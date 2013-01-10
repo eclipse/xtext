@@ -152,10 +152,10 @@ public class JvmModelGenerator implements IGenerator {
   
   @Inject
   private IJavaDocTypeReferenceProvider javaDocTypeReferenceProvider;
-
+  
   @Inject
   private IScopeProvider scopeProvider;
-
+  
   public void doGenerate(final Resource input, final IFileSystemAccess fsa) {
     EList<EObject> _contents = input.getContents();
     for (final EObject obj : _contents) {
@@ -429,19 +429,28 @@ public class JvmModelGenerator implements IGenerator {
       JvmVisibility _visibility = it.getVisibility();
       String _javaName = this.javaName(_visibility);
       appendable.append(_javaName);
-      boolean _isAbstract = it.isAbstract();
-      if (_isAbstract) {
-        appendable.append("abstract ");
-      }
-      boolean _isStatic = it.isStatic();
-      if (_isStatic) {
-        appendable.append("static ");
-      }
       ITreeAppendable _xifexpression = null;
-      boolean _isFinal = it.isFinal();
-      if (_isFinal) {
-        ITreeAppendable _append = appendable.append("final ");
-        _xifexpression = _append;
+      boolean _not = (!(it instanceof JvmEnumerationType));
+      if (_not) {
+        ITreeAppendable _xblockexpression_1 = null;
+        {
+          boolean _isAbstract = it.isAbstract();
+          if (_isAbstract) {
+            appendable.append("abstract ");
+          }
+          boolean _isStatic = it.isStatic();
+          if (_isStatic) {
+            appendable.append("static ");
+          }
+          ITreeAppendable _xifexpression_1 = null;
+          boolean _isFinal = it.isFinal();
+          if (_isFinal) {
+            ITreeAppendable _append = appendable.append("final ");
+            _xifexpression_1 = _append;
+          }
+          _xblockexpression_1 = (_xifexpression_1);
+        }
+        _xifexpression = _xblockexpression_1;
       }
       _xblockexpression = (_xifexpression);
     }
