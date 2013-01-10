@@ -34,22 +34,29 @@ public class XbaseValidationConfigurationBlock extends AbstractValidatorConfigur
 
 		Composite inner = createSection(Messages.XbaseValidationConfigurationBlock_restricted_api_section_title,
 				composite, nColumns);
-
-		addJavaDelegatingComboBox(XbaseConfigurableIssueCodes.FORBIDDEN_REFERENCE,
-				Messages.XbaseValidationConfigurationBlock_forbidden_ref_label, inner, defaultIndent);
-		addJavaDelegatingComboBox(XbaseConfigurableIssueCodes.DISCOURAGED_REFERENCE,
-				Messages.XbaseValidationConfigurationBlock_discouraged_ref_label, inner, defaultIndent);
-		addComboBox(XbaseConfigurableIssueCodes.IMPORT_WILDCARD_DEPRECATED, "Use of wildcard imports:", inner,
-				defaultIndent);
+		fillRestrictedApiSection(defaultIndent, inner);
 
 		Composite unusedCode = createSection("Unnecessary code", composite, nColumns);
+		fillUnusedCodeSection(defaultIndent, unusedCode);
+
+	}
+
+	protected void fillUnusedCodeSection(int defaultIndent, Composite unusedCodeSection) {
 		addJavaDelegatingComboBox(XbaseConfigurableIssueCodes.UNUSED_LOCAL_VARIABLE,
-				"Value of local variable is not used:", unusedCode, defaultIndent);
-		addJavaDelegatingComboBox(XbaseConfigurableIssueCodes.IMPORT_UNUSED, "Unused import:", unusedCode,
+				"Value of local variable is not used:", unusedCodeSection, defaultIndent);
+		addJavaDelegatingComboBox(XbaseConfigurableIssueCodes.IMPORT_UNUSED, "Unused import:", unusedCodeSection,
 				defaultIndent);
 		addJavaDelegatingComboBox(XbaseConfigurableIssueCodes.OBSOLETE_INSTANCEOF,
-				"Unnecessary 'instanceof' operation:", unusedCode, defaultIndent);
+				"Unnecessary 'instanceof' operation:", unusedCodeSection, defaultIndent);
+	}
 
+	protected void fillRestrictedApiSection(int defaultIndent, Composite restrictedApiSection) {
+		addJavaDelegatingComboBox(XbaseConfigurableIssueCodes.FORBIDDEN_REFERENCE,
+				Messages.XbaseValidationConfigurationBlock_forbidden_ref_label, restrictedApiSection, defaultIndent);
+		addJavaDelegatingComboBox(XbaseConfigurableIssueCodes.DISCOURAGED_REFERENCE,
+				Messages.XbaseValidationConfigurationBlock_discouraged_ref_label, restrictedApiSection, defaultIndent);
+		addComboBox(XbaseConfigurableIssueCodes.IMPORT_WILDCARD_DEPRECATED, "Use of wildcard imports:", restrictedApiSection,
+				defaultIndent);
 	}
 
 	protected Combo addJavaDelegatingComboBox(PreferenceKey prefKey, String label, Composite parent, int indent) {

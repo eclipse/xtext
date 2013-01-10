@@ -877,8 +877,8 @@ public class XtendJavaValidator extends XbaseWithAnnotationsJavaValidator {
 				if (dispatchOperations.size() == 1) {
 					JvmOperation singleOp = dispatchOperations.iterator().next();
 					XtendFunction function = associations.getXtendFunction(singleOp);
-					warning("Single dispatch method.", function, XTEND_FUNCTION__DISPATCH,
-							IssueCodes.SINGLE_DISPATCH_FUNCTION);
+					addIssue(function, SINGLE_DISPATCH_FUNCTION, "Single dispatch method.",
+							XTEND_FUNCTION__DISPATCH);
 				} else {
 					Multimap<List<JvmType>, JvmOperation> signatures = HashMultimap.create();
 					boolean isFirstLocalOperation = true;
@@ -964,11 +964,13 @@ public class XtendJavaValidator extends XbaseWithAnnotationsJavaValidator {
 		for(Pair<String, Integer> dispatchSignature: dispatchMethods.keySet()) {
 			if(nonDispatchMethods.containsKey(dispatchSignature)) {
 				for(XtendFunction function: nonDispatchMethods.get(dispatchSignature)) 
-					warning("Non-dispatch method has same name and number of parameters as dispatch method", 
-							function, XTEND_FUNCTION__NAME, DISPATCH_PLAIN_FUNCTION_NAME_CLASH);
+					addIssue(function, DISPATCH_PLAIN_FUNCTION_NAME_CLASH,
+							"Non-dispatch method has same name and number of parameters as dispatch method",
+							XTEND_FUNCTION__NAME);
 				for(JvmOperation operation: dispatchMethods.get(dispatchSignature)) 
-					warning("Dispatch method has same name and number of parameters as non-dispatch method", 
-							associations.getXtendFunction(operation), XTEND_FUNCTION__NAME, DISPATCH_PLAIN_FUNCTION_NAME_CLASH);
+					addIssue(associations.getXtendFunction(operation), DISPATCH_PLAIN_FUNCTION_NAME_CLASH,
+							"Dispatch method has same name and number of parameters as non-dispatch method",
+							XTEND_FUNCTION__NAME);
 			}
 		}
 	}
@@ -1124,7 +1126,7 @@ public class XtendJavaValidator extends XbaseWithAnnotationsJavaValidator {
 				message = "The value of the field " + jvmField.getDeclaringType().getSimpleName() + "."
 					+ jvmField.getSimpleName() + " is not used";
 			}
-			warning(message, XtendPackage.Literals.XTEND_FIELD__NAME, FIELD_LOCALLY_NEVER_READ);
+			addIssueToState(FIELD_LOCALLY_NEVER_READ, message, XtendPackage.Literals.XTEND_FIELD__NAME);
 		}
 	}
 	
@@ -1136,7 +1138,7 @@ public class XtendJavaValidator extends XbaseWithAnnotationsJavaValidator {
 				String message = "The method " + jvmOperation.getSimpleName() 
 						+  uiStrings.parameters(jvmOperation)  
 						+ " from the type "+jvmOperation.getDeclaringType().getSimpleName()+" is never used locally.";
-				warning(message, XtendPackage.Literals.XTEND_FUNCTION__NAME, FUNCTION_LOCALLY_NEVER_USED);
+				addIssueToState(FUNCTION_LOCALLY_NEVER_USED, message, XtendPackage.Literals.XTEND_FUNCTION__NAME);
 			}
 		}
 	}
