@@ -33,7 +33,10 @@ public class XbaseSeverityConverter extends SeverityConverter {
 	}
 
 	/**
-	 * Pair contains <delegationKey,defaultValue>
+	 * 
+	 * @param pair
+	 *            holds first=delegationKey, second=defaultValue. delegationKey starts with {@link JavaCore#PLUGIN_ID}
+	 * @return resolved delegated value
 	 */
 	protected String delegatedValue(Pair<String, String> pair) {
 		return pair.getSecond();
@@ -47,7 +50,9 @@ public class XbaseSeverityConverter extends SeverityConverter {
 	}
 
 	/**
-	 * @returns Pair contains <delegationKey,defaultSeverity>
+	 * Returns decoded delegation key or <code>null</code> if encodedValue can not be parsed.
+	 * @returns {@link Pair} where getFirst() is delegationKey and getSecond() is the defaultSeverity.
+	 * @see XbaseSeverityConverter#encodeDefaultSeverity(String, String)
 	 */
 	public static Pair<String, String> decodeDelegationKey(String encodedValue) {
 		List<String> split = Strings.split(encodedValue, DEFAULT_SEVERITY_SEPARATOR);
@@ -55,7 +60,8 @@ public class XbaseSeverityConverter extends SeverityConverter {
 			return Tuples.create(split.get(0), split.get(1));
 		} else if (split.size() == 1) {
 			return Tuples.create(split.get(0), SeverityConverter.SEVERITY_WARNING);
-		} else
+		} else {
 			return null;
+		}
 	}
 }
