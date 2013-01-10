@@ -1,7 +1,9 @@
 /**
- * <copyright>
- * </copyright>
- *
+ * Copyright (c) 2011-2013 itemis AG (http://www.itemis.eu) and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
  */
 package org.eclipse.xtext.common.types.provider;
 
@@ -34,7 +36,6 @@ import org.eclipse.xtext.common.types.util.TypesAdapterFactory;
  * <!-- begin-user-doc -->
  * <!-- end-user-doc -->
  * @generated
- * @noextend This class is not intended to be subclassed by clients.
  */
 public class TypesItemProviderAdapterFactory extends TypesAdapterFactory implements ComposeableAdapterFactory, IChangeNotifier, IDisposable
 {
@@ -882,7 +883,6 @@ public class TypesItemProviderAdapterFactory extends TypesAdapterFactory impleme
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
-	 * @since 2.1
 	 */
 	protected JvmDelegateTypeReferenceItemProvider jvmDelegateTypeReferenceItemProvider;
 
@@ -891,7 +891,6 @@ public class TypesItemProviderAdapterFactory extends TypesAdapterFactory impleme
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
-	 * @since 2.1
 	 */
 	@Override
 	public Adapter createJvmDelegateTypeReferenceAdapter()
@@ -909,7 +908,6 @@ public class TypesItemProviderAdapterFactory extends TypesAdapterFactory impleme
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
-	 * @since 2.1
 	 */
 	protected JvmSynonymTypeReferenceItemProvider jvmSynonymTypeReferenceItemProvider;
 
@@ -918,7 +916,6 @@ public class TypesItemProviderAdapterFactory extends TypesAdapterFactory impleme
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
-	 * @since 2.1
 	 */
 	@Override
 	public Adapter createJvmSynonymTypeReferenceAdapter()
@@ -936,7 +933,6 @@ public class TypesItemProviderAdapterFactory extends TypesAdapterFactory impleme
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
-	 * @since 2.1
 	 */
 	protected JvmUnknownTypeReferenceItemProvider jvmUnknownTypeReferenceItemProvider;
 
@@ -945,7 +941,6 @@ public class TypesItemProviderAdapterFactory extends TypesAdapterFactory impleme
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
-	 * @since 2.1
 	 */
 	@Override
 	public Adapter createJvmUnknownTypeReferenceAdapter()
@@ -963,7 +958,6 @@ public class TypesItemProviderAdapterFactory extends TypesAdapterFactory impleme
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
-	 * @since 2.1
 	 */
 	protected JvmCustomAnnotationValueItemProvider jvmCustomAnnotationValueItemProvider;
 
@@ -972,7 +966,6 @@ public class TypesItemProviderAdapterFactory extends TypesAdapterFactory impleme
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
-	 * @since 2.1
 	 */
 	@Override
 	public Adapter createJvmCustomAnnotationValueAdapter()

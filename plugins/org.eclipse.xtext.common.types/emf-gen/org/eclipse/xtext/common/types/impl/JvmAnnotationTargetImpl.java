@@ -1,7 +1,9 @@
 /**
- * <copyright>
- * </copyright>
- *
+ * Copyright (c) 2011-2013 itemis AG (http://www.itemis.eu) and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
  */
 package org.eclipse.xtext.common.types.impl;
 
@@ -14,7 +16,7 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 
-import org.eclipse.emf.ecore.util.EObjectContainmentWithInverseEList;
+import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
 import org.eclipse.xtext.common.types.JvmAnnotationReference;
@@ -76,26 +78,9 @@ public abstract class JvmAnnotationTargetImpl extends JvmIdentifiableElementImpl
 	{
 		if (annotations == null)
 		{
-			annotations = new EObjectContainmentWithInverseEList.Resolving<JvmAnnotationReference>(JvmAnnotationReference.class, this, TypesPackage.JVM_ANNOTATION_TARGET__ANNOTATIONS, TypesPackage.JVM_ANNOTATION_REFERENCE__TARGET);
+			annotations = new EObjectContainmentEList.Resolving<JvmAnnotationReference>(JvmAnnotationReference.class, this, TypesPackage.JVM_ANNOTATION_TARGET__ANNOTATIONS);
 		}
 		return annotations;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@SuppressWarnings("unchecked")
-	@Override
-	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs)
-	{
-		switch (featureID)
-		{
-			case TypesPackage.JVM_ANNOTATION_TARGET__ANNOTATIONS:
-				return ((InternalEList<InternalEObject>)(InternalEList<?>)getAnnotations()).basicAdd(otherEnd, msgs);
-		}
-		return super.eInverseAdd(otherEnd, featureID, msgs);
 	}
 
 	/**

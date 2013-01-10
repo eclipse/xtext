@@ -1,7 +1,9 @@
 /**
- * <copyright>
- * </copyright>
- *
+ * Copyright (c) 2011-2013 itemis AG (http://www.itemis.eu) and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
  */
 package org.eclipse.xtext.common.types.impl;
 
@@ -1265,19 +1267,9 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getJvmAnnotationReference_Target()
-	{
-		return (EReference)jvmAnnotationReferenceEClass.getEStructuralFeatures().get(1);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EReference getJvmAnnotationReference_Values()
 	{
-		return (EReference)jvmAnnotationReferenceEClass.getEStructuralFeatures().get(2);
+		return (EReference)jvmAnnotationReferenceEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -1843,7 +1835,6 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage
 
 		jvmAnnotationReferenceEClass = createEClass(JVM_ANNOTATION_REFERENCE);
 		createEReference(jvmAnnotationReferenceEClass, JVM_ANNOTATION_REFERENCE__ANNOTATION);
-		createEReference(jvmAnnotationReferenceEClass, JVM_ANNOTATION_REFERENCE__TARGET);
 		createEReference(jvmAnnotationReferenceEClass, JVM_ANNOTATION_REFERENCE__VALUES);
 
 		jvmAnnotationValueEClass = createEClass(JVM_ANNOTATION_VALUE);
@@ -2202,11 +2193,10 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage
 		initEReference(getJvmFormalParameter_ParameterType(), this.getJvmTypeReference(), null, "parameterType", null, 0, 1, JvmFormalParameter.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(jvmAnnotationTargetEClass, JvmAnnotationTarget.class, "JvmAnnotationTarget", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getJvmAnnotationTarget_Annotations(), this.getJvmAnnotationReference(), this.getJvmAnnotationReference_Target(), "annotations", null, 0, -1, JvmAnnotationTarget.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getJvmAnnotationTarget_Annotations(), this.getJvmAnnotationReference(), null, "annotations", null, 0, -1, JvmAnnotationTarget.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(jvmAnnotationReferenceEClass, JvmAnnotationReference.class, "JvmAnnotationReference", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getJvmAnnotationReference_Annotation(), this.getJvmAnnotationType(), null, "annotation", null, 0, 1, JvmAnnotationReference.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getJvmAnnotationReference_Target(), this.getJvmAnnotationTarget(), this.getJvmAnnotationTarget_Annotations(), "target", null, 0, 1, JvmAnnotationReference.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getJvmAnnotationReference_Values(), this.getJvmAnnotationValue(), null, "values", null, 0, -1, JvmAnnotationReference.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(jvmAnnotationValueEClass, JvmAnnotationValue.class, "JvmAnnotationValue", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);

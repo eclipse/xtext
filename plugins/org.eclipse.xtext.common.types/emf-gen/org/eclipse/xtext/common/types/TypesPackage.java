@@ -1,7 +1,9 @@
 /**
- * <copyright>
- * </copyright>
- *
+ * Copyright (c) 2011-2013 itemis AG (http://www.itemis.eu) and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
  */
 package org.eclipse.xtext.common.types;
 
@@ -1953,22 +1955,13 @@ public interface TypesPackage extends EPackage
 	int JVM_ANNOTATION_REFERENCE__ANNOTATION = 0;
 
 	/**
-	 * The feature id for the '<em><b>Target</b></em>' container reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int JVM_ANNOTATION_REFERENCE__TARGET = 1;
-
-	/**
 	 * The feature id for the '<em><b>Values</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int JVM_ANNOTATION_REFERENCE__VALUES = 2;
+	int JVM_ANNOTATION_REFERENCE__VALUES = 1;
 
 	/**
 	 * The number of structural features of the '<em>Jvm Annotation Reference</em>' class.
@@ -1977,7 +1970,7 @@ public interface TypesPackage extends EPackage
 	 * @generated
 	 * @ordered
 	 */
-	int JVM_ANNOTATION_REFERENCE_FEATURE_COUNT = 3;
+	int JVM_ANNOTATION_REFERENCE_FEATURE_COUNT = 2;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.xtext.common.types.impl.JvmAnnotationValueImpl <em>Jvm Annotation Value</em>}' class.
@@ -3466,17 +3459,6 @@ public interface TypesPackage extends EPackage
 	EReference getJvmAnnotationReference_Annotation();
 
 	/**
-	 * Returns the meta object for the container reference '{@link org.eclipse.xtext.common.types.JvmAnnotationReference#getTarget <em>Target</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the container reference '<em>Target</em>'.
-	 * @see org.eclipse.xtext.common.types.JvmAnnotationReference#getTarget()
-	 * @see #getJvmAnnotationReference()
-	 * @generated
-	 */
-	EReference getJvmAnnotationReference_Target();
-
-	/**
 	 * Returns the meta object for the containment reference list '{@link org.eclipse.xtext.common.types.JvmAnnotationReference#getValues <em>Values</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -4619,14 +4601,6 @@ public interface TypesPackage extends EPackage
 		 * @generated
 		 */
 		EReference JVM_ANNOTATION_REFERENCE__ANNOTATION = eINSTANCE.getJvmAnnotationReference_Annotation();
-
-		/**
-		 * The meta object literal for the '<em><b>Target</b></em>' container reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference JVM_ANNOTATION_REFERENCE__TARGET = eINSTANCE.getJvmAnnotationReference_Target();
 
 		/**
 		 * The meta object literal for the '<em><b>Values</b></em>' containment reference list feature.

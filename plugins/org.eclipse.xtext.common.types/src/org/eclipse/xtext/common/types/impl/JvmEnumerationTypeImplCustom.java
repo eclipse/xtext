@@ -47,4 +47,14 @@ public class JvmEnumerationTypeImplCustom extends JvmEnumerationTypeImpl {
 		return members;
 	}
 
+	@Override
+	public boolean isFinal() {
+		return true;
+	}
+	
+	@Override
+	public void setFinal(boolean newFinal) {
+		throw new UnsupportedOperationException("Enums are always final.");
+	}
+	
 }

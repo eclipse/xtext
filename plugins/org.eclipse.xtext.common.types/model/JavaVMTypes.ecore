@@ -241,12 +241,10 @@
   <eClassifiers xsi:type="ecore:EClass" name="JvmAnnotationTarget" abstract="true"
       eSuperTypes="#//JvmIdentifiableElement">
     <eStructuralFeatures xsi:type="ecore:EReference" name="annotations" upperBound="-1"
-        eType="#//JvmAnnotationReference" containment="true" eOpposite="#//JvmAnnotationReference/target"/>
+        eType="#//JvmAnnotationReference" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="JvmAnnotationReference">
     <eStructuralFeatures xsi:type="ecore:EReference" name="annotation" eType="#//JvmAnnotationType"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="target" eType="#//JvmAnnotationTarget"
-        eOpposite="#//JvmAnnotationTarget/annotations"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="values" upperBound="-1"
         eType="#//JvmAnnotationValue" containment="true"/>
   </eClassifiers>
