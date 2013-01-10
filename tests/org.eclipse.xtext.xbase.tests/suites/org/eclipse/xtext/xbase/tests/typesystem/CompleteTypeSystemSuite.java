@@ -20,6 +20,8 @@ import org.junit.runners.Suite.SuiteClasses;
 	InvariantCheckingIsolationTest.class,
 	InvariantCheckingBatchTypeResolverTest.class,
 	ShuffledTypeResolverTest.class,
-	TypeSystemSuite.class
+	TypeSystemSuite.class,
+	ValidationSuite.class,
+	CompilerAndInterpreterSuiteNewAPI.class
 })
 public class CompleteTypeSystemSuite {}

@@ -45,6 +45,22 @@ abstract class AbstractTypeResolverTest<Reference> extends AbstractXbaseTestCase
 		super.expression(expression, resolve)
 	}
 	
+	@Test def void testRawType_01() throws Exception {
+		"{ val java.util.Set set = newHashSet() set }".resolvesTo("Set")
+	}
+	
+	@Test def void testRawType_02() throws Exception {
+		"{ val java.util.Set set = newHashSet set.head }".resolvesTo("Object")
+	}
+	
+	@Test def void testRawType_03() throws Exception {
+		"(null as java.util.Set<java.util.Set>).head".resolvesTo("Set")
+	}
+	
+	@Test def void testRawType_04() throws Exception {
+		"{ val java.util.Set<java.util.Set> set = newHashSet set }".resolvesTo("Set<Set>")
+	}
+	
 	@Test def void testAssignment_01() throws Exception {
 		"new testdata.FieldAccess().stringField = null".resolvesTo("String")
 	}

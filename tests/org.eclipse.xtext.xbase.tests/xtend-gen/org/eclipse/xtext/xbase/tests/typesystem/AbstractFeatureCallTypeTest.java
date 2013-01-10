@@ -29,7 +29,6 @@ import org.eclipse.xtext.xbase.tests.AbstractXbaseTestCase;
 import org.junit.AfterClass;
 import org.junit.Assert;
 import org.junit.BeforeClass;
-import org.junit.Ignore;
 import org.junit.Test;
 
 /**
@@ -86,6 +85,31 @@ public abstract class AbstractFeatureCallTypeTest extends AbstractXbaseTestCase 
       _xblockexpression = (_expression);
     }
     return _xblockexpression;
+  }
+  
+  @Test
+  public void testRawType_01() throws Exception {
+    this.resolvesFeatureCallsTo("{ val java.util.Set set = newHashSet() set }", "HashSet", "Set");
+  }
+  
+  @Test
+  public void testRawType_02() throws Exception {
+    this.resolvesFeatureCallsTo("{ val java.util.Set set = newHashSet set.head }", "HashSet", "Set", "Object");
+  }
+  
+  @Test
+  public void testRawType_03() throws Exception {
+    this.resolvesFeatureCallsTo("(null as java.util.Set<java.util.Set>).head", "Set");
+  }
+  
+  @Test
+  public void testRawType_04() throws Exception {
+    this.resolvesFeatureCallsTo("{ val java.util.Set<java.util.Set> set = newHashSet set.head }", "HashSet<Set>", "Set<Set>", "Set");
+  }
+  
+  @Test
+  public void testRawType_05() throws Exception {
+    this.resolvesFeatureCallsTo("{ val java.util.Set<java.util.Set> set = newHashSet(newHashSet) set.head }", "HashSet<Set>", "HashSet", "Set<Set>", "Set");
   }
   
   @Test
@@ -258,7 +282,6 @@ public abstract class AbstractFeatureCallTypeTest extends AbstractXbaseTestCase 
   }
   
   @Test
-  @Ignore(value = "Investigate why this fails for nested arrays")
   public void testArray_09() throws Exception {
     this.resolvesFeatureCallsTo("{ val x = new testdata.ArrayClient().swap(null) val Integer[] y = x.head }", "Integer[][]", "Integer[][]", "Integer[]");
   }
@@ -678,7 +701,6 @@ public abstract class AbstractFeatureCallTypeTest extends AbstractXbaseTestCase 
     this.resolvesFeatureCallsTo("{\n\t\t\tval CharSequence s = null\n\t\t\ts.^class.declaredFields.toMap[name].mapValues[get(s)]\n\t\t}", "CharSequence", "Class<? extends CharSequence>", "Field[]", "Map<String, Field>", "String", "Map<String, Object>", "Object", "CharSequence");
   }
   
-  @Ignore(value = "TODO this should work")
   @Test
   public void testBug_391758() throws Exception {
     this.resolvesFeatureCallsTo("{\n\t\t\tval iterable = newArrayList\n\t\t\titerable.fold(newArrayList) [ list , elem | null as java.util.List<String> ]\n\t\t}", "ArrayList<Object>", "ArrayList<Object>", "List<String>", "ArrayList<String>");

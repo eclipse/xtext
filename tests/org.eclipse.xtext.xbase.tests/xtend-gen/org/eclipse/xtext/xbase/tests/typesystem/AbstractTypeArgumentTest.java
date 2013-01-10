@@ -218,6 +218,40 @@ public abstract class AbstractTypeArgumentTest extends AbstractXbaseTestCase {
   }
   
   @Test
+  public void testRawType_01() throws Exception {
+    Iterator<XExpression> _bindTypeArgumentsTo = this.bindTypeArgumentsTo("{ val java.util.Set set = newHashSet() set }", "");
+    this.done(_bindTypeArgumentsTo);
+  }
+  
+  @Test
+  public void testRawType_02() throws Exception {
+    Iterator<XExpression> _bindTypeArgumentsTo = this.bindTypeArgumentsTo("{ val java.util.Set set = newHashSet set.head }", "");
+    Iterator<XExpression> _and = this.and(_bindTypeArgumentsTo, "");
+    this.done(_and);
+  }
+  
+  @Test
+  public void testRawType_03() throws Exception {
+    Iterator<XExpression> _bindTypeArgumentsTo = this.bindTypeArgumentsTo("(null as java.util.Set<java.util.Set>).head", "Set");
+    this.done(_bindTypeArgumentsTo);
+  }
+  
+  @Test
+  public void testRawType_04() throws Exception {
+    Iterator<XExpression> _bindTypeArgumentsTo = this.bindTypeArgumentsTo("{ val java.util.Set<java.util.Set> set = newHashSet set.head }", "Set");
+    Iterator<XExpression> _and = this.and(_bindTypeArgumentsTo, "Set");
+    this.done(_and);
+  }
+  
+  @Test
+  public void testRawType_05() throws Exception {
+    Iterator<XExpression> _bindTypeArgumentsTo = this.bindTypeArgumentsTo("{ val java.util.Set<java.util.Set> set = newHashSet(newHashSet) set.head }", "Set");
+    Iterator<XExpression> _and = this.and(_bindTypeArgumentsTo, "");
+    Iterator<XExpression> _and_1 = this.and(_and, "Set");
+    this.done(_and_1);
+  }
+  
+  @Test
   public void testNumberLiteralInClosure_01() throws Exception {
     Iterator<XExpression> _bindTypeArgumentsTo = this.bindTypeArgumentsTo("newArrayList().map[42]", "Object");
     Iterator<XExpression> _and = this.and(_bindTypeArgumentsTo, "Object", "Integer");
@@ -1562,6 +1596,44 @@ public abstract class AbstractTypeArgumentTest extends AbstractXbaseTestCase {
   @Test
   public void testFeatureCall_78() throws Exception {
     Iterator<XExpression> _bindTypeArgumentsTo = this.bindTypeArgumentsTo("<String>newArrayList().get(0)", "String");
+    this.done(_bindTypeArgumentsTo);
+  }
+  
+  @Test
+  public void testFeatureCallWithExpectation_01() throws Exception {
+    Iterator<XExpression> _bindTypeArgumentsTo = this.bindTypeArgumentsTo("{ val java.util.Set<java.util.Set<String>> set = newHashSet(newHashSet) set.head }", "Set<String>");
+    Iterator<XExpression> _and = this.and(_bindTypeArgumentsTo, "String");
+    Iterator<XExpression> _and_1 = this.and(_and, "Set<String>");
+    this.done(_and_1);
+  }
+  
+  @Test
+  public void testFeatureCallWithExpectation_02() throws Exception {
+    Iterator<XExpression> _bindTypeArgumentsTo = this.bindTypeArgumentsTo("{ val Iterable<CharSequence> set = newHashSet(\'\') }", "CharSequence");
+    this.done(_bindTypeArgumentsTo);
+  }
+  
+  @Test
+  public void testFeatureCallWithExpectation_03() throws Exception {
+    Iterator<XExpression> _bindTypeArgumentsTo = this.bindTypeArgumentsTo("{ val Iterable<CharSequence> set = newHashSet() }", "CharSequence");
+    this.done(_bindTypeArgumentsTo);
+  }
+  
+  @Test
+  public void testFeatureCallWithExpectation_04() throws Exception {
+    Iterator<XExpression> _bindTypeArgumentsTo = this.bindTypeArgumentsTo("{ val java.util.List<CharSequence> set = newHashSet(\'\') }", "CharSequence");
+    this.done(_bindTypeArgumentsTo);
+  }
+  
+  @Test
+  public void testFeatureCallWithExpectation_05() throws Exception {
+    Iterator<XExpression> _bindTypeArgumentsTo = this.bindTypeArgumentsTo("{ val Iterable<? super CharSequence> set = newHashSet(\'\') }", "CharSequence");
+    this.done(_bindTypeArgumentsTo);
+  }
+  
+  @Test
+  public void testFeatureCallWithExpectation_06() throws Exception {
+    Iterator<XExpression> _bindTypeArgumentsTo = this.bindTypeArgumentsTo("{ val Iterable<? extends CharSequence> set = newHashSet(\'\') }", "String");
     this.done(_bindTypeArgumentsTo);
   }
   

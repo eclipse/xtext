@@ -61,6 +61,26 @@ public abstract class AbstractTypeResolverTest<Reference extends Object> extends
   }
   
   @Test
+  public void testRawType_01() throws Exception {
+    this.resolvesTo("{ val java.util.Set set = newHashSet() set }", "Set");
+  }
+  
+  @Test
+  public void testRawType_02() throws Exception {
+    this.resolvesTo("{ val java.util.Set set = newHashSet set.head }", "Object");
+  }
+  
+  @Test
+  public void testRawType_03() throws Exception {
+    this.resolvesTo("(null as java.util.Set<java.util.Set>).head", "Set");
+  }
+  
+  @Test
+  public void testRawType_04() throws Exception {
+    this.resolvesTo("{ val java.util.Set<java.util.Set> set = newHashSet set }", "Set<Set>");
+  }
+  
+  @Test
   public void testAssignment_01() throws Exception {
     this.resolvesTo("new testdata.FieldAccess().stringField = null", "String");
   }
@@ -2259,7 +2279,6 @@ public abstract class AbstractTypeResolverTest<Reference extends Object> extends
     this.resolvesTo("{\n\t\t\tval Object it = null\n\t\t\t^class.declaredFields.toMap[name].mapValues[get(it)]\n\t\t}", "Map<String, Object>");
   }
   
-  @Ignore(value = "TODO this should work")
   @Test
   public void testBug_391758() throws Exception {
     this.resolvesTo("{\n\t\t\tval iterable = newArrayList\n\t\t\titerable.fold(newArrayList) [ list , elem | null as java.util.List<String> ]\n\t\t}", "List<String>");

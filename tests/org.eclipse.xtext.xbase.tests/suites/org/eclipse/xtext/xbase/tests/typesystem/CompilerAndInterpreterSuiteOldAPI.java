@@ -7,6 +7,10 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.tests.typesystem;
 
+import org.eclipse.xtext.xbase.tests.compiler.CompilerTest;
+import org.eclipse.xtext.xbase.tests.compiler.CompilerTests2;
+import org.eclipse.xtext.xbase.tests.compiler.EvaluationCompilerTest;
+import org.eclipse.xtext.xbase.tests.interpreter.XbaseInterpreterTest;
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
@@ -16,7 +20,9 @@ import org.junit.runners.Suite.SuiteClasses;
  */
 @RunWith(Suite.class)
 @SuiteClasses({
-	CompilerAndInterpreterSuiteNewAPI.class,
-	CompilerAndInterpreterSuiteOldAPI.class
+	EvaluationCompilerTest.class,
+	XbaseInterpreterTest.class,
+	CompilerTest.class,
+	CompilerTests2.class
 })
-public class CompilerAndInterpreterSuite {}
+public class CompilerAndInterpreterSuiteOldAPI {}

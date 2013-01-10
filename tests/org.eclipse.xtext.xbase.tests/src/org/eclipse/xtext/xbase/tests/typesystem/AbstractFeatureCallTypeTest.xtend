@@ -50,6 +50,26 @@ abstract class AbstractFeatureCallTypeTest extends AbstractXbaseTestCase {
 		}
 		super.expression(expression, resolve)
 	}
+	
+	@Test def void testRawType_01() throws Exception {
+		"{ val java.util.Set set = newHashSet() set }".resolvesFeatureCallsTo("HashSet", "Set")
+	}
+	
+	@Test def void testRawType_02() throws Exception {
+		"{ val java.util.Set set = newHashSet set.head }".resolvesFeatureCallsTo("HashSet", "Set", "Object")
+	}
+	
+	@Test def void testRawType_03() throws Exception {
+		"(null as java.util.Set<java.util.Set>).head".resolvesFeatureCallsTo("Set")
+	}
+	
+	@Test def void testRawType_04() throws Exception {
+		"{ val java.util.Set<java.util.Set> set = newHashSet set.head }".resolvesFeatureCallsTo("HashSet<Set>", "Set<Set>", "Set")
+	}
+	
+	@Test def void testRawType_05() throws Exception {
+		"{ val java.util.Set<java.util.Set> set = newHashSet(newHashSet) set.head }".resolvesFeatureCallsTo("HashSet<Set>", "HashSet", "Set<Set>", "Set")
+	}
 
 	@Test def void testNumberLiteralInClosure_01() throws Exception {
 		"newArrayList().map[42]".resolvesFeatureCallsTo("ArrayList<Object>", "List<Integer>")
