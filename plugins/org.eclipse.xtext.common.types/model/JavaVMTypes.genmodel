@@ -6,7 +6,8 @@
     forceOverwrite="true" modelName="Types" updateClasspath="false" rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container"
     importerID="org.eclipse.emf.importer.ecore" containmentProxies="true" complianceLevel="5.0"
     suppressGenModelAnnotations="false" copyrightFields="false" editPluginID="org.eclipse.xtext.common.types.edit"
-    editorPluginID="org.eclipse.xtext.types.editor">
+    editorPluginID="org.eclipse.xtext.types.editor"
+    runtimeVersion="2.5">
   <foreignModel>JavaVMTypes.ecore</foreignModel>
   <genPackages prefix="Types" basePackage="org.eclipse.xtext.common" disposableProviderFactory="true"
       ecorePackage="JavaVMTypes.ecore#/">
