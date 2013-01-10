@@ -31,6 +31,7 @@ import org.eclipse.xtext.resource.IFragmentProvider;
 public abstract class AbstractClassMirror implements IClassMirror {
 
 	private static final Logger logger = Logger.getLogger(AbstractClassMirror.class);
+	private boolean isEmptynessLogged = false;
 	
 	public String getFragment(EObject obj, IFragmentProvider.Fallback fallback) {
 		if (obj instanceof JvmTypeParameter)
@@ -69,9 +70,12 @@ public abstract class AbstractClassMirror implements IClassMirror {
 			}
 		} else {
 			if (resource.getContents().isEmpty()) {
-				logger.error("resource is empty: " + resource.getURI());
-				if (logger.isDebugEnabled()) {
-					logger.debug(getClass().getName(), new Exception());
+				if (!isEmptynessLogged) {
+					isEmptynessLogged = true;
+					logger.error("resource is empty: " + resource.getURI());
+					if (logger.isDebugEnabled()) {
+						logger.debug(getClass().getName(), new Exception());
+					}
 				}
 				return null;
 			}
