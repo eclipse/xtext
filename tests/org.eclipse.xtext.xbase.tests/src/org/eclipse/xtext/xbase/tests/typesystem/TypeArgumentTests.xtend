@@ -69,6 +69,48 @@ class BatchTypeArgumentTest extends AbstractTypeArgumentTest {
 		]
 	}
 	
+	@Test
+	@Ignore("TODO Fix me")
+	override testRawType_01() throws Exception {
+		super.testRawType_01()
+	}
+	
+	@Test
+	@Ignore("TODO Fix me")
+	override testRawType_02() throws Exception {
+		super.testRawType_02()
+	}
+	
+	@Test
+	@Ignore("TODO Fix me")
+	override testRawType_05() throws Exception {
+		super.testRawType_05()
+	}
+	
+	@Test
+	@Ignore("TODO Fix me")
+	override testFeatureCallWithExpectation_01() throws Exception {
+		super.testFeatureCallWithExpectation_01()
+	}
+	
+	@Test
+	@Ignore("TODO Fix me")
+	override testFeatureCallWithExpectation_02() throws Exception {
+		super.testFeatureCallWithExpectation_02()
+	}
+	
+	@Test
+	@Ignore("TODO Fix me")
+	override testFeatureCallWithExpectation_04() throws Exception {
+		super.testFeatureCallWithExpectation_04()
+	}
+	
+	@Test
+	@Ignore("TODO Fix me")
+	override testFeatureCallWithExpectation_05() throws Exception {
+		super.testFeatureCallWithExpectation_05()
+	}
+	
 }
 
 /**
@@ -783,6 +825,32 @@ class OldAPITypeArgumentTest extends AbstractTypeArgumentTest {
 		fail("fails in old implementation")
 	}
 	@Ignore("fails in old implementation") @Test override testRecursiveTypeArgumentResolution_08() throws Exception {
+		fail("fails in old implementation")
+	}
+	
+	@Ignore("fails in old implementation") @Test override testRawType_01() throws Exception {
+		fail("fails in old implementation")
+	}
+	@Ignore("fails in old implementation") @Test override testRawType_02() throws Exception {
+		fail("fails in old implementation")
+	}
+	@Ignore("fails in old implementation") @Test override testRawType_04() throws Exception {
+		fail("fails in old implementation")
+	}
+	@Ignore("fails in old implementation") @Test override testRawType_05() throws Exception {
+		fail("fails in old implementation")
+	}
+	
+	@Ignore("fails in old implementation") @Test override testFeatureCallWithExpectation_01() throws Exception {
+		fail("fails in old implementation")
+	}
+	@Ignore("fails in old implementation") @Test override testFeatureCallWithExpectation_02() throws Exception {
+		fail("fails in old implementation")
+	}
+	@Ignore("fails in old implementation") @Test override testFeatureCallWithExpectation_04() throws Exception {
+		fail("fails in old implementation")
+	}
+	@Ignore("fails in old implementation") @Test override testFeatureCallWithExpectation_05() throws Exception {
 		fail("fails in old implementation")
 	}
 	

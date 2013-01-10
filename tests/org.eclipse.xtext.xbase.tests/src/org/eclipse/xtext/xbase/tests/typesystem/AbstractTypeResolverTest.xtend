@@ -7,12 +7,12 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.tests.typesystem
 
-import org.eclipse.xtext.xbase.tests.AbstractXbaseTestCase
-import org.junit.Ignore
-import org.junit.Test
 import java.util.Set
+import org.eclipse.xtext.xbase.tests.AbstractXbaseTestCase
 import org.junit.AfterClass
 import org.junit.BeforeClass
+import org.junit.Ignore
+import org.junit.Test
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -2225,8 +2225,6 @@ abstract class AbstractTypeResolverTest<Reference> extends AbstractXbaseTestCase
 		}".resolvesTo("Map<String, Object>")
 	}
 
-	// TODO fix the following case
-	@Ignore("TODO this should work")
 	@Test def void testBug_391758() throws Exception {
 		"{
 			val iterable = newArrayList
