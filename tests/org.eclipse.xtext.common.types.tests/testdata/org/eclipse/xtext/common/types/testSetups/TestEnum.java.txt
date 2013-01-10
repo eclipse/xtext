@@ -13,7 +13,12 @@ package org.eclipse.xtext.common.types.testSetups;
  */
 public enum TestEnum {
 
-	FirstValue("Zonk"),
+	FirstValue("Zonk") {
+		@Override
+		public String toString() {
+			return super.toString();
+		}
+	},
 	SecondValue("Bla");
 	
 	String string;

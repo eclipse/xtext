@@ -246,8 +246,9 @@ public class DeclaredTypeFactory implements ITypeFactory<Class<?>> {
 
 	protected void setTypeModifiers(Class<?> clazz, JvmDeclaredType result) {
 		result.setAbstract(Modifier.isAbstract(clazz.getModifiers()));
-		result.setFinal(Modifier.isFinal(clazz.getModifiers()));
 		result.setStatic(Modifier.isStatic(clazz.getModifiers()));
+		if (!(result instanceof JvmEnumerationType))
+			result.setFinal(Modifier.isFinal(clazz.getModifiers()));
 	}
 
 	protected void createNestedTypes(Class<?> clazz, JvmDeclaredType result) {

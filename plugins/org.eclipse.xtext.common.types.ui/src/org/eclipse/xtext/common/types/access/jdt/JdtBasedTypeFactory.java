@@ -429,8 +429,9 @@ public class JdtBasedTypeFactory implements ITypeFactory<IType> {
 
 	public void setTypeModifiers(ITypeBinding binding, JvmDeclaredType result) {
 		result.setAbstract(Modifier.isAbstract(binding.getModifiers()));
-		result.setFinal(Modifier.isFinal(binding.getModifiers()));
 		result.setStatic(Modifier.isStatic(binding.getModifiers()));
+		if (!(result instanceof JvmEnumerationType))
+			result.setFinal(Modifier.isFinal(binding.getModifiers()));
 	}
 
 	public JvmAnnotationType createAnnotationType(ITypeBinding binding) {
