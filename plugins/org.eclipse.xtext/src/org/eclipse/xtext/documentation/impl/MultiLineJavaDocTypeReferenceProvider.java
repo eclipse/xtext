@@ -26,23 +26,37 @@ public class MultiLineJavaDocTypeReferenceProvider implements IJavaDocTypeRefere
 	public List<ReplaceRegion> computeTypeRefRegions(INode node) {
 		List<ReplaceRegion> regions = Lists.newArrayList();
 		Iterable<ILeafNode> leafNodes = node.getLeafNodes();
+		computeRegions(regions, leafNodes, "@link ", "}", "#");
+		computeRegions(regions, leafNodes, "@see ", " " , "#");
+		return regions;
+	}
+
+	public List<ReplaceRegion> computeParameterTypeRefRegions(INode node) {
+		List<ReplaceRegion> regions = Lists.newArrayList();
+		Iterable<ILeafNode> leafNodes = node.getLeafNodes();
+		computeRegions(regions, leafNodes, "@param ", " ", "-");
+		return regions;
+	}
+
+	protected void computeRegions(List<ReplaceRegion> regions, Iterable<ILeafNode> leafNodes, String start, String end, String optionalEnd) {
 		for (ILeafNode leafNode : leafNodes) {
 			String text = leafNode.getText();
 			int offset = leafNode.getOffset();
-			int link = text.indexOf("@link ");
-			while (link != -1) {
-				int beginIndex = link + 6;
-				int endLink = text.indexOf("}", beginIndex);
+			int position = text.indexOf(start);
+			while (position != -1) {
+				int beginIndex = position + start.length();
+				int endLink = text.indexOf(optionalEnd, beginIndex);
+				if(endLink == -1)
+					endLink = text.indexOf(end, beginIndex);
 				if (endLink == -1) { 
 					break;
 				} else {
-					String simpleName = text.substring(beginIndex, endLink);
-					ReplaceRegion region = new ReplaceRegion(offset + beginIndex, endLink - beginIndex, simpleName);
+					String simpleName = text.substring(beginIndex, endLink).trim();
+					ReplaceRegion region = new ReplaceRegion(offset + beginIndex, simpleName.length(), simpleName);
 					regions.add(region);
 				} 
-				link = text.indexOf("@link ", endLink);
+				position = text.indexOf(start, endLink);
 			}
 		}
-		return regions;
 	}
 }

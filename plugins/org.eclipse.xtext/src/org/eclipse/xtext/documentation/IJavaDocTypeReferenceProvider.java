@@ -24,4 +24,6 @@ import com.google.inject.ImplementedBy;
 public interface IJavaDocTypeReferenceProvider {
 	
 	public List<ReplaceRegion> computeTypeRefRegions(INode commentNode);
+
+	public List<ReplaceRegion> computeParameterTypeRefRegions(INode commentNode);
 }
