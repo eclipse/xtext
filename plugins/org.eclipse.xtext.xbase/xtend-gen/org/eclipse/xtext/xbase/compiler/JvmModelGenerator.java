@@ -1,10 +1,10 @@
-/**
+/*******************************************************************************
  * Copyright (c) 2012 itemis AG (http://www.itemis.eu) and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- */
+ *******************************************************************************/
 package org.eclipse.xtext.xbase.compiler;
 
 import com.google.common.base.Objects;
@@ -502,8 +502,8 @@ public class JvmModelGenerator implements IGenerator {
   }
   
   /**
-   * Returns the visibility modifier and a space as suffix if not empty
-   */
+	 * Returns the visibility modifier and a space as suffix if not empty
+	 */
   public String javaName(final JvmVisibility visibility) {
     boolean _notEquals = ObjectExtensions.operator_notEquals(visibility, null);
     if (_notEquals) {
@@ -1139,11 +1139,18 @@ public class JvmModelGenerator implements IGenerator {
                   final int realOffset = (_offset_1 - nodeOffset);
                   String _substring = nodeText.substring(lastOffset, realOffset);
                   parentAppendable.append(_substring);
-                  int _offset_2 = region.getOffset();
+                  final int startLine = node_1.getStartLine();
+                  String _substring_1 = nodeText.substring(0, realOffset);
+                  int _countLines = Strings.countLines(_substring_1);
+                  final int positionStartLine = (startLine + _countLines);
                   int _length_1 = region.getLength();
-                  int _startLine_1 = node_1.getStartLine();
-                  int _endLine_1 = node_1.getEndLine();
-                  TextRegionWithLineInformation _textRegionWithLineInformation_1 = new TextRegionWithLineInformation(_offset_2, _length_1, _startLine_1, _endLine_1);
+                  int _plus = (realOffset + _length_1);
+                  String _substring_2 = nodeText.substring(0, _plus);
+                  int _countLines_1 = Strings.countLines(_substring_2);
+                  final int positionEndLine = (startLine + _countLines_1);
+                  int _offset_2 = region.getOffset();
+                  int _length_2 = region.getLength();
+                  TextRegionWithLineInformation _textRegionWithLineInformation_1 = new TextRegionWithLineInformation(_offset_2, _length_2, positionStartLine, positionEndLine);
                   LocationData _locationData_1 = new LocationData(_textRegionWithLineInformation_1, null, null);
                   ITreeAppendable childAppendable = parentAppendable.trace(_locationData_1);
                   EClass _jvmType = TypesPackage.eINSTANCE.getJvmType();
@@ -1164,9 +1171,9 @@ public class JvmModelGenerator implements IGenerator {
                   }
                   int _offset_3 = region.getOffset();
                   int _minus = (_offset_3 - nodeOffset);
-                  int _length_2 = region.getLength();
-                  int _plus = (_minus + _length_2);
-                  lastOffset = _plus;
+                  int _length_3 = region.getLength();
+                  int _plus_1 = (_minus + _length_3);
+                  lastOffset = _plus_1;
                 }
               }
               String _substring = nodeText.substring(lastOffset);
