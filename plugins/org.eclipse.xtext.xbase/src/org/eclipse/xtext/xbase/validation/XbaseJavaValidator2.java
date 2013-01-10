@@ -197,6 +197,7 @@ public class XbaseJavaValidator2 extends AbstractXbaseJavaValidator {
 						IssueCodes.VARIABLE_NAME_SHADOWING);
 				return;
 			}
+			// TODO validate on the fly while resolving types
 			// temporarily disabled
 //			int idx = 0;
 //			if (nameDeclarator.eContainer() instanceof XBlockExpression) {
@@ -219,7 +220,7 @@ public class XbaseJavaValidator2 extends AbstractXbaseJavaValidator {
 		if (expectedType == null || expectedType.getType() == null)
 			return;
 		LightweightTypeReference actualType = getActualType(expression);
-		if (actualType == null || actualType.getType() == null)
+		if (actualType == null)
 			return;
 		boolean valid = expectedType.isAssignableFrom(actualType);
 		if (!valid) {
@@ -274,7 +275,6 @@ public class XbaseJavaValidator2 extends AbstractXbaseJavaValidator {
 	
 	@Check
 	public void checkTypes(XForLoopExpression obj) {
-//		try {
 		LightweightTypeReference actualType = getActualType(obj.getForExpression());
 		if (actualType == null || actualType.getType() == null)
 			return;
@@ -311,10 +311,6 @@ public class XbaseJavaValidator2 extends AbstractXbaseJavaValidator {
 				}
 			}
 		}
-//		} catch (WrappedException e) {
-//			throw new WrappedException("XbaseJavaValidator#checkTypes for " + obj + " caused: "
-//					+ e.getCause().getMessage(), e);
-//		}
 	}
 
 
