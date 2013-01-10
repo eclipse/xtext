@@ -129,6 +129,8 @@ public class TraceAsPrimarySourceInstaller implements ITraceToBytecodeInstaller 
 	}
 
 	public byte[] installTrace(byte[] javaClassBytecode) throws IOException {
+		if (trace == null)
+			return null;
 		ClassReader reader = new ClassReader(javaClassBytecode);
 		ClassWriter writer = new ClassWriter(0);
 		URI associatedPath = trace.getAssociatedPath();
