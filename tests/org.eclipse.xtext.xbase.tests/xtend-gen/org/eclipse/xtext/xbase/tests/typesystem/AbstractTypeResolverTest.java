@@ -830,52 +830,52 @@ public abstract class AbstractTypeResolverTest<Reference extends Object> extends
   }
   
   @Test
-  public void testReturnType_00() throws Exception {
+  public void testReturnExpression_00() throws Exception {
     this.resolvesTo("return", "void");
   }
   
   @Test
-  public void testReturnType_01() throws Exception {
+  public void testReturnExpression_01() throws Exception {
     this.resolvesTo("return \'foo\'", "void");
   }
   
   @Test
-  public void testReturnType_02() throws Exception {
+  public void testReturnExpression_02() throws Exception {
     this.resolvesTo("return try { if (true) \'foo\' else \'bar\' } finally { String::valueOf(\'zonk\') }", "void");
   }
   
   @Test
-  public void testReturnType_03() throws Exception {
+  public void testReturnExpression_03() throws Exception {
     this.resolvesTo("{ val c = [ int i | return i ] c.apply(1) return null }", "void");
   }
   
   @Test
-  public void testReturnType_04() throws Exception {
+  public void testReturnExpression_04() throws Exception {
     this.resolvesTo("{ val c = [ int i | i ] c.apply(1) return null }", "void");
   }
   
   @Test
-  public void testReturnType_05() throws Exception {
+  public void testReturnExpression_05() throws Exception {
     this.resolvesTo("{ var closure = [| return \'literal\'] closure.apply }", "String");
   }
   
   @Test
-  public void testReturnType_06() throws Exception {
+  public void testReturnExpression_06() throws Exception {
     this.resolvesTo("{ var closure = [| return \'literal\'] return closure.apply }", "void");
   }
   
   @Test
-  public void testReturnType_07() throws Exception {
+  public void testReturnExpression_07() throws Exception {
     this.resolvesTo("[| return \'literal\'].apply", "String");
   }
   
   @Test
-  public void testReturnType_08() throws Exception {
+  public void testReturnExpression_08() throws Exception {
     this.resolvesTo("return [| return \'literal\'].apply", "void");
   }
   
   @Test
-  public void testReturnType_09() throws Exception {
+  public void testReturnExpression_09() throws Exception {
     Reference _resolvesTo = this.resolvesTo("[| return \'literal\']", "()=>String");
     this.isFunctionAndEquivalentTo(_resolvesTo, "Function0<String>");
   }

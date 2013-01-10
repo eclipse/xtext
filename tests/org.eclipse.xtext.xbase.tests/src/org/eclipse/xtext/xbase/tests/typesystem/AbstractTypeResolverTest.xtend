@@ -744,43 +744,43 @@ abstract class AbstractTypeResolverTest<Reference> extends AbstractXbaseTestCase
         "{ var x = <Iterable<String>>newArrayList('a,b'.split(',')) x.head.head }".resolvesTo("String")
     }
     
-    @Test def void testReturnType_00() throws Exception {
+    @Test def void testReturnExpression_00() throws Exception {
 		"return".resolvesTo("void")
 	}
 	
-	@Test def void testReturnType_01() throws Exception {
+	@Test def void testReturnExpression_01() throws Exception {
 		"return 'foo'".resolvesTo("void")
 	}
 	
-	@Test def void testReturnType_02() throws Exception {
+	@Test def void testReturnExpression_02() throws Exception {
 		"return try { if (true) 'foo' else 'bar' } finally { String::valueOf('zonk') }".resolvesTo("void")
 	}
 	
-	@Test def void testReturnType_03() throws Exception {
+	@Test def void testReturnExpression_03() throws Exception {
 		"{ val c = [ int i | return i ] c.apply(1) return null }".resolvesTo("void")
 	}
 	
-	@Test def void testReturnType_04() throws Exception {
+	@Test def void testReturnExpression_04() throws Exception {
 		"{ val c = [ int i | i ] c.apply(1) return null }".resolvesTo("void")
 	}
 	
-	@Test def void testReturnType_05() throws Exception {
+	@Test def void testReturnExpression_05() throws Exception {
 		"{ var closure = [| return 'literal'] closure.apply }".resolvesTo("String")
 	}
 	
-	@Test def void testReturnType_06() throws Exception {
+	@Test def void testReturnExpression_06() throws Exception {
 		"{ var closure = [| return 'literal'] return closure.apply }".resolvesTo("void")
 	}
 	
-	@Test def void testReturnType_07() throws Exception {
+	@Test def void testReturnExpression_07() throws Exception {
 		"[| return 'literal'].apply".resolvesTo("String")
 	}
 	
-	@Test def void testReturnType_08() throws Exception {
+	@Test def void testReturnExpression_08() throws Exception {
 		"return [| return 'literal'].apply".resolvesTo("void")
 	}
 	
-	@Test def void testReturnType_09() throws Exception {
+	@Test def void testReturnExpression_09() throws Exception {
 		"[| return 'literal']".resolvesTo("()=>String").isFunctionAndEquivalentTo("Function0<String>")
 	}
 	

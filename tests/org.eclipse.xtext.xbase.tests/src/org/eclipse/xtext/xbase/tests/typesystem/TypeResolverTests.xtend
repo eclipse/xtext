@@ -417,6 +417,12 @@ class OldAPITypeResolverTest extends AbstractTypeResolverTest<JvmTypeReference> 
 	@Ignore("fails in old implementation") @Test override testFeatureCallWithArrayToIterableConversion_04() throws Exception {
         fail("fails in old implementation")
     }
+	@Ignore("fails in old implementation") @Test override testFeatureCallWithArrayToIterableConversion_06() throws Exception {
+        fail("fails in old implementation")
+    }
+	@Ignore("fails in old implementation") @Test override testFeatureCallWithArrayToIterableConversion_07() throws Exception {
+        fail("fails in old implementation")
+    }
 	
 	@Ignore("fails in old implementation") @Test override testOverloadedVarArgs_03() throws Exception {
 		fail("fails in old implementation")
@@ -1508,7 +1514,7 @@ class ShuffledTypeResolverTest extends AbstractBatchTypeResolverTest {
 abstract class TypeResolverPerformanceTest extends BatchTypeResolverTest {
 	
 	@Rule
-	public val timeout = new Timeout(400) // TODO improve - aim at something like 100
+	public val timeout = new Timeout(100) // TODO improve - aim at something like 100
 	
 	override LightweightTypeReference resolvesTo(String expression, String type) {
 		val xExpression = expression(expression.replace('$$', 'org::eclipse::xtext::xbase::lib::'), false /* true */);

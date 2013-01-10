@@ -16,32 +16,32 @@ import org.junit.Test;
 @SuppressWarnings("all")
 public abstract class AbstractReturnTypeTest<Reference extends Object> extends AbstractTypeResolverTest<Reference> {
   @Test
-  public void testReturnType_01() throws Exception {
+  public void testReturnExpression_01() throws Exception {
     this.resolvesTo("return \'foo\'", "String");
   }
   
   @Test
-  public void testReturnType_02() throws Exception {
+  public void testReturnExpression_02() throws Exception {
     this.resolvesTo("return try { if (true) \'foo\' else \'bar\' } finally { String::valueOf(\'zonk\') }", "String");
   }
   
   @Test
-  public void testReturnType_03() throws Exception {
+  public void testReturnExpression_03() throws Exception {
     this.resolvesTo("{ val c = [ int i | return i ] c.apply(1) return null }", "null");
   }
   
   @Test
-  public void testReturnType_04() throws Exception {
+  public void testReturnExpression_04() throws Exception {
     this.resolvesTo("{ val c = [ int i | i ] c.apply(1) return null }", "null");
   }
   
   @Test
-  public void testReturnType_06() throws Exception {
+  public void testReturnExpression_06() throws Exception {
     this.resolvesTo("{ var closure = [| return \'literal\'] return closure.apply }", "String");
   }
   
   @Test
-  public void testReturnType_08() throws Exception {
+  public void testReturnExpression_08() throws Exception {
     this.resolvesTo("return [| return \'literal\'].apply", "String");
   }
   
