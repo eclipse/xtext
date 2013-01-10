@@ -800,6 +800,36 @@ public abstract class AbstractTypeResolverTest<Reference extends Object> extends
   }
   
   @Test
+  public void testFeatureCallWithArrayToIterableConversion_05() throws Exception {
+    this.resolvesTo("{ var x = <String[]>newArrayList(\'a,b\'.split(\',\')) x }", "ArrayList<String[]>");
+  }
+  
+  @Test
+  public void testFeatureCallWithArrayToIterableConversion_06() throws Exception {
+    this.resolvesTo("{ var x = <String[]>newArrayList(\'a,b\'.split(\',\')) x.head }", "String[]");
+  }
+  
+  @Test
+  public void testFeatureCallWithArrayToIterableConversion_07() throws Exception {
+    this.resolvesTo("{ var x = <String[]>newArrayList(\'a,b\'.split(\',\')) x.head.head }", "String");
+  }
+  
+  @Test
+  public void testFeatureCallWithArrayToIterableConversion_08() throws Exception {
+    this.resolvesTo("{ var x = <Iterable<String>>newArrayList(\'a,b\'.split(\',\')) x }", "ArrayList<Iterable<String>>");
+  }
+  
+  @Test
+  public void testFeatureCallWithArrayToIterableConversion_09() throws Exception {
+    this.resolvesTo("{ var x = <Iterable<String>>newArrayList(\'a,b\'.split(\',\')) x.head }", "Iterable<String>");
+  }
+  
+  @Test
+  public void testFeatureCallWithArrayToIterableConversion_10() throws Exception {
+    this.resolvesTo("{ var x = <Iterable<String>>newArrayList(\'a,b\'.split(\',\')) x.head.head }", "String");
+  }
+  
+  @Test
   public void testReturnType_00() throws Exception {
     this.resolvesTo("return", "void");
   }

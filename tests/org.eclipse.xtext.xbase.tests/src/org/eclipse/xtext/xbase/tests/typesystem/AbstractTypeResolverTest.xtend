@@ -719,6 +719,30 @@ abstract class AbstractTypeResolverTest<Reference> extends AbstractXbaseTestCase
 	@Test def void testFeatureCallWithArrayToIterableConversion_04() throws Exception {
         "(null as String[][]).head".resolvesTo("String[]")
     }
+	
+	@Test def void testFeatureCallWithArrayToIterableConversion_05() throws Exception {
+        "{ var x = <String[]>newArrayList('a,b'.split(',')) x }".resolvesTo("ArrayList<String[]>")
+    }
+	
+	@Test def void testFeatureCallWithArrayToIterableConversion_06() throws Exception {
+        "{ var x = <String[]>newArrayList('a,b'.split(',')) x.head }".resolvesTo("String[]")
+    }
+	
+	@Test def void testFeatureCallWithArrayToIterableConversion_07() throws Exception {
+        "{ var x = <String[]>newArrayList('a,b'.split(',')) x.head.head }".resolvesTo("String")
+    }
+	
+	@Test def void testFeatureCallWithArrayToIterableConversion_08() throws Exception {
+        "{ var x = <Iterable<String>>newArrayList('a,b'.split(',')) x }".resolvesTo("ArrayList<Iterable<String>>")
+    }
+	
+	@Test def void testFeatureCallWithArrayToIterableConversion_09() throws Exception {
+        "{ var x = <Iterable<String>>newArrayList('a,b'.split(',')) x.head }".resolvesTo("Iterable<String>")
+    }
+	
+	@Test def void testFeatureCallWithArrayToIterableConversion_10() throws Exception {
+        "{ var x = <Iterable<String>>newArrayList('a,b'.split(',')) x.head.head }".resolvesTo("String")
+    }
     
     @Test def void testReturnType_00() throws Exception {
 		"return".resolvesTo("void")

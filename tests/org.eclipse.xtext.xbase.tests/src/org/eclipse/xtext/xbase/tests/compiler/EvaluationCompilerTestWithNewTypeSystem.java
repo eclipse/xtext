@@ -27,11 +27,33 @@ public class EvaluationCompilerTestWithNewTypeSystem extends EvaluationCompilerT
 	public void testBlock_01() throws Exception {
 		super.testBlock_01();
 	}
+	
 	// re-enabled
 	@Override
 	@Test
 	public void testBlock_02() throws Exception {
 		super.testBlock_02();
+	}
+
+	// re-enabled
+	@Override
+	@Test
+	public void testCollectionExtensions_08() throws Exception {
+		super.testCollectionExtensions_08();
+	}
+	
+	// re-enabled
+	@Override
+	@Test
+	public void testCollectionExtensions_09() throws Exception {
+		super.testCollectionExtensions_09();
+	}
+	
+	// re-enabled
+	@Override
+	@Test
+	public void testCollectionExtensions_10() throws Exception {
+		super.testCollectionExtensions_10();
 	}
 	
 	// TODO move to AbstractXbaseEvaluationTests

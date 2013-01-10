@@ -2465,6 +2465,21 @@ public abstract class AbstractXbaseEvaluationTest extends Assert {
 		assertEvaluatesTo(Boolean.FALSE, "newHashSet('a', 'b', 'c').addAll('a', 'b', 'c')");
 	}
 	
+	@Ignore("Fails with old impl")
+	@Test public void testCollectionExtensions_08() throws Exception {
+		assertEvaluatesTo("a", "{ var x = <String[]>newArrayList('a,b'.split(',')) x.head.head }");
+	}
+	
+	@Ignore("Fails with old impl")
+	@Test public void testCollectionExtensions_09() throws Exception {
+		assertEvaluatesTo("a", "{ var x = <Iterable<String>>newArrayList('a,b'.split(',')) x.head.head }");
+	}
+	
+	@Ignore("Fails with old impl")
+	@Test public void testCollectionExtensions_10() throws Exception {
+		assertEvaluatesTo("a", "{ var x = <Iterable<String>>newArrayList('a,b'.split(',')).flatten x.head }");
+	}
+	
 	@Test public void testListExtensions_01() throws Exception {
 		assertEvaluatesTo(Lists.newArrayList("a", "b", "c"), "newArrayList('c', 'a', 'b').sortInplace()");
 		assertEvaluatesTo(Lists.newArrayList("a", "b", "c"), "newArrayList('c', 'a', 'b').sort()");
