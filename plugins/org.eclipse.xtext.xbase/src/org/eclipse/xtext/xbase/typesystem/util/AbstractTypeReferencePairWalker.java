@@ -66,7 +66,7 @@ public abstract class AbstractTypeReferencePairWalker extends TypeReferenceVisit
 		@Override
 		protected void doVisitTypeReference(LightweightTypeReference reference, CompoundTypeReference declaration) {
 			List<LightweightTypeReference> components = declaration.getMultiTypeComponents();
-			if (components.isEmpty()) {
+			if (!components.isEmpty()) {
 				for (LightweightTypeReference component: components) {
 					outerVisit(component, reference);
 				}

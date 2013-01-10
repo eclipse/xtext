@@ -64,7 +64,11 @@ public class DeferredTypeParameterHintCollector extends AbstractTypeReferencePai
 		return new CompoundTypeReferenceTraverser() {
 			@Override
 			protected void doVisitUnboundTypeReference(UnboundTypeReference reference, CompoundTypeReference declaration) {
-				addHint(reference, declaration);
+				if (declaration.isSynonym()) {
+					super.doVisitUnboundTypeReference(reference, declaration);
+				} else {
+					addHint(reference, declaration);
+				}
 			}
 		};
 	}

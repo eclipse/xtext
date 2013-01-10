@@ -9,9 +9,12 @@ package org.eclipse.xtext.xbase.typesystem.computation;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.NonNullByDefault;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.common.types.JvmField;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmGenericType;
@@ -46,6 +49,7 @@ import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.typesystem.conformance.ConformanceHint;
 import org.eclipse.xtext.xbase.typesystem.references.AnyTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.ArrayTypeReference;
+import org.eclipse.xtext.xbase.typesystem.references.CompoundTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightMergedBoundTypeArgument;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.ParameterizedTypeReference;
@@ -328,42 +332,85 @@ public class XbaseTypeComputer implements ITypeComputer {
 		state.acceptActualType(primitiveVoid);
 	}
 
-	@NonNull
+	@NonNullByDefault
 	protected LightweightTypeReference computeForLoopParameterType(final XForLoopExpression object,
 			final ITypeComputationState state) {
 		JvmFormalParameter declaredParam = object.getDeclaredParam();
 		LightweightTypeReference parameterType = null;
 		if (declaredParam.getParameterType() != null) {
 			parameterType = state.getConverter().toLightweightReference(declaredParam.getParameterType());
-			LightweightTypeReference iterable = null;
+			LightweightTypeReference iterableOrArray = null;
 			if (parameterType.isPrimitive()) {
-				iterable = new ArrayTypeReference(state.getReferenceOwner(), parameterType);
+				iterableOrArray = new ArrayTypeReference(state.getReferenceOwner(), parameterType);
 			} else {
 				ParameterizedTypeReference reference = new ParameterizedTypeReference(state.getReferenceOwner(), services.getTypeReferences().findDeclaredType(Iterable.class, object));
 				WildcardTypeReference wildcard = new WildcardTypeReference(state.getReferenceOwner());
 				wildcard.addUpperBound(parameterType);
 				reference.addTypeArgument(wildcard);
-				iterable = reference;
+				iterableOrArray = reference;
 			}
-			// TODO add synonyms automatically
-			ITypeComputationState iterableState = state.withExpectation(iterable);
-			iterableState.computeTypes(object.getForExpression());
-			
+			final CompoundTypeReference withSynonyms = new CompoundTypeReference(iterableOrArray.getOwner(), true);
+			withSynonyms.addComponent(iterableOrArray);
+			services.getSynonymTypesProvider().collectSynonymTypes(iterableOrArray, new SynonymTypesProvider.Acceptor() {
+				@Override
+				protected boolean accept(LightweightTypeReference synonym, Set<ConformanceHint> hints) {
+					if (synonym.isType(List.class)) {
+						List<LightweightTypeReference> superTypes = synonym.getAllSuperTypes();
+						for(LightweightTypeReference superType: superTypes) {
+							if (superType.isType(Iterable.class)) {
+								if (superType.getTypeArguments().size() == 1) {
+									LightweightTypeReference argument = superType.getTypeArguments().get(0);
+									if (argument.isWildcard()) {
+										withSynonyms.addComponent(superType);
+										return true;
+									} else {
+										JvmType rawSuperType = superType.getType();
+										if (rawSuperType == null) {
+											withSynonyms.addComponent(superType);
+											return true;
+										}
+										ParameterizedTypeReference parameterized = new ParameterizedTypeReference(superType.getOwner(), rawSuperType);
+										WildcardTypeReference wildcard = new WildcardTypeReference(superType.getOwner());
+										wildcard.addUpperBound(argument);
+										parameterized.addTypeArgument(wildcard);
+										withSynonyms.addComponent(parameterized);
+										return true;
+									}
+								} else {
+									withSynonyms.addComponent(superType);
+									return true;
+								}
+							}
+						}
+					} else {
+						withSynonyms.addComponent(synonym);
+					}
+					return true;
+				}
+			});
+			ITypeComputationState iterableState = state.withExpectation(withSynonyms);
+			ITypeComputationResult forExpressionResult = iterableState.computeTypes(object.getForExpression());
+			LightweightTypeReference forExpressionType = forExpressionResult.getActualExpressionType();
+			if (forExpressionType.isAny()) {
+				iterableState.refineExpectedType(object.getForExpression(), iterableOrArray);
+			} else if (forExpressionType.isResolved() && iterableOrArray.isAssignableFrom(forExpressionType)) {
+				iterableState.refineExpectedType(object.getForExpression(), forExpressionType);
+			}
 		} else {
 			WildcardTypeReference wildcard = new WildcardTypeReference(state.getReferenceOwner());
 			wildcard.addUpperBound(getTypeForName(Object.class, state));
 			ParameterizedTypeReference iterable = new ParameterizedTypeReference(state.getReferenceOwner(), services.getTypeReferences().findDeclaredType(Iterable.class, object));
 			iterable.addTypeArgument(wildcard);
-			// TODO add synonyms automatically
+			// TODO do we have to add synonyms, too?
 			ITypeComputationState iterableState = state.withExpectation(iterable); 
 			ITypeComputationResult forExpressionResult = iterableState.computeTypes(object.getForExpression());
 			LightweightTypeReference forExpressionType = forExpressionResult.getActualExpressionType();
-			if (forExpressionType.isResolved() && iterable.isAssignableFrom(forExpressionType)) {
+			if (forExpressionType.isResolved() && !forExpressionType.isAny() && iterable.isAssignableFrom(forExpressionType)) {
 				iterableState.refineExpectedType(object.getForExpression(), forExpressionType);
 			}
 			parameterType = forExpressionType.accept(new TypeReferenceVisitorWithResult<LightweightTypeReference>() {
 				@Override
-				public LightweightTypeReference doVisitParameterizedTypeReference(@NonNull ParameterizedTypeReference reference) {
+				public LightweightTypeReference doVisitParameterizedTypeReference(ParameterizedTypeReference reference) {
 					DeclaratorTypeArgumentCollector typeArgumentCollector = new ConstraintAwareTypeArgumentCollector(state.getReferenceOwner());
 					Map<JvmTypeParameter, LightweightMergedBoundTypeArgument> typeParameterMapping = typeArgumentCollector.getTypeParameterMapping(reference);
 					TypeParameterSubstitutor<?> substitutor = new TypeParameterByConstraintSubstitutor(typeParameterMapping, state.getReferenceOwner());
@@ -373,7 +420,11 @@ public class XbaseTypeComputer implements ITypeComputer {
 					return substitutedArgument;
 				}
 				@Override
-				public LightweightTypeReference doVisitArrayTypeReference(@NonNull ArrayTypeReference reference) {
+				protected LightweightTypeReference doVisitAnyTypeReference(AnyTypeReference reference) {
+					return reference;
+				}
+				@Override
+				public LightweightTypeReference doVisitArrayTypeReference(ArrayTypeReference reference) {
 					return reference.getComponentType();
 				}
 			});

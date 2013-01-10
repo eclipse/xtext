@@ -26,5 +26,6 @@ import org.junit.runners.Suite.SuiteClasses;
 	StringLiteralTest.class,
 	ClosureTypeSystemSuite.class,
 	BatchLinkingTest.class,
+	ExpectationSuite.class
 })
 public class TypeSystemSuite {}
