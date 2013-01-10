@@ -21,6 +21,7 @@ import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
@@ -30,13 +31,13 @@ import org.eclipse.jface.viewers.StyledString;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.xtend.core.formatting.MemberFromSuperImplementor;
 import org.eclipse.xtend.core.jvmmodel.IXtendJvmAssociations;
-import org.eclipse.xtend.core.linking.XtendLinkingDiagnosticMessageProvider;
 import org.eclipse.xtend.core.services.XtendGrammarAccess;
 import org.eclipse.xtend.core.validation.IssueCodes;
 import org.eclipse.xtend.core.xtend.XtendClass;
 import org.eclipse.xtend.core.xtend.XtendFunction;
 import org.eclipse.xtend.core.xtend.XtendMember;
 import org.eclipse.xtend.ide.buildpath.XtendLibClasspathAdder;
+import org.eclipse.xtend.ide.validator.XtendUIValidator;
 import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.Keyword;
 import org.eclipse.xtext.common.types.JvmConstructor;
@@ -45,6 +46,7 @@ import org.eclipse.xtext.common.types.JvmPrimitiveType;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.JvmTypeReference;
+import org.eclipse.xtext.common.types.TypesPackage;
 import org.eclipse.xtext.common.types.access.jdt.IJavaProjectProvider;
 import org.eclipse.xtext.common.types.util.Primitives;
 import org.eclipse.xtext.common.types.util.Primitives.Primitive;
@@ -75,6 +77,7 @@ import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XMemberFeatureCall;
 import org.eclipse.xtext.xbase.compiler.IAppendable;
 import org.eclipse.xtext.xbase.compiler.ImportManager;
+import org.eclipse.xtext.xbase.compiler.ScopeFakeReference;
 import org.eclipse.xtext.xbase.compiler.StringBuilderBasedAppendable;
 import org.eclipse.xtext.xbase.lib.StringExtensions;
 import org.eclipse.xtext.xbase.scoping.XbaseScopeProvider;
@@ -134,7 +137,9 @@ public class XtendQuickfixProvider extends XbaseQuickfixProvider {
 
 	@Override
 	public boolean hasResolutionFor(String issueCode) {
-		if(XtendLinkingDiagnosticMessageProvider.FEATURECALL_LINKING_DIAGNOSTIC.equals(issueCode))
+		if(IssueCodes.FEATURECALL_LINKING_DIAGNOSTIC.equals(issueCode))
+			return true;
+		if(IssueCodes.JAVA_DOC_LINKING_DIAGNOSTIC.equals(issueCode))
 			return true;
 		return super.hasResolutionFor(issueCode);
 	}
@@ -143,11 +148,16 @@ public class XtendQuickfixProvider extends XbaseQuickfixProvider {
 	public List<IssueResolution> getResolutions(Issue issue) {
 		StopWatch stopWatch = new StopWatch(logger);
 		try {
-			if(XtendLinkingDiagnosticMessageProvider.FEATURECALL_LINKING_DIAGNOSTIC.equals(issue.getCode())){
+			if(IssueCodes.FEATURECALL_LINKING_DIAGNOSTIC.equals(issue.getCode())){
 				final IssueResolutionAcceptor issueResolutionAcceptor = issueResolutionAcceptorProvider.get();
 				createXtendLinkingIssueResolutions(issue, issueResolutionAcceptor);
 				return issueResolutionAcceptor.getIssueResolutions();
-			}else
+			} else if(IssueCodes.JAVA_DOC_LINKING_DIAGNOSTIC.equals(issue.getCode())){
+				List<IssueResolution> result = new ArrayList<IssueResolution>();
+				result.addAll(getResolutionsForLinkingIssue(issue));
+				result.addAll(super.getResolutions(issue));
+				return result;
+			} else
 				return super.getResolutions(issue);
 		} finally {
 			stopWatch.resetAndLog("#getResolutions");
@@ -765,4 +775,15 @@ public class XtendQuickfixProvider extends XbaseQuickfixProvider {
 		}
 	}
 	
+	@Override
+	protected EReference getUnresolvedEReference(Issue issue, EObject target) {
+		EReference reference = super.getUnresolvedEReference(issue, target);
+		if(reference == null){
+			if(issue.getCode().equals(IssueCodes.JAVA_DOC_LINKING_DIAGNOSTIC)){
+				return  new ScopeFakeReference(TypesPackage.eINSTANCE.getJvmType());
+			}
+		}
+		return reference;
+	}
+
 }

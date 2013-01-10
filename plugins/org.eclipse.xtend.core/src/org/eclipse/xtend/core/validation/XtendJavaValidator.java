@@ -172,9 +172,6 @@ public class XtendJavaValidator extends XbaseWithAnnotationsJavaValidator {
 	@Inject
 	private ReturnTypeProvider returnTypeProvider;
 
-	@Inject
-	private IJavaDocTypeReferenceProvider javaDocTypeReferenceProvider;
-
 	private final Set<EReference> typeConformanceCheckedReferences = ImmutableSet.copyOf(Iterables.concat(
 			super.getTypeConformanceCheckedReferences(), 
 			ImmutableSet.of(

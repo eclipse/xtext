@@ -10,6 +10,7 @@ package org.eclipse.xtend.core.linking;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.xtend.core.validation.IssueCodes;
 import org.eclipse.xtend.core.xtend.XtendClass;
 import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.diagnostics.Diagnostic;
@@ -27,8 +28,6 @@ import org.eclipse.xtext.xbase.XUnaryOperation;
  * @author Holger Schill - Initial contribution and API
  */
 public class XtendLinkingDiagnosticMessageProvider extends LinkingDiagnosticMessageProvider {
-
-	public static final String FEATURECALL_LINKING_DIAGNOSTIC = "org.eclipse.xtend.core.linking.XtendLinkingDiagnosticMessageProvider.Linking";
 
 	@Override
 	public DiagnosticMessage getUnresolvedProxyMessage(ILinkingDiagnosticContext context) {
@@ -48,7 +47,7 @@ public class XtendLinkingDiagnosticMessageProvider extends LinkingDiagnosticMess
 				String firstPartOfMessage = "The method ";
 				if(explicitArguments.size() == 0 || featureCall instanceof XAssignment)
 					firstPartOfMessage += "or field ";
-				return new DiagnosticMessage(firstPartOfMessage + linkText + " is undefined for the type " + clazzName, Severity.ERROR,FEATURECALL_LINKING_DIAGNOSTIC, linkText);
+				return new DiagnosticMessage(firstPartOfMessage + linkText + " is undefined for the type " + clazzName, Severity.ERROR, IssueCodes.FEATURECALL_LINKING_DIAGNOSTIC, linkText);
 			}
 		}
 		EClass referenceType = context.getReference().getEReferenceType();
