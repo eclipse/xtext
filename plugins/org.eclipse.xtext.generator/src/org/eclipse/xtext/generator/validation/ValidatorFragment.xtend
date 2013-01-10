@@ -71,7 +71,6 @@ class ValidatorFragment extends Xtend2GeneratorFragment implements IInheriting, 
 			import java.util.ArrayList;
 			import java.util.List;
 			import org.eclipse.emf.ecore.EPackage;
-			import «getValidatorSuperClassName(isInheritImplementation)»;
 			«IF !composedChecks.isEmpty»
 			import org.eclipse.xtext.validation.ComposedChecks;
 			«ENDIF»
@@ -79,7 +78,7 @@ class ValidatorFragment extends Xtend2GeneratorFragment implements IInheriting, 
 			«IF !composedChecks.isEmpty»
 			@ComposedChecks(validators= {«FOR validator: composedChecks SEPARATOR ", "»«validator».class«ENDFOR»})
 			«ENDIF»
-			public class «abstractValidatorName.toSimpleName» extends «getValidatorSuperClassName(isInheritImplementation).toSimpleName» {
+			public class «abstractValidatorName.toSimpleName» extends «getValidatorSuperClassName(isInheritImplementation)» {
 			
 				@Override
 				protected List<EPackage> getEPackages() {

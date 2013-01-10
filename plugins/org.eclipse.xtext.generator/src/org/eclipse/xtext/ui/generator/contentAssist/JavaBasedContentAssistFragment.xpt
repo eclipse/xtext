@@ -29,7 +29,6 @@ package «getGenProposalProvider().toJavaPackage()»;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.*;
-import «superClassName»;
 import org.eclipse.xtext.ui.editor.contentassist.ICompletionProposalAcceptor;
 import org.eclipse.xtext.ui.editor.contentassist.ContentAssistContext;
 
@@ -39,7 +38,7 @@ import org.eclipse.xtext.ui.editor.contentassist.ContentAssistContext;
  * with a more concrete subtype. 
  */
 @SuppressWarnings("all")
-public class «getGenProposalProvider().toSimpleName()» extends «superClassName.toSimpleName()» {
+public class «getGenProposalProvider().toSimpleName()» extends «superClassName» {
 		
 	«LET {} AS processedFqnFeatureNames-»
 		«FOREACH containedAssignments() AS assignment-»
@@ -90,11 +89,10 @@ public class «getGenProposalProvider().toSimpleName()» extends «superClassName.t
 */
 package «getProposalProvider().toJavaPackage()»;
 
-import «getGenProposalProvider()»;
 /**
  * see http://www.eclipse.org/Xtext/documentation/latest/xtext.html#contentAssist on how to customize content assistant
  */
-public class «getProposalProvider().toSimpleName()» extends «getGenProposalProvider().toSimpleName()» {
+public class «getProposalProvider().toSimpleName()» extends «getGenProposalProvider()» {
 
 }
 «ENDFILE»

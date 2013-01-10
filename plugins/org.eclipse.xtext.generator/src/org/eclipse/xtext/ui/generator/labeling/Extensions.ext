@@ -15,8 +15,18 @@ extension org::eclipse::xtext::GrammarUtil;
 String eObjectLabelProviderQualifiedName(Grammar grammar) :
 	eObjectLabelProviderQualifiedName(grammar,getNaming());
 	
+String eObjectLabelProviderSuperClassName(Grammar grammar) :
+	usesXbase(grammar) 
+		? "org.eclipse.xtext.xbase.ui.labeling.XbaseLabelProvider" 
+		: "org.eclipse.xtext.ui.label.DefaultEObjectLabelProvider";
+
 String descriptionLabelProviderQualifiedName(Grammar grammar) :
 	descriptionLabelProviderQualifiedName(grammar,getNaming());
+	
+String descriptionLabelProviderSuperClassName(Grammar grammar) :
+	usesXbase(grammar) 
+		? "org.eclipse.xtext.xbase.ui.labeling.XbaseDescriptionLabelProvider" 
+		: "org.eclipse.xtext.ui.label.DefaultDescriptionLabelProvider";
 	
 private String eObjectLabelProviderQualifiedName(Grammar grammar, Naming n) :
 	JAVA org.eclipse.xtext.ui.generator.labeling.LabelProviderFragment.getEObjectLabelProviderQualifiedName(org.eclipse.xtext.Grammar, org.eclipse.xtext.generator.Naming);

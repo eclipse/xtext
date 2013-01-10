@@ -30,7 +30,6 @@ import org.eclipse.xpand2.XpandExecutionContextImpl;
 import org.eclipse.xpand2.XpandFacade;
 import org.eclipse.xpand2.output.Outlet;
 import org.eclipse.xpand2.output.OutputImpl;
-import org.eclipse.xtext.ui.wizard.Abstract«pluginProject?"Plugin":""»ProjectCreator;
 «IF !pluginProject-»
 import org.eclipse.xtext.ui.util.ProjectFactory;
 «ENDIF-»
@@ -43,7 +42,7 @@ import com.google.inject.Provider;
 import com.google.common.collect.Lists;
 «ENDIF-»
 
-public class «projectCreatorClassName().toSimpleName()» extends Abstract«pluginProject?"Plugin":""»ProjectCreator {
+public class «projectCreatorClassName().toSimpleName()» extends «projectCreatorSuperClassName(pluginProject)» {
 
 	protected static final String DSL_GENERATOR_PROJECT_NAME = "«generatorProjectName»";
 

@@ -31,14 +31,12 @@
 */
 package «qualifiedName().toJavaPackage()»;
 
-import org.eclipse.xtext.ui.editor.outline.impl.DefaultOutlineTreeProvider;
-
 /**
  * Customization of the default outline structure.
  *
  * see http://www.eclipse.org/Xtext/documentation.html#outline
  */
-public class «qualifiedName().toSimpleName()» extends DefaultOutlineTreeProvider {
+public class «qualifiedName().toSimpleName()» extends org.eclipse.xtext.ui.editor.outline.impl.DefaultOutlineTreeProvider {
 	
 }
 «ENDFILE»
@@ -51,14 +49,12 @@ public class «qualifiedName().toSimpleName()» extends DefaultOutlineTreeProvider
 */
 package «qualifiedName().toJavaPackage()»
 
-import org.eclipse.xtext.ui.editor.outline.impl.DefaultOutlineTreeProvider
-
 /**
  * Customization of the default outline structure.
  *
  * see http://www.eclipse.org/Xtext/documentation.html#outline
  */
-class «qualifiedName().toSimpleName()» extends DefaultOutlineTreeProvider {
+class «qualifiedName().toSimpleName()» extends org.eclipse.xtext.ui.editor.outline.impl.DefaultOutlineTreeProvider {
 	
 }
 «ENDFILE»

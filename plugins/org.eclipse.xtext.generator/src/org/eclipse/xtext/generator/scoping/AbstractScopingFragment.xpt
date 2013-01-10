@@ -32,8 +32,6 @@
  */
 package «scopeProviderName().toJavaPackage()»;
 
-import «scopeProviderSuperClassName»;
-
 /**
  * This class contains custom scoping description.
  * 
@@ -41,7 +39,7 @@ import «scopeProviderSuperClassName»;
  * on how and when to use it 
  *
  */
-public class «scopeProviderName().toSimpleName()» extends «scopeProviderSuperClassName.toSimpleName()» {
+public class «scopeProviderName().toSimpleName()» extends «scopeProviderSuperClassName» {
 
 }
 «ENDFILE»
@@ -55,8 +53,6 @@ public class «scopeProviderName().toSimpleName()» extends «scopeProviderSuperCla
  */
 package «scopeProviderName().toJavaPackage()»
 
-import «scopeProviderSuperClassName»
-
 /**
  * This class contains custom scoping description.
  * 
@@ -64,7 +60,7 @@ import «scopeProviderSuperClassName»
  * on how and when to use it 
  *
  */
-class «scopeProviderName().toSimpleName()» extends «scopeProviderSuperClassName.toSimpleName()» {
+class «scopeProviderName().toSimpleName()» extends «scopeProviderSuperClassName» {
 
 }
 «ENDFILE»
