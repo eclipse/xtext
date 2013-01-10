@@ -18,12 +18,14 @@ import com.google.common.annotations.Beta;
  * @author Sven Efftinge
  */
 @Beta
-@Retention(RetentionPolicy.SOURCE)
+@Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.ANNOTATION_TYPE)
 public @interface Active {
-	
+
 	/**
-	 * @return the processor to call during compilation.
+	 * @return the processor to call during compilation. should implement one or
+	 *         more of the processor interfaces {@link PreModifyProcessor},
+	 *         {@link ModifyProcessor}, and {@link PostModifyProcessor}.
 	 */
-	Class<? extends ActiveAnnotationProcessor> processor();
+	Class<?> value();
 }
