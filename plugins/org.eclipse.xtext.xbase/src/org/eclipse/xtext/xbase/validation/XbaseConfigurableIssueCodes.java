@@ -37,8 +37,6 @@ public class XbaseConfigurableIssueCodes extends ConfigurableIssueCodesProvider 
 	public static final PreferenceKey OBSOLETE_INSTANCEOF = createDelegate(IssueCodes.OBSOLETE_INSTANCEOF, JavaCore.COMPILER_PB_UNNECESSARY_TYPE_CHECK);
 	public static final PreferenceKey IMPORT_UNUSED = createDelegate(IssueCodes.IMPORT_UNUSED, JavaCore.COMPILER_PB_UNUSED_IMPORT);
 	public static final PreferenceKey UNUSED_LOCAL_VARIABLE = createDelegate(IssueCodes.UNUSED_LOCAL_VARIABLE, JavaCore.COMPILER_PB_UNUSED_LOCAL);
-	
-	// TODO add IMPORT_DUPLICATE to UI
 	public static final PreferenceKey IMPORT_DUPLICATE = create(IssueCodes.IMPORT_DUPLICATE, SeverityConverter.SEVERITY_WARNING);
 	
 	
@@ -46,17 +44,17 @@ public class XbaseConfigurableIssueCodes extends ConfigurableIssueCodesProvider 
 	 * If you would like to a add a new IssueCode use this method,<br>
 	 * this method creates a new {@link PreferenceKey} and adds it to the inner registry map.
 	 */
-	private static PreferenceKey create(String id, String defaultValue) {
+	protected static PreferenceKey create(String id, String defaultValue) {
 		PreferenceKey prefKey = new PreferenceKey(id, defaultValue);
 		_allConfigurableCodes.put(prefKey.getId(), prefKey);
 		return prefKey;
 	}
 
-	private static PreferenceKey createDelegate(String id, String delegationKey) {
+	protected static PreferenceKey createDelegate(String id, String delegationKey) {
 		return createDelegate(id, delegationKey, SeverityConverter.SEVERITY_WARNING);
 	}
 
-	private static PreferenceKey createDelegate(String id, String delegationKey, String defaultSeverity) {
+	protected static PreferenceKey createDelegate(String id, String delegationKey, String defaultSeverity) {
 		String encodedDelegation = XbaseSeverityConverter.encodeDefaultSeverity(delegationKey, defaultSeverity);
 		return create(id, encodedDelegation);
 	}
