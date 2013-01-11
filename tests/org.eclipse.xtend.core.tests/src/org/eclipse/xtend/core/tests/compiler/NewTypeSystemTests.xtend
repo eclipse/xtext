@@ -120,6 +120,12 @@ class XtendCompilerTest2 extends AbstractXtendCompilerTest {
 		fail("TODO implement better expectation computation for unresolved type parameters")
 	}
 	
+	@Test
+	@Ignore("TODO implement better expectation computation for unresolved type parameters")
+	override testRichStringNoAutoConversionToString_03() {
+		fail("TODO implement better expectation computation for unresolved type parameters")
+	}
+	
 	@Test 
 	override testBug380062_01() {
 		assertCompilesTo('''

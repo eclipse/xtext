@@ -40,6 +40,12 @@ public class XtendCompilerTest2 extends AbstractXtendCompilerTest {
   }
   
   @Test
+  @Ignore(value = "TODO implement better expectation computation for unresolved type parameters")
+  public void testRichStringNoAutoConversionToString_03() {
+    Assert.fail("TODO implement better expectation computation for unresolved type parameters");
+  }
+  
+  @Test
   public void testBug380062_01() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("class Foo<T> {");
