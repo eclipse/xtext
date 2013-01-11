@@ -76,6 +76,8 @@ import static org.eclipse.xtext.util.Strings.*
 import org.eclipse.emf.ecore.util.EcoreUtil
 import org.eclipse.xtext.documentation.IJavaDocTypeReferenceProvider
 import org.eclipse.xtext.resource.XtextResource
+import java.io.BufferedReader
+import java.io.StringReader
 
 /**
  * A generator implementation that processes the 
@@ -83,7 +85,7 @@ import org.eclipse.xtext.resource.XtextResource
  * and produces the respective java code.
  */
 class JvmModelGenerator implements IGenerator {
-	
+
 	@Inject extension ILogicalContainerProvider
 	@Inject extension TypeReferences 
 	@Inject extension TreeAppendableUtil
@@ -565,45 +567,77 @@ class JvmModelGenerator implements IGenerator {
 	} 
 	
 	def protected generateDocumentation(String text, List<INode> documentationNodes, ITreeAppendable appendable) {
+
 		if (!documentationNodes.empty) {
 			var documentationTrace = ITextRegionWithLineInformation::EMPTY_REGION
 			for(node: documentationNodes) {
 				documentationTrace = documentationTrace.merge(new TextRegionWithLineInformation(node.offset, node.length, node.startLine, node.endLine)) 
 			}
 			val parentAppendable = appendable.trace(new LocationData(documentationTrace, null, null))
+			parentAppendable.append("/**")
+			val reader =  new BufferedReader(new StringReader(text))
+			var lineOffset = 0
+			var lineString = reader.readLine
 			for(node: documentationNodes) {
-				val nodeText = node.text
 				val context = NodeModelUtils::findActualSemanticObjectFor(node)
 				val nodeOffset = node.offset
+				val nodeText = node.text
+				val nodeReader =  new BufferedReader(new StringReader(nodeText))
 				val regions = (javaDocTypeReferenceProvider.computeTypeRefRegions(node) + javaDocTypeReferenceProvider.computeParameterTypeRefRegions(node)).sortBy()[offset]
-				var lastOffset = 0
-				if(regions.size > 0){
-					for(region : regions){
-						// Offset computed to the texts offset inside the node
-						val realOffset = region.offset - nodeOffset
-						parentAppendable.append(nodeText.substring(lastOffset, realOffset))
-						val startLine = node.startLine
-						val positionStartLine = startLine + Strings::countLines(nodeText.substring(0, realOffset));
-						val positionEndLine = startLine + Strings::countLines(nodeText.substring(0, realOffset + region.length));
-						var childAppendable = parentAppendable.trace(new LocationData(new TextRegionWithLineInformation(region.offset, region.length, positionStartLine, positionEndLine), null, null))
-						val desc = scopeProvider.getScope(context, new ScopeFakeReference(TypesPackage::eINSTANCE.getJvmType())).getSingleElement(QualifiedName::^create(region.text))
-						if(desc != null) {
-							val jvmType = EcoreUtil::resolve(desc.EObjectOrProxy, context) as JvmType
-							childAppendable.append(jvmType)
-
-						} else {
-							childAppendable.append(region.text)
-						}
-						// Last offset where we already appended the code
-						lastOffset = region.offset - nodeOffset + region.length
+				var nodeLineOffset = 0
+				var nodeLine = nodeReader.readLine
+				var nodeLineEndOffset = nodeLineOffset + nodeLine.length
+				while(nodeLine != null && lineString != null){
+					var index = nodeLine.indexOf(lineString)
+					while(index == -1){
+						nodeLineOffset = nodeLineOffset + nodeLine.length
+						nodeLine = nodeReader.readLine
+						nodeLineEndOffset = nodeLineOffset + nodeLine.length
+						index = nodeLine.indexOf(lineString)
 					}
-					// Append the rest of the text
-					parentAppendable.append(nodeText.substring(lastOffset))
-				} else {
-					// No regions - put the full text here
-					parentAppendable.append(nodeText)
+					parentAppendable.newLine.append(" * ")
+					val nodeLineOffsetF = nodeLineOffset
+					val nodeLineEndOffsetF = nodeLineEndOffset
+					val validRegions = regions.filter()[(offset - nodeOffset) >= nodeLineOffsetF && (offset - nodeOffset) <= nodeLineEndOffsetF]
+					var lastOffsetInLine = 0
+					if(regions.size > 0){
+						for(region : validRegions){
+							val realOffset = region.offset - nodeOffset
+							val lineRelativeOffsetOfRegion = region.offset - nodeOffset - nodeLineOffset - index -1
+							val stringBefore = lineString.substring(lastOffsetInLine, lineRelativeOffsetOfRegion)
+							parentAppendable.append(stringBefore)
+							val startLine = node.startLine
+							val positionStartLine = startLine + Strings::countLines(nodeText.substring(0, realOffset));
+							val positionEndLine = startLine + Strings::countLines(nodeText.substring(0, realOffset + region.length));
+							var childAppendable = parentAppendable.trace(new LocationData(new TextRegionWithLineInformation(region.offset, region.length, positionStartLine, positionEndLine), null, null))
+							val desc = scopeProvider.getScope(context, new ScopeFakeReference(TypesPackage::eINSTANCE.getJvmType())).getSingleElement(QualifiedName::^create(region.text))
+							if(desc != null) {
+								val jvmType = EcoreUtil::resolve(desc.EObjectOrProxy, context) as JvmType
+								childAppendable.append(jvmType)
+							} else {
+								childAppendable.append(region.text)
+							}
+							lastOffsetInLine = lineRelativeOffsetOfRegion + region.length
+
+						}
+						// Rest
+						parentAppendable.append(lineString.substring(lastOffsetInLine))
+
+					} else {
+						parentAppendable.append(lineString)
+					}
+
+					nodeLineOffset = nodeLineOffset + nodeLine.length
+					nodeLine = nodeReader.readLine
+					if(nodeLine != null)
+						nodeLineEndOffset = nodeLineOffset + nodeLine.length
+					lineOffset = 0
+					lineString = reader.readLine
+					if(lineString != null)
+						lineOffset = lineOffset + lineString.length
 				}
 			}
+			parentAppendable.newLine.append(" */")
 			appendable.newLine
 		} else {
 			// In case there is no node for the given documentation we use JavaDoc-format as default
