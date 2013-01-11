@@ -20,7 +20,7 @@
 	<property name="buckminster.home" location="${user.home}/Entwicklung/buckminster" />
 
 	<!-- Local Xtext git repository -->
-	<property name="checkout.location" value="${user.home}/git/org.eclipse.xtend/" />
+	<property name="checkout.location" value="${user.home}/git/org.eclipse.xtext/" />
 	<property name="releng.project.location" value="${checkout.location}/plugins/org.eclipse.xtend.standalone.maven" />
 
 	<!-- What to do -->
