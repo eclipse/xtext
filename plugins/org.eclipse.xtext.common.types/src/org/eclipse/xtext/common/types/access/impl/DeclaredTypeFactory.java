@@ -45,16 +45,28 @@ import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.common.types.JvmLowerBound;
 import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmParameterizedTypeReference;
+import org.eclipse.xtext.common.types.JvmType;
+import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.JvmUpperBound;
 import org.eclipse.xtext.common.types.JvmVisibility;
 import org.eclipse.xtext.common.types.JvmWildcardTypeReference;
 import org.eclipse.xtext.common.types.TypesFactory;
+import org.eclipse.xtext.common.types.access.IJvmTypeProvider;
+import org.eclipse.xtext.common.types.util.TypeReferences;
 
 import com.google.common.collect.Lists;
 import com.google.inject.Inject;
 
 /**
+ * Internal implementation that allows to convert Java top-level classes to {@link JvmType types}.
+ * 
+ * Clients are not supposed to use this class directly but the {@link IJvmTypeProvider}
+ * or {@link TypeReferences} instead. Those will take care of types that are requested more than
+ * once and therefore should return the very same {@link JvmType type} on subsequent queries.
+ * 
+ * @noextend This class is not intended to be subclassed by clients.
+ * @noinstantiate This class is not intended to be instantiated by clients.
  * @author Sebastian Zarnekow - Initial contribution and API
  */
 public class DeclaredTypeFactory implements ITypeFactory<Class<?>> {
@@ -67,6 +79,10 @@ public class DeclaredTypeFactory implements ITypeFactory<Class<?>> {
 		this.uriHelper = uriHelper;
 	}
 
+	/**
+	 * Creates a new {@link JvmDeclaredType type} from the given class.
+	 * @noreference This method is not intended to be referenced by clients.
+	 */
 	public JvmDeclaredType createType(final Class<?> clazz) {
 		if (clazz.isAnonymousClass() || clazz.isSynthetic())
 			throw new IllegalStateException("Cannot create type for anonymous or synthetic classes");
@@ -259,7 +275,7 @@ public class DeclaredTypeFactory implements ITypeFactory<Class<?>> {
 		}
 	}
 
-	public JvmAnnotationType createAnnotationType(Class<?> clazz) {
+	protected JvmAnnotationType createAnnotationType(Class<?> clazz) {
 		JvmAnnotationType result = TypesFactory.eINSTANCE.createJvmAnnotationType();
 		result.internalSetIdentifier(clazz.getName());
 		result.setSimpleName(clazz.getSimpleName());
@@ -339,7 +355,7 @@ public class DeclaredTypeFactory implements ITypeFactory<Class<?>> {
 		}
 	}
 
-	public JvmEnumerationType createEnumerationType(Class<?> clazz) {
+	protected JvmEnumerationType createEnumerationType(Class<?> clazz) {
 		JvmEnumerationType result = TypesFactory.eINSTANCE.createJvmEnumerationType();
 		result.internalSetIdentifier(clazz.getName());
 		result.setSimpleName(clazz.getSimpleName());
@@ -365,9 +381,9 @@ public class DeclaredTypeFactory implements ITypeFactory<Class<?>> {
 			result.setVisibility(JvmVisibility.PUBLIC);
 	}
 
-	public org.eclipse.xtext.common.types.JvmTypeParameter createTypeParameter(TypeVariable<?> variable,
+	protected JvmTypeParameter createTypeParameter(TypeVariable<?> variable,
 			org.eclipse.xtext.common.types.JvmMember container) {
-		org.eclipse.xtext.common.types.JvmTypeParameter result = TypesFactory.eINSTANCE.createJvmTypeParameter();
+		JvmTypeParameter result = TypesFactory.eINSTANCE.createJvmTypeParameter();
 		result.setName(variable.getName());
 		if (variable.getBounds().length != 0) {
 			for (Type bound : variable.getBounds()) {
@@ -379,7 +395,7 @@ public class DeclaredTypeFactory implements ITypeFactory<Class<?>> {
 		return result;
 	}
 
-	public JvmTypeReference createTypeReference(Type type) {
+	protected JvmTypeReference createTypeReference(Type type) {
 		if (type instanceof GenericArrayType) {
 			GenericArrayType arrayType = (GenericArrayType) type;
 			Type componentType = arrayType.getGenericComponentType();
@@ -416,7 +432,7 @@ public class DeclaredTypeFactory implements ITypeFactory<Class<?>> {
 		}
 	}
 
-	public JvmTypeReference createTypeArgument(Type actualTypeArgument, Type rawType, int i) {
+	protected JvmTypeReference createTypeArgument(Type actualTypeArgument, Type rawType, int i) {
 		if (actualTypeArgument instanceof WildcardType) {
 			WildcardType wildcardType = (WildcardType) actualTypeArgument;
 			JvmWildcardTypeReference result = TypesFactory.eINSTANCE.createJvmWildcardTypeReference();
@@ -443,14 +459,14 @@ public class DeclaredTypeFactory implements ITypeFactory<Class<?>> {
 		}
 	}
 
-	public org.eclipse.xtext.common.types.JvmType createProxy(Type type) {
+	protected JvmType createProxy(Type type) {
 		InternalEObject proxy = (InternalEObject) TypesFactory.eINSTANCE.createJvmVoid();
 		URI uri = uriHelper.getFullURI(type);
 		proxy.eSetProxyURI(uri);
 		return (org.eclipse.xtext.common.types.JvmType) proxy;
 	}
 
-	public org.eclipse.xtext.common.types.JvmField createField(Field field) {
+	protected JvmField createField(Field field) {
 		JvmField result;
 		if (!field.isEnumConstant())
 			result = TypesFactory.eINSTANCE.createJvmField();
@@ -466,7 +482,7 @@ public class DeclaredTypeFactory implements ITypeFactory<Class<?>> {
 		return result;
 	}
 
-	public <T> org.eclipse.xtext.common.types.JvmConstructor createConstructor(Constructor<T> constructor) {
+	protected <T> org.eclipse.xtext.common.types.JvmConstructor createConstructor(Constructor<T> constructor) {
 		JvmConstructor result = TypesFactory.eINSTANCE.createJvmConstructor();
 		Class<T> declaringClass = constructor.getDeclaringClass();
 		int offset = 0;
@@ -486,7 +502,7 @@ public class DeclaredTypeFactory implements ITypeFactory<Class<?>> {
 		return result;
 	}
 
-	public void setVisibility(org.eclipse.xtext.common.types.JvmMember result, int modifiers) {
+	protected void setVisibility(org.eclipse.xtext.common.types.JvmMember result, int modifiers) {
 		if (Modifier.isPrivate(modifiers))
 			result.setVisibility(JvmVisibility.PRIVATE);
 		else if (Modifier.isProtected(modifiers))
@@ -497,7 +513,7 @@ public class DeclaredTypeFactory implements ITypeFactory<Class<?>> {
 			result.setVisibility(JvmVisibility.DEFAULT);
 	}
 
-	public void enhanceExecutable(JvmExecutable result, Member member, String simpleName, Type[] parameterTypes,
+	protected void enhanceExecutable(JvmExecutable result, Member member, String simpleName, Type[] parameterTypes,
 			Annotation[][] annotations, int offset) {
 		StringBuilder fqName = new StringBuilder(48);
 		fqName.append(member.getDeclaringClass().getName());
@@ -517,13 +533,13 @@ public class DeclaredTypeFactory implements ITypeFactory<Class<?>> {
 		setVisibility(result, member.getModifiers());
 	}
 
-	public void enhanceGenericDeclaration(JvmExecutable result, GenericDeclaration declaration) {
+	protected void enhanceGenericDeclaration(JvmExecutable result, GenericDeclaration declaration) {
 		for (TypeVariable<?> variable : declaration.getTypeParameters()) {
 			result.getTypeParameters().add(createTypeParameter(variable, result));
 		}
 	}
 
-	public JvmOperation createOperation(Method method) {
+	protected JvmOperation createOperation(Method method) {
 		JvmOperation result = TypesFactory.eINSTANCE.createJvmOperation();
 		Type[] genericParameterTypes = null;
 		try {
@@ -551,7 +567,7 @@ public class DeclaredTypeFactory implements ITypeFactory<Class<?>> {
 		return result;
 	}
 
-	public JvmFormalParameter createFormalParameter(Type parameterType, String paramName,
+	protected JvmFormalParameter createFormalParameter(Type parameterType, String paramName,
 			org.eclipse.xtext.common.types.JvmMember container, Annotation[] annotations) {
 		JvmFormalParameter result = TypesFactory.eINSTANCE.createJvmFormalParameter();
 		result.setName(paramName);

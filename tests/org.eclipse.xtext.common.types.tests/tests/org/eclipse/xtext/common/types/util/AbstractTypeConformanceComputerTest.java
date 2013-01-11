@@ -8,6 +8,7 @@
 package org.eclipse.xtext.common.types.util;
 
 import java.io.Serializable;
+import java.lang.reflect.Type;
 import java.nio.CharBuffer;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -35,6 +36,7 @@ import org.eclipse.xtext.common.types.JvmUpperBound;
 import org.eclipse.xtext.common.types.JvmWildcardTypeReference;
 import org.eclipse.xtext.common.types.TypesFactory;
 import org.eclipse.xtext.common.types.access.IJvmTypeProvider;
+import org.eclipse.xtext.common.types.access.impl.ClassURIHelper;
 import org.eclipse.xtext.common.types.access.impl.DeclaredTypeFactory;
 import org.eclipse.xtext.common.types.testSetups.RawIterable;
 import org.junit.After;
@@ -53,11 +55,25 @@ import com.google.inject.Module;
  */
 public abstract class AbstractTypeConformanceComputerTest extends Assert {
 
+	protected static class AccessibleDeclaredTypeFactory extends DeclaredTypeFactory {
+
+		@Inject
+		public AccessibleDeclaredTypeFactory(ClassURIHelper uriHelper) {
+			super(uriHelper);
+		}
+		
+		@Override
+		protected JvmTypeReference createTypeReference(Type type) {
+			return super.createTypeReference(type);
+		}
+		
+	}
+	
 	@Inject
 	private TypeConformanceComputer computer;
 	
 	@Inject
-	private DeclaredTypeFactory factory;
+	private AccessibleDeclaredTypeFactory factory;
 	
 	@Inject
 	private ResourceSetImpl resourceSet;
