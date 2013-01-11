@@ -1137,9 +1137,16 @@ public class JvmModelGenerator implements IGenerator {
             final int nodeOffset = node_1.getOffset();
             List<ReplaceRegion> _computeTypeRefRegions = this.javaDocTypeReferenceProvider.computeTypeRefRegions(node_1);
             List<ReplaceRegion> _computeParameterTypeRefRegions = this.javaDocTypeReferenceProvider.computeParameterTypeRefRegions(node_1);
-            final Iterable<ReplaceRegion> regions = Iterables.<ReplaceRegion>concat(_computeTypeRefRegions, _computeParameterTypeRefRegions);
+            Iterable<ReplaceRegion> _plus = Iterables.<ReplaceRegion>concat(_computeTypeRefRegions, _computeParameterTypeRefRegions);
+            final Function1<ReplaceRegion,Integer> _function = new Function1<ReplaceRegion,Integer>() {
+                public Integer apply(final ReplaceRegion it) {
+                  int _offset = it.getOffset();
+                  return Integer.valueOf(_offset);
+                }
+              };
+            final List<ReplaceRegion> regions = IterableExtensions.<ReplaceRegion, Integer>sortBy(_plus, _function);
             int lastOffset = 0;
-            int _size = IterableExtensions.size(regions);
+            int _size = regions.size();
             boolean _greaterThan = (_size > 0);
             if (_greaterThan) {
               for (final ReplaceRegion region : regions) {
@@ -1153,8 +1160,8 @@ public class JvmModelGenerator implements IGenerator {
                   int _countLines = Strings.countLines(_substring_1);
                   final int positionStartLine = (startLine + _countLines);
                   int _length_1 = region.getLength();
-                  int _plus = (realOffset + _length_1);
-                  String _substring_2 = nodeText.substring(0, _plus);
+                  int _plus_1 = (realOffset + _length_1);
+                  String _substring_2 = nodeText.substring(0, _plus_1);
                   int _countLines_1 = Strings.countLines(_substring_2);
                   final int positionEndLine = (startLine + _countLines_1);
                   int _offset_2 = region.getOffset();
@@ -1181,8 +1188,8 @@ public class JvmModelGenerator implements IGenerator {
                   int _offset_3 = region.getOffset();
                   int _minus = (_offset_3 - nodeOffset);
                   int _length_3 = region.getLength();
-                  int _plus_1 = (_minus + _length_3);
-                  lastOffset = _plus_1;
+                  int _plus_2 = (_minus + _length_3);
+                  lastOffset = _plus_2;
                 }
               }
               String _substring = nodeText.substring(lastOffset);

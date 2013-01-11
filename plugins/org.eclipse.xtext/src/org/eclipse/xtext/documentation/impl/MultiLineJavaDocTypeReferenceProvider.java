@@ -26,7 +26,7 @@ public class MultiLineJavaDocTypeReferenceProvider implements IJavaDocTypeRefere
 	public List<ReplaceRegion> computeTypeRefRegions(INode node) {
 		List<ReplaceRegion> regions = Lists.newArrayList();
 		Iterable<ILeafNode> leafNodes = node.getLeafNodes();
-		computeRegions(regions, leafNodes, "@link ", "}", "#");
+		computeRegions(regions, leafNodes, "@link ", " ", "#");
 		computeRegions(regions, leafNodes, "@see ", " " , "#");
 		return regions;
 	}
