@@ -1,10 +1,10 @@
 package org.eclipse.xtend.core.macro
 
 import com.google.inject.Inject
+import org.eclipse.emf.ecore.EObject
 import org.eclipse.xtend.core.jvmmodel.IXtendJvmAssociations
+import org.eclipse.xtend.core.macro.declaration.AbstractNamedElementImpl
 import org.eclipse.xtend.core.macro.declaration.CompilationUnitImpl
-import org.eclipse.xtend.core.macro.declaration.XtendClassDeclarationImpl
-import org.eclipse.xtend.core.xtend.XtendClass
 import org.eclipse.xtend.lib.macro.ModifyContext
 import org.eclipse.xtend.lib.macro.declaration.ClassDeclaration
 import org.eclipse.xtend.lib.macro.declaration.ConstructorDeclaration
@@ -12,46 +12,51 @@ import org.eclipse.xtend.lib.macro.declaration.FieldDeclaration
 import org.eclipse.xtend.lib.macro.declaration.MethodDeclaration
 import org.eclipse.xtend.lib.macro.declaration.MutableClassDeclaration
 import org.eclipse.xtend.lib.macro.declaration.MutableConstructorDeclaration
+import org.eclipse.xtend.lib.macro.declaration.MutableExecutableDeclaration
 import org.eclipse.xtend.lib.macro.declaration.MutableFieldDeclaration
 import org.eclipse.xtend.lib.macro.declaration.MutableMethodDeclaration
+import org.eclipse.xtend.lib.macro.declaration.MutableNamedElement
+import org.eclipse.xtend.lib.macro.declaration.MutableTypeDeclaration
 import org.eclipse.xtend.lib.macro.declaration.NamedElement
+import org.eclipse.xtend.lib.macro.type.TypeReference
+import org.eclipse.xtext.common.types.JvmMember
 import org.eclipse.xtext.xbase.lib.Procedures$Procedure1
-import org.eclipse.xtend.core.macro.declaration.AbstractDeclarationImpl
-import org.eclipse.emf.ecore.EObject
 
 class ModifyContextImpl implements ModifyContext {
 	
 	@Inject IXtendJvmAssociations associations
+	
+	@Property CompilationUnitImpl unit
 	
 	def private CompilationUnitImpl unit(NamedElement element) {
 		element.compilationUnit as CompilationUnitImpl
 	}
 	
 	def private EObject delegate(NamedElement element) {
-//		switch element { 
-//			AbstractDeclarationImpl : element.delegate
-//		}
+		switch element { 
+			AbstractNamedElementImpl<? extends EObject> : element.delegate
+		}
 	}
 	
 	override getGeneratedClass(ClassDeclaration source) {
-		val inferred = associations.getInferredType((source as XtendClassDeclarationImpl).delegate as XtendClass)
-		return source.unit.toTypeDeclaration(inferred) as MutableClassDeclaration
+		getGeneratedElement(source) as MutableClassDeclaration
 	}
 	
 	override getGeneratedConstructor(ConstructorDeclaration source) {
-		throw new UnsupportedOperationException("Auto-generated function stub")
+		getGeneratedElement(source) as MutableConstructorDeclaration
 	}
 	
 	override getGeneratedElement(NamedElement source) {
-//		source.unit.toMemberDeclaration(associations.getJvmElements(source.def).head as JvmMember)
+		val generated = associations.getJvmElements(source.delegate).head as JvmMember
+		source.unit.toMemberDeclaration(generated) as MutableNamedElement
 	}
 	
 	override getGeneratedField(FieldDeclaration source) {
-		throw new UnsupportedOperationException("Auto-generated function stub")
+		getGeneratedElement(source) as MutableFieldDeclaration
 	}
 	
 	override getGeneratedMethod(MethodDeclaration source) {
-		throw new UnsupportedOperationException("Auto-generated function stub")
+		getGeneratedElement(source) as MutableMethodDeclaration
 	}
 	
 	override isExternal(NamedElement element) {
@@ -66,21 +71,24 @@ class ModifyContextImpl implements ModifyContext {
 		throw new UnsupportedOperationException("Auto-generated function stub")
 	}
 
-	override newClass(Procedure1<MutableClassDeclaration> initializer) {
+	override newConstructor(MutableClassDeclaration container, Procedure1<MutableConstructorDeclaration> initializer) {
 		throw new UnsupportedOperationException("Auto-generated function stub")
 	}
 	
-	override newConstructor(Procedure1<MutableConstructorDeclaration> initializer) {
+	override findGeneratedClass(String name) {
+		throw new UnsupportedOperationException("Auto-generated function stub")
+	}
+
+	override newField(MutableClassDeclaration declarator, String simpleName, Procedure1<MutableFieldDeclaration> initializer) {
 		throw new UnsupportedOperationException("Auto-generated function stub")
 	}
 	
-	override newField(Procedure1<MutableFieldDeclaration> initializer) {
+	override newMethod(MutableTypeDeclaration declarator, String simpleName, Procedure1<MutableMethodDeclaration> initializer) {
 		throw new UnsupportedOperationException("Auto-generated function stub")
 	}
 	
-	override newMethod(Procedure1<MutableMethodDeclaration> initializer) {
+	override newParameter(MutableExecutableDeclaration declarator, String simpleName, TypeReference type) {
 		throw new UnsupportedOperationException("Auto-generated function stub")
 	}
-	
 	
 }

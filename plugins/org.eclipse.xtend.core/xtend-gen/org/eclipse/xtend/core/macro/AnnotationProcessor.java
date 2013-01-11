@@ -1,13 +1,14 @@
-/**
+/*******************************************************************************
  * Copyright (c) 2012 itemis AG (http://www.itemis.eu) and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- */
+ *******************************************************************************/
 package org.eclipse.xtend.core.macro;
 
 import com.google.inject.Inject;
+import com.google.inject.Provider;
 import java.util.List;
 import org.eclipse.xtend.core.macro.ActiveAnnotationContext;
 import org.eclipse.xtend.core.macro.ModifyContextImpl;
@@ -32,11 +33,11 @@ import org.eclipse.xtext.xbase.lib.ListExtensions;
 @SuppressWarnings("all")
 public class AnnotationProcessor {
   @Inject
-  private ModifyContextImpl modifyContext;
+  private Provider<ModifyContextImpl> modifyContextProvider;
   
   /**
-   * gets called from Xtend compiler, during "model inference", i.e. translation of Xtend AST to Java AST
-   */
+  	 * gets called from Xtend compiler, during "model inference", i.e. translation of Xtend AST to Java AST
+  	 */
   public Object indexingPhase(final ActiveAnnotationContext ctx, final IAcceptor<JvmDeclaredType> acceptor, final CancelIndicator monitor) {
     Object _switchResult = null;
     Object _processorInstance = ctx.getProcessorInstance();
@@ -61,16 +62,19 @@ public class AnnotationProcessor {
       if (processor instanceof ModifyProcessor) {
         final ModifyProcessor _modifyProcessor = (ModifyProcessor)processor;
         _matched=true;
+        final ModifyContextImpl modifyCtx = this.modifyContextProvider.get();
+        CompilationUnitImpl _compilationUnit = ctx.getCompilationUnit();
+        modifyCtx.setUnit(_compilationUnit);
         List<XtendAnnotationTarget> _annotatedSourceElements = ctx.getAnnotatedSourceElements();
         final Function1<XtendAnnotationTarget,MutableNamedElement> _function = new Function1<XtendAnnotationTarget,MutableNamedElement>() {
             public MutableNamedElement apply(final XtendAnnotationTarget it) {
               CompilationUnitImpl _compilationUnit = ctx.getCompilationUnit();
               final XtendMemberDeclarationImpl xtendMember = _compilationUnit.toXtendMemberDeclaration(((XtendMember) it));
-              return AnnotationProcessor.this.modifyContext.getGeneratedElement(xtendMember);
+              return modifyCtx.getGeneratedElement(xtendMember);
             }
           };
         List<MutableNamedElement> _map = ListExtensions.<XtendAnnotationTarget, MutableNamedElement>map(_annotatedSourceElements, _function);
-        _modifyProcessor.modify(_map, this.modifyContext);
+        _modifyProcessor.modify(_map, modifyCtx);
       }
     }
     return _switchResult;

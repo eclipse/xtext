@@ -15,6 +15,7 @@ import org.eclipse.xtext.common.types.JvmDeclaredType
 import org.eclipse.xtext.util.CancelIndicator
 import org.eclipse.xtext.util.IAcceptor
 import org.eclipse.xtend.core.xtend.XtendMember
+import com.google.inject.Provider
 
 /**
  * It checks whether the files contain macro annotations and calls their register and processing functions.
@@ -23,7 +24,7 @@ import org.eclipse.xtend.core.xtend.XtendMember
  */
 public class AnnotationProcessor {
 	
-	@Inject ModifyContextImpl modifyContext
+	@Inject Provider<ModifyContextImpl> modifyContextProvider
 
 	/**
 	 * gets called from Xtend compiler, during "model inference", i.e. translation of Xtend AST to Java AST
@@ -39,10 +40,12 @@ public class AnnotationProcessor {
 	def inferencePhase(ActiveAnnotationContext ctx, CancelIndicator monitor) {
 		switch processor : ctx.processorInstance{
 			ModifyProcessor: {
+				val modifyCtx = modifyContextProvider.get
+				modifyCtx.unit = ctx.compilationUnit
 				processor.modify(ctx.annotatedSourceElements.map[
 					val xtendMember = ctx.compilationUnit.toXtendMemberDeclaration(it as XtendMember)
-					return modifyContext.getGeneratedElement(xtendMember)
-				], modifyContext)
+					return modifyCtx.getGeneratedElement(xtendMember)
+				], modifyCtx)
 			}
 		}
 	}

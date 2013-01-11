@@ -32,7 +32,7 @@ import org.eclipse.xtend.lib.macro.declaration.ExecutableDeclaration
 import org.eclipse.emf.ecore.EObject
 import org.eclipse.xtend.lib.macro.declaration.NamedElement
 
-abstract class XtendNamedElementImpl<T extends EObject> extends AbstractDeclarationImpl<T> implements NamedElement {
+abstract class XtendNamedElementImpl<T extends EObject> extends AbstractNamedElementImpl<T> implements NamedElement {
 }
 
 abstract class XtendMemberDeclarationImpl<T extends XtendMember> extends XtendNamedElementImpl<T> implements MemberDeclaration {

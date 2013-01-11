@@ -89,7 +89,7 @@ import com.google.inject.Inject;
 @NonNullByDefault
 public class JvmTypesBuilder {
 
-	private static final Logger LOG = Logger.getLogger(JvmTypesBuilder.class);
+	private static Logger LOG = Logger.getLogger(JvmTypesBuilder.class);
 	
 	@Inject
 	private IJvmModelAssociator associator;

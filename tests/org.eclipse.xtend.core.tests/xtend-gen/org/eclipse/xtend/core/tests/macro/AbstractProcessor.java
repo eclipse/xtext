@@ -15,8 +15,7 @@ public class AbstractProcessor implements ModifyProcessor<MutableClassDeclaratio
     this.ctx = context;
     final Procedure1<MutableClassDeclaration> _function = new Procedure1<MutableClassDeclaration>() {
         public void apply(final MutableClassDeclaration it) {
-          MutableClassDeclaration _generatedClass = AbstractProcessor.this.ctx.getGeneratedClass(it);
-          _generatedClass.setAbstract(true);
+          it.setAbstract(true);
         }
       };
     IterableExtensions.forEach(annotatedSourceClasses, _function);

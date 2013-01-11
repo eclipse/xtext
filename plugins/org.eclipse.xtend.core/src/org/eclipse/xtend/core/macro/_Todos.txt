@@ -2,15 +2,17 @@
  - naming of phases
  
  * Phase 1 (preModify/global indexing) *
- - add implicit imports
  - register class, interface, annotationType, enum
  - [DOM] don't allow cross reference resolution (return null)
+ - add implicit imports (POST 2.4)
  
  * Phase 2 (modify / process) *
- - factory for declarations
  - factory for type references
- - factory for Expressions
  - support JavaBlackBoxBlock
- - [DOM] Expressions
  - validation
- - quickfixes
+ - immutable DOM for Expressions (POST 2.4)
+ - string-based factory for declarations (POST 2.4)
+ - string-based factory for Expressions (POST 2.4)
+ - quickfixes (POST 2.4)
+ 
+ method call macros (POST 2.4)

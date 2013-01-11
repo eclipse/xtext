@@ -19,10 +19,16 @@ import org.eclipse.xtext.common.types.JvmTypeParameter
 import org.eclipse.xtext.common.types.JvmUpperBound
 import org.eclipse.xtext.common.types.JvmVoid
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference
+import org.eclipse.emf.ecore.EObject
+import org.eclipse.xtend.lib.macro.declaration.NamedElement
 
 abstract class AbstractDeclarationImpl<T> {
 	@Property T delegate
 	@Property CompilationUnitImpl compilationUnit
+}
+
+abstract class AbstractNamedElementImpl<T extends EObject> extends AbstractDeclarationImpl<T> implements NamedElement {
+	
 }
 
 class TypeReferenceImpl extends AbstractDeclarationImpl<LightweightTypeReference> implements TypeReference {

@@ -31,7 +31,7 @@ class AbstractProcessor implements ModifyProcessor<MutableClassDeclaration> {
 	override modify(List<? extends MutableClassDeclaration> annotatedSourceClasses, ModifyContext context) {
 		ctx = context
 		annotatedSourceClasses.forEach [
-			generatedClass.^abstract = true
+			^abstract = true
 		]
 	}
 	
