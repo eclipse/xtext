@@ -8,21 +8,20 @@
 package org.eclipse.xtend.core.validation;
 
 
-import static com.google.common.collect.Maps.*;
-
 import java.util.Map;
 
 import org.eclipse.xtext.preferences.PreferenceKey;
+import org.eclipse.xtext.validation.ConfigurableIssueCodesProvider;
 import org.eclipse.xtext.validation.SeverityConverter;
+import org.eclipse.xtext.xbase.validation.IssueCodesStore;
 import org.eclipse.xtext.xbase.validation.XbaseConfigurableIssueCodes;
 
 /**
- * TODO Refactor subclasses should not share the static XbaseConfigurableIssueCodes state.
  * 
  * @author Dennis Huebner - Initial contribution and API
  */
-public class XtendConfigurableIssueCodes extends XbaseConfigurableIssueCodes {
-	private static final Map<String, PreferenceKey> _allConfigurableCodes = newLinkedHashMap(new XbaseConfigurableIssueCodes().getConfigurableIssueCodes());
+public class XtendConfigurableIssueCodes extends ConfigurableIssueCodesProvider {
+	private static final IssueCodesStore _CACHE = new IssueCodesStore(new XbaseConfigurableIssueCodes().getConfigurableIssueCodes());
 
 	public static final PreferenceKey SINGLE_DISPATCH_FUNCTION = create(IssueCodes.SINGLE_DISPATCH_FUNCTION, SeverityConverter.SEVERITY_WARNING);
 	
@@ -30,18 +29,17 @@ public class XtendConfigurableIssueCodes extends XbaseConfigurableIssueCodes {
 	public static final PreferenceKey FIELD_LOCALLY_NEVER_READ = create(IssueCodes.FIELD_LOCALLY_NEVER_READ, SeverityConverter.SEVERITY_WARNING);
 	public static final PreferenceKey FUNCTION_LOCALLY_NEVER_USED = create(IssueCodes.FUNCTION_LOCALLY_NEVER_USED, SeverityConverter.SEVERITY_WARNING);
 
+
 	/**
 	 * If you would like to a add a new IssueCode use this method,<br>
 	 * this method creates a new {@link PreferenceKey} and adds it to the inner registry map.
 	 */
-	protected static PreferenceKey create(String id, String defaultValue) {
-		PreferenceKey prefKey = new PreferenceKey(id, defaultValue);
-		_allConfigurableCodes.put(prefKey.getId(), prefKey);
-		return prefKey;
+	private static PreferenceKey create(String id, String defaultValue) {
+		return _CACHE.add(id, defaultValue);
 	}
 
 	@Override
 	public Map<String, PreferenceKey> getConfigurableIssueCodes() {
-		return _allConfigurableCodes;
+		return _CACHE.getImmutableCopy();
 	}
 }
