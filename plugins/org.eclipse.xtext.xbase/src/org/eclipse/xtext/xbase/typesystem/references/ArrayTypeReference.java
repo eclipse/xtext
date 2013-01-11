@@ -108,6 +108,12 @@ public class ArrayTypeReference extends LightweightTypeReference {
 	}
 	
 	@Override
+	@Nullable
+	public ArrayTypeReference tryConvertToArray() {
+		return this;
+	}
+	
+	@Override
 	protected LightweightTypeReference doCopyInto(ITypeReferenceOwner owner) {
 		LightweightTypeReference copiedComponent = component.copyInto(owner);
 		return new ArrayTypeReference(owner, copiedComponent);

@@ -173,11 +173,26 @@ public abstract class LightweightTypeReference {
 		return false;
 	}
 	
+	/**
+	 * Returns the list representation of this reference if it represents an array or is
+	 * already a subtype of {@link List}.
+	 * If the array's type is a primitive, the list's element type is the wrapper.
+	 * May return <code>null</code> if the conversion is not possible.
+	 * 
+	 * @return an equivalent list type or <code>null</code>.
+	 */
 	@Nullable
 	public LightweightTypeReference tryConvertToListType() {
 		return null;
 	}
 	
+	/**
+	 * Returns the component type of the current array type. Does <em>not</em> attempt to
+	 * convert this reference from iterable to array, first.
+	 * 
+	 * @see #isArray()
+	 * @return the compoent type of the current array or <code>null</code>.
+	 */
 	@Nullable
 	public LightweightTypeReference getComponentType() {
 		return null;
@@ -453,7 +468,8 @@ public abstract class LightweightTypeReference {
 	}
 
 	/**
-	 * Returns the array representation of this reference if its represents a subtype of {@link Iterable}.
+	 * Returns the array representation of this reference if its represents a subtype of {@link Iterable}
+	 * or already an array itself.
 	 * If the iterable's type is a primitive wrapper, the array is <em>not</em> the primitive array but
 	 * the wrapper array. May return <code>null</code> if the conversion is not possible.
 	 * 

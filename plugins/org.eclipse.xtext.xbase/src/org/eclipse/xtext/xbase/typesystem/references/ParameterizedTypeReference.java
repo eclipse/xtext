@@ -314,6 +314,14 @@ public class ParameterizedTypeReference extends LightweightTypeReference {
 		return arrayTypes.tryConvertToArray(this);
 	}
 	
+	@Override
+	@Nullable
+	public LightweightTypeReference tryConvertToListType() {
+		if (isAssignableFrom(List.class))
+			return this;
+		return super.tryConvertToListType();
+	}
+	
 	/**
 	 * Returns a projection of this type to the instance level. That is, type arguments will 
 	 * be replaced by their invariant bounds.
