@@ -45,9 +45,9 @@ import org.eclipse.xtext.common.types.JvmMember;
 import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeReference;
-import org.eclipse.xtext.documentation.IJavaDocTypeReferenceProvider;
 import org.eclipse.xtext.common.types.JvmVoid;
 import org.eclipse.xtext.common.types.TypesPackage;
+import org.eclipse.xtext.documentation.IJavaDocTypeReferenceProvider;
 import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.nodemodel.ILeafNode;
 import org.eclipse.xtext.nodemodel.INode;
@@ -99,7 +99,6 @@ import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.OwnedConverter;
 import org.eclipse.xtext.xbase.typesystem.references.ParameterizedTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.TypeReferenceVisitorWithNonNullResult;
-import org.eclipse.xtext.xbase.typesystem.references.WildcardTypeReference;
 import org.eclipse.xtext.xbase.typesystem.util.CommonTypeComputationServices;
 import org.eclipse.xtext.xbase.typing.JvmExceptions;
 import org.eclipse.xtext.xbase.util.XExpressionHelper;
@@ -906,9 +905,8 @@ public class XbaseJavaValidator2 extends AbstractXbaseJavaValidator {
 			return;
 		}
 		if (rightType.isAssignableFrom(leftType, new TypeConformanceComputationArgument(false, false, true, true, false, false))) {
-			warning("The expression of type " + getNameOfTypes(leftType) + " is already of type "
-					+ canonicalName(rightType), null,
-					ValidationMessageAcceptor.INSIGNIFICANT_INDEX, OBSOLETE_INSTANCEOF);
+			addIssueToState(OBSOLETE_INSTANCEOF, "The expression of type " + getNameOfTypes(leftType)
+					+ " is already of type " + canonicalName(rightType), null);
 		}
 	}
 
@@ -1170,7 +1168,7 @@ public class XbaseJavaValidator2 extends AbstractXbaseJavaValidator {
 	public  void checkLocalUsageOfDeclared(XVariableDeclaration variableDeclaration) {
 		if(!isLocallyUsed(variableDeclaration, variableDeclaration.eContainer())){
 			String message = "The value of the local variable " + variableDeclaration.getName() + " is not used";
-			warning(message, XbasePackage.Literals.XVARIABLE_DECLARATION__NAME, UNUSED_LOCAL_VARIABLE);
+			addIssueToState(UNUSED_LOCAL_VARIABLE, message, XbasePackage.Literals.XVARIABLE_DECLARATION__NAME);
 		}
 	}
 	
@@ -1189,14 +1187,13 @@ public class XbaseJavaValidator2 extends AbstractXbaseJavaValidator {
 		
 		for (XImportDeclaration imp : importSection.getImportDeclarations()) {
 			if (imp.getImportedNamespace() != null) { 
-				warning("The use of wildcard imports is deprecated.", imp, null, IssueCodes.IMPORT_WILDCARD_DEPRECATED);
+				addIssue(imp, IMPORT_WILDCARD_DEPRECATED, "The use of wildcard imports is deprecated.");
 			} else {
 				JvmType importedType = imp.getImportedType();
 				if (importedType != null && !importedType.eIsProxy()) {
 					Map<JvmType, XImportDeclaration> map = imp.isStatic() ? staticImports : imports;
 					if (map.containsKey(importedType)) {
-						warning("Duplicate import of '" + importedType.getSimpleName() + "'.", imp, null,
-								IssueCodes.IMPORT_DUPLICATE);
+						addIssue(imp, IssueCodes.IMPORT_DUPLICATE, "Duplicate import of '" + importedType.getSimpleName() + "'.");
 					} else {
 						map.put(importedType, imp);
 						if (!imp.isStatic()) {
@@ -1283,8 +1280,7 @@ public class XbaseJavaValidator2 extends AbstractXbaseJavaValidator {
 			}
 		}
 		for (XImportDeclaration imp : imports.values()) {
-			warning("The import '" + imp.getImportedTypeName() + "' is never used.", imp, null,
-					IssueCodes.IMPORT_UNUSED);
+			addIssue(imp, IMPORT_UNUSED, "The import '" + imp.getImportedTypeName() + "' is never used.");
 		}
 	}
 	
