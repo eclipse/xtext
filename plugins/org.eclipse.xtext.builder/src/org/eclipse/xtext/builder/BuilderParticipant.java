@@ -10,12 +10,13 @@ package org.eclipse.xtext.builder;
 import static com.google.common.collect.Lists.*;
 import static com.google.common.collect.Maps.*;
 import static com.google.common.collect.Sets.*;
-import static org.eclipse.xtext.ui.util.ResourceUtil.getContainer;
+import static org.eclipse.xtext.ui.util.ResourceUtil.*;
 
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import org.apache.log4j.Logger;
 import org.eclipse.core.resources.IContainer;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IMarker;
@@ -49,6 +50,9 @@ import com.google.inject.Provider;
  * @since 2.1
  */
 public class BuilderParticipant implements IXtextBuilderParticipant {
+	
+	private final static Logger logger = Logger.getLogger(BuilderParticipant.class);
+	
 	@Inject
 	private Provider<EclipseResourceFileSystemAccess2> fileSystemAccessProvider;
 	
@@ -192,7 +196,11 @@ public class BuilderParticipant implements IXtextBuilderParticipant {
 				
 			});
 			if (delta.getNew() != null) {
-				handleChangedContents(delta, context, access);
+				try {
+					handleChangedContents(delta, context, access);
+				} catch (Exception e) {
+					logger.error("Error during compilation of '"+delta.getUri()+"'.", e);
+				}
 			}
 			access.flushSourceTraces();
 			SubMonitor deleteMonitor = SubMonitor.convert(subMonitor.newChild(1), derivedResources.size());
