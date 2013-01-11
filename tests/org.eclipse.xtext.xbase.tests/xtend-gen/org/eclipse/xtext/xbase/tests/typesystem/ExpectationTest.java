@@ -15,6 +15,7 @@ import java.util.Set;
 import org.eclipse.xtext.junit4.InjectWith;
 import org.eclipse.xtext.junit4.XtextRunner;
 import org.eclipse.xtext.xbase.XExpression;
+import org.eclipse.xtext.xbase.XReturnExpression;
 import org.eclipse.xtext.xbase.junit.typesystem.PublicReentrantTypeResolver;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Conversions;
@@ -276,6 +277,19 @@ public class ExpectationTest extends AbstractXbaseTestCase {
     ExpectationTest _expects = this.expects("{ val Iterable<String> iterable = newArrayList(null) }");
     ExpectationTest _types = _expects.types("Unbound[T][]", "Unbound[T]");
     _types.finalizedAs("String[]", "String");
+  }
+  
+  @Test
+  public void testFeatureCallVarArgument_04() {
+    final Function1<XExpression,Boolean> _function = new Function1<XExpression,Boolean>() {
+        public Boolean apply(final XExpression it) {
+          return Boolean.valueOf((it instanceof XReturnExpression));
+        }
+      };
+    this.typeComputer.setPredicate(_function);
+    ExpectationTest _expects = this.expects("new foo.ClassWithGenericMethod().genericMethod(return null)");
+    ExpectationTest _types = _expects.types("Unbound[T]");
+    _types.finalizedAs("Object");
   }
   
   @Test

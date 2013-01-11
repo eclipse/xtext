@@ -7,7 +7,10 @@
  */
 package org.eclipse.xtext.xbase.tests.typesystem;
 
+import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XNullLiteral;
+import org.eclipse.xtext.xbase.lib.Functions.Function0;
+import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.tests.typesystem.ExpectationTest;
 import org.eclipse.xtext.xbase.typesystem.computation.ITypeComputationState;
 import org.eclipse.xtext.xbase.typesystem.computation.XbaseTypeComputer;
@@ -24,9 +27,32 @@ public class ExpectationTestingTypeComputer extends XbaseTypeComputer {
     this._test = test;
   }
   
-  protected void _computeTypes(final XNullLiteral object, final ITypeComputationState state) {
-    ExpectationTest _test = this.getTest();
-    _test.recordExpectation(state);
-    super._computeTypes(object, state);
+  private Function1<? super XExpression,? extends Boolean> _predicate = new Function0<Function1<? super XExpression,? extends Boolean>>() {
+    public Function1<? super XExpression,? extends Boolean> apply() {
+      final Function1<XExpression,Boolean> _function = new Function1<XExpression,Boolean>() {
+          public Boolean apply(final XExpression it) {
+            return Boolean.valueOf((it instanceof XNullLiteral));
+          }
+        };
+      return _function;
+    }
+  }.apply();
+  
+  public Function1<? super XExpression,? extends Boolean> getPredicate() {
+    return this._predicate;
+  }
+  
+  public void setPredicate(final Function1<? super XExpression,? extends Boolean> predicate) {
+    this._predicate = predicate;
+  }
+  
+  public void computeTypes(final XExpression expression, final ITypeComputationState state) {
+    Function1<? super XExpression,? extends Boolean> _predicate = this.getPredicate();
+    Boolean _apply = _predicate.apply(expression);
+    if ((_apply).booleanValue()) {
+      ExpectationTest _test = this.getTest();
+      _test.recordExpectation(state);
+    }
+    super.computeTypes(expression, state);
   }
 }
