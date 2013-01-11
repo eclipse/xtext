@@ -9,8 +9,12 @@ package org.eclipse.xtext.xbase.tests.typing;
 
 import org.eclipse.xtext.junit4.InjectWith;
 import org.eclipse.xtext.junit4.XtextRunner;
+import org.eclipse.xtext.xbase.XBlockExpression;
+import org.eclipse.xtext.xbase.XExpression;
+import org.eclipse.xtext.xbase.XFeatureCall;
 import org.eclipse.xtext.xbase.XForLoopExpression;
 import org.eclipse.xtext.xbase.XMemberFeatureCall;
+import org.eclipse.xtext.xbase.lib.Functions;
 import org.eclipse.xtext.xbase.tests.typesystem.XbaseNewTypeSystemInjectorProvider;
 import org.junit.Ignore;
 import org.junit.Test;
@@ -30,29 +34,64 @@ public class XbaseExpectedTypeProviderTest2 extends XbaseExpectedTypeProviderTes
 		assertExpected("java.lang.Object", fc.getExplicitArguments().get(1));
 	}
 	
-	@Ignore("TODO investigate")
 	@Override
-	@Test
-	public void testTypeParamInference_02() throws Exception {
-		super.testTypeParamInference_02();
+	@Test public void testTypeParamInference_02() throws Exception {
+		XMemberFeatureCall fc = (XMemberFeatureCall) expression("new testdata.ClosureClient().invoke1([String e|e.length],'foo')");
+		final XExpression closure = fc.getMemberCallArguments().get(0);
+		assertExpected(Functions.class.getCanonicalName()+"$Function1<java.lang.String, java.lang.Integer>", closure);
 	}
-	@Ignore("TODO investigate")
+	
+	@Ignore("TODO deferred closure typing")
+	@Test public void testTypeParamInference_02_b() throws Exception {
+		XMemberFeatureCall fc = (XMemberFeatureCall) expression("new testdata.ClosureClient().invoke1([ e|e.length],'foo')");
+		final XExpression closure = fc.getMemberCallArguments().get(0);
+		assertExpected(Functions.class.getCanonicalName()+"$Function1<java.lang.String, java.lang.Integer>", closure);
+	}
+	
 	@Override
 	@Test
 	public void testTypeParamInference_03() throws Exception {
-		super.testTypeParamInference_02();
+		XMemberFeatureCall fc = (XMemberFeatureCall) expression("new testdata.ClosureClient().invoke1([String e|null],'foo')");
+		final XExpression closure = fc.getMemberCallArguments().get(0);
+		assertExpected(Functions.class.getCanonicalName()+"$Function1<java.lang.String, java.lang.Object>", closure);
 	}
-	@Ignore("TODO investigate")
+	
+	@Test
+	public void testTypeParamInference_03_b() throws Exception {
+		XMemberFeatureCall fc = (XMemberFeatureCall) expression("new testdata.ClosureClient().invoke1([e|null],'foo')");
+		final XExpression closure = fc.getMemberCallArguments().get(0);
+		assertExpected(Functions.class.getCanonicalName()+"$Function1<java.lang.String, java.lang.Object>", closure);
+	}
+
 	@Override
 	@Test
 	public void testTypeParamInference_07() throws Exception {
-		super.testTypeParamInference_02();
+		XBlockExpression block = (XBlockExpression) expression("{ var this = new testdata.ClosureClient() invoke1([ String e|e.length],'foo') }");
+		XFeatureCall fc = (XFeatureCall) block.getExpressions().get(1);
+		final XExpression closure = fc.getFeatureCallArguments().get(0);
+		assertExpected(Functions.class.getCanonicalName()+"$Function1<java.lang.String, java.lang.Integer>", closure);
 	}
-	@Ignore("TODO investigate")
-	@Override
+	@Ignore("TODO deferred closure typing")
 	@Test
-	public void testTypeParamInference_08() throws Exception {
-		super.testTypeParamInference_02();
+	public void testTypeParamInference_07_b() throws Exception {
+		XBlockExpression block = (XBlockExpression) expression("{ var this = new testdata.ClosureClient() invoke1([ e|e.length],'foo') }");
+		XFeatureCall fc = (XFeatureCall) block.getExpressions().get(1);
+		final XExpression closure = fc.getFeatureCallArguments().get(0);
+		assertExpected(Functions.class.getCanonicalName()+"$Function1<java.lang.String, java.lang.Integer>", closure);
+	}
+	
+	@Override
+	@Test public void testTypeParamInference_08() throws Exception {
+		XBlockExpression block = (XBlockExpression) expression("{ var this = new testdata.ClosureClient() invoke1([String e|null],'foo') }");
+		XFeatureCall fc = (XFeatureCall) block.getExpressions().get(1);
+		final XExpression closure = fc.getFeatureCallArguments().get(0);
+		assertExpected(Functions.class.getCanonicalName()+"$Function1<java.lang.String, java.lang.Object>", closure);
+	}
+	@Test public void testTypeParamInference_08_b() throws Exception {
+		XBlockExpression block = (XBlockExpression) expression("{ var this = new testdata.ClosureClient() invoke1([e|null],'foo') }");
+		XFeatureCall fc = (XFeatureCall) block.getExpressions().get(1);
+		final XExpression closure = fc.getFeatureCallArguments().get(0);
+		assertExpected(Functions.class.getCanonicalName()+"$Function1<java.lang.String, java.lang.Object>", closure);
 	}
 	
 	@Override
