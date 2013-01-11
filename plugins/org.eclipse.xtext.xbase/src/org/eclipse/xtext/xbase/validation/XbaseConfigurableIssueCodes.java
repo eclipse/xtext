@@ -7,8 +7,6 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.validation;
 
-import static com.google.common.collect.Maps.*;
-
 import java.util.Map;
 
 import org.eclipse.jdt.core.JavaCore;
@@ -27,8 +25,7 @@ import org.eclipse.xtext.validation.SeverityConverter;
  */
 public class XbaseConfigurableIssueCodes extends ConfigurableIssueCodesProvider {
 
-	private static final Map<String, PreferenceKey> _allConfigurableCodes = newLinkedHashMap();
-
+	private static final IssueCodesStore _ISSUE_CODES = new IssueCodesStore();
 
 	public static final PreferenceKey FORBIDDEN_REFERENCE = createDelegate(IssueCodes.FORBIDDEN_REFERENCE, JavaCore.COMPILER_PB_FORBIDDEN_REFERENCE);
 	public static final PreferenceKey DISCOURAGED_REFERENCE = createDelegate(IssueCodes.DISCOURAGED_REFERENCE, JavaCore.COMPILER_PB_DISCOURAGED_REFERENCE);
@@ -39,29 +36,26 @@ public class XbaseConfigurableIssueCodes extends ConfigurableIssueCodesProvider 
 	public static final PreferenceKey UNUSED_LOCAL_VARIABLE = createDelegate(IssueCodes.UNUSED_LOCAL_VARIABLE, JavaCore.COMPILER_PB_UNUSED_LOCAL);
 	public static final PreferenceKey IMPORT_DUPLICATE = create(IssueCodes.IMPORT_DUPLICATE, SeverityConverter.SEVERITY_WARNING);
 	
-	
+
 	/**
 	 * If you would like to a add a new IssueCode use this method,<br>
 	 * this method creates a new {@link PreferenceKey} and adds it to the inner registry map.
 	 */
-	protected static PreferenceKey create(String id, String defaultValue) {
-		PreferenceKey prefKey = new PreferenceKey(id, defaultValue);
-		_allConfigurableCodes.put(prefKey.getId(), prefKey);
-		return prefKey;
+	private static PreferenceKey create(String id, String defaultValue) {
+		return _ISSUE_CODES.add(id, defaultValue);
 	}
 
-	protected static PreferenceKey createDelegate(String id, String delegationKey) {
+	private static PreferenceKey createDelegate(String id, String delegationKey) {
 		return createDelegate(id, delegationKey, SeverityConverter.SEVERITY_WARNING);
 	}
 
-	protected static PreferenceKey createDelegate(String id, String delegationKey, String defaultSeverity) {
+	private static PreferenceKey createDelegate(String id, String delegationKey, String defaultSeverity) {
 		String encodedDelegation = XbaseSeverityConverter.encodeDefaultSeverity(delegationKey, defaultSeverity);
 		return create(id, encodedDelegation);
 	}
 
 	@Override
 	public Map<String, PreferenceKey> getConfigurableIssueCodes() {
-		return _allConfigurableCodes;
+		return _ISSUE_CODES.getImmutableCopy();
 	}
-
 }
