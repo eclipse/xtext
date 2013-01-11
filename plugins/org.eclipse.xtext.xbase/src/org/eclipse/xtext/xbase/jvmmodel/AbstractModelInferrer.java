@@ -27,8 +27,9 @@ import org.eclipse.xtext.util.IAcceptor;
  */
 public abstract class AbstractModelInferrer implements IJvmModelInferrer {
 	
-	private final static Logger log = Logger.getLogger(AbstractModelInferrer.class);
+	private static Logger log = Logger.getLogger(AbstractModelInferrer.class);
 	private Method oldApiMethod;
+	private boolean hasLoggedAboutDeprecation = false;
 	
 	public AbstractModelInferrer() {
 		try {
@@ -40,8 +41,11 @@ public abstract class AbstractModelInferrer implements IJvmModelInferrer {
 	public void infer(EObject e, final @NonNull IJvmDeclaredTypeAcceptor acceptor, boolean preIndexingPhase) {
 		if (oldApiMethod != null) {
 			try {
-				log.error("You are using a deprecated implementation of IjvmModelInferrer. Please change the type of the acceptor in your 'infer' method" +
-						".\nIt should be 'org.eclipse.xtext.xbase.jvmmodel.IJvmDeclaredTypeAcceptor'.\nThis backward compatibility mode will be removed in the next release (2.3 June 2012).");
+				if (!hasLoggedAboutDeprecation) {
+					hasLoggedAboutDeprecation = true;
+					log.error("The class '"+getClass().getName()+"' is using a deprecated implementation of IJvmModelInferrer. Please change the type of the acceptor in your 'infer' method" +
+							".\nIt should be 'org.eclipse.xtext.xbase.jvmmodel.IJvmDeclaredTypeAcceptor'.\nThis backward compatibility mode will be removed in the next release (2.3 June 2012).");
+				}
 				oldApiMethod.invoke(this, e, new IAcceptor<JvmDeclaredType>() {
 					public void accept(JvmDeclaredType t) {
 						acceptor.accept(t);
