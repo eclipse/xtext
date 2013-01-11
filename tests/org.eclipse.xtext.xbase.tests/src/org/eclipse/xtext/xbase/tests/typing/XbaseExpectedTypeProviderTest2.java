@@ -24,7 +24,6 @@ import org.junit.runner.RunWith;
 public class XbaseExpectedTypeProviderTest2 extends XbaseExpectedTypeProviderTest {
 
 	@SuppressWarnings("deprecation")
-	@Ignore("TODO fix me")
 	@Override
 	@Test public void testLowerBoundIsNotVoid() throws Exception {
 		XMemberFeatureCall fc = (XMemberFeatureCall) expression("new foo.ClassWithGenericMethod().genericMethod(return null)");

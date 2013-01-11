@@ -22,6 +22,8 @@ import org.junit.Before
 import org.junit.runner.RunWith
 import org.eclipse.xtext.junit4.XtextRunner
 import org.eclipse.xtext.junit4.InjectWith
+import org.eclipse.xtext.xbase.XExpression
+import org.eclipse.xtext.xbase.XReturnExpression
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -205,6 +207,14 @@ class ExpectationTest extends AbstractXbaseTestCase {
 	}
 	
 	@Test
+	def void testFeatureCallVarArgument_04() {
+		typeComputer.predicate = [ it instanceof XReturnExpression ]
+		"new foo.ClassWithGenericMethod().genericMethod(return null)".expects
+			.types('Unbound[T]')
+			.finalizedAs('Object')
+	}
+	
+	@Test
 	def void testForLoop_01() {
 		"for(int x: null) {}".expects.types('int[] | Iterable<? extends Integer> | Integer[]').finalizedAs('int[] | Iterable<? extends Integer> | Integer[]')
 	}
@@ -235,9 +245,13 @@ class ExpectationTestingTypeComputer extends XbaseTypeComputer {
 	@Property
 	ExpectationTest test
 	
-	override protected _computeTypes(XNullLiteral object, ITypeComputationState state) {
-		test.recordExpectation(state)
-		super._computeTypes(object, state)
+	@Property() (XExpression)=>boolean predicate = [ it instanceof XNullLiteral ]
+	
+	override computeTypes(XExpression expression, ITypeComputationState state) {
+		if (predicate.apply(expression)) {
+			test.recordExpectation(state)
+		}
+		super.computeTypes(expression, state)
 	}
 	
 }

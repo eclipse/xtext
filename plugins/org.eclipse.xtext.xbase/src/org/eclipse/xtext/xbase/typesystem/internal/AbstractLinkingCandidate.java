@@ -156,7 +156,7 @@ public abstract class AbstractLinkingCandidate<Expression extends XExpression> i
 	
 	protected void accept(ObservableTypeExpectation expectation, LightweightTypeReference actual) {
 		LightweightTypeReference expectedType = expectation.getExpectedType();
-		if (expectedType == null || actual instanceof AnyTypeReference) {
+		if (expectedType == null || actual instanceof AnyTypeReference || actual.isPrimitiveVoid()) {
 			return;
 		}
 		resolveAgainstActualType(expectedType, actual, expectation.getState());
