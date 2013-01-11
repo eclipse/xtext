@@ -1,11 +1,25 @@
 package org.eclipse.xtext.xbase.tests.jvmmodel
 
 import com.google.inject.Inject
+import com.google.inject.name.Named
+import foo.TestAnnotation3
+import java.util.List
+import org.eclipse.emf.common.util.BasicEList
+import org.eclipse.emf.ecore.EObject
 import org.eclipse.xtext.common.types.JvmAnnotationType
-import org.eclipse.xtext.common.types.JvmStringAnnotationValue
+import org.eclipse.xtext.common.types.JvmConstructor
+import org.eclipse.xtext.common.types.JvmCustomAnnotationValue
+import org.eclipse.xtext.common.types.JvmEnumerationType
+import org.eclipse.xtext.common.types.JvmField
+import org.eclipse.xtext.common.types.JvmGenericType
+import org.eclipse.xtext.common.types.JvmOperation
 import org.eclipse.xtext.common.types.TypesFactory
 import org.eclipse.xtext.common.types.util.TypeReferences
+import org.eclipse.xtext.junit4.logging.LoggingTester
 import org.eclipse.xtext.resource.XtextResource
+import org.eclipse.xtext.util.Wrapper
+import org.eclipse.xtext.xbase.XNumberLiteral
+import org.eclipse.xtext.xbase.XStringLiteral
 import org.eclipse.xtext.xbase.XbaseFactory
 import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotationsFactory
 import org.eclipse.xtext.xbase.jvmmodel.ILogicalContainerProvider
@@ -13,23 +27,7 @@ import org.eclipse.xtext.xbase.jvmmodel.JvmTypesBuilder
 import org.eclipse.xtext.xbase.tests.AbstractXbaseTestCase
 import org.junit.Test
 
-import static org.junit.Assert.*
-import org.eclipse.emf.common.util.BasicEList
-import java.util.List
-import org.eclipse.xtext.util.Wrapper
-import org.eclipse.emf.ecore.EObject
-import org.eclipse.xtext.common.types.JvmGenericType
-import org.eclipse.xtext.common.types.JvmConstructor
-import org.eclipse.xtext.common.types.JvmField
-import org.eclipse.xtext.common.types.JvmOperation
-import org.eclipse.xtext.common.types.JvmEnumerationType
-import com.google.inject.name.Named
-import foo.TestAnnotation3
-import org.eclipse.xtext.common.types.JvmIntAnnotationValue
-import org.eclipse.xtext.common.types.JvmCustomAnnotationValue
-import org.eclipse.xtext.xbase.XStringLiteral
-import org.eclipse.xtext.xbase.XNumberLiteral
-import org.eclipse.xtext.xbase.XStringLiteral
+import static extension org.junit.Assert.*
 
 class JvmTypesBuilderTest extends AbstractXbaseTestCase {
 	
@@ -248,44 +246,56 @@ class JvmTypesBuilderTest extends AbstractXbaseTestCase {
 	
 	@Test
 	def void testInitializeSafely_0() {
-		genericTestInitializeSafely([EObject expr, String name, (JvmGenericType)=>void init 
-			| expr.toClass(name, init)
-		])
+		expectErrorLogging [
+			genericTestInitializeSafely([EObject expr, String name, (JvmGenericType)=>void init 
+				| expr.toClass(name, init)
+			])
+		]
 	}
 	
 	@Test
 	def void testInitializeSafely_1() {
-		genericTestInitializeSafely([EObject expr, String name, (JvmConstructor)=>void init 
-			| expr.toConstructor(init)
-		])
+		expectErrorLogging [
+			genericTestInitializeSafely([EObject expr, String name, (JvmConstructor)=>void init 
+				| expr.toConstructor(init)
+			])
+		]
 	}
 	
 	@Test
 	def void testInitializeSafely_2() {
-		genericTestInitializeSafely([EObject expr, String name, (JvmField)=>void init 
-			| expr.toField(name, null, init)
-		])
+		expectErrorLogging [
+			genericTestInitializeSafely([EObject expr, String name, (JvmField)=>void init 
+				| expr.toField(name, null, init)
+			])
+		]
 	}
 	
 	@Test
 	def void testInitializeSafely_3() {
-		genericTestInitializeSafely([EObject expr, String name, (JvmOperation)=>void init 
-			| expr.toMethod(name, null, init)
-		])
+		expectErrorLogging [
+			genericTestInitializeSafely([EObject expr, String name, (JvmOperation)=>void init 
+				| expr.toMethod(name, null, init)
+			])
+		]
 	}
 	
 	@Test
 	def void testInitializeSafely_4() {
-		genericTestInitializeSafely([EObject expr, String name, (JvmAnnotationType)=>void init 
-			| expr.toAnnotationType(name, init)
-		])
+		expectErrorLogging [
+			genericTestInitializeSafely([EObject expr, String name, (JvmAnnotationType)=>void init 
+				| expr.toAnnotationType(name, init)
+			])
+		]
 	}
 	
 	@Test
 	def void testInitializeSafely_5() {
-		genericTestInitializeSafely([EObject expr, String name, (JvmEnumerationType)=>void init 
-			| expr.toEnumerationType(name, init)
-		])
+		expectErrorLogging [
+			genericTestInitializeSafely([EObject expr, String name, (JvmEnumerationType)=>void init 
+				| expr.toEnumerationType(name, init)
+			])
+		]
 	}
 	
 	def protected <T> genericTestInitializeSafely((EObject, String, (T)=>void)=>EObject create) {
@@ -294,5 +304,10 @@ class JvmTypesBuilderTest extends AbstractXbaseTestCase {
 		val element = create.apply(expr, "foo", [T it| initialized.set(true) throw new RuntimeException();]);
 		assertTrue(initialized.get())
 		assertNotNull(element);
+	}
+	
+	def protected expectErrorLogging((Object)=>void block) {
+		val loggings = LoggingTester::countErrorLogging(typeof(JvmTypesBuilder), [|block.apply(null)])
+		assertEquals("Unexpected amount of error logging.",1, loggings) 
 	}
 }
