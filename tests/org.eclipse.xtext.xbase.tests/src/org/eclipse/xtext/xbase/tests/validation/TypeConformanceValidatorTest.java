@@ -75,7 +75,7 @@ public class TypeConformanceValidatorTest extends AbstractXbaseTestCase {
 	@Test public void testCast_04() throws Exception {
 		// class MyNPE extends NullPointerException implements CharSequence {}
 		// TODO: should we check the actual type in case the a casted expression
-		// is an upcast?
+		// is an upcast? (see comment in XbaseTypeComputer
 		assertNoCastError("('foo' as CharSequence) as NullPointerException");
 	}
 

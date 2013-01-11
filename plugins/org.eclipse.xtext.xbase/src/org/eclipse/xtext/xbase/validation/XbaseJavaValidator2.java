@@ -174,7 +174,8 @@ public class XbaseJavaValidator2 extends AbstractXbaseJavaValidator {
 			//			XbasePackage.Literals.XBINARY_OPERATION__LEFT_OPERAND,
 			//			XbasePackage.Literals.XUNARY_OPERATION__OPERAND
 			XbasePackage.Literals.XASSIGNMENT__VALUE, 
-			XbasePackage.Literals.XBINARY_OPERATION__RIGHT_OPERAND);
+			XbasePackage.Literals.XBINARY_OPERATION__RIGHT_OPERAND,
+			XbasePackage.Literals.XFOR_LOOP_EXPRESSION__FOR_EXPRESSION);
 
 	protected Set<EReference> getTypeConformanceCheckedReferences() {
 		return typeConformanceCheckedReferences;
@@ -217,7 +218,7 @@ public class XbaseJavaValidator2 extends AbstractXbaseJavaValidator {
 	
 	protected void validateType(XExpression expression, Procedures.Procedure2<LightweightTypeReference, LightweightTypeReference> messageProducer) {
 		LightweightTypeReference expectedType = getExpectedType(expression);
-		if (expectedType == null || expectedType.getType() == null)
+		if (expectedType == null)
 			return;
 		LightweightTypeReference actualType = getActualType(expression);
 		if (actualType == null)
@@ -273,45 +274,45 @@ public class XbaseJavaValidator2 extends AbstractXbaseJavaValidator {
 		return typeRef.getType() instanceof JvmGenericType && !((JvmGenericType)typeRef.getType()).isInterface();
 	}
 	
-	@Check
-	public void checkTypes(XForLoopExpression obj) {
-		LightweightTypeReference actualType = getActualType(obj.getForExpression());
-		if (actualType == null || actualType.getType() == null)
-			return;
-
-		JvmType iterable = getServices().getTypeReferences().findDeclaredType(Iterable.class, obj);
-		if (iterable == null) {
-			error("foreach needs '"+Iterable.class.getCanonicalName()+"' on the classpath.", obj, null, -1, MISSING_TYPE);
-			return;
-		}
-		ParameterizedTypeReference expectedType = new ParameterizedTypeReference(actualType.getOwner(), iterable);
-		JvmTypeReference expected = obj.getDeclaredParam().getParameterType();
-		if (expected != null) {
-			LightweightTypeReference declaredParameterType = new OwnedConverter(actualType.getOwner()).toLightweightReference(expected);
-			if (declaredParameterType.isType(Void.TYPE)) {
-				// see #checkTypeReferenceIsNotVoid
-				return;
-			}
-			WildcardTypeReference wildcardTypeReference = new WildcardTypeReference(actualType.getOwner());
-			wildcardTypeReference.addUpperBound(declaredParameterType.getWrapperTypeIfPrimitive());
-			expectedType.addTypeArgument(wildcardTypeReference);
-		}
-		
-		if (!expectedType.isAssignableFrom(actualType))
-			error("Incompatible types. Expected " + getNameOfTypes(expectedType) + " but was "
-					+ canonicalName(actualType), obj.getForExpression(), null,
-					ValidationMessageAcceptor.INSIGNIFICANT_INDEX, INCOMPATIBLE_TYPES);
-		else if (actualType.isRawType()) {
-			// rawType - check expectation for Object
-			if (expected != null) {
-				if (!Object.class.getName().equals(expected.getQualifiedName())) {
-					error("Incompatible types. Expected " + getNameOfTypes(expectedType) + " but was "
-							+ canonicalName(actualType), obj.getForExpression(), null,
-							ValidationMessageAcceptor.INSIGNIFICANT_INDEX, INCOMPATIBLE_TYPES);
-				}
-			}
-		}
-	}
+//	@Check
+//	public void checkTypes(XForLoopExpression obj) {
+//		LightweightTypeReference actualType = getActualType(obj.getForExpression());
+//		if (actualType == null || actualType.getType() == null)
+//			return;
+//
+//		JvmType iterable = getServices().getTypeReferences().findDeclaredType(Iterable.class, obj);
+//		if (iterable == null) {
+//			error("foreach needs '"+Iterable.class.getCanonicalName()+"' on the classpath.", obj, null, -1, MISSING_TYPE);
+//			return;
+//		}
+//		ParameterizedTypeReference expectedType = new ParameterizedTypeReference(actualType.getOwner(), iterable);
+//		JvmTypeReference expected = obj.getDeclaredParam().getParameterType();
+//		if (expected != null) {
+//			LightweightTypeReference declaredParameterType = new OwnedConverter(actualType.getOwner()).toLightweightReference(expected);
+//			if (declaredParameterType.isType(Void.TYPE)) {
+//				// see #checkTypeReferenceIsNotVoid
+//				return;
+//			}
+//			WildcardTypeReference wildcardTypeReference = new WildcardTypeReference(actualType.getOwner());
+//			wildcardTypeReference.addUpperBound(declaredParameterType.getWrapperTypeIfPrimitive());
+//			expectedType.addTypeArgument(wildcardTypeReference);
+//		}
+//		
+//		if (!expectedType.isAssignableFrom(actualType))
+//			error("Incompatible types. Expected " + getNameOfTypes(expectedType) + " but was "
+//					+ canonicalName(actualType), obj.getForExpression(), null,
+//					ValidationMessageAcceptor.INSIGNIFICANT_INDEX, INCOMPATIBLE_TYPES);
+//		else if (actualType.isRawType()) {
+//			// rawType - check expectation for Object
+//			if (expected != null) {
+//				if (!Object.class.getName().equals(expected.getQualifiedName())) {
+//					error("Incompatible types. Expected " + getNameOfTypes(expectedType) + " but was "
+//							+ canonicalName(actualType), obj.getForExpression(), null,
+//							ValidationMessageAcceptor.INSIGNIFICANT_INDEX, INCOMPATIBLE_TYPES);
+//				}
+//			}
+//		}
+//	}
 
 
 	@Check

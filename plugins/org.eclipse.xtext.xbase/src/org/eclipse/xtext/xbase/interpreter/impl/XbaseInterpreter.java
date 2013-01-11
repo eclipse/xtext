@@ -413,19 +413,90 @@ public class XbaseInterpreter implements IExpressionInterpreter {
 		Object result = internalEvaluate(castedExpression.getTarget(), context, indicator);
 		result = wrapOrUnwrapArray(result, castedExpression.getType());
 		result = coerceArgumentType(result, castedExpression.getType());
-		String typeName = castedExpression.getType().getType().getQualifiedName();
-		Class<?> expectedType = null;
-		try {
-			expectedType = classFinder.forName(typeName);
-		} catch (ClassNotFoundException e) {
-			throw new EvaluationException(new NoClassDefFoundError(typeName));
+		JvmType castType = castedExpression.getType().getType();
+		if (castType instanceof JvmPrimitiveType) {
+			if (result == null) {
+				throwNullPointerException(castedExpression, "Cannot cast null to primitive " + castType.getIdentifier());
+			}
+			return castToPrimitiveType(result, primitives.primitiveKind((JvmPrimitiveType) castType));
+		} else {
+			String typeName = castType.getQualifiedName();
+			Class<?> expectedType = null;
+			try {
+				expectedType = classFinder.forName(typeName);
+			} catch (ClassNotFoundException e) {
+				throw new EvaluationException(new NoClassDefFoundError(typeName));
+			}
+			try {
+				expectedType.cast(result);
+			} catch (ClassCastException e) {
+				throw new EvaluationException(new ClassCastException(typeName));
+			}
+			return result;
 		}
-		try {
-			expectedType.cast(result);
-		} catch (ClassCastException e) {
-			throw new EvaluationException(e);
+	}
+
+	protected Object castToPrimitiveType(Object castMe, Primitives.Primitive kind) {
+		if (com.google.common.primitives.Primitives.isWrapperType(castMe.getClass())) {
+			if (kind == Primitives.Primitive.Boolean) {
+				if (castMe instanceof Boolean) {
+					return castMe;
+				}
+			} else if (kind == Primitives.Primitive.Char) {
+				if (castMe instanceof Character) {
+					return ((Character) castMe).charValue();
+				} else if (castMe instanceof Byte) {
+					return (char) ((Byte) castMe).byteValue();
+				} else if (castMe instanceof Short) {
+					return (char) ((Short) castMe).shortValue();
+				} else if (castMe instanceof Long) {
+					return (char) ((Long) castMe).longValue();
+				} else if (castMe instanceof Integer) {
+					return (char) ((Integer) castMe).intValue();
+				} else if (castMe instanceof Float) {
+					return (char) ((Float) castMe).floatValue();
+				} else if (castMe instanceof Double) {
+					return (char) ((Double) castMe).doubleValue();
+				}
+			} else if (castMe instanceof Number) {
+				Number number = (Number) castMe;
+				switch(kind) {
+					case Byte:
+						return number.byteValue();
+					case Short:
+						return number.shortValue();
+					case Long: 
+						return number.longValue();
+					case Int:
+						return number.intValue();
+					case Float:
+						return number.floatValue();
+					case Double:
+						return number.doubleValue();
+					default:
+						throw new IllegalStateException("Unexpected cast type 'void'");
+				}
+			} else if (castMe instanceof Character) {
+				char c = ((Character) castMe).charValue();
+				switch(kind) {
+					case Byte:
+						return (byte) c;
+					case Short:
+						return (short) c;
+					case Long: 
+						return (long) c;
+					case Int:
+						return (int) c;
+					case Float:
+						return (float) c;
+					case Double:
+						return (double) c;
+					default:
+						throw new IllegalStateException("Unexpected cast type 'void'");
+				}
+			}
 		}
-		return result;
+		throw new EvaluationException(new ClassCastException(castMe.getClass().getName() + "!=" + kind.name().toLowerCase()));
 	}
 
 	protected Object _doEvaluate(XThrowExpression throwExpression, IEvaluationContext context, CancelIndicator indicator) {

@@ -1426,6 +1426,16 @@ public abstract class AbstractXbaseEvaluationTest extends Assert {
 				"}");
 	}
 	
+	@Ignore("Fails with old implementation")
+	@Test public void testForLoop_16() throws Exception {
+		assertEvaluatesTo(new Character('a'), 
+				"{\n" +
+				"  var Character result = null\n" +
+				"  for(int i: 'abc'.toCharArray) if (result == null) result = i as char\n" +
+				"  result" +
+				"}");
+	}
+	
 	@Test public void testFunctionConversion_00() throws Exception {
 		assertEvaluatesTo("foo",
 				"([|newArrayList('foo').iterator] as Iterable<String>).iterator.next");

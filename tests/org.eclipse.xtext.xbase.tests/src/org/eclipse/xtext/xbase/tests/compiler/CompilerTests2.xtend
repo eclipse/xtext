@@ -229,6 +229,37 @@ abstract class AbstractCompilerTests2 extends AbstractOutputComparingCompilerTes
 			}
 		''')
 	}
+	
+	@Test def void testForLoop_12() throws Exception {
+		'''
+			for(double d: <Integer>newArrayList) { d.toString }
+		'''.compilesTo('''
+			java.util.ArrayList<Integer> _newArrayList = org.eclipse.xtext.xbase.lib.CollectionLiterals.<Integer>newArrayList();
+			for (final double d : _newArrayList) {
+			  Double.valueOf(d).toString();
+			}
+		''')
+	}
+	
+	@Test def void testForLoop_13() throws Exception {
+		'''
+			for(double d: null as int[]) { d.toString }
+		'''.compilesTo('''
+			for (final double d : ((int[]) null)) {
+			  Double.valueOf(d).toString();
+			}
+		''')
+	}
+	
+	@Test def void testForLoop_14() throws Exception {
+		'''
+			for(double d: null as Integer[]) { d.toString }
+		'''.compilesTo('''
+			for (final double d : ((Integer[]) null)) {
+			  Double.valueOf(d).toString();
+			}
+		''')
+	}
 }
 
 class CompilerTests2 extends AbstractCompilerTests2 {
@@ -242,6 +273,24 @@ class CompilerTests2 extends AbstractCompilerTests2 {
 	@Test 
 	@Ignore("Type check fails in old implementation")
 	override testForLoop_11() throws Exception {
+		fail("Type check fails in old implementation")
+	}
+	
+	@Test 
+	@Ignore("Type check fails in old implementation")
+	override testForLoop_12() throws Exception {
+		fail("Type check fails in old implementation")
+	}
+	
+	@Test 
+	@Ignore("Type check fails in old implementation")
+	override testForLoop_13() throws Exception {
+		fail("Type check fails in old implementation")
+	}
+	
+	@Test 
+	@Ignore("Type check fails in old implementation")
+	override testForLoop_14() throws Exception {
 		fail("Type check fails in old implementation")
 	}
 	

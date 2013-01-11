@@ -49,6 +49,13 @@ public class XbaseInterpreterTestWithNewTypeSystem extends XbaseInterpreterTest 
 		super.testCollectionExtensions_10();
 	}
 	
+	// re-enabled
+	@Override
+	@Test
+	public void testForLoop_16() throws Exception {
+		super.testForLoop_16();
+	}
+	
 	@Override
 	@Test
 	@Ignore

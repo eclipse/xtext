@@ -23,6 +23,7 @@ import org.junit.runner.RunWith;
 @InjectWith(XbaseNewTypeSystemInjectorProvider.class)
 public class XbaseExpectedTypeProviderTest2 extends XbaseExpectedTypeProviderTest {
 
+	@SuppressWarnings("deprecation")
 	@Ignore("TODO fix me")
 	@Override
 	@Test public void testLowerBoundIsNotVoid() throws Exception {
@@ -84,6 +85,10 @@ public class XbaseExpectedTypeProviderTest2 extends XbaseExpectedTypeProviderTes
 		XForLoopExpression loop = (XForLoopExpression) expression("for (double x : null as Iterable<? super Integer>) null");
 		assertExpected("double[] | java.lang.Iterable<? extends java.lang.Double> | java.lang.Double[]", loop.getForExpression());
 	}
+	@Test public void testForLoopExpression_2_d() throws Exception {
+		XForLoopExpression loop = (XForLoopExpression) expression("for(Double d: null as int[])) {}");
+		assertExpected("java.lang.Iterable<? extends java.lang.Double> | double[] | java.lang.Double[]", loop.getForExpression());
+	}
 
 	// testForLoopExpression_3_*:
 	// if the type is compatible, we use that one as expectation
@@ -142,6 +147,10 @@ public class XbaseExpectedTypeProviderTest2 extends XbaseExpectedTypeProviderTes
 	@Test public void testForLoopExpression_4_e() throws Exception {
 		XForLoopExpression loop = (XForLoopExpression) expression("for (double x : null as Iterable<? extends Integer>) null");
 		assertExpected("java.lang.Iterable<? extends java.lang.Integer>", loop.getForExpression());
+	}
+	@Test public void testForLoopExpression_4_f() throws Exception {
+		XForLoopExpression loop = (XForLoopExpression) expression("for(double d: <Integer>newArrayList) { d.toString }");
+		assertExpected("java.util.ArrayList<java.lang.Integer>", loop.getForExpression());
 	}
 	
 	

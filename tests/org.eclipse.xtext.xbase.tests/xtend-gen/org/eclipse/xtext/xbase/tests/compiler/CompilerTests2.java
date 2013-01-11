@@ -25,4 +25,22 @@ public class CompilerTests2 extends AbstractCompilerTests2 {
   public void testForLoop_11() throws Exception {
     Assert.fail("Type check fails in old implementation");
   }
+  
+  @Test
+  @Ignore(value = "Type check fails in old implementation")
+  public void testForLoop_12() throws Exception {
+    Assert.fail("Type check fails in old implementation");
+  }
+  
+  @Test
+  @Ignore(value = "Type check fails in old implementation")
+  public void testForLoop_13() throws Exception {
+    Assert.fail("Type check fails in old implementation");
+  }
+  
+  @Test
+  @Ignore(value = "Type check fails in old implementation")
+  public void testForLoop_14() throws Exception {
+    Assert.fail("Type check fails in old implementation");
+  }
 }

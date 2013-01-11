@@ -386,4 +386,54 @@ public abstract class AbstractCompilerTests2 extends AbstractOutputComparingComp
     _builder_1.newLine();
     this.compilesTo(_builder, _builder_1);
   }
+  
+  @Test
+  public void testForLoop_12() throws Exception {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("for(double d: <Integer>newArrayList) { d.toString }");
+    _builder.newLine();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("java.util.ArrayList<Integer> _newArrayList = org.eclipse.xtext.xbase.lib.CollectionLiterals.<Integer>newArrayList();");
+    _builder_1.newLine();
+    _builder_1.append("for (final double d : _newArrayList) {");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("Double.valueOf(d).toString();");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    this.compilesTo(_builder, _builder_1);
+  }
+  
+  @Test
+  public void testForLoop_13() throws Exception {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("for(double d: null as int[]) { d.toString }");
+    _builder.newLine();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("for (final double d : ((int[]) null)) {");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("Double.valueOf(d).toString();");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    this.compilesTo(_builder, _builder_1);
+  }
+  
+  @Test
+  public void testForLoop_14() throws Exception {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("for(double d: null as Integer[]) { d.toString }");
+    _builder.newLine();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("for (final double d : ((Integer[]) null)) {");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("Double.valueOf(d).toString();");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    this.compilesTo(_builder, _builder_1);
+  }
 }
