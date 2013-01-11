@@ -8,38 +8,28 @@
 package org.eclipse.xtend.core.validation;
 
 
-import java.util.Map;
-
 import org.eclipse.xtext.preferences.PreferenceKey;
-import org.eclipse.xtext.validation.ConfigurableIssueCodesProvider;
+import org.eclipse.xtext.util.IAcceptor;
 import org.eclipse.xtext.validation.SeverityConverter;
-import org.eclipse.xtext.xbase.validation.IssueCodesStore;
 import org.eclipse.xtext.xbase.validation.XbaseConfigurableIssueCodes;
+
+import com.google.inject.Singleton;
 
 /**
  * 
  * @author Dennis Huebner - Initial contribution and API
  */
-public class XtendConfigurableIssueCodes extends ConfigurableIssueCodesProvider {
-	private static final IssueCodesStore _CACHE = new IssueCodesStore(new XbaseConfigurableIssueCodes().getConfigurableIssueCodes());
+@Singleton
+public class XtendConfigurableIssueCodes extends XbaseConfigurableIssueCodes {
 
-	public static final PreferenceKey SINGLE_DISPATCH_FUNCTION = create(IssueCodes.SINGLE_DISPATCH_FUNCTION, SeverityConverter.SEVERITY_WARNING);
-	
-	public static final PreferenceKey DISPATCH_PLAIN_FUNCTION_NAME_CLASH = create(IssueCodes.DISPATCH_PLAIN_FUNCTION_NAME_CLASH, SeverityConverter.SEVERITY_WARNING);
-	public static final PreferenceKey FIELD_LOCALLY_NEVER_READ = create(IssueCodes.FIELD_LOCALLY_NEVER_READ, SeverityConverter.SEVERITY_WARNING);
-	public static final PreferenceKey FUNCTION_LOCALLY_NEVER_USED = create(IssueCodes.FUNCTION_LOCALLY_NEVER_USED, SeverityConverter.SEVERITY_WARNING);
-
-
-	/**
-	 * If you would like to a add a new IssueCode use this method,<br>
-	 * this method creates a new {@link PreferenceKey} and adds it to the inner registry map.
-	 */
-	private static PreferenceKey create(String id, String defaultValue) {
-		return _CACHE.add(id, defaultValue);
-	}
 
 	@Override
-	public Map<String, PreferenceKey> getConfigurableIssueCodes() {
-		return _CACHE.getImmutableCopy();
+	protected void initialize(IAcceptor<PreferenceKey> iAcceptor) {
+		super.initialize(iAcceptor);
+		iAcceptor.accept(create(IssueCodes.SINGLE_DISPATCH_FUNCTION, SeverityConverter.SEVERITY_WARNING));
+
+		iAcceptor.accept(create(IssueCodes.DISPATCH_PLAIN_FUNCTION_NAME_CLASH, SeverityConverter.SEVERITY_WARNING));
+		iAcceptor.accept(create(IssueCodes.FIELD_LOCALLY_NEVER_READ, SeverityConverter.SEVERITY_WARNING));
+		iAcceptor.accept(create(IssueCodes.FUNCTION_LOCALLY_NEVER_USED, SeverityConverter.SEVERITY_WARNING));
 	}
 }
