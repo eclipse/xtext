@@ -8,6 +8,7 @@
 package org.eclipse.xtext.xbase.tests.jvmmodel;
 
 import static com.google.common.collect.Lists.*;
+import static org.eclipse.xtext.junit4.logging.LoggingTester.*;
 import static org.junit.Assert.*;
 
 import java.util.List;
@@ -26,21 +27,27 @@ import org.junit.Test;
 public class JvmModelInferrerTest {
 	public static class MyOldInferrer extends AbstractModelInferrer {
 		public final List<EObject> other = newArrayList();
-		public void infer (EObject o, Object x, boolean s) {
+
+		public void infer(EObject o, Object x, boolean s) {
 			if (o instanceof EClass)
 				throw new IllegalArgumentException();
 			other.add(o);
 		}
 	}
+
 	@Test
 	public void testCompatibility() throws Exception {
-		EClass clazz = EcorePackage.Literals.ECLASS;
-		MyOldInferrer inferrer = new MyOldInferrer();
-		inferrer.infer(clazz, new IJvmDeclaredTypeAcceptor() {
-			public <T extends JvmDeclaredType> IPostIndexingInitializing<T> accept(T type) {
-				return null;
+		final EClass clazz = EcorePackage.Literals.ECLASS;
+		final MyOldInferrer inferrer = new MyOldInferrer();
+		assertEquals(1, countErrorLogging(AbstractModelInferrer.class, new Runnable() {
+			public void run() {
+				inferrer.infer(clazz, new IJvmDeclaredTypeAcceptor() {
+					public <T extends JvmDeclaredType> IPostIndexingInitializing<T> accept(T type) {
+						return null;
+					}
+				}, false);
 			}
-		}, false);
+		}));
 		assertFalse(inferrer.other.isEmpty());
 		assertEquals(clazz.eContents().size(), inferrer.other.size());
 		

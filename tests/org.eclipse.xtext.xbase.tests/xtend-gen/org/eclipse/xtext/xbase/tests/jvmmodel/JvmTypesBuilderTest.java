@@ -26,6 +26,7 @@ import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.TypesFactory;
 import org.eclipse.xtext.common.types.util.TypeReferences;
+import org.eclipse.xtext.junit4.logging.LoggingTester;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.util.Wrapper;
 import org.eclipse.xtext.xbase.XExpression;
@@ -47,6 +48,7 @@ import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.Functions.Function3;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ListExtensions;
+import org.eclipse.xtext.xbase.lib.Procedures.Procedure0;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xbase.tests.AbstractXbaseTestCase;
 import org.junit.Assert;
@@ -476,68 +478,98 @@ public class JvmTypesBuilderTest extends AbstractXbaseTestCase {
   
   @Test
   public void testInitializeSafely_0() {
-    final Function3<EObject,String,Procedure1<? super JvmGenericType>,JvmGenericType> _function = new Function3<EObject,String,Procedure1<? super JvmGenericType>,JvmGenericType>() {
-        public JvmGenericType apply(final EObject expr, final String name, final Procedure1<? super JvmGenericType> init) {
-          JvmGenericType _class = JvmTypesBuilderTest.this._jvmTypesBuilder.toClass(expr, name, init);
-          return _class;
+    final Procedure1<Object> _function = new Procedure1<Object>() {
+        public void apply(final Object it) {
+          final Function3<EObject,String,Procedure1<? super JvmGenericType>,JvmGenericType> _function = new Function3<EObject,String,Procedure1<? super JvmGenericType>,JvmGenericType>() {
+              public JvmGenericType apply(final EObject expr, final String name, final Procedure1<? super JvmGenericType> init) {
+                JvmGenericType _class = JvmTypesBuilderTest.this._jvmTypesBuilder.toClass(expr, name, init);
+                return _class;
+              }
+            };
+          JvmTypesBuilderTest.this.<JvmGenericType>genericTestInitializeSafely(_function);
         }
       };
-    this.<JvmGenericType>genericTestInitializeSafely(_function);
+    this.expectErrorLogging(_function);
   }
   
   @Test
   public void testInitializeSafely_1() {
-    final Function3<EObject,String,Procedure1<? super JvmConstructor>,JvmConstructor> _function = new Function3<EObject,String,Procedure1<? super JvmConstructor>,JvmConstructor>() {
-        public JvmConstructor apply(final EObject expr, final String name, final Procedure1<? super JvmConstructor> init) {
-          JvmConstructor _constructor = JvmTypesBuilderTest.this._jvmTypesBuilder.toConstructor(expr, init);
-          return _constructor;
+    final Procedure1<Object> _function = new Procedure1<Object>() {
+        public void apply(final Object it) {
+          final Function3<EObject,String,Procedure1<? super JvmConstructor>,JvmConstructor> _function = new Function3<EObject,String,Procedure1<? super JvmConstructor>,JvmConstructor>() {
+              public JvmConstructor apply(final EObject expr, final String name, final Procedure1<? super JvmConstructor> init) {
+                JvmConstructor _constructor = JvmTypesBuilderTest.this._jvmTypesBuilder.toConstructor(expr, init);
+                return _constructor;
+              }
+            };
+          JvmTypesBuilderTest.this.<JvmConstructor>genericTestInitializeSafely(_function);
         }
       };
-    this.<JvmConstructor>genericTestInitializeSafely(_function);
+    this.expectErrorLogging(_function);
   }
   
   @Test
   public void testInitializeSafely_2() {
-    final Function3<EObject,String,Procedure1<? super JvmField>,JvmField> _function = new Function3<EObject,String,Procedure1<? super JvmField>,JvmField>() {
-        public JvmField apply(final EObject expr, final String name, final Procedure1<? super JvmField> init) {
-          JvmField _field = JvmTypesBuilderTest.this._jvmTypesBuilder.toField(expr, name, null, init);
-          return _field;
+    final Procedure1<Object> _function = new Procedure1<Object>() {
+        public void apply(final Object it) {
+          final Function3<EObject,String,Procedure1<? super JvmField>,JvmField> _function = new Function3<EObject,String,Procedure1<? super JvmField>,JvmField>() {
+              public JvmField apply(final EObject expr, final String name, final Procedure1<? super JvmField> init) {
+                JvmField _field = JvmTypesBuilderTest.this._jvmTypesBuilder.toField(expr, name, null, init);
+                return _field;
+              }
+            };
+          JvmTypesBuilderTest.this.<JvmField>genericTestInitializeSafely(_function);
         }
       };
-    this.<JvmField>genericTestInitializeSafely(_function);
+    this.expectErrorLogging(_function);
   }
   
   @Test
   public void testInitializeSafely_3() {
-    final Function3<EObject,String,Procedure1<? super JvmOperation>,JvmOperation> _function = new Function3<EObject,String,Procedure1<? super JvmOperation>,JvmOperation>() {
-        public JvmOperation apply(final EObject expr, final String name, final Procedure1<? super JvmOperation> init) {
-          JvmOperation _method = JvmTypesBuilderTest.this._jvmTypesBuilder.toMethod(expr, name, null, init);
-          return _method;
+    final Procedure1<Object> _function = new Procedure1<Object>() {
+        public void apply(final Object it) {
+          final Function3<EObject,String,Procedure1<? super JvmOperation>,JvmOperation> _function = new Function3<EObject,String,Procedure1<? super JvmOperation>,JvmOperation>() {
+              public JvmOperation apply(final EObject expr, final String name, final Procedure1<? super JvmOperation> init) {
+                JvmOperation _method = JvmTypesBuilderTest.this._jvmTypesBuilder.toMethod(expr, name, null, init);
+                return _method;
+              }
+            };
+          JvmTypesBuilderTest.this.<JvmOperation>genericTestInitializeSafely(_function);
         }
       };
-    this.<JvmOperation>genericTestInitializeSafely(_function);
+    this.expectErrorLogging(_function);
   }
   
   @Test
   public void testInitializeSafely_4() {
-    final Function3<EObject,String,Procedure1<? super JvmAnnotationType>,JvmAnnotationType> _function = new Function3<EObject,String,Procedure1<? super JvmAnnotationType>,JvmAnnotationType>() {
-        public JvmAnnotationType apply(final EObject expr, final String name, final Procedure1<? super JvmAnnotationType> init) {
-          JvmAnnotationType _annotationType = JvmTypesBuilderTest.this._jvmTypesBuilder.toAnnotationType(expr, name, init);
-          return _annotationType;
+    final Procedure1<Object> _function = new Procedure1<Object>() {
+        public void apply(final Object it) {
+          final Function3<EObject,String,Procedure1<? super JvmAnnotationType>,JvmAnnotationType> _function = new Function3<EObject,String,Procedure1<? super JvmAnnotationType>,JvmAnnotationType>() {
+              public JvmAnnotationType apply(final EObject expr, final String name, final Procedure1<? super JvmAnnotationType> init) {
+                JvmAnnotationType _annotationType = JvmTypesBuilderTest.this._jvmTypesBuilder.toAnnotationType(expr, name, init);
+                return _annotationType;
+              }
+            };
+          JvmTypesBuilderTest.this.<JvmAnnotationType>genericTestInitializeSafely(_function);
         }
       };
-    this.<JvmAnnotationType>genericTestInitializeSafely(_function);
+    this.expectErrorLogging(_function);
   }
   
   @Test
   public void testInitializeSafely_5() {
-    final Function3<EObject,String,Procedure1<? super JvmEnumerationType>,JvmEnumerationType> _function = new Function3<EObject,String,Procedure1<? super JvmEnumerationType>,JvmEnumerationType>() {
-        public JvmEnumerationType apply(final EObject expr, final String name, final Procedure1<? super JvmEnumerationType> init) {
-          JvmEnumerationType _enumerationType = JvmTypesBuilderTest.this._jvmTypesBuilder.toEnumerationType(expr, name, init);
-          return _enumerationType;
+    final Procedure1<Object> _function = new Procedure1<Object>() {
+        public void apply(final Object it) {
+          final Function3<EObject,String,Procedure1<? super JvmEnumerationType>,JvmEnumerationType> _function = new Function3<EObject,String,Procedure1<? super JvmEnumerationType>,JvmEnumerationType>() {
+              public JvmEnumerationType apply(final EObject expr, final String name, final Procedure1<? super JvmEnumerationType> init) {
+                JvmEnumerationType _enumerationType = JvmTypesBuilderTest.this._jvmTypesBuilder.toEnumerationType(expr, name, init);
+                return _enumerationType;
+              }
+            };
+          JvmTypesBuilderTest.this.<JvmEnumerationType>genericTestInitializeSafely(_function);
         }
       };
-    this.<JvmEnumerationType>genericTestInitializeSafely(_function);
+    this.expectErrorLogging(_function);
   }
   
   protected <T extends Object> void genericTestInitializeSafely(final Function3<? super EObject,? super String,? super Procedure1<? super T>,? extends EObject> create) {
@@ -555,5 +587,19 @@ public class JvmTypesBuilderTest extends AbstractXbaseTestCase {
     Boolean _get = initialized.get();
     Assert.assertTrue((_get).booleanValue());
     Assert.assertNotNull(element);
+  }
+  
+  protected void expectErrorLogging(final Procedure1<? super Object> block) {
+    final Procedure0 _function = new Procedure0() {
+        public void apply() {
+          block.apply(null);
+        }
+      };
+    final int loggings = LoggingTester.countErrorLogging(JvmTypesBuilder.class, new Runnable() {
+        public void run() {
+          _function.apply();
+        }
+    });
+    Assert.assertEquals("Unexpected amount of error logging.", 1, loggings);
   }
 }
