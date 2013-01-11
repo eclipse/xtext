@@ -575,7 +575,7 @@ class JvmModelGenerator implements IGenerator {
 				val nodeText = node.text
 				val context = NodeModelUtils::findActualSemanticObjectFor(node)
 				val nodeOffset = node.offset
-				val regions = javaDocTypeReferenceProvider.computeTypeRefRegions(node) + javaDocTypeReferenceProvider.computeParameterTypeRefRegions(node)
+				val regions = (javaDocTypeReferenceProvider.computeTypeRefRegions(node) + javaDocTypeReferenceProvider.computeParameterTypeRefRegions(node)).sortBy()[offset]
 				var lastOffset = 0
 				if(regions.size > 0){
 					for(region : regions){
