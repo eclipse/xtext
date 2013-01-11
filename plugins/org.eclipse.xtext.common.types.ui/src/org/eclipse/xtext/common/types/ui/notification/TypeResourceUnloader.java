@@ -23,7 +23,7 @@ import com.google.inject.Inject;
 /**
  * A listener that will notify the state change broker about reconcile operations
  * on java types. It converts the {@link ElementChangedEvent notifications} of the JDT
- * to {@link IResourceDescription.Event events} for the Xtext protocol.
+ * to {@link org.eclipse.xtext.resource.IResourceDescription.Event events} for the Xtext protocol.
  * As this will only notify  
  * 
  * @author Sebastian Zarnekow - Initial contribution and API

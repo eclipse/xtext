@@ -26,9 +26,9 @@ import com.google.inject.Inject;
 
 /**
  * The delta converter transforms {@link IJavaElementDelta JDT's deltas} to 
- * {@link IResourceDescription.Delta xtext's deltas}.
+ * {@link org.eclipse.xtext.resource.IResourceDescription.Delta xtext's deltas}.
  * Each of the resulting deltas will return <code>true</code> when 
- * {@link IResourceDescription.Delta#haveEObjectDescriptionsChanged() 
+ * {@link org.eclipse.xtext.resource.IResourceDescription.Delta#haveEObjectDescriptionsChanged() 
  * haveEObjectDescriptionsChanged} is queried.
  * @author Sebastian Zarnekow - Initial contribution and API
  */

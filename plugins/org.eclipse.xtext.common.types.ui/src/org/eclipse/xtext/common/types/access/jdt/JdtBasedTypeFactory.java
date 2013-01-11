@@ -62,8 +62,10 @@ import org.eclipse.xtext.common.types.JvmUpperBound;
 import org.eclipse.xtext.common.types.JvmVisibility;
 import org.eclipse.xtext.common.types.JvmWildcardTypeReference;
 import org.eclipse.xtext.common.types.TypesFactory;
+import org.eclipse.xtext.common.types.access.IJvmTypeProvider;
 import org.eclipse.xtext.common.types.access.impl.ITypeFactory;
 import org.eclipse.xtext.common.types.impl.JvmExecutableImplCustom;
+import org.eclipse.xtext.common.types.util.TypeReferences;
 import org.eclipse.xtext.util.internal.StopWatches;
 import org.eclipse.xtext.util.internal.StopWatches.StoppedTask;
 
@@ -71,6 +73,15 @@ import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 
 /**
+ * Internal implementation that allows to convert Java top-level classes that
+ * are represented as JDTs {@link IType ITypes} to {@link JvmType JvmTypes}.
+ * 
+ * Clients are not supposed to use this class directly but the {@link IJvmTypeProvider}
+ * or {@link TypeReferences} instead. Those will take care of types that are requested more than
+ * once and therefore should return the very same {@link JvmType type} on subsequent queries.
+ * 
+ * @noextend This class is not intended to be subclassed by clients.
+ * @noinstantiate This class is not intended to be instantiated by clients.
  * @author Sebastian Zarnekow - Initial contribution and API
  */
 public class JdtBasedTypeFactory implements ITypeFactory<IType> {
@@ -121,7 +132,7 @@ public class JdtBasedTypeFactory implements ITypeFactory<IType> {
 					+ "', but got '" + binding.toString() + "'.");
 	}
 
-	public JvmDeclaredType createType(ITypeBinding typeBinding) {
+	protected JvmDeclaredType createType(ITypeBinding typeBinding) {
 		if (typeBinding.isAnonymous() || typeBinding.isSynthetic())
 			throw new IllegalStateException("Cannot create type for anonymous or synthetic classes");
 		if (typeBinding.isAnnotation())
@@ -157,11 +168,11 @@ public class JdtBasedTypeFactory implements ITypeFactory<IType> {
 		resolveMembers.stop();
 	}
 
-	public String getQualifiedName(ITypeBinding binding) {
+	protected String getQualifiedName(ITypeBinding binding) {
 		return uriHelper.getQualifiedName(binding);
 	}
 
-	public void createAnnotationValues(IBinding annotated, JvmAnnotationTarget result) {
+	protected void createAnnotationValues(IBinding annotated, JvmAnnotationTarget result) {
 		try {
 			resolveAnnotations.start();
 			if (annotated.getAnnotations().length == 0)
@@ -180,7 +191,7 @@ public class JdtBasedTypeFactory implements ITypeFactory<IType> {
 	/**
 	 * @since 2.4
 	 */
-	public JvmAnnotationReference createAnnotationReference(IAnnotationBinding annotation) {
+	protected JvmAnnotationReference createAnnotationReference(IAnnotationBinding annotation) {
 		JvmAnnotationReference annotationReference = TypesFactory.eINSTANCE.createJvmAnnotationReference();
 		annotationReference.setAnnotation(createAnnotationProxy(annotation.getAnnotationType()));
 		try {
@@ -281,14 +292,14 @@ public class JdtBasedTypeFactory implements ITypeFactory<IType> {
 		return result;
 	}
 
-	public JvmType createProxy(ITypeBinding typeBinding) {
+	protected JvmType createProxy(ITypeBinding typeBinding) {
 		InternalEObject proxy = (InternalEObject) TypesFactory.eINSTANCE.createJvmVoid();
 		URI uri = uriHelper.getFullURI(typeBinding);
 		proxy.eSetProxyURI(uri);
 		return (org.eclipse.xtext.common.types.JvmType) proxy;
 	}
 
-	public JvmType createProxyForType(String fqn) {
+	protected JvmType createProxyForType(String fqn) {
 		InternalEObject proxy = (InternalEObject) TypesFactory.eINSTANCE.createJvmVoid();
 		URI uri = uriHelper.getFullURIForClass(fqn);
 		proxy.eSetProxyURI(uri);
@@ -319,7 +330,7 @@ public class JdtBasedTypeFactory implements ITypeFactory<IType> {
 		return result;
 	}
 
-	public JvmAnnotationValue createAnnotationValue(ITypeBinding type) {
+	protected JvmAnnotationValue createAnnotationValue(ITypeBinding type) {
 		if (String.class.getName().equals(type.getQualifiedName())) {
 			return TypesFactory.eINSTANCE.createJvmStringAnnotationValue();
 		} else if (Class.class.getName().equals(type.getQualifiedName())) {
@@ -348,28 +359,28 @@ public class JdtBasedTypeFactory implements ITypeFactory<IType> {
 			throw new IllegalArgumentException("Unexpected type: " + type);
 	}
 
-	public JvmOperation createMethodProxy(ITypeBinding typeBinding, String methodName) {
+	protected JvmOperation createMethodProxy(ITypeBinding typeBinding, String methodName) {
 		InternalEObject proxy = (InternalEObject) TypesFactory.eINSTANCE.createJvmOperation();
 		URI uri = uriHelper.getFullURI(typeBinding, methodName);
 		proxy.eSetProxyURI(uri);
 		return (JvmOperation) proxy;
 	}
 	
-	public JvmEnumerationLiteral createEnumLiteralProxy(IVariableBinding binding) {
+	protected JvmEnumerationLiteral createEnumLiteralProxy(IVariableBinding binding) {
 		InternalEObject proxy = (InternalEObject) TypesFactory.eINSTANCE.createJvmEnumerationLiteral();
 		URI uri = uriHelper.getFullURI(binding);
 		proxy.eSetProxyURI(uri);
 		return (JvmEnumerationLiteral) proxy;
 	}
 
-	public JvmAnnotationType createAnnotationProxy(ITypeBinding annotation) {
+	protected JvmAnnotationType createAnnotationProxy(ITypeBinding annotation) {
 		InternalEObject proxy = (InternalEObject) TypesFactory.eINSTANCE.createJvmAnnotationType();
 		URI uri = uriHelper.getFullURI(annotation);
 		proxy.eSetProxyURI(uri);
 		return (JvmAnnotationType) proxy;
 	}
 
-	public void setSuperTypes(ITypeBinding binding, JvmDeclaredType result) {
+	protected void setSuperTypes(ITypeBinding binding, JvmDeclaredType result) {
 		if (binding.getSuperclass() != null) {
 			result.getSuperTypes().add(createTypeReference(binding.getSuperclass()));
 		} 
@@ -381,7 +392,7 @@ public class JdtBasedTypeFactory implements ITypeFactory<IType> {
 		}
 	}
 
-	public void createMethods(ITypeBinding typeBinding, JvmDeclaredType result) {
+	protected void createMethods(ITypeBinding typeBinding, JvmDeclaredType result) {
 		resolveMembers.start();
 		for (IMethodBinding method : typeBinding.getDeclaredMethods()) {
 			if (!method.isSynthetic() && !"<clinit>".equals(method.getName())) {
@@ -417,7 +428,7 @@ public class JdtBasedTypeFactory implements ITypeFactory<IType> {
 		}
 	}
 
-	public void createNestedTypes(ITypeBinding typeBinding, JvmDeclaredType result) {
+	protected void createNestedTypes(ITypeBinding typeBinding, JvmDeclaredType result) {
 		resolveMembers.start();
 		for (ITypeBinding declaredType : typeBinding.getDeclaredTypes()) {
 			if (!declaredType.isAnonymous() && !declaredType.isSynthetic()) {
@@ -427,14 +438,14 @@ public class JdtBasedTypeFactory implements ITypeFactory<IType> {
 		resolveMembers.stop();
 	}
 
-	public void setTypeModifiers(ITypeBinding binding, JvmDeclaredType result) {
+	protected void setTypeModifiers(ITypeBinding binding, JvmDeclaredType result) {
 		result.setAbstract(Modifier.isAbstract(binding.getModifiers()));
 		result.setStatic(Modifier.isStatic(binding.getModifiers()));
 		if (!(result instanceof JvmEnumerationType))
 			result.setFinal(Modifier.isFinal(binding.getModifiers()));
 	}
 
-	public JvmAnnotationType createAnnotationType(ITypeBinding binding) {
+	protected JvmAnnotationType createAnnotationType(ITypeBinding binding) {
 		JvmAnnotationType result = TypesFactory.eINSTANCE.createJvmAnnotationType();
 		result.internalSetIdentifier(getQualifiedName(binding));
 		result.setSimpleName(binding.getName());
@@ -449,7 +460,7 @@ public class JdtBasedTypeFactory implements ITypeFactory<IType> {
 		return result;
 	}
 
-	public JvmEnumerationType createEnumerationType(ITypeBinding binding) {
+	protected JvmEnumerationType createEnumerationType(ITypeBinding binding) {
 		JvmEnumerationType result = TypesFactory.eINSTANCE.createJvmEnumerationType();
 		result.internalSetIdentifier(getQualifiedName(binding));
 		result.setSimpleName(binding.getName());
@@ -465,7 +476,7 @@ public class JdtBasedTypeFactory implements ITypeFactory<IType> {
 		return result;
 	}
 
-	public JvmTypeParameter createTypeParameter(ITypeBinding parameter, JvmMember container) {
+	protected JvmTypeParameter createTypeParameter(ITypeBinding parameter, JvmMember container) {
 		resolveTypeParams.start();
 		JvmTypeParameter result = TypesFactory.eINSTANCE.createJvmTypeParameter();
 		result.setName(parameter.getName());
@@ -484,7 +495,7 @@ public class JdtBasedTypeFactory implements ITypeFactory<IType> {
 		return result;
 	}
 
-	public JvmTypeReference createTypeReference(ITypeBinding typeBinding) {
+	protected JvmTypeReference createTypeReference(ITypeBinding typeBinding) {
 		if (typeBinding.isArray()) {
 			ITypeBinding componentType = typeBinding.getComponentType();
 			JvmTypeReference componentTypeReference = createTypeReference(componentType);
@@ -509,13 +520,13 @@ public class JdtBasedTypeFactory implements ITypeFactory<IType> {
 		}
 	}
 
-	public JvmTypeReference createTypeReference(String qualifiedName) {
+	protected JvmTypeReference createTypeReference(String qualifiedName) {
 		JvmParameterizedTypeReference result = TypesFactory.eINSTANCE.createJvmParameterizedTypeReference();
 		result.setType(createProxyForType(qualifiedName));
 		return result;
 	}
 
-	public JvmTypeReference createTypeArgument(ITypeBinding argument) {
+	protected JvmTypeReference createTypeArgument(ITypeBinding argument) {
 		if (argument.isWildcardType()) {
 			JvmWildcardTypeReference result = TypesFactory.eINSTANCE.createJvmWildcardTypeReference();
 			if (argument.getBound() == null) {
@@ -547,7 +558,7 @@ public class JdtBasedTypeFactory implements ITypeFactory<IType> {
 		}
 	}
 
-	public JvmField createField(IVariableBinding field) {
+	protected JvmField createField(IVariableBinding field) {
 		JvmField result;
 		if (!field.isEnumConstant())
 			result = TypesFactory.eINSTANCE.createJvmField();
@@ -565,7 +576,7 @@ public class JdtBasedTypeFactory implements ITypeFactory<IType> {
 		return result;
 	}
 
-	public void setVisibility(JvmMember result, int modifiers) {
+	protected void setVisibility(JvmMember result, int modifiers) {
 		if (Modifier.isPrivate(modifiers))
 			result.setVisibility(JvmVisibility.PRIVATE);
 		else if (Modifier.isProtected(modifiers))
@@ -576,7 +587,7 @@ public class JdtBasedTypeFactory implements ITypeFactory<IType> {
 			result.setVisibility(JvmVisibility.DEFAULT);
 	}
 
-	public JvmConstructor createConstructor(IMethodBinding method) {
+	protected JvmConstructor createConstructor(IMethodBinding method) {
 		JvmConstructor result = TypesFactory.eINSTANCE.createJvmConstructor();
 		enhanceGenericDeclaration(result, method.getTypeParameters());
 		enhanceExecutable(result, method);
@@ -584,7 +595,7 @@ public class JdtBasedTypeFactory implements ITypeFactory<IType> {
 		return result;
 	}
 	
-	public void enhanceExecutable(JvmExecutable result, IMethodBinding method) {
+	protected void enhanceExecutable(JvmExecutable result, IMethodBinding method) {
 		StringBuilder fqName = new StringBuilder(48);
 		fqName.append(getQualifiedName(method.getDeclaringClass()));
 		fqName.append('.');
@@ -679,13 +690,13 @@ public class JdtBasedTypeFactory implements ITypeFactory<IType> {
 		
 	}
 
-	public void enhanceGenericDeclaration(JvmExecutable result, ITypeBinding[] parameters) {
+	protected void enhanceGenericDeclaration(JvmExecutable result, ITypeBinding[] parameters) {
 		for (ITypeBinding parameter : parameters) {
 			result.getTypeParameters().add(createTypeParameter(parameter, result));
 		}
 	}
 
-	public JvmOperation createOperation(IMethodBinding method) {
+	protected JvmOperation createOperation(IMethodBinding method) {
 		JvmOperation result = TypesFactory.eINSTANCE.createJvmOperation();
 		enhanceGenericDeclaration(result, method.getTypeParameters());
 		enhanceExecutable(result, method);
@@ -697,7 +708,7 @@ public class JdtBasedTypeFactory implements ITypeFactory<IType> {
 		return result;
 	}
 
-	public JvmFormalParameter createFormalParameter(ITypeBinding parameterType, String paramName, IAnnotationBinding[] annotations) {
+	protected JvmFormalParameter createFormalParameter(ITypeBinding parameterType, String paramName, IAnnotationBinding[] annotations) {
 		JvmFormalParameter result = TypesFactory.eINSTANCE.createJvmFormalParameter();
 		if (paramName != null)
 			result.setName(paramName);
