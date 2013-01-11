@@ -76,10 +76,13 @@ public class XbaseExpectedTypeProviderTest2 extends XbaseExpectedTypeProviderTes
 		XForLoopExpression loop = (XForLoopExpression) expression("for (java.lang.String x : new Object) null");
 		assertExpected("java.lang.Iterable<? extends java.lang.String> | java.lang.String[]", loop.getForExpression());
 	}
-	
 	@Test public void testForLoopExpression_2_b() throws Exception {
 		XForLoopExpression loop = (XForLoopExpression) expression("for (int x : new Object) null");
 		assertExpected("int[] | java.lang.Iterable<? extends java.lang.Integer> | java.lang.Integer[]", loop.getForExpression());
+	}
+	@Test public void testForLoopExpression_2_c() throws Exception {
+		XForLoopExpression loop = (XForLoopExpression) expression("for (double x : null as Iterable<? super Integer>) null");
+		assertExpected("double[] | java.lang.Iterable<? extends java.lang.Double> | java.lang.Double[]", loop.getForExpression());
 	}
 
 	// testForLoopExpression_3_*:
@@ -112,5 +115,34 @@ public class XbaseExpectedTypeProviderTest2 extends XbaseExpectedTypeProviderTes
 		XForLoopExpression loop = (XForLoopExpression) expression("for (java.lang.String x : null as Iterable<? extends String>) null");
 		assertExpected("java.lang.Iterable<? extends java.lang.String>", loop.getForExpression());
 	}
+	@Test public void testForLoopExpression_3_h() throws Exception {
+		XForLoopExpression loop = (XForLoopExpression) expression("for (Object x : null as Iterable<? super Integer>) null");
+		assertExpected("java.lang.Iterable<? extends java.lang.Object & super java.lang.Integer>", loop.getForExpression());
+	}
+	
+	// testForLoopExpression_4_*:
+	// if the expected component type is compatible, the expectation of the for expression is refined to 
+	// to what it actually is
+	@Test public void testForLoopExpression_4_a() throws Exception {
+		XForLoopExpression loop = (XForLoopExpression) expression("for (Object x : null as double[]) null");
+		assertExpected("double[]", loop.getForExpression());
+	}
+	@Test public void testForLoopExpression_4_b() throws Exception {
+		XForLoopExpression loop = (XForLoopExpression) expression("for (double x : null as int[]) null");
+		assertExpected("int[]", loop.getForExpression());
+	}
+	@Test public void testForLoopExpression_4_c() throws Exception {
+		XForLoopExpression loop = (XForLoopExpression) expression("for (double x : null as Integer[]) null");
+		assertExpected("java.lang.Integer[]", loop.getForExpression());
+	}
+	@Test public void testForLoopExpression_4_d() throws Exception {
+		XForLoopExpression loop = (XForLoopExpression) expression("for (double x : null as Iterable<Integer>) null");
+		assertExpected("java.lang.Iterable<java.lang.Integer>", loop.getForExpression());
+	}
+	@Test public void testForLoopExpression_4_e() throws Exception {
+		XForLoopExpression loop = (XForLoopExpression) expression("for (double x : null as Iterable<? extends Integer>) null");
+		assertExpected("java.lang.Iterable<? extends java.lang.Integer>", loop.getForExpression());
+	}
+	
 	
 }
