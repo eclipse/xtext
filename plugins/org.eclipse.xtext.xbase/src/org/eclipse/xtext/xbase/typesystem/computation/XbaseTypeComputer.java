@@ -14,7 +14,6 @@ import java.util.Set;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.NonNullByDefault;
-import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.common.types.JvmField;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmGenericType;
@@ -319,6 +318,28 @@ public class XbaseTypeComputer implements ITypeComputer {
 	}
 
 	protected void _computeTypes(XCastedExpression object, ITypeComputationState state) {
+		// TODO: should we hold on the previously known expression?
+		/* 
+		 * ('foo' as CharSequence) as NullPointerException
+		 * In this case, we know - even though it's CharSequence on the Java side - 
+		 * that the type of ('foo' as CharSequence) is still a String
+		 * which is not conformant to NPE. The subsequent cast will always fail at
+		 * runtime. This could be detected.
+		 * 
+		 * It could be interesting to have a subtype of MultiTypeReference, e.g. CastedTypeReference
+		 * that still knows about the original type. This would be similar to a nested switch
+		 * with the difference, that we want to know which type to use on the Java side in order
+		 * to disambiguate overloaded methods:
+		 * 
+		 * m(Object o) {} // 1
+		 * m(String s) {}
+		 * 
+		 * {
+		 *   val o = '' as Object
+		 *   m('' as Object) // calls 1
+		 *   o.substring(1) // valid, too - compiler could insert the cast back to String
+		 * }
+		 */
 		state.withNonVoidExpectation().computeTypes(object.getTarget());
 		state.acceptActualType(state.getConverter().toLightweightReference(object.getType()));
 	}

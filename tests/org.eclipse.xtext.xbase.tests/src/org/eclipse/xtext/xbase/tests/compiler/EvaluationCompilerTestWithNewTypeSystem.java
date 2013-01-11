@@ -34,6 +34,13 @@ public class EvaluationCompilerTestWithNewTypeSystem extends EvaluationCompilerT
 	public void testBlock_02() throws Exception {
 		super.testBlock_02();
 	}
+	
+	// re-enabled
+	@Override
+	@Test
+	public void testForLoop_16() throws Exception {
+		super.testForLoop_16();
+	}
 
 	// re-enabled
 	@Override
