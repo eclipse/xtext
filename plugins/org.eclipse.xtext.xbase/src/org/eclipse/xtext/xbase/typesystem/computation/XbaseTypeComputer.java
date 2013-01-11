@@ -393,8 +393,17 @@ public class XbaseTypeComputer implements ITypeComputer {
 			LightweightTypeReference forExpressionType = forExpressionResult.getActualExpressionType();
 			if (forExpressionType.isAny()) {
 				iterableState.refineExpectedType(object.getForExpression(), iterableOrArray);
-			} else if (forExpressionType.isResolved() && iterableOrArray.isAssignableFrom(forExpressionType)) {
-				iterableState.refineExpectedType(object.getForExpression(), forExpressionType);
+			} else if (forExpressionType.isResolved()) {
+				if (iterableOrArray.isAssignableFrom(forExpressionType))
+					iterableState.refineExpectedType(object.getForExpression(), forExpressionType);
+				else {
+					ArrayTypeReference array = forExpressionType.tryConvertToArray();
+					if (array != null) {
+						if (parameterType.isAssignableFrom(array.getComponentType())) {
+							iterableState.refineExpectedType(object.getForExpression(), forExpressionType);
+						}
+					}
+				}
 			}
 		} else {
 			WildcardTypeReference wildcard = new WildcardTypeReference(state.getReferenceOwner());
