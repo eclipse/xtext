@@ -2344,6 +2344,48 @@ abstract class AbstractXtendCompilerTest extends AbstractXtendTestCase {
         XtendCompilerTest::assertEquals(expectedBazClass.toString, bazJavaCode.toString);
     }
     
+    /*
+     * see https://bugs.eclipse.org/bugs/show_bug.cgi?id=391077
+     */
+    @Test def void testBug391077() {
+    	assertCompilesTo('''
+			class TestError {
+			    def Void voidObjectReturned() {
+			    }
+			    
+			    def void sampleMethod() {
+			        try {
+			            voidObjectReturned
+			        } catch (Exception e) {
+			            Integer::parseInt('1')
+			        }
+			    }
+			}
+    	''','''
+			import org.eclipse.xtext.xbase.lib.Exceptions;
+			
+			@SuppressWarnings("all")
+			public class TestError {
+			  public Void voidObjectReturned() {
+			    return null;
+			  }
+			  
+			  public void sampleMethod() {
+			    try {
+			      this.voidObjectReturned();
+			    } catch (final Throwable _t) {
+			      if (_t instanceof Exception) {
+			        final Exception e = (Exception)_t;
+			        Integer.parseInt("1");
+			      } else {
+			        throw Exceptions.sneakyThrow(_t);
+			      }
+			    }
+			  }
+			}
+    	''')
+    }
+    
 	def assertCompilesTo(CharSequence input, CharSequence expected) {
 		val file = file(input.toString(), true)
 		val inferredType = file.eResource.contents.filter(typeof(JvmDeclaredType)).head
@@ -2355,6 +2397,10 @@ abstract class AbstractXtendCompilerTest extends AbstractXtendTestCase {
 }
 
 class XtendCompilerTest extends AbstractXtendCompilerTest {
+	
+	@Ignore @Test override testBug391077() {
+		super.testBug391077()
+	}
 	
 	/*
 	 * Refined questionable expectation.
