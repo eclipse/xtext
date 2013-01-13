@@ -98,12 +98,14 @@ import org.eclipse.xtext.xbase.compiler.XbaseCompiler;
 import org.eclipse.xtext.xbase.compiler.output.ITreeAppendable;
 import org.eclipse.xtext.xbase.compiler.output.TreeAppendable;
 import org.eclipse.xtext.xbase.jvmmodel.IJvmModelAssociations;
+import org.eclipse.xtext.xbase.jvmmodel.IJvmModelInferrer;
 import org.eclipse.xtext.xbase.jvmmodel.ILogicalContainerProvider;
 import org.eclipse.xtext.xbase.jvmmodel.JvmTypeExtensions;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Functions.Function0;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
+import org.eclipse.xtext.xbase.lib.InputOutput;
 import org.eclipse.xtext.xbase.lib.IntegerRange;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
@@ -1146,7 +1148,6 @@ public class JvmModelGenerator implements IGenerator {
           StringReader _stringReader = new StringReader(text);
           BufferedReader _bufferedReader = new BufferedReader(_stringReader);
           final BufferedReader reader = _bufferedReader;
-          int lineOffset = 0;
           String lineString = reader.readLine();
           for (final INode node_1 : documentationNodes) {
             {
@@ -1187,14 +1188,17 @@ public class JvmModelGenerator implements IGenerator {
                   boolean _while_1 = _equals;
                   while (_while_1) {
                     {
+                      InputOutput.println();
                       int _length_2 = nodeLine.length();
                       int _plus_1 = (nodeLineOffset + _length_2);
-                      nodeLineOffset = _plus_1;
+                      int _plus_2 = (_plus_1 + 1);
+                      nodeLineOffset = _plus_2;
                       String _readLine = nodeReader.readLine();
                       nodeLine = _readLine;
                       int _length_3 = nodeLine.length();
-                      int _plus_2 = (nodeLineOffset + _length_3);
-                      nodeLineEndOffset = _plus_2;
+                      int _plus_3 = (nodeLineOffset + _length_3);
+                      int _plus_4 = (_plus_3 + 1);
+                      nodeLineEndOffset = _plus_4;
                       int _indexOf = nodeLine.indexOf(lineString);
                       index = _indexOf;
                     }
@@ -1235,9 +1239,9 @@ public class JvmModelGenerator implements IGenerator {
                         int _offset_2 = region.getOffset();
                         int _minus_1 = (_offset_2 - nodeOffset);
                         int _minus_2 = (_minus_1 - nodeLineOffset);
-                        int _minus_3 = (_minus_2 - index);
-                        final int lineRelativeOffsetOfRegion = (_minus_3 - 1);
+                        final int lineRelativeOffsetOfRegion = (_minus_2 - index);
                         final String stringBefore = lineString.substring(lastOffsetInLine, lineRelativeOffsetOfRegion);
+                        InputOutput.println();
                         parentAppendable.append(stringBefore);
                         final int startLine = node_1.getStartLine();
                         String _substring = nodeText.substring(0, realOffset);
@@ -1274,42 +1278,30 @@ public class JvmModelGenerator implements IGenerator {
                         lastOffsetInLine = _plus_2;
                       }
                     }
-                    try {
+                    int _length_2 = lineString.length();
+                    boolean _greaterThan_1 = (_length_2 > lastOffsetInLine);
+                    if (_greaterThan_1) {
                       final String substring = lineString.substring(lastOffsetInLine);
                       parentAppendable.append(substring);
-                    } catch (final Throwable _t) {
-                      if (_t instanceof StringIndexOutOfBoundsException) {
-                        final StringIndexOutOfBoundsException e = (StringIndexOutOfBoundsException)_t;
-                        String _plus_1 = ("line String was : \'" + lineString);
-                        String _plus_2 = (_plus_1 + "\'.");
-                        JvmModelGenerator.log.error(_plus_2, e);
-                      } else {
-                        throw Exceptions.sneakyThrow(_t);
-                      }
                     }
                   } else {
                     parentAppendable.append(lineString);
                   }
-                  int _length_2 = nodeLine.length();
-                  int _plus_3 = (nodeLineOffset + _length_2);
-                  nodeLineOffset = _plus_3;
+                  int _length_3 = nodeLine.length();
+                  int _plus_1 = (nodeLineOffset + _length_3);
+                  int _plus_2 = (_plus_1 + 1);
+                  nodeLineOffset = _plus_2;
                   String _readLine = nodeReader.readLine();
                   nodeLine = _readLine;
                   boolean _notEquals_2 = ObjectExtensions.operator_notEquals(nodeLine, null);
                   if (_notEquals_2) {
-                    int _length_3 = nodeLine.length();
-                    int _plus_4 = (nodeLineOffset + _length_3);
+                    int _length_4 = nodeLine.length();
+                    int _plus_3 = (nodeLineOffset + _length_4);
+                    int _plus_4 = (_plus_3 + 1);
                     nodeLineEndOffset = _plus_4;
                   }
-                  lineOffset = 0;
                   String _readLine_1 = reader.readLine();
                   lineString = _readLine_1;
-                  boolean _notEquals_3 = ObjectExtensions.operator_notEquals(lineString, null);
-                  if (_notEquals_3) {
-                    int _length_4 = lineString.length();
-                    int _plus_5 = (lineOffset + _length_4);
-                    lineOffset = _plus_5;
-                  }
                 }
                 boolean _and_1 = false;
                 boolean _notEquals_2 = ObjectExtensions.operator_notEquals(nodeLine, null);

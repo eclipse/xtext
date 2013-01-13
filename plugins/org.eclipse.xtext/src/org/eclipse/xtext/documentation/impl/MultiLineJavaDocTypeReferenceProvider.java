@@ -26,32 +26,36 @@ public class MultiLineJavaDocTypeReferenceProvider implements IJavaDocTypeRefere
 	public List<ReplaceRegion> computeTypeRefRegions(INode node) {
 		List<ReplaceRegion> regions = Lists.newArrayList();
 		Iterable<ILeafNode> leafNodes = node.getLeafNodes();
-		computeRegions(regions, leafNodes, "@link ", " ", "#");
-		computeRegions(regions, leafNodes, "@see ", " " , "#");
+		computeRegions(regions, leafNodes, "@link ", " ", "}", "#");
+		computeRegions(regions, leafNodes, "@see ", " " , "#", null);
 		return regions;
 	}
 
 	public List<ReplaceRegion> computeParameterTypeRefRegions(INode node) {
 		List<ReplaceRegion> regions = Lists.newArrayList();
 		Iterable<ILeafNode> leafNodes = node.getLeafNodes();
-		computeRegions(regions, leafNodes, "@param ", " ", "-");
+		computeRegions(regions, leafNodes, "@param ", " ", "-", null);
 		return regions;
 	}
 
-	protected void computeRegions(List<ReplaceRegion> regions, Iterable<ILeafNode> leafNodes, String start, String end, String optionalEnd) {
+	protected void computeRegions(List<ReplaceRegion> regions, Iterable<ILeafNode> leafNodes, String start, String end, String optionalEnd, String optionalEnd2) {
 		for (ILeafNode leafNode : leafNodes) {
 			String text = leafNode.getText();
 			int offset = leafNode.getOffset();
 			int position = text.indexOf(start);
 			while (position != -1) {
 				int beginIndex = position + start.length();
-				int endLink = text.indexOf(optionalEnd, beginIndex);
+				int endLink = -1;
+				if(optionalEnd2 != null && endLink == -1)
+					endLink = text.indexOf(optionalEnd2, beginIndex);
+				if(optionalEnd != null && endLink == -1)
+					endLink = text.indexOf(optionalEnd, beginIndex);
 				if(endLink == -1)
 					endLink = text.indexOf(end, beginIndex);
 				if (endLink == -1) { 
 					break;
 				} else {
-					String simpleName = text.substring(beginIndex, endLink).trim();
+					String simpleName = text.substring(beginIndex, endLink);
 					ReplaceRegion region = new ReplaceRegion(offset + beginIndex, simpleName.length(), simpleName);
 					regions.add(region);
 				} 
