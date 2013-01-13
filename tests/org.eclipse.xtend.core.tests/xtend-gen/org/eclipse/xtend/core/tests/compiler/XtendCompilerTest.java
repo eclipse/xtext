@@ -2,10 +2,17 @@ package org.eclipse.xtend.core.tests.compiler;
 
 import org.eclipse.xtend.core.tests.compiler.AbstractXtendCompilerTest;
 import org.eclipse.xtend2.lib.StringConcatenation;
+import org.junit.Ignore;
 import org.junit.Test;
 
 @SuppressWarnings("all")
 public class XtendCompilerTest extends AbstractXtendCompilerTest {
+  @Ignore
+  @Test
+  public void testBug391077() {
+    super.testBug391077();
+  }
+  
   /**
    * Refined questionable expectation.
    */

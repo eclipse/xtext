@@ -4986,6 +4986,105 @@ public abstract class AbstractXtendCompilerTest extends AbstractXtendTestCase {
     }
   }
   
+  /**
+   * see https://bugs.eclipse.org/bugs/show_bug.cgi?id=391077
+   */
+  @Test
+  public void testBug391077() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("class TestError {");
+    _builder.newLine();
+    _builder.append("    ");
+    _builder.append("def Void voidObjectReturned() {");
+    _builder.newLine();
+    _builder.append("    ");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("    ");
+    _builder.newLine();
+    _builder.append("    ");
+    _builder.append("def void sampleMethod() {");
+    _builder.newLine();
+    _builder.append("        ");
+    _builder.append("try {");
+    _builder.newLine();
+    _builder.append("            ");
+    _builder.append("voidObjectReturned");
+    _builder.newLine();
+    _builder.append("        ");
+    _builder.append("} catch (Exception e) {");
+    _builder.newLine();
+    _builder.append("            ");
+    _builder.append("Integer::parseInt(\'1\')");
+    _builder.newLine();
+    _builder.append("        ");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("    ");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("import org.eclipse.xtext.xbase.lib.Exceptions;");
+    _builder_1.newLine();
+    _builder_1.newLine();
+    _builder_1.append("@SuppressWarnings(\"all\")");
+    _builder_1.newLine();
+    _builder_1.append("public class TestError {");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("public Void voidObjectReturned() {");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("return null;");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("public void sampleMethod() {");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("try {");
+    _builder_1.newLine();
+    _builder_1.append("      ");
+    _builder_1.append("this.voidObjectReturned();");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("} catch (final Throwable _t) {");
+    _builder_1.newLine();
+    _builder_1.append("      ");
+    _builder_1.append("if (_t instanceof Exception) {");
+    _builder_1.newLine();
+    _builder_1.append("        ");
+    _builder_1.append("final Exception e = (Exception)_t;");
+    _builder_1.newLine();
+    _builder_1.append("        ");
+    _builder_1.append("Integer.parseInt(\"1\");");
+    _builder_1.newLine();
+    _builder_1.append("      ");
+    _builder_1.append("} else {");
+    _builder_1.newLine();
+    _builder_1.append("        ");
+    _builder_1.append("throw Exceptions.sneakyThrow(_t);");
+    _builder_1.newLine();
+    _builder_1.append("      ");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    this.assertCompilesTo(_builder, _builder_1);
+  }
+  
   public void assertCompilesTo(final CharSequence input, final CharSequence expected) {
     try {
       String _string = input.toString();
