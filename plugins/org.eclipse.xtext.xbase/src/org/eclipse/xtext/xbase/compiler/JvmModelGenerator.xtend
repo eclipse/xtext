@@ -78,6 +78,8 @@ import org.eclipse.xtext.documentation.IJavaDocTypeReferenceProvider
 import org.eclipse.xtext.resource.XtextResource
 import java.io.BufferedReader
 import java.io.StringReader
+import java.lang.StringIndexOutOfBoundsException
+import org.apache.log4j.Logger
 
 /**
  * A generator implementation that processes the 
@@ -85,6 +87,8 @@ import java.io.StringReader
  * and produces the respective java code.
  */
 class JvmModelGenerator implements IGenerator {
+
+	static val log = Logger::getLogger(typeof(JvmModelGenerator)) 
 
 	@Inject extension ILogicalContainerProvider
 	@Inject extension TypeReferences 
@@ -567,7 +571,6 @@ class JvmModelGenerator implements IGenerator {
 	} 
 	
 	def protected generateDocumentation(String text, List<INode> documentationNodes, ITreeAppendable appendable) {
-
 		if (!documentationNodes.empty) {
 			var documentationTrace = ITextRegionWithLineInformation::EMPTY_REGION
 			for(node: documentationNodes) {
@@ -621,7 +624,15 @@ class JvmModelGenerator implements IGenerator {
 
 						}
 						// Rest
-						parentAppendable.append(lineString.substring(lastOffsetInLine))
+						try {
+							//TODO this is a temporary catch see https://bugs.eclipse.org/bugs/show_bug.cgi?id=397992
+							val substring = lineString.substring(lastOffsetInLine)
+							parentAppendable.append(
+								substring
+							)
+						} catch (StringIndexOutOfBoundsException e) {
+							log.error("line String was : '"+lineString+"'.", e)
+						} 
 
 					} else {
 						parentAppendable.append(lineString)
