@@ -1,10 +1,10 @@
-/*******************************************************************************
+/**
  * Copyright (c) 2012 itemis AG (http://www.itemis.eu) and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- *******************************************************************************/
+ */
 package org.eclipse.xtext.xbase.compiler;
 
 import com.google.common.base.Objects;
@@ -17,6 +17,7 @@ import java.util.Collection;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Set;
+import org.apache.log4j.Logger;
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
@@ -101,6 +102,7 @@ import org.eclipse.xtext.xbase.jvmmodel.ILogicalContainerProvider;
 import org.eclipse.xtext.xbase.jvmmodel.JvmTypeExtensions;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Exceptions;
+import org.eclipse.xtext.xbase.lib.Functions.Function0;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IntegerRange;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
@@ -116,6 +118,13 @@ import org.eclipse.xtext.xbase.lib.StringExtensions;
  */
 @SuppressWarnings("all")
 public class JvmModelGenerator implements IGenerator {
+  private final static Logger log = new Function0<Logger>() {
+    public Logger apply() {
+      Logger _logger = Logger.getLogger(JvmModelGenerator.class);
+      return _logger;
+    }
+  }.apply();
+  
   @Inject
   private ILogicalContainerProvider _iLogicalContainerProvider;
   
@@ -513,8 +522,8 @@ public class JvmModelGenerator implements IGenerator {
   }
   
   /**
-	 * Returns the visibility modifier and a space as suffix if not empty
-	 */
+   * Returns the visibility modifier and a space as suffix if not empty
+   */
   public String javaName(final JvmVisibility visibility) {
     boolean _notEquals = ObjectExtensions.operator_notEquals(visibility, null);
     if (_notEquals) {
@@ -1265,21 +1274,32 @@ public class JvmModelGenerator implements IGenerator {
                         lastOffsetInLine = _plus_2;
                       }
                     }
-                    String _substring = lineString.substring(lastOffsetInLine);
-                    parentAppendable.append(_substring);
+                    try {
+                      final String substring = lineString.substring(lastOffsetInLine);
+                      parentAppendable.append(substring);
+                    } catch (final Throwable _t) {
+                      if (_t instanceof StringIndexOutOfBoundsException) {
+                        final StringIndexOutOfBoundsException e = (StringIndexOutOfBoundsException)_t;
+                        String _plus_1 = ("line String was : \'" + lineString);
+                        String _plus_2 = (_plus_1 + "\'.");
+                        JvmModelGenerator.log.error(_plus_2, e);
+                      } else {
+                        throw Exceptions.sneakyThrow(_t);
+                      }
+                    }
                   } else {
                     parentAppendable.append(lineString);
                   }
                   int _length_2 = nodeLine.length();
-                  int _plus_1 = (nodeLineOffset + _length_2);
-                  nodeLineOffset = _plus_1;
+                  int _plus_3 = (nodeLineOffset + _length_2);
+                  nodeLineOffset = _plus_3;
                   String _readLine = nodeReader.readLine();
                   nodeLine = _readLine;
                   boolean _notEquals_2 = ObjectExtensions.operator_notEquals(nodeLine, null);
                   if (_notEquals_2) {
                     int _length_3 = nodeLine.length();
-                    int _plus_2 = (nodeLineOffset + _length_3);
-                    nodeLineEndOffset = _plus_2;
+                    int _plus_4 = (nodeLineOffset + _length_3);
+                    nodeLineEndOffset = _plus_4;
                   }
                   lineOffset = 0;
                   String _readLine_1 = reader.readLine();
@@ -1287,8 +1307,8 @@ public class JvmModelGenerator implements IGenerator {
                   boolean _notEquals_3 = ObjectExtensions.operator_notEquals(lineString, null);
                   if (_notEquals_3) {
                     int _length_4 = lineString.length();
-                    int _plus_3 = (lineOffset + _length_4);
-                    lineOffset = _plus_3;
+                    int _plus_5 = (lineOffset + _length_4);
+                    lineOffset = _plus_5;
                   }
                 }
                 boolean _and_1 = false;
