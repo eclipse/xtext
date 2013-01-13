@@ -1,10 +1,10 @@
-/*******************************************************************************
+/**
  * Copyright (c) 2012 itemis AG (http://www.itemis.eu) and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- *******************************************************************************/
+ */
 package org.eclipse.xtend.core.macro;
 
 import com.google.inject.Inject;
@@ -36,8 +36,8 @@ public class AnnotationProcessor {
   private Provider<ModifyContextImpl> modifyContextProvider;
   
   /**
-  	 * gets called from Xtend compiler, during "model inference", i.e. translation of Xtend AST to Java AST
-  	 */
+   * gets called from Xtend compiler, during "model inference", i.e. translation of Xtend AST to Java AST
+   */
   public Object indexingPhase(final ActiveAnnotationContext ctx, final IAcceptor<JvmDeclaredType> acceptor, final CancelIndicator monitor) {
     Object _switchResult = null;
     Object _processorInstance = ctx.getProcessorInstance();
