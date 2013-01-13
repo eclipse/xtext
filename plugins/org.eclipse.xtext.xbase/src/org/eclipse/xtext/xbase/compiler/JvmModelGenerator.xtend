@@ -579,7 +579,6 @@ class JvmModelGenerator implements IGenerator {
 			val parentAppendable = appendable.trace(new LocationData(documentationTrace, null, null))
 			parentAppendable.append("/**")
 			val reader =  new BufferedReader(new StringReader(text))
-			var lineOffset = 0
 			var lineString = reader.readLine
 			for(node: documentationNodes) {
 				val context = NodeModelUtils::findActualSemanticObjectFor(node)
@@ -593,9 +592,10 @@ class JvmModelGenerator implements IGenerator {
 				while(nodeLine != null && lineString != null){
 					var index = nodeLine.indexOf(lineString)
 					while(index == -1){
-						nodeLineOffset = nodeLineOffset + nodeLine.length
+						println
+						nodeLineOffset = nodeLineOffset + nodeLine.length + 1
 						nodeLine = nodeReader.readLine
-						nodeLineEndOffset = nodeLineOffset + nodeLine.length
+						nodeLineEndOffset = nodeLineOffset + nodeLine.length + 1
 						index = nodeLine.indexOf(lineString)
 					}
 					parentAppendable.newLine.append(" * ")
@@ -606,8 +606,9 @@ class JvmModelGenerator implements IGenerator {
 					if(regions.size > 0){
 						for(region : validRegions){
 							val realOffset = region.offset - nodeOffset
-							val lineRelativeOffsetOfRegion = region.offset - nodeOffset - nodeLineOffset - index -1
+							val lineRelativeOffsetOfRegion = region.offset - nodeOffset - nodeLineOffset - index
 							val stringBefore = lineString.substring(lastOffsetInLine, lineRelativeOffsetOfRegion)
+							println
 							parentAppendable.append(stringBefore)
 							val startLine = node.startLine
 							val positionStartLine = startLine + Strings::countLines(nodeText.substring(0, realOffset));
@@ -623,29 +624,23 @@ class JvmModelGenerator implements IGenerator {
 							lastOffsetInLine = lineRelativeOffsetOfRegion + region.length
 
 						}
-						// Rest
-						try {
-							//TODO this is a temporary catch see https://bugs.eclipse.org/bugs/show_bug.cgi?id=397992
+						if(lineString.length > lastOffsetInLine){
 							val substring = lineString.substring(lastOffsetInLine)
 							parentAppendable.append(
 								substring
 							)
-						} catch (StringIndexOutOfBoundsException e) {
-							log.error("line String was : '"+lineString+"'.", e)
-						} 
+						}
+
 
 					} else {
 						parentAppendable.append(lineString)
 					}
 
-					nodeLineOffset = nodeLineOffset + nodeLine.length
+					nodeLineOffset = nodeLineOffset + nodeLine.length + 1
 					nodeLine = nodeReader.readLine
 					if(nodeLine != null)
-						nodeLineEndOffset = nodeLineOffset + nodeLine.length
-					lineOffset = 0
+						nodeLineEndOffset = nodeLineOffset + nodeLine.length + 1
 					lineString = reader.readLine
-					if(lineString != null)
-						lineOffset = lineOffset + lineString.length
 				}
 			}
 			parentAppendable.newLine.append(" */")
