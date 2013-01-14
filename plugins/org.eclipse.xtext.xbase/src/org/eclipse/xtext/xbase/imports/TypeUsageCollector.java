@@ -7,6 +7,8 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.imports;
 
+import static com.google.common.collect.Iterables.*;
+
 import java.util.List;
 import java.util.Set;
 
@@ -26,6 +28,7 @@ import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.JvmWildcardTypeReference;
 import org.eclipse.xtext.common.types.TypesFactory;
 import org.eclipse.xtext.common.types.TypesPackage;
+import org.eclipse.xtext.common.types.util.FeatureOverridesService;
 import org.eclipse.xtext.common.types.util.SuperTypeCollector;
 import org.eclipse.xtext.common.types.util.TypeReferences;
 import org.eclipse.xtext.documentation.IEObjectDocumentationProvider;
@@ -84,7 +87,7 @@ public class TypeUsageCollector {
 	
 	@Inject
 	private TypeUsages typeUsages;
-
+	
 	private JvmDeclaredType currentThisType;
 	
 	private JvmMember currentContext;
@@ -157,13 +160,15 @@ public class TypeUsageCollector {
 					|| next instanceof XAssignment) {
 				final XAbstractFeatureCall featureCall = (XAbstractFeatureCall) next;
 				final JvmIdentifiableElement member = featureCall.getFeature();
-				if (member instanceof JvmOperation) {
-					if (((JvmOperation) member).isStatic())
-						acceptStaticExtensionImport((JvmMember) member);
-				}
-				if (member instanceof JvmField) {
-					if (((JvmField) member).isStatic())
-						acceptStaticExtensionImport((JvmMember) member);
+				if(!contains(currentThisType.getAllFeatures(), member)) {
+					if (member instanceof JvmOperation) {
+						if (((JvmOperation) member).isStatic())
+							acceptStaticExtensionImport((JvmMember) member);
+					}
+					if (member instanceof JvmField) {
+						if (((JvmField) member).isStatic())
+							acceptStaticExtensionImport((JvmMember) member);
+					}
 				}
 			} else {
 				Set<EObject> elements = associations.getJvmElements(next);
