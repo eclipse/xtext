@@ -44,20 +44,18 @@ public class NoTypeResult implements ITypeComputationResult {
 		return null;
 	}
 	
+	@Nullable
 	public LightweightTypeReference getActualExpressionType() {
-		throw new UnsupportedOperationException("TODO implement me");
+		return null;
 	}
 	
+	@Nullable
 	public LightweightTypeReference getExpectedExpressionType() {
 		throw new UnsupportedOperationException("TODO implement me");
 	}
 
-	public LightweightTypeReference getActualType(@Nullable JvmIdentifiableElement element) {
-		throw new UnsupportedOperationException("TODO implement me");
-	}
-	
 	public EnumSet<ConformanceHint> getConformanceHints() {
-		throw new UnsupportedOperationException("TODO implement me");
+		return EnumSet.noneOf(ConformanceHint.class);
 	}
 	
 	@Override

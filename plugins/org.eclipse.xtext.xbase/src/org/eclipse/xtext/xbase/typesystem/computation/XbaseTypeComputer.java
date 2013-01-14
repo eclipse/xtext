@@ -14,6 +14,7 @@ import java.util.Set;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.NonNullByDefault;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.common.types.JvmField;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmGenericType;
@@ -395,6 +396,7 @@ public class XbaseTypeComputer implements ITypeComputer {
 	}
 
 	@NonNullByDefault
+	@Nullable
 	protected LightweightTypeReference computeForLoopParameterType(final XForLoopExpression object,
 			final ITypeComputationState state) {
 		JvmFormalParameter declaredParam = object.getDeclaredParam();
@@ -453,16 +455,18 @@ public class XbaseTypeComputer implements ITypeComputer {
 			ITypeComputationState iterableState = state.withExpectation(withSynonyms);
 			ITypeComputationResult forExpressionResult = iterableState.computeTypes(object.getForExpression());
 			LightweightTypeReference forExpressionType = forExpressionResult.getActualExpressionType();
-			if (forExpressionType.isAny()) {
-				iterableState.refineExpectedType(object.getForExpression(), iterableOrArray);
-			} else if (forExpressionType.isResolved()) {
-				if (iterableOrArray.isAssignableFrom(forExpressionType))
-					iterableState.refineExpectedType(object.getForExpression(), forExpressionType);
-				else {
-					ArrayTypeReference array = forExpressionType.tryConvertToArray();
-					if (array != null) {
-						if (parameterType.isAssignableFrom(array.getComponentType())) {
-							iterableState.refineExpectedType(object.getForExpression(), forExpressionType);
+			if (forExpressionType!= null) {
+				if (forExpressionType.isAny()) {
+					iterableState.refineExpectedType(object.getForExpression(), iterableOrArray);
+				} else if (forExpressionType.isResolved()) {
+					if (iterableOrArray.isAssignableFrom(forExpressionType))
+						iterableState.refineExpectedType(object.getForExpression(), forExpressionType);
+					else {
+						ArrayTypeReference array = forExpressionType.tryConvertToArray();
+						if (array != null) {
+							if (parameterType.isAssignableFrom(array.getComponentType())) {
+								iterableState.refineExpectedType(object.getForExpression(), forExpressionType);
+							}
 						}
 					}
 				}
@@ -476,32 +480,31 @@ public class XbaseTypeComputer implements ITypeComputer {
 			ITypeComputationState iterableState = state.withExpectation(iterable); 
 			ITypeComputationResult forExpressionResult = iterableState.computeTypes(object.getForExpression());
 			LightweightTypeReference forExpressionType = forExpressionResult.getActualExpressionType();
-			if (forExpressionType.isResolved() && !forExpressionType.isAny() && iterable.isAssignableFrom(forExpressionType)) {
-				iterableState.refineExpectedType(object.getForExpression(), forExpressionType);
+			if (forExpressionType != null) {
+				if (forExpressionType.isResolved() && !forExpressionType.isAny() && iterable.isAssignableFrom(forExpressionType)) {
+					iterableState.refineExpectedType(object.getForExpression(), forExpressionType);
+				}
+				parameterType = forExpressionType.accept(new TypeReferenceVisitorWithResult<LightweightTypeReference>() {
+					@Override
+					public LightweightTypeReference doVisitParameterizedTypeReference(ParameterizedTypeReference reference) {
+						DeclaratorTypeArgumentCollector typeArgumentCollector = new ConstraintAwareTypeArgumentCollector(state.getReferenceOwner());
+						Map<JvmTypeParameter, LightweightMergedBoundTypeArgument> typeParameterMapping = typeArgumentCollector.getTypeParameterMapping(reference);
+						TypeParameterSubstitutor<?> substitutor = new TypeParameterByConstraintSubstitutor(typeParameterMapping, state.getReferenceOwner());
+						JvmGenericType iterable = (JvmGenericType) services.getTypeReferences().findDeclaredType(Iterable.class, object);
+						ParameterizedTypeReference substituteMe = new ParameterizedTypeReference(state.getReferenceOwner(), iterable.getTypeParameters().get(0));
+						LightweightTypeReference substitutedArgument = substitutor.substitute(substituteMe);
+						return substitutedArgument;
+					}
+					@Override
+					protected LightweightTypeReference doVisitAnyTypeReference(AnyTypeReference reference) {
+						return reference;
+					}
+					@Override
+					public LightweightTypeReference doVisitArrayTypeReference(ArrayTypeReference reference) {
+						return reference.getComponentType();
+					}
+				});
 			}
-			parameterType = forExpressionType.accept(new TypeReferenceVisitorWithResult<LightweightTypeReference>() {
-				@Override
-				public LightweightTypeReference doVisitParameterizedTypeReference(ParameterizedTypeReference reference) {
-					DeclaratorTypeArgumentCollector typeArgumentCollector = new ConstraintAwareTypeArgumentCollector(state.getReferenceOwner());
-					Map<JvmTypeParameter, LightweightMergedBoundTypeArgument> typeParameterMapping = typeArgumentCollector.getTypeParameterMapping(reference);
-					TypeParameterSubstitutor<?> substitutor = new TypeParameterByConstraintSubstitutor(typeParameterMapping, state.getReferenceOwner());
-					JvmGenericType iterable = (JvmGenericType) services.getTypeReferences().findDeclaredType(Iterable.class, object);
-					ParameterizedTypeReference substituteMe = new ParameterizedTypeReference(state.getReferenceOwner(), iterable.getTypeParameters().get(0));
-					LightweightTypeReference substitutedArgument = substitutor.substitute(substituteMe);
-					return substitutedArgument;
-				}
-				@Override
-				protected LightweightTypeReference doVisitAnyTypeReference(AnyTypeReference reference) {
-					return reference;
-				}
-				@Override
-				public LightweightTypeReference doVisitArrayTypeReference(ArrayTypeReference reference) {
-					return reference.getComponentType();
-				}
-			});
-		}
-		if (parameterType == null) {
-			throw new IllegalStateException("Should not be possible");
 		}
 		return parameterType;
 	}

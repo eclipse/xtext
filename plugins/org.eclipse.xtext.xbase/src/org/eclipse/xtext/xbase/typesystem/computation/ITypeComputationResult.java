@@ -9,27 +9,31 @@ package org.eclipse.xtext.xbase.typesystem.computation;
 
 import java.util.EnumSet;
 
-import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.xtext.common.types.JvmIdentifiableElement;
+import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.typesystem.conformance.ConformanceHint;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 
 /**
+ * The result of the type computation for a given expression.
+ * 
+ * This result may be a lazy result, thus the real type is determined 
+ * when {@link #getActualExpressionType()} or other properties are
+ * queried.
+ * 
  * @author Sebastian Zarnekow - Initial contribution and API
  */
+@NonNullByDefault(false)
 public interface ITypeComputationResult {
 
 	LightweightTypeReference getActualExpressionType();
 	
 	LightweightTypeReference getReturnType();
 	
-	@Nullable LightweightTypeReference getExpectedExpressionType();
+	LightweightTypeReference getExpectedExpressionType();
 	
-	@Nullable LightweightTypeReference getActualType(JvmIdentifiableElement element);
+	XExpression getExpression();
 	
-	@Nullable XExpression getExpression();
-	
-	@Nullable EnumSet<ConformanceHint> getConformanceHints();
+	EnumSet<ConformanceHint> getConformanceHints();
 	
 }

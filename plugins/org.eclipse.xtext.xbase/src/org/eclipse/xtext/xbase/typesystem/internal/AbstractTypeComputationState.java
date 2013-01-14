@@ -149,7 +149,7 @@ public abstract class AbstractTypeComputationState implements ITypeComputationSt
 		return new TypeCheckpointComputationState(resolvedTypes, featureScopeSession, reentrantTypeResolver, this);
 	}
 	
-	public AbstractTypeComputationState assignType(JvmIdentifiableElement element, LightweightTypeReference type) {
+	public AbstractTypeComputationState assignType(JvmIdentifiableElement element, @Nullable  LightweightTypeReference type) {
 		TypeAssigner assigner = assignTypes();
 		assigner.assignType(element, type);
 		return assigner.getForkedState();
