@@ -23,43 +23,62 @@ import com.google.common.collect.Lists;
  */
 public class MultiLineJavaDocTypeReferenceProvider implements IJavaDocTypeReferenceProvider {
 
+	protected String lineDelimiter = System.getProperty("line.separator");
+
 	public List<ReplaceRegion> computeTypeRefRegions(INode node) {
 		List<ReplaceRegion> regions = Lists.newArrayList();
 		Iterable<ILeafNode> leafNodes = node.getLeafNodes();
-		computeRegions(regions, leafNodes, "@link ", " ", "}", "#");
-		computeRegions(regions, leafNodes, "@see ", " " , "#", null);
+		computeRegions(regions, leafNodes, "@link ", "#", " ", "}");
+		computeRegions(regions, leafNodes, "@see ", "#" , " ", lineDelimiter);
 		return regions;
 	}
 
 	public List<ReplaceRegion> computeParameterTypeRefRegions(INode node) {
 		List<ReplaceRegion> regions = Lists.newArrayList();
 		Iterable<ILeafNode> leafNodes = node.getLeafNodes();
-		computeRegions(regions, leafNodes, "@param ", " ", "-", null);
+		computeRegions(regions, leafNodes, "@param ", " ", "-", lineDelimiter);
 		return regions;
 	}
 
-	protected void computeRegions(List<ReplaceRegion> regions, Iterable<ILeafNode> leafNodes, String start, String end, String optionalEnd, String optionalEnd2) {
+	/**
+	 * Computes regions between a given string to seach and different ends searched by their precedence
+	 *
+	 * @param regions - List to put new regions in
+	 * @param leafNodes - nodes to search in
+	 * @param toSearch - String to search
+	 * @param end - end with highest precedence
+	 * @param optionalEnd - end with lower precedence
+	 * @param optionalEnd2 - end with lowest precedence
+	 */
+	protected void computeRegions(List<ReplaceRegion> regions, Iterable<ILeafNode> leafNodes, String toSearch, String end, String optionalEnd, String optionalEnd2) {
 		for (ILeafNode leafNode : leafNodes) {
 			String text = leafNode.getText();
 			int offset = leafNode.getOffset();
-			int position = text.indexOf(start);
+			int position = text.indexOf(toSearch);
 			while (position != -1) {
-				int beginIndex = position + start.length();
+				int beginIndex = position + toSearch.length();
 				int endLink = -1;
-				if(optionalEnd2 != null && endLink == -1)
-					endLink = text.indexOf(optionalEnd2, beginIndex);
+				if(end != null && endLink == -1)
+					endLink = text.indexOf(end, beginIndex);
 				if(optionalEnd != null && endLink == -1)
 					endLink = text.indexOf(optionalEnd, beginIndex);
-				if(endLink == -1)
-					endLink = text.indexOf(end, beginIndex);
+				if(optionalEnd2 != null){
+					int lastEndLink = text.indexOf(optionalEnd2, beginIndex);
+					if(endLink != -1){
+						if(endLink > lastEndLink)
+							endLink = lastEndLink;
+					} else {
+						endLink = lastEndLink;
+					}
+				}
 				if (endLink == -1) { 
 					break;
 				} else {
-					String simpleName = text.substring(beginIndex, endLink);
+					String simpleName = text.substring(beginIndex, endLink).trim();
 					ReplaceRegion region = new ReplaceRegion(offset + beginIndex, simpleName.length(), simpleName);
 					regions.add(region);
 				} 
-				position = text.indexOf(start, endLink);
+				position = text.indexOf(toSearch, endLink);
 			}
 		}
 	}
