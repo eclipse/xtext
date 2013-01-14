@@ -7,7 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.resource;
 
-import static com.google.common.collect.Lists.*;
+import java.io.IOException;
 
 import org.apache.log4j.Logger;
 import org.eclipse.emf.ecore.resource.Resource;
@@ -15,6 +15,7 @@ import org.eclipse.xtext.resource.impl.DefaultResourceDescription;
 import org.eclipse.xtext.resource.impl.DefaultResourceDescriptionManager;
 import org.eclipse.xtext.resource.impl.EObjectDescriptionLookUp;
 import org.eclipse.xtext.util.IResourceScopeCache;
+import org.eclipse.xtext.util.RuntimeIOException;
 
 import com.google.inject.Inject;
 
@@ -36,6 +37,13 @@ public class DerivedStateAwareResourceDescriptionManager extends DefaultResource
 	protected IResourceDescription internalGetResourceDescription(final Resource resource,
 			IDefaultResourceDescriptionStrategy strategy) {
 		DerivedStateAwareResource res = (DerivedStateAwareResource) resource;
+		if (!res.isLoaded()) {
+			try {
+				res.load(res.getResourceSet().getLoadOptions());
+			} catch (IOException e) {
+				throw new RuntimeIOException(e);
+			}
+		}
 		boolean isInitialized = res.fullyInitialized || res.isInitializing;
 		try {
 			if (!isInitialized) {
