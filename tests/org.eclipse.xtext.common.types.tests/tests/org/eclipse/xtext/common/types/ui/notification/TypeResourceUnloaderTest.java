@@ -221,7 +221,7 @@ public class TypeResourceUnloaderTest extends Assert implements IResourceDescrip
 	}
 	
 	protected void waitForEvent() throws InterruptedException {
-		int counter = 50;
+		int counter = 500;
 		while(event == null && counter > 0) {
 			counter--;
 			Thread.sleep(15);
