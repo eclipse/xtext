@@ -61,14 +61,17 @@ public class MultiLineJavaDocTypeReferenceProvider implements IJavaDocTypeRefere
 				if(end != null && endLink == -1)
 					endLink = text.indexOf(end, beginIndex);
 				if(optionalEnd != null && endLink == -1)
+
 					endLink = text.indexOf(optionalEnd, beginIndex);
 				if(optionalEnd2 != null){
 					int lastEndLink = text.indexOf(optionalEnd2, beginIndex);
-					if(endLink != -1){
-						if(endLink > lastEndLink)
+					if(lastEndLink != -1) {
+						if(endLink != -1){
+							if(endLink > lastEndLink)
+								endLink = lastEndLink;
+						} else {
 							endLink = lastEndLink;
-					} else {
-						endLink = lastEndLink;
+						}
 					}
 				}
 				if (endLink == -1) { 
