@@ -38,7 +38,7 @@ public class FunctionTypeConformanceStrategy extends
 				if (converted != null) {
 					TypeConformanceResult functionsAreConformant = conformanceComputer.isConformant(leftReference, converted, param);
 					if (functionsAreConformant.isConformant()) {
-						return TypeConformanceResult.merge(functionsAreConformant, new TypeConformanceResult(ConformanceHint.DEMAND_CONVERSION));
+						return TypeConformanceResult.merge(functionsAreConformant, TypeConformanceResult.create(param, ConformanceHint.DEMAND_CONVERSION));
 					}
 				}
 			}
@@ -52,7 +52,7 @@ public class FunctionTypeConformanceStrategy extends
 		List<LightweightTypeReference> leftParameterTypes = left.getParameterTypes();
 		List<LightweightTypeReference> rightParameterTypes = right.getParameterTypes();
 		if (leftParameterTypes.size() != rightParameterTypes.size()) {
-			return TypeConformanceResult.FAILED;
+			return TypeConformanceResult.create(param, ConformanceHint.INCOMPATIBLE);
 		}
 		LightweightTypeReference leftReturnType = left.getReturnType();
 		LightweightTypeReference rightReturnType = right.getReturnType();
@@ -61,28 +61,28 @@ public class FunctionTypeConformanceStrategy extends
 		if (leftIsVoid) {
 			if (rightIsVoid) {
 				if (param.rawType)
-					return TypeConformanceResult.SUCCESS;
+					return TypeConformanceResult.create(param, ConformanceHint.SUCCESS);
 			} else {
-				return TypeConformanceResult.FAILED;
+				return TypeConformanceResult.create(param, ConformanceHint.INCOMPATIBLE);
 			}
 		} else if (rightIsVoid) {
-			return TypeConformanceResult.FAILED;
+			return TypeConformanceResult.create(param, ConformanceHint.INCOMPATIBLE);
 		} else if (param.rawType) {
-			return TypeConformanceResult.SUCCESS;
+			return TypeConformanceResult.create(param, ConformanceHint.SUCCESS);
 		}
 		if (param.rawType) {
 			throw new IllegalStateException("rawTypeComputation should have exited earlier");
 		}
 		TypeConformanceComputationArgument argument = new TypeConformanceComputationArgument(false, false, true, false, param.unboundComputationAddsHints, param.allowSynonyms);
 		if (!conformanceComputer.isConformant(leftReturnType, rightReturnType, argument).isConformant()) {
-			return TypeConformanceResult.FAILED;
+			return TypeConformanceResult.create(param, ConformanceHint.INCOMPATIBLE);
 		}
 		for(int i = 0; i < leftParameterTypes.size(); i++) {
 			if (!conformanceComputer.isConformant(rightParameterTypes.get(i), leftParameterTypes.get(i), argument).isConformant()) {
-				return TypeConformanceResult.FAILED;
+				return TypeConformanceResult.create(param, ConformanceHint.INCOMPATIBLE);
 			} 
 		}
-		return TypeConformanceResult.SUCCESS;
+		return TypeConformanceResult.create(param, ConformanceHint.SUCCESS);
 	}
 
 }

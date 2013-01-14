@@ -32,7 +32,7 @@ public class WildcardConformanceStrategy extends TypeConformanceStrategy<Wildcar
 				if (!result.isConformant()) {
 					return result;
 				}
-				return TypeConformanceResult.SUCCESS;
+				return TypeConformanceResult.create(param, ConformanceHint.SUCCESS);
 			}
 			for(LightweightTypeReference upperBound: leftWildcard.getUpperBounds()) {
 				TypeConformanceResult result = conformanceComputer.isConformant(upperBound, right, new TypeConformanceComputationArgument(
@@ -41,9 +41,9 @@ public class WildcardConformanceStrategy extends TypeConformanceStrategy<Wildcar
 					return result;
 				}
 			}
-			return TypeConformanceResult.SUCCESS;
+			return TypeConformanceResult.create(param, ConformanceHint.SUCCESS);
 		}
-		return TypeConformanceResult.FAILED;
+		return TypeConformanceResult.create(param, ConformanceHint.INCOMPATIBLE);
 	}
 	
 	@Override
@@ -62,16 +62,16 @@ public class WildcardConformanceStrategy extends TypeConformanceStrategy<Wildcar
 					TypeConformanceResult result = conformanceComputer.isConformant(rightLowerBound, leftLowerBound, new TypeConformanceComputationArgument(
 							false, false, false, false, param.unboundComputationAddsHints, false));
 					if (!result.isConformant()) {
-						return TypeConformanceResult.FAILED;
+						return TypeConformanceResult.create(param, ConformanceHint.INCOMPATIBLE);
 					}
 				} else {
 					for(LightweightTypeReference rightUpperBound: rightWildcard.getUpperBounds()) {
 						if (!rightUpperBound.isType(Object.class)) {
-							return TypeConformanceResult.FAILED;
+							return TypeConformanceResult.create(param, ConformanceHint.INCOMPATIBLE);
 						}
 					}
 				}
-				return TypeConformanceResult.SUCCESS;
+				return TypeConformanceResult.create(param, ConformanceHint.SUCCESS);
 			}
 			for(LightweightTypeReference upperBound: leftWildcard.getUpperBounds()) {
 				TypeConformanceResult result = conformanceComputer.isConformant(upperBound, rightWildcard, new TypeConformanceComputationArgument(
@@ -80,8 +80,8 @@ public class WildcardConformanceStrategy extends TypeConformanceStrategy<Wildcar
 					return result;
 				}
 			}
-			return TypeConformanceResult.SUCCESS;
+			return TypeConformanceResult.create(param, ConformanceHint.SUCCESS);
 		}
-		return TypeConformanceResult.FAILED;
+		return TypeConformanceResult.create(param, ConformanceHint.INCOMPATIBLE);
 	}
 }

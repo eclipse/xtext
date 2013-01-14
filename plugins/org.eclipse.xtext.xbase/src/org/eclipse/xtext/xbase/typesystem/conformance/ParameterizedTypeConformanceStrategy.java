@@ -42,19 +42,19 @@ public class ParameterizedTypeConformanceStrategy<TypeReference extends Paramete
 	protected TypeConformanceResult doVisitArrayTypeReference(TypeReference left, ArrayTypeReference right,
 			TypeConformanceComputationArgument.Internal<TypeReference> param) {
 		if (left.isType(Object.class))
-			return TypeConformanceResult.SUBTYPE;
+			return TypeConformanceResult.create(param, ConformanceHint.SUBTYPE);
 		if (left.isType(Serializable.class))
-			return TypeConformanceResult.SUBTYPE;
+			return TypeConformanceResult.create(param, ConformanceHint.SUBTYPE);
 		if (left.isType(Cloneable.class))
-			return TypeConformanceResult.SUBTYPE;
+			return TypeConformanceResult.create(param, ConformanceHint.SUBTYPE);
 		if (left.isSubtypeOf(Iterable.class) && param.allowSynonyms) {
 			ParameterizedTypeReference rightAsList = right.tryConvertToListType();
 			TypeConformanceResult result = conformanceComputer.isConformant(left, rightAsList, param);
 			if (result.isConformant()) {
-				return TypeConformanceResult.merge(result, new TypeConformanceResult(ConformanceHint.DEMAND_CONVERSION, ConformanceHint.SYNONYM));
+				return TypeConformanceResult.merge(result, TypeConformanceResult.create(param, ConformanceHint.DEMAND_CONVERSION, ConformanceHint.SYNONYM));
 			}
 		}
-		return TypeConformanceResult.FAILED;
+		return TypeConformanceResult.create(param, ConformanceHint.INCOMPATIBLE);
 	}
 
 	@Override
@@ -62,12 +62,18 @@ public class ParameterizedTypeConformanceStrategy<TypeReference extends Paramete
 			ParameterizedTypeReference rightReference,
 			TypeConformanceComputationArgument.Internal<TypeReference> param) {
 		if (leftReference.getType() == rightReference.getType()) {
-			if (param.rawType || leftReference.isRawType() || rightReference.isRawType() || leftReference.getTypeArguments().isEmpty() || rightReference.getTypeArguments().isEmpty())
-				return TypeConformanceResult.SUCCESS;
-			return areArgumentsConformant(leftReference, rightReference, param.unboundComputationAddsHints);
+			if (param.rawType) {
+				return TypeConformanceResult.create(param, ConformanceHint.SUCCESS);
+			}
+			if (leftReference.isRawType() || rightReference.isRawType()) {
+				return TypeConformanceResult.create(param, ConformanceHint.SUCCESS, ConformanceHint.RAWTYPE_CONVERSION);
+			}
+			if (leftReference.getTypeArguments().isEmpty() || rightReference.getTypeArguments().isEmpty())
+				return TypeConformanceResult.create(param, ConformanceHint.SUCCESS);
+			return areArgumentsConformant(leftReference, rightReference, param.unboundComputationAddsHints, param);
 		}
 		if (leftReference.isType(Void.TYPE) || rightReference.isType(Void.TYPE)) {
-			return TypeConformanceResult.FAILED;
+			return TypeConformanceResult.create(param, ConformanceHint.INCOMPATIBLE);
 		}
 		if (param.allowPrimitiveConversion || param.allowPrimitiveWidening) {
 			if (leftReference.isPrimitive()) {
@@ -77,57 +83,57 @@ public class ParameterizedTypeConformanceStrategy<TypeReference extends Paramete
 				JvmType rightType = rightReference.getType();
 				if (rightReference.isPrimitive()) {
 					if (param.allowPrimitiveWidening && isWideningConversion(primitives, leftType, (JvmPrimitiveType) rightType)) {
-						return new TypeConformanceResult(ConformanceHint.PRIMITIVE_WIDENING);
+						return TypeConformanceResult.create(param, ConformanceHint.PRIMITIVE_WIDENING);
 					}
-					return TypeConformanceResult.FAILED;
+					return TypeConformanceResult.create(param, ConformanceHint.INCOMPATIBLE);
 				} else if (param.allowPrimitiveConversion){
 					LightweightTypeReference primitive = rightReference.getPrimitiveIfWrapperType();
 					if (primitive.isPrimitive()) {
 						JvmPrimitiveType rightPrimitiveType = (JvmPrimitiveType) primitive.getType();
 						if (rightPrimitiveType != null && (rightPrimitiveType == leftType || isWideningConversion(primitives, leftType, rightPrimitiveType))) {
-							return new TypeConformanceResult(ConformanceHint.UNBOXING);
+							return TypeConformanceResult.create(param, ConformanceHint.UNBOXING);
 						}
-						return TypeConformanceResult.FAILED;
+						return TypeConformanceResult.create(param, ConformanceHint.INCOMPATIBLE);
 					}
 				} else {
-					return TypeConformanceResult.FAILED;
+					return TypeConformanceResult.create(param, ConformanceHint.INCOMPATIBLE);
 				}
 			} else if (param.allowPrimitiveConversion && rightReference.isPrimitive()) {
 				if (leftReference.isType(Object.class))
-					return new TypeConformanceResult(ConformanceHint.BOXING);
+					return TypeConformanceResult.create(param, ConformanceHint.BOXING);
 				if (leftReference.isType(String.class))
-					return TypeConformanceResult.FAILED;
+					return TypeConformanceResult.create(param, ConformanceHint.INCOMPATIBLE);
 				LightweightTypeReference wrapper = rightReference.getWrapperTypeIfPrimitive();
 				TypeConformanceResult result = conformanceComputer.isConformant(leftReference, wrapper, param);
 				if (result.isConformant()) {
-					return new TypeConformanceResult(ConformanceHint.BOXING);
+					return TypeConformanceResult.create(param, ConformanceHint.BOXING);
 				}
 			}
 		}
 		if (!param.asTypeArgument) {
 			// early exit - remaining cases are all compatible to java.lang.Object
 			if (leftReference.isType(Object.class))
-				return TypeConformanceResult.SUCCESS;
+				return TypeConformanceResult.create(param, ConformanceHint.SUCCESS);
 			JvmType leftType = leftReference.getType();
 			if (leftType instanceof JvmGenericType) {
 				JvmGenericType castedLeftType = (JvmGenericType) leftType;
 				if (castedLeftType.isFinal() && !(rightReference.getType() instanceof JvmTypeParameter))
-					return TypeConformanceResult.FAILED;
+					return TypeConformanceResult.create(param, ConformanceHint.INCOMPATIBLE);
 			} else if (leftType instanceof JvmTypeParameter && !(rightReference.getType() instanceof JvmTypeParameter)) {
-				return TypeConformanceResult.FAILED;
+				return TypeConformanceResult.create(param, ConformanceHint.INCOMPATIBLE);
 			}
 			TypeConformanceComputationArgument paramWithoutSuperTypeCheck = new TypeConformanceComputationArgument(
 					param.rawType, true, param.allowPrimitiveConversion, param.allowPrimitiveWidening, param.unboundComputationAddsHints, param.allowSynonyms);
 			for(LightweightTypeReference rightSuperType: rightReference.getAllSuperTypes()) {
 				TypeConformanceResult result = conformanceComputer.isConformant(leftReference, rightSuperType, paramWithoutSuperTypeCheck);
 				if (result.isConformant()) {
-					return TypeConformanceResult.merge(result, new TypeConformanceResult(ConformanceHint.SUBTYPE));
+					return TypeConformanceResult.merge(result, TypeConformanceResult.create(param, ConformanceHint.SUBTYPE));
 				}
 			}
 			if (param.allowSynonyms && (leftReference.isType(Serializable.class) || leftReference.isType(Cloneable.class))) {
 				ArrayTypeReference rightAsArray = rightReference.tryConvertToArray();
 				if (rightAsArray != null) {
-					return new TypeConformanceResult(ConformanceHint.SUCCESS, ConformanceHint.SUBTYPE, ConformanceHint.DEMAND_CONVERSION, ConformanceHint.SYNONYM);
+					return TypeConformanceResult.create(param, ConformanceHint.SUCCESS, ConformanceHint.SUBTYPE, ConformanceHint.DEMAND_CONVERSION, ConformanceHint.SYNONYM);
 				}
 			}
 		}
@@ -141,13 +147,13 @@ public class ParameterizedTypeConformanceStrategy<TypeReference extends Paramete
 		if (leftFunctionType != null) {
 			FunctionTypeReference rightFunctionType = rightReference.getAsFunctionTypeReference();
 			if (rightFunctionType != null) {
-				return TypeConformanceResult.FAILED;
+				return TypeConformanceResult.create(param, ConformanceHint.INCOMPATIBLE);
 			}
 			rightFunctionType = rightReference.tryConvertToFunctionTypeReference(param.rawType);
 			if (rightFunctionType != null) {
 				TypeConformanceResult functionsAreConformant = conformanceComputer.isConformant(leftFunctionType, rightFunctionType, param);
 				if (functionsAreConformant.isConformant()) {
-					return TypeConformanceResult.merge(functionsAreConformant, new TypeConformanceResult(ConformanceHint.DEMAND_CONVERSION));
+					return TypeConformanceResult.merge(functionsAreConformant, TypeConformanceResult.create(param, ConformanceHint.DEMAND_CONVERSION));
 				}
 			}
 		} else {
@@ -157,12 +163,12 @@ public class ParameterizedTypeConformanceStrategy<TypeReference extends Paramete
 				if (leftFunctionType != null) {
 					TypeConformanceResult functionsAreConformant = conformanceComputer.isConformant(leftFunctionType, rightFunctionType, param);
 					if (functionsAreConformant.isConformant()) {
-						return TypeConformanceResult.merge(functionsAreConformant, new TypeConformanceResult(ConformanceHint.DEMAND_CONVERSION));
+						return TypeConformanceResult.merge(functionsAreConformant, TypeConformanceResult.create(param, ConformanceHint.DEMAND_CONVERSION));
 					}
 				}
 			}
 		}
-		return TypeConformanceResult.FAILED;
+		return TypeConformanceResult.create(param, ConformanceHint.INCOMPATIBLE);
 	}
 	
 	@Override
@@ -178,7 +184,7 @@ public class ParameterizedTypeConformanceStrategy<TypeReference extends Paramete
 				if (converted != null) {
 					TypeConformanceResult functionsAreConformant = conformanceComputer.isConformant(converted, right, param);
 					if (functionsAreConformant.isConformant()) {
-						return TypeConformanceResult.merge(functionsAreConformant, new TypeConformanceResult(ConformanceHint.DEMAND_CONVERSION));
+						return TypeConformanceResult.merge(functionsAreConformant, TypeConformanceResult.create(param, ConformanceHint.DEMAND_CONVERSION));
 					}
 				}
 			}
@@ -197,7 +203,7 @@ public class ParameterizedTypeConformanceStrategy<TypeReference extends Paramete
 				}
 			}
 		}
-		return TypeConformanceResult.FAILED;
+		return TypeConformanceResult.create(param, ConformanceHint.INCOMPATIBLE);
 	}
 
 	/**
@@ -239,50 +245,50 @@ public class ParameterizedTypeConformanceStrategy<TypeReference extends Paramete
 	}
 
 	protected TypeConformanceResult areArgumentsConformant(ParameterizedTypeReference leftReference,
-			ParameterizedTypeReference rightReference, boolean unboundAddsHints) {
+			ParameterizedTypeReference rightReference, boolean unboundAddsHints, TypeConformanceComputationArgument param) {
 		if (leftReference.getType() != rightReference.getType())
 			throw new IllegalArgumentException("cannot compare type arguments for different base types");
 		List<LightweightTypeReference> leftTypeArguments = leftReference.getTypeArguments();
 		List<LightweightTypeReference> rightTypeArguments = rightReference.getTypeArguments();
 		if (leftTypeArguments.size() != rightTypeArguments.size()) {
-			return TypeConformanceResult.FAILED;
+			return TypeConformanceResult.create(param, ConformanceHint.INCOMPATIBLE);
 		}
 		TypeConformanceComputationArgument argument = new TypeConformanceComputationArgument(false, true, false, false, unboundAddsHints, false);
 		for(int i = 0; i < leftTypeArguments.size(); i++) {
 			if (!conformanceComputer.isConformant(leftTypeArguments.get(i), rightTypeArguments.get(i), argument).isConformant()) {
-				return TypeConformanceResult.FAILED;
+				return TypeConformanceResult.create(param, ConformanceHint.INCOMPATIBLE);
 			}
 		}
-		return TypeConformanceResult.SUCCESS;
+		return TypeConformanceResult.create(param, ConformanceHint.SUCCESS);
 	}
 
 	@Override
 	protected TypeConformanceResult doVisitAnyTypeReference(TypeReference left, AnyTypeReference right, TypeConformanceComputationArgument.Internal<TypeReference> param) {
 		if (left.isPrimitive() || left.isPrimitiveVoid())
-			return TypeConformanceResult.FAILED;
-		return TypeConformanceResult.SUCCESS;
+			return TypeConformanceResult.create(param, ConformanceHint.INCOMPATIBLE);
+		return TypeConformanceResult.create(param, ConformanceHint.SUCCESS);
 	}
 	
 	@Override
 	protected TypeConformanceResult doVisitUnboundTypeReference(TypeReference left, UnboundTypeReference right,
 			TypeConformanceComputationArgument.Internal<TypeReference> param) {
 		if (left.getType() == right.getType())
-			return TypeConformanceResult.SUCCESS;
+			return TypeConformanceResult.create(param, ConformanceHint.SUCCESS);
 		if (left.isType(Object.class))
-			return TypeConformanceResult.SUCCESS;
+			return TypeConformanceResult.create(param, ConformanceHint.SUCCESS);
 		if (!param.isRawType() && right.canResolveTo(left)) {
-			return TypeConformanceResult.SUCCESS;
+			return TypeConformanceResult.create(param, ConformanceHint.SUCCESS);
 		}
 		right.tryResolve();
 		LightweightTypeReference resolvedTo = right.getResolvedTo();
 		if (resolvedTo != null) {
 			return conformanceComputer.isConformant(left, right, param);
 		}
-		return TypeConformanceResult.FAILED;
+		return TypeConformanceResult.create(param, ConformanceHint.INCOMPATIBLE);
 	}
 
 	@Override
 	protected TypeConformanceResult doVisitTypeReference(TypeReference left, LightweightTypeReference right, TypeConformanceComputationArgument.Internal<TypeReference> param) {
-		return TypeConformanceResult.FAILED;
+		return TypeConformanceResult.create(param, ConformanceHint.INCOMPATIBLE);
 	}
 }

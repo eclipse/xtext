@@ -48,7 +48,7 @@ public class ArrayConformanceStrategy extends TypeConformanceStrategy<ArrayTypeR
 				}
 			}
 		}
-		return TypeConformanceResult.FAILED;
+		return TypeConformanceResult.create(param, ConformanceHint.INCOMPATIBLE);
 	}
 	
 	@Override
@@ -62,7 +62,7 @@ public class ArrayConformanceStrategy extends TypeConformanceStrategy<ArrayTypeR
 				for(LightweightTypeReference rightSuperTypes: right.getAllSuperTypes()) {
 					TypeConformanceResult result = conformanceComputer.isConformant(left, rightSuperTypes, paramWithoutSuperTypeCheck);
 					if (result.isConformant()) {
-						return TypeConformanceResult.merge(result, new TypeConformanceResult(ConformanceHint.SUBTYPE));
+						return TypeConformanceResult.merge(result, TypeConformanceResult.create(param, ConformanceHint.SUBTYPE));
 					}
 				}
 			} else if (param.allowSynonyms){
@@ -76,21 +76,21 @@ public class ArrayConformanceStrategy extends TypeConformanceStrategy<ArrayTypeR
 					}
 					TypeConformanceResult result = conformanceComputer.isConformant(left, rightAsArray, param);
 					if (result.isConformant()) {
-						return TypeConformanceResult.merge(result, new TypeConformanceResult(ConformanceHint.DEMAND_CONVERSION, ConformanceHint.SYNONYM));
+						return TypeConformanceResult.merge(result, TypeConformanceResult.create(param, ConformanceHint.DEMAND_CONVERSION, ConformanceHint.SYNONYM));
 					}
 				}
 			}
 		}
-		return TypeConformanceResult.FAILED;
+		return TypeConformanceResult.create(param, ConformanceHint.INCOMPATIBLE);
 	}
 
 	@Override
 	protected TypeConformanceResult doVisitAnyTypeReference(ArrayTypeReference left, AnyTypeReference reference, TypeConformanceComputationArgument.Internal<ArrayTypeReference> param) {
-		return TypeConformanceResult.SUCCESS;
+		return TypeConformanceResult.create(param, ConformanceHint.SUCCESS);
 	}
 
 	@Override
 	protected TypeConformanceResult doVisitTypeReference(ArrayTypeReference left, LightweightTypeReference reference, TypeConformanceComputationArgument.Internal<ArrayTypeReference> param) {
-		return TypeConformanceResult.FAILED;
+		return TypeConformanceResult.create(param, ConformanceHint.INCOMPATIBLE);
 	}
 }

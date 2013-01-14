@@ -47,6 +47,8 @@ import org.eclipse.xtext.xbase.XTypeLiteral;
 import org.eclipse.xtext.xbase.XVariableDeclaration;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.typesystem.conformance.ConformanceHint;
+import org.eclipse.xtext.xbase.typesystem.conformance.TypeConformanceComputationArgument;
+import org.eclipse.xtext.xbase.typesystem.conformance.TypeConformanceResult;
 import org.eclipse.xtext.xbase.typesystem.references.AnyTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.ArrayTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.CompoundTypeReference;
@@ -459,7 +461,8 @@ public class XbaseTypeComputer implements ITypeComputer {
 				if (forExpressionType.isAny()) {
 					iterableState.refineExpectedType(object.getForExpression(), iterableOrArray);
 				} else if (forExpressionType.isResolved()) {
-					if (iterableOrArray.isAssignableFrom(forExpressionType))
+					TypeConformanceResult assignability = iterableOrArray.internalIsAssignableFrom(forExpressionType, new TypeConformanceComputationArgument());
+					if (assignability.isConformant() && !assignability.getConformanceHints().contains(ConformanceHint.RAWTYPE_CONVERSION))
 						iterableState.refineExpectedType(object.getForExpression(), forExpressionType);
 					else {
 						ArrayTypeReference array = forExpressionType.tryConvertToArray();

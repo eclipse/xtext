@@ -29,9 +29,9 @@ public class MultiTypeConformanceStrategy extends TypeConformanceStrategy<Compou
 				return result;
 		}
 		if (!left.getMultiTypeComponents().isEmpty()) {
-			return TypeConformanceResult.SUCCESS;
+			return TypeConformanceResult.create(param, ConformanceHint.SUCCESS);
 		}
-		return TypeConformanceResult.FAILED;
+		return TypeConformanceResult.create(param, ConformanceHint.INCOMPATIBLE);
 	}
 
 	@Override

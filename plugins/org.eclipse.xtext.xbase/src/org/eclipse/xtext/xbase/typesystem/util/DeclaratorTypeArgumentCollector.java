@@ -31,7 +31,6 @@ import org.eclipse.xtext.xbase.typesystem.references.WildcardTypeReference;
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  * TODO JavaDoc, toString
- * TODO implement as member function of ParameterizedTypeReference
  */
 @NonNullByDefault
 public class DeclaratorTypeArgumentCollector extends TypeReferenceVisitorWithParameterAndResult<LightweightTraversalData, Boolean> {
@@ -43,7 +42,7 @@ public class DeclaratorTypeArgumentCollector extends TypeReferenceVisitorWithPar
 
 	@Override
 	public Boolean doVisitCompoundTypeReference(CompoundTypeReference reference, LightweightTraversalData data) {
-		// TODO error message, cannot extend compound reference
+		// TODO error message, cannot extend compound reference - error handling does not belong here
 		boolean result = true;
 		for(LightweightTypeReference component: reference.getMultiTypeComponents()) {
 			Boolean componentsDone = component.accept(this, data);
@@ -54,13 +53,13 @@ public class DeclaratorTypeArgumentCollector extends TypeReferenceVisitorWithPar
 
 	@Override
 	public Boolean doVisitArrayTypeReference(ArrayTypeReference reference, LightweightTraversalData data) {
-		// TODO error message, cannot extend array type
+		// TODO error message, cannot extend array type - error handling does not belong here
 		return Boolean.FALSE;
 	}
 	
 	@Override
 	public Boolean doVisitWildcardTypeReference(WildcardTypeReference reference, LightweightTraversalData data) {
-		// TODO error message, cannot extend wildcard type
+		// TODO error message, cannot extend wildcard type - error handling does not belong here
 		return Boolean.FALSE;
 	}
 
@@ -80,7 +79,10 @@ public class DeclaratorTypeArgumentCollector extends TypeReferenceVisitorWithPar
 
 	protected Boolean doVisitParameterizedTypeReference(ParameterizedTypeReference reference, JvmType type,
 			LightweightTraversalData data) {
-		// TODO check constraints, add validation messages if necessary
+		// TODO check constraints, add validation messages if necessary - error handling does not belong here
+		if (reference.isRawType()) {
+			return Boolean.FALSE;
+		}
 		if (type instanceof JvmTypeParameterDeclarator) {
 			List<JvmTypeParameter> typeParameters = ((JvmTypeParameterDeclarator) type).getTypeParameters();
 			List<LightweightTypeReference> typeArguments = reference.getTypeArguments();

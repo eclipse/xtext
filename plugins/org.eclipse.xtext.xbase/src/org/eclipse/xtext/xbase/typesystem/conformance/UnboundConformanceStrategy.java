@@ -37,7 +37,7 @@ class UnboundConformanceStrategy extends TypeConformanceStrategy<UnboundTypeRefe
 		TypeConformanceResult result = tryResolveAndCheckConformance(left, right, param);
 		if (result != null)
 			return result;
-		return TypeConformanceResult.FAILED;
+		return TypeConformanceResult.create(param, ConformanceHint.INCOMPATIBLE);
 	}
 
 	@Nullable
@@ -45,7 +45,7 @@ class UnboundConformanceStrategy extends TypeConformanceStrategy<UnboundTypeRefe
 			TypeConformanceComputationArgument.Internal<UnboundTypeReference> param) {
 		List<LightweightBoundTypeArgument> hints = left.getAllHints();
 		if (hints.isEmpty() && !param.unboundComputationAddsHints) {
-			return TypeConformanceResult.FAILED; 
+			return TypeConformanceResult.create(param, ConformanceHint.INCOMPATIBLE); 
 		}
 		List<LightweightBoundTypeArgument> hintsToProcess = Lists.newArrayListWithCapacity(hints.size());
 		List<LightweightBoundTypeArgument> inferredHintsToProcess = Lists.newArrayListWithCapacity(hints.size());
@@ -72,7 +72,7 @@ class UnboundConformanceStrategy extends TypeConformanceStrategy<UnboundTypeRefe
 			} else {
 				left.acceptHint(right, BoundTypeArgumentSource.INFERRED, this, VarianceInfo.OUT, VarianceInfo.OUT);
 			}
-			return TypeConformanceResult.SUCCESS;
+			return TypeConformanceResult.create(param, ConformanceHint.SUCCESS);
 		} else {
 			BoundTypeArgumentMerger merger = left.getOwner().getServices().getBoundTypeArgumentMerger();
 			LightweightMergedBoundTypeArgument mergeResult = merger.merge(inferredHintsToProcess.isEmpty() || (laterCount > 1 && inferredAsWildcard) ? hintsToProcess : inferredHintsToProcess, left.getOwner());
@@ -97,7 +97,7 @@ class UnboundConformanceStrategy extends TypeConformanceStrategy<UnboundTypeRefe
 				return result;
 			}
 		}
-		return TypeConformanceResult.FAILED;
+		return TypeConformanceResult.create(param, ConformanceHint.INCOMPATIBLE);
 	}
 	
 	@Override
@@ -109,17 +109,17 @@ class UnboundConformanceStrategy extends TypeConformanceStrategy<UnboundTypeRefe
 	protected TypeConformanceResult doVisitUnboundTypeReference(UnboundTypeReference left, UnboundTypeReference right,
 			TypeConformanceComputationArgument.Internal<UnboundTypeReference> param) {
 		if (left.getHandle().equals(right.getHandle())) {
-			return TypeConformanceResult.SUCCESS;
+			return TypeConformanceResult.create(param, ConformanceHint.SUCCESS);
 		}
 		if (param.unboundComputationAddsHints && (!left.hasSignificantHints() || !right.hasSignificantHints())) {
 			left.acceptHint(right, BoundTypeArgumentSource.INFERRED, this, VarianceInfo.OUT, VarianceInfo.OUT);
-			return TypeConformanceResult.SUCCESS;
+			return TypeConformanceResult.create(param, ConformanceHint.SUCCESS);
 		}
 		if (left.getAllHints().equals(right.getAllHints()))
-			return TypeConformanceResult.SUCCESS;
+			return TypeConformanceResult.create(param, ConformanceHint.SUCCESS);
 		TypeConformanceResult result = tryResolveAndCheckConformance(left, right, param);
 		if (result != null)
 			return result;
-		return TypeConformanceResult.FAILED;
+		return TypeConformanceResult.create(param, ConformanceHint.INCOMPATIBLE);
 	}
 }

@@ -115,8 +115,8 @@ public abstract class TypeConformanceStrategy<T extends LightweightTypeReference
 				return result;
 		}
 		if (right.getMultiTypeComponents().isEmpty())
-			return TypeConformanceResult.SUCCESS;
-		return TypeConformanceResult.FAILED;
+			return TypeConformanceResult.create(param, ConformanceHint.SUCCESS);
+		return TypeConformanceResult.create(param, ConformanceHint.INCOMPATIBLE);
 	}
 	
 	@Override
@@ -126,19 +126,18 @@ public abstract class TypeConformanceStrategy<T extends LightweightTypeReference
 	protected TypeConformanceResult doVisitSynonymTypeReference(T left, CompoundTypeReference right, TypeConformanceComputationArgument.Internal<T> param) {
 		List<LightweightTypeReference> rightComponents = right.getMultiTypeComponents();
 		if (rightComponents.isEmpty())
-			return TypeConformanceResult.FAILED;
+			return TypeConformanceResult.create(param, ConformanceHint.INCOMPATIBLE);
 		for(int i = 0; i < rightComponents.size(); i++) {
 			TypeConformanceResult candidate = rightComponents.get(i).accept(this, param);
 			if (candidate.isConformant()) {
 				if (i == 0)
 					return candidate;
-				TypeConformanceResult result = TypeConformanceResult.merge(candidate, new TypeConformanceResult(ConformanceHint.SYNONYM));
-				result.setSynonymIndex(i);
+				TypeConformanceResult result = TypeConformanceResult.merge(candidate, TypeConformanceResult.create(param, ConformanceHint.SYNONYM));
 				result.setConversion(rightComponents.get(0), rightComponents.get(i));
 				return result;
 			}
 		}
-		return TypeConformanceResult.FAILED;
+		return TypeConformanceResult.create(param, ConformanceHint.INCOMPATIBLE);
 	}
 	
 }
