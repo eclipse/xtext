@@ -66,12 +66,12 @@ public class ValidationTests extends AbstractXbaseTestCase {
 		helper.assertNoErrors(expr);
 	}
 	
-	@Test public void testNoWildCardsInTypeArgs() throws Exception {
+	@Test public void testNoWildcardsInTypeArgs() throws Exception {
 		XExpression expr = expression("java::util::Collections::<? extends String>singleton()");
 		helper.assertError(expr, TypesPackage.Literals.JVM_WILDCARD_TYPE_REFERENCE, INVALID_USE_OF_WILDCARD);
 	}
 	
-	@Test public void testNoWildCardsInTypeArgs_01() throws Exception {
+	@Test public void testNoWildcardsInTypeArgs_01() throws Exception {
 		XExpression expr = expression("new java.util.ArrayList<?>()");
 		helper.assertError(expr, TypesPackage.Literals.JVM_WILDCARD_TYPE_REFERENCE, INVALID_USE_OF_WILDCARD);
 	}

@@ -19,8 +19,8 @@ import org.eclipse.xtext.scoping.impl.ImportNormalizer;
  */
 public class NestedTypeAwareImportNormalizer extends ImportNormalizer {
 
-	public NestedTypeAwareImportNormalizer(QualifiedName importedNamespace, boolean wildCard, boolean ignoreCase) {
-		super(importedNamespace, wildCard, ignoreCase);
+	public NestedTypeAwareImportNormalizer(QualifiedName importedNamespace, boolean wildcard, boolean ignoreCase) {
+		super(importedNamespace, wildcard, ignoreCase);
 		if (ignoreCase)
 			throw new IllegalArgumentException("ignoreCase is currently not supported");
 	}

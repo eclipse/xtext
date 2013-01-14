@@ -247,10 +247,10 @@ public class XbaseImportedNamespaceScopeProvider extends AbstractGlobalScopeDele
 		if (importedNamespace == null || importedNamespace.getSegmentCount() < 1) {
 			return null;
 		}
-		boolean hasWildCard = ignoreCase ? 
-				importedNamespace.getLastSegment().equalsIgnoreCase(getWildCard()) :
-				importedNamespace.getLastSegment().equals(getWildCard());
-		if (hasWildCard) {
+		boolean hasWildcard = ignoreCase ? 
+				importedNamespace.getLastSegment().equalsIgnoreCase(getWildcard()) :
+				importedNamespace.getLastSegment().equals(getWildcard());
+		if (hasWildcard) {
 			if (importedNamespace.getSegmentCount() <= 1)
 				return null;
 			return doCreateImportNormalizer(importedNamespace.skipLast(1), true, ignoreCase);
@@ -286,7 +286,7 @@ public class XbaseImportedNamespaceScopeProvider extends AbstractGlobalScopeDele
 		return new MultimapBasedSelectable(allDescriptions);
 	}
 
-	public String getWildCard() {
+	public String getWildcard() {
 		return "*";
 	}
 	

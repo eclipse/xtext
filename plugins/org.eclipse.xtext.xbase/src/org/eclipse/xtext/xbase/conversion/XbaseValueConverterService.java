@@ -96,6 +96,11 @@ public class XbaseValueConverterService extends DefaultTerminalConverters {
 		return qualifiedNameValueConverter;
 	}
 	
+	@ValueConverter(rule = "QualifiedNameWithWildcard")
+	public IValueConverter<String> getQualifiedNameWithWildCardValueConverter() {
+		return getQualifiedNameValueConverter();
+	}
+	
 	@ValueConverter(rule = "StaticQualifier")
 	public IValueConverter<String> getStaticQualifierConverter() {
 		return staticQualifierConverter;
