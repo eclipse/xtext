@@ -2084,6 +2084,35 @@ public abstract class AbstractXbaseEvaluationTest extends Assert {
 					"  new testdata.InterfaceASubClient().getClassName [| 'Foo' ]" +
 				"}");
 	}
+
+	/*
+	 * TODO improve the compiler
+	 * We could produce something like
+	 * 
+	 *  final Wrapper<org.eclipse.xtext.xbase.lib.Functions.Function1<? super Integer, ? extends Integer>> _wrappedFun = Wrapper.create();
+	 * 	_wrappedFun.set(new org.eclipse.xtext.xbase.lib.Functions.Function1<Integer, Integer>() {
+	 * 		public Integer apply(final Integer it) {
+	 * 			int _xifexpression = (int) 0;
+	 * 			boolean _equals = ((it).intValue() == 0);
+	 * 			if (_equals) {
+	 * 				_xifexpression = 0;
+	 * 			} else {
+	 * 				org.eclipse.xtext.xbase.lib.Functions.Function1<? super Integer, ? extends Integer> _fun = _wrappedFun.get();
+	 * 				int _minus = ((it).intValue() - 1);
+	 * 				Integer _apply = _fun.apply(Integer.valueOf(_minus));
+	 * 				int _plus = ((_apply).intValue() + (it).intValue());
+	 * 				_xifexpression = _plus;
+	 * 			}
+	 * 			return Integer.valueOf(_xifexpression);
+	 * 		}
+	 * 	});
+	 * 	final org.eclipse.xtext.xbase.lib.Functions.Function1<? super Integer, ? extends Integer> fun = _wrappedFun.get();
+	 */
+	@Ignore("TODO improve the compiler")
+	@Test public void testClosure_31() throws Exception {
+		assertEvaluatesTo(Integer.valueOf(15), 
+				"{ val (int)=>int fun = [ if (it == 0) 0 else fun.apply(it - 1) + it ] fun.apply(5) }");
+	}
 	
 	/**
 	 * @since 2.3
