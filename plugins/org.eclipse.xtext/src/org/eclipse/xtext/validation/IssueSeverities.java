@@ -33,14 +33,16 @@ public class IssueSeverities {
 	}
 
 	public Severity getSeverity(String code) {
-		if (!configurableIssueCodes.containsKey(code))
-			return Severity.ERROR;
+		if (!configurableIssueCodes.containsKey(code)) {
+			log.error("Configurable issue code '" + code + "' is not registered. Check the binding for " + ConfigurableIssueCodesProvider.class.getName());
+			return Severity.IGNORE;
+		}
 		final String value = preferenceValues.getPreference(configurableIssueCodes.get(code));
 		try {
 			return converter.stringToSeverity(value);
 		} catch (IllegalArgumentException e) {
 			log.error(e.getMessage(), e);
-			return Severity.ERROR;
+			return Severity.IGNORE;
 		}
 	}
 	
