@@ -904,7 +904,7 @@ public class XbaseJavaValidator2 extends AbstractXbaseJavaValidator {
 			error("Incompatible conditional operand types " + this.getNameOfTypes(leftType)+" and "+this.getNameOfTypes(rightType), null, ValidationMessageAcceptor.INSIGNIFICANT_INDEX, INVALID_INSTANCEOF);
 			return;
 		}
-		if (rightType.isAssignableFrom(leftType, new TypeConformanceComputationArgument(false, false, true, true, false, false))) {
+		if (!isIgnored(OBSOLETE_INSTANCEOF) && rightType.isAssignableFrom(leftType, new TypeConformanceComputationArgument(false, false, true, true, false, false))) {
 			addIssueToState(OBSOLETE_INSTANCEOF, "The expression of type " + getNameOfTypes(leftType)
 					+ " is already of type " + canonicalName(rightType), null);
 		}
@@ -1166,7 +1166,7 @@ public class XbaseJavaValidator2 extends AbstractXbaseJavaValidator {
 
 	@Check
 	public  void checkLocalUsageOfDeclared(XVariableDeclaration variableDeclaration) {
-		if(!isLocallyUsed(variableDeclaration, variableDeclaration.eContainer())){
+		if(!isIgnored(UNUSED_LOCAL_VARIABLE) && !isLocallyUsed(variableDeclaration, variableDeclaration.eContainer())){
 			String message = "The value of the local variable " + variableDeclaration.getName() + " is not used";
 			addIssueToState(UNUSED_LOCAL_VARIABLE, message, XbasePackage.Literals.XVARIABLE_DECLARATION__NAME);
 		}
@@ -1279,8 +1279,10 @@ public class XbaseJavaValidator2 extends AbstractXbaseJavaValidator {
 				}
 			}
 		}
-		for (XImportDeclaration imp : imports.values()) {
-			addIssue(imp, IMPORT_UNUSED, "The import '" + imp.getImportedTypeName() + "' is never used.");
+		if(!isIgnored(IMPORT_UNUSED)) {
+			for (XImportDeclaration imp : imports.values()) {
+				addIssue(imp, IMPORT_UNUSED, "The import '" + imp.getImportedTypeName() + "' is never used.");
+			}
 		}
 	}
 	

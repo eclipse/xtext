@@ -1,10 +1,10 @@
-/**
+/*******************************************************************************
  * Copyright (c) 2012 itemis AG (http://www.itemis.eu) and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- */
+ *******************************************************************************/
 package org.eclipse.xtext.xbase.compiler;
 
 import com.google.common.base.Objects;
@@ -17,7 +17,6 @@ import java.util.Collection;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Set;
-import org.apache.log4j.Logger;
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
@@ -103,7 +102,6 @@ import org.eclipse.xtext.xbase.jvmmodel.ILogicalContainerProvider;
 import org.eclipse.xtext.xbase.jvmmodel.JvmTypeExtensions;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Exceptions;
-import org.eclipse.xtext.xbase.lib.Functions.Function0;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.InputOutput;
 import org.eclipse.xtext.xbase.lib.IntegerRange;
@@ -114,19 +112,12 @@ import org.eclipse.xtext.xbase.lib.Procedures.Procedure2;
 import org.eclipse.xtext.xbase.lib.StringExtensions;
 
 /**
- * A generator implementation that processes the
- * derived {@link org.eclipse.xtext.xbase.jvmmodel.IJvmModelInferrer JVM model}
+ * A generator implementation that processes the 
+ * derived {@link IJvmModelInferrer JVM model}
  * and produces the respective java code.
  */
 @SuppressWarnings("all")
 public class JvmModelGenerator implements IGenerator {
-  private final static Logger log = new Function0<Logger>() {
-    public Logger apply() {
-      Logger _logger = Logger.getLogger(JvmModelGenerator.class);
-      return _logger;
-    }
-  }.apply();
-  
   @Inject
   private ILogicalContainerProvider _iLogicalContainerProvider;
   
@@ -524,8 +515,8 @@ public class JvmModelGenerator implements IGenerator {
   }
   
   /**
-   * Returns the visibility modifier and a space as suffix if not empty
-   */
+  	 * Returns the visibility modifier and a space as suffix if not empty
+  	 */
   public String javaName(final JvmVisibility visibility) {
     boolean _notEquals = ObjectExtensions.operator_notEquals(visibility, null);
     if (_notEquals) {

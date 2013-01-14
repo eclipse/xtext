@@ -75,11 +75,8 @@ import org.eclipse.xtext.xbase.jvmmodel.JvmTypeExtensions
 import static org.eclipse.xtext.util.Strings.*
 import org.eclipse.emf.ecore.util.EcoreUtil
 import org.eclipse.xtext.documentation.IJavaDocTypeReferenceProvider
-import org.eclipse.xtext.resource.XtextResource
 import java.io.BufferedReader
 import java.io.StringReader
-import java.lang.StringIndexOutOfBoundsException
-import org.apache.log4j.Logger
 
 /**
  * A generator implementation that processes the 
@@ -88,7 +85,6 @@ import org.apache.log4j.Logger
  */
 class JvmModelGenerator implements IGenerator {
 
-	static val log = Logger::getLogger(typeof(JvmModelGenerator)) 
 
 	@Inject extension ILogicalContainerProvider
 	@Inject extension TypeReferences 
