@@ -2,6 +2,7 @@ package org.eclipse.xtend.core.tests.compiler;
 
 import com.google.common.collect.Iterables;
 import com.google.inject.Inject;
+import com.google.inject.Provider;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
@@ -11,6 +12,7 @@ import org.eclipse.xtend.core.xtend.XtendFile;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.xbase.compiler.DisableCodeGenerationAdapter;
+import org.eclipse.xtext.xbase.compiler.GeneratorConfig;
 import org.eclipse.xtext.xbase.compiler.JvmModelGenerator;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
@@ -23,6 +25,9 @@ public abstract class AbstractXtendCompilerTest extends AbstractXtendTestCase {
   @Inject
   private JvmModelGenerator generator;
   
+  @Inject
+  private Provider<GeneratorConfig> generatorConfigProvider;
+
   @Test
   public void testThreeDataClassesExtendingEachOther() {
     StringConcatenation _builder = new StringConcatenation();
@@ -5201,8 +5206,9 @@ public abstract class AbstractXtendCompilerTest extends AbstractXtendTestCase {
       EList<EObject> _contents_1 = _eResource_1.getContents();
       Iterable<JvmDeclaredType> _filter_1 = Iterables.<JvmDeclaredType>filter(_contents_1, JvmDeclaredType.class);
       final JvmDeclaredType bazType = IterableExtensions.<JvmDeclaredType>last(_filter_1);
-      final CharSequence barJavaCode = this.generator.generateType(barType);
-      final CharSequence bazJavaCode = this.generator.generateType(bazType);
+      final GeneratorConfig generatorConfig = this.generatorConfigProvider.get();
+      final CharSequence barJavaCode = this.generator.generateType(barType, generatorConfig);
+      final CharSequence bazJavaCode = this.generator.generateType(bazType, generatorConfig);
       String _string_1 = expectedBarClass.toString();
       String _string_2 = barJavaCode.toString();
       XtendCompilerTest.assertEquals(_string_1, _string_2);
@@ -5313,7 +5319,71 @@ public abstract class AbstractXtendCompilerTest extends AbstractXtendTestCase {
     this.assertCompilesTo(_builder, _builder_1);
   }
   
+  @Test
+  public void compileWithConfiguration() {
+    final GeneratorConfig generatorConfig = this.generatorConfigProvider.get();
+    generatorConfig.setGenerateSuppressWarnings(false);
+    generatorConfig.setGenerateExpressions(false);
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("package foo");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("/**");
+    _builder.newLine();
+    _builder.append(" ");
+    _builder.append("* javadoc");
+    _builder.newLine();
+    _builder.append(" ");
+    _builder.append("*/");
+    _builder.newLine();
+    _builder.append("class Bar {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def foo(){");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("1 + 1");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("package foo;");
+    _builder_1.newLine();
+    _builder_1.newLine();
+    _builder_1.append("/**");
+    _builder_1.newLine();
+    _builder_1.append(" ");
+    _builder_1.append("* javadoc");
+    _builder_1.newLine();
+    _builder_1.append(" ");
+    _builder_1.append("*/");
+    _builder_1.newLine();
+    _builder_1.newLine();
+    _builder_1.append("public class Bar {");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("public int foo() {");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("throw new UnsupportedOperationException(\"foo is not implemented\");");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    this.assertCompilesTo(_builder, _builder_1, generatorConfig);
+  }
+
   public void assertCompilesTo(final CharSequence input, final CharSequence expected) {
+    GeneratorConfig _get = this.generatorConfigProvider.get();
+    this.assertCompilesTo(input, expected, _get);
+  }
+
+  public void assertCompilesTo(final CharSequence input, final CharSequence expected, final GeneratorConfig config) {
     try {
       String _string = input.toString();
       final XtendFile file = this.file(_string, true);
@@ -5323,7 +5393,7 @@ public abstract class AbstractXtendCompilerTest extends AbstractXtendTestCase {
       final JvmDeclaredType inferredType = IterableExtensions.<JvmDeclaredType>head(_filter);
       boolean _isDisabled = DisableCodeGenerationAdapter.isDisabled(inferredType);
       Assert.assertFalse(_isDisabled);
-      final CharSequence javaCode = this.generator.generateType(inferredType);
+      final CharSequence javaCode = this.generator.generateType(inferredType, config);
       String _string_1 = expected.toString();
       String _string_2 = javaCode.toString();
       XtendCompilerTest.assertEquals(_string_1, _string_2);

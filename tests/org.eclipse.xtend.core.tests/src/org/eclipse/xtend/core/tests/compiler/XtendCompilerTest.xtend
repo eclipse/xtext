@@ -1,16 +1,19 @@
 package org.eclipse.xtend.core.tests.compiler
 
 import com.google.inject.Inject
+import com.google.inject.Provider
 import org.eclipse.xtend.core.tests.AbstractXtendTestCase
 import org.eclipse.xtext.common.types.JvmDeclaredType
+import org.eclipse.xtext.xbase.compiler.DisableCodeGenerationAdapter
+import org.eclipse.xtext.xbase.compiler.GeneratorConfig
 import org.eclipse.xtext.xbase.compiler.JvmModelGenerator
 import org.junit.Ignore
 import org.junit.Test
-import org.eclipse.xtext.xbase.compiler.DisableCodeGenerationAdapter
 
 abstract class AbstractXtendCompilerTest extends AbstractXtendTestCase {
 	
 	@Inject JvmModelGenerator generator
+	@Inject Provider<GeneratorConfig> generatorConfigProvider
 	
 	@Test def testThreeDataClassesExtendingEachOther() {
 		// part of the Html builder API example. Caused and NPE in which wasn't elsewhere detected in the tests.
@@ -2450,8 +2453,9 @@ abstract class AbstractXtendCompilerTest extends AbstractXtendTestCase {
         val file = file(input.toString(), true)
         val barType = file.eResource.contents.filter(typeof(JvmDeclaredType)).head
         val bazType = file.eResource.contents.filter(typeof(JvmDeclaredType)).last
-        val barJavaCode = generator.generateType(barType);
-        val bazJavaCode = generator.generateType(bazType);
+        val generatorConfig =  generatorConfigProvider.get
+        val barJavaCode = generator.generateType(barType, generatorConfig);
+        val bazJavaCode = generator.generateType(bazType, generatorConfig);
         XtendCompilerTest::assertEquals(expectedBarClass.toString, barJavaCode.toString);
         XtendCompilerTest::assertEquals(expectedBazClass.toString, bazJavaCode.toString);
     }
@@ -2498,14 +2502,50 @@ abstract class AbstractXtendCompilerTest extends AbstractXtendTestCase {
     	''')
     }
     
-	def assertCompilesTo(CharSequence input, CharSequence expected) {
+    @Test
+    def compileWithConfiguration(){
+	val generatorConfig = generatorConfigProvider.get
+	generatorConfig.setGenerateSuppressWarnings(false)
+	generatorConfig.setGenerateExpressions(false)
+        assertCompilesTo(
+        '''
+			package foo
+
+			/**
+			 * javadoc
+			 */
+			class Bar {
+				def foo(){
+					1 + 1
+				}
+			}
+        ''',
+        '''
+			package foo;
+
+			/**
+			 * javadoc
+			 */
+
+			public class Bar {
+			  public int foo() {
+			    throw new UnsupportedOperationException("foo is not implemented");
+			  }
+			}
+        ''', generatorConfig)
+    }
+
+    def  assertCompilesTo(CharSequence input, CharSequence expected){
+	assertCompilesTo(input, expected, generatorConfigProvider.get)
+    }
+
+	def assertCompilesTo(CharSequence input, CharSequence expected, GeneratorConfig config) {
 		val file = file(input.toString(), true)
 		val inferredType = file.eResource.contents.filter(typeof(JvmDeclaredType)).head
 		assertFalse(DisableCodeGenerationAdapter::isDisabled(inferredType))
-		val javaCode = generator.generateType(inferredType);
+		val javaCode = generator.generateType(inferredType, config);
 		XtendCompilerTest::assertEquals(expected.toString, javaCode.toString);
 	}
-	
 }
 
 class XtendCompilerTest extends AbstractXtendCompilerTest {

@@ -14,6 +14,7 @@ import org.eclipse.xtext.util.TextRegion
 import org.junit.Test
 import org.junit.Ignore
 import org.eclipse.xtend.core.xtend.XtendClass
+import org.eclipse.xtext.xbase.compiler.GeneratorConfig
 
 /**
  * @author Sebastian Zarnekow
@@ -22,6 +23,8 @@ class CompilerTraceTest extends AbstractXtendTestCase {
 	
 	@Inject JvmModelGenerator generator
 	
+	@Inject GeneratorConfig generatorConfig
+
 	@Inject extension IXtendJvmAssociations
 	
 	@Test
@@ -770,7 +773,7 @@ class CompilerTraceTest extends AbstractXtendTestCase {
 		val actualXtendCode = xtendGroup1 + xtendGroup2 + xtendGroup3 
 		val file = file(actualXtendCode, true)
 		val inferredType = (file.getXtendTypes.head as XtendClass).getInferredType
-		val compiledCode = generator.generateType(inferredType);
+		val compiledCode = generator.generateType(inferredType, generatorConfig);
 		
 		val javaMatcher = p.matcher(java.toString);
 		assertTrue("javaMatcher.matches", javaMatcher.matches());

@@ -48,6 +48,7 @@ import org.eclipse.xtext.util.Strings;
 import org.eclipse.xtext.validation.CheckMode;
 import org.eclipse.xtext.validation.IResourceValidator;
 import org.eclipse.xtext.validation.Issue;
+import org.eclipse.xtext.xbase.compiler.GeneratorConfig;
 import org.eclipse.xtext.xbase.compiler.JvmModelGenerator;
 
 import com.google.common.base.Function;
@@ -100,6 +101,8 @@ public class XtendBatchCompiler {
 	private IQualifiedNameProvider qualifiedNameProvider;
 	@Inject
 	private IndexedJvmTypeAccess indexedJvmTypeAccess;
+	@Inject
+	private GeneratorConfig generatorConfig;
 
 	protected Writer outputWriter;
 	protected Writer errorWriter;
@@ -417,7 +420,7 @@ public class XtendBatchCompiler {
 		for (IEObjectDescription eObjectDescription : exportedObjectsByType) {
 			XtendClass xtendClass = (XtendClass) eObjectDescription.getEObjectOrProxy();
 			JvmGenericType jvmGenericType = xtendJvmAssociations.getInferredType(xtendClass);
-			CharSequence generatedType = generator.generateType(jvmGenericType);
+			CharSequence generatedType = generator.generateType(jvmGenericType, generatorConfig);
 			if (log.isDebugEnabled()) {
 				log.debug("write '" + outputPath + File.separator + getJavaFileName(xtendClass) + "'");
 			}

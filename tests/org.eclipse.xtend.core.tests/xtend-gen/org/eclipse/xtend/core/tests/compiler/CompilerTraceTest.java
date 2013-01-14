@@ -23,6 +23,7 @@ import org.eclipse.xtext.generator.trace.ITraceRegionProvider;
 import org.eclipse.xtext.util.ITextRegionWithLineInformation;
 import org.eclipse.xtext.util.TextRegion;
 import org.eclipse.xtext.util.TextRegionWithLineInformation;
+import org.eclipse.xtext.xbase.compiler.GeneratorConfig;
 import org.eclipse.xtext.xbase.compiler.JvmModelGenerator;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Functions.Function0;
@@ -40,6 +41,9 @@ public class CompilerTraceTest extends AbstractXtendTestCase {
   @Inject
   private JvmModelGenerator generator;
   
+  @Inject
+  private GeneratorConfig generatorConfig;
+
   @Inject
   private IXtendJvmAssociations _iXtendJvmAssociations;
   
@@ -1560,7 +1564,7 @@ public class CompilerTraceTest extends AbstractXtendTestCase {
       EList<XtendTypeDeclaration> _xtendTypes = file.getXtendTypes();
       XtendTypeDeclaration _head = IterableExtensions.<XtendTypeDeclaration>head(_xtendTypes);
       final JvmGenericType inferredType = this._iXtendJvmAssociations.getInferredType(((XtendClass) _head));
-      final CharSequence compiledCode = this.generator.generateType(inferredType);
+      final CharSequence compiledCode = this.generator.generateType(inferredType, this.generatorConfig);
       String _string = java.toString();
       final Matcher javaMatcher = this.p.matcher(_string);
       boolean _matches_1 = javaMatcher.matches();

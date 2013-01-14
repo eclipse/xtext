@@ -40,6 +40,7 @@ import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.junit4.util.ParseHelper;
 import org.eclipse.xtext.junit4.validation.ValidationTestHelper;
 import org.eclipse.xtext.xbase.XbasePackage;
+import org.eclipse.xtext.xbase.compiler.GeneratorConfig;
 import org.eclipse.xtext.xbase.compiler.JvmModelGenerator;
 import org.eclipse.xtext.xbase.compiler.OnTheFlyJavaCompiler.EclipseRuntimeDependentJavaCompiler;
 import org.eclipse.xtext.xbase.lib.Conversions;
@@ -2984,6 +2985,9 @@ public abstract class AbstractCompilerTest extends AbstractXtendTestCase {
 	@Inject
 	private IXtendJvmAssociations associations;
 	
+	@Inject
+	protected GeneratorConfig generatorConfig;
+
 	@Before
 	public void setUp() throws Exception {
 		javaCompiler.clearClassPath();
@@ -3083,7 +3087,7 @@ public abstract class AbstractCompilerTest extends AbstractXtendTestCase {
 			XtendFile file = parseHelper.parse(xtendCode);
 			validationHelper.assertNoErrors(file);
 			JvmGenericType inferredType = associations.getInferredType((XtendClass) file.getXtendTypes().get(0));
-			CharSequence javaCode = generator.generateType(inferredType);
+			CharSequence javaCode = generator.generateType(inferredType, generatorConfig);
 			return javaCode.toString();
 		} catch (Exception exc) {
 			throw new RuntimeException("Xtend compilation failed:\n" + xtendCode, exc);
