@@ -71,6 +71,9 @@ public class QuickfixProviderFragment extends AbstractStubGeneratorFragment impl
 		this.isInheritImplementation = isInheritImplementation;
 	}
 
+	/**
+	 * @since 2.4
+	 */
 	@Override
 	protected List<Object> getParameters(Grammar grammar) {
 		List<Object> parameters = super.getParameters(grammar);
@@ -78,6 +81,9 @@ public class QuickfixProviderFragment extends AbstractStubGeneratorFragment impl
 		return parameters;
 	}
 
+	/**
+	 * @since 2.4
+	 */
 	@Override
 	public String[] getExportedPackagesUi(Grammar grammar) {
 		return new String[] { getNaming().packageName(getQuickfixProviderName(grammar, getNaming())) };
