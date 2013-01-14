@@ -141,7 +141,7 @@ public class DefaultUiModule extends AbstractGenericModule {
 	/**
 	 * @since 2.4
 	 */
-	public Class<? extends IImageDescriptorHelper> bindIImageDescriptorHelperHelper() {
+	public Class<? extends IImageDescriptorHelper> bindIImageDescriptorHelper() {
 		return PluginImageHelper.class;
 	}
 
