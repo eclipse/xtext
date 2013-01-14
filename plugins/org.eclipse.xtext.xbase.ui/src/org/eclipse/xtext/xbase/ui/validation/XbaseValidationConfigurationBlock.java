@@ -26,9 +26,14 @@ import org.eclipse.xtext.xbase.validation.XbaseSeverityConverter;
 import com.google.inject.Inject;
 
 /**
- * Default ConfigurationBlock for Xbase Langauges
+ * Default ConfigurationBlock for Xbase Langauges.<br>
+ * Clients may override {@link #fillSettingsPage(Composite, int, int)}<br>
+ * If {@link #fillSettingsPage(Composite, int, int)} is reused, clients may participate<br>
+ * to the section creation in {@link #fillRestrictedApiSection(ComboBoxBuilder)} and/or
+ * {@link #fillUnusedCodeSection(ComboBoxBuilder)}
  * 
  * @author Dennis Huebner - Initial contribution and API
+ * 
  */
 public class XbaseValidationConfigurationBlock extends AbstractValidatorConfigurationBlock {
 	@Inject
@@ -37,9 +42,9 @@ public class XbaseValidationConfigurationBlock extends AbstractValidatorConfigur
 	@Override
 	protected void fillSettingsPage(Composite composite, int nColumns, int defaultIndent) {
 
-		Composite inner = createSection(Messages.XbaseValidationConfigurationBlock_restricted_api_section_title,
+		Composite restrictedApi = createSection(Messages.XbaseValidationConfigurationBlock_restricted_api_section_title,
 				composite, nColumns);
-		fillRestrictedApiSection(new ComboBoxBuilder(this, inner, defaultIndent));
+		fillRestrictedApiSection(new ComboBoxBuilder(this, restrictedApi, defaultIndent));
 
 		Composite unusedCode = createSection("Unnecessary code", composite, nColumns);
 		fillUnusedCodeSection(new ComboBoxBuilder(this, unusedCode, defaultIndent));
