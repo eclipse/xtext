@@ -15,7 +15,6 @@ import org.eclipse.xtext.xbase.formatting.XbaseFormatter
  * see : http://www.eclipse.org/Xtext/documentation/latest/xtext.html#formatting
  * on how and when to use it 
  * 
- * Also see {@link org.eclipse.xtext.xtext.XtextFormattingTokenSerializer} as an example
  */
 class PureXbaseFormatter extends AbstractDeclarativeFormatter {
 

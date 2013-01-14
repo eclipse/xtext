@@ -102,6 +102,7 @@ class JvmModelGenerator implements IGenerator {
 	@Inject IJavaDocTypeReferenceProvider javaDocTypeReferenceProvider
 	@Inject IScopeProvider scopeProvider
 	@Inject IQualifiedNameConverter qualifiedNameConverter
+	@Inject GeneratorConfig generatorConfig
 	
 	override void doGenerate(Resource input, IFileSystemAccess fsa) {
 		for (obj : input.contents) {
@@ -115,15 +116,15 @@ class JvmModelGenerator implements IGenerator {
 		if (DisableCodeGenerationAdapter::isDisabled(type))
 			return;
 		if(type.qualifiedName != null)
-			fsa.generateFile(type.qualifiedName.replace('.', '/') + '.java', type.generateType)
+			fsa.generateFile(type.qualifiedName.replace('.', '/') + '.java', type.generateType(generatorConfig))
 	}
 	
-	def CharSequence generateType(JvmDeclaredType type) {
+	def CharSequence generateType(JvmDeclaredType type, GeneratorConfig config) {
 		val importManager = new ImportManager(true, type)
-		val bodyAppendable = createAppendable(type, importManager)
-		generateBody(type, bodyAppendable)
-		val importAppendable = createAppendable(type, importManager)
-        generateFileHeader(type, importAppendable)
+		val bodyAppendable = createAppendable(type, importManager, config)
+		generateBody(type, bodyAppendable, config)
+		val importAppendable = createAppendable(type, importManager, config)
+        generateFileHeader(type, importAppendable, config)
 		if (type.packageName != null) {
 			importAppendable.append("package ").append(type.packageName).append(";");
 			importAppendable.newLine.newLine
@@ -138,100 +139,100 @@ class JvmModelGenerator implements IGenerator {
 	}
 	
 	
-	def dispatch generateBody(JvmGenericType it, ITreeAppendable appendable) {
-		generateJavaDoc(appendable)
+	def dispatch generateBody(JvmGenericType it, ITreeAppendable appendable, GeneratorConfig config) {
+		generateJavaDoc(appendable, config)
 		val childAppendable = appendable.trace(it)
-		generateAnnotations(childAppendable, true)
-		generateModifier(childAppendable)
+		generateAnnotations(childAppendable, true, config)
+		generateModifier(childAppendable, config)
 		if (isInterface) {
 			childAppendable.append("interface ")
 		} else {
 			childAppendable.append("class ")
 		}
 		childAppendable.traceSignificant(it).append(simpleName)
-		generateTypeParameterDeclaration(childAppendable)
+		generateTypeParameterDeclaration(childAppendable, config)
 		if (typeParameters.empty)
 			childAppendable.append(" ")
-		generateExtendsClause(childAppendable)
+		generateExtendsClause(childAppendable, config)
 		childAppendable.append('{').increaseIndentation
 		childAppendable.forEach(membersToBeCompiled, [
 				separator = [ITreeAppendable it | newLine]
 			], [
 				val memberAppendable = childAppendable.traceWithComments(it)
 				memberAppendable.openScope
-				generateMember(memberAppendable)
+				generateMember(memberAppendable, config)
 				memberAppendable.closeScope
 			])
 		childAppendable.decreaseIndentation.newLine.append('}')
 		appendable.newLine
 	}
 	
-	def dispatch generateBody(JvmEnumerationType it, ITreeAppendable appendable) {
-		generateJavaDoc(appendable)
+	def dispatch generateBody(JvmEnumerationType it, ITreeAppendable appendable, GeneratorConfig config) {
+		generateJavaDoc(appendable, config)
 		val childAppendable = appendable.trace(it)
-		generateAnnotations(childAppendable, true)
-		generateModifier(childAppendable)
+		generateAnnotations(childAppendable, true, config)
+		generateModifier(childAppendable, config)
 		childAppendable.append("enum ")
 		childAppendable.traceSignificant(it).append(simpleName)
 		childAppendable.append(" ")
-		generateExtendsClause(childAppendable)
+		generateExtendsClause(childAppendable, config)
 		childAppendable.append("{").increaseIndentation
 		childAppendable.forEach(literals, [
 				separator = [ITreeAppendable it | append(',').newLine]  suffix = ';'
 			], [
-				generateEnumLiteral(childAppendable.trace(it))
+				generateEnumLiteral(childAppendable.trace(it), config)
 			])
 		childAppendable.forEach(membersToBeCompiled.filter[!(it instanceof JvmEnumerationLiteral)], [
 				separator = [ITreeAppendable it | newLine]
 			], [ 
-				generateMember(childAppendable.trace(it)) 
+				generateMember(childAppendable.trace(it), config)
 			])
 		childAppendable.decreaseIndentation.newLine.append("}")
 		appendable.newLine
 	}
 	
-	def void generateEnumLiteral(JvmEnumerationLiteral it, ITreeAppendable appendable) {
+	def void generateEnumLiteral(JvmEnumerationLiteral it, ITreeAppendable appendable, GeneratorConfig config) {
 		appendable.increaseIndentation.newLine
-		generateJavaDoc(appendable)
-		generateAnnotations(appendable, true)
+		generateJavaDoc(appendable, config)
+		generateAnnotations(appendable, true, config)
 		appendable.append(simpleName)
 		// TODO: constructor args
 		appendable.decreaseIndentation
 	}
 	
-	def dispatch generateBody(JvmAnnotationType it, ITreeAppendable appendable) {
-		generateJavaDoc(appendable)
+	def dispatch generateBody(JvmAnnotationType it, ITreeAppendable appendable, GeneratorConfig config) {
+		generateJavaDoc(appendable, config)
 		val childAppendable = appendable.trace(it)
-		generateAnnotations(childAppendable, true)
-		generateModifier(childAppendable)
+		generateAnnotations(childAppendable, true, config)
+		generateModifier(childAppendable, config)
 		childAppendable.append("@interface ")
 		childAppendable.traceSignificant(it).append(simpleName)
 		childAppendable.append(" {")
 		for (operation : members.filter(typeof(JvmOperation))) {
-			generateAnnotationMethod(operation, childAppendable)
+			generateAnnotationMethod(operation, childAppendable, config)
 		}
 		childAppendable.newLine.append("}")
 		appendable.newLine
 	}
 	
-	def generateAnnotationMethod(JvmOperation it, ITreeAppendable appendable) {
+	def generateAnnotationMethod(JvmOperation it, ITreeAppendable appendable, GeneratorConfig config) {
 		appendable.increaseIndentation.newLine
 		appendable.openScope
-		generateJavaDoc(appendable)
+		generateJavaDoc(appendable, config)
 		val tracedAppendable = appendable.trace(it)
-		generateAnnotations(tracedAppendable, true)
-		generateModifier(tracedAppendable)
+		generateAnnotations(tracedAppendable, true, config)
+		generateModifier(tracedAppendable, config)
 		returnType.serializeSafely("Object", tracedAppendable)
 		tracedAppendable.append(" ")
 		tracedAppendable.traceSignificant(it).append(simpleName)
 		tracedAppendable.append("()")
-		generateDefaultExpression(tracedAppendable)
+		generateDefaultExpression(tracedAppendable, config)
 		tracedAppendable.append(";")
 		appendable.decreaseIndentation
 		appendable.closeScope
 	}
-	
-	def void generateDefaultExpression(JvmOperation it, ITreeAppendable appendable) {
+
+	def void generateDefaultExpression(JvmOperation it, ITreeAppendable appendable, GeneratorConfig config) {
 		if (compilationStrategy != null) {
 			appendable.append(" default ")
 			appendable.increaseIndentation
@@ -239,7 +240,7 @@ class JvmModelGenerator implements IGenerator {
 			appendable.decreaseIndentation
 		} else {
 			val expression = associatedExpression
-			if (expression != null) {
+			if (expression != null && config.generateExpressions) {
 				if(expression.hasErrors(true)) {
 					appendable.append("/* skipped default expression with errors */")
 				} else {
@@ -250,7 +251,7 @@ class JvmModelGenerator implements IGenerator {
 		}
 	}
 	
-	def dispatch generateModifier(JvmDeclaredType it, ITreeAppendable appendable) {
+	def dispatch generateModifier(JvmDeclaredType it, ITreeAppendable appendable, GeneratorConfig config) {
 		appendable.append(visibility.javaName)
 		if (!(it instanceof JvmEnumerationType)) {
 			if (isAbstract)
@@ -262,7 +263,7 @@ class JvmModelGenerator implements IGenerator {
 		}
 	}
 	
-	def dispatch generateModifier(JvmField it, ITreeAppendable appendable) {
+	def dispatch generateModifier(JvmField it, ITreeAppendable appendable, GeneratorConfig config) {
 		appendable.append(visibility.javaName)
 		if (isFinal)
 			appendable.append("final ")
@@ -270,7 +271,7 @@ class JvmModelGenerator implements IGenerator {
 			appendable.append("static ")
 	}
 		
-	def dispatch generateModifier(JvmOperation it, ITreeAppendable appendable) {
+	def dispatch generateModifier(JvmOperation it, ITreeAppendable appendable, GeneratorConfig config) {
 		appendable.append(visibility.javaName)
 		if (isAbstract)
 			appendable.append("abstract ")
@@ -280,7 +281,7 @@ class JvmModelGenerator implements IGenerator {
 			appendable.append("final ")
 	}
 	
-	def dispatch generateModifier(JvmConstructor it, ITreeAppendable appendable) {
+	def dispatch generateModifier(JvmConstructor it, ITreeAppendable appendable, GeneratorConfig config) {
 		appendable.append(visibility.javaName)
 	}
 	
@@ -299,7 +300,7 @@ class JvmModelGenerator implements IGenerator {
 			return ''
 	}
 		
-	def void generateExtendsClause(JvmDeclaredType it, ITreeAppendable appendable) {
+	def void generateExtendsClause(JvmDeclaredType it, ITreeAppendable appendable, GeneratorConfig config) {
 		if (it instanceof JvmGenericType && (it as JvmGenericType).isInterface) {
 			appendable.forEachSafely(superTypes, [
 					prefix = 'extends '	separator =  ', ' suffix =  ' '
@@ -330,38 +331,38 @@ class JvmModelGenerator implements IGenerator {
 		}
 	}
 	
-	def dispatch ITreeAppendable generateMember(JvmMember it, ITreeAppendable appendable) {
+	def dispatch ITreeAppendable generateMember(JvmMember it, ITreeAppendable appendable, GeneratorConfig config) {
 		throw new UnsupportedOperationException("generateMember not implemented for elements of type "
 			+ it?.^class?.name
 		)
 	}
 	
-	def dispatch generateMember(JvmGenericType it, ITreeAppendable appendable) {
+	def dispatch generateMember(JvmGenericType it, ITreeAppendable appendable, GeneratorConfig config) {
 		appendable.newLine
-		generateBody(it, appendable)
+		generateBody(it, appendable, config)
 	}
 	
-	def dispatch generateMember(JvmField it, ITreeAppendable appendable) {
+	def dispatch generateMember(JvmField it, ITreeAppendable appendable, GeneratorConfig config) {
 		appendable.newLine
-		generateJavaDoc(appendable)
+		generateJavaDoc(appendable, config)
 		val tracedAppendable = appendable.trace(it)
-		generateAnnotations(tracedAppendable, true)
-		generateModifier(tracedAppendable)
+		generateAnnotations(tracedAppendable, true, config)
+		generateModifier(tracedAppendable, config)
 		type.serializeSafely("Object", tracedAppendable)
 		tracedAppendable.append(" ")
 		tracedAppendable.traceSignificant(it).append(simpleName)
-		generateInitialization(tracedAppendable)
+		generateInitialization(tracedAppendable, config)
 		tracedAppendable.append(";")
 	}
 	
-	def dispatch generateMember(JvmOperation it, ITreeAppendable appendable) {
+	def dispatch generateMember(JvmOperation it, ITreeAppendable appendable, GeneratorConfig config) {
 		appendable.newLine
 		appendable.openScope
-		generateJavaDoc(appendable)
+		generateJavaDoc(appendable, config)
 		val tracedAppendable = appendable.trace(it)
-		generateAnnotations(tracedAppendable, true)
-		generateModifier(tracedAppendable)
-		generateTypeParameterDeclaration(tracedAppendable)
+		generateAnnotations(tracedAppendable, true, config)
+		generateModifier(tracedAppendable, config)
+		generateTypeParameterDeclaration(tracedAppendable, config)
 		if (returnType == null) {
 			tracedAppendable.append("void")
 		} else {
@@ -370,39 +371,39 @@ class JvmModelGenerator implements IGenerator {
 		tracedAppendable.append(" ")
 		tracedAppendable.traceSignificant(it).append(simpleName)
 		tracedAppendable.append("(")
-		generateParameters(tracedAppendable)
+		generateParameters(tracedAppendable, config)
 		tracedAppendable.append(")")
-		generateThrowsClause(tracedAppendable)
+		generateThrowsClause(tracedAppendable, config)
 		if (isAbstract || !hasBody) {
 			tracedAppendable.append(";")
 		} else {
 			tracedAppendable.append(" ")
-			generateExecutableBody(tracedAppendable)
+			generateExecutableBody(tracedAppendable, config)
 		}
 		appendable.closeScope
 		appendable
 	}
 	
-	def dispatch generateMember(JvmConstructor it, ITreeAppendable appendable) {
+	def dispatch generateMember(JvmConstructor it, ITreeAppendable appendable, GeneratorConfig config) {
 		appendable.newLine
 		appendable.openScope
-		generateJavaDoc(appendable)
+		generateJavaDoc(appendable, config)
 		val tracedAppendable = appendable.trace(it)
-		generateAnnotations(tracedAppendable, true)
-		generateModifier(tracedAppendable)
-		generateTypeParameterDeclaration(tracedAppendable)
+		generateAnnotations(tracedAppendable, true, config)
+		generateModifier(tracedAppendable, config)
+		generateTypeParameterDeclaration(tracedAppendable, config)
 		tracedAppendable.traceSignificant(it).append(simpleName)
 		tracedAppendable.append("(")
-		generateParameters(tracedAppendable)
+		generateParameters(tracedAppendable, config)
 		tracedAppendable.append(")")
-		generateThrowsClause(tracedAppendable)
+		generateThrowsClause(tracedAppendable, config)
 		tracedAppendable.append(" ")
-		generateExecutableBody(tracedAppendable)
+		generateExecutableBody(tracedAppendable, config)
 		appendable.closeScope
 		appendable
 	}
 	
-	def void generateInitialization(JvmField it, ITreeAppendable appendable) {
+	def void generateInitialization(JvmField it, ITreeAppendable appendable, GeneratorConfig config) {
 		if (compilationStrategy != null) {
 			appendable.append(" = ")
 			appendable.increaseIndentation
@@ -410,7 +411,7 @@ class JvmModelGenerator implements IGenerator {
 			appendable.decreaseIndentation
 		} else {
 			val expression = associatedExpression
-			if (expression != null) {
+			if (expression != null && config.generateExpressions) {
 				if(expression.hasErrors(true)) {
 					appendable.append(" /* Skipped initializer because of errors */")
 				} else {
@@ -421,21 +422,21 @@ class JvmModelGenerator implements IGenerator {
 		}
 	}
 		
-	def void generateTypeParameterDeclaration(JvmTypeParameterDeclarator it, ITreeAppendable appendable) {
+	def void generateTypeParameterDeclaration(JvmTypeParameterDeclarator it, ITreeAppendable appendable, GeneratorConfig config) {
 		appendable.forEach(typeParameters, [
 				prefix = '<' separator = ', ' suffix = '> '
 			], [
-				it| generateTypeParameterDeclaration(appendable)
+				it| generateTypeParameterDeclaration(appendable, config)
 			])
 	}
 	
-	def void generateTypeParameterDeclaration(JvmTypeParameter it, ITreeAppendable appendable) {
+	def void generateTypeParameterDeclaration(JvmTypeParameter it, ITreeAppendable appendable, GeneratorConfig config) {
 		val tracedAppendable = appendable.trace(it)
 		tracedAppendable.traceSignificant(it).append(name)
-		generateTypeParameterConstraints(tracedAppendable)
+		generateTypeParameterConstraints(tracedAppendable, config)
 	}
 	
-	def void generateTypeParameterConstraints(JvmTypeParameter it, ITreeAppendable appendable) {
+	def void generateTypeParameterConstraints(JvmTypeParameter it, ITreeAppendable appendable, GeneratorConfig config) {
 		val upperBounds = constraints.filter(typeof(JvmUpperBound))
 		appendable.forEachSafely(upperBounds, [
 				prefix = ' extends ' separator = ' & '
@@ -444,7 +445,7 @@ class JvmModelGenerator implements IGenerator {
 			])
 	}
 	
-	def void generateThrowsClause(JvmExecutable it, ITreeAppendable appendable) {
+	def void generateThrowsClause(JvmExecutable it, ITreeAppendable appendable, GeneratorConfig config) {
 		val toBeGenerated = <JvmType, JvmTypeReference> newLinkedHashMap
 		exceptions.forEach[if(!toBeGenerated.containsKey(type)) toBeGenerated.put(type, it)]
 		appendable.forEachSafely(toBeGenerated.values, [
@@ -454,21 +455,21 @@ class JvmModelGenerator implements IGenerator {
 			])
 	}
 	
-	def void generateParameters(JvmExecutable it, ITreeAppendable appendable) {
+	def void generateParameters(JvmExecutable it, ITreeAppendable appendable, GeneratorConfig config) {
 		if (!parameters.isEmpty) {
 			for (i : 0 .. parameters.size - 1) {
 				val last = i + 1 == parameters.size
 				val p = parameters.get(i)
-				p.generateParameter(appendable, last && it.varArgs)
+				p.generateParameter(appendable, last && it.varArgs, config)
 				if (!last)
 					appendable.append(", ")
 			}
 		}
 	}
 	
-	def void generateParameter(JvmFormalParameter it, ITreeAppendable appendable, boolean vararg) {
+	def void generateParameter(JvmFormalParameter it, ITreeAppendable appendable, boolean vararg, GeneratorConfig config) {
 		val tracedAppendable = appendable.trace(it)
-		generateAnnotations(tracedAppendable, false)
+		generateAnnotations(tracedAppendable, false, config)
 		tracedAppendable.append("final ")
 		if (vararg) {
 			if (! (parameterType instanceof JvmGenericArrayTypeReference)) {
@@ -488,8 +489,8 @@ class JvmModelGenerator implements IGenerator {
 	def hasBody(JvmExecutable op) {
 		op.compilationStrategy != null || op.associatedExpression != null
 	}
-		
-	def void generateExecutableBody(JvmExecutable op, ITreeAppendable appendable) {
+
+	def void generateExecutableBody(JvmExecutable op, ITreeAppendable appendable, GeneratorConfig config) {
 		if (op.compilationStrategy != null) {
 			val errors = op.getErrors(true)
 			if(errors.empty) {
@@ -501,7 +502,7 @@ class JvmModelGenerator implements IGenerator {
 			}
 		} else {
 			val expression = op.getAssociatedExpression
-			if (expression != null) {
+			if (expression != null && config.generateExpressions) {
 				val errors = expression.getErrors(true)
 				if(errors.empty) {
 					val returnType = switch(op) { 
@@ -546,28 +547,28 @@ class JvmModelGenerator implements IGenerator {
 	}
 	
 	
-	def void generateFileHeader(JvmDeclaredType it, ITreeAppendable appendable) {
+	def void generateFileHeader(JvmDeclaredType it, ITreeAppendable appendable, GeneratorConfig config) {
         val fileHeaderAdapter = it.eAdapters.filter(typeof(FileHeaderAdapter)).head
         if(!fileHeaderAdapter?.headerText.nullOrEmpty) {
-        	generateDocumentation(fileHeaderAdapter.headerText, fileHeaderProvider.getFileHeaderNodes(eResource), appendable)
+		generateDocumentation(fileHeaderAdapter.headerText, fileHeaderProvider.getFileHeaderNodes(eResource), appendable, config)
         }
     }
 
-	def void generateJavaDoc(EObject it, ITreeAppendable appendable) {
+	def void generateJavaDoc(EObject it, ITreeAppendable appendable, GeneratorConfig config) {
 		val adapter = it.eAdapters.filter(typeof(DocumentationAdapter)).head
 		if(!adapter?.documentation.nullOrEmpty) {
 			// TODO we should track the source of the documentation in the documentation adapter
 			val sourceElements = jvmModelAssociations.getSourceElements(it)
 			if (sourceElements.size == 1 && documentationProvider instanceof IEObjectDocumentationProviderExtension) {
 				val documentationNodes = (documentationProvider as IEObjectDocumentationProviderExtension).getDocumentationNodes(sourceElements.head)
-				generateDocumentation(adapter.documentation, documentationNodes, appendable)
+				generateDocumentation(adapter.documentation, documentationNodes, appendable, config)
 			} else {
-				generateDocumentation(adapter.documentation, emptyList, appendable)
+				generateDocumentation(adapter.documentation, emptyList, appendable, config)
 			}
 		}
 	} 
 	
-	def protected generateDocumentation(String text, List<INode> documentationNodes, ITreeAppendable appendable) {
+	def protected generateDocumentation(String text, List<INode> documentationNodes, ITreeAppendable appendable, GeneratorConfig config) {
 		if (!documentationNodes.empty) {
 			var documentationTrace = ITextRegionWithLineInformation::EMPTY_REGION
 			for(node: documentationNodes) {
@@ -647,63 +648,67 @@ class JvmModelGenerator implements IGenerator {
 		}
 	}
 	
-	def void generateAnnotations(JvmAnnotationTarget it, ITreeAppendable appendable, boolean withLineBreak) {
+	def void generateAnnotations(JvmAnnotationTarget it, ITreeAppendable appendable, boolean withLineBreak, GeneratorConfig config) {
 		val sep = [ITreeAppendable it |  if(withLineBreak) newLine else append(' ') ]
 		appendable.forEachSafely(annotations, [
 				separator = sep suffix = sep
 			], [
-				it, app | it.generateAnnotation(app)
+				it, app | it.generateAnnotation(app, config)
 			])
 	}
 	
-	def void generateAnnotations(JvmAnnotationAnnotationValue it, ITreeAppendable appendable, boolean withLineBreak) {
+	def void generateAnnotations(JvmAnnotationAnnotationValue it, ITreeAppendable appendable, boolean withLineBreak, GeneratorConfig config) {
 		appendable.forEachSafely(values, [
 				separator = [ITreeAppendable it |  if(withLineBreak) append(',').newLine else append(', ') ]
 				suffix = [ITreeAppendable it |  if(withLineBreak) newLine ]
 			], [
-				it, app | it.generateAnnotation(app)
+				it, app | it.generateAnnotation(app, config)
 			])
 	}
-	
-	def void generateAnnotation(JvmAnnotationReference it, ITreeAppendable appendable) {
-		appendable.append("@")
-		appendable.append(annotation)
-		appendable.forEach(values, [
-				prefix = '(' separator = ', ' suffix = ')'		
-			], [
-				toJava(appendable)
-			])
+
+	def void generateAnnotation(JvmAnnotationReference it, ITreeAppendable appendable, GeneratorConfig config) {
+		if(!(annotation.qualifiedName.equals("java.lang.SuppressWarnings") && !config.generateSuppressWarnings) ){
+			appendable.append("@")
+			appendable.append(annotation)
+			if(config.generateExpressions)
+				appendable.forEach(values, [
+						prefix = '(' separator = ', ' suffix = ')'
+					], [
+						toJava(appendable, config)
+					])
+
+			}
 	}
 	 
-	def void toJava(JvmAnnotationValue it, ITreeAppendable appendable) {
+	def void toJava(JvmAnnotationValue it, ITreeAppendable appendable, GeneratorConfig config) {
 		if (operation != null) {
 			appendable.append(operation.simpleName)
 			appendable.append(" = ")
 		} 
-		toJavaLiteral(appendable)
+		toJavaLiteral(appendable, config)
 	}
 		
-	def dispatch void toJavaLiteral(JvmAnnotationAnnotationValue value, ITreeAppendable appendable) {
-		appendable.forEachWithShortcut(value.values, [value.generateAnnotations(appendable, false)])
+	def dispatch void toJavaLiteral(JvmAnnotationAnnotationValue value, ITreeAppendable appendable, GeneratorConfig config) {
+		appendable.forEachWithShortcut(value.values, [value.generateAnnotations(appendable, false, config)])
 	}
 		
-	def dispatch void toJavaLiteral(JvmShortAnnotationValue it, ITreeAppendable appendable) {
+	def dispatch void toJavaLiteral(JvmShortAnnotationValue it, ITreeAppendable appendable, GeneratorConfig config) {
 		appendable.forEachWithShortcut(values, [toString])
 	}
 	
-	def dispatch void toJavaLiteral(JvmIntAnnotationValue it, ITreeAppendable appendable) {
+	def dispatch void toJavaLiteral(JvmIntAnnotationValue it, ITreeAppendable appendable, GeneratorConfig config) {
 		appendable.forEachWithShortcut(values, [toString])
 	}
 	
-	def dispatch void toJavaLiteral(JvmLongAnnotationValue it, ITreeAppendable appendable) {
+	def dispatch void toJavaLiteral(JvmLongAnnotationValue it, ITreeAppendable appendable, GeneratorConfig config) {
 		appendable.forEachWithShortcut(values, [toString])
 	}
 	
-	def dispatch void toJavaLiteral(JvmByteAnnotationValue it, ITreeAppendable appendable) {
+	def dispatch void toJavaLiteral(JvmByteAnnotationValue it, ITreeAppendable appendable, GeneratorConfig config) {
 		appendable.forEachWithShortcut(values, [toString])
 	}
 	
-	def dispatch void toJavaLiteral(JvmDoubleAnnotationValue it, ITreeAppendable appendable) {
+	def dispatch void toJavaLiteral(JvmDoubleAnnotationValue it, ITreeAppendable appendable, GeneratorConfig config) {
 		appendable.forEachWithShortcut(values, [
 			appendable.append(
 				switch(it) {
@@ -715,7 +720,7 @@ class JvmModelGenerator implements IGenerator {
 		])
 	}
 	
-	def dispatch void toJavaLiteral(JvmFloatAnnotationValue it, ITreeAppendable appendable) {
+	def dispatch void toJavaLiteral(JvmFloatAnnotationValue it, ITreeAppendable appendable, GeneratorConfig config) {
 		appendable.forEachWithShortcut(values, [
 			appendable.append(
 				switch(it) {
@@ -727,25 +732,25 @@ class JvmModelGenerator implements IGenerator {
 		])
 	}
 	
-	def dispatch void toJavaLiteral(JvmCharAnnotationValue it, ITreeAppendable appendable) {
+	def dispatch void toJavaLiteral(JvmCharAnnotationValue it, ITreeAppendable appendable, GeneratorConfig config) {
 		appendable.forEachWithShortcut(values, [
 			appendable.append("'" + Strings::convertToJavaString(toString, true) + "'")			
 		])
 	}
 		
-	def dispatch void toJavaLiteral(JvmStringAnnotationValue it, ITreeAppendable appendable) {
+	def dispatch void toJavaLiteral(JvmStringAnnotationValue it, ITreeAppendable appendable, GeneratorConfig config) {
 		appendable.forEachWithShortcut(values, [
 			appendable.append('"' + Strings::convertToJavaString(toString, true) + '"')			
 		])
 	}
 		
-	def dispatch void toJavaLiteral(JvmTypeAnnotationValue it, ITreeAppendable appendable) {
+	def dispatch void toJavaLiteral(JvmTypeAnnotationValue it, ITreeAppendable appendable, GeneratorConfig config) {
 		appendable.forEachWithShortcut(values, [
 			appendable.append(type).append(".class")
 		])
 	} 
 	
-	def dispatch void toJavaLiteral(JvmEnumAnnotationValue it, ITreeAppendable appendable) {
+	def dispatch void toJavaLiteral(JvmEnumAnnotationValue it, ITreeAppendable appendable, GeneratorConfig config) {
 		appendable.forEachWithShortcut(values, [
 			appendable.append(declaringType)
 			appendable.append(".")
@@ -753,19 +758,19 @@ class JvmModelGenerator implements IGenerator {
 		])
 	} 
 		
-	def dispatch void toJavaLiteral(JvmBooleanAnnotationValue it, ITreeAppendable appendable) {
+	def dispatch void toJavaLiteral(JvmBooleanAnnotationValue it, ITreeAppendable appendable, GeneratorConfig config) {
 		appendable.forEachWithShortcut(values, [
 			appendable.append(toString)			
 		])
 	} 
 	
-	def dispatch void toJavaLiteral(JvmCustomAnnotationValue it, ITreeAppendable appendable) {
+	def dispatch void toJavaLiteral(JvmCustomAnnotationValue it, ITreeAppendable appendable, GeneratorConfig config) {
 		appendable.forEachWithShortcut(values.filter(typeof(XExpression)), [
 			compiler.toJavaExpression(it, appendable)
 		])
 	}
 		
-	def TreeAppendable createAppendable(EObject context, ImportManager importManager) {
+	def TreeAppendable createAppendable(EObject context, ImportManager importManager, GeneratorConfig config) {
 		val appendable = new TreeAppendable(importManager, locationProvider, jvmModelAssociations, context, "  ", "\n")
 		val type = context.containerType
 		if( type != null) {

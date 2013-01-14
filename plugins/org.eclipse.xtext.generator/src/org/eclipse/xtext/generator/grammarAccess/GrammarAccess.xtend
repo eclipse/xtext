@@ -64,7 +64,7 @@ class GrammarAccess {
 	}
 	/**
 	 * Returns the full qulified Java class name of a GrammarAccess implementation for a grammar.
-	 * @param grammar 
+	 * @param grammar the grammar
 	 * @return the GrammarAccess' full qualified Java class name
 	 */
 	def String gaFQName(Grammar grammar) {
@@ -111,7 +111,7 @@ class GrammarAccess {
 	/**
 	 * Returns the simple class name of a rule's facade. A GrammarAccess implementation has
 	 * a facade for each parser rule, which contains the methods for accessing the rule's elements.
-	 * @param rule
+	 * @param rule ruleName
 	 * @return the simple class name
 	 */	
 	def String gaRuleAccesorClassName(AbstractRule rule) {
