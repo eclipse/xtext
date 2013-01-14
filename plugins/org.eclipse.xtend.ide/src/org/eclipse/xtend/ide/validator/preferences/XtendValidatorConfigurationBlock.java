@@ -9,6 +9,7 @@ package org.eclipse.xtend.ide.validator.preferences;
 
 import static org.eclipse.xtend.core.validation.IssueCodes.*;
 
+import org.eclipse.swt.widgets.Composite;
 import org.eclipse.xtext.xbase.ui.validation.XbaseValidationConfigurationBlock;
 
 /**
@@ -17,12 +18,22 @@ import org.eclipse.xtext.xbase.ui.validation.XbaseValidationConfigurationBlock;
 public class XtendValidatorConfigurationBlock extends XbaseValidationConfigurationBlock {
 
 	@Override
+	protected void fillSettingsPage(Composite composite, int nColumns, int defaultIndent) {
+		super.fillSettingsPage(composite, nColumns, defaultIndent);
+		fillDispatchSection(new ComboBoxBuilder(this, createSection("Dispatch methods", composite, nColumns),
+				defaultIndent));
+	}
+
+	protected void fillDispatchSection(ComboBoxBuilder builder) {
+		builder.addComboBox(DISPATCH_PLAIN_FUNCTION_NAME_CLASH, "Dispatch plain function name clash:").addComboBox(
+				SINGLE_DISPATCH_FUNCTION, "Single dispatch function:");
+	}
+
+	@Override
 	protected void fillUnusedCodeSection(ComboBoxBuilder builder) {
 		super.fillUnusedCodeSection(builder);
-		builder.addComboBox(SINGLE_DISPATCH_FUNCTION, "Single dispatch function:")
-				.addComboBox(DISPATCH_PLAIN_FUNCTION_NAME_CLASH, "Dispatch plain function name clash:")
-				.addComboBox(FIELD_LOCALLY_NEVER_READ, "Field never read locally:")
-				.addComboBox(FUNCTION_LOCALLY_NEVER_USED, "Function never used locally:");
+		builder.addComboBox(FIELD_LOCALLY_NEVER_READ, "Field never read locally:").addComboBox(
+				FUNCTION_LOCALLY_NEVER_USED, "Function never used locally:");
 	}
 
 }
