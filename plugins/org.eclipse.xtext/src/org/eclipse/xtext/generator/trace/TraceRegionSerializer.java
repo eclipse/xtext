@@ -32,7 +32,7 @@ public class TraceRegionSerializer {
 	 * @noimplement This interface is not intended to be implemented by clients.
 	 */
 	public interface Strategy<Region, Location> {
-		Location createLocation(int offset, int length, int lineNumber, int endLineNumber, URI path, String projectName);
+		Location createLocation(int offset, int length, int lineNumber, int endLineNumber, URI path);
 		Region createRegion(int offset, int length, int lineNumber, int endLineNumber, List<Location> associations, Region parent);
 		void writeRegion(Region region, Callback<Region, Location> callback) throws IOException;
 		void writeLocation(Location location, Callback<Region, Location> callback) throws IOException;
@@ -40,7 +40,7 @@ public class TraceRegionSerializer {
 	
 	public interface Callback<Region, Location> {
 		void doWriteRegion(int offset, int length, int lineNumber, int endLineNumber, List<Location> locations, List<Region> children) throws IOException;
-		void doWriteLocation(int offset, int length, int lineNumber, int endLineNumber, URI path, String projectName) throws IOException;
+		void doWriteLocation(int offset, int length, int lineNumber, int endLineNumber, URI path) throws IOException;
 	}
 	
 	/**
@@ -49,8 +49,8 @@ public class TraceRegionSerializer {
 	 */
 	protected static class IdentityStrategy implements Strategy<AbstractTraceRegion, ILocationData> {
 
-		public ILocationData createLocation(int offset, int length, int lineNumber, int endLineNumber, URI path, String projectName) {
-			return new LocationData(offset, length, lineNumber, endLineNumber, path, projectName);
+		public ILocationData createLocation(int offset, int length, int lineNumber, int endLineNumber, URI path) {
+			return new LocationData(offset, length, lineNumber, endLineNumber, path);
 		}
 
 		public AbstractTraceRegion createRegion(int offset, int length, int lineNumber, int endLineNumber, List<ILocationData> associations,
@@ -63,7 +63,7 @@ public class TraceRegionSerializer {
 		}
 
 		public void writeLocation(ILocationData location, Callback<AbstractTraceRegion, ILocationData> callback) throws IOException {
-			callback.doWriteLocation(location.getOffset(), location.getLength(), location.getLineNumber(), location.getEndLineNumber(), location.getPath(), location.getProjectName());
+			callback.doWriteLocation(location.getOffset(), location.getLength(), location.getLineNumber(), location.getEndLineNumber(), location.getPath());
 		}
 		
 	}
@@ -99,7 +99,7 @@ public class TraceRegionSerializer {
 					}
 				}
 
-				public void doWriteLocation(int offset, int length, int lineNumber, int endLineNumber, URI path, String projectName) throws IOException {
+				public void doWriteLocation(int offset, int length, int lineNumber, int endLineNumber, URI path) throws IOException {
 					dataStream.writeInt(offset);
 					dataStream.writeInt(length);
 					dataStream.writeInt(lineNumber);
@@ -110,12 +110,10 @@ public class TraceRegionSerializer {
 					} else {
 						dataStream.writeBoolean(false);
 					}
-					if (projectName != null) {
-						dataStream.writeBoolean(true);
-						dataStream.writeUTF(projectName);
-					} else {
-						dataStream.writeBoolean(false);
-					}
+					// write "false" to indicate that there is no project name. 
+					// see https://bugs.eclipse.org/bugs/show_bug.cgi?id=397981
+					// this can be removed with the next major change of the trace file format.
+					dataStream.writeBoolean(false); 
 				}
 			});
 		} finally {
@@ -154,10 +152,8 @@ public class TraceRegionSerializer {
 			URI path = null;
 			if (dataStream.readBoolean())
 				path = URI.createURI(dataStream.readUTF());
-			String project = null;
-			if (dataStream.readBoolean())
-				project = dataStream.readUTF();
-			allLocations.add(reader.createLocation(locationOffset, locationLength, locationLineNumber, locationEndLineNumber, path, project));
+			dataStream.readBoolean(); // obsolete, this used to indicate a project name. see https://bugs.eclipse.org/bugs/show_bug.cgi?id=397981
+			allLocations.add(reader.createLocation(locationOffset, locationLength, locationLineNumber, locationEndLineNumber, path));
 			locationSize--;
 		}
 		Region result = reader.createRegion(offset, length, lineNumber, endLineNumber, allLocations, parent);

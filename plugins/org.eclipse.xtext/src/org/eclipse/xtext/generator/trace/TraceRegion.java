@@ -26,9 +26,9 @@ public class TraceRegion extends AbstractStatefulTraceRegion {
 
 	public TraceRegion(int myOffset, int myLength, int myLineNumber, int myEndLineNumber, 
 			int associatedOffset, int associatedLength, int associatedLineNumber, int associatedEndLineNumber, 
-			@Nullable AbstractTraceRegion parent, @Nullable URI associatedPath, @Nullable String associatedProject) {
+			@Nullable AbstractTraceRegion parent, @Nullable URI associatedPath) {
 		this(myOffset, myLength, myLineNumber, myEndLineNumber, 
-				new LocationData(associatedOffset, associatedLength, associatedLineNumber, associatedEndLineNumber, associatedPath, associatedProject), parent);
+				new LocationData(associatedOffset, associatedLength, associatedLineNumber, associatedEndLineNumber, associatedPath), parent);
 	}
 	
 	public TraceRegion(int myOffset, int myLength, int myLineNumber, int myEndLineNumber, ILocationData locationData, @Nullable AbstractTraceRegion parent) {
@@ -40,16 +40,10 @@ public class TraceRegion extends AbstractStatefulTraceRegion {
 			if (locationData.getPath() == null) {
 				throw new IllegalArgumentException("associatedPath may not be null");
 			}
-			if (locationData.getProjectName() == null) {
-				throw new IllegalArgumentException("associatedProjectName may not be null");
-			}
  		} else {
  			if (parent.getAssociatedPath() == null && locationData.getPath() == null) {
  				throw new IllegalArgumentException("associatedPath may not be null");
  			}
- 			if (parent.getAssociatedProjectName() == null && locationData.getProjectName() == null) {
-				throw new IllegalArgumentException("associatedProjectName may not be null");
-			}
  		}
 	}
 	
@@ -59,9 +53,6 @@ public class TraceRegion extends AbstractStatefulTraceRegion {
 			for(ILocationData locationData: allLocationData) {
 				if (locationData.getPath() == null) {
 					throw new IllegalArgumentException("associatedPath may not be null");
-				}
-				if (locationData.getProjectName() == null) {
-					throw new IllegalArgumentException("associatedProjectName may not be null");
 				}
 			}
  		} else {

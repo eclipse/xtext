@@ -17,6 +17,5 @@ import org.eclipse.xtext.util.ITextRegionWithLineInformation;
 public interface ILocationData extends ITextRegionWithLineInformation {
 
 	@Nullable URI getPath();
-	@Nullable String getProjectName();
 	
 }
