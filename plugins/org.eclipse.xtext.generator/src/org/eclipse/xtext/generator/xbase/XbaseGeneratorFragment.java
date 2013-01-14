@@ -7,13 +7,17 @@
  *******************************************************************************/
 package org.eclipse.xtext.generator.xbase;
 
+import static com.google.common.collect.Iterables.*;
+import static com.google.common.collect.Sets.*;
 import static java.util.Collections.*;
+import static org.eclipse.xtext.util.Strings.*;
 
 import java.util.List;
 import java.util.Set;
 
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.xpand2.XpandExecutionContext;
+import org.eclipse.xtext.AbstractRule;
 import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.common.types.util.TypeArgumentContextProvider;
@@ -42,7 +46,9 @@ import org.eclipse.xtext.scoping.impl.AbstractDeclarativeScopeProvider;
 import org.eclipse.xtext.util.Strings;
 import org.eclipse.xtext.validation.ConfigurableIssueCodesProvider;
 import org.eclipse.xtext.validation.SeverityConverter;
+import org.eclipse.xtext.xtext.UsedRulesFinder;
 
+import com.google.common.base.Predicate;
 import com.google.common.collect.Lists;
 
 /**
@@ -73,6 +79,20 @@ public class XbaseGeneratorFragment extends AbstractGeneratorFragment {
 			}
 		}
 		return false;
+	}
+	
+	/**
+	 * @since 2.4
+	 */
+	public boolean usesXImportSection(Grammar grammar) {
+		Set<AbstractRule> usedRules = newHashSet();
+		new UsedRulesFinder(usedRules).compute(grammar);
+		return any(usedRules, new Predicate<AbstractRule>() {
+			public boolean apply(AbstractRule rule) {
+				return equal(rule.getName(), "XImportSection") 
+						&& equal(GrammarUtil.getGrammar(rule).getName(), "org.eclipse.xtext.xbase.Xtype");
+			}
+		});
 	}
 	
 	public void setGenerateXtendInferrer(boolean generateXtendInferrer) {
@@ -123,7 +143,7 @@ public class XbaseGeneratorFragment extends AbstractGeneratorFragment {
 								+ IScopeProvider.class.getName()
 								+ ".class).annotatedWith(Names.named("
 								+ AbstractDeclarativeScopeProvider.class.getName()
-								+ ".NAMED_DELEGATE)).to(org.eclipse.xtext.xbase.scoping.XbaseImportedNamespaceScopeProvider.class)")
+								+ ".NAMED_DELEGATE)).to("+ getImportScopeProvider(grammar)+")")
 				.addTypeToType(IScopeProvider.class.getCanonicalName(),
 						"org.eclipse.xtext.xbase.scoping.XbaseScopeProvider")
 				.addTypeToType(ILinker.class.getCanonicalName(),
@@ -148,7 +168,6 @@ public class XbaseGeneratorFragment extends AbstractGeneratorFragment {
 				.addTypeToType(SeverityConverter.class.getCanonicalName(), "org.eclipse.xtext.xbase.validation.XbaseSeverityConverter")
 				.addTypeToType(ConfigurableIssueCodesProvider.class.getCanonicalName(),"org.eclipse.xtext.xbase.validation.XbaseConfigurableIssueCodes")
 				;
-		
 		if (useInferredJvmModel) {
 			config = config
 				.addTypeToType(ILocationInFileProvider.class.getName(),
@@ -168,6 +187,15 @@ public class XbaseGeneratorFragment extends AbstractGeneratorFragment {
 		return config.getBindings();
 	}
 
+	/**
+	 * @since 2.4
+	 */
+	protected String getImportScopeProvider(Grammar grammar) {
+		return (usesXImportSection(grammar))
+			? "org.eclipse.xtext.xbase.scoping.XImportSectionNamespaceScopeProvider.class"
+			: "org.eclipse.xtext.xbase.scoping.XbaseImportedNamespaceScopeProvider.class"; 
+	}
+	
 	@Override
 	public Set<Binding> getGuiceBindingsUi(Grammar grammar) {
 		if (!usesXbaseGrammar(grammar))
@@ -227,13 +255,16 @@ public class XbaseGeneratorFragment extends AbstractGeneratorFragment {
 						"\t\t\tbinder.bind(org.eclipse.xtext.common.types.ui.navigation.IDerivedMemberAwareEditorOpener.class).to(org.eclipse.xtext.xbase.ui.jvmmodel.navigation.DerivedMemberAwareEditorOpener.class); \n"+
 						"\t\t}")
 				.addTypeToType("org.eclipse.xtext.common.types.xtext.ui.ITypesProposalProvider", 
-						"org.eclipse.xtext.xbase.ui.contentassist.ImportingTypesProposalProvider")
-				.addTypeToType("org.eclipse.xtext.xbase.imports.IUnresolvedTypeResolver", 
-						"org.eclipse.xtext.xbase.ui.imports.InteractiveUnresolvedTypeResolver");
+						"org.eclipse.xtext.xbase.ui.contentassist.ImportingTypesProposalProvider");
 
 		} else {
 			bindFactory =  bindFactory.addTypeToType("org.eclipse.xtext.ui.refactoring.IRenameStrategy", 
 					"org.eclipse.xtext.xbase.ui.refactoring.XbaseRenameStrategy");
+		}
+		if(usesXImportSection(grammar)) {
+			bindFactory.addTypeToType("org.eclipse.xtext.xbase.imports.IUnresolvedTypeResolver", 
+					"org.eclipse.xtext.xbase.ui.imports.InteractiveUnresolvedTypeResolver");
+
 		}
 		return bindFactory.getBindings();
 	}
@@ -278,7 +309,7 @@ public class XbaseGeneratorFragment extends AbstractGeneratorFragment {
 	
 	@Override
 	protected List<Object> getParameters(Grammar grammar) {
-		return Lists.<Object>newArrayList(useInferredJvmModel, generateXtendInferrer, jdtTypeHierarchy, jdtCallHierarchy);
+		return Lists.<Object>newArrayList(useInferredJvmModel, generateXtendInferrer, jdtTypeHierarchy, jdtCallHierarchy, usesXImportSection(grammar));
 	}
 	
 	@Override

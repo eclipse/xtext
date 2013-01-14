@@ -15,13 +15,13 @@ import org.eclipse.xtend.core.xtend.XtendFile;
 import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.scoping.impl.ImportNormalizer;
 import org.eclipse.xtext.util.Strings;
-import org.eclipse.xtext.xbase.scoping.XbaseImportedNamespaceScopeProvider;
+import org.eclipse.xtext.xbase.scoping.XImportSectionNamespaceScopeProvider;
 
 /**
  * @author Jan Koehnlein - Initial contribution and API
  * @author Sebastian Zarnekow - Improved support for nested types in connection with imports
  */
-public class XtendImportedNamespaceScopeProvider extends XbaseImportedNamespaceScopeProvider {
+public class XtendImportedNamespaceScopeProvider extends XImportSectionNamespaceScopeProvider {
 
 	public static final QualifiedName XTEND_LIB = QualifiedName.create("org","eclipse","xtend","lib");
 	
