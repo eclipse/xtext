@@ -650,8 +650,8 @@ ruleJvmLowerBound :
 	'super' ruleJvmTypeReference
 ;
 
-// Rule QualifiedNameWithWildCard
-ruleQualifiedNameWithWildCard :
+// Rule QualifiedNameWithWildcard
+ruleQualifiedNameWithWildcard :
 	ruleQualifiedName '.' '*'
 ;
 
@@ -665,7 +665,7 @@ ruleXImportDeclaration :
 	'import' (
 		'static' 'extension'? ruleQualifiedName '.' '*' |
 		ruleQualifiedName |
-		ruleQualifiedNameWithWildCard
+		ruleQualifiedNameWithWildcard
 	) ';'?
 ;
 

@@ -69,10 +69,4 @@ public class XtendValueConverterService extends XbaseValueConverterService {
 	public IValueConverter<String> getCommentRichTextEndValueConverter() {
 		return commentRichTextEndValueConverter;
 	}
-	
-	@ValueConverter(rule = "QualifiedNameWithWildCard")
-	public IValueConverter<String> getQualifiedNameWithWildCardConverter() {
-		return getQualifiedNameValueConverter();
-	}
-
 }

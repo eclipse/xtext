@@ -7,9 +7,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.eclipse.emf.ecore.EPackage;
-import org.eclipse.xtext.xbase.annotations.validation.XbaseWithAnnotationsJavaValidator;
 
-public class AbstractXtendJavaValidator extends XbaseWithAnnotationsJavaValidator {
+public class AbstractXtendJavaValidator extends org.eclipse.xtext.xbase.annotations.validation.XbaseWithAnnotationsJavaValidator {
 
 	@Override
 	protected List<EPackage> getEPackages() {
