@@ -7689,25 +7689,25 @@ public class InternalXtendParser extends AbstractInternalContentAssistParser {
     // $ANTLR end "ruleJvmTypeParameter"
 
 
-    // $ANTLR start "entryRuleQualifiedNameWithWildCard"
-    // ../org.eclipse.xtend.ide/src-gen/org/eclipse/xtend/ide/contentassist/antlr/internal/InternalXtend.g:2548:1: entryRuleQualifiedNameWithWildCard : ruleQualifiedNameWithWildCard EOF ;
-    public final void entryRuleQualifiedNameWithWildCard() throws RecognitionException {
+    // $ANTLR start "entryRuleQualifiedNameWithWildcard"
+    // ../org.eclipse.xtend.ide/src-gen/org/eclipse/xtend/ide/contentassist/antlr/internal/InternalXtend.g:2548:1: entryRuleQualifiedNameWithWildcard : ruleQualifiedNameWithWildcard EOF ;
+    public final void entryRuleQualifiedNameWithWildcard() throws RecognitionException {
         try {
-            // ../org.eclipse.xtend.ide/src-gen/org/eclipse/xtend/ide/contentassist/antlr/internal/InternalXtend.g:2549:1: ( ruleQualifiedNameWithWildCard EOF )
-            // ../org.eclipse.xtend.ide/src-gen/org/eclipse/xtend/ide/contentassist/antlr/internal/InternalXtend.g:2550:1: ruleQualifiedNameWithWildCard EOF
+            // ../org.eclipse.xtend.ide/src-gen/org/eclipse/xtend/ide/contentassist/antlr/internal/InternalXtend.g:2549:1: ( ruleQualifiedNameWithWildcard EOF )
+            // ../org.eclipse.xtend.ide/src-gen/org/eclipse/xtend/ide/contentassist/antlr/internal/InternalXtend.g:2550:1: ruleQualifiedNameWithWildcard EOF
             {
             if ( state.backtracking==0 ) {
-               before(grammarAccess.getQualifiedNameWithWildCardRule()); 
+               before(grammarAccess.getQualifiedNameWithWildcardRule()); 
             }
-            pushFollow(FOLLOW_ruleQualifiedNameWithWildCard_in_entryRuleQualifiedNameWithWildCard5380);
-            ruleQualifiedNameWithWildCard();
+            pushFollow(FOLLOW_ruleQualifiedNameWithWildcard_in_entryRuleQualifiedNameWithWildcard5380);
+            ruleQualifiedNameWithWildcard();
 
             state._fsp--;
             if (state.failed) return ;
             if ( state.backtracking==0 ) {
-               after(grammarAccess.getQualifiedNameWithWildCardRule()); 
+               after(grammarAccess.getQualifiedNameWithWildcardRule()); 
             }
-            match(input,EOF,FOLLOW_EOF_in_entryRuleQualifiedNameWithWildCard5387); if (state.failed) return ;
+            match(input,EOF,FOLLOW_EOF_in_entryRuleQualifiedNameWithWildcard5387); if (state.failed) return ;
 
             }
 
@@ -7720,30 +7720,30 @@ public class InternalXtendParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end "entryRuleQualifiedNameWithWildCard"
+    // $ANTLR end "entryRuleQualifiedNameWithWildcard"
 
 
-    // $ANTLR start "ruleQualifiedNameWithWildCard"
-    // ../org.eclipse.xtend.ide/src-gen/org/eclipse/xtend/ide/contentassist/antlr/internal/InternalXtend.g:2557:1: ruleQualifiedNameWithWildCard : ( ( rule__QualifiedNameWithWildCard__Group__0 ) ) ;
-    public final void ruleQualifiedNameWithWildCard() throws RecognitionException {
+    // $ANTLR start "ruleQualifiedNameWithWildcard"
+    // ../org.eclipse.xtend.ide/src-gen/org/eclipse/xtend/ide/contentassist/antlr/internal/InternalXtend.g:2557:1: ruleQualifiedNameWithWildcard : ( ( rule__QualifiedNameWithWildcard__Group__0 ) ) ;
+    public final void ruleQualifiedNameWithWildcard() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtend.ide/src-gen/org/eclipse/xtend/ide/contentassist/antlr/internal/InternalXtend.g:2561:2: ( ( ( rule__QualifiedNameWithWildCard__Group__0 ) ) )
-            // ../org.eclipse.xtend.ide/src-gen/org/eclipse/xtend/ide/contentassist/antlr/internal/InternalXtend.g:2562:1: ( ( rule__QualifiedNameWithWildCard__Group__0 ) )
+            // ../org.eclipse.xtend.ide/src-gen/org/eclipse/xtend/ide/contentassist/antlr/internal/InternalXtend.g:2561:2: ( ( ( rule__QualifiedNameWithWildcard__Group__0 ) ) )
+            // ../org.eclipse.xtend.ide/src-gen/org/eclipse/xtend/ide/contentassist/antlr/internal/InternalXtend.g:2562:1: ( ( rule__QualifiedNameWithWildcard__Group__0 ) )
             {
-            // ../org.eclipse.xtend.ide/src-gen/org/eclipse/xtend/ide/contentassist/antlr/internal/InternalXtend.g:2562:1: ( ( rule__QualifiedNameWithWildCard__Group__0 ) )
-            // ../org.eclipse.xtend.ide/src-gen/org/eclipse/xtend/ide/contentassist/antlr/internal/InternalXtend.g:2563:1: ( rule__QualifiedNameWithWildCard__Group__0 )
+            // ../org.eclipse.xtend.ide/src-gen/org/eclipse/xtend/ide/contentassist/antlr/internal/InternalXtend.g:2562:1: ( ( rule__QualifiedNameWithWildcard__Group__0 ) )
+            // ../org.eclipse.xtend.ide/src-gen/org/eclipse/xtend/ide/contentassist/antlr/internal/InternalXtend.g:2563:1: ( rule__QualifiedNameWithWildcard__Group__0 )
             {
             if ( state.backtracking==0 ) {
-               before(grammarAccess.getQualifiedNameWithWildCardAccess().getGroup()); 
+               before(grammarAccess.getQualifiedNameWithWildcardAccess().getGroup()); 
             }
-            // ../org.eclipse.xtend.ide/src-gen/org/eclipse/xtend/ide/contentassist/antlr/internal/InternalXtend.g:2564:1: ( rule__QualifiedNameWithWildCard__Group__0 )
-            // ../org.eclipse.xtend.ide/src-gen/org/eclipse/xtend/ide/contentassist/antlr/internal/InternalXtend.g:2564:2: rule__QualifiedNameWithWildCard__Group__0
+            // ../org.eclipse.xtend.ide/src-gen/org/eclipse/xtend/ide/contentassist/antlr/internal/InternalXtend.g:2564:1: ( rule__QualifiedNameWithWildcard__Group__0 )
+            // ../org.eclipse.xtend.ide/src-gen/org/eclipse/xtend/ide/contentassist/antlr/internal/InternalXtend.g:2564:2: rule__QualifiedNameWithWildcard__Group__0
             {
-            pushFollow(FOLLOW_rule__QualifiedNameWithWildCard__Group__0_in_ruleQualifiedNameWithWildCard5413);
-            rule__QualifiedNameWithWildCard__Group__0();
+            pushFollow(FOLLOW_rule__QualifiedNameWithWildcard__Group__0_in_ruleQualifiedNameWithWildcard5413);
+            rule__QualifiedNameWithWildcard__Group__0();
 
             state._fsp--;
             if (state.failed) return ;
@@ -7751,7 +7751,7 @@ public class InternalXtendParser extends AbstractInternalContentAssistParser {
             }
 
             if ( state.backtracking==0 ) {
-               after(grammarAccess.getQualifiedNameWithWildCardAccess().getGroup()); 
+               after(grammarAccess.getQualifiedNameWithWildcardAccess().getGroup()); 
             }
 
             }
@@ -7771,7 +7771,7 @@ public class InternalXtendParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end "ruleQualifiedNameWithWildCard"
+    // $ANTLR end "ruleQualifiedNameWithWildcard"
 
 
     // $ANTLR start "entryRuleXImportSection"
@@ -63904,23 +63904,23 @@ public class InternalXtendParser extends AbstractInternalContentAssistParser {
     // $ANTLR end "rule__JvmTypeParameter__Group_1_0__1__Impl"
 
 
-    // $ANTLR start "rule__QualifiedNameWithWildCard__Group__0"
-    // ../org.eclipse.xtend.ide/src-gen/org/eclipse/xtend/ide/contentassist/antlr/internal/InternalXtend.g:21926:1: rule__QualifiedNameWithWildCard__Group__0 : rule__QualifiedNameWithWildCard__Group__0__Impl rule__QualifiedNameWithWildCard__Group__1 ;
-    public final void rule__QualifiedNameWithWildCard__Group__0() throws RecognitionException {
+    // $ANTLR start "rule__QualifiedNameWithWildcard__Group__0"
+    // ../org.eclipse.xtend.ide/src-gen/org/eclipse/xtend/ide/contentassist/antlr/internal/InternalXtend.g:21926:1: rule__QualifiedNameWithWildcard__Group__0 : rule__QualifiedNameWithWildcard__Group__0__Impl rule__QualifiedNameWithWildcard__Group__1 ;
+    public final void rule__QualifiedNameWithWildcard__Group__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtend.ide/src-gen/org/eclipse/xtend/ide/contentassist/antlr/internal/InternalXtend.g:21930:1: ( rule__QualifiedNameWithWildCard__Group__0__Impl rule__QualifiedNameWithWildCard__Group__1 )
-            // ../org.eclipse.xtend.ide/src-gen/org/eclipse/xtend/ide/contentassist/antlr/internal/InternalXtend.g:21931:2: rule__QualifiedNameWithWildCard__Group__0__Impl rule__QualifiedNameWithWildCard__Group__1
+            // ../org.eclipse.xtend.ide/src-gen/org/eclipse/xtend/ide/contentassist/antlr/internal/InternalXtend.g:21930:1: ( rule__QualifiedNameWithWildcard__Group__0__Impl rule__QualifiedNameWithWildcard__Group__1 )
+            // ../org.eclipse.xtend.ide/src-gen/org/eclipse/xtend/ide/contentassist/antlr/internal/InternalXtend.g:21931:2: rule__QualifiedNameWithWildcard__Group__0__Impl rule__QualifiedNameWithWildcard__Group__1
             {
-            pushFollow(FOLLOW_rule__QualifiedNameWithWildCard__Group__0__Impl_in_rule__QualifiedNameWithWildCard__Group__044110);
-            rule__QualifiedNameWithWildCard__Group__0__Impl();
+            pushFollow(FOLLOW_rule__QualifiedNameWithWildcard__Group__0__Impl_in_rule__QualifiedNameWithWildcard__Group__044110);
+            rule__QualifiedNameWithWildcard__Group__0__Impl();
 
             state._fsp--;
             if (state.failed) return ;
-            pushFollow(FOLLOW_rule__QualifiedNameWithWildCard__Group__1_in_rule__QualifiedNameWithWildCard__Group__044113);
-            rule__QualifiedNameWithWildCard__Group__1();
+            pushFollow(FOLLOW_rule__QualifiedNameWithWildcard__Group__1_in_rule__QualifiedNameWithWildcard__Group__044113);
+            rule__QualifiedNameWithWildcard__Group__1();
 
             state._fsp--;
             if (state.failed) return ;
@@ -63939,12 +63939,12 @@ public class InternalXtendParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end "rule__QualifiedNameWithWildCard__Group__0"
+    // $ANTLR end "rule__QualifiedNameWithWildcard__Group__0"
 
 
-    // $ANTLR start "rule__QualifiedNameWithWildCard__Group__0__Impl"
-    // ../org.eclipse.xtend.ide/src-gen/org/eclipse/xtend/ide/contentassist/antlr/internal/InternalXtend.g:21938:1: rule__QualifiedNameWithWildCard__Group__0__Impl : ( ruleQualifiedName ) ;
-    public final void rule__QualifiedNameWithWildCard__Group__0__Impl() throws RecognitionException {
+    // $ANTLR start "rule__QualifiedNameWithWildcard__Group__0__Impl"
+    // ../org.eclipse.xtend.ide/src-gen/org/eclipse/xtend/ide/contentassist/antlr/internal/InternalXtend.g:21938:1: rule__QualifiedNameWithWildcard__Group__0__Impl : ( ruleQualifiedName ) ;
+    public final void rule__QualifiedNameWithWildcard__Group__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
@@ -63956,15 +63956,15 @@ public class InternalXtendParser extends AbstractInternalContentAssistParser {
             // ../org.eclipse.xtend.ide/src-gen/org/eclipse/xtend/ide/contentassist/antlr/internal/InternalXtend.g:21944:1: ruleQualifiedName
             {
             if ( state.backtracking==0 ) {
-               before(grammarAccess.getQualifiedNameWithWildCardAccess().getQualifiedNameParserRuleCall_0()); 
+               before(grammarAccess.getQualifiedNameWithWildcardAccess().getQualifiedNameParserRuleCall_0()); 
             }
-            pushFollow(FOLLOW_ruleQualifiedName_in_rule__QualifiedNameWithWildCard__Group__0__Impl44140);
+            pushFollow(FOLLOW_ruleQualifiedName_in_rule__QualifiedNameWithWildcard__Group__0__Impl44140);
             ruleQualifiedName();
 
             state._fsp--;
             if (state.failed) return ;
             if ( state.backtracking==0 ) {
-               after(grammarAccess.getQualifiedNameWithWildCardAccess().getQualifiedNameParserRuleCall_0()); 
+               after(grammarAccess.getQualifiedNameWithWildcardAccess().getQualifiedNameParserRuleCall_0()); 
             }
 
             }
@@ -63984,26 +63984,26 @@ public class InternalXtendParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end "rule__QualifiedNameWithWildCard__Group__0__Impl"
+    // $ANTLR end "rule__QualifiedNameWithWildcard__Group__0__Impl"
 
 
-    // $ANTLR start "rule__QualifiedNameWithWildCard__Group__1"
-    // ../org.eclipse.xtend.ide/src-gen/org/eclipse/xtend/ide/contentassist/antlr/internal/InternalXtend.g:21955:1: rule__QualifiedNameWithWildCard__Group__1 : rule__QualifiedNameWithWildCard__Group__1__Impl rule__QualifiedNameWithWildCard__Group__2 ;
-    public final void rule__QualifiedNameWithWildCard__Group__1() throws RecognitionException {
+    // $ANTLR start "rule__QualifiedNameWithWildcard__Group__1"
+    // ../org.eclipse.xtend.ide/src-gen/org/eclipse/xtend/ide/contentassist/antlr/internal/InternalXtend.g:21955:1: rule__QualifiedNameWithWildcard__Group__1 : rule__QualifiedNameWithWildcard__Group__1__Impl rule__QualifiedNameWithWildcard__Group__2 ;
+    public final void rule__QualifiedNameWithWildcard__Group__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtend.ide/src-gen/org/eclipse/xtend/ide/contentassist/antlr/internal/InternalXtend.g:21959:1: ( rule__QualifiedNameWithWildCard__Group__1__Impl rule__QualifiedNameWithWildCard__Group__2 )
-            // ../org.eclipse.xtend.ide/src-gen/org/eclipse/xtend/ide/contentassist/antlr/internal/InternalXtend.g:21960:2: rule__QualifiedNameWithWildCard__Group__1__Impl rule__QualifiedNameWithWildCard__Group__2
+            // ../org.eclipse.xtend.ide/src-gen/org/eclipse/xtend/ide/contentassist/antlr/internal/InternalXtend.g:21959:1: ( rule__QualifiedNameWithWildcard__Group__1__Impl rule__QualifiedNameWithWildcard__Group__2 )
+            // ../org.eclipse.xtend.ide/src-gen/org/eclipse/xtend/ide/contentassist/antlr/internal/InternalXtend.g:21960:2: rule__QualifiedNameWithWildcard__Group__1__Impl rule__QualifiedNameWithWildcard__Group__2
             {
-            pushFollow(FOLLOW_rule__QualifiedNameWithWildCard__Group__1__Impl_in_rule__QualifiedNameWithWildCard__Group__144169);
-            rule__QualifiedNameWithWildCard__Group__1__Impl();
+            pushFollow(FOLLOW_rule__QualifiedNameWithWildcard__Group__1__Impl_in_rule__QualifiedNameWithWildcard__Group__144169);
+            rule__QualifiedNameWithWildcard__Group__1__Impl();
 
             state._fsp--;
             if (state.failed) return ;
-            pushFollow(FOLLOW_rule__QualifiedNameWithWildCard__Group__2_in_rule__QualifiedNameWithWildCard__Group__144172);
-            rule__QualifiedNameWithWildCard__Group__2();
+            pushFollow(FOLLOW_rule__QualifiedNameWithWildcard__Group__2_in_rule__QualifiedNameWithWildcard__Group__144172);
+            rule__QualifiedNameWithWildcard__Group__2();
 
             state._fsp--;
             if (state.failed) return ;
@@ -64022,12 +64022,12 @@ public class InternalXtendParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end "rule__QualifiedNameWithWildCard__Group__1"
+    // $ANTLR end "rule__QualifiedNameWithWildcard__Group__1"
 
 
-    // $ANTLR start "rule__QualifiedNameWithWildCard__Group__1__Impl"
-    // ../org.eclipse.xtend.ide/src-gen/org/eclipse/xtend/ide/contentassist/antlr/internal/InternalXtend.g:21967:1: rule__QualifiedNameWithWildCard__Group__1__Impl : ( '.' ) ;
-    public final void rule__QualifiedNameWithWildCard__Group__1__Impl() throws RecognitionException {
+    // $ANTLR start "rule__QualifiedNameWithWildcard__Group__1__Impl"
+    // ../org.eclipse.xtend.ide/src-gen/org/eclipse/xtend/ide/contentassist/antlr/internal/InternalXtend.g:21967:1: rule__QualifiedNameWithWildcard__Group__1__Impl : ( '.' ) ;
+    public final void rule__QualifiedNameWithWildcard__Group__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
@@ -64039,11 +64039,11 @@ public class InternalXtendParser extends AbstractInternalContentAssistParser {
             // ../org.eclipse.xtend.ide/src-gen/org/eclipse/xtend/ide/contentassist/antlr/internal/InternalXtend.g:21973:1: '.'
             {
             if ( state.backtracking==0 ) {
-               before(grammarAccess.getQualifiedNameWithWildCardAccess().getFullStopKeyword_1()); 
+               before(grammarAccess.getQualifiedNameWithWildcardAccess().getFullStopKeyword_1()); 
             }
-            match(input,47,FOLLOW_47_in_rule__QualifiedNameWithWildCard__Group__1__Impl44200); if (state.failed) return ;
+            match(input,47,FOLLOW_47_in_rule__QualifiedNameWithWildcard__Group__1__Impl44200); if (state.failed) return ;
             if ( state.backtracking==0 ) {
-               after(grammarAccess.getQualifiedNameWithWildCardAccess().getFullStopKeyword_1()); 
+               after(grammarAccess.getQualifiedNameWithWildcardAccess().getFullStopKeyword_1()); 
             }
 
             }
@@ -64063,21 +64063,21 @@ public class InternalXtendParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end "rule__QualifiedNameWithWildCard__Group__1__Impl"
+    // $ANTLR end "rule__QualifiedNameWithWildcard__Group__1__Impl"
 
 
-    // $ANTLR start "rule__QualifiedNameWithWildCard__Group__2"
-    // ../org.eclipse.xtend.ide/src-gen/org/eclipse/xtend/ide/contentassist/antlr/internal/InternalXtend.g:21986:1: rule__QualifiedNameWithWildCard__Group__2 : rule__QualifiedNameWithWildCard__Group__2__Impl ;
-    public final void rule__QualifiedNameWithWildCard__Group__2() throws RecognitionException {
+    // $ANTLR start "rule__QualifiedNameWithWildcard__Group__2"
+    // ../org.eclipse.xtend.ide/src-gen/org/eclipse/xtend/ide/contentassist/antlr/internal/InternalXtend.g:21986:1: rule__QualifiedNameWithWildcard__Group__2 : rule__QualifiedNameWithWildcard__Group__2__Impl ;
+    public final void rule__QualifiedNameWithWildcard__Group__2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtend.ide/src-gen/org/eclipse/xtend/ide/contentassist/antlr/internal/InternalXtend.g:21990:1: ( rule__QualifiedNameWithWildCard__Group__2__Impl )
-            // ../org.eclipse.xtend.ide/src-gen/org/eclipse/xtend/ide/contentassist/antlr/internal/InternalXtend.g:21991:2: rule__QualifiedNameWithWildCard__Group__2__Impl
+            // ../org.eclipse.xtend.ide/src-gen/org/eclipse/xtend/ide/contentassist/antlr/internal/InternalXtend.g:21990:1: ( rule__QualifiedNameWithWildcard__Group__2__Impl )
+            // ../org.eclipse.xtend.ide/src-gen/org/eclipse/xtend/ide/contentassist/antlr/internal/InternalXtend.g:21991:2: rule__QualifiedNameWithWildcard__Group__2__Impl
             {
-            pushFollow(FOLLOW_rule__QualifiedNameWithWildCard__Group__2__Impl_in_rule__QualifiedNameWithWildCard__Group__244231);
-            rule__QualifiedNameWithWildCard__Group__2__Impl();
+            pushFollow(FOLLOW_rule__QualifiedNameWithWildcard__Group__2__Impl_in_rule__QualifiedNameWithWildcard__Group__244231);
+            rule__QualifiedNameWithWildcard__Group__2__Impl();
 
             state._fsp--;
             if (state.failed) return ;
@@ -64096,12 +64096,12 @@ public class InternalXtendParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end "rule__QualifiedNameWithWildCard__Group__2"
+    // $ANTLR end "rule__QualifiedNameWithWildcard__Group__2"
 
 
-    // $ANTLR start "rule__QualifiedNameWithWildCard__Group__2__Impl"
-    // ../org.eclipse.xtend.ide/src-gen/org/eclipse/xtend/ide/contentassist/antlr/internal/InternalXtend.g:21997:1: rule__QualifiedNameWithWildCard__Group__2__Impl : ( '*' ) ;
-    public final void rule__QualifiedNameWithWildCard__Group__2__Impl() throws RecognitionException {
+    // $ANTLR start "rule__QualifiedNameWithWildcard__Group__2__Impl"
+    // ../org.eclipse.xtend.ide/src-gen/org/eclipse/xtend/ide/contentassist/antlr/internal/InternalXtend.g:21997:1: rule__QualifiedNameWithWildcard__Group__2__Impl : ( '*' ) ;
+    public final void rule__QualifiedNameWithWildcard__Group__2__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
@@ -64113,11 +64113,11 @@ public class InternalXtendParser extends AbstractInternalContentAssistParser {
             // ../org.eclipse.xtend.ide/src-gen/org/eclipse/xtend/ide/contentassist/antlr/internal/InternalXtend.g:22003:1: '*'
             {
             if ( state.backtracking==0 ) {
-               before(grammarAccess.getQualifiedNameWithWildCardAccess().getAsteriskKeyword_2()); 
+               before(grammarAccess.getQualifiedNameWithWildcardAccess().getAsteriskKeyword_2()); 
             }
-            match(input,42,FOLLOW_42_in_rule__QualifiedNameWithWildCard__Group__2__Impl44259); if (state.failed) return ;
+            match(input,42,FOLLOW_42_in_rule__QualifiedNameWithWildcard__Group__2__Impl44259); if (state.failed) return ;
             if ( state.backtracking==0 ) {
-               after(grammarAccess.getQualifiedNameWithWildCardAccess().getAsteriskKeyword_2()); 
+               after(grammarAccess.getQualifiedNameWithWildcardAccess().getAsteriskKeyword_2()); 
             }
 
             }
@@ -64137,7 +64137,7 @@ public class InternalXtendParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end "rule__QualifiedNameWithWildCard__Group__2__Impl"
+    // $ANTLR end "rule__QualifiedNameWithWildcard__Group__2__Impl"
 
 
     // $ANTLR start "rule__XImportDeclaration__Group__0"
@@ -75417,28 +75417,28 @@ public class InternalXtendParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__XImportDeclaration__ImportedNamespaceAssignment_1_2"
-    // ../org.eclipse.xtend.ide/src-gen/org/eclipse/xtend/ide/contentassist/antlr/internal/InternalXtend.g:25927:1: rule__XImportDeclaration__ImportedNamespaceAssignment_1_2 : ( ruleQualifiedNameWithWildCard ) ;
+    // ../org.eclipse.xtend.ide/src-gen/org/eclipse/xtend/ide/contentassist/antlr/internal/InternalXtend.g:25927:1: rule__XImportDeclaration__ImportedNamespaceAssignment_1_2 : ( ruleQualifiedNameWithWildcard ) ;
     public final void rule__XImportDeclaration__ImportedNamespaceAssignment_1_2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtend.ide/src-gen/org/eclipse/xtend/ide/contentassist/antlr/internal/InternalXtend.g:25931:1: ( ( ruleQualifiedNameWithWildCard ) )
-            // ../org.eclipse.xtend.ide/src-gen/org/eclipse/xtend/ide/contentassist/antlr/internal/InternalXtend.g:25932:1: ( ruleQualifiedNameWithWildCard )
+            // ../org.eclipse.xtend.ide/src-gen/org/eclipse/xtend/ide/contentassist/antlr/internal/InternalXtend.g:25931:1: ( ( ruleQualifiedNameWithWildcard ) )
+            // ../org.eclipse.xtend.ide/src-gen/org/eclipse/xtend/ide/contentassist/antlr/internal/InternalXtend.g:25932:1: ( ruleQualifiedNameWithWildcard )
             {
-            // ../org.eclipse.xtend.ide/src-gen/org/eclipse/xtend/ide/contentassist/antlr/internal/InternalXtend.g:25932:1: ( ruleQualifiedNameWithWildCard )
-            // ../org.eclipse.xtend.ide/src-gen/org/eclipse/xtend/ide/contentassist/antlr/internal/InternalXtend.g:25933:1: ruleQualifiedNameWithWildCard
+            // ../org.eclipse.xtend.ide/src-gen/org/eclipse/xtend/ide/contentassist/antlr/internal/InternalXtend.g:25932:1: ( ruleQualifiedNameWithWildcard )
+            // ../org.eclipse.xtend.ide/src-gen/org/eclipse/xtend/ide/contentassist/antlr/internal/InternalXtend.g:25933:1: ruleQualifiedNameWithWildcard
             {
             if ( state.backtracking==0 ) {
-               before(grammarAccess.getXImportDeclarationAccess().getImportedNamespaceQualifiedNameWithWildCardParserRuleCall_1_2_0()); 
+               before(grammarAccess.getXImportDeclarationAccess().getImportedNamespaceQualifiedNameWithWildcardParserRuleCall_1_2_0()); 
             }
-            pushFollow(FOLLOW_ruleQualifiedNameWithWildCard_in_rule__XImportDeclaration__ImportedNamespaceAssignment_1_252266);
-            ruleQualifiedNameWithWildCard();
+            pushFollow(FOLLOW_ruleQualifiedNameWithWildcard_in_rule__XImportDeclaration__ImportedNamespaceAssignment_1_252266);
+            ruleQualifiedNameWithWildcard();
 
             state._fsp--;
             if (state.failed) return ;
             if ( state.backtracking==0 ) {
-               after(grammarAccess.getXImportDeclarationAccess().getImportedNamespaceQualifiedNameWithWildCardParserRuleCall_1_2_0()); 
+               after(grammarAccess.getXImportDeclarationAccess().getImportedNamespaceQualifiedNameWithWildcardParserRuleCall_1_2_0()); 
             }
 
             }
@@ -80128,9 +80128,9 @@ public class InternalXtendParser extends AbstractInternalContentAssistParser {
     public static final BitSet FOLLOW_ruleJvmTypeParameter_in_entryRuleJvmTypeParameter5320 = new BitSet(new long[]{0x0000000000000000L});
     public static final BitSet FOLLOW_EOF_in_entryRuleJvmTypeParameter5327 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__JvmTypeParameter__Group__0_in_ruleJvmTypeParameter5353 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleQualifiedNameWithWildCard_in_entryRuleQualifiedNameWithWildCard5380 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleQualifiedNameWithWildCard5387 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__QualifiedNameWithWildCard__Group__0_in_ruleQualifiedNameWithWildCard5413 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleQualifiedNameWithWildcard_in_entryRuleQualifiedNameWithWildcard5380 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleQualifiedNameWithWildcard5387 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__QualifiedNameWithWildcard__Group__0_in_ruleQualifiedNameWithWildcard5413 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleXImportSection_in_entryRuleXImportSection5440 = new BitSet(new long[]{0x0000000000000000L});
     public static final BitSet FOLLOW_EOF_in_entryRuleXImportSection5447 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__XImportSection__ImportDeclarationsAssignment_in_ruleXImportSection5475 = new BitSet(new long[]{0x0000000000000002L,0x0000000800000000L});
@@ -81719,14 +81719,14 @@ public class InternalXtendParser extends AbstractInternalContentAssistParser {
     public static final BitSet FOLLOW_rule__JvmTypeParameter__ConstraintsAssignment_1_0_0_in_rule__JvmTypeParameter__Group_1_0__0__Impl44018 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__JvmTypeParameter__Group_1_0__1__Impl_in_rule__JvmTypeParameter__Group_1_0__144048 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__JvmTypeParameter__ConstraintsAssignment_1_0_1_in_rule__JvmTypeParameter__Group_1_0__1__Impl44075 = new BitSet(new long[]{0x0000000000000002L,0x0000000400000000L});
-    public static final BitSet FOLLOW_rule__QualifiedNameWithWildCard__Group__0__Impl_in_rule__QualifiedNameWithWildCard__Group__044110 = new BitSet(new long[]{0x0000800000000000L});
-    public static final BitSet FOLLOW_rule__QualifiedNameWithWildCard__Group__1_in_rule__QualifiedNameWithWildCard__Group__044113 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleQualifiedName_in_rule__QualifiedNameWithWildCard__Group__0__Impl44140 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__QualifiedNameWithWildCard__Group__1__Impl_in_rule__QualifiedNameWithWildCard__Group__144169 = new BitSet(new long[]{0x0000040000000000L});
-    public static final BitSet FOLLOW_rule__QualifiedNameWithWildCard__Group__2_in_rule__QualifiedNameWithWildCard__Group__144172 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_47_in_rule__QualifiedNameWithWildCard__Group__1__Impl44200 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__QualifiedNameWithWildCard__Group__2__Impl_in_rule__QualifiedNameWithWildCard__Group__244231 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_42_in_rule__QualifiedNameWithWildCard__Group__2__Impl44259 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__QualifiedNameWithWildcard__Group__0__Impl_in_rule__QualifiedNameWithWildcard__Group__044110 = new BitSet(new long[]{0x0000800000000000L});
+    public static final BitSet FOLLOW_rule__QualifiedNameWithWildcard__Group__1_in_rule__QualifiedNameWithWildcard__Group__044113 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleQualifiedName_in_rule__QualifiedNameWithWildcard__Group__0__Impl44140 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__QualifiedNameWithWildcard__Group__1__Impl_in_rule__QualifiedNameWithWildcard__Group__144169 = new BitSet(new long[]{0x0000040000000000L});
+    public static final BitSet FOLLOW_rule__QualifiedNameWithWildcard__Group__2_in_rule__QualifiedNameWithWildcard__Group__144172 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_47_in_rule__QualifiedNameWithWildcard__Group__1__Impl44200 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__QualifiedNameWithWildcard__Group__2__Impl_in_rule__QualifiedNameWithWildcard__Group__244231 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_42_in_rule__QualifiedNameWithWildcard__Group__2__Impl44259 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__XImportDeclaration__Group__0__Impl_in_rule__XImportDeclaration__Group__044296 = new BitSet(new long[]{0x000000000C000010L,0x0000004000000000L});
     public static final BitSet FOLLOW_rule__XImportDeclaration__Group__1_in_rule__XImportDeclaration__Group__044299 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_99_in_rule__XImportDeclaration__Group__0__Impl44327 = new BitSet(new long[]{0x0000000000000002L});
@@ -81975,7 +81975,7 @@ public class InternalXtendParser extends AbstractInternalContentAssistParser {
     public static final BitSet FOLLOW_101_in_rule__XImportDeclaration__ExtensionAssignment_1_0_152149 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleQualifiedName_in_rule__XImportDeclaration__ImportedTypeAssignment_1_0_252192 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleQualifiedName_in_rule__XImportDeclaration__ImportedTypeAssignment_1_152231 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleQualifiedNameWithWildCard_in_rule__XImportDeclaration__ImportedNamespaceAssignment_1_252266 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleQualifiedNameWithWildcard_in_rule__XImportDeclaration__ImportedNamespaceAssignment_1_252266 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__Member__Group_2_1_6_0__0_in_synpred13_InternalXtend6107 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__Member__Group_2_1_6_1__0_in_synpred14_InternalXtend6125 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__Member__Group_2_1_6_2__0_in_synpred15_InternalXtend6143 = new BitSet(new long[]{0x0000000000000002L});

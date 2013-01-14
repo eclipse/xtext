@@ -1592,7 +1592,7 @@
         </elements>
       </alternatives>
     </rules>
-    <rules xsi:type="xtext:ParserRule" name="QualifiedNameWithWildCard">
+    <rules xsi:type="xtext:ParserRule" name="QualifiedNameWithWildcard">
       <type metamodel="/1/@metamodelDeclarations.2">
         <classifier xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
       </type>

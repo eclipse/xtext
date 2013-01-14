@@ -190,7 +190,7 @@ public abstract class AbstractXtypeSemanticSequencer extends AbstractDelegatingS
 	 *     (
 	 *         (static?='static' extension?='extension'? importedType=[JvmDeclaredType|QualifiedName]) | 
 	 *         importedType=[JvmDeclaredType|QualifiedName] | 
-	 *         importedNamespace=QualifiedNameWithWildCard
+	 *         importedNamespace=QualifiedNameWithWildcard
 	 *     )
 	 */
 	protected void sequence_XImportDeclaration(EObject context, XImportDeclaration semanticObject) {

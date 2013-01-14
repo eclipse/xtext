@@ -5509,25 +5509,25 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
     // $ANTLR end "ruleJvmLowerBound"
 
 
-    // $ANTLR start "entryRuleQualifiedNameWithWildCard"
-    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:1850:1: entryRuleQualifiedNameWithWildCard : ruleQualifiedNameWithWildCard EOF ;
-    public final void entryRuleQualifiedNameWithWildCard() throws RecognitionException {
+    // $ANTLR start "entryRuleQualifiedNameWithWildcard"
+    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:1850:1: entryRuleQualifiedNameWithWildcard : ruleQualifiedNameWithWildcard EOF ;
+    public final void entryRuleQualifiedNameWithWildcard() throws RecognitionException {
         try {
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:1851:1: ( ruleQualifiedNameWithWildCard EOF )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:1852:1: ruleQualifiedNameWithWildCard EOF
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:1851:1: ( ruleQualifiedNameWithWildcard EOF )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:1852:1: ruleQualifiedNameWithWildcard EOF
             {
             if ( state.backtracking==0 ) {
-               before(grammarAccess.getQualifiedNameWithWildCardRule()); 
+               before(grammarAccess.getQualifiedNameWithWildcardRule()); 
             }
-            pushFollow(FOLLOW_ruleQualifiedNameWithWildCard_in_entryRuleQualifiedNameWithWildCard3882);
-            ruleQualifiedNameWithWildCard();
+            pushFollow(FOLLOW_ruleQualifiedNameWithWildcard_in_entryRuleQualifiedNameWithWildcard3882);
+            ruleQualifiedNameWithWildcard();
 
             state._fsp--;
             if (state.failed) return ;
             if ( state.backtracking==0 ) {
-               after(grammarAccess.getQualifiedNameWithWildCardRule()); 
+               after(grammarAccess.getQualifiedNameWithWildcardRule()); 
             }
-            match(input,EOF,FOLLOW_EOF_in_entryRuleQualifiedNameWithWildCard3889); if (state.failed) return ;
+            match(input,EOF,FOLLOW_EOF_in_entryRuleQualifiedNameWithWildcard3889); if (state.failed) return ;
 
             }
 
@@ -5540,30 +5540,30 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end "entryRuleQualifiedNameWithWildCard"
+    // $ANTLR end "entryRuleQualifiedNameWithWildcard"
 
 
-    // $ANTLR start "ruleQualifiedNameWithWildCard"
-    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:1859:1: ruleQualifiedNameWithWildCard : ( ( rule__QualifiedNameWithWildCard__Group__0 ) ) ;
-    public final void ruleQualifiedNameWithWildCard() throws RecognitionException {
+    // $ANTLR start "ruleQualifiedNameWithWildcard"
+    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:1859:1: ruleQualifiedNameWithWildcard : ( ( rule__QualifiedNameWithWildcard__Group__0 ) ) ;
+    public final void ruleQualifiedNameWithWildcard() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:1863:2: ( ( ( rule__QualifiedNameWithWildCard__Group__0 ) ) )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:1864:1: ( ( rule__QualifiedNameWithWildCard__Group__0 ) )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:1863:2: ( ( ( rule__QualifiedNameWithWildcard__Group__0 ) ) )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:1864:1: ( ( rule__QualifiedNameWithWildcard__Group__0 ) )
             {
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:1864:1: ( ( rule__QualifiedNameWithWildCard__Group__0 ) )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:1865:1: ( rule__QualifiedNameWithWildCard__Group__0 )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:1864:1: ( ( rule__QualifiedNameWithWildcard__Group__0 ) )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:1865:1: ( rule__QualifiedNameWithWildcard__Group__0 )
             {
             if ( state.backtracking==0 ) {
-               before(grammarAccess.getQualifiedNameWithWildCardAccess().getGroup()); 
+               before(grammarAccess.getQualifiedNameWithWildcardAccess().getGroup()); 
             }
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:1866:1: ( rule__QualifiedNameWithWildCard__Group__0 )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:1866:2: rule__QualifiedNameWithWildCard__Group__0
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:1866:1: ( rule__QualifiedNameWithWildcard__Group__0 )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:1866:2: rule__QualifiedNameWithWildcard__Group__0
             {
-            pushFollow(FOLLOW_rule__QualifiedNameWithWildCard__Group__0_in_ruleQualifiedNameWithWildCard3915);
-            rule__QualifiedNameWithWildCard__Group__0();
+            pushFollow(FOLLOW_rule__QualifiedNameWithWildcard__Group__0_in_ruleQualifiedNameWithWildcard3915);
+            rule__QualifiedNameWithWildcard__Group__0();
 
             state._fsp--;
             if (state.failed) return ;
@@ -5571,7 +5571,7 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
             }
 
             if ( state.backtracking==0 ) {
-               after(grammarAccess.getQualifiedNameWithWildCardAccess().getGroup()); 
+               after(grammarAccess.getQualifiedNameWithWildcardAccess().getGroup()); 
             }
 
             }
@@ -5591,7 +5591,7 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end "ruleQualifiedNameWithWildCard"
+    // $ANTLR end "ruleQualifiedNameWithWildcard"
 
 
     // $ANTLR start "entryRuleValidID"
@@ -38828,23 +38828,23 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
     // $ANTLR end "rule__JvmLowerBound__Group__1__Impl"
 
 
-    // $ANTLR start "rule__QualifiedNameWithWildCard__Group__0"
-    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:13534:1: rule__QualifiedNameWithWildCard__Group__0 : rule__QualifiedNameWithWildCard__Group__0__Impl rule__QualifiedNameWithWildCard__Group__1 ;
-    public final void rule__QualifiedNameWithWildCard__Group__0() throws RecognitionException {
+    // $ANTLR start "rule__QualifiedNameWithWildcard__Group__0"
+    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:13534:1: rule__QualifiedNameWithWildcard__Group__0 : rule__QualifiedNameWithWildcard__Group__0__Impl rule__QualifiedNameWithWildcard__Group__1 ;
+    public final void rule__QualifiedNameWithWildcard__Group__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:13538:1: ( rule__QualifiedNameWithWildCard__Group__0__Impl rule__QualifiedNameWithWildCard__Group__1 )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:13539:2: rule__QualifiedNameWithWildCard__Group__0__Impl rule__QualifiedNameWithWildCard__Group__1
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:13538:1: ( rule__QualifiedNameWithWildcard__Group__0__Impl rule__QualifiedNameWithWildcard__Group__1 )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:13539:2: rule__QualifiedNameWithWildcard__Group__0__Impl rule__QualifiedNameWithWildcard__Group__1
             {
-            pushFollow(FOLLOW_rule__QualifiedNameWithWildCard__Group__0__Impl_in_rule__QualifiedNameWithWildCard__Group__027200);
-            rule__QualifiedNameWithWildCard__Group__0__Impl();
+            pushFollow(FOLLOW_rule__QualifiedNameWithWildcard__Group__0__Impl_in_rule__QualifiedNameWithWildcard__Group__027200);
+            rule__QualifiedNameWithWildcard__Group__0__Impl();
 
             state._fsp--;
             if (state.failed) return ;
-            pushFollow(FOLLOW_rule__QualifiedNameWithWildCard__Group__1_in_rule__QualifiedNameWithWildCard__Group__027203);
-            rule__QualifiedNameWithWildCard__Group__1();
+            pushFollow(FOLLOW_rule__QualifiedNameWithWildcard__Group__1_in_rule__QualifiedNameWithWildcard__Group__027203);
+            rule__QualifiedNameWithWildcard__Group__1();
 
             state._fsp--;
             if (state.failed) return ;
@@ -38863,12 +38863,12 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end "rule__QualifiedNameWithWildCard__Group__0"
+    // $ANTLR end "rule__QualifiedNameWithWildcard__Group__0"
 
 
-    // $ANTLR start "rule__QualifiedNameWithWildCard__Group__0__Impl"
-    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:13546:1: rule__QualifiedNameWithWildCard__Group__0__Impl : ( ruleQualifiedName ) ;
-    public final void rule__QualifiedNameWithWildCard__Group__0__Impl() throws RecognitionException {
+    // $ANTLR start "rule__QualifiedNameWithWildcard__Group__0__Impl"
+    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:13546:1: rule__QualifiedNameWithWildcard__Group__0__Impl : ( ruleQualifiedName ) ;
+    public final void rule__QualifiedNameWithWildcard__Group__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
@@ -38880,15 +38880,15 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
             // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:13552:1: ruleQualifiedName
             {
             if ( state.backtracking==0 ) {
-               before(grammarAccess.getQualifiedNameWithWildCardAccess().getQualifiedNameParserRuleCall_0()); 
+               before(grammarAccess.getQualifiedNameWithWildcardAccess().getQualifiedNameParserRuleCall_0()); 
             }
-            pushFollow(FOLLOW_ruleQualifiedName_in_rule__QualifiedNameWithWildCard__Group__0__Impl27230);
+            pushFollow(FOLLOW_ruleQualifiedName_in_rule__QualifiedNameWithWildcard__Group__0__Impl27230);
             ruleQualifiedName();
 
             state._fsp--;
             if (state.failed) return ;
             if ( state.backtracking==0 ) {
-               after(grammarAccess.getQualifiedNameWithWildCardAccess().getQualifiedNameParserRuleCall_0()); 
+               after(grammarAccess.getQualifiedNameWithWildcardAccess().getQualifiedNameParserRuleCall_0()); 
             }
 
             }
@@ -38908,26 +38908,26 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end "rule__QualifiedNameWithWildCard__Group__0__Impl"
+    // $ANTLR end "rule__QualifiedNameWithWildcard__Group__0__Impl"
 
 
-    // $ANTLR start "rule__QualifiedNameWithWildCard__Group__1"
-    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:13563:1: rule__QualifiedNameWithWildCard__Group__1 : rule__QualifiedNameWithWildCard__Group__1__Impl rule__QualifiedNameWithWildCard__Group__2 ;
-    public final void rule__QualifiedNameWithWildCard__Group__1() throws RecognitionException {
+    // $ANTLR start "rule__QualifiedNameWithWildcard__Group__1"
+    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:13563:1: rule__QualifiedNameWithWildcard__Group__1 : rule__QualifiedNameWithWildcard__Group__1__Impl rule__QualifiedNameWithWildcard__Group__2 ;
+    public final void rule__QualifiedNameWithWildcard__Group__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:13567:1: ( rule__QualifiedNameWithWildCard__Group__1__Impl rule__QualifiedNameWithWildCard__Group__2 )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:13568:2: rule__QualifiedNameWithWildCard__Group__1__Impl rule__QualifiedNameWithWildCard__Group__2
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:13567:1: ( rule__QualifiedNameWithWildcard__Group__1__Impl rule__QualifiedNameWithWildcard__Group__2 )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:13568:2: rule__QualifiedNameWithWildcard__Group__1__Impl rule__QualifiedNameWithWildcard__Group__2
             {
-            pushFollow(FOLLOW_rule__QualifiedNameWithWildCard__Group__1__Impl_in_rule__QualifiedNameWithWildCard__Group__127259);
-            rule__QualifiedNameWithWildCard__Group__1__Impl();
+            pushFollow(FOLLOW_rule__QualifiedNameWithWildcard__Group__1__Impl_in_rule__QualifiedNameWithWildcard__Group__127259);
+            rule__QualifiedNameWithWildcard__Group__1__Impl();
 
             state._fsp--;
             if (state.failed) return ;
-            pushFollow(FOLLOW_rule__QualifiedNameWithWildCard__Group__2_in_rule__QualifiedNameWithWildCard__Group__127262);
-            rule__QualifiedNameWithWildCard__Group__2();
+            pushFollow(FOLLOW_rule__QualifiedNameWithWildcard__Group__2_in_rule__QualifiedNameWithWildcard__Group__127262);
+            rule__QualifiedNameWithWildcard__Group__2();
 
             state._fsp--;
             if (state.failed) return ;
@@ -38946,12 +38946,12 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end "rule__QualifiedNameWithWildCard__Group__1"
+    // $ANTLR end "rule__QualifiedNameWithWildcard__Group__1"
 
 
-    // $ANTLR start "rule__QualifiedNameWithWildCard__Group__1__Impl"
-    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:13575:1: rule__QualifiedNameWithWildCard__Group__1__Impl : ( '.' ) ;
-    public final void rule__QualifiedNameWithWildCard__Group__1__Impl() throws RecognitionException {
+    // $ANTLR start "rule__QualifiedNameWithWildcard__Group__1__Impl"
+    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:13575:1: rule__QualifiedNameWithWildcard__Group__1__Impl : ( '.' ) ;
+    public final void rule__QualifiedNameWithWildcard__Group__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
@@ -38963,11 +38963,11 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
             // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:13581:1: '.'
             {
             if ( state.backtracking==0 ) {
-               before(grammarAccess.getQualifiedNameWithWildCardAccess().getFullStopKeyword_1()); 
+               before(grammarAccess.getQualifiedNameWithWildcardAccess().getFullStopKeyword_1()); 
             }
-            match(input,36,FOLLOW_36_in_rule__QualifiedNameWithWildCard__Group__1__Impl27290); if (state.failed) return ;
+            match(input,36,FOLLOW_36_in_rule__QualifiedNameWithWildcard__Group__1__Impl27290); if (state.failed) return ;
             if ( state.backtracking==0 ) {
-               after(grammarAccess.getQualifiedNameWithWildCardAccess().getFullStopKeyword_1()); 
+               after(grammarAccess.getQualifiedNameWithWildcardAccess().getFullStopKeyword_1()); 
             }
 
             }
@@ -38987,21 +38987,21 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end "rule__QualifiedNameWithWildCard__Group__1__Impl"
+    // $ANTLR end "rule__QualifiedNameWithWildcard__Group__1__Impl"
 
 
-    // $ANTLR start "rule__QualifiedNameWithWildCard__Group__2"
-    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:13594:1: rule__QualifiedNameWithWildCard__Group__2 : rule__QualifiedNameWithWildCard__Group__2__Impl ;
-    public final void rule__QualifiedNameWithWildCard__Group__2() throws RecognitionException {
+    // $ANTLR start "rule__QualifiedNameWithWildcard__Group__2"
+    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:13594:1: rule__QualifiedNameWithWildcard__Group__2 : rule__QualifiedNameWithWildcard__Group__2__Impl ;
+    public final void rule__QualifiedNameWithWildcard__Group__2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:13598:1: ( rule__QualifiedNameWithWildCard__Group__2__Impl )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:13599:2: rule__QualifiedNameWithWildCard__Group__2__Impl
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:13598:1: ( rule__QualifiedNameWithWildcard__Group__2__Impl )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:13599:2: rule__QualifiedNameWithWildcard__Group__2__Impl
             {
-            pushFollow(FOLLOW_rule__QualifiedNameWithWildCard__Group__2__Impl_in_rule__QualifiedNameWithWildCard__Group__227321);
-            rule__QualifiedNameWithWildCard__Group__2__Impl();
+            pushFollow(FOLLOW_rule__QualifiedNameWithWildcard__Group__2__Impl_in_rule__QualifiedNameWithWildcard__Group__227321);
+            rule__QualifiedNameWithWildcard__Group__2__Impl();
 
             state._fsp--;
             if (state.failed) return ;
@@ -39020,12 +39020,12 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end "rule__QualifiedNameWithWildCard__Group__2"
+    // $ANTLR end "rule__QualifiedNameWithWildcard__Group__2"
 
 
-    // $ANTLR start "rule__QualifiedNameWithWildCard__Group__2__Impl"
-    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:13605:1: rule__QualifiedNameWithWildCard__Group__2__Impl : ( '*' ) ;
-    public final void rule__QualifiedNameWithWildCard__Group__2__Impl() throws RecognitionException {
+    // $ANTLR start "rule__QualifiedNameWithWildcard__Group__2__Impl"
+    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:13605:1: rule__QualifiedNameWithWildcard__Group__2__Impl : ( '*' ) ;
+    public final void rule__QualifiedNameWithWildcard__Group__2__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
@@ -39037,11 +39037,11 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
             // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:13611:1: '*'
             {
             if ( state.backtracking==0 ) {
-               before(grammarAccess.getQualifiedNameWithWildCardAccess().getAsteriskKeyword_2()); 
+               before(grammarAccess.getQualifiedNameWithWildcardAccess().getAsteriskKeyword_2()); 
             }
-            match(input,31,FOLLOW_31_in_rule__QualifiedNameWithWildCard__Group__2__Impl27349); if (state.failed) return ;
+            match(input,31,FOLLOW_31_in_rule__QualifiedNameWithWildcard__Group__2__Impl27349); if (state.failed) return ;
             if ( state.backtracking==0 ) {
-               after(grammarAccess.getQualifiedNameWithWildCardAccess().getAsteriskKeyword_2()); 
+               after(grammarAccess.getQualifiedNameWithWildcardAccess().getAsteriskKeyword_2()); 
             }
 
             }
@@ -39061,7 +39061,7 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end "rule__QualifiedNameWithWildCard__Group__2__Impl"
+    // $ANTLR end "rule__QualifiedNameWithWildcard__Group__2__Impl"
 
 
     // $ANTLR start "rule__XImportDeclaration__Group__0"
@@ -45279,28 +45279,28 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start "rule__XImportDeclaration__ImportedNamespaceAssignment_1_2"
-    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:15786:1: rule__XImportDeclaration__ImportedNamespaceAssignment_1_2 : ( ruleQualifiedNameWithWildCard ) ;
+    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:15786:1: rule__XImportDeclaration__ImportedNamespaceAssignment_1_2 : ( ruleQualifiedNameWithWildcard ) ;
     public final void rule__XImportDeclaration__ImportedNamespaceAssignment_1_2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:15790:1: ( ( ruleQualifiedNameWithWildCard ) )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:15791:1: ( ruleQualifiedNameWithWildCard )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:15790:1: ( ( ruleQualifiedNameWithWildcard ) )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:15791:1: ( ruleQualifiedNameWithWildcard )
             {
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:15791:1: ( ruleQualifiedNameWithWildCard )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:15792:1: ruleQualifiedNameWithWildCard
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:15791:1: ( ruleQualifiedNameWithWildcard )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/ui/contentassist/antlr/internal/InternalXbase.g:15792:1: ruleQualifiedNameWithWildcard
             {
             if ( state.backtracking==0 ) {
-               before(grammarAccess.getXImportDeclarationAccess().getImportedNamespaceQualifiedNameWithWildCardParserRuleCall_1_2_0()); 
+               before(grammarAccess.getXImportDeclarationAccess().getImportedNamespaceQualifiedNameWithWildcardParserRuleCall_1_2_0()); 
             }
-            pushFollow(FOLLOW_ruleQualifiedNameWithWildCard_in_rule__XImportDeclaration__ImportedNamespaceAssignment_1_231776);
-            ruleQualifiedNameWithWildCard();
+            pushFollow(FOLLOW_ruleQualifiedNameWithWildcard_in_rule__XImportDeclaration__ImportedNamespaceAssignment_1_231776);
+            ruleQualifiedNameWithWildcard();
 
             state._fsp--;
             if (state.failed) return ;
             if ( state.backtracking==0 ) {
-               after(grammarAccess.getXImportDeclarationAccess().getImportedNamespaceQualifiedNameWithWildCardParserRuleCall_1_2_0()); 
+               after(grammarAccess.getXImportDeclarationAccess().getImportedNamespaceQualifiedNameWithWildcardParserRuleCall_1_2_0()); 
             }
 
             }
@@ -48846,9 +48846,9 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
     public static final BitSet FOLLOW_ruleJvmLowerBound_in_entryRuleJvmLowerBound3820 = new BitSet(new long[]{0x0000000000000000L});
     public static final BitSet FOLLOW_EOF_in_entryRuleJvmLowerBound3827 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__JvmLowerBound__Group__0_in_ruleJvmLowerBound3853 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleQualifiedNameWithWildCard_in_entryRuleQualifiedNameWithWildCard3882 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleQualifiedNameWithWildCard3889 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__QualifiedNameWithWildCard__Group__0_in_ruleQualifiedNameWithWildCard3915 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleQualifiedNameWithWildcard_in_entryRuleQualifiedNameWithWildcard3882 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleQualifiedNameWithWildcard3889 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__QualifiedNameWithWildcard__Group__0_in_ruleQualifiedNameWithWildcard3915 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleValidID_in_entryRuleValidID3942 = new BitSet(new long[]{0x0000000000000000L});
     public static final BitSet FOLLOW_EOF_in_entryRuleValidID3949 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_RULE_ID_in_ruleValidID3975 = new BitSet(new long[]{0x0000000000000002L});
@@ -49792,14 +49792,14 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
     public static final BitSet FOLLOW_38_in_rule__JvmLowerBound__Group__0__Impl27106 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__JvmLowerBound__Group__1__Impl_in_rule__JvmLowerBound__Group__127137 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__JvmLowerBound__TypeReferenceAssignment_1_in_rule__JvmLowerBound__Group__1__Impl27164 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__QualifiedNameWithWildCard__Group__0__Impl_in_rule__QualifiedNameWithWildCard__Group__027200 = new BitSet(new long[]{0x0000001000000000L});
-    public static final BitSet FOLLOW_rule__QualifiedNameWithWildCard__Group__1_in_rule__QualifiedNameWithWildCard__Group__027203 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleQualifiedName_in_rule__QualifiedNameWithWildCard__Group__0__Impl27230 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__QualifiedNameWithWildCard__Group__1__Impl_in_rule__QualifiedNameWithWildCard__Group__127259 = new BitSet(new long[]{0x0000000080000000L});
-    public static final BitSet FOLLOW_rule__QualifiedNameWithWildCard__Group__2_in_rule__QualifiedNameWithWildCard__Group__127262 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_36_in_rule__QualifiedNameWithWildCard__Group__1__Impl27290 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__QualifiedNameWithWildCard__Group__2__Impl_in_rule__QualifiedNameWithWildCard__Group__227321 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_31_in_rule__QualifiedNameWithWildCard__Group__2__Impl27349 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__QualifiedNameWithWildcard__Group__0__Impl_in_rule__QualifiedNameWithWildcard__Group__027200 = new BitSet(new long[]{0x0000001000000000L});
+    public static final BitSet FOLLOW_rule__QualifiedNameWithWildcard__Group__1_in_rule__QualifiedNameWithWildcard__Group__027203 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleQualifiedName_in_rule__QualifiedNameWithWildcard__Group__0__Impl27230 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__QualifiedNameWithWildcard__Group__1__Impl_in_rule__QualifiedNameWithWildcard__Group__127259 = new BitSet(new long[]{0x0000000080000000L});
+    public static final BitSet FOLLOW_rule__QualifiedNameWithWildcard__Group__2_in_rule__QualifiedNameWithWildcard__Group__127262 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_36_in_rule__QualifiedNameWithWildcard__Group__1__Impl27290 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__QualifiedNameWithWildcard__Group__2__Impl_in_rule__QualifiedNameWithWildcard__Group__227321 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_31_in_rule__QualifiedNameWithWildcard__Group__2__Impl27349 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__XImportDeclaration__Group__0__Impl_in_rule__XImportDeclaration__Group__027386 = new BitSet(new long[]{0x0000000000000010L,0x0000000000002000L});
     public static final BitSet FOLLOW_rule__XImportDeclaration__Group__1_in_rule__XImportDeclaration__Group__027389 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_71_in_rule__XImportDeclaration__Group__0__Impl27417 = new BitSet(new long[]{0x0000000000000002L});
@@ -49938,7 +49938,7 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
     public static final BitSet FOLLOW_78_in_rule__XImportDeclaration__ExtensionAssignment_1_0_131659 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleQualifiedName_in_rule__XImportDeclaration__ImportedTypeAssignment_1_0_231702 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleQualifiedName_in_rule__XImportDeclaration__ImportedTypeAssignment_1_131741 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleQualifiedNameWithWildCard_in_rule__XImportDeclaration__ImportedNamespaceAssignment_1_231776 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleQualifiedNameWithWildcard_in_rule__XImportDeclaration__ImportedNamespaceAssignment_1_231776 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__OpOther__Group_4_1_0__0_in_synpred16_InternalXbase4548 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__XMemberFeatureCall__MemberCallArgumentsAssignment_1_1_3_1_0_in_synpred27_InternalXbase4998 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__XVariableDeclaration__Group_2_0__0_in_synpred48_InternalXbase5557 = new BitSet(new long[]{0x0000000000000002L});

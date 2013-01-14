@@ -49,7 +49,7 @@ JvmTypeParameter :
 QualifiedName:
   ValidID ('.' ValidID)*;
 
-QualifiedNameWithWildCard :
+QualifiedNameWithWildcard :
 	QualifiedName  '.' '*';
 
 ValidID:
@@ -62,7 +62,7 @@ XImportDeclaration:
 	'import' (
 		(static?='static' extension?='extension'? importedType=[JvmDeclaredType|QualifiedName] '.' '*') 
 		| importedType=[JvmDeclaredType|QualifiedName] 
-		| importedNamespace=QualifiedNameWithWildCard) ';'?
+		| importedNamespace=QualifiedNameWithWildcard) ';'?
 ;
 
 terminal ID:

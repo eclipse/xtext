@@ -37,10 +37,10 @@ public class NestedTypeAwareImportNormalizerTest extends Assert {
 		assertEquals(null, importNormalizer.resolve(ytextRelativeName));
 		assertEquals(null, importNormalizer.resolve(xytextRelativeName));
 		
-		ImportNormalizer wildCardImportNormalizer = new NestedTypeAwareImportNormalizer(namespace, true, false);
-		assertEquals(namespace.append(xtextRelativeName), wildCardImportNormalizer.resolve(xtextRelativeName));
-		assertEquals(namespace.append(ytextRelativeName), wildCardImportNormalizer.resolve(ytextRelativeName));
-		assertEquals(namespace.append(xytextRelativeName), wildCardImportNormalizer.resolve(xytextRelativeName));
+		ImportNormalizer wildcardImportNormalizer = new NestedTypeAwareImportNormalizer(namespace, true, false);
+		assertEquals(namespace.append(xtextRelativeName), wildcardImportNormalizer.resolve(xtextRelativeName));
+		assertEquals(namespace.append(ytextRelativeName), wildcardImportNormalizer.resolve(ytextRelativeName));
+		assertEquals(namespace.append(xytextRelativeName), wildcardImportNormalizer.resolve(xytextRelativeName));
 
 		ImportNormalizer xtextImportNormalizer = new NestedTypeAwareImportNormalizer(xtextRelativeName, false, false);
 		assertEquals(xtextRelativeName, xtextImportNormalizer.resolve(xtextRelativeName));
@@ -61,10 +61,10 @@ public class NestedTypeAwareImportNormalizerTest extends Assert {
 		assertEquals(QualifiedName.create("java", "util", "Map$Entry$Internal"), importNormalizer.resolve(QualifiedName.create("Entry$Internal")));
 		assertEquals(null, importNormalizer.resolve(QualifiedName.create("Entry2$Internal")));
 		
-		ImportNormalizer wildCardImportNormalizer = new NestedTypeAwareImportNormalizer(imported, true, false);
-		assertEquals(imported.append(mapEntry), wildCardImportNormalizer.resolve(mapEntry));
-		assertEquals(imported.append(maps), wildCardImportNormalizer.resolve(maps));
-		assertEquals(imported.append(mapsInternal), wildCardImportNormalizer.resolve(mapsInternal));
+		ImportNormalizer wildcardImportNormalizer = new NestedTypeAwareImportNormalizer(imported, true, false);
+		assertEquals(imported.append(mapEntry), wildcardImportNormalizer.resolve(mapEntry));
+		assertEquals(imported.append(maps), wildcardImportNormalizer.resolve(maps));
+		assertEquals(imported.append(mapsInternal), wildcardImportNormalizer.resolve(mapsInternal));
 	}
 	
 	@Test public void testDeresolve_ImportNormalizer() throws Exception {
@@ -83,10 +83,10 @@ public class NestedTypeAwareImportNormalizerTest extends Assert {
 		assertEquals(null, importNormalizer.deresolve(ytextFQN));
 		assertEquals(QualifiedName.create("ytext"), importNormalizer.deresolve(xytextFQN));
 
-		ImportNormalizer wildCardImportNormalizer = new ImportNormalizer(namespace, true, false);
-		assertEquals(QualifiedName.create("Xtext"), wildCardImportNormalizer.deresolve(xtextFQN));
-		assertEquals(null, wildCardImportNormalizer.deresolve(ytextFQN));
-		assertEquals(QualifiedName.create("ytext"), wildCardImportNormalizer.deresolve(xytextFQN));
+		ImportNormalizer wildcardImportNormalizer = new ImportNormalizer(namespace, true, false);
+		assertEquals(QualifiedName.create("Xtext"), wildcardImportNormalizer.deresolve(xtextFQN));
+		assertEquals(null, wildcardImportNormalizer.deresolve(ytextFQN));
+		assertEquals(QualifiedName.create("ytext"), wildcardImportNormalizer.deresolve(xytextFQN));
 	}
 
 	@Test public void testDeesolve_NestedTypes() throws Exception {
@@ -105,7 +105,7 @@ public class NestedTypeAwareImportNormalizerTest extends Assert {
 		assertEquals(QualifiedName.create("Entry"), importNormalizer.deresolve(fqnMapEntry));
 		assertEquals(QualifiedName.create("Entry$Nested"), importNormalizer.deresolve(QualifiedName.create("java", "util", "Map$Entry$Nested")));
 
-		ImportNormalizer wildCardImportNormalizer = new NestedTypeAwareImportNormalizer(QualifiedName.create("java", "util"), true, false);
-		assertEquals(QualifiedName.create("Map$Entry"), wildCardImportNormalizer.deresolve(fqnMapEntry));
+		ImportNormalizer wildcardImportNormalizer = new NestedTypeAwareImportNormalizer(QualifiedName.create("java", "util"), true, false);
+		assertEquals(QualifiedName.create("Map$Entry"), wildcardImportNormalizer.deresolve(fqnMapEntry));
 	}
 }

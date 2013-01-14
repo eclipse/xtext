@@ -6,9 +6,8 @@ package org.eclipse.xtext.purexbase.validation;
 import java.util.ArrayList;
 import java.util.List;
 import org.eclipse.emf.ecore.EPackage;
-import org.eclipse.xtext.xbase.validation.XbaseValidator;
 
-public class AbstractPureXbaseValidator extends XbaseValidator {
+public class AbstractPureXbaseValidator extends org.eclipse.xtext.xbase.validation.XbaseValidator {
 
 	@Override
 	protected List<EPackage> getEPackages() {
