@@ -152,9 +152,11 @@ public class EclipseResourceFileSystemAccess2 extends AbstractFileSystemAccess {
 						// no need to convert the string twice
 						newContent.reset();
 						file.setContents(newContent, true, true, monitor);
-						if (file.isDerived() != outputConfig.isSetDerivedProperty()) {
-							setDerived(file, outputConfig.isSetDerivedProperty());
-						}
+					} else {
+						file.touch(getMonitor());
+					}
+					if (file.isDerived() != outputConfig.isSetDerivedProperty()) {
+						setDerived(file, outputConfig.isSetDerivedProperty());
 					}
 					updateTraceInformation(traceFile, postProcessedContent, outputConfig.isSetDerivedProperty());
 					if (callBack != null)
@@ -191,11 +193,15 @@ public class EclipseResourceFileSystemAccess2 extends AbstractFileSystemAccess {
 		try {
 			IFile file = getFile(fileName, outputName);
 			if (file.exists()) {
-				if (outputConfig.isOverrideExistingResources() && hasContentsChanged(file, content)) {
-					// reset to offset zero allows to reuse internal byte[]
-					// no need to convert the string twice
-					content.reset();
-					file.setContents(content, true, true, monitor);
+				if (outputConfig.isOverrideExistingResources()) {
+					if (hasContentsChanged(file, content)) {
+						// reset to offset zero allows to reuse internal byte[]
+						// no need to convert the string twice
+						content.reset();
+						file.setContents(content, true, true, monitor);
+					} else {
+						file.touch(getMonitor());
+					}
 					if (file.isDerived() != outputConfig.isSetDerivedProperty())
 						setDerived(file, outputConfig.isSetDerivedProperty());
 					if (callBack != null)
