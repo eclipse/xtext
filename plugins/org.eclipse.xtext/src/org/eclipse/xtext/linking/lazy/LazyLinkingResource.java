@@ -51,7 +51,7 @@ import com.google.inject.Provider;
  */
 public class LazyLinkingResource extends XtextResource {
 
-	private static final Logger log = Logger.getLogger(LazyLinkingResource.class);
+	private static Logger log = Logger.getLogger(LazyLinkingResource.class);
 	
 	/**
 	 * The cache key for a Set of uri fragments that cannot be resolved. 
