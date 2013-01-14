@@ -9,6 +9,9 @@ import org.junit.Test
 
 @RunWith(typeof(XtextRunner))
 @InjectWith(typeof(DomainmodelUiInjectorProvider))
+/**
+ * @author Jan Koehnlein - copied and adapted form Xtend
+ */
 class ContentAssistTest extends AbstractContentAssistTest {
 	
 	@Test def void testImportCompletion() {

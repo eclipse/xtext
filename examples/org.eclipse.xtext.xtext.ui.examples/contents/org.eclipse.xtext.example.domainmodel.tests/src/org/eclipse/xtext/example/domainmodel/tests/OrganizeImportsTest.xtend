@@ -16,6 +16,9 @@ import static org.junit.Assert.*
 
 @RunWith(typeof(XtextRunner))
 @InjectWith(typeof(DomainmodelInjectorProvider))
+/**
+ * @author Jan Koehnlein - copied and adapted form Xtend
+ */
 class OrganizeImportsTest {
 	
 	@Inject extension ParseHelper<DomainModel> 
