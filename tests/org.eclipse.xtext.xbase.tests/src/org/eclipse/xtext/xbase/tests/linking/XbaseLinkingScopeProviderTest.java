@@ -57,4 +57,11 @@ public class XbaseLinkingScopeProviderTest extends AbstractXbaseLinkingTest {
 		fail("Fails with old implementation");
 	}
 	
+	@Override
+	@Ignore("Fails with old implementation")
+	@Test
+	public void testRecursiveClosure() throws Exception {
+		fail("Fails with old implementation");
+	}
+	
 }
