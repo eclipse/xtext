@@ -159,7 +159,8 @@ public abstract class AbstractTypeReferencePairWalker extends TypeReferenceVisit
 					processTypeParameter(typeParameter, reference);
 				}
 			} else if (type instanceof JvmTypeParameterDeclarator
-					&& !((JvmTypeParameterDeclarator) type).getTypeParameters().isEmpty()) {
+					&& !((JvmTypeParameterDeclarator) type).getTypeParameters().isEmpty()
+					&& !declaration.getTypeArguments().isEmpty()) {
 				doVisitMatchingTypeParameters(reference, declaration);
 			}
 		}

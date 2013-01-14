@@ -93,6 +93,7 @@ import org.eclipse.xtext.xbase.typesystem.computation.NumberLiterals;
 import org.eclipse.xtext.xbase.typesystem.computation.SynonymTypesProvider;
 import org.eclipse.xtext.xbase.typesystem.conformance.ConformanceHint;
 import org.eclipse.xtext.xbase.typesystem.conformance.TypeConformanceComputationArgument;
+import org.eclipse.xtext.xbase.typesystem.conformance.TypeConformanceResult;
 import org.eclipse.xtext.xbase.typesystem.legacy.StandardTypeReferenceOwner;
 import org.eclipse.xtext.xbase.typesystem.references.ArrayTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
@@ -222,10 +223,24 @@ public class XbaseJavaValidator2 extends AbstractXbaseJavaValidator {
 		LightweightTypeReference actualType = getActualType(expression);
 		if (actualType == null)
 			return;
-		boolean valid = expectedType.isAssignableFrom(actualType);
-		if (!valid) {
-			messageProducer.apply(expectedType, actualType);
+		if (isRawConformanceAllowed(expression)) {
+			boolean valid = expectedType.isAssignableFrom(actualType);
+			if (!valid) {
+				messageProducer.apply(expectedType, actualType);
+			}
+		} else {
+			TypeConformanceResult assignability = expectedType.internalIsAssignableFrom(actualType, new TypeConformanceComputationArgument());
+			if (!assignability.isConformant() || assignability.getConformanceHints().contains(ConformanceHint.RAWTYPE_CONVERSION)) {
+				messageProducer.apply(expectedType, actualType);
+			}
 		}
+	}
+	
+	protected boolean isRawConformanceAllowed(XExpression expression) {
+		if (expression.eContainingFeature() == XbasePackage.Literals.XFOR_LOOP_EXPRESSION__FOR_EXPRESSION) {
+			return false;
+		}
+		return true;
 	}
 	
 	protected LightweightTypeReference getActualType(EObject context, JvmIdentifiableElement element) {

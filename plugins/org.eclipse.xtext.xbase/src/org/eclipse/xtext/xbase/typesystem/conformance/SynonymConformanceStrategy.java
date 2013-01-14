@@ -26,13 +26,13 @@ public class SynonymConformanceStrategy extends TypeConformanceStrategy<Compound
 	protected TypeConformanceResult doVisitTypeReference(CompoundTypeReference left, LightweightTypeReference right, TypeConformanceComputationArgument.Internal<CompoundTypeReference> param) {
 		List<LightweightTypeReference> leftReferences = left.getMultiTypeComponents();
 		if (leftReferences.isEmpty())
-			return TypeConformanceResult.FAILED;
+			return TypeConformanceResult.create(param, ConformanceHint.INCOMPATIBLE);
 		for(LightweightTypeReference reference: leftReferences) {
 			TypeConformanceResult result = conformanceComputer.isConformant(reference, right, param);
 			if (result.isConformant())
 				return result;
 		}
-		return TypeConformanceResult.FAILED;
+		return TypeConformanceResult.create(param, ConformanceHint.INCOMPATIBLE);
 	}
 	
 	@Override

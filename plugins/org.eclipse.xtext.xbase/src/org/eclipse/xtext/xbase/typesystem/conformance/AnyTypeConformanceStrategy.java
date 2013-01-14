@@ -25,12 +25,12 @@ public class AnyTypeConformanceStrategy extends TypeConformanceStrategy<AnyTypeR
 
 	@Override
 	protected TypeConformanceResult doVisitAnyTypeReference(AnyTypeReference left, AnyTypeReference right, TypeConformanceComputationArgument.Internal<AnyTypeReference> param) {
-		return TypeConformanceResult.SUCCESS;
+		return TypeConformanceResult.create(param, ConformanceHint.SUCCESS);
 	}
 
 	@Override
 	protected TypeConformanceResult doVisitTypeReference(AnyTypeReference left, LightweightTypeReference right, TypeConformanceComputationArgument.Internal<AnyTypeReference> param) {
-		return TypeConformanceResult.FAILED;
+		return TypeConformanceResult.create(param, ConformanceHint.INCOMPATIBLE);
 	}
 	
 	@Override
@@ -44,6 +44,6 @@ public class AnyTypeConformanceStrategy extends TypeConformanceStrategy<AnyTypeR
 				}
 			}
 		}
-		return TypeConformanceResult.FAILED;
+		return TypeConformanceResult.create(param, ConformanceHint.INCOMPATIBLE);
 	}
 }

@@ -10,8 +10,6 @@ package org.eclipse.xtext.xbase.tests.validation;
 import org.eclipse.xtext.junit4.InjectWith;
 import org.eclipse.xtext.junit4.XtextRunner;
 import org.eclipse.xtext.xbase.tests.typesystem.XbaseNewTypeSystemInjectorProvider;
-import org.junit.Ignore;
-import org.junit.Test;
 import org.junit.runner.RunWith;
 
 /**
@@ -20,35 +18,4 @@ import org.junit.runner.RunWith;
 @RunWith(XtextRunner.class)
 @InjectWith(XbaseNewTypeSystemInjectorProvider.class)
 public class TypeConformanceValidatorTest2 extends TypeConformanceValidatorTest {
-
-	@Override
-	@Test
-	@Ignore("TODO To be implemented")
-	public void testForLoop_03() throws Exception {
-		// TODO Auto-generated method stub
-		super.testForLoop_03();
-	}
-	
-	@Override
-	@Test
-	@Ignore("TODO To be implemented")
-	public void testForLoop_06() throws Exception {
-		super.testForLoop_06();
-	}
-	
-	@Override
-	@Test
-	@Ignore("TODO To be implemented - raw type declared, but actually instantiated type HashSet<String> - use Object or String")
-	public void testForLoop_07() throws Exception {
-		super.testForLoop_07();
-	}
-	
-	@Override
-	@Test
-	@Ignore("TODO To be implemented")
-	public void testForLoop_08() throws Exception {
-		super.testForLoop_08();
-	}
-	
-	
 }

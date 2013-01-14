@@ -14,7 +14,7 @@ import org.junit.Test;
 
 @SuppressWarnings("all")
 public class ActiveAnnotationTest extends AbstractXtendTestCase {
-  @Ignore
+  @Ignore(value = "Fails when run as plugin test")
   @Test
   public void testSimpleModification() {
     try {

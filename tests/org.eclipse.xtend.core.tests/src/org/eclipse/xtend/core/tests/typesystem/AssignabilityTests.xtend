@@ -24,6 +24,7 @@ import org.eclipse.xtend.core.tests.RuntimeInjectorProvider
 import org.eclipse.xtext.junit4.XtextRunner
 import org.junit.runner.RunWith
 import org.eclipse.xtext.junit4.InjectWith
+import org.eclipse.xtext.xbase.typesystem.conformance.ConformanceHint
 
 /**
  * @author Sebastian Zarnekow
@@ -705,6 +706,12 @@ abstract class AbstractAssignabilityTest extends AbstractTestingTypeReferenceOwn
  */
 class AssignabilityTest extends AbstractAssignabilityTest {
 	
+	override doIsAssignable(LightweightTypeReference lhs, LightweightTypeReference rhs) {
+		val result = lhs.internalIsAssignableFrom(rhs, new TypeConformanceComputationArgument(false, false, true, true, false, true))
+		assertFalse(result.conformanceHints.toString(), result.conformanceHints.contains(ConformanceHint::RAW))
+		return result.conformant
+	}
+	
 	@Test 
 	def void testPrimitiveConversion_09() {
 		"Comparable".isAssignableFrom("int")
@@ -1115,7 +1122,9 @@ class OldAPIAssignabilityTest extends AssignabilityTest {
 class RawAssignabilityTest extends AbstractAssignabilityTest {
 	
 	override boolean doIsAssignable(LightweightTypeReference lhs, LightweightTypeReference rhs) {
-		return lhs.isAssignableFrom(rhs, new TypeConformanceComputationArgument(true, false, true, true, false, true))
+		val result = lhs.internalIsAssignableFrom(rhs, new TypeConformanceComputationArgument(true, false, true, true, false, true))
+		assertTrue(result.conformanceHints.toString(), result.conformanceHints.contains(ConformanceHint::RAW))
+		return result.conformant
 	}
 	
 	@Test 

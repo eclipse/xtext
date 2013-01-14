@@ -70,8 +70,9 @@ public class TypeConformanceComputer {
 	
 	@NonNull
 	public TypeConformanceResult isConformant(LightweightTypeReference left, LightweightTypeReference right, TypeConformanceComputationArgument flags) {
-		if (left == right && left != null)
-			return TypeConformanceResult.SUCCESS;
+		if (left == right && left != null) {
+			return TypeConformanceResult.create(flags, ConformanceHint.SUCCESS);
+		}
 		return left.accept(leftDispatcher, TypeConformanceComputationArgument.Internal.create(
 				right, flags.rawType, flags.asTypeArgument, flags.allowPrimitiveConversion, flags.allowPrimitiveWidening, flags.unboundComputationAddsHints, flags.allowSynonyms));
 	}

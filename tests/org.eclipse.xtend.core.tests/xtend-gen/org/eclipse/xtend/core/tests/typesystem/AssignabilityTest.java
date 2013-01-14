@@ -7,8 +7,14 @@
  */
 package org.eclipse.xtend.core.tests.typesystem;
 
+import java.util.EnumSet;
 import org.eclipse.xtend.core.tests.typesystem.AbstractAssignabilityTest;
 import org.eclipse.xtext.xbase.lib.Pair;
+import org.eclipse.xtext.xbase.typesystem.conformance.ConformanceHint;
+import org.eclipse.xtext.xbase.typesystem.conformance.TypeConformanceComputationArgument;
+import org.eclipse.xtext.xbase.typesystem.conformance.TypeConformanceResult;
+import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
+import org.junit.Assert;
 import org.junit.Test;
 
 /**
@@ -16,6 +22,17 @@ import org.junit.Test;
  */
 @SuppressWarnings("all")
 public class AssignabilityTest extends AbstractAssignabilityTest {
+  public boolean doIsAssignable(final LightweightTypeReference lhs, final LightweightTypeReference rhs) {
+    TypeConformanceComputationArgument _typeConformanceComputationArgument = new TypeConformanceComputationArgument(false, false, true, true, false, true);
+    final TypeConformanceResult result = lhs.internalIsAssignableFrom(rhs, _typeConformanceComputationArgument);
+    EnumSet<ConformanceHint> _conformanceHints = result.getConformanceHints();
+    String _string = _conformanceHints.toString();
+    EnumSet<ConformanceHint> _conformanceHints_1 = result.getConformanceHints();
+    boolean _contains = _conformanceHints_1.contains(ConformanceHint.RAW);
+    Assert.assertFalse(_string, _contains);
+    return result.isConformant();
+  }
+  
   @Test
   public void testPrimitiveConversion_09() {
     this.isAssignableFrom("Comparable", "int");
