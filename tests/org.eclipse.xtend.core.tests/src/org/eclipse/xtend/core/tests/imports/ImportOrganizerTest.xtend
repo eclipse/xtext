@@ -1090,4 +1090,23 @@ class ImportOrganizerTest extends AbstractXtendTestCase {
 			class Foo {}
 		''')
 	}
+	
+	// see https://bugs.eclipse.org/bugs/show_bug.cgi?id=397903 
+	@Test def testAssignmentToStaticLocalField() {
+		'''
+			class Foo {
+				static int foo
+				def bar() {
+					foo = 1
+				}
+			}
+		'''.assertIsOrganizedTo('''
+			class Foo {
+				static int foo
+				def bar() {
+					foo = 1
+				}
+			}
+		''')
+	}
 }
