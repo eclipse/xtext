@@ -20,7 +20,7 @@ import org.eclipse.xtext.util.ITextRegionWithLineInformation;
 public class RootTraceRegionForTesting extends AbstractStatefulTraceRegion {
 
 	public RootTraceRegionForTesting(ITextRegionWithLineInformation myLocation, ITextRegionWithLineInformation association) {
-		super(myLocation, new LocationData(association, URI.createURI("uri"), "project"), null);
+		super(myLocation, new LocationData(association, URI.createURI("uri")), null);
 	}
 	
 }

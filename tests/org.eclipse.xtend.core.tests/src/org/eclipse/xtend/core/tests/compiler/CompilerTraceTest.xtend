@@ -779,7 +779,7 @@ class CompilerTraceTest extends AbstractXtendTestCase {
 		val javaGroup3 = javaMatcher.group(3);
 		val actualJavaExpectation = javaGroup1 + javaGroup2 + javaGroup3;
 		assertEquals(actualJavaExpectation, compiledCode.toString);
-		val trace = new SimpleTrace((compiledCode as ITraceRegionProvider).traceRegion.invertFor(file.eResource.URI, file.eResource.URI, "project").merge)
+		val trace = new SimpleTrace((compiledCode as ITraceRegionProvider).traceRegion.invertFor(file.eResource.URI, file.eResource.URI).merge)
 		val locations = trace.getAllAssociatedLocations(new TextRegion(xtendGroup1.length(), xtendGroup2.length()));
 		val expectedRegion = new TextRegion(javaGroup1.length(), javaGroup2.length())
 		assertFalse(locations.empty)
