@@ -8,6 +8,7 @@
 package org.eclipse.xtext.xbase.ui.editor;
 
 import java.util.Iterator;
+import java.util.Set;
 
 import org.apache.log4j.Logger;
 import org.eclipse.core.resources.IFile;
@@ -28,6 +29,8 @@ import org.eclipse.ui.ide.ResourceUtil;
 import org.eclipse.ui.part.FileEditorInput;
 import org.eclipse.ui.texteditor.IDocumentProvider;
 import org.eclipse.xtext.LanguageInfo;
+import org.eclipse.xtext.builder.EclipseOutputConfigurationProvider;
+import org.eclipse.xtext.generator.OutputConfiguration;
 import org.eclipse.xtext.generator.trace.ILocationInResource;
 import org.eclipse.xtext.generator.trace.ITrace;
 import org.eclipse.xtext.generator.trace.ITraceInformation;
@@ -72,6 +75,9 @@ public class XbaseEditor extends XtextEditor {
 	
 	@Inject
 	private StacktraceBasedEditorDecider calleeAnalyzer;
+	
+	@Inject 
+	private EclipseOutputConfigurationProvider outputConfigurationProvider;
 
 	private IResource javaResource = null;
 	
@@ -200,26 +206,28 @@ public class XbaseEditor extends XtextEditor {
 		if (expectJavaSelection > 0 && reentrantCallFromSelf == 0) {
 			if (calleeAnalyzer.isLineBasedOpenEditorAction()) {
 				expectLineSelection = true;
-				return new DocumentProviderStub() {
-					@Override
-					public IDocument getDocument(Object element) {
-						try {
-							String string = Files.readStreamIntoString(((IStorage) javaResource).getContents());
-							final Document document = new Document(string);
-							return document;
-						} catch(CoreException e) {
-							return XbaseEditor.super.getDocumentProvider().getDocument(element);
+				if (isCompiledWithJSR45()) {
+					return new DocumentProviderStub() {
+						@Override
+						public IDocument getDocument(Object element) {
+							try {
+								String string = Files.readStreamIntoString(((IStorage) javaResource).getContents());
+								final Document document = new Document(string);
+								return document;
+							} catch(CoreException e) {
+								return XbaseEditor.super.getDocumentProvider().getDocument(element);
+							}
 						}
-					}
-					@Override
-					public void connect(Object element) throws CoreException {
-						// do nothing
-					}
-					@Override
-					public void disconnect(Object element) {
-						// do nothing
-					}
-				};
+						@Override
+						public void connect(Object element) throws CoreException {
+							// do nothing
+						}
+						@Override
+						public void disconnect(Object element) {
+							// do nothing
+						}
+					};
+				}
 			}
 		}
 		return super.getDocumentProvider();
@@ -234,33 +242,35 @@ public class XbaseEditor extends XtextEditor {
 					ITrace traceToSource = traceInformation.getTraceToSource((IStorage) javaResource);
 					if (traceToSource != null) {
 						if (expectLineSelection && javaResource instanceof IStorage) {
-							try {
-								String string = Files.readStreamIntoString(((IStorage) javaResource).getContents());
-								Document javaDocument = new Document(string);
-								int line = getLineInJavaDocument(javaDocument, selectionStart, selectionLength);
-								if (line != -1) {
-									int startOffsetOfContents = getStartOffsetOfContentsInJava(javaDocument, line);
-									if (startOffsetOfContents != -1) {
-										ILocationInResource bestSelection = traceToSource.getBestAssociatedLocation(new TextRegion(startOffsetOfContents, 0));
-										if (bestSelection != null) {
-											final ITextRegionWithLineInformation textRegion = bestSelection.getTextRegion();
-											if (textRegion != null) {
-												int lineToSelect = textRegion.getLineNumber();
-												try {
-													IRegion lineInfo = getDocument().getLineInformation(lineToSelect);
-													super.selectAndReveal(lineInfo.getOffset(), lineInfo.getLength(), lineInfo.getOffset(), lineInfo.getLength());
-													return;
-												} catch (BadLocationException e) {
-													log.error(e);
+							if (isCompiledWithJSR45()) {
+								try {
+									String string = Files.readStreamIntoString(((IStorage) javaResource).getContents());
+									Document javaDocument = new Document(string);
+									int line = getLineInJavaDocument(javaDocument, selectionStart, selectionLength);
+									if (line != -1) {
+										int startOffsetOfContents = getStartOffsetOfContentsInJava(javaDocument, line);
+										if (startOffsetOfContents != -1) {
+											ILocationInResource bestSelection = traceToSource.getBestAssociatedLocation(new TextRegion(startOffsetOfContents, 0));
+											if (bestSelection != null) {
+												final ITextRegionWithLineInformation textRegion = bestSelection.getTextRegion();
+												if (textRegion != null) {
+													int lineToSelect = textRegion.getLineNumber();
+													try {
+														IRegion lineInfo = getDocument().getLineInformation(lineToSelect);
+														super.selectAndReveal(lineInfo.getOffset(), lineInfo.getLength(), lineInfo.getOffset(), lineInfo.getLength());
+														return;
+													} catch (BadLocationException e) {
+														log.error(e);
+													}
 												}
 											}
 										}
 									}
+								} catch(BadLocationException e) {
+									// do nothing
+								} catch(CoreException e) {
+									// do nothing
 								}
-							} catch(BadLocationException e) {
-								// do nothing
-							} catch(CoreException e) {
-								// do nothing
 							}
 						} else {
 							ILocationInResource bestSelection = traceToSource.getBestAssociatedLocation(new TextRegion(selectionStart, selectionLength));
@@ -295,6 +305,18 @@ public class XbaseEditor extends XtextEditor {
 		}
 	}
 	
+	protected boolean isCompiledWithJSR45() {
+		//TODO the information whether this was compiled with JSR-45, needs to be done on a per resource base, since a project might 
+		// have a different configuration than its jars. Storing it in the trace file (together with other compilation options and version information) seems appropriate.
+		Set<OutputConfiguration> configurations = outputConfigurationProvider.getOutputConfigurations(getResource().getProject());
+		for (OutputConfiguration config : configurations) {
+			if (config.isInstallDslAsPrimarySource()) {
+				return false;
+			}
+		}
+		return true;
+	}
+
 	/**
 	 * Returns the line of the given selection. It is assumed that it covers an entire line in the
 	 * Java file.
