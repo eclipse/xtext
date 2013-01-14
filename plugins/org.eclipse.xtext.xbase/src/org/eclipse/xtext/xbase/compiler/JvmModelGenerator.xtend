@@ -573,7 +573,7 @@ class JvmModelGenerator implements IGenerator {
 			for(node: documentationNodes) {
 				documentationTrace = documentationTrace.merge(new TextRegionWithLineInformation(node.offset, node.length, node.startLine, node.endLine)) 
 			}
-			val parentAppendable = appendable.trace(new LocationData(documentationTrace, null, null))
+			val parentAppendable = appendable.trace(new LocationData(documentationTrace, null))
 			parentAppendable.append("/**")
 			val reader =  new BufferedReader(new StringReader(text))
 			var lineString = reader.readLine
@@ -609,7 +609,7 @@ class JvmModelGenerator implements IGenerator {
 						val startLine = node.startLine
 						val positionStartLine = startLine + Strings::countLines(nodeText.substring(0, nodeRelativeOffsetOfRegion));
 						val positionEndLine = startLine + Strings::countLines(nodeText.substring(0, nodeRelativeOffsetOfRegion + region.length));
-						var childAppendable = parentAppendable.trace(new LocationData(new TextRegionWithLineInformation(region.offset, region.length, positionStartLine, positionEndLine), null, null))
+						var childAppendable = parentAppendable.trace(new LocationData(new TextRegionWithLineInformation(region.offset, region.length, positionStartLine, positionEndLine), null))
 						val qualifiedName = qualifiedNameConverter.toQualifiedName(region.text)
 						val description = scopeProvider.getScope(context, new ScopeFakeReference(TypesPackage::eINSTANCE.getJvmType())).getSingleElement(QualifiedName::^create(region.text))
 						// Create import only for regions with simpleName

@@ -549,7 +549,7 @@ public class FeatureCallCompiler extends LiteralsCompiler {
 		if (result.getLength() == 0)
 			return null;
 		return new LocationData(result.getOffset(), result.getLength(), result.getLineNumber(),
-				result.getEndLineNumber(), null, null);
+				result.getEndLineNumber(), null);
 	}
 
 	protected boolean isHidden(INode node) {
@@ -607,7 +607,7 @@ public class FeatureCallCompiler extends LiteralsCompiler {
 		if (result == null || result.getLength() == 0)
 			return null;
 		return new LocationData(result.getOffset(), result.getLength(), result.getLineNumber(),
-				result.getEndLineNumber(), null, null);
+				result.getEndLineNumber(), null);
 	}
 	
 	protected void appendNullValue(JvmTypeReference type, EObject context, ITreeAppendable b) {

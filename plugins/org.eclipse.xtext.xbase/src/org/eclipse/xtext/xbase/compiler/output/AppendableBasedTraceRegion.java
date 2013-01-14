@@ -61,7 +61,7 @@ public class AppendableBasedTraceRegion extends AbstractTraceRegion {
 		} else {
 			this.locations = Lists.newArrayList();
 			for(ILocationData locationData: delegate.getLocationData()) {
-				this.locations.add(new LocationData(locationData.getOffset(), locationData.getLength(), locationData.getLineNumber(), locationData.getEndLineNumber(), null, null));
+				this.locations.add(new LocationData(locationData.getOffset(), locationData.getLength(), locationData.getLineNumber(), locationData.getEndLineNumber(), null));
 			}
 		}
 		int length = 0;

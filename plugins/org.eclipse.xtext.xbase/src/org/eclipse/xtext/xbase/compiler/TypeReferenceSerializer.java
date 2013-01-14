@@ -138,7 +138,7 @@ public class TypeReferenceSerializer {
 			if (tracing) {
 				ITextRegion region = locationProvider.getFullTextRegion(type, TypesPackage.Literals.JVM_PARAMETERIZED_TYPE_REFERENCE__TYPE, 0);
 				if (region instanceof ITextRegionWithLineInformation) {
-					((ITreeAppendable) tracedAppendable).trace(new LocationData((ITextRegionWithLineInformation) region, null, null)).append(jvmType);
+					((ITreeAppendable) tracedAppendable).trace(new LocationData((ITextRegionWithLineInformation) region, null)).append(jvmType);
 				} else {
 					tracedAppendable.append(jvmType);
 				}
