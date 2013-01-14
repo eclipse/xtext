@@ -1825,6 +1825,21 @@ public abstract class AbstractXbaseEvaluationTest extends Assert {
 		assertEvaluatesTo(Boolean.TRUE, "newArrayList('foo','bar') as String[] instanceof Object[]");
 	}
 	
+	/**
+	 * @since 2.4
+	 */
+	@Test public void testInstanceOf_07() throws Exception {
+		assertEvaluatesTo(Boolean.FALSE, "[|'foo'] instanceof com.google.common.base.Supplier<?>");
+		assertEvaluatesTo(Boolean.TRUE, "[|'foo'] instanceof org.eclipse.xtext.xbase.lib.Functions$Function0<?>");
+	}
+	
+	/**
+	 * @since 2.4
+	 */
+	@Test public void testInstanceOf_08() throws Exception {
+		assertEvaluatesTo(Boolean.FALSE, "null instanceof java.util.List<?>");
+	}
+	
 	@Test public void testClosure_01() throws Exception {
 		assertEvaluatesTo("literal", "new testdata.ClosureClient().invoke0(|'literal')");
 	}
