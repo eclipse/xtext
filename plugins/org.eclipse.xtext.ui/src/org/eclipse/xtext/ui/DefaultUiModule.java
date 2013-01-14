@@ -40,6 +40,7 @@ import org.eclipse.xtext.resource.impl.LiveShadowedResourceDescriptions;
 import org.eclipse.xtext.resource.impl.ResourceDescriptionsProvider;
 import org.eclipse.xtext.service.AbstractGenericModule;
 import org.eclipse.xtext.service.DispatchingProvider;
+import org.eclipse.xtext.ui.IImageHelper.IImageDescriptorHelper;
 import org.eclipse.xtext.ui.containers.ContainerStateProvider;
 import org.eclipse.xtext.ui.editor.IDirtyStateManager;
 import org.eclipse.xtext.ui.editor.IURIEditorOpener;
@@ -134,6 +135,13 @@ public class DefaultUiModule extends AbstractGenericModule {
 	}
 
 	public Class<? extends IImageHelper> bindIImageHelper() {
+		return PluginImageHelper.class;
+	}
+	
+	/**
+	 * @since 2.4
+	 */
+	public Class<? extends IImageDescriptorHelper> bindIImageDescriptorHelperHelper() {
 		return PluginImageHelper.class;
 	}
 

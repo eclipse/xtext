@@ -8,13 +8,17 @@
 package org.eclipse.xtext.ui.label;
 
 import org.eclipse.emf.edit.provider.IItemLabelProvider;
+import org.eclipse.jface.resource.DeviceResourceException;
 import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.jface.viewers.DelegatingStyledCellLabelProvider.IStyledLabelProvider;
 import org.eclipse.jface.viewers.ILabelProvider;
 import org.eclipse.jface.viewers.LabelProvider;
 import org.eclipse.jface.viewers.StyledString;
+import org.eclipse.swt.graphics.Device;
 import org.eclipse.swt.graphics.Image;
+import org.eclipse.swt.graphics.ImageData;
 import org.eclipse.xtext.ui.IImageHelper;
+import org.eclipse.xtext.ui.IImageHelper.IImageDescriptorHelper;
 
 import com.google.inject.Inject;
 
@@ -24,12 +28,14 @@ import com.google.inject.Inject;
  * 
  * @author Jan Koehnlein - Initial contribution and API
  */
-public abstract class AbstractLabelProvider extends LabelProvider implements IStyledLabelProvider, IItemLabelProvider {
+public abstract class AbstractLabelProvider extends LabelProvider implements IStyledLabelProvider, IItemLabelProvider, ILabelProviderImageDescriptorExtension {
 
 	private ILabelProvider delegate;
 
 	@Inject
 	private IImageHelper imageHelper;
+	@Inject
+	private IImageDescriptorHelper imageDescriptorHelper;
 
 	protected AbstractLabelProvider() {
 	}
@@ -53,6 +59,30 @@ public abstract class AbstractLabelProvider extends LabelProvider implements ISt
 			}
 		}
 		return convertToImage(getDefaultImage());
+	}
+	
+	/**
+	 * @since 2.4
+	 */
+	public ImageDescriptor getImageDescriptor(Object element) {
+		Object image = doGetImage(element);
+		ImageDescriptor imageDescriptor = convertToImageDescriptor(image);
+		return imageDescriptor;
+	}
+	
+	/**
+	 * @since 2.4
+	 */
+	protected ImageDescriptor convertToImageDescriptor(Object imageDescription) {
+		if (imageDescription instanceof Image) {
+			final Image image = (Image) imageDescription;
+			return imageDescriptorHelper.getImageDescriptor(image);
+		} else if (imageDescription instanceof ImageDescriptor) {
+			return (ImageDescriptor) imageDescription;
+		} else if (imageDescription instanceof String) {
+			return imageDescriptorHelper.getImageDescriptor((String) imageDescription);
+		}
+		return null;
 	}
 
 	/**
