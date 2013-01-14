@@ -9,6 +9,7 @@ package org.eclipse.xtend.core.tests.compiler.batch;
 
 import com.google.inject.Inject;
 import java.io.File;
+import java.io.FilenameFilter;
 import java.util.List;
 import org.eclipse.xtend.core.compiler.batch.XtendBatchCompiler;
 import org.eclipse.xtend.core.tests.RuntimeInjectorProvider;
@@ -17,6 +18,7 @@ import org.eclipse.xtext.junit4.XtextRunner;
 import org.eclipse.xtext.util.Files;
 import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Exceptions;
+import org.eclipse.xtext.xbase.lib.Functions.Function2;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
@@ -98,7 +100,7 @@ public class TestBatchCompiler {
     File _file = new File(_plus);
     String[] _list = _file.list();
     int _size = ((List<String>)Conversions.doWrapArray(_list)).size();
-    Assert.assertEquals(4, _size);
+    Assert.assertEquals(8, _size);
   }
   
   @Test
@@ -115,17 +117,79 @@ public class TestBatchCompiler {
     Assert.assertTrue("Compiler output exists", _exists);
     String[] _list = compilerOutputDir.list();
     int _size = ((List<String>)Conversions.doWrapArray(_list)).size();
-    Assert.assertEquals(4, _size);
+    Assert.assertEquals(8, _size);
   }
   
   @Test
-  public void testCompileTestData() {
+  public void testCompileTestDataWithTrace() {
+    this.batchCompiler.setWriteTraceFiles(true);
     this.batchCompiler.compile();
     String _plus = (TestBatchCompiler.OUTPUT_DIRECTORY + "/test");
     File _file = new File(_plus);
-    String[] _list = _file.list();
+    final Function2<File,String,Boolean> _function = new Function2<File,String,Boolean>() {
+        public Boolean apply(final File dir, final String name) {
+          boolean _endsWith = name.endsWith(".java");
+          return _endsWith;
+        }
+      };
+    String[] _list = _file.list(new FilenameFilter() {
+        public boolean accept(File dir,String name) {
+          return _function.apply(dir,name);
+        }
+    });
     int _size = ((List<String>)Conversions.doWrapArray(_list)).size();
     Assert.assertEquals(4, _size);
+    String _plus_1 = (TestBatchCompiler.OUTPUT_DIRECTORY + "/test");
+    File _file_1 = new File(_plus_1);
+    final Function2<File,String,Boolean> _function_1 = new Function2<File,String,Boolean>() {
+        public Boolean apply(final File dir, final String name) {
+          boolean _endsWith = name.endsWith("._trace");
+          return _endsWith;
+        }
+      };
+    String[] _list_1 = _file_1.list(new FilenameFilter() {
+        public boolean accept(File dir,String name) {
+          return _function_1.apply(dir,name);
+        }
+    });
+    int _size_1 = ((List<String>)Conversions.doWrapArray(_list_1)).size();
+    Assert.assertEquals(4, _size_1);
+  }
+  
+  @Test
+  public void testCompileTestDataWithoutTrace() {
+    this.batchCompiler.setWriteTraceFiles(false);
+    this.batchCompiler.compile();
+    String _plus = (TestBatchCompiler.OUTPUT_DIRECTORY + "/test");
+    File _file = new File(_plus);
+    final Function2<File,String,Boolean> _function = new Function2<File,String,Boolean>() {
+        public Boolean apply(final File dir, final String name) {
+          boolean _endsWith = name.endsWith(".java");
+          return _endsWith;
+        }
+      };
+    String[] _list = _file.list(new FilenameFilter() {
+        public boolean accept(File dir,String name) {
+          return _function.apply(dir,name);
+        }
+    });
+    int _size = ((List<String>)Conversions.doWrapArray(_list)).size();
+    Assert.assertEquals(4, _size);
+    String _plus_1 = (TestBatchCompiler.OUTPUT_DIRECTORY + "/test");
+    File _file_1 = new File(_plus_1);
+    final Function2<File,String,Boolean> _function_1 = new Function2<File,String,Boolean>() {
+        public Boolean apply(final File dir, final String name) {
+          boolean _endsWith = name.endsWith("._trace");
+          return _endsWith;
+        }
+      };
+    String[] _list_1 = _file_1.list(new FilenameFilter() {
+        public boolean accept(File dir,String name) {
+          return _function_1.apply(dir,name);
+        }
+    });
+    int _size_1 = ((List<String>)Conversions.doWrapArray(_list_1)).size();
+    Assert.assertEquals(0, _size_1);
   }
   
   @Test
