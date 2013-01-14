@@ -33,7 +33,7 @@ public class SeverityConverter {
 			return Severity.INFO;
 		}
 		if (severityAsString.equals(SEVERITY_IGNORE)) {
-			return null;
+			return Severity.IGNORE;
 		}
 		throw new IllegalArgumentException("Unknown severity '"+severityAsString+"'.");
 	}

@@ -32,6 +32,9 @@ public class IssueSeverities {
 		this.converter = converter;
 	}
 
+	/**
+	 * @return the Severity for the given severity code. Never returns <code>null</code>
+	 */
 	public Severity getSeverity(String code) {
 		if (!configurableIssueCodes.containsKey(code)) {
 			log.error("Configurable issue code '" + code + "' is not registered. Check the binding for " + ConfigurableIssueCodesProvider.class.getName());
@@ -47,6 +50,6 @@ public class IssueSeverities {
 	}
 	
 	public boolean isIgnored(String code) {
-		return getSeverity(code) == null;
+		return getSeverity(code) == Severity.IGNORE;
 	}
 }
