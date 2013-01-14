@@ -1,10 +1,10 @@
-/*******************************************************************************
+/**
  * Copyright (c) 2012 itemis AG (http://www.itemis.eu) and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- *******************************************************************************/
+ */
 package org.eclipse.xtext.xbase.compiler;
 
 import com.google.common.base.Objects;
@@ -69,6 +69,7 @@ import org.eclipse.xtext.documentation.IJavaDocTypeReferenceProvider;
 import org.eclipse.xtext.generator.IFileSystemAccess;
 import org.eclipse.xtext.generator.IGenerator;
 import org.eclipse.xtext.generator.trace.LocationData;
+import org.eclipse.xtext.naming.IQualifiedNameConverter;
 import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
@@ -97,13 +98,11 @@ import org.eclipse.xtext.xbase.compiler.XbaseCompiler;
 import org.eclipse.xtext.xbase.compiler.output.ITreeAppendable;
 import org.eclipse.xtext.xbase.compiler.output.TreeAppendable;
 import org.eclipse.xtext.xbase.jvmmodel.IJvmModelAssociations;
-import org.eclipse.xtext.xbase.jvmmodel.IJvmModelInferrer;
 import org.eclipse.xtext.xbase.jvmmodel.ILogicalContainerProvider;
 import org.eclipse.xtext.xbase.jvmmodel.JvmTypeExtensions;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
-import org.eclipse.xtext.xbase.lib.InputOutput;
 import org.eclipse.xtext.xbase.lib.IntegerRange;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
@@ -112,8 +111,8 @@ import org.eclipse.xtext.xbase.lib.Procedures.Procedure2;
 import org.eclipse.xtext.xbase.lib.StringExtensions;
 
 /**
- * A generator implementation that processes the 
- * derived {@link IJvmModelInferrer JVM model}
+ * A generator implementation that processes the
+ * derived {@link org.eclipse.xtext.xbase.jvmmodel.IJvmModelInferrer JVM model}
  * and produces the respective java code.
  */
 @SuppressWarnings("all")
@@ -159,6 +158,9 @@ public class JvmModelGenerator implements IGenerator {
   
   @Inject
   private IScopeProvider scopeProvider;
+  
+  @Inject
+  private IQualifiedNameConverter qualifiedNameConverter;
   
   public void doGenerate(final Resource input, final IFileSystemAccess fsa) {
     EList<EObject> _contents = input.getContents();
@@ -515,8 +517,8 @@ public class JvmModelGenerator implements IGenerator {
   }
   
   /**
-  	 * Returns the visibility modifier and a space as suffix if not empty
-  	 */
+   * Returns the visibility modifier and a space as suffix if not empty
+   */
   public String javaName(final JvmVisibility visibility) {
     boolean _notEquals = ObjectExtensions.operator_notEquals(visibility, null);
     if (_notEquals) {
@@ -1173,13 +1175,12 @@ public class JvmModelGenerator implements IGenerator {
               boolean _while = _and;
               while (_while) {
                 {
-                  int index = nodeLine.indexOf(lineString);
+                  int lineRelativeOffsetOfNodeString = nodeLine.indexOf(lineString);
                   int _minus = (-1);
-                  boolean _equals = (index == _minus);
+                  boolean _equals = (lineRelativeOffsetOfNodeString == _minus);
                   boolean _while_1 = _equals;
                   while (_while_1) {
                     {
-                      InputOutput.println();
                       int _length_2 = nodeLine.length();
                       int _plus_1 = (nodeLineOffset + _length_2);
                       int _plus_2 = (_plus_1 + 1);
@@ -1191,92 +1192,95 @@ public class JvmModelGenerator implements IGenerator {
                       int _plus_4 = (_plus_3 + 1);
                       nodeLineEndOffset = _plus_4;
                       int _indexOf = nodeLine.indexOf(lineString);
-                      index = _indexOf;
+                      lineRelativeOffsetOfNodeString = _indexOf;
                     }
                     int _minus_1 = (-1);
-                    boolean _equals_1 = (index == _minus_1);
+                    boolean _equals_1 = (lineRelativeOffsetOfNodeString == _minus_1);
                     _while_1 = _equals_1;
                   }
                   ITreeAppendable _newLine = parentAppendable.newLine();
                   _newLine.append(" * ");
-                  final int nodeLineOffsetF = nodeLineOffset;
-                  final int nodeLineEndOffsetF = nodeLineEndOffset;
+                  final int nodeLineOffsetFinal = nodeLineOffset;
+                  final int nodeLineEndOffsetFinal = nodeLineEndOffset;
                   final Function1<ReplaceRegion,Boolean> _function_1 = new Function1<ReplaceRegion,Boolean>() {
                       public Boolean apply(final ReplaceRegion it) {
                         boolean _and = false;
                         int _offset = it.getOffset();
                         int _minus = (_offset - nodeOffset);
-                        boolean _greaterEqualsThan = (_minus >= nodeLineOffsetF);
+                        boolean _greaterEqualsThan = (_minus >= nodeLineOffsetFinal);
                         if (!_greaterEqualsThan) {
                           _and = false;
                         } else {
                           int _offset_1 = it.getOffset();
                           int _minus_1 = (_offset_1 - nodeOffset);
-                          boolean _lessEqualsThan = (_minus_1 <= nodeLineEndOffsetF);
+                          boolean _lessEqualsThan = (_minus_1 <= nodeLineEndOffsetFinal);
                           _and = (_greaterEqualsThan && _lessEqualsThan);
                         }
                         return Boolean.valueOf(_and);
                       }
                     };
-                  final Iterable<ReplaceRegion> validRegions = IterableExtensions.<ReplaceRegion>filter(regions, _function_1);
+                  final Iterable<ReplaceRegion> regionsInLine = IterableExtensions.<ReplaceRegion>filter(regions, _function_1);
                   int lastOffsetInLine = 0;
-                  int _size = regions.size();
-                  boolean _greaterThan = (_size > 0);
-                  if (_greaterThan) {
-                    for (final ReplaceRegion region : validRegions) {
-                      {
-                        int _offset_1 = region.getOffset();
-                        final int realOffset = (_offset_1 - nodeOffset);
-                        int _offset_2 = region.getOffset();
-                        int _minus_1 = (_offset_2 - nodeOffset);
-                        int _minus_2 = (_minus_1 - nodeLineOffset);
-                        final int lineRelativeOffsetOfRegion = (_minus_2 - index);
-                        final String stringBefore = lineString.substring(lastOffsetInLine, lineRelativeOffsetOfRegion);
-                        InputOutput.println();
-                        parentAppendable.append(stringBefore);
-                        final int startLine = node_1.getStartLine();
-                        String _substring = nodeText.substring(0, realOffset);
-                        int _countLines = Strings.countLines(_substring);
-                        final int positionStartLine = (startLine + _countLines);
-                        int _length_2 = region.getLength();
-                        int _plus_1 = (realOffset + _length_2);
-                        String _substring_1 = nodeText.substring(0, _plus_1);
-                        int _countLines_1 = Strings.countLines(_substring_1);
-                        final int positionEndLine = (startLine + _countLines_1);
-                        int _offset_3 = region.getOffset();
-                        int _length_3 = region.getLength();
-                        TextRegionWithLineInformation _textRegionWithLineInformation_1 = new TextRegionWithLineInformation(_offset_3, _length_3, positionStartLine, positionEndLine);
-                        LocationData _locationData_1 = new LocationData(_textRegionWithLineInformation_1, null, null);
-                        ITreeAppendable childAppendable = parentAppendable.trace(_locationData_1);
-                        EClass _jvmType = TypesPackage.eINSTANCE.getJvmType();
-                        ScopeFakeReference _scopeFakeReference = new ScopeFakeReference(_jvmType);
-                        IScope _scope = this.scopeProvider.getScope(context, _scopeFakeReference);
-                        String _text = region.getText();
-                        QualifiedName _create = QualifiedName.create(_text);
-                        final IEObjectDescription desc = _scope.getSingleElement(_create);
-                        boolean _notEquals_2 = ObjectExtensions.operator_notEquals(desc, null);
-                        if (_notEquals_2) {
-                          EObject _eObjectOrProxy = desc.getEObjectOrProxy();
-                          EObject _resolve = EcoreUtil.resolve(_eObjectOrProxy, context);
-                          final JvmType jvmType = ((JvmType) _resolve);
-                          childAppendable.append(jvmType);
-                        } else {
-                          String _text_1 = region.getText();
-                          childAppendable.append(_text_1);
-                        }
-                        int _length_4 = region.getLength();
-                        int _plus_2 = (lineRelativeOffsetOfRegion + _length_4);
-                        lastOffsetInLine = _plus_2;
+                  for (final ReplaceRegion region : regionsInLine) {
+                    {
+                      int _offset_1 = region.getOffset();
+                      final int nodeRelativeOffsetOfRegion = (_offset_1 - nodeOffset);
+                      int _offset_2 = region.getOffset();
+                      int _minus_1 = (_offset_2 - nodeOffset);
+                      int _minus_2 = (_minus_1 - nodeLineOffset);
+                      final int lineRelativeOffsetOfRegion = (_minus_2 - lineRelativeOffsetOfNodeString);
+                      final String stringInFrontOfRegion = lineString.substring(lastOffsetInLine, lineRelativeOffsetOfRegion);
+                      parentAppendable.append(stringInFrontOfRegion);
+                      final int startLine = node_1.getStartLine();
+                      String _substring = nodeText.substring(0, nodeRelativeOffsetOfRegion);
+                      int _countLines = Strings.countLines(_substring);
+                      final int positionStartLine = (startLine + _countLines);
+                      int _length_2 = region.getLength();
+                      int _plus_1 = (nodeRelativeOffsetOfRegion + _length_2);
+                      String _substring_1 = nodeText.substring(0, _plus_1);
+                      int _countLines_1 = Strings.countLines(_substring_1);
+                      final int positionEndLine = (startLine + _countLines_1);
+                      int _offset_3 = region.getOffset();
+                      int _length_3 = region.getLength();
+                      TextRegionWithLineInformation _textRegionWithLineInformation_1 = new TextRegionWithLineInformation(_offset_3, _length_3, positionStartLine, positionEndLine);
+                      LocationData _locationData_1 = new LocationData(_textRegionWithLineInformation_1, null, null);
+                      ITreeAppendable childAppendable = parentAppendable.trace(_locationData_1);
+                      String _text = region.getText();
+                      final QualifiedName qualifiedName = this.qualifiedNameConverter.toQualifiedName(_text);
+                      EClass _jvmType = TypesPackage.eINSTANCE.getJvmType();
+                      ScopeFakeReference _scopeFakeReference = new ScopeFakeReference(_jvmType);
+                      IScope _scope = this.scopeProvider.getScope(context, _scopeFakeReference);
+                      String _text_1 = region.getText();
+                      QualifiedName _create = QualifiedName.create(_text_1);
+                      final IEObjectDescription description = _scope.getSingleElement(_create);
+                      boolean _and_1 = false;
+                      int _segmentCount = qualifiedName.getSegmentCount();
+                      boolean _equals_1 = (_segmentCount == 1);
+                      if (!_equals_1) {
+                        _and_1 = false;
+                      } else {
+                        boolean _notEquals_2 = ObjectExtensions.operator_notEquals(description, null);
+                        _and_1 = (_equals_1 && _notEquals_2);
                       }
+                      if (_and_1) {
+                        EObject _eObjectOrProxy = description.getEObjectOrProxy();
+                        EObject _resolve = EcoreUtil.resolve(_eObjectOrProxy, context);
+                        final JvmType jvmType = ((JvmType) _resolve);
+                        childAppendable.append(jvmType);
+                      } else {
+                        String _text_2 = region.getText();
+                        childAppendable.append(_text_2);
+                      }
+                      int _length_4 = region.getLength();
+                      int _plus_2 = (lineRelativeOffsetOfRegion + _length_4);
+                      lastOffsetInLine = _plus_2;
                     }
-                    int _length_2 = lineString.length();
-                    boolean _greaterThan_1 = (_length_2 > lastOffsetInLine);
-                    if (_greaterThan_1) {
-                      final String substring = lineString.substring(lastOffsetInLine);
-                      parentAppendable.append(substring);
-                    }
-                  } else {
-                    parentAppendable.append(lineString);
+                  }
+                  int _length_2 = lineString.length();
+                  boolean _greaterThan = (_length_2 > lastOffsetInLine);
+                  if (_greaterThan) {
+                    String _substring = lineString.substring(lastOffsetInLine);
+                    parentAppendable.append(_substring);
                   }
                   int _length_3 = nodeLine.length();
                   int _plus_1 = (nodeLineOffset + _length_3);

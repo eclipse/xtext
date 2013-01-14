@@ -25,10 +25,55 @@ class JavaDocTypeReferenceProviderTest extends AbstractXtendTestCase {
 		val resource = clazz(input).eResource as XtextResource
 		val rootNode = resource.parseResult.rootNode
 		val regions = javaDocTypeReferenceProvider.computeTypeRefRegions(rootNode)
-		assertEquals(3,regions.size)
+		assertEquals(4,regions.size)
 		assertEquals("List", regions.head.text);
 		assertEquals(input.indexOf("List"), regions.head.offset)
 		assertEquals("List".length, regions.head.length)
+	}
+
+	@Test
+	def void testComputation_2() {
+		val String input = '''
+			package foo
+
+			/**
+			* {@link java.util.ArrayList @see Integer}
+			*/
+			class Foo{}
+		'''
+		val resource = clazz(input).eResource as XtextResource
+		val rootNode = resource.parseResult.rootNode
+		val regions = javaDocTypeReferenceProvider.computeTypeRefRegions(rootNode)
+		assertEquals(2,regions.size)
+		assertEquals("java.util.ArrayList", regions.head.text);
+		assertEquals(input.indexOf("java.util.ArrayList"), regions.head.offset)
+		assertEquals("java.util.ArrayList".length, regions.head.length)
+	}
+
+	@Test
+	def void testComputation_3() {
+		val String input = '''
+			package foo
+
+
+			class Foo{
+				/**
+				* @param string - a fancy string
+				* @param zonk
+				*/
+				def bar(String string, Integer zonk){}
+			}
+		'''
+		val resource = clazz(input).eResource as XtextResource
+		val rootNode = resource.parseResult.rootNode
+		val regions = javaDocTypeReferenceProvider.computeParameterTypeRefRegions(rootNode)
+		assertEquals(2,regions.size)
+		assertEquals("string", regions.head.text);
+		assertEquals(input.indexOf("string"), regions.head.offset)
+		assertEquals("string".length, regions.head.length)
+		assertEquals("zonk", regions.get(1).text);
+		assertEquals(input.indexOf("zonk"), regions.get(1).offset)
+		assertEquals("zonk".length, regions.get(1).length)
 	}
 
 }

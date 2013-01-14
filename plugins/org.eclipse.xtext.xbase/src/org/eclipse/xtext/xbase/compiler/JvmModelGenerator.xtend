@@ -8,9 +8,12 @@
 package org.eclipse.xtext.xbase.compiler
 
 import com.google.inject.Inject
+import java.io.BufferedReader
+import java.io.StringReader
 import java.util.List
 import org.eclipse.emf.ecore.EObject
 import org.eclipse.emf.ecore.resource.Resource
+import org.eclipse.emf.ecore.util.EcoreUtil
 import org.eclipse.xtend2.lib.StringConcatenation
 import org.eclipse.xtext.common.types.JvmAnnotationAnnotationValue
 import org.eclipse.xtext.common.types.JvmAnnotationReference
@@ -52,9 +55,11 @@ import org.eclipse.xtext.common.types.util.TypeReferences
 import org.eclipse.xtext.documentation.IEObjectDocumentationProvider
 import org.eclipse.xtext.documentation.IEObjectDocumentationProviderExtension
 import org.eclipse.xtext.documentation.IFileHeaderProvider
+import org.eclipse.xtext.documentation.IJavaDocTypeReferenceProvider
 import org.eclipse.xtext.generator.IFileSystemAccess
 import org.eclipse.xtext.generator.IGenerator
 import org.eclipse.xtext.generator.trace.LocationData
+import org.eclipse.xtext.naming.IQualifiedNameConverter
 import org.eclipse.xtext.naming.QualifiedName
 import org.eclipse.xtext.nodemodel.INode
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils
@@ -73,10 +78,6 @@ import org.eclipse.xtext.xbase.jvmmodel.ILogicalContainerProvider
 import org.eclipse.xtext.xbase.jvmmodel.JvmTypeExtensions
 
 import static org.eclipse.xtext.util.Strings.*
-import org.eclipse.emf.ecore.util.EcoreUtil
-import org.eclipse.xtext.documentation.IJavaDocTypeReferenceProvider
-import java.io.BufferedReader
-import java.io.StringReader
 
 /**
  * A generator implementation that processes the 
@@ -84,8 +85,7 @@ import java.io.StringReader
  * and produces the respective java code.
  */
 class JvmModelGenerator implements IGenerator {
-
-
+ 
 	@Inject extension ILogicalContainerProvider
 	@Inject extension TypeReferences 
 	@Inject extension TreeAppendableUtil
@@ -101,6 +101,7 @@ class JvmModelGenerator implements IGenerator {
 	@Inject JavaKeywords keywords
 	@Inject IJavaDocTypeReferenceProvider javaDocTypeReferenceProvider
 	@Inject IScopeProvider scopeProvider
+	@Inject IQualifiedNameConverter qualifiedNameConverter
 	
 	override void doGenerate(Resource input, IFileSystemAccess fsa) {
 		for (obj : input.contents) {
@@ -586,52 +587,45 @@ class JvmModelGenerator implements IGenerator {
 				var nodeLine = nodeReader.readLine
 				var nodeLineEndOffset = nodeLineOffset + nodeLine.length
 				while(nodeLine != null && lineString != null){
-					var index = nodeLine.indexOf(lineString)
-					while(index == -1){
-						println
+					var lineRelativeOffsetOfNodeString = nodeLine.indexOf(lineString)
+					// Search for first line in node
+					while(lineRelativeOffsetOfNodeString == -1){
 						nodeLineOffset = nodeLineOffset + nodeLine.length + 1
 						nodeLine = nodeReader.readLine
 						nodeLineEndOffset = nodeLineOffset + nodeLine.length + 1
-						index = nodeLine.indexOf(lineString)
+						lineRelativeOffsetOfNodeString = nodeLine.indexOf(lineString)
 					}
 					parentAppendable.newLine.append(" * ")
-					val nodeLineOffsetF = nodeLineOffset
-					val nodeLineEndOffsetF = nodeLineEndOffset
-					val validRegions = regions.filter()[(offset - nodeOffset) >= nodeLineOffsetF && (offset - nodeOffset) <= nodeLineEndOffsetF]
+					val nodeLineOffsetFinal = nodeLineOffset
+					val nodeLineEndOffsetFinal = nodeLineEndOffset
+					// Nodes in current line
+					val regionsInLine = regions.filter()[(offset - nodeOffset) >= nodeLineOffsetFinal && (offset - nodeOffset) <= nodeLineEndOffsetFinal]
 					var lastOffsetInLine = 0
-					if(regions.size > 0){
-						for(region : validRegions){
-							val realOffset = region.offset - nodeOffset
-							val lineRelativeOffsetOfRegion = region.offset - nodeOffset - nodeLineOffset - index
-							val stringBefore = lineString.substring(lastOffsetInLine, lineRelativeOffsetOfRegion)
-							println
-							parentAppendable.append(stringBefore)
-							val startLine = node.startLine
-							val positionStartLine = startLine + Strings::countLines(nodeText.substring(0, realOffset));
-							val positionEndLine = startLine + Strings::countLines(nodeText.substring(0, realOffset + region.length));
-							var childAppendable = parentAppendable.trace(new LocationData(new TextRegionWithLineInformation(region.offset, region.length, positionStartLine, positionEndLine), null, null))
-							val desc = scopeProvider.getScope(context, new ScopeFakeReference(TypesPackage::eINSTANCE.getJvmType())).getSingleElement(QualifiedName::^create(region.text))
-							if(desc != null) {
-								val jvmType = EcoreUtil::resolve(desc.EObjectOrProxy, context) as JvmType
-								childAppendable.append(jvmType)
-							} else {
-								childAppendable.append(region.text)
-							}
-							lastOffsetInLine = lineRelativeOffsetOfRegion + region.length
-
+					for(region : regionsInLine){
+						val nodeRelativeOffsetOfRegion = region.offset - nodeOffset
+						val lineRelativeOffsetOfRegion = region.offset - nodeOffset - nodeLineOffset - lineRelativeOffsetOfNodeString
+						val stringInFrontOfRegion = lineString.substring(lastOffsetInLine, lineRelativeOffsetOfRegion)
+						parentAppendable.append(stringInFrontOfRegion)
+						val startLine = node.startLine
+						val positionStartLine = startLine + Strings::countLines(nodeText.substring(0, nodeRelativeOffsetOfRegion));
+						val positionEndLine = startLine + Strings::countLines(nodeText.substring(0, nodeRelativeOffsetOfRegion + region.length));
+						var childAppendable = parentAppendable.trace(new LocationData(new TextRegionWithLineInformation(region.offset, region.length, positionStartLine, positionEndLine), null, null))
+						val qualifiedName = qualifiedNameConverter.toQualifiedName(region.text)
+						val description = scopeProvider.getScope(context, new ScopeFakeReference(TypesPackage::eINSTANCE.getJvmType())).getSingleElement(QualifiedName::^create(region.text))
+						// Create import only for regions with simpleName
+						if(qualifiedName.getSegmentCount() == 1 && description != null){
+							val jvmType = EcoreUtil::resolve(description.EObjectOrProxy, context) as JvmType
+							childAppendable.append(jvmType)
+						} else {
+							childAppendable.append(region.text)
 						}
-						if(lineString.length > lastOffsetInLine){
-							val substring = lineString.substring(lastOffsetInLine)
-							parentAppendable.append(
-								substring
-							)
-						}
+						lastOffsetInLine = lineRelativeOffsetOfRegion + region.length
 
-
-					} else {
-						parentAppendable.append(lineString)
 					}
-
+					// Rest of line if there there is any
+					if(lineString.length > lastOffsetInLine){
+						parentAppendable.append(lineString.substring(lastOffsetInLine))
+					}
 					nodeLineOffset = nodeLineOffset + nodeLine.length + 1
 					nodeLine = nodeReader.readLine
 					if(nodeLine != null)

@@ -1451,6 +1451,118 @@ abstract class AbstractXtendCompilerTest extends AbstractXtendTestCase {
 	}
 	
 	@Test
+	def testJavaDocs_2() {
+		assertCompilesTo('''
+			package foo
+
+			class Bar {
+				/**
+				 * @param string
+				 */
+				def foo(String string) {}
+
+			}
+		''', '''
+			package foo;
+
+			@SuppressWarnings("all")
+			public class Bar {
+			  /**
+			   * @param string
+			   */
+			  public Object foo(final String string) {
+			    return null;
+			  }
+			}
+			''');
+	}
+
+	@Test
+	def testJavaDocs_3() {
+		assertCompilesTo('''
+			package foo
+
+			class Bar {
+				/**
+				 * {@link java.lang.String @see Integer}
+				 */
+				def foo(String string) {}
+
+			}
+		''', '''
+			package foo;
+
+			@SuppressWarnings("all")
+			public class Bar {
+			  /**
+			   * {@link java.lang.String @see Integer}
+			   */
+			  public Object foo(final String string) {
+			    return null;
+			  }
+			}
+			''');
+	}
+
+	@Test
+	def testJavaDocs_4() {
+		assertCompilesTo('''
+			package foo
+
+			class Bar {
+				/**
+				 * {@link java.lang.String @see Integer}
+				 */
+				def foo(String string) {}
+
+			}
+		''', '''
+			package foo;
+
+			@SuppressWarnings("all")
+			public class Bar {
+			  /**
+			   * {@link java.lang.String @see Integer}
+			   */
+			  public Object foo(final String string) {
+			    return null;
+			  }
+			}
+			''');
+	}
+
+	@Test
+	def testJavaDocs_5() {
+		assertCompilesTo('''
+			package foo
+
+			class Bar {
+				/**
+				 * {@link java.lang.String
+				 * @param string - stuff
+				 * @param string2
+				 */
+				def foo(String string, String string2) {}
+
+			}
+		''', '''
+			package foo;
+
+			@SuppressWarnings("all")
+			public class Bar {
+			  /**
+			   * {@link java.lang.String
+			   * @param string - stuff
+			   * @param string2
+			   */
+			  public Object foo(final String string, final String string2) {
+			    return null;
+			  }
+			}
+			''');
+	}
+
+	@Test
 	def testStaticMethod() {
 		assertCompilesTo('''
 			package foo
