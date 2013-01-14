@@ -35,8 +35,8 @@ import org.eclipse.xtext.xbase.typesystem.legacy.LegacyTypeArgumentContextProvid
 import org.eclipse.xtext.xbase.typesystem.legacy.LegacyVisibilityService;
 import org.eclipse.xtext.xbase.typesystem.legacy.XbaseBatchTypeProvider;
 import org.eclipse.xtext.xbase.typing.XbaseTypeProvider;
-import org.eclipse.xtext.xbase.validation.XbaseJavaValidator;
 import org.eclipse.xtext.xbase.validation.XbaseJavaValidator2;
+import org.eclipse.xtext.xbase.validation.XbaseJavaValidator;
 
 import com.google.inject.Binder;
 import com.google.inject.Guice;
@@ -105,7 +105,7 @@ public class XbaseNewTypeSystemInjectorProvider extends XbaseInjectorProvider {
 		}
 		
 		@SingletonBinding(eager=true)	
-		public Class<? extends XbaseJavaValidator2> bindXbaseJavaValidator2() {
+		public Class<? extends XbaseJavaValidator2> bindDefaultXbaseValidator() {
 			return XbaseJavaValidator2.class;
 		}
 		

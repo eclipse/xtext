@@ -100,6 +100,7 @@ import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.OwnedConverter;
 import org.eclipse.xtext.xbase.typesystem.references.ParameterizedTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.TypeReferenceVisitorWithNonNullResult;
+import org.eclipse.xtext.xbase.typesystem.references.WildcardTypeReference;
 import org.eclipse.xtext.xbase.typesystem.util.CommonTypeComputationServices;
 import org.eclipse.xtext.xbase.typing.JvmExceptions;
 import org.eclipse.xtext.xbase.util.XExpressionHelper;
@@ -216,7 +217,7 @@ public class XbaseJavaValidator2 extends AbstractXbaseJavaValidator {
 		}
 	}
 	
-	protected void validateType(XExpression expression, Procedures.Procedure2<LightweightTypeReference, LightweightTypeReference> messageProducer) {
+	protected void doValidateType(XExpression expression, Procedures.Procedure2<LightweightTypeReference, LightweightTypeReference> messageProducer) {
 		LightweightTypeReference expectedType = getExpectedType(expression);
 		if (expectedType == null)
 			return;
@@ -425,11 +426,15 @@ public class XbaseJavaValidator2 extends AbstractXbaseJavaValidator {
 	}
 
 	protected LightweightTypeReference toLightweightTypeReference(JvmTypeReference typeRef) {
-		OwnedConverter converter = new OwnedConverter(new StandardTypeReferenceOwner(getServices(), typeRef));
+		return toLightweightTypeReference(typeRef, false);
+	}
+	
+	protected LightweightTypeReference toLightweightTypeReference(JvmTypeReference typeRef, boolean keepUnboundWildcardInformation) {
+		OwnedConverter converter = new OwnedConverter(new StandardTypeReferenceOwner(getServices(), typeRef), keepUnboundWildcardInformation);
 		LightweightTypeReference reference = converter.toLightweightReference(typeRef);
 		return reference;
 	}
-
+	
 	@Check
 	public void checkTypeReferenceIsNotVoid(XCasePart expression) {
 		if (expression.getTypeGuard() != null) {
@@ -483,7 +488,7 @@ public class XbaseJavaValidator2 extends AbstractXbaseJavaValidator {
 		if (obj instanceof XAbstractFeatureCall) {
 			XExpression firstArgument = ((XAbstractFeatureCall) obj).getImplicitFirstArgument();
 			if (firstArgument != null) {
-				validateType(firstArgument, new Procedures.Procedure2<LightweightTypeReference, LightweightTypeReference>() {
+				doValidateType(firstArgument, new Procedures.Procedure2<LightweightTypeReference, LightweightTypeReference>() {
 					public void apply(LightweightTypeReference expectedType, LightweightTypeReference actualType) {
 						error("Incompatible implicit first argument. Expected " + getNameOfTypes(expectedType)
 								+ " but was " + canonicalName(actualType), obj, null,
@@ -496,7 +501,7 @@ public class XbaseJavaValidator2 extends AbstractXbaseJavaValidator {
 			return;
 		}
 //		try {
-		validateType(obj, new Procedures.Procedure2<LightweightTypeReference, LightweightTypeReference>() {
+		doValidateType(obj, new Procedures.Procedure2<LightweightTypeReference, LightweightTypeReference>() {
 			public void apply(LightweightTypeReference expectedType, LightweightTypeReference actualType) {
 				error("Incompatible types. Expected " + getNameOfTypes(expectedType) + " but was "
 						+ canonicalName(actualType), obj, null, ValidationMessageAcceptor.INSIGNIFICANT_INDEX,
@@ -524,7 +529,7 @@ public class XbaseJavaValidator2 extends AbstractXbaseJavaValidator {
 			JvmOperation operation = (JvmOperation) featureCall.getFeature();
 			if (operation.isStatic()) {
 //				try {
-				validateType(receiver, new Procedures.Procedure2<LightweightTypeReference, LightweightTypeReference>() {
+				doValidateType(receiver, new Procedures.Procedure2<LightweightTypeReference, LightweightTypeReference>() {
 					public void apply(LightweightTypeReference expectedType, LightweightTypeReference actualType) {
 						error("Incompatible receiver type. Expected " + getNameOfTypes(expectedType) + " but was "
 								+ canonicalName(actualType), featureCall,
@@ -549,6 +554,8 @@ public class XbaseJavaValidator2 extends AbstractXbaseJavaValidator {
 		if (expectedType == null || expectedType.isPrimitiveVoid())
 			return;
 		LightweightTypeReference type = typeResolver.resolveTypes(expr).getReturnType(expr);
+		if (type == null)
+			return;
 		// TODO what's this special case here?
 //		if (typeRefs.is(expectedType, Void.class) && EcoreUtil2.getContainerOfType(expr, XClosure.class) != null) {
 //			if (typeRefs.is(type, Void.TYPE))
@@ -897,7 +904,7 @@ public class XbaseJavaValidator2 extends AbstractXbaseJavaValidator {
 	@Check
 	public void checkInstanceOf(XInstanceOfExpression instanceOfExpression) {
 		LightweightTypeReference leftType = getActualType(instanceOfExpression.getExpression());
-		final LightweightTypeReference rightType = toLightweightTypeReference(instanceOfExpression.getType());
+		final LightweightTypeReference rightType = toLightweightTypeReference(instanceOfExpression.getType(), true);
 		if (leftType == null || rightType == null || rightType.getType() == null || rightType.getType().eIsProxy()) {
 			return;
 		}
@@ -941,9 +948,11 @@ public class XbaseJavaValidator2 extends AbstractXbaseJavaValidator {
 			protected Boolean doVisitParameterizedTypeReference(ParameterizedTypeReference reference) {
 				for(LightweightTypeReference argument: reference.getTypeArguments()) {
 					if (argument.isWildcard()) {
-						if (!argument.getUpperBoundSubstitute().isType(Object.class) && argument.getLowerBoundSubstitute().isAny()) {
+						if (!((WildcardTypeReference)argument).isUnbounded()) {
 							return Boolean.TRUE;
 						}
+					} else {
+						return Boolean.TRUE;
 					}
 				}
 				return Boolean.FALSE;

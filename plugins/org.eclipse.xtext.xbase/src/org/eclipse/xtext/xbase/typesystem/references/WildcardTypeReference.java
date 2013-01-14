@@ -7,6 +7,8 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.typesystem.references;
 
+import java.lang.reflect.WildcardType;
+import java.util.Collections;
 import java.util.List;
 
 import org.eclipse.jdt.annotation.NonNullByDefault;
@@ -58,6 +60,18 @@ public class WildcardTypeReference extends LightweightTypeReference {
 		return expose(upperBounds);
 	}
 	
+	/**
+	 * Returns <code>true</code> if this wilcard is unbounded according to
+	 * http://docs.oracle.com/javase/specs/jls/se7/html/jls-4.html#jls-4.5.1.
+	 * 
+	 * Unbounded wildcards do not have any upper or lower bound defined.
+	 * Unbounded references are only useful on the source level since at runtime
+	 * an unbound wildcard type gets Object as upper bound (see {@link WildcardType#getUpperBounds()}.
+	 */
+	public boolean isUnbounded() {
+		return lowerBound == null && upperBounds == null || upperBounds.isEmpty();
+	}
+	
 	@Nullable
 	public LightweightTypeReference getLowerBound() {
 		return lowerBound;
@@ -100,6 +114,10 @@ public class WildcardTypeReference extends LightweightTypeReference {
 	
 	@Override
 	public LightweightTypeReference getUpperBoundSubstitute() {
+		if (isUnbounded()) {
+			JvmType object = getOwner().getServices().getTypeReferences().findDeclaredType(Object.class, getOwner().getContextResourceSet());
+			return new ParameterizedTypeReference(getOwner(), object);
+		}
 		List<LightweightTypeReference> upperBounds = getUpperBounds();
 		if (upperBounds.size() == 1) {
 			LightweightTypeReference result = upperBounds.get(0);
@@ -128,6 +146,9 @@ public class WildcardTypeReference extends LightweightTypeReference {
 	
 	@Override
 	protected List<LightweightTypeReference> getSuperTypes(TypeParameterSubstitutor<?> substitutor) {
+		if (isUnbounded()) {
+			return Collections.singletonList(getUpperBoundSubstitute());
+		}
 		List<LightweightTypeReference> nonNullUpperBounds = expose(getUpperBounds());
 		List<LightweightTypeReference> result = Lists.newArrayListWithCapacity(nonNullUpperBounds.size());
 		for(LightweightTypeReference upperBound: nonNullUpperBounds) {
