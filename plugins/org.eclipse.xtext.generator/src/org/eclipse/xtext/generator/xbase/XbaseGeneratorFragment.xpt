@@ -16,7 +16,7 @@
 «EXTENSION org::eclipse::xtext::generator::xbase::XbaseGeneratorFragment»
 «EXTENSION org::eclipse::xtext::generator::GenModelAccess»
 
-«DEFINE generate(Boolean useInferredJvmModel, Boolean generateXtendInferrer, Boolean jdtTypeHierarchy, Boolean jdtCallHierachy) FOR Grammar»
+«DEFINE generate(Boolean useInferredJvmModel, Boolean generateXtendInferrer, Boolean jdtTypeHierarchy, Boolean jdtCallHierachy, Boolean usesXImportSection) FOR Grammar»
 «IF generateXtendInferrer»
 «FILE getJvmModelInferrerName().asPath()+".xtend" SRC-»
 package «getJvmModelInferrerName().toJavaPackage()»
@@ -86,11 +86,11 @@ class «getJvmModelInferrerName().toSimpleName()» extends AbstractModelInferrer {
 «ENDIF»
 «ENDDEFINE»
 
-«DEFINE addToPluginXmlRt(Boolean useInferredJvmModel, Boolean generateXtendInferrer, Boolean jdtTypeHierarchy, Boolean jdtCallHierachy) FOR Grammar»
+«DEFINE addToPluginXmlRt(Boolean useInferredJvmModel, Boolean generateXtendInferrer, Boolean jdtTypeHierarchy, Boolean jdtCallHierachy, Boolean usesXImportSection) FOR Grammar»
 «ENDDEFINE» 
 
 
-«DEFINE addToPluginXmlUi(Boolean useInferredJvmModel, Boolean generateXtendInferrer, Boolean jdtTypeHierarchy, Boolean jdtCallHierachy) FOR Grammar»
+«DEFINE addToPluginXmlUi(Boolean useInferredJvmModel, Boolean generateXtendInferrer, Boolean jdtTypeHierarchy, Boolean jdtCallHierachy, Boolean usesXImportSection) FOR Grammar»
 «IF jdtTypeHierarchy-»
 <!-- Type Hierarchy  -->
 	<extension
@@ -113,6 +113,7 @@ class «getJvmModelInferrerName().toSimpleName()» extends AbstractModelInferrer {
 				</reference>
 			</activeWhen>
 		</handler>
+		«IF usesXImportSection-»
 		<handler
             class="«executableExtensionFactory()»:org.eclipse.xtext.xbase.ui.imports.OrganizeImportsHandler"
             commandId="org.eclipse.xtext.xbase.ui.organizeImports">
@@ -122,8 +123,10 @@ class «getJvmModelInferrerName().toSimpleName()» extends AbstractModelInferrer {
 				</reference>
 			</activeWhen>
         </handler>
+        «ENDIF-»
 	</extension>
 	<extension point="org.eclipse.ui.menus">
+		«IF usesXImportSection-»
 	    <menuContribution
             locationURI="popup:#TextEditorContext?after=group.edit">
              <command
@@ -137,6 +140,7 @@ class «getJvmModelInferrerName().toSimpleName()» extends AbstractModelInferrer {
                 </visibleWhen>
             </command>  
         </menuContribution>
+        «ENDIF-»
 		<menuContribution
 			locationURI="popup:#TextEditorContext?after=group.open">
 			<command commandId="org.eclipse.xtext.xbase.ui.hierarchy.OpenTypeHierarchy"
@@ -246,6 +250,6 @@ class «getJvmModelInferrerName().toSimpleName()» extends AbstractModelInferrer {
 «ENDDEFINE»
 
 
-«DEFINE addToStandaloneSetup(Boolean useInferredJvmModel, Boolean generateXtendInferrer, Boolean jdtTypeHierarchy, Boolean jdtCallHierachy) FOR Grammar»
+«DEFINE addToStandaloneSetup(Boolean useInferredJvmModel, Boolean generateXtendInferrer, Boolean jdtTypeHierarchy, Boolean jdtCallHierachy, Boolean usesXImportSection) FOR Grammar»
 «ENDDEFINE»
 
