@@ -12,7 +12,7 @@ import org.junit.Ignore
 
 class ActiveAnnotationTest extends AbstractXtendTestCase {
 	
-	@Ignore
+	@Ignore("Fails when run as plugin test")
 	@Test def void testSimpleModification() {
 		val file = file('''
 			@org.eclipse.xtend.core.tests.macro.Abstract
