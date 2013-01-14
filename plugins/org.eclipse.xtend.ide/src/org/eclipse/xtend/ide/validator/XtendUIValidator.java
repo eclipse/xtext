@@ -57,6 +57,7 @@ import org.eclipse.xtext.util.TextRegion;
 import org.eclipse.xtext.util.Tuples;
 import org.eclipse.xtext.validation.Check;
 import org.eclipse.xtext.validation.ValidationMessageAcceptor;
+import org.eclipse.xtext.xbase.compiler.GeneratorConfig;
 import org.eclipse.xtext.xbase.compiler.JvmModelGenerator;
 import org.eclipse.xtext.xbase.jvmmodel.IJvmModelAssociations;
 import org.eclipse.xtext.xbase.ui.validation.XbaseUIValidator;
@@ -82,7 +83,10 @@ public class XtendUIValidator extends XbaseUIValidator {
 	protected IJvmModelAssociations associations;
 
 	@Inject
-	private IWhitespaceInformationProvider whitespaceInformationProvider;
+	protected IWhitespaceInformationProvider whitespaceInformationProvider;
+
+	@Inject
+	protected GeneratorConfig generatorConfig;
 
 	@Override
 	protected List<EPackage> getEPackages() {
@@ -208,25 +212,15 @@ public class XtendUIValidator extends XbaseUIValidator {
 			};
 			List<EObject> jvmElements = Lists.newArrayList(associations.getJvmElements(clazz));
 			JvmDeclaredType inferredType = (JvmDeclaredType) jvmElements.get(0);
-			CharSequence compiledCode = generator.generateType(inferredType);
-			compilationUnit.getBuffer().append(removeSuppressedWarningsAnnotation(compiledCode.toString()));
+			generatorConfig.setGenerateExpressions(false);
+			generatorConfig.setGenerateSuppressWarnings(false);
+			CharSequence compiledCode = generator.generateType(inferredType, generatorConfig);
+			compilationUnit.getBuffer().append(compiledCode.toString());
 			AbstractTraceRegion traceRegion = ((ITraceRegionProvider) compiledCode).getTraceRegion();
 			return Tuples.create(compilationUnit, new SimpleTrace(traceRegion));
 		} catch (Exception e) {
 			return null;
 		}
-	}
-	// TODO: Remove this when there are compiler-settings for Xbase to avoid this annotation by configuration
-	// For now an easy search and replace
-	protected String removeSuppressedWarningsAnnotation(String compiledCodeAsString) {
-		String textToReplace = "@SuppressWarnings(\"all\")";
-		int annotationOffset = compiledCodeAsString.indexOf(textToReplace);
-		if(annotationOffset != -1){
-			// To not destroy offset of traces we have to keep the offsets valid by filling in same amount of whitespaces
-			String space = "                        ";
-			compiledCodeAsString = compiledCodeAsString.substring(0, annotationOffset) + space + compiledCodeAsString.substring(annotationOffset + textToReplace.length());
-		}
-		return compiledCodeAsString;
 	}
 
 	protected class SimpleTrace extends AbstractTrace {

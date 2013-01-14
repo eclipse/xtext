@@ -24,6 +24,7 @@ import org.eclipse.xtext.junit4.util.ParseHelper;
 import org.eclipse.xtext.junit4.validation.ValidationTestHelper;
 import org.eclipse.xtext.validation.Check;
 import org.eclipse.xtext.xbase.XbasePackage;
+import org.eclipse.xtext.xbase.compiler.GeneratorConfig;
 import org.eclipse.xtext.xbase.compiler.JvmModelGenerator;
 import org.eclipse.xtext.xbase.compiler.OnTheFlyJavaCompiler.EclipseRuntimeDependentJavaCompiler;
 import org.eclipse.xtext.xbase.junit.evaluation.AbstractXbaseEvaluationTest;
@@ -50,6 +51,9 @@ public class CompilerTestHelper {
 	
 	@Inject
 	private JvmModelGenerator generator;
+
+	@Inject
+	private GeneratorConfig config;
 
 	@Inject
 	private IXtendJvmAssociations associations;
@@ -128,7 +132,7 @@ public class CompilerTestHelper {
 			final XtendFile file = parseHelper.parse(text);
 			validationHelper.assertNoErrors(file);
 			JvmGenericType inferredType = associations.getInferredType((XtendClass) file.getXtendTypes().get(0));
-			CharSequence javaCode = generator.generateType(inferredType);
+			CharSequence javaCode = generator.generateType(inferredType, config);
 			return javaCode.toString();
 		} catch (Exception e) {
 			throw new RuntimeException("Xtend compilation failed for: " + xtendCode, e);

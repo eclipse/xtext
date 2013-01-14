@@ -11,6 +11,7 @@ import org.eclipse.xtext.xbase.compiler.ElementIssueProvider
 import org.eclipse.xtext.xbase.compiler.IElementIssueProvider
 import org.eclipse.xtext.xbase.compiler.JvmModelGenerator
 import org.junit.Test
+import org.eclipse.xtext.xbase.compiler.GeneratorConfig
 
 class XtendCompilerErrorHandlingTest extends AbstractXtendTestCase {
 	
@@ -21,6 +22,8 @@ class XtendCompilerErrorHandlingTest extends AbstractXtendTestCase {
 	@Inject ElementIssueProvider$Factory issueProviderFactory
 	
 	@Inject OnChangeEvictingCache cache
+
+	@Inject GeneratorConfig generatorConfig
 
 	@Test
 	def testUnresolvedSuperclass() {
@@ -283,7 +286,7 @@ class XtendCompilerErrorHandlingTest extends AbstractXtendTestCase {
 			issueProviderFactory.create(resource, issues)
 		])
 		val inferredType = resource.contents.filter(typeof(JvmDeclaredType)).head
-		val javaCode = generator.generateType(inferredType);
+		val javaCode = generator.generateType(inferredType, generatorConfig);
 		assertEquals(expected.toString, javaCode.toString)
 	}
 }
