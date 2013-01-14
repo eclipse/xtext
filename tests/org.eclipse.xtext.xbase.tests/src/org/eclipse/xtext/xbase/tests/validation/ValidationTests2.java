@@ -98,29 +98,5 @@ public class ValidationTests2 extends ValidationTests {
 	public void testExceptionInClosure_04() throws Exception {
 		super.testExceptionInClosure_04();
 	}
-
-	@Override
-	@Test @Ignore("TODO To be implemented")
-	public void testInstanceof_3() throws Exception {
-		super.testInstanceof_3();
-	}
-
-	@Override
-	@Test @Ignore("TODO To be implemented")
-	public void testInstanceof_4() throws Exception {
-		super.testInstanceof_4();
-	}
-
-	@Override
-	@Test @Ignore("TODO To be implemented")
-	public void testInstanceof_5() throws Exception {
-		super.testInstanceof_5();
-	}
-
-	@Override
-	@Test @Ignore("TODO To be implemented")
-	public void testInstanceof_14() throws Exception {
-		super.testInstanceof_14();
-	}
 	
 }

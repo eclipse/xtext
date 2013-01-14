@@ -65,6 +65,9 @@ public class WildcardConformanceStrategy extends TypeConformanceStrategy<Wildcar
 						return TypeConformanceResult.create(param, ConformanceHint.INCOMPATIBLE);
 					}
 				} else {
+					if (rightWildcard.isUnbounded()) {
+						return TypeConformanceResult.create(param, ConformanceHint.INCOMPATIBLE);
+					}
 					for(LightweightTypeReference rightUpperBound: rightWildcard.getUpperBounds()) {
 						if (!rightUpperBound.isType(Object.class)) {
 							return TypeConformanceResult.create(param, ConformanceHint.INCOMPATIBLE);

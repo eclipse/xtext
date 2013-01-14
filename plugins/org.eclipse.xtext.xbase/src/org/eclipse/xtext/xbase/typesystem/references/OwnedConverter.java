@@ -7,6 +7,8 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.typesystem.references;
 
+import java.lang.reflect.WildcardType;
+
 import org.eclipse.xtext.common.types.JvmAnyTypeReference;
 import org.eclipse.xtext.common.types.JvmCompoundTypeReference;
 import org.eclipse.xtext.common.types.JvmGenericArrayTypeReference;
@@ -32,8 +34,26 @@ import com.google.common.base.Preconditions;
 public class OwnedConverter extends AbstractXtypeReferenceVisitor<LightweightTypeReference> implements Function<JvmTypeReference, LightweightTypeReference> {
 
 	private final ITypeReferenceOwner owner;
+	private final boolean keepUnboundWildcards;
 
+	/**
+.	 * Creates a new owneder converter with proper substitution of unbound wildcards.
+	 * Equivalent to <code>new OwnedConverter(owner, false)</code>.
+	 */
 	public OwnedConverter(ITypeReferenceOwner owner) {
+		this(owner, false);
+	}
+	
+	/**
+	 * @param keepUnboundWildcards <code>true</code> if unbound wildcards should be converted to <code>? extends Object</code>.
+	 *   Unbound information is required to do proper cast validation. In other cases, the compiler should
+	 *   add the upper bound object.
+	 *   
+	 * @see WildcardType#getUpperBounds()
+	 * 
+	 */
+	public OwnedConverter(ITypeReferenceOwner owner, boolean keepUnboundWildcards) {
+		this.keepUnboundWildcards = keepUnboundWildcards;
 		this.owner = Preconditions.checkNotNull(owner, "owner");
 	}
 	
@@ -114,13 +134,21 @@ public class OwnedConverter extends AbstractXtypeReferenceVisitor<LightweightTyp
 				result.setLowerBound(visit(constraint.getTypeReference()));
 			}
 		}
-		if (!upperBoundSeen) {
-			JvmType objectType = owner.getServices().getTypeReferences().findDeclaredType(Object.class, getOwner().getContextResourceSet());
-			ParameterizedTypeReference upperBound = new ParameterizedTypeReference(owner, objectType);
-			result.addUpperBound(upperBound);
-		}
-		if (result.getUpperBounds().isEmpty()) {
-			throw new IllegalStateException("UpperBounds may not be empty");
+		if (!keepUnboundWildcards) {
+			if (!upperBoundSeen) {
+				JvmType objectType = owner.getServices().getTypeReferences().findDeclaredType(Object.class, getOwner().getContextResourceSet());
+				ParameterizedTypeReference upperBound = new ParameterizedTypeReference(owner, objectType);
+				result.addUpperBound(upperBound);
+			}
+			if (result.getUpperBounds().isEmpty()) {
+				throw new IllegalStateException("UpperBounds may not be empty");
+			}
+		} else {
+			if (!upperBoundSeen && result.getLowerBound() != null) {
+				JvmType objectType = owner.getServices().getTypeReferences().findDeclaredType(Object.class, getOwner().getContextResourceSet());
+				ParameterizedTypeReference upperBound = new ParameterizedTypeReference(owner, objectType);
+				result.addUpperBound(upperBound);
+			}
 		}
 		return result;
 	}

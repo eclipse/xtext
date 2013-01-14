@@ -695,7 +695,7 @@ public class XbaseInterpreter implements IExpressionInterpreter {
 			return Boolean.FALSE;
 
 		Class<?> expectedType = null;
-		String className = instanceOf.getType().getQualifiedName();
+		String className = instanceOf.getType().getType().getQualifiedName();
 		try {
 			expectedType = classFinder.forName(className);
 		} catch (ClassNotFoundException cnfe) {

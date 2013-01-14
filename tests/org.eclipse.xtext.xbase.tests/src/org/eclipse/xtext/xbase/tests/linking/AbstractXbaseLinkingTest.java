@@ -326,7 +326,7 @@ public abstract class AbstractXbaseLinkingTest extends AbstractXbaseTestCase {
 		assertEquals("testdata.MethodOverrides4.staticM5()", featureCall.getFeature().getIdentifier());
 	}
 	
-	@Ignore("TODO ambiguous method validation or eager binding of type arguments to expectation")
+	@Ignore("TODO eager binding of type arguments to expectation")
 	@Test public void testStaticFeatureCall_08() throws Exception {
 		XBlockExpression block = (XBlockExpression) expression("{ val Iterable<CharSequence> iterable = testdata::MethodOverrides4::staticM5() }");
 		XVariableDeclaration variable = (XVariableDeclaration) block.getExpressions().get(0);

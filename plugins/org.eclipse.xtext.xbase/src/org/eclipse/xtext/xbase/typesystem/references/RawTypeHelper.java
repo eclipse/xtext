@@ -118,6 +118,9 @@ public class RawTypeHelper implements IRawTypeHelper {
 		
 		@Override
 		protected List<JvmType> doVisitWildcardTypeReference(WildcardTypeReference reference, ResourceSet resourceSet) {
+			if (reference.isUnbounded()) {
+				return createObjectReference(resourceSet);
+			}
 			List<LightweightTypeReference> upperBounds = reference.getUpperBounds();
 			if (upperBounds.isEmpty()) {
 				throw new IllegalStateException("UpperBounds may not be empty");
@@ -225,6 +228,12 @@ public class RawTypeHelper implements IRawTypeHelper {
 		
 		@Override
 		public LightweightTypeReference doVisitWildcardTypeReference(WildcardTypeReference reference, ResourceSet resourceSet) {
+			if (reference.isUnbounded()) {
+				return reference.getUpperBoundSubstitute();
+			}
+			if (reference.getUpperBounds().size() == 1) {
+				return reference.getUpperBoundSubstitute();
+			}
 			CompoundTypeReference result = new CompoundTypeReference(reference.getOwner(), false);
 			enhanceCompoundReference(reference.getUpperBounds(), result, resourceSet);
 			return result;
