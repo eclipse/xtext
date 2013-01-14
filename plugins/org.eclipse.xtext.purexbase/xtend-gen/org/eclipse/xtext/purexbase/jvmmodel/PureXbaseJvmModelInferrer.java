@@ -16,7 +16,6 @@ import org.eclipse.xtext.xbase.XBlockExpression;
 import org.eclipse.xtext.xbase.jvmmodel.AbstractModelInferrer;
 import org.eclipse.xtext.xbase.jvmmodel.IJvmDeclaredTypeAcceptor;
 import org.eclipse.xtext.xbase.jvmmodel.IJvmDeclaredTypeAcceptor.IPostIndexingInitializing;
-import org.eclipse.xtext.xbase.jvmmodel.IJvmModelAssociator;
 import org.eclipse.xtext.xbase.jvmmodel.JvmTypesBuilder;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 
@@ -27,7 +26,7 @@ import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
  * which is generated from the source model.
  * Other Xtend models link against the JVM model rather than the source model. The JVM
  * model elements should be associated with their source element by means of the
- * {@link IJvmModelAssociator}.</p>
+ * {@link org.eclipse.xtext.xbase.jvmmodel.IJvmModelAssociator}.</p>
  */
 @SuppressWarnings("all")
 public class PureXbaseJvmModelInferrer extends AbstractModelInferrer {

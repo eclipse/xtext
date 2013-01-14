@@ -42,7 +42,7 @@ public class XtendCompilerErrorHandlingTest extends AbstractXtendTestCase {
   
   @Inject
   private GeneratorConfig generatorConfig;
-
+  
   @Test
   public void testUnresolvedSuperclass() {
     StringConcatenation _builder = new StringConcatenation();

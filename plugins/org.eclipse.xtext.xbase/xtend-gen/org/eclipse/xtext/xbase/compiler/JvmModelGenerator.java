@@ -165,7 +165,7 @@ public class JvmModelGenerator implements IGenerator {
   
   @Inject
   private GeneratorConfig generatorConfig;
-
+  
   public void doGenerate(final Resource input, final IFileSystemAccess fsa) {
     EList<EObject> _contents = input.getContents();
     for (final EObject obj : _contents) {

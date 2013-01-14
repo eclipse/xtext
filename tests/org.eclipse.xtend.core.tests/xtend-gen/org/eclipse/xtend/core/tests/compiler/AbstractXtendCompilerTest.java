@@ -27,7 +27,7 @@ public abstract class AbstractXtendCompilerTest extends AbstractXtendTestCase {
   
   @Inject
   private Provider<GeneratorConfig> generatorConfigProvider;
-
+  
   @Test
   public void testThreeDataClassesExtendingEachOther() {
     StringConcatenation _builder = new StringConcatenation();
@@ -5377,12 +5377,12 @@ public abstract class AbstractXtendCompilerTest extends AbstractXtendTestCase {
     _builder_1.newLine();
     this.assertCompilesTo(_builder, _builder_1, generatorConfig);
   }
-
+  
   public void assertCompilesTo(final CharSequence input, final CharSequence expected) {
     GeneratorConfig _get = this.generatorConfigProvider.get();
     this.assertCompilesTo(input, expected, _get);
   }
-
+  
   public void assertCompilesTo(final CharSequence input, final CharSequence expected, final GeneratorConfig config) {
     try {
       String _string = input.toString();

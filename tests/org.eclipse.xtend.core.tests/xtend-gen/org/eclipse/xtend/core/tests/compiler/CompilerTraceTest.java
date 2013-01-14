@@ -43,7 +43,7 @@ public class CompilerTraceTest extends AbstractXtendTestCase {
   
   @Inject
   private GeneratorConfig generatorConfig;
-
+  
   @Inject
   private IXtendJvmAssociations _iXtendJvmAssociations;
   
