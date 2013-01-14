@@ -63,30 +63,40 @@ class TestBatchCompiler {
 	}
 
     @Test
-    def void bug368551() {
-        batchCompiler.tempDirectory = TEMP_DIRECTORY_WITH_SPACES
-    	batchCompiler.sourcePath = XTEND_SRC_DIRECTORY
-        batchCompiler.outputPath = OUTPUT_DIRECTORY_WITH_SPACES
-        batchCompiler.compile
-        assertEquals(4,  new File( OUTPUT_DIRECTORY_WITH_SPACES+"/test").list.size)
-    }
-    
-    @Test
-    def void bug387829() {
-        batchCompiler.tempDirectory = TEMP_DIRECTORY_WITH_SPACES
-    	batchCompiler.sourcePath = XTEND_SRC_DIRECTORY
-        batchCompiler.outputPath = OUTPUT_DIRECTORY_WITH_SPACES
-        batchCompiler.setClassPath(XTEND_SRC_DIRECTORY) //Tests Bug 387829
-        batchCompiler.compile
-        val compilerOutputDir = new File( OUTPUT_DIRECTORY_WITH_SPACES+"/test")
-        assertTrue("Compiler output exists",compilerOutputDir.exists)
-        assertEquals(4, compilerOutputDir.list.size)
-    }
+	def void bug368551() {
+		batchCompiler.tempDirectory = TEMP_DIRECTORY_WITH_SPACES
+		batchCompiler.sourcePath = XTEND_SRC_DIRECTORY
+		batchCompiler.outputPath = OUTPUT_DIRECTORY_WITH_SPACES
+		batchCompiler.compile
+		assertEquals(8, new File(OUTPUT_DIRECTORY_WITH_SPACES + "/test").list.size)
+	}
 
 	@Test
-	def void testCompileTestData() {
+	def void bug387829() {
+		batchCompiler.tempDirectory = TEMP_DIRECTORY_WITH_SPACES
+		batchCompiler.sourcePath = XTEND_SRC_DIRECTORY
+		batchCompiler.outputPath = OUTPUT_DIRECTORY_WITH_SPACES
+		batchCompiler.setClassPath(XTEND_SRC_DIRECTORY) //Tests Bug 387829
 		batchCompiler.compile
-		assertEquals(4, new File(OUTPUT_DIRECTORY+"/test").list.size)
+		val compilerOutputDir = new File(OUTPUT_DIRECTORY_WITH_SPACES + "/test")
+		assertTrue("Compiler output exists", compilerOutputDir.exists)
+		assertEquals(8, compilerOutputDir.list.size)
+	}
+
+	@Test
+	def void testCompileTestDataWithTrace() {
+		batchCompiler.writeTraceFiles = true
+		batchCompiler.compile
+		assertEquals(4, new File(OUTPUT_DIRECTORY + "/test").list[dir, name|name.endsWith(".java")].size)
+		assertEquals(4, new File(OUTPUT_DIRECTORY + "/test").list[dir, name|name.endsWith("._trace")].size)
+	}
+
+	@Test
+	def void testCompileTestDataWithoutTrace() {
+		batchCompiler.writeTraceFiles = false
+		batchCompiler.compile
+		assertEquals(4, new File(OUTPUT_DIRECTORY + "/test").list[dir, name|name.endsWith(".java")].size)
+		assertEquals(0, new File(OUTPUT_DIRECTORY + "/test").list[dir, name|name.endsWith("._trace")].size)
 	}
 
 	@Test
