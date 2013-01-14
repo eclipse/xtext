@@ -157,10 +157,9 @@ public abstract class AbstractTrace implements ITrace, ITrace.Internal {
 						if (path == null) {
 							path = leftChild.getAssociatedPath();
 						}
-						String projectName = leftChild.getAssociatedProjectName();
 						ITextRegionWithLineInformation merged = parent.getMergedAssociatedLocation();
 						if (merged != null) {
-							return new OffsetBasedLocationInResource(merged.getOffset(), merged.getLength(), merged.getLineNumber(), merged.getEndLineNumber(), path, projectName, this);
+							return new OffsetBasedLocationInResource(merged.getOffset(), merged.getLength(), merged.getLineNumber(), merged.getEndLineNumber(), path, this);
 						}
 					}
 				}
@@ -188,12 +187,9 @@ public abstract class AbstractTrace implements ITrace, ITrace.Internal {
 		URI path = location.getPath();
 		if (path == null)
 			path = traceRegion.getAssociatedPath();
-		String projectName = location.getProjectName();
-		if (projectName == null)
-			projectName = traceRegion.getAssociatedProjectName();
-		if(path == null || projectName == null)
+		if(path == null)
 			return null;
-		return new OffsetBasedLocationInResource(location.getOffset(), location.getLength(), location.getLineNumber(), location.getEndLineNumber(), path, projectName, this);
+		return new OffsetBasedLocationInResource(location.getOffset(), location.getLength(), location.getLineNumber(), location.getEndLineNumber(), path, this);
 	}
 	
 	@Nullable
