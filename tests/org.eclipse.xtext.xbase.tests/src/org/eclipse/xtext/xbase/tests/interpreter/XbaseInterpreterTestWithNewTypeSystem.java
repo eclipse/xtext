@@ -56,6 +56,12 @@ public class XbaseInterpreterTestWithNewTypeSystem extends XbaseInterpreterTest 
 		super.testForLoop_16();
 	}
 	
+	// re-enabled
+	@Override
+	@Test public void testClosure_31() throws Exception {
+		super.testClosure_31();
+	}
+	
 	@Override
 	@Test
 	@Ignore

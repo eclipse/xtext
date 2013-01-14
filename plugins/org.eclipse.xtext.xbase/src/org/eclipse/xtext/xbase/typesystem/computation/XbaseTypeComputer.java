@@ -250,12 +250,53 @@ public class XbaseTypeComputer implements ITypeComputer {
 	protected void _computeTypes(XVariableDeclaration object, ITypeComputationState state) {
 		JvmTypeReference declaredType = object.getType();
 		LightweightTypeReference lightweightTypeReference = declaredType != null ? state.getConverter().toLightweightReference(declaredType) : null;
-		ITypeComputationState initializerState = lightweightTypeReference != null ? state.withExpectation(lightweightTypeReference) : state.withNonVoidExpectation();
-		ITypeComputationResult computedType = initializerState.computeTypes(object.getRight());
-		// TODO keep information about the actual type 
-		state.assignType(object, lightweightTypeReference != null ? lightweightTypeReference : computedType.getActualExpressionType());
-		LightweightTypeReference primitiveVoid = getPrimitiveVoid(state);
-		state.acceptActualType(primitiveVoid);
+		/*
+		 * Allow recursive closure bodies, e.g.
+		 * 
+		 * val (Integer)=>BigInteger fib = [ idx |
+		 * 		if (idx < 2) {
+		 * 			BigInteger::ONE
+		 * 		} else {
+		 * 			fib.apply(idx - 1) + fib.apply(idx - 2)
+		 * 		}
+		 * 	]
+		 * 
+		 * Actually this should be even smarter, but it's not possible to decide whether 'apply' is called on the closure
+		 * before it is produced if the closure is not assigned to the local variable directly.
+		 * 
+		 * TODO Do we need an annotation to mark functions as not eagerly called, e.g. @Lazy
+		 * 
+		 * This would allow 
+		 * 
+		 * val (Integer)=>BigInteger fib = [ idx |
+		 * 		if (idx < 2) {
+		 * 			BigInteger::ONE
+		 * 		} else {
+		 * 			fib.apply(idx - 1) + fib.apply(idx - 2)
+		 * 		}
+		 * 	].memoize()
+		 * 
+		 * where memoize() is an extension method like in
+		 * http://pragprog.com/magazines/2013-01/using-memoization-in-groovy
+		 */
+		if (lightweightTypeReference != null && object.getRight() instanceof XClosure) {
+			ITypeComputationState initializerState = state.assignType(object, lightweightTypeReference).withExpectation(lightweightTypeReference);
+			initializerState.computeTypes(object.getRight());
+			LightweightTypeReference primitiveVoid = getPrimitiveVoid(state);
+			state.acceptActualType(primitiveVoid);
+		}else {
+			ITypeComputationState initializerState = lightweightTypeReference != null ? state.withExpectation(lightweightTypeReference) : state.withNonVoidExpectation();
+			ITypeComputationResult computedType = initializerState.computeTypes(object.getRight());
+			/* 
+			 * TODO keep information about the actual type, e.g. automatic cast insertion should be possible for
+			 * 
+			 * val Object o = ""
+			 * o.substring(1)
+			 */
+			state.assignType(object, lightweightTypeReference != null ? lightweightTypeReference : computedType.getActualExpressionType());
+			LightweightTypeReference primitiveVoid = getPrimitiveVoid(state);
+			state.acceptActualType(primitiveVoid);
+		}
 	}
 
 	protected void _computeTypes(final XConstructorCall constructorCall, ITypeComputationState state) {

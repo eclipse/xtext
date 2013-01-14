@@ -142,6 +142,16 @@ public abstract class AbstractXbaseLinkingTest extends AbstractXbaseTestCase {
 		assertTrue(((JvmMember)expression.getFeature()).getVisibility()==JvmVisibility.PRIVATE);
 	}
 	
+	@Test public void testRecursiveClosure() throws Exception {
+		XBlockExpression block = (XBlockExpression) expression("{ val (int)=>int fun = [ fun.apply(it) ] }");
+		XVariableDeclaration variable = (XVariableDeclaration) block.getExpressions().get(0);
+		XClosure closure = (XClosure) variable.getRight();
+		XBlockExpression body = (XBlockExpression) closure.getExpression();
+		XMemberFeatureCall member = (XMemberFeatureCall) body.getExpressions().get(0);
+		XFeatureCall recursive = (XFeatureCall) member.getMemberCallTarget();
+		assertSame(variable, recursive.getFeature());
+	}
+	
 	@Test public void testConstructorCall_00() throws Exception {
 		XConstructorCall expression = (XConstructorCall) expression("new java.util.ArrayList<String>(42)");
 		assertEquals("java.util.ArrayList.ArrayList(int)", expression.getConstructor().getIdentifier());
