@@ -955,6 +955,9 @@ public class XtendJavaValidator extends XbaseWithAnnotationsJavaValidator {
 
 	protected void checkDispatchNonDispatchConflict(XtendClass clazz,
 			Multimap<Pair<String, Integer>, JvmOperation> dispatchMethods) {
+		if(isIgnored(DISPATCH_PLAIN_FUNCTION_NAME_CLASH)) {
+			return;
+		}
 		Multimap<Pair<String, Integer>, XtendFunction> nonDispatchMethods = HashMultimap.create();
 		for(XtendFunction method: filter(clazz.getMembers(), XtendFunction.class)) {
 			if(!method.isDispatch()) {
@@ -1103,8 +1106,8 @@ public class XtendJavaValidator extends XbaseWithAnnotationsJavaValidator {
 	}
 	
 	@Check
-	public void checkLocalUsageOfDeclaredFields(XtendField field){
-		if(doCheckValidMemberName(field)) {
+	public void checkLocalUsageOfDeclaredFields(XtendField field) {
+		if(doCheckValidMemberName(field) && !isIgnored(FIELD_LOCALLY_NEVER_READ)) {
 			JvmField jvmField = associations.getJvmField(field);
 			if (jvmField == null || jvmField.getVisibility() != JvmVisibility.PRIVATE)
 				return;
@@ -1132,7 +1135,7 @@ public class XtendJavaValidator extends XbaseWithAnnotationsJavaValidator {
 	
 	@Check
 	public void checkLocalUsageOfDeclaredXtendFunction(XtendFunction function){
-		if(doCheckValidMemberName(function)) {
+		if(doCheckValidMemberName(function) && !isIgnored(FUNCTION_LOCALLY_NEVER_USED)) {
 			JvmOperation jvmOperation = function.isDispatch()?associations.getDispatchOperation(function):associations.getDirectlyInferredOperation(function);
 			if(jvmOperation != null && jvmOperation.getVisibility() == JvmVisibility.PRIVATE && !isLocallyUsed(jvmOperation, function.eContainer())){
 				String message = "The method " + jvmOperation.getSimpleName() 
