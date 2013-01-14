@@ -17,8 +17,6 @@ import org.eclipse.jdt.internal.ui.JavaPlugin;
 import org.eclipse.jdt.ui.JavaElementLabels;
 import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.jface.viewers.ILabelProvider;
-import org.eclipse.swt.graphics.Image;
-import org.eclipse.swt.widgets.Display;
 import org.eclipse.xtext.common.types.JvmAnyTypeReference;
 import org.eclipse.xtext.common.types.JvmConstructor;
 import org.eclipse.xtext.common.types.JvmEnumerationType;
@@ -31,6 +29,7 @@ import org.eclipse.xtext.common.types.JvmMember;
 import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.JvmTypeReference;
+import org.eclipse.xtext.ui.label.ILabelProviderImageDescriptorExtension;
 import org.eclipse.xtext.util.PolymorphicDispatcher;
 import org.eclipse.xtext.util.PolymorphicDispatcher.ErrorHandler;
 import org.eclipse.xtext.xbase.jvmmodel.IJvmModelAssociations;
@@ -206,15 +205,13 @@ public class XbaseDeclarativeHoverSignatureProvider {
 	}
 
 	public String getImageTag(final EObject object) {
-		final String[] result = new String[1];
-		Display.getDefault().syncExec(new Runnable() {
-			
-			public void run() {
-				Image image = labelProvider.getImage(object);
-				result[0] = getImageTagLink(ImageDescriptor.createFromImage(image));
-			}
-		});
-		return result[0];
+		if (labelProvider instanceof ILabelProviderImageDescriptorExtension) {
+			ILabelProviderImageDescriptorExtension extension = (ILabelProviderImageDescriptorExtension) labelProvider;
+			ImageDescriptor descriptor = extension.getImageDescriptor(object);
+			if (descriptor != null)
+				return getImageTagLink(descriptor);
+		}
+		return null;
 	}
 
 	protected String getImageTagLink(ImageDescriptor imageDescriptor) {
