@@ -175,7 +175,7 @@ public class XtendUIValidator extends XbaseUIValidator {
 			try {
 				CompilationUnit compilationUnit = compilationUnitAndTrace.getFirst();
 				traces.add(compilationUnitAndTrace.getSecond());
-				compilationUnit.reconcile(ICompilationUnit.ENABLE_BINDINGS_RECOVERY, true, null,
+				compilationUnit.reconcile(ICompilationUnit.NO_AST, true, null,
 						new NullProgressMonitor());
 			} catch (JavaModelException e) {
 				// Ignore
