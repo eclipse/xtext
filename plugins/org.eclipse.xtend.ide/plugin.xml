@@ -1186,10 +1186,4 @@
 	         </enablement>
       </consolePatternMatchListener>
    </extension>
-   <extension
-         point="org.eclipse.core.runtime.preferences">
-      <initializer
-            class="org.eclipse.xtend.ide.XtendExecutableExtensionFactory:org.eclipse.xtend.ide.validator.PreferenceInitializer">
-      </initializer>
-   </extension>
 </plugin>
