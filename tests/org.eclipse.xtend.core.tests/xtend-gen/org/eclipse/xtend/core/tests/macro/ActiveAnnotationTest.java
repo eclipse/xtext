@@ -9,10 +9,12 @@ import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.junit.Assert;
+import org.junit.Ignore;
 import org.junit.Test;
 
 @SuppressWarnings("all")
 public class ActiveAnnotationTest extends AbstractXtendTestCase {
+  @Ignore
   @Test
   public void testSimpleModification() {
     try {

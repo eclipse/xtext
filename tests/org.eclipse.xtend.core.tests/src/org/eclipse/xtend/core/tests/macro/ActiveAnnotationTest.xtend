@@ -8,9 +8,11 @@ import org.eclipse.xtend.lib.macro.ModifyProcessor
 import org.eclipse.xtend.lib.macro.declaration.MutableClassDeclaration
 import org.eclipse.xtext.common.types.JvmDeclaredType
 import org.junit.Test
+import org.junit.Ignore
 
 class ActiveAnnotationTest extends AbstractXtendTestCase {
 	
+	@Ignore
 	@Test def void testSimpleModification() {
 		val file = file('''
 			@org.eclipse.xtend.core.tests.macro.Abstract
