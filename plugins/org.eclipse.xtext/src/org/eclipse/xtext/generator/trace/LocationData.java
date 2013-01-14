@@ -19,16 +19,14 @@ import org.eclipse.xtext.util.TextRegionWithLineInformation;
 public class LocationData extends TextRegionWithLineInformation implements ILocationData {
 
 	private final URI path;
-	private final String projectName;
 	
-	public LocationData(int offset, int length, int lineNumber, int endLineNumber,  @Nullable URI path, @Nullable String projectName) {
+	public LocationData(int offset, int length, int lineNumber, int endLineNumber,  @Nullable URI path) {
 		super(offset, length, lineNumber, endLineNumber);
 		this.path = path;
-		this.projectName = projectName;
 	}
 	
-	public LocationData(@NonNull ITextRegionWithLineInformation region,  @Nullable URI path, @Nullable String projectName) {
-		this(region.getOffset(), region.getLength(), region.getLineNumber(), region.getEndLineNumber(), path, projectName);
+	public LocationData(@NonNull ITextRegionWithLineInformation region,  @Nullable URI path) {
+		this(region.getOffset(), region.getLength(), region.getLineNumber(), region.getEndLineNumber(), path);
 	}
 
 	@Nullable
@@ -36,17 +34,11 @@ public class LocationData extends TextRegionWithLineInformation implements ILoca
 		return path;
 	}
 
-	@Nullable
-	public String getProjectName() {
-		return projectName;
-	}
-
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = super.hashCode();
 		result = prime * result + ((path == null) ? 0 : path.hashCode());
-		result = prime * result + ((projectName == null) ? 0 : projectName.hashCode());
 		return result;
 	}
 
@@ -64,18 +56,13 @@ public class LocationData extends TextRegionWithLineInformation implements ILoca
 				return false;
 		} else if (!path.equals(other.path))
 			return false;
-		if (projectName == null) {
-			if (other.projectName != null)
-				return false;
-		} else if (!projectName.equals(other.projectName))
-			return false;
 		return true;
 	}
 
 	@Override
 	@NonNull
 	public String toString() {
-		return "LocationData [" + super.toString() + "][path=" + path + ", projectName=" + projectName + "]";
+		return "LocationData [" + super.toString() + "][path=" + path + "]";
 	}
 
 }

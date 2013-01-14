@@ -39,7 +39,7 @@ public class TreeAppendableUtil {
           int _length = it.getLength();
           int _lineNumber = it.getLineNumber();
           int _endLineNumber = it.getEndLineNumber();
-          LocationData _locationData = new LocationData(_offset, _length, _lineNumber, _endLineNumber, null, null);
+          LocationData _locationData = new LocationData(_offset, _length, _lineNumber, _endLineNumber, null);
           ITreeAppendable _trace_1 = appendable.trace(_locationData, useForDebugging);
           _xifexpression_1 = _trace_1;
         } else {
@@ -83,7 +83,7 @@ public class TreeAppendableUtil {
           int _length = it.getLength();
           int _lineNumber = it.getLineNumber();
           int _endLineNumber = it.getEndLineNumber();
-          LocationData _locationData = new LocationData(_offset, _length, _lineNumber, _endLineNumber, null, null);
+          LocationData _locationData = new LocationData(_offset, _length, _lineNumber, _endLineNumber, null);
           ITreeAppendable _trace_1 = appendable.trace(_locationData);
           _xifexpression_1 = _trace_1;
         } else {

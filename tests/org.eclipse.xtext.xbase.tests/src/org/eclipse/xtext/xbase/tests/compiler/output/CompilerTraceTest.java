@@ -72,12 +72,9 @@ public class CompilerTraceTest extends AbstractXbaseTestCase {
 			URI path = location.getPath();
 			if (path == null)
 				path = traceRegion.getAssociatedPath();
-			String projectName = location.getProjectName();
-			if (projectName == null)
-				projectName = traceRegion.getAssociatedProjectName();
-			if(path == null /* || projectName == null */) // we don't use a real IProject in this test
+			if(path == null)
 				return null;
-			return new OffsetBasedLocationInResource(location.getOffset(), location.getLength(), location.getLineNumber(), location.getEndLineNumber(), path, projectName, this);
+			return new OffsetBasedLocationInResource(location.getOffset(), location.getLength(), location.getLineNumber(), location.getEndLineNumber(), path, this);
 		}
 		
 	}

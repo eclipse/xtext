@@ -112,7 +112,6 @@ public class FileBasedTraceInformation implements ITraceInformation {
 					StorageAwareTrace result = traceToSourceProvider.get();
 					result.setLocalStorage(sourceResource);
 					final URI sourceFileURI = storage2UriMapper.getUri(sourceResource);
-					final String projectName = sourceFile.getProject().getName();
 					result.setTraceRegionProvider(new ITraceRegionProvider() {
 						public AbstractTraceRegion getTraceRegion() {
 							List<AbstractTraceRegion> result = newArrayList();
@@ -128,7 +127,7 @@ public class FileBasedTraceInformation implements ITraceInformation {
 											throw new TraceNotFoundException();
 										IPath generatedFilePath = generatedFileForTraceFile.getFullPath();
 										URI generatedFileURI = URI.createPlatformResourceURI(generatedFilePath.toString(), true);
-										result.addAll(traceRegion.invertFor(sourceFileURI, generatedFileURI, projectName));
+										result.addAll(traceRegion.invertFor(sourceFileURI, generatedFileURI));
 									} catch (Exception e) {
 										log.error(e.getMessage(), e);
 									} finally {

@@ -96,7 +96,7 @@ public class XtendCompiler extends XbaseCompiler {
 		protected void setCurrentAppendable(@Nullable RichStringLiteral origin) {
 			if (currentAppendable == null && origin != null) {
 				ITextRegionWithLineInformation region = (ITextRegionWithLineInformation) getLocationInFileProvider().getSignificantTextRegion(origin, XbasePackage.Literals.XSTRING_LITERAL__VALUE, 0);
-				currentAppendable = appendable.trace(new LocationData(region, null, null), true);
+				currentAppendable = appendable.trace(new LocationData(region, null), true);
 			}
 		}
 

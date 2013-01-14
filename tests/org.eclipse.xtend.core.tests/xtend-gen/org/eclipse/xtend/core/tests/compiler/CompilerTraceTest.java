@@ -1577,7 +1577,7 @@ public class CompilerTraceTest extends AbstractXtendTestCase {
       URI _uRI = _eResource.getURI();
       Resource _eResource_1 = file.eResource();
       URI _uRI_1 = _eResource_1.getURI();
-      List<AbstractTraceRegion> _invertFor = _traceRegion.invertFor(_uRI, _uRI_1, "project");
+      List<AbstractTraceRegion> _invertFor = _traceRegion.invertFor(_uRI, _uRI_1);
       AbstractTraceRegion _merge = this.merge(_invertFor);
       SimpleTrace _simpleTrace = new SimpleTrace(_merge);
       final SimpleTrace trace = _simpleTrace;

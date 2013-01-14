@@ -38,7 +38,6 @@ public abstract class AbstractLocationInResource implements ILocationInResource 
 	}
 
 	public abstract URI getResourceURI();
-	protected abstract String getProjectName();
 	protected abstract int getOffset();
 	protected abstract int getLength();
 	protected abstract int getLineNumber();
@@ -55,9 +54,8 @@ public abstract class AbstractLocationInResource implements ILocationInResource 
 		return result;
 	}
 	
-	@NonNull
-	public IProject getProject() {
-		return trace.findProject(getProjectName());
+	public @NonNull IProject getProject() {
+		return trace.getLocalProject();
 	}
 	
 	public LanguageInfo getLanguage() {

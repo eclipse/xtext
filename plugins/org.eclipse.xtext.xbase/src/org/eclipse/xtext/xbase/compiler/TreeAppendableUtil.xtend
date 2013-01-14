@@ -23,7 +23,7 @@ class TreeAppendableUtil {
 		} else {
 			val it = locationProvider.getSignificantTextRegion(source) as ITextRegionWithLineInformation
 			if (it != null)
-				appendable.trace(new LocationData(offset, length, lineNumber, endLineNumber, null, null), useForDebugging)
+				appendable.trace(new LocationData(offset, length, lineNumber, endLineNumber, null), useForDebugging)
 			else
 				appendable
 		}
@@ -38,7 +38,7 @@ class TreeAppendableUtil {
 				default: locationProvider.getFullTextRegion(source)
 			} as ITextRegionWithLineInformation
 			if (it != null)
-				appendable.trace(new LocationData(offset, length, lineNumber, endLineNumber, null, null))
+				appendable.trace(new LocationData(offset, length, lineNumber, endLineNumber, null))
 			else
 				appendable
 		}

@@ -1135,7 +1135,7 @@ public class JvmModelGenerator implements IGenerator {
             ITextRegionWithLineInformation _merge = documentationTrace.merge(_textRegionWithLineInformation);
             documentationTrace = _merge;
           }
-          LocationData _locationData = new LocationData(documentationTrace, null, null);
+          LocationData _locationData = new LocationData(documentationTrace, null);
           final ITreeAppendable parentAppendable = appendable.trace(_locationData);
           parentAppendable.append("/**");
           StringReader _stringReader = new StringReader(text);
@@ -1243,7 +1243,7 @@ public class JvmModelGenerator implements IGenerator {
                       int _offset_3 = region.getOffset();
                       int _length_3 = region.getLength();
                       TextRegionWithLineInformation _textRegionWithLineInformation_1 = new TextRegionWithLineInformation(_offset_3, _length_3, positionStartLine, positionEndLine);
-                      LocationData _locationData_1 = new LocationData(_textRegionWithLineInformation_1, null, null);
+                      LocationData _locationData_1 = new LocationData(_textRegionWithLineInformation_1, null);
                       ITreeAppendable childAppendable = parentAppendable.trace(_locationData_1);
                       String _text = region.getText();
                       final QualifiedName qualifiedName = this.qualifiedNameConverter.toQualifiedName(_text);

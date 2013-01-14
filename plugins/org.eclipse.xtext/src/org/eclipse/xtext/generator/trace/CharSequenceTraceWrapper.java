@@ -39,24 +39,22 @@ public class CharSequenceTraceWrapper {
 	}
 	
 	public CharSequence wrapWithTraceData(CharSequence sequence, URI originURI, @Nullable String originProject, int originOffset, int originLength, int originLineNumber, int originEndLineNumber) {
-		return new CharSequenceBasedTraceRegionProvider(sequence, originURI, originProject, originOffset, originLength, originLineNumber, originEndLineNumber);
+		return new CharSequenceBasedTraceRegionProvider(sequence, originURI, originOffset, originLength, originLineNumber, originEndLineNumber);
 	}
 	
 	protected static class CharSequenceBasedTraceRegionProvider implements ITraceRegionProvider, CharSequence {
 
 		private final CharSequence delegate;
 		private final URI originURI;
-		private final String originProject;
 		private final int originOffset;
 		private final int originLength;
 		private final int originLineNumber;
 		private final int originEndLineNumber;
 
-		public CharSequenceBasedTraceRegionProvider(CharSequence delegate, URI originURI, @Nullable String originProject,
+		public CharSequenceBasedTraceRegionProvider(CharSequence delegate, URI originURI,
 				int originOffset, int originLength, int originLineNumber, int originEndLineNumber) {
 			this.delegate = delegate;
 			this.originURI = originURI;
-			this.originProject = originProject;
 			this.originOffset = originOffset;
 			this.originLength = originLength;
 			this.originLineNumber = originLineNumber;
@@ -81,7 +79,7 @@ public class CharSequenceTraceWrapper {
 		}
 
 		public AbstractTraceRegion getTraceRegion() {
-			ILocationData locationData = new LocationData(originOffset, originLength, originLineNumber, originEndLineNumber, originURI, originProject);
+			ILocationData locationData = new LocationData(originOffset, originLength, originLineNumber, originEndLineNumber, originURI);
 			AbstractTraceRegion result = new TraceRegion(0, delegate.length(), 0, Strings.countLineBreaks(delegate), locationData, null);
 			return result;
 		}

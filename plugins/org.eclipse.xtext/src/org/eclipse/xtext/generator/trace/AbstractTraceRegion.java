@@ -103,24 +103,24 @@ public abstract class AbstractTraceRegion {
 		return nestedRegions;
 	}
 	
-	public List<AbstractTraceRegion> invertFor(URI expectedAssociatedPath, URI myPath, String myProjectName) {
+	public List<AbstractTraceRegion> invertFor(URI expectedAssociatedPath, URI myPath) {
 		Map<URI, List<Pair<ILocationData, AbstractTraceRegion>>> matchingLocations = collectMatchingLocations(expectedAssociatedPath);
 		List<Pair<ILocationData, AbstractTraceRegion>> expectedMatchingLocations = matchingLocations.get(expectedAssociatedPath);
 		if (expectedMatchingLocations == null)
 			return Collections.emptyList();
 		inplaceSortByOffset(expectedMatchingLocations);
-		List<AbstractTraceRegion> result = toInvertedTraceRegions(expectedMatchingLocations, myPath, myProjectName);
+		List<AbstractTraceRegion> result = toInvertedTraceRegions(expectedMatchingLocations, myPath);
 		return result;
 	}
 	
-	public Map<URI, List<AbstractTraceRegion>> invertAll(URI myPath, String myProjectName) {
+	public Map<URI, List<AbstractTraceRegion>> invertAll(URI myPath) {
 		Map<URI, List<Pair<ILocationData, AbstractTraceRegion>>> matchingLocations = collectMatchingLocations(null);
 		Map<URI, List<AbstractTraceRegion>> result = Maps.newHashMapWithExpectedSize(matchingLocations.size());
 		for(URI uri: matchingLocations.keySet()) {
 			List<Pair<ILocationData, AbstractTraceRegion>> expectedMatchingLocations = matchingLocations.get(uri);
 			if (expectedMatchingLocations != null) {
 				inplaceSortByOffset(expectedMatchingLocations);
-				List<AbstractTraceRegion> resultPerURI = toInvertedTraceRegions(expectedMatchingLocations, myPath, myProjectName);
+				List<AbstractTraceRegion> resultPerURI = toInvertedTraceRegions(expectedMatchingLocations, myPath);
 				result.put(uri, resultPerURI);
 			}
 		}
@@ -202,8 +202,7 @@ public abstract class AbstractTraceRegion {
 	 * Produces trees from a sorted list of locations. If the locations overlap, they'll be splitted
 	 * automatically to fulfill the contract of invariant of trace regions. 
 	 */
-	protected List<AbstractTraceRegion> toInvertedTraceRegions(
-			List<Pair<ILocationData, AbstractTraceRegion>> locations, URI myPath, String myProjectName) {
+	protected List<AbstractTraceRegion> toInvertedTraceRegions(List<Pair<ILocationData, AbstractTraceRegion>> locations, URI myPath) {
 		List<AbstractTraceRegion> result = Lists.newArrayListWithCapacity(2);
 		TraceRegion current = null;
 		int currentEndOffset = 0;
@@ -215,7 +214,7 @@ public abstract class AbstractTraceRegion {
 				// equal region - add mapped location
 				if (current.getMyOffset() == nextLocation.getOffset() && current.getMyLength() == nextLocation.getLength()) {
 					List<ILocationData> writableLocations = current.getWritableAssociatedLocations();
-					ILocationData newData = createLocationData(nextRegion, myPath, myProjectName);
+					ILocationData newData = createLocationData(nextRegion, myPath);
 					if (!writableLocations.contains(newData))
 						writableLocations.add(newData);
 					continue outer;
@@ -234,14 +233,14 @@ public abstract class AbstractTraceRegion {
 				int nextOffset = nextLocation.getOffset();
 				if (nextOffset + nextLocation.getLength() <= currentEndOffset) {
 					current = new TraceRegion(nextOffset, nextLocation.getLength(), nextLocation.getLineNumber(), nextLocation.getEndLineNumber(), 
-							createLocationData(nextRegion, myPath, myProjectName), current);
+							createLocationData(nextRegion, myPath), current);
 					currentEndOffset = nextLocation.getOffset() + nextLocation.getLength();
 				} else {
 					int nextLength = currentEndOffset - nextOffset;
 					int nextEndLine = current.getMyEndLineNumber();
 					int splittedLength = nextLocation.getLength() - nextLength;
 					int splittedBeginLine = nextEndLine;
-					ILocationData splitted = new LocationData(currentEndOffset, splittedLength, splittedBeginLine, nextLocation.getEndLineNumber(), nextLocation.getPath(), nextLocation.getProjectName());
+					ILocationData splitted = new LocationData(currentEndOffset, splittedLength, splittedBeginLine, nextLocation.getEndLineNumber(), nextLocation.getPath());
 					for(int j = i + 1; j < locations.size() && splitted != null; j++) {
 						ILocationData shiftMe = locations.get(j).getFirst();
 						if (splitted.getOffset() == shiftMe.getOffset()) {
@@ -258,12 +257,12 @@ public abstract class AbstractTraceRegion {
 						locations.add(Tuples.create(splitted, nextRegion));
 					}
 					current = new TraceRegion(nextOffset, nextLength, nextLocation.getLineNumber(), splittedBeginLine, 
-							createLocationData(nextRegion, myPath, myProjectName), current);
+							createLocationData(nextRegion, myPath), current);
 					currentEndOffset = nextOffset + nextLength;
 				}
 			} else {
 				current = new TraceRegion(nextLocation.getOffset(), nextLocation.getLength(), nextLocation.getLineNumber(), nextLocation.getEndLineNumber(), 
-						createLocationData(nextRegion, myPath, myProjectName), null);
+						createLocationData(nextRegion, myPath), null);
 				currentEndOffset = nextLocation.getOffset() + nextLocation.getLength();
 				result.add(current);
 			}
@@ -271,8 +270,8 @@ public abstract class AbstractTraceRegion {
 		return result;
 	}
 
-	public LocationData createLocationData(AbstractTraceRegion region, URI myPath, String myProjectName) {
-		return new LocationData(region.getMyOffset(), region.getMyLength(), region.getMyLineNumber(), region.getMyEndLineNumber(), myPath, myProjectName);
+	public LocationData createLocationData(AbstractTraceRegion region, URI myPath) {
+		return new LocationData(region.getMyOffset(), region.getMyLength(), region.getMyLineNumber(), region.getMyEndLineNumber(), myPath);
 	}
 	
 	/**
@@ -316,7 +315,6 @@ public abstract class AbstractTraceRegion {
 		}
 		boolean allNull = true;
 		URI path = null;
-		String projectName = null;
 		ITextRegionWithLineInformation region = ITextRegionWithLineInformation.EMPTY_REGION;
 		for(ILocationData data: allData) {
 			if (path != null) {
@@ -330,12 +328,11 @@ public abstract class AbstractTraceRegion {
 				} else {
 					allNull = false;
 					path = data.getPath();
-					projectName = data.getProjectName();
 				}
 			}
 			region = region.merge(new TextRegionWithLineInformation(data.getOffset(), data.getLength(), data.getLineNumber(), data.getEndLineNumber()));
 		}
-		return new LocationData(region.getOffset(), region.getLength(), region.getLineNumber(), region.getEndLineNumber(), path, projectName);
+		return new LocationData(region.getOffset(), region.getLength(), region.getLineNumber(), region.getEndLineNumber(), path);
 	}
 	
 	@Nullable
@@ -349,21 +346,6 @@ public abstract class AbstractTraceRegion {
 		}
 		if (parent != null && getAssociatedLocations().size() == 1) {
 			return parent.getAssociatedPath();
-		}
-		return null;
-	}
-	
-	@Nullable
-	public String getAssociatedProjectName() {
-		ILocationData data = getMergedAssociatedLocation();
-		if (data != null) {
-			String result = data.getProjectName();
-			if (result != null) {
-				return result;
-			}
-		}
-		if (parent != null && getAssociatedLocations().size() == 1) {
-			return parent.getAssociatedProjectName();
 		}
 		return null;
 	}

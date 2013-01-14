@@ -203,22 +203,13 @@ public interface TracePackage extends EPackage {
 	int DEBUG_LOCATION_DATA__END_LINE_NUMBER = 4;
 
 	/**
-	 * The feature id for the '<em><b>Project Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DEBUG_LOCATION_DATA__PROJECT_NAME = 5;
-
-	/**
 	 * The feature id for the '<em><b>Path</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int DEBUG_LOCATION_DATA__PATH = 6;
+	int DEBUG_LOCATION_DATA__PATH = 5;
 
 	/**
 	 * The feature id for the '<em><b>End Offset</b></em>' attribute.
@@ -227,7 +218,7 @@ public interface TracePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int DEBUG_LOCATION_DATA__END_OFFSET = 7;
+	int DEBUG_LOCATION_DATA__END_OFFSET = 6;
 
 	/**
 	 * The number of structural features of the '<em>Debug Location Data</em>' class.
@@ -236,7 +227,7 @@ public interface TracePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int DEBUG_LOCATION_DATA_FEATURE_COUNT = 8;
+	int DEBUG_LOCATION_DATA_FEATURE_COUNT = 7;
 
 	/**
 	 * The meta object id for the '<em>URI</em>' data type.
@@ -356,17 +347,6 @@ public interface TracePackage extends EPackage {
 	 * @generated
 	 */
 	EAttribute getDebugLocationData_EndLineNumber();
-
-	/**
-	 * Returns the meta object for the attribute '{@link org.eclipse.xtext.builder.trace.DebugLocationData#getProjectName <em>Project Name</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Project Name</em>'.
-	 * @see org.eclipse.xtext.builder.trace.DebugLocationData#getProjectName()
-	 * @see #getDebugLocationData()
-	 * @generated
-	 */
-	EAttribute getDebugLocationData_ProjectName();
 
 	/**
 	 * Returns the meta object for the attribute '{@link org.eclipse.xtext.builder.trace.DebugLocationData#getPath <em>Path</em>}'.
@@ -561,14 +541,6 @@ public interface TracePackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute DEBUG_LOCATION_DATA__END_LINE_NUMBER = eINSTANCE.getDebugLocationData_EndLineNumber();
-
-		/**
-		 * The meta object literal for the '<em><b>Project Name</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute DEBUG_LOCATION_DATA__PROJECT_NAME = eINSTANCE.getDebugLocationData_ProjectName();
 
 		/**
 		 * The meta object literal for the '<em><b>Path</b></em>' attribute feature.

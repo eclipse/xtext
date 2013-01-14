@@ -15,7 +15,6 @@ import org.eclipse.emf.common.util.URI;
 public class OffsetBasedLocationInResource extends AbstractLocationInResource {
 
 	private final URI resourceURI;
-	private final String projectName;
 	private final int offset;
 	private final int length;
 	private final int lineNumber;
@@ -23,24 +22,18 @@ public class OffsetBasedLocationInResource extends AbstractLocationInResource {
 	
 	public OffsetBasedLocationInResource(
 			int offset, int length, int lineNumber, int endLineNumber, 
-			URI resourceURI, String projectName, AbstractTrace trace) {
+			URI resourceURI, AbstractTrace trace) {
 		super(trace);
 		this.offset = offset;
 		this.length = length;
 		this.lineNumber = lineNumber;
 		this.endLineNumber = endLineNumber;
 		this.resourceURI = resourceURI;
-		this.projectName = projectName;
 	}
 
 	@Override
 	public URI getResourceURI() {
 		return resourceURI;
-	}
-
-	@Override
-	protected String getProjectName() {
-		return projectName;
 	}
 
 	@Override
