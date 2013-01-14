@@ -174,9 +174,10 @@ public class XtendUIValidator extends XbaseUIValidator {
 					}
 				}
 			};
-			Pair<CompilationUnit, SimpleTrace> compilationUnitAndTrace = getCompilationUnitAndTrace(javaProject,
-					clazz, requestor, lineBreak);
+			
 			try {
+				Pair<CompilationUnit, SimpleTrace> compilationUnitAndTrace = getCompilationUnitAndTrace(javaProject,
+						clazz, requestor, lineBreak);
 				CompilationUnit compilationUnit = compilationUnitAndTrace.getFirst();
 				traces.add(compilationUnitAndTrace.getSecond());
 				compilationUnit.reconcile(ICompilationUnit.NO_AST, true, null,
@@ -184,13 +185,12 @@ public class XtendUIValidator extends XbaseUIValidator {
 			} catch (JavaModelException e) {
 				// Ignore
 			}
+		
 		}
-
 	}
 
 	public Pair<CompilationUnit, SimpleTrace> getCompilationUnitAndTrace(IJavaProject project, final XtendClass clazz,
-			final IProblemRequestor requestor, String lineBreak) {
-		try {
+			final IProblemRequestor requestor, String lineBreak) throws JavaModelException {
 			final PackageFragment packageFragment = (PackageFragment) project.getPackageFragments()[0];
 			CompilationUnit compilationUnit = new CompilationUnit(packageFragment, clazz.getName(),
 					new WorkingCopyOwner() {
@@ -218,9 +218,6 @@ public class XtendUIValidator extends XbaseUIValidator {
 			compilationUnit.getBuffer().append(compiledCode.toString());
 			AbstractTraceRegion traceRegion = ((ITraceRegionProvider) compiledCode).getTraceRegion();
 			return Tuples.create(compilationUnit, new SimpleTrace(traceRegion));
-		} catch (Exception e) {
-			return null;
-		}
 	}
 
 	protected class SimpleTrace extends AbstractTrace {
