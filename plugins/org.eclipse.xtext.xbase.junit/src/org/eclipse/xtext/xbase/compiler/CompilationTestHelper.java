@@ -8,6 +8,7 @@
 package org.eclipse.xtext.xbase.compiler;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -16,6 +17,8 @@ import org.apache.log4j.Logger;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.emf.ecore.resource.URIConverter;
+import org.eclipse.emf.ecore.resource.impl.ExtensibleURIConverterImpl;
 import org.eclipse.xtext.diagnostics.Severity;
 import org.eclipse.xtext.generator.IGenerator;
 import org.eclipse.xtext.generator.InMemoryFileSystemAccess;
@@ -219,5 +222,30 @@ public class CompilationTestHelper {
 		}
 		return result;
 	}
+	
+	public ResourceSet unLoadedResourceSet(Pair<String,CharSequence> ...resources ) throws IOException {
+		XtextResourceSet result = resourceSetProvider.get();
+		final Map<URI, CharSequence> uri2Content = newHashMap();
+		result.setURIConverter(new ExtensibleURIConverterImpl() {
+			@Override
+			public InputStream createInputStream(URI uri, Map<?, ?> options)
+					throws IOException {
+				CharSequence charSequence = uri2Content.get(uri);
+				if (charSequence != null)
+					return new StringInputStream(charSequence.toString());
+				return super.createInputStream(uri, options);
+			}
+		});
+		for (Pair<String, CharSequence> entry : resources) {
+			final URI uri = URI.createURI(entry.getKey());
+			Resource resource = result.createResource(uri);
+			if (resource == null)
+				throw new IllegalStateException("Couldn't create resource for URI "+uri+". Resource.Factory not registered?");
+			uri2Content.put(uri, entry.getValue());
+		}
+		return result;
+	}
+	
+	
 	
 }

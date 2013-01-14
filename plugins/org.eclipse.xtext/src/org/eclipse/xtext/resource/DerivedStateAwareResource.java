@@ -104,7 +104,7 @@ public class DerivedStateAwareResource extends LazyLinkingResource {
 	
 
 	public void discardDerivedState() {
-		if (fullyInitialized && !isInitializing) {
+		if (isLoaded && fullyInitialized && !isInitializing) {
 			try {
 				isInitializing = true;
 				if (derivedStateComputer != null)
@@ -118,6 +118,8 @@ public class DerivedStateAwareResource extends LazyLinkingResource {
 	}
 
 	public void installDerivedState(boolean preIndexingPhase) {
+		if (!isLoaded)
+			throw new IllegalStateException("The resource must be loaded, before installDerivedState can be called.");
 		if (!fullyInitialized && !isInitializing) {
 			try {
 				isInitializing = true;
