@@ -8,6 +8,7 @@
 package org.eclipse.xtext.xbase.typesystem.internal;
 
 import org.eclipse.jdt.annotation.NonNullByDefault;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.xbase.typesystem.computation.ITypeAssigner;
@@ -30,16 +31,9 @@ public class CompoundTypeAssigner implements ITypeAssigner {
 		this.assigners = assigners;
 	}
 
-	public void assignType(JvmIdentifiableElement element, LightweightTypeReference expectedType) {
+	public void assignType(JvmIdentifiableElement element, @Nullable LightweightTypeReference expectedType) {
 		for(ITypeAssigner assigner: assigners) {
 			assigner.assignType(element, expectedType);
-		}
-	}
-
-	public void assignType(JvmIdentifiableElement element, LightweightTypeReference actualDeclaredType,
-			LightweightTypeReference expectedType) {
-		for(ITypeAssigner assigner: assigners) {
-			assigner.assignType(element, actualDeclaredType, expectedType);
 		}
 	}
 

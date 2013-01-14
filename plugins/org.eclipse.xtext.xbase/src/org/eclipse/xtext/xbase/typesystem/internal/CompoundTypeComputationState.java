@@ -134,7 +134,7 @@ public class CompoundTypeComputationState implements ITypeComputationState {
 		return result;
 	}
 
-	public ITypeComputationState assignType(JvmIdentifiableElement element, LightweightTypeReference type) {
+	public ITypeComputationState assignType(JvmIdentifiableElement element, @Nullable LightweightTypeReference type) {
 		AbstractTypeComputationState[] result = new AbstractTypeComputationState[components.length];
 		for (int i = 0; i < components.length; i++) {
 			result[i] = components[i].assignType(element, type);

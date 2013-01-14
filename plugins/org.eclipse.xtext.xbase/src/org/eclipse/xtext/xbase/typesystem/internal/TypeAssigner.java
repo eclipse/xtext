@@ -8,9 +8,11 @@
 package org.eclipse.xtext.xbase.typesystem.internal;
 
 import org.eclipse.jdt.annotation.NonNullByDefault;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.xbase.typesystem.computation.ITypeAssigner;
+import org.eclipse.xtext.xbase.typesystem.references.AnyTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.OwnedConverter;
 
@@ -32,17 +34,12 @@ public class TypeAssigner implements ITypeAssigner {
 		return state;
 	}
 
-	public void assignType(JvmIdentifiableElement element, LightweightTypeReference actualDeclaredType, LightweightTypeReference expectedType) {
-		// TODO validation messages
-//		if (declaredType != null)
-			state.getResolvedTypes().setType(element, actualDeclaredType);
-//		else
-//			state.getResolvedTypes().setType(element, expectedType);
-		state.addLocalToCurrentScope(element);
-	}
-
-	public void assignType(JvmIdentifiableElement element, LightweightTypeReference expectedType) {
-		state.getResolvedTypes().setType(element, expectedType);
+	public void assignType(JvmIdentifiableElement element, @Nullable LightweightTypeReference actualType) {
+		if (actualType != null) {
+			state.getResolvedTypes().setType(element, actualType);
+		} else {
+			state.getResolvedTypes().setType(element, new AnyTypeReference(state.getReferenceOwner()));
+		}
 		state.addLocalToCurrentScope(element);
 	}
 

@@ -21,6 +21,11 @@ import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.OwnedConverter;
 
 /**
+ * The current state of the type computation.
+ * It is passed around as a context instance that allows to query types that
+ * were already computed, assign types to local variables or trigger type
+ * computation for expression in the context of a certain expectation.
+ * 
  * @noimplement This interface is not intended to be implemented by clients.
  * @author Sebastian Zarnekow - Initial contribution and API
  * 
@@ -34,28 +39,86 @@ public interface ITypeComputationState {
 	 * arguments, e.g. an operation that declares two parameters of the very
 	 * same type argument will yield a more detailed expectation if possible.
 	 * <code>&lt;T&gt; T foo(T, T)</code> with
-	 * <code>foo&lt;String&gt;(null, 'string')</code> will allow to pass the unresolved T as expectation
+	 * <code>foo&lt;String&gt;(null, 'string')</code> will allow to pass the unresolved <code>T</code> as expectation
 	 * where clients would be invoked with the better candidate 'string'.
 	 */
 	ITypeComputationState withExpectation(LightweightTypeReference expectation);
 	
+	/**
+	 * After the fact refinement of the expected type. The expected type of a given
+	 * expression may be changed after the real type of that expression is known.
+	 * 
+	 * Example:
+	 * 
+	 * <pre>
+	 * for(double d: produceIntArray) {
+	 * }
+	 * </pre>
+	 * 
+	 * Expressions are resolved in the context of an expected type, which may or may not exist (e.g. it may be <code>null</code>).
+	 * 
+	 * The expectation for the call to <code>produceIntArray</code> is <code>double[]</code>. 
+	 * However, the method returns an array of int. The tricky part is, that an <code>int[]</code>
+	 * is not assignable to a <code>double[]</code> which would lead to incompatible types. Nevertheless,
+	 * the expression is valid, since the component type is relevant for the compatibility
+	 * in the context of a for-loop. Therefore, the expectation is refined after the fact to 
+	 * <code>int[]</code> because the conformance could be validated.   
+	 */
 	void refineExpectedType(XExpression expression, LightweightTypeReference expectation);
 	
+	/**
+	 * The given expectation becomes the expected return type and the expected type for
+	 * the current context. Outer context is ignored for child expressions.
+	 */
 	ITypeComputationState withRootExpectation(LightweightTypeReference expectation);
 	
+	/**
+	 * Keep the current return expectation and assume an actual expectation that is not void.
+	 * 
+	 * Example:
+	 * <pre>
+	 * val x = someExpression
+	 * </pre>
+	 * 
+	 * The expectation for the call to <code>someExpression</code> is anything but <code>void</code>.
+	 * 
+	 */
 	ITypeComputationState withNonVoidExpectation();
 	
 	/**
 	 * Transfers the available return type expectation to the actual expectation of this
-	 * computation step. 
+	 * computation step.
+	 * 
+	 * <pre>
+	 * op someMethod: String {
+	 *   return someExpression
+	 * }
+	 * </pre>
+	 * 
+	 * The actual expectation of the child <code>someExpression</code> is the return expectation
+	 * in that context, e.g. <code>java.lang.String</code> in the given example. 
 	 */
 	ITypeComputationState withReturnExpectation();
 	
 	/**
-	 * Keeps the return type expectation. Otherwise the state is free of expectations.
+	 * Keeps the return type expectation. Otherwise the new state does not have any expectations.
+	 * 
+	 * Example:
+	 * <pre>
+	 * {
+	 *   someExpression
+	 *   subsequent 
+	 * }
+	 * </pre>
+	 * 
+	 * The expectation for the call to <code>someExpression</code> does not have any actual expectations.
 	 */
 	ITypeComputationState withoutExpectation();
 
+	/**
+	 * A type checkpoint allows to re-specify the type of an identifiable that was already
+	 * type-computed. The refined type is discarded as soon as the state is left.
+	 */
 	ITypeComputationState withTypeCheckpoint();
 
 	ITypeComputationResult computeTypes(@Nullable XExpression expression);
@@ -63,7 +126,7 @@ public interface ITypeComputationState {
 	/**
 	 * @param type the type of the element. <code>null</code> or other invalid types will be treated as error types.
 	 */
-	ITypeComputationState assignType(JvmIdentifiableElement element, LightweightTypeReference type);
+	ITypeComputationState assignType(JvmIdentifiableElement element, @Nullable LightweightTypeReference type);
 	
 	ITypeAssigner assignTypes();
 	
