@@ -1,3 +1,10 @@
+/**
+ * Copyright (c) 2013 itemis AG (http://www.itemis.eu) and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ */
 package org.eclipse.xtend.ide.quickfix;
 
 import com.google.common.collect.Iterators;
@@ -67,7 +74,7 @@ public class NewMethodModificationProvider {
     }
   }
   
-  private XtendClass xtendClass(final JvmType type) {
+  protected XtendClass xtendClass(final JvmType type) {
     XtendClass _xblockexpression = null;
     {
       boolean _equals = ObjectExtensions.operator_equals(type, null);

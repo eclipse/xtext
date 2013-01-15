@@ -56,7 +56,6 @@ import org.eclipse.xtext.common.types.JvmConstructor;
 import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmPrimitiveType;
 import org.eclipse.xtext.common.types.JvmType;
-import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.TypesPackage;
 import org.eclipse.xtext.common.types.access.jdt.IJavaProjectProvider;
@@ -94,12 +93,6 @@ import org.eclipse.xtext.xbase.compiler.ScopeFakeReference;
 import org.eclipse.xtext.xbase.compiler.StringBuilderBasedAppendable;
 import org.eclipse.xtext.xbase.lib.StringExtensions;
 import org.eclipse.xtext.xbase.scoping.XbaseScopeProvider;
-import org.eclipse.xtext.xbase.typesystem.references.ITypeReferenceOwner;
-import org.eclipse.xtext.xbase.typesystem.references.LightweightBoundTypeArgument;
-import org.eclipse.xtext.xbase.typesystem.references.LightweightMergedBoundTypeArgument;
-import org.eclipse.xtext.xbase.typesystem.references.OwnedConverter;
-import org.eclipse.xtext.xbase.typesystem.util.CommonTypeComputationServices;
-import org.eclipse.xtext.xbase.typesystem.util.TypeParameterByConstraintSubstitutor;
 import org.eclipse.xtext.xbase.typing.ITypeProvider;
 import org.eclipse.xtext.xbase.ui.contentassist.ReplacingAppendable;
 import org.eclipse.xtext.xbase.ui.quickfix.XbaseQuickfixProvider;
@@ -143,14 +136,16 @@ public class XtendQuickfixProvider extends XbaseQuickfixProvider {
 	private JdtVariableCompletions jdtVariableCompletions;
 	@Inject
 	private Primitives primitives;
-	@Inject
-	private CommonTypeComputationServices computationServices;
+	@Inject 
+	private ExpectedTypeResolver expectedTypeResolver;
 	@Inject
 	private JdtTypeRelevance jdtTypeRelevance;
 	@Inject
 	private NewTypePageConfigurer newTypePageConfigurer;
-	@Inject Provider<NewXtendClassWizard> newXtendClassWizardProvider;
-	@Inject UndefinedMethodFix createMissingMethod;
+	@Inject 
+	private Provider<NewXtendClassWizard> newXtendClassWizardProvider;
+	@Inject 
+	private UndefinedMethodFix createMissingMethod;
 
 	@Override
 	public boolean hasResolutionFor(String issueCode) {
@@ -200,7 +195,7 @@ public class XtendQuickfixProvider extends XbaseQuickfixProvider {
 						reference == XbasePackage.Literals.XTYPE_LITERAL__TYPE ||
 						reference == TypesPackage.Literals.JVM_PARAMETERIZED_TYPE_REFERENCE__TYPE){
 						URI context = state.getURI();
-						String issueString = getIssueString(issue, xtextDocument);
+						String issueString = xtextDocument.get(issue.getOffset(), issue.getLength());
 						issueResolutionAcceptor.accept(
 								issue, 
 								"Create Xtend class", 
@@ -218,26 +213,19 @@ public class XtendQuickfixProvider extends XbaseQuickfixProvider {
 								openNewJavaInterfaceWizardFor(context, issueString));
 					}
 				}
-
-
 			});
 			super.createLinkingIssueResolutions(issue, issueResolutionAcceptor);
 		}
 	}
 	
-	protected String getIssueString(Issue issue, IXtextDocument xtextDocument)
-			throws BadLocationException {
-		return xtextDocument.get(issue.getOffset(), issue.getLength());
-	}
-	
-	private IModification openNewJavaInterfaceWizardFor(final URI contextUri, final String typeName) {
+	protected IModification openNewJavaInterfaceWizardFor(final URI contextUri, final String typeName) {
 		return new IModification() {
 			public void apply(IModificationContext context) throws Exception {
 				runAsyncInDisplayThread(new Runnable(){
 
 					public void run() {
 						NewInterfaceWizardPage classWizardPage = new NewInterfaceWizardPage();
-						NewInterfaceCreationWizard wizard = new NewInterfaceCreationWizard(classWizardPage, false);
+						NewInterfaceCreationWizard wizard = new NewInterfaceCreationWizard(classWizardPage, true);
 						WizardDialog dialog = createWizardDialog(wizard); 
 						newTypePageConfigurer.configure(classWizardPage, contextUri, typeName);
 						dialog.open(); 
@@ -247,14 +235,14 @@ public class XtendQuickfixProvider extends XbaseQuickfixProvider {
 		};
 	}
 	
-	private IModification openNewJavaClassWizardFor(final URI contextUri, final String typeName) {
+	protected IModification openNewJavaClassWizardFor(final URI contextUri, final String typeName) {
 		return new IModification() {
 			public void apply(IModificationContext context) throws Exception {
 				runAsyncInDisplayThread(new Runnable(){
 
 					public void run() {
 						NewClassWizardPage classWizardPage = new NewClassWizardPage();
-						NewClassCreationWizard wizard = new NewClassCreationWizard(classWizardPage, false);
+						NewClassCreationWizard wizard = new NewClassCreationWizard(classWizardPage, true);
 						WizardDialog dialog = createWizardDialog(wizard); 
 						newTypePageConfigurer.configure(classWizardPage, contextUri, typeName);
 						dialog.open(); 
@@ -264,7 +252,7 @@ public class XtendQuickfixProvider extends XbaseQuickfixProvider {
 		};
 	}
 
-	private IModification openNewXtendClassWizardFor(final URI contextUri, final String typeName) {
+	protected IModification openNewXtendClassWizardFor(final URI contextUri, final String typeName) {
 		return new IModification() {
 			public void apply(IModificationContext context) throws Exception {
 				runAsyncInDisplayThread(new Runnable(){
@@ -281,7 +269,7 @@ public class XtendQuickfixProvider extends XbaseQuickfixProvider {
 		};
 	}
 	
-	private WizardDialog createWizardDialog(
+	protected WizardDialog createWizardDialog(
 			NewElementWizard newXtendClassWizard) {
 		IWorkbench workbench = PlatformUI.getWorkbench(); 
 		Shell shell = workbench.getActiveWorkbenchWindow().getShell(); 
@@ -312,10 +300,10 @@ public class XtendQuickfixProvider extends XbaseQuickfixProvider {
 							if(target != null && isExpressionWithName(target, XbaseScopeProvider.SUPER))
 								return;
 						}
-						XMemberFeatureCall memberFeatureCall = EcoreUtil2.getContainerOfType(eObject, XMemberFeatureCall.class);
-						if(memberFeatureCall == null){
-							return;
-						}
+//						XMemberFeatureCall memberFeatureCall = EcoreUtil2.getContainerOfType(eObject, XMemberFeatureCall.class);
+//						if(memberFeatureCall == null){
+//							return;
+//						}
 						if(eObject instanceof XAbstractFeatureCall){
 							XAbstractFeatureCall call = (XAbstractFeatureCall) eObject;
 							StringBuilderBasedAppendable appendable = new StringBuilderBasedAppendable(new ImportManager(true));
@@ -336,43 +324,8 @@ public class XtendQuickfixProvider extends XbaseQuickfixProvider {
 								expectedFieldType = typeProvider.getType(xExpression);
 							}
 							JvmTypeReference expectedType = typeProvider.getExpectedType(call);
-							if(expectedType != null) {
-								ITypeReferenceOwner owner = new ITypeReferenceOwner() {
-	
-									@NonNull
-									public CommonTypeComputationServices getServices() {
-										return computationServices;
-									}
-	
-									@NonNull
-									public List<LightweightBoundTypeArgument> getAllHints(@NonNull Object handle) {
-										throw new UnsupportedOperationException();
-									}
-	
-									public void acceptHint(@NonNull Object handle,
-											@NonNull LightweightBoundTypeArgument boundTypeArgument) {
-										throw new UnsupportedOperationException();
-									}
-									
-									@NonNull 
-									public List<JvmTypeParameter> getDeclaredTypeParameters() {
-										throw new UnsupportedOperationException();
-									}
-	
-									@NonNull
-									public ResourceSet getContextResourceSet() {
-										return state.getResourceSet();
-									}
-									
-									public boolean isResolved(@NonNull Object handle) {
-										throw new UnsupportedOperationException();
-									}
-								};
-								TypeParameterByConstraintSubstitutor substitutor = new TypeParameterByConstraintSubstitutor(
-										Collections.<JvmTypeParameter, LightweightMergedBoundTypeArgument> emptyMap(),
-										owner);
-								JvmTypeReference resolvedExpectedType = substitutor.substitute(
-										new OwnedConverter(owner).toLightweightReference(expectedType)).toTypeReference();
+							
+								JvmTypeReference resolvedExpectedType = (expectedType != null) ? expectedTypeResolver.resolveExpectedType(call, expectedType) : null;
 								if (resolvedExpectedType != null && resolvedExpectedType.getType() != null) {
 									typeRefSerializer.serialize(resolvedExpectedType, call, appendable);
 									appendable.append(" ");
@@ -392,51 +345,7 @@ public class XtendQuickfixProvider extends XbaseQuickfixProvider {
 									if(!(call instanceof XAssignment))
 										createNewLocalVariable(elementName, resolvedExpectedType, issue, issueResolutionAcceptor, modificationContext);
 								}
-							}
 						}
-					}
-
-					private JvmTypeReference resolveExpectedType(final XtextResource state, XAbstractFeatureCall call) {
-						JvmTypeReference expectedType = typeProvider.getExpectedType(call);
-						ITypeReferenceOwner owner = new ITypeReferenceOwner() {
-
-							@NonNull
-							public CommonTypeComputationServices getServices() {
-								return computationServices;
-							}
-
-							@NonNull
-							public List<LightweightBoundTypeArgument> getAllHints(@NonNull Object handle) {
-								throw new UnsupportedOperationException();
-							}
-
-							public void acceptHint(@NonNull Object handle,
-									@NonNull LightweightBoundTypeArgument boundTypeArgument) {
-								throw new UnsupportedOperationException();
-							}
-
-							@NonNull
-							public ResourceSet getContextResourceSet() {
-								return state.getResourceSet();
-							}
-							
-							public boolean isResolved(@NonNull Object handle) {
-								throw new UnsupportedOperationException();
-							}
-
-							public @NonNull List<JvmTypeParameter> getDeclaredTypeParameters() {
-								throw new UnsupportedOperationException();
-							}
-						};
-						TypeParameterByConstraintSubstitutor substitutor = new TypeParameterByConstraintSubstitutor(
-								Collections.<JvmTypeParameter, LightweightMergedBoundTypeArgument> emptyMap(),
-								owner);
-						if(expectedType == null){
-							return null;
-						}
-						JvmTypeReference resolvedExpectedType = substitutor.substitute(
-								new OwnedConverter(owner).toLightweightReference(expectedType)).toTypeReference();
-						return resolvedExpectedType;
 					}
 				});
 		}
@@ -445,7 +354,6 @@ public class XtendQuickfixProvider extends XbaseQuickfixProvider {
 	/**
 	 * @since 2.3
 	 */
-	@SuppressWarnings("null")
 	protected void createNewLocalVariable(final String elementName, JvmTypeReference expectedType,
 			Issue issue, IssueResolutionAcceptor issueResolutionAcceptor, IModificationContext modificationContext) {
 		final StringBuilderBasedAppendable localVarDescriptionBuilder = new StringBuilderBasedAppendable();
@@ -527,7 +435,6 @@ public class XtendQuickfixProvider extends XbaseQuickfixProvider {
 	/**
 	 * @since 2.3
 	 */
-	@SuppressWarnings("null")
 	protected void createNewXtendField(final String elementName, final JvmTypeReference expectedType, XAbstractFeatureCall call, final Issue issue, final IssueResolutionAcceptor issueResolutionAcceptor, IModificationContext modificationContext){
 		StringBuilderBasedAppendable fieldDescriptionBuilder = new StringBuilderBasedAppendable(new ImportManager(true));
 		final JvmTypeReference type = (expectedType == null || expectedType.getType() == null)?typeRefs.createTypeRef(typeRefs.findDeclaredType(Object.class, call)):expectedType;
@@ -597,7 +504,6 @@ public class XtendQuickfixProvider extends XbaseQuickfixProvider {
 	/**
 	 * @since 2.3
 	 */
-	@SuppressWarnings("null")
 	protected void computeArgumentString(XAbstractFeatureCall call, boolean paramNames, final IAppendable appendable, boolean isExtension) {
 		Iterator<XExpression> iterator = computeArguments(call, isExtension).iterator();
 		final Set<String> notallowed = Sets.newHashSet();
@@ -618,7 +524,7 @@ public class XtendQuickfixProvider extends XbaseQuickfixProvider {
 		appendable.append(")");
 	}
 
-	private List<XExpression> computeArguments(XAbstractFeatureCall call, boolean isExtension) {
+	protected List<XExpression> computeArguments(XAbstractFeatureCall call, boolean isExtension) {
 		List<XExpression> arguments = Lists.newArrayList(call.getExplicitArguments());
 		if(call instanceof XMemberFeatureCall && !isExtension)
 			arguments.remove(((XMemberFeatureCall) call).getMemberCallTarget());
@@ -631,7 +537,7 @@ public class XtendQuickfixProvider extends XbaseQuickfixProvider {
 		return arguments;
 	}
 	
-	private boolean isExpressionWithName(XExpression expression, QualifiedName fqn) {
+	protected boolean isExpressionWithName(XExpression expression, QualifiedName fqn) {
 		ICompositeNode node = NodeModelUtils.getNode(expression);
 		if(node != null){
 			String string = node.getText().trim();
@@ -641,7 +547,7 @@ public class XtendQuickfixProvider extends XbaseQuickfixProvider {
 		return false;
 	}
 
-	private final class VariableNameAcceptor implements JdtVariableCompletions.CompletionDataAcceptor {
+	protected final class VariableNameAcceptor implements JdtVariableCompletions.CompletionDataAcceptor {
 		private final Set<String> notallowed;
 		Set<String> variableNames = Sets.newHashSet();
 
@@ -676,7 +582,6 @@ public class XtendQuickfixProvider extends XbaseQuickfixProvider {
 	/**
 	 * @since 2.3
 	 */
-	@SuppressWarnings("null")
 	protected void computeTypeArguments(XExpression expression, List<JvmTypeReference> typeArguments, final IAppendable appendable) {
 		if(typeArguments.size() > 0){
 			appendable.append("<");
@@ -803,7 +708,6 @@ public class XtendQuickfixProvider extends XbaseQuickfixProvider {
 		if (issue.getData() != null && issue.getData().length > 0)
 			acceptor.accept(issue, "Add throws declaration", "Add throws declaration", "fix_indent.gif",
 					new ISemanticModification() {
-						@SuppressWarnings("null")
 						public void apply(EObject element, IModificationContext context) throws Exception {
 							URI exceptionURI = URI.createURI(issue.getData()[0]);
 							XtendFunction xtendFunction = EcoreUtil2.getContainerOfType(element, XtendFunction.class);
@@ -847,7 +751,6 @@ public class XtendQuickfixProvider extends XbaseQuickfixProvider {
 		if (issue.getData() != null && issue.getData().length > 1)
 			acceptor.accept(issue, "Surround with try/catch block", "Surround with try/catch block", "fix_indent.gif",
 					new ISemanticModification() {
-						@SuppressWarnings("null")
 						public void apply(EObject element, IModificationContext context) throws Exception {
 							URI exceptionURI = URI.createURI(issue.getData()[0]);
 							URI childURI = URI.createURI(issue.getData()[1]);

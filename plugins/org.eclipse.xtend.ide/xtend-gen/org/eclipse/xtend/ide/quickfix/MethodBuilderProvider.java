@@ -1,3 +1,10 @@
+/**
+ * Copyright (c) 2013 itemis AG (http://www.itemis.eu) and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ */
 package org.eclipse.xtend.ide.quickfix;
 
 import com.google.inject.Inject;
@@ -6,6 +13,9 @@ import org.eclipse.xtend.ide.quickfix.JavaMethodBuilder;
 import org.eclipse.xtend.ide.quickfix.XtendMethodBuilder;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 
+/**
+ * @author Sebastian Benz - Initial contribution and API
+ */
 @SuppressWarnings("all")
 public class MethodBuilderProvider {
   @Inject
@@ -24,7 +34,7 @@ public class MethodBuilderProvider {
     return _invoke;
   }
   
-  private XtendMethodBuilder invoke(final Provider<? extends XtendMethodBuilder> provider, final String methodName, final XAbstractFeatureCall call) {
+  protected XtendMethodBuilder invoke(final Provider<? extends XtendMethodBuilder> provider, final String methodName, final XAbstractFeatureCall call) {
     XtendMethodBuilder _xblockexpression = null;
     {
       final XtendMethodBuilder builder = provider.get();

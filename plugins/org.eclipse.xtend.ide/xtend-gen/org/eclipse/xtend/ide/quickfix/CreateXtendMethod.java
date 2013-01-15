@@ -1,3 +1,10 @@
+/**
+ * Copyright (c) 2013 itemis AG (http://www.itemis.eu) and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ */
 package org.eclipse.xtend.ide.quickfix;
 
 import org.eclipse.emf.common.util.URI;
@@ -98,7 +105,8 @@ public class CreateXtendMethod implements IModification {
         } else {
           EObject _grammarElement_1 = leafNode.getGrammarElement();
           String _value = ((Keyword) _grammarElement_1).getValue();
-          boolean _equals_1 = ObjectExtensions.operator_equals("}", _value);
+          boolean _equals_1 = ObjectExtensions.operator_equals(
+            "}", _value);
           _and = ((_grammarElement instanceof Keyword) && _equals_1);
         }
         if (_and) {

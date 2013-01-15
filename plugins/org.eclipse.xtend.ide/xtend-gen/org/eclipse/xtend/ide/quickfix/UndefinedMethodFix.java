@@ -1,3 +1,10 @@
+/**
+ * Copyright (c) 2013 itemis AG (http://www.itemis.eu) and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ */
 package org.eclipse.xtend.ide.quickfix;
 
 import com.google.inject.Inject;
@@ -15,6 +22,9 @@ import org.eclipse.xtext.validation.Issue;
 import org.eclipse.xtext.xbase.XMemberFeatureCall;
 import org.eclipse.xtext.xbase.XbasePackage.Literals;
 
+/**
+ * @author Sebastian Benz - Initial contribution and API
+ */
 @SuppressWarnings("all")
 public class UndefinedMethodFix {
   @Inject
@@ -40,11 +50,12 @@ public class UndefinedMethodFix {
     String _plus = ("create method \'" + issueString);
     String _plus_1 = (_plus + "\'");
     IModification _createModification = this._newMethodModificationProvider.createModification(featureCall, issueString);
-    issueResolutionAcceptor.accept(issue, _plus_1, "", 
+    issueResolutionAcceptor.accept(issue, _plus_1, 
+      "", 
       "fix_public_function.png", _createModification);
   }
   
-  private String textForFeature(final EObject eObject, final EStructuralFeature feature) {
+  protected String textForFeature(final EObject eObject, final EStructuralFeature feature) {
     final List<INode> nodes = NodeModelUtils.findNodesForFeature(eObject, feature);
     StringBuilder _stringBuilder = new StringBuilder();
     final StringBuilder sb = _stringBuilder;

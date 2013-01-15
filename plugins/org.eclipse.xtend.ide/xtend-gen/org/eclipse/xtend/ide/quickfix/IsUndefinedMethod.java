@@ -1,3 +1,10 @@
+/**
+ * Copyright (c) 2013 itemis AG (http://www.itemis.eu) and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ */
 package org.eclipse.xtend.ide.quickfix;
 
 import com.google.inject.Inject;
@@ -14,6 +21,9 @@ import org.eclipse.xtext.xbase.XMemberFeatureCall;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.typing.ITypeProvider;
 
+/**
+ * @author Sebastian Benz - Initial contribution and API
+ */
 @SuppressWarnings("all")
 public class IsUndefinedMethod {
   @Inject
@@ -44,7 +54,7 @@ public class IsUndefinedMethod {
     return this.calls(featureCall, ((JvmOperation) method));
   }
   
-  private boolean calls(final XMemberFeatureCall featureCall, final JvmOperation operation) {
+  protected boolean calls(final XMemberFeatureCall featureCall, final JvmOperation operation) {
     final EList<JvmFormalParameter> left = operation.getParameters();
     final EList<XExpression> right = featureCall.getMemberCallArguments();
     int _size = left.size();
@@ -79,7 +89,7 @@ public class IsUndefinedMethod {
     return false;
   }
   
-  private boolean isUnknown(final EObject obj) {
+  protected boolean isUnknown(final EObject obj) {
     boolean _or = false;
     boolean _equals = ObjectExtensions.operator_equals(obj, null);
     if (_equals) {

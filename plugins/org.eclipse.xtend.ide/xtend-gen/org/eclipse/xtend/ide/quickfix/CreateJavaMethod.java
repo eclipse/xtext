@@ -1,3 +1,10 @@
+/**
+ * Copyright (c) 2013 itemis AG (http://www.itemis.eu) and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ */
 package org.eclipse.xtend.ide.quickfix;
 
 import java.util.List;
@@ -38,7 +45,7 @@ public class CreateJavaMethod implements IModification {
     this.openInEditor(_generateMethod);
   }
   
-  private IMethod generateMethod() {
+  protected IMethod generateMethod() {
     try {
       IMethod _xblockexpression = null;
       {
@@ -80,7 +87,7 @@ public class CreateJavaMethod implements IModification {
     return _nullProgressMonitor;
   }
   
-  private void openInEditor(final IJavaElement element) {
+  protected void openInEditor(final IJavaElement element) {
     JdtHyperlink _jdtHyperlink = new JdtHyperlink();
     final JdtHyperlink link = _jdtHyperlink;
     link.setJavaElement(element);

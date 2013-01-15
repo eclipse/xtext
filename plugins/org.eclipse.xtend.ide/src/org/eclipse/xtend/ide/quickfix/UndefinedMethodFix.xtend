@@ -1,3 +1,10 @@
+/*******************************************************************************
+ * Copyright (c) 2013 itemis AG (http://www.itemis.eu) and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *******************************************************************************/
 package org.eclipse.xtend.ide.quickfix
 
 import com.google.inject.Inject
@@ -30,29 +37,33 @@ import org.eclipse.emf.ecore.EObject
 import org.eclipse.emf.ecore.EStructuralFeature
 import org.eclipse.xtext.nodemodel.INode
 
+/**
+ * @author Sebastian Benz - Initial contribution and API
+ */
 class UndefinedMethodFix {
-	
-	@Inject extension NewMethodModificationProvider 
+
+	@Inject extension NewMethodModificationProvider
 	@Inject extension IsUndefinedMethod
 	@Inject extension CallsReadOnlyType
-	
-	def apply(Issue issue, IssueResolutionAcceptor issueResolutionAcceptor, XMemberFeatureCall featureCall){
+
+	def apply(Issue issue, IssueResolutionAcceptor issueResolutionAcceptor, XMemberFeatureCall featureCall) {
 		val issueString = textForFeature(featureCall, XABSTRACT_FEATURE_CALL__FEATURE);
-		if(!featureCall.callsUndefinedMethod){
+		if (!featureCall.callsUndefinedMethod) {
 			return
 		}
-		if(featureCall.receiverIsReadOnly){
+		if (featureCall.receiverIsReadOnly) {
 			return
 		}
 		issueResolutionAcceptor.accept(
-			issue, 
-			"create method '" + issueString + "'", "", 
-			"fix_public_function.png", 
+			issue,
+			"create method '" + issueString + "'",
+			"",
+			"fix_public_function.png",
 			createModification(featureCall, issueString)
 		)
 	}
-	
-	def private textForFeature(EObject eObject, EStructuralFeature feature){
+
+	def protected textForFeature(EObject eObject, EStructuralFeature feature) {
 		val nodes = findNodesForFeature(eObject, feature);
 		val sb = new StringBuilder();
 		for (INode node : nodes) {
@@ -62,63 +73,63 @@ class UndefinedMethodFix {
 	}
 }
 
+class NewMethodModificationProvider {
 
-class NewMethodModificationProvider{
-	
 	@Inject IURIEditorOpener editorOpener
 	@Inject ReplacingAppendable$Factory apendableFactory
 	@Inject extension MethodBuilderProvider methodBuilderProvider
 	@Inject extension IJavaElementFinder elementProvider
-	@Inject extension FeatureCallTargetTypeProvider 
-	
+	@Inject extension FeatureCallTargetTypeProvider
+
 	def IModification createModification(XMemberFeatureCall call, String methodName) {
-		val targetType = call.targetType 
+		val targetType = call.targetType
 		val xtendClass = targetType.xtendClass
-		if(xtendClass != null){
+		if (xtendClass != null) {
 			val methodBuilder = newXtendMethodBuilder(methodName, call)
 			return new CreateXtendMethod(methodBuilder, targetType.xtendClass, editorOpener, apendableFactory)
-		}else{
+		} else {
 			val methodBuilder = newJavaMethodBuilder(methodName, call)
-			methodBuilder.isInterface = (targetType instanceof JvmGenericType) && (targetType as JvmGenericType).interface
+			methodBuilder.isInterface = (targetType instanceof JvmGenericType) &&
+				(targetType as JvmGenericType).interface
 			val javaElement = findElementFor(targetType)
 			return new CreateJavaMethod(methodBuilder, javaElement as IType)
 		}
 	}
-	
-	def private xtendClass(JvmType type){
-		if(type == null){
+
+	def protected xtendClass(JvmType type) {
+		if (type == null) {
 			return null
 		}
 		type.eResource.allContents.filter(typeof(XtendClass)).findFirst[it.name == type.simpleName]
 	}
-	
+
 }
 
 @Data
-class CreateJavaMethod implements IModification{
-	
+class CreateJavaMethod implements IModification {
+
 	XtendMethodBuilder methodBuilder
 	IType type
-	
+
 	override apply(IModificationContext context) throws Exception {
 		generateMethod.openInEditor
 	}
-	
-	def private generateMethod(){
+
+	def protected generateMethod() {
 		val importManager = new ImportManager(true, ".".charAt(0))
 		val content = new StringBuilderBasedAppendable(importManager)
 		methodBuilder.build(content)
-		importManager.imports.forEach[
+		importManager.imports.forEach [
 			type.compilationUnit.createImport(it, null, monitor)
 		]
 		type.createMethod(content.toString, null, true, monitor)
 	}
-	
-	def monitor(){
+
+	def monitor() {
 		new NullProgressMonitor
 	}
-	
-	def private openInEditor(IJavaElement element){
+
+	def protected openInEditor(IJavaElement element) {
 		val link = new JdtHyperlink()
 		link.javaElement = element
 		link.open
@@ -126,8 +137,8 @@ class CreateJavaMethod implements IModification{
 }
 
 @Data
-class CreateXtendMethod implements IModification{
-	
+class CreateXtendMethod implements IModification {
+
 	XtendMethodBuilder methodBuilder
 	XtendClass xtendClass
 	IURIEditorOpener editorOpener
@@ -141,30 +152,29 @@ class CreateXtendMethod implements IModification{
 		val xtextEditor = editor as XtextEditor;
 		val document = xtextEditor.getDocument();
 		var offset = getFunctionInsertOffset(xtendClass)
-		
-		val appendable = appendableFactory.get(document, xtendClass, offset-1, 0, 1, false)
+
+		val appendable = appendableFactory.get(document, xtendClass, offset - 1, 0, 1, false)
 		appendable.newLine()
 		methodBuilder.build(appendable)
 		appendable.decreaseIndentation().newLine()
 		appendable.commitChanges
 		xtextEditor.setHighlightRange(offset + 1, appendable.length, true)
 	}
-	
+
 	def getFunctionInsertOffset(XtendClass clazz) {
 		val clazzNode = NodeModelUtils::findActualNodeFor(clazz)
 		if (clazzNode == null)
 			throw new IllegalStateException("Cannot determine node for clazz " + clazz.getName())
 		var lastClosingBraceOffset = -1
 		for (leafNode : clazzNode.getLeafNodes()) {
-			if ((leafNode.getGrammarElement() instanceof Keyword)
-					&& "}" == (leafNode.getGrammarElement() as Keyword).getValue()) {
+			if ((leafNode.getGrammarElement() instanceof Keyword) &&
+				"}" == (leafNode.getGrammarElement() as Keyword).getValue()) {
 				lastClosingBraceOffset = leafNode.getOffset();
 			}
 		}
-		if(lastClosingBraceOffset == -1)
-			clazzNode.getTotalEndOffset() 
-		else lastClosingBraceOffset
+		if (lastClosingBraceOffset == -1)
+			clazzNode.getTotalEndOffset()
+		else
+			lastClosingBraceOffset
 	}
-	
 }
-
