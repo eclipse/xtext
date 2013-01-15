@@ -2,8 +2,17 @@ package org.eclipse.xtend.ide.tests.validation;
 
 import com.google.common.collect.Iterables;
 import com.google.inject.Inject;
+import java.util.Map;
+import org.eclipse.core.resources.IProject;
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.jdt.core.IJavaProject;
+import org.eclipse.jdt.core.JavaCore;
+import org.eclipse.jdt.internal.core.JavaModel;
+import org.eclipse.jdt.internal.core.JavaModelManager;
+import org.eclipse.jface.preference.IPersistentPreferenceStore;
+import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.xtend.core.validation.IssueCodes;
+import org.eclipse.xtend.core.validation.XtendConfigurableIssueCodes;
 import org.eclipse.xtend.core.xtend.XtendClass;
 import org.eclipse.xtend.core.xtend.XtendField;
 import org.eclipse.xtend.core.xtend.XtendFile;
@@ -18,12 +27,16 @@ import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.common.types.JvmParameterizedTypeReference;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.junit4.validation.ValidationTestHelper;
+import org.eclipse.xtext.preferences.PreferenceKey;
+import org.eclipse.xtext.ui.editor.preferences.IPreferenceStoreAccess;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.IntegerRange;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
+import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xtype.XImportDeclaration;
 import org.eclipse.xtext.xtype.XImportSection;
+import org.junit.Assert;
 import org.junit.Ignore;
 import org.junit.Test;
 
@@ -34,6 +47,9 @@ public class XtendUIValidationTests extends AbstractXtendUITestCase {
   
   @Inject
   private ValidationTestHelper helper;
+  
+  @Inject
+  private IPreferenceStoreAccess prefStoreAccess;
   
   public void tearDown() throws Exception {
     this.testHelper.tearDown();
@@ -460,5 +476,100 @@ public class XtendUIValidationTests extends AbstractXtendUITestCase {
     } catch (Exception _e) {
       throw Exceptions.sneakyThrow(_e);
     }
+  }
+  
+  @Test
+  public void testIssueCodeDelegation() {
+    try {
+      JavaModelManager _javaModelManager = JavaModelManager.getJavaModelManager();
+      JavaModel _javaModel = _javaModelManager.getJavaModel();
+      IProject _project = this.testHelper.getProject();
+      final IJavaProject javaProject = _javaModel.getJavaProject(_project);
+      final String javaSeverity = javaProject.getOption(JavaCore.COMPILER_PB_FORBIDDEN_REFERENCE, true);
+      boolean _notEquals = ObjectExtensions.operator_notEquals(javaSeverity, "error");
+      if (_notEquals) {
+        String _plus = ("Wrong expectation Java compiler option \'" + JavaCore.COMPILER_PB_FORBIDDEN_REFERENCE);
+        String _plus_1 = (_plus + "\' should be \'error\' by default");
+        Assert.fail(_plus_1);
+      }
+      String otherSeverity = "warning";
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("class ValidationClazz {");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("def bar(org.eclipse.xtend.core.tests.restricted.RestrictedClass x) {}");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      _builder.newLine();
+      final XtendFile xtendFile = this.testHelper.xtendFile("ValidationClazz.xtend", _builder.toString());
+      EList<XtendTypeDeclaration> _xtendTypes = xtendFile.getXtendTypes();
+      Iterable<XtendClass> _filter = Iterables.<XtendClass>filter(_xtendTypes, XtendClass.class);
+      XtendClass _head = IterableExtensions.<XtendClass>head(_filter);
+      EList<XtendMember> _members = _head.getMembers();
+      XtendMember _head_1 = IterableExtensions.<XtendMember>head(_members);
+      final XtendFunction function = ((XtendFunction) _head_1);
+      EList<XtendParameter> _parameters = function.getParameters();
+      XtendParameter _get = _parameters.get(0);
+      this.helper.assertError(_get, org.eclipse.xtext.common.types.TypesPackage.Literals.JVM_TYPE_REFERENCE, org.eclipse.xtext.xbase.validation.IssueCodes.FORBIDDEN_REFERENCE);
+      javaProject.setOption(JavaCore.COMPILER_PB_FORBIDDEN_REFERENCE, otherSeverity);
+      EList<XtendParameter> _parameters_1 = function.getParameters();
+      XtendParameter _get_1 = _parameters_1.get(0);
+      this.helper.assertWarning(_get_1, org.eclipse.xtext.common.types.TypesPackage.Literals.JVM_TYPE_REFERENCE, org.eclipse.xtext.xbase.validation.IssueCodes.FORBIDDEN_REFERENCE);
+    } catch (Exception _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
+  public void testConfigurableIssueCode() {
+    try {
+      XtendConfigurableIssueCodes _xtendConfigurableIssueCodes = new XtendConfigurableIssueCodes();
+      Map<String,PreferenceKey> _configurableIssueCodes = _xtendConfigurableIssueCodes.getConfigurableIssueCodes();
+      final PreferenceKey configIssueCode = _configurableIssueCodes.get(IssueCodes.FIELD_LOCALLY_NEVER_READ);
+      final String defaultSeverity = configIssueCode.getDefaultValue();
+      IPreferenceStore _xtendPreferencesStore = this.getXtendPreferencesStore();
+      final IPersistentPreferenceStore xtendPrefStore = ((IPersistentPreferenceStore) _xtendPreferencesStore);
+      final String currentSeverity = xtendPrefStore.getString(IssueCodes.FIELD_LOCALLY_NEVER_READ);
+      boolean _or = false;
+      boolean _notEquals = ObjectExtensions.operator_notEquals(defaultSeverity, "warning");
+      if (_notEquals) {
+        _or = true;
+      } else {
+        boolean _notEquals_1 = ObjectExtensions.operator_notEquals(currentSeverity, defaultSeverity);
+        _or = (_notEquals || _notEquals_1);
+      }
+      if (_or) {
+        String _plus = ("Wrong expectation Xtend compiler option \'" + IssueCodes.FIELD_LOCALLY_NEVER_READ);
+        String _plus_1 = (_plus + "\' should be \'warning\' by default.");
+        Assert.fail(_plus_1);
+      }
+      String otherSeverity = "error";
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("class TestConfigurableIssueCode {");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("private String unusedField = \"unusedField\"");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      _builder.newLine();
+      final XtendFile xtendFile = this.testHelper.xtendFile("TestConfigurableIssueCode.xtend", _builder.toString());
+      EList<XtendTypeDeclaration> _xtendTypes = xtendFile.getXtendTypes();
+      Iterable<XtendClass> _filter = Iterables.<XtendClass>filter(_xtendTypes, XtendClass.class);
+      XtendClass _head = IterableExtensions.<XtendClass>head(_filter);
+      EList<XtendMember> _members = _head.getMembers();
+      final XtendMember unusedField = IterableExtensions.<XtendMember>head(_members);
+      this.helper.assertWarning(unusedField, Literals.XTEND_FIELD, IssueCodes.FIELD_LOCALLY_NEVER_READ);
+      xtendPrefStore.setValue(IssueCodes.FIELD_LOCALLY_NEVER_READ, otherSeverity);
+      this.helper.assertError(unusedField, Literals.XTEND_FIELD, IssueCodes.FIELD_LOCALLY_NEVER_READ);
+    } catch (Exception _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  public IPreferenceStore getXtendPreferencesStore() {
+    IProject _project = this.testHelper.getProject();
+    return this.prefStoreAccess.getWritablePreferenceStore(_project);
   }
 }
