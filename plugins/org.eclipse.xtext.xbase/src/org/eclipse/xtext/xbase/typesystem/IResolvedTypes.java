@@ -7,13 +7,14 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.typesystem;
 
+import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
-import org.eclipse.emf.common.util.Diagnostic;
 import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
+import org.eclipse.xtext.diagnostics.AbstractDiagnostic;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.XConstructorCall;
 import org.eclipse.xtext.xbase.XExpression;
@@ -37,7 +38,7 @@ public interface IResolvedTypes {
 	 * It's cumbersome to use Issues since they only know about URIs 
 	 * so we probably want to use Diagnostics?
 	 */
-	List<Diagnostic> getQueuedDiagnostics();
+	Collection<AbstractDiagnostic> getQueuedDiagnostics();
 	
 	/**
 	 * Returns the actually inferred type for the given expression or <code>null</code> if none.
@@ -98,7 +99,7 @@ public interface IResolvedTypes {
 		protected NullResolvedTypes() {
 		}
 		
-		public List<Diagnostic> getQueuedDiagnostics() {
+		public Collection<AbstractDiagnostic> getQueuedDiagnostics() {
 			return Collections.emptyList();
 		}
 		

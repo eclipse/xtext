@@ -10,9 +10,13 @@ package org.eclipse.xtext.xbase.typesystem.internal;
 import java.util.Map;
 import java.util.Set;
 
+import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.common.types.JvmMember;
+import org.eclipse.xtext.diagnostics.AbstractDiagnostic;
+import org.eclipse.xtext.diagnostics.Severity;
+import org.eclipse.xtext.validation.EObjectDiagnosticImpl;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.typesystem.computation.ILinkingCandidate;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
@@ -66,6 +70,21 @@ public class RootResolvedTypes extends ResolvedTypes {
 			toBeInferredRootExpressions = Sets.newHashSet();
 		}
 		toBeInferredRootExpressions.add(expression);
+	}
+
+	public void addDiagnostics(Resource resource) {
+		for(AbstractDiagnostic diagnostic: getQueuedDiagnostics()) {
+			if (diagnostic instanceof EObjectDiagnosticImpl) {
+				Severity severity = ((EObjectDiagnosticImpl) diagnostic).getSeverity();
+				if (severity == Severity.ERROR) {
+					resource.getErrors().add(diagnostic);
+				} else if (severity == Severity.WARNING) {
+					resource.getWarnings().add(diagnostic);
+				}
+			} else {
+				resource.getErrors().add(diagnostic);
+			}
+		}
 	}
 
 }

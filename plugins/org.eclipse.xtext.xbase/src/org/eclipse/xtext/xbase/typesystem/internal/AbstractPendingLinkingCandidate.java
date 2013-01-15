@@ -21,14 +21,19 @@ import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.xtext.common.types.JvmExecutable;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
+import org.eclipse.xtext.diagnostics.AbstractDiagnostic;
+import org.eclipse.xtext.diagnostics.Severity;
+import org.eclipse.xtext.validation.EObjectDiagnosticImpl;
 import org.eclipse.xtext.xbase.XAssignment;
 import org.eclipse.xtext.xbase.XExpression;
+import org.eclipse.xtext.xbase.XbasePackage;
 import org.eclipse.xtext.xbase.scoping.batch.IIdentifiableElementDescription;
 import org.eclipse.xtext.xbase.typesystem.computation.ILinkingCandidate;
 import org.eclipse.xtext.xbase.typesystem.conformance.ConformanceHint;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightMergedBoundTypeArgument;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 import org.eclipse.xtext.xbase.typesystem.util.TypeParameterByConstraintSubstitutor;
+import org.eclipse.xtext.xbase.validation.IssueCodes;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -50,6 +55,40 @@ public abstract class AbstractPendingLinkingCandidate<Expression extends XExpres
 	@Override
 	protected Map<JvmTypeParameter, LightweightMergedBoundTypeArgument> getTypeParameterMapping() {
 		return typeParameterMapping;
+	}
+	
+	@Override
+	protected void validate() {
+		// TODO improve messages
+		ResolvedTypes types = getState().getResolvedTypes();
+		if (!isVisible()) {
+			String message = "Feature " + getFeature().getSimpleName() + " is not visible";
+			AbstractDiagnostic diagnostic = new EObjectDiagnosticImpl(
+					Severity.ERROR, 
+					IssueCodes.FEATURE_NOT_VISIBLE, 
+					message, 
+					getExpression(), 
+					XbasePackage.Literals.XABSTRACT_FEATURE_CALL__FEATURE, -1, null);
+			types.addDiagnostic(diagnostic);
+		} else if (getArityMismatch() != 0) {
+			String message = "Invalid number of arguments. Expected " + getFeature().getSimpleName();
+			AbstractDiagnostic diagnostic = new EObjectDiagnosticImpl(
+					Severity.ERROR, 
+					IssueCodes.INVALID_NUMBER_OF_ARGUMENTS, 
+					message, 
+					getExpression(), 
+					XbasePackage.Literals.XABSTRACT_FEATURE_CALL__FEATURE, -1, null);
+			types.addDiagnostic(diagnostic);
+		} else if (getTypeArityMismatch() != 0) {
+			String message = "Invalid number of type arguments. Expected " + getFeature().getSimpleName();
+			AbstractDiagnostic diagnostic = new EObjectDiagnosticImpl(
+					Severity.ERROR, 
+					IssueCodes.INVALID_NUMBER_OF_TYPE_ARGUMENTS, 
+					message, 
+					getExpression(), 
+					XbasePackage.Literals.XABSTRACT_FEATURE_CALL__FEATURE, -1, null);
+			types.addDiagnostic(diagnostic);
+		}
 	}
 
 	@Override

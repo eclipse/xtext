@@ -76,6 +76,7 @@ public class DefaultReentrantTypeResolver implements IReentrantTypeResolver {
 		computeTypes(result, session);
 		result.resolveUnboundTypeParameters();
 		result.resolveProxies();
+		result.addDiagnostics(root.eResource());
 		return result;
 	}
 
