@@ -32,10 +32,8 @@ import org.eclipse.xtext.util.OnChangeEvictingCache;
 import org.eclipse.xtext.util.Pair;
 import org.eclipse.xtext.validation.Issue;
 import org.eclipse.xtext.xbase.compiler.ElementIssueProvider;
-import org.eclipse.xtext.xbase.compiler.IElementIssueProvider;
 
 import com.google.inject.Inject;
-import com.google.inject.Provider;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
@@ -52,7 +50,7 @@ public class XtendBuilderParticipant extends BuilderParticipant {
 
 	@Inject
 	private OnChangeEvictingCache cache;
-	
+
 	@Inject
 	private ElementIssueProvider.Factory elementIssueProviderFactory;
 
@@ -66,24 +64,16 @@ public class XtendBuilderParticipant extends BuilderParticipant {
 		if (file != null) {
 			try {
 				registerCurrentSourceFolder(delta, fileSystemAccess);
-				boolean needsIssueAdapter = file.findMaxProblemSeverity(null, true, IResource.DEPTH_INFINITE) == IMarker.SEVERITY_ERROR;
-				if (needsIssueAdapter) {
-					cache.get(IElementIssueProvider.class.getName(), resource, new Provider<IElementIssueProvider>() {
-						public IElementIssueProvider get() {
-							try {
-								final List<Issue> issues = newArrayList();
-								for (IMarker marker : file.findMarkers(null, true, IResource.DEPTH_ONE)) {
-									issues.add(issueUtil.createIssue(marker));
-								}
-								return elementIssueProviderFactory.create(resource, issues);
-							} catch (CoreException e) {
-								LOGGER.error("Error creating ElementIssueProvider", e);
-							}
-							return null;
-						}
-					});
+				final List<Issue> issues = newArrayList();
+				for (IMarker marker : file.findMarkers(null, true, IResource.DEPTH_ONE)) {
+					issues.add(issueUtil.createIssue(marker));
 				}
-				getGenerator().doGenerate(resource, fileSystemAccess);
+				try {
+					elementIssueProviderFactory.attachData(resource, issues);
+					getGenerator().doGenerate(resource, fileSystemAccess);
+				} finally {
+					elementIssueProviderFactory.detachData(resource);
+				}
 			} catch (RuntimeException e) {
 				if (e.getCause() instanceof CoreException) {
 					throw (CoreException) e.getCause();
