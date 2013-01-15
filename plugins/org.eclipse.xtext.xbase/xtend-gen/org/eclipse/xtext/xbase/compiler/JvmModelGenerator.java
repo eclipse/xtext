@@ -1437,38 +1437,47 @@ public class JvmModelGenerator implements IGenerator {
   
   public void generateAnnotation(final JvmAnnotationReference it, final ITreeAppendable appendable, final GeneratorConfig config) {
     boolean _and = false;
+    boolean _and_1 = false;
     JvmAnnotationType _annotation = it.getAnnotation();
     String _qualifiedName = _annotation.getQualifiedName();
-    boolean _equals = _qualifiedName.equals("java.lang.SuppressWarnings");
-    if (!_equals) {
+    boolean _notEquals = ObjectExtensions.operator_notEquals(_qualifiedName, null);
+    if (!_notEquals) {
+      _and_1 = false;
+    } else {
+      JvmAnnotationType _annotation_1 = it.getAnnotation();
+      String _qualifiedName_1 = _annotation_1.getQualifiedName();
+      boolean _equals = _qualifiedName_1.equals("java.lang.SuppressWarnings");
+      _and_1 = (_notEquals && _equals);
+    }
+    if (!_and_1) {
       _and = false;
     } else {
       boolean _isGenerateSuppressWarnings = config.isGenerateSuppressWarnings();
       boolean _not = (!_isGenerateSuppressWarnings);
-      _and = (_equals && _not);
+      _and = (_and_1 && _not);
     }
-    boolean _not_1 = (!_and);
-    if (_not_1) {
-      appendable.append("@");
-      JvmAnnotationType _annotation_1 = it.getAnnotation();
-      appendable.append(_annotation_1);
-      boolean _isGenerateExpressions = config.isGenerateExpressions();
-      if (_isGenerateExpressions) {
-        EList<JvmAnnotationValue> _values = it.getValues();
-        final Procedure1<LoopParams> _function = new Procedure1<LoopParams>() {
-            public void apply(final LoopParams it) {
-              it.setPrefix("(");
-              it.setSeparator(", ");
-              it.setSuffix(")");
-            }
-          };
-        final Procedure1<JvmAnnotationValue> _function_1 = new Procedure1<JvmAnnotationValue>() {
-            public void apply(final JvmAnnotationValue it) {
-              JvmModelGenerator.this.toJava(it, appendable, config);
-            }
-          };
-        this._loopExtensions.<JvmAnnotationValue>forEach(appendable, _values, _function, _function_1);
-      }
+    if (_and) {
+      return;
+    }
+    appendable.append("@");
+    JvmAnnotationType _annotation_2 = it.getAnnotation();
+    appendable.append(_annotation_2);
+    boolean _isGenerateExpressions = config.isGenerateExpressions();
+    if (_isGenerateExpressions) {
+      EList<JvmAnnotationValue> _values = it.getValues();
+      final Procedure1<LoopParams> _function = new Procedure1<LoopParams>() {
+          public void apply(final LoopParams it) {
+            it.setPrefix("(");
+            it.setSeparator(", ");
+            it.setSuffix(")");
+          }
+        };
+      final Procedure1<JvmAnnotationValue> _function_1 = new Procedure1<JvmAnnotationValue>() {
+          public void apply(final JvmAnnotationValue it) {
+            JvmModelGenerator.this.toJava(it, appendable, config);
+          }
+        };
+      this._loopExtensions.<JvmAnnotationValue>forEach(appendable, _values, _function, _function_1);
     }
   }
   

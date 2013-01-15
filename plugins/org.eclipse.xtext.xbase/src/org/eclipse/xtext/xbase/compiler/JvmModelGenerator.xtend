@@ -667,17 +667,18 @@ class JvmModelGenerator implements IGenerator {
 	}
 
 	def void generateAnnotation(JvmAnnotationReference it, ITreeAppendable appendable, GeneratorConfig config) {
-		if(!(annotation.qualifiedName.equals("java.lang.SuppressWarnings") && !config.generateSuppressWarnings) ){
-			appendable.append("@")
-			appendable.append(annotation)
-			if(config.generateExpressions)
-				appendable.forEach(values, [
-						prefix = '(' separator = ', ' suffix = ')'
-					], [
-						toJava(appendable, config)
-					])
+		if(annotation.qualifiedName != null && annotation.qualifiedName.equals("java.lang.SuppressWarnings") && !config.generateSuppressWarnings) 
+			return;
+		appendable.append("@")
+		appendable.append(annotation)
+		if(config.generateExpressions)
+			appendable.forEach(values, [
+					prefix = '(' separator = ', ' suffix = ')'
+				], [
+					toJava(appendable, config)
+				])
 
-			}
+		
 	}
 	 
 	def void toJava(JvmAnnotationValue it, ITreeAppendable appendable, GeneratorConfig config) {
