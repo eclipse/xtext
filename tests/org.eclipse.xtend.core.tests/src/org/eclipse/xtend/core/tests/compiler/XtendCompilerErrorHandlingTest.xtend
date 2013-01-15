@@ -21,8 +21,6 @@ class XtendCompilerErrorHandlingTest extends AbstractXtendTestCase {
 	
 	@Inject ElementIssueProvider$Factory issueProviderFactory
 	
-	@Inject OnChangeEvictingCache cache
-
 	@Inject GeneratorConfig generatorConfig
 
 	@Test
@@ -281,12 +279,14 @@ class XtendCompilerErrorHandlingTest extends AbstractXtendTestCase {
 	def assertCompilesTo(CharSequence input, CharSequence expected) {
 		val file = file(input.toString(), false)
 		val resource = file.eResource
-		cache.get(typeof(IElementIssueProvider).name, file.eResource, [|
-			val issues = validator.validate(resource, CheckMode::ALL, CancelIndicator::NullImpl)
-			issueProviderFactory.create(resource, issues)
-		])
-		val inferredType = resource.contents.filter(typeof(JvmDeclaredType)).head
-		val javaCode = generator.generateType(inferredType, generatorConfig);
-		assertEquals(expected.toString, javaCode.toString)
+		val issues = validator.validate(resource, CheckMode::ALL, CancelIndicator::NullImpl)
+		try {
+			issueProviderFactory.attachData(resource, issues)
+			val inferredType = resource.contents.filter(typeof(JvmDeclaredType)).head
+			val javaCode = generator.generateType(inferredType, generatorConfig);
+			assertEquals(expected.toString, javaCode.toString)
+		} finally {
+			issueProviderFactory.detachData(resource);
+		}
 	}
 }

@@ -30,8 +30,6 @@ class ErrorSafeExtensionsTest extends AbstractXbaseTestCase {
 	
 	@Inject ElementIssueProvider$Factory issueProviderFactory
 	
-	@Inject OnChangeEvictingCache cache
-	
 	@Inject extension ErrorSafeExtensions 
 
 	@Test
@@ -126,10 +124,8 @@ class ErrorSafeExtensionsTest extends AbstractXbaseTestCase {
 	
 	def protected validatedExpression(CharSequence model) {
 		val expression = expression(model, false)
-		cache.get(typeof(IElementIssueProvider).name, expression.eResource, [|
-			val issues = resourceValidator.validate(expression.eResource, CheckMode::ALL, CancelIndicator::NullImpl)
-			issueProviderFactory.create(expression.eResource, issues)
-		])
+		val issues = resourceValidator.validate(expression.eResource, CheckMode::ALL, CancelIndicator::NullImpl)
+		issueProviderFactory.attachData(expression.eResource, issues)
 		expression
 	}
 	

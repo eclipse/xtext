@@ -7,25 +7,21 @@
  */
 package org.eclipse.xtext.xbase.compiler;
 
-import com.google.inject.Provider;
-import java.util.Collections;
-import java.util.List;
 import javax.inject.Inject;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.diagnostics.Severity;
-import org.eclipse.xtext.util.OnChangeEvictingCache;
 import org.eclipse.xtext.validation.Issue;
 import org.eclipse.xtext.xbase.compiler.BrokenTypeRefDetector;
 import org.eclipse.xtext.xbase.compiler.IElementIssueProvider;
+import org.eclipse.xtext.xbase.compiler.IElementIssueProvider.Factory;
 import org.eclipse.xtext.xbase.compiler.LoopParams;
 import org.eclipse.xtext.xbase.compiler.TypeReferenceSerializer;
 import org.eclipse.xtext.xbase.compiler.output.ErrorTreeAppendable;
 import org.eclipse.xtext.xbase.compiler.output.ITreeAppendable;
 import org.eclipse.xtext.xbase.lib.Exceptions;
-import org.eclipse.xtext.xbase.lib.Functions.Function0;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
@@ -41,40 +37,23 @@ public class ErrorSafeExtensions {
   private TypeReferenceSerializer _typeReferenceSerializer;
   
   @Inject
-  private OnChangeEvictingCache cache;
+  private Factory issueProviderFactory;
   
   public Iterable<Issue> getErrors(final EObject element, final boolean includeContents) {
     Iterable<Issue> _xblockexpression = null;
     {
-      String _name = IElementIssueProvider.class.getName();
       Resource _eResource = element.eResource();
-      final Function0<IElementIssueProvider> _function = new Function0<IElementIssueProvider>() {
-          public IElementIssueProvider apply() {
-            return null;
+      final IElementIssueProvider issueProvider = this.issueProviderFactory.get(_eResource);
+      Iterable<Issue> _issues = issueProvider.getIssues(element, includeContents);
+      final Function1<Issue,Boolean> _function = new Function1<Issue,Boolean>() {
+          public Boolean apply(final Issue it) {
+            Severity _severity = it.getSeverity();
+            boolean _equals = ObjectExtensions.operator_equals(_severity, Severity.ERROR);
+            return Boolean.valueOf(_equals);
           }
         };
-      final IElementIssueProvider issueProvider = this.cache.<IElementIssueProvider>get(_name, _eResource, new Provider<IElementIssueProvider>() {
-          public IElementIssueProvider get() {
-            return _function.apply();
-          }
-      });
-      Iterable<Issue> _xifexpression = null;
-      boolean _equals = ObjectExtensions.operator_equals(issueProvider, null);
-      if (_equals) {
-        return Collections.<Issue>emptyList();
-      } else {
-        List<Issue> _issues = issueProvider.getIssues(element, includeContents);
-        final Function1<Issue,Boolean> _function_1 = new Function1<Issue,Boolean>() {
-            public Boolean apply(final Issue it) {
-              Severity _severity = it.getSeverity();
-              boolean _equals = ObjectExtensions.operator_equals(_severity, Severity.ERROR);
-              return Boolean.valueOf(_equals);
-            }
-          };
-        Iterable<Issue> _filter = IterableExtensions.<Issue>filter(_issues, _function_1);
-        _xifexpression = _filter;
-      }
-      _xblockexpression = (_xifexpression);
+      Iterable<Issue> _filter = IterableExtensions.<Issue>filter(_issues, _function);
+      _xblockexpression = (_filter);
     }
     return _xblockexpression;
   }
@@ -82,35 +61,18 @@ public class ErrorSafeExtensions {
   public boolean hasErrors(final EObject element, final boolean includeContents) {
     boolean _xblockexpression = false;
     {
-      String _name = IElementIssueProvider.class.getName();
       Resource _eResource = element.eResource();
-      final Function0<IElementIssueProvider> _function = new Function0<IElementIssueProvider>() {
-          public IElementIssueProvider apply() {
-            return null;
+      final IElementIssueProvider issueProvider = this.issueProviderFactory.get(_eResource);
+      Iterable<Issue> _issues = issueProvider.getIssues(element, includeContents);
+      final Function1<Issue,Boolean> _function = new Function1<Issue,Boolean>() {
+          public Boolean apply(final Issue it) {
+            Severity _severity = it.getSeverity();
+            boolean _equals = ObjectExtensions.operator_equals(_severity, Severity.ERROR);
+            return Boolean.valueOf(_equals);
           }
         };
-      final IElementIssueProvider issueProvider = this.cache.<IElementIssueProvider>get(_name, _eResource, new Provider<IElementIssueProvider>() {
-          public IElementIssueProvider get() {
-            return _function.apply();
-          }
-      });
-      boolean _xifexpression = false;
-      boolean _equals = ObjectExtensions.operator_equals(issueProvider, null);
-      if (_equals) {
-        return false;
-      } else {
-        List<Issue> _issues = issueProvider.getIssues(element, includeContents);
-        final Function1<Issue,Boolean> _function_1 = new Function1<Issue,Boolean>() {
-            public Boolean apply(final Issue it) {
-              Severity _severity = it.getSeverity();
-              boolean _equals = ObjectExtensions.operator_equals(_severity, Severity.ERROR);
-              return Boolean.valueOf(_equals);
-            }
-          };
-        boolean _exists = IterableExtensions.<Issue>exists(_issues, _function_1);
-        _xifexpression = _exists;
-      }
-      _xblockexpression = (_xifexpression);
+      boolean _exists = IterableExtensions.<Issue>exists(_issues, _function);
+      _xblockexpression = (_exists);
     }
     return _xblockexpression;
   }

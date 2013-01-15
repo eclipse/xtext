@@ -1,7 +1,6 @@
 package org.eclipse.xtext.xbase.tests.compiler;
 
 import com.google.inject.Inject;
-import com.google.inject.Provider;
 import java.util.List;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
@@ -11,7 +10,6 @@ import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 import org.eclipse.xtext.resource.ILocationInFileProvider;
 import org.eclipse.xtext.util.CancelIndicator;
-import org.eclipse.xtext.util.OnChangeEvictingCache;
 import org.eclipse.xtext.validation.CheckMode;
 import org.eclipse.xtext.validation.IResourceValidator;
 import org.eclipse.xtext.validation.Issue;
@@ -20,14 +18,12 @@ import org.eclipse.xtext.xbase.XCastedExpression;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.compiler.ElementIssueProvider.Factory;
 import org.eclipse.xtext.xbase.compiler.ErrorSafeExtensions;
-import org.eclipse.xtext.xbase.compiler.IElementIssueProvider;
 import org.eclipse.xtext.xbase.compiler.ImportManager;
 import org.eclipse.xtext.xbase.compiler.LoopParams;
 import org.eclipse.xtext.xbase.compiler.output.ITreeAppendable;
 import org.eclipse.xtext.xbase.compiler.output.TreeAppendable;
 import org.eclipse.xtext.xbase.jvmmodel.IJvmModelAssociations;
 import org.eclipse.xtext.xbase.lib.Exceptions;
-import org.eclipse.xtext.xbase.lib.Functions.Function0;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure2;
 import org.eclipse.xtext.xbase.tests.AbstractXbaseTestCase;
@@ -47,9 +43,6 @@ public class ErrorSafeExtensionsTest extends AbstractXbaseTestCase {
   
   @Inject
   private Factory issueProviderFactory;
-  
-  @Inject
-  private OnChangeEvictingCache cache;
   
   @Inject
   private ErrorSafeExtensions _errorSafeExtensions;
@@ -262,26 +255,10 @@ public class ErrorSafeExtensionsTest extends AbstractXbaseTestCase {
       XExpression _xblockexpression = null;
       {
         final XExpression expression = this.expression(model, false);
-        String _name = IElementIssueProvider.class.getName();
         Resource _eResource = expression.eResource();
-        final Function0<IElementIssueProvider> _function = new Function0<IElementIssueProvider>() {
-            public IElementIssueProvider apply() {
-              IElementIssueProvider _xblockexpression = null;
-              {
-                Resource _eResource = expression.eResource();
-                final List<Issue> issues = ErrorSafeExtensionsTest.this.resourceValidator.validate(_eResource, CheckMode.ALL, CancelIndicator.NullImpl);
-                Resource _eResource_1 = expression.eResource();
-                IElementIssueProvider _create = ErrorSafeExtensionsTest.this.issueProviderFactory.create(_eResource_1, issues);
-                _xblockexpression = (_create);
-              }
-              return _xblockexpression;
-            }
-          };
-        this.cache.<IElementIssueProvider>get(_name, _eResource, new Provider<IElementIssueProvider>() {
-            public IElementIssueProvider get() {
-              return _function.apply();
-            }
-        });
+        final List<Issue> issues = this.resourceValidator.validate(_eResource, CheckMode.ALL, CancelIndicator.NullImpl);
+        Resource _eResource_1 = expression.eResource();
+        this.issueProviderFactory.attachData(_eResource_1, issues);
         _xblockexpression = (expression);
       }
       return _xblockexpression;

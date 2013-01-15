@@ -7,15 +7,22 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.compiler;
 
-import java.util.List;
-
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtext.validation.Issue;
+
+import com.google.inject.ImplementedBy;
 
 /**
  * @author Jan Koehnlein - Initial contribution and API
  */
 public interface IElementIssueProvider {
 	
-	List<Issue> getIssues(EObject element, boolean includeContents);
+	Iterable<Issue> getIssues(EObject element, boolean includeContents);
+	
+	@ImplementedBy(ElementIssueProvider.Factory.class)
+	interface Factory {
+		IElementIssueProvider get(Resource reosurce);
+	}
+	
 }

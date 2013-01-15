@@ -2,7 +2,6 @@ package org.eclipse.xtend.core.tests.compiler;
 
 import com.google.common.collect.Iterables;
 import com.google.inject.Inject;
-import com.google.inject.Provider;
 import java.util.List;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
@@ -12,16 +11,13 @@ import org.eclipse.xtend.core.xtend.XtendFile;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.util.CancelIndicator;
-import org.eclipse.xtext.util.OnChangeEvictingCache;
 import org.eclipse.xtext.validation.CheckMode;
 import org.eclipse.xtext.validation.IResourceValidator;
 import org.eclipse.xtext.validation.Issue;
 import org.eclipse.xtext.xbase.compiler.ElementIssueProvider.Factory;
 import org.eclipse.xtext.xbase.compiler.GeneratorConfig;
-import org.eclipse.xtext.xbase.compiler.IElementIssueProvider;
 import org.eclipse.xtext.xbase.compiler.JvmModelGenerator;
 import org.eclipse.xtext.xbase.lib.Exceptions;
-import org.eclipse.xtext.xbase.lib.Functions.Function0;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.junit.Assert;
 import org.junit.Test;
@@ -36,9 +32,6 @@ public class XtendCompilerErrorHandlingTest extends AbstractXtendTestCase {
   
   @Inject
   private Factory issueProviderFactory;
-  
-  @Inject
-  private OnChangeEvictingCache cache;
   
   @Inject
   private GeneratorConfig generatorConfig;
@@ -477,31 +470,19 @@ public class XtendCompilerErrorHandlingTest extends AbstractXtendTestCase {
       String _string = input.toString();
       final XtendFile file = this.file(_string, false);
       final Resource resource = file.eResource();
-      String _name = IElementIssueProvider.class.getName();
-      Resource _eResource = file.eResource();
-      final Function0<IElementIssueProvider> _function = new Function0<IElementIssueProvider>() {
-          public IElementIssueProvider apply() {
-            IElementIssueProvider _xblockexpression = null;
-            {
-              final List<Issue> issues = XtendCompilerErrorHandlingTest.this.validator.validate(resource, CheckMode.ALL, CancelIndicator.NullImpl);
-              IElementIssueProvider _create = XtendCompilerErrorHandlingTest.this.issueProviderFactory.create(resource, issues);
-              _xblockexpression = (_create);
-            }
-            return _xblockexpression;
-          }
-        };
-      this.cache.<IElementIssueProvider>get(_name, _eResource, new Provider<IElementIssueProvider>() {
-          public IElementIssueProvider get() {
-            return _function.apply();
-          }
-      });
-      EList<EObject> _contents = resource.getContents();
-      Iterable<JvmDeclaredType> _filter = Iterables.<JvmDeclaredType>filter(_contents, JvmDeclaredType.class);
-      final JvmDeclaredType inferredType = IterableExtensions.<JvmDeclaredType>head(_filter);
-      final CharSequence javaCode = this.generator.generateType(inferredType, this.generatorConfig);
-      String _string_1 = expected.toString();
-      String _string_2 = javaCode.toString();
-      Assert.assertEquals(_string_1, _string_2);
+      final List<Issue> issues = this.validator.validate(resource, CheckMode.ALL, CancelIndicator.NullImpl);
+      try {
+        this.issueProviderFactory.attachData(resource, issues);
+        EList<EObject> _contents = resource.getContents();
+        Iterable<JvmDeclaredType> _filter = Iterables.<JvmDeclaredType>filter(_contents, JvmDeclaredType.class);
+        final JvmDeclaredType inferredType = IterableExtensions.<JvmDeclaredType>head(_filter);
+        final CharSequence javaCode = this.generator.generateType(inferredType, this.generatorConfig);
+        String _string_1 = expected.toString();
+        String _string_2 = javaCode.toString();
+        Assert.assertEquals(_string_1, _string_2);
+      } finally {
+        this.issueProviderFactory.detachData(resource);
+      }
     } catch (Exception _e) {
       throw Exceptions.sneakyThrow(_e);
     }
