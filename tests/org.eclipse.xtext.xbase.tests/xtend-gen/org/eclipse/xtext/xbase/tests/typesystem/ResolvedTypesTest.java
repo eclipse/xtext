@@ -8,15 +8,18 @@
 package org.eclipse.xtext.xbase.tests.typesystem;
 
 import com.google.inject.Inject;
+import java.util.Collection;
 import java.util.List;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.TypesFactory;
+import org.eclipse.xtext.diagnostics.AbstractDiagnostic;
 import org.eclipse.xtext.junit4.InjectWith;
 import org.eclipse.xtext.junit4.XtextRunner;
 import org.eclipse.xtext.xbase.XFeatureCall;
 import org.eclipse.xtext.xbase.XbaseFactory;
 import org.eclipse.xtext.xbase.junit.typesystem.PublicReentrantTypeResolver;
 import org.eclipse.xtext.xbase.junit.typesystem.PublicResolvedTypes;
+import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.tests.AbstractXbaseTestCase;
 import org.eclipse.xtext.xbase.tests.typesystem.XbaseNewTypeSystemInjectorProvider;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
@@ -65,10 +68,12 @@ public class ResolvedTypesTest extends AbstractXbaseTestCase {
     this.setTestMe(_publicResolvedTypes);
   }
   
-  @Test(expected = UnsupportedOperationException.class)
+  @Test
   public void testDiagnostics() {
+    List<?> _emptyList = CollectionLiterals.emptyList();
     PublicResolvedTypes _testMe = this.getTestMe();
-    _testMe.getQueuedDiagnostics();
+    Collection<AbstractDiagnostic> _queuedDiagnostics = _testMe.getQueuedDiagnostics();
+    Assert.assertEquals(((Object) _emptyList), _queuedDiagnostics);
   }
   
   @Test

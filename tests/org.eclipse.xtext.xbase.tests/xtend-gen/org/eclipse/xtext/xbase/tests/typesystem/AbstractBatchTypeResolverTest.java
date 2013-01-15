@@ -20,6 +20,8 @@ import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.junit4.InjectWith;
 import org.eclipse.xtext.junit4.XtextRunner;
+import org.eclipse.xtext.linking.impl.XtextLinkingDiagnostic;
+import org.eclipse.xtext.resource.XtextSyntaxDiagnostic;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.XCasePart;
 import org.eclipse.xtext.xbase.XConstructorCall;
@@ -169,11 +171,11 @@ public abstract class AbstractBatchTypeResolverTest extends AbstractTypeResolver
         }
       }
       Resource _eResource_4 = xExpression.eResource();
-      EList<Diagnostic> _errors_2 = _eResource_4.getErrors();
-      String _string_2 = _errors_2.toString();
+      Iterable<Diagnostic> _linkingAndSyntaxErrors = this.linkingAndSyntaxErrors(_eResource_4);
+      String _string_2 = _linkingAndSyntaxErrors.toString();
       Resource _eResource_5 = xExpression.eResource();
-      EList<Diagnostic> _errors_3 = _eResource_5.getErrors();
-      boolean _isEmpty_2 = _errors_3.isEmpty();
+      Iterable<Diagnostic> _linkingAndSyntaxErrors_1 = this.linkingAndSyntaxErrors(_eResource_5);
+      boolean _isEmpty_2 = IterableExtensions.isEmpty(_linkingAndSyntaxErrors_1);
       Assert.assertTrue(_string_2, _isEmpty_2);
       Resource _eResource_6 = xExpression.eResource();
       EList<Diagnostic> _warnings_2 = _eResource_6.getWarnings();
@@ -186,6 +188,23 @@ public abstract class AbstractBatchTypeResolverTest extends AbstractTypeResolver
     } catch (Exception _e) {
       throw Exceptions.sneakyThrow(_e);
     }
+  }
+  
+  public Iterable<Diagnostic> linkingAndSyntaxErrors(final Resource resource) {
+    EList<Diagnostic> _errors = resource.getErrors();
+    final Function1<Diagnostic,Boolean> _function = new Function1<Diagnostic,Boolean>() {
+        public Boolean apply(final Diagnostic it) {
+          boolean _or = false;
+          if ((it instanceof XtextSyntaxDiagnostic)) {
+            _or = true;
+          } else {
+            _or = ((it instanceof XtextSyntaxDiagnostic) || (it instanceof XtextLinkingDiagnostic));
+          }
+          return Boolean.valueOf(_or);
+        }
+      };
+    Iterable<Diagnostic> _filter = IterableExtensions.<Diagnostic>filter(_errors, _function);
+    return _filter;
   }
   
   public void isFunctionAndEquivalentTo(final LightweightTypeReference reference, final String type) {
