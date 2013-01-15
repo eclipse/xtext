@@ -5378,6 +5378,60 @@ public abstract class AbstractXtendCompilerTest extends AbstractXtendTestCase {
     this.assertCompilesTo(_builder, _builder_1, generatorConfig);
   }
   
+  @Test
+  @Ignore
+  public void compileProperty() {
+    final GeneratorConfig generatorConfig = this.generatorConfigProvider.get();
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("package foo");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("class Bar {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("@Property");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("boolean generateExpressions = true");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("package foo;");
+    _builder_1.newLine();
+    _builder_1.newLine();
+    _builder_1.append("@SuppressWarnings(\"all\")");
+    _builder_1.newLine();
+    _builder_1.append("public class Bar {");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("private boolean _generateExpressions = true;");
+    _builder_1.newLine();
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("public boolean isGenerateExpressions() {");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("return this._generateExpressions;");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("public void setGenerateExpressions(final boolean generateExpressions) {");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("this._generateExpressions = generateExpressions;");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    this.assertCompilesTo(_builder, _builder_1, generatorConfig);
+  }
+
   public void assertCompilesTo(final CharSequence input, final CharSequence expected) {
     GeneratorConfig _get = this.generatorConfigProvider.get();
     this.assertCompilesTo(input, expected, _get);
