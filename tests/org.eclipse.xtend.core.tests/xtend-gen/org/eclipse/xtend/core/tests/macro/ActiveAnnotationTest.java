@@ -7,14 +7,13 @@ import org.eclipse.xtend.core.tests.AbstractXtendTestCase;
 import org.eclipse.xtend.core.xtend.XtendFile;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
+import org.eclipse.xtext.resource.XtextResourceSet;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.junit.Assert;
-import org.junit.Ignore;
 import org.junit.Test;
 
 @SuppressWarnings("all")
 public class ActiveAnnotationTest extends AbstractXtendTestCase {
-  @Ignore(value = "Fails when run as plugin test")
   @Test
   public void testSimpleModification() {
     try {
@@ -36,5 +35,11 @@ public class ActiveAnnotationTest extends AbstractXtendTestCase {
     } catch (Exception _e) {
       throw Exceptions.sneakyThrow(_e);
     }
+  }
+  
+  protected XtextResourceSet getResourceSet() {
+    final XtextResourceSet set = super.getResourceSet();
+    set.setClasspathURIContext(ActiveAnnotationTest.class);
+    return set;
   }
 }
