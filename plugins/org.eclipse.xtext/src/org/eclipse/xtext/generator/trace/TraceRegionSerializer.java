@@ -70,6 +70,13 @@ public class TraceRegionSerializer {
 	
 	private static final int VERSION_3 = 3;
 	
+	/**
+	 * changes compared to version 3:
+	 * 
+	 * - in version 4, ILocationData has no project name.
+	 */
+	private static final int VERSION_4 = 4;
+	
 	public void writeTraceRegionTo(AbstractTraceRegion region, OutputStream stream) throws IOException {
 		if (region != null && region.getParent() != null)
 			throw new IllegalArgumentException("region must be the root");
@@ -79,7 +86,7 @@ public class TraceRegionSerializer {
 	public <Region, Location> void doWriteTo(final Strategy<Region, Location> strategy, Region region, OutputStream stream) throws IOException {
 		final DataOutputStream dataStream = new DataOutputStream(new BufferedOutputStream(stream));
 		try {
-			dataStream.writeInt(VERSION_3);
+			dataStream.writeInt(VERSION_4);
 			dataStream.writeBoolean(region != null);
 			if (region == null)
 				return;
@@ -110,10 +117,6 @@ public class TraceRegionSerializer {
 					} else {
 						dataStream.writeBoolean(false);
 					}
-					// write "false" to indicate that there is no project name. 
-					// see https://bugs.eclipse.org/bugs/show_bug.cgi?id=397981
-					// this can be removed with the next major change of the trace file format.
-					dataStream.writeBoolean(false); 
 				}
 			});
 		} finally {
@@ -128,15 +131,15 @@ public class TraceRegionSerializer {
 	public <Region, Location> Region doReadFrom(InputStream contents, Strategy<Region, Location> reader) throws IOException {
 		DataInputStream dataStream = new DataInputStream(new BufferedInputStream(contents));
 		int version = dataStream.readInt();
-		if (version != VERSION_3)
+		if (version != VERSION_3 && version != VERSION_4)
 			return null;
 		boolean isNull = !dataStream.readBoolean();
 		if (isNull)
 			return null;
-		return doReadFrom(dataStream, reader, null);
+		return doReadFrom(dataStream, reader, null, version);
 	}
 
-	public <Location, Region> Region doReadFrom(DataInputStream dataStream, Strategy<Region, Location> reader, Region parent)
+	public <Location, Region> Region doReadFrom(DataInputStream dataStream, Strategy<Region, Location> reader, Region parent, int version)
 			throws IOException {
 		int offset = dataStream.readInt();
 		int length = dataStream.readInt();
@@ -152,14 +155,17 @@ public class TraceRegionSerializer {
 			URI path = null;
 			if (dataStream.readBoolean())
 				path = URI.createURI(dataStream.readUTF());
-			dataStream.readBoolean(); // obsolete, this used to indicate a project name. see https://bugs.eclipse.org/bugs/show_bug.cgi?id=397981
+			if(version == VERSION_3) {
+				if (dataStream.readBoolean()) // true, if a project is specified
+					dataStream.readUTF(); // read the project name
+			}
 			allLocations.add(reader.createLocation(locationOffset, locationLength, locationLineNumber, locationEndLineNumber, path));
 			locationSize--;
 		}
 		Region result = reader.createRegion(offset, length, lineNumber, endLineNumber, allLocations, parent);
 		int childrenSize = dataStream.readInt();
 		while(childrenSize != 0) {
-			doReadFrom(dataStream, reader, result);
+			doReadFrom(dataStream, reader, result, version);
 			childrenSize--;
 		}
 		return result;
