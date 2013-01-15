@@ -76,6 +76,10 @@ class OldAPIIdentifiableTypeTest extends AbstractIdentifiableTypeTest {
 		]		
 	}
 	
+	@Ignore("fails in old implementation") @Test override testIfExpression_01() throws Exception {
+		fail("fails in old implementation")
+	}
+	
 	@Ignore("fails in old implementation") @Test override testClosure_03() throws Exception {
 		fail("fails in old implementation")
 	}

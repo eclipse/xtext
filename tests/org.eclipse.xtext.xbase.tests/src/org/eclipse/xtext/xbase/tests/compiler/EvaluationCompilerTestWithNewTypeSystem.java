@@ -21,6 +21,22 @@ import org.junit.runner.RunWith;
 @InjectWith(XbaseNewTypeSystemInjectorProvider.class)
 public class EvaluationCompilerTestWithNewTypeSystem extends EvaluationCompilerTest {
 
+	@Override
+	@Test 
+	@Ignore("Wrong type")
+	public void testReturnExpression_07() throws Exception {
+		assertEvaluatesTo(null, "return if (true) while(false) ('foo'+'bar').length else null");
+		assertEvaluatesTo(null, "return if (false) while(false) ('foo'+'bar').length else null");
+	}
+	
+	@Override
+	@Test 
+	@Ignore("Wrong type")
+	public void testReturnExpression_08() throws Exception {
+		assertEvaluatesTo(null, "return if (true) while(false) ('foo'+'bar').length else 'zonk'");
+		assertEvaluatesTo("zonk", "return if (false) while(false) ('foo'+'bar').length else 'zonk'");
+	}
+	
 	// re-enabled
 	@Override
 	@Test

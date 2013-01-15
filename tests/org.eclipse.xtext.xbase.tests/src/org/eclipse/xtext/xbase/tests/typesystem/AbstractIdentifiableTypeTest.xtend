@@ -77,6 +77,14 @@ abstract class AbstractIdentifiableTypeTest extends AbstractXbaseTestCase {
 		}
 		super.expression(expression, resolve)
 	}
+	
+	@Test def void testIfExpression_01() throws Exception {
+		"{ val x = if (true) while(false) ('foo'+'bar').length }".resolvesIdentifiablesTo("null")
+	}
+	
+	@Test def void testIfExpression_02() throws Exception {
+		"{ val Object x = if (true) while(false) ('foo'+'bar').length }".resolvesIdentifiablesTo("Object")
+	}
 
 	@Test def void testOverloadedMethods_01() throws Exception {
 		"{

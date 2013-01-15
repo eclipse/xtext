@@ -68,6 +68,12 @@ public interface IResolvedTypes {
 	LightweightTypeReference getExpectedType(XExpression expression);
 	
 	/**
+	 * Returns <code>true</code> if the given expression may have the type <code>void</code>.
+	 * @param expression expression whose expected type is queried.
+	 */
+	boolean isVoidTypeAllowed(XExpression expression);
+	
+	/**
 	 * Returns the expected return type for the given expression or <code>null</code> if none.
 	 * @param expression expression whose expected return type is queried.
 	 */
@@ -123,6 +129,10 @@ public interface IResolvedTypes {
 		@Nullable
 		public LightweightTypeReference getActualType(JvmIdentifiableElement identifiable) {
 			return null;
+		}
+		
+		public boolean isVoidTypeAllowed(XExpression expression) {
+			return false;
 		}
 	}
 	

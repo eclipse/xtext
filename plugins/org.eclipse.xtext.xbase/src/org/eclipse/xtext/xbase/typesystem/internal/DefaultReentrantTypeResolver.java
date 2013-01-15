@@ -96,7 +96,7 @@ public class DefaultReentrantTypeResolver implements IReentrantTypeResolver {
 	}
 
 	protected void _computeTypes(ResolvedTypes resolvedTypes, IFeatureScopeSession session, XExpression expression) {
-		RootExpressionComputationState state = new RootExpressionComputationState(resolvedTypes, session, expression, this);
+		ExpressionBasedRootTypeComputationState state = new ExpressionBasedRootTypeComputationState(resolvedTypes, session, expression, this);
 		state.computeTypes();
 	}
 	

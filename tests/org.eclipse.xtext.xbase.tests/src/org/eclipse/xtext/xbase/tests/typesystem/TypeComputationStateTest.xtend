@@ -20,9 +20,9 @@ import org.eclipse.xtext.xbase.lib.util.ReflectExtensions
 import org.eclipse.xtext.xbase.tests.AbstractXbaseTestCase
 import org.eclipse.xtext.xbase.typesystem.computation.ITypeComputationState
 import org.eclipse.xtext.xbase.typesystem.computation.ITypeComputer
+import org.eclipse.xtext.xbase.typesystem.internal.ExpressionBasedRootTypeComputationState
 import org.eclipse.xtext.xbase.typesystem.internal.ExpressionTypeComputationState
 import org.eclipse.xtext.xbase.typesystem.internal.ResolvedTypes
-import org.eclipse.xtext.xbase.typesystem.internal.RootExpressionComputationState
 import org.eclipse.xtext.xbase.typesystem.references.AnyTypeReference
 import org.junit.Ignore
 import org.junit.Test
@@ -45,7 +45,7 @@ class TypeComputationStateTest extends AbstractXbaseTestCase implements ITypeCom
 		val expression = expression("{ null }")
 		val resolution = new PublicResolvedTypes(resolver)
 		val any = new AnyTypeReference(resolution.getReferenceOwner())
-		new RootExpressionComputationState(resolution, resolver.batchScopeProvider.newSession(expression.eResource), expression, resolver, any).computeTypes
+		new ExpressionBasedRootTypeComputationState(resolution, resolver.batchScopeProvider.newSession(expression.eResource), expression, resolver, any).computeTypes
 		assertEquals(any.toString, resolution.getActualType(expression).toString)
 		assertEquals(any.toString, resolution.getActualType(expression.eContents.head as XNullLiteral).toString)
 	}
@@ -56,7 +56,7 @@ class TypeComputationStateTest extends AbstractXbaseTestCase implements ITypeCom
 		val expression = expression("{ null }")
 		val resolution = new PublicResolvedTypes(resolver)
 		val any = new AnyTypeReference(resolution.getReferenceOwner())
-		new RootExpressionComputationState(resolution, resolver.batchScopeProvider.newSession(expression.eResource), expression, resolver, any).computeTypes
+		new ExpressionBasedRootTypeComputationState(resolution, resolver.batchScopeProvider.newSession(expression.eResource), expression, resolver, any).computeTypes
 		val expressionTypes = resolution.basicGetExpressionTypes
 		val typesForNullLiteral = expressionTypes.get((expression as XBlockExpression).expressions.head)
 		assertEquals(typesForNullLiteral.toString, 1, typesForNullLiteral.filter[ returnType ].size)
@@ -72,7 +72,7 @@ class TypeComputationStateTest extends AbstractXbaseTestCase implements ITypeCom
 		resolver.initializeFrom(expression)
 		val resolution = new PublicResolvedTypes(resolver)
 		val any = new AnyTypeReference(resolution.getReferenceOwner())
-		new RootExpressionComputationState(resolution, resolver.batchScopeProvider.newSession(expression.eResource), expression, resolver, any).computeTypes
+		new ExpressionBasedRootTypeComputationState(resolution, resolver.batchScopeProvider.newSession(expression.eResource), expression, resolver, any).computeTypes
 		val expressionTypes = resolution.basicGetExpressionTypes
 		expression.eAllContents.forEach [
 			val types = expressionTypes.get(it as XExpression)
@@ -88,7 +88,7 @@ class TypeComputationStateTest extends AbstractXbaseTestCase implements ITypeCom
 		resolver.initializeFrom(expression)
 		val resolution = new PublicResolvedTypes(resolver)
 		val any = new AnyTypeReference(resolution.getReferenceOwner())
-		new RootExpressionComputationState(resolution, resolver.batchScopeProvider.newSession(expression.eResource), expression, resolver, any).computeTypes
+		new ExpressionBasedRootTypeComputationState(resolution, resolver.batchScopeProvider.newSession(expression.eResource), expression, resolver, any).computeTypes
 		val expressionTypes = resolution.basicGetExpressionTypes
 		expression.eAllContents.forEach [
 			val typesForMemberFeatureCall = expressionTypes.get(it as XExpression)

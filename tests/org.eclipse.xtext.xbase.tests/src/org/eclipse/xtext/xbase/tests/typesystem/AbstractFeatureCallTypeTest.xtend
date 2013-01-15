@@ -50,6 +50,16 @@ abstract class AbstractFeatureCallTypeTest extends AbstractXbaseTestCase {
 		super.expression(expression, resolve)
 	}
 	
+	@Test def void testJEP101Example_01() throws Exception {
+		"{ val foo.JEP101List<String> ls = foo::JEP101List::nil }".resolvesFeatureCallsTo("JEP101List<String>")
+	}
+	@Test def void testJEP101Example_02() throws Exception {
+		"foo::JEP101List::cons(42, foo::JEP101List::nil)".resolvesFeatureCallsTo("JEP101List<Integer>", "JEP101List<Integer>")
+	}
+	@Test def void testJEP101Example_03() throws Exception {
+		"{ val String s = foo::JEP101List::nil.head }".resolvesFeatureCallsTo("JEP101List<String>", "String")
+	}
+	
 	@Test def void testRawType_01() throws Exception {
 		"{ val java.util.Set set = newHashSet() set }".resolvesFeatureCallsTo("HashSet", "Set")
 	}

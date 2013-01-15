@@ -238,6 +238,26 @@ class ExpectationTest extends AbstractXbaseTestCase {
 	def void testLowerBound_01() {
 		"(1 as Comparable<? super CharSequence>).compareTo(null)".expects.types('CharSequence').finalizedAs('CharSequence')
 	}
+	
+	@Test 
+	def void testReturn_01() {
+		"return null".expects.notVoid
+	}
+	
+	@Test 
+	def void testReturn_02() {
+		"return { { null } }".expects.notVoid
+	}
+	
+	@Test 
+	def void testReturn_03() {
+		"return if (true) { { null } }".expects.notVoid
+	}
+	
+	@Test 
+	def void testReturn_04() {
+		"return if (true) { null '' }".expects.nothing
+	}
 }
 
 class ExpectationTestingTypeComputer extends XbaseTypeComputer {

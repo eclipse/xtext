@@ -7,8 +7,12 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.tests.validation;
 
+import static org.eclipse.xtext.xbase.XbasePackage.Literals.*;
+import static org.eclipse.xtext.xbase.validation.IssueCodes.*;
+
 import org.eclipse.xtext.junit4.InjectWith;
 import org.eclipse.xtext.junit4.XtextRunner;
+import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.tests.typesystem.XbaseNewTypeSystemInjectorProvider;
 import org.junit.Ignore;
 import org.junit.Test;
@@ -70,9 +74,39 @@ public class ValidationTests2 extends ValidationTests {
 	}
 
 	@Override
-	@Test @Ignore("TODO To be implemented")
+	@Test
 	public void testVoidInReturnExpression_02() throws Exception {
-		super.testVoidInReturnExpression_02();
+		XExpression expression = expression("return if (true) while(false) ('foo'+'bar').length");
+		helper.assertError(expression, XWHILE_EXPRESSION, INCOMPATIBLE_TYPES);
+		helper.assertNoIssues(expression, XIF_EXPRESSION);
+	}
+	
+	@Override
+	@Test public void testVoidInReturnExpression_03() throws Exception {
+		XExpression expression = expression("return if (true) while(false) ('foo'+'bar').length else 'zonk'");
+		helper.assertError(expression, XWHILE_EXPRESSION, INCOMPATIBLE_TYPES);
+		helper.assertNoIssues(expression, XIF_EXPRESSION);
+		helper.assertNoIssues(expression, XSTRING_LITERAL);
+	}
+	
+	@Override
+	@Test public void testVoidInReturnExpression_05() throws Exception {
+		XExpression expression = expression("return if (true) while(false) ('foo'+'bar').length else null");
+		helper.assertError(expression, XWHILE_EXPRESSION, INCOMPATIBLE_TYPES);
+		helper.assertNoIssues(expression, XIF_EXPRESSION);
+		helper.assertNoIssues(expression, XNULL_LITERAL);
+	}
+	
+	@Test @Ignore("TODO To be implemented - should be a control flow problem")
+	@Override
+	public void testInvalidEarlyExit_02() throws Exception {
+		super.testInvalidEarlyExit_02();
+	}
+	
+	@Test @Ignore("TODO To be implemented - should be a control flow problem")
+	@Override
+	public void testInvalidEarlyExit_04() throws Exception {
+		super.testInvalidEarlyExit_04();
 	}
 
 	@Override

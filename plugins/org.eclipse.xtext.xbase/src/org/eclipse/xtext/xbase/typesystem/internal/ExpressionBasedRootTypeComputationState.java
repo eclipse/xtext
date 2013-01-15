@@ -22,18 +22,18 @@ import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
  * TODO JavaDoc, toString
  */
 @NonNullByDefault
-public class RootExpressionComputationState extends AbstractRootTypeComputationState {
+public class ExpressionBasedRootTypeComputationState extends AbstractRootTypeComputationState {
 
 	private final XExpression expression;
 	private final LightweightTypeReference expectedType;
 
-	public RootExpressionComputationState(ResolvedTypes resolvedTypes, 
+	public ExpressionBasedRootTypeComputationState(ResolvedTypes resolvedTypes, 
 			IFeatureScopeSession featureScopeSession, XExpression expression,
 			DefaultReentrantTypeResolver defaultReentrantTypeResolver) {
 		this(resolvedTypes, featureScopeSession, expression, defaultReentrantTypeResolver, null);
 	}
 	
-	public RootExpressionComputationState(ResolvedTypes resolvedTypes, IFeatureScopeSession featureScopeSession, XExpression expression,
+	public ExpressionBasedRootTypeComputationState(ResolvedTypes resolvedTypes, IFeatureScopeSession featureScopeSession, XExpression expression,
 			DefaultReentrantTypeResolver defaultReentrantTypeResolver, @Nullable LightweightTypeReference expectedType) {
 		super(resolvedTypes, featureScopeSession, defaultReentrantTypeResolver);
 		this.expression = expression;
@@ -46,7 +46,7 @@ public class RootExpressionComputationState extends AbstractRootTypeComputationS
 		if (expectedType != null) {
 			result = returnType ? new TypeExpectation(expectedType, actualState, returnType) : new RootTypeExpectation(expectedType, actualState);
 		} else {
-			result = returnType ? new NoExpectation(actualState, returnType) : new RootNoExpectation(actualState);
+			result = returnType ? new NoExpectation(actualState, returnType) : new RootNoExpectation(actualState, true);
 		}
 		return Collections.singletonList(result);
 	}

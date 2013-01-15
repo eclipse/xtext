@@ -161,6 +161,8 @@ public class XbaseJavaValidator2 extends AbstractXbaseJavaValidator {
 	private final Set<EReference> typeConformanceCheckedReferences = ImmutableSet.of(
 			XbasePackage.Literals.XVARIABLE_DECLARATION__RIGHT, 
 			XbasePackage.Literals.XIF_EXPRESSION__IF,
+			XbasePackage.Literals.XIF_EXPRESSION__THEN,
+			XbasePackage.Literals.XIF_EXPRESSION__ELSE,
 			XbasePackage.Literals.XTHROW_EXPRESSION__EXPRESSION, 
 			XbasePackage.Literals.XRETURN_EXPRESSION__EXPRESSION,
 			XbasePackage.Literals.XSWITCH_EXPRESSION__SWITCH, 
@@ -219,11 +221,23 @@ public class XbaseJavaValidator2 extends AbstractXbaseJavaValidator {
 	
 	protected void doValidateType(XExpression expression, Procedures.Procedure2<LightweightTypeReference, LightweightTypeReference> messageProducer) {
 		LightweightTypeReference expectedType = getExpectedType(expression);
-		if (expectedType == null)
+		if (expectedType == null) {
+			if (!typeResolver.resolveTypes(expression).isVoidTypeAllowed(expression)) {
+				LightweightTypeReference actualType = getActualType(expression);
+				if (actualType == null)
+					return;
+				if (actualType.isPrimitiveVoid() && !isDefiniteEarlyExit(expression)) {
+					messageProducer.apply(null, actualType);
+				}
+			}
 			return;
+		}
 		LightweightTypeReference actualType = getActualType(expression);
 		if (actualType == null)
 			return;
+		if (actualType.isPrimitiveVoid() && isDefiniteEarlyExit(expression)) {
+			return;
+		}
 		if (isRawConformanceAllowed(expression)) {
 			boolean valid = expectedType.isAssignableFrom(actualType);
 			if (!valid) {
@@ -235,6 +249,10 @@ public class XbaseJavaValidator2 extends AbstractXbaseJavaValidator {
 				messageProducer.apply(expectedType, actualType);
 			}
 		}
+	}
+	
+	protected boolean isDefiniteEarlyExit(XExpression expression) {
+		return expression instanceof XReturnExpression || expression instanceof XThrowExpression;
 	}
 	
 	protected boolean isRawConformanceAllowed(XExpression expression) {
@@ -490,9 +508,14 @@ public class XbaseJavaValidator2 extends AbstractXbaseJavaValidator {
 			if (firstArgument != null) {
 				doValidateType(firstArgument, new Procedures.Procedure2<LightweightTypeReference, LightweightTypeReference>() {
 					public void apply(LightweightTypeReference expectedType, LightweightTypeReference actualType) {
-						error("Incompatible implicit first argument. Expected " + getNameOfTypes(expectedType)
-								+ " but was " + canonicalName(actualType), obj, null,
-								ValidationMessageAcceptor.INSIGNIFICANT_INDEX, INCOMPATIBLE_TYPES);
+						if (expectedType != null) {
+							error("Incompatible implicit first argument. Expected " + getNameOfTypes(expectedType)
+									+ " but was " + canonicalName(actualType), obj, null,
+									ValidationMessageAcceptor.INSIGNIFICANT_INDEX, INCOMPATIBLE_TYPES);
+						} else {
+							error("Incompatible implicit first argument. Unexpected type primitive void.", obj, null,
+									ValidationMessageAcceptor.INSIGNIFICANT_INDEX, INCOMPATIBLE_TYPES);
+						}
 					}
 				});
 			}
@@ -503,9 +526,14 @@ public class XbaseJavaValidator2 extends AbstractXbaseJavaValidator {
 //		try {
 		doValidateType(obj, new Procedures.Procedure2<LightweightTypeReference, LightweightTypeReference>() {
 			public void apply(LightweightTypeReference expectedType, LightweightTypeReference actualType) {
-				error("Incompatible types. Expected " + getNameOfTypes(expectedType) + " but was "
-						+ canonicalName(actualType), obj, null, ValidationMessageAcceptor.INSIGNIFICANT_INDEX,
-						INCOMPATIBLE_TYPES);
+				if (expectedType != null) {
+					error("Incompatible types. Expected " + getNameOfTypes(expectedType) + " but was "
+							+ canonicalName(actualType), obj, null, ValidationMessageAcceptor.INSIGNIFICANT_INDEX,
+							INCOMPATIBLE_TYPES);
+				} else {
+					error("Incompatible types. Unexpected type primitive void.", obj, null, ValidationMessageAcceptor.INSIGNIFICANT_INDEX,
+							INCOMPATIBLE_TYPES);
+				}
 			}
 		});
 //		} catch (WrappedException e) {
@@ -531,10 +559,15 @@ public class XbaseJavaValidator2 extends AbstractXbaseJavaValidator {
 //				try {
 				doValidateType(receiver, new Procedures.Procedure2<LightweightTypeReference, LightweightTypeReference>() {
 					public void apply(LightweightTypeReference expectedType, LightweightTypeReference actualType) {
-						error("Incompatible receiver type. Expected " + getNameOfTypes(expectedType) + " but was "
-								+ canonicalName(actualType), featureCall,
-								XbasePackage.Literals.XABSTRACT_FEATURE_CALL__FEATURE,
-								ValidationMessageAcceptor.INSIGNIFICANT_INDEX, INCOMPATIBLE_TYPES);
+						if (expectedType != null) {
+							error("Incompatible receiver type. Expected " + getNameOfTypes(expectedType) + " but was "
+									+ canonicalName(actualType), featureCall,
+									XbasePackage.Literals.XABSTRACT_FEATURE_CALL__FEATURE,
+									ValidationMessageAcceptor.INSIGNIFICANT_INDEX, INCOMPATIBLE_TYPES);
+						} else {
+							error("Incompatible receiver type. Unexpected type primitive void.", featureCall, null,
+									ValidationMessageAcceptor.INSIGNIFICANT_INDEX, INCOMPATIBLE_TYPES);
+						}
 					}
 				});
 //				} catch (WrappedException e) {
@@ -570,30 +603,33 @@ public class XbaseJavaValidator2 extends AbstractXbaseJavaValidator {
 
 	@Check
 	public void checkReturn(XReturnExpression expr) {
-		LightweightTypeReference returnType = typeResolver.resolveTypes(expr).getExpectedReturnType(expr);
-		if (returnType == null) {
-			if (expr.getExpression() != null) {
-				LightweightTypeReference expressionType = getActualType(expr.getExpression());
-				if (expressionType.isPrimitiveVoid()) {
-					error("Incompatible types. Expected java.lang.Object but was " + canonicalName(expressionType),
-							expr.getExpression(), null, ValidationMessageAcceptor.INSIGNIFICANT_INDEX,
-							INCOMPATIBLE_TYPES);
-				}
-			}
+		LightweightTypeReference expectedReturnType = typeResolver.resolveTypes(expr).getExpectedReturnType(expr);
+		if (expectedReturnType == null) {
 			return;
 		}
-		if (returnType.isPrimitiveVoid()) {
+//		if (expectedReturnType == null) {
+//			if (expr.getExpression() != null) {
+//				LightweightTypeReference expressionType = getActualType(expr.getExpression());
+//				if (expressionType.isPrimitiveVoid()) {
+//					error("Incompatible types. Expected java.lang.Object but was " + canonicalName(expressionType),
+//							expr.getExpression(), null, ValidationMessageAcceptor.INSIGNIFICANT_INDEX,
+//							INCOMPATIBLE_TYPES);
+//				}
+//			}
+//			return;
+//		}
+		if (expectedReturnType.isPrimitiveVoid()) {
 			if (expr.getExpression() != null)
 				error("Void functions cannot return a value.", expr, null,
 						ValidationMessageAcceptor.INSIGNIFICANT_INDEX, INVALID_RETURN);
 		} else {
 			if (expr.getExpression() == null)
-				error("The function must return a result of type " + returnType.getSimpleName() + ".", expr, null,
+				error("The function must return a result of type " + expectedReturnType.getSimpleName() + ".", expr, null,
 						ValidationMessageAcceptor.INSIGNIFICANT_INDEX, INVALID_RETURN);
 			else {
 				LightweightTypeReference expressionType = getActualType(expr.getExpression());
 				if (expressionType.isPrimitiveVoid()) {
-					error("Incompatible types. Expected " + getNameOfTypes(returnType) + " but was "
+					error("Incompatible types. Expected " + getNameOfTypes(expectedReturnType) + " but was "
 							+ canonicalName(expressionType), expr.getExpression(), null,
 							ValidationMessageAcceptor.INSIGNIFICANT_INDEX, INCOMPATIBLE_TYPES);
 				}

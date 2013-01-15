@@ -56,6 +56,10 @@ abstract class AbstractReturnTypeTest<Reference> extends AbstractTypeResolverTes
 		"return [| return 'literal'].apply".resolvesTo("String")
 	}
 	
+	@Test override testReturnExpression_10() throws Exception {
+		"return if (true) while(false) ('foo'+'bar').length".resolvesTo("null")
+	}
+	
 	@Test override void testBooleanLiteral_02() throws Exception {
 		"return true".resolvesTo("boolean")
 	}

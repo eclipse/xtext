@@ -1095,6 +1095,16 @@ abstract class AbstractTypeArgumentTest extends AbstractXbaseTestCase {
 		"{ val Iterable<? extends CharSequence> set = newHashSet('') }".bindTypeArgumentsTo("String").done
 	}
 	
+	@Test def void testJEP101Example_01() throws Exception {
+		"{ val foo.JEP101List<String> ls = foo::JEP101List::nil }".bindTypeArgumentsTo("String").done
+	}
+	@Test def void testJEP101Example_02() throws Exception {
+		"foo::JEP101List::cons(42, foo::JEP101List::nil)".bindTypeArgumentsTo("Integer").and("Integer").done
+	}
+	@Test def void testJEP101Example_03() throws Exception {
+		"{ val String s = foo::JEP101List::nil.head }".bindTypeArgumentsTo("String").done
+	}
+	
 	@Test def void testToList_01() throws Exception {
 		"{ val Iterable<? extends String> iter = null org::eclipse::xtext::xbase::tests::typesystem::TypeResolutionTestData::fixedToList(iter) }".bindTypeArgumentsTo("? extends String").done
 	}
