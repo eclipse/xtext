@@ -16,6 +16,7 @@ import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.common.types.JvmMember;
 import org.eclipse.xtext.diagnostics.AbstractDiagnostic;
 import org.eclipse.xtext.diagnostics.Severity;
+import org.eclipse.xtext.util.IAcceptor;
 import org.eclipse.xtext.validation.EObjectDiagnosticImpl;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.typesystem.computation.ILinkingCandidate;
@@ -72,19 +73,33 @@ public class RootResolvedTypes extends ResolvedTypes {
 		toBeInferredRootExpressions.add(expression);
 	}
 
-	public void addDiagnostics(Resource resource) {
-		for(AbstractDiagnostic diagnostic: getQueuedDiagnostics()) {
-			if (diagnostic instanceof EObjectDiagnosticImpl) {
-				Severity severity = ((EObjectDiagnosticImpl) diagnostic).getSeverity();
-				if (severity == Severity.ERROR) {
+	public void addDiagnostics(final Resource resource) {
+		class DiagnosticAcceptor implements IAcceptor<AbstractDiagnostic> {
+
+			public void accept(AbstractDiagnostic diagnostic) {
+				if (diagnostic instanceof EObjectDiagnosticImpl) {
+					Severity severity = ((EObjectDiagnosticImpl) diagnostic).getSeverity();
+					if (severity == Severity.ERROR) {
+						resource.getErrors().add(diagnostic);
+					} else if (severity == Severity.WARNING) {
+						resource.getWarnings().add(diagnostic);
+					}
+				} else {
 					resource.getErrors().add(diagnostic);
-				} else if (severity == Severity.WARNING) {
-					resource.getWarnings().add(diagnostic);
 				}
-			} else {
-				resource.getErrors().add(diagnostic);
 			}
+			
 		}
+		DiagnosticAcceptor acceptor = new DiagnosticAcceptor();
+		for(AbstractDiagnostic diagnostic: getQueuedDiagnostics()) {
+			acceptor.accept(diagnostic);
+		}
+		
+		Map<XExpression, ILinkingCandidate> candidates = basicGetLinkingCandidates();
+		for(ILinkingCandidate candidate: candidates.values()) {
+			candidate.validate(acceptor);
+		}
+		
 	}
 
 }

@@ -24,5 +24,5 @@ public class ImplicitFirstArgument extends AbstractImplicitFeature {
 	public void resolveLinkingProxy() {
 		getOwner().setImplicitFirstArgument(getFeatureCall());
 	}
-
+	
 }

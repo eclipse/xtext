@@ -12,6 +12,8 @@ import java.util.List;
 
 import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
+import org.eclipse.xtext.diagnostics.AbstractDiagnostic;
+import org.eclipse.xtext.util.IAcceptor;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.typesystem.computation.IFeatureLinkingCandidate;
 import org.eclipse.xtext.xbase.typesystem.computation.ILinkingCandidate;
@@ -51,6 +53,10 @@ public abstract class AbstractImplicitFeature implements IFeatureLinkingCandidat
 
 	public JvmIdentifiableElement getFeature() {
 		return implicit.getFeature();
+	}
+	
+	public void validate(IAcceptor<? super AbstractDiagnostic> result) {
+		
 	}
 
 	public List<LightweightTypeReference> getTypeArguments() {

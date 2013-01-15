@@ -13,6 +13,8 @@ import java.util.List;
 import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.xtext.common.types.JvmConstructor;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
+import org.eclipse.xtext.diagnostics.AbstractDiagnostic;
+import org.eclipse.xtext.util.IAcceptor;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.XConstructorCall;
 import org.eclipse.xtext.xbase.XExpression;
@@ -41,6 +43,10 @@ public class NullLinkingCandidate implements IFeatureLinkingCandidate, IConstruc
 	}
 
 	public void resolveLinkingProxy() {
+		// no op
+	}
+	
+	public void validate(IAcceptor<? super AbstractDiagnostic> result) {
 		// no op
 	}
 
