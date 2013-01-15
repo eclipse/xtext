@@ -54,9 +54,6 @@ public class DeltaConverter {
 	 * @return a possibly empty list of converted deltas.
 	 */
 	public List<IResourceDescription.Delta> convert(IJavaElementDelta delta) {
-		// a file was opened or closed - we do not expect a change
-		if (delta.getFlags() == IJavaElementDelta.F_AST_AFFECTED)
-			return Collections.emptyList();
 		List<IResourceDescription.Delta> result = Lists.newArrayListWithExpectedSize(2);
 		convertCompilationUnits(delta, result);
 		return result;
