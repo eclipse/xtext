@@ -938,7 +938,7 @@ public class XtendValidationTest extends AbstractXtendTestCase {
 	
 	@Test public void testPrivateUnusedField() throws Exception {
 		XtendClass clazz = clazz("import java.util.List class X { private List sb }");
-		helper.assertWarning(clazz.eContainer(), XTEND_FIELD,FIELD_LOCALLY_NEVER_READ , "not");
+		helper.assertWarning(clazz.eContainer(), XTEND_FIELD,UNUSED_PRIVATE_MEMBER , "not");
 	}
 	
 	@Test public void testUnusedField() throws Exception {
@@ -953,17 +953,17 @@ public class XtendValidationTest extends AbstractXtendTestCase {
 	
 	@Test public void testUnusedExtensionField() throws Exception {
 		XtendClass clazz = clazz("import com.google.inject.Inject class X { @Inject extension String }");
-		helper.assertWarning(clazz.eContainer(), XTEND_FIELD, FIELD_LOCALLY_NEVER_READ , "extension", "String", "not", "used", "in", "X");
+		helper.assertWarning(clazz.eContainer(), XTEND_FIELD, UNUSED_PRIVATE_MEMBER , "extension", "String", "not", "used", "in", "X");
 	}
 	
 	@Test public void testUnusedExtensionField_1() throws Exception {
 		XtendClass clazz = clazz("import com.google.inject.Inject class X { @Inject extension String x }");
-		helper.assertWarning(clazz.eContainer(), XTEND_FIELD, FIELD_LOCALLY_NEVER_READ , "extension", "X.x", "not", "used");
+		helper.assertWarning(clazz.eContainer(), XTEND_FIELD, UNUSED_PRIVATE_MEMBER , "extension", "X.x", "not", "used");
 	}
 	
 	@Test public void testUnusedFunction() throws Exception {
 		XtendClass clazz = clazz("class X { def private foo(String a, Integer b) }");
-		helper.assertWarning(clazz, XTEND_FUNCTION, FUNCTION_LOCALLY_NEVER_USED, "method","foo(String, Integer)","never", "used");
+		helper.assertWarning(clazz, XTEND_FUNCTION, UNUSED_PRIVATE_MEMBER, "method","foo(String, Integer)","never", "used");
 	}
 	
 	@Test public void testUsedFunction() throws Exception {
@@ -973,7 +973,7 @@ public class XtendValidationTest extends AbstractXtendTestCase {
 	
 	@Test public void testUnusedDispatchFunction() throws Exception {
 		XtendClass clazz = clazz("class X { def private dispatch foo(String a) def private dispatch foo(NullPointerException a) }");
-		helper.assertWarning(clazz, XTEND_FUNCTION, FUNCTION_LOCALLY_NEVER_USED, "method", "foo(Serializable","never", "used");
+		helper.assertWarning(clazz, XTEND_FUNCTION, UNUSED_PRIVATE_MEMBER, "method", "foo(Serializable","never", "used");
 	}
 	
 	@Test public void testUsedDispatchFunction() throws Exception {
@@ -993,7 +993,7 @@ public class XtendValidationTest extends AbstractXtendTestCase {
 	
 	@Test public void testUnusedMemberOfExtensionField() throws Exception {
 		XtendClass clazz = clazz("class X { extension java.util.Collection def foo(){  }}");
-		helper.assertWarning(clazz, XTEND_FIELD,FIELD_LOCALLY_NEVER_READ , "not");
+		helper.assertWarning(clazz, XTEND_FIELD,UNUSED_PRIVATE_MEMBER , "not");
 	}
 	
 	@Test public void testUsedMemberOfExtensionFieldWithName() throws Exception {
@@ -1008,12 +1008,12 @@ public class XtendValidationTest extends AbstractXtendTestCase {
 	
 	@Test public void testUnusedMemberOfExtensionFieldWithName() throws Exception {
 		XtendClass clazz = clazz("class X { extension java.util.Collection bar def foo(){  }}");
-		helper.assertWarning(clazz, XTEND_FIELD, FIELD_LOCALLY_NEVER_READ , "not");
+		helper.assertWarning(clazz, XTEND_FIELD, UNUSED_PRIVATE_MEMBER , "not");
 	}
 	
 	@Test public void testUnusedMemberOfExtensionField_No_False_Positive() throws Exception {
 		XtendClass clazz = clazz("class X { extension java.util.Collection foo def bar(){  newArrayList.add('42') }}");
-		helper.assertWarning(clazz, XTEND_FIELD,FIELD_LOCALLY_NEVER_READ , "not");
+		helper.assertWarning(clazz, XTEND_FIELD,UNUSED_PRIVATE_MEMBER , "not");
 	}
 	
 	@Test public void testConstructorThrownExceptionsOfTypeThrowable() throws Exception {
