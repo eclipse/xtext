@@ -2,7 +2,6 @@ package org.eclipse.xtend.ide.tests.validation;
 
 import com.google.common.collect.Iterables;
 import com.google.inject.Inject;
-import java.util.Map;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.jdt.core.IJavaProject;
@@ -12,7 +11,6 @@ import org.eclipse.jdt.internal.core.JavaModelManager;
 import org.eclipse.jface.preference.IPersistentPreferenceStore;
 import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.xtend.core.validation.IssueCodes;
-import org.eclipse.xtend.core.validation.XtendConfigurableIssueCodes;
 import org.eclipse.xtend.core.xtend.XtendClass;
 import org.eclipse.xtend.core.xtend.XtendField;
 import org.eclipse.xtend.core.xtend.XtendFile;
@@ -27,13 +25,13 @@ import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.common.types.JvmParameterizedTypeReference;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.junit4.validation.ValidationTestHelper;
-import org.eclipse.xtext.preferences.PreferenceKey;
 import org.eclipse.xtext.ui.editor.preferences.IPreferenceStoreAccess;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.IntegerRange;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
+import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xtype.XImportDeclaration;
 import org.eclipse.xtext.xtype.XImportSection;
 import org.junit.Assert;
@@ -524,27 +522,9 @@ public class XtendUIValidationTests extends AbstractXtendUITestCase {
   @Test
   public void testConfigurableIssueCode() {
     try {
-      XtendConfigurableIssueCodes _xtendConfigurableIssueCodes = new XtendConfigurableIssueCodes();
-      Map<String,PreferenceKey> _configurableIssueCodes = _xtendConfigurableIssueCodes.getConfigurableIssueCodes();
-      final PreferenceKey configIssueCode = _configurableIssueCodes.get(IssueCodes.FIELD_LOCALLY_NEVER_READ);
-      final String defaultSeverity = configIssueCode.getDefaultValue();
-      IPreferenceStore _xtendPreferencesStore = this.getXtendPreferencesStore();
+      IPersistentPreferenceStore _xtendPreferencesStore = this.getXtendPreferencesStore();
       final IPersistentPreferenceStore xtendPrefStore = ((IPersistentPreferenceStore) _xtendPreferencesStore);
-      final String currentSeverity = xtendPrefStore.getString(IssueCodes.FIELD_LOCALLY_NEVER_READ);
-      boolean _or = false;
-      boolean _notEquals = ObjectExtensions.operator_notEquals(defaultSeverity, "warning");
-      if (_notEquals) {
-        _or = true;
-      } else {
-        boolean _notEquals_1 = ObjectExtensions.operator_notEquals(currentSeverity, defaultSeverity);
-        _or = (_notEquals || _notEquals_1);
-      }
-      if (_or) {
-        String _plus = ("Wrong expectation Xtend compiler option \'" + IssueCodes.FIELD_LOCALLY_NEVER_READ);
-        String _plus_1 = (_plus + "\' should be \'warning\' by default.");
-        Assert.fail(_plus_1);
-      }
-      String otherSeverity = "error";
+      xtendPrefStore.setValue(IssueCodes.UNUSED_PRIVATE_MEMBER, "warning");
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("class TestConfigurableIssueCode {");
       _builder.newLine();
@@ -553,23 +533,47 @@ public class XtendUIValidationTests extends AbstractXtendUITestCase {
       _builder.newLine();
       _builder.append("}");
       _builder.newLine();
-      _builder.newLine();
-      final XtendFile xtendFile = this.testHelper.xtendFile("TestConfigurableIssueCode.xtend", _builder.toString());
-      EList<XtendTypeDeclaration> _xtendTypes = xtendFile.getXtendTypes();
-      Iterable<XtendClass> _filter = Iterables.<XtendClass>filter(_xtendTypes, XtendClass.class);
-      XtendClass _head = IterableExtensions.<XtendClass>head(_filter);
-      EList<XtendMember> _members = _head.getMembers();
-      final XtendMember unusedField = IterableExtensions.<XtendMember>head(_members);
-      this.helper.assertWarning(unusedField, Literals.XTEND_FIELD, IssueCodes.FIELD_LOCALLY_NEVER_READ);
-      xtendPrefStore.setValue(IssueCodes.FIELD_LOCALLY_NEVER_READ, otherSeverity);
-      this.helper.assertError(unusedField, Literals.XTEND_FIELD, IssueCodes.FIELD_LOCALLY_NEVER_READ);
+      XtendFile _xtendFile = this.testHelper.xtendFile("TestConfigurableIssueCode.xtend", _builder.toString());
+      final Procedure1<XtendFile> _function = new Procedure1<XtendFile>() {
+          public void apply(final XtendFile it) {
+            EList<XtendTypeDeclaration> _xtendTypes = it.getXtendTypes();
+            Iterable<XtendClass> _filter = Iterables.<XtendClass>filter(_xtendTypes, XtendClass.class);
+            XtendClass _head = IterableExtensions.<XtendClass>head(_filter);
+            EList<XtendMember> _members = _head.getMembers();
+            final XtendMember unusedField = IterableExtensions.<XtendMember>head(_members);
+            XtendUIValidationTests.this.helper.assertWarning(unusedField, Literals.XTEND_FIELD, IssueCodes.UNUSED_PRIVATE_MEMBER);
+          }
+        };
+      ObjectExtensions.<XtendFile>operator_doubleArrow(_xtendFile, _function);
+      xtendPrefStore.setValue(IssueCodes.UNUSED_PRIVATE_MEMBER, "error");
+      StringConcatenation _builder_1 = new StringConcatenation();
+      _builder_1.append("class TestConfigurableIssueCode {");
+      _builder_1.newLine();
+      _builder_1.append("\t");
+      _builder_1.append("private String unusedField = \"unusedField\"");
+      _builder_1.newLine();
+      _builder_1.append("}");
+      _builder_1.newLine();
+      XtendFile _xtendFile_1 = this.testHelper.xtendFile("TestConfigurableIssueCode.xtend", _builder_1.toString());
+      final Procedure1<XtendFile> _function_1 = new Procedure1<XtendFile>() {
+          public void apply(final XtendFile it) {
+            EList<XtendTypeDeclaration> _xtendTypes = it.getXtendTypes();
+            Iterable<XtendClass> _filter = Iterables.<XtendClass>filter(_xtendTypes, XtendClass.class);
+            XtendClass _head = IterableExtensions.<XtendClass>head(_filter);
+            EList<XtendMember> _members = _head.getMembers();
+            final XtendMember unusedField = IterableExtensions.<XtendMember>head(_members);
+            XtendUIValidationTests.this.helper.assertError(unusedField, Literals.XTEND_FIELD, IssueCodes.UNUSED_PRIVATE_MEMBER);
+          }
+        };
+      ObjectExtensions.<XtendFile>operator_doubleArrow(_xtendFile_1, _function_1);
     } catch (Exception _e) {
       throw Exceptions.sneakyThrow(_e);
     }
   }
   
-  public IPreferenceStore getXtendPreferencesStore() {
+  public IPersistentPreferenceStore getXtendPreferencesStore() {
     IProject _project = this.testHelper.getProject();
-    return this.prefStoreAccess.getWritablePreferenceStore(_project);
+    IPreferenceStore _writablePreferenceStore = this.prefStoreAccess.getWritablePreferenceStore(_project);
+    return ((IPersistentPreferenceStore) _writablePreferenceStore);
   }
 }

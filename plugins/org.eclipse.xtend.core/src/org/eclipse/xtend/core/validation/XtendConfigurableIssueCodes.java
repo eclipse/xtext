@@ -8,6 +8,7 @@
 package org.eclipse.xtend.core.validation;
 
 
+import org.eclipse.jdt.core.JavaCore;
 import org.eclipse.xtext.preferences.PreferenceKey;
 import org.eclipse.xtext.util.IAcceptor;
 import org.eclipse.xtext.validation.SeverityConverter;
@@ -27,9 +28,7 @@ public class XtendConfigurableIssueCodes extends XbaseConfigurableIssueCodes {
 	protected void initialize(IAcceptor<PreferenceKey> iAcceptor) {
 		super.initialize(iAcceptor);
 		iAcceptor.accept(create(IssueCodes.SINGLE_DISPATCH_FUNCTION, SeverityConverter.SEVERITY_WARNING));
-
 		iAcceptor.accept(create(IssueCodes.DISPATCH_PLAIN_FUNCTION_NAME_CLASH, SeverityConverter.SEVERITY_WARNING));
-		iAcceptor.accept(create(IssueCodes.FIELD_LOCALLY_NEVER_READ, SeverityConverter.SEVERITY_WARNING));
-		iAcceptor.accept(create(IssueCodes.FUNCTION_LOCALLY_NEVER_USED, SeverityConverter.SEVERITY_WARNING));
+		iAcceptor.accept(createDelegate(IssueCodes.UNUSED_PRIVATE_MEMBER, JavaCore.COMPILER_PB_UNUSED_PRIVATE_MEMBER));
 	}
 }

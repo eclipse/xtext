@@ -58,11 +58,11 @@ public class XbaseConfigurableIssueCodes extends ConfigurableIssueCodesProvider 
 		return new PreferenceKey(id, defaultValue);
 	}
 
-	private PreferenceKey createDelegate(String id, String delegationKey) {
+	protected PreferenceKey createDelegate(String id, String delegationKey) {
 		return createDelegate(id, delegationKey, SeverityConverter.SEVERITY_WARNING);
 	}
 
-	private PreferenceKey createDelegate(String id, String delegationKey, String defaultSeverity) {
+	protected PreferenceKey createDelegate(String id, String delegationKey, String defaultSeverity) {
 		String encodedDelegation = XbaseSeverityConverter.encodeDefaultSeverity(delegationKey, defaultSeverity);
 		return create(id, encodedDelegation);
 	}

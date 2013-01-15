@@ -25,15 +25,14 @@ public class XtendValidatorConfigurationBlock extends XbaseValidationConfigurati
 	}
 
 	protected void fillDispatchSection(ComboBoxBuilder builder) {
-		builder.addComboBox(DISPATCH_PLAIN_FUNCTION_NAME_CLASH, "Dispatch plain function name clash:").addComboBox(
-				SINGLE_DISPATCH_FUNCTION, "Single dispatch function:");
+		builder.addComboBox(DISPATCH_PLAIN_FUNCTION_NAME_CLASH, "Dispatch and non-dispatch method name clash:").addComboBox(
+				SINGLE_DISPATCH_FUNCTION, "Single dispatch method:");
 	}
 
 	@Override
 	protected void fillUnusedCodeSection(ComboBoxBuilder builder) {
 		super.fillUnusedCodeSection(builder);
-		builder.addComboBox(FIELD_LOCALLY_NEVER_READ, "Field never read locally:").addComboBox(
-				FUNCTION_LOCALLY_NEVER_USED, "Function never used locally:");
+		builder.addComboBox(UNUSED_PRIVATE_MEMBER, "Unused private member:");
 	}
 
 }

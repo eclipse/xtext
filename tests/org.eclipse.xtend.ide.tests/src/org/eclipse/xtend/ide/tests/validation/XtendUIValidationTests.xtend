@@ -4,9 +4,7 @@ import com.google.inject.Inject
 import org.eclipse.jdt.core.JavaCore
 import org.eclipse.jdt.internal.core.JavaModelManager
 import org.eclipse.jface.preference.IPersistentPreferenceStore
-import org.eclipse.jface.preference.IPreferenceStore
 import org.eclipse.xtend.core.validation.IssueCodes
-import org.eclipse.xtend.core.validation.XtendConfigurableIssueCodes
 import org.eclipse.xtend.core.xtend.XtendClass
 import org.eclipse.xtend.core.xtend.XtendField
 import org.eclipse.xtend.core.xtend.XtendFunction
@@ -266,34 +264,33 @@ class XtendUIValidationTests extends AbstractXtendUITestCase {
 	
 	@Test
 	def void testConfigurableIssueCode() {
-		val configIssueCode = new XtendConfigurableIssueCodes().getConfigurableIssueCodes().get(FIELD_LOCALLY_NEVER_READ)
-		val defaultSeverity = configIssueCode.defaultValue
-		
 		val xtendPrefStore = (xtendPreferencesStore as IPersistentPreferenceStore)
+		xtendPrefStore.setValue(IssueCodes::UNUSED_PRIVATE_MEMBER, "warning")
 		
-		val currentSeverity = xtendPrefStore.getString(FIELD_LOCALLY_NEVER_READ)
+		testHelper.xtendFile("TestConfigurableIssueCode.xtend",'''
+			class TestConfigurableIssueCode {
+				private String unusedField = "unusedField"
+			}
+		''') => [
+			val unusedField = xtendTypes.filter(typeof(XtendClass)).head.members.head 
+			helper.assertWarning(unusedField, XtendPackage$Literals::XTEND_FIELD, UNUSED_PRIVATE_MEMBER)
+		]
 		
-		if (defaultSeverity != "warning" || currentSeverity != defaultSeverity) {
-			fail("Wrong expectation Xtend compiler option '"+FIELD_LOCALLY_NEVER_READ+"' should be 'warning' by default.")
-		}
-		var otherSeverity = "error"
+		xtendPrefStore.setValue(IssueCodes::UNUSED_PRIVATE_MEMBER, "error")
 		
-		val xtendFile = testHelper.xtendFile("TestConfigurableIssueCode.xtend",'''
-		class TestConfigurableIssueCode {
-			private String unusedField = "unusedField"
-		}
-
-		''')
-		val unusedField = xtendFile.xtendTypes.filter(typeof(XtendClass)).head.members.head 
-		helper.assertWarning(unusedField, XtendPackage$Literals::XTEND_FIELD, FIELD_LOCALLY_NEVER_READ)
+		testHelper.xtendFile("TestConfigurableIssueCode.xtend",'''
+			class TestConfigurableIssueCode {
+				private String unusedField = "unusedField"
+			}
+		''') => [
+			val unusedField = xtendTypes.filter(typeof(XtendClass)).head.members.head 
+			helper.assertError(unusedField, XtendPackage$Literals::XTEND_FIELD, UNUSED_PRIVATE_MEMBER)
+		]
 		
-		xtendPrefStore.setValue(IssueCodes::FIELD_LOCALLY_NEVER_READ, otherSeverity)
-		
-		helper.assertError(unusedField, XtendPackage$Literals::XTEND_FIELD, FIELD_LOCALLY_NEVER_READ)
 	}
 	
-	def IPreferenceStore getXtendPreferencesStore() {
-		return prefStoreAccess.getWritablePreferenceStore(testHelper.project);
+	def getXtendPreferencesStore() {
+		return prefStoreAccess.getWritablePreferenceStore(testHelper.project) as IPersistentPreferenceStore;
 	}
 	
 	

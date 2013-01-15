@@ -55,9 +55,8 @@ public final class IssueCodes {
 	public static final String INCOMPATIBLE_THROWS_CLAUSE = ISSUE_CODE_PREFIX + "incompatible_throws_clause";
 	public static final String CYCLIC_INHERITANCE = ISSUE_CODE_PREFIX + "cyclic_inheritance";
 
-	public static final String FIELD_LOCALLY_NEVER_READ = ISSUE_CODE_PREFIX + "field_locally_never_read";
+	public static final String UNUSED_PRIVATE_MEMBER = ISSUE_CODE_PREFIX + "unused_private_member";
 	public static final String FIELD_NOT_INITIALIZED = ISSUE_CODE_PREFIX + "field_not_initialized";
-	public static final String FUNCTION_LOCALLY_NEVER_USED = ISSUE_CODE_PREFIX + "function_locally_never_used";
 	public static final String EXCEPTION_NOT_THROWABLE = ISSUE_CODE_PREFIX + "exception_not_throwable";
 	public static final String EXCEPTION_DECLARED_TWICE = ISSUE_CODE_PREFIX + "exception_declared_twice";
 

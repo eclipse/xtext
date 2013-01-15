@@ -1107,7 +1107,7 @@ public class XtendJavaValidator extends XbaseWithAnnotationsJavaValidator {
 	
 	@Check
 	public void checkLocalUsageOfDeclaredFields(XtendField field) {
-		if(doCheckValidMemberName(field) && !isIgnored(FIELD_LOCALLY_NEVER_READ)) {
+		if(doCheckValidMemberName(field) && !isIgnored(UNUSED_PRIVATE_MEMBER)) {
 			JvmField jvmField = associations.getJvmField(field);
 			if (jvmField == null || jvmField.getVisibility() != JvmVisibility.PRIVATE)
 				return;
@@ -1129,19 +1129,19 @@ public class XtendJavaValidator extends XbaseWithAnnotationsJavaValidator {
 				message = "The value of the field " + jvmField.getDeclaringType().getSimpleName() + "."
 					+ jvmField.getSimpleName() + " is not used";
 			}
-			addIssueToState(FIELD_LOCALLY_NEVER_READ, message, XtendPackage.Literals.XTEND_FIELD__NAME);
+			addIssueToState(UNUSED_PRIVATE_MEMBER, message, XtendPackage.Literals.XTEND_FIELD__NAME);
 		}
 	}
 	
 	@Check
 	public void checkLocalUsageOfDeclaredXtendFunction(XtendFunction function){
-		if(doCheckValidMemberName(function) && !isIgnored(FUNCTION_LOCALLY_NEVER_USED)) {
+		if(doCheckValidMemberName(function) && !isIgnored(UNUSED_PRIVATE_MEMBER)) {
 			JvmOperation jvmOperation = function.isDispatch()?associations.getDispatchOperation(function):associations.getDirectlyInferredOperation(function);
 			if(jvmOperation != null && jvmOperation.getVisibility() == JvmVisibility.PRIVATE && !isLocallyUsed(jvmOperation, function.eContainer())){
 				String message = "The method " + jvmOperation.getSimpleName() 
 						+  uiStrings.parameters(jvmOperation)  
 						+ " from the type "+jvmOperation.getDeclaringType().getSimpleName()+" is never used locally.";
-				addIssueToState(FUNCTION_LOCALLY_NEVER_USED, message, XtendPackage.Literals.XTEND_FUNCTION__NAME);
+				addIssueToState(UNUSED_PRIVATE_MEMBER, message, XtendPackage.Literals.XTEND_FUNCTION__NAME);
 			}
 		}
 	}
