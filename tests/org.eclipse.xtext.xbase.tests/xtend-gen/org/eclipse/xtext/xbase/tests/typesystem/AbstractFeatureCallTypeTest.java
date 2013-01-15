@@ -88,6 +88,21 @@ public abstract class AbstractFeatureCallTypeTest extends AbstractXbaseTestCase 
   }
   
   @Test
+  public void testJEP101Example_01() throws Exception {
+    this.resolvesFeatureCallsTo("{ val foo.JEP101List<String> ls = foo::JEP101List::nil }", "JEP101List<String>");
+  }
+  
+  @Test
+  public void testJEP101Example_02() throws Exception {
+    this.resolvesFeatureCallsTo("foo::JEP101List::cons(42, foo::JEP101List::nil)", "JEP101List<Integer>", "JEP101List<Integer>");
+  }
+  
+  @Test
+  public void testJEP101Example_03() throws Exception {
+    this.resolvesFeatureCallsTo("{ val String s = foo::JEP101List::nil.head }", "JEP101List<String>", "String");
+  }
+  
+  @Test
   public void testRawType_01() throws Exception {
     this.resolvesFeatureCallsTo("{ val java.util.Set set = newHashSet() set }", "HashSet", "Set");
   }

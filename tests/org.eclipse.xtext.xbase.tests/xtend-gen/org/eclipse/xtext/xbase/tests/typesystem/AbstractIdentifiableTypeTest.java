@@ -169,6 +169,16 @@ public abstract class AbstractIdentifiableTypeTest extends AbstractXbaseTestCase
   }
   
   @Test
+  public void testIfExpression_01() throws Exception {
+    this.resolvesIdentifiablesTo("{ val x = if (true) while(false) (\'foo\'+\'bar\').length }", "null");
+  }
+  
+  @Test
+  public void testIfExpression_02() throws Exception {
+    this.resolvesIdentifiablesTo("{ val Object x = if (true) while(false) (\'foo\'+\'bar\').length }", "Object");
+  }
+  
+  @Test
   public void testOverloadedMethods_01() throws Exception {
     this.resolvesIdentifiablesTo("{\n\t\t\tvar java.util.List<CharSequence> list = null\n\t\t\tvar Object o = null\n\t\t\torg::eclipse::xtext::xbase::tests::typesystem::TypeResolutionTestData::overloaded(list, o)\n\t\t}", "List<CharSequence>", "Object");
   }

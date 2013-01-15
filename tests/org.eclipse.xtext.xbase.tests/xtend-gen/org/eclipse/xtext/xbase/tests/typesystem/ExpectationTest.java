@@ -326,4 +326,28 @@ public class ExpectationTest extends AbstractXbaseTestCase {
     ExpectationTest _types = _expects.types("CharSequence");
     _types.finalizedAs("CharSequence");
   }
+  
+  @Test
+  public void testReturn_01() {
+    ExpectationTest _expects = this.expects("return null");
+    _expects.notVoid();
+  }
+  
+  @Test
+  public void testReturn_02() {
+    ExpectationTest _expects = this.expects("return { { null } }");
+    _expects.notVoid();
+  }
+  
+  @Test
+  public void testReturn_03() {
+    ExpectationTest _expects = this.expects("return if (true) { { null } }");
+    _expects.notVoid();
+  }
+  
+  @Test
+  public void testReturn_04() {
+    ExpectationTest _expects = this.expects("return if (true) { null \'\' }");
+    _expects.nothing();
+  }
 }

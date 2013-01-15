@@ -48,6 +48,12 @@ public class OldAPIIdentifiableTypeTest extends AbstractIdentifiableTypeTest {
   
   @Ignore(value = "fails in old implementation")
   @Test
+  public void testIfExpression_01() throws Exception {
+    Assert.fail("fails in old implementation");
+  }
+  
+  @Ignore(value = "fails in old implementation")
+  @Test
   public void testClosure_03() throws Exception {
     Assert.fail("fails in old implementation");
   }

@@ -47,6 +47,11 @@ public abstract class AbstractReturnTypeTest<Reference extends Object> extends A
   }
   
   @Test
+  public void testReturnExpression_10() throws Exception {
+    this.resolvesTo("return if (true) while(false) (\'foo\'+\'bar\').length", "null");
+  }
+  
+  @Test
   public void testBooleanLiteral_02() throws Exception {
     this.resolvesTo("return true", "boolean");
   }

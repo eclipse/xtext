@@ -22,6 +22,22 @@ import org.junit.runner.RunWith;
 public class XbaseInterpreterTestWithNewTypeSystem extends XbaseInterpreterTest {
 	
 	@Override
+	@Test 
+	@Ignore("Wrong type")
+	public void testReturnExpression_07() throws Exception {
+		assertEvaluatesTo(null, "return if (true) while(false) ('foo'+'bar').length else null");
+		assertEvaluatesTo(null, "return if (false) while(false) ('foo'+'bar').length else null");
+	}
+	
+	@Override
+	@Test 
+	@Ignore("Wrong type")
+	public void testReturnExpression_08() throws Exception {
+		assertEvaluatesTo(null, "return if (true) while(false) ('foo'+'bar').length else 'zonk'");
+		assertEvaluatesTo("zonk", "return if (false) while(false) ('foo'+'bar').length else 'zonk'");
+	}
+	
+	@Override
 	@Test
 	// re-enabled
 	public void testBlock_02() throws Exception {

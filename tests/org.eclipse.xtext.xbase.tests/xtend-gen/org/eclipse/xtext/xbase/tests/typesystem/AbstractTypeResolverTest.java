@@ -901,6 +901,11 @@ public abstract class AbstractTypeResolverTest<Reference extends Object> extends
   }
   
   @Test
+  public void testReturnExpression_10() throws Exception {
+    this.resolvesTo("return if (true) while(false) (\'foo\'+\'bar\').length", "void");
+  }
+  
+  @Test
   public void testClosure_00() throws Exception {
     this.resolvesTo("[|\'literal\'].apply()", "String");
   }
@@ -1150,8 +1155,13 @@ public abstract class AbstractTypeResolverTest<Reference extends Object> extends
   }
   
   @Test
-  public void testTypeArgs() throws Exception {
+  public void testTypeArgs_01() throws Exception {
     this.resolvesTo("new java.util.ArrayList<String>() += \'foo\'", "boolean");
+  }
+  
+  @Test
+  public void testJEP101Example_01() throws Exception {
+    this.resolvesTo("foo::JEP101List::cons(42, foo::JEP101List::nil())", "JEP101List<Integer>");
   }
   
   @Test
@@ -1284,6 +1294,16 @@ public abstract class AbstractTypeResolverTest<Reference extends Object> extends
   @Test
   public void testIfExpression_25() throws Exception {
     this.resolvesTo("{ val x = if (true) return else null x }", "null");
+  }
+  
+  @Test
+  public void testIfExpression_26() throws Exception {
+    this.resolvesTo("if (true) for(i: 1..2) i.toString else \'\'", "String");
+  }
+  
+  @Test
+  public void testIfExpression_27() throws Exception {
+    this.resolvesTo("if (true) while(false) (\'foo\'+\'bar\').length", "null");
   }
   
   @Test

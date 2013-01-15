@@ -1638,6 +1638,25 @@ public abstract class AbstractTypeArgumentTest extends AbstractXbaseTestCase {
   }
   
   @Test
+  public void testJEP101Example_01() throws Exception {
+    Iterator<XExpression> _bindTypeArgumentsTo = this.bindTypeArgumentsTo("{ val foo.JEP101List<String> ls = foo::JEP101List::nil }", "String");
+    this.done(_bindTypeArgumentsTo);
+  }
+  
+  @Test
+  public void testJEP101Example_02() throws Exception {
+    Iterator<XExpression> _bindTypeArgumentsTo = this.bindTypeArgumentsTo("foo::JEP101List::cons(42, foo::JEP101List::nil)", "Integer");
+    Iterator<XExpression> _and = this.and(_bindTypeArgumentsTo, "Integer");
+    this.done(_and);
+  }
+  
+  @Test
+  public void testJEP101Example_03() throws Exception {
+    Iterator<XExpression> _bindTypeArgumentsTo = this.bindTypeArgumentsTo("{ val String s = foo::JEP101List::nil.head }", "String");
+    this.done(_bindTypeArgumentsTo);
+  }
+  
+  @Test
   public void testToList_01() throws Exception {
     Iterator<XExpression> _bindTypeArgumentsTo = this.bindTypeArgumentsTo("{ val Iterable<? extends String> iter = null org::eclipse::xtext::xbase::tests::typesystem::TypeResolutionTestData::fixedToList(iter) }", "? extends String");
     this.done(_bindTypeArgumentsTo);

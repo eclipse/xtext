@@ -800,6 +800,10 @@ abstract class AbstractTypeResolverTest<Reference> extends AbstractXbaseTestCase
 		"[| return 'literal']".resolvesTo("()=>String").isFunctionAndEquivalentTo("Function0<String>")
 	}
 	
+	@Test def void testReturnExpression_10() throws Exception {
+		"return if (true) while(false) ('foo'+'bar').length".resolvesTo("void")
+	}
+	
 	@Test def void testClosure_00() throws Exception {
 		"[|'literal'].apply()".resolvesTo("String")
 	}
@@ -1045,8 +1049,12 @@ abstract class AbstractTypeResolverTest<Reference> extends AbstractXbaseTestCase
         "newTreeSet([a, b|a.toString.compareTo(b.toString)], 'a', 'b')".resolvesTo("TreeSet<String>")
     }
     
-	@Test def void testTypeArgs() throws Exception {
+	@Test def void testTypeArgs_01() throws Exception {
 		"new java.util.ArrayList<String>() += 'foo'".resolvesTo("boolean")
+	}
+	
+	@Test def void testJEP101Example_01() throws Exception {
+		"foo::JEP101List::cons(42, foo::JEP101List::nil())".resolvesTo("JEP101List<Integer>")
 	}
 	
 	@Test def void testIfExpression_01() throws Exception {
@@ -1149,6 +1157,14 @@ abstract class AbstractTypeResolverTest<Reference> extends AbstractXbaseTestCase
 	
 	@Test def void testIfExpression_25() throws Exception {
 		"{ val x = if (true) return else null x }".resolvesTo("null")
+	}
+	
+	@Test def void testIfExpression_26() throws Exception {
+		"if (true) for(i: 1..2) i.toString else ''".resolvesTo("String")
+	}
+	
+	@Test def void testIfExpression_27() throws Exception {
+		"if (true) while(false) ('foo'+'bar').length".resolvesTo("null")
 	}
 	
 	@Test def void testSwitchExpression() throws Exception {

@@ -43,7 +43,7 @@ public class OperationBodyComputationState extends AbstractLogicalContainerAware
 		if (type != null) {
 			result = returnType ? new TypeExpectation(type, actualState, returnType) : new RootTypeExpectation(type, actualState);
 		} else {
-			result = returnType ? new NoExpectation(actualState, returnType) : new RootNoExpectation(actualState);
+			result = returnType ? new NoExpectation(actualState, returnType) : new RootNoExpectation(actualState, true);
 		}
 		return Collections.singletonList(result);
 	}

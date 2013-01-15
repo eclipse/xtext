@@ -60,5 +60,9 @@ public abstract class ForwardingResolvedTypes extends ForwardingObject implement
 	public List<Diagnostic> getQueuedDiagnostics() {
 		return delegate().getQueuedDiagnostics();
 	}
+	
+	public boolean isVoidTypeAllowed(XExpression expression) {
+		return delegate().isVoidTypeAllowed(expression);
+	}
 
 }

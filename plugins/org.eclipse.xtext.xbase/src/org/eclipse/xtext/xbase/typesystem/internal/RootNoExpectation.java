@@ -19,8 +19,11 @@ import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 @NonNullByDefault
 public class RootNoExpectation extends AbstractRootTypeExpectation {
 
-	public RootNoExpectation(AbstractTypeComputationState state) {
+	private boolean voidAllowed;
+
+	public RootNoExpectation(AbstractTypeComputationState state, boolean voidAllowed) {
 		super(state);
+		this.voidAllowed = voidAllowed;
 	}
 
 	@Nullable
@@ -29,25 +32,13 @@ public class RootNoExpectation extends AbstractRootTypeExpectation {
 	}
 
 	public boolean isNoTypeExpectation() {
-		return true;
+		return voidAllowed;
 	}
 	
 	@Override
 	public boolean isVoidTypeAllowed() {
-		return true;
+		return voidAllowed;
 	}
-	
-//	@Override
-//	public void acceptActualType(LightweightTypeReference type, ConformanceHint... hints) {
-//		// TODO resolve all unbound type parameters
-////		AbstractTypeComputationState state = getState();
-////		if (hint contains RAW) {
-////		UnboundTypeParameterSubstitutor substitutor = new UnboundTypeParameterSubstitutor(
-////				Collections.<JvmTypeParameter, LightweightTypeReference>emptyMap(), state.getServices());
-////		LightweightTypeReference substitute = substitutor.substitute(type);
-////		}
-//		super.acceptActualType(type, hints);
-//	}
 	
 	public RootNoExpectation copyInto(ITypeReferenceOwner referenceOwner) {
 		return this;
