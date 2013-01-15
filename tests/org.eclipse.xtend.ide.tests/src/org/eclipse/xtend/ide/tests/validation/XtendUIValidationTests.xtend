@@ -16,6 +16,7 @@ import static org.eclipse.xtext.common.types.TypesPackage$Literals.*
 import static org.eclipse.xtext.xbase.XbasePackage$Literals.*
 import static org.eclipse.xtext.xtype.XtypePackage$Literals.*
 import static org.eclipse.xtext.xbase.validation.IssueCodes.*
+import static org.eclipse.xtend.core.validation.IssueCodes.*
 
 class XtendUIValidationTests extends AbstractXtendUITestCase {
 	@Inject
@@ -25,6 +26,16 @@ class XtendUIValidationTests extends AbstractXtendUITestCase {
 	
 	override tearDown() throws Exception {
 		testHelper.tearDown
+	}
+	
+	@Test
+	def void testWrongPackage() {
+		val xtendFile = testHelper.xtendFile("Clazz.xtend",'''
+			package my.foo.pack
+			class Foo {
+			}
+		''')
+		helper.assertError(xtendFile, XTEND_FILE, WRONG_PACKAGE)
 	}
 	
 	@Test

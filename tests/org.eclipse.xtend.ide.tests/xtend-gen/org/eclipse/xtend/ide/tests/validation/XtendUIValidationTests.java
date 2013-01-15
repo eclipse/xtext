@@ -3,11 +3,13 @@ package org.eclipse.xtend.ide.tests.validation;
 import com.google.common.collect.Iterables;
 import com.google.inject.Inject;
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.xtend.core.validation.IssueCodes;
 import org.eclipse.xtend.core.xtend.XtendClass;
 import org.eclipse.xtend.core.xtend.XtendField;
 import org.eclipse.xtend.core.xtend.XtendFile;
 import org.eclipse.xtend.core.xtend.XtendFunction;
 import org.eclipse.xtend.core.xtend.XtendMember;
+import org.eclipse.xtend.core.xtend.XtendPackage.Literals;
 import org.eclipse.xtend.core.xtend.XtendParameter;
 import org.eclipse.xtend.core.xtend.XtendTypeDeclaration;
 import org.eclipse.xtend.ide.tests.AbstractXtendUITestCase;
@@ -20,10 +22,8 @@ import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.IntegerRange;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
-import org.eclipse.xtext.xbase.validation.IssueCodes;
 import org.eclipse.xtext.xtype.XImportDeclaration;
 import org.eclipse.xtext.xtype.XImportSection;
-import org.eclipse.xtext.xtype.XtypePackage.Literals;
 import org.junit.Ignore;
 import org.junit.Test;
 
@@ -37,6 +37,23 @@ public class XtendUIValidationTests extends AbstractXtendUITestCase {
   
   public void tearDown() throws Exception {
     this.testHelper.tearDown();
+  }
+  
+  @Test
+  public void testWrongPackage() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("package my.foo.pack");
+      _builder.newLine();
+      _builder.append("class Foo {");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      final XtendFile xtendFile = this.testHelper.xtendFile("Clazz.xtend", _builder.toString());
+      this.helper.assertError(xtendFile, Literals.XTEND_FILE, IssueCodes.WRONG_PACKAGE);
+    } catch (Exception _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
   }
   
   @Test
@@ -54,7 +71,7 @@ public class XtendUIValidationTests extends AbstractXtendUITestCase {
       XImportSection _importSection = xtendFile.getImportSection();
       EList<XImportDeclaration> _importDeclarations = _importSection.getImportDeclarations();
       XImportDeclaration _get = _importDeclarations.get(0);
-      this.helper.assertError(_get, Literals.XIMPORT_DECLARATION, IssueCodes.FORBIDDEN_REFERENCE);
+      this.helper.assertError(_get, org.eclipse.xtext.xtype.XtypePackage.Literals.XIMPORT_DECLARATION, org.eclipse.xtext.xbase.validation.IssueCodes.FORBIDDEN_REFERENCE);
     } catch (Exception _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -75,7 +92,7 @@ public class XtendUIValidationTests extends AbstractXtendUITestCase {
       XImportSection _importSection = xtendFile.getImportSection();
       EList<XImportDeclaration> _importDeclarations = _importSection.getImportDeclarations();
       XImportDeclaration _get = _importDeclarations.get(0);
-      this.helper.assertWarning(_get, Literals.XIMPORT_DECLARATION, IssueCodes.DISCOURAGED_REFERENCE);
+      this.helper.assertWarning(_get, org.eclipse.xtext.xtype.XtypePackage.Literals.XIMPORT_DECLARATION, org.eclipse.xtext.xbase.validation.IssueCodes.DISCOURAGED_REFERENCE);
     } catch (Exception _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -96,7 +113,7 @@ public class XtendUIValidationTests extends AbstractXtendUITestCase {
       XImportSection _importSection = xtendFile.getImportSection();
       EList<XImportDeclaration> _importDeclarations = _importSection.getImportDeclarations();
       XImportDeclaration _get = _importDeclarations.get(0);
-      this.helper.assertError(_get, Literals.XIMPORT_DECLARATION, IssueCodes.FORBIDDEN_REFERENCE);
+      this.helper.assertError(_get, org.eclipse.xtext.xtype.XtypePackage.Literals.XIMPORT_DECLARATION, org.eclipse.xtext.xbase.validation.IssueCodes.FORBIDDEN_REFERENCE);
     } catch (Exception _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -117,7 +134,7 @@ public class XtendUIValidationTests extends AbstractXtendUITestCase {
       XImportSection _importSection = xtendFile.getImportSection();
       EList<XImportDeclaration> _importDeclarations = _importSection.getImportDeclarations();
       XImportDeclaration _get = _importDeclarations.get(0);
-      this.helper.assertWarning(_get, Literals.XIMPORT_DECLARATION, IssueCodes.DISCOURAGED_REFERENCE);
+      this.helper.assertWarning(_get, org.eclipse.xtext.xtype.XtypePackage.Literals.XIMPORT_DECLARATION, org.eclipse.xtext.xbase.validation.IssueCodes.DISCOURAGED_REFERENCE);
     } catch (Exception _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -165,7 +182,7 @@ public class XtendUIValidationTests extends AbstractXtendUITestCase {
       XImportSection _importSection = xtendFile.getImportSection();
       EList<XImportDeclaration> _importDeclarations = _importSection.getImportDeclarations();
       XImportDeclaration _get = _importDeclarations.get(0);
-      this.helper.assertError(_get, Literals.XIMPORT_DECLARATION, IssueCodes.FORBIDDEN_REFERENCE);
+      this.helper.assertError(_get, org.eclipse.xtext.xtype.XtypePackage.Literals.XIMPORT_DECLARATION, org.eclipse.xtext.xbase.validation.IssueCodes.FORBIDDEN_REFERENCE);
       EList<XtendTypeDeclaration> _xtendTypes = xtendFile.getXtendTypes();
       Iterable<XtendClass> _filter = Iterables.<XtendClass>filter(_xtendTypes, XtendClass.class);
       XtendClass _head = IterableExtensions.<XtendClass>head(_filter);
@@ -173,9 +190,9 @@ public class XtendUIValidationTests extends AbstractXtendUITestCase {
       XtendMember _head_1 = IterableExtensions.<XtendMember>head(_members);
       final XtendField field = ((XtendField) _head_1);
       JvmTypeReference _type = field.getType();
-      this.helper.assertError(_type, org.eclipse.xtext.common.types.TypesPackage.Literals.JVM_TYPE_REFERENCE, IssueCodes.FORBIDDEN_REFERENCE);
+      this.helper.assertError(_type, org.eclipse.xtext.common.types.TypesPackage.Literals.JVM_TYPE_REFERENCE, org.eclipse.xtext.xbase.validation.IssueCodes.FORBIDDEN_REFERENCE);
       XExpression _initialValue = field.getInitialValue();
-      this.helper.assertError(_initialValue, org.eclipse.xtext.xbase.XbasePackage.Literals.XCONSTRUCTOR_CALL, IssueCodes.FORBIDDEN_REFERENCE);
+      this.helper.assertError(_initialValue, org.eclipse.xtext.xbase.XbasePackage.Literals.XCONSTRUCTOR_CALL, org.eclipse.xtext.xbase.validation.IssueCodes.FORBIDDEN_REFERENCE);
     } catch (Exception _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -199,7 +216,7 @@ public class XtendUIValidationTests extends AbstractXtendUITestCase {
       XImportSection _importSection = xtendFile.getImportSection();
       EList<XImportDeclaration> _importDeclarations = _importSection.getImportDeclarations();
       XImportDeclaration _get = _importDeclarations.get(0);
-      this.helper.assertWarning(_get, Literals.XIMPORT_DECLARATION, IssueCodes.DISCOURAGED_REFERENCE);
+      this.helper.assertWarning(_get, org.eclipse.xtext.xtype.XtypePackage.Literals.XIMPORT_DECLARATION, org.eclipse.xtext.xbase.validation.IssueCodes.DISCOURAGED_REFERENCE);
       EList<XtendTypeDeclaration> _xtendTypes = xtendFile.getXtendTypes();
       Iterable<XtendClass> _filter = Iterables.<XtendClass>filter(_xtendTypes, XtendClass.class);
       XtendClass _head = IterableExtensions.<XtendClass>head(_filter);
@@ -207,9 +224,9 @@ public class XtendUIValidationTests extends AbstractXtendUITestCase {
       XtendMember _head_1 = IterableExtensions.<XtendMember>head(_members);
       final XtendField field = ((XtendField) _head_1);
       JvmTypeReference _type = field.getType();
-      this.helper.assertWarning(_type, org.eclipse.xtext.common.types.TypesPackage.Literals.JVM_TYPE_REFERENCE, IssueCodes.DISCOURAGED_REFERENCE);
+      this.helper.assertWarning(_type, org.eclipse.xtext.common.types.TypesPackage.Literals.JVM_TYPE_REFERENCE, org.eclipse.xtext.xbase.validation.IssueCodes.DISCOURAGED_REFERENCE);
       XExpression _initialValue = field.getInitialValue();
-      this.helper.assertWarning(_initialValue, org.eclipse.xtext.xbase.XbasePackage.Literals.XCONSTRUCTOR_CALL, IssueCodes.DISCOURAGED_REFERENCE);
+      this.helper.assertWarning(_initialValue, org.eclipse.xtext.xbase.XbasePackage.Literals.XCONSTRUCTOR_CALL, org.eclipse.xtext.xbase.validation.IssueCodes.DISCOURAGED_REFERENCE);
     } catch (Exception _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -233,7 +250,7 @@ public class XtendUIValidationTests extends AbstractXtendUITestCase {
       XImportSection _importSection = xtendFile.getImportSection();
       EList<XImportDeclaration> _importDeclarations = _importSection.getImportDeclarations();
       XImportDeclaration _get = _importDeclarations.get(0);
-      this.helper.assertWarning(_get, Literals.XIMPORT_DECLARATION, IssueCodes.DISCOURAGED_REFERENCE);
+      this.helper.assertWarning(_get, org.eclipse.xtext.xtype.XtypePackage.Literals.XIMPORT_DECLARATION, org.eclipse.xtext.xbase.validation.IssueCodes.DISCOURAGED_REFERENCE);
       EList<XtendTypeDeclaration> _xtendTypes = xtendFile.getXtendTypes();
       Iterable<XtendClass> _filter = Iterables.<XtendClass>filter(_xtendTypes, XtendClass.class);
       XtendClass _head = IterableExtensions.<XtendClass>head(_filter);
@@ -241,9 +258,9 @@ public class XtendUIValidationTests extends AbstractXtendUITestCase {
       XtendMember _head_1 = IterableExtensions.<XtendMember>head(_members);
       final XtendField field = ((XtendField) _head_1);
       JvmTypeReference _type = field.getType();
-      this.helper.assertWarning(_type, org.eclipse.xtext.common.types.TypesPackage.Literals.JVM_TYPE_REFERENCE, IssueCodes.DISCOURAGED_REFERENCE);
+      this.helper.assertWarning(_type, org.eclipse.xtext.common.types.TypesPackage.Literals.JVM_TYPE_REFERENCE, org.eclipse.xtext.xbase.validation.IssueCodes.DISCOURAGED_REFERENCE);
       XExpression _initialValue = field.getInitialValue();
-      this.helper.assertWarning(_initialValue, org.eclipse.xtext.xbase.XbasePackage.Literals.XCONSTRUCTOR_CALL, IssueCodes.DISCOURAGED_REFERENCE);
+      this.helper.assertWarning(_initialValue, org.eclipse.xtext.xbase.XbasePackage.Literals.XCONSTRUCTOR_CALL, org.eclipse.xtext.xbase.validation.IssueCodes.DISCOURAGED_REFERENCE);
     } catch (Exception _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -267,7 +284,7 @@ public class XtendUIValidationTests extends AbstractXtendUITestCase {
       XImportSection _importSection = xtendFile.getImportSection();
       EList<XImportDeclaration> _importDeclarations = _importSection.getImportDeclarations();
       XImportDeclaration _get = _importDeclarations.get(0);
-      this.helper.assertError(_get, Literals.XIMPORT_DECLARATION, IssueCodes.FORBIDDEN_REFERENCE);
+      this.helper.assertError(_get, org.eclipse.xtext.xtype.XtypePackage.Literals.XIMPORT_DECLARATION, org.eclipse.xtext.xbase.validation.IssueCodes.FORBIDDEN_REFERENCE);
       EList<XtendTypeDeclaration> _xtendTypes = xtendFile.getXtendTypes();
       Iterable<XtendClass> _filter = Iterables.<XtendClass>filter(_xtendTypes, XtendClass.class);
       XtendClass _head = IterableExtensions.<XtendClass>head(_filter);
@@ -275,9 +292,9 @@ public class XtendUIValidationTests extends AbstractXtendUITestCase {
       XtendMember _head_1 = IterableExtensions.<XtendMember>head(_members);
       final XtendField field = ((XtendField) _head_1);
       JvmTypeReference _type = field.getType();
-      this.helper.assertError(_type, org.eclipse.xtext.common.types.TypesPackage.Literals.JVM_TYPE_REFERENCE, IssueCodes.FORBIDDEN_REFERENCE);
+      this.helper.assertError(_type, org.eclipse.xtext.common.types.TypesPackage.Literals.JVM_TYPE_REFERENCE, org.eclipse.xtext.xbase.validation.IssueCodes.FORBIDDEN_REFERENCE);
       XExpression _initialValue = field.getInitialValue();
-      this.helper.assertError(_initialValue, org.eclipse.xtext.xbase.XbasePackage.Literals.XCONSTRUCTOR_CALL, IssueCodes.FORBIDDEN_REFERENCE);
+      this.helper.assertError(_initialValue, org.eclipse.xtext.xbase.XbasePackage.Literals.XCONSTRUCTOR_CALL, org.eclipse.xtext.xbase.validation.IssueCodes.FORBIDDEN_REFERENCE);
     } catch (Exception _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -304,7 +321,7 @@ public class XtendUIValidationTests extends AbstractXtendUITestCase {
       final XtendFunction function = ((XtendFunction) _head_1);
       EList<XtendParameter> _parameters = function.getParameters();
       XtendParameter _get = _parameters.get(0);
-      this.helper.assertError(_get, org.eclipse.xtext.common.types.TypesPackage.Literals.JVM_TYPE_REFERENCE, IssueCodes.FORBIDDEN_REFERENCE);
+      this.helper.assertError(_get, org.eclipse.xtext.common.types.TypesPackage.Literals.JVM_TYPE_REFERENCE, org.eclipse.xtext.xbase.validation.IssueCodes.FORBIDDEN_REFERENCE);
     } catch (Exception _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -331,7 +348,7 @@ public class XtendUIValidationTests extends AbstractXtendUITestCase {
       final XtendFunction function = ((XtendFunction) _head_1);
       EList<XtendParameter> _parameters = function.getParameters();
       XtendParameter _get = _parameters.get(0);
-      this.helper.assertWarning(_get, org.eclipse.xtext.common.types.TypesPackage.Literals.JVM_TYPE_REFERENCE, IssueCodes.DISCOURAGED_REFERENCE);
+      this.helper.assertWarning(_get, org.eclipse.xtext.common.types.TypesPackage.Literals.JVM_TYPE_REFERENCE, org.eclipse.xtext.xbase.validation.IssueCodes.DISCOURAGED_REFERENCE);
     } catch (Exception _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -358,7 +375,7 @@ public class XtendUIValidationTests extends AbstractXtendUITestCase {
       final XtendFunction function = ((XtendFunction) _head_1);
       EList<XtendParameter> _parameters = function.getParameters();
       XtendParameter _get = _parameters.get(0);
-      this.helper.assertError(_get, org.eclipse.xtext.common.types.TypesPackage.Literals.JVM_TYPE_REFERENCE, IssueCodes.FORBIDDEN_REFERENCE);
+      this.helper.assertError(_get, org.eclipse.xtext.common.types.TypesPackage.Literals.JVM_TYPE_REFERENCE, org.eclipse.xtext.xbase.validation.IssueCodes.FORBIDDEN_REFERENCE);
     } catch (Exception _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -388,8 +405,8 @@ public class XtendUIValidationTests extends AbstractXtendUITestCase {
       final JvmParameterizedTypeReference type = ((JvmParameterizedTypeReference) _parameterType);
       EList<JvmTypeReference> _arguments = type.getArguments();
       final JvmTypeReference typeParameter = _arguments.get(0);
-      this.helper.assertError(type, org.eclipse.xtext.common.types.TypesPackage.Literals.JVM_PARAMETERIZED_TYPE_REFERENCE, IssueCodes.FORBIDDEN_REFERENCE);
-      this.helper.assertWarning(typeParameter, org.eclipse.xtext.common.types.TypesPackage.Literals.JVM_TYPE_REFERENCE, IssueCodes.DISCOURAGED_REFERENCE);
+      this.helper.assertError(type, org.eclipse.xtext.common.types.TypesPackage.Literals.JVM_PARAMETERIZED_TYPE_REFERENCE, org.eclipse.xtext.xbase.validation.IssueCodes.FORBIDDEN_REFERENCE);
+      this.helper.assertWarning(typeParameter, org.eclipse.xtext.common.types.TypesPackage.Literals.JVM_TYPE_REFERENCE, org.eclipse.xtext.xbase.validation.IssueCodes.DISCOURAGED_REFERENCE);
     } catch (Exception _e) {
       throw Exceptions.sneakyThrow(_e);
     }

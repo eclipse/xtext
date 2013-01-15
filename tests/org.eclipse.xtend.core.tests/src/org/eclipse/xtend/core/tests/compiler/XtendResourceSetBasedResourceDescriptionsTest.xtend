@@ -8,6 +8,7 @@ import org.eclipse.xtext.validation.IResourceValidator
 import org.eclipse.xtext.xbase.compiler.CompilationTestHelper
 import org.eclipse.xtext.xbase.resource.XbaseResource
 import org.junit.Test
+import org.eclipse.emf.ecore.resource.Resource
 
 class XtendResourceSetBasedResourceDescriptionsTest extends AbstractXtendTestCase {
 
@@ -19,7 +20,7 @@ class XtendResourceSetBasedResourceDescriptionsTest extends AbstractXtendTestCas
 			'foo/ClassA.xtend'->'''package foo class ClassA extends bar.ClassB {}''',
 			'bar/ClassB.xtend'->'''package bar class ClassB { public foo.ClassA myField }'''
 		)
-		for (res : resourceSet.resources.toSet) {
+		for (Resource res : resourceSet.resources.toSet) {
 			val issues = validator.validate(res, CheckMode::ALL, CancelIndicator::NullImpl)
 			assertTrue(issues.toString, issues.empty)
 		}
@@ -30,7 +31,7 @@ class XtendResourceSetBasedResourceDescriptionsTest extends AbstractXtendTestCas
 			'foo/ClassA.xtend'->'''package foo class ClassA extends bar.ClassB {}''',
 			'bar/ClassB.xtend'->'''package bar class ClassB { public foo.ClassA myField }'''
 		)
-		for (res : resourceSet.resources.toSet) {
+		for (Resource res : resourceSet.resources.toSet) {
 			val issues = validator.validate(res, CheckMode::ALL, CancelIndicator::NullImpl)
 			assertTrue(issues.toString, issues.empty)
 		}
@@ -41,7 +42,7 @@ class XtendResourceSetBasedResourceDescriptionsTest extends AbstractXtendTestCas
 			'foo/ClassA.xtend'->'''package foo class ClassA extends bar.ClassB {}''',
 			'bar/ClassB.xtend'->'''package bar class ClassB { public foo.ClassA myField }'''
 		)
-		for (res : resourceSet.resources.toSet) {
+		for (Resource res : resourceSet.resources.toSet) {
 			assertFalse(res.loaded)
 			try {
 				(res as XbaseResource).installDerivedState(true)

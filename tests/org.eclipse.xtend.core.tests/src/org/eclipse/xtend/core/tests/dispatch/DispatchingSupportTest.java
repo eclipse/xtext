@@ -130,7 +130,7 @@ public class DispatchingSupportTest extends AbstractXtendTestCase {
 				"class Super {\n" +
 				"  def private dispatch foo(Object x) {} \n" +
 				"}");
-		Resource subResource = superClazz.eResource().getResourceSet().createResource(URI.createURI("Foo.xtend", true));
+		Resource subResource = superClazz.eResource().getResourceSet().createResource(URI.createURI("Sub.xtend", true));
 		subResource.load(new StringInputStream(
 				"class Sub extends Super {\n" +
 				"  def dispatch foo(String x) {}\n" +
@@ -147,7 +147,7 @@ public class DispatchingSupportTest extends AbstractXtendTestCase {
 				"class Super {\n" +
 				"  def dispatch foo(Object x) {} \n" +
 				"}");
-		Resource subResource = superClazz.eResource().getResourceSet().createResource(URI.createURI("Foo.xtend", true));
+		Resource subResource = superClazz.eResource().getResourceSet().createResource(URI.createURI("Sub.xtend", true));
 		subResource.load(new StringInputStream(
 				"class Sub extends Super {\n" +
 				"  def dispatch foo(String x) {}\n" +
