@@ -32,7 +32,7 @@ public class XtendValidatorConfigurationBlock extends XbaseValidationConfigurati
 	@Override
 	protected void fillUnusedCodeSection(ComboBoxBuilder builder) {
 		super.fillUnusedCodeSection(builder);
-		builder.addComboBox(UNUSED_PRIVATE_MEMBER, "Unused private member:");
+		builder.addJavaDelegatingComboBox(UNUSED_PRIVATE_MEMBER, "Unused private member:");
 	}
 
 }
