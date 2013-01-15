@@ -1,28 +1,38 @@
 package org.eclipse.xtend.ide.tests.validation
 
 import com.google.inject.Inject
+import org.eclipse.jdt.core.JavaCore
+import org.eclipse.jdt.internal.core.JavaModelManager
+import org.eclipse.jface.preference.IPersistentPreferenceStore
+import org.eclipse.jface.preference.IPreferenceStore
+import org.eclipse.xtend.core.validation.IssueCodes
+import org.eclipse.xtend.core.validation.XtendConfigurableIssueCodes
 import org.eclipse.xtend.core.xtend.XtendClass
 import org.eclipse.xtend.core.xtend.XtendField
 import org.eclipse.xtend.core.xtend.XtendFunction
+import org.eclipse.xtend.core.xtend.XtendPackage
 import org.eclipse.xtend.ide.tests.AbstractXtendUITestCase
 import org.eclipse.xtend.ide.tests.WorkbenchTestHelper
 import org.eclipse.xtext.common.types.JvmParameterizedTypeReference
 import org.eclipse.xtext.junit4.validation.ValidationTestHelper
+import org.eclipse.xtext.ui.editor.preferences.IPreferenceStoreAccess
 import org.junit.Ignore
 import org.junit.Test
 
+import static org.eclipse.xtend.core.validation.IssueCodes.*
 import static org.eclipse.xtend.core.xtend.XtendPackage$Literals.*
 import static org.eclipse.xtext.common.types.TypesPackage$Literals.*
 import static org.eclipse.xtext.xbase.XbasePackage$Literals.*
-import static org.eclipse.xtext.xtype.XtypePackage$Literals.*
 import static org.eclipse.xtext.xbase.validation.IssueCodes.*
-import static org.eclipse.xtend.core.validation.IssueCodes.*
+import static org.eclipse.xtext.xtype.XtypePackage$Literals.*
 
 class XtendUIValidationTests extends AbstractXtendUITestCase {
 	@Inject
 	private WorkbenchTestHelper testHelper;
 	@Inject
 	private ValidationTestHelper helper;
+	@Inject
+	private IPreferenceStoreAccess prefStoreAccess;
 	
 	override tearDown() throws Exception {
 		testHelper.tearDown
@@ -232,4 +242,59 @@ class XtendUIValidationTests extends AbstractXtendUITestCase {
 		''')
 		helper.validate(xtendFile)
 	}
+	
+	@Test
+	def void testIssueCodeDelegation() {
+		val javaProject = JavaModelManager::getJavaModelManager().getJavaModel().getJavaProject(testHelper.project)
+		val javaSeverity = javaProject.getOption(JavaCore::COMPILER_PB_FORBIDDEN_REFERENCE, true)
+		if (javaSeverity != "error") {
+			fail("Wrong expectation Java compiler option '"+JavaCore::COMPILER_PB_FORBIDDEN_REFERENCE+"' should be 'error' by default")
+		}
+		var otherSeverity = "warning"
+		val xtendFile = testHelper.xtendFile("ValidationClazz.xtend",'''
+		class ValidationClazz {
+			def bar(org.eclipse.xtend.core.tests.restricted.RestrictedClass x) {}
+		}
+
+		''')
+		val function = xtendFile.xtendTypes.filter(typeof(XtendClass)).head.members.head as XtendFunction
+		helper.assertError(function.parameters.get(0), JVM_TYPE_REFERENCE, FORBIDDEN_REFERENCE)
+		
+		javaProject.setOption(JavaCore::COMPILER_PB_FORBIDDEN_REFERENCE, otherSeverity)
+		helper.assertWarning(function.parameters.get(0), JVM_TYPE_REFERENCE, FORBIDDEN_REFERENCE)
+	}
+	
+	@Test
+	def void testConfigurableIssueCode() {
+		val configIssueCode = new XtendConfigurableIssueCodes().getConfigurableIssueCodes().get(FIELD_LOCALLY_NEVER_READ)
+		val defaultSeverity = configIssueCode.defaultValue
+		
+		val xtendPrefStore = (xtendPreferencesStore as IPersistentPreferenceStore)
+		
+		val currentSeverity = xtendPrefStore.getString(FIELD_LOCALLY_NEVER_READ)
+		
+		if (defaultSeverity != "warning" || currentSeverity != defaultSeverity) {
+			fail("Wrong expectation Xtend compiler option '"+FIELD_LOCALLY_NEVER_READ+"' should be 'warning' by default.")
+		}
+		var otherSeverity = "error"
+		
+		val xtendFile = testHelper.xtendFile("TestConfigurableIssueCode.xtend",'''
+		class TestConfigurableIssueCode {
+			private String unusedField = "unusedField"
+		}
+
+		''')
+		val unusedField = xtendFile.xtendTypes.filter(typeof(XtendClass)).head.members.head 
+		helper.assertWarning(unusedField, XtendPackage$Literals::XTEND_FIELD, FIELD_LOCALLY_NEVER_READ)
+		
+		xtendPrefStore.setValue(IssueCodes::FIELD_LOCALLY_NEVER_READ, otherSeverity)
+		
+		helper.assertError(unusedField, XtendPackage$Literals::XTEND_FIELD, FIELD_LOCALLY_NEVER_READ)
+	}
+	
+	def IPreferenceStore getXtendPreferencesStore() {
+		return prefStoreAccess.getWritablePreferenceStore(testHelper.project);
+	}
+	
+	
 }
