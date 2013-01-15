@@ -64,6 +64,44 @@ public class ValidationTestHelper {
 		if (!isEmpty(issues))
 			fail("Expected no error '" + issuecode + "' but got " + issues);
 	}
+	
+	/**
+	 * @since 2.4
+	 */
+	public void assertNoIssues(final EObject root, final EClass objectType) {
+		final List<Issue> validate = validate(root);
+		Iterable<Issue> issues = filter(validate, new Predicate<Issue>() {
+			public boolean apply(Issue input) {
+				EObject object = root.eResource().getEObject(input.getUriToProblem().fragment());
+				if (objectType.isInstance(object)) {
+					return true;
+				}
+				return false;
+			}
+		});
+		if (!isEmpty(issues))
+			fail("Expected no error on instances of  '" + objectType.getName() + "' but got " + issues);
+	}
+	
+	/**
+	 * @since 2.4
+	 */
+	public void assertNoIssue(final EObject root, final EClass objectType, final String issuecode) {
+		final List<Issue> validate = validate(root);
+		Iterable<Issue> issues = filter(validate, new Predicate<Issue>() {
+			public boolean apply(Issue input) {
+				if (issuecode.equals(input.getCode())) {
+					EObject object = root.eResource().getEObject(input.getUriToProblem().fragment());
+					if (objectType.isInstance(object)) {
+						return true;
+					}
+				}
+				return false;
+			}
+		});
+		if (!isEmpty(issues))
+			fail("Expected no error '" + issuecode + "' but got " + issues);
+	}
 
 	public void assertError(final EObject model, final EClass objectType, final String code,
 			final String... messageParts) {
