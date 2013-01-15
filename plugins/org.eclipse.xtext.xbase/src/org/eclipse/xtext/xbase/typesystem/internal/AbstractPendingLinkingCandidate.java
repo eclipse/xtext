@@ -23,6 +23,7 @@ import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.diagnostics.AbstractDiagnostic;
 import org.eclipse.xtext.diagnostics.Severity;
+import org.eclipse.xtext.util.IAcceptor;
 import org.eclipse.xtext.validation.EObjectDiagnosticImpl;
 import org.eclipse.xtext.xbase.XAssignment;
 import org.eclipse.xtext.xbase.XExpression;
@@ -57,10 +58,8 @@ public abstract class AbstractPendingLinkingCandidate<Expression extends XExpres
 		return typeParameterMapping;
 	}
 	
-	@Override
-	protected void validate() {
+	public void validate(IAcceptor<? super AbstractDiagnostic> result) {
 		// TODO improve messages
-		ResolvedTypes types = getState().getResolvedTypes();
 		if (!isVisible()) {
 			String message = "Feature " + getFeature().getSimpleName() + " is not visible";
 			AbstractDiagnostic diagnostic = new EObjectDiagnosticImpl(
@@ -69,7 +68,7 @@ public abstract class AbstractPendingLinkingCandidate<Expression extends XExpres
 					message, 
 					getExpression(), 
 					XbasePackage.Literals.XABSTRACT_FEATURE_CALL__FEATURE, -1, null);
-			types.addDiagnostic(diagnostic);
+			result.accept(diagnostic);
 		} else if (getArityMismatch() != 0) {
 			String message = "Invalid number of arguments. Expected " + getFeature().getSimpleName();
 			AbstractDiagnostic diagnostic = new EObjectDiagnosticImpl(
@@ -78,7 +77,7 @@ public abstract class AbstractPendingLinkingCandidate<Expression extends XExpres
 					message, 
 					getExpression(), 
 					XbasePackage.Literals.XABSTRACT_FEATURE_CALL__FEATURE, -1, null);
-			types.addDiagnostic(diagnostic);
+			result.accept(diagnostic);
 		} else if (getTypeArityMismatch() != 0) {
 			String message = "Invalid number of type arguments. Expected " + getFeature().getSimpleName();
 			AbstractDiagnostic diagnostic = new EObjectDiagnosticImpl(
@@ -87,7 +86,7 @@ public abstract class AbstractPendingLinkingCandidate<Expression extends XExpres
 					message, 
 					getExpression(), 
 					XbasePackage.Literals.XABSTRACT_FEATURE_CALL__FEATURE, -1, null);
-			types.addDiagnostic(diagnostic);
+			result.accept(diagnostic);
 		}
 	}
 

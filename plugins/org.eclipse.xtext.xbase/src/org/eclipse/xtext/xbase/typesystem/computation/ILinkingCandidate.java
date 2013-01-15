@@ -11,6 +11,8 @@ import java.util.List;
 
 import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
+import org.eclipse.xtext.diagnostics.AbstractDiagnostic;
+import org.eclipse.xtext.util.IAcceptor;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 
 /**
@@ -24,6 +26,8 @@ public interface ILinkingCandidate {
 	void apply();
 	
 	void resolveLinkingProxy();
+	
+	void validate(IAcceptor<? super AbstractDiagnostic> result);
 	
 	boolean isPreferredOver(ILinkingCandidate other);
 	

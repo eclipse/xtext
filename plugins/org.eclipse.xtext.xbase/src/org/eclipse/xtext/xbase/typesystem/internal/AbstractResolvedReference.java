@@ -12,6 +12,8 @@ import java.util.Map;
 import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
+import org.eclipse.xtext.diagnostics.AbstractDiagnostic;
+import org.eclipse.xtext.util.IAcceptor;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.typesystem.computation.ILinkingCandidate;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightMergedBoundTypeArgument;
@@ -43,6 +45,10 @@ public abstract class AbstractResolvedReference<Expression extends XExpression> 
 	}
 	
 	public void resolveLinkingProxy() {
+		// nothing to do
+	}
+	
+	public void validate(IAcceptor<? super AbstractDiagnostic> result) {
 		// nothing to do
 	}
 	
