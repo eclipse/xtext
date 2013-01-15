@@ -41,6 +41,9 @@ import org.junit.Rule
 import org.junit.Test
 import org.junit.rules.Timeout
 import org.junit.runner.RunWith
+import org.eclipse.xtext.resource.XtextSyntaxDiagnostic
+import org.eclipse.xtext.linking.impl.XtextLinkingDiagnostic
+import org.eclipse.emf.ecore.resource.Resource
 
 /**
  * @author Sebastian Zarnekow
@@ -98,9 +101,13 @@ abstract class AbstractBatchTypeResolverTest extends AbstractTypeResolverTest<Li
 				}
 			}
 		}
-		assertTrue(xExpression.eResource.errors.toString, xExpression.eResource.errors.isEmpty)
+		assertTrue(xExpression.eResource.linkingAndSyntaxErrors.toString, xExpression.eResource.linkingAndSyntaxErrors.isEmpty)
 		assertTrue(xExpression.eResource.warnings.toString, xExpression.eResource.warnings.isEmpty)
 		return resolvedType
+	}
+	
+	def linkingAndSyntaxErrors(Resource resource) {
+		resource.errors.filter[ it instanceof XtextSyntaxDiagnostic || it instanceof XtextLinkingDiagnostic]
 	}
 	
 	override void isFunctionAndEquivalentTo(LightweightTypeReference reference, String type) {

@@ -26,6 +26,9 @@ import com.google.inject.Inject
 import org.eclipse.xtext.xbase.XReturnExpression
 import org.eclipse.xtext.xbase.XClosure
 import org.eclipse.xtext.xbase.XThrowExpression
+import org.eclipse.emf.ecore.resource.Resource
+import org.eclipse.xtext.resource.XtextSyntaxDiagnostic
+import org.eclipse.xtext.linking.impl.XtextLinkingDiagnostic
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -268,9 +271,13 @@ abstract class AbstractBatchReturnTypeTest extends AbstractReturnTypeTest<Lightw
 		val resolvedTypes = getTypeResolver.resolveTypes(xExpression)
 		val resolvedType = resolvedTypes.getReturnType(xExpression)
 		assertEquals(replacedExpressionText, type, resolvedType.simpleName);
-		assertTrue(xExpression.eResource.errors.toString, xExpression.eResource.errors.isEmpty)
+		assertTrue(xExpression.eResource.linkingAndSyntaxErrors.toString, xExpression.eResource.linkingAndSyntaxErrors.isEmpty)
 		assertTrue(xExpression.eResource.warnings.toString, xExpression.eResource.warnings.isEmpty)
 		return resolvedType
+	}
+	
+	def linkingAndSyntaxErrors(Resource resource) {
+		resource.errors.filter[ it instanceof XtextSyntaxDiagnostic || it instanceof XtextLinkingDiagnostic]
 	}
 	
 	def void doResolvesTo(String expression, String type) {

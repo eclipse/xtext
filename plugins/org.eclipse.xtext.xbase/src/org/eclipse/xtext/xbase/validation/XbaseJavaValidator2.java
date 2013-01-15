@@ -20,6 +20,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
@@ -252,6 +253,20 @@ public class XbaseJavaValidator2 extends AbstractXbaseJavaValidator {
 	}
 	
 	protected boolean isDefiniteEarlyExit(XExpression expression) {
+		if (expression == null) {
+			return true;
+		}
+		if (expression instanceof XBlockExpression) {
+			XBlockExpression block = (XBlockExpression) expression;
+			List<XExpression> children = block.getExpressions();
+			for(XExpression child: children) {
+				if (isDefiniteEarlyExit(child)) {
+					return true;
+				}
+			}
+		} else if (expression instanceof XIfExpression) {
+			return isDefiniteEarlyExit(((XIfExpression) expression).getThen()) && isDefiniteEarlyExit(((XIfExpression) expression).getElse());
+		}
 		return expression instanceof XReturnExpression || expression instanceof XThrowExpression;
 	}
 	
