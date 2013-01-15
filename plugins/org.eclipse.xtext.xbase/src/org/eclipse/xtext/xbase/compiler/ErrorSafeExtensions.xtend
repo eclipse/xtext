@@ -15,7 +15,6 @@ import org.eclipse.xtext.common.types.JvmTypeReference
 import org.eclipse.xtext.common.types.JvmWildcardTypeReference
 import org.eclipse.xtext.common.types.util.AbstractTypeReferenceVisitor
 import org.eclipse.xtext.diagnostics.Severity
-import org.eclipse.xtext.util.OnChangeEvictingCache
 import org.eclipse.xtext.validation.Issue
 import org.eclipse.xtext.xbase.compiler.output.ErrorTreeAppendable
 import org.eclipse.xtext.xbase.compiler.output.ITreeAppendable
@@ -29,22 +28,16 @@ class ErrorSafeExtensions {
 	
 	@Inject extension TypeReferenceSerializer 
 
-	@Inject OnChangeEvictingCache cache
+	@Inject IElementIssueProvider$Factory issueProviderFactory
 
 	def Iterable<Issue> getErrors(EObject element, boolean includeContents) {
-		val IElementIssueProvider issueProvider = cache.get(typeof(IElementIssueProvider).name, element.eResource, [|null])
-		if(issueProvider==null)
-			return emptyList
-		else 
-			issueProvider.getIssues(element, includeContents).filter[severity == Severity::ERROR]
+		val issueProvider = issueProviderFactory.get(element.eResource)
+		issueProvider.getIssues(element, includeContents).filter[severity == Severity::ERROR]
 	}
 
 	def boolean hasErrors(EObject element, boolean includeContents) {
-		val IElementIssueProvider issueProvider = cache.get(typeof(IElementIssueProvider).name, element.eResource, [|null])
-		if(issueProvider==null)
-			return false
-		else 
-			issueProvider.getIssues(element, includeContents).exists[it.severity == Severity::ERROR]
+		val issueProvider = issueProviderFactory.get(element.eResource)
+		issueProvider.getIssues(element, includeContents).exists[it.severity == Severity::ERROR]
 	}
 	
 	def <T extends EObject> void forEachSafely(ITreeAppendable appendable, Iterable<T> elements, 
