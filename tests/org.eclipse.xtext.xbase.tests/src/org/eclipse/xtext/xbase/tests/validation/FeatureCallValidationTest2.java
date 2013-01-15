@@ -23,24 +23,6 @@ public class FeatureCallValidationTest2 extends FeatureCallValidationTest {
 
 	@Override
 	@Test @Ignore("TODO To be implemented")
-	public void testConstructorCall_0() throws Exception {
-		super.testConstructorCall_0();
-	}
-	
-	@Override
-	@Test @Ignore("TODO To be implemented")
-	public void testConstructorCall_2() throws Exception {
-		super.testConstructorCall_2();
-	}
-	
-	@Override
-	@Test @Ignore("TODO To be implemented")
-	public void testConstructorCall_3() throws Exception {
-		super.testConstructorCall_3();
-	}
-	
-	@Override
-	@Test @Ignore("TODO To be implemented")
 	public void testAssignmentToStaticField() throws Exception {
 		super.testAssignmentToStaticField();
 	}
@@ -49,12 +31,6 @@ public class FeatureCallValidationTest2 extends FeatureCallValidationTest {
 	@Test @Ignore("TODO To be implemented")
 	public void testField_0() throws Exception {
 		super.testField_0();
-	}
-	
-	@Override
-	@Test @Ignore("TODO To be implemented")
-	public void testField_1() throws Exception {
-		super.testField_1();
 	}
 	
 	@Override
@@ -77,42 +53,6 @@ public class FeatureCallValidationTest2 extends FeatureCallValidationTest {
 	@Test @Ignore("TODO To be implemented")
 	public void testOperationMemberFeatureCall_0() throws Exception {
 		super.testOperationMemberFeatureCall_0();
-	}
-
-	@Override
-	@Test @Ignore("TODO To be implemented")
-	public void testOperationMemberFeatureCall_1() throws Exception {
-		super.testOperationMemberFeatureCall_1();
-	}
-
-	@Override
-	@Test @Ignore("TODO To be implemented")
-	public void testOperationMemberFeatureCall_2() throws Exception {
-		super.testOperationMemberFeatureCall_2();
-	}
-
-	@Override
-	@Test @Ignore("TODO To be implemented")
-	public void testOperationFeatureCall_1() throws Exception {
-		super.testOperationFeatureCall_1();
-	}
-
-	@Override
-	@Test @Ignore("TODO To be implemented")
-	public void testOperationFeatureCall_2() throws Exception {
-		super.testOperationFeatureCall_2();
-	}
-
-	@Override
-	@Test @Ignore("TODO To be implemented")
-	public void testOperationFeatureCall_5() throws Exception {
-		super.testOperationFeatureCall_5();
-	}
-
-	@Override
-	@Test @Ignore("TODO To be implemented")
-	public void testOperationFeatureCall_6() throws Exception {
-		super.testOperationFeatureCall_6();
 	}
 
 	@Override

@@ -29,6 +29,7 @@ import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.JvmTypeParameterDeclarator;
 import org.eclipse.xtext.common.types.JvmTypeReference;
+import org.eclipse.xtext.diagnostics.AbstractDiagnostic;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.XClosure;
 import org.eclipse.xtext.xbase.XConstructorCall;
@@ -111,6 +112,7 @@ public abstract class ResolvedTypes implements IResolvedTypes {
 
 	private final DefaultReentrantTypeResolver resolver;
 	
+	private Set<AbstractDiagnostic> diagnostics;
 	private Map<JvmIdentifiableElement, LightweightTypeReference> types;
 	private Map<JvmIdentifiableElement, LightweightTypeReference> reassignedTypes;
 	private Multimap<XExpression, TypeData> expressionTypes;
@@ -145,8 +147,17 @@ public abstract class ResolvedTypes implements IResolvedTypes {
 		return resolver.getServices();
 	}
 
-	public List<Diagnostic> getQueuedDiagnostics() {
-		throw new UnsupportedOperationException("TODO implement me");
+	public Collection<AbstractDiagnostic> getQueuedDiagnostics() {
+		if (diagnostics == null)
+			return Collections.emptyList();
+		return diagnostics;
+	}
+	
+	protected void addDiagnostic(AbstractDiagnostic diagnostic) {
+		if (diagnostics == null) {
+			diagnostics = Sets.newLinkedHashSet();
+		}
+		diagnostics.add(diagnostic);
 	}
 
 	@Nullable

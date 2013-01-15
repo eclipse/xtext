@@ -13,12 +13,12 @@ import java.util.EnumSet;
 import java.util.List;
 import java.util.Map;
 
-import org.eclipse.emf.common.util.Diagnostic;
 import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmMember;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
+import org.eclipse.xtext.diagnostics.AbstractDiagnostic;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.XConstructorCall;
 import org.eclipse.xtext.xbase.XExpression;
@@ -75,8 +75,16 @@ public class StackedResolvedTypes extends ResolvedTypes {
 		mergeExpressionTypesIntoParent(parent);
 		mergeTypesIntoParent(parent);
 		mergeLinkingCandidatesIntoParent(parent);
+		mergeQueuedDiagnostics(parent);
 	}
 	
+	protected void mergeQueuedDiagnostics(ResolvedTypes parent) {
+		Collection<AbstractDiagnostic> diagnostics = super.getQueuedDiagnostics();
+		for(AbstractDiagnostic diagnostic: diagnostics) {
+			parent.addDiagnostic(diagnostic);
+		}
+	}
+
 	protected void mergeExpressionTypesIntoParent(ResolvedTypes parent) {
 		for(Map.Entry<XExpression, Collection<TypeData>> entry: basicGetExpressionTypes().asMap().entrySet()) {
 			for(TypeData typeData: entry.getValue()) {
@@ -232,8 +240,8 @@ public class StackedResolvedTypes extends ResolvedTypes {
 	}
 	
 	@Override
-	public List<Diagnostic> getQueuedDiagnostics() {
-		List<Diagnostic> result = Lists.newArrayList(super.getQueuedDiagnostics());
+	public List<AbstractDiagnostic> getQueuedDiagnostics() {
+		List<AbstractDiagnostic> result = Lists.newArrayList(super.getQueuedDiagnostics());
 		result.addAll(parent.getQueuedDiagnostics());
 		return result;
 	}
