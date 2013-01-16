@@ -27,14 +27,12 @@ abstract class AbstractTypeResolverTest<Reference> extends AbstractXbaseTestCase
 	
 	@BeforeClass
 	def static void createSeenExpressionsSet() {
-	    XbaseNewTypeSystemInjectorProvider$ClasspathTypeProviderFactoryWithoutAnnotationValues::skipAnnotationValues
 		seenExpressions = newHashSet
 	}
 	
 	@AfterClass
 	def static void discardSeenExpressions() {
 		seenExpressions = null
-		XbaseNewTypeSystemInjectorProvider$ClasspathTypeProviderFactoryWithoutAnnotationValues::readAnnotationValues
 	}
 	
 	override protected expression(CharSequence expression, boolean resolve) throws Exception {
