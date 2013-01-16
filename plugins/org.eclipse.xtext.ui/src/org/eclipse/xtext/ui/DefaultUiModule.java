@@ -31,6 +31,7 @@ import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.eclipse.ui.views.contentoutline.IContentOutlinePage;
 import org.eclipse.xtext.formatting.IIndentationInformation;
 import org.eclipse.xtext.formatting.IWhitespaceInformationProvider;
+import org.eclipse.xtext.generator.trace.ITraceURIConverter;
 import org.eclipse.xtext.parser.IEncodingProvider;
 import org.eclipse.xtext.preferences.IPreferenceValuesProvider;
 import org.eclipse.xtext.resource.IExternalContentSupport;
@@ -91,6 +92,7 @@ import org.eclipse.xtext.ui.editor.templates.XtextTemplateContextTypeRegistry;
 import org.eclipse.xtext.ui.editor.templates.XtextTemplateStore;
 import org.eclipse.xtext.ui.editor.toggleComments.DefaultSingleLineCommentHelper;
 import org.eclipse.xtext.ui.editor.toggleComments.ISingleLineCommentHelper;
+import org.eclipse.xtext.ui.generator.trace.DefaultUITraceURIConverter;
 import org.eclipse.xtext.ui.label.DefaultDescriptionLabelProvider;
 import org.eclipse.xtext.ui.label.DefaultEObjectLabelProvider;
 import org.eclipse.xtext.ui.label.InjectableAdapterFactoryLabelProvider;
@@ -369,6 +371,13 @@ public class DefaultUiModule extends AbstractGenericModule {
 	 */
 	public Class<? extends IPreferenceValuesProvider> bindIPreferenceValuesProvider() {
 		return EclipsePreferencesProvider.class;
+	}
+	
+	/**
+	 * @since 2.4
+	 */
+	public Class<? extends ITraceURIConverter> bindITraceURIConverter() {
+		return DefaultUITraceURIConverter.class;
 	}
 }
 
