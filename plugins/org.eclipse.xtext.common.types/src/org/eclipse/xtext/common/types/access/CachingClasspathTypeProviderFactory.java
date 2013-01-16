@@ -34,7 +34,7 @@ public class CachingClasspathTypeProviderFactory extends ClasspathTypeProviderFa
 	
 	@Override
 	protected ClasspathTypeProvider createClasspathTypeProvider(ResourceSet resourceSet) {
-		return new CachingClasspathTypeProvider(getClassLoader(), resourceSet, getIndexedJvmTypeAccess(), reusedFactory);
+		return new CachingClasspathTypeProvider(getClassLoader(resourceSet), resourceSet, getIndexedJvmTypeAccess(), reusedFactory);
 	}
 	
 }
