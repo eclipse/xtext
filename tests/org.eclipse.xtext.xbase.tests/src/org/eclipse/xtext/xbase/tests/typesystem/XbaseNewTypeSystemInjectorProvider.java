@@ -3,16 +3,8 @@
 */
 package org.eclipse.xtext.xbase.tests.typesystem;
 
-import java.lang.reflect.AnnotatedElement;
-
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
-import org.eclipse.emf.ecore.resource.ResourceSet;
-import org.eclipse.xtext.common.types.JvmAnnotationTarget;
-import org.eclipse.xtext.common.types.access.CachingClasspathTypeProviderFactory;
-import org.eclipse.xtext.common.types.access.ClasspathTypeProviderFactory;
-import org.eclipse.xtext.common.types.access.impl.ClasspathTypeProvider;
-import org.eclipse.xtext.common.types.access.impl.DeclaredTypeFactory;
 import org.eclipse.xtext.common.types.util.FeatureOverridesService;
 import org.eclipse.xtext.common.types.util.TypeArgumentContextProvider;
 import org.eclipse.xtext.common.types.util.VisibilityService;
@@ -36,12 +28,11 @@ import org.eclipse.xtext.xbase.typesystem.legacy.LegacyTypeArgumentContextProvid
 import org.eclipse.xtext.xbase.typesystem.legacy.LegacyVisibilityService;
 import org.eclipse.xtext.xbase.typesystem.legacy.XbaseBatchTypeProvider;
 import org.eclipse.xtext.xbase.typing.XbaseTypeProvider;
-import org.eclipse.xtext.xbase.validation.XbaseJavaValidator2;
 import org.eclipse.xtext.xbase.validation.XbaseJavaValidator;
+import org.eclipse.xtext.xbase.validation.XbaseJavaValidator2;
 
 import com.google.inject.Binder;
 import com.google.inject.Guice;
-import com.google.inject.Inject;
 import com.google.inject.Injector;
 
 /**
@@ -129,41 +120,6 @@ public class XbaseNewTypeSystemInjectorProvider extends XbaseInjectorProvider {
 		@Override
 		public IScope getScope(EObject context, EReference reference) {
 			throw new UnsupportedOperationException();
-		}
-	}
-
-	public static class ClasspathTypeProviderFactoryWithoutAnnotationValues extends ClasspathTypeProviderFactory {
-
-		private static boolean skipAnnotationValues = false;
-		
-		public static void skipAnnotationValues() {
-			skipAnnotationValues = true;	
-		}
-		
-		public static void readAnnotationValues() {
-			skipAnnotationValues = false;	
-		}
-		
-		@Inject
-		public ClasspathTypeProviderFactoryWithoutAnnotationValues(ClassLoader classLoader) {
-			super(classLoader);
-		}
-
-		@Override
-		protected ClasspathTypeProvider createClasspathTypeProvider(ResourceSet resourceSet) {
-			return new ClasspathTypeProvider(getClassLoader(resourceSet), resourceSet, getIndexedJvmTypeAccess()) {
-				@Override
-				protected DeclaredTypeFactory createDeclaredTypeFactory() {
-					return new DeclaredTypeFactory(getClassURIHelper()) {
-						@Override
-						protected void createAnnotationValues(AnnotatedElement annotated, JvmAnnotationTarget result) {
-							if (skipAnnotationValues)
-								return;
-							super.createAnnotationValues(annotated, result);
-						}
-					};
-				}
-			};
 		}
 	}
 
