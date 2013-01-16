@@ -68,8 +68,9 @@ public abstract class AbstractUnresolvableFeature implements ILinkingCandidate, 
 		state.getStackedResolvedTypes().mergeIntoParent();
 	}
 	
-	public void validate(IAcceptor<? super AbstractDiagnostic> result) {
+	public boolean validate(IAcceptor<? super AbstractDiagnostic> result) {
 		// nothing to do
+		return true;
 	}
 
 	protected void computeArgumentTypes() {

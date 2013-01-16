@@ -27,7 +27,7 @@ public interface ILinkingCandidate {
 	
 	void resolveLinkingProxy();
 	
-	void validate(IAcceptor<? super AbstractDiagnostic> result);
+	boolean validate(IAcceptor<? super AbstractDiagnostic> result);
 	
 	boolean isPreferredOver(ILinkingCandidate other);
 	

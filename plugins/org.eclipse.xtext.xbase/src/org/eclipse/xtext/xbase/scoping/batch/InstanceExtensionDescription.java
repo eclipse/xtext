@@ -12,7 +12,7 @@ import java.util.Map;
 import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.EcoreUtil2;
-import org.eclipse.xtext.common.types.JvmIdentifiableElement;
+import org.eclipse.xtext.common.types.JvmFeature;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.xbase.XExpression;
@@ -29,7 +29,7 @@ public class InstanceExtensionDescription extends InstanceFeatureDescription {
 	private final LightweightTypeReference firstArgumentType;
 	private final Map<JvmTypeParameter, LightweightMergedBoundTypeArgument> argumentTypeParameterMapping;
 
-	protected InstanceExtensionDescription(QualifiedName qualifiedName, JvmIdentifiableElement feature,
+	protected InstanceExtensionDescription(QualifiedName qualifiedName, JvmFeature feature,
 			XExpression receiver, LightweightTypeReference receiverType,
 			Map<JvmTypeParameter, LightweightMergedBoundTypeArgument> typeParameterMapping,
 			XExpression firstArgument, LightweightTypeReference firstArgumentType,

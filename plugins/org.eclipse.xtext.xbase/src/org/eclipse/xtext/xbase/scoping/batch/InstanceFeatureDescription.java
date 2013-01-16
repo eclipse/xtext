@@ -11,7 +11,7 @@ import java.util.Map;
 
 import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.xtext.common.types.JvmIdentifiableElement;
+import org.eclipse.xtext.common.types.JvmFeature;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.xbase.XExpression;
@@ -29,7 +29,7 @@ public class InstanceFeatureDescription extends BucketedEObjectDescription {
 	private final Map<JvmTypeParameter, LightweightMergedBoundTypeArgument> typeParameterMapping;
 
 	protected InstanceFeatureDescription(
-			QualifiedName qualifiedName, JvmIdentifiableElement feature,
+			QualifiedName qualifiedName, JvmFeature feature,
 			XExpression receiver, LightweightTypeReference receiverType, Map<JvmTypeParameter, LightweightMergedBoundTypeArgument> typeParameterMapping, 
 			int bucketId, boolean visible) {
 		super(qualifiedName, feature, bucketId, visible);
@@ -53,6 +53,11 @@ public class InstanceFeatureDescription extends BucketedEObjectDescription {
 	@Override
 	public Map<JvmTypeParameter, LightweightMergedBoundTypeArgument> getSyntacticReceiverTypeParameterMapping() {
 		return typeParameterMapping;
+	}
+	
+	@Override
+	public boolean isStatic() {
+		return ((JvmFeature) getElementOrProxy()).isStatic();
 	}
 
 }

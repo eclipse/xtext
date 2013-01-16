@@ -55,8 +55,8 @@ public abstract class AbstractImplicitFeature implements IFeatureLinkingCandidat
 		return implicit.getFeature();
 	}
 	
-	public void validate(IAcceptor<? super AbstractDiagnostic> result) {
-		
+	public boolean validate(IAcceptor<? super AbstractDiagnostic> result) {
+		return true;
 	}
 
 	public List<LightweightTypeReference> getTypeArguments() {

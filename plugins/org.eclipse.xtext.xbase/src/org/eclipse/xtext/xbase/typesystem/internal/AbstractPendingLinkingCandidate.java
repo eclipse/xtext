@@ -58,7 +58,7 @@ public abstract class AbstractPendingLinkingCandidate<Expression extends XExpres
 		return typeParameterMapping;
 	}
 	
-	public void validate(IAcceptor<? super AbstractDiagnostic> result) {
+	public boolean validate(IAcceptor<? super AbstractDiagnostic> result) {
 		// TODO improve messages
 		if (!isVisible()) {
 			String message = "Feature " + getFeature().getSimpleName() + " is not visible";
@@ -69,6 +69,7 @@ public abstract class AbstractPendingLinkingCandidate<Expression extends XExpres
 					getExpression(), 
 					XbasePackage.Literals.XABSTRACT_FEATURE_CALL__FEATURE, -1, null);
 			result.accept(diagnostic);
+			return false;
 		} else if (getArityMismatch() != 0) {
 			String message = "Invalid number of arguments. Expected " + getFeature().getSimpleName();
 			AbstractDiagnostic diagnostic = new EObjectDiagnosticImpl(
@@ -78,6 +79,7 @@ public abstract class AbstractPendingLinkingCandidate<Expression extends XExpres
 					getExpression(), 
 					XbasePackage.Literals.XABSTRACT_FEATURE_CALL__FEATURE, -1, null);
 			result.accept(diagnostic);
+			return false;
 		} else if (getTypeArityMismatch() != 0) {
 			String message = "Invalid number of type arguments. Expected " + getFeature().getSimpleName();
 			AbstractDiagnostic diagnostic = new EObjectDiagnosticImpl(
@@ -87,7 +89,9 @@ public abstract class AbstractPendingLinkingCandidate<Expression extends XExpres
 					getExpression(), 
 					XbasePackage.Literals.XABSTRACT_FEATURE_CALL__FEATURE, -1, null);
 			result.accept(diagnostic);
+			return false;
 		}
+		return true;
 	}
 
 	@Override
