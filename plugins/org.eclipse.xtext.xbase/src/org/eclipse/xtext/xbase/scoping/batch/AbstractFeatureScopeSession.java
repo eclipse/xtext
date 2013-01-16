@@ -56,8 +56,8 @@ public abstract class AbstractFeatureScopeSession implements IFeatureScopeSessio
 		}
 	}
 	
-	public IFeatureScopeSession addTypesToStaticScope(List<JvmType> staticFeatureProviders,
-			List<JvmType> extensionProviders) {
+	public IFeatureScopeSession addTypesToStaticScope(List<? extends JvmType> staticFeatureProviders,
+			List<? extends JvmType> extensionProviders) {
 		if (staticFeatureProviders.isEmpty() && extensionProviders.isEmpty())
 			return this;
 		AbstractNestedFeatureScopeSession result = new FeatureScopeSessionWithStaticTypes(this, staticFeatureProviders, extensionProviders);

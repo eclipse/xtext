@@ -79,6 +79,9 @@ public abstract class BucketedEObjectDescription extends EObjectDescription impl
 			if (getImplicitFirstArgument() != null) {
 				builder.append(":implicitFirstArgument");
 			}
+			if (getImplicitReceiver() != null) {
+				builder.append(":implicitReceiver");
+			}
 			if (isVisible()) {
 				builder.append('+');
 			} else {

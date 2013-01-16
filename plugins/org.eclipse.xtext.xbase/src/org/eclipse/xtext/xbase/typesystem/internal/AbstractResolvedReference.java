@@ -48,8 +48,9 @@ public abstract class AbstractResolvedReference<Expression extends XExpression> 
 		// nothing to do
 	}
 	
-	public void validate(IAcceptor<? super AbstractDiagnostic> result) {
+	public boolean validate(IAcceptor<? super AbstractDiagnostic> result) {
 		// nothing to do
+		return true;
 	}
 	
 	@Override

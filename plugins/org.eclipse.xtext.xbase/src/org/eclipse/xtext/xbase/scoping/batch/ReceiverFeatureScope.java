@@ -76,13 +76,11 @@ public class ReceiverFeatureScope extends AbstractSessionBasedScope {
 	}
 
 	protected IEObjectDescription createDescription(QualifiedName name, JvmFeature feature, TypeBucket bucket) {
-		// TODO handle static features
 		if (implicit) {
-			if (feature.isStatic())
-				return new StaticFeatureDescription(name, feature, bucket.getId(), getSession().isVisible(feature));
 			return new InstanceFeatureDescriptionWithImplicitReceiver(name, feature, receiver, receiverType, getReceiverTypeParameterMapping(), bucket.getId(), getSession().isVisible(feature));
+		} else {
+			return new InstanceFeatureDescription(name, feature, receiver, receiverType, getReceiverTypeParameterMapping(), bucket.getId(), getSession().isVisible(feature));
 		}
-		return new InstanceFeatureDescription(name, feature, receiver, receiverType, getReceiverTypeParameterMapping(), bucket.getId(), getSession().isVisible(feature));
 	}
 
 	protected Map<JvmTypeParameter, LightweightMergedBoundTypeArgument> getReceiverTypeParameterMapping() {

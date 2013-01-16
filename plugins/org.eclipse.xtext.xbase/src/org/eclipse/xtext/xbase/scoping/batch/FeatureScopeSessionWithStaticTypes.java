@@ -20,12 +20,12 @@ import com.google.common.collect.Lists;
 @NonNullByDefault
 public class FeatureScopeSessionWithStaticTypes extends AbstractNestedFeatureScopeSession {
 
-	private final List<JvmType> staticFeatureProviders;
-	private final List<JvmType> extensionProviders;
+	private final List<? extends JvmType> staticFeatureProviders;
+	private final List<? extends JvmType> extensionProviders;
 
 	public FeatureScopeSessionWithStaticTypes(AbstractFeatureScopeSession featureScopeSession,
-			List<JvmType> staticFeatureProviders,
-			List<JvmType> extensionProviders) {
+			List<? extends JvmType> staticFeatureProviders,
+			List<? extends JvmType> extensionProviders) {
 		super(featureScopeSession);
 		this.staticFeatureProviders = staticFeatureProviders;
 		this.extensionProviders = extensionProviders;
@@ -41,7 +41,7 @@ public class FeatureScopeSessionWithStaticTypes extends AbstractNestedFeatureSco
 		return concatTypeBuckets(extensionProviders, super.getStaticallyImportedExtensionTypes());
 	}
 
-	protected List<TypeBucket> concatTypeBuckets(List<JvmType> types, List<TypeBucket> parentResult) {
+	protected List<TypeBucket> concatTypeBuckets(List<? extends JvmType> types, List<TypeBucket> parentResult) {
 		if (types.isEmpty()) {
 			return parentResult;
 		}

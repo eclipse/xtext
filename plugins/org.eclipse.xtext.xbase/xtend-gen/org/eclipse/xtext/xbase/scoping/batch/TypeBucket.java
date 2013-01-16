@@ -29,13 +29,13 @@ public class TypeBucket {
     return this._id;
   }
   
-  private final List<JvmType> _types;
+  private final List<? extends JvmType> _types;
   
-  public List<JvmType> getTypes() {
+  public List<? extends JvmType> getTypes() {
     return this._types;
   }
   
-  public TypeBucket(final int id, final List<JvmType> types) {
+  public TypeBucket(final int id, final List<? extends JvmType> types) {
     super();
     this._id = id;
     this._types = types;

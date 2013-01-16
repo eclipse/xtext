@@ -30,7 +30,7 @@ public class SynonymTypeBucket extends TypeBucket {
     return this._hints;
   }
   
-  public SynonymTypeBucket(final int id, final List<JvmType> types, final Set<ConformanceHint> hints) {
+  public SynonymTypeBucket(final int id, final List<? extends JvmType> types, final Set<ConformanceHint> hints) {
     super(id, types);
     this._hints = hints;
   }

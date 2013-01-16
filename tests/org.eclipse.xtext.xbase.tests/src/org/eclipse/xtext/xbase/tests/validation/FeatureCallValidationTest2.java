@@ -7,10 +7,14 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.tests.validation;
 
+import static org.eclipse.xtext.xbase.XbasePackage.Literals.*;
+import static org.eclipse.xtext.xbase.validation.IssueCodes.*;
+
 import org.eclipse.xtext.junit4.InjectWith;
 import org.eclipse.xtext.junit4.XtextRunner;
+import org.eclipse.xtext.xbase.XBlockExpression;
+import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.tests.typesystem.XbaseNewTypeSystemInjectorProvider;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -22,79 +26,56 @@ import org.junit.runner.RunWith;
 public class FeatureCallValidationTest2 extends FeatureCallValidationTest {
 
 	@Override
-	@Test @Ignore("TODO To be implemented")
-	public void testAssignmentToStaticField() throws Exception {
-		super.testAssignmentToStaticField();
-	}
-	
-	@Override
-	@Test @Ignore("TODO To be implemented")
-	public void testField_0() throws Exception {
-		super.testField_0();
-	}
-	
-	@Override
-	@Test @Ignore("TODO To be implemented")
-	public void testField_2() throws Exception {
-		super.testField_2();
-	}
-	@Override
-	@Test @Ignore("TODO To be implemented")
-	public void testField_3() throws Exception {
-		super.testField_3();
-	}
-	@Override
-	@Test @Ignore("TODO To be implemented")
-	public void testField_4() throws Exception {
-		super.testField_4();
-	}
-
-	@Override
-	@Test @Ignore("TODO To be implemented")
-	public void testOperationMemberFeatureCall_0() throws Exception {
-		super.testOperationMemberFeatureCall_0();
-	}
-
-	@Override
-	@Test @Ignore("TODO To be implemented")
+	@Test
 	public void testOperationFeatureCall_13() throws Exception {
-		super.testOperationFeatureCall_13();
+		XExpression expression = expression("{ var Iterable<String> x = <String[]>newArrayList('a,b'.split(',')).flatten }");
+		helper.assertError(expression, XMEMBER_FEATURE_CALL, INCOMPATIBLE_TYPES, "receiver", 
+				"Iterable<? extends Iterable<? extends String>>", 
+				"Iterable<? extends String>[]", 
+				"ArrayList<String[]>");
 	}
 
 	@Override
-	@Test @Ignore("TODO To be implemented")
+	@Test
 	public void testOperationFeatureCall_14() throws Exception {
-		super.testOperationFeatureCall_14();
+		XExpression expression = expression("{ var Iterable<String> x = newArrayList('a,b'.split(','), 'a,b'.split(',')).flatten }");
+		helper.assertError(expression, XMEMBER_FEATURE_CALL, INCOMPATIBLE_TYPES, "receiver", 
+				"Iterable<? extends Iterable<? extends String>>", 
+				"Iterable<? extends String>[]", 
+				"ArrayList<String[]>");
 	}
-
+	
 	@Override
-	@Test @Ignore("TODO To be implemented")
-	public void testStaticFeatureAccess_1() throws Exception {
-		super.testStaticFeatureAccess_1();
-	}
-
-	@Override
-	@Test @Ignore("TODO To be implemented")
-	public void testStaticFeatureAccess_2() throws Exception {
-		super.testStaticFeatureAccess_2();
-	}
-
-	@Override
-	@Test @Ignore("TODO To be implemented")
+	@Test
 	public void testBug_350934_01() throws Exception {
-		super.testBug_350934_01();
+		XExpression expression = expression("'3'>3");
+		helper.assertError(expression, XSTRING_LITERAL, INCOMPATIBLE_TYPES);
 	}
 	
 	@Override
-	@Test @Ignore("TODO To be implemented")
+	@Test
 	public void testBug_350934_02() throws Exception {
-		super.testBug_350934_02();
+		XExpression expression = expression("'true'<false");
+		helper.assertError(expression, XSTRING_LITERAL, INCOMPATIBLE_TYPES);
 	}
 	
 	@Override
-	@Test @Ignore("TODO To be implemented")
+	@Test
 	public void testBug_350934_03() throws Exception {
-		super.testBug_350934_03();
+		XExpression expression = expression("true>=0"); 
+		helper.assertError(expression, XBOOLEAN_LITERAL, INCOMPATIBLE_TYPES);
+	}
+	
+	@Test
+	public void testBug_350934_04() throws Exception {
+		XExpression expression = expression("{ val z = 1bd val y = 2bi val abc = z * y }"); 
+		helper.assertError(expression, XFEATURE_CALL, INCOMPATIBLE_TYPES, "BigInteger", "BigDecimal");
+	}
+	
+	@Override
+	@Test public void testOperationFeatureCall_0() throws Exception {
+		XExpression expression = expression("{ var this = new testdata.Methods() staticMethod() }");
+		helper.assertError(((XBlockExpression) expression).getExpressions().get(1), XFEATURE_CALL, INSTANCE_ACCESS_TO_STATIC_MEMBER);
 	}
 	
 }

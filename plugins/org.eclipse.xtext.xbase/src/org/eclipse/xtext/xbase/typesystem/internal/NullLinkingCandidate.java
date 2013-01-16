@@ -46,8 +46,9 @@ public class NullLinkingCandidate implements IFeatureLinkingCandidate, IConstruc
 		// no op
 	}
 	
-	public void validate(IAcceptor<? super AbstractDiagnostic> result) {
+	public boolean validate(IAcceptor<? super AbstractDiagnostic> result) {
 		// no op
+		return true;
 	}
 
 	public boolean isPreferredOver(ILinkingCandidate other) {

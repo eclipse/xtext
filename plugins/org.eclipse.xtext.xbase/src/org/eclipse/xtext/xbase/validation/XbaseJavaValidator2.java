@@ -20,7 +20,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
@@ -175,8 +174,8 @@ public class XbaseJavaValidator2 extends AbstractXbaseJavaValidator {
 			XbasePackage.Literals.XFEATURE_CALL__FEATURE_CALL_ARGUMENTS,
 			//TODO these references might point to the receiver, which is the basis of why a certain feature was picked in scoping.
 			// Should be checked in case of extension methods only (i.e. when they are arguments)
-			//			XbasePackage.Literals.XBINARY_OPERATION__LEFT_OPERAND,
-			//			XbasePackage.Literals.XUNARY_OPERATION__OPERAND
+			XbasePackage.Literals.XBINARY_OPERATION__LEFT_OPERAND,
+			XbasePackage.Literals.XUNARY_OPERATION__OPERAND,
 			XbasePackage.Literals.XASSIGNMENT__VALUE, 
 			XbasePackage.Literals.XBINARY_OPERATION__RIGHT_OPERAND,
 			XbasePackage.Literals.XFOR_LOOP_EXPRESSION__FOR_EXPRESSION);
@@ -676,7 +675,7 @@ public class XbaseJavaValidator2 extends AbstractXbaseJavaValidator {
 	public void checkTypes(XCatchClause catchClause) {
 		LightweightTypeReference parameterType = getActualType(catchClause, catchClause.getDeclaredParam());
 		if (parameterType != null && !parameterType.isSubtypeOf(Throwable.class)) {
-			error("No exception of type " + parameterType.getIdentifier()
+			error("No exception of type " + parameterType.getSimpleName()
 					+ " can be thrown; an exception type must be a subclass of Throwable",
 					catchClause.getDeclaredParam(), TypesPackage.Literals.JVM_FORMAL_PARAMETER__PARAMETER_TYPE,
 					ValidationMessageAcceptor.INSIGNIFICANT_INDEX, INCOMPATIBLE_TYPES);
@@ -1211,7 +1210,7 @@ public class XbaseJavaValidator2 extends AbstractXbaseJavaValidator {
 				thrownException)) {
 			String expressionTypeURI = EcoreUtil.getURI(thrownException.getType()).toString();
 			String childURI = EcoreUtil.getURI(childThrowingException).toString();
-			error("Unhandled exception type " + thrownException.getIdentifier(), childThrowingException, null,
+			error("Unhandled exception type " + thrownException.getSimpleName(), childThrowingException, null,
 					ValidationMessageAcceptor.INSIGNIFICANT_INDEX, UNHANDLED_EXCEPTION, expressionTypeURI, childURI);
 		}
 	}
@@ -1390,7 +1389,7 @@ public class XbaseJavaValidator2 extends AbstractXbaseJavaValidator {
 	}
 
 	protected String canonicalName(LightweightTypeReference typeRef) {
-		return (typeRef == null) ? "<null>" : typeRef.getIdentifier();
+		return (typeRef == null) ? "<null>" : typeRef.getSimpleName();
 	}
 
 	protected boolean isInterface(JvmType type) {

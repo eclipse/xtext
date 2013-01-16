@@ -315,6 +315,11 @@ public class DispatchAndExtensionAwareReentrantTypeResolver extends LogicalConta
 		}
 		super._doPrepare(resolvedTypes, featureScopeSession, field, resolvedTypesByContext);
 	}
+	
+	@Override
+	protected IFeatureScopeSession addThisTypeToStaticScope(IFeatureScopeSession session, JvmDeclaredType type) {
+		return session.addTypesToStaticScope(Collections.singletonList(type), Collections.singletonList(type));
+	}
 
 	protected IFeatureScopeSession addExtensionsToMemberSession(ResolvedTypes resolvedTypes,
 			IFeatureScopeSession featureScopeSession, JvmDeclaredType type) {

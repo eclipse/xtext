@@ -38,8 +38,9 @@ public class AppliedFeatureLinkingCandidate implements IFeatureLinkingCandidate 
 		// nothing to do
 	}
 	
-	public void validate(IAcceptor<? super AbstractDiagnostic> result) {
+	public boolean validate(IAcceptor<? super AbstractDiagnostic> result) {
 		// nothing to do
+		return true;
 	}
 
 	public boolean isPreferredOver(ILinkingCandidate other) {

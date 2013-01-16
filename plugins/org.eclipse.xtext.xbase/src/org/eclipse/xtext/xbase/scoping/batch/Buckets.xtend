@@ -28,7 +28,7 @@ import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference
 @Data
 class TypeBucket {
 	int id
-	List<JvmType> types
+	List<? extends JvmType> types
 }
 
 /**

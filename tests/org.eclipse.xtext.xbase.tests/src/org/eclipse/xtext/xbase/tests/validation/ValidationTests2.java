@@ -72,6 +72,14 @@ public class ValidationTests2 extends ValidationTests {
 	public void testVariableShadowing_07() throws Exception {
 		super.testVariableShadowing_07();
 	}
+	
+	@Override
+	@Test
+	public void testInstanceOf_0() throws Exception {
+		XExpression expression = expression("'foo' instanceof String");
+		helper.assertWarning(expression, XINSTANCE_OF_EXPRESSION, OBSOLETE_INSTANCEOF, "already", "String");
+		helper.assertNoError(expression, INVALID_INSTANCEOF);
+	}
 
 	@Override
 	@Test

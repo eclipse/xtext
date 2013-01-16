@@ -15,13 +15,23 @@ import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.common.types.JvmConstructor;
 import org.eclipse.xtext.common.types.JvmExecutable;
+import org.eclipse.xtext.common.types.JvmField;
+import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
+import org.eclipse.xtext.diagnostics.AbstractDiagnostic;
+import org.eclipse.xtext.diagnostics.Severity;
+import org.eclipse.xtext.util.IAcceptor;
+import org.eclipse.xtext.validation.EObjectDiagnosticImpl;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.XAssignment;
+import org.eclipse.xtext.xbase.XBinaryOperation;
 import org.eclipse.xtext.xbase.XExpression;
+import org.eclipse.xtext.xbase.XFeatureCall;
+import org.eclipse.xtext.xbase.XMemberFeatureCall;
+import org.eclipse.xtext.xbase.XVariableDeclaration;
 import org.eclipse.xtext.xbase.XbasePackage;
 import org.eclipse.xtext.xbase.scoping.batch.IIdentifiableElementDescription;
 import org.eclipse.xtext.xbase.typesystem.computation.IFeatureLinkingCandidate;
@@ -32,6 +42,7 @@ import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.ParameterizedTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.WildcardTypeReference;
 import org.eclipse.xtext.xbase.typesystem.util.DeferredTypeParameterHintCollector;
+import org.eclipse.xtext.xbase.validation.IssueCodes;
 
 import com.google.common.collect.Lists;
 
@@ -72,6 +83,85 @@ public class FeatureLinkingCandidate extends AbstractPendingLinkingCandidate<XAb
 		}
 		return syntacticArguments;
 	}
+	
+	@Override
+	public boolean validate(IAcceptor<? super AbstractDiagnostic> result) {
+		if (isStatic() && !isExtension() && isInstanceAccessSyntax()) {
+			String message = "Instance access to static member " + getFeature().getSimpleName();
+			AbstractDiagnostic diagnostic = new EObjectDiagnosticImpl(Severity.ERROR,
+					IssueCodes.INSTANCE_ACCESS_TO_STATIC_MEMBER, message, getExpression(),
+					XbasePackage.Literals.XABSTRACT_FEATURE_CALL__FEATURE, -1, null);
+			result.accept(diagnostic);
+			return false;
+		} else if (!isStatic() && isStaticAccessSyntax()) {
+			String message = "Static access to instance member " + getFeature().getSimpleName();
+			AbstractDiagnostic diagnostic = new EObjectDiagnosticImpl(Severity.ERROR,
+					IssueCodes.STATIC_ACCESS_TO_INSTANCE_MEMBER, message, getExpression(),
+					XbasePackage.Literals.XABSTRACT_FEATURE_CALL__FEATURE, -1, null);
+			result.accept(diagnostic);
+			return false;
+		} else if (super.validate(result)) {
+			if (isExplicitOperationCallOrBuilderSyntax() && !(getFeature() instanceof JvmExecutable)) {
+				String typeName = getFeatureTypeName();
+				String code = IssueCodes.FIELD_ACCESS_WITH_PARENTHESES;
+				if (!(getFeature() instanceof JvmField)) {
+					code = IssueCodes.LOCAL_VAR_ACCESS_WITH_PARENTHESES;
+				}
+				String message = "Cannot access the " + typeName + " " + getFeature().getSimpleName() + " with parentheses";
+				AbstractDiagnostic diagnostic = new EObjectDiagnosticImpl(Severity.ERROR, code, message,
+						getExpression(), XbasePackage.Literals.XABSTRACT_FEATURE_CALL__FEATURE, -1, null);
+				result.accept(diagnostic);
+				return false;
+			}
+		}
+		return false;
+	}
+
+	protected boolean isExplicitOperationCallOrBuilderSyntax() {
+		XAbstractFeatureCall featureCall = getFeatureCall();
+		if (featureCall instanceof XBinaryOperation || featureCall instanceof XAssignment) {
+			return false;
+		}
+		return featureCall.isExplicitOperationCallOrBuilderSyntax();
+	}
+
+	protected String getFeatureTypeName() {
+		JvmIdentifiableElement feature = getFeature();
+		if (feature instanceof JvmFormalParameter) {
+			return "parameter";
+		}
+		if (feature instanceof XVariableDeclaration) {
+			return "local variable";
+		}
+		if (feature instanceof JvmField) {
+			return "field";
+		}
+		if (feature instanceof JvmOperation) {
+			return "method";
+		}
+		if (feature instanceof JvmConstructor) {
+			return "constructor";
+		}
+		throw new IllegalStateException();
+	}
+
+	protected boolean isStaticAccessSyntax() {
+		XAbstractFeatureCall featureCall = getFeatureCall();
+		if (featureCall instanceof XFeatureCall) {
+			return ((XFeatureCall) featureCall).getDeclaringType() != null;
+		}
+		return false;
+	}
+	
+	protected boolean isInstanceAccessSyntax() {
+		if (getImplicitReceiver() != null)
+			return true;
+		XAbstractFeatureCall featureCall = getFeatureCall();
+		if (featureCall instanceof XAssignment) {
+			return ((XAssignment) featureCall).getAssignable() != null;
+		}
+		return featureCall instanceof XMemberFeatureCall;
+	}
 
 	protected List<XExpression> createArgumentList(XExpression head, List<XExpression> tail) {
 		// TODO investigate in optimized List impls like HEAD, syntacticArguments
@@ -80,6 +170,15 @@ public class FeatureLinkingCandidate extends AbstractPendingLinkingCandidate<XAb
 		for(XExpression expression: tail) {
 			// addAll will convert the tail to an array, first
 			result.add(expression);
+		}
+		return result;
+	}
+	
+	@Override
+	public int getArityMismatch() {
+		int result = super.getArityMismatch();
+		if (isStatic() && getImplicitReceiver() != null) {
+			result++;
 		}
 		return result;
 	}

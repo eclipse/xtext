@@ -104,6 +104,12 @@ public class FeatureCallValidationTest extends AbstractXbaseTestCase {
 		helper.assertError(((XBlockExpression) expression).getExpressions().get(1), XFEATURE_CALL,
 				FIELD_ACCESS_WITH_PARENTHESES);
 	}
+	
+	@Test public void testField_5() throws Exception {
+		XExpression expression = expression("{ var it = new testdata.FieldAccess() staticField }");
+		helper.assertError(((XBlockExpression) expression).getExpressions().get(1), XFEATURE_CALL,
+				INSTANCE_ACCESS_TO_STATIC_MEMBER);
+	}
 
 	@Test public void testOperationMemberFeatureCall_0() throws Exception {
 		XExpression expression = expression("new testdata.Methods().staticMethod()");
