@@ -67,7 +67,9 @@ public class ProcessorInstanceForJvmTypeProvider {
             return _class.getClassLoader();
           }
         }
-        String _plus = ("Unsupported classloader context in resource set : " + classLoaderCtx);
+        Class<? extends Object> _class = classLoaderCtx==null?(Class<? extends Object>)null:classLoaderCtx.getClass();
+        String _name = _class.getName();
+        String _plus = ("Unsupported classloader context in resource set : " + _name);
         ProcessorInstanceForJvmTypeProvider.logger.error(_plus);
       }
     }

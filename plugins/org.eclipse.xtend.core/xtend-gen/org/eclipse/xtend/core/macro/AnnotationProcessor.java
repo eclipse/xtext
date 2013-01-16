@@ -22,6 +22,8 @@ import org.eclipse.xtend.lib.macro.declaration.MutableNamedElement;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.util.CancelIndicator;
 import org.eclipse.xtext.util.IAcceptor;
+import org.eclipse.xtext.util.internal.StopWatches;
+import org.eclipse.xtext.util.internal.StopWatches.StoppedTask;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.ListExtensions;
 
@@ -39,44 +41,68 @@ public class AnnotationProcessor {
    * gets called from Xtend compiler, during "model inference", i.e. translation of Xtend AST to Java AST
    */
   public Object indexingPhase(final ActiveAnnotationContext ctx, final IAcceptor<JvmDeclaredType> acceptor, final CancelIndicator monitor) {
-    Object _switchResult = null;
-    Object _processorInstance = ctx.getProcessorInstance();
-    final Object processor = _processorInstance;
-    boolean _matched = false;
-    if (!_matched) {
-      if (processor instanceof PreModifyProcessor) {
-        final PreModifyProcessor _preModifyProcessor = (PreModifyProcessor)processor;
-        _matched=true;
-        _switchResult = null;
+    Object _xblockexpression = null;
+    {
+      final StoppedTask task = StopWatches.forTask("[macros] indexingPhase");
+      task.start();
+      Object _xtrycatchfinallyexpression = null;
+      try {
+        Object _switchResult = null;
+        Object _processorInstance = ctx.getProcessorInstance();
+        final Object processor = _processorInstance;
+        boolean _matched = false;
+        if (!_matched) {
+          if (processor instanceof PreModifyProcessor) {
+            final PreModifyProcessor _preModifyProcessor = (PreModifyProcessor)processor;
+            _matched=true;
+            _switchResult = null;
+          }
+        }
+        _xtrycatchfinallyexpression = _switchResult;
+      } finally {
+        task.stop();
       }
+      _xblockexpression = (_xtrycatchfinallyexpression);
     }
-    return _switchResult;
+    return _xblockexpression;
   }
   
   public Object inferencePhase(final ActiveAnnotationContext ctx, final CancelIndicator monitor) {
-    Object _switchResult = null;
-    Object _processorInstance = ctx.getProcessorInstance();
-    final Object processor = _processorInstance;
-    boolean _matched = false;
-    if (!_matched) {
-      if (processor instanceof ModifyProcessor) {
-        final ModifyProcessor _modifyProcessor = (ModifyProcessor)processor;
-        _matched=true;
-        final ModifyContextImpl modifyCtx = this.modifyContextProvider.get();
-        CompilationUnitImpl _compilationUnit = ctx.getCompilationUnit();
-        modifyCtx.setUnit(_compilationUnit);
-        List<XtendAnnotationTarget> _annotatedSourceElements = ctx.getAnnotatedSourceElements();
-        final Function1<XtendAnnotationTarget,MutableNamedElement> _function = new Function1<XtendAnnotationTarget,MutableNamedElement>() {
-            public MutableNamedElement apply(final XtendAnnotationTarget it) {
-              CompilationUnitImpl _compilationUnit = ctx.getCompilationUnit();
-              final XtendMemberDeclarationImpl xtendMember = _compilationUnit.toXtendMemberDeclaration(((XtendMember) it));
-              return modifyCtx.getGeneratedElement(xtendMember);
-            }
-          };
-        List<MutableNamedElement> _map = ListExtensions.<XtendAnnotationTarget, MutableNamedElement>map(_annotatedSourceElements, _function);
-        _modifyProcessor.modify(_map, modifyCtx);
+    Object _xblockexpression = null;
+    {
+      final StoppedTask task = StopWatches.forTask("[macros] inferencePhase");
+      task.start();
+      Object _xtrycatchfinallyexpression = null;
+      try {
+        Object _switchResult = null;
+        Object _processorInstance = ctx.getProcessorInstance();
+        final Object processor = _processorInstance;
+        boolean _matched = false;
+        if (!_matched) {
+          if (processor instanceof ModifyProcessor) {
+            final ModifyProcessor _modifyProcessor = (ModifyProcessor)processor;
+            _matched=true;
+            final ModifyContextImpl modifyCtx = this.modifyContextProvider.get();
+            CompilationUnitImpl _compilationUnit = ctx.getCompilationUnit();
+            modifyCtx.setUnit(_compilationUnit);
+            List<XtendAnnotationTarget> _annotatedSourceElements = ctx.getAnnotatedSourceElements();
+            final Function1<XtendAnnotationTarget,MutableNamedElement> _function = new Function1<XtendAnnotationTarget,MutableNamedElement>() {
+                public MutableNamedElement apply(final XtendAnnotationTarget it) {
+                  CompilationUnitImpl _compilationUnit = ctx.getCompilationUnit();
+                  final XtendMemberDeclarationImpl xtendMember = _compilationUnit.toXtendMemberDeclaration(((XtendMember) it));
+                  return modifyCtx.getGeneratedElement(xtendMember);
+                }
+              };
+            List<MutableNamedElement> _map = ListExtensions.<XtendAnnotationTarget, MutableNamedElement>map(_annotatedSourceElements, _function);
+            _modifyProcessor.modify(_map, modifyCtx);
+          }
+        }
+        _xtrycatchfinallyexpression = _switchResult;
+      } finally {
+        task.stop();
       }
+      _xblockexpression = (_xtrycatchfinallyexpression);
     }
-    return _switchResult;
+    return _xblockexpression;
   }
 }

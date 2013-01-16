@@ -181,7 +181,7 @@ public class XtendJvmModelInferrer implements IJvmModelInferrer {
 			}
 		}
 		
-		List<ActiveAnnotationContext> list = contextProvider.computeContext(xtendFile);
+		List<? extends ActiveAnnotationContext> list = contextProvider.computeContext(xtendFile);
 		for (ActiveAnnotationContext ctx : list) {
 			try {
 				annotationProcessor.indexingPhase(ctx, new IAcceptor<JvmDeclaredType>() {

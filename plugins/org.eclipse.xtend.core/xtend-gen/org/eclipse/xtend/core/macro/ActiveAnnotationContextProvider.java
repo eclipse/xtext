@@ -22,6 +22,8 @@ import org.eclipse.xtend.core.xtend.XtendTypeDeclaration;
 import org.eclipse.xtext.common.types.JvmAnnotationType;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.util.IAcceptor;
+import org.eclipse.xtext.util.internal.StopWatches;
+import org.eclipse.xtext.util.internal.StopWatches.StoppedTask;
 import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotation;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
@@ -41,40 +43,46 @@ public class ActiveAnnotationContextProvider {
   @Inject
   private Provider<CompilationUnitImpl> compilationUnitProvider;
   
-  public List<ActiveAnnotationContext> computeContext(final XtendFile file) {
-    final Map<JvmAnnotationType,ActiveAnnotationContext> annotatedElements = CollectionLiterals.<JvmAnnotationType, ActiveAnnotationContext>newHashMap();
-    final CompilationUnitImpl compilationUnit = this.compilationUnitProvider.get();
-    final Procedure1<Pair<JvmAnnotationType,XAnnotation>> _function = new Procedure1<Pair<JvmAnnotationType,XAnnotation>>() {
-        public void apply(final Pair<JvmAnnotationType,XAnnotation> it) {
-          JvmAnnotationType _key = it.getKey();
-          boolean _containsKey = annotatedElements.containsKey(_key);
-          boolean _not = (!_containsKey);
-          if (_not) {
-            ActiveAnnotationContext _activeAnnotationContext = new ActiveAnnotationContext();
-            final ActiveAnnotationContext fa = _activeAnnotationContext;
-            fa.setCompilationUnit(compilationUnit);
-            JvmAnnotationType _key_1 = it.getKey();
-            final JvmType processorType = ActiveAnnotationContextProvider.this._xAnnotationExtensions.getProcessorType(_key_1);
-            Object _processorInstance = ActiveAnnotationContextProvider.this._processorInstanceForJvmTypeProvider.getProcessorInstance(processorType);
-            fa.setProcessorInstance(_processorInstance);
-            JvmAnnotationType _key_2 = it.getKey();
-            annotatedElements.put(_key_2, fa);
+  public List<? extends ActiveAnnotationContext> computeContext(final XtendFile file) {
+    final StoppedTask task = StopWatches.forTask("[macros] findActiveAnnotations");
+    task.start();
+    try {
+      final Map<JvmAnnotationType,ActiveAnnotationContext> annotatedElements = CollectionLiterals.<JvmAnnotationType, ActiveAnnotationContext>newHashMap();
+      final CompilationUnitImpl compilationUnit = this.compilationUnitProvider.get();
+      final Procedure1<Pair<JvmAnnotationType,XAnnotation>> _function = new Procedure1<Pair<JvmAnnotationType,XAnnotation>>() {
+          public void apply(final Pair<JvmAnnotationType,XAnnotation> it) {
+            JvmAnnotationType _key = it.getKey();
+            boolean _containsKey = annotatedElements.containsKey(_key);
+            boolean _not = (!_containsKey);
+            if (_not) {
+              ActiveAnnotationContext _activeAnnotationContext = new ActiveAnnotationContext();
+              final ActiveAnnotationContext fa = _activeAnnotationContext;
+              fa.setCompilationUnit(compilationUnit);
+              JvmAnnotationType _key_1 = it.getKey();
+              final JvmType processorType = ActiveAnnotationContextProvider.this._xAnnotationExtensions.getProcessorType(_key_1);
+              Object _processorInstance = ActiveAnnotationContextProvider.this._processorInstanceForJvmTypeProvider.getProcessorInstance(processorType);
+              fa.setProcessorInstance(_processorInstance);
+              JvmAnnotationType _key_2 = it.getKey();
+              annotatedElements.put(_key_2, fa);
+            }
+            JvmAnnotationType _key_3 = it.getKey();
+            ActiveAnnotationContext _get = annotatedElements.get(_key_3);
+            List<XtendAnnotationTarget> _annotatedSourceElements = _get.getAnnotatedSourceElements();
+            XAnnotation _value = it.getValue();
+            XtendAnnotationTarget _annotatedTarget = ActiveAnnotationContextProvider.this._xAnnotationExtensions.getAnnotatedTarget(_value);
+            _annotatedSourceElements.add(_annotatedTarget);
           }
-          JvmAnnotationType _key_3 = it.getKey();
-          ActiveAnnotationContext _get = annotatedElements.get(_key_3);
-          List<XtendAnnotationTarget> _annotatedSourceElements = _get.getAnnotatedSourceElements();
-          XAnnotation _value = it.getValue();
-          XtendAnnotationTarget _annotatedTarget = ActiveAnnotationContextProvider.this._xAnnotationExtensions.getAnnotatedTarget(_value);
-          _annotatedSourceElements.add(_annotatedTarget);
-        }
-      };
-    this.searchAnnotatedElements(file, new IAcceptor<Pair<JvmAnnotationType,XAnnotation>>() {
-        public void accept(Pair<JvmAnnotationType,XAnnotation> t) {
-          _function.apply(t);
-        }
-    });
-    Collection<ActiveAnnotationContext> _values = annotatedElements.values();
-    return IterableExtensions.<ActiveAnnotationContext>toList(_values);
+        };
+      this.searchAnnotatedElements(file, new IAcceptor<Pair<JvmAnnotationType,XAnnotation>>() {
+          public void accept(Pair<JvmAnnotationType,XAnnotation> t) {
+            _function.apply(t);
+          }
+      });
+      Collection<ActiveAnnotationContext> _values = annotatedElements.values();
+      return IterableExtensions.<ActiveAnnotationContext>toList(_values);
+    } finally {
+      task.stop();
+    }
   }
   
   /**

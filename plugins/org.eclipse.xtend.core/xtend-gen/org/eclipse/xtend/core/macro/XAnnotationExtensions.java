@@ -26,6 +26,7 @@ import org.eclipse.xtend.lib.macro.Active;
 import org.eclipse.xtext.common.types.JvmAnnotationReference;
 import org.eclipse.xtext.common.types.JvmAnnotationType;
 import org.eclipse.xtext.common.types.JvmAnnotationValue;
+import org.eclipse.xtext.common.types.JvmCustomAnnotationValue;
 import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeAnnotationValue;
@@ -34,6 +35,7 @@ import org.eclipse.xtext.linking.ILinkingService;
 import org.eclipse.xtext.linking.lazy.LazyURIEncoder;
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.util.Triple;
+import org.eclipse.xtext.xbase.XTypeLiteral;
 import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotation;
 import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotationsPackage.Literals;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
@@ -183,11 +185,27 @@ public class XAnnotationExtensions {
           return Boolean.valueOf(_equals);
         }
       };
-    JvmAnnotationValue _findFirst = IterableExtensions.<JvmAnnotationValue>findFirst(_values, _function_1);
-    final JvmTypeAnnotationValue annoVal = ((JvmTypeAnnotationValue) _findFirst);
-    EList<JvmTypeReference> _values_1 = annoVal.getValues();
-    JvmTypeReference _head = IterableExtensions.<JvmTypeReference>head(_values_1);
-    return _head.getType();
+    final JvmAnnotationValue annoVal = IterableExtensions.<JvmAnnotationValue>findFirst(_values, _function_1);
+    boolean _matched = false;
+    if (!_matched) {
+      if (annoVal instanceof JvmTypeAnnotationValue) {
+        final JvmTypeAnnotationValue _jvmTypeAnnotationValue = (JvmTypeAnnotationValue)annoVal;
+        _matched=true;
+        EList<JvmTypeReference> _values_1 = _jvmTypeAnnotationValue.getValues();
+        JvmTypeReference _head = IterableExtensions.<JvmTypeReference>head(_values_1);
+        return _head.getType();
+      }
+    }
+    if (!_matched) {
+      if (annoVal instanceof JvmCustomAnnotationValue) {
+        final JvmCustomAnnotationValue _jvmCustomAnnotationValue = (JvmCustomAnnotationValue)annoVal;
+        _matched=true;
+        EList<Object> _values_1 = _jvmCustomAnnotationValue.getValues();
+        Object _head = IterableExtensions.<Object>head(_values_1);
+        return ((XTypeLiteral) _head).getType();
+      }
+    }
+    return null;
   }
   
   public JvmType getProcessorType(final XAnnotation it) {

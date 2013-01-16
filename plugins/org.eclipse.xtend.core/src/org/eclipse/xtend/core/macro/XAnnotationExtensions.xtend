@@ -25,6 +25,9 @@ import org.eclipse.xtext.linking.lazy.LazyURIEncoder
 import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotation
 
 import static org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotationsPackage$Literals.*
+import org.eclipse.xtext.common.types.JvmCustomAnnotationValue
+import org.eclipse.xtext.xbase.XTypeLiteral
+import org.eclipse.xtext.common.types.JvmType
 
 class XAnnotationExtensions {
 	
@@ -68,14 +71,23 @@ class XAnnotationExtensions {
 		return false
 	}
 	
-	def getProcessorType(JvmAnnotationType it) {
+	def JvmType getProcessorType(JvmAnnotationType it) {
 		val activeAnnotation = it.annotations.findFirst [ 
 			annotation?.identifier == typeof(Active).name
 		]
 		val annoVal = activeAnnotation.values.findFirst [
 			operation.simpleName == 'value'
-		] as JvmTypeAnnotationValue
-		return annoVal.values.head.type
+		]
+		switch annoVal {
+			JvmTypeAnnotationValue : {
+				return annoVal.values.head.type
+			}
+			JvmCustomAnnotationValue : {
+				return (annoVal.values.head as XTypeLiteral).type				
+			}
+			default :
+				return null				
+		}
 	}
 	
 	def getProcessorType(XAnnotation it) {
