@@ -154,7 +154,7 @@ public class XbaseNewTypeSystemInjectorProvider extends XbaseInjectorProvider {
 
 		@Override
 		protected ClasspathTypeProvider createClasspathTypeProvider(ResourceSet resourceSet) {
-			return new ClasspathTypeProvider(getClassLoader(), resourceSet, getIndexedJvmTypeAccess()) {
+			return new ClasspathTypeProvider(getClassLoader(resourceSet), resourceSet, getIndexedJvmTypeAccess()) {
 				@Override
 				protected DeclaredTypeFactory createDeclaredTypeFactory() {
 					return new DeclaredTypeFactory(getClassURIHelper()) {

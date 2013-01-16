@@ -125,6 +125,9 @@ public class CompilationTestHelper {
 			for (Resource resource : resourcesToCheck) {
 				if (resource instanceof XtextResource) {
 					XtextResource xtextResource = (XtextResource) resource;
+					if (!xtextResource.isLoaded()) {
+						xtextResource.load(resourceSet.getLoadOptions());
+					}
 					List<Issue> issues = xtextResource.getResourceServiceProvider().getResourceValidator().validate(xtextResource, CheckMode.ALL, CancelIndicator.NullImpl);
 					for (Issue issue : issues) {
 						if (issue.getSeverity() == Severity.ERROR) {

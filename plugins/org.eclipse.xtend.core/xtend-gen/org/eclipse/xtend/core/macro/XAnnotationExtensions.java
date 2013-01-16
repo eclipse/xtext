@@ -123,7 +123,7 @@ public class XAnnotationExtensions {
    * Checks whether this annotation is pointing to a processed annotation, without resolving the proxy
    */
   public boolean isProcessed(final XAnnotation it) {
-    Object _eGet = it.eGet(Literals.XANNOTATION__ANNOTATION_TYPE);
+    Object _eGet = it.eGet(Literals.XANNOTATION__ANNOTATION_TYPE, false);
     final Object proxy = _eGet;
     boolean _matched = false;
     if (!_matched) {
