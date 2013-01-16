@@ -33,8 +33,6 @@ class ErrorSafeExtensionsTest extends AbstractXbaseTestCase {
 	
 	@Inject ITraceURIConverter converter
 	
-	@Inject OnChangeEvictingCache cache
-	
 	@Inject extension ErrorSafeExtensions 
 
 	@Test
