@@ -10,6 +10,8 @@ package org.eclipse.xtext.generator.trace;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.xtext.resource.XtextResource;
 
+import com.google.inject.ImplementedBy;
+
 /**
  * This class converts URIs between their absolute forms (this should be platform:/resource/) and a relative form, which
  * is persisted in trace files. Since trace files may be packed in JARs, the URIs should not make assumptions about the
@@ -17,6 +19,7 @@ import org.eclipse.xtext.resource.XtextResource;
  * 
  * @author Moritz Eysholdt - Initial contribution and API
  */
+@ImplementedBy(DefaultTraceURIConverter.class)
 public interface ITraceURIConverter {
 
 	/**
