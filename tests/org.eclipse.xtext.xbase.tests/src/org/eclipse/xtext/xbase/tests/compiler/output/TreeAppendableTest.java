@@ -19,7 +19,6 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.EcoreFactory;
 import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.emf.ecore.resource.impl.ResourceImpl;
 import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.generator.trace.AbstractTraceRegion;
@@ -68,7 +67,7 @@ public class TreeAppendableTest extends Assert implements ILocationInFileProvide
 	@Before
 	public void createResource() {
 		content = EcoreFactory.eINSTANCE.createEClass();
-		resource = new ResourceImpl(URI.createURI("platform:/resource/test"));
+		resource = new XtextResource(URI.createURI("platform:/resource/test"));
 		resource.getContents().add(content);
 	}
 	
