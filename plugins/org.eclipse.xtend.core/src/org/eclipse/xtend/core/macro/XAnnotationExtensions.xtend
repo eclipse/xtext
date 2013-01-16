@@ -53,7 +53,7 @@ class XAnnotationExtensions {
 	 * Checks whether this annotation is pointing to a processed annotation, without resolving the proxy
 	 */
 	def isProcessed(XAnnotation it) {
-		switch proxy : it.eGet(XANNOTATION__ANNOTATION_TYPE) {
+		switch proxy : it.eGet(XANNOTATION__ANNOTATION_TYPE, false) {
 			EObject case proxy.eIsProxy: {
 				val uri = (proxy as InternalEObject).eProxyURI
 				if (encoder.isCrossLinkFragment(eResource, uri.fragment)) {

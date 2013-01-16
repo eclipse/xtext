@@ -29,4 +29,5 @@ Require-Bundle: org.eclipse.xtend.core;bundle-version="2.3.0",
  org.eclipse.xtend.ide.tests.data;bundle-version="1.0.0"
 Import-Package: org.apache.log4j;version="1.2.15",
  org.junit;version="4.5.0",
- org.junit.rules;version="4.5.0"
+ org.junit.rules;version="4.5.0",
+ org.junit.runner;version="4.5.0"

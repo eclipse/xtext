@@ -16,6 +16,7 @@ import org.eclipse.xtext.util.IAcceptor
 import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotation
 import org.eclipse.xtext.xbase.lib.Pair
 import org.eclipse.xtext.util.internal.StopWatches
+import org.eclipse.xtext.util.OnChangeEvictingCache
 
 class ActiveAnnotationContext {
 	@Property val List<XtendAnnotationTarget> annotatedSourceElements = newArrayList()
@@ -25,27 +26,31 @@ class ActiveAnnotationContext {
 
 class ActiveAnnotationContextProvider {
 	
+	@Inject OnChangeEvictingCache cache
 	@Inject extension XAnnotationExtensions
 	@Inject extension ProcessorInstanceForJvmTypeProvider
 	@Inject Provider<CompilationUnitImpl> compilationUnitProvider
 	
 	def List<? extends ActiveAnnotationContext> computeContext(XtendFile file) {
+		//TODO measure and improve (is called twice for each xtendfile)
 		val task = StopWatches::forTask('[macros] findActiveAnnotations')
 		task.start
 		try {
-			val Map<JvmAnnotationType, ActiveAnnotationContext> annotatedElements = newHashMap
-			val compilationUnit = compilationUnitProvider.get
-			searchAnnotatedElements(file) [
-				if (!annotatedElements.containsKey(key)) {
-					val fa = new ActiveAnnotationContext
-					fa.compilationUnit = compilationUnit
-					val processorType = key.getProcessorType
-					fa.setProcessorInstance(processorType.processorInstance)
-					annotatedElements.put(key, fa)
-				}
-				annotatedElements.get(key).annotatedSourceElements += value.annotatedTarget
+			cache.get('annotation context', file.eResource) [|
+				val Map<JvmAnnotationType, ActiveAnnotationContext> annotatedElements = newHashMap
+				val compilationUnit = compilationUnitProvider.get
+				searchAnnotatedElements(file) [
+					if (!annotatedElements.containsKey(key)) {
+						val fa = new ActiveAnnotationContext
+						fa.compilationUnit = compilationUnit
+						val processorType = key.getProcessorType
+						fa.setProcessorInstance(processorType.processorInstance)
+						annotatedElements.put(key, fa)
+					}
+					annotatedElements.get(key).annotatedSourceElements += value.annotatedTarget
+				]
+				return annotatedElements.values.toList
 			]
-			return annotatedElements.values.toList
 		} finally {
 			task.stop
 		}
