@@ -169,8 +169,11 @@ public class ParallelResourceLoader extends AbstractResourceLoader {
 
 			if (throwable != null) { // rethrow errors in the main thread
 				if (throwable instanceof WrappedException)
-					throw new LoadOperationException(uri, throwable.getCause());
-				throw new LoadOperationException(uri, throwable);
+					throw new LoadOperationException(uri, (Exception) throwable.getCause());
+				if (throwable instanceof Exception)
+					throw new LoadOperationException(uri, (Exception) throwable);
+				else
+					throw (Error)throwable;
 			}
 			
 			if(resource == null && uri != null) {
