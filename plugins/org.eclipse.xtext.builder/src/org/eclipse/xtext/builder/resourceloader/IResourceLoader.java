@@ -127,16 +127,6 @@ public interface IResourceLoader {
 		 * @param uri the uri of the resource that failed to load
 		 * @param exception the exception
 		 */
-		public LoadOperationException(URI uri, Throwable exception) {
-			this(uri, new Exception(exception));
-		}
-
-		/**
-		 * Instantiates a new load operation exception.
-		 *
-		 * @param uri the uri of the resource that failed to load
-		 * @param exception the exception
-		 */
 		public LoadOperationException(URI uri, Exception exception) {
 			super(exception);
 			this.uri = uri;
