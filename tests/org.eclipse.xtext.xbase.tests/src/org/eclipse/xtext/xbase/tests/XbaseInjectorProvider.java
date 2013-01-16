@@ -3,6 +3,8 @@
 */
 package org.eclipse.xtext.xbase.tests;
 
+import org.eclipse.xtext.common.types.access.CachingClasspathTypeProviderFactory;
+import org.eclipse.xtext.common.types.access.ClasspathTypeProviderFactory;
 import org.eclipse.xtext.common.types.access.IJvmTypeProvider;
 import org.eclipse.xtext.junit4.GlobalRegistries;
 import org.eclipse.xtext.junit4.GlobalRegistries.GlobalStateMemento;
@@ -83,6 +85,10 @@ public class XbaseInjectorProvider implements IInjectorProvider, IRegistryConfig
 		@Override
 		public ClassLoader bindClassLoaderToInstance() {
 			return AbstractXbaseTestCase.class.getClassLoader();
+		}
+		
+		public Class<? extends ClasspathTypeProviderFactory> bindClasspathTypeProviderFactory() {
+			return CachingClasspathTypeProviderFactory.class;
 		}
 
 		public Class<? extends Provider<SynchronizedXtextResourceSet>> provideSynchronizedResourceSet() {

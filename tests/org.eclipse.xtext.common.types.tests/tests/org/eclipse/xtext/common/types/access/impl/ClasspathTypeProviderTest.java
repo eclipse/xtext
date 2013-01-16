@@ -46,9 +46,17 @@ public class ClasspathTypeProviderTest extends AbstractTypeProviderTest {
 	@Override
 	public void setUp() throws Exception {
 		super.setUp();
-		typeProvider = new ClasspathTypeProvider(getClass().getClassLoader(), resourceSet, indexedJvmTypeAccess);
+		typeProvider = createTypeProvider();
 	}
 	
+	protected ClasspathTypeProvider createTypeProvider() {
+		return new ClasspathTypeProvider(getClass().getClassLoader(), resourceSet, indexedJvmTypeAccess);
+	}
+	
+	protected ResourceSet getResourceSet() {
+		return resourceSet;
+	}
+
 	@After
 	public void tearDown() throws Exception {
 		typeProvider = null;

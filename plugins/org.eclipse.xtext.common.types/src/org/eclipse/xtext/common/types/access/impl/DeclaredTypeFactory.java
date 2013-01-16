@@ -22,6 +22,7 @@ import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 import java.lang.reflect.TypeVariable;
 import java.lang.reflect.WildcardType;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
@@ -47,6 +48,7 @@ import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmParameterizedTypeReference;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
+import org.eclipse.xtext.common.types.JvmTypeParameterDeclarator;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.JvmUpperBound;
 import org.eclipse.xtext.common.types.JvmVisibility;
@@ -491,10 +493,10 @@ public class DeclaredTypeFactory implements ITypeFactory<Class<?>> {
 		} else if (declaringClass.isMemberClass() && !Modifier.isStatic(declaringClass.getModifiers())) {
 			offset = 1;
 		}
+		enhanceGenericDeclaration(result, constructor);
 		enhanceExecutable(result, constructor, constructor.getDeclaringClass().getSimpleName(),
 				constructor.getGenericParameterTypes(), constructor.getParameterAnnotations(), offset);
 		result.setVarArgs(constructor.isVarArgs());
-		enhanceGenericDeclaration(result, constructor);
 		for (Type parameterType : constructor.getGenericExceptionTypes()) {
 			result.getExceptions().add(createTypeReference(parameterType));
 		}
@@ -513,7 +515,7 @@ public class DeclaredTypeFactory implements ITypeFactory<Class<?>> {
 			result.setVisibility(JvmVisibility.DEFAULT);
 	}
 
-	protected void enhanceExecutable(JvmExecutable result, Member member, String simpleName, Type[] parameterTypes,
+	protected <T extends Member & GenericDeclaration> void enhanceExecutable(JvmExecutable result, T member, String simpleName, Type[] parameterTypes,
 			Annotation[][] annotations, int offset) {
 		StringBuilder fqName = new StringBuilder(48);
 		fqName.append(member.getDeclaringClass().getName());
@@ -525,7 +527,7 @@ public class DeclaredTypeFactory implements ITypeFactory<Class<?>> {
 				fqName.append(',');
 			Type parameterType = parameterTypes[i];
 			uriHelper.computeTypeName(parameterType, fqName);
-			result.getParameters().add(createFormalParameter(parameterType, "arg" + (i - offset), result, annotations[i]));
+			result.getParameters().add(createFormalParameter(parameterType, "arg" + (i - offset), result, member, annotations[i]));
 		}
 		fqName.append(')');
 		result.internalSetIdentifier(fqName.toString());
@@ -547,9 +549,9 @@ public class DeclaredTypeFactory implements ITypeFactory<Class<?>> {
 		} catch(GenericSignatureFormatError error) {
 			genericParameterTypes = method.getParameterTypes();
 		}
+		enhanceGenericDeclaration(result, method);
 		enhanceExecutable(result, method, method.getName(), genericParameterTypes, method.getParameterAnnotations(), 0);
 		result.setVarArgs(method.isVarArgs());
-		enhanceGenericDeclaration(result, method);
 		result.setAbstract(Modifier.isAbstract(method.getModifiers()));
 		result.setFinal(Modifier.isFinal(method.getModifiers()));
 		result.setStatic(Modifier.isStatic(method.getModifiers()));
@@ -568,14 +570,58 @@ public class DeclaredTypeFactory implements ITypeFactory<Class<?>> {
 	}
 
 	protected JvmFormalParameter createFormalParameter(Type parameterType, String paramName,
-			org.eclipse.xtext.common.types.JvmMember container, Annotation[] annotations) {
+			org.eclipse.xtext.common.types.JvmMember container,
+			GenericDeclaration member, Annotation[] annotations) {
 		JvmFormalParameter result = TypesFactory.eINSTANCE.createJvmFormalParameter();
 		result.setName(paramName);
-		result.setParameterType(createTypeReference(parameterType));
+		if (isLocal(parameterType, member)) {
+			result.setParameterType(createLocalTypeReference(parameterType, (JvmTypeParameterDeclarator) container, member));
+		} else {
+			result.setParameterType(createTypeReference(parameterType));
+		}
 		for (Annotation annotation : annotations) {
 			result.getAnnotations().add(createAnnotationReference(annotation));
 		}
 		return result;
+	}
+	
+	protected JvmTypeReference createLocalTypeReference(Type type, JvmTypeParameterDeclarator container, GenericDeclaration member) {
+		if (type instanceof GenericArrayType) {
+			GenericArrayType arrayType = (GenericArrayType) type;
+			Type componentType = arrayType.getGenericComponentType();
+			return createLocalArrayTypeReference(componentType, container, member);
+		} else if (type instanceof TypeVariable<?>) {
+			TypeVariable<?> typeVariable = (TypeVariable<?>) type;
+			JvmParameterizedTypeReference result = TypesFactory.eINSTANCE.createJvmParameterizedTypeReference();
+			int idx = Arrays.asList(member.getTypeParameters()).indexOf(typeVariable);
+			result.setType(container.getTypeParameters().get(idx));
+			return result;
+		}
+		throw new IllegalArgumentException(type.toString());
+	}
+	
+	protected JvmTypeReference createLocalArrayTypeReference(Type componentType, JvmTypeParameterDeclarator container, GenericDeclaration member) {
+		JvmTypeReference componentTypeReference = createLocalTypeReference(componentType, container, member);
+		if (componentTypeReference != null) {
+			JvmGenericArrayTypeReference result = TypesFactory.eINSTANCE.createJvmGenericArrayTypeReference();
+			result.setComponentType(componentTypeReference);
+			return result;
+		} else {
+			return null;
+		}
+	}
+
+	protected boolean isLocal(Type parameterType, GenericDeclaration member) {
+		if (parameterType instanceof TypeVariable<?>) {
+			return member.equals(((TypeVariable<?>) parameterType).getGenericDeclaration());
+		} else if (parameterType instanceof GenericArrayType) {
+			return isLocal(((GenericArrayType) parameterType).getGenericComponentType(), member);
+		}
+		return false;
+	}
+
+	protected ClassURIHelper getUriHelper() {
+		return uriHelper;
 	}
 
 }
