@@ -44,20 +44,4 @@ public class DefaultUITraceURIConverter extends DefaultTraceURIConverter {
 		return super.getURIForTrace(context);
 	}
 
-	protected boolean isPrefix(URI prefix, URI uri) {
-		if (prefix.scheme() == null || !prefix.scheme().equals(uri.scheme()))
-			return false;
-		String[] prefixSeg = prefix.segments();
-		String[] uriSeg = uri.segments();
-		if (prefixSeg.length == 0 || uriSeg.length == 0)
-			return false;
-		if (!"".equals(prefixSeg[prefixSeg.length - 1])) // this is true when the URI has a trailing slash ("/").
-			return false;
-		if (uriSeg.length < prefixSeg.length - 1)
-			return false;
-		for (int i = 0; i < prefixSeg.length - 1; i++)
-			if (!uriSeg[i].equals(prefixSeg[i]))
-				return false;
-		return true;
-	}
 }
