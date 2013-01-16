@@ -6,10 +6,12 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtext.common.types.JvmTypeReference;
+import org.eclipse.xtext.generator.trace.ITraceURIConverter;
 import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 import org.eclipse.xtext.resource.ILocationInFileProvider;
 import org.eclipse.xtext.util.CancelIndicator;
+import org.eclipse.xtext.util.OnChangeEvictingCache;
 import org.eclipse.xtext.validation.CheckMode;
 import org.eclipse.xtext.validation.IResourceValidator;
 import org.eclipse.xtext.validation.Issue;
@@ -43,6 +45,12 @@ public class ErrorSafeExtensionsTest extends AbstractXbaseTestCase {
   
   @Inject
   private Factory issueProviderFactory;
+  
+  @Inject
+  private ITraceURIConverter converter;
+  
+  @Inject
+  private OnChangeEvictingCache cache;
   
   @Inject
   private ErrorSafeExtensions _errorSafeExtensions;
@@ -269,7 +277,7 @@ public class ErrorSafeExtensionsTest extends AbstractXbaseTestCase {
   
   protected TreeAppendable createTreeAppendable(final EObject source) {
     ImportManager _importManager = new ImportManager(true);
-    TreeAppendable _treeAppendable = new TreeAppendable(_importManager, this.locationProvider, this.jvmModelAssociations, source, " ", "<newline>");
+    TreeAppendable _treeAppendable = new TreeAppendable(_importManager, this.converter, this.locationProvider, this.jvmModelAssociations, source, " ", "<newline>");
     return _treeAppendable;
   }
   

@@ -3,6 +3,7 @@ package org.eclipse.xtext.xbase.tests.compiler.output;
 import com.google.inject.Inject;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.common.types.JvmType;
+import org.eclipse.xtext.generator.trace.ITraceURIConverter;
 import org.eclipse.xtext.resource.ILocationInFileProvider;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XTypeLiteral;
@@ -24,6 +25,9 @@ public class ErrorTreeAppendableTest extends AbstractXbaseTestCase {
   
   @Inject
   private IJvmModelAssociations jvmModelAssociations;
+  
+  @Inject
+  private ITraceURIConverter converter;
   
   @Test
   public void testTraceChildIsSelf() {
@@ -59,7 +63,7 @@ public class ErrorTreeAppendableTest extends AbstractXbaseTestCase {
   
   public ErrorTreeAppendable createErrorTreeAppendable(final EObject source) {
     ImportManager _importManager = new ImportManager(true);
-    TreeAppendable _treeAppendable = new TreeAppendable(_importManager, this.locationProvider, this.jvmModelAssociations, source, " ", "<newline>");
+    TreeAppendable _treeAppendable = new TreeAppendable(_importManager, this.converter, this.locationProvider, this.jvmModelAssociations, source, " ", "<newline>");
     ErrorTreeAppendable _errorChild = _treeAppendable.errorChild(source);
     return _errorChild;
   }

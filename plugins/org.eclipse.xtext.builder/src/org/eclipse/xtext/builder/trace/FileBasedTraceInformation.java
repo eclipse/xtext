@@ -54,7 +54,7 @@ public class FileBasedTraceInformation implements ITraceInformation {
 	@Deprecated 
 	public static final String TRACE_FILE_EXTENSION = TraceFileNameProvider.TRACE_FILE_EXTENSION;
 
-	private static final Logger log = Logger.getLogger(StorageAwareTrace.class);
+	private static final Logger log = Logger.getLogger(FileBasedTraceInformation.class);
 	
 	@Inject
 	private TraceRegionSerializer traceRegionSerializer;

@@ -68,6 +68,7 @@ import org.eclipse.xtext.documentation.IFileHeaderProvider;
 import org.eclipse.xtext.documentation.IJavaDocTypeReferenceProvider;
 import org.eclipse.xtext.generator.IFileSystemAccess;
 import org.eclipse.xtext.generator.IGenerator;
+import org.eclipse.xtext.generator.trace.ITraceURIConverter;
 import org.eclipse.xtext.generator.trace.LocationData;
 import org.eclipse.xtext.naming.IQualifiedNameConverter;
 import org.eclipse.xtext.naming.QualifiedName;
@@ -165,6 +166,9 @@ public class JvmModelGenerator implements IGenerator {
   
   @Inject
   private GeneratorConfig generatorConfig;
+  
+  @Inject
+  private ITraceURIConverter converter;
   
   public void doGenerate(final Resource input, final IFileSystemAccess fsa) {
     EList<EObject> _contents = input.getContents();
@@ -1689,7 +1693,7 @@ public class JvmModelGenerator implements IGenerator {
   }
   
   public TreeAppendable createAppendable(final EObject context, final ImportManager importManager, final GeneratorConfig config) {
-    TreeAppendable _treeAppendable = new TreeAppendable(importManager, this.locationProvider, this.jvmModelAssociations, context, "  ", "\n");
+    TreeAppendable _treeAppendable = new TreeAppendable(importManager, this.converter, this.locationProvider, this.jvmModelAssociations, context, "  ", "\n");
     final TreeAppendable appendable = _treeAppendable;
     final JvmGenericType type = this.containerType(context);
     boolean _notEquals = ObjectExtensions.operator_notEquals(type, null);
