@@ -41,7 +41,7 @@ import com.google.inject.Inject;
  */
 public class MemberFromSuperImplementor {
 
-	public static final String DEFAULT_BODY = "throw new UnsupportedOperationException(\"Auto-generated function stub\")";
+	public static final String DEFAULT_BODY = "throw new UnsupportedOperationException(\"TODO: auto-generated method stub\")";
 
 	@Inject
 	private TypeArgumentContextProvider typeArgumentContextProvider;

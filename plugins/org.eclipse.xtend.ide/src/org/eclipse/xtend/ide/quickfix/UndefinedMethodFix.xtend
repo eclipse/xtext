@@ -56,7 +56,7 @@ class UndefinedMethodFix {
 		}
 		issueResolutionAcceptor.accept(
 			issue,
-			"create method '" + issueString + "'",
+			"Create method '" + issueString + "'",
 			"",
 			"fix_public_function.png",
 			createModification(featureCall, issueString)
