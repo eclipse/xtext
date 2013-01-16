@@ -1437,26 +1437,23 @@ public class JvmModelGenerator implements IGenerator {
   
   public void generateAnnotation(final JvmAnnotationReference it, final ITreeAppendable appendable, final GeneratorConfig config) {
     boolean _and = false;
-    boolean _and_1 = false;
-    JvmAnnotationType _annotation = it.getAnnotation();
-    String _qualifiedName = _annotation.getQualifiedName();
-    boolean _notEquals = ObjectExtensions.operator_notEquals(_qualifiedName, null);
-    if (!_notEquals) {
-      _and_1 = false;
-    } else {
-      JvmAnnotationType _annotation_1 = it.getAnnotation();
-      String _qualifiedName_1 = _annotation_1.getQualifiedName();
-      boolean _equals = _qualifiedName_1.equals("java.lang.SuppressWarnings");
-      _and_1 = (_notEquals && _equals);
-    }
-    if (!_and_1) {
+    boolean _isGenerateSuppressWarnings = config.isGenerateSuppressWarnings();
+    boolean _not = (!_isGenerateSuppressWarnings);
+    if (!_not) {
       _and = false;
     } else {
-      boolean _isGenerateSuppressWarnings = config.isGenerateSuppressWarnings();
-      boolean _not = (!_isGenerateSuppressWarnings);
-      _and = (_and_1 && _not);
+      JvmAnnotationType _annotation = it.getAnnotation();
+      String _qualifiedName = _annotation==null?(String)null:_annotation.getQualifiedName();
+      boolean _equals = ObjectExtensions.operator_equals(_qualifiedName, "java.lang.SuppressWarnings");
+      _and = (_not && _equals);
     }
     if (_and) {
+      return;
+    }
+    JvmAnnotationType _annotation_1 = it.getAnnotation();
+    boolean _eIsProxy = _annotation_1.eIsProxy();
+    if (_eIsProxy) {
+      appendable.append("/* unresolvable annotation */");
       return;
     }
     appendable.append("@");

@@ -667,8 +667,12 @@ class JvmModelGenerator implements IGenerator {
 	}
 
 	def void generateAnnotation(JvmAnnotationReference it, ITreeAppendable appendable, GeneratorConfig config) {
-		if(annotation.qualifiedName != null && annotation.qualifiedName.equals("java.lang.SuppressWarnings") && !config.generateSuppressWarnings) 
+		if(!config.generateSuppressWarnings && annotation?.qualifiedName == "java.lang.SuppressWarnings") 
 			return;
+		if (annotation.eIsProxy) {
+			appendable.append("/* unresolvable annotation */")
+			return;
+		}
 		appendable.append("@")
 		appendable.append(annotation)
 		if(config.generateExpressions)
