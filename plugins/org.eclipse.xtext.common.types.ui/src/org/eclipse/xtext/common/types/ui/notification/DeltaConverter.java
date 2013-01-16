@@ -54,6 +54,17 @@ public class DeltaConverter {
 	 * @return a possibly empty list of converted deltas.
 	 */
 	public List<IResourceDescription.Delta> convert(IJavaElementDelta delta) {
+		/*
+		 * a file was opened or closed or there is no relevant structural change in the delta
+		 * - we do not expect an IResourceDescription.Delta
+		 * 
+		 * Deltas without any affected children or without content changes
+		 * are considered to be irrelevant
+		 */
+		if (delta.getFlags() == IJavaElementDelta.F_AST_AFFECTED 
+				|| delta.getFlags() == (IJavaElementDelta.F_AST_AFFECTED | IJavaElementDelta.F_CONTENT | IJavaElementDelta.F_FINE_GRAINED)) {
+			return Collections.emptyList();
+		}
 		List<IResourceDescription.Delta> result = Lists.newArrayListWithExpectedSize(2);
 		convertCompilationUnits(delta, result);
 		return result;
