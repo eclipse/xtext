@@ -11,7 +11,6 @@ import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 import org.eclipse.xtext.resource.ILocationInFileProvider;
 import org.eclipse.xtext.util.CancelIndicator;
-import org.eclipse.xtext.util.OnChangeEvictingCache;
 import org.eclipse.xtext.validation.CheckMode;
 import org.eclipse.xtext.validation.IResourceValidator;
 import org.eclipse.xtext.validation.Issue;
@@ -48,9 +47,6 @@ public class ErrorSafeExtensionsTest extends AbstractXbaseTestCase {
   
   @Inject
   private ITraceURIConverter converter;
-  
-  @Inject
-  private OnChangeEvictingCache cache;
   
   @Inject
   private ErrorSafeExtensions _errorSafeExtensions;
