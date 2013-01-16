@@ -15,6 +15,7 @@ import org.eclipse.xtext.common.types.JvmAnnotationType
 import org.eclipse.xtext.util.IAcceptor
 import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotation
 import org.eclipse.xtext.xbase.lib.Pair
+import org.eclipse.xtext.util.internal.StopWatches
 
 class ActiveAnnotationContext {
 	@Property val List<XtendAnnotationTarget> annotatedSourceElements = newArrayList()
@@ -28,20 +29,26 @@ class ActiveAnnotationContextProvider {
 	@Inject extension ProcessorInstanceForJvmTypeProvider
 	@Inject Provider<CompilationUnitImpl> compilationUnitProvider
 	
-	def computeContext(XtendFile file) {
-		val Map<JvmAnnotationType, ActiveAnnotationContext> annotatedElements = newHashMap
-		val compilationUnit = compilationUnitProvider.get
-		searchAnnotatedElements(file) [
-			if (!annotatedElements.containsKey(key)) {
-				val fa = new ActiveAnnotationContext
-				fa.compilationUnit = compilationUnit
-				val processorType = key.getProcessorType
-				fa.setProcessorInstance(processorType.processorInstance)
-				annotatedElements.put(key, fa)
-			}
-			annotatedElements.get(key).annotatedSourceElements += value.annotatedTarget
-		]
-		return annotatedElements.values.toList
+	def List<? extends ActiveAnnotationContext> computeContext(XtendFile file) {
+		val task = StopWatches::forTask('[macros] findActiveAnnotations')
+		task.start
+		try {
+			val Map<JvmAnnotationType, ActiveAnnotationContext> annotatedElements = newHashMap
+			val compilationUnit = compilationUnitProvider.get
+			searchAnnotatedElements(file) [
+				if (!annotatedElements.containsKey(key)) {
+					val fa = new ActiveAnnotationContext
+					fa.compilationUnit = compilationUnit
+					val processorType = key.getProcessorType
+					fa.setProcessorInstance(processorType.processorInstance)
+					annotatedElements.put(key, fa)
+				}
+				annotatedElements.get(key).annotatedSourceElements += value.annotatedTarget
+			]
+			return annotatedElements.values.toList
+		} finally {
+			task.stop
+		}
 	}
 	
 	/**

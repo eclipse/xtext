@@ -31,7 +31,7 @@ class ProcessorInstanceForJvmTypeProvider {
 					ClassLoader : return classLoaderCtx
 					Class<?> : return classLoaderCtx.classLoader
 					default : {
-						logger.error("Unsupported classloader context in resource set : "+classLoaderCtx)
+						logger.error("Unsupported classloader context in resource set : "+classLoaderCtx?.getClass.name)
 					}
 				}
 			}

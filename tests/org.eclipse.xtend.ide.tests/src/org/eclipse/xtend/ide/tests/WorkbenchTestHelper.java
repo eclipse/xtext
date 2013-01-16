@@ -206,6 +206,14 @@ public class WorkbenchTestHelper extends Assert {
 	}
 
 	public static IProject createPluginProject(String name) throws CoreException {
+		return createPluginProject(name, "com.google.inject",
+				"org.eclipse.xtend.lib", 
+				"org.eclipse.xtext.xbase.lib",
+				"org.eclipse.xtend.ide.tests.data",
+				"org.junit4");
+	}
+	
+	public static IProject createPluginProject(String name, String ...requiredBundles) throws CoreException {
 		Injector injector = XtendActivator.getInstance().getInjector("org.eclipse.xtend.core.Xtend");
 		PluginProjectFactory projectFactory = injector.getInstance(PluginProjectFactory.class);
 		projectFactory.setProjectName(name);
@@ -214,12 +222,7 @@ public class WorkbenchTestHelper extends Assert {
 				"org.eclipse.pde.SchemaBuilder", XtextProjectHelper.BUILDER_ID);
 		projectFactory.addProjectNatures(JavaCore.NATURE_ID, "org.eclipse.pde.PluginNature",
 				XtextProjectHelper.NATURE_ID);
-		projectFactory.addRequiredBundles(newArrayList(
-				"com.google.inject",
-				"org.eclipse.xtend.lib", 
-				"org.eclipse.xtext.xbase.lib",
-				"org.eclipse.xtend.ide.tests.data",
-				"org.junit4"));
+		projectFactory.addRequiredBundles(newArrayList(requiredBundles));
 		IProject result = projectFactory.createProject(new NullProgressMonitor(), null);
 		IJavaProject javaProject = JavaCore.create(result);
 		JavaProjectSetupUtil.makeJava5Compliant(javaProject);
