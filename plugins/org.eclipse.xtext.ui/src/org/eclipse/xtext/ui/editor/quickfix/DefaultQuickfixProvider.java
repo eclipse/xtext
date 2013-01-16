@@ -14,6 +14,7 @@ import java.util.Set;
 import org.apache.log4j.Logger;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
+import org.eclipse.jface.text.BadLocationException;
 import org.eclipse.xtext.AbstractElement;
 import org.eclipse.xtext.CrossReference;
 import org.eclipse.xtext.GrammarUtil;
@@ -116,6 +117,11 @@ public class DefaultQuickfixProvider extends AbstractDeclarativeQuickfixProvider
 				EReference reference = getUnresolvedEReference(issue, target);
 				if (reference == null)
 					return;
+				fixUnresolvedReference(issue, xtextDocument, target, reference);
+			}
+
+			protected void fixUnresolvedReference(final Issue issue, final IXtextDocument xtextDocument,
+					EObject target, EReference reference) throws BadLocationException {
 				boolean caseInsensitive = caseInsensitivityHelper.isIgnoreCase(reference);
 				EObject crossReferenceTerminal = getCrossReference(issue, target);
 				String ruleName = null;

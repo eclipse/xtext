@@ -1,0 +1,546 @@
+package org.eclipse.xtend.ide.tests.quickfix;
+
+import com.google.inject.Inject;
+import org.eclipse.xtend.core.validation.IssueCodes;
+import org.eclipse.xtend.ide.tests.AbstractXtendUITestCase;
+import org.eclipse.xtend.ide.tests.quickfix.QuickfixTestBuilder;
+import org.eclipse.xtend2.lib.StringConcatenation;
+import org.junit.After;
+import org.junit.Ignore;
+import org.junit.Test;
+
+@SuppressWarnings("all")
+public class QuickfixTest extends AbstractXtendUITestCase {
+  @Inject
+  private QuickfixTestBuilder builder;
+  
+  @After
+  public void tearDown() {
+    this.builder.tearDown();
+  }
+  
+  @Test
+  public void missingMember() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("class Foo {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def foo() {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("bar|");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    QuickfixTestBuilder _create = this.builder.create("Foo.xtend", _builder);
+    QuickfixTestBuilder _assertIssueCodes = _create.assertIssueCodes(IssueCodes.FEATURECALL_LINKING_DIAGNOSTIC);
+    QuickfixTestBuilder _assertResolutionLabels = _assertIssueCodes.assertResolutionLabels("Create method \'bar\'", "Create field \'bar\'", "Create local variable \'bar\'");
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("class Foo {");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("def foo() {");
+    _builder_1.newLine();
+    _builder_1.append("\t\t");
+    _builder_1.append("bar");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("def bar() { }");
+    _builder_1.newLine();
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    QuickfixTestBuilder _assertModelAfterQuickfix = _assertResolutionLabels.assertModelAfterQuickfix("Create method \'bar\'", _builder_1);
+    StringConcatenation _builder_2 = new StringConcatenation();
+    _builder_2.append("class Foo {");
+    _builder_2.newLine();
+    _builder_2.append("\t");
+    _builder_2.append("Object bar");
+    _builder_2.newLine();
+    _builder_2.append("\t");
+    _builder_2.append("def foo() {");
+    _builder_2.newLine();
+    _builder_2.append("\t\t");
+    _builder_2.append("bar");
+    _builder_2.newLine();
+    _builder_2.append("\t");
+    _builder_2.append("}");
+    _builder_2.newLine();
+    _builder_2.append("}");
+    _builder_2.newLine();
+    QuickfixTestBuilder _assertModelAfterQuickfix_1 = _assertModelAfterQuickfix.assertModelAfterQuickfix("Create field \'bar\'", _builder_2);
+    StringConcatenation _builder_3 = new StringConcatenation();
+    _builder_3.append("class Foo {");
+    _builder_3.newLine();
+    _builder_3.append("\t");
+    _builder_3.append("def foo() {");
+    _builder_3.newLine();
+    _builder_3.append("\t\t");
+    _builder_3.append("val bar = null");
+    _builder_3.newLine();
+    _builder_3.append("\t\t");
+    _builder_3.append("bar");
+    _builder_3.newLine();
+    _builder_3.append("\t");
+    _builder_3.append("}");
+    _builder_3.newLine();
+    _builder_3.append("}");
+    _builder_3.newLine();
+    _assertModelAfterQuickfix_1.assertModelAfterQuickfix("Create local variable \'bar\'", _builder_3);
+  }
+  
+  @Test
+  public void invalidNumberOfArguments() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("class Foo {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def foo() {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("bar|(1)");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def bar() {}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    QuickfixTestBuilder _create = this.builder.create("Foo.xtend", _builder);
+    _create.assertIssueCodes(org.eclipse.xtext.xbase.validation.IssueCodes.INVALID_NUMBER_OF_ARGUMENTS);
+  }
+  
+  @Test
+  public void missingConcreteMembers() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("abstract class Foo {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def bar()");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("class Bar| extends Foo {");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    QuickfixTestBuilder _create = this.builder.create("Foo.xtend", _builder);
+    QuickfixTestBuilder _assertIssueCodes = _create.assertIssueCodes(IssueCodes.CLASS_MUST_BE_ABSTRACT);
+    QuickfixTestBuilder _assertResolutionLabels = _assertIssueCodes.assertResolutionLabels("Add unimplemented methods", "Make class abstract");
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("abstract class Foo {");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("def bar()");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.newLine();
+    _builder_1.append("class Bar extends Foo {");
+    _builder_1.newLine();
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("override bar() {");
+    _builder_1.newLine();
+    _builder_1.append("\t\t");
+    _builder_1.append("throw new UnsupportedOperationException(\"TODO: auto-generated method stub\")");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    QuickfixTestBuilder _assertModelAfterQuickfix = _assertResolutionLabels.assertModelAfterQuickfix("Add unimplemented methods", _builder_1);
+    StringConcatenation _builder_2 = new StringConcatenation();
+    _builder_2.append("abstract class Foo {");
+    _builder_2.newLine();
+    _builder_2.append("\t");
+    _builder_2.append("def bar()");
+    _builder_2.newLine();
+    _builder_2.append("}");
+    _builder_2.newLine();
+    _builder_2.newLine();
+    _builder_2.append("abstract class Bar extends Foo {");
+    _builder_2.newLine();
+    _builder_2.append("}");
+    _builder_2.newLine();
+    _assertModelAfterQuickfix.assertModelAfterQuickfix("Make class abstract", _builder_2);
+  }
+  
+  @Ignore
+  @Test
+  public void missingConcreteMembers2() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("class Foo| implements Comparable<Foo> {");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    QuickfixTestBuilder _create = this.builder.create("Foo.xtend", _builder);
+    QuickfixTestBuilder _assertIssueCodes = _create.assertIssueCodes(IssueCodes.CLASS_MUST_BE_ABSTRACT);
+    QuickfixTestBuilder _assertResolutionLabels = _assertIssueCodes.assertResolutionLabels("Add unimplemented methods", "Make class abstract");
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("class Foo implements Comparable<Foo> {");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("override compareTo(Foo o) {");
+    _builder_1.newLine();
+    _builder_1.append("\t\t");
+    _builder_1.append("throw new UnsupportedOperationException(\"TODO: auto-generated method stub\")");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    QuickfixTestBuilder _assertModelAfterQuickfix = _assertResolutionLabels.assertModelAfterQuickfix("Add unimplemented methods", _builder_1);
+    StringConcatenation _builder_2 = new StringConcatenation();
+    _builder_2.append("abstract class Foo implements Comparable<Foo> {");
+    _builder_2.newLine();
+    _builder_2.append("}");
+    _builder_2.newLine();
+    _assertModelAfterQuickfix.assertModelAfterQuickfix("Make class abstract", _builder_2);
+  }
+  
+  @Test
+  public void inconsistentIndentation() {
+    final String tripleQuotes = "\'\'\'";
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("class Foo {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def bar() ");
+    _builder.append(tripleQuotes, "	");
+    _builder.newLineIfNotEmpty();
+    _builder.append("\t\t");
+    _builder.append("tab");
+    _builder.newLine();
+    _builder.append("        ");
+    _builder.append("|space");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append(tripleQuotes, "	");
+    _builder.newLineIfNotEmpty();
+    _builder.append("}");
+    _builder.newLine();
+    QuickfixTestBuilder _create = this.builder.create("Foo.xtend", _builder);
+    QuickfixTestBuilder _assertIssueCodes = _create.assertIssueCodes(IssueCodes.INCONSISTENT_INDENTATION);
+    QuickfixTestBuilder _assertResolutionLabels = _assertIssueCodes.assertResolutionLabels("Correct indentation");
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("class Foo {");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("def bar() ");
+    _builder_1.append(tripleQuotes, "	");
+    _builder_1.newLineIfNotEmpty();
+    _builder_1.append("\t\t");
+    _builder_1.append("tab");
+    _builder_1.newLine();
+    _builder_1.append("\t\t");
+    _builder_1.append("space");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append(tripleQuotes, "	");
+    _builder_1.newLineIfNotEmpty();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _assertResolutionLabels.assertModelAfterQuickfix(_builder_1);
+  }
+  
+  @Test
+  public void missingOverride() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("class Foo implements Comparable<Foo> {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def comp|areTo(Foo o) {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("1");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    QuickfixTestBuilder _create = this.builder.create("Foo.xtend", _builder);
+    QuickfixTestBuilder _assertIssueCodes = _create.assertIssueCodes(IssueCodes.MISSING_OVERRIDE);
+    QuickfixTestBuilder _assertResolutionLabels = _assertIssueCodes.assertResolutionLabels("Change \'def\' to \'override\'");
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("class Foo implements Comparable<Foo> {");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("override compareTo(Foo o) {");
+    _builder_1.newLine();
+    _builder_1.append("\t\t");
+    _builder_1.append("1");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _assertResolutionLabels.assertModelAfterQuickfix(_builder_1);
+  }
+  
+  @Test
+  public void obsoleteOverride() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("class Foo {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("override| bar() {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    QuickfixTestBuilder _create = this.builder.create("Foo.xtend", _builder);
+    QuickfixTestBuilder _assertIssueCodes = _create.assertIssueCodes(IssueCodes.OBSOLETE_OVERRIDE);
+    QuickfixTestBuilder _assertResolutionLabels = _assertIssueCodes.assertResolutionLabels("Change \'override\' to \'def\'");
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("class Foo {");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("def bar() {");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _assertResolutionLabels.assertModelAfterQuickfix(_builder_1);
+  }
+  
+  @Test
+  public void missingConstructorFromSuper() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("class Foo {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("new(int i) {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("class Bar| extends Foo {");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    QuickfixTestBuilder _create = this.builder.create("Foo.xtend", _builder);
+    QuickfixTestBuilder _assertIssueCodes = _create.assertIssueCodes(IssueCodes.MISSING_CONSTRUCTOR);
+    QuickfixTestBuilder _assertResolutionLabels = _assertIssueCodes.assertResolutionLabels("Add constructor new(int)");
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("class Foo {");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("new(int i) {");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.newLine();
+    _builder_1.append("class Bar extends Foo {");
+    _builder_1.newLine();
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("new(int i) {");
+    _builder_1.newLine();
+    _builder_1.append("\t\t");
+    _builder_1.append("super(i)");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _assertResolutionLabels.assertModelAfterQuickfix(_builder_1);
+  }
+  
+  @Test
+  public void missingAbstract() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("class Foo {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def void bar|()");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    QuickfixTestBuilder _create = this.builder.create("Foo.xtend", _builder);
+    QuickfixTestBuilder _assertIssueCodes = _create.assertIssueCodes(IssueCodes.MISSING_ABSTRACT);
+    QuickfixTestBuilder _assertResolutionLabels = _assertIssueCodes.assertResolutionLabels("Make class abstract");
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("abstract class Foo {");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("def void bar()");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _assertResolutionLabels.assertModelAfterQuickfix(_builder_1);
+  }
+  
+  @Ignore
+  @Test
+  public void unhandledCheckedException() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("class Foo {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def void bar|() {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("throw new Exception()");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    QuickfixTestBuilder _create = this.builder.create("Foo.xtend", _builder);
+    QuickfixTestBuilder _assertIssueCodes = _create.assertIssueCodes(org.eclipse.xtext.xbase.validation.IssueCodes.UNHANDLED_EXCEPTION);
+    QuickfixTestBuilder _assertResolutionLabels = _assertIssueCodes.assertResolutionLabels("Add throws declaration", "Surround with try/catch block");
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("class Foo {");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("def void bar() throws Exception {");
+    _builder_1.newLine();
+    _builder_1.append("\t\t");
+    _builder_1.append("throw new Exception()");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    QuickfixTestBuilder _assertModelAfterQuickfix = _assertResolutionLabels.assertModelAfterQuickfix("Add throws declaration", _builder_1);
+    StringConcatenation _builder_2 = new StringConcatenation();
+    _builder_2.append("class Foo {");
+    _builder_2.newLine();
+    _builder_2.append("\t");
+    _builder_2.append("def void bar() {");
+    _builder_2.newLine();
+    _builder_2.append("\t\t");
+    _builder_2.append("try {");
+    _builder_2.newLine();
+    _builder_2.append("\t\t\t");
+    _builder_2.append("throw new Exception()");
+    _builder_2.newLine();
+    _builder_2.append("\t\t");
+    _builder_2.append("} catch(Exception exc) {");
+    _builder_2.newLine();
+    _builder_2.append("\t\t\t");
+    _builder_2.append("throw new RuntimeException(\"auto-generated try/catch\")");
+    _builder_2.newLine();
+    _builder_2.append("\t\t");
+    _builder_2.append("}");
+    _builder_2.newLine();
+    _builder_2.append("\t");
+    _builder_2.append("}");
+    _builder_2.newLine();
+    _builder_2.append("}");
+    _builder_2.newLine();
+    _assertModelAfterQuickfix.assertModelAfterQuickfix("Surround with try/catch block", _builder_2);
+  }
+  
+  @Test
+  public void unusedImport() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("import java.util.List|");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("class Foo {");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    QuickfixTestBuilder _create = this.builder.create("Foo.xtend", _builder);
+    QuickfixTestBuilder _assertIssueCodes = _create.assertIssueCodes(org.eclipse.xtext.xbase.validation.IssueCodes.IMPORT_UNUSED);
+    QuickfixTestBuilder _assertResolutionLabels = _assertIssueCodes.assertResolutionLabels("Organize imports");
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("class Foo {");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _assertResolutionLabels.assertModelAfterQuickfix(_builder_1);
+  }
+  
+  @Test
+  public void duplicateImport() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("import java.util.List");
+    _builder.newLine();
+    _builder.append("import java.util.List|");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("class Foo {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("List foo");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    QuickfixTestBuilder _create = this.builder.create("Foo.xtend", _builder);
+    QuickfixTestBuilder _assertIssueCodes = _create.assertIssueCodes(org.eclipse.xtext.xbase.validation.IssueCodes.IMPORT_DUPLICATE);
+    QuickfixTestBuilder _assertResolutionLabels = _assertIssueCodes.assertResolutionLabels("Organize imports");
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("import java.util.List");
+    _builder_1.newLine();
+    _builder_1.newLine();
+    _builder_1.append("class Foo {");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("List foo");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _assertResolutionLabels.assertModelAfterQuickfix(_builder_1);
+  }
+  
+  @Test
+  public void wildcardImport() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("import java.util.*|");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("class Foo {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("List foo");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    QuickfixTestBuilder _create = this.builder.create("Foo.xtend", _builder);
+    QuickfixTestBuilder _assertIssueCodes = _create.assertIssueCodes(org.eclipse.xtext.xbase.validation.IssueCodes.IMPORT_WILDCARD_DEPRECATED);
+    QuickfixTestBuilder _assertResolutionLabels = _assertIssueCodes.assertResolutionLabels("Organize imports");
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("import java.util.List");
+    _builder_1.newLine();
+    _builder_1.newLine();
+    _builder_1.append("class Foo {");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("List foo");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _assertResolutionLabels.assertModelAfterQuickfix(_builder_1);
+  }
+}

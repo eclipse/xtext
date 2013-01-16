@@ -47,7 +47,7 @@ public class UndefinedMethodFix {
     if (_receiverIsReadOnly) {
       return;
     }
-    String _plus = ("create method \'" + issueString);
+    String _plus = ("Create method \'" + issueString);
     String _plus_1 = (_plus + "\'");
     IModification _createModification = this._newMethodModificationProvider.createModification(featureCall, issueString);
     issueResolutionAcceptor.accept(issue, _plus_1, 
