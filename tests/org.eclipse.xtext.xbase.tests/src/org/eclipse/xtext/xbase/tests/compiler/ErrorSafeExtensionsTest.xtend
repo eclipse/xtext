@@ -19,6 +19,7 @@ import org.eclipse.xtext.xbase.XBlockExpression
 import org.eclipse.xtext.xbase.compiler.LoopParams
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils
 import org.eclipse.xtext.xbase.XCastedExpression
+import org.eclipse.xtext.generator.trace.ITraceURIConverter
 
 class ErrorSafeExtensionsTest extends AbstractXbaseTestCase {
 	
@@ -29,6 +30,10 @@ class ErrorSafeExtensionsTest extends AbstractXbaseTestCase {
 	@Inject IResourceValidator resourceValidator 
 	
 	@Inject ElementIssueProvider$Factory issueProviderFactory
+	
+	@Inject ITraceURIConverter converter
+	
+	@Inject OnChangeEvictingCache cache
 	
 	@Inject extension ErrorSafeExtensions 
 
@@ -130,7 +135,7 @@ class ErrorSafeExtensionsTest extends AbstractXbaseTestCase {
 	}
 	
 	def protected createTreeAppendable(EObject source) {
-		new TreeAppendable(new ImportManager(true), locationProvider, jvmModelAssociations, source, " ", "<newline>")
+		new TreeAppendable(new ImportManager(true), converter, locationProvider, jvmModelAssociations, source, " ", "<newline>")
 	}
 	
 	def protected getText(EObject object) {

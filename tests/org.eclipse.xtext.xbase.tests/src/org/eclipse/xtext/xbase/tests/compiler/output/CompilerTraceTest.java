@@ -7,6 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.tests.compiler.output;
 
+import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -22,6 +23,7 @@ import org.eclipse.xtext.generator.trace.AbstractTraceRegion;
 import org.eclipse.xtext.generator.trace.ILocationData;
 import org.eclipse.xtext.generator.trace.ILocationInResource;
 import org.eclipse.xtext.generator.trace.ITrace;
+import org.eclipse.xtext.generator.trace.ITraceURIConverter;
 import org.eclipse.xtext.resource.ILocationInFileProvider;
 import org.eclipse.xtext.util.TextRegion;
 import org.eclipse.xtext.xbase.XExpression;
@@ -68,7 +70,7 @@ public class CompilerTraceTest extends AbstractXbaseTestCase {
 		
 		@Override
 		@Nullable
-		protected ILocationInResource createLocationInResourceFor(@NonNull ILocationData location, @NonNull AbstractTraceRegion traceRegion) {
+		protected ILocationInResource createLocationInResourceFor(@NonNull ILocationData location, @NonNull AbstractTraceRegion traceRegion, @NonNull Map<URI, URI> cache) {
 			URI path = location.getPath();
 			if (path == null)
 				path = traceRegion.getAssociatedPath();
@@ -81,6 +83,9 @@ public class CompilerTraceTest extends AbstractXbaseTestCase {
 	
 	@Inject
 	private ITypeProvider typeProvider;
+	
+	@Inject 
+	private ITraceURIConverter converter;
 	
 	@Inject
 	private ILocationInFileProvider locationProvider;
@@ -1046,7 +1051,7 @@ public class CompilerTraceTest extends AbstractXbaseTestCase {
 		String xbaseGroup3 = xbaseMatcher.group(3);
 		String actualCode = xbaseGroup1 + xbaseGroup2 + xbaseGroup3; 
 		XExpression model = expression(actualCode,true);
-		TreeAppendable appendable = new TreeAppendable(new ImportManager(true), locationProvider, jvmModelAssociations, model, "  ", "\n");
+		TreeAppendable appendable = new TreeAppendable(new ImportManager(true), converter, locationProvider, jvmModelAssociations, model, "  ", "\n");
 		XbaseCompiler compiler = get(XbaseCompiler.class);
 		JvmTypeReference returnType = typeProvider.getCommonReturnType(model, true);
 		compiler.compile(model, appendable, returnType);

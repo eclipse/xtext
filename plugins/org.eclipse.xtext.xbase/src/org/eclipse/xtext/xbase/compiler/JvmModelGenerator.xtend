@@ -78,6 +78,7 @@ import org.eclipse.xtext.xbase.jvmmodel.ILogicalContainerProvider
 import org.eclipse.xtext.xbase.jvmmodel.JvmTypeExtensions
 
 import static org.eclipse.xtext.util.Strings.*
+import org.eclipse.xtext.generator.trace.ITraceURIConverter
 
 /**
  * A generator implementation that processes the 
@@ -103,6 +104,7 @@ class JvmModelGenerator implements IGenerator {
 	@Inject IScopeProvider scopeProvider
 	@Inject IQualifiedNameConverter qualifiedNameConverter
 	@Inject GeneratorConfig generatorConfig
+	@Inject ITraceURIConverter converter
 	
 	override void doGenerate(Resource input, IFileSystemAccess fsa) {
 		for (obj : input.contents) {
@@ -776,7 +778,7 @@ class JvmModelGenerator implements IGenerator {
 	}
 		
 	def TreeAppendable createAppendable(EObject context, ImportManager importManager, GeneratorConfig config) {
-		val appendable = new TreeAppendable(importManager, locationProvider, jvmModelAssociations, context, "  ", "\n")
+		val appendable = new TreeAppendable(importManager, converter, locationProvider, jvmModelAssociations, context, "  ", "\n")
 		val type = context.containerType
 		if( type != null) {
 			appendable.declareVariable(context.containerType, "this")

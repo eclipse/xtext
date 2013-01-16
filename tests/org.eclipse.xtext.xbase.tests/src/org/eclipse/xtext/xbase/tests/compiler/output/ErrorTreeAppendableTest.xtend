@@ -11,12 +11,18 @@ import org.eclipse.xtext.xbase.tests.AbstractXbaseTestCase
 import org.junit.Test
 
 import static org.eclipse.xtext.xbase.XbasePackage$Literals.*
+import org.eclipse.xtext.generator.trace.ITraceURIConverter
 
 class ErrorTreeAppendableTest extends AbstractXbaseTestCase {
 	
-	@Inject ILocationInFileProvider locationProvider
+	@Inject 
+	private ILocationInFileProvider locationProvider
 	
-	@Inject IJvmModelAssociations jvmModelAssociations
+	@Inject 
+	private IJvmModelAssociations jvmModelAssociations
+	
+	@Inject 
+	private ITraceURIConverter converter;
 	
 	@Test
 	def testTraceChildIsSelf() {
@@ -36,6 +42,6 @@ class ErrorTreeAppendableTest extends AbstractXbaseTestCase {
 	}
 	
 	def createErrorTreeAppendable(EObject source) {
-		new TreeAppendable(new ImportManager(true), locationProvider, jvmModelAssociations, source, " ", "<newline>").errorChild(source)
+		new TreeAppendable(new ImportManager(true), converter, locationProvider, jvmModelAssociations, source, " ", "<newline>").errorChild(source)
 	}
 }

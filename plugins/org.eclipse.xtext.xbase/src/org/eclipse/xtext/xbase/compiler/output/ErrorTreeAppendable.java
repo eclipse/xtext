@@ -16,6 +16,7 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.generator.trace.ILocationData;
+import org.eclipse.xtext.generator.trace.ITraceURIConverter;
 import org.eclipse.xtext.linking.lazy.LazyURIEncoder;
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.resource.ILocationInFileProvider;
@@ -35,12 +36,13 @@ public class ErrorTreeAppendable extends TreeAppendable {
 	private LazyURIEncoder encoder;
 
 	public ErrorTreeAppendable(SharedAppendableState state, 
+			ITraceURIConverter converter,
 			ILocationInFileProvider locationProvider,
 			IJvmModelAssociations jvmModelAssociations,
 			Set<ILocationData> sourceLocations, 
 			boolean useForDebugging,
 			EObject context) {
-		super(state, locationProvider, jvmModelAssociations, sourceLocations, useForDebugging);
+		super(state, converter, locationProvider, jvmModelAssociations, sourceLocations, useForDebugging);
 		this.context = context;
 		encoder = new LazyURIEncoder();
 	}
