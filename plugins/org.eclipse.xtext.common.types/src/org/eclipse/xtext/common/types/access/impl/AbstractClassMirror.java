@@ -42,6 +42,9 @@ public abstract class AbstractClassMirror implements IClassMirror {
 			if (obj instanceof JvmArrayType) {
 				if (obj.eContainer() instanceof JvmGenericArrayTypeReference)
 					return fallback.getFragment(obj);
+				if (obj.eContainer() instanceof JvmIdentifiableElement) {
+					return getFragment(obj.eContainer(), fallback) + "[]";
+				}
 			}
 			return ((JvmIdentifiableElement) obj).getIdentifier();
 		}

@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2009 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2013 itemis AG (http://www.itemis.eu) and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -7,15 +7,21 @@
  *******************************************************************************/
 package org.eclipse.xtext.common.types.access.impl;
 
-import org.eclipse.xtext.common.types.JvmType;
+import org.eclipse.xtext.common.types.access.CachingClasspathTypeProviderFactory;
+
+import com.google.inject.Inject;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
- * @noimplement This interface is not intended to be implemented by clients.
- * @noextend This interface is not intended to be extended by clients.
  */
-public interface ITypeFactory<Arg> {
+public class CachingClasspathTypeProviderTest extends ClasspathTypeProviderTest {
 
-	JvmType createType(Arg arg);
+	@Inject
+	private CachingClasspathTypeProviderFactory typeProviderFactory;
+	
+	@Override
+	protected ClasspathTypeProvider createTypeProvider() {
+		return typeProviderFactory.createTypeProvider(getResourceSet());
+	}
 	
 }

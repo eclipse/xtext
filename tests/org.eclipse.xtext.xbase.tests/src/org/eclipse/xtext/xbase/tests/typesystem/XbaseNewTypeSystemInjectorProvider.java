@@ -9,6 +9,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.xtext.common.types.JvmAnnotationTarget;
+import org.eclipse.xtext.common.types.access.CachingClasspathTypeProviderFactory;
 import org.eclipse.xtext.common.types.access.ClasspathTypeProviderFactory;
 import org.eclipse.xtext.common.types.access.impl.ClasspathTypeProvider;
 import org.eclipse.xtext.common.types.access.impl.DeclaredTypeFactory;
@@ -74,10 +75,6 @@ public class XbaseNewTypeSystemInjectorProvider extends XbaseInjectorProvider {
 		public void configureLinkingIScopeProvider(Binder binder) {
 			binder.bind(IScopeProvider.class).annotatedWith(LinkingScopeProviderBinding.class)
 					.to(XbaseBatchScopeProvider.class);
-		}
-
-		public Class<? extends ClasspathTypeProviderFactory> bindClasspathTypeProviderFactory() {
-			return ClasspathTypeProviderFactoryWithoutAnnotationValues.class;
 		}
 
 		@Override
