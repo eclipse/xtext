@@ -85,7 +85,6 @@ public class XtendBatchCompiler {
 		}
 	};
 
-	@Inject
 	protected Provider<ResourceSet> resourceSetProvider;
 	@Inject
 	protected Provider<JavaIoFileSystemAccess> javaIoFileSystemAccessProvider;
@@ -136,6 +135,11 @@ public class XtendBatchCompiler {
 	
 	public void setWriteTraceFiles(boolean writeTraceFiles) {
 		this.writeTraceFiles = writeTraceFiles;
+	}
+	
+	@Inject
+	public void setResourceSetProvider(Provider<ResourceSet> resourceSetProvider) {
+		this.resourceSetProvider = resourceSetProvider;
 	}
 
 	public boolean isDeleteTempDirectory() {
