@@ -14,7 +14,6 @@ import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugin.MojoFailureException;
 import org.apache.maven.project.MavenProject;
-import org.eclipse.xtend.core.XtendStandaloneSetup;
 import org.eclipse.xtext.generator.trace.AbstractTraceRegion;
 import org.eclipse.xtext.generator.trace.ITraceToBytecodeInstaller;
 import org.eclipse.xtext.generator.trace.TraceAsPrimarySourceInstaller;
@@ -74,7 +73,7 @@ public abstract class AbstractXtendInstallDebugInfoMojo extends AbstractMojo {
 	protected boolean xtendAsPrimaryDebugSource;
 
 	public AbstractXtendInstallDebugInfoMojo() {
-		new XtendStandaloneSetup().createInjectorAndDoEMFRegistration().injectMembers(this);
+		new XtendMavenStandaloneSetup().createInjectorAndDoEMFRegistration().injectMembers(this);
 	}
 
 	protected void collectJavaSourceFile2traceFile(String root, String subdir,

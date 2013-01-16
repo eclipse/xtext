@@ -23,7 +23,6 @@ import org.apache.maven.artifact.Artifact;
 import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.project.MavenProject;
-import org.eclipse.xtend.core.XtendStandaloneSetup;
 import org.eclipse.xtend.core.compiler.batch.XtendBatchCompiler;
 
 import com.google.common.base.Predicate;
@@ -76,7 +75,7 @@ public abstract class AbstractXtend2CompilerMojo extends AbstractMojo {
 	protected abstract void internalExecute(XtendBatchCompiler xtend2BatchCompiler) throws MojoExecutionException;
 
 	protected XtendBatchCompiler createXtendBatchCompiler() {
-		Injector injector = new XtendStandaloneSetup().createInjectorAndDoEMFRegistration();
+		Injector injector = new XtendMavenStandaloneSetup().createInjectorAndDoEMFRegistration();
 		return injector.getInstance(XtendBatchCompiler.class);
 	}
 
