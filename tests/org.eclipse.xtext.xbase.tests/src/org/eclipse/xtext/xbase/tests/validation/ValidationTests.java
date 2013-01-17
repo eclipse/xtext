@@ -251,6 +251,22 @@ public class ValidationTests extends AbstractXbaseTestCase {
 		helper.assertError(expression, TypesPackage.Literals.JVM_FORMAL_PARAMETER, VARIABLE_NAME_SHADOWING, "x");
 	}
 	
+	@Test
+	@Ignore("Fails with old implementation")
+	public void testVariableShadowing_08() throws Exception {
+		XExpression expression = expression("[ int x, String x | x.substring(1) ]");
+		helper.assertError(expression, TypesPackage.Literals.JVM_FORMAL_PARAMETER, VARIABLE_NAME_SHADOWING, "x");
+		helper.assertNoError(expression, UNRESOLVABLE_PROXY);
+	}
+	
+	@Test 
+	@Ignore("Fails with old implementation")
+	public void testVariableShadowing_09() throws Exception {
+		XExpression expression = expression("[ String x, int x | x.substring(1) ]");
+		helper.assertError(expression, TypesPackage.Literals.JVM_FORMAL_PARAMETER, VARIABLE_NAME_SHADOWING, "x");
+		helper.assertError(expression, XMEMBER_FEATURE_CALL, UNRESOLVABLE_PROXY, "substring(int)");
+	}
+	
 	@Test public void testNoPrimitivesInTypeArgs_00() throws Exception {
 		XExpression expression = expression("java::util::Collections::<boolean>singletonList");
 		helper.assertError(expression, TypesPackage.Literals.JVM_TYPE_REFERENCE, INVALID_USE_OF_TYPE, "primitives");

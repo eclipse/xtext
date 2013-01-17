@@ -9,6 +9,7 @@ package org.eclipse.xtext.xbase.typesystem.internal;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.annotation.NonNullByDefault;
+import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.util.internal.StopWatches;
 import org.eclipse.xtext.util.internal.StopWatches.StoppedTask;
 import org.eclipse.xtext.xbase.XExpression;
@@ -18,6 +19,7 @@ import org.eclipse.xtext.xbase.typesystem.IResolvedTypes;
 import org.eclipse.xtext.xbase.typesystem.computation.ITypeComputer;
 import org.eclipse.xtext.xbase.typesystem.util.BoundTypeArgumentMerger;
 import org.eclipse.xtext.xbase.typesystem.util.CommonTypeComputationServices;
+import org.eclipse.xtext.xbase.validation.FeatureNameValidator;
 
 import com.google.inject.Inject;
 
@@ -42,6 +44,9 @@ public class DefaultReentrantTypeResolver implements IReentrantTypeResolver {
 	
 	@Inject
 	private ExpressionArgumentFactory expressionArgumentFactory;
+	
+	@Inject
+	private FeatureNameValidator featureNameValidator;
 	
 	private EObject root;
 	
@@ -99,6 +104,14 @@ public class DefaultReentrantTypeResolver implements IReentrantTypeResolver {
 	protected void _computeTypes(ResolvedTypes resolvedTypes, IFeatureScopeSession session, XExpression expression) {
 		ExpressionBasedRootTypeComputationState state = new ExpressionBasedRootTypeComputationState(resolvedTypes, session, expression, this);
 		state.computeTypes();
+	}
+	
+	protected boolean isShadowingAllowed(QualifiedName name) {
+		return featureNameValidator.isShadowingAllowed(name);
+	}
+	
+	protected boolean isDisallowedName(QualifiedName name) {
+		return featureNameValidator.isDisallowedName(name);
 	}
 	
 	protected ITypeComputer getTypeComputer() {

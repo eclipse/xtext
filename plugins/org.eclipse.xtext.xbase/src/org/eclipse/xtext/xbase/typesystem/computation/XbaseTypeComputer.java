@@ -242,7 +242,14 @@ public class XbaseTypeComputer implements ITypeComputer {
 							state.addLocalToCurrentScope((XVariableDeclaration)expression);
 						}
 					}
-					state.computeTypes(IterableExtensions.last(expressions));
+					XExpression lastExpression = IterableExtensions.last(expressions);
+					state.computeTypes(lastExpression);
+					// add the last expression to the scope, too in order validate for duplicate names, even
+					// though the variable declaration could be removed automatically to keep only the side effect
+					// of the initializer
+					if (lastExpression instanceof XVariableDeclaration) {
+						state.addLocalToCurrentScope((XVariableDeclaration) lastExpression);
+					}
 				} else {
 					expectation.acceptActualType(new AnyTypeReference(expectation.getReferenceOwner()), ConformanceHint.UNCHECKED);
 				}
@@ -296,7 +303,7 @@ public class XbaseTypeComputer implements ITypeComputer {
 			 * val Object o = ""
 			 * o.substring(1)
 			 */
-			state.assignType(object, lightweightTypeReference != null ? lightweightTypeReference : computedType.getActualExpressionType());
+			state.assignType(object, lightweightTypeReference != null ? lightweightTypeReference : computedType.getActualExpressionType(), false);
 			LightweightTypeReference primitiveVoid = getPrimitiveVoid(state);
 			state.acceptActualType(primitiveVoid);
 		}

@@ -34,6 +34,7 @@ import com.google.inject.Singleton;
  * @author Sven Efftinge - Initial contribution and API
  * @since 2.4
  */
+@SuppressWarnings("deprecation")
 @Singleton
 public class XbaseBatchTypeProvider extends XbaseTypeProvider {
 	

@@ -13,7 +13,9 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.xtext.diagnostics.ExceptionDiagnostic;
 import org.eclipse.xtext.nodemodel.INode;
+import org.eclipse.xtext.parser.IParseResult;
 import org.eclipse.xtext.resource.DerivedStateAwareResource;
+import org.eclipse.xtext.util.CancelIndicator;
 import org.eclipse.xtext.util.Triple;
 
 import com.google.inject.Inject;
@@ -47,6 +49,16 @@ public class BatchLinkableResource extends DerivedStateAwareResource {
 			throw new WrappedException(e);
 		}
 		return super.getEObject(uriFragment);
+	}
+	
+	@Override
+	public void resolveLazyCrossReferences(CancelIndicator monitor) {
+		IParseResult parseResult = getParseResult();
+		if (parseResult != null) {
+			batchLinkingService.resolveBatched(parseResult.getRootASTElement());
+		}
+		if (!monitor.isCanceled())
+			super.resolveLazyCrossReferences(monitor);
 	}
 	
 }

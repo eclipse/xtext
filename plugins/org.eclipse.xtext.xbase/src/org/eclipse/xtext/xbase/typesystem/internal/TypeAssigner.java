@@ -35,12 +35,17 @@ public class TypeAssigner implements ITypeAssigner {
 	}
 
 	public void assignType(JvmIdentifiableElement element, @Nullable LightweightTypeReference actualType) {
+		assignType(element, actualType, true);
+	}
+	
+	protected void assignType(JvmIdentifiableElement element, @Nullable LightweightTypeReference actualType, boolean addToChildScope) {
 		if (actualType != null) {
 			state.getResolvedTypes().setType(element, actualType);
 		} else {
 			state.getResolvedTypes().setType(element, new AnyTypeReference(state.getReferenceOwner()));
 		}
-		state.addLocalToCurrentScope(element);
+		if (addToChildScope)
+			state.addLocalToCurrentScope(element);
 	}
 
 	protected OwnedConverter getConverter() {

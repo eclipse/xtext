@@ -12,6 +12,7 @@ import java.util.List;
 import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
+import org.eclipse.xtext.diagnostics.AbstractDiagnostic;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.typesystem.computation.ILinkingCandidate;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightBoundTypeArgument;
@@ -58,6 +59,11 @@ public class ReassigningStackedResolvedTypes extends StackedResolvedTypes {
 	@Override
 	protected void acceptUnboundTypeReference(Object handle, UnboundTypeReference reference) {
 		getParent().acceptUnboundTypeReference(handle, reference);
+	}
+	
+	@Override
+	protected void addDiagnostic(AbstractDiagnostic diagnostic) {
+		getParent().addDiagnostic(diagnostic);
 	}
 	
 	@Override

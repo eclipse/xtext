@@ -7,6 +7,8 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.typesystem.internal;
 
+import java.util.List;
+
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.jdt.annotation.NonNull;
@@ -41,19 +43,23 @@ public class CachingBatchTypeResolver implements IBatchTypeResolver {
 			return IResolvedTypes.NULL;
 		}
 		Resource resource = object.eResource();
-		final EObject entryPoint = delegate.getEntryPoint(object);
-		final LazyResolvedTypes result = cache.get(Tuples.create(CachingBatchTypeResolver.class, entryPoint), resource, new Provider<LazyResolvedTypes>() {
-			public LazyResolvedTypes get() {
-				return new LazyResolvedTypes(entryPoint);
-			}
-		});
-		cache.execWithoutCacheClear(resource, new IUnitOfWork.Void<Resource>() {
-			@Override
-			public void process(Resource state) throws Exception {
-				result.delegate(); // trigger the actual resolution after the thing was cached
-			}
-		});
-		return result;
+		List<EObject> entryPoints = delegate.getEntryPoints(object);
+		if (entryPoints.size() == 1) {
+			final EObject entryPoint = entryPoints.get(0);
+			final LazyResolvedTypes result = cache.get(Tuples.create(CachingBatchTypeResolver.class, entryPoint), resource, new Provider<LazyResolvedTypes>() {
+				public LazyResolvedTypes get() {
+					return new LazyResolvedTypes(entryPoint);
+				}
+			});
+			cache.execWithoutCacheClear(resource, new IUnitOfWork.Void<Resource>() {
+				@Override
+				public void process(Resource state) throws Exception {
+					result.delegate(); // trigger the actual resolution after the thing was cached
+				}
+			});
+			return result;
+		}
+		return IResolvedTypes.NULL;
 	}
 	
 	@NonNullByDefault

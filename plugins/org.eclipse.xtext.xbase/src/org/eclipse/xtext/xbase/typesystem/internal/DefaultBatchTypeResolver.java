@@ -7,6 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.typesystem.internal;
 
+import java.util.Collections;
 import java.util.List;
 
 import org.eclipse.emf.common.notify.Adapter;
@@ -18,6 +19,7 @@ import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.xbase.typesystem.IBatchTypeResolver;
 import org.eclipse.xtext.xbase.typesystem.IResolvedTypes;
 
+import com.google.common.collect.Lists;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 
@@ -68,13 +70,37 @@ public class DefaultBatchTypeResolver implements IBatchTypeResolver {
 	}
 
 	protected IReentrantTypeResolver getTypeResolver(EObject object) {
-		EObject root = getEntryPoint(object);
-		IReentrantTypeResolver result = getOrCreateResolver(root);
+		List<EObject> roots = getEntryPoints(object);
+		if (roots.size() == 1) {
+			IReentrantTypeResolver result = getOrCreateResolver(roots.get(0));
+			return result;
+		}
+		CompoundReentrantTypeResolver result = new CompoundReentrantTypeResolver();
+		for(EObject root: roots) {
+			result.initializeFrom(root);
+		}
 		return result;
 	}
+	
+	public class CompoundReentrantTypeResolver implements IReentrantTypeResolver {
 
-	protected EObject getEntryPoint(EObject object) {
-		return EcoreUtil.getRootContainer(object);
+		private List<IReentrantTypeResolver> resolvers = Lists.newArrayList();
+		
+		public void initializeFrom(EObject root) {
+			resolvers.add(getOrCreateResolver(root));
+		}
+
+		public IResolvedTypes reentrantResolve() {
+			for(IReentrantTypeResolver resolver: resolvers) {
+				resolver.reentrantResolve();
+			}
+			return IResolvedTypes.NULL;
+		}
+		
+	}
+
+	protected List<EObject> getEntryPoints(EObject object) {
+		return Collections.singletonList(EcoreUtil.getRootContainer(object));
 	}
 
 	protected IReentrantTypeResolver getOrCreateResolver(EObject root) {
