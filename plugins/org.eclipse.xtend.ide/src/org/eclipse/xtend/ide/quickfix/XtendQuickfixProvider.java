@@ -34,7 +34,6 @@ import org.eclipse.xtext.common.types.JvmConstructor;
 import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeReference;
-import org.eclipse.xtext.common.types.TypesPackage;
 import org.eclipse.xtext.common.types.access.jdt.IJavaProjectProvider;
 import org.eclipse.xtext.common.types.util.TypeReferences;
 import org.eclipse.xtext.diagnostics.Diagnostic;
@@ -53,7 +52,6 @@ import org.eclipse.xtext.util.StopWatch;
 import org.eclipse.xtext.validation.Issue;
 import org.eclipse.xtext.xbase.XBlockExpression;
 import org.eclipse.xtext.xbase.XExpression;
-import org.eclipse.xtext.xbase.compiler.ScopeFakeReference;
 import org.eclipse.xtext.xbase.ui.contentassist.ReplacingAppendable;
 import org.eclipse.xtext.xbase.ui.quickfix.XbaseQuickfixProvider;
 
@@ -87,7 +85,6 @@ public class XtendQuickfixProvider extends XbaseQuickfixProvider {
 
 	private static final Set<String> LINKING_ISSUE_CODES = newHashSet(
 			IssueCodes.FEATURECALL_LINKING_DIAGNOSTIC, 
-			IssueCodes.JAVA_DOC_LINKING_DIAGNOSTIC, 
 			Diagnostic.LINKING_DIAGNOSTIC);
 	
 	@Override
@@ -118,17 +115,6 @@ public class XtendQuickfixProvider extends XbaseQuickfixProvider {
 		super.createLinkingIssueQuickfixes(issue, issueResolutionAcceptor, xtextDocument, resource, referenceOwner, unresolvedReference);
 		createTypeQuickfixes.addQuickfixes(issue, issueResolutionAcceptor, xtextDocument, resource, referenceOwner, unresolvedReference);
 		createMemberQuickfixes.addQuickfixes(issue, issueResolutionAcceptor, xtextDocument, resource, referenceOwner, unresolvedReference);
-	}
-
-	@Override
-	protected EReference getUnresolvedEReference(Issue issue, EObject target) {
-		EReference reference = super.getUnresolvedEReference(issue, target);
-		if(reference == null){
-			if(issue.getCode().equals(IssueCodes.JAVA_DOC_LINKING_DIAGNOSTIC)){
-				return  new ScopeFakeReference(TypesPackage.eINSTANCE.getJvmType());
-			}
-		}
-		return reference;
 	}
 
 	@Fix(IssueCodes.INCONSISTENT_INDENTATION)

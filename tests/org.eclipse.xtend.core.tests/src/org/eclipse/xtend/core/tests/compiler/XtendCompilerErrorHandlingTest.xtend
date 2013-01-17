@@ -4,14 +4,12 @@ import com.google.inject.Inject
 import org.eclipse.xtend.core.tests.AbstractXtendTestCase
 import org.eclipse.xtext.common.types.JvmDeclaredType
 import org.eclipse.xtext.util.CancelIndicator
-import org.eclipse.xtext.util.OnChangeEvictingCache
 import org.eclipse.xtext.validation.CheckMode
 import org.eclipse.xtext.validation.IResourceValidator
 import org.eclipse.xtext.xbase.compiler.ElementIssueProvider
-import org.eclipse.xtext.xbase.compiler.IElementIssueProvider
+import org.eclipse.xtext.xbase.compiler.IGeneratorConfigProvider
 import org.eclipse.xtext.xbase.compiler.JvmModelGenerator
 import org.junit.Test
-import org.eclipse.xtext.xbase.compiler.GeneratorConfig
 
 class XtendCompilerErrorHandlingTest extends AbstractXtendTestCase {
 	
@@ -21,7 +19,7 @@ class XtendCompilerErrorHandlingTest extends AbstractXtendTestCase {
 	
 	@Inject ElementIssueProvider$Factory issueProviderFactory
 	
-	@Inject GeneratorConfig generatorConfig
+	@Inject IGeneratorConfigProvider generatorConfigProvider
 
 	@Test
 	def testUnresolvedSuperclass() {
@@ -283,7 +281,7 @@ class XtendCompilerErrorHandlingTest extends AbstractXtendTestCase {
 		try {
 			issueProviderFactory.attachData(resource, issues)
 			val inferredType = resource.contents.filter(typeof(JvmDeclaredType)).head
-			val javaCode = generator.generateType(inferredType, generatorConfig);
+			val javaCode = generator.generateType(inferredType, generatorConfigProvider.get(inferredType));
 			assertEquals(expected.toString, javaCode.toString)
 		} finally {
 			issueProviderFactory.detachData(resource);

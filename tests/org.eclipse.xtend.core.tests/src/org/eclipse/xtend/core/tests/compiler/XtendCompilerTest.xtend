@@ -1,11 +1,11 @@
 package org.eclipse.xtend.core.tests.compiler
 
 import com.google.inject.Inject
-import com.google.inject.Provider
 import org.eclipse.xtend.core.tests.AbstractXtendTestCase
 import org.eclipse.xtext.common.types.JvmDeclaredType
 import org.eclipse.xtext.xbase.compiler.DisableCodeGenerationAdapter
 import org.eclipse.xtext.xbase.compiler.GeneratorConfig
+import org.eclipse.xtext.xbase.compiler.IGeneratorConfigProvider
 import org.eclipse.xtext.xbase.compiler.JvmModelGenerator
 import org.junit.Ignore
 import org.junit.Test
@@ -13,7 +13,7 @@ import org.junit.Test
 abstract class AbstractXtendCompilerTest extends AbstractXtendTestCase {
 	
 	@Inject JvmModelGenerator generator
-	@Inject Provider<GeneratorConfig> generatorConfigProvider
+	@Inject IGeneratorConfigProvider generatorConfigProvider
 	
 	@Test def testThreeDataClassesExtendingEachOther() {
 		// part of the Html builder API example. Caused and NPE in which wasn't elsewhere detected in the tests.
@@ -2453,7 +2453,7 @@ abstract class AbstractXtendCompilerTest extends AbstractXtendTestCase {
         val file = file(input.toString(), true)
         val barType = file.eResource.contents.filter(typeof(JvmDeclaredType)).head
         val bazType = file.eResource.contents.filter(typeof(JvmDeclaredType)).last
-        val generatorConfig =  generatorConfigProvider.get
+        val generatorConfig =  generatorConfigProvider.get(barType)
         val barJavaCode = generator.generateType(barType, generatorConfig);
         val bazJavaCode = generator.generateType(bazType, generatorConfig);
         XtendCompilerTest::assertEquals(expectedBarClass.toString, barJavaCode.toString);
@@ -2504,8 +2504,8 @@ abstract class AbstractXtendCompilerTest extends AbstractXtendTestCase {
     
     @Test
     def compileWithConfiguration(){
-	val generatorConfig = generatorConfigProvider.get
-	generatorConfig.setGenerateSuppressWarnings(false)
+	val generatorConfig = generatorConfigProvider.get(null)
+	generatorConfig.setGenerateSyntheticSuppressWarnings(false)
 	generatorConfig.setGenerateExpressions(false)
         assertCompilesTo(
         '''
@@ -2537,7 +2537,7 @@ abstract class AbstractXtendCompilerTest extends AbstractXtendTestCase {
 
     @Test@Ignore
     def compileProperty(){
-	val generatorConfig = generatorConfigProvider.get
+	val generatorConfig = generatorConfigProvider.get(null)
         assertCompilesTo(
         '''
 			package foo
@@ -2567,7 +2567,7 @@ abstract class AbstractXtendCompilerTest extends AbstractXtendTestCase {
 
 
     def  assertCompilesTo(CharSequence input, CharSequence expected){
-	assertCompilesTo(input, expected, generatorConfigProvider.get)
+		assertCompilesTo(input, expected, generatorConfigProvider.get(null))
     }
 
 	def assertCompilesTo(CharSequence input, CharSequence expected, GeneratorConfig config) {

@@ -13,6 +13,7 @@ import org.eclipse.xtend.core.xtend.XtendClass;
 import org.eclipse.xtend.core.xtend.XtendFile;
 import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.xbase.compiler.GeneratorConfig;
+import org.eclipse.xtext.xbase.compiler.IGeneratorConfigProvider;
 import org.eclipse.xtext.xbase.compiler.JvmModelGenerator;
 
 import com.google.inject.Injector;
@@ -54,7 +55,7 @@ public class TestCaseCompiler {
 		JvmModelGenerator generator = injector.getInstance(JvmModelGenerator.class);
 		XtendFile xtendFile = (XtendFile)res.getContents().get(0);
 		JvmGenericType inferredType = associations.getInferredType((XtendClass) xtendFile.getXtendTypes().get(0));
-		GeneratorConfig config = injector.getInstance(GeneratorConfig.class);
+		GeneratorConfig config = injector.getInstance(IGeneratorConfigProvider.class).get(inferredType);
 		CharSequence javaCode = generator.generateType(inferredType, config);
 		writer.append(javaCode);
 		writer.close();
