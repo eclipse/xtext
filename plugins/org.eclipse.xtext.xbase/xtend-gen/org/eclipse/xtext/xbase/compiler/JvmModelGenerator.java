@@ -87,7 +87,6 @@ import org.eclipse.xtext.xbase.compiler.XbaseCompiler;
 import org.eclipse.xtext.xbase.compiler.output.ITreeAppendable;
 import org.eclipse.xtext.xbase.compiler.output.TreeAppendable;
 import org.eclipse.xtext.xbase.jvmmodel.IJvmModelAssociations;
-import org.eclipse.xtext.xbase.jvmmodel.IJvmModelInferrer;
 import org.eclipse.xtext.xbase.jvmmodel.ILogicalContainerProvider;
 import org.eclipse.xtext.xbase.jvmmodel.JvmTypeExtensions;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
@@ -102,7 +101,7 @@ import org.eclipse.xtext.xbase.lib.StringExtensions;
 
 /**
  * A generator implementation that processes the
- * derived {@link IJvmModelInferrer JVM model}
+ * derived {@link org.eclipse.xtext.xbase.jvmmodel.IJvmModelInferrer JVM model}
  * and produces the respective java code.
  */
 @SuppressWarnings("all")

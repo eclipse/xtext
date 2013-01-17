@@ -55,7 +55,6 @@ import org.eclipse.xtext.generator.IFileSystemAccess
 import org.eclipse.xtext.generator.IGenerator
 import org.eclipse.xtext.generator.trace.ITraceURIConverter
 import org.eclipse.xtext.generator.trace.LocationData
-import org.eclipse.xtext.naming.IQualifiedNameConverter
 import org.eclipse.xtext.nodemodel.INode
 import org.eclipse.xtext.resource.ILocationInFileProvider
 import org.eclipse.xtext.util.ITextRegionWithLineInformation
@@ -67,7 +66,6 @@ import org.eclipse.xtext.xbase.XExpression
 import org.eclipse.xtext.xbase.compiler.output.ITreeAppendable
 import org.eclipse.xtext.xbase.compiler.output.TreeAppendable
 import org.eclipse.xtext.xbase.jvmmodel.IJvmModelAssociations
-import org.eclipse.xtext.xbase.jvmmodel.IJvmModelInferrer
 import org.eclipse.xtext.xbase.jvmmodel.ILogicalContainerProvider
 import org.eclipse.xtext.xbase.jvmmodel.JvmTypeExtensions
 
@@ -75,7 +73,7 @@ import static org.eclipse.xtext.util.Strings.*
 
 /**
  * A generator implementation that processes the 
- * derived {@link IJvmModelInferrer JVM model}
+ * derived {@link org.eclipse.xtext.xbase.jvmmodel.IJvmModelInferrer JVM model}
  * and produces the respective java code.
  */
 class JvmModelGenerator implements IGenerator {
