@@ -19,24 +19,28 @@ import org.junit.Test;
  */
 public class AbstractFeatureCallCustomImplTest extends AbstractXbaseTestCase {
 	
+	@SuppressWarnings("deprecation")
 	@Test public void testFeatureCall() throws Exception {
 		assertEquals(0, ((XFeatureCall) expression("foo")).getExplicitArguments().size());
 		assertEquals(1, ((XFeatureCall) expression("foo(2)")).getExplicitArguments().size());
 		assertEquals(2, ((XFeatureCall) expression("foo(3,4)")).getExplicitArguments().size());
 	}
 	
+	@SuppressWarnings("deprecation")
 	@Test public void testMemberFeatureCall() throws Exception {
 		assertEquals(1, ((XMemberFeatureCall) expression("foo.bar")).getExplicitArguments().size());
 		assertEquals(2, ((XMemberFeatureCall) expression("foo.bar(2)")).getExplicitArguments().size());
 		assertEquals(3, ((XMemberFeatureCall) expression("foo.bar(3,4)")).getExplicitArguments().size());
 	}
 	
+	@SuppressWarnings("deprecation")
 	@Test public void testBinaryOperation() throws Exception {
 		assertEquals(2, ((XBinaryOperation) expression("foo + bar")).getExplicitArguments().size());
 		assertEquals(2, ((XBinaryOperation) expression("foo - bar + baz")).getExplicitArguments().size());
 		assertEquals(2, ((XBinaryOperation) expression("a + b * c + d")).getExplicitArguments().size());
 	}
 	
+	@SuppressWarnings("deprecation")
 	@Test public void testUnaryOperation() throws Exception {
 		assertEquals(1, ((XUnaryOperation) expression("- bar")).getExplicitArguments().size());
 	}

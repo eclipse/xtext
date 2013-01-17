@@ -32,6 +32,7 @@ Export-Package: org.eclipse.xtext.xbase;x-friends:="org.eclipse.xtext.xbase.juni
  org.eclipse.xtext.xbase.annotations.scoping;x-internal:=true,
  org.eclipse.xtext.xbase.annotations.serializer;x-internal:=true,
  org.eclipse.xtext.xbase.annotations.services;x-internal:=true,
+ org.eclipse.xtext.xbase.annotations.typesystem;x-internal:=true,
  org.eclipse.xtext.xbase.annotations.typing;x-internal:=true,
  org.eclipse.xtext.xbase.annotations.validation;x-internal:=true,
  org.eclipse.xtext.xbase.annotations.xAnnotations;x-friends:="org.eclipse.xtext.xbase.tests",

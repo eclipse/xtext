@@ -20,6 +20,7 @@ import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmMember;
 import org.eclipse.xtext.common.types.util.TypeReferences;
+import org.eclipse.xtext.diagnostics.AbstractDiagnostic;
 import org.eclipse.xtext.diagnostics.Severity;
 import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.IEObjectDescription;
@@ -198,6 +199,10 @@ public abstract class AbstractTypeComputationState implements ITypeComputationSt
 	public TypeAssigner assignTypes() {
 		TypeCheckpointComputationState state = new TypeCheckpointComputationState(resolvedTypes, featureScopeSession, reentrantTypeResolver, this);
 		return createTypeAssigner(state);
+	}
+	
+	public void addDiagnostic(AbstractDiagnostic diagnostic) {
+		resolvedTypes.addDiagnostic(diagnostic);
 	}
 
 	protected TypeAssigner createTypeAssigner(final AbstractTypeComputationState state) {

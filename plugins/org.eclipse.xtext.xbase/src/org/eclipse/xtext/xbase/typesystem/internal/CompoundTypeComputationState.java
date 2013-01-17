@@ -14,6 +14,7 @@ import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmTypeReference;
+import org.eclipse.xtext.diagnostics.AbstractDiagnostic;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.XConstructorCall;
 import org.eclipse.xtext.xbase.XExpression;
@@ -156,6 +157,12 @@ public class CompoundTypeComputationState implements ITypeComputationState {
 			array[i] = components[i].assignTypes();
 		}
 		return new CompoundTypeAssigner(owner, array);
+	}
+	
+	public void addDiagnostic(AbstractDiagnostic diagnostic) {
+		for (int i = 0; i < components.length; i++) {
+			components[i].addDiagnostic(diagnostic);
+		}
 	}
 
 	public ITypeReferenceOwner getReferenceOwner() {
