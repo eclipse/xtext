@@ -9,7 +9,7 @@ package org.eclipse.xtext.xbase.resource;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
-import org.eclipse.xtext.xbase.scoping.batch.XbaseBatchScopeProvider;
+import org.eclipse.xtext.xbase.scoping.batch.IBatchScopeProvider;
 import org.eclipse.xtext.xbase.typesystem.IBatchTypeResolver;
 
 import com.google.inject.Inject;
@@ -20,7 +20,7 @@ import com.google.inject.Inject;
 public class BatchLinkingService {
 	
 	@Inject
-	private XbaseBatchScopeProvider batchScopeProvider;
+	private IBatchScopeProvider batchScopeProvider;
 	
 	@Inject
 	private IBatchTypeResolver batchTypeResolver;

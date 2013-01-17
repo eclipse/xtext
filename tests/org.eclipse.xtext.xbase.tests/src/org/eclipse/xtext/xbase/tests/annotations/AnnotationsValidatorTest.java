@@ -22,7 +22,7 @@ import com.google.inject.Inject;
 public class AnnotationsValidatorTest extends AbstractXbaseWithAnnotationsTest {
 	
 	@Inject 
-	private ValidationTestHelper validator;
+	protected ValidationTestHelper validator;
 	
 	@Test public void testTypeConformance_01() throws Exception {
 		XAnnotation annotation = annotation("@testdata.Annotation2('foo')", false);

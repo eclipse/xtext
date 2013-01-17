@@ -109,6 +109,7 @@ import org.eclipse.xtext.xtype.XtypePackage;
 import com.google.common.base.Joiner;
 import com.google.common.base.Predicate;
 import com.google.common.collect.ImmutableSet;
+import com.google.common.collect.ImmutableSet.Builder;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
@@ -155,7 +156,21 @@ public class XbaseJavaValidator2 extends AbstractXbaseJavaValidator {
 	@Inject
 	private IJavaDocTypeReferenceProvider javaDocTypeReferenceProvider;
 	
-	private final Set<EReference> typeConformanceCheckedReferences = ImmutableSet.of(
+	private final Set<EReference> typeConformanceCheckedReferences;
+	
+	{
+		ImmutableSet.Builder<EReference> builder = ImmutableSet.builder();
+		initTypeConformanceCheckedReferences(builder);
+		typeConformanceCheckedReferences = builder.build();
+		for(EReference reference: typeConformanceCheckedReferences) {
+			if (!XbasePackage.Literals.XEXPRESSION.isSuperTypeOf(reference.getEReferenceType())) {
+				throw new IllegalStateException("not a subtype of XExpression: " + reference);
+			}
+		}
+	}
+
+	protected void initTypeConformanceCheckedReferences(ImmutableSet.Builder<EReference> acceptor) {
+		acceptor.add(
 			XbasePackage.Literals.XVARIABLE_DECLARATION__RIGHT, 
 			XbasePackage.Literals.XIF_EXPRESSION__IF,
 			XbasePackage.Literals.XIF_EXPRESSION__THEN,
@@ -176,8 +191,9 @@ public class XbaseJavaValidator2 extends AbstractXbaseJavaValidator {
 			XbasePackage.Literals.XASSIGNMENT__VALUE, 
 			XbasePackage.Literals.XBINARY_OPERATION__RIGHT_OPERAND,
 			XbasePackage.Literals.XFOR_LOOP_EXPRESSION__FOR_EXPRESSION);
-
-	protected Set<EReference> getTypeConformanceCheckedReferences() {
+	}
+	
+	protected final Set<EReference> getTypeConformanceCheckedReferences() {
 		return typeConformanceCheckedReferences;
 	}
 	

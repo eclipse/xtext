@@ -156,7 +156,9 @@ public abstract class ResolvedTypes implements IResolvedTypes {
 		if (diagnostics == null) {
 			diagnostics = Sets.newLinkedHashSet();
 		}
-		diagnostics.add(diagnostic);
+		if (!diagnostics.add(diagnostic)) {
+			throw new IllegalStateException("Duplicate diagnostic: " + diagnostic);
+		}
 	}
 
 	@Nullable

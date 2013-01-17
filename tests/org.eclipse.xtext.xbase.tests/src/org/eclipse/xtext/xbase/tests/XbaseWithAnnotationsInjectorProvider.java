@@ -12,6 +12,8 @@ import org.eclipse.xtext.junit4.IRegistryConfigurator;
 import org.eclipse.xtext.resource.SynchronizedXtextResourceSet;
 import org.eclipse.xtext.xbase.XbaseRuntimeModule;
 import org.eclipse.xtext.xbase.XbaseStandaloneSetup;
+import org.eclipse.xtext.xbase.annotations.XbaseWithAnnotationsRuntimeModule;
+import org.eclipse.xtext.xbase.annotations.XbaseWithAnnotationsStandaloneSetup;
 import org.eclipse.xtext.xbase.junit.SynchronizedXtextResourceSetProvider;
 
 import com.google.inject.Guice;
@@ -19,11 +21,11 @@ import com.google.inject.Injector;
 import com.google.inject.Provider;
 
 /**
- * An injector provider for plain Xbase tests.
+ * A test injector provider for XbaseWithAnnotations. 
  * 
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public class XbaseInjectorProvider implements IInjectorProvider, IRegistryConfigurator {
+public class XbaseWithAnnotationsInjectorProvider implements IInjectorProvider, IRegistryConfigurator {
 
 	protected GlobalStateMemento stateBeforeInjectorCreation;
 	protected GlobalStateMemento stateAfterInjectorCreation;
@@ -43,7 +45,7 @@ public class XbaseInjectorProvider implements IInjectorProvider, IRegistryConfig
 	}
 
 	protected Injector internalCreateInjector() {
-		return new XbaseTestStandaloneSetup().createInjectorAndDoEMFRegistration();
+		return new XbaseWithAnnotationsTestStandaloneSetup().createInjectorAndDoEMFRegistration();
 	}
 
 	public void restoreRegistry() {
@@ -55,18 +57,18 @@ public class XbaseInjectorProvider implements IInjectorProvider, IRegistryConfig
 		stateAfterInjectorCreation.restoreGlobalState();
 	}
 
-	public static class XbaseTestStandaloneSetup extends XbaseStandaloneSetup {
+	public static class XbaseWithAnnotationsTestStandaloneSetup extends XbaseWithAnnotationsStandaloneSetup {
 
 		@Override
 		public Injector createInjector() {
-			return Guice.createInjector(new XbaseTestRuntimeModule());
+			return Guice.createInjector(new XbaseWithAnnotationsTestRuntimeModule());
 		}
 	}
 
-	public static class XbaseTestRuntimeModule extends XbaseRuntimeModule {
+	public static class XbaseWithAnnotationsTestRuntimeModule extends XbaseWithAnnotationsRuntimeModule {
 		@Override
 		public ClassLoader bindClassLoaderToInstance() {
-			return XbaseTestRuntimeModule.class.getClassLoader();
+			return XbaseWithAnnotationsTestRuntimeModule.class.getClassLoader();
 		}
 		
 		public Class<? extends ClasspathTypeProviderFactory> bindClasspathTypeProviderFactory() {

@@ -7,6 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.scoping.batch;
 
+import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtext.scoping.IScopeProvider;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
@@ -33,5 +34,11 @@ public interface IBatchScopeProvider extends IScopeProvider {
 	 * @return a new feature scope session. Never <code>null</code>.
 	 */
 	IFeatureScopeSession newSession(Resource context);
+	
+	/**
+	 * Returns <code>true</code> if a proxy at the given reference should be 
+	 * resolved by means of a batch run.
+	 */
+	boolean isBatchScopeable(EReference reference);
 	
 }
