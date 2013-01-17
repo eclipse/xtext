@@ -10,6 +10,7 @@ package org.eclipse.xtext.xbase.tests.validation;
 import static org.eclipse.xtext.xbase.XbasePackage.Literals.*;
 import static org.eclipse.xtext.xbase.validation.IssueCodes.*;
 
+import org.eclipse.xtext.common.types.TypesPackage;
 import org.eclipse.xtext.junit4.InjectWith;
 import org.eclipse.xtext.junit4.XtextRunner;
 import org.eclipse.xtext.xbase.XExpression;
@@ -81,6 +82,19 @@ public class ValidationTests2 extends ValidationTests {
 	
 	@Override
 	@Test
+	public void testCast_0() throws Exception {
+		super.testCast_0();
+	}
+	
+	@Test
+	public void testCastInSwitch() throws Exception {
+		XExpression expression = expression("switch('foo') { String: it }");
+		helper.assertWarning(expression, TypesPackage.Literals.JVM_PARAMETERIZED_TYPE_REFERENCE, OBSOLETE_CAST, "Unnecessary cast from String to String");
+		helper.assertNoError(expression, INVALID_CAST);
+	}
+	
+	@Override
+	@Test
 	public void testInstanceOf_0() throws Exception {
 		XExpression expression = expression("'foo' instanceof String");
 		helper.assertWarning(expression, XINSTANCE_OF_EXPRESSION, OBSOLETE_INSTANCEOF, "already", "String");
@@ -122,11 +136,18 @@ public class ValidationTests2 extends ValidationTests {
 	public void testInvalidEarlyExit_04() throws Exception {
 		super.testInvalidEarlyExit_04();
 	}
-
+	
 	@Override
-	@Test @Ignore("TODO To be implemented")
+	@Test
 	public void testReturnExpressionInClosure_01() throws Exception {
-		super.testReturnExpressionInClosure_01();
+		XExpression expression = expression("{val (String)=>String func = [x | return true] func.apply('foo')}");
+		helper.assertError(expression, XCLOSURE, INCOMPATIBLE_TYPES, "(String)=>String", "(String)=>boolean");
+	}
+
+	@Test
+	public void testReturnExpressionInClosure_08() throws Exception {
+		XExpression expression = expression("{val (String)=>String func = [x | if (x == null) return x true] func.apply('foo')}");
+		helper.assertError(expression, XCLOSURE, INCOMPATIBLE_TYPES, "(String)=>String", "(String)=>Serializable & Comparable<?>");
 	}
 
 	@Override
