@@ -235,13 +235,6 @@ public class XtendJavaValidator2 extends XbaseWithAnnotationsJavaValidator2 {
 	}
 
 	@Check
-	public void checkVariableNameShadowing(XtendFunction func) {
-		for (XtendParameter p : func.getParameters()) {
-			super.checkDeclaredVariableName(func, p, XTEND_PARAMETER__NAME);
-		}
-	}
-
-	@Check
 	public void checkNoVoidInDependencyDeclaration(XtendField dep) {
 		JvmTypeReference declaredFieldType = dep.getType();
 		if (isPrimitiveVoid(declaredFieldType)) {
