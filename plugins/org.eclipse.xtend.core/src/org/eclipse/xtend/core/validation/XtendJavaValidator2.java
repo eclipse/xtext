@@ -111,6 +111,7 @@ import com.google.common.collect.Lists;
 import com.google.common.collect.Multimap;
 import com.google.common.collect.Multimaps;
 import com.google.common.collect.Sets;
+import com.google.common.collect.ImmutableSet.Builder;
 import com.google.inject.Inject;
 
 /**
@@ -152,25 +153,21 @@ public class XtendJavaValidator2 extends XbaseWithAnnotationsJavaValidator2 {
 	@Inject
 	private IVisibilityHelper visibilityHelper;
 	
-	private final Set<EReference> typeConformanceCheckedReferences = ImmutableSet.copyOf(Iterables.concat(
-			super.getTypeConformanceCheckedReferences(), 
-			ImmutableSet.of(
-					XtendPackage.Literals.RICH_STRING_FOR_LOOP__AFTER, 
+	@Override
+	protected void initTypeConformanceCheckedReferences(Builder<EReference> acceptor) {
+		super.initTypeConformanceCheckedReferences(acceptor);
+		acceptor.add(XtendPackage.Literals.RICH_STRING_FOR_LOOP__AFTER, 
 					XtendPackage.Literals.RICH_STRING_FOR_LOOP__BEFORE,
 					XtendPackage.Literals.RICH_STRING_FOR_LOOP__SEPARATOR, 
 					XtendPackage.Literals.RICH_STRING_IF__IF,
-					XtendPackage.Literals.RICH_STRING_ELSE_IF__IF)));
-
+					XtendPackage.Literals.RICH_STRING_ELSE_IF__IF);
+	}
+	
 	@Override
 	protected List<EPackage> getEPackages() {
 		return newArrayList(XtendPackage.eINSTANCE, XbasePackage.eINSTANCE, XAnnotationsPackage.eINSTANCE);
 	}
 
-	@Override
-	protected Set<EReference> getTypeConformanceCheckedReferences() {
-		return typeConformanceCheckedReferences;
-	}
-	
 	@Check
 	public void checkPropertyAnnotation(XtendField field) {
 		if (hasAnnotation(field, Property.class) && field.isStatic()) {
