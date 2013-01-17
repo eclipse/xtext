@@ -53,6 +53,21 @@ Task 'secondary (i.e. Macros) JVM Model inference' took 670ms (500 measurements)
 Task 'Crosslink resolution' took 45668ms (55750 measurements).
 Task 'validation' took 28262ms (250 measurements).
 
+2013-01-17 / Sven
+
+Task 'build' took 76871ms (10 measurements).
+Task 'parsing' took 3124ms (250 measurements).
+Task 'primary JVM Model inference' took 3729ms (500 measurements).
+Task '[macros] findActiveAnnotations' took 1702ms (500 measurements).
+Task 'Crosslink resolution' took 42519ms (58750 measurements).
+Task 'resolve param names' took 21ms (5 measurements).
+Task 'resolve annotations' took 330ms (8920 measurements).
+Task 'resolve members' took 3419ms (875 measurements).
+Task 'resolve typeParams' took 45ms (1600 measurements).
+Task 'resolve binding' took 615ms (305 measurements).
+Task 'secondary (i.e. Macros) JVM Model inference' took 3ms (500 measurements).
+Task 'validation' took 18758ms (250 measurements).
+
  */
 
 public class PerformanceTest extends AbstractXtendUITestCase {
