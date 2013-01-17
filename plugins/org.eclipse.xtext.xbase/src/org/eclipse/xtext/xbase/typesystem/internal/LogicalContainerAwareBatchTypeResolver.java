@@ -7,11 +7,17 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.typesystem.internal;
 
+import java.util.Collections;
+import java.util.List;
+
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
+import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.xbase.jvmmodel.ILogicalContainerProvider;
 
 import com.google.inject.Inject;
@@ -27,7 +33,16 @@ public class LogicalContainerAwareBatchTypeResolver extends DefaultBatchTypeReso
 	private ILogicalContainerProvider logicalContainerProvider;
 	
 	@Override
-	protected EObject getEntryPoint(EObject object) {
+	protected List<EObject> getEntryPoints(EObject object) {
+		if (object.eContainer() == null && object.eResource() != null) {
+			Resource resource = object.eResource();
+			List<EObject> contents = resource.getContents();
+			for(EObject content: contents) {
+				if (content instanceof JvmType) {
+					return Collections.singletonList(content);
+				}
+			}
+		}
 		JvmIdentifiableElement logicalContainer = logicalContainerProvider.getNearestLogicalContainer(object);
 		if (logicalContainer == null) {
 			if (object instanceof JvmIdentifiableElement) {
@@ -35,7 +50,7 @@ public class LogicalContainerAwareBatchTypeResolver extends DefaultBatchTypeReso
 			} else {
 				EObject container = object.eContainer();
 				if (container != null) {
-					return getEntryPoint(container);
+					return getEntryPoints(container);
 				}
 				throw new IllegalStateException("object is not contained in a logical container: " + object);
 			}
@@ -48,7 +63,7 @@ public class LogicalContainerAwareBatchTypeResolver extends DefaultBatchTypeReso
 		} else {
 			throw new IllegalStateException("logicalContainer is not contained in a declaredType");
 		}
-		return declaredType;
+		return Collections.<EObject>singletonList(declaredType);
 	}
 
 }

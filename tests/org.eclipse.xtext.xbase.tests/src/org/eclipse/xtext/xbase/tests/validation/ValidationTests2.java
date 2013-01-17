@@ -37,47 +37,47 @@ public class ValidationTests2 extends ValidationTests {
 		XExpression expr = expression("{ val x = 'foo' x() }");
 		helper.assertError(expr, XFEATURE_CALL, UNRESOLVABLE_PROXY, "method", "x()");
 	}
+	
+	@Override
+	@Test
+	public void testVariableShadowing_08() throws Exception {
+		super.testVariableShadowing_08();
+	}
+	
+	@Override
+	@Test
+	public void testVariableShadowing_09() throws Exception {
+		super.testVariableShadowing_09();
+	}
 
+	@Test @Ignore("TODO To be implemented - should be a control flow problem")
+	@Override
+	public void testInvalidEarlyExit_02() throws Exception {
+		super.testInvalidEarlyExit_02();
+	}
+	
+	@Test @Ignore("TODO To be implemented - should be a control flow problem")
+	@Override
+	public void testInvalidEarlyExit_04() throws Exception {
+		super.testInvalidEarlyExit_04();
+	}
+	
 	@Override
 	@Test @Ignore("TODO To be implemented")
-	public void testVariableShadowing_00() throws Exception {
-		super.testVariableShadowing_00();
+	public void testExceptionInClosure_01() throws Exception {
+		super.testExceptionInClosure_01();
 	}
 
 	@Override
 	@Test @Ignore("TODO To be implemented")
-	public void testVariableShadowing_01() throws Exception {
-		super.testVariableShadowing_01();
+	public void testExceptionInClosure_03() throws Exception {
+		super.testExceptionInClosure_03();
 	}
 
 	@Override
 	@Test @Ignore("TODO To be implemented")
-	public void testVariableShadowing_03() throws Exception {
-		super.testVariableShadowing_03();
-	}
-
-	@Override
-	@Test @Ignore("TODO To be implemented")
-	public void testVariableShadowing_04() throws Exception {
-		super.testVariableShadowing_04();
-	}
-
-	@Override
-	@Test @Ignore("TODO To be implemented")
-	public void testVariableShadowing_05() throws Exception {
-		super.testVariableShadowing_05();
-	}
-
-	@Override
-	@Test @Ignore("TODO To be implemented")
-	public void testVariableShadowing_06() throws Exception {
-		super.testVariableShadowing_06();
-	}
-
-	@Override
-	@Test @Ignore("TODO To be implemented")
-	public void testVariableShadowing_07() throws Exception {
-		super.testVariableShadowing_07();
+	public void testExceptionInClosure_04() throws Exception {
+		super.testExceptionInClosure_04();
 	}
 	
 	@Override
@@ -125,18 +125,6 @@ public class ValidationTests2 extends ValidationTests {
 		helper.assertNoIssues(expression, XNULL_LITERAL);
 	}
 	
-	@Test @Ignore("TODO To be implemented - should be a control flow problem")
-	@Override
-	public void testInvalidEarlyExit_02() throws Exception {
-		super.testInvalidEarlyExit_02();
-	}
-	
-	@Test @Ignore("TODO To be implemented - should be a control flow problem")
-	@Override
-	public void testInvalidEarlyExit_04() throws Exception {
-		super.testInvalidEarlyExit_04();
-	}
-	
 	@Override
 	@Test
 	public void testReturnExpressionInClosure_01() throws Exception {
@@ -148,24 +136,6 @@ public class ValidationTests2 extends ValidationTests {
 	public void testReturnExpressionInClosure_08() throws Exception {
 		XExpression expression = expression("{val (String)=>String func = [x | if (x == null) return x true] func.apply('foo')}");
 		helper.assertError(expression, XCLOSURE, INCOMPATIBLE_TYPES, "(String)=>String", "(String)=>Serializable & Comparable<?>");
-	}
-
-	@Override
-	@Test @Ignore("TODO To be implemented")
-	public void testExceptionInClosure_01() throws Exception {
-		super.testExceptionInClosure_01();
-	}
-
-	@Override
-	@Test @Ignore("TODO To be implemented")
-	public void testExceptionInClosure_03() throws Exception {
-		super.testExceptionInClosure_03();
-	}
-
-	@Override
-	@Test @Ignore("TODO To be implemented")
-	public void testExceptionInClosure_04() throws Exception {
-		super.testExceptionInClosure_04();
 	}
 	
 }

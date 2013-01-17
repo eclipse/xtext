@@ -20,8 +20,10 @@ import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmMember;
 import org.eclipse.xtext.common.types.util.TypeReferences;
+import org.eclipse.xtext.diagnostics.Severity;
 import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.IEObjectDescription;
+import org.eclipse.xtext.validation.EObjectDiagnosticImpl;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.XConstructorCall;
 import org.eclipse.xtext.xbase.XExpression;
@@ -41,6 +43,7 @@ import org.eclipse.xtext.xbase.typesystem.references.ITypeReferenceOwner;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.OwnedConverter;
 import org.eclipse.xtext.xbase.typesystem.references.ParameterizedTypeReference;
+import org.eclipse.xtext.xbase.validation.IssueCodes;
 
 import com.google.common.collect.Lists;
 
@@ -150,15 +153,48 @@ public abstract class AbstractTypeComputationState implements ITypeComputationSt
 	}
 	
 	public AbstractTypeComputationState assignType(JvmIdentifiableElement element, @Nullable  LightweightTypeReference type) {
+		return assignType(element, type, true);
+	}
+	
+	public AbstractTypeComputationState assignType(JvmIdentifiableElement element, @Nullable  LightweightTypeReference type, boolean addToChildScope) {
 		TypeAssigner assigner = assignTypes();
-		assigner.assignType(element, type);
+		assigner.assignType(element, type, addToChildScope);
 		return assigner.getForkedState();
 	}
 	
 	public void addLocalToCurrentScope(JvmIdentifiableElement element) {
-		featureScopeSession = featureScopeSession.addLocalElement(QualifiedName.create(element.getSimpleName()), element, getReferenceOwner());
+		QualifiedName elementName = QualifiedName.create(element.getSimpleName());
+		addLocalToCurrentScope(elementName, element, !getResolver().isShadowingAllowed(elementName));
 	}
-
+	
+	protected void addLocalToCurrentScope(QualifiedName elementName, JvmIdentifiableElement element, boolean raiseIssueIfShadowing) {
+		if (getResolver().isDisallowedName(elementName)) {
+			resolvedTypes.addDiagnostic(new EObjectDiagnosticImpl(
+					Severity.ERROR,
+					IssueCodes.VARIABLE_NAME_DISALLOWED, 
+					"'" + elementName + "' is not a valid name", 
+					element,
+					element.eClass().getEStructuralFeature("name"),
+					-1,
+					null));
+			return;
+		}
+		if (raiseIssueIfShadowing) {
+			IEObjectDescription existingElement = featureScopeSession.getLocalElement(elementName);
+			if (existingElement != null) {
+				resolvedTypes.addDiagnostic(new EObjectDiagnosticImpl(
+						Severity.ERROR,
+						IssueCodes.VARIABLE_NAME_SHADOWING, 
+						"Duplicate local variable " + elementName, 
+						element,
+						element.eClass().getEStructuralFeature("name"),
+						-1,
+						null));
+			}
+		}
+		featureScopeSession = featureScopeSession.addLocalElement(elementName, element, getReferenceOwner());
+	}
+	
 	public TypeAssigner assignTypes() {
 		TypeCheckpointComputationState state = new TypeCheckpointComputationState(resolvedTypes, featureScopeSession, reentrantTypeResolver, this);
 		return createTypeAssigner(state);

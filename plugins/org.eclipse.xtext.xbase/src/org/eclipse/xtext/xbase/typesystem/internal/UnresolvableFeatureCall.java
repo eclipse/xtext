@@ -43,6 +43,7 @@ public class UnresolvableFeatureCall extends AbstractUnresolvableFeature impleme
 		return (XAbstractFeatureCall) getExpression();
 	}
 	
+	@SuppressWarnings("deprecation")
 	@Override
 	protected List<XExpression> getArguments() {
 		return getFeatureCall().getExplicitArguments();
@@ -78,7 +79,7 @@ public class UnresolvableFeatureCall extends AbstractUnresolvableFeature impleme
 		String issueCode = message.getIssueCode();
 		if (messageString.startsWith("Couldn't resolve reference to JvmIdentifiableElement")) {
 			if (getFeatureCall().isExplicitOperationCallOrBuilderSyntax()) {
-				List<XExpression> arguments = getArguments();
+				List<XExpression> arguments = new FeatureLinkHelper().getSyntacticArguments(getFeatureCall());
 				String argumentTypes = "";
 				if (!arguments.isEmpty()) {
 					IResolvedTypes resolvedTypes = getResolvedTypes();

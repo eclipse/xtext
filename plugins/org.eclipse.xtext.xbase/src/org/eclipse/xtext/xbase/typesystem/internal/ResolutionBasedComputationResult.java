@@ -9,7 +9,6 @@ package org.eclipse.xtext.xbase.typesystem.internal;
 
 import java.util.EnumSet;
 
-import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.typesystem.computation.ITypeComputationResult;
 import org.eclipse.xtext.xbase.typesystem.conformance.ConformanceHint;

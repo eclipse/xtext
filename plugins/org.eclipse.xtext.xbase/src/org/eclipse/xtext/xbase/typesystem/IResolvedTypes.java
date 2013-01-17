@@ -37,6 +37,8 @@ public interface IResolvedTypes {
 	 * TODO find a suitable abstraction to represent diagnostics
 	 * It's cumbersome to use Issues since they only know about URIs 
 	 * so we probably want to use Diagnostics?
+	 * 
+	 * TODO do we really need this on the resolved types API? probably not
 	 */
 	Collection<AbstractDiagnostic> getQueuedDiagnostics();
 	

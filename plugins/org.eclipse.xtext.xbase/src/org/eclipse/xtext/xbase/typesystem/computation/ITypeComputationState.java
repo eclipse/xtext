@@ -11,14 +11,17 @@ import java.util.List;
 
 import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.XConstructorCall;
 import org.eclipse.xtext.xbase.XExpression;
+import org.eclipse.xtext.xbase.XVariableDeclaration;
 import org.eclipse.xtext.xbase.typesystem.conformance.ConformanceHint;
 import org.eclipse.xtext.xbase.typesystem.references.ITypeReferenceOwner;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.OwnedConverter;
+import org.eclipse.xtext.xbase.validation.FeatureNameValidator;
 
 /**
  * The current state of the type computation.
@@ -128,8 +131,20 @@ public interface ITypeComputationState {
 	 */
 	ITypeComputationState assignType(JvmIdentifiableElement element, @Nullable LightweightTypeReference type);
 	
+	/**
+	 * @param type the type of the element. <code>null</code> or other invalid types will be treated as error types.
+	 */
+	ITypeComputationState assignType(JvmIdentifiableElement element, @Nullable LightweightTypeReference type, boolean addToChildScope);
+	
 	ITypeAssigner assignTypes();
 	
+	/**
+	 * Adds the given element as a local variable. An issue is recorded if the new element will
+	 * shadow an existing element. If the new element has a disallowed name, it will not be added to the scope.
+	 * 
+	 * @see FeatureNameValidator
+	 * @param element the newly added element (e.g. a {@link XVariableDeclaration variable} or {@link JvmFormalParameter parameter}.
+	 */
 	void addLocalToCurrentScope(JvmIdentifiableElement element);
 	
 	/**

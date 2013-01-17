@@ -15,7 +15,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import org.eclipse.emf.common.util.Diagnostic;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.jdt.annotation.Nullable;
@@ -608,6 +607,7 @@ public abstract class ResolvedTypes implements IResolvedTypes {
 		appendContent(featureLinking, "featureLinking", result, indentation);
 		appendContent(unboundTypeParameters, "unboundTypeParameters", result, indentation);
 		appendContent(typeParameterHints, "typeParameterHints", result, indentation);
+		appendContent(diagnostics, "diagnostics", result, indentation);
 	}
 
 	protected void appendContent(@Nullable Map<?, ?> map, String prefix, StringBuilder result, String indentation) {
@@ -615,6 +615,14 @@ public abstract class ResolvedTypes implements IResolvedTypes {
 			MapJoiner joiner = Joiner.on("\n  " + indentation).withKeyValueSeparator(" -> ");
 			result.append("\n").append(indentation).append(prefix).append(":\n").append(indentation).append("  ");
 			joiner.appendTo(result, map);
+		}
+	}
+	
+	protected void appendContent(@Nullable Collection<?> values, String prefix, StringBuilder result, String indentation) {
+		if (values != null) {
+			Joiner joiner = Joiner.on("\n  " + indentation);
+			result.append("\n").append(indentation).append(prefix).append(":\n").append(indentation).append("  ");
+			joiner.appendTo(result, values);
 		}
 	}
 	

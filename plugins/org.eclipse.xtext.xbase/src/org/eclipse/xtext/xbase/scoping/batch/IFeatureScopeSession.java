@@ -79,6 +79,9 @@ public interface IFeatureScopeSession extends IVisibilityHelper {
 	
 	/**
 	 * Add a locally defined identifiable to this scope. It will shadow previously registered locals.
+	 * 
+	 * No validation of the given name is performed.
+	 * 
 	 * @param name the qualified name of the identifiable.
 	 * @param element the element itself.
 	 * @return a configured session.
@@ -88,6 +91,7 @@ public interface IFeatureScopeSession extends IVisibilityHelper {
 	/**
 	 * Add locally defined identifiables to this scope. Since the elements have unique names, they cannot shadow
 	 * each other. However, they will shadow previously added local elements.
+	 * 
 	 * @param elements the local elements.
 	 * @return a configured session.
 	 */

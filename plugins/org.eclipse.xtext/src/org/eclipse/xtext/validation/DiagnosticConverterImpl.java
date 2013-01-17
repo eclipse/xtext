@@ -19,6 +19,7 @@ import org.eclipse.xtext.diagnostics.AbstractDiagnostic;
 import org.eclipse.xtext.diagnostics.Severity;
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
+import org.eclipse.xtext.resource.XtextSyntaxDiagnostic;
 import org.eclipse.xtext.util.IAcceptor;
 import org.eclipse.xtext.util.Strings;
 import org.eclipse.xtext.validation.Issue.IssueImpl;
@@ -39,7 +40,7 @@ public class DiagnosticConverterImpl implements IDiagnosticConverter {
 	
 	public void convertResourceDiagnostic(Diagnostic diagnostic, Severity severity,	IAcceptor<Issue> acceptor) {
 		IssueImpl issue = new Issue.IssueImpl();
-		issue.setSyntaxError(true);
+		issue.setSyntaxError(diagnostic instanceof XtextSyntaxDiagnostic);
 		issue.setSeverity(severity);
 		issue.setLineNumber(diagnostic.getLine());
 		issue.setMessage(diagnostic.getMessage());

@@ -141,6 +141,14 @@ public class CompoundTypeComputationState implements ITypeComputationState {
 		}
 		return new CompoundTypeComputationState(owner, result);
 	}
+	
+	public ITypeComputationState assignType(JvmIdentifiableElement element, @Nullable LightweightTypeReference type, boolean addToChildScope) {
+		AbstractTypeComputationState[] result = new AbstractTypeComputationState[components.length];
+		for (int i = 0; i < components.length; i++) {
+			result[i] = components[i].assignType(element, type, addToChildScope);
+		}
+		return new CompoundTypeComputationState(owner, result);
+	}
 
 	public ITypeAssigner assignTypes() {
 		TypeAssigner[] array = new TypeAssigner[components.length];

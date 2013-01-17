@@ -43,4 +43,8 @@ public class BatchLinkingService {
 		return (EObject) context.eGet(reference, false);
 	}
 
+	public void resolveBatched(EObject root) {
+		batchTypeResolver.resolveTypes(root);
+	}
+	
 }
