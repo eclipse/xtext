@@ -81,6 +81,7 @@ public abstract class AbstractXtend2CompilerMojo extends AbstractMojo {
 
 	protected void compile(XtendBatchCompiler xtend2BatchCompiler, String classPath, List<String> sourceDirectories,
 			String outputPath) throws MojoExecutionException {
+		xtend2BatchCompiler.setResourceSetProvider(new MavenProjectResourceSetProvider(project));
 		Iterable<String> filtered = filter(sourceDirectories, FILE_EXISTS);
 		if (Iterables.isEmpty(filtered)) {
 			getLog().info(
