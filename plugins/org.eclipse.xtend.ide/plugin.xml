@@ -1176,7 +1176,7 @@
       <consolePatternMatchListener
             class="org.eclipse.xtend.ide.XtendExecutableExtensionFactory:org.eclipse.xtend.ide.hyperlinking.ConsoleHyperlinking"
             id="org.eclipse.xtend.ide.hyperlinking.ConsoleHyperlinking"
-            regex="\w+.xtend(:\d+)">
+            regex="\w+\.xtend(:\d+)">
 	        <enablement>
 	            <or>
 				  <test property="org.eclipse.ui.console.consoleTypeTest" value="javaStackTraceConsole"/>
