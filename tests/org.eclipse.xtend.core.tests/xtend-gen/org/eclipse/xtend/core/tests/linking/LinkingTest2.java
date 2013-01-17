@@ -21,6 +21,7 @@ import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.XBlockExpression;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XFeatureCall;
+import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -55,5 +56,33 @@ public class LinkingTest2 extends AbstractLinkingTest {
     JvmIdentifiableElement _feature_1 = ((XAbstractFeatureCall) _implicitFirstArgument_1).getFeature();
     String _simpleName = _feature_1.getSimpleName();
     Assert.assertEquals("it", _simpleName);
+  }
+  
+  @Test
+  public void testBug345827_03() throws Exception {
+    final XtendFunction function = this.function(
+      "def String name(String param) { \n\t\t\t\t   var name = \'\'\n\t\t\t\t   name() \n\t\t\t\t}");
+    XExpression _expression = function.getExpression();
+    final XBlockExpression block = ((XBlockExpression) _expression);
+    EList<XExpression> _expressions = block.getExpressions();
+    XExpression _last = IterableExtensions.<XExpression>last(_expressions);
+    final XFeatureCall featureCall = ((XFeatureCall) _last);
+    JvmOperation _directlyInferredOperation = this.associator.getDirectlyInferredOperation(function);
+    JvmIdentifiableElement _feature = featureCall.getFeature();
+    Assert.assertSame(_directlyInferredOperation, _feature);
+  }
+  
+  @Test
+  public void testBug345827_05() throws Exception {
+    final XtendFunction function = this.function(
+      "def String name(String name) { \n\t\t\t\t   name() \n\t\t\t\t}");
+    XExpression _expression = function.getExpression();
+    final XBlockExpression block = ((XBlockExpression) _expression);
+    EList<XExpression> _expressions = block.getExpressions();
+    XExpression _head = IterableExtensions.<XExpression>head(_expressions);
+    final XFeatureCall featureCall = ((XFeatureCall) _head);
+    JvmOperation _directlyInferredOperation = this.associator.getDirectlyInferredOperation(function);
+    JvmIdentifiableElement _feature = featureCall.getFeature();
+    Assert.assertSame(_directlyInferredOperation, _feature);
   }
 }

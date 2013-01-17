@@ -26,9 +26,15 @@ import org.junit.runner.RunWith;
 public class ValidationTests2 extends ValidationTests {
 
 	@Override
-	@Test @Ignore("TODO To be implemented")
-	public void testLocalVarWithArguments() throws Exception {
-		super.testLocalVarWithArguments();
+	@Test
+	public void testLocalVarWithArguments_01() throws Exception {
+		XExpression expr = expression("{ val x = 'foo' x(42, 17bd) }");
+		helper.assertError(expr, XFEATURE_CALL, UNRESOLVABLE_PROXY, "method", "x(int, BigDecimal)");
+	}
+	
+	@Test public void testLocalVarWithArguments_02() throws Exception {
+		XExpression expr = expression("{ val x = 'foo' x() }");
+		helper.assertError(expr, XFEATURE_CALL, UNRESOLVABLE_PROXY, "method", "x()");
 	}
 
 	@Override

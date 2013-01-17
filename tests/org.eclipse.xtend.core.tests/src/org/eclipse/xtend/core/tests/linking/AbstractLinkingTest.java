@@ -83,7 +83,7 @@ public abstract class AbstractLinkingTest extends AbstractXtendTestCase {
 	}
 	
 	@Inject
-	private IXtendJvmAssociations associator;
+	protected IXtendJvmAssociations associator;
 	
 	@Inject
 	private ITypeProvider typeProvider;

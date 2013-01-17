@@ -132,5 +132,28 @@ class LinkingTest2 extends AbstractLinkingTest {
         assertEquals("it", (seventh.getImplicitFirstArgument() as XAbstractFeatureCall).getFeature().getSimpleName());
     }
     
+    @Test 
+	override testBug345827_03() throws Exception {
+		val function = function(
+				"def String name(String param) { 
+				   var name = ''
+				   name() 
+				}")
+		val block = function.getExpression() as XBlockExpression
+		val featureCall = block.getExpressions().last as XFeatureCall
+		assertSame(associator.getDirectlyInferredOperation(function), featureCall.getFeature());
+	}
+	
+    @Test 
+	override testBug345827_05() throws Exception {
+		val function = function(
+				"def String name(String name) { 
+				   name() 
+				}")
+		val block = function.getExpression() as XBlockExpression
+		val featureCall = block.getExpressions().head as XFeatureCall
+		assertSame(associator.getDirectlyInferredOperation(function), featureCall.getFeature());
+	}
+    
 }
 
