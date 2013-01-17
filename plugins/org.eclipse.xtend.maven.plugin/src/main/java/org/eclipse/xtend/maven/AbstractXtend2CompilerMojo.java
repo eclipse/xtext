@@ -39,6 +39,7 @@ public abstract class AbstractXtend2CompilerMojo extends AbstractMojo {
 			return new File(filePath).exists();
 		}
 	};
+	
 	/**
 	 * The project itself. This parameter is set by maven.
 	 * 
@@ -46,18 +47,27 @@ public abstract class AbstractXtend2CompilerMojo extends AbstractMojo {
 	 * @required
 	 */
 	protected MavenProject project;
+	
 	/**
      * Xtend-File encoding argument for the compiler.
      *
      * @parameter expression="${encoding}" default-value="${project.build.sourceEncoding}"
      */
 	protected String encoding;
-    /**
+    
+	/**
      * Set this to true to skip compiling Xtend sources.
      *
      * @parameter default-value="false" expression="${skipXtend}"
      */
 	protected boolean skipXtend;
+	
+	/**
+	 * Set this to false to suppress the creation of *._trace files.
+	 *
+	 * @parameter default-value="true" expression="${writeTraceFiles}"
+	 */
+	protected boolean writeTraceFiles;
 
 	public void execute() throws MojoExecutionException {
 		if (isSkipped()) {
@@ -101,6 +111,8 @@ public abstract class AbstractXtend2CompilerMojo extends AbstractMojo {
 		xtend2BatchCompiler.setOutputPath(outputPath);
 		getLog().debug ("Set encoding: " + encoding);
 		xtend2BatchCompiler.setFileEncoding(encoding);
+		getLog().debug ("Set writeTraceFiles: " + writeTraceFiles);
+		xtend2BatchCompiler.setWriteTraceFiles(writeTraceFiles);
 		if (!xtend2BatchCompiler.compile()) {
 			throw new MojoExecutionException("Error compiling xtend sources in '"
 					+ concat(File.pathSeparator, newArrayList(filtered)) + "'.");
