@@ -7,22 +7,15 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.compiler;
 
-import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.impl.EReferenceImpl;
+import org.eclipse.emf.ecore.EObject;
 
 /**
  * @author Holger Schill - Initial contribution and API
- * @since 2.4
  */
-public class ScopeFakeReference extends EReferenceImpl {
-	EClass clazz = null;
+public class GeneratorConfigProvider implements IGeneratorConfigProvider {
 
-	public ScopeFakeReference(EClass clazz) {
-		this.clazz = clazz;
+	public GeneratorConfig get(EObject context) {
+		return new GeneratorConfig();
 	}
 
-	@Override
-	public EClass getEReferenceType() {
-		return clazz;
-	}
 }

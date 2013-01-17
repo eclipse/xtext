@@ -4,5 +4,5 @@ class GeneratorConfig {
 	@Property
 	boolean generateExpressions = true
 	@Property
-	boolean generateSuppressWarnings = true
+	boolean generateSyntheticSuppressWarnings = true
 }
