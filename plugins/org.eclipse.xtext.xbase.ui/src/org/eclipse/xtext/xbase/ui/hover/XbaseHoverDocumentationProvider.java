@@ -68,7 +68,7 @@ import org.eclipse.xtext.ui.editor.hover.html.IEObjectHoverDocumentationProvider
 import org.eclipse.xtext.ui.editor.hover.html.XtextElementLinks;
 import org.eclipse.xtext.util.Strings;
 import org.eclipse.xtext.xbase.compiler.DocumentationAdapter;
-import org.eclipse.xtext.xbase.compiler.GeneratorConfig;
+import org.eclipse.xtext.xbase.compiler.IGeneratorConfigProvider;
 import org.eclipse.xtext.xbase.compiler.JvmModelGenerator;
 import org.eclipse.xtext.xbase.compiler.output.FakeTreeAppendable;
 import org.eclipse.xtext.xbase.compiler.output.ITreeAppendable;
@@ -107,7 +107,7 @@ public class XbaseHoverDocumentationProvider implements IEObjectHoverDocumentati
 	protected JvmModelGenerator jvmModelGenerator;
 	@Inject
 	private XbaseDeclarativeHoverSignatureProvider hoverSignatureProvider;
-	@Inject GeneratorConfig generatorConfig;
+	@Inject IGeneratorConfigProvider generatorConfigProvider;
 
 	protected StringBuffer buffer;
 	protected int fLiteralContent;
@@ -268,7 +268,7 @@ public class XbaseHoverDocumentationProvider implements IEObjectHoverDocumentati
 						buffer.append("(");
 						for (JvmAnnotationValue value : annotationReference.getValues()) {
 							ITreeAppendable appendable = new FakeTreeAppendable();
-							jvmModelGenerator.toJava(value, appendable, generatorConfig);
+							jvmModelGenerator.toJava(value, appendable, generatorConfigProvider.get(object));
 							String java = appendable.getContent();
 							buffer.append(java);
 						}
