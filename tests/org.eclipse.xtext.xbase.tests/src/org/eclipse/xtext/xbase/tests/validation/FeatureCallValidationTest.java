@@ -62,6 +62,11 @@ public class FeatureCallValidationTest extends AbstractXbaseTestCase {
 		XExpression expression = expression("1 + '2'");
 		helper.assertNoErrors(expression);
 	}
+	
+	@Test public void testBinaryOperation_3() throws Exception {
+		XExpression expression = expression("{ val x = true (x && x).booleanValue }");
+		helper.assertNoErrors(expression);
+	}
 
 	@Test public void testAssignment_0() throws Exception {
 		XExpression expression = expression("new testdata.Properties1().prop3 = 'foo'");

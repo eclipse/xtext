@@ -14,6 +14,7 @@ import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
+import org.eclipse.xtext.xbase.XAssignment;
 import org.eclipse.xtext.xbase.XFeatureCall;
 
 import com.google.common.collect.Iterables;
@@ -35,10 +36,16 @@ public class LocalVariableScope extends AbstractSessionBasedScope {
 	
 	@Override
 	protected Collection<IEObjectDescription> getLocalElementsByName(QualifiedName name) {
+		if (canBeLocalVariable())
+			return Collections.emptyList();
 		IEObjectDescription element = getSession().getLocalElement(name);
 		if (element == null)
 			return Collections.emptyList();
 		return Collections.singletonList(element);
+	}
+
+	protected boolean canBeLocalVariable() {
+		return !looksLikeLocalVariable() && !(getFeatureCall() instanceof XAssignment);
 	}
 	
 	protected boolean looksLikeLocalVariable() {

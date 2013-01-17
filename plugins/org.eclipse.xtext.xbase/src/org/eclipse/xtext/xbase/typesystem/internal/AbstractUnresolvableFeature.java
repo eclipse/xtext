@@ -24,6 +24,7 @@ import org.eclipse.xtext.linking.impl.XtextLinkingDiagnostic;
 import org.eclipse.xtext.linking.lazy.LazyLinkingResource;
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.util.IAcceptor;
+import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.typesystem.computation.ILinkingCandidate;
 import org.eclipse.xtext.xbase.typesystem.computation.ITypeExpectation;
@@ -65,7 +66,11 @@ public abstract class AbstractUnresolvableFeature implements ILinkingCandidate, 
 						ConformanceHint.CHECKED);
 			}
 		}
-		state.getStackedResolvedTypes().mergeIntoParent();
+		getResolvedTypes().mergeIntoParent();
+	}
+
+	protected StackedResolvedTypes getResolvedTypes() {
+		return state.getStackedResolvedTypes();
 	}
 	
 	public boolean validate(IAcceptor<? super AbstractDiagnostic> result) {
@@ -99,7 +104,9 @@ public abstract class AbstractUnresolvableFeature implements ILinkingCandidate, 
 	}
 	
 	protected Resource.Diagnostic createDiagnostic(DiagnosticMessage message) {
-		Diagnostic diagnostic = new XtextLinkingDiagnostic(node, message.getMessage(),
+		Diagnostic diagnostic = new XtextLinkingDiagnostic(
+				node, 
+				message.getMessage(),
 				message.getIssueCode(), message.getIssueData());
 		return diagnostic;
 	}
