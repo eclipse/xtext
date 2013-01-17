@@ -35,6 +35,7 @@ import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.TypesPackage;
 import org.eclipse.xtext.common.types.access.jdt.IJavaProjectProvider;
 import org.eclipse.xtext.common.types.util.jdt.IJavaElementFinder;
+import org.eclipse.xtext.util.OnChangeEvictingCache;
 import org.eclipse.xtext.validation.AbstractDeclarativeValidator;
 import org.eclipse.xtext.validation.Check;
 import org.eclipse.xtext.xbase.XConstructorCall;
@@ -44,6 +45,7 @@ import org.eclipse.xtext.xtype.XImportDeclaration;
 import org.eclipse.xtext.xtype.XtypePackage;
 
 import com.google.inject.Inject;
+import com.google.inject.Provider;
 
 /**
  * @author Holger Schill - Initial contribution and API
@@ -56,6 +58,9 @@ public class XbaseUIValidator extends AbstractDeclarativeValidator {
 
 	@Inject
 	private IJavaElementFinder javaElementFinder;
+	
+	@Inject
+	private OnChangeEvictingCache cache;
 
 	@Override
 	protected List<EPackage> getEPackages() {
@@ -64,6 +69,8 @@ public class XbaseUIValidator extends AbstractDeclarativeValidator {
 	
 	@Check
 	public void checkRestrictedType(XImportDeclaration importDeclaration){
+		if (shouldCheckRestriction())
+			return;
 		JvmType importedType = importDeclaration.getImportedType();
 		if(importedType instanceof JvmDeclaredType)
 			checkRestrictedType(importDeclaration, XtypePackage.Literals.XIMPORT_DECLARATION__IMPORTED_TYPE, (JvmDeclaredType) importedType);
@@ -71,12 +78,16 @@ public class XbaseUIValidator extends AbstractDeclarativeValidator {
 
 	@Check
 	public void checkRestrictedType(XConstructorCall constructorCall) {
+		if (shouldCheckRestriction())
+			return;
 		JvmDeclaredType declaringType = constructorCall.getConstructor().getDeclaringType();
 		checkRestrictedType(constructorCall, XbasePackage.Literals.XCONSTRUCTOR_CALL__CONSTRUCTOR, declaringType);
 	}
 
 	@Check
 	public void checkRestrictedType(JvmTypeReference typeReference) {
+		if (shouldCheckRestriction())
+			return;
 		if (typeReference != null && typeReference.eResource() != null
 				&& typeReference.eResource().getResourceSet() != null) {
 			JvmType type = typeReference.getType();
@@ -90,64 +101,69 @@ public class XbaseUIValidator extends AbstractDeclarativeValidator {
 		}
 	}
 
-	private static final int FORBIDDENREFERENCEID = 1;
-	private static final int DISCOURAGEDREFERENCEID = 2;
-	private static final int VALIDREFERENCEID = 0;
+	protected boolean shouldCheckRestriction() {
+		return isIgnored(DISCOURAGED_REFERENCE) && isIgnored(FORBIDDEN_REFERENCE);
+	}
 
-	protected void checkRestrictedType(EObject context, final EStructuralFeature feature, final JvmDeclaredType typeToCheck) {
-		if (isIgnored(DISCOURAGED_REFERENCE) && isIgnored(FORBIDDEN_REFERENCE))
-			return;
-		
-		IJavaProject javaProject = projectProvider.getJavaProject(context.eResource().getResourceSet());
-		
+	private static enum RestrictionKind {
+		FORBIDDEN, DISCOURAGED, VALID
+	}
+
+	protected void checkRestrictedType(final EObject context, final EStructuralFeature feature, final JvmDeclaredType typeToCheck) {
+		final IJavaProject javaProject = projectProvider.getJavaProject(context.eResource().getResourceSet());
 		if(javaProject == null)
 			return;
-		IJavaElement javaElement = javaElementFinder.findElementFor(typeToCheck);
-		if(javaElement == null)
-			return;
-		final IJavaProject declaringJavaProject = javaElement.getJavaProject();
-		if(declaringJavaProject == null)
-			return;
-		String packageName = typeToCheck.getPackageName();
-		final String simpleName = typeToCheck.getSimpleName();
-		if(!getContext().containsKey(typeToCheck)){
-			IJavaSearchScope searchScope = SearchEngine.createJavaSearchScope(new IJavaElement[] { javaProject });
-			BasicSearchEngine searchEngine = new BasicSearchEngine();
-			try {
-				searchEngine.searchAllTypeNames(packageName != null ? packageName.toCharArray() : CharOperation.NO_CHAR, SearchPattern.R_EXACT_MATCH,
-						simpleName.toCharArray(), SearchPattern.R_EXACT_MATCH, IJavaSearchConstants.TYPE,
-						searchScope, new IRestrictedAccessTypeRequestor() {
-							public void acceptType(int modifiers, char[] packageName, char[] simpleTypeName,
-									char[][] enclosingTypeNames, String path, AccessRestriction access) {
-								if(access != null){
-									if (access.getProblemId() == IProblem.ForbiddenReference) {
-										getContext().put(typeToCheck, FORBIDDENREFERENCEID);
-									} else if (access.getProblemId() == IProblem.DiscouragedReference) {
-										getContext().put(typeToCheck, DISCOURAGEDREFERENCEID);
-									} else
-										getContext().put(typeToCheck, VALIDREFERENCEID);
-								} else
-									getContext().put(typeToCheck, VALIDREFERENCEID);
-							}
-						}, IJavaSearchConstants.WAIT_UNTIL_READY_TO_SEARCH, new NullProgressMonitor());
-			} catch (JavaModelException e) {
-				// Ignore
+		RestrictionKind kind = cache.get("restriction", typeToCheck.eResource(), new Provider<RestrictionKind>() {
+			public RestrictionKind get() {
+				IJavaElement javaElement = javaElementFinder.findElementFor(typeToCheck);
+				if(javaElement == null)
+					return RestrictionKind.VALID;
+				final IJavaProject declaringJavaProject = javaElement.getJavaProject();
+				if(declaringJavaProject == null)
+					return RestrictionKind.VALID;
+				String packageName = typeToCheck.getPackageName();
+				final String simpleName = typeToCheck.getSimpleName();
+				if(!getContext().containsKey(typeToCheck)){
+					IJavaSearchScope searchScope = SearchEngine.createJavaSearchScope(new IJavaElement[] { javaProject });
+					BasicSearchEngine searchEngine = new BasicSearchEngine();
+					try {
+						final RestrictionKind[] result = new RestrictionKind[1];
+						searchEngine.searchAllTypeNames(packageName != null ? packageName.toCharArray() : CharOperation.NO_CHAR, SearchPattern.R_EXACT_MATCH,
+								simpleName.toCharArray(), SearchPattern.R_EXACT_MATCH, IJavaSearchConstants.TYPE,
+								searchScope, new IRestrictedAccessTypeRequestor() {
+									public void acceptType(int modifiers, char[] packageName, char[] simpleTypeName,
+											char[][] enclosingTypeNames, String path, AccessRestriction access) {
+										if(access != null){
+											if (access.getProblemId() == IProblem.ForbiddenReference) {
+												result[0] = RestrictionKind.FORBIDDEN;
+											} else if (access.getProblemId() == IProblem.DiscouragedReference) {
+												result[0] = RestrictionKind.DISCOURAGED;
+											} else
+												result[0] = RestrictionKind.VALID;
+										} else
+											result[0] = RestrictionKind.VALID;
+									}
+								}, IJavaSearchConstants.WAIT_UNTIL_READY_TO_SEARCH, new NullProgressMonitor());
+						return result[0];
+					} catch (JavaModelException e) {
+						// Ignore
+					}
+				}
+				return RestrictionKind.VALID;
 			}
-		}
-		Object element = getContext().get(typeToCheck);
-		if (element != null) {
-			if (element.equals(FORBIDDENREFERENCEID)) {
-				addIssue(context, IssueCodes.FORBIDDEN_REFERENCE,
-						"Access restriction: The type " + simpleName
-								+ " is not accessible due to restriction on required project "
-								+ declaringJavaProject.getElementName(), feature);
-			} else if (element.equals(DISCOURAGEDREFERENCEID)) {
-				addIssue(context,
-						IssueCodes.DISCOURAGED_REFERENCE,
-						"Discouraged access: The type " + simpleName
-								+ " is not accessible due to restriction on required project "
-								+ declaringJavaProject.getElementName(), feature);
-			}
+		});
+		
+		if (kind == RestrictionKind.FORBIDDEN) {
+			addIssue(context, IssueCodes.FORBIDDEN_REFERENCE,
+					"Access restriction: The type " + typeToCheck.getSimpleName()
+							+ " is not accessible due to restriction on required project "
+							+ javaProject.getElementName(), feature);
+		} else if (kind == RestrictionKind.DISCOURAGED) {
+			addIssue(context,
+					IssueCodes.DISCOURAGED_REFERENCE,
+					"Discouraged access: The type " + typeToCheck.getSimpleName()
+							+ " is not accessible due to restriction on required project "
+							+ javaProject.getElementName(), feature);
 		}
 	}
 }

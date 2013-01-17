@@ -25,6 +25,7 @@ class XtendFileGenerator {
 			import static extension «staticImport».*
 		«ENDFOR»
 		
+		@Deprecated
 		class «conf.className» {
 			
 			«FOR injectedExt : conf.injectedExtensionTypes»
@@ -35,6 +36,7 @@ class XtendFileGenerator {
 			/**
 			 * Xtend supports the Java syntax
 			 */
+			@com.google.inject.Inject
 			def «IF conf.noTypeInference»String «ENDIF»simpleMethodCall_01(Object myObject) {
 				myObject.toString()
 			}
@@ -42,6 +44,7 @@ class XtendFileGenerator {
 			/**
 			 * if a method does not take arguments you can leave out the parenthesis
 			 */
+			@Deprecated
 			def «IF conf.noTypeInference»String «ENDIF»simpleMethodCall_02(Object myObject) {
 				myObject.toString
 			}
@@ -235,6 +238,7 @@ class XtendFileGenerator {
 			 * It supports a unique automatic indentation handling, which is also refelected tooling-wise
 			 * Note the indentation before the call to signature.
 			 */
+			@Deprecated
 			def «IF conf.noTypeInference»CharSequence «ENDIF»writeLetterTo(Person p) «TQ()»
 				Dear «GO()»p.forename«GC()»,
 				

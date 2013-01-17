@@ -54,6 +54,8 @@ public class XtendFileGenerator {
       }
     }
     _builder.newLine();
+    _builder.append("@Deprecated");
+    _builder.newLine();
     _builder.append("class ");
     _builder.append(conf.className, "");
     _builder.append(" {");
@@ -86,6 +88,9 @@ public class XtendFileGenerator {
     _builder.append("*/");
     _builder.newLine();
     _builder.append("\t");
+    _builder.append("@com.google.inject.Inject");
+    _builder.newLine();
+    _builder.append("\t");
     _builder.append("def ");
     {
       if (conf.noTypeInference) {
@@ -110,6 +115,9 @@ public class XtendFileGenerator {
     _builder.newLine();
     _builder.append("\t ");
     _builder.append("*/");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("@Deprecated");
     _builder.newLine();
     _builder.append("\t");
     _builder.append("def ");
@@ -860,6 +868,9 @@ public class XtendFileGenerator {
     _builder.newLine();
     _builder.append("\t ");
     _builder.append("*/");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("@Deprecated");
     _builder.newLine();
     _builder.append("\t");
     _builder.append("def ");
