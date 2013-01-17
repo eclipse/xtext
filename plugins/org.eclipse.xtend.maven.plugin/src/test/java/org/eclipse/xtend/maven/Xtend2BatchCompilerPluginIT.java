@@ -12,34 +12,36 @@ import org.junit.Test;
 
 public class Xtend2BatchCompilerPluginIT {
 
+	private static String ROOT = "/it/compile";
+
 	@Test
 	public void projectWithMultipleSourceDirectories() throws Exception {
-		verifyErrorFreeLog("/it/multisources");
+		verifyErrorFreeLog(ROOT + "/multisources");
 	}
 
 	@Test
 	public void simpleProject() throws Exception {
-		verifyErrorFreeLog("/it/simple");
+		verifyErrorFreeLog(ROOT + "/simple");
 	}
 
 	@Test
 	public void pluginPrefix() throws Exception {
-		verifyErrorFreeLog("/it/simple", "xtend:compile");
+		verifyErrorFreeLog(ROOT + "/simple", "xtend:compile");
 	}
 
 	@Test
 	public void simpleProjectXtend2Tests() throws Exception {
-		verifyErrorFreeLog("/it/withtestsrc");
+		verifyErrorFreeLog(ROOT + "/withtestsrc");
 	}
 
 	@Test
 	public void aggregation() throws Exception {
-		verifyErrorFreeLog("/it/aggregation");
+		verifyErrorFreeLog(ROOT + "/aggregation");
 	}
 
 	@Test
 	public void haltOnXtendValidationErrors() throws Exception {
-		Verifier verifier = newVerifier("/it/xtenderrors");
+		Verifier verifier = newVerifier(ROOT + "/xtenderrors");
 		try {
 			verifier.executeGoal("verify");
 			Assert.fail("expected org.apache.maven.plugin.MojoExecutionException");
@@ -51,7 +53,7 @@ public class Xtend2BatchCompilerPluginIT {
 
 	@Test
 	public void continueOnXtendWarnings() throws Exception {
-		Verifier verifier = newVerifier("/it/xtendwarnings");
+		Verifier verifier = newVerifier(ROOT + "/xtendwarnings");
 		verifier.executeGoal("verify");
 		verifier.verifyTextInLog("3: The import 'java.util.Collections' is never used.");
 		verifier.verifyTextInLog("[INFO] BUILD SUCCESS");
