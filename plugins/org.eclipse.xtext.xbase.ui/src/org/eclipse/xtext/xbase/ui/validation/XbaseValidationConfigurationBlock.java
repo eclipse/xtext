@@ -55,7 +55,8 @@ public class XbaseValidationConfigurationBlock extends AbstractValidatorConfigur
 		comboBoxBuilder
 				.addJavaDelegatingComboBox(IssueCodes.UNUSED_LOCAL_VARIABLE, "Value of local variable is not used:")
 				.addJavaDelegatingComboBox(IssueCodes.IMPORT_UNUSED, "Unused import:")
-				.addJavaDelegatingComboBox(IssueCodes.OBSOLETE_INSTANCEOF, "Unnecessary 'instanceof' operation:");
+				.addJavaDelegatingComboBox(IssueCodes.OBSOLETE_INSTANCEOF, "Unnecessary 'instanceof' operation:")
+				.addJavaDelegatingComboBox(IssueCodes.OBSOLETE_CAST, "Unnecessary 'cast' operation:");
 	}
 
 	protected void fillRestrictedApiSection(ComboBoxBuilder comboBoxBuilder) {
