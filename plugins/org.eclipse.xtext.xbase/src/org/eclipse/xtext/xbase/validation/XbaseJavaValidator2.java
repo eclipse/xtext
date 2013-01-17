@@ -292,24 +292,33 @@ public class XbaseJavaValidator2 extends AbstractXbaseJavaValidator {
 		if (toType == null || fromType == null)
 			return;
 		if (fromType.getType() instanceof JvmDeclaredType) {
-			
 			// if one of the types is an interface and the other is a non final class (or interface) there always can be a subtype
-			if (isInterface(fromType) 
-					&& !isFinal(toType)) 
-				return;
-			if (isInterface(toType) 
-					&& !isFinal(fromType)) 
-				return;
-			if (!toType.isAssignableFrom(fromType)) {
-				if (	(isFinal(fromType) || isFinal(toType))
-					||  (isClass(fromType) && isClass(toType))) {
-					if (!fromType.isAssignableFrom(toType)) { // no upcast
-						error("Cannot cast from " + getNameOfTypes(fromType) + " to "
-								+ canonicalName(toType), concreteSyntax, null, ValidationMessageAcceptor.INSIGNIFICANT_INDEX,
-								INVALID_CAST);
+			if ((!isInterface(fromType) || isFinal(toType)) && (!isInterface(toType) || isFinal(fromType))) { 
+				if (!toType.isAssignableFrom(fromType)) {
+					if (   isFinal(fromType) || isFinal(toType)
+						|| isClass(fromType) && isClass(toType)) {
+						if (!fromType.isAssignableFrom(toType)) { // no upcast
+							error("Cannot cast from " + getNameOfTypes(fromType) + " to "
+									+ canonicalName(toType), concreteSyntax, null, ValidationMessageAcceptor.INSIGNIFICANT_INDEX,
+									INVALID_CAST);
+						}
 					}
 				}
 			}
+		}
+		/*
+		 * TODO: JDT reports no unncessary cast of List<?> but for List<String> ... why is there an exception?
+		 * 
+		 * 
+		 */
+//			List<? extends String> list = Collections.emptyList();
+//			if (((List<? extends String>)list).isEmpty()) {}
+//			List<String> list = Collections.emptyList();
+//			if (((List<String>)list).isEmpty()) {}
+//			List list = Collections.emptyList();
+//			if (((List)list).isEmpty()) {}
+		if (toType.getIdentifier().equals(fromType.getIdentifier())) {
+			addIssue(concreteSyntax, IssueCodes.OBSOLETE_CAST, "Unnecessary cast from " + fromType.getSimpleName() + " to " + toType.getSimpleName());
 		}
 	}
 	
@@ -944,8 +953,10 @@ public class XbaseJavaValidator2 extends AbstractXbaseJavaValidator {
 		if (casePart.getTypeGuard() == null)
 			return;
 		LightweightTypeReference typeGuard = toLightweightTypeReference(casePart.getTypeGuard());
-		if (typeGuard.isPrimitive())
+		if (typeGuard.isPrimitive()) {
 			error("Primitives are not allowed as type guards", Literals.XCASE_PART__TYPE_GUARD, INVALID_USE_OF_TYPE);
+			return;
+		}
 		LightweightTypeReference targetTypeRef = getActualType(((XSwitchExpression) casePart.eContainer()).getSwitch());
 		checkCast(casePart.getTypeGuard(), typeGuard, targetTypeRef);
 	}

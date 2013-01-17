@@ -503,7 +503,7 @@ public class ValidationTests extends AbstractXbaseTestCase {
 
 	@Test @Ignore public void testCast_0() throws Exception {
 		XExpression expression = expression("'foo' as String");
-		helper.assertWarning(expression, XCASTED_EXPRESSION, OBSOLETE_CAST, "cast", "obsolete");
+		helper.assertWarning(expression, TypesPackage.Literals.JVM_PARAMETERIZED_TYPE_REFERENCE, OBSOLETE_CAST, "Unnecessary cast from String to String");
 		helper.assertNoError(expression, INVALID_CAST);
 	}
 
