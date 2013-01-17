@@ -48,9 +48,11 @@ ruleXAnnotationValueFieldReference :
 
 // Rule XAnnotationValueArray
 ruleXAnnotationValueArray :
-	'{' ruleXAnnotationElementValue (
-		',' ruleXAnnotationElementValue
-	)* '}'
+	'{' (
+		ruleXAnnotationElementValue (
+			',' ruleXAnnotationElementValue
+		)*
+	)? '}'
 ;
 
 // Rule XExpression

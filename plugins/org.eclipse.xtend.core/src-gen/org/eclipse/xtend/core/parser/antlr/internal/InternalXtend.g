@@ -2988,10 +2988,10 @@ ruleXAnnotationValueArray returns [EObject current=null]
     {
     	newLeafNode(otherlv_1, grammarAccess.getXAnnotationValueArrayAccess().getLeftCurlyBracketKeyword_1());
     }
-(
+((
 (
 		{ 
-	        newCompositeNode(grammarAccess.getXAnnotationValueArrayAccess().getValuesXAnnotationElementValueParserRuleCall_2_0()); 
+	        newCompositeNode(grammarAccess.getXAnnotationValueArrayAccess().getValuesXAnnotationElementValueParserRuleCall_2_0_0()); 
 	    }
 		lv_values_2_0=ruleXAnnotationElementValue		{
 	        if ($current==null) {
@@ -3008,12 +3008,12 @@ ruleXAnnotationValueArray returns [EObject current=null]
 )
 )(	otherlv_3=',' 
     {
-    	newLeafNode(otherlv_3, grammarAccess.getXAnnotationValueArrayAccess().getCommaKeyword_3_0());
+    	newLeafNode(otherlv_3, grammarAccess.getXAnnotationValueArrayAccess().getCommaKeyword_2_1_0());
     }
 (
 (
 		{ 
-	        newCompositeNode(grammarAccess.getXAnnotationValueArrayAccess().getValuesXAnnotationElementValueParserRuleCall_3_1_0()); 
+	        newCompositeNode(grammarAccess.getXAnnotationValueArrayAccess().getValuesXAnnotationElementValueParserRuleCall_2_1_1_0()); 
 	    }
 		lv_values_4_0=ruleXAnnotationElementValue		{
 	        if ($current==null) {
@@ -3028,9 +3028,9 @@ ruleXAnnotationValueArray returns [EObject current=null]
 	    }
 
 )
-))*	otherlv_5='}' 
+))*)?	otherlv_5='}' 
     {
-    	newLeafNode(otherlv_5, grammarAccess.getXAnnotationValueArrayAccess().getRightCurlyBracketKeyword_4());
+    	newLeafNode(otherlv_5, grammarAccess.getXAnnotationValueArrayAccess().getRightCurlyBracketKeyword_3());
     }
 )
 ;

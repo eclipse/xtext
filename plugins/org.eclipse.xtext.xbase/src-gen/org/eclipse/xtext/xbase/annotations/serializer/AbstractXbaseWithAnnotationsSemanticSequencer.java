@@ -1037,7 +1037,7 @@ public abstract class AbstractXbaseWithAnnotationsSemanticSequencer extends Xbas
 	
 	/**
 	 * Constraint:
-	 *     (values+=XAnnotationElementValue values+=XAnnotationElementValue*)
+	 *     ((values+=XAnnotationElementValue values+=XAnnotationElementValue*)?)
 	 */
 	protected void sequence_XAnnotationValueArray(EObject context, XAnnotationValueArray semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
