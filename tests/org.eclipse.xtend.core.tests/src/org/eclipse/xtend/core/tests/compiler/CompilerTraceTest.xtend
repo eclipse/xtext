@@ -1,20 +1,20 @@
 package org.eclipse.xtend.core.tests.compiler
 
-import org.eclipse.xtend.core.tests.AbstractXtendTestCase
 import com.google.inject.Inject
-import org.eclipse.xtext.xbase.compiler.JvmModelGenerator
-import org.eclipse.xtend.core.jvmmodel.IXtendJvmAssociations
-import java.util.regex.Pattern
-import org.eclipse.xtext.generator.trace.ITraceRegionProvider
 import java.util.List
-import org.eclipse.xtext.generator.trace.AbstractTraceRegion
-import org.eclipse.xtext.util.ITextRegionWithLineInformation
-import org.eclipse.xtext.util.TextRegionWithLineInformation
-import org.eclipse.xtext.util.TextRegion
-import org.junit.Test
-import org.junit.Ignore
+import java.util.regex.Pattern
+import org.eclipse.xtend.core.jvmmodel.IXtendJvmAssociations
+import org.eclipse.xtend.core.tests.AbstractXtendTestCase
 import org.eclipse.xtend.core.xtend.XtendClass
-import org.eclipse.xtext.xbase.compiler.GeneratorConfig
+import org.eclipse.xtext.generator.trace.AbstractTraceRegion
+import org.eclipse.xtext.generator.trace.ITraceRegionProvider
+import org.eclipse.xtext.util.ITextRegionWithLineInformation
+import org.eclipse.xtext.util.TextRegion
+import org.eclipse.xtext.util.TextRegionWithLineInformation
+import org.eclipse.xtext.xbase.compiler.IGeneratorConfigProvider
+import org.eclipse.xtext.xbase.compiler.JvmModelGenerator
+import org.junit.Ignore
+import org.junit.Test
 
 /**
  * @author Sebastian Zarnekow
@@ -23,7 +23,7 @@ class CompilerTraceTest extends AbstractXtendTestCase {
 	
 	@Inject JvmModelGenerator generator
 	
-	@Inject GeneratorConfig generatorConfig
+	@Inject IGeneratorConfigProvider generatorConfigProvider
 
 	@Inject extension IXtendJvmAssociations
 	
@@ -773,7 +773,7 @@ class CompilerTraceTest extends AbstractXtendTestCase {
 		val actualXtendCode = xtendGroup1 + xtendGroup2 + xtendGroup3 
 		val file = file(actualXtendCode, true)
 		val inferredType = (file.getXtendTypes.head as XtendClass).getInferredType
-		val compiledCode = generator.generateType(inferredType, generatorConfig);
+		val compiledCode = generator.generateType(inferredType, generatorConfigProvider.get(inferredType));
 		
 		val javaMatcher = p.matcher(java.toString);
 		assertTrue("javaMatcher.matches", javaMatcher.matches());

@@ -2,7 +2,6 @@ package org.eclipse.xtend.core.tests.compiler;
 
 import com.google.common.collect.Iterables;
 import com.google.inject.Inject;
-import com.google.inject.Provider;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
@@ -13,6 +12,7 @@ import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.xbase.compiler.DisableCodeGenerationAdapter;
 import org.eclipse.xtext.xbase.compiler.GeneratorConfig;
+import org.eclipse.xtext.xbase.compiler.IGeneratorConfigProvider;
 import org.eclipse.xtext.xbase.compiler.JvmModelGenerator;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
@@ -26,7 +26,7 @@ public abstract class AbstractXtendCompilerTest extends AbstractXtendTestCase {
   private JvmModelGenerator generator;
   
   @Inject
-  private Provider<GeneratorConfig> generatorConfigProvider;
+  private IGeneratorConfigProvider generatorConfigProvider;
   
   @Test
   public void testThreeDataClassesExtendingEachOther() {
@@ -5206,7 +5206,7 @@ public abstract class AbstractXtendCompilerTest extends AbstractXtendTestCase {
       EList<EObject> _contents_1 = _eResource_1.getContents();
       Iterable<JvmDeclaredType> _filter_1 = Iterables.<JvmDeclaredType>filter(_contents_1, JvmDeclaredType.class);
       final JvmDeclaredType bazType = IterableExtensions.<JvmDeclaredType>last(_filter_1);
-      final GeneratorConfig generatorConfig = this.generatorConfigProvider.get();
+      final GeneratorConfig generatorConfig = this.generatorConfigProvider.get(barType);
       final CharSequence barJavaCode = this.generator.generateType(barType, generatorConfig);
       final CharSequence bazJavaCode = this.generator.generateType(bazType, generatorConfig);
       String _string_1 = expectedBarClass.toString();
@@ -5321,8 +5321,8 @@ public abstract class AbstractXtendCompilerTest extends AbstractXtendTestCase {
   
   @Test
   public void compileWithConfiguration() {
-    final GeneratorConfig generatorConfig = this.generatorConfigProvider.get();
-    generatorConfig.setGenerateSuppressWarnings(false);
+    final GeneratorConfig generatorConfig = this.generatorConfigProvider.get(null);
+    generatorConfig.setGenerateSyntheticSuppressWarnings(false);
     generatorConfig.setGenerateExpressions(false);
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("package foo");
@@ -5381,7 +5381,7 @@ public abstract class AbstractXtendCompilerTest extends AbstractXtendTestCase {
   @Test
   @Ignore
   public void compileProperty() {
-    final GeneratorConfig generatorConfig = this.generatorConfigProvider.get();
+    final GeneratorConfig generatorConfig = this.generatorConfigProvider.get(null);
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("package foo");
     _builder.newLine();
@@ -5433,7 +5433,7 @@ public abstract class AbstractXtendCompilerTest extends AbstractXtendTestCase {
   }
   
   public void assertCompilesTo(final CharSequence input, final CharSequence expected) {
-    GeneratorConfig _get = this.generatorConfigProvider.get();
+    GeneratorConfig _get = this.generatorConfigProvider.get(null);
     this.assertCompilesTo(input, expected, _get);
   }
   

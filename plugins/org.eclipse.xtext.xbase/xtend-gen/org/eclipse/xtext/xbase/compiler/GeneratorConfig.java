@@ -12,13 +12,13 @@ public class GeneratorConfig {
     this._generateExpressions = generateExpressions;
   }
   
-  private boolean _generateSuppressWarnings = true;
+  private boolean _generateSyntheticSuppressWarnings = true;
   
-  public boolean isGenerateSuppressWarnings() {
-    return this._generateSuppressWarnings;
+  public boolean isGenerateSyntheticSuppressWarnings() {
+    return this._generateSyntheticSuppressWarnings;
   }
   
-  public void setGenerateSuppressWarnings(final boolean generateSuppressWarnings) {
-    this._generateSuppressWarnings = generateSuppressWarnings;
+  public void setGenerateSyntheticSuppressWarnings(final boolean generateSyntheticSuppressWarnings) {
+    this._generateSyntheticSuppressWarnings = generateSyntheticSuppressWarnings;
   }
 }

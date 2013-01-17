@@ -26,6 +26,7 @@ import org.eclipse.xtext.validation.Check;
 import org.eclipse.xtext.validation.CheckType;
 import org.eclipse.xtext.xbase.XbasePackage;
 import org.eclipse.xtext.xbase.compiler.GeneratorConfig;
+import org.eclipse.xtext.xbase.compiler.IGeneratorConfigProvider;
 import org.eclipse.xtext.xbase.compiler.JvmModelGenerator;
 import org.eclipse.xtext.xbase.compiler.OnTheFlyJavaCompiler.EclipseRuntimeDependentJavaCompiler;
 import org.eclipse.xtext.xbase.lib.StringExtensions;
@@ -135,7 +136,7 @@ public class AnnotationsCompilerTest extends AbstractXtendTestCase {
 		XtendFile file = parseHelper.parse(text);
 		validationHelper.assertNoErrors(file);
 		JvmGenericType inferredType = associations.getInferredType((XtendClass) file.getXtendTypes().get(0));
-		CharSequence javaCode = generator.generateType(inferredType, generatorConfig);
+		CharSequence javaCode = generator.generateType(inferredType, generatorConfigProvider.get(file));
 		Class<?> class1 = javaCompiler.compileToClass("Foo", javaCode.toString());
 		return class1;
 	}
@@ -156,7 +157,7 @@ public class AnnotationsCompilerTest extends AbstractXtendTestCase {
 	private JvmModelGenerator generator;
 	
 	@Inject
-	private GeneratorConfig generatorConfig;
+	private IGeneratorConfigProvider generatorConfigProvider;
 
 	@Before
 	public void setUp() throws Exception {

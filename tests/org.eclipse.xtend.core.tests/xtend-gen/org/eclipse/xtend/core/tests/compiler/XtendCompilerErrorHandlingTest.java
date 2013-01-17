@@ -16,6 +16,7 @@ import org.eclipse.xtext.validation.IResourceValidator;
 import org.eclipse.xtext.validation.Issue;
 import org.eclipse.xtext.xbase.compiler.ElementIssueProvider.Factory;
 import org.eclipse.xtext.xbase.compiler.GeneratorConfig;
+import org.eclipse.xtext.xbase.compiler.IGeneratorConfigProvider;
 import org.eclipse.xtext.xbase.compiler.JvmModelGenerator;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
@@ -34,7 +35,7 @@ public class XtendCompilerErrorHandlingTest extends AbstractXtendTestCase {
   private Factory issueProviderFactory;
   
   @Inject
-  private GeneratorConfig generatorConfig;
+  private IGeneratorConfigProvider generatorConfigProvider;
   
   @Test
   public void testUnresolvedSuperclass() {
@@ -476,7 +477,8 @@ public class XtendCompilerErrorHandlingTest extends AbstractXtendTestCase {
         EList<EObject> _contents = resource.getContents();
         Iterable<JvmDeclaredType> _filter = Iterables.<JvmDeclaredType>filter(_contents, JvmDeclaredType.class);
         final JvmDeclaredType inferredType = IterableExtensions.<JvmDeclaredType>head(_filter);
-        final CharSequence javaCode = this.generator.generateType(inferredType, this.generatorConfig);
+        GeneratorConfig _get = this.generatorConfigProvider.get(inferredType);
+        final CharSequence javaCode = this.generator.generateType(inferredType, _get);
         String _string_1 = expected.toString();
         String _string_2 = javaCode.toString();
         Assert.assertEquals(_string_1, _string_2);

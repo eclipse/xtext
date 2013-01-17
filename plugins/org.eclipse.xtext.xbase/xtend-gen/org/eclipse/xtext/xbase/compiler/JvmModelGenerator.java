@@ -10,8 +10,6 @@ package org.eclipse.xtext.xbase.compiler;
 import com.google.common.base.Objects;
 import com.google.common.collect.Iterables;
 import com.google.inject.Inject;
-import java.io.BufferedReader;
-import java.io.StringReader;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.LinkedHashMap;
@@ -19,10 +17,8 @@ import java.util.List;
 import java.util.Set;
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.util.EList;
-import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.common.types.JvmAnnotationAnnotationValue;
 import org.eclipse.xtext.common.types.JvmAnnotationReference;
@@ -60,26 +56,17 @@ import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.JvmUpperBound;
 import org.eclipse.xtext.common.types.JvmVisibility;
 import org.eclipse.xtext.common.types.JvmVoid;
-import org.eclipse.xtext.common.types.TypesPackage;
 import org.eclipse.xtext.common.types.util.TypeReferences;
 import org.eclipse.xtext.documentation.IEObjectDocumentationProvider;
 import org.eclipse.xtext.documentation.IEObjectDocumentationProviderExtension;
 import org.eclipse.xtext.documentation.IFileHeaderProvider;
-import org.eclipse.xtext.documentation.IJavaDocTypeReferenceProvider;
 import org.eclipse.xtext.generator.IFileSystemAccess;
 import org.eclipse.xtext.generator.IGenerator;
 import org.eclipse.xtext.generator.trace.ITraceURIConverter;
 import org.eclipse.xtext.generator.trace.LocationData;
-import org.eclipse.xtext.naming.IQualifiedNameConverter;
-import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.nodemodel.INode;
-import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
-import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.resource.ILocationInFileProvider;
-import org.eclipse.xtext.scoping.IScope;
-import org.eclipse.xtext.scoping.IScopeProvider;
 import org.eclipse.xtext.util.ITextRegionWithLineInformation;
-import org.eclipse.xtext.util.ReplaceRegion;
 import org.eclipse.xtext.util.Strings;
 import org.eclipse.xtext.util.TextRegionWithLineInformation;
 import org.eclipse.xtext.validation.Issue;
@@ -90,16 +77,17 @@ import org.eclipse.xtext.xbase.compiler.DocumentationAdapter;
 import org.eclipse.xtext.xbase.compiler.ErrorSafeExtensions;
 import org.eclipse.xtext.xbase.compiler.FileHeaderAdapter;
 import org.eclipse.xtext.xbase.compiler.GeneratorConfig;
+import org.eclipse.xtext.xbase.compiler.IGeneratorConfigProvider;
 import org.eclipse.xtext.xbase.compiler.ImportManager;
 import org.eclipse.xtext.xbase.compiler.JavaKeywords;
 import org.eclipse.xtext.xbase.compiler.LoopExtensions;
 import org.eclipse.xtext.xbase.compiler.LoopParams;
-import org.eclipse.xtext.xbase.compiler.ScopeFakeReference;
 import org.eclipse.xtext.xbase.compiler.TreeAppendableUtil;
 import org.eclipse.xtext.xbase.compiler.XbaseCompiler;
 import org.eclipse.xtext.xbase.compiler.output.ITreeAppendable;
 import org.eclipse.xtext.xbase.compiler.output.TreeAppendable;
 import org.eclipse.xtext.xbase.jvmmodel.IJvmModelAssociations;
+import org.eclipse.xtext.xbase.jvmmodel.IJvmModelInferrer;
 import org.eclipse.xtext.xbase.jvmmodel.ILogicalContainerProvider;
 import org.eclipse.xtext.xbase.jvmmodel.JvmTypeExtensions;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
@@ -114,7 +102,7 @@ import org.eclipse.xtext.xbase.lib.StringExtensions;
 
 /**
  * A generator implementation that processes the
- * derived {@link org.eclipse.xtext.xbase.jvmmodel.IJvmModelInferrer JVM model}
+ * derived {@link IJvmModelInferrer JVM model}
  * and produces the respective java code.
  */
 @SuppressWarnings("all")
@@ -156,16 +144,7 @@ public class JvmModelGenerator implements IGenerator {
   private JavaKeywords keywords;
   
   @Inject
-  private IJavaDocTypeReferenceProvider javaDocTypeReferenceProvider;
-  
-  @Inject
-  private IScopeProvider scopeProvider;
-  
-  @Inject
-  private IQualifiedNameConverter qualifiedNameConverter;
-  
-  @Inject
-  private GeneratorConfig generatorConfig;
+  private IGeneratorConfigProvider generatorConfigProvider;
   
   @Inject
   private ITraceURIConverter converter;
@@ -191,7 +170,8 @@ public class JvmModelGenerator implements IGenerator {
       String _qualifiedName_1 = type.getQualifiedName();
       String _replace = _qualifiedName_1.replace(".", "/");
       String _plus = (_replace + ".java");
-      CharSequence _generateType = this.generateType(type, this.generatorConfig);
+      GeneratorConfig _get = this.generatorConfigProvider.get(type);
+      CharSequence _generateType = this.generateType(type, _get);
       fsa.generateFile(_plus, _generateType);
     }
   }
@@ -1147,12 +1127,21 @@ public class JvmModelGenerator implements IGenerator {
   }
   
   protected ITreeAppendable generateDocumentation(final String text, final List<INode> documentationNodes, final ITreeAppendable appendable, final GeneratorConfig config) {
-    try {
+    ITreeAppendable _xblockexpression = null;
+    {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("/**");
+      final StringConcatenation doc = ((StringConcatenation) _builder);
+      doc.newLine();
+      doc.append(" * ");
+      doc.append(text, " * ");
+      doc.newLine();
+      doc.append(" */");
       ITreeAppendable _xifexpression = null;
       boolean _isEmpty = documentationNodes.isEmpty();
       boolean _not = (!_isEmpty);
       if (_not) {
-        ITreeAppendable _xblockexpression = null;
+        ITreeAppendable _xblockexpression_1 = null;
         {
           ITextRegionWithLineInformation documentationTrace = ITextRegionWithLineInformation.EMPTY_REGION;
           for (final INode node : documentationNodes) {
@@ -1165,208 +1154,22 @@ public class JvmModelGenerator implements IGenerator {
             documentationTrace = _merge;
           }
           LocationData _locationData = new LocationData(documentationTrace, null);
-          final ITreeAppendable parentAppendable = appendable.trace(_locationData);
-          parentAppendable.append("/**");
-          StringReader _stringReader = new StringReader(text);
-          BufferedReader _bufferedReader = new BufferedReader(_stringReader);
-          final BufferedReader reader = _bufferedReader;
-          String lineString = reader.readLine();
-          for (final INode node_1 : documentationNodes) {
-            {
-              final EObject context = NodeModelUtils.findActualSemanticObjectFor(node_1);
-              final int nodeOffset = node_1.getOffset();
-              final String nodeText = node_1.getText();
-              StringReader _stringReader_1 = new StringReader(nodeText);
-              BufferedReader _bufferedReader_1 = new BufferedReader(_stringReader_1);
-              final BufferedReader nodeReader = _bufferedReader_1;
-              List<ReplaceRegion> _computeTypeRefRegions = this.javaDocTypeReferenceProvider.computeTypeRefRegions(node_1);
-              List<ReplaceRegion> _computeParameterTypeRefRegions = this.javaDocTypeReferenceProvider.computeParameterTypeRefRegions(node_1);
-              Iterable<ReplaceRegion> _plus = Iterables.<ReplaceRegion>concat(_computeTypeRefRegions, _computeParameterTypeRefRegions);
-              final Function1<ReplaceRegion,Integer> _function = new Function1<ReplaceRegion,Integer>() {
-                  public Integer apply(final ReplaceRegion it) {
-                    int _offset = it.getOffset();
-                    return Integer.valueOf(_offset);
-                  }
-                };
-              final List<ReplaceRegion> regions = IterableExtensions.<ReplaceRegion, Integer>sortBy(_plus, _function);
-              int nodeLineOffset = 0;
-              String nodeLine = nodeReader.readLine();
-              int _length_1 = nodeLine.length();
-              int nodeLineEndOffset = (nodeLineOffset + _length_1);
-              boolean _and = false;
-              boolean _notEquals = ObjectExtensions.operator_notEquals(nodeLine, null);
-              if (!_notEquals) {
-                _and = false;
-              } else {
-                boolean _notEquals_1 = ObjectExtensions.operator_notEquals(lineString, null);
-                _and = (_notEquals && _notEquals_1);
-              }
-              boolean _while = _and;
-              while (_while) {
-                {
-                  int lineRelativeOffsetOfNodeString = nodeLine.indexOf(lineString);
-                  int _minus = (-1);
-                  boolean _equals = (lineRelativeOffsetOfNodeString == _minus);
-                  boolean _while_1 = _equals;
-                  while (_while_1) {
-                    {
-                      int _length_2 = nodeLine.length();
-                      int _plus_1 = (nodeLineOffset + _length_2);
-                      int _plus_2 = (_plus_1 + 1);
-                      nodeLineOffset = _plus_2;
-                      String _readLine = nodeReader.readLine();
-                      nodeLine = _readLine;
-                      int _length_3 = nodeLine.length();
-                      int _plus_3 = (nodeLineOffset + _length_3);
-                      int _plus_4 = (_plus_3 + 1);
-                      nodeLineEndOffset = _plus_4;
-                      int _indexOf = nodeLine.indexOf(lineString);
-                      lineRelativeOffsetOfNodeString = _indexOf;
-                    }
-                    int _minus_1 = (-1);
-                    boolean _equals_1 = (lineRelativeOffsetOfNodeString == _minus_1);
-                    _while_1 = _equals_1;
-                  }
-                  ITreeAppendable _newLine = parentAppendable.newLine();
-                  _newLine.append(" * ");
-                  final int nodeLineOffsetFinal = nodeLineOffset;
-                  final int nodeLineEndOffsetFinal = nodeLineEndOffset;
-                  final Function1<ReplaceRegion,Boolean> _function_1 = new Function1<ReplaceRegion,Boolean>() {
-                      public Boolean apply(final ReplaceRegion it) {
-                        boolean _and = false;
-                        int _offset = it.getOffset();
-                        int _minus = (_offset - nodeOffset);
-                        boolean _greaterEqualsThan = (_minus >= nodeLineOffsetFinal);
-                        if (!_greaterEqualsThan) {
-                          _and = false;
-                        } else {
-                          int _offset_1 = it.getOffset();
-                          int _minus_1 = (_offset_1 - nodeOffset);
-                          boolean _lessEqualsThan = (_minus_1 <= nodeLineEndOffsetFinal);
-                          _and = (_greaterEqualsThan && _lessEqualsThan);
-                        }
-                        return Boolean.valueOf(_and);
-                      }
-                    };
-                  final Iterable<ReplaceRegion> regionsInLine = IterableExtensions.<ReplaceRegion>filter(regions, _function_1);
-                  int lastOffsetInLine = 0;
-                  for (final ReplaceRegion region : regionsInLine) {
-                    {
-                      int _offset_1 = region.getOffset();
-                      final int nodeRelativeOffsetOfRegion = (_offset_1 - nodeOffset);
-                      int _offset_2 = region.getOffset();
-                      int _minus_1 = (_offset_2 - nodeOffset);
-                      int _minus_2 = (_minus_1 - nodeLineOffset);
-                      final int lineRelativeOffsetOfRegion = (_minus_2 - lineRelativeOffsetOfNodeString);
-                      final String stringInFrontOfRegion = lineString.substring(lastOffsetInLine, lineRelativeOffsetOfRegion);
-                      parentAppendable.append(stringInFrontOfRegion);
-                      final int startLine = node_1.getStartLine();
-                      String _substring = nodeText.substring(0, nodeRelativeOffsetOfRegion);
-                      int _countLines = Strings.countLines(_substring);
-                      final int positionStartLine = (startLine + _countLines);
-                      int _length_2 = region.getLength();
-                      int _plus_1 = (nodeRelativeOffsetOfRegion + _length_2);
-                      String _substring_1 = nodeText.substring(0, _plus_1);
-                      int _countLines_1 = Strings.countLines(_substring_1);
-                      final int positionEndLine = (startLine + _countLines_1);
-                      int _offset_3 = region.getOffset();
-                      int _length_3 = region.getLength();
-                      TextRegionWithLineInformation _textRegionWithLineInformation_1 = new TextRegionWithLineInformation(_offset_3, _length_3, positionStartLine, positionEndLine);
-                      LocationData _locationData_1 = new LocationData(_textRegionWithLineInformation_1, null);
-                      ITreeAppendable childAppendable = parentAppendable.trace(_locationData_1);
-                      String _text = region.getText();
-                      final QualifiedName qualifiedName = this.qualifiedNameConverter.toQualifiedName(_text);
-                      EClass _jvmType = TypesPackage.eINSTANCE.getJvmType();
-                      ScopeFakeReference _scopeFakeReference = new ScopeFakeReference(_jvmType);
-                      IScope _scope = this.scopeProvider.getScope(context, _scopeFakeReference);
-                      String _text_1 = region.getText();
-                      QualifiedName _create = QualifiedName.create(_text_1);
-                      final IEObjectDescription description = _scope.getSingleElement(_create);
-                      boolean _and_1 = false;
-                      int _segmentCount = qualifiedName.getSegmentCount();
-                      boolean _equals_1 = (_segmentCount == 1);
-                      if (!_equals_1) {
-                        _and_1 = false;
-                      } else {
-                        boolean _notEquals_2 = ObjectExtensions.operator_notEquals(description, null);
-                        _and_1 = (_equals_1 && _notEquals_2);
-                      }
-                      if (_and_1) {
-                        EObject _eObjectOrProxy = description.getEObjectOrProxy();
-                        EObject _resolve = EcoreUtil.resolve(_eObjectOrProxy, context);
-                        final JvmType jvmType = ((JvmType) _resolve);
-                        childAppendable.append(jvmType);
-                      } else {
-                        String _text_2 = region.getText();
-                        childAppendable.append(_text_2);
-                      }
-                      int _length_4 = region.getLength();
-                      int _plus_2 = (lineRelativeOffsetOfRegion + _length_4);
-                      lastOffsetInLine = _plus_2;
-                    }
-                  }
-                  int _length_2 = lineString.length();
-                  boolean _greaterThan = (_length_2 > lastOffsetInLine);
-                  if (_greaterThan) {
-                    String _substring = lineString.substring(lastOffsetInLine);
-                    parentAppendable.append(_substring);
-                  }
-                  int _length_3 = nodeLine.length();
-                  int _plus_1 = (nodeLineOffset + _length_3);
-                  int _plus_2 = (_plus_1 + 1);
-                  nodeLineOffset = _plus_2;
-                  String _readLine = nodeReader.readLine();
-                  nodeLine = _readLine;
-                  boolean _notEquals_2 = ObjectExtensions.operator_notEquals(nodeLine, null);
-                  if (_notEquals_2) {
-                    int _length_4 = nodeLine.length();
-                    int _plus_3 = (nodeLineOffset + _length_4);
-                    int _plus_4 = (_plus_3 + 1);
-                    nodeLineEndOffset = _plus_4;
-                  }
-                  String _readLine_1 = reader.readLine();
-                  lineString = _readLine_1;
-                }
-                boolean _and_1 = false;
-                boolean _notEquals_2 = ObjectExtensions.operator_notEquals(nodeLine, null);
-                if (!_notEquals_2) {
-                  _and_1 = false;
-                } else {
-                  boolean _notEquals_3 = ObjectExtensions.operator_notEquals(lineString, null);
-                  _and_1 = (_notEquals_2 && _notEquals_3);
-                }
-                _while = _and_1;
-              }
-            }
-          }
-          ITreeAppendable _newLine = parentAppendable.newLine();
-          _newLine.append(" */");
-          ITreeAppendable _newLine_1 = appendable.newLine();
-          _xblockexpression = (_newLine_1);
-        }
-        _xifexpression = _xblockexpression;
-      } else {
-        ITreeAppendable _xblockexpression_1 = null;
-        {
-          StringConcatenation _builder = new StringConcatenation();
-          _builder.append("/**");
-          final StringConcatenation doc = ((StringConcatenation) _builder);
-          doc.newLine();
-          doc.append(" * ");
-          doc.append(text, " * ");
-          doc.newLine();
-          doc.append(" */");
+          ITreeAppendable _trace = appendable.trace(_locationData);
           String _string = doc.toString();
-          ITreeAppendable _append = appendable.append(_string);
-          ITreeAppendable _newLine = _append.newLine();
+          _trace.append(_string);
+          ITreeAppendable _newLine = appendable.newLine();
           _xblockexpression_1 = (_newLine);
         }
         _xifexpression = _xblockexpression_1;
+      } else {
+        String _string = doc.toString();
+        ITreeAppendable _append = appendable.append(_string);
+        ITreeAppendable _newLine = _append.newLine();
+        _xifexpression = _newLine;
       }
-      return _xifexpression;
-    } catch (Exception _e) {
-      throw Exceptions.sneakyThrow(_e);
+      _xblockexpression = (_xifexpression);
     }
+    return _xblockexpression;
   }
   
   public void generateAnnotations(final JvmAnnotationTarget it, final ITreeAppendable appendable, final boolean withLineBreak, final GeneratorConfig config) {
@@ -1441,8 +1244,8 @@ public class JvmModelGenerator implements IGenerator {
   
   public void generateAnnotation(final JvmAnnotationReference it, final ITreeAppendable appendable, final GeneratorConfig config) {
     boolean _and = false;
-    boolean _isGenerateSuppressWarnings = config.isGenerateSuppressWarnings();
-    boolean _not = (!_isGenerateSuppressWarnings);
+    boolean _isGenerateSyntheticSuppressWarnings = config.isGenerateSyntheticSuppressWarnings();
+    boolean _not = (!_isGenerateSyntheticSuppressWarnings);
     if (!_not) {
       _and = false;
     } else {
