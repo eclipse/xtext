@@ -13,7 +13,7 @@ import org.eclipse.xtext.generator.trace.AbstractTraceRegion;
 import org.eclipse.xtext.generator.trace.TraceRegionSerializer;
 import org.junit.Test;
 
-public class XtendBatchCompilerPluginTraceIT {
+public class XtendCompilerMojoTraceIT {
 
 	private static String ROOT = "/it/compile";
 

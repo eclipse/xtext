@@ -32,7 +32,7 @@ import com.google.inject.Injector;
 /**
  * @author Michael Clay - Initial contribution and API
  */
-public abstract class AbstractXtend2CompilerMojo extends AbstractMojo {
+public abstract class AbstractXtendCompilerMojo extends AbstractMojo {
 	protected static final Predicate<String> FILE_EXISTS = new Predicate<String>() {
 
 		public boolean apply(String filePath) {

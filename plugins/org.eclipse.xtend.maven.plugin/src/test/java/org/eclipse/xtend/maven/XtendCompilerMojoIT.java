@@ -10,7 +10,7 @@ import org.apache.maven.it.Verifier;
 import org.apache.maven.it.util.ResourceExtractor;
 import org.junit.Test;
 
-public class Xtend2BatchCompilerPluginIT {
+public class XtendCompilerMojoIT {
 
 	private static String ROOT = "/it/compile";
 

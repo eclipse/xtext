@@ -24,7 +24,7 @@ import com.google.common.collect.Sets;
  * @phase generate-sources
  * @requiresDependencyResolution compile
  */
-public class XtendCompile extends AbstractXtend2CompilerMojo {
+public class XtendCompile extends AbstractXtendCompilerMojo {
 	/**
 	 * Location of the generated source files.
 	 * 

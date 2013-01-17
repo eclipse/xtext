@@ -24,7 +24,7 @@ import com.google.common.collect.Sets;
  * @phase generate-test-sources
  * @requiresDependencyResolution test
  */
-public class XtendTestCompile extends AbstractXtend2CompilerMojo {
+public class XtendTestCompile extends AbstractXtendCompilerMojo {
 	/**
 	 * Location of the generated test files.
 	 * 
