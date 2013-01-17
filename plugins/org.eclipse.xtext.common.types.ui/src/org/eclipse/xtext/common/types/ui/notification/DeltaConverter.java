@@ -34,6 +34,56 @@ import com.google.inject.Inject;
  */
 public class DeltaConverter {
 	
+	/**
+	 * Wraps an exception that occured during event conversion.
+	 * Events that cannot be converted are assumed to have changes but
+	 * the {@link #getUri()} may be misleading.
+	 * 
+	 * @since 2.4
+	 */
+	public static class ThrowableWrapper implements IResourceDescription.Delta {
+
+		private String location;
+		private String eventAsString;
+		private Throwable cause;
+
+		public ThrowableWrapper(String location, String eventAsString, Throwable cause) {
+			this.location = location;
+			this.eventAsString = eventAsString;
+			this.cause = cause;
+		}
+		
+		public URI getUri() {
+			return URI.createURI(location);
+		}
+
+		public IResourceDescription getOld() {
+			return null;
+		}
+
+		public IResourceDescription getNew() {
+			return null;
+		}
+
+		public boolean haveEObjectDescriptionsChanged() {
+			return true;
+		}
+		
+		public String getLocation() {
+			return location;
+		}
+
+		public Throwable getCause() {
+			return cause;
+		}
+		
+		@Override
+		public String toString() {
+			return "Exception while processing " + eventAsString + ": " + cause.getMessage();
+		}
+		
+	}
+	
 	private static final Logger logger = Logger.getLogger(DeltaConverter.class);
 	
 	private final TypeURIHelper uriHelper;
@@ -65,9 +115,14 @@ public class DeltaConverter {
 				|| delta.getFlags() == (IJavaElementDelta.F_AST_AFFECTED | IJavaElementDelta.F_CONTENT | IJavaElementDelta.F_FINE_GRAINED)) {
 			return Collections.emptyList();
 		}
-		List<IResourceDescription.Delta> result = Lists.newArrayListWithExpectedSize(2);
-		convertCompilationUnits(delta, result);
-		return result;
+		try {
+			List<IResourceDescription.Delta> result = Lists.newArrayListWithExpectedSize(2);
+			convertCompilationUnits(delta, result);
+			return result;
+		} catch(Throwable throwable) {
+			return Collections.<IResourceDescription.Delta>singletonList(
+					new ThrowableWrapper(delta.getElement().getPath().toString(), delta.toString(), throwable));
+		}
 	}
 
 	protected void convertCompilationUnit(IJavaElementDelta delta, List<IResourceDescription.Delta> result) {

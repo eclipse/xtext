@@ -57,6 +57,7 @@ public class TypeResourceUnloaderTest extends Assert implements IResourceDescrip
 	private IStateChangeEventBroker eventBroker;
 
 	private volatile IResourceDescription.Event event;
+	private List<IResourceDescription.Event> subsequentEvents;
 
 	private ICompilationUnit compilationUnit;
 
@@ -82,6 +83,7 @@ public class TypeResourceUnloaderTest extends Assert implements IResourceDescrip
 		document = getDocument();
 		originalContent = document.get();
 		firedElementChangedEvents = Lists.newArrayList();
+		subsequentEvents = Lists.newArrayList();
 	}
 	
 	@After
@@ -98,6 +100,7 @@ public class TypeResourceUnloaderTest extends Assert implements IResourceDescrip
 		project = null;
 		event = null;
 		firedElementChangedEvents = null;
+		subsequentEvents = null;
 	}
 	
 	@Test public void testNullChange() throws BadLocationException, InterruptedException {
@@ -136,6 +139,8 @@ public class TypeResourceUnloaderTest extends Assert implements IResourceDescrip
 		document.replace(idx, 0, "<Abc>");
 		waitForEvent();
 		assertNotNull(String.valueOf(firedElementChangedEvents), event);
+		assertTrue(subsequentEvents.toString(), subsequentEvents.isEmpty());
+		assertFalse(event.toString(), event instanceof DeltaConverter.ThrowableWrapper);
 		assertEquals(1, event.getDeltas().size());
 		IResourceDescription.Delta delta = event.getDeltas().get(0);
 		assertNotNull(delta.getNew());
@@ -153,6 +158,8 @@ public class TypeResourceUnloaderTest extends Assert implements IResourceDescrip
 		document.replace(idx, lookup.length(), "");
 		waitForEvent();
 		assertNotNull(String.valueOf(firedElementChangedEvents), event);
+		assertTrue(subsequentEvents.toString(), subsequentEvents.isEmpty());
+		assertFalse(event.toString(), event instanceof DeltaConverter.ThrowableWrapper);
 		assertEquals(1, event.getDeltas().size());
 		IResourceDescription.Delta delta = event.getDeltas().get(0);
 		assertNotNull(delta.getNew());
@@ -179,6 +186,8 @@ public class TypeResourceUnloaderTest extends Assert implements IResourceDescrip
 		document.replace(idx + 1, 0, "int foobar");
 		waitForEvent();
 		assertNotNull(String.valueOf(firedElementChangedEvents), event);
+		assertTrue(subsequentEvents.toString(), subsequentEvents.isEmpty());
+		assertFalse(event.toString(), event instanceof DeltaConverter.ThrowableWrapper);
 		assertEquals(1, event.getDeltas().size());
 		IResourceDescription.Delta delta = event.getDeltas().get(0);
 		Collection<String> allNames = getNames(delta);
@@ -193,6 +202,8 @@ public class TypeResourceUnloaderTest extends Assert implements IResourceDescrip
 		document.replace(idx + lookup.length(), 0, "abstract int foobar();");
 		waitForEvent();
 		assertNotNull(String.valueOf(firedElementChangedEvents), event);
+		assertTrue(subsequentEvents.toString(), subsequentEvents.isEmpty());
+		assertFalse(event.toString(), event instanceof DeltaConverter.ThrowableWrapper);
 		assertEquals(1, event.getDeltas().size());
 		IResourceDescription.Delta delta = event.getDeltas().get(0);
 		Collection<String> allNames = getNames(delta);
@@ -207,6 +218,8 @@ public class TypeResourceUnloaderTest extends Assert implements IResourceDescrip
 		document.replace(idx + "method".length(), 0, "2");
 		waitForEvent();
 		assertNotNull(String.valueOf(firedElementChangedEvents), event);
+		assertTrue(subsequentEvents.toString(), subsequentEvents.isEmpty());
+		assertFalse(event.toString(), event instanceof DeltaConverter.ThrowableWrapper);
 		assertEquals(1, event.getDeltas().size());
 		IResourceDescription.Delta delta = event.getDeltas().get(0);
 		Collection<String> allNames = getNames(delta);
@@ -221,6 +234,8 @@ public class TypeResourceUnloaderTest extends Assert implements IResourceDescrip
 		document.replace(idx + "method".length(), 0, "2");
 		waitForEvent();
 		assertNotNull(String.valueOf(firedElementChangedEvents), event);
+		assertTrue(subsequentEvents.toString(), subsequentEvents.isEmpty());
+		assertFalse(event.toString(), event instanceof DeltaConverter.ThrowableWrapper);
 		assertEquals(1, event.getDeltas().size());
 		IResourceDescription.Delta delta = event.getDeltas().get(0);
 		Collection<String> allNames = getNames(delta);
@@ -236,6 +251,8 @@ public class TypeResourceUnloaderTest extends Assert implements IResourceDescrip
 		document.replace(idx, "NestedTypes".length(), "FooBar");
 		waitForEvent();
 		assertNotNull(String.valueOf(firedElementChangedEvents), event);
+		assertTrue(subsequentEvents.toString(), subsequentEvents.isEmpty());
+		assertFalse(event.toString(), event instanceof DeltaConverter.ThrowableWrapper);
 		assertEquals(2, event.getDeltas().size());
 		IResourceDescription.Delta delta = event.getDeltas().get(0);
 		
@@ -295,7 +312,9 @@ public class TypeResourceUnloaderTest extends Assert implements IResourceDescrip
 	}
 	
 	public void descriptionsChanged(IResourceDescription.Event event) {
-		assertNull("given event has to be the first and only event", this.event);
+		if (this.event != null && subsequentEvents != null) {
+			subsequentEvents.add(event);
+		}
 		this.event = event;
 	}
 
