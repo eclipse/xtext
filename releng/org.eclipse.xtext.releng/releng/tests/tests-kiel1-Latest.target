@@ -47,7 +47,7 @@
 </location>
 <location includeAllPlatforms="false" includeMode="planner" includeSource="false" type="InstallableUnit">
 <unit id="org.eclipse.xtext.sdk.feature.group" version="0.0.0"/>
-<repository location="file:${WORKSPACE}/repositories/xtext.p2.repository/"/>
+<repository location="${WORKSPACE}/repositories/xtext.p2.repository"/>
 </location>
 </locations>
 </target>

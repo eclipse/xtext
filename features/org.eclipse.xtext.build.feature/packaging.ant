@@ -32,14 +32,20 @@
 
 	<!-- Modify category xml (replace package qualifier) -->
 	<target name="-create.category.xml" depends="-define.package.qualifier">
-		<loadfile property="modifiedCategoryXml" srcFile="category.xml.template">
+		<antcall target="resolve.variables" inheritall="true">
+			<param name="src.file" value="category.xml.template" />
+			<param name="dest.file" value="category.xml" />
+		</antcall>
+	</target>
+
+	<target name="resolve.variables">
+		<loadfile property="resolved.stream" srcFile="${src.file}">
 			<filterchain>
 				<expandproperties />
 			</filterchain>
 		</loadfile>
-		<echo file="category.xml">${modifiedCategoryXml}</echo>
+		<echo file="${dest.file}">${resolved.stream}</echo>
 	</target>
-
 
 	<target name="package.site" depends="-define.package.qualifier">
 		<mkdir dir="${sp:output}" />
@@ -158,26 +164,26 @@
 			<arg value="-p2.arch" />
 			<arg value="${wildcard}" />
 		</java>
-		
+
 		<condition property="director.failed">
 			<not>
 				<equals arg1="${director.result}" arg2="0"/>
 			</not>
 		</condition>
-	
+
 		<antcall target="-check.director.result" inheritall="true"/>
-		
+
 		<!-- remove the p2 metadata, so that the installation of target platform IUs is not confused -->
 		<delete dir="${install.destination}" includeEmptyDirs="true">
 			<include name="p2/**" />
 		</delete>
 	</target>
-	
+
 	<target name="-check.director.result" if="director.failed">
 		<echo>${director.output}</echo>
 		<fail message="p2 Director execution failed."/>
 	</target>
-	
+
 	<target name="-install.ius" depends="-install.content.ius" if="target.platform.ius">
 		<!--
 		  install the specified TP IUs
