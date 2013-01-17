@@ -94,6 +94,7 @@ public class TypeResourceUnloaderTest extends Assert implements IResourceDescrip
 		eventBroker.removeListener(this);
 		eventBroker = null;
 		projectProvider = null;
+		compilationUnit.discardWorkingCopy();
 		compilationUnit = null;
 		editor = null;
 		type = null;
