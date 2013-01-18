@@ -260,7 +260,7 @@ public class QuickfixTestBuilder {
       NullProgressMonitor _nullProgressMonitor = new NullProgressMonitor();
       this._syncUtil.waitForAutoBuild(_nullProgressMonitor);
       this._syncUtil.yieldToQueuedDisplayJobs(null);
-      final XtextEditor editor = this._workbenchTestHelper.openEditor(file);
+      XtextEditor editor = this._workbenchTestHelper.openEditor(file);
       this._syncUtil.waitForReconciler(editor);
       this._syncUtil.yieldToQueuedDisplayJobs(null);
       _xblockexpression = (editor);
@@ -278,6 +278,7 @@ public class QuickfixTestBuilder {
       if (_notEquals_1) {
         this.file.delete(true, null);
       }
+      this._syncUtil.yieldToQueuedDisplayJobs(null);
     } catch (Exception _e) {
       throw Exceptions.sneakyThrow(_e);
     }

@@ -3,11 +3,8 @@ package org.eclipse.xtend.ide.codebuilder
 import javax.inject.Inject
 import org.eclipse.jdt.core.IType
 import org.eclipse.xtend.core.xtend.XtendClass
-import org.eclipse.xtend.core.xtend.XtendMember
-import org.eclipse.xtext.EcoreUtil2
 import org.eclipse.xtext.common.types.JvmTypeReference
 import org.eclipse.xtext.common.types.JvmVisibility
-import org.eclipse.xtext.nodemodel.util.NodeModelUtils
 import org.eclipse.xtext.xbase.compiler.IAppendable
 import org.eclipse.xtext.xbase.compiler.TypeReferenceSerializer
 
@@ -21,6 +18,8 @@ class XtendFieldBuilder extends AbstractFieldBuilder implements ICodeBuilder$Xte
 	
 	@Inject XtendTypeReferenceSerializer typeRefSerializer
 
+	@Inject extension InsertionOffsets
+	
 	override protected getTypeReferenceSerializer() {
 		typeRefSerializer
 	}
@@ -31,11 +30,7 @@ class XtendFieldBuilder extends AbstractFieldBuilder implements ICodeBuilder$Xte
 	}
 
 	override getInsertOffset() {
-		val member = EcoreUtil2::getContainerOfType(context, typeof(XtendMember))
-		if(member == null) 
-			throw new RuntimeException("Cannot insert field without a reference member");
-		val memberNode = NodeModelUtils::findActualNodeFor(member)
-		memberNode.offset
+		getNewFieldInsertOffset(context, xtendClass)
 	}
 	
 	override getXtendClass() {

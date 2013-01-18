@@ -4,11 +4,8 @@ import com.google.inject.Inject
 import java.util.List
 import org.eclipse.jdt.core.IType
 import org.eclipse.xtend.core.xtend.XtendClass
-import org.eclipse.xtend.core.xtend.XtendMember
-import org.eclipse.xtext.EcoreUtil2
 import org.eclipse.xtext.common.types.JvmTypeReference
 import org.eclipse.xtext.common.types.JvmVisibility
-import org.eclipse.xtext.nodemodel.util.NodeModelUtils
 import org.eclipse.xtext.xbase.compiler.IAppendable
 import org.eclipse.xtext.xbase.compiler.TypeReferenceSerializer
 
@@ -26,13 +23,15 @@ class XtendConstructorBuilder extends AbstractConstructorBuilder implements ICod
 	
 	@Inject XtendTypeReferenceSerializer typeRefSerializer
 
+	@Inject extension InsertionOffsets
+
 	override protected getTypeReferenceSerializer() {
 		typeRefSerializer
 	}
 	
 	override build(IAppendable appendable) {
 		appendable
-			.appendVisibility(visibility, JvmVisibility::PRIVATE)
+			.appendVisibility(visibility, JvmVisibility::PUBLIC)
 			.append('new')
 			.appendParameters(parameterTypes)
 			.append(' {').increaseIndentation.newLine
@@ -42,11 +41,7 @@ class XtendConstructorBuilder extends AbstractConstructorBuilder implements ICod
 	}
 
 	override getInsertOffset() {
-		val member = EcoreUtil2::getContainerOfType(context, typeof(XtendMember))
-		if(member == null) 
-			throw new RuntimeException("Cannot insert field without a reference member");
-		val memberNode = NodeModelUtils::findActualNodeFor(member)
-		memberNode.offset
+		getNewConstructorInsertOffset(context, xtendClass)
 	}
 	
 	override getXtendClass() {
