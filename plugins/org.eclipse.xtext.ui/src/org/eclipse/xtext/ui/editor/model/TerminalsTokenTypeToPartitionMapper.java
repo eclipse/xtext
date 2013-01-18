@@ -15,7 +15,7 @@ import com.google.inject.Singleton;
  * @author Sven Efftinge - Initial contribution and API
  */
 @Singleton
-public class TerminalsTokenTypeToPartitionMapper extends TokenTypeToStringMapper implements ITokenTypeToPartitionTypeMapper {
+public class TerminalsTokenTypeToPartitionMapper extends TokenTypeToStringMapper implements ITokenTypeToPartitionTypeMapper, ITokenTypeToPartitionTypeMapperExtension {
 	public final static String COMMENT_PARTITION = "__comment";
 	/**
 	 * @since 2.0
@@ -48,6 +48,20 @@ public class TerminalsTokenTypeToPartitionMapper extends TokenTypeToStringMapper
 
 	public String[] getSupportedPartitionTypes() {
 		return SUPPORTED_PARTITIONS;
+	}
+	
+	/**
+	 * @since 2.4
+	 */
+	public boolean isMultiLineComment(String partitionType) {
+		return COMMENT_PARTITION.equals(partitionType);
+	}
+	
+	/**
+	 * @since 2.4
+	 */
+	public boolean isSingleLineComment(String partitionType) {
+		return SL_COMMENT_PARTITION.equals(partitionType);
 	}
 
 }

@@ -23,6 +23,9 @@ import org.eclipse.ui.texteditor.spelling.ISpellingProblemCollector;
 import org.eclipse.ui.texteditor.spelling.SpellingContext;
 import org.eclipse.ui.texteditor.spelling.SpellingReconcileStrategy;
 import org.eclipse.ui.texteditor.spelling.SpellingService;
+import org.eclipse.xtext.ui.editor.model.ITokenTypeToPartitionTypeMapperExtension;
+
+import com.google.inject.Inject;
 
 /**
  * @author Michael Clay - Initial contribution and API
@@ -31,8 +34,14 @@ import org.eclipse.ui.texteditor.spelling.SpellingService;
 public class XtextSpellingReconcileStrategy extends SpellingReconcileStrategy {
 
 	public static class Factory {
+		
+		@Inject
+		private ITokenTypeToPartitionTypeMapperExtension partitionMapperExtension;
+		
 		public XtextSpellingReconcileStrategy create(ISourceViewer sourceViewer) {
-			return new XtextSpellingReconcileStrategy(sourceViewer);
+			XtextSpellingReconcileStrategy result = new XtextSpellingReconcileStrategy(sourceViewer);
+			result.setPartitionMapperExtension(partitionMapperExtension);
+			return result;
 		}
 	}
 	
@@ -40,10 +49,18 @@ public class XtextSpellingReconcileStrategy extends SpellingReconcileStrategy {
 	private SpellingService spellingService = EditorsUI.getSpellingService();
 	private SpellingContext spellingContext = new SpellingContext();
 	private NullProgressMonitor progressMonitor = new NullProgressMonitor();
+	private ITokenTypeToPartitionTypeMapperExtension partitionMapperExtension;
 
 	protected XtextSpellingReconcileStrategy(ISourceViewer viewer) {
 		super(viewer, EditorsUI.getSpellingService());
 		spellingContext.setContentType(getContentType());
+	}
+	
+	/**
+	 * @since 2.4
+	 */
+	protected void setPartitionMapperExtension(ITokenTypeToPartitionTypeMapperExtension partitionMapperExtension) {
+		this.partitionMapperExtension = partitionMapperExtension;
 	}
 
 	@Override
@@ -78,9 +95,19 @@ public class XtextSpellingReconcileStrategy extends SpellingReconcileStrategy {
 	}
 
 	protected boolean shouldProcess(ITypedRegion typedRegion) {
-		if (STRING_LITERAL_PARTITION.equals(typedRegion.getType())
-				|| SL_COMMENT_PARTITION.equals(typedRegion.getType())
-				|| COMMENT_PARTITION.equals(typedRegion.getType())) {
+		String type = typedRegion.getType();
+		if (partitionMapperExtension != null) {
+			if (partitionMapperExtension.isMultiLineComment(type) || partitionMapperExtension.isSingleLineComment(type)) {
+				return true;
+			}
+			if (STRING_LITERAL_PARTITION.equals(type)) {
+				return true;
+			}
+			return false;
+		}
+		if (STRING_LITERAL_PARTITION.equals(type)
+				|| SL_COMMENT_PARTITION.equals(type)
+				|| COMMENT_PARTITION.equals(type)) {
 			return true;
 		}
 		return false;
