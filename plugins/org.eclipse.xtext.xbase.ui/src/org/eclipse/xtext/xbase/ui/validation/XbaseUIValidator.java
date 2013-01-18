@@ -16,7 +16,10 @@ import java.util.Map;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EStructuralFeature;
+import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.jdt.core.IAccessRule;
+import org.eclipse.jdt.core.IClasspathEntry;
 import org.eclipse.jdt.core.IJavaElement;
 import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.jdt.core.IPackageFragmentRoot;
@@ -24,6 +27,7 @@ import org.eclipse.jdt.core.IType;
 import org.eclipse.jdt.core.JavaModelException;
 import org.eclipse.jdt.core.compiler.CharOperation;
 import org.eclipse.jdt.internal.core.ClasspathAccessRule;
+import org.eclipse.jdt.internal.core.JavaProject;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmParameterizedTypeReference;
 import org.eclipse.xtext.common.types.JvmType;
@@ -147,7 +151,14 @@ public class XbaseUIValidator extends AbstractDeclarativeValidator {
 	protected RestrictionKind computeRestriction(IType type) {
 		try {
 			IPackageFragmentRoot root = (IPackageFragmentRoot) type.getAncestor(IJavaElement.PACKAGE_FRAGMENT_ROOT);
-			IAccessRule[] rules = root.getResolvedClasspathEntry().getAccessRules();
+			if (root == null) {
+				return RestrictionKind.VALID;
+			}
+			IClasspathEntry entry = getResolvedClasspathEntry(root);
+			if (entry == null) {
+				return RestrictionKind.VALID;
+			}
+			IAccessRule[] rules = entry.getAccessRules();
 			String typePath = type.getFullyQualifiedName().replace('.', '/');
 			char[] typePathAsArray = typePath.toCharArray();
 			for(IAccessRule rule: rules) {
@@ -165,5 +176,22 @@ public class XbaseUIValidator extends AbstractDeclarativeValidator {
 			// ignore
 		}
 		return RestrictionKind.VALID;
+	}
+	
+	/*
+	 * JDT 3.6 or later could use root.getResolvedClasspathEntry, but that was not available in 3.5
+	 * Therefore we inline the implementation here but avoid throwing an exception in case there is no entry
+	 */
+	@Nullable 
+	protected IClasspathEntry getResolvedClasspathEntry(@NonNull IPackageFragmentRoot root) throws JavaModelException {
+		IClasspathEntry result = null;
+		JavaProject project = (JavaProject) root.getJavaProject();
+		project.getResolvedClasspath(); // force the resolved entry cache to be populated
+		@SuppressWarnings("rawtypes")
+		Map rootPathToResolvedEntries = project.getPerProjectInfo().rootPathToResolvedEntries;
+		if (rootPathToResolvedEntries != null) {
+			result = (IClasspathEntry) rootPathToResolvedEntries.get(root.getPath());
+		}
+		return result;
 	}
 }
