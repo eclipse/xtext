@@ -16,7 +16,9 @@ import org.eclipse.xtend.core.xtend.XtendField;
 import org.eclipse.xtend.core.xtend.XtendMember;
 import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.nodemodel.ICompositeNode;
+import org.eclipse.xtext.nodemodel.ILeafNode;
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
+import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 
@@ -31,8 +33,7 @@ public class InsertionOffsets {
     EList<XtendMember> _members = ownerClass.getMembers();
     boolean _isEmpty = _members.isEmpty();
     if (_isEmpty) {
-      int _after = this.after(ownerClass);
-      return (_after - 2);
+      return this.inEmpty(ownerClass);
     }
     EList<XtendMember> _members_1 = ownerClass.getMembers();
     Iterable<XtendField> _filter = Iterables.<XtendField>filter(_members_1, XtendField.class);
@@ -62,8 +63,7 @@ public class InsertionOffsets {
       EList<XtendMember> _members_1 = ownerClass.getMembers();
       boolean _isEmpty = _members_1.isEmpty();
       if (_isEmpty) {
-        int _after = this.after(ownerClass);
-        return (_after - 2);
+        return this.inEmpty(ownerClass);
       } else {
         EList<XtendMember> _members_2 = ownerClass.getMembers();
         XtendMember _last = IterableExtensions.<XtendMember>last(_members_2);
@@ -98,6 +98,36 @@ public class InsertionOffsets {
       int _length = node.getLength();
       int _plus = (_offset + _length);
       _xblockexpression = (_plus);
+    }
+    return _xblockexpression;
+  }
+  
+  protected int inEmpty(final XtendClass ownerClass) {
+    int _xblockexpression = (int) 0;
+    {
+      final ICompositeNode classNode = NodeModelUtils.findActualNodeFor(ownerClass);
+      Iterable<ILeafNode> _leafNodes = classNode.getLeafNodes();
+      final Function1<ILeafNode,Boolean> _function = new Function1<ILeafNode,Boolean>() {
+          public Boolean apply(final ILeafNode it) {
+            String _text = it.getText();
+            boolean _equals = ObjectExtensions.operator_equals(_text, "{");
+            return Boolean.valueOf(_equals);
+          }
+        };
+      final ILeafNode openingBraceNode = IterableExtensions.<ILeafNode>findFirst(_leafNodes, _function);
+      int _xifexpression = (int) 0;
+      boolean _notEquals = ObjectExtensions.operator_notEquals(openingBraceNode, null);
+      if (_notEquals) {
+        int _offset = openingBraceNode.getOffset();
+        int _plus = (_offset + 1);
+        _xifexpression = _plus;
+      } else {
+        int _offset_1 = classNode.getOffset();
+        int _length = classNode.getLength();
+        int _plus_1 = (_offset_1 + _length);
+        _xifexpression = _plus_1;
+      }
+      _xblockexpression = (_xifexpression);
     }
     return _xblockexpression;
   }

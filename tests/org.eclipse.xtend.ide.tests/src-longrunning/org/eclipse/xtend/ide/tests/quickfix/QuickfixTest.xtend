@@ -221,8 +221,7 @@ class QuickfixTest extends AbstractXtendUITestCase {
 	@Test 
 	def void missingMemberOtherClass() {
 		create('Foo.xtend', '''
-			class Foo {
-			}
+			class Foo {}
 			
 			class Bar {
 				def bar(Foo foo) {
@@ -240,7 +239,7 @@ class QuickfixTest extends AbstractXtendUITestCase {
 					«defaultBody»
 				}
 				
-			}
+				}
 			
 			class Bar {
 				def bar(Foo foo) {
@@ -255,7 +254,7 @@ class QuickfixTest extends AbstractXtendUITestCase {
 					«defaultBody»
 				}
 				
-			}
+				}
 			
 			class Bar {
 				def bar(Foo foo) {
@@ -264,8 +263,7 @@ class QuickfixTest extends AbstractXtendUITestCase {
 			}
 		''')
 		.assertModelAfterQuickfix("Create extension method 'foo(Foo)'", '''
-			class Foo {
-			}
+			class Foo {}
 			
 			class Bar {
 				def bar(Foo foo) {
@@ -279,8 +277,7 @@ class QuickfixTest extends AbstractXtendUITestCase {
 			}
 		''')
 		.assertModelAfterQuickfix("Create extension method 'getFoo(Foo)'", '''
-			class Foo {
-			}
+			class Foo {}
 			
 			class Bar {
 				def bar(Foo foo) {
@@ -570,7 +567,7 @@ class QuickfixTest extends AbstractXtendUITestCase {
 			
 			class Bar {
 				def bar(Foo foo) {
-					this * foo
+					foo * this
 				}
 			}
 		''')

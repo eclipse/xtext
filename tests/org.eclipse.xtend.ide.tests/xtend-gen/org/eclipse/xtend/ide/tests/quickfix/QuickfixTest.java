@@ -437,9 +437,7 @@ public class QuickfixTest extends AbstractXtendUITestCase {
   @Test
   public void missingMemberOtherClass() {
     StringConcatenation _builder = new StringConcatenation();
-    _builder.append("class Foo {");
-    _builder.newLine();
-    _builder.append("}");
+    _builder.append("class Foo {}");
     _builder.newLine();
     _builder.newLine();
     _builder.append("class Bar {");
@@ -475,6 +473,7 @@ public class QuickfixTest extends AbstractXtendUITestCase {
     _builder_1.newLine();
     _builder_1.append("\t");
     _builder_1.newLine();
+    _builder_1.append("\t");
     _builder_1.append("}");
     _builder_1.newLine();
     _builder_1.newLine();
@@ -508,6 +507,7 @@ public class QuickfixTest extends AbstractXtendUITestCase {
     _builder_2.newLine();
     _builder_2.append("\t");
     _builder_2.newLine();
+    _builder_2.append("\t");
     _builder_2.append("}");
     _builder_2.newLine();
     _builder_2.newLine();
@@ -526,9 +526,7 @@ public class QuickfixTest extends AbstractXtendUITestCase {
     _builder_2.newLine();
     QuickfixTestBuilder _assertModelAfterQuickfix_1 = _assertModelAfterQuickfix.assertModelAfterQuickfix("Create method \'getFoo()\' in \'Foo\'", _builder_2);
     StringConcatenation _builder_3 = new StringConcatenation();
-    _builder_3.append("class Foo {");
-    _builder_3.newLine();
-    _builder_3.append("}");
+    _builder_3.append("class Foo {}");
     _builder_3.newLine();
     _builder_3.newLine();
     _builder_3.append("class Bar {");
@@ -559,9 +557,7 @@ public class QuickfixTest extends AbstractXtendUITestCase {
     _builder_3.newLine();
     QuickfixTestBuilder _assertModelAfterQuickfix_2 = _assertModelAfterQuickfix_1.assertModelAfterQuickfix("Create extension method \'foo(Foo)\'", _builder_3);
     StringConcatenation _builder_4 = new StringConcatenation();
-    _builder_4.append("class Foo {");
-    _builder_4.newLine();
-    _builder_4.append("}");
+    _builder_4.append("class Foo {}");
     _builder_4.newLine();
     _builder_4.newLine();
     _builder_4.append("class Bar {");
@@ -1102,7 +1098,7 @@ public class QuickfixTest extends AbstractXtendUITestCase {
     _builder_2.append("def bar(Foo foo) {");
     _builder_2.newLine();
     _builder_2.append("\t\t");
-    _builder_2.append("this * foo");
+    _builder_2.append("foo * this");
     _builder_2.newLine();
     _builder_2.append("\t");
     _builder_2.append("}");
