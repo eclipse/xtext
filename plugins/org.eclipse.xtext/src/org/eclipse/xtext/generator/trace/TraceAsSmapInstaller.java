@@ -50,11 +50,7 @@ public class TraceAsSmapInstaller implements ITraceToBytecodeInstaller {
 	}
 
 	protected String getPath(URI path) {
-		if (!path.isPlatformResource())
-			return null;
-		String fullPath = path.trimFragment().toPlatformString(true);
-		final String substring = fullPath.substring(fullPath.substring(1).indexOf('/') + 1);
-		return substring;
+		return path.lastSegment();
 	}
 
 	protected String getStratumName(final URI path) {
