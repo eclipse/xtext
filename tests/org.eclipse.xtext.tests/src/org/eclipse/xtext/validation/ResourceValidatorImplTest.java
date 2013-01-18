@@ -70,7 +70,8 @@ public class ResourceValidatorImplTest extends AbstractXtextTests {
 		XtextResource resource = getResourceAndExpect(new StringInputStream("type foo extends Bar"), 1);
 		List<Issue> list = getValidator().validate(resource, CheckMode.NORMAL_AND_FAST, null);
 		assertEquals(1,list.size());
-		assertTrue(list.get(0).isSyntaxError());
+		assertTrue(!list.get(0).isSyntaxError());
+		assertEquals(org.eclipse.xtext.diagnostics.Diagnostic.LINKING_DIAGNOSTIC, list.get(0).getCode());
 	}
 	
 	@Test public void testSemanticError() throws Exception {
