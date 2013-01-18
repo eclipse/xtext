@@ -7,6 +7,7 @@ import org.eclipse.xtend.ide.tests.AbstractXtendUITestCase
 import org.junit.After
 import org.junit.Test
 import org.junit.Ignore
+import org.eclipse.xtext.diagnostics.Diagnostic
 
 class QuickfixTest extends AbstractXtendUITestCase {
 	
@@ -494,6 +495,83 @@ class QuickfixTest extends AbstractXtendUITestCase {
 		''')
 		.assertModelAfterQuickfix("Make class abstract", '''
 			abstract class Foo implements Comparable<Foo> {
+			}
+		''')
+	}
+	
+	@Test 
+	def void missingOperatorSameClass() {
+		create('Foo.xtend', '''
+			class Foo {
+			}
+			
+			class Bar {
+				def bar(Foo foo) {
+					this *| foo
+				}
+			}
+		''')
+		.assertIssueCodes(Diagnostic::LINKING_DIAGNOSTIC)
+		.assertResolutionLabels("Create method 'operator_multiply(Foo)'", "Change to '+'")
+		.assertModelAfterQuickfix("Create method 'operator_multiply(Foo)'", '''
+			class Foo {
+			}
+			
+			class Bar {
+				def bar(Foo foo) {
+					this * foo
+				}
+				
+				def operator_multiply(Foo foo) {
+					«defaultBody»
+				}
+				
+			}
+		''')
+	}
+	
+	@Test 
+	def void missingOperatorOtherClass() {
+		create('Foo.xtend', '''
+			class Foo {
+			}
+			
+			class Bar {
+				def bar(Foo foo) {
+					foo *| this
+				}
+			}
+		''')
+		.assertIssueCodes(Diagnostic::LINKING_DIAGNOSTIC)
+		.assertResolutionLabels("Create extension method 'operator_multiply(Foo, Bar)'", "Create method 'operator_multiply(Bar)' in 'Foo'", "Change to '+'")
+		.assertModelAfterQuickfix("Create extension method 'operator_multiply(Foo, Bar)'", '''
+			class Foo {
+			}
+			
+			class Bar {
+				def bar(Foo foo) {
+					foo * this
+				}
+				
+				def operator_multiply(Foo foo, Bar bar) {
+					«defaultBody»
+				}
+				
+			}
+		''')
+		.assertModelAfterQuickfix("Create method 'operator_multiply(Bar)' in 'Foo'", '''
+			class Foo {
+				
+				def operator_multiply(Bar bar) {
+					«defaultBody»
+				}
+				
+			}
+			
+			class Bar {
+				def bar(Foo foo) {
+					this * foo
+				}
 			}
 		''')
 	}
