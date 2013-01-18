@@ -1,11 +1,4 @@
-/**
- * Copyright (c) 2013 itemis AG (http://www.itemis.eu) and others.
- * All rights reserved. This program and the accompanying materials
- * are made available under the terms of the Eclipse Public License v1.0
- * which accompanies this distribution, and is available at
- * http://www.eclipse.org/legal/epl-v10.html
- */
-package org.eclipse.xtend.ide.quickfix;
+package org.eclipse.xtend.ide.codebuilder;
 
 import com.google.common.collect.Lists;
 import java.util.ArrayList;
@@ -46,19 +39,8 @@ public class VariableNameAcceptor implements CompletionDataAcceptor {
         public Integer apply(final String left, final String right) {
           int _length = left.length();
           int _length_1 = right.length();
-          boolean _lessThan = (_length < _length_1);
-          if (_lessThan) {
-            return (-1);
-          } else {
-            int _length_2 = left.length();
-            int _length_3 = right.length();
-            boolean _greaterThan = (_length_2 > _length_3);
-            if (_greaterThan) {
-              return 1;
-            } else {
-              return 0;
-            }
-          }
+          int _minus = (_length - _length_1);
+          return _minus;
         }
       };
     Collections.<String>sort(candidates, new Comparator<String>() {

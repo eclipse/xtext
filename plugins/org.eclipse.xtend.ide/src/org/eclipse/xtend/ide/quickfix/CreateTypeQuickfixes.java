@@ -76,7 +76,7 @@ public class CreateTypeQuickfixes implements ILinkingIssueQuickfixProvider {
 			issueResolutionAcceptor.accept(issue, "Create Java class",
 					"Opens the new Java class wizard to create the type '" + issueString + "'", "java_file.gif",
 					openNewJavaClassWizardFor(context, issueString));
-			issueResolutionAcceptor.accept(issue, "Create Java Interface",
+			issueResolutionAcceptor.accept(issue, "Create Java interface",
 					"Opens the new Java interface wizard to create the type '" + issueString + "'",
 					"java_interface.gif", openNewJavaInterfaceWizardFor(context, issueString));
 		}

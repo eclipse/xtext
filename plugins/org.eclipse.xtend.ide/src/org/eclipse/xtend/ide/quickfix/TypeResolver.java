@@ -24,18 +24,20 @@ import com.google.inject.Inject;
 /**
  * @author Sebastian Benz - Initial contribution and API
  */
-public class ExpectedTypeResolver {
+public class TypeResolver {
 	
 	@Inject
 	private CommonTypeComputationServices computationServices;
 	
-	public JvmTypeReference resolveExpectedType(final EObject context, JvmTypeReference expectedType) {
+	public JvmTypeReference resolveType(EObject context, JvmTypeReference type) {
+		if(type == null)
+			return null;
 		ITypeReferenceOwner owner = new StandardTypeReferenceOwner(computationServices, context);
 		TypeParameterByConstraintSubstitutor substitutor = new TypeParameterByConstraintSubstitutor(
 				Collections.<JvmTypeParameter, LightweightMergedBoundTypeArgument> emptyMap(),
 				owner);
 		JvmTypeReference resolvedExpectedType = substitutor.substitute(
-				new OwnedConverter(owner).toLightweightReference(expectedType)).toTypeReference();
+				new OwnedConverter(owner).toLightweightReference(type)).toTypeReference();
 		return resolvedExpectedType;
 	}
 }

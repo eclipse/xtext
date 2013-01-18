@@ -12,6 +12,8 @@ class QuickfixTest extends AbstractXtendUITestCase {
 	
 	@Inject extension QuickfixTestBuilder builder
 	
+	static val defaultBody = 'throw new UnsupportedOperationException("TODO: auto-generated method stub")'
+	 
 	@After
 	override tearDown() {
 		builder.tearDown
@@ -27,19 +29,12 @@ class QuickfixTest extends AbstractXtendUITestCase {
 			}
 		''')
 		.assertIssueCodes(FEATURECALL_LINKING_DIAGNOSTIC)
-		.assertResolutionLabels("Create method 'bar'", "Create field 'bar'", "Create local variable 'bar'")
-		.assertModelAfterQuickfix("Create method 'bar'", '''
-			class Foo {
-				def foo() {
-					bar
-				}
-				def bar() { }
-			
-			}
-		''')
+		.assertResolutionLabels("Create field 'bar'", "Create local variable 'bar'", "Create method 'bar()'", "Create method 'getBar()'")
 		.assertModelAfterQuickfix("Create field 'bar'", '''
 			class Foo {
+				
 				Object bar
+				
 				def foo() {
 					bar
 				}
@@ -51,6 +46,199 @@ class QuickfixTest extends AbstractXtendUITestCase {
 					val bar = null
 					bar
 				}
+			}
+		''')
+		.assertModelAfterQuickfix("Create method 'bar()'", '''
+			class Foo {
+				def foo() {
+					bar
+				}
+				
+				def bar() {
+					«defaultBody»
+				}
+				
+			}
+		''')
+		.assertModelAfterQuickfix("Create method 'getBar()'", '''
+			class Foo {
+				def foo() {
+					bar
+				}
+				
+				def getBar() {
+					«defaultBody»
+				}
+				
+			}
+		''')
+	}
+	
+	@Test 
+	def void missingMethod() {
+		create('Foo.xtend', '''
+			class Foo {
+				def foo() {
+					bar|()
+				}
+			}
+		''')
+		.assertIssueCodes(FEATURECALL_LINKING_DIAGNOSTIC)
+		.assertResolutionLabels("Create method 'bar()'")
+		.assertModelAfterQuickfix("Create method 'bar()'", '''
+			class Foo {
+				def foo() {
+					bar()
+				}
+				
+				def bar() {
+					«defaultBody»
+				}
+				
+			}
+		''')
+	}
+	
+	@Test 
+	def void missingMemberExplicitThis() {
+		create('Foo.xtend', '''
+			class Foo {
+				def foo() {
+					this.bar|
+				}
+			}
+		''')
+		.assertResolutionLabels("Create method 'bar()'", "Create field 'bar'", "Create method 'getBar()'")
+		.assertModelAfterQuickfix("Create method 'bar()'", '''
+			class Foo {
+				def foo() {
+					this.bar
+				}
+				
+				def bar() {
+					«defaultBody»
+				}
+				
+			}
+		''')
+		.assertModelAfterQuickfix("Create field 'bar'", '''
+			class Foo {
+				
+				Object bar
+				
+				def foo() {
+					this.bar
+				}
+			}
+		''')
+		.assertModelAfterQuickfix("Create method 'getBar()'", '''
+			class Foo {
+				def foo() {
+					this.bar
+				}
+				
+				def getBar() {
+					«defaultBody»
+				}
+				
+			}
+		''')
+
+	}
+	
+	@Test 
+	def void missingMethodExplicitThis() {
+		create('Foo.xtend', '''
+			class Foo {
+				def foo() {
+					this.bar|()
+				}
+			}
+		''')
+		.assertIssueCodes(FEATURECALL_LINKING_DIAGNOSTIC)
+		.assertResolutionLabels("Create method 'bar()'")
+		.assertModelAfterQuickfix("Create method 'bar()'", '''
+			class Foo {
+				def foo() {
+					this.bar()
+				}
+				
+				def bar() {
+					«defaultBody»
+				}
+				
+			}
+		''')
+	}
+	
+	@Test 
+	def void missingMemberSameClass() {
+		create('Foo.xtend', '''
+			class Foo {
+				def foo(Foo foo) {
+					foo.bar|
+				}
+			}
+		''')
+		.assertIssueCodes(FEATURECALL_LINKING_DIAGNOSTIC)
+		.assertResolutionLabels("Create method 'bar()'", "Create field 'bar'", "Create method 'getBar()'")
+		.assertModelAfterQuickfix("Create method 'bar()'", '''
+			class Foo {
+				def foo(Foo foo) {
+					foo.bar
+				}
+				
+				def bar() {
+					«defaultBody»
+				}
+				
+			}
+		''')
+		.assertModelAfterQuickfix("Create field 'bar'", '''
+			class Foo {
+				
+				Object bar
+				
+				def foo(Foo foo) {
+					foo.bar
+				}
+			}
+		''')
+		.assertModelAfterQuickfix("Create method 'getBar()'", '''
+			class Foo {
+				def foo(Foo foo) {
+					foo.bar
+				}
+				
+				def getBar() {
+					«defaultBody»
+				}
+				
+			}
+		''')
+	}
+	
+	@Test 
+	def void missingMethodSameClass() {
+		create('Foo.xtend', '''
+			class Foo {
+				def foo(Foo foo) {
+					foo.bar|()
+				}
+			}
+		''')
+		.assertIssueCodes(FEATURECALL_LINKING_DIAGNOSTIC)
+		.assertResolutionLabels("Create method 'bar()'")
+		.assertModelAfterQuickfix("Create method 'bar()'", '''
+			class Foo {
+				def foo(Foo foo) {
+					foo.bar()
+				}
+				
+				def bar() {
+					«defaultBody»
+				}
+				
 			}
 		''')
 	}
@@ -94,7 +282,7 @@ class QuickfixTest extends AbstractXtendUITestCase {
 			class Bar extends Foo {
 			
 				override bar() {
-					throw new UnsupportedOperationException("TODO: auto-generated method stub")
+					«defaultBody»
 				}
 				
 			}
@@ -121,7 +309,7 @@ class QuickfixTest extends AbstractXtendUITestCase {
 		.assertModelAfterQuickfix("Add unimplemented methods", '''
 			class Foo implements Comparable<Foo> {
 				override compareTo(Foo o) {
-					throw new UnsupportedOperationException("TODO: auto-generated method stub")
+					«defaultBody»
 				}
 			}
 		''')
@@ -325,5 +513,6 @@ class QuickfixTest extends AbstractXtendUITestCase {
 			}
 		''')
 	}
+	
 }
 
