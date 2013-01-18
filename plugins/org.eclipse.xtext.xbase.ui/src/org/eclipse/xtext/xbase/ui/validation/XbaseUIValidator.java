@@ -11,23 +11,19 @@ import static com.google.common.collect.Lists.*;
 import static org.eclipse.xtext.xbase.validation.IssueCodes.*;
 
 import java.util.List;
+import java.util.Map;
 
-import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EStructuralFeature;
+import org.eclipse.jdt.core.IAccessRule;
 import org.eclipse.jdt.core.IJavaElement;
 import org.eclipse.jdt.core.IJavaProject;
+import org.eclipse.jdt.core.IPackageFragmentRoot;
+import org.eclipse.jdt.core.IType;
 import org.eclipse.jdt.core.JavaModelException;
 import org.eclipse.jdt.core.compiler.CharOperation;
-import org.eclipse.jdt.core.compiler.IProblem;
-import org.eclipse.jdt.core.search.IJavaSearchConstants;
-import org.eclipse.jdt.core.search.IJavaSearchScope;
-import org.eclipse.jdt.core.search.SearchEngine;
-import org.eclipse.jdt.core.search.SearchPattern;
-import org.eclipse.jdt.internal.compiler.env.AccessRestriction;
-import org.eclipse.jdt.internal.core.search.BasicSearchEngine;
-import org.eclipse.jdt.internal.core.search.IRestrictedAccessTypeRequestor;
+import org.eclipse.jdt.internal.core.ClasspathAccessRule;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmParameterizedTypeReference;
 import org.eclipse.xtext.common.types.JvmType;
@@ -44,8 +40,8 @@ import org.eclipse.xtext.xbase.validation.IssueCodes;
 import org.eclipse.xtext.xtype.XImportDeclaration;
 import org.eclipse.xtext.xtype.XtypePackage;
 
+import com.google.common.collect.Maps;
 import com.google.inject.Inject;
-import com.google.inject.Provider;
 
 /**
  * @author Holger Schill - Initial contribution and API
@@ -69,7 +65,7 @@ public class XbaseUIValidator extends AbstractDeclarativeValidator {
 	
 	@Check
 	public void checkRestrictedType(XImportDeclaration importDeclaration){
-		if (shouldCheckRestriction())
+		if (isRestrictionCheckIgnored())
 			return;
 		JvmType importedType = importDeclaration.getImportedType();
 		if(importedType instanceof JvmDeclaredType)
@@ -78,7 +74,7 @@ public class XbaseUIValidator extends AbstractDeclarativeValidator {
 
 	@Check
 	public void checkRestrictedType(XConstructorCall constructorCall) {
-		if (shouldCheckRestriction())
+		if (isRestrictionCheckIgnored())
 			return;
 		JvmDeclaredType declaringType = constructorCall.getConstructor().getDeclaringType();
 		checkRestrictedType(constructorCall, XbasePackage.Literals.XCONSTRUCTOR_CALL__CONSTRUCTOR, declaringType);
@@ -86,7 +82,7 @@ public class XbaseUIValidator extends AbstractDeclarativeValidator {
 
 	@Check
 	public void checkRestrictedType(JvmTypeReference typeReference) {
-		if (shouldCheckRestriction())
+		if (isRestrictionCheckIgnored())
 			return;
 		if (typeReference != null && typeReference.eResource() != null
 				&& typeReference.eResource().getResourceSet() != null) {
@@ -101,7 +97,7 @@ public class XbaseUIValidator extends AbstractDeclarativeValidator {
 		}
 	}
 
-	protected boolean shouldCheckRestriction() {
+	protected boolean isRestrictionCheckIgnored() {
 		return isIgnored(DISCOURAGED_REFERENCE) && isIgnored(FORBIDDEN_REFERENCE);
 	}
 
@@ -110,60 +106,64 @@ public class XbaseUIValidator extends AbstractDeclarativeValidator {
 	}
 
 	protected void checkRestrictedType(final EObject context, final EStructuralFeature feature, final JvmDeclaredType typeToCheck) {
-		final IJavaProject javaProject = projectProvider.getJavaProject(context.eResource().getResourceSet());
-		if(javaProject == null)
-			return;
-		RestrictionKind kind = cache.get("restriction", typeToCheck.eResource(), new Provider<RestrictionKind>() {
-			public RestrictionKind get() {
-				IJavaElement javaElement = javaElementFinder.findElementFor(typeToCheck);
-				if(javaElement == null)
-					return RestrictionKind.VALID;
-				final IJavaProject declaringJavaProject = javaElement.getJavaProject();
-				if(declaringJavaProject == null)
-					return RestrictionKind.VALID;
-				String packageName = typeToCheck.getPackageName();
-				final String simpleName = typeToCheck.getSimpleName();
-				if(!getContext().containsKey(typeToCheck)){
-					IJavaSearchScope searchScope = SearchEngine.createJavaSearchScope(new IJavaElement[] { javaProject });
-					BasicSearchEngine searchEngine = new BasicSearchEngine();
-					try {
-						final RestrictionKind[] result = new RestrictionKind[1];
-						searchEngine.searchAllTypeNames(packageName != null ? packageName.toCharArray() : CharOperation.NO_CHAR, SearchPattern.R_EXACT_MATCH,
-								simpleName.toCharArray(), SearchPattern.R_EXACT_MATCH, IJavaSearchConstants.TYPE,
-								searchScope, new IRestrictedAccessTypeRequestor() {
-									public void acceptType(int modifiers, char[] packageName, char[] simpleTypeName,
-											char[][] enclosingTypeNames, String path, AccessRestriction access) {
-										if(access != null){
-											if (access.getProblemId() == IProblem.ForbiddenReference) {
-												result[0] = RestrictionKind.FORBIDDEN;
-											} else if (access.getProblemId() == IProblem.DiscouragedReference) {
-												result[0] = RestrictionKind.DISCOURAGED;
-											} else
-												result[0] = RestrictionKind.VALID;
-										} else
-											result[0] = RestrictionKind.VALID;
-									}
-								}, IJavaSearchConstants.WAIT_UNTIL_READY_TO_SEARCH, new NullProgressMonitor());
-						return result[0];
-					} catch (JavaModelException e) {
-						// Ignore
-					}
-				}
-				return RestrictionKind.VALID;
+		@SuppressWarnings("unchecked")
+		Map<JvmDeclaredType, RestrictionKind> validationContext = (Map<JvmDeclaredType, RestrictionKind>) getContext().get(RestrictionKind.class);
+		if (validationContext == null) {
+			validationContext = Maps.newHashMap();
+			getContext().put(RestrictionKind.class, validationContext);
+		}
+		RestrictionKind restriction = validationContext.get(typeToCheck);
+		IJavaProject javaProject = null;
+		if (restriction == null) {
+			final IJavaElement javaElement = javaElementFinder.findElementFor(typeToCheck);
+			if(javaElement == null || !(javaElement instanceof IType)) {
+				validationContext.put(typeToCheck, RestrictionKind.VALID);
+				return;
 			}
-		});
+			javaProject = javaElement.getJavaProject();
+			restriction = computeRestriction((IType) javaElement);
+			validationContext.put(typeToCheck, restriction);
+		}
 		
-		if (kind == RestrictionKind.FORBIDDEN) {
+		if (restriction == RestrictionKind.FORBIDDEN) {
+			if (javaProject == null) 
+				javaProject = projectProvider.getJavaProject(context.eResource().getResourceSet());
+			
 			addIssue(context, IssueCodes.FORBIDDEN_REFERENCE,
 					"Access restriction: The type " + typeToCheck.getSimpleName()
 							+ " is not accessible due to restriction on required project "
 							+ javaProject.getElementName(), feature);
-		} else if (kind == RestrictionKind.DISCOURAGED) {
+		} else if (restriction == RestrictionKind.DISCOURAGED) {
+			if (javaProject == null) 
+				javaProject = projectProvider.getJavaProject(context.eResource().getResourceSet());
 			addIssue(context,
 					IssueCodes.DISCOURAGED_REFERENCE,
 					"Discouraged access: The type " + typeToCheck.getSimpleName()
 							+ " is not accessible due to restriction on required project "
 							+ javaProject.getElementName(), feature);
 		}
+	}
+
+	protected RestrictionKind computeRestriction(IType type) {
+		try {
+			IPackageFragmentRoot root = (IPackageFragmentRoot) type.getAncestor(IJavaElement.PACKAGE_FRAGMENT_ROOT);
+			IAccessRule[] rules = root.getResolvedClasspathEntry().getAccessRules();
+			String typePath = type.getFullyQualifiedName().replace('.', '/');
+			char[] typePathAsArray = typePath.toCharArray();
+			for(IAccessRule rule: rules) {
+				char[] patternArray = ((ClasspathAccessRule)rule).pattern;
+				if (CharOperation.pathMatch(patternArray, typePathAsArray, true, '/')) {
+					if (rule.getKind() == IAccessRule.K_DISCOURAGED) {
+						return RestrictionKind.DISCOURAGED;
+					} else if (rule.getKind() == IAccessRule.K_NON_ACCESSIBLE) {
+						return RestrictionKind.FORBIDDEN;
+					}
+					return RestrictionKind.VALID;
+				}
+			}
+		} catch(JavaModelException jme) {
+			// ignore
+		}
+		return RestrictionKind.VALID;
 	}
 }
