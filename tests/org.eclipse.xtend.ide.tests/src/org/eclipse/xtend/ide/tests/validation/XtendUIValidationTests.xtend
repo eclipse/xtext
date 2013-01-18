@@ -200,7 +200,19 @@ class XtendUIValidationTests extends AbstractXtendUITestCase {
 		helper.assertError(function.parameters.get(0), JVM_TYPE_REFERENCE, FORBIDDEN_REFERENCE)
 	}
 	
-		@Test
+	@Test
+	def void testForbiddenArrayTypeUsage() {
+		val xtendFile = testHelper.xtendFile("Clazz.xtend",'''
+		class Foo {
+			def bar(org.eclipse.xtend.core.tests.restricted.RestrictedClass[] x) {}
+		}
+
+		''')
+		val function = xtendFile.xtendTypes.filter(typeof(XtendClass)).head.members.head as XtendFunction
+		helper.assertError(function.parameters.get(0), JVM_TYPE_REFERENCE, FORBIDDEN_REFERENCE)
+	}
+	
+	@Test
 	def void testParameterizedTypeReference() {
 		val xtendFile = testHelper.xtendFile("Clazz.xtend",'''
 		class Foo {
