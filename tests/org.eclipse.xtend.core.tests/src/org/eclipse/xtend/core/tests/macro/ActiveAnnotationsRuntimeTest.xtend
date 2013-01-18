@@ -21,7 +21,7 @@ class ActiveAnnotationsRuntimeTest extends AbstractActiveAnnotationsTest {
 	@Inject CompilationTestHelper compiler
 	@Inject Provider<CompilationUnitImpl> compilationUnitProvider
 	
-	override assertProcessing(Pair<String,CharSequence> macroFile, Pair<String,CharSequence> clientFile, (CompilationUnit)=>void expectations) {
+	override assertProcessing(Pair<String,String> macroFile, Pair<String,String> clientFile, (CompilationUnit)=>void expectations) {
 		val resourceSet = compiler.unLoadedResourceSet(clientFile) as XtextResourceSet
 		compiler.compile(macroFile.value) [ result |
 			resourceSet.setClasspathURIContext(new DelegatingClassloader(getClass().classLoader) [result.getCompiledClass(it)])

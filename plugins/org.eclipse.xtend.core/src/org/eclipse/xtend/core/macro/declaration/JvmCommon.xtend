@@ -81,7 +81,7 @@ class TypeReferenceImpl extends AbstractDeclarationImpl<LightweightTypeReference
 		delegate.primitive
 	}
 	
-	override isPrimitiveVoid() {
+	override isVoid() {
 		delegate.primitiveVoid
 	}
 	

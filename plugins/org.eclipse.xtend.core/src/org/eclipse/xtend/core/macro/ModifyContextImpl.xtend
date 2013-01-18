@@ -12,15 +12,11 @@ import org.eclipse.xtend.lib.macro.declaration.FieldDeclaration
 import org.eclipse.xtend.lib.macro.declaration.MethodDeclaration
 import org.eclipse.xtend.lib.macro.declaration.MutableClassDeclaration
 import org.eclipse.xtend.lib.macro.declaration.MutableConstructorDeclaration
-import org.eclipse.xtend.lib.macro.declaration.MutableExecutableDeclaration
 import org.eclipse.xtend.lib.macro.declaration.MutableFieldDeclaration
 import org.eclipse.xtend.lib.macro.declaration.MutableMethodDeclaration
 import org.eclipse.xtend.lib.macro.declaration.MutableNamedElement
-import org.eclipse.xtend.lib.macro.declaration.MutableTypeDeclaration
 import org.eclipse.xtend.lib.macro.declaration.NamedElement
-import org.eclipse.xtend.lib.macro.type.TypeReference
 import org.eclipse.xtext.common.types.JvmMember
-import org.eclipse.xtext.xbase.lib.Procedures$Procedure1
 
 class ModifyContextImpl implements ModifyContext {
 	
@@ -71,24 +67,13 @@ class ModifyContextImpl implements ModifyContext {
 		throw new UnsupportedOperationException("Auto-generated function stub")
 	}
 
-	override newConstructor(MutableClassDeclaration container, Procedure1<MutableConstructorDeclaration> initializer) {
-		throw new UnsupportedOperationException("Auto-generated function stub")
-	}
-	
 	override findGeneratedClass(String name) {
 		throw new UnsupportedOperationException("Auto-generated function stub")
 	}
-
-	override newField(MutableClassDeclaration declarator, String simpleName, Procedure1<MutableFieldDeclaration> initializer) {
-		throw new UnsupportedOperationException("Auto-generated function stub")
-	}
 	
-	override newMethod(MutableTypeDeclaration declarator, String simpleName, Procedure1<MutableMethodDeclaration> initializer) {
-		throw new UnsupportedOperationException("Auto-generated function stub")
-	}
-	
-	override newParameter(MutableExecutableDeclaration declarator, String simpleName, TypeReference type) {
+	override getTypeReferences() {
 		throw new UnsupportedOperationException("Auto-generated function stub")
 	}
 	
 }
+

@@ -1,6 +1,7 @@
 package org.eclipse.xtend.core.tests.macro
 
 import org.eclipse.xtend.lib.macro.declaration.CompilationUnit
+import org.eclipse.xtend.lib.macro.declaration.MutableMethodDeclaration
 import org.eclipse.xtext.xbase.lib.Pair
 import org.junit.Test
 
@@ -48,5 +49,55 @@ abstract class AbstractActiveAnnotationsTest {
 		]
 	}
 	
-	def void assertProcessing(Pair<String,CharSequence> macroFile, Pair<String,CharSequence> clientFile, (CompilationUnit)=>void expectations)
+	@Test def void testPropertyAnnotation() {
+		assertProcessing(
+			'myannotation/PropertyAnnotation.xtend' -> "
+				package myannotation
+				
+				import java.util.List
+				import org.eclipse.xtend.lib.macro.Active
+				import org.eclipse.xtend.lib.macro.ModifyContext
+				import org.eclipse.xtend.lib.macro.ModifyProcessor
+				import org.eclipse.xtend.lib.macro.declaration.MutableFieldDeclaration
+
+				@Active(typeof(PropertyProcessor))
+				annotation Property2 { }
+				class PropertyProcessor implements ModifyProcessor<MutableFieldDeclaration> {
+					
+					extension ModifyContext ctx
+					
+					override modify(List<? extends MutableFieldDeclaration> annotatedSourceFields, ModifyContext context) {
+						ctx = context
+						annotatedSourceFields.forEach [ field |
+							field.declaringType.addMethod(field.getterName) [
+								body = ['''
+									return this.«field.name»;
+								''']
+							]
+						]
+					}
+					
+					def private String getterName(MutableFieldDeclaration field) {
+						return 'get'+field.name.toFirstUpper
+					}
+				}
+			",
+			'myusercode/UserCode.xtend' -> '''
+				package myusercode
+				
+				class MyClass {
+					
+					@myannotation.Property2 String myField
+				}
+			'''
+		) [
+			val clazz = generatedClassDeclarations.head
+			val getter = clazz.members.filter(typeof(MutableMethodDeclaration)).head
+			assertEquals('getMyField', getter.name)
+		]
+	}
+	
+	
+	
+	def void assertProcessing(Pair<String,String> macroFile, Pair<String,String> clientFile, (CompilationUnit)=>void expectations)
 }

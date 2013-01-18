@@ -10,6 +10,7 @@ package org.eclipse.xtend.core.macro.declaration
 import java.util.Map
 import javax.inject.Inject
 import org.eclipse.emf.ecore.EObject
+import org.eclipse.xtend.core.macro.CompilationContextImpl
 import org.eclipse.xtend.core.xtend.XtendClass
 import org.eclipse.xtend.core.xtend.XtendConstructor
 import org.eclipse.xtend.core.xtend.XtendField
@@ -18,6 +19,8 @@ import org.eclipse.xtend.core.xtend.XtendFunction
 import org.eclipse.xtend.core.xtend.XtendMember
 import org.eclipse.xtend.core.xtend.XtendParameter
 import org.eclipse.xtend.core.xtend.XtendTypeDeclaration
+import org.eclipse.xtend.lib.macro.CompilationContext
+import org.eclipse.xtend.lib.macro.TypeReferenceProvider
 import org.eclipse.xtend.lib.macro.declaration.CompilationUnit
 import org.eclipse.xtend.lib.macro.declaration.MemberDeclaration
 import org.eclipse.xtend.lib.macro.declaration.MutableClassDeclaration
@@ -32,6 +35,7 @@ import org.eclipse.xtext.common.types.JvmAnnotationType
 import org.eclipse.xtext.common.types.JvmConstructor
 import org.eclipse.xtext.common.types.JvmDeclaredType
 import org.eclipse.xtext.common.types.JvmEnumerationType
+import org.eclipse.xtext.common.types.JvmExecutable
 import org.eclipse.xtext.common.types.JvmField
 import org.eclipse.xtext.common.types.JvmFormalParameter
 import org.eclipse.xtext.common.types.JvmGenericType
@@ -43,12 +47,15 @@ import org.eclipse.xtext.common.types.JvmTypeParameter
 import org.eclipse.xtext.common.types.JvmTypeReference
 import org.eclipse.xtext.common.types.JvmVisibility
 import org.eclipse.xtext.common.types.JvmVoid
+import org.eclipse.xtext.common.types.util.TypeReferences
+import org.eclipse.xtext.xbase.compiler.TypeReferenceSerializer2
+import org.eclipse.xtext.xbase.jvmmodel.JvmTypesBuilder
 import org.eclipse.xtext.xbase.typesystem.legacy.StandardTypeReferenceOwner
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference
 import org.eclipse.xtext.xbase.typesystem.references.OwnedConverter
 import org.eclipse.xtext.xbase.typesystem.util.CommonTypeComputationServices
 
-class CompilationUnitImpl implements CompilationUnit {
+class CompilationUnitImpl implements CompilationUnit, TypeReferenceProvider {
 
 	override getDocComment() {
 		throw new UnsupportedOperationException("Auto-generated function stub")
@@ -77,6 +84,10 @@ class CompilationUnitImpl implements CompilationUnit {
 
 	@Property XtendFile xtendFile
 	@Inject CommonTypeComputationServices services;
+	@Inject TypeReferences typeReferences
+	@Inject JvmTypesBuilder typesBuilder
+	@Inject TypeReferenceSerializer2 typeRefSerializer
+	
 	Map<EObject, Object> identityCache = newHashMap
 	OwnedConverter typeRefConverter
 
@@ -258,4 +269,99 @@ class CompilationUnitImpl implements CompilationUnit {
 				it.compilationUnit = this
 			]
 		]}
+
+	override getTypeReferenceProvider() {
+		return this
+	}
+	
+	override getAnyType() {
+		toTypeReference(typeReferences.createAnyTypeReference(xtendFile))
+	}
+	
+	override getList(TypeReference param) {
+		newTypeReference("java.util.List", param)
+	}
+	
+	override getObject() {
+		toTypeReference(typeReferences.createTypeRef(typeReferences.findDeclaredType(typeof(Object), xtendFile)))
+	}
+	
+	override getPrimitiveBoolean() {
+		newTypeReference("boolean")
+	}
+	
+	override getPrimitiveByte() {
+		newTypeReference("byte")
+	}
+	
+	override getPrimitiveChar() {
+		newTypeReference("char")
+	}
+	
+	override getPrimitiveDouble() {
+		newTypeReference("double")
+	}
+	
+	override getPrimitiveFloat() {
+		newTypeReference("float")
+	}
+	
+	override getPrimitiveInt() {
+		newTypeReference("int")
+	}
+	
+	override getPrimitiveLong() {
+		newTypeReference("long")
+	}
+	
+	override getPrimitiveShort() {
+		newTypeReference("short")
+	}
+	
+	override getPrimitiveVoid() {
+		newTypeReference("void")
+	}
+	
+	override getSet(TypeReference param) {
+		newTypeReference("java.util.Set", param)
+	}
+	
+	override getString() {
+		newTypeReference("java.lang.String")
+	}
+	
+	override newArrayTypeReference(TypeReference componentType) {
+		toTypeReference(typeReferences.createArrayType(componentType.toJvmTypeReference))
+	}
+	
+	override newTypeReference(String typeName, TypeReference... typeArguments) {
+		val type = typeReferences.findDeclaredType(typeName, xtendFile)
+		if (type == null)
+			return null
+		toTypeReference(typeReferences.createTypeRef(type, typeArguments.map[toJvmTypeReference] as JvmTypeReference[]))
+	}
+	
+	override newWildcardTypeReference() {
+		newWildcardTypeReference(null);
+	}
+	
+	override newWildcardTypeReference(TypeReference upperBound) {
+		if (upperBound == null) {
+			toTypeReference(typeReferences.wildCard())
+		} else {
+			toTypeReference(typeReferences.wildCardExtends(upperBound.toJvmTypeReference))
+		}
+	}
+	
+	def JvmTypeReference toJvmTypeReference(TypeReference typeRef) {
+		return (typeRef as TypeReferenceImpl).lightWeightTypeReference.toJavaCompliantTypeReference
+	}
+	
+	def void setCompilationStrategy(JvmExecutable executable, (CompilationContext)=>CharSequence compilationStrategy) {
+		typesBuilder.setBody(executable) [
+			val context = new CompilationContextImpl(it, this, typeRefSerializer)
+			it.append(compilationStrategy.apply(context))
+		]
+	}
+	
 }
