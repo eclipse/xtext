@@ -50,7 +50,7 @@ public class SuperMemberImplementorTest extends AbstractXtendTestCase {
 		xtendClass = clazz(model);
 		implementedInterface = (JvmGenericType) xtendClass.getImplements().get(0).getType();
 		superClass = (JvmGenericType) xtendClass.getExtends().getType();
-		throwsExpression = "throw new UnsupportedOperationException(\"Auto-generated function stub\")";
+		throwsExpression = "\n  throw new UnsupportedOperationException(\"TODO: auto-generated method stub\")\n";
 	}
 
 	@Test public void testInsertOffset() throws Exception {
@@ -58,21 +58,21 @@ public class SuperMemberImplementorTest extends AbstractXtendTestCase {
 	}
 
 	@Test public void testPlain() {
-		checkOverrideMethodCode("plain", "override plain() { " + throwsExpression + "}");
+		checkOverrideMethodCode("plain", "override plain() {" + throwsExpression + "}");
 	}
 
 	@Test public void testClassTypeParam() {
-		checkOverrideMethodCode("classTypeParameter", "override classTypeParameter(U arg0) { " + throwsExpression + "}");
+		checkOverrideMethodCode("classTypeParameter", "override classTypeParameter(U arg0) {" + throwsExpression + "}");
 	}
 
 	@Test public void testClassTypeParam2() {
 		checkOverrideMethodCode("classTypeParameter2",
-				"override classTypeParameter2(Iterable<? extends CharSequence> arg0) { " + throwsExpression + "}");
+				"override classTypeParameter2(Iterable<? extends CharSequence> arg0) {" + throwsExpression + "}");
 	}
 
 	@Test public void testClassTypeParam3() {
 		checkOverrideMethodCode("classTypeParameter3",
-				"override classTypeParameter3(Iterable<? super CharSequence> arg0) { " + throwsExpression + "}");
+				"override classTypeParameter3(Iterable<? super CharSequence> arg0) {" + throwsExpression + "}");
 	}
 
 	@Test public void testMethodTypeParam() {
@@ -81,11 +81,11 @@ public class SuperMemberImplementorTest extends AbstractXtendTestCase {
 	}
 
 	@Test public void testException() {
-		checkOverrideMethodCode("exception", "override exception() throws Exception { " + throwsExpression + "}");
+		checkOverrideMethodCode("exception", "override exception() throws Exception {" + throwsExpression + "}");
 	}
 
 	@Test public void testProtected() {
-		checkOverrideMethodCode("protectedMethod", "override protected protectedMethod() { " + throwsExpression + "}");
+		checkOverrideMethodCode("protectedMethod", "override protected protectedMethod() {" + throwsExpression + "}");
 	}
 
 	@Test public void testPlain_1() {
