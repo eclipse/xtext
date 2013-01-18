@@ -1,3 +1,10 @@
+/**
+ * Copyright (c) 2013 itemis AG (http://www.itemis.eu) and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ */
 package org.eclipse.xtend.ide.codebuilder;
 
 import com.google.common.collect.Iterables;
@@ -13,6 +20,11 @@ import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 
+/**
+ * Calculates where to insert new members into exisitng Xtend code.
+ * 
+ * @author Jan Koehnlein
+ */
 @SuppressWarnings("all")
 public class InsertionOffsets {
   public int getNewFieldInsertOffset(final EObject call, final XtendClass ownerClass) {

@@ -14,6 +14,10 @@ import org.eclipse.xtext.common.types.JvmVisibility;
 import org.eclipse.xtext.xbase.compiler.IAppendable;
 
 /**
+ * Common interface to generate Java or Xtend code into an {@link IAppendable}.
+ * Use {@link CodeBuilderFactory} to obtain an instance.
+ * 
+ * @author Sebastian Benz - Inspiration
  * @author Jan Koehnlein - Initial contribution and API
  */
 public interface ICodeBuilder {

@@ -1,3 +1,10 @@
+/**
+ * Copyright (c) 2013 itemis AG (http://www.itemis.eu) and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ */
 package org.eclipse.xtend.ide.codebuilder;
 
 import com.google.common.base.Objects;
@@ -21,6 +28,9 @@ import org.eclipse.xtext.xbase.compiler.TypeReferenceSerializer;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 
+/**
+ * @author Jan Koehnlein
+ */
 @SuppressWarnings("all")
 public abstract class AbstractCodeBuilder implements ICodeBuilder {
   private Object _ownerSource;

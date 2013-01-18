@@ -1,3 +1,10 @@
+/*******************************************************************************
+ * Copyright (c) 2013 itemis AG (http://www.itemis.eu) and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *******************************************************************************/
 package org.eclipse.xtend.ide.codebuilder
 
 import com.google.inject.Inject
@@ -9,6 +16,12 @@ import org.eclipse.xtext.common.types.util.jdt.IJavaElementFinder
 import org.eclipse.jdt.core.IType
 import org.eclipse.xtend.core.xtend.XtendClass
 
+/** 
+ * Creates {@link ICodeBuilder}s to insert Java or Xtend code snippets into an {@link IAppendable}.
+ *  
+ * @author Sebastian Benz - Inspiration
+ * @author Jan Koehnlein - Initial implementation and API 
+ */
 class CodeBuilderFactory {
 	
 	@Inject extension IXtendJvmAssociations
@@ -70,7 +83,5 @@ class CodeBuilderFactory {
 		else 
 			null
 	}
-	
-	
 }
 
