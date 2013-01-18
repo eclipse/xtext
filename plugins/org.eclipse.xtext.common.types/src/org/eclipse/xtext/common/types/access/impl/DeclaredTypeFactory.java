@@ -493,9 +493,37 @@ public class DeclaredTypeFactory implements ITypeFactory<Class<?>> {
 		} else if (declaringClass.isMemberClass() && !Modifier.isStatic(declaringClass.getModifiers())) {
 			offset = 1;
 		}
+		Type[] genericParameterTypes = null;
+		try {
+			genericParameterTypes = constructor.getGenericParameterTypes();
+		} catch(GenericSignatureFormatError error) {
+			genericParameterTypes = constructor.getParameterTypes();
+		}
+		if (offset != 0) {
+			/*
+			 * #getGenericParameterTypes may return a different number of parameters
+			 * for inner classes then #getParameterTypes does. This happens for
+			 * signatures that are parameterized, e.g.
+			 * 
+			 * <pre>
+			 * 
+			 * class WrappedCollection<V> .. {
+			 *   class WrappedIterator implements Iterator<V> {
+			 *     WrappedIterator(Iterator<V> iterator) { .. }
+			 *   }
+			 * }
+			 * 
+			 * </pre>
+			 * 
+			 * Therefore we adjust the offset here
+			 */
+			if (constructor.getParameterTypes().length != genericParameterTypes.length) {
+				offset = 0;
+			}
+		}
 		enhanceGenericDeclaration(result, constructor);
 		enhanceExecutable(result, constructor, constructor.getDeclaringClass().getSimpleName(),
-				constructor.getGenericParameterTypes(), constructor.getParameterAnnotations(), offset);
+				genericParameterTypes, constructor.getParameterAnnotations(), offset);
 		result.setVarArgs(constructor.isVarArgs());
 		for (Type parameterType : constructor.getGenericExceptionTypes()) {
 			result.getExceptions().add(createTypeReference(parameterType));
@@ -522,12 +550,14 @@ public class DeclaredTypeFactory implements ITypeFactory<Class<?>> {
 		fqName.append('.');
 		fqName.append(simpleName);
 		fqName.append('(');
-		for (int i = offset; i < parameterTypes.length; i++) {
-			if (i != offset)
+		for (int typeIdx = offset, annotationIdx = annotations.length - parameterTypes.length + offset; 
+				typeIdx < parameterTypes.length; 
+				typeIdx++, annotationIdx++) {
+			if (typeIdx != offset)
 				fqName.append(',');
-			Type parameterType = parameterTypes[i];
+			Type parameterType = parameterTypes[typeIdx];
 			uriHelper.computeTypeName(parameterType, fqName);
-			result.getParameters().add(createFormalParameter(parameterType, "arg" + (i - offset), result, member, annotations[i]));
+			result.getParameters().add(createFormalParameter(parameterType, "arg" + (typeIdx - offset), result, member, annotations[annotationIdx]));
 		}
 		fqName.append(')');
 		result.internalSetIdentifier(fqName.toString());

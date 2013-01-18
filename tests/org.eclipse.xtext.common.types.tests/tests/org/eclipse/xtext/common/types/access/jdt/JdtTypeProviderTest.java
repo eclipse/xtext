@@ -233,6 +233,20 @@ public class JdtTypeProviderTest extends AbstractTypeProviderTest {
 	public void testFindTypeByName_$StartsWithDollar() {
 		super.testFindTypeByName_$StartsWithDollar();
 	}
+	
+	@Override
+	@Test
+	@Ignore("TODO This one fails due to a bug in JDT for parameter annotations of binary, inner constructor")
+	public void testInnerType_WrappedIterator_02() throws Exception {
+		super.testInnerType_WrappedIterator_02();
+	}
+	
+	@Override
+	@Test
+	@Ignore("TODO This one fails due to a bug in JDT for parameter annotations of binary, inner constructor")
+	public void testInnerType_WrappedIterator_03() throws Exception {
+		super.testInnerType_WrappedIterator_03();
+	}
 
 	// tests for the presence of the bug above
 	@Test
