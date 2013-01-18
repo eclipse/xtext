@@ -16,14 +16,12 @@ import java.util.List;
 import org.apache.log4j.Logger;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
-import org.eclipse.xtend.core.jvmmodel.IXtendJvmAssociations;
 import org.eclipse.xtend.core.xtend.XtendClass;
 import org.eclipse.xtend.core.xtend.XtendMember;
 import org.eclipse.xtend.ide.codebuilder.AbstractConstructorBuilder;
 import org.eclipse.xtend.ide.codebuilder.AbstractFieldBuilder;
 import org.eclipse.xtend.ide.codebuilder.AbstractMethodBuilder;
 import org.eclipse.xtend.ide.codebuilder.CodeBuilderFactory;
-import org.eclipse.xtend.ide.codebuilder.XtendTypeReferenceSerializer;
 import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.Keyword;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
@@ -35,15 +33,15 @@ import org.eclipse.xtext.common.types.util.Primitives;
 import org.eclipse.xtext.common.types.util.Primitives.Primitive;
 import org.eclipse.xtext.common.types.util.TypeReferences;
 import org.eclipse.xtext.common.types.util.jdt.IJavaElementFinder;
-import org.eclipse.xtext.common.types.xtext.ui.JdtVariableCompletions;
+import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.nodemodel.ILeafNode;
+import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.editor.model.IXtextDocument;
 import org.eclipse.xtext.ui.editor.model.edit.IModificationContext;
 import org.eclipse.xtext.ui.editor.model.edit.ISemanticModification;
-import org.eclipse.xtext.ui.editor.model.edit.IssueModificationContext;
 import org.eclipse.xtext.ui.editor.model.edit.SemanticModificationWrapper;
 import org.eclipse.xtext.ui.editor.quickfix.IssueResolutionAcceptor;
 import org.eclipse.xtext.validation.Issue;
@@ -55,6 +53,7 @@ import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XFeatureCall;
 import org.eclipse.xtext.xbase.XMemberFeatureCall;
 import org.eclipse.xtext.xbase.XUnaryOperation;
+import org.eclipse.xtext.xbase.XbasePackage;
 import org.eclipse.xtext.xbase.compiler.StringBuilderBasedAppendable;
 import org.eclipse.xtext.xbase.jvmmodel.ILogicalContainerProvider;
 import org.eclipse.xtext.xbase.scoping.featurecalls.OperatorMapping;
@@ -92,6 +91,9 @@ public class CreateMemberQuickfixes implements ILinkingIssueQuickfixProvider {
 	@Inject
 	private TypeResolver typeResolver;
 	
+	@Inject 
+	private OperatorMapping operatorMapping;
+	
 	@Inject
 	private CodeBuilderFactory codeBuilderFactory;
 	
@@ -101,37 +103,41 @@ public class CreateMemberQuickfixes implements ILinkingIssueQuickfixProvider {
 	public void addQuickfixes(Issue issue, IssueResolutionAcceptor issueResolutionAcceptor,
 			IXtextDocument xtextDocument, XtextResource resource, EObject referenceOwner, EReference unresolvedReference)
 			throws Exception {
-		String newMemberName = (issue.getData() != null && issue.getData().length > 0) ? issue.getData()[0] : null;
-		if (newMemberName != null && referenceOwner instanceof XAbstractFeatureCall) {
+		if (referenceOwner instanceof XAbstractFeatureCall) {
 			XAbstractFeatureCall call = (XAbstractFeatureCall) referenceOwner;
 			
-			if (call instanceof XMemberFeatureCall) {
-				if(!call.isExplicitOperationCallOrBuilderSyntax()) { 
-					newFieldQuickfix(newMemberName, call, issue, issueResolutionAcceptor);
-					newGetterQuickfixes(newMemberName, call, issue, issueResolutionAcceptor);
+			String newMemberName = (issue.getData() != null && issue.getData().length > 0) ? issue.getData()[0] : null;
+			if(newMemberName != null) {
+				if (call instanceof XMemberFeatureCall) {
+					if(!call.isExplicitOperationCallOrBuilderSyntax()) { 
+						newFieldQuickfix(newMemberName, call, issue, issueResolutionAcceptor);
+						newGetterQuickfixes(newMemberName, call, issue, issueResolutionAcceptor);
+					}
+					newMethodQuickfixes(newMemberName, call, issue, issueResolutionAcceptor);
+					
+				} else if(call instanceof XFeatureCall) {
+					if(!call.isExplicitOperationCallOrBuilderSyntax()) {
+						newLocalVariableQuickfix(newMemberName, call, issue, issueResolutionAcceptor);
+						newFieldQuickfix(newMemberName, call, issue, issueResolutionAcceptor);
+						newGetterQuickfixes(newMemberName, call, issue, issueResolutionAcceptor);
+					}
+					newMethodQuickfixes(newMemberName, call, issue, issueResolutionAcceptor);
+					
+				} else if (call instanceof XAssignment) {
+					newSetterQuickfix(issue, issueResolutionAcceptor, newMemberName, call);
+					if(((XAssignment) call).getAssignable() == null) {
+						newLocalVariableQuickfix(newMemberName, call, issue, issueResolutionAcceptor);
+						newFieldQuickfix(newMemberName, call, issue, issueResolutionAcceptor);
+					}
 				}
-				newMethodQuickfixes(newMemberName, call, issue, issueResolutionAcceptor);
-				
-			} else if(call instanceof XFeatureCall) {
-				if(!call.isExplicitOperationCallOrBuilderSyntax()) {
-					newLocalVariableQuickfix(newMemberName, call, issue, issueResolutionAcceptor);
-					newFieldQuickfix(newMemberName, call, issue, issueResolutionAcceptor);
-					newGetterQuickfixes(newMemberName, call, issue, issueResolutionAcceptor);
+			} 
+			if (call instanceof XBinaryOperation || call instanceof XUnaryOperation) {
+				JvmIdentifiableElement feature = call.getFeature();
+				if(feature.eIsProxy()) {
+					String operatorMethodName = getOperatorMethodName(call);
+					if(operatorMethodName != null) 
+						newMethodQuickfixes(operatorMethodName, call, issue, issueResolutionAcceptor);
 				}
-				newMethodQuickfixes(newMemberName, call, issue, issueResolutionAcceptor);
-				
-			} else if (call instanceof XAssignment) {
-				newSetterQuickfix(issue, issueResolutionAcceptor, newMemberName, call);
-				if(((XAssignment) call).getAssignable() == null) {
-					newLocalVariableQuickfix(newMemberName, call, issue, issueResolutionAcceptor);
-					newFieldQuickfix(newMemberName, call, issue, issueResolutionAcceptor);
-				}
-				
-			} else if (call instanceof XBinaryOperation || call instanceof XUnaryOperation) {
-				newMethodQuickfixes(newMemberName, call, issue, issueResolutionAcceptor);
-				
-			} else {
-				LOG.error("Unhandled XAbstractFeatureCall " + referenceOwner.eClass().getName(), new IllegalStateException());
 			}
 		}
 		if(referenceOwner instanceof XConstructorCall) {
@@ -168,6 +174,20 @@ public class CreateMemberQuickfixes implements ILinkingIssueQuickfixProvider {
 	protected JvmDeclaredType getCallersType(XExpression call) {
 		JvmIdentifiableElement nearestLogicalContainer = logicalContainerProvider.getNearestLogicalContainer(call);
 		return EcoreUtil2.getContainerOfType(nearestLogicalContainer, JvmDeclaredType.class);
+	}
+	
+	protected String getOperatorMethodName(XAbstractFeatureCall call) {
+		for(INode node: NodeModelUtils.findNodesForFeature(call, XbasePackage.Literals.XABSTRACT_FEATURE_CALL__FEATURE)) {
+			for(ILeafNode leafNode: node.getLeafNodes()) {
+				if(!leafNode.isHidden()) {
+					String symbol = leafNode.getText();
+					QualifiedName methodName = operatorMapping.getMethodName(QualifiedName.create(symbol));
+					if(methodName != null)
+						return methodName.getFirstSegment();
+				}
+			}
+		}
+		return null;
 	}
 	
 	protected void newLocalVariableQuickfix(final String variableName, XAbstractFeatureCall call, Issue issue,
@@ -218,7 +238,7 @@ public class CreateMemberQuickfixes implements ILinkingIssueQuickfixProvider {
 			newMethodQuickfix((JvmDeclaredType) containerType.getType(), name, returnType, argumentTypes, false, isLocal, call, issue, issueResolutionAcceptor);
 		if(!isLocal) {
 			List<JvmTypeReference> extensionMethodParameterTypes = newArrayList(argumentTypes);
-			extensionMethodParameterTypes.add(containerType);
+			extensionMethodParameterTypes.add(0, containerType);
 			newMethodQuickfix(callersType, name, returnType, extensionMethodParameterTypes, true, true, call, issue, issueResolutionAcceptor);
 		}
 	}
