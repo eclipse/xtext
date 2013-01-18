@@ -105,6 +105,8 @@ public class CreateMemberQuickfixes implements ILinkingIssueQuickfixProvider {
 	public void addQuickfixes(Issue issue, IssueResolutionAcceptor issueResolutionAcceptor,
 			IXtextDocument xtextDocument, XtextResource resource, EObject referenceOwner, EReference unresolvedReference)
 			throws Exception {
+		if (issue.getData() == null || issue.getData().length==0)
+			return;
 		String elementName = issue.getData()[0];
 		if (elementName != null) {
 			if (referenceOwner instanceof XMemberFeatureCall) {
