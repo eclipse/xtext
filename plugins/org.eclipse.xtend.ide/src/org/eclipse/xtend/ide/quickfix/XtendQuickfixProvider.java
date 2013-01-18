@@ -87,6 +87,7 @@ public class XtendQuickfixProvider extends XbaseQuickfixProvider {
 	private static final Set<String> LINKING_ISSUE_CODES = newHashSet(
 			IssueCodes.FEATURECALL_LINKING_DIAGNOSTIC, 
 			Diagnostic.LINKING_DIAGNOSTIC,
+			org.eclipse.xtext.xbase.validation.IssueCodes.INVALID_ARGUMENT_TYPES,
 			org.eclipse.xtext.xbase.validation.IssueCodes.INVALID_NUMBER_OF_ARGUMENTS);
 	
 	@Override
@@ -101,7 +102,6 @@ public class XtendQuickfixProvider extends XbaseQuickfixProvider {
 			if(LINKING_ISSUE_CODES.contains(issue.getCode())){
 				List<IssueResolution> result = new ArrayList<IssueResolution>();
 				result.addAll(getResolutionsForLinkingIssue(issue));
-				result.addAll(super.getResolutions(issue));
 				return result;
 			} else
 				return super.getResolutions(issue);
