@@ -5,7 +5,7 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtend.ide.quickfix;
+package org.eclipse.xtend.ide.codebuilder;
 
 import java.util.Iterator;
 
@@ -22,7 +22,6 @@ import org.eclipse.xtext.xtype.XFunctionTypeRef;
 @NonNullByDefault
 public class XtendTypeReferenceSerializer extends TypeReferenceSerializer {
 
-	@SuppressWarnings("null")
 	@Override
 	public void serialize(JvmTypeReference type, EObject context, IAppendable appendable, boolean withoutConstraints,
 			boolean paramsToWildcard, boolean paramsToObject, boolean allowPrimitives) {

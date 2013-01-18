@@ -28,6 +28,7 @@ import org.eclipse.xtend.core.validation.IssueCodes;
 import org.eclipse.xtend.core.xtend.XtendClass;
 import org.eclipse.xtend.core.xtend.XtendFunction;
 import org.eclipse.xtend.ide.buildpath.XtendLibClasspathAdder;
+import org.eclipse.xtend.ide.codebuilder.XtendTypeReferenceSerializer;
 import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.Keyword;
 import org.eclipse.xtext.common.types.JvmConstructor;
@@ -82,10 +83,11 @@ public class XtendQuickfixProvider extends XbaseQuickfixProvider {
 	@Inject private CreateTypeQuickfixes createTypeQuickfixes;
 
 	@Inject private CreateMemberQuickfixes createMemberQuickfixes;
-
+	
 	private static final Set<String> LINKING_ISSUE_CODES = newHashSet(
 			IssueCodes.FEATURECALL_LINKING_DIAGNOSTIC, 
-			Diagnostic.LINKING_DIAGNOSTIC);
+			Diagnostic.LINKING_DIAGNOSTIC,
+			org.eclipse.xtext.xbase.validation.IssueCodes.INVALID_NUMBER_OF_ARGUMENTS);
 	
 	@Override
 	public boolean hasResolutionFor(String issueCode) {
