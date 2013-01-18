@@ -11,7 +11,6 @@ import static com.google.common.collect.Iterables.*;
 
 import java.io.Serializable;
 import java.lang.annotation.Annotation;
-import java.lang.reflect.Modifier;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -1524,6 +1523,84 @@ public abstract class AbstractTypeProviderTest extends Assert {
 			}
 		}));
 	}
+	
+	@Test public void testInnerType_WrappedIterator_01() throws Exception {
+		JvmGenericType wrappedIterator = (JvmGenericType) getTypeProvider().findTypeByName(
+				"com.google.common.collect.AbstractMultimap$WrappedCollection$WrappedIterator");
+		assertEquals(2, Iterables.size(wrappedIterator.getDeclaredConstructors()));
+		// default constructor
+		assertTrue(Iterables.any(wrappedIterator.getMembers(), new Predicate<JvmMember>() {
+			public boolean apply(JvmMember input) {
+				return (input instanceof JvmConstructor)
+						&& input.getSimpleName().equals("WrappedIterator")
+						&& ((JvmConstructor)input).getParameters().size() == 0;
+			}
+		}));
+		// second constructor
+		JvmConstructor secondConstructor = (JvmConstructor) Iterables.find(wrappedIterator.getMembers(), new Predicate<JvmMember>() {
+			public boolean apply(JvmMember input) {
+				return (input instanceof JvmConstructor)
+						&& input.getSimpleName().equals("WrappedIterator")
+						&& ((JvmConstructor)input).getParameters().size() == 1;
+			}
+		});
+		assertNotNull(secondConstructor);
+		JvmFormalParameter firstParameter = secondConstructor.getParameters().get(0);
+		assertEquals("java.util.Iterator<V>", firstParameter.getParameterType().getIdentifier());
+	}
+	
+	@Test public void testInnerType_WrappedIterator_02() throws Exception {
+		JvmGenericType wrappedIterator = (JvmGenericType) getTypeProvider().findTypeByName(
+				"org.eclipse.xtext.common.types.testSetups.NestedParameterizedTypes$WrappedCollection$WrappedIterator");
+		assertEquals(3, Iterables.size(wrappedIterator.getDeclaredConstructors()));
+		JvmConstructor constructor = (JvmConstructor) Iterables.find(wrappedIterator.getMembers(), new Predicate<JvmMember>() {
+			public boolean apply(JvmMember input) {
+				return (input instanceof JvmConstructor)
+						&& input.getSimpleName().equals("WrappedIterator")
+						&& ((JvmConstructor)input).getParameters().size() == 3;
+			}
+		});
+		assertNotNull(constructor);
+		JvmFormalParameter firstParameter = constructor.getParameters().get(0);
+		assertEquals(1, firstParameter.getAnnotations().size());
+		assertEquals("java.lang.String", firstParameter.getParameterType().getIdentifier());
+		assertEquals(TestAnnotationWithDefaults.class.getName(), firstParameter.getAnnotations().get(0).getAnnotation().getQualifiedName());
+		JvmFormalParameter secondParameter = constructor.getParameters().get(1);
+		assertEquals(0, secondParameter.getAnnotations().size());
+		assertEquals("int", secondParameter.getParameterType().getIdentifier());
+		JvmFormalParameter thirdParameter = constructor.getParameters().get(2);
+		assertEquals(1, thirdParameter.getAnnotations().size());
+		assertEquals("java.util.Iterator<V>", thirdParameter.getParameterType().getIdentifier());
+		assertEquals(TestAnnotation.NestedAnnotation.class.getName(), thirdParameter.getAnnotations().get(0).getAnnotation().getQualifiedName());
+	}
+	
+	@Test public void testInnerType_WrappedIterator_03() throws Exception {
+		JvmGenericType wrappedIterator = (JvmGenericType) getTypeProvider().findTypeByName(
+				"org.eclipse.xtext.common.types.testSetups.NestedParameterizedTypes$WrappedCollection$WrappedIterator");
+		assertEquals(3, Iterables.size(wrappedIterator.getDeclaredConstructors()));
+		JvmConstructor constructor = (JvmConstructor) Iterables.find(wrappedIterator.getMembers(), new Predicate<JvmMember>() {
+			public boolean apply(JvmMember input) {
+				return (input instanceof JvmConstructor)
+						&& input.getSimpleName().equals("WrappedIterator")
+						&& ((JvmConstructor)input).getParameters().size() == 4;
+			}
+		});
+		assertNotNull(constructor);
+		JvmFormalParameter firstParameter = constructor.getParameters().get(0);
+		assertEquals(0, firstParameter.getAnnotations().size());
+		assertEquals("int", firstParameter.getParameterType().getIdentifier());
+		JvmFormalParameter secondParameter = constructor.getParameters().get(1);
+		assertEquals(1, secondParameter.getAnnotations().size());
+		assertEquals("java.lang.String", secondParameter.getParameterType().getIdentifier());
+		assertEquals(TestAnnotationWithDefaults.class.getName(), secondParameter.getAnnotations().get(0).getAnnotation().getQualifiedName());
+		JvmFormalParameter thirdParameter = constructor.getParameters().get(2);
+		assertEquals(0, thirdParameter.getAnnotations().size());
+		assertEquals("int", thirdParameter.getParameterType().getIdentifier());
+		JvmFormalParameter forthParameter = constructor.getParameters().get(3);
+		assertEquals(1, forthParameter.getAnnotations().size());
+		assertEquals("java.lang.String", forthParameter.getParameterType().getIdentifier());
+		assertEquals(TestAnnotation.NestedAnnotation.class.getName(), forthParameter.getAnnotations().get(0).getAnnotation().getQualifiedName());
+	}
 
 	@Test public void testAnnotationType_01() throws Exception {
 		String typeName = TestAnnotation.class.getName();
@@ -2488,6 +2565,17 @@ public abstract class AbstractTypeProviderTest extends Assert {
 	@Test
 	public void testFindTypeByName_TypeParamEndsWithDollar() {
 		String typeName = "org.eclipse.xtext.common.types.testSetups.TypeParamEndsWithDollar";
+		JvmGenericType type = (JvmGenericType) getTypeProvider().findTypeByName(typeName);
+		assertNotNull(type);
+		diagnose(type);
+		Resource resource = type.eResource();
+		getAndResolveAllFragments(resource);
+		recomputeAndCheckIdentifiers(resource);
+	}
+	
+	@Test
+	public void testFindTypeByName_AbstractMultimap() {
+		String typeName = "com.google.common.collect.AbstractMultimap";
 		JvmGenericType type = (JvmGenericType) getTypeProvider().findTypeByName(typeName);
 		assertNotNull(type);
 		diagnose(type);

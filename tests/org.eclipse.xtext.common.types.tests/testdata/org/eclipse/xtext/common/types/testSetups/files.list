@@ -14,6 +14,7 @@ Fields.java.txt
 GenericSuperClass.java.txt
 InitializerWithConstructor.java.txt
 InitializerWithoutConstructor.java.txt
+NestedParameterizedTypes.java.txt
 NestedTypes.java.txt
 ParameterizedMethods.java.txt
 ParameterizedTypes.java.txt
