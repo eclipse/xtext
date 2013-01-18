@@ -61,4 +61,9 @@ public class TokenTypeToPartitionMapper extends TerminalsTokenTypeToPartitionMap
 	public String[] getSupportedPartitionTypes() {
 		return SUPPORTED_TOKEN_TYPES;
 	}
+	
+	@Override
+	public boolean isMultiLineComment(String partitionType) {
+		return super.isMultiLineComment(partitionType) || JAVA_DOC_PARTITION.equals(partitionType);
+	}
 }

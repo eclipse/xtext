@@ -87,6 +87,7 @@ import org.eclipse.xtext.ui.editor.bracketmatching.BracketMatchingPreferencesIni
 import org.eclipse.xtext.ui.editor.folding.IFoldingStructureProvider;
 import org.eclipse.xtext.ui.editor.model.CommonWordIterator;
 import org.eclipse.xtext.ui.editor.model.DocumentCharacterIterator;
+import org.eclipse.xtext.ui.editor.model.ITokenTypeToPartitionTypeMapperExtension;
 import org.eclipse.xtext.ui.editor.model.IXtextDocument;
 import org.eclipse.xtext.ui.editor.model.TerminalsTokenTypeToPartitionMapper;
 import org.eclipse.xtext.ui.editor.model.XtextDocumentProvider;
@@ -163,6 +164,12 @@ public class XtextEditor extends TextEditor {
 
 	@Inject
 	private TextAttributeProvider textAttributeProvider;
+	
+	/**
+	 * @since 2.4
+	 */
+	@Inject
+	private ITokenTypeToPartitionTypeMapperExtension tokenTypeToPartitionTypeMapperExtension;
 
 	private String keyBindingScope;
 
@@ -1257,8 +1264,7 @@ public class XtextEditor extends TextEditor {
 			}
 
 			int index = super.getLineStartPosition(document, line, length, offset);
-			if (type.equals(TerminalsTokenTypeToPartitionMapper.COMMENT_PARTITION)
-					|| type.equals(TerminalsTokenTypeToPartitionMapper.SL_COMMENT_PARTITION)) {
+			if (tokenTypeToPartitionTypeMapperExtension.isMultiLineComment(type) || tokenTypeToPartitionTypeMapperExtension.isSingleLineComment(type)) {
 				if (index < length - 1 && line.charAt(index) == '*' && line.charAt(index + 1) != '/') {
 					do {
 						++index;

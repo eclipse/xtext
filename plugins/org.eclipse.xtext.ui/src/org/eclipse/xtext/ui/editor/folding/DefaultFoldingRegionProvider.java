@@ -24,6 +24,7 @@ import org.eclipse.jface.text.ITypedRegion;
 import org.eclipse.xtext.parser.IParseResult;
 import org.eclipse.xtext.resource.ILocationInFileProvider;
 import org.eclipse.xtext.resource.XtextResource;
+import org.eclipse.xtext.ui.editor.model.ITokenTypeToPartitionTypeMapperExtension;
 import org.eclipse.xtext.ui.editor.model.IXtextDocument;
 import org.eclipse.xtext.ui.editor.model.TerminalsTokenTypeToPartitionMapper;
 import org.eclipse.xtext.util.ITextRegion;
@@ -43,6 +44,12 @@ public class DefaultFoldingRegionProvider implements IFoldingRegionProvider {
 	
 	@Inject
 	private ILocationInFileProvider locationInFileProvider;
+	
+	/**
+	 * @since 2.4
+	 */
+	@Inject
+	private ITokenTypeToPartitionTypeMapperExtension tokenTypeToPartitionTypeMapperExtension;
 
 	public DefaultFoldingRegionProvider(ILocationInFileProvider locationInFileProvider) {
 		this.locationInFileProvider = locationInFileProvider;
@@ -115,7 +122,7 @@ public class DefaultFoldingRegionProvider implements IFoldingRegionProvider {
 			ITypedRegion[] typedRegions = xtextDocument.computePartitioning(
 					IDocumentExtension3.DEFAULT_PARTITIONING, 0, xtextDocument.getLength(), false);
 			for (ITypedRegion typedRegion : typedRegions) {
-				if (TerminalsTokenTypeToPartitionMapper.COMMENT_PARTITION.equals(typedRegion.getType())) {
+				if (tokenTypeToPartitionTypeMapperExtension.isMultiLineComment(typedRegion.getType())) {
 					int offset = typedRegion.getOffset();
 					int length = typedRegion.getLength();
 					Matcher matcher = getTextPatternInComment().matcher(xtextDocument.get(offset, length));
