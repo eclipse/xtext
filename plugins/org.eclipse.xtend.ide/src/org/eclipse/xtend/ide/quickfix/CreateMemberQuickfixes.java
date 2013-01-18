@@ -295,7 +295,7 @@ public class CreateMemberQuickfixes implements ILinkingIssueQuickfixProvider {
 		constructorBuilder.setContext(call);
 		constructorBuilder.setParameterTypes(getResolvedArgumentTypes(call, call.getArguments()));
 		constructorBuilder.setVisibility(JvmVisibility.PUBLIC);
-		StringBuffer label = new StringBuffer("Create constructor ");
+		StringBuffer label = new StringBuffer("Create constructor '");
 		if(constructorBuilder.getOwnerSource() instanceof XtendClass)
 			label.append("new");
 		else

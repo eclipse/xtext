@@ -143,7 +143,6 @@ class QuickfixTest extends AbstractXtendUITestCase {
 				
 			}
 		''')
-
 	}
 	
 	@Test 
@@ -219,6 +218,83 @@ class QuickfixTest extends AbstractXtendUITestCase {
 	}
 	
 	@Test 
+	def void missingMemberOtherClass() {
+		create('Foo.xtend', '''
+			class Foo {
+			}
+			
+			class Bar {
+				def bar(Foo foo) {
+					foo.foo|
+				}
+			}
+		''')
+		.assertIssueCodes(FEATURECALL_LINKING_DIAGNOSTIC)
+		.assertResolutionLabels("Create method 'foo()' in 'Foo'", "Create method 'getFoo()' in 'Foo'", 
+				"Create extension method 'foo(Foo)'", "Create extension method 'getFoo(Foo)'")
+		.assertModelAfterQuickfix("Create method 'foo()' in 'Foo'", '''
+			class Foo {
+				
+				def foo() {
+					«defaultBody»
+				}
+				
+			}
+			
+			class Bar {
+				def bar(Foo foo) {
+					foo.foo
+				}
+			}
+		''')
+		.assertModelAfterQuickfix("Create method 'getFoo()' in 'Foo'", '''
+			class Foo {
+				
+				def getFoo() {
+					«defaultBody»
+				}
+				
+			}
+			
+			class Bar {
+				def bar(Foo foo) {
+					foo.foo
+				}
+			}
+		''')
+		.assertModelAfterQuickfix("Create extension method 'foo(Foo)'", '''
+			class Foo {
+			}
+			
+			class Bar {
+				def bar(Foo foo) {
+					foo.foo
+				}
+				
+				def foo(Foo foo) {
+					«defaultBody»
+				}
+				
+			}
+		''')
+		.assertModelAfterQuickfix("Create extension method 'getFoo(Foo)'", '''
+			class Foo {
+			}
+			
+			class Bar {
+				def bar(Foo foo) {
+					foo.foo
+				}
+				
+				def getFoo(Foo foo) {
+					«defaultBody»
+				}
+				
+			}
+		''')
+	}
+	
+	@Test 
 	def void missingMethodSameClass() {
 		create('Foo.xtend', '''
 			class Foo {
@@ -239,6 +315,108 @@ class QuickfixTest extends AbstractXtendUITestCase {
 					«defaultBody»
 				}
 				
+			}
+		''')
+	}
+	
+	@Test 
+	def void missingMethodOtherClass() {
+		create('Foo.xtend', '''
+			class Foo {
+			}
+			
+			class Bar {
+				def bar(Foo foo) {
+					foo.foo|()
+				}
+			}
+		''')
+		.assertIssueCodes(FEATURECALL_LINKING_DIAGNOSTIC)
+		.assertResolutionLabels("Create method 'foo()' in 'Foo'", "Create extension method 'foo(Foo)'")
+		.assertModelAfterQuickfix("Create method 'foo()' in 'Foo'", '''
+			class Foo {
+				
+				def foo() {
+					«defaultBody»
+				}
+				
+			}
+			
+			class Bar {
+				def bar(Foo foo) {
+					foo.foo()
+				}
+			}
+		''')
+		.assertModelAfterQuickfix("Create extension method 'foo(Foo)'", '''
+			class Foo {
+			}
+			
+			class Bar {
+				def bar(Foo foo) {
+					foo.foo()
+				}
+				
+				def foo(Foo foo) {
+					«defaultBody»
+				}
+				
+			}
+		''')
+	}
+	
+	@Test
+	def void missingConstructorSameClass() {
+		create('Foo.xtend', '''
+			class Foo {
+				def foo() {
+					new Foo(1)|
+				}
+			}
+		''')
+		.assertIssueCodes(INVALID_NUMBER_OF_ARGUMENTS)
+		.assertResolutionLabels("Create constructor 'new(int)'")
+		.assertModelAfterQuickfix('''
+			class Foo {
+				
+				new(int i) {
+					«defaultBody»
+				}
+				
+				def foo() {
+					new Foo(1)
+				}
+			}
+		''')
+	}
+	
+	@Test
+	def void missingConstructorOtherClass() {
+		create('Foo.xtend', '''
+			class Foo {
+			}
+			
+			class Bar {
+				def foo() {
+					new Foo(1)|
+				}
+			}
+		''')
+		.assertIssueCodes(INVALID_NUMBER_OF_ARGUMENTS)
+		.assertResolutionLabels("Create constructor 'new(int)' in 'Foo'")
+		.assertModelAfterQuickfix('''
+			class Foo {
+				
+				new(int i) {
+					«defaultBody»
+				}
+				
+			}
+			
+			class Bar {
+				def foo() {
+					new Foo(1)
+				}
 			}
 		''')
 	}
@@ -266,7 +444,7 @@ class QuickfixTest extends AbstractXtendUITestCase {
 	def void missingConcreteMembers() {
 		create('Foo.xtend', '''
 			abstract class Foo {
-				def bar()
+				def void bar()
 			}
 			
 			class Bar| extends Foo {
@@ -276,7 +454,7 @@ class QuickfixTest extends AbstractXtendUITestCase {
 		.assertResolutionLabels("Add unimplemented methods", "Make class abstract")
 		.assertModelAfterQuickfix("Add unimplemented methods", '''
 			abstract class Foo {
-				def bar()
+				def void bar()
 			}
 			
 			class Bar extends Foo {
@@ -289,7 +467,7 @@ class QuickfixTest extends AbstractXtendUITestCase {
 		''')
 		.assertModelAfterQuickfix("Make class abstract", '''
 			abstract class Foo {
-				def bar()
+				def void bar()
 			}
 			
 			abstract class Bar extends Foo {
@@ -297,8 +475,7 @@ class QuickfixTest extends AbstractXtendUITestCase {
 		''')
 	}
 	
-	// TODO: this testcase goes completely wrong 
-	@Ignore@Test
+	@Test
 	def void missingConcreteMembers2() {
 		create('Foo.xtend', '''
 			class Foo| implements Comparable<Foo> {
@@ -308,9 +485,11 @@ class QuickfixTest extends AbstractXtendUITestCase {
 		.assertResolutionLabels("Add unimplemented methods", "Make class abstract")
 		.assertModelAfterQuickfix("Add unimplemented methods", '''
 			class Foo implements Comparable<Foo> {
+			
 				override compareTo(Foo o) {
 					«defaultBody»
 				}
+				
 			}
 		''')
 		.assertModelAfterQuickfix("Make class abstract", '''

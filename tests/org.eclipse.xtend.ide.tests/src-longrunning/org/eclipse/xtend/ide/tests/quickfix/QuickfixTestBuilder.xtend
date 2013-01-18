@@ -98,7 +98,7 @@ class QuickfixTestBuilder {
 	def protected openEditorSafely(IFile file) throws Exception {
 		waitForAutoBuild(new NullProgressMonitor)
 		yieldToQueuedDisplayJobs(null)
-		val editor = openEditor(file)
+		var editor = openEditor(file)
 		waitForReconciler(editor)
 		yieldToQueuedDisplayJobs(null)
 		editor
@@ -109,5 +109,6 @@ class QuickfixTestBuilder {
 			editor.close(false)
 		if(file != null)
 			file.delete(true, null)
+		yieldToQueuedDisplayJobs(null)
 	}
 }
