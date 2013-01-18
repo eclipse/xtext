@@ -389,7 +389,7 @@ public class TypeURIHelper implements URIHelperConstants {
 		if (typeBinding.getDeclaringClass() != null) {
 			createResourceURIForClass(typeBinding.getDeclaringClass(), uriBuilder);
 		} else {
-			createResourceURIForClassImpl2(typeBinding.getQualifiedName(), uriBuilder);
+			createResourceURIForClassImpl2(typeBinding.getErasure().getQualifiedName(), uriBuilder);
 		}
 	}
 	
