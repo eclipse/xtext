@@ -6,6 +6,8 @@ import javax.inject.Inject;
 import org.eclipse.xtend.core.macro.declaration.CompilationUnitImpl;
 import org.eclipse.xtend.core.tests.AbstractXtendTestCase;
 import org.eclipse.xtend.core.xtend.XtendFile;
+import org.eclipse.xtend.lib.macro.CompilationContext;
+import org.eclipse.xtend.lib.macro.TypeReferenceProvider;
 import org.eclipse.xtend.lib.macro.declaration.ClassDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.CompilationUnit;
 import org.eclipse.xtend.lib.macro.declaration.ConstructorDeclaration;
@@ -21,9 +23,11 @@ import org.eclipse.xtend.lib.macro.declaration.Type;
 import org.eclipse.xtend.lib.macro.declaration.TypeDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.TypeParameterDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.TypeParameterDeclarator;
+import org.eclipse.xtend.lib.macro.declaration.Visibility;
 import org.eclipse.xtend.lib.macro.type.TypeReference;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.xbase.lib.Exceptions;
+import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.junit.Assert;
@@ -252,6 +256,190 @@ public class DeclarationsTest extends AbstractXtendTestCase {
         }
       };
     this.asCompilationUnit(_validFile, _function);
+  }
+  
+  @Test
+  public void testMutableClassDeclaration() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("package foo");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("class MyClass<T extends CharSequence> {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("String myField");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("new(String initial) {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("this.myField = initial");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def <T2 extends CharSequence> MyClass myMethod(T2 a, T b) {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("myField = myField + a + b");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("return this");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    XtendFile _validFile = this.validFile(_builder);
+    final Procedure1<CompilationUnit> _function = new Procedure1<CompilationUnit>() {
+        public void apply(final CompilationUnit it) {
+          List<? extends TypeDeclaration> _generatedTypeDeclarations = it.getGeneratedTypeDeclarations();
+          TypeDeclaration _head = IterableExtensions.head(_generatedTypeDeclarations);
+          final MutableClassDeclaration genClazz = ((MutableClassDeclaration) _head);
+          final Procedure1<MutableMethodDeclaration> _function = new Procedure1<MutableMethodDeclaration>() {
+              public void apply(final MutableMethodDeclaration it) {
+                CompilationUnit _compilationUnit = genClazz.getCompilationUnit();
+                TypeReferenceProvider _typeReferenceProvider = _compilationUnit.getTypeReferenceProvider();
+                TypeReference _string = _typeReferenceProvider.getString();
+                it.setReturnType(_string);
+                it.setVisibility(Visibility.PRIVATE);
+                final Function1<CompilationContext,CharSequence> _function = new Function1<CompilationContext,CharSequence>() {
+                    public CharSequence apply(final CompilationContext it) {
+                      StringConcatenation _builder = new StringConcatenation();
+                      _builder.append("return \"foo\";");
+                      _builder.newLine();
+                      return _builder;
+                    }
+                  };
+                it.setBody(_function);
+              }
+            };
+          genClazz.addMethod("newMethod", _function);
+          final MutableMethodDeclaration mutableMethod = genClazz.findMethod("newMethod");
+          List<? extends MutableMemberDeclaration> _members = genClazz.getMembers();
+          MutableMemberDeclaration _get = _members.get(3);
+          Assert.assertSame(mutableMethod, _get);
+          TypeReference _returnType = mutableMethod.getReturnType();
+          String _string = _returnType.toString();
+          Assert.assertEquals("String", _string);
+          Visibility _visibility = mutableMethod.getVisibility();
+          Assert.assertEquals(Visibility.PRIVATE, _visibility);
+        }
+      };
+    this.asCompilationUnit(_validFile, _function);
+  }
+  
+  @Test
+  public void testTypeReferences() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("package foo");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("class MyClass {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    XtendFile _validFile = this.validFile(_builder);
+    final Procedure1<CompilationUnit> _function = new Procedure1<CompilationUnit>() {
+        public void apply(final CompilationUnit it) {
+          TypeReferenceProvider _typeReferenceProvider = it.getTypeReferenceProvider();
+          final TypeReference anyType = _typeReferenceProvider.getAnyType();
+          boolean _isAnyType = anyType.isAnyType();
+          Assert.assertTrue(_isAnyType);
+          TypeReferenceProvider _typeReferenceProvider_1 = it.getTypeReferenceProvider();
+          final TypeReference stringType = _typeReferenceProvider_1.getString();
+          TypeReferenceProvider _typeReferenceProvider_2 = it.getTypeReferenceProvider();
+          String _name = CharSequence.class.getName();
+          final TypeReference charsequenceType = _typeReferenceProvider_2.newTypeReference(_name);
+          boolean _isAssignableFrom = charsequenceType.isAssignableFrom(stringType);
+          Assert.assertTrue(_isAssignableFrom);
+          boolean _isAssignableFrom_1 = stringType.isAssignableFrom(anyType);
+          Assert.assertTrue(_isAssignableFrom_1);
+          boolean _isAssignableFrom_2 = stringType.isAssignableFrom(charsequenceType);
+          Assert.assertFalse(_isAssignableFrom_2);
+          TypeReferenceProvider _typeReferenceProvider_3 = it.getTypeReferenceProvider();
+          TypeReference _primitiveBoolean = _typeReferenceProvider_3.getPrimitiveBoolean();
+          DeclarationsTest.this.checkPrimitive(_primitiveBoolean, "java.lang.Boolean");
+          TypeReferenceProvider _typeReferenceProvider_4 = it.getTypeReferenceProvider();
+          TypeReference _primitiveInt = _typeReferenceProvider_4.getPrimitiveInt();
+          DeclarationsTest.this.checkPrimitive(_primitiveInt, "java.lang.Integer");
+          TypeReferenceProvider _typeReferenceProvider_5 = it.getTypeReferenceProvider();
+          TypeReference _primitiveLong = _typeReferenceProvider_5.getPrimitiveLong();
+          DeclarationsTest.this.checkPrimitive(_primitiveLong, "java.lang.Long");
+          TypeReferenceProvider _typeReferenceProvider_6 = it.getTypeReferenceProvider();
+          TypeReference _primitiveShort = _typeReferenceProvider_6.getPrimitiveShort();
+          DeclarationsTest.this.checkPrimitive(_primitiveShort, "java.lang.Short");
+          TypeReferenceProvider _typeReferenceProvider_7 = it.getTypeReferenceProvider();
+          TypeReference _primitiveChar = _typeReferenceProvider_7.getPrimitiveChar();
+          DeclarationsTest.this.checkPrimitive(_primitiveChar, "java.lang.Character");
+          TypeReferenceProvider _typeReferenceProvider_8 = it.getTypeReferenceProvider();
+          TypeReference _primitiveByte = _typeReferenceProvider_8.getPrimitiveByte();
+          DeclarationsTest.this.checkPrimitive(_primitiveByte, "java.lang.Byte");
+          TypeReferenceProvider _typeReferenceProvider_9 = it.getTypeReferenceProvider();
+          TypeReference _primitiveFloat = _typeReferenceProvider_9.getPrimitiveFloat();
+          DeclarationsTest.this.checkPrimitive(_primitiveFloat, "java.lang.Float");
+          TypeReferenceProvider _typeReferenceProvider_10 = it.getTypeReferenceProvider();
+          TypeReference _primitiveDouble = _typeReferenceProvider_10.getPrimitiveDouble();
+          DeclarationsTest.this.checkPrimitive(_primitiveDouble, "java.lang.Double");
+          TypeReferenceProvider _typeReferenceProvider_11 = it.getTypeReferenceProvider();
+          final TypeReference primitiveVoid = _typeReferenceProvider_11.getPrimitiveVoid();
+          boolean _isVoid = primitiveVoid.isVoid();
+          Assert.assertTrue(_isVoid);
+          TypeReferenceProvider _typeReferenceProvider_12 = it.getTypeReferenceProvider();
+          TypeReferenceProvider _typeReferenceProvider_13 = it.getTypeReferenceProvider();
+          TypeReference _string = _typeReferenceProvider_13.getString();
+          final TypeReference listOfStringType = _typeReferenceProvider_12.getList(_string);
+          TypeReferenceProvider _typeReferenceProvider_14 = it.getTypeReferenceProvider();
+          List<TypeReference> _actualTypeArguments = listOfStringType.getActualTypeArguments();
+          TypeReference _head = IterableExtensions.<TypeReference>head(_actualTypeArguments);
+          final TypeReference setOfString = _typeReferenceProvider_14.getSet(_head);
+          String _string_1 = listOfStringType.toString();
+          Assert.assertEquals("List<String>", _string_1);
+          List<TypeReference> _actualTypeArguments_1 = listOfStringType.getActualTypeArguments();
+          TypeReference _head_1 = IterableExtensions.<TypeReference>head(_actualTypeArguments_1);
+          String _string_2 = _head_1.toString();
+          Assert.assertEquals("String", _string_2);
+          String _string_3 = setOfString.toString();
+          Assert.assertEquals("Set<String>", _string_3);
+          List<TypeReference> _actualTypeArguments_2 = setOfString.getActualTypeArguments();
+          TypeReference _head_2 = IterableExtensions.<TypeReference>head(_actualTypeArguments_2);
+          String _string_4 = _head_2.toString();
+          Assert.assertEquals("String", _string_4);
+          TypeReferenceProvider _typeReferenceProvider_15 = it.getTypeReferenceProvider();
+          TypeReferenceProvider _typeReferenceProvider_16 = it.getTypeReferenceProvider();
+          TypeReference _newWildcardTypeReference = _typeReferenceProvider_16.newWildcardTypeReference();
+          TypeReference _set = _typeReferenceProvider_15.getSet(_newWildcardTypeReference);
+          String _string_5 = _set.toString();
+          Assert.assertEquals("Set<?>", _string_5);
+          TypeReferenceProvider _typeReferenceProvider_17 = it.getTypeReferenceProvider();
+          TypeReferenceProvider _typeReferenceProvider_18 = it.getTypeReferenceProvider();
+          TypeReference _newWildcardTypeReference_1 = _typeReferenceProvider_18.newWildcardTypeReference(listOfStringType);
+          TypeReference _set_1 = _typeReferenceProvider_17.getSet(_newWildcardTypeReference_1);
+          String _string_6 = _set_1.toString();
+          Assert.assertEquals("Set<? extends List<String>>", _string_6);
+        }
+      };
+    this.asCompilationUnit(_validFile, _function);
+  }
+  
+  public void checkPrimitive(final TypeReference primitiveType, final String wrapperTypeName) {
+    String _string = primitiveType.toString();
+    boolean _isPrimitive = primitiveType.isPrimitive();
+    Assert.assertTrue(_string, _isPrimitive);
+    TypeReference _wrapperIfPrimitive = primitiveType.getWrapperIfPrimitive();
+    Type _type = _wrapperIfPrimitive.getType();
+    String _name = _type.getName();
+    Assert.assertEquals(wrapperTypeName, _name);
   }
   
   public XtendFile validFile(final CharSequence code) {

@@ -1,7 +1,7 @@
 package test;
 
 /**
- * used in {@link InferredJvmModelShadowingJavaLinkingTests}
+ * used in {@link org.eclipse.xtext.xbase.typesystem.InferredTypeIndicator}
  */
 @SuppressWarnings("all")
 public class Foo {

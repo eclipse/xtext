@@ -110,7 +110,7 @@ public class TypeReferenceImpl extends AbstractDeclarationImpl<LightweightTypeRe
     return _isPrimitive;
   }
   
-  public boolean isPrimitiveVoid() {
+  public boolean isVoid() {
     LightweightTypeReference _delegate = this.getDelegate();
     boolean _isPrimitiveVoid = _delegate.isPrimitiveVoid();
     return _isPrimitiveVoid;

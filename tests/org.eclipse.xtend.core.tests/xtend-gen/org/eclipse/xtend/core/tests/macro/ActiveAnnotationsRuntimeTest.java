@@ -37,11 +37,11 @@ public class ActiveAnnotationsRuntimeTest extends AbstractActiveAnnotationsTest 
   @Inject
   private Provider<CompilationUnitImpl> compilationUnitProvider;
   
-  public void assertProcessing(final Pair<String,CharSequence> macroFile, final Pair<String,CharSequence> clientFile, final Procedure1<? super CompilationUnit> expectations) {
+  public void assertProcessing(final Pair<String,String> macroFile, final Pair<String,String> clientFile, final Procedure1<? super CompilationUnit> expectations) {
     try {
       ResourceSet _unLoadedResourceSet = this.compiler.unLoadedResourceSet(clientFile);
       final XtextResourceSet resourceSet = ((XtextResourceSet) _unLoadedResourceSet);
-      CharSequence _value = macroFile.getValue();
+      String _value = macroFile.getValue();
       final Procedure1<Result> _function = new Procedure1<Result>() {
           public void apply(final Result result) {
             Class<? extends Object> _class = ActiveAnnotationsRuntimeTest.this.getClass();

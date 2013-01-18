@@ -82,19 +82,4 @@ public abstract class JvmTypeDeclarationImpl<T extends JvmDeclaredType> extends 
       _delegate_3.setSimpleName(_substring_1);
     }
   }
-  
-  public void addMember(final MutableMemberDeclaration member) {
-    UnsupportedOperationException _unsupportedOperationException = new UnsupportedOperationException("Auto-Jvm function stub");
-    throw _unsupportedOperationException;
-  }
-  
-  public void addMember(final int index, final MutableMemberDeclaration member) {
-    UnsupportedOperationException _unsupportedOperationException = new UnsupportedOperationException("Auto-Jvm function stub");
-    throw _unsupportedOperationException;
-  }
-  
-  public void removeMember(final MutableMemberDeclaration member) {
-    UnsupportedOperationException _unsupportedOperationException = new UnsupportedOperationException("Auto-Jvm function stub");
-    throw _unsupportedOperationException;
-  }
 }

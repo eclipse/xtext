@@ -55,7 +55,7 @@ class ActiveAnnotationsProcessingInIDETest extends AbstractActiveAnnotationsTest
 	IJavaProject userProject
 	IFile sourceFile
 	
-	override assertProcessing(Pair<String,CharSequence> macroFile, Pair<String,CharSequence> clientFile, (CompilationUnit)=>void expectations) {
+	override assertProcessing(Pair<String,String> macroFile, Pair<String,String> clientFile, (CompilationUnit)=>void expectations) {
 		macroProject  = JavaCore::create(createPluginProject("macroProject"))
 		macroProject.newSource(macroFile.key, macroFile.value.toString)
 		val lidx = macroFile.key.lastIndexOf('/')

@@ -3,6 +3,7 @@ package org.eclipse.xtend.lib.macro.declaration;
 import java.util.List;
 
 import org.eclipse.xtend.lib.macro.type.TypeReference;
+import org.eclipse.xtext.xbase.lib.Procedures;
 
 public interface MutableClassDeclaration extends MutableTypeDeclaration, ClassDeclaration {
 	public void setSuperclass(TypeReference superclass);
@@ -10,4 +11,20 @@ public interface MutableClassDeclaration extends MutableTypeDeclaration, ClassDe
 	void setAbstract(boolean isAbstract);
 	void setFinal(boolean isFinal);
 	void setStatic(boolean isStatic);
+	
+	/**
+	 * 
+	 * @param name of the method
+	 * @param parameterTypes - the types of the method
+	 * @return the declared method with the given name and the specified parameter types or <code>null</code> if no such method exists.
+	 */
+	MutableMethodDeclaration findMethod(String name, TypeReference... parameterTypes);
+	void addMethod(String name, Procedures.Procedure1<MutableMethodDeclaration> initializer);
+	
+	/**
+	 * @param name of the feature
+	 * @return the declared field with the given name or <code>null</code> of no such field exists.
+	 */
+	MutableFieldDeclaration findField(String name);
+	void addField(String name, Procedures.Procedure1<MutableFieldDeclaration> initializer);
 }

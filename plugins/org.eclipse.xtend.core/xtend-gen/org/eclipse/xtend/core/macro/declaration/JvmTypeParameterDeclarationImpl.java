@@ -7,6 +7,7 @@
  */
 package org.eclipse.xtend.core.macro.declaration;
 
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtend.core.macro.declaration.CompilationUnitImpl;
 import org.eclipse.xtend.core.macro.declaration.TypeParameterDeclarationImpl;
@@ -15,6 +16,7 @@ import org.eclipse.xtend.lib.macro.declaration.MutableTypeParameterDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.MutableTypeParameterDeclarator;
 import org.eclipse.xtext.common.types.JvmExecutable;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
+import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 
 @SuppressWarnings("all")
 public class JvmTypeParameterDeclarationImpl extends TypeParameterDeclarationImpl implements MutableTypeParameterDeclaration {
@@ -29,5 +31,28 @@ public class JvmTypeParameterDeclarationImpl extends TypeParameterDeclarationImp
   public void setName(final String name) {
     JvmTypeParameter _delegate = this.getDelegate();
     _delegate.setName(name);
+  }
+  
+  public void remove() {
+    JvmTypeParameter _delegate = this.getDelegate();
+    EObject _eContainer = _delegate.eContainer();
+    boolean _equals = ObjectExtensions.operator_equals(_eContainer, null);
+    if (_equals) {
+      return;
+    }
+    JvmTypeParameter _delegate_1 = this.getDelegate();
+    EObject _eContainer_1 = _delegate_1.eContainer();
+    EList<EObject> _eContents = _eContainer_1.eContents();
+    JvmTypeParameter _delegate_2 = this.getDelegate();
+    _eContents.remove(_delegate_2);
+    JvmTypeParameter _delegate_3 = this.getDelegate();
+    EObject _eContainer_2 = _delegate_3.eContainer();
+    boolean _notEquals = ObjectExtensions.operator_notEquals(_eContainer_2, null);
+    if (_notEquals) {
+      JvmTypeParameter _delegate_4 = this.getDelegate();
+      String _plus = ("Couldn\'t remove " + _delegate_4);
+      IllegalStateException _illegalStateException = new IllegalStateException(_plus);
+      throw _illegalStateException;
+    }
   }
 }

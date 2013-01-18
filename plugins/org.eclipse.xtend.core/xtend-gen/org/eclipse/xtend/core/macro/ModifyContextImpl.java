@@ -7,6 +7,7 @@ import org.eclipse.xtend.core.jvmmodel.IXtendJvmAssociations;
 import org.eclipse.xtend.core.macro.declaration.AbstractNamedElementImpl;
 import org.eclipse.xtend.core.macro.declaration.CompilationUnitImpl;
 import org.eclipse.xtend.lib.macro.ModifyContext;
+import org.eclipse.xtend.lib.macro.TypeReferenceProvider;
 import org.eclipse.xtend.lib.macro.declaration.ClassDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.CompilationUnit;
 import org.eclipse.xtend.lib.macro.declaration.ConstructorDeclaration;
@@ -15,17 +16,12 @@ import org.eclipse.xtend.lib.macro.declaration.MemberDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.MethodDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.MutableClassDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.MutableConstructorDeclaration;
-import org.eclipse.xtend.lib.macro.declaration.MutableExecutableDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.MutableFieldDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.MutableMethodDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.MutableNamedElement;
-import org.eclipse.xtend.lib.macro.declaration.MutableParameterDeclaration;
-import org.eclipse.xtend.lib.macro.declaration.MutableTypeDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.NamedElement;
-import org.eclipse.xtend.lib.macro.type.TypeReference;
 import org.eclipse.xtext.common.types.JvmMember;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
-import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 
 @SuppressWarnings("all")
 public class ModifyContextImpl implements ModifyContext {
@@ -110,27 +106,12 @@ public class ModifyContextImpl implements ModifyContext {
     throw _unsupportedOperationException;
   }
   
-  public MutableConstructorDeclaration newConstructor(final MutableClassDeclaration container, final Procedure1<MutableConstructorDeclaration> initializer) {
-    UnsupportedOperationException _unsupportedOperationException = new UnsupportedOperationException("Auto-generated function stub");
-    throw _unsupportedOperationException;
-  }
-  
   public MutableClassDeclaration findGeneratedClass(final String name) {
     UnsupportedOperationException _unsupportedOperationException = new UnsupportedOperationException("Auto-generated function stub");
     throw _unsupportedOperationException;
   }
   
-  public MutableFieldDeclaration newField(final MutableClassDeclaration declarator, final String simpleName, final Procedure1<MutableFieldDeclaration> initializer) {
-    UnsupportedOperationException _unsupportedOperationException = new UnsupportedOperationException("Auto-generated function stub");
-    throw _unsupportedOperationException;
-  }
-  
-  public MutableMethodDeclaration newMethod(final MutableTypeDeclaration declarator, final String simpleName, final Procedure1<MutableMethodDeclaration> initializer) {
-    UnsupportedOperationException _unsupportedOperationException = new UnsupportedOperationException("Auto-generated function stub");
-    throw _unsupportedOperationException;
-  }
-  
-  public MutableParameterDeclaration newParameter(final MutableExecutableDeclaration declarator, final String simpleName, final TypeReference type) {
+  public TypeReferenceProvider getTypeReferences() {
     UnsupportedOperationException _unsupportedOperationException = new UnsupportedOperationException("Auto-generated function stub");
     throw _unsupportedOperationException;
   }

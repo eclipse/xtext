@@ -214,9 +214,9 @@ public class CompilationTestHelper {
 	 * @return a resourceset, containing the given resources.
 	 * @throws IOException 
 	 */
-	public ResourceSet resourceSet(Pair<String,CharSequence> ...resources ) throws IOException {
+	public ResourceSet resourceSet(Pair<String,? extends CharSequence> ...resources ) throws IOException {
 		XtextResourceSet result = resourceSetProvider.get();
-		for (Pair<String, CharSequence> entry : resources) {
+		for (Pair<String, ? extends CharSequence> entry : resources) {
 			final URI uri = URI.createURI(entry.getKey());
 			Resource resource = result.createResource(uri);
 			if (resource == null)
@@ -226,7 +226,7 @@ public class CompilationTestHelper {
 		return result;
 	}
 	
-	public ResourceSet unLoadedResourceSet(Pair<String,CharSequence> ...resources ) throws IOException {
+	public ResourceSet unLoadedResourceSet(Pair<String,? extends CharSequence> ...resources ) throws IOException {
 		XtextResourceSet result = resourceSetProvider.get();
 		final Map<URI, CharSequence> uri2Content = newHashMap();
 		result.setURIConverter(new ExtensibleURIConverterImpl() {
@@ -239,7 +239,7 @@ public class CompilationTestHelper {
 				return super.createInputStream(uri, options);
 			}
 		});
-		for (Pair<String, CharSequence> entry : resources) {
+		for (Pair<String, ? extends CharSequence> entry : resources) {
 			final URI uri = URI.createURI(entry.getKey());
 			Resource resource = result.createResource(uri);
 			if (resource == null)

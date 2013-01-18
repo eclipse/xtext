@@ -81,13 +81,13 @@ public class ActiveAnnotationsProcessingInIDETest extends AbstractActiveAnnotati
   
   private IFile sourceFile;
   
-  public void assertProcessing(final Pair<String,CharSequence> macroFile, final Pair<String,CharSequence> clientFile, final Procedure1<? super CompilationUnit> expectations) {
+  public void assertProcessing(final Pair<String,String> macroFile, final Pair<String,String> clientFile, final Procedure1<? super CompilationUnit> expectations) {
     try {
       IProject _createPluginProject = WorkbenchTestHelper.createPluginProject("macroProject");
       IJavaProject _create = JavaCore.create(_createPluginProject);
       this.macroProject = _create;
       String _key = macroFile.getKey();
-      CharSequence _value = macroFile.getValue();
+      String _value = macroFile.getValue();
       String _string = _value.toString();
       this.newSource(this.macroProject, _key, _string);
       String _key_1 = macroFile.getKey();
@@ -108,7 +108,7 @@ public class ActiveAnnotationsProcessingInIDETest extends AbstractActiveAnnotati
       IJavaProject _create_1 = JavaCore.create(_createPluginProject_1);
       this.userProject = _create_1;
       String _key_3 = clientFile.getKey();
-      CharSequence _value_1 = clientFile.getValue();
+      String _value_1 = clientFile.getValue();
       String _string_1 = _value_1.toString();
       IFile _newSource = this.newSource(this.userProject, _key_3, _string_1);
       this.sourceFile = _newSource;

@@ -8,6 +8,7 @@
 package org.eclipse.xtend.core.macro.declaration
 
 import java.util.List
+import org.eclipse.xtend.lib.macro.CompilationContext
 import org.eclipse.xtend.lib.macro.declaration.MutableClassDeclaration
 import org.eclipse.xtend.lib.macro.declaration.MutableConstructorDeclaration
 import org.eclipse.xtend.lib.macro.declaration.MutableExecutableDeclaration
@@ -32,11 +33,22 @@ import org.eclipse.xtext.common.types.JvmIdentifiableElement
 import org.eclipse.xtext.common.types.JvmMember
 import org.eclipse.xtext.common.types.JvmOperation
 import org.eclipse.xtext.common.types.JvmVisibility
+import org.eclipse.xtext.common.types.TypesFactory
+import org.eclipse.xtext.xbase.lib.Functions$Function1
+import org.eclipse.xtext.xbase.lib.Procedures$Procedure1
 
 abstract class JvmNamedElementImpl<T extends JvmIdentifiableElement> extends AbstractDeclarationImpl<T> implements MutableNamedElement {
 	
 	override getName() {
 		delegate.simpleName
+	}
+	
+	override remove() {
+		if (delegate.eContainer == null)
+			return;
+		delegate.eContainer.eContents.remove(delegate)
+		if (delegate.eContainer != null)
+			throw new IllegalStateException("Couldn't remove "+delegate.toString)
 	}
 	
 }
@@ -111,18 +123,6 @@ abstract class JvmTypeDeclarationImpl<T extends JvmDeclaredType> extends JvmMemb
 		}
 	}
 	
-	override addMember(MutableMemberDeclaration member) {
-		throw new UnsupportedOperationException("Auto-Jvm function stub")
-	}
-	
-	override addMember(int index, MutableMemberDeclaration member) {
-		throw new UnsupportedOperationException("Auto-Jvm function stub")
-	}
-	
-	override removeMember(MutableMemberDeclaration member) {
-		throw new UnsupportedOperationException("Auto-Jvm function stub")
-	}
-	
 }
 
 class JvmClassDeclarationImpl extends JvmTypeDeclarationImpl<JvmGenericType> implements MutableClassDeclaration {
@@ -166,12 +166,41 @@ class JvmClassDeclarationImpl extends JvmTypeDeclarationImpl<JvmGenericType> imp
 	}
 	
 	override setSuperclass(TypeReference superclass) {
-		throw new UnsupportedOperationException("Auto-Jvm function stub")
+		val interfaces = implementedInterfaces
+		delegate.superTypes.clear
+		delegate.superTypes.add(compilationUnit.toJvmTypeReference(superclass))
+		interfaces.forEach[delegate.superTypes.add(compilationUnit.toJvmTypeReference(it))]
 	}
 	
-	override setImplementedInterfaces(List<? extends TypeReference> superclass) {
-		throw new UnsupportedOperationException("Auto-Jvm function stub")
+	override setImplementedInterfaces(List<? extends TypeReference> superInterfaces) {
+		val superClass = getSuperclass
+		delegate.superTypes.clear
+		delegate.superTypes.add(compilationUnit.toJvmTypeReference(superClass))
+		superInterfaces.forEach[delegate.superTypes.add(compilationUnit.toJvmTypeReference(it))]
 	}
+
+	override addField(String name, Procedure1<MutableFieldDeclaration> initializer) {
+		val newField = TypesFactory::eINSTANCE.createJvmField
+		newField.simpleName = name
+		delegate.members.add(newField)
+		initializer.apply(compilationUnit.toMemberDeclaration(newField) as MutableFieldDeclaration)
+	}
+	
+	override addMethod(String name, Procedure1<MutableMethodDeclaration> initializer) {
+		val newMethod = TypesFactory::eINSTANCE.createJvmOperation
+		newMethod.simpleName = name
+		delegate.members.add(newMethod)
+		initializer.apply(compilationUnit.toMemberDeclaration(newMethod) as MutableMethodDeclaration)
+	}
+	
+	override findField(String name) {
+		members.filter(typeof(MutableFieldDeclaration)).findFirst[it.name == name]
+	}
+	
+	override findMethod(String name, TypeReference[] parameterTypes) {
+		members.filter(typeof(MutableMethodDeclaration)).findFirst[it.name == name && it.parameters.map[type].toList == parameterTypes.toList]
+	}
+
 }
 
 //class InterfaceDeclarationJavaImpl extends JvmTypeDeclarationImpl<JvmGenericType> implements JvmInterfaceDeclaration {
@@ -276,6 +305,10 @@ class JvmMethodDeclarationImpl extends JvmExecutableDeclarationImpl<JvmOperation
 		delegate.setReturnType((type as TypeReferenceImpl).lightWeightTypeReference.toJavaCompliantTypeReference)
 	}
 	
+	override setBody((CompilationContext)=>CharSequence compilationStrategy) {
+		compilationUnit.setCompilationStrategy(delegate, compilationStrategy)
+	}
+	
 }
 
 class JvmConstructorDeclarationImpl extends JvmExecutableDeclarationImpl<JvmConstructor> implements MutableConstructorDeclaration {
@@ -286,6 +319,10 @@ class JvmConstructorDeclarationImpl extends JvmExecutableDeclarationImpl<JvmCons
 	
 	override getBody() {
 		throw new UnsupportedOperationException("Auto-Jvm function stub")
+	}
+
+	override setBody((CompilationContext)=>CharSequence compilationStrategy) {
+		compilationUnit.setCompilationStrategy(delegate, compilationStrategy)
 	}
 	
 }
@@ -338,6 +375,14 @@ class JvmTypeParameterDeclarationImpl extends TypeParameterDeclarationImpl imple
 	
 	override setName(String name) {
 		delegate.name = name
+	}
+	
+	override remove() {
+		if (delegate.eContainer == null)
+			return;
+		delegate.eContainer.eContents.remove(delegate)
+		if (delegate.eContainer != null)
+			throw new IllegalStateException("Couldn't remove "+delegate)
 	}
 	
 }

@@ -7,7 +7,4 @@ public interface MutableTypeDeclaration extends MutableMemberDeclaration, TypeDe
 	void setSimpleName(String simpleName);
 	void setPackageName(String packageName);
 	
-	void addMember(MutableMemberDeclaration member);
-	void addMember(int index, MutableMemberDeclaration member);
-	void removeMember(MutableMemberDeclaration member);
 }

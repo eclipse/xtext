@@ -15,6 +15,9 @@ import org.eclipse.xtend.lib.macro.declaration.MutableMethodDeclaration
 import org.junit.Test
 
 import static extension org.junit.Assert.*
+import org.eclipse.xtend.lib.macro.declaration.Visibility
+
+import org.eclipse.xtend.lib.macro.type.TypeReference
 
 class DeclarationsTest extends AbstractXtendTestCase {
 	
@@ -102,6 +105,85 @@ class DeclarationsTest extends AbstractXtendTestCase {
 			assertSame(constructor, clazz.members.get(1))
 			assertSame(method, clazz.members.get(2))
 		]
+	}
+	
+	@Test def testMutableClassDeclaration() {
+		validFile('''
+		package foo
+		
+		class MyClass<T extends CharSequence> {
+			
+			String myField
+			
+			new(String initial) {
+				this.myField = initial
+			}
+			
+			def <T2 extends CharSequence> MyClass myMethod(T2 a, T b) {
+				myField = myField + a + b
+				return this
+			}
+		}
+		''').asCompilationUnit [
+			val genClazz = generatedTypeDeclarations.head as MutableClassDeclaration
+			
+			genClazz.addMethod('newMethod') [
+				returnType = genClazz.compilationUnit.typeReferenceProvider.string 
+				visibility = Visibility::PRIVATE
+				body = ['''
+					return "foo";
+				''']
+			]
+			
+			val mutableMethod = genClazz.findMethod('newMethod')
+			assertSame(mutableMethod, genClazz.members.get(3))
+			assertEquals('String', mutableMethod.returnType.toString)
+			assertEquals(Visibility::PRIVATE, mutableMethod.visibility)
+		]
+	}
+	
+	@Test def testTypeReferences() {
+		validFile('''
+		package foo
+		
+		class MyClass {
+			
+		}
+		''').asCompilationUnit [
+			val anyType = typeReferenceProvider.anyType
+			assertTrue(anyType.anyType)
+			
+			val stringType = typeReferenceProvider.string
+			val charsequenceType = typeReferenceProvider.newTypeReference(typeof(CharSequence).name)
+			assertTrue(charsequenceType.isAssignableFrom(stringType))
+			assertTrue(stringType.isAssignableFrom(anyType))
+			assertFalse(stringType.isAssignableFrom(charsequenceType))
+			
+			checkPrimitive(typeReferenceProvider.primitiveBoolean, 'java.lang.Boolean')
+			checkPrimitive(typeReferenceProvider.primitiveInt, 'java.lang.Integer')
+			checkPrimitive(typeReferenceProvider.primitiveLong, 'java.lang.Long')
+			checkPrimitive(typeReferenceProvider.primitiveShort, 'java.lang.Short')
+			checkPrimitive(typeReferenceProvider.primitiveChar, 'java.lang.Character')
+			checkPrimitive(typeReferenceProvider.primitiveByte, 'java.lang.Byte')
+			checkPrimitive(typeReferenceProvider.primitiveFloat, 'java.lang.Float')
+			checkPrimitive(typeReferenceProvider.primitiveDouble, 'java.lang.Double')
+			val primitiveVoid = typeReferenceProvider.primitiveVoid
+			assertTrue(primitiveVoid.void)
+			
+			val listOfStringType = typeReferenceProvider.getList(typeReferenceProvider.string)
+			val setOfString = typeReferenceProvider.getSet(listOfStringType.actualTypeArguments.head)
+			assertEquals('List<String>', listOfStringType.toString)
+			assertEquals('String',listOfStringType.actualTypeArguments.head.toString)
+			assertEquals('Set<String>', setOfString.toString)
+			assertEquals('String',setOfString.actualTypeArguments.head.toString)
+			assertEquals('Set<?>', typeReferenceProvider.getSet(typeReferenceProvider.newWildcardTypeReference).toString)
+			assertEquals('Set<? extends List<String>>', typeReferenceProvider.getSet(typeReferenceProvider.newWildcardTypeReference(listOfStringType)).toString)
+		]
+	}
+	
+	def void checkPrimitive(TypeReference primitiveType, String wrapperTypeName) {
+		assertTrue(primitiveType.toString, primitiveType.primitive)
+		assertEquals(wrapperTypeName, primitiveType.wrapperIfPrimitive.type.name)
 	}
 	
 	def validFile(CharSequence code) {

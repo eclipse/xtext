@@ -17,6 +17,7 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.xtend.core.macro.CompilationContextImpl;
 import org.eclipse.xtend.core.macro.declaration.JvmClassDeclarationImpl;
 import org.eclipse.xtend.core.macro.declaration.JvmConstructorDeclarationImpl;
 import org.eclipse.xtend.core.macro.declaration.JvmFieldDeclarationImpl;
@@ -42,6 +43,8 @@ import org.eclipse.xtend.core.xtend.XtendFunction;
 import org.eclipse.xtend.core.xtend.XtendMember;
 import org.eclipse.xtend.core.xtend.XtendParameter;
 import org.eclipse.xtend.core.xtend.XtendTypeDeclaration;
+import org.eclipse.xtend.lib.macro.CompilationContext;
+import org.eclipse.xtend.lib.macro.TypeReferenceProvider;
 import org.eclipse.xtend.lib.macro.declaration.ClassDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.CompilationUnit;
 import org.eclipse.xtend.lib.macro.declaration.MemberDeclaration;
@@ -54,21 +57,31 @@ import org.eclipse.xtend.lib.macro.declaration.TypeParameterDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.Visibility;
 import org.eclipse.xtend.lib.macro.type.TypeReference;
 import org.eclipse.xtext.common.types.JvmAnnotationType;
+import org.eclipse.xtext.common.types.JvmAnyTypeReference;
 import org.eclipse.xtext.common.types.JvmConstructor;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmEnumerationType;
+import org.eclipse.xtext.common.types.JvmExecutable;
 import org.eclipse.xtext.common.types.JvmField;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
+import org.eclipse.xtext.common.types.JvmGenericArrayTypeReference;
 import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.common.types.JvmMember;
 import org.eclipse.xtext.common.types.JvmOperation;
+import org.eclipse.xtext.common.types.JvmParameterizedTypeReference;
 import org.eclipse.xtext.common.types.JvmPrimitiveType;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.JvmVisibility;
 import org.eclipse.xtext.common.types.JvmVoid;
+import org.eclipse.xtext.common.types.JvmWildcardTypeReference;
+import org.eclipse.xtext.common.types.util.TypeReferences;
+import org.eclipse.xtext.xbase.compiler.TypeReferenceSerializer2;
+import org.eclipse.xtext.xbase.compiler.output.ITreeAppendable;
+import org.eclipse.xtext.xbase.jvmmodel.JvmTypesBuilder;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
+import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Functions.Function0;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
@@ -81,7 +94,7 @@ import org.eclipse.xtext.xbase.typesystem.references.OwnedConverter;
 import org.eclipse.xtext.xbase.typesystem.util.CommonTypeComputationServices;
 
 @SuppressWarnings("all")
-public class CompilationUnitImpl implements CompilationUnit {
+public class CompilationUnitImpl implements CompilationUnit, TypeReferenceProvider {
   public String getDocComment() {
     UnsupportedOperationException _unsupportedOperationException = new UnsupportedOperationException("Auto-generated function stub");
     throw _unsupportedOperationException;
@@ -144,6 +157,15 @@ public class CompilationUnitImpl implements CompilationUnit {
   
   @Inject
   private CommonTypeComputationServices services;
+  
+  @Inject
+  private TypeReferences typeReferences;
+  
+  @Inject
+  private JvmTypesBuilder typesBuilder;
+  
+  @Inject
+  private TypeReferenceSerializer2 typeRefSerializer;
   
   private Map<EObject,Object> identityCache = new Function0<Map<EObject,Object>>() {
     public Map<EObject,Object> apply() {
@@ -580,5 +602,152 @@ public class CompilationUnitImpl implements CompilationUnit {
       };
     XtendTypeParameterDeclarationImpl _get = this.<JvmTypeParameter, XtendTypeParameterDeclarationImpl>get(delegate, _function);
     return _get;
+  }
+  
+  public TypeReferenceProvider getTypeReferenceProvider() {
+    return this;
+  }
+  
+  public TypeReference getAnyType() {
+    XtendFile _xtendFile = this.getXtendFile();
+    JvmAnyTypeReference _createAnyTypeReference = this.typeReferences.createAnyTypeReference(_xtendFile);
+    TypeReference _typeReference = this.toTypeReference(_createAnyTypeReference);
+    return _typeReference;
+  }
+  
+  public TypeReference getList(final TypeReference param) {
+    TypeReference _newTypeReference = this.newTypeReference("java.util.List", param);
+    return _newTypeReference;
+  }
+  
+  public TypeReference getObject() {
+    XtendFile _xtendFile = this.getXtendFile();
+    JvmType _findDeclaredType = this.typeReferences.findDeclaredType(Object.class, _xtendFile);
+    JvmParameterizedTypeReference _createTypeRef = this.typeReferences.createTypeRef(_findDeclaredType);
+    TypeReference _typeReference = this.toTypeReference(_createTypeRef);
+    return _typeReference;
+  }
+  
+  public TypeReference getPrimitiveBoolean() {
+    TypeReference _newTypeReference = this.newTypeReference("boolean");
+    return _newTypeReference;
+  }
+  
+  public TypeReference getPrimitiveByte() {
+    TypeReference _newTypeReference = this.newTypeReference("byte");
+    return _newTypeReference;
+  }
+  
+  public TypeReference getPrimitiveChar() {
+    TypeReference _newTypeReference = this.newTypeReference("char");
+    return _newTypeReference;
+  }
+  
+  public TypeReference getPrimitiveDouble() {
+    TypeReference _newTypeReference = this.newTypeReference("double");
+    return _newTypeReference;
+  }
+  
+  public TypeReference getPrimitiveFloat() {
+    TypeReference _newTypeReference = this.newTypeReference("float");
+    return _newTypeReference;
+  }
+  
+  public TypeReference getPrimitiveInt() {
+    TypeReference _newTypeReference = this.newTypeReference("int");
+    return _newTypeReference;
+  }
+  
+  public TypeReference getPrimitiveLong() {
+    TypeReference _newTypeReference = this.newTypeReference("long");
+    return _newTypeReference;
+  }
+  
+  public TypeReference getPrimitiveShort() {
+    TypeReference _newTypeReference = this.newTypeReference("short");
+    return _newTypeReference;
+  }
+  
+  public TypeReference getPrimitiveVoid() {
+    TypeReference _newTypeReference = this.newTypeReference("void");
+    return _newTypeReference;
+  }
+  
+  public TypeReference getSet(final TypeReference param) {
+    TypeReference _newTypeReference = this.newTypeReference("java.util.Set", param);
+    return _newTypeReference;
+  }
+  
+  public TypeReference getString() {
+    TypeReference _newTypeReference = this.newTypeReference("java.lang.String");
+    return _newTypeReference;
+  }
+  
+  public TypeReference newArrayTypeReference(final TypeReference componentType) {
+    JvmTypeReference _jvmTypeReference = this.toJvmTypeReference(componentType);
+    JvmGenericArrayTypeReference _createArrayType = this.typeReferences.createArrayType(_jvmTypeReference);
+    TypeReference _typeReference = this.toTypeReference(_createArrayType);
+    return _typeReference;
+  }
+  
+  public TypeReference newTypeReference(final String typeName, final TypeReference... typeArguments) {
+    TypeReference _xblockexpression = null;
+    {
+      XtendFile _xtendFile = this.getXtendFile();
+      final JvmType type = this.typeReferences.findDeclaredType(typeName, _xtendFile);
+      boolean _equals = ObjectExtensions.operator_equals(type, null);
+      if (_equals) {
+        return null;
+      }
+      final Function1<TypeReference,JvmTypeReference> _function = new Function1<TypeReference,JvmTypeReference>() {
+          public JvmTypeReference apply(final TypeReference it) {
+            JvmTypeReference _jvmTypeReference = CompilationUnitImpl.this.toJvmTypeReference(it);
+            return _jvmTypeReference;
+          }
+        };
+      List<JvmTypeReference> _map = ListExtensions.<TypeReference, JvmTypeReference>map(((List<TypeReference>)Conversions.doWrapArray(typeArguments)), _function);
+      JvmParameterizedTypeReference _createTypeRef = this.typeReferences.createTypeRef(type, ((JvmTypeReference[]) ((JvmTypeReference[])Conversions.unwrapArray(_map, JvmTypeReference.class))));
+      TypeReference _typeReference = this.toTypeReference(_createTypeRef);
+      _xblockexpression = (_typeReference);
+    }
+    return _xblockexpression;
+  }
+  
+  public TypeReference newWildcardTypeReference() {
+    TypeReference _newWildcardTypeReference = this.newWildcardTypeReference(null);
+    return _newWildcardTypeReference;
+  }
+  
+  public TypeReference newWildcardTypeReference(final TypeReference upperBound) {
+    TypeReference _xifexpression = null;
+    boolean _equals = ObjectExtensions.operator_equals(upperBound, null);
+    if (_equals) {
+      JvmWildcardTypeReference _wildCard = this.typeReferences.wildCard();
+      TypeReference _typeReference = this.toTypeReference(_wildCard);
+      _xifexpression = _typeReference;
+    } else {
+      JvmTypeReference _jvmTypeReference = this.toJvmTypeReference(upperBound);
+      JvmWildcardTypeReference _wildCardExtends = this.typeReferences.wildCardExtends(_jvmTypeReference);
+      TypeReference _typeReference_1 = this.toTypeReference(_wildCardExtends);
+      _xifexpression = _typeReference_1;
+    }
+    return _xifexpression;
+  }
+  
+  public JvmTypeReference toJvmTypeReference(final TypeReference typeRef) {
+    LightweightTypeReference _lightWeightTypeReference = ((TypeReferenceImpl) typeRef).getLightWeightTypeReference();
+    return _lightWeightTypeReference.toJavaCompliantTypeReference();
+  }
+  
+  public void setCompilationStrategy(final JvmExecutable executable, final Function1<? super CompilationContext,? extends CharSequence> compilationStrategy) {
+    final Procedure1<ITreeAppendable> _function = new Procedure1<ITreeAppendable>() {
+        public void apply(final ITreeAppendable it) {
+          CompilationContextImpl _compilationContextImpl = new CompilationContextImpl(it, CompilationUnitImpl.this, CompilationUnitImpl.this.typeRefSerializer);
+          final CompilationContextImpl context = _compilationContextImpl;
+          CharSequence _apply = compilationStrategy.apply(context);
+          it.append(_apply);
+        }
+      };
+    this.typesBuilder.setBody(executable, _function);
   }
 }
