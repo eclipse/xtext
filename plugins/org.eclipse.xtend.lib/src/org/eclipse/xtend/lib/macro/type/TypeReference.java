@@ -35,15 +35,26 @@ public interface TypeReference {
 
 	boolean isAnyType();
 
+	/**
+	 * @return whether this is a primitive type (i.e. one of boolean, char, byte, short, int, long, float, double).
+	 */
 	boolean isPrimitive();
 
 	TypeReference getWrapperIfPrimitive();
 
+	/**
+	 * Checks whether this type is one of the wrapper types for the primitive value types.
+	 * 
+	 * @return wither this is one of the wrapper types for the primitive value types.
+	 */
 	boolean isWrapper();
 
 	TypeReference getPrimitiveIfWrapper();
 
-	boolean isPrimitiveVoid();
+	/**
+	 * @return whether this type is 'void' (doesn't include 'java.lang.Void')
+	 */
+	boolean isVoid();
 
 	/**
 	 * Determines if the specified <code>TypeReference</code> parameter can be assigned to this 
