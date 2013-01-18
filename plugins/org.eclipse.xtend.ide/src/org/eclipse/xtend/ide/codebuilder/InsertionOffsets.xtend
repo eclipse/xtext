@@ -24,7 +24,7 @@ class InsertionOffsets {
 
 	def getNewFieldInsertOffset(EObject call, XtendClass ownerClass) {
 		if (ownerClass.members.empty)
-			return after(ownerClass) - 2
+			return inEmpty(ownerClass)
 		val lastDefinedField = ownerClass.members.filter(typeof(XtendField)).last
 		if (lastDefinedField == null)
 			return before(ownerClass.members.head)
@@ -39,7 +39,7 @@ class InsertionOffsets {
 		if (ownerClass.members.contains(callingMember))
 			return after(callingMember)
 		else if (ownerClass.members.empty)
-			return after(ownerClass) - 2
+			return inEmpty(ownerClass)
 		else
 			return after(ownerClass.members.last)
 	}
@@ -59,5 +59,14 @@ class InsertionOffsets {
 	def protected after(EObject element) {
 		val node = NodeModelUtils::findActualNodeFor(element)
 		node.offset + node.length
+	}
+	
+	def protected inEmpty(XtendClass ownerClass) {
+		val classNode = NodeModelUtils::findActualNodeFor(ownerClass)
+		val openingBraceNode = classNode.leafNodes.findFirst[text == "{"]
+		if(openingBraceNode != null)
+			openingBraceNode.offset + 1
+		else 
+			classNode.offset + classNode.length
 	}
 }
