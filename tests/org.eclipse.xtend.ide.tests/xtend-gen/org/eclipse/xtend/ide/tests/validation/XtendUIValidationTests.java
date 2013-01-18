@@ -396,6 +396,33 @@ public class XtendUIValidationTests extends AbstractXtendUITestCase {
   }
   
   @Test
+  public void testForbiddenArrayTypeUsage() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("class Foo {");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("def bar(org.eclipse.xtend.core.tests.restricted.RestrictedClass[] x) {}");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      _builder.newLine();
+      final XtendFile xtendFile = this.testHelper.xtendFile("Clazz.xtend", _builder.toString());
+      EList<XtendTypeDeclaration> _xtendTypes = xtendFile.getXtendTypes();
+      Iterable<XtendClass> _filter = Iterables.<XtendClass>filter(_xtendTypes, XtendClass.class);
+      XtendClass _head = IterableExtensions.<XtendClass>head(_filter);
+      EList<XtendMember> _members = _head.getMembers();
+      XtendMember _head_1 = IterableExtensions.<XtendMember>head(_members);
+      final XtendFunction function = ((XtendFunction) _head_1);
+      EList<XtendParameter> _parameters = function.getParameters();
+      XtendParameter _get = _parameters.get(0);
+      this.helper.assertError(_get, org.eclipse.xtext.common.types.TypesPackage.Literals.JVM_TYPE_REFERENCE, org.eclipse.xtext.xbase.validation.IssueCodes.FORBIDDEN_REFERENCE);
+    } catch (Exception _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
   public void testParameterizedTypeReference() {
     try {
       StringConcatenation _builder = new StringConcatenation();

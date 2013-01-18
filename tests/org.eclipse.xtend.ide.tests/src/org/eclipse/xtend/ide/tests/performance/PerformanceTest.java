@@ -22,9 +22,6 @@ import org.eclipse.ui.texteditor.MarkerUtilities;
 import org.eclipse.xtend.ide.tests.AbstractXtendUITestCase;
 import org.eclipse.xtend.ide.tests.WorkbenchTestHelper;
 import org.eclipse.xtext.junit4.internal.StopWatchRule;
-import org.eclipse.xtext.util.internal.StopWatches;
-import org.junit.After;
-import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 
@@ -67,6 +64,36 @@ Task 'resolve typeParams' took 45ms (1600 measurements).
 Task 'resolve binding' took 615ms (305 measurements).
 Task 'secondary (i.e. Macros) JVM Model inference' took 3ms (500 measurements).
 Task 'validation' took 18758ms (250 measurements).
+
+2013-01-18 / Sebastian - access restriction based on index query
+
+Task 'build' took 38074ms (7 measurements).
+Task 'parsing' took 1460ms (200 measurements).
+Task 'primary JVM Model inference' took 1615ms (400 measurements).
+Task '[macros] findActiveAnnotations' took 791ms (400 measurements).
+Task 'Crosslink resolution' took 22793ms (47000 measurements).
+Task 'resolve param names' took 101ms (4 measurements).
+Task 'resolve annotations' took 128ms (6348 measurements).
+Task 'resolve members' took 929ms (688 measurements).
+Task 'resolve typeParams' took 26ms (1208 measurements).
+Task 'resolve binding' took 237ms (240 measurements).
+Task 'secondary (i.e. Macros) JVM Model inference' took 2ms (400 measurements).
+Task 'validation' took 10002ms (200 measurements).
+
+2013-01-18 / Sebastian - access restriction based on IClasspathEntry
+
+Task 'build' took 33002ms (8 measurements).
+Task 'parsing' took 1361ms (200 measurements).
+Task 'primary JVM Model inference' took 1507ms (400 measurements).
+Task '[macros] findActiveAnnotations' took 736ms (400 measurements).
+Task 'Crosslink resolution' took 22774ms (47000 measurements).
+Task 'resolve param names' took 154ms (4 measurements).
+Task 'resolve annotations' took 108ms (6348 measurements).
+Task 'resolve members' took 931ms (688 measurements).
+Task 'resolve typeParams' took 22ms (1208 measurements).
+Task 'resolve binding' took 252ms (240 measurements).
+Task 'secondary (i.e. Macros) JVM Model inference' took 3ms (400 measurements).
+Task 'validation' took 5203ms (200 measurements).
 
  */
 
