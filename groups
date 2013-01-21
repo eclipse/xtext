@@ -1,0 +1,4 @@
+# UUID                                  	Group Name
+#
+e667efa4d7e88410dd42728155ab14051e894019	Administrators
+ldap:cn=modeling.tmf.xtext,ou=group,dc=eclipse,dc=org	ldap/modeling.tmf.xtext
