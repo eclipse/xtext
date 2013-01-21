@@ -2526,7 +2526,6 @@ abstract class AbstractXtendCompilerTest extends AbstractXtendTestCase {
 			/**
 			 * javadoc
 			 */
-
 			public class Bar {
 			  public int foo() {
 			    throw new UnsupportedOperationException("foo is not implemented");
@@ -2534,6 +2533,77 @@ abstract class AbstractXtendCompilerTest extends AbstractXtendTestCase {
 			}
         ''', generatorConfig)
     }
+    @Test
+    def compileWithConfiguration_2(){
+	val generatorConfig = generatorConfigProvider.get(null)
+	generatorConfig.setGenerateSyntheticSuppressWarnings(true)
+	generatorConfig.setGenerateExpressions(false)
+        assertCompilesTo(
+        '''
+			package foo
+
+			/**
+			 * javadoc
+			 */
+			@SuppressWarnings("unused")
+			class Bar {
+				def foo(){
+					1 + 1
+				}
+			}
+        ''',
+        '''
+			package foo;
+
+			/**
+			 * javadoc
+			 */
+			@SuppressWarnings("all")
+			public class Bar {
+			  public int foo() {
+			    throw new UnsupportedOperationException("foo is not implemented");
+			  }
+			}
+        ''', generatorConfig)
+    }
+
+    @Test
+    def compileWithConfiguration_3(){
+	val generatorConfig = generatorConfigProvider.get(null)
+	generatorConfig.setGenerateSyntheticSuppressWarnings(true)
+	generatorConfig.setGenerateExpressions(false)
+        assertCompilesTo(
+        '''
+			package foo
+
+			/**
+			 * javadoc
+			 */
+			@Deprecated
+			@SuppressWarnings("unused")
+			class Bar {
+				def foo(){
+					1 + 1
+				}
+			}
+        ''',
+        '''
+			package foo;
+
+			/**
+			 * javadoc
+			 */
+			@Deprecated
+			@SuppressWarnings("all")
+			public class Bar {
+			  public int foo() {
+			    throw new UnsupportedOperationException("foo is not implemented");
+			  }
+			}
+        ''', generatorConfig)
+    }
+
+
 
     @Test@Ignore
     def compileProperty(){

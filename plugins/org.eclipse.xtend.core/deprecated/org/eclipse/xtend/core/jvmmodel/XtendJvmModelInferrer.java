@@ -61,7 +61,6 @@ import org.eclipse.xtext.common.types.JvmGenericArrayTypeReference;
 import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmParameterizedTypeReference;
-import org.eclipse.xtext.common.types.JvmStringAnnotationValue;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeConstraint;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
@@ -261,16 +260,6 @@ public class XtendJvmModelInferrer implements IJvmModelInferrer {
 		inferredJvmType.setAbstract(source.isAbstract());
 		translateAnnotationsTo(source.getAnnotations(), inferredJvmType);
 		boolean isDataObject = hasAnnotation(source, Data.class);
-		JvmAnnotationType annotation = (JvmAnnotationType) typeReferences.findDeclaredType(SuppressWarnings.class,
-				source);
-		if (annotation != null && !hasAnnotation(source, SuppressWarnings.class)) {
-			JvmAnnotationReference suppressWarnings = typesFactory.createJvmAnnotationReference();
-			suppressWarnings.setAnnotation(annotation);
-			JvmStringAnnotationValue annotationValue = typesFactory.createJvmStringAnnotationValue();
-			annotationValue.getValues().add("all");
-			suppressWarnings.getValues().add(annotationValue);
-			inferredJvmType.getAnnotations().add(suppressWarnings);
-		}
 		if (source.getExtends() == null) {
 			JvmTypeReference typeRefToObject = typeReferences.getTypeForName(Object.class, source);
 			if (typeRefToObject != null)
