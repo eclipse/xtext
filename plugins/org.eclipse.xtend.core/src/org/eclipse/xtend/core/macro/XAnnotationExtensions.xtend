@@ -60,7 +60,9 @@ class XAnnotationExtensions {
 					val triple = encoder.decode(eResource, uri.fragment)
 					val candidates = linkingService.getLinkedObjects(triple.first, triple.second, triple.third)
 					if (!candidates.isEmpty) {
-						return (candidates.head as JvmAnnotationType).isActiveAnnotation
+						val head = candidates.head
+						if (head instanceof JvmAnnotationType)
+							return (head as JvmAnnotationType).isActiveAnnotation
 					}
 				}
 			}
