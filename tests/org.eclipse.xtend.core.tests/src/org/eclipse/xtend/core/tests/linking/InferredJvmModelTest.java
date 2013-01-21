@@ -11,11 +11,13 @@ import static com.google.common.collect.Iterables.*;
 import static org.eclipse.xtext.util.Strings.*;
 
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.ENamedElement;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EStructuralFeature;
+import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtend.core.jvmmodel.IXtendJvmAssociations;
 import org.eclipse.xtend.core.tests.AbstractXtendTestCase;
 import org.eclipse.xtend.core.xtend.XtendClass;
@@ -35,6 +37,8 @@ import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.JvmUpperBound;
 import org.eclipse.xtext.common.types.JvmVisibility;
+import org.eclipse.xtext.resource.XtextResourceSet;
+import org.eclipse.xtext.util.StringInputStream;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.junit.Test;
 
@@ -727,6 +731,17 @@ public class InferredJvmModelTest extends AbstractXtendTestCase {
 		XtendFunction xtendFunction = (XtendFunction) ((XtendClass)xtendFile.getXtendTypes().get(0)).getMembers().get(0);
 		assertEquals("java.util.List<S>", xtendFunction.getReturnType().getIdentifier());
 	}
+
+	@Test
+	public void test_No_Exception_bug395377() throws Exception {
+		String content = "@Data class Foo {  String extension }";
+		XtextResourceSet set = getResourceSet();
+		String fileName = getFileName(content);
+		Resource resource = set.createResource(URI.createURI(fileName + ".xtend"));
+		resource.load(new StringInputStream(content), null);
+		XtendFile file = (XtendFile) resource.getContents().get(0);
+	getInferredType(file);
+    }
 
 	protected JvmGenericType getInferredType(XtendFile xtendFile) {
 		assertEquals(2, xtendFile.eResource().getContents().size());

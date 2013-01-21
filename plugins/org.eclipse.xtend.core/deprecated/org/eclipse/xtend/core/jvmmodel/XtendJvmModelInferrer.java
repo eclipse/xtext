@@ -669,16 +669,18 @@ public class XtendJvmModelInferrer implements IJvmModelInferrer {
 			if (isProperty && !field.isStatic()) {
 				field.setSimpleName("_"+computeFieldName);
 				final JvmOperation getter = jvmTypesBuilder.toGetter(source, computeFieldName, field.getSimpleName(), field.getType());
-				typeExtensions.setSynthetic(getter, true);
-				jvmTypesBuilder.setDocumentation(getter, jvmTypesBuilder.getDocumentation(source));
-				if (getter != null && !hasMethod((XtendClass)source.eContainer(), getter.getSimpleName(), getter.getParameters()))
+				if (getter != null && !hasMethod((XtendClass)source.eContainer(), getter.getSimpleName(), getter.getParameters())){
+					typeExtensions.setSynthetic(getter, true);
+					jvmTypesBuilder.setDocumentation(getter, jvmTypesBuilder.getDocumentation(source));
 					container.getMembers().add( getter);
+				}
 				if (!source.isFinal() && ! isDataObject) {
 					final JvmOperation setter = jvmTypesBuilder.toSetter(source, computeFieldName, field.getSimpleName(), field.getType());
-					typeExtensions.setSynthetic(setter, true);
-					jvmTypesBuilder.setDocumentation(setter, jvmTypesBuilder.getDocumentation(source));
-					if (setter != null && !hasMethod((XtendClass)source.eContainer(), setter.getSimpleName(), setter.getParameters()))
+					if (setter != null && !hasMethod((XtendClass)source.eContainer(), setter.getSimpleName(), setter.getParameters())){
+						typeExtensions.setSynthetic(setter, true);
+						jvmTypesBuilder.setDocumentation(setter, jvmTypesBuilder.getDocumentation(source));
 						container.getMembers().add( setter);
+					}
 				}
 			}
 			jvmTypesBuilder.setDocumentation(field, jvmTypesBuilder.getDocumentation(source));
