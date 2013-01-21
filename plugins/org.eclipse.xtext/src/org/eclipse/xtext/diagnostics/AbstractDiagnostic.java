@@ -24,11 +24,17 @@ public abstract class AbstractDiagnostic implements Diagnostic {
 	public abstract String[] getData();
 
 	public int getLength() {
-		return getNode().getLength();
+		INode node = getNode();
+		if (node != null)
+			return node.getLength();
+		return 1;
 	}
 
 	public int getOffset() {
-		return getNode().getOffset();
+		INode node = getNode();
+		if (node != null)
+			return node.getOffset();
+		return 0;
 	}
 
 	public int getColumn() {
@@ -36,7 +42,10 @@ public abstract class AbstractDiagnostic implements Diagnostic {
 	}
 
 	public int getLine() {
-		return getNode().getStartLine();
+		INode node = getNode();
+		if (node != null)
+			return node.getStartLine();
+		return -1;
 	}
 
 	public String getLocation() {
