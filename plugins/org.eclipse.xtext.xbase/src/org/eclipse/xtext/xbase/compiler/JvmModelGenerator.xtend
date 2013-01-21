@@ -50,12 +50,15 @@ import org.eclipse.xtext.common.types.util.TypeReferences
 import org.eclipse.xtext.documentation.IEObjectDocumentationProvider
 import org.eclipse.xtext.documentation.IEObjectDocumentationProviderExtension
 import org.eclipse.xtext.documentation.IFileHeaderProvider
+import org.eclipse.xtext.documentation.IJavaDocTypeReferenceProvider
 import org.eclipse.xtext.generator.IFileSystemAccess
 import org.eclipse.xtext.generator.IGenerator
 import org.eclipse.xtext.generator.trace.ITraceURIConverter
 import org.eclipse.xtext.generator.trace.LocationData
+import org.eclipse.xtext.naming.IQualifiedNameConverter
 import org.eclipse.xtext.nodemodel.INode
 import org.eclipse.xtext.resource.ILocationInFileProvider
+import org.eclipse.xtext.scoping.IScopeProvider
 import org.eclipse.xtext.util.ITextRegionWithLineInformation
 import org.eclipse.xtext.util.Strings
 import org.eclipse.xtext.util.TextRegionWithLineInformation
@@ -68,7 +71,10 @@ import org.eclipse.xtext.xbase.jvmmodel.IJvmModelAssociations
 import org.eclipse.xtext.xbase.jvmmodel.ILogicalContainerProvider
 import org.eclipse.xtext.xbase.jvmmodel.JvmTypeExtensions
 
+import static org.eclipse.xtext.common.types.TypesPackage$Literals.*
 import static org.eclipse.xtext.util.Strings.*
+import org.eclipse.emf.ecore.util.EcoreUtil
+import org.eclipse.xtext.nodemodel.util.NodeModelUtils
 
 /**
  * A generator implementation that processes the 
@@ -92,6 +98,9 @@ class JvmModelGenerator implements IGenerator {
 	@Inject JavaKeywords keywords
 	@Inject IGeneratorConfigProvider generatorConfigProvider
 	@Inject ITraceURIConverter converter
+	@Inject IJavaDocTypeReferenceProvider javaDocTypeReferenceProvider
+	@Inject IScopeProvider scopeProvider
+	@Inject IQualifiedNameConverter qualifiedNameConverter
 	
 	override void doGenerate(Resource input, IFileSystemAccess fsa) {
 		for (obj : input.contents) {
@@ -559,6 +568,7 @@ class JvmModelGenerator implements IGenerator {
 			val sourceElements = jvmModelAssociations.getSourceElements(it)
 			if (sourceElements.size == 1 && documentationProvider instanceof IEObjectDocumentationProviderExtension) {
 				val documentationNodes = (documentationProvider as IEObjectDocumentationProviderExtension).getDocumentationNodes(sourceElements.head)
+				addJavaDocImports(appendable, documentationNodes)
 				generateDocumentation(adapter.documentation, documentationNodes, appendable, config)
 			} else {
 				generateDocumentation(adapter.documentation, emptyList, appendable, config)
@@ -566,6 +576,43 @@ class JvmModelGenerator implements IGenerator {
 		}
 	} 
 	
+	def addJavaDocImports(EObject it, ITreeAppendable appendable,List<INode> documentationNodes) {
+		for(node : documentationNodes){
+			for(region : javaDocTypeReferenceProvider.computeTypeRefRegions(node)) {
+				val text = region.text
+				if(text != null && text.length > 0){
+					val fqn = qualifiedNameConverter.toQualifiedName(text)
+					val context = NodeModelUtils::findActualSemanticObjectFor(node)
+					if(fqn.segmentCount == 1 && context != null){
+						val scope = scopeProvider.getScope(context, JVM_PARAMETERIZED_TYPE_REFERENCE__TYPE)
+						val candidate = scope.getSingleElement(fqn)
+						if(candidate != null) {
+							val jvmType = 	(
+											if(candidate.EObjectOrProxy.eIsProxy)
+												EcoreUtil::resolve(candidate.EObjectOrProxy, context)
+											else
+												candidate.EObjectOrProxy
+											) as JvmType
+							if(!jvmType.eIsProxy) {
+								val importManager = getImportManager(appendable)
+								importManager.addImportFor(jvmType)
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+
+	def getImportManager(ITreeAppendable appendable){
+			val stateField = appendable.getClass.getDeclaredField("state")
+			stateField.setAccessible(true)
+			val stateValue = stateField.get(appendable)
+			val importManagerField = stateValue.getClass.getDeclaredField("importManager")
+			importManagerField.setAccessible(true)
+			importManagerField.get(stateValue) as ImportManager
+	}
+
 	def protected generateDocumentation(String text, List<INode> documentationNodes, ITreeAppendable appendable, GeneratorConfig config) {
 		val doc = '''/**''' as StringConcatenation
 			doc.newLine
