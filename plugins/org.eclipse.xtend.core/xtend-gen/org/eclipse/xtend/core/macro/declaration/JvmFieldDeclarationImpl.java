@@ -26,6 +26,11 @@ public class JvmFieldDeclarationImpl extends JvmMemberDeclarationImpl<JvmField> 
     throw _unsupportedOperationException;
   }
   
+  public void setInitializer(final Expression initializer) {
+    UnsupportedOperationException _unsupportedOperationException = new UnsupportedOperationException("Auto-Jvm function stub");
+    throw _unsupportedOperationException;
+  }
+  
   public boolean isFinal() {
     JvmField _delegate = this.getDelegate();
     boolean _isFinal = _delegate.isFinal();
@@ -54,11 +59,6 @@ public class JvmFieldDeclarationImpl extends JvmMemberDeclarationImpl<JvmField> 
   public void setFinal(final boolean isFinal) {
     JvmField _delegate = this.getDelegate();
     _delegate.setFinal(isFinal);
-  }
-  
-  public void setInitializer(final Expression initializer) {
-    UnsupportedOperationException _unsupportedOperationException = new UnsupportedOperationException("Auto-Jvm function stub");
-    throw _unsupportedOperationException;
   }
   
   public void setStatic(final boolean isStatic) {

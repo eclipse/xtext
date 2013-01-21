@@ -11,6 +11,7 @@ import java.util.List;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.xtend.core.macro.declaration.CompilationUnitImpl;
 import org.eclipse.xtend.core.macro.declaration.JvmMemberDeclarationImpl;
+import org.eclipse.xtend.lib.macro.CompilationContext;
 import org.eclipse.xtend.lib.macro.declaration.MutableExecutableDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.MutableParameterDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.MutableTypeParameterDeclaration;
@@ -20,11 +21,15 @@ import org.eclipse.xtend.lib.macro.expression.Expression;
 import org.eclipse.xtend.lib.macro.type.TypeReference;
 import org.eclipse.xtext.common.types.JvmExecutable;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
+import org.eclipse.xtext.common.types.JvmTypeConstraint;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.JvmTypeParameterDeclarator;
 import org.eclipse.xtext.common.types.JvmTypeReference;
+import org.eclipse.xtext.common.types.JvmUpperBound;
+import org.eclipse.xtext.common.types.TypesFactory;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.ListExtensions;
+import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 
 @SuppressWarnings("all")
 public abstract class JvmExecutableDeclarationImpl<T extends JvmExecutable> extends JvmMemberDeclarationImpl<T> implements MutableExecutableDeclaration {
@@ -46,11 +51,6 @@ public abstract class JvmExecutableDeclarationImpl<T extends JvmExecutable> exte
     JvmExecutable _delegate = this.getDelegate();
     boolean _isVarArgs = _delegate.isVarArgs();
     return _isVarArgs;
-  }
-  
-  public Expression getBody() {
-    UnsupportedOperationException _unsupportedOperationException = new UnsupportedOperationException("Auto-Jvm function stub");
-    throw _unsupportedOperationException;
   }
   
   public List<MutableParameterDeclaration> getParameters() {
@@ -81,14 +81,30 @@ public abstract class JvmExecutableDeclarationImpl<T extends JvmExecutable> exte
     return _map;
   }
   
+  public Expression getBody() {
+    UnsupportedOperationException _unsupportedOperationException = new UnsupportedOperationException("Auto-Jvm function stub");
+    throw _unsupportedOperationException;
+  }
+  
   public void setBody(final Expression body) {
     UnsupportedOperationException _unsupportedOperationException = new UnsupportedOperationException("Auto-Jvm function stub");
     throw _unsupportedOperationException;
   }
   
-  public void setExceptions(final List<TypeReference> exceptions) {
-    UnsupportedOperationException _unsupportedOperationException = new UnsupportedOperationException("Auto-Jvm function stub");
-    throw _unsupportedOperationException;
+  public void setExceptions(final TypeReference... exceptions) {
+    JvmExecutable _delegate = this.getDelegate();
+    EList<JvmTypeReference> _exceptions = _delegate.getExceptions();
+    _exceptions.clear();
+    for (final TypeReference exceptionType : exceptions) {
+      boolean _notEquals = ObjectExtensions.operator_notEquals(exceptionType, null);
+      if (_notEquals) {
+        JvmExecutable _delegate_1 = this.getDelegate();
+        EList<JvmTypeReference> _exceptions_1 = _delegate_1.getExceptions();
+        CompilationUnitImpl _compilationUnit = this.getCompilationUnit();
+        JvmTypeReference _jvmTypeReference = _compilationUnit.toJvmTypeReference(exceptionType);
+        _exceptions_1.add(_jvmTypeReference);
+      }
+    }
   }
   
   public void setVarArgs(final boolean isVarArgs) {
@@ -96,18 +112,44 @@ public abstract class JvmExecutableDeclarationImpl<T extends JvmExecutable> exte
     _delegate.setVarArgs(isVarArgs);
   }
   
-  public void addTypeParameter(final MutableTypeParameterDeclaration typeParameter) {
-    UnsupportedOperationException _unsupportedOperationException = new UnsupportedOperationException("Auto-Jvm function stub");
-    throw _unsupportedOperationException;
+  public MutableTypeParameterDeclaration addTypeParameter(final String name, final TypeReference[] upperBounds) {
+    final JvmTypeParameter param = TypesFactory.eINSTANCE.createJvmTypeParameter();
+    param.setName(name);
+    JvmTypeParameterDeclarator _delegate = this.getDelegate();
+    EList<JvmTypeParameter> _typeParameters = _delegate.getTypeParameters();
+    _typeParameters.add(param);
+    for (final TypeReference upper : upperBounds) {
+      {
+        CompilationUnitImpl _compilationUnit = this.getCompilationUnit();
+        final JvmTypeReference typeRef = _compilationUnit.toJvmTypeReference(upper);
+        final JvmUpperBound jvmUpperBound = TypesFactory.eINSTANCE.createJvmUpperBound();
+        jvmUpperBound.setTypeReference(typeRef);
+        EList<JvmTypeConstraint> _constraints = param.getConstraints();
+        _constraints.add(jvmUpperBound);
+      }
+    }
+    CompilationUnitImpl _compilationUnit = this.getCompilationUnit();
+    TypeParameterDeclaration _typeParameterDeclaration = _compilationUnit.toTypeParameterDeclaration(param);
+    return ((MutableTypeParameterDeclaration) _typeParameterDeclaration);
   }
   
-  public void addTypeParameter(final int index, final MutableTypeParameterDeclaration typeParameter) {
-    UnsupportedOperationException _unsupportedOperationException = new UnsupportedOperationException("Auto-Jvm function stub");
-    throw _unsupportedOperationException;
+  public void setBody(final Function1<? super CompilationContext,? extends CharSequence> compilationStrategy) {
+    CompilationUnitImpl _compilationUnit = this.getCompilationUnit();
+    JvmExecutable _delegate = this.getDelegate();
+    _compilationUnit.setCompilationStrategy(_delegate, compilationStrategy);
   }
   
-  public void removeTypeParameter(final MutableTypeParameterDeclaration typeParameter) {
-    UnsupportedOperationException _unsupportedOperationException = new UnsupportedOperationException("Auto-Jvm function stub");
-    throw _unsupportedOperationException;
+  public MutableParameterDeclaration addParameter(final String name, final TypeReference type) {
+    final JvmFormalParameter param = TypesFactory.eINSTANCE.createJvmFormalParameter();
+    param.setName(name);
+    CompilationUnitImpl _compilationUnit = this.getCompilationUnit();
+    JvmTypeReference _jvmTypeReference = _compilationUnit.toJvmTypeReference(type);
+    param.setParameterType(_jvmTypeReference);
+    JvmExecutable _delegate = this.getDelegate();
+    EList<JvmFormalParameter> _parameters = _delegate.getParameters();
+    _parameters.add(param);
+    CompilationUnitImpl _compilationUnit_1 = this.getCompilationUnit();
+    ParameterDeclaration _parameterDeclaration = _compilationUnit_1.toParameterDeclaration(param);
+    return ((MutableParameterDeclaration) _parameterDeclaration);
   }
 }

@@ -61,6 +61,7 @@ public class ActiveAnnotationContextProvider {
             public List<ActiveAnnotationContext> apply() {
               final Map<JvmAnnotationType,ActiveAnnotationContext> annotatedElements = CollectionLiterals.<JvmAnnotationType, ActiveAnnotationContext>newHashMap();
               final CompilationUnitImpl compilationUnit = ActiveAnnotationContextProvider.this.compilationUnitProvider.get();
+              compilationUnit.setXtendFile(file);
               final Procedure1<Pair<JvmAnnotationType,XAnnotation>> _function = new Procedure1<Pair<JvmAnnotationType,XAnnotation>>() {
                   public void apply(final Pair<JvmAnnotationType,XAnnotation> it) {
                     JvmAnnotationType _key = it.getKey();

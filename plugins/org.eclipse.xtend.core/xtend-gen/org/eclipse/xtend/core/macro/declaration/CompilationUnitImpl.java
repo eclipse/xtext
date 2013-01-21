@@ -17,12 +17,14 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.xtend.core.jvmmodel.IXtendJvmAssociations;
 import org.eclipse.xtend.core.macro.CompilationContextImpl;
 import org.eclipse.xtend.core.macro.declaration.JvmClassDeclarationImpl;
 import org.eclipse.xtend.core.macro.declaration.JvmConstructorDeclarationImpl;
 import org.eclipse.xtend.core.macro.declaration.JvmFieldDeclarationImpl;
 import org.eclipse.xtend.core.macro.declaration.JvmMethodDeclarationImpl;
 import org.eclipse.xtend.core.macro.declaration.JvmParameterDeclarationImpl;
+import org.eclipse.xtend.core.macro.declaration.JvmTypeDeclarationImpl;
 import org.eclipse.xtend.core.macro.declaration.JvmTypeParameterDeclarationImpl;
 import org.eclipse.xtend.core.macro.declaration.PrimitiveTypeImpl;
 import org.eclipse.xtend.core.macro.declaration.TypeReferenceImpl;
@@ -51,6 +53,7 @@ import org.eclipse.xtend.lib.macro.declaration.MemberDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.MutableClassDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.MutableTypeDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.ParameterDeclaration;
+import org.eclipse.xtend.lib.macro.declaration.PrimitiveType.Kind;
 import org.eclipse.xtend.lib.macro.declaration.Type;
 import org.eclipse.xtend.lib.macro.declaration.TypeDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.TypeParameterDeclaration;
@@ -58,6 +61,7 @@ import org.eclipse.xtend.lib.macro.declaration.Visibility;
 import org.eclipse.xtend.lib.macro.type.TypeReference;
 import org.eclipse.xtext.common.types.JvmAnnotationType;
 import org.eclipse.xtext.common.types.JvmAnyTypeReference;
+import org.eclipse.xtext.common.types.JvmComponentType;
 import org.eclipse.xtext.common.types.JvmConstructor;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmEnumerationType;
@@ -166,6 +170,9 @@ public class CompilationUnitImpl implements CompilationUnit, TypeReferenceProvid
   
   @Inject
   private TypeReferenceSerializer2 typeRefSerializer;
+  
+  @Inject
+  private IXtendJvmAssociations associations;
   
   private Map<EObject,Object> identityCache = new Function0<Map<EObject,Object>>() {
     public Map<EObject,Object> apply() {
@@ -695,6 +702,134 @@ public class CompilationUnitImpl implements CompilationUnit, TypeReferenceProvid
     {
       XtendFile _xtendFile = this.getXtendFile();
       final JvmType type = this.typeReferences.findDeclaredType(typeName, _xtendFile);
+      boolean _equals = ObjectExtensions.operator_equals(type, null);
+      if (_equals) {
+        return null;
+      }
+      final Function1<TypeReference,JvmTypeReference> _function = new Function1<TypeReference,JvmTypeReference>() {
+          public JvmTypeReference apply(final TypeReference it) {
+            JvmTypeReference _jvmTypeReference = CompilationUnitImpl.this.toJvmTypeReference(it);
+            return _jvmTypeReference;
+          }
+        };
+      List<JvmTypeReference> _map = ListExtensions.<TypeReference, JvmTypeReference>map(((List<TypeReference>)Conversions.doWrapArray(typeArguments)), _function);
+      JvmParameterizedTypeReference _createTypeRef = this.typeReferences.createTypeRef(type, ((JvmTypeReference[]) ((JvmTypeReference[])Conversions.unwrapArray(_map, JvmTypeReference.class))));
+      TypeReference _typeReference = this.toTypeReference(_createTypeRef);
+      _xblockexpression = (_typeReference);
+    }
+    return _xblockexpression;
+  }
+  
+  public TypeReference newTypeReference(final Type typeDeclaration, final TypeReference... typeArguments) {
+    TypeReference _xblockexpression = null;
+    {
+      JvmComponentType _switchResult = null;
+      boolean _matched = false;
+      if (!_matched) {
+        if (typeDeclaration instanceof JvmTypeDeclarationImpl) {
+          final JvmTypeDeclarationImpl<? extends JvmDeclaredType> _jvmTypeDeclarationImpl = (JvmTypeDeclarationImpl<? extends JvmDeclaredType>)typeDeclaration;
+          _matched=true;
+          JvmDeclaredType _delegate = _jvmTypeDeclarationImpl.getDelegate();
+          _switchResult = _delegate;
+        }
+      }
+      if (!_matched) {
+        if (typeDeclaration instanceof XtendTypeDeclarationImpl) {
+          final XtendTypeDeclarationImpl<? extends XtendTypeDeclaration> _xtendTypeDeclarationImpl = (XtendTypeDeclarationImpl<? extends XtendTypeDeclaration>)typeDeclaration;
+          _matched=true;
+          XtendTypeDeclaration _delegate = _xtendTypeDeclarationImpl.getDelegate();
+          JvmDeclaredType _inferredType = this.associations.getInferredType(_delegate);
+          _switchResult = _inferredType;
+        }
+      }
+      if (!_matched) {
+        if (typeDeclaration instanceof JvmTypeParameterDeclarationImpl) {
+          final JvmTypeParameterDeclarationImpl _jvmTypeParameterDeclarationImpl = (JvmTypeParameterDeclarationImpl)typeDeclaration;
+          _matched=true;
+          JvmTypeParameter _delegate = _jvmTypeParameterDeclarationImpl.getDelegate();
+          _switchResult = _delegate;
+        }
+      }
+      if (!_matched) {
+        if (typeDeclaration instanceof PrimitiveTypeImpl) {
+          final PrimitiveTypeImpl _primitiveTypeImpl = (PrimitiveTypeImpl)typeDeclaration;
+          _matched=true;
+          TypeReference _switchResult_1 = null;
+          Kind _kind = _primitiveTypeImpl.getKind();
+          final Kind _switchValue = _kind;
+          boolean _matched_1 = false;
+          if (!_matched_1) {
+            if (Objects.equal(_switchValue,Kind.BOOLEAN)) {
+              _matched_1=true;
+              TypeReference _primitiveBoolean = this.getPrimitiveBoolean();
+              _switchResult_1 = _primitiveBoolean;
+            }
+          }
+          if (!_matched_1) {
+            if (Objects.equal(_switchValue,Kind.BYTE)) {
+              _matched_1=true;
+              TypeReference _primitiveByte = this.getPrimitiveByte();
+              _switchResult_1 = _primitiveByte;
+            }
+          }
+          if (!_matched_1) {
+            if (Objects.equal(_switchValue,Kind.CHAR)) {
+              _matched_1=true;
+              TypeReference _primitiveChar = this.getPrimitiveChar();
+              _switchResult_1 = _primitiveChar;
+            }
+          }
+          if (!_matched_1) {
+            if (Objects.equal(_switchValue,Kind.DOUBLE)) {
+              _matched_1=true;
+              TypeReference _primitiveDouble = this.getPrimitiveDouble();
+              _switchResult_1 = _primitiveDouble;
+            }
+          }
+          if (!_matched_1) {
+            if (Objects.equal(_switchValue,Kind.FLOAT)) {
+              _matched_1=true;
+              TypeReference _primitiveFloat = this.getPrimitiveFloat();
+              _switchResult_1 = _primitiveFloat;
+            }
+          }
+          if (!_matched_1) {
+            if (Objects.equal(_switchValue,Kind.INT)) {
+              _matched_1=true;
+              TypeReference _primitiveInt = this.getPrimitiveInt();
+              _switchResult_1 = _primitiveInt;
+            }
+          }
+          if (!_matched_1) {
+            if (Objects.equal(_switchValue,Kind.LONG)) {
+              _matched_1=true;
+              TypeReference _primitiveLong = this.getPrimitiveLong();
+              _switchResult_1 = _primitiveLong;
+            }
+          }
+          if (!_matched_1) {
+            if (Objects.equal(_switchValue,Kind.SHORT)) {
+              _matched_1=true;
+              TypeReference _primitiveShort = this.getPrimitiveShort();
+              _switchResult_1 = _primitiveShort;
+            }
+          }
+          return _switchResult_1;
+        }
+      }
+      if (!_matched) {
+        if (typeDeclaration instanceof VoidTypeImpl) {
+          final VoidTypeImpl _voidTypeImpl = (VoidTypeImpl)typeDeclaration;
+          _matched=true;
+          return this.getPrimitiveVoid();
+        }
+      }
+      if (!_matched) {
+        String _plus = ("couln\'t construct type refernce for type " + typeDeclaration);
+        IllegalArgumentException _illegalArgumentException = new IllegalArgumentException(_plus);
+        throw _illegalArgumentException;
+      }
+      final JvmComponentType type = _switchResult;
       boolean _equals = ObjectExtensions.operator_equals(type, null);
       if (_equals) {
         return null;

@@ -12,6 +12,7 @@ import java.util.List;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.xtend.core.macro.declaration.CompilationUnitImpl;
 import org.eclipse.xtend.core.macro.declaration.JvmTypeDeclarationImpl;
+import org.eclipse.xtend.lib.macro.TypeReferenceProvider;
 import org.eclipse.xtend.lib.macro.declaration.MemberDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.MutableClassDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.MutableFieldDeclaration;
@@ -27,6 +28,7 @@ import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.JvmTypeReference;
+import org.eclipse.xtext.common.types.JvmVisibility;
 import org.eclipse.xtext.common.types.TypesFactory;
 import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
@@ -184,12 +186,19 @@ public class JvmClassDeclarationImpl extends JvmTypeDeclarationImpl<JvmGenericTy
   
   public void addMethod(final String name, final Procedure1<MutableMethodDeclaration> initializer) {
     final JvmOperation newMethod = TypesFactory.eINSTANCE.createJvmOperation();
+    newMethod.setVisibility(JvmVisibility.PUBLIC);
     newMethod.setSimpleName(name);
+    CompilationUnitImpl _compilationUnit = this.getCompilationUnit();
+    CompilationUnitImpl _compilationUnit_1 = this.getCompilationUnit();
+    TypeReferenceProvider _typeReferenceProvider = _compilationUnit_1.getTypeReferenceProvider();
+    TypeReference _primitiveVoid = _typeReferenceProvider.getPrimitiveVoid();
+    JvmTypeReference _jvmTypeReference = _compilationUnit.toJvmTypeReference(_primitiveVoid);
+    newMethod.setReturnType(_jvmTypeReference);
     JvmGenericType _delegate = this.getDelegate();
     EList<JvmMember> _members = _delegate.getMembers();
     _members.add(newMethod);
-    CompilationUnitImpl _compilationUnit = this.getCompilationUnit();
-    MemberDeclaration _memberDeclaration = _compilationUnit.toMemberDeclaration(newMethod);
+    CompilationUnitImpl _compilationUnit_2 = this.getCompilationUnit();
+    MemberDeclaration _memberDeclaration = _compilationUnit_2.toMemberDeclaration(newMethod);
     initializer.apply(((MutableMethodDeclaration) _memberDeclaration));
   }
   
