@@ -3,7 +3,6 @@ package org.eclipse.xtend.core.tests.compiler;
 import com.google.inject.Inject;
 import java.util.List;
 import java.util.Set;
-import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.xtend.core.tests.AbstractXtendTestCase;
@@ -38,18 +37,22 @@ public class XtendResourceSetBasedResourceDescriptionsTest extends AbstractXtend
       _builder_1.append("package bar class ClassB { public foo.ClassA myField }");
       Pair<String,CharSequence> _mappedTo_1 = Pair.<String, CharSequence>of("bar/ClassB.xtend", _builder_1);
       final ResourceSet resourceSet = this.compiler.resourceSet(_mappedTo, _mappedTo_1);
-      EList<Resource> _resources = resourceSet.getResources();
-      Set<Resource> _set = IterableExtensions.<Resource>toSet(_resources);
-      for (final Resource res : _set) {
-        {
-          final List<Issue> issues = this.validator.validate(res, CheckMode.ALL, CancelIndicator.NullImpl);
-          String _string = issues.toString();
-          boolean _isEmpty = issues.isEmpty();
-          Assert.assertTrue(_string, _isEmpty);
-        }
-      }
+      final List<? extends Resource> resources = resourceSet.getResources();
+      this.doStuff(resources);
     } catch (Exception _e) {
       throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  public void doStuff(final List<? extends Resource> resources) {
+    Set<? extends Resource> _set = IterableExtensions.toSet(resources);
+    for (final Resource res : _set) {
+      {
+        final List<Issue> issues = this.validator.validate(res, CheckMode.ALL, CancelIndicator.NullImpl);
+        String _string = issues.toString();
+        boolean _isEmpty = issues.isEmpty();
+        Assert.assertTrue(_string, _isEmpty);
+      }
     }
   }
   
@@ -63,8 +66,8 @@ public class XtendResourceSetBasedResourceDescriptionsTest extends AbstractXtend
       _builder_1.append("package bar class ClassB { public foo.ClassA myField }");
       Pair<String,CharSequence> _mappedTo_1 = Pair.<String, CharSequence>of("bar/ClassB.xtend", _builder_1);
       final ResourceSet resourceSet = this.compiler.unLoadedResourceSet(_mappedTo, _mappedTo_1);
-      EList<Resource> _resources = resourceSet.getResources();
-      Set<Resource> _set = IterableExtensions.<Resource>toSet(_resources);
+      final List<? extends Resource> resources = resourceSet.getResources();
+      Set<? extends Resource> _set = IterableExtensions.toSet(resources);
       for (final Resource res : _set) {
         {
           final List<Issue> issues = this.validator.validate(res, CheckMode.ALL, CancelIndicator.NullImpl);
@@ -88,8 +91,8 @@ public class XtendResourceSetBasedResourceDescriptionsTest extends AbstractXtend
       _builder_1.append("package bar class ClassB { public foo.ClassA myField }");
       Pair<String,CharSequence> _mappedTo_1 = Pair.<String, CharSequence>of("bar/ClassB.xtend", _builder_1);
       final ResourceSet resourceSet = this.compiler.unLoadedResourceSet(_mappedTo, _mappedTo_1);
-      EList<Resource> _resources = resourceSet.getResources();
-      Set<Resource> _set = IterableExtensions.<Resource>toSet(_resources);
+      final List<? extends Resource> resources = resourceSet.getResources();
+      Set<? extends Resource> _set = IterableExtensions.toSet(resources);
       for (final Resource res : _set) {
         {
           boolean _isLoaded = res.isLoaded();
