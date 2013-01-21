@@ -11,18 +11,19 @@ import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.xtext.common.types.JvmConstructor;
 import org.eclipse.xtext.xbase.XConstructorCall;
 import org.eclipse.xtext.xbase.typesystem.computation.IConstructorLinkingCandidate;
+import org.eclipse.xtext.xbase.typesystem.computation.ILinkingCandidate;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
 @NonNullByDefault
-public class NullConstructorLinkingCandidate extends AbstractNullLinkingCandidate<IConstructorLinkingCandidate> implements IConstructorLinkingCandidate {
+public class NullConstructorLinkingCandidate extends AbstractNullLinkingCandidate implements IConstructorLinkingCandidate {
 
 	public NullConstructorLinkingCandidate(XConstructorCall constructorCall) {
 		super(constructorCall);
 	}
 	
-	public IConstructorLinkingCandidate getPreferredCandidate(IConstructorLinkingCandidate other) {
+	public ILinkingCandidate getPreferredCandidate(ILinkingCandidate other) {
 		return other;
 	}
 

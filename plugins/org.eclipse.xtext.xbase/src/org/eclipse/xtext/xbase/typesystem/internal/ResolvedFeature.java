@@ -25,6 +25,7 @@ import org.eclipse.xtext.util.Wrapper;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.typesystem.computation.IFeatureLinkingCandidate;
+import org.eclipse.xtext.xbase.typesystem.computation.ILinkingCandidate;
 import org.eclipse.xtext.xbase.typesystem.computation.ITypeComputationState;
 import org.eclipse.xtext.xbase.typesystem.computation.SynonymTypesProvider;
 import org.eclipse.xtext.xbase.typesystem.conformance.ConformanceHint;
@@ -43,7 +44,7 @@ import com.google.common.collect.Lists;
  * @author Sebastian Zarnekow - Initial contribution and API
  */
 @NonNullByDefault
-public class ResolvedFeature extends AbstractResolvedReference<XAbstractFeatureCall, IFeatureLinkingCandidate> implements IFeatureLinkingCandidate {
+public class ResolvedFeature extends AbstractResolvedReference<XAbstractFeatureCall> implements IFeatureLinkingCandidate {
 
 	private FeatureLinkHelper helper;
 
@@ -53,7 +54,7 @@ public class ResolvedFeature extends AbstractResolvedReference<XAbstractFeatureC
 	}
 	
 	@Override
-	public IFeatureLinkingCandidate getPreferredCandidate(IFeatureLinkingCandidate other) {
+	public ILinkingCandidate getPreferredCandidate(ILinkingCandidate other) {
 		return this;
 	}
 

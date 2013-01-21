@@ -51,7 +51,7 @@ import com.google.common.collect.Lists;
  * TODO JavaDoc, toString
  */
 @NonNullByDefault
-public class FeatureLinkingCandidate extends AbstractPendingLinkingCandidate<XAbstractFeatureCall, IFeatureLinkingCandidate> implements IFeatureLinkingCandidate {
+public class FeatureLinkingCandidate extends AbstractPendingLinkingCandidate<XAbstractFeatureCall> implements IFeatureLinkingCandidate {
 
 	public FeatureLinkingCandidate(XAbstractFeatureCall featureCall, IIdentifiableElementDescription description,
 			ExpressionTypeComputationState state) {
@@ -243,7 +243,7 @@ public class FeatureLinkingCandidate extends AbstractPendingLinkingCandidate<XAb
 	}
 	
 	@Override
-	protected int compareByArityWith(AbstractPendingLinkingCandidate<?, ?> right) {
+	protected int compareByArityWith(AbstractPendingLinkingCandidate<?> right) {
 		int result = super.compareByArityWith(right);
 		if (result == 0) {
 			boolean isExecutable = getFeature() instanceof JvmExecutable;
@@ -269,7 +269,7 @@ public class FeatureLinkingCandidate extends AbstractPendingLinkingCandidate<XAb
 	}
 	
 	@Override
-	protected int compareByArgumentTypes(AbstractPendingLinkingCandidate<?, ?> right) {
+	protected int compareByArgumentTypes(AbstractPendingLinkingCandidate<?> right) {
 		int result = super.compareByArgumentTypes(right);
 		if (result != 0 || !(right instanceof FeatureLinkingCandidate))
 			return result;

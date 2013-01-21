@@ -38,7 +38,7 @@ import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
  * TODO JavaDoc, toString
  */
 @NonNullByDefault
-public interface ILinkingCandidate<Candidate extends ILinkingCandidate<Candidate>> {
+public interface ILinkingCandidate {
 
 	/**
 	 * Apply this candidate to the underlying model. This propagates
@@ -60,7 +60,7 @@ public interface ILinkingCandidate<Candidate extends ILinkingCandidate<Candidate
 	 */
 	boolean validate(IAcceptor<? super AbstractDiagnostic> result);
 	
-	Candidate getPreferredCandidate(Candidate other);
+	ILinkingCandidate getPreferredCandidate(ILinkingCandidate other);
 	
 	@Nullable JvmIdentifiableElement getFeature();
 	

@@ -311,7 +311,7 @@ public class XbaseTypeComputer implements ITypeComputer {
 
 	protected void _computeTypes(final XConstructorCall constructorCall, ITypeComputationState state) {
 		List<? extends IConstructorLinkingCandidate> candidates = state.getLinkingCandidates(constructorCall);
-		IConstructorLinkingCandidate best = getBestCandidate(candidates);
+		ILinkingCandidate best = getBestCandidate(candidates);
 		best.apply();
 	}
 	
@@ -582,14 +582,14 @@ public class XbaseTypeComputer implements ITypeComputer {
 	
 	protected void _computeTypes(final XAbstractFeatureCall featureCall, ITypeComputationState state) {
 		List<? extends IFeatureLinkingCandidate> candidates = state.getLinkingCandidates(featureCall);
-		IFeatureLinkingCandidate best = getBestCandidate(candidates);
+		ILinkingCandidate best = getBestCandidate(candidates);
 		best.apply();
 	}
 	
-	protected <Candidate extends ILinkingCandidate<Candidate>> Candidate getBestCandidate(List<? extends Candidate> candidates) {
-		Candidate result = candidates.get(0);
+	protected ILinkingCandidate getBestCandidate(List<? extends ILinkingCandidate> candidates) {
+		ILinkingCandidate result = candidates.get(0);
 		for(int i = 1; i < candidates.size(); i++) {
-			Candidate candidate = candidates.get(i);
+			ILinkingCandidate candidate = candidates.get(i);
 			result = result.getPreferredCandidate(candidate);
 		}
 		return result;
