@@ -147,8 +147,10 @@ public class XAnnotationExtensions {
             boolean _isEmpty = candidates.isEmpty();
             boolean _not = (!_isEmpty);
             if (_not) {
-              EObject _head = IterableExtensions.<EObject>head(candidates);
-              return this.isActiveAnnotation(((JvmAnnotationType) _head));
+              final EObject head = IterableExtensions.<EObject>head(candidates);
+              if ((head instanceof JvmAnnotationType)) {
+                return this.isActiveAnnotation(((JvmAnnotationType) head));
+              }
             }
           }
         }
