@@ -51,8 +51,10 @@ public class DefaultFoldingRegionProvider implements IFoldingRegionProvider {
 	@Inject
 	private ITokenTypeToPartitionTypeMapperExtension tokenTypeToPartitionTypeMapperExtension;
 
+	@Deprecated
 	public DefaultFoldingRegionProvider(ILocationInFileProvider locationInFileProvider) {
 		this.locationInFileProvider = locationInFileProvider;
+		this.tokenTypeToPartitionTypeMapperExtension = new TerminalsTokenTypeToPartitionMapper();
 	}
 
 	@Inject
