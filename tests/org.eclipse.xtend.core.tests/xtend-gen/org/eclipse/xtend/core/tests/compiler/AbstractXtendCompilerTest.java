@@ -5543,7 +5543,6 @@ public abstract class AbstractXtendCompilerTest extends AbstractXtendTestCase {
     _builder.append("\t");
     _builder.append("def doStuff(){}");
     _builder.newLine();
-    _builder.append("\t");
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
@@ -5632,7 +5631,6 @@ public abstract class AbstractXtendCompilerTest extends AbstractXtendTestCase {
     _builder.append("\t");
     _builder.append("def doStuff(ArrayList l){}");
     _builder.newLine();
-    _builder.append("\t");
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();

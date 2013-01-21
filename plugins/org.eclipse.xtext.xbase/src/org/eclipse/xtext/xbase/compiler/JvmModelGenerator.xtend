@@ -82,7 +82,7 @@ import org.eclipse.xtext.nodemodel.util.NodeModelUtils
  * and produces the respective java code.
  */
 class JvmModelGenerator implements IGenerator {
- 
+
 	@Inject extension ILogicalContainerProvider
 	@Inject extension TypeReferences 
 	@Inject extension TreeAppendableUtil
