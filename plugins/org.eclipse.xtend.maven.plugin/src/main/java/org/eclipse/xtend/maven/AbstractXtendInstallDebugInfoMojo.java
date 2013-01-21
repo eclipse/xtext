@@ -123,6 +123,8 @@ public abstract class AbstractXtendInstallDebugInfoMojo extends AbstractMojo {
 		String p = xtendAsPrimaryDebugSource ? "primary" : "secondary (via SMAP)";
 		int n = trace2class.size();
 		getLog().info("Installing Xtend files into " + n + " class files as " + p + " debug sources in: " + folder);
+		getLog().debug("xtendAsPrimaryDebugSource=" + xtendAsPrimaryDebugSource);
+		getLog().debug("hideSyntheticVariables=" + hideSyntheticVariables);
 	}
 
 	protected void installTrace(File traceFile, Collection<File> classFiles) throws FileNotFoundException, IOException {
@@ -131,8 +133,13 @@ public abstract class AbstractXtendInstallDebugInfoMojo extends AbstractMojo {
 		try {
 			AbstractTraceRegion traceRegion = traceRegionSerializer.readTraceRegionFrom(in);
 			traceToBytecodeInstaller.setTrace(traceFileNameProvider.getJavaFromTrace(traceFile.getName()), traceRegion);
-			for (File classFile : classFiles)
+			if (getLog().isDebugEnabled())
+				getLog().debug("Installing trace " + traceFile + " into:");
+			for (File classFile : classFiles) {
+				if (getLog().isDebugEnabled())
+					getLog().debug("  " + classFile);
 				Files.write(traceToBytecodeInstaller.installTrace(Files.toByteArray(classFile)), classFile);
+			}
 		} finally {
 			in.close();
 		}
