@@ -43,13 +43,18 @@ import com.google.common.collect.Lists;
  * @author Sebastian Zarnekow - Initial contribution and API
  */
 @NonNullByDefault
-public class ResolvedFeature extends AbstractResolvedReference<XAbstractFeatureCall> implements IFeatureLinkingCandidate {
+public class ResolvedFeature extends AbstractResolvedReference<XAbstractFeatureCall, IFeatureLinkingCandidate> implements IFeatureLinkingCandidate {
 
 	private FeatureLinkHelper helper;
 
 	public ResolvedFeature(XAbstractFeatureCall featureCall, JvmIdentifiableElement feature, FeatureLinkHelper helper, ExpressionTypeComputationState state) {
 		super(featureCall, feature, state);
 		this.helper = helper;
+	}
+	
+	@Override
+	public IFeatureLinkingCandidate getPreferredCandidate(IFeatureLinkingCandidate other) {
+		return this;
 	}
 
 	@Override

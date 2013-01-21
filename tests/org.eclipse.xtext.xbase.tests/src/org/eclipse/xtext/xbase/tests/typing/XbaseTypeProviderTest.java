@@ -629,7 +629,7 @@ public class XbaseTypeProviderTest extends AbstractXbaseTestCase {
 	}
 	
 	@Inject
-	private ITypeProvider typeProvider;
+	protected ITypeProvider typeProvider;
 
 	public void assertResolvedType(String typeName, String expression) throws Exception {
 		final XExpression expression2 = expression(expression, true);

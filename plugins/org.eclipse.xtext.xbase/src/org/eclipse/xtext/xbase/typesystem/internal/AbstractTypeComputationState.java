@@ -259,7 +259,7 @@ public abstract class AbstractTypeComputationState implements ITypeComputationSt
 		}
 		EObject proxyOrResolved = (EObject) featureCall.eGet(XbasePackage.Literals.XABSTRACT_FEATURE_CALL__FEATURE, false);
 		if (proxyOrResolved == null) {
-			result = new NullLinkingCandidate(featureCall);
+			result = new NullFeatureLinkingCandidate(featureCall);
 			return Collections.singletonList(result);
 		}
 		if (!proxyOrResolved.eIsProxy()) {
@@ -373,7 +373,7 @@ public abstract class AbstractTypeComputationState implements ITypeComputationSt
 		}
 		EObject proxyOrResolved = (EObject) constructorCall.eGet(XbasePackage.Literals.XCONSTRUCTOR_CALL__CONSTRUCTOR, false);
 		if (proxyOrResolved == null) {
-			result = new NullLinkingCandidate(constructorCall);
+			result = new NullConstructorLinkingCandidate(constructorCall);
 			return Collections.singletonList(result);
 		}
 		if (!proxyOrResolved.eIsProxy()) {

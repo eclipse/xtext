@@ -10,12 +10,12 @@ package org.eclipse.xtext.xbase.typesystem.internal;
 import java.util.List;
 
 import org.eclipse.jdt.annotation.NonNullByDefault;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.diagnostics.AbstractDiagnostic;
 import org.eclipse.xtext.util.IAcceptor;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.typesystem.computation.IFeatureLinkingCandidate;
-import org.eclipse.xtext.xbase.typesystem.computation.ILinkingCandidate;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 
 /**
@@ -43,10 +43,11 @@ public class AppliedFeatureLinkingCandidate implements IFeatureLinkingCandidate 
 		return true;
 	}
 
-	public boolean isPreferredOver(ILinkingCandidate other) {
-		return true;
+	public IFeatureLinkingCandidate getPreferredCandidate(IFeatureLinkingCandidate other) {
+		return this;
 	}
 
+	@Nullable
 	public JvmIdentifiableElement getFeature() {
 		return delegate.getFeature();
 	}

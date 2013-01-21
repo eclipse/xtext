@@ -26,10 +26,15 @@ import com.google.common.collect.Lists;
  * @author Sebastian Zarnekow - Initial contribution and API
  */
 @NonNullByDefault
-public class ResolvedConstructor extends AbstractResolvedReference<XConstructorCall> implements IConstructorLinkingCandidate {
+public class ResolvedConstructor extends AbstractResolvedReference<XConstructorCall, IConstructorLinkingCandidate> implements IConstructorLinkingCandidate {
 
 	public ResolvedConstructor(XConstructorCall constructorCall, JvmConstructor constructor, ExpressionTypeComputationState state) {
 		super(constructorCall, constructor, state);
+	}
+	
+	@Override
+	public IConstructorLinkingCandidate getPreferredCandidate(IConstructorLinkingCandidate other) {
+		return this;
 	}
 	
 	public JvmConstructor getConstructor() {

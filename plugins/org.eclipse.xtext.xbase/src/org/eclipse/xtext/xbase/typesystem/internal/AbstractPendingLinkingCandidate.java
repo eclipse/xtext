@@ -41,7 +41,7 @@ import org.eclipse.xtext.xbase.validation.IssueCodes;
  * TODO Javadoc
  */
 @NonNullByDefault
-public abstract class AbstractPendingLinkingCandidate<Expression extends XExpression> extends AbstractLinkingCandidate<Expression> { 
+public abstract class AbstractPendingLinkingCandidate<Expression extends XExpression, Candidate extends ILinkingCandidate<Candidate>> extends AbstractLinkingCandidate<Expression, Candidate> { 
 	
 	protected final IIdentifiableElementDescription description;
 	private final Map<JvmTypeParameter, LightweightMergedBoundTypeArgument> typeParameterMapping;
@@ -95,37 +95,55 @@ public abstract class AbstractPendingLinkingCandidate<Expression extends XExpres
 	}
 
 	@Override
-	public boolean isPreferredOver(ILinkingCandidate other) {
+	public Candidate getPreferredCandidate(Candidate other) {
 		if (other instanceof AbstractPendingLinkingCandidate) {
-			AbstractPendingLinkingCandidate<?> right = (AbstractPendingLinkingCandidate<?>) other;
+			AbstractPendingLinkingCandidate<?, ?> right = (AbstractPendingLinkingCandidate<?, ?>) other;
 			boolean visible = isVisible();
 			if (visible != right.isVisible()) {
 				if (visible)
-					return true;
-				return false;
+					return getThis();
+				return other;
 			}
 			int arityCompareResult = compareByArityWith(right);
-			if (arityCompareResult != 0)
-				return arityCompareResult <= 0;
+			if (arityCompareResult != 0) {
+				if (arityCompareResult <= 0) {
+					return getThis();
+				}
+				return other;
+			}
 			int typeArityCompareResult = compareByArity(getTypeArityMismatch(), right.getTypeArityMismatch());
-			if (typeArityCompareResult != 0)
-				return typeArityCompareResult <= 0;
+			if (typeArityCompareResult != 0) {
+				if (typeArityCompareResult <= 0) {
+					return getThis();
+				}
+				return other;
+			}
 			int argumentTypeCompareResult = compareByArgumentTypes(right);
-			if (argumentTypeCompareResult != 0)
-				return argumentTypeCompareResult <= 0;
+			if (argumentTypeCompareResult != 0) {
+				if (argumentTypeCompareResult <= 0) {
+					return getThis();
+				}
+				return other;
+			}
 			int typeArgumentCompareResult = compareByTypeArguments(right);
-			if (typeArgumentCompareResult != 0)
-				return typeArgumentCompareResult <= 0;
-			return true;
+			if (typeArgumentCompareResult != 0) {
+				if (typeArgumentCompareResult <= 0) {
+					return getThis();
+				}
+				return other;
+			}
+			return getThis();
 		}
 		throw new IllegalArgumentException("other was " + other);
 	}
+	
+	protected abstract Candidate getThis();
 	
 	protected boolean isVisible() {
 		return description.isVisible();
 	}
 	
-	protected int compareByArgumentTypes(AbstractPendingLinkingCandidate<?> right) {
+	protected int compareByArgumentTypes(AbstractPendingLinkingCandidate<?, ?> right) {
 		initializeArgumentTypeComputation();
 		right.initializeArgumentTypeComputation();
 		
@@ -145,7 +163,7 @@ public abstract class AbstractPendingLinkingCandidate<Expression extends XExpres
 		return result;
 	}
 	
-	protected int compareByTypeArguments(AbstractPendingLinkingCandidate<?> right) {
+	protected int compareByTypeArguments(AbstractPendingLinkingCandidate<?, ?> right) {
 		initializeArgumentTypeComputation();
 		right.initializeArgumentTypeComputation();
 		
@@ -176,7 +194,7 @@ public abstract class AbstractPendingLinkingCandidate<Expression extends XExpres
 		return failures;
 	}
 	
-	protected int compareByArgumentTypes(AbstractPendingLinkingCandidate<?> right, boolean recompute) {
+	protected int compareByArgumentTypes(AbstractPendingLinkingCandidate<?, ?> right, boolean recompute) {
 		int upTo = Math.min(arguments.getArgumentSize(), right.arguments.getArgumentSize());
 		int leftBoxing = 0;
 		int rightBoxing = 0;
@@ -234,7 +252,7 @@ public abstract class AbstractPendingLinkingCandidate<Expression extends XExpres
 		return getState().getStackedResolvedTypes().getConformanceHints(argument, recompute);
 	}
 
-	protected int compareDeclaredParameterTypes(AbstractPendingLinkingCandidate<?> right) {
+	protected int compareDeclaredParameterTypes(AbstractPendingLinkingCandidate<?, ?> right) {
 		int result = 0;
 		int upTo = Math.min(arguments.getArgumentSize(), right.arguments.getArgumentSize());
 		for(int i = 0; i < upTo; i++) {
@@ -258,7 +276,7 @@ public abstract class AbstractPendingLinkingCandidate<Expression extends XExpres
 		return result;
 	}
 	
-	protected int compareByArityWith(AbstractPendingLinkingCandidate<?> right) {
+	protected int compareByArityWith(AbstractPendingLinkingCandidate<?, ?> right) {
 		int arityCompareResult = compareByArity(getArityMismatch(), right.getArityMismatch());
 		return arityCompareResult;
 	}

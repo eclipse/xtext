@@ -26,7 +26,7 @@ import com.google.inject.Inject;
 public class XbaseIdentifiableTypeProviderTest extends AbstractXbaseTestCase {
 	
 	@Inject
-	private ITypeProvider typeProvider;
+	protected ITypeProvider typeProvider;
 	
 	@Test public void testVariableDeclaration_in_ForExpression_0() throws Exception {
 		XForLoopExpression expression = (XForLoopExpression) expression("for(x : null as java.util.List<String>) x.length", true);

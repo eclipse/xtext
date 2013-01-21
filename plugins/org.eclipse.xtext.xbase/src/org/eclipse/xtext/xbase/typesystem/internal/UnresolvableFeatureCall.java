@@ -33,7 +33,7 @@ import com.google.common.collect.Lists;
  * @author Sebastian Zarnekow - Initial contribution and API
  */
 @NonNullByDefault
-public class UnresolvableFeatureCall extends AbstractUnresolvableFeature implements IFeatureLinkingCandidate {
+public class UnresolvableFeatureCall extends AbstractUnresolvableReference<IFeatureLinkingCandidate> implements IFeatureLinkingCandidate {
 
 	public UnresolvableFeatureCall(XAbstractFeatureCall featureCall, INode node, String text, ExpressionTypeComputationState state) {
 		super(featureCall, node, text, state);

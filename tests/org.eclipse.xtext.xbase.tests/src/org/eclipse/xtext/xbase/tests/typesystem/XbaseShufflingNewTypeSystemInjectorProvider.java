@@ -84,7 +84,7 @@ public class XbaseShufflingNewTypeSystemInjectorProvider extends XbaseNewTypeSys
 	public static class ShufflingExpressionArgumentFactory extends ExpressionArgumentFactory {
 		@Override
 		public IFeatureCallArguments createExpressionArguments(XExpression expression,
-				AbstractLinkingCandidate<?> candidate) {
+				AbstractLinkingCandidate<?, ?> candidate) {
 			if (expression instanceof XAssignment && !(candidate.getFeature() instanceof JvmExecutable)) {
 				return new AssignmentArguments(candidate);
 			} else {

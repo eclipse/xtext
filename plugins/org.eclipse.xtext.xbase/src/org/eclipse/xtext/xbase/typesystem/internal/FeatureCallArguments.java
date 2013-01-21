@@ -33,7 +33,7 @@ public class FeatureCallArguments implements IFeatureCallArguments {
 	private OwnedConverter converter;
 	private final int argumentSizeFixup;
 	
-	public FeatureCallArguments(AbstractLinkingCandidate<? extends XExpression> candidate) {
+	public FeatureCallArguments(AbstractLinkingCandidate<?, ?> candidate) {
 		int fixedArityParameterCount = 0;
 		varArgs = false;
 		JvmIdentifiableElement feature = candidate.getFeature();

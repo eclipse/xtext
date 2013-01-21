@@ -36,13 +36,13 @@ import org.eclipse.xtext.xbase.typesystem.references.OwnedConverter;
  * @author Sebastian Zarnekow - Initial contribution and API
  */
 @NonNullByDefault
-public abstract class AbstractUnresolvableFeature implements ILinkingCandidate, ILinkingDiagnosticMessageProvider.ILinkingDiagnosticContext {
+public abstract class AbstractUnresolvableReference<Candidate extends ILinkingCandidate<Candidate>> implements ILinkingCandidate<Candidate>, ILinkingDiagnosticMessageProvider.ILinkingDiagnosticContext {
 	private XExpression expression;
 	private ExpressionTypeComputationState state;
 	private String text;
 	private INode node;
 
-	public AbstractUnresolvableFeature(XExpression expression, INode node, String text, ExpressionTypeComputationState state) {
+	public AbstractUnresolvableReference(XExpression expression, INode node, String text, ExpressionTypeComputationState state) {
 		this.expression = expression;
 		this.node = node;
 		this.text = text;
@@ -128,12 +128,13 @@ public abstract class AbstractUnresolvableFeature implements ILinkingCandidate, 
 		return node;
 	}
 
-	public boolean isPreferredOver(ILinkingCandidate other) {
-		return false;
+	public Candidate getPreferredCandidate(Candidate other) {
+		return other;
 	}
 
+	@Nullable
 	public JvmIdentifiableElement getFeature() {
-		throw new UnsupportedOperationException("TODO return some error feature that is compatible to everything");
+		return null;
 	}
 	
 	public EObject getContext() {
