@@ -2603,6 +2603,92 @@ abstract class AbstractXtendCompilerTest extends AbstractXtendTestCase {
         ''', generatorConfig)
     }
 
+    @Test
+    def compileImportForTypeRefInJavaDoc(){
+	assertCompilesTo(
+	'''
+		package foo
+		import java.util.List
+		import java.util.ArrayList
+
+		/**
+		 *
+		 * {@link List}
+		 * @see Bar
+		 */
+		class Foo {
+			/**
+			 * @see ArrayList
+			 */
+			def doStuff(){}
+
+		}
+	''',
+	'''
+		package foo;
+
+		import java.util.ArrayList;
+		import java.util.List;
+
+		/**
+		 * {@link List}
+		 * @see Bar
+		 */
+		@SuppressWarnings("all")
+		public class Foo {
+		  /**
+		   * @see ArrayList
+		   */
+		  public Object doStuff() {
+		    return null;
+		  }
+		}
+	''')
+    }
+
+    @Test
+    def compileImportForTypeRefInJavaDoc_2(){
+	assertCompilesTo(
+	'''
+		package foo
+		import java.util.List
+		import java.util.ArrayList
+
+		/**
+		 *
+		 * {@link List}
+		 * @see Bar
+		 */
+		class Foo {
+			/**
+			 * @see ArrayList
+			 */
+			def doStuff(ArrayList l){}
+
+		}
+	''',
+	'''
+		package foo;
+
+		import java.util.ArrayList;
+		import java.util.List;
+
+		/**
+		 * {@link List}
+		 * @see Bar
+		 */
+		@SuppressWarnings("all")
+		public class Foo {
+		  /**
+		   * @see ArrayList
+		   */
+		  public Object doStuff(final ArrayList l) {
+		    return null;
+		  }
+		}
+	''')
+    }
+
 
 
     @Test@Ignore

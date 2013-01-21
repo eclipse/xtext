@@ -10,6 +10,7 @@ package org.eclipse.xtext.xbase.compiler;
 import com.google.common.base.Objects;
 import com.google.common.collect.Iterables;
 import com.google.inject.Inject;
+import java.lang.reflect.Field;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.LinkedHashMap;
@@ -19,6 +20,7 @@ import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.common.types.JvmAnnotationAnnotationValue;
 import org.eclipse.xtext.common.types.JvmAnnotationReference;
@@ -55,17 +57,26 @@ import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.JvmUpperBound;
 import org.eclipse.xtext.common.types.JvmVisibility;
 import org.eclipse.xtext.common.types.JvmVoid;
+import org.eclipse.xtext.common.types.TypesPackage.Literals;
 import org.eclipse.xtext.common.types.util.TypeReferences;
 import org.eclipse.xtext.documentation.IEObjectDocumentationProvider;
 import org.eclipse.xtext.documentation.IEObjectDocumentationProviderExtension;
 import org.eclipse.xtext.documentation.IFileHeaderProvider;
+import org.eclipse.xtext.documentation.IJavaDocTypeReferenceProvider;
 import org.eclipse.xtext.generator.IFileSystemAccess;
 import org.eclipse.xtext.generator.IGenerator;
 import org.eclipse.xtext.generator.trace.ITraceURIConverter;
 import org.eclipse.xtext.generator.trace.LocationData;
+import org.eclipse.xtext.naming.IQualifiedNameConverter;
+import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.nodemodel.INode;
+import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
+import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.resource.ILocationInFileProvider;
+import org.eclipse.xtext.scoping.IScope;
+import org.eclipse.xtext.scoping.IScopeProvider;
 import org.eclipse.xtext.util.ITextRegionWithLineInformation;
+import org.eclipse.xtext.util.ReplaceRegion;
 import org.eclipse.xtext.util.Strings;
 import org.eclipse.xtext.util.TextRegionWithLineInformation;
 import org.eclipse.xtext.validation.Issue;
@@ -147,6 +158,15 @@ public class JvmModelGenerator implements IGenerator {
   @Inject
   private ITraceURIConverter converter;
   
+  @Inject
+  private IJavaDocTypeReferenceProvider javaDocTypeReferenceProvider;
+
+  @Inject
+  private IScopeProvider scopeProvider;
+
+  @Inject
+  private IQualifiedNameConverter qualifiedNameConverter;
+
   public void doGenerate(final Resource input, final IFileSystemAccess fsa) {
     EList<EObject> _contents = input.getContents();
     for (final EObject obj : _contents) {
@@ -1154,6 +1174,7 @@ public class JvmModelGenerator implements IGenerator {
       if (_and) {
         EObject _head = IterableExtensions.<EObject>head(sourceElements);
         final List<INode> documentationNodes = ((IEObjectDocumentationProviderExtension) this.documentationProvider).getDocumentationNodes(_head);
+        this.addJavaDocImports(it, appendable, documentationNodes);
         String _documentation_1 = adapter.getDocumentation();
         this.generateDocumentation(_documentation_1, documentationNodes, appendable, config);
       } else {
@@ -1164,6 +1185,84 @@ public class JvmModelGenerator implements IGenerator {
     }
   }
   
+  public void addJavaDocImports(final EObject it, final ITreeAppendable appendable, final List<INode> documentationNodes) {
+    for (final INode node : documentationNodes) {
+      List<ReplaceRegion> _computeTypeRefRegions = this.javaDocTypeReferenceProvider.computeTypeRefRegions(node);
+      for (final ReplaceRegion region : _computeTypeRefRegions) {
+        {
+          final String text = region.getText();
+          boolean _and = false;
+          boolean _notEquals = ObjectExtensions.operator_notEquals(text, null);
+          if (!_notEquals) {
+            _and = false;
+          } else {
+            int _length = text.length();
+            boolean _greaterThan = (_length > 0);
+            _and = (_notEquals && _greaterThan);
+          }
+          if (_and) {
+            final QualifiedName fqn = this.qualifiedNameConverter.toQualifiedName(text);
+            final EObject context = NodeModelUtils.findActualSemanticObjectFor(node);
+            boolean _and_1 = false;
+            int _segmentCount = fqn.getSegmentCount();
+            boolean _equals = (_segmentCount == 1);
+            if (!_equals) {
+              _and_1 = false;
+            } else {
+              boolean _notEquals_1 = ObjectExtensions.operator_notEquals(context, null);
+              _and_1 = (_equals && _notEquals_1);
+            }
+            if (_and_1) {
+              final IScope scope = this.scopeProvider.getScope(context, Literals.JVM_PARAMETERIZED_TYPE_REFERENCE__TYPE);
+              final IEObjectDescription candidate = scope.getSingleElement(fqn);
+              boolean _notEquals_2 = ObjectExtensions.operator_notEquals(candidate, null);
+              if (_notEquals_2) {
+                EObject _xifexpression = null;
+                EObject _eObjectOrProxy = candidate.getEObjectOrProxy();
+                boolean _eIsProxy = _eObjectOrProxy.eIsProxy();
+                if (_eIsProxy) {
+                  EObject _eObjectOrProxy_1 = candidate.getEObjectOrProxy();
+                  EObject _resolve = EcoreUtil.resolve(_eObjectOrProxy_1, context);
+                  _xifexpression = _resolve;
+                } else {
+                  EObject _eObjectOrProxy_2 = candidate.getEObjectOrProxy();
+                  _xifexpression = _eObjectOrProxy_2;
+                }
+                final JvmType jvmType = ((JvmType) _xifexpression);
+                boolean _eIsProxy_1 = jvmType.eIsProxy();
+                boolean _not = (!_eIsProxy_1);
+                if (_not) {
+                  final ImportManager importManager = this.getImportManager(appendable);
+                  importManager.addImportFor(jvmType);
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+
+  public ImportManager getImportManager(final ITreeAppendable appendable) {
+    try {
+      ImportManager _xblockexpression = null;
+      {
+        Class<? extends Object> _class = appendable.getClass();
+        final Field stateField = _class.getDeclaredField("state");
+        stateField.setAccessible(true);
+        final Object stateValue = stateField.get(appendable);
+        Class<? extends Object> _class_1 = stateValue.getClass();
+        final Field importManagerField = _class_1.getDeclaredField("importManager");
+        importManagerField.setAccessible(true);
+        Object _get = importManagerField.get(stateValue);
+        _xblockexpression = (((ImportManager) _get));
+      }
+      return _xblockexpression;
+    } catch (Exception _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+
   protected ITreeAppendable generateDocumentation(final String text, final List<INode> documentationNodes, final ITreeAppendable appendable, final GeneratorConfig config) {
     ITreeAppendable _xblockexpression = null;
     {
