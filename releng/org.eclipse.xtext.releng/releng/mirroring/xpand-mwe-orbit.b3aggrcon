@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<aggregator:Contribution xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:aggregator="http://www.eclipse.org/b3/2011/aggregator/1.1.0" label="Xpand, MWE and Orbit">
+  <repositories location="http://download.eclipse.org/modeling/m2t/xpand/updates/nightly/">
+    <features name="org.eclipse.xpand.feature.group"/>
+  </repositories>
+  <repositories location="http://download.eclipse.org/modeling/emft/mwe/updates/nightly/">
+    <features name="org.eclipse.emf.mwe.sdk.feature.group"/>
+  </repositories>
+  <repositories location="http://download.eclipse.org/modeling/tmf/xtext/updates/orbit">
+    <bundles name="com.google.guava"/>
+    <bundles name="com.google.inject"/>
+    <bundles name="org.apache.log4j"/>
+    <bundles name="org.aopalliance"/>
+    <bundles name="org.easymock"/>
+    <bundles name="org.antlr.runtime"/>
+    <bundles name="javax.inject"/>
+    <bundles name="org.objectweb.asm"/>
+  </repositories>
+</aggregator:Contribution>
