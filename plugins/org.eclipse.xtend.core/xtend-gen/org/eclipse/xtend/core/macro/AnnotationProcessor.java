@@ -70,17 +70,9 @@ public class AnnotationProcessor {
         }
         _xtrycatchfinallyexpression = _switchResult;
       } catch (final Throwable _t) {
-        if (_t instanceof Exception) {
-          final Exception e = (Exception)_t;
-          Object _processorInstance_1 = ctx.getProcessorInstance();
-          String _plus = ("error while executing \'" + _processorInstance_1);
-          String _plus_1 = (_plus + "\' on \'");
-          List<XtendAnnotationTarget> _annotatedSourceElements = ctx.getAnnotatedSourceElements();
-          String _plus_2 = (_plus_1 + _annotatedSourceElements);
-          String _plus_3 = (_plus_2 + "\' : ");
-          String _message = e.getMessage();
-          String _plus_4 = (_plus_3 + _message);
-          AnnotationProcessor.logger.error(_plus_4);
+        if (_t instanceof Throwable) {
+          final Throwable e = (Throwable)_t;
+          this.handleException(e, ctx);
         } else {
           throw Exceptions.sneakyThrow(_t);
         }
@@ -90,6 +82,30 @@ public class AnnotationProcessor {
       _xblockexpression = (_xtrycatchfinallyexpression);
     }
     return _xblockexpression;
+  }
+  
+  public void handleException(final Throwable e, final ActiveAnnotationContext ctx) {
+    try {
+      boolean _matched = false;
+      if (!_matched) {
+        if (e instanceof VirtualMachineError) {
+          final VirtualMachineError _virtualMachineError = (VirtualMachineError)e;
+          _matched=true;
+          throw _virtualMachineError;
+        }
+      }
+      Object _processorInstance = ctx.getProcessorInstance();
+      String _plus = ("error while executing \'" + _processorInstance);
+      String _plus_1 = (_plus + "\' on \'");
+      List<XtendAnnotationTarget> _annotatedSourceElements = ctx.getAnnotatedSourceElements();
+      String _plus_2 = (_plus_1 + _annotatedSourceElements);
+      String _plus_3 = (_plus_2 + "\' : ");
+      String _message = e.getMessage();
+      String _plus_4 = (_plus_3 + _message);
+      AnnotationProcessor.logger.error(_plus_4);
+    } catch (Exception _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
   }
   
   public Object inferencePhase(final ActiveAnnotationContext ctx, final CancelIndicator monitor) {
@@ -124,17 +140,9 @@ public class AnnotationProcessor {
         }
         _xtrycatchfinallyexpression = _switchResult;
       } catch (final Throwable _t) {
-        if (_t instanceof Exception) {
-          final Exception e = (Exception)_t;
-          Object _processorInstance_1 = ctx.getProcessorInstance();
-          String _plus = ("error while executing \'" + _processorInstance_1);
-          String _plus_1 = (_plus + "\' on \'");
-          List<XtendAnnotationTarget> _annotatedSourceElements = ctx.getAnnotatedSourceElements();
-          String _plus_2 = (_plus_1 + _annotatedSourceElements);
-          String _plus_3 = (_plus_2 + "\' : ");
-          String _message = e.getMessage();
-          String _plus_4 = (_plus_3 + _message);
-          AnnotationProcessor.logger.error(_plus_4);
+        if (_t instanceof Throwable) {
+          final Throwable e = (Throwable)_t;
+          this.handleException(e, ctx);
         } else {
           throw Exceptions.sneakyThrow(_t);
         }

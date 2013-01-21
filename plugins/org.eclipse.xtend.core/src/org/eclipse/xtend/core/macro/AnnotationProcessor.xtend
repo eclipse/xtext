@@ -42,12 +42,19 @@ class AnnotationProcessor {
 					//TODO
 				}
 			}
-		} catch (Exception e) {
-			//TODO create validation issue
-			logger.error("error while executing '"+ctx.processorInstance+"' on '"+ctx.annotatedSourceElements+"' : "+e.message) 
+		} catch (Throwable e) {
+			handleException(e, ctx) 
 		} finally {
 			task.stop
 		}
+	}
+
+	def handleException(Throwable e, ActiveAnnotationContext ctx) {
+		switch e {
+			VirtualMachineError : throw e
+		}
+		//TODO create validation issue
+		logger.error("error while executing '"+ctx.processorInstance+"' on '"+ctx.annotatedSourceElements+"' : "+e.message)
 	}
 	
 	def inferencePhase(ActiveAnnotationContext ctx, CancelIndicator monitor) {
@@ -64,9 +71,8 @@ class AnnotationProcessor {
 					], modifyCtx)
 				}
 			}
-		} catch (Exception e) {
-			//TODO create validation issue
-			logger.error("error while executing '"+ctx.processorInstance+"' on '"+ctx.annotatedSourceElements+"' : "+e.message) 
+		} catch (Throwable e) {
+			handleException(e, ctx)  
 		} finally {
 			task.stop
 			//TODO check time and issue warning if processing is really slow.
