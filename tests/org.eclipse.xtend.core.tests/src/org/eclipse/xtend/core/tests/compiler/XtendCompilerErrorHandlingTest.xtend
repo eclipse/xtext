@@ -72,11 +72,11 @@ class XtendCompilerErrorHandlingTest extends AbstractXtendTestCase {
 	@Test
 	def testUnresolvedAnnotation() {
 		'''
-			@Unresolved
+			@MyAnnotation
 			class Foo {
 			}
 		'''.assertCompilesTo( '''
-			/* @Unresolved */@SuppressWarnings("all")
+			/* @MyAnnotation */@SuppressWarnings("all")
 			public class Foo {
 			}
 		''')
@@ -93,6 +93,25 @@ class XtendCompilerErrorHandlingTest extends AbstractXtendTestCase {
 			@Deprecated/* 
 			@Unresolved */
 			@SuppressWarnings("all")
+			public class Foo {
+			}
+		''')
+	}
+	
+	//TODO
+	/*
+	 * the @SuppressWarnings should be transformed into
+	 * a synthetic @SupresssWarnings("all") on class declarations.
+	 */
+	@Test
+	def testUnresolvedAnnotation_2() {
+		'''
+			@MyAnnotation(x = 'foo')
+			@SuppressWarnings("unused")
+			class Foo {
+			}
+		'''.assertCompilesTo( '''
+			/* @MyAnnotation */@SuppressWarnings(value = "unused")
 			public class Foo {
 			}
 		''')

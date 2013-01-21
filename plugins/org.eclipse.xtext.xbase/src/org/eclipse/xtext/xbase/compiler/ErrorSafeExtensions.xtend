@@ -9,6 +9,7 @@
 
 import javax.inject.Inject
 import org.eclipse.emf.ecore.EObject
+import org.eclipse.xtext.common.types.JvmAnnotationReference
 import org.eclipse.xtext.common.types.JvmCompoundTypeReference
 import org.eclipse.xtext.common.types.JvmParameterizedTypeReference
 import org.eclipse.xtext.common.types.JvmTypeReference
@@ -18,8 +19,6 @@ import org.eclipse.xtext.diagnostics.Severity
 import org.eclipse.xtext.validation.Issue
 import org.eclipse.xtext.xbase.compiler.output.ErrorTreeAppendable
 import org.eclipse.xtext.xbase.compiler.output.ITreeAppendable
-
-import static java.util.Collections.*
 
 /** 
  * @author Jan Koehnlein
@@ -113,6 +112,25 @@ class ErrorSafeExtensions {
 					appendable.append(surrogateType)
 			} else {
 				serialize(typeRef, typeRef.eContainer, appendable)
+			}
+		}
+	}
+	
+	def void serializeSafely(JvmAnnotationReference annotationRef, ITreeAppendable appendable, (ITreeAppendable)=>void onSuccess) {
+		if(annotationRef == null || annotationRef.annotation == null) {
+			val errorChild = appendable.openErrorAppendable(appendable, annotationRef)
+			errorChild.append("annotation is 'null'")
+			appendable.closeErrorAppendable(errorChild)
+		} else {
+			if(annotationRef.annotation.eIsProxy) {
+				val errorChild = appendable.openErrorAppendable(appendable, annotationRef.eContainer)
+				appendable.append("@")
+				appendable.append(annotationRef.annotation)
+				appendable.closeErrorAppendable(errorChild)
+			} else {
+				appendable.append("@")
+				appendable.append(annotationRef.annotation)
+				onSuccess.apply(appendable)
 			}
 		}
 	}

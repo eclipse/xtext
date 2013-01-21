@@ -10,6 +10,8 @@ package org.eclipse.xtext.xbase.compiler;
 import javax.inject.Inject;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.xtext.common.types.JvmAnnotationReference;
+import org.eclipse.xtext.common.types.JvmAnnotationType;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.diagnostics.Severity;
@@ -232,6 +234,39 @@ public class ErrorSafeExtensions {
       } else {
         EObject _eContainer_2 = typeRef.eContainer();
         this._typeReferenceSerializer.serialize(typeRef, _eContainer_2, appendable);
+      }
+    }
+  }
+  
+  public void serializeSafely(final JvmAnnotationReference annotationRef, final ITreeAppendable appendable, final Procedure1<? super ITreeAppendable> onSuccess) {
+    boolean _or = false;
+    boolean _equals = ObjectExtensions.operator_equals(annotationRef, null);
+    if (_equals) {
+      _or = true;
+    } else {
+      JvmAnnotationType _annotation = annotationRef.getAnnotation();
+      boolean _equals_1 = ObjectExtensions.operator_equals(_annotation, null);
+      _or = (_equals || _equals_1);
+    }
+    if (_or) {
+      final ITreeAppendable errorChild = this.openErrorAppendable(appendable, appendable, annotationRef);
+      errorChild.append("annotation is \'null\'");
+      this.closeErrorAppendable(appendable, errorChild);
+    } else {
+      JvmAnnotationType _annotation_1 = annotationRef.getAnnotation();
+      boolean _eIsProxy = _annotation_1.eIsProxy();
+      if (_eIsProxy) {
+        EObject _eContainer = annotationRef.eContainer();
+        final ITreeAppendable errorChild_1 = this.openErrorAppendable(appendable, appendable, _eContainer);
+        appendable.append("@");
+        JvmAnnotationType _annotation_2 = annotationRef.getAnnotation();
+        appendable.append(_annotation_2);
+        this.closeErrorAppendable(appendable, errorChild_1);
+      } else {
+        appendable.append("@");
+        JvmAnnotationType _annotation_3 = annotationRef.getAnnotation();
+        appendable.append(_annotation_3);
+        onSuccess.apply(appendable);
       }
     }
   }

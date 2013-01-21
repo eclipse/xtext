@@ -108,14 +108,14 @@ public class XtendCompilerErrorHandlingTest extends AbstractXtendTestCase {
   @Test
   public void testUnresolvedAnnotation() {
     StringConcatenation _builder = new StringConcatenation();
-    _builder.append("@Unresolved");
+    _builder.append("@MyAnnotation");
     _builder.newLine();
     _builder.append("class Foo {");
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
     StringConcatenation _builder_1 = new StringConcatenation();
-    _builder_1.append("/* @Unresolved */@SuppressWarnings(\"all\")");
+    _builder_1.append("/* @MyAnnotation */@SuppressWarnings(\"all\")");
     _builder_1.newLine();
     _builder_1.append("public class Foo {");
     _builder_1.newLine();
@@ -141,6 +141,31 @@ public class XtendCompilerErrorHandlingTest extends AbstractXtendTestCase {
     _builder_1.append("@Unresolved */");
     _builder_1.newLine();
     _builder_1.append("@SuppressWarnings(\"all\")");
+    _builder_1.newLine();
+    _builder_1.append("public class Foo {");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    this.assertCompilesTo(_builder, _builder_1);
+  }
+  
+  /**
+   * the @SuppressWarnings should be transformed into
+   * a synthetic @SupresssWarnings("all") on class declarations.
+   */
+  @Test
+  public void testUnresolvedAnnotation_2() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("@MyAnnotation(x = \'foo\')");
+    _builder.newLine();
+    _builder.append("@SuppressWarnings(\"unused\")");
+    _builder.newLine();
+    _builder.append("class Foo {");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("/* @MyAnnotation */@SuppressWarnings(value = \"unused\")");
     _builder_1.newLine();
     _builder_1.append("public class Foo {");
     _builder_1.newLine();

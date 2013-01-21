@@ -1241,14 +1241,14 @@ public class JvmModelGenerator implements IGenerator {
     this._errorSafeExtensions.<JvmAnnotationReference>forEachSafely(appendable, _values, _function, _function_1);
   }
   
-  public void generateAnnotation(final JvmAnnotationReference it, final ITreeAppendable appendable, final GeneratorConfig config) {
+  public void generateAnnotation(final JvmAnnotationReference annotation, final ITreeAppendable appendable, final GeneratorConfig config) {
     boolean _and = false;
     boolean _isGenerateSyntheticSuppressWarnings = config.isGenerateSyntheticSuppressWarnings();
     boolean _not = (!_isGenerateSyntheticSuppressWarnings);
     if (!_not) {
       _and = false;
     } else {
-      JvmAnnotationType _annotation = it.getAnnotation();
+      JvmAnnotationType _annotation = annotation.getAnnotation();
       String _qualifiedName = _annotation==null?(String)null:_annotation.getQualifiedName();
       boolean _equals = ObjectExtensions.operator_equals(_qualifiedName, "java.lang.SuppressWarnings");
       _and = (_not && _equals);
@@ -1256,32 +1256,28 @@ public class JvmModelGenerator implements IGenerator {
     if (_and) {
       return;
     }
-    JvmAnnotationType _annotation_1 = it.getAnnotation();
-    boolean _eIsProxy = _annotation_1.eIsProxy();
-    if (_eIsProxy) {
-      appendable.append("/* unresolvable annotation */");
-      return;
-    }
-    appendable.append("@");
-    JvmAnnotationType _annotation_2 = it.getAnnotation();
-    appendable.append(_annotation_2);
-    boolean _isGenerateExpressions = config.isGenerateExpressions();
-    if (_isGenerateExpressions) {
-      EList<JvmAnnotationValue> _values = it.getValues();
-      final Procedure1<LoopParams> _function = new Procedure1<LoopParams>() {
-          public void apply(final LoopParams it) {
-            it.setPrefix("(");
-            it.setSeparator(", ");
-            it.setSuffix(")");
+    final Procedure1<ITreeAppendable> _function = new Procedure1<ITreeAppendable>() {
+        public void apply(final ITreeAppendable it) {
+          boolean _isGenerateExpressions = config.isGenerateExpressions();
+          if (_isGenerateExpressions) {
+            EList<JvmAnnotationValue> _values = annotation.getValues();
+            final Procedure1<LoopParams> _function = new Procedure1<LoopParams>() {
+                public void apply(final LoopParams it) {
+                  it.setPrefix("(");
+                  it.setSeparator(", ");
+                  it.setSuffix(")");
+                }
+              };
+            final Procedure1<JvmAnnotationValue> _function_1 = new Procedure1<JvmAnnotationValue>() {
+                public void apply(final JvmAnnotationValue it) {
+                  JvmModelGenerator.this.toJava(it, appendable, config);
+                }
+              };
+            JvmModelGenerator.this._loopExtensions.<JvmAnnotationValue>forEach(appendable, _values, _function, _function_1);
           }
-        };
-      final Procedure1<JvmAnnotationValue> _function_1 = new Procedure1<JvmAnnotationValue>() {
-          public void apply(final JvmAnnotationValue it) {
-            JvmModelGenerator.this.toJava(it, appendable, config);
-          }
-        };
-      this._loopExtensions.<JvmAnnotationValue>forEach(appendable, _values, _function, _function_1);
-    }
+        }
+      };
+    this._errorSafeExtensions.serializeSafely(annotation, appendable, _function);
   }
   
   public void toJava(final JvmAnnotationValue it, final ITreeAppendable appendable, final GeneratorConfig config) {
