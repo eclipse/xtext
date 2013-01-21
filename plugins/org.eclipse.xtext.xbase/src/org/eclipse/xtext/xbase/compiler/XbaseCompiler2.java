@@ -11,6 +11,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.jdt.annotation.Nullable;
@@ -202,6 +203,14 @@ public class XbaseCompiler2 extends XbaseCompiler {
 		Map<JvmTypeParameter, LightweightMergedBoundTypeArgument> mapping = new DeclaratorTypeArgumentCollector().getTypeParameterMapping(lightweightTypeReference);
 		LightweightTypeReference parameterType = converter.toLightweightReference(operation.getReturnType());
 		return new StandardTypeParameterSubstitutor(mapping, owner).substitute(parameterType).toJavaCompliantTypeReference();
+	}
+	
+	@Override
+	protected JvmOperation findImplementingOperation(JvmTypeReference closureType, EObject context) {
+		StandardTypeReferenceOwner owner = new StandardTypeReferenceOwner(services, context);
+		OwnedConverter converter = new OwnedConverter(owner);
+		LightweightTypeReference lightweightTypeReference = converter.toLightweightReference(closureType);
+		return services.getFunctionTypes().findImplementingOperation(lightweightTypeReference);
 	}
 	
 	@Override

@@ -2205,5 +2205,11 @@ abstract class AbstractClosureTypeTest extends AbstractXbaseTestCase {
 		"[ int i1, int i2| if (true) return i1 else return null ].apply(1, 1)"
 			.resolvesClosuresTo("(int, int)=>Integer")
 			.withEquivalents("Function2<Integer, Integer, Integer>")
+	}
+	
+	@Test def void testAbstractIterator_01() throws Exception {
+		"{ var com.google.common.collect.AbstractIterator<String> iter = [| return null ] }"
+			.resolvesClosuresTo("()=>String")
+			.withEquivalents("AbstractIterator<String>")
 	}	
 }

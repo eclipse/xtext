@@ -33,4 +33,22 @@ class CompilerTests2WithNewTypeSystem extends AbstractCompilerTests2 {
 		''')
 	}
 	
+	@Test def void testAbstractIterator() throws Exception {
+		'''
+			{
+				var com.google.common.collect.AbstractIterator<String> iter = [| return null ]
+				return iter
+			}
+		'''.compilesTo('''
+			final com.google.common.collect.AbstractIterator<String> _function = new com.google.common.collect.AbstractIterator<String>() {
+			    @Override
+			    protected String computeNext() {
+			      return null;
+			    }
+			  };
+			com.google.common.collect.AbstractIterator<String> iter = _function;
+			return iter;
+		''')
+	}
+	
 }

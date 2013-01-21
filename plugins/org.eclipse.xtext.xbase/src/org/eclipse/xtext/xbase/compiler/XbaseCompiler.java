@@ -18,8 +18,10 @@ import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.Keyword;
+import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmExecutable;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
+import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmType;
@@ -744,9 +746,9 @@ public class XbaseCompiler extends FeatureCallCompiler {
 		b.increaseIndentation().increaseIndentation();
 		try {
 			b.openScope();
-			JvmOperation operation = closures.findImplementingOperation(type, closure.eResource());
+			JvmOperation operation = findImplementingOperation(type, closure);
 			final JvmTypeReference returnType = getClosureOperationReturnType(type, context, operation);
-			b.newLine().append("public ");
+			appendOperationVisibility(b, operation);
 			serialize(returnType, closure, b, false, false, true, true);
 			b.append(" ").append(operation.getSimpleName());
 			b.append("(");
@@ -788,6 +790,24 @@ public class XbaseCompiler extends FeatureCallCompiler {
 		b.decreaseIndentation();
 		b.newLine().append("}");
 		b.decreaseIndentation().newLine().append("};").decreaseIndentation();
+	}
+
+	protected void appendOperationVisibility(final ITreeAppendable b, JvmOperation operation) {
+		b.newLine();
+		JvmDeclaredType declaringType = operation.getDeclaringType();
+		if (declaringType instanceof JvmGenericType && !((JvmGenericType) declaringType).isInterface()) {
+			b.append("@Override").newLine();
+		}
+		switch(operation.getVisibility()) {
+			case DEFAULT: break;
+			case PUBLIC: b.append("public "); return;
+			case PROTECTED: b.append("protected "); return;
+			case PRIVATE: b.append("private "); return;
+		}
+	}
+
+	protected JvmOperation findImplementingOperation(JvmTypeReference declaringType, EObject context) {
+		return closures.findImplementingOperation(declaringType, context.eResource());
 	}
 
 	protected JvmTypeReference getClosureOperationParameterType(JvmTypeReference closureType, ITypeArgumentContext context,
