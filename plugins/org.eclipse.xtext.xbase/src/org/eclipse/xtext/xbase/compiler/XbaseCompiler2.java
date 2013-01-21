@@ -20,10 +20,12 @@ import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmSynonymTypeReference;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.JvmTypeReference;
+import org.eclipse.xtext.common.types.TypesPackage;
 import org.eclipse.xtext.common.types.util.ITypeArgumentContext;
 import org.eclipse.xtext.generator.trace.ILocationData;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.XExpression;
+import org.eclipse.xtext.xbase.XForLoopExpression;
 import org.eclipse.xtext.xbase.compiler.output.ITreeAppendable;
 import org.eclipse.xtext.xbase.typesystem.IBatchTypeResolver;
 import org.eclipse.xtext.xbase.typesystem.IResolvedTypes;
@@ -215,6 +217,15 @@ public class XbaseCompiler2 extends XbaseCompiler {
 				type = expectedType;
 		}
 		return type;
+	}
+	
+	@Override
+	protected JvmTypeReference getForLoopParameterType(XForLoopExpression expr) {
+		JvmTypeReference declaredType = expr.getDeclaredParam().getParameterType();
+		if (declaredType != null) {
+			return declaredType;
+		}
+		return super.getForLoopParameterType(expr);
 	}
 	
 }

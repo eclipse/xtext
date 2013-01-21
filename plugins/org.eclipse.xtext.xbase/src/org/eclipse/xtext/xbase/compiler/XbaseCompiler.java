@@ -384,7 +384,7 @@ public class XbaseCompiler extends FeatureCallCompiler {
 		loopAppendable.append("for (");
 		ITreeAppendable parameterAppendable = loopAppendable.trace(expr.getDeclaredParam());
 		parameterAppendable.append("final ");
-		JvmTypeReference paramType = getTypeProvider().getTypeForIdentifiable(expr.getDeclaredParam());
+		JvmTypeReference paramType = getForLoopParameterType(expr);
 		serialize(paramType, expr, parameterAppendable);
 		parameterAppendable.append(" ");
 		final String name = makeJavaIdentifier(expr.getDeclaredParam().getName());
@@ -395,6 +395,10 @@ public class XbaseCompiler extends FeatureCallCompiler {
 		loopAppendable.append(") {").increaseIndentation();
 		internalToJavaStatement(expr.getEachExpression(), loopAppendable, false);
 		loopAppendable.decreaseIndentation().newLine().append("}");
+	}
+
+	protected JvmTypeReference getForLoopParameterType(XForLoopExpression expr) {
+		return getTypeProvider().getTypeForIdentifiable(expr.getDeclaredParam());
 	}
 
 	protected void _toJavaStatement(final XConstructorCall expr, ITreeAppendable b, final boolean isReferenced) {
