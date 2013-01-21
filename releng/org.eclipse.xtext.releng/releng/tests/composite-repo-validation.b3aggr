@@ -15,7 +15,7 @@
     </contributions>
     <validationRepositories location="http://download.eclipse.org/eclipse/updates/3.5/"/>
     <validationRepositories location="http://download.eclipse.org/modeling/tmf/xtext/updates/orbit"/>
-    <validationRepositories location="http://download.eclipse.org/modeling/emf/emf/updates/2.8milestones"/>
+    <validationRepositories location="http://download.eclipse.org/modeling/emf/emf/updates/nightly"/>
     <validationRepositories location="http://download.eclipse.org/tools/gef/updates/releases/"/>
   </validationSets>
   <configurations/>
