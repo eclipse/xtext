@@ -17,13 +17,16 @@ import org.eclipse.xtext.util.IAcceptor
 import org.eclipse.xtend.core.xtend.XtendMember
 import com.google.inject.Provider
 import org.eclipse.xtext.util.internal.StopWatches
+import org.apache.log4j.Logger
 
 /**
  * It checks whether the files contain macro annotations and calls their register and processing functions.
  * 
  * @author Sven Efftinge
  */
-public class AnnotationProcessor {
+class AnnotationProcessor {
+	
+	static val logger = Logger::getLogger(typeof(AnnotationProcessor))
 	
 	@Inject Provider<ModifyContextImpl> modifyContextProvider
 
@@ -39,6 +42,9 @@ public class AnnotationProcessor {
 					//TODO
 				}
 			}
+		} catch (Exception e) {
+			//TODO create validation issue
+			logger.error("error while executing '"+ctx.processorInstance+"' on '"+ctx.annotatedSourceElements+"' : "+e.message) 
 		} finally {
 			task.stop
 		}
@@ -58,8 +64,12 @@ public class AnnotationProcessor {
 					], modifyCtx)
 				}
 			}
+		} catch (Exception e) {
+			//TODO create validation issue
+			logger.error("error while executing '"+ctx.processorInstance+"' on '"+ctx.annotatedSourceElements+"' : "+e.message) 
 		} finally {
 			task.stop
+			//TODO check time and issue warning if processing is really slow.
 		}
 	}
 	

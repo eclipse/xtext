@@ -18,8 +18,10 @@ import org.eclipse.xtend.core.xtend.XtendClass;
 import org.eclipse.xtend.core.xtend.XtendConstructor;
 import org.eclipse.xtend.core.xtend.XtendField;
 import org.eclipse.xtend.core.xtend.XtendFunction;
+import org.eclipse.xtend.core.xtend.XtendTypeDeclaration;
 import org.eclipse.xtext.common.types.JvmAnnotationType;
 import org.eclipse.xtext.common.types.JvmConstructor;
+import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmField;
 import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.common.types.JvmOperation;
@@ -35,6 +37,8 @@ import com.google.inject.Singleton;
 @ImplementedBy(IXtendJvmAssociations.Impl.class)
 public interface IXtendJvmAssociations extends IJvmModelAssociations {
 
+	JvmDeclaredType getInferredType(XtendTypeDeclaration xtendClass);
+	
 	JvmGenericType getInferredType(XtendClass xtendClass);
 
 	JvmAnnotationType getInferredAnnotationType(XtendAnnotationType xtendAnnotation);
@@ -60,6 +64,11 @@ public interface IXtendJvmAssociations extends IJvmModelAssociations {
 	@Singleton
 	static class Impl extends JvmModelAssociator implements IXtendJvmAssociations {
 
+		public JvmDeclaredType getInferredType(XtendTypeDeclaration xtendClass) {
+			final JvmDeclaredType firstOrNull = getFirstOrNull(getJvmElements(xtendClass), JvmDeclaredType.class);
+			return firstOrNull;
+		}
+		
 		public JvmGenericType getInferredType(XtendClass xtendClass) {
 			final JvmGenericType firstOrNull = getFirstOrNull(getJvmElements(xtendClass), JvmGenericType.class);
 			return firstOrNull;

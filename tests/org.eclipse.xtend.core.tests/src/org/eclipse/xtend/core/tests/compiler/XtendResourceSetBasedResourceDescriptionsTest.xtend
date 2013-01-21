@@ -10,6 +10,7 @@ import org.eclipse.xtext.validation.IResourceValidator
 import org.eclipse.xtext.xbase.compiler.CompilationTestHelper
 import org.eclipse.xtext.xbase.resource.XbaseResource
 import org.junit.Test
+import java.util.ArrayList
 
 class XtendResourceSetBasedResourceDescriptionsTest extends AbstractXtendTestCase {
 
@@ -23,11 +24,7 @@ class XtendResourceSetBasedResourceDescriptionsTest extends AbstractXtendTestCas
 		)
 		//TODO retry with new type system
 		val List<? extends Resource> resources = resourceSet.resources
-		doStuff(resources)
-	}
-	
-	def void doStuff(List<? extends Resource> resources) {
-		for (Resource res : resources.toSet) {
+		for (Resource res : new ArrayList<Resource>(resources)) {
 			val issues = validator.validate(res, CheckMode::ALL, CancelIndicator::NullImpl)
 			assertTrue(issues.toString, issues.empty)
 		}
@@ -39,7 +36,7 @@ class XtendResourceSetBasedResourceDescriptionsTest extends AbstractXtendTestCas
 			'bar/ClassB.xtend'->'''package bar class ClassB { public foo.ClassA myField }'''
 		)
 		val List<? extends Resource> resources = resourceSet.resources
-		for (Resource res : resources.toSet) {
+		for (Resource res : new ArrayList<Resource>(resources)) {
 			val issues = validator.validate(res, CheckMode::ALL, CancelIndicator::NullImpl)
 			assertTrue(issues.toString, issues.empty)
 		}
@@ -51,7 +48,7 @@ class XtendResourceSetBasedResourceDescriptionsTest extends AbstractXtendTestCas
 			'bar/ClassB.xtend'->'''package bar class ClassB { public foo.ClassA myField }'''
 		)
 		val List<? extends Resource> resources = resourceSet.resources
-		for (Resource res : resources.toSet) {
+		for (Resource res : new ArrayList<Resource>(resources)) {
 			assertFalse(res.loaded)
 			try {
 				(res as XbaseResource).installDerivedState(true)

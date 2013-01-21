@@ -54,6 +54,8 @@ import org.eclipse.xtext.xbase.typesystem.legacy.StandardTypeReferenceOwner
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference
 import org.eclipse.xtext.xbase.typesystem.references.OwnedConverter
 import org.eclipse.xtext.xbase.typesystem.util.CommonTypeComputationServices
+import org.eclipse.xtend.core.jvmmodel.IXtendJvmAssociations
+import org.eclipse.xtend.lib.macro.declaration.PrimitiveType
 
 class CompilationUnitImpl implements CompilationUnit, TypeReferenceProvider {
 
@@ -87,6 +89,7 @@ class CompilationUnitImpl implements CompilationUnit, TypeReferenceProvider {
 	@Inject TypeReferences typeReferences
 	@Inject JvmTypesBuilder typesBuilder
 	@Inject TypeReferenceSerializer2 typeRefSerializer
+	@Inject IXtendJvmAssociations associations
 	
 	Map<EObject, Object> identityCache = newHashMap
 	OwnedConverter typeRefConverter
@@ -336,6 +339,42 @@ class CompilationUnitImpl implements CompilationUnit, TypeReferenceProvider {
 	
 	override newTypeReference(String typeName, TypeReference... typeArguments) {
 		val type = typeReferences.findDeclaredType(typeName, xtendFile)
+		if (type == null)
+			return null
+		toTypeReference(typeReferences.createTypeRef(type, typeArguments.map[toJvmTypeReference] as JvmTypeReference[]))
+	}
+	
+	override newTypeReference(Type typeDeclaration, TypeReference... typeArguments) {
+		val type = switch typeDeclaration {
+			JvmTypeDeclarationImpl<? extends JvmDeclaredType> : {
+				typeDeclaration.delegate
+			}
+			XtendTypeDeclarationImpl<? extends XtendTypeDeclaration> : {
+				associations.getInferredType(typeDeclaration.delegate)
+			}
+			JvmTypeParameterDeclarationImpl : {
+				typeDeclaration.delegate
+			}
+			PrimitiveTypeImpl : {
+				return switch typeDeclaration.kind {
+					case PrimitiveType$Kind::BOOLEAN : primitiveBoolean
+					case PrimitiveType$Kind::BYTE : primitiveByte
+					case PrimitiveType$Kind::CHAR : primitiveChar
+					case PrimitiveType$Kind::DOUBLE : primitiveDouble
+					case PrimitiveType$Kind::FLOAT : primitiveFloat
+					case PrimitiveType$Kind::INT : primitiveInt
+					case PrimitiveType$Kind::LONG : primitiveLong
+					case PrimitiveType$Kind::SHORT : primitiveShort
+				}
+			}
+			VoidTypeImpl : {
+				return primitiveVoid
+			}
+			default : {
+				throw new IllegalArgumentException("couln't construct type refernce for type "+typeDeclaration)
+			}
+		}
+		
 		if (type == null)
 			return null
 		toTypeReference(typeReferences.createTypeRef(type, typeArguments.map[toJvmTypeReference] as JvmTypeReference[]))

@@ -39,6 +39,7 @@ class ActiveAnnotationContextProvider {
 			cache.get('annotation context', file.eResource) [|
 				val Map<JvmAnnotationType, ActiveAnnotationContext> annotatedElements = newHashMap
 				val compilationUnit = compilationUnitProvider.get
+				compilationUnit.xtendFile = file
 				searchAnnotatedElements(file) [
 					if (!annotatedElements.containsKey(key)) {
 						val fa = new ActiveAnnotationContext
