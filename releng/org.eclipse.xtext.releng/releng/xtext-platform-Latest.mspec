@@ -4,5 +4,5 @@
   <mspec:property key="target.arch" value="*"/>
   <mspec:property key="target.ws" value="*"/>
   <mspec:property key="eclipse.target.platform" mutable="true" value="${eclipse.download}/eclipse/updates/4.3milestones"/>
-  <mspec:property key="emf.target.platform" mutable="true" value="${eclipse.download}/modeling/emf/emf/updates/2.9/nightly"/>
+  <mspec:property key="emf.target.platform" mutable="true" value="${eclipse.download}/modeling/emf/emf/updates/nightly"/>
 </mspec:mspec>
