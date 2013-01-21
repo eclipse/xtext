@@ -190,6 +190,4 @@ public class XbaseExpectedTypeProviderTest2 extends XbaseExpectedTypeProviderTes
 		XForLoopExpression loop = (XForLoopExpression) expression("for(double d: <Integer>newArrayList) { d.toString }");
 		assertExpected("java.util.ArrayList<java.lang.Integer>", loop.getForExpression());
 	}
-	
-	
 }

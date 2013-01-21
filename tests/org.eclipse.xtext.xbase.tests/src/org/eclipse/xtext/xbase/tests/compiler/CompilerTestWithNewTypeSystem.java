@@ -10,7 +10,6 @@ package org.eclipse.xtext.xbase.tests.compiler;
 import org.eclipse.xtext.junit4.InjectWith;
 import org.eclipse.xtext.junit4.XtextRunner;
 import org.eclipse.xtext.xbase.tests.typesystem.XbaseNewTypeSystemInjectorProvider;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -20,12 +19,41 @@ import org.junit.runner.RunWith;
 @RunWith(XtextRunner.class)
 @InjectWith(XbaseNewTypeSystemInjectorProvider.class)
 public class CompilerTestWithNewTypeSystem extends CompilerTest {
-
 	
 	@Override
 	@Test
-	@Ignore("TODO implement raw type stuff properly")
 	public void testSwitchTypeGuards_01() throws Exception {
-		super.testSwitchTypeGuards_01();
+		assertCompilesTo(
+				"String _switchResult = null;\n" + 
+				"final CharSequence x = ((CharSequence) \"foo\");\n" + 
+				"boolean _matched = false;\n" + 
+				"if (!_matched) {\n" + 
+				"  if (x instanceof String) {\n" + 
+				"    final String _string = (String)x;\n" + 
+				"    _matched=true;\n" + 
+				"    String _substring = _string.substring(3);\n" + 
+				"    String _plus = (_substring + _string);\n" + 
+				"    _switchResult = _plus;\n" + 
+				"  }\n" + 
+				"}\n" + 
+				"if (!_matched) {\n" + 
+				"  if (x instanceof Comparable) {\n" + 
+				"    final Comparable _comparable = (Comparable)x;\n" + 
+				"    _matched=true;\n" + 
+				"    int _compareTo = ((Comparable)_comparable).compareTo(\"jho\");\n" + 
+				"    String _plus = (\"\" + Integer.valueOf(_compareTo));\n" + 
+				// diff is here: CharSequence.toString instead of Comparable.toString
+				"    String _string = ((CharSequence)_comparable).toString();\n" + 
+				"    String _plus_1 = (_plus + _string);\n" + 
+				"    _switchResult = _plus_1;\n" + 
+				"  }\n" + 
+				"}\n" + 
+				"return _switchResult;"
+				, 
+				"switch x : 'foo' as CharSequence {" +
+				"  String : x.substring(3) + x " +
+				"  Comparable : '' + x.compareTo('jho') + x.toString" +
+				"}");
 	}
+	
 }

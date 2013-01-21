@@ -77,6 +77,15 @@ public class ResolvedFeature extends AbstractResolvedReference<XAbstractFeatureC
 	}
 	
 	@Override
+	protected boolean isRawTypeContext() {
+		LightweightTypeReference receiverType = getReceiverType();
+		if(receiverType != null && receiverType.isRawType()) {
+			return true;
+		}
+		return false;
+	}
+	
+	@Override
 	protected void resolveAgainstActualType(LightweightTypeReference declaredType, LightweightTypeReference actualType, final AbstractTypeComputationState state) {
 		super.resolveAgainstActualType(declaredType, actualType, state);
 		if (!isStatic() && !isExtension()) { // TODO necessary?

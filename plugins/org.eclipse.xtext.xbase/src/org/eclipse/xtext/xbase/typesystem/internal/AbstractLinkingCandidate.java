@@ -33,6 +33,7 @@ import org.eclipse.xtext.xbase.typesystem.references.UnboundTypeReference;
 import org.eclipse.xtext.xbase.typesystem.util.BoundTypeArgumentSource;
 import org.eclipse.xtext.xbase.typesystem.util.ConstraintVisitingInfo;
 import org.eclipse.xtext.xbase.typesystem.util.ExpectationTypeParameterHintCollector;
+import org.eclipse.xtext.xbase.typesystem.util.RawTypeSubstitutor;
 import org.eclipse.xtext.xbase.typesystem.util.TypeArgumentFromComputedTypeCollector;
 import org.eclipse.xtext.xbase.typesystem.util.TypeParameterByConstraintSubstitutor;
 import org.eclipse.xtext.xbase.typesystem.util.TypeParameterByUnboundSubstitutor;
@@ -267,8 +268,7 @@ public abstract class AbstractLinkingCandidate<Expression extends XExpression> i
 		initializeArgumentTypeComputation();
 		if (arguments.isProcessed(argumentIndex))
 			return;
-		UnboundTypeParameterPreservingSubstitutor substitutor = new UnboundTypeParameterPreservingSubstitutor(getDeclaratorParameterMapping(), state.getReferenceOwner());
-		substitutor.enhanceMapping(getTypeParameterMapping());
+		TypeParameterSubstitutor<?> substitutor = createArgumentTypeSubstitutor();
 		if (argumentIndex < arguments.getFixedArityArgumentCount()) {
 			computeFixedArityArgumentType(argumentIndex, substitutor);
 			return;
@@ -299,7 +299,21 @@ public abstract class AbstractLinkingCandidate<Expression extends XExpression> i
 		}
 	}
 
-	protected void computeFixedArityArgumentType(int argumentIndex, UnboundTypeParameterPreservingSubstitutor substitutor) {
+	protected TypeParameterSubstitutor<?> createArgumentTypeSubstitutor() {
+		if (isRawTypeContext()) {
+			return new RawTypeSubstitutor(state.getReferenceOwner());
+		} else {
+			UnboundTypeParameterPreservingSubstitutor substitutor = new UnboundTypeParameterPreservingSubstitutor(getDeclaratorParameterMapping(), state.getReferenceOwner());
+			substitutor.enhanceMapping(getTypeParameterMapping());
+			return substitutor;
+		}
+	}
+	
+	protected boolean isRawTypeContext() {
+		return false;
+	}
+
+	protected void computeFixedArityArgumentType(int argumentIndex, TypeParameterSubstitutor<?> substitutor) {
 		LightweightTypeReference parameterType = arguments.getDeclaredType(argumentIndex);
 		LightweightTypeReference substitutedParameterType = substitutor.substitute(parameterType);
 		XExpression argument = arguments.getArgument(argumentIndex);

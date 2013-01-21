@@ -7,7 +7,6 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.typesystem.override;
 
-import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
@@ -19,6 +18,7 @@ import org.eclipse.xtext.xbase.typesystem.references.ITypeReferenceOwner;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightMergedBoundTypeArgument;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.ParameterizedTypeReference;
+import org.eclipse.xtext.xbase.typesystem.util.RawTypeSubstitutor;
 import org.eclipse.xtext.xbase.typesystem.util.TypeParameterSubstitutor;
 import org.eclipse.xtext.xbase.typesystem.util.VarianceInfo;
 
@@ -68,16 +68,7 @@ public class ResolvedOperationInHierarchy extends AbstractResolvedOperation {
 	@Override
 	protected TypeParameterSubstitutor<?> getSubstitutor() {
 		if (isRawTypeInheritance()) {
-			return new TypeParameterSubstitutor<Object>(Collections.<JvmTypeParameter,LightweightMergedBoundTypeArgument>emptyMap(), getContextType().getOwner()) {
-				@Override
-				public LightweightTypeReference substitute(LightweightTypeReference original) {
-					return original.getRawTypeReference();
-				}
-				@Override
-				protected Object createVisiting() {
-					return new Object();
-				}
-			};
+			return new RawTypeSubstitutor(getContextType().getOwner());
 		}
 		TypeParameterSubstitutor<?> result = super.getSubstitutor();
 		List<JvmTypeParameter> typeParameters = getTypeParameters();

@@ -402,6 +402,12 @@ abstract class AbstractFeatureCallTypeTest extends AbstractXbaseTestCase {
 		}".resolvesFeatureCallsTo("Comparable<Object>", "Comparable<Object> & CharSequence", "Comparable<Object> & CharSequence & Appendable", "int")
 	}
 	
+	@Test def void testSwitchExpression_7() throws Exception {
+		"switch x : 'foo' as CharSequence {
+			Comparable : x.compareTo('')
+		}".resolvesFeatureCallsTo("CharSequence & Comparable", "int")
+	}
+	
 	@Test def void testTypeGuardedCase_0() throws Exception {
 		"switch s: new Object() { String: s StringBuffer: s}".resolvesFeatureCallsTo("String", "StringBuffer")
 	}

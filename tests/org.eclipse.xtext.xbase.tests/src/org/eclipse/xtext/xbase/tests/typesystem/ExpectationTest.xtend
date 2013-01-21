@@ -258,6 +258,12 @@ class ExpectationTest extends AbstractXbaseTestCase {
 	def void testReturn_04() {
 		"return if (true) { null '' }".expects.nothing
 	}
+	
+	@Test
+	def void testRawType_01() {
+		"('' as Comparable).compareTo(null)".expects.types('Object')
+	}
+	
 }
 
 class ExpectationTestingTypeComputer extends XbaseTypeComputer {

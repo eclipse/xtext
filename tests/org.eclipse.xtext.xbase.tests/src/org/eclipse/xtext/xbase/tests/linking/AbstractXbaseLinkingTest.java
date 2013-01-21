@@ -580,6 +580,15 @@ public abstract class AbstractXbaseLinkingTest extends AbstractXbaseTestCase {
 		assertEquals(switchExpr, ((XFeatureCall)switchExpr.getDefault()).getFeature());
 	}
 	
+	@Test public void testSwitchExpression_03() throws Exception {
+		XSwitchExpression switchExpr = (XSwitchExpression) expression(
+				"switch x : 'foo' as CharSequence {" +
+				"  Comparable : x.toString()" +
+				"}");
+		XMemberFeatureCall then = (XMemberFeatureCall) switchExpr.getCases().get(0).getThen();
+		assertEquals("java.lang.CharSequence.toString()", then.getFeature().getIdentifier());
+	}
+	
 	@Test public void testTryCatch_0() throws Exception {
 		XTryCatchFinallyExpression exp = (XTryCatchFinallyExpression) expression("try 'foo' catch (Exception e) e",true);
 		XCatchClause xCatchClause = exp.getCatchClauses().get(0);

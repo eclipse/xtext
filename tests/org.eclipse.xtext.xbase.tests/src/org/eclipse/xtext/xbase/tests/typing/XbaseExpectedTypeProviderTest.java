@@ -34,6 +34,7 @@ import org.junit.Test;
 /**
  * @author Sven Efftinge - Initial contribution and API
  */
+@SuppressWarnings("deprecation")
 public class XbaseExpectedTypeProviderTest extends AbstractXbaseTestCase {
 
 	@Test public void testAssignment() throws Exception {
