@@ -321,7 +321,7 @@ public class LinkingErrorTest extends AbstractXtendTestCase {
 	}
 	
 	@Test public void testBug_350167_04() throws Exception {
-		XtendFunction fun = function("@Something({ x, String::Foo }) def fun(Object o) {\n" + 
+		XtendFunction fun = function("def fun(@Something({ ., String::Foo }) Object o) {\n" + 
 				"	null\n" + 
 				"}");
 		assertNoExceptions(fun);
