@@ -149,7 +149,7 @@ public class ClassFileDebugInfoExtractor {
 	}
 
 	public String getDebugInfo(File file) {
-		if (file.isFile()) {
+		if (file.isFile() && file.getName().endsWith(".class")) {
 			try {
 				ClassReader cr = new ClassReader(Files.toByteArray(file));
 				ClassVisitor visitor = new ClassVisitor(file.getName());
@@ -160,8 +160,11 @@ public class ClassFileDebugInfoExtractor {
 			}
 		} else if (file.isDirectory()) {
 			List<String> children = Lists.newArrayList();
-			for (File child : file.listFiles())
-				children.add(getDebugInfo(child));
+			for (File child : file.listFiles()) {
+				String info = getDebugInfo(child);
+				if (!Strings.isEmpty(info))
+					children.add(info);
+			}
 			Collections.sort(children);
 			StringBuffer buf = new StringBuffer();
 			buf.append("// " + file.getName() + " {\n");
@@ -169,7 +172,7 @@ public class ClassFileDebugInfoExtractor {
 			buf.append("}");
 			return buf.toString();
 		}
-		return "// unknown file type or file not found: " + file;
+		return null;
 	}
 
 	public String getDebugInfo(String classFile) {

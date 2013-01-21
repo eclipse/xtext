@@ -10,7 +10,7 @@ import com.google.common.collect.Multimap;
  * 
  * @author Moritz Eysholdt - Initial contribution and API
  * @goal xtend-test-install-debug-info
- * @phase process-classes
+ * @phase process-test-classes
  * @requiresDependencyResolution compile
  */
 public class XtendTestInstallDebugInfo extends AbstractXtendInstallDebugInfoMojo {
