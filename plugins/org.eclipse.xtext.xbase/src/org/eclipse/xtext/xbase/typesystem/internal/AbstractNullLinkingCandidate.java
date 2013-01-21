@@ -11,15 +11,10 @@ import java.util.Collections;
 import java.util.List;
 
 import org.eclipse.jdt.annotation.NonNullByDefault;
-import org.eclipse.xtext.common.types.JvmConstructor;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.diagnostics.AbstractDiagnostic;
 import org.eclipse.xtext.util.IAcceptor;
-import org.eclipse.xtext.xbase.XAbstractFeatureCall;
-import org.eclipse.xtext.xbase.XConstructorCall;
 import org.eclipse.xtext.xbase.XExpression;
-import org.eclipse.xtext.xbase.typesystem.computation.IConstructorLinkingCandidate;
-import org.eclipse.xtext.xbase.typesystem.computation.IFeatureLinkingCandidate;
 import org.eclipse.xtext.xbase.typesystem.computation.ILinkingCandidate;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 
@@ -27,15 +22,12 @@ import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
  * @author Sebastian Zarnekow - Initial contribution and API
  */
 @NonNullByDefault
-public class NullLinkingCandidate implements IFeatureLinkingCandidate, IConstructorLinkingCandidate {
+public abstract class AbstractNullLinkingCandidate<Candidate extends ILinkingCandidate<Candidate>> implements ILinkingCandidate<Candidate>{
 
-	private XExpression featureOrConstructorCall;
+	protected final XExpression featureOrConstructorCall;
 
-	public NullLinkingCandidate(XAbstractFeatureCall featureCall) {
-		this.featureOrConstructorCall = featureCall;
-	}
-	public NullLinkingCandidate(XConstructorCall constructorCall) {
-		this.featureOrConstructorCall = constructorCall;
+	protected AbstractNullLinkingCandidate(XExpression featureOrConstructorCall) {
+		this.featureOrConstructorCall = featureOrConstructorCall;
 	}
 	
 	public void apply() {
@@ -51,10 +43,6 @@ public class NullLinkingCandidate implements IFeatureLinkingCandidate, IConstruc
 		return true;
 	}
 
-	public boolean isPreferredOver(ILinkingCandidate other) {
-		return false;
-	}
-
 	public JvmIdentifiableElement getFeature() {
 		throw new UnsupportedOperationException();
 	}
@@ -62,25 +50,5 @@ public class NullLinkingCandidate implements IFeatureLinkingCandidate, IConstruc
 	public List<LightweightTypeReference> getTypeArguments() {
 		return Collections.emptyList();
 	}
-
-	public XAbstractFeatureCall getFeatureCall() {
-		return (XAbstractFeatureCall) featureOrConstructorCall;
-	}
-
-	public boolean isStatic() {
-		return false;
-	}
-
-	public boolean isExtension() {
-		return false;
-	}
-
-	public XConstructorCall getConstructorCall() {
-		return (XConstructorCall) featureOrConstructorCall;
-	}
-
-	public JvmConstructor getConstructor() {
-		throw new UnsupportedOperationException();
-	}
-
+	
 }

@@ -16,7 +16,7 @@ import org.eclipse.xtext.xbase.XConstructorCall;
  * TODO JavaDoc, toString
  */
 @NonNullByDefault
-public interface IConstructorLinkingCandidate extends ILinkingCandidate {
+public interface IConstructorLinkingCandidate extends ILinkingCandidate<IConstructorLinkingCandidate> {
 
 	XConstructorCall getConstructorCall();
 	 

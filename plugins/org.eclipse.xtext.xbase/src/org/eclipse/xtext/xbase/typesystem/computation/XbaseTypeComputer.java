@@ -502,7 +502,7 @@ public class XbaseTypeComputer implements ITypeComputer {
 						TypeParameterSubstitutor<?> substitutor = new TypeParameterByConstraintSubstitutor(typeParameterMapping, state.getReferenceOwner());
 						JvmGenericType iterable = (JvmGenericType) services.getTypeReferences().findDeclaredType(Iterable.class, object);
 						ParameterizedTypeReference substituteMe = new ParameterizedTypeReference(state.getReferenceOwner(), iterable.getTypeParameters().get(0));
-						LightweightTypeReference substitutedArgument = substitutor.substitute(substituteMe);
+						LightweightTypeReference substitutedArgument = substitutor.substitute(substituteMe).getUpperBoundSubstitute();
 						return substitutedArgument;
 					}
 					@Override
@@ -586,12 +586,11 @@ public class XbaseTypeComputer implements ITypeComputer {
 		best.apply();
 	}
 	
-	protected <Candidate extends ILinkingCandidate> Candidate getBestCandidate(List<? extends Candidate> candidates) {
+	protected <Candidate extends ILinkingCandidate<Candidate>> Candidate getBestCandidate(List<? extends Candidate> candidates) {
 		Candidate result = candidates.get(0);
 		for(int i = 1; i < candidates.size(); i++) {
 			Candidate candidate = candidates.get(i);
-			if (!result.isPreferredOver(candidate))
-				result = candidate;
+			result = result.getPreferredCandidate(candidate);
 		}
 		return result;
 	}

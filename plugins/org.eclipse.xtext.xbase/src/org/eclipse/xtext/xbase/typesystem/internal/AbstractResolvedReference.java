@@ -22,7 +22,7 @@ import org.eclipse.xtext.xbase.typesystem.references.LightweightMergedBoundTypeA
  * @author Sebastian Zarnekow - Initial contribution and API
  */
 @NonNullByDefault
-public abstract class AbstractResolvedReference<Expression extends XExpression> extends AbstractLinkingCandidate<Expression> {
+public abstract class AbstractResolvedReference<Expression extends XExpression, Candidate extends ILinkingCandidate<Candidate>> extends AbstractLinkingCandidate<Expression, Candidate> {
 	
 	protected final JvmIdentifiableElement resolvedElement;
 	private final Map<JvmTypeParameter, LightweightMergedBoundTypeArgument> typeParameterMapping;
@@ -39,11 +39,6 @@ public abstract class AbstractResolvedReference<Expression extends XExpression> 
 		return typeParameterMapping;
 	}
 
-	@Override
-	public boolean isPreferredOver(ILinkingCandidate other) {
-		return true;
-	}
-	
 	public void resolveLinkingProxy() {
 		// nothing to do
 	}

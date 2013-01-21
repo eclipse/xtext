@@ -1669,7 +1669,7 @@ class InvariantCheckingEagerReentrantTypeResolver extends EagerReentrantTypeReso
 @Singleton
 class EagerArgumentTypeComputer extends XbaseTypeComputer {
 	
-	override protected <Candidate extends ILinkingCandidate> getBestCandidate(List<? extends Candidate> candidates) {
+	override protected <Candidate extends ILinkingCandidate<Candidate>> getBestCandidate(List<? extends Candidate> candidates) {
 		candidates.forEach[
 			if (it instanceof AbstractPendingLinkingCandidate)
 				(it as AbstractPendingLinkingCandidate).computeArgumentTypes()

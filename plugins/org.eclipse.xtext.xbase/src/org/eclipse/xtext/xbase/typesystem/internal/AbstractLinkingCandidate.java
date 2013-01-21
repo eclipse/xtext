@@ -48,7 +48,7 @@ import com.google.common.collect.Maps;
  * @author Sebastian Zarnekow - Initial contribution and API
  */
 @NonNullByDefault
-public abstract class AbstractLinkingCandidate<Expression extends XExpression> implements ILinkingCandidate {
+public abstract class AbstractLinkingCandidate<Expression extends XExpression, Candidate extends ILinkingCandidate<Candidate>> implements ILinkingCandidate<Candidate> {
 
 	protected class ArgumentTypeComputationState extends AbstractStackedTypeComputationState {
 
@@ -362,7 +362,7 @@ public abstract class AbstractLinkingCandidate<Expression extends XExpression> i
 	
 	protected abstract List<XExpression> getArguments();
 	
-	public abstract boolean isPreferredOver(ILinkingCandidate other);
+	public abstract Candidate getPreferredCandidate(Candidate other);
 	
 	@Nullable
 	protected LightweightTypeReference getExpectedType(XExpression expression) {

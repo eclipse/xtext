@@ -21,7 +21,7 @@ import org.eclipse.xtext.xbase.typesystem.internal.AbstractPendingLinkingCandida
 @Singleton
 @SuppressWarnings("all")
 public class EagerArgumentTypeComputer extends XbaseTypeComputer {
-  protected <Candidate extends ILinkingCandidate> Candidate getBestCandidate(final List<? extends Candidate> candidates) {
+  protected <Candidate extends ILinkingCandidate<Candidate>> Candidate getBestCandidate(final List<? extends Candidate> candidates) {
     Candidate _xblockexpression = null;
     {
       final Procedure1<Candidate> _function = new Procedure1<Candidate>() {
