@@ -12,6 +12,10 @@ import org.eclipse.xtext.xbase.tests.AbstractXbaseTestCase
 
 import static org.junit.Assert.*
 import org.junit.Test
+import org.junit.runner.RunWith
+import org.eclipse.xtext.junit4.XtextRunner
+import org.eclipse.xtext.junit4.InjectWith
+import org.eclipse.xtext.xbase.tests.typesystem.XbaseWithLogicalContainerInjectorProvider
 
 class JvmModelBasedLinkingTest extends AbstractXbaseTestCase {
 	
@@ -84,4 +88,10 @@ class JvmModelBasedLinkingTest extends AbstractXbaseTestCase {
 	def stringType(EObject ctx) {
 		refs.getTypeForName(typeof(String), ctx)
 	}
+}
+
+@RunWith(typeof(XtextRunner))
+@InjectWith(typeof(XbaseWithLogicalContainerInjectorProvider))
+class JvmModelBasedLinkingTest2 extends JvmModelBasedLinkingTest {
+	
 }
