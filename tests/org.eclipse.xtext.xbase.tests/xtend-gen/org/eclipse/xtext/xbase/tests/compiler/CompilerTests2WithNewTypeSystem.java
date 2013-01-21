@@ -45,4 +45,42 @@ public class CompilerTests2WithNewTypeSystem extends AbstractCompilerTests2 {
     _builder_1.newLine();
     this.compilesTo(_builder, _builder_1);
   }
+  
+  @Test
+  public void testAbstractIterator() throws Exception {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("{");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("var com.google.common.collect.AbstractIterator<String> iter = [| return null ]");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("return iter");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("final com.google.common.collect.AbstractIterator<String> _function = new com.google.common.collect.AbstractIterator<String>() {");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("@Override");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("protected String computeNext() {");
+    _builder_1.newLine();
+    _builder_1.append("      ");
+    _builder_1.append("return null;");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("};");
+    _builder_1.newLine();
+    _builder_1.append("com.google.common.collect.AbstractIterator<String> iter = _function;");
+    _builder_1.newLine();
+    _builder_1.append("return iter;");
+    _builder_1.newLine();
+    this.compilesTo(_builder, _builder_1);
+  }
 }

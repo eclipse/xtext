@@ -2179,4 +2179,10 @@ public abstract class AbstractClosureTypeTest extends AbstractXbaseTestCase {
     List<Object> _resolvesClosuresTo = this.resolvesClosuresTo("[ int i1, int i2| if (true) return i1 else return null ].apply(1, 1)", "(int, int)=>Integer");
     this.withEquivalents(_resolvesClosuresTo, "Function2<Integer, Integer, Integer>");
   }
+  
+  @Test
+  public void testAbstractIterator_01() throws Exception {
+    List<Object> _resolvesClosuresTo = this.resolvesClosuresTo("{ var com.google.common.collect.AbstractIterator<String> iter = [| return null ] }", "()=>String");
+    this.withEquivalents(_resolvesClosuresTo, "AbstractIterator<String>");
+  }
 }

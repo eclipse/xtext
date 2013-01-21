@@ -28,6 +28,7 @@ import org.eclipse.xtext.common.types.JvmVisibility;
 import org.eclipse.xtext.common.types.util.TypeReferences;
 import org.eclipse.xtext.xbase.lib.Functions;
 import org.eclipse.xtext.xbase.lib.Procedures;
+import org.eclipse.xtext.xbase.typesystem.override.ResolvedOperations;
 import org.eclipse.xtext.xbase.typesystem.util.ActualTypeArgumentCollector;
 import org.eclipse.xtext.xbase.typesystem.util.BoundTypeArgumentSource;
 import org.eclipse.xtext.xbase.typesystem.util.TypeParameterByConstraintSubstitutor;
@@ -77,7 +78,7 @@ public class FunctionTypes {
 			LightweightTypeReference functionType, JvmOperation operation,
 			ActualTypeArgumentCollector typeArgumentCollector, ITypeReferenceOwner owner) {
 		/* 
-		 * The mapping is populated from by means of the function type to declarator mapping, though a method
+		 * The mapping is populated by means of the function type to declarator mapping, though a method
 		 * 
 		 * m(Zonk zonk) { .. }
 		 * 
@@ -98,9 +99,10 @@ public class FunctionTypes {
 	}
 	
 	public JvmOperation findImplementingOperation(LightweightTypeReference functionType) {
+		// TODO use org.eclipse.xtext.xbase.typesystem.override.ResolvedOperations instead (if fast enough)
 		List<JvmType> rawTypes = functionType.getRawTypes();
 		for(JvmType rawType: rawTypes) {
-			if (rawType instanceof JvmDeclaredType) {
+			if (rawType instanceof JvmDeclaredType && !((JvmDeclaredType) rawType).isFinal()) {
 				Iterable<JvmOperation> features = Iterables.filter(((JvmDeclaredType)rawType).getAllFeatures(), JvmOperation.class);
 				JvmOperation result = null;
 				for (JvmOperation op : features) {
@@ -121,7 +123,8 @@ public class FunctionTypes {
 	}
 
 	private boolean isValidFunction(JvmOperation op) {
-		if (op.getVisibility() == JvmVisibility.PUBLIC) {
+		// TODO we need context here - the op has to be visible
+		if (op.isAbstract()) {
 			if (Object.class.getName().equals(op.getDeclaringType().getIdentifier()))
 				return false;
 			final String name = op.getSimpleName();
