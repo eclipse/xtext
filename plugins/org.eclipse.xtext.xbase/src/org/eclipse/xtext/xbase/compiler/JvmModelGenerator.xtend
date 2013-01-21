@@ -14,7 +14,6 @@ import org.eclipse.emf.ecore.resource.Resource
 import org.eclipse.xtend2.lib.StringConcatenation
 import org.eclipse.xtext.common.types.JvmAnnotationAnnotationValue
 import org.eclipse.xtext.common.types.JvmAnnotationReference
-import org.eclipse.xtext.common.types.JvmAnnotationTarget
 import org.eclipse.xtext.common.types.JvmAnnotationType
 import org.eclipse.xtext.common.types.JvmAnnotationValue
 import org.eclipse.xtext.common.types.JvmBooleanAnnotationValue
@@ -132,7 +131,10 @@ class JvmModelGenerator implements IGenerator {
 	def dispatch generateBody(JvmGenericType it, ITreeAppendable appendable, GeneratorConfig config) {
 		generateJavaDoc(appendable, config)
 		val childAppendable = appendable.trace(it)
-		generateAnnotations(childAppendable, true, config)
+		if(config.generateSyntheticSuppressWarnings)
+			generateAnnotationsWithSyntheticSuppressWarnings(childAppendable, config)
+		else
+			annotations.generateAnnotations(childAppendable, true, config)
 		generateModifier(childAppendable, config)
 		if (isInterface) {
 			childAppendable.append("interface ")
@@ -157,10 +159,16 @@ class JvmModelGenerator implements IGenerator {
 		appendable.newLine
 	}
 	
+	def generateAnnotationsWithSyntheticSuppressWarnings(JvmGenericType it, ITreeAppendable appendable, GeneratorConfig config) {
+		val noSuppressWarningsFilter = [JvmAnnotationReference it | !(it.annotation?.getIdentifier()?.equals(typeof(SuppressWarnings).name))]
+		annotations.filter(noSuppressWarningsFilter).generateAnnotations(appendable, true, config)
+		appendable.append('''@SuppressWarnings("all")''').newLine
+	}
+
 	def dispatch generateBody(JvmEnumerationType it, ITreeAppendable appendable, GeneratorConfig config) {
 		generateJavaDoc(appendable, config)
 		val childAppendable = appendable.trace(it)
-		generateAnnotations(childAppendable, true, config)
+		annotations.generateAnnotations(childAppendable, true, config)
 		generateModifier(childAppendable, config)
 		childAppendable.append("enum ")
 		childAppendable.traceSignificant(it).append(simpleName)
@@ -184,7 +192,7 @@ class JvmModelGenerator implements IGenerator {
 	def void generateEnumLiteral(JvmEnumerationLiteral it, ITreeAppendable appendable, GeneratorConfig config) {
 		appendable.increaseIndentation.newLine
 		generateJavaDoc(appendable, config)
-		generateAnnotations(appendable, true, config)
+		annotations.generateAnnotations(appendable, true, config)
 		appendable.append(simpleName)
 		// TODO: constructor args
 		appendable.decreaseIndentation
@@ -193,7 +201,7 @@ class JvmModelGenerator implements IGenerator {
 	def dispatch generateBody(JvmAnnotationType it, ITreeAppendable appendable, GeneratorConfig config) {
 		generateJavaDoc(appendable, config)
 		val childAppendable = appendable.trace(it)
-		generateAnnotations(childAppendable, true, config)
+		annotations.generateAnnotations(childAppendable, true, config)
 		generateModifier(childAppendable, config)
 		childAppendable.append("@interface ")
 		childAppendable.traceSignificant(it).append(simpleName)
@@ -210,7 +218,7 @@ class JvmModelGenerator implements IGenerator {
 		appendable.openScope
 		generateJavaDoc(appendable, config)
 		val tracedAppendable = appendable.trace(it)
-		generateAnnotations(tracedAppendable, true, config)
+		annotations.generateAnnotations(tracedAppendable, true, config)
 		generateModifier(tracedAppendable, config)
 		returnType.serializeSafely("Object", tracedAppendable)
 		tracedAppendable.append(" ")
@@ -336,7 +344,7 @@ class JvmModelGenerator implements IGenerator {
 		appendable.newLine
 		generateJavaDoc(appendable, config)
 		val tracedAppendable = appendable.trace(it)
-		generateAnnotations(tracedAppendable, true, config)
+		annotations.generateAnnotations(tracedAppendable, true, config)
 		generateModifier(tracedAppendable, config)
 		type.serializeSafely("Object", tracedAppendable)
 		tracedAppendable.append(" ")
@@ -350,7 +358,7 @@ class JvmModelGenerator implements IGenerator {
 		appendable.openScope
 		generateJavaDoc(appendable, config)
 		val tracedAppendable = appendable.trace(it)
-		generateAnnotations(tracedAppendable, true, config)
+		annotations.generateAnnotations(tracedAppendable, true, config)
 		generateModifier(tracedAppendable, config)
 		generateTypeParameterDeclaration(tracedAppendable, config)
 		if (returnType == null) {
@@ -379,7 +387,7 @@ class JvmModelGenerator implements IGenerator {
 		appendable.openScope
 		generateJavaDoc(appendable, config)
 		val tracedAppendable = appendable.trace(it)
-		generateAnnotations(tracedAppendable, true, config)
+		annotations.generateAnnotations(tracedAppendable, true, config)
 		generateModifier(tracedAppendable, config)
 		generateTypeParameterDeclaration(tracedAppendable, config)
 		tracedAppendable.traceSignificant(it).append(simpleName)
@@ -459,7 +467,7 @@ class JvmModelGenerator implements IGenerator {
 	
 	def void generateParameter(JvmFormalParameter it, ITreeAppendable appendable, boolean vararg, GeneratorConfig config) {
 		val tracedAppendable = appendable.trace(it)
-		generateAnnotations(tracedAppendable, false, config)
+		annotations.generateAnnotations(tracedAppendable, false, config)
 		tracedAppendable.append("final ")
 		if (vararg) {
 			if (! (parameterType instanceof JvmGenericArrayTypeReference)) {
@@ -578,7 +586,7 @@ class JvmModelGenerator implements IGenerator {
 		}
 	}
 	
-	def void generateAnnotations(JvmAnnotationTarget it, ITreeAppendable appendable, boolean withLineBreak, GeneratorConfig config) {
+	def void generateAnnotations(Iterable<JvmAnnotationReference> annotations, ITreeAppendable appendable, boolean withLineBreak, GeneratorConfig config) {
 		val sep = [ITreeAppendable it |  if(withLineBreak) newLine else append(' ') ]
 		appendable.forEachSafely(annotations, [
 				separator = sep suffix = sep
@@ -596,17 +604,14 @@ class JvmModelGenerator implements IGenerator {
 			])
 	}
 
-	def void generateAnnotation(JvmAnnotationReference annotation, ITreeAppendable appendable, GeneratorConfig config) {
-		if(!config.generateSyntheticSuppressWarnings && annotation.annotation?.qualifiedName == "java.lang.SuppressWarnings")
-			return;
-		annotation.serializeSafely(appendable) [
-			if(config.generateExpressions)
-				appendable.forEach(annotation.values, [
-						prefix = '(' separator = ', ' suffix = ')'
-					], [
-						toJava(appendable, config)
-					])
-		]
+	def void generateAnnotation(JvmAnnotationReference it, ITreeAppendable appendable, GeneratorConfig config) {
+		appendable.append("@")
+		appendable.append(annotation)
+		appendable.forEach(values, [
+				prefix = '(' separator = ', ' suffix = ')'
+			], [
+				toJava(appendable, config)
+			])
 	}
 	 
 	def void toJava(JvmAnnotationValue it, ITreeAppendable appendable, GeneratorConfig config) {
