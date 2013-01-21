@@ -64,4 +64,11 @@ public class XbaseLinkingScopeProviderTest extends AbstractXbaseLinkingTest {
 		fail("Fails with old implementation");
 	}
 	
+	@Override
+	@Ignore("Fails with old implementation")
+	@Test
+	public void testSwitchExpression_03() throws Exception {
+		// links to Object.toString though CharSequence specializes this
+		super.testSwitchExpression_03();
+	}
 }

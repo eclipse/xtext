@@ -132,6 +132,12 @@ public class OldAPIFeatureCallTypeTest extends AbstractFeatureCallTypeTest {
   
   @Ignore(value = "fails in old implementation")
   @Test
+  public void testSwitchExpression_7() throws Exception {
+    Assert.fail("fails in old implementation");
+  }
+  
+  @Ignore(value = "fails in old implementation")
+  @Test
   public void testTypeGuardedCase_1() throws Exception {
     Assert.fail("fails in old implementation");
   }

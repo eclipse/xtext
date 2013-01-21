@@ -57,6 +57,15 @@ public class FeatureLinkingCandidate extends AbstractPendingLinkingCandidate<XAb
 			ExpressionTypeComputationState state) {
 		super(featureCall, description, state);
 	}
+	
+	@Override
+	protected boolean isRawTypeContext() {
+		LightweightTypeReference receiverType = getReceiverType();
+		if(receiverType != null && receiverType.isRawType()) {
+			return true;
+		}
+		return false;
+	}
 
 	@Override
 	protected List<XExpression> getArguments() {

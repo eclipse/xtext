@@ -350,4 +350,10 @@ public class ExpectationTest extends AbstractXbaseTestCase {
     ExpectationTest _expects = this.expects("return if (true) { null \'\' }");
     _expects.nothing();
   }
+  
+  @Test
+  public void testRawType_01() {
+    ExpectationTest _expects = this.expects("(\'\' as Comparable).compareTo(null)");
+    _expects.types("Object");
+  }
 }

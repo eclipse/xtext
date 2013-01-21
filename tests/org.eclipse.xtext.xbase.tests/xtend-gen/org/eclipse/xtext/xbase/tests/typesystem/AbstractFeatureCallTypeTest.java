@@ -415,6 +415,11 @@ public abstract class AbstractFeatureCallTypeTest extends AbstractXbaseTestCase 
   }
   
   @Test
+  public void testSwitchExpression_7() throws Exception {
+    this.resolvesFeatureCallsTo("switch x : \'foo\' as CharSequence {\n\t\t\tComparable : x.compareTo(\'\')\n\t\t}", "CharSequence & Comparable", "int");
+  }
+  
+  @Test
   public void testTypeGuardedCase_0() throws Exception {
     this.resolvesFeatureCallsTo("switch s: new Object() { String: s StringBuffer: s}", "String", "StringBuffer");
   }
