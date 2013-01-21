@@ -19,7 +19,7 @@ import org.eclipse.xtext.xbase.XExpression;
 @NonNullByDefault
 public class ExpressionArgumentFactory {
 
-	public IFeatureCallArguments createExpressionArguments(XExpression expression, AbstractLinkingCandidate<?, ?> candidate) {
+	public IFeatureCallArguments createExpressionArguments(XExpression expression, AbstractLinkingCandidate<?> candidate) {
 		if (expression instanceof XAssignment && !(candidate.getFeature() instanceof JvmExecutable))
 			return new AssignmentArguments(candidate);
 		else

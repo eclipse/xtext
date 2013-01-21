@@ -29,7 +29,7 @@ import com.google.common.collect.Lists;
  * TODO JavaDoc, toString
  */
 @NonNullByDefault
-public class ConstructorLinkingCandidate extends AbstractPendingLinkingCandidate<XConstructorCall, IConstructorLinkingCandidate> implements IConstructorLinkingCandidate {
+public class ConstructorLinkingCandidate extends AbstractPendingLinkingCandidate<XConstructorCall> implements IConstructorLinkingCandidate {
 
 	public ConstructorLinkingCandidate(XConstructorCall constructorCall, IIdentifiableElementDescription description, ExpressionTypeComputationState state) {
 		super(constructorCall, description, state);

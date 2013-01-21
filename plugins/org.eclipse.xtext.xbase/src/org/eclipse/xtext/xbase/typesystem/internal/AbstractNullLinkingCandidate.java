@@ -22,7 +22,7 @@ import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
  * @author Sebastian Zarnekow - Initial contribution and API
  */
 @NonNullByDefault
-public abstract class AbstractNullLinkingCandidate<Candidate extends ILinkingCandidate<Candidate>> implements ILinkingCandidate<Candidate>{
+public abstract class AbstractNullLinkingCandidate implements ILinkingCandidate {
 
 	protected final XExpression featureOrConstructorCall;
 

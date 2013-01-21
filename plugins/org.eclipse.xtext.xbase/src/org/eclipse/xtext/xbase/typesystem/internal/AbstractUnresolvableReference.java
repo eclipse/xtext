@@ -36,7 +36,7 @@ import org.eclipse.xtext.xbase.typesystem.references.OwnedConverter;
  * @author Sebastian Zarnekow - Initial contribution and API
  */
 @NonNullByDefault
-public abstract class AbstractUnresolvableReference<Candidate extends ILinkingCandidate<Candidate>> implements ILinkingCandidate<Candidate>, ILinkingDiagnosticMessageProvider.ILinkingDiagnosticContext {
+public abstract class AbstractUnresolvableReference implements ILinkingCandidate, ILinkingDiagnosticMessageProvider.ILinkingDiagnosticContext {
 	private XExpression expression;
 	private ExpressionTypeComputationState state;
 	private String text;
@@ -128,7 +128,7 @@ public abstract class AbstractUnresolvableReference<Candidate extends ILinkingCa
 		return node;
 	}
 
-	public Candidate getPreferredCandidate(Candidate other) {
+	public ILinkingCandidate getPreferredCandidate(ILinkingCandidate other) {
 		return other;
 	}
 

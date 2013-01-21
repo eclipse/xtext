@@ -27,7 +27,7 @@ import com.google.common.collect.Lists;
  * @author Sebastian Zarnekow - Initial contribution and API
  */
 @NonNullByDefault
-public class UnresolvableConstructorCall extends AbstractUnresolvableReference<IConstructorLinkingCandidate> implements IConstructorLinkingCandidate {
+public class UnresolvableConstructorCall extends AbstractUnresolvableReference implements IConstructorLinkingCandidate {
 
 	public UnresolvableConstructorCall(XConstructorCall constructorCall, INode node, String text, ExpressionTypeComputationState state) {
 		super(constructorCall, node, text, state);

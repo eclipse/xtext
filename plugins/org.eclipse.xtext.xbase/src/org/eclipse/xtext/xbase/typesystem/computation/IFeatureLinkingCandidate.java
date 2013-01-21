@@ -15,7 +15,7 @@ import org.eclipse.xtext.xbase.XAbstractFeatureCall;
  * TODO JavaDoc, toString
  */
 @NonNullByDefault
-public interface IFeatureLinkingCandidate extends ILinkingCandidate<IFeatureLinkingCandidate> {
+public interface IFeatureLinkingCandidate extends ILinkingCandidate {
 
 	XAbstractFeatureCall getFeatureCall();
 
