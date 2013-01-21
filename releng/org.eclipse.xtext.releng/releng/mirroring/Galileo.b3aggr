@@ -13,7 +13,7 @@
       </repositories>
       <repositories location="http://download.eclipse.org/modeling/emf/updates">
         <features name="org.eclipse.emf.feature.group" versionRange="[2.5.0,2.6.0)"/>
-        <features name="org.eclipse.emf.source.feature.group"/>
+        <features name="org.eclipse.emf.source.feature.group" versionRange="[2.5.0,2.6.0)"/>
         <features name="org.eclipse.emf.compare.sdk.feature.group" versionRange="[1.0.1,1.0.2)"/>
       </repositories>
       <repositories location="http://download.eclipse.org/eclipse/updates/3.8">
@@ -26,7 +26,7 @@
       </repositories>
     </contributions>
   </validationSets>
-  <configurations operatingSystem="macosx" windowSystem="cocoa"/>
+  <configurations operatingSystem="macosx" windowSystem="cocoa" architecture="x86_64"/>
   <configurations operatingSystem="linux" windowSystem="gtk"/>
   <configurations operatingSystem="linux" windowSystem="gtk" architecture="x86_64"/>
 </aggregator:Aggregation>

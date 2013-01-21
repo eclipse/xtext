@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <rm:rmap xmlns:bc="http://www.eclipse.org/buckminster/Common-1.0" xmlns:rm="http://www.eclipse.org/buckminster/RMap-1.0">
-	<rm:property key="checkout.location" value="${workspace.root}/org.eclipse.xtend.git" />
+	<rm:property key="checkout.location" value="${workspace.root}/org.eclipse.xtext.git" />
 	
 	<rm:locator pattern="^org\.eclipse\.xtend\..*?(?:tests|testlanguages)(?:\..+)?$" searchPathRef="xtend.tests"/>
 
