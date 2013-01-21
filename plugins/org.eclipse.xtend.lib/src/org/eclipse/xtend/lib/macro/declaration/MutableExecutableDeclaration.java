@@ -12,5 +12,7 @@ public interface MutableExecutableDeclaration extends MutableTypeParameterDeclar
 	void setVarArgs(boolean isVarArgs);
 	void setBody(Expression body);
 	void setBody(Functions.Function1<? super CompilationContext, ? extends CharSequence> compilationStrategy);
-	void setExceptions(List<TypeReference> exceptions);
+	void setExceptions(TypeReference... exceptions);
+	
+	MutableParameterDeclaration addParameter(String name, TypeReference type);
 }
