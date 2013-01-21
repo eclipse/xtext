@@ -3,6 +3,8 @@ package org.eclipse.xtext.xbase.tests.compiler
 import com.google.common.base.Supplier
 import com.google.inject.Inject
 import com.google.inject.Provider
+import foo.TestAnnotation
+import foo.TestAnnotation2
 import foo.TestAnnotations
 import java.util.AbstractList
 import org.eclipse.emf.ecore.EObject
@@ -13,6 +15,8 @@ import org.eclipse.xtext.common.types.TypesFactory
 import org.eclipse.xtext.common.types.util.TypeReferences
 import org.eclipse.xtext.generator.IFileSystemAccess
 import org.eclipse.xtext.generator.InMemoryFileSystemAccess
+import org.eclipse.xtext.junit4.InjectWith
+import org.eclipse.xtext.junit4.XtextRunner
 import org.eclipse.xtext.junit4.validation.ValidationTestHelper
 import org.eclipse.xtext.xbase.compiler.JvmModelGenerator
 import org.eclipse.xtext.xbase.compiler.OnTheFlyJavaCompiler$EclipseRuntimeDependentJavaCompiler
@@ -20,12 +24,10 @@ import org.eclipse.xtext.xbase.junit.evaluation.AbstractXbaseEvaluationTest
 import org.eclipse.xtext.xbase.jvmmodel.JvmTypesBuilder
 import org.eclipse.xtext.xbase.lib.Functions
 import org.eclipse.xtext.xbase.tests.AbstractXbaseTestCase
-import org.junit.Test
-
-import static org.junit.Assert.*
-import foo.TestAnnotation
-import foo.TestAnnotation2
+import org.eclipse.xtext.xbase.tests.typesystem.XbaseWithLogicalContainerInjectorProvider
 import org.junit.Before
+import org.junit.Test
+import org.junit.runner.RunWith
 
 class JvmModelGeneratorTest extends AbstractXbaseTestCase {
 	
@@ -258,3 +260,9 @@ class JvmModelGeneratorTest extends AbstractXbaseTestCase {
 		return compiledClass
 	}
 }
+
+@RunWith(typeof(XtextRunner))
+@InjectWith(typeof(XbaseWithLogicalContainerInjectorProvider))
+class JvmModelGeneratorTest2 extends JvmModelGeneratorTest {
+	
+} 
