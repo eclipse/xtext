@@ -68,6 +68,16 @@ import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.JvmVisibility;
 import org.eclipse.xtext.common.types.TypesPackage;
 import org.eclipse.xtext.common.types.util.TypeReferences;
+import org.eclipse.xtext.diagnostics.Severity;
+import org.eclipse.xtext.documentation.IEObjectDocumentationProvider;
+import org.eclipse.xtext.documentation.IEObjectDocumentationProviderExtension;
+import org.eclipse.xtext.documentation.IJavaDocTypeReferenceProvider;
+import org.eclipse.xtext.naming.IQualifiedNameConverter;
+import org.eclipse.xtext.nodemodel.INode;
+import org.eclipse.xtext.resource.IEObjectDescription;
+import org.eclipse.xtext.scoping.IScope;
+import org.eclipse.xtext.scoping.IScopeProvider;
+import org.eclipse.xtext.util.ReplaceRegion;
 import org.eclipse.xtext.validation.Check;
 import org.eclipse.xtext.validation.ComposedChecks;
 import org.eclipse.xtext.validation.ValidationMessageAcceptor;
@@ -106,12 +116,12 @@ import org.eclipse.xtext.xtype.XtypePackage;
 import com.google.common.base.Function;
 import com.google.common.base.Predicate;
 import com.google.common.collect.HashMultimap;
+import com.google.common.collect.ImmutableSet.Builder;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Multimap;
 import com.google.common.collect.Multimaps;
 import com.google.common.collect.Sets;
-import com.google.common.collect.ImmutableSet.Builder;
 import com.google.inject.Inject;
 
 /**
@@ -152,6 +162,17 @@ public class XtendJavaValidator2 extends XbaseWithAnnotationsJavaValidator2 {
 	
 	@Inject
 	private IVisibilityHelper visibilityHelper;
+	@Inject
+	private IJavaDocTypeReferenceProvider javaDocTypeReferenceProvider;
+
+	@Inject
+	private IScopeProvider scopeProvider;
+
+	@Inject
+	private IEObjectDocumentationProvider documentationProvider;
+
+	@Inject
+	private IQualifiedNameConverter qualifiedNameConverter;
 
 	@Override
 	protected void initTypeConformanceCheckedReferences(Builder<EReference> acceptor) {
@@ -1217,6 +1238,27 @@ public class XtendJavaValidator2 extends XbaseWithAnnotationsJavaValidator2 {
 		super.checkFinalFieldInitialization(inferredType);
 	}
 	
+	@Check
+	public void checkJavaDocRefs(XtendMember member){
+		if(isIgnored(IssueCodes.JAVA_DOC_LINKING_DIAGNOSTIC))
+			return;
+		List<INode> documentationNodes = ((IEObjectDocumentationProviderExtension) documentationProvider).getDocumentationNodes(member);
+		for(INode node : documentationNodes){
+			for(ReplaceRegion region : javaDocTypeReferenceProvider.computeTypeRefRegions(node)){
+				String typeRefString = region.getText();
+				if(typeRefString != null && typeRefString.length() > 0){
+					IScope scope = scopeProvider.getScope(member, TypesPackage.Literals.JVM_PARAMETERIZED_TYPE_REFERENCE__TYPE);
+					IEObjectDescription candidate = scope.getSingleElement(qualifiedNameConverter.toQualifiedName(typeRefString));
+					if(candidate == null){
+						Severity severity = getIssueSeverities(getContext(), getCurrentObject()).getSeverity(IssueCodes.JAVA_DOC_LINKING_DIAGNOSTIC);
+						if (severity != null)
+							getChain().add(createDiagnostic(severity, "javaDoc: " + typeRefString + " cannot be resolved to a type", member, region.getOffset(), region.getLength(), IssueCodes.JAVA_DOC_LINKING_DIAGNOSTIC));
+					}
+				}
+			}
+		}
+	}
+
 	@Override
 	protected void reportUninitializedField(JvmField field) {
 		EObject element = associations.getPrimarySourceElement(field);

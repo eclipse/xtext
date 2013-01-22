@@ -702,7 +702,7 @@ abstract class AbstractXtendCompilerTest extends AbstractXtendTestCase {
 			        }
 			      } finally {
 			      }
-			    } catch (Exception _e) {
+			    } catch (Throwable _e) {
 			      throw Exceptions.sneakyThrow(_e);
 			    }
 			  }
@@ -749,7 +749,7 @@ abstract class AbstractXtendCompilerTest extends AbstractXtendTestCase {
 			              File _file = new File(f);
 			              File _canonicalFile = _file.getCanonicalFile();
 			              return _canonicalFile;
-			            } catch (Exception _e) {
+			            } catch (Throwable _e) {
 			              throw Exceptions.sneakyThrow(_e);
 			            }
 			          }
@@ -975,7 +975,7 @@ abstract class AbstractXtendCompilerTest extends AbstractXtendTestCase {
 			    try {
 			      IOException _iOException = new IOException();
 			      throw _iOException;
-			    } catch (Exception _e) {
+			    } catch (Throwable _e) {
 			      throw Exceptions.sneakyThrow(_e);
 			    }
 			  }
@@ -2449,58 +2449,58 @@ abstract class AbstractXtendCompilerTest extends AbstractXtendTestCase {
 			public class bar {
 			  private Date d;
 			}
-		''')
-	}
-	
-	@Test
-	def compileAllClassesWithTheSameFileHeader(){
-		val input = ''' 
-			/**
-			 * Copyright (c) 2011 itemis AG (http://www.itemis.eu) and others.
-			 * All rights reserved. This program and the accompanying materials
-			 * are made available under the terms of the Eclipse Public License v1.0
-			 * which accompanies this distribution, and is available at
-			 * http://www.eclipse.org/legal/epl-v10.html
-			 */
-			package foo
-			
-			class bar { 
-			    String name = 'foobar'
-			}
-			
-			class baz { 
-			    String name = 'foobaz'
-			}
-		'''
-		val expectedBarClass = '''
-			/**
-			 * Copyright (c) 2011 itemis AG (http://www.itemis.eu) and others.
-			 * All rights reserved. This program and the accompanying materials
-			 * are made available under the terms of the Eclipse Public License v1.0
-			 * which accompanies this distribution, and is available at
-			 * http://www.eclipse.org/legal/epl-v10.html
-			 */
-			package foo;
-			
-			@SuppressWarnings("all")
-			public class bar {
-			  private String name = "foobar";
-			}
-		'''
-		val expectedBazClass = '''
-			/**
-			 * Copyright (c) 2011 itemis AG (http://www.itemis.eu) and others.
-			 * All rights reserved. This program and the accompanying materials
-			 * are made available under the terms of the Eclipse Public License v1.0
-			 * which accompanies this distribution, and is available at
-			 * http://www.eclipse.org/legal/epl-v10.html
-			 */
-			package foo;
-			
-			@SuppressWarnings("all")
-			public class baz {
-			  private String name = "foobaz";
-			}
+        ''')
+    }
+
+    @Test
+    def compileAllClassesWithTheSameFileHeader(){
+        val input = '''
+            /**
+             * Copyright (c) 2011 itemis AG (http://www.itemis.eu) and others.
+             * All rights reserved. This program and the accompanying materials
+             * are made available under the terms of the Eclipse Public License v1.0
+             * which accompanies this distribution, and is available at
+             * http://www.eclipse.org/legal/epl-v10.html
+             */
+            package foo
+
+            class bar {
+                String name = 'foobar'
+            }
+
+            class baz {
+                String name = 'foobaz'
+            }
+        '''
+        val expectedBarClass = '''
+            /**
+             * Copyright (c) 2011 itemis AG (http://www.itemis.eu) and others.
+             * All rights reserved. This program and the accompanying materials
+             * are made available under the terms of the Eclipse Public License v1.0
+             * which accompanies this distribution, and is available at
+             * http://www.eclipse.org/legal/epl-v10.html
+             */
+            package foo;
+
+            @SuppressWarnings("all")
+            public class bar {
+              private String name = "foobar";
+            }
+        '''
+        val expectedBazClass = '''
+            /**
+             * Copyright (c) 2011 itemis AG (http://www.itemis.eu) and others.
+             * All rights reserved. This program and the accompanying materials
+             * are made available under the terms of the Eclipse Public License v1.0
+             * which accompanies this distribution, and is available at
+             * http://www.eclipse.org/legal/epl-v10.html
+             */
+            package foo;
+
+            @SuppressWarnings("all")
+            public class baz {
+              private String name = "foobaz";
+            }
 		'''
 		val file = file(input.toString(), true)
 		val barType = file.eResource.contents.filter(typeof(JvmDeclaredType)).head
@@ -2511,7 +2511,7 @@ abstract class AbstractXtendCompilerTest extends AbstractXtendTestCase {
 		XtendCompilerTest::assertEquals(expectedBarClass.toString, barJavaCode.toString);
 		XtendCompilerTest::assertEquals(expectedBazClass.toString, bazJavaCode.toString);
 	}
-	
+
 	/*
 	 * see https://bugs.eclipse.org/bugs/show_bug.cgi?id=391077
 	 */
@@ -2559,62 +2559,64 @@ abstract class AbstractXtendCompilerTest extends AbstractXtendTestCase {
 		val generatorConfig = generatorConfigProvider.get(null)
 		generatorConfig.setGenerateSyntheticSuppressWarnings(false)
 		generatorConfig.setGenerateExpressions(false)
-		assertCompilesTo('''
-			package foo
+		assertCompilesTo(
+			'''
+				package foo
 
-			/**
-			 * javadoc
-			 */
-			class Bar {
-				def foo(){
-					1 + 1
+				/**
+				 * javadoc
+				 */
+				class Bar {
+					def foo(){
+						1 + 1
+					}
 				}
-			}
-		''',
-		'''
-			package foo;
+			''',
+			'''
+				package foo;
 
-			/**
-			 * javadoc
-			 */
-			public class Bar {
-			  public int foo() {
-			    throw new UnsupportedOperationException("foo is not implemented");
-			  }
-			}
-		''', generatorConfig)
+				/**
+				 * javadoc
+				 */
+				public class Bar {
+				  public int foo() {
+				    throw new UnsupportedOperationException("foo is not implemented");
+				  }
+				}
+			''', generatorConfig)
 	}
 	@Test
 	def compileWithConfiguration_2(){
-	val generatorConfig = generatorConfigProvider.get(null)
-	generatorConfig.setGenerateSyntheticSuppressWarnings(true)
-	generatorConfig.setGenerateExpressions(false)
-		assertCompilesTo('''
-			package foo
+		val generatorConfig = generatorConfigProvider.get(null)
+		generatorConfig.setGenerateSyntheticSuppressWarnings(true)
+		generatorConfig.setGenerateExpressions(false)
+		assertCompilesTo(
+			'''
+				package foo
 
-			/**
-			 * javadoc
-			 */
-			@SuppressWarnings("unused")
-			class Bar {
-				def foo(){
-					1 + 1
+				/**
+				 * javadoc
+				 */
+				@SuppressWarnings("unused")
+				class Bar {
+					def foo(){
+						1 + 1
+					}
 				}
-			}
-		''',
-		'''
-			package foo;
+			''',
+			'''
+				package foo;
 
-			/**
-			 * javadoc
-			 */
-			@SuppressWarnings("all")
-			public class Bar {
-			  public int foo() {
-			    throw new UnsupportedOperationException("foo is not implemented");
-			  }
-			}
-		''', generatorConfig)
+				/**
+				 * javadoc
+				 */
+				@SuppressWarnings("all")
+				public class Bar {
+				  public int foo() {
+				    throw new UnsupportedOperationException("foo is not implemented");
+				  }
+				}
+			''', generatorConfig)
 	}
 
 	@Test
@@ -2622,147 +2624,206 @@ abstract class AbstractXtendCompilerTest extends AbstractXtendTestCase {
 		val generatorConfig = generatorConfigProvider.get(null)
 		generatorConfig.setGenerateSyntheticSuppressWarnings(true)
 		generatorConfig.setGenerateExpressions(false)
-		assertCompilesTo('''
-			package foo
+		assertCompilesTo(
+			'''
+				package foo
 
-			/**
-			 * javadoc
-			 */
-			@Deprecated
-			@SuppressWarnings("unused")
-			class Bar {
-				def foo(){
-					1 + 1
+				/**
+				 * javadoc
+				 */
+				@Deprecated
+				@SuppressWarnings("unused")
+				class Bar {
+					def foo(){
+						1 + 1
+					}
 				}
-			}
-		''',
-		'''
-			package foo;
+			''',
+			'''
+				package foo;
 
-			/**
-			 * javadoc
-			 */
-			@Deprecated
-			@SuppressWarnings("all")
-			public class Bar {
-			  public int foo() {
-			    throw new UnsupportedOperationException("foo is not implemented");
-			  }
-			}
-		''', generatorConfig)
+				/**
+				 * javadoc
+				 */
+				@Deprecated
+				@SuppressWarnings("all")
+				public class Bar {
+				  public int foo() {
+				    throw new UnsupportedOperationException("foo is not implemented");
+				  }
+				}
+			''', generatorConfig)
 	}
 
 	@Test
 	def compileImportForTypeRefInJavaDoc(){
-		assertCompilesTo('''
-			package foo
-			import java.util.List
-			import java.util.ArrayList
+		assertCompilesTo(
+			'''
+				package foo
+				import java.util.List
+				import java.util.ArrayList
 
-			/**
-			 *
-			 * {@link List}
-			 * @see Bar
-			 */
-			class Foo {
 				/**
-				 * @see ArrayList
+				 *
+				 * {@link List}
 				 */
-				def doStuff(){}
+				class Foo {
+					/**
+					 *
+					 * @see ArrayList
+					 */
+					def doStuff(){}
 
-			}
-		''',
-		'''
-			package foo;
+				}
+			''',
+			'''
+				package foo;
 
-			import java.util.ArrayList;
-			import java.util.List;
+				import java.util.ArrayList;
+				import java.util.List;
 
-			/**
-			 * {@link List}
-			 * @see Bar
-			 */
-			@SuppressWarnings("all")
-			public class Foo {
-			  /**
-			   * @see ArrayList
-			   */
-			  public Object doStuff() {
-			    return null;
-			  }
-			}
-		''')
+				/**
+				 * {@link List}
+				 */
+				@SuppressWarnings("all")
+				public class Foo {
+				  /**
+				   * @see ArrayList
+				   */
+				  public Object doStuff() {
+				    return null;
+				  }
+				}
+			''')
 	}
 
 	@Test
 	def compileImportForTypeRefInJavaDoc_2(){
-		assertCompilesTo('''
-			package foo
-			import java.util.List
-			import java.util.ArrayList
+		assertCompilesTo(
+			'''
+				package foo
+				import java.util.List
+				import java.util.ArrayList
 
-			/**
-			 *
-			 * {@link List}
-			 * @see Bar
-			 */
-			class Foo {
 				/**
-				 * @see ArrayList
+				 *
+				 * {@link List}
 				 */
-				def doStuff(ArrayList l){}
+				class Foo {
+					/**
+					 * @see ArrayList
+					 */
+					def doStuff(ArrayList l){}
 
-			}
-		''',
-		'''
-			package foo;
+				}
+			''',
+			'''
+				package foo;
 
-			import java.util.ArrayList;
-			import java.util.List;
+				import java.util.ArrayList;
+				import java.util.List;
 
-			/**
-			 * {@link List}
-			 * @see Bar
-			 */
-			@SuppressWarnings("all")
-			public class Foo {
-			  /**
-			   * @see ArrayList
-			   */
-			  public Object doStuff(final ArrayList l) {
-			    return null;
-			  }
-			}
-		''')
+				/**
+				 * {@link List}
+				 */
+				@SuppressWarnings("all")
+				public class Foo {
+				  /**
+				   * @see ArrayList
+				   */
+				  public Object doStuff(final ArrayList l) {
+				    return null;
+				  }
+				}
+			''')
 	}
 
 	@Test
+	def compileImportForTypeRefInJavaDoc_3(){
+		assertCompilesTo(
+			'''
+				package foo
+				import java.util.List
+				import java.util.ArrayList
+
+				class Foo {
+					/**
+					 * @see ArrayList
+					 */
+					List<String> list = null
+
+				}
+			''',
+			'''
+				package foo;
+
+				import java.util.ArrayList;
+				import java.util.List;
+
+				@SuppressWarnings("all")
+				public class Foo {
+				  /**
+				   * @see ArrayList
+				   */
+				  private List<String> list = null;
+				}
+			''')
+	}
+
+	@Test
+	def compileImportForTypeRefInJavaDoc_Same_Package(){
+		assertCompilesTo(
+			'''
+				package foo
+
+				/**
+				 *
+				 * {@link Bar}
+				 */
+				class Foo {
+				}
+				class Bar{}
+			''',
+			'''
+				package foo;
+
+				/**
+				 * {@link Bar}
+				 */
+				@SuppressWarnings("all")
+				public class Foo {
+				}
+			''')
+	}
+
+	@Test@Ignore
 	def compileProperty() {
 		val generatorConfig = generatorConfigProvider.get(null)
-		assertCompilesTo('''
-			package foo
-			
-			class Bar {
-				@Property
-				boolean generateExpressions = true
-			}
-		''',
-		'''
-			package foo;
-			
-			@SuppressWarnings("all")
-			public class Bar {
-			  private boolean _generateExpressions = true;
-			  
-			  public boolean isGenerateExpressions() {
-			    return this._generateExpressions;
-			  }
-			  
-			  public void setGenerateExpressions(final boolean generateExpressions) {
-			    this._generateExpressions = generateExpressions;
-			  }
-			}
-		''', generatorConfig)
+		assertCompilesTo(
+			'''
+				package foo
+
+				class Bar {
+					@Property
+					boolean generateExpressions = true
+				}
+			''',
+			'''
+				package foo;
+
+				@SuppressWarnings("all")
+				public class Bar {
+				  private boolean _generateExpressions = true;
+
+				  public boolean isGenerateExpressions() {
+				    return this._generateExpressions;
+				  }
+
+				  public void setGenerateExpressions(final boolean generateExpressions) {
+				    this._generateExpressions = generateExpressions;
+				  }
+				}
+			''', generatorConfig)
 	}
 
 	def assertCompilesTo(CharSequence input, CharSequence expected){

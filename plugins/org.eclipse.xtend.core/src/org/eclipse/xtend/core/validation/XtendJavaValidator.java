@@ -77,7 +77,17 @@ import org.eclipse.xtext.common.types.util.Primitives;
 import org.eclipse.xtext.common.types.util.TypeArgumentContextProvider;
 import org.eclipse.xtext.common.types.util.TypeConformanceComputer;
 import org.eclipse.xtext.common.types.util.TypeReferences;
+import org.eclipse.xtext.diagnostics.Severity;
+import org.eclipse.xtext.documentation.IEObjectDocumentationProvider;
+import org.eclipse.xtext.documentation.IEObjectDocumentationProviderExtension;
+import org.eclipse.xtext.documentation.IJavaDocTypeReferenceProvider;
+import org.eclipse.xtext.naming.IQualifiedNameConverter;
+import org.eclipse.xtext.nodemodel.INode;
+import org.eclipse.xtext.resource.IEObjectDescription;
+import org.eclipse.xtext.scoping.IScope;
+import org.eclipse.xtext.scoping.IScopeProvider;
 import org.eclipse.xtext.util.Pair;
+import org.eclipse.xtext.util.ReplaceRegion;
 import org.eclipse.xtext.util.Tuples;
 import org.eclipse.xtext.validation.Check;
 import org.eclipse.xtext.validation.ComposedChecks;
@@ -170,6 +180,19 @@ public class XtendJavaValidator extends XbaseWithAnnotationsJavaValidator {
 	
 	@Inject
 	private ReturnTypeProvider returnTypeProvider;
+
+	@Inject
+	private IJavaDocTypeReferenceProvider javaDocTypeReferenceProvider;
+
+	@Inject
+	private IScopeProvider scopeProvider;
+
+	@Inject
+	private IEObjectDocumentationProvider documentationProvider;
+
+	@Inject
+	private IQualifiedNameConverter qualifiedNameConverter;
+
 
 	private final Set<EReference> typeConformanceCheckedReferences = ImmutableSet.copyOf(Iterables.concat(
 			super.getTypeConformanceCheckedReferences(), 
@@ -1242,6 +1265,28 @@ public class XtendJavaValidator extends XbaseWithAnnotationsJavaValidator {
 		super.checkFinalFieldInitialization(inferredType);
 	}
 	
+	@Check
+	public void checkJavaDocRefs(XtendMember member){
+		if(isIgnored(IssueCodes.JAVA_DOC_LINKING_DIAGNOSTIC))
+			return;
+		List<INode> documentationNodes = ((IEObjectDocumentationProviderExtension) documentationProvider).getDocumentationNodes(member);
+		for(INode node : documentationNodes){
+			for(ReplaceRegion region : javaDocTypeReferenceProvider.computeTypeRefRegions(node)){
+				String typeRefString = region.getText();
+				if(typeRefString != null && typeRefString.length() > 0){
+					IScope scope = scopeProvider.getScope(member, TypesPackage.Literals.JVM_PARAMETERIZED_TYPE_REFERENCE__TYPE);
+					IEObjectDescription candidate = scope.getSingleElement(qualifiedNameConverter.toQualifiedName(typeRefString));
+					if(candidate == null){
+						Severity severity = getIssueSeverities(getContext(), getCurrentObject()).getSeverity(IssueCodes.JAVA_DOC_LINKING_DIAGNOSTIC);
+						if (severity != null)
+							getChain().add(createDiagnostic(severity, "javaDoc: " + typeRefString + " cannot be resolved to a type", member, region.getOffset(), region.getLength(), IssueCodes.JAVA_DOC_LINKING_DIAGNOSTIC));
+					}
+				}
+			}
+		}
+	}
+
+
 	@Override
 	protected void reportUninitializedField(JvmField field) {
 		EObject element = associations.getPrimarySourceElement(field);

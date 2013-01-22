@@ -301,6 +301,28 @@ class XtendUIValidationTests extends AbstractXtendUITestCase {
 		
 	}
 	
+	@Test
+    def testJavaDocRefs_Delegation() throws Exception {
+	val javaProject = JavaModelManager::getJavaModelManager().getJavaModel().getJavaProject(testHelper.project)
+		val javaSeverity = javaProject.getOption(JavaCore::COMPILER_PB_INVALID_JAVADOC, true)
+		if (javaSeverity != "ignore") {
+			fail("Wrong expectation Java compiler option '"+JavaCore::COMPILER_PB_INVALID_JAVADOC+"' should be 'ignore' by default")
+		}
+		var otherSeverity = "warning"
+		val xtendFile = testHelper.xtendFile("ValidationClazz.xtend",'''
+					class Foo {
+						/**
+						* {@link List}
+						*/
+						def doStuff(){}
+					}''')
+	val clazz = xtendFile.getXtendTypes.head as XtendClass
+	val member = clazz.members.head
+	helper.assertNoIssues(member)
+	javaProject.setOption(JavaCore::COMPILER_PB_INVALID_JAVADOC, otherSeverity)
+	helper.assertWarning(member, XTEND_FUNCTION, IssueCodes::JAVA_DOC_LINKING_DIAGNOSTIC, "javaDoc","List","cannot be resolved to a type");
+    }
+
 	def getXtendPreferencesStore() {
 		return prefStoreAccess.getWritablePreferenceStore(testHelper.project) as IPersistentPreferenceStore;
 	}
