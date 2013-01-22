@@ -6,15 +6,26 @@
   <repositories location="http://download.eclipse.org/modeling/emft/mwe/updates/nightly/">
     <features name="org.eclipse.emf.mwe.sdk.feature.group"/>
     <features name="org.eclipse.emf.mwe2.runtime.sdk.feature.group"/>
+    <features name="org.eclipse.emf.mwe2.runtime.sdk.feature.group"/>
   </repositories>
   <repositories location="http://download.eclipse.org/modeling/tmf/xtext/updates/orbit">
     <bundles name="com.google.guava"/>
+    <bundles name="com.google.guava.source"/>
     <bundles name="com.google.inject"/>
+    <bundles name="com.google.inject.source"/>
     <bundles name="org.apache.log4j"/>
+    <bundles name="org.apache.log4j.source"/>
     <bundles name="org.aopalliance"/>
+    <bundles name="org.aopalliance.source"/>
     <bundles name="org.easymock"/>
+    <bundles name="org.easymock.source"/>
     <bundles name="org.antlr.runtime"/>
+    <bundles name="org.antlr.runtime.source"/>
     <bundles name="javax.inject"/>
+    <bundles name="javax.inject.source"/>
     <bundles name="org.objectweb.asm"/>
+    <bundles name="org.objectweb.asm.source"/>
+    <bundles name="org.apache.commons.lang"/>
+    <bundles name="org.apache.commons.lang.source"/>
   </repositories>
 </aggregator:Contribution>
