@@ -1,27 +1,19 @@
-/**
- * Copyright (c) 2013 itemis AG (http://www.itemis.eu) and others.
- * All rights reserved. This program and the accompanying materials
- * are made available under the terms of the Eclipse Public License v1.0
- * which accompanies this distribution, and is available at
- * http://www.eclipse.org/legal/epl-v10.html
- */
 package org.eclipse.xtend.ide.codebuilder;
 
-import javax.inject.Inject;
+import com.google.inject.Inject;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtend.core.xtend.XtendClass;
-import org.eclipse.xtend.ide.codebuilder.AbstractFieldBuilder;
+import org.eclipse.xtend.ide.codebuilder.AbstractClassBuilder;
 import org.eclipse.xtend.ide.codebuilder.ICodeBuilder.Xtend;
 import org.eclipse.xtend.ide.codebuilder.InsertionOffsets;
 import org.eclipse.xtend.ide.codebuilder.XtendTypeReferenceSerializer;
-import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.JvmVisibility;
 import org.eclipse.xtext.xbase.compiler.IAppendable;
 import org.eclipse.xtext.xbase.compiler.TypeReferenceSerializer;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 
 @SuppressWarnings("all")
-public class XtendFieldBuilder extends AbstractFieldBuilder implements Xtend {
+public class XtendClassBuilder extends AbstractClassBuilder implements Xtend {
   @Inject
   private XtendTypeReferenceSerializer typeRefSerializer;
   
@@ -30,13 +22,21 @@ public class XtendFieldBuilder extends AbstractFieldBuilder implements Xtend {
   
   public boolean isValid() {
     boolean _and = false;
+    boolean _and_1 = false;
     boolean _isValid = super.isValid();
     if (!_isValid) {
+      _and_1 = false;
+    } else {
+      String _className = this.getClassName();
+      boolean _notEquals = ObjectExtensions.operator_notEquals(_className, null);
+      _and_1 = (_isValid && _notEquals);
+    }
+    if (!_and_1) {
       _and = false;
     } else {
-      String _fieldName = this.getFieldName();
-      boolean _notEquals = ObjectExtensions.operator_notEquals(_fieldName, null);
-      _and = (_isValid && _notEquals);
+      JvmVisibility _visibility = this.getVisibility();
+      boolean _equals = ObjectExtensions.operator_equals(_visibility, JvmVisibility.PUBLIC);
+      _and = (_and_1 && _equals);
     }
     return _and;
   }
@@ -46,25 +46,24 @@ public class XtendFieldBuilder extends AbstractFieldBuilder implements Xtend {
   }
   
   public IAppendable build(final IAppendable appendable) {
-    JvmVisibility _visibility = this.getVisibility();
-    IAppendable _appendVisibility = this.appendVisibility(appendable, _visibility, JvmVisibility.PRIVATE);
-    JvmTypeReference _fieldType = this.getFieldType();
-    IAppendable _appendType = this.appendType(_appendVisibility, _fieldType, "Object");
-    IAppendable _append = _appendType.append(" ");
-    String _fieldName = this.getFieldName();
-    IAppendable _append_1 = _append.append(_fieldName);
-    return _append_1;
+    IAppendable _append = appendable.append("class ");
+    String _className = this.getClassName();
+    IAppendable _append_1 = _append.append(_className);
+    IAppendable _append_2 = _append_1.append(" {");
+    IAppendable _newLine = _append_2.newLine();
+    IAppendable _append_3 = _newLine.append("}");
+    return _append_3;
   }
   
   public int getInsertOffset() {
     EObject _context = this.getContext();
     XtendClass _xtendClass = this.getXtendClass();
-    int _newFieldInsertOffset = this._insertionOffsets.getNewFieldInsertOffset(_context, _xtendClass);
-    return _newFieldInsertOffset;
+    int _newTypeInsertOffset = this._insertionOffsets.getNewTypeInsertOffset(_context, _xtendClass);
+    return _newTypeInsertOffset;
   }
   
   public int getIndentationLevel() {
-    return 1;
+    return 0;
   }
   
   public XtendClass getXtendClass() {

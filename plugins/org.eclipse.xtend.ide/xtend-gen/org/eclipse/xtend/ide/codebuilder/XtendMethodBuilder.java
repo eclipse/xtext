@@ -71,6 +71,10 @@ public class XtendMethodBuilder extends AbstractMethodBuilder implements Xtend {
     return _newMethodInsertOffset;
   }
   
+  public int getIndentationLevel() {
+    return 1;
+  }
+  
   public XtendClass getXtendClass() {
     Object _ownerSource = this.getOwnerSource();
     return ((XtendClass) _ownerSource);

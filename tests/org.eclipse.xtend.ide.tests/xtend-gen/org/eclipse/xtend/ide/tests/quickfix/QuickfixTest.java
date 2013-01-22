@@ -1452,7 +1452,22 @@ public class QuickfixTest extends AbstractXtendUITestCase {
     _builder.newLine();
     QuickfixTestBuilder _create = this.builder.create("Foo.xtend", _builder);
     QuickfixTestBuilder _assertIssueCodes = _create.assertIssueCodes(Diagnostic.LINKING_DIAGNOSTIC);
-    _assertIssueCodes.assertResolutionLabelsSubset("Create Xtend class \'Bar\'", "Create Java class \'Bar\'", "Create Java interface \'Bar\'");
+    QuickfixTestBuilder _assertResolutionLabelsSubset = _assertIssueCodes.assertResolutionLabelsSubset("Create Xtend class \'Bar\'", "Create Java class \'Bar\'", "Create Java interface \'Bar\'", 
+      "Create local Xtend class \'Bar\'");
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("class Foo {");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("Bar bar");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.newLine();
+    _builder_1.append("class Bar {");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _assertResolutionLabelsSubset.assertModelAfterQuickfix("Create local Xtend class \'Bar\'", _builder_1);
   }
   
   @Test
@@ -1473,7 +1488,28 @@ public class QuickfixTest extends AbstractXtendUITestCase {
     _builder.newLine();
     QuickfixTestBuilder _create = this.builder.create("Foo.xtend", _builder);
     QuickfixTestBuilder _assertIssueCodes = _create.assertIssueCodes(Diagnostic.LINKING_DIAGNOSTIC);
-    _assertIssueCodes.assertResolutionLabelsSubset("Create Xtend class \'Bar\'", "Create Java class \'Bar\'", "Create Java interface \'Bar\'");
+    QuickfixTestBuilder _assertResolutionLabelsSubset = _assertIssueCodes.assertResolutionLabelsSubset("Create Xtend class \'Bar\'", "Create Java class \'Bar\'", 
+      "Create Java interface \'Bar\'", "Create local Xtend class \'Bar\'");
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("class Foo {");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("def foo() {");
+    _builder_1.newLine();
+    _builder_1.append("\t\t");
+    _builder_1.append("new Bar");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.newLine();
+    _builder_1.append("class Bar {");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _assertResolutionLabelsSubset.assertModelAfterQuickfix("Create local Xtend class \'Bar\'", _builder_1);
   }
   
   @Test

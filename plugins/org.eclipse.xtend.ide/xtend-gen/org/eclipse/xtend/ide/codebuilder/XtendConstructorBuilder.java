@@ -55,6 +55,10 @@ public class XtendConstructorBuilder extends AbstractConstructorBuilder implemen
     return _newConstructorInsertOffset;
   }
   
+  public int getIndentationLevel() {
+    return 1;
+  }
+  
   public XtendClass getXtendClass() {
     Object _ownerSource = this.getOwnerSource();
     return ((XtendClass) _ownerSource);

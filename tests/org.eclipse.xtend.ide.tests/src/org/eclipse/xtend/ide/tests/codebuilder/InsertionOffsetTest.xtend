@@ -150,6 +150,17 @@ class InsertionOffsetTest extends AbstractXtendUITestCase {
 		'''.checkConstructorInsertionOffset
 	}
 	
+	@Test
+	def testClass() {
+		'''
+			class Foo {
+				|
+			}$
+			class Bar {
+			}
+		'''.checkTypeInsertionOffset
+	}
+	
 	def protected checkFieldInsertionOffset(CharSequence model) {
 		val modelAsString = model.toString
 		val caretOffset = modelAsString.replace('$', '').indexOf('|')
@@ -178,5 +189,15 @@ class InsertionOffsetTest extends AbstractXtendUITestCase {
 		val xtextResource = xtendClass.eResource as XtextResource
 		val caretElement = xtextResource.resolveContainedElementAt(caretOffset)
 		assertEquals(expectedOffset, getNewConstructorInsertOffset(caretElement, xtendClass))		
+	}
+
+	def protected checkTypeInsertionOffset(CharSequence model) {
+		val modelAsString = model.toString
+		val caretOffset = modelAsString.replace('$', '').indexOf('|')
+		val expectedOffset = modelAsString.replace('|', '').indexOf('$')
+		val xtendClass = parse(modelAsString.replace('|', '').replace('$', '')).xtendTypes.head as XtendClass
+		val xtextResource = xtendClass.eResource as XtextResource
+		val caretElement = xtextResource.resolveContainedElementAt(caretOffset)
+		assertEquals(expectedOffset, getNewTypeInsertOffset(caretElement, xtendClass))		
 	}
 }

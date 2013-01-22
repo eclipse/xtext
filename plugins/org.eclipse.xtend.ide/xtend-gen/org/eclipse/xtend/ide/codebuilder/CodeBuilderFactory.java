@@ -14,12 +14,16 @@ import org.eclipse.jdt.core.IJavaElement;
 import org.eclipse.jdt.core.IType;
 import org.eclipse.xtend.core.jvmmodel.IXtendJvmAssociations;
 import org.eclipse.xtend.core.xtend.XtendClass;
+import org.eclipse.xtend.ide.codebuilder.AbstractClassBuilder;
 import org.eclipse.xtend.ide.codebuilder.AbstractConstructorBuilder;
 import org.eclipse.xtend.ide.codebuilder.AbstractFieldBuilder;
 import org.eclipse.xtend.ide.codebuilder.AbstractMethodBuilder;
+import org.eclipse.xtend.ide.codebuilder.ICodeBuilder;
+import org.eclipse.xtend.ide.codebuilder.JavaClassBuilder;
 import org.eclipse.xtend.ide.codebuilder.JavaConstructorBuilder;
 import org.eclipse.xtend.ide.codebuilder.JavaFieldBuilder;
 import org.eclipse.xtend.ide.codebuilder.JavaMethodBuilder;
+import org.eclipse.xtend.ide.codebuilder.XtendClassBuilder;
 import org.eclipse.xtend.ide.codebuilder.XtendConstructorBuilder;
 import org.eclipse.xtend.ide.codebuilder.XtendFieldBuilder;
 import org.eclipse.xtend.ide.codebuilder.XtendMethodBuilder;
@@ -44,22 +48,48 @@ public class CodeBuilderFactory {
   private IJavaElementFinder _iJavaElementFinder;
   
   @Inject
-  private Provider<XtendFieldBuilder> xtendFieldBuilderProvider;
+  private Provider<XtendClassBuilder> xtendClassBuilderProvider;
   
   @Inject
-  private Provider<XtendMethodBuilder> xtendMethodBuilderProvider;
+  private Provider<XtendFieldBuilder> xtendFieldBuilderProvider;
   
   @Inject
   private Provider<XtendConstructorBuilder> xtendConstructorBuilderProvider;
   
   @Inject
+  private Provider<XtendMethodBuilder> xtendMethodBuilderProvider;
+  
+  @Inject
+  private Provider<JavaClassBuilder> javaClassBuilderProvider;
+  
+  @Inject
   private Provider<JavaFieldBuilder> javaFieldBuilderProvider;
+  
+  @Inject
+  private Provider<JavaConstructorBuilder> javaConstructorBuilderProvider;
   
   @Inject
   private Provider<JavaMethodBuilder> javaMethodBuilderProvider;
   
-  @Inject
-  private Provider<JavaConstructorBuilder> javaConstructorBuilderProvider;
+  public AbstractClassBuilder createClassBuilder(final JvmDeclaredType owner) {
+    AbstractClassBuilder _xblockexpression = null;
+    {
+      final Object ownerSource = this.getSource(owner);
+      AbstractClassBuilder _xifexpression = null;
+      if ((ownerSource instanceof XtendClass)) {
+        XtendClassBuilder _get = this.xtendClassBuilderProvider.get();
+        _xifexpression = _get;
+      } else {
+        JavaClassBuilder _get_1 = this.javaClassBuilderProvider.get();
+        _xifexpression = _get_1;
+      }
+      final AbstractClassBuilder builder = _xifexpression;
+      builder.setOwner(owner);
+      builder.setOwnerSource(ownerSource);
+      _xblockexpression = (builder);
+    }
+    return _xblockexpression;
+  }
   
   public AbstractFieldBuilder createFieldBuilder(final JvmDeclaredType owner) {
     AbstractFieldBuilder _xblockexpression = null;

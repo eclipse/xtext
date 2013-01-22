@@ -13,8 +13,6 @@ class ConstructorBuilderTest extends AbstractBuilderTest {
 	
 	@Inject extension TypeReferences
 	
-	static val DEFAULT_BODY = 'throw new UnsupportedOperationException("TODO: auto-generated method stub")'
-	
 	@Test
 	def testXtendMethod() {
 		(createConstructorBuilder(xtendClass) => [

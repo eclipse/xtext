@@ -71,7 +71,7 @@ class CodeBuilderQuickfix {
 			val document = xtextEditor.getDocument();
 			var offset = builder.insertOffset
 
-			val appendable = appendableFactory.get(document, xtendClass, offset, 0, 1, true)
+			val appendable = appendableFactory.get(document, xtendClass, offset, 0, builder.indentationLevel, true)
 			builder.build(appendable)
 			appendable.commitChanges
 			xtextEditor.setHighlightRange(offset + 1, appendable.length, true)

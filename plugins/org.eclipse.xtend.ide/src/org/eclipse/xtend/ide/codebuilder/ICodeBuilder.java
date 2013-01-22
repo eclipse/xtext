@@ -40,6 +40,8 @@ public interface ICodeBuilder {
 		XtendClass getXtendClass();
 		
 		int getInsertOffset();
+		
+		int getIndentationLevel();
 	}
 	
 	interface Java extends ICodeBuilder {

@@ -156,9 +156,11 @@ public class QuickfixTestBuilder {
       final Procedure1<String> _function_2 = new Procedure1<String>() {
           public void apply(final String it) {
             String _plus = ("Label \'" + it);
-            String _plus_1 = (_plus + "\' missing");
+            String _plus_1 = (_plus + "\' missing. Got ");
+            String _join = IterableExtensions.join(actualLabels, ", ");
+            String _plus_2 = (_plus_1 + _join);
             boolean _contains = actualLabels.contains(it);
-            Assert.assertTrue(_plus_1, _contains);
+            Assert.assertTrue(_plus_2, _contains);
           }
         };
       IterableExtensions.<String>forEach(((Iterable<String>)Conversions.doWrapArray(expectedLabels)), _function_2);

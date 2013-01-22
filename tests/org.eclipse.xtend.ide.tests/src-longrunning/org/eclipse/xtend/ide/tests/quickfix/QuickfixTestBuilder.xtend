@@ -61,7 +61,9 @@ class QuickfixTestBuilder {
 
 	def assertResolutionLabelsSubset(String... expectedLabels) {
 		val actualLabels = issuesAtCaret.map[resolutions].flatten.map[label].toSet
-		expectedLabels.forEach[assertTrue('Label \'' + it + '\' missing', actualLabels.contains(it))]
+		expectedLabels.forEach[
+			assertTrue('Label \'' + it + '\' missing. Got ' + actualLabels.join(', '), actualLabels.contains(it))
+		]
 		this
 	}
 

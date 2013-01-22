@@ -24,6 +24,8 @@ import org.junit.Assert;
 
 @SuppressWarnings("all")
 public class AbstractBuilderTest extends AbstractXtendUITestCase {
+  protected final static String DEFAULT_BODY = "throw new UnsupportedOperationException(\"TODO: auto-generated method stub\")";
+  
   @Inject
   private WorkbenchTestHelper _workbenchTestHelper;
   

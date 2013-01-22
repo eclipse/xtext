@@ -135,7 +135,8 @@ public class CodeBuilderQuickfix {
             final XtextEditor xtextEditor = ((XtextEditor) editor);
             final IXtextDocument document = xtextEditor.getDocument();
             int offset = builder.getInsertOffset();
-            final ReplacingAppendable appendable = CodeBuilderQuickfix.this.appendableFactory.get(document, xtendClass, offset, 0, 1, true);
+            int _indentationLevel = builder.getIndentationLevel();
+            final ReplacingAppendable appendable = CodeBuilderQuickfix.this.appendableFactory.get(document, xtendClass, offset, 0, _indentationLevel, true);
             builder.build(appendable);
             appendable.commitChanges();
             int _plus = (offset + 1);

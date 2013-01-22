@@ -24,8 +24,6 @@ public class ConstructorBuilderTest extends AbstractBuilderTest {
   @Inject
   private TypeReferences _typeReferences;
   
-  private final static String DEFAULT_BODY = "throw new UnsupportedOperationException(\"TODO: auto-generated method stub\")";
-  
   @Test
   public void testXtendMethod() {
     JvmDeclaredType _xtendClass = this.getXtendClass();
@@ -48,7 +46,7 @@ public class ConstructorBuilderTest extends AbstractBuilderTest {
     _builder.append("protected new(Foo foo, Foo foo2) {");
     _builder.newLine();
     _builder.append("  ");
-    _builder.append(ConstructorBuilderTest.DEFAULT_BODY, "  ");
+    _builder.append(AbstractBuilderTest.DEFAULT_BODY, "  ");
     _builder.newLineIfNotEmpty();
     _builder.append("}");
     this.assertBuilds(_doubleArrow, _builder.toString());
@@ -76,7 +74,7 @@ public class ConstructorBuilderTest extends AbstractBuilderTest {
     _builder.append("private Bar(Bar bar, Bar bar2) {");
     _builder.newLine();
     _builder.append("  ");
-    _builder.append(ConstructorBuilderTest.DEFAULT_BODY, "  ");
+    _builder.append(AbstractBuilderTest.DEFAULT_BODY, "  ");
     _builder.append(";");
     _builder.newLineIfNotEmpty();
     _builder.append("}");

@@ -270,6 +270,23 @@ public class InsertionOffsetTest extends AbstractXtendUITestCase {
     this.checkConstructorInsertionOffset(_builder);
   }
   
+  @Test
+  public void testClass() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("class Foo {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("|");
+    _builder.newLine();
+    _builder.append("}$");
+    _builder.newLine();
+    _builder.append("class Bar {");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    this.checkTypeInsertionOffset(_builder);
+  }
+  
   protected void checkFieldInsertionOffset(final CharSequence model) {
     try {
       final String modelAsString = model.toString();
@@ -334,6 +351,29 @@ public class InsertionOffsetTest extends AbstractXtendUITestCase {
       final EObject caretElement = this._eObjectAtOffsetHelper.resolveContainedElementAt(xtextResource, caretOffset);
       int _newConstructorInsertOffset = this._insertionOffsets.getNewConstructorInsertOffset(caretElement, xtendClass);
       Assert.assertEquals(expectedOffset, _newConstructorInsertOffset);
+    } catch (Exception _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  protected void checkTypeInsertionOffset(final CharSequence model) {
+    try {
+      final String modelAsString = model.toString();
+      String _replace = modelAsString.replace("$", "");
+      final int caretOffset = _replace.indexOf("|");
+      String _replace_1 = modelAsString.replace("|", "");
+      final int expectedOffset = _replace_1.indexOf("$");
+      String _replace_2 = modelAsString.replace("|", "");
+      String _replace_3 = _replace_2.replace("$", "");
+      XtendFile _parse = this.parseHelper.parse(_replace_3);
+      EList<XtendTypeDeclaration> _xtendTypes = _parse.getXtendTypes();
+      XtendTypeDeclaration _head = IterableExtensions.<XtendTypeDeclaration>head(_xtendTypes);
+      final XtendClass xtendClass = ((XtendClass) _head);
+      Resource _eResource = xtendClass.eResource();
+      final XtextResource xtextResource = ((XtextResource) _eResource);
+      final EObject caretElement = this._eObjectAtOffsetHelper.resolveContainedElementAt(xtextResource, caretOffset);
+      int _newTypeInsertOffset = this._insertionOffsets.getNewTypeInsertOffset(caretElement, xtendClass);
+      Assert.assertEquals(expectedOffset, _newTypeInsertOffset);
     } catch (Exception _e) {
       throw Exceptions.sneakyThrow(_e);
     }

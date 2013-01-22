@@ -31,6 +31,11 @@ import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 @NonNullByDefault
 @SuppressWarnings("all")
 public class InsertionOffsets {
+  public int getNewTypeInsertOffset(final EObject call, final XtendClass ownerClass) {
+    int _after = this.after(ownerClass);
+    return _after;
+  }
+  
   public int getNewFieldInsertOffset(final EObject call, final XtendClass ownerClass) {
     EList<XtendMember> _members = ownerClass.getMembers();
     boolean _isEmpty = _members.isEmpty();
