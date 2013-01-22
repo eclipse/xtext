@@ -24,6 +24,9 @@
       <repositories location="http://download.eclipse.org/tools/gef/updates/releases">
         <bundles name="org.eclipse.draw2d.feature.group"/>
       </repositories>
+      <repositories location="http://download.eclipse.org/technology/m2e/releases/1.0/1.0.0.20110606-1526/">
+        <bundles name="org.eclipse.m2e.core"/>
+      </repositories>
     </contributions>
   </validationSets>
   <configurations operatingSystem="macosx" windowSystem="cocoa" architecture="x86_64"/>
