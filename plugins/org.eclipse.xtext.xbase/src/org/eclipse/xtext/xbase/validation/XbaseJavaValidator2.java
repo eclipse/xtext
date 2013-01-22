@@ -81,7 +81,6 @@ import org.eclipse.xtext.xbase.XVariableDeclaration;
 import org.eclipse.xtext.xbase.XbasePackage;
 import org.eclipse.xtext.xbase.XbasePackage.Literals;
 import org.eclipse.xtext.xbase.controlflow.IEarlyExitComputer;
-import org.eclipse.xtext.xbase.imports.IImportsConfiguration;
 import org.eclipse.xtext.xbase.jvmmodel.IJvmModelAssociations;
 import org.eclipse.xtext.xbase.jvmmodel.ILogicalContainerProvider;
 import org.eclipse.xtext.xbase.lib.Procedures;
@@ -109,7 +108,6 @@ import org.eclipse.xtext.xtype.XtypePackage;
 import com.google.common.base.Joiner;
 import com.google.common.base.Predicate;
 import com.google.common.collect.ImmutableSet;
-import com.google.common.collect.ImmutableSet.Builder;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
@@ -140,9 +138,6 @@ public class XbaseJavaValidator2 extends AbstractXbaseJavaValidator {
 	
 	@Inject
 	private NumberLiterals numberLiterals;
-	
-	@Inject
-	private IImportsConfiguration importsConfiguration;
 	
 	@Inject
 	private IJvmModelAssociations associations;

@@ -367,10 +367,22 @@ public class JvmModelGeneratorTest extends AbstractXbaseTestCase {
       final Procedure1<JvmEnumerationType> _function = new Procedure1<JvmEnumerationType>() {
           public void apply(final JvmEnumerationType it) {
             EList<JvmMember> _members = it.getMembers();
-            JvmEnumerationLiteral _enumerationLiteral = JvmModelGeneratorTest.this.builder.toEnumerationLiteral(expression, "BAR");
+            final Procedure1<JvmEnumerationLiteral> _function = new Procedure1<JvmEnumerationLiteral>() {
+                public void apply(final JvmEnumerationLiteral literal) {
+                  JvmParameterizedTypeReference _createTypeRef = JvmModelGeneratorTest.this.references.createTypeRef(it);
+                  literal.setType(_createTypeRef);
+                }
+              };
+            JvmEnumerationLiteral _enumerationLiteral = JvmModelGeneratorTest.this.builder.toEnumerationLiteral(expression, "BAR", _function);
             JvmModelGeneratorTest.this.builder.<JvmEnumerationLiteral>operator_add(_members, _enumerationLiteral);
             EList<JvmMember> _members_1 = it.getMembers();
-            JvmEnumerationLiteral _enumerationLiteral_1 = JvmModelGeneratorTest.this.builder.toEnumerationLiteral(expression, "BAZ");
+            final Procedure1<JvmEnumerationLiteral> _function_1 = new Procedure1<JvmEnumerationLiteral>() {
+                public void apply(final JvmEnumerationLiteral literal) {
+                  JvmParameterizedTypeReference _createTypeRef = JvmModelGeneratorTest.this.references.createTypeRef(it);
+                  literal.setType(_createTypeRef);
+                }
+              };
+            JvmEnumerationLiteral _enumerationLiteral_1 = JvmModelGeneratorTest.this.builder.toEnumerationLiteral(expression, "BAZ", _function_1);
             JvmModelGeneratorTest.this.builder.<JvmEnumerationLiteral>operator_add(_members_1, _enumerationLiteral_1);
           }
         };
@@ -498,22 +510,40 @@ public class JvmModelGeneratorTest extends AbstractXbaseTestCase {
       final Procedure1<JvmEnumerationType> _function = new Procedure1<JvmEnumerationType>() {
           public void apply(final JvmEnumerationType it) {
             EList<JvmMember> _members = it.getMembers();
-            JvmEnumerationLiteral _enumerationLiteral = JvmModelGeneratorTest.this.builder.toEnumerationLiteral(expression, "WARN");
+            final Procedure1<JvmEnumerationLiteral> _function = new Procedure1<JvmEnumerationLiteral>() {
+                public void apply(final JvmEnumerationLiteral literal) {
+                  JvmParameterizedTypeReference _createTypeRef = JvmModelGeneratorTest.this.references.createTypeRef(it);
+                  literal.setType(_createTypeRef);
+                }
+              };
+            JvmEnumerationLiteral _enumerationLiteral = JvmModelGeneratorTest.this.builder.toEnumerationLiteral(expression, "WARN", _function);
             JvmModelGeneratorTest.this.builder.<JvmEnumerationLiteral>operator_add(_members, _enumerationLiteral);
             EList<JvmMember> _members_1 = it.getMembers();
-            JvmEnumerationLiteral _enumerationLiteral_1 = JvmModelGeneratorTest.this.builder.toEnumerationLiteral(expression, "ERROR");
+            final Procedure1<JvmEnumerationLiteral> _function_1 = new Procedure1<JvmEnumerationLiteral>() {
+                public void apply(final JvmEnumerationLiteral literal) {
+                  JvmParameterizedTypeReference _createTypeRef = JvmModelGeneratorTest.this.references.createTypeRef(it);
+                  literal.setType(_createTypeRef);
+                }
+              };
+            JvmEnumerationLiteral _enumerationLiteral_1 = JvmModelGeneratorTest.this.builder.toEnumerationLiteral(expression, "ERROR", _function_1);
             JvmModelGeneratorTest.this.builder.<JvmEnumerationLiteral>operator_add(_members_1, _enumerationLiteral_1);
             EList<JvmMember> _members_2 = it.getMembers();
-            JvmEnumerationLiteral _enumerationLiteral_2 = JvmModelGeneratorTest.this.builder.toEnumerationLiteral(expression, "DEBUG");
+            final Procedure1<JvmEnumerationLiteral> _function_2 = new Procedure1<JvmEnumerationLiteral>() {
+                public void apply(final JvmEnumerationLiteral literal) {
+                  JvmParameterizedTypeReference _createTypeRef = JvmModelGeneratorTest.this.references.createTypeRef(it);
+                  literal.setType(_createTypeRef);
+                }
+              };
+            JvmEnumerationLiteral _enumerationLiteral_2 = JvmModelGeneratorTest.this.builder.toEnumerationLiteral(expression, "DEBUG", _function_2);
             JvmModelGeneratorTest.this.builder.<JvmEnumerationLiteral>operator_add(_members_2, _enumerationLiteral_2);
             EList<JvmMember> _members_3 = it.getMembers();
             JvmTypeReference _typeForName = JvmModelGeneratorTest.this.references.getTypeForName("java.lang.Object", expression);
-            final Procedure1<JvmOperation> _function = new Procedure1<JvmOperation>() {
+            final Procedure1<JvmOperation> _function_3 = new Procedure1<JvmOperation>() {
                 public void apply(final JvmOperation it) {
                   JvmModelGeneratorTest.this.builder.setBody(it, expression);
                 }
               };
-            JvmOperation _method = JvmModelGeneratorTest.this.builder.toMethod(expression, "doStuff", _typeForName, _function);
+            JvmOperation _method = JvmModelGeneratorTest.this.builder.toMethod(expression, "doStuff", _typeForName, _function_3);
             JvmModelGeneratorTest.this.builder.<JvmOperation>operator_add(_members_3, _method);
           }
         };

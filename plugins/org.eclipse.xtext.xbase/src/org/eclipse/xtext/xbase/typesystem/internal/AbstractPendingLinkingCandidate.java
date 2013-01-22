@@ -27,6 +27,8 @@ import org.eclipse.xtext.util.IAcceptor;
 import org.eclipse.xtext.validation.EObjectDiagnosticImpl;
 import org.eclipse.xtext.xbase.XAssignment;
 import org.eclipse.xtext.xbase.XExpression;
+import org.eclipse.xtext.xbase.XReturnExpression;
+import org.eclipse.xtext.xbase.XThrowExpression;
 import org.eclipse.xtext.xbase.XbasePackage;
 import org.eclipse.xtext.xbase.scoping.batch.IIdentifiableElementDescription;
 import org.eclipse.xtext.xbase.typesystem.computation.ILinkingCandidate;
@@ -90,8 +92,38 @@ public abstract class AbstractPendingLinkingCandidate<Expression extends XExpres
 					XbasePackage.Literals.XABSTRACT_FEATURE_CALL__FEATURE, -1, null);
 			result.accept(diagnostic);
 			return false;
+		} else {
+			// TODO use early exit computation
+			List<XExpression> arguments = getSyntacticArguments();
+			for(int i = 0; i < arguments.size(); i++) {
+				XExpression argument = arguments.get(i);
+				if (isDefiniteEarlyExit(argument)) {
+					XExpression errorOn = getExpression();
+					if (i < arguments.size() - 1) {
+						errorOn = arguments.get(i + 1);
+					}
+					String message = "Unreachable code.";
+					AbstractDiagnostic diagnostic = new EObjectDiagnosticImpl(
+							Severity.ERROR, 
+							IssueCodes.UNREACHABLE_CODE, 
+							message, 
+							errorOn, 
+							null, 
+							-1, null);
+					result.accept(diagnostic);
+					return false;
+				}
+			}
 		}
 		return true;
+	}
+	
+	protected boolean isDefiniteEarlyExit(XExpression expression) {
+		return expression instanceof XReturnExpression || expression instanceof XThrowExpression;
+	}
+	
+	protected List<XExpression> getSyntacticArguments() {
+		return getArguments();
 	}
 
 	@Override

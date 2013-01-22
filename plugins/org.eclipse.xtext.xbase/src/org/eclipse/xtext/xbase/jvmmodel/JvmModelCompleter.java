@@ -11,6 +11,7 @@ import static com.google.common.collect.Iterables.*;
 
 import org.eclipse.xtext.common.types.JvmConstructor;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
+import org.eclipse.xtext.common.types.JvmEnumerationLiteral;
 import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmTypeReference;
@@ -50,8 +51,17 @@ public class JvmModelCompleter {
 		if(element instanceof JvmConstructor) {
 			completeJvmConstructor((JvmConstructor) element);
 		}
+		if (element instanceof JvmEnumerationLiteral) {
+			completeJvmEnumerationLiteral((JvmEnumerationLiteral)element);
+		}
 	}
 	
+	protected void completeJvmEnumerationLiteral(JvmEnumerationLiteral element) {
+		if (element.getType() == null) {
+			element.setType(references.createTypeRef(element.getDeclaringType()));
+		}
+	}
+
 	public void completeJvmConstructor(JvmConstructor constructor) {
 		JvmDeclaredType declaringType = constructor.getDeclaringType();
 		if(declaringType != null) {

@@ -81,6 +81,10 @@ public class XtendTypeComputer extends XbaseTypeComputer {
 			eachState = eachState.assignType(parameter, parameterType);
 		eachState.computeTypes(object.getEachExpression());
 		
+		state.withNonVoidExpectation().computeTypes(object.getBefore());
+		state.withNonVoidExpectation().computeTypes(object.getSeparator());
+		state.withNonVoidExpectation().computeTypes(object.getAfter());
+		
 		LightweightTypeReference primitiveVoid = getPrimitiveVoid(state);
 		state.acceptActualType(primitiveVoid);
 		
