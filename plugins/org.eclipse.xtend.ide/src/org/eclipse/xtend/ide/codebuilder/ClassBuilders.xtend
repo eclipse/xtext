@@ -11,6 +11,10 @@ abstract class AbstractClassBuilder extends AbstractCodeBuilder {
 	
 	@Property String className
 	
+	override getImage() {
+		'newclass_wiz.gif'
+	}
+	
 }
 
 class XtendClassBuilder extends AbstractClassBuilder implements ICodeBuilder$Xtend {

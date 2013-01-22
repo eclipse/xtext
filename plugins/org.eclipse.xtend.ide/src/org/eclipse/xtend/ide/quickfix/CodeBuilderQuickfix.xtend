@@ -11,7 +11,6 @@ import com.google.inject.Inject
 import org.eclipse.core.runtime.NullProgressMonitor
 import org.eclipse.emf.ecore.util.EcoreUtil
 import org.eclipse.xtend.core.xtend.XtendClass
-import org.eclipse.xtend.ide.codebuilder.ICodeBuilder
 import org.eclipse.xtend.ide.codebuilder.JavaConstructorBuilder
 import org.eclipse.xtend.ide.codebuilder.JavaFieldBuilder
 import org.eclipse.xtend.ide.codebuilder.JavaMethodBuilder
@@ -25,6 +24,7 @@ import org.eclipse.xtext.validation.Issue
 import org.eclipse.xtext.xbase.compiler.ImportManager
 import org.eclipse.xtext.xbase.compiler.StringBuilderBasedAppendable
 import org.eclipse.xtext.xbase.ui.contentassist.ReplacingAppendable
+import org.eclipse.xtend.ide.codebuilder.ICodeBuilder
 
 /**
  * Creates quickfixes using {@link ICodeBuilder}s.

@@ -21,7 +21,7 @@ class ClassBuilderTest extends AbstractBuilderTest {
 	}
 	
 	@Test
-	def testJavaMethod() {
+	def testJavaClass() {
 		(createClassBuilder(javaClass) => [
 			context = javaClass
 			className = 'Bar'

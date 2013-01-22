@@ -26,7 +26,9 @@ public interface ICodeBuilder {
 
 	IAppendable build(IAppendable appendable);
 
-	String preview();
+	String getPreview();
+	
+	String getImage();
 	
 	Object getOwnerSource();
 	

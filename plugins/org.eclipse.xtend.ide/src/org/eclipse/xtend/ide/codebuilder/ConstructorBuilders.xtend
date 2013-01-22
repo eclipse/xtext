@@ -12,9 +12,10 @@ import java.util.List
 import org.eclipse.jdt.core.IType
 import org.eclipse.xtend.core.xtend.XtendClass
 import org.eclipse.xtext.common.types.JvmTypeReference
-import org.eclipse.xtext.common.types.JvmVisibility
 import org.eclipse.xtext.xbase.compiler.IAppendable
 import org.eclipse.xtext.xbase.compiler.TypeReferenceSerializer
+
+import static org.eclipse.xtext.common.types.JvmVisibility.*
 
 /**
  * @author Jan Koehnlein
@@ -26,6 +27,15 @@ abstract class AbstractConstructorBuilder extends AbstractCodeBuilder {
 	def protected appendDefaultBody(IAppendable appendable, String statementSeparator) {
 		appendable.append('throw new UnsupportedOperationException("TODO: auto-generated method stub")')
 			.append(statementSeparator)
+	}
+	
+	override getImage() {
+		switch visibility {
+			case PRIVATE: 'methpri_obj.gif'
+			case PROTECTED: 'methpro_obj.gif'
+			case PUBLIC: 'methpub_obj.gif'
+			default: 'methdef_obj.gif'
+		}
 	}
 }
 
@@ -41,7 +51,7 @@ class XtendConstructorBuilder extends AbstractConstructorBuilder implements ICod
 	
 	override build(IAppendable appendable) {
 		appendable
-			.appendVisibility(visibility, JvmVisibility::PUBLIC)
+			.appendVisibility(visibility, PUBLIC)
 			.append('new')
 			.appendParameters(parameterTypes)
 			.append(' {').increaseIndentation.newLine
@@ -73,7 +83,7 @@ class JavaConstructorBuilder extends AbstractConstructorBuilder implements ICode
 	
 	override build(IAppendable appendable) {
 		appendable
-			.appendVisibility(visibility, JvmVisibility::PUBLIC)
+			.appendVisibility(visibility, PUBLIC)
 			.append(owner.simpleName)
 			.appendParameters(parameterTypes)
 			.append(' {').increaseIndentation.newLine
