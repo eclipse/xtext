@@ -16,7 +16,6 @@
     <bundles name="org.apache.log4j"/>
     <bundles name="org.apache.log4j.source"/>
     <bundles name="org.aopalliance"/>
-    <bundles name="org.aopalliance.source"/>
     <bundles name="org.easymock"/>
     <bundles name="org.easymock.source"/>
     <bundles name="org.antlr.runtime"/>
