@@ -60,6 +60,8 @@ import com.google.common.collect.Sets;
 import com.google.inject.Inject;
 
 /**
+ * Quickfixes for misspelled or not yet imported Java types.
+ *  
  * @author Jan Koehnlein - Initial contribution and API
  */
 public class JavaTypeQuickfixes implements ILinkingIssueQuickfixProvider {
