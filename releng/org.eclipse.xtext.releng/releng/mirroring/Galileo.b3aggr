@@ -19,7 +19,7 @@
       <repositories location="http://download.eclipse.org/eclipse/updates/3.8">
         <bundles name="org.eclipse.jdt.annotation"/>
         <bundles name="org.junit4"/>
-        <bundles name="org.junit"/>
+        <bundles name="org.junit" versionRange="[4.7,5.0)"/>
       </repositories>
       <repositories location="http://download.eclipse.org/tools/gef/updates/releases">
         <bundles name="org.eclipse.draw2d.feature.group"/>
