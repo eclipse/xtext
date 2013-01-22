@@ -160,13 +160,13 @@ public class JvmModelGenerator implements IGenerator {
   
   @Inject
   private IJavaDocTypeReferenceProvider javaDocTypeReferenceProvider;
-
+  
   @Inject
   private IScopeProvider scopeProvider;
-
+  
   @Inject
   private IQualifiedNameConverter qualifiedNameConverter;
-
+  
   public void doGenerate(final Resource input, final IFileSystemAccess fsa) {
     EList<EObject> _contents = input.getContents();
     for (final EObject obj : _contents) {
@@ -314,7 +314,7 @@ public class JvmModelGenerator implements IGenerator {
     }
     return _xblockexpression;
   }
-
+  
   protected ITreeAppendable _generateBody(final JvmEnumerationType it, final ITreeAppendable appendable, final GeneratorConfig config) {
     ITreeAppendable _xblockexpression = null;
     {
@@ -1242,7 +1242,7 @@ public class JvmModelGenerator implements IGenerator {
       }
     }
   }
-
+  
   public ImportManager getImportManager(final ITreeAppendable appendable) {
     try {
       ImportManager _xblockexpression = null;
@@ -1262,7 +1262,7 @@ public class JvmModelGenerator implements IGenerator {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-
+  
   protected ITreeAppendable generateDocumentation(final String text, final List<INode> documentationNodes, final ITreeAppendable appendable, final GeneratorConfig config) {
     ITreeAppendable _xblockexpression = null;
     {
