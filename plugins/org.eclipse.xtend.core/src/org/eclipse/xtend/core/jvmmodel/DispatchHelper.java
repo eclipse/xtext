@@ -61,25 +61,11 @@ public class DispatchHelper {
 		
 		/**
 		 * Creates a new {@link DispatchSignature} from a method name and parameter count.
-		 * The method name may not include the synthesized underscore.
+		 * The method name may not include the synthesized underscore even though an explicit underscope is ok.
 		 * @param simpleName the simple name of the associated dispatcher function.
 		 * @param arity the number of parameters (zero or more)
 		 */
 		public DispatchSignature(String simpleName, int arity) {
-			this(simpleName, arity, false);
-		}
-		
-		/**
-		 * Creates a new {@link DispatchSignature} from a method name and parameter count.
-		 * The method name may not include the synthesized underscore.
-		 * @param simpleName the simple name of the associated dispatcher function.
-		 * @param arity the number of parameters (zero or more)
-		 * @param allowUnderscore a potentially given underscore prefix is not synthetic
-		 */
-		public DispatchSignature(String simpleName, int arity, boolean allowUnderscore) {
-			if (!allowUnderscore && simpleName.startsWith("_")) {
-				throw new IllegalArgumentException("Dispatch signature is not expected to start with an underscore");
-			}
 			if (arity < 0) {
 				throw new IllegalArgumentException("The number of parameters may not be smaller than zero, was: " + arity);
 			}

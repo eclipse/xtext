@@ -105,7 +105,6 @@ import org.eclipse.xtext.xbase.validation.UIStrings;
 import com.google.common.base.Function;
 import com.google.common.base.Predicate;
 import com.google.common.collect.HashMultimap;
-import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Multimap;
@@ -929,7 +928,7 @@ public class XtendJavaValidator2 extends XbaseWithAnnotationsJavaValidator2 {
 		Multimap<DispatchHelper.DispatchSignature, XtendFunction> nonDispatchMethods = HashMultimap.create();
 		for(XtendFunction method: filter(clazz.getMembers(), XtendFunction.class)) {
 			if(!method.isDispatch()) {
-				nonDispatchMethods.put(new DispatchHelper.DispatchSignature(method.getName(), method.getParameters().size(), true), method);
+				nonDispatchMethods.put(new DispatchHelper.DispatchSignature(method.getName(), method.getParameters().size()), method);
 			}
 		}
 		for (DispatchHelper.DispatchSignature dispatchSignature : dispatchMethods.keySet()) {
