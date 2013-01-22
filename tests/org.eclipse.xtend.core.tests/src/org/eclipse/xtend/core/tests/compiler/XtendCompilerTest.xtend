@@ -1914,6 +1914,36 @@ abstract class AbstractXtendCompilerTest extends AbstractXtendTestCase {
 	}
 	
 	@Test
+	def testFindFirstOnIt_01() { 
+		assertCompilesTo(
+			'''
+				class FindFirstOnIt {
+					def <T> useExtension(Iterable<T> it) {
+						findFirst [ it != null ]
+					}
+				}
+			''', '''
+				import org.eclipse.xtext.xbase.lib.Functions.Function1;
+				import org.eclipse.xtext.xbase.lib.IterableExtensions;
+				import org.eclipse.xtext.xbase.lib.ObjectExtensions;
+				
+				@SuppressWarnings("all")
+				public class FindFirstOnIt {
+				  public <T extends Object> T useExtension(final Iterable<T> it) {
+				    final Function1<T,Boolean> _function = new Function1<T,Boolean>() {
+				        public Boolean apply(final T it) {
+				          boolean _notEquals = ObjectExtensions.operator_notEquals(it, null);
+				          return Boolean.valueOf(_notEquals);
+				        }
+				      };
+				    T _findFirst = IterableExtensions.<T>findFirst(it, _function);
+				    return _findFirst;
+				  }
+				}
+			''')
+	}
+	
+	@Test
 	def testReturnType() {
 		assertCompilesTo(
 			'''
