@@ -43,7 +43,7 @@ import com.google.inject.Inject;
 public class XtendValidationTest extends AbstractXtendTestCase {
 
 	@Inject
-	private ValidationTestHelper helper;
+	protected ValidationTestHelper helper;
 	
 	@Test public void testPropertyMustNotBeStatic_01() throws Exception {
 		XtendClass clazz = clazz("class Z { @Property String x  @Property static String y}");

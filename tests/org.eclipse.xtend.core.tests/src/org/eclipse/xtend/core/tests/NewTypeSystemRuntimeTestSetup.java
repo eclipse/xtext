@@ -41,6 +41,8 @@ import org.eclipse.xtext.xbase.typesystem.legacy.LegacyTypeArgumentContextProvid
 import org.eclipse.xtext.xbase.typesystem.legacy.LegacyVisibilityService;
 import org.eclipse.xtext.xbase.typesystem.legacy.XbaseBatchTypeProvider;
 import org.eclipse.xtext.xbase.typing.ITypeProvider;
+import org.eclipse.xtext.xbase.validation.FeatureNameValidator;
+import org.eclipse.xtext.xbase.validation.LogicalContainerAwareFeatureNameValidator;
 
 import com.google.inject.Binder;
 import com.google.inject.Guice;
@@ -49,7 +51,7 @@ import com.google.inject.Injector;
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-@SuppressWarnings("deprecation")
+@SuppressWarnings({ "deprecation", "unused" })
 public class NewTypeSystemRuntimeTestSetup extends XtendStandaloneSetup {
 	
 	@Override
@@ -60,7 +62,6 @@ public class NewTypeSystemRuntimeTestSetup extends XtendStandaloneSetup {
 				return AbstractXtendTestCase.class.getClassLoader();
 			}
 			
-			@SuppressWarnings("unused")
 			public XtendFactory bindXtendFactory() {
 				return XtendFactory.eINSTANCE;
 			}
@@ -71,7 +72,6 @@ public class NewTypeSystemRuntimeTestSetup extends XtendStandaloneSetup {
 						.to(ExtensionAwareScopeProvider.class);
 			}
 			
-			@SuppressWarnings("unused")
 			public Class<? extends IBatchScopeProvider> bindIBatchScopeProvider() {
 				return ExtensionAwareScopeProvider.class;
 			}
@@ -86,17 +86,14 @@ public class NewTypeSystemRuntimeTestSetup extends XtendStandaloneSetup {
 				return XbaseBatchTypeProvider.class;
 			}
 			
-			@SuppressWarnings("unused")
 			public Class<? extends DefaultBatchTypeResolver> bindDefaultBatchTypeResolver() {
 				return LogicalContainerAwareBatchTypeResolver.class;
 			}
 			
-			@SuppressWarnings("unused")
 			public Class<? extends DefaultReentrantTypeResolver> bindReentrantTypeResolver() {
 				return DispatchAndExtensionAwareReentrantTypeResolver.class;
 			}
 			
-			@SuppressWarnings("unused")
 			public Class<? extends ITypeComputer> bindTypeComputer() {
 				return XtendTypeComputer.class;
 			}
@@ -126,12 +123,10 @@ public class NewTypeSystemRuntimeTestSetup extends XtendStandaloneSetup {
 				return XtendJavaValidator2.class;
 			}
 			
-			@SuppressWarnings("unused")
 			public Class<? extends VisibilityService> bindVisibilityService() {
 				return LegacyVisibilityService.class;
 			}
 			
-			@SuppressWarnings("unused")
 			public Class<? extends FeatureOverridesService> bindFeatureOverridesService() {
 				return LegacyFeatureOverridesService.class;
 			}
@@ -141,9 +136,12 @@ public class NewTypeSystemRuntimeTestSetup extends XtendStandaloneSetup {
 				return LegacyTypeArgumentContextProvider.class;
 			}
 			
-			@SuppressWarnings("unused")
 			public Class<? extends TypeReferenceSerializer> bindTypeReferenceSerializer() {
 				return TypeReferenceSerializer2.class;
+			}
+			
+			public Class<? extends FeatureNameValidator> bindFeatureNameValidator() {
+				return LogicalContainerAwareFeatureNameValidator.class;
 			}
 		});
 	}

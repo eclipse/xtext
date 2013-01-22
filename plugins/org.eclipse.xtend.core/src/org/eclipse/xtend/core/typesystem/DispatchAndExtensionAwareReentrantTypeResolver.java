@@ -10,6 +10,7 @@ package org.eclipse.xtend.core.typesystem;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -93,8 +94,20 @@ public class DispatchAndExtensionAwareReentrantTypeResolver extends LogicalConta
 			}
 			TypeConformanceComputer conformanceComputer = getServices().getTypeConformanceComputer();
 			LightweightTypeReference result = conformanceComputer.getCommonSuperType(types);
-			if (result == null)
-				return null;
+			if (result == null) {
+				if (types.isEmpty())
+					return null;
+				Iterator<LightweightTypeReference> iterator = types.iterator();
+				while(iterator.hasNext()) {
+					if (iterator.next().isPrimitiveVoid()) {
+						iterator.remove();
+					}
+				}
+				result = conformanceComputer.getCommonSuperType(types);
+				if (result == null) {
+					throw new UnsupportedOperationException("Cannot determine common super type of: " + types);
+				}
+			}
 			return result.toJavaCompliantTypeReference();
 		}
 	}

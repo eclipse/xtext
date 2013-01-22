@@ -101,6 +101,7 @@ import org.eclipse.xtext.xbase.typesystem.references.OwnedConverter;
 import org.eclipse.xtext.xbase.typesystem.util.ContextualVisibilityHelper;
 import org.eclipse.xtext.xbase.typesystem.util.IVisibilityHelper;
 import org.eclipse.xtext.xbase.validation.UIStrings;
+import org.eclipse.xtext.xtype.XtypePackage;
 
 import com.google.common.base.Function;
 import com.google.common.base.Predicate;
@@ -151,7 +152,7 @@ public class XtendJavaValidator2 extends XbaseWithAnnotationsJavaValidator2 {
 	
 	@Inject
 	private IVisibilityHelper visibilityHelper;
-	
+
 	@Override
 	protected void initTypeConformanceCheckedReferences(Builder<EReference> acceptor) {
 		super.initTypeConformanceCheckedReferences(acceptor);
@@ -164,7 +165,7 @@ public class XtendJavaValidator2 extends XbaseWithAnnotationsJavaValidator2 {
 	
 	@Override
 	protected List<EPackage> getEPackages() {
-		return newArrayList(XtendPackage.eINSTANCE, XbasePackage.eINSTANCE, XAnnotationsPackage.eINSTANCE);
+		return newArrayList(XtendPackage.eINSTANCE, XtypePackage.eINSTANCE, XbasePackage.eINSTANCE, XAnnotationsPackage.eINSTANCE);
 	}
 
 	@Check
@@ -839,6 +840,7 @@ public class XtendJavaValidator2 extends XbaseWithAnnotationsJavaValidator2 {
 						}
 						expectStatic = overriddenOperation.isStatic();
 					} 
+					LightweightTypeReference dispatchMethodReturnType = getActualType(clazz, syntheticDispatchMethod);
 					if (dispatchOperations.size() == 1) {
 						JvmOperation singleOp = dispatchOperations.iterator().next();
 						XtendFunction function = associations.getXtendFunction(singleOp);
@@ -876,19 +878,19 @@ public class XtendJavaValidator2 extends XbaseWithAnnotationsJavaValidator2 {
 								}
 							}
 							// TODO move validation to type computation
-	//						XtendFunction function = associations.getXtendFunction(jvmOperation);
-	//						if (function != null) {
-	//							JvmTypeReference functionReturnType = returnTypeProvider.computeReturnType(function);
-	//							if (functionReturnType != null) {
-	//								if (!isConformant(jvmOperation.getReturnType(), functionReturnType)) {
-	//									error("Incompatible return type of dispatch method. Expected "
-	//											+ getNameOfTypes(jvmOperation.getReturnType()) + " but was "
-	//											+ canonicalName(functionReturnType), function,
-	//											XtendPackage.Literals.XTEND_FUNCTION__RETURN_TYPE,
-	//											ValidationMessageAcceptor.INSIGNIFICANT_INDEX, INCOMPATIBLE_RETURN_TYPE);
-	//								}
-	//							}
-	//						}
+							if (dispatchMethodReturnType != null) {
+								XtendFunction function = associations.getXtendFunction(jvmOperation);
+								if (function != null) {
+									LightweightTypeReference operationType = getActualType(function.getExpression(), jvmOperation);
+									if (!dispatchMethodReturnType.isAssignableFrom(operationType)) {
+										error("Incompatible return type of dispatch method. Expected "
+												+ syntheticDispatchMethod.getSimpleName() + " but was "
+												+ operationType.getSimpleName(), function,
+												XtendPackage.Literals.XTEND_FUNCTION__RETURN_TYPE,
+												ValidationMessageAcceptor.INSIGNIFICANT_INDEX, INCOMPATIBLE_RETURN_TYPE);
+									}
+								}
+							}
 						}
 						if (commonVisibility == null) {
 							addDispatchError(type, dispatchOperations, "All local dispatch methods must have the same visibility.", 
