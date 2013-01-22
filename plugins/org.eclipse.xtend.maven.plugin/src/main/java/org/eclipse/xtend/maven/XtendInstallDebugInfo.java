@@ -17,7 +17,6 @@ public class XtendInstallDebugInfo extends AbstractXtendInstallDebugInfoMojo {
 
 	@Override
 	protected void internalExecute() {
-		@SuppressWarnings("unchecked")
 		List<String> compileSourceRoots = project.getCompileSourceRoots();
 		String outputDirectory = project.getBuild().getOutputDirectory();
 		Multimap<File, File> trace2class = createTraceToClassFileMap(compileSourceRoots, outputDirectory);

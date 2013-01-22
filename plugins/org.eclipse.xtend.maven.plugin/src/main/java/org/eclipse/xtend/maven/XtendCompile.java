@@ -41,11 +41,10 @@ public class XtendCompile extends AbstractXtendCompilerMojo {
 	private String tempDirectory;
 
 	@Override
-	protected void internalExecute(XtendBatchCompiler xtend2BatchCompiler) throws MojoExecutionException {
-		compileSources(xtend2BatchCompiler);
+	protected void internalExecute() throws MojoExecutionException {
+		compileSources(xtendBatchCompilerProvider.get());
 	}
 
-	@SuppressWarnings("unchecked")
 	private void compileSources(XtendBatchCompiler xtend2BatchCompiler) throws MojoExecutionException {
 		List<String> compileSourceRoots = Lists.newArrayList(project.getCompileSourceRoots());
 		String classPath = concat(File.pathSeparator, getClassPath());
@@ -53,8 +52,6 @@ public class XtendCompile extends AbstractXtendCompilerMojo {
 		compile(xtend2BatchCompiler, classPath, compileSourceRoots, outputDirectory);
 	}
 
-
-	@SuppressWarnings("unchecked")
 	protected List<String> getClassPath() {
 		Set<String> classPath = Sets.newLinkedHashSet();
 		classPath.add(project.getBuild().getSourceDirectory());
@@ -67,7 +64,6 @@ public class XtendCompile extends AbstractXtendCompilerMojo {
 		return newArrayList(filter(classPath, FILE_EXISTS));
 	}
 
-	
 	@Override
 	protected String getTempDirectory() {
 		return tempDirectory;

@@ -18,7 +18,7 @@ import com.google.common.collect.Sets;
 
 /**
  * Goal which compiles Xtend2 test sources.
- *
+ * 
  * @author Michael Clay - Initial contribution and API
  * @goal testCompile
  * @phase generate-test-sources
@@ -41,11 +41,10 @@ public class XtendTestCompile extends AbstractXtendCompilerMojo {
 	private String testTempDirectory;
 
 	@Override
-	protected void internalExecute(XtendBatchCompiler xtend2BatchCompiler) throws MojoExecutionException {
-		compileTestSources(xtend2BatchCompiler);
+	protected void internalExecute() throws MojoExecutionException {
+		compileTestSources(xtendBatchCompilerProvider.get());
 	}
 
-	@SuppressWarnings("unchecked")
 	protected void compileTestSources(XtendBatchCompiler xtend2BatchCompiler) throws MojoExecutionException {
 		List<String> testCompileSourceRoots = Lists.newArrayList(project.getTestCompileSourceRoots());
 		String testClassPath = concat(File.pathSeparator, getTestClassPath());
@@ -53,7 +52,6 @@ public class XtendTestCompile extends AbstractXtendCompilerMojo {
 		compile(xtend2BatchCompiler, testClassPath, testCompileSourceRoots, testOutputDirectory);
 	}
 
-	@SuppressWarnings("unchecked")
 	protected List<String> getTestClassPath() {
 		Set<String> classPath = Sets.newLinkedHashSet();
 		classPath.add(project.getBuild().getTestSourceDirectory());

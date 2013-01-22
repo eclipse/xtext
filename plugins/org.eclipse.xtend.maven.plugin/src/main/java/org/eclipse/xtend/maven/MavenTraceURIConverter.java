@@ -19,7 +19,6 @@ public class MavenTraceURIConverter extends DefaultTraceURIConverter {
 	}
 
 	protected URI deresolve(MavenProject project, URI uri) {
-		@SuppressWarnings("unchecked")
 		Iterable<String> roots = Iterables.concat(project.getCompileSourceRoots(), project.getTestCompileSourceRoots());
 		for (String rootString : roots) {
 			if (!rootString.endsWith("/"))

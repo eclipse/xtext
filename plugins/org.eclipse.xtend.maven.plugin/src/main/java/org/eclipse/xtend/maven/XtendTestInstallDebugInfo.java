@@ -16,7 +16,6 @@ import com.google.common.collect.Multimap;
 public class XtendTestInstallDebugInfo extends AbstractXtendInstallDebugInfoMojo {
 	@Override
 	protected void internalExecute() {
-		@SuppressWarnings("unchecked")
 		List<String> compileSourceRoots = project.getTestCompileSourceRoots();
 		String outputDirectory = project.getBuild().getTestOutputDirectory();
 		Multimap<File, File> trace2class = createTraceToClassFileMap(compileSourceRoots, outputDirectory);
