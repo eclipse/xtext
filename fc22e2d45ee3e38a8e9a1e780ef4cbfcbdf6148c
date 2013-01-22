@@ -1,0 +1,9 @@
+Change-Id: Ifc22e2d45ee3e38a8e9a1e780ef4cbfcbdf6148c
+Code-Review+2: Holger Schill <Holger.Schill@itemis.de>
+IP-Clean+1: Holger Schill <Holger.Schill@itemis.de>
+Verified+1: Holger Schill <Holger.Schill@itemis.de>
+Submitted-by: Holger Schill <Holger.Schill@itemis.de>
+Submitted-at: Tue, 22 Jan 2013 03:52:20 -0500
+Reviewed-on: https://git.eclipse.org/r/9821
+Project: tmf/org.eclipse.xtext
+Branch: refs/heads/master
