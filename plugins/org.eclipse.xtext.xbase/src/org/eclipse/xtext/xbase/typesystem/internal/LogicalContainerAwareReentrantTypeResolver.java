@@ -13,6 +13,7 @@ import java.util.Map;
 
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.common.types.JvmAnnotationAnnotationValue;
@@ -44,9 +45,11 @@ import org.eclipse.xtext.xbase.scoping.batch.IFeatureScopeSession;
 import org.eclipse.xtext.xbase.typesystem.InferredTypeIndicator;
 import org.eclipse.xtext.xbase.typesystem.computation.ITypeComputationResult;
 import org.eclipse.xtext.xbase.typesystem.override.OverrideHelper;
+import org.eclipse.xtext.xbase.typesystem.references.AnyTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.ITypeReferenceOwner;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 import org.eclipse.xtext.xbase.typesystem.util.AbstractReentrantTypeReferenceProvider;
+import org.eclipse.xtext.xbase.typing.IJvmTypeReferenceProvider;
 import org.eclipse.xtext.xbase.validation.IssueCodes;
 import org.eclipse.xtext.xtype.XComputedTypeReference;
 import org.eclipse.xtext.xtype.impl.XComputedTypeReferenceImplCustom;
@@ -91,6 +94,29 @@ public class LogicalContainerAwareReentrantTypeResolver extends DefaultReentrant
 				return null;
 			return actualType.toJavaCompliantTypeReference();
 		}
+		
+		@Override
+		protected JvmTypeReference handleReentrantInvocation(@NonNull XComputedTypeReferenceImplCustom context) {
+			resolvedTypes.addDiagnostic(new EObjectDiagnosticImpl(
+					Severity.WARNING, 
+					IssueCodes.TOO_LITTLE_TYPE_INFORMATION, 
+					"Cannot infer type from recursive usage. Type 'Object' is used.",
+					getSourceElement(member), 
+					null, 
+					-1, 
+					null));
+			AnyTypeReference result = new AnyTypeReference(resolvedTypes.getReferenceOwner());
+			return result.toJavaCompliantTypeReference();
+		}
+
+		/*
+		 * Allows invocation from within the context of the class
+		 */
+		@Override
+		protected void markComputing() {
+			super.markComputing();
+		}
+		
 	}
 	
 	public class AnyTypeReferenceProvider extends AbstractReentrantTypeReferenceProvider {
@@ -109,7 +135,6 @@ public class LogicalContainerAwareReentrantTypeResolver extends DefaultReentrant
 					Severity.ERROR, 
 					IssueCodes.TOO_LITTLE_TYPE_INFORMATION, 
 					"Cannot infer type",
-					// TODO use the source
 					getSourceElement(member), 
 					null, 
 					-1, 
@@ -220,6 +245,28 @@ public class LogicalContainerAwareReentrantTypeResolver extends DefaultReentrant
 		}
 	}
 	
+	@Nullable
+	protected DemandTypeReferenceProvider getComputedTypeReference(JvmTypeReference knownType) {
+		if (InferredTypeIndicator.isInferred(knownType)) {
+			XComputedTypeReference casted = (XComputedTypeReference) knownType;
+			JvmTypeReference equivalent = casted.getEquivalent();
+			if (equivalent instanceof XComputedTypeReference) {
+				IJvmTypeReferenceProvider typeProvider = ((XComputedTypeReference) equivalent).getTypeProvider();
+				if (typeProvider instanceof DemandTypeReferenceProvider) {
+					return (DemandTypeReferenceProvider) typeProvider;
+				}
+			}
+		}
+		return null;
+	}
+	
+	protected void markComputing(JvmTypeReference knownType) {
+		DemandTypeReferenceProvider demandTypeReferenceProvider = getComputedTypeReference(knownType);
+		if (demandTypeReferenceProvider != null) {
+			demandTypeReferenceProvider.markComputing();
+		}
+	}
+	
 	protected void _doPrepare(ResolvedTypes resolvedTypes, IFeatureScopeSession featureScopeSession, JvmConstructor constructor, Map<JvmIdentifiableElement, ResolvedTypes> resolvedTypesByContext) {
 		StackedResolvedTypes childResolvedTypes = declareTypeParameters(resolvedTypes, constructor, resolvedTypesByContext);
 		
@@ -307,6 +354,8 @@ public class LogicalContainerAwareReentrantTypeResolver extends DefaultReentrant
 			throw new IllegalStateException("No resolved type found. Field was: " + field.getIdentifier());
 		}
 		FieldTypeComputationState state = new FieldTypeComputationState(childResolvedTypes, featureScopeSession, field, this);
+		// no need to unmark the computing state since we replace the equivalent in #resolveTo
+		markComputing(field.getType());
 		ITypeComputationResult result = state.computeTypes();
 		if (InferredTypeIndicator.isInferred(field.getType())) {
 			LightweightTypeReference fieldType = result.getActualExpressionType();
@@ -341,6 +390,8 @@ public class LogicalContainerAwareReentrantTypeResolver extends DefaultReentrant
 		}
 		
 		OperationBodyComputationState state = new OperationBodyComputationState(childResolvedTypes, featureScopeSession, operation, this);
+		// no need to unmark the computing state since we replace the equivalent in #resolveTo
+		markComputing(operation.getReturnType());
 		setReturnType(operation, state.computeTypes());
 		computeAnnotationTypes(childResolvedTypes, featureScopeSession, operation);
 		

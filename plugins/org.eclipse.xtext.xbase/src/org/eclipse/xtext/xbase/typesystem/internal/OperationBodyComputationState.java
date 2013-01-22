@@ -57,7 +57,7 @@ public class OperationBodyComputationState extends AbstractLogicalContainerAware
 			InferredTypeIndicator.resolveTo(operation.getReturnType(), expectedType.toJavaCompliantTypeReference());
 			return expectedType;
 		}
-		return getResolvedTypes().getExpectedTypeForAssociatedExpression(getMember(), getDefiniteRootExpression());
+		return getResolvedTypes().getExpectedTypeForAssociatedExpression(getMember(), getNonNullRootExpression());
 	}
 	
 	@Override

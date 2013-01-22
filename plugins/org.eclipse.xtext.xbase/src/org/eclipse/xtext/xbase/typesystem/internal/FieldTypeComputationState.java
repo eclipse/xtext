@@ -40,7 +40,7 @@ public class FieldTypeComputationState extends AbstractLogicalContainerAwareRoot
 	@Override
 	@Nullable
 	protected LightweightTypeReference getExpectedType() {
-		return getResolvedTypes().getExpectedTypeForAssociatedExpression(getMember(), getDefiniteRootExpression());
+		return getResolvedTypes().getExpectedTypeForAssociatedExpression(getMember(), getNonNullRootExpression());
 	}
 	
 	@Override
