@@ -12,6 +12,9 @@ import org.eclipse.xtext.xbase.compiler.CompilationTestHelper
 import org.eclipse.xtext.xbase.lib.Pair
 import org.junit.Test
 import org.junit.runner.RunWith
+import org.eclipse.xtend.lib.macro.declaration.MutableTypeDeclaration
+import com.google.common.collect.Lists
+import org.junit.Before
 
 @RunWith(typeof(XtextRunner))
 @InjectWith(typeof(RuntimeInjectorProvider))
@@ -20,9 +23,17 @@ class ActiveAnnotationsRuntimeTest extends AbstractActiveAnnotationsTest {
 	@Inject CompilationTestHelper compiler
 	@Inject Provider<CompilationUnitImpl> compilationUnitProvider
 	
+	@Before
+	def void setUp() {
+		compiler.setJavaCompilerClassPath(typeof(MutableTypeDeclaration) , typeof(IterableExtensions), typeof(Lists))
+	}
+	
 	override assertProcessing(Pair<String,String> macroFile, Pair<String,String> clientFile, (CompilationUnitImpl)=>void expectations) {
+		val macroResourceSet = compiler.unLoadedResourceSet(macroFile) as XtextResourceSet
+		macroResourceSet.classpathURIContext = getClass.classLoader
+		
 		val resourceSet = compiler.unLoadedResourceSet(clientFile) as XtextResourceSet
-		compiler.compile(macroFile.value) [ result |
+		compiler.compile(macroResourceSet) [ result |
 			resourceSet.setClasspathURIContext(new DelegatingClassloader(getClass().classLoader) [result.getCompiledClass(it)])
 		]
 		val singleResource = resourceSet.resources.head
