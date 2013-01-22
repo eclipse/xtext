@@ -1475,4 +1475,43 @@ public class QuickfixTest extends AbstractXtendUITestCase {
     QuickfixTestBuilder _assertIssueCodes = _create.assertIssueCodes(Diagnostic.LINKING_DIAGNOSTIC);
     _assertIssueCodes.assertResolutionLabelsSubset("Create Xtend class \'Bar\'", "Create Java class \'Bar\'", "Create Java interface \'Bar\'");
   }
+  
+  @Test
+  public void missingTypeStaticAccess() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("class Foo {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def foo() {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("Collections|::sort");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    QuickfixTestBuilder _create = this.builder.create("Foo.xtend", _builder);
+    QuickfixTestBuilder _assertIssueCodes = _create.assertIssueCodes(IssueCodes.FEATURECALL_LINKING_DIAGNOSTIC);
+    QuickfixTestBuilder _assertResolutionLabelsSubset = _assertIssueCodes.assertResolutionLabelsSubset("Import \'Collections\' (java.util)");
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("import java.util.Collections");
+    _builder_1.newLine();
+    _builder_1.newLine();
+    _builder_1.append("class Foo {");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("def foo() {");
+    _builder_1.newLine();
+    _builder_1.append("\t\t");
+    _builder_1.append("Collections::sort");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _assertResolutionLabelsSubset.assertModelAfterQuickfix(_builder_1);
+  }
 }

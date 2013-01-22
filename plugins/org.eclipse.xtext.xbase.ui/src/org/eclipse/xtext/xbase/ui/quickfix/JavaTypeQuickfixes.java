@@ -274,11 +274,14 @@ public class JavaTypeQuickfixes implements ILinkingIssueQuickfixProvider {
 		return fqNameAsString;
 	}
 
-	protected void createImportProposals(final JvmDeclaredType contextType, final Issue issue, final String typeSimpleName, IJavaSearchScope searchScope,
+	protected void createImportProposals(final JvmDeclaredType contextType, final Issue issue, String typeSimpleName, IJavaSearchScope searchScope,
 			final IssueResolutionAcceptor acceptor) throws JavaModelException {
-		if(contextType != null){
+		if(contextType != null) {
+			final String wantedTypeName = typeSimpleName.contains("::") 
+				? typeSimpleName.substring(0, typeSimpleName.indexOf("::")) 
+				: typeSimpleName;
 			BasicSearchEngine searchEngine = new BasicSearchEngine();
-			searchEngine.searchAllTypeNames(null, SearchPattern.R_EXACT_MATCH, typeSimpleName.toCharArray(),
+			searchEngine.searchAllTypeNames(null, SearchPattern.R_EXACT_MATCH, wantedTypeName.toCharArray(),
 					SearchPattern.R_EXACT_MATCH, IJavaSearchConstants.TYPE, searchScope, new IRestrictedAccessTypeRequestor() {
 						
 						public void acceptType(int modifiers, char[] packageName, char[] simpleTypeName, char[][] enclosingTypeNames,
@@ -313,7 +316,7 @@ public class JavaTypeQuickfixes implements ILinkingIssueQuickfixProvider {
 											appendable.append(typeRefs.findDeclaredType(qualifiedTypeName, element));
 											appendable.insertNewImports();
 										}
-									}, jdtTypeRelevance.getRelevance(qualifiedTypeName, typeSimpleName) + 100);
+									}, jdtTypeRelevance.getRelevance(qualifiedTypeName, wantedTypeName) + 100);
 								}
 							}
 						}
