@@ -740,7 +740,7 @@ public class InferredJvmModelTest extends AbstractXtendTestCase {
 		Resource resource = set.createResource(URI.createURI(fileName + ".xtend"));
 		resource.load(new StringInputStream(content), null);
 		XtendFile file = (XtendFile) resource.getContents().get(0);
-	getInferredType(file);
+		getInferredType(file);
     }
 
 	protected JvmGenericType getInferredType(XtendFile xtendFile) {
