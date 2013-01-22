@@ -14,6 +14,7 @@ import org.apache.commons.lang.StringUtils;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
+import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.jdt.core.IJavaElement;
 import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.jdt.core.JavaModelException;
@@ -90,12 +91,11 @@ public class JavaTypeQuickfixes implements ILinkingIssueQuickfixProvider {
 	@Inject
 	private ReplacingAppendable.Factory appendableFactory;
 	
+	@NonNullByDefault
 	public void addQuickfixes(Issue issue, IssueResolutionAcceptor issueResolutionAcceptor,
 			IXtextDocument xtextDocument, XtextResource resource, 
 			EObject referenceOwner, EReference unresolvedReference)
 			throws Exception {
-		if (unresolvedReference == null)
-			return;
 		String issueString = xtextDocument.get(issue.getOffset(), issue.getLength());
 		IScope scope = scopeProvider.getScope(referenceOwner, unresolvedReference);
 		boolean useJavaSearch = false;
