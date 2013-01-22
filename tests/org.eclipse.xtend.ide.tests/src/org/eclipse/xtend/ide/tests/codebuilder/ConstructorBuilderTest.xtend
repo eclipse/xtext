@@ -36,6 +36,6 @@ class ConstructorBuilderTest extends AbstractBuilderTest {
 		]).assertBuilds('''
 			private Bar(Bar bar, Bar bar2) {
 			  «DEFAULT_BODY»;
-			}''')
+			}''') 
 	}
 }
