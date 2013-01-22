@@ -175,7 +175,7 @@ public abstract class AbstractTypeComputationState implements ITypeComputationSt
 					Severity.ERROR,
 					IssueCodes.VARIABLE_NAME_DISALLOWED, 
 					"'" + elementName + "' is not a valid name", 
-					element,
+					getResolver().getSourceElement(element),
 					element.eClass().getEStructuralFeature("name"),
 					-1,
 					null));
@@ -188,7 +188,7 @@ public abstract class AbstractTypeComputationState implements ITypeComputationSt
 						Severity.ERROR,
 						IssueCodes.VARIABLE_NAME_SHADOWING, 
 						"Duplicate local variable " + elementName, 
-						element,
+						getResolver().getSourceElement(element),
 						element.eClass().getEStructuralFeature("name"),
 						-1,
 						null));

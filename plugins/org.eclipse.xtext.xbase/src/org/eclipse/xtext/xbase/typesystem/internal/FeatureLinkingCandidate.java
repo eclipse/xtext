@@ -197,6 +197,7 @@ public class FeatureLinkingCandidate extends AbstractPendingLinkingCandidate<XAb
 		return result;
 	}
 	
+	@Override
 	protected List<XExpression> getSyntacticArguments() {
 		return new FeatureLinkHelper().getSyntacticArguments(getFeatureCall());
 	}

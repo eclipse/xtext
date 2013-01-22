@@ -171,11 +171,32 @@ public class TypeConformanceValidatorTest extends AbstractXbaseTestCase {
 	@Test public void testForLoop_08() throws Exception {
 		assertNoConformanceError("{ val java.util.Set set = newHashSet() for(Object o : set) o }");
 	}
+	
+	@Test public void testReturn_01() throws Exception {
+		assertNoConformanceError("return");
+		assertNoConformanceError("return null");
+		assertNoConformanceError("return 1");
+		assertNoConformanceError("return ''");
+	}
+	
+	@Test public void testReturn_02() throws Exception {
+		assertNoConformanceError("println(return)");
+	}
+	
+	@Test public void testReturn_03() throws Exception {
+		final XExpression xExpression = expression("println(return)", false);
+		helper.assertError(xExpression, XbasePackage.Literals.XFEATURE_CALL, UNREACHABLE_CODE, "Unreachable code.");
+	}
 
 	protected void assertConformanceError(String expression, EClass objectType, String... messageParts)
 			throws Exception {
 		final XExpression xExpression = expression(expression, false);
 		helper.assertError(xExpression, objectType, INCOMPATIBLE_TYPES, messageParts);
+	}
+	
+	protected void assertNoConformanceError(String expression) throws Exception {
+		final XExpression xExpression = expression(expression, false);
+		helper.assertNoError(xExpression, INCOMPATIBLE_TYPES);
 	}
 
 	protected void assertCastError(String expression, EClass objectType, String... messageParts) throws Exception {
@@ -186,11 +207,6 @@ public class TypeConformanceValidatorTest extends AbstractXbaseTestCase {
 	protected void assertNoCastError(String expression) throws Exception {
 		final XExpression xExpression = expression(expression, false);
 		helper.assertNoError(xExpression, INVALID_CAST);
-	}
-
-	protected void assertNoConformanceError(String expression) throws Exception {
-		final XExpression xExpression = expression(expression, false);
-		helper.assertNoError(xExpression, INCOMPATIBLE_TYPES);
 	}
 
 }

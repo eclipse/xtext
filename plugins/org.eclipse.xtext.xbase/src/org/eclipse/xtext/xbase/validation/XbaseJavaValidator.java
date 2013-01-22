@@ -96,7 +96,6 @@ import org.eclipse.xtext.xbase.XVariableDeclaration;
 import org.eclipse.xtext.xbase.XbasePackage;
 import org.eclipse.xtext.xbase.XbasePackage.Literals;
 import org.eclipse.xtext.xbase.controlflow.IEarlyExitComputer;
-import org.eclipse.xtext.xbase.imports.IImportsConfiguration;
 import org.eclipse.xtext.xbase.jvmmodel.IJvmModelAssociations;
 import org.eclipse.xtext.xbase.jvmmodel.ILogicalContainerProvider;
 import org.eclipse.xtext.xbase.lib.Procedures;
@@ -171,9 +170,6 @@ public class XbaseJavaValidator extends AbstractXbaseJavaValidator {
 	@Inject
 	private TypeArgumentContextProvider typeArgumentContextProvider;
 
-	@Inject
-	private IImportsConfiguration importsConfiguration;
-	
 	@Inject
 	private IJvmModelAssociations associations;
 	
@@ -1312,7 +1308,7 @@ public class XbaseJavaValidator extends AbstractXbaseJavaValidator {
 	protected List<EPackage> getEPackages() {
 		return newArrayList(eINSTANCE, XtypePackage.eINSTANCE);
 	}
-
+	
 	protected String canonicalName(JvmTypeReference typeRef) {
 		return (typeRef == null) ? "<null>" : notNull(typeRef.getQualifiedName('.'));
 	}

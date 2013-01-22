@@ -37,6 +37,7 @@ import org.eclipse.xtext.diagnostics.Severity;
 import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.validation.EObjectDiagnosticImpl;
 import org.eclipse.xtext.xbase.XExpression;
+import org.eclipse.xtext.xbase.jvmmodel.IJvmModelAssociations;
 import org.eclipse.xtext.xbase.jvmmodel.ILogicalContainerProvider;
 import org.eclipse.xtext.xbase.scoping.batch.IFeatureNames;
 import org.eclipse.xtext.xbase.scoping.batch.IFeatureScopeSession;
@@ -109,7 +110,7 @@ public class LogicalContainerAwareReentrantTypeResolver extends DefaultReentrant
 					IssueCodes.TOO_LITTLE_TYPE_INFORMATION, 
 					"Cannot infer type",
 					// TODO use the source
-					member, 
+					getSourceElement(member), 
 					null, 
 					-1, 
 					null));
@@ -119,6 +120,9 @@ public class LogicalContainerAwareReentrantTypeResolver extends DefaultReentrant
 
 	@Inject
 	private ILogicalContainerProvider logicalContainerProvider;
+	
+	@Inject
+	private IJvmModelAssociations associations;
 	
 	@Inject
 	private OverrideHelper overrideHelper;
@@ -460,5 +464,12 @@ public class LogicalContainerAwareReentrantTypeResolver extends DefaultReentrant
 		}
 		return null;
 	}
-	
+
+	@Override
+	protected EObject getSourceElement(JvmIdentifiableElement element) {
+		EObject result = associations.getPrimarySourceElement(element);
+		if (result != null)
+			return result;
+		return element;
+	}
 }

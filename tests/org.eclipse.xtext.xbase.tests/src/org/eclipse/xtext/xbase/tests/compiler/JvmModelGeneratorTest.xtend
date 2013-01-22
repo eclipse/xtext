@@ -28,6 +28,7 @@ import org.eclipse.xtext.xbase.tests.typesystem.XbaseWithLogicalContainerInjecto
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
+import org.eclipse.xtext.xbase.jvmmodel.JvmModelCompleter
 
 class JvmModelGeneratorTest extends AbstractXbaseTestCase {
 	
@@ -164,8 +165,12 @@ class JvmModelGeneratorTest extends AbstractXbaseTestCase {
 	def void testEnumeration() {
 		val expression = expression("null", false);
 		val enumeration = expression.toEnumerationType("my.test.Foo") [
-			members += expression.toEnumerationLiteral("BAR")
-			members += expression.toEnumerationLiteral("BAZ")
+			members += expression.toEnumerationLiteral("BAR") [ literal |
+				literal.type = references.createTypeRef(it)
+			]
+			members += expression.toEnumerationLiteral("BAZ") [ literal |
+				literal.type = references.createTypeRef(it)
+			]
 		]
 		val compiled = compile(expression.eResource, enumeration)
 		
@@ -222,14 +227,19 @@ class JvmModelGeneratorTest extends AbstractXbaseTestCase {
 
 	}
     
-    
     @Test
     def void testBug377002(){
         val expression = expression("null")
         val clazz = expression.toEnumerationType("my.test.Level") [
-            members += expression.toEnumerationLiteral("WARN")
-            members += expression.toEnumerationLiteral("ERROR")
-            members += expression.toEnumerationLiteral("DEBUG")
+            members += expression.toEnumerationLiteral("WARN") [ literal |
+				literal.type = references.createTypeRef(it)
+			]
+            members += expression.toEnumerationLiteral("ERROR") [ literal |
+				literal.type = references.createTypeRef(it)
+			]
+            members += expression.toEnumerationLiteral("DEBUG") [ literal |
+				literal.type = references.createTypeRef(it)
+			]
             members += expression.toMethod("doStuff", references.getTypeForName("java.lang.Object", expression)) [
                 setBody(expression)
             ]
@@ -264,5 +274,27 @@ class JvmModelGeneratorTest extends AbstractXbaseTestCase {
 @RunWith(typeof(XtextRunner))
 @InjectWith(typeof(XbaseWithLogicalContainerInjectorProvider))
 class JvmModelGeneratorTest2 extends JvmModelGeneratorTest {
+	
+	@Inject
+	JvmModelCompleter completer
+	
+	@Inject 
+	extension JvmTypesBuilder builder
+		
+	@Test
+	def void testEnumerationWithCompleter() {
+		val expression = expression("null", false);
+		val enumeration = expression.toEnumerationType("my.test.Foo") [
+			members += expression.toEnumerationLiteral("BAR")
+			members += expression.toEnumerationLiteral("BAZ")
+		]
+		completer.complete(enumeration)
+		val compiled = compile(expression.eResource, enumeration)
+		
+		val valuesMethod = compiled.getMethod("values")
+		val values = valuesMethod.invoke(null) as Object[]
+		assertEquals("BAR", values.get(0).toString())
+		assertEquals("BAZ", values.get(1).toString())
+	}
 	
 } 
