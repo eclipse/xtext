@@ -75,7 +75,7 @@ import org.eclipse.xtext.xtype.XFunctionTypeRef;
 import org.eclipse.xtext.xtype.XImportDeclaration;
 import org.eclipse.xtext.xtype.XImportSection;
 
-@SuppressWarnings(value = "restriction")
+@SuppressWarnings("all")
 public class XtendFormatter extends XbaseFormatter2 {
   @Inject
   private NodeModelAccess _nodeModelAccess;

@@ -34,7 +34,7 @@ import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xbase.lib.StringExtensions;
 import org.junit.Assert;
 
-@SuppressWarnings(value = "restriction")
+@SuppressWarnings("all")
 public class FormatterTester {
   @Inject
   private ParseHelper<EObject> _parseHelper;
