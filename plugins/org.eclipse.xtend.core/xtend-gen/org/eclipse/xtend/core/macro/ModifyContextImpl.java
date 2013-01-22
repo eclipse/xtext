@@ -1,16 +1,19 @@
 package org.eclipse.xtend.core.macro;
 
 import com.google.inject.Inject;
+import java.util.List;
 import java.util.Set;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtend.core.jvmmodel.IXtendJvmAssociations;
 import org.eclipse.xtend.core.macro.declaration.AbstractNamedElementImpl;
 import org.eclipse.xtend.core.macro.declaration.CompilationUnitImpl;
 import org.eclipse.xtend.lib.macro.ModifyContext;
+import org.eclipse.xtend.lib.macro.Problem;
 import org.eclipse.xtend.lib.macro.TypeReferenceProvider;
 import org.eclipse.xtend.lib.macro.declaration.ClassDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.CompilationUnit;
 import org.eclipse.xtend.lib.macro.declaration.ConstructorDeclaration;
+import org.eclipse.xtend.lib.macro.declaration.Element;
 import org.eclipse.xtend.lib.macro.declaration.FieldDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.MemberDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.MethodDeclaration;
@@ -111,8 +114,28 @@ public class ModifyContextImpl implements ModifyContext {
     throw _unsupportedOperationException;
   }
   
-  public TypeReferenceProvider getTypeReferences() {
-    UnsupportedOperationException _unsupportedOperationException = new UnsupportedOperationException("Auto-generated function stub");
-    throw _unsupportedOperationException;
+  public TypeReferenceProvider getTypeReferenceProvider() {
+    return this.getUnit();
+  }
+  
+  public void addError(final Element element, final String message) {
+    CompilationUnitImpl _unit = this.getUnit();
+    _unit.addError(element, message);
+  }
+  
+  public void addInfo(final Element element, final String message) {
+    CompilationUnitImpl _unit = this.getUnit();
+    _unit.addInfo(element, message);
+  }
+  
+  public void addWarning(final Element element, final String message) {
+    CompilationUnitImpl _unit = this.getUnit();
+    _unit.addWarning(element, message);
+  }
+  
+  public List<Problem> getProblems(final Element element) {
+    CompilationUnitImpl _unit = this.getUnit();
+    List<Problem> _problems = _unit.getProblems(element);
+    return _problems;
   }
 }

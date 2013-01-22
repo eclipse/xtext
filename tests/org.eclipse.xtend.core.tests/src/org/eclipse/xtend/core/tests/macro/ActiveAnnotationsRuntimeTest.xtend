@@ -1,18 +1,17 @@
 package org.eclipse.xtend.core.tests.macro
 
 import com.google.inject.Inject
+import com.google.inject.Provider
+import org.eclipse.xtend.core.macro.declaration.CompilationUnitImpl
 import org.eclipse.xtend.core.tests.RuntimeInjectorProvider
-import org.eclipse.xtend.lib.macro.declaration.CompilationUnit
+import org.eclipse.xtend.core.xtend.XtendFile
 import org.eclipse.xtext.junit4.InjectWith
 import org.eclipse.xtext.junit4.XtextRunner
+import org.eclipse.xtext.resource.XtextResourceSet
 import org.eclipse.xtext.xbase.compiler.CompilationTestHelper
 import org.eclipse.xtext.xbase.lib.Pair
-import org.junit.runner.RunWith
-import org.eclipse.xtext.resource.XtextResourceSet
 import org.junit.Test
-import org.eclipse.xtend.core.macro.declaration.CompilationUnitImpl
-import com.google.inject.Provider
-import org.eclipse.xtend.core.xtend.XtendFile
+import org.junit.runner.RunWith
 
 @RunWith(typeof(XtextRunner))
 @InjectWith(typeof(RuntimeInjectorProvider))
@@ -21,7 +20,7 @@ class ActiveAnnotationsRuntimeTest extends AbstractActiveAnnotationsTest {
 	@Inject CompilationTestHelper compiler
 	@Inject Provider<CompilationUnitImpl> compilationUnitProvider
 	
-	override assertProcessing(Pair<String,String> macroFile, Pair<String,String> clientFile, (CompilationUnit)=>void expectations) {
+	override assertProcessing(Pair<String,String> macroFile, Pair<String,String> clientFile, (CompilationUnitImpl)=>void expectations) {
 		val resourceSet = compiler.unLoadedResourceSet(clientFile) as XtextResourceSet
 		compiler.compile(macroFile.value) [ result |
 			resourceSet.setClasspathURIContext(new DelegatingClassloader(getClass().classLoader) [result.getCompiledClass(it)])

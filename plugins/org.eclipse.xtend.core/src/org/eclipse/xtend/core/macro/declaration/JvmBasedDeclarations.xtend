@@ -189,7 +189,7 @@ class JvmClassDeclarationImpl extends JvmTypeDeclarationImpl<JvmGenericType> imp
 		val newMethod = TypesFactory::eINSTANCE.createJvmOperation
 		newMethod.visibility = JvmVisibility::PUBLIC
 		newMethod.simpleName = name
-		newMethod.returnType = compilationUnit.toJvmTypeReference(compilationUnit.typeReferenceProvider.primitiveVoid)
+		newMethod.returnType = compilationUnit.toJvmTypeReference(compilationUnit.primitiveVoid)
 		delegate.members.add(newMethod)
 		initializer.apply(compilationUnit.toMemberDeclaration(newMethod) as MutableMethodDeclaration)
 	}

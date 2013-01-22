@@ -9,6 +9,7 @@ package org.eclipse.xtend.lib.macro.type;
 
 import java.util.List;
 
+import org.eclipse.xtend.lib.macro.declaration.Element;
 import org.eclipse.xtend.lib.macro.declaration.Type;
 
 import com.google.common.annotations.Beta;
@@ -17,7 +18,7 @@ import com.google.common.annotations.Beta;
  * @author Sven Efftinge
  */
 @Beta
-public interface TypeReference {
+public interface TypeReference extends Element {
 
 	Type getType();
 

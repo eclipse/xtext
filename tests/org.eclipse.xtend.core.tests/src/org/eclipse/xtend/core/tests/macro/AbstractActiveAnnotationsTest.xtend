@@ -1,11 +1,13 @@
 package org.eclipse.xtend.core.tests.macro
 
-import org.eclipse.xtend.lib.macro.declaration.CompilationUnit
+import org.eclipse.xtend.core.macro.declaration.CompilationUnitImpl
+import org.eclipse.xtend.lib.macro.declaration.Element
 import org.eclipse.xtend.lib.macro.declaration.MutableMethodDeclaration
 import org.eclipse.xtext.xbase.lib.Pair
 import org.junit.Test
 
 import static org.junit.Assert.*
+import org.eclipse.xtend.lib.macro.declaration.MutableFieldDeclaration
 
 abstract class AbstractActiveAnnotationsTest {
 	
@@ -132,8 +134,8 @@ abstract class AbstractActiveAnnotationsTest {
 						ctx = context
 						annotatedMethods.forEach [
 							val type = addTypeParameter('A')
-							addParameter('myParam', compilationUnit.typeReferenceProvider.newTypeReference(type))
-							setExceptions(compilationUnit.typeReferenceProvider.newTypeReference('java.lang.Exception'))
+							addParameter('myParam', typeReferenceProvider.newTypeReference(type))
+							setExceptions(typeReferenceProvider.newTypeReference('java.lang.Exception'))
 						]
 					}
 					
@@ -157,6 +159,54 @@ abstract class AbstractActiveAnnotationsTest {
 		]
 	}
 	
+	@Test def void testValidation() {
+		assertProcessing(
+			'myannotation/AbstractAnnotation.xtend' -> '''
+				package myannotation
+				
+				import java.util.List
+				import org.eclipse.xtend.lib.macro.Active
+				import org.eclipse.xtend.lib.macro.ModifyContext
+				import org.eclipse.xtend.lib.macro.ModifyProcessor
+				import org.eclipse.xtend.lib.macro.declaration.MutableNamedElement
+				import org.eclipse.xtend.lib.macro.declaration.MutableFieldDeclaration
+
+				@Active(typeof(ValidatedProcessor))
+				annotation Validated { }
+				class ValidatedProcessor implements ModifyProcessor<MutableNamedElement> {
+					
+					extension ModifyContext ctx
+					
+					override modify(List<? extends MutableNamedElement> annotatedMethods, ModifyContext context) {
+						ctx = context
+						annotatedMethods.forEach [ ele |
+							switch ele {
+								MutableFieldDeclaration : ele.addWarning('field-warning')
+								default : ele.addWarning('warning')
+							}
+						]
+					}
+				}
+			''',
+			'myusercode/UserCode.xtend' -> '''
+				package myusercode
+				
+				class MyClass {
+					@myannotation.Validated
+					def void foo() {
+					}
+					
+					@myannotation.Validated
+					String name
+				}
+			'''
+		) [
+			val method = generatedClassDeclarations.head.members.filter(typeof(MutableMethodDeclaration)).head
+			val field = generatedClassDeclarations.head.members.filter(typeof(MutableFieldDeclaration)).head
+			assertEquals('field-warning', getProblems(field).head.message)
+			assertEquals('warning', getProblems(method).head.message)
+		]
+	}
 	
-	def void assertProcessing(Pair<String,String> macroFile, Pair<String,String> clientFile, (CompilationUnit)=>void expectations)
+	def void assertProcessing(Pair<String,String> macroFile, Pair<String,String> clientFile, (CompilationUnitImpl)=>void expectations)
 }

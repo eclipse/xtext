@@ -96,13 +96,10 @@ public class AnnotationProcessor {
       }
       Object _processorInstance = ctx.getProcessorInstance();
       String _plus = ("error while executing \'" + _processorInstance);
-      String _plus_1 = (_plus + "\' on \'");
-      List<XtendAnnotationTarget> _annotatedSourceElements = ctx.getAnnotatedSourceElements();
-      String _plus_2 = (_plus_1 + _annotatedSourceElements);
-      String _plus_3 = (_plus_2 + "\' : ");
+      String _plus_1 = (_plus + "\' : ");
       String _message = e.getMessage();
-      String _plus_4 = (_plus_3 + _message);
-      AnnotationProcessor.logger.error(_plus_4);
+      String _plus_2 = (_plus_1 + _message);
+      AnnotationProcessor.logger.error(_plus_2, e);
     } catch (Exception _e) {
       throw Exceptions.sneakyThrow(_e);
     }

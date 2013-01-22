@@ -12,7 +12,6 @@ import org.eclipse.xtend.core.tests.RuntimeInjectorProvider;
 import org.eclipse.xtend.core.tests.macro.AbstractActiveAnnotationsTest;
 import org.eclipse.xtend.core.tests.macro.DelegatingClassloader;
 import org.eclipse.xtend.core.xtend.XtendFile;
-import org.eclipse.xtend.lib.macro.declaration.CompilationUnit;
 import org.eclipse.xtext.junit4.InjectWith;
 import org.eclipse.xtext.junit4.XtextRunner;
 import org.eclipse.xtext.resource.XtextResourceSet;
@@ -37,7 +36,7 @@ public class ActiveAnnotationsRuntimeTest extends AbstractActiveAnnotationsTest 
   @Inject
   private Provider<CompilationUnitImpl> compilationUnitProvider;
   
-  public void assertProcessing(final Pair<String,String> macroFile, final Pair<String,String> clientFile, final Procedure1<? super CompilationUnit> expectations) {
+  public void assertProcessing(final Pair<String,String> macroFile, final Pair<String,String> clientFile, final Procedure1<? super CompilationUnitImpl> expectations) {
     try {
       ResourceSet _unLoadedResourceSet = this.compiler.unLoadedResourceSet(clientFile);
       final XtextResourceSet resourceSet = ((XtextResourceSet) _unLoadedResourceSet);

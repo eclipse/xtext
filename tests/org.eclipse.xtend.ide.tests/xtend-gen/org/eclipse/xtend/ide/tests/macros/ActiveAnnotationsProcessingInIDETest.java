@@ -26,7 +26,6 @@ import org.eclipse.xtend.core.tests.macro.AbstractActiveAnnotationsTest;
 import org.eclipse.xtend.core.xtend.XtendFile;
 import org.eclipse.xtend.ide.tests.WorkbenchTestHelper;
 import org.eclipse.xtend.ide.tests.XtendIDEInjectorProvider;
-import org.eclipse.xtend.lib.macro.declaration.CompilationUnit;
 import org.eclipse.xtext.junit4.InjectWith;
 import org.eclipse.xtext.junit4.XtextRunner;
 import org.eclipse.xtext.junit4.internal.StopWatchRule;
@@ -81,7 +80,7 @@ public class ActiveAnnotationsProcessingInIDETest extends AbstractActiveAnnotati
   
   private IFile sourceFile;
   
-  public void assertProcessing(final Pair<String,String> macroFile, final Pair<String,String> clientFile, final Procedure1<? super CompilationUnit> expectations) {
+  public void assertProcessing(final Pair<String,String> macroFile, final Pair<String,String> clientFile, final Procedure1<? super CompilationUnitImpl> expectations) {
     try {
       IProject _createPluginProject = WorkbenchTestHelper.createPluginProject("macroProject");
       IJavaProject _create = JavaCore.create(_createPluginProject);

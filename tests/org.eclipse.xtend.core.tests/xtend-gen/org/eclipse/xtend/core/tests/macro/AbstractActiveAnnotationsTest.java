@@ -2,9 +2,11 @@ package org.eclipse.xtend.core.tests.macro;
 
 import com.google.common.collect.Iterables;
 import java.util.List;
+import org.eclipse.xtend.core.macro.declaration.CompilationUnitImpl;
+import org.eclipse.xtend.lib.macro.Problem;
 import org.eclipse.xtend.lib.macro.declaration.ClassDeclaration;
-import org.eclipse.xtend.lib.macro.declaration.CompilationUnit;
 import org.eclipse.xtend.lib.macro.declaration.MemberDeclaration;
+import org.eclipse.xtend.lib.macro.declaration.MutableFieldDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.MutableMethodDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.MutableParameterDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.MutableTypeParameterDeclaration;
@@ -85,8 +87,8 @@ public abstract class AbstractActiveAnnotationsTest {
     _builder_1.append("}");
     _builder_1.newLine();
     Pair<String,String> _mappedTo_1 = Pair.<String, String>of("myusercode/UserCode.xtend", _builder_1.toString());
-    final Procedure1<CompilationUnit> _function = new Procedure1<CompilationUnit>() {
-        public void apply(final CompilationUnit it) {
+    final Procedure1<CompilationUnitImpl> _function = new Procedure1<CompilationUnitImpl>() {
+        public void apply(final CompilationUnitImpl it) {
           List<? extends ClassDeclaration> _generatedClassDeclarations = it.getGeneratedClassDeclarations();
           final ClassDeclaration clazz = IterableExtensions.head(_generatedClassDeclarations);
           boolean _isAbstract = clazz.isAbstract();
@@ -113,8 +115,8 @@ public abstract class AbstractActiveAnnotationsTest {
     _builder.append("}");
     _builder.newLine();
     Pair<String,String> _mappedTo_1 = Pair.<String, String>of("myusercode/UserCode.xtend", _builder.toString());
-    final Procedure1<CompilationUnit> _function = new Procedure1<CompilationUnit>() {
-        public void apply(final CompilationUnit it) {
+    final Procedure1<CompilationUnitImpl> _function = new Procedure1<CompilationUnitImpl>() {
+        public void apply(final CompilationUnitImpl it) {
           List<? extends ClassDeclaration> _generatedClassDeclarations = it.getGeneratedClassDeclarations();
           final ClassDeclaration clazz = IterableExtensions.head(_generatedClassDeclarations);
           List<? extends MemberDeclaration> _members = clazz.getMembers();
@@ -191,10 +193,10 @@ public abstract class AbstractActiveAnnotationsTest {
     _builder.append("val type = addTypeParameter(\'A\')");
     _builder.newLine();
     _builder.append("\t\t\t");
-    _builder.append("addParameter(\'myParam\', compilationUnit.typeReferenceProvider.newTypeReference(type))");
+    _builder.append("addParameter(\'myParam\', typeReferenceProvider.newTypeReference(type))");
     _builder.newLine();
     _builder.append("\t\t\t");
-    _builder.append("setExceptions(compilationUnit.typeReferenceProvider.newTypeReference(\'java.lang.Exception\'))");
+    _builder.append("setExceptions(typeReferenceProvider.newTypeReference(\'java.lang.Exception\'))");
     _builder.newLine();
     _builder.append("\t\t");
     _builder.append("]");
@@ -225,8 +227,8 @@ public abstract class AbstractActiveAnnotationsTest {
     _builder_1.append("}");
     _builder_1.newLine();
     Pair<String,String> _mappedTo_1 = Pair.<String, String>of("myusercode/UserCode.xtend", _builder_1.toString());
-    final Procedure1<CompilationUnit> _function = new Procedure1<CompilationUnit>() {
-        public void apply(final CompilationUnit it) {
+    final Procedure1<CompilationUnitImpl> _function = new Procedure1<CompilationUnitImpl>() {
+        public void apply(final CompilationUnitImpl it) {
           List<? extends ClassDeclaration> _generatedClassDeclarations = it.getGeneratedClassDeclarations();
           ClassDeclaration _head = IterableExtensions.head(_generatedClassDeclarations);
           List<? extends MemberDeclaration> _members = _head.getMembers();
@@ -255,5 +257,118 @@ public abstract class AbstractActiveAnnotationsTest {
     this.assertProcessing(_mappedTo, _mappedTo_1, _function);
   }
   
-  public abstract void assertProcessing(final Pair<String,String> macroFile, final Pair<String,String> clientFile, final Procedure1<? super CompilationUnit> expectations);
+  @Test
+  public void testValidation() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("package myannotation");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("import java.util.List");
+    _builder.newLine();
+    _builder.append("import org.eclipse.xtend.lib.macro.Active");
+    _builder.newLine();
+    _builder.append("import org.eclipse.xtend.lib.macro.ModifyContext");
+    _builder.newLine();
+    _builder.append("import org.eclipse.xtend.lib.macro.ModifyProcessor");
+    _builder.newLine();
+    _builder.append("import org.eclipse.xtend.lib.macro.declaration.MutableNamedElement");
+    _builder.newLine();
+    _builder.append("import org.eclipse.xtend.lib.macro.declaration.MutableFieldDeclaration");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("@Active(typeof(ValidatedProcessor))");
+    _builder.newLine();
+    _builder.append("annotation Validated { }");
+    _builder.newLine();
+    _builder.append("class ValidatedProcessor implements ModifyProcessor<MutableNamedElement> {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("extension ModifyContext ctx");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("override modify(List<? extends MutableNamedElement> annotatedMethods, ModifyContext context) {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("ctx = context");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("annotatedMethods.forEach [ ele |");
+    _builder.newLine();
+    _builder.append("\t\t\t");
+    _builder.append("switch ele {");
+    _builder.newLine();
+    _builder.append("\t\t\t\t");
+    _builder.append("MutableFieldDeclaration : ele.addWarning(\'field-warning\')");
+    _builder.newLine();
+    _builder.append("\t\t\t\t");
+    _builder.append("default : ele.addWarning(\'warning\')");
+    _builder.newLine();
+    _builder.append("\t\t\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("]");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    Pair<String,String> _mappedTo = Pair.<String, String>of("myannotation/AbstractAnnotation.xtend", _builder.toString());
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("package myusercode");
+    _builder_1.newLine();
+    _builder_1.newLine();
+    _builder_1.append("class MyClass {");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("@myannotation.Validated");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("def void foo() {");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("@myannotation.Validated");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("String name");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    Pair<String,String> _mappedTo_1 = Pair.<String, String>of("myusercode/UserCode.xtend", _builder_1.toString());
+    final Procedure1<CompilationUnitImpl> _function = new Procedure1<CompilationUnitImpl>() {
+        public void apply(final CompilationUnitImpl it) {
+          List<? extends ClassDeclaration> _generatedClassDeclarations = it.getGeneratedClassDeclarations();
+          ClassDeclaration _head = IterableExtensions.head(_generatedClassDeclarations);
+          List<? extends MemberDeclaration> _members = _head.getMembers();
+          Iterable<MutableMethodDeclaration> _filter = Iterables.<MutableMethodDeclaration>filter(_members, MutableMethodDeclaration.class);
+          final MutableMethodDeclaration method = IterableExtensions.<MutableMethodDeclaration>head(_filter);
+          List<? extends ClassDeclaration> _generatedClassDeclarations_1 = it.getGeneratedClassDeclarations();
+          ClassDeclaration _head_1 = IterableExtensions.head(_generatedClassDeclarations_1);
+          List<? extends MemberDeclaration> _members_1 = _head_1.getMembers();
+          Iterable<MutableFieldDeclaration> _filter_1 = Iterables.<MutableFieldDeclaration>filter(_members_1, MutableFieldDeclaration.class);
+          final MutableFieldDeclaration field = IterableExtensions.<MutableFieldDeclaration>head(_filter_1);
+          List<Problem> _problems = it.getProblems(field);
+          Problem _head_2 = IterableExtensions.<Problem>head(_problems);
+          String _message = _head_2.getMessage();
+          Assert.assertEquals("field-warning", _message);
+          List<Problem> _problems_1 = it.getProblems(method);
+          Problem _head_3 = IterableExtensions.<Problem>head(_problems_1);
+          String _message_1 = _head_3.getMessage();
+          Assert.assertEquals("warning", _message_1);
+        }
+      };
+    this.assertProcessing(_mappedTo, _mappedTo_1, _function);
+  }
+  
+  public abstract void assertProcessing(final Pair<String,String> macroFile, final Pair<String,String> clientFile, final Procedure1<? super CompilationUnitImpl> expectations);
 }

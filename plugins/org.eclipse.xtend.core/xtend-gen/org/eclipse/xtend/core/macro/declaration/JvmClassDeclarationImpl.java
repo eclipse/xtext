@@ -12,7 +12,6 @@ import java.util.List;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.xtend.core.macro.declaration.CompilationUnitImpl;
 import org.eclipse.xtend.core.macro.declaration.JvmTypeDeclarationImpl;
-import org.eclipse.xtend.lib.macro.TypeReferenceProvider;
 import org.eclipse.xtend.lib.macro.declaration.MemberDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.MutableClassDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.MutableFieldDeclaration;
@@ -190,8 +189,7 @@ public class JvmClassDeclarationImpl extends JvmTypeDeclarationImpl<JvmGenericTy
     newMethod.setSimpleName(name);
     CompilationUnitImpl _compilationUnit = this.getCompilationUnit();
     CompilationUnitImpl _compilationUnit_1 = this.getCompilationUnit();
-    TypeReferenceProvider _typeReferenceProvider = _compilationUnit_1.getTypeReferenceProvider();
-    TypeReference _primitiveVoid = _typeReferenceProvider.getPrimitiveVoid();
+    TypeReference _primitiveVoid = _compilationUnit_1.getPrimitiveVoid();
     JvmTypeReference _jvmTypeReference = _compilationUnit.toJvmTypeReference(_primitiveVoid);
     newMethod.setReturnType(_jvmTypeReference);
     JvmGenericType _delegate = this.getDelegate();
