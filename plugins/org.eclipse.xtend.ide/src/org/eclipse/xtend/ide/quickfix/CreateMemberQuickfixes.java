@@ -116,13 +116,14 @@ public class CreateMemberQuickfixes implements ILinkingIssueQuickfixProvider {
 					newMethodQuickfixes(newMemberName, call, issue, issueResolutionAcceptor);
 					
 				} else if(call instanceof XFeatureCall) {
-					if(!call.isExplicitOperationCallOrBuilderSyntax()) {
-						newLocalVariableQuickfix(newMemberName, call, issue, issueResolutionAcceptor);
-						newFieldQuickfix(newMemberName, call, issue, issueResolutionAcceptor);
-						newGetterQuickfixes(newMemberName, call, issue, issueResolutionAcceptor);
+					if(((XFeatureCall) call).getDeclaringType() == null) {
+						if(!call.isExplicitOperationCallOrBuilderSyntax()) {
+							newLocalVariableQuickfix(newMemberName, call, issue, issueResolutionAcceptor);
+							newFieldQuickfix(newMemberName, call, issue, issueResolutionAcceptor);
+							newGetterQuickfixes(newMemberName, call, issue, issueResolutionAcceptor);
+						}
+						newMethodQuickfixes(newMemberName, call, issue, issueResolutionAcceptor);
 					}
-					newMethodQuickfixes(newMemberName, call, issue, issueResolutionAcceptor);
-					
 				} else if (call instanceof XAssignment) {
 					newSetterQuickfix(issue, issueResolutionAcceptor, newMemberName, call);
 					if(((XAssignment) call).getAssignable() == null) {
@@ -165,7 +166,7 @@ public class CreateMemberQuickfixes implements ILinkingIssueQuickfixProvider {
 			return typeRefs.createTypeRef(getCallersType(featureCall));
 		} else {
 			JvmTypeReference typeRef = typeProvider.getType(actualReceiver);
-			if(typeRef.getType() instanceof JvmDeclaredType)
+			if(typeRef != null && typeRef.getType() instanceof JvmDeclaredType)
 				return typeResolver.resolveType(featureCall, typeRef);
 		}
 		return null;
@@ -233,13 +234,15 @@ public class CreateMemberQuickfixes implements ILinkingIssueQuickfixProvider {
 	protected void newMethodQuickfixes(JvmTypeReference containerType, String name, JvmTypeReference returnType,
 			List<JvmTypeReference> argumentTypes, XAbstractFeatureCall call, JvmDeclaredType callersType,
 			final Issue issue, final IssueResolutionAcceptor issueResolutionAcceptor) {
-		boolean isLocal = callersType == containerType.getType();
-		if(containerType.getType() instanceof JvmDeclaredType) 
-			newMethodQuickfix((JvmDeclaredType) containerType.getType(), name, returnType, argumentTypes, false, isLocal, call, issue, issueResolutionAcceptor);
-		if(!isLocal) {
-			List<JvmTypeReference> extensionMethodParameterTypes = newArrayList(argumentTypes);
-			extensionMethodParameterTypes.add(0, containerType);
-			newMethodQuickfix(callersType, name, returnType, extensionMethodParameterTypes, true, true, call, issue, issueResolutionAcceptor);
+		if(containerType != null) {
+			boolean isLocal = callersType == containerType.getType();
+			if(containerType.getType() instanceof JvmDeclaredType) 
+				newMethodQuickfix((JvmDeclaredType) containerType.getType(), name, returnType, argumentTypes, false, isLocal, call, issue, issueResolutionAcceptor);
+			if(!isLocal) {
+				List<JvmTypeReference> extensionMethodParameterTypes = newArrayList(argumentTypes);
+				extensionMethodParameterTypes.add(0, containerType);
+				newMethodQuickfix(callersType, name, returnType, extensionMethodParameterTypes, true, true, call, issue, issueResolutionAcceptor);
+			}
 		}
 	}
 	
@@ -291,7 +294,7 @@ public class CreateMemberQuickfixes implements ILinkingIssueQuickfixProvider {
 		JvmDeclaredType callersType = getCallersType(call);
 		JvmTypeReference receiverType = getReceiverType(call);
 		JvmTypeReference fieldType = getNewMemberType(call);
-		if(callersType == receiverType.getType()) 
+		if(receiverType != null && callersType == receiverType.getType()) 
 			newFieldQuickfix(callersType, name, fieldType, call, issue, issueResolutionAcceptor);
 	}
 
