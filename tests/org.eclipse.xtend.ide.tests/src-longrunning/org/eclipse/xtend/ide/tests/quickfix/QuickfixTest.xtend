@@ -768,5 +768,29 @@ class QuickfixTest extends AbstractXtendUITestCase {
 		''')
 	}
 	
+	@Test
+	def void missingClass() {
+		create('Foo.xtend', '''
+			class Foo {
+				Bar| bar
+			}
+		''')
+		.assertIssueCodes(Diagnostic::LINKING_DIAGNOSTIC)
+		.assertResolutionLabelsSubset("Create Xtend class 'Bar'", "Create Java class 'Bar'", "Create Java interface 'Bar'")
+	}
+	
+	@Test
+	def void missingClassAndConstructor() {
+		create('Foo.xtend', '''
+			class Foo {
+				def foo() {
+					new Bar|
+				}
+			}
+		''')
+		.assertIssueCodes(Diagnostic::LINKING_DIAGNOSTIC)
+		.assertResolutionLabelsSubset("Create Xtend class 'Bar'", "Create Java class 'Bar'", "Create Java interface 'Bar'")
+	}
+	
 }
 

@@ -59,6 +59,12 @@ class QuickfixTestBuilder {
 		this
 	}
 
+	def assertResolutionLabelsSubset(String... expectedLabels) {
+		val actualLabels = issuesAtCaret.map[resolutions].flatten.map[label].toSet
+		expectedLabels.forEach[assertTrue('Label \'' + it + '\' missing', actualLabels.contains(it))]
+		this
+	}
+
 	def assertModelAfterQuickfix(CharSequence expectedModel) {
 		val resolutions = issuesAtCaret.map[resolutions].flatten.toList
 		val originalModel = editor.document.get
