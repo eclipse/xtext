@@ -86,4 +86,39 @@ public class XbaseIntegrationTest2 extends XbaseIntegrationTest {
 		super.testStaticMethod_02();
 	}
 	
+	@Override
+	@Test
+	public void testForLoop_16() throws Exception {
+		super.testForLoop_16();
+	}
+	
+	@Override
+	@Test
+	public void testMapValuesExtension() throws Exception {
+		super.testMapValuesExtension();
+	}
+	
+	@Override
+	@Test public void testReduceWithPlusOperator() throws Exception {
+		super.testReduceWithPlusOperator();
+	}
+	
+	@Override
+	@Test
+	public void testCollectionExtensions_08() throws Exception {
+		super.testCollectionExtensions_08();
+	}
+	
+	@Override
+	@Test
+	public void testCollectionExtensions_09() throws Exception {
+		super.testCollectionExtensions_09();
+	}
+	
+	@Override
+	@Test
+	public void testCollectionExtensions_10() throws Exception {
+		super.testCollectionExtensions_10();
+	}
+	
 }

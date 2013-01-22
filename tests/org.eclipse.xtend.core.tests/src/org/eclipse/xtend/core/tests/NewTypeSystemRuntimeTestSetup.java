@@ -24,6 +24,8 @@ import org.eclipse.xtext.linking.LinkingScopeProviderBinding;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.scoping.IScopeProvider;
 import org.eclipse.xtext.service.SingletonBinding;
+import org.eclipse.xtext.xbase.annotations.typesystem.XbaseWithAnnotationsBatchScopeProvider;
+import org.eclipse.xtext.xbase.annotations.typesystem.XbaseWithAnnotationsTypeComputer;
 import org.eclipse.xtext.xbase.compiler.TypeReferenceSerializer;
 import org.eclipse.xtext.xbase.compiler.TypeReferenceSerializer2;
 import org.eclipse.xtext.xbase.compiler.XbaseCompiler;
@@ -32,6 +34,7 @@ import org.eclipse.xtext.xbase.interpreter.impl.XbaseInterpreter2;
 import org.eclipse.xtext.xbase.jvmmodel.IJvmModelInferrer;
 import org.eclipse.xtext.xbase.resource.BatchLinkableResource;
 import org.eclipse.xtext.xbase.scoping.batch.IBatchScopeProvider;
+import org.eclipse.xtext.xbase.scoping.batch.XbaseBatchScopeProvider;
 import org.eclipse.xtext.xbase.typesystem.computation.ITypeComputer;
 import org.eclipse.xtext.xbase.typesystem.internal.DefaultBatchTypeResolver;
 import org.eclipse.xtext.xbase.typesystem.internal.DefaultReentrantTypeResolver;
@@ -96,6 +99,10 @@ public class NewTypeSystemRuntimeTestSetup extends XtendStandaloneSetup {
 			
 			public Class<? extends ITypeComputer> bindTypeComputer() {
 				return XtendTypeComputer.class;
+			}
+			
+			public Class<? extends XbaseBatchScopeProvider> bindBatchScopeProvider() {
+				return XbaseWithAnnotationsBatchScopeProvider.class;
 			}
 			
 			@Override

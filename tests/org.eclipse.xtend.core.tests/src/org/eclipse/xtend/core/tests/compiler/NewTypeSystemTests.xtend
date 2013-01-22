@@ -69,6 +69,12 @@ class CompilerTest2 extends AbstractCompilerTest {
 		super.testBug_352849_02()
 	}
 	
+	@Test
+	@Ignore("TODO Currently there is no way to refer to computed types in the jvm model inferer")
+	override testData_03() throws Exception {
+		super.testData_03()
+	}
+	
 	// overridden variant eliminates recursion
 	@Test
 	override testEscapeCharacterForReservedNames() throws Exception {
@@ -90,18 +96,6 @@ class CompilerTest2 extends AbstractCompilerTest {
 			}'
 		val javaCode = compileToJavaCode(code)
 		javaCompiler.compileToClass("x.Z", javaCode)
-	}
-	
-	@Test
-	@Ignore("TODO")
-	override testData_01() throws Exception {
-		super.testData_01()
-	}
-	
-	@Test
-	@Ignore("TODO")
-	override testData_02() throws Exception {
-		super.testData_02()
 	}
 	
 }

@@ -324,7 +324,6 @@ class XtendAnnotationsFormatterTest extends AbstractXtendFormatterTest {
 		''')	
 	}
 	
-	@Ignore("https://bugs.eclipse.org/bugs/show_bug.cgi?id=393343")
 	@Test def formatAnnotationListValue0() {
 		assertFormattedAnnotation('''
 			@SuppressWarnings({})

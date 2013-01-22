@@ -19,6 +19,9 @@ import org.eclipse.xtext.xbase.XFeatureCall
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.junit.Ignore
+import org.eclipse.emf.ecore.ENamedElement
+import org.eclipse.emf.ecore.EPackage
+import org.eclipse.emf.ecore.EStructuralFeature
 
 @RunWith(typeof(XtextRunner))
 @InjectWith(typeof(NewTypeSystemRuntimeInjectorProvider))
@@ -34,9 +37,44 @@ class InferredJvmModelShadowingJavaLinkingTests2 extends InferredJvmModelShadowi
 @InjectWith(typeof(NewTypeSystemRuntimeInjectorProvider))
 class InferredJvmModelTest2 extends InferredJvmModelTest {
     
-    @Ignore("TODO: implement solution for recursive functions, e.g. doStuff in this test case")
     @Test override testDispatchFunction_03() throws Exception {
-        super.testDispatchFunction_03()
+        testDispatchFunction_03_impl(true)
+    }
+    
+    @Test def void testDispatchFunction_03_noValidate() throws Exception {
+        testDispatchFunction_03_impl(false)
+    }
+    
+    def protected testDispatchFunction_03_impl(boolean validation) throws Exception {
+    	val xtendFile = file(
+				"class Dispatcher {\n" + 
+				"	def dispatch doStuff(org.eclipse.emf.ecore.EClass model) {\n" + 
+				"		model.ETypeParameters.map(e|doStuff(e))\n" + 
+				"	}\n" + 
+				"	def dispatch doStuff(org.eclipse.emf.ecore.EPackage packageDecl) {\n" + 
+				"		packageDecl.EClassifiers.map(e|doStuff(e))\n" + 
+				"	}\n" + 
+				"	def dispatch doStuff(org.eclipse.emf.ecore.EStructuralFeature feature) {\n" + 
+				"		newArrayList(feature)\n" + 
+				"	}\n" + 
+				"}", validation);
+		
+		val inferredType = getInferredType(xtendFile);
+		
+		// one main dispatch
+		val operations = inferredType.getDeclaredOperations();
+		val dispatchCase = findByNameAndFirstParameterType(operations, "doStuff", typeof(ENamedElement));
+		assertEquals("java.lang.Object", dispatchCase.getReturnType().getIdentifier());
+
+		// three internal case methods
+		val eClassParam = findByNameAndFirstParameterType(operations, "_doStuff", typeof(EClass));
+		assertEquals("java.util.List<? extends java.lang.Object>", eClassParam.getReturnType().getIdentifier());
+		
+		val ePackageParam = findByNameAndFirstParameterType(operations, "_doStuff", typeof(EPackage));
+		assertEquals("java.util.List<? extends java.lang.Object>", ePackageParam.getReturnType().getIdentifier());
+		
+		val eStructuralFeatureParam = findByNameAndFirstParameterType(operations, "_doStuff", typeof(EStructuralFeature));
+		assertEquals("java.util.List<? extends java.lang.Object>", eStructuralFeatureParam.getReturnType().getIdentifier());
     }
     
     @Test override testDispatchFunction_04() throws Exception {

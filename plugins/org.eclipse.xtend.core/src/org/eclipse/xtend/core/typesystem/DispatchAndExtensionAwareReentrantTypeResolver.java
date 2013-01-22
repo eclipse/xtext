@@ -15,6 +15,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtend.core.jvmmodel.DispatchHelper;
@@ -31,7 +32,9 @@ import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.util.TypeReferences;
+import org.eclipse.xtext.diagnostics.Severity;
 import org.eclipse.xtext.resource.IEObjectDescription;
+import org.eclipse.xtext.validation.EObjectDiagnosticImpl;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XFeatureCall;
 import org.eclipse.xtext.xbase.XMemberFeatureCall;
@@ -44,12 +47,14 @@ import org.eclipse.xtext.xbase.typesystem.conformance.TypeConformanceComputer;
 import org.eclipse.xtext.xbase.typesystem.internal.LogicalContainerAwareReentrantTypeResolver;
 import org.eclipse.xtext.xbase.typesystem.internal.OperationBodyComputationState;
 import org.eclipse.xtext.xbase.typesystem.internal.ResolvedTypes;
+import org.eclipse.xtext.xbase.typesystem.references.AnyTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.ITypeReferenceOwner;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.OwnedConverter;
 import org.eclipse.xtext.xbase.typesystem.references.ParameterizedTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.WildcardTypeReference;
 import org.eclipse.xtext.xbase.typesystem.util.AbstractReentrantTypeReferenceProvider;
+import org.eclipse.xtext.xbase.validation.IssueCodes;
 import org.eclipse.xtext.xtype.XComputedTypeReference;
 import org.eclipse.xtext.xtype.impl.XComputedTypeReferenceImplCustom;
 
@@ -108,6 +113,20 @@ public class DispatchAndExtensionAwareReentrantTypeResolver extends LogicalConta
 					throw new UnsupportedOperationException("Cannot determine common super type of: " + types);
 				}
 			}
+			return result.toJavaCompliantTypeReference();
+		}
+		
+		@Override
+		protected JvmTypeReference handleReentrantInvocation(@NonNull XComputedTypeReferenceImplCustom context) {
+			resolvedTypes.addDiagnostic(new EObjectDiagnosticImpl(
+					Severity.WARNING, 
+					IssueCodes.TOO_LITTLE_TYPE_INFORMATION, 
+					"Cannot infer type from recursive usage. Type 'Object' is used.",
+					getSourceElement(operation), 
+					null, 
+					-1, 
+					null));
+			AnyTypeReference result = new AnyTypeReference(resolvedTypes.getReferenceOwner());
 			return result.toJavaCompliantTypeReference();
 		}
 	}
@@ -218,7 +237,7 @@ public class DispatchAndExtensionAwareReentrantTypeResolver extends LogicalConta
 	
 	@Inject
 	private XbaseFactory xbaseFactory;
-	
+
 	@Override
 	protected void _computeTypes(Map<JvmIdentifiableElement, ResolvedTypes> preparedResolvedTypes, ResolvedTypes resolvedTypes, IFeatureScopeSession featureScopeSession,
 			JvmOperation operation) {
@@ -247,6 +266,9 @@ public class DispatchAndExtensionAwareReentrantTypeResolver extends LogicalConta
 			List<LightweightTypeReference> dispatchCaseResults = Lists.newArrayListWithCapacity(dispatchCases.size());
 			boolean hasInferredCase = false;
 			for(JvmOperation dispatchCase: dispatchCases) {
+				markComputing(dispatchCase.getReturnType());
+			}
+			for(JvmOperation dispatchCase: dispatchCases) {
 				ResolvedTypes dispatchCaseResolvedTypes = dispatchCase == operation ? childResolvedTypes : preparedResolvedTypes.get(dispatchCase);
 				if (dispatchCaseResolvedTypes == null) {
 					if (preparedResolvedTypes.containsKey(dispatchCase)) {
@@ -263,8 +285,6 @@ public class DispatchAndExtensionAwareReentrantTypeResolver extends LogicalConta
 					}
 				} else {
 					OperationBodyComputationState state = new DispatchOperationBodyComputationState(dispatchCaseResolvedTypes, featureScopeSession, dispatchCase, dispatcher, this);
-					// no need to unmark the computing state since we replace the equivalent in #resolveTo
-					markComputing(dispatcher.getReturnType());
 					ITypeComputationResult dispatchCaseResult = state.computeTypes();
 					if (InferredTypeIndicator.isInferred(dispatchCase.getReturnType())) {
 						if (declaredDispatcherType == null) {
