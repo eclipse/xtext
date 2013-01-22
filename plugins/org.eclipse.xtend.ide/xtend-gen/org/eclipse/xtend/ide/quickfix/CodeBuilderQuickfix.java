@@ -81,8 +81,8 @@ public class CodeBuilderQuickfix {
         }
       }
       final IModification modification = _switchResult;
-      String _preview = builder.preview();
-      String _image = this.getImage(builder);
+      String _preview = builder.getPreview();
+      String _image = builder.getImage();
       acceptor.accept(issue, label, _preview, _image, modification);
     }
   }

@@ -37,7 +37,7 @@ public class ClassBuilderTest extends AbstractBuilderTest {
   }
   
   @Test
-  public void testJavaMethod() {
+  public void testJavaClass() {
     JvmDeclaredType _javaClass = this.getJavaClass();
     AbstractClassBuilder _createClassBuilder = this._codeBuilderFactory.createClassBuilder(_javaClass);
     final Procedure1<AbstractClassBuilder> _function = new Procedure1<AbstractClassBuilder>() {

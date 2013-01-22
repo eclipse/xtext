@@ -12,9 +12,10 @@ import java.util.List
 import org.eclipse.jdt.core.IType
 import org.eclipse.xtend.core.xtend.XtendClass
 import org.eclipse.xtext.common.types.JvmTypeReference
-import org.eclipse.xtext.common.types.JvmVisibility
 import org.eclipse.xtext.xbase.compiler.IAppendable
 import org.eclipse.xtext.xbase.compiler.TypeReferenceSerializer
+
+import static org.eclipse.xtext.common.types.JvmVisibility.*
 
 /**
  * @author Jan Koehnlein
@@ -28,6 +29,15 @@ abstract class AbstractMethodBuilder extends AbstractCodeBuilder {
 	def protected appendDefaultBody(IAppendable appendable, String statementSeparator) {
 		appendable.append('throw new UnsupportedOperationException("TODO: auto-generated method stub")')
 			.append(statementSeparator)
+	}
+	
+	override getImage() {
+		switch visibility {
+			case PRIVATE: 'methpri_obj.gif'
+			case PROTECTED: 'methpro_obj.gif'
+			case PUBLIC: 'methpub_obj.gif'
+			default: 'methdef_obj.gif'
+		}
 	}
 }
 
@@ -47,7 +57,7 @@ class XtendMethodBuilder extends AbstractMethodBuilder implements ICodeBuilder$X
 	
 	override build(IAppendable appendable) {
 		appendable.append('def ')
-			.appendVisibility(visibility, JvmVisibility::PUBLIC)
+			.appendVisibility(visibility, PUBLIC)
 			.append(methodName)
 			.appendParameters(parameterTypes)
 			.append(' {').increaseIndentation.newLine
@@ -83,7 +93,7 @@ class JavaMethodBuilder extends AbstractMethodBuilder implements ICodeBuilder$Ja
 	
 	override build(IAppendable appendable) {
 		appendable
-			.appendVisibility(visibility, JvmVisibility::PRIVATE)
+			.appendVisibility(visibility, PRIVATE)
 			.appendType(returnType, "void").append(' ')
 			.append(methodName)
 			.appendParameters(parameterTypes)

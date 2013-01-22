@@ -122,7 +122,7 @@ public abstract class AbstractCodeBuilder implements ICodeBuilder {
     return _and;
   }
   
-  public String preview() {
+  public String getPreview() {
     String _xblockexpression = null;
     {
       StringBuilderBasedAppendable _stringBuilderBasedAppendable = new StringBuilderBasedAppendable();

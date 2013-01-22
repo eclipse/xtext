@@ -47,7 +47,7 @@ abstract class AbstractCodeBuilder implements ICodeBuilder {
 			&& ownerSource != null && owner != null && context != null
 	}
 	
-	override preview() {
+	override getPreview() {
 		val appendable = new StringBuilderBasedAppendable
 		appendable.append('...').newLine.build.newLine.append('...')
 		appendable.toString

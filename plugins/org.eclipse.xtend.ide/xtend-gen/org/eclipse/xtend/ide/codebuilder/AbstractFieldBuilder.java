@@ -7,8 +7,10 @@
  */
 package org.eclipse.xtend.ide.codebuilder;
 
+import com.google.common.base.Objects;
 import org.eclipse.xtend.ide.codebuilder.AbstractCodeBuilder;
 import org.eclipse.xtext.common.types.JvmTypeReference;
+import org.eclipse.xtext.common.types.JvmVisibility;
 
 /**
  * @author Jan Koehnlein
@@ -33,5 +35,34 @@ public abstract class AbstractFieldBuilder extends AbstractCodeBuilder {
   
   public void setFieldType(final JvmTypeReference fieldType) {
     this._fieldType = fieldType;
+  }
+  
+  public String getImage() {
+    String _switchResult = null;
+    JvmVisibility _visibility = this.getVisibility();
+    final JvmVisibility getVisibility = _visibility;
+    boolean _matched = false;
+    if (!_matched) {
+      if (Objects.equal(getVisibility,JvmVisibility.PRIVATE)) {
+        _matched=true;
+        _switchResult = "field_private_obj.gif";
+      }
+    }
+    if (!_matched) {
+      if (Objects.equal(getVisibility,JvmVisibility.PROTECTED)) {
+        _matched=true;
+        _switchResult = "field_protected_obj.gif";
+      }
+    }
+    if (!_matched) {
+      if (Objects.equal(getVisibility,JvmVisibility.PUBLIC)) {
+        _matched=true;
+        _switchResult = "field_public_obj.gif";
+      }
+    }
+    if (!_matched) {
+      _switchResult = "field_default_obj.gif";
+    }
+    return _switchResult;
   }
 }

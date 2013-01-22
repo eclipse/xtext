@@ -11,9 +11,10 @@ import javax.inject.Inject
 import org.eclipse.jdt.core.IType
 import org.eclipse.xtend.core.xtend.XtendClass
 import org.eclipse.xtext.common.types.JvmTypeReference
-import org.eclipse.xtext.common.types.JvmVisibility
 import org.eclipse.xtext.xbase.compiler.IAppendable
 import org.eclipse.xtext.xbase.compiler.TypeReferenceSerializer
+
+import static org.eclipse.xtext.common.types.JvmVisibility.*
 
 /**
  * @author Jan Koehnlein
@@ -23,6 +24,14 @@ abstract class AbstractFieldBuilder extends AbstractCodeBuilder {
 	@Property String fieldName
 	@Property JvmTypeReference fieldType
 	
+	override getImage() {
+		switch visibility {
+			case PRIVATE: 'field_private_obj.gif'
+			case PROTECTED: 'field_protected_obj.gif'
+			case PUBLIC: 'field_public_obj.gif'
+			default: 'field_default_obj.gif'
+		}
+	}
 } 
 
 class XtendFieldBuilder extends AbstractFieldBuilder implements ICodeBuilder$Xtend {
@@ -40,7 +49,7 @@ class XtendFieldBuilder extends AbstractFieldBuilder implements ICodeBuilder$Xte
 	}
 	
 	override build(IAppendable appendable) {
-		appendable.appendVisibility(visibility, JvmVisibility::PRIVATE)
+		appendable.appendVisibility(visibility, PRIVATE)
 			.appendType(fieldType, "Object").append(' ').append(fieldName)
 	}
 
@@ -70,7 +79,7 @@ class JavaFieldBuilder extends AbstractFieldBuilder implements ICodeBuilder$Java
 	}
 	
 	override build(IAppendable appendable) {
-		appendable.appendVisibility(visibility, JvmVisibility::DEFAULT)
+		appendable.appendVisibility(visibility, DEFAULT)
 			.appendType(fieldType, "Object").append(' ').append(fieldName).append(';')
 	}
 

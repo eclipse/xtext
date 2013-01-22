@@ -13,4 +13,8 @@ public abstract class AbstractClassBuilder extends AbstractCodeBuilder {
   public void setClassName(final String className) {
     this._className = className;
   }
+  
+  public String getImage() {
+    return "newclass_wiz.gif";
+  }
 }
