@@ -80,7 +80,7 @@ public class XtendQuickfixProvider extends XbaseQuickfixProvider {
 	
 	@Inject private IJavaProjectProvider projectProvider;
 
-	@Inject private CreateTypeQuickfixes createTypeQuickfixes;
+	@Inject private CreateXtendTypeQuickfixes createTypeQuickfixes;
 
 	@Inject private CreateMemberQuickfixes createMemberQuickfixes;
 	

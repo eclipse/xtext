@@ -12,6 +12,8 @@ import org.eclipse.xtext.ui.editor.quickfix.Fix;
 import org.eclipse.xtext.ui.editor.quickfix.IssueResolutionAcceptor;
 import org.eclipse.xtext.util.concurrent.IUnitOfWork;
 import org.eclipse.xtext.validation.Issue;
+import org.eclipse.xtext.xbase.XConstructorCall;
+import org.eclipse.xtext.xbase.XbasePackage;
 import org.eclipse.xtext.xbase.ui.imports.OrganizeImportsHandler;
 import org.eclipse.xtext.xbase.validation.IssueCodes;
 
@@ -24,6 +26,9 @@ public class XbaseQuickfixProvider extends DefaultQuickfixProvider {
 
 	@Inject
 	private JavaTypeQuickfixes javaTypeQuickfixes;
+	
+	@Inject
+	private CreateJavaTypeQuickfixes createJavaTypeQuickfixes;
 	
 	@Fix(IssueCodes.IMPORT_DUPLICATE)
 	public void fixDuplicateImport(final Issue issue, IssueResolutionAcceptor acceptor) {
@@ -68,8 +73,9 @@ public class XbaseQuickfixProvider extends DefaultQuickfixProvider {
 				public void process(XtextResource state) throws Exception {
 					EObject target = state.getEObject(issue.getUriToProblem().fragment());
 					EReference reference = getUnresolvedEReference(issue, target);
-					createLinkingIssueQuickfixes(issue, issueResolutionAcceptor, xtextDocument, state, target,
-							reference);
+					if(reference != null && reference.getEReferenceType() != null) 
+						createLinkingIssueQuickfixes(issue, issueResolutionAcceptor, xtextDocument, state, target,
+								reference);
 				}
 			});
 		}
@@ -79,5 +85,15 @@ public class XbaseQuickfixProvider extends DefaultQuickfixProvider {
 			IXtextDocument xtextDocument,
 			XtextResource state, EObject target, EReference reference) throws Exception {
 		javaTypeQuickfixes.addQuickfixes(issue, issueResolutionAcceptor, xtextDocument, state, target, reference);
+		createJavaTypeQuickfixes.addQuickfixes(issue, issueResolutionAcceptor, xtextDocument, state, target, reference);
+	}
+	
+	@Override
+	protected EReference getUnresolvedEReference(Issue issue, EObject target) {
+		EReference unresolvedEReference = super.getUnresolvedEReference(issue, target);
+		if(unresolvedEReference == null && target instanceof XConstructorCall)
+			return XbasePackage.Literals.XCONSTRUCTOR_CALL__CONSTRUCTOR;
+		else 
+			return unresolvedEReference;
 	}
 }

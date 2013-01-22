@@ -1553,7 +1553,7 @@ public class QuickfixTest extends AbstractXtendUITestCase {
   @Test
   public void missingAnnotation() {
     StringConcatenation _builder = new StringConcatenation();
-    _builder.append("@Bar");
+    _builder.append("@Bar|");
     _builder.newLine();
     _builder.append("class Foo {");
     _builder.newLine();
