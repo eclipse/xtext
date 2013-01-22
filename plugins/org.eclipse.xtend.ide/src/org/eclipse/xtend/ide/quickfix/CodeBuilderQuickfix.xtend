@@ -38,11 +38,13 @@ class CodeBuilderQuickfix {
 	@Inject ReplacingAppendable$Factory appendableFactory 
 	
 	def addQuickfix(ICodeBuilder builder, String label, Issue issue, IssueResolutionAcceptor acceptor) {
-		val modification = switch builder {
-			ICodeBuilder$Xtend: builder.xtendModification
-			ICodeBuilder$Java: builder.javaModification
-		} 
-		acceptor.accept(issue, label, builder.preview, builder.image, modification)
+		if (builder.isValid) {
+			val modification = switch builder {
+				ICodeBuilder$Xtend: builder.xtendModification
+				ICodeBuilder$Java: builder.javaModification
+			} 
+			acceptor.accept(issue, label, builder.preview, builder.image, modification)
+		}
 	}
 	
 	def protected getImage(ICodeBuilder builder) {

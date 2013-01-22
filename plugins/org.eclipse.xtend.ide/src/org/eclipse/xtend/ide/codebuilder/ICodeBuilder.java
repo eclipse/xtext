@@ -7,6 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtend.ide.codebuilder;
 
+import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.jdt.core.IType;
 import org.eclipse.xtend.core.xtend.XtendClass;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
@@ -20,6 +21,7 @@ import org.eclipse.xtext.xbase.compiler.IAppendable;
  * @author Sebastian Benz - Inspiration
  * @author Jan Koehnlein - Initial contribution and API
  */
+@NonNullByDefault
 public interface ICodeBuilder {
 
 	IAppendable build(IAppendable appendable);
@@ -31,6 +33,8 @@ public interface ICodeBuilder {
 	JvmDeclaredType getOwner();
 	
 	JvmVisibility getVisibility();
+	
+	boolean isValid();
 	
 	interface Xtend extends ICodeBuilder {
 		XtendClass getXtendClass();

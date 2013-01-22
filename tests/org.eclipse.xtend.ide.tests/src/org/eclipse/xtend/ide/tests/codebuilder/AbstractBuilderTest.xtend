@@ -49,6 +49,7 @@ class AbstractBuilderTest extends AbstractXtendUITestCase {
 	}
 	
 	def protected assertBuilds(ICodeBuilder builder, String expectedCode) {
+		assertTrue(builder.valid)
 		val appendable = new StringBuilderBasedAppendable
 		builder.build(appendable)
 		assertEquals(expectedCode, appendable.toString)
