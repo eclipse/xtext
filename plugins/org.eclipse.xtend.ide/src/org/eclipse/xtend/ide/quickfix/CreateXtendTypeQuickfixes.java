@@ -23,13 +23,7 @@ import org.eclipse.jdt.core.IPackageFragment;
 import org.eclipse.jdt.core.IPackageFragmentRoot;
 import org.eclipse.jdt.core.JavaCore;
 import org.eclipse.jdt.core.JavaModelException;
-import org.eclipse.jdt.internal.ui.wizards.NewAnnotationCreationWizard;
-import org.eclipse.jdt.internal.ui.wizards.NewClassCreationWizard;
 import org.eclipse.jdt.internal.ui.wizards.NewElementWizard;
-import org.eclipse.jdt.internal.ui.wizards.NewInterfaceCreationWizard;
-import org.eclipse.jdt.ui.wizards.NewAnnotationWizardPage;
-import org.eclipse.jdt.ui.wizards.NewClassWizardPage;
-import org.eclipse.jdt.ui.wizards.NewInterfaceWizardPage;
 import org.eclipse.jdt.ui.wizards.NewTypeWizardPage;
 import org.eclipse.jface.viewers.StructuredSelection;
 import org.eclipse.jface.wizard.WizardDialog;
@@ -54,6 +48,7 @@ import org.eclipse.xtext.ui.editor.model.edit.IModificationContext;
 import org.eclipse.xtext.ui.editor.quickfix.IssueResolutionAcceptor;
 import org.eclipse.xtext.ui.refactoring.impl.ProjectUtil;
 import org.eclipse.xtext.validation.Issue;
+import org.eclipse.xtext.xbase.XConstructorCall;
 import org.eclipse.xtext.xbase.XbasePackage;
 import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotationsPackage;
 import org.eclipse.xtext.xbase.ui.quickfix.ILinkingIssueQuickfixProvider;
@@ -62,12 +57,14 @@ import com.google.inject.Inject;
 import com.google.inject.Provider;
 
 /**
+ * Quickfixes to create new Xtend types.
+ * 
  * @author Jan Koehnlein - Initial contribution and API
  */
 @NonNullByDefault
-public class CreateTypeQuickfixes implements ILinkingIssueQuickfixProvider {
+public class CreateXtendTypeQuickfixes implements ILinkingIssueQuickfixProvider {
 
-	private static final Logger LOG = Logger.getLogger(CreateTypeQuickfixes.class);
+	private static final Logger LOG = Logger.getLogger(CreateXtendTypeQuickfixes.class);
 	
 	@Inject 
 	private ProjectUtil projectUtil;
@@ -90,18 +87,16 @@ public class CreateTypeQuickfixes implements ILinkingIssueQuickfixProvider {
 			throws Exception {
 		String typeName = xtextDocument.get(issue.getOffset(), issue.getLength());
 		if (unresolvedReference == XbasePackage.Literals.XCONSTRUCTOR_CALL__CONSTRUCTOR) {
-			newXtendClassQuickfix(typeName, resource, issue, issueResolutionAcceptor);
-			newLocalXtendClassQuickfix(typeName, resource, issue, issueResolutionAcceptor);
-			newJavaClassQuickfix(typeName, resource, issue, issueResolutionAcceptor);
+			if(((XConstructorCall)referenceOwner).getConstructor().eIsProxy()) {
+				newXtendClassQuickfix(typeName, resource, issue, issueResolutionAcceptor);
+				newLocalXtendClassQuickfix(typeName, resource, issue, issueResolutionAcceptor);
+			}
 		} else if(unresolvedReference == XbasePackage.Literals.XTYPE_LITERAL__TYPE
 				|| unresolvedReference == TypesPackage.Literals.JVM_PARAMETERIZED_TYPE_REFERENCE__TYPE) {
 			newXtendClassQuickfix(typeName, resource, issue, issueResolutionAcceptor);
 			newLocalXtendClassQuickfix(typeName, resource, issue, issueResolutionAcceptor);
-			newJavaClassQuickfix(typeName, resource, issue, issueResolutionAcceptor);
-			newJavaInterfaceQuickfix(typeName, resource, issue, issueResolutionAcceptor);
 		} else if(unresolvedReference == XAnnotationsPackage.Literals.XANNOTATION__ANNOTATION_TYPE) {
 			newLocalXtendAnnotationQuickfix(typeName, resource, issue, issueResolutionAcceptor);
-			newJavaAnnotationQuickfix(typeName, resource, issue, issueResolutionAcceptor);
 		}
 	}
 
@@ -135,63 +130,6 @@ public class CreateTypeQuickfixes implements ILinkingIssueQuickfixProvider {
 				codeBuilderQuickfix.addQuickfix(annotationBuilder, "Create local Xtend annotation '@" + typeName + "'", issue, issueResolutionAcceptor);
 			}
 		}
-	}
-
-	protected void newJavaInterfaceQuickfix(final String typeName, final XtextResource resource, Issue issue,
-			IssueResolutionAcceptor issueResolutionAcceptor) {
-		issueResolutionAcceptor.accept(issue, "Create Java interface '" + typeName + "'",
-				"Opens the new Java interface wizard to create the type '" + typeName + "'",
-				"java_interface.gif", new IModification() {
-					public void apply(@Nullable IModificationContext context) throws Exception {
-						runAsyncInDisplayThread(new Runnable() {
-							public void run() {
-								NewInterfaceWizardPage classWizardPage = new NewInterfaceWizardPage();
-								NewInterfaceCreationWizard wizard = new NewInterfaceCreationWizard(classWizardPage, true);
-								WizardDialog dialog = createWizardDialog(wizard);
-								configureWizardPage(classWizardPage, resource.getURI(), typeName);
-								dialog.open();
-							}
-						});
-					}
-				});
-	}
-
-	protected void newJavaClassQuickfix(final String typeName, final XtextResource resource, Issue issue,
-			IssueResolutionAcceptor issueResolutionAcceptor) {
-		issueResolutionAcceptor.accept(issue, "Create Java class '" + typeName + "'",
-				"Opens the new Java class wizard to create the type '" + typeName + "'", "java_file.gif",
-				new IModification() {
-					public void apply(@Nullable IModificationContext context) throws Exception {
-						runAsyncInDisplayThread(new Runnable() {
-							public void run() {
-								NewClassWizardPage classWizardPage = new NewClassWizardPage();
-								NewClassCreationWizard wizard = new NewClassCreationWizard(classWizardPage, true);
-								WizardDialog dialog = createWizardDialog(wizard);
-								configureWizardPage(classWizardPage, resource.getURI(), typeName);
-								dialog.open();
-							}
-						});
-					}
-				});
-	}
-
-	protected void newJavaAnnotationQuickfix(final String typeName, final XtextResource resource, Issue issue,
-			IssueResolutionAcceptor issueResolutionAcceptor) {
-		issueResolutionAcceptor.accept(issue, "Create Java annotation '@" + typeName + "'",
-				"Opens the new Java annotation wizard to create the type '@" + typeName + "'", "java_file.gif",
-				new IModification() {
-					public void apply(@Nullable IModificationContext context) throws Exception {
-						runAsyncInDisplayThread(new Runnable() {
-							public void run() {
-								NewAnnotationWizardPage annotationWizardPage = new NewAnnotationWizardPage();
-								NewAnnotationCreationWizard wizard = new NewAnnotationCreationWizard(annotationWizardPage, true);
-								WizardDialog dialog = createWizardDialog(wizard);
-								configureWizardPage(annotationWizardPage, resource.getURI(), typeName);
-								dialog.open();
-							}
-						});
-					}
-				});
 	}
 
 	protected void newXtendClassQuickfix(final String typeName, final XtextResource resource, Issue issue,

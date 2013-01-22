@@ -837,7 +837,7 @@ class QuickfixTest extends AbstractXtendUITestCase {
 	@Test
 	def void missingAnnotation() {
 		create('Foo.xtend', '''
-			@Bar
+			@Bar|
 			class Foo {
 			}
 		''')
