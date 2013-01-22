@@ -1,14 +1,14 @@
 package org.eclipse.xtend.ide.tests.quickfix
 
 import com.google.inject.Inject
+import org.eclipse.xtend.ide.tests.AbstractXtendUITestCase
+import org.eclipse.xtext.diagnostics.Diagnostic
+import org.junit.After
+import org.junit.Ignore
+import org.junit.Test
+
 import static org.eclipse.xtend.core.validation.IssueCodes.*
 import static org.eclipse.xtext.xbase.validation.IssueCodes.*
-import org.eclipse.xtend.ide.tests.AbstractXtendUITestCase
-import org.junit.After
-import org.junit.Test
-import org.junit.Ignore
-import org.eclipse.xtext.diagnostics.Diagnostic
-import org.eclipse.xtext.xbase.validation.IssueCodes
 
 class QuickfixTest extends AbstractXtendUITestCase {
 	
@@ -777,7 +777,16 @@ class QuickfixTest extends AbstractXtendUITestCase {
 			}
 		''')
 		.assertIssueCodes(Diagnostic::LINKING_DIAGNOSTIC)
-		.assertResolutionLabelsSubset("Create Xtend class 'Bar'", "Create Java class 'Bar'", "Create Java interface 'Bar'")
+		.assertResolutionLabelsSubset("Create Xtend class 'Bar'", "Create Java class 'Bar'", "Create Java interface 'Bar'", 
+				"Create local Xtend class 'Bar'")
+		.assertModelAfterQuickfix("Create local Xtend class 'Bar'", '''
+			class Foo {
+				Bar bar
+			}
+			
+			class Bar {
+			}
+		''')
 	}
 	
 	@Test
@@ -790,7 +799,19 @@ class QuickfixTest extends AbstractXtendUITestCase {
 			}
 		''')
 		.assertIssueCodes(Diagnostic::LINKING_DIAGNOSTIC)
-		.assertResolutionLabelsSubset("Create Xtend class 'Bar'", "Create Java class 'Bar'", "Create Java interface 'Bar'")
+		.assertResolutionLabelsSubset("Create Xtend class 'Bar'", "Create Java class 'Bar'", 
+				"Create Java interface 'Bar'", "Create local Xtend class 'Bar'")
+						.assertModelAfterQuickfix("Create local Xtend class 'Bar'", '''
+			class Foo {
+				def foo() {
+					new Bar
+				}
+			}
+			
+			class Bar {
+			}
+		''')
+				
 	}
 
 	@Test

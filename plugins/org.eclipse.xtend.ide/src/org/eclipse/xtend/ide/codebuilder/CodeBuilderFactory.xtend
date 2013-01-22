@@ -29,13 +29,27 @@ class CodeBuilderFactory {
 	@Inject extension IXtendJvmAssociations
 	@Inject extension IJavaElementFinder
 	
+	@Inject Provider<XtendClassBuilder> xtendClassBuilderProvider
 	@Inject Provider<XtendFieldBuilder> xtendFieldBuilderProvider
-	@Inject Provider<XtendMethodBuilder> xtendMethodBuilderProvider
 	@Inject Provider<XtendConstructorBuilder> xtendConstructorBuilderProvider
+	@Inject Provider<XtendMethodBuilder> xtendMethodBuilderProvider
 	
+	@Inject Provider<JavaClassBuilder> javaClassBuilderProvider
 	@Inject Provider<JavaFieldBuilder> javaFieldBuilderProvider
-	@Inject Provider<JavaMethodBuilder> javaMethodBuilderProvider
 	@Inject Provider<JavaConstructorBuilder> javaConstructorBuilderProvider
+	@Inject Provider<JavaMethodBuilder> javaMethodBuilderProvider
+	
+	def createClassBuilder(JvmDeclaredType owner) {
+		val ownerSource = owner.source
+		val builder = 
+			if(ownerSource instanceof XtendClass) 
+				xtendClassBuilderProvider.get
+			else
+				javaClassBuilderProvider.get
+		builder.owner = owner
+		builder.ownerSource = ownerSource
+		builder
+	}
 	
 	def createFieldBuilder(JvmDeclaredType owner) {
 		val ownerSource = owner.source

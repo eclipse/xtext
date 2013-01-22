@@ -34,8 +34,15 @@ import org.eclipse.jface.wizard.WizardDialog;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.IWorkbench;
 import org.eclipse.ui.PlatformUI;
+import org.eclipse.xtend.core.jvmmodel.IXtendJvmAssociations;
+import org.eclipse.xtend.core.xtend.XtendClass;
+import org.eclipse.xtend.ide.codebuilder.AbstractClassBuilder;
+import org.eclipse.xtend.ide.codebuilder.CodeBuilderFactory;
 import org.eclipse.xtend.ide.wizards.NewXtendClassWizard;
 import org.eclipse.xtend.ide.wizards.NewXtendClassWizardPage;
+import org.eclipse.xtext.EcoreUtil2;
+import org.eclipse.xtext.common.types.JvmGenericType;
+import org.eclipse.xtext.common.types.JvmVisibility;
 import org.eclipse.xtext.common.types.TypesPackage;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.editor.model.IXtextDocument;
@@ -63,6 +70,15 @@ public class CreateTypeQuickfixes implements ILinkingIssueQuickfixProvider {
 
 	@Inject
 	private Provider<NewXtendClassWizard> newXtendClassWizardProvider;
+	
+	@Inject
+	private IXtendJvmAssociations associations;
+	
+	@Inject
+	private CodeBuilderFactory codeBuilderFactory;
+	
+	@Inject
+	private CodeBuilderQuickfix codeBuilderQuickfix;
 
 	public void addQuickfixes(Issue issue, IssueResolutionAcceptor issueResolutionAcceptor,
 			IXtextDocument xtextDocument, XtextResource resource, 
@@ -72,16 +88,28 @@ public class CreateTypeQuickfixes implements ILinkingIssueQuickfixProvider {
 				|| unresolvedReference == XbasePackage.Literals.XTYPE_LITERAL__TYPE
 				|| unresolvedReference == TypesPackage.Literals.JVM_PARAMETERIZED_TYPE_REFERENCE__TYPE) {
 			URI context = resource.getURI();
-			String issueString = xtextDocument.get(issue.getOffset(), issue.getLength());
-			issueResolutionAcceptor.accept(issue, "Create Xtend class '" + issueString + "'",
-					"Opens the new Xtend class wizard to create the type '" + issueString + "'", "xtend_file.png",
-					openNewXtendClassWizardFor(context, issueString));
-			issueResolutionAcceptor.accept(issue, "Create Java class '" + issueString + "'",
-					"Opens the new Java class wizard to create the type '" + issueString + "'", "java_file.gif",
-					openNewJavaClassWizardFor(context, issueString));
-			issueResolutionAcceptor.accept(issue, "Create Java interface '" + issueString + "'",
-					"Opens the new Java interface wizard to create the type '" + issueString + "'",
-					"java_interface.gif", openNewJavaInterfaceWizardFor(context, issueString));
+			String typeName = xtextDocument.get(issue.getOffset(), issue.getLength());
+			issueResolutionAcceptor.accept(issue, "Create Xtend class '" + typeName + "'",
+					"Opens the new Xtend class wizard to create the type '" + typeName + "'", "xtend_file.png",
+					openNewXtendClassWizardFor(context, typeName));
+			issueResolutionAcceptor.accept(issue, "Create Java class '" + typeName + "'",
+					"Opens the new Java class wizard to create the type '" + typeName + "'", "java_file.gif",
+					openNewJavaClassWizardFor(context, typeName));
+			issueResolutionAcceptor.accept(issue, "Create Java interface '" + typeName + "'",
+					"Opens the new Java interface wizard to create the type '" + typeName + "'",
+					"java_interface.gif", openNewJavaInterfaceWizardFor(context, typeName));
+			EObject eObject = resource.getEObject(issue.getUriToProblem().fragment());
+			XtendClass xtendClass = EcoreUtil2.getContainerOfType(eObject, XtendClass.class);
+			if(xtendClass != null) {
+				JvmGenericType inferredType = associations.getInferredType(xtendClass);
+				if(inferredType != null) {
+					AbstractClassBuilder classBuilder = codeBuilderFactory.createClassBuilder(inferredType);
+					classBuilder.setClassName(typeName);
+					classBuilder.setVisibility(JvmVisibility.PUBLIC);
+					classBuilder.setContext(xtendClass);
+					codeBuilderQuickfix.addQuickfix(classBuilder, "Create local Xtend class '" + typeName + "'", issue, issueResolutionAcceptor);
+				}
+			}
 		}
 	}
 

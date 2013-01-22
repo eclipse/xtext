@@ -24,6 +24,10 @@ import org.eclipse.jdt.annotation.NonNullByDefault
 @NonNullByDefault
 class InsertionOffsets {
 
+	def getNewTypeInsertOffset(EObject call, XtendClass ownerClass) {
+		after(ownerClass)
+	}
+
 	def getNewFieldInsertOffset(EObject call, XtendClass ownerClass) {
 		if (ownerClass.members.empty)
 			return inEmpty(ownerClass)
