@@ -13,7 +13,9 @@ import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
+import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.diagnostics.AbstractDiagnostic;
+import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.XConstructorCall;
 import org.eclipse.xtext.xbase.XExpression;
@@ -147,6 +149,13 @@ public interface ITypeComputationState {
 	 * @param element the newly added element (e.g. a {@link XVariableDeclaration variable} or {@link JvmFormalParameter parameter}.
 	 */
 	void addLocalToCurrentScope(JvmIdentifiableElement element);
+	
+	/**
+	 * Assigns the given actual type to the raw type which shall be reachable with the given name.
+	 * This is useful to refine the context of certain expression children, e.g. the body of a lambda
+	 * expression shall use the visibility constraints of implemented SAM type. 
+	 */
+	void assignType(QualifiedName name, JvmType rawType, LightweightTypeReference actualType);
 	
 	void addDiagnostic(AbstractDiagnostic diagnostic);
 	

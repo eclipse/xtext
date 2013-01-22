@@ -52,7 +52,7 @@ public class CompilerTests2WithNewTypeSystem extends AbstractCompilerTests2 {
     _builder.append("{");
     _builder.newLine();
     _builder.append("\t");
-    _builder.append("var com.google.common.collect.AbstractIterator<String> iter = [| return null ]");
+    _builder.append("var com.google.common.collect.AbstractIterator<String> iter = [| return self.endOfData ]");
     _builder.newLine();
     _builder.append("\t");
     _builder.append("return iter");
@@ -69,7 +69,7 @@ public class CompilerTests2WithNewTypeSystem extends AbstractCompilerTests2 {
     _builder_1.append("protected String computeNext() {");
     _builder_1.newLine();
     _builder_1.append("      ");
-    _builder_1.append("return null;");
+    _builder_1.append("return this.endOfData();");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("}");

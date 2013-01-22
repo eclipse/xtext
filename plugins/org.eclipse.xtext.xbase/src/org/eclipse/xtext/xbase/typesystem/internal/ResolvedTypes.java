@@ -372,6 +372,10 @@ public abstract class ResolvedTypes implements IResolvedTypes {
 		}
 	}
 	
+	public void reassignTypeWithoutMerge(JvmIdentifiableElement identifiable, @Nullable LightweightTypeReference reference) {
+		ensureReassignedTypesMapExists().put(identifiable, reference);
+	}
+	
 	protected LightweightTypeReference acceptType(final XExpression expression, AbstractTypeExpectation expectation, LightweightTypeReference type, boolean returnType, ConformanceHint... hints) {
 		if (!type.isOwnedBy(getReferenceOwner())) {
 			throw new IllegalArgumentException("type is associated with an incompatible owner");

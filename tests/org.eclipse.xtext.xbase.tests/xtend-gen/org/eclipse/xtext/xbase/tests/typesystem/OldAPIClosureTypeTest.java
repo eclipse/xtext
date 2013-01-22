@@ -78,6 +78,12 @@ public class OldAPIClosureTypeTest extends AbstractClosureTypeTest {
   
   @Ignore(value = "fails in old impl")
   @Test
+  public void testAbstractIterator_02() throws Exception {
+    Assert.fail("fails in old impl");
+  }
+  
+  @Ignore(value = "fails in old impl")
+  @Test
   public void testSpecializedSubInterface_01() throws Exception {
     Assert.fail("fails in old impl");
   }

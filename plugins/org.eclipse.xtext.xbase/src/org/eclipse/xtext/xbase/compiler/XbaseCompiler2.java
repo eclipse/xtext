@@ -19,6 +19,7 @@ import org.eclipse.xtext.common.types.JvmAnyTypeReference;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmSynonymTypeReference;
+import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.TypesPackage;
@@ -211,6 +212,29 @@ public class XbaseCompiler2 extends XbaseCompiler {
 		OwnedConverter converter = new OwnedConverter(owner);
 		LightweightTypeReference lightweightTypeReference = converter.toLightweightReference(closureType);
 		return services.getFunctionTypes().findImplementingOperation(lightweightTypeReference);
+	}
+	
+	@Override
+	protected void reassignThisInClosure(final ITreeAppendable b, JvmType rawClosureType) {
+		boolean registerClosureAsThis = true;
+		if (b.hasObject("this")) {
+			Object element = b.getObject("this");
+			if (element instanceof JvmType) {
+				final String proposedName = ((JvmType) element).getSimpleName()+".this";
+				if (!b.hasObject(proposedName)) {
+					registerClosureAsThis = false;
+					b.declareSyntheticVariable(element, proposedName);
+					if (b.hasObject("super")) {
+						Object superElement = b.getObject("super");
+						if (superElement instanceof JvmType) {
+							b.declareSyntheticVariable(superElement, ((JvmType) element).getSimpleName()+".super");
+						}
+					}
+				}
+			}
+		}
+		if (registerClosureAsThis)
+			b.declareSyntheticVariable(rawClosureType, "this");
 	}
 	
 	@Override

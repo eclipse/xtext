@@ -2182,7 +2182,13 @@ public abstract class AbstractClosureTypeTest extends AbstractXbaseTestCase {
   
   @Test
   public void testAbstractIterator_01() throws Exception {
-    List<Object> _resolvesClosuresTo = this.resolvesClosuresTo("{ var com.google.common.collect.AbstractIterator<String> iter = [| return null ] }", "()=>String");
+    List<Object> _resolvesClosuresTo = this.resolvesClosuresTo("{ var com.google.common.collect.AbstractIterator<String> iter = [| return self.endOfData ] }", "()=>String");
     this.withEquivalents(_resolvesClosuresTo, "AbstractIterator<String>");
+  }
+  
+  @Test
+  public void testAbstractIterator_02() throws Exception {
+    List<Object> _resolvesClosuresTo = this.resolvesClosuresTo("{ \n\t\t\tvar com.google.common.collect.AbstractIterator<java.util.Iterator<String>> iter = [|\n\t\t\t\tif (true) {\n\t\t\t\t\tval com.google.common.collect.AbstractIterator<String> result = [|\n\t\t\t\t\t\treturn self.endOfData\n\t\t\t\t\t]\n\t\t\t\t\treturn result\n\t\t\t\t}\n\t\t\t\treturn self.endOfData\n\t\t\t]\n\t\t}", "()=>Iterator<String>", "()=>String");
+    this.withEquivalents(_resolvesClosuresTo, "AbstractIterator<Iterator<String>>", "AbstractIterator<String>");
   }
 }

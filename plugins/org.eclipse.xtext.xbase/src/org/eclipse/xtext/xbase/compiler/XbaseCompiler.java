@@ -768,21 +768,7 @@ public class XbaseCompiler extends FeatureCallCompiler {
 			}
 			b.append(") {");
 			b.increaseIndentation();
-			if (b.hasObject("this")) {
-				Object element = b.getObject("this");
-				if (element instanceof JvmType) {
-					final String proposedName = ((JvmType) element).getSimpleName()+".this";
-					if (!b.hasObject(proposedName)) {
-						b.declareSyntheticVariable(element, proposedName);
-						if (b.hasObject("super")) {
-							Object superElement = b.getObject("super");
-							if (superElement instanceof JvmType) {
-								b.declareSyntheticVariable(superElement, ((JvmType) element).getSimpleName()+".super");
-							}
-						}
-					}
-				}
-			}
+			reassignThisInClosure(b, type.getType());
 			compile(closure.getExpression(), b, operation.getReturnType(), newHashSet(operation.getExceptions()));
 		} finally {
 			b.closeScope();
@@ -790,6 +776,24 @@ public class XbaseCompiler extends FeatureCallCompiler {
 		b.decreaseIndentation();
 		b.newLine().append("}");
 		b.decreaseIndentation().newLine().append("};").decreaseIndentation();
+	}
+
+	protected void reassignThisInClosure(final ITreeAppendable b, JvmType rawClosureType) {
+		if (b.hasObject("this")) {
+			Object element = b.getObject("this");
+			if (element instanceof JvmType) {
+				final String proposedName = ((JvmType) element).getSimpleName()+".this";
+				if (!b.hasObject(proposedName)) {
+					b.declareSyntheticVariable(element, proposedName);
+					if (b.hasObject("super")) {
+						Object superElement = b.getObject("super");
+						if (superElement instanceof JvmType) {
+							b.declareSyntheticVariable(superElement, ((JvmType) element).getSimpleName()+".super");
+						}
+					}
+				}
+			}
+		}
 	}
 
 	protected void appendOperationVisibility(final ITreeAppendable b, JvmOperation operation) {

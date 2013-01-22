@@ -138,6 +138,12 @@ class OldAPIClosureTypeTest extends AbstractClosureTypeTest {
 	
 	@Ignore("fails in old impl")
 	@Test 
+	override testAbstractIterator_02() throws Exception {
+		fail("fails in old impl")
+	}
+	
+	@Ignore("fails in old impl")
+	@Test 
 	override testSpecializedSubInterface_01() throws Exception {
 		fail("fails in old impl")
 	}

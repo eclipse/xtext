@@ -46,7 +46,7 @@ public class ParameterizedTypeReference extends LightweightTypeReference {
 			throw new NullPointerException("type may not be null");
 		}
 		if (type instanceof JvmArrayType) {
-			throw new IllegalArgumentException("type should be an array type");
+			throw new IllegalArgumentException("type may not be an array type");
 		}
 		this.type = type;
 		// TODO check against owner or specialized representation of the owner

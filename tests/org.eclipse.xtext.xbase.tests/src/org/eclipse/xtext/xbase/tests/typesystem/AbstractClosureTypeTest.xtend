@@ -2208,8 +2208,24 @@ abstract class AbstractClosureTypeTest extends AbstractXbaseTestCase {
 	}
 	
 	@Test def void testAbstractIterator_01() throws Exception {
-		"{ var com.google.common.collect.AbstractIterator<String> iter = [| return null ] }"
+		"{ var com.google.common.collect.AbstractIterator<String> iter = [| return self.endOfData ] }"
 			.resolvesClosuresTo("()=>String")
 			.withEquivalents("AbstractIterator<String>")
-	}	
+	}
+	
+	@Test def void testAbstractIterator_02() throws Exception {
+		"{ 
+			var com.google.common.collect.AbstractIterator<java.util.Iterator<String>> iter = [|
+				if (true) {
+					val com.google.common.collect.AbstractIterator<String> result = [|
+						return self.endOfData
+					]
+					return result
+				}
+				return self.endOfData
+			]
+		}"
+			.resolvesClosuresTo("()=>Iterator<String>", "()=>String")
+			.withEquivalents("AbstractIterator<Iterator<String>>", "AbstractIterator<String>")
+	}
 }

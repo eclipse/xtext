@@ -312,6 +312,11 @@ public abstract class AbstractFeatureCallTypeTest extends AbstractXbaseTestCase 
   }
   
   @Test
+  public void testClosure_02() throws Exception {
+    this.resolvesFeatureCallsTo("{ var com.google.common.collect.AbstractIterator<String> iter = [| return self.endOfData ] }", "AbstractIterator<String>", "String");
+  }
+  
+  @Test
   public void testClosure_03() throws Exception {
     String _plus = ("{\n" + 
       "  var java.util.List<? super String> list = null;\n");
@@ -331,6 +336,11 @@ public abstract class AbstractFeatureCallTypeTest extends AbstractXbaseTestCase 
     String _plus_2 = (_plus_1 + 
       "}");
     this.resolvesFeatureCallsTo(_plus_2, "List<? super String>", "List<Boolean>");
+  }
+  
+  @Test
+  public void testClosure_05() throws Exception {
+    this.resolvesFeatureCallsTo("{ \n\t\t\tvar com.google.common.collect.AbstractIterator<java.util.Iterator<String>> iter = [|\n\t\t\t\tif (true) {\n\t\t\t\t\tval com.google.common.collect.AbstractIterator<String> result = [|\n\t\t\t\t\t\treturn self.endOfData\n\t\t\t\t\t]\n\t\t\t\t\treturn result\n\t\t\t\t}\n\t\t\t\treturn self.endOfData\n\t\t\t]\n\t\t}", "AbstractIterator<String>", "String", "AbstractIterator<String>", "AbstractIterator<Iterator<String>>", "Iterator<String>");
   }
   
   @Test

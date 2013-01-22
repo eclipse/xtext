@@ -15,6 +15,7 @@ import java.util.Map;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.jdt.annotation.NonNullByDefault;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.naming.QualifiedName;
@@ -89,8 +90,21 @@ public abstract class AbstractFeatureScopeSession implements IFeatureScopeSessio
 	public IFeatureScopeSession addLocalElements(Map<QualifiedName, JvmIdentifiableElement> elements, ITypeReferenceOwner owner) {
 		if (elements.isEmpty())
 			return this;
-		if (elements.containsKey(IFeatureNames.THIS)) {
-			JvmIdentifiableElement associatedWithThis = elements.get(IFeatureNames.THIS);
+		AbstractNestedFeatureScopeSession result = tryCreateNestedSessionWithVisibilityContext(elements, owner, IFeatureNames.THIS);
+		if (result != null)
+			return result;
+		result = tryCreateNestedSessionWithVisibilityContext(elements, owner, IFeatureNames.SELF);
+		if (result != null)
+			return result;
+		result = new FeatureScopeSessionWithLocalElements(this, elements);
+		return result;
+	}
+
+	@Nullable
+	protected AbstractNestedFeatureScopeSession tryCreateNestedSessionWithVisibilityContext(Map<QualifiedName, JvmIdentifiableElement> elements, ITypeReferenceOwner owner,
+			QualifiedName thisName) {
+		if (elements.containsKey(thisName)) {
+			JvmIdentifiableElement associatedWithThis = elements.get(thisName);
 			if (associatedWithThis instanceof JvmType) {
 				LightweightTypeReference context = new ParameterizedTypeReference(owner, (JvmType) associatedWithThis);
 				FeatureScopeSessionWithContext contextSession = new FeatureScopeSessionWithContext(this, context);
@@ -98,8 +112,7 @@ public abstract class AbstractFeatureScopeSession implements IFeatureScopeSessio
 				return result;
 			}
 		}
-		AbstractNestedFeatureScopeSession result = new FeatureScopeSessionWithLocalElements(this, elements);
-		return result;
+		return null;
 	}
 
 	protected IScope createFeatureCallScope(EObject context, EReference reference, IResolvedTypes resolvedTypes) {
