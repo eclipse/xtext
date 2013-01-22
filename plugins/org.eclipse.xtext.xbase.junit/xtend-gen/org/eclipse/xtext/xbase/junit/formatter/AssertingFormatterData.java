@@ -3,7 +3,7 @@ package org.eclipse.xtext.xbase.junit.formatter;
 import org.eclipse.xtext.preferences.MapBasedPreferenceValues;
 import org.eclipse.xtext.xbase.formatting.FormattingPreferenceValues;
 
-@SuppressWarnings(value = "restriction")
+@SuppressWarnings("all")
 public class AssertingFormatterData {
   private MapBasedPreferenceValues _config;
   
