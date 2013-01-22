@@ -3228,6 +3228,14 @@ public abstract class AbstractCompilerTest extends AbstractXtendTestCase {
 		assertFalse(newInstance.hashCode() == fourthInstance.hashCode());
 	}
 	
+	@Test public void testData_03() throws Exception {
+		Class<?> code = compileJavaCode("foo.Bar", "package foo @Data class Bar { val myFlag = true }");
+		Method isMyFlag = code.getDeclaredMethod("isMyFlag");
+		Constructor<?> constructor = code.getDeclaredConstructor();
+		Object newInstance = constructor.newInstance();
+		assertTrue( (Boolean) isMyFlag.invoke(newInstance));
+	}
+	
 	@Test public void testPackageScope() throws Exception {
 		Class<?> code = compileJavaCode("test.Bar", "package test class Bar extends SuperClass {}");
 		SuperClass sc = (SuperClass) code.newInstance();

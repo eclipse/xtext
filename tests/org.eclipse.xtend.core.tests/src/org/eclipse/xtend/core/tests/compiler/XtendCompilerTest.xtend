@@ -692,13 +692,13 @@ abstract class AbstractXtendCompilerTest extends AbstractXtendTestCase {
 			import java.io.IOException
 			import java.util.Collections
 			
-			class Foo  {     
-			   def bar() {               
-			       try {       
-			           newArrayList("file1.ext").map(f| new File(f).canonicalFile) 
-			       } catch(IOException o) {  
+			class Foo {
+			   def bar() {
+			       try {
+			           newArrayList("file1.ext").map(f| new File(f).canonicalFile)
+			       } catch(IOException o) {
 			           Collections::<File>emptyList
-			       } 
+			       }
 			   }
 			}
 		''','''
@@ -1318,26 +1318,26 @@ abstract class AbstractXtendCompilerTest extends AbstractXtendTestCase {
 	}
 	
 	@Test
-    def testAnnotationOnAnnotation() {
-        assertCompilesTo('''
-            package foo
-            @java.lang.annotation.Documented
-            annotation Bar {
-                @com.google.inject.Inject String string
-            }
-        ''', '''
-            package foo;
-
-            import com.google.inject.Inject;
-            import java.lang.annotation.Documented;
-
-            @Documented
-            public @interface Bar {
-              @Inject
-              public String string();
-            }
-        ''')
-    }
+	def testAnnotationOnAnnotation() {
+		assertCompilesTo('''
+			package foo
+			@java.lang.annotation.Documented
+			annotation Bar {
+			    @com.google.inject.Inject String string
+			}
+		''', '''
+			package foo;
+			
+			import com.google.inject.Inject;
+			import java.lang.annotation.Documented;
+			
+			@Documented
+			public @interface Bar {
+			  @Inject
+			  public String string();
+			}
+		''')
+	}
 	
 	@Test
 	def testSuperCall() {
@@ -2260,100 +2260,98 @@ abstract class AbstractXtendCompilerTest extends AbstractXtendTestCase {
 	}
 	
 	@Test
-    def compileAnnotationWithFileHeader(){
-        assertCompilesTo(
-        ''' 
-            /**
-             * Copyright (c) 2011 itemis AG (http://www.itemis.eu) and others.
-             * All rights reserved. This program and the accompanying materials
-             * are made available under the terms of the Eclipse Public License v1.0
-             * which accompanies this distribution, and is available at
-             * http://www.eclipse.org/legal/epl-v10.html
-             */
-            package foo
-            
-            annotation bar { 
-                String name = 'foobar'
-            }
-        ''',
-        '''
-            /**
-             * Copyright (c) 2011 itemis AG (http://www.itemis.eu) and others.
-             * All rights reserved. This program and the accompanying materials
-             * are made available under the terms of the Eclipse Public License v1.0
-             * which accompanies this distribution, and is available at
-             * http://www.eclipse.org/legal/epl-v10.html
-             */
-            package foo;
-
-            public @interface bar {
-              public String name() default "foobar";
-            }
-        ''')
-    }
-    
-    @Test
-    def compileClassWithFileHeader(){
-        assertCompilesTo(
-        ''' 
-            /**
-             * Copyright (c) 2011 itemis AG (http://www.itemis.eu) and others.
-             * All rights reserved. This program and the accompanying materials
-             * are made available under the terms of the Eclipse Public License v1.0
-             * which accompanies this distribution, and is available at
-             * http://www.eclipse.org/legal/epl-v10.html
-             */
-            package foo
-            
-            class bar { 
-                String name = 'foobar'
-            }
-        ''',
-        '''
-            /**
-             * Copyright (c) 2011 itemis AG (http://www.itemis.eu) and others.
-             * All rights reserved. This program and the accompanying materials
-             * are made available under the terms of the Eclipse Public License v1.0
-             * which accompanies this distribution, and is available at
-             * http://www.eclipse.org/legal/epl-v10.html
-             */
-            package foo;
-
-            @SuppressWarnings("all")
-            public class bar {
-              private String name = "foobar";
-            }
-        ''')
-    }
-    
-    @Test
-    def compileClassInDefaultPackageWithFileHeader(){
-        assertCompilesTo(
-        ''' 
-            /**
-             * Xtend can't decide whether this is a header or a javadoc
-             */
-
-            class bar { 
-            }
-        ''',
-        '''
-            /**
-             * Xtend can't decide whether this is a header or a javadoc
-             */
-            /**
-             * Xtend can't decide whether this is a header or a javadoc
-             */
-            @SuppressWarnings("all")
-            public class bar {
-            }
-        ''')
-    }
-    
-    @Test
-    def compileClassInDefaultPackageWithFileHeaderAndJavaDoc(){
-        assertCompilesTo(
-        ''' 
+	def compileAnnotationWithFileHeader(){
+		assertCompilesTo(
+		''' 
+			/**
+			 * Copyright (c) 2011 itemis AG (http://www.itemis.eu) and others.
+			 * All rights reserved. This program and the accompanying materials
+			 * are made available under the terms of the Eclipse Public License v1.0
+			 * which accompanies this distribution, and is available at
+			 * http://www.eclipse.org/legal/epl-v10.html
+			 */
+			package foo
+			
+			annotation bar { 
+			    String name = 'foobar'
+			}
+		''',
+		'''
+			/**
+			 * Copyright (c) 2011 itemis AG (http://www.itemis.eu) and others.
+			 * All rights reserved. This program and the accompanying materials
+			 * are made available under the terms of the Eclipse Public License v1.0
+			 * which accompanies this distribution, and is available at
+			 * http://www.eclipse.org/legal/epl-v10.html
+			 */
+			package foo;
+			
+			public @interface bar {
+			  public String name() default "foobar";
+			}
+		''')
+	}
+	
+	@Test
+	def compileClassWithFileHeader(){
+		assertCompilesTo(
+		''' 
+			/**
+			 * Copyright (c) 2011 itemis AG (http://www.itemis.eu) and others.
+			 * All rights reserved. This program and the accompanying materials
+			 * are made available under the terms of the Eclipse Public License v1.0
+			 * which accompanies this distribution, and is available at
+			 * http://www.eclipse.org/legal/epl-v10.html
+			 */
+			package foo
+			
+			class bar { 
+			    String name = 'foobar'
+			}
+		''',
+		'''
+			/**
+			 * Copyright (c) 2011 itemis AG (http://www.itemis.eu) and others.
+			 * All rights reserved. This program and the accompanying materials
+			 * are made available under the terms of the Eclipse Public License v1.0
+			 * which accompanies this distribution, and is available at
+			 * http://www.eclipse.org/legal/epl-v10.html
+			 */
+			package foo;
+			
+			@SuppressWarnings("all")
+			public class bar {
+			  private String name = "foobar";
+			}
+		''')
+	}
+	
+	@Test
+	def compileClassInDefaultPackageWithFileHeader(){
+		assertCompilesTo(''' 
+			/**
+			 * Xtend can't decide whether this is a header or a javadoc
+			 */
+			
+			class bar { 
+			}
+		''',
+		'''
+			/**
+			 * Xtend can't decide whether this is a header or a javadoc
+			 */
+			/**
+			 * Xtend can't decide whether this is a header or a javadoc
+			 */
+			@SuppressWarnings("all")
+			public class bar {
+			}
+		''')
+	}
+	
+	@Test
+	def compileClassInDefaultPackageWithFileHeaderAndJavaDoc(){
+		assertCompilesTo(''' 
 			/**
 			 * header
 			 */
@@ -2363,8 +2361,8 @@ abstract class AbstractXtendCompilerTest extends AbstractXtendTestCase {
 			 */
 			class bar { 
 			}
-        ''',
-        '''
+		''',
+		'''
 			/**
 			 * header
 			 */
@@ -2374,13 +2372,13 @@ abstract class AbstractXtendCompilerTest extends AbstractXtendTestCase {
 			@SuppressWarnings("all")
 			public class bar {
 			}
-        ''')
-    }
-    
-    @Test
-    def compileClassInDefaultPackageWithFileHeaderAndImport(){
-        assertCompilesTo(
-        ''' 
+		''')
+	}
+	
+	@Test
+	def compileClassInDefaultPackageWithFileHeaderAndImport(){
+		assertCompilesTo(
+		''' 
 			/**
 			 * header
 			 */
@@ -2390,8 +2388,8 @@ abstract class AbstractXtendCompilerTest extends AbstractXtendTestCase {
 			class bar {
 				Date d
 			}
-        ''',
-        '''
+		''',
+		'''
 			/**
 			 * header
 			 */
@@ -2401,13 +2399,12 @@ abstract class AbstractXtendCompilerTest extends AbstractXtendTestCase {
 			public class bar {
 			  private Date d;
 			}
-        ''')
-    }
-    
-    @Test
-    def compileClassInDefaultPackageWithJavadDocAndImport(){
-        assertCompilesTo(
-        ''' 
+		''')
+	}
+	
+	@Test
+	def compileClassInDefaultPackageWithJavadDocAndImport(){
+		assertCompilesTo(''' 
 			import java.util.Date
 			
 			/**
@@ -2416,8 +2413,8 @@ abstract class AbstractXtendCompilerTest extends AbstractXtendTestCase {
 			class bar {
 				Date d
 			}
-        ''',
-        '''
+		''',
+		'''
 			import java.util.Date;
 			
 			/**
@@ -2427,74 +2424,74 @@ abstract class AbstractXtendCompilerTest extends AbstractXtendTestCase {
 			public class bar {
 			  private Date d;
 			}
-        ''')
-    }
-    
-    @Test
-    def compileAllClassesWithTheSameFileHeader(){
-        val input = ''' 
-            /**
-             * Copyright (c) 2011 itemis AG (http://www.itemis.eu) and others.
-             * All rights reserved. This program and the accompanying materials
-             * are made available under the terms of the Eclipse Public License v1.0
-             * which accompanies this distribution, and is available at
-             * http://www.eclipse.org/legal/epl-v10.html
-             */
-            package foo
-            
-            class bar { 
-                String name = 'foobar'
-            }
-
-            class baz { 
-                String name = 'foobaz'
-            }
-        '''
-        val expectedBarClass = '''
-            /**
-             * Copyright (c) 2011 itemis AG (http://www.itemis.eu) and others.
-             * All rights reserved. This program and the accompanying materials
-             * are made available under the terms of the Eclipse Public License v1.0
-             * which accompanies this distribution, and is available at
-             * http://www.eclipse.org/legal/epl-v10.html
-             */
-            package foo;
-
-            @SuppressWarnings("all")
-            public class bar {
-              private String name = "foobar";
-            }
-        '''
-        val expectedBazClass = '''
-            /**
-             * Copyright (c) 2011 itemis AG (http://www.itemis.eu) and others.
-             * All rights reserved. This program and the accompanying materials
-             * are made available under the terms of the Eclipse Public License v1.0
-             * which accompanies this distribution, and is available at
-             * http://www.eclipse.org/legal/epl-v10.html
-             */
-            package foo;
-
-            @SuppressWarnings("all")
-            public class baz {
-              private String name = "foobaz";
-            }
-        '''
-        val file = file(input.toString(), true)
-        val barType = file.eResource.contents.filter(typeof(JvmDeclaredType)).head
-        val bazType = file.eResource.contents.filter(typeof(JvmDeclaredType)).last
-        val generatorConfig =  generatorConfigProvider.get(barType)
-        val barJavaCode = generator.generateType(barType, generatorConfig);
-        val bazJavaCode = generator.generateType(bazType, generatorConfig);
-        XtendCompilerTest::assertEquals(expectedBarClass.toString, barJavaCode.toString);
-        XtendCompilerTest::assertEquals(expectedBazClass.toString, bazJavaCode.toString);
-    }
-    
-    /*
-     * see https://bugs.eclipse.org/bugs/show_bug.cgi?id=391077
-     */
-    @Test def void testBug391077() {
-    	assertCompilesTo('''
+		''')
+	}
+	
+	@Test
+	def compileAllClassesWithTheSameFileHeader(){
+		val input = ''' 
+			/**
+			 * Copyright (c) 2011 itemis AG (http://www.itemis.eu) and others.
+			 * All rights reserved. This program and the accompanying materials
+			 * are made available under the terms of the Eclipse Public License v1.0
+			 * which accompanies this distribution, and is available at
+			 * http://www.eclipse.org/legal/epl-v10.html
+			 */
+			package foo
+			
+			class bar { 
+			    String name = 'foobar'
+			}
+			
+			class baz { 
+			    String name = 'foobaz'
+			}
+		'''
+		val expectedBarClass = '''
+			/**
+			 * Copyright (c) 2011 itemis AG (http://www.itemis.eu) and others.
+			 * All rights reserved. This program and the accompanying materials
+			 * are made available under the terms of the Eclipse Public License v1.0
+			 * which accompanies this distribution, and is available at
+			 * http://www.eclipse.org/legal/epl-v10.html
+			 */
+			package foo;
+			
+			@SuppressWarnings("all")
+			public class bar {
+			  private String name = "foobar";
+			}
+		'''
+		val expectedBazClass = '''
+			/**
+			 * Copyright (c) 2011 itemis AG (http://www.itemis.eu) and others.
+			 * All rights reserved. This program and the accompanying materials
+			 * are made available under the terms of the Eclipse Public License v1.0
+			 * which accompanies this distribution, and is available at
+			 * http://www.eclipse.org/legal/epl-v10.html
+			 */
+			package foo;
+			
+			@SuppressWarnings("all")
+			public class baz {
+			  private String name = "foobaz";
+			}
+		'''
+		val file = file(input.toString(), true)
+		val barType = file.eResource.contents.filter(typeof(JvmDeclaredType)).head
+		val bazType = file.eResource.contents.filter(typeof(JvmDeclaredType)).last
+		val generatorConfig =  generatorConfigProvider.get(barType)
+		val barJavaCode = generator.generateType(barType, generatorConfig);
+		val bazJavaCode = generator.generateType(bazType, generatorConfig);
+		XtendCompilerTest::assertEquals(expectedBarClass.toString, barJavaCode.toString);
+		XtendCompilerTest::assertEquals(expectedBazClass.toString, bazJavaCode.toString);
+	}
+	
+	/*
+	 * see https://bugs.eclipse.org/bugs/show_bug.cgi?id=391077
+	 */
+	@Test def void testBug391077() {
+		assertCompilesTo('''
 			class TestError {
 			    def Void voidObjectReturned() {
 			    }
@@ -2507,7 +2504,7 @@ abstract class AbstractXtendCompilerTest extends AbstractXtendTestCase {
 			        }
 			    }
 			}
-    	''','''
+		''','''
 			import org.eclipse.xtext.xbase.lib.Exceptions;
 			
 			@SuppressWarnings("all")
@@ -2529,16 +2526,15 @@ abstract class AbstractXtendCompilerTest extends AbstractXtendTestCase {
 			    }
 			  }
 			}
-    	''')
-    }
-    
-    @Test
-    def compileWithConfiguration(){
-	val generatorConfig = generatorConfigProvider.get(null)
-	generatorConfig.setGenerateSyntheticSuppressWarnings(false)
-	generatorConfig.setGenerateExpressions(false)
-        assertCompilesTo(
-        '''
+		''')
+	}
+	
+	@Test
+	def compileWithConfiguration(){
+		val generatorConfig = generatorConfigProvider.get(null)
+		generatorConfig.setGenerateSyntheticSuppressWarnings(false)
+		generatorConfig.setGenerateExpressions(false)
+		assertCompilesTo('''
 			package foo
 
 			/**
@@ -2549,8 +2545,8 @@ abstract class AbstractXtendCompilerTest extends AbstractXtendTestCase {
 					1 + 1
 				}
 			}
-        ''',
-        '''
+		''',
+		'''
 			package foo;
 
 			/**
@@ -2561,15 +2557,14 @@ abstract class AbstractXtendCompilerTest extends AbstractXtendTestCase {
 			    throw new UnsupportedOperationException("foo is not implemented");
 			  }
 			}
-        ''', generatorConfig)
-    }
-    @Test
-    def compileWithConfiguration_2(){
+		''', generatorConfig)
+	}
+	@Test
+	def compileWithConfiguration_2(){
 	val generatorConfig = generatorConfigProvider.get(null)
 	generatorConfig.setGenerateSyntheticSuppressWarnings(true)
 	generatorConfig.setGenerateExpressions(false)
-        assertCompilesTo(
-        '''
+		assertCompilesTo('''
 			package foo
 
 			/**
@@ -2581,8 +2576,8 @@ abstract class AbstractXtendCompilerTest extends AbstractXtendTestCase {
 					1 + 1
 				}
 			}
-        ''',
-        '''
+		''',
+		'''
 			package foo;
 
 			/**
@@ -2594,16 +2589,15 @@ abstract class AbstractXtendCompilerTest extends AbstractXtendTestCase {
 			    throw new UnsupportedOperationException("foo is not implemented");
 			  }
 			}
-        ''', generatorConfig)
-    }
+		''', generatorConfig)
+	}
 
-    @Test
-    def compileWithConfiguration_3(){
-	val generatorConfig = generatorConfigProvider.get(null)
-	generatorConfig.setGenerateSyntheticSuppressWarnings(true)
-	generatorConfig.setGenerateExpressions(false)
-        assertCompilesTo(
-        '''
+	@Test
+	def compileWithConfiguration_3(){
+		val generatorConfig = generatorConfigProvider.get(null)
+		generatorConfig.setGenerateSyntheticSuppressWarnings(true)
+		generatorConfig.setGenerateExpressions(false)
+		assertCompilesTo('''
 			package foo
 
 			/**
@@ -2616,8 +2610,8 @@ abstract class AbstractXtendCompilerTest extends AbstractXtendTestCase {
 					1 + 1
 				}
 			}
-        ''',
-        '''
+		''',
+		'''
 			package foo;
 
 			/**
@@ -2630,131 +2624,126 @@ abstract class AbstractXtendCompilerTest extends AbstractXtendTestCase {
 			    throw new UnsupportedOperationException("foo is not implemented");
 			  }
 			}
-        ''', generatorConfig)
-    }
+		''', generatorConfig)
+	}
 
-    @Test
-    def compileImportForTypeRefInJavaDoc(){
-	assertCompilesTo(
-	'''
-		package foo
-		import java.util.List
-		import java.util.ArrayList
-
-		/**
-		 *
-		 * {@link List}
-		 * @see Bar
-		 */
-		class Foo {
-			/**
-			 * @see ArrayList
-			 */
-			def doStuff(){}
-
-		}
-	''',
-	'''
-		package foo;
-
-		import java.util.ArrayList;
-		import java.util.List;
-
-		/**
-		 * {@link List}
-		 * @see Bar
-		 */
-		@SuppressWarnings("all")
-		public class Foo {
-		  /**
-		   * @see ArrayList
-		   */
-		  public Object doStuff() {
-		    return null;
-		  }
-		}
-	''')
-    }
-
-    @Test
-    def compileImportForTypeRefInJavaDoc_2(){
-	assertCompilesTo(
-	'''
-		package foo
-		import java.util.List
-		import java.util.ArrayList
-
-		/**
-		 *
-		 * {@link List}
-		 * @see Bar
-		 */
-		class Foo {
-			/**
-			 * @see ArrayList
-			 */
-			def doStuff(ArrayList l){}
-
-		}
-	''',
-	'''
-		package foo;
-
-		import java.util.ArrayList;
-		import java.util.List;
-
-		/**
-		 * {@link List}
-		 * @see Bar
-		 */
-		@SuppressWarnings("all")
-		public class Foo {
-		  /**
-		   * @see ArrayList
-		   */
-		  public Object doStuff(final ArrayList l) {
-		    return null;
-		  }
-		}
-	''')
-    }
-
-
-
-    @Test@Ignore
-    def compileProperty(){
-	val generatorConfig = generatorConfigProvider.get(null)
-        assertCompilesTo(
-        '''
+	@Test
+	def compileImportForTypeRefInJavaDoc(){
+		assertCompilesTo('''
 			package foo
+			import java.util.List
+			import java.util.ArrayList
 
-			class Bar {
-				@Property
-				boolean generateExpressions = true
+			/**
+			 *
+			 * {@link List}
+			 * @see Bar
+			 */
+			class Foo {
+				/**
+				 * @see ArrayList
+				 */
+				def doStuff(){}
+
 			}
-        ''',
-        '''
+		''',
+		'''
 			package foo;
 
+			import java.util.ArrayList;
+			import java.util.List;
+
+			/**
+			 * {@link List}
+			 * @see Bar
+			 */
 			@SuppressWarnings("all")
-			public class Bar {
-			  private boolean _generateExpressions = true;
-
-			  public boolean isGenerateExpressions() {
-			    return this._generateExpressions;
-			  }
-
-			  public void setGenerateExpressions(final boolean generateExpressions) {
-			    this._generateExpressions = generateExpressions;
+			public class Foo {
+			  /**
+			   * @see ArrayList
+			   */
+			  public Object doStuff() {
+			    return null;
 			  }
 			}
-        ''', generatorConfig)
-    }
+		''')
+	}
 
+	@Test
+	def compileImportForTypeRefInJavaDoc_2(){
+		assertCompilesTo('''
+			package foo
+			import java.util.List
+			import java.util.ArrayList
 
-    def  assertCompilesTo(CharSequence input, CharSequence expected){
+			/**
+			 *
+			 * {@link List}
+			 * @see Bar
+			 */
+			class Foo {
+				/**
+				 * @see ArrayList
+				 */
+				def doStuff(ArrayList l){}
+
+			}
+		''',
+		'''
+			package foo;
+
+			import java.util.ArrayList;
+			import java.util.List;
+
+			/**
+			 * {@link List}
+			 * @see Bar
+			 */
+			@SuppressWarnings("all")
+			public class Foo {
+			  /**
+			   * @see ArrayList
+			   */
+			  public Object doStuff(final ArrayList l) {
+			    return null;
+			  }
+			}
+		''')
+	}
+
+	@Test
+	@Ignore
+	def compileProperty() {
+		val generatorConfig = generatorConfigProvider.get(null)
+			assertCompilesTo('''
+				package foo
+				
+				class Bar {
+					@Property
+					boolean generateExpressions = true
+				}
+			''',
+			'''
+				package foo;
+				
+				@SuppressWarnings("all")
+				public class Bar {
+				  private boolean _generateExpressions = true;
+				
+				  public boolean isGenerateExpressions() {
+				    return this._generateExpressions;
+				  }
+				
+				  public void setGenerateExpressions(final boolean generateExpressions) {
+				    this._generateExpressions = generateExpressions;
+				  }
+				}
+		''', generatorConfig)
+	}
+
+	def assertCompilesTo(CharSequence input, CharSequence expected){
 		assertCompilesTo(input, expected, generatorConfigProvider.get(null))
-    }
+	}
 
 	def assertCompilesTo(CharSequence input, CharSequence expected, GeneratorConfig config) {
 		val file = file(input.toString(), true)

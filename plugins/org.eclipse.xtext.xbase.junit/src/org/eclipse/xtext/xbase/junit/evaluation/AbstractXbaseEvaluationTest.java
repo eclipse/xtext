@@ -2447,14 +2447,16 @@ public abstract class AbstractXbaseEvaluationTest extends Assert {
 				"newArrayList('foo','bar','baz','booze').sortBy[length].take(3).fold(0)[a, b| a + b.length]");
 	}
 	
-	@Ignore @Test public void testMapValuesExtension() throws Exception {
+	@Ignore("Fails with old impl")
+	@Test public void testMapValuesExtension() throws Exception {
 		assertEvaluatesTo("D", 
 				"{ val it = newLinkedHashMap(1->'b', 2->'d') " +
 				"org::junit::Assert::assertEquals('D', it.mapValues[ toUpperCase ].get(2)) " +
 				"return 'D'}");
 	}
 	
-	@Ignore @Test public void testReduceWithPlusOperator() throws Exception {
+	@Ignore("Fails with old impl") 
+	@Test public void testReduceWithPlusOperator() throws Exception {
 		assertEvaluatesTo( 55 , 
 				"(1..10).map[it].reduce[ a, b | a + b]");
 	}

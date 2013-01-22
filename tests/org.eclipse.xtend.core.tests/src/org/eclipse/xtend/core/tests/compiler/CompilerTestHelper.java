@@ -73,6 +73,7 @@ public class CompilerTestHelper {
 		javaCompiler.addClassPathOfClass(XbasePackage.class);
 		javaCompiler.addClassPathOfClass(XtendPackage.class);
 		javaCompiler.addClassPathOfClass(Check.class);
+		javaCompiler.addClassPathOfClass(Assert.class);
 	}
 	
 	public void assertEvaluatesTo(Object object, String string) {

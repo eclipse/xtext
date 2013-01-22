@@ -152,7 +152,7 @@ public abstract class ResolvedTypes implements IResolvedTypes {
 		return diagnostics;
 	}
 	
-	protected void addDiagnostic(AbstractDiagnostic diagnostic) {
+	public void addDiagnostic(AbstractDiagnostic diagnostic) {
 		if (diagnostics == null) {
 			diagnostics = Sets.newLinkedHashSet();
 		}

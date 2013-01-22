@@ -8,6 +8,10 @@
 package org.eclipse.xtend.core.tests.linking;
 
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.ENamedElement;
+import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.xtend.core.tests.NewTypeSystemRuntimeInjectorProvider;
 import org.eclipse.xtend.core.tests.linking.InferredJvmModelTest;
 import org.eclipse.xtend.core.xtend.XtendFile;
@@ -18,7 +22,6 @@ import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.junit4.InjectWith;
 import org.eclipse.xtext.junit4.XtextRunner;
 import org.junit.Assert;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -26,10 +29,56 @@ import org.junit.runner.RunWith;
 @InjectWith(value = NewTypeSystemRuntimeInjectorProvider.class)
 @SuppressWarnings("all")
 public class InferredJvmModelTest2 extends InferredJvmModelTest {
-  @Ignore(value = "TODO: implement solution for recursive functions, e.g. doStuff in this test case")
   @Test
   public void testDispatchFunction_03() throws Exception {
-    super.testDispatchFunction_03();
+    this.testDispatchFunction_03_impl(true);
+  }
+  
+  @Test
+  public void testDispatchFunction_03_noValidate() throws Exception {
+    this.testDispatchFunction_03_impl(false);
+  }
+  
+  protected void testDispatchFunction_03_impl(final boolean validation) throws Exception {
+    String _plus = ("class Dispatcher {\n" + 
+      "\tdef dispatch doStuff(org.eclipse.emf.ecore.EClass model) {\n");
+    String _plus_1 = (_plus + 
+      "\t\tmodel.ETypeParameters.map(e|doStuff(e))\n");
+    String _plus_2 = (_plus_1 + 
+      "\t}\n");
+    String _plus_3 = (_plus_2 + 
+      "\tdef dispatch doStuff(org.eclipse.emf.ecore.EPackage packageDecl) {\n");
+    String _plus_4 = (_plus_3 + 
+      "\t\tpackageDecl.EClassifiers.map(e|doStuff(e))\n");
+    String _plus_5 = (_plus_4 + 
+      "\t}\n");
+    String _plus_6 = (_plus_5 + 
+      "\tdef dispatch doStuff(org.eclipse.emf.ecore.EStructuralFeature feature) {\n");
+    String _plus_7 = (_plus_6 + 
+      "\t\tnewArrayList(feature)\n");
+    String _plus_8 = (_plus_7 + 
+      "\t}\n");
+    String _plus_9 = (_plus_8 + 
+      "}");
+    final XtendFile xtendFile = this.file(_plus_9, validation);
+    final JvmGenericType inferredType = this.getInferredType(xtendFile);
+    final Iterable<JvmOperation> operations = inferredType.getDeclaredOperations();
+    final JvmOperation dispatchCase = this.findByNameAndFirstParameterType(operations, "doStuff", ENamedElement.class);
+    JvmTypeReference _returnType = dispatchCase.getReturnType();
+    String _identifier = _returnType.getIdentifier();
+    Assert.assertEquals("java.lang.Object", _identifier);
+    final JvmOperation eClassParam = this.findByNameAndFirstParameterType(operations, "_doStuff", EClass.class);
+    JvmTypeReference _returnType_1 = eClassParam.getReturnType();
+    String _identifier_1 = _returnType_1.getIdentifier();
+    Assert.assertEquals("java.util.List<? extends java.lang.Object>", _identifier_1);
+    final JvmOperation ePackageParam = this.findByNameAndFirstParameterType(operations, "_doStuff", EPackage.class);
+    JvmTypeReference _returnType_2 = ePackageParam.getReturnType();
+    String _identifier_2 = _returnType_2.getIdentifier();
+    Assert.assertEquals("java.util.List<? extends java.lang.Object>", _identifier_2);
+    final JvmOperation eStructuralFeatureParam = this.findByNameAndFirstParameterType(operations, "_doStuff", EStructuralFeature.class);
+    JvmTypeReference _returnType_3 = eStructuralFeatureParam.getReturnType();
+    String _identifier_3 = _returnType_3.getIdentifier();
+    Assert.assertEquals("java.util.List<? extends java.lang.Object>", _identifier_3);
   }
   
   @Test

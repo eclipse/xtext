@@ -514,7 +514,6 @@ public class XtendAnnotationsFormatterTest extends AbstractXtendFormatterTest {
     this.assertFormattedAnnotation(_builder, _builder_1);
   }
   
-  @Ignore(value = "https://bugs.eclipse.org/bugs/show_bug.cgi?id=393343")
   @Test
   public void formatAnnotationListValue0() {
     StringConcatenation _builder = new StringConcatenation();
