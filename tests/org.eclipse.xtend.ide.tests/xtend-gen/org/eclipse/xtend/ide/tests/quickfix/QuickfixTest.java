@@ -1488,8 +1488,7 @@ public class QuickfixTest extends AbstractXtendUITestCase {
     _builder.newLine();
     QuickfixTestBuilder _create = this.builder.create("Foo.xtend", _builder);
     QuickfixTestBuilder _assertIssueCodes = _create.assertIssueCodes(Diagnostic.LINKING_DIAGNOSTIC);
-    QuickfixTestBuilder _assertResolutionLabelsSubset = _assertIssueCodes.assertResolutionLabelsSubset("Create Xtend class \'Bar\'", "Create Java class \'Bar\'", 
-      "Create Java interface \'Bar\'", "Create local Xtend class \'Bar\'");
+    QuickfixTestBuilder _assertResolutionLabelsSubset = _assertIssueCodes.assertResolutionLabelsSubset("Create Xtend class \'Bar\'", "Create Java class \'Bar\'", "Create local Xtend class \'Bar\'");
     StringConcatenation _builder_1 = new StringConcatenation();
     _builder_1.append("class Foo {");
     _builder_1.newLine();
@@ -1549,5 +1548,32 @@ public class QuickfixTest extends AbstractXtendUITestCase {
     _builder_1.append("}");
     _builder_1.newLine();
     _assertResolutionLabelsSubset.assertModelAfterQuickfix(_builder_1);
+  }
+  
+  @Test
+  public void missingAnnotation() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("@Bar");
+    _builder.newLine();
+    _builder.append("class Foo {");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    QuickfixTestBuilder _create = this.builder.create("Foo.xtend", _builder);
+    QuickfixTestBuilder _assertIssueCodes = _create.assertIssueCodes(Diagnostic.LINKING_DIAGNOSTIC);
+    QuickfixTestBuilder _assertResolutionLabelsSubset = _assertIssueCodes.assertResolutionLabelsSubset("Create local Xtend annotation \'@Bar\'", "Create Java annotation \'@Bar\'");
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("@Bar");
+    _builder_1.newLine();
+    _builder_1.append("class Foo {");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.newLine();
+    _builder_1.append("annotation Bar {");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _assertResolutionLabelsSubset.assertModelAfterQuickfix("Create local Xtend annotation \'@Bar\'", _builder_1);
   }
 }

@@ -14,15 +14,18 @@ import org.eclipse.jdt.core.IJavaElement;
 import org.eclipse.jdt.core.IType;
 import org.eclipse.xtend.core.jvmmodel.IXtendJvmAssociations;
 import org.eclipse.xtend.core.xtend.XtendClass;
+import org.eclipse.xtend.ide.codebuilder.AbstractAnnotationBuilder;
 import org.eclipse.xtend.ide.codebuilder.AbstractClassBuilder;
 import org.eclipse.xtend.ide.codebuilder.AbstractConstructorBuilder;
 import org.eclipse.xtend.ide.codebuilder.AbstractFieldBuilder;
 import org.eclipse.xtend.ide.codebuilder.AbstractMethodBuilder;
 import org.eclipse.xtend.ide.codebuilder.ICodeBuilder;
+import org.eclipse.xtend.ide.codebuilder.JavaAnnotationBuilder;
 import org.eclipse.xtend.ide.codebuilder.JavaClassBuilder;
 import org.eclipse.xtend.ide.codebuilder.JavaConstructorBuilder;
 import org.eclipse.xtend.ide.codebuilder.JavaFieldBuilder;
 import org.eclipse.xtend.ide.codebuilder.JavaMethodBuilder;
+import org.eclipse.xtend.ide.codebuilder.XtendAnnotationBuilder;
 import org.eclipse.xtend.ide.codebuilder.XtendClassBuilder;
 import org.eclipse.xtend.ide.codebuilder.XtendConstructorBuilder;
 import org.eclipse.xtend.ide.codebuilder.XtendFieldBuilder;
@@ -51,6 +54,9 @@ public class CodeBuilderFactory {
   private Provider<XtendClassBuilder> xtendClassBuilderProvider;
   
   @Inject
+  private Provider<XtendAnnotationBuilder> xtendAnnotationBuilderProvider;
+  
+  @Inject
   private Provider<XtendFieldBuilder> xtendFieldBuilderProvider;
   
   @Inject
@@ -61,6 +67,9 @@ public class CodeBuilderFactory {
   
   @Inject
   private Provider<JavaClassBuilder> javaClassBuilderProvider;
+  
+  @Inject
+  private Provider<JavaAnnotationBuilder> javaAnnotationBuilderProvider;
   
   @Inject
   private Provider<JavaFieldBuilder> javaFieldBuilderProvider;
@@ -84,6 +93,26 @@ public class CodeBuilderFactory {
         _xifexpression = _get_1;
       }
       final AbstractClassBuilder builder = _xifexpression;
+      builder.setOwner(owner);
+      builder.setOwnerSource(ownerSource);
+      _xblockexpression = (builder);
+    }
+    return _xblockexpression;
+  }
+  
+  public AbstractAnnotationBuilder createAnnotationBuilder(final JvmDeclaredType owner) {
+    AbstractAnnotationBuilder _xblockexpression = null;
+    {
+      final Object ownerSource = this.getSource(owner);
+      AbstractAnnotationBuilder _xifexpression = null;
+      if ((ownerSource instanceof XtendClass)) {
+        XtendAnnotationBuilder _get = this.xtendAnnotationBuilderProvider.get();
+        _xifexpression = _get;
+      } else {
+        JavaAnnotationBuilder _get_1 = this.javaAnnotationBuilderProvider.get();
+        _xifexpression = _get_1;
+      }
+      final AbstractAnnotationBuilder builder = _xifexpression;
       builder.setOwner(owner);
       builder.setOwnerSource(ownerSource);
       _xblockexpression = (builder);

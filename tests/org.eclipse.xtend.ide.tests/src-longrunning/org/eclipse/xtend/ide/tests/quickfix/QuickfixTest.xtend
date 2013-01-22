@@ -799,9 +799,8 @@ class QuickfixTest extends AbstractXtendUITestCase {
 			}
 		''')
 		.assertIssueCodes(Diagnostic::LINKING_DIAGNOSTIC)
-		.assertResolutionLabelsSubset("Create Xtend class 'Bar'", "Create Java class 'Bar'", 
-				"Create Java interface 'Bar'", "Create local Xtend class 'Bar'")
-						.assertModelAfterQuickfix("Create local Xtend class 'Bar'", '''
+		.assertResolutionLabelsSubset("Create Xtend class 'Bar'", "Create Java class 'Bar'", "Create local Xtend class 'Bar'")
+		.assertModelAfterQuickfix("Create local Xtend class 'Bar'", '''
 			class Foo {
 				def foo() {
 					new Bar
@@ -811,7 +810,6 @@ class QuickfixTest extends AbstractXtendUITestCase {
 			class Bar {
 			}
 		''')
-				
 	}
 
 	@Test
@@ -836,6 +834,25 @@ class QuickfixTest extends AbstractXtendUITestCase {
 		''')	
 	}
 	
+	@Test
+	def void missingAnnotation() {
+		create('Foo.xtend', '''
+			@Bar
+			class Foo {
+			}
+		''')
+		.assertIssueCodes(Diagnostic::LINKING_DIAGNOSTIC)
+		.assertResolutionLabelsSubset("Create local Xtend annotation '@Bar'", "Create Java annotation '@Bar'")
+		.assertModelAfterQuickfix("Create local Xtend annotation '@Bar'", '''
+			@Bar
+			class Foo {
+			}
+			
+			annotation Bar {
+			}
+		''')
+	}
+
 	
 }
 
