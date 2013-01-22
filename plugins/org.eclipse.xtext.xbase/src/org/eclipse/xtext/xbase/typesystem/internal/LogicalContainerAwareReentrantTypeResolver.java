@@ -32,7 +32,10 @@ import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeParameterDeclarator;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.JvmVisibility;
+import org.eclipse.xtext.common.types.TypesFactory;
+import org.eclipse.xtext.diagnostics.Severity;
 import org.eclipse.xtext.naming.QualifiedName;
+import org.eclipse.xtext.validation.EObjectDiagnosticImpl;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.jvmmodel.ILogicalContainerProvider;
 import org.eclipse.xtext.xbase.scoping.batch.IFeatureNames;
@@ -43,6 +46,7 @@ import org.eclipse.xtext.xbase.typesystem.override.OverrideHelper;
 import org.eclipse.xtext.xbase.typesystem.references.ITypeReferenceOwner;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 import org.eclipse.xtext.xbase.typesystem.util.AbstractReentrantTypeReferenceProvider;
+import org.eclipse.xtext.xbase.validation.IssueCodes;
 import org.eclipse.xtext.xtype.XComputedTypeReference;
 import org.eclipse.xtext.xtype.impl.XComputedTypeReferenceImplCustom;
 
@@ -85,6 +89,31 @@ public class LogicalContainerAwareReentrantTypeResolver extends DefaultReentrant
 			if (actualType == null)
 				return null;
 			return actualType.toJavaCompliantTypeReference();
+		}
+	}
+	
+	public class AnyTypeReferenceProvider extends AbstractReentrantTypeReferenceProvider {
+		private final JvmMember member;
+		private final ResolvedTypes resolvedTypes;
+
+		public AnyTypeReferenceProvider(JvmMember member, ResolvedTypes resolvedTypes) {
+			this.member = member;
+			this.resolvedTypes = resolvedTypes;
+		}
+
+		@Override
+		@Nullable
+		protected JvmTypeReference doGetTypeReference(XComputedTypeReferenceImplCustom context) {
+			resolvedTypes.addDiagnostic(new EObjectDiagnosticImpl(
+					Severity.ERROR, 
+					IssueCodes.TOO_LITTLE_TYPE_INFORMATION, 
+					"Cannot infer type",
+					// TODO use the source
+					member, 
+					null, 
+					-1, 
+					null));
+			return TypesFactory.eINSTANCE.createJvmAnyTypeReference();
 		}
 	}
 
@@ -223,8 +252,11 @@ public class LogicalContainerAwareReentrantTypeResolver extends DefaultReentrant
 	
 	protected AbstractReentrantTypeReferenceProvider createTypeProvider(Map<JvmIdentifiableElement, ResolvedTypes> resolvedTypesByContext, ResolvedTypes resolvedTypes, IFeatureScopeSession featureScopeSession, JvmMember member, boolean returnType) {
 		XExpression expression = logicalContainerProvider.getAssociatedExpression(member);
-		resolvedTypes.markToBeInferred(expression);
-		return new DemandTypeReferenceProvider(member, expression, resolvedTypesByContext, resolvedTypes, featureScopeSession, returnType);
+		if (expression != null) {
+			resolvedTypes.markToBeInferred(expression);
+			return new DemandTypeReferenceProvider(member, expression, resolvedTypesByContext, resolvedTypes, featureScopeSession, returnType);
+		}
+		return new AnyTypeReferenceProvider(member, resolvedTypes); 
 	}
 	
 	@Override
@@ -265,9 +297,11 @@ public class LogicalContainerAwareReentrantTypeResolver extends DefaultReentrant
 
 	protected void _computeTypes(Map<JvmIdentifiableElement, ResolvedTypes> preparedResolvedTypes, ResolvedTypes resolvedTypes, IFeatureScopeSession featureScopeSession, JvmField field) {
 		ResolvedTypes childResolvedTypes = preparedResolvedTypes.get(field);
-		if (childResolvedTypes == null)
+		if (childResolvedTypes == null) {
+			if (preparedResolvedTypes.containsKey(field))
+				return;
 			throw new IllegalStateException("No resolved type found. Field was: " + field.getIdentifier());
-		
+		}
 		FieldTypeComputationState state = new FieldTypeComputationState(childResolvedTypes, featureScopeSession, field, this);
 		ITypeComputationResult result = state.computeTypes();
 		if (InferredTypeIndicator.isInferred(field.getType())) {
@@ -282,9 +316,11 @@ public class LogicalContainerAwareReentrantTypeResolver extends DefaultReentrant
 	
 	protected void _computeTypes(Map<JvmIdentifiableElement, ResolvedTypes> preparedResolvedTypes, ResolvedTypes resolvedTypes, IFeatureScopeSession featureScopeSession, JvmConstructor constructor) {
 		ResolvedTypes childResolvedTypes = preparedResolvedTypes.get(constructor);
-		if (childResolvedTypes == null)
+		if (childResolvedTypes == null) {
+			if (preparedResolvedTypes.containsKey(constructor))
+				return;
 			throw new IllegalStateException("No resolved type found. Constructor was: " + constructor.getIdentifier());
-		
+		}
 		ConstructorBodyComputationState state = new ConstructorBodyComputationState(childResolvedTypes, featureScopeSession, constructor, this);
 		state.computeTypes();
 		computeAnnotationTypes(childResolvedTypes, featureScopeSession, constructor);
