@@ -22,6 +22,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtend2.lib.StringConcatenation;
+import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.common.types.JvmAnnotationAnnotationValue;
 import org.eclipse.xtext.common.types.JvmAnnotationReference;
 import org.eclipse.xtext.common.types.JvmAnnotationType;
@@ -97,6 +98,7 @@ import org.eclipse.xtext.xbase.compiler.XbaseCompiler;
 import org.eclipse.xtext.xbase.compiler.output.ITreeAppendable;
 import org.eclipse.xtext.xbase.compiler.output.TreeAppendable;
 import org.eclipse.xtext.xbase.jvmmodel.IJvmModelAssociations;
+import org.eclipse.xtext.xbase.jvmmodel.IJvmModelInferrer;
 import org.eclipse.xtext.xbase.jvmmodel.ILogicalContainerProvider;
 import org.eclipse.xtext.xbase.jvmmodel.JvmTypeExtensions;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
@@ -111,7 +113,7 @@ import org.eclipse.xtext.xbase.lib.StringExtensions;
 
 /**
  * A generator implementation that processes the
- * derived {@link org.eclipse.xtext.xbase.jvmmodel.IJvmModelInferrer JVM model}
+ * derived {@link IJvmModelInferrer JVM model}
  * and produces the respective java code.
  */
 @SuppressWarnings("all")
@@ -1229,11 +1231,24 @@ public class JvmModelGenerator implements IGenerator {
                   _xifexpression = _eObjectOrProxy_2;
                 }
                 final JvmType jvmType = ((JvmType) _xifexpression);
-                boolean _eIsProxy_1 = jvmType.eIsProxy();
-                boolean _not = (!_eIsProxy_1);
-                if (_not) {
-                  final ImportManager importManager = this.getImportManager(appendable);
-                  importManager.addImportFor(jvmType);
+                boolean _and_2 = false;
+                if (!(jvmType instanceof JvmDeclaredType)) {
+                  _and_2 = false;
+                } else {
+                  boolean _eIsProxy_1 = jvmType.eIsProxy();
+                  boolean _not = (!_eIsProxy_1);
+                  _and_2 = ((jvmType instanceof JvmDeclaredType) && _not);
+                }
+                if (_and_2) {
+                  final JvmDeclaredType referencedType = ((JvmDeclaredType) jvmType);
+                  final JvmDeclaredType contextDeclarator = EcoreUtil2.<JvmDeclaredType>getContainerOfType(it, JvmDeclaredType.class);
+                  String _packageName = referencedType.getPackageName();
+                  String _packageName_1 = contextDeclarator.getPackageName();
+                  boolean _notEquals_3 = ObjectExtensions.operator_notEquals(_packageName, _packageName_1);
+                  if (_notEquals_3) {
+                    final ImportManager importManager = this.getImportManager(appendable);
+                    importManager.addImportFor(jvmType);
+                  }
                 }
               }
             }

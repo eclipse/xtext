@@ -25,7 +25,7 @@ class JavaDocTypeReferenceProviderTest extends AbstractXtendTestCase {
 		val resource = clazz(input).eResource as XtextResource
 		val rootNode = resource.parseResult.rootNode
 		val regions = javaDocTypeReferenceProvider.computeTypeRefRegions(rootNode)
-		assertEquals(4,regions.size)
+		assertEquals(3,regions.size)
 		assertEquals("List", regions.head.text);
 		assertEquals(input.indexOf("List"), regions.head.offset)
 		assertEquals("List".length, regions.head.length)
@@ -44,7 +44,7 @@ class JavaDocTypeReferenceProviderTest extends AbstractXtendTestCase {
 		val resource = clazz(input).eResource as XtextResource
 		val rootNode = resource.parseResult.rootNode
 		val regions = javaDocTypeReferenceProvider.computeTypeRefRegions(rootNode)
-		assertEquals(2,regions.size)
+		assertEquals(1,regions.size)
 		assertEquals("java.util.ArrayList", regions.head.text);
 		assertEquals(input.indexOf("java.util.ArrayList"), regions.head.offset)
 		assertEquals("java.util.ArrayList".length, regions.head.length)
@@ -55,6 +55,37 @@ class JavaDocTypeReferenceProviderTest extends AbstractXtendTestCase {
 		val String input = '''
 			package foo
 
+			/**
+			* {@link java.util.ArrayList
+			*/
+			class Foo{}
+		'''
+		val resource = clazz(input).eResource as XtextResource
+		val rootNode = resource.parseResult.rootNode
+		val regions = javaDocTypeReferenceProvider.computeTypeRefRegions(rootNode)
+		assertEquals(0,regions.size)
+	}
+
+	@Test
+	def void testComputation_4() {
+		val String input = '''
+			package foo
+
+			/**
+			* {@link java.util.ArrayList
+			 */
+			class Foo{}
+		'''
+		val resource = clazz(input).eResource as XtextResource
+		val rootNode = resource.parseResult.rootNode
+		val regions = javaDocTypeReferenceProvider.computeTypeRefRegions(rootNode)
+		assertEquals(0,regions.size)
+	}
+
+	@Test
+	def void testComputation_5() {
+		val String input = '''
+			package foo
 
 			class Foo{
 				/**
@@ -74,6 +105,25 @@ class JavaDocTypeReferenceProviderTest extends AbstractXtendTestCase {
 		assertEquals("zonk", regions.get(1).text);
 		assertEquals(input.indexOf("zonk"), regions.get(1).offset)
 		assertEquals("zonk".length, regions.get(1).length)
+	}
+
+	@Test
+	def void testComputation_6() {
+		val String input = '''
+			package foo
+
+			/**
+			* {@link }
+			* @see
+			* @see
+			* {@link}
+			*/
+			class Foo{}
+		'''
+		val resource = clazz(input).eResource as XtextResource
+		val rootNode = resource.parseResult.rootNode
+		val regions = javaDocTypeReferenceProvider.computeTypeRefRegions(rootNode)
+		assertEquals(0,regions.size)
 	}
 
 }

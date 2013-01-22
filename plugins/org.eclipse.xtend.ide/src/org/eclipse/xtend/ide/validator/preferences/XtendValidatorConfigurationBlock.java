@@ -22,11 +22,19 @@ public class XtendValidatorConfigurationBlock extends XbaseValidationConfigurati
 		super.fillSettingsPage(composite, nColumns, defaultIndent);
 		fillDispatchSection(new ComboBoxBuilder(this, createSection("Dispatch methods", composite, nColumns),
 				defaultIndent));
+		fillJavaDocSection(new ComboBoxBuilder(this,createSection("JavaDoc", composite, nColumns),
+				defaultIndent));
 	}
 
 	protected void fillDispatchSection(ComboBoxBuilder builder) {
 		builder.addComboBox(DISPATCH_PLAIN_FUNCTION_NAME_CLASH, "Dispatch and non-dispatch method name clash:").addComboBox(
 				SINGLE_DISPATCH_FUNCTION, "Single dispatch method:");
+	}
+	/**
+	 * @see org.eclipse.xtend.core.validation.XtendConfigurableIssueCodes
+	 */
+	protected void fillJavaDocSection(ComboBoxBuilder builder) {
+		builder.addJavaDelegatingComboBox(JAVA_DOC_LINKING_DIAGNOSTIC, "Unresolved references");
 	}
 
 	@Override

@@ -30,5 +30,6 @@ public class XtendConfigurableIssueCodes extends XbaseConfigurableIssueCodes {
 		iAcceptor.accept(create(IssueCodes.SINGLE_DISPATCH_FUNCTION, SeverityConverter.SEVERITY_WARNING));
 		iAcceptor.accept(create(IssueCodes.DISPATCH_PLAIN_FUNCTION_NAME_CLASH, SeverityConverter.SEVERITY_WARNING));
 		iAcceptor.accept(createDelegate(IssueCodes.UNUSED_PRIVATE_MEMBER, JavaCore.COMPILER_PB_UNUSED_PRIVATE_MEMBER));
+		iAcceptor.accept(createDelegate(IssueCodes.JAVA_DOC_LINKING_DIAGNOSTIC, JavaCore.COMPILER_PB_INVALID_JAVADOC, SeverityConverter.SEVERITY_ERROR));
 	}
 }

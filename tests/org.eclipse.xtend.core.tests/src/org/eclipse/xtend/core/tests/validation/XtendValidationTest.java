@@ -20,12 +20,15 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtend.core.tests.AbstractXtendTestCase;
+import org.eclipse.xtend.core.validation.IssueCodes;
 import org.eclipse.xtend.core.xtend.XtendClass;
 import org.eclipse.xtend.core.xtend.XtendConstructor;
+import org.eclipse.xtend.core.xtend.XtendField;
 import org.eclipse.xtend.core.xtend.XtendFile;
 import org.eclipse.xtend.core.xtend.XtendFunction;
 import org.eclipse.xtend.core.xtend.XtendMember;
 import org.eclipse.xtend.core.xtend.XtendPackage;
+import org.eclipse.xtend.core.xtend.XtendTypeDeclaration;
 import org.eclipse.xtext.common.types.TypesPackage;
 import org.eclipse.xtext.junit4.validation.ValidationTestHelper;
 import org.eclipse.xtext.resource.XtextResourceSet;
@@ -1242,4 +1245,85 @@ public class XtendValidationTest extends AbstractXtendTestCase {
     			"}");
     	helper.assertError(file, XNULL_LITERAL, INVALID_INNER_EXPRESSION);
     }
+
+    @Test
+    public void testJavaDocRefs() throws Exception {
+	XtendFile file = file(
+			"/**\n" +
+			" * {@link List}\n" +
+			" */\n" +
+			"class Foo {\n" +
+			"}");
+	XtendTypeDeclaration clazz = file.getXtendTypes().get(0);
+	helper.assertError(clazz, XTEND_CLASS, IssueCodes.JAVA_DOC_LINKING_DIAGNOSTIC, "javaDoc","List","cannot be resolved to a type");
+    }
+
+    @Test
+    public void testJavaDocRefs_1() throws Exception {
+	XtendFile file = file(
+			"import java.util.List\n" +
+			"/**\n" +
+			" * {@link List}\n" +
+			" */\n" +
+			"class Foo {\n" +
+			"}");
+	XtendTypeDeclaration clazz = file.getXtendTypes().get(0);
+	helper.assertNoIssues(clazz);
+    }
+
+    @Test
+    public void testJavaDocRefs_2() throws Exception {
+	XtendFile file = file(
+			"/**\n" +
+			" * {@link Bar\n" +
+			" */\n" +
+			"class Foo {\n" +
+			"}");
+	XtendTypeDeclaration clazz = file.getXtendTypes().get(0);
+	helper.assertNoIssues(clazz);
+    }
+
+    @Test
+    public void testJavaDocRefs_3() throws Exception {
+	XtendFile file = file(
+			"class Foo {\n" +
+					"/**" +
+				" * {@link List}\n" +
+				" */" +
+				"def doStuff(){}"+
+			"}");
+	XtendClass clazz = (XtendClass) file.getXtendTypes().get(0);
+	XtendMember function = clazz.getMembers().get(0);
+	helper.assertError(function, XTEND_FUNCTION, IssueCodes.JAVA_DOC_LINKING_DIAGNOSTIC, "javaDoc","List","cannot be resolved to a type");
+    }
+
+	@Test
+	public void testJavaDocRefs_4() throws Exception {
+		XtendFile file = file(
+				"class Foo {\n" +
+					"/**" +
+					" * {@link List}\n" +
+					" */" +
+					"String field = '42'\n" +
+					"def doStuff(){}"+
+				"}");
+		XtendClass clazz = (XtendClass) file.getXtendTypes().get(0);
+		XtendMember field = clazz.getMembers().get(0);
+		helper.assertError(field, XTEND_FIELD, IssueCodes.JAVA_DOC_LINKING_DIAGNOSTIC, "javaDoc","List","cannot be resolved to a type");
+	}
+
+	@Test
+	public void testJavaDocRefs_5() throws Exception {
+		XtendFile file = file(
+				"class Foo {\n" +
+					"/**" +
+					" * {@link List}\n" +
+					" */" +
+					"String field = '42'\n" +
+					"def doStuff(){}"+
+				"}");
+		XtendClass clazz = (XtendClass) file.getXtendTypes().get(0);
+		XtendMember field = clazz.getMembers().get(0);
+		helper.assertError(field, XTEND_FIELD, IssueCodes.JAVA_DOC_LINKING_DIAGNOSTIC, "javaDoc","List","cannot be resolved to a type");
+	}
 }

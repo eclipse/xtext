@@ -1688,7 +1688,7 @@ public abstract class AbstractXtendCompilerTest extends AbstractXtendTestCase {
     _builder_1.append("}");
     _builder_1.newLine();
     _builder_1.append("    ");
-    _builder_1.append("} catch (Exception _e) {");
+    _builder_1.append("} catch (Throwable _e) {");
     _builder_1.newLine();
     _builder_1.append("      ");
     _builder_1.append("throw Exceptions.sneakyThrow(_e);");
@@ -1794,7 +1794,7 @@ public abstract class AbstractXtendCompilerTest extends AbstractXtendTestCase {
     _builder_1.append("return _canonicalFile;");
     _builder_1.newLine();
     _builder_1.append("            ");
-    _builder_1.append("} catch (Exception _e) {");
+    _builder_1.append("} catch (Throwable _e) {");
     _builder_1.newLine();
     _builder_1.append("              ");
     _builder_1.append("throw Exceptions.sneakyThrow(_e);");
@@ -2266,7 +2266,7 @@ public abstract class AbstractXtendCompilerTest extends AbstractXtendTestCase {
     _builder_1.append("throw _iOException;");
     _builder_1.newLine();
     _builder_1.append("    ");
-    _builder_1.append("} catch (Exception _e) {");
+    _builder_1.append("} catch (Throwable _e) {");
     _builder_1.newLine();
     _builder_1.append("      ");
     _builder_1.append("throw Exceptions.sneakyThrow(_e);");
@@ -5641,15 +5641,15 @@ public abstract class AbstractXtendCompilerTest extends AbstractXtendTestCase {
     _builder.append("* {@link List}");
     _builder.newLine();
     _builder.append(" ");
-    _builder.append("* @see Bar");
-    _builder.newLine();
-    _builder.append(" ");
     _builder.append("*/");
     _builder.newLine();
     _builder.append("class Foo {");
     _builder.newLine();
     _builder.append("\t");
     _builder.append("/**");
+    _builder.newLine();
+    _builder.append("\t ");
+    _builder.append("*");
     _builder.newLine();
     _builder.append("\t ");
     _builder.append("* @see ArrayList");
@@ -5676,9 +5676,6 @@ public abstract class AbstractXtendCompilerTest extends AbstractXtendTestCase {
     _builder_1.newLine();
     _builder_1.append(" ");
     _builder_1.append("* {@link List}");
-    _builder_1.newLine();
-    _builder_1.append(" ");
-    _builder_1.append("* @see Bar");
     _builder_1.newLine();
     _builder_1.append(" ");
     _builder_1.append("*/");
@@ -5729,9 +5726,6 @@ public abstract class AbstractXtendCompilerTest extends AbstractXtendTestCase {
     _builder.append("* {@link List}");
     _builder.newLine();
     _builder.append(" ");
-    _builder.append("* @see Bar");
-    _builder.newLine();
-    _builder.append(" ");
     _builder.append("*/");
     _builder.newLine();
     _builder.append("class Foo {");
@@ -5766,9 +5760,6 @@ public abstract class AbstractXtendCompilerTest extends AbstractXtendTestCase {
     _builder_1.append("* {@link List}");
     _builder_1.newLine();
     _builder_1.append(" ");
-    _builder_1.append("* @see Bar");
-    _builder_1.newLine();
-    _builder_1.append(" ");
     _builder_1.append("*/");
     _builder_1.newLine();
     _builder_1.append("@SuppressWarnings(\"all\")");
@@ -5799,6 +5790,108 @@ public abstract class AbstractXtendCompilerTest extends AbstractXtendTestCase {
   }
   
   @Test
+  public void compileImportForTypeRefInJavaDoc_3() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("package foo");
+    _builder.newLine();
+    _builder.append("import java.util.List");
+    _builder.newLine();
+    _builder.append("import java.util.ArrayList");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("class Foo {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("/**");
+    _builder.newLine();
+    _builder.append("\t ");
+    _builder.append("* @see ArrayList");
+    _builder.newLine();
+    _builder.append("\t ");
+    _builder.append("*/");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("List<String> list = null");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("package foo;");
+    _builder_1.newLine();
+    _builder_1.newLine();
+    _builder_1.append("import java.util.ArrayList;");
+    _builder_1.newLine();
+    _builder_1.append("import java.util.List;");
+    _builder_1.newLine();
+    _builder_1.newLine();
+    _builder_1.append("@SuppressWarnings(\"all\")");
+    _builder_1.newLine();
+    _builder_1.append("public class Foo {");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("/**");
+    _builder_1.newLine();
+    _builder_1.append("   ");
+    _builder_1.append("* @see ArrayList");
+    _builder_1.newLine();
+    _builder_1.append("   ");
+    _builder_1.append("*/");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("private List<String> list = null;");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    this.assertCompilesTo(_builder, _builder_1);
+  }
+
+  @Test
+  public void compileImportForTypeRefInJavaDoc_Same_Package() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("package foo");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("/**");
+    _builder.newLine();
+    _builder.append(" ");
+    _builder.append("*");
+    _builder.newLine();
+    _builder.append(" ");
+    _builder.append("* {@link Bar}");
+    _builder.newLine();
+    _builder.append(" ");
+    _builder.append("*/");
+    _builder.newLine();
+    _builder.append("class Foo {");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("class Bar{}");
+    _builder.newLine();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("package foo;");
+    _builder_1.newLine();
+    _builder_1.newLine();
+    _builder_1.append("/**");
+    _builder_1.newLine();
+    _builder_1.append(" ");
+    _builder_1.append("* {@link Bar}");
+    _builder_1.newLine();
+    _builder_1.append(" ");
+    _builder_1.append("*/");
+    _builder_1.newLine();
+    _builder_1.append("@SuppressWarnings(\"all\")");
+    _builder_1.newLine();
+    _builder_1.append("public class Foo {");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    this.assertCompilesTo(_builder, _builder_1);
+  }
+
+  @Test
+  @Ignore
   public void compileProperty() {
     final GeneratorConfig generatorConfig = this.generatorConfigProvider.get(null);
     StringConcatenation _builder = new StringConcatenation();
@@ -5826,7 +5919,6 @@ public abstract class AbstractXtendCompilerTest extends AbstractXtendTestCase {
     _builder_1.append("  ");
     _builder_1.append("private boolean _generateExpressions = true;");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public boolean isGenerateExpressions() {");
@@ -5837,7 +5929,6 @@ public abstract class AbstractXtendCompilerTest extends AbstractXtendTestCase {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
-    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public void setGenerateExpressions(final boolean generateExpressions) {");
