@@ -4184,6 +4184,69 @@ public abstract class AbstractXtendCompilerTest extends AbstractXtendTestCase {
   }
   
   @Test
+  public void testFindFirstOnIt_01() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("class FindFirstOnIt {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def <T> useExtension(Iterable<T> it) {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("findFirst [ it != null ]");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("import org.eclipse.xtext.xbase.lib.Functions.Function1;");
+    _builder_1.newLine();
+    _builder_1.append("import org.eclipse.xtext.xbase.lib.IterableExtensions;");
+    _builder_1.newLine();
+    _builder_1.append("import org.eclipse.xtext.xbase.lib.ObjectExtensions;");
+    _builder_1.newLine();
+    _builder_1.newLine();
+    _builder_1.append("@SuppressWarnings(\"all\")");
+    _builder_1.newLine();
+    _builder_1.append("public class FindFirstOnIt {");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("public <T extends Object> T useExtension(final Iterable<T> it) {");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("final Function1<T,Boolean> _function = new Function1<T,Boolean>() {");
+    _builder_1.newLine();
+    _builder_1.append("        ");
+    _builder_1.append("public Boolean apply(final T it) {");
+    _builder_1.newLine();
+    _builder_1.append("          ");
+    _builder_1.append("boolean _notEquals = ObjectExtensions.operator_notEquals(it, null);");
+    _builder_1.newLine();
+    _builder_1.append("          ");
+    _builder_1.append("return Boolean.valueOf(_notEquals);");
+    _builder_1.newLine();
+    _builder_1.append("        ");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("      ");
+    _builder_1.append("};");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("T _findFirst = IterableExtensions.<T>findFirst(it, _function);");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("return _findFirst;");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    this.assertCompilesTo(_builder, _builder_1);
+  }
+  
+  @Test
   public void testReturnType() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("import test.ReturnTypeUsesTypeParameter");

@@ -17,6 +17,7 @@ import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.common.types.JvmAnyTypeReference;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
+import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmSynonymTypeReference;
 import org.eclipse.xtext.common.types.JvmType;
@@ -216,13 +217,12 @@ public class XbaseCompiler2 extends XbaseCompiler {
 	
 	@Override
 	protected void reassignThisInClosure(final ITreeAppendable b, JvmType rawClosureType) {
-		boolean registerClosureAsThis = true;
+		boolean registerClosureAsThis = rawClosureType instanceof JvmGenericType && !((JvmGenericType) rawClosureType).isInterface();
 		if (b.hasObject("this")) {
 			Object element = b.getObject("this");
 			if (element instanceof JvmType) {
 				final String proposedName = ((JvmType) element).getSimpleName()+".this";
 				if (!b.hasObject(proposedName)) {
-					registerClosureAsThis = false;
 					b.declareSyntheticVariable(element, proposedName);
 					if (b.hasObject("super")) {
 						Object superElement = b.getObject("super");
@@ -231,10 +231,12 @@ public class XbaseCompiler2 extends XbaseCompiler {
 						}
 					}
 				}
+			} else {
+				registerClosureAsThis = false;
 			}
 		}
 		if (registerClosureAsThis)
-			b.declareSyntheticVariable(rawClosureType, "this");
+			b.declareVariable(rawClosureType, "this");
 	}
 	
 	@Override

@@ -103,15 +103,35 @@ class CompilerTest2 extends AbstractCompilerTest {
 class XtendCompilerTest2 extends AbstractXtendCompilerTest {
 	
 	@Test
-	@Ignore("TODO")
-	override testReturnType() {
-		super.testReturnType()
-	}
-	
-	@Test
-	@Ignore("TODO")
 	override testReturnType_02() {
-		super.testReturnType_02()
+		assertCompilesTo(
+			'''
+				import test.ReturnTypeUsesTypeParameter
+				class MyClass implements ReturnTypeUsesTypeParameter {
+				
+					override <LocalName extends CharSequence> accept(LocalName param) {
+						[ if (true) it?.apply(param) ] 
+					}
+				}
+			''', '''
+				import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
+				import test.ReturnTypeUsesTypeParameter;
+				import test.ReturnTypeUsesTypeParameter.Inner;
+				
+				@SuppressWarnings("all")
+				public class MyClass implements ReturnTypeUsesTypeParameter {
+				  public <LocalName extends CharSequence> Inner<LocalName> accept(final LocalName param) {
+				    final Inner<LocalName> _function = new Inner<LocalName>() {
+				        public void useProcedure(final Procedure1<? super LocalName> it) {
+				          if (true) {
+				            if (it!=null) it.apply(param);
+				          }
+				        }
+				      };
+				    return _function;
+				  }
+				}
+			''')
 	}
 	
 	@Test
@@ -291,6 +311,188 @@ class XtendCompilerTest2 extends AbstractXtendCompilerTest {
 		''')
 	}
 	
+	@Test def void testAbstractIterator_01() {
+		assertCompilesTo('''
+			import java.util.Iterator
+			import com.google.common.collect.AbstractIterator
+			public class Foo  {
+			    def <T> Iterator<T> skipNulls(Iterator<T> iter) {
+			    	val AbstractIterator<T> result = [|
+			    		while(iter.hasNext) {
+			    			val elem = iter.next
+			    			if (elem != null)
+			    				return elem
+			    		}
+			    		return self.endOfData
+			    	]
+			    	return result
+			    }
+			}
+		''', '''
+			import com.google.common.collect.AbstractIterator;
+			import java.util.Iterator;
+			import org.eclipse.xtext.xbase.lib.ObjectExtensions;
+			
+			@SuppressWarnings("all")
+			public class Foo {
+			  public <T extends Object> Iterator<T> skipNulls(final Iterator<T> iter) {
+			    final AbstractIterator<T> _function = new AbstractIterator<T>() {
+			        @Override
+			        protected T computeNext() {
+			          boolean _hasNext = iter.hasNext();
+			          boolean _while = _hasNext;
+			          while (_while) {
+			            {
+			              final T elem = iter.next();
+			              boolean _notEquals = ObjectExtensions.operator_notEquals(elem, null);
+			              if (_notEquals) {
+			                return elem;
+			              }
+			            }
+			            boolean _hasNext_1 = iter.hasNext();
+			            _while = _hasNext_1;
+			          }
+			          return this.endOfData();
+			        }
+			      };
+			    final AbstractIterator<T> result = _function;
+			    return result;
+			  }
+			}
+		''')
+	}
+	
+	@Test def void testAbstractIterator_02() {
+		assertCompilesTo('''
+			import com.google.common.collect.AbstractIterator
+			public class Foo  {
+			    def skipNulls() {
+			    	val AbstractIterator<String> result = [|
+			    		toString
+			    		super.toString
+			    		self.toString
+			    	]
+			    	return result
+			    }
+			}
+		''', '''
+			import com.google.common.collect.AbstractIterator;
+			
+			@SuppressWarnings("all")
+			public class Foo {
+			  public AbstractIterator<String> skipNulls() {
+			    final AbstractIterator<String> _function = new AbstractIterator<String>() {
+			        @Override
+			        protected String computeNext() {
+			          String _xblockexpression = null;
+			          {
+			            Foo.this.toString();
+			            Foo.super.toString();
+			            String _string = this.toString();
+			            _xblockexpression = (_string);
+			          }
+			          return _xblockexpression;
+			        }
+			      };
+			    final AbstractIterator<String> result = _function;
+			    return result;
+			  }
+			}
+		''')
+	}
+	
+	// TODO elvis should evaluate the right side lazy
+	@Test def void testAbstractIterator_03() {
+		assertCompilesTo('''
+			import java.util.Iterator
+			import com.google.common.collect.AbstractIterator
+			public class Foo  {
+				def <T> Iterator<T> skipNulls(Iterator<T> iter) {
+					val AbstractIterator<T> result = [|
+						iter.findFirst [ it != null ] ?: self.endOfData
+					]
+					return result
+				}
+			}
+		''', '''
+			import com.google.common.collect.AbstractIterator;
+			import java.util.Iterator;
+			import org.eclipse.xtext.xbase.lib.Functions.Function1;
+			import org.eclipse.xtext.xbase.lib.IteratorExtensions;
+			import org.eclipse.xtext.xbase.lib.ObjectExtensions;
+			
+			@SuppressWarnings("all")
+			public class Foo {
+			  public <T extends Object> Iterator<T> skipNulls(final Iterator<T> iter) {
+			    final AbstractIterator<T> _function = new AbstractIterator<T>() {
+			        @Override
+			        protected T computeNext() {
+			          final Function1<T,Boolean> _function = new Function1<T,Boolean>() {
+			              public Boolean apply(final T it) {
+			                boolean _notEquals = ObjectExtensions.operator_notEquals(it, null);
+			                return Boolean.valueOf(_notEquals);
+			              }
+			            };
+			          T _findFirst = IteratorExtensions.<T>findFirst(iter, _function);
+			          T _endOfData = this.endOfData();
+			          T _elvis = ObjectExtensions.<T>operator_elvis(_findFirst, _endOfData);
+			          return _elvis;
+			        }
+			      };
+			    final AbstractIterator<T> result = _function;
+			    return result;
+			  }
+			}
+		''')
+	}
+	
+	// TODO elvis should evaluate the right side lazy
+	@Test
+	def testAbstractIterator_04() { 
+		assertCompilesTo(
+			'''
+				import java.util.Iterator
+				import com.google.common.collect.AbstractIterator
+				class FindFirstOnIt {
+
+					def <T> Iterator<T> skipNulls(Iterator<T> it) {
+						val AbstractIterator<T> result = [|
+							findFirst [ it != null ] ?: self.endOfData
+						]
+						return result
+					}
+				}
+			''', '''
+				import com.google.common.collect.AbstractIterator;
+				import java.util.Iterator;
+				import org.eclipse.xtext.xbase.lib.Functions.Function1;
+				import org.eclipse.xtext.xbase.lib.IteratorExtensions;
+				import org.eclipse.xtext.xbase.lib.ObjectExtensions;
+				
+				@SuppressWarnings("all")
+				public class FindFirstOnIt {
+				  public <T extends Object> Iterator<T> skipNulls(final Iterator<T> it) {
+				    final AbstractIterator<T> _function = new AbstractIterator<T>() {
+				        @Override
+				        protected T computeNext() {
+				          final Function1<T,Boolean> _function = new Function1<T,Boolean>() {
+				              public Boolean apply(final T it) {
+				                boolean _notEquals = ObjectExtensions.operator_notEquals(it, null);
+				                return Boolean.valueOf(_notEquals);
+				              }
+				            };
+				          T _findFirst = IteratorExtensions.<T>findFirst(it, _function);
+				          T _endOfData = this.endOfData();
+				          T _elvis = ObjectExtensions.<T>operator_elvis(_findFirst, _endOfData);
+				          return _elvis;
+				        }
+				      };
+				    final AbstractIterator<T> result = _function;
+				    return result;
+				  }
+				}
+			''')
+	}
 }
 
 @RunWith(typeof(XtextRunner))
