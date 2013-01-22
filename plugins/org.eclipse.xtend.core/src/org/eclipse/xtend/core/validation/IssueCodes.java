@@ -18,6 +18,7 @@ public final class IssueCodes {
 
 	protected static final String ISSUE_CODE_PREFIX = "org.eclipse.xtend.core.validation.IssueCodes.";
 	public static final String FEATURECALL_LINKING_DIAGNOSTIC = ISSUE_CODE_PREFIX + "feature_linking";
+	public static final String JAVA_DOC_LINKING_DIAGNOSTIC = ISSUE_CODE_PREFIX + "java_doc_linking";
 	public static final String ANNOTATION_WRONG_TARGET = ISSUE_CODE_PREFIX + "wrong_annotation_target";
 	public static final String DISPATCH_FUNC_WITHOUT_PARAMS = ISSUE_CODE_PREFIX + "case_function_without_params";
 	public static final String DISPATCH_FUNC_WITH_TYPE_PARAMS = ISSUE_CODE_PREFIX + "case_function_with_type_params";

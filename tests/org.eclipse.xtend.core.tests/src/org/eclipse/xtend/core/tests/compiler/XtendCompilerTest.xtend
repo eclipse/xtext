@@ -2449,22 +2449,22 @@ abstract class AbstractXtendCompilerTest extends AbstractXtendTestCase {
             public class baz {
               private String name = "foobaz";
             }
-        '''
-        val file = file(input.toString(), true)
-        val barType = file.eResource.contents.filter(typeof(JvmDeclaredType)).head
-        val bazType = file.eResource.contents.filter(typeof(JvmDeclaredType)).last
-        val generatorConfig =  generatorConfigProvider.get(barType)
-        val barJavaCode = generator.generateType(barType, generatorConfig);
-        val bazJavaCode = generator.generateType(bazType, generatorConfig);
-        XtendCompilerTest::assertEquals(expectedBarClass.toString, barJavaCode.toString);
-        XtendCompilerTest::assertEquals(expectedBazClass.toString, bazJavaCode.toString);
-    }
-    
-    /*
-     * see https://bugs.eclipse.org/bugs/show_bug.cgi?id=391077
-     */
-    @Test def void testBug391077() {
-    	assertCompilesTo('''
+		'''
+		val file = file(input.toString(), true)
+		val barType = file.eResource.contents.filter(typeof(JvmDeclaredType)).head
+		val bazType = file.eResource.contents.filter(typeof(JvmDeclaredType)).last
+		val generatorConfig =  generatorConfigProvider.get(barType)
+		val barJavaCode = generator.generateType(barType, generatorConfig);
+		val bazJavaCode = generator.generateType(bazType, generatorConfig);
+		XtendCompilerTest::assertEquals(expectedBarClass.toString, barJavaCode.toString);
+		XtendCompilerTest::assertEquals(expectedBazClass.toString, bazJavaCode.toString);
+	}
+
+	/*
+	* see https://bugs.eclipse.org/bugs/show_bug.cgi?id=391077
+	*/
+	@Test def void testBug391077() {
+		assertCompilesTo('''
 			class TestError {
 			    def Void voidObjectReturned() {
 			    }
@@ -2477,7 +2477,7 @@ abstract class AbstractXtendCompilerTest extends AbstractXtendTestCase {
 			        }
 			    }
 			}
-    	''','''
+		''','''
 			import org.eclipse.xtext.xbase.lib.Exceptions;
 			
 			@SuppressWarnings("all")
@@ -2499,16 +2499,16 @@ abstract class AbstractXtendCompilerTest extends AbstractXtendTestCase {
 			    }
 			  }
 			}
-    	''')
-    }
-    
-    @Test
-    def compileWithConfiguration(){
+		''')
+	}
+
+	@Test
+	def compileWithConfiguration(){
 	val generatorConfig = generatorConfigProvider.get(null)
 	generatorConfig.setGenerateSyntheticSuppressWarnings(false)
 	generatorConfig.setGenerateExpressions(false)
-        assertCompilesTo(
-        '''
+		assertCompilesTo(
+		'''
 			package foo
 
 			/**
@@ -2519,8 +2519,8 @@ abstract class AbstractXtendCompilerTest extends AbstractXtendTestCase {
 					1 + 1
 				}
 			}
-        ''',
-        '''
+		''',
+		'''
 			package foo;
 
 			/**
@@ -2531,15 +2531,15 @@ abstract class AbstractXtendCompilerTest extends AbstractXtendTestCase {
 			    throw new UnsupportedOperationException("foo is not implemented");
 			  }
 			}
-        ''', generatorConfig)
-    }
-    @Test
-    def compileWithConfiguration_2(){
+		''', generatorConfig)
+	}
+	@Test
+	def compileWithConfiguration_2(){
 	val generatorConfig = generatorConfigProvider.get(null)
 	generatorConfig.setGenerateSyntheticSuppressWarnings(true)
 	generatorConfig.setGenerateExpressions(false)
-        assertCompilesTo(
-        '''
+		assertCompilesTo(
+		'''
 			package foo
 
 			/**
@@ -2551,8 +2551,8 @@ abstract class AbstractXtendCompilerTest extends AbstractXtendTestCase {
 					1 + 1
 				}
 			}
-        ''',
-        '''
+		''',
+		'''
 			package foo;
 
 			/**
@@ -2564,16 +2564,16 @@ abstract class AbstractXtendCompilerTest extends AbstractXtendTestCase {
 			    throw new UnsupportedOperationException("foo is not implemented");
 			  }
 			}
-        ''', generatorConfig)
-    }
+		''', generatorConfig)
+	}
 
-    @Test
-    def compileWithConfiguration_3(){
+	@Test
+	def compileWithConfiguration_3(){
 	val generatorConfig = generatorConfigProvider.get(null)
 	generatorConfig.setGenerateSyntheticSuppressWarnings(true)
 	generatorConfig.setGenerateExpressions(false)
-        assertCompilesTo(
-        '''
+		assertCompilesTo(
+		'''
 			package foo
 
 			/**
@@ -2586,8 +2586,8 @@ abstract class AbstractXtendCompilerTest extends AbstractXtendTestCase {
 					1 + 1
 				}
 			}
-        ''',
-        '''
+		''',
+		'''
 			package foo;
 
 			/**
@@ -2600,11 +2600,11 @@ abstract class AbstractXtendCompilerTest extends AbstractXtendTestCase {
 			    throw new UnsupportedOperationException("foo is not implemented");
 			  }
 			}
-        ''', generatorConfig)
-    }
+		''', generatorConfig)
+	}
 
-    @Test
-    def compileImportForTypeRefInJavaDoc(){
+	@Test
+	def compileImportForTypeRefInJavaDoc(){
 	assertCompilesTo(
 	'''
 		package foo
@@ -2614,7 +2614,6 @@ abstract class AbstractXtendCompilerTest extends AbstractXtendTestCase {
 		/**
 		 *
 		 * {@link List}
-		 * @see Bar
 		 */
 		class Foo {
 			/**
@@ -2632,7 +2631,6 @@ abstract class AbstractXtendCompilerTest extends AbstractXtendTestCase {
 
 		/**
 		 * {@link List}
-		 * @see Bar
 		 */
 		@SuppressWarnings("all")
 		public class Foo {
@@ -2644,10 +2642,10 @@ abstract class AbstractXtendCompilerTest extends AbstractXtendTestCase {
 		  }
 		}
 	''')
-    }
+	}
 
-    @Test
-    def compileImportForTypeRefInJavaDoc_2(){
+	@Test
+	def compileImportForTypeRefInJavaDoc_2(){
 	assertCompilesTo(
 	'''
 		package foo
@@ -2657,7 +2655,6 @@ abstract class AbstractXtendCompilerTest extends AbstractXtendTestCase {
 		/**
 		 *
 		 * {@link List}
-		 * @see Bar
 		 */
 		class Foo {
 			/**
@@ -2675,7 +2672,6 @@ abstract class AbstractXtendCompilerTest extends AbstractXtendTestCase {
 
 		/**
 		 * {@link List}
-		 * @see Bar
 		 */
 		@SuppressWarnings("all")
 		public class Foo {
@@ -2687,23 +2683,79 @@ abstract class AbstractXtendCompilerTest extends AbstractXtendTestCase {
 		  }
 		}
 	''')
-    }
+	}
 
+	@Test
+	def compileImportForTypeRefInJavaDoc_3(){
+	assertCompilesTo(
+	'''
+		package foo
+		import java.util.List
+		import java.util.ArrayList
 
+		class Foo {
+			/**
+			 * @see ArrayList
+			 */
+			List<String> list = null
 
-    @Test@Ignore
-    def compileProperty(){
+		}
+	''',
+	'''
+		package foo;
+
+		import java.util.ArrayList;
+		import java.util.List;
+
+		@SuppressWarnings("all")
+		public class Foo {
+		  /**
+		   * @see ArrayList
+		   */
+		  private List<String> list = null;
+		}
+	''')
+	}
+
+	@Test
+	def compileImportForTypeRefInJavaDoc_Same_Package(){
+	assertCompilesTo(
+	'''
+		package foo
+
+		/**
+		 *
+		 * {@link Bar}
+		 */
+		class Foo {
+		}
+		class Bar{}
+	''',
+	'''
+		package foo;
+
+		/**
+		 * {@link Bar}
+		 */
+		@SuppressWarnings("all")
+		public class Foo {
+		}
+	''')
+	}
+
+	@Test@Ignore
+	def compileProperty(){
 	val generatorConfig = generatorConfigProvider.get(null)
-        assertCompilesTo(
-        '''
+		assertCompilesTo(
+		'''
 			package foo
 
 			class Bar {
 				@Property
 				boolean generateExpressions = true
 			}
-        ''',
-        '''
+		''',
+		'''
 			package foo;
 
 			@SuppressWarnings("all")
@@ -2718,13 +2770,13 @@ abstract class AbstractXtendCompilerTest extends AbstractXtendTestCase {
 			    this._generateExpressions = generateExpressions;
 			  }
 			}
-        ''', generatorConfig)
-    }
+		''', generatorConfig)
+	}
 
 
-    def  assertCompilesTo(CharSequence input, CharSequence expected){
+	def  assertCompilesTo(CharSequence input, CharSequence expected){
 		assertCompilesTo(input, expected, generatorConfigProvider.get(null))
-    }
+	}
 
 	def assertCompilesTo(CharSequence input, CharSequence expected, GeneratorConfig config) {
 		val file = file(input.toString(), true)

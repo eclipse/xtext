@@ -598,6 +598,47 @@ public class XtendUIValidationTests extends AbstractXtendUITestCase {
     }
   }
   
+  @Test
+  public void testJavaDocRefs_Delegation() throws Exception {
+    JavaModelManager _javaModelManager = JavaModelManager.getJavaModelManager();
+    JavaModel _javaModel = _javaModelManager.getJavaModel();
+    IProject _project = this.testHelper.getProject();
+    final IJavaProject javaProject = _javaModel.getJavaProject(_project);
+    final String javaSeverity = javaProject.getOption(JavaCore.COMPILER_PB_INVALID_JAVADOC, true);
+    boolean _notEquals = ObjectExtensions.operator_notEquals(javaSeverity, "ignore");
+    if (_notEquals) {
+      String _plus = ("Wrong expectation Java compiler option \'" + JavaCore.COMPILER_PB_INVALID_JAVADOC);
+      String _plus_1 = (_plus + "\' should be \'ignore\' by default");
+      Assert.fail(_plus_1);
+    }
+    String otherSeverity = "warning";
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("class Foo {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("/**");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("* {@link List}");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("*/");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def doStuff(){}");
+    _builder.newLine();
+    _builder.append("}");
+    final XtendFile xtendFile = this.testHelper.xtendFile("ValidationClazz.xtend", _builder.toString());
+    EList<XtendTypeDeclaration> _xtendTypes = xtendFile.getXtendTypes();
+    XtendTypeDeclaration _head = IterableExtensions.<XtendTypeDeclaration>head(_xtendTypes);
+    final XtendClass clazz = ((XtendClass) _head);
+    EList<XtendMember> _members = clazz.getMembers();
+    final XtendMember member = IterableExtensions.<XtendMember>head(_members);
+    this.helper.assertNoIssues(member);
+    javaProject.setOption(JavaCore.COMPILER_PB_INVALID_JAVADOC, otherSeverity);
+    this.helper.assertWarning(member, Literals.XTEND_FUNCTION, IssueCodes.JAVA_DOC_LINKING_DIAGNOSTIC, "javaDoc", "List", "cannot be resolved to a type");
+  }
+  
   public IPersistentPreferenceStore getXtendPreferencesStore() {
     IProject _project = this.testHelper.getProject();
     IPreferenceStore _writablePreferenceStore = this.prefStoreAccess.getWritablePreferenceStore(_project);

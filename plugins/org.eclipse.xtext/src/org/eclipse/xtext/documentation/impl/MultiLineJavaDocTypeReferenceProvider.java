@@ -41,7 +41,7 @@ public class MultiLineJavaDocTypeReferenceProvider implements IJavaDocTypeRefere
 	}
 
 	/**
-	 * Computes regions between a given string to seach and different ends searched by their precedence
+	 * Computes regions between a given string to search and different ends searched by their precedence
 	 *
 	 * @param regions - List to put new regions in
 	 * @param leafNodes - nodes to search in
@@ -61,7 +61,6 @@ public class MultiLineJavaDocTypeReferenceProvider implements IJavaDocTypeRefere
 				if(end != null && endLink == -1)
 					endLink = text.indexOf(end, beginIndex);
 				if(optionalEnd != null && endLink == -1)
-
 					endLink = text.indexOf(optionalEnd, beginIndex);
 				if(optionalEnd2 != null){
 					int lastEndLink = text.indexOf(optionalEnd2, beginIndex);
@@ -77,9 +76,11 @@ public class MultiLineJavaDocTypeReferenceProvider implements IJavaDocTypeRefere
 				if (endLink == -1) { 
 					break;
 				} else {
-					String simpleName = text.substring(beginIndex, endLink).trim();
-					ReplaceRegion region = new ReplaceRegion(offset + beginIndex, simpleName.length(), simpleName);
-					regions.add(region);
+					String simpleName = text.substring(beginIndex, endLink).replaceAll(" ", "");
+					if(simpleName.length() > 0 && simpleName.matches("[0-9a-zA-Z\\.]*")){
+						ReplaceRegion region = new ReplaceRegion(offset + beginIndex, simpleName.length(), simpleName);
+						regions.add(region);
+					}
 				} 
 				position = text.indexOf(toSearch, endLink);
 			}

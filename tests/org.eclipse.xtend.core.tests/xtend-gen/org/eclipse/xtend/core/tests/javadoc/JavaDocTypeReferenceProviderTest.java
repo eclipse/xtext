@@ -50,7 +50,7 @@ public class JavaDocTypeReferenceProviderTest extends AbstractXtendTestCase {
       final ICompositeNode rootNode = _parseResult.getRootNode();
       final List<ReplaceRegion> regions = this.javaDocTypeReferenceProvider.computeTypeRefRegions(rootNode);
       int _size = regions.size();
-      Assert.assertEquals(4, _size);
+      Assert.assertEquals(3, _size);
       ReplaceRegion _head = IterableExtensions.<ReplaceRegion>head(regions);
       String _text = _head.getText();
       Assert.assertEquals("List", _text);
@@ -90,7 +90,7 @@ public class JavaDocTypeReferenceProviderTest extends AbstractXtendTestCase {
       final ICompositeNode rootNode = _parseResult.getRootNode();
       final List<ReplaceRegion> regions = this.javaDocTypeReferenceProvider.computeTypeRefRegions(rootNode);
       int _size = regions.size();
-      Assert.assertEquals(2, _size);
+      Assert.assertEquals(1, _size);
       ReplaceRegion _head = IterableExtensions.<ReplaceRegion>head(regions);
       String _text = _head.getText();
       Assert.assertEquals("java.util.ArrayList", _text);
@@ -113,6 +113,64 @@ public class JavaDocTypeReferenceProviderTest extends AbstractXtendTestCase {
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("package foo");
       _builder.newLine();
+      _builder.newLine();
+      _builder.append("/**");
+      _builder.newLine();
+      _builder.append("* {@link java.util.ArrayList");
+      _builder.newLine();
+      _builder.append("*/");
+      _builder.newLine();
+      _builder.append("class Foo{}");
+      _builder.newLine();
+      final String input = _builder.toString();
+      XtendClass _clazz = this.clazz(input);
+      Resource _eResource = _clazz.eResource();
+      final XtextResource resource = ((XtextResource) _eResource);
+      IParseResult _parseResult = resource.getParseResult();
+      final ICompositeNode rootNode = _parseResult.getRootNode();
+      final List<ReplaceRegion> regions = this.javaDocTypeReferenceProvider.computeTypeRefRegions(rootNode);
+      int _size = regions.size();
+      Assert.assertEquals(0, _size);
+    } catch (Exception _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
+  public void testComputation_4() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("package foo");
+      _builder.newLine();
+      _builder.newLine();
+      _builder.append("/**");
+      _builder.newLine();
+      _builder.append("* {@link java.util.ArrayList");
+      _builder.newLine();
+      _builder.append(" ");
+      _builder.append("*/");
+      _builder.newLine();
+      _builder.append("class Foo{}");
+      _builder.newLine();
+      final String input = _builder.toString();
+      XtendClass _clazz = this.clazz(input);
+      Resource _eResource = _clazz.eResource();
+      final XtextResource resource = ((XtextResource) _eResource);
+      IParseResult _parseResult = resource.getParseResult();
+      final ICompositeNode rootNode = _parseResult.getRootNode();
+      final List<ReplaceRegion> regions = this.javaDocTypeReferenceProvider.computeTypeRefRegions(rootNode);
+      int _size = regions.size();
+      Assert.assertEquals(0, _size);
+    } catch (Exception _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
+  public void testComputation_5() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("package foo");
       _builder.newLine();
       _builder.newLine();
       _builder.append("class Foo{");
@@ -165,6 +223,41 @@ public class JavaDocTypeReferenceProviderTest extends AbstractXtendTestCase {
       ReplaceRegion _get_2 = regions.get(1);
       int _length_3 = _get_2.getLength();
       Assert.assertEquals(_length_2, _length_3);
+    } catch (Exception _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
+  public void testComputation_6() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("package foo");
+      _builder.newLine();
+      _builder.newLine();
+      _builder.append("/**");
+      _builder.newLine();
+      _builder.append("* {@link }");
+      _builder.newLine();
+      _builder.append("* @see");
+      _builder.newLine();
+      _builder.append("* @see");
+      _builder.newLine();
+      _builder.append("* {@link}");
+      _builder.newLine();
+      _builder.append("*/");
+      _builder.newLine();
+      _builder.append("class Foo{}");
+      _builder.newLine();
+      final String input = _builder.toString();
+      XtendClass _clazz = this.clazz(input);
+      Resource _eResource = _clazz.eResource();
+      final XtextResource resource = ((XtextResource) _eResource);
+      IParseResult _parseResult = resource.getParseResult();
+      final ICompositeNode rootNode = _parseResult.getRootNode();
+      final List<ReplaceRegion> regions = this.javaDocTypeReferenceProvider.computeTypeRefRegions(rootNode);
+      int _size = regions.size();
+      Assert.assertEquals(0, _size);
     } catch (Exception _e) {
       throw Exceptions.sneakyThrow(_e);
     }

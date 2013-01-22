@@ -11,7 +11,9 @@ import com.google.inject.Inject
 import java.util.List
 import org.eclipse.emf.ecore.EObject
 import org.eclipse.emf.ecore.resource.Resource
+import org.eclipse.emf.ecore.util.EcoreUtil
 import org.eclipse.xtend2.lib.StringConcatenation
+import org.eclipse.xtext.EcoreUtil2
 import org.eclipse.xtext.common.types.JvmAnnotationAnnotationValue
 import org.eclipse.xtext.common.types.JvmAnnotationReference
 import org.eclipse.xtext.common.types.JvmAnnotationType
@@ -57,6 +59,7 @@ import org.eclipse.xtext.generator.trace.ITraceURIConverter
 import org.eclipse.xtext.generator.trace.LocationData
 import org.eclipse.xtext.naming.IQualifiedNameConverter
 import org.eclipse.xtext.nodemodel.INode
+import org.eclipse.xtext.nodemodel.util.NodeModelUtils
 import org.eclipse.xtext.resource.ILocationInFileProvider
 import org.eclipse.xtext.scoping.IScopeProvider
 import org.eclipse.xtext.util.ITextRegionWithLineInformation
@@ -68,17 +71,16 @@ import org.eclipse.xtext.xbase.XExpression
 import org.eclipse.xtext.xbase.compiler.output.ITreeAppendable
 import org.eclipse.xtext.xbase.compiler.output.TreeAppendable
 import org.eclipse.xtext.xbase.jvmmodel.IJvmModelAssociations
+import org.eclipse.xtext.xbase.jvmmodel.IJvmModelInferrer
 import org.eclipse.xtext.xbase.jvmmodel.ILogicalContainerProvider
 import org.eclipse.xtext.xbase.jvmmodel.JvmTypeExtensions
 
 import static org.eclipse.xtext.common.types.TypesPackage$Literals.*
 import static org.eclipse.xtext.util.Strings.*
-import org.eclipse.emf.ecore.util.EcoreUtil
-import org.eclipse.xtext.nodemodel.util.NodeModelUtils
 
 /**
  * A generator implementation that processes the 
- * derived {@link org.eclipse.xtext.xbase.jvmmodel.IJvmModelInferrer JVM model}
+ * derived {@link IJvmModelInferrer JVM model}
  * and produces the respective java code.
  */
 class JvmModelGenerator implements IGenerator {
@@ -593,9 +595,13 @@ class JvmModelGenerator implements IGenerator {
 											else
 												candidate.EObjectOrProxy
 											) as JvmType
-							if(!jvmType.eIsProxy) {
-								val importManager = getImportManager(appendable)
-								importManager.addImportFor(jvmType)
+							if(jvmType instanceof JvmDeclaredType && !jvmType.eIsProxy) {
+								val referencedType = jvmType as JvmDeclaredType
+								val contextDeclarator = EcoreUtil2::getContainerOfType(it,typeof(JvmDeclaredType))
+								if(referencedType.packageName != contextDeclarator.packageName){
+									val importManager = getImportManager(appendable)
+									importManager.addImportFor(jvmType)
+								}
 							}
 						}
 					}

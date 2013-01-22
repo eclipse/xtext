@@ -35,6 +35,7 @@ import org.eclipse.xtext.common.types.JvmConstructor;
 import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeReference;
+import org.eclipse.xtext.common.types.TypesPackage;
 import org.eclipse.xtext.common.types.access.jdt.IJavaProjectProvider;
 import org.eclipse.xtext.common.types.util.TypeReferences;
 import org.eclipse.xtext.diagnostics.Diagnostic;
@@ -87,6 +88,7 @@ public class XtendQuickfixProvider extends XbaseQuickfixProvider {
 	private static final Set<String> LINKING_ISSUE_CODES = newHashSet(
 			IssueCodes.FEATURECALL_LINKING_DIAGNOSTIC, 
 			Diagnostic.LINKING_DIAGNOSTIC,
+			IssueCodes.JAVA_DOC_LINKING_DIAGNOSTIC,
 			org.eclipse.xtext.xbase.validation.IssueCodes.INVALID_ARGUMENT_TYPES,
 			org.eclipse.xtext.xbase.validation.IssueCodes.INVALID_NUMBER_OF_ARGUMENTS);
 	
@@ -110,6 +112,17 @@ public class XtendQuickfixProvider extends XbaseQuickfixProvider {
 		}
 	}
 	
+	@Override
+	protected EReference getUnresolvedEReference(Issue issue, EObject target) {
+		EReference reference = super.getUnresolvedEReference(issue, target);
+		if(reference == null){
+			if(issue.getCode().equals(IssueCodes.JAVA_DOC_LINKING_DIAGNOSTIC)){
+				return TypesPackage.Literals.JVM_PARAMETERIZED_TYPE_REFERENCE__TYPE;
+			}
+		}
+		return reference;
+	}
+
 	@Override
 	protected void createLinkingIssueQuickfixes(Issue issue, IssueResolutionAcceptor issueResolutionAcceptor, 
 			IXtextDocument xtextDocument, XtextResource resource, 
