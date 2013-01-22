@@ -19,17 +19,21 @@ import org.eclipse.xtext.xbase.lib.Functions$Function1
 @InjectWith(typeof(NewTypeSystemRuntimeInjectorProvider))
 class CompilerTest2 extends AbstractCompilerTest {
 	@Test
-	@Ignore("TODO: detect recursion that does not provide any meaningful hints")
 	override testBug343096_01() throws Exception {
-		super.testBug343096_01()
+		compileJavaCode("x.Y",
+				"package x class Y {" +
+				"def <T> bug343096() {\n" + 
+				"  [T t|switch t {\n" + 
+				"    case t : bug343096\n" + 
+				"  }]" + 
+				"}}");
 	}
 	
 	@Test
-	// TODO recursion
 	override testBug343096_02() throws Exception {
 		invokeAndExpect2(
 				typeof(Functions$Function1).canonicalName,
-				"def <T> String bug343096() {
+				"def <T> bug343096() {
 				  [T t|switch t { 
 				    case t : bug343096 
 				  }].getClass.interfaces.head.canonicalName 
@@ -37,7 +41,6 @@ class CompilerTest2 extends AbstractCompilerTest {
 	}
 	
 	@Test
-	// TODO recursion
 	override testBug343096_03() throws Exception {
 		invokeAndExpect2(
 				typeof(Object).canonicalName,
@@ -61,13 +64,7 @@ class CompilerTest2 extends AbstractCompilerTest {
 	}
 	
 	@Test
-	@Ignore("TODO")
-	override testBug_352849_01() throws Exception {
-		super.testBug_352849_01()
-	}
-	
-	@Test
-	@Ignore("TODO")
+	@Ignore("TODO use the type expectation to bind type arguments")
 	override testBug_352849_02() throws Exception {
 		super.testBug_352849_02()
 	}
@@ -77,6 +74,17 @@ class CompilerTest2 extends AbstractCompilerTest {
 	override testEscapeCharacterForReservedNames() throws Exception {
 		val code = 'package x class Z {
 			  def Object create(Object x) {
+			    create(x)
+			  }
+			}'
+		val javaCode = compileToJavaCode(code)
+		javaCompiler.compileToClass("x.Z", javaCode)
+	}
+	
+	@Test
+	def void testEscapeCharacterForReservedNames_02() throws Exception {
+		val code = 'package x class Z {
+			  def create(Object x) {
 			    create(x)
 			  }
 			}'

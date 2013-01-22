@@ -42,7 +42,7 @@ public abstract class AbstractRootTypeComputationState extends AbstractTypeCompu
 	@Nullable
 	protected abstract XExpression getRootExpression();
 	
-	protected XExpression getDefiniteRootExpression() {
+	protected XExpression getNonNullRootExpression() {
 		XExpression result = getRootExpression();
 		if (result == null)
 			throw new IllegalStateException("root expression was null");
@@ -54,13 +54,13 @@ public abstract class AbstractRootTypeComputationState extends AbstractTypeCompu
 	
 	@Override
 	protected LightweightTypeReference acceptType(ResolvedTypes types, AbstractTypeExpectation expectation, LightweightTypeReference type, boolean returnType, ConformanceHint... hints) {
-		return types.acceptType(getDefiniteRootExpression(), expectation, type, returnType, hints);
+		return types.acceptType(getNonNullRootExpression(), expectation, type, returnType, hints);
 	}
 	
 	@Override
 	protected LightweightTypeReference acceptType(XExpression alreadyHandled, ResolvedTypes types, AbstractTypeExpectation expectation, LightweightTypeReference type, boolean returnType, ConformanceHint... hints) {
 		if (alreadyHandled != getRootExpression())
-			return types.acceptType(getDefiniteRootExpression(), expectation, type, returnType, hints);
+			return types.acceptType(getNonNullRootExpression(), expectation, type, returnType, hints);
 		return type;
 	}
 	

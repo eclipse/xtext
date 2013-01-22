@@ -263,6 +263,8 @@ public class DispatchAndExtensionAwareReentrantTypeResolver extends LogicalConta
 					}
 				} else {
 					OperationBodyComputationState state = new DispatchOperationBodyComputationState(dispatchCaseResolvedTypes, featureScopeSession, dispatchCase, dispatcher, this);
+					// no need to unmark the computing state since we replace the equivalent in #resolveTo
+					markComputing(dispatcher.getReturnType());
 					ITypeComputationResult dispatchCaseResult = state.computeTypes();
 					if (InferredTypeIndicator.isInferred(dispatchCase.getReturnType())) {
 						if (declaredDispatcherType == null) {

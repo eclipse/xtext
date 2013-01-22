@@ -21,16 +21,25 @@ import org.junit.runner.RunWith;
 @SuppressWarnings("all")
 public class CompilerTest2 extends AbstractCompilerTest {
   @Test
-  @Ignore(value = "TODO: detect recursion that does not provide any meaningful hints")
   public void testBug343096_01() throws Exception {
-    super.testBug343096_01();
+    String _plus = ("package x class Y {" + 
+      "def <T> bug343096() {\n");
+    String _plus_1 = (_plus + 
+      "  [T t|switch t {\n");
+    String _plus_2 = (_plus_1 + 
+      "    case t : bug343096\n");
+    String _plus_3 = (_plus_2 + 
+      "  }]");
+    String _plus_4 = (_plus_3 + 
+      "}}");
+    this.compileJavaCode("x.Y", _plus_4);
   }
   
   @Test
   public void testBug343096_02() throws Exception {
     String _canonicalName = Function1.class.getCanonicalName();
     this.invokeAndExpect2(_canonicalName, 
-      "def <T> String bug343096() {\n\t\t\t\t  [T t|switch t { \n\t\t\t\t    case t : bug343096 \n\t\t\t\t  }].getClass.interfaces.head.canonicalName \n\t\t\t\t}", "bug343096");
+      "def <T> bug343096() {\n\t\t\t\t  [T t|switch t { \n\t\t\t\t    case t : bug343096 \n\t\t\t\t  }].getClass.interfaces.head.canonicalName \n\t\t\t\t}", "bug343096");
   }
   
   @Test
@@ -53,13 +62,7 @@ public class CompilerTest2 extends AbstractCompilerTest {
   }
   
   @Test
-  @Ignore(value = "TODO")
-  public void testBug_352849_01() throws Exception {
-    super.testBug_352849_01();
-  }
-  
-  @Test
-  @Ignore(value = "TODO")
+  @Ignore(value = "TODO use the type expectation to bind type arguments")
   public void testBug_352849_02() throws Exception {
     super.testBug_352849_02();
   }
@@ -67,6 +70,13 @@ public class CompilerTest2 extends AbstractCompilerTest {
   @Test
   public void testEscapeCharacterForReservedNames() throws Exception {
     final String code = "package x class Z {\n\t\t\t  def Object create(Object x) {\n\t\t\t    create(x)\n\t\t\t  }\n\t\t\t}";
+    final String javaCode = this.compileToJavaCode(code);
+    this.javaCompiler.compileToClass("x.Z", javaCode);
+  }
+  
+  @Test
+  public void testEscapeCharacterForReservedNames_02() throws Exception {
+    final String code = "package x class Z {\n\t\t\t  def create(Object x) {\n\t\t\t    create(x)\n\t\t\t  }\n\t\t\t}";
     final String javaCode = this.compileToJavaCode(code);
     this.javaCompiler.compileToClass("x.Z", javaCode);
   }
