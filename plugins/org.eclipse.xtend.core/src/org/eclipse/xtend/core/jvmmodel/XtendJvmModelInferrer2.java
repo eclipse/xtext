@@ -234,16 +234,6 @@ public class XtendJvmModelInferrer2 implements IJvmModelInferrer {
 		inferredJvmType.setAbstract(source.isAbstract());
 		translateAnnotationsTo(source.getAnnotations(), inferredJvmType);
 		boolean isDataObject = hasAnnotation(source, Data.class);
-		JvmAnnotationType annotation = (JvmAnnotationType) typeReferences.findDeclaredType(SuppressWarnings.class,
-				source);
-		if (annotation != null && !hasAnnotation(source, SuppressWarnings.class)) {
-			JvmAnnotationReference suppressWarnings = typesFactory.createJvmAnnotationReference();
-			suppressWarnings.setAnnotation(annotation);
-			JvmStringAnnotationValue annotationValue = typesFactory.createJvmStringAnnotationValue();
-			annotationValue.getValues().add("all");
-			suppressWarnings.getValues().add(annotationValue);
-			inferredJvmType.getAnnotations().add(suppressWarnings);
-		}
 		if (source.getExtends() == null) {
 			JvmTypeReference typeRefToObject = typeReferences.getTypeForName(Object.class, source);
 			if (typeRefToObject != null)
