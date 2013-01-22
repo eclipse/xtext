@@ -21,7 +21,7 @@
 
 	<!-- Local Xtext git repository -->
 	<property name="checkout.location" value="${user.home}/git/org.eclipse.xtext/" />
-	<property name="xtend.checkout.location" value="${user.home}/git/org.eclipse.xtend/" />
+	<property name="xtend.checkout.location" value="${checkout.location}" />
 	<property name="releng.project.location" value="${checkout.location}/releng/org.eclipse.xtext.releng" />
 	<!--<property name="commands.file" value="${releng.project.location}/releng/tests/Xtext-test-buckminster-commands.txt" />-->
 	<property name="commands.file" value="${releng.project.location}/releng/local/commands.txt" />

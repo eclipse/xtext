@@ -5,18 +5,18 @@ setpref targetPlatformPath="${build.root}/target.platform"
 importtargetdefinition "${releng.project.location}/api-baseline/api-baseline.target"
 addbaseline -A "api-baseline"
 
-#import -Declipse.download="http://download.eclipse.org" "${releng.project.location}/releng/xtext-platform-${ECLIPSE.TARGET.ALIAS}.mspec"
-#resolve "${releng.project.location}/releng/xtext.cquery"
-
-#build
-#perform --properties "${releng.project.location}/releng/xtext-build.properties" "org.eclipse.xtext.build#build"
-
-importtargetdefinition  -DuseMirror=true -A "${releng.project.location}/releng/tests/tests-Galileo.target
-
-resolve "${releng.project.location}/releng/org.eclipse.xtext.releng/releng/tests/xtext-test.mspec"
+import -Declipse.download="http://download.eclipse.org" "${releng.project.location}/releng/xtext-platform-${ECLIPSE.TARGET.ALIAS}.mspec"
+resolve "${releng.project.location}/releng/xtext.cquery"
 
 build
+#perform --properties "${releng.project.location}/releng/xtext-build.properties" "org.eclipse.xtext.build#build"
 
-junit --launch "org.eclipse.xtext.common.types.tests/org.eclipse.xtext.common.types.tests.launch" --flatXML --output "${build.root}/xtext.test.results/org.eclipse.xtext.common.types.tests.xml"
+#importtargetdefinition  -DuseMirror=true -A "${releng.project.location}/releng/tests/tests-Galileo.target
+
+#resolve "${releng.project.location}/releng/org.eclipse.xtext.releng/releng/tests/xtext-test.mspec"
+
+#build
+
+#junit --launch "org.eclipse.xtext.common.types.tests/org.eclipse.xtext.common.types.tests.launch" --flatXML --output "${build.root}/xtext.test.results/org.eclipse.xtext.common.types.tests.xml"
 
 #perform --properties "${releng.project.location}/releng/xtext-build.properties" "org.eclipse.xtext.releng#setup.promoter"
