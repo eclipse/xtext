@@ -128,7 +128,7 @@ class DeclarationsTest extends AbstractXtendTestCase {
 			val genClazz = generatedTypeDeclarations.head as MutableClassDeclaration
 			
 			genClazz.addMethod('newMethod') [
-				returnType = genClazz.compilationUnit.typeReferenceProvider.string 
+				returnType = (genClazz.compilationUnit as CompilationUnitImpl).string 
 				visibility = Visibility::PRIVATE
 				body = ['''
 					return "foo";
@@ -150,6 +150,7 @@ class DeclarationsTest extends AbstractXtendTestCase {
 			
 		}
 		''').asCompilationUnit [
+			val typeReferenceProvider = (it as CompilationUnitImpl)
 			val anyType = typeReferenceProvider.anyType
 			assertTrue(anyType.anyType)
 			

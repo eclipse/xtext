@@ -10,6 +10,8 @@ package org.eclipse.xtend.core.macro.declaration
 import java.util.Map
 import javax.inject.Inject
 import org.eclipse.emf.ecore.EObject
+import org.eclipse.emf.ecore.EStructuralFeature
+import org.eclipse.xtend.core.jvmmodel.IXtendJvmAssociations
 import org.eclipse.xtend.core.macro.CompilationContextImpl
 import org.eclipse.xtend.core.xtend.XtendClass
 import org.eclipse.xtend.core.xtend.XtendConstructor
@@ -17,15 +19,20 @@ import org.eclipse.xtend.core.xtend.XtendField
 import org.eclipse.xtend.core.xtend.XtendFile
 import org.eclipse.xtend.core.xtend.XtendFunction
 import org.eclipse.xtend.core.xtend.XtendMember
+import org.eclipse.xtend.core.xtend.XtendPackage
 import org.eclipse.xtend.core.xtend.XtendParameter
 import org.eclipse.xtend.core.xtend.XtendTypeDeclaration
 import org.eclipse.xtend.lib.macro.CompilationContext
+import org.eclipse.xtend.lib.macro.Problem
+import org.eclipse.xtend.lib.macro.ProblemSupport
 import org.eclipse.xtend.lib.macro.TypeReferenceProvider
 import org.eclipse.xtend.lib.macro.declaration.CompilationUnit
+import org.eclipse.xtend.lib.macro.declaration.Element
 import org.eclipse.xtend.lib.macro.declaration.MemberDeclaration
 import org.eclipse.xtend.lib.macro.declaration.MutableClassDeclaration
 import org.eclipse.xtend.lib.macro.declaration.MutableTypeDeclaration
 import org.eclipse.xtend.lib.macro.declaration.ParameterDeclaration
+import org.eclipse.xtend.lib.macro.declaration.PrimitiveType
 import org.eclipse.xtend.lib.macro.declaration.Type
 import org.eclipse.xtend.lib.macro.declaration.TypeDeclaration
 import org.eclipse.xtend.lib.macro.declaration.TypeParameterDeclaration
@@ -39,6 +46,7 @@ import org.eclipse.xtext.common.types.JvmExecutable
 import org.eclipse.xtext.common.types.JvmField
 import org.eclipse.xtext.common.types.JvmFormalParameter
 import org.eclipse.xtext.common.types.JvmGenericType
+import org.eclipse.xtext.common.types.JvmIdentifiableElement
 import org.eclipse.xtext.common.types.JvmMember
 import org.eclipse.xtext.common.types.JvmOperation
 import org.eclipse.xtext.common.types.JvmPrimitiveType
@@ -47,17 +55,18 @@ import org.eclipse.xtext.common.types.JvmTypeParameter
 import org.eclipse.xtext.common.types.JvmTypeReference
 import org.eclipse.xtext.common.types.JvmVisibility
 import org.eclipse.xtext.common.types.JvmVoid
+import org.eclipse.xtext.common.types.TypesPackage
 import org.eclipse.xtext.common.types.util.TypeReferences
+import org.eclipse.xtext.diagnostics.Severity
+import org.eclipse.xtext.validation.EObjectDiagnosticImpl
 import org.eclipse.xtext.xbase.compiler.TypeReferenceSerializer2
 import org.eclipse.xtext.xbase.jvmmodel.JvmTypesBuilder
 import org.eclipse.xtext.xbase.typesystem.legacy.StandardTypeReferenceOwner
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference
 import org.eclipse.xtext.xbase.typesystem.references.OwnedConverter
 import org.eclipse.xtext.xbase.typesystem.util.CommonTypeComputationServices
-import org.eclipse.xtend.core.jvmmodel.IXtendJvmAssociations
-import org.eclipse.xtend.lib.macro.declaration.PrimitiveType
 
-class CompilationUnitImpl implements CompilationUnit, TypeReferenceProvider {
+class CompilationUnitImpl implements CompilationUnit, TypeReferenceProvider, ProblemSupport {
 
 	override getDocComment() {
 		throw new UnsupportedOperationException("Auto-generated function stub")
@@ -273,10 +282,6 @@ class CompilationUnitImpl implements CompilationUnit, TypeReferenceProvider {
 			]
 		]}
 
-	override getTypeReferenceProvider() {
-		return this
-	}
-	
 	override getAnyType() {
 		toTypeReference(typeReferences.createAnyTypeReference(xtendFile))
 	}
@@ -401,6 +406,96 @@ class CompilationUnitImpl implements CompilationUnit, TypeReferenceProvider {
 			val context = new CompilationContextImpl(it, this, typeRefSerializer)
 			it.append(compilationStrategy.apply(context))
 		]
+	}
+	
+	override addError(Element element, String message) {
+		val resAndObj = getResourceAndEObject(element)
+		resAndObj.key.errors.add(new EObjectDiagnosticImpl(Severity::ERROR, 'user.issue', message, resAndObj.value, getSignificantFeature(resAndObj.value), -1, null))
+	}
+	
+	override addInfo(Element element, String message) {
+//		val resAndObj = getResourceAndEObject(element)
+//		resAndObj.key.errors.add(new EObjectDiagnosticImpl(Severity::INFO, 'user.issue', message, resAndObj.value, getSignificantFeature(resAndObj.value), -1, null))
+	}
+	
+	override addWarning(Element element, String message) {
+		val resAndObj = getResourceAndEObject(element)
+		resAndObj.key.warnings.add(new EObjectDiagnosticImpl(Severity::WARNING, 'user.issue', message, resAndObj.value, getSignificantFeature(resAndObj.value), -1, null))
+	}
+	
+	override getProblems(Element element) {
+		val resAndObj = getResourceAndEObject(element)
+		val resource = resAndObj.key
+		val issues = (resource.errors + resource.warnings).filter(typeof(EObjectDiagnosticImpl))
+		
+		val result = issues.filter[diag | diag.problematicObject == resAndObj.value ].map[ diag |
+			new ProblemImpl(diag.code, diag.message, translateSeverity(diag.severity)) as Problem
+		]
+		return result.toList
+	}
+	
+	def EStructuralFeature getSignificantFeature(EObject obj) {
+		return switch obj {
+			XtendTypeDeclaration : XtendPackage::eINSTANCE.xtendTypeDeclaration_Name
+			XtendField : XtendPackage::eINSTANCE.xtendField_Name
+			XtendFunction : XtendPackage::eINSTANCE.xtendFunction_Name
+			XtendConstructor : XtendPackage::eINSTANCE.xtendConstructor_Name
+			JvmFormalParameter : TypesPackage::eINSTANCE.jvmFormalParameter_Name
+		}
+	}
+	
+	def private getResourceAndEObject(Element element) {
+		switch element {
+			XtendNamedElementImpl<? extends EObject>: {
+				val resource = element.delegate.eResource
+				val eobject = element.delegate
+				return resource -> eobject
+			}
+			JvmNamedElementImpl<JvmIdentifiableElement> : {
+				val resource = element.delegate.eResource
+				if (resource == xtendFile.eResource) {
+					val eobject = associations.getPrimarySourceElement(element.delegate)
+					return resource -> eobject
+				}
+			} 
+		}
+		throw new IllegalArgumentException("You can only add issues on locally declared elements.")
+	}
+	
+	def private Problem$Severity translateSeverity(Severity severity) {
+		switch (severity) {
+			case Severity::ERROR : Problem$Severity::ERROR
+			case Severity::WARNING : Problem$Severity::WARNING
+			case Severity::INFO : Problem$Severity::INFO
+			case Severity::IGNORE : Problem$Severity::IGNORE
+		}
+	}
+}
+
+class ProblemImpl implements Problem {
+	
+	String id
+	String message
+	Problem$Severity severity	
+	
+	new(String id,
+	String message,
+	Problem$Severity severity) {
+		this.id = id
+		this.message = message
+		this.severity = severity
+	}
+
+	override getId() {
+		return id
+	}
+	
+	override getMessage() {
+		return message
+	}
+	
+	override getSeverity() {
+		return severity
 	}
 	
 }

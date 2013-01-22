@@ -17,6 +17,7 @@ import org.eclipse.xtend.lib.macro.declaration.MutableMethodDeclaration
 import org.eclipse.xtend.lib.macro.declaration.MutableNamedElement
 import org.eclipse.xtend.lib.macro.declaration.NamedElement
 import org.eclipse.xtext.common.types.JvmMember
+import org.eclipse.xtend.lib.macro.declaration.Element
 
 class ModifyContextImpl implements ModifyContext {
 	
@@ -71,8 +72,24 @@ class ModifyContextImpl implements ModifyContext {
 		throw new UnsupportedOperationException("Auto-generated function stub")
 	}
 	
-	override getTypeReferences() {
-		throw new UnsupportedOperationException("Auto-generated function stub")
+	override getTypeReferenceProvider() {
+		return unit
+	}
+
+	override addError(Element element, String message) {
+		unit.addError(element, message)
+	}
+	
+	override addInfo(Element element, String message) {
+		unit.addInfo(element, message)
+	}
+	
+	override addWarning(Element element, String message) {
+		unit.addWarning(element, message)
+	}
+	
+	override getProblems(Element element) {
+		unit.getProblems(element)
 	}
 	
 }

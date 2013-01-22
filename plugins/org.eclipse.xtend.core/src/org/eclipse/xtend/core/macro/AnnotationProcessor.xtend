@@ -54,7 +54,7 @@ class AnnotationProcessor {
 			VirtualMachineError : throw e
 		}
 		//TODO create validation issue
-		logger.error("error while executing '"+ctx.processorInstance+"' on '"+ctx.annotatedSourceElements+"' : "+e.message)
+		logger.error("error while executing '"+ctx.processorInstance+"' : "+e.message, e)
 	}
 	
 	def inferencePhase(ActiveAnnotationContext ctx, CancelIndicator monitor) {
