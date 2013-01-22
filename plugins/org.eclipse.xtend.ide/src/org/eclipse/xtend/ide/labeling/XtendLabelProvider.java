@@ -6,11 +6,14 @@ package org.eclipse.xtend.ide.labeling;
 import org.eclipse.emf.edit.ui.provider.AdapterFactoryLabelProvider;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.xtend.core.jvmmodel.IXtendJvmAssociations;
+import org.eclipse.xtend.core.xtend.XtendAnnotationType;
 import org.eclipse.xtend.core.xtend.XtendClass;
 import org.eclipse.xtend.core.xtend.XtendConstructor;
 import org.eclipse.xtend.core.xtend.XtendField;
 import org.eclipse.xtend.core.xtend.XtendFile;
 import org.eclipse.xtend.core.xtend.XtendFunction;
+import org.eclipse.xtend.ide.internal.XtendActivator;
+import org.eclipse.xtext.common.types.JvmAnnotationType;
 import org.eclipse.xtext.common.types.JvmConstructor;
 import org.eclipse.xtext.common.types.JvmField;
 import org.eclipse.xtext.common.types.JvmGenericType;
@@ -55,6 +58,11 @@ public class XtendLabelProvider extends XbaseLabelProvider {
 	public Image image(XtendClass element) {
 		JvmGenericType inferredType = associations.getInferredType(element);
 		return images.forClass(inferredType.getVisibility());
+	}
+
+	public Image image(XtendAnnotationType element) {
+		JvmAnnotationType inferredType = associations.getInferredAnnotationType(element);
+		return images.forAnnotation(inferredType.getVisibility());
 	}
 
 	public Image image(XtendFunction element) {
