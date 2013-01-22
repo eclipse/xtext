@@ -26,6 +26,9 @@ public class AssignmentArguments implements IFeatureCallArguments {
 	public AssignmentArguments(AbstractLinkingCandidate<?> candidate) {
 		XAssignment assignment = (XAssignment) candidate.getExpression();
 		declaredType = candidate.getActualType(candidate.getFeature());
+		if (declaredType == null) {
+			throw new IllegalStateException("declaredType may not be null");
+		}
 		value = assignment.getValue();
 	}
 
