@@ -70,13 +70,13 @@ public class CreateTypeQuickfixes implements ILinkingIssueQuickfixProvider {
 				|| unresolvedReference == TypesPackage.Literals.JVM_PARAMETERIZED_TYPE_REFERENCE__TYPE) {
 			URI context = resource.getURI();
 			String issueString = xtextDocument.get(issue.getOffset(), issue.getLength());
-			issueResolutionAcceptor.accept(issue, "Create Xtend class",
+			issueResolutionAcceptor.accept(issue, "Create Xtend class '" + issueString + "'",
 					"Opens the new Xtend class wizard to create the type '" + issueString + "'", "xtend_file.png",
 					openNewXtendClassWizardFor(context, issueString));
-			issueResolutionAcceptor.accept(issue, "Create Java class",
+			issueResolutionAcceptor.accept(issue, "Create Java class '" + issueString + "'",
 					"Opens the new Java class wizard to create the type '" + issueString + "'", "java_file.gif",
 					openNewJavaClassWizardFor(context, issueString));
-			issueResolutionAcceptor.accept(issue, "Create Java interface",
+			issueResolutionAcceptor.accept(issue, "Create Java interface '" + issueString + "'",
 					"Opens the new Java interface wizard to create the type '" + issueString + "'",
 					"java_interface.gif", openNewJavaInterfaceWizardFor(context, issueString));
 		}

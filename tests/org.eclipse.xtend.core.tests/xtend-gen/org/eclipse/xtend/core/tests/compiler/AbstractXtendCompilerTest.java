@@ -5376,7 +5376,7 @@ public abstract class AbstractXtendCompilerTest extends AbstractXtendTestCase {
     _builder_1.newLine();
     this.assertCompilesTo(_builder, _builder_1, generatorConfig);
   }
-
+  
   @Test
   public void compileWithConfiguration_2() {
     final GeneratorConfig generatorConfig = this.generatorConfigProvider.get(null);
@@ -5438,7 +5438,7 @@ public abstract class AbstractXtendCompilerTest extends AbstractXtendTestCase {
     _builder_1.newLine();
     this.assertCompilesTo(_builder, _builder_1, generatorConfig);
   }
-
+  
   @Test
   public void compileWithConfiguration_3() {
     final GeneratorConfig generatorConfig = this.generatorConfigProvider.get(null);
@@ -5592,7 +5592,7 @@ public abstract class AbstractXtendCompilerTest extends AbstractXtendTestCase {
     _builder_1.newLine();
     this.assertCompilesTo(_builder, _builder_1);
   }
-
+  
   @Test
   public void compileImportForTypeRefInJavaDoc_2() {
     StringConcatenation _builder = new StringConcatenation();
@@ -5680,7 +5680,7 @@ public abstract class AbstractXtendCompilerTest extends AbstractXtendTestCase {
     _builder_1.newLine();
     this.assertCompilesTo(_builder, _builder_1);
   }
-
+  
   @Test
   @Ignore
   public void compileProperty() {

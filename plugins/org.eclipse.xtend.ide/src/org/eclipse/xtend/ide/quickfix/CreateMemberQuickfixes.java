@@ -311,27 +311,29 @@ public class CreateMemberQuickfixes implements ILinkingIssueQuickfixProvider {
 	protected void newConstructorQuickfix(Issue issue, IssueResolutionAcceptor issueResolutionAcceptor,
 			XConstructorCall call) {
 		JvmDeclaredType ownerType = call.getConstructor().getDeclaringType();
-		AbstractConstructorBuilder constructorBuilder = codeBuilderFactory.createConstructorBuilder(ownerType);
-		constructorBuilder.setContext(call);
-		constructorBuilder.setParameterTypes(getResolvedArgumentTypes(call, call.getArguments()));
-		constructorBuilder.setVisibility(JvmVisibility.PUBLIC);
-		StringBuffer label = new StringBuffer("Create constructor '");
-		if(constructorBuilder.getOwnerSource() instanceof XtendClass)
-			label.append("new");
-		else
-			label.append(ownerType.getSimpleName());
-		label.append("(");
-		boolean isFirst = true;
-		for(JvmTypeReference parameterType: constructorBuilder.getParameterTypes()) {
-			if(!isFirst) 
-				label.append(", ");
-			isFirst = false;
-			label.append(parameterType.getSimpleName());
+		if(ownerType != null) {
+			AbstractConstructorBuilder constructorBuilder = codeBuilderFactory.createConstructorBuilder(ownerType);
+			constructorBuilder.setContext(call);
+			constructorBuilder.setParameterTypes(getResolvedArgumentTypes(call, call.getArguments()));
+			constructorBuilder.setVisibility(JvmVisibility.PUBLIC);
+			StringBuffer label = new StringBuffer("Create constructor '");
+			if(constructorBuilder.getOwnerSource() instanceof XtendClass)
+				label.append("new");
+			else
+				label.append(ownerType.getSimpleName());
+			label.append("(");
+			boolean isFirst = true;
+			for(JvmTypeReference parameterType: constructorBuilder.getParameterTypes()) {
+				if(!isFirst) 
+					label.append(", ");
+				isFirst = false;
+				label.append(parameterType.getSimpleName());
+			}
+			label.append(")'");
+			if(getCallersType(call) != ownerType) 
+				label.append(" in '").append(ownerType.getSimpleName()).append("'");
+			quickfixFactory.addQuickfix(constructorBuilder, label.toString(), issue, issueResolutionAcceptor);
 		}
-		label.append(")'");
-		if(getCallersType(call) != ownerType) 
-			label.append(" in '").append(ownerType.getSimpleName()).append("'");
-		quickfixFactory.addQuickfix(constructorBuilder, label.toString(), issue, issueResolutionAcceptor);
 	}
 	
 	/**

@@ -1439,4 +1439,40 @@ public class QuickfixTest extends AbstractXtendUITestCase {
     _builder_1.newLine();
     _assertResolutionLabels.assertModelAfterQuickfix(_builder_1);
   }
+  
+  @Test
+  public void missingClass() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("class Foo {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("Bar| bar");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    QuickfixTestBuilder _create = this.builder.create("Foo.xtend", _builder);
+    QuickfixTestBuilder _assertIssueCodes = _create.assertIssueCodes(Diagnostic.LINKING_DIAGNOSTIC);
+    _assertIssueCodes.assertResolutionLabelsSubset("Create Xtend class \'Bar\'", "Create Java class \'Bar\'", "Create Java interface \'Bar\'");
+  }
+  
+  @Test
+  public void missingClassAndConstructor() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("class Foo {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def foo() {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("new Bar|");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    QuickfixTestBuilder _create = this.builder.create("Foo.xtend", _builder);
+    QuickfixTestBuilder _assertIssueCodes = _create.assertIssueCodes(Diagnostic.LINKING_DIAGNOSTIC);
+    _assertIssueCodes.assertResolutionLabelsSubset("Create Xtend class \'Bar\'", "Create Java class \'Bar\'", "Create Java interface \'Bar\'");
+  }
 }

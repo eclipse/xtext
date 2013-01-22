@@ -3,6 +3,7 @@ package org.eclipse.xtend.ide.tests.quickfix;
 import com.google.common.collect.Iterables;
 import com.google.inject.Inject;
 import java.util.List;
+import java.util.Set;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.xtend.ide.tests.WorkbenchTestHelper;
@@ -127,6 +128,40 @@ public class QuickfixTestBuilder {
         };
       Iterable<String> _map_1 = IterableExtensions.<IssueResolution, String>map(resolutions, _function_1);
       this.assertEqual(((List<String>)Conversions.doWrapArray(resolutionLabels)), _map_1);
+      _xblockexpression = (this);
+    }
+    return _xblockexpression;
+  }
+  
+  public QuickfixTestBuilder assertResolutionLabelsSubset(final String... expectedLabels) {
+    QuickfixTestBuilder _xblockexpression = null;
+    {
+      Iterable<Issue> _issuesAtCaret = this.getIssuesAtCaret();
+      final Function1<Issue,List<IssueResolution>> _function = new Function1<Issue,List<IssueResolution>>() {
+          public List<IssueResolution> apply(final Issue it) {
+            List<IssueResolution> _resolutions = QuickfixTestBuilder.this._issueResolutionProvider.getResolutions(it);
+            return _resolutions;
+          }
+        };
+      Iterable<List<IssueResolution>> _map = IterableExtensions.<Issue, List<IssueResolution>>map(_issuesAtCaret, _function);
+      Iterable<IssueResolution> _flatten = Iterables.<IssueResolution>concat(_map);
+      final Function1<IssueResolution,String> _function_1 = new Function1<IssueResolution,String>() {
+          public String apply(final IssueResolution it) {
+            String _label = it.getLabel();
+            return _label;
+          }
+        };
+      Iterable<String> _map_1 = IterableExtensions.<IssueResolution, String>map(_flatten, _function_1);
+      final Set<String> actualLabels = IterableExtensions.<String>toSet(_map_1);
+      final Procedure1<String> _function_2 = new Procedure1<String>() {
+          public void apply(final String it) {
+            String _plus = ("Label \'" + it);
+            String _plus_1 = (_plus + "\' missing");
+            boolean _contains = actualLabels.contains(it);
+            Assert.assertTrue(_plus_1, _contains);
+          }
+        };
+      IterableExtensions.<String>forEach(((Iterable<String>)Conversions.doWrapArray(expectedLabels)), _function_2);
       _xblockexpression = (this);
     }
     return _xblockexpression;
