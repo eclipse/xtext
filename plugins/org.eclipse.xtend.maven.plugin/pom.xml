@@ -45,7 +45,8 @@
 			<version>2.2.3</version>
 			<scope>runtime</scope>
 		</dependency>
-		<!-- Explicit antl-runtime dependency to 3.2 to avoid loading of mismatched transitive dependencies -->
+		<!-- Explicit antl-runtime dependency to 3.2 to avoid loading of mismatched 
+			transitive dependencies -->
 		<dependency>
 			<groupId>org.antlr</groupId>
 			<artifactId>antlr-runtime</artifactId>
@@ -114,13 +115,17 @@
 						<phase>pre-integration-test</phase>
 						<configuration>
 							<target unless="maven.test.skip">
-								<property name="src.jar" value="${project.build.directory}/${project.build.finalName}.jar" />
+								<property name="src.jar"
+									value="${project.build.directory}/${project.build.finalName}.jar" />
 								<property name="it.jar.name" value="${project.build.finalName}-it" />
-								<property name="it.jar.directory" value="${project.build.directory}/${it.jar.name}" />
+								<property name="it.jar.directory"
+									value="${project.build.directory}/${it.jar.name}" />
 								<unzip src="${src.jar}" dest="${it.jar.directory}" />
-								<replaceregexp file="${it.jar.directory}/META-INF/maven/plugin.xml" match="&lt;version&gt;(.*)&lt;/version&gt;"
-									replace="&lt;version&gt;IT-SNAPSHOT&lt;/version&gt;" byline="false" />
-								<jar destfile="${project.build.directory}/${it.jar.name}.jar" basedir="${it.jar.directory}" />
+								<replaceregexp file="${it.jar.directory}/META-INF/maven/plugin.xml"
+									match="&lt;version&gt;(.*)&lt;/version&gt;" replace="&lt;version&gt;IT-SNAPSHOT&lt;/version&gt;"
+									byline="false" />
+								<jar destfile="${project.build.directory}/${it.jar.name}.jar"
+									basedir="${it.jar.directory}" />
 							</target>
 						</configuration>
 						<goals>
@@ -152,6 +157,12 @@
 				<artifactId>maven-surefire-plugin</artifactId>
 				<configuration>
 					<argLine>-Xmx1024m -XX:MaxPermSize=512m</argLine>
+					<excludes>
+						<exclude>**/*Test.java</exclude>
+					</excludes>
+					<includes>
+						<include>**/*IT.java</include>
+					</includes>
 				</configuration>
 				<executions>
 					<execution>
@@ -159,11 +170,6 @@
 						<goals>
 							<goal>test</goal>
 						</goals>
-						<configuration>
-							<includes>
-								<include>**/*IT.java</include>
-							</includes>
-						</configuration>
 					</execution>
 				</executions>
 			</plugin>
