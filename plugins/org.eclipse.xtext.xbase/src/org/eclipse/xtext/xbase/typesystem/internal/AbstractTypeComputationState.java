@@ -19,6 +19,7 @@ import org.eclipse.xtext.common.types.JvmConstructor;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmMember;
+import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.util.TypeReferences;
 import org.eclipse.xtext.diagnostics.AbstractDiagnostic;
 import org.eclipse.xtext.diagnostics.Severity;
@@ -194,6 +195,11 @@ public abstract class AbstractTypeComputationState implements ITypeComputationSt
 			}
 		}
 		featureScopeSession = featureScopeSession.addLocalElement(elementName, element, getReferenceOwner());
+	}
+	
+	public void assignType(QualifiedName name, JvmType rawType, LightweightTypeReference actualType) {
+		resolvedTypes.reassignTypeWithoutMerge(rawType, actualType);
+		featureScopeSession = featureScopeSession.addLocalElement(name, rawType, getReferenceOwner());
 	}
 	
 	public TypeAssigner assignTypes() {

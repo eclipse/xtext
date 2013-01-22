@@ -281,6 +281,11 @@ abstract class AbstractFeatureCallTypeTest extends AbstractXbaseTestCase {
 		  new testdata.ClosureClient().invoke0(closure)	}".resolvesFeatureCallsTo("String", "()=>String")
 	}
 	
+	@Test def void testClosure_02() throws Exception {
+		"{ var com.google.common.collect.AbstractIterator<String> iter = [| return self.endOfData ] }"
+			.resolvesFeatureCallsTo("AbstractIterator<String>", "String")
+	}
+	
 	@Test
 	def void testClosure_03() throws Exception {
 		("{\n" + 
@@ -295,6 +300,21 @@ abstract class AbstractFeatureCallTypeTest extends AbstractXbaseTestCase {
 		"  var java.util.List<? super String> list = null;\n" + 
 		"  list.map(e|false)\n" +
 		"}").resolvesFeatureCallsTo("List<? super String>", "List<Boolean>")
+	}
+	
+	@Test def void testClosure_05() throws Exception {
+		"{ 
+			var com.google.common.collect.AbstractIterator<java.util.Iterator<String>> iter = [|
+				if (true) {
+					val com.google.common.collect.AbstractIterator<String> result = [|
+						return self.endOfData
+					]
+					return result
+				}
+				return self.endOfData
+			]
+		}"
+			.resolvesFeatureCallsTo("AbstractIterator<String>", "String", "AbstractIterator<String>", "AbstractIterator<Iterator<String>>", "Iterator<String>")
 	}
 
 	@Test def void testClosure_07() throws Exception {

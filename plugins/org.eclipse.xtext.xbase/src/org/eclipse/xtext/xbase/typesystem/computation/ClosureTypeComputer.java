@@ -14,12 +14,14 @@ import java.util.Map;
 import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
+import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.JvmTypeParameterDeclarator;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.xbase.XClosure;
+import org.eclipse.xtext.xbase.scoping.batch.IFeatureNames;
 import org.eclipse.xtext.xbase.typesystem.conformance.ConformanceHint;
 import org.eclipse.xtext.xbase.typesystem.references.AnyTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.FunctionTypeReference;
@@ -241,7 +243,15 @@ public class ClosureTypeComputer {
 				resultClosureType.addParameterType(objectType);
 			}
 		}
-		return typeAssigner.getForkedState();
+		ITypeComputationState result = typeAssigner.getForkedState();
+		LightweightTypeReference expectedType = expectation.getExpectedType();
+		if (expectedType != null) {
+			JvmType knownType = expectedType.getType();
+			if (knownType != null && knownType instanceof JvmGenericType) {
+				result.assignType(IFeatureNames.SELF, knownType, expectedType);
+			}
+		}
+		return result;
 	}
 
 	protected void processExpressionType(ITypeComputationResult expressionResult) {

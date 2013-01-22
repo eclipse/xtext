@@ -13,8 +13,10 @@ import java.util.List;
 import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
+import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.diagnostics.AbstractDiagnostic;
+import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.XConstructorCall;
 import org.eclipse.xtext.xbase.XExpression;
@@ -180,6 +182,12 @@ public class CompoundTypeComputationState implements ITypeComputationState {
 	public void addLocalToCurrentScope(JvmIdentifiableElement element) {
 		for (int i = 0; i < components.length; i++) {
 			components[i].addLocalToCurrentScope(element);
+		}
+	}
+	
+	public void assignType(QualifiedName name, JvmType rawType, LightweightTypeReference actualType) {
+		for (int i = 0; i < components.length; i++) {
+			components[i].assignType(name, rawType, actualType);
 		}
 	}
 

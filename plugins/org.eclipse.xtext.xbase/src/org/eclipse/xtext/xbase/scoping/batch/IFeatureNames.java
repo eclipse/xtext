@@ -20,5 +20,6 @@ public interface IFeatureNames {
 	QualifiedName THIS = QualifiedName.create("this");
 	QualifiedName SUPER = QualifiedName.create("super");
 	QualifiedName IT = QualifiedName.create("it");
+	QualifiedName SELF = QualifiedName.create("self");
 	
 }
