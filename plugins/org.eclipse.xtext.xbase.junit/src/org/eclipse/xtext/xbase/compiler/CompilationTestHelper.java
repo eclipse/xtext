@@ -7,6 +7,10 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.compiler;
 
+import static com.google.common.collect.Lists.newArrayList;
+import static com.google.common.collect.Maps.newHashMap;
+import static java.util.Collections.emptyMap;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;
@@ -17,7 +21,6 @@ import org.apache.log4j.Logger;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
-import org.eclipse.emf.ecore.resource.URIConverter;
 import org.eclipse.emf.ecore.resource.impl.ExtensibleURIConverterImpl;
 import org.eclipse.xtext.diagnostics.Severity;
 import org.eclipse.xtext.generator.IGenerator;
@@ -37,12 +40,6 @@ import org.junit.Assert;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 
-import static java.util.Collections.*;
-
-import static com.google.common.collect.Lists.*;
-
-import static com.google.common.collect.Maps.*;
-
 /**
  * @author Sven Efftinge
  */
@@ -55,6 +52,13 @@ public class CompilationTestHelper {
 	@Inject private Provider<XtextResourceSet> resourceSetProvider;
 	
 	@Inject private FileExtensionProvider extensionProvider;
+	
+	public void setJavaCompilerClassPath(Class<?> ...classes) {
+		javaCompiler.clearClassPath();
+		for (Class<?> clazz : classes) {
+			javaCompiler.addClassPathOfClass(clazz);
+		}
+	}
 	
 	/**
 	 * Asserts that the expected code is generated for the given source.
