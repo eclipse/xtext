@@ -8,6 +8,7 @@ import org.junit.After
 import org.junit.Test
 import org.junit.Ignore
 import org.eclipse.xtext.diagnostics.Diagnostic
+import org.eclipse.xtext.xbase.validation.IssueCodes
 
 class QuickfixTest extends AbstractXtendUITestCase {
 	
@@ -791,6 +792,29 @@ class QuickfixTest extends AbstractXtendUITestCase {
 		.assertIssueCodes(Diagnostic::LINKING_DIAGNOSTIC)
 		.assertResolutionLabelsSubset("Create Xtend class 'Bar'", "Create Java class 'Bar'", "Create Java interface 'Bar'")
 	}
+
+	@Test
+	def void missingTypeStaticAccess() {
+		create('Foo.xtend', '''
+			class Foo {
+				def foo() {
+					Collections|::sort
+				}
+			}
+		''')
+		.assertIssueCodes(FEATURECALL_LINKING_DIAGNOSTIC)
+		.assertResolutionLabelsSubset("Import 'Collections' (java.util)")
+		.assertModelAfterQuickfix('''
+			import java.util.Collections
+			
+			class Foo {
+				def foo() {
+					Collections::sort
+				}
+			}
+		''')	
+	}
+	
 	
 }
 
