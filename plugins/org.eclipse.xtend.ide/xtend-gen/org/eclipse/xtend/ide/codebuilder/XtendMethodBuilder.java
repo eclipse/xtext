@@ -19,6 +19,7 @@ import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.JvmVisibility;
 import org.eclipse.xtext.xbase.compiler.IAppendable;
 import org.eclipse.xtext.xbase.compiler.TypeReferenceSerializer;
+import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 
 @SuppressWarnings("all")
 public class XtendMethodBuilder extends AbstractMethodBuilder implements Xtend {
@@ -27,6 +28,19 @@ public class XtendMethodBuilder extends AbstractMethodBuilder implements Xtend {
   
   @Inject
   private InsertionOffsets _insertionOffsets;
+  
+  public boolean isValid() {
+    boolean _and = false;
+    boolean _isValid = super.isValid();
+    if (!_isValid) {
+      _and = false;
+    } else {
+      String _methodName = this.getMethodName();
+      boolean _notEquals = ObjectExtensions.operator_notEquals(_methodName, null);
+      _and = (_isValid && _notEquals);
+    }
+    return _and;
+  }
   
   protected TypeReferenceSerializer getTypeReferenceSerializer() {
     return this.typeRefSerializer;

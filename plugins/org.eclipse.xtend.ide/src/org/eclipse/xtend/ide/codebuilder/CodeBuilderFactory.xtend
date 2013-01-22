@@ -15,6 +15,7 @@ import com.google.inject.Provider
 import org.eclipse.xtext.common.types.util.jdt.IJavaElementFinder
 import org.eclipse.jdt.core.IType
 import org.eclipse.xtend.core.xtend.XtendClass
+import org.eclipse.jdt.annotation.NonNullByDefault
 
 /** 
  * Creates {@link ICodeBuilder}s to insert Java or Xtend code snippets into an {@link IAppendable}.
@@ -22,6 +23,7 @@ import org.eclipse.xtend.core.xtend.XtendClass
  * @author Sebastian Benz - Inspiration
  * @author Jan Koehnlein - Initial implementation and API 
  */
+@NonNullByDefault
 class CodeBuilderFactory {
 	
 	@Inject extension IXtendJvmAssociations

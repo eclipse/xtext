@@ -89,6 +89,8 @@ public class AbstractBuilderTest extends AbstractXtendUITestCase {
   }
   
   protected void assertBuilds(final ICodeBuilder builder, final String expectedCode) {
+    boolean _isValid = builder.isValid();
+    Assert.assertTrue(_isValid);
     StringBuilderBasedAppendable _stringBuilderBasedAppendable = new StringBuilderBasedAppendable();
     final StringBuilderBasedAppendable appendable = _stringBuilderBasedAppendable;
     builder.build(appendable);

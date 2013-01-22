@@ -9,6 +9,7 @@ package org.eclipse.xtend.ide.codebuilder;
 
 import com.google.inject.Inject;
 import com.google.inject.Provider;
+import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.jdt.core.IJavaElement;
 import org.eclipse.jdt.core.IType;
 import org.eclipse.xtend.core.jvmmodel.IXtendJvmAssociations;
@@ -33,6 +34,7 @@ import org.eclipse.xtext.xbase.lib.ObjectExtensions;
  * @author Sebastian Benz - Inspiration
  * @author Jan Koehnlein - Initial implementation and API
  */
+@NonNullByDefault
 @SuppressWarnings("all")
 public class CodeBuilderFactory {
   @Inject

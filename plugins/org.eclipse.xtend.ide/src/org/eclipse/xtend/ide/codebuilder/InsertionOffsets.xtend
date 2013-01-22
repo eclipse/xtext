@@ -14,12 +14,14 @@ import org.eclipse.xtend.core.xtend.XtendField
 import org.eclipse.xtend.core.xtend.XtendMember
 import org.eclipse.xtext.EcoreUtil2
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils
+import org.eclipse.jdt.annotation.NonNullByDefault
 
 /**
  * Calculates where to insert new members into exisitng Xtend code.
  * 
  * @author Jan Koehnlein
  */
+@NonNullByDefault
 class InsertionOffsets {
 
 	def getNewFieldInsertOffset(EObject call, XtendClass ownerClass) {

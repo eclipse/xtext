@@ -22,6 +22,7 @@ abstract class AbstractFieldBuilder extends AbstractCodeBuilder {
 	
 	@Property String fieldName
 	@Property JvmTypeReference fieldType
+	
 } 
 
 class XtendFieldBuilder extends AbstractFieldBuilder implements ICodeBuilder$Xtend {
@@ -29,6 +30,10 @@ class XtendFieldBuilder extends AbstractFieldBuilder implements ICodeBuilder$Xte
 	@Inject XtendTypeReferenceSerializer typeRefSerializer
 
 	@Inject extension InsertionOffsets
+	
+	override isValid() {
+		super.isValid() && fieldName != null
+	}
 	
 	override protected getTypeReferenceSerializer() {
 		typeRefSerializer
@@ -52,6 +57,10 @@ class JavaFieldBuilder extends AbstractFieldBuilder implements ICodeBuilder$Java
 	
 	@Inject TypeReferenceSerializer typeRefSerializer
 
+	override isValid() {
+		super.isValid() && fieldName != null && fieldType != null
+	}
+	
 	override protected getTypeReferenceSerializer() {
 		typeRefSerializer
 	}

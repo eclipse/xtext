@@ -69,7 +69,7 @@ class JavaConstructorBuilder extends AbstractConstructorBuilder implements ICode
 	
 	override build(IAppendable appendable) {
 		appendable
-			.appendVisibility(visibility, JvmVisibility::PRIVATE)
+			.appendVisibility(visibility, JvmVisibility::PUBLIC)
 			.append(owner.simpleName)
 			.appendParameters(parameterTypes)
 			.append(' {').increaseIndentation.newLine

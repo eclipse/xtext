@@ -24,10 +24,13 @@ import org.eclipse.xtext.common.types.xtext.ui.JdtVariableCompletions
 import org.eclipse.xtext.xbase.compiler.IAppendable
 import org.eclipse.xtext.xbase.compiler.StringBuilderBasedAppendable
 import org.eclipse.xtext.xbase.compiler.TypeReferenceSerializer
+import org.eclipse.jdt.annotation.NonNullByDefault
+import org.eclipse.xtext.common.types.util.jdt.IJavaElementFinder
 
 /** 
  * @author Jan Koehnlein
  */
+@NonNullByDefault
 abstract class AbstractCodeBuilder implements ICodeBuilder {
 
 	@Property Object ownerSource
@@ -36,6 +39,13 @@ abstract class AbstractCodeBuilder implements ICodeBuilder {
 	@Property EObject context
 	
 	@Inject extension JdtVariableCompletions
+	@Inject extension IJavaElementFinder
+	
+	override isValid() {
+		val javaElement = owner.findElementFor
+		return (javaElement == null || !javaElement.readOnly) 
+			&& ownerSource != null && owner != null && context != null
+	}
 	
 	override preview() {
 		val appendable = new StringBuilderBasedAppendable
@@ -43,10 +53,10 @@ abstract class AbstractCodeBuilder implements ICodeBuilder {
 		appendable.toString
 	}
 	
-	def protected appendVisibility(IAppendable appendable, JvmVisibility visibility, JvmVisibility defaultVisibility) {
+	def protected appendVisibility(IAppendable appendable, JvmVisibility visibility, JvmVisibility skippableDefault) {
 		appendable.append(
 			switch visibility {
-				case defaultVisibility: ''
+				case skippableDefault: ''
 				case JvmVisibility::PRIVATE: 'private '
 				case JvmVisibility::PROTECTED: 'protected '
 				case JvmVisibility::PUBLIC: 'public '

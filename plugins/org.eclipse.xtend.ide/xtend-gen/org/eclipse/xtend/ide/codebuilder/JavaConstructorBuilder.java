@@ -29,7 +29,7 @@ public class JavaConstructorBuilder extends AbstractConstructorBuilder implement
   
   public IAppendable build(final IAppendable appendable) {
     JvmVisibility _visibility = this.getVisibility();
-    IAppendable _appendVisibility = this.appendVisibility(appendable, _visibility, JvmVisibility.PRIVATE);
+    IAppendable _appendVisibility = this.appendVisibility(appendable, _visibility, JvmVisibility.PUBLIC);
     JvmDeclaredType _owner = this.getOwner();
     String _simpleName = _owner.getSimpleName();
     IAppendable _append = _appendVisibility.append(_simpleName);

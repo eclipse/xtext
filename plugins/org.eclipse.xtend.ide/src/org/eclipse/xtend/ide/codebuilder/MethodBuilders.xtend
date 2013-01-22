@@ -37,6 +37,10 @@ class XtendMethodBuilder extends AbstractMethodBuilder implements ICodeBuilder$X
 
 	@Inject extension InsertionOffsets
 
+	override isValid() {
+		super.isValid() && methodName != null
+	}
+	
 	override protected getTypeReferenceSerializer() {
 		typeRefSerializer
 	}
@@ -65,6 +69,10 @@ class JavaMethodBuilder extends AbstractMethodBuilder implements ICodeBuilder$Ja
 	
 	@Inject TypeReferenceSerializer typeRefSerializer
 
+	override isValid() {
+		super.isValid() && methodName != null && returnType != null
+	}
+	
 	override protected getTypeReferenceSerializer() {
 		typeRefSerializer
 	}

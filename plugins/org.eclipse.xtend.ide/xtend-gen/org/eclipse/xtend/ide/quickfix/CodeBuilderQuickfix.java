@@ -60,28 +60,31 @@ public class CodeBuilderQuickfix {
   private Factory appendableFactory;
   
   public void addQuickfix(final ICodeBuilder builder, final String label, final Issue issue, final IssueResolutionAcceptor acceptor) {
-    IModification _switchResult = null;
-    boolean _matched = false;
-    if (!_matched) {
-      if (builder instanceof Xtend) {
-        final Xtend _xtend = (Xtend)builder;
-        _matched=true;
-        IModification _xtendModification = this.getXtendModification(_xtend);
-        _switchResult = _xtendModification;
+    boolean _isValid = builder.isValid();
+    if (_isValid) {
+      IModification _switchResult = null;
+      boolean _matched = false;
+      if (!_matched) {
+        if (builder instanceof Xtend) {
+          final Xtend _xtend = (Xtend)builder;
+          _matched=true;
+          IModification _xtendModification = this.getXtendModification(_xtend);
+          _switchResult = _xtendModification;
+        }
       }
-    }
-    if (!_matched) {
-      if (builder instanceof Java) {
-        final Java _java = (Java)builder;
-        _matched=true;
-        IModification _javaModification = this.getJavaModification(_java);
-        _switchResult = _javaModification;
+      if (!_matched) {
+        if (builder instanceof Java) {
+          final Java _java = (Java)builder;
+          _matched=true;
+          IModification _javaModification = this.getJavaModification(_java);
+          _switchResult = _javaModification;
+        }
       }
+      final IModification modification = _switchResult;
+      String _preview = builder.preview();
+      String _image = this.getImage(builder);
+      acceptor.accept(issue, label, _preview, _image, modification);
     }
-    final IModification modification = _switchResult;
-    String _preview = builder.preview();
-    String _image = this.getImage(builder);
-    acceptor.accept(issue, label, _preview, _image, modification);
   }
   
   protected String getImage(final ICodeBuilder builder) {

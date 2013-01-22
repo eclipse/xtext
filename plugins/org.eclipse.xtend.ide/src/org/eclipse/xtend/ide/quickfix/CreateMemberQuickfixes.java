@@ -16,6 +16,8 @@ import java.util.List;
 import org.apache.log4j.Logger;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
+import org.eclipse.jdt.annotation.NonNullByDefault;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtend.core.xtend.XtendClass;
 import org.eclipse.xtend.core.xtend.XtendMember;
 import org.eclipse.xtend.ide.codebuilder.AbstractConstructorBuilder;
@@ -66,6 +68,7 @@ import com.google.inject.Inject;
 /**
  * @author Jan Koehnlein - Initial contribution and API
  */
+@NonNullByDefault
 public class CreateMemberQuickfixes implements ILinkingIssueQuickfixProvider {
 
 	private static final Logger LOG = Logger.getLogger(CreateMemberQuickfixes.class);
@@ -84,9 +87,6 @@ public class CreateMemberQuickfixes implements ILinkingIssueQuickfixProvider {
 
 	@Inject
 	private ILogicalContainerProvider logicalContainerProvider;
-	
-	@Inject
-	private IJavaElementFinder javaElementFinder;
 	
 	@Inject
 	private TypeResolver typeResolver;
@@ -150,6 +150,7 @@ public class CreateMemberQuickfixes implements ILinkingIssueQuickfixProvider {
 		return prefix + fieldName.substring(0,1).toUpperCase() + fieldName.substring(1);
 	}
 
+	@Nullable
 	protected JvmTypeReference getNewMemberType(XAbstractFeatureCall call) {
 		if(call instanceof XAssignment) {
 			XExpression value = ((XAssignment) call).getValue();
@@ -160,6 +161,7 @@ public class CreateMemberQuickfixes implements ILinkingIssueQuickfixProvider {
 		}
 	}
 	
+	@Nullable
 	protected JvmTypeReference getReceiverType(XAbstractFeatureCall featureCall) {
 		XExpression actualReceiver = featureCall.getActualReceiver();
 		if(actualReceiver == null) {
@@ -172,11 +174,13 @@ public class CreateMemberQuickfixes implements ILinkingIssueQuickfixProvider {
 		return null;
 	}
 
+	@Nullable
 	protected JvmDeclaredType getCallersType(XExpression call) {
 		JvmIdentifiableElement nearestLogicalContainer = logicalContainerProvider.getNearestLogicalContainer(call);
 		return EcoreUtil2.getContainerOfType(nearestLogicalContainer, JvmDeclaredType.class);
 	}
 	
+	@Nullable
 	protected String getOperatorMethodName(XAbstractFeatureCall call) {
 		for(INode node: NodeModelUtils.findNodesForFeature(call, XbasePackage.Literals.XABSTRACT_FEATURE_CALL__FEATURE)) {
 			for(ILeafNode leafNode: node.getLeafNodes()) {
@@ -202,7 +206,7 @@ public class CreateMemberQuickfixes implements ILinkingIssueQuickfixProvider {
 		issueResolutionAcceptor.accept(issue, "Create local variable '" + variableName + "'",
 				localVarDescriptionBuilder.toString(), "fix_local_var.png",
 				new SemanticModificationWrapper(issue.getUriToProblem(), new ISemanticModification() {
-					public void apply(final EObject element, final IModificationContext context) throws Exception {
+					public void apply(@Nullable final EObject element, @Nullable final IModificationContext context) throws Exception {
 						if (element != null) {
 							XtendMember xtendMember = EcoreUtil2.getContainerOfType(element, XtendMember.class);
 							if (xtendMember != null) {
@@ -225,53 +229,51 @@ public class CreateMemberQuickfixes implements ILinkingIssueQuickfixProvider {
 			final Issue issue, final IssueResolutionAcceptor issueResolutionAcceptor) {
 		JvmDeclaredType callersType = getCallersType(call);
 		JvmTypeReference receiverType = getReceiverType(call);
-		JvmTypeReference newMemberType = getNewMemberType(call);
+		JvmTypeReference returnType = getNewMemberType(call);
+		if(callersType == null || receiverType == null)
+			return;
 		List<JvmTypeReference> argumentTypes = getResolvedArgumentTypes(call, call.getActualArguments());
-		newMethodQuickfixes(receiverType, newMemberName, newMemberType, argumentTypes, call, callersType, issue,
+		newMethodQuickfixes(receiverType, newMemberName, returnType, argumentTypes, call, callersType, issue,
 				issueResolutionAcceptor);
 	}
 
-	protected void newMethodQuickfixes(JvmTypeReference containerType, String name, JvmTypeReference returnType,
-			List<JvmTypeReference> argumentTypes, XAbstractFeatureCall call, JvmDeclaredType callersType,
-			final Issue issue, final IssueResolutionAcceptor issueResolutionAcceptor) {
-		if(containerType != null) {
-			boolean isLocal = callersType == containerType.getType();
-			if(containerType.getType() instanceof JvmDeclaredType) 
-				newMethodQuickfix((JvmDeclaredType) containerType.getType(), name, returnType, argumentTypes, false, isLocal, call, issue, issueResolutionAcceptor);
-			if(!isLocal) {
-				List<JvmTypeReference> extensionMethodParameterTypes = newArrayList(argumentTypes);
-				extensionMethodParameterTypes.add(0, containerType);
-				newMethodQuickfix(callersType, name, returnType, extensionMethodParameterTypes, true, true, call, issue, issueResolutionAcceptor);
-			}
+	protected void newMethodQuickfixes(JvmTypeReference containerType, String name, @Nullable JvmTypeReference returnType,
+		List<JvmTypeReference> argumentTypes, XAbstractFeatureCall call, JvmDeclaredType callersType,
+		final Issue issue, final IssueResolutionAcceptor issueResolutionAcceptor) {
+		boolean isLocal = callersType == containerType.getType();
+		if(containerType.getType() instanceof JvmDeclaredType) 
+			newMethodQuickfix((JvmDeclaredType) containerType.getType(), name, returnType, argumentTypes, false, isLocal, call, issue, issueResolutionAcceptor);
+		if(!isLocal) {
+			List<JvmTypeReference> extensionMethodParameterTypes = newArrayList(argumentTypes);
+			extensionMethodParameterTypes.add(0, containerType);
+			newMethodQuickfix(callersType, name, returnType, extensionMethodParameterTypes, true, true, call, issue, issueResolutionAcceptor);
 		}
 	}
 	
-	protected void newMethodQuickfix(JvmDeclaredType containerType, String name, JvmTypeReference returnType,
-			List<JvmTypeReference> parameterTypes, boolean isExtension, boolean isLocal, XAbstractFeatureCall call, 
-			final Issue issue, final IssueResolutionAcceptor issueResolutionAcceptor) {
-		if(!javaElementFinder.findElementFor(containerType).isReadOnly()) {
-			AbstractMethodBuilder methodBuilder = codeBuilderFactory.createMethodBuilder(containerType);
-			methodBuilder.setMethodName(name);
-			methodBuilder.setReturnType(returnType);
-			methodBuilder.setParameterTypes(parameterTypes);
-			methodBuilder.setContext(call);
-			methodBuilder.setVisibility(JvmVisibility.PUBLIC);
-			StringBuffer label = new StringBuffer("Create ");
-			if(isExtension)
-				label.append("extension ");
-			label.append("method '").append(name).append("(");
-			boolean isFirst = true;
-			for(JvmTypeReference parameterType: parameterTypes) {
-				if(!isFirst) 
-					label.append(", ");
-				isFirst = false;
-				label.append(parameterType.getSimpleName());
-			}
-			label.append(")'");
-			if(!isLocal)
-				label.append(" in '" + containerType.getSimpleName() + "'");
-			quickfixFactory.addQuickfix(methodBuilder, label.toString(), issue, issueResolutionAcceptor);
+	protected void newMethodQuickfix(JvmDeclaredType containerType, String name, @Nullable JvmTypeReference returnType,
+		List<JvmTypeReference> parameterTypes, boolean isExtension, boolean isLocal, XAbstractFeatureCall call, 
+		final Issue issue, final IssueResolutionAcceptor issueResolutionAcceptor) {
+		AbstractMethodBuilder methodBuilder = codeBuilderFactory.createMethodBuilder(containerType);
+		methodBuilder.setMethodName(name);
+		methodBuilder.setReturnType(returnType);
+		methodBuilder.setParameterTypes(parameterTypes);
+		methodBuilder.setContext(call);
+		methodBuilder.setVisibility(JvmVisibility.PUBLIC);
+		StringBuffer label = new StringBuffer("Create ");
+		if(isExtension)
+			label.append("extension ");
+		label.append("method '").append(name).append("(");
+		boolean isFirst = true;
+		for(JvmTypeReference parameterType: parameterTypes) {
+			if(!isFirst) 
+				label.append(", ");
+			isFirst = false;
+			label.append(parameterType.getSimpleName());
 		}
+		label.append(")'");
+		if(!isLocal)
+			label.append(" in '" + containerType.getSimpleName() + "'");
+		quickfixFactory.addQuickfix(methodBuilder, label.toString(), issue, issueResolutionAcceptor);
 	}
 	
 	protected void newSetterQuickfix(Issue issue, IssueResolutionAcceptor issueResolutionAcceptor,
@@ -284,9 +286,11 @@ public class CreateMemberQuickfixes implements ILinkingIssueQuickfixProvider {
 		JvmDeclaredType callersType = getCallersType(call);
 		JvmTypeReference receiverType = getReceiverType(call);
 		JvmTypeReference fieldType = getNewMemberType(call);
-		newMethodQuickfixes(receiverType, getAccessorMethodName("get", name), 
-				fieldType, Collections.<JvmTypeReference>emptyList(), call, 
-				callersType, issue, issueResolutionAcceptor);
+		if(callersType != null && receiverType != null) {
+			newMethodQuickfixes(receiverType, getAccessorMethodName("get", name), 
+					fieldType, Collections.<JvmTypeReference>emptyList(), call, 
+					callersType, issue, issueResolutionAcceptor);
+		}
 	}
 
 	protected void newFieldQuickfix(String name, XAbstractFeatureCall call, 
@@ -294,21 +298,19 @@ public class CreateMemberQuickfixes implements ILinkingIssueQuickfixProvider {
 		JvmDeclaredType callersType = getCallersType(call);
 		JvmTypeReference receiverType = getReceiverType(call);
 		JvmTypeReference fieldType = getNewMemberType(call);
-		if(receiverType != null && callersType == receiverType.getType()) 
+		if(callersType != null && receiverType != null && callersType == receiverType.getType()) 
 			newFieldQuickfix(callersType, name, fieldType, call, issue, issueResolutionAcceptor);
 	}
 
-	protected void newFieldQuickfix(JvmDeclaredType containerType, String name, JvmTypeReference fieldType,
-			XAbstractFeatureCall call, final Issue issue, final IssueResolutionAcceptor issueResolutionAcceptor) {
-		if(!javaElementFinder.findElementFor(containerType).isReadOnly()) {
-			AbstractFieldBuilder fieldBuilder = codeBuilderFactory.createFieldBuilder(containerType);
-			fieldBuilder.setFieldName(name);
-			fieldBuilder.setFieldType(fieldType);
-			fieldBuilder.setContext(call);
-			fieldBuilder.setVisibility(JvmVisibility.PRIVATE);
-			StringBuilder label = new StringBuilder("Create field '").append(name).append("'");
-			quickfixFactory.addQuickfix(fieldBuilder, label.toString(), issue, issueResolutionAcceptor);
-		}
+	protected void newFieldQuickfix(JvmDeclaredType containerType, String name, @Nullable JvmTypeReference fieldType,
+		XAbstractFeatureCall call, final Issue issue, final IssueResolutionAcceptor issueResolutionAcceptor) {
+		AbstractFieldBuilder fieldBuilder = codeBuilderFactory.createFieldBuilder(containerType);
+		fieldBuilder.setFieldName(name);
+		fieldBuilder.setFieldType(fieldType);
+		fieldBuilder.setContext(call);
+		fieldBuilder.setVisibility(JvmVisibility.PRIVATE);
+		StringBuilder label = new StringBuilder("Create field '").append(name).append("'");
+		quickfixFactory.addQuickfix(fieldBuilder, label.toString(), issue, issueResolutionAcceptor);
 	}
 	
 	protected void newConstructorQuickfix(Issue issue, IssueResolutionAcceptor issueResolutionAcceptor,
@@ -344,14 +346,12 @@ public class CreateMemberQuickfixes implements ILinkingIssueQuickfixProvider {
 	 */
 	protected int getFirstOffsetOfKeyword(EObject object, String keyword) {
 		int offset = -1;
-		if (object != null) {
-			ICompositeNode node = NodeModelUtils.getNode(object);
-			if (node != null) {
-				for (ILeafNode leafNode : node.getLeafNodes()) {
-					if (leafNode.getGrammarElement() instanceof Keyword
-							&& equal(keyword, ((Keyword) leafNode.getGrammarElement()).getValue())) {
-						return leafNode.getOffset() + 1;
-					}
+		ICompositeNode node = NodeModelUtils.getNode(object);
+		if (node != null) {
+			for (ILeafNode leafNode : node.getLeafNodes()) {
+				if (leafNode.getGrammarElement() instanceof Keyword
+						&& equal(keyword, ((Keyword) leafNode.getGrammarElement()).getValue())) {
+					return leafNode.getOffset() + 1;
 				}
 			}
 		}
@@ -361,8 +361,8 @@ public class CreateMemberQuickfixes implements ILinkingIssueQuickfixProvider {
 	/**
 	 * @since 2.3
 	 */
-	protected String getDefaultValueLiteral(JvmTypeReference type) {
-		if (primitives.isPrimitive(type)) {
+	protected String getDefaultValueLiteral(@Nullable JvmTypeReference type) {
+		if (type != null && primitives.isPrimitive(type)) {
 			Primitive primitiveKind = primitives.primitiveKind((JvmPrimitiveType) type.getType());
 			if (primitiveKind == Primitive.Boolean)
 				return "false";

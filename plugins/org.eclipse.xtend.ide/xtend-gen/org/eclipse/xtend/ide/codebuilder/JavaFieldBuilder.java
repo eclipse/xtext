@@ -15,11 +15,33 @@ import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.JvmVisibility;
 import org.eclipse.xtext.xbase.compiler.IAppendable;
 import org.eclipse.xtext.xbase.compiler.TypeReferenceSerializer;
+import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 
 @SuppressWarnings("all")
 public class JavaFieldBuilder extends AbstractFieldBuilder implements Java {
   @Inject
   private TypeReferenceSerializer typeRefSerializer;
+  
+  public boolean isValid() {
+    boolean _and = false;
+    boolean _and_1 = false;
+    boolean _isValid = super.isValid();
+    if (!_isValid) {
+      _and_1 = false;
+    } else {
+      String _fieldName = this.getFieldName();
+      boolean _notEquals = ObjectExtensions.operator_notEquals(_fieldName, null);
+      _and_1 = (_isValid && _notEquals);
+    }
+    if (!_and_1) {
+      _and = false;
+    } else {
+      JvmTypeReference _fieldType = this.getFieldType();
+      boolean _notEquals_1 = ObjectExtensions.operator_notEquals(_fieldType, null);
+      _and = (_and_1 && _notEquals_1);
+    }
+    return _and;
+  }
   
   protected TypeReferenceSerializer getTypeReferenceSerializer() {
     return this.typeRefSerializer;

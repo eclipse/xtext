@@ -10,6 +10,7 @@ package org.eclipse.xtend.ide.codebuilder;
 import com.google.common.collect.Iterables;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.xtend.core.xtend.XtendClass;
 import org.eclipse.xtend.core.xtend.XtendConstructor;
 import org.eclipse.xtend.core.xtend.XtendField;
@@ -27,6 +28,7 @@ import org.eclipse.xtext.xbase.lib.ObjectExtensions;
  * 
  * @author Jan Koehnlein
  */
+@NonNullByDefault
 @SuppressWarnings("all")
 public class InsertionOffsets {
   public int getNewFieldInsertOffset(final EObject call, final XtendClass ownerClass) {

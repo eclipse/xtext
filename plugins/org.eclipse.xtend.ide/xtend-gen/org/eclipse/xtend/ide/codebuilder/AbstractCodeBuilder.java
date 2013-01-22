@@ -13,6 +13,8 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.jdt.annotation.NonNullByDefault;
+import org.eclipse.jdt.core.IJavaElement;
 import org.eclipse.xtend.ide.codebuilder.ICodeBuilder;
 import org.eclipse.xtend.ide.codebuilder.VariableNameAcceptor;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
@@ -20,6 +22,7 @@ import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.JvmVisibility;
+import org.eclipse.xtext.common.types.util.jdt.IJavaElementFinder;
 import org.eclipse.xtext.common.types.xtext.ui.JdtVariableCompletions;
 import org.eclipse.xtext.common.types.xtext.ui.JdtVariableCompletions.VariableType;
 import org.eclipse.xtext.xbase.compiler.IAppendable;
@@ -31,6 +34,7 @@ import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 /**
  * @author Jan Koehnlein
  */
+@NonNullByDefault
 @SuppressWarnings("all")
 public abstract class AbstractCodeBuilder implements ICodeBuilder {
   private Object _ownerSource;
@@ -76,6 +80,48 @@ public abstract class AbstractCodeBuilder implements ICodeBuilder {
   @Inject
   private JdtVariableCompletions _jdtVariableCompletions;
   
+  @Inject
+  private IJavaElementFinder _iJavaElementFinder;
+  
+  public boolean isValid() {
+    JvmDeclaredType _owner = this.getOwner();
+    final IJavaElement javaElement = this._iJavaElementFinder.findElementFor(_owner);
+    boolean _and = false;
+    boolean _and_1 = false;
+    boolean _and_2 = false;
+    boolean _or = false;
+    boolean _equals = ObjectExtensions.operator_equals(javaElement, null);
+    if (_equals) {
+      _or = true;
+    } else {
+      boolean _isReadOnly = javaElement.isReadOnly();
+      boolean _not = (!_isReadOnly);
+      _or = (_equals || _not);
+    }
+    if (!_or) {
+      _and_2 = false;
+    } else {
+      Object _ownerSource = this.getOwnerSource();
+      boolean _notEquals = ObjectExtensions.operator_notEquals(_ownerSource, null);
+      _and_2 = (_or && _notEquals);
+    }
+    if (!_and_2) {
+      _and_1 = false;
+    } else {
+      JvmDeclaredType _owner_1 = this.getOwner();
+      boolean _notEquals_1 = ObjectExtensions.operator_notEquals(_owner_1, null);
+      _and_1 = (_and_2 && _notEquals_1);
+    }
+    if (!_and_1) {
+      _and = false;
+    } else {
+      EObject _context = this.getContext();
+      boolean _notEquals_2 = ObjectExtensions.operator_notEquals(_context, null);
+      _and = (_and_1 && _notEquals_2);
+    }
+    return _and;
+  }
+  
   public String preview() {
     String _xblockexpression = null;
     {
@@ -92,11 +138,11 @@ public abstract class AbstractCodeBuilder implements ICodeBuilder {
     return _xblockexpression;
   }
   
-  protected IAppendable appendVisibility(final IAppendable appendable, final JvmVisibility visibility, final JvmVisibility defaultVisibility) {
+  protected IAppendable appendVisibility(final IAppendable appendable, final JvmVisibility visibility, final JvmVisibility skippableDefault) {
     String _switchResult = null;
     boolean _matched = false;
     if (!_matched) {
-      if (Objects.equal(visibility,defaultVisibility)) {
+      if (Objects.equal(visibility,skippableDefault)) {
         _matched=true;
         _switchResult = "";
       }
