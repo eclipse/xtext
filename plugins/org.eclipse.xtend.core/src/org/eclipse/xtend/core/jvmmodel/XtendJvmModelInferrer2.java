@@ -615,7 +615,7 @@ public class XtendJvmModelInferrer2 implements IJvmModelInferrer {
 	}
 	
 	protected void transform(XtendField source, JvmGenericType container) {
-		if (source.isExtension() || source.getName() != null) {
+		if ((source.isExtension() && source.getType() != null) || source.getName() != null) {
 			JvmField field = typesFactory.createJvmField();
 			final String computeFieldName = computeFieldName(source);
 			field.setSimpleName(computeFieldName);
