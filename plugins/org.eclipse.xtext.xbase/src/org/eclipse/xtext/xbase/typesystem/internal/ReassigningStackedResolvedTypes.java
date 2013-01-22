@@ -62,7 +62,7 @@ public class ReassigningStackedResolvedTypes extends StackedResolvedTypes {
 	}
 	
 	@Override
-	protected void addDiagnostic(AbstractDiagnostic diagnostic) {
+	public void addDiagnostic(AbstractDiagnostic diagnostic) {
 		getParent().addDiagnostic(diagnostic);
 	}
 	
