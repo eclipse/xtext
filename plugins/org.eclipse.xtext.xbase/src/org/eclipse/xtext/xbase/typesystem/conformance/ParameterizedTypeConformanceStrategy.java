@@ -116,7 +116,13 @@ public class ParameterizedTypeConformanceStrategy<TypeReference extends Paramete
 			}
 			TypeConformanceComputationArgument paramWithoutSuperTypeCheck = new TypeConformanceComputationArgument(
 					param.rawType, true, param.allowPrimitiveConversion, param.allowPrimitiveWidening, param.unboundComputationAddsHints, param.allowSynonyms);
-			LightweightTypeReference rightSuperType = rightReference.getSuperType(leftReference.getType());
+			if (leftType instanceof JvmPrimitiveType) {
+				leftType = leftReference.getWrapperTypeIfPrimitive().getType();
+			}
+			if (leftType == null) {
+				throw new IllegalStateException("Cannot determine raw type for " + leftType);
+			}
+			LightweightTypeReference rightSuperType = rightReference.getSuperType(leftType);
 			if (rightSuperType != null) {
 				TypeConformanceResult result = conformanceComputer.isConformant(leftReference, rightSuperType, paramWithoutSuperTypeCheck);
 				if (result.isConformant()) {
