@@ -24,6 +24,7 @@ abstract class AbstractFieldBuilder extends AbstractCodeBuilder {
 	
 	@Property String fieldName
 	@Property JvmTypeReference fieldType
+	@Property boolean staticFlag
 	
 	override getImage() {
 		switch visibility {
@@ -51,7 +52,9 @@ class XtendFieldBuilder extends AbstractFieldBuilder implements ICodeBuilder$Xte
 	
 	override build(IAppendable appendable) {
 		appendable.appendVisibility(visibility, PRIVATE)
-			.appendType(fieldType, "Object").append(' ').append(fieldName)
+		if(staticFlag)
+			appendable.append('static ')
+		appendable.appendType(fieldType, "Object").append(' ').append(fieldName)
 	}
 
 	override getInsertOffset() {
@@ -81,7 +84,9 @@ class JavaFieldBuilder extends AbstractFieldBuilder implements ICodeBuilder$Java
 	
 	override build(IAppendable appendable) {
 		appendable.appendVisibility(visibility, DEFAULT)
-			.appendType(fieldType, "Object").append(' ').append(fieldName).append(';')
+		if(staticFlag)
+			appendable.append('static ')
+		appendable.appendType(fieldType, "Object").append(' ').append(fieldName).append(';')
 	}
 
 	override getIType() {

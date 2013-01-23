@@ -26,6 +26,7 @@ abstract class AbstractMethodBuilder extends AbstractCodeBuilder {
 	@Property String methodName
 	@Property JvmTypeReference returnType
 	@Property List<JvmTypeReference> parameterTypes = emptyList
+	@Property boolean staticFlag
 
 	def protected appendDefaultBody(IAppendable appendable, String statementSeparator) {
 		appendable.append('throw new UnsupportedOperationException("TODO: auto-generated method stub")')
@@ -59,7 +60,9 @@ class XtendMethodBuilder extends AbstractMethodBuilder implements ICodeBuilder$X
 	override build(IAppendable appendable) {
 		appendable.append('def ')
 			.appendVisibility(visibility, PUBLIC)
-			.append(methodName)
+		if(staticFlag)
+			appendable.append('static ')
+		appendable.append(methodName)
 			.appendParameters(parameterTypes)
 			.append(' {').increaseIndentation.newLine
 			.appendDefaultBody('')
@@ -85,7 +88,7 @@ class JavaMethodBuilder extends AbstractMethodBuilder implements ICodeBuilder$Ja
 	@Inject TypeReferenceSerializer typeRefSerializer
 
 	override isValid() {
-		super.isValid() && methodName != null && returnType != null
+		super.isValid() && methodName != null
 	}
 	
 	override protected getTypeReferenceSerializer() {
@@ -94,7 +97,10 @@ class JavaMethodBuilder extends AbstractMethodBuilder implements ICodeBuilder$Ja
 	
 	override build(IAppendable appendable) {
 		appendable
-			.appendVisibility(visibility, PRIVATE)
+			.appendVisibility(visibility, DEFAULT)
+		if(staticFlag)
+			appendable.append('static ')
+		appendable
 			.appendType(returnType, "void").append(' ')
 			.append(methodName)
 			.appendParameters(parameterTypes)
