@@ -24,6 +24,7 @@ import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmTypeConstraint;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.JvmTypeReference;
+import org.eclipse.xtext.common.types.JvmUpperBound;
 import org.eclipse.xtext.common.types.JvmVisibility;
 import org.eclipse.xtext.common.types.util.ITypeArgumentContext;
 import org.eclipse.xtext.common.types.util.TypeArgumentContextProvider;
@@ -122,7 +123,7 @@ public class MemberFromSuperImplementor {
 					appendable.append(", ");
 				isFirst = false;
 				appendable.append(typeParameter);
-				if(!typeParameter.getConstraints().isEmpty()) {
+				if(!isCall && !typeParameter.getConstraints().isEmpty() && !hasDefaultUpperBounds(typeParameter)) {
 					appendable.append(" extends ");
 					boolean isFirstConstraint = true;
 					for(JvmTypeConstraint constraint: typeParameter.getConstraints()) {
@@ -177,6 +178,13 @@ public class MemberFromSuperImplementor {
 			}
 		}
 		appendable.append(")");
+	}
+	
+	protected boolean hasDefaultUpperBounds(JvmTypeParameter typeParameter) {
+		return typeParameter.getConstraints().size() == 1 
+				&& typeParameter.getConstraints().get(0) instanceof JvmUpperBound 
+				&& equal("java.lang.Object", typeParameter.getConstraints().get(0).getTypeReference().getIdentifier());
+			
 	}
 
 	public int getFunctionInsertOffset(XtendClass clazz) {
