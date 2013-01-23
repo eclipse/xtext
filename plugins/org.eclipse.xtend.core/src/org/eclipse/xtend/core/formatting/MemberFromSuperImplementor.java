@@ -12,7 +12,6 @@ import static org.eclipse.xtext.util.Strings.*;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.xtend.core.compiler.XtendTypeReferenceSerializer;
 import org.eclipse.xtend.core.jvmmodel.IXtendJvmAssociations;
 import org.eclipse.xtend.core.xtend.XtendClass;
 import org.eclipse.xtext.Keyword;
@@ -35,6 +34,7 @@ import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 import org.eclipse.xtext.xbase.compiler.IAppendable;
 import org.eclipse.xtext.xbase.compiler.StringBuilderBasedAppendable;
 import org.eclipse.xtext.xbase.compiler.TypeReferenceSerializer;
+import org.eclipse.xtext.xbase.compiler.output.XtypeTypeReferenceSerializer;
 
 import com.google.inject.Inject;
 
@@ -49,7 +49,7 @@ public class MemberFromSuperImplementor {
 	private TypeArgumentContextProvider typeArgumentContextProvider;
 
 	@Inject
-	private XtendTypeReferenceSerializer typeReferenceSerializer;
+	private XtypeTypeReferenceSerializer typeReferenceSerializer;
 
 	@Inject
 	private TypeReferences typeReferences;

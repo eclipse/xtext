@@ -22,7 +22,6 @@ import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.jface.text.BadLocationException;
-import org.eclipse.xtend.core.compiler.XtendTypeReferenceSerializer;
 import org.eclipse.xtend.core.formatting.MemberFromSuperImplementor;
 import org.eclipse.xtend.core.services.XtendGrammarAccess;
 import org.eclipse.xtend.core.validation.IssueCodes;
@@ -53,6 +52,7 @@ import org.eclipse.xtext.util.StopWatch;
 import org.eclipse.xtext.validation.Issue;
 import org.eclipse.xtext.xbase.XBlockExpression;
 import org.eclipse.xtext.xbase.XExpression;
+import org.eclipse.xtext.xbase.compiler.output.XtypeTypeReferenceSerializer;
 import org.eclipse.xtext.xbase.ui.contentassist.ReplacingAppendable;
 import org.eclipse.xtext.xbase.ui.quickfix.XbaseQuickfixProvider;
 
@@ -68,7 +68,7 @@ public class XtendQuickfixProvider extends XbaseQuickfixProvider {
 	
 	@Inject	private ReplacingAppendable.Factory appendableFactory;
 	
-	@Inject	private XtendTypeReferenceSerializer typeRefSerializer;
+	@Inject	private XtypeTypeReferenceSerializer typeRefSerializer;
 	
 	@Inject	private TypeReferences typeRefs;
 	
