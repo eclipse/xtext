@@ -14,6 +14,7 @@ import static org.eclipse.xtext.xbase.validation.IssueCodes.*;
 import org.eclipse.xtend.core.tests.NewTypeSystemRuntimeInjectorProvider;
 import org.eclipse.xtend.core.xtend.XtendClass;
 import org.eclipse.xtend.core.xtend.XtendFile;
+import org.eclipse.xtend.core.xtend.XtendFunction;
 import org.eclipse.xtext.junit4.InjectWith;
 import org.eclipse.xtext.junit4.XtextRunner;
 import org.junit.Test;
@@ -26,6 +27,43 @@ import org.junit.runner.RunWith;
 @InjectWith(NewTypeSystemRuntimeInjectorProvider.class)
 public class XtendValidationTest2 extends XtendValidationTest {
 
+	@Override
+	@Test
+	public void testInaccessibleMethod2() throws Exception {
+		super.testInaccessibleMethod2();
+	}
+	
+	@Test
+	public void testInaccessibleMethod3() throws Exception {
+		XtendClass xtendClass = clazz("class Foo { def foo() { val o = new Object() clone() }}");
+		helper.assertNoErrors(xtendClass);
+	}
+	
+	@Test
+	public void testInaccessibleMethod4() throws Exception {
+		XtendClass xtendClass = clazz("class Foo { def foo() { val o = new Object() this.clone super.clone }}");
+		helper.assertNoErrors(xtendClass);
+	}
+	
+	@Test
+	public void testInaccessibleMethod5() throws Exception {
+		XtendClass xtendClass = clazz("package java.lang class Foo { def foo() { val o = new Object() o.clone }}");
+		helper.assertNoErrors(xtendClass);
+	}
+	
+	@Override
+	@Test 
+	public void testBug343096() throws Exception {
+		XtendFunction function = function(
+				"def <T> test() {\n" + 
+				"  [T t|switch t {\n" + 
+				"    case t:test\n" + 
+				"  }]\n" + 
+				"}");
+		helper.assertNoErrors(function);
+		helper.assertWarning(function, XTEND_FUNCTION, TOO_LITTLE_TYPE_INFORMATION, "recursive", "'Object'");
+	}
+	
 	@Override
 	@Test public void testShadowingVariableNames_00() throws Exception {
 		XtendClass clazz = clazz("class X { def foo() { val this = 'foo' } }");
