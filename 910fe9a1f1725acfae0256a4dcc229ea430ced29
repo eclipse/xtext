@@ -1,0 +1,9 @@
+Verified+1: Hudson CI
+Code-Review+2: Sebastian Zarnekow <Sebastian.Zarnekow@itemis.de>
+IP-Clean+1: Sebastian Zarnekow <Sebastian.Zarnekow@itemis.de>
+Verified+1: Sebastian Zarnekow <Sebastian.Zarnekow@itemis.de>
+Submitted-by: Sebastian Zarnekow <Sebastian.Zarnekow@itemis.de>
+Submitted-at: Wed, 23 Jan 2013 15:00:05 -0500
+Reviewed-on: https://git.eclipse.org/r/9866
+Project: tmf/org.eclipse.xtext
+Branch: refs/heads/master
