@@ -95,6 +95,66 @@ Task 'resolve binding' took 252ms (240 measurements).
 Task 'secondary (i.e. Macros) JVM Model inference' took 3ms (400 measurements).
 Task 'validation' took 5203ms (200 measurements).
 
+2013-01-18 / Sebastian - new type system
+
+Task 'build' took 34014ms (7 measurements).
+Task 'parsing' took 1405ms (200 measurements).
+Task 'primary JVM Model inference' took 1393ms (400 measurements).
+Task '[macros] findActiveAnnotations' took 749ms (400 measurements).
+Task 'Crosslink resolution' took 2699ms (16600 measurements).
+Task 'resolve param names' took 0ms (0 measurements).
+Task 'resolve annotations' took 382ms (11876 measurements).
+Task 'resolve members' took 1598ms (920 measurements).
+Task 'resolve typeParams' took 13ms (1360 measurements).
+Task 'resolve binding' took 334ms (316 measurements).
+Task 'JdtBasedTypeFactory.createType' took 1690ms (316 measurements).
+Task 'secondary (i.e. Macros) JVM Model inference' took 3ms (400 measurements).
+Task 'DefaultReentrantTypeResolver.resolve' took 18305ms (200 measurements).
+Task 'LightweightTypeReference.copyInto' took 235ms (1591000 measurements).
+Task 'LightweightTypeReference#internalIsAssignableFrom' took 3539ms (1102600 measurements).
+Task 'DeclaratorTypeArgumentCollector.getTypeParameterMapping' took 275ms (124600 measurements).
+Task 'UnboundTypeReference.copyInto' took 41ms (99200 measurements).
+Task 'LightweightTypeReference#collectSuperTypes' took 13ms (1000 measurements).
+Task 'validation' took 2789ms (200 measurements).
+
+(7 vs 10 measurements for the build ... huh?!?)
+
+Task 'build' took 40698ms (10 measurements).
+Task 'parsing' took 1475ms (250 measurements).
+Task 'primary JVM Model inference' took 1604ms (500 measurements).
+Task '[macros] findActiveAnnotations' took 889ms (500 measurements).
+Task 'Crosslink resolution' took 3010ms (20750 measurements).
+Task 'resolve param names' took 0ms (0 measurements).
+Task 'resolve annotations' took 391ms (14845 measurements).
+Task 'resolve members' took 1582ms (1150 measurements).
+Task 'resolve typeParams' took 20ms (1700 measurements).
+Task 'resolve binding' took 383ms (395 measurements).
+Task 'JdtBasedTypeFactory.createType' took 1658ms (395 measurements).
+Task 'secondary (i.e. Macros) JVM Model inference' took 2ms (500 measurements).
+Task 'DefaultReentrantTypeResolver.resolve' took 21187ms (250 measurements).
+Task 'LightweightTypeReference.copyInto' took 304ms (1988750 measurements).
+Task 'LightweightTypeReference#internalIsAssignableFrom' took 4050ms (1378250 measurements).
+Task 'DeclaratorTypeArgumentCollector.getTypeParameterMapping' took 335ms (155750 measurements).
+Task 'UnboundTypeReference.copyInto' took 46ms (124000 measurements).
+Task 'LightweightTypeReference#collectSuperTypes' took 18ms (1250 measurements).
+Task 'validation' took 3221ms (250 measurements).
+
+2013-01-18 / Sebastian - old type system
+
+Task 'build' took 39030ms (10 measurements).
+Task 'parsing' took 1487ms (250 measurements).
+Task 'primary JVM Model inference' took 1732ms (500 measurements).
+Task '[macros] findActiveAnnotations' took 841ms (500 measurements).
+Task 'Crosslink resolution' took 26299ms (58750 measurements).
+Task 'resolve param names' took 110ms (5 measurements).
+Task 'resolve annotations' took 152ms (7925 measurements).
+Task 'resolve members' took 1008ms (850 measurements).
+Task 'resolve typeParams' took 28ms (1510 measurements).
+Task 'resolve binding' took 290ms (295 measurements).
+Task 'JdtBasedTypeFactory.createType' took 1087ms (295 measurements).
+Task 'secondary (i.e. Macros) JVM Model inference' took 2ms (500 measurements).
+Task 'validation' took 5988ms (250 measurements).
+
  */
 
 public class PerformanceTest extends AbstractXtendUITestCase {
