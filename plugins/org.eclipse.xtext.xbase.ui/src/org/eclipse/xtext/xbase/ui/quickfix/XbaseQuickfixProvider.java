@@ -25,7 +25,7 @@ public class XbaseQuickfixProvider extends DefaultQuickfixProvider {
 	private OrganizeImportsHandler organizeImportsHandler;
 
 	@Inject
-	private JavaTypeQuickfixes javaTypeQuickfixes;
+	protected JavaTypeQuickfixes javaTypeQuickfixes;
 	
 	@Inject
 	private CreateJavaTypeQuickfixes createJavaTypeQuickfixes;

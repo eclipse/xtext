@@ -890,6 +890,7 @@ public class QuickfixTest extends AbstractXtendUITestCase {
     _builder_1.newLine();
     _builder_1.append("class Bar extends Foo {");
     _builder_1.newLine();
+    _builder_1.append("\t");
     _builder_1.newLine();
     _builder_1.append("\t");
     _builder_1.append("override bar() {");
@@ -934,6 +935,7 @@ public class QuickfixTest extends AbstractXtendUITestCase {
     StringConcatenation _builder_1 = new StringConcatenation();
     _builder_1.append("class Foo implements Comparable<Foo> {");
     _builder_1.newLine();
+    _builder_1.append("\t");
     _builder_1.newLine();
     _builder_1.append("\t");
     _builder_1.append("override compareTo(Foo o) {");
@@ -1254,6 +1256,7 @@ public class QuickfixTest extends AbstractXtendUITestCase {
     _builder_1.newLine();
     _builder_1.append("class Bar extends Foo {");
     _builder_1.newLine();
+    _builder_1.append("\t");
     _builder_1.newLine();
     _builder_1.append("\t");
     _builder_1.append("new(int i) {");
@@ -1263,6 +1266,8 @@ public class QuickfixTest extends AbstractXtendUITestCase {
     _builder_1.newLine();
     _builder_1.append("\t");
     _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("\t");
     _builder_1.newLine();
     _builder_1.append("}");
     _builder_1.newLine();
@@ -1512,6 +1517,30 @@ public class QuickfixTest extends AbstractXtendUITestCase {
   }
   
   @Test
+  public void missingSuperClass() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("class Foo extends Bar| {");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    QuickfixTestBuilder _create = this.builder.create("Foo.xtend", _builder);
+    QuickfixTestBuilder _assertIssueCodes = _create.assertIssueCodes(Diagnostic.LINKING_DIAGNOSTIC, IssueCodes.CLASS_EXPECTED);
+    _assertIssueCodes.assertResolutionLabelsSubset("Create Xtend class \'Bar\'", "Create Java class \'Bar\'", "Create local Xtend class \'Bar\'");
+  }
+  
+  @Test
+  public void missingSuperInterface() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("class Foo implements Bar| {");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    QuickfixTestBuilder _create = this.builder.create("Foo.xtend", _builder);
+    QuickfixTestBuilder _assertIssueCodes = _create.assertIssueCodes(Diagnostic.LINKING_DIAGNOSTIC, IssueCodes.INTERFACE_EXPECTED);
+    _assertIssueCodes.assertResolutionLabelsSubset("Create Java interface \'Bar\'");
+  }
+  
+  @Test
   public void missingTypeStaticAccess() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("class Foo {");
@@ -1661,9 +1690,10 @@ public class QuickfixTest extends AbstractXtendUITestCase {
     _builder_1.newLine();
     _builder_1.append("class B extends A {");
     _builder_1.newLine();
+    _builder_1.append("\t");
     _builder_1.newLine();
     _builder_1.append("\t");
-    _builder_1.append("override <T extends Object> test(List<T> t, (Object)=>String a) {");
+    _builder_1.append("override <T> test(List<T> t, (Object)=>String a) {");
     _builder_1.newLine();
     _builder_1.append("\t\t");
     _builder_1.append(QuickfixTest.defaultBody, "		");
