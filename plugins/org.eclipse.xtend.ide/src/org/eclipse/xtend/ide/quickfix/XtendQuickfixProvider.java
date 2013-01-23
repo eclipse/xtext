@@ -22,12 +22,13 @@ import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.jface.text.BadLocationException;
-import org.eclipse.xtend.core.formatting.MemberFromSuperImplementor;
 import org.eclipse.xtend.core.services.XtendGrammarAccess;
 import org.eclipse.xtend.core.validation.IssueCodes;
 import org.eclipse.xtend.core.xtend.XtendClass;
 import org.eclipse.xtend.core.xtend.XtendFunction;
 import org.eclipse.xtend.ide.buildpath.XtendLibClasspathAdder;
+import org.eclipse.xtend.ide.codebuilder.InsertionOffsets;
+import org.eclipse.xtend.ide.codebuilder.MemberFromSuperImplementor;
 import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.Keyword;
 import org.eclipse.xtext.common.types.JvmConstructor;
@@ -74,6 +75,8 @@ public class XtendQuickfixProvider extends XbaseQuickfixProvider {
 	
 	@Inject private XtendGrammarAccess grammarAccess;
 	
+	@Inject private InsertionOffsets insertionOffsets;
+
 	@Inject private MemberFromSuperImplementor superMemberImplementor;
 	
 	@Inject	private XtendLibClasspathAdder xtendLibAdder;
@@ -179,7 +182,7 @@ public class XtendQuickfixProvider extends XbaseQuickfixProvider {
 						public void apply(EObject element, IModificationContext context) throws Exception {
 							XtendClass clazz = (XtendClass) element;
 							ReplacingAppendable appendable = appendableFactory.get(context.getXtextDocument(), clazz,
-									superMemberImplementor.getConstructorInsertOffset(clazz), 0);
+									insertionOffsets.getNewConstructorInsertOffset(null, clazz), 0);
 							EObject constructor = clazz.eResource().getResourceSet().getEObject(constructorURI, true);
 							appendable.increaseIndentation().newLine();
 							if (constructor instanceof JvmConstructor) {
@@ -203,7 +206,7 @@ public class XtendQuickfixProvider extends XbaseQuickfixProvider {
 							XtendClass clazz = (XtendClass) element;
 							IXtextDocument document = context.getXtextDocument();
 							ReplacingAppendable appendable = appendableFactory.get(document, clazz,
-									superMemberImplementor.getFunctionInsertOffset(clazz), 0);
+									insertionOffsets.getNewMethodInsertOffset(null, clazz), 0);
 							appendable.increaseIndentation();
 							for (String operationUriAsString : issue.getData()) {
 								URI operationURI = URI.createURI(operationUriAsString);

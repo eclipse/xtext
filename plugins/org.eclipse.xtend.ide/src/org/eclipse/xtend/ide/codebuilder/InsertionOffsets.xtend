@@ -15,6 +15,7 @@ import org.eclipse.xtend.core.xtend.XtendMember
 import org.eclipse.xtext.EcoreUtil2
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils
 import org.eclipse.jdt.annotation.NonNullByDefault
+import org.eclipse.jdt.annotation.Nullable
 
 /**
  * Calculates where to insert new members into exisitng Xtend code.
@@ -24,11 +25,11 @@ import org.eclipse.jdt.annotation.NonNullByDefault
 @NonNullByDefault
 class InsertionOffsets {
 
-	def getNewTypeInsertOffset(EObject call, XtendClass ownerClass) {
+	def getNewTypeInsertOffset(@Nullable EObject call, XtendClass ownerClass) {
 		after(ownerClass)
 	}
 
-	def getNewFieldInsertOffset(EObject call, XtendClass ownerClass) {
+	def getNewFieldInsertOffset(@Nullable EObject call, XtendClass ownerClass) {
 		if (ownerClass.members.empty)
 			return inEmpty(ownerClass)
 		val lastDefinedField = ownerClass.members.filter(typeof(XtendField)).last
@@ -38,11 +39,9 @@ class InsertionOffsets {
 			return after(lastDefinedField)
 	}
 
-	def getNewMethodInsertOffset(EObject call, XtendClass ownerClass) {
+	def getNewMethodInsertOffset(@Nullable EObject call, XtendClass ownerClass) {
 		val callingMember = EcoreUtil2::getContainerOfType(call, typeof(XtendMember))
-		if (callingMember == null)
-			throw new IllegalStateException("Missing method not called from Xtend member")
-		if (ownerClass.members.contains(callingMember))
+		if (callingMember != null && ownerClass.members.contains(callingMember))
 			return after(callingMember)
 		else if (ownerClass.members.empty)
 			return inEmpty(ownerClass)
@@ -50,7 +49,7 @@ class InsertionOffsets {
 			return after(ownerClass.members.last)
 	}
 
-	def getNewConstructorInsertOffset(EObject call, XtendClass ownerClass) {
+	def getNewConstructorInsertOffset(@Nullable EObject call, XtendClass ownerClass) {
 		val lastDefinedConstructor = ownerClass.members.filter(typeof(XtendConstructor)).last
 		if(lastDefinedConstructor == null)
 			return getNewFieldInsertOffset(call, ownerClass)		
