@@ -117,7 +117,7 @@ public class XtendQuickfixProvider extends XbaseQuickfixProvider {
 	protected void createLinkingIssueQuickfixes(Issue issue, IssueResolutionAcceptor issueResolutionAcceptor, 
 			IXtextDocument xtextDocument, XtextResource resource, 
 			EObject referenceOwner, EReference unresolvedReference) throws Exception {
-		super.createLinkingIssueQuickfixes(issue, issueResolutionAcceptor, xtextDocument, resource, referenceOwner, unresolvedReference);
+		javaTypeQuickfixes.addQuickfixes(issue, issueResolutionAcceptor, xtextDocument, resource, referenceOwner, unresolvedReference);
 		createTypeQuickfixes.addQuickfixes(issue, issueResolutionAcceptor, xtextDocument, resource, referenceOwner, unresolvedReference);
 		createMemberQuickfixes.addQuickfixes(issue, issueResolutionAcceptor, xtextDocument, resource, referenceOwner, unresolvedReference);
 	}
@@ -182,14 +182,12 @@ public class XtendQuickfixProvider extends XbaseQuickfixProvider {
 						public void apply(EObject element, IModificationContext context) throws Exception {
 							XtendClass clazz = (XtendClass) element;
 							ReplacingAppendable appendable = appendableFactory.get(context.getXtextDocument(), clazz,
-									insertionOffsets.getNewConstructorInsertOffset(null, clazz), 0);
+									insertionOffsets.getNewConstructorInsertOffset(null, clazz), 0, 1, true);
 							EObject constructor = clazz.eResource().getResourceSet().getEObject(constructorURI, true);
-							appendable.increaseIndentation().newLine();
 							if (constructor instanceof JvmConstructor) {
 								superMemberImplementor.appendConstructorFromSuper(clazz, (JvmConstructor) constructor,
 										appendable);
 							}
-							appendable.decreaseIndentation().newLine();
 							appendable.commitChanges();
 						}
 					});
@@ -206,20 +204,19 @@ public class XtendQuickfixProvider extends XbaseQuickfixProvider {
 							XtendClass clazz = (XtendClass) element;
 							IXtextDocument document = context.getXtextDocument();
 							ReplacingAppendable appendable = appendableFactory.get(document, clazz,
-									insertionOffsets.getNewMethodInsertOffset(null, clazz), 0);
-							appendable.increaseIndentation();
+									insertionOffsets.getNewMethodInsertOffset(null, clazz), 0, 1, true);
+							boolean isFirst = true;
 							for (String operationUriAsString : issue.getData()) {
 								URI operationURI = URI.createURI(operationUriAsString);
 								EObject overridden = clazz.eResource().getResourceSet().getEObject(operationURI, true);
 								if (overridden instanceof JvmOperation) {
-									appendable.newLine();
+									if(!isFirst) 
+										appendable.newLine().newLine();
+									isFirst = false;
 									superMemberImplementor.appendOverrideFunction(clazz, (JvmOperation) overridden,
 											appendable);
-									appendable.newLine();
 								}
 							}
-							appendable.decreaseIndentation();
-							appendable.newLine();
 							appendable.commitChanges();
 						}
 					});

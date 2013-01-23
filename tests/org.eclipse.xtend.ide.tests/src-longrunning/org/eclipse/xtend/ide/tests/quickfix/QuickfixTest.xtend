@@ -457,7 +457,7 @@ class QuickfixTest extends AbstractXtendUITestCase {
 			}
 			
 			class Bar extends Foo {
-			
+				
 				override bar() {
 					«defaultBody»
 				}
@@ -484,7 +484,7 @@ class QuickfixTest extends AbstractXtendUITestCase {
 		.assertResolutionLabels("Add unimplemented methods", "Make class abstract")
 		.assertModelAfterQuickfix("Add unimplemented methods", '''
 			class Foo implements Comparable<Foo> {
-			
+				
 				override compareTo(Foo o) {
 					«defaultBody»
 				}
@@ -655,10 +655,11 @@ class QuickfixTest extends AbstractXtendUITestCase {
 			}
 			
 			class Bar extends Foo {
-
+				
 				new(int i) {
 					super(i)
 				}
+				
 			}
 		''')
 	}
@@ -813,6 +814,26 @@ class QuickfixTest extends AbstractXtendUITestCase {
 	}
 
 	@Test
+	def void missingSuperClass() {
+		create('Foo.xtend', '''
+			class Foo extends Bar| {
+			}
+		''')
+		.assertIssueCodes(Diagnostic::LINKING_DIAGNOSTIC, CLASS_EXPECTED)
+		.assertResolutionLabelsSubset("Create Xtend class 'Bar'", "Create Java class 'Bar'", "Create local Xtend class 'Bar'")
+	}
+
+	@Test
+	def void missingSuperInterface() {
+		create('Foo.xtend', '''
+			class Foo implements Bar| {
+			}
+		''')
+		.assertIssueCodes(Diagnostic::LINKING_DIAGNOSTIC, INTERFACE_EXPECTED)
+		.assertResolutionLabelsSubset("Create Java interface 'Bar'")
+	}
+
+	@Test
 	def void missingTypeStaticAccess() {
 		create('Foo.xtend', '''
 			class Foo {
@@ -901,8 +922,8 @@ class QuickfixTest extends AbstractXtendUITestCase {
 			}
 			
 			class B extends A {
-			
-				override <T extends Object> test(List<T> t, (Object)=>String a) {
+				
+				override <T> test(List<T> t, (Object)=>String a) {
 					«defaultBody»
 				}
 				

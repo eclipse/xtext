@@ -15,6 +15,7 @@ import org.eclipse.core.runtime.Path;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
+import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.jdt.core.IJavaElement;
@@ -32,6 +33,7 @@ import org.eclipse.ui.IWorkbench;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.xtend.core.jvmmodel.IXtendJvmAssociations;
 import org.eclipse.xtend.core.xtend.XtendClass;
+import org.eclipse.xtend.core.xtend.XtendPackage;
 import org.eclipse.xtend.ide.codebuilder.AbstractAnnotationBuilder;
 import org.eclipse.xtend.ide.codebuilder.AbstractClassBuilder;
 import org.eclipse.xtend.ide.codebuilder.CodeBuilderFactory;
@@ -51,6 +53,7 @@ import org.eclipse.xtext.validation.Issue;
 import org.eclipse.xtext.xbase.XConstructorCall;
 import org.eclipse.xtext.xbase.XbasePackage;
 import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotationsPackage;
+import org.eclipse.xtext.xbase.ui.quickfix.CreateJavaTypeQuickfixes;
 import org.eclipse.xtext.xbase.ui.quickfix.ILinkingIssueQuickfixProvider;
 
 import com.google.inject.Inject;
@@ -62,7 +65,7 @@ import com.google.inject.Provider;
  * @author Jan Koehnlein - Initial contribution and API
  */
 @NonNullByDefault
-public class CreateXtendTypeQuickfixes implements ILinkingIssueQuickfixProvider {
+public class CreateXtendTypeQuickfixes extends CreateJavaTypeQuickfixes {
 
 	private static final Logger LOG = Logger.getLogger(CreateXtendTypeQuickfixes.class);
 	
@@ -81,6 +84,7 @@ public class CreateXtendTypeQuickfixes implements ILinkingIssueQuickfixProvider 
 	@Inject
 	private CodeBuilderQuickfix codeBuilderQuickfix;
 
+	@Override
 	public void addQuickfixes(Issue issue, IssueResolutionAcceptor issueResolutionAcceptor,
 			IXtextDocument xtextDocument, XtextResource resource, 
 			EObject referenceOwner, EReference unresolvedReference)
@@ -88,14 +92,27 @@ public class CreateXtendTypeQuickfixes implements ILinkingIssueQuickfixProvider 
 		String typeName = xtextDocument.get(issue.getOffset(), issue.getLength());
 		if (unresolvedReference == XbasePackage.Literals.XCONSTRUCTOR_CALL__CONSTRUCTOR) {
 			if(((XConstructorCall)referenceOwner).getConstructor().eIsProxy()) {
+				newJavaClassQuickfix(typeName, resource, issue, issueResolutionAcceptor);
 				newXtendClassQuickfix(typeName, resource, issue, issueResolutionAcceptor);
 				newLocalXtendClassQuickfix(typeName, resource, issue, issueResolutionAcceptor);
 			}
 		} else if(unresolvedReference == XbasePackage.Literals.XTYPE_LITERAL__TYPE
 				|| unresolvedReference == TypesPackage.Literals.JVM_PARAMETERIZED_TYPE_REFERENCE__TYPE) {
-			newXtendClassQuickfix(typeName, resource, issue, issueResolutionAcceptor);
-			newLocalXtendClassQuickfix(typeName, resource, issue, issueResolutionAcceptor);
+			EStructuralFeature eContainingFeature = referenceOwner.eContainingFeature();
+			if(eContainingFeature == XtendPackage.Literals.XTEND_CLASS__EXTENDS) {
+				newJavaClassQuickfix(typeName, resource, issue, issueResolutionAcceptor);
+				newXtendClassQuickfix(typeName, resource, issue, issueResolutionAcceptor);
+				newLocalXtendClassQuickfix(typeName, resource, issue, issueResolutionAcceptor);
+			} else if(eContainingFeature == XtendPackage.Literals.XTEND_CLASS__IMPLEMENTS) {
+				newJavaInterfaceQuickfix(typeName, resource, issue, issueResolutionAcceptor);
+			} else {
+				newJavaClassQuickfix(typeName, resource, issue, issueResolutionAcceptor);
+				newJavaInterfaceQuickfix(typeName, resource, issue, issueResolutionAcceptor);
+				newXtendClassQuickfix(typeName, resource, issue, issueResolutionAcceptor);
+				newLocalXtendClassQuickfix(typeName, resource, issue, issueResolutionAcceptor);				
+			}
 		} else if(unresolvedReference == XAnnotationsPackage.Literals.XANNOTATION__ANNOTATION_TYPE) {
+			newJavaAnnotationQuickfix(typeName, resource, issue, issueResolutionAcceptor);
 			newLocalXtendAnnotationQuickfix(typeName, resource, issue, issueResolutionAcceptor);
 		}
 	}
@@ -149,46 +166,6 @@ public class CreateXtendTypeQuickfixes implements ILinkingIssueQuickfixProvider 
 						});
 					}
 				});
-	}
-
-	protected WizardDialog createWizardDialog(NewElementWizard newXtendClassWizard) {
-		IWorkbench workbench = PlatformUI.getWorkbench();
-		Shell shell = workbench.getActiveWorkbenchWindow().getShell();
-		newXtendClassWizard.init(workbench, new StructuredSelection());
-		WizardDialog dialog = new WizardDialog(shell, newXtendClassWizard);
-		dialog.create();
-		return dialog;
-	}
-
-	
-	protected void configureWizardPage(NewTypeWizardPage page, URI contextUri, String typeName) {
-		setPackageName(page, contextUri);
-		page.setTypeName(typeName, true);
-	}
-
-	protected void setPackageName(NewTypeWizardPage page, URI contextUri) {
-		IJavaProject javaProject = getJavaProject(contextUri);
-		String path = contextUri.trimSegments(1).toPlatformString(true);
-		try {
-			if(javaProject != null) {
-				IPackageFragment packageFragment = javaProject.findPackageFragment(new Path(path));
-				IPackageFragmentRoot root = (IPackageFragmentRoot) packageFragment
-						.getAncestor(IJavaElement.PACKAGE_FRAGMENT_ROOT);
-				page.setPackageFragment(packageFragment, true);
-				page.setPackageFragmentRoot(root, true);
-			}
-		} catch (JavaModelException e) {
-			LOG.error("Could not find package for " + path, e);
-		}
-	}
-
-	@Nullable
-	protected IJavaProject getJavaProject(URI uri){
-		IProject project = projectUtil.getProject(uri);
-		if(project == null){
-			return null;
-		}
-		return JavaCore.create(project);
 	}
 
 }
