@@ -5745,7 +5745,6 @@ public abstract class AbstractXtendCompilerTest extends AbstractXtendTestCase {
   }
   
   @Test
-  @Ignore
   public void compileProperty() {
     final GeneratorConfig generatorConfig = this.generatorConfigProvider.get(null);
     StringConcatenation _builder = new StringConcatenation();
@@ -5773,6 +5772,7 @@ public abstract class AbstractXtendCompilerTest extends AbstractXtendTestCase {
     _builder_1.append("  ");
     _builder_1.append("private boolean _generateExpressions = true;");
     _builder_1.newLine();
+    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public boolean isGenerateExpressions() {");
@@ -5783,6 +5783,7 @@ public abstract class AbstractXtendCompilerTest extends AbstractXtendTestCase {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
+    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public void setGenerateExpressions(final boolean generateExpressions) {");

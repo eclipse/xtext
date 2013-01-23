@@ -68,6 +68,12 @@ public class CompilerTest2 extends AbstractCompilerTest {
   }
   
   @Test
+  @Ignore(value = "TODO Currently there is no way to refer to computed types in the jvm model inferer")
+  public void testData_03() throws Exception {
+    super.testData_03();
+  }
+  
+  @Test
   public void testEscapeCharacterForReservedNames() throws Exception {
     final String code = "package x class Z {\n\t\t\t  def Object create(Object x) {\n\t\t\t    create(x)\n\t\t\t  }\n\t\t\t}";
     final String javaCode = this.compileToJavaCode(code);
@@ -79,17 +85,5 @@ public class CompilerTest2 extends AbstractCompilerTest {
     final String code = "package x class Z {\n\t\t\t  def create(Object x) {\n\t\t\t    create(x)\n\t\t\t  }\n\t\t\t}";
     final String javaCode = this.compileToJavaCode(code);
     this.javaCompiler.compileToClass("x.Z", javaCode);
-  }
-  
-  @Test
-  @Ignore(value = "TODO")
-  public void testData_01() throws Exception {
-    super.testData_01();
-  }
-  
-  @Test
-  @Ignore(value = "TODO")
-  public void testData_02() throws Exception {
-    super.testData_02();
   }
 }

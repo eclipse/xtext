@@ -2712,32 +2712,31 @@ abstract class AbstractXtendCompilerTest extends AbstractXtendTestCase {
 	}
 
 	@Test
-	@Ignore
 	def compileProperty() {
 		val generatorConfig = generatorConfigProvider.get(null)
-			assertCompilesTo('''
-				package foo
-				
-				class Bar {
-					@Property
-					boolean generateExpressions = true
-				}
-			''',
-			'''
-				package foo;
-				
-				@SuppressWarnings("all")
-				public class Bar {
-				  private boolean _generateExpressions = true;
-				
-				  public boolean isGenerateExpressions() {
-				    return this._generateExpressions;
-				  }
-				
-				  public void setGenerateExpressions(final boolean generateExpressions) {
-				    this._generateExpressions = generateExpressions;
-				  }
-				}
+		assertCompilesTo('''
+			package foo
+			
+			class Bar {
+				@Property
+				boolean generateExpressions = true
+			}
+		''',
+		'''
+			package foo;
+			
+			@SuppressWarnings("all")
+			public class Bar {
+			  private boolean _generateExpressions = true;
+			  
+			  public boolean isGenerateExpressions() {
+			    return this._generateExpressions;
+			  }
+			  
+			  public void setGenerateExpressions(final boolean generateExpressions) {
+			    this._generateExpressions = generateExpressions;
+			  }
+			}
 		''', generatorConfig)
 	}
 

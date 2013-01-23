@@ -9,9 +9,9 @@ package org.eclipse.xtend.core.tests.compiler;
 
 import org.eclipse.xtend.core.tests.NewTypeSystemRuntimeInjectorProvider;
 import org.eclipse.xtend.core.tests.compiler.XtendCompilerErrorHandlingTest;
+import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.junit4.InjectWith;
 import org.eclipse.xtext.junit4.XtextRunner;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -20,32 +20,136 @@ import org.junit.runner.RunWith;
 @SuppressWarnings("all")
 public class XtendCompilerErrorHandlingTest2 extends XtendCompilerErrorHandlingTest {
   @Test
-  @Ignore(value = "TODO")
   public void testUnresolvedReturnType() {
-    super.testUnresolvedReturnType();
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("class Foo {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def Unresolved bar() {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("null");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("@SuppressWarnings(\"all\")");
+    _builder_1.newLine();
+    _builder_1.append("public class Foo {");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("public /* Unresolved */Object bar() {");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("return null;");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    this.assertCompilesTo(_builder, _builder_1);
   }
   
   @Test
-  @Ignore(value = "TODO")
-  public void testFieldInitializerTypeError() {
-    super.testFieldInitializerTypeError();
-  }
-  
-  @Test
-  @Ignore(value = "TODO")
   public void testFieldInitializerLinkError() {
-    super.testFieldInitializerLinkError();
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("class Foo {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("val bar = foo()");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("@SuppressWarnings(\"all\")");
+    _builder_1.newLine();
+    _builder_1.append("public class Foo {");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("private final Object bar /* Skipped initializer because of errors */;");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    this.assertCompilesTo(_builder, _builder_1);
   }
   
   @Test
-  @Ignore(value = "TODO")
   public void testMethodBodyTypeError() {
-    super.testMethodBodyTypeError();
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("class Foo {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def int bar() {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("null");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("@SuppressWarnings(\"all\")");
+    _builder_1.newLine();
+    _builder_1.append("public class Foo {");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("public int bar() {");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("throw new Error(\"Unresolved compilation problems:\"");
+    _builder_1.newLine();
+    _builder_1.append("      ");
+    _builder_1.append("+ \"\\nIncompatible implicit return type. Expected int or Integer but was null\");");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    this.assertCompilesTo(_builder, _builder_1);
   }
   
   @Test
-  @Ignore(value = "TODO")
   public void testMethodBodyLinkError() {
-    super.testMethodBodyLinkError();
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("class Foo {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def int bar() {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("foo()");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("@SuppressWarnings(\"all\")");
+    _builder_1.newLine();
+    _builder_1.append("public class Foo {");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("public int bar() {");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("throw new Error(\"Unresolved compilation problems:\"");
+    _builder_1.newLine();
+    _builder_1.append("      ");
+    _builder_1.append("+ \"\\nThe method or field foo is undefined for the type Foo\");");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    this.assertCompilesTo(_builder, _builder_1);
   }
 }

@@ -110,7 +110,11 @@ public class OwnedConverter extends AbstractXtypeReferenceVisitor<LightweightTyp
 
 	@Override
 	public LightweightTypeReference doVisitParameterizedTypeReference(JvmParameterizedTypeReference reference) {
-		ParameterizedTypeReference result = new ParameterizedTypeReference(owner, reference.getType());
+		JvmType type = reference.getType();
+		if (type == null || type.eIsProxy()) {
+			return new AnyTypeReference(owner);
+		}
+		ParameterizedTypeReference result = new ParameterizedTypeReference(owner, type);
 		for(JvmTypeReference argument: reference.getArguments()) {
 			result.addTypeArgument(visit(argument));
 		}
