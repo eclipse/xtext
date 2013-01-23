@@ -377,10 +377,12 @@ public class CreateMemberQuickfixes implements ILinkingIssueQuickfixProvider {
 		for(XExpression argument: arguments) {
 			JvmTypeReference argumentType = typeProvider.getType(argument);
 			JvmTypeReference resolved = typeResolver.resolveType(context, argumentType);
-			if(resolved == null) 
+			if(resolved == null) { 
 				LOG.error("Could not resolve argument type", new Exception());
-			else
+				argumentTypes.add(typeRefs.getTypeForName(Object.class, context));
+			} else {
 				argumentTypes.add(resolved);
+			}
 		}
 		return argumentTypes;
 
