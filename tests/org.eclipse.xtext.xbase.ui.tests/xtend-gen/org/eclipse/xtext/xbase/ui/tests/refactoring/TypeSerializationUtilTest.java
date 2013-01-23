@@ -60,7 +60,7 @@ public class TypeSerializationUtilTest {
   public void testClosure() {
     this.assertSerializedTypeOfFoo("val foo = [|1]", "()=>int");
     this.assertSerializedTypeOfFoo("val foo = [String x|x.toFirstUpper]", "(String)=>String");
-    this.assertSerializedTypeOfFoo("val foo = [String x, int offset|x.substring(offset)]", "(String,int)=>String");
+    this.assertSerializedTypeOfFoo("val foo = [String x, int offset|x.substring(offset)]", "(String, int)=>String");
     this.assertSerializedTypeOfFoo("val foo = [String x|System.out.println(x)]", "(String)=>void");
   }
   

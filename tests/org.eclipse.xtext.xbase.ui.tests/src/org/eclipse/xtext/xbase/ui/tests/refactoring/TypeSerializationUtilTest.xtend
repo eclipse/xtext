@@ -41,7 +41,7 @@ class TypeSerializationUtilTest {
 	@Test def testClosure() {
 		"val foo = [|1]".assertSerializedTypeOfFoo('()=>int')	
 		"val foo = [String x|x.toFirstUpper]".assertSerializedTypeOfFoo('(String)=>String')	
-		"val foo = [String x, int offset|x.substring(offset)]".assertSerializedTypeOfFoo('(String,int)=>String')	
+		"val foo = [String x, int offset|x.substring(offset)]".assertSerializedTypeOfFoo('(String, int)=>String')	
 		"val foo = [String x|System.out.println(x)]".assertSerializedTypeOfFoo('(String)=>void')	
 	}
 	
