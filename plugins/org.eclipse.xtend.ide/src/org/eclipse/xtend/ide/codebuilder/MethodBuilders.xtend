@@ -10,13 +10,13 @@ package org.eclipse.xtend.ide.codebuilder
 import com.google.inject.Inject
 import java.util.List
 import org.eclipse.jdt.core.IType
-import org.eclipse.xtend.core.compiler.XtendTypeReferenceSerializer
 import org.eclipse.xtend.core.xtend.XtendClass
 import org.eclipse.xtext.common.types.JvmTypeReference
 import org.eclipse.xtext.xbase.compiler.IAppendable
 import org.eclipse.xtext.xbase.compiler.TypeReferenceSerializer
 
 import static org.eclipse.xtext.common.types.JvmVisibility.*
+import org.eclipse.xtext.xbase.compiler.output.XtypeTypeReferenceSerializer
 
 /**
  * @author Jan Koehnlein
@@ -44,7 +44,7 @@ abstract class AbstractMethodBuilder extends AbstractCodeBuilder {
 
 class XtendMethodBuilder extends AbstractMethodBuilder implements ICodeBuilder$Xtend {
 	
-	@Inject XtendTypeReferenceSerializer typeRefSerializer
+	@Inject XtypeTypeReferenceSerializer typeRefSerializer
 
 	@Inject extension InsertionOffsets
 

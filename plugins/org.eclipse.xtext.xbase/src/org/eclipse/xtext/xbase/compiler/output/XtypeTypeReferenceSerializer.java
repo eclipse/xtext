@@ -5,7 +5,7 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtend.core.compiler;
+package org.eclipse.xtext.xbase.compiler.output;
 
 import java.util.Iterator;
 
@@ -20,7 +20,7 @@ import org.eclipse.xtext.xtype.XFunctionTypeRef;
  * @author Holger Schill - Initial contribution and API
  */
 @NonNullByDefault
-public class XtendTypeReferenceSerializer extends TypeReferenceSerializer {
+public class XtypeTypeReferenceSerializer extends TypeReferenceSerializer {
 
 	@Override
 	public void serialize(JvmTypeReference type, EObject context, IAppendable appendable, boolean withoutConstraints,

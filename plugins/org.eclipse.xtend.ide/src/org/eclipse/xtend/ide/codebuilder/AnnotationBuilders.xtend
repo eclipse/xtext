@@ -2,11 +2,11 @@ package org.eclipse.xtend.ide.codebuilder
 
 import com.google.inject.Inject
 import org.eclipse.jdt.core.IType
-import org.eclipse.xtend.core.compiler.XtendTypeReferenceSerializer
 import org.eclipse.xtend.core.xtend.XtendClass
 import org.eclipse.xtext.common.types.JvmVisibility
 import org.eclipse.xtext.xbase.compiler.IAppendable
 import org.eclipse.xtext.xbase.compiler.TypeReferenceSerializer
+import org.eclipse.xtext.xbase.compiler.output.XtypeTypeReferenceSerializer
 
 abstract class AbstractAnnotationBuilder extends AbstractCodeBuilder {
 	
@@ -20,7 +20,7 @@ abstract class AbstractAnnotationBuilder extends AbstractCodeBuilder {
 
 class XtendAnnotationBuilder extends AbstractAnnotationBuilder implements ICodeBuilder$Xtend {
 	
-	@Inject XtendTypeReferenceSerializer typeRefSerializer
+	@Inject XtypeTypeReferenceSerializer typeRefSerializer
 
 	@Inject extension InsertionOffsets
 	

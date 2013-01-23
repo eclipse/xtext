@@ -10,7 +10,6 @@ package org.eclipse.xtend.ide.codebuilder;
 import com.google.inject.Inject;
 import java.util.List;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.xtend.core.compiler.XtendTypeReferenceSerializer;
 import org.eclipse.xtend.core.xtend.XtendClass;
 import org.eclipse.xtend.ide.codebuilder.AbstractMethodBuilder;
 import org.eclipse.xtend.ide.codebuilder.ICodeBuilder.Xtend;
@@ -19,12 +18,13 @@ import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.JvmVisibility;
 import org.eclipse.xtext.xbase.compiler.IAppendable;
 import org.eclipse.xtext.xbase.compiler.TypeReferenceSerializer;
+import org.eclipse.xtext.xbase.compiler.output.XtypeTypeReferenceSerializer;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 
 @SuppressWarnings("all")
 public class XtendMethodBuilder extends AbstractMethodBuilder implements Xtend {
   @Inject
-  private XtendTypeReferenceSerializer typeRefSerializer;
+  private XtypeTypeReferenceSerializer typeRefSerializer;
   
   @Inject
   private InsertionOffsets _insertionOffsets;
