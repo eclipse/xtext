@@ -195,7 +195,34 @@ public interface IResolvedOperation extends IResolvedExecutable {
 	 * @return the list of resolved type parameters.
 	 */
 	List<JvmTypeParameter> getResolvedTypeParameters();
-
+	
+	/**
+	 * Returns the list of resolved constraints for the given type parameter index.
+	 * 
+	 * Consider the following example:
+	 * 
+	 * <pre>
+	 * interface I&lt;T&gt; {
+	 *   &lt;V extends T&gt; V method(Class&lt;? extends V&gt; c);
+	 * }
+	 * 
+	 * abstract class C implements I&lt;CharSequence&gt; {
+	 * }
+	 * </pre>
+	 * 
+	 * The resolved constraint of <code>I#method&lt;V&gt;</code> in the context of class <code>C</code> is
+	 * <code>CharSequence</code>.
+	 * 
+	 * @param idx
+	 *            the index of the considered type parameter.
+	 * 
+	 * @return a list of resolved upper bound constraints for the type parameter at index <code>idx</code>.
+	 * @see #getResolvedTypeParameterConstraints(int)
+	 * @throws IndexOutOfBoundsException
+	 *             if the idx does not match the resolved type parameter list.
+	 */
+	List<LightweightTypeReference> getResolvedTypeParameterConstraints(int idx) throws IndexOutOfBoundsException;
+	
 	/**
 	 * Returns the resolved return types in the current context. That is, all free type variables are bound according
 	 * the the bottom of this method hierarchy.

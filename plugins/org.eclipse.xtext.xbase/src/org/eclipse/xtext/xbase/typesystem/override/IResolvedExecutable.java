@@ -32,8 +32,8 @@ public interface IResolvedExecutable {
 	 * @see #getContextType()
 	 * @return the list of parameter types.
 	 */
-	List<LightweightTypeReference> getParameterTypes();
-
+	List<LightweightTypeReference> getResolvedParameterTypes();
+	
 	/**
 	 * Returns the resolved signature of this operation. The resolved representation of
 	 * <code>List&lt;String&gt;.addAll(int, Collection&lt;E&gt)</code> is
