@@ -2,11 +2,11 @@ package org.eclipse.xtend.ide.codebuilder;
 
 import com.google.inject.Inject;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.xtend.core.compiler.XtendTypeReferenceSerializer;
 import org.eclipse.xtend.core.xtend.XtendClass;
 import org.eclipse.xtend.ide.codebuilder.AbstractAnnotationBuilder;
 import org.eclipse.xtend.ide.codebuilder.ICodeBuilder.Xtend;
 import org.eclipse.xtend.ide.codebuilder.InsertionOffsets;
-import org.eclipse.xtend.ide.codebuilder.XtendTypeReferenceSerializer;
 import org.eclipse.xtext.common.types.JvmVisibility;
 import org.eclipse.xtext.xbase.compiler.IAppendable;
 import org.eclipse.xtext.xbase.compiler.TypeReferenceSerializer;

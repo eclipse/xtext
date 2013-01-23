@@ -5,7 +5,7 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtend.ide.codebuilder;
+package org.eclipse.xtend.core.compiler;
 
 import java.util.Iterator;
 

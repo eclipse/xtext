@@ -877,5 +877,37 @@ class QuickfixTest extends AbstractXtendUITestCase {
 			}
 		''')
 	}
+	
+	@Test
+	// see https://bugs.eclipse.org/bugs/show_bug.cgi?id=378817
+	def void overrideSuperMethodWithComplicatedSignature() {
+		create('Foo.xtend', '''
+			import java.util.List
+			
+			abstract class A {
+				def <T extends Object> T test(List<T> t, (Object)=>String a)
+			}
+			
+			class B| extends A {
+			}
+		''')
+		.assertIssueCodes(CLASS_MUST_BE_ABSTRACT)
+		.assertResolutionLabels('Add unimplemented methods', 'Make class abstract')
+		.assertModelAfterQuickfix('Add unimplemented methods','''
+			import java.util.List
+			
+			abstract class A {
+				def <T extends Object> T test(List<T> t, (Object)=>String a)
+			}
+			
+			class B extends A {
+			
+				override <T extends Object> test(List<T> t, (Object)=>String a) {
+					«defaultBody»
+				}
+				
+			}
+		''')
+	} 
 }
 

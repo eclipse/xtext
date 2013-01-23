@@ -1625,4 +1625,56 @@ public class QuickfixTest extends AbstractXtendUITestCase {
     _builder_1.newLine();
     _assertResolutionLabelsSubset.assertModelAfterQuickfix(_builder_1);
   }
+  
+  @Test
+  public void overrideSuperMethodWithComplicatedSignature() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("import java.util.List");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("abstract class A {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def <T extends Object> T test(List<T> t, (Object)=>String a)");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("class B| extends A {");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    QuickfixTestBuilder _create = this.builder.create("Foo.xtend", _builder);
+    QuickfixTestBuilder _assertIssueCodes = _create.assertIssueCodes(IssueCodes.CLASS_MUST_BE_ABSTRACT);
+    QuickfixTestBuilder _assertResolutionLabels = _assertIssueCodes.assertResolutionLabels("Add unimplemented methods", "Make class abstract");
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("import java.util.List");
+    _builder_1.newLine();
+    _builder_1.newLine();
+    _builder_1.append("abstract class A {");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("def <T extends Object> T test(List<T> t, (Object)=>String a)");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.newLine();
+    _builder_1.append("class B extends A {");
+    _builder_1.newLine();
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("override <T extends Object> test(List<T> t, (Object)=>String a) {");
+    _builder_1.newLine();
+    _builder_1.append("\t\t");
+    _builder_1.append(QuickfixTest.defaultBody, "		");
+    _builder_1.newLineIfNotEmpty();
+    _builder_1.append("\t");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _assertResolutionLabels.assertModelAfterQuickfix("Add unimplemented methods", _builder_1);
+  }
 }
