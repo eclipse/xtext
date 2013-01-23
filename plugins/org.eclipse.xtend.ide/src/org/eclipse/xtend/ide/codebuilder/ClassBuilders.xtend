@@ -2,6 +2,7 @@ package org.eclipse.xtend.ide.codebuilder
 
 import com.google.inject.Inject
 import org.eclipse.jdt.core.IType
+import org.eclipse.xtend.core.compiler.XtendTypeReferenceSerializer
 import org.eclipse.xtend.core.xtend.XtendClass
 import org.eclipse.xtext.common.types.JvmVisibility
 import org.eclipse.xtext.xbase.compiler.IAppendable

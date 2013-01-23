@@ -12,6 +12,7 @@ import static org.eclipse.xtext.util.Strings.*;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.xtend.core.compiler.XtendTypeReferenceSerializer;
 import org.eclipse.xtend.core.jvmmodel.IXtendJvmAssociations;
 import org.eclipse.xtend.core.xtend.XtendClass;
 import org.eclipse.xtext.Keyword;
@@ -47,7 +48,7 @@ public class MemberFromSuperImplementor {
 	private TypeArgumentContextProvider typeArgumentContextProvider;
 
 	@Inject
-	private TypeReferenceSerializer typeReferenceSerializer;
+	private XtendTypeReferenceSerializer typeReferenceSerializer;
 
 	@Inject
 	private TypeReferences typeReferences;
@@ -121,6 +122,16 @@ public class MemberFromSuperImplementor {
 					appendable.append(", ");
 				isFirst = false;
 				appendable.append(typeParameter);
+				if(!typeParameter.getConstraints().isEmpty()) {
+					appendable.append(" extends ");
+					boolean isFirstConstraint = true;
+					for(JvmTypeConstraint constraint: typeParameter.getConstraints()) {
+						if(!isFirstConstraint)
+							appendable.append(" & ");
+						isFirstConstraint = false;
+						typeReferenceSerializer.serialize(constraint.getTypeReference(), typeParameter, appendable);
+					}
+				}
 				if (!isCall) {
 					boolean firstConstraint = true;
 					for(JvmTypeConstraint constraint: typeParameter.getConstraints()) {
