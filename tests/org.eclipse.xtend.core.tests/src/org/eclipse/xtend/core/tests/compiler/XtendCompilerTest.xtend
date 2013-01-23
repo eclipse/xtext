@@ -15,6 +15,31 @@ abstract class AbstractXtendCompilerTest extends AbstractXtendTestCase {
 	@Inject JvmModelGenerator generator
 	@Inject IGeneratorConfigProvider generatorConfigProvider
 	
+	@Test def testSneakyThrowable() {
+		'''
+			class MyClass {
+				def void throwsSomething() {
+					throw new Throwable
+				}
+			}
+			
+		'''.assertCompilesTo('''
+			import org.eclipse.xtext.xbase.lib.Exceptions;
+			
+			@SuppressWarnings("all")
+			public class MyClass {
+			  public void throwsSomething() {
+			    try {
+			      Throwable _throwable = new Throwable();
+			      throw _throwable;
+			    } catch (Throwable _e) {
+			      throw Exceptions.sneakyThrow(_e);
+			    }
+			  }
+			}
+		''')
+	}
+	
 	@Test def testThreeDataClassesExtendingEachOther() {
 		// part of the Html builder API example. Caused and NPE in which wasn't elsewhere detected in the tests.
 		'''

@@ -29,6 +29,60 @@ public abstract class AbstractXtendCompilerTest extends AbstractXtendTestCase {
   private IGeneratorConfigProvider generatorConfigProvider;
   
   @Test
+  public void testSneakyThrowable() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("class MyClass {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def void throwsSomething() {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("throw new Throwable");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    _builder.newLine();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("import org.eclipse.xtext.xbase.lib.Exceptions;");
+    _builder_1.newLine();
+    _builder_1.newLine();
+    _builder_1.append("@SuppressWarnings(\"all\")");
+    _builder_1.newLine();
+    _builder_1.append("public class MyClass {");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("public void throwsSomething() {");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("try {");
+    _builder_1.newLine();
+    _builder_1.append("      ");
+    _builder_1.append("Throwable _throwable = new Throwable();");
+    _builder_1.newLine();
+    _builder_1.append("      ");
+    _builder_1.append("throw _throwable;");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("} catch (Throwable _e) {");
+    _builder_1.newLine();
+    _builder_1.append("      ");
+    _builder_1.append("throw Exceptions.sneakyThrow(_e);");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    this.assertCompilesTo(_builder, _builder_1);
+  }
+  
+  @Test
   public void testThreeDataClassesExtendingEachOther() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("import java.util.ArrayList");
