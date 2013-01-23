@@ -669,7 +669,7 @@ abstract class AbstractAssignabilityTest extends AbstractTestingTypeReferenceOwn
 	def void testDemandConvertedFunctionType_12() {
 		"()=>CharSequence".isNotAssignableFrom("$Function<String, CharSequence>")
 		"(CharSequence)=>String".isNotAssignableFrom("Iterable<CharSequence>")
-		"(String)=>String".isNotAssignableFrom("Comparator<CharSequence>")
+		"(String)=>String".isNotAssignableFrom("java.util.Comparator<CharSequence>")
 	}
 	
 	@Test

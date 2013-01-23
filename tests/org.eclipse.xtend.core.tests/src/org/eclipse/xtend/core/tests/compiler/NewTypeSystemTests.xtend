@@ -502,33 +502,73 @@ class XtendCompilerTest2 extends AbstractXtendCompilerTest {
 class XtendCompilerErrorHandlingTest2 extends XtendCompilerErrorHandlingTest {
 	
 	@Test
-	@Ignore("TODO")
 	override testUnresolvedReturnType() {
-		super.testUnresolvedReturnType()
+		'''
+			class Foo {
+				def Unresolved bar() {
+					null
+				}
+			}
+		'''.assertCompilesTo( '''
+			@SuppressWarnings("all")
+			public class Foo {
+			  public /* Unresolved */Object bar() {
+			    return null;
+			  }
+			}
+		''')
 	}
 	
 	@Test
-	@Ignore("TODO")
-	override testFieldInitializerTypeError() {
-		super.testFieldInitializerTypeError()
-	}
-	
-	@Test
-	@Ignore("TODO")
 	override testFieldInitializerLinkError() {
-		super.testFieldInitializerLinkError()
+		'''
+			class Foo {
+				val bar = foo()
+			}
+		'''.assertCompilesTo( '''
+			@SuppressWarnings("all")
+			public class Foo {
+			  private final Object bar /* Skipped initializer because of errors */;
+			}
+		''')
 	}
 	
 	@Test
-	@Ignore("TODO")
 	override testMethodBodyTypeError() {
-		super.testMethodBodyTypeError()
+		'''
+			class Foo {
+				def int bar() {
+					null
+				}
+			}
+		'''.assertCompilesTo( '''
+			@SuppressWarnings("all")
+			public class Foo {
+			  public int bar() {
+			    throw new Error("Unresolved compilation problems:"
+			      + "\nIncompatible implicit return type. Expected int or Integer but was null");
+			  }
+			}
+		''')
 	}
 	
 	@Test
-	@Ignore("TODO")
 	override testMethodBodyLinkError() {
-		super.testMethodBodyLinkError()
+		'''
+			class Foo {
+				def int bar() {
+					foo()
+				}
+			}
+		'''.assertCompilesTo( '''
+			@SuppressWarnings("all")
+			public class Foo {
+			  public int bar() {
+			    throw new Error("Unresolved compilation problems:"
+			      + "\nThe method or field foo is undefined for the type Foo");
+			  }
+			}
+		''')
 	}
 	
 }
