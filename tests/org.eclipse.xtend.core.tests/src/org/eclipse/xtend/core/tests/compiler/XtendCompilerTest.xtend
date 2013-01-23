@@ -2755,7 +2755,8 @@ abstract class AbstractXtendCompilerTest extends AbstractXtendTestCase {
 
 class XtendCompilerTest extends AbstractXtendCompilerTest {
 	
-	@Ignore @Test override testBug391077() {
+	@Ignore("Fails with old impl")
+	@Test override testBug391077() {
 		super.testBug391077()
 	}
 	

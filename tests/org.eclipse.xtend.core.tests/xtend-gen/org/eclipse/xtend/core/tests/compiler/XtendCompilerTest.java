@@ -7,7 +7,7 @@ import org.junit.Test;
 
 @SuppressWarnings("all")
 public class XtendCompilerTest extends AbstractXtendCompilerTest {
-  @Ignore
+  @Ignore(value = "Fails with old impl")
   @Test
   public void testBug391077() {
     super.testBug391077();

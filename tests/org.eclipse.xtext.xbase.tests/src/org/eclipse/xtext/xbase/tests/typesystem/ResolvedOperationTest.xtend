@@ -7,21 +7,21 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.tests.typesystem
 
-import org.junit.runner.RunWith
-import org.eclipse.xtext.junit4.XtextRunner
-import org.eclipse.xtext.junit4.InjectWith
-import org.eclipse.xtext.xbase.tests.AbstractXbaseTestCase
-import org.eclipse.xtext.xbase.typesystem.^override.IResolvedOperation
-import org.eclipse.xtext.xbase.XMemberFeatureCall
 import com.google.inject.Inject
-import org.eclipse.xtext.xbase.typesystem.IBatchTypeResolver
-import org.eclipse.xtext.common.types.JvmOperation
-import org.eclipse.xtext.xbase.typesystem.^override.BottomResolvedOperation
-import org.junit.Test
-import org.eclipse.xtext.xbase.typesystem.^override.OverrideTester
-import org.eclipse.xtext.xbase.typesystem.^override.IOverrideCheckResult
 import java.util.EnumSet
+import org.eclipse.xtext.common.types.JvmOperation
 import org.eclipse.xtext.common.types.JvmVisibility
+import org.eclipse.xtext.junit4.InjectWith
+import org.eclipse.xtext.junit4.XtextRunner
+import org.eclipse.xtext.xbase.XMemberFeatureCall
+import org.eclipse.xtext.xbase.tests.AbstractXbaseTestCase
+import org.eclipse.xtext.xbase.typesystem.IBatchTypeResolver
+import org.eclipse.xtext.xbase.typesystem.^override.BottomResolvedOperation
+import org.eclipse.xtext.xbase.typesystem.^override.IOverrideCheckResult
+import org.eclipse.xtext.xbase.typesystem.^override.IResolvedOperation
+import org.eclipse.xtext.xbase.typesystem.^override.OverrideTester
+import org.junit.Test
+import org.junit.runner.RunWith
 
 import static org.eclipse.xtext.xbase.typesystem.^override.IOverrideCheckResult$OverrideCheckDetails.*
 
@@ -60,6 +60,22 @@ class ResolvedOperationTest extends AbstractXbaseTestCase {
 		val operation = 'newArrayList("").iterator'.toOperation
 		assertEquals('ArrayList<String>', operation.contextType.simpleName)
 		assertEquals('Iterator<String>', operation.resolvedReturnType.simpleName)
+	}
+	
+	@Test
+	def void testTypeParameterConstraints() {
+		val operation = '(null as overrides.AbstractForCharSequence).method'.toOperation
+		assertTrue(operation.bottomInContext)
+		assertEquals('AbstractForCharSequence', operation.contextType.simpleName)
+		assertEquals('method', operation.declaration.simpleName)
+		val typeParameters = operation.resolvedTypeParameters
+		assertEquals(2, typeParameters.size)
+		val firstConstraints = operation.getResolvedTypeParameterConstraints(0)
+		assertEquals(1, firstConstraints.size)
+		assertEquals('CharSequence', firstConstraints.head.simpleName)
+		val secondConstraints = operation.getResolvedTypeParameterConstraints(1)
+		assertEquals(1, secondConstraints.size)
+		assertEquals('V', secondConstraints.head.simpleName)
 	}
 	
 	@Test
@@ -104,8 +120,8 @@ class ResolvedOperationTest extends AbstractXbaseTestCase {
 	@Test
 	def void testArrayListOfStringAcceptsStrings() {
 		val operation = 'newArrayList("").addAll(null)'.toOperation
-		assertEquals(1, operation.parameterTypes.size)
-		assertEquals('Collection<? extends String>', operation.parameterTypes.head.simpleName)
+		assertEquals(1, operation.resolvedParameterTypes.size)
+		assertEquals('Collection<? extends String>', operation.resolvedParameterTypes.head.simpleName)
 	}
 	
 	@Test
@@ -248,6 +264,16 @@ class ResolvedOperationTest extends AbstractXbaseTestCase {
 			assertEquals(1, declaration.typeParameters.size)
 			declaration.typeParameters.clear
 			has(1).candidatesAndOverrides(0).withDetail(TYPE_PARAMETER_MISMATCH)
+		]
+	}
+	
+	@Test
+	def void testOverrideMethodResolution_15() {
+		'(null as overrides.ConcreteForCharSequence).method'.toOperation => [
+			val candidate = overriddenAndImplementedMethodCandidates.head
+			assertEquals(2, candidate.typeParameters.size)
+			assertEquals(2, declaration.typeParameters.size)
+			has(1).candidatesAndOverrides(1).withDetail(IMPLEMENTATION)
 		]
 	}
 	

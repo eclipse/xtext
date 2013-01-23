@@ -98,6 +98,34 @@ public class ResolvedOperationTest extends AbstractXbaseTestCase {
   }
   
   @Test
+  public void testTypeParameterConstraints() {
+    final IResolvedOperation operation = this.toOperation("(null as overrides.AbstractForCharSequence).method");
+    boolean _isBottomInContext = operation.isBottomInContext();
+    Assert.assertTrue(_isBottomInContext);
+    LightweightTypeReference _contextType = operation.getContextType();
+    String _simpleName = _contextType.getSimpleName();
+    Assert.assertEquals("AbstractForCharSequence", _simpleName);
+    JvmOperation _declaration = operation.getDeclaration();
+    String _simpleName_1 = _declaration.getSimpleName();
+    Assert.assertEquals("method", _simpleName_1);
+    final List<JvmTypeParameter> typeParameters = operation.getResolvedTypeParameters();
+    int _size = typeParameters.size();
+    Assert.assertEquals(2, _size);
+    final List<LightweightTypeReference> firstConstraints = operation.getResolvedTypeParameterConstraints(0);
+    int _size_1 = firstConstraints.size();
+    Assert.assertEquals(1, _size_1);
+    LightweightTypeReference _head = IterableExtensions.<LightweightTypeReference>head(firstConstraints);
+    String _simpleName_2 = _head.getSimpleName();
+    Assert.assertEquals("CharSequence", _simpleName_2);
+    final List<LightweightTypeReference> secondConstraints = operation.getResolvedTypeParameterConstraints(1);
+    int _size_2 = secondConstraints.size();
+    Assert.assertEquals(1, _size_2);
+    LightweightTypeReference _head_1 = IterableExtensions.<LightweightTypeReference>head(secondConstraints);
+    String _simpleName_3 = _head_1.getSimpleName();
+    Assert.assertEquals("V", _simpleName_3);
+  }
+  
+  @Test
   public void testIterableOfStringsIteratesStrings() {
     final IResolvedOperation operation = this.toOperation("(null as Iterable<? extends String>).iterator");
     LightweightTypeReference _resolvedReturnType = operation.getResolvedReturnType();
@@ -158,11 +186,11 @@ public class ResolvedOperationTest extends AbstractXbaseTestCase {
   @Test
   public void testArrayListOfStringAcceptsStrings() {
     final IResolvedOperation operation = this.toOperation("newArrayList(\"\").addAll(null)");
-    List<LightweightTypeReference> _parameterTypes = operation.getParameterTypes();
-    int _size = _parameterTypes.size();
+    List<LightweightTypeReference> _resolvedParameterTypes = operation.getResolvedParameterTypes();
+    int _size = _resolvedParameterTypes.size();
     Assert.assertEquals(1, _size);
-    List<LightweightTypeReference> _parameterTypes_1 = operation.getParameterTypes();
-    LightweightTypeReference _head = IterableExtensions.<LightweightTypeReference>head(_parameterTypes_1);
+    List<LightweightTypeReference> _resolvedParameterTypes_1 = operation.getResolvedParameterTypes();
+    LightweightTypeReference _head = IterableExtensions.<LightweightTypeReference>head(_resolvedParameterTypes_1);
     String _simpleName = _head.getSimpleName();
     Assert.assertEquals("Collection<? extends String>", _simpleName);
   }
@@ -379,6 +407,28 @@ public class ResolvedOperationTest extends AbstractXbaseTestCase {
           IResolvedOperation _has = ResolvedOperationTest.this.has(it, 1);
           IResolvedOperation _candidatesAndOverrides = ResolvedOperationTest.this.candidatesAndOverrides(_has, 0);
           ResolvedOperationTest.this.withDetail(_candidatesAndOverrides, OverrideCheckDetails.TYPE_PARAMETER_MISMATCH);
+        }
+      };
+    ObjectExtensions.<IResolvedOperation>operator_doubleArrow(_operation, _function);
+  }
+  
+  @Test
+  public void testOverrideMethodResolution_15() {
+    IResolvedOperation _operation = this.toOperation("(null as overrides.ConcreteForCharSequence).method");
+    final Procedure1<IResolvedOperation> _function = new Procedure1<IResolvedOperation>() {
+        public void apply(final IResolvedOperation it) {
+          List<JvmOperation> _overriddenAndImplementedMethodCandidates = it.getOverriddenAndImplementedMethodCandidates();
+          final JvmOperation candidate = IterableExtensions.<JvmOperation>head(_overriddenAndImplementedMethodCandidates);
+          EList<JvmTypeParameter> _typeParameters = candidate.getTypeParameters();
+          int _size = _typeParameters.size();
+          Assert.assertEquals(2, _size);
+          JvmOperation _declaration = it.getDeclaration();
+          EList<JvmTypeParameter> _typeParameters_1 = _declaration.getTypeParameters();
+          int _size_1 = _typeParameters_1.size();
+          Assert.assertEquals(2, _size_1);
+          IResolvedOperation _has = ResolvedOperationTest.this.has(it, 1);
+          IResolvedOperation _candidatesAndOverrides = ResolvedOperationTest.this.candidatesAndOverrides(_has, 1);
+          ResolvedOperationTest.this.withDetail(_candidatesAndOverrides, OverrideCheckDetails.IMPLEMENTATION);
         }
       };
     ObjectExtensions.<IResolvedOperation>operator_doubleArrow(_operation, _function);

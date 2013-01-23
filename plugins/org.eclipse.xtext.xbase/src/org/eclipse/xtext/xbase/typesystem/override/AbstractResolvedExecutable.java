@@ -50,7 +50,7 @@ public abstract class AbstractResolvedExecutable implements IResolvedExecutable 
 		return Collections.unmodifiableList(getDeclaration().getTypeParameters());
 	}
 	
-	public List<LightweightTypeReference> getParameterTypes() {
+	public List<LightweightTypeReference> getResolvedParameterTypes() {
 		JvmExecutable declaration = getDeclaration();
 		if (declaration.getParameters().isEmpty())
 			return Collections.emptyList();
@@ -66,7 +66,7 @@ public abstract class AbstractResolvedExecutable implements IResolvedExecutable 
 	
 	public String getResolvedErasureSignature() {
 		JvmExecutable declaration = getDeclaration();
-		List<LightweightTypeReference> parameterTypes = getParameterTypes();
+		List<LightweightTypeReference> parameterTypes = getResolvedParameterTypes();
 		StringBuilder result = new StringBuilder(declaration.getSimpleName().length() + 2 + 20 * parameterTypes.size());
 		result.append(declaration.getSimpleName());
 		result.append('(');
@@ -82,7 +82,7 @@ public abstract class AbstractResolvedExecutable implements IResolvedExecutable 
 	
 	public String getResolvedSignature() {
 		JvmExecutable declaration = getDeclaration();
-		List<LightweightTypeReference> parameterTypes = getParameterTypes();
+		List<LightweightTypeReference> parameterTypes = getResolvedParameterTypes();
 		StringBuilder result = new StringBuilder(declaration.getSimpleName().length() + 2 + 30 * parameterTypes.size());
 		result.append(declaration.getSimpleName());
 		result.append('(');
@@ -98,7 +98,7 @@ public abstract class AbstractResolvedExecutable implements IResolvedExecutable 
 	
 	public String getSimpleSignature() {
 		JvmExecutable declaration = getDeclaration();
-		List<LightweightTypeReference> parameterTypes = getParameterTypes();
+		List<LightweightTypeReference> parameterTypes = getResolvedParameterTypes();
 		StringBuilder result = new StringBuilder(declaration.getSimpleName().length() + 2 + 10 * parameterTypes.size());
 		result.append(declaration.getSimpleName());
 		result.append('(');

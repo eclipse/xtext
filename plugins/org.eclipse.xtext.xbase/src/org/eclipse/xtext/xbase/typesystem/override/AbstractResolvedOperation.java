@@ -16,7 +16,9 @@ import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmFeature;
 import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmType;
+import org.eclipse.xtext.common.types.JvmTypeConstraint;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
+import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.JvmVisibility;
 import org.eclipse.xtext.xbase.typesystem.override.IOverrideCheckResult.OverrideCheckDetails;
 import org.eclipse.xtext.xbase.typesystem.references.ITypeReferenceOwner;
@@ -160,6 +162,17 @@ public abstract class AbstractResolvedOperation extends AbstractResolvedExecutab
 	
 	public List<JvmTypeParameter> getResolvedTypeParameters() {
 		return getBottom().getTypeParameters();
+	}
+	
+	public List<LightweightTypeReference> getResolvedTypeParameterConstraints(int idx) throws IndexOutOfBoundsException {
+		JvmTypeParameter typeParameter = getResolvedTypeParameters().get(idx);
+		List<JvmTypeConstraint> constraints = typeParameter.getConstraints();
+		List<JvmTypeReference> constraintReferences = Lists.newArrayListWithCapacity(constraints.size());
+		for(JvmTypeConstraint constraint: constraints) {
+			constraintReferences.add(constraint.getTypeReference());
+		}
+		List<LightweightTypeReference> result = getResolvedReferences(constraintReferences);
+		return result;
 	}
 
 	public LightweightTypeReference getResolvedReturnType() {

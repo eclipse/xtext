@@ -103,7 +103,7 @@ public class OverrideTester {
 			}
 			case NOT_VISIBLE:
 			case STATIC_MISMATCH: 
-				if (!overriding.getParameterTypes().isEmpty() && !isMatchingParameterList(overriding, overriddenInHierarchy)) {
+				if (!overriding.getResolvedParameterTypes().isEmpty() && !isMatchingParameterList(overriding, overriddenInHierarchy)) {
 					result.add(OverrideCheckDetails.PARAMETER_TYPE_MISMATCH);
 					return result;
 				}
@@ -125,8 +125,8 @@ public class OverrideTester {
 	}
 	
 	protected boolean isSameErasure(AbstractResolvedOperation overriding, AbstractResolvedOperation overridden) {
-		List<LightweightTypeReference> overridingParameterTypes = overriding.getParameterTypes();
-		List<LightweightTypeReference> overriddenParameterTypes = overridden.getParameterTypes();
+		List<LightweightTypeReference> overridingParameterTypes = overriding.getResolvedParameterTypes();
+		List<LightweightTypeReference> overriddenParameterTypes = overridden.getResolvedParameterTypes();
 		if (overridingParameterTypes.size() != overriddenParameterTypes.size()) {
 			return false;
 		}
@@ -238,8 +238,8 @@ public class OverrideTester {
 	
 	protected boolean isMatchingParameterList(AbstractResolvedOperation overriding,
 			AbstractResolvedOperation overridden) {
-		List<LightweightTypeReference> overridingParameterTypes = overriding.getParameterTypes();
-		List<LightweightTypeReference> overriddenParameterTypes = overridden.getParameterTypes();
+		List<LightweightTypeReference> overridingParameterTypes = overriding.getResolvedParameterTypes();
+		List<LightweightTypeReference> overriddenParameterTypes = overridden.getResolvedParameterTypes();
 		boolean testErasure = false;
 		for(int i = 0; i < overridingParameterTypes.size(); i++) {
 			LightweightTypeReference overridingParameterType = overridingParameterTypes.get(i);
@@ -270,7 +270,7 @@ public class OverrideTester {
 	protected boolean isMatchingTypeParameters(AbstractResolvedOperation overriding, AbstractResolvedOperation overridden) {
 		int overridingTypeParameterCount = overriding.getTypeParameters().size();
 		if (overridingTypeParameterCount != overridden.getTypeParameters().size()) {
-			for(LightweightTypeReference overridingParameterType: overriding.getParameterTypes()) {
+			for(LightweightTypeReference overridingParameterType: overriding.getResolvedParameterTypes()) {
 				if (!overridingParameterType.getTypeArguments().isEmpty())
 					return false;
 			}
