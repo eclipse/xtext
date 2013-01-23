@@ -14,9 +14,8 @@ import org.eclipse.xtext.common.types.util.TypeReferences;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.xbase.compiler.ImportManager;
 import org.eclipse.xtext.xbase.compiler.StringBuilderBasedAppendable;
-import org.eclipse.xtext.xbase.compiler.TypeReferenceSerializer;
+import org.eclipse.xtext.xbase.compiler.output.XtypeTypeReferenceSerializer;
 import org.eclipse.xtext.xbase.imports.IImportsConfiguration;
-import org.eclipse.xtext.xtype.XFunctionTypeRef;
 import org.eclipse.xtext.xtype.XImportDeclaration;
 import org.eclipse.xtext.xtype.XImportSection;
 
@@ -28,7 +27,7 @@ import com.google.inject.Inject;
 public class TypeSerializationUtil {
 
 	@Inject 
-	private TypeReferenceSerializer serializer;
+	private XtypeTypeReferenceSerializer serializer;
 
 	@Inject
 	private TypeReferences typeReferences;
@@ -44,20 +43,6 @@ public class TypeSerializationUtil {
 	public String serialize(JvmTypeReference typeRef, EObject context) {
 		if(typeRef == null) 
 			return "void";
-		// the {@link TypeReferenceSerializer} serializes function types as their equivalent Java type
-		if(typeRef instanceof XFunctionTypeRef) {
-			StringBuilder builder = new StringBuilder("(");
-			boolean isFirst = true;
-			for(JvmTypeReference paramType: ((XFunctionTypeRef) typeRef).getParamTypes()) {
-				if(!isFirst)
-					builder.append(",");
-				isFirst = false;
-				builder.append(serialize(paramType, context));
-			}
-			builder.append(")=>");
-			builder.append(serialize(((XFunctionTypeRef) typeRef).getReturnType(), context));
-			return builder.toString();
-		}
 		StringBuilderBasedAppendable appendable = new StringBuilderBasedAppendable(getImportManager(context));
 		serializer.serialize(typeRef, context, appendable);
 		return appendable.toString();
