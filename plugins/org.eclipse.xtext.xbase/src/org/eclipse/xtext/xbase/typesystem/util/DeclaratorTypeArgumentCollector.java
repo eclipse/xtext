@@ -17,6 +17,8 @@ import org.eclipse.xtext.common.types.JvmTypeConstraint;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.JvmTypeParameterDeclarator;
 import org.eclipse.xtext.common.types.JvmTypeReference;
+import org.eclipse.xtext.util.internal.StopWatches;
+import org.eclipse.xtext.util.internal.StopWatches.StoppedTask;
 import org.eclipse.xtext.xbase.typesystem.references.ArrayTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.CompoundTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.ITypeReferenceOwner;
@@ -123,9 +125,15 @@ public class DeclaratorTypeArgumentCollector extends TypeReferenceVisitorWithPar
 	}
 	
 	public Map<JvmTypeParameter, LightweightMergedBoundTypeArgument> getTypeParameterMapping(LightweightTypeReference reference) {
-		LightweightTraversalData data = new LightweightTraversalData();
-		reference.accept(this, data);
-		return data.getTypeParameterMapping();
+		StoppedTask task = StopWatches.forTask("DeclaratorTypeArgumentCollector.getTypeParameterMapping");
+		try {
+			task.start();
+			LightweightTraversalData data = new LightweightTraversalData();
+			reference.accept(this, data);
+			return data.getTypeParameterMapping();
+		} finally {
+			task.stop();
+		}
 	}
 	
 }

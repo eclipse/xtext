@@ -20,6 +20,7 @@ import org.eclipse.xtext.common.types.JvmPrimitiveType;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeConstraint;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
+import org.eclipse.xtext.common.types.JvmTypeParameterDeclarator;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.JvmUpperBound;
 import org.eclipse.xtext.common.types.util.Primitives;
@@ -181,6 +182,58 @@ public class ParameterizedTypeReference extends LightweightTypeReference {
 			}
 		}
 		return Collections.emptyList();
+	}
+	
+	@Override
+	@Nullable
+	public LightweightTypeReference getSuperType(JvmType rawType) {
+		if (rawType == type)
+			return this;
+		JvmTypeReference superType = getSuperType(rawType, type);
+		if (superType != null) {
+			if (superType instanceof JvmParameterizedTypeReference) {
+				if (((JvmParameterizedTypeReference) superType).getArguments().isEmpty()) {
+					return new ParameterizedTypeReference(getOwner(), rawType);
+				}
+			}
+			OwnedConverter converter = new OwnedConverter(getOwner());
+			LightweightTypeReference unresolved = converter.toLightweightReference(superType);
+			TypeParameterSubstitutor<?> substitutor = createSubstitutor();
+			LightweightTypeReference result = substitutor.substitute(unresolved);
+			if (isRawType()) {
+				result = result.getRawTypeReference();
+			}
+			return result;
+		}
+		return null;
+	}
+
+	@Nullable
+	protected JvmTypeReference getSuperType(JvmType rawType, JvmType thisType) {
+		if (thisType instanceof JvmDeclaredType) {
+			List<JvmTypeReference> superTypes = ((JvmDeclaredType) thisType).getSuperTypes();
+			for(JvmTypeReference superType: superTypes) {
+				if (superType.getType() == rawType)
+					return superType;
+				JvmTypeReference result = getSuperType(rawType, superType.getType());
+				if (result != null)
+					return result;
+			}
+		} else if (thisType instanceof JvmTypeParameter) {
+			List<JvmTypeConstraint> constraints = ((JvmTypeParameter) thisType).getConstraints();
+			for(JvmTypeConstraint constraint: constraints) {
+				if (constraint instanceof JvmUpperBound) {
+					JvmTypeReference superType = constraint.getTypeReference();
+					if (superType.getType() == rawType) {
+						return superType;
+					}
+					JvmTypeReference result = getSuperType(rawType, superType.getType());
+					if (result != null)
+						return result;
+				}
+			}
+		}
+		return null;
 	}
 	
 	@Override

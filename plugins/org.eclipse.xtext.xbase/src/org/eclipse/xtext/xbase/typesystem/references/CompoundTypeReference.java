@@ -112,6 +112,19 @@ public class CompoundTypeReference extends LightweightTypeReference {
 	}
 	
 	@Override
+	@Nullable
+	public LightweightTypeReference getSuperType(JvmType rawType) {
+		if (components == null || components.isEmpty())
+			return null;
+		for(LightweightTypeReference component: components) {
+			LightweightTypeReference result = component.getSuperType(rawType);
+			if (result != null)
+				return result;
+		}
+		return null;
+	}
+	
+	@Override
 	public boolean isType(Class<?> clazz) {
 		if (isSynonym()) {
 			for(LightweightTypeReference component: components) {

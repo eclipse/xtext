@@ -18,6 +18,8 @@ import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.TypesFactory;
+import org.eclipse.xtext.util.internal.StopWatches;
+import org.eclipse.xtext.util.internal.StopWatches.StoppedTask;
 import org.eclipse.xtext.xbase.lib.Functions;
 import org.eclipse.xtext.xbase.lib.Procedures;
 import org.eclipse.xtext.xbase.typesystem.conformance.SuperTypeAcceptor;
@@ -212,6 +214,18 @@ public abstract class LightweightTypeReference {
 	}
 	
 	/**
+	 * Returns the resolved super type for the given raw type or null if the raw type
+	 * is not a valid super type. 
+	 * 
+	 * @param rawType the raw type that should be resolved.
+	 * @return the resolved super type.
+	 */
+	@Nullable
+	public LightweightTypeReference getSuperType(JvmType rawType) {
+		return null;
+	}
+	
+	/**
 	 * Returns the list of all super types which includes the super class and the 
 	 * implemented interfaces. The type parameters of the provided super types are resolved.
 	 * That means, the super types of <code>ArrayList&lt;String&gt;</code> includes
@@ -276,9 +290,15 @@ public abstract class LightweightTypeReference {
 	protected abstract List<LightweightTypeReference> getSuperTypes(TypeParameterSubstitutor<?> substitutor);
 	
 	public void collectSuperTypes(SuperTypeAcceptor acceptor) {
-		TypeParameterSubstitutor<?> substitutor = createSubstitutor();
-		List<LightweightTypeReference> superTypes = getSuperTypes(substitutor);
-		collectSuperTypes(1, superTypes, substitutor, acceptor);
+		StoppedTask task = StopWatches.forTask("LightweightTypeReference#collectSuperTypes");
+		try {
+			task.start();
+			TypeParameterSubstitutor<?> substitutor = createSubstitutor();
+			List<LightweightTypeReference> superTypes = getSuperTypes(substitutor);
+			collectSuperTypes(1, superTypes, substitutor, acceptor);
+		} finally {
+			task.stop();
+		}
 	}
 	
 	protected void collectSuperTypes(int level, List<LightweightTypeReference> references, TypeParameterSubstitutor<?> substitutor, SuperTypeAcceptor acceptor) {
@@ -312,9 +332,15 @@ public abstract class LightweightTypeReference {
 	}
 	
 	public TypeConformanceResult internalIsAssignableFrom(LightweightTypeReference reference, TypeConformanceComputationArgument argument) {
-		TypeConformanceComputer conformanceCompouter = getOwner().getServices().getTypeConformanceComputer();
-		TypeConformanceResult result = conformanceCompouter.isConformant(this, reference, argument);
-		return result;
+		StoppedTask task = StopWatches.forTask("LightweightTypeReference#internalIsAssignableFrom");
+		try {
+			task.start();
+			TypeConformanceComputer conformanceCompouter = getOwner().getServices().getTypeConformanceComputer();
+			TypeConformanceResult result = conformanceCompouter.isConformant(this, reference, argument);
+			return result;
+		} finally {
+			task.stop();
+		}
 	}
 	
 	public boolean isAssignableFrom(Class<?> clazz) {
@@ -358,10 +384,16 @@ public abstract class LightweightTypeReference {
 	}
 	
 	public LightweightTypeReference copyInto(ITypeReferenceOwner owner) {
-		if (isOwnedBy(owner)) {
-			return this;
+		StoppedTask task = StopWatches.forTask("LightweightTypeReference.copyInto");
+		try {
+			task.start();
+			if (isOwnedBy(owner)) {
+				return this;
+			}
+			return doCopyInto(owner);
+		} finally {
+			task.stop();
 		}
-		return doCopyInto(owner);
 	}
 
 	protected abstract LightweightTypeReference doCopyInto(ITypeReferenceOwner owner);

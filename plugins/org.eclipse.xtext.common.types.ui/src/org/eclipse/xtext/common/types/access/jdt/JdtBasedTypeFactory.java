@@ -91,10 +91,11 @@ public class JdtBasedTypeFactory implements ITypeFactory<IType> {
 	private WorkingCopyOwner workingCopyOwner;
 	
 	private static StoppedTask resolveParamNames = StopWatches.forTask("resolve param names");
-	private StoppedTask resolveAnnotations = StopWatches.forTask("resolve annotations");
-	private StoppedTask resolveMembers = StopWatches.forTask("resolve members");
-	private StoppedTask resolveTypeParams = StopWatches.forTask("resolve typeParams");
-	private StoppedTask resolveBinding = StopWatches.forTask("resolve binding");
+	private static StoppedTask resolveAnnotations = StopWatches.forTask("resolve annotations");
+	private static StoppedTask resolveMembers = StopWatches.forTask("resolve members");
+	private static StoppedTask resolveTypeParams = StopWatches.forTask("resolve typeParams");
+	private static StoppedTask resolveBinding = StopWatches.forTask("resolve binding");
+	private static StoppedTask createType = StopWatches.forTask("JdtBasedTypeFactory.createType");
 
 	@Deprecated
 	public JdtBasedTypeFactory(TypeURIHelper uriHelper) {
@@ -125,7 +126,9 @@ public class JdtBasedTypeFactory implements ITypeFactory<IType> {
 			throw new IllegalStateException("Could not create binding for '" + jdtType.getFullyQualifiedName() + "'.");
 		IBinding binding = bindings[0];
 		if (binding instanceof ITypeBinding) {
+			createType.start();
 			JvmDeclaredType result = createType((ITypeBinding) binding);
+			createType.stop();
 			return result;
 		} else
 			throw new IllegalStateException("Expected ITypeBinding for '" + jdtType.getFullyQualifiedName()

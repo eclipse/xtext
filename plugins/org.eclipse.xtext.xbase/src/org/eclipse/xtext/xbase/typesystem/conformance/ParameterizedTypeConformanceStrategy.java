@@ -62,15 +62,7 @@ public class ParameterizedTypeConformanceStrategy<TypeReference extends Paramete
 			ParameterizedTypeReference rightReference,
 			TypeConformanceComputationArgument.Internal<TypeReference> param) {
 		if (leftReference.getType() == rightReference.getType()) {
-			if (param.rawType) {
-				return TypeConformanceResult.create(param, ConformanceHint.SUCCESS);
-			}
-			if (leftReference.isRawType() || rightReference.isRawType()) {
-				return TypeConformanceResult.create(param, ConformanceHint.SUCCESS, ConformanceHint.RAWTYPE_CONVERSION);
-			}
-			if (leftReference.getTypeArguments().isEmpty() || rightReference.getTypeArguments().isEmpty())
-				return TypeConformanceResult.create(param, ConformanceHint.SUCCESS);
-			return areArgumentsConformant(leftReference, rightReference, param.unboundComputationAddsHints, param);
+			return getConformanceResultForEqualTypes(leftReference, rightReference, param);
 		}
 		if (leftReference.isType(Void.TYPE) || rightReference.isType(Void.TYPE)) {
 			return TypeConformanceResult.create(param, ConformanceHint.INCOMPATIBLE);
@@ -124,7 +116,8 @@ public class ParameterizedTypeConformanceStrategy<TypeReference extends Paramete
 			}
 			TypeConformanceComputationArgument paramWithoutSuperTypeCheck = new TypeConformanceComputationArgument(
 					param.rawType, true, param.allowPrimitiveConversion, param.allowPrimitiveWidening, param.unboundComputationAddsHints, param.allowSynonyms);
-			for(LightweightTypeReference rightSuperType: rightReference.getAllSuperTypes()) {
+			LightweightTypeReference rightSuperType = rightReference.getSuperType(leftReference.getType());
+			if (rightSuperType != null) {
 				TypeConformanceResult result = conformanceComputer.isConformant(leftReference, rightSuperType, paramWithoutSuperTypeCheck);
 				if (result.isConformant()) {
 					return TypeConformanceResult.merge(result, TypeConformanceResult.create(param, ConformanceHint.SUBTYPE));
@@ -138,6 +131,19 @@ public class ParameterizedTypeConformanceStrategy<TypeReference extends Paramete
 			}
 		}
 		return isAssignableAsFunctionType(leftReference, rightReference, param);
+	}
+
+	protected TypeConformanceResult getConformanceResultForEqualTypes(TypeReference leftReference,
+			ParameterizedTypeReference rightReference, TypeConformanceComputationArgument.Internal<TypeReference> param) {
+		if (param.rawType) {
+			return TypeConformanceResult.create(param, ConformanceHint.SUCCESS);
+		}
+		if (leftReference.isRawType() || rightReference.isRawType()) {
+			return TypeConformanceResult.create(param, ConformanceHint.SUCCESS, ConformanceHint.RAWTYPE_CONVERSION);
+		}
+		if (leftReference.getTypeArguments().isEmpty() || rightReference.getTypeArguments().isEmpty())
+			return TypeConformanceResult.create(param, ConformanceHint.SUCCESS);
+		return areArgumentsConformant(leftReference, rightReference, param.unboundComputationAddsHints, param);
 	}
 
 	protected TypeConformanceResult isAssignableAsFunctionType(TypeReference leftReference,
