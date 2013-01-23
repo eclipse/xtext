@@ -428,7 +428,7 @@ public class ResolvedOperationTest extends AbstractXbaseTestCase {
           Assert.assertEquals(2, _size_1);
           IResolvedOperation _has = ResolvedOperationTest.this.has(it, 1);
           IResolvedOperation _candidatesAndOverrides = ResolvedOperationTest.this.candidatesAndOverrides(_has, 1);
-          ResolvedOperationTest.this.withDetail(_candidatesAndOverrides, OverrideCheckDetails.IMPLEMENTATION);
+          ResolvedOperationTest.this.withDetails(_candidatesAndOverrides, OverrideCheckDetails.IMPLEMENTATION);
         }
       };
     ObjectExtensions.<IResolvedOperation>operator_doubleArrow(_operation, _function);
