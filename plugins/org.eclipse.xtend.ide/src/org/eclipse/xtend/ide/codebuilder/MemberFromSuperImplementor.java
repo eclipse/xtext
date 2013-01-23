@@ -5,7 +5,7 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtend.core.formatting;
+package org.eclipse.xtend.ide.codebuilder;
 
 import static com.google.common.collect.Iterables.*;
 import static org.eclipse.xtext.util.Strings.*;
@@ -14,7 +14,6 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.xtend.core.jvmmodel.IXtendJvmAssociations;
 import org.eclipse.xtend.core.xtend.XtendClass;
-import org.eclipse.xtext.Keyword;
 import org.eclipse.xtext.common.types.JvmConstructor;
 import org.eclipse.xtext.common.types.JvmExecutable;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
@@ -28,12 +27,8 @@ import org.eclipse.xtext.common.types.JvmVisibility;
 import org.eclipse.xtext.common.types.util.ITypeArgumentContext;
 import org.eclipse.xtext.common.types.util.TypeArgumentContextProvider;
 import org.eclipse.xtext.common.types.util.TypeReferences;
-import org.eclipse.xtext.nodemodel.ICompositeNode;
-import org.eclipse.xtext.nodemodel.ILeafNode;
-import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 import org.eclipse.xtext.xbase.compiler.IAppendable;
 import org.eclipse.xtext.xbase.compiler.StringBuilderBasedAppendable;
-import org.eclipse.xtext.xbase.compiler.TypeReferenceSerializer;
 import org.eclipse.xtext.xbase.compiler.output.XtypeTypeReferenceSerializer;
 
 import com.google.inject.Inject;
@@ -41,6 +36,7 @@ import com.google.inject.Inject;
 /**
  * @author Jan Koehnlein - Initial contribution and API
  */
+// TODO: reimplement using ICodeBuilder
 public class MemberFromSuperImplementor {
 
 	public static final String DEFAULT_BODY = "throw new UnsupportedOperationException(\"TODO: auto-generated method stub\")";
@@ -56,6 +52,10 @@ public class MemberFromSuperImplementor {
 
 	@Inject
 	private IXtendJvmAssociations associations;
+	
+	@Inject
+	private InsertionOffsets insertionOffsets;
+	
 
 	public void appendOverrideFunction(final XtendClass overrider, JvmOperation overriddenOperation,
 			IAppendable appendable) {
@@ -186,23 +186,4 @@ public class MemberFromSuperImplementor {
 				&& equal("java.lang.Object", typeParameter.getConstraints().get(0).getTypeReference().getIdentifier());
 			
 	}
-
-	public int getFunctionInsertOffset(XtendClass clazz) {
-		ICompositeNode clazzNode = NodeModelUtils.findActualNodeFor(clazz);
-		if (clazzNode == null)
-			throw new IllegalStateException("Cannot determine node for clazz " + clazz.getName());
-		int lastClosingBraceOffset = -1;
-		for (ILeafNode leafNode : clazzNode.getLeafNodes()) {
-			if (leafNode.getGrammarElement() instanceof Keyword
-					&& equal("}", ((Keyword) leafNode.getGrammarElement()).getValue())) {
-				lastClosingBraceOffset = leafNode.getOffset();
-			}
-		}
-		return (lastClosingBraceOffset == -1) ? clazzNode.getTotalEndOffset() : lastClosingBraceOffset;
-	}
-
-	public int getConstructorInsertOffset(XtendClass clazz) {
-		return getFunctionInsertOffset(clazz);
-	}
-
 }

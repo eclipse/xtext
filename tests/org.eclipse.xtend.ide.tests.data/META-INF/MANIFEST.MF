@@ -5,4 +5,5 @@ Bundle-SymbolicName: org.eclipse.xtend.ide.tests.data
 Bundle-Version: 1.0.0.qualifier
 Bundle-Vendor: Eclipse Modeling Project
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
-Export-Package: org.eclipse.xtend.core.tests.internal;x-internal:=true
+Export-Package: org.eclipse.xtend.core.tests.internal;x-internal:=true,
+ org.eclipse.xtend.ide.tests.data

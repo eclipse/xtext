@@ -5,14 +5,16 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtend.core.tests.formatting;
+package org.eclipse.xtend.ide.tests.codebuilder;
 
 import static com.google.common.collect.Iterables.*;
 import static org.eclipse.xtext.util.Strings.*;
 
-import org.eclipse.xtend.core.formatting.MemberFromSuperImplementor;
-import org.eclipse.xtend.core.tests.AbstractXtendTestCase;
 import org.eclipse.xtend.core.xtend.XtendClass;
+import org.eclipse.xtend.ide.codebuilder.InsertionOffsets;
+import org.eclipse.xtend.ide.codebuilder.MemberFromSuperImplementor;
+import org.eclipse.xtend.ide.tests.AbstractXtendUITestCase;
+import org.eclipse.xtend.ide.tests.WorkbenchTestHelper;
 import org.eclipse.xtext.common.types.JvmConstructor;
 import org.eclipse.xtext.common.types.JvmExecutable;
 import org.eclipse.xtext.common.types.JvmGenericType;
@@ -29,12 +31,18 @@ import com.google.inject.Inject;
 /**
  * @author Jan Koehnlein - Initial contribution and API
  */
-public class SuperMemberImplementorTest extends AbstractXtendTestCase {
+public class SuperMemberImplementorTest extends AbstractXtendUITestCase {
 
 	private XtendClass xtendClass;
 
 	@Inject
 	private MemberFromSuperImplementor implementor;
+
+	@Inject
+	private InsertionOffsets insertionOffsets;
+	
+	@Inject 
+	private WorkbenchTestHelper testHelper;
 
 	private JvmGenericType implementedInterface;
 
@@ -44,17 +52,19 @@ public class SuperMemberImplementorTest extends AbstractXtendTestCase {
 
 	private String model;
 
+	@Override
 	@Before
 	public void setUp() throws Exception {
-		model = "class Foo<U> extends test.Constructor<U> implements test.OverrideFunctions<U, CharSequence> {}";
-		xtendClass = clazz(model);
+		super.setUp();
+		model = "class Foo<U> extends org.eclipse.xtend.ide.tests.data.Constructor<U> implements org.eclipse.xtend.ide.tests.data.OverrideFunctions<U, CharSequence> {}";
+		xtendClass = (XtendClass) testHelper.xtendFile("Foo.xtend", model).getXtendTypes().get(0);
 		implementedInterface = (JvmGenericType) xtendClass.getImplements().get(0).getType();
 		superClass = (JvmGenericType) xtendClass.getExtends().getType();
 		throwsExpression = "\n  throw new UnsupportedOperationException(\"TODO: auto-generated method stub\")\n";
 	}
 
 	@Test public void testInsertOffset() throws Exception {
-		assertEquals(model.lastIndexOf('}'), implementor.getFunctionInsertOffset(xtendClass));
+		assertEquals(model.lastIndexOf('}'), insertionOffsets.getNewMethodInsertOffset(null, xtendClass));
 	}
 
 	@Test public void testPlain() {
@@ -62,21 +72,21 @@ public class SuperMemberImplementorTest extends AbstractXtendTestCase {
 	}
 
 	@Test public void testClassTypeParam() {
-		checkOverrideMethodCode("classTypeParameter", "override classTypeParameter(U arg0) {" + throwsExpression + "}");
+		checkOverrideMethodCode("classTypeParameter", "override classTypeParameter(U param) {" + throwsExpression + "}");
 	}
 
 	@Test public void testClassTypeParam2() {
 		checkOverrideMethodCode("classTypeParameter2",
-				"override classTypeParameter2(Iterable<? extends CharSequence> arg0) {" + throwsExpression + "}");
+				"override classTypeParameter2(Iterable<? extends CharSequence> param) {" + throwsExpression + "}");
 	}
 
 	@Test public void testClassTypeParam3() {
 		checkOverrideMethodCode("classTypeParameter3",
-				"override classTypeParameter3(Iterable<? super CharSequence> arg0) {" + throwsExpression + "}");
+				"override classTypeParameter3(Iterable<? super CharSequence> param) {" + throwsExpression + "}");
 	}
 
 	@Test public void testMethodTypeParam() {
-		checkOverrideMethodCode("methodTypeParameter", "override <V> methodTypeParameter(V arg0) { " + throwsExpression
+		checkOverrideMethodCode("methodTypeParameter", "override <V> methodTypeParameter(V param) { " + throwsExpression
 				+ "}");
 	}
 
@@ -94,24 +104,24 @@ public class SuperMemberImplementorTest extends AbstractXtendTestCase {
 
 	@Test public void testClassTypeParam_1() {
 		checkOverrideMethodCode("concreteClassTypeParameter",
-				"override concreteClassTypeParameter(U arg0) { super.concreteClassTypeParameter(arg0) }");
+				"override concreteClassTypeParameter(U param) { super.concreteClassTypeParameter(param) }");
 	}
 
 	@Test public void testMethodTypeParam_1() {
 		checkOverrideMethodCode("concreteMethodTypeParameter",
-				"override <V> concreteMethodTypeParameter(V arg0) { super.<V>concreteMethodTypeParameter(arg0)}");
+				"override <V> concreteMethodTypeParameter(V param) { super.<V>concreteMethodTypeParameter(param)}");
 	}
 
 	@Test public void testOverrideConstructor_0() {
-		checkImplementConstructor("String", "new(String arg0) { super(arg0) }");
+		checkImplementConstructor("String", "new(String x) { super(x) }");
 	}
 
 	@Test public void testOverrideConstructor_1() {
-		checkImplementConstructor("U", "new(U arg0) { super(arg0) }");
+		checkImplementConstructor("U", "new(U x) { super(x) }");
 	}
 
 	@Test public void testOverrideConstructor_2() {
-		checkImplementConstructor("int", "protected new(int arg0) { super(arg0) }");
+		checkImplementConstructor("int", "protected new(int x) { super(x) }");
 	}
 
 	@Test public void testOverrideConstructor_3() {

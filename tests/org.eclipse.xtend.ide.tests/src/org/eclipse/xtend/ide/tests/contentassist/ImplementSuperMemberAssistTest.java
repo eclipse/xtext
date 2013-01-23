@@ -10,7 +10,7 @@ package org.eclipse.xtend.ide.tests.contentassist;
 import java.util.List;
 
 import org.eclipse.jface.text.contentassist.ICompletionProposal;
-import org.eclipse.xtend.core.formatting.MemberFromSuperImplementor;
+import org.eclipse.xtend.ide.codebuilder.MemberFromSuperImplementor;
 import org.eclipse.xtext.formatting.IIndentationInformation;
 import org.eclipse.xtext.util.ReplaceRegion;
 import org.eclipse.xtext.xbase.imports.RewritableImportSection;

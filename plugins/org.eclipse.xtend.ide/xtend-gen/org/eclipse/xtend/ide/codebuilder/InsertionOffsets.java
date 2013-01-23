@@ -11,6 +11,7 @@ import com.google.common.collect.Iterables;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.annotation.NonNullByDefault;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtend.core.xtend.XtendClass;
 import org.eclipse.xtend.core.xtend.XtendConstructor;
 import org.eclipse.xtend.core.xtend.XtendField;
@@ -31,12 +32,12 @@ import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 @NonNullByDefault
 @SuppressWarnings("all")
 public class InsertionOffsets {
-  public int getNewTypeInsertOffset(final EObject call, final XtendClass ownerClass) {
+  public int getNewTypeInsertOffset(@Nullable final EObject call, final XtendClass ownerClass) {
     int _after = this.after(ownerClass);
     return _after;
   }
   
-  public int getNewFieldInsertOffset(final EObject call, final XtendClass ownerClass) {
+  public int getNewFieldInsertOffset(@Nullable final EObject call, final XtendClass ownerClass) {
     EList<XtendMember> _members = ownerClass.getMembers();
     boolean _isEmpty = _members.isEmpty();
     if (_isEmpty) {
@@ -55,16 +56,18 @@ public class InsertionOffsets {
     }
   }
   
-  public int getNewMethodInsertOffset(final EObject call, final XtendClass ownerClass) {
+  public int getNewMethodInsertOffset(@Nullable final EObject call, final XtendClass ownerClass) {
     final XtendMember callingMember = EcoreUtil2.<XtendMember>getContainerOfType(call, XtendMember.class);
-    boolean _equals = ObjectExtensions.operator_equals(callingMember, null);
-    if (_equals) {
-      IllegalStateException _illegalStateException = new IllegalStateException("Missing method not called from Xtend member");
-      throw _illegalStateException;
+    boolean _and = false;
+    boolean _notEquals = ObjectExtensions.operator_notEquals(callingMember, null);
+    if (!_notEquals) {
+      _and = false;
+    } else {
+      EList<XtendMember> _members = ownerClass.getMembers();
+      boolean _contains = _members.contains(callingMember);
+      _and = (_notEquals && _contains);
     }
-    EList<XtendMember> _members = ownerClass.getMembers();
-    boolean _contains = _members.contains(callingMember);
-    if (_contains) {
+    if (_and) {
       return this.after(callingMember);
     } else {
       EList<XtendMember> _members_1 = ownerClass.getMembers();
@@ -79,7 +82,7 @@ public class InsertionOffsets {
     }
   }
   
-  public int getNewConstructorInsertOffset(final EObject call, final XtendClass ownerClass) {
+  public int getNewConstructorInsertOffset(@Nullable final EObject call, final XtendClass ownerClass) {
     EList<XtendMember> _members = ownerClass.getMembers();
     Iterable<XtendConstructor> _filter = Iterables.<XtendConstructor>filter(_members, XtendConstructor.class);
     final XtendConstructor lastDefinedConstructor = IterableExtensions.<XtendConstructor>last(_filter);
