@@ -187,7 +187,7 @@ public abstract class AbstractXbaseCompiler {
 	
 	protected void generateCheckedExceptionHandling(XExpression obj, ITreeAppendable appendable) {
 		String name = appendable.declareSyntheticVariable(new Object(), "_e");
-		appendable.decreaseIndentation().newLine().append("} catch (Exception "+name+") {").increaseIndentation();
+		appendable.decreaseIndentation().newLine().append("} catch (Throwable "+name+") {").increaseIndentation();
 		final JvmType findDeclaredType = typeReferences.findDeclaredType(Exceptions.class, obj);
 		if (findDeclaredType == null) {
 			appendable.append("COMPILE ERROR : '"+Exceptions.class.getCanonicalName()+"' could not be found on the classpath!");
