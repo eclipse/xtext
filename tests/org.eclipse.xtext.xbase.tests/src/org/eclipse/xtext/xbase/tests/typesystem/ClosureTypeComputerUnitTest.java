@@ -16,6 +16,7 @@ import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.common.types.JvmFeature;
+import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmMember;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
@@ -546,6 +547,10 @@ public class ClosureTypeComputerUnitTest extends AbstractXbaseTestCase implement
 	class NullFeatureScopeSession extends AbstractFeatureScopeSession {
 
 		public boolean isVisible(JvmMember member) {
+			throw new UnsupportedOperationException();
+		}
+		
+		public boolean isVisible(JvmMember member, @Nullable JvmIdentifiableElement receiverFeature) {
 			throw new UnsupportedOperationException();
 		}
 

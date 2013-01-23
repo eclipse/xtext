@@ -13,8 +13,11 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmFeature;
+import org.eclipse.xtext.common.types.JvmIdentifiableElement;
+import org.eclipse.xtext.common.types.JvmMember;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.naming.QualifiedName;
@@ -26,6 +29,7 @@ import org.eclipse.xtext.xbase.scoping.featurecalls.OperatorMapping;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightMergedBoundTypeArgument;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 import org.eclipse.xtext.xbase.typesystem.util.DeclaratorTypeArgumentCollector;
+import org.eclipse.xtext.xbase.typesystem.util.IVisibilityHelper;
 
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
@@ -34,23 +38,29 @@ import com.google.common.collect.Sets;
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public class ReceiverFeatureScope extends AbstractSessionBasedScope {
+public class ReceiverFeatureScope extends AbstractSessionBasedScope implements IVisibilityHelper {
 
 	private final TypeBucket bucket;
 	private final OperatorMapping operatorMapping;
 	private final LightweightTypeReference receiverType;
 	private final XExpression receiver;
 	private final boolean implicit;
+	private final JvmIdentifiableElement receiverFeature;
 	private Map<JvmTypeParameter, LightweightMergedBoundTypeArgument> receiverTypeParameterMapping;
 
 	protected ReceiverFeatureScope(IScope parent, IFeatureScopeSession session, XExpression receiver, LightweightTypeReference receiverType, boolean implicit,
-			XAbstractFeatureCall featureCall, TypeBucket bucket, OperatorMapping operatorMapping) {
+			XAbstractFeatureCall featureCall, TypeBucket bucket, JvmIdentifiableElement receiverFeature, OperatorMapping operatorMapping) {
 		super(parent, session, featureCall);
 		this.receiver = receiver;
 		this.receiverType = receiverType;
 		this.implicit = implicit;
 		this.bucket = bucket;
+		this.receiverFeature = receiverFeature;
 		this.operatorMapping = operatorMapping;
+	}
+	
+	public boolean isVisible(@NonNull JvmMember member) {
+		return getSession().isVisible(member, receiverFeature);
 	}
 	
 	@Override
@@ -77,9 +87,9 @@ public class ReceiverFeatureScope extends AbstractSessionBasedScope {
 
 	protected IEObjectDescription createDescription(QualifiedName name, JvmFeature feature, TypeBucket bucket) {
 		if (implicit) {
-			return new InstanceFeatureDescriptionWithImplicitReceiver(name, feature, receiver, receiverType, getReceiverTypeParameterMapping(), bucket.getId(), getSession().isVisible(feature));
+			return new InstanceFeatureDescriptionWithImplicitReceiver(name, feature, receiver, receiverType, getReceiverTypeParameterMapping(), bucket.getId(), isVisible(feature));
 		} else {
-			return new InstanceFeatureDescription(name, feature, receiver, receiverType, getReceiverTypeParameterMapping(), bucket.getId(), getSession().isVisible(feature));
+			return new InstanceFeatureDescription(name, feature, receiver, receiverType, getReceiverTypeParameterMapping(), bucket.getId(), isVisible(feature));
 		}
 	}
 

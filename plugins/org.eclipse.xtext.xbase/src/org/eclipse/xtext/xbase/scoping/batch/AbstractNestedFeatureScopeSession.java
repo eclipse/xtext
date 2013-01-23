@@ -11,6 +11,7 @@ import java.util.List;
 
 import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmMember;
 import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.IEObjectDescription;
@@ -103,6 +104,10 @@ public abstract class AbstractNestedFeatureScopeSession extends AbstractFeatureS
 	
 	public boolean isVisible(JvmMember member) {
 		return parent.isVisible(member);
+	}
+	
+	public boolean isVisible(JvmMember member, @Nullable JvmIdentifiableElement receiverFeature) {
+		return parent.isVisible(member, receiverFeature);
 	}
 	
 }

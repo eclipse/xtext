@@ -160,6 +160,16 @@ public abstract class ResolvedTypes implements IResolvedTypes {
 			throw new IllegalStateException("Duplicate diagnostic: " + diagnostic);
 		}
 	}
+	
+	@Nullable
+	public JvmIdentifiableElement getLinkedFeature(@Nullable XAbstractFeatureCall featureCall) {
+		if (featureLinking == null || featureCall == null)
+			return null;
+		ILinkingCandidate candidate = featureLinking.get(featureCall);
+		if (candidate == null)
+			return null;
+		return candidate.getFeature();
+	}
 
 	@Nullable
 	protected TypeData getTypeData(XExpression expression, boolean returnType) {

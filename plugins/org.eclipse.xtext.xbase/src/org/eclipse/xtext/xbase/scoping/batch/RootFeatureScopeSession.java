@@ -12,6 +12,7 @@ import java.util.Collections;
 
 import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmMember;
 import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.IEObjectDescription;
@@ -85,6 +86,15 @@ public class RootFeatureScopeSession extends AbstractFeatureScopeSession {
 	 * By default, all public features are considered to be accessible.
 	 */
 	public boolean isVisible(JvmMember member) {
+		return visibilityHelper.isVisible(member);
+	}
+	
+	/**
+	 * {@inheritDoc}
+	 * 
+	 * By default, all public features are considered to be accessible.
+	 */
+	public boolean isVisible(JvmMember member, @Nullable JvmIdentifiableElement receiverFeature) {
 		return visibilityHelper.isVisible(member);
 	}
 	

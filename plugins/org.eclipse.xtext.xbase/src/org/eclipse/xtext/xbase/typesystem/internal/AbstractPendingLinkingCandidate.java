@@ -130,17 +130,17 @@ public abstract class AbstractPendingLinkingCandidate<Expression extends XExpres
 	public ILinkingCandidate getPreferredCandidate(ILinkingCandidate other) {
 		if (other instanceof AbstractPendingLinkingCandidate) {
 			AbstractPendingLinkingCandidate<?> right = (AbstractPendingLinkingCandidate<?>) other;
-			boolean visible = isVisible();
-			if (visible != right.isVisible()) {
-				if (visible)
-					return getThis();
-				return other;
-			}
 			int arityCompareResult = compareByArityWith(right);
 			if (arityCompareResult != 0) {
 				if (arityCompareResult <= 0) {
 					return getThis();
 				}
+				return other;
+			}
+			boolean visible = isVisible();
+			if (visible != right.isVisible()) {
+				if (visible)
+					return getThis();
 				return other;
 			}
 			int typeArityCompareResult = compareByArity(getTypeArityMismatch(), right.getTypeArityMismatch());

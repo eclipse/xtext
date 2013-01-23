@@ -100,6 +100,7 @@ public class FeatureLinkingCandidate extends AbstractPendingLinkingCandidate<XAb
 	
 	@Override
 	public boolean validate(IAcceptor<? super AbstractDiagnostic> result) {
+		// TODO improve error messages
 		if (isStatic() && !isExtension() && isInstanceAccessSyntax()) {
 			String message = "Instance access to static member " + getFeature().getSimpleName();
 			AbstractDiagnostic diagnostic = new EObjectDiagnosticImpl(Severity.ERROR,
@@ -248,7 +249,8 @@ public class FeatureLinkingCandidate extends AbstractPendingLinkingCandidate<XAb
 		int result = super.compareByArityWith(right);
 		if (result == 0) {
 			boolean isExecutable = getFeature() instanceof JvmExecutable;
-			if (isExecutable != right.getFeature() instanceof JvmExecutable) {
+			if (isExecutable != right.getFeature() instanceof JvmExecutable && isVisible() == right.isVisible()) {
+				// TODO this code looks bogus to me (we need to verify why / if we need this)
 				if (getExpression() instanceof XAssignment) {
 					if (isExecutable)
 						return 1;
