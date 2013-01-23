@@ -56,6 +56,16 @@ public abstract class AbstractMethodBuilder extends AbstractCodeBuilder {
     this._parameterTypes = parameterTypes;
   }
   
+  private boolean _staticFlag;
+  
+  public boolean isStaticFlag() {
+    return this._staticFlag;
+  }
+  
+  public void setStaticFlag(final boolean staticFlag) {
+    this._staticFlag = staticFlag;
+  }
+  
   protected IAppendable appendDefaultBody(final IAppendable appendable, final String statementSeparator) {
     IAppendable _append = appendable.append("throw new UnsupportedOperationException(\"TODO: auto-generated method stub\")");
     IAppendable _append_1 = _append.append(statementSeparator);

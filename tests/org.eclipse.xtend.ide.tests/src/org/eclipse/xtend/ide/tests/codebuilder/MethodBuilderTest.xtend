@@ -40,4 +40,34 @@ class MethodBuilderTest extends AbstractBuilderTest {
 			  «DEFAULT_BODY»;
 			}''')
 	}
+	
+	@Test
+	def testStaticXtendMethod() {
+		(createMethodBuilder(xtendClass) => [
+			context = xtendClass
+			methodName = 'foo'
+			returnType = xtendClass.createTypeRef
+			visibility = JvmVisibility::PROTECTED
+			staticFlag = true
+			parameterTypes = <JvmTypeReference>newArrayList(xtendClass.createTypeRef)
+		]).assertBuilds('''
+			def protected static foo(Foo foo) {
+			  «DEFAULT_BODY»
+			}''')
+	}
+	
+	@Test
+	def testStaticJavaMethod() {
+		(createMethodBuilder(javaClass) => [
+			context = javaClass
+			methodName = 'bar'
+			returnType = javaClass.createTypeRef
+			visibility = JvmVisibility::PRIVATE
+			staticFlag = true
+			parameterTypes = <JvmTypeReference>newArrayList(javaClass.createTypeRef)
+		]).assertBuilds('''
+			private static Bar bar(Bar bar) {
+			  «DEFAULT_BODY»;
+			}''')
+	}
 }

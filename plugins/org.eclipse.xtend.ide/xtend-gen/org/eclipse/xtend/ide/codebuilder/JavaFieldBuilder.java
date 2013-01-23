@@ -48,15 +48,23 @@ public class JavaFieldBuilder extends AbstractFieldBuilder implements Java {
   }
   
   public IAppendable build(final IAppendable appendable) {
-    JvmVisibility _visibility = this.getVisibility();
-    IAppendable _appendVisibility = this.appendVisibility(appendable, _visibility, JvmVisibility.DEFAULT);
-    JvmTypeReference _fieldType = this.getFieldType();
-    IAppendable _appendType = this.appendType(_appendVisibility, _fieldType, "Object");
-    IAppendable _append = _appendType.append(" ");
-    String _fieldName = this.getFieldName();
-    IAppendable _append_1 = _append.append(_fieldName);
-    IAppendable _append_2 = _append_1.append(";");
-    return _append_2;
+    IAppendable _xblockexpression = null;
+    {
+      JvmVisibility _visibility = this.getVisibility();
+      this.appendVisibility(appendable, _visibility, JvmVisibility.DEFAULT);
+      boolean _isStaticFlag = this.isStaticFlag();
+      if (_isStaticFlag) {
+        appendable.append("static ");
+      }
+      JvmTypeReference _fieldType = this.getFieldType();
+      IAppendable _appendType = this.appendType(appendable, _fieldType, "Object");
+      IAppendable _append = _appendType.append(" ");
+      String _fieldName = this.getFieldName();
+      IAppendable _append_1 = _append.append(_fieldName);
+      IAppendable _append_2 = _append_1.append(";");
+      _xblockexpression = (_append_2);
+    }
+    return _xblockexpression;
   }
   
   public IType getIType() {

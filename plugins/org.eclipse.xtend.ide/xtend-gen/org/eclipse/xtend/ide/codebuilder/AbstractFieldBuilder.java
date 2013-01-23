@@ -37,6 +37,16 @@ public abstract class AbstractFieldBuilder extends AbstractCodeBuilder {
     this._fieldType = fieldType;
   }
   
+  private boolean _staticFlag;
+  
+  public boolean isStaticFlag() {
+    return this._staticFlag;
+  }
+  
+  public void setStaticFlag(final boolean staticFlag) {
+    this._staticFlag = staticFlag;
+  }
+  
   public String getImage() {
     String _switchResult = null;
     JvmVisibility _visibility = this.getVisibility();

@@ -294,6 +294,51 @@ class QuickfixTest extends AbstractXtendUITestCase {
 	}
 	
 	@Test 
+	def void missingStaticMemberOtherClass() {
+		create('Foo.xtend', '''
+			class Foo {}
+			
+			class Bar {
+				def bar() {
+					Foo::foo|
+				}
+			}
+		''')
+		.assertIssueCodes(FEATURECALL_LINKING_DIAGNOSTIC)
+		.assertResolutionLabels("Create static method 'foo()' in 'Foo'", "Create static method 'getFoo()' in 'Foo'")
+		.assertModelAfterQuickfix("Create static method 'foo()' in 'Foo'", '''
+			class Foo {
+				
+				def static foo() {
+					«defaultBody»
+				}
+				
+				}
+			
+			class Bar {
+				def bar() {
+					Foo::foo
+				}
+			}
+		''')
+		.assertModelAfterQuickfix("Create static method 'getFoo()' in 'Foo'", '''
+			class Foo {
+				
+				def static getFoo() {
+					«defaultBody»
+				}
+				
+				}
+			
+			class Bar {
+				def bar() {
+					Foo::foo
+				}
+			}
+		''')
+	}
+	
+	@Test 
 	def void missingMethodSameClass() {
 		create('Foo.xtend', '''
 			class Foo {
@@ -360,6 +405,37 @@ class QuickfixTest extends AbstractXtendUITestCase {
 					«defaultBody»
 				}
 				
+			}
+		''')
+	}
+	
+	@Test 
+	def void missingStaticMethodOtherClass() {
+		create('Foo.xtend', '''
+			class Foo {
+			}
+			
+			class Bar {
+				def bar() {
+					Foo::foo|()
+				}
+			}
+		''')
+		.assertIssueCodes(FEATURECALL_LINKING_DIAGNOSTIC)
+		.assertResolutionLabels("Create static method 'foo()' in 'Foo'")
+		.assertModelAfterQuickfix('''
+			class Foo {
+				
+				def static foo() {
+					«defaultBody»
+				}
+				
+			}
+			
+			class Bar {
+				def bar() {
+					Foo::foo()
+				}
 			}
 		''')
 	}

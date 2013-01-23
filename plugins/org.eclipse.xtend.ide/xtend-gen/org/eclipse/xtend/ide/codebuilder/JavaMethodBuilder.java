@@ -25,21 +25,13 @@ public class JavaMethodBuilder extends AbstractMethodBuilder implements Java {
   
   public boolean isValid() {
     boolean _and = false;
-    boolean _and_1 = false;
     boolean _isValid = super.isValid();
     if (!_isValid) {
-      _and_1 = false;
+      _and = false;
     } else {
       String _methodName = this.getMethodName();
       boolean _notEquals = ObjectExtensions.operator_notEquals(_methodName, null);
-      _and_1 = (_isValid && _notEquals);
-    }
-    if (!_and_1) {
-      _and = false;
-    } else {
-      JvmTypeReference _returnType = this.getReturnType();
-      boolean _notEquals_1 = ObjectExtensions.operator_notEquals(_returnType, null);
-      _and = (_and_1 && _notEquals_1);
+      _and = (_isValid && _notEquals);
     }
     return _and;
   }
@@ -49,23 +41,31 @@ public class JavaMethodBuilder extends AbstractMethodBuilder implements Java {
   }
   
   public IAppendable build(final IAppendable appendable) {
-    JvmVisibility _visibility = this.getVisibility();
-    IAppendable _appendVisibility = this.appendVisibility(appendable, _visibility, JvmVisibility.PRIVATE);
-    JvmTypeReference _returnType = this.getReturnType();
-    IAppendable _appendType = this.appendType(_appendVisibility, _returnType, "void");
-    IAppendable _append = _appendType.append(" ");
-    String _methodName = this.getMethodName();
-    IAppendable _append_1 = _append.append(_methodName);
-    List<JvmTypeReference> _parameterTypes = this.getParameterTypes();
-    IAppendable _appendParameters = this.appendParameters(_append_1, _parameterTypes);
-    IAppendable _append_2 = _appendParameters.append(" {");
-    IAppendable _increaseIndentation = _append_2.increaseIndentation();
-    IAppendable _newLine = _increaseIndentation.newLine();
-    IAppendable _appendDefaultBody = this.appendDefaultBody(_newLine, ";");
-    IAppendable _decreaseIndentation = _appendDefaultBody.decreaseIndentation();
-    IAppendable _newLine_1 = _decreaseIndentation.newLine();
-    IAppendable _append_3 = _newLine_1.append("}");
-    return _append_3;
+    IAppendable _xblockexpression = null;
+    {
+      JvmVisibility _visibility = this.getVisibility();
+      this.appendVisibility(appendable, _visibility, JvmVisibility.DEFAULT);
+      boolean _isStaticFlag = this.isStaticFlag();
+      if (_isStaticFlag) {
+        appendable.append("static ");
+      }
+      JvmTypeReference _returnType = this.getReturnType();
+      IAppendable _appendType = this.appendType(appendable, _returnType, "void");
+      IAppendable _append = _appendType.append(" ");
+      String _methodName = this.getMethodName();
+      IAppendable _append_1 = _append.append(_methodName);
+      List<JvmTypeReference> _parameterTypes = this.getParameterTypes();
+      IAppendable _appendParameters = this.appendParameters(_append_1, _parameterTypes);
+      IAppendable _append_2 = _appendParameters.append(" {");
+      IAppendable _increaseIndentation = _append_2.increaseIndentation();
+      IAppendable _newLine = _increaseIndentation.newLine();
+      IAppendable _appendDefaultBody = this.appendDefaultBody(_newLine, ";");
+      IAppendable _decreaseIndentation = _appendDefaultBody.decreaseIndentation();
+      IAppendable _newLine_1 = _decreaseIndentation.newLine();
+      IAppendable _append_3 = _newLine_1.append("}");
+      _xblockexpression = (_append_3);
+    }
+    return _xblockexpression;
   }
   
   public IType getIType() {

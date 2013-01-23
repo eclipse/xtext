@@ -46,14 +46,22 @@ public class XtendFieldBuilder extends AbstractFieldBuilder implements Xtend {
   }
   
   public IAppendable build(final IAppendable appendable) {
-    JvmVisibility _visibility = this.getVisibility();
-    IAppendable _appendVisibility = this.appendVisibility(appendable, _visibility, JvmVisibility.PRIVATE);
-    JvmTypeReference _fieldType = this.getFieldType();
-    IAppendable _appendType = this.appendType(_appendVisibility, _fieldType, "Object");
-    IAppendable _append = _appendType.append(" ");
-    String _fieldName = this.getFieldName();
-    IAppendable _append_1 = _append.append(_fieldName);
-    return _append_1;
+    IAppendable _xblockexpression = null;
+    {
+      JvmVisibility _visibility = this.getVisibility();
+      this.appendVisibility(appendable, _visibility, JvmVisibility.PRIVATE);
+      boolean _isStaticFlag = this.isStaticFlag();
+      if (_isStaticFlag) {
+        appendable.append("static ");
+      }
+      JvmTypeReference _fieldType = this.getFieldType();
+      IAppendable _appendType = this.appendType(appendable, _fieldType, "Object");
+      IAppendable _append = _appendType.append(" ");
+      String _fieldName = this.getFieldName();
+      IAppendable _append_1 = _append.append(_fieldName);
+      _xblockexpression = (_append_1);
+    }
+    return _xblockexpression;
   }
   
   public int getInsertOffset() {

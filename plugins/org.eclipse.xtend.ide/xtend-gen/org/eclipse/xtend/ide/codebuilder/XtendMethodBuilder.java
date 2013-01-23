@@ -47,21 +47,29 @@ public class XtendMethodBuilder extends AbstractMethodBuilder implements Xtend {
   }
   
   public IAppendable build(final IAppendable appendable) {
-    IAppendable _append = appendable.append("def ");
-    JvmVisibility _visibility = this.getVisibility();
-    IAppendable _appendVisibility = this.appendVisibility(_append, _visibility, JvmVisibility.PUBLIC);
-    String _methodName = this.getMethodName();
-    IAppendable _append_1 = _appendVisibility.append(_methodName);
-    List<JvmTypeReference> _parameterTypes = this.getParameterTypes();
-    IAppendable _appendParameters = this.appendParameters(_append_1, _parameterTypes);
-    IAppendable _append_2 = _appendParameters.append(" {");
-    IAppendable _increaseIndentation = _append_2.increaseIndentation();
-    IAppendable _newLine = _increaseIndentation.newLine();
-    IAppendable _appendDefaultBody = this.appendDefaultBody(_newLine, "");
-    IAppendable _decreaseIndentation = _appendDefaultBody.decreaseIndentation();
-    IAppendable _newLine_1 = _decreaseIndentation.newLine();
-    IAppendable _append_3 = _newLine_1.append("}");
-    return _append_3;
+    IAppendable _xblockexpression = null;
+    {
+      IAppendable _append = appendable.append("def ");
+      JvmVisibility _visibility = this.getVisibility();
+      this.appendVisibility(_append, _visibility, JvmVisibility.PUBLIC);
+      boolean _isStaticFlag = this.isStaticFlag();
+      if (_isStaticFlag) {
+        appendable.append("static ");
+      }
+      String _methodName = this.getMethodName();
+      IAppendable _append_1 = appendable.append(_methodName);
+      List<JvmTypeReference> _parameterTypes = this.getParameterTypes();
+      IAppendable _appendParameters = this.appendParameters(_append_1, _parameterTypes);
+      IAppendable _append_2 = _appendParameters.append(" {");
+      IAppendable _increaseIndentation = _append_2.increaseIndentation();
+      IAppendable _newLine = _increaseIndentation.newLine();
+      IAppendable _appendDefaultBody = this.appendDefaultBody(_newLine, "");
+      IAppendable _decreaseIndentation = _appendDefaultBody.decreaseIndentation();
+      IAppendable _newLine_1 = _decreaseIndentation.newLine();
+      IAppendable _append_3 = _newLine_1.append("}");
+      _xblockexpression = (_append_3);
+    }
+    return _xblockexpression;
   }
   
   public int getInsertOffset() {

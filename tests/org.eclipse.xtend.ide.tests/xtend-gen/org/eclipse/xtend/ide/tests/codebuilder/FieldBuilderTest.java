@@ -58,6 +58,26 @@ public class FieldBuilderTest extends AbstractBuilderTest {
   }
   
   @Test
+  public void testStaticXtendField() {
+    JvmDeclaredType _xtendClass = this.getXtendClass();
+    AbstractFieldBuilder _createFieldBuilder = this._codeBuilderFactory.createFieldBuilder(_xtendClass);
+    final Procedure1<AbstractFieldBuilder> _function = new Procedure1<AbstractFieldBuilder>() {
+        public void apply(final AbstractFieldBuilder it) {
+          JvmDeclaredType _xtendClass = FieldBuilderTest.this.getXtendClass();
+          it.setContext(_xtendClass);
+          it.setFieldName("foo");
+          JvmDeclaredType _xtendClass_1 = FieldBuilderTest.this.getXtendClass();
+          JvmParameterizedTypeReference _createTypeRef = FieldBuilderTest.this._typeReferences.createTypeRef(_xtendClass_1);
+          it.setFieldType(_createTypeRef);
+          it.setVisibility(JvmVisibility.PROTECTED);
+          it.setStaticFlag(true);
+        }
+      };
+    AbstractFieldBuilder _doubleArrow = ObjectExtensions.<AbstractFieldBuilder>operator_doubleArrow(_createFieldBuilder, _function);
+    this.assertBuilds(_doubleArrow, "protected static Foo foo");
+  }
+  
+  @Test
   public void testJavaField() {
     JvmDeclaredType _javaClass = this.getJavaClass();
     AbstractFieldBuilder _createFieldBuilder = this._codeBuilderFactory.createFieldBuilder(_javaClass);
@@ -92,5 +112,25 @@ public class FieldBuilderTest extends AbstractBuilderTest {
       };
     AbstractFieldBuilder _doubleArrow = ObjectExtensions.<AbstractFieldBuilder>operator_doubleArrow(_createFieldBuilder, _function);
     this.assertBuilds(_doubleArrow, "public Bar bar;");
+  }
+  
+  @Test
+  public void testStaticJavaField() {
+    JvmDeclaredType _javaClass = this.getJavaClass();
+    AbstractFieldBuilder _createFieldBuilder = this._codeBuilderFactory.createFieldBuilder(_javaClass);
+    final Procedure1<AbstractFieldBuilder> _function = new Procedure1<AbstractFieldBuilder>() {
+        public void apply(final AbstractFieldBuilder it) {
+          JvmDeclaredType _javaClass = FieldBuilderTest.this.getJavaClass();
+          it.setContext(_javaClass);
+          it.setFieldName("bar");
+          JvmDeclaredType _javaClass_1 = FieldBuilderTest.this.getJavaClass();
+          JvmParameterizedTypeReference _createTypeRef = FieldBuilderTest.this._typeReferences.createTypeRef(_javaClass_1);
+          it.setFieldType(_createTypeRef);
+          it.setVisibility(JvmVisibility.PROTECTED);
+          it.setStaticFlag(true);
+        }
+      };
+    AbstractFieldBuilder _doubleArrow = ObjectExtensions.<AbstractFieldBuilder>operator_doubleArrow(_createFieldBuilder, _function);
+    this.assertBuilds(_doubleArrow, "protected static Bar bar;");
   }
 }

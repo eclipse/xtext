@@ -32,6 +32,17 @@ class FieldBuilderTest extends AbstractBuilderTest {
 	}
 	
 	@Test
+	def testStaticXtendField() {
+		(createFieldBuilder(xtendClass) => [
+			context = xtendClass
+			fieldName = 'foo'
+			fieldType = xtendClass.createTypeRef
+			visibility = JvmVisibility::PROTECTED
+			staticFlag = true
+		]).assertBuilds('protected static Foo foo')
+	}
+	
+	@Test
 	def testJavaField() {
 		(createFieldBuilder(javaClass) => [
 			context = javaClass
@@ -48,6 +59,17 @@ class FieldBuilderTest extends AbstractBuilderTest {
 			fieldType = javaClass.createTypeRef
 			visibility = JvmVisibility::PUBLIC
 		]).assertBuilds('public Bar bar;')
+	}
+	
+	@Test
+	def testStaticJavaField() {
+		(createFieldBuilder(javaClass) => [
+			context = javaClass
+			fieldName = 'bar'
+			fieldType = javaClass.createTypeRef
+			visibility = JvmVisibility::PROTECTED
+			staticFlag = true
+		]).assertBuilds('protected static Bar bar;')
 	}
 	
 }

@@ -88,4 +88,67 @@ public class MethodBuilderTest extends AbstractBuilderTest {
     _builder.append("}");
     this.assertBuilds(_doubleArrow, _builder.toString());
   }
+  
+  @Test
+  public void testStaticXtendMethod() {
+    JvmDeclaredType _xtendClass = this.getXtendClass();
+    AbstractMethodBuilder _createMethodBuilder = this._codeBuilderFactory.createMethodBuilder(_xtendClass);
+    final Procedure1<AbstractMethodBuilder> _function = new Procedure1<AbstractMethodBuilder>() {
+        public void apply(final AbstractMethodBuilder it) {
+          JvmDeclaredType _xtendClass = MethodBuilderTest.this.getXtendClass();
+          it.setContext(_xtendClass);
+          it.setMethodName("foo");
+          JvmDeclaredType _xtendClass_1 = MethodBuilderTest.this.getXtendClass();
+          JvmParameterizedTypeReference _createTypeRef = MethodBuilderTest.this._typeReferences.createTypeRef(_xtendClass_1);
+          it.setReturnType(_createTypeRef);
+          it.setVisibility(JvmVisibility.PROTECTED);
+          it.setStaticFlag(true);
+          JvmDeclaredType _xtendClass_2 = MethodBuilderTest.this.getXtendClass();
+          JvmParameterizedTypeReference _createTypeRef_1 = MethodBuilderTest.this._typeReferences.createTypeRef(_xtendClass_2);
+          ArrayList<JvmTypeReference> _newArrayList = CollectionLiterals.<JvmTypeReference>newArrayList(_createTypeRef_1);
+          it.setParameterTypes(_newArrayList);
+        }
+      };
+    AbstractMethodBuilder _doubleArrow = ObjectExtensions.<AbstractMethodBuilder>operator_doubleArrow(_createMethodBuilder, _function);
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("def protected static foo(Foo foo) {");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append(AbstractBuilderTest.DEFAULT_BODY, "  ");
+    _builder.newLineIfNotEmpty();
+    _builder.append("}");
+    this.assertBuilds(_doubleArrow, _builder.toString());
+  }
+  
+  @Test
+  public void testStaticJavaMethod() {
+    JvmDeclaredType _javaClass = this.getJavaClass();
+    AbstractMethodBuilder _createMethodBuilder = this._codeBuilderFactory.createMethodBuilder(_javaClass);
+    final Procedure1<AbstractMethodBuilder> _function = new Procedure1<AbstractMethodBuilder>() {
+        public void apply(final AbstractMethodBuilder it) {
+          JvmDeclaredType _javaClass = MethodBuilderTest.this.getJavaClass();
+          it.setContext(_javaClass);
+          it.setMethodName("bar");
+          JvmDeclaredType _javaClass_1 = MethodBuilderTest.this.getJavaClass();
+          JvmParameterizedTypeReference _createTypeRef = MethodBuilderTest.this._typeReferences.createTypeRef(_javaClass_1);
+          it.setReturnType(_createTypeRef);
+          it.setVisibility(JvmVisibility.PRIVATE);
+          it.setStaticFlag(true);
+          JvmDeclaredType _javaClass_2 = MethodBuilderTest.this.getJavaClass();
+          JvmParameterizedTypeReference _createTypeRef_1 = MethodBuilderTest.this._typeReferences.createTypeRef(_javaClass_2);
+          ArrayList<JvmTypeReference> _newArrayList = CollectionLiterals.<JvmTypeReference>newArrayList(_createTypeRef_1);
+          it.setParameterTypes(_newArrayList);
+        }
+      };
+    AbstractMethodBuilder _doubleArrow = ObjectExtensions.<AbstractMethodBuilder>operator_doubleArrow(_createMethodBuilder, _function);
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("private static Bar bar(Bar bar) {");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append(AbstractBuilderTest.DEFAULT_BODY, "  ");
+    _builder.append(";");
+    _builder.newLineIfNotEmpty();
+    _builder.append("}");
+    this.assertBuilds(_doubleArrow, _builder.toString());
+  }
 }
