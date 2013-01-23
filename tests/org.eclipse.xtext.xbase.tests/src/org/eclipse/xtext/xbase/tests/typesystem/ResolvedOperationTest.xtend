@@ -273,7 +273,7 @@ class ResolvedOperationTest extends AbstractXbaseTestCase {
 			val candidate = overriddenAndImplementedMethodCandidates.head
 			assertEquals(2, candidate.typeParameters.size)
 			assertEquals(2, declaration.typeParameters.size)
-			has(1).candidatesAndOverrides(1).withDetail(IMPLEMENTATION)
+			has(1).candidatesAndOverrides(1).withDetails(IMPLEMENTATION)
 		]
 	}
 	
