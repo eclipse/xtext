@@ -13,7 +13,6 @@ import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeReference;
-import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference.JavaIdentifierFunction;
 import org.eclipse.xtext.xtype.XFunctionTypeRef;
 
 import com.google.common.base.Function;

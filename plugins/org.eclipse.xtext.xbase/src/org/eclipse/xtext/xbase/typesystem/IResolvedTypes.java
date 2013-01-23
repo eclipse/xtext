@@ -87,9 +87,16 @@ public interface IResolvedTypes {
 	 * @param expression may either be an {@link XAbstractFeatureCall} or {@link XConstructorCall}. May not be <code>null</code>. 
 	 */
 	List<LightweightTypeReference> getActualTypeArguments(XExpression expression);
-
-	// TODO return types? are they necessary for clients if diagnostics were already produced?
 	
+	/**
+	 * Returns the intermediate linking result for the given feature call, if any.
+	 * If the feature call is <code>null</code>, the result is <code>null</code>.
+	 * @param featureCall the feature call that is queried for the current linking state.
+	 * @return the potentially intermediate linking state or <code>null</code> if none.
+	 */
+	@Nullable
+	JvmIdentifiableElement getLinkedFeature(@Nullable XAbstractFeatureCall featureCall);
+
 	IResolvedTypes NULL = new NullResolvedTypes();
 
 	/**
@@ -136,6 +143,11 @@ public interface IResolvedTypes {
 		
 		public boolean isVoidTypeAllowed(XExpression expression) {
 			return false;
+		}
+		
+		@Nullable
+		public JvmIdentifiableElement getLinkedFeature(@Nullable XAbstractFeatureCall featureCall) {
+			return null;
 		}
 	}
 	

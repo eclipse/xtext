@@ -114,7 +114,6 @@ public class XbaseBatchTypeProvider extends XbaseTypeProvider {
 		return returnType.toTypeReference();
 	}
 
-	@SuppressWarnings("deprecation")
 	@Override
 	public org.eclipse.xtext.common.types.util.ITypeArgumentContext getTypeArgumentContext(XAbstractFeatureCall featureCall,
 			List<XExpression> actualArguments, Provider<JvmTypeReference> receiverTypeProvider,
@@ -122,7 +121,6 @@ public class XbaseBatchTypeProvider extends XbaseTypeProvider {
 		throw new UnsupportedOperationException();
 	}
 
-	@SuppressWarnings("deprecation")
 	@Override
 	public org.eclipse.xtext.common.types.util.ITypeArgumentContext getTypeArgumentContext(XConstructorCall constructorCall, JvmConstructor constructor) {
 		throw new UnsupportedOperationException();

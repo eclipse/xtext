@@ -113,6 +113,7 @@ public class FeatureScopes implements IFeatureNames {
 			final boolean implicit,
 			final EObject featureCall,
 			final IFeatureScopeSession session,
+			final JvmIdentifiableElement receiverFeature,
 			IScope parent) {
 		final Wrapper<IScope> wrapper = Wrapper.wrap(parent);
 		synonymProvider.collectSynonymTypes(featureDeclarator, new SynonymTypesProvider.Acceptor() {
@@ -124,14 +125,14 @@ public class FeatureScopes implements IFeatureNames {
 			protected boolean accept(LightweightTypeReference synonymType, Set<ConformanceHint> hints) {
 				List<JvmType> rawTypes = synonymType.getRawTypes();
 				SynonymTypeBucket bucket = new SynonymTypeBucket(id++, rawTypes, hints);
-				wrapper.set(new ReceiverFeatureScope(wrapper.get(), session, receiver, synonymType, implicit, asAbstractFeatureCall(featureCall), bucket, operatorMapping));
+				wrapper.set(new ReceiverFeatureScope(wrapper.get(), session, receiver, synonymType, implicit, asAbstractFeatureCall(featureCall), bucket, receiverFeature, operatorMapping));
 				return true;
 			}
 			
 		});
 		List<JvmType> rawTypes = featureDeclarator.getRawTypes();
 		TypeBucket typeBucket = new TypeBucket(-1, rawTypes);
-		IScope result = new ReceiverFeatureScope(wrapper.get(), session, receiver, featureDeclarator, implicit, asAbstractFeatureCall(featureCall), typeBucket, operatorMapping);
+		IScope result = new ReceiverFeatureScope(wrapper.get(), session, receiver, featureDeclarator, implicit, asAbstractFeatureCall(featureCall), typeBucket, receiverFeature, operatorMapping);
 		return result;
 	}
 
@@ -152,7 +153,8 @@ public class FeatureScopes implements IFeatureNames {
 		if (receiverType != null) {
 			IScope staticExtensionScope = createStaticExtensionsScope(receiver, receiverType, featureCall, IScope.NULLSCOPE, session, resolvedTypes);
 			IScope extensionScope = createDynamicExtensionsScope(receiver, receiverType, featureCall, staticExtensionScope, session, resolvedTypes);
-			return createFeatureScopeForTypeRef(receiver, receiverType, false, featureCall, session, extensionScope);
+			JvmIdentifiableElement linkedReceiver = resolvedTypes.getLinkedFeature(asAbstractFeatureCall(receiver));
+			return createFeatureScopeForTypeRef(receiver, receiverType, false, featureCall, session, linkedReceiver, extensionScope);
 		} else {
 			return IScope.NULLSCOPE;
 		}
@@ -245,7 +247,7 @@ public class FeatureScopes implements IFeatureNames {
 			
 			XFeatureCall implicitReceiver = xbaseFactory.createXFeatureCall();
 			implicitReceiver.setFeature(thisElement);
-			return createFeatureScopeForTypeRef(implicitReceiver, type, true, featureCall, session, parent);
+			return createFeatureScopeForTypeRef(implicitReceiver, type, true, featureCall, session, thisElement, parent);
 		}
 		return parent;
 	}

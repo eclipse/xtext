@@ -16,7 +16,9 @@ import org.eclipse.emf.ecore.EReference;
 import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
+import org.eclipse.xtext.common.types.JvmMember;
 import org.eclipse.xtext.common.types.JvmType;
+import org.eclipse.xtext.common.types.JvmVisibility;
 import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.scoping.IScope;
@@ -130,5 +132,15 @@ public interface IFeatureScopeSession extends IVisibilityHelper {
 	 * import sections or ordered imports.
 	 */
 	List<TypeBucket> getStaticallyImportedExtensionTypes();
+	
+	/**
+	 * Returns <code>true</code> if the member is visible according to the {@link JvmVisibility} and the local context
+	 * when invoked on the given receiver feature which resolves to the given type.
+	 * 
+	 * @param member the member that shall be accessed.
+	 * @param receiverFeature the links the receiver of the feature call to the given member. May be unknown.
+	 * @return <code>true</code> if the feature can be accessed.
+	 */
+	boolean isVisible(JvmMember member, @Nullable JvmIdentifiableElement receiverFeature);
 
 }

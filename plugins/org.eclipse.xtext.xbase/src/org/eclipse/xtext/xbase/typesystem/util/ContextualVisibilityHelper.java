@@ -41,6 +41,14 @@ public class ContextualVisibilityHelper implements IVisibilityHelper {
 		this(new PublicVisibilityHelper(), contextType);
 	}
 	
+	public LightweightTypeReference getContextType() {
+		return contextType;
+	}
+	
+	public JvmType getRawContextType() {
+		return rawContextType;
+	}
+	
 	public boolean isVisible(JvmMember member) {
 		JvmVisibility visibility = member.getVisibility();
 		if (visibility == JvmVisibility.PUBLIC) {

@@ -45,6 +45,7 @@ public class AssignmentLinkingTest extends AbstractXtendTestCase {
 		assertLinksTo("aString", XbasePackage.Literals.XVARIABLE_DECLARATION, assignment);
 	}
 	
+	@SuppressWarnings("deprecation")
 	@Test public void testParameter() throws Exception {
 		XtendClass clazz = clazz(
 				"class SomeClass {\n" +
@@ -208,6 +209,7 @@ public class AssignmentLinkingTest extends AbstractXtendTestCase {
 		assertLinksTo(identifier, TypesPackage.Literals.JVM_IDENTIFIABLE_ELEMENT, featureCall, withIssues);
 	}
 	
+	@SuppressWarnings("deprecation")
 	protected void assertLinksTo(String identifier, EClass type, XAssignment featureCall, boolean withIssues) {
 		assertNotNull("feature is available", featureCall.getFeature());
 		JvmIdentifiableElement linked = featureCall.getFeature();
