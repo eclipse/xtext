@@ -852,7 +852,30 @@ class QuickfixTest extends AbstractXtendUITestCase {
 			}
 		''')
 	}
-
 	
+	@Test 
+	def void useObjectForUnknownParams() {
+		create('Foo.xtend', '''
+			class Foo {
+				def foo(int x) {
+					bar|(x,y)
+				}
+			}
+		''')
+		.assertIssueCodes(FEATURECALL_LINKING_DIAGNOSTIC)
+		.assertResolutionLabelsSubset("Create method 'bar(int, Object)'")
+		.assertModelAfterQuickfix('''
+			class Foo {
+				def foo(int x) {
+					bar(x,y)
+				}
+				
+				def bar(int i, Object object) {
+					«defaultBody»
+				}
+				
+			}
+		''')
+	}
 }
 
