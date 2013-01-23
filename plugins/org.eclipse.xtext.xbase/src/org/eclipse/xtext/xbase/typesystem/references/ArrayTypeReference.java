@@ -75,10 +75,30 @@ public class ArrayTypeReference extends LightweightTypeReference {
 			}
 			return result;
 		}
-		List<LightweightTypeReference> result = Lists.newArrayListWithCapacity(3);
+		List<LightweightTypeReference> result = Lists.newArrayListWithCapacity(2);
 		result.add(new ParameterizedTypeReference(getOwner(), findNonNullType(Cloneable.class)));
 		result.add(new ParameterizedTypeReference(getOwner(), findNonNullType(Serializable.class)));
 		return result;
+	}
+	
+	@Override
+	@Nullable
+	public LightweightTypeReference getSuperType(JvmType rawType) {
+		if (rawType instanceof JvmArrayType) {
+			JvmComponentType rawComponentType = ((JvmArrayType) rawType).getComponentType();
+			LightweightTypeReference result = component.getSuperType(rawComponentType);
+			if (result == null) {
+				return null;
+			}
+			return new ArrayTypeReference(getOwner(), result);
+		}
+		String identifier = rawType.getIdentifier();
+		if (Cloneable.class.getCanonicalName().equals(identifier)
+				|| Serializable.class.getCanonicalName().equals(identifier)
+				|| Object.class.getCanonicalName().equals(identifier)) {
+			return new ParameterizedTypeReference(getOwner(), rawType);
+		}
+		return null;
 	}
 	
 	@Override

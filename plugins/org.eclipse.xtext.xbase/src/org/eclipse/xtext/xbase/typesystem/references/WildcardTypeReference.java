@@ -158,6 +158,24 @@ public class WildcardTypeReference extends LightweightTypeReference {
 	}
 	
 	@Override
+	@Nullable
+	public LightweightTypeReference getSuperType(JvmType rawType) {
+		if (isUnbounded()) {
+			if (Object.class.getCanonicalName().equals(rawType.getIdentifier())) {
+				return new ParameterizedTypeReference(getOwner(), rawType);
+			}
+			return null;
+		}
+		List<LightweightTypeReference> nonNullUpperBounds = expose(getUpperBounds());
+		for(LightweightTypeReference upperBound: nonNullUpperBounds) {
+			LightweightTypeReference result = upperBound.getSuperType(rawType);
+			if (result != null)
+				return result;
+		}
+		return null;
+	}
+	
+	@Override
 	public JvmTypeReference toTypeReference() {
 		TypesFactory typesFactory = getTypesFactory();
 		JvmWildcardTypeReference result = typesFactory.createJvmWildcardTypeReference();
