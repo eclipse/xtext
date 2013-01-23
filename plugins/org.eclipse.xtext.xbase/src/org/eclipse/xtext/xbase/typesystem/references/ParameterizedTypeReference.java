@@ -7,6 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.typesystem.references;
 
+import java.io.Serializable;
 import java.util.Collections;
 import java.util.List;
 
@@ -20,7 +21,6 @@ import org.eclipse.xtext.common.types.JvmPrimitiveType;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeConstraint;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
-import org.eclipse.xtext.common.types.JvmTypeParameterDeclarator;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.JvmUpperBound;
 import org.eclipse.xtext.common.types.util.Primitives;
@@ -231,6 +231,13 @@ public class ParameterizedTypeReference extends LightweightTypeReference {
 					if (result != null)
 						return result;
 				}
+			}
+		} else if (thisType instanceof JvmArrayType) {
+			String identifier = rawType.getIdentifier();
+			if (Cloneable.class.getCanonicalName().equals(identifier)
+					|| Serializable.class.getCanonicalName().equals(identifier)
+					|| Object.class.getCanonicalName().equals(identifier)) {
+				return getServices().getTypeReferences().createTypeRef(rawType);
 			}
 		}
 		return null;
