@@ -22,5 +22,6 @@ Import-Package: org.apache.log4j;version="1.2.15",
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Export-Package: org.eclipse.xtext.example.tutorial.ui.contentassist,
  org.eclipse.xtext.example.tutorial.ui.contentassist.antlr,
- org.eclipse.xtext.example.tutorial.ui.internal
+ org.eclipse.xtext.example.tutorial.ui.internal,
+ org.eclipse.xtext.example.tutorial.ui.quickfix
 Bundle-Activator: org.eclipse.xtext.example.tutorial.ui.internal.TutorialActivator
