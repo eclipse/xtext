@@ -84,7 +84,7 @@ public class DependentElementsCalculatorTests extends AbstractXtendUITestCase {
           }
         };
       IterableExtensions.<EObject>forEach(_newArrayList, _function);
-    } catch (Exception _e) {
+    } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
   }
@@ -144,7 +144,7 @@ public class DependentElementsCalculatorTests extends AbstractXtendUITestCase {
           }
         };
       IterableExtensions.<EObject>forEach(_list, _function_1);
-    } catch (Exception _e) {
+    } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
   }

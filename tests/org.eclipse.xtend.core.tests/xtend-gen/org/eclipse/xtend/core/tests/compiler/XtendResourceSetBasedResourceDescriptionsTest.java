@@ -46,7 +46,7 @@ public class XtendResourceSetBasedResourceDescriptionsTest extends AbstractXtend
           Assert.assertTrue(_string, _isEmpty);
         }
       }
-    } catch (Exception _e) {
+    } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
   }
@@ -71,7 +71,7 @@ public class XtendResourceSetBasedResourceDescriptionsTest extends AbstractXtend
           Assert.assertTrue(_string, _isEmpty);
         }
       }
-    } catch (Exception _e) {
+    } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
   }
@@ -104,7 +104,7 @@ public class XtendResourceSetBasedResourceDescriptionsTest extends AbstractXtend
           }
         }
       }
-    } catch (Exception _e) {
+    } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
   }

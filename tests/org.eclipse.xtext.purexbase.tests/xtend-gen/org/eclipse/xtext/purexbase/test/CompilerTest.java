@@ -172,7 +172,7 @@ public class CompilerTest {
       _builder_1.append("}");
       _builder_1.newLine();
       this._compilationTestHelper.assertCompilesTo(_builder, _builder_1);
-    } catch (Exception _e) {
+    } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
   }
@@ -269,7 +269,7 @@ public class CompilerTest {
       _builder_1.append("}");
       _builder_1.newLine();
       this._compilationTestHelper.assertCompilesTo(_builder, _builder_1);
-    } catch (Exception _e) {
+    } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
   }
@@ -432,7 +432,7 @@ public class CompilerTest {
       _builder_1.append("}");
       _builder_1.newLine();
       this._compilationTestHelper.assertCompilesTo(_builder, _builder_1);
-    } catch (Exception _e) {
+    } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
   }
@@ -511,7 +511,7 @@ public class CompilerTest {
       _builder_1.append("}");
       _builder_1.newLine();
       this._compilationTestHelper.assertCompilesTo(_builder, _builder_1);
-    } catch (Exception _e) {
+    } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
   }
@@ -698,7 +698,7 @@ public class CompilerTest {
       _builder_1.append("}");
       _builder_1.newLine();
       this._compilationTestHelper.assertCompilesTo(_builder, _builder_1);
-    } catch (Exception _e) {
+    } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
   }
@@ -882,7 +882,7 @@ public class CompilerTest {
       _builder_1.append("}");
       _builder_1.newLine();
       this._compilationTestHelper.assertCompilesTo(_builder, _builder_1);
-    } catch (Exception _e) {
+    } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
   }
@@ -969,7 +969,7 @@ public class CompilerTest {
       _builder_1.append("}");
       _builder_1.newLine();
       this._compilationTestHelper.assertCompilesTo(_builder, _builder_1);
-    } catch (Exception _e) {
+    } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
   }
@@ -1141,7 +1141,7 @@ public class CompilerTest {
       _builder_1.append("}");
       _builder_1.newLine();
       this._compilationTestHelper.assertCompilesTo(_builder, _builder_1);
-    } catch (Exception _e) {
+    } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
   }
@@ -1273,7 +1273,7 @@ public class CompilerTest {
       _builder_1.append("}");
       _builder_1.newLine();
       this._compilationTestHelper.assertCompilesTo(_builder, _builder_1);
-    } catch (Exception _e) {
+    } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
   }
@@ -1604,7 +1604,7 @@ public class CompilerTest {
       _builder_1.append("}");
       _builder_1.newLine();
       this._compilationTestHelper.assertCompilesTo(_builder, _builder_1);
-    } catch (Exception _e) {
+    } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
   }
@@ -1780,7 +1780,7 @@ public class CompilerTest {
       _builder_1.append("}");
       _builder_1.newLine();
       this._compilationTestHelper.assertCompilesTo(_builder, _builder_1);
-    } catch (Exception _e) {
+    } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
   }

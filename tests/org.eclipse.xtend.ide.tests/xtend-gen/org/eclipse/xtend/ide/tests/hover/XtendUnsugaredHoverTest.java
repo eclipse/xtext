@@ -108,7 +108,7 @@ public class XtendUnsugaredHoverTest extends AbstractXtendUITestCase {
   public void cleanup() {
     try {
       this.testHelper.tearDown();
-    } catch (Exception _e) {
+    } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
   }

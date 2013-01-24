@@ -59,7 +59,7 @@ public class AbstractBuilderTest extends AbstractXtendUITestCase {
         _xblockexpression = (this.xtendClass);
       }
       return _xblockexpression;
-    } catch (Exception _e) {
+    } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
   }
@@ -85,7 +85,7 @@ public class AbstractBuilderTest extends AbstractXtendUITestCase {
         _xblockexpression = (this.javaClass);
       }
       return _xblockexpression;
-    } catch (Exception _e) {
+    } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
   }

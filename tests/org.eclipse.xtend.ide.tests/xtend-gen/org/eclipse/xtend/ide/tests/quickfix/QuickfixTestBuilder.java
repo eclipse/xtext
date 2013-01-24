@@ -77,7 +77,7 @@ public class QuickfixTestBuilder {
         _xblockexpression = (this);
       }
       return _xblockexpression;
-    } catch (Exception _e) {
+    } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
   }
@@ -316,7 +316,7 @@ public class QuickfixTestBuilder {
         this.file.delete(true, null);
       }
       this._syncUtil.yieldToQueuedDisplayJobs(null);
-    } catch (Exception _e) {
+    } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
   }

@@ -62,7 +62,7 @@ public class NonOverridableTypesProviderTest extends AbstractXtendTestCase {
       this.assertNotInScope("MiddleClass.InnerMostClass", operation);
       this.assertNotInScope("OuterClass", inferredType);
       this.assertNotInScope("PrivateMiddleClass", inferredType);
-    } catch (Exception _e) {
+    } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
   }
@@ -101,7 +101,7 @@ public class NonOverridableTypesProviderTest extends AbstractXtendTestCase {
       this.assertNotInScope("MiddleClass", operation);
       this.assertNotInScope("OuterClass", operation);
       this.assertNotInScope("PrivateMiddleClass", inferredType);
-    } catch (Exception _e) {
+    } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
   }
@@ -149,7 +149,7 @@ public class NonOverridableTypesProviderTest extends AbstractXtendTestCase {
       this.assertTypeParameterInScope("T", operation2);
       this.assertNotInScope("MiddleClass.InnerMostClass", operation2);
       this.assertNotInScope("OuterClass", operation2);
-    } catch (Exception _e) {
+    } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
   }
@@ -200,7 +200,7 @@ public class NonOverridableTypesProviderTest extends AbstractXtendTestCase {
       this.assertNotInScope("OuterClass.MiddleClass", operation2);
       this.assertNotInScope("MiddleClass", operation2);
       this.assertNotInScope("OuterClass", operation2);
-    } catch (Exception _e) {
+    } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
   }

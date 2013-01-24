@@ -69,7 +69,7 @@ public class JdtFindReferencesTest extends AbstractXtendUITestCase {
   public static void cleanup() {
     try {
       IResourcesSetupUtil.cleanWorkspace();
-    } catch (Exception _e) {
+    } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
   }
@@ -193,7 +193,7 @@ public class JdtFindReferencesTest extends AbstractXtendUITestCase {
           }
         };
       ObjectExtensions.<ArrayList<Object>>operator_doubleArrow(_findReferences, _function);
-    } catch (Exception _e) {
+    } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
   }
@@ -272,7 +272,7 @@ public class JdtFindReferencesTest extends AbstractXtendUITestCase {
           }
         };
       ObjectExtensions.<ArrayList<Object>>operator_doubleArrow(_findReferences, _function);
-    } catch (Exception _e) {
+    } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
   }
@@ -399,7 +399,7 @@ public class JdtFindReferencesTest extends AbstractXtendUITestCase {
           }
         };
       ObjectExtensions.<ArrayList<Object>>operator_doubleArrow(_findReferences, _function);
-    } catch (Exception _e) {
+    } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
   }
@@ -539,7 +539,7 @@ public class JdtFindReferencesTest extends AbstractXtendUITestCase {
           }
         };
       ObjectExtensions.<ArrayList<Object>>operator_doubleArrow(_findReferences, _function);
-    } catch (Exception _e) {
+    } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
   }
@@ -670,7 +670,7 @@ public class JdtFindReferencesTest extends AbstractXtendUITestCase {
           }
         };
       ObjectExtensions.<ArrayList<Object>>operator_doubleArrow(_findReferences, _function);
-    } catch (Exception _e) {
+    } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
   }
@@ -773,7 +773,7 @@ public class JdtFindReferencesTest extends AbstractXtendUITestCase {
           }
         };
       ObjectExtensions.<ArrayList<Object>>operator_doubleArrow(_findReferences, _function);
-    } catch (Exception _e) {
+    } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
   }
@@ -814,7 +814,7 @@ public class JdtFindReferencesTest extends AbstractXtendUITestCase {
           }
         };
       ObjectExtensions.<Iterable<IJavaElement>>operator_doubleArrow(_javaElements, _function);
-    } catch (Exception _e) {
+    } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
   }
@@ -864,7 +864,7 @@ public class JdtFindReferencesTest extends AbstractXtendUITestCase {
           }
         };
       ObjectExtensions.<Iterable<IJavaElement>>operator_doubleArrow(_javaElements, _function);
-    } catch (Exception _e) {
+    } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
   }
@@ -911,7 +911,7 @@ public class JdtFindReferencesTest extends AbstractXtendUITestCase {
           }
         };
       ObjectExtensions.<Iterable<IJavaElement>>operator_doubleArrow(_javaElements, _function);
-    } catch (Exception _e) {
+    } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
   }
@@ -988,7 +988,7 @@ public class JdtFindReferencesTest extends AbstractXtendUITestCase {
           }
         };
       ObjectExtensions.<Iterable<IJavaElement>>operator_doubleArrow(_javaElements, _function);
-    } catch (Exception _e) {
+    } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
   }
@@ -1060,7 +1060,7 @@ public class JdtFindReferencesTest extends AbstractXtendUITestCase {
           }
         };
       ObjectExtensions.<Iterable<IJavaElement>>operator_doubleArrow(_javaElements, _function);
-    } catch (Exception _e) {
+    } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
   }
@@ -1132,7 +1132,7 @@ public class JdtFindReferencesTest extends AbstractXtendUITestCase {
         _xblockexpression = (elements);
       }
       return _xblockexpression;
-    } catch (Exception _e) {
+    } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
   }

@@ -1608,7 +1608,7 @@ public class CompilerTraceTest extends AbstractXtendTestCase {
       String _plus_4 = (_plus_3 + " / ");
       String _plus_5 = (_plus_4 + expectedRegion);
       Assert.fail(_plus_5);
-    } catch (Exception _e) {
+    } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
   }

@@ -1112,7 +1112,7 @@ public class ExtractMethodIntegrationTest extends AbstractXtendUITestCase {
                   _xblockexpression = (_perform);
                 }
                 return _xblockexpression;
-              } catch (Exception _e) {
+              } catch (Throwable _e) {
                 throw Exceptions.sneakyThrow(_e);
               }
             }
@@ -1129,7 +1129,7 @@ public class ExtractMethodIntegrationTest extends AbstractXtendUITestCase {
       } finally {
         editor.close(false);
       }
-    } catch (Exception _e) {
+    } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
   }
@@ -1175,7 +1175,7 @@ public class ExtractMethodIntegrationTest extends AbstractXtendUITestCase {
                   _xblockexpression = ("");
                 }
                 return _xblockexpression;
-              } catch (Exception _e) {
+              } catch (Throwable _e) {
                 throw Exceptions.sneakyThrow(_e);
               }
             }
@@ -1188,7 +1188,7 @@ public class ExtractMethodIntegrationTest extends AbstractXtendUITestCase {
       } finally {
         editor.close(false);
       }
-    } catch (Exception _e) {
+    } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
   }

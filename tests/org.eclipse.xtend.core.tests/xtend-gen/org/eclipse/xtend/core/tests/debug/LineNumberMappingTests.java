@@ -370,7 +370,7 @@ public class LineNumberMappingTests extends AbstractXtendTestCase {
       String _string_1 = fsa.charSequence.toString();
       this.print(result, _string_1);
       return result;
-    } catch (Exception _e) {
+    } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
   }

@@ -72,7 +72,7 @@ public class UnloadingTest extends AbstractXtendTestCase {
       JvmType _type = _parameterType.getType();
       Resource _eResource_1 = _type.eResource();
       Assert.assertNotNull(_eResource_1);
-    } catch (Exception _e) {
+    } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
   }

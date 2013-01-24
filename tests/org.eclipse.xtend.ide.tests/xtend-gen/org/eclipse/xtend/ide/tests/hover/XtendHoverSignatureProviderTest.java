@@ -65,7 +65,7 @@ public class XtendHoverSignatureProviderTest extends AbstractXtendUITestCase {
       final XtendClass clazz = IterableExtensions.<XtendClass>head(_filter);
       final String signature = this.signatureProvider.getSignature(clazz);
       Assert.assertEquals("Foo", signature);
-    } catch (Exception _e) {
+    } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
   }
@@ -99,7 +99,7 @@ public class XtendHoverSignatureProviderTest extends AbstractXtendUITestCase {
       final String signature2 = this.signatureProvider.getSignature(xtendFunction2);
       Assert.assertEquals("Object bar(String a) throws NullPointerException", signature1);
       Assert.assertEquals("void bar(String a, int b) throws NullPointerException, RuntimeException", signature2);
-    } catch (Exception _e) {
+    } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
   }
@@ -129,7 +129,7 @@ public class XtendHoverSignatureProviderTest extends AbstractXtendUITestCase {
       final XtendParameter xtendParameter = _parameters.get(0);
       final String signature = this.signatureProvider.getSignature(xtendParameter);
       Assert.assertEquals("String a - bar(String)", signature);
-    } catch (Exception _e) {
+    } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
   }
@@ -170,7 +170,7 @@ public class XtendHoverSignatureProviderTest extends AbstractXtendUITestCase {
       final XtendField xtendField = ((XtendField) _get);
       final String signature = this.signatureProvider.getSignature(xtendField);
       Assert.assertEquals("Collections collections", signature);
-    } catch (Exception _e) {
+    } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
   }
@@ -203,7 +203,7 @@ public class XtendHoverSignatureProviderTest extends AbstractXtendUITestCase {
       final XtendField xtendField = ((XtendField) _get);
       final String signature = this.signatureProvider.getSignature(xtendField);
       Assert.assertEquals("ArrayList<String> collections", signature);
-    } catch (Exception _e) {
+    } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
   }
@@ -236,7 +236,7 @@ public class XtendHoverSignatureProviderTest extends AbstractXtendUITestCase {
       final XtendField xtendField = ((XtendField) _get);
       final String signature = this.signatureProvider.getSignature(xtendField);
       Assert.assertEquals("String", signature);
-    } catch (Exception _e) {
+    } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
   }
@@ -269,7 +269,7 @@ public class XtendHoverSignatureProviderTest extends AbstractXtendUITestCase {
       final XtendField xtendField = ((XtendField) _get);
       final String signature = this.signatureProvider.getSignature(xtendField);
       Assert.assertEquals("", signature);
-    } catch (Exception _e) {
+    } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
   }
@@ -296,7 +296,7 @@ public class XtendHoverSignatureProviderTest extends AbstractXtendUITestCase {
       final XtendMember xtendConstructor = _members.get(0);
       final String signature = this.signatureProvider.getSignature(xtendConstructor);
       Assert.assertEquals("Foo(String a, int b)", signature);
-    } catch (Exception _e) {
+    } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
   }
@@ -335,7 +335,7 @@ public class XtendHoverSignatureProviderTest extends AbstractXtendUITestCase {
       JvmConstructor _constructor = constructorCall.getConstructor();
       final String signature = this.signatureProvider.getSignature(_constructor);
       Assert.assertEquals("Foo()", signature);
-    } catch (Exception _e) {
+    } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
   }
@@ -355,7 +355,7 @@ public class XtendHoverSignatureProviderTest extends AbstractXtendUITestCase {
       final XtendClass clazz = IterableExtensions.<XtendClass>head(_filter);
       final String signature = this.signatureProvider.getSignature(clazz);
       Assert.assertEquals("Foo<T, Y>", signature);
-    } catch (Exception _e) {
+    } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
   }
@@ -394,7 +394,7 @@ public class XtendHoverSignatureProviderTest extends AbstractXtendUITestCase {
       JvmConstructor _constructor = constructorCall.getConstructor();
       final String signature = this.signatureProvider.getSignature(_constructor);
       Assert.assertEquals("Foo<String>()", signature);
-    } catch (Exception _e) {
+    } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
   }
@@ -439,7 +439,7 @@ public class XtendHoverSignatureProviderTest extends AbstractXtendUITestCase {
       final JvmFormalParameter param = ((XForLoopExpression) _get_1).getDeclaredParam();
       final String signature = this.signatureProvider.getSignature(param);
       Assert.assertEquals("String foo", signature);
-    } catch (Exception _e) {
+    } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
   }
@@ -491,7 +491,7 @@ public class XtendHoverSignatureProviderTest extends AbstractXtendUITestCase {
       final JvmFormalParameter param = _declaredFormalParameters.get(0);
       final String signature = this.signatureProvider.getSignature(param);
       Assert.assertEquals("String s", signature);
-    } catch (Exception _e) {
+    } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
   }
@@ -529,7 +529,7 @@ public class XtendHoverSignatureProviderTest extends AbstractXtendUITestCase {
       final XVariableDeclaration variable = ((XVariableDeclaration) _get_1);
       final String signature = this.signatureProvider.getSignature(variable);
       Assert.assertEquals("String a", signature);
-    } catch (Exception _e) {
+    } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
   }
@@ -569,7 +569,7 @@ public class XtendHoverSignatureProviderTest extends AbstractXtendUITestCase {
       Assert.assertEquals("int id", fieldSignature);
       final String functionSignature = this.signatureProvider.getSignature(function);
       Assert.assertEquals("void a(int i)", functionSignature);
-    } catch (Exception _e) {
+    } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
   }
@@ -609,7 +609,7 @@ public class XtendHoverSignatureProviderTest extends AbstractXtendUITestCase {
       final String signature = this.signatureProvider.getSignature(function);
       EcoreUtil.resolveAll(xtendFile);
       Assert.assertEquals("long error()", signature);
-    } catch (Exception _e) {
+    } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
   }
@@ -692,7 +692,7 @@ public class XtendHoverSignatureProviderTest extends AbstractXtendUITestCase {
       JvmIdentifiableElement _feature_3 = ((XFeatureCall) _memberCallTarget_1).getFeature();
       String _signature_3 = this.signatureProvider.getSignature(_feature_3);
       Assert.assertEquals("Foo Bar.f", _signature_3);
-    } catch (Exception _e) {
+    } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
   }
@@ -709,7 +709,7 @@ public class XtendHoverSignatureProviderTest extends AbstractXtendUITestCase {
   public void cleanup() {
     try {
       this.testHelper.tearDown();
-    } catch (Exception _e) {
+    } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
   }

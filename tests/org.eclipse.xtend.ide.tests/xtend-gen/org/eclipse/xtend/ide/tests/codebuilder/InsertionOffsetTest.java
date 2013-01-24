@@ -305,7 +305,7 @@ public class InsertionOffsetTest extends AbstractXtendUITestCase {
       final EObject caretElement = this._eObjectAtOffsetHelper.resolveContainedElementAt(xtextResource, caretOffset);
       int _newFieldInsertOffset = this._insertionOffsets.getNewFieldInsertOffset(caretElement, xtendClass);
       Assert.assertEquals(expectedOffset, _newFieldInsertOffset);
-    } catch (Exception _e) {
+    } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
   }
@@ -328,7 +328,7 @@ public class InsertionOffsetTest extends AbstractXtendUITestCase {
       final EObject caretElement = this._eObjectAtOffsetHelper.resolveContainedElementAt(xtextResource, caretOffset);
       int _newMethodInsertOffset = this._insertionOffsets.getNewMethodInsertOffset(caretElement, xtendClass);
       Assert.assertEquals(expectedOffset, _newMethodInsertOffset);
-    } catch (Exception _e) {
+    } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
   }
@@ -351,7 +351,7 @@ public class InsertionOffsetTest extends AbstractXtendUITestCase {
       final EObject caretElement = this._eObjectAtOffsetHelper.resolveContainedElementAt(xtextResource, caretOffset);
       int _newConstructorInsertOffset = this._insertionOffsets.getNewConstructorInsertOffset(caretElement, xtendClass);
       Assert.assertEquals(expectedOffset, _newConstructorInsertOffset);
-    } catch (Exception _e) {
+    } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
   }
@@ -374,7 +374,7 @@ public class InsertionOffsetTest extends AbstractXtendUITestCase {
       final EObject caretElement = this._eObjectAtOffsetHelper.resolveContainedElementAt(xtextResource, caretOffset);
       int _newTypeInsertOffset = this._insertionOffsets.getNewTypeInsertOffset(caretElement, xtendClass);
       Assert.assertEquals(expectedOffset, _newTypeInsertOffset);
-    } catch (Exception _e) {
+    } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
   }

@@ -99,7 +99,7 @@ public class XtendHoverDocumentationProviderTest extends AbstractXtendUITestCase
       _builder_1.append("<code><a href=\"eclipse-xtext-doc:__synthetic0.xtend%23/1/@members.1\">#foo</a></code><dl><dt>Parameters:</dt><dd><b>a</b> </dd><dd><b>b</b> </dd></dl>");
       String _string = _builder_1.toString();
       Assert.assertEquals(_string, docu);
-    } catch (Exception _e) {
+    } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
   }
@@ -168,7 +168,7 @@ public class XtendHoverDocumentationProviderTest extends AbstractXtendUITestCase
       _builder_1.append("<code><a href=\"eclipse-xtext-doc:__synthetic0.xtend%23/1/@members.2\">#foo(Object)</a></code><dl><dt>Parameters:</dt><dd><b>a</b> </dd><dd><b>b</b> </dd></dl>");
       String _string = _builder_1.toString();
       Assert.assertEquals(_string, docu);
-    } catch (Exception _e) {
+    } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
   }
@@ -237,7 +237,7 @@ public class XtendHoverDocumentationProviderTest extends AbstractXtendUITestCase
       _builder_1.append("<code><a href=\"eclipse-xtext-doc:__synthetic0.xtend%23/1/@members.1\">#foo</a></code><dl><dt>Parameters:</dt><dd><b>a</b> </dd><dd><b>b</b> </dd></dl>");
       String _string = _builder_1.toString();
       Assert.assertEquals(_string, docu);
-    } catch (Exception _e) {
+    } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
   }
@@ -310,7 +310,7 @@ public class XtendHoverDocumentationProviderTest extends AbstractXtendUITestCase
       _builder_2.append("</a></code><dl><dt>Parameters:</dt><dd><b>a</b> </dd><dd><b>b</b> </dd></dl>");
       boolean _endsWith = docu.endsWith(_builder_2.toString());
       Assert.assertTrue(_endsWith);
-    } catch (Exception _e) {
+    } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
   }
@@ -351,7 +351,7 @@ public class XtendHoverDocumentationProviderTest extends AbstractXtendUITestCase
       final XtendFunction member = this.getFirstMethod(xtendFile);
       final String docu = this.documentationProvider.getDocumentation(member);
       Assert.assertEquals("SimpleJavaDoc<dl><dt>Parameters:</dt><dd><b>a</b>  something</dd><dd><b>b</b> </dd></dl>", docu);
-    } catch (Exception _e) {
+    } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
   }
@@ -415,7 +415,7 @@ public class XtendHoverDocumentationProviderTest extends AbstractXtendUITestCase
       _builder_1.append("<p><b>Deprecated.</b> <i></i></p>SimpleJavaDoc<dl><dt>Parameters:</dt><dd><b>a</b> </dd><dd><b>b</b> </dd><dt>Since:</dt><dd> 2.3</dd><dt>Author:</dt><dd> FooBar</dd><dt>See Also:</dt><dd><a href=\"eclipse-xtext-doc:java:/Objects/java.util.Collections%23java.util.Collections\">Collections</a></dd><dd><a href=\"eclipse-xtext-doc:java:/Objects/java.util.List%23java.util.List\">java.util.List</a></dd></dl>");
       String _string = _builder_1.toString();
       Assert.assertEquals(_string, docu);
-    } catch (Exception _e) {
+    } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
   }
@@ -459,7 +459,7 @@ public class XtendHoverDocumentationProviderTest extends AbstractXtendUITestCase
       _builder_1.append("SimpleJavaDoc<dl><dt>Parameters:</dt><dd><b>a</b> </dd><dd><b>b</b> </dd><dt>Throws:</dt><dd><a href=\"eclipse-xtext-doc:java:/Objects/java.lang.NullPointerException%23java.lang.NullPointerException\">NullPointerException</a> -  not so good</dd><dd><a href=\"eclipse-xtext-doc:java:/Objects/java.lang.RuntimeException%23java.lang.RuntimeException\">RuntimeException</a></dd></dl>");
       String _string = _builder_1.toString();
       Assert.assertEquals(_string, docu);
-    } catch (Exception _e) {
+    } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
   }
@@ -505,7 +505,7 @@ public class XtendHoverDocumentationProviderTest extends AbstractXtendUITestCase
       _builder_1.append("<code><a href=\"eclipse-xtext-doc:java:/Objects/java.util.Collections%23java.util.Collections\">java.util.Collections</a></code><dl><dt>Parameters:</dt><dd><b>a</b> </dd><dd><b>b</b> </dd></dl>");
       String _string = _builder_1.toString();
       Assert.assertEquals(_string, docu);
-    } catch (Exception _e) {
+    } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
   }
@@ -551,7 +551,7 @@ public class XtendHoverDocumentationProviderTest extends AbstractXtendUITestCase
       _builder_1.append("<code><a href=\"eclipse-xtext-doc:java:/Objects/java.util.Collections%23java.util.Collections\"> label foo bar</a></code><dl><dt>Parameters:</dt><dd><b>a</b> </dd><dd><b>b</b> </dd></dl>");
       String _string = _builder_1.toString();
       Assert.assertEquals(_string, docu);
-    } catch (Exception _e) {
+    } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
   }
@@ -597,7 +597,7 @@ public class XtendHoverDocumentationProviderTest extends AbstractXtendUITestCase
       _builder_1.append("<code>Collections</code><dl><dt>Parameters:</dt><dd><b>a</b> </dd><dd><b>b</b> </dd></dl>");
       String _string = _builder_1.toString();
       Assert.assertEquals(_string, docu);
-    } catch (Exception _e) {
+    } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
   }
@@ -643,7 +643,7 @@ public class XtendHoverDocumentationProviderTest extends AbstractXtendUITestCase
       _builder_1.append("<code><a href=\"eclipse-xtext-doc:java:/Objects/java.util.Collections%23java.util.Collections.sort(java.util.List)\">java.util.Collections#sort(java.util.List)</a></code><dl><dt>Parameters:</dt><dd><b>a</b> </dd><dd><b>b</b> </dd></dl>");
       String _string = _builder_1.toString();
       Assert.assertEquals(_string, docu);
-    } catch (Exception _e) {
+    } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
   }
@@ -689,7 +689,7 @@ public class XtendHoverDocumentationProviderTest extends AbstractXtendUITestCase
       _builder_1.append("<code><a href=\"eclipse-xtext-doc:java:/Objects/java.util.Collections%23java.util.Collections.sort(java.util.List)\"> label foo bar</a></code><dl><dt>Parameters:</dt><dd><b>a</b> </dd><dd><b>b</b> </dd></dl>");
       String _string = _builder_1.toString();
       Assert.assertEquals(_string, docu);
-    } catch (Exception _e) {
+    } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
   }
@@ -743,7 +743,7 @@ public class XtendHoverDocumentationProviderTest extends AbstractXtendUITestCase
       _builder_1.append("<code><a href=\"eclipse-xtext-doc:__synthetic0.xtend%23/1/@members.2\">testpackage.Foo#foo(java.util.List)</a></code><dl><dt>Parameters:</dt><dd><b>a</b> </dd><dd><b>b</b> </dd></dl>");
       String _string = _builder_1.toString();
       Assert.assertEquals(_string, docu);
-    } catch (Exception _e) {
+    } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
   }
@@ -810,7 +810,7 @@ public class XtendHoverDocumentationProviderTest extends AbstractXtendUITestCase
       _builder_1.append("<code><a href=\"eclipse-xtext-doc:__synthetic0.xtend%23/1/@members.2\">testpackage.Foo#foo(java.util.List)</a></code><dl><dt>Parameters:</dt><dd><b>a</b> </dd><dd><b>b</b> </dd></dl>");
       String _string = _builder_1.toString();
       Assert.assertEquals(_string, docu);
-    } catch (Exception _e) {
+    } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
   }
@@ -827,7 +827,7 @@ public class XtendHoverDocumentationProviderTest extends AbstractXtendUITestCase
   public void cleanup() {
     try {
       this.testHelper.tearDown();
-    } catch (Exception _e) {
+    } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
   }

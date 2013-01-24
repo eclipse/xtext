@@ -5332,7 +5332,7 @@ public abstract class AbstractXtendCompilerTest extends AbstractXtendTestCase {
       String _string_3 = expectedBazClass.toString();
       String _string_4 = bazJavaCode.toString();
       XtendCompilerTest.assertEquals(_string_3, _string_4);
-    } catch (Exception _e) {
+    } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
   }
@@ -5963,7 +5963,7 @@ public abstract class AbstractXtendCompilerTest extends AbstractXtendTestCase {
       String _string_1 = expected.toString();
       String _string_2 = javaCode.toString();
       XtendCompilerTest.assertEquals(_string_1, _string_2);
-    } catch (Exception _e) {
+    } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
   }

@@ -39,7 +39,7 @@ public class RenameResourceTest extends AbstractXtendUITestCase {
         IFile _file = this._workbenchTestHelper.getFile("Bar.xtend");
         _file.delete(true, null);
       }
-    } catch (Exception _e) {
+    } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
   }
@@ -55,7 +55,7 @@ public class RenameResourceTest extends AbstractXtendUITestCase {
         IFile _file = this._workbenchTestHelper.getFile("Bar.xtend");
         _file.delete(true, null);
       }
-    } catch (Exception _e) {
+    } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
   }
@@ -77,7 +77,7 @@ public class RenameResourceTest extends AbstractXtendUITestCase {
             public void apply(final IProgressMonitor it) {
               try {
                 change.perform(it);
-              } catch (Exception _e) {
+              } catch (Throwable _e) {
                 throw Exceptions.sneakyThrow(_e);
               }
             }
@@ -94,7 +94,7 @@ public class RenameResourceTest extends AbstractXtendUITestCase {
         _xblockexpression = (newFile);
       }
       return _xblockexpression;
-    } catch (Exception _e) {
+    } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
   }

@@ -88,7 +88,7 @@ public class XtendHoverGenericsResolverTest extends AbstractXtendUITestCase {
       final String originalSignature = this.signatureProvider.getSignature(feature);
       String _replaceGenerics = this.hoverGenericsResolver.replaceGenerics(call, originalSignature);
       Assert.assertEquals("<String> String something(Iterable<String> iterable)", _replaceGenerics);
-    } catch (Exception _e) {
+    } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
   }
@@ -134,7 +134,7 @@ public class XtendHoverGenericsResolverTest extends AbstractXtendUITestCase {
       final String originalSignature = this.signatureProvider.getSignature(feature);
       String _replaceGenerics = this.hoverGenericsResolver.replaceGenerics(call, originalSignature);
       Assert.assertEquals("<String, Foo> Foo something(Iterable<String> iterable, Foo type1, String type2)", _replaceGenerics);
-    } catch (Exception _e) {
+    } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
   }
@@ -183,7 +183,7 @@ public class XtendHoverGenericsResolverTest extends AbstractXtendUITestCase {
       String _plus_3 = (_plus_2 + suffix);
       String _resolveSignatureInHtml = this.hoverGenericsResolver.resolveSignatureInHtml(call, javaElement, _plus_3);
       Assert.assertEquals(_plus_1, _resolveSignatureInHtml);
-    } catch (Exception _e) {
+    } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
   }
@@ -200,7 +200,7 @@ public class XtendHoverGenericsResolverTest extends AbstractXtendUITestCase {
   public void cleanup() {
     try {
       this.testHelper.tearDown();
-    } catch (Exception _e) {
+    } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
   }

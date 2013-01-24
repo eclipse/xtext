@@ -60,7 +60,7 @@ public class DispatchRenameSupportTest extends AbstractXtendUITestCase {
       final IFile fooFile = this.testHelper.createFile("Foo", _builder.toString());
       this.checkDispatchOperations(fooFile, 
         "Foo._foo(String)", "Foo._foo(Integer)", "Foo.foo(Object)");
-    } catch (Exception _e) {
+    } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
   }
@@ -92,7 +92,7 @@ public class DispatchRenameSupportTest extends AbstractXtendUITestCase {
       this.checkDispatchOperations(subFile, 
         "Super.foo(Double)", "Super._foo(Double)", 
         "Sub._foo(String)", "Sub._foo(Integer)", "Sub.foo(Object)");
-    } catch (Exception _e) {
+    } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
   }
@@ -124,7 +124,7 @@ public class DispatchRenameSupportTest extends AbstractXtendUITestCase {
       this.checkDispatchOperations(superFile, 
         "Super.foo(Double)", "Super._foo(Double)", 
         "Sub._foo(String)", "Sub._foo(Integer)", "Sub.foo(Object)");
-    } catch (Exception _e) {
+    } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
   }
@@ -152,7 +152,7 @@ public class DispatchRenameSupportTest extends AbstractXtendUITestCase {
       this.testHelper.createFile("Sub", _builder_1.toString());
       this.checkDispatchOperations(superFile, 
         "Super._foo(Double)", "Super.foo(Double)");
-    } catch (Exception _e) {
+    } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
   }
@@ -181,7 +181,7 @@ public class DispatchRenameSupportTest extends AbstractXtendUITestCase {
       this.checkDispatchOperations(subFile, 
         "Super._foo(Double)", 
         "Sub._foo(Integer)", "Sub.foo(Object)");
-    } catch (Exception _e) {
+    } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
   }
@@ -213,7 +213,7 @@ public class DispatchRenameSupportTest extends AbstractXtendUITestCase {
       this.checkDispatchOperations(subFile, 
         "Super.foo(Double)", "Super._foo(Double)", 
         "Sub._foo(String)", "Sub._foo(Double)", "Sub.foo(Object)");
-    } catch (Exception _e) {
+    } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
   }
@@ -245,7 +245,7 @@ public class DispatchRenameSupportTest extends AbstractXtendUITestCase {
       this.checkDispatchOperations(superFile, 
         "Super.foo(Double)", "Super._foo(Double)", 
         "Sub._foo(String)", "Sub._foo(Double)", "Sub.foo(Object)");
-    } catch (Exception _e) {
+    } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
   }
@@ -284,7 +284,7 @@ public class DispatchRenameSupportTest extends AbstractXtendUITestCase {
         "Super.foo(Double)", "Super._foo(Double)", 
         "Sub._foo(Integer)", "Sub.foo(Object)", 
         "SubSub._foo(String)", "SubSub.foo(Object)");
-    } catch (Exception _e) {
+    } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
   }
@@ -323,7 +323,7 @@ public class DispatchRenameSupportTest extends AbstractXtendUITestCase {
         "Super.foo(Double)", "Super._foo(Double)", 
         "Sub._foo(Integer)", "Sub.foo(Object)", 
         "SubSub._foo(String)", "SubSub.foo(Object)");
-    } catch (Exception _e) {
+    } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
   }
@@ -362,7 +362,7 @@ public class DispatchRenameSupportTest extends AbstractXtendUITestCase {
         "Super.foo(Double)", "Super._foo(Double)", 
         "Sub._foo(Integer)", "Sub.foo(Object)", 
         "SubSub._foo(String)", "SubSub.foo(Object)");
-    } catch (Exception _e) {
+    } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
   }
@@ -401,7 +401,7 @@ public class DispatchRenameSupportTest extends AbstractXtendUITestCase {
         "Super.foo(Double)", "Super._foo(Double)", 
         "Sub._foo(Integer)", 
         "SubSub._foo(String)", "SubSub.foo(Object)");
-    } catch (Exception _e) {
+    } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
   }
@@ -440,7 +440,7 @@ public class DispatchRenameSupportTest extends AbstractXtendUITestCase {
         "Super.foo(Double)", "Super._foo(Double)", 
         "Sub._foo(Integer)", 
         "SubSub._foo(String)", "SubSub.foo(Object)");
-    } catch (Exception _e) {
+    } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
   }
@@ -479,7 +479,7 @@ public class DispatchRenameSupportTest extends AbstractXtendUITestCase {
         "Super.foo(Double)", "Super._foo(Double)", 
         "Sub0._foo(Integer)", "Sub0.foo(Object)", 
         "Sub1._foo(String)", "Sub1.foo(Object)");
-    } catch (Exception _e) {
+    } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
   }
@@ -518,7 +518,7 @@ public class DispatchRenameSupportTest extends AbstractXtendUITestCase {
         "Super.foo(Double)", "Super._foo(Double)", 
         "Sub0._foo(Integer)", "Sub0.foo(Object)", 
         "Sub1._foo(String)", "Sub1.foo(Object)");
-    } catch (Exception _e) {
+    } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
   }
@@ -557,7 +557,7 @@ public class DispatchRenameSupportTest extends AbstractXtendUITestCase {
         "Super._foo(Double)", 
         "Sub0._foo(Integer)", "Sub0.foo(Object)", 
         "Sub1._foo(String)", "Sub1.foo(Object)");
-    } catch (Exception _e) {
+    } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
   }
@@ -591,7 +591,7 @@ public class DispatchRenameSupportTest extends AbstractXtendUITestCase {
       this.testHelper.createFile("Sub1", _builder_2.toString());
       this.checkDispatchOperations(sub0File, 
         "Sub0._foo(Integer)", "Sub0.foo(Integer)");
-    } catch (Exception _e) {
+    } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
   }
@@ -625,7 +625,7 @@ public class DispatchRenameSupportTest extends AbstractXtendUITestCase {
       final IFile sub1File = this.testHelper.createFile("Sub1", _builder_2.toString());
       this.checkDispatchOperations(sub1File, 
         "Sub1._foo(String)", "Sub1.foo(String)");
-    } catch (Exception _e) {
+    } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
   }
@@ -670,7 +670,7 @@ public class DispatchRenameSupportTest extends AbstractXtendUITestCase {
         "Super.foo(Double)", "Super._foo(Double)", 
         "SubSub1._foo(String)", "SubSub1.foo(Object)", 
         "SubSub0._foo(String)", "SubSub0.foo(Object)");
-    } catch (Exception _e) {
+    } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
   }
@@ -715,7 +715,7 @@ public class DispatchRenameSupportTest extends AbstractXtendUITestCase {
         "Super.foo(Double)", "Super._foo(Double)", 
         "SubSub1._foo(String)", "SubSub1.foo(Object)", 
         "SubSub0._foo(String)", "SubSub0.foo(Object)");
-    } catch (Exception _e) {
+    } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
   }
@@ -760,7 +760,7 @@ public class DispatchRenameSupportTest extends AbstractXtendUITestCase {
         "Super._foo(Double)", 
         "SubSub1._foo(String)", "SubSub1.foo(Object)", 
         "SubSub0._foo(String)", "SubSub0.foo(Object)");
-    } catch (Exception _e) {
+    } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
   }

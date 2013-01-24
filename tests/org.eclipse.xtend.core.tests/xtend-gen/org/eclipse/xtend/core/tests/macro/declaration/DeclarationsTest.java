@@ -427,7 +427,7 @@ public class DeclarationsTest extends AbstractXtendTestCase {
       String _string = code.toString();
       XtendFile _file = this.file(_string, true);
       return _file;
-    } catch (Exception _e) {
+    } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
   }

@@ -55,7 +55,7 @@ public class CircularDepsBetweenJavaAndXtendTest extends AbstractXtendUITestCase
       this.workbenchTestHelper.createFile("XtendClass.xtend", _builder_2.toString());
       IResourcesSetupUtil.waitForAutoBuild();
       this.assertNoErrorsInWorkspace();
-    } catch (Exception _e) {
+    } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
   }
@@ -86,7 +86,7 @@ public class CircularDepsBetweenJavaAndXtendTest extends AbstractXtendUITestCase
       this.workbenchTestHelper.createFile("XtendClass.xtend", _builder_1.toString());
       IResourcesSetupUtil.waitForAutoBuild();
       this.assertNoErrorsInWorkspace();
-    } catch (Exception _e) {
+    } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
   }
@@ -102,7 +102,7 @@ public class CircularDepsBetweenJavaAndXtendTest extends AbstractXtendUITestCase
         boolean _equals = (_severity == IMarker.SEVERITY_ERROR);
         Assert.assertFalse(_message, _equals);
       }
-    } catch (Exception _e) {
+    } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
   }

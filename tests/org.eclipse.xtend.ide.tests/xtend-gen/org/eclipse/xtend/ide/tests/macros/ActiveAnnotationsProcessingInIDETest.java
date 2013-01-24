@@ -124,7 +124,7 @@ public class ActiveAnnotationsProcessingInIDETest extends AbstractActiveAnnotati
       XtendFile _head = IterableExtensions.<XtendFile>head(_filter);
       unit.setXtendFile(_head);
       expectations.apply(unit);
-    } catch (Exception _e) {
+    } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
   }
@@ -147,7 +147,7 @@ public class ActiveAnnotationsProcessingInIDETest extends AbstractActiveAnnotati
       StringInputStream _stringInputStream = new StringInputStream(contents);
       result.create(_stringInputStream, true, null);
       return result;
-    } catch (Exception _e) {
+    } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
   }
@@ -179,7 +179,7 @@ public class ActiveAnnotationsProcessingInIDETest extends AbstractActiveAnnotati
       final ByteArrayInputStream in = _byteArrayInputStream;
       BufferedInputStream _bufferedInputStream = new BufferedInputStream(in);
       manifestFile.setContents(_bufferedInputStream, true, true, null);
-    } catch (Exception _e) {
+    } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
   }

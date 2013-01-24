@@ -516,7 +516,7 @@ public class XtendCompilerErrorHandlingTest extends AbstractXtendTestCase {
       } finally {
         this.issueProviderFactory.detachData(resource);
       }
-    } catch (Exception _e) {
+    } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
   }

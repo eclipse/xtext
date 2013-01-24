@@ -65,7 +65,7 @@ public class XtendUIValidationTests extends AbstractXtendUITestCase {
       _builder.newLine();
       final XtendFile xtendFile = this.testHelper.xtendFile("Clazz.xtend", _builder.toString());
       this.helper.assertError(xtendFile, Literals.XTEND_FILE, IssueCodes.WRONG_PACKAGE);
-    } catch (Exception _e) {
+    } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
   }
@@ -86,7 +86,7 @@ public class XtendUIValidationTests extends AbstractXtendUITestCase {
       EList<XImportDeclaration> _importDeclarations = _importSection.getImportDeclarations();
       XImportDeclaration _get = _importDeclarations.get(0);
       this.helper.assertError(_get, org.eclipse.xtext.xtype.XtypePackage.Literals.XIMPORT_DECLARATION, org.eclipse.xtext.xbase.validation.IssueCodes.FORBIDDEN_REFERENCE);
-    } catch (Exception _e) {
+    } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
   }
@@ -107,7 +107,7 @@ public class XtendUIValidationTests extends AbstractXtendUITestCase {
       EList<XImportDeclaration> _importDeclarations = _importSection.getImportDeclarations();
       XImportDeclaration _get = _importDeclarations.get(0);
       this.helper.assertWarning(_get, org.eclipse.xtext.xtype.XtypePackage.Literals.XIMPORT_DECLARATION, org.eclipse.xtext.xbase.validation.IssueCodes.DISCOURAGED_REFERENCE);
-    } catch (Exception _e) {
+    } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
   }
@@ -128,7 +128,7 @@ public class XtendUIValidationTests extends AbstractXtendUITestCase {
       EList<XImportDeclaration> _importDeclarations = _importSection.getImportDeclarations();
       XImportDeclaration _get = _importDeclarations.get(0);
       this.helper.assertError(_get, org.eclipse.xtext.xtype.XtypePackage.Literals.XIMPORT_DECLARATION, org.eclipse.xtext.xbase.validation.IssueCodes.FORBIDDEN_REFERENCE);
-    } catch (Exception _e) {
+    } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
   }
@@ -149,7 +149,7 @@ public class XtendUIValidationTests extends AbstractXtendUITestCase {
       EList<XImportDeclaration> _importDeclarations = _importSection.getImportDeclarations();
       XImportDeclaration _get = _importDeclarations.get(0);
       this.helper.assertWarning(_get, org.eclipse.xtext.xtype.XtypePackage.Literals.XIMPORT_DECLARATION, org.eclipse.xtext.xbase.validation.IssueCodes.DISCOURAGED_REFERENCE);
-    } catch (Exception _e) {
+    } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
   }
@@ -173,7 +173,7 @@ public class XtendUIValidationTests extends AbstractXtendUITestCase {
       EList<XImportDeclaration> _importDeclarations = _importSection.getImportDeclarations();
       XImportDeclaration _get = _importDeclarations.get(0);
       this.helper.assertNoIssues(_get);
-    } catch (Exception _e) {
+    } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
   }
@@ -207,7 +207,7 @@ public class XtendUIValidationTests extends AbstractXtendUITestCase {
       this.helper.assertError(_type, org.eclipse.xtext.common.types.TypesPackage.Literals.JVM_TYPE_REFERENCE, org.eclipse.xtext.xbase.validation.IssueCodes.FORBIDDEN_REFERENCE);
       XExpression _initialValue = field.getInitialValue();
       this.helper.assertError(_initialValue, org.eclipse.xtext.xbase.XbasePackage.Literals.XCONSTRUCTOR_CALL, org.eclipse.xtext.xbase.validation.IssueCodes.FORBIDDEN_REFERENCE);
-    } catch (Exception _e) {
+    } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
   }
@@ -241,7 +241,7 @@ public class XtendUIValidationTests extends AbstractXtendUITestCase {
       this.helper.assertWarning(_type, org.eclipse.xtext.common.types.TypesPackage.Literals.JVM_TYPE_REFERENCE, org.eclipse.xtext.xbase.validation.IssueCodes.DISCOURAGED_REFERENCE);
       XExpression _initialValue = field.getInitialValue();
       this.helper.assertWarning(_initialValue, org.eclipse.xtext.xbase.XbasePackage.Literals.XCONSTRUCTOR_CALL, org.eclipse.xtext.xbase.validation.IssueCodes.DISCOURAGED_REFERENCE);
-    } catch (Exception _e) {
+    } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
   }
@@ -275,7 +275,7 @@ public class XtendUIValidationTests extends AbstractXtendUITestCase {
       this.helper.assertWarning(_type, org.eclipse.xtext.common.types.TypesPackage.Literals.JVM_TYPE_REFERENCE, org.eclipse.xtext.xbase.validation.IssueCodes.DISCOURAGED_REFERENCE);
       XExpression _initialValue = field.getInitialValue();
       this.helper.assertWarning(_initialValue, org.eclipse.xtext.xbase.XbasePackage.Literals.XCONSTRUCTOR_CALL, org.eclipse.xtext.xbase.validation.IssueCodes.DISCOURAGED_REFERENCE);
-    } catch (Exception _e) {
+    } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
   }
@@ -309,7 +309,7 @@ public class XtendUIValidationTests extends AbstractXtendUITestCase {
       this.helper.assertError(_type, org.eclipse.xtext.common.types.TypesPackage.Literals.JVM_TYPE_REFERENCE, org.eclipse.xtext.xbase.validation.IssueCodes.FORBIDDEN_REFERENCE);
       XExpression _initialValue = field.getInitialValue();
       this.helper.assertError(_initialValue, org.eclipse.xtext.xbase.XbasePackage.Literals.XCONSTRUCTOR_CALL, org.eclipse.xtext.xbase.validation.IssueCodes.FORBIDDEN_REFERENCE);
-    } catch (Exception _e) {
+    } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
   }
@@ -336,7 +336,7 @@ public class XtendUIValidationTests extends AbstractXtendUITestCase {
       EList<XtendParameter> _parameters = function.getParameters();
       XtendParameter _get = _parameters.get(0);
       this.helper.assertError(_get, org.eclipse.xtext.common.types.TypesPackage.Literals.JVM_TYPE_REFERENCE, org.eclipse.xtext.xbase.validation.IssueCodes.FORBIDDEN_REFERENCE);
-    } catch (Exception _e) {
+    } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
   }
@@ -363,7 +363,7 @@ public class XtendUIValidationTests extends AbstractXtendUITestCase {
       EList<XtendParameter> _parameters = function.getParameters();
       XtendParameter _get = _parameters.get(0);
       this.helper.assertWarning(_get, org.eclipse.xtext.common.types.TypesPackage.Literals.JVM_TYPE_REFERENCE, org.eclipse.xtext.xbase.validation.IssueCodes.DISCOURAGED_REFERENCE);
-    } catch (Exception _e) {
+    } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
   }
@@ -390,7 +390,7 @@ public class XtendUIValidationTests extends AbstractXtendUITestCase {
       EList<XtendParameter> _parameters = function.getParameters();
       XtendParameter _get = _parameters.get(0);
       this.helper.assertError(_get, org.eclipse.xtext.common.types.TypesPackage.Literals.JVM_TYPE_REFERENCE, org.eclipse.xtext.xbase.validation.IssueCodes.FORBIDDEN_REFERENCE);
-    } catch (Exception _e) {
+    } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
   }
@@ -417,7 +417,7 @@ public class XtendUIValidationTests extends AbstractXtendUITestCase {
       EList<XtendParameter> _parameters = function.getParameters();
       XtendParameter _get = _parameters.get(0);
       this.helper.assertError(_get, org.eclipse.xtext.common.types.TypesPackage.Literals.JVM_TYPE_REFERENCE, org.eclipse.xtext.xbase.validation.IssueCodes.FORBIDDEN_REFERENCE);
-    } catch (Exception _e) {
+    } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
   }
@@ -448,7 +448,7 @@ public class XtendUIValidationTests extends AbstractXtendUITestCase {
       final JvmTypeReference typeParameter = _arguments.get(0);
       this.helper.assertError(type, org.eclipse.xtext.common.types.TypesPackage.Literals.JVM_PARAMETERIZED_TYPE_REFERENCE, org.eclipse.xtext.xbase.validation.IssueCodes.FORBIDDEN_REFERENCE);
       this.helper.assertWarning(typeParameter, org.eclipse.xtext.common.types.TypesPackage.Literals.JVM_TYPE_REFERENCE, org.eclipse.xtext.xbase.validation.IssueCodes.DISCOURAGED_REFERENCE);
-    } catch (Exception _e) {
+    } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
   }
@@ -498,7 +498,7 @@ public class XtendUIValidationTests extends AbstractXtendUITestCase {
       _builder.newLine();
       final XtendFile xtendFile = this.testHelper.xtendFile("Clazz.xtend", _builder.toString());
       this.helper.validate(xtendFile);
-    } catch (Exception _e) {
+    } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
   }
@@ -541,7 +541,7 @@ public class XtendUIValidationTests extends AbstractXtendUITestCase {
       EList<XtendParameter> _parameters_1 = function.getParameters();
       XtendParameter _get_1 = _parameters_1.get(0);
       this.helper.assertWarning(_get_1, org.eclipse.xtext.common.types.TypesPackage.Literals.JVM_TYPE_REFERENCE, org.eclipse.xtext.xbase.validation.IssueCodes.FORBIDDEN_REFERENCE);
-    } catch (Exception _e) {
+    } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
   }
@@ -593,7 +593,7 @@ public class XtendUIValidationTests extends AbstractXtendUITestCase {
           }
         };
       ObjectExtensions.<XtendFile>operator_doubleArrow(_xtendFile_1, _function_1);
-    } catch (Exception _e) {
+    } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
   }

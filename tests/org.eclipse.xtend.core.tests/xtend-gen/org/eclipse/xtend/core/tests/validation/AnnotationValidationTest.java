@@ -31,7 +31,7 @@ public class AnnotationValidationTest extends AbstractXtendTestCase {
       _builder.append("}");
       final XtendFile file = this.parser.parse(_builder);
       this.helper.assertError(file, Literals.XTEND_FIELD, IssueCodes.INVALID_ANNOTATION_VALUE_TYPE);
-    } catch (Exception _e) {
+    } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
   }
@@ -63,7 +63,7 @@ public class AnnotationValidationTest extends AbstractXtendTestCase {
       _builder.append("}");
       final XtendFile file = this.parser.parse(_builder);
       this.helper.assertNoErrors(file);
-    } catch (Exception _e) {
+    } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
   }
@@ -80,7 +80,7 @@ public class AnnotationValidationTest extends AbstractXtendTestCase {
       _builder.append("}");
       final XtendFile file = this.parser.parse(_builder);
       this.helper.assertError(file, Literals.XTEND_FIELD, IssueCodes.INVALID_ANNOTATION_VALUE_TYPE);
-    } catch (Exception _e) {
+    } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
   }

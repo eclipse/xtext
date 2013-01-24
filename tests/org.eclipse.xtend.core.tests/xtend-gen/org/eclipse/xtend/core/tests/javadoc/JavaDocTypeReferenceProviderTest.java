@@ -62,7 +62,7 @@ public class JavaDocTypeReferenceProviderTest extends AbstractXtendTestCase {
       ReplaceRegion _head_2 = IterableExtensions.<ReplaceRegion>head(regions);
       int _length_1 = _head_2.getLength();
       Assert.assertEquals(_length, _length_1);
-    } catch (Exception _e) {
+    } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
   }
@@ -102,7 +102,7 @@ public class JavaDocTypeReferenceProviderTest extends AbstractXtendTestCase {
       ReplaceRegion _head_2 = IterableExtensions.<ReplaceRegion>head(regions);
       int _length_1 = _head_2.getLength();
       Assert.assertEquals(_length, _length_1);
-    } catch (Exception _e) {
+    } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
   }
@@ -131,7 +131,7 @@ public class JavaDocTypeReferenceProviderTest extends AbstractXtendTestCase {
       final List<ReplaceRegion> regions = this.javaDocTypeReferenceProvider.computeTypeRefRegions(rootNode);
       int _size = regions.size();
       Assert.assertEquals(0, _size);
-    } catch (Exception _e) {
+    } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
   }
@@ -161,7 +161,7 @@ public class JavaDocTypeReferenceProviderTest extends AbstractXtendTestCase {
       final List<ReplaceRegion> regions = this.javaDocTypeReferenceProvider.computeTypeRefRegions(rootNode);
       int _size = regions.size();
       Assert.assertEquals(0, _size);
-    } catch (Exception _e) {
+    } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
   }
@@ -223,7 +223,7 @@ public class JavaDocTypeReferenceProviderTest extends AbstractXtendTestCase {
       ReplaceRegion _get_2 = regions.get(1);
       int _length_3 = _get_2.getLength();
       Assert.assertEquals(_length_2, _length_3);
-    } catch (Exception _e) {
+    } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
   }
@@ -258,7 +258,7 @@ public class JavaDocTypeReferenceProviderTest extends AbstractXtendTestCase {
       final List<ReplaceRegion> regions = this.javaDocTypeReferenceProvider.computeTypeRefRegions(rootNode);
       int _size = regions.size();
       Assert.assertEquals(0, _size);
-    } catch (Exception _e) {
+    } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
   }
