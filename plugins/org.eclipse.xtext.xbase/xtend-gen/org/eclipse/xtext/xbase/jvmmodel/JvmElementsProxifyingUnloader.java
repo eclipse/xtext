@@ -1,7 +1,6 @@
 package org.eclipse.xtext.xbase.jvmmodel;
 
 import com.google.common.annotations.Beta;
-import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
@@ -36,8 +35,6 @@ public class JvmElementsProxifyingUnloader implements IReferableElementsUnloader
         }
       }
     }
-    EList<Adapter> _eAdapters = element.eAdapters();
-    _eAdapters.clear();
     URI _uRI = EcoreUtil.getURI(element);
     ((InternalEObject) element).eSetProxyURI(_uRI);
   }
