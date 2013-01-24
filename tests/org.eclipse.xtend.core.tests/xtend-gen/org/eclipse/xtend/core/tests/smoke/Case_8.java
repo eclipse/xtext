@@ -40,7 +40,7 @@ public class Case_8 {
       EList<EObject> _eContents = _parse.eContents();
       EObject _head = IterableExtensions.<EObject>head(_eContents);
       return _head;
-    } catch (Exception _e) {
+    } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
   }

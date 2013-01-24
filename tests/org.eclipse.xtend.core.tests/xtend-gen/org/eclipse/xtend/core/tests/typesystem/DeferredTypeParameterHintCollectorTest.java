@@ -79,7 +79,7 @@ public class DeferredTypeParameterHintCollectorTest extends AbstractTestingTypeR
       final XtendFunction function = this.function(_string);
       final JvmOperation operation = this._iXtendJvmAssociations.getDirectlyInferredOperation(function);
       return operation;
-    } catch (Exception _e) {
+    } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
   }

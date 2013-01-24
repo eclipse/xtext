@@ -96,7 +96,7 @@ public class ActualTypeArgumentMergeTest extends AbstractTestingTypeReferenceOwn
         collector.populateTypeParameterMapping(_lightweightReference, _lightweightReference_1);
       }
       return collector.getTypeParameterMapping();
-    } catch (Exception _e) {
+    } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
   }

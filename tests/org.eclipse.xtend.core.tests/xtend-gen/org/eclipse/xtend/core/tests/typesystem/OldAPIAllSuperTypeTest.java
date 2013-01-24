@@ -76,7 +76,7 @@ public class OldAPIAllSuperTypeTest extends AllSuperTypesTest {
       Iterable<String> _map = IterableExtensions.<JvmTypeReference, String>map(computedSuperTypes, _function);
       final Set<String> actualSupertypesAsSet = IterableExtensions.<String>toSet(_map);
       Assert.assertEquals(expectedSupertypesAsSet, ((Object) actualSupertypesAsSet));
-    } catch (Exception _e) {
+    } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
   }

@@ -150,7 +150,7 @@ public class CommonSuperTypeTest extends AbstractTestingTypeReferenceOwner {
         }
       }
       return computedSuperType;
-    } catch (Exception _e) {
+    } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
   }

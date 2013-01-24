@@ -161,7 +161,7 @@ public abstract class AbstractAssignabilityTest extends AbstractTestingTypeRefer
           Assert.assertEquals(_string_1, Boolean.valueOf(expectation), Boolean.valueOf(_testIsAssignable_1));
         }
       }
-    } catch (Exception _e) {
+    } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
   }

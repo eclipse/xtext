@@ -193,7 +193,7 @@ public class ActualTypeArgumentCollectorTest extends AbstractTestingTypeReferenc
         _xblockexpression = (operation);
       }
       return _xblockexpression;
-    } catch (Exception _e) {
+    } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
   }

@@ -99,7 +99,7 @@ public class OldAPIAssignabilityTest extends AssignabilityTest {
       final JvmTypeReference rhsType = _xifexpression_1;
       boolean _isConformant = this.conformanceComputer.isConformant(lhsType, rhsType);
       Assert.assertEquals(Boolean.valueOf(expectation), Boolean.valueOf(_isConformant));
-    } catch (Exception _e) {
+    } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
   }

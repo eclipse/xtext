@@ -86,7 +86,7 @@ public class BoundTypeArgumentMergerTest extends AbstractTestingTypeReferenceOwn
         };
       IterableExtensions.<JvmFormalParameter>forEach(_parameters, _function_1);
       return this.merger.merge(mergable, this);
-    } catch (Exception _e) {
+    } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
   }

@@ -86,7 +86,7 @@ public abstract class AbstractSuperTypesTest extends AbstractTestingTypeReferenc
       Iterable<String> _map = IterableExtensions.<LightweightTypeReference, String>map(_collectSuperTypes, _function);
       List<String> _list_1 = IterableExtensions.<String>toList(_map);
       Assert.assertEquals(_list, ((Object) _list_1));
-    } catch (Exception _e) {
+    } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
   }

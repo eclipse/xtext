@@ -142,7 +142,7 @@ public class OldAPICommonSuperTypeTest extends CommonSuperTypeTest {
         Assert.assertEquals(_key_3, _simpleName_3);
       }
       return computedSuperType;
-    } catch (Exception _e) {
+    } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
   }

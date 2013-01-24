@@ -89,7 +89,7 @@ public class ActiveAnnotationsRuntimeTest extends AbstractActiveAnnotationsTest 
             _function_1.apply(t);
           }
       });
-    } catch (Exception _e) {
+    } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
   }

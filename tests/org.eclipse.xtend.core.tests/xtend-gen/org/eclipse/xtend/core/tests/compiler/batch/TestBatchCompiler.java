@@ -61,7 +61,7 @@ public class TestBatchCompiler {
       _file_2.mkdir();
       File _file_3 = new File(TestBatchCompiler.OUTPUT_DIRECTORY_WITH_SPACES);
       Files.cleanFolder(_file_3, null, true, false);
-    } catch (Exception _e) {
+    } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
   }
@@ -85,7 +85,7 @@ public class TestBatchCompiler {
         File _file_5 = new File(TestBatchCompiler.TEMP_DIRECTORY_WITH_SPACES);
         Files.cleanFolder(_file_5, null, true, true);
       }
-    } catch (Exception _e) {
+    } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
   }
