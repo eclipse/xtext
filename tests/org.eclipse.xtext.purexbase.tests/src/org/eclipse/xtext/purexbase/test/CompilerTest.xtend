@@ -62,6 +62,7 @@ class CompilerTest {
 			import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 			import org.eclipse.xtext.xbase.lib.Pair;
 			
+			@SuppressWarnings("all")
 			public class MyFile {
 			  public BigDecimal myMethod() throws Throwable {
 			    BigDecimal _xblockexpression = null;
@@ -115,6 +116,7 @@ class CompilerTest {
 			import java.util.Collections;
 			import org.eclipse.xtext.purexbase.test.data.Person;
 			
+			@SuppressWarnings("all")
 			public class MyFile {
 			  public void myMethod() throws Throwable {
 			    Person _person = new Person();
@@ -176,6 +178,7 @@ class CompilerTest {
 			}
 			// foo (String)
 		'''.assertCompilesTo('''
+			@SuppressWarnings("all")
 			public class MyFile {
 			  public String myMethod() throws Throwable {
 			    String _xblockexpression = null;
@@ -216,6 +219,7 @@ class CompilerTest {
 			(s as String).length
 			// 3 (int)
 		'''.assertCompilesTo('''
+			@SuppressWarnings("all")
 			public class MyFile {
 			  public int myMethod() throws Throwable {
 			    int _xblockexpression = (int) 0;
@@ -271,6 +275,7 @@ class CompilerTest {
 			import org.eclipse.xtext.xbase.lib.Functions.Function1;
 			import org.eclipse.xtext.xbase.lib.ListExtensions;
 			
+			@SuppressWarnings("all")
 			public class MyFile {
 			  public String myMethod() throws Throwable {
 			    String _xblockexpression = null;
@@ -342,6 +347,7 @@ class CompilerTest {
 				"Xbase doesn't need the ternary operator"
 			}
 		'''.assertCompilesTo('''
+			@SuppressWarnings("all")
 			public class MyFile {
 			  public String myMethod() throws Throwable {
 			    String _xblockexpression = null;
@@ -396,6 +402,7 @@ class CompilerTest {
 		'''.assertCompilesTo('''
 			import org.eclipse.xtext.purexbase.test.data.Amount;
 			
+			@SuppressWarnings("all")
 			public class MyFile {
 			  public Amount myMethod() throws Throwable {
 			    Amount _xblockexpression = null;
@@ -445,6 +452,7 @@ class CompilerTest {
 			import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 			import org.eclipse.xtext.xbase.lib.ListExtensions;
 			
+			@SuppressWarnings("all")
 			public class MyFile {
 			  public ArrayList<String> myMethod() throws Throwable {
 			    ArrayList<String> _xblockexpression = null;
@@ -510,6 +518,7 @@ class CompilerTest {
 		'''.assertCompilesTo('''
 			import org.eclipse.xtext.xbase.lib.Exceptions;
 			
+			@SuppressWarnings("all")
 			public class MyFile {
 			  public Object myMethod() throws Throwable {
 			    Object _xblockexpression = null;
@@ -585,6 +594,7 @@ class CompilerTest {
 			import org.eclipse.xtext.xbase.lib.IterableExtensions;
 			import org.eclipse.xtext.xbase.lib.ListExtensions;
 			
+			@SuppressWarnings("all")
 			public class MyFile {
 			  public List<String> myMethod() throws Throwable {
 			    List<String> _xblockexpression = null;
@@ -708,6 +718,7 @@ class CompilerTest {
 			import java.util.List;
 			import org.eclipse.xtext.xbase.lib.Conversions;
 			
+			@SuppressWarnings("all")
 			public class MyFile {
 			  public void myMethod() throws Throwable {
 			    "string".length();
