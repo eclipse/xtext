@@ -29,7 +29,6 @@ import org.eclipse.xtend.core.xtend.XtendParameter;
 
 import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.JvmTypeReference;
-import org.eclipse.xtext.common.types.JvmVisibility;
 
 import org.eclipse.xtext.xbase.XExpression;
 
@@ -44,7 +43,6 @@ import org.eclipse.xtext.xbase.XExpression;
  *   <li>{@link org.eclipse.xtend.core.xtend.impl.XtendConstructorImpl#getExpression <em>Expression</em>}</li>
  *   <li>{@link org.eclipse.xtend.core.xtend.impl.XtendConstructorImpl#getParameters <em>Parameters</em>}</li>
  *   <li>{@link org.eclipse.xtend.core.xtend.impl.XtendConstructorImpl#getTypeParameters <em>Type Parameters</em>}</li>
- *   <li>{@link org.eclipse.xtend.core.xtend.impl.XtendConstructorImpl#getVisibility <em>Visibility</em>}</li>
  *   <li>{@link org.eclipse.xtend.core.xtend.impl.XtendConstructorImpl#getExceptions <em>Exceptions</em>}</li>
  * </ul>
  * </p>
@@ -102,35 +100,6 @@ public class XtendConstructorImpl extends XtendMemberImplCustom implements Xtend
 	 * @ordered
 	 */
 	protected EList<JvmTypeParameter> typeParameters;
-
-	/**
-	 * The default value of the '{@link #getVisibility() <em>Visibility</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getVisibility()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final JvmVisibility VISIBILITY_EDEFAULT = JvmVisibility.PUBLIC;
-
-	/**
-	 * The cached value of the '{@link #getVisibility() <em>Visibility</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getVisibility()
-	 * @generated
-	 * @ordered
-	 */
-	protected JvmVisibility visibility = VISIBILITY_EDEFAULT;
-
-	/**
-	 * This is true if the Visibility attribute has been set.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	protected boolean visibilityESet;
 
 	/**
 	 * The cached value of the '{@link #getExceptions() <em>Exceptions</em>}' containment reference list.
@@ -267,26 +236,6 @@ public class XtendConstructorImpl extends XtendMemberImplCustom implements Xtend
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public JvmVisibility getVisibility()
-	{
-		return visibility;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public boolean isSetVisibility()
-	{
-		return visibilityESet;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EList<JvmTypeReference> getExceptions()
 	{
 		if (exceptions == null)
@@ -336,8 +285,6 @@ public class XtendConstructorImpl extends XtendMemberImplCustom implements Xtend
 				return getParameters();
 			case XtendPackage.XTEND_CONSTRUCTOR__TYPE_PARAMETERS:
 				return getTypeParameters();
-			case XtendPackage.XTEND_CONSTRUCTOR__VISIBILITY:
-				return getVisibility();
 			case XtendPackage.XTEND_CONSTRUCTOR__EXCEPTIONS:
 				return getExceptions();
 		}
@@ -424,8 +371,6 @@ public class XtendConstructorImpl extends XtendMemberImplCustom implements Xtend
 				return parameters != null && !parameters.isEmpty();
 			case XtendPackage.XTEND_CONSTRUCTOR__TYPE_PARAMETERS:
 				return typeParameters != null && !typeParameters.isEmpty();
-			case XtendPackage.XTEND_CONSTRUCTOR__VISIBILITY:
-				return isSetVisibility();
 			case XtendPackage.XTEND_CONSTRUCTOR__EXCEPTIONS:
 				return exceptions != null && !exceptions.isEmpty();
 		}
@@ -445,8 +390,6 @@ public class XtendConstructorImpl extends XtendMemberImplCustom implements Xtend
 		StringBuffer result = new StringBuffer(super.toString());
 		result.append(" (name: ");
 		result.append(name);
-		result.append(", visibility: ");
-		if (visibilityESet) result.append(visibility); else result.append("<unset>");
 		result.append(')');
 		return result.toString();
 	}

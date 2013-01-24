@@ -12,7 +12,6 @@ import org.eclipse.emf.common.util.EList;
 
 import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.JvmTypeReference;
-import org.eclipse.xtext.common.types.JvmVisibility;
 
 import org.eclipse.xtext.xbase.XExpression;
 
@@ -28,7 +27,6 @@ import org.eclipse.xtext.xbase.XExpression;
  *   <li>{@link org.eclipse.xtend.core.xtend.XtendConstructor#getExpression <em>Expression</em>}</li>
  *   <li>{@link org.eclipse.xtend.core.xtend.XtendConstructor#getParameters <em>Parameters</em>}</li>
  *   <li>{@link org.eclipse.xtend.core.xtend.XtendConstructor#getTypeParameters <em>Type Parameters</em>}</li>
- *   <li>{@link org.eclipse.xtend.core.xtend.XtendConstructor#getVisibility <em>Visibility</em>}</li>
  *   <li>{@link org.eclipse.xtend.core.xtend.XtendConstructor#getExceptions <em>Exceptions</em>}</li>
  * </ul>
  * </p>
@@ -122,35 +120,6 @@ public interface XtendConstructor extends XtendMember
 	 * @generated
 	 */
 	EList<JvmTypeParameter> getTypeParameters();
-
-	/**
-	 * Returns the value of the '<em><b>Visibility</b></em>' attribute.
-	 * The default value is <code>"PUBLIC"</code>.
-	 * The literals are from the enumeration {@link org.eclipse.xtext.common.types.JvmVisibility}.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Visibility</em>' attribute isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Visibility</em>' attribute.
-	 * @see org.eclipse.xtext.common.types.JvmVisibility
-	 * @see #isSetVisibility()
-	 * @see org.eclipse.xtend.core.xtend.XtendPackage#getXtendConstructor_Visibility()
-	 * @model default="PUBLIC" unsettable="true" transient="true" changeable="false" derived="true"
-	 * @generated
-	 */
-	JvmVisibility getVisibility();
-
-	/**
-	 * Returns whether the value of the '{@link org.eclipse.xtend.core.xtend.XtendConstructor#getVisibility <em>Visibility</em>}' attribute is set.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return whether the value of the '<em>Visibility</em>' attribute is set.
-	 * @see #getVisibility()
-	 * @generated
-	 */
-	boolean isSetVisibility();
 
 	/**
 	 * Returns the value of the '<em><b>Exceptions</b></em>' containment reference list.

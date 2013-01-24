@@ -755,19 +755,9 @@ public class XtendPackageImpl extends EPackageImpl implements XtendPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getXtendConstructor_Visibility()
-	{
-		return (EAttribute)xtendConstructorEClass.getEStructuralFeatures().get(4);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EReference getXtendConstructor_Exceptions()
 	{
-		return (EReference)xtendConstructorEClass.getEStructuralFeatures().get(5);
+		return (EReference)xtendConstructorEClass.getEStructuralFeatures().get(4);
 	}
 
 	/**
@@ -905,7 +895,6 @@ public class XtendPackageImpl extends EPackageImpl implements XtendPackage
 		createEReference(xtendConstructorEClass, XTEND_CONSTRUCTOR__EXPRESSION);
 		createEReference(xtendConstructorEClass, XTEND_CONSTRUCTOR__PARAMETERS);
 		createEReference(xtendConstructorEClass, XTEND_CONSTRUCTOR__TYPE_PARAMETERS);
-		createEAttribute(xtendConstructorEClass, XTEND_CONSTRUCTOR__VISIBILITY);
 		createEReference(xtendConstructorEClass, XTEND_CONSTRUCTOR__EXCEPTIONS);
 
 		xtendTypeDeclarationEClass = createEClass(XTEND_TYPE_DECLARATION);
@@ -1047,7 +1036,6 @@ public class XtendPackageImpl extends EPackageImpl implements XtendPackage
 		initEReference(getXtendConstructor_Expression(), theXbasePackage.getXExpression(), null, "expression", null, 0, 1, XtendConstructor.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getXtendConstructor_Parameters(), this.getXtendParameter(), null, "parameters", null, 0, -1, XtendConstructor.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getXtendConstructor_TypeParameters(), theTypesPackage.getJvmTypeParameter(), null, "typeParameters", null, 0, -1, XtendConstructor.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getXtendConstructor_Visibility(), theTypesPackage.getJvmVisibility(), "visibility", "PUBLIC", 0, 1, XtendConstructor.class, IS_TRANSIENT, !IS_VOLATILE, !IS_CHANGEABLE, IS_UNSETTABLE, !IS_ID, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
 		initEReference(getXtendConstructor_Exceptions(), theTypesPackage.getJvmTypeReference(), null, "exceptions", null, 0, -1, XtendConstructor.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(xtendTypeDeclarationEClass, XtendTypeDeclaration.class, "XtendTypeDeclaration", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);

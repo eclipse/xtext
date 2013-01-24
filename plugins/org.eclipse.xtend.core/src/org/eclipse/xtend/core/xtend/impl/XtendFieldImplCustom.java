@@ -9,6 +9,8 @@ package org.eclipse.xtend.core.xtend.impl;
 
 import static org.eclipse.xtext.util.Strings.*;
 
+import org.eclipse.xtext.common.types.JvmVisibility;
+
 /**
  * @author Jan Koehnlein - Initial contribution and API
  */
@@ -22,5 +24,21 @@ public class XtendFieldImplCustom extends XtendFieldImpl {
 		}
 		return false;
 	}
+
+	@Override
+	protected JvmVisibility getDefaultVisibility() {
+		return JvmVisibility.PRIVATE;
+	}
 	
+	@Override
+	public boolean isFinal() {
+		for(String modifier: getModifiers()) { 
+			if(equal(modifier, "var")) 
+				return false;
+			if(equal(modifier, "val") || equal(modifier, "final")) 
+				return true;
+		}
+		return false;
+
+	}
 }

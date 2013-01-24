@@ -899,22 +899,13 @@ public interface XtendPackage extends EPackage
 	int XTEND_CONSTRUCTOR__TYPE_PARAMETERS = XTEND_MEMBER_FEATURE_COUNT + 3;
 
 	/**
-	 * The feature id for the '<em><b>Visibility</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int XTEND_CONSTRUCTOR__VISIBILITY = XTEND_MEMBER_FEATURE_COUNT + 4;
-
-	/**
 	 * The feature id for the '<em><b>Exceptions</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int XTEND_CONSTRUCTOR__EXCEPTIONS = XTEND_MEMBER_FEATURE_COUNT + 5;
+	int XTEND_CONSTRUCTOR__EXCEPTIONS = XTEND_MEMBER_FEATURE_COUNT + 4;
 
 	/**
 	 * The number of structural features of the '<em>Constructor</em>' class.
@@ -923,7 +914,7 @@ public interface XtendPackage extends EPackage
 	 * @generated
 	 * @ordered
 	 */
-	int XTEND_CONSTRUCTOR_FEATURE_COUNT = XTEND_MEMBER_FEATURE_COUNT + 6;
+	int XTEND_CONSTRUCTOR_FEATURE_COUNT = XTEND_MEMBER_FEATURE_COUNT + 5;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.xtend.core.xtend.impl.XtendAnnotationTypeImpl <em>Annotation Type</em>}' class.
@@ -1549,17 +1540,6 @@ public interface XtendPackage extends EPackage
 	EReference getXtendConstructor_TypeParameters();
 
 	/**
-	 * Returns the meta object for the attribute '{@link org.eclipse.xtend.core.xtend.XtendConstructor#getVisibility <em>Visibility</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Visibility</em>'.
-	 * @see org.eclipse.xtend.core.xtend.XtendConstructor#getVisibility()
-	 * @see #getXtendConstructor()
-	 * @generated
-	 */
-	EAttribute getXtendConstructor_Visibility();
-
-	/**
 	 * Returns the meta object for the containment reference list '{@link org.eclipse.xtend.core.xtend.XtendConstructor#getExceptions <em>Exceptions</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2078,14 +2058,6 @@ public interface XtendPackage extends EPackage
 		 * @generated
 		 */
 		EReference XTEND_CONSTRUCTOR__TYPE_PARAMETERS = eINSTANCE.getXtendConstructor_TypeParameters();
-
-		/**
-		 * The meta object literal for the '<em><b>Visibility</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute XTEND_CONSTRUCTOR__VISIBILITY = eINSTANCE.getXtendConstructor_Visibility();
 
 		/**
 		 * The meta object literal for the '<em><b>Exceptions</b></em>' containment reference list feature.
