@@ -32,4 +32,7 @@ public class AbstractPureXbaseProposalProvider extends org.eclipse.xtext.xbase.u
 	public void complete_SpecialBlockExpression(EObject model, RuleCall ruleCall, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
 		// subclasses may override
 	}
+	public void complete_FeatureCallID(EObject model, RuleCall ruleCall, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
+		// subclasses may override
+	}
 }

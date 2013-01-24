@@ -8,5 +8,7 @@ Model:
 	
 SpecialBlockExpression returns xbase::XBlockExpression:
 	{xbase::XBlockExpression}
-	(expressions+=XExpressionInsideBlock ';'?)*
-;
+	(expressions+=XExpressionInsideBlock ';'?)*;
+
+FeatureCallID:
+	ValidID;
