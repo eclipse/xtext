@@ -79,6 +79,9 @@ public class XbaseValueConverterService extends DefaultTerminalConverters {
 	private KeywordAlternativeConverter validIDConverter;
 	
 	@Inject
+	private KeywordAlternativeConverter featureCallIDConverter;
+	
+	@Inject
 	private KeywordAlternativeConverter idOrSuperConverter;
 	
 	@ValueConverter(rule = "IdOrSuper")
@@ -89,6 +92,11 @@ public class XbaseValueConverterService extends DefaultTerminalConverters {
 	@ValueConverter(rule = "ValidID")
 	public IValueConverter<String> getValidIDConverter() {
 		return validIDConverter;
+	}
+	
+	@ValueConverter(rule = "FeatureCallID")
+	public IValueConverter<String> getFeatureCallIDValueConverter() {
+		return featureCallIDConverter;
 	}
 	
 	@ValueConverter(rule = "QualifiedName")
