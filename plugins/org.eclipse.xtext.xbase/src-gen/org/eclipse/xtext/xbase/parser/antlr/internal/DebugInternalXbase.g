@@ -10,7 +10,7 @@ ruleXExpression :
 
 // Rule XAssignment
 ruleXAssignment :
-	ruleValidID ruleOpSingleAssign ruleXAssignment |
+	ruleFeatureCallID ruleOpSingleAssign ruleXAssignment |
 	ruleXOrExpression (
 		( (
 		ruleOpMultiAssign
@@ -184,9 +184,9 @@ ruleXCastedExpression :
 ruleXMemberFeatureCall :
 	ruleXPrimaryExpression (
 		( (
-		'.' ruleValidID ruleOpSingleAssign
+		'.' ruleFeatureCallID ruleOpSingleAssign
 		) => (
-			'.' ruleValidID ruleOpSingleAssign
+			'.' ruleFeatureCallID ruleOpSingleAssign
 		) ) ruleXAssignment |
 		( (
 		'.' |
@@ -200,7 +200,7 @@ ruleXMemberFeatureCall :
 			'<' ruleJvmArgumentTypeReference (
 				',' ruleJvmArgumentTypeReference
 			)* '>'
-		)? ruleValidID (
+		)? ruleFeatureCallID (
 			( (
 			'('
 			) => '(' ) (
@@ -413,9 +413,18 @@ ruleXFeatureCall :
 	) => ruleXClosure )?
 ;
 
+// Rule FeatureCallID
+ruleFeatureCallID :
+	ruleValidID |
+	'extends' |
+	'static' |
+	'import' |
+	'extension'
+;
+
 // Rule IdOrSuper
 ruleIdOrSuper :
-	ruleValidID |
+	ruleFeatureCallID |
 	'super'
 ;
 
