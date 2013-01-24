@@ -22,19 +22,76 @@ public class DatatypeRuleConverterTest extends AbstractXtendTestCase {
 	private IValueConverterService converter;
 	
 	@Test public void testValidID() {
-		doTestConverter("create", "create", "ValidID");
 		doTestConverter("doStuff", "doStuff", "ValidID");
-		doTestConverter("^super", "super", "ValidID");
-		doTestConverter("^class", "class", "ValidID");
+		doTestConverter("create", "create", "ValidID");
+		doTestConverter("annotation", "annotation", "ValidID");
+		
+		doTestConverter("^extends", "extends", "ValidID");
 		doTestConverter("^import", "import", "ValidID");
+		doTestConverter("^extension", "extension", "ValidID");
+		doTestConverter("^class", "class", "ValidID");
+		doTestConverter("^interface", "interface", "ValidID");
+		doTestConverter("^public", "public", "ValidID");
+		doTestConverter("^package", "package", "ValidID");
+		doTestConverter("^protected", "protected", "ValidID");
+		doTestConverter("^private", "private", "ValidID");
+		doTestConverter("^abstract", "abstract", "ValidID");
+		doTestConverter("^static", "static", "ValidID");
+		doTestConverter("^final", "final", "ValidID");
+		doTestConverter("^dispatch", "dispatch", "ValidID");
+		doTestConverter("^def", "def", "ValidID");
+		doTestConverter("^override", "override", "ValidID");
+		doTestConverter("^implements", "implements", "ValidID");
+		doTestConverter("^throws", "throws", "ValidID");
 	}
 	
+	@Test public void testFeatureCallID() {
+		doTestConverter("doStuff", "doStuff", "FeatureCallID");
+		doTestConverter("create", "create", "FeatureCallID");
+		doTestConverter("annotation", "annotation", "FeatureCallID");
+		doTestConverter("extends", "extends", "FeatureCallID");
+		doTestConverter("import", "import", "FeatureCallID");
+		doTestConverter("extension", "extension", "FeatureCallID");
+		doTestConverter("class", "class", "FeatureCallID");
+		doTestConverter("interface", "interface", "FeatureCallID");
+		doTestConverter("public", "public", "FeatureCallID");
+		doTestConverter("package", "package", "FeatureCallID");
+		doTestConverter("protected", "protected", "FeatureCallID");
+		doTestConverter("private", "private", "FeatureCallID");
+		doTestConverter("abstract", "abstract", "FeatureCallID");
+		doTestConverter("static", "static", "FeatureCallID");
+		doTestConverter("final", "final", "FeatureCallID");
+		doTestConverter("dispatch", "dispatch", "FeatureCallID");
+		doTestConverter("def", "def", "FeatureCallID");
+		doTestConverter("override", "override", "FeatureCallID");
+		doTestConverter("implements", "implements", "FeatureCallID");
+		doTestConverter("throws", "throws", "FeatureCallID");
+		
+		doTestConverter("^super", "super", "FeatureCallID");
+	}
+
 	@Test public void testIdOrSuper() {
-		doTestConverter("create", "create", "IdOrSuper");
 		doTestConverter("doStuff", "doStuff", "IdOrSuper");
+		doTestConverter("create", "create", "IdOrSuper");
+		doTestConverter("annotation", "annotation", "IdOrSuper");
+		doTestConverter("extends", "extends", "IdOrSuper");
+		doTestConverter("import", "import", "IdOrSuper");
+		doTestConverter("extension", "extension", "IdOrSuper");
+		doTestConverter("class", "class", "IdOrSuper");
+		doTestConverter("interface", "interface", "IdOrSuper");
+		doTestConverter("public", "public", "IdOrSuper");
+		doTestConverter("package", "package", "IdOrSuper");
+		doTestConverter("protected", "protected", "IdOrSuper");
+		doTestConverter("private", "private", "IdOrSuper");
+		doTestConverter("abstract", "abstract", "IdOrSuper");
+		doTestConverter("static", "static", "IdOrSuper");
+		doTestConverter("final", "final", "IdOrSuper");
+		doTestConverter("dispatch", "dispatch", "IdOrSuper");
+		doTestConverter("def", "def", "IdOrSuper");
+		doTestConverter("override", "override", "IdOrSuper");
+		doTestConverter("implements", "implements", "IdOrSuper");
+		doTestConverter("throws", "throws", "IdOrSuper");		
 		doTestConverter("super", "super", "IdOrSuper");
-		doTestConverter("^class", "class", "IdOrSuper");
-		doTestConverter("^import", "import", "IdOrSuper");
 	}
 
 	protected void doTestConverter(String text, String expectation, String ruleName) {
