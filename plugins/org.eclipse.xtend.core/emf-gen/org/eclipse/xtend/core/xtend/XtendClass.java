@@ -21,7 +21,6 @@ import org.eclipse.xtext.common.types.JvmTypeReference;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link org.eclipse.xtend.core.xtend.XtendClass#isAbstract <em>Abstract</em>}</li>
  *   <li>{@link org.eclipse.xtend.core.xtend.XtendClass#getExtends <em>Extends</em>}</li>
  *   <li>{@link org.eclipse.xtend.core.xtend.XtendClass#getImplements <em>Implements</em>}</li>
  *   <li>{@link org.eclipse.xtend.core.xtend.XtendClass#getMembers <em>Members</em>}</li>
@@ -35,32 +34,6 @@ import org.eclipse.xtext.common.types.JvmTypeReference;
  */
 public interface XtendClass extends XtendTypeDeclaration
 {
-	/**
-	 * Returns the value of the '<em><b>Abstract</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Abstract</em>' attribute isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Abstract</em>' attribute.
-	 * @see #setAbstract(boolean)
-	 * @see org.eclipse.xtend.core.xtend.XtendPackage#getXtendClass_Abstract()
-	 * @model
-	 * @generated
-	 */
-	boolean isAbstract();
-
-	/**
-	 * Sets the value of the '{@link org.eclipse.xtend.core.xtend.XtendClass#isAbstract <em>Abstract</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Abstract</em>' attribute.
-	 * @see #isAbstract()
-	 * @generated
-	 */
-	void setAbstract(boolean value);
-
 	/**
 	 * Returns the value of the '<em><b>Extends</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
@@ -134,5 +107,13 @@ public interface XtendClass extends XtendTypeDeclaration
 	 * @generated
 	 */
 	EList<JvmTypeParameter> getTypeParameters();
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model kind="operation"
+	 * @generated
+	 */
+	boolean isAbstract();
 
 } // XtendClass

@@ -108,7 +108,7 @@ public class XtendFactoryImpl extends EFactoryImpl implements XtendFactory
 	 */
 	public XtendClass createXtendClass()
 	{
-		XtendClassImpl xtendClass = new XtendClassImpl();
+		XtendClassImplCustom xtendClass = new XtendClassImplCustom();
 		return xtendClass;
 	}
 
@@ -130,7 +130,7 @@ public class XtendFactoryImpl extends EFactoryImpl implements XtendFactory
 	 */
 	public XtendFunction createXtendFunction()
 	{
-		XtendFunctionImpl xtendFunction = new XtendFunctionImpl();
+		XtendFunctionImplCustom xtendFunction = new XtendFunctionImplCustom();
 		return xtendFunction;
 	}
 
@@ -141,7 +141,7 @@ public class XtendFactoryImpl extends EFactoryImpl implements XtendFactory
 	 */
 	public XtendField createXtendField()
 	{
-		XtendFieldImpl xtendField = new XtendFieldImpl();
+		XtendFieldImplCustom xtendField = new XtendFieldImplCustom();
 		return xtendField;
 	}
 
@@ -251,7 +251,7 @@ public class XtendFactoryImpl extends EFactoryImpl implements XtendFactory
 	 */
 	public XtendAnnotationType createXtendAnnotationType()
 	{
-		XtendAnnotationTypeImpl xtendAnnotationType = new XtendAnnotationTypeImpl();
+		XtendAnnotationTypeImplCustom xtendAnnotationType = new XtendAnnotationTypeImplCustom();
 		return xtendAnnotationType;
 	}
 

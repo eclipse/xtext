@@ -20,14 +20,18 @@ File returns XtendFile :
 ;
 
 Type returns XtendTypeDeclaration :
-	{XtendTypeDeclaration} annotations+=XAnnotation* 
-	({XtendClass.annotationInfo = current}
-	   'public'? abstract?='abstract'? 'class' name=ValidID ('<' typeParameters+=JvmTypeParameter (',' typeParameters+=JvmTypeParameter)* '>')?  
-	   ("extends" extends=JvmParameterizedTypeReference)? 
-	   ('implements' implements+=JvmParameterizedTypeReference (',' implements+=JvmParameterizedTypeReference)*)?'{'
+	{XtendTypeDeclaration} annotations+=XAnnotation*   
+	(
+		{XtendClass.annotationInfo = current}
+		modifiers+=CommonModifier*
+	  	'class' name=ValidID ('<' typeParameters+=JvmTypeParameter (',' typeParameters+=JvmTypeParameter)* '>')?  
+	   	("extends" extends=JvmParameterizedTypeReference)? 
+	   	('implements' implements+=JvmParameterizedTypeReference (',' implements+=JvmParameterizedTypeReference)*)?'{'
 		   (members+=Member)*
-	   '}'
-	 |{XtendAnnotationType.annotationInfo = current}
+	   	'}'
+	 |
+	 	{XtendAnnotationType.annotationInfo = current}
+	 	modifiers+=CommonModifier*
 		'annotation' name=ValidID '{'
 		   (members+=AnnotationField)*
 	   	'}'
@@ -35,37 +39,70 @@ Type returns XtendTypeDeclaration :
 ;
 
 AnnotationField returns XtendField :
-	annotations+=XAnnotation*	
- 	(type=JvmTypeReference | (final?='val' | 'var') type=JvmTypeReference?) name=ValidID ('=' initialValue=XExpression)? ';'?
+	annotations+=XAnnotation* modifiers+=CommonModifier* 
+	( 
+			modifiers+=FieldModifier modifiers+=CommonModifier*
+			type=JvmTypeReference? name=ValidID
+		|
+			type=JvmTypeReference name=ValidID
+	)
+	('=' initialValue=XExpression)? ';'?
 ;
 	
-
 Member returns XtendMember:
-	{XtendMember} annotations+=XAnnotation* 
+	{XtendMember} annotations+=XAnnotation*
 	(
-		{XtendField.annotationInfo = current}	
-			visibility=Visibility?   
-		 	(extension?='extension' (final?='val' | 'var')? type=JvmTypeReference name=ValidID?
-			| static?='static'? (type=JvmTypeReference | (final?='val' | 'var') type=JvmTypeReference?) name=ValidID)
-			('=' initialValue=XExpression)? ';'?
-	|	{XtendFunction.annotationInfo = current}
-			('def' | override?='override') visibility=Visibility? static?='static'? (dispatch?='dispatch'?) 
+		(	
+			{XtendField.annotationInfo = current} modifiers+=CommonModifier*
+			(
+				modifiers+=FieldModifier modifiers+=CommonModifier* 
+				type=JvmTypeReference? name=ValidID 
+			|
+				modifiers+='extension' (modifiers+=FieldModifier | modifiers+=CommonModifier)* 
+				type=JvmTypeReference name=ValidID?
+			| 
+				modifiers+=FieldModifier (modifiers+=CommonModifier)* modifiers+='extension' (modifiers+=CommonModifier)*  
+				type=JvmTypeReference name=ValidID?
+			|  
+				type=JvmTypeReference name=ValidID
+			) ('=' initialValue=XExpression)? ';'?
+
+		) | (
+			{XtendFunction.annotationInfo = current} modifiers+=CommonModifier*
+			modifiers+=MethodModifier (modifiers+=CommonModifier | modifiers+=MethodModifier)* 
 			('<' typeParameters+=JvmTypeParameter (',' typeParameters+=JvmTypeParameter)* '>')?
-			( =>(returnType=JvmTypeReference createExtensionInfo=CreateExtensionInfo name=ValidID '(')
-			| =>(returnType=JvmTypeReference name=ValidID '(')
-			| =>(createExtensionInfo=CreateExtensionInfo name=ValidID '(')
-			| name=ValidID '('
+			( 
+				=>(returnType=JvmTypeReference createExtensionInfo=CreateExtensionInfo name=ValidID '(')
+			  | =>(returnType=JvmTypeReference name=ValidID '(')
+			  | =>(createExtensionInfo=CreateExtensionInfo name=ValidID '(')
+			  | name=ValidID '('
 			)
 			(parameters+=Parameter (',' parameters+=Parameter)*)? ')'
 			('throws' exceptions+=JvmTypeReference (',' exceptions+=JvmTypeReference)*)?
-			(expression=XBlockExpression | expression=RichString )?
-	|	{XtendConstructor.annotationInfo = current}
-			visibility=Visibility? 'new' 
+			(expression=XBlockExpression | expression=RichString | ';')?
+			
+		) | (
+			{XtendConstructor.annotationInfo = current} modifiers+=CommonModifier*
+			'new' 
 			('<' typeParameters+=JvmTypeParameter (',' typeParameters+=JvmTypeParameter)* '>')?
 			'(' (parameters+=Parameter (',' parameters+=Parameter)*)? ')'
 			('throws' exceptions+=JvmTypeReference (',' exceptions+=JvmTypeReference)*)?
 			expression=XBlockExpression
-	) ;
+		)
+	)
+;
+
+CommonModifier:
+		'public' | 'private' | 'protected' | 'package' | 'abstract' | 'static' | 'dispatch' | 'final'
+;
+
+FieldModifier:
+		'val' | 'var'
+;
+
+MethodModifier:
+		'def' | 'override' 
+; 
 
 CreateExtensionInfo:
 	'create' (name=ValidID ':')? createExpression=XExpression
@@ -75,13 +112,14 @@ ValidID:
 	ID | 'create' | 'annotation'
 ;
 
+FeatureCallID:
+	ValidID | 'extends' | 'import' | 'extension' | 'class' | 'interface' | CommonModifier | MethodModifier | 'implements' | 'throws'
+;
+
 Parameter returns XtendParameter:
 	annotations+=XAnnotation* 
 	parameterType=JvmTypeReference varArg?='...'? name=ValidID;
 
-enum Visibility returns types::JvmVisibility:
-	PUBLIC = 'public' | PROTECTED = 'protected' | PRIVATE = 'private';
-		
 XStringLiteral returns xbase::XExpression:
 	SimpleStringLiteral | RichString
 ;
@@ -164,4 +202,3 @@ terminal fragment IN_RICH_STRING :
 	  "''" !('«'|"'") 
 	| "'" !('«'|"'")
 	| !('«'|"'");
-

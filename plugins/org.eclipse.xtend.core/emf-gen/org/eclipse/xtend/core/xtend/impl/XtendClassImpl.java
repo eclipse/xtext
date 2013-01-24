@@ -37,7 +37,6 @@ import org.eclipse.xtext.common.types.JvmTypeReference;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.eclipse.xtend.core.xtend.impl.XtendClassImpl#isAbstract <em>Abstract</em>}</li>
  *   <li>{@link org.eclipse.xtend.core.xtend.impl.XtendClassImpl#getExtends <em>Extends</em>}</li>
  *   <li>{@link org.eclipse.xtend.core.xtend.impl.XtendClassImpl#getImplements <em>Implements</em>}</li>
  *   <li>{@link org.eclipse.xtend.core.xtend.impl.XtendClassImpl#getMembers <em>Members</em>}</li>
@@ -49,26 +48,6 @@ import org.eclipse.xtext.common.types.JvmTypeReference;
  */
 public class XtendClassImpl extends XtendTypeDeclarationImpl implements XtendClass
 {
-	/**
-	 * The default value of the '{@link #isAbstract() <em>Abstract</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #isAbstract()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final boolean ABSTRACT_EDEFAULT = false;
-
-	/**
-	 * The cached value of the '{@link #isAbstract() <em>Abstract</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #isAbstract()
-	 * @generated
-	 * @ordered
-	 */
-	protected boolean abstract_ = ABSTRACT_EDEFAULT;
-
 	/**
 	 * The cached value of the '{@link #getExtends() <em>Extends</em>}' containment reference.
 	 * <!-- begin-user-doc -->
@@ -128,29 +107,6 @@ public class XtendClassImpl extends XtendTypeDeclarationImpl implements XtendCla
 	protected EClass eStaticClass()
 	{
 		return XtendPackage.Literals.XTEND_CLASS;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public boolean isAbstract()
-	{
-		return abstract_;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setAbstract(boolean newAbstract)
-	{
-		boolean oldAbstract = abstract_;
-		abstract_ = newAbstract;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, XtendPackage.XTEND_CLASS__ABSTRACT, oldAbstract, abstract_));
 	}
 
 	/**
@@ -248,6 +204,18 @@ public class XtendClassImpl extends XtendTypeDeclarationImpl implements XtendCla
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public boolean isAbstract()
+	{
+		// TODO: implement this method
+		// Ensure that you remove @generated or mark it @generated NOT
+		throw new UnsupportedOperationException();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs)
 	{
@@ -275,8 +243,6 @@ public class XtendClassImpl extends XtendTypeDeclarationImpl implements XtendCla
 	{
 		switch (featureID)
 		{
-			case XtendPackage.XTEND_CLASS__ABSTRACT:
-				return isAbstract();
 			case XtendPackage.XTEND_CLASS__EXTENDS:
 				return getExtends();
 			case XtendPackage.XTEND_CLASS__IMPLEMENTS:
@@ -300,9 +266,6 @@ public class XtendClassImpl extends XtendTypeDeclarationImpl implements XtendCla
 	{
 		switch (featureID)
 		{
-			case XtendPackage.XTEND_CLASS__ABSTRACT:
-				setAbstract((Boolean)newValue);
-				return;
 			case XtendPackage.XTEND_CLASS__EXTENDS:
 				setExtends((JvmTypeReference)newValue);
 				return;
@@ -332,9 +295,6 @@ public class XtendClassImpl extends XtendTypeDeclarationImpl implements XtendCla
 	{
 		switch (featureID)
 		{
-			case XtendPackage.XTEND_CLASS__ABSTRACT:
-				setAbstract(ABSTRACT_EDEFAULT);
-				return;
 			case XtendPackage.XTEND_CLASS__EXTENDS:
 				setExtends((JvmTypeReference)null);
 				return;
@@ -361,8 +321,6 @@ public class XtendClassImpl extends XtendTypeDeclarationImpl implements XtendCla
 	{
 		switch (featureID)
 		{
-			case XtendPackage.XTEND_CLASS__ABSTRACT:
-				return abstract_ != ABSTRACT_EDEFAULT;
 			case XtendPackage.XTEND_CLASS__EXTENDS:
 				return extends_ != null;
 			case XtendPackage.XTEND_CLASS__IMPLEMENTS:
@@ -373,23 +331,6 @@ public class XtendClassImpl extends XtendTypeDeclarationImpl implements XtendCla
 				return typeParameters != null && !typeParameters.isEmpty();
 		}
 		return super.eIsSet(featureID);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public String toString()
-	{
-		if (eIsProxy()) return super.toString();
-
-		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (abstract: ");
-		result.append(abstract_);
-		result.append(')');
-		return result.toString();
 	}
 
 } //XtendClassImpl

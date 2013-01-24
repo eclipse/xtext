@@ -43,7 +43,6 @@ import org.eclipse.xtend.core.xtend.XtendField;
 import org.eclipse.xtend.core.xtend.XtendFile;
 import org.eclipse.xtend.core.xtend.XtendFunction;
 import org.eclipse.xtend.core.xtend.XtendMember;
-import org.eclipse.xtend.core.xtend.XtendPackage;
 import org.eclipse.xtend.core.xtend.XtendParameter;
 import org.eclipse.xtend.core.xtend.XtendTypeDeclaration;
 import org.eclipse.xtend.lib.Data;
@@ -465,8 +464,7 @@ public class XtendJvmModelInferrer implements IJvmModelInferrer {
 			Iterable<XtendFunction> xtendFunctions = filter(associations.getSourceElements(jvmOperation),
 					XtendFunction.class);
 			for (XtendFunction func : xtendFunctions) {
-				JvmVisibility xtendVisibility = func.eIsSet(XtendPackage.Literals.XTEND_FUNCTION__VISIBILITY) ? func
-						.getVisibility() : null;
+				JvmVisibility xtendVisibility = func.getDeclaredVisibility();
 				if (isFirst) {
 					commonVisibility = xtendVisibility;
 					isFirst = false;
@@ -521,7 +519,7 @@ public class XtendJvmModelInferrer implements IJvmModelInferrer {
 		String sourceName = source.getName();
 		JvmVisibility visibility = source.getVisibility();
 		if (source.isDispatch()) {
-			if (!source.eIsSet(XtendPackage.Literals.XTEND_FUNCTION__VISIBILITY))
+			if (source.getDeclaredVisibility() == null)
 				visibility = JvmVisibility.PROTECTED;
 			sourceName = "_" + sourceName;
 		}

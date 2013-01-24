@@ -167,13 +167,22 @@ public interface XtendPackage extends EPackage
 	int XTEND_MEMBER__ANNOTATION_INFO = XTEND_ANNOTATION_TARGET_FEATURE_COUNT + 0;
 
 	/**
+	 * The feature id for the '<em><b>Modifiers</b></em>' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int XTEND_MEMBER__MODIFIERS = XTEND_ANNOTATION_TARGET_FEATURE_COUNT + 1;
+
+	/**
 	 * The number of structural features of the '<em>Member</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int XTEND_MEMBER_FEATURE_COUNT = XTEND_ANNOTATION_TARGET_FEATURE_COUNT + 1;
+	int XTEND_MEMBER_FEATURE_COUNT = XTEND_ANNOTATION_TARGET_FEATURE_COUNT + 2;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.xtend.core.xtend.impl.XtendTypeDeclarationImpl <em>Type Declaration</em>}' class.
@@ -202,6 +211,15 @@ public interface XtendPackage extends EPackage
 	 * @ordered
 	 */
 	int XTEND_TYPE_DECLARATION__ANNOTATION_INFO = XTEND_MEMBER__ANNOTATION_INFO;
+
+	/**
+	 * The feature id for the '<em><b>Modifiers</b></em>' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int XTEND_TYPE_DECLARATION__MODIFIERS = XTEND_MEMBER__MODIFIERS;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -250,6 +268,15 @@ public interface XtendPackage extends EPackage
 	int XTEND_CLASS__ANNOTATION_INFO = XTEND_TYPE_DECLARATION__ANNOTATION_INFO;
 
 	/**
+	 * The feature id for the '<em><b>Modifiers</b></em>' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int XTEND_CLASS__MODIFIERS = XTEND_TYPE_DECLARATION__MODIFIERS;
+
+	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -259,22 +286,13 @@ public interface XtendPackage extends EPackage
 	int XTEND_CLASS__NAME = XTEND_TYPE_DECLARATION__NAME;
 
 	/**
-	 * The feature id for the '<em><b>Abstract</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int XTEND_CLASS__ABSTRACT = XTEND_TYPE_DECLARATION_FEATURE_COUNT + 0;
-
-	/**
 	 * The feature id for the '<em><b>Extends</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int XTEND_CLASS__EXTENDS = XTEND_TYPE_DECLARATION_FEATURE_COUNT + 1;
+	int XTEND_CLASS__EXTENDS = XTEND_TYPE_DECLARATION_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Implements</b></em>' containment reference list.
@@ -283,7 +301,7 @@ public interface XtendPackage extends EPackage
 	 * @generated
 	 * @ordered
 	 */
-	int XTEND_CLASS__IMPLEMENTS = XTEND_TYPE_DECLARATION_FEATURE_COUNT + 2;
+	int XTEND_CLASS__IMPLEMENTS = XTEND_TYPE_DECLARATION_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>Members</b></em>' containment reference list.
@@ -292,7 +310,7 @@ public interface XtendPackage extends EPackage
 	 * @generated
 	 * @ordered
 	 */
-	int XTEND_CLASS__MEMBERS = XTEND_TYPE_DECLARATION_FEATURE_COUNT + 3;
+	int XTEND_CLASS__MEMBERS = XTEND_TYPE_DECLARATION_FEATURE_COUNT + 2;
 
 	/**
 	 * The feature id for the '<em><b>Type Parameters</b></em>' containment reference list.
@@ -301,7 +319,7 @@ public interface XtendPackage extends EPackage
 	 * @generated
 	 * @ordered
 	 */
-	int XTEND_CLASS__TYPE_PARAMETERS = XTEND_TYPE_DECLARATION_FEATURE_COUNT + 4;
+	int XTEND_CLASS__TYPE_PARAMETERS = XTEND_TYPE_DECLARATION_FEATURE_COUNT + 3;
 
 	/**
 	 * The number of structural features of the '<em>Class</em>' class.
@@ -310,7 +328,7 @@ public interface XtendPackage extends EPackage
 	 * @generated
 	 * @ordered
 	 */
-	int XTEND_CLASS_FEATURE_COUNT = XTEND_TYPE_DECLARATION_FEATURE_COUNT + 5;
+	int XTEND_CLASS_FEATURE_COUNT = XTEND_TYPE_DECLARATION_FEATURE_COUNT + 4;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.xtend.core.xtend.impl.XtendFunctionImpl <em>Function</em>}' class.
@@ -339,6 +357,15 @@ public interface XtendPackage extends EPackage
 	 * @ordered
 	 */
 	int XTEND_FUNCTION__ANNOTATION_INFO = XTEND_MEMBER__ANNOTATION_INFO;
+
+	/**
+	 * The feature id for the '<em><b>Modifiers</b></em>' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int XTEND_FUNCTION__MODIFIERS = XTEND_MEMBER__MODIFIERS;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -377,31 +404,13 @@ public interface XtendPackage extends EPackage
 	int XTEND_FUNCTION__PARAMETERS = XTEND_MEMBER_FEATURE_COUNT + 3;
 
 	/**
-	 * The feature id for the '<em><b>Override</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int XTEND_FUNCTION__OVERRIDE = XTEND_MEMBER_FEATURE_COUNT + 4;
-
-	/**
-	 * The feature id for the '<em><b>Dispatch</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int XTEND_FUNCTION__DISPATCH = XTEND_MEMBER_FEATURE_COUNT + 5;
-
-	/**
 	 * The feature id for the '<em><b>Create Extension Info</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int XTEND_FUNCTION__CREATE_EXTENSION_INFO = XTEND_MEMBER_FEATURE_COUNT + 6;
+	int XTEND_FUNCTION__CREATE_EXTENSION_INFO = XTEND_MEMBER_FEATURE_COUNT + 4;
 
 	/**
 	 * The feature id for the '<em><b>Type Parameters</b></em>' containment reference list.
@@ -410,25 +419,7 @@ public interface XtendPackage extends EPackage
 	 * @generated
 	 * @ordered
 	 */
-	int XTEND_FUNCTION__TYPE_PARAMETERS = XTEND_MEMBER_FEATURE_COUNT + 7;
-
-	/**
-	 * The feature id for the '<em><b>Visibility</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int XTEND_FUNCTION__VISIBILITY = XTEND_MEMBER_FEATURE_COUNT + 8;
-
-	/**
-	 * The feature id for the '<em><b>Static</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int XTEND_FUNCTION__STATIC = XTEND_MEMBER_FEATURE_COUNT + 9;
+	int XTEND_FUNCTION__TYPE_PARAMETERS = XTEND_MEMBER_FEATURE_COUNT + 5;
 
 	/**
 	 * The feature id for the '<em><b>Exceptions</b></em>' containment reference list.
@@ -437,7 +428,7 @@ public interface XtendPackage extends EPackage
 	 * @generated
 	 * @ordered
 	 */
-	int XTEND_FUNCTION__EXCEPTIONS = XTEND_MEMBER_FEATURE_COUNT + 10;
+	int XTEND_FUNCTION__EXCEPTIONS = XTEND_MEMBER_FEATURE_COUNT + 6;
 
 	/**
 	 * The number of structural features of the '<em>Function</em>' class.
@@ -446,7 +437,7 @@ public interface XtendPackage extends EPackage
 	 * @generated
 	 * @ordered
 	 */
-	int XTEND_FUNCTION_FEATURE_COUNT = XTEND_MEMBER_FEATURE_COUNT + 11;
+	int XTEND_FUNCTION_FEATURE_COUNT = XTEND_MEMBER_FEATURE_COUNT + 7;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.xtend.core.xtend.impl.XtendFieldImpl <em>Field</em>}' class.
@@ -477,6 +468,15 @@ public interface XtendPackage extends EPackage
 	int XTEND_FIELD__ANNOTATION_INFO = XTEND_MEMBER__ANNOTATION_INFO;
 
 	/**
+	 * The feature id for the '<em><b>Modifiers</b></em>' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int XTEND_FIELD__MODIFIERS = XTEND_MEMBER__MODIFIERS;
+
+	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -486,49 +486,13 @@ public interface XtendPackage extends EPackage
 	int XTEND_FIELD__NAME = XTEND_MEMBER_FEATURE_COUNT + 0;
 
 	/**
-	 * The feature id for the '<em><b>Final</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int XTEND_FIELD__FINAL = XTEND_MEMBER_FEATURE_COUNT + 1;
-
-	/**
 	 * The feature id for the '<em><b>Type</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int XTEND_FIELD__TYPE = XTEND_MEMBER_FEATURE_COUNT + 2;
-
-	/**
-	 * The feature id for the '<em><b>Extension</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int XTEND_FIELD__EXTENSION = XTEND_MEMBER_FEATURE_COUNT + 3;
-
-	/**
-	 * The feature id for the '<em><b>Visibility</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int XTEND_FIELD__VISIBILITY = XTEND_MEMBER_FEATURE_COUNT + 4;
-
-	/**
-	 * The feature id for the '<em><b>Static</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int XTEND_FIELD__STATIC = XTEND_MEMBER_FEATURE_COUNT + 5;
+	int XTEND_FIELD__TYPE = XTEND_MEMBER_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>Initial Value</b></em>' containment reference.
@@ -537,7 +501,7 @@ public interface XtendPackage extends EPackage
 	 * @generated
 	 * @ordered
 	 */
-	int XTEND_FIELD__INITIAL_VALUE = XTEND_MEMBER_FEATURE_COUNT + 6;
+	int XTEND_FIELD__INITIAL_VALUE = XTEND_MEMBER_FEATURE_COUNT + 2;
 
 	/**
 	 * The number of structural features of the '<em>Field</em>' class.
@@ -546,7 +510,7 @@ public interface XtendPackage extends EPackage
 	 * @generated
 	 * @ordered
 	 */
-	int XTEND_FIELD_FEATURE_COUNT = XTEND_MEMBER_FEATURE_COUNT + 7;
+	int XTEND_FIELD_FEATURE_COUNT = XTEND_MEMBER_FEATURE_COUNT + 3;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.xtend.core.xtend.impl.XtendParameterImpl <em>Parameter</em>}' class.
@@ -890,6 +854,15 @@ public interface XtendPackage extends EPackage
 	int XTEND_CONSTRUCTOR__ANNOTATION_INFO = XTEND_MEMBER__ANNOTATION_INFO;
 
 	/**
+	 * The feature id for the '<em><b>Modifiers</b></em>' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int XTEND_CONSTRUCTOR__MODIFIERS = XTEND_MEMBER__MODIFIERS;
+
+	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -981,6 +954,15 @@ public interface XtendPackage extends EPackage
 	int XTEND_ANNOTATION_TYPE__ANNOTATION_INFO = XTEND_TYPE_DECLARATION__ANNOTATION_INFO;
 
 	/**
+	 * The feature id for the '<em><b>Modifiers</b></em>' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int XTEND_ANNOTATION_TYPE__MODIFIERS = XTEND_TYPE_DECLARATION__MODIFIERS;
+
+	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1060,17 +1042,6 @@ public interface XtendPackage extends EPackage
 	 * @generated
 	 */
 	EClass getXtendClass();
-
-	/**
-	 * Returns the meta object for the attribute '{@link org.eclipse.xtend.core.xtend.XtendClass#isAbstract <em>Abstract</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Abstract</em>'.
-	 * @see org.eclipse.xtend.core.xtend.XtendClass#isAbstract()
-	 * @see #getXtendClass()
-	 * @generated
-	 */
-	EAttribute getXtendClass_Abstract();
 
 	/**
 	 * Returns the meta object for the containment reference '{@link org.eclipse.xtend.core.xtend.XtendClass#getExtends <em>Extends</em>}'.
@@ -1159,6 +1130,17 @@ public interface XtendPackage extends EPackage
 	EReference getXtendMember_AnnotationInfo();
 
 	/**
+	 * Returns the meta object for the attribute list '{@link org.eclipse.xtend.core.xtend.XtendMember#getModifiers <em>Modifiers</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute list '<em>Modifiers</em>'.
+	 * @see org.eclipse.xtend.core.xtend.XtendMember#getModifiers()
+	 * @see #getXtendMember()
+	 * @generated
+	 */
+	EAttribute getXtendMember_Modifiers();
+
+	/**
 	 * Returns the meta object for class '{@link org.eclipse.xtend.core.xtend.XtendFunction <em>Function</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1213,28 +1195,6 @@ public interface XtendPackage extends EPackage
 	EReference getXtendFunction_Parameters();
 
 	/**
-	 * Returns the meta object for the attribute '{@link org.eclipse.xtend.core.xtend.XtendFunction#isOverride <em>Override</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Override</em>'.
-	 * @see org.eclipse.xtend.core.xtend.XtendFunction#isOverride()
-	 * @see #getXtendFunction()
-	 * @generated
-	 */
-	EAttribute getXtendFunction_Override();
-
-	/**
-	 * Returns the meta object for the attribute '{@link org.eclipse.xtend.core.xtend.XtendFunction#isDispatch <em>Dispatch</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Dispatch</em>'.
-	 * @see org.eclipse.xtend.core.xtend.XtendFunction#isDispatch()
-	 * @see #getXtendFunction()
-	 * @generated
-	 */
-	EAttribute getXtendFunction_Dispatch();
-
-	/**
 	 * Returns the meta object for the containment reference '{@link org.eclipse.xtend.core.xtend.XtendFunction#getCreateExtensionInfo <em>Create Extension Info</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1255,28 +1215,6 @@ public interface XtendPackage extends EPackage
 	 * @generated
 	 */
 	EReference getXtendFunction_TypeParameters();
-
-	/**
-	 * Returns the meta object for the attribute '{@link org.eclipse.xtend.core.xtend.XtendFunction#getVisibility <em>Visibility</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Visibility</em>'.
-	 * @see org.eclipse.xtend.core.xtend.XtendFunction#getVisibility()
-	 * @see #getXtendFunction()
-	 * @generated
-	 */
-	EAttribute getXtendFunction_Visibility();
-
-	/**
-	 * Returns the meta object for the attribute '{@link org.eclipse.xtend.core.xtend.XtendFunction#isStatic <em>Static</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Static</em>'.
-	 * @see org.eclipse.xtend.core.xtend.XtendFunction#isStatic()
-	 * @see #getXtendFunction()
-	 * @generated
-	 */
-	EAttribute getXtendFunction_Static();
 
 	/**
 	 * Returns the meta object for the containment reference list '{@link org.eclipse.xtend.core.xtend.XtendFunction#getExceptions <em>Exceptions</em>}'.
@@ -1311,17 +1249,6 @@ public interface XtendPackage extends EPackage
 	EAttribute getXtendField_Name();
 
 	/**
-	 * Returns the meta object for the attribute '{@link org.eclipse.xtend.core.xtend.XtendField#isFinal <em>Final</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Final</em>'.
-	 * @see org.eclipse.xtend.core.xtend.XtendField#isFinal()
-	 * @see #getXtendField()
-	 * @generated
-	 */
-	EAttribute getXtendField_Final();
-
-	/**
 	 * Returns the meta object for the containment reference '{@link org.eclipse.xtend.core.xtend.XtendField#getType <em>Type</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1331,39 +1258,6 @@ public interface XtendPackage extends EPackage
 	 * @generated
 	 */
 	EReference getXtendField_Type();
-
-	/**
-	 * Returns the meta object for the attribute '{@link org.eclipse.xtend.core.xtend.XtendField#isExtension <em>Extension</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Extension</em>'.
-	 * @see org.eclipse.xtend.core.xtend.XtendField#isExtension()
-	 * @see #getXtendField()
-	 * @generated
-	 */
-	EAttribute getXtendField_Extension();
-
-	/**
-	 * Returns the meta object for the attribute '{@link org.eclipse.xtend.core.xtend.XtendField#getVisibility <em>Visibility</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Visibility</em>'.
-	 * @see org.eclipse.xtend.core.xtend.XtendField#getVisibility()
-	 * @see #getXtendField()
-	 * @generated
-	 */
-	EAttribute getXtendField_Visibility();
-
-	/**
-	 * Returns the meta object for the attribute '{@link org.eclipse.xtend.core.xtend.XtendField#isStatic <em>Static</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Static</em>'.
-	 * @see org.eclipse.xtend.core.xtend.XtendField#isStatic()
-	 * @see #getXtendField()
-	 * @generated
-	 */
-	EAttribute getXtendField_Static();
 
 	/**
 	 * Returns the meta object for the containment reference '{@link org.eclipse.xtend.core.xtend.XtendField#getInitialValue <em>Initial Value</em>}'.
@@ -1786,14 +1680,6 @@ public interface XtendPackage extends EPackage
 		EClass XTEND_CLASS = eINSTANCE.getXtendClass();
 
 		/**
-		 * The meta object literal for the '<em><b>Abstract</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute XTEND_CLASS__ABSTRACT = eINSTANCE.getXtendClass_Abstract();
-
-		/**
 		 * The meta object literal for the '<em><b>Extends</b></em>' containment reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -1862,6 +1748,14 @@ public interface XtendPackage extends EPackage
 		EReference XTEND_MEMBER__ANNOTATION_INFO = eINSTANCE.getXtendMember_AnnotationInfo();
 
 		/**
+		 * The meta object literal for the '<em><b>Modifiers</b></em>' attribute list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute XTEND_MEMBER__MODIFIERS = eINSTANCE.getXtendMember_Modifiers();
+
+		/**
 		 * The meta object literal for the '{@link org.eclipse.xtend.core.xtend.impl.XtendFunctionImpl <em>Function</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -1904,22 +1798,6 @@ public interface XtendPackage extends EPackage
 		EReference XTEND_FUNCTION__PARAMETERS = eINSTANCE.getXtendFunction_Parameters();
 
 		/**
-		 * The meta object literal for the '<em><b>Override</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute XTEND_FUNCTION__OVERRIDE = eINSTANCE.getXtendFunction_Override();
-
-		/**
-		 * The meta object literal for the '<em><b>Dispatch</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute XTEND_FUNCTION__DISPATCH = eINSTANCE.getXtendFunction_Dispatch();
-
-		/**
 		 * The meta object literal for the '<em><b>Create Extension Info</b></em>' containment reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -1934,22 +1812,6 @@ public interface XtendPackage extends EPackage
 		 * @generated
 		 */
 		EReference XTEND_FUNCTION__TYPE_PARAMETERS = eINSTANCE.getXtendFunction_TypeParameters();
-
-		/**
-		 * The meta object literal for the '<em><b>Visibility</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute XTEND_FUNCTION__VISIBILITY = eINSTANCE.getXtendFunction_Visibility();
-
-		/**
-		 * The meta object literal for the '<em><b>Static</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute XTEND_FUNCTION__STATIC = eINSTANCE.getXtendFunction_Static();
 
 		/**
 		 * The meta object literal for the '<em><b>Exceptions</b></em>' containment reference list feature.
@@ -1978,44 +1840,12 @@ public interface XtendPackage extends EPackage
 		EAttribute XTEND_FIELD__NAME = eINSTANCE.getXtendField_Name();
 
 		/**
-		 * The meta object literal for the '<em><b>Final</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute XTEND_FIELD__FINAL = eINSTANCE.getXtendField_Final();
-
-		/**
 		 * The meta object literal for the '<em><b>Type</b></em>' containment reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
 		EReference XTEND_FIELD__TYPE = eINSTANCE.getXtendField_Type();
-
-		/**
-		 * The meta object literal for the '<em><b>Extension</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute XTEND_FIELD__EXTENSION = eINSTANCE.getXtendField_Extension();
-
-		/**
-		 * The meta object literal for the '<em><b>Visibility</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute XTEND_FIELD__VISIBILITY = eINSTANCE.getXtendField_Visibility();
-
-		/**
-		 * The meta object literal for the '<em><b>Static</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute XTEND_FIELD__STATIC = eINSTANCE.getXtendField_Static();
 
 		/**
 		 * The meta object literal for the '<em><b>Initial Value</b></em>' containment reference feature.

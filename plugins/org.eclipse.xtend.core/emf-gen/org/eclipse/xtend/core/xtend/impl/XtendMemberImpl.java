@@ -8,17 +8,25 @@
  */
 package org.eclipse.xtend.core.xtend.impl;
 
+import java.util.Collection;
+
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
+
+import org.eclipse.emf.common.util.EList;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
+import org.eclipse.emf.ecore.util.EDataTypeEList;
+
 import org.eclipse.xtend.core.xtend.XtendAnnotationTarget;
 import org.eclipse.xtend.core.xtend.XtendMember;
 import org.eclipse.xtend.core.xtend.XtendPackage;
+
+import org.eclipse.xtext.common.types.JvmVisibility;
 
 /**
  * <!-- begin-user-doc -->
@@ -28,6 +36,7 @@ import org.eclipse.xtend.core.xtend.XtendPackage;
  * The following features are implemented:
  * <ul>
  *   <li>{@link org.eclipse.xtend.core.xtend.impl.XtendMemberImpl#getAnnotationInfo <em>Annotation Info</em>}</li>
+ *   <li>{@link org.eclipse.xtend.core.xtend.impl.XtendMemberImpl#getModifiers <em>Modifiers</em>}</li>
  * </ul>
  * </p>
  *
@@ -44,6 +53,16 @@ public class XtendMemberImpl extends XtendAnnotationTargetImpl implements XtendM
 	 * @ordered
 	 */
 	protected XtendAnnotationTarget annotationInfo;
+
+	/**
+	 * The cached value of the '{@link #getModifiers() <em>Modifiers</em>}' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getModifiers()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<String> modifiers;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -119,6 +138,68 @@ public class XtendMemberImpl extends XtendAnnotationTargetImpl implements XtendM
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EList<String> getModifiers()
+	{
+		if (modifiers == null)
+		{
+			modifiers = new EDataTypeEList<String>(String.class, this, XtendPackage.XTEND_MEMBER__MODIFIERS);
+		}
+		return modifiers;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public JvmVisibility getVisibility()
+	{
+		// TODO: implement this method
+		// Ensure that you remove @generated or mark it @generated NOT
+		throw new UnsupportedOperationException();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public JvmVisibility getDeclaredVisibility()
+	{
+		// TODO: implement this method
+		// Ensure that you remove @generated or mark it @generated NOT
+		throw new UnsupportedOperationException();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean isStatic()
+	{
+		// TODO: implement this method
+		// Ensure that you remove @generated or mark it @generated NOT
+		throw new UnsupportedOperationException();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean isFinal()
+	{
+		// TODO: implement this method
+		// Ensure that you remove @generated or mark it @generated NOT
+		throw new UnsupportedOperationException();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs)
 	{
@@ -142,6 +223,8 @@ public class XtendMemberImpl extends XtendAnnotationTargetImpl implements XtendM
 		{
 			case XtendPackage.XTEND_MEMBER__ANNOTATION_INFO:
 				return getAnnotationInfo();
+			case XtendPackage.XTEND_MEMBER__MODIFIERS:
+				return getModifiers();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -151,6 +234,7 @@ public class XtendMemberImpl extends XtendAnnotationTargetImpl implements XtendM
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@SuppressWarnings("unchecked")
 	@Override
 	public void eSet(int featureID, Object newValue)
 	{
@@ -158,6 +242,10 @@ public class XtendMemberImpl extends XtendAnnotationTargetImpl implements XtendM
 		{
 			case XtendPackage.XTEND_MEMBER__ANNOTATION_INFO:
 				setAnnotationInfo((XtendAnnotationTarget)newValue);
+				return;
+			case XtendPackage.XTEND_MEMBER__MODIFIERS:
+				getModifiers().clear();
+				getModifiers().addAll((Collection<? extends String>)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -176,6 +264,9 @@ public class XtendMemberImpl extends XtendAnnotationTargetImpl implements XtendM
 			case XtendPackage.XTEND_MEMBER__ANNOTATION_INFO:
 				setAnnotationInfo((XtendAnnotationTarget)null);
 				return;
+			case XtendPackage.XTEND_MEMBER__MODIFIERS:
+				getModifiers().clear();
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -192,8 +283,27 @@ public class XtendMemberImpl extends XtendAnnotationTargetImpl implements XtendM
 		{
 			case XtendPackage.XTEND_MEMBER__ANNOTATION_INFO:
 				return annotationInfo != null;
+			case XtendPackage.XTEND_MEMBER__MODIFIERS:
+				return modifiers != null && !modifiers.isEmpty();
 		}
 		return super.eIsSet(featureID);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public String toString()
+	{
+		if (eIsProxy()) return super.toString();
+
+		StringBuffer result = new StringBuffer(super.toString());
+		result.append(" (modifiers: ");
+		result.append(modifiers);
+		result.append(')');
+		return result.toString();
 	}
 
 } //XtendMemberImpl

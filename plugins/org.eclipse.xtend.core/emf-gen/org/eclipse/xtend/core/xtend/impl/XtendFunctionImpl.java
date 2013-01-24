@@ -30,7 +30,6 @@ import org.eclipse.xtend.core.xtend.XtendParameter;
 
 import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.JvmTypeReference;
-import org.eclipse.xtext.common.types.JvmVisibility;
 
 import org.eclipse.xtext.xbase.XExpression;
 
@@ -45,12 +44,8 @@ import org.eclipse.xtext.xbase.XExpression;
  *   <li>{@link org.eclipse.xtend.core.xtend.impl.XtendFunctionImpl#getExpression <em>Expression</em>}</li>
  *   <li>{@link org.eclipse.xtend.core.xtend.impl.XtendFunctionImpl#getReturnType <em>Return Type</em>}</li>
  *   <li>{@link org.eclipse.xtend.core.xtend.impl.XtendFunctionImpl#getParameters <em>Parameters</em>}</li>
- *   <li>{@link org.eclipse.xtend.core.xtend.impl.XtendFunctionImpl#isOverride <em>Override</em>}</li>
- *   <li>{@link org.eclipse.xtend.core.xtend.impl.XtendFunctionImpl#isDispatch <em>Dispatch</em>}</li>
  *   <li>{@link org.eclipse.xtend.core.xtend.impl.XtendFunctionImpl#getCreateExtensionInfo <em>Create Extension Info</em>}</li>
  *   <li>{@link org.eclipse.xtend.core.xtend.impl.XtendFunctionImpl#getTypeParameters <em>Type Parameters</em>}</li>
- *   <li>{@link org.eclipse.xtend.core.xtend.impl.XtendFunctionImpl#getVisibility <em>Visibility</em>}</li>
- *   <li>{@link org.eclipse.xtend.core.xtend.impl.XtendFunctionImpl#isStatic <em>Static</em>}</li>
  *   <li>{@link org.eclipse.xtend.core.xtend.impl.XtendFunctionImpl#getExceptions <em>Exceptions</em>}</li>
  * </ul>
  * </p>
@@ -110,46 +105,6 @@ public class XtendFunctionImpl extends XtendMemberImplCustom implements XtendFun
 	protected EList<XtendParameter> parameters;
 
 	/**
-	 * The default value of the '{@link #isOverride() <em>Override</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #isOverride()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final boolean OVERRIDE_EDEFAULT = false;
-
-	/**
-	 * The cached value of the '{@link #isOverride() <em>Override</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #isOverride()
-	 * @generated
-	 * @ordered
-	 */
-	protected boolean override = OVERRIDE_EDEFAULT;
-
-	/**
-	 * The default value of the '{@link #isDispatch() <em>Dispatch</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #isDispatch()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final boolean DISPATCH_EDEFAULT = false;
-
-	/**
-	 * The cached value of the '{@link #isDispatch() <em>Dispatch</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #isDispatch()
-	 * @generated
-	 * @ordered
-	 */
-	protected boolean dispatch = DISPATCH_EDEFAULT;
-
-	/**
 	 * The cached value of the '{@link #getCreateExtensionInfo() <em>Create Extension Info</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -168,55 +123,6 @@ public class XtendFunctionImpl extends XtendMemberImplCustom implements XtendFun
 	 * @ordered
 	 */
 	protected EList<JvmTypeParameter> typeParameters;
-
-	/**
-	 * The default value of the '{@link #getVisibility() <em>Visibility</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getVisibility()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final JvmVisibility VISIBILITY_EDEFAULT = JvmVisibility.PUBLIC;
-
-	/**
-	 * The cached value of the '{@link #getVisibility() <em>Visibility</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getVisibility()
-	 * @generated
-	 * @ordered
-	 */
-	protected JvmVisibility visibility = VISIBILITY_EDEFAULT;
-
-	/**
-	 * This is true if the Visibility attribute has been set.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	protected boolean visibilityESet;
-
-	/**
-	 * The default value of the '{@link #isStatic() <em>Static</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #isStatic()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final boolean STATIC_EDEFAULT = false;
-
-	/**
-	 * The cached value of the '{@link #isStatic() <em>Static</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #isStatic()
-	 * @generated
-	 * @ordered
-	 */
-	protected boolean static_ = STATIC_EDEFAULT;
 
 	/**
 	 * The cached value of the '{@link #getExceptions() <em>Exceptions</em>}' containment reference list.
@@ -387,52 +293,6 @@ public class XtendFunctionImpl extends XtendMemberImplCustom implements XtendFun
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public boolean isOverride()
-	{
-		return override;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setOverride(boolean newOverride)
-	{
-		boolean oldOverride = override;
-		override = newOverride;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, XtendPackage.XTEND_FUNCTION__OVERRIDE, oldOverride, override));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public boolean isDispatch()
-	{
-		return dispatch;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setDispatch(boolean newDispatch)
-	{
-		boolean oldDispatch = dispatch;
-		dispatch = newDispatch;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, XtendPackage.XTEND_FUNCTION__DISPATCH, oldDispatch, dispatch));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public CreateExtensionInfo getCreateExtensionInfo()
 	{
 		return createExtensionInfo;
@@ -495,79 +355,6 @@ public class XtendFunctionImpl extends XtendMemberImplCustom implements XtendFun
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public JvmVisibility getVisibility()
-	{
-		return visibility;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setVisibility(JvmVisibility newVisibility)
-	{
-		JvmVisibility oldVisibility = visibility;
-		visibility = newVisibility == null ? VISIBILITY_EDEFAULT : newVisibility;
-		boolean oldVisibilityESet = visibilityESet;
-		visibilityESet = true;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, XtendPackage.XTEND_FUNCTION__VISIBILITY, oldVisibility, visibility, !oldVisibilityESet));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void unsetVisibility()
-	{
-		JvmVisibility oldVisibility = visibility;
-		boolean oldVisibilityESet = visibilityESet;
-		visibility = VISIBILITY_EDEFAULT;
-		visibilityESet = false;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.UNSET, XtendPackage.XTEND_FUNCTION__VISIBILITY, oldVisibility, VISIBILITY_EDEFAULT, oldVisibilityESet));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public boolean isSetVisibility()
-	{
-		return visibilityESet;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public boolean isStatic()
-	{
-		return static_;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setStatic(boolean newStatic)
-	{
-		boolean oldStatic = static_;
-		static_ = newStatic;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, XtendPackage.XTEND_FUNCTION__STATIC, oldStatic, static_));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EList<JvmTypeReference> getExceptions()
 	{
 		if (exceptions == null)
@@ -575,6 +362,42 @@ public class XtendFunctionImpl extends XtendMemberImplCustom implements XtendFun
 			exceptions = new EObjectContainmentEList<JvmTypeReference>(JvmTypeReference.class, this, XtendPackage.XTEND_FUNCTION__EXCEPTIONS);
 		}
 		return exceptions;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean isAbstract()
+	{
+		// TODO: implement this method
+		// Ensure that you remove @generated or mark it @generated NOT
+		throw new UnsupportedOperationException();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean isOverride()
+	{
+		// TODO: implement this method
+		// Ensure that you remove @generated or mark it @generated NOT
+		throw new UnsupportedOperationException();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean isDispatch()
+	{
+		// TODO: implement this method
+		// Ensure that you remove @generated or mark it @generated NOT
+		throw new UnsupportedOperationException();
 	}
 
 	/**
@@ -621,18 +444,10 @@ public class XtendFunctionImpl extends XtendMemberImplCustom implements XtendFun
 				return getReturnType();
 			case XtendPackage.XTEND_FUNCTION__PARAMETERS:
 				return getParameters();
-			case XtendPackage.XTEND_FUNCTION__OVERRIDE:
-				return isOverride();
-			case XtendPackage.XTEND_FUNCTION__DISPATCH:
-				return isDispatch();
 			case XtendPackage.XTEND_FUNCTION__CREATE_EXTENSION_INFO:
 				return getCreateExtensionInfo();
 			case XtendPackage.XTEND_FUNCTION__TYPE_PARAMETERS:
 				return getTypeParameters();
-			case XtendPackage.XTEND_FUNCTION__VISIBILITY:
-				return getVisibility();
-			case XtendPackage.XTEND_FUNCTION__STATIC:
-				return isStatic();
 			case XtendPackage.XTEND_FUNCTION__EXCEPTIONS:
 				return getExceptions();
 		}
@@ -663,24 +478,12 @@ public class XtendFunctionImpl extends XtendMemberImplCustom implements XtendFun
 				getParameters().clear();
 				getParameters().addAll((Collection<? extends XtendParameter>)newValue);
 				return;
-			case XtendPackage.XTEND_FUNCTION__OVERRIDE:
-				setOverride((Boolean)newValue);
-				return;
-			case XtendPackage.XTEND_FUNCTION__DISPATCH:
-				setDispatch((Boolean)newValue);
-				return;
 			case XtendPackage.XTEND_FUNCTION__CREATE_EXTENSION_INFO:
 				setCreateExtensionInfo((CreateExtensionInfo)newValue);
 				return;
 			case XtendPackage.XTEND_FUNCTION__TYPE_PARAMETERS:
 				getTypeParameters().clear();
 				getTypeParameters().addAll((Collection<? extends JvmTypeParameter>)newValue);
-				return;
-			case XtendPackage.XTEND_FUNCTION__VISIBILITY:
-				setVisibility((JvmVisibility)newValue);
-				return;
-			case XtendPackage.XTEND_FUNCTION__STATIC:
-				setStatic((Boolean)newValue);
 				return;
 			case XtendPackage.XTEND_FUNCTION__EXCEPTIONS:
 				getExceptions().clear();
@@ -712,23 +515,11 @@ public class XtendFunctionImpl extends XtendMemberImplCustom implements XtendFun
 			case XtendPackage.XTEND_FUNCTION__PARAMETERS:
 				getParameters().clear();
 				return;
-			case XtendPackage.XTEND_FUNCTION__OVERRIDE:
-				setOverride(OVERRIDE_EDEFAULT);
-				return;
-			case XtendPackage.XTEND_FUNCTION__DISPATCH:
-				setDispatch(DISPATCH_EDEFAULT);
-				return;
 			case XtendPackage.XTEND_FUNCTION__CREATE_EXTENSION_INFO:
 				setCreateExtensionInfo((CreateExtensionInfo)null);
 				return;
 			case XtendPackage.XTEND_FUNCTION__TYPE_PARAMETERS:
 				getTypeParameters().clear();
-				return;
-			case XtendPackage.XTEND_FUNCTION__VISIBILITY:
-				unsetVisibility();
-				return;
-			case XtendPackage.XTEND_FUNCTION__STATIC:
-				setStatic(STATIC_EDEFAULT);
 				return;
 			case XtendPackage.XTEND_FUNCTION__EXCEPTIONS:
 				getExceptions().clear();
@@ -755,18 +546,10 @@ public class XtendFunctionImpl extends XtendMemberImplCustom implements XtendFun
 				return returnType != null;
 			case XtendPackage.XTEND_FUNCTION__PARAMETERS:
 				return parameters != null && !parameters.isEmpty();
-			case XtendPackage.XTEND_FUNCTION__OVERRIDE:
-				return override != OVERRIDE_EDEFAULT;
-			case XtendPackage.XTEND_FUNCTION__DISPATCH:
-				return dispatch != DISPATCH_EDEFAULT;
 			case XtendPackage.XTEND_FUNCTION__CREATE_EXTENSION_INFO:
 				return createExtensionInfo != null;
 			case XtendPackage.XTEND_FUNCTION__TYPE_PARAMETERS:
 				return typeParameters != null && !typeParameters.isEmpty();
-			case XtendPackage.XTEND_FUNCTION__VISIBILITY:
-				return isSetVisibility();
-			case XtendPackage.XTEND_FUNCTION__STATIC:
-				return static_ != STATIC_EDEFAULT;
 			case XtendPackage.XTEND_FUNCTION__EXCEPTIONS:
 				return exceptions != null && !exceptions.isEmpty();
 		}
@@ -786,14 +569,6 @@ public class XtendFunctionImpl extends XtendMemberImplCustom implements XtendFun
 		StringBuffer result = new StringBuffer(super.toString());
 		result.append(" (name: ");
 		result.append(name);
-		result.append(", override: ");
-		result.append(override);
-		result.append(", dispatch: ");
-		result.append(dispatch);
-		result.append(", visibility: ");
-		if (visibilityESet) result.append(visibility); else result.append("<unset>");
-		result.append(", static: ");
-		result.append(static_);
 		result.append(')');
 		return result.toString();
 	}

@@ -277,36 +277,6 @@ public class XtendConstructorImpl extends XtendMemberImplCustom implements Xtend
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setVisibility(JvmVisibility newVisibility)
-	{
-		JvmVisibility oldVisibility = visibility;
-		visibility = newVisibility == null ? VISIBILITY_EDEFAULT : newVisibility;
-		boolean oldVisibilityESet = visibilityESet;
-		visibilityESet = true;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, XtendPackage.XTEND_CONSTRUCTOR__VISIBILITY, oldVisibility, visibility, !oldVisibilityESet));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void unsetVisibility()
-	{
-		JvmVisibility oldVisibility = visibility;
-		boolean oldVisibilityESet = visibilityESet;
-		visibility = VISIBILITY_EDEFAULT;
-		visibilityESet = false;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.UNSET, XtendPackage.XTEND_CONSTRUCTOR__VISIBILITY, oldVisibility, VISIBILITY_EDEFAULT, oldVisibilityESet));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public boolean isSetVisibility()
 	{
 		return visibilityESet;
@@ -399,9 +369,6 @@ public class XtendConstructorImpl extends XtendMemberImplCustom implements Xtend
 				getTypeParameters().clear();
 				getTypeParameters().addAll((Collection<? extends JvmTypeParameter>)newValue);
 				return;
-			case XtendPackage.XTEND_CONSTRUCTOR__VISIBILITY:
-				setVisibility((JvmVisibility)newValue);
-				return;
 			case XtendPackage.XTEND_CONSTRUCTOR__EXCEPTIONS:
 				getExceptions().clear();
 				getExceptions().addAll((Collection<? extends JvmTypeReference>)newValue);
@@ -431,9 +398,6 @@ public class XtendConstructorImpl extends XtendMemberImplCustom implements Xtend
 				return;
 			case XtendPackage.XTEND_CONSTRUCTOR__TYPE_PARAMETERS:
 				getTypeParameters().clear();
-				return;
-			case XtendPackage.XTEND_CONSTRUCTOR__VISIBILITY:
-				unsetVisibility();
 				return;
 			case XtendPackage.XTEND_CONSTRUCTOR__EXCEPTIONS:
 				getExceptions().clear();

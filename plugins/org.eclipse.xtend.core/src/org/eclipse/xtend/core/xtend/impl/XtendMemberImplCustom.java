@@ -7,7 +7,10 @@
  *******************************************************************************/
 package org.eclipse.xtend.core.xtend.impl;
 
+import static org.eclipse.xtext.util.Strings.*;
+
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.xtext.common.types.JvmVisibility;
 import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotation;
 
 /**
@@ -23,4 +26,48 @@ public class XtendMemberImplCustom extends XtendMemberImpl {
 		return super.getAnnotations();
 	}
 	
+	@Override
+	public boolean isFinal() {
+		for(String modifier: getModifiers()) { 
+			if(equal(modifier, "abstract")) 
+				return false;
+			if(equal(modifier, "final")) 
+				return true;
+		}
+		return false;
+	}
+
+	@Override
+	public boolean isStatic() {
+		for(String modifier: getModifiers()) { 
+			if(equal(modifier, "static")) 
+				return true;
+		}
+		return false;
+	}
+	
+	protected JvmVisibility getDefaultVisibility() {
+		return JvmVisibility.PUBLIC;
+	}
+	
+	@Override
+	public JvmVisibility getDeclaredVisibility() {
+		for(String modifier: getModifiers()) {
+			if(equal(modifier, "public")) 
+				return JvmVisibility.PUBLIC;
+			if(equal(modifier, "package")) 
+				return JvmVisibility.DEFAULT;
+			if(equal(modifier, "protected")) 
+				return JvmVisibility.PROTECTED;
+			if(equal(modifier, "private")) 
+				return JvmVisibility.PRIVATE;
+		}
+		return null;
+	}
+	
+	@Override
+	public JvmVisibility getVisibility() {
+		JvmVisibility declaredVisibility = getDeclaredVisibility();
+		return declaredVisibility == null ? getDefaultVisibility() : declaredVisibility;
+	}
 }

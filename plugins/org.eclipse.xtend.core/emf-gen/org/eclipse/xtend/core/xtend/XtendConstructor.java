@@ -136,46 +136,18 @@ public interface XtendConstructor extends XtendMember
 	 * @return the value of the '<em>Visibility</em>' attribute.
 	 * @see org.eclipse.xtext.common.types.JvmVisibility
 	 * @see #isSetVisibility()
-	 * @see #unsetVisibility()
-	 * @see #setVisibility(JvmVisibility)
 	 * @see org.eclipse.xtend.core.xtend.XtendPackage#getXtendConstructor_Visibility()
-	 * @model default="PUBLIC" unsettable="true"
+	 * @model default="PUBLIC" unsettable="true" transient="true" changeable="false" derived="true"
 	 * @generated
 	 */
 	JvmVisibility getVisibility();
-
-	/**
-	 * Sets the value of the '{@link org.eclipse.xtend.core.xtend.XtendConstructor#getVisibility <em>Visibility</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Visibility</em>' attribute.
-	 * @see org.eclipse.xtext.common.types.JvmVisibility
-	 * @see #isSetVisibility()
-	 * @see #unsetVisibility()
-	 * @see #getVisibility()
-	 * @generated
-	 */
-	void setVisibility(JvmVisibility value);
-
-	/**
-	 * Unsets the value of the '{@link org.eclipse.xtend.core.xtend.XtendConstructor#getVisibility <em>Visibility</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #isSetVisibility()
-	 * @see #getVisibility()
-	 * @see #setVisibility(JvmVisibility)
-	 * @generated
-	 */
-	void unsetVisibility();
 
 	/**
 	 * Returns whether the value of the '{@link org.eclipse.xtend.core.xtend.XtendConstructor#getVisibility <em>Visibility</em>}' attribute is set.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return whether the value of the '<em>Visibility</em>' attribute is set.
-	 * @see #unsetVisibility()
 	 * @see #getVisibility()
-	 * @see #setVisibility(JvmVisibility)
 	 * @generated
 	 */
 	boolean isSetVisibility();

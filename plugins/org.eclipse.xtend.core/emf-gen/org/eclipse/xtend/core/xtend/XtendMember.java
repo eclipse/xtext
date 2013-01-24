@@ -8,6 +8,9 @@
  */
 package org.eclipse.xtend.core.xtend;
 
+import org.eclipse.emf.common.util.EList;
+
+import org.eclipse.xtext.common.types.JvmVisibility;
 
 /**
  * <!-- begin-user-doc -->
@@ -18,6 +21,7 @@ package org.eclipse.xtend.core.xtend;
  * The following features are supported:
  * <ul>
  *   <li>{@link org.eclipse.xtend.core.xtend.XtendMember#getAnnotationInfo <em>Annotation Info</em>}</li>
+ *   <li>{@link org.eclipse.xtend.core.xtend.XtendMember#getModifiers <em>Modifiers</em>}</li>
  * </ul>
  * </p>
  *
@@ -52,5 +56,53 @@ public interface XtendMember extends XtendAnnotationTarget
 	 * @generated
 	 */
 	void setAnnotationInfo(XtendAnnotationTarget value);
+
+	/**
+	 * Returns the value of the '<em><b>Modifiers</b></em>' attribute list.
+	 * The list contents are of type {@link java.lang.String}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Modifiers</em>' attribute list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Modifiers</em>' attribute list.
+	 * @see org.eclipse.xtend.core.xtend.XtendPackage#getXtendMember_Modifiers()
+	 * @model unique="false"
+	 * @generated
+	 */
+	EList<String> getModifiers();
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model kind="operation"
+	 * @generated
+	 */
+	JvmVisibility getVisibility();
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model kind="operation"
+	 * @generated
+	 */
+	JvmVisibility getDeclaredVisibility();
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model kind="operation"
+	 * @generated
+	 */
+	boolean isStatic();
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model kind="operation"
+	 * @generated
+	 */
+	boolean isFinal();
 
 } // XtendMember

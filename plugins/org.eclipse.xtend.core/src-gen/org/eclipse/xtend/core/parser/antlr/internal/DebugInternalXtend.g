@@ -13,7 +13,7 @@ ruleFile :
 // Rule Type
 ruleType :
 	ruleXAnnotation* (
-		'public'? 'abstract'? 'class' ruleValidID (
+		ruleCommonModifier* 'class' ruleValidID (
 			'<' ruleJvmTypeParameter (
 				',' ruleJvmTypeParameter
 			)* '>'
@@ -24,19 +24,16 @@ ruleType :
 				',' ruleJvmParameterizedTypeReference
 			)*
 		)? '{' ruleMember* '}' |
-		'annotation' ruleValidID '{' ruleAnnotationField* '}'
+		ruleCommonModifier* 'annotation' ruleValidID '{' ruleAnnotationField* '}'
 	)
 ;
 
 // Rule AnnotationField
 ruleAnnotationField :
-	ruleXAnnotation* (
-		ruleJvmTypeReference |
-		(
-			'val' |
-			'var'
-		) ruleJvmTypeReference?
-	) ruleValidID (
+	ruleXAnnotation* ruleCommonModifier* (
+		ruleFieldModifier ruleCommonModifier* ruleJvmTypeReference? ruleValidID |
+		ruleJvmTypeReference ruleValidID
+	) (
 		'=' ruleXExpression
 	)? ';'?
 ;
@@ -44,25 +41,22 @@ ruleAnnotationField :
 // Rule Member
 ruleMember :
 	ruleXAnnotation* (
-		ruleVisibility? (
+		ruleCommonModifier* (
+			ruleFieldModifier ruleCommonModifier* ruleJvmTypeReference? ruleValidID |
 			'extension' (
-				'val' |
-				'var'
-			)? ruleJvmTypeReference ruleValidID? |
-			'static'? (
-				ruleJvmTypeReference |
-				(
-					'val' |
-					'var'
-				) ruleJvmTypeReference?
-			) ruleValidID
+				ruleFieldModifier |
+				ruleCommonModifier
+			)* ruleJvmTypeReference ruleValidID? |
+			ruleFieldModifier ruleCommonModifier* 'extension' ruleCommonModifier*
+			ruleJvmTypeReference ruleValidID? |
+			ruleJvmTypeReference ruleValidID
 		) (
 			'=' ruleXExpression
 		)? ';'? |
-		(
-			'def' |
-			'override'
-		) ruleVisibility? 'static'? 'dispatch'? (
+		ruleCommonModifier* ruleMethodModifier (
+			ruleCommonModifier |
+			ruleMethodModifier
+		)* (
 			'<' ruleJvmTypeParameter (
 				',' ruleJvmTypeParameter
 			)* '>'
@@ -93,9 +87,10 @@ ruleMember :
 			)*
 		)? (
 			ruleXBlockExpression |
-			ruleRichString
+			ruleRichString |
+			';'
 		)? |
-		ruleVisibility? 'new' (
+		ruleCommonModifier* 'new' (
 			'<' ruleJvmTypeParameter (
 				',' ruleJvmTypeParameter
 			)* '>'
@@ -111,6 +106,30 @@ ruleMember :
 	)
 ;
 
+// Rule CommonModifier
+ruleCommonModifier :
+	'public' |
+	'private' |
+	'protected' |
+	'package' |
+	'abstract' |
+	'static' |
+	'dispatch' |
+	'final'
+;
+
+// Rule FieldModifier
+ruleFieldModifier :
+	'val' |
+	'var'
+;
+
+// Rule MethodModifier
+ruleMethodModifier :
+	'def' |
+	'override'
+;
+
 // Rule CreateExtensionInfo
 ruleCreateExtensionInfo :
 	'create' (
@@ -123,6 +142,20 @@ ruleValidID :
 	RULE_ID |
 	'create' |
 	'annotation'
+;
+
+// Rule FeatureCallID
+ruleFeatureCallID :
+	ruleValidID |
+	'extends' |
+	'import' |
+	'extension' |
+	'class' |
+	'interface' |
+	ruleCommonModifier |
+	ruleMethodModifier |
+	'implements' |
+	'throws'
 ;
 
 // Rule Parameter
@@ -267,7 +300,7 @@ ruleXExpression :
 
 // Rule XAssignment
 ruleXAssignment :
-	ruleValidID ruleOpSingleAssign ruleXAssignment |
+	ruleFeatureCallID ruleOpSingleAssign ruleXAssignment |
 	ruleXOrExpression (
 		( (
 		ruleOpMultiAssign
@@ -441,9 +474,9 @@ ruleXCastedExpression :
 ruleXMemberFeatureCall :
 	ruleXPrimaryExpression (
 		( (
-		'.' ruleValidID ruleOpSingleAssign
+		'.' ruleFeatureCallID ruleOpSingleAssign
 		) => (
-			'.' ruleValidID ruleOpSingleAssign
+			'.' ruleFeatureCallID ruleOpSingleAssign
 		) ) ruleXAssignment |
 		( (
 		'.' |
@@ -457,7 +490,7 @@ ruleXMemberFeatureCall :
 			'<' ruleJvmArgumentTypeReference (
 				',' ruleJvmArgumentTypeReference
 			)* '>'
-		)? ruleValidID (
+		)? ruleFeatureCallID (
 			( (
 			'('
 			) => '(' ) (
@@ -672,7 +705,7 @@ ruleXFeatureCall :
 
 // Rule IdOrSuper
 ruleIdOrSuper :
-	ruleValidID |
+	ruleFeatureCallID |
 	'super'
 ;
 
@@ -877,13 +910,6 @@ ruleXImportDeclaration :
 		ruleQualifiedName |
 		ruleQualifiedNameWithWildcard
 	) ';'?
-;
-
-// Rule Visibility
-ruleVisibility :
-	'public' |
-	'protected' |
-	'private'
 ;
 
 RULE_RICH_TEXT :

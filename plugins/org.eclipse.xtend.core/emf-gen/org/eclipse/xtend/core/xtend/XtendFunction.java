@@ -12,7 +12,6 @@ import org.eclipse.emf.common.util.EList;
 
 import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.JvmTypeReference;
-import org.eclipse.xtext.common.types.JvmVisibility;
 
 import org.eclipse.xtext.xbase.XExpression;
 
@@ -28,12 +27,8 @@ import org.eclipse.xtext.xbase.XExpression;
  *   <li>{@link org.eclipse.xtend.core.xtend.XtendFunction#getExpression <em>Expression</em>}</li>
  *   <li>{@link org.eclipse.xtend.core.xtend.XtendFunction#getReturnType <em>Return Type</em>}</li>
  *   <li>{@link org.eclipse.xtend.core.xtend.XtendFunction#getParameters <em>Parameters</em>}</li>
- *   <li>{@link org.eclipse.xtend.core.xtend.XtendFunction#isOverride <em>Override</em>}</li>
- *   <li>{@link org.eclipse.xtend.core.xtend.XtendFunction#isDispatch <em>Dispatch</em>}</li>
  *   <li>{@link org.eclipse.xtend.core.xtend.XtendFunction#getCreateExtensionInfo <em>Create Extension Info</em>}</li>
  *   <li>{@link org.eclipse.xtend.core.xtend.XtendFunction#getTypeParameters <em>Type Parameters</em>}</li>
- *   <li>{@link org.eclipse.xtend.core.xtend.XtendFunction#getVisibility <em>Visibility</em>}</li>
- *   <li>{@link org.eclipse.xtend.core.xtend.XtendFunction#isStatic <em>Static</em>}</li>
  *   <li>{@link org.eclipse.xtend.core.xtend.XtendFunction#getExceptions <em>Exceptions</em>}</li>
  * </ul>
  * </p>
@@ -139,58 +134,6 @@ public interface XtendFunction extends XtendMember
 	EList<XtendParameter> getParameters();
 
 	/**
-	 * Returns the value of the '<em><b>Override</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Override</em>' attribute isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Override</em>' attribute.
-	 * @see #setOverride(boolean)
-	 * @see org.eclipse.xtend.core.xtend.XtendPackage#getXtendFunction_Override()
-	 * @model
-	 * @generated
-	 */
-	boolean isOverride();
-
-	/**
-	 * Sets the value of the '{@link org.eclipse.xtend.core.xtend.XtendFunction#isOverride <em>Override</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Override</em>' attribute.
-	 * @see #isOverride()
-	 * @generated
-	 */
-	void setOverride(boolean value);
-
-	/**
-	 * Returns the value of the '<em><b>Dispatch</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Dispatch</em>' attribute isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Dispatch</em>' attribute.
-	 * @see #setDispatch(boolean)
-	 * @see org.eclipse.xtend.core.xtend.XtendPackage#getXtendFunction_Dispatch()
-	 * @model
-	 * @generated
-	 */
-	boolean isDispatch();
-
-	/**
-	 * Sets the value of the '{@link org.eclipse.xtend.core.xtend.XtendFunction#isDispatch <em>Dispatch</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Dispatch</em>' attribute.
-	 * @see #isDispatch()
-	 * @generated
-	 */
-	void setDispatch(boolean value);
-
-	/**
 	 * Returns the value of the '<em><b>Create Extension Info</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <p>
@@ -233,89 +176,6 @@ public interface XtendFunction extends XtendMember
 	EList<JvmTypeParameter> getTypeParameters();
 
 	/**
-	 * Returns the value of the '<em><b>Visibility</b></em>' attribute.
-	 * The default value is <code>"PUBLIC"</code>.
-	 * The literals are from the enumeration {@link org.eclipse.xtext.common.types.JvmVisibility}.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Visibility</em>' attribute isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Visibility</em>' attribute.
-	 * @see org.eclipse.xtext.common.types.JvmVisibility
-	 * @see #isSetVisibility()
-	 * @see #unsetVisibility()
-	 * @see #setVisibility(JvmVisibility)
-	 * @see org.eclipse.xtend.core.xtend.XtendPackage#getXtendFunction_Visibility()
-	 * @model default="PUBLIC" unsettable="true"
-	 * @generated
-	 */
-	JvmVisibility getVisibility();
-
-	/**
-	 * Sets the value of the '{@link org.eclipse.xtend.core.xtend.XtendFunction#getVisibility <em>Visibility</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Visibility</em>' attribute.
-	 * @see org.eclipse.xtext.common.types.JvmVisibility
-	 * @see #isSetVisibility()
-	 * @see #unsetVisibility()
-	 * @see #getVisibility()
-	 * @generated
-	 */
-	void setVisibility(JvmVisibility value);
-
-	/**
-	 * Unsets the value of the '{@link org.eclipse.xtend.core.xtend.XtendFunction#getVisibility <em>Visibility</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #isSetVisibility()
-	 * @see #getVisibility()
-	 * @see #setVisibility(JvmVisibility)
-	 * @generated
-	 */
-	void unsetVisibility();
-
-	/**
-	 * Returns whether the value of the '{@link org.eclipse.xtend.core.xtend.XtendFunction#getVisibility <em>Visibility</em>}' attribute is set.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return whether the value of the '<em>Visibility</em>' attribute is set.
-	 * @see #unsetVisibility()
-	 * @see #getVisibility()
-	 * @see #setVisibility(JvmVisibility)
-	 * @generated
-	 */
-	boolean isSetVisibility();
-
-	/**
-	 * Returns the value of the '<em><b>Static</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Static</em>' attribute isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Static</em>' attribute.
-	 * @see #setStatic(boolean)
-	 * @see org.eclipse.xtend.core.xtend.XtendPackage#getXtendFunction_Static()
-	 * @model
-	 * @generated
-	 */
-	boolean isStatic();
-
-	/**
-	 * Sets the value of the '{@link org.eclipse.xtend.core.xtend.XtendFunction#isStatic <em>Static</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Static</em>' attribute.
-	 * @see #isStatic()
-	 * @generated
-	 */
-	void setStatic(boolean value);
-
-	/**
 	 * Returns the value of the '<em><b>Exceptions</b></em>' containment reference list.
 	 * The list contents are of type {@link org.eclipse.xtext.common.types.JvmTypeReference}.
 	 * <!-- begin-user-doc -->
@@ -330,5 +190,29 @@ public interface XtendFunction extends XtendMember
 	 * @generated
 	 */
 	EList<JvmTypeReference> getExceptions();
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model kind="operation"
+	 * @generated
+	 */
+	boolean isAbstract();
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model kind="operation"
+	 * @generated
+	 */
+	boolean isOverride();
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model kind="operation"
+	 * @generated
+	 */
+	boolean isDispatch();
 
 } // XtendFunction
