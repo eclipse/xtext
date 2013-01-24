@@ -9,6 +9,8 @@ package org.eclipse.xtend.core.tests;
 
 import org.eclipse.xtend.core.XtendRuntimeModule2;
 import org.eclipse.xtend.core.XtendStandaloneSetup;
+import org.eclipse.xtext.common.types.access.CachingClasspathTypeProviderFactory;
+import org.eclipse.xtext.common.types.access.ClasspathTypeProviderFactory;
 
 import com.google.inject.Guice;
 import com.google.inject.Injector;
@@ -24,6 +26,11 @@ public class NewTypeSystemRuntimeTestSetup extends XtendStandaloneSetup {
 			@Override
 			public ClassLoader bindClassLoaderToInstance() {
 				return AbstractXtendTestCase.class.getClassLoader();
+			}
+			
+			@SuppressWarnings("unused")
+			public Class<? extends ClasspathTypeProviderFactory> bindClasspathTypeProviderFactory() {
+				return CachingClasspathTypeProviderFactory.class;
 			}
 		});
 	}
