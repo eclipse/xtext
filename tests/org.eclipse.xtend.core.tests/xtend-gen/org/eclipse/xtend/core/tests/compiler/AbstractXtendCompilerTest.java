@@ -4090,10 +4090,10 @@ public abstract class AbstractXtendCompilerTest extends AbstractXtendTestCase {
     _builder.append("for (volatile : synchronized) {");
     _builder.newLine();
     _builder.append("\t\t\t");
-    _builder.append("switch final : volatile {");
+    _builder.append("switch continue : volatile {");
     _builder.newLine();
     _builder.append("\t\t\t\t");
-    _builder.append("case final.length > 2 : synchronized.forEach(break | (break + final).toString)");
+    _builder.append("case continue.length > 2 : synchronized.forEach(break | (break + continue).toString)");
     _builder.newLine();
     _builder.append("\t\t\t");
     _builder.append("}");
@@ -4133,7 +4133,7 @@ public abstract class AbstractXtendCompilerTest extends AbstractXtendTestCase {
     _builder_1.append("for (final String volatile_ : synchronized_) {");
     _builder_1.newLine();
     _builder_1.append("      ");
-    _builder_1.append("final String final_ = volatile_;");
+    _builder_1.append("final String continue_ = volatile_;");
     _builder_1.newLine();
     _builder_1.append("      ");
     _builder_1.append("boolean _matched = false;");
@@ -4142,7 +4142,7 @@ public abstract class AbstractXtendCompilerTest extends AbstractXtendTestCase {
     _builder_1.append("if (!_matched) {");
     _builder_1.newLine();
     _builder_1.append("        ");
-    _builder_1.append("int _length = final_.length();");
+    _builder_1.append("int _length = continue_.length();");
     _builder_1.newLine();
     _builder_1.append("        ");
     _builder_1.append("boolean _greaterThan = (_length > 2);");
@@ -4160,7 +4160,7 @@ public abstract class AbstractXtendCompilerTest extends AbstractXtendTestCase {
     _builder_1.append("public void apply(final String break_) {");
     _builder_1.newLine();
     _builder_1.append("                ");
-    _builder_1.append("String _plus = (break_ + final_);");
+    _builder_1.append("String _plus = (break_ + continue_);");
     _builder_1.newLine();
     _builder_1.append("                ");
     _builder_1.append("_plus.toString();");
