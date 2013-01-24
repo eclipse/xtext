@@ -202,6 +202,8 @@ public class XtendJavaValidator extends XbaseWithAnnotationsJavaValidator {
 					XtendPackage.Literals.RICH_STRING_IF__IF,
 					XtendPackage.Literals.RICH_STRING_ELSE_IF__IF)));
 
+	protected final Set<String> visibilityModifers = newHashSet("public", "private", "protected", "package");
+	
 	@Override
 	protected List<EPackage> getEPackages() {
 		return newArrayList(XtendPackage.eINSTANCE, XtypePackage.eINSTANCE, XbasePackage.eINSTANCE, XAnnotationsPackage.eINSTANCE);
@@ -215,7 +217,8 @@ public class XtendJavaValidator extends XbaseWithAnnotationsJavaValidator {
 	@Check
 	public void checkPropertyAnnotation(XtendField field) {
 		if (hasAnnotation(field, Property.class) && field.isStatic()) {
-			error("A property must not be static", XtendPackage.Literals.XTEND_FIELD__STATIC, STATIC_PROPERTY);
+			error("A property must not be static", XtendPackage.Literals.XTEND_MEMBER__MODIFIERS, 
+					field.getModifiers().indexOf("static"), STATIC_PROPERTY);
 		}
 	}
 	
@@ -638,7 +641,8 @@ public class XtendJavaValidator extends XbaseWithAnnotationsJavaValidator {
 		JvmOperation overriddenOperation = overridesService.findOverriddenOperation(function);
 		if (overriddenOperation == null) {
 			if (function.isOverride()) {
-				error("The method "+ uiStrings.signature(operation) +" of type "+operation.getDeclaringType().getSimpleName()+" must override a superclass method.", function, XTEND_FUNCTION__OVERRIDE, OBSOLETE_OVERRIDE);
+				error("The method "+ uiStrings.signature(operation) +" of type "+operation.getDeclaringType().getSimpleName()+" must override a superclass method.", 
+						function, XTEND_MEMBER__MODIFIERS, function.getModifiers().indexOf("override"), OBSOLETE_OVERRIDE);
 			}
 			return;
 		}
@@ -863,11 +867,13 @@ public class XtendJavaValidator extends XbaseWithAnnotationsJavaValidator {
 	public void dispatchFuncWithTypeParams(XtendFunction func) {
 		if (func.isDispatch()) {
 			if (func.getParameters().isEmpty()) {
-				error("A dispatch method must at least have one parameter declared.", func, XTEND_FUNCTION__DISPATCH,
+				error("A dispatch method must at least have one parameter declared.", func, 
+						XTEND_MEMBER__MODIFIERS, func.getModifiers().indexOf("dispatch"),
 						IssueCodes.DISPATCH_FUNC_WITHOUT_PARAMS);
 			}
 			if (!func.getTypeParameters().isEmpty()) {
-				error("A dispatch method must not declare any type parameters.", func, XTEND_FUNCTION__DISPATCH,
+				error("A dispatch method must not declare any type parameters.", func, 
+						XTEND_MEMBER__MODIFIERS, func.getModifiers().indexOf("dispatch"),
 						IssueCodes.DISPATCH_FUNC_WITH_TYPE_PARAMS);
 			}
 			if (func.getName().startsWith("_")) {
@@ -891,7 +897,7 @@ public class XtendJavaValidator extends XbaseWithAnnotationsJavaValidator {
 				if(overriddenOperation != null) { 
 					if (isMorePrivateThan(syntheticDispatchMethod.getVisibility(), overriddenOperation.getVisibility())) {
 						String msg = "Synthetic dispatch method reduces visibility of overridden method " + overriddenOperation.getIdentifier();
-						addDispatchError(type, dispatchOperations, msg, XTEND_FUNCTION__VISIBILITY, OVERRIDE_REDUCES_VISIBILITY);
+						addDispatchError(type, dispatchOperations, msg, null, OVERRIDE_REDUCES_VISIBILITY);
 					}
 					expectStatic = overriddenOperation.isStatic();
 				} 
@@ -899,7 +905,7 @@ public class XtendJavaValidator extends XbaseWithAnnotationsJavaValidator {
 					JvmOperation singleOp = dispatchOperations.iterator().next();
 					XtendFunction function = associations.getXtendFunction(singleOp);
 					addIssue(function, SINGLE_DISPATCH_FUNCTION, "Single dispatch method.",
-							XTEND_FUNCTION__DISPATCH);
+							XTEND_MEMBER__MODIFIERS, function.getModifiers().indexOf("dispatch"));
 				} else {
 					Multimap<List<JvmType>, JvmOperation> signatures = HashMultimap.create();
 					boolean isFirstLocalOperation = true;
@@ -911,11 +917,11 @@ public class XtendJavaValidator extends XbaseWithAnnotationsJavaValidator {
 							if(expectStatic != null) {
 								if (expectStatic && !jvmOperation.isStatic()) {
 									String msg = "The dispatch method must be static because the dispatch methods in the superclass are static.";
-									addDispatchError(jvmOperation, msg, XTEND_FUNCTION__STATIC, DISPATCH_FUNCTIONS_STATIC_EXPECTED);
+									addDispatchError(jvmOperation, msg, "static", DISPATCH_FUNCTIONS_STATIC_EXPECTED);
 								}
 								if (!expectStatic && jvmOperation.isStatic()) {
 									String msg = "The dispatch method must not be static because the dispatch methods in the superclass are not static.";
-									addDispatchError(jvmOperation, msg, XTEND_FUNCTION__STATIC, DISPATCH_FUNCTIONS_NON_STATIC_EXPECTED);
+									addDispatchError(jvmOperation, msg, "static", DISPATCH_FUNCTIONS_NON_STATIC_EXPECTED);
 								}
 							}
 							if (isFirstLocalOperation) {
@@ -947,11 +953,11 @@ public class XtendJavaValidator extends XbaseWithAnnotationsJavaValidator {
 					}
 					if (commonVisibility == null) {
 						addDispatchError(type, dispatchOperations, "All local dispatch methods must have the same visibility.", 
-								XTEND_FUNCTION__VISIBILITY, DISPATCH_FUNCTIONS_WITH_DIFFERENT_VISIBILITY);
+								null, DISPATCH_FUNCTIONS_WITH_DIFFERENT_VISIBILITY);
 					}
 					if (expectStatic == null && commonStatic == null) {
 						addDispatchError(type, dispatchOperations, "Static and non-static dispatch methods can not be mixed.", 
-								XTEND_FUNCTION__STATIC,	DISPATCH_FUNCTIONS_MIXED_STATIC_AND_NON_STATIC);
+								"static", DISPATCH_FUNCTIONS_MIXED_STATIC_AND_NON_STATIC);
 					}
 					for (final List<JvmType> paramTypes : signatures.keySet()) {
 						Collection<JvmOperation> ops = signatures.get(paramTypes);
@@ -999,20 +1005,32 @@ public class XtendJavaValidator extends XbaseWithAnnotationsJavaValidator {
 		}
 	}
 
-	protected void addDispatchError(JvmGenericType type, Iterable<JvmOperation> operations, String message, EStructuralFeature preferredFeature, String ISSUE_ID) {
+	protected void addDispatchError(JvmGenericType type, Iterable<JvmOperation> operations, String message, String modifier, String ISSUE_ID) {
 		for (JvmOperation jvmOperation : operations)
 			if (jvmOperation.getDeclaringType() == type)
-				addDispatchError(jvmOperation, message, preferredFeature, ISSUE_ID);
+				addDispatchError(jvmOperation, message, modifier, ISSUE_ID);
 	}
 	
-	protected void addDispatchError(JvmOperation jvmOperation, String message, EStructuralFeature preferredFeature, String ISSUE_ID) {
+	protected void addDispatchError(JvmOperation jvmOperation, String message, String modifier, String ISSUE_ID) {
 		XtendFunction function = associations.getXtendFunction(jvmOperation);
 		if (function != null) {
-			EStructuralFeature feature = (function.eIsSet(preferredFeature)) ? preferredFeature : XTEND_FUNCTION__DISPATCH;
-			error(message, function, feature, ValidationMessageAcceptor.INSIGNIFICANT_INDEX, ISSUE_ID);
+			int modifierIndex = -1;
+			if(modifier != null) {
+				modifierIndex = function.getModifiers().indexOf(modifier);
+			} else {
+				for(int i = 0; i < function.getModifiers().size(); ++i) {
+					if(visibilityModifers.contains(function.getModifiers().get(i))) {
+						modifierIndex = i;
+						break;
+					}
+				}
+			}
+			if(modifierIndex == -1)
+				modifierIndex = function.getModifiers().indexOf("dispatch");
+			error(message, function, XTEND_MEMBER__MODIFIERS, modifierIndex, ISSUE_ID);
 		}
 	}
-
+	
 	protected List<JvmType> getParamTypes(JvmOperation jvmOperation, boolean wrapPrimitives) {
 		List<JvmType> types = newArrayList();
 		for (JvmFormalParameter p : jvmOperation.getParameters()) {
@@ -1068,7 +1086,8 @@ public class XtendJavaValidator extends XbaseWithAnnotationsJavaValidator {
 		if (func.getCreateExtensionInfo() == null)
 			return;
 		if (!func.getTypeParameters().isEmpty())
-			error("Create methods can not have type parameters.", func, XtendPackage.Literals.XTEND_FUNCTION__STATIC,
+			error("Create methods can not have type parameters.", func, 
+					XTEND_MEMBER__MODIFIERS, func.getModifiers().indexOf("static"),
 					INVALID_USE_OF_STATIC);
 	}
 	
@@ -1077,7 +1096,8 @@ public class XtendJavaValidator extends XbaseWithAnnotationsJavaValidator {
 		if (func.getCreateExtensionInfo() == null)
 			return;
 		if (func.isStatic())
-			error("Create methods can not be static.", func, XtendPackage.Literals.XTEND_FUNCTION__STATIC,
+			error("Create methods can not be static.", func, 
+					XTEND_MEMBER__MODIFIERS, func.getModifiers().indexOf("static"),
 					INVALID_USE_OF_STATIC);
 	}
 

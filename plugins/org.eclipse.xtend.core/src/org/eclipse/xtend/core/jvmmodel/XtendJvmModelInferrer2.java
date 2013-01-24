@@ -438,8 +438,7 @@ public class XtendJvmModelInferrer2 implements IJvmModelInferrer {
 			Iterable<XtendFunction> xtendFunctions = Iterables.filter(associations.getSourceElements(jvmOperation),
 					XtendFunction.class);
 			for (XtendFunction func : xtendFunctions) {
-				JvmVisibility xtendVisibility = func.eIsSet(XtendPackage.Literals.XTEND_FUNCTION__VISIBILITY) ? func
-						.getVisibility() : null;
+				JvmVisibility xtendVisibility = func.getDeclaredVisibility();
 				if (isFirst) {
 					commonVisibility = xtendVisibility;
 					isFirst = false;
@@ -494,7 +493,7 @@ public class XtendJvmModelInferrer2 implements IJvmModelInferrer {
 		String sourceName = source.getName();
 		JvmVisibility visibility = source.getVisibility();
 		if (source.isDispatch()) {
-			if (!source.eIsSet(XtendPackage.Literals.XTEND_FUNCTION__VISIBILITY))
+			if (source.getDeclaredVisibility() == null)
 				visibility = JvmVisibility.PROTECTED;
 			sourceName = "_" + sourceName;
 		}
