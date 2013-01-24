@@ -102,6 +102,8 @@ public class CompilerTest {
       _builder_1.append("import org.eclipse.xtext.xbase.lib.Pair;");
       _builder_1.newLine();
       _builder_1.newLine();
+      _builder_1.append("@SuppressWarnings(\"all\")");
+      _builder_1.newLine();
       _builder_1.append("public class MyFile {");
       _builder_1.newLine();
       _builder_1.append("  ");
@@ -223,6 +225,8 @@ public class CompilerTest {
       _builder_1.newLine();
       _builder_1.append("import org.eclipse.xtext.purexbase.test.data.Person;");
       _builder_1.newLine();
+      _builder_1.newLine();
+      _builder_1.append("@SuppressWarnings(\"all\")");
       _builder_1.newLine();
       _builder_1.append("public class MyFile {");
       _builder_1.newLine();
@@ -370,6 +374,8 @@ public class CompilerTest {
       _builder.append("// foo (String)");
       _builder.newLine();
       StringConcatenation _builder_1 = new StringConcatenation();
+      _builder_1.append("@SuppressWarnings(\"all\")");
+      _builder_1.newLine();
       _builder_1.append("public class MyFile {");
       _builder_1.newLine();
       _builder_1.append("  ");
@@ -471,6 +477,8 @@ public class CompilerTest {
       _builder.append("// 3 (int)");
       _builder.newLine();
       StringConcatenation _builder_1 = new StringConcatenation();
+      _builder_1.append("@SuppressWarnings(\"all\")");
+      _builder_1.newLine();
       _builder_1.append("public class MyFile {");
       _builder_1.newLine();
       _builder_1.append("  ");
@@ -586,6 +594,8 @@ public class CompilerTest {
       _builder_1.newLine();
       _builder_1.append("import org.eclipse.xtext.xbase.lib.ListExtensions;");
       _builder_1.newLine();
+      _builder_1.newLine();
+      _builder_1.append("@SuppressWarnings(\"all\")");
       _builder_1.newLine();
       _builder_1.append("public class MyFile {");
       _builder_1.newLine();
@@ -772,6 +782,8 @@ public class CompilerTest {
       _builder.append("}");
       _builder.newLine();
       StringConcatenation _builder_1 = new StringConcatenation();
+      _builder_1.append("@SuppressWarnings(\"all\")");
+      _builder_1.newLine();
       _builder_1.append("public class MyFile {");
       _builder_1.newLine();
       _builder_1.append("  ");
@@ -911,6 +923,8 @@ public class CompilerTest {
       _builder_1.append("import org.eclipse.xtext.purexbase.test.data.Amount;");
       _builder_1.newLine();
       _builder_1.newLine();
+      _builder_1.append("@SuppressWarnings(\"all\")");
+      _builder_1.newLine();
       _builder_1.append("public class MyFile {");
       _builder_1.newLine();
       _builder_1.append("  ");
@@ -1023,6 +1037,8 @@ public class CompilerTest {
       _builder_1.newLine();
       _builder_1.append("import org.eclipse.xtext.xbase.lib.ListExtensions;");
       _builder_1.newLine();
+      _builder_1.newLine();
+      _builder_1.append("@SuppressWarnings(\"all\")");
       _builder_1.newLine();
       _builder_1.append("public class MyFile {");
       _builder_1.newLine();
@@ -1192,6 +1208,8 @@ public class CompilerTest {
       StringConcatenation _builder_1 = new StringConcatenation();
       _builder_1.append("import org.eclipse.xtext.xbase.lib.Exceptions;");
       _builder_1.newLine();
+      _builder_1.newLine();
+      _builder_1.append("@SuppressWarnings(\"all\")");
       _builder_1.newLine();
       _builder_1.append("public class MyFile {");
       _builder_1.newLine();
@@ -1377,6 +1395,8 @@ public class CompilerTest {
       _builder_1.newLine();
       _builder_1.append("import org.eclipse.xtext.xbase.lib.ListExtensions;");
       _builder_1.newLine();
+      _builder_1.newLine();
+      _builder_1.append("@SuppressWarnings(\"all\")");
       _builder_1.newLine();
       _builder_1.append("public class MyFile {");
       _builder_1.newLine();
@@ -1692,6 +1712,8 @@ public class CompilerTest {
       _builder_1.newLine();
       _builder_1.append("import org.eclipse.xtext.xbase.lib.Conversions;");
       _builder_1.newLine();
+      _builder_1.newLine();
+      _builder_1.append("@SuppressWarnings(\"all\")");
       _builder_1.newLine();
       _builder_1.append("public class MyFile {");
       _builder_1.newLine();
