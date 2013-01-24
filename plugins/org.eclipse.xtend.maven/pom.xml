@@ -11,6 +11,7 @@
 		<module>../org.eclipse.xtend.lib.maven</module>
 		<module>../org.eclipse.xtend.lib.gwt</module>
 		<module>../org.eclipse.xtend.maven.plugin</module>
+		<module>../org.eclipse.xtend.maven.archetype</module> 
 	</modules>
 	<distributionManagement>
 		<repository>
