@@ -23,6 +23,18 @@ import org.junit.runner.RunWith;
 public class TypeConformanceValidatorTest2 extends TypeConformanceValidatorTest {
 	
 	@Override
+	@Test
+	public void testReturn_02() throws Exception {
+		super.testReturn_02();
+	}
+	
+	@Override
+	@Test
+	public void testReturn_03() throws Exception {
+		super.testReturn_03();
+	}
+	
+	@Override
 	@Test public void testWhilePredicate() throws Exception {
 		assertNoConformanceError("while (true) 'foo'");
 		assertConformanceError("while (27) 'foo'", XbasePackage.Literals.XNUMBER_LITERAL, "int",
