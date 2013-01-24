@@ -12,6 +12,7 @@ import org.eclipse.xtext.linking.LinkingScopeProviderBinding;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.scoping.IScopeProvider;
+import org.eclipse.xtext.serializer.tokens.SerializerScopeProviderBinding;
 import org.eclipse.xtext.service.SingletonBinding;
 import org.eclipse.xtext.xbase.XbaseStandaloneSetup;
 import org.eclipse.xtext.xbase.compiler.TypeReferenceSerializer;
@@ -21,7 +22,9 @@ import org.eclipse.xtext.xbase.compiler.XbaseCompiler2;
 import org.eclipse.xtext.xbase.interpreter.IExpressionInterpreter;
 import org.eclipse.xtext.xbase.interpreter.impl.XbaseInterpreter2;
 import org.eclipse.xtext.xbase.resource.BatchLinkableResource;
+import org.eclipse.xtext.xbase.scoping.XbaseScopeProvider;
 import org.eclipse.xtext.xbase.scoping.batch.XbaseBatchScopeProvider;
+import org.eclipse.xtext.xbase.serializer.SerializerScopeProvider;
 import org.eclipse.xtext.xbase.tests.XbaseInjectorProvider;
 import org.eclipse.xtext.xbase.typesystem.legacy.LegacyFeatureOverridesService;
 import org.eclipse.xtext.xbase.typesystem.legacy.LegacyTypeArgumentContextProvider;
@@ -66,6 +69,12 @@ public class XbaseNewTypeSystemInjectorProvider extends XbaseInjectorProvider {
 		public void configureLinkingIScopeProvider(Binder binder) {
 			binder.bind(IScopeProvider.class).annotatedWith(LinkingScopeProviderBinding.class)
 					.to(XbaseBatchScopeProvider.class);
+		}
+		
+		@Override
+		public void configureSerializerIScopeProvider(Binder binder) {
+			binder.bind(IScopeProvider.class).annotatedWith(SerializerScopeProviderBinding.class)
+					.to(SerializerScopeProvider.class);
 		}
 
 		@Override
