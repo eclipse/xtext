@@ -1,8 +1,8 @@
-package org.eclipse.xtend.ide.tests.performance;
+package org.eclipse.xtend.core.tests.performance;
 
 import java.util.HashMap;
 import java.util.Map;
-import org.eclipse.xtend.ide.tests.performance.GeneratorConfig;
+import org.eclipse.xtend.core.tests.performance.GeneratorConfig;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Pair;
@@ -25,8 +25,6 @@ public class XtendFileGenerator {
     _builder.append("import java.util.Collections");
     _builder.newLine();
     _builder.append("import java.util.List");
-    _builder.newLine();
-    _builder.append("import org.eclipse.xtext.xbase.lib.Functions");
     _builder.newLine();
     _builder.append("import org.junit.Assert");
     _builder.newLine();
@@ -987,17 +985,14 @@ public class XtendFileGenerator {
     _builder.append("\t");
     _builder.newLine();
     _builder.append("\t");
-    _builder.append("private BigDecimal value = null;");
+    _builder.append("BigDecimal value");
     _builder.newLine();
     _builder.newLine();
     _builder.append("\t");
-    _builder.append("public Amount(BigDecimal value) {");
+    _builder.append("new(BigDecimal value) {");
     _builder.newLine();
     _builder.append("\t\t");
-    _builder.append("super();");
-    _builder.newLine();
-    _builder.append("\t\t");
-    _builder.append("this.value = value;");
+    _builder.append("this.value = value");
     _builder.newLine();
     _builder.append("\t");
     _builder.append("}");
@@ -1005,13 +1000,10 @@ public class XtendFileGenerator {
     _builder.append("\t");
     _builder.newLine();
     _builder.append("\t");
-    _builder.append("public Amount(String value) {");
+    _builder.append("new(String value) {");
     _builder.newLine();
     _builder.append("\t\t");
-    _builder.append("super();");
-    _builder.newLine();
-    _builder.append("\t\t");
-    _builder.append("this.value = new BigDecimal(value);");
+    _builder.append("this.value = new BigDecimal(value)");
     _builder.newLine();
     _builder.append("\t");
     _builder.append("}");
@@ -1019,13 +1011,10 @@ public class XtendFileGenerator {
     _builder.append("\t");
     _builder.newLine();
     _builder.append("\t");
-    _builder.append("@Override");
-    _builder.newLine();
-    _builder.append("\t");
-    _builder.append("public String toString() {");
+    _builder.append("override toString() {");
     _builder.newLine();
     _builder.append("\t\t");
-    _builder.append("return value.setScale(2, BigDecimal.ROUND_HALF_UP).toString();");
+    _builder.append("return value.setScale(2, BigDecimal::ROUND_HALF_UP).toString();");
     _builder.newLine();
     _builder.append("\t");
     _builder.append("}");
@@ -1033,7 +1022,7 @@ public class XtendFileGenerator {
     _builder.append("\t");
     _builder.newLine();
     _builder.append("\t");
-    _builder.append("public Amount operator_plus(Amount other) {");
+    _builder.append("def public Amount operator_plus(Amount other) {");
     _builder.newLine();
     _builder.append("\t\t");
     _builder.append("return new Amount(this.value.add(other.value));");
@@ -1044,7 +1033,7 @@ public class XtendFileGenerator {
     _builder.append("\t");
     _builder.newLine();
     _builder.append("\t");
-    _builder.append("public Amount operator_minus(Amount other) {");
+    _builder.append("def public Amount operator_minus(Amount other) {");
     _builder.newLine();
     _builder.append("\t\t");
     _builder.append("return new Amount(this.value.subtract(other.value));");
@@ -1055,7 +1044,7 @@ public class XtendFileGenerator {
     _builder.append("\t");
     _builder.newLine();
     _builder.append("\t");
-    _builder.append("public Amount operator_multiply(int factor) {");
+    _builder.append("def public Amount operator_multiply(int factor) {");
     _builder.newLine();
     _builder.append("\t\t");
     _builder.append("return new Amount(this.value.multiply(new BigDecimal(factor)));");
@@ -1066,7 +1055,7 @@ public class XtendFileGenerator {
     _builder.append("\t");
     _builder.newLine();
     _builder.append("\t");
-    _builder.append("public Amount operator_divide(int divisor) {");
+    _builder.append("def public Amount operator_divide(int divisor) {");
     _builder.newLine();
     _builder.append("\t\t");
     _builder.append("return new Amount(this.value.divide(new BigDecimal(divisor)));");
@@ -1078,7 +1067,7 @@ public class XtendFileGenerator {
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
-    Pair<String,CharSequence> _mappedTo = Pair.<String, CharSequence>of("xtend/tutorial/util/Amount.java", _builder);
+    Pair<String,CharSequence> _mappedTo = Pair.<String, CharSequence>of("xtend/tutorial/util/Amount.xtend", _builder);
     return _mappedTo;
   }
   
@@ -1087,14 +1076,14 @@ public class XtendFileGenerator {
     _builder.append("package xtend.tutorial.util;");
     _builder.newLine();
     _builder.newLine();
-    _builder.append("public class Circle implements Shape {");
+    _builder.append("public class Circle extends Shape {");
     _builder.newLine();
     _builder.append("\t");
     _builder.append("public int diameter;");
     _builder.newLine();
     _builder.newLine();
     _builder.append("\t");
-    _builder.append("public Circle(int diameter) {");
+    _builder.append("new(int diameter) {");
     _builder.newLine();
     _builder.append("\t\t");
     _builder.append("super();");
@@ -1109,7 +1098,7 @@ public class XtendFileGenerator {
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
-    Pair<String,CharSequence> _mappedTo = Pair.<String, CharSequence>of("xtend/tutorial/util/Circle.java", _builder);
+    Pair<String,CharSequence> _mappedTo = Pair.<String, CharSequence>of("xtend/tutorial/util/Circle.xtend", _builder);
     return _mappedTo;
   }
   
@@ -1132,7 +1121,7 @@ public class XtendFileGenerator {
     _builder.append("\t");
     _builder.newLine();
     _builder.append("\t");
-    _builder.append("public String getName() {");
+    _builder.append("def public String getName() {");
     _builder.newLine();
     _builder.append("\t\t");
     _builder.append("return name;");
@@ -1143,7 +1132,7 @@ public class XtendFileGenerator {
     _builder.append("\t");
     _builder.newLine();
     _builder.append("\t");
-    _builder.append("public void setName(String name) {");
+    _builder.append("def public void setName(String name) {");
     _builder.newLine();
     _builder.append("\t\t");
     _builder.append("this.name = name;");
@@ -1154,7 +1143,7 @@ public class XtendFileGenerator {
     _builder.append("\t");
     _builder.newLine();
     _builder.append("\t");
-    _builder.append("public Iterable<NetNode> getReferences() {");
+    _builder.append("def public Iterable<NetNode> getReferences() {");
     _builder.newLine();
     _builder.append("\t\t");
     _builder.append("return references;");
@@ -1165,7 +1154,7 @@ public class XtendFileGenerator {
     _builder.append("\t");
     _builder.newLine();
     _builder.append("\t");
-    _builder.append("public void setReferences(Iterable<NetNode> references) {");
+    _builder.append("def public void setReferences(Iterable<NetNode> references) {");
     _builder.newLine();
     _builder.append("\t\t");
     _builder.append("this.references = references;");
@@ -1177,7 +1166,7 @@ public class XtendFileGenerator {
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
-    Pair<String,CharSequence> _mappedTo = Pair.<String, CharSequence>of("xtend/tutorial/util/NetNode.java", _builder);
+    Pair<String,CharSequence> _mappedTo = Pair.<String, CharSequence>of("xtend/tutorial/util/NetNode.xtend", _builder);
     return _mappedTo;
   }
   
@@ -1205,7 +1194,7 @@ public class XtendFileGenerator {
     _builder.append("\t");
     _builder.newLine();
     _builder.append("\t");
-    _builder.append("public Person(String forename, String name) {");
+    _builder.append("new(String forename, String name) {");
     _builder.newLine();
     _builder.append("\t\t");
     _builder.append("super();");
@@ -1222,7 +1211,7 @@ public class XtendFileGenerator {
     _builder.append("\t");
     _builder.newLine();
     _builder.append("\t");
-    _builder.append("public Person() {");
+    _builder.append("new() {");
     _builder.newLine();
     _builder.append("\t");
     _builder.append("}");
@@ -1230,7 +1219,7 @@ public class XtendFileGenerator {
     _builder.append("\t");
     _builder.newLine();
     _builder.append("\t");
-    _builder.append("public Set<Person> getFriends() {");
+    _builder.append("def public Set<Person> getFriends() {");
     _builder.newLine();
     _builder.append("\t\t");
     _builder.append("return friends;");
@@ -1241,7 +1230,7 @@ public class XtendFileGenerator {
     _builder.append("\t");
     _builder.newLine();
     _builder.append("\t");
-    _builder.append("public void setFriends(Set<Person> friends) {");
+    _builder.append("def public void setFriends(Set<Person> friends) {");
     _builder.newLine();
     _builder.append("\t\t");
     _builder.append("this.friends = friends;");
@@ -1251,7 +1240,7 @@ public class XtendFileGenerator {
     _builder.newLine();
     _builder.newLine();
     _builder.append("\t");
-    _builder.append("public String getForename() {");
+    _builder.append("def public String getForename() {");
     _builder.newLine();
     _builder.append("\t\t");
     _builder.append("return forename;");
@@ -1262,7 +1251,7 @@ public class XtendFileGenerator {
     _builder.append("\t");
     _builder.newLine();
     _builder.append("\t");
-    _builder.append("public void setForename(String forename) {");
+    _builder.append("def public void setForename(String forename) {");
     _builder.newLine();
     _builder.append("\t\t");
     _builder.append("this.forename = forename;");
@@ -1273,7 +1262,7 @@ public class XtendFileGenerator {
     _builder.append("\t");
     _builder.newLine();
     _builder.append("\t");
-    _builder.append("public String getName() {");
+    _builder.append("def public String getName() {");
     _builder.newLine();
     _builder.append("\t\t");
     _builder.append("return name;");
@@ -1284,7 +1273,7 @@ public class XtendFileGenerator {
     _builder.append("\t");
     _builder.newLine();
     _builder.append("\t");
-    _builder.append("public void setName(String name) {");
+    _builder.append("def public void setName(String name) {");
     _builder.newLine();
     _builder.append("\t\t");
     _builder.append("this.name = name;");
@@ -1296,7 +1285,7 @@ public class XtendFileGenerator {
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
-    Pair<String,CharSequence> _mappedTo = Pair.<String, CharSequence>of("xtend/tutorial/util/Person.java", _builder);
+    Pair<String,CharSequence> _mappedTo = Pair.<String, CharSequence>of("xtend/tutorial/util/Person.xtend", _builder);
     return _mappedTo;
   }
   
@@ -1305,16 +1294,19 @@ public class XtendFileGenerator {
     _builder.append("package xtend.tutorial.util;");
     _builder.newLine();
     _builder.newLine();
-    _builder.append("public class Rectangle implements Shape {");
+    _builder.append("public class Rectangle extends Shape {");
     _builder.newLine();
     _builder.append("\t");
     _builder.newLine();
     _builder.append("\t");
-    _builder.append("public int height, width;");
+    _builder.append("public int height;");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("public int width;");
     _builder.newLine();
     _builder.newLine();
     _builder.append("\t");
-    _builder.append("public Rectangle(int height, int width) {");
+    _builder.append("new(int height, int width) {");
     _builder.newLine();
     _builder.append("\t\t");
     _builder.append("super();");
@@ -1332,7 +1324,7 @@ public class XtendFileGenerator {
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
-    Pair<String,CharSequence> _mappedTo = Pair.<String, CharSequence>of("xtend/tutorial/util/Rectangle.java", _builder);
+    Pair<String,CharSequence> _mappedTo = Pair.<String, CharSequence>of("xtend/tutorial/util/Rectangle.xtend", _builder);
     return _mappedTo;
   }
   
@@ -1341,11 +1333,11 @@ public class XtendFileGenerator {
     _builder.append("package xtend.tutorial.util;");
     _builder.newLine();
     _builder.newLine();
-    _builder.append("public interface Shape {");
+    _builder.append("public class Shape {");
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
-    Pair<String,CharSequence> _mappedTo = Pair.<String, CharSequence>of("xtend/tutorial/util/Shape.java", _builder);
+    Pair<String,CharSequence> _mappedTo = Pair.<String, CharSequence>of("xtend/tutorial/util/Shape.xtend", _builder);
     return _mappedTo;
   }
 }

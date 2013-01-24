@@ -7,6 +7,13 @@
  *******************************************************************************/
 package org.eclipse.xtext.common.types.access.impl;
 
+import static com.google.common.collect.Maps.*;
+
+import java.util.Map;
+
+import org.eclipse.xtext.util.internal.StopWatches;
+import org.eclipse.xtext.util.internal.StopWatches.StoppedTask;
+
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
@@ -19,20 +26,37 @@ public class ClassFinder {
 		this.classLoader = classLoader;
 		this.classNameUtil = new ClassNameUtil();
 	}
+	
+	private Map<String, Class<?>> cache = newHashMap();
 
 	public Class<?> forName(String name) throws ClassNotFoundException {
+		StoppedTask task = StopWatches.forTask("Load class ");
 		try {
+			task.start();
 			if (name.length() <= "boolean".length() && name.indexOf('.') == -1) {
 				Class<?> result = Primitives.forName(name);
 				if (result != null)
 					return result;
 			}
-			return Class.forName(classNameUtil.normalizeClassName(name), false, classLoader);
+			
+			if (cache.containsKey(name)) {
+				Class<?> result = cache.get(name);
+				if (result == null)
+					throw new ClassNotFoundException(name);
+				return result;
+			}
+			Class<?> result = Class.forName(classNameUtil.normalizeClassName(name), false, classLoader);
+			cache.put(name, result);
+			return result;
 		} catch(ClassNotFoundException e) {
 			Class<?> result = Primitives.forName(name);
-			if (result == null)
+			if (result == null) {
+				cache.put(name, null);
 				throw e;
+			}
 			return result;
+		} finally {
+			task.stop();
 		}
 	}
 	
