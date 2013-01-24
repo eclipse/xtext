@@ -52,7 +52,15 @@ public class DerivedStateAwareResource extends LazyLinkingResource {
 		}
 		return super.getContents();
 	}
-
+	
+	@Override
+	protected void clearInternalState() {
+		if (fullyInitialized) {
+			discardDerivedState();
+		}
+		super.clearInternalState();
+	}
+	
 	@Override
 	protected void updateInternalState(IParseResult oldParseResult, IParseResult newParseResult) {
 		if (fullyInitialized) {

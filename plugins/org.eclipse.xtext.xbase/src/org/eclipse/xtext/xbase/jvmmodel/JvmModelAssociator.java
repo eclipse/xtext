@@ -27,7 +27,6 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.Constants;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
-import org.eclipse.xtext.parser.antlr.IReferableElementsUnloader;
 import org.eclipse.xtext.resource.DerivedStateAwareResource;
 import org.eclipse.xtext.resource.IDerivedStateComputer;
 import org.eclipse.xtext.resource.XtextResource;
@@ -57,7 +56,7 @@ public class JvmModelAssociator implements IJvmModelAssociations, IJvmModelAssoc
 	private String languageName;
 	
 	@Inject 
-	private IReferableElementsUnloader.GenericUnloader unloader;
+	private JvmElementsProxifyingUnloader unloader;
 	
 	@Inject
 	private IJvmModelInferrer inferrer;
