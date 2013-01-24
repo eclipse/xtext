@@ -7,13 +7,16 @@ addbaseline -A "api-baseline"
 
 import -Declipse.download="http://download.eclipse.org" "${releng.project.location}/releng/xtext-platform-${ECLIPSE.TARGET.ALIAS}.mspec"
 resolve "${releng.project.location}/releng/xtext.cquery"
+resolve "${releng.project.location}/releng/tests/xtext-test.mspec"
 
 build
+
+junit --launch "org.eclipse.xtext.purexbase.tests/org.eclipse.xtext.purexbase.tests.launch" --flatXML --output "${WORKSPACE}/xtext.test.results/org.eclipse.xtext.purexbase.tests.xml"
+
 #perform --properties "${releng.project.location}/releng/xtext-build.properties" "org.eclipse.xtext.build#build"
 
 #importtargetdefinition  -DuseMirror=true -A "${releng.project.location}/releng/tests/tests-Galileo.target
 
-#resolve "${releng.project.location}/releng/org.eclipse.xtext.releng/releng/tests/xtext-test.mspec"
 
 #build
 
