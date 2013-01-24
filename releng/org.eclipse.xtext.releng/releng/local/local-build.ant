@@ -47,6 +47,7 @@
 			<arg value="-Dcheckout.location=${checkout.location}" />
 			<arg value="-DtargetPlatformPath=${build.root}/target.platform" />
 			<arg value="-Dxtend.checkout.location=${xtend.checkout.location}" />
+			<arg value="-Dxtext.checkout.location=${checkout.location}" />
 			<arg value="-Dreleng.project.location=${releng.project.location}" />
 			<arg value="-DECLIPSE.TARGET.ALIAS=${ECLIPSE.TARGET.ALIAS}" />
 			<arg line="-data ${build.root}/buckminster.workspace" />

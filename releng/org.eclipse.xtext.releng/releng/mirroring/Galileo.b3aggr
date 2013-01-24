@@ -14,7 +14,7 @@
       <repositories location="http://download.eclipse.org/modeling/emf/updates">
         <features name="org.eclipse.emf.feature.group" versionRange="[2.5.0,2.6.0)"/>
         <features name="org.eclipse.emf.source.feature.group" versionRange="[2.5.0,2.6.0)"/>
-        <features name="org.eclipse.emf.compare.sdk.feature.group" versionRange="[1.0.1,1.0.2)"/>
+        <features name="org.eclipse.emf.compare.feature.group"/>
       </repositories>
       <repositories location="http://download.eclipse.org/eclipse/updates/3.8">
         <bundles name="org.eclipse.jdt.annotation"/>
