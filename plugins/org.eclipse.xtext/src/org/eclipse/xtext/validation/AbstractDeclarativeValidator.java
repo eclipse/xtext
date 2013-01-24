@@ -447,6 +447,34 @@ public abstract class AbstractDeclarativeValidator extends AbstractInjectableVal
 			}
 		}
 	}
+	/**
+	 * @since 2.4
+	 */
+	protected void addIssue(EObject source, String issueCode, String message,  int offset, int length){
+		addIssue(source, issueCode, message, offset, length, (String[])null);
+	}
+	
+	/**
+	 * @since 2.4
+	 */
+	protected void addIssue(EObject source, String issueCode, String message,  int offset, int length, String... issueData) {
+		Severity severity = getIssueSeverities(getContext(), getCurrentObject()).getSeverity(issueCode);
+		if (severity != null) {
+			switch (severity) {
+				case WARNING:
+					getMessageAcceptor().acceptWarning(message, source, offset, length, issueCode, issueData);
+					break;
+				case INFO:
+					getMessageAcceptor().acceptInfo(message, source,  offset, length, issueCode, issueData);
+					break;
+				case ERROR:
+					getMessageAcceptor().acceptError(message, source, offset, length, issueCode, issueData);
+					break;
+				default:
+					break;
+			}
+		}
+	}
 
 	/**
 	 * @since 2.4

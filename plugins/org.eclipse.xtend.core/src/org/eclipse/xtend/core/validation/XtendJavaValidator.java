@@ -77,7 +77,6 @@ import org.eclipse.xtext.common.types.util.Primitives;
 import org.eclipse.xtext.common.types.util.TypeArgumentContextProvider;
 import org.eclipse.xtext.common.types.util.TypeConformanceComputer;
 import org.eclipse.xtext.common.types.util.TypeReferences;
-import org.eclipse.xtext.diagnostics.Severity;
 import org.eclipse.xtext.documentation.IEObjectDocumentationProvider;
 import org.eclipse.xtext.documentation.IEObjectDocumentationProviderExtension;
 import org.eclipse.xtext.documentation.IJavaDocTypeReferenceProvider;
@@ -1276,11 +1275,8 @@ public class XtendJavaValidator extends XbaseWithAnnotationsJavaValidator {
 				if(typeRefString != null && typeRefString.length() > 0){
 					IScope scope = scopeProvider.getScope(member, TypesPackage.Literals.JVM_PARAMETERIZED_TYPE_REFERENCE__TYPE);
 					IEObjectDescription candidate = scope.getSingleElement(qualifiedNameConverter.toQualifiedName(typeRefString));
-					if(candidate == null){
-						Severity severity = getIssueSeverities(getContext(), getCurrentObject()).getSeverity(IssueCodes.JAVA_DOC_LINKING_DIAGNOSTIC);
-						if (severity != null)
-							getChain().add(createDiagnostic(severity, "javaDoc: " + typeRefString + " cannot be resolved to a type", member, region.getOffset(), region.getLength(), IssueCodes.JAVA_DOC_LINKING_DIAGNOSTIC));
-					}
+					if(candidate == null)
+						addIssue(member, IssueCodes.JAVA_DOC_LINKING_DIAGNOSTIC,  "javaDoc: " + typeRefString + " cannot be resolved to a type", region.getOffset(), region.getLength());
 				}
 			}
 		}
