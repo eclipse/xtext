@@ -638,7 +638,7 @@ public class XtendUIValidationTests extends AbstractXtendUITestCase {
     javaProject.setOption(JavaCore.COMPILER_PB_INVALID_JAVADOC, otherSeverity);
     this.helper.assertWarning(member, Literals.XTEND_FUNCTION, IssueCodes.JAVA_DOC_LINKING_DIAGNOSTIC, "javaDoc", "List", "cannot be resolved to a type");
   }
-
+  
   public IPersistentPreferenceStore getXtendPreferencesStore() {
     IProject _project = this.testHelper.getProject();
     IPreferenceStore _writablePreferenceStore = this.prefStoreAccess.getWritablePreferenceStore(_project);

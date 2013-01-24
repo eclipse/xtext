@@ -5229,7 +5229,7 @@ public abstract class AbstractXtendCompilerTest extends AbstractXtendTestCase {
       _builder.append("package foo");
       _builder.newLine();
       _builder.newLine();
-      _builder.append("class bar { ");
+      _builder.append("class bar {");
       _builder.newLine();
       _builder.append("    ");
       _builder.append("String name = \'foobar\'");
@@ -5237,7 +5237,7 @@ public abstract class AbstractXtendCompilerTest extends AbstractXtendTestCase {
       _builder.append("}");
       _builder.newLine();
       _builder.newLine();
-      _builder.append("class baz { ");
+      _builder.append("class baz {");
       _builder.newLine();
       _builder.append("    ");
       _builder.append("String name = \'foobaz\'");
@@ -5845,7 +5845,7 @@ public abstract class AbstractXtendCompilerTest extends AbstractXtendTestCase {
     _builder_1.newLine();
     this.assertCompilesTo(_builder, _builder_1);
   }
-
+  
   @Test
   public void compileImportForTypeRefInJavaDoc_Same_Package() {
     StringConcatenation _builder = new StringConcatenation();
@@ -5889,7 +5889,7 @@ public abstract class AbstractXtendCompilerTest extends AbstractXtendTestCase {
     _builder_1.newLine();
     this.assertCompilesTo(_builder, _builder_1);
   }
-
+  
   @Test
   @Ignore
   public void compileProperty() {
