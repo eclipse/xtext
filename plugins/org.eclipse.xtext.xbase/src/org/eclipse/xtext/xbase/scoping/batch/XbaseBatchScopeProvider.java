@@ -32,7 +32,7 @@ public class XbaseBatchScopeProvider extends DelegatingScopeProvider implements 
 	private ImplicitlyImportedTypes implicitlyImportedTypes;
 	
 	@Inject
-	private FeatureScopes featureScopeProvider;
+	private FeatureScopes featureScopes;
 	
 	@Override
 	public IScope getScope(EObject context, EReference reference) {
@@ -59,7 +59,11 @@ public class XbaseBatchScopeProvider extends DelegatingScopeProvider implements 
 	}
 
 	public boolean isFeatureCallScope(EReference reference) {
-		return featureScopeProvider.isFeatureCallScope(reference);
+		return featureScopes.isFeatureCallScope(reference);
+	}
+	
+	protected FeatureScopes getFeatureScopes() {
+		return featureScopes;
 	}
 
 	public boolean isBatchScopeable(EReference reference) {

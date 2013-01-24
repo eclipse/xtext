@@ -25,6 +25,7 @@ import org.eclipse.xtext.serializer.acceptor.SequenceFeeder;
 import org.eclipse.xtext.serializer.diagnostic.SerializationDiagnostic;
 import org.eclipse.xtext.serializer.sequencer.ISemanticNodeProvider.INodesForEObjectProvider;
 import org.eclipse.xtext.serializer.tokens.IValueSerializer;
+import org.eclipse.xtext.serializer.tokens.SerializerScopeProviderBinding;
 import org.eclipse.xtext.xbase.XAssignment;
 import org.eclipse.xtext.xbase.XBinaryOperation;
 import org.eclipse.xtext.xbase.XClosure;
@@ -61,6 +62,7 @@ public class XbaseSemanticSequencer extends AbstractXbaseSemanticSequencer {
 	private IQualifiedNameConverter qualifiedNameConverter;
 
 	@Inject
+	@SerializerScopeProviderBinding
 	private IScopeProvider scopeProvider;
 	
 	@Inject
