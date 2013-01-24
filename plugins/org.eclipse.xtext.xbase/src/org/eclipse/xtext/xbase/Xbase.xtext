@@ -15,7 +15,7 @@ XExpression returns XExpression :
 	XAssignment;
 
 XAssignment returns XExpression :
-	{XAssignment} /* (declaringType=[types::JvmDeclaredType] '::')? */ feature=[types::JvmIdentifiableElement|ValidID] OpSingleAssign value=XAssignment |	
+	{XAssignment} /* (declaringType=[types::JvmDeclaredType] '::')? */ feature=[types::JvmIdentifiableElement|FeatureCallID] OpSingleAssign value=XAssignment |	
 	XOrExpression (
 		=>({XBinaryOperation.leftOperand=current} feature=[types::JvmIdentifiableElement|OpMultiAssign]) rightOperand=XAssignment
 	)?;
@@ -94,10 +94,10 @@ XCastedExpression returns XExpression:
 
 XMemberFeatureCall returns XExpression:
 	XPrimaryExpression
-	(=>({XAssignment.assignable=current} '.' feature=[types::JvmIdentifiableElement|ValidID] OpSingleAssign) value=XAssignment
+	(=>({XAssignment.assignable=current} '.' feature=[types::JvmIdentifiableElement|FeatureCallID] OpSingleAssign) value=XAssignment
 	|=>({XMemberFeatureCall.memberCallTarget=current} ("."|nullSafe?="?."|spreading?="*.")) 
 		('<' typeArguments+=JvmArgumentTypeReference (',' typeArguments+=JvmArgumentTypeReference)* '>')?  
-		feature=[types::JvmIdentifiableElement|ValidID] (
+		feature=[types::JvmIdentifiableElement|FeatureCallID] (
 			=>explicitOperationCall?='(' 
 				(
 				    memberCallArguments+=XShortClosure
@@ -215,8 +215,12 @@ XFeatureCall returns XExpression:
 	')')?
 	featureCallArguments+=XClosure?;
 	
+FeatureCallID:
+	ValidID | 'extends' | 'static' | 'import' | 'extension'
+;
+
 IdOrSuper :
-	ValidID | 'super'
+	FeatureCallID | 'super'
 ;
 	
 // This is a workaround since ANTLR will not be able to resolve
