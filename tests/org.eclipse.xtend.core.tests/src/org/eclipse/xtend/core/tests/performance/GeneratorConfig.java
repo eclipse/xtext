@@ -5,7 +5,7 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtend.ide.tests.performance;
+package org.eclipse.xtend.core.tests.performance;
 
 import static com.google.common.collect.Lists.*;
 
