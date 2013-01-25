@@ -715,19 +715,9 @@ public class XtendPackageImpl extends EPackageImpl implements XtendPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getXtendConstructor_Name()
-	{
-		return (EAttribute)xtendConstructorEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EReference getXtendConstructor_Expression()
 	{
-		return (EReference)xtendConstructorEClass.getEStructuralFeatures().get(1);
+		return (EReference)xtendConstructorEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -737,7 +727,7 @@ public class XtendPackageImpl extends EPackageImpl implements XtendPackage
 	 */
 	public EReference getXtendConstructor_Parameters()
 	{
-		return (EReference)xtendConstructorEClass.getEStructuralFeatures().get(2);
+		return (EReference)xtendConstructorEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -747,7 +737,7 @@ public class XtendPackageImpl extends EPackageImpl implements XtendPackage
 	 */
 	public EReference getXtendConstructor_TypeParameters()
 	{
-		return (EReference)xtendConstructorEClass.getEStructuralFeatures().get(3);
+		return (EReference)xtendConstructorEClass.getEStructuralFeatures().get(2);
 	}
 
 	/**
@@ -757,7 +747,7 @@ public class XtendPackageImpl extends EPackageImpl implements XtendPackage
 	 */
 	public EReference getXtendConstructor_Exceptions()
 	{
-		return (EReference)xtendConstructorEClass.getEStructuralFeatures().get(4);
+		return (EReference)xtendConstructorEClass.getEStructuralFeatures().get(3);
 	}
 
 	/**
@@ -891,7 +881,6 @@ public class XtendPackageImpl extends EPackageImpl implements XtendPackage
 		createEAttribute(createExtensionInfoEClass, CREATE_EXTENSION_INFO__NAME);
 
 		xtendConstructorEClass = createEClass(XTEND_CONSTRUCTOR);
-		createEAttribute(xtendConstructorEClass, XTEND_CONSTRUCTOR__NAME);
 		createEReference(xtendConstructorEClass, XTEND_CONSTRUCTOR__EXPRESSION);
 		createEReference(xtendConstructorEClass, XTEND_CONSTRUCTOR__PARAMETERS);
 		createEReference(xtendConstructorEClass, XTEND_CONSTRUCTOR__TYPE_PARAMETERS);
@@ -1032,7 +1021,6 @@ public class XtendPackageImpl extends EPackageImpl implements XtendPackage
 		initEAttribute(getCreateExtensionInfo_Name(), ecorePackage.getEString(), "name", "it", 0, 1, CreateExtensionInfo.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(xtendConstructorEClass, XtendConstructor.class, "XtendConstructor", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getXtendConstructor_Name(), ecorePackage.getEString(), "name", null, 0, 1, XtendConstructor.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getXtendConstructor_Expression(), theXbasePackage.getXExpression(), null, "expression", null, 0, 1, XtendConstructor.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getXtendConstructor_Parameters(), this.getXtendParameter(), null, "parameters", null, 0, -1, XtendConstructor.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getXtendConstructor_TypeParameters(), theTypesPackage.getJvmTypeParameter(), null, "typeParameters", null, 0, -1, XtendConstructor.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

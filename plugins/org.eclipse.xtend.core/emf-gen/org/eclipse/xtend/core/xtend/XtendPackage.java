@@ -863,22 +863,13 @@ public interface XtendPackage extends EPackage
 	int XTEND_CONSTRUCTOR__MODIFIERS = XTEND_MEMBER__MODIFIERS;
 
 	/**
-	 * The feature id for the '<em><b>Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int XTEND_CONSTRUCTOR__NAME = XTEND_MEMBER_FEATURE_COUNT + 0;
-
-	/**
 	 * The feature id for the '<em><b>Expression</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int XTEND_CONSTRUCTOR__EXPRESSION = XTEND_MEMBER_FEATURE_COUNT + 1;
+	int XTEND_CONSTRUCTOR__EXPRESSION = XTEND_MEMBER_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Parameters</b></em>' containment reference list.
@@ -887,7 +878,7 @@ public interface XtendPackage extends EPackage
 	 * @generated
 	 * @ordered
 	 */
-	int XTEND_CONSTRUCTOR__PARAMETERS = XTEND_MEMBER_FEATURE_COUNT + 2;
+	int XTEND_CONSTRUCTOR__PARAMETERS = XTEND_MEMBER_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>Type Parameters</b></em>' containment reference list.
@@ -896,7 +887,7 @@ public interface XtendPackage extends EPackage
 	 * @generated
 	 * @ordered
 	 */
-	int XTEND_CONSTRUCTOR__TYPE_PARAMETERS = XTEND_MEMBER_FEATURE_COUNT + 3;
+	int XTEND_CONSTRUCTOR__TYPE_PARAMETERS = XTEND_MEMBER_FEATURE_COUNT + 2;
 
 	/**
 	 * The feature id for the '<em><b>Exceptions</b></em>' containment reference list.
@@ -905,7 +896,7 @@ public interface XtendPackage extends EPackage
 	 * @generated
 	 * @ordered
 	 */
-	int XTEND_CONSTRUCTOR__EXCEPTIONS = XTEND_MEMBER_FEATURE_COUNT + 4;
+	int XTEND_CONSTRUCTOR__EXCEPTIONS = XTEND_MEMBER_FEATURE_COUNT + 3;
 
 	/**
 	 * The number of structural features of the '<em>Constructor</em>' class.
@@ -914,7 +905,7 @@ public interface XtendPackage extends EPackage
 	 * @generated
 	 * @ordered
 	 */
-	int XTEND_CONSTRUCTOR_FEATURE_COUNT = XTEND_MEMBER_FEATURE_COUNT + 5;
+	int XTEND_CONSTRUCTOR_FEATURE_COUNT = XTEND_MEMBER_FEATURE_COUNT + 4;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.xtend.core.xtend.impl.XtendAnnotationTypeImpl <em>Annotation Type</em>}' class.
@@ -1496,17 +1487,6 @@ public interface XtendPackage extends EPackage
 	EClass getXtendConstructor();
 
 	/**
-	 * Returns the meta object for the attribute '{@link org.eclipse.xtend.core.xtend.XtendConstructor#getName <em>Name</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Name</em>'.
-	 * @see org.eclipse.xtend.core.xtend.XtendConstructor#getName()
-	 * @see #getXtendConstructor()
-	 * @generated
-	 */
-	EAttribute getXtendConstructor_Name();
-
-	/**
 	 * Returns the meta object for the containment reference '{@link org.eclipse.xtend.core.xtend.XtendConstructor#getExpression <em>Expression</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2026,14 +2006,6 @@ public interface XtendPackage extends EPackage
 		 * @generated
 		 */
 		EClass XTEND_CONSTRUCTOR = eINSTANCE.getXtendConstructor();
-
-		/**
-		 * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute XTEND_CONSTRUCTOR__NAME = eINSTANCE.getXtendConstructor_Name();
 
 		/**
 		 * The meta object literal for the '<em><b>Expression</b></em>' containment reference feature.

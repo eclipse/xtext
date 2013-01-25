@@ -39,7 +39,6 @@ import org.eclipse.xtext.xbase.XExpression;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.eclipse.xtend.core.xtend.impl.XtendConstructorImpl#getName <em>Name</em>}</li>
  *   <li>{@link org.eclipse.xtend.core.xtend.impl.XtendConstructorImpl#getExpression <em>Expression</em>}</li>
  *   <li>{@link org.eclipse.xtend.core.xtend.impl.XtendConstructorImpl#getParameters <em>Parameters</em>}</li>
  *   <li>{@link org.eclipse.xtend.core.xtend.impl.XtendConstructorImpl#getTypeParameters <em>Type Parameters</em>}</li>
@@ -51,26 +50,6 @@ import org.eclipse.xtext.xbase.XExpression;
  */
 public class XtendConstructorImpl extends XtendMemberImplCustom implements XtendConstructor
 {
-	/**
-	 * The default value of the '{@link #getName() <em>Name</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getName()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final String NAME_EDEFAULT = null;
-
-	/**
-	 * The cached value of the '{@link #getName() <em>Name</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getName()
-	 * @generated
-	 * @ordered
-	 */
-	protected String name = NAME_EDEFAULT;
-
 	/**
 	 * The cached value of the '{@link #getExpression() <em>Expression</em>}' containment reference.
 	 * <!-- begin-user-doc -->
@@ -130,29 +109,6 @@ public class XtendConstructorImpl extends XtendMemberImplCustom implements Xtend
 	protected EClass eStaticClass()
 	{
 		return XtendPackage.Literals.XTEND_CONSTRUCTOR;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public String getName()
-	{
-		return name;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setName(String newName)
-	{
-		String oldName = name;
-		name = newName;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, XtendPackage.XTEND_CONSTRUCTOR__NAME, oldName, name));
 	}
 
 	/**
@@ -277,8 +233,6 @@ public class XtendConstructorImpl extends XtendMemberImplCustom implements Xtend
 	{
 		switch (featureID)
 		{
-			case XtendPackage.XTEND_CONSTRUCTOR__NAME:
-				return getName();
 			case XtendPackage.XTEND_CONSTRUCTOR__EXPRESSION:
 				return getExpression();
 			case XtendPackage.XTEND_CONSTRUCTOR__PARAMETERS:
@@ -302,9 +256,6 @@ public class XtendConstructorImpl extends XtendMemberImplCustom implements Xtend
 	{
 		switch (featureID)
 		{
-			case XtendPackage.XTEND_CONSTRUCTOR__NAME:
-				setName((String)newValue);
-				return;
 			case XtendPackage.XTEND_CONSTRUCTOR__EXPRESSION:
 				setExpression((XExpression)newValue);
 				return;
@@ -334,9 +285,6 @@ public class XtendConstructorImpl extends XtendMemberImplCustom implements Xtend
 	{
 		switch (featureID)
 		{
-			case XtendPackage.XTEND_CONSTRUCTOR__NAME:
-				setName(NAME_EDEFAULT);
-				return;
 			case XtendPackage.XTEND_CONSTRUCTOR__EXPRESSION:
 				setExpression((XExpression)null);
 				return;
@@ -363,8 +311,6 @@ public class XtendConstructorImpl extends XtendMemberImplCustom implements Xtend
 	{
 		switch (featureID)
 		{
-			case XtendPackage.XTEND_CONSTRUCTOR__NAME:
-				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
 			case XtendPackage.XTEND_CONSTRUCTOR__EXPRESSION:
 				return expression != null;
 			case XtendPackage.XTEND_CONSTRUCTOR__PARAMETERS:
@@ -375,23 +321,6 @@ public class XtendConstructorImpl extends XtendMemberImplCustom implements Xtend
 				return exceptions != null && !exceptions.isEmpty();
 		}
 		return super.eIsSet(featureID);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public String toString()
-	{
-		if (eIsProxy()) return super.toString();
-
-		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (name: ");
-		result.append(name);
-		result.append(')');
-		return result.toString();
 	}
 
 } //XtendConstructorImpl
