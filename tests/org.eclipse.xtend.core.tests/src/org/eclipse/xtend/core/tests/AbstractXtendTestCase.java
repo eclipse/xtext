@@ -15,8 +15,10 @@ import java.util.regex.Pattern;
 
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.xtend.core.xtend.XtendAnnotationType;
 import org.eclipse.xtend.core.xtend.XtendClass;
 import org.eclipse.xtend.core.xtend.XtendConstructor;
+import org.eclipse.xtend.core.xtend.XtendField;
 import org.eclipse.xtend.core.xtend.XtendFile;
 import org.eclipse.xtend.core.xtend.XtendFunction;
 import org.eclipse.xtext.diagnostics.Severity;
@@ -111,6 +113,10 @@ public abstract class AbstractXtendTestCase extends Assert {
 			return pathName + classMatcher.group(1);
 		return "Sample";
 	}
+	
+	protected XtendAnnotationType annotationType(String string) throws Exception {
+		return (XtendAnnotationType) file(string).getXtendTypes().get(0);
+	}
 
 	protected XtendFunction function(String string) throws Exception {
 		XtendClass clazz = clazz("class Foo { " + string + "}");
@@ -120,6 +126,11 @@ public abstract class AbstractXtendTestCase extends Assert {
 	protected XtendConstructor constructor(String string) throws Exception {
 		XtendClass clazz = clazz("class Foo { " + string + "}");
 		return (XtendConstructor) clazz.getMembers().get(0);
+	}
+
+	protected XtendField field(String string) throws Exception {
+		XtendClass clazz = clazz("class Foo { " + string + "}");
+		return (XtendField) clazz.getMembers().get(0);
 	}
 
 }

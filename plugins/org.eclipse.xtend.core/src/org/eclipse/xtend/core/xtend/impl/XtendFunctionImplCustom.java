@@ -16,8 +16,8 @@ public class XtendFunctionImplCustom extends XtendFunctionImpl {
 	
 	@Override
 	public boolean isDispatch() {
-		for(String modifier: getModifiers()) { 
-			if(equal(modifier, "dispatch")) 
+		for (String modifier: getModifiers()) { 
+			if (equal(modifier, "dispatch")) 
 				return true;
 		}
 		return false;
@@ -25,8 +25,8 @@ public class XtendFunctionImplCustom extends XtendFunctionImpl {
 	
 	@Override
 	public boolean isOverride() {
-		for(String modifier: getModifiers()) { 
-			if(equal(modifier, "override")) 
+		for (String modifier: getModifiers()) { 
+			if (equal(modifier, "override")) 
 				return true;
 		}
 		return false;
@@ -34,13 +34,7 @@ public class XtendFunctionImplCustom extends XtendFunctionImpl {
 	
 	@Override
 	public boolean isAbstract() {
-		for(String modifier: getModifiers()) { 
-			if(equal(modifier, "abstract")) 
-				return true;
-			if(equal(modifier, "final")) 
-				return false;
-		}
-		return false;
+		return getExpression() == null;
 	}
 
 }
