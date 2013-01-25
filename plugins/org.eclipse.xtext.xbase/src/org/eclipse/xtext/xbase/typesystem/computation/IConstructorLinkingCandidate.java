@@ -12,8 +12,12 @@ import org.eclipse.xtext.common.types.JvmConstructor;
 import org.eclipse.xtext.xbase.XConstructorCall;
 
 /**
+ * A constructor linking candidate represents an actual or a possible
+ * value of a {@link XConstructorCall#getConstructor() constructor call}.
+ * 
+ * It's a typesafe specialization of the {@link ILinkingCandidate}
+ * 
  * @author Sebastian Zarnekow - Initial contribution and API
- * TODO JavaDoc, toString
  */
 @NonNullByDefault
 public interface IConstructorLinkingCandidate extends ILinkingCandidate {

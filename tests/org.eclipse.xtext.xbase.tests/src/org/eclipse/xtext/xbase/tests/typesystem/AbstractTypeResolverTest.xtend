@@ -1141,7 +1141,7 @@ abstract class AbstractTypeResolverTest<Reference> extends AbstractXbaseTestCase
         "{ val x = if (true) null else null x }".resolvesTo("null")
     }
     
-    @Test def void testIfExpression_2() throws Exception {
+    @Test def void testIfExpression_22() throws Exception {
 		"{ val x = if (true) return 1 else 0 x }".resolvesTo("int")
 	}
 	
@@ -1163,6 +1163,10 @@ abstract class AbstractTypeResolverTest<Reference> extends AbstractXbaseTestCase
 	
 	@Test def void testIfExpression_27() throws Exception {
 		"if (true) while(false) ('foo'+'bar').length".resolvesTo("null")
+	}
+	
+	@Test def void testIfExpression_28() throws Exception {
+		"if (true) return '' else 1".resolvesTo("int")
 	}
 	
 	@Test def void testSwitchExpression() throws Exception {

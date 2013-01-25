@@ -79,6 +79,10 @@ abstract class AbstractReturnTypeTest<Reference> extends AbstractTypeResolverTes
 		"if (true) return 1".resolvesTo("Integer")
 	}
 	
+	@Test override void testIfExpression_28() throws Exception {
+		"if (true) return '' else 1".resolvesTo("Comparable<?> & Serializable")
+	}
+	
 	@Test override testSwitchExpression_1() throws Exception {
 		"switch true { case true : return 's' default: null}".resolvesTo("String")
 	}

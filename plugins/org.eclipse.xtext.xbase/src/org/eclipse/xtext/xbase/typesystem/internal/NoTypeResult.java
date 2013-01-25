@@ -52,7 +52,11 @@ public class NoTypeResult implements ITypeComputationResult {
 	public LightweightTypeReference getExpectedExpressionType() {
 		throw new UnsupportedOperationException("TODO implement me");
 	}
-
+	
+	public LightweightTypeReference getExpectedReturnType() {
+		throw new UnsupportedOperationException("TODO implement me");
+	}
+	
 	public EnumSet<ConformanceHint> getConformanceHints() {
 		return EnumSet.noneOf(ConformanceHint.class);
 	}
