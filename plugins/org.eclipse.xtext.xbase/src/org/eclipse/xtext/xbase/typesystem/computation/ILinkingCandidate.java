@@ -35,7 +35,6 @@ import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
  * @see AbstractResolvedReference
  * 
  * @author Sebastian Zarnekow - Initial contribution and API
- * TODO JavaDoc, toString
  */
 @NonNullByDefault
 public interface ILinkingCandidate {
@@ -60,10 +59,23 @@ public interface ILinkingCandidate {
 	 */
 	boolean validate(IAcceptor<? super AbstractDiagnostic> result);
 	
+	/**
+	 * Produces the best candidate for the current two candidates. It may turn out
+	 * that both candidates (<code>this</code> and <code>other</code>) are ambiguous 
+	 * so no prefered candidate can be chosen. In that case, a new linking candidate
+	 * may be produced that carries this information and will use that on {@link #apply()},
+	 * {@link #resolveLinkingProxy()}, and {@link #validate(IAcceptor)}.
+	 */
 	ILinkingCandidate getPreferredCandidate(ILinkingCandidate other);
 	
+	/**
+	 * The currently considered feature (if any). Otherwise <code>null</code>.
+	 */
 	@Nullable JvmIdentifiableElement getFeature();
 	
+	/**
+	 * The resolved type arguments.
+	 */
 	List<LightweightTypeReference> getTypeArguments();
 
 }

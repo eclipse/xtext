@@ -11,6 +11,7 @@ import java.util.EnumSet;
 
 import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.xtext.xbase.XExpression;
+import org.eclipse.xtext.xbase.XIfExpression;
 import org.eclipse.xtext.xbase.typesystem.conformance.ConformanceHint;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 
@@ -21,19 +22,64 @@ import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
  * when {@link #getActualExpressionType()} or other properties are
  * queried.
  * 
+ * A type computation result distinguishes between return types and actual
+ * types for expressions.
+ * 
+ * Consider the following scenario:
+ * <pre>
+ *   val x = if (guard) return 'dummy' else 1
+ * <pre>
+ * 
+ * The return type of the {@link XIfExpression if expression} is the 
+ * type <code>Comparable&lt;?&gt; & Serializable</code> while the actual type
+ * of the conditional expression is type <code>int</code>. The first branch 
+ * of the condition will never complete normally thus its type is not 
+ * considered for the local expression type computation.
+ * 
  * @author Sebastian Zarnekow - Initial contribution and API
  */
 @NonNullByDefault(false)
 public interface ITypeComputationResult {
 
+	/**
+	 * Returns the type of the expression (if known).
+	 * May return <code>null</code>.
+	 */
 	LightweightTypeReference getActualExpressionType();
-	
-	LightweightTypeReference getReturnType();
-	
+
+	/**
+	 * Returns the type of the expectation (if any).
+	 * 
+	 * TODO expose the {@link ITypeExpectation} instead which carries more information.
+	 */
 	LightweightTypeReference getExpectedExpressionType();
 	
+	/**
+	 * Returns the return type of the expression (if known).
+	 * May return <code>null</code>. The return type is different 
+	 * from the {@link #getActualExpressionType() actual type} since
+	 * its value escapes the current context.
+	 */
+	LightweightTypeReference getReturnType();
+	
+	/**
+	 * Returns the type of the return expectation (if any).
+	 * 
+	 * TODO expose the {@link ITypeExpectation} instead which carries more information.
+	 */
+	LightweightTypeReference getExpectedReturnType();
+	
+	/**
+	 * The expression that is associated with this result.
+	 */
 	XExpression getExpression();
 	
+	/**
+	 * Conformance information about the actual expression type and
+	 * the expectation.
+	 */
 	EnumSet<ConformanceHint> getConformanceHints();
+	
+//	EnumSet<ConformanceHint> getReturnTypeConformanceHints();
 	
 }

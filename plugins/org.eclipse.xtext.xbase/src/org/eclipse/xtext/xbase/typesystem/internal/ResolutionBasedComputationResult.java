@@ -41,7 +41,11 @@ public class ResolutionBasedComputationResult implements ITypeComputationResult 
 	}
 
 	public LightweightTypeReference getExpectedExpressionType() {
-		return resolution.getActualType(expression);
+		return resolution.getExpectedType(expression);
+	}
+	
+	public LightweightTypeReference getExpectedReturnType() {
+		return resolution.getExpectedReturnType(expression);
 	}
 	
 	public EnumSet<ConformanceHint> getConformanceHints() {
