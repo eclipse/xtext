@@ -1320,4 +1320,54 @@ public class XtendJavaValidator extends XbaseWithAnnotationsJavaValidator {
 		return false;
 	}
 	
+	private ModifierValidator classModifierValidator = new ModifierValidator(
+			newHashSet("public", "static", "final", "abstract"), this);
+		
+	private ModifierValidator fieldModifierValidator = new ModifierValidator(
+			newHashSet("public", "protected", "package", "private", "static", "final", "val", "var", "extension"), this);
+		
+	private ModifierValidator constructorModifierValidator = new ModifierValidator(
+			visibilityModifers, this);
+		
+	private ModifierValidator methodModifierValidator = new ModifierValidator(
+			newHashSet("public", "protected", "package", "private", "static", "abstract", "dispatch", "final", "def", "override"), this);
+		
+	private ModifierValidator annotationTypeModifierValidator = new ModifierValidator(
+			newHashSet("public", "abstract"), this);
+		
+	@Check
+	protected void checkModifiers(XtendClass xtendClass) {
+		classModifierValidator.checkModifiers(xtendClass, "class " + xtendClass.getName());
+	}
+	
+	@Check
+	protected void checkModifiers(XtendField field) {
+		fieldModifierValidator.checkModifiers(field, "field " + field.getName());
+	}
+	
+	@Check
+	protected void checkModifiers(XtendConstructor constructor) {
+		String typeName = ((XtendTypeDeclaration) constructor.eContainer()).getName();
+		constructorModifierValidator.checkModifiers(constructor, "type " + typeName);
+	}
+
+	@Check
+	protected void checkModifiers(XtendFunction method) {
+		methodModifierValidator.checkModifiers(method, "method " + method.getName());
+		int abstractIndex = method.getModifiers().indexOf("abstract");
+		if (method.getExpression() != null) {
+			if (abstractIndex != -1) 
+				error("Method " + method.getName() + " with a body cannot be abstract", XTEND_MEMBER__MODIFIERS, abstractIndex, INVALID_MODIFIER);
+		} else {
+			int finalIndex = method.getModifiers().indexOf("final");
+			if(finalIndex != -1) 
+				error("Abstract method " + method.getName() + " cannot be final", XTEND_MEMBER__MODIFIERS, finalIndex, INVALID_MODIFIER);
+		}
+	}
+
+	@Check
+	protected void checkModifiers(XtendAnnotationType annotation) {
+		annotationTypeModifierValidator.checkModifiers(annotation, "annotation type " + annotation.getName());
+	}
+
 }
