@@ -106,7 +106,7 @@ public class TypeSignatureHashTest extends AbstractXbaseTestCase {
       JvmType _findDeclaredType = this._typeReferences.findDeclaredType(String.class, e);
       String _hash = this._jvmDeclaredTypeSignatureHashProvider.getHash(((JvmDeclaredType) _findDeclaredType));
       Assert.assertEquals("java.lang.String", _hash);
-    } catch (Exception _e) {
+    } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
   }

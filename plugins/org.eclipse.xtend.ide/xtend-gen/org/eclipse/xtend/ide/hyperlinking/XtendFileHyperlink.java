@@ -91,7 +91,7 @@ public class XtendFileHyperlink implements IHyperlink {
           throw Exceptions.sneakyThrow(_t);
         }
       }
-    } catch (Exception _e) {
+    } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
   }

@@ -100,7 +100,7 @@ public class AnnotationProcessor {
       String _message = e.getMessage();
       String _plus_2 = (_plus_1 + _message);
       AnnotationProcessor.logger.error(_plus_2, e);
-    } catch (Exception _e) {
+    } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
   }

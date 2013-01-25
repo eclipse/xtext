@@ -211,7 +211,7 @@ public class RecomputingReentrantTypeResolver extends DefaultReentrantTypeResolv
       Object _invoke_10 = this._reflectExtensions.invoke(left, "getSyntacticArguments");
       Object _invoke_11 = this._reflectExtensions.invoke(right, "getSyntacticArguments");
       Assert.assertEquals("syntacticArguments", _invoke_10, _invoke_11);
-    } catch (Exception _e) {
+    } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
   }
@@ -236,7 +236,7 @@ public class RecomputingReentrantTypeResolver extends DefaultReentrantTypeResolv
       Map<JvmTypeParameter,LightweightMergedBoundTypeArgument> _invokeAndCast_4 = this.<Map<JvmTypeParameter,LightweightMergedBoundTypeArgument>>invokeAndCast(left, "getDeclaratorParameterMapping");
       Map<JvmTypeParameter,LightweightMergedBoundTypeArgument> _invokeAndCast_5 = this.<Map<JvmTypeParameter,LightweightMergedBoundTypeArgument>>invokeAndCast(right, "getDeclaratorParameterMapping");
       this.assertEqualMapping("declaratorParameterMapping", _invokeAndCast_4, _invokeAndCast_5);
-    } catch (Exception _e) {
+    } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
   }
@@ -326,7 +326,7 @@ public class RecomputingReentrantTypeResolver extends DefaultReentrantTypeResolv
     try {
       Object _invoke = this._reflectExtensions.invoke(receiver, getter);
       return ((T) _invoke);
-    } catch (Exception _e) {
+    } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
   }

@@ -185,7 +185,7 @@ public abstract class AbstractBatchTypeResolverTest extends AbstractTypeResolver
       boolean _isEmpty_3 = _warnings_3.isEmpty();
       Assert.assertTrue(_string_3, _isEmpty_3);
       return resolvedType;
-    } catch (Exception _e) {
+    } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
   }

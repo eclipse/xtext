@@ -142,7 +142,7 @@ public class CodeBuilderQuickfix {
             int _plus = (offset + 1);
             int _length = appendable.length();
             xtextEditor.setHighlightRange(_plus, _length, true);
-          } catch (Exception _e) {
+          } catch (Throwable _e) {
             throw Exceptions.sneakyThrow(_e);
           }
         }
@@ -172,7 +172,7 @@ public class CodeBuilderQuickfix {
                     ICompilationUnit _compilationUnit = type.getCompilationUnit();
                     NullProgressMonitor _nullProgressMonitor = new NullProgressMonitor();
                     _compilationUnit.createImport(it, null, _nullProgressMonitor);
-                  } catch (Exception _e) {
+                  } catch (Throwable _e) {
                     throw Exceptions.sneakyThrow(_e);
                   }
                 }
@@ -225,7 +225,7 @@ public class CodeBuilderQuickfix {
                 };
               ObjectExtensions.<JdtHyperlink>operator_doubleArrow(_jdtHyperlink, _function_1);
             }
-          } catch (Exception _e) {
+          } catch (Throwable _e) {
             throw Exceptions.sneakyThrow(_e);
           }
         }

@@ -68,7 +68,7 @@ public class ResolvedOperationTest extends AbstractXbaseTestCase {
       Assert.assertFalse(_eIsProxy);
       BottomResolvedOperation _bottomResolvedOperation = new BottomResolvedOperation(operation, receiverType, this.overrideTester);
       return _bottomResolvedOperation;
-    } catch (Exception _e) {
+    } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
   }

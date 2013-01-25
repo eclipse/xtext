@@ -85,7 +85,7 @@ public class StringLiteralTest extends AbstractXbaseTestCase {
           }
         };
       return IterableExtensions.<XStringLiteral, Integer>sortBy(featureCalls, _function);
-    } catch (Exception _e) {
+    } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
   }

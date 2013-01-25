@@ -41,7 +41,7 @@ public abstract class TypeResolverPerformanceTest extends BatchTypeResolverTest 
       String _simpleName = lightweight.getSimpleName();
       Assert.assertEquals(type, _simpleName);
       return lightweight;
-    } catch (Exception _e) {
+    } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
   }

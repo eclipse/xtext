@@ -96,7 +96,7 @@ public class OldAPITypeResolverTest extends AbstractTypeResolverTest<JvmTypeRefe
       boolean _isEmpty_3 = _warnings_1.isEmpty();
       Assert.assertTrue(_isEmpty_3);
       return resolvedType;
-    } catch (Exception _e) {
+    } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
   }

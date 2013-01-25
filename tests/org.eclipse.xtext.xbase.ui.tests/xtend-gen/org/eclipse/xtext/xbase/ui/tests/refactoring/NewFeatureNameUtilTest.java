@@ -153,7 +153,7 @@ public class NewFeatureNameUtilTest {
         _xblockexpression = (expression);
       }
       return _xblockexpression;
-    } catch (Exception _e) {
+    } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
   }

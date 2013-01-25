@@ -84,7 +84,7 @@ public class Bug350007Test extends AbstractXbaseContentAssistBugTest {
       String _string = proposalStrings.toString();
       boolean _contains = proposalStrings.contains("java.util.ArrayList");
       Assert.assertTrue(_string, _contains);
-    } catch (Exception _e) {
+    } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
   }

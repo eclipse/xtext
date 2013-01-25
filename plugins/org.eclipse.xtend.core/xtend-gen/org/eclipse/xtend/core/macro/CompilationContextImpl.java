@@ -43,7 +43,7 @@ public class CompilationContextImpl implements CompilationContext {
     try {
       Object _get = this.reflectExtensions.<Object>get(appendable, "state");
       return _get==null?(ImportManager)null:this.reflectExtensions.<ImportManager>get(_get, "importManager");
-    } catch (Exception _e) {
+    } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
   }

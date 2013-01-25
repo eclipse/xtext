@@ -62,7 +62,7 @@ public class JdtBasedProcessorProvider extends ProcessorInstanceForJvmTypeProvid
       final Class<? extends Object> result = classLoader.loadClass(_identifier);
       try {
         return result.newInstance();
-      } catch (Exception _e) {
+      } catch (Throwable _e) {
         throw Exceptions.sneakyThrow(_e);
       }
     } catch (final Throwable _t) {
@@ -128,7 +128,7 @@ public class JdtBasedProcessorProvider extends ProcessorInstanceForJvmTypeProvid
       ClassLoader _classLoader = _class.getClassLoader();
       URLClassLoader _uRLClassLoader = new URLClassLoader(((URL[])Conversions.unwrapArray(urls, URL.class)), _classLoader);
       return _uRLClassLoader;
-    } catch (Exception _e) {
+    } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
   }
@@ -168,7 +168,7 @@ public class JdtBasedProcessorProvider extends ProcessorInstanceForJvmTypeProvid
         }
       }
       return result;
-    } catch (Exception _e) {
+    } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
   }

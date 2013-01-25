@@ -108,7 +108,7 @@ public abstract class AbstractOrderSensitivityTest extends AbstractXbaseTestCase
       String _string = _builder_1.toString();
       String _identifier = feature.getIdentifier();
       Assert.assertEquals(_string, _identifier);
-    } catch (Exception _e) {
+    } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
   }
@@ -137,7 +137,7 @@ public abstract class AbstractOrderSensitivityTest extends AbstractXbaseTestCase
       String _string = _builder_1.toString();
       String _identifier = feature.getIdentifier();
       Assert.assertEquals(_string, _identifier);
-    } catch (Exception _e) {
+    } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
   }

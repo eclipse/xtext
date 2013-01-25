@@ -86,7 +86,7 @@ public class TypeComputationStateTest extends AbstractXbaseTestCase implements I
       LightweightTypeReference _actualType_1 = resolution.getActualType(((XNullLiteral) _head));
       String _string_3 = _actualType_1.toString();
       Assert.assertEquals(_string_2, _string_3);
-    } catch (Exception _e) {
+    } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
   }
@@ -153,7 +153,7 @@ public class TypeComputationStateTest extends AbstractXbaseTestCase implements I
       Iterable<TypeData> _filter_3 = IterableExtensions.<TypeData>filter(typesForBlock, _function_3);
       int _size_3 = IterableExtensions.size(_filter_3);
       Assert.assertEquals(_string_3, 1, _size_3);
-    } catch (Exception _e) {
+    } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
   }
@@ -193,7 +193,7 @@ public class TypeComputationStateTest extends AbstractXbaseTestCase implements I
           }
         };
       IteratorExtensions.<EObject>forEach(_eAllContents, _function);
-    } catch (Exception _e) {
+    } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
   }
@@ -246,7 +246,7 @@ public class TypeComputationStateTest extends AbstractXbaseTestCase implements I
           }
         };
       IteratorExtensions.<EObject>forEach(_eAllContents, _function);
-    } catch (Exception _e) {
+    } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
   }
@@ -287,7 +287,7 @@ public class TypeComputationStateTest extends AbstractXbaseTestCase implements I
         String _identifier_3 = _actualType_4.getIdentifier();
         Assert.assertEquals(_identifier_2, _identifier_3);
       }
-    } catch (Exception _e) {
+    } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
   }

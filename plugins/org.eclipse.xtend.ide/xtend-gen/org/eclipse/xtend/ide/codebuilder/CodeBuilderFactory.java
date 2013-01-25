@@ -19,7 +19,6 @@ import org.eclipse.xtend.ide.codebuilder.AbstractClassBuilder;
 import org.eclipse.xtend.ide.codebuilder.AbstractConstructorBuilder;
 import org.eclipse.xtend.ide.codebuilder.AbstractFieldBuilder;
 import org.eclipse.xtend.ide.codebuilder.AbstractMethodBuilder;
-import org.eclipse.xtend.ide.codebuilder.ICodeBuilder;
 import org.eclipse.xtend.ide.codebuilder.JavaAnnotationBuilder;
 import org.eclipse.xtend.ide.codebuilder.JavaClassBuilder;
 import org.eclipse.xtend.ide.codebuilder.JavaConstructorBuilder;

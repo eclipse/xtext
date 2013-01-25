@@ -147,7 +147,7 @@ public abstract class AbstractIdentifiableTypeTest extends AbstractXbaseTestCase
           }
         };
       return IterableExtensions.<JvmIdentifiableElement, Integer>sortBy(identifiables, _function_2);
-    } catch (Exception _e) {
+    } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
   }

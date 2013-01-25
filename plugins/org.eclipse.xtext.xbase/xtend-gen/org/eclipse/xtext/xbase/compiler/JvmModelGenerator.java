@@ -1273,7 +1273,7 @@ public class JvmModelGenerator implements IGenerator {
         _xblockexpression = (((ImportManager) _get));
       }
       return _xblockexpression;
-    } catch (Exception _e) {
+    } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
   }

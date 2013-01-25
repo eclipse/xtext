@@ -212,7 +212,7 @@ public abstract class AbstractTypeArgumentTest extends AbstractXbaseTestCase {
           }
         };
       return IterableExtensions.<XExpression, Integer>sortBy(result, _function_1);
-    } catch (Exception _e) {
+    } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
   }

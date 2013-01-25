@@ -28,7 +28,7 @@ public class ProcessorInstanceForJvmTypeProvider {
       final Class<? extends Object> loadClass = _classLoader==null?(Class<? extends Object>)null:_classLoader.loadClass(_identifier);
       try {
         return loadClass==null?(Object)null:loadClass.newInstance();
-      } catch (Exception _e) {
+      } catch (Throwable _e) {
         throw Exceptions.sneakyThrow(_e);
       }
     } catch (final Throwable _t) {

@@ -70,7 +70,7 @@ public abstract class AbstractClosureTypeTest extends AbstractXbaseTestCase {
           }
         };
       return IterableExtensions.<XClosure, Integer>sortBy(Closures, _function);
-    } catch (Exception _e) {
+    } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
   }

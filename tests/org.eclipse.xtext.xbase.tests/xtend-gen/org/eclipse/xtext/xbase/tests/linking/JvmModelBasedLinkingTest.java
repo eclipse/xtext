@@ -67,7 +67,7 @@ public class JvmModelBasedLinkingTest extends AbstractXbaseTestCase {
       JvmGenericType _class = this._jvmTypesBuilder.toClass(expr, "Foo", _function);
       this._jvmTypesBuilder.<JvmGenericType>operator_add(_contents, _class);
       this._validationTestHelper.assertNoErrors(expr);
-    } catch (Exception _e) {
+    } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
   }
@@ -106,7 +106,7 @@ public class JvmModelBasedLinkingTest extends AbstractXbaseTestCase {
       this._validationTestHelper.assertNoErrors(expr);
       JvmIdentifiableElement _feature = expr.getFeature();
       Assert.assertTrue((_feature instanceof JvmFormalParameter));
-    } catch (Exception _e) {
+    } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
   }
@@ -145,7 +145,7 @@ public class JvmModelBasedLinkingTest extends AbstractXbaseTestCase {
       this._validationTestHelper.assertNoErrors(expr);
       JvmIdentifiableElement _feature = expr.getFeature();
       Assert.assertTrue((_feature instanceof JvmField));
-    } catch (Exception _e) {
+    } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
   }
@@ -180,7 +180,7 @@ public class JvmModelBasedLinkingTest extends AbstractXbaseTestCase {
       this._validationTestHelper.assertNoErrors(expr);
       JvmIdentifiableElement _feature = expr.getFeature();
       Assert.assertTrue((_feature instanceof JvmField));
-    } catch (Exception _e) {
+    } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
   }

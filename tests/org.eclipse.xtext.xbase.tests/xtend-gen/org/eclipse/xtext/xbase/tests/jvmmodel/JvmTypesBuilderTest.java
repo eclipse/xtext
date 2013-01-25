@@ -84,7 +84,7 @@ public class JvmTypesBuilderTest extends AbstractXbaseTestCase {
       JvmAnnotationReference _head = IterableExtensions.<JvmAnnotationReference>head(_annotations);
       JvmAnnotationType _annotation = _head.getAnnotation();
       Assert.assertEquals(_annotationType, _annotation);
-    } catch (Exception _e) {
+    } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
   }
@@ -113,7 +113,7 @@ public class JvmTypesBuilderTest extends AbstractXbaseTestCase {
       EList<Object> _values_1 = ((JvmCustomAnnotationValue) _head_2).getValues();
       Object _head_3 = IterableExtensions.<Object>head(_values_1);
       Assert.assertTrue((_head_3 instanceof XStringLiteral));
-    } catch (Exception _e) {
+    } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
   }
@@ -149,7 +149,7 @@ public class JvmTypesBuilderTest extends AbstractXbaseTestCase {
       JvmOperation _operation = _head_5.getOperation();
       String _simpleName = _operation.getSimpleName();
       Assert.assertEquals("value", _simpleName);
-    } catch (Exception _e) {
+    } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
   }
@@ -178,7 +178,7 @@ public class JvmTypesBuilderTest extends AbstractXbaseTestCase {
       EList<JvmAnnotationValue> _values = _head_1.getValues();
       boolean _isEmpty = _values.isEmpty();
       Assert.assertTrue(_isEmpty);
-    } catch (Exception _e) {
+    } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
   }
@@ -221,7 +221,7 @@ public class JvmTypesBuilderTest extends AbstractXbaseTestCase {
       EList<Object> _values_2 = value.getValues();
       Object _head_5 = IterableExtensions.<Object>head(_values_2);
       Assert.assertTrue((_head_5 instanceof XNumberLiteral));
-    } catch (Exception _e) {
+    } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
   }
@@ -263,7 +263,7 @@ public class JvmTypesBuilderTest extends AbstractXbaseTestCase {
       EList<Object> _values_5 = ((JvmCustomAnnotationValue) _head_5).getValues();
       Object _get = _values_5.get(1);
       Assert.assertTrue((_get instanceof XStringLiteral));
-    } catch (Exception _e) {
+    } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
   }
@@ -291,7 +291,7 @@ public class JvmTypesBuilderTest extends AbstractXbaseTestCase {
       EList<JvmAnnotationValue> _values = _head_1.getValues();
       boolean _isEmpty = _values.isEmpty();
       Assert.assertTrue(_isEmpty);
-    } catch (Exception _e) {
+    } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
   }
@@ -312,7 +312,7 @@ public class JvmTypesBuilderTest extends AbstractXbaseTestCase {
       Assert.assertEquals("MyAnnotation", _simpleName);
       String _documentation = this._jvmTypesBuilder.getDocumentation(anno);
       Assert.assertEquals("Foo", _documentation);
-    } catch (Exception _e) {
+    } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
   }
@@ -338,7 +338,7 @@ public class JvmTypesBuilderTest extends AbstractXbaseTestCase {
       EList<JvmTypeReference> _superTypes = anno.getSuperTypes();
       int _size = _superTypes.size();
       Assert.assertEquals(1, _size);
-    } catch (Exception _e) {
+    } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
   }
@@ -375,7 +375,7 @@ public class JvmTypesBuilderTest extends AbstractXbaseTestCase {
         };
       List<String> _map = ListExtensions.<JvmEnumerationLiteral, String>map(_literals, _function_1);
       Assert.assertArrayEquals(((Object[])Conversions.unwrapArray(_newArrayList, Object.class)), ((Object[])Conversions.unwrapArray(_map, Object.class)));
-    } catch (Exception _e) {
+    } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
   }

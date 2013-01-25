@@ -155,7 +155,7 @@ public class FormatterTester {
           throw Exceptions.sneakyThrow(_t_1);
         }
       }
-    } catch (Exception _e) {
+    } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
   }

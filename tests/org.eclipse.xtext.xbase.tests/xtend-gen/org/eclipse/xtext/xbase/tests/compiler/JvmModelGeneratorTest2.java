@@ -59,7 +59,7 @@ public class JvmModelGeneratorTest2 extends JvmModelGeneratorTest {
       Object _get_1 = ((List<Object>)Conversions.doWrapArray(values)).get(1);
       String _string_1 = _get_1.toString();
       Assert.assertEquals("BAZ", _string_1);
-    } catch (Exception _e) {
+    } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
   }

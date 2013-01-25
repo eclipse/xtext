@@ -73,7 +73,7 @@ public abstract class AbstractConstructorCallTypeTest extends AbstractXbaseTestC
           }
         };
       return IterableExtensions.<XConstructorCall, Integer>sortBy(closures, _function);
-    } catch (Exception _e) {
+    } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
   }

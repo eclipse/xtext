@@ -126,7 +126,7 @@ public abstract class AbstractBatchReturnTypeTest extends AbstractReturnTypeTest
       boolean _isEmpty_3 = _warnings_3.isEmpty();
       Assert.assertTrue(_string_3, _isEmpty_3);
       return resolvedType;
-    } catch (Exception _e) {
+    } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
   }
@@ -156,7 +156,7 @@ public abstract class AbstractBatchReturnTypeTest extends AbstractReturnTypeTest
       final LightweightTypeReference resolvedType = resolvedTypes.getReturnType(parsedExpression);
       String _simpleName = resolvedType.getSimpleName();
       Assert.assertEquals(expression, type, _simpleName);
-    } catch (Exception _e) {
+    } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
   }

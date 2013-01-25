@@ -92,7 +92,7 @@ public class TypeSerializationUtilTest {
       Assert.assertEquals(_size, _size_1);
       boolean _containsAll = actualImports.containsAll(((Collection<? extends Object>)Conversions.doWrapArray(expectedImports)));
       Assert.assertTrue(_containsAll);
-    } catch (Exception _e) {
+    } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
   }

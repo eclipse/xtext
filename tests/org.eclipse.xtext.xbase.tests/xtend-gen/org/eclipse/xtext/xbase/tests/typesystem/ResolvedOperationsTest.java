@@ -64,7 +64,7 @@ public class ResolvedOperationsTest extends AbstractXbaseTestCase {
       JvmType _type = typeLiteral.getType();
       final ResolvedOperations result = this.overrideHelper.getResolvedOperations(((JvmDeclaredType) _type));
       return result;
-    } catch (Exception _e) {
+    } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
   }
@@ -76,7 +76,7 @@ public class ResolvedOperationsTest extends AbstractXbaseTestCase {
       JvmTypeReference _type = cast.getType();
       final ResolvedOperations result = this.overrideHelper.getResolvedOperations(_type);
       return result;
-    } catch (Exception _e) {
+    } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
   }

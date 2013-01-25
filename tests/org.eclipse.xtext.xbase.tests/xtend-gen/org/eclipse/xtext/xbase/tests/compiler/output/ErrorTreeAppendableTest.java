@@ -41,7 +41,7 @@ public class ErrorTreeAppendableTest extends AbstractXbaseTestCase {
       int _minus = (-1);
       ITreeAppendable _trace_2 = app.trace(e, Literals.XNUMBER_LITERAL__VALUE, _minus);
       Assert.assertEquals(app, _trace_2);
-    } catch (Exception _e) {
+    } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
   }
@@ -56,7 +56,7 @@ public class ErrorTreeAppendableTest extends AbstractXbaseTestCase {
       app.append(_type);
       String _content = app.getContent();
       Assert.assertEquals("Unresolved", _content);
-    } catch (Exception _e) {
+    } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
   }

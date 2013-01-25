@@ -151,7 +151,7 @@ public class JvmModelGeneratorTest extends AbstractXbaseTestCase {
       Class<? extends Object> _last = IterableExtensions.<Class<? extends Object>>last(((Iterable<Class<? extends Object>>)Conversions.doWrapArray(_declaredClasses_2)));
       Method _method = compiledClass.getMethod("foo", _head_1, _last);
       Assert.assertNotNull(_method);
-    } catch (Exception _e) {
+    } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
   }
@@ -184,7 +184,7 @@ public class JvmModelGeneratorTest extends AbstractXbaseTestCase {
       Method _method = compiledClass.getMethod("doStuff", String.class);
       Object _invoke = _method.invoke(instance, "foo");
       Assert.assertEquals("FOO", _invoke);
-    } catch (Exception _e) {
+    } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
   }
@@ -217,7 +217,7 @@ public class JvmModelGeneratorTest extends AbstractXbaseTestCase {
       Assert.assertEquals("theTruth", _name);
       Object _defaultValue = method.getDefaultValue();
       Assert.assertEquals(Integer.valueOf(42), _defaultValue);
-    } catch (Exception _e) {
+    } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
   }
@@ -275,7 +275,7 @@ public class JvmModelGeneratorTest extends AbstractXbaseTestCase {
       Method _findFirst_1 = IterableExtensions.<Method>findFirst(((Iterable<Method>)Conversions.doWrapArray(_methods_1)), _function_2);
       Object _defaultValue_1 = _findFirst_1.getDefaultValue();
       Assert.assertNull(_defaultValue_1);
-    } catch (Exception _e) {
+    } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
   }
@@ -297,7 +297,7 @@ public class JvmModelGeneratorTest extends AbstractXbaseTestCase {
       final Class<? extends Object> compiled = this.compile(_eResource, clazz);
       boolean _isAssignableFrom = Iterable.class.isAssignableFrom(compiled);
       Assert.assertTrue(_isAssignableFrom);
-    } catch (Exception _e) {
+    } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
   }
@@ -321,7 +321,7 @@ public class JvmModelGeneratorTest extends AbstractXbaseTestCase {
       Assert.assertTrue(_isAssignableFrom);
       boolean _isAssignableFrom_1 = AbstractList.class.isAssignableFrom(compiled);
       Assert.assertTrue(_isAssignableFrom_1);
-    } catch (Exception _e) {
+    } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
   }
@@ -355,7 +355,7 @@ public class JvmModelGeneratorTest extends AbstractXbaseTestCase {
       setter.invoke(inst, "FOO");
       Object _invoke = getter.invoke(inst);
       Assert.assertEquals("FOO", _invoke);
-    } catch (Exception _e) {
+    } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
   }
@@ -398,7 +398,7 @@ public class JvmModelGeneratorTest extends AbstractXbaseTestCase {
       Object _get_1 = ((List<Object>)Conversions.doWrapArray(values)).get(1);
       String _string_1 = _get_1.toString();
       Assert.assertEquals("BAZ", _string_1);
-    } catch (Exception _e) {
+    } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
   }
@@ -423,7 +423,7 @@ public class JvmModelGeneratorTest extends AbstractXbaseTestCase {
       final JvmGenericType clazz = this.builder.toClass(expression, "my.test.Foo", _function);
       Resource _eResource = expression.eResource();
       this.compile(_eResource, clazz);
-    } catch (Exception _e) {
+    } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
   }
@@ -463,7 +463,7 @@ public class JvmModelGeneratorTest extends AbstractXbaseTestCase {
       final JvmGenericType clazz = this.builder.toClass(expression, "my.test.Foo", _function);
       Resource _eResource = expression.eResource();
       this.compile(_eResource, clazz);
-    } catch (Exception _e) {
+    } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
   }
@@ -498,7 +498,7 @@ public class JvmModelGeneratorTest extends AbstractXbaseTestCase {
       final JvmGenericType clazz = this.builder.toClass(expression, "my.test.Foo", _function);
       Resource _eResource = expression.eResource();
       this.compile(_eResource, clazz);
-    } catch (Exception _e) {
+    } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
   }
@@ -558,7 +558,7 @@ public class JvmModelGeneratorTest extends AbstractXbaseTestCase {
       Assert.assertNotNull(_field_2);
       Method _method = compiled.getMethod("doStuff");
       Assert.assertNotNull(_method);
-    } catch (Exception _e) {
+    } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
   }

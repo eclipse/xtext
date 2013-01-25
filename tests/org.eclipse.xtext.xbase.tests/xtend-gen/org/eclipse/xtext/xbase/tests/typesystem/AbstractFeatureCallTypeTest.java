@@ -66,7 +66,7 @@ public abstract class AbstractFeatureCallTypeTest extends AbstractXbaseTestCase 
           }
         };
       return IterableExtensions.<XAbstractFeatureCall, Integer>sortBy(featureCalls, _function);
-    } catch (Exception _e) {
+    } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
   }

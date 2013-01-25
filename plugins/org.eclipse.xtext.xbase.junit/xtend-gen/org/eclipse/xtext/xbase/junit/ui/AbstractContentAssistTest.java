@@ -44,7 +44,7 @@ public class AbstractContentAssistTest implements ResourceLoadHelper, IJavaProje
     try {
       IJavaProject _createJavaProject = JavaProjectSetupUtil.createJavaProject("contentAssistTest");
       AbstractContentAssistTest.javaProject = _createJavaProject;
-    } catch (Exception _e) {
+    } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
   }
@@ -55,7 +55,7 @@ public class AbstractContentAssistTest implements ResourceLoadHelper, IJavaProje
       IProject _project = AbstractContentAssistTest.javaProject.getProject();
       NullProgressMonitor _nullProgressMonitor = new NullProgressMonitor();
       _project.delete(true, _nullProgressMonitor);
-    } catch (Exception _e) {
+    } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
   }
@@ -88,7 +88,7 @@ public class AbstractContentAssistTest implements ResourceLoadHelper, IJavaProje
         _xblockexpression = (((XtextResource) result));
       }
       return _xblockexpression;
-    } catch (Exception _e) {
+    } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
   }

@@ -29,7 +29,7 @@ public class ReflectExtensionsTest {
       final String x = "foo";
       Object _invoke = this.privateExt.invoke(x, "length");
       Assert.assertEquals(Integer.valueOf(3), _invoke);
-    } catch (Exception _e) {
+    } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
   }
@@ -48,7 +48,7 @@ public class ReflectExtensionsTest {
           throw Exceptions.sneakyThrow(_t);
         }
       }
-    } catch (Exception _e) {
+    } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
   }
@@ -67,7 +67,7 @@ public class ReflectExtensionsTest {
           throw Exceptions.sneakyThrow(_t);
         }
       }
-    } catch (Exception _e) {
+    } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
   }
@@ -87,7 +87,7 @@ public class ReflectExtensionsTest {
           throw Exceptions.sneakyThrow(_t);
         }
       }
-    } catch (Exception _e) {
+    } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
   }
@@ -105,7 +105,7 @@ public class ReflectExtensionsTest {
       Assert.assertNull(_invoke);
       Object _invoke_1 = this.privateExt.invoke(x, "apply", "foo");
       Assert.assertEquals("foo", _invoke_1);
-    } catch (Exception _e) {
+    } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
   }
@@ -116,7 +116,7 @@ public class ReflectExtensionsTest {
       final String x = "foo";
       Object _invoke = this.privateExt.invoke(x, "substring", Integer.valueOf(1), Integer.valueOf(2));
       Assert.assertEquals("o", _invoke);
-    } catch (Exception _e) {
+    } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
   }
@@ -128,7 +128,7 @@ public class ReflectExtensionsTest {
       final ReflectExtensionsTest x = _reflectExtensionsTest;
       Object _get = this.privateExt.<Object>get(x, "ext");
       Assert.assertNotNull(_get);
-    } catch (Exception _e) {
+    } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
   }
@@ -149,7 +149,7 @@ public class ReflectExtensionsTest {
           throw Exceptions.sneakyThrow(_t);
         }
       }
-    } catch (Exception _e) {
+    } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
   }
@@ -161,7 +161,7 @@ public class ReflectExtensionsTest {
       final ReflectExtensionsTest x = _reflectExtensionsTest;
       Object _get = this.privateExt.<Object>get(x, "privateExt");
       Assert.assertSame(x.privateExt, _get);
-    } catch (Exception _e) {
+    } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
   }
@@ -173,7 +173,7 @@ public class ReflectExtensionsTest {
       final ReflectExtensionsTest x = _reflectExtensionsTest;
       this.privateExt.set(x, "ext", null);
       Assert.assertNull(x.ext);
-    } catch (Exception _e) {
+    } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
   }
@@ -193,7 +193,7 @@ public class ReflectExtensionsTest {
           throw Exceptions.sneakyThrow(_t);
         }
       }
-    } catch (Exception _e) {
+    } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
   }
@@ -205,7 +205,7 @@ public class ReflectExtensionsTest {
       final ReflectExtensionsTest x = _reflectExtensionsTest;
       this.privateExt.set(x, "privateExt", null);
       Assert.assertNull(x.privateExt);
-    } catch (Exception _e) {
+    } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
   }

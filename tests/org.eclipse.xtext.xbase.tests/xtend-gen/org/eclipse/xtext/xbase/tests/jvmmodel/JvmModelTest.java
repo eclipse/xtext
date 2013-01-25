@@ -40,7 +40,7 @@ public class JvmModelTest extends AbstractJvmModelTest {
       int _size = _contents_1.size();
       Assert.assertEquals(_string, 2, _size);
       this.helper.assertNoErrors(expression);
-    } catch (Exception _e) {
+    } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
   }
@@ -60,7 +60,7 @@ public class JvmModelTest extends AbstractJvmModelTest {
       Assert.assertEquals(1, _size);
       Object _get_1 = field.get(resource);
       Assert.assertFalse((((Boolean) _get_1)).booleanValue());
-    } catch (Exception _e) {
+    } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
   }
@@ -70,7 +70,7 @@ public class JvmModelTest extends AbstractJvmModelTest {
     try {
       final XExpression expression = this.expression("return");
       this.helper.assertError(expression, Literals.XRETURN_EXPRESSION, IssueCodes.INVALID_RETURN);
-    } catch (Exception _e) {
+    } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
   }

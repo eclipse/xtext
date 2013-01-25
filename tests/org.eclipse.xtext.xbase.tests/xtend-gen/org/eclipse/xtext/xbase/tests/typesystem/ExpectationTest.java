@@ -62,7 +62,7 @@ public class ExpectationTest extends AbstractXbaseTestCase {
       this.resolver.reentrantResolve();
       this.pendingAssert = true;
       return this;
-    } catch (Exception _e) {
+    } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
   }
