@@ -6,4 +6,5 @@ Bundle-Version: 1.0.0.qualifier
 Bundle-Vendor: Eclipse Modeling Project
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Export-Package: org.eclipse.xtend.core.tests.internal;x-internal:=true,
- org.eclipse.xtend.ide.tests.data
+ org.eclipse.xtend.ide.tests.data,
+ org.eclipse.xtend.ide.tests.data.bug348446
