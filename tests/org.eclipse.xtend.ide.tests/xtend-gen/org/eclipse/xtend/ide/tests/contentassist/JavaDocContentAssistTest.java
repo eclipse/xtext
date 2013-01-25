@@ -50,7 +50,7 @@ public class JavaDocContentAssistTest extends AbstractXtendContentAssistBugTest 
       _builder_1.append("class Foo {}");
       _builder_1.newLine();
       _applyProposal.expectContent(_builder_1.toString());
-    } catch (Exception _e) {
+    } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
   }
@@ -89,7 +89,7 @@ public class JavaDocContentAssistTest extends AbstractXtendContentAssistBugTest 
       _builder_1.append("class Foo {}");
       _builder_1.newLine();
       _applyProposal.expectContent(_builder_1.toString());
-    } catch (Exception _e) {
+    } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
   }
@@ -115,7 +115,7 @@ public class JavaDocContentAssistTest extends AbstractXtendContentAssistBugTest 
       ICompletionProposal[] _computeCompletionProposals = _append.computeCompletionProposals(39);
       boolean _isEmpty = ((List<ICompletionProposal>)Conversions.doWrapArray(_computeCompletionProposals)).isEmpty();
       Assert.assertTrue(_isEmpty);
-    } catch (Exception _e) {
+    } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
   }
@@ -154,7 +154,7 @@ public class JavaDocContentAssistTest extends AbstractXtendContentAssistBugTest 
       _builder_1.append("class Foo {}");
       _builder_1.newLine();
       _applyProposal.expectContent(_builder_1.toString());
-    } catch (Exception _e) {
+    } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
   }
@@ -193,7 +193,7 @@ public class JavaDocContentAssistTest extends AbstractXtendContentAssistBugTest 
       _builder_1.append("class Foo {}");
       _builder_1.newLine();
       _applyProposal.expectContent(_builder_1.toString());
-    } catch (Exception _e) {
+    } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
   }
@@ -232,7 +232,7 @@ public class JavaDocContentAssistTest extends AbstractXtendContentAssistBugTest 
       _builder_1.append("class Foo {}");
       _builder_1.newLine();
       _applyProposal.expectContent(_builder_1.toString());
-    } catch (Exception _e) {
+    } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
   }

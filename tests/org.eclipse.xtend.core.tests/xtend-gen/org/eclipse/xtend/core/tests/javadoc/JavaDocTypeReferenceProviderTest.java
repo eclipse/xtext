@@ -287,7 +287,7 @@ public class JavaDocTypeReferenceProviderTest extends AbstractXtendTestCase {
       final List<ReplaceRegion> regions = this.javaDocTypeReferenceProvider.computeTypeRefRegions(rootNode);
       int _size = regions.size();
       Assert.assertEquals(1, _size);
-    } catch (Exception _e) {
+    } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
   }
@@ -316,7 +316,7 @@ public class JavaDocTypeReferenceProviderTest extends AbstractXtendTestCase {
       final List<ReplaceRegion> regions = this.javaDocTypeReferenceProvider.computeTypeRefRegions(rootNode);
       int _size = regions.size();
       Assert.assertEquals(1, _size);
-    } catch (Exception _e) {
+    } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
   }
