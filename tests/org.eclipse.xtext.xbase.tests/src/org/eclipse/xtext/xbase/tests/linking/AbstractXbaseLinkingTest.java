@@ -397,8 +397,8 @@ public abstract class AbstractXbaseLinkingTest extends AbstractXbaseTestCase {
 	}
 	
 	@Test public void testLinkingToInvisibleElements() throws Exception {
-		XMemberFeatureCall expression = (XMemberFeatureCall) expression("new testdata.GenericType1<String>().t.offset");
-		assertEquals("java.lang.String.offset", expression.getFeature().getIdentifier());
+		XMemberFeatureCall expression = (XMemberFeatureCall) expression("new testdata.GenericType1<String>().t.value");
+		assertEquals("java.lang.String.value", expression.getFeature().getIdentifier());
 		assertTrue(((JvmMember)expression.getFeature()).getVisibility()==JvmVisibility.PRIVATE);
 	}
 	
