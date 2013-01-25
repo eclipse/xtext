@@ -8,7 +8,6 @@
 package org.eclipse.xtend.ide.contentassist;
 
 import org.eclipse.jface.text.contentassist.ContentAssistant;
-import org.eclipse.jface.text.contentassist.IContentAssistProcessor;
 import org.eclipse.jface.text.source.ISourceViewer;
 import org.eclipse.jface.text.source.SourceViewerConfiguration;
 import org.eclipse.xtend.ide.autoedit.TokenTypeToPartitionMapper;
@@ -23,9 +22,6 @@ import com.google.inject.Inject;
  */
 public class XtendContentAssistFactory extends DefaultContentAssistantFactory {
 
-	@Inject(optional = true)
-	private IContentAssistProcessor contentAssistProcessor;
-
 	@Inject
 	private XtendJavaDocContentAssistProcessor javaDocContentAssistProcessor;
 
@@ -33,10 +29,8 @@ public class XtendContentAssistFactory extends DefaultContentAssistantFactory {
 	protected void setContentAssistProcessor(ContentAssistant assistent, SourceViewerConfiguration configuration,
 			ISourceViewer sourceViewer) {
 		super.setContentAssistProcessor(assistent, configuration, sourceViewer);
-		if (contentAssistProcessor != null) {
-			assistent.setContentAssistProcessor(javaDocContentAssistProcessor, TokenTypeToPartitionMapper.JAVA_DOC_PARTITION);
-			assistent.setContentAssistProcessor(null, TerminalsTokenTypeToPartitionMapper.SL_COMMENT_PARTITION);
-			assistent.setContentAssistProcessor(null, TerminalsTokenTypeToPartitionMapper.COMMENT_PARTITION);
-		}
+		assistent.setContentAssistProcessor(javaDocContentAssistProcessor,TokenTypeToPartitionMapper.JAVA_DOC_PARTITION);
+		assistent.setContentAssistProcessor(null, TerminalsTokenTypeToPartitionMapper.SL_COMMENT_PARTITION);
+		assistent.setContentAssistProcessor(null, TerminalsTokenTypeToPartitionMapper.COMMENT_PARTITION);
 	}
 }
