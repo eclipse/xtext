@@ -15,16 +15,15 @@ import org.junit.Test;
  */
 public class Bug348446Test extends AbstractXtendContentAssistBugTest {
 
-	@Test public void testGetPackage() throws Exception {
-		newBuilder().append("typeof(String).pack").assertText();
-		newBuilder().append("typeof(String).^pack").assertText();
-		newBuilder().append("typeof(String).getpack").assertText("getPackage()");
+	@Test public void testVar() throws Exception {
+		newBuilder().append("new org.eclipse.xtend.ide.tests.data.bug348446.TestClass().va").assertText("variable");
+		newBuilder().append("new org.eclipse.xtend.ide.tests.data.bug348446.TestClass().^va").assertText();
 	}
 	
-	@Test public void testGetClass() throws Exception {
-		newBuilder().append("typeof(String).clas").assertText("classLoader", "classes");
-		newBuilder().append("typeof(String).^clas").assertText();
-		newBuilder().append("typeof(String).getclas").assertText("classLoader", "classes");
+	@Test public void testGetWhile() throws Exception {
+		newBuilder().append("new org.eclipse.xtend.ide.tests.data.bug348446.TestClass().wh").assertText("whileYouCan");
+		newBuilder().append("new org.eclipse.xtend.ide.tests.data.bug348446.TestClass().getWh").assertText("whileYouCan");
+		newBuilder().append("new org.eclipse.xtend.ide.tests.data.bug348446.TestClass().^wh").assertText();
 	}
 	
 	@Override
