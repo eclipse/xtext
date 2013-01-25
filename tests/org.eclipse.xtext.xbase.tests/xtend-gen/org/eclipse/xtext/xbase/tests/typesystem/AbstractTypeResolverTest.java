@@ -1274,7 +1274,7 @@ public abstract class AbstractTypeResolverTest<Reference extends Object> extends
   }
   
   @Test
-  public void testIfExpression_2() throws Exception {
+  public void testIfExpression_22() throws Exception {
     this.resolvesTo("{ val x = if (true) return 1 else 0 x }", "int");
   }
   
@@ -1301,6 +1301,11 @@ public abstract class AbstractTypeResolverTest<Reference extends Object> extends
   @Test
   public void testIfExpression_27() throws Exception {
     this.resolvesTo("if (true) while(false) (\'foo\'+\'bar\').length", "null");
+  }
+  
+  @Test
+  public void testIfExpression_28() throws Exception {
+    this.resolvesTo("if (true) return \'\' else 1", "int");
   }
   
   @Test

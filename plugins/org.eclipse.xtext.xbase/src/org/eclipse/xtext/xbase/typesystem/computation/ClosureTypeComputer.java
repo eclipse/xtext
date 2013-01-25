@@ -41,6 +41,12 @@ import org.eclipse.xtext.xbase.typesystem.util.TypeParameterByUnboundSubstitutor
 
 /**
  * Externalized strategy for closure type computation which allows for easier unit testing.
+ * Clients will usually not alter the implementation. Public methods are mostly public 
+ * for testing purpose.
+ * 
+ * @see XbaseTypeComputer#_computeTypes(XClosure, ITypeComputationState)
+ * @noinstantiate This class is not intended to be instantiated by clients.
+ * 
  * @author Sebastian Zarnekow - Initial contribution and API
  */
 @NonNullByDefault
@@ -277,6 +283,9 @@ public class ClosureTypeComputer {
 	
 	protected void deferredBindTypeArgument(@Nullable LightweightTypeReference declared, LightweightTypeReference actual) {
 		if (declared != null) { 
+			// TODO double check other clients of the ExpectationTypeParameterHintCollector
+			// It may be possible / necessary to use the very same implementation instead of anonymous 
+			// specializations or it may be possible that this specialization is no longer necessary.
 			ExpectationTypeParameterHintCollector collector = new ExpectationTypeParameterHintCollector(expectation.getReferenceOwner()) {
 				
 				class UnboundTypeReferencePreserver extends DeferredParameterizedTypeReferenceTraverser {

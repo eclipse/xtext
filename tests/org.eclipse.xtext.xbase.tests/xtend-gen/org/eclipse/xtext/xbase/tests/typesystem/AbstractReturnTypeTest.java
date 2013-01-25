@@ -72,6 +72,11 @@ public abstract class AbstractReturnTypeTest<Reference extends Object> extends A
   }
   
   @Test
+  public void testIfExpression_28() throws Exception {
+    this.resolvesTo("if (true) return \'\' else 1", "Comparable<?> & Serializable");
+  }
+  
+  @Test
   public void testSwitchExpression_1() throws Exception {
     this.resolvesTo("switch true { case true : return \'s\' default: null}", "String");
   }
