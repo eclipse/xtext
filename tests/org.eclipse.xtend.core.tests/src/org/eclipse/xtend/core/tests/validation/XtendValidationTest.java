@@ -1326,4 +1326,34 @@ public class XtendValidationTest extends AbstractXtendTestCase {
 		XtendMember field = clazz.getMembers().get(0);
 		helper.assertError(field, XTEND_FIELD, IssueCodes.JAVA_DOC_LINKING_DIAGNOSTIC, "javaDoc","List","cannot be resolved to a type");
 	}
+
+	@Test
+	public void testJavaDocRefs_6() throws Exception {
+		XtendFile file = file(
+				"class Foo {\n" +
+					"/**" +
+					" * {@link    List}\n" +
+					" */" +
+					"String field = '42'\n" +
+					"def doStuff(){}"+
+				"}");
+		XtendClass clazz = (XtendClass) file.getXtendTypes().get(0);
+		XtendMember field = clazz.getMembers().get(0);
+		helper.assertError(field, XTEND_FIELD, IssueCodes.JAVA_DOC_LINKING_DIAGNOSTIC, "javaDoc","List","cannot be resolved to a type");
+	}
+
+	@Test
+	public void testJavaDocRefs_7() throws Exception {
+		XtendFile file = file(
+				"class Foo {\n" +
+					"/**" +
+					" * @see    List\n" +
+					" */" +
+					"String field = '42'\n" +
+					"def doStuff(){}"+
+				"}");
+		XtendClass clazz = (XtendClass) file.getXtendTypes().get(0);
+		XtendMember field = clazz.getMembers().get(0);
+		helper.assertError(field, XTEND_FIELD, IssueCodes.JAVA_DOC_LINKING_DIAGNOSTIC, "javaDoc","List","cannot be resolved to a type");
+	}
 }
