@@ -157,8 +157,8 @@ public class XtextDocument extends Document implements IXtextDocument {
 		protected void beforeReadOnly(XtextResource res, IUnitOfWork<?, XtextResource> work) {
 			if (log.isDebugEnabled())
 				log.debug("read - " + Thread.currentThread().getName());
-			// don't updateContent on reentrant read lock request
-			if (rwLock.getReadLockCount() == 1)
+			// don't updateContent on reentrant read or write lock request
+			if (rwLock.getReadLockCount() == 1 && rwLock.getWriteHoldCount() == 0)
 				updateContentBeforeRead();
 		}
 
