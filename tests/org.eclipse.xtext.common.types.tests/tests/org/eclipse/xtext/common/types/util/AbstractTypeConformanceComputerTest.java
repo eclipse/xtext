@@ -53,6 +53,7 @@ import com.google.inject.Module;
 /**
  * @author Sven Efftinge - Initial contribution and API
  */
+@SuppressWarnings("deprecation")
 public abstract class AbstractTypeConformanceComputerTest extends Assert {
 
 	protected static class AccessibleDeclaredTypeFactory extends DeclaredTypeFactory {

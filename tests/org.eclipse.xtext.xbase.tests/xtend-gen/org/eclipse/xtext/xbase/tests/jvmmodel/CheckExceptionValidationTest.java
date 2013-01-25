@@ -10,7 +10,7 @@ import org.eclipse.xtext.xbase.validation.IssueCodes;
 import org.junit.Test;
 
 @SuppressWarnings("all")
-public class CheckExceptionValiationTest extends AbstractJvmModelTest {
+public class CheckExceptionValidationTest extends AbstractJvmModelTest {
   @Inject
   private ValidationTestHelper helper;
   

@@ -22,6 +22,7 @@ import com.google.inject.Provider;
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
+@SuppressWarnings("deprecation")
 public class ClasspathSuperTypeCollectorTest extends AbstractSuperTypeCollectorTest {
 
 	private ResourceSet resourceSet;

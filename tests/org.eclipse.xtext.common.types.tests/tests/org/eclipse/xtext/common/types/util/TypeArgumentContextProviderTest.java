@@ -54,6 +54,7 @@ import com.google.inject.Injector;
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
+@SuppressWarnings("deprecation")
 public class TypeArgumentContextProviderTest extends Assert {
 
 	public static class ExposedTypeArgumentContextProvider extends TypeArgumentContextProvider {

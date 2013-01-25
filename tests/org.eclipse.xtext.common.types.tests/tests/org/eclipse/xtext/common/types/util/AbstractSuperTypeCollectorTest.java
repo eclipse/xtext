@@ -37,6 +37,7 @@ import com.google.common.collect.Sets;
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
+@SuppressWarnings("deprecation")
 public abstract class AbstractSuperTypeCollectorTest extends Assert {
 
 	protected abstract IJvmTypeProvider getTypeProvider();

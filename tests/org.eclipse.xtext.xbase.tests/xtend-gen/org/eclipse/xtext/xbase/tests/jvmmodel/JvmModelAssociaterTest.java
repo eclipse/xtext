@@ -2,7 +2,6 @@ package org.eclipse.xtext.xbase.tests.jvmmodel;
 
 import com.google.common.collect.Iterables;
 import com.google.inject.Inject;
-import com.google.inject.Injector;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EClass;
@@ -17,7 +16,6 @@ import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.resource.DerivedStateAwareResource;
 import org.eclipse.xtext.resource.XtextResourceSet;
-import org.eclipse.xtext.xbase.XbaseStandaloneSetup;
 import org.eclipse.xtext.xbase.jvmmodel.IJvmDeclaredTypeAcceptor;
 import org.eclipse.xtext.xbase.jvmmodel.IJvmDeclaredTypeAcceptor.IPostIndexingInitializing;
 import org.eclipse.xtext.xbase.jvmmodel.IJvmModelInferrer;
@@ -46,12 +44,6 @@ public class JvmModelAssociaterTest extends AbstractJvmModelTest {
   
   @Inject
   private DerivedStateAwareResource resource;
-  
-  public Injector getInjector() {
-    XbaseStandaloneSetup _xbaseStandaloneSetup = new XbaseStandaloneSetup();
-    Injector _createInjector = _xbaseStandaloneSetup.createInjector();
-    return _createInjector;
-  }
   
   @Test
   public void testInference() {

@@ -1,13 +1,11 @@
 package org.eclipse.xtext.xbase.tests.jvmmodel;
 
 import com.google.inject.Inject;
-import java.lang.reflect.Field;
 import java.util.ArrayList;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtext.junit4.validation.ValidationTestHelper;
-import org.eclipse.xtext.resource.DerivedStateAwareResource;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.resource.IResourceDescription;
 import org.eclipse.xtext.resource.IResourceDescription.Manager;
@@ -15,6 +13,7 @@ import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XbasePackage.Literals;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Exceptions;
+import org.eclipse.xtext.xbase.lib.util.ReflectExtensions;
 import org.eclipse.xtext.xbase.tests.jvmmodel.AbstractJvmModelTest;
 import org.eclipse.xtext.xbase.validation.IssueCodes;
 import org.junit.Assert;
@@ -27,6 +26,9 @@ public class JvmModelTest extends AbstractJvmModelTest {
   
   @Inject
   private Manager manager;
+  
+  @Inject
+  private ReflectExtensions _reflectExtensions;
   
   @Test
   public void testSimple() {
@@ -49,17 +51,15 @@ public class JvmModelTest extends AbstractJvmModelTest {
   public void testResourceDescriptionsAreCorrect() {
     try {
       final Resource resource = this.newResource("return s.toUpperCase");
-      final Field field = DerivedStateAwareResource.class.getDeclaredField("fullyInitialized");
-      field.setAccessible(true);
-      Object _get = field.get(resource);
-      Assert.assertFalse((((Boolean) _get)).booleanValue());
+      final boolean initialized = (this._reflectExtensions.<Boolean>get(resource, "fullyInitialized")).booleanValue();
+      Assert.assertFalse(initialized);
       final IResourceDescription desc = this.manager.getResourceDescription(resource);
       Iterable<IEObjectDescription> _exportedObjects = desc.getExportedObjects();
       final ArrayList<Iterable<IEObjectDescription>> list = CollectionLiterals.<Iterable<IEObjectDescription>>newArrayList(_exportedObjects);
       int _size = list.size();
       Assert.assertEquals(1, _size);
-      Object _get_1 = field.get(resource);
-      Assert.assertFalse((((Boolean) _get_1)).booleanValue());
+      Boolean _get = this._reflectExtensions.<Boolean>get(resource, "fullyInitialized");
+      Assert.assertFalse((_get).booleanValue());
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }

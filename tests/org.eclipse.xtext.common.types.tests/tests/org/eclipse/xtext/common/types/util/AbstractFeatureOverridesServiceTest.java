@@ -36,6 +36,7 @@ import com.google.inject.Module;
 /**
  * @author Sven Efftinge  Initial contribution and API
  */
+@SuppressWarnings("deprecation")
 public abstract class AbstractFeatureOverridesServiceTest extends Assert {
     
     private IJvmTypeProvider typeProvider;
