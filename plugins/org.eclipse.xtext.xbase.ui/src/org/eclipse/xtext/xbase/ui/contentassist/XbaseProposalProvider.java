@@ -662,6 +662,6 @@ public class XbaseProposalProvider extends AbstractXbaseProposalProvider impleme
 	}
 
 	protected boolean isIdRule(final String ruleName) {
-		return "IdOrSuper".equals(ruleName) || "ValidID".equals(ruleName);
+		return "IdOrSuper".equals(ruleName) || "ValidID".equals(ruleName) || "FeatureCallID".equals(ruleName); 
 	}
 }

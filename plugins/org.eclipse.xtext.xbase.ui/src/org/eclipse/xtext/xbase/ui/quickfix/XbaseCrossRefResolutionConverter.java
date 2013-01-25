@@ -16,7 +16,7 @@ import org.eclipse.xtext.ui.editor.quickfix.DefaultQuickfixProvider.CrossRefReso
 public class XbaseCrossRefResolutionConverter extends CrossRefResolutionConverter {
 	@Override
 	public String convertToString(String replacement, String ruleName) {
-		if (ruleName.equals("ID") || ruleName.equals("IdOrSuper"))
+		if (ruleName.equals("ID") || ruleName.equals("IdOrSuper") || ruleName.equals("FeatureCallID"))
 			return super.convertToString(replacement, ruleName);
 		return replacement;
 	}
