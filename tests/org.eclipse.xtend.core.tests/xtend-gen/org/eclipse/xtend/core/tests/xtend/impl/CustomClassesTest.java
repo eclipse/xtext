@@ -35,7 +35,7 @@ public class CustomClassesTest extends AbstractXtendTestCase {
       XtendClass _clazz_3 = this.clazz(_builder_3.toString());
       boolean _isAbstract_1 = _clazz_3.isAbstract();
       Assert.assertFalse(_isAbstract_1);
-    } catch (Exception _e) {
+    } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
   }
@@ -53,7 +53,7 @@ public class CustomClassesTest extends AbstractXtendTestCase {
       XtendClass _clazz_1 = this.clazz(_builder_1.toString());
       boolean _isStatic_1 = _clazz_1.isStatic();
       Assert.assertTrue(_isStatic_1);
-    } catch (Exception _e) {
+    } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
   }
@@ -86,7 +86,7 @@ public class CustomClassesTest extends AbstractXtendTestCase {
       XtendClass _clazz_4 = this.clazz(_builder_4.toString());
       JvmVisibility _visibility_4 = _clazz_4.getVisibility();
       Assert.assertEquals(JvmVisibility.PRIVATE, _visibility_4);
-    } catch (Exception _e) {
+    } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
   }
@@ -104,7 +104,7 @@ public class CustomClassesTest extends AbstractXtendTestCase {
       XtendAnnotationType _annotationType_1 = this.annotationType(_builder_1.toString());
       boolean _isFinal = _annotationType_1.isFinal();
       Assert.assertFalse(_isFinal);
-    } catch (Exception _e) {
+    } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
   }
@@ -137,7 +137,7 @@ public class CustomClassesTest extends AbstractXtendTestCase {
       XtendAnnotationType _annotationType_4 = this.annotationType(_builder_4.toString());
       JvmVisibility _visibility_4 = _annotationType_4.getVisibility();
       Assert.assertEquals(JvmVisibility.PRIVATE, _visibility_4);
-    } catch (Exception _e) {
+    } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
   }
@@ -170,7 +170,7 @@ public class CustomClassesTest extends AbstractXtendTestCase {
       XtendField _field_4 = this.field(_builder_4.toString());
       JvmVisibility _visibility_4 = _field_4.getVisibility();
       Assert.assertEquals(JvmVisibility.PRIVATE, _visibility_4);
-    } catch (Exception _e) {
+    } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
   }
@@ -188,7 +188,7 @@ public class CustomClassesTest extends AbstractXtendTestCase {
       XtendField _field_1 = this.field(_builder_1.toString());
       boolean _isExtension_1 = _field_1.isExtension();
       Assert.assertTrue(_isExtension_1);
-    } catch (Exception _e) {
+    } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
   }
@@ -221,7 +221,7 @@ public class CustomClassesTest extends AbstractXtendTestCase {
       XtendField _field_4 = this.field(_builder_4.toString());
       boolean _isFinal_4 = _field_4.isFinal();
       Assert.assertFalse(_isFinal_4);
-    } catch (Exception _e) {
+    } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
   }

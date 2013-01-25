@@ -2,6 +2,7 @@ import java.util.Comparator;
 import java.util.List;
 import org.eclipse.xtext.xbase.lib.Conversions;
 
+@SuppressWarnings("all")
 public class Xbase11_TypeCoercion {
   public void myMethod() throws Throwable {
     "string".length();

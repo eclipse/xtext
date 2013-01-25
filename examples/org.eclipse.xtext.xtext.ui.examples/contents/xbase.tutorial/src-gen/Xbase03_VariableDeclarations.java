@@ -1,3 +1,4 @@
+@SuppressWarnings("all")
 public class Xbase03_VariableDeclarations {
   public String myMethod() throws Throwable {
     String _xblockexpression = null;

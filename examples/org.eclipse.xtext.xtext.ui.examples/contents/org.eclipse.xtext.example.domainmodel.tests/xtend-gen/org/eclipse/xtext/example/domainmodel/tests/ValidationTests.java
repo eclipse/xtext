@@ -290,7 +290,7 @@ public class ValidationTests {
     try {
       DomainModel _parse = this.parseHelper.parse(modelAsText);
       return _parse;
-    } catch (Exception _e) {
+    } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
   }

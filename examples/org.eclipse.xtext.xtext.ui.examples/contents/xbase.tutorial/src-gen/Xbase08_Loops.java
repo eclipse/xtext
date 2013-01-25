@@ -3,6 +3,7 @@ import java.util.List;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.ListExtensions;
 
+@SuppressWarnings("all")
 public class Xbase08_Loops {
   public ArrayList<String> myMethod() throws Throwable {
     ArrayList<String> _xblockexpression = null;

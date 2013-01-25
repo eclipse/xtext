@@ -9,6 +9,7 @@ import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ListExtensions;
 
+@SuppressWarnings("all")
 public class Xbase10_Switch {
   public List<String> myMethod() throws Throwable {
     List<String> _xblockexpression = null;

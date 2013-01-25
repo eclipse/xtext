@@ -19,7 +19,7 @@ public class ContentAssistTest extends AbstractContentAssistTest {
       ContentAssistProcessorTestBuilder _newBuilder = this.newBuilder();
       ContentAssistProcessorTestBuilder _append = _newBuilder.append("import java.util.Da");
       _append.assertText("java.util.Date");
-    } catch (Exception _e) {
+    } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
   }
@@ -30,7 +30,7 @@ public class ContentAssistTest extends AbstractContentAssistTest {
       ContentAssistProcessorTestBuilder _newBuilder = this.newBuilder();
       ContentAssistProcessorTestBuilder _append = _newBuilder.append("import LinkedHashSet");
       _append.assertText("java.util.LinkedHashSet");
-    } catch (Exception _e) {
+    } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
   }
@@ -41,7 +41,7 @@ public class ContentAssistTest extends AbstractContentAssistTest {
       ContentAssistProcessorTestBuilder _newBuilder = this.newBuilder();
       ContentAssistProcessorTestBuilder _append = _newBuilder.append("entity Foo { bar: LinkedHashSet");
       _append.assertText("java.util.LinkedHashSet");
-    } catch (Exception _e) {
+    } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
   }

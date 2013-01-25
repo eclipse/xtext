@@ -37,7 +37,7 @@ public class ArithmeticsQuickfixProvider extends DefaultQuickfixProvider {
             Integer _offset = issue.getOffset();
             Integer _length = issue.getLength();
             _xtextDocument.replace((_offset).intValue(), (_length).intValue(), string);
-          } catch (Exception _e) {
+          } catch (Throwable _e) {
             throw Exceptions.sneakyThrow(_e);
           }
         }

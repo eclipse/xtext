@@ -1,3 +1,4 @@
+@SuppressWarnings("all")
 public class Xbase04_Casts {
   public int myMethod() throws Throwable {
     int _xblockexpression = (int) 0;

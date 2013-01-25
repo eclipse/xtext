@@ -3,6 +3,7 @@ import java.math.BigInteger;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Pair;
 
+@SuppressWarnings("all")
 public class Xbase01_Literals {
   public BigDecimal myMethod() throws Throwable {
     BigDecimal _xblockexpression = null;

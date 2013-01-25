@@ -1,3 +1,4 @@
+@SuppressWarnings("all")
 public class Xbase06_If {
   public String myMethod() throws Throwable {
     String _xblockexpression = null;

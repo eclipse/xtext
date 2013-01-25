@@ -58,7 +58,7 @@ public class OrganizeImportsTest {
       String _string_1 = expected.toString();
       String _string_2 = builder.toString();
       Assert.assertEquals(_string_1, _string_2);
-    } catch (Exception _e) {
+    } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
   }

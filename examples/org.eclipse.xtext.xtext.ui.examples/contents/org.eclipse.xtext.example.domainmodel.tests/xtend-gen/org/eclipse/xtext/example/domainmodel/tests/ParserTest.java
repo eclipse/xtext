@@ -75,7 +75,7 @@ public class ParserTest {
       JvmTypeReference _type = property.getType();
       String _identifier = _type.getIdentifier();
       Assert.assertEquals("java.lang.String", _identifier);
-    } catch (Exception _e) {
+    } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
   }
@@ -111,7 +111,7 @@ public class ParserTest {
       _builder.newLine();
       DomainModel _parse = this._parseHelper.parse(_builder);
       this._validationTestHelper.assertNoErrors(_parse);
-    } catch (Exception _e) {
+    } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
   }
@@ -137,7 +137,7 @@ public class ParserTest {
       _builder.newLine();
       DomainModel _parse = this._parseHelper.parse(_builder);
       this._validationTestHelper.assertNoErrors(_parse);
-    } catch (Exception _e) {
+    } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
   }
@@ -184,7 +184,7 @@ public class ParserTest {
       JvmTypeReference _returnType = method.getReturnType();
       String _simpleName = _returnType.getSimpleName();
       Assert.assertEquals("String", _simpleName);
-    } catch (Exception _e) {
+    } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
   }

@@ -1,5 +1,6 @@
 import helper.Amount;
 
+@SuppressWarnings("all")
 public class Xbase07_Operators {
   public Amount myMethod() throws Throwable {
     Amount _xblockexpression = null;

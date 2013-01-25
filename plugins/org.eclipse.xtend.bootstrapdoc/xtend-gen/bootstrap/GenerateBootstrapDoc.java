@@ -104,7 +104,7 @@ public class GenerateBootstrapDoc {
       writer.append(_main);
       writer.close();
       InputOutput.<String>println("Done.");
-    } catch (Exception _e) {
+    } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
   }
@@ -144,7 +144,7 @@ public class GenerateBootstrapDoc {
             InputOutput.<String>println(_canonicalPath_1);
             InputSupplier<FileInputStream> _newInputStreamSupplier = Files.newInputStreamSupplier(source);
             Files.copy(_newInputStreamSupplier, target);
-          } catch (Exception _e) {
+          } catch (Throwable _e) {
             throw Exceptions.sneakyThrow(_e);
           }
         }

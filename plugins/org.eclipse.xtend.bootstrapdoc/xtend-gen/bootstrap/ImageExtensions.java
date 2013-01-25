@@ -33,7 +33,7 @@ public class ImageExtensions {
       } finally {
         if (stream!=null) stream.close();
       }
-    } catch (Exception _e) {
+    } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
   }

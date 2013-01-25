@@ -1,6 +1,7 @@
 import helper.Person;
 import java.util.Collections;
 
+@SuppressWarnings("all")
 public class Xbase02_PropertyAccess {
   public void myMethod() throws Throwable {
     Person _person = new Person();

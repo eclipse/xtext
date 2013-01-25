@@ -53,7 +53,7 @@ public class CompilerTest {
               CompilerTest.this._reflectExtensions.invoke(obj, "setName", "Foo");
               Object _invoke = CompilerTest.this._reflectExtensions.invoke(obj, "doStuff", "Hello");
               Assert.assertEquals("Hello Foo", _invoke);
-            } catch (Exception _e) {
+            } catch (Throwable _e) {
               throw Exceptions.sneakyThrow(_e);
             }
           }
@@ -63,7 +63,7 @@ public class CompilerTest {
             _function.apply(t);
           }
       });
-    } catch (Exception _e) {
+    } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
   }
@@ -162,7 +162,7 @@ public class CompilerTest {
             _function.apply(t);
           }
       });
-    } catch (Exception _e) {
+    } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
   }

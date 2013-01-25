@@ -2,7 +2,6 @@ package org.eclipse.xtend.core.tests.validation;
 
 import com.google.inject.Inject;
 import org.eclipse.xtend.core.tests.AbstractXtendTestCase;
-import org.eclipse.xtend.core.tests.NewTypeSystemRuntimeInjectorProvider;
 import org.eclipse.xtend.core.validation.IssueCodes;
 import org.eclipse.xtend.core.xtend.XtendAnnotationType;
 import org.eclipse.xtend.core.xtend.XtendClass;
@@ -11,15 +10,10 @@ import org.eclipse.xtend.core.xtend.XtendField;
 import org.eclipse.xtend.core.xtend.XtendFunction;
 import org.eclipse.xtend.core.xtend.XtendPackage.Literals;
 import org.eclipse.xtend2.lib.StringConcatenation;
-import org.eclipse.xtext.junit4.InjectWith;
-import org.eclipse.xtext.junit4.XtextRunner;
 import org.eclipse.xtext.junit4.validation.ValidationTestHelper;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.junit.Test;
-import org.junit.runner.RunWith;
 
-@RunWith(value = XtextRunner.class)
-@InjectWith(value = NewTypeSystemRuntimeInjectorProvider.class)
 @SuppressWarnings("all")
 public class ModifierValidationTest extends AbstractXtendTestCase {
   @Inject
@@ -60,7 +54,7 @@ public class ModifierValidationTest extends AbstractXtendTestCase {
       _builder_7.append("final class Foo{}");
       XtendClass _clazz_7 = this.clazz(_builder_7.toString());
       this._validationTestHelper.assertNoErrors(_clazz_7);
-    } catch (Exception _e) {
+    } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
   }
@@ -100,7 +94,7 @@ public class ModifierValidationTest extends AbstractXtendTestCase {
       _builder_7.append("final annotation Foo{}");
       XtendAnnotationType _annotationType_7 = this.annotationType(_builder_7.toString());
       this._validationTestHelper.assertError(_annotationType_7, Literals.XTEND_ANNOTATION_TYPE, IssueCodes.INVALID_MODIFIER);
-    } catch (Exception _e) {
+    } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
   }
@@ -140,7 +134,7 @@ public class ModifierValidationTest extends AbstractXtendTestCase {
       _builder_7.append("final def foo() {}");
       XtendFunction _function_7 = this.function(_builder_7.toString());
       this._validationTestHelper.assertNoErrors(_function_7);
-    } catch (Exception _e) {
+    } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
   }
@@ -180,7 +174,7 @@ public class ModifierValidationTest extends AbstractXtendTestCase {
       _builder_7.append("final new() {}");
       XtendConstructor _constructor_7 = this.constructor(_builder_7.toString());
       this._validationTestHelper.assertError(_constructor_7, Literals.XTEND_CONSTRUCTOR, IssueCodes.INVALID_MODIFIER);
-    } catch (Exception _e) {
+    } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
   }
@@ -224,7 +218,7 @@ public class ModifierValidationTest extends AbstractXtendTestCase {
       _builder_8.append("extension int foo");
       XtendField _field_8 = this.field(_builder_8.toString());
       this._validationTestHelper.assertNoErrors(_field_8);
-    } catch (Exception _e) {
+    } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
   }
@@ -264,7 +258,7 @@ public class ModifierValidationTest extends AbstractXtendTestCase {
       _builder_7.append("final final def foo() {}");
       XtendFunction _function_7 = this.function(_builder_7.toString());
       this._validationTestHelper.assertError(_function_7, Literals.XTEND_FUNCTION, IssueCodes.INVALID_MODIFIER);
-    } catch (Exception _e) {
+    } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
   }
@@ -288,7 +282,7 @@ public class ModifierValidationTest extends AbstractXtendTestCase {
       _builder_3.append("public private def foo() {}");
       XtendFunction _function_3 = this.function(_builder_3.toString());
       this._validationTestHelper.assertError(_function_3, Literals.XTEND_FUNCTION, IssueCodes.INVALID_MODIFIER);
-    } catch (Exception _e) {
+    } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
   }
@@ -304,7 +298,7 @@ public class ModifierValidationTest extends AbstractXtendTestCase {
       _builder_1.append("static abstract int foo=42");
       XtendField _field_1 = this.field(_builder_1.toString());
       this._validationTestHelper.assertError(_field_1, Literals.XTEND_FIELD, IssueCodes.INVALID_MODIFIER);
-    } catch (Exception _e) {
+    } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
   }
@@ -320,7 +314,7 @@ public class ModifierValidationTest extends AbstractXtendTestCase {
       _builder_1.append("final abstract def foo() ");
       XtendFunction _function_1 = this.function(_builder_1.toString());
       this._validationTestHelper.assertError(_function_1, Literals.XTEND_FUNCTION, IssueCodes.INVALID_MODIFIER);
-    } catch (Exception _e) {
+    } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
   }
@@ -336,7 +330,7 @@ public class ModifierValidationTest extends AbstractXtendTestCase {
       _builder_1.append("abstract def foo()");
       XtendFunction _function_1 = this.function(_builder_1.toString());
       this._validationTestHelper.assertNoError(_function_1, IssueCodes.INVALID_MODIFIER);
-    } catch (Exception _e) {
+    } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
   }
@@ -352,7 +346,7 @@ public class ModifierValidationTest extends AbstractXtendTestCase {
       _builder_1.append("final def foo() {}");
       XtendFunction _function_1 = this.function(_builder_1.toString());
       this._validationTestHelper.assertNoErrors(_function_1);
-    } catch (Exception _e) {
+    } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
   }
@@ -376,7 +370,7 @@ public class ModifierValidationTest extends AbstractXtendTestCase {
       _builder_3.append("val final int i=42");
       XtendField _field_3 = this.field(_builder_3.toString());
       this._validationTestHelper.assertNoErrors(_field_3);
-    } catch (Exception _e) {
+    } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
   }

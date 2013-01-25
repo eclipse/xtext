@@ -982,14 +982,6 @@ public class CompilationUnitImpl implements CompilationUnit, TypeReferenceProvid
       }
     }
     if (!_matched) {
-      if (obj instanceof XtendConstructor) {
-        final XtendConstructor _xtendConstructor = (XtendConstructor)obj;
-        _matched=true;
-        EAttribute _xtendConstructor_Name = XtendPackage.eINSTANCE.getXtendConstructor_Name();
-        _switchResult = _xtendConstructor_Name;
-      }
-    }
-    if (!_matched) {
       if (obj instanceof JvmFormalParameter) {
         final JvmFormalParameter _jvmFormalParameter = (JvmFormalParameter)obj;
         _matched=true;

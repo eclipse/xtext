@@ -3,6 +3,7 @@ import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.ListExtensions;
 
+@SuppressWarnings("all")
 public class Xbase05_Closures {
   public String myMethod() throws Throwable {
     String _xblockexpression = null;

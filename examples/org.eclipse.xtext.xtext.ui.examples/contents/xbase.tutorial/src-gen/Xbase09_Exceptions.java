@@ -1,5 +1,6 @@
 import org.eclipse.xtext.xbase.lib.Exceptions;
 
+@SuppressWarnings("all")
 public class Xbase09_Exceptions {
   public Object myMethod() throws Throwable {
     Object _xblockexpression = null;
