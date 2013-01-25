@@ -439,7 +439,8 @@ class CompilationUnitImpl implements CompilationUnit, TypeReferenceProvider, Pro
 			XtendTypeDeclaration : XtendPackage::eINSTANCE.xtendTypeDeclaration_Name
 			XtendField : XtendPackage::eINSTANCE.xtendField_Name
 			XtendFunction : XtendPackage::eINSTANCE.xtendFunction_Name
-			XtendConstructor : XtendPackage::eINSTANCE.xtendConstructor_Name
+			// FIXME: find something appropriate for constructors
+			//XtendConstructor : XtendPackage::eINSTANCE.xtendConstructor_Name
 			JvmFormalParameter : TypesPackage::eINSTANCE.jvmFormalParameter_Name
 		}
 	}
