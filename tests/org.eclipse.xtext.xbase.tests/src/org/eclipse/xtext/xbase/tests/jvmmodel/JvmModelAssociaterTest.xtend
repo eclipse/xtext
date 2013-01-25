@@ -6,15 +6,15 @@ import org.eclipse.emf.ecore.EcoreFactory
 import org.eclipse.xtext.common.types.JvmConstructor
 import org.eclipse.xtext.common.types.JvmDeclaredType
 import org.eclipse.xtext.common.types.JvmGenericType
+import org.eclipse.xtext.junit4.InjectWith
+import org.eclipse.xtext.junit4.XtextRunner
 import org.eclipse.xtext.resource.DerivedStateAwareResource
 import org.eclipse.xtext.resource.XtextResourceSet
-import org.eclipse.xtext.xbase.XbaseStandaloneSetup
 import org.eclipse.xtext.xbase.jvmmodel.JvmModelAssociator
+import org.eclipse.xtext.xbase.jvmmodel.JvmModelInferrerRegistry
 import org.eclipse.xtext.xbase.jvmmodel.JvmTypesBuilder
 import org.junit.Test
-
-import static org.junit.Assert.*
-import org.eclipse.xtext.xbase.jvmmodel.JvmModelInferrerRegistry
+import org.junit.runner.RunWith
 
 class JvmModelAssociaterTest extends AbstractJvmModelTest {
 	
@@ -22,10 +22,6 @@ class JvmModelAssociaterTest extends AbstractJvmModelTest {
 	@Inject JvmModelAssociator assoc
 	@Inject XtextResourceSet resourceSet
 	@Inject DerivedStateAwareResource resource
-	
-	override getInjector() {
-		new XbaseStandaloneSetup().createInjector
-	}
 	
 	@Test
 	def void testInference() {
@@ -113,5 +109,10 @@ class JvmModelAssociaterTest extends AbstractJvmModelTest {
 		assertSame(type.superTypes.head.type, anotherType)
 	}
 	
+}
+
+@RunWith(typeof(XtextRunner))
+@InjectWith(typeof(AbstractJvmModelTest$SimpleJvmModelTestInjectorProvider2))
+class JvmModelAssociaterTest2 extends JvmModelAssociaterTest {
 	
 }
