@@ -157,6 +157,7 @@ public class ContentAssistTest extends AbstractXbaseContentAssistInBlockTest imp
 		List<String> result = Lists.newArrayList(super.getKeywordsAndStatics());
 		result.add("super");
 		result.add("this");
+		result.add("class");
 //		result.add("clone");
 		result.add("hashCode");
 		result.add("toString");
@@ -175,7 +176,6 @@ public class ContentAssistTest extends AbstractXbaseContentAssistInBlockTest imp
 	@Override
 	public String[] getStringFeatures() {
 		ArrayList<String> features = newArrayList(super.getStringFeatures());
-		features.remove("class");
 		return features.toArray(new String[features.size()]);
 	}
 	
