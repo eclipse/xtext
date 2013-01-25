@@ -107,11 +107,6 @@ public class DefaultReferenceDescriptionTest extends AbstractXtextTests {
 		eClass.getESuperTypes().add(EcorePackage.Literals.EPACKAGE);
 		ePackage.getEClassifiers().add(eClass);
 
-		EAttribute nameAttribute = EcoreFactory.eINSTANCE.createEAttribute();
-		nameAttribute.setName("name");
-		nameAttribute.setEType(EcorePackage.Literals.ESTRING);
-		eClass.getEStructuralFeatures().add(nameAttribute);
-
 		EReference eReference1 = EcoreFactory.eINSTANCE.createEReference();
 		eReference1.setContainment(false);
 		eReference1.setName("onlyExportedRef");
@@ -146,7 +141,7 @@ public class DefaultReferenceDescriptionTest extends AbstractXtextTests {
 		eClass.getEStructuralFeatures().add(eReference5);
 
 		EObject object = ePackage.getEFactoryInstance().create(eClass);
-		object.eSet(nameAttribute, "testname");
+		object.eSet(EcorePackage.Literals.ENAMED_ELEMENT__NAME, "testname");
 		object.eSet(eReference1, EcorePackage.Literals.EPACKAGE);
 		object.eSet(eReference2, ePackage.getEFactoryInstance().create(eClass));
 		object.eSet(eReference3, EcorePackage.Literals.EPACKAGE);
@@ -304,6 +299,5 @@ public class DefaultReferenceDescriptionTest extends AbstractXtextTests {
 		IResourceDescription resourceDescription = new DefaultResourceDescription(testResource, strategy);
 		return resourceDescription;
 	}
-
 
 }
