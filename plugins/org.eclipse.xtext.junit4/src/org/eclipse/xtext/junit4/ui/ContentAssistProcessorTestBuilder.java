@@ -122,6 +122,19 @@ public class ContentAssistProcessorTestBuilder implements Cloneable {
 		return ret;
 	}
 
+	public ContentAssistProcessorTestBuilder applyProposal(int position) throws Exception {
+		ICompletionProposal proposal = computeCompletionProposals(getModel(), position)[0];
+		final XtextResource xtextResource = loadHelper.getResourceFor(new StringInputStream(model));
+		IXtextDocument document = getDocument(xtextResource, model);
+		proposal.apply(document);
+		ContentAssistProcessorTestBuilder reset = reset();
+		return reset.append(document.get());
+	}
+
+	public void expectContent(String exprectation){
+		Assert.assertEquals(exprectation, getModel());
+	}
+
 	public ContentAssistProcessorTestBuilder assertCount(int completionProposalCount) throws Exception {
 		return assertCountAtCursorPosition(completionProposalCount, this.cursorPosition);
 	}

@@ -22,7 +22,15 @@ import com.google.inject.ImplementedBy;
  */
 @ImplementedBy(MultiLineJavaDocTypeReferenceProvider.class)
 public interface IJavaDocTypeReferenceProvider {
-	
+
+	public static final String SEE_TAG = "@see";
+
+	public static final String SEE_TAG_WITH_SUFFIX = SEE_TAG + " ";
+
+	public static final String LINK_TAG = "@link";
+
+	public static final String LINK_TAG_WITH_SUFFIX = LINK_TAG + " ";
+
 	public List<ReplaceRegion> computeTypeRefRegions(INode commentNode);
 
 	public List<ReplaceRegion> computeParameterTypeRefRegions(INode commentNode);

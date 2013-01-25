@@ -28,8 +28,8 @@ public class MultiLineJavaDocTypeReferenceProvider implements IJavaDocTypeRefere
 	public List<ReplaceRegion> computeTypeRefRegions(INode node) {
 		List<ReplaceRegion> regions = Lists.newArrayList();
 		Iterable<ILeafNode> leafNodes = node.getLeafNodes();
-		computeRegions(regions, leafNodes, "@link ", "#", " ", "}");
-		computeRegions(regions, leafNodes, "@see ", "#" , " ", lineDelimiter);
+		computeRegions(regions, leafNodes, LINK_TAG_WITH_SUFFIX, "#", " ", "}");
+		computeRegions(regions, leafNodes, SEE_TAG_WITH_SUFFIX, "#" , " ", lineDelimiter);
 		return regions;
 	}
 
@@ -55,8 +55,15 @@ public class MultiLineJavaDocTypeReferenceProvider implements IJavaDocTypeRefere
 			String text = leafNode.getText();
 			int offset = leafNode.getOffset();
 			int position = text.indexOf(toSearch);
+			int textLength = text.length();
 			while (position != -1) {
 				int beginIndex = position + toSearch.length();
+				// Skip leading whitespaces
+				if(Character.isWhitespace(text.charAt(beginIndex))){
+					while(beginIndex < textLength && Character.isWhitespace(text.charAt(beginIndex))){
+						beginIndex ++;
+					}
+				}
 				int endLink = -1;
 				if(end != null && endLink == -1)
 					endLink = text.indexOf(end, beginIndex);
@@ -77,7 +84,7 @@ public class MultiLineJavaDocTypeReferenceProvider implements IJavaDocTypeRefere
 					break;
 				} else {
 					String simpleName = text.substring(beginIndex, endLink).replaceAll(" ", "");
-					if(simpleName.length() > 0 && simpleName.matches("[0-9a-zA-Z\\.]*")){
+					if(simpleName.length() > 0 && simpleName.matches("[0-9a-zA-Z\\.\\$_]*")){
 						ReplaceRegion region = new ReplaceRegion(offset + beginIndex, simpleName.length(), simpleName);
 						regions.add(region);
 					}
