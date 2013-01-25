@@ -433,6 +433,13 @@ public class ParserBasedContentAssistContextFactory extends AbstractContentAssis
 			return result;
 		}
 
+		/**
+		 * @since 2.4
+		 */
+		protected int getCompletionOffset(){
+			return completionOffset;
+		}
+
 		public ContentAssistContext.Builder doCreateContext(
 				INode lastCompleteNode, 
 				EObject currentModel, EObject previousModel,

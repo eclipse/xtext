@@ -126,4 +126,36 @@ class JavaDocTypeReferenceProviderTest extends AbstractXtendTestCase {
 		assertEquals(0,regions.size)
 	}
 
+	@Test
+	def void testComputation_7() {
+		val String input = '''
+			package foo
+
+			/**
+			* {@link    String}
+			*/
+			class Foo{}
+		'''
+		val resource = clazz(input).eResource as XtextResource
+		val rootNode = resource.parseResult.rootNode
+		val regions = javaDocTypeReferenceProvider.computeTypeRefRegions(rootNode)
+		assertEquals(1,regions.size)
+	}
+
+	@Test
+	def void testComputation_8() {
+		val String input = '''
+			package foo
+
+			/**
+			* @see    String
+			*/
+			class Foo{}
+		'''
+		val resource = clazz(input).eResource as XtextResource
+		val rootNode = resource.parseResult.rootNode
+		val regions = javaDocTypeReferenceProvider.computeTypeRefRegions(rootNode)
+		assertEquals(1,regions.size)
+	}
+
 }

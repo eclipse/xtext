@@ -135,7 +135,7 @@ public class JavaDocTypeReferenceProviderTest extends AbstractXtendTestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testComputation_4() {
     try {
@@ -165,7 +165,7 @@ public class JavaDocTypeReferenceProviderTest extends AbstractXtendTestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testComputation_5() {
     try {
@@ -227,7 +227,7 @@ public class JavaDocTypeReferenceProviderTest extends AbstractXtendTestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
+
   @Test
   public void testComputation_6() {
     try {
@@ -259,6 +259,64 @@ public class JavaDocTypeReferenceProviderTest extends AbstractXtendTestCase {
       int _size = regions.size();
       Assert.assertEquals(0, _size);
     } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+
+  @Test
+  public void testComputation_7() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("package foo");
+      _builder.newLine();
+      _builder.newLine();
+      _builder.append("/**");
+      _builder.newLine();
+      _builder.append("* {@link    String}");
+      _builder.newLine();
+      _builder.append("*/");
+      _builder.newLine();
+      _builder.append("class Foo{}");
+      _builder.newLine();
+      final String input = _builder.toString();
+      XtendClass _clazz = this.clazz(input);
+      Resource _eResource = _clazz.eResource();
+      final XtextResource resource = ((XtextResource) _eResource);
+      IParseResult _parseResult = resource.getParseResult();
+      final ICompositeNode rootNode = _parseResult.getRootNode();
+      final List<ReplaceRegion> regions = this.javaDocTypeReferenceProvider.computeTypeRefRegions(rootNode);
+      int _size = regions.size();
+      Assert.assertEquals(1, _size);
+    } catch (Exception _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+
+  @Test
+  public void testComputation_8() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("package foo");
+      _builder.newLine();
+      _builder.newLine();
+      _builder.append("/**");
+      _builder.newLine();
+      _builder.append("* @see    String");
+      _builder.newLine();
+      _builder.append("*/");
+      _builder.newLine();
+      _builder.append("class Foo{}");
+      _builder.newLine();
+      final String input = _builder.toString();
+      XtendClass _clazz = this.clazz(input);
+      Resource _eResource = _clazz.eResource();
+      final XtextResource resource = ((XtextResource) _eResource);
+      IParseResult _parseResult = resource.getParseResult();
+      final ICompositeNode rootNode = _parseResult.getRootNode();
+      final List<ReplaceRegion> regions = this.javaDocTypeReferenceProvider.computeTypeRefRegions(rootNode);
+      int _size = regions.size();
+      Assert.assertEquals(1, _size);
+    } catch (Exception _e) {
       throw Exceptions.sneakyThrow(_e);
     }
   }

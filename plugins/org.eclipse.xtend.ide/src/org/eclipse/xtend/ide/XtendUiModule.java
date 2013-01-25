@@ -17,6 +17,7 @@ import org.eclipse.xtend.ide.builder.JavaProjectPreferencesInitializer;
 import org.eclipse.xtend.ide.builder.SourceRelativeFileSystemAccess;
 import org.eclipse.xtend.ide.builder.XtendBuilderParticipant;
 import org.eclipse.xtend.ide.contentassist.TemplateProposalProvider;
+import org.eclipse.xtend.ide.contentassist.XtendContentAssistFactory;
 import org.eclipse.xtend.ide.editor.InitiallyCollapsableAwareFoldingStructureProvider;
 import org.eclipse.xtend.ide.editor.OccurrenceComputer;
 import org.eclipse.xtend.ide.editor.OverrideIndicatorModelListener;
@@ -67,6 +68,7 @@ import org.eclipse.xtext.ui.editor.XtextSourceViewerConfiguration;
 import org.eclipse.xtext.ui.editor.actions.IActionContributor;
 import org.eclipse.xtext.ui.editor.autoedit.AbstractEditStrategy;
 import org.eclipse.xtext.ui.editor.autoedit.AbstractEditStrategyProvider;
+import org.eclipse.xtext.ui.editor.contentassist.IContentAssistantFactory;
 import org.eclipse.xtext.ui.editor.contentassist.ITemplateProposalProvider;
 import org.eclipse.xtext.ui.editor.doubleClicking.DoubleClickStrategyProvider;
 import org.eclipse.xtext.ui.editor.embedded.IEditedResourceProvider;
@@ -359,5 +361,10 @@ public class XtendUiModule extends org.eclipse.xtend.ide.AbstractXtendUiModule {
 	
 	public Class<? extends ProcessorInstanceForJvmTypeProvider> bindProcessorInstanceForJvmTypeProvider() {
 		return JdtBasedProcessorProvider.class;
+	}
+
+	@Override
+	public Class<? extends IContentAssistantFactory> bindIContentAssistantFactory() {
+		return XtendContentAssistFactory.class;
 	}
 }
