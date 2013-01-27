@@ -157,12 +157,6 @@
 				<artifactId>maven-surefire-plugin</artifactId>
 				<configuration>
 					<argLine>-Xmx1024m -XX:MaxPermSize=512m</argLine>
-					<excludes>
-						<exclude>**/*Test.java</exclude>
-					</excludes>
-					<includes>
-						<include>**/*IT.java</include>
-					</includes>
 				</configuration>
 				<executions>
 					<execution>
@@ -170,6 +164,14 @@
 						<goals>
 							<goal>test</goal>
 						</goals>
+						<configuration>
+    						<excludes>
+    	                        <exclude>**/*Test.java</exclude>
+    	                    </excludes>
+    	                    <includes>
+    	                        <include>**/*IT.java</include>
+    	                    </includes>
+						</configuration>
 					</execution>
 				</executions>
 			</plugin>
