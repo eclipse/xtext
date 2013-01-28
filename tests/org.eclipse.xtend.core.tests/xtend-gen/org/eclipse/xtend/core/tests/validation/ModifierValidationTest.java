@@ -2,6 +2,7 @@ package org.eclipse.xtend.core.tests.validation;
 
 import com.google.inject.Inject;
 import org.eclipse.xtend.core.tests.AbstractXtendTestCase;
+import org.eclipse.xtend.core.tests.NewTypeSystemRuntimeInjectorProvider;
 import org.eclipse.xtend.core.validation.IssueCodes;
 import org.eclipse.xtend.core.xtend.XtendAnnotationType;
 import org.eclipse.xtend.core.xtend.XtendClass;
@@ -10,10 +11,15 @@ import org.eclipse.xtend.core.xtend.XtendField;
 import org.eclipse.xtend.core.xtend.XtendFunction;
 import org.eclipse.xtend.core.xtend.XtendPackage.Literals;
 import org.eclipse.xtend2.lib.StringConcatenation;
+import org.eclipse.xtext.junit4.InjectWith;
+import org.eclipse.xtext.junit4.XtextRunner;
 import org.eclipse.xtext.junit4.validation.ValidationTestHelper;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 
+@RunWith(value = XtextRunner.class)
+@InjectWith(value = NewTypeSystemRuntimeInjectorProvider.class)
 @SuppressWarnings("all")
 public class ModifierValidationTest extends AbstractXtendTestCase {
   @Inject
