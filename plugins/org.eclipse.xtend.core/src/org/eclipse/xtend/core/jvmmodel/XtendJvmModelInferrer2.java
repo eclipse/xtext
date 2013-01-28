@@ -292,6 +292,7 @@ public class XtendJvmModelInferrer2 implements IJvmModelInferrer {
 	
 	protected void initialize(XtendInterface source, JvmGenericType inferredJvmType) {
 		inferredJvmType.setVisibility(JvmVisibility.PUBLIC);
+		inferredJvmType.setInterface(true);
 		translateAnnotationsTo(source.getAnnotations(), inferredJvmType);
 		for (JvmTypeReference intf : source.getExtends()) {
 			inferredJvmType.getSuperTypes().add(jvmTypesBuilder.cloneWithProxies(intf));
