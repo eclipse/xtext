@@ -194,6 +194,9 @@ public class XtendResource extends XbaseResource {
 				}
 			}	
 		}
+		if (references.isEmpty()) {
+			return null;
+		}
 		JvmTypeReference result = jvmTypeConformanceComputer.getCommonSuperType(references);
 		while(result instanceof JvmMultiTypeReference) {
 			result = jvmTypeConformanceComputer.getCommonSuperType(((JvmMultiTypeReference) result).getReferences());
