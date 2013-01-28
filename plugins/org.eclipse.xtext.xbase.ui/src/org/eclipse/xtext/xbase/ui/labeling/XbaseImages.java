@@ -51,17 +51,39 @@ public class XbaseImages {
 	}
 
 	public Image forOperation(JvmVisibility visibility, boolean isStatic) {
-		ImageDescriptor descriptor = JavaElementImageProvider.getMethodImageDescriptor(false, toFlags(visibility));
-		if (isStatic)
-			return getDecoratedJdtImage(descriptor, JavaElementImageDescriptor.STATIC);
+		return forOperation(visibility, false, isStatic, false); 	
+	}
+	
+	public Image forOperation(JvmVisibility visibility, boolean isAbstract, boolean isStatic, boolean isFinal) {
+		ImageDescriptor descriptor = JavaElementImageProvider.getMethodImageDescriptor(false, 
+				toFlags(visibility, isAbstract, isStatic, isFinal));
+		int adornment = 0;
+		if(isStatic)
+			adornment |= JavaElementImageDescriptor.STATIC;
+		if(isFinal)
+			adornment |= JavaElementImageDescriptor.FINAL;
+		if(isAbstract)
+			adornment |= JavaElementImageDescriptor.ABSTRACT;
+		if (adornment != 0)
+				return getDecoratedJdtImage(descriptor, adornment);
 		else
 			return getJdtImage(descriptor);
 	}
 
 	public Image forField(JvmVisibility visibility, boolean isStatic, boolean isExtension) {
-		ImageDescriptor descriptor = JavaElementImageProvider.getFieldImageDescriptor(false, toFlags(visibility));
-		if (isStatic)
-			return getDecoratedJdtImage(descriptor, JavaElementImageDescriptor.STATIC);
+		return forField(visibility, isStatic, isExtension, false);
+	}
+	
+	public Image forField(JvmVisibility visibility, boolean isStatic, boolean isFinal, boolean isExtension) {
+		ImageDescriptor descriptor = JavaElementImageProvider.getFieldImageDescriptor(false, 
+				toFlags(visibility, false, isStatic, isFinal));
+		int adornment = 0;
+		if(isStatic)
+			adornment |= JavaElementImageDescriptor.STATIC;
+		if(isFinal)
+			adornment |= JavaElementImageDescriptor.FINAL;
+		if (adornment != 0)
+				return getDecoratedJdtImage(descriptor, adornment);
 		else
 			return getJdtImage(descriptor);
 	}
@@ -82,6 +104,17 @@ public class XbaseImages {
 		return JavaElementImageProvider.getDecoratedImage(descriptor, adornment, JavaElementImageProvider.SMALL_SIZE);
 	}
 
+	protected int toFlags(JvmVisibility visibility, boolean isAbstract, boolean isStatic, boolean isFinal) {
+		int flags = toFlags(visibility);
+		if(isAbstract)
+			flags |= Flags.AccAbstract;
+		if(isStatic)
+			flags |= Flags.AccStatic;
+		if(isFinal)
+			flags |= Flags.AccFinal;
+		return flags;
+	}
+	
 	protected int toFlags(JvmVisibility visibility) {
 		switch (visibility) {
 			case PRIVATE:

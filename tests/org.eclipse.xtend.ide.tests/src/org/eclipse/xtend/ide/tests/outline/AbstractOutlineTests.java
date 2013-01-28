@@ -112,6 +112,27 @@ public abstract class AbstractOutlineTests extends AbstractXtendUITestCase {
 		dispatcher.child(1, "foo(String) : String").numChildren(0);
 	}
 
+	@Test public void testInterface() throws Exception {
+		AssertBuilder assertBuilder = newAssertBuilder("interface Foo { int bar def String foo() }");
+		AssertBuilder interfaze = assertBuilder.numChildren(1).child(0, "Foo").numChildren(2);
+		interfaze.child(0, "bar : int").numChildren(0);
+		interfaze.child(1, "foo() : String").numChildren(0);
+	}
+
+	@Test public void testEnum() throws Exception {
+		AssertBuilder assertBuilder = newAssertBuilder("enum Foo { BAR, BAZ }");
+		AssertBuilder interfaze = assertBuilder.numChildren(1).child(0, "Foo").numChildren(2);
+		interfaze.child(0, "BAR : Foo").numChildren(0);
+		interfaze.child(1, "BAZ : Foo").numChildren(0);
+	}
+
+	@Test public void testAnnotationType() throws Exception {
+		AssertBuilder assertBuilder = newAssertBuilder("annotation Foo { int bar String foo = '' }");
+		AssertBuilder annotationType = assertBuilder.numChildren(1).child(0, "Foo").numChildren(2);
+		annotationType.child(0, "bar : int").numChildren(0);
+		annotationType.child(1, "foo : String").numChildren(0);
+	}
+
 	protected AssertBuilder newAssertBuilder(String model) throws Exception, CoreException {
 		XtendFile file = workbenchTestHelper.xtendFile("Foo", model);
 		XtextDocument document = documentProvider.get();
