@@ -147,8 +147,6 @@ public class XbaseInformationControl extends AbstractInformationControl implemen
 		Control viewerControl = embeddedEditor.getViewer().getControl();
 		viewerControl.setBackground(display.getSystemColor(SWT.COLOR_INFO_BACKGROUND));
 		viewerControl.setForeground(display.getSystemColor(SWT.COLOR_INFO_FOREGROUND));
-		// FIXME: No arguments need when https://bugs.eclipse.org/bugs/show_bug.cgi?id=368827 is solved
-		embeddedEditorAccess = embeddedEditor.createPartialEditor("", "a", "", false);
 		embeddedEditor.getDocument().setValidationJob(null);
 		createTextLayout();
 	}
@@ -246,11 +244,14 @@ public class XbaseInformationControl extends AbstractInformationControl implemen
 			unsugaredExpression = castedInput.getUnsugaredExpression();
 			if(unsugaredExpression != null && unsugaredExpression.length() > 0){
 				EObject element = fInput.getElement();
-				if(element != null && element.eResource() != null && element.eResource().getResourceSet() != null)
+				if(element != null && element.eResource() != null && element.eResource().getResourceSet() != null){
+					// FIXME: No arguments need when https://bugs.eclipse.org/bugs/show_bug.cgi?id=368827 is solved
+					// THEN move to createContent as it was before
+					if(embeddedEditorAccess == null)
+						embeddedEditorAccess = embeddedEditor.createPartialEditor("", "INITIAL CONTENT", "", false);
 					resourceProvider.setContext(((XtextResourceSet) element.eResource().getResourceSet()).getClasspathURIContext());
-				else
+				} else
 					return;
-				embeddedEditorAccess.updateModel("", "a", "");
 				embeddedEditorAccess.updateModel(castedInput.getPrefix() , unsugaredExpression ,castedInput.getSuffix());
 			}
 		}
