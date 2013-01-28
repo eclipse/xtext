@@ -59,6 +59,8 @@ public class XbaseWithAnnotationsTypeProvider extends XbaseTypeProvider {
 	protected JvmTypeReference _expectedType(XAnnotation annotation, EReference reference, int index,
 			boolean rawType) {
 		if (reference == XAnnotationsPackage.Literals.XANNOTATION__VALUE) {
+			if (annotation.getAnnotationType() == null)
+				return null;
 			JvmOperation valueOperation = annotationUtil.findSingleValueAttribute(annotation.getAnnotationType());
 			if (valueOperation==null)
 				return null;
