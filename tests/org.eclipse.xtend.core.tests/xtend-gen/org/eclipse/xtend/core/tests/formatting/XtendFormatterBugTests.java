@@ -59,7 +59,7 @@ public class XtendFormatterBugTests extends AbstractXtendFormatterTest {
     _builder_1.newLine();
     _builder_1.append("class bar {");
     _builder_1.newLine();
-    _builder_1.append(" \t");
+    _builder_1.append("\t");
     _builder_1.append("def testVisibilityOfDispatchMethods() {");
     _builder_1.newLine();
     _builder_1.append("\t\t");
@@ -72,7 +72,6 @@ public class XtendFormatterBugTests extends AbstractXtendFormatterTest {
     _builder_1.append("\t\t");
     _builder_1.append("import java.util.Arrays;");
     _builder_1.newLine();
-    _builder_1.append("\t\t");
     _builder_1.newLine();
     _builder_1.append("\t\t");
     _builder_1.append("@SuppressWarnings(\"all\")");
@@ -80,7 +79,6 @@ public class XtendFormatterBugTests extends AbstractXtendFormatterTest {
     _builder_1.append("\t\t");
     _builder_1.append("public class NoSuchElementException {");
     _builder_1.newLine();
-    _builder_1.append("\t\t");
     _builder_1.newLine();
     _builder_1.append("\t\t  ");
     _builder_1.append("}");

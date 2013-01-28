@@ -13,12 +13,12 @@ class XtendFormatterBugTests extends AbstractXtendFormatterTest {
 				def testVisibilityOfDispatchMethods() {
 					```
 						package foo;
-
+						
 						import java.util.Arrays;
-
+						
 						@SuppressWarnings("all")
 						public class NoSuchElementException {
-
+						
 						  }
 						}
 					```
