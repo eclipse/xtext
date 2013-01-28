@@ -8,9 +8,10 @@ import org.eclipse.xtext.naming.IQualifiedNameProvider
 
 import static org.junit.Assert.*
 import java.util.List
+import org.eclipse.xtext.junit4.XtextRunner
+import org.eclipse.xtext.junit4.InjectWith
 
-//@org.junit.runner.RunWith(typeof(XtextRunner))
-//@InjectWith(typeof(ClasspathAwareInjectorProvider))
+@org.junit.runner.RunWith(typeof(XtextRunner))
 class Case_8 {
 
     @Inject
