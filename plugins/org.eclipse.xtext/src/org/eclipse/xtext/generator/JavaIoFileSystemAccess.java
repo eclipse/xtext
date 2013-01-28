@@ -36,7 +36,7 @@ import com.google.inject.Inject;
  * @author Jan Koehnlein
  * @author Moritz Eysholdt
  */
-public class JavaIoFileSystemAccess extends AbstractFileSystemAccess {
+public class JavaIoFileSystemAccess extends AbstractFileSystemAccess2 {
 
 	@Inject
 	private IEncodingProvider encodingProvider;

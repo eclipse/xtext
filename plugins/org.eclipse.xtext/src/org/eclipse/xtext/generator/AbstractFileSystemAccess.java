@@ -9,7 +9,6 @@ package org.eclipse.xtext.generator;
 
 import static com.google.common.collect.Maps.*;
 
-import java.io.InputStream;
 import java.util.Map;
 
 import org.eclipse.emf.common.util.URI;
@@ -21,7 +20,7 @@ import com.google.inject.Inject;
  * @author Sven Efftinge - Initial contribution and API
  */
 public abstract class AbstractFileSystemAccess implements IFileSystemAccess, IFileSystemAccessExtension,
-		IFileSystemAccessExtension2, IFileSystemAccessExtension3 {
+		IFileSystemAccessExtension2 {
 
 	@Inject(optional = true)
 	private IFilePostProcessor postProcessor;
@@ -74,27 +73,6 @@ public abstract class AbstractFileSystemAccess implements IFileSystemAccess, IFi
 
 	public void generateFile(String fileName, CharSequence contents) {
 		generateFile(fileName, DEFAULT_OUTPUT, contents);
-	}
-
-	/**
-	 * @since 2.4
-	 */
-	public void generateFile(String fileName, InputStream content) {
-		generateFile(fileName, DEFAULT_OUTPUT, content);
-	}
-
-	/**
-	 * @since 2.4
-	 */
-	public InputStream readBinaryFile(String fileName) {
-		return readBinaryFile(fileName, DEFAULT_OUTPUT);
-	}
-
-	/**
-	 * @since 2.4
-	 */
-	public CharSequence readTextFile(String fileName) {
-		return readTextFile(fileName, DEFAULT_OUTPUT);
 	}
 
 	/**
