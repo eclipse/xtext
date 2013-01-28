@@ -166,6 +166,21 @@ public class XtendAdapterFactory extends AdapterFactoryImpl
 				return createXtendAnnotationTypeAdapter();
 			}
 			@Override
+			public Adapter caseXtendInterface(XtendInterface object)
+			{
+				return createXtendInterfaceAdapter();
+			}
+			@Override
+			public Adapter caseXtendEnum(XtendEnum object)
+			{
+				return createXtendEnumAdapter();
+			}
+			@Override
+			public Adapter caseXtendEnumLiteral(XtendEnumLiteral object)
+			{
+				return createXtendEnumLiteralAdapter();
+			}
+			@Override
 			public Adapter caseXExpression(XExpression object)
 			{
 				return createXExpressionAdapter();
@@ -443,6 +458,51 @@ public class XtendAdapterFactory extends AdapterFactoryImpl
 	 * @generated
 	 */
 	public Adapter createXtendAnnotationTypeAdapter()
+	{
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.xtend.core.xtend.XtendInterface <em>Interface</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.xtend.core.xtend.XtendInterface
+	 * @generated
+	 */
+	public Adapter createXtendInterfaceAdapter()
+	{
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.xtend.core.xtend.XtendEnum <em>Enum</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.xtend.core.xtend.XtendEnum
+	 * @generated
+	 */
+	public Adapter createXtendEnumAdapter()
+	{
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.xtend.core.xtend.XtendEnumLiteral <em>Enum Literal</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.xtend.core.xtend.XtendEnumLiteral
+	 * @generated
+	 */
+	public Adapter createXtendEnumLiteralAdapter()
 	{
 		return null;
 	}

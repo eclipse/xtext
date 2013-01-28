@@ -62,14 +62,14 @@ class XtendConstructorBuilder extends AbstractConstructorBuilder implements ICod
 	}
 
 	override getInsertOffset() {
-		getNewConstructorInsertOffset(context, xtendClass)
+		getNewConstructorInsertOffset(context, xtendType)
 	}
 	
 	override getIndentationLevel() {
 		1
 	}
 	
-	override getXtendClass() {
+	override getXtendType() {
 		ownerSource as XtendClass
 	}
 }

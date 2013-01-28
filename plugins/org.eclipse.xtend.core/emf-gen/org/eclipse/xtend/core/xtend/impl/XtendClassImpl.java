@@ -24,7 +24,6 @@ import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
 import org.eclipse.xtend.core.xtend.XtendClass;
-import org.eclipse.xtend.core.xtend.XtendMember;
 import org.eclipse.xtend.core.xtend.XtendPackage;
 
 import org.eclipse.xtext.common.types.JvmTypeParameter;
@@ -39,7 +38,6 @@ import org.eclipse.xtext.common.types.JvmTypeReference;
  * <ul>
  *   <li>{@link org.eclipse.xtend.core.xtend.impl.XtendClassImpl#getExtends <em>Extends</em>}</li>
  *   <li>{@link org.eclipse.xtend.core.xtend.impl.XtendClassImpl#getImplements <em>Implements</em>}</li>
- *   <li>{@link org.eclipse.xtend.core.xtend.impl.XtendClassImpl#getMembers <em>Members</em>}</li>
  *   <li>{@link org.eclipse.xtend.core.xtend.impl.XtendClassImpl#getTypeParameters <em>Type Parameters</em>}</li>
  * </ul>
  * </p>
@@ -67,16 +65,6 @@ public class XtendClassImpl extends XtendTypeDeclarationImpl implements XtendCla
 	 * @ordered
 	 */
 	protected EList<JvmTypeReference> implements_;
-
-	/**
-	 * The cached value of the '{@link #getMembers() <em>Members</em>}' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getMembers()
-	 * @generated
-	 * @ordered
-	 */
-	protected EList<XtendMember> members;
 
 	/**
 	 * The cached value of the '{@link #getTypeParameters() <em>Type Parameters</em>}' containment reference list.
@@ -176,20 +164,6 @@ public class XtendClassImpl extends XtendTypeDeclarationImpl implements XtendCla
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<XtendMember> getMembers()
-	{
-		if (members == null)
-		{
-			members = new EObjectContainmentEList<XtendMember>(XtendMember.class, this, XtendPackage.XTEND_CLASS__MEMBERS);
-		}
-		return members;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EList<JvmTypeParameter> getTypeParameters()
 	{
 		if (typeParameters == null)
@@ -225,8 +199,6 @@ public class XtendClassImpl extends XtendTypeDeclarationImpl implements XtendCla
 				return basicSetExtends(null, msgs);
 			case XtendPackage.XTEND_CLASS__IMPLEMENTS:
 				return ((InternalEList<?>)getImplements()).basicRemove(otherEnd, msgs);
-			case XtendPackage.XTEND_CLASS__MEMBERS:
-				return ((InternalEList<?>)getMembers()).basicRemove(otherEnd, msgs);
 			case XtendPackage.XTEND_CLASS__TYPE_PARAMETERS:
 				return ((InternalEList<?>)getTypeParameters()).basicRemove(otherEnd, msgs);
 		}
@@ -247,8 +219,6 @@ public class XtendClassImpl extends XtendTypeDeclarationImpl implements XtendCla
 				return getExtends();
 			case XtendPackage.XTEND_CLASS__IMPLEMENTS:
 				return getImplements();
-			case XtendPackage.XTEND_CLASS__MEMBERS:
-				return getMembers();
 			case XtendPackage.XTEND_CLASS__TYPE_PARAMETERS:
 				return getTypeParameters();
 		}
@@ -272,10 +242,6 @@ public class XtendClassImpl extends XtendTypeDeclarationImpl implements XtendCla
 			case XtendPackage.XTEND_CLASS__IMPLEMENTS:
 				getImplements().clear();
 				getImplements().addAll((Collection<? extends JvmTypeReference>)newValue);
-				return;
-			case XtendPackage.XTEND_CLASS__MEMBERS:
-				getMembers().clear();
-				getMembers().addAll((Collection<? extends XtendMember>)newValue);
 				return;
 			case XtendPackage.XTEND_CLASS__TYPE_PARAMETERS:
 				getTypeParameters().clear();
@@ -301,9 +267,6 @@ public class XtendClassImpl extends XtendTypeDeclarationImpl implements XtendCla
 			case XtendPackage.XTEND_CLASS__IMPLEMENTS:
 				getImplements().clear();
 				return;
-			case XtendPackage.XTEND_CLASS__MEMBERS:
-				getMembers().clear();
-				return;
 			case XtendPackage.XTEND_CLASS__TYPE_PARAMETERS:
 				getTypeParameters().clear();
 				return;
@@ -325,8 +288,6 @@ public class XtendClassImpl extends XtendTypeDeclarationImpl implements XtendCla
 				return extends_ != null;
 			case XtendPackage.XTEND_CLASS__IMPLEMENTS:
 				return implements_ != null && !implements_.isEmpty();
-			case XtendPackage.XTEND_CLASS__MEMBERS:
-				return members != null && !members.isEmpty();
 			case XtendPackage.XTEND_CLASS__TYPE_PARAMETERS:
 				return typeParameters != null && !typeParameters.isEmpty();
 		}

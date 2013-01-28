@@ -291,7 +291,7 @@ public class JvmModelGenerator implements IGenerator {
     return _xblockexpression;
   }
   
-  public ITreeAppendable generateAnnotationsWithSyntheticSuppressWarnings(final JvmGenericType it, final ITreeAppendable appendable, final GeneratorConfig config) {
+  public ITreeAppendable generateAnnotationsWithSyntheticSuppressWarnings(final JvmDeclaredType it, final ITreeAppendable appendable, final GeneratorConfig config) {
     ITreeAppendable _xblockexpression = null;
     {
       final Function1<JvmAnnotationReference,Boolean> _function = new Function1<JvmAnnotationReference,Boolean>() {
@@ -322,8 +322,13 @@ public class JvmModelGenerator implements IGenerator {
     {
       this.generateJavaDoc(it, appendable, config);
       final ITreeAppendable childAppendable = appendable.trace(it);
-      EList<JvmAnnotationReference> _annotations = it.getAnnotations();
-      this.generateAnnotations(_annotations, childAppendable, true, config);
+      boolean _isGenerateSyntheticSuppressWarnings = config.isGenerateSyntheticSuppressWarnings();
+      if (_isGenerateSyntheticSuppressWarnings) {
+        this.generateAnnotationsWithSyntheticSuppressWarnings(it, childAppendable, config);
+      } else {
+        EList<JvmAnnotationReference> _annotations = it.getAnnotations();
+        this.generateAnnotations(_annotations, childAppendable, true, config);
+      }
       this.generateModifier(it, childAppendable, config);
       childAppendable.append("enum ");
       ITreeAppendable _traceSignificant = this._treeAppendableUtil.traceSignificant(childAppendable, it);
@@ -390,14 +395,12 @@ public class JvmModelGenerator implements IGenerator {
   }
   
   public void generateEnumLiteral(final JvmEnumerationLiteral it, final ITreeAppendable appendable, final GeneratorConfig config) {
-    ITreeAppendable _increaseIndentation = appendable.increaseIndentation();
-    _increaseIndentation.newLine();
+    appendable.newLine();
     this.generateJavaDoc(it, appendable, config);
     EList<JvmAnnotationReference> _annotations = it.getAnnotations();
     this.generateAnnotations(_annotations, appendable, true, config);
     String _simpleName = it.getSimpleName();
     appendable.append(_simpleName);
-    appendable.decreaseIndentation();
   }
   
   protected ITreeAppendable _generateBody(final JvmAnnotationType it, final ITreeAppendable appendable, final GeneratorConfig config) {

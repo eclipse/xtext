@@ -39,9 +39,12 @@ import org.eclipse.xtend.core.xtend.XtendAnnotationTarget;
 import org.eclipse.xtend.core.xtend.XtendAnnotationType;
 import org.eclipse.xtend.core.xtend.XtendClass;
 import org.eclipse.xtend.core.xtend.XtendConstructor;
+import org.eclipse.xtend.core.xtend.XtendEnum;
+import org.eclipse.xtend.core.xtend.XtendEnumLiteral;
 import org.eclipse.xtend.core.xtend.XtendField;
 import org.eclipse.xtend.core.xtend.XtendFile;
 import org.eclipse.xtend.core.xtend.XtendFunction;
+import org.eclipse.xtend.core.xtend.XtendInterface;
 import org.eclipse.xtend.core.xtend.XtendMember;
 import org.eclipse.xtend.core.xtend.XtendParameter;
 import org.eclipse.xtend.core.xtend.XtendTypeDeclaration;
@@ -53,6 +56,8 @@ import org.eclipse.xtext.common.types.JvmAnnotationTarget;
 import org.eclipse.xtext.common.types.JvmAnnotationType;
 import org.eclipse.xtext.common.types.JvmConstructor;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
+import org.eclipse.xtext.common.types.JvmEnumerationLiteral;
+import org.eclipse.xtext.common.types.JvmEnumerationType;
 import org.eclipse.xtext.common.types.JvmExecutable;
 import org.eclipse.xtext.common.types.JvmField;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
@@ -176,6 +181,28 @@ public class XtendJvmModelInferrer implements IJvmModelInferrer {
 						}
 					});
 				}
+			} else if (declaration instanceof XtendInterface) {
+				final JvmGenericType javaType = typesFactory.createJvmGenericType();
+				setNameAndAssociate(xtendFile, declaration, javaType);
+				acceptor.accept(javaType);
+				if (!preIndexingPhase) {
+					doLater.add(new Runnable() {
+						public void run() {
+							initialize((XtendInterface) declaration, javaType);
+						}
+					});
+				}
+			} else if (declaration instanceof XtendEnum) {
+				final JvmEnumerationType javaType = typesFactory.createJvmEnumerationType();
+				setNameAndAssociate(xtendFile, declaration, javaType);
+				acceptor.accept(javaType);
+				if (!preIndexingPhase) {
+					doLater.add(new Runnable() {
+						public void run() {
+							initialize((XtendEnum) declaration, javaType);
+						}
+					});
+				}
 			}
 		}
 		
@@ -252,6 +279,36 @@ public class XtendJvmModelInferrer implements IJvmModelInferrer {
 	
 	protected void translateAnnotationsTo(List<XAnnotation> annotations, JvmAnnotationTarget target) {
 		jvmTypesBuilder.translateAnnotationsTo(Iterables.filter(annotations, annotationTranslationFilter), target);
+	}
+	
+	protected void initialize(XtendInterface source, JvmGenericType inferredJvmType) {
+		inferredJvmType.setVisibility(JvmVisibility.PUBLIC);
+		inferredJvmType.setInterface(true);
+		translateAnnotationsTo(source.getAnnotations(), inferredJvmType);
+		for (JvmTypeReference intf : source.getExtends()) 
+			inferredJvmType.getSuperTypes().add(jvmTypesBuilder.cloneWithProxies(intf));
+		copyAndFixTypeParameters(source.getTypeParameters(), inferredJvmType);
+		
+		for (XtendMember member : source.getMembers()) {
+			if (member instanceof XtendField
+					|| (member instanceof XtendFunction && ((XtendFunction) member).getName() != null)) {
+				transform(member, inferredJvmType);
+			}
+		}
+		
+		computeInferredReturnTypes(inferredJvmType);
+		jvmTypesBuilder.setDocumentation(inferredJvmType, jvmTypesBuilder.getDocumentation(source));
+		nameClashResolver.resolveNameClashes(inferredJvmType);
+	}
+	
+	protected void initialize(XtendEnum source, JvmEnumerationType inferredJvmType) {
+		inferredJvmType.setVisibility(JvmVisibility.PUBLIC);
+		translateAnnotationsTo(source.getAnnotations(), inferredJvmType);
+		for (XtendMember member : source.getMembers()) {
+			if (member instanceof XtendEnumLiteral) 
+				transform((XtendEnumLiteral)member, inferredJvmType);
+		}
+		jvmTypesBuilder.setDocumentation(inferredJvmType, jvmTypesBuilder.getDocumentation(source));
 	}
 	
 	protected void initialize(XtendClass source, JvmGenericType inferredJvmType) {
@@ -506,6 +563,8 @@ public class XtendJvmModelInferrer implements IJvmModelInferrer {
 			transform((XtendField) sourceMember, container);
 		} else if (sourceMember instanceof XtendConstructor) {
 			transform((XtendConstructor) sourceMember, container);
+		} else if (sourceMember instanceof XtendEnumLiteral && container instanceof JvmEnumerationType) {
+			transform((XtendEnumLiteral) sourceMember, (JvmEnumerationType) container);
 		} else {
 			throw new IllegalArgumentException("Cannot transform " + notNull(sourceMember) + " to a JvmMember");
 		}
@@ -685,6 +744,15 @@ public class XtendJvmModelInferrer implements IJvmModelInferrer {
 			jvmTypesBuilder.setInitializer(field, source.getInitialValue());
 			
 		}
+	}
+	
+	protected void transform(XtendEnumLiteral literal, JvmDeclaredType container) {
+		JvmEnumerationLiteral jvmLiteral = typesFactory.createJvmEnumerationLiteral();
+		jvmLiteral.setSimpleName(literal.getName());
+		jvmLiteral.setVisibility(JvmVisibility.PUBLIC);
+		jvmLiteral.setStatic(true);
+		jvmLiteral.setFinal(true);
+		jvmLiteral.setDeclaringType(container);
 	}
 	
 	private Predicate<XAnnotation> annotationTranslationFilter = new Predicate<XAnnotation>() {

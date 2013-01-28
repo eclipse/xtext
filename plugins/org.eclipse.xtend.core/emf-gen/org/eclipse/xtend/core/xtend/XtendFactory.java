@@ -164,6 +164,33 @@ public interface XtendFactory extends EFactory
 	XtendAnnotationType createXtendAnnotationType();
 
 	/**
+	 * Returns a new object of class '<em>Interface</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Interface</em>'.
+	 * @generated
+	 */
+	XtendInterface createXtendInterface();
+
+	/**
+	 * Returns a new object of class '<em>Enum</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Enum</em>'.
+	 * @generated
+	 */
+	XtendEnum createXtendEnum();
+
+	/**
+	 * Returns a new object of class '<em>Enum Literal</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Enum Literal</em>'.
+	 * @generated
+	 */
+	XtendEnumLiteral createXtendEnumLiteral();
+
+	/**
 	 * Returns the package supported by this factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

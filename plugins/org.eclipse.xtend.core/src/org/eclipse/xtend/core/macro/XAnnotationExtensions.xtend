@@ -28,6 +28,9 @@ import static org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotationsPacka
 import org.eclipse.xtext.common.types.JvmCustomAnnotationValue
 import org.eclipse.xtext.xbase.XTypeLiteral
 import org.eclipse.xtext.common.types.JvmType
+import org.eclipse.xtend.core.xtend.XtendInterface
+import org.eclipse.xtend.core.xtend.XtendEnum
+import org.eclipse.xtend.core.xtend.XtendEnumLiteral
 
 class XAnnotationExtensions {
 	
@@ -39,9 +42,12 @@ class XAnnotationExtensions {
 		switch container : annotation.eContainer {
 			XtendAnnotationType : container
 			XtendClass : container
+			XtendInterface : container
+			XtendEnum : container
 			XtendField : container
 			XtendFunction : container
 			XtendConstructor : container
+			XtendEnumLiteral : container
 			XtendParameter : container
 			XtendAnnotationTarget 	: container.eContainer as XtendAnnotationTarget
 			XAnnotation 			: getAnnotatedTarget(container)

@@ -1,6 +1,7 @@
 package org.eclipse.xtend.ide.tests.hover
 
 import com.google.inject.Inject
+import org.eclipse.xtend.core.xtend.XtendClass
 import org.eclipse.xtend.core.xtend.XtendFunction
 import org.eclipse.xtend.ide.hover.XtendHoverSerializer
 import org.eclipse.xtend.ide.tests.AbstractXtendUITestCase
@@ -10,10 +11,7 @@ import org.junit.After
 import org.junit.Before
 import org.junit.Test
 
-import static org.eclipse.xtend.ide.tests.hover.XtendUnsugaredHoverTest.*
 import static org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil.*
-import static org.junit.Assert.*
-import org.eclipse.xtend.core.xtend.XtendClass
 
 class XtendUnsugaredHoverTest extends AbstractXtendUITestCase {
 	 

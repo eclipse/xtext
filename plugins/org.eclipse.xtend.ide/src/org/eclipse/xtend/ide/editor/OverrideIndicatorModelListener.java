@@ -180,11 +180,7 @@ public class OverrideIndicatorModelListener extends NullImpl implements IXtextMo
 	private Iterable<XtendFunction> getXtendFunctions(XtendFile xtendFile) {
 		return concat(transform(xtendFile.getXtendTypes(), new Function<XtendTypeDeclaration, Iterable<XtendFunction>>(){
 			public java.lang.Iterable<XtendFunction> apply(XtendTypeDeclaration input) {
-				if (input instanceof XtendClass) {
-					XtendClass xtendClass = (XtendClass) input;
-					return filter(xtendClass.getMembers(), XtendFunction.class);
-				}
-				return Collections.emptyList();
+				return filter(input.getMembers(), XtendFunction.class);
 			}
 		}));
 	}

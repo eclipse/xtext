@@ -21,10 +21,12 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
 import org.eclipse.emf.ecore.util.EDataTypeEList;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 
 import org.eclipse.xtend.core.xtend.XtendAnnotationTarget;
 import org.eclipse.xtend.core.xtend.XtendMember;
 import org.eclipse.xtend.core.xtend.XtendPackage;
+import org.eclipse.xtend.core.xtend.XtendTypeDeclaration;
 
 import org.eclipse.xtext.common.types.JvmVisibility;
 
@@ -37,6 +39,7 @@ import org.eclipse.xtext.common.types.JvmVisibility;
  * <ul>
  *   <li>{@link org.eclipse.xtend.core.xtend.impl.XtendMemberImpl#getAnnotationInfo <em>Annotation Info</em>}</li>
  *   <li>{@link org.eclipse.xtend.core.xtend.impl.XtendMemberImpl#getModifiers <em>Modifiers</em>}</li>
+ *   <li>{@link org.eclipse.xtend.core.xtend.impl.XtendMemberImpl#getDeclaringType <em>Declaring Type</em>}</li>
  * </ul>
  * </p>
  *
@@ -152,6 +155,51 @@ public class XtendMemberImpl extends XtendAnnotationTargetImpl implements XtendM
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public XtendTypeDeclaration getDeclaringType()
+	{
+		if (eContainerFeatureID() != XtendPackage.XTEND_MEMBER__DECLARING_TYPE) return null;
+		return (XtendTypeDeclaration)eContainer();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public NotificationChain basicSetDeclaringType(XtendTypeDeclaration newDeclaringType, NotificationChain msgs)
+	{
+		msgs = eBasicSetContainer((InternalEObject)newDeclaringType, XtendPackage.XTEND_MEMBER__DECLARING_TYPE, msgs);
+		return msgs;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setDeclaringType(XtendTypeDeclaration newDeclaringType)
+	{
+		if (newDeclaringType != eInternalContainer() || (eContainerFeatureID() != XtendPackage.XTEND_MEMBER__DECLARING_TYPE && newDeclaringType != null))
+		{
+			if (EcoreUtil.isAncestor(this, newDeclaringType))
+				throw new IllegalArgumentException("Recursive containment not allowed for " + toString());
+			NotificationChain msgs = null;
+			if (eInternalContainer() != null)
+				msgs = eBasicRemoveFromContainer(msgs);
+			if (newDeclaringType != null)
+				msgs = ((InternalEObject)newDeclaringType).eInverseAdd(this, XtendPackage.XTEND_TYPE_DECLARATION__MEMBERS, XtendTypeDeclaration.class, msgs);
+			msgs = basicSetDeclaringType(newDeclaringType, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, XtendPackage.XTEND_MEMBER__DECLARING_TYPE, newDeclaringType, newDeclaringType));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public JvmVisibility getVisibility()
 	{
 		// TODO: implement this method
@@ -201,14 +249,50 @@ public class XtendMemberImpl extends XtendAnnotationTargetImpl implements XtendM
 	 * @generated
 	 */
 	@Override
+	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs)
+	{
+		switch (featureID)
+		{
+			case XtendPackage.XTEND_MEMBER__DECLARING_TYPE:
+				if (eInternalContainer() != null)
+					msgs = eBasicRemoveFromContainer(msgs);
+				return basicSetDeclaringType((XtendTypeDeclaration)otherEnd, msgs);
+		}
+		return super.eInverseAdd(otherEnd, featureID, msgs);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs)
 	{
 		switch (featureID)
 		{
 			case XtendPackage.XTEND_MEMBER__ANNOTATION_INFO:
 				return basicSetAnnotationInfo(null, msgs);
+			case XtendPackage.XTEND_MEMBER__DECLARING_TYPE:
+				return basicSetDeclaringType(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public NotificationChain eBasicRemoveFromContainerFeature(NotificationChain msgs)
+	{
+		switch (eContainerFeatureID())
+		{
+			case XtendPackage.XTEND_MEMBER__DECLARING_TYPE:
+				return eInternalContainer().eInverseRemove(this, XtendPackage.XTEND_TYPE_DECLARATION__MEMBERS, XtendTypeDeclaration.class, msgs);
+		}
+		return super.eBasicRemoveFromContainerFeature(msgs);
 	}
 
 	/**
@@ -225,6 +309,8 @@ public class XtendMemberImpl extends XtendAnnotationTargetImpl implements XtendM
 				return getAnnotationInfo();
 			case XtendPackage.XTEND_MEMBER__MODIFIERS:
 				return getModifiers();
+			case XtendPackage.XTEND_MEMBER__DECLARING_TYPE:
+				return getDeclaringType();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -247,6 +333,9 @@ public class XtendMemberImpl extends XtendAnnotationTargetImpl implements XtendM
 				getModifiers().clear();
 				getModifiers().addAll((Collection<? extends String>)newValue);
 				return;
+			case XtendPackage.XTEND_MEMBER__DECLARING_TYPE:
+				setDeclaringType((XtendTypeDeclaration)newValue);
+				return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -267,6 +356,9 @@ public class XtendMemberImpl extends XtendAnnotationTargetImpl implements XtendM
 			case XtendPackage.XTEND_MEMBER__MODIFIERS:
 				getModifiers().clear();
 				return;
+			case XtendPackage.XTEND_MEMBER__DECLARING_TYPE:
+				setDeclaringType((XtendTypeDeclaration)null);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -285,6 +377,8 @@ public class XtendMemberImpl extends XtendAnnotationTargetImpl implements XtendM
 				return annotationInfo != null;
 			case XtendPackage.XTEND_MEMBER__MODIFIERS:
 				return modifiers != null && !modifiers.isEmpty();
+			case XtendPackage.XTEND_MEMBER__DECLARING_TYPE:
+				return getDeclaringType() != null;
 		}
 		return super.eIsSet(featureID);
 	}

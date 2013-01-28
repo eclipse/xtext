@@ -22,6 +22,7 @@ public abstract class AbstractXtendSyntacticSequencer extends AbstractSyntacticS
 	protected AbstractElementAlias match_File_SemicolonKeyword_0_2_q;
 	protected AbstractElementAlias match_Member_SemicolonKeyword_2_0_4_q;
 	protected AbstractElementAlias match_Member_SemicolonKeyword_2_1_9_2_q;
+	protected AbstractElementAlias match_Type_SemicolonKeyword_2_2_6_q;
 	protected AbstractElementAlias match_XAnnotationElementValue_LeftParenthesisKeyword_7_0_a;
 	protected AbstractElementAlias match_XAnnotationElementValue_LeftParenthesisKeyword_7_0_p;
 	protected AbstractElementAlias match_XAnnotation___LeftParenthesisKeyword_3_0_RightParenthesisKeyword_3_2__q;
@@ -40,6 +41,7 @@ public abstract class AbstractXtendSyntacticSequencer extends AbstractSyntacticS
 		match_File_SemicolonKeyword_0_2_q = new TokenAlias(false, true, grammarAccess.getFileAccess().getSemicolonKeyword_0_2());
 		match_Member_SemicolonKeyword_2_0_4_q = new TokenAlias(false, true, grammarAccess.getMemberAccess().getSemicolonKeyword_2_0_4());
 		match_Member_SemicolonKeyword_2_1_9_2_q = new TokenAlias(false, true, grammarAccess.getMemberAccess().getSemicolonKeyword_2_1_9_2());
+		match_Type_SemicolonKeyword_2_2_6_q = new TokenAlias(false, true, grammarAccess.getTypeAccess().getSemicolonKeyword_2_2_6());
 		match_XAnnotationElementValue_LeftParenthesisKeyword_7_0_a = new TokenAlias(true, true, grammarAccess.getXAnnotationElementValueAccess().getLeftParenthesisKeyword_7_0());
 		match_XAnnotationElementValue_LeftParenthesisKeyword_7_0_p = new TokenAlias(true, false, grammarAccess.getXAnnotationElementValueAccess().getLeftParenthesisKeyword_7_0());
 		match_XAnnotation___LeftParenthesisKeyword_3_0_RightParenthesisKeyword_3_2__q = new GroupAlias(false, true, new TokenAlias(false, false, grammarAccess.getXAnnotationAccess().getLeftParenthesisKeyword_3_0()), new TokenAlias(false, false, grammarAccess.getXAnnotationAccess().getRightParenthesisKeyword_3_2()));
@@ -97,6 +99,8 @@ public abstract class AbstractXtendSyntacticSequencer extends AbstractSyntacticS
 				emit_Member_SemicolonKeyword_2_0_4_q(semanticObject, getLastNavigableState(), syntaxNodes);
 			else if(match_Member_SemicolonKeyword_2_1_9_2_q.equals(syntax))
 				emit_Member_SemicolonKeyword_2_1_9_2_q(semanticObject, getLastNavigableState(), syntaxNodes);
+			else if(match_Type_SemicolonKeyword_2_2_6_q.equals(syntax))
+				emit_Type_SemicolonKeyword_2_2_6_q(semanticObject, getLastNavigableState(), syntaxNodes);
 			else if(match_XAnnotationElementValue_LeftParenthesisKeyword_7_0_a.equals(syntax))
 				emit_XAnnotationElementValue_LeftParenthesisKeyword_7_0_a(semanticObject, getLastNavigableState(), syntaxNodes);
 			else if(match_XAnnotationElementValue_LeftParenthesisKeyword_7_0_p.equals(syntax))
@@ -150,6 +154,14 @@ public abstract class AbstractXtendSyntacticSequencer extends AbstractSyntacticS
 	 *     ';'?
 	 */
 	protected void emit_Member_SemicolonKeyword_2_1_9_2_q(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
+		acceptNodes(transition, nodes);
+	}
+	
+	/**
+	 * Syntax:
+	 *     ';'?
+	 */
+	protected void emit_Type_SemicolonKeyword_2_2_6_q(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
 	}
 	

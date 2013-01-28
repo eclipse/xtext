@@ -25,10 +25,13 @@ import org.eclipse.xtend.core.xtend.XtendAnnotationTarget;
 import org.eclipse.xtend.core.xtend.XtendAnnotationType;
 import org.eclipse.xtend.core.xtend.XtendClass;
 import org.eclipse.xtend.core.xtend.XtendConstructor;
+import org.eclipse.xtend.core.xtend.XtendEnum;
+import org.eclipse.xtend.core.xtend.XtendEnumLiteral;
 import org.eclipse.xtend.core.xtend.XtendFactory;
 import org.eclipse.xtend.core.xtend.XtendField;
 import org.eclipse.xtend.core.xtend.XtendFile;
 import org.eclipse.xtend.core.xtend.XtendFunction;
+import org.eclipse.xtend.core.xtend.XtendInterface;
 import org.eclipse.xtend.core.xtend.XtendMember;
 import org.eclipse.xtend.core.xtend.XtendPackage;
 import org.eclipse.xtend.core.xtend.XtendParameter;
@@ -161,6 +164,27 @@ public class XtendPackageImpl extends EPackageImpl implements XtendPackage
 	 * @generated
 	 */
 	private EClass xtendAnnotationTypeEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass xtendInterfaceEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass xtendEnumEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass xtendEnumLiteralEClass = null;
 
 	/**
 	 * Creates an instance of the model <b>Package</b>, registered with
@@ -305,19 +329,9 @@ public class XtendPackageImpl extends EPackageImpl implements XtendPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getXtendClass_Members()
-	{
-		return (EReference)xtendClassEClass.getEStructuralFeatures().get(2);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EReference getXtendClass_TypeParameters()
 	{
-		return (EReference)xtendClassEClass.getEStructuralFeatures().get(3);
+		return (EReference)xtendClassEClass.getEStructuralFeatures().get(2);
 	}
 
 	/**
@@ -368,6 +382,16 @@ public class XtendPackageImpl extends EPackageImpl implements XtendPackage
 	public EAttribute getXtendMember_Modifiers()
 	{
 		return (EAttribute)xtendMemberEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getXtendMember_DeclaringType()
+	{
+		return (EReference)xtendMemberEClass.getEStructuralFeatures().get(2);
 	}
 
 	/**
@@ -775,6 +799,16 @@ public class XtendPackageImpl extends EPackageImpl implements XtendPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EReference getXtendTypeDeclaration_Members()
+	{
+		return (EReference)xtendTypeDeclarationEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getXtendAnnotationType()
 	{
 		return xtendAnnotationTypeEClass;
@@ -785,9 +819,59 @@ public class XtendPackageImpl extends EPackageImpl implements XtendPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getXtendAnnotationType_Members()
+	public EClass getXtendInterface()
 	{
-		return (EReference)xtendAnnotationTypeEClass.getEStructuralFeatures().get(0);
+		return xtendInterfaceEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getXtendInterface_Extends()
+	{
+		return (EReference)xtendInterfaceEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getXtendInterface_TypeParameters()
+	{
+		return (EReference)xtendInterfaceEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getXtendEnum()
+	{
+		return xtendEnumEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getXtendEnumLiteral()
+	{
+		return xtendEnumLiteralEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getXtendEnumLiteral_Name()
+	{
+		return (EAttribute)xtendEnumLiteralEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -828,7 +912,6 @@ public class XtendPackageImpl extends EPackageImpl implements XtendPackage
 		xtendClassEClass = createEClass(XTEND_CLASS);
 		createEReference(xtendClassEClass, XTEND_CLASS__EXTENDS);
 		createEReference(xtendClassEClass, XTEND_CLASS__IMPLEMENTS);
-		createEReference(xtendClassEClass, XTEND_CLASS__MEMBERS);
 		createEReference(xtendClassEClass, XTEND_CLASS__TYPE_PARAMETERS);
 
 		xtendAnnotationTargetEClass = createEClass(XTEND_ANNOTATION_TARGET);
@@ -837,6 +920,7 @@ public class XtendPackageImpl extends EPackageImpl implements XtendPackage
 		xtendMemberEClass = createEClass(XTEND_MEMBER);
 		createEReference(xtendMemberEClass, XTEND_MEMBER__ANNOTATION_INFO);
 		createEAttribute(xtendMemberEClass, XTEND_MEMBER__MODIFIERS);
+		createEReference(xtendMemberEClass, XTEND_MEMBER__DECLARING_TYPE);
 
 		xtendFunctionEClass = createEClass(XTEND_FUNCTION);
 		createEAttribute(xtendFunctionEClass, XTEND_FUNCTION__NAME);
@@ -888,9 +972,18 @@ public class XtendPackageImpl extends EPackageImpl implements XtendPackage
 
 		xtendTypeDeclarationEClass = createEClass(XTEND_TYPE_DECLARATION);
 		createEAttribute(xtendTypeDeclarationEClass, XTEND_TYPE_DECLARATION__NAME);
+		createEReference(xtendTypeDeclarationEClass, XTEND_TYPE_DECLARATION__MEMBERS);
 
 		xtendAnnotationTypeEClass = createEClass(XTEND_ANNOTATION_TYPE);
-		createEReference(xtendAnnotationTypeEClass, XTEND_ANNOTATION_TYPE__MEMBERS);
+
+		xtendInterfaceEClass = createEClass(XTEND_INTERFACE);
+		createEReference(xtendInterfaceEClass, XTEND_INTERFACE__EXTENDS);
+		createEReference(xtendInterfaceEClass, XTEND_INTERFACE__TYPE_PARAMETERS);
+
+		xtendEnumEClass = createEClass(XTEND_ENUM);
+
+		xtendEnumLiteralEClass = createEClass(XTEND_ENUM_LITERAL);
+		createEAttribute(xtendEnumLiteralEClass, XTEND_ENUM_LITERAL__NAME);
 	}
 
 	/**
@@ -940,6 +1033,9 @@ public class XtendPackageImpl extends EPackageImpl implements XtendPackage
 		xtendConstructorEClass.getESuperTypes().add(this.getXtendMember());
 		xtendTypeDeclarationEClass.getESuperTypes().add(this.getXtendMember());
 		xtendAnnotationTypeEClass.getESuperTypes().add(this.getXtendTypeDeclaration());
+		xtendInterfaceEClass.getESuperTypes().add(this.getXtendTypeDeclaration());
+		xtendEnumEClass.getESuperTypes().add(this.getXtendTypeDeclaration());
+		xtendEnumLiteralEClass.getESuperTypes().add(this.getXtendMember());
 
 		// Initialize classes and features; add operations and parameters
 		initEClass(xtendFileEClass, XtendFile.class, "XtendFile", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -950,7 +1046,6 @@ public class XtendPackageImpl extends EPackageImpl implements XtendPackage
 		initEClass(xtendClassEClass, XtendClass.class, "XtendClass", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getXtendClass_Extends(), theTypesPackage.getJvmTypeReference(), null, "extends", null, 0, 1, XtendClass.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getXtendClass_Implements(), theTypesPackage.getJvmTypeReference(), null, "implements", null, 0, -1, XtendClass.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getXtendClass_Members(), this.getXtendMember(), null, "members", null, 0, -1, XtendClass.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getXtendClass_TypeParameters(), theTypesPackage.getJvmTypeParameter(), null, "typeParameters", null, 0, -1, XtendClass.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		addEOperation(xtendClassEClass, ecorePackage.getEBoolean(), "isAbstract", 0, 1, IS_UNIQUE, IS_ORDERED);
@@ -961,6 +1056,7 @@ public class XtendPackageImpl extends EPackageImpl implements XtendPackage
 		initEClass(xtendMemberEClass, XtendMember.class, "XtendMember", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getXtendMember_AnnotationInfo(), this.getXtendAnnotationTarget(), null, "annotationInfo", null, 0, 1, XtendMember.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getXtendMember_Modifiers(), ecorePackage.getEString(), "modifiers", null, 0, -1, XtendMember.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getXtendMember_DeclaringType(), this.getXtendTypeDeclaration(), this.getXtendTypeDeclaration_Members(), "declaringType", null, 0, 1, XtendMember.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		addEOperation(xtendMemberEClass, theTypesPackage.getJvmVisibility(), "getVisibility", 0, 1, IS_UNIQUE, IS_ORDERED);
 
@@ -1028,9 +1124,18 @@ public class XtendPackageImpl extends EPackageImpl implements XtendPackage
 
 		initEClass(xtendTypeDeclarationEClass, XtendTypeDeclaration.class, "XtendTypeDeclaration", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getXtendTypeDeclaration_Name(), ecorePackage.getEString(), "name", null, 0, 1, XtendTypeDeclaration.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getXtendTypeDeclaration_Members(), this.getXtendMember(), this.getXtendMember_DeclaringType(), "members", null, 0, -1, XtendTypeDeclaration.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(xtendAnnotationTypeEClass, XtendAnnotationType.class, "XtendAnnotationType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getXtendAnnotationType_Members(), this.getXtendMember(), null, "members", null, 0, -1, XtendAnnotationType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(xtendInterfaceEClass, XtendInterface.class, "XtendInterface", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getXtendInterface_Extends(), theTypesPackage.getJvmTypeReference(), null, "extends", null, 0, -1, XtendInterface.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getXtendInterface_TypeParameters(), theTypesPackage.getJvmTypeParameter(), null, "typeParameters", null, 0, -1, XtendInterface.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(xtendEnumEClass, XtendEnum.class, "XtendEnum", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+		initEClass(xtendEnumLiteralEClass, XtendEnumLiteral.class, "XtendEnumLiteral", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getXtendEnumLiteral_Name(), ecorePackage.getEString(), "name", null, 0, 1, XtendEnumLiteral.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Create resource
 		createResource(eNS_URI);

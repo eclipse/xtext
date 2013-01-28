@@ -18,9 +18,11 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtend.core.xtend.XtendAnnotationType;
 import org.eclipse.xtend.core.xtend.XtendClass;
 import org.eclipse.xtend.core.xtend.XtendConstructor;
+import org.eclipse.xtend.core.xtend.XtendEnum;
 import org.eclipse.xtend.core.xtend.XtendField;
 import org.eclipse.xtend.core.xtend.XtendFile;
 import org.eclipse.xtend.core.xtend.XtendFunction;
+import org.eclipse.xtend.core.xtend.XtendInterface;
 import org.eclipse.xtext.diagnostics.Severity;
 import org.eclipse.xtext.junit4.InjectWith;
 import org.eclipse.xtext.junit4.XtextRunner;
@@ -116,6 +118,14 @@ public abstract class AbstractXtendTestCase extends Assert {
 	
 	protected XtendAnnotationType annotationType(String string) throws Exception {
 		return (XtendAnnotationType) file(string).getXtendTypes().get(0);
+	}
+
+	protected XtendInterface interfaze(String string) throws Exception {
+		return (XtendInterface) file(string).getXtendTypes().get(0);
+	}
+
+	protected XtendEnum enumeration(String string) throws Exception {
+		return (XtendEnum) file(string).getXtendTypes().get(0);
 	}
 
 	protected XtendFunction function(String string) throws Exception {

@@ -12,10 +12,10 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.xtend.core.xtend.XtendClass;
 import org.eclipse.xtend.core.xtend.XtendConstructor;
 import org.eclipse.xtend.core.xtend.XtendField;
 import org.eclipse.xtend.core.xtend.XtendMember;
+import org.eclipse.xtend.core.xtend.XtendTypeDeclaration;
 import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.nodemodel.ILeafNode;
@@ -32,23 +32,23 @@ import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 @NonNullByDefault
 @SuppressWarnings("all")
 public class InsertionOffsets {
-  public int getNewTypeInsertOffset(@Nullable final EObject call, final XtendClass ownerClass) {
-    int _after = this.after(ownerClass);
+  public int getNewTypeInsertOffset(@Nullable final EObject call, final XtendTypeDeclaration ownerType) {
+    int _after = this.after(ownerType);
     return _after;
   }
   
-  public int getNewFieldInsertOffset(@Nullable final EObject call, final XtendClass ownerClass) {
-    EList<XtendMember> _members = ownerClass.getMembers();
+  public int getNewFieldInsertOffset(@Nullable final EObject call, final XtendTypeDeclaration ownerType) {
+    EList<XtendMember> _members = ownerType.getMembers();
     boolean _isEmpty = _members.isEmpty();
     if (_isEmpty) {
-      return this.inEmpty(ownerClass);
+      return this.inEmpty(ownerType);
     }
-    EList<XtendMember> _members_1 = ownerClass.getMembers();
+    EList<XtendMember> _members_1 = ownerType.getMembers();
     Iterable<XtendField> _filter = Iterables.<XtendField>filter(_members_1, XtendField.class);
     final XtendField lastDefinedField = IterableExtensions.<XtendField>last(_filter);
     boolean _equals = ObjectExtensions.operator_equals(lastDefinedField, null);
     if (_equals) {
-      EList<XtendMember> _members_2 = ownerClass.getMembers();
+      EList<XtendMember> _members_2 = ownerType.getMembers();
       XtendMember _head = IterableExtensions.<XtendMember>head(_members_2);
       return this.before(_head);
     } else {
@@ -56,39 +56,39 @@ public class InsertionOffsets {
     }
   }
   
-  public int getNewMethodInsertOffset(@Nullable final EObject call, final XtendClass ownerClass) {
+  public int getNewMethodInsertOffset(@Nullable final EObject call, final XtendTypeDeclaration ownerType) {
     final XtendMember callingMember = EcoreUtil2.<XtendMember>getContainerOfType(call, XtendMember.class);
     boolean _and = false;
     boolean _notEquals = ObjectExtensions.operator_notEquals(callingMember, null);
     if (!_notEquals) {
       _and = false;
     } else {
-      EList<XtendMember> _members = ownerClass.getMembers();
+      EList<XtendMember> _members = ownerType.getMembers();
       boolean _contains = _members.contains(callingMember);
       _and = (_notEquals && _contains);
     }
     if (_and) {
       return this.after(callingMember);
     } else {
-      EList<XtendMember> _members_1 = ownerClass.getMembers();
+      EList<XtendMember> _members_1 = ownerType.getMembers();
       boolean _isEmpty = _members_1.isEmpty();
       if (_isEmpty) {
-        return this.inEmpty(ownerClass);
+        return this.inEmpty(ownerType);
       } else {
-        EList<XtendMember> _members_2 = ownerClass.getMembers();
+        EList<XtendMember> _members_2 = ownerType.getMembers();
         XtendMember _last = IterableExtensions.<XtendMember>last(_members_2);
         return this.after(_last);
       }
     }
   }
   
-  public int getNewConstructorInsertOffset(@Nullable final EObject call, final XtendClass ownerClass) {
-    EList<XtendMember> _members = ownerClass.getMembers();
+  public int getNewConstructorInsertOffset(@Nullable final EObject call, final XtendTypeDeclaration ownerType) {
+    EList<XtendMember> _members = ownerType.getMembers();
     Iterable<XtendConstructor> _filter = Iterables.<XtendConstructor>filter(_members, XtendConstructor.class);
     final XtendConstructor lastDefinedConstructor = IterableExtensions.<XtendConstructor>last(_filter);
     boolean _equals = ObjectExtensions.operator_equals(lastDefinedConstructor, null);
     if (_equals) {
-      return this.getNewFieldInsertOffset(call, ownerClass);
+      return this.getNewFieldInsertOffset(call, ownerType);
     } else {
       return this.after(lastDefinedConstructor);
     }
@@ -112,10 +112,10 @@ public class InsertionOffsets {
     return _xblockexpression;
   }
   
-  protected int inEmpty(final XtendClass ownerClass) {
+  protected int inEmpty(final XtendTypeDeclaration ownerType) {
     int _xblockexpression = (int) 0;
     {
-      final ICompositeNode classNode = NodeModelUtils.findActualNodeFor(ownerClass);
+      final ICompositeNode classNode = NodeModelUtils.findActualNodeFor(ownerType);
       Iterable<ILeafNode> _leafNodes = classNode.getLeafNodes();
       final Function1<ILeafNode,Boolean> _function = new Function1<ILeafNode,Boolean>() {
           public Boolean apply(final ILeafNode it) {

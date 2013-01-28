@@ -109,7 +109,7 @@ public class XtendImportsConfiguration extends DefaultImportsConfiguration {
 	
 	@Override
 	public JvmDeclaredType getContextJvmDeclaredType(EObject model) {
-		XtendClass xtendClass = EcoreUtil2.getContainerOfType(model, XtendClass.class);
-		return associations.getInferredType(xtendClass);
+		XtendTypeDeclaration xtendType = EcoreUtil2.getContainerOfType(model, XtendTypeDeclaration.class);
+		return associations.getInferredType(xtendType);
 	}
 }

@@ -238,6 +238,35 @@ public class XtendSwitch<T>
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
+			case XtendPackage.XTEND_INTERFACE:
+			{
+				XtendInterface xtendInterface = (XtendInterface)theEObject;
+				T result = caseXtendInterface(xtendInterface);
+				if (result == null) result = caseXtendTypeDeclaration(xtendInterface);
+				if (result == null) result = caseXtendMember(xtendInterface);
+				if (result == null) result = caseXtendAnnotationTarget(xtendInterface);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case XtendPackage.XTEND_ENUM:
+			{
+				XtendEnum xtendEnum = (XtendEnum)theEObject;
+				T result = caseXtendEnum(xtendEnum);
+				if (result == null) result = caseXtendTypeDeclaration(xtendEnum);
+				if (result == null) result = caseXtendMember(xtendEnum);
+				if (result == null) result = caseXtendAnnotationTarget(xtendEnum);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case XtendPackage.XTEND_ENUM_LITERAL:
+			{
+				XtendEnumLiteral xtendEnumLiteral = (XtendEnumLiteral)theEObject;
+				T result = caseXtendEnumLiteral(xtendEnumLiteral);
+				if (result == null) result = caseXtendMember(xtendEnumLiteral);
+				if (result == null) result = caseXtendAnnotationTarget(xtendEnumLiteral);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
 			default: return defaultCase(theEObject);
 		}
 	}
@@ -494,6 +523,54 @@ public class XtendSwitch<T>
 	 * @generated
 	 */
 	public T caseXtendAnnotationType(XtendAnnotationType object)
+	{
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Interface</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Interface</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseXtendInterface(XtendInterface object)
+	{
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Enum</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Enum</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseXtendEnum(XtendEnum object)
+	{
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Enum Literal</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Enum Literal</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseXtendEnumLiteral(XtendEnumLiteral object)
 	{
 		return null;
 	}

@@ -11,6 +11,7 @@ import com.google.inject.Inject;
 import java.util.List;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtend.core.xtend.XtendClass;
+import org.eclipse.xtend.core.xtend.XtendTypeDeclaration;
 import org.eclipse.xtend.ide.codebuilder.AbstractMethodBuilder;
 import org.eclipse.xtend.ide.codebuilder.ICodeBuilder.Xtend;
 import org.eclipse.xtend.ide.codebuilder.InsertionOffsets;
@@ -74,8 +75,8 @@ public class XtendMethodBuilder extends AbstractMethodBuilder implements Xtend {
   
   public int getInsertOffset() {
     EObject _context = this.getContext();
-    XtendClass _xtendClass = this.getXtendClass();
-    int _newMethodInsertOffset = this._insertionOffsets.getNewMethodInsertOffset(_context, _xtendClass);
+    XtendTypeDeclaration _xtendType = this.getXtendType();
+    int _newMethodInsertOffset = this._insertionOffsets.getNewMethodInsertOffset(_context, _xtendType);
     return _newMethodInsertOffset;
   }
   
@@ -83,7 +84,7 @@ public class XtendMethodBuilder extends AbstractMethodBuilder implements Xtend {
     return 1;
   }
   
-  public XtendClass getXtendClass() {
+  public XtendTypeDeclaration getXtendType() {
     Object _ownerSource = this.getOwnerSource();
     return ((XtendClass) _ownerSource);
   }

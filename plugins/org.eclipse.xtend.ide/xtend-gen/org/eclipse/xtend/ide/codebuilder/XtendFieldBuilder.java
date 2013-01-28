@@ -10,6 +10,7 @@ package org.eclipse.xtend.ide.codebuilder;
 import javax.inject.Inject;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtend.core.xtend.XtendClass;
+import org.eclipse.xtend.core.xtend.XtendTypeDeclaration;
 import org.eclipse.xtend.ide.codebuilder.AbstractFieldBuilder;
 import org.eclipse.xtend.ide.codebuilder.ICodeBuilder.Xtend;
 import org.eclipse.xtend.ide.codebuilder.InsertionOffsets;
@@ -66,8 +67,8 @@ public class XtendFieldBuilder extends AbstractFieldBuilder implements Xtend {
   
   public int getInsertOffset() {
     EObject _context = this.getContext();
-    XtendClass _xtendClass = this.getXtendClass();
-    int _newFieldInsertOffset = this._insertionOffsets.getNewFieldInsertOffset(_context, _xtendClass);
+    XtendTypeDeclaration _xtendType = this.getXtendType();
+    int _newFieldInsertOffset = this._insertionOffsets.getNewFieldInsertOffset(_context, _xtendType);
     return _newFieldInsertOffset;
   }
   
@@ -75,7 +76,7 @@ public class XtendFieldBuilder extends AbstractFieldBuilder implements Xtend {
     return 1;
   }
   
-  public XtendClass getXtendClass() {
+  public XtendTypeDeclaration getXtendType() {
     Object _ownerSource = this.getOwnerSource();
     return ((XtendClass) _ownerSource);
   }

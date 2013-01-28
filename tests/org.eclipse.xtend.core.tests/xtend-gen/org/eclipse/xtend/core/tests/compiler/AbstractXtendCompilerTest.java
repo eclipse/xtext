@@ -29,6 +29,70 @@ public abstract class AbstractXtendCompilerTest extends AbstractXtendTestCase {
   private IGeneratorConfigProvider generatorConfigProvider;
   
   @Test
+  public void testInterface() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("interface Foo {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def int foo()");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("int bar=42");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("@SuppressWarnings(\"all\")");
+    _builder_1.newLine();
+    _builder_1.append("public interface Foo {");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("public abstract int foo();");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("public final static int bar = 42;");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    this.assertCompilesTo(_builder, _builder_1);
+  }
+  
+  @Test
+  public void testEnum() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("enum Foo {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("FOO, BAR, BAZ");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("@SuppressWarnings(\"all\")");
+    _builder_1.newLine();
+    _builder_1.append("public enum Foo {");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("FOO,");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("BAR,");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("BAZ;");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    this.assertCompilesTo(_builder, _builder_1);
+  }
+  
+  @Test
   public void testSneakyThrowable() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("class MyClass {");

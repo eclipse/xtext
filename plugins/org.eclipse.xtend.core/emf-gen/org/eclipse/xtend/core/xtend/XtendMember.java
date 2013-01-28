@@ -22,6 +22,7 @@ import org.eclipse.xtext.common.types.JvmVisibility;
  * <ul>
  *   <li>{@link org.eclipse.xtend.core.xtend.XtendMember#getAnnotationInfo <em>Annotation Info</em>}</li>
  *   <li>{@link org.eclipse.xtend.core.xtend.XtendMember#getModifiers <em>Modifiers</em>}</li>
+ *   <li>{@link org.eclipse.xtend.core.xtend.XtendMember#getDeclaringType <em>Declaring Type</em>}</li>
  * </ul>
  * </p>
  *
@@ -72,6 +73,34 @@ public interface XtendMember extends XtendAnnotationTarget
 	 * @generated
 	 */
 	EList<String> getModifiers();
+
+	/**
+	 * Returns the value of the '<em><b>Declaring Type</b></em>' container reference.
+	 * It is bidirectional and its opposite is '{@link org.eclipse.xtend.core.xtend.XtendTypeDeclaration#getMembers <em>Members</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Declaring Type</em>' container reference isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Declaring Type</em>' container reference.
+	 * @see #setDeclaringType(XtendTypeDeclaration)
+	 * @see org.eclipse.xtend.core.xtend.XtendPackage#getXtendMember_DeclaringType()
+	 * @see org.eclipse.xtend.core.xtend.XtendTypeDeclaration#getMembers
+	 * @model opposite="members" transient="false"
+	 * @generated
+	 */
+	XtendTypeDeclaration getDeclaringType();
+
+	/**
+	 * Sets the value of the '{@link org.eclipse.xtend.core.xtend.XtendMember#getDeclaringType <em>Declaring Type</em>}' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Declaring Type</em>' container reference.
+	 * @see #getDeclaringType()
+	 * @generated
+	 */
+	void setDeclaringType(XtendTypeDeclaration value);
 
 	/**
 	 * <!-- begin-user-doc -->

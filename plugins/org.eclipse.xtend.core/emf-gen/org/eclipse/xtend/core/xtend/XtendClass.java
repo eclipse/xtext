@@ -23,7 +23,6 @@ import org.eclipse.xtext.common.types.JvmTypeReference;
  * <ul>
  *   <li>{@link org.eclipse.xtend.core.xtend.XtendClass#getExtends <em>Extends</em>}</li>
  *   <li>{@link org.eclipse.xtend.core.xtend.XtendClass#getImplements <em>Implements</em>}</li>
- *   <li>{@link org.eclipse.xtend.core.xtend.XtendClass#getMembers <em>Members</em>}</li>
  *   <li>{@link org.eclipse.xtend.core.xtend.XtendClass#getTypeParameters <em>Type Parameters</em>}</li>
  * </ul>
  * </p>
@@ -75,22 +74,6 @@ public interface XtendClass extends XtendTypeDeclaration
 	 * @generated
 	 */
 	EList<JvmTypeReference> getImplements();
-
-	/**
-	 * Returns the value of the '<em><b>Members</b></em>' containment reference list.
-	 * The list contents are of type {@link org.eclipse.xtend.core.xtend.XtendMember}.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Members</em>' containment reference list isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Members</em>' containment reference list.
-	 * @see org.eclipse.xtend.core.xtend.XtendPackage#getXtendClass_Members()
-	 * @model containment="true"
-	 * @generated
-	 */
-	EList<XtendMember> getMembers();
 
 	/**
 	 * Returns the value of the '<em><b>Type Parameters</b></em>' containment reference list.

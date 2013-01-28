@@ -9,7 +9,7 @@ package org.eclipse.xtend.ide.codebuilder;
 
 import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.jdt.core.IType;
-import org.eclipse.xtend.core.xtend.XtendClass;
+import org.eclipse.xtend.core.xtend.XtendTypeDeclaration;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmVisibility;
 import org.eclipse.xtext.xbase.compiler.IAppendable;
@@ -39,7 +39,7 @@ public interface ICodeBuilder {
 	boolean isValid();
 	
 	interface Xtend extends ICodeBuilder {
-		XtendClass getXtendClass();
+		XtendTypeDeclaration getXtendType();
 		
 		int getInsertOffset();
 		

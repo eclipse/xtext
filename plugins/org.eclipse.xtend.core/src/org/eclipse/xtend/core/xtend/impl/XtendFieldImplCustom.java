@@ -9,6 +9,7 @@ package org.eclipse.xtend.core.xtend.impl;
 
 import static org.eclipse.xtext.util.Strings.*;
 
+import org.eclipse.xtend.core.xtend.XtendInterface;
 import org.eclipse.xtext.common.types.JvmVisibility;
 
 /**
@@ -27,7 +28,10 @@ public class XtendFieldImplCustom extends XtendFieldImpl {
 
 	@Override
 	protected JvmVisibility getDefaultVisibility() {
-		return JvmVisibility.PRIVATE;
+		if(getDeclaringType() instanceof XtendInterface)
+			return JvmVisibility.PUBLIC;
+		else 
+			return JvmVisibility.PRIVATE;
 	}
 	
 	@Override
@@ -38,7 +42,11 @@ public class XtendFieldImplCustom extends XtendFieldImpl {
 			if(equal(modifier, "val") || equal(modifier, "final")) 
 				return true;
 		}
-		return false;
-
+		return getDeclaringType() instanceof XtendInterface;
+	}
+	
+	@Override
+	public boolean isStatic() {
+		return super.isStatic() ? true : getDeclaringType() instanceof XtendInterface;
 	}
 }

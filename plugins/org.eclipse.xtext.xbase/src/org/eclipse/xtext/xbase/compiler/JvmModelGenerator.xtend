@@ -170,7 +170,7 @@ class JvmModelGenerator implements IGenerator {
 		appendable.newLine
 	}
 	
-	def generateAnnotationsWithSyntheticSuppressWarnings(JvmGenericType it, ITreeAppendable appendable, GeneratorConfig config) {
+	def generateAnnotationsWithSyntheticSuppressWarnings(JvmDeclaredType it, ITreeAppendable appendable, GeneratorConfig config) {
 		val noSuppressWarningsFilter = [JvmAnnotationReference it | !(it.annotation?.getIdentifier()?.equals(typeof(SuppressWarnings).name))]
 		annotations.filter(noSuppressWarningsFilter).generateAnnotations(appendable, true, config)
 		appendable.append('''@SuppressWarnings("all")''').newLine
@@ -179,7 +179,10 @@ class JvmModelGenerator implements IGenerator {
 	def dispatch generateBody(JvmEnumerationType it, ITreeAppendable appendable, GeneratorConfig config) {
 		generateJavaDoc(appendable, config)
 		val childAppendable = appendable.trace(it)
-		annotations.generateAnnotations(childAppendable, true, config)
+		if(config.generateSyntheticSuppressWarnings)
+			generateAnnotationsWithSyntheticSuppressWarnings(childAppendable, config)
+		else
+			annotations.generateAnnotations(childAppendable, true, config)
 		generateModifier(childAppendable, config)
 		childAppendable.append("enum ")
 		childAppendable.traceSignificant(it).append(simpleName)
@@ -201,12 +204,11 @@ class JvmModelGenerator implements IGenerator {
 	}
 	
 	def void generateEnumLiteral(JvmEnumerationLiteral it, ITreeAppendable appendable, GeneratorConfig config) {
-		appendable.increaseIndentation.newLine
+		appendable.newLine
 		generateJavaDoc(appendable, config)
 		annotations.generateAnnotations(appendable, true, config)
 		appendable.append(simpleName)
 		// TODO: constructor args
-		appendable.decreaseIndentation
 	}
 	
 	def dispatch generateBody(JvmAnnotationType it, ITreeAppendable appendable, GeneratorConfig config) {

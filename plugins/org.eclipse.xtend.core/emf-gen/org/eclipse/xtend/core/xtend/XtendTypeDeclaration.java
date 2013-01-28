@@ -8,6 +8,7 @@
  */
 package org.eclipse.xtend.core.xtend;
 
+import org.eclipse.emf.common.util.EList;
 
 /**
  * <!-- begin-user-doc -->
@@ -18,6 +19,7 @@ package org.eclipse.xtend.core.xtend;
  * The following features are supported:
  * <ul>
  *   <li>{@link org.eclipse.xtend.core.xtend.XtendTypeDeclaration#getName <em>Name</em>}</li>
+ *   <li>{@link org.eclipse.xtend.core.xtend.XtendTypeDeclaration#getMembers <em>Members</em>}</li>
  * </ul>
  * </p>
  *
@@ -52,5 +54,23 @@ public interface XtendTypeDeclaration extends XtendMember
 	 * @generated
 	 */
 	void setName(String value);
+
+	/**
+	 * Returns the value of the '<em><b>Members</b></em>' containment reference list.
+	 * The list contents are of type {@link org.eclipse.xtend.core.xtend.XtendMember}.
+	 * It is bidirectional and its opposite is '{@link org.eclipse.xtend.core.xtend.XtendMember#getDeclaringType <em>Declaring Type</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Members</em>' containment reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Members</em>' containment reference list.
+	 * @see org.eclipse.xtend.core.xtend.XtendPackage#getXtendTypeDeclaration_Members()
+	 * @see org.eclipse.xtend.core.xtend.XtendMember#getDeclaringType
+	 * @model opposite="declaringType" containment="true"
+	 * @generated
+	 */
+	EList<XtendMember> getMembers();
 
 } // XtendTypeDeclaration

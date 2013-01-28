@@ -4,32 +4,31 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- *
  */
 package org.eclipse.xtend.core.xtend.impl;
 
 import org.eclipse.emf.ecore.EClass;
 
-import org.eclipse.xtend.core.xtend.XtendAnnotationType;
+import org.eclipse.xtend.core.xtend.XtendEnum;
 import org.eclipse.xtend.core.xtend.XtendPackage;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Annotation Type</b></em>'.
+ * An implementation of the model object '<em><b>Enum</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * </p>
  *
  * @generated
  */
-public class XtendAnnotationTypeImpl extends XtendTypeDeclarationImpl implements XtendAnnotationType
+public class XtendEnumImpl extends XtendTypeDeclarationImpl implements XtendEnum
 {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected XtendAnnotationTypeImpl()
+	protected XtendEnumImpl()
 	{
 		super();
 	}
@@ -42,7 +41,7 @@ public class XtendAnnotationTypeImpl extends XtendTypeDeclarationImpl implements
 	@Override
 	protected EClass eStaticClass()
 	{
-		return XtendPackage.Literals.XTEND_ANNOTATION_TYPE;
+		return XtendPackage.Literals.XTEND_ENUM;
 	}
 
-} //XtendAnnotationTypeImpl
+} //XtendEnumImpl

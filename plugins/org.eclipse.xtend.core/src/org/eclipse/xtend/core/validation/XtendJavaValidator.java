@@ -11,7 +11,6 @@ import static com.google.common.collect.Iterables.*;
 import static com.google.common.collect.Lists.*;
 import static com.google.common.collect.Maps.*;
 import static com.google.common.collect.Sets.*;
-import static java.util.Collections.*;
 import static org.eclipse.xtend.core.validation.IssueCodes.*;
 import static org.eclipse.xtend.core.xtend.XtendPackage.Literals.*;
 import static org.eclipse.xtext.util.Strings.*;
@@ -44,9 +43,11 @@ import org.eclipse.xtend.core.xtend.XtendAnnotationTarget;
 import org.eclipse.xtend.core.xtend.XtendAnnotationType;
 import org.eclipse.xtend.core.xtend.XtendClass;
 import org.eclipse.xtend.core.xtend.XtendConstructor;
+import org.eclipse.xtend.core.xtend.XtendEnum;
 import org.eclipse.xtend.core.xtend.XtendField;
 import org.eclipse.xtend.core.xtend.XtendFile;
 import org.eclipse.xtend.core.xtend.XtendFunction;
+import org.eclipse.xtend.core.xtend.XtendInterface;
 import org.eclipse.xtend.core.xtend.XtendMember;
 import org.eclipse.xtend.core.xtend.XtendPackage;
 import org.eclipse.xtend.core.xtend.XtendParameter;
@@ -58,7 +59,6 @@ import org.eclipse.xtext.common.types.JvmAnnotationType;
 import org.eclipse.xtext.common.types.JvmConstructor;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmExecutable;
-import org.eclipse.xtext.common.types.JvmFeature;
 import org.eclipse.xtext.common.types.JvmField;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmGenericType;
@@ -113,7 +113,6 @@ import org.eclipse.xtext.xtype.XtypePackage;
 
 import com.google.common.base.Function;
 import com.google.common.base.Predicate;
-import com.google.common.base.Predicates;
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Iterables;
@@ -702,19 +701,6 @@ public class XtendJavaValidator extends XbaseWithAnnotationsJavaValidator {
 		}
 	}
 
-	protected Iterable<JvmOperation> allSuperOperations(final XtendClass xtendClass) {
-		// I love Google collections
-		Iterable<JvmOperation> result = filter(
-				concat(transform(
-						filter(concat(singleton(xtendClass.getExtends()), xtendClass.getImplements()),
-								Predicates.notNull()), new Function<JvmTypeReference, Iterable<JvmFeature>>() {
-							public Iterable<JvmFeature> apply(JvmTypeReference from) {
-								return featureOverridesService.getAllJvmFeatures(from);
-							}
-						})), JvmOperation.class);
-		return result;
-	}
-	
 	@Check
 	public void checkDefaultSuperConstructor(XtendClass xtendClass) {
 		JvmGenericType inferredType = associations.getInferredType(xtendClass);
@@ -829,24 +815,38 @@ public class XtendJavaValidator extends XbaseWithAnnotationsJavaValidator {
 	
 	@Check
 	public void checkAbstract(XtendFunction function) {
-		if (function.getExpression() == null && function.eContainer() instanceof XtendClass) {
-			XtendClass declarator = (XtendClass) function.eContainer();
-			if (function.isDispatch()) {
-				error("The dispatch method " + function.getName() + " in type " + declarator.getName() + " must not be abstract",XTEND_FUNCTION__NAME, -1, DISPATCH_FUNCTIONS_MUST_NOT_BE_ABSTRACT);
-				return;
+		if (function.getExpression() == null) {
+			if(function.getDeclaringType() instanceof XtendClass) {
+				XtendClass declarator = (XtendClass) function.getDeclaringType();
+				if (function.isDispatch()) {
+					error("The dispatch method " + function.getName() + " in type " + declarator.getName() + " must not be abstract",XTEND_FUNCTION__NAME, -1, DISPATCH_FUNCTIONS_MUST_NOT_BE_ABSTRACT);
+					return;
+				}
+				if (function.getCreateExtensionInfo() != null) {
+					error("The 'create'-method " + function.getName() + " in type " + declarator.getName() + " must not be abstract",XTEND_FUNCTION__NAME, -1, CREATE_FUNCTIONS_MUST_NOT_BE_ABSTRACT);
+					return;
+				}
+				if (!declarator.isAbstract()) {
+					error("The abstract method " + function.getName() + " in type " + declarator.getName() + " can only be defined by an abstract class.", 
+							XTEND_FUNCTION__NAME, -1, MISSING_ABSTRACT);
+				}
+				if(function.getReturnType() == null) {
+					error("The abstract method " + function.getName() + " in type " + declarator.getName() + " must declare a return type",
+							XTEND_FUNCTION__NAME, -1, ABSTRACT_METHOD_MISSING_RETURN_TYPE);
+				}
+			} else if(function.eContainer() instanceof XtendInterface) {
+				XtendInterface declarator = (XtendInterface) function.eContainer();
+				if (function.getCreateExtensionInfo() != null) {
+					error("'Create'-method " + function.getName() + " is not permitted in an interface", XTEND_FUNCTION__NAME, -1, CREATE_FUNCTIONS_MUST_NOT_BE_ABSTRACT);
+					return;
+				}
+				if(function.getReturnType() == null) {
+					error("The abstract method " + function.getName() + " in type " + declarator.getName() + " must declare a return type",
+							XTEND_FUNCTION__NAME, -1, ABSTRACT_METHOD_MISSING_RETURN_TYPE);
+				}
 			}
-			if (function.getCreateExtensionInfo() != null) {
-				error("The 'create'-method " + function.getName() + " in type " + declarator.getName() + " must not be abstract",XTEND_FUNCTION__NAME, -1, CREATE_FUNCTIONS_MUST_NOT_BE_ABSTRACT);
-				return;
-			}
-			if (!declarator.isAbstract()) {
-				error("The abstract method " + function.getName() + " in type " + declarator.getName() + " can only be defined by an abstract class.", 
-						XTEND_FUNCTION__NAME, -1, MISSING_ABSTRACT);
-			}
-			if(function.getReturnType() == null) {
-				error("The abstract method " + function.getName() + " in type " + declarator.getName() + " must declare a return type",
-						XTEND_FUNCTION__NAME, -1, ABSTRACT_METHOD_MISSING_RETURN_TYPE);
-			}
+		} else if(function.getDeclaringType() instanceof XtendInterface) {
+			error("Abstract methods do not specify a body", XTEND_FUNCTION__NAME, -1, ABSTRACT_METHOD_WITH_BODY);
 		}
 	}
 	
@@ -1323,14 +1323,26 @@ public class XtendJavaValidator extends XbaseWithAnnotationsJavaValidator {
 	private ModifierValidator classModifierValidator = new ModifierValidator(
 			newHashSet("public", "static", "final", "abstract"), this);
 		
+	private ModifierValidator interfaceModifierValidator = new ModifierValidator(
+			newHashSet("public", "abstract"), this);
+		
+	private ModifierValidator enumModifierValidator = new ModifierValidator(
+			newHashSet("public"), this);
+		
 	private ModifierValidator fieldModifierValidator = new ModifierValidator(
 			newHashSet("public", "protected", "package", "private", "static", "final", "val", "var", "extension"), this);
+		
+	private ModifierValidator fieldInInterfaceModifierValidator = new ModifierValidator(
+			newHashSet("public", "static", "final", "val"), this);
 		
 	private ModifierValidator constructorModifierValidator = new ModifierValidator(
 			visibilityModifers, this);
 		
 	private ModifierValidator methodModifierValidator = new ModifierValidator(
 			newHashSet("public", "protected", "package", "private", "static", "abstract", "dispatch", "final", "def", "override"), this);
+		
+	private ModifierValidator methodInInterfaceModifierValidator = new ModifierValidator(
+			newHashSet("public", "abstract", "def"), this);
 		
 	private ModifierValidator annotationTypeModifierValidator = new ModifierValidator(
 			newHashSet("public", "abstract"), this);
@@ -1341,27 +1353,48 @@ public class XtendJavaValidator extends XbaseWithAnnotationsJavaValidator {
 	}
 	
 	@Check
+	protected void checkModifiers(XtendInterface xtendInterface) {
+		interfaceModifierValidator.checkModifiers(xtendInterface, "interface " + xtendInterface.getName());
+	}
+	
+	@Check
+	protected void checkModifiers(XtendEnum xtendEnum) {
+		enumModifierValidator.checkModifiers(xtendEnum, "enum " + xtendEnum.getName());
+	}
+	
+	@Check
 	protected void checkModifiers(XtendField field) {
-		fieldModifierValidator.checkModifiers(field, "field " + field.getName());
+		if(field.getDeclaringType() instanceof XtendClass)
+			fieldModifierValidator.checkModifiers(field, "field " + field.getName());
+		else if(field.getDeclaringType() instanceof XtendInterface)
+			fieldInInterfaceModifierValidator.checkModifiers(field,  "field " + field.getName());
 	}
 	
 	@Check
 	protected void checkModifiers(XtendConstructor constructor) {
-		String typeName = ((XtendTypeDeclaration) constructor.eContainer()).getName();
-		constructorModifierValidator.checkModifiers(constructor, "type " + typeName);
+		if(!(constructor.getDeclaringType() instanceof XtendClass)) {
+			error("Contructors are only permitted within classes", null, CONSTRUCTOR_NOT_PERMITTED);
+		} else {
+			String typeName = ((XtendTypeDeclaration) constructor.eContainer()).getName();
+			constructorModifierValidator.checkModifiers(constructor, "type " + typeName);
+		}
 	}
 
 	@Check
 	protected void checkModifiers(XtendFunction method) {
-		methodModifierValidator.checkModifiers(method, "method " + method.getName());
-		int abstractIndex = method.getModifiers().indexOf("abstract");
-		if (method.getExpression() != null) {
-			if (abstractIndex != -1) 
-				error("Method " + method.getName() + " with a body cannot be abstract", XTEND_MEMBER__MODIFIERS, abstractIndex, INVALID_MODIFIER);
-		} else {
-			int finalIndex = method.getModifiers().indexOf("final");
-			if(finalIndex != -1) 
-				error("Abstract method " + method.getName() + " cannot be final", XTEND_MEMBER__MODIFIERS, finalIndex, INVALID_MODIFIER);
+		if(method.getDeclaringType() instanceof XtendClass) {
+			methodModifierValidator.checkModifiers(method, "method " + method.getName());
+			int abstractIndex = method.getModifiers().indexOf("abstract");
+			if (method.getExpression() != null) {
+				if (abstractIndex != -1) 
+					error("Method " + method.getName() + " with a body cannot be abstract", XTEND_MEMBER__MODIFIERS, abstractIndex, INVALID_MODIFIER);
+			} else {
+				int finalIndex = method.getModifiers().indexOf("final");
+				if(finalIndex != -1) 
+					error("Abstract method " + method.getName() + " cannot be final", XTEND_MEMBER__MODIFIERS, finalIndex, INVALID_MODIFIER);
+			}
+		} else if(method.getDeclaringType() instanceof XtendInterface) {
+			methodInInterfaceModifierValidator.checkModifiers(method, "method " + method.getName());			
 		}
 	}
 

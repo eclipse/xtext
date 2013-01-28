@@ -21,6 +21,7 @@ import org.eclipse.jdt.core.IMethod;
 import org.eclipse.jdt.core.IType;
 import org.eclipse.ui.IEditorPart;
 import org.eclipse.xtend.core.xtend.XtendClass;
+import org.eclipse.xtend.core.xtend.XtendTypeDeclaration;
 import org.eclipse.xtend.ide.codebuilder.ICodeBuilder;
 import org.eclipse.xtend.ide.codebuilder.ICodeBuilder.Java;
 import org.eclipse.xtend.ide.codebuilder.ICodeBuilder.Xtend;
@@ -125,7 +126,7 @@ public class CodeBuilderQuickfix {
     final Procedure1<IModificationContext> _function = new Procedure1<IModificationContext>() {
         public void apply(final IModificationContext it) {
           try {
-            final XtendClass xtendClass = builder.getXtendClass();
+            final XtendTypeDeclaration xtendClass = builder.getXtendType();
             URI _uRI = EcoreUtil.getURI(xtendClass);
             final IEditorPart editor = CodeBuilderQuickfix.this.editorOpener.open(_uRI, false);
             boolean _not = (!(editor instanceof XtextEditor));
