@@ -86,6 +86,8 @@ public class XbaseWithAnnotationsJavaValidator extends XbaseJavaValidator {
 		if (annotation.getValue()==null)
 			return;
 		JvmAnnotationType type = annotation.getAnnotationType();
+		if (type == null)
+			return;
 		JvmOperation value = annotationUtil.findSingleValueAttribute(type);
 		if (value == null) {
 			error("The attribute 'value' is undefined for the annotation '"+type.getIdentifier()+"'", annotation.getValue(), null, ValidationMessageAcceptor.INSIGNIFICANT_INDEX,
