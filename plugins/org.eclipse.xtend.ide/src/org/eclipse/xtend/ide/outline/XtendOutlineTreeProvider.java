@@ -101,13 +101,12 @@ public class XtendOutlineTreeProvider extends ModeAwareOutlineTreeProvider {
 	}
 
 	protected void createFeatureNodes(IOutlineNode parentNode, XtendTypeDeclaration xtendType) {
-		if (xtendType instanceof XtendClass) {
-			XtendClass xtendClass = (XtendClass) xtendType;
-			final JvmGenericType inferredType = associations.getInferredType(xtendClass);
-			if (inferredType != null) {
+		final JvmDeclaredType inferredType = associations.getInferredType(xtendType);
+		if (inferredType != null) {
+			Set<JvmFeature> processedFeatures = newHashSet();
+			if(xtendType instanceof XtendClass) {
 				Multimap<JvmOperation, JvmOperation> dispatcher2dispatched = dispatchingSupport.getDispatcher2dispatched(
-						xtendClass, getCurrentMode() == HIDE_INHERITED_MODE);
-				Set<JvmFeature> processedFeatures = newHashSet();
+						(XtendClass) xtendType, getCurrentMode() == HIDE_INHERITED_MODE);
 				for (JvmOperation dispatcher : dispatcher2dispatched.keySet()) {
 					XtendFeatureNode dispatcherNode = createNodeForFeature(parentNode, inferredType, dispatcher, dispatcher);
 					if (dispatcherNode != null) {
@@ -124,33 +123,33 @@ public class XtendOutlineTreeProvider extends ModeAwareOutlineTreeProvider {
 						}
 					}
 				}
-				List<JvmMember> remainingFeatures = newArrayList();
-				remainingFeatures.addAll(inferredType.getMembers());
-				if (getCurrentMode() == SHOW_INHERITED_MODE) {
-					Set<JvmTypeReference> superTypes = superTypeCollector.collectSuperTypes(inferredType);
-					for (JvmTypeReference superType : superTypes) {
-						JvmDeclaredType type = (JvmDeclaredType) superType.getType();
-						for (JvmMember member : type.getMembers()) {
-							if (member.getVisibility() != JvmVisibility.PRIVATE)
-								remainingFeatures.add(member);
-						}
-					}
-				} 
-				for (JvmFeature feature : filter(remainingFeatures, JvmFeature.class)) {
-					if (!processedFeatures.contains(feature)) {
-						EObject primarySourceElement = associations.getPrimarySourceElement(feature);
-						createNodeForFeature(parentNode, inferredType, feature, 
-								primarySourceElement != null ? primarySourceElement : feature);
+			}
+			List<JvmMember> remainingFeatures = newArrayList();
+			remainingFeatures.addAll(inferredType.getMembers());
+			if (getCurrentMode() == SHOW_INHERITED_MODE) {
+				Set<JvmTypeReference> superTypes = superTypeCollector.collectSuperTypes(inferredType);
+				for (JvmTypeReference superType : superTypes) {
+					JvmDeclaredType type = (JvmDeclaredType) superType.getType();
+					for (JvmMember member : type.getMembers()) {
+						if (member.getVisibility() != JvmVisibility.PRIVATE)
+							remainingFeatures.add(member);
 					}
 				}
-			} else {
-				for (XtendMember member : xtendClass.getMembers())
-					createEObjectNode(parentNode, member);
+			} 
+			for (JvmFeature feature : filter(remainingFeatures, JvmFeature.class)) {
+				if (!processedFeatures.contains(feature)) {
+					EObject primarySourceElement = associations.getPrimarySourceElement(feature);
+					createNodeForFeature(parentNode, inferredType, feature, 
+							primarySourceElement != null ? primarySourceElement : feature);
+				}
 			}
+		} else {
+			for (XtendMember member : xtendType.getMembers())
+				createEObjectNode(parentNode, member);
 		}
 	}
 
-	protected XtendFeatureNode createNodeForFeature(IOutlineNode parentNode, final JvmGenericType inferredType,
+	protected XtendFeatureNode createNodeForFeature(IOutlineNode parentNode, final JvmDeclaredType inferredType,
 			JvmFeature jvmFeature, EObject semanticFeature) {
 		Object text = textDispatcher.invoke(semanticFeature);
 		Image image = imageDispatcher.invoke(semanticFeature);

@@ -3,6 +3,9 @@
 */
 package org.eclipse.xtend.ide.labeling;
 
+import java.util.Iterator;
+
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.edit.ui.provider.AdapterFactoryLabelProvider;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.xtend.core.jvmmodel.IXtendJvmAssociations;
@@ -14,11 +17,7 @@ import org.eclipse.xtend.core.xtend.XtendField;
 import org.eclipse.xtend.core.xtend.XtendFile;
 import org.eclipse.xtend.core.xtend.XtendFunction;
 import org.eclipse.xtend.core.xtend.XtendInterface;
-import org.eclipse.xtext.common.types.JvmAnnotationType;
-import org.eclipse.xtext.common.types.JvmConstructor;
-import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmField;
-import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.xbase.ui.labeling.XbaseLabelProvider;
@@ -58,38 +57,31 @@ public class XtendLabelProvider extends XbaseLabelProvider {
 	}
 
 	public Image image(XtendClass element) {
-		JvmGenericType inferredType = associations.getInferredType(element);
-		return images.forClass(inferredType.getVisibility());
+		return images.forClass(element.getVisibility());
 	}
 
 	public Image image(XtendInterface element) {
-		JvmGenericType inferredType = associations.getInferredType(element);
-		return images.forInterface(inferredType.getVisibility());
+		return images.forInterface(element.getVisibility());
 	}
 
 	public Image image(XtendEnum element) {
-		JvmDeclaredType inferredType = associations.getInferredType(element);
-		return images.forEnum(inferredType.getVisibility());
+		return images.forEnum(element.getVisibility());
 	}
 
 	public Image image(XtendAnnotationType element) {
-		JvmAnnotationType inferredType = associations.getInferredAnnotationType(element);
-		return images.forAnnotation(inferredType.getVisibility());
+		return images.forAnnotation(element.getVisibility());
 	}
 
 	public Image image(XtendFunction element) {
-		JvmOperation inferredOperation = associations.getDirectlyInferredOperation(element);
-		return images.forOperation(inferredOperation.getVisibility(), inferredOperation.isStatic());
+		return images.forOperation(element.getVisibility(), element.isAbstract(), element.isStatic(), element.isFinal());
 	}
 	
 	public Image image(XtendConstructor element) {
-		JvmConstructor inferredConstructor = associations.getInferredConstructor(element);
-		return images.forConstructor(inferredConstructor.getVisibility());
+		return images.forConstructor(element.getVisibility());
 	}
 
 	public Image image(XtendField element) {
-		JvmField inferredField = associations.getJvmField(element);
-		return images.forField(inferredField.getVisibility(), inferredField.isStatic(), element.isExtension());
+		return images.forField(element.getVisibility(), element.isStatic(), element.isFinal(), element.isExtension());
 	}
 
 	public String text(XtendFile element) {
@@ -116,13 +108,25 @@ public class XtendLabelProvider extends XbaseLabelProvider {
 		if (element.getName() == null && element.isExtension()) {
 			return uiStrings.referenceToString(element.getType(), "extension");
 		}
-		JvmField jvmField = associations.getJvmField(element);
-		if (jvmField != null) {
-			JvmTypeReference type = jvmField.getType();
-			if (type != null) {
-				return element.getName() +" : " + uiStrings.referenceToString(type, "Object");
-			}
+		JvmTypeReference type = getType(element);
+		if (type != null) {
+			return element.getName() +" : " + uiStrings.referenceToString(type, "Object");
 		}
 		return element.getName();
+	}
+	
+	protected JvmTypeReference getType(XtendField field) {
+		JvmField jvmField = associations.getJvmField(field);
+		if (jvmField != null) {
+			return jvmField.getType();
+		} else {
+			Iterator<EObject> i = associations.getJvmElements(field).iterator();
+			if(i.hasNext()) {
+				EObject next = i.next();
+				if(next instanceof JvmOperation)
+					return ((JvmOperation)next).getReturnType();
+			}
+		}
+		return null;
 	}
 }
