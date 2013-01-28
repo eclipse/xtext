@@ -267,7 +267,10 @@ public class RichStringToLineModel extends ForLoopOnce {
             this._outdentThisLine = false;
           }
           lastLine.setIndentLength(newContentStartColumn);
-          this.contentStartColumn = newContentStartColumn;
+          boolean _notEquals = (newContentStartColumn != 0);
+          if (_notEquals) {
+            this.contentStartColumn = newContentStartColumn;
+          }
           LineModel _model_3 = this.getModel();
           List<Line> _lines_2 = _model_3.getLines();
           Line _last = IterableExtensions.<Line>last(_lines_2);

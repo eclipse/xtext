@@ -5,26 +5,6 @@ import org.junit.Ignore
 
 class XtendRichStringFormatterTest extends AbstractXtendFormatterTest {
 	
-	def private String decode(CharSequence seq) {
-		seq.toString.replace("<<", "«").replace(">>", "»").replace("```", "'''")
-	}
-	
-	def void assertFormattedRichStringExpression(CharSequence seq) {
-		assertFormattedExpression(seq.decode) 
-	}
-	
-	def void assertFormattedRichString(CharSequence seq) {
-		assertFormatted(seq.decode) 
-	}
-	
-	def void assertFormattedRichStringExpression(CharSequence expected, CharSequence actual) {
-		assertFormattedExpression(expected.decode, actual.decode) 
-	}
-	
-	def void assertFormattedRichStringExpressionWithErrors(CharSequence actual) {
-		assertFormattedExpression(null, actual.decode, actual.decode, true) 
-	}
-	
 	@Test def testSimple() {
 		assertFormattedRichStringExpression('''
 			val x = ```foo```;

@@ -107,4 +107,24 @@ abstract class AbstractXtendFormatterTest {
 		]
 	}
 
+	def protected String decode(CharSequence seq) {
+		seq.toString.replace("<<", "«").replace(">>", "»").replace("```", "'''")
+	}
+
+	def void assertFormattedRichStringExpression(CharSequence seq) {
+		assertFormattedExpression(seq.decode)
+	}
+
+	def void assertFormattedRichString(CharSequence seq) {
+		assertFormatted(seq.decode)
+	}
+
+	def void assertFormattedRichStringExpression(CharSequence expected, CharSequence actual) {
+		assertFormattedExpression(expected.decode, actual.decode)
+	}
+
+	def void assertFormattedRichStringExpressionWithErrors(CharSequence actual) {
+		assertFormattedExpression(null, actual.decode, actual.decode, true)
+	}
+
 }

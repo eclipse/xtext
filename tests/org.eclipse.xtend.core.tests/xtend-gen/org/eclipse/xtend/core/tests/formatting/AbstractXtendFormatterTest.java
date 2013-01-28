@@ -129,4 +129,34 @@ public abstract class AbstractXtendFormatterTest {
       };
     this.tester.assertFormatted(_function);
   }
+
+  protected String decode(final CharSequence seq) {
+    String _string = seq.toString();
+    String _replace = _string.replace("<<", "\u00AB");
+    String _replace_1 = _replace.replace(">>", "\u00BB");
+    String _replace_2 = _replace_1.replace("```", "\'\'\'");
+    return _replace_2;
+  }
+
+  public void assertFormattedRichStringExpression(final CharSequence seq) {
+    String _decode = this.decode(seq);
+    this.assertFormattedExpression(_decode);
+  }
+
+  public void assertFormattedRichString(final CharSequence seq) {
+    String _decode = this.decode(seq);
+    this.assertFormatted(_decode);
+  }
+
+  public void assertFormattedRichStringExpression(final CharSequence expected, final CharSequence actual) {
+    String _decode = this.decode(expected);
+    String _decode_1 = this.decode(actual);
+    this.assertFormattedExpression(_decode, _decode_1);
+  }
+
+  public void assertFormattedRichStringExpressionWithErrors(final CharSequence actual) {
+    String _decode = this.decode(actual);
+    String _decode_1 = this.decode(actual);
+    this.assertFormattedExpression(null, _decode, _decode_1, true);
+  }
 }
