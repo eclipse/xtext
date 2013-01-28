@@ -30,6 +30,19 @@ Type returns XtendTypeDeclaration :
 		   (members+=Member)*
 	   	'}'
 	 |
+		{XtendInterface.annotationInfo = current}
+		modifiers+=CommonModifier*
+	  	'interface' name=ValidID ('<' typeParameters+=JvmTypeParameter (',' typeParameters+=JvmTypeParameter)* '>')?  
+	   	('extends' extends+=JvmParameterizedTypeReference (',' extends+=JvmParameterizedTypeReference)*)?'{'
+		   (members+=Member)*
+	   	'}'
+	 |
+		{XtendEnum.annotationInfo = current}
+		modifiers+=CommonModifier*
+	  	'enum' name=ValidID '{'   
+		   (members+=XtendEnumLiteral (',' members+=XtendEnumLiteral)*)? ';'?
+	   	'}'
+	 |
 	 	{XtendAnnotationType.annotationInfo = current}
 	 	modifiers+=CommonModifier*
 		'annotation' name=ValidID '{'
@@ -91,6 +104,11 @@ Member returns XtendMember:
 		)
 	)
 ;
+
+XtendEnumLiteral: 
+	name=ValidID
+;
+
 
 CommonModifier:
 		'public' | 'private' | 'protected' | 'package' | 'abstract' | 'static' | 'dispatch' | 'final'

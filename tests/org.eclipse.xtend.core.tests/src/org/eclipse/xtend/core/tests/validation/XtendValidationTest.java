@@ -26,6 +26,7 @@ import org.eclipse.xtend.core.xtend.XtendConstructor;
 import org.eclipse.xtend.core.xtend.XtendField;
 import org.eclipse.xtend.core.xtend.XtendFile;
 import org.eclipse.xtend.core.xtend.XtendFunction;
+import org.eclipse.xtend.core.xtend.XtendInterface;
 import org.eclipse.xtend.core.xtend.XtendMember;
 import org.eclipse.xtend.core.xtend.XtendPackage;
 import org.eclipse.xtend.core.xtend.XtendTypeDeclaration;
@@ -176,6 +177,11 @@ public class XtendValidationTest extends AbstractXtendTestCase {
 	@Test public void testForwardReferenceInFieldInitializer_09() throws Exception {
 		XtendClass clazz = clazz("class Z { static val x = [| y] static val y = [|''] }");
 		helper.assertNoErrors(clazz);
+	}
+	
+	@Test public void testConstructorInInterface() throws Exception {
+		XtendInterface interfaze = interfaze("interface Foo { new() {} }");
+		helper.assertError(interfaze, XTEND_CONSTRUCTOR, CONSTRUCTOR_NOT_PERMITTED);
 	}
 	
 	@Test public void testCircularConstructor_01() throws Exception {
@@ -1092,6 +1098,16 @@ public class XtendValidationTest extends AbstractXtendTestCase {
     @Test public void testAbstractMethodWithoutReturnType() throws Exception {
     	XtendClass clazz = clazz("abstract class Foo { def test() }");
     	helper.assertError(clazz.getMembers().get(0), XTEND_FUNCTION, ABSTRACT_METHOD_MISSING_RETURN_TYPE);
+    }
+    
+    @Test public void testAbstractMethodWithoutReturnType_1() throws Exception {
+    	XtendInterface clazz = interfaze("interface Foo { def test() }");
+    	helper.assertError(clazz.getMembers().get(0), XTEND_FUNCTION, ABSTRACT_METHOD_MISSING_RETURN_TYPE);
+    }
+    
+    @Test public void testNonAbstractMethodInInterface() throws Exception {
+    	XtendInterface clazz = interfaze("interface Foo { def test() {} }");
+    	helper.assertError(clazz.getMembers().get(0), XTEND_FUNCTION, ABSTRACT_METHOD_WITH_BODY);
     }
     
     @Test public void testAbstractMethodWithReturnType() throws Exception {

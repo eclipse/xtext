@@ -8,14 +8,14 @@
 package org.eclipse.xtend.ide.codebuilder
 
 import org.eclipse.emf.ecore.EObject
-import org.eclipse.xtend.core.xtend.XtendClass
+import org.eclipse.jdt.annotation.NonNullByDefault
+import org.eclipse.jdt.annotation.Nullable
 import org.eclipse.xtend.core.xtend.XtendConstructor
 import org.eclipse.xtend.core.xtend.XtendField
 import org.eclipse.xtend.core.xtend.XtendMember
+import org.eclipse.xtend.core.xtend.XtendTypeDeclaration
 import org.eclipse.xtext.EcoreUtil2
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils
-import org.eclipse.jdt.annotation.NonNullByDefault
-import org.eclipse.jdt.annotation.Nullable
 
 /**
  * Calculates where to insert new members into exisitng Xtend code.
@@ -25,34 +25,34 @@ import org.eclipse.jdt.annotation.Nullable
 @NonNullByDefault
 class InsertionOffsets {
 
-	def getNewTypeInsertOffset(@Nullable EObject call, XtendClass ownerClass) {
-		after(ownerClass)
+	def getNewTypeInsertOffset(@Nullable EObject call, XtendTypeDeclaration ownerType) {
+		after(ownerType)
 	}
 
-	def getNewFieldInsertOffset(@Nullable EObject call, XtendClass ownerClass) {
-		if (ownerClass.members.empty)
-			return inEmpty(ownerClass)
-		val lastDefinedField = ownerClass.members.filter(typeof(XtendField)).last
+	def getNewFieldInsertOffset(@Nullable EObject call, XtendTypeDeclaration ownerType) {
+		if (ownerType.members.empty)
+			return inEmpty(ownerType)
+		val lastDefinedField = ownerType.members.filter(typeof(XtendField)).last
 		if (lastDefinedField == null)
-			return before(ownerClass.members.head)
+			return before(ownerType.members.head)
 		else
 			return after(lastDefinedField)
 	}
 
-	def getNewMethodInsertOffset(@Nullable EObject call, XtendClass ownerClass) {
+	def getNewMethodInsertOffset(@Nullable EObject call, XtendTypeDeclaration ownerType) {
 		val callingMember = EcoreUtil2::getContainerOfType(call, typeof(XtendMember))
-		if (callingMember != null && ownerClass.members.contains(callingMember))
+		if (callingMember != null && ownerType.members.contains(callingMember))
 			return after(callingMember)
-		else if (ownerClass.members.empty)
-			return inEmpty(ownerClass)
+		else if (ownerType.members.empty)
+			return inEmpty(ownerType)
 		else
-			return after(ownerClass.members.last)
+			return after(ownerType.members.last)
 	}
 
-	def getNewConstructorInsertOffset(@Nullable EObject call, XtendClass ownerClass) {
-		val lastDefinedConstructor = ownerClass.members.filter(typeof(XtendConstructor)).last
+	def getNewConstructorInsertOffset(@Nullable EObject call, XtendTypeDeclaration ownerType) {
+		val lastDefinedConstructor = ownerType.members.filter(typeof(XtendConstructor)).last
 		if(lastDefinedConstructor == null)
-			return getNewFieldInsertOffset(call, ownerClass)		
+			return getNewFieldInsertOffset(call, ownerType)		
 		else	
 			return after(lastDefinedConstructor)
 	}
@@ -66,8 +66,8 @@ class InsertionOffsets {
 		node.offset + node.length
 	}
 	
-	def protected inEmpty(XtendClass ownerClass) {
-		val classNode = NodeModelUtils::findActualNodeFor(ownerClass)
+	def protected inEmpty(XtendTypeDeclaration ownerType) {
+		val classNode = NodeModelUtils::findActualNodeFor(ownerType)
 		val openingBraceNode = classNode.leafNodes.findFirst[text == "{"]
 		if(openingBraceNode != null)
 			openingBraceNode.offset + 1

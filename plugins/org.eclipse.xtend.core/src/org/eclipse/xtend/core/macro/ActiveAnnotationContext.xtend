@@ -9,14 +9,17 @@ import org.eclipse.xtend.core.macro.declaration.CompilationUnitImpl
 import org.eclipse.xtend.core.xtend.XtendAnnotationTarget
 import org.eclipse.xtend.core.xtend.XtendClass
 import org.eclipse.xtend.core.xtend.XtendConstructor
+import org.eclipse.xtend.core.xtend.XtendEnum
 import org.eclipse.xtend.core.xtend.XtendFile
 import org.eclipse.xtend.core.xtend.XtendFunction
+import org.eclipse.xtend.core.xtend.XtendInterface
 import org.eclipse.xtext.common.types.JvmAnnotationType
 import org.eclipse.xtext.util.IAcceptor
+import org.eclipse.xtext.util.OnChangeEvictingCache
+import org.eclipse.xtext.util.internal.StopWatches
 import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotation
 import org.eclipse.xtext.xbase.lib.Pair
-import org.eclipse.xtext.util.internal.StopWatches
-import org.eclipse.xtext.util.OnChangeEvictingCache
+import org.eclipse.xtend.core.xtend.XtendEnumLiteral
 
 class ActiveAnnotationContext {
 	@Property val List<XtendAnnotationTarget> annotatedSourceElements = newArrayList()
@@ -68,6 +71,18 @@ class ActiveAnnotationContextProvider {
 				]
 			}
 			XtendClass : {
+				element.registerMacroAnnotations(acceptor)
+				element.members.forEach [
+					searchAnnotatedElements(acceptor)
+				]
+			}
+			XtendInterface : {
+				element.registerMacroAnnotations(acceptor)
+				element.members.forEach [
+					searchAnnotatedElements(acceptor)
+				]
+			}
+			XtendEnum : {
 				element.registerMacroAnnotations(acceptor)
 				element.members.forEach [
 					searchAnnotatedElements(acceptor)

@@ -19,7 +19,9 @@ import org.eclipse.xtend.core.xtend.RichStringIf;
 import org.eclipse.xtend.core.xtend.RichStringLiteral;
 import org.eclipse.xtend.core.xtend.XtendClass;
 import org.eclipse.xtend.core.xtend.XtendConstructor;
+import org.eclipse.xtend.core.xtend.XtendEnum;
 import org.eclipse.xtend.core.xtend.XtendFunction;
+import org.eclipse.xtend.core.xtend.XtendInterface;
 import org.eclipse.xtend.core.xtend.XtendPackage;
 import org.eclipse.xtend.core.xtend.XtendParameter;
 import org.eclipse.xtext.EcoreUtil2;
@@ -64,6 +66,10 @@ public class XtendTypeProvider extends XbaseWithAnnotationsTypeProvider {
 			return _typeForIdentifiable((JvmGenericType)identifiable, rawType);
 		} else if (identifiable instanceof XtendClass) {
 			return _typeForIdentifiable((XtendClass)identifiable, rawType);
+		} else if (identifiable instanceof XtendInterface) {
+			return _typeForIdentifiable((XtendInterface)identifiable, rawType);
+		} else if (identifiable instanceof XtendEnum) {
+			return _typeForIdentifiable((XtendEnum)identifiable, rawType);
 		} else if (identifiable instanceof XtendParameter) {
 			return _typeForIdentifiable((XtendParameter)identifiable, rawType);
 		} else {
@@ -214,6 +220,26 @@ public class XtendTypeProvider extends XbaseWithAnnotationsTypeProvider {
 	
 	protected JvmTypeReference _typeForIdentifiable(XtendClass clazz, boolean rawType) {
 		JvmType type = xtendjvmAssociations.getInferredType(clazz);
+		if (type != null) {
+			JvmParameterizedTypeReference typeReference = getTypesFactory().createJvmParameterizedTypeReference();
+			typeReference.setType(type);
+			return typeReference;
+		}
+		return null;
+	}
+	
+	protected JvmTypeReference _typeForIdentifiable(XtendInterface interfaze, boolean rawType) {
+		JvmType type = xtendjvmAssociations.getInferredType(interfaze);
+		if (type != null) {
+			JvmParameterizedTypeReference typeReference = getTypesFactory().createJvmParameterizedTypeReference();
+			typeReference.setType(type);
+			return typeReference;
+		}
+		return null;
+	}
+	
+	protected JvmTypeReference _typeForIdentifiable(XtendEnum enam, boolean rawType) {
+		JvmType type = xtendjvmAssociations.getInferredType(enam);
 		if (type != null) {
 			JvmParameterizedTypeReference typeReference = getTypesFactory().createJvmParameterizedTypeReference();
 			typeReference.setType(type);

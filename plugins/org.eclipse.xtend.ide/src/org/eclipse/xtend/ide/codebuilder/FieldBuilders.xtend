@@ -58,14 +58,14 @@ class XtendFieldBuilder extends AbstractFieldBuilder implements ICodeBuilder$Xte
 	}
 
 	override getInsertOffset() {
-		getNewFieldInsertOffset(context, xtendClass)
+		getNewFieldInsertOffset(context, xtendType)
 	}
 	
 	override getIndentationLevel() {
 		1
 	}
 	
-	override getXtendClass() {
+	override getXtendType() {
 		ownerSource as XtendClass
 	}
 }

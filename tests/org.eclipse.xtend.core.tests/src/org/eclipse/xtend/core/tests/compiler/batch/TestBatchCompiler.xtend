@@ -68,7 +68,7 @@ class TestBatchCompiler {
 		batchCompiler.sourcePath = XTEND_SRC_DIRECTORY
 		batchCompiler.outputPath = OUTPUT_DIRECTORY_WITH_SPACES
 		batchCompiler.compile
-		assertEquals(8, new File(OUTPUT_DIRECTORY_WITH_SPACES + "/test").list.size)
+		assertEquals(14, new File(OUTPUT_DIRECTORY_WITH_SPACES + "/test").list.size)
 	}
 
 	@Test
@@ -80,22 +80,22 @@ class TestBatchCompiler {
 		batchCompiler.compile
 		val compilerOutputDir = new File(OUTPUT_DIRECTORY_WITH_SPACES + "/test")
 		assertTrue("Compiler output exists", compilerOutputDir.exists)
-		assertEquals(8, compilerOutputDir.list.size)
+		assertEquals(14, compilerOutputDir.list.size)
 	}
 
 	@Test
 	def void testCompileTestDataWithTrace() {
 		batchCompiler.writeTraceFiles = true
 		batchCompiler.compile
-		assertEquals(4, new File(OUTPUT_DIRECTORY + "/test").list[dir, name|name.endsWith(".java")].size)
-		assertEquals(4, new File(OUTPUT_DIRECTORY + "/test").list[dir, name|name.endsWith("._trace")].size)
+		assertEquals(7, new File(OUTPUT_DIRECTORY + "/test").list[dir, name|name.endsWith(".java")].size)
+		assertEquals(7, new File(OUTPUT_DIRECTORY + "/test").list[dir, name|name.endsWith("._trace")].size)
 	}
 
 	@Test
 	def void testCompileTestDataWithoutTrace() {
 		batchCompiler.writeTraceFiles = false
 		batchCompiler.compile
-		assertEquals(4, new File(OUTPUT_DIRECTORY + "/test").list[dir, name|name.endsWith(".java")].size)
+		assertEquals(7, new File(OUTPUT_DIRECTORY + "/test").list[dir, name|name.endsWith(".java")].size)
 		assertEquals(0, new File(OUTPUT_DIRECTORY + "/test").list[dir, name|name.endsWith("._trace")].size)
 	}
 

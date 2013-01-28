@@ -16,12 +16,15 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtend.core.xtend.XtendAnnotationType;
 import org.eclipse.xtend.core.xtend.XtendClass;
 import org.eclipse.xtend.core.xtend.XtendConstructor;
+import org.eclipse.xtend.core.xtend.XtendEnum;
 import org.eclipse.xtend.core.xtend.XtendField;
 import org.eclipse.xtend.core.xtend.XtendFunction;
+import org.eclipse.xtend.core.xtend.XtendInterface;
 import org.eclipse.xtend.core.xtend.XtendTypeDeclaration;
 import org.eclipse.xtext.common.types.JvmAnnotationType;
 import org.eclipse.xtext.common.types.JvmConstructor;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
+import org.eclipse.xtext.common.types.JvmEnumerationType;
 import org.eclipse.xtext.common.types.JvmField;
 import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.common.types.JvmOperation;
@@ -41,7 +44,11 @@ public interface IXtendJvmAssociations extends IJvmModelAssociations {
 	
 	JvmGenericType getInferredType(XtendClass xtendClass);
 
+	JvmGenericType getInferredType(XtendInterface xtendInterfaceClass);
+
 	JvmAnnotationType getInferredAnnotationType(XtendAnnotationType xtendAnnotation);
+	
+	JvmEnumerationType getInferredEnumerationType(XtendEnum xtendInterfaceClass);
 	
 	JvmConstructor getInferredConstructor(XtendClass xtendClass);
 
@@ -55,6 +62,8 @@ public interface IXtendJvmAssociations extends IJvmModelAssociations {
 	
 	XtendClass getXtendClass(JvmGenericType jvmType);
 	
+	XtendInterface getXtendInterface(JvmGenericType jvmType);
+	
 	XtendFunction getXtendFunction(JvmOperation jvmOperation);
 
 	XtendConstructor getXtendConstructor(JvmConstructor jvmConstructor);
@@ -64,8 +73,8 @@ public interface IXtendJvmAssociations extends IJvmModelAssociations {
 	@Singleton
 	static class Impl extends JvmModelAssociator implements IXtendJvmAssociations {
 
-		public JvmDeclaredType getInferredType(XtendTypeDeclaration xtendClass) {
-			final JvmDeclaredType firstOrNull = getFirstOrNull(getJvmElements(xtendClass), JvmDeclaredType.class);
+		public JvmDeclaredType getInferredType(XtendTypeDeclaration xtendType) {
+			final JvmDeclaredType firstOrNull = getFirstOrNull(getJvmElements(xtendType), JvmDeclaredType.class);
 			return firstOrNull;
 		}
 		
@@ -74,8 +83,18 @@ public interface IXtendJvmAssociations extends IJvmModelAssociations {
 			return firstOrNull;
 		}
 
+		public JvmGenericType getInferredType(XtendInterface xtendInterface) {
+			final JvmGenericType firstOrNull = getFirstOrNull(getJvmElements(xtendInterface), JvmGenericType.class);
+			return firstOrNull;
+		}
+
 		public JvmAnnotationType getInferredAnnotationType(XtendAnnotationType xtendAnnotation) {
 			final JvmAnnotationType firstOrNull = getFirstOrNull(getJvmElements(xtendAnnotation), JvmAnnotationType.class);
+			return firstOrNull;
+		}
+
+		public JvmEnumerationType getInferredEnumerationType(XtendEnum xtendEnum) {
+			final JvmEnumerationType firstOrNull = getFirstOrNull(getJvmElements(xtendEnum), JvmEnumerationType.class);
 			return firstOrNull;
 		}
 
@@ -122,6 +141,13 @@ public interface IXtendJvmAssociations extends IJvmModelAssociations {
 			final EObject primarySourceElement = getPrimarySourceElement(jvmType);
 			if (primarySourceElement instanceof XtendClass) 
 				return (XtendClass) primarySourceElement;
+			return null;
+		}
+
+		public XtendInterface getXtendInterface(JvmGenericType jvmType) {
+			final EObject primarySourceElement = getPrimarySourceElement(jvmType);
+			if (primarySourceElement instanceof XtendInterface) 
+				return (XtendInterface) primarySourceElement;
 			return null;
 		}
 
