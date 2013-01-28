@@ -9,7 +9,7 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.ltk.core.refactoring.resource.RenameResourceChange;
-import org.eclipse.xtend.core.xtend.XtendClass;
+import org.eclipse.xtend.core.xtend.XtendTypeDeclaration;
 import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.ui.refactoring.IChangeRedirector;
 import org.eclipse.xtext.ui.refactoring.IRefactoringUpdateAcceptor;
@@ -42,10 +42,10 @@ public class XtendRenameStrategy extends DefaultJvmModelRenameStrategy {
 
 	protected IPath getPathToRename(URI elementURI, ResourceSet resourceSet) {
 		EObject targetObject = resourceSet.getEObject(elementURI, false);
-		if (targetObject instanceof XtendClass) {
+		if (targetObject instanceof XtendTypeDeclaration) {
 			URI resourceURI = EcoreUtil2.getNormalizedResourceURI(targetObject);
 			if (!resourceURI.isPlatformResource())
-				throw new RefactoringException("Renamed class does not reside in the workspace");
+				throw new RefactoringException("Renamed type does not reside in the workspace");
 			IPath path = new Path("/").append(new Path(resourceURI.path()).removeFirstSegments(1));
 			if(context instanceof IChangeRedirector.Aware) { 
 				if(((IChangeRedirector.Aware) context).getChangeRedirector().getRedirectedPath(path) != path)

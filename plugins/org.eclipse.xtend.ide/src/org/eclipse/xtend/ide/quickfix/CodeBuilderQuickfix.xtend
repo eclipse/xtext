@@ -24,6 +24,7 @@ import org.eclipse.xtext.validation.Issue
 import org.eclipse.xtext.xbase.compiler.ImportManager
 import org.eclipse.xtext.xbase.compiler.StringBuilderBasedAppendable
 import org.eclipse.xtext.xbase.ui.contentassist.ReplacingAppendable
+
 import org.eclipse.xtend.ide.codebuilder.ICodeBuilder
 
 /**
@@ -62,7 +63,7 @@ class CodeBuilderQuickfix {
 	
 	def protected IModification getXtendModification(ICodeBuilder$Xtend builder) {
 		[
-			val xtendClass = builder.xtendClass
+			val xtendClass = builder.xtendType
 			val editor = editorOpener.open(EcoreUtil::getURI(xtendClass), false);
 			if (!(editor instanceof XtextEditor)) {
 				return

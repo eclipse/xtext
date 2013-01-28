@@ -3,6 +3,7 @@ package org.eclipse.xtend.core.tests.xtend.impl
 import org.eclipse.xtend.core.tests.AbstractXtendTestCase
 import org.junit.Test
 import org.eclipse.xtext.common.types.JvmVisibility
+import org.eclipse.xtend.core.xtend.XtendField
 
 class CustomClassesTest extends AbstractXtendTestCase {
 	
@@ -26,9 +27,50 @@ class CustomClassesTest extends AbstractXtendTestCase {
 		assertEquals(JvmVisibility::PRIVATE, clazz('''private class Foo {}''').visibility)
 	}
 	
-	@Test def void testAnnotationTypeStaticAbstract() {
+	@Test def void testInterfaceVisibility() {
+		assertEquals(JvmVisibility::PUBLIC, interfaze('''interface Foo {}''').visibility)
+		assertEquals(JvmVisibility::PUBLIC, interfaze('''public interface Foo {}''').visibility)
+		assertEquals(JvmVisibility::PROTECTED, interfaze('''protected interface Foo {}''').visibility)
+		assertEquals(JvmVisibility::DEFAULT, interfaze('''package interface Foo {}''').visibility)
+		assertEquals(JvmVisibility::PRIVATE, interfaze('''private interface Foo {}''').visibility)
+	}
+	
+	@Test def void testEnumVisibility() {
+		assertEquals(JvmVisibility::PUBLIC, enumeration('''enum Foo {}''').visibility)
+		assertEquals(JvmVisibility::PUBLIC, enumeration('''public enum Foo {}''').visibility)
+		assertEquals(JvmVisibility::PROTECTED, enumeration('''protected enum Foo {}''').visibility)
+		assertEquals(JvmVisibility::DEFAULT, enumeration('''package enum Foo {}''').visibility)
+		assertEquals(JvmVisibility::PRIVATE, enumeration('''private enum Foo {}''').visibility)
+	}
+	
+	@Test def void testInterfaceFinalAndStatic() {
+		assertFalse(interfaze('''interface Foo {}''').final)
+		assertFalse(interfaze('''interface Foo {}''').^static)
+	}
+	
+	@Test def void testEnumFinalAndStatic() {
+		assertFalse(enumeration('''enum Foo {}''').^static)
+	}
+	
+	@Test def void testEnumLiteralDefaults() {
+		val enumeration = enumeration('''enum Foo { BAR }''')
+		val literal = enumeration.getMembers().get(0)
+		assertTrue(literal.^static)
+		assertTrue(literal.final)
+		assertEquals(JvmVisibility::PUBLIC, literal.visibility)
+	}
+
+	@Test def void testFieldInInterfaceDefaults() {
+		val field = interfaze('''interface Foo { int foo }''').members.get(0) as XtendField
+		assertTrue(field.final)
+		assertTrue(field.^static)
+		assertEquals(JvmVisibility::PUBLIC, field.visibility)
+	}
+	
+	
+	@Test def void testAnnotationTypeStaticAndFinal() {
 		assertFalse(annotationType('''static annotation Foo {}''').^static)
-		assertFalse(annotationType('''final annotation Foo {}''').^final)
+		assertFalse(annotationType('''final annotation Foo {}''').final)
 	}
 	
 	@Test def void testAnnotationTypeVisibility() {
@@ -53,10 +95,10 @@ class CustomClassesTest extends AbstractXtendTestCase {
 	}
 	
 	@Test def void testFieldFinal() {
-		assertFalse(field('''int foo=42''').^final)
-		assertTrue(field('''final int foo=42''').^final)
-		assertTrue(field('''val int foo=42''').^final)
-		assertFalse(field('''var int foo=42''').^final)
-		assertFalse(field('''var final int foo=42''').^final)
+		assertFalse(field('''int foo=42''').final)
+		assertTrue(field('''final int foo=42''').final)
+		assertTrue(field('''val int foo=42''').final)
+		assertFalse(field('''var int foo=42''').final)
+		assertFalse(field('''var final int foo=42''').final)
 	}
 }

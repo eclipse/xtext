@@ -7,34 +7,20 @@
  *******************************************************************************/
 package org.eclipse.xtend.core.xtend.impl;
 
-import static org.eclipse.xtext.util.Strings.*;
 
 /**
  * @author Jan Koehnlein - Initial contribution and API
  */
-public class XtendFunctionImplCustom extends XtendFunctionImpl {
-	
+public class XtendInterfaceImplCustom extends XtendInterfaceImpl {
+
 	@Override
-	public boolean isDispatch() {
-		for (String modifier: getModifiers()) { 
-			if (equal(modifier, "dispatch")) 
-				return true;
-		}
+	public boolean isStatic() {
 		return false;
 	}
-	
+
 	@Override
-	public boolean isOverride() {
-		for (String modifier: getModifiers()) { 
-			if (equal(modifier, "override")) 
-				return true;
-		}
+	public boolean isFinal() {
 		return false;
-	}
-	
-	@Override
-	public boolean isAbstract() {
-		return getExpression() == null;
 	}
 	
 }

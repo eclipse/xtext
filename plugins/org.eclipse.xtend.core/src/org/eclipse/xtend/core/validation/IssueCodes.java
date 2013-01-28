@@ -64,6 +64,7 @@ public final class IssueCodes {
 	public static final String MUST_INVOKE_SUPER_CONSTRUCTOR = ISSUE_CODE_PREFIX + "must_invoke_super_constructor";
 	public static final String CONSTRUCTOR_TYPE_PARAMS_NOT_SUPPORTED = ISSUE_CODE_PREFIX
 			+ "constructor_type_params_not_supported";
+	public static final String CONSTRUCTOR_NOT_PERMITTED = ISSUE_CODE_PREFIX + "constructor_not_permitted";
 
 	public static final String INVALID_USE_OF_STATIC = ISSUE_CODE_PREFIX + "invalid_use_of_static";
 	public static final String INVALID_USE_OF_TYPEPARAMS = ISSUE_CODE_PREFIX + "invalid_use_of_typeParams";
@@ -74,6 +75,7 @@ public final class IssueCodes {
 	public static final String LEFT_HAND_SIDE_MUST_BE_VARIABLE = "left_hand_side_must_be_variable";
 	
 	public static final String ABSTRACT_METHOD_MISSING_RETURN_TYPE = ISSUE_CODE_PREFIX + "abstract_method_missing_return_type";
+	public static final String ABSTRACT_METHOD_WITH_BODY = ISSUE_CODE_PREFIX + "abstract_method_with_body";
 	
 	public static final String INVALID_MODIFIER = ISSUE_CODE_PREFIX +  "invalid_modifier"; 
 	

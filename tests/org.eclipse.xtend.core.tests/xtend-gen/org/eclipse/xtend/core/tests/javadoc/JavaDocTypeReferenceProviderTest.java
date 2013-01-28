@@ -135,7 +135,7 @@ public class JavaDocTypeReferenceProviderTest extends AbstractXtendTestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-
+  
   @Test
   public void testComputation_4() {
     try {
@@ -165,7 +165,7 @@ public class JavaDocTypeReferenceProviderTest extends AbstractXtendTestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-
+  
   @Test
   public void testComputation_5() {
     try {
@@ -227,7 +227,7 @@ public class JavaDocTypeReferenceProviderTest extends AbstractXtendTestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-
+  
   @Test
   public void testComputation_6() {
     try {
@@ -262,7 +262,7 @@ public class JavaDocTypeReferenceProviderTest extends AbstractXtendTestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-
+  
   @Test
   public void testComputation_7() {
     try {
@@ -291,7 +291,7 @@ public class JavaDocTypeReferenceProviderTest extends AbstractXtendTestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-
+  
   @Test
   public void testComputation_8() {
     try {

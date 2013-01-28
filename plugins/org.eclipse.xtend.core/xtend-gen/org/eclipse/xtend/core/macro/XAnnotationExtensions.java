@@ -19,8 +19,11 @@ import org.eclipse.xtend.core.xtend.XtendAnnotationTarget;
 import org.eclipse.xtend.core.xtend.XtendAnnotationType;
 import org.eclipse.xtend.core.xtend.XtendClass;
 import org.eclipse.xtend.core.xtend.XtendConstructor;
+import org.eclipse.xtend.core.xtend.XtendEnum;
+import org.eclipse.xtend.core.xtend.XtendEnumLiteral;
 import org.eclipse.xtend.core.xtend.XtendField;
 import org.eclipse.xtend.core.xtend.XtendFunction;
+import org.eclipse.xtend.core.xtend.XtendInterface;
 import org.eclipse.xtend.core.xtend.XtendParameter;
 import org.eclipse.xtend.lib.macro.Active;
 import org.eclipse.xtext.common.types.JvmAnnotationReference;
@@ -70,6 +73,20 @@ public class XAnnotationExtensions {
       }
     }
     if (!_matched) {
+      if (container instanceof XtendInterface) {
+        final XtendInterface _xtendInterface = (XtendInterface)container;
+        _matched=true;
+        _switchResult = _xtendInterface;
+      }
+    }
+    if (!_matched) {
+      if (container instanceof XtendEnum) {
+        final XtendEnum _xtendEnum = (XtendEnum)container;
+        _matched=true;
+        _switchResult = _xtendEnum;
+      }
+    }
+    if (!_matched) {
       if (container instanceof XtendField) {
         final XtendField _xtendField = (XtendField)container;
         _matched=true;
@@ -88,6 +105,13 @@ public class XAnnotationExtensions {
         final XtendConstructor _xtendConstructor = (XtendConstructor)container;
         _matched=true;
         _switchResult = _xtendConstructor;
+      }
+    }
+    if (!_matched) {
+      if (container instanceof XtendEnumLiteral) {
+        final XtendEnumLiteral _xtendEnumLiteral = (XtendEnumLiteral)container;
+        _matched=true;
+        _switchResult = _xtendEnumLiteral;
       }
     }
     if (!_matched) {

@@ -1,11 +1,12 @@
 package org.eclipse.xtend.core.tests.validation
 
-import org.eclipse.xtend.core.tests.AbstractXtendTestCase
 import com.google.inject.Inject
+import org.eclipse.xtend.core.tests.AbstractXtendTestCase
 import org.eclipse.xtext.junit4.validation.ValidationTestHelper
 import org.junit.Test
-import static org.eclipse.xtend.core.xtend.XtendPackage$Literals.*
+
 import static org.eclipse.xtend.core.validation.IssueCodes.*
+import static org.eclipse.xtend.core.xtend.XtendPackage$Literals.*
 
 class ModifierValidationTest extends AbstractXtendTestCase {
 	
@@ -20,6 +21,28 @@ class ModifierValidationTest extends AbstractXtendTestCase {
 		clazz('''abstract class Foo{}''').assertNoErrors
 		clazz('''dispatch class Foo{}''').assertError(XTEND_CLASS, INVALID_MODIFIER)		
 		clazz('''final class Foo{}''').assertNoErrors		
+	}
+	
+	@Test def void testInterfaceAllowedModifiers() {
+		interfaze('''private interface Foo{}''').assertError(XTEND_INTERFACE, INVALID_MODIFIER)
+		interfaze('''package interface Foo{}''').assertError(XTEND_INTERFACE, INVALID_MODIFIER)
+		interfaze('''protected interface Foo{}''').assertError(XTEND_INTERFACE, INVALID_MODIFIER)
+		interfaze('''public interface Foo{}''').assertNoErrors
+		interfaze('''static interface Foo{}''').assertError(XTEND_INTERFACE, INVALID_MODIFIER)		
+		interfaze('''abstract interface Foo{}''').assertNoErrors
+		interfaze('''dispatch interface Foo{}''').assertError(XTEND_INTERFACE, INVALID_MODIFIER)		
+		interfaze('''final interface Foo{}''').assertError(XTEND_INTERFACE, INVALID_MODIFIER)		
+	}
+	
+	@Test def void testEnumAllowedModifiers() {
+		enumeration('''private enum Foo{}''').assertError(XTEND_ENUM, INVALID_MODIFIER)
+		enumeration('''package enum Foo{}''').assertError(XTEND_ENUM, INVALID_MODIFIER)
+		enumeration('''protected enum Foo{}''').assertError(XTEND_ENUM, INVALID_MODIFIER)
+		enumeration('''public enum Foo{}''').assertNoErrors
+		enumeration('''static enum Foo{}''').assertError(XTEND_ENUM, INVALID_MODIFIER)		
+		enumeration('''abstract enum Foo{}''').assertError(XTEND_ENUM, INVALID_MODIFIER)
+		enumeration('''dispatch enum Foo{}''').assertError(XTEND_ENUM, INVALID_MODIFIER)		
+		enumeration('''final enum Foo{}''').assertError(XTEND_ENUM, INVALID_MODIFIER)		
 	}
 	
 	@Test def void testAnnotationTypeAllowedModifiers() {
@@ -44,6 +67,17 @@ class ModifierValidationTest extends AbstractXtendTestCase {
 		function('''final def foo() {}''').assertNoErrors		
 	}
 
+	@Test def void testMethodInInterfaceAllowedModifiers() {
+		memberInInterface('''private def foo() {}''').assertError(XTEND_FUNCTION, INVALID_MODIFIER)
+		memberInInterface('''package def foo() {}''').assertError(XTEND_FUNCTION, INVALID_MODIFIER)
+		memberInInterface('''protected def foo() {}''').assertError(XTEND_FUNCTION, INVALID_MODIFIER)
+		memberInInterface('''public def foo() {}''').assertNoError(INVALID_MODIFIER)
+		memberInInterface('''static def foo() {}''').assertError(XTEND_FUNCTION, INVALID_MODIFIER)	
+		memberInInterface('''abstract def int foo()''').assertNoErrors	
+		memberInInterface('''dispatch def foo (int i){}''').assertError(XTEND_FUNCTION, INVALID_MODIFIER)		
+		memberInInterface('''final def foo() {}''').assertError(XTEND_FUNCTION, INVALID_MODIFIER)
+	}
+
 	@Test def void testConstructorAllowedModifiers() {
 		constructor('''private new() {}''').assertNoErrors
 		constructor('''package new() {}''').assertNoErrors
@@ -65,6 +99,18 @@ class ModifierValidationTest extends AbstractXtendTestCase {
 		field('''dispatch int foo''').assertError(XTEND_FIELD, INVALID_MODIFIER)
 		field('''final int foo = 42''').assertNoErrors
 		field('''extension int foo''').assertNoErrors
+	}
+	
+	@Test def void testFieldInInterfaceAllowedModifiers() {
+		memberInInterface('''private int foo''').assertError(XTEND_FIELD, INVALID_MODIFIER)
+		memberInInterface('''package int foo''').assertError(XTEND_FIELD, INVALID_MODIFIER)
+		memberInInterface('''protected int foo''').assertError(XTEND_FIELD, INVALID_MODIFIER)
+		memberInInterface('''public int foo''').assertNoErrors
+		memberInInterface('''static int foo''').assertNoErrors		
+		memberInInterface('''abstract int foo''').assertError(XTEND_FIELD, INVALID_MODIFIER)
+		memberInInterface('''dispatch int foo''').assertError(XTEND_FIELD, INVALID_MODIFIER)
+		memberInInterface('''final int foo = 42''').assertNoErrors
+		memberInInterface('''extension int foo''').assertError(XTEND_FIELD, INVALID_MODIFIER)
 	}
 	
 	@Test def void testDuplicateModifier() {
@@ -111,5 +157,9 @@ class ModifierValidationTest extends AbstractXtendTestCase {
 		field('''var final int i=42''').assertError(XTEND_FIELD, INVALID_MODIFIER)
 		field('''final val int i=42''').assertNoErrors
 		field('''val final int i=42''').assertNoErrors
+	}
+	
+	def protected memberInInterface(String model) {
+		interfaze('''interface Foo { «model» }''').members.get(0)
 	}
 }

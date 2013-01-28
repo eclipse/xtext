@@ -9,11 +9,14 @@ import org.eclipse.xtend.core.jvmmodel.IXtendJvmAssociations;
 import org.eclipse.xtend.core.xtend.XtendAnnotationType;
 import org.eclipse.xtend.core.xtend.XtendClass;
 import org.eclipse.xtend.core.xtend.XtendConstructor;
+import org.eclipse.xtend.core.xtend.XtendEnum;
 import org.eclipse.xtend.core.xtend.XtendField;
 import org.eclipse.xtend.core.xtend.XtendFile;
 import org.eclipse.xtend.core.xtend.XtendFunction;
+import org.eclipse.xtend.core.xtend.XtendInterface;
 import org.eclipse.xtext.common.types.JvmAnnotationType;
 import org.eclipse.xtext.common.types.JvmConstructor;
+import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmField;
 import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.common.types.JvmOperation;
@@ -57,6 +60,16 @@ public class XtendLabelProvider extends XbaseLabelProvider {
 	public Image image(XtendClass element) {
 		JvmGenericType inferredType = associations.getInferredType(element);
 		return images.forClass(inferredType.getVisibility());
+	}
+
+	public Image image(XtendInterface element) {
+		JvmGenericType inferredType = associations.getInferredType(element);
+		return images.forInterface(inferredType.getVisibility());
+	}
+
+	public Image image(XtendEnum element) {
+		JvmDeclaredType inferredType = associations.getInferredType(element);
+		return images.forEnum(inferredType.getVisibility());
 	}
 
 	public Image image(XtendAnnotationType element) {

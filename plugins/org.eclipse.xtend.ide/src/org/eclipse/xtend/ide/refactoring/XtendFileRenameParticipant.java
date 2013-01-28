@@ -10,7 +10,7 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
-import org.eclipse.xtend.core.xtend.XtendClass;
+import org.eclipse.xtend.core.xtend.XtendTypeDeclaration;
 import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.refactoring.IChangeRedirector;
@@ -43,9 +43,9 @@ public class XtendFileRenameParticipant extends AbstractProcessorBasedRenamePart
 		URI resourceURI = URI.createPlatformResourceURI(file.getFullPath().toString(), true);
 		Resource resource = resourceSet.getResource(resourceURI, true);
 		if (resource != null && !resource.getContents().isEmpty()) {
-			for (XtendClass clazz : EcoreUtil2.eAllOfType(resource.getContents().get(0), XtendClass.class)) {
-				if (clazz.getName().equals(className)) {
-					IRenameElementContext renameElementContext = renameContextFactory.createRenameElementContext(clazz, null, null,
+			for (XtendTypeDeclaration type : EcoreUtil2.eAllOfType(resource.getContents().get(0), XtendTypeDeclaration.class)) {
+				if (type.getName().equals(className)) {
+					IRenameElementContext renameElementContext = renameContextFactory.createRenameElementContext(type, null, null,
 							(XtextResource) resource);
 					if(renameElementContext instanceof IChangeRedirector.Aware) 
 						((IChangeRedirector.Aware) renameElementContext).setChangeRedirector(new IChangeRedirector() {

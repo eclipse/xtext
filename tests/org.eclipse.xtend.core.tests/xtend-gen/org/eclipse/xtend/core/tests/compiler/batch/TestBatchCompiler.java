@@ -100,7 +100,7 @@ public class TestBatchCompiler {
     File _file = new File(_plus);
     String[] _list = _file.list();
     int _size = ((List<String>)Conversions.doWrapArray(_list)).size();
-    Assert.assertEquals(8, _size);
+    Assert.assertEquals(14, _size);
   }
   
   @Test
@@ -117,7 +117,7 @@ public class TestBatchCompiler {
     Assert.assertTrue("Compiler output exists", _exists);
     String[] _list = compilerOutputDir.list();
     int _size = ((List<String>)Conversions.doWrapArray(_list)).size();
-    Assert.assertEquals(8, _size);
+    Assert.assertEquals(14, _size);
   }
   
   @Test
@@ -138,7 +138,7 @@ public class TestBatchCompiler {
         }
     });
     int _size = ((List<String>)Conversions.doWrapArray(_list)).size();
-    Assert.assertEquals(4, _size);
+    Assert.assertEquals(7, _size);
     String _plus_1 = (TestBatchCompiler.OUTPUT_DIRECTORY + "/test");
     File _file_1 = new File(_plus_1);
     final Function2<File,String,Boolean> _function_1 = new Function2<File,String,Boolean>() {
@@ -153,7 +153,7 @@ public class TestBatchCompiler {
         }
     });
     int _size_1 = ((List<String>)Conversions.doWrapArray(_list_1)).size();
-    Assert.assertEquals(4, _size_1);
+    Assert.assertEquals(7, _size_1);
   }
   
   @Test
@@ -174,7 +174,7 @@ public class TestBatchCompiler {
         }
     });
     int _size = ((List<String>)Conversions.doWrapArray(_list)).size();
-    Assert.assertEquals(4, _size);
+    Assert.assertEquals(7, _size);
     String _plus_1 = (TestBatchCompiler.OUTPUT_DIRECTORY + "/test");
     File _file_1 = new File(_plus_1);
     final Function2<File,String,Boolean> _function_1 = new Function2<File,String,Boolean>() {

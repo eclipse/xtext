@@ -71,14 +71,14 @@ class XtendMethodBuilder extends AbstractMethodBuilder implements ICodeBuilder$X
 	}
 
 	override getInsertOffset() {
-		getNewMethodInsertOffset(context, xtendClass)
+		getNewMethodInsertOffset(context, xtendType)
 	}
 	
 	override getIndentationLevel() {
 		1
 	}
 	
-	override getXtendClass() {
+	override getXtendType() {
 		ownerSource as XtendClass
 	}
 }

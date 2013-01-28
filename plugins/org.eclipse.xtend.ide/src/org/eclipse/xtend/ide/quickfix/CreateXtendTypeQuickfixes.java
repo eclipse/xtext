@@ -34,12 +34,14 @@ import org.eclipse.ui.PlatformUI;
 import org.eclipse.xtend.core.jvmmodel.IXtendJvmAssociations;
 import org.eclipse.xtend.core.xtend.XtendClass;
 import org.eclipse.xtend.core.xtend.XtendPackage;
+import org.eclipse.xtend.core.xtend.XtendTypeDeclaration;
 import org.eclipse.xtend.ide.codebuilder.AbstractAnnotationBuilder;
 import org.eclipse.xtend.ide.codebuilder.AbstractClassBuilder;
 import org.eclipse.xtend.ide.codebuilder.CodeBuilderFactory;
 import org.eclipse.xtend.ide.wizards.NewXtendClassWizard;
 import org.eclipse.xtend.ide.wizards.NewXtendClassWizardPage;
 import org.eclipse.xtext.EcoreUtil2;
+import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.common.types.JvmVisibility;
 import org.eclipse.xtext.common.types.TypesPackage;
@@ -120,14 +122,14 @@ public class CreateXtendTypeQuickfixes extends CreateJavaTypeQuickfixes {
 	protected void newLocalXtendClassQuickfix(String typeName, XtextResource resource, Issue issue,
 			IssueResolutionAcceptor issueResolutionAcceptor) {
 		EObject eObject = resource.getEObject(issue.getUriToProblem().fragment());
-		XtendClass xtendClass = EcoreUtil2.getContainerOfType(eObject, XtendClass.class);
-		if(xtendClass != null) {
-			JvmGenericType inferredType = associations.getInferredType(xtendClass);
+		XtendTypeDeclaration xtendType = EcoreUtil2.getContainerOfType(eObject, XtendTypeDeclaration.class);
+		if(xtendType != null) {
+			JvmDeclaredType inferredType = associations.getInferredType(xtendType);
 			if(inferredType != null) {
 				AbstractClassBuilder classBuilder = codeBuilderFactory.createClassBuilder(inferredType);
 				classBuilder.setClassName(typeName);
 				classBuilder.setVisibility(JvmVisibility.PUBLIC);
-				classBuilder.setContext(xtendClass);
+				classBuilder.setContext(xtendType);
 				codeBuilderQuickfix.addQuickfix(classBuilder, "Create local Xtend class '" + typeName + "'", issue, issueResolutionAcceptor);
 			}
 		}
@@ -136,14 +138,14 @@ public class CreateXtendTypeQuickfixes extends CreateJavaTypeQuickfixes {
 	protected void newLocalXtendAnnotationQuickfix(String typeName, XtextResource resource, Issue issue,
 			IssueResolutionAcceptor issueResolutionAcceptor) {
 		EObject eObject = resource.getEObject(issue.getUriToProblem().fragment());
-		XtendClass xtendClass = EcoreUtil2.getContainerOfType(eObject, XtendClass.class);
-		if(xtendClass != null) {
-			JvmGenericType inferredType = associations.getInferredType(xtendClass);
+		XtendTypeDeclaration xtendType = EcoreUtil2.getContainerOfType(eObject, XtendTypeDeclaration.class);
+		if(xtendType != null) {
+			JvmDeclaredType inferredType = associations.getInferredType(xtendType);
 			if(inferredType != null) {
 				AbstractAnnotationBuilder annotationBuilder = codeBuilderFactory.createAnnotationBuilder(inferredType);
 				annotationBuilder.setAnnotationName(typeName);
 				annotationBuilder.setVisibility(JvmVisibility.PUBLIC);
-				annotationBuilder.setContext(xtendClass);
+				annotationBuilder.setContext(xtendType);
 				codeBuilderQuickfix.addQuickfix(annotationBuilder, "Create local Xtend annotation '@" + typeName + "'", issue, issueResolutionAcceptor);
 			}
 		}

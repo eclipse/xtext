@@ -38,14 +38,14 @@ class XtendClassBuilder extends AbstractClassBuilder implements ICodeBuilder$Xte
 	}
 
 	override getInsertOffset() {
-		getNewTypeInsertOffset(context, xtendClass)
+		getNewTypeInsertOffset(context, xtendType)
 	}
 	
 	override getIndentationLevel() {
 		0
 	}
 	
-	override getXtendClass() {
+	override getXtendType() {
 		ownerSource as XtendClass
 	}
 }

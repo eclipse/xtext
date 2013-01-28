@@ -85,6 +85,9 @@ public class XtendFactoryImpl extends EFactoryImpl implements XtendFactory
 			case XtendPackage.XTEND_CONSTRUCTOR: return createXtendConstructor();
 			case XtendPackage.XTEND_TYPE_DECLARATION: return createXtendTypeDeclaration();
 			case XtendPackage.XTEND_ANNOTATION_TYPE: return createXtendAnnotationType();
+			case XtendPackage.XTEND_INTERFACE: return createXtendInterface();
+			case XtendPackage.XTEND_ENUM: return createXtendEnum();
+			case XtendPackage.XTEND_ENUM_LITERAL: return createXtendEnumLiteral();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -253,6 +256,39 @@ public class XtendFactoryImpl extends EFactoryImpl implements XtendFactory
 	{
 		XtendAnnotationTypeImplCustom xtendAnnotationType = new XtendAnnotationTypeImplCustom();
 		return xtendAnnotationType;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public XtendInterface createXtendInterface()
+	{
+		XtendInterfaceImplCustom xtendInterface = new XtendInterfaceImplCustom();
+		return xtendInterface;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public XtendEnum createXtendEnum()
+	{
+		XtendEnumImplCustom xtendEnum = new XtendEnumImplCustom();
+		return xtendEnum;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public XtendEnumLiteral createXtendEnumLiteral()
+	{
+		XtendEnumLiteralImplCustom xtendEnumLiteral = new XtendEnumLiteralImplCustom();
+		return xtendEnumLiteral;
 	}
 
 	/**

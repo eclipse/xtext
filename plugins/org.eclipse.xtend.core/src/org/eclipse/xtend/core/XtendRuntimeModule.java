@@ -6,7 +6,6 @@ package org.eclipse.xtend.core;
 import org.eclipse.xtend.core.compiler.XtendCompiler;
 import org.eclipse.xtend.core.compiler.XtendOutputConfigurationProvider;
 import org.eclipse.xtend.core.conversion.XtendValueConverterService;
-import org.eclipse.xtend.core.featurecalls.XtendIdentifiableSimpleNameProvider;
 import org.eclipse.xtend.core.formatting.XtendFormatter;
 import org.eclipse.xtend.core.imports.XtendImportsConfiguration;
 import org.eclipse.xtend.core.jvmmodel.IXtendJvmAssociations;
@@ -36,7 +35,6 @@ import org.eclipse.xtext.validation.ConfigurableIssueCodesProvider;
 import org.eclipse.xtext.xbase.XbaseFactory;
 import org.eclipse.xtext.xbase.compiler.XbaseCompiler;
 import org.eclipse.xtext.xbase.compiler.output.TraceAwarePostProcessor;
-import org.eclipse.xtext.xbase.featurecalls.IdentifiableSimpleNameProvider;
 import org.eclipse.xtext.xbase.formatting.IBasicFormatter;
 import org.eclipse.xtext.xbase.imports.IImportsConfiguration;
 import org.eclipse.xtext.xbase.jvmmodel.IJvmModelInferrer;
@@ -80,11 +78,6 @@ public class XtendRuntimeModule extends org.eclipse.xtend.core.AbstractXtendRunt
 	public void configureIScopeProviderDelegate(Binder binder) {
 		binder.bind(IScopeProvider.class).annotatedWith(Names.named(AbstractDeclarativeScopeProvider.NAMED_DELEGATE))
 		.to(XtendImportedNamespaceScopeProvider.class);
-	}
-
-	@Override
-	public Class<? extends IdentifiableSimpleNameProvider> bindIdentifiableSimpleNameProvider() {
-		return XtendIdentifiableSimpleNameProvider.class;
 	}
 
 	public Class<? extends IJvmModelInferrer> bindIJvmModelInferrer() {

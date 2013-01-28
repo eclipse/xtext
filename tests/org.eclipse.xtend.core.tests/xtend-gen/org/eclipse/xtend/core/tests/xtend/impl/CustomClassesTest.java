@@ -1,9 +1,13 @@
 package org.eclipse.xtend.core.tests.xtend.impl;
 
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.xtend.core.tests.AbstractXtendTestCase;
 import org.eclipse.xtend.core.xtend.XtendAnnotationType;
 import org.eclipse.xtend.core.xtend.XtendClass;
+import org.eclipse.xtend.core.xtend.XtendEnum;
 import org.eclipse.xtend.core.xtend.XtendField;
+import org.eclipse.xtend.core.xtend.XtendInterface;
+import org.eclipse.xtend.core.xtend.XtendMember;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.common.types.JvmVisibility;
 import org.eclipse.xtext.xbase.lib.Exceptions;
@@ -92,7 +96,143 @@ public class CustomClassesTest extends AbstractXtendTestCase {
   }
   
   @Test
-  public void testAnnotationTypeStaticAbstract() {
+  public void testInterfaceVisibility() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("interface Foo {}");
+      XtendInterface _interfaze = this.interfaze(_builder.toString());
+      JvmVisibility _visibility = _interfaze.getVisibility();
+      Assert.assertEquals(JvmVisibility.PUBLIC, _visibility);
+      StringConcatenation _builder_1 = new StringConcatenation();
+      _builder_1.append("public interface Foo {}");
+      XtendInterface _interfaze_1 = this.interfaze(_builder_1.toString());
+      JvmVisibility _visibility_1 = _interfaze_1.getVisibility();
+      Assert.assertEquals(JvmVisibility.PUBLIC, _visibility_1);
+      StringConcatenation _builder_2 = new StringConcatenation();
+      _builder_2.append("protected interface Foo {}");
+      XtendInterface _interfaze_2 = this.interfaze(_builder_2.toString());
+      JvmVisibility _visibility_2 = _interfaze_2.getVisibility();
+      Assert.assertEquals(JvmVisibility.PROTECTED, _visibility_2);
+      StringConcatenation _builder_3 = new StringConcatenation();
+      _builder_3.append("package interface Foo {}");
+      XtendInterface _interfaze_3 = this.interfaze(_builder_3.toString());
+      JvmVisibility _visibility_3 = _interfaze_3.getVisibility();
+      Assert.assertEquals(JvmVisibility.DEFAULT, _visibility_3);
+      StringConcatenation _builder_4 = new StringConcatenation();
+      _builder_4.append("private interface Foo {}");
+      XtendInterface _interfaze_4 = this.interfaze(_builder_4.toString());
+      JvmVisibility _visibility_4 = _interfaze_4.getVisibility();
+      Assert.assertEquals(JvmVisibility.PRIVATE, _visibility_4);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
+  public void testEnumVisibility() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("enum Foo {}");
+      XtendEnum _enumeration = this.enumeration(_builder.toString());
+      JvmVisibility _visibility = _enumeration.getVisibility();
+      Assert.assertEquals(JvmVisibility.PUBLIC, _visibility);
+      StringConcatenation _builder_1 = new StringConcatenation();
+      _builder_1.append("public enum Foo {}");
+      XtendEnum _enumeration_1 = this.enumeration(_builder_1.toString());
+      JvmVisibility _visibility_1 = _enumeration_1.getVisibility();
+      Assert.assertEquals(JvmVisibility.PUBLIC, _visibility_1);
+      StringConcatenation _builder_2 = new StringConcatenation();
+      _builder_2.append("protected enum Foo {}");
+      XtendEnum _enumeration_2 = this.enumeration(_builder_2.toString());
+      JvmVisibility _visibility_2 = _enumeration_2.getVisibility();
+      Assert.assertEquals(JvmVisibility.PROTECTED, _visibility_2);
+      StringConcatenation _builder_3 = new StringConcatenation();
+      _builder_3.append("package enum Foo {}");
+      XtendEnum _enumeration_3 = this.enumeration(_builder_3.toString());
+      JvmVisibility _visibility_3 = _enumeration_3.getVisibility();
+      Assert.assertEquals(JvmVisibility.DEFAULT, _visibility_3);
+      StringConcatenation _builder_4 = new StringConcatenation();
+      _builder_4.append("private enum Foo {}");
+      XtendEnum _enumeration_4 = this.enumeration(_builder_4.toString());
+      JvmVisibility _visibility_4 = _enumeration_4.getVisibility();
+      Assert.assertEquals(JvmVisibility.PRIVATE, _visibility_4);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
+  public void testInterfaceFinalAndStatic() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("interface Foo {}");
+      XtendInterface _interfaze = this.interfaze(_builder.toString());
+      boolean _isFinal = _interfaze.isFinal();
+      Assert.assertFalse(_isFinal);
+      StringConcatenation _builder_1 = new StringConcatenation();
+      _builder_1.append("interface Foo {}");
+      XtendInterface _interfaze_1 = this.interfaze(_builder_1.toString());
+      boolean _isStatic = _interfaze_1.isStatic();
+      Assert.assertFalse(_isStatic);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
+  public void testEnumFinalAndStatic() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("enum Foo {}");
+      XtendEnum _enumeration = this.enumeration(_builder.toString());
+      boolean _isStatic = _enumeration.isStatic();
+      Assert.assertFalse(_isStatic);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
+  public void testEnumLiteralDefaults() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("enum Foo { BAR }");
+      final XtendEnum enumeration = this.enumeration(_builder.toString());
+      EList<XtendMember> _members = enumeration.getMembers();
+      final XtendMember literal = _members.get(0);
+      boolean _isStatic = literal.isStatic();
+      Assert.assertTrue(_isStatic);
+      boolean _isFinal = literal.isFinal();
+      Assert.assertTrue(_isFinal);
+      JvmVisibility _visibility = literal.getVisibility();
+      Assert.assertEquals(JvmVisibility.PUBLIC, _visibility);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
+  public void testFieldInInterfaceDefaults() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("interface Foo { int foo }");
+      XtendInterface _interfaze = this.interfaze(_builder.toString());
+      EList<XtendMember> _members = _interfaze.getMembers();
+      XtendMember _get = _members.get(0);
+      final XtendField field = ((XtendField) _get);
+      boolean _isFinal = field.isFinal();
+      Assert.assertTrue(_isFinal);
+      boolean _isStatic = field.isStatic();
+      Assert.assertTrue(_isStatic);
+      JvmVisibility _visibility = field.getVisibility();
+      Assert.assertEquals(JvmVisibility.PUBLIC, _visibility);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
+  public void testAnnotationTypeStaticAndFinal() {
     try {
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("static annotation Foo {}");

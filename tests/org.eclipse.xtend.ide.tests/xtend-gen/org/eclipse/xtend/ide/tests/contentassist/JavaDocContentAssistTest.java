@@ -54,7 +54,7 @@ public class JavaDocContentAssistTest extends AbstractXtendContentAssistBugTest 
       throw Exceptions.sneakyThrow(_e);
     }
   }
-
+  
   @Test
   public void testTypeInJavaDoc_2() {
     try {
@@ -93,7 +93,7 @@ public class JavaDocContentAssistTest extends AbstractXtendContentAssistBugTest 
       throw Exceptions.sneakyThrow(_e);
     }
   }
-
+  
   @Test
   public void testTypeInJavaDoc_3() {
     try {
@@ -119,7 +119,7 @@ public class JavaDocContentAssistTest extends AbstractXtendContentAssistBugTest 
       throw Exceptions.sneakyThrow(_e);
     }
   }
-
+  
   @Test
   public void testTypeInJavaDoc_4() {
     try {
@@ -158,7 +158,7 @@ public class JavaDocContentAssistTest extends AbstractXtendContentAssistBugTest 
       throw Exceptions.sneakyThrow(_e);
     }
   }
-
+  
   @Test
   public void testTypeInJavaDoc_5() {
     try {
@@ -197,7 +197,7 @@ public class JavaDocContentAssistTest extends AbstractXtendContentAssistBugTest 
       throw Exceptions.sneakyThrow(_e);
     }
   }
-
+  
   @Test
   public void testTypeInJavaDoc_6() {
     try {

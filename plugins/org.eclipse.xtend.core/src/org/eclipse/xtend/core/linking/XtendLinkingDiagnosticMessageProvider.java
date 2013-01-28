@@ -12,6 +12,7 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtend.core.validation.IssueCodes;
 import org.eclipse.xtend.core.xtend.XtendClass;
+import org.eclipse.xtend.core.xtend.XtendTypeDeclaration;
 import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.diagnostics.Diagnostic;
 import org.eclipse.xtext.diagnostics.DiagnosticMessage;
@@ -40,9 +41,9 @@ public class XtendLinkingDiagnosticMessageProvider extends LinkingDiagnosticMess
 		EObject contextObject = context.getContext();
 		if(contextObject instanceof XAbstractFeatureCall && !(contextObject instanceof XBinaryOperation || contextObject instanceof XUnaryOperation)){
 			XAbstractFeatureCall featureCall = (XAbstractFeatureCall)contextObject;
-			XtendClass xtendClazz = EcoreUtil2.getContainerOfType(featureCall, XtendClass.class);
-			if(xtendClazz != null){
-				String clazzName = xtendClazz.getName();
+			XtendTypeDeclaration xtendType = EcoreUtil2.getContainerOfType(featureCall, XtendTypeDeclaration.class);
+			if(xtendType != null){
+				String clazzName = xtendType.getName();
 				EList<XExpression> explicitArguments = featureCall.getExplicitArguments();
 				String firstPartOfMessage = "The method ";
 				if(explicitArguments.size() == 0 || featureCall instanceof XAssignment)

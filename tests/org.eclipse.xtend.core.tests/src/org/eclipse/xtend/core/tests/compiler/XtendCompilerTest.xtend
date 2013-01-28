@@ -15,6 +15,39 @@ abstract class AbstractXtendCompilerTest extends AbstractXtendTestCase {
 	@Inject JvmModelGenerator generator
 	@Inject IGeneratorConfigProvider generatorConfigProvider
 	
+	@Test def testInterface() {
+		'''
+			interface Foo {
+				def int foo()
+				int bar=42
+			}
+		'''.assertCompilesTo('''
+			@SuppressWarnings("all")
+			public interface Foo {
+			  public abstract int foo();
+			  
+			  public final static int bar = 42;
+			}
+		''')
+	}
+	
+	@Test def testEnum() {
+		'''
+			enum Foo {
+				FOO, BAR, BAZ
+			}
+		'''.assertCompilesTo('''
+			@SuppressWarnings("all")
+			public enum Foo {
+			  FOO,
+			  
+			  BAR,
+			  
+			  BAZ;
+			}
+		''')
+	}
+	
 	@Test def testSneakyThrowable() {
 		'''
 			class MyClass {

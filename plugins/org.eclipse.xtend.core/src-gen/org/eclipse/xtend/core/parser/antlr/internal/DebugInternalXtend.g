@@ -24,6 +24,20 @@ ruleType :
 				',' ruleJvmParameterizedTypeReference
 			)*
 		)? '{' ruleMember* '}' |
+		ruleCommonModifier* 'interface' ruleValidID (
+			'<' ruleJvmTypeParameter (
+				',' ruleJvmTypeParameter
+			)* '>'
+		)? (
+			'extends' ruleJvmParameterizedTypeReference (
+				',' ruleJvmParameterizedTypeReference
+			)*
+		)? '{' ruleMember* '}' |
+		ruleCommonModifier* 'enum' ruleValidID '{' (
+			ruleXtendEnumLiteral (
+				',' ruleXtendEnumLiteral
+			)*
+		)? ';'? '}' |
 		ruleCommonModifier* 'annotation' ruleValidID '{' ruleAnnotationField* '}'
 	)
 ;
@@ -104,6 +118,11 @@ ruleMember :
 			)*
 		)? ruleXBlockExpression
 	)
+;
+
+// Rule XtendEnumLiteral
+ruleXtendEnumLiteral :
+	ruleValidID
 ;
 
 // Rule CommonModifier

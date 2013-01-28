@@ -15,8 +15,10 @@ import org.eclipse.xtend.core.macro.declaration.CompilationUnitImpl;
 import org.eclipse.xtend.core.xtend.XtendAnnotationTarget;
 import org.eclipse.xtend.core.xtend.XtendClass;
 import org.eclipse.xtend.core.xtend.XtendConstructor;
+import org.eclipse.xtend.core.xtend.XtendEnum;
 import org.eclipse.xtend.core.xtend.XtendFile;
 import org.eclipse.xtend.core.xtend.XtendFunction;
+import org.eclipse.xtend.core.xtend.XtendInterface;
 import org.eclipse.xtend.core.xtend.XtendMember;
 import org.eclipse.xtend.core.xtend.XtendParameter;
 import org.eclipse.xtend.core.xtend.XtendTypeDeclaration;
@@ -133,6 +135,34 @@ public class ActiveAnnotationContextProvider {
         _matched=true;
         this.registerMacroAnnotations(_xtendClass, acceptor);
         EList<XtendMember> _members = _xtendClass.getMembers();
+        final Procedure1<XtendMember> _function = new Procedure1<XtendMember>() {
+            public void apply(final XtendMember it) {
+              ActiveAnnotationContextProvider.this.searchAnnotatedElements(it, acceptor);
+            }
+          };
+        IterableExtensions.<XtendMember>forEach(_members, _function);
+      }
+    }
+    if (!_matched) {
+      if (element instanceof XtendInterface) {
+        final XtendInterface _xtendInterface = (XtendInterface)element;
+        _matched=true;
+        this.registerMacroAnnotations(_xtendInterface, acceptor);
+        EList<XtendMember> _members = _xtendInterface.getMembers();
+        final Procedure1<XtendMember> _function = new Procedure1<XtendMember>() {
+            public void apply(final XtendMember it) {
+              ActiveAnnotationContextProvider.this.searchAnnotatedElements(it, acceptor);
+            }
+          };
+        IterableExtensions.<XtendMember>forEach(_members, _function);
+      }
+    }
+    if (!_matched) {
+      if (element instanceof XtendEnum) {
+        final XtendEnum _xtendEnum = (XtendEnum)element;
+        _matched=true;
+        this.registerMacroAnnotations(_xtendEnum, acceptor);
+        EList<XtendMember> _members = _xtendEnum.getMembers();
         final Procedure1<XtendMember> _function = new Procedure1<XtendMember>() {
             public void apply(final XtendMember it) {
               ActiveAnnotationContextProvider.this.searchAnnotatedElements(it, acceptor);

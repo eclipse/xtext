@@ -24,11 +24,14 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.jdt.core.compiler.batch.BatchCompiler;
 import org.eclipse.xtend.core.jvmmodel.IXtendJvmAssociations;
+import org.eclipse.xtend.core.xtend.XtendAnnotationType;
 import org.eclipse.xtend.core.xtend.XtendClass;
+import org.eclipse.xtend.core.xtend.XtendEnum;
 import org.eclipse.xtend.core.xtend.XtendFile;
+import org.eclipse.xtend.core.xtend.XtendInterface;
 import org.eclipse.xtend.core.xtend.XtendPackage;
 import org.eclipse.xtend.core.xtend.XtendTypeDeclaration;
-import org.eclipse.xtext.common.types.JvmGenericType;
+import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.access.impl.ClasspathTypeProvider;
 import org.eclipse.xtext.common.types.access.impl.IndexedJvmTypeAccess;
 import org.eclipse.xtext.diagnostics.Severity;
@@ -293,19 +296,25 @@ public class XtendBatchCompiler {
 				if (xtendType == null) {
 					continue;
 				}
-				if (xtendType instanceof XtendClass) {
-					XtendClass xtendClass = (XtendClass) xtendType;
-					StringBuilder classSignatureBuilder = new StringBuilder();
-					if (!Strings.isEmpty(xtendFile.getPackage())) {
-						classSignatureBuilder.append("package " + xtendFile.getPackage() + ";");
-						classSignatureBuilder.append("\n");
-					}
-					classSignatureBuilder.append("public class " + xtendClass.getName() + "{}");
-					if (log.isDebugEnabled()) {
-						log.debug("create java stub '" + getJavaFileName(xtendClass) + "'");
-					}
-					fileSystemAccess.generateFile(getJavaFileName(xtendClass), classSignatureBuilder.toString());
+				StringBuilder classSignatureBuilder = new StringBuilder();
+				if (!Strings.isEmpty(xtendFile.getPackage())) {
+					classSignatureBuilder.append("package " + xtendFile.getPackage() + ";");
+					classSignatureBuilder.append("\n");
 				}
+				classSignatureBuilder.append("public ");
+				if(xtendType instanceof XtendClass) 
+					classSignatureBuilder.append("class ");
+				else if(xtendType instanceof XtendInterface) 
+					classSignatureBuilder.append("interface ");
+				else if(xtendType instanceof XtendEnum) 
+					classSignatureBuilder.append("enum ");
+				else if(xtendType instanceof XtendAnnotationType) 
+					classSignatureBuilder.append("@interface ");
+				classSignatureBuilder.append(xtendType.getName() + "{}");
+				if (log.isDebugEnabled()) {
+					log.debug("create java stub '" + getJavaFileName(xtendType) + "'");
+				}
+				fileSystemAccess.generateFile(getJavaFileName(xtendType), classSignatureBuilder.toString());
 			}
 		}
 		return outputDirectory;
@@ -412,7 +421,7 @@ public class XtendBatchCompiler {
 		javaIoFileSystemAccess.setWriteTrace(writeTraceFiles);
 		ResourceSetBasedResourceDescriptions resourceDescriptions = getResourceDescriptions(resourceSet);
 		Iterable<IEObjectDescription> exportedObjectsByType = resourceDescriptions
-				.getExportedObjectsByType(XtendPackage.eINSTANCE.getXtendClass());
+				.getExportedObjectsByType(XtendPackage.eINSTANCE.getXtendTypeDeclaration());
 		if (log.isInfoEnabled()) {
 			int size = Iterables.size(exportedObjectsByType);
 			if (size == 0) {
@@ -422,13 +431,13 @@ public class XtendBatchCompiler {
 			}
 		}
 		for (IEObjectDescription eObjectDescription : exportedObjectsByType) {
-			XtendClass xtendClass = (XtendClass) eObjectDescription.getEObjectOrProxy();
-			JvmGenericType jvmGenericType = xtendJvmAssociations.getInferredType(xtendClass);
-			CharSequence generatedType = generator.generateType(jvmGenericType, generatorConfigprovider.get(xtendClass));
+			XtendTypeDeclaration xtendType = (XtendTypeDeclaration) eObjectDescription.getEObjectOrProxy();
+			JvmDeclaredType jvmGenericType = xtendJvmAssociations.getInferredType(xtendType);
+			CharSequence generatedType = generator.generateType(jvmGenericType, generatorConfigprovider.get(xtendType));
 			if (log.isDebugEnabled()) {
-				log.debug("write '" + outputPath + File.separator + getJavaFileName(xtendClass) + "'");
+				log.debug("write '" + outputPath + File.separator + getJavaFileName(xtendType) + "'");
 			}
-			javaIoFileSystemAccess.generateFile(getJavaFileName(xtendClass), generatedType);
+			javaIoFileSystemAccess.generateFile(getJavaFileName(xtendType), generatedType);
 		}
 	}
 
@@ -439,12 +448,12 @@ public class XtendBatchCompiler {
 		return resourceDescriptions;
 	}
 
-	private String getJavaFileName(XtendClass xtendClass) {
-		return Strings.concat("/", getFullyQualifiedName(xtendClass).getSegments()) + ".java";
+	private String getJavaFileName(XtendTypeDeclaration xtendType) {
+		return Strings.concat("/", getFullyQualifiedName(xtendType).getSegments()) + ".java";
 	}
 
-	private QualifiedName getFullyQualifiedName(XtendClass xtendClass) {
-		return qualifiedNameProvider.getFullyQualifiedName(xtendClass);
+	private QualifiedName getFullyQualifiedName(XtendTypeDeclaration xtendType) {
+		return qualifiedNameProvider.getFullyQualifiedName(xtendType);
 	}
 
 	protected XtendFile getXtendFile(Resource resource) {
