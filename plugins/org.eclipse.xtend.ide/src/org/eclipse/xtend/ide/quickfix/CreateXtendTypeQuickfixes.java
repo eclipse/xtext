@@ -122,7 +122,7 @@ public class CreateXtendTypeQuickfixes extends CreateJavaTypeQuickfixes {
 	protected void newLocalXtendClassQuickfix(String typeName, XtextResource resource, Issue issue,
 			IssueResolutionAcceptor issueResolutionAcceptor) {
 		EObject eObject = resource.getEObject(issue.getUriToProblem().fragment());
-		XtendTypeDeclaration xtendType = EcoreUtil2.getContainerOfType(eObject, XtendTypeDeclaration.class);
+		XtendTypeDeclaration xtendType = getAnnotationTarget(eObject);
 		if(xtendType != null) {
 			JvmDeclaredType inferredType = associations.getInferredType(xtendType);
 			if(inferredType != null) {
@@ -138,7 +138,7 @@ public class CreateXtendTypeQuickfixes extends CreateJavaTypeQuickfixes {
 	protected void newLocalXtendAnnotationQuickfix(String typeName, XtextResource resource, Issue issue,
 			IssueResolutionAcceptor issueResolutionAcceptor) {
 		EObject eObject = resource.getEObject(issue.getUriToProblem().fragment());
-		XtendTypeDeclaration xtendType = EcoreUtil2.getContainerOfType(eObject, XtendTypeDeclaration.class);
+		XtendTypeDeclaration xtendType = getAnnotationTarget(eObject);
 		if(xtendType != null) {
 			JvmDeclaredType inferredType = associations.getInferredType(xtendType);
 			if(inferredType != null) {
@@ -149,6 +149,15 @@ public class CreateXtendTypeQuickfixes extends CreateJavaTypeQuickfixes {
 				codeBuilderQuickfix.addQuickfix(annotationBuilder, "Create local Xtend annotation '@" + typeName + "'", issue, issueResolutionAcceptor);
 			}
 		}
+	}
+
+	@Nullable
+	protected XtendTypeDeclaration getAnnotationTarget(EObject eObject) {
+		XtendTypeDeclaration containerType = EcoreUtil2.getContainerOfType(eObject, XtendTypeDeclaration.class);
+		if(containerType != null && containerType.eContainingFeature() == XtendPackage.Literals.XTEND_MEMBER__ANNOTATION_INFO)
+			return getAnnotationTarget(containerType);
+		else 
+			return containerType;
 	}
 
 	protected void newXtendClassQuickfix(final String typeName, final XtextResource resource, Issue issue,
