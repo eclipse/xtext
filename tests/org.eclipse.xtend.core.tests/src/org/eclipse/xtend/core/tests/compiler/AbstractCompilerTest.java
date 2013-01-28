@@ -69,6 +69,14 @@ import com.google.inject.Injector;
  */
 public abstract class AbstractCompilerTest extends AbstractXtendTestCase {
 	
+	@Test public void testGenericVoidFunction() throws Exception {
+		String code = 
+				" def String getString(String myString) {\n" + 
+				"   (test::GenericVoidFunctionAcceptor::accept(<String>newArrayList()) [it.add(myString)]).head\n" + 
+				" }";
+		invokeAndExpect2("foo",code,"getString", "foo");
+	}
+	
 	@Test public void testRecursiveTypeParameter_01() throws Exception {
 		String code = 
 				" def String produceString(String s) {\n" + 
