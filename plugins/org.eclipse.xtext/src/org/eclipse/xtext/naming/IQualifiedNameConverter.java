@@ -12,6 +12,7 @@ import java.util.List;
 import org.eclipse.xtext.util.Strings;
 
 import com.google.inject.ImplementedBy;
+import com.google.inject.Singleton;
 
 /**
  * Converts {@link QualifiedName}s to strings and back.
@@ -28,6 +29,7 @@ public interface IQualifiedNameConverter {
 
 	QualifiedName toQualifiedName(String qualifiedNameAsText);
 
+	@Singleton
 	static class DefaultImpl implements IQualifiedNameConverter {
 
 		/**

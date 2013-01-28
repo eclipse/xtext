@@ -18,6 +18,7 @@ import org.eclipse.xtext.util.IResourceScopeCache;
 import org.eclipse.xtext.util.RuntimeIOException;
 
 import com.google.inject.Inject;
+import com.google.inject.Singleton;
 
 /**
  * 
@@ -26,6 +27,7 @@ import com.google.inject.Inject;
  * @author Sven Efftinge - Initial contribution and API
  * @since 2.1
  */
+@Singleton
 public class DerivedStateAwareResourceDescriptionManager extends DefaultResourceDescriptionManager {
 	
 	private final static Logger log = Logger.getLogger(DerivedStateAwareResourceDescriptionManager.class);
