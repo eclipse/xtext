@@ -25,7 +25,7 @@ import com.google.common.io.ByteStreams;
  * @author Moritz Eysholdt
  * @since 2.0
  */
-public class InMemoryFileSystemAccess extends AbstractFileSystemAccess {
+public class InMemoryFileSystemAccess extends AbstractFileSystemAccess2 {
 
 	private Map<String, Object> files = newTreeMap(); // the TreeMap sorts all files by name
 
