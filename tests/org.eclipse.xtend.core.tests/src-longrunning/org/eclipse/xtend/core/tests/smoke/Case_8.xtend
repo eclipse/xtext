@@ -1,17 +1,15 @@
 package org.eclipse.xtend.core.tests.smoke
 
 import com.google.inject.Inject
+import java.util.List
 import org.eclipse.emf.ecore.EObject
 import org.eclipse.emf.ecore.util.EcoreUtil
 import org.eclipse.xtext.junit4.util.ParseHelper
 import org.eclipse.xtext.naming.IQualifiedNameProvider
 
 import static org.junit.Assert.*
-import java.util.List
-import org.eclipse.xtext.junit4.XtextRunner
-import org.eclipse.xtext.junit4.InjectWith
 
-@org.junit.runner.RunWith(typeof(XtextRunner))
+@SuppressWarnings("all")
 class Case_8 {
 
     @Inject
