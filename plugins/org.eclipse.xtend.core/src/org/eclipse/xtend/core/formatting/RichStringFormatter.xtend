@@ -236,7 +236,10 @@ class RichStringToLineModel extends AbstractRichStringPartAcceptor$ForLoopOnce {
 					_outdentThisLine = false
 				}
 				lastLine.indentLength = newContentStartColumn
-				contentStartColumn = newContentStartColumn
+				// newContentStartColumn is 0 when the line before had a SN and no content -> This shouldn't have impact to a greyspace and should not lead to a increment for the following lines.
+				// see https://bugs.eclipse.org/bugs/show_bug.cgi?id=398718
+				if(newContentStartColumn != 0)
+					contentStartColumn = newContentStartColumn
 				model.lines.last.chunks += indentationStack
 			}
 		}
