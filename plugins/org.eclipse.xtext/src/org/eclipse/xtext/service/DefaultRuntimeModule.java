@@ -144,7 +144,7 @@ public abstract class DefaultRuntimeModule extends AbstractGenericModule {
 	 * @since 2.4
 	 */
 	public void configureSerializerIScopeProvider(Binder binder) {
-		binder.bind(IScopeProvider.class).annotatedWith(SerializerScopeProviderBinding.class).to(Key.get(IScopeProvider.class, LinkingScopeProviderBinding.class));
+		binder.bind(IScopeProvider.class).annotatedWith(SerializerScopeProviderBinding.class).to(IScopeProvider.class);
 	}
 	
 	public void configureLinkingIScopeProvider(Binder binder) {
