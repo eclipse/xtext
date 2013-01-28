@@ -33,7 +33,7 @@ import org.eclipse.core.runtime.Path;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.xtext.builder.trace.FileBasedTraceInformation;
 import org.eclipse.xtext.builder.trace.TraceMarkers;
-import org.eclipse.xtext.generator.AbstractFileSystemAccess;
+import org.eclipse.xtext.generator.AbstractFileSystemAccess2;
 import org.eclipse.xtext.generator.OutputConfiguration;
 import org.eclipse.xtext.generator.trace.AbstractTraceRegion;
 import org.eclipse.xtext.generator.trace.ILocationData;
@@ -52,7 +52,7 @@ import com.google.inject.Inject;
  * @author Michael Clay - https://bugs.eclipse.org/bugs/show_bug.cgi?id=386135
  * @since 2.1
  */
-public class EclipseResourceFileSystemAccess2 extends AbstractFileSystemAccess {
+public class EclipseResourceFileSystemAccess2 extends AbstractFileSystemAccess2 {
 
 	private final static Logger log = Logger.getLogger(EclipseResourceFileSystemAccess2.class);
 	

@@ -22,7 +22,7 @@ import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.emf.common.util.URI;
-import org.eclipse.xtext.generator.AbstractFileSystemAccess;
+import org.eclipse.xtext.generator.AbstractFileSystemAccess2;
 import org.eclipse.xtext.util.IAcceptor;
 import org.eclipse.xtext.util.RuntimeIOException;
 import org.eclipse.xtext.util.StringInputStream;
@@ -35,7 +35,7 @@ import com.google.inject.Inject;
  * @deprecated use {@link EclipseResourceFileSystemAccess2} instead
  */
 @Deprecated
-public class EclipseResourceFileSystemAccess extends AbstractFileSystemAccess {
+public class EclipseResourceFileSystemAccess extends AbstractFileSystemAccess2 {
 
 	@Inject
 	private IWorkspaceRoot root;
