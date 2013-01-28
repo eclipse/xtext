@@ -9,9 +9,12 @@ package org.eclipse.xtext.xbase;
 
 import org.eclipse.xtext.naming.QualifiedName;
 
+import com.google.inject.Singleton;
+
 /**
  * @author Sven Efftinge - Initial contribution and API
  */
+@Singleton
 public class XbaseQualifiedNameConverter extends org.eclipse.xtext.naming.IQualifiedNameConverter.DefaultImpl {
 	
 	/**

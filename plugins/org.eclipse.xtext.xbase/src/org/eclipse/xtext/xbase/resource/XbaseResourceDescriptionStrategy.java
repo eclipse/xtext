@@ -23,10 +23,12 @@ import com.google.common.collect.ForwardingMap;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.ImmutableMap.Builder;
 import com.google.inject.Inject;
+import com.google.inject.Singleton;
 
 /**
  * @author Jan Koehnlein - Initial contribution and API
  */
+@Singleton
 public class XbaseResourceDescriptionStrategy extends DefaultResourceDescriptionStrategy {
 	
 	private static final Logger LOG = Logger.getLogger(XbaseResourceDescriptionStrategy.class);
