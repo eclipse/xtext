@@ -1366,7 +1366,8 @@ public class XtendJavaValidator extends XbaseWithAnnotationsJavaValidator {
 	protected void checkModifiers(XtendField field) {
 		if(field.getDeclaringType() instanceof XtendClass)
 			fieldModifierValidator.checkModifiers(field, "field " + field.getName());
-		else if(field.getDeclaringType() instanceof XtendInterface)
+		else if(field.getDeclaringType() instanceof XtendInterface 
+				|| field.getDeclaringType() instanceof XtendAnnotationType)
 			fieldInInterfaceModifierValidator.checkModifiers(field,  "field " + field.getName());
 	}
 	
