@@ -76,7 +76,7 @@ public class XbaseLabelProvider extends DefaultEObjectLabelProvider {
 	}
 	
 	public Image image(JvmOperation element) {
-		return images.forOperation(element.getVisibility(), element.isStatic());
+		return images.forOperation(element.getVisibility(), element.isAbstract(), element.isStatic(), element.isFinal());
 	}
 	
 	public Object text(JvmOperation element) {
@@ -92,7 +92,7 @@ public class XbaseLabelProvider extends DefaultEObjectLabelProvider {
 	}
 	
 	public Image image(JvmField element) {
-		return images.forField(element.getVisibility(), element.isStatic(), false);
+		return images.forField(element.getVisibility(), element.isStatic(), element.isFinal(), false);
 	}
 	
 	public String text(JvmField element) {
