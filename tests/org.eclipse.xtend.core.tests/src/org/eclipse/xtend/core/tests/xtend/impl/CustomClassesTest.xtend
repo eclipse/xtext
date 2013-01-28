@@ -67,6 +67,12 @@ class CustomClassesTest extends AbstractXtendTestCase {
 		assertEquals(JvmVisibility::PUBLIC, field.visibility)
 	}
 	
+	@Test def void testFieldInAnnotationDefaults() {
+		val field = annotationType('''annotation Foo { int foo }''').members.get(0) as XtendField
+		assertTrue(field.final)
+		assertTrue(field.^static)
+		assertEquals(JvmVisibility::PUBLIC, field.visibility)
+	}
 	
 	@Test def void testAnnotationTypeStaticAndFinal() {
 		assertFalse(annotationType('''static annotation Foo {}''').^static)

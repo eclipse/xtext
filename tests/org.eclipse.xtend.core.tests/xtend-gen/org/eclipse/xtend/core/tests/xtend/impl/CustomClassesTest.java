@@ -232,6 +232,26 @@ public class CustomClassesTest extends AbstractXtendTestCase {
   }
   
   @Test
+  public void testFieldInAnnotationDefaults() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("annotation Foo { int foo }");
+      XtendAnnotationType _annotationType = this.annotationType(_builder.toString());
+      EList<XtendMember> _members = _annotationType.getMembers();
+      XtendMember _get = _members.get(0);
+      final XtendField field = ((XtendField) _get);
+      boolean _isFinal = field.isFinal();
+      Assert.assertTrue(_isFinal);
+      boolean _isStatic = field.isStatic();
+      Assert.assertTrue(_isStatic);
+      JvmVisibility _visibility = field.getVisibility();
+      Assert.assertEquals(JvmVisibility.PUBLIC, _visibility);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
   public void testAnnotationTypeStaticAndFinal() {
     try {
       StringConcatenation _builder = new StringConcatenation();

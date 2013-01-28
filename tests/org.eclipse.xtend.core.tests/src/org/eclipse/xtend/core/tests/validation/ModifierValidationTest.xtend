@@ -113,6 +113,17 @@ class ModifierValidationTest extends AbstractXtendTestCase {
 		memberInInterface('''extension int foo''').assertError(XTEND_FIELD, INVALID_MODIFIER)
 	}
 	
+	@Test def void testFieldInAnnotationAllowedModifiers() {
+		memberInAnnotation('''private int foo''').assertError(XTEND_FIELD, INVALID_MODIFIER)
+		memberInAnnotation('''package int foo''').assertError(XTEND_FIELD, INVALID_MODIFIER)
+		memberInAnnotation('''protected int foo''').assertError(XTEND_FIELD, INVALID_MODIFIER)
+		memberInAnnotation('''public int foo''').assertNoErrors
+		memberInAnnotation('''static int foo''').assertNoErrors		
+		memberInAnnotation('''abstract int foo''').assertError(XTEND_FIELD, INVALID_MODIFIER)
+		memberInAnnotation('''dispatch int foo''').assertError(XTEND_FIELD, INVALID_MODIFIER)
+		memberInAnnotation('''final int foo = 42''').assertNoErrors
+	}
+	
 	@Test def void testDuplicateModifier() {
 		function('''private private def foo() {}''').assertError(XTEND_FUNCTION, INVALID_MODIFIER)
 		function('''package package def foo() {}''').assertError(XTEND_FUNCTION, INVALID_MODIFIER)
@@ -161,5 +172,9 @@ class ModifierValidationTest extends AbstractXtendTestCase {
 	
 	def protected memberInInterface(String model) {
 		interfaze('''interface Foo { «model» }''').members.get(0)
+	}
+	
+	def protected memberInAnnotation(String model) {
+		annotationType('''annotation Foo { «model» }''').members.get(0)
 	}
 }
