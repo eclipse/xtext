@@ -150,7 +150,7 @@ public class XtendQuickfixProvider extends XbaseQuickfixProvider {
 		acceptor.accept(issue, "Change 'def' to 'override'", "Marks this function as 'override'", "fix_indent.gif",
 				new ISemanticModification() {
 					public void apply(EObject element, IModificationContext context) throws Exception {
-						replaceKeyword(grammarAccess.getMemberAccess().findKeywords("def").get(0), "override", element,
+						replaceKeyword(grammarAccess.getMethodModifierAccess().findKeywords("def").get(0), "override", element,
 								context.getXtextDocument());
 					}
 				});
@@ -161,7 +161,7 @@ public class XtendQuickfixProvider extends XbaseQuickfixProvider {
 		acceptor.accept(issue, "Change 'override' to 'def'", "Removes 'override' from this function", "fix_indent.gif",
 				new ISemanticModification() {
 					public void apply(EObject element, IModificationContext context) throws Exception {
-						replaceKeyword(grammarAccess.getMemberAccess().findKeywords("override").get(0), "def", element,
+						replaceKeyword(grammarAccess.getMethodModifierAccess().findKeywords("override").get(0), "def", element,
 								context.getXtextDocument());
 					}
 				});
