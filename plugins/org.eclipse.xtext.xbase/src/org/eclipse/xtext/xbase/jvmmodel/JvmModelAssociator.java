@@ -11,6 +11,7 @@ import static com.google.common.collect.Lists.*;
 import static com.google.common.collect.Maps.*;
 import static com.google.common.collect.Sets.*;
 
+import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -201,12 +202,16 @@ public class JvmModelAssociator implements IJvmModelAssociations, IJvmModelAssoc
 	}
 
 	public Set<EObject> getJvmElements(EObject sourceElement) {
+		if (sourceElement == null)
+			return Collections.emptySet();
 		final ListMultimap<EObject, EObject> sourceToTargetMap = sourceToTargetMap(sourceElement.eResource());
 		final List<EObject> elements = sourceToTargetMap.get(sourceElement);
 		return newLinkedHashSet(elements);
 	}
 
 	public Set<EObject> getSourceElements(EObject jvmElement) {
+		if (jvmElement == null)
+			return Collections.emptySet();
 		//If this turns out to be too slow we should improve the internal data structure :-)
 		ListMultimap<EObject,EObject> map = sourceToTargetMap(jvmElement.eResource());
 		Set<EObject> sourceElements = newLinkedHashSet();
@@ -218,6 +223,8 @@ public class JvmModelAssociator implements IJvmModelAssociations, IJvmModelAssoc
 	}
 
 	public EObject getPrimarySourceElement(EObject jvmElement) {
+		if (jvmElement == null)
+			return null;
 		ListMultimap<EObject,EObject> map = sourceToTargetMap(jvmElement.eResource());
 		for (Map.Entry<EObject, EObject> entry : map.entries()) {
 			if (entry.getValue() == jvmElement)
