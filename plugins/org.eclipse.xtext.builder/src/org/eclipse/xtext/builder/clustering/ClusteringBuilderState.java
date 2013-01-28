@@ -211,6 +211,9 @@ public class ClusteringBuilderState extends AbstractBuilderState {
 	                            final IResourceDescription description = manager.getResourceDescription(resource);
 	                            final IResourceDescription copiedDescription = BuilderStateUtil.create(description);
 	                            newDelta = manager.createDelta(this.getResourceDescription(actualResourceURI), copiedDescription);
+                        	} catch (OperationCanceledException e) {
+                        		loadOperation.cancel();
+                        		throw e;
                         	} catch (RuntimeException e) {
                         		LOGGER.error("Error resolving cross references on resource '"+actualResourceURI+"'", e);
                         	}
@@ -254,6 +257,9 @@ public class ClusteringBuilderState extends AbstractBuilderState {
                         // Validate now.
                         try {
                         	updateMarkers(newDelta, resourceSet, subProgress.newChild(1));
+                        } catch (OperationCanceledException e) {
+                        	loadOperation.cancel();
+                        	throw e;
                         } catch (Exception e) {
                         	LOGGER.error("Error validating "+newDelta.getUri(), e);
                         }
@@ -277,7 +283,8 @@ public class ClusteringBuilderState extends AbstractBuilderState {
             }
         } finally {
             if(loadOperation != null) loadOperation.cancel();
-            progress.done();
+            if (!progress.isCanceled())
+            	progress.done();
         }
         return allDeltas;
     }
