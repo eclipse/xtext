@@ -1,6 +1,7 @@
 package org.eclipse.xtend.ide.refactoring;
 
 import static java.util.Collections.*;
+import static org.eclipse.xtext.util.Strings.*;
 
 import java.util.List;
 
@@ -39,22 +40,24 @@ public class XtendFileRenameParticipant extends AbstractProcessorBasedRenamePart
 		final IPath filePath = file.getFullPath();
 		final IPath newPath = file.getFullPath().removeLastSegments(1).append(getNewName() + ".xtend");
 		String className = trimFileExtension(file.getName());
-		ResourceSet resourceSet = resourceSetProvider.get(file.getProject());
-		URI resourceURI = URI.createPlatformResourceURI(file.getFullPath().toString(), true);
-		Resource resource = resourceSet.getResource(resourceURI, true);
-		if (resource != null && !resource.getContents().isEmpty()) {
-			for (XtendTypeDeclaration type : EcoreUtil2.eAllOfType(resource.getContents().get(0), XtendTypeDeclaration.class)) {
-				if (type.getName().equals(className)) {
-					IRenameElementContext renameElementContext = renameContextFactory.createRenameElementContext(type, null, null,
-							(XtextResource) resource);
-					if(renameElementContext instanceof IChangeRedirector.Aware) 
-						((IChangeRedirector.Aware) renameElementContext).setChangeRedirector(new IChangeRedirector() {
-							public IPath getRedirectedPath(IPath source) {
-								return source.equals(filePath) ? newPath : filePath;
-							}
-							
-						});
-					return singletonList(renameElementContext);
+		if(className != null) {
+			ResourceSet resourceSet = resourceSetProvider.get(file.getProject());
+			URI resourceURI = URI.createPlatformResourceURI(file.getFullPath().toString(), true);
+			Resource resource = resourceSet.getResource(resourceURI, true);
+			if (resource != null && !resource.getContents().isEmpty()) {
+				for (XtendTypeDeclaration type : EcoreUtil2.eAllOfType(resource.getContents().get(0), XtendTypeDeclaration.class)) {
+					if (equal(className, type.getName())) {
+						IRenameElementContext renameElementContext = renameContextFactory.createRenameElementContext(type, null, null,
+								(XtextResource) resource);
+						if(renameElementContext instanceof IChangeRedirector.Aware) 
+							((IChangeRedirector.Aware) renameElementContext).setChangeRedirector(new IChangeRedirector() {
+								public IPath getRedirectedPath(IPath source) {
+									return source.equals(filePath) ? newPath : filePath;
+								}
+								
+							});
+						return singletonList(renameElementContext);
+					}
 				}
 			}
 		}
