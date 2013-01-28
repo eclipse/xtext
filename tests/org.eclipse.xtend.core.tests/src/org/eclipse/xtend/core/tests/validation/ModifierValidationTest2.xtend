@@ -14,7 +14,7 @@ import static org.eclipse.xtend.core.xtend.XtendPackage$Literals.*
 
 @RunWith(typeof(XtextRunner))
 @InjectWith(typeof(NewTypeSystemRuntimeInjectorProvider))
-class ModifierValidationTest extends AbstractXtendTestCase {
+class ModifierValidationTest2 extends AbstractXtendTestCase {
 	
 	@Inject extension ValidationTestHelper
 	
@@ -45,7 +45,7 @@ class ModifierValidationTest extends AbstractXtendTestCase {
 		function('''package def foo() {}''').assertNoErrors
 		function('''protected def foo() {}''').assertNoErrors
 		function('''public def foo() {}''').assertNoErrors
-		function('''static def foo() {}''').assertNoErrors		
+		function('''static def foo() {}''').assertNoErrors
 		function('''abstract def foo()''').assertNoError(INVALID_MODIFIER)	
 		function('''dispatch def foo (int i){}''').assertNoErrors		
 		function('''final def foo() {}''').assertNoErrors		
