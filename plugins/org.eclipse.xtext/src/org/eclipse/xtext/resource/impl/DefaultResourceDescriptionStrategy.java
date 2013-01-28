@@ -25,12 +25,14 @@ import org.eclipse.xtext.resource.IReferenceDescription;
 import org.eclipse.xtext.util.IAcceptor;
 
 import com.google.inject.Inject;
+import com.google.inject.Singleton;
 
 /**
  * By default, all elements with a not null <code>name</code> feature and all cross-resource crossrefs are indexed.
  * 
  * @author Jan Koehnlein - Initial contribution and API
  */
+@Singleton
 public class DefaultResourceDescriptionStrategy implements IDefaultResourceDescriptionStrategy {
 
 	private final static Logger LOG = Logger.getLogger(DefaultResourceDescriptionStrategy.class);

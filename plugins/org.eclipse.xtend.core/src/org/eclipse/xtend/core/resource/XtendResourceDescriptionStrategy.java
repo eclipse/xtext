@@ -17,10 +17,12 @@ import org.eclipse.xtext.xbase.resource.XbaseResourceDescriptionStrategy;
 
 import com.google.common.collect.ImmutableMap;
 import com.google.inject.Inject;
+import com.google.inject.Singleton;
 
 /**
  * @author Jan Koehnlein - Initial contribution and API
  */
+@Singleton
 public class XtendResourceDescriptionStrategy extends XbaseResourceDescriptionStrategy {
 
 	@Inject
