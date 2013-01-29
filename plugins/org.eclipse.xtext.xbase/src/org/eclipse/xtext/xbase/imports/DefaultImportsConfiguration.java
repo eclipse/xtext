@@ -10,6 +10,7 @@ package org.eclipse.xtext.xbase.imports;
 import static com.google.common.collect.Lists.*;
 import static com.google.common.collect.Sets.*;
 
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
@@ -173,14 +174,17 @@ public class DefaultImportsConfiguration implements IImportsConfiguration {
 		EList<AbstractRule> rules = grammarAccess.getGrammar().getRules();
 		if(!rules.isEmpty() && rules.get(0) instanceof ParserRule) {
 			LinkedList<EObject> pathToImportSection = newLinkedList();
-			if(internalFindPathToImportSection(pathToImportSection, rules.get(0))) {
-				return pathToImportSection;
-			}
+			if(internalFindPathToImportSection(pathToImportSection, new HashSet<EObject>(), rules.get(0))) {
+ 				return pathToImportSection;
+ 			}
 		}
 		return null;
 	}
 	
-	protected boolean internalFindPathToImportSection(LinkedList<EObject> pathToImportSection, EObject ruleOrRuleCall) {
+	protected boolean internalFindPathToImportSection(LinkedList<EObject> pathToImportSection, 
+			Set<EObject> seenRulesOrRuleCalls, EObject ruleOrRuleCall) {
+		if(seenRulesOrRuleCalls.contains(ruleOrRuleCall))
+			return false;
 		pathToImportSection.addLast(ruleOrRuleCall);
 		ParserRule rule = null;
 		EClassifier returnType = null;
@@ -195,7 +199,7 @@ public class DefaultImportsConfiguration implements IImportsConfiguration {
 		}
 		for(RuleCall containedRuleCall: GrammarUtil.containedRuleCalls(rule)) {
 			if(containedRuleCall.getRule() instanceof ParserRule) 
-				if(internalFindPathToImportSection(pathToImportSection, containedRuleCall)) {
+				if(internalFindPathToImportSection(pathToImportSection, seenRulesOrRuleCalls, containedRuleCall)) {
 					return true;
 				}
 		}
