@@ -24,7 +24,7 @@ import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.jdt.core.JavaCore;
 import org.eclipse.xtext.builder.nature.ToggleXtextNatureAction;
 import org.eclipse.xtext.ui.util.PluginProjectFactory;
-import org.eclipse.xtext.util.internal.StopWatches;
+import org.eclipse.xtext.util.internal.Stopwatches;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -106,7 +106,7 @@ public class BuilderPerformanceTest extends AbstractBuilderTest {
 	@Override
 	@Before
 	public void setUp() throws Exception {
-		StopWatches.setEnabled(true);
+		Stopwatches.setEnabled(true);
 		super.setUp();
 	}
 	
@@ -114,8 +114,8 @@ public class BuilderPerformanceTest extends AbstractBuilderTest {
 	@After
 	public void tearDown() throws Exception {
 		super.tearDown();
-		printAndClearStopWatchData();
-		StopWatches.setEnabled(false);
+		printAndClearStopwatchData();
+		Stopwatches.setEnabled(false);
 	}
 	
 	@Test public void testSecondBuildRunIsMuchFaster() throws Exception {
@@ -169,13 +169,13 @@ public class BuilderPerformanceTest extends AbstractBuilderTest {
 //		controller.startCPUProfiling(ProfilingModes.CPU_TRACING, null, "");
 		
 		toggleNature(javaProject1);
-		printAndClearStopWatchData();
+		printAndClearStopwatchData();
 		
 //		controller.captureSnapshot(ProfilingModes.SNAPSHOT_WITHOUT_HEAP);
 //		controller.clearCPUData();
 //		
 		System.out.println("Clean Xtext first - "+cleanBuildTakes());
-		printAndClearStopWatchData();
+		printAndClearStopwatchData();
 		
 //		controller.captureSnapshot(ProfilingModes.SNAPSHOT_WITHOUT_HEAP);
 //		controller.clearCPUData();
@@ -234,9 +234,9 @@ public class BuilderPerformanceTest extends AbstractBuilderTest {
 //		controller.stopCPUProfiling();
 	}
 	
-	private void printAndClearStopWatchData() {
-		System.out.println(StopWatches.getPrintableStopWatchData());
-		StopWatches.resetAll();
+	private void printAndClearStopwatchData() {
+		System.out.println(Stopwatches.getPrintableStopwatchData());
+		Stopwatches.resetAll();
 	}
 	
 	private IFile copyAndGetXtendExampleJar(IJavaProject javaProject1) throws CoreException {

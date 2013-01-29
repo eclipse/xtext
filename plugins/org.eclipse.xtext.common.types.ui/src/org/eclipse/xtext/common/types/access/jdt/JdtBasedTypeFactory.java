@@ -66,8 +66,8 @@ import org.eclipse.xtext.common.types.access.IJvmTypeProvider;
 import org.eclipse.xtext.common.types.access.impl.ITypeFactory;
 import org.eclipse.xtext.common.types.impl.JvmExecutableImplCustom;
 import org.eclipse.xtext.common.types.util.TypeReferences;
-import org.eclipse.xtext.util.internal.StopWatches;
-import org.eclipse.xtext.util.internal.StopWatches.StoppedTask;
+import org.eclipse.xtext.util.internal.Stopwatches;
+import org.eclipse.xtext.util.internal.Stopwatches.StoppedTask;
 
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
@@ -90,12 +90,11 @@ public class JdtBasedTypeFactory implements ITypeFactory<IType> {
 	private final TypeURIHelper uriHelper;
 	private WorkingCopyOwner workingCopyOwner;
 	
-	private static StoppedTask resolveParamNames = StopWatches.forTask("resolve param names");
-	private static StoppedTask resolveAnnotations = StopWatches.forTask("resolve annotations");
-	private static StoppedTask resolveMembers = StopWatches.forTask("resolve members");
-	private static StoppedTask resolveTypeParams = StopWatches.forTask("resolve typeParams");
-	private static StoppedTask resolveBinding = StopWatches.forTask("resolve binding");
-	private static StoppedTask createType = StopWatches.forTask("JdtBasedTypeFactory.createType");
+	private StoppedTask resolveAnnotations = Stopwatches.forTask("resolve annotations (JdtBasedTypeFactory)");
+	private StoppedTask resolveMembers = Stopwatches.forTask("resolve members (JdtBasedTypeFactory)");
+	private StoppedTask resolveTypeParams = Stopwatches.forTask("resolve typeParams (JdtBasedTypeFactory)");
+	private StoppedTask resolveBinding = Stopwatches.forTask("resolve binding (JdtBasedTypeFactory)");
+	private StoppedTask createType = Stopwatches.forTask("JdtBasedTypeFactory.createType (JdtBasedTypeFactory)");
 
 	@Deprecated
 	public JdtBasedTypeFactory(TypeURIHelper uriHelper) {
@@ -647,6 +646,7 @@ public class JdtBasedTypeFactory implements ITypeFactory<IType> {
 	 */
 	public static class ParameterNameInitializer implements Runnable {
 		private final static Logger log = Logger.getLogger(JdtBasedTypeFactory.ParameterNameInitializer.class);
+		private StoppedTask resolveParamNames = Stopwatches.forTask("resolve param names (JdtBasedTypeFactory)");
 		private JvmExecutable executable;
 		private String iMethodIdentifier;
 		

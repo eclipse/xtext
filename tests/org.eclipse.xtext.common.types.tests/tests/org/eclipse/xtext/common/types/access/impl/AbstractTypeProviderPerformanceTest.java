@@ -21,7 +21,7 @@ import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmMember;
 import org.eclipse.xtext.common.types.access.IJvmTypeProvider;
 import org.eclipse.xtext.common.types.access.jdt.MockJavaProjectProvider;
-import org.eclipse.xtext.junit4.internal.StopWatchRule;
+import org.eclipse.xtext.junit4.internal.StopwatchRule;
 import org.junit.Assert;
 import org.junit.Rule;
 import org.junit.Test;
@@ -36,7 +36,7 @@ public abstract class AbstractTypeProviderPerformanceTest {
 
 	protected abstract IJvmTypeProvider getTypeProvider();
 
-	@Rule public static StopWatchRule rule = new StopWatchRule(true);
+	@Rule public static StopwatchRule rule = new StopwatchRule(true);
 	
 	public Iterable<String> getClassNamesToLoad() throws Exception {
 		List<String> resource = MockJavaProjectProvider.readResource("/org/eclipse/xtext/common/types/testSetups/files.list");
