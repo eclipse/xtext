@@ -21,6 +21,7 @@ class QuickfixTest extends AbstractXtendUITestCase {
 		builder.tearDown
 	}
 	
+	
 	@Test 
 	def void missingMember() {
 		create('Foo.xtend', '''
@@ -930,6 +931,23 @@ class QuickfixTest extends AbstractXtendUITestCase {
 			}
 		''')	
 	}
+	
+	@Test
+	def void missingAnnotationImport() {
+		create('Foo.xtend', '''
+			@QuickFixMe|
+			class Foo {}
+		''')
+		.assertIssueCodes(Diagnostic::LINKING_DIAGNOSTIC)
+		.assertResolutionLabelsSubset("Import 'QuickFixMe' (org.eclipse.xtend.ide.tests.data.quickfix)")
+		.assertModelAfterQuickfix('''
+			import org.eclipse.xtend.ide.tests.data.quickfix.QuickFixMe
+			
+			@QuickFixMe
+			class Foo {}
+		''')
+	}
+	
 	
 	@Test
 	def void missingAnnotation() {
