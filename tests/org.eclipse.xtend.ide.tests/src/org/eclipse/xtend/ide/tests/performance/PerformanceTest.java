@@ -23,7 +23,7 @@ import org.eclipse.xtend.core.tests.performance.GeneratorConfig;
 import org.eclipse.xtend.core.tests.performance.XtendFileGenerator;
 import org.eclipse.xtend.ide.tests.AbstractXtendUITestCase;
 import org.eclipse.xtend.ide.tests.WorkbenchTestHelper;
-import org.eclipse.xtext.junit4.internal.StopWatchRule;
+import org.eclipse.xtext.junit4.internal.StopwatchRule;
 import org.junit.Rule;
 import org.junit.Test;
 
@@ -161,7 +161,7 @@ Task 'validation' took 5988ms (250 measurements).
 
 public class PerformanceTest extends AbstractXtendUITestCase {
 	
-	@Rule public static StopWatchRule stopWatch = new StopWatchRule(true);
+	@Rule public static StopwatchRule stopwatch = new StopwatchRule(true);
 
 	@Inject 
 	private WorkbenchTestHelper workbenchTestHelper;

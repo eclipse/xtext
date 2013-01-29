@@ -1,3 +1,10 @@
+/*******************************************************************************
+ * Copyright (c) 2013 itemis AG (http://www.itemis.eu) and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *******************************************************************************/
 package org.eclipse.xtend.core.macro
 
 import com.google.inject.Inject
@@ -16,17 +23,22 @@ import org.eclipse.xtend.core.xtend.XtendInterface
 import org.eclipse.xtext.common.types.JvmAnnotationType
 import org.eclipse.xtext.util.IAcceptor
 import org.eclipse.xtext.util.OnChangeEvictingCache
-import org.eclipse.xtext.util.internal.StopWatches
+import org.eclipse.xtext.util.internal.Stopwatches
 import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotation
 import org.eclipse.xtext.xbase.lib.Pair
-import org.eclipse.xtend.core.xtend.XtendEnumLiteral
 
+/**
+ * @author Sven Efftinge
+ */
 class ActiveAnnotationContext {
 	@Property val List<XtendAnnotationTarget> annotatedSourceElements = newArrayList()
 	@Property Object processorInstance
 	@Property CompilationUnitImpl compilationUnit
 }
 
+/**
+ * @author Sven Efftinge
+ */
 class ActiveAnnotationContextProvider {
 	
 	@Inject OnChangeEvictingCache cache
@@ -36,7 +48,7 @@ class ActiveAnnotationContextProvider {
 	
 	def List<? extends ActiveAnnotationContext> computeContext(XtendFile file) {
 		//TODO measure and improve (is called twice for each xtendfile)
-		val task = StopWatches::forTask('[macros] findActiveAnnotations')
+		val task = Stopwatches::forTask('[macros] findActiveAnnotations (ActiveAnnotationContextProvider.computeContext)')
 		task.start
 		try {
 			cache.get('annotation context', file.eResource) [|

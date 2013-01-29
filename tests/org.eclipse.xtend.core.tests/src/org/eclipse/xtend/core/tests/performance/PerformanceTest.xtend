@@ -1,18 +1,24 @@
 package org.eclipse.xtend.core.tests.performance
 
-import org.eclipse.xtend.core.tests.AbstractXtendTestCase
-import org.junit.Test
 import com.google.inject.Inject
 import java.util.List
-import org.eclipse.xtext.util.internal.StopWatches
+import org.eclipse.xtend.core.tests.AbstractXtendTestCase
+import org.eclipse.xtend.core.tests.NewTypeSystemRuntimeInjectorProvider
+import org.eclipse.xtext.junit4.InjectWith
+import org.eclipse.xtext.junit4.XtextRunner
+import org.eclipse.xtext.junit4.internal.StopwatchRule
 import org.junit.Rule
-import org.eclipse.xtext.junit4.internal.StopWatchRule
+import org.junit.Test
+import org.junit.runner.RunWith
+
+import static org.eclipse.xtext.util.internal.Stopwatches.*
 
 class PerformanceTest extends AbstractXtendTestCase {
 	
 	@Inject XtendFileGenerator fileGenerator
 	
-	@Rule public static StopWatchRule rule = new StopWatchRule(true)
+	@Rule public static val rule = new StopwatchRule(true)
+
 	/*
 	Sven 2013-01-24 (old typesystem)
 	-------------------------------------------------------------------------------------------------------------------------
@@ -70,6 +76,20 @@ class PerformanceTest extends AbstractXtendTestCase {
 	Task 'Crosslink resolution' took 12790ms (11902 measurements).
 	Task 'validation' took 10647ms (57 measurements).
 	-------------------------------------------------------------------------------------------------------------------------
+	
+	Test 'doCompile(org.eclipse.xtend.core.tests.performance.PerformanceTest)' :
+	-------------------------------------------------------------------------------------------------------------------------
+	Task 'Validate all' took 10521ms (1 measurements).
+	Task 'parsing' took 720ms (57 measurements).
+	Task 'primary JVM Model inference' took 1756ms (57 measurements).
+	Task '[macros] findActiveAnnotations' took 1202ms (57 measurements).
+	Task 'ClassFinder.forName' took 1189ms (60887 measurements).
+	Task 'secondary (i.e. Macros) JVM Model inference' took 0ms (57 measurements).
+	Task 'Crosslink resolution' took 10582ms (11902 measurements).
+	Task 'validation' took 7569ms (57 measurements).
+	-------------------------------------------------------------------------------------------------------------------------
+	
+	
 	 */
 	@Test def void doCompile() {
 		val num = 50;
@@ -83,9 +103,40 @@ class PerformanceTest extends AbstractXtendTestCase {
 			config.className = "MyGeneratedType"+i;
 			files.add(fileGenerator.getContents(config).toString());
 		}
-		val task = StopWatches::forTask("Validate all")
+		val task = forTask("PerformanceTest.doCompile")
 		task.start
 		files(true, files as String[])
 		task.stop
 	}
+	
+	@Test
+	def void doCompileTwice() {
+		doCompile
+		doCompile
+	}
+	
+	@Test
+	def void doCompileThreeTimes() {
+		doCompile
+		doCompile
+		doCompile
+	}
+}
+
+@RunWith(typeof(XtextRunner))
+@InjectWith(typeof(NewTypeSystemRuntimeInjectorProvider))
+class PerformanceTestNewTypeSystem extends PerformanceTest {
+	
+//	@Inject extension ReflectExtensions
+//	@Inject CachingClasspathTypeProviderFactory factory
+//	
+//	@Before
+//	@After
+//	def void printLoadedClasses() {
+//		val Cache<Class<?>, ?> cache = factory.get("reusedFactory").get("typeCache")
+//		val types = cache.asMap.keySet.map[ canonicalName ].sort
+//		println(types.join('\n'))
+//		println('==========================================')
+//	}
+	
 }

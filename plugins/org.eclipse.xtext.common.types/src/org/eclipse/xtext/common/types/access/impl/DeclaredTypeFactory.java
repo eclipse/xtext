@@ -56,6 +56,8 @@ import org.eclipse.xtext.common.types.JvmWildcardTypeReference;
 import org.eclipse.xtext.common.types.TypesFactory;
 import org.eclipse.xtext.common.types.access.IJvmTypeProvider;
 import org.eclipse.xtext.common.types.util.TypeReferences;
+import org.eclipse.xtext.util.internal.Stopwatches;
+import org.eclipse.xtext.util.internal.Stopwatches.StoppedTask;
 
 import com.google.common.collect.Lists;
 import com.google.inject.Inject;
@@ -75,7 +77,10 @@ public class DeclaredTypeFactory implements ITypeFactory<Class<?>> {
 
 	private final static Logger log = Logger.getLogger(DeclaredTypeFactory.class);
 	private final ClassURIHelper uriHelper;
-
+	
+	private final StoppedTask createTypeTask = Stopwatches.forTask("DeclaredTypeFactory.createType");
+	private final StoppedTask annotationTask = Stopwatches.forTask("DeclaredTypeFactory.createAnnotationValues");
+	
 	@Inject
 	public DeclaredTypeFactory(ClassURIHelper uriHelper) {
 		this.uriHelper = uriHelper;
@@ -86,45 +91,55 @@ public class DeclaredTypeFactory implements ITypeFactory<Class<?>> {
 	 * @noreference This method is not intended to be referenced by clients.
 	 */
 	public JvmDeclaredType createType(final Class<?> clazz) {
-		if (clazz.isAnonymousClass() || clazz.isSynthetic())
-			throw new IllegalStateException("Cannot create type for anonymous or synthetic classes");
-		if (clazz.isAnnotation())
-			return createAnnotationType(clazz);
-		if (clazz.isEnum())
-			return createEnumerationType(clazz);
-
-		final JvmGenericType result = TypesFactory.eINSTANCE.createJvmGenericType();
-		result.setInterface(clazz.isInterface());
-		setTypeModifiers(clazz, result);
-		setVisibility(clazz, result);
-		result.internalSetIdentifier(clazz.getName());
-		result.setSimpleName(clazz.getSimpleName());
-		if (clazz.getDeclaringClass() == null && clazz.getPackage() != null)
-			result.setPackageName(clazz.getPackage().getName());
-		
-		createNestedTypes(clazz, result);
-		createMethods(clazz, result);
-		createConstructors(clazz, result);
-		createFields(clazz, result);
-		
-		setSuperTypes(clazz, result);
 		try {
-			for (TypeVariable<?> variable : clazz.getTypeParameters()) {
-				result.getTypeParameters().add(createTypeParameter(variable, result));
+			createTypeTask.start();
+			if (clazz.isAnonymousClass() || clazz.isSynthetic())
+				throw new IllegalStateException("Cannot create type for anonymous or synthetic classes");
+			if (clazz.isAnnotation())
+				return createAnnotationType(clazz);
+			if (clazz.isEnum())
+				return createEnumerationType(clazz);
+	
+			final JvmGenericType result = TypesFactory.eINSTANCE.createJvmGenericType();
+			result.setInterface(clazz.isInterface());
+			setTypeModifiers(clazz, result);
+			setVisibility(clazz, result);
+			result.internalSetIdentifier(clazz.getName());
+			result.setSimpleName(clazz.getSimpleName());
+			if (clazz.getDeclaringClass() == null && clazz.getPackage() != null)
+				result.setPackageName(clazz.getPackage().getName());
+			
+			createNestedTypes(clazz, result);
+			createMethods(clazz, result);
+			createConstructors(clazz, result);
+			createFields(clazz, result);
+			
+			setSuperTypes(clazz, result);
+			try {
+				for (TypeVariable<?> variable : clazz.getTypeParameters()) {
+					result.getTypeParameters().add(createTypeParameter(variable, result));
+				}
+			} catch(GenericSignatureFormatError error) {
+				if (log.isDebugEnabled())
+					log.debug("Invalid class file for: " + result.getIdentifier(), error);
 			}
-		} catch(GenericSignatureFormatError error) {
-			if (log.isDebugEnabled())
-				log.debug("Invalid class file for: " + result.getIdentifier(), error);
+			createAnnotationValues(clazz, result);
+			return result;
+		} finally {
+			createTypeTask.stop();
 		}
-		createAnnotationValues(clazz, result);
-		return result;
 	}
 	
 	private static final Object[] EMPTY_ARRAY = new Object[0];
 
 	protected void createAnnotationValues(final AnnotatedElement annotated, final JvmAnnotationTarget result) {
-		for (Annotation annotation : annotated.getDeclaredAnnotations()) {
-			result.getAnnotations().add(createAnnotationReference(annotation));
+		try {
+			annotationTask.start();
+			for (Annotation annotation : annotated.getDeclaredAnnotations()) {
+				result.getAnnotations().add(createAnnotationReference(annotation));
+			}
+		} finally {
+			annotationTask.stop();
 		}
 	}
 

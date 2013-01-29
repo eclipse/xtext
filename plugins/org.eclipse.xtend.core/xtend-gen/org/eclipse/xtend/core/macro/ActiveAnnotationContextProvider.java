@@ -1,3 +1,10 @@
+/**
+ * Copyright (c) 2013 itemis AG (http://www.itemis.eu) and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ */
 package org.eclipse.xtend.core.macro;
 
 import com.google.inject.Inject;
@@ -26,8 +33,8 @@ import org.eclipse.xtext.common.types.JvmAnnotationType;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.util.IAcceptor;
 import org.eclipse.xtext.util.OnChangeEvictingCache;
-import org.eclipse.xtext.util.internal.StopWatches;
-import org.eclipse.xtext.util.internal.StopWatches.StoppedTask;
+import org.eclipse.xtext.util.internal.Stopwatches;
+import org.eclipse.xtext.util.internal.Stopwatches.StoppedTask;
 import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotation;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Functions.Function0;
@@ -37,6 +44,9 @@ import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.Pair;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 
+/**
+ * @author Sven Efftinge
+ */
 @SuppressWarnings("all")
 public class ActiveAnnotationContextProvider {
   @Inject
@@ -54,7 +64,7 @@ public class ActiveAnnotationContextProvider {
   public List<? extends ActiveAnnotationContext> computeContext(final XtendFile file) {
     List<ActiveAnnotationContext> _xblockexpression = null;
     {
-      final StoppedTask task = StopWatches.forTask("[macros] findActiveAnnotations");
+      final StoppedTask task = Stopwatches.forTask("[macros] findActiveAnnotations (ActiveAnnotationContextProvider.computeContext)");
       task.start();
       List<ActiveAnnotationContext> _xtrycatchfinallyexpression = null;
       try {

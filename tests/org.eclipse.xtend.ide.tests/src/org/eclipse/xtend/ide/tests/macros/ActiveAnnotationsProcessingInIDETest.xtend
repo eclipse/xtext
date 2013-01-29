@@ -17,7 +17,7 @@ import org.eclipse.xtend.core.xtend.XtendFile
 import org.eclipse.xtend.ide.tests.XtendIDEInjectorProvider
 import org.eclipse.xtext.junit4.InjectWith
 import org.eclipse.xtext.junit4.XtextRunner
-import org.eclipse.xtext.junit4.internal.StopWatchRule
+import org.eclipse.xtext.junit4.internal.StopwatchRule
 import org.eclipse.xtext.ui.resource.XtextResourceSetProvider
 import org.eclipse.xtext.util.StringInputStream
 import org.eclipse.xtext.xbase.lib.Pair
@@ -41,7 +41,7 @@ class ActiveAnnotationsProcessingInIDETest extends AbstractActiveAnnotationsTest
 	@Inject XtextResourceSetProvider resourceSetProvider
 	@Inject Provider<CompilationUnitImpl> compilationUnitProvider 
 
-	@Rule public static StopWatchRule stopWatch = new StopWatchRule(true);
+	@Rule public static StopwatchRule stopwatch = new StopwatchRule(true);
 	
 	@After def tearDown() throws Exception {
 		macroProject = null

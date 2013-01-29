@@ -8,9 +8,9 @@ import java.util.Map;
 import org.eclipse.xtend.core.tests.AbstractXtendTestCase;
 import org.eclipse.xtend.core.tests.performance.GeneratorConfig;
 import org.eclipse.xtend.core.tests.performance.XtendFileGenerator;
-import org.eclipse.xtext.junit4.internal.StopWatchRule;
-import org.eclipse.xtext.util.internal.StopWatches;
-import org.eclipse.xtext.util.internal.StopWatches.StoppedTask;
+import org.eclipse.xtext.junit4.internal.StopwatchRule;
+import org.eclipse.xtext.util.internal.Stopwatches;
+import org.eclipse.xtext.util.internal.Stopwatches.StoppedTask;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Exceptions;
@@ -27,10 +27,10 @@ public class PerformanceTest extends AbstractXtendTestCase {
   private XtendFileGenerator fileGenerator;
   
   @Rule
-  public static StopWatchRule rule = new Function0<StopWatchRule>() {
-    public StopWatchRule apply() {
-      StopWatchRule _stopWatchRule = new StopWatchRule(true);
-      return _stopWatchRule;
+  public final static StopwatchRule rule = new Function0<StopwatchRule>() {
+    public StopwatchRule apply() {
+      StopwatchRule _stopwatchRule = new StopwatchRule(true);
+      return _stopwatchRule;
     }
   }.apply();
   
@@ -91,6 +91,18 @@ public class PerformanceTest extends AbstractXtendTestCase {
    * Task 'Crosslink resolution' took 12790ms (11902 measurements).
    * Task 'validation' took 10647ms (57 measurements).
    * -------------------------------------------------------------------------------------------------------------------------
+   * 
+   * Test 'doCompile(org.eclipse.xtend.core.tests.performance.PerformanceTest)' :
+   * -------------------------------------------------------------------------------------------------------------------------
+   * Task 'Validate all' took 10521ms (1 measurements).
+   * Task 'parsing' took 720ms (57 measurements).
+   * Task 'primary JVM Model inference' took 1756ms (57 measurements).
+   * Task '[macros] findActiveAnnotations' took 1202ms (57 measurements).
+   * Task 'ClassFinder.forName' took 1189ms (60887 measurements).
+   * Task 'secondary (i.e. Macros) JVM Model inference' took 0ms (57 measurements).
+   * Task 'Crosslink resolution' took 10582ms (11902 measurements).
+   * Task 'validation' took 7569ms (57 measurements).
+   * -------------------------------------------------------------------------------------------------------------------------
    */
   @Test
   public void doCompile() {
@@ -121,12 +133,25 @@ public class PerformanceTest extends AbstractXtendTestCase {
           files.add(_string);
         }
       }
-      final StoppedTask task = StopWatches.forTask("Validate all");
+      final StoppedTask task = Stopwatches.forTask("PerformanceTest.doCompile");
       task.start();
       this.files(true, ((String[]) ((String[])Conversions.unwrapArray(files, String.class))));
       task.stop();
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
+  }
+  
+  @Test
+  public void doCompileTwice() {
+    this.doCompile();
+    this.doCompile();
+  }
+  
+  @Test
+  public void doCompileThreeTimes() {
+    this.doCompile();
+    this.doCompile();
+    this.doCompile();
   }
 }

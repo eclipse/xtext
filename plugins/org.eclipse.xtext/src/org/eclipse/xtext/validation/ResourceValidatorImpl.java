@@ -22,8 +22,8 @@ import org.eclipse.xtext.diagnostics.Severity;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.util.CancelIndicator;
 import org.eclipse.xtext.util.IAcceptor;
-import org.eclipse.xtext.util.internal.StopWatches;
-import org.eclipse.xtext.util.internal.StopWatches.StoppedTask;
+import org.eclipse.xtext.util.internal.Stopwatches;
+import org.eclipse.xtext.util.internal.Stopwatches.StoppedTask;
 import org.eclipse.xtext.validation.impl.ConcreteSyntaxEValidator;
 
 import com.google.common.collect.Lists;
@@ -60,7 +60,7 @@ public class ResourceValidatorImpl implements IResourceValidator {
 	private IDiagnosticConverter converter;
 
 	public List<Issue> validate(Resource resource, final CheckMode mode, CancelIndicator mon) {
-		StoppedTask task = StopWatches.forTask("validation");
+		StoppedTask task = Stopwatches.forTask("ResourceValidatorImpl.validation");
 		try {
 			task.start();
 			final CancelIndicator monitor = mon == null ? CancelIndicator.NullImpl : mon;

@@ -30,8 +30,8 @@ import org.eclipse.xtext.resource.IResourceDescription.Delta;
 import org.eclipse.xtext.resource.impl.ResourceDescriptionsProvider;
 import org.eclipse.xtext.ui.XtextProjectHelper;
 import org.eclipse.xtext.ui.resource.IResourceSetProvider;
-import org.eclipse.xtext.util.internal.StopWatches;
-import org.eclipse.xtext.util.internal.StopWatches.StoppedTask;
+import org.eclipse.xtext.util.internal.Stopwatches;
+import org.eclipse.xtext.util.internal.Stopwatches.StoppedTask;
 
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Maps;
@@ -72,7 +72,7 @@ public class XtextBuilder extends IncrementalProjectBuilder {
 	@Override
 	protected IProject[] build(int kind, Map args, IProgressMonitor monitor) throws CoreException {
 		long startTime = System.currentTimeMillis();
-		StoppedTask task = StopWatches.forTask("build");
+		StoppedTask task = Stopwatches.forTask("XtextBuilder.build");
 		try {
 			task.start();
 			if (monitor != null) {

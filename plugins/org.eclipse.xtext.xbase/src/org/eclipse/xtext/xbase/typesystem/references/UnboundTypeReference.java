@@ -16,8 +16,6 @@ import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.JvmTypeReference;
-import org.eclipse.xtext.util.internal.StopWatches;
-import org.eclipse.xtext.util.internal.StopWatches.StoppedTask;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.typesystem.conformance.TypeConformanceComputationArgument;
 import org.eclipse.xtext.xbase.typesystem.util.BoundTypeArgumentSource;
@@ -284,13 +282,7 @@ public class UnboundTypeReference extends LightweightTypeReference {
 	 */
 	@Override
 	public LightweightTypeReference copyInto(ITypeReferenceOwner owner) {
-		StoppedTask task = StopWatches.forTask("UnboundTypeReference.copyInto");
-		try {
-			task.start();
-			return doCopyInto(owner);
-		} finally {
-			task.stop();
-		}
+		return doCopyInto(owner);
 	}
 	
 	@Override

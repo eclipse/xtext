@@ -18,8 +18,8 @@ import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.TypesFactory;
-import org.eclipse.xtext.util.internal.StopWatches;
-import org.eclipse.xtext.util.internal.StopWatches.StoppedTask;
+import org.eclipse.xtext.util.internal.Stopwatches;
+import org.eclipse.xtext.util.internal.Stopwatches.StoppedTask;
 import org.eclipse.xtext.xbase.lib.Functions;
 import org.eclipse.xtext.xbase.lib.Procedures;
 import org.eclipse.xtext.xbase.typesystem.conformance.SuperTypeAcceptor;
@@ -290,7 +290,7 @@ public abstract class LightweightTypeReference {
 	protected abstract List<LightweightTypeReference> getSuperTypes(TypeParameterSubstitutor<?> substitutor);
 	
 	public void collectSuperTypes(SuperTypeAcceptor acceptor) {
-		StoppedTask task = StopWatches.forTask("LightweightTypeReference#collectSuperTypes");
+		StoppedTask task = Stopwatches.forTask("LightweightTypeReference#collectSuperTypes");
 		try {
 			task.start();
 			TypeParameterSubstitutor<?> substitutor = createSubstitutor();
@@ -332,7 +332,7 @@ public abstract class LightweightTypeReference {
 	}
 	
 	public TypeConformanceResult internalIsAssignableFrom(LightweightTypeReference reference, TypeConformanceComputationArgument argument) {
-		StoppedTask task = StopWatches.forTask("LightweightTypeReference#internalIsAssignableFrom");
+		StoppedTask task = Stopwatches.forTask("LightweightTypeReference#internalIsAssignableFrom");
 		try {
 			task.start();
 			TypeConformanceComputer conformanceCompouter = getOwner().getServices().getTypeConformanceComputer();
@@ -384,7 +384,7 @@ public abstract class LightweightTypeReference {
 	}
 	
 	public LightweightTypeReference copyInto(ITypeReferenceOwner owner) {
-		StoppedTask task = StopWatches.forTask("LightweightTypeReference.copyInto");
+		StoppedTask task = Stopwatches.forTask("LightweightTypeReference.copyInto");
 		try {
 			task.start();
 			if (isOwnedBy(owner)) {

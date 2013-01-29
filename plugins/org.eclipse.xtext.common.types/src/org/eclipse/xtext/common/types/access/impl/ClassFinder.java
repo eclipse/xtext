@@ -11,8 +11,8 @@ import static com.google.common.collect.Maps.*;
 
 import java.util.Map;
 
-import org.eclipse.xtext.util.internal.StopWatches;
-import org.eclipse.xtext.util.internal.StopWatches.StoppedTask;
+import org.eclipse.xtext.util.internal.Stopwatches;
+import org.eclipse.xtext.util.internal.Stopwatches.StoppedTask;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -22,17 +22,18 @@ public class ClassFinder {
 	private final ClassLoader classLoader;
 	private final ClassNameUtil classNameUtil;
 	
+	private final StoppedTask forNameTask = Stopwatches.forTask("ClassFinder.forName");
+	
 	public ClassFinder(ClassLoader classLoader) {
 		this.classLoader = classLoader;
 		this.classNameUtil = new ClassNameUtil();
 	}
 	
-	private Map<String, Class<?>> cache = newHashMap();
+	private Map<String, Class<?>> cache = newHashMapWithExpectedSize(500);
 
 	public Class<?> forName(String name) throws ClassNotFoundException {
-		StoppedTask task = StopWatches.forTask("Load class ");
 		try {
-			task.start();
+			forNameTask.start();
 			if (name.length() <= "boolean".length() && name.indexOf('.') == -1) {
 				Class<?> result = Primitives.forName(name);
 				if (result != null)
@@ -56,7 +57,7 @@ public class ClassFinder {
 			}
 			return result;
 		} finally {
-			task.stop();
+			forNameTask.stop();
 		}
 	}
 	

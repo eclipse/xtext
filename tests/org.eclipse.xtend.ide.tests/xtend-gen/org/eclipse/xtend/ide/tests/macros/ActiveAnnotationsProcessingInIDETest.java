@@ -28,7 +28,7 @@ import org.eclipse.xtend.ide.tests.WorkbenchTestHelper;
 import org.eclipse.xtend.ide.tests.XtendIDEInjectorProvider;
 import org.eclipse.xtext.junit4.InjectWith;
 import org.eclipse.xtext.junit4.XtextRunner;
-import org.eclipse.xtext.junit4.internal.StopWatchRule;
+import org.eclipse.xtext.junit4.internal.StopwatchRule;
 import org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil;
 import org.eclipse.xtext.ui.resource.XtextResourceSetProvider;
 import org.eclipse.xtext.util.StringInputStream;
@@ -59,10 +59,10 @@ public class ActiveAnnotationsProcessingInIDETest extends AbstractActiveAnnotati
   private Provider<CompilationUnitImpl> compilationUnitProvider;
   
   @Rule
-  public static StopWatchRule stopWatch = new Function0<StopWatchRule>() {
-    public StopWatchRule apply() {
-      StopWatchRule _stopWatchRule = new StopWatchRule(true);
-      return _stopWatchRule;
+  public static StopwatchRule stopwatch = new Function0<StopwatchRule>() {
+    public StopwatchRule apply() {
+      StopwatchRule _stopwatchRule = new StopwatchRule(true);
+      return _stopwatchRule;
     }
   }.apply();
   
