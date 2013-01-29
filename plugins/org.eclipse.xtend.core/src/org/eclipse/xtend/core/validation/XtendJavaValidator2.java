@@ -240,6 +240,9 @@ public class XtendJavaValidator2 extends XbaseWithAnnotationsJavaValidator2 {
 	protected Map<Class<?>, ElementType> getTargetInfos() {
 		Map<Class<?>, ElementType> result = newHashMap();
 		result.put(XtendClass.class, ElementType.TYPE);
+		result.put(XtendInterface.class, ElementType.TYPE);
+		result.put(XtendEnum.class, ElementType.TYPE);
+		result.put(XtendAnnotationType.class, ElementType.ANNOTATION_TYPE);
 		result.put(XtendField.class, ElementType.FIELD);
 		result.put(XtendFunction.class, ElementType.METHOD);
 		result.put(XtendParameter.class, ElementType.PARAMETER);
@@ -266,10 +269,10 @@ public class XtendJavaValidator2 extends XbaseWithAnnotationsJavaValidator2 {
 	}
 	
 	@Check
-	public void checkMemberNamesAreUnique(XtendClass xtendClass) {
+	public void checkMemberNamesAreUnique(XtendTypeDeclaration xtendType) {
 		final Multimap<String, XtendField> name2field = HashMultimap.create();
 		final Multimap<JvmType, XtendField> type2extension = HashMultimap.create();
-		for(XtendMember member: xtendClass.getMembers()) {
+		for(XtendMember member: xtendType.getMembers()) {
 			if(member instanceof XtendField) {
 				XtendField field = (XtendField)member;
 				 if(isEmpty(field.getName())) {
@@ -328,15 +331,15 @@ public class XtendJavaValidator2 extends XbaseWithAnnotationsJavaValidator2 {
 	}
 	
 	@Check
-	public void checkClassPath(XtendClass clazz) {
+	public void checkClassPath(XtendTypeDeclaration type) {
 		TypeReferences typeReferences = getServices().getTypeReferences();
-		final JvmGenericType listType = (JvmGenericType) typeReferences.findDeclaredType(List.class, clazz);
+		final JvmGenericType listType = (JvmGenericType) typeReferences.findDeclaredType(List.class, type);
 		if (listType == null || listType.getTypeParameters().isEmpty()) {
-			error("Xtend requires Java source level 1.5.", clazz, XTEND_TYPE_DECLARATION__NAME,
+			error("Xtend requires Java source level 1.5.", type, XTEND_TYPE_DECLARATION__NAME,
 					IssueCodes.XBASE_LIB_NOT_ON_CLASSPATH);
 		}
-		if (typeReferences.findDeclaredType(StringConcatenation.class, clazz) == null || typeReferences.findDeclaredType(Exceptions.class, clazz) == null) {
-			error("Mandatory library bundle 'org.eclipse.xtext.xbase.lib' 2.3.0 or higher not found on the classpath.", clazz,
+		if (typeReferences.findDeclaredType(StringConcatenation.class, type) == null || typeReferences.findDeclaredType(Exceptions.class, type) == null) {
+			error("Mandatory library bundle 'org.eclipse.xtext.xbase.lib' 2.3.0 or higher not found on the classpath.", type,
 					XTEND_TYPE_DECLARATION__NAME, IssueCodes.XBASE_LIB_NOT_ON_CLASSPATH);
 		}
 	}
@@ -380,7 +383,7 @@ public class XtendJavaValidator2 extends XbaseWithAnnotationsJavaValidator2 {
 					error("Attempt to override final class", XTEND_CLASS__EXTENDS, OVERRIDDEN_FINAL);
 				}
 				JvmGenericType inferredType = associations.getInferredType(xtendClass);
-				if (inferredType != null && hasCycleInHierarchy(inferredType, Lists.<JvmGenericType> newArrayList())) {
+				if (inferredType != null && hasCycleInHierarchy(inferredType, Sets.<JvmGenericType> newHashSet())) {
 					error("The inheritance hierarchy of " + notNull(xtendClass.getName()) + " contains cycles",
 							XTEND_TYPE_DECLARATION__NAME, CYCLIC_INHERITANCE);
 				}
@@ -395,9 +398,23 @@ public class XtendJavaValidator2 extends XbaseWithAnnotationsJavaValidator2 {
 		}
 	}
 
-	protected boolean hasCycleInHierarchy(JvmGenericType type, List<JvmGenericType> processedSuperTypes) {
-		if (type.isInterface())
-			return false;
+	@Check
+	public void checkSuperTypes(XtendInterface xtendInterface) {
+		for (int i = 0; i < xtendInterface.getExtends().size(); ++i) {
+			JvmTypeReference implementedType = xtendInterface.getExtends().get(i);
+			if (!(implementedType.getType() instanceof JvmGenericType)
+					|| !((JvmGenericType) implementedType.getType()).isInterface()) {
+				error("Extended interface must be an interface", XTEND_INTERFACE__EXTENDS, i, INTERFACE_EXPECTED);
+			}
+		}
+		JvmGenericType inferredType = associations.getInferredType(xtendInterface);
+		if(inferredType != null && hasCycleInHierarchy(inferredType, Sets.<JvmGenericType> newHashSet())) {
+			error("The inheritance hierarchy of " + notNull(xtendInterface.getName()) + " contains cycles",
+					XTEND_TYPE_DECLARATION__NAME, CYCLIC_INHERITANCE);
+		}
+	}
+
+	protected boolean hasCycleInHierarchy(JvmGenericType type, Set<JvmGenericType> processedSuperTypes) {
 		if (processedSuperTypes.contains(type))
 			return true;
 		processedSuperTypes.add(type);
@@ -407,6 +424,7 @@ public class XtendJavaValidator2 extends XbaseWithAnnotationsJavaValidator2 {
 					return true;
 			}
 		}
+		processedSuperTypes.remove(type);
 		return false;
 	}
 	
@@ -416,13 +434,13 @@ public class XtendJavaValidator2 extends XbaseWithAnnotationsJavaValidator2 {
 	}
 
 	@Check
-	public void checkDuplicateAndOverriddenFunctions(XtendClass xtendClass) {
-		final JvmGenericType inferredType = associations.getInferredType(xtendClass);
-		if (inferredType != null) {
+	public void checkDuplicateAndOverriddenFunctions(XtendTypeDeclaration xtendType) {
+		final JvmDeclaredType inferredType = associations.getInferredType(xtendType);
+		if (inferredType instanceof JvmGenericType) {
 			ResolvedOperations resolvedOperations = overrideHelper.getResolvedOperations(inferredType);
 			
-			doCheckDuplicateExecutables(inferredType, resolvedOperations);
-			doCheckOverriddenMethods(xtendClass, inferredType, resolvedOperations);
+			doCheckDuplicateExecutables((JvmGenericType) inferredType, resolvedOperations);
+			doCheckOverriddenMethods(xtendType, (JvmGenericType) inferredType, resolvedOperations);
 			doCheckFunctionOverrides(resolvedOperations);
 		}
 	}
@@ -509,7 +527,7 @@ public class XtendJavaValidator2 extends XbaseWithAnnotationsJavaValidator2 {
 	}
 	
 	
-	protected void doCheckOverriddenMethods(XtendClass xtendClass, JvmGenericType inferredType,
+	protected void doCheckOverriddenMethods(XtendTypeDeclaration xtendType, JvmGenericType inferredType,
 			ResolvedOperations resolvedOperations) {
 		List<IResolvedOperation> operationsMissingImplementation = null;
 		boolean doCheckAbstract = !inferredType.isAbstract();
@@ -543,8 +561,8 @@ public class XtendJavaValidator2 extends XbaseWithAnnotationsJavaValidator2 {
 				}
 			}
 		}
-		if(operationsMissingImplementation != null && !operationsMissingImplementation.isEmpty()) {
-			reportMissingImplementations(xtendClass, operationsMissingImplementation);
+		if(xtendType instanceof XtendClass && operationsMissingImplementation != null && !operationsMissingImplementation.isEmpty()) {
+			reportMissingImplementations((XtendClass) xtendType, operationsMissingImplementation);
 		}
 	}
 
@@ -821,7 +839,7 @@ public class XtendJavaValidator2 extends XbaseWithAnnotationsJavaValidator2 {
 					error("'Create'-method " + function.getName() + " is not permitted in an interface", XTEND_FUNCTION__NAME, -1, CREATE_FUNCTIONS_MUST_NOT_BE_ABSTRACT);
 					return;
 				}
-				if(function.getReturnType() == null) {
+				if(function.getReturnType() == null && !function.isOverride()) {
 					error("The abstract method " + function.getName() + " in type " + declarator.getName() + " must declare a return type",
 							XTEND_FUNCTION__NAME, -1, ABSTRACT_METHOD_MISSING_RETURN_TYPE);
 				}
@@ -1117,7 +1135,7 @@ public class XtendJavaValidator2 extends XbaseWithAnnotationsJavaValidator2 {
 		Set<String> names = newLinkedHashSet();
 		for (XtendTypeDeclaration clazz : file.getXtendTypes()) {	
 			if (!names.add(clazz.getName()))
-				error("The type "+clazz.getName()+" is already defined.", clazz, XtendPackage.Literals.XTEND_TYPE_DECLARATION__NAME, -1, IssueCodes.DUPLICATE_CLASS);
+				error("The type "+clazz.getName()+" is already defined.", clazz, XtendPackage.Literals.XTEND_TYPE_DECLARATION__NAME, -1, IssueCodes.DUPLICATE_TYPE_NAME);
 		}
 	}
 	
@@ -1240,8 +1258,19 @@ public class XtendJavaValidator2 extends XbaseWithAnnotationsJavaValidator2 {
 	}
 	
 	@Check
-	public void checkJavaKeywordConflict(XtendClass member) {
+	public void checkJavaKeywordConflict(XtendTypeDeclaration member) {
 		checkNoJavaKeyword(member, XtendPackage.Literals.XTEND_TYPE_DECLARATION__NAME);
+	}
+
+	@Check
+	public void checkJavaKeywordConflict(XtendClass member) {
+		for (JvmTypeParameter p : member.getTypeParameters()) {
+			checkNoJavaKeyword(p, TypesPackage.Literals.JVM_TYPE_PARAMETER__NAME);
+		}
+	}
+	
+	@Check
+	public void checkJavaKeywordConflict(XtendInterface member) {
 		for (JvmTypeParameter p : member.getTypeParameters()) {
 			checkNoJavaKeyword(p, TypesPackage.Literals.JVM_TYPE_PARAMETER__NAME);
 		}
@@ -1271,6 +1300,12 @@ public class XtendJavaValidator2 extends XbaseWithAnnotationsJavaValidator2 {
 				if (anno.getAnnotationType() != null && Data.class.getName().equals(anno.getAnnotationType().getIdentifier()))
 					return;
 			}
+		super.checkFinalFieldInitialization(inferredType);
+	}
+	
+	@Check
+	public void checkFinalFieldInitialization(XtendInterface xtendInterface) {
+		JvmGenericType inferredType = associations.getInferredType(xtendInterface);
 		super.checkFinalFieldInitialization(inferredType);
 	}
 	
@@ -1313,31 +1348,31 @@ public class XtendJavaValidator2 extends XbaseWithAnnotationsJavaValidator2 {
 	}
 	
 	private ModifierValidator classModifierValidator = new ModifierValidator(
-			newHashSet("public", "static", "final", "abstract"), this);
+			newArrayList("public", "static", "final", "abstract"), this);
 		
 	private ModifierValidator interfaceModifierValidator = new ModifierValidator(
-			newHashSet("public", "abstract"), this);
+			newArrayList("public", "abstract"), this);
 		
 	private ModifierValidator enumModifierValidator = new ModifierValidator(
-			newHashSet("public"), this);
+			newArrayList("public"), this);
 		
 	private ModifierValidator fieldModifierValidator = new ModifierValidator(
-			newHashSet("public", "protected", "package", "private", "static", "final", "val", "var", "extension"), this);
+			newArrayList("public", "protected", "package", "private", "static", "final", "val", "var", "extension"), this);
 		
 	private ModifierValidator fieldInInterfaceModifierValidator = new ModifierValidator(
-			newHashSet("public", "static", "final", "val"), this);
+			newArrayList("public", "static", "final", "val"), this);
 		
 	private ModifierValidator constructorModifierValidator = new ModifierValidator(
-			visibilityModifers, this);
+			newArrayList(visibilityModifers), this);
 		
 	private ModifierValidator methodModifierValidator = new ModifierValidator(
-			newHashSet("public", "protected", "package", "private", "static", "abstract", "dispatch", "final", "def", "override"), this);
+			newArrayList("public", "protected", "package", "private", "static", "abstract", "dispatch", "final", "def", "override"), this);
 		
 	private ModifierValidator methodInInterfaceModifierValidator = new ModifierValidator(
-			newHashSet("public", "abstract", "def"), this);
+			newArrayList("public", "abstract", "def", "override"), this);
 		
 	private ModifierValidator annotationTypeModifierValidator = new ModifierValidator(
-			newHashSet("public", "abstract"), this);
+			newArrayList("public", "abstract"), this);
 		
 	@Check
 	protected void checkModifiers(XtendClass xtendClass) {

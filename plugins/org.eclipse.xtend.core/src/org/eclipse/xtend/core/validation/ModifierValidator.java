@@ -11,6 +11,7 @@ import static com.google.common.collect.Sets.*;
 import static org.eclipse.xtend.core.xtend.XtendPackage.Literals.*;
 import static org.eclipse.xtext.util.Strings.*;
 
+import java.util.List;
 import java.util.Set;
 
 import org.eclipse.emf.ecore.EObject;
@@ -28,9 +29,18 @@ public class ModifierValidator {
 	private Set<String> allowedModifiers;
 	private AbstractDeclarativeValidator validator;
 
-	public ModifierValidator(Set<String> allowedModifiers, AbstractDeclarativeValidator validator) {
-		this.allowedModifiers = allowedModifiers;
+	private String allowedModifiersAsString;
+
+	
+	public ModifierValidator(List<String> allowedModifiers, AbstractDeclarativeValidator validator) {
+		this.allowedModifiers = newHashSet(allowedModifiers);
 		this.validator = validator;
+		StringBuffer buffer = new StringBuffer(allowedModifiers.get(0));
+		for(int i=1; i<allowedModifiers.size()-1; ++i) 
+			buffer.append(", ").append(allowedModifiers.get(i));
+		if(allowedModifiers.size() > 1) 
+			buffer.append(" & ").append(allowedModifiers.get(allowedModifiers.size()-1));
+		allowedModifiersAsString = buffer.toString();
 	}
 	
 	@Check
@@ -45,7 +55,7 @@ public class ModifierValidator {
 		for(int i=0; i<member.getModifiers().size(); ++i) {
 			String modifier = member.getModifiers().get(i);
 			if(!allowedModifiers.contains(modifier)) { 
-				error("Illegal modifier for the " + memberName + "; only public, abstract & final are permitted",
+				error("Illegal modifier for the " + memberName + "; only " + allowedModifiersAsString + " are permitted",
 						member, i);
 			}
 			if(seenModifiers.contains(modifier)) 

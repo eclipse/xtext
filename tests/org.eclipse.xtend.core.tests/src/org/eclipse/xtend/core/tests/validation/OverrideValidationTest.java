@@ -13,6 +13,7 @@ import static org.eclipse.xtext.xbase.validation.IssueCodes.*;
 
 import org.eclipse.xtend.core.tests.AbstractXtendTestCase;
 import org.eclipse.xtend.core.xtend.XtendClass;
+import org.eclipse.xtend.core.xtend.XtendInterface;
 import org.eclipse.xtext.junit4.validation.ValidationTestHelper;
 import org.junit.Ignore;
 import org.junit.Test;
@@ -492,4 +493,396 @@ public class OverrideValidationTest extends AbstractXtendTestCase {
 		helper.assertNoError(xtendClass.getMembers().get(0), INCOMPATIBLE_THROWS_CLAUSE);
 	}
 	
+	// ***************************************************************************************************
+	// * and now the same for the interfaces 
+	// ***************************************************************************************************
+	
+	@Test public void testDuplicateInterfaceMethod_0() throws Exception {
+		XtendInterface xtendInterface = interfaze("interface Foo { def void bar(int x) def void bar(int x) }");
+		helper.assertError(xtendInterface.getMembers().get(0), XTEND_FUNCTION, DUPLICATE_METHOD, "duplicate");
+	}
+
+	@Test public void testDuplicateInterfaceMethod_1() throws Exception {
+		XtendInterface xtendInterface = interfaze("interface Foo { def void bar(String x) def void bar(int x) }");
+		helper.assertNoError(xtendInterface, DUPLICATE_METHOD);
+	}
+
+	@Test public void testDuplicateInterfaceMethod_2() throws Exception {
+		XtendInterface xtendInterface = interfaze("interface Foo { def void bar(String x) def void bar(String x, int x) }");
+		helper.assertNoError(xtendInterface, DUPLICATE_METHOD);
+	}
+
+	@Test public void testDuplicateInterfaceMethod_3() throws Exception {
+		XtendInterface xtendInterface = interfaze("interface Foo { def void bar(java.util.List<String> x) def void bar(java.util.List<Integer> x) }");
+		helper.assertError(xtendInterface.getMembers().get(0), XTEND_FUNCTION, DUPLICATE_METHOD, "erasure", "List)",
+				"List<String");
+		helper.assertError(xtendInterface.getMembers().get(1), XTEND_FUNCTION, DUPLICATE_METHOD, "erasure", "List)",
+				"List<Integer");
+	}
+
+	@Test public void testDuplicateInterfaceMethod_4() throws Exception {
+		XtendInterface xtendInterface = interfaze("interface Foo { def <T> void bar(T t) def <T> void bar(T t) }");
+		helper.assertError(xtendInterface.getMembers().get(0), XTEND_FUNCTION, DUPLICATE_METHOD, "duplicate", "bar(T)");
+		helper.assertError(xtendInterface.getMembers().get(1), XTEND_FUNCTION, DUPLICATE_METHOD, "duplicate", "bar(T)");
+	}
+
+	@Test public void testDuplicateInterfaceMethod_5() throws Exception {
+		XtendInterface xtendInterface = interfaze("interface Foo { def <T> void bar(T t) def <V> void bar(V v) }");
+		helper.assertError(xtendInterface.getMembers().get(0), XTEND_FUNCTION, DUPLICATE_METHOD, "erasure", "Object)", "T");
+		helper.assertError(xtendInterface.getMembers().get(1), XTEND_FUNCTION, DUPLICATE_METHOD, "erasure", "Object)", "V");
+	}
+
+	@Test public void testDuplicateInterfaceMethod_6() throws Exception {
+		XtendInterface xtendInterface = interfaze("interface Foo { def <T> void bar(CharSequence seq) def <V extends CharSequence> void bar(V v) }");
+		helper.assertError(xtendInterface.getMembers().get(0), XTEND_FUNCTION, DUPLICATE_METHOD, "erasure", "CharSequence)");
+		helper.assertError(xtendInterface.getMembers().get(1), XTEND_FUNCTION, DUPLICATE_METHOD, "erasure",
+				"CharSequence)", "bar(V)");
+	}
+
+	@Test public void testDuplicateInterfaceMethod_7() throws Exception {
+		XtendInterface xtendInterface = interfaze("interface Foo { def <T extends CharSequence> void bar(T t) def <V extends String> void bar(V v) }");
+		helper.assertNoErrors(xtendInterface);
+	}
+
+	@Test public void testOverrideGenericInterfaceMethod_1() throws Exception {
+		XtendInterface xtendInterface = interfaze(" import java.util.List interface Foo<T> extends test.GenericSuperTypeInterface<T> {  " +
+									"override <RenamedT1> getValue1(List<RenamedT1> t)" +
+									"}");
+		helper.assertNoErrors(xtendInterface);
+	}
+	@Test public void testOverrideGenericInterfaceMethod_2() throws Exception {
+		XtendInterface xtendInterface = interfaze("interface Foo<T> extends test.GenericSuperTypeInterface<T> {  " +
+								    "override <T2> getValue2(T2[] t)" +
+									"}");
+		helper.assertNoErrors(xtendInterface);
+	}
+	@Test public void testOverrideGenericInterfaceMethod_3() throws Exception {
+		XtendInterface xtendInterface = interfaze(" import java.util.List interface Foo<T> extends test.GenericSuperTypeInterface<T> {  " +
+									"override <T3> getValue3(List<T3> t) " +
+									"}");
+		helper.assertNoErrors(xtendInterface);
+	}
+	@Test public void testOverrideGenericInterfaceMethod_4() throws Exception {
+		XtendInterface xtendInterface = interfaze(" import java.util.List interface Foo<T> extends test.GenericSuperTypeInterface<T> {  " +
+								    "override <T3> getValue4(List<T3[]> t) " +
+									"}");
+		helper.assertNoErrors(xtendInterface);
+	}
+	@Test public void testOverrideGenericInterfaceMethod_5() throws Exception {
+		XtendInterface xtendInterface = interfaze(" import java.util.List interface Foo<T> extends test.GenericSuperTypeInterface<T> {  " +
+								    "override <T3> getValue5(List<List<T3>[]> t) " +
+									"}");
+		helper.assertNoErrors(xtendInterface);
+	}
+	@Test public void testOverrideGenericInterfaceMethod_6() throws Exception {
+		XtendInterface xtendInterface = interfaze(" import java.util.List interface Foo<T> extends test.GenericSuperTypeInterface<T> {  " +
+								    "override <T3> getValue6(List<? extends T3> t) " +
+									"}");
+		helper.assertNoErrors(xtendInterface);
+	}
+	@Test public void testOverrideGenericInterfaceMethod_7() throws Exception {
+		XtendInterface xtendInterface = interfaze(" import java.util.List interface Foo<T> extends test.GenericSuperTypeInterface<T> {  " +
+								    "override <T3> getValue7(List<? super T3> t) " +
+									"}");
+		helper.assertNoErrors(xtendInterface);
+	}
+	@Test public void testOverrideGenericInterfaceMethod_8() throws Exception {
+		XtendInterface xtendInterface = interfaze(" import java.util.List interface Foo<T> extends test.GenericSuperTypeInterface<T> {  " +
+									"override <T1, T2 extends T1> getValue8(List<T1> t, List<T2> t2) " +
+									"}");
+		helper.assertNoErrors(xtendInterface);
+	}
+	@Test public void testOverrideGenericInterfaceMethod_9() throws Exception {
+		XtendInterface xtendInterface = interfaze(" import java.util.List import java.io.Serializable interface Foo<T> extends test.GenericSuperTypeInterface<T> {  " +
+									"override <T2, T1 extends Serializable & CharSequence> getValue9(List<T1> t)"+
+									"}");
+		helper.assertNoErrors(xtendInterface);
+	}
+
+	@Test public void testOverrideGenericInterfaceMethod_10() throws Exception {
+		XtendInterface xtendInterface = interfaze(" interface Foo<T> extends test.GenericSuperTypeInterface<T> {  " +
+									"override <T extends String> foo1()"+
+									"}");
+		helper.assertError(xtendInterface, XTEND_FUNCTION, DUPLICATE_METHOD);
+	}
+
+	@Test public void testOverrideGenericInterfaceMethod_11() throws Exception {
+		XtendInterface xtendInterface = interfaze(" interface Foo<T> extends test.GenericSuperTypeInterface<T> {  " +
+									"override <T extends CharSequence> foo1()"+
+									"}");
+		helper.assertNoErrors(xtendInterface);
+	}
+
+	@Test public void testOverrideGenericInterfaceMethod_12() throws Exception {
+		XtendInterface xtendInterface = interfaze(" interface Foo<T> extends test.GenericSuperTypeInterface<T> {  " +
+									"override <Unused> void foo2(T t, (T)=>void proc) "+
+									"}");
+		helper.assertNoErrors(xtendInterface);
+	}
+	
+	@Test public void testOverrideGenericInterfaceMethod_13() throws Exception {
+		XtendInterface xtendInterface = interfaze("interface Foo extends test.GenericSuperTypeInterface<String> {  " +
+									"override <C extends Comparable<C>> C getComparable()"+
+									"}");
+		helper.assertNoErrors(xtendInterface);
+	}
+	
+	@Test public void testOverrideGenericInterfaceMethod_14() throws Exception {
+		XtendInterface xtendInterface = interfaze("interface Foo extends test.GenericSuperTypeInterface<String> {  " +
+									"override <X extends Comparable<X>> void useComparable(X x) "+
+									"}");
+		helper.assertNoErrors(xtendInterface);
+	}
+	
+	@Test public void testOverrideGenericInterfaceMethod_15() throws Exception {
+		XtendInterface xtendInterface = interfaze(" interface Foo<T> extends test.GenericSuperTypeInterface<T> {  " +
+									"override <T> void foo3(T t, (T)=>void proc) "+
+									"}");
+		helper.assertNoErrors(xtendInterface);
+	}
+
+	@Test public void testInterfaceOverrideReturnType() throws Exception {
+		XtendInterface xtendInterface = interfaze("interface Foo<T> extends test.GenericSuperTypeInterface<T> {  " +
+									"override <T> T getSomething(T t) "+
+									"}");
+		helper.assertNoErrors(xtendInterface);
+	}
+
+	@Ignore("Make this one green when https://bugs.eclipse.org/bugs/show_bug.cgi?id=376037 is fixed")
+	@Test public void testInterfaceOverrideReturnType_1() throws Exception {
+		XtendInterface xtendInterface = interfaze("import java.util.List import java.io.Serializable interface Foo<T> extends test.GenericSuperTypeInterface<T> {  " +
+									"override <T1> T1[] getValue1(List<T1> t)" +
+									"}");
+		helper.assertNoErrors(xtendInterface);
+	}
+
+	@Ignore("Make this one green when https://bugs.eclipse.org/bugs/show_bug.cgi?id=376037 is fixed")
+	@Test public void testInterfaceOverrideReturnType_2() throws Exception {
+		XtendInterface xtendInterface = interfaze("import java.util.List import java.io.Serializable interface Foo<T> extends test.GenericSuperTypeInterface<T> {  " +
+									"override <T3> List<T3> getValue3(List<T3> t)" +
+									"}");
+		helper.assertNoErrors(xtendInterface);
+	}
+	
+	@Test public void testInterfaceOverrideReturnType_3() throws Exception {
+		XtendInterface xtendInterface = interfaze("interface Foo extends test.GenericSuperTypeInterface<Comparable<String>> {  " +
+									"override String getTypeParamValue() "+
+									"}");
+		helper.assertNoErrors(xtendInterface);
+	}
+
+	@Ignore("This should issue a warning and not an error")
+	@Test public void testInterfaceOverrideReturnType_4() throws Exception {
+		XtendInterface xtendInterface = interfaze("interface Foo extends test.GenericSuperTypeInterface<Integer> {  " +
+									"override String getComparable()" +
+									"}");
+		helper.assertNoErrors(xtendInterface);
+	}
+
+	@Test public void testInterfaceObsoleteOverride_0() throws Exception {
+		XtendInterface xtendInterface = interfaze("interface Foo { override bar() }");
+		helper.assertError(xtendInterface.getMembers().get(0), XTEND_FUNCTION, OBSOLETE_OVERRIDE);
+	}
+
+	@Test public void testInterfaceObsoleteOverride_1() throws Exception {
+		XtendInterface xtendInterface = interfaze("interface Foo extends test.SuperInterface { override bar() }");
+		helper.assertError(xtendInterface.getMembers().get(0), XTEND_FUNCTION, OBSOLETE_OVERRIDE);
+	}
+
+	@Test public void testInterfaceMissingOverride_0() throws Exception {
+		XtendInterface xtendInterface = interfaze("interface Foo extends test.SuperInterface { def string() }");
+		helper.assertError(xtendInterface.getMembers().get(0), XTEND_FUNCTION, MISSING_OVERRIDE);
+	}
+
+	@Test public void testInterfaceMissingOverride_1() throws Exception {
+		XtendInterface xtendInterface = interfaze("interface Foo extends test.SuperInterface { def string(int i) }");
+		helper.assertNoError(xtendInterface.getMembers().get(0), MISSING_OVERRIDE);
+	}
+
+	@Test public void testInterfaceMissingOverride_2() throws Exception {
+		XtendInterface xtendInterface = interfaze("interface Foo extends test.SuperInterface { def string(String s) }");
+		helper.assertError(xtendInterface.getMembers().get(0), XTEND_FUNCTION, MISSING_OVERRIDE);
+	}
+
+	@Test public void testInterfaceMissingOverride_3() throws Exception {
+		XtendInterface xtendInterface = interfaze("interface Foo extends test.SuperInterface { def object(String s) }");
+		helper.assertNoError(xtendInterface.getMembers().get(0), MISSING_OVERRIDE);
+	}
+
+	@Test public void testInterfaceMissingOverride_4() throws Exception {
+		XtendInterface xtendInterface = interfaze("interface Foo extends test.SomeInterface { def foo() }");
+		helper.assertError(xtendInterface.getMembers().get(0), XTEND_FUNCTION, MISSING_OVERRIDE);
+	}
+
+	@Test public void testInterfaceMissingOverride_5() throws Exception {
+		XtendInterface xtendInterface = interfaze("interface Foo { def boolean equals(Object x) }");
+		helper.assertError(xtendInterface.getMembers().get(0), XTEND_FUNCTION, MISSING_OVERRIDE);
+	}
+
+	@Test public void testInterfaceIncompatibleReturnType_0() throws Exception {
+		XtendInterface xtendInterface = interfaze("interface Foo extends test.SuperInterface { override Boolean string() }");
+		helper.assertError(xtendInterface.getMembers().get(0), XTEND_FUNCTION, INCOMPATIBLE_RETURN_TYPE);
+	}
+
+	@Test public void testInterfaceIncompatibleReturnType_1() throws Exception {
+		XtendInterface xtendInterface = interfaze("interface Foo extends test.SuperInterface { override String object() }");
+		helper.assertNoError(xtendInterface.getMembers().get(0), INCOMPATIBLE_RETURN_TYPE);
+	}
+
+	@Test public void testInterfaceIncompatibleReturnType_2() throws Exception {
+		XtendInterface xtendInterface = interfaze("interface Foo extends test.SomeInterface { override void foo() }");
+		helper.assertError(xtendInterface.getMembers().get(0), XTEND_FUNCTION, INCOMPATIBLE_RETURN_TYPE);
+	}
+
+	@Test public void testInterfaceIncompatibleGenericReturnType_0() throws Exception {
+		XtendInterface xtendInterface = interfaze("interface Foo extends test.SuperInterface { override java.util.ArrayList<String> returnsListString() }");
+		helper.assertNoError(xtendInterface.getMembers().get(0), INCOMPATIBLE_RETURN_TYPE);
+	}
+
+	@Test public void testInterfaceIncompatibleGenericReturnType_1() throws Exception {
+		XtendInterface xtendInterface = interfaze("interface Foo extends test.SuperInterface { override java.util.List<Object> returnsListString() }");
+		helper.assertError(xtendInterface.getMembers().get(0), XTEND_FUNCTION, INCOMPATIBLE_RETURN_TYPE);
+	}
+
+	@Test public void testInterfaceIncompatibleGenericReturnType_2() throws Exception {
+		XtendInterface xtendInterface = interfaze("interface Foo extends test.SuperInterface { override java.util.ArrayList<String> returnsListExtendsObject() }");
+		helper.assertNoError(xtendInterface.getMembers().get(0), INCOMPATIBLE_RETURN_TYPE);
+	}
+
+	@Test public void testInterfaceOverrideVoidFunction() throws Exception {
+		XtendInterface xtendInterface = interfaze("interface Foo extends test.SuperInterface { override voidFunction() }");
+		helper.assertNoError(xtendInterface.getMembers().get(0), INCOMPATIBLE_RETURN_TYPE);
+	}
+
+	@Test public void testInterfaceOverrideVoidFunction_1() throws Exception {
+		XtendInterface xtendInterface = interfaze("interface Foo extends test.SuperInterface { override String voidFunction() }");
+		helper.assertError(xtendInterface.getMembers().get(0), XTEND_FUNCTION, INCOMPATIBLE_RETURN_TYPE);
+	}
+
+	@Test public void testInterfaceOverrideWithTypeParameter() throws Exception {
+		XtendInterface xtendInterface = interfaze("interface Foo extends test.GenericClass { override java.util.List<String> foo() }");
+		helper.assertNoError(xtendInterface.getMembers().get(0), INCOMPATIBLE_RETURN_TYPE);
+	}
+
+	@Test public void testInterfaceOverrideWithTypeParameter_1() throws Exception {
+		XtendInterface xtendInterface = interfaze("interface Foo extends test.GenericClass<String> { override java.util.List<String> foo() }");
+		helper.assertNoError(xtendInterface.getMembers().get(0), INCOMPATIBLE_RETURN_TYPE);
+	}
+
+	@Test public void testInterfaceOverrideWithTypeParameter_2() throws Exception {
+		XtendInterface xtendInterface = interfaze("interface Foo<S> extends test.GenericClass<S> { override java.util.List<S> foo() }");
+		helper.assertNoError(xtendInterface.getMembers().get(0), INCOMPATIBLE_RETURN_TYPE);
+	}
+
+  	@Test public void testInterfaceIncompatibleThrowsClause() throws Exception {
+		XtendInterface xtendInterface = interfaze("interface Foo extends test.ExceptionThrowingInterface { override ioException() throws Exception }");
+		helper.assertError(xtendInterface.getMembers().get(0), XTEND_FUNCTION, INCOMPATIBLE_THROWS_CLAUSE,
+				"Exception", "not", "compatible", "throws", "clause");
+	}
+	
+	@Test public void testInterfaceIncompatibleThrowsClause_01() throws Exception {
+		XtendInterface xtendInterface = interfaze("interface Foo extends test.ExceptionThrowingInterface { override runtimeException() throws Exception }");
+		helper.assertError(xtendInterface.getMembers().get(0), XTEND_FUNCTION, INCOMPATIBLE_THROWS_CLAUSE,
+				"Exception", "not", "compatible", "throws", "clause");
+	}
+	
+	@Test public void testInterfaceIncompatibleThrowsClause_02() throws Exception {
+		XtendInterface xtendInterface = interfaze("interface Foo extends test.ExceptionThrowingInterface { override nullPointerException() throws Exception }");
+		helper.assertError(xtendInterface.getMembers().get(0), XTEND_FUNCTION, INCOMPATIBLE_THROWS_CLAUSE,
+				"Exception", "not", "compatible", "throws", "clause");
+	}
+	
+	@Test public void testInterfaceIncompatibleThrowsClause_03() throws Exception {
+		XtendInterface xtendInterface = interfaze("interface Foo extends test.ExceptionThrowingInterface { override noException() throws Exception }");
+		helper.assertError(xtendInterface.getMembers().get(0), XTEND_FUNCTION, INCOMPATIBLE_THROWS_CLAUSE,
+				"Exception", "not", "compatible", "throws", "clause");
+	}
+	
+	@Ignore("Fails in old impl")
+	@Test public void testInterfaceIncompatibleThrowsClause_04() throws Exception {
+		XtendInterface xtendInterface = interfaze("interface Foo extends test.ExceptionThrowingInterface { override generifiedIoException() throws java.net.URISyntaxException }");
+		helper.assertError(xtendInterface.getMembers().get(0), XTEND_FUNCTION, INCOMPATIBLE_THROWS_CLAUSE,
+				"Exception", "URISyntaxException", "not", "compatible", "throws", "clause");
+	}
+	
+	@Ignore("Fails in old impl")
+	@Test public void testInterfaceIncompatibleThrowsClause_05() throws Exception {
+		XtendInterface xtendInterface = interfaze("interface Foo extends test.ExceptionThrowingInterface { override generifiedRuntimeException() throws java.io.FileNotFoundException }");
+		helper.assertError(xtendInterface.getMembers().get(0), XTEND_FUNCTION, INCOMPATIBLE_THROWS_CLAUSE,
+				"Exception", "FileNotFoundException", "not", "compatible", "throws", "clause");
+	}
+	
+	@Test public void testInterfaceCompatibleThrowsClause() throws Exception {
+		XtendInterface xtendInterface = interfaze("interface Foo extends test.ExceptionThrowingInterface { override ioException() throws java.io.FileNotFoundException }");
+		helper.assertNoError(xtendInterface.getMembers().get(0), INCOMPATIBLE_THROWS_CLAUSE);
+	}
+
+	@Test public void testInterfaceCompatibleThrowsClause_01() throws Exception {
+		XtendInterface xtendInterface = interfaze("interface Foo extends test.ExceptionThrowingInterface { override runtimeException() throws NullPointerException }");
+		helper.assertNoError(xtendInterface.getMembers().get(0), INCOMPATIBLE_THROWS_CLAUSE);
+	}
+
+	@Test public void testInterfaceCompatibleThrowsClause_02() throws Exception {
+		XtendInterface xtendInterface = interfaze("interface Foo extends test.ExceptionThrowingInterface { override nullPointerException() throws RuntimeException }");
+		helper.assertNoError(xtendInterface.getMembers().get(0), INCOMPATIBLE_THROWS_CLAUSE);
+	}
+
+	@Test public void testInterfaceCompatibleThrowsClause_03() throws Exception {
+		XtendInterface xtendInterface = interfaze("interface Foo extends test.ExceptionThrowingInterface { override noException() throws RuntimeException }");
+		helper.assertNoError(xtendInterface.getMembers().get(0), INCOMPATIBLE_THROWS_CLAUSE);
+	}
+
+	@Test public void testInterfaceCompatibleThrowsClause_04() throws Exception {
+		XtendInterface xtendInterface = interfaze("interface Foo extends test.ExceptionThrowingInterface { override throwable() throws RuntimeException }");
+		helper.assertNoError(xtendInterface.getMembers().get(0), INCOMPATIBLE_THROWS_CLAUSE);
+	}
+
+	@Test public void testInterfaceCompatibleThrowsClause_05() throws Exception {
+		XtendInterface xtendInterface = interfaze("interface Foo extends test.ExceptionThrowingInterface { override throwable() throws Exception }");
+		helper.assertNoError(xtendInterface.getMembers().get(0), INCOMPATIBLE_THROWS_CLAUSE);
+	}
+
+	@Test public void testInterfaceCompatibleThrowsClause_06() throws Exception {
+		XtendInterface xtendInterface = interfaze("interface Foo extends test.ExceptionThrowingInterface { override throwable() throws Throwable }");
+		helper.assertNoError(xtendInterface.getMembers().get(0), INCOMPATIBLE_THROWS_CLAUSE);
+	}
+
+	@Test public void testInterfaceCompatibleThrowsClause_07() throws Exception {
+		XtendInterface xtendInterface = interfaze("interface Foo extends test.ExceptionThrowingInterface { override ioException() }");
+		helper.assertNoError(xtendInterface.getMembers().get(0), INCOMPATIBLE_THROWS_CLAUSE);
+	}
+	
+	@Ignore("Fails in old impl")
+	@Test public void testInterfaceCompatibleThrowsClause_08() throws Exception {
+		XtendInterface xtendInterface = interfaze("interface Foo extends test.ExceptionThrowingInterface { override <E extends java.io.IOException> generifiedIoException() throws E }");
+		helper.assertNoError(xtendInterface.getMembers().get(0), INCOMPATIBLE_THROWS_CLAUSE);
+	}
+	
+	@Ignore("Fails in old impl")
+	@Test public void testInterfaceCompatibleThrowsClause_09() throws Exception {
+		XtendInterface xtendInterface = interfaze("interface Foo extends test.ExceptionThrowingInterface { override <E extends java.io.IOException> generifiedIoException() throws E }");
+		helper.assertNoError(xtendInterface.getMembers().get(0), INCOMPATIBLE_THROWS_CLAUSE);
+	}
+	
+	@Ignore("Fails in old impl")
+	@Test public void testInterfaceCompatibleThrowsClause_10() throws Exception {
+		XtendInterface xtendInterface = interfaze("interface Foo extends test.ExceptionThrowingInterface { override <E extends java.io.IOException> generifiedIoException() throws E, NullPointerException, OutOfMemoryError }");
+		helper.assertNoError(xtendInterface.getMembers().get(0), INCOMPATIBLE_THROWS_CLAUSE);
+	}
+	
+	@Test public void testInterfaceCompatibleThrowsClause_11() throws Exception {
+		XtendInterface xtendInterface = interfaze("interface Foo extends test.ExceptionThrowingInterface { override generifiedIoException() throws java.io.IOException }");
+		helper.assertNoError(xtendInterface.getMembers().get(0), INCOMPATIBLE_THROWS_CLAUSE);
+	}
+	
+	@Test public void testInterfaceCompatibleThrowsClause_12() throws Exception {
+		XtendInterface xtendInterface = interfaze("interface Foo extends test.ExceptionThrowingInterface { override generifiedRuntimeException() throws NullPointerException }");
+		helper.assertNoError(xtendInterface.getMembers().get(0), INCOMPATIBLE_THROWS_CLAUSE);
+	}
+	
+	@Test public void testInterfaceCompatibleThrowsClause_13() throws Exception {
+		XtendClass xtendClass = clazz("class Foo extends test.ExceptionThrowingInterface { override <E extends RuntimeException> generifiedRuntimeException() throws E, NullPointerException }");
+		helper.assertNoError(xtendClass.getMembers().get(0), INCOMPATIBLE_THROWS_CLAUSE);
+
+	}
 }

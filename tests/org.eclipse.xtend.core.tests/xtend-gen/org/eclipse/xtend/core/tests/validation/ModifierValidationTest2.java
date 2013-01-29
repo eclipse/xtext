@@ -39,16 +39,20 @@ public class ModifierValidationTest2 extends ModifierValidationTest {
     XtendMember _memberInInterface_3 = this.memberInInterface(_builder_3.toString());
     this._validationTestHelper.assertNoError(_memberInInterface_3, IssueCodes.INVALID_MODIFIER);
     StringConcatenation _builder_4 = new StringConcatenation();
-    _builder_4.append("static def foo() {}");
+    _builder_4.append("override def foo() {}");
     XtendMember _memberInInterface_4 = this.memberInInterface(_builder_4.toString());
-    this._validationTestHelper.assertError(_memberInInterface_4, Literals.XTEND_FUNCTION, IssueCodes.INVALID_MODIFIER);
+    this._validationTestHelper.assertNoError(_memberInInterface_4, IssueCodes.INVALID_MODIFIER);
     StringConcatenation _builder_5 = new StringConcatenation();
-    _builder_5.append("abstract def int foo()");
+    _builder_5.append("static def foo() {}");
     XtendMember _memberInInterface_5 = this.memberInInterface(_builder_5.toString());
-    this._validationTestHelper.assertNoErrors(_memberInInterface_5);
+    this._validationTestHelper.assertError(_memberInInterface_5, Literals.XTEND_FUNCTION, IssueCodes.INVALID_MODIFIER);
     StringConcatenation _builder_6 = new StringConcatenation();
-    _builder_6.append("final def foo() {}");
+    _builder_6.append("abstract def int foo()");
     XtendMember _memberInInterface_6 = this.memberInInterface(_builder_6.toString());
-    this._validationTestHelper.assertError(_memberInInterface_6, Literals.XTEND_FUNCTION, IssueCodes.INVALID_MODIFIER);
+    this._validationTestHelper.assertNoErrors(_memberInInterface_6);
+    StringConcatenation _builder_7 = new StringConcatenation();
+    _builder_7.append("final def foo() {}");
+    XtendMember _memberInInterface_7 = this.memberInInterface(_builder_7.toString());
+    this._validationTestHelper.assertError(_memberInInterface_7, Literals.XTEND_FUNCTION, IssueCodes.INVALID_MODIFIER);
   }
 }

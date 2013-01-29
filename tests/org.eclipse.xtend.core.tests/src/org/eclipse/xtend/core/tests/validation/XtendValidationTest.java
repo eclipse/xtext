@@ -21,8 +21,10 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtend.core.tests.AbstractXtendTestCase;
 import org.eclipse.xtend.core.validation.IssueCodes;
+import org.eclipse.xtend.core.xtend.XtendAnnotationType;
 import org.eclipse.xtend.core.xtend.XtendClass;
 import org.eclipse.xtend.core.xtend.XtendConstructor;
+import org.eclipse.xtend.core.xtend.XtendEnum;
 import org.eclipse.xtend.core.xtend.XtendFile;
 import org.eclipse.xtend.core.xtend.XtendFunction;
 import org.eclipse.xtend.core.xtend.XtendInterface;
@@ -340,6 +342,21 @@ public class XtendValidationTest extends AbstractXtendTestCase {
 		helper.assertError(clazz, XAnnotationsPackage.Literals.XANNOTATION, ANNOTATION_WRONG_TARGET);
 	}
 	
+	@Test public void testAnnotationTarget_04() throws Exception {
+		XtendEnum enumeration = enumeration("@testdata.Annotation2('foo') enum X { }");
+		helper.assertError(enumeration, XAnnotationsPackage.Literals.XANNOTATION, ANNOTATION_WRONG_TARGET, "@Annotation2");
+	}
+	
+	@Test public void testAnnotationTarget_05() throws Exception {
+		XtendInterface interfaze = interfaze("@testdata.Annotation2('foo') interface X { }");
+		helper.assertError(interfaze, XAnnotationsPackage.Literals.XANNOTATION, ANNOTATION_WRONG_TARGET, "@Annotation2");
+	}
+	
+	@Test public void testAnnotationTarget_06() throws Exception {
+		XtendAnnotationType annotationType = annotationType("@testdata.Annotation2('foo') annotation X { }");
+		helper.assertError(annotationType, XAnnotationsPackage.Literals.XANNOTATION, ANNOTATION_WRONG_TARGET, "@Annotation2");
+	}
+	
 	@Test public void testShadowingVariableNames_00() throws Exception {
 		XtendClass clazz = clazz("class X { def foo() { val this = 'foo' } }");
 		helper.assertError(clazz, XVARIABLE_DECLARATION, VARIABLE_NAME_SHADOWING);
@@ -639,34 +656,82 @@ public class XtendValidationTest extends AbstractXtendTestCase {
 	
 	@Test public void testClassUniqueNames() throws Exception {
 		XtendClass clazz = clazz("class Foo {} class Foo {}");
-		helper.assertError(clazz, XTEND_CLASS, DUPLICATE_CLASS, "type", "already defined");
+		helper.assertError(clazz, XTEND_CLASS, DUPLICATE_TYPE_NAME, "type", "already defined");
+	}
+	
+	@Test public void testInterfaceExtendsInterface() throws Exception {
+		XtendInterface interfaze = interfaze("interface Foo extends Cloneable {}");
+		helper.assertNoErrors(interfaze);
+	}
+
+	@Test public void testInterfaceExtendsClass() throws Exception {
+		XtendInterface interfaze = interfaze("interface Foo extends Object {}");
+		helper.assertError(interfaze, XTEND_INTERFACE, INTERFACE_EXPECTED, "Extended", "interface");
+	}
+	
+	@Test public void testInterfaceExtendsItself() throws Exception {
+		XtendInterface interfaze = interfaze("interface Foo extends Foo {}");
+		helper.assertError(interfaze, XTEND_INTERFACE, CYCLIC_INHERITANCE, "hierarchy", "cycles");
+	}
+	
+	@Test public void testTypesUniqueNames() throws Exception {
+		XtendFile file = file("class Foo {} interface Foo {} annotation Foo {}");
+		helper.assertError(file, XTEND_INTERFACE, DUPLICATE_TYPE_NAME, "type", "already defined");
+		helper.assertError(file, XTEND_ANNOTATION_TYPE, DUPLICATE_TYPE_NAME, "type", "already defined");
 	}
 	
 	@Test public void testInheritanceCycle() throws Exception {
-		Iterator<XtendFile> iter = files(false, 
-				 "package test class Foo extends Bar {}"
-				,"package test class Bar extends Baz {}"
-				,"package test class Baz extends Foo {}").iterator();
+		Iterator<XtendTypeDeclaration> types = file("package test "
+				+ "class Foo extends Bar {}"
+				+ "class Bar extends Baz {}"
+				+ "class Baz extends Foo {}").getXtendTypes().iterator();
 		waitForAutoBuild();
-		helper.assertError(iter.next(), XTEND_CLASS, CYCLIC_INHERITANCE, "hierarchy", "cycles");
-		helper.assertError(iter.next(), XTEND_CLASS, CYCLIC_INHERITANCE, "hierarchy", "cycles");
-		helper.assertError(iter.next(), XTEND_CLASS, CYCLIC_INHERITANCE, "hierarchy", "cycles");
+		helper.assertError(types.next(), XTEND_CLASS, CYCLIC_INHERITANCE, "hierarchy", "cycles");
+		helper.assertError(types.next(), XTEND_CLASS, CYCLIC_INHERITANCE, "hierarchy", "cycles");
+		helper.assertError(types.next(), XTEND_CLASS, CYCLIC_INHERITANCE, "hierarchy", "cycles");
 	}
 	
 	@Test public void testInheritanceCycle_1() throws Exception {
-		Iterator<XtendFile> iter = files(false, 
-				 "package test class Foo extends Bar {}"
-				,"package test class Bar extends Foo {}").iterator();
-		waitForAutoBuild();
-		helper.assertError(iter.next(), XTEND_CLASS, CYCLIC_INHERITANCE, "hierarchy", "cycles");
-		helper.assertError(iter.next(), XTEND_CLASS, CYCLIC_INHERITANCE, "hierarchy", "cycles");
+		Iterator<XtendTypeDeclaration> types = file("package test "
+				+ "class Foo extends Bar {}"
+				+ "class Bar extends Foo {}").getXtendTypes().iterator();
+		helper.assertError(types.next(), XTEND_CLASS, CYCLIC_INHERITANCE, "hierarchy", "cycles");
+		helper.assertError(types.next(), XTEND_CLASS, CYCLIC_INHERITANCE, "hierarchy", "cycles");
 	}
 	
-	@Test public void testIgnoreInterfacesInCycleDetection() throws Exception {
-		files(true, 
-				 "package test class Foo extends Bar {}"
-				,"package test class Bar extends Baz implements java.io.Serializable {}"
-				,"package test class Baz implements java.io.Serializable {}");
+	@Test public void testInheritanceCycle_2() throws Exception {
+		Iterator<XtendTypeDeclaration> types =  file("package test "
+				+ "interface Foo extends Bar {}"
+				+ "interface Bar extends Foo {}").getXtendTypes().iterator();
+		helper.assertError(types.next(), XTEND_INTERFACE, CYCLIC_INHERITANCE, "hierarchy", "cycles");
+		helper.assertError(types.next(), XTEND_INTERFACE, CYCLIC_INHERITANCE, "hierarchy", "cycles");
+	}
+	
+	@Test public void testInheritanceCycle_3() throws Exception {
+		Iterator<XtendTypeDeclaration> types = file("package test "
+				 + "interface Foo extends Bar {}"
+				 + "interface Bar extends Baz {}"
+				 + "interface Baz extends Foo {}").getXtendTypes().iterator();
+		helper.assertError(types.next(), XTEND_INTERFACE, CYCLIC_INHERITANCE, "hierarchy", "cycles");
+		helper.assertError(types.next(), XTEND_INTERFACE, CYCLIC_INHERITANCE, "hierarchy", "cycles");
+		helper.assertError(types.next(), XTEND_INTERFACE, CYCLIC_INHERITANCE, "hierarchy", "cycles");
+	}
+
+	@Test public void testMultipleInheritance() throws Exception {
+		XtendFile file = file("package test "
+				+ "class Foo extends Bar {}"
+				+ "class Bar extends Baz implements java.io.Serializable {}"
+				+ "class Baz implements java.io.Serializable {}");
+		helper.assertNoErrors(file);
+	}
+
+	@Test public void testDiamondInheritance() throws Exception {
+		XtendFile file = file("package test "
+				+ "interface Bottom extends Left, Top, Right {}"
+				+ "interface Left extends Top {}"
+				+ "interface Right extends Top {}"
+				+ "interface Top{}");
+		helper.assertNoErrors(file);
 	}
 
 	@Test public void testInvalidFieldName_00() throws Exception {
@@ -1087,6 +1152,13 @@ public class XtendValidationTest extends AbstractXtendTestCase {
     	helper.assertError(clazz, XTEND_CLASS, INVALID_IDENTIFIER, "null");
     	helper.assertError(clazz.getMembers().get(0), XTEND_FIELD, INVALID_IDENTIFIER, "true");
     	helper.assertError(clazz.getMembers().get(1), XTEND_FIELD, INVALID_IDENTIFIER, "false");
+    }
+    
+    @Test public void testKeywordConflict_04() throws Exception {
+    	XtendFile file = file("interface assert {} enum volatile {} annotation ^null {}");
+    	helper.assertError(file, XTEND_INTERFACE, INVALID_IDENTIFIER, "assert");
+    	helper.assertError(file, XTEND_ENUM, INVALID_IDENTIFIER, "volatile");
+    	helper.assertError(file, XTEND_ANNOTATION_TYPE, INVALID_IDENTIFIER, "null");
     }
     
     @Test public void testAbstractMethodsInNonAbstractClass() throws Exception {

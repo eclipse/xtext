@@ -72,6 +72,7 @@ class ModifierValidationTest extends AbstractXtendTestCase {
 		memberInInterface('''package def foo() {}''').assertError(XTEND_FUNCTION, INVALID_MODIFIER)
 		memberInInterface('''protected def foo() {}''').assertError(XTEND_FUNCTION, INVALID_MODIFIER)
 		memberInInterface('''public def foo() {}''').assertNoError(INVALID_MODIFIER)
+		memberInInterface('''override def foo() {}''').assertNoError(INVALID_MODIFIER)
 		memberInInterface('''static def foo() {}''').assertError(XTEND_FUNCTION, INVALID_MODIFIER)	
 		memberInInterface('''abstract def int foo()''').assertNoErrors	
 		memberInInterface('''dispatch def foo (int i){}''').assertError(XTEND_FUNCTION, INVALID_MODIFIER)		
@@ -105,8 +106,8 @@ class ModifierValidationTest extends AbstractXtendTestCase {
 		memberInInterface('''private int foo''').assertError(XTEND_FIELD, INVALID_MODIFIER)
 		memberInInterface('''package int foo''').assertError(XTEND_FIELD, INVALID_MODIFIER)
 		memberInInterface('''protected int foo''').assertError(XTEND_FIELD, INVALID_MODIFIER)
-		memberInInterface('''public int foo''').assertNoErrors
-		memberInInterface('''static int foo''').assertNoErrors		
+		memberInInterface('''public int foo = 42''').assertNoErrors
+		memberInInterface('''static int foo = 42''').assertNoErrors		
 		memberInInterface('''abstract int foo''').assertError(XTEND_FIELD, INVALID_MODIFIER)
 		memberInInterface('''dispatch int foo''').assertError(XTEND_FIELD, INVALID_MODIFIER)
 		memberInInterface('''final int foo = 42''').assertNoErrors
