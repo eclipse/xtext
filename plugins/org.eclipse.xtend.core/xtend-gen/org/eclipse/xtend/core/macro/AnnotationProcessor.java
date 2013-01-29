@@ -10,7 +10,6 @@ package org.eclipse.xtend.core.macro;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 import java.util.List;
-import org.apache.log4j.Logger;
 import org.eclipse.xtend.core.macro.ActiveAnnotationContext;
 import org.eclipse.xtend.core.macro.ModifyContextImpl;
 import org.eclipse.xtend.core.macro.declaration.CompilationUnitImpl;
@@ -25,8 +24,6 @@ import org.eclipse.xtext.util.CancelIndicator;
 import org.eclipse.xtext.util.IAcceptor;
 import org.eclipse.xtext.util.internal.StopWatches;
 import org.eclipse.xtext.util.internal.StopWatches.StoppedTask;
-import org.eclipse.xtext.xbase.lib.Exceptions;
-import org.eclipse.xtext.xbase.lib.Functions.Function0;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.ListExtensions;
 
@@ -37,13 +34,6 @@ import org.eclipse.xtext.xbase.lib.ListExtensions;
  */
 @SuppressWarnings("all")
 public class AnnotationProcessor {
-  private final static Logger logger = new Function0<Logger>() {
-    public Logger apply() {
-      Logger _logger = Logger.getLogger(AnnotationProcessor.class);
-      return _logger;
-    }
-  }.apply();
-  
   @Inject
   private Provider<ModifyContextImpl> modifyContextProvider;
   
@@ -69,40 +59,12 @@ public class AnnotationProcessor {
           }
         }
         _xtrycatchfinallyexpression = _switchResult;
-      } catch (final Throwable _t) {
-        if (_t instanceof Throwable) {
-          final Throwable e = (Throwable)_t;
-          this.handleException(e, ctx);
-        } else {
-          throw Exceptions.sneakyThrow(_t);
-        }
       } finally {
         task.stop();
       }
       _xblockexpression = (_xtrycatchfinallyexpression);
     }
     return _xblockexpression;
-  }
-  
-  public void handleException(final Throwable e, final ActiveAnnotationContext ctx) {
-    try {
-      boolean _matched = false;
-      if (!_matched) {
-        if (e instanceof VirtualMachineError) {
-          final VirtualMachineError _virtualMachineError = (VirtualMachineError)e;
-          _matched=true;
-          throw _virtualMachineError;
-        }
-      }
-      Object _processorInstance = ctx.getProcessorInstance();
-      String _plus = ("error while executing \'" + _processorInstance);
-      String _plus_1 = (_plus + "\' : ");
-      String _message = e.getMessage();
-      String _plus_2 = (_plus_1 + _message);
-      AnnotationProcessor.logger.error(_plus_2, e);
-    } catch (Throwable _e) {
-      throw Exceptions.sneakyThrow(_e);
-    }
   }
   
   public Object inferencePhase(final ActiveAnnotationContext ctx, final CancelIndicator monitor) {
@@ -136,13 +98,6 @@ public class AnnotationProcessor {
           }
         }
         _xtrycatchfinallyexpression = _switchResult;
-      } catch (final Throwable _t) {
-        if (_t instanceof Throwable) {
-          final Throwable e = (Throwable)_t;
-          this.handleException(e, ctx);
-        } else {
-          throw Exceptions.sneakyThrow(_t);
-        }
       } finally {
         task.stop();
       }
