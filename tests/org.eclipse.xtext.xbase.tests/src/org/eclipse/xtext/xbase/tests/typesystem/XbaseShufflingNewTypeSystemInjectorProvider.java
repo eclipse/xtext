@@ -10,24 +10,18 @@ package org.eclipse.xtext.xbase.tests.typesystem;
 import java.util.List;
 
 import org.eclipse.jdt.annotation.NonNullByDefault;
-import org.eclipse.xtext.common.types.JvmExecutable;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
-import org.eclipse.xtext.common.types.JvmTypeReference;
-import org.eclipse.xtext.xbase.XAssignment;
 import org.eclipse.xtext.xbase.XCasePart;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XIfExpression;
 import org.eclipse.xtext.xbase.XSwitchExpression;
 import org.eclipse.xtext.xbase.XbaseStandaloneSetup;
-import org.eclipse.xtext.xbase.lib.ListExtensions;
+import org.eclipse.xtext.xbase.typesystem.arguments.IFeatureCallArguments;
 import org.eclipse.xtext.xbase.typesystem.computation.XbaseTypeComputer;
-import org.eclipse.xtext.xbase.typesystem.internal.AbstractLinkingCandidate;
-import org.eclipse.xtext.xbase.typesystem.internal.AssignmentArguments;
 import org.eclipse.xtext.xbase.typesystem.internal.ExpressionArgumentFactory;
-import org.eclipse.xtext.xbase.typesystem.internal.FeatureCallArguments;
-import org.eclipse.xtext.xbase.typesystem.internal.IFeatureCallArguments;
-import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
+import org.eclipse.xtext.xbase.typesystem.references.OwnedConverter;
 
+import com.google.common.collect.Lists;
 import com.google.inject.Guice;
 import com.google.inject.Injector;
 
@@ -62,7 +56,7 @@ public class XbaseShufflingNewTypeSystemInjectorProvider extends XbaseNewTypeSys
 		@Override
 		protected List<XCasePart> getCases(XSwitchExpression switchExpression) {
 			List<XCasePart> result = super.getCases(switchExpression);
-			return ListExtensions.reverseView(result);
+			return Lists.reverse(result);
 		}
 		
 		@Override
@@ -82,45 +76,20 @@ public class XbaseShufflingNewTypeSystemInjectorProvider extends XbaseNewTypeSys
 	
 	@NonNullByDefault
 	public static class ShufflingExpressionArgumentFactory extends ExpressionArgumentFactory {
+		
 		@Override
-		public IFeatureCallArguments createExpressionArguments(XExpression expression,
-				AbstractLinkingCandidate<?> candidate) {
-			if (expression instanceof XAssignment && !(candidate.getFeature() instanceof JvmExecutable)) {
-				return new AssignmentArguments(candidate);
-			} else {
-				return new FeatureCallArguments(candidate) {
-					@Override
-					public LightweightTypeReference getDeclaredType(int argumentIndex) {
-						List<JvmFormalParameter> parameters = getParameters();
-						if (isVarArgs()) {
-							parameters = parameters.subList(0, parameters.size() - 1);
-						}
-						int idx = argumentIndex - getArgumentSizeFixup();
-						JvmFormalParameter parameter = ListExtensions.reverseView(parameters).get(idx);
-						JvmTypeReference parameterType = parameter.getParameterType();
-						LightweightTypeReference result = getConverter().toLightweightReference(parameterType);
-						return result;
-					}
-					
-					@Override
-					public XExpression getArgument(int argumentIndex) {
-						List<XExpression> arguments = getArguments();
-						argumentIndex -= getArgumentSizeFixup();
-						if (isVarArgs()) {
-							if (argumentIndex >= getFixedArityArgumentCount()) {
-								argumentIndex -= getFixedArityArgumentCount();
-								arguments = arguments.subList(getFixedArityArgumentCount(), arguments.size());
-								return ListExtensions.reverseView(arguments).get(argumentIndex);
-							}
-							arguments = arguments.subList(0, getFixedArityArgumentCount());
-						}
-						arguments = ListExtensions.reverseView(arguments);
-						XExpression result = arguments.get(argumentIndex);
-						return result;
-					}
-				};
+		protected IFeatureCallArguments createArgumentsForExecutable(boolean varArgs, List<XExpression> arguments,
+				List<JvmFormalParameter> parameters, boolean hasReceiver, OwnedConverter converter) {
+			if (varArgs) {
+				List<JvmFormalParameter> reversedParameters = Lists.newArrayList(Lists.reverse(parameters.subList(0, parameters.size() - 1)));
+				reversedParameters.add(parameters.get(parameters.size() - 1));
+				List<XExpression> reversedArgumetns = Lists.newArrayList(Lists.reverse(arguments.subList(0, parameters.size() - 1)));
+				reversedArgumetns.addAll(Lists.reverse(arguments.subList(parameters.size() - 1, arguments.size())));
+				return super.createArgumentsForExecutable(varArgs, reversedArgumetns, reversedParameters, hasReceiver, converter);
 			}
+			return super.createArgumentsForExecutable(varArgs, Lists.reverse(arguments), Lists.reverse(parameters), hasReceiver, converter);
 		}
+		
 	}
 	
 }

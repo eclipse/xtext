@@ -227,7 +227,7 @@ public abstract class AbstractPendingLinkingCandidate<Expression extends XExpres
 	}
 	
 	protected int compareByArgumentTypes(AbstractPendingLinkingCandidate<?> right, boolean recompute) {
-		int upTo = Math.min(arguments.getArgumentSize(), right.arguments.getArgumentSize());
+		int upTo = Math.min(arguments.getArgumentCount(), right.arguments.getArgumentCount());
 		int leftBoxing = 0;
 		int rightBoxing = 0;
 		for(int i = 0; i < upTo; i++) {
@@ -278,7 +278,7 @@ public abstract class AbstractPendingLinkingCandidate<Expression extends XExpres
 	
 	protected EnumSet<ConformanceHint> getConformanceHints(int idx, boolean recompute) {
 		while(!arguments.isProcessed(idx)) {
-			computeArgumentType(arguments.getNextUnprocessedNextArgument());
+			computeArgumentType(arguments.getNextUnprocessedArgumentSlot());
 		}
 		XExpression argument = arguments.getArgument(idx);
 		return getState().getStackedResolvedTypes().getConformanceHints(argument, recompute);
@@ -286,7 +286,7 @@ public abstract class AbstractPendingLinkingCandidate<Expression extends XExpres
 
 	protected int compareDeclaredParameterTypes(AbstractPendingLinkingCandidate<?> right) {
 		int result = 0;
-		int upTo = Math.min(arguments.getArgumentSize(), right.arguments.getArgumentSize());
+		int upTo = Math.min(arguments.getArgumentCount(), right.arguments.getArgumentCount());
 		for(int i = 0; i < upTo; i++) {
 			LightweightTypeReference expectedArgumentType = getSubstitutedExpectedType(i);
 			LightweightTypeReference rightExpectedArgumentType = right.getSubstitutedExpectedType(i);

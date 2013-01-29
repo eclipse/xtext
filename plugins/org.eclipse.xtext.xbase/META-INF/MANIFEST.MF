@@ -60,6 +60,7 @@ Export-Package: org.eclipse.xtext.xbase;x-friends:="org.eclipse.xtext.xbase.juni
  org.eclipse.xtext.xbase.serializer;x-internal:=true,
  org.eclipse.xtext.xbase.services;x-internal:=true,
  org.eclipse.xtext.xbase.typesystem;x-internal:=true,
+ org.eclipse.xtext.xbase.typesystem.arguments;x-internal:=true,
  org.eclipse.xtext.xbase.typesystem.computation;x-internal:=true,
  org.eclipse.xtext.xbase.typesystem.conformance;x-internal:=true,
  org.eclipse.xtext.xbase.typesystem.internal;x-internal:=true,
