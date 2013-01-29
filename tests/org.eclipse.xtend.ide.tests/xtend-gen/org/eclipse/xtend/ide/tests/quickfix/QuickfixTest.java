@@ -1731,6 +1731,27 @@ public class QuickfixTest extends AbstractXtendUITestCase {
   }
   
   @Test
+  public void missingAnnotationImport() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("@QuickFixMe|");
+    _builder.newLine();
+    _builder.append("class Foo {}");
+    _builder.newLine();
+    QuickfixTestBuilder _create = this.builder.create("Foo.xtend", _builder);
+    QuickfixTestBuilder _assertIssueCodes = _create.assertIssueCodes(Diagnostic.LINKING_DIAGNOSTIC);
+    QuickfixTestBuilder _assertResolutionLabelsSubset = _assertIssueCodes.assertResolutionLabelsSubset("Import \'QuickFixMe\' (org.eclipse.xtend.ide.tests.data.quickfix)");
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("import org.eclipse.xtend.ide.tests.data.quickfix.QuickFixMe");
+    _builder_1.newLine();
+    _builder_1.newLine();
+    _builder_1.append("@QuickFixMe");
+    _builder_1.newLine();
+    _builder_1.append("class Foo {}");
+    _builder_1.newLine();
+    _assertResolutionLabelsSubset.assertModelAfterQuickfix(_builder_1);
+  }
+  
+  @Test
   public void missingAnnotation() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("@Bar|");
