@@ -156,9 +156,6 @@ public class StackedResolvedTypes extends ResolvedTypes {
 		if (super.isResolved(handle)) {
 			return true;
 		}
-		if (basicGetTypeParameters().containsKey(handle)) {
-			return false;
-		}
 		return parent.isResolved(handle);
 	}
 
