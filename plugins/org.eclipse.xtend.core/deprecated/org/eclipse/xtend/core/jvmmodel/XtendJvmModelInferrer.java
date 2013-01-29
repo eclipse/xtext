@@ -15,6 +15,7 @@ import static org.eclipse.xtext.util.Strings.*;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -206,7 +207,13 @@ public class XtendJvmModelInferrer implements IJvmModelInferrer {
 			}
 		}
 		
-		List<? extends ActiveAnnotationContext> list = contextProvider.computeContext(xtendFile);
+		List<? extends ActiveAnnotationContext> list = null;
+		try {
+			list = contextProvider.computeContext(xtendFile);
+		} catch (Throwable t) {
+			handleProcessingError(xtendFile, null, t);
+			list = Collections.emptyList();
+		}
 		for (ActiveAnnotationContext ctx : list) {
 			try {
 				annotationProcessor.indexingPhase(ctx, new IAcceptor<JvmDeclaredType>() {
@@ -214,7 +221,7 @@ public class XtendJvmModelInferrer implements IJvmModelInferrer {
 						acceptor.accept(t);
 					}
 				}, CancelIndicator.NullImpl);
-			} catch (RuntimeException e) {
+			} catch (Throwable e) {
 				handleProcessingError(xtendFile, ctx, e);
 			}
 		}
@@ -226,14 +233,17 @@ public class XtendJvmModelInferrer implements IJvmModelInferrer {
 			for (ActiveAnnotationContext ctx : list) {
 				try {
 					annotationProcessor.inferencePhase(ctx, CancelIndicator.NullImpl);
-				} catch (RuntimeException e) {
+				} catch (Throwable e) {
 					handleProcessingError(xtendFile, ctx, e);
 				}
 			}
 		}
 	}
 
-	private void handleProcessingError(XtendFile xtendFile, ActiveAnnotationContext ctx, RuntimeException e) {
+	private void handleProcessingError(XtendFile xtendFile, ActiveAnnotationContext ctx, Throwable e) {
+		if (e instanceof VirtualMachineError) {
+			throw (VirtualMachineError)e;
+		}
 		logger.error("Error processing "+xtendFile.eResource().getURI()+" with processor "+ctx.getProcessorInstance().toString(), e);
 	}
 	

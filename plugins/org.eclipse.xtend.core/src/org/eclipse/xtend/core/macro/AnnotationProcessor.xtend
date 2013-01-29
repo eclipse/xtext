@@ -9,15 +9,14 @@
 package org.eclipse.xtend.core.macro
 
 import com.google.inject.Inject
+import com.google.inject.Provider
+import org.eclipse.xtend.core.xtend.XtendMember
 import org.eclipse.xtend.lib.macro.ModifyProcessor
 import org.eclipse.xtend.lib.macro.PreModifyProcessor
 import org.eclipse.xtext.common.types.JvmDeclaredType
 import org.eclipse.xtext.util.CancelIndicator
 import org.eclipse.xtext.util.IAcceptor
-import org.eclipse.xtend.core.xtend.XtendMember
-import com.google.inject.Provider
 import org.eclipse.xtext.util.internal.StopWatches
-import org.apache.log4j.Logger
 
 /**
  * It checks whether the files contain macro annotations and calls their register and processing functions.
@@ -25,8 +24,6 @@ import org.apache.log4j.Logger
  * @author Sven Efftinge
  */
 class AnnotationProcessor {
-	
-	static val logger = Logger::getLogger(typeof(AnnotationProcessor))
 	
 	@Inject Provider<ModifyContextImpl> modifyContextProvider
 
@@ -42,21 +39,11 @@ class AnnotationProcessor {
 					//TODO
 				}
 			}
-		} catch (Throwable e) {
-			handleException(e, ctx) 
 		} finally {
 			task.stop
 		}
 	}
 
-	def handleException(Throwable e, ActiveAnnotationContext ctx) {
-		switch e {
-			VirtualMachineError : throw e
-		}
-		//TODO create validation issue
-		logger.error("error while executing '"+ctx.processorInstance+"' : "+e.message, e)
-	}
-	
 	def inferencePhase(ActiveAnnotationContext ctx, CancelIndicator monitor) {
 		val task = StopWatches::forTask('[macros] inferencePhase')
 		task.start
@@ -71,11 +58,8 @@ class AnnotationProcessor {
 					], modifyCtx)
 				}
 			}
-		} catch (Throwable e) {
-			handleException(e, ctx)  
 		} finally {
 			task.stop
-			//TODO check time and issue warning if processing is really slow.
 		}
 	}
 	
