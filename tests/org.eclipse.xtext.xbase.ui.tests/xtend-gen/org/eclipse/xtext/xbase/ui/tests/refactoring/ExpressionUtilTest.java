@@ -4,8 +4,6 @@ import java.util.List;
 import javax.inject.Inject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.jface.text.TextSelection;
-import org.eclipse.xtext.junit4.InjectWith;
-import org.eclipse.xtext.junit4.XtextRunner;
 import org.eclipse.xtext.junit4.util.ParseHelper;
 import org.eclipse.xtext.junit4.validation.ValidationTestHelper;
 import org.eclipse.xtext.resource.ILocationInFileProvider;
@@ -18,19 +16,16 @@ import org.eclipse.xtext.xbase.lib.Functions.Function2;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ListExtensions;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
-import org.eclipse.xtext.xbase.tests.XbaseInjectorProvider;
+import org.eclipse.xtext.xbase.tests.AbstractXbaseTestCase;
 import org.eclipse.xtext.xbase.ui.refactoring.ExpressionUtil;
 import org.junit.Assert;
 import org.junit.Test;
-import org.junit.runner.RunWith;
 
 /**
  * @author Jan Koehnlein
  */
-@RunWith(value = XtextRunner.class)
-@InjectWith(value = XbaseInjectorProvider.class)
 @SuppressWarnings("all")
-public class ExpressionUtilTest {
+public class ExpressionUtilTest extends AbstractXbaseTestCase {
   @Inject
   private ExpressionUtil util;
   
