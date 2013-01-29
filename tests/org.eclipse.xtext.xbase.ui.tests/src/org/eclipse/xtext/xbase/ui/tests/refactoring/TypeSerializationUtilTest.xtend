@@ -1,25 +1,21 @@
 package org.eclipse.xtext.xbase.ui.tests.refactoring
 
-import org.junit.runner.RunWith
-import org.eclipse.xtext.junit4.XtextRunner
-import org.eclipse.xtext.junit4.InjectWith
-import org.eclipse.xtext.xbase.tests.XbaseInjectorProvider
-import org.junit.Test
-import org.eclipse.xtext.xbase.ui.refactoring.TypeSerializationUtil
 import com.google.inject.Inject
 import org.eclipse.xtext.junit4.util.ParseHelper
 import org.eclipse.xtext.xbase.XExpression
 import org.eclipse.xtext.xbase.XVariableDeclaration
+import org.eclipse.xtext.xbase.tests.AbstractXbaseTestCase
 import org.eclipse.xtext.xbase.typing.ITypeProvider
-import static org.junit.Assert.*
+import org.eclipse.xtext.xbase.ui.refactoring.TypeSerializationUtil
 import org.junit.Ignore
+import org.junit.Test
+
+import static org.junit.Assert.*
 
 /**
  * @author Jan Koehnlein
  */
-@RunWith(typeof(XtextRunner))
-@InjectWith(typeof(XbaseInjectorProvider))
-class TypeSerializationUtilTest {
+class TypeSerializationUtilTest extends AbstractXbaseTestCase {
 	
 	@Inject TypeSerializationUtil util
 	

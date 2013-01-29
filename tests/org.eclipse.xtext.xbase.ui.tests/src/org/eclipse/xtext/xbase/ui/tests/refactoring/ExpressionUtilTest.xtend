@@ -2,26 +2,19 @@ package org.eclipse.xtext.xbase.ui.tests.refactoring
 
 import javax.inject.Inject
 import org.eclipse.jface.text.TextSelection
-import org.eclipse.xtext.junit4.InjectWith
-import org.eclipse.xtext.junit4.XtextRunner
 import org.eclipse.xtext.junit4.util.ParseHelper
 import org.eclipse.xtext.junit4.validation.ValidationTestHelper
 import org.eclipse.xtext.resource.ILocationInFileProvider
 import org.eclipse.xtext.resource.XtextResource
 import org.eclipse.xtext.xbase.XExpression
+import org.eclipse.xtext.xbase.tests.AbstractXbaseTestCase
 import org.eclipse.xtext.xbase.ui.refactoring.ExpressionUtil
 import org.junit.Test
-import org.junit.runner.RunWith
-import org.eclipse.xtext.xbase.tests.XbaseInjectorProvider
-
-import static org.junit.Assert.*
 
 /**
  * @author Jan Koehnlein
  */
-@RunWith(typeof(XtextRunner))
-@InjectWith(typeof(XbaseInjectorProvider))
-class ExpressionUtilTest {
+class ExpressionUtilTest extends AbstractXbaseTestCase {
 
 	@Inject ExpressionUtil util
 	
