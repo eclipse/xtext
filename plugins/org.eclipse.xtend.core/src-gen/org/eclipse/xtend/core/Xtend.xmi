@@ -571,15 +571,25 @@
         <classifier xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
       </type>
       <alternatives xsi:type="xtext:Alternatives">
-        <elements xsi:type="xtext:RuleCall" rule="/0/@rules.9"/>
-        <elements xsi:type="xtext:Keyword" value="extends"/>
-        <elements xsi:type="xtext:Keyword" value="import"/>
-        <elements xsi:type="xtext:Keyword" value="extension"/>
+        <elements xsi:type="xtext:RuleCall" rule="/3/@rules.15"/>
+        <elements xsi:type="xtext:Keyword" value="abstract"/>
+        <elements xsi:type="xtext:Keyword" value="annotation"/>
         <elements xsi:type="xtext:Keyword" value="class"/>
-        <elements xsi:type="xtext:Keyword" value="interface"/>
-        <elements xsi:type="xtext:RuleCall" rule="/0/@rules.5"/>
-        <elements xsi:type="xtext:RuleCall" rule="/0/@rules.7"/>
+        <elements xsi:type="xtext:Keyword" value="create"/>
+        <elements xsi:type="xtext:Keyword" value="def"/>
+        <elements xsi:type="xtext:Keyword" value="dispatch"/>
+        <elements xsi:type="xtext:Keyword" value="extends"/>
+        <elements xsi:type="xtext:Keyword" value="extension"/>
+        <elements xsi:type="xtext:Keyword" value="final"/>
         <elements xsi:type="xtext:Keyword" value="implements"/>
+        <elements xsi:type="xtext:Keyword" value="import"/>
+        <elements xsi:type="xtext:Keyword" value="interface"/>
+        <elements xsi:type="xtext:Keyword" value="override"/>
+        <elements xsi:type="xtext:Keyword" value="package"/>
+        <elements xsi:type="xtext:Keyword" value="public"/>
+        <elements xsi:type="xtext:Keyword" value="private"/>
+        <elements xsi:type="xtext:Keyword" value="protected"/>
+        <elements xsi:type="xtext:Keyword" value="static"/>
         <elements xsi:type="xtext:Keyword" value="throws"/>
       </alternatives>
     </rules>

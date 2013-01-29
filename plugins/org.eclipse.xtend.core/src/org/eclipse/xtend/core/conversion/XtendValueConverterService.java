@@ -9,7 +9,6 @@ package org.eclipse.xtend.core.conversion;
 
 import org.eclipse.xtext.conversion.IValueConverter;
 import org.eclipse.xtext.conversion.ValueConverter;
-import org.eclipse.xtext.conversion.impl.NonRecursiveKeywordAlternativeConverter;
 import org.eclipse.xtext.xbase.conversion.XbaseValueConverterService;
 
 import com.google.inject.Inject;
@@ -23,14 +22,6 @@ import com.google.inject.Singleton;
 @Singleton
 public class XtendValueConverterService extends XbaseValueConverterService {
 
-	@Inject
-	private NonRecursiveKeywordAlternativeConverter featureCallIDConverter;
-
-	@Override
-	public IValueConverter<String> getFeatureCallIDValueConverter() {
-		return featureCallIDConverter;
-	}
-	
 	@Inject
 	private RichTextEndValueConverter richTextEndValueConverter;
 

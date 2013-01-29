@@ -78,7 +78,7 @@ public class XtendHighlightingCalculator extends XbaseHighlightingCalculator {
 	@Inject
 	protected void setXtendGrammarAccess(IGrammarAccess grammarAccess) {
 		ImmutableSet.Builder<Keyword> builder = ImmutableSet.builder();
-		AbstractRule rule = GrammarUtil.findRuleForName(grammarAccess.getGrammar(), "ValidID");
+		AbstractRule rule = GrammarUtil.findRuleForName(grammarAccess.getGrammar(), "FeatureCallID");
 		if (!(rule instanceof TerminalRule)) { // if someone decides to override ValidID with a terminal rule
 			Iterator<EObject> i = rule.eAllContents();
 			while (i.hasNext()) {

@@ -1452,55 +1452,97 @@ public class XtendGrammarAccess extends AbstractGrammarElementFinder {
 	public class FeatureCallIDElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "FeatureCallID");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
-		private final RuleCall cValidIDParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
-		private final Keyword cExtendsKeyword_1 = (Keyword)cAlternatives.eContents().get(1);
-		private final Keyword cImportKeyword_2 = (Keyword)cAlternatives.eContents().get(2);
-		private final Keyword cExtensionKeyword_3 = (Keyword)cAlternatives.eContents().get(3);
-		private final Keyword cClassKeyword_4 = (Keyword)cAlternatives.eContents().get(4);
-		private final Keyword cInterfaceKeyword_5 = (Keyword)cAlternatives.eContents().get(5);
-		private final RuleCall cCommonModifierParserRuleCall_6 = (RuleCall)cAlternatives.eContents().get(6);
-		private final RuleCall cMethodModifierParserRuleCall_7 = (RuleCall)cAlternatives.eContents().get(7);
-		private final Keyword cImplementsKeyword_8 = (Keyword)cAlternatives.eContents().get(8);
-		private final Keyword cThrowsKeyword_9 = (Keyword)cAlternatives.eContents().get(9);
+		private final RuleCall cIDTerminalRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
+		private final Keyword cAbstractKeyword_1 = (Keyword)cAlternatives.eContents().get(1);
+		private final Keyword cAnnotationKeyword_2 = (Keyword)cAlternatives.eContents().get(2);
+		private final Keyword cClassKeyword_3 = (Keyword)cAlternatives.eContents().get(3);
+		private final Keyword cCreateKeyword_4 = (Keyword)cAlternatives.eContents().get(4);
+		private final Keyword cDefKeyword_5 = (Keyword)cAlternatives.eContents().get(5);
+		private final Keyword cDispatchKeyword_6 = (Keyword)cAlternatives.eContents().get(6);
+		private final Keyword cExtendsKeyword_7 = (Keyword)cAlternatives.eContents().get(7);
+		private final Keyword cExtensionKeyword_8 = (Keyword)cAlternatives.eContents().get(8);
+		private final Keyword cFinalKeyword_9 = (Keyword)cAlternatives.eContents().get(9);
+		private final Keyword cImplementsKeyword_10 = (Keyword)cAlternatives.eContents().get(10);
+		private final Keyword cImportKeyword_11 = (Keyword)cAlternatives.eContents().get(11);
+		private final Keyword cInterfaceKeyword_12 = (Keyword)cAlternatives.eContents().get(12);
+		private final Keyword cOverrideKeyword_13 = (Keyword)cAlternatives.eContents().get(13);
+		private final Keyword cPackageKeyword_14 = (Keyword)cAlternatives.eContents().get(14);
+		private final Keyword cPublicKeyword_15 = (Keyword)cAlternatives.eContents().get(15);
+		private final Keyword cPrivateKeyword_16 = (Keyword)cAlternatives.eContents().get(16);
+		private final Keyword cProtectedKeyword_17 = (Keyword)cAlternatives.eContents().get(17);
+		private final Keyword cStaticKeyword_18 = (Keyword)cAlternatives.eContents().get(18);
+		private final Keyword cThrowsKeyword_19 = (Keyword)cAlternatives.eContents().get(19);
 		
 		//FeatureCallID:
-		//	ValidID | "extends" | "import" | "extension" | "class" | "interface" | CommonModifier | MethodModifier | "implements"
-		//	| "throws";
+		//	ID | "abstract" | "annotation" | "class" | "create" | "def" | "dispatch" | "extends" | "extension" | "final" |
+		//	"implements" | "import" | "interface" | "override" | "package" | "public" | "private" | "protected" | "static" |
+		//	"throws";
 		public ParserRule getRule() { return rule; }
 
-		//ValidID | "extends" | "import" | "extension" | "class" | "interface" | CommonModifier | MethodModifier | "implements" |
+		//ID | "abstract" | "annotation" | "class" | "create" | "def" | "dispatch" | "extends" | "extension" | "final" |
+		//"implements" | "import" | "interface" | "override" | "package" | "public" | "private" | "protected" | "static" |
 		//"throws"
 		public Alternatives getAlternatives() { return cAlternatives; }
 
-		//ValidID
-		public RuleCall getValidIDParserRuleCall_0() { return cValidIDParserRuleCall_0; }
+		//ID
+		public RuleCall getIDTerminalRuleCall_0() { return cIDTerminalRuleCall_0; }
 
-		//"extends"
-		public Keyword getExtendsKeyword_1() { return cExtendsKeyword_1; }
+		//"abstract"
+		public Keyword getAbstractKeyword_1() { return cAbstractKeyword_1; }
 
-		//"import"
-		public Keyword getImportKeyword_2() { return cImportKeyword_2; }
-
-		//"extension"
-		public Keyword getExtensionKeyword_3() { return cExtensionKeyword_3; }
+		//"annotation"
+		public Keyword getAnnotationKeyword_2() { return cAnnotationKeyword_2; }
 
 		//"class"
-		public Keyword getClassKeyword_4() { return cClassKeyword_4; }
+		public Keyword getClassKeyword_3() { return cClassKeyword_3; }
 
-		//"interface"
-		public Keyword getInterfaceKeyword_5() { return cInterfaceKeyword_5; }
+		//"create"
+		public Keyword getCreateKeyword_4() { return cCreateKeyword_4; }
 
-		//CommonModifier
-		public RuleCall getCommonModifierParserRuleCall_6() { return cCommonModifierParserRuleCall_6; }
+		//"def"
+		public Keyword getDefKeyword_5() { return cDefKeyword_5; }
 
-		//MethodModifier
-		public RuleCall getMethodModifierParserRuleCall_7() { return cMethodModifierParserRuleCall_7; }
+		//"dispatch"
+		public Keyword getDispatchKeyword_6() { return cDispatchKeyword_6; }
+
+		//"extends"
+		public Keyword getExtendsKeyword_7() { return cExtendsKeyword_7; }
+
+		//"extension"
+		public Keyword getExtensionKeyword_8() { return cExtensionKeyword_8; }
+
+		//"final"
+		public Keyword getFinalKeyword_9() { return cFinalKeyword_9; }
 
 		//"implements"
-		public Keyword getImplementsKeyword_8() { return cImplementsKeyword_8; }
+		public Keyword getImplementsKeyword_10() { return cImplementsKeyword_10; }
+
+		//"import"
+		public Keyword getImportKeyword_11() { return cImportKeyword_11; }
+
+		//"interface"
+		public Keyword getInterfaceKeyword_12() { return cInterfaceKeyword_12; }
+
+		//"override"
+		public Keyword getOverrideKeyword_13() { return cOverrideKeyword_13; }
+
+		//"package"
+		public Keyword getPackageKeyword_14() { return cPackageKeyword_14; }
+
+		//"public"
+		public Keyword getPublicKeyword_15() { return cPublicKeyword_15; }
+
+		//"private"
+		public Keyword getPrivateKeyword_16() { return cPrivateKeyword_16; }
+
+		//"protected"
+		public Keyword getProtectedKeyword_17() { return cProtectedKeyword_17; }
+
+		//"static"
+		public Keyword getStaticKeyword_18() { return cStaticKeyword_18; }
 
 		//"throws"
-		public Keyword getThrowsKeyword_9() { return cThrowsKeyword_9; }
+		public Keyword getThrowsKeyword_19() { return cThrowsKeyword_19; }
 	}
 
 	public class ParameterElements extends AbstractParserRuleElementFinder {
@@ -2261,8 +2303,9 @@ public class XtendGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//FeatureCallID:
-	//	ValidID | "extends" | "import" | "extension" | "class" | "interface" | CommonModifier | MethodModifier | "implements"
-	//	| "throws";
+	//	ID | "abstract" | "annotation" | "class" | "create" | "def" | "dispatch" | "extends" | "extension" | "final" |
+	//	"implements" | "import" | "interface" | "override" | "package" | "public" | "private" | "protected" | "static" |
+	//	"throws";
 	public FeatureCallIDElements getFeatureCallIDAccess() {
 		return (pFeatureCallID != null) ? pFeatureCallID : (pFeatureCallID = new FeatureCallIDElements());
 	}

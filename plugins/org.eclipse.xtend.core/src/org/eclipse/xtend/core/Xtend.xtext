@@ -131,7 +131,9 @@ ValidID:
 ;
 
 FeatureCallID:
-	ValidID | 'extends' | 'import' | 'extension' | 'class' | 'interface' | CommonModifier | MethodModifier | 'implements' | 'throws'
+	ID | 'abstract' | 'annotation' | 'class' | 'create' | 'def' | 'dispatch' | 'extends' | 'extension' 
+	   | 'final' | 'implements' | 'import' | 'interface' | 'override' | 'package' | 'public' | 'private' 
+	   | 'protected' | 'static' | 'throws'
 ;
 
 Parameter returns XtendParameter:

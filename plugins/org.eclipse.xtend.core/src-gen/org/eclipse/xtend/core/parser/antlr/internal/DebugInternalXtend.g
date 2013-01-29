@@ -165,15 +165,25 @@ ruleValidID :
 
 // Rule FeatureCallID
 ruleFeatureCallID :
-	ruleValidID |
-	'extends' |
-	'import' |
-	'extension' |
+	RULE_ID |
+	'abstract' |
+	'annotation' |
 	'class' |
-	'interface' |
-	ruleCommonModifier |
-	ruleMethodModifier |
+	'create' |
+	'def' |
+	'dispatch' |
+	'extends' |
+	'extension' |
+	'final' |
 	'implements' |
+	'import' |
+	'interface' |
+	'override' |
+	'package' |
+	'public' |
+	'private' |
+	'protected' |
+	'static' |
 	'throws'
 ;
 
