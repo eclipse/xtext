@@ -17,6 +17,8 @@ import org.eclipse.xtend.core.xtend.XtendConstructor
 import org.eclipse.xtend.core.xtend.XtendField
 import org.eclipse.xtend.core.xtend.XtendFile
 import org.eclipse.xtend.core.xtend.XtendFunction
+import org.eclipse.xtend.core.xtend.XtendInterface
+import org.eclipse.xtend.core.xtend.XtendMember
 import org.eclipse.xtend.core.xtend.XtendParameter
 import org.eclipse.xtext.nodemodel.INode
 import org.eclipse.xtext.preferences.PreferenceKey
@@ -32,6 +34,11 @@ import static org.eclipse.xtend.core.formatting.XtendFormatterPreferenceKeys.*
 import static org.eclipse.xtend.core.xtend.XtendPackage$Literals.*
 import static org.eclipse.xtext.xbase.formatting.XbaseFormatterPreferenceKeys.*
 import static org.eclipse.xtext.xtype.XtypePackage$Literals.*
+import org.eclipse.xtend.core.xtend.XtendTypeDeclaration
+import org.eclipse.xtext.common.types.JvmTypeParameter
+import java.util.List
+import org.eclipse.xtend.core.xtend.XtendAnnotationType
+import org.eclipse.xtend.core.xtend.XtendEnum
 
 @SuppressWarnings("restriction")
 public class XtendFormatter extends XbaseFormatter2 {
@@ -94,16 +101,8 @@ public class XtendFormatter extends XbaseFormatter2 {
 
 	def protected dispatch void format(XtendClass clazz, FormattableDocument format) {
 		formatAnnotations(clazz, format, newLineAfterClassAnnotations)
-		format += clazz.nodeForKeyword("public").append[oneSpace]
-		format += clazz.nodeForKeyword("abstract").append[oneSpace]
-		if (!clazz.typeParameters.empty) {
-			format += clazz.nodeForKeyword("<").surround[noSpace]
-			for (arg : clazz.typeParameters) {
-				arg.format(format)
-				format += arg.immediatelyFollowingKeyword(",").surround([noSpace], [oneSpace])
-			}
-			format += clazz.nodeForKeyword(">").prepend[noSpace]
-		}
+		formatModifiers(clazz, format)
+		formatTypeParameters(clazz, clazz.typeParameters, format)
 		format += clazz.nodeForKeyword("class").append[oneSpace]
 		format += clazz.nodeForKeyword("extends").surround[oneSpace]
 		clazz.^extends.format(format)
@@ -112,16 +111,31 @@ public class XtendFormatter extends XbaseFormatter2 {
 			format += imp.nodeForEObject.immediatelyFollowingKeyword(",").surround([noSpace], [oneSpace])
 			imp.format(format)
 		}
-		val clazzOpenBrace = clazz.nodeForKeyword("{")
+		formatBody(clazz, format)
+	}
+
+	def protected formatTypeParameters(XtendMember member, List<? extends JvmTypeParameter> typeParameters, FormattableDocument format) {
+		if (!typeParameters.empty) {
+			format += member.nodeForKeyword("<").surround[noSpace]
+			for (arg : typeParameters) {
+				arg.format(format)
+				format += arg.immediatelyFollowingKeyword(",").surround([noSpace], [oneSpace])
+			}
+			format += member.nodeForKeyword(">").prepend[noSpace]
+		}
+	}
+
+	def protected formatBody(XtendTypeDeclaration type, FormattableDocument format) {
+		val clazzOpenBrace = type.nodeForKeyword("{")
 		format += clazzOpenBrace.prepend[cfg(bracesInNewLine)]
-		if (!clazz.members.empty) {
+		if (!type.members.empty) {
 			format += clazzOpenBrace.append[increaseIndentation]
 			format += clazzOpenBrace.append[cfg(blankLinesBeforeFirstMember)]
-			for (i : 0 .. (clazz.members.size - 1)) {
-				val current = clazz.members.get(i)
+			for (i : 0 .. (type.members.size - 1)) {
+				val current = type.members.get(i)
 				current.format(format)
-				if (i < clazz.members.size - 1) {
-					val next = clazz.members.get(i + 1)
+				if (i < type.members.size - 1) {
+					val next = type.members.get(i + 1)
 					if (current instanceof XtendField && next instanceof XtendField)
 						format += current.nodeForEObject.append[cfg(blankLinesBetweenFields)]
 					else if (current instanceof XtendFunction && next instanceof XtendFunction)
@@ -129,7 +143,52 @@ public class XtendFormatter extends XbaseFormatter2 {
 					else
 						format += current.nodeForEObject.append[cfg(blankLinesBetweenFieldsAndMethods)]
 				} else {
-					val node = clazz.members.get(i).nodeForEObject
+					val node = type.members.get(i).nodeForEObject
+					format += node.append[decreaseIndentation]
+					format += node.append[cfg(blankLinesAfterLastMember)]
+				}
+			}
+		} else {
+			format += clazzOpenBrace.append[newLine]
+		}
+	}
+
+	def protected dispatch void format(XtendInterface interfaze, FormattableDocument format) {
+		formatAnnotations(interfaze, format, newLineAfterClassAnnotations)
+		formatModifiers(interfaze, format)
+		formatTypeParameters(interfaze, interfaze.typeParameters, format)
+		format += interfaze.nodeForKeyword("interface").append[oneSpace]
+		format += interfaze.nodeForKeyword("extends").surround[oneSpace]
+		for (imp : interfaze.extends) {
+			format += imp.nodeForEObject.immediatelyFollowingKeyword(",").surround([noSpace], [oneSpace])
+			imp.format(format)
+		}
+		formatBody(interfaze, format)
+	}
+
+	def protected dispatch void format(XtendAnnotationType annotationType, FormattableDocument format) {
+		formatAnnotations(annotationType, format, newLineAfterClassAnnotations)
+		formatModifiers(annotationType, format)
+		format += annotationType.nodeForKeyword("annotation").append[oneSpace]
+		formatBody(annotationType, format)
+	}
+
+	def protected dispatch void format(XtendEnum enumeration, FormattableDocument format) {
+		formatAnnotations(enumeration, format, newLineAfterClassAnnotations)
+		formatModifiers(enumeration, format)
+		format += enumeration.nodeForKeyword("enum").append[oneSpace]
+				val clazzOpenBrace = enumeration.nodeForKeyword("{")
+		format += clazzOpenBrace.prepend[cfg(bracesInNewLine)]
+		if (!enumeration.members.empty) {
+			format += clazzOpenBrace.append[increaseIndentation]
+			format += clazzOpenBrace.append[cfg(blankLinesBeforeFirstMember)]
+			for (i : 0 .. (enumeration.members.size - 1)) {
+				val current = enumeration.members.get(i)
+				current.format(format)
+				if (i < enumeration.members.size - 1) {
+					format += current.nodeForEObject.immediatelyFollowingKeyword(",").surround([noSpace], [oneSpace])
+				} else {
+					val node = current.nodeForEObject
 					format += node.append[decreaseIndentation]
 					format += node.append[cfg(blankLinesAfterLastMember)]
 				}
@@ -141,6 +200,7 @@ public class XtendFormatter extends XbaseFormatter2 {
 
 	def protected dispatch void format(XtendConstructor func, FormattableDocument format) {
 		formatAnnotations(func, format, newLineAfterConstructorAnnotations)
+		formatModifiers(func, format)
 		format += func.nodeForKeyword("new").append[noSpace]
 		if (!func.typeParameters.empty) {
 			format += func.nodeForKeyword("<").append[noSpace]
@@ -208,6 +268,7 @@ public class XtendFormatter extends XbaseFormatter2 {
 
 	def protected dispatch void format(XtendFunction func, FormattableDocument format) {
 		formatAnnotations(func, format, newLineAfterMethodAnnotations)
+		formatModifiers(func, format)
 		format += func.nodeForKeyword("def").append[oneSpace]
 		if (!func.typeParameters.empty) {
 			format += func.nodeForKeyword("<").append[noSpace]
@@ -231,12 +292,9 @@ public class XtendFormatter extends XbaseFormatter2 {
 
 	def protected dispatch void format(XtendField field, FormattableDocument document) {
 		formatAnnotations(field, document, newLineAfterFieldAnnotations)
+		formatModifiers(field, document)
 		if (field.name != null)
 			document += field.nodeForFeature(XTEND_FIELD__TYPE).append[oneSpace]
-		document += field.nodeForKeyword("static").append[oneSpace]
-		document += field.nodeForKeyword("extension").append[oneSpace]
-		document += field.nodeForKeyword("val").append[oneSpace]
-		document += field.nodeForKeyword("var").append[oneSpace]
 		document += field.nodeForKeyword("=").surround([oneSpace], [oneSpace])
 		field.type.format(document)
 		field.initialValue.format(document)
@@ -253,5 +311,22 @@ public class XtendFormatter extends XbaseFormatter2 {
 		val callback = [EObject obj, FormattableDocument doc|obj.format(doc)]
 		richStringFormatter.format(callback, format, rs)
 	}
-
+	
+	/** 
+	 * Always put existing modifiers into this fixed order
+	 */
+	def protected formatModifiers(XtendMember member, FormattableDocument document) {
+		document += member.nodeForKeyword("public").append[oneSpace]
+		document += member.nodeForKeyword("protected").append[oneSpace]
+		document += member.nodeForKeyword("package").append[oneSpace]
+		document += member.nodeForKeyword("private").append[oneSpace]
+		document += member.nodeForKeyword("abstract").append[oneSpace]
+		document += member.nodeForKeyword("static").append[oneSpace]
+		document += member.nodeForKeyword("final").append[oneSpace]
+		document += member.nodeForKeyword("extension").append[oneSpace]
+		document += member.nodeForKeyword("val").append[oneSpace]
+		document += member.nodeForKeyword("var").append[oneSpace]
+		document += member.nodeForKeyword("def").append[oneSpace]
+		document += member.nodeForKeyword("override").append[oneSpace]
+	}
 }
