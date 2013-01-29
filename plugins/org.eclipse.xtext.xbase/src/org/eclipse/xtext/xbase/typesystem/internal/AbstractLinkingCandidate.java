@@ -19,6 +19,8 @@ import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.JvmTypeParameterDeclarator;
 import org.eclipse.xtext.common.types.JvmUpperBound;
 import org.eclipse.xtext.xbase.XExpression;
+import org.eclipse.xtext.xbase.typesystem.arguments.IFeatureCallArgumentSlot;
+import org.eclipse.xtext.xbase.typesystem.arguments.IFeatureCallArguments;
 import org.eclipse.xtext.xbase.typesystem.computation.ILinkingCandidate;
 import org.eclipse.xtext.xbase.typesystem.computation.ITypeComputationState;
 import org.eclipse.xtext.xbase.typesystem.computation.ITypeExpectation;
@@ -255,7 +257,7 @@ public abstract class AbstractLinkingCandidate<Expression extends XExpression> i
 	public void computeArgumentTypes() {
 		initializeArgumentTypeComputation();
 		while(arguments.hasUnprocessedArguments())
-			computeArgumentType(arguments.getNextUnprocessedNextArgument());
+			computeArgumentType(arguments.getNextUnprocessedArgumentSlot());
 	}
 	
 	protected void initializeArgumentTypeComputation() {
@@ -264,21 +266,17 @@ public abstract class AbstractLinkingCandidate<Expression extends XExpression> i
 		arguments = state.getResolver().getExpressionArgumentFactory().createExpressionArguments(expression, this);
 	}
 	
-	protected void computeArgumentType(int argumentIndex) {
-		initializeArgumentTypeComputation();
-		if (arguments.isProcessed(argumentIndex))
-			return;
+	protected void computeArgumentType(IFeatureCallArgumentSlot slot) {
 		TypeParameterSubstitutor<?> substitutor = createArgumentTypeSubstitutor();
-		if (argumentIndex < arguments.getFixedArityArgumentCount()) {
-			computeFixedArityArgumentType(argumentIndex, substitutor);
-			return;
-		}
-		if (arguments.isVarArgs()) {
-			ArrayTypeReference lastParameterType = arguments.getVarArgType();
+		if (!slot.isVarArg() && !slot.isSuperfluous()) {
+			computeFixedArityArgumentType(slot, substitutor);
+		} else if (slot.isVarArg()) {
+			ArrayTypeReference lastParameterType = (ArrayTypeReference) slot.getDeclaredType();
 			LightweightTypeReference componentType = lastParameterType.getComponentType();
 			ITypeComputationState argumentState = null;
 			LightweightTypeReference substitutedComponentType = substitutor.substitute(componentType);
-			if (arguments.isExactArity()) {
+			List<XExpression> arguments = slot.getArgumentExpressions();
+			if (arguments.size() == 1) {
 				ArgumentTypeComputationState first = createVarArgTypeComputationState(substitutedComponentType);
 				ArrayTypeReference arrayTypeReference = new ArrayTypeReference(substitutedComponentType.getOwner(), substitutedComponentType);
 				ArgumentTypeComputationState second = createLinkingTypeComputationState(arrayTypeReference);
@@ -286,17 +284,14 @@ public abstract class AbstractLinkingCandidate<Expression extends XExpression> i
 			} else {
 				argumentState = createVarArgTypeComputationState(substitutedComponentType);
 			}
-			while(arguments.hasUnprocessedArguments()) {
-				int localNextArgumentIndex = arguments.getNextUnprocessedNextArgument();
-				XExpression argument = arguments.getArgument(localNextArgumentIndex);
+			for(XExpression argument: arguments) {
 				resolveArgumentType(argument, substitutedComponentType, argumentState);
-				arguments.markProcessed(localNextArgumentIndex);
 			}
 		} else {
-			XExpression argument = arguments.getArgument(argumentIndex);
+			XExpression argument = slot.getArgumentExpression();
 			resolveArgumentType(argument, null, state.withNonVoidExpectation());
-			arguments.markProcessed(argumentIndex);
 		}
+		slot.markProcessed();
 	}
 
 	protected TypeParameterSubstitutor<?> createArgumentTypeSubstitutor() {
@@ -313,13 +308,12 @@ public abstract class AbstractLinkingCandidate<Expression extends XExpression> i
 		return false;
 	}
 
-	protected void computeFixedArityArgumentType(int argumentIndex, TypeParameterSubstitutor<?> substitutor) {
-		LightweightTypeReference parameterType = arguments.getDeclaredType(argumentIndex);
+	protected void computeFixedArityArgumentType(IFeatureCallArgumentSlot slot, TypeParameterSubstitutor<?> substitutor) {
+		LightweightTypeReference parameterType = slot.getDeclaredType();
 		LightweightTypeReference substitutedParameterType = substitutor.substitute(parameterType);
-		XExpression argument = arguments.getArgument(argumentIndex);
+		XExpression argument = slot.getArgumentExpression();
 		AbstractTypeComputationState argumentState = createLinkingTypeComputationState(substitutedParameterType);
 		resolveArgumentType(argument, substitutedParameterType, argumentState);
-		arguments.markProcessed(argumentIndex);
 	}
 
 	protected ArgumentTypeComputationState createLinkingTypeComputationState(LightweightTypeReference expectedType) {
