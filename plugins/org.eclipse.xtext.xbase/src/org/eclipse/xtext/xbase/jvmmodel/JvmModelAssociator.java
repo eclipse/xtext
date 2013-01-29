@@ -31,8 +31,8 @@ import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.resource.DerivedStateAwareResource;
 import org.eclipse.xtext.resource.IDerivedStateComputer;
 import org.eclipse.xtext.resource.XtextResource;
-import org.eclipse.xtext.util.internal.StopWatches;
-import org.eclipse.xtext.util.internal.StopWatches.StoppedTask;
+import org.eclipse.xtext.util.internal.Stopwatches;
+import org.eclipse.xtext.util.internal.Stopwatches.StoppedTask;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.lib.Pair;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
@@ -238,7 +238,7 @@ public class JvmModelAssociator implements IJvmModelAssociations, IJvmModelAssoc
 			return;
 		EObject eObject = resource.getContents().get(0);
 		
-		StoppedTask task = StopWatches.forTask("primary JVM Model inference");
+		StoppedTask task = Stopwatches.forTask("primary JVM Model inference (JvmModelAssociator.installDerivedState)");
 		task.start();
 		// call primary inferrer
 		JvmDeclaredTypeAcceptor acceptor = new JvmDeclaredTypeAcceptor(resource);
@@ -250,7 +250,7 @@ public class JvmModelAssociator implements IJvmModelAssociations, IJvmModelAssoc
 		}
 		task.stop();
 		
-		task = StopWatches.forTask("secondary (i.e. Macros) JVM Model inference");
+		task = Stopwatches.forTask("secondary (i.e. Macros) JVM Model inference (JvmModelAssociator.installDerivedState)");
 		task.start();
 		// call secondary inferrers
 		final String fileExtension = resource.getURI().fileExtension();
