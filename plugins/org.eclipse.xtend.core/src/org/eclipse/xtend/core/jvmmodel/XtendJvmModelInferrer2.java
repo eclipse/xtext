@@ -14,6 +14,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import org.apache.log4j.Logger;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.annotation.NonNull;
@@ -96,6 +97,8 @@ public class XtendJvmModelInferrer2 implements IJvmModelInferrer {
 	public static final String CREATE_INITIALIZER_PREFIX = "_init_";
 
 	public static final String CREATE_CHACHE_VARIABLE_PREFIX = "_createCache_";
+	
+	private final static Logger logger = Logger.getLogger(XtendJvmModelInferrer2.class);
 
 	@Inject
 	private TypesFactory typesFactory;
@@ -192,13 +195,24 @@ public class XtendJvmModelInferrer2 implements IJvmModelInferrer {
 			}
 		}
 		
-		List<? extends ActiveAnnotationContext> list = contextProvider.computeContext(xtendFile);
+		List<? extends ActiveAnnotationContext> list = null;
+		try {
+			list = contextProvider.computeContext(xtendFile);
+		} catch (Throwable t) {
+			handleProcessingError(xtendFile, null, t);
+			list = newArrayList();
+		}
 		for (ActiveAnnotationContext ctx : list) {
-			annotationProcessor.indexingPhase(ctx, new IAcceptor<JvmDeclaredType>() {
-				public void accept(JvmDeclaredType t) {
-					acceptor.accept(t);
-				}
-			}, CancelIndicator.NullImpl);
+			try {
+				annotationProcessor.indexingPhase(ctx, new IAcceptor<JvmDeclaredType>() {
+					public void accept(JvmDeclaredType t) {
+						acceptor.accept(t);
+					}
+				}, CancelIndicator.NullImpl);
+			} catch (Throwable t) {
+				handleProcessingError(xtendFile, ctx, t);
+				list = newArrayList();
+			}
 		}
 		
 		if (!preIndexingPhase) {
@@ -206,11 +220,23 @@ public class XtendJvmModelInferrer2 implements IJvmModelInferrer {
 				runnable.run();
 			}
 			for (ActiveAnnotationContext ctx : list) {
-				annotationProcessor.inferencePhase(ctx, CancelIndicator.NullImpl);
+				try {
+					annotationProcessor.inferencePhase(ctx, CancelIndicator.NullImpl);
+				} catch (Throwable t) {
+					handleProcessingError(xtendFile, ctx, t);
+					list = newArrayList();
+				}
 			}
 		}
 	}
 	
+	protected void handleProcessingError(XtendFile xtendFile, ActiveAnnotationContext ctx, Throwable t) {
+		if (t instanceof VirtualMachineError)
+			throw (VirtualMachineError)t;
+		// TODO tell the user through an issue
+		logger.error("Error processing "+xtendFile.eResource().getURI()+" with processor "+ctx.getProcessorInstance().toString(), t);
+	}
+
 	protected void setNameAndAssociate(XtendFile file, XtendTypeDeclaration xtendType, JvmDeclaredType javaType) {
 		javaType.setPackageName(file.getPackage());
 		javaType.setSimpleName(xtendType.getName());

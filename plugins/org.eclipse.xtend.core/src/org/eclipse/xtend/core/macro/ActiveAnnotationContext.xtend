@@ -67,6 +67,11 @@ class ActiveAnnotationContextProvider {
 				]
 				return annotatedElements.values.toList
 			]
+		} catch (Throwable e) {
+			switch e {
+				VirtualMachineError : throw e
+			}
+			return newArrayList
 		} finally {
 			task.stop
 		}
