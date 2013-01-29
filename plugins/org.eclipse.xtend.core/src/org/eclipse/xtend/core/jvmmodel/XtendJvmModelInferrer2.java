@@ -323,6 +323,9 @@ public class XtendJvmModelInferrer2 implements IJvmModelInferrer {
 		for (JvmTypeReference intf : source.getExtends()) {
 			inferredJvmType.getSuperTypes().add(jvmTypesBuilder.cloneWithProxies(intf));
 		}
+		if (inferredJvmType.getSuperTypes().isEmpty()) {
+			inferredJvmType.getSuperTypes().add(typeReferences.getTypeForName(Object.class, source));
+		}
 		copyAndFixTypeParameters(source.getTypeParameters(), inferredJvmType);
 		for (XtendMember member : source.getMembers()) {
 			if (member instanceof XtendField

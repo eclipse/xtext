@@ -618,30 +618,38 @@ public class JvmModelGenerator implements IGenerator {
     }
     if (_and) {
       EList<JvmTypeReference> _superTypes = it.getSuperTypes();
-      final Procedure1<LoopParams> _function = new Procedure1<LoopParams>() {
-          public void apply(final LoopParams it) {
-            it.setPrefix("extends ");
-            it.setSeparator(", ");
-            it.setSuffix(" ");
-          }
-        };
-      final Procedure2<JvmTypeReference,ITreeAppendable> _function_1 = new Procedure2<JvmTypeReference,ITreeAppendable>() {
-          public void apply(final JvmTypeReference it, final ITreeAppendable app) {
-            JvmModelGenerator.this._errorSafeExtensions.serializeSafely(it, app);
-          }
-        };
-      this._errorSafeExtensions.<JvmTypeReference>forEachSafely(appendable, _superTypes, _function, _function_1);
-    } else {
-      EList<JvmTypeReference> _superTypes_1 = it.getSuperTypes();
-      final Function1<JvmTypeReference,Boolean> _function_2 = new Function1<JvmTypeReference,Boolean>() {
+      final Function1<JvmTypeReference,Boolean> _function = new Function1<JvmTypeReference,Boolean>() {
           public Boolean apply(final JvmTypeReference typeRef) {
             String _identifier = typeRef.getIdentifier();
             boolean _notEquals = ObjectExtensions.operator_notEquals(_identifier, "java.lang.Object");
             return Boolean.valueOf(_notEquals);
           }
         };
-      final Iterable<JvmTypeReference> withoutObject = IterableExtensions.<JvmTypeReference>filter(_superTypes_1, _function_2);
+      final Iterable<JvmTypeReference> withoutObject = IterableExtensions.<JvmTypeReference>filter(_superTypes, _function);
+      final Procedure1<LoopParams> _function_1 = new Procedure1<LoopParams>() {
+          public void apply(final LoopParams it) {
+            it.setPrefix("extends ");
+            it.setSeparator(", ");
+            it.setSuffix(" ");
+          }
+        };
+      final Procedure2<JvmTypeReference,ITreeAppendable> _function_2 = new Procedure2<JvmTypeReference,ITreeAppendable>() {
+          public void apply(final JvmTypeReference it, final ITreeAppendable app) {
+            JvmModelGenerator.this._errorSafeExtensions.serializeSafely(it, app);
+          }
+        };
+      this._errorSafeExtensions.<JvmTypeReference>forEachSafely(appendable, withoutObject, _function_1, _function_2);
+    } else {
+      EList<JvmTypeReference> _superTypes_1 = it.getSuperTypes();
       final Function1<JvmTypeReference,Boolean> _function_3 = new Function1<JvmTypeReference,Boolean>() {
+          public Boolean apply(final JvmTypeReference typeRef) {
+            String _identifier = typeRef.getIdentifier();
+            boolean _notEquals = ObjectExtensions.operator_notEquals(_identifier, "java.lang.Object");
+            return Boolean.valueOf(_notEquals);
+          }
+        };
+      final Iterable<JvmTypeReference> withoutObject_1 = IterableExtensions.<JvmTypeReference>filter(_superTypes_1, _function_3);
+      final Function1<JvmTypeReference,Boolean> _function_4 = new Function1<JvmTypeReference,Boolean>() {
           public Boolean apply(final JvmTypeReference typeRef) {
             boolean _and = false;
             JvmType _type = typeRef.getType();
@@ -656,15 +664,15 @@ public class JvmModelGenerator implements IGenerator {
             return Boolean.valueOf(_and);
           }
         };
-      Iterable<JvmTypeReference> _filter = IterableExtensions.<JvmTypeReference>filter(withoutObject, _function_3);
+      Iterable<JvmTypeReference> _filter = IterableExtensions.<JvmTypeReference>filter(withoutObject_1, _function_4);
       final JvmTypeReference superClazz = IterableExtensions.<JvmTypeReference>head(_filter);
-      final Function1<JvmTypeReference,Boolean> _function_4 = new Function1<JvmTypeReference,Boolean>() {
+      final Function1<JvmTypeReference,Boolean> _function_5 = new Function1<JvmTypeReference,Boolean>() {
           public Boolean apply(final JvmTypeReference typeRef) {
             boolean _notEquals = ObjectExtensions.operator_notEquals(typeRef, superClazz);
             return Boolean.valueOf(_notEquals);
           }
         };
-      final Iterable<JvmTypeReference> superInterfaces = IterableExtensions.<JvmTypeReference>filter(withoutObject, _function_4);
+      final Iterable<JvmTypeReference> superInterfaces = IterableExtensions.<JvmTypeReference>filter(withoutObject_1, _function_5);
       boolean _notEquals = ObjectExtensions.operator_notEquals(superClazz, null);
       if (_notEquals) {
         final boolean hasErrors = this._errorSafeExtensions.hasErrors(superClazz, true);
@@ -686,19 +694,19 @@ public class JvmModelGenerator implements IGenerator {
           appendable.append(" */");
         }
       }
-      final Procedure1<LoopParams> _function_5 = new Procedure1<LoopParams>() {
+      final Procedure1<LoopParams> _function_6 = new Procedure1<LoopParams>() {
           public void apply(final LoopParams it) {
             it.setPrefix("implements ");
             it.setSeparator(", ");
             it.setSuffix(" ");
           }
         };
-      final Procedure2<JvmTypeReference,ITreeAppendable> _function_6 = new Procedure2<JvmTypeReference,ITreeAppendable>() {
+      final Procedure2<JvmTypeReference,ITreeAppendable> _function_7 = new Procedure2<JvmTypeReference,ITreeAppendable>() {
           public void apply(final JvmTypeReference it, final ITreeAppendable app) {
             JvmModelGenerator.this._errorSafeExtensions.serializeSafely(it, app);
           }
         };
-      this._errorSafeExtensions.<JvmTypeReference>forEachSafely(appendable, superInterfaces, _function_5, _function_6);
+      this._errorSafeExtensions.<JvmTypeReference>forEachSafely(appendable, superInterfaces, _function_6, _function_7);
     }
   }
   
