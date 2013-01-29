@@ -22,6 +22,7 @@ class ModifierValidationTest2 extends ModifierValidationTest {
 		memberInInterface('''package def foo() {}''').assertError(XTEND_FUNCTION, INVALID_MODIFIER)
 		memberInInterface('''protected def foo() {}''').assertError(XTEND_FUNCTION, INVALID_MODIFIER)
 		memberInInterface('''public def foo() {}''').assertNoError(INVALID_MODIFIER)
+		memberInInterface('''override def foo() {}''').assertNoError(INVALID_MODIFIER)
 		memberInInterface('''static def foo() {}''').assertError(XTEND_FUNCTION, INVALID_MODIFIER)	
 		memberInInterface('''abstract def int foo()''').assertNoErrors	
 		// TODO: this one fails in the proxy resolution phase prior to validation:
