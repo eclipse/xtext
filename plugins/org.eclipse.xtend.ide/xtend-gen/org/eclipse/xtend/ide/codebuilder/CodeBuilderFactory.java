@@ -18,16 +18,19 @@ import org.eclipse.xtend.ide.codebuilder.AbstractAnnotationBuilder;
 import org.eclipse.xtend.ide.codebuilder.AbstractClassBuilder;
 import org.eclipse.xtend.ide.codebuilder.AbstractConstructorBuilder;
 import org.eclipse.xtend.ide.codebuilder.AbstractFieldBuilder;
+import org.eclipse.xtend.ide.codebuilder.AbstractInterfaceBuilder;
 import org.eclipse.xtend.ide.codebuilder.AbstractMethodBuilder;
 import org.eclipse.xtend.ide.codebuilder.JavaAnnotationBuilder;
 import org.eclipse.xtend.ide.codebuilder.JavaClassBuilder;
 import org.eclipse.xtend.ide.codebuilder.JavaConstructorBuilder;
 import org.eclipse.xtend.ide.codebuilder.JavaFieldBuilder;
+import org.eclipse.xtend.ide.codebuilder.JavaInterfaceBuilder;
 import org.eclipse.xtend.ide.codebuilder.JavaMethodBuilder;
 import org.eclipse.xtend.ide.codebuilder.XtendAnnotationBuilder;
 import org.eclipse.xtend.ide.codebuilder.XtendClassBuilder;
 import org.eclipse.xtend.ide.codebuilder.XtendConstructorBuilder;
 import org.eclipse.xtend.ide.codebuilder.XtendFieldBuilder;
+import org.eclipse.xtend.ide.codebuilder.XtendInterfaceBuilder;
 import org.eclipse.xtend.ide.codebuilder.XtendMethodBuilder;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmGenericType;
@@ -53,6 +56,9 @@ public class CodeBuilderFactory {
   private Provider<XtendClassBuilder> xtendClassBuilderProvider;
   
   @Inject
+  private Provider<XtendInterfaceBuilder> xtendInterfaceBuilderProvider;
+  
+  @Inject
   private Provider<XtendAnnotationBuilder> xtendAnnotationBuilderProvider;
   
   @Inject
@@ -66,6 +72,9 @@ public class CodeBuilderFactory {
   
   @Inject
   private Provider<JavaClassBuilder> javaClassBuilderProvider;
+  
+  @Inject
+  private Provider<JavaInterfaceBuilder> javaInterfaceBuilderProvider;
   
   @Inject
   private Provider<JavaAnnotationBuilder> javaAnnotationBuilderProvider;
@@ -92,6 +101,26 @@ public class CodeBuilderFactory {
         _xifexpression = _get_1;
       }
       final AbstractClassBuilder builder = _xifexpression;
+      builder.setOwner(owner);
+      builder.setOwnerSource(ownerSource);
+      _xblockexpression = (builder);
+    }
+    return _xblockexpression;
+  }
+  
+  public AbstractInterfaceBuilder createInterfaceBuilder(final JvmDeclaredType owner) {
+    AbstractInterfaceBuilder _xblockexpression = null;
+    {
+      final Object ownerSource = this.getSource(owner);
+      AbstractInterfaceBuilder _xifexpression = null;
+      if ((ownerSource instanceof XtendClass)) {
+        XtendInterfaceBuilder _get = this.xtendInterfaceBuilderProvider.get();
+        _xifexpression = _get;
+      } else {
+        JavaInterfaceBuilder _get_1 = this.javaInterfaceBuilderProvider.get();
+        _xifexpression = _get_1;
+      }
+      final AbstractInterfaceBuilder builder = _xifexpression;
       builder.setOwner(owner);
       builder.setOwnerSource(ownerSource);
       _xblockexpression = (builder);

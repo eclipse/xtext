@@ -1609,7 +1609,7 @@ public class QuickfixTest extends AbstractXtendUITestCase {
     QuickfixTestBuilder _create = this.builder.create("Foo.xtend", _builder);
     QuickfixTestBuilder _assertIssueCodes = _create.assertIssueCodes(Diagnostic.LINKING_DIAGNOSTIC);
     QuickfixTestBuilder _assertResolutionLabelsSubset = _assertIssueCodes.assertResolutionLabelsSubset("Create Xtend class \'Bar\'", "Create Java class \'Bar\'", "Create Java interface \'Bar\'", 
-      "Create local Xtend class \'Bar\'");
+      "Create local Xtend class \'Bar\'", "Create local Xtend interface \'Bar\'");
     StringConcatenation _builder_1 = new StringConcatenation();
     _builder_1.append("class Foo {");
     _builder_1.newLine();
@@ -1623,7 +1623,21 @@ public class QuickfixTest extends AbstractXtendUITestCase {
     _builder_1.newLine();
     _builder_1.append("}");
     _builder_1.newLine();
-    _assertResolutionLabelsSubset.assertModelAfterQuickfix("Create local Xtend class \'Bar\'", _builder_1);
+    QuickfixTestBuilder _assertModelAfterQuickfix = _assertResolutionLabelsSubset.assertModelAfterQuickfix("Create local Xtend class \'Bar\'", _builder_1);
+    StringConcatenation _builder_2 = new StringConcatenation();
+    _builder_2.append("class Foo {");
+    _builder_2.newLine();
+    _builder_2.append("\t");
+    _builder_2.append("Bar bar");
+    _builder_2.newLine();
+    _builder_2.append("}");
+    _builder_2.newLine();
+    _builder_2.newLine();
+    _builder_2.append("interface Bar {");
+    _builder_2.newLine();
+    _builder_2.append("}");
+    _builder_2.newLine();
+    _assertModelAfterQuickfix.assertModelAfterQuickfix("Create local Xtend interface \'Bar\'", _builder_2);
   }
   
   @Test
@@ -1688,7 +1702,18 @@ public class QuickfixTest extends AbstractXtendUITestCase {
     _builder.newLine();
     QuickfixTestBuilder _create = this.builder.create("Foo.xtend", _builder);
     QuickfixTestBuilder _assertIssueCodes = _create.assertIssueCodes(Diagnostic.LINKING_DIAGNOSTIC, IssueCodes.INTERFACE_EXPECTED);
-    _assertIssueCodes.assertResolutionLabelsSubset("Create Java interface \'Bar\'");
+    QuickfixTestBuilder _assertResolutionLabelsSubset = _assertIssueCodes.assertResolutionLabelsSubset("Create Java interface \'Bar\'", "Create local Xtend interface \'Bar\'");
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("class Foo implements Bar {");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.newLine();
+    _builder_1.append("interface Bar {");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _assertResolutionLabelsSubset.assertModelAfterQuickfix("Create local Xtend interface \'Bar\'", _builder_1);
   }
   
   @Test

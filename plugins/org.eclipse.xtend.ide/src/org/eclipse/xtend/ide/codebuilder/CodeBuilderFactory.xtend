@@ -30,12 +30,14 @@ class CodeBuilderFactory {
 	@Inject extension IJavaElementFinder
 	
 	@Inject Provider<XtendClassBuilder> xtendClassBuilderProvider
+	@Inject Provider<XtendInterfaceBuilder> xtendInterfaceBuilderProvider
 	@Inject Provider<XtendAnnotationBuilder> xtendAnnotationBuilderProvider
 	@Inject Provider<XtendFieldBuilder> xtendFieldBuilderProvider
 	@Inject Provider<XtendConstructorBuilder> xtendConstructorBuilderProvider
 	@Inject Provider<XtendMethodBuilder> xtendMethodBuilderProvider
 	
 	@Inject Provider<JavaClassBuilder> javaClassBuilderProvider
+	@Inject Provider<JavaInterfaceBuilder> javaInterfaceBuilderProvider
 	@Inject Provider<JavaAnnotationBuilder> javaAnnotationBuilderProvider
 	@Inject Provider<JavaFieldBuilder> javaFieldBuilderProvider
 	@Inject Provider<JavaConstructorBuilder> javaConstructorBuilderProvider
@@ -48,6 +50,18 @@ class CodeBuilderFactory {
 				xtendClassBuilderProvider.get
 			else
 				javaClassBuilderProvider.get
+		builder.owner = owner
+		builder.ownerSource = ownerSource
+		builder
+	}
+	
+	def createInterfaceBuilder(JvmDeclaredType owner) {
+		val ownerSource = owner.source
+		val builder = 
+			if(ownerSource instanceof XtendClass) 
+				xtendInterfaceBuilderProvider.get
+			else
+				javaInterfaceBuilderProvider.get
 		builder.owner = owner
 		builder.ownerSource = ownerSource
 		builder
