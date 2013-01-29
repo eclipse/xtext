@@ -7,6 +7,7 @@ import org.eclipse.xtend.core.tests.NewTypeSystemRuntimeInjectorProvider
 import org.eclipse.xtext.junit4.InjectWith
 import org.eclipse.xtext.junit4.XtextRunner
 import org.eclipse.xtext.junit4.internal.StopwatchRule
+import org.junit.Ignore
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -110,12 +111,14 @@ class PerformanceTest extends AbstractXtendTestCase {
 	}
 	
 	@Test
+	@Ignore
 	def void doCompileTwice() {
 		doCompile
 		doCompile
 	}
 	
 	@Test
+	@Ignore
 	def void doCompileThreeTimes() {
 		doCompile
 		doCompile
@@ -123,6 +126,7 @@ class PerformanceTest extends AbstractXtendTestCase {
 	}
 }
 
+@Ignore
 @RunWith(typeof(XtextRunner))
 @InjectWith(typeof(NewTypeSystemRuntimeInjectorProvider))
 class PerformanceTestNewTypeSystem extends PerformanceTest {
