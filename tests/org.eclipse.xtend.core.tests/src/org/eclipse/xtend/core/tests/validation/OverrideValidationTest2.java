@@ -20,12 +20,6 @@ import org.junit.runner.RunWith;
 @InjectWith(NewTypeSystemRuntimeInjectorProvider.class)
 public class OverrideValidationTest2 extends OverrideValidationTest {
 	
-	@Override
-	public void testInterfaceMissingOverride_5() throws Exception {
-		// TODO find out if it's a problem that this one fails with the new TS
-		//super.testInterfaceMissingOverride_5();
-	}
-	
 	// These are disabled in the super class
 	@Override
 	@Test public void testOverrideReturnType_1() throws Exception {
