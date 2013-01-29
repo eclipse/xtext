@@ -313,7 +313,8 @@ class JvmModelGenerator implements IGenerator {
 		
 	def void generateExtendsClause(JvmDeclaredType it, ITreeAppendable appendable, GeneratorConfig config) {
 		if (it instanceof JvmGenericType && (it as JvmGenericType).isInterface) {
-			appendable.forEachSafely(superTypes, [
+			val withoutObject = superTypes.filter( typeRef | typeRef.identifier != "java.lang.Object")
+			appendable.forEachSafely(withoutObject, [
 					prefix = 'extends '	separator =  ', ' suffix =  ' '
 				], [
 					it, app | serializeSafely(app)
