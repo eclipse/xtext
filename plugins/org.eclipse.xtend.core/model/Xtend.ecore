@@ -33,6 +33,8 @@
         containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="modifiers" unique="false"
         upperBound="-1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="declaringType" eType="#//XtendTypeDeclaration"
+        eOpposite="#//XtendTypeDeclaration/members"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="XtendFunction" eSuperTypes="#//XtendMember">
     <eOperations name="isAbstract" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
@@ -115,11 +117,12 @@
   <eClassifiers xsi:type="ecore:EClass" name="XtendTypeDeclaration" eSuperTypes="#//XtendMember">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="members" upperBound="-1"
-        eType="#//XtendMember" containment="true"/>
+        eType="#//XtendMember" containment="true" eOpposite="#//XtendMember/declaringType"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="XtendAnnotationType" eSuperTypes="#//XtendTypeDeclaration"/>
   <eClassifiers xsi:type="ecore:EClass" name="XtendInterface" eSuperTypes="#//XtendTypeDeclaration">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="extends" upperBound="-1" eType="ecore:EClass platform:/resource/org.eclipse.xtext.common.types/model/JavaVMTypes.ecore#//JvmTypeReference"
+    <eStructuralFeatures xsi:type="ecore:EReference" name="extends" upperBound="-1"
+        eType="ecore:EClass platform:/resource/org.eclipse.xtext.common.types/model/JavaVMTypes.ecore#//JvmTypeReference"
         containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="typeParameters" upperBound="-1"
         eType="ecore:EClass platform:/resource/org.eclipse.xtext.common.types/model/JavaVMTypes.ecore#//JvmTypeParameter"
