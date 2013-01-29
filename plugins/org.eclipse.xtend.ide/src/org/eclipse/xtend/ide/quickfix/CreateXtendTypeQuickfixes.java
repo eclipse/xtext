@@ -21,6 +21,7 @@ import org.eclipse.xtend.core.xtend.XtendPackage;
 import org.eclipse.xtend.core.xtend.XtendTypeDeclaration;
 import org.eclipse.xtend.ide.codebuilder.AbstractAnnotationBuilder;
 import org.eclipse.xtend.ide.codebuilder.AbstractClassBuilder;
+import org.eclipse.xtend.ide.codebuilder.AbstractInterfaceBuilder;
 import org.eclipse.xtend.ide.codebuilder.CodeBuilderFactory;
 import org.eclipse.xtend.ide.wizards.NewXtendClassWizard;
 import org.eclipse.xtend.ide.wizards.NewXtendClassWizardPage;
@@ -87,11 +88,13 @@ public class CreateXtendTypeQuickfixes extends CreateJavaTypeQuickfixes {
 				newLocalXtendClassQuickfix(typeName, resource, issue, issueResolutionAcceptor);
 			} else if(eContainingFeature == XtendPackage.Literals.XTEND_CLASS__IMPLEMENTS) {
 				newJavaInterfaceQuickfix(typeName, resource, issue, issueResolutionAcceptor);
+				newLocalXtendInterfaceQuickfix(typeName, resource, issue, issueResolutionAcceptor);
 			} else {
 				newJavaClassQuickfix(typeName, resource, issue, issueResolutionAcceptor);
 				newJavaInterfaceQuickfix(typeName, resource, issue, issueResolutionAcceptor);
 				newXtendClassQuickfix(typeName, resource, issue, issueResolutionAcceptor);
 				newLocalXtendClassQuickfix(typeName, resource, issue, issueResolutionAcceptor);				
+				newLocalXtendInterfaceQuickfix(typeName, resource, issue, issueResolutionAcceptor);
 			}
 		} else if(unresolvedReference == XAnnotationsPackage.Literals.XANNOTATION__ANNOTATION_TYPE) {
 			newJavaAnnotationQuickfix(typeName, resource, issue, issueResolutionAcceptor);
@@ -111,6 +114,22 @@ public class CreateXtendTypeQuickfixes extends CreateJavaTypeQuickfixes {
 				classBuilder.setVisibility(JvmVisibility.PUBLIC);
 				classBuilder.setContext(xtendType);
 				codeBuilderQuickfix.addQuickfix(classBuilder, "Create local Xtend class '" + typeName + "'", issue, issueResolutionAcceptor);
+			}
+		}
+	}
+
+	protected void newLocalXtendInterfaceQuickfix(String typeName, XtextResource resource, Issue issue,
+			IssueResolutionAcceptor issueResolutionAcceptor) {
+		EObject eObject = resource.getEObject(issue.getUriToProblem().fragment());
+		XtendTypeDeclaration xtendType = getAnnotationTarget(eObject);
+		if(xtendType != null) {
+			JvmDeclaredType inferredType = associations.getInferredType(xtendType);
+			if(inferredType != null) {
+				AbstractInterfaceBuilder interfaceBuilder = codeBuilderFactory.createInterfaceBuilder(inferredType);
+				interfaceBuilder.setInterfaceName(typeName);
+				interfaceBuilder.setVisibility(JvmVisibility.PUBLIC);
+				interfaceBuilder.setContext(xtendType);
+				codeBuilderQuickfix.addQuickfix(interfaceBuilder, "Create local Xtend interface '" + typeName + "'", issue, issueResolutionAcceptor);
 			}
 		}
 	}

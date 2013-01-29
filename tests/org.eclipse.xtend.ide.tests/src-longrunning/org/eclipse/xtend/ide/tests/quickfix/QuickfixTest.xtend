@@ -856,13 +856,21 @@ class QuickfixTest extends AbstractXtendUITestCase {
 		''')
 		.assertIssueCodes(Diagnostic::LINKING_DIAGNOSTIC)
 		.assertResolutionLabelsSubset("Create Xtend class 'Bar'", "Create Java class 'Bar'", "Create Java interface 'Bar'", 
-				"Create local Xtend class 'Bar'")
+				"Create local Xtend class 'Bar'", "Create local Xtend interface 'Bar'")
 		.assertModelAfterQuickfix("Create local Xtend class 'Bar'", '''
 			class Foo {
 				Bar bar
 			}
 			
 			class Bar {
+			}
+		''')
+		.assertModelAfterQuickfix("Create local Xtend interface 'Bar'", '''
+			class Foo {
+				Bar bar
+			}
+			
+			interface Bar {
 			}
 		''')
 	}
@@ -907,7 +915,14 @@ class QuickfixTest extends AbstractXtendUITestCase {
 			}
 		''')
 		.assertIssueCodes(Diagnostic::LINKING_DIAGNOSTIC, INTERFACE_EXPECTED)
-		.assertResolutionLabelsSubset("Create Java interface 'Bar'")
+		.assertResolutionLabelsSubset("Create Java interface 'Bar'", "Create local Xtend interface 'Bar'")
+		.assertModelAfterQuickfix("Create local Xtend interface 'Bar'", '''
+			class Foo implements Bar {
+			}
+			
+			interface Bar {
+			}
+		''')
 	}
 
 	@Test
