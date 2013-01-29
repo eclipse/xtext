@@ -26,7 +26,7 @@ import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
  * the type arguments for a feature call or the diagnostics that
  * were produced during the type resolution.
  * 
- * TODO JavaDoc, describe contract for toString
+ * TODO JavaDoc - better describe actual type, return type and expected types.
  * 
  * @author Sebastian Zarnekow - Initial contribution and API
  */

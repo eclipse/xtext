@@ -17,6 +17,12 @@ import org.eclipse.xtext.xtype.XComputedTypeReference;
 import org.eclipse.xtext.xtype.impl.XComputedTypeReferenceImplCustom;
 
 /**
+ * This is a {@link IJvmTypeReferenceProvider type reference provider} that
+ * can be used to describe an infered type reference during the model inference.
+ * 
+ * Clients will usually use {@link #isInferred(JvmTypeReference)} and
+ * {@link #resolveTo(JvmTypeReference, JvmTypeReference)}.
+ * 
  * @author Sebastian Zarnekow - Initial contribution and API
  */
 public class InferredTypeIndicator implements IJvmTypeReferenceProvider {
