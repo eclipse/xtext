@@ -1,20 +1,21 @@
 package org.eclipse.xtend.core.tests.macro
 
+import com.google.common.collect.Lists
 import com.google.inject.Inject
 import com.google.inject.Provider
 import org.eclipse.xtend.core.macro.declaration.CompilationUnitImpl
 import org.eclipse.xtend.core.tests.RuntimeInjectorProvider
 import org.eclipse.xtend.core.xtend.XtendFile
+import org.eclipse.xtend.lib.macro.declaration.MutableTypeDeclaration
 import org.eclipse.xtext.junit4.InjectWith
 import org.eclipse.xtext.junit4.XtextRunner
 import org.eclipse.xtext.resource.XtextResourceSet
 import org.eclipse.xtext.xbase.compiler.CompilationTestHelper
+import org.eclipse.xtext.xbase.lib.IterableExtensions
 import org.eclipse.xtext.xbase.lib.Pair
+import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
-import org.eclipse.xtend.lib.macro.declaration.MutableTypeDeclaration
-import com.google.common.collect.Lists
-import org.junit.Before
 
 @RunWith(typeof(XtextRunner))
 @InjectWith(typeof(RuntimeInjectorProvider))
