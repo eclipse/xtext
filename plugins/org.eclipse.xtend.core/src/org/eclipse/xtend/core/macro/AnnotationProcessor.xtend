@@ -10,7 +10,6 @@ package org.eclipse.xtend.core.macro
 
 import com.google.inject.Inject
 import com.google.inject.Provider
-import org.apache.log4j.Logger
 import org.eclipse.xtend.core.xtend.XtendMember
 import org.eclipse.xtend.lib.macro.ModifyProcessor
 import org.eclipse.xtend.lib.macro.PreModifyProcessor
@@ -26,8 +25,6 @@ import org.eclipse.xtext.util.internal.Stopwatches
  */
 class AnnotationProcessor {
 	
-	static val logger = Logger::getLogger(typeof(AnnotationProcessor))
-	
 	@Inject Provider<ModifyContextImpl> modifyContextProvider
 
 	/**
@@ -42,21 +39,11 @@ class AnnotationProcessor {
 					//TODO
 				}
 			}
-		} catch (Throwable e) {
-			handleException(e, ctx) 
 		} finally {
 			task.stop
 		}
 	}
 
-	def handleException(Throwable e, ActiveAnnotationContext ctx) {
-		switch e {
-			VirtualMachineError : throw e
-		}
-		//TODO create validation issue
-		logger.error("error while executing '"+ctx.processorInstance+"' : "+e.message, e)
-	}
-	
 	def inferencePhase(ActiveAnnotationContext ctx, CancelIndicator monitor) {
 		val task = Stopwatches::forTask('[macros] inferencePhase (AnnotationProcessor.inferencePhase)')
 		task.start
@@ -71,11 +58,8 @@ class AnnotationProcessor {
 					], modifyCtx)
 				}
 			}
-		} catch (Throwable e) {
-			handleException(e, ctx)  
 		} finally {
 			task.stop
-			//TODO check time and issue warning if processing is really slow.
 		}
 	}
 	
