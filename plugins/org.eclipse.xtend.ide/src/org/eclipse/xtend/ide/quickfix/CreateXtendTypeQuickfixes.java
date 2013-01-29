@@ -155,7 +155,7 @@ public class CreateXtendTypeQuickfixes extends CreateJavaTypeQuickfixes {
 	protected XtendTypeDeclaration getAnnotationTarget(EObject eObject) {
 		XtendTypeDeclaration containerType = EcoreUtil2.getContainerOfType(eObject, XtendTypeDeclaration.class);
 		if(containerType != null && containerType.eContainingFeature() == XtendPackage.Literals.XTEND_MEMBER__ANNOTATION_INFO)
-			return getAnnotationTarget(containerType);
+			return getAnnotationTarget(containerType.eContainer());
 		else 
 			return containerType;
 	}
