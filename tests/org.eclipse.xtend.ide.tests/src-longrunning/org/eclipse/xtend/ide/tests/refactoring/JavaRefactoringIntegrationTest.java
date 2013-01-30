@@ -741,6 +741,105 @@ public class JavaRefactoringIntegrationTest extends AbstractXtendUITestCase {
 	}
 
 	@Test
+	public void testRenameXtendInterface() throws Exception {
+		try {
+			String xtendModel = "interface XtendInterface { }";
+			IFile xtendClass = testHelper.createFile("XtendInterface.xtend", xtendModel);
+			IFile javaClass = testHelper.createFile("JavaClass.java", "public class JavaClass implements XtendInterface { }");
+			final XtextEditor editor = openEditorSafely(xtendClass);
+			renameXtendElement(editor, xtendModel.indexOf("XtendInterface"), "NewXtendInterface");
+			fileAsserts.assertFileExists("src/NewXtendInterface.xtend");
+			fileAsserts.assertFileContains(javaClass, "JavaClass implements NewXtendInterface");
+		} finally {
+			testHelper.getProject().getFile("src/NewXtendInterface.xtend").delete(true, new NullProgressMonitor());
+			waitForAutoBuild();
+		}
+	}
+
+	@Test
+	public void testRenameRefToXtendInterface() throws Exception {
+		try {
+			testHelper.createFile("XtendInterface.xtend", "interface XtendInterface {}");
+			String xtendModel = "class XtendRef { XtendInterface foo }";
+			IFile xtendRef = testHelper.createFile("XtendRef.xtend", xtendModel);
+			final XtextEditor editor = openEditorSafely(xtendRef);
+			renameXtendElement(editor, xtendModel.indexOf("XtendInterface"), "NewXtendInterface");
+			assertDocumentContains(editor, xtendModel.replace("XtendInterface", "NewXtendInterface"));
+			IFile newXtendInterface = fileAsserts.assertFileExists("src/NewXtendInterface.xtend");
+			fileAsserts.assertFileContains(newXtendInterface, "interface NewXtendInterface {}");
+		} finally {
+			testHelper.getProject().getFile("src/NewXtendInterface.xtend").delete(true, new NullProgressMonitor());
+			waitForAutoBuild();
+		}
+	}
+
+	@Test
+	public void testRenameXtendEnum() throws Exception {
+		try {
+			String xtendModel = "enum XtendEnum { FOO, BAR }";
+			IFile xtendClass = testHelper.createFile("XtendEnum.xtend", xtendModel);
+			IFile javaClass = testHelper.createFile("JavaClass.java", "public class JavaClass { XtendEnum e; }");
+			final XtextEditor editor = openEditorSafely(xtendClass);
+			renameXtendElement(editor, xtendModel.indexOf("XtendEnum"), "NewXtendEnum");
+			fileAsserts.assertFileExists("src/NewXtendEnum.xtend");
+			fileAsserts.assertFileContains(javaClass, "{ NewXtendEnum e; }");
+		} finally {
+			testHelper.getProject().getFile("src/NewXtendEnum.xtend").delete(true, new NullProgressMonitor());
+			waitForAutoBuild();
+		}
+	}
+
+	@Test
+	public void testRenameRefToXtendEnum() throws Exception {
+		try {
+			testHelper.createFile("XtendEnum.xtend", "enum XtendEnum { FOO, BAR }");
+			String xtendModel = "class XtendRef { XtendEnum foo }";
+			IFile xtendRef = testHelper.createFile("XtendRef.xtend", xtendModel);
+			final XtextEditor editor = openEditorSafely(xtendRef);
+			renameXtendElement(editor, xtendModel.indexOf("XtendEnum"), "NewXtendEnum");
+			assertDocumentContains(editor, xtendModel.replace("XtendEnum", "NewXtendEnum"));
+			IFile newXtendInterface = fileAsserts.assertFileExists("src/NewXtendEnum.xtend");
+			fileAsserts.assertFileContains(newXtendInterface, "enum NewXtendEnum { FOO, BAR }");
+		} finally {
+			testHelper.getProject().getFile("src/NewXtendEnum.xtend").delete(true, new NullProgressMonitor());
+			waitForAutoBuild();
+		}
+	}
+
+	@Test
+	public void testRenameXtendAnnotationType() throws Exception {
+		try {
+			String xtendModel = "annotation XtendAnnotation {}";
+			IFile xtendClass = testHelper.createFile("XtendAnnotation.xtend", xtendModel);
+			IFile javaClass = testHelper.createFile("JavaClass.java", "@XtendAnnotation public class JavaClass {}");
+			final XtextEditor editor = openEditorSafely(xtendClass);
+			renameXtendElement(editor, xtendModel.indexOf("XtendAnnotation"), "NewXtendAnnotation");
+			fileAsserts.assertFileExists("src/NewXtendAnnotation.xtend");
+			fileAsserts.assertFileContains(javaClass, "@NewXtendAnnotation public class JavaClass {}");
+		} finally {
+			testHelper.getProject().getFile("src/NewXtendAnnotation.xtend").delete(true, new NullProgressMonitor());
+			waitForAutoBuild();
+		}
+	}
+
+	@Test
+	public void testRenameRefToXtendAnnotation() throws Exception {
+		try {
+			testHelper.createFile("XtendAnnotation.xtend", "annotation XtendAnnotation {}");
+			String xtendModel = "@XtendAnnotation class XtendRef {}";
+			IFile xtendRef = testHelper.createFile("XtendRef.xtend", xtendModel);
+			final XtextEditor editor = openEditorSafely(xtendRef);
+			renameXtendElement(editor, xtendModel.indexOf("XtendAnnotation"), "NewXtendAnnotation");
+			assertDocumentContains(editor, xtendModel.replace("XtendAnnotation", "NewXtendAnnotation"));
+			IFile newXtendInterface = fileAsserts.assertFileExists("src/NewXtendAnnotation.xtend");
+			fileAsserts.assertFileContains(newXtendInterface, "annotation NewXtendAnnotation {}");
+		} finally {
+			testHelper.getProject().getFile("src/NewXtendAnnotation.xtend").delete(true, new NullProgressMonitor());
+			waitForAutoBuild();
+		}
+	}
+
+	@Test
 	public void testRenameXtendField() throws Exception {
 		String xtendModel = "class XtendClass { protected int foo }";
 		IFile xtendClass = testHelper.createFile("XtendClass.xtend", xtendModel);
@@ -750,6 +849,18 @@ public class JavaRefactoringIntegrationTest extends AbstractXtendUITestCase {
 		renameXtendElement(editor, xtendModel.indexOf("foo"), "baz");
 		assertDocumentContains(editor, xtendModel.replace("foo", "baz"));
 		fileAsserts.assertFileContains(javaClass, "int bar = baz");
+	}
+
+	@Test
+	public void testRenameXtendEnumLiteral() throws Exception {
+		String xtendModel = "enum XtendEnum { FOO }";
+		IFile xtendClass = testHelper.createFile("XtendEnum.xtend", xtendModel);
+		IFile javaClass = testHelper.createFile("JavaClass.java",
+				"public class JavaClass { XtendEnum bar = XtendEnum.FOO; }");
+		final XtextEditor editor = openEditorSafely(xtendClass);
+		renameXtendElement(editor, xtendModel.indexOf("FOO"), "BAZ");
+		assertDocumentContains(editor, xtendModel.replace("FOO", "BAZ"));
+		fileAsserts.assertFileContains(javaClass, "XtendEnum bar = XtendEnum.BAZ");
 	}
 
 	@Test
