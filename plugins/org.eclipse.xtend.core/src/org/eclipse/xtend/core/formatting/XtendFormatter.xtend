@@ -186,7 +186,7 @@ public class XtendFormatter extends XbaseFormatter2 {
 				val current = enumeration.members.get(i)
 				current.format(format)
 				if (i < enumeration.members.size - 1) {
-					format += current.nodeForEObject.immediatelyFollowingKeyword(",").surround([noSpace], [oneSpace])
+					format += current.nodeForEObject.immediatelyFollowingKeyword(",").surround([noSpace], [cfg(blankLinesBetweenEnumLiterals)])
 				} else {
 					val node = current.nodeForEObject
 					format += node.append[decreaseIndentation]

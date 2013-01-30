@@ -36,13 +36,14 @@ public class BlankLinesTab extends AbstractModifyDialogTab {
 		createNumberPref(cuGroup, col, "After import declaration:", blankLinesAfterImports);
 		createNumberPref(cuGroup, col, "Between class declarations:", blankLinesBetweenClasses);
 		
-		Group cdGr = createGroup(col, composite, "Blank lines within class declarations");
+		Group cdGr = createGroup(col, composite, "Blank lines within type declarations");
 			
 		createNumberPref(cdGr, col, "Before first declaration:", blankLinesBeforeFirstMember);
 		createNumberPref(cdGr, col, "After last member declaration:", blankLinesAfterLastMember);
 		createNumberPref(cdGr, col, "Between fields:", blankLinesBetweenFields);
 		createNumberPref(cdGr, col, "Between fields and methods:", blankLinesBetweenFieldsAndMethods);
 		createNumberPref(cdGr, col, "Between methods:", blankLinesBetweenMethods);
+		createNumberPref(cdGr, col, "Between enum literals:", blankLinesBetweenEnumLiterals);
 		
 		Group eblGroup = createGroup(col, composite, "Existing blank lines");
 		createNumberPref(eblGroup, col, "Number of empty lines to preserve:", preserveBlankLines);
