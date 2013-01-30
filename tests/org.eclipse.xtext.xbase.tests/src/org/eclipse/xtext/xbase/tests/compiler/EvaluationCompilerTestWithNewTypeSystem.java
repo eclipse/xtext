@@ -79,6 +79,18 @@ public class EvaluationCompilerTestWithNewTypeSystem extends EvaluationCompilerT
 		super.testCollectionExtensions_10();
 	}
 	
+	@Override
+	@Test
+	public void testMapValuesExtension() throws Exception {
+		super.testMapValuesExtension();
+	}
+	
+	@Override
+	@Test
+	public void testReduceWithPlusOperator() throws Exception {
+		super.testReduceWithPlusOperator();
+	}
+	
 	// TODO move to AbstractXbaseEvaluationTests
 	@Test public void testClosure_07_02() throws Exception {
 		assertEvaluatesWithException(NullPointerException.class, 
@@ -118,34 +130,6 @@ public class EvaluationCompilerTestWithNewTypeSystem extends EvaluationCompilerT
 	@Ignore("To be implemented later")
 	public void testImplicitOneArgClosure_01() throws Exception {
 		super.testImplicitOneArgClosure_01();
-	}
-	
-	@Override
-	@Test
-	@Ignore("To be implemented later")
-	public void testClosure_06_1() throws Exception {
-		super.testClosure_06_1();
-	}
-	
-	@Override
-	@Test
-	@Ignore("To be implemented later")
-	public void testClosure_10() throws Exception {
-		super.testClosure_10();
-	}
-	
-	@Override
-	@Test
-	@Ignore("To be implemented later")
-	public void testClosure_10_2() throws Exception {
-		super.testClosure_10_2();
-	}
-	
-	@Override
-	@Test
-	@Ignore("To be implemented later")
-	public void testStaticMethod_02() throws Exception {
-		super.testStaticMethod_02();
 	}
 	
 }

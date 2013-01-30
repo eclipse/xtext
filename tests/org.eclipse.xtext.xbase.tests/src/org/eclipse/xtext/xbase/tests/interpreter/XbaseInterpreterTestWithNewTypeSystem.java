@@ -78,6 +78,20 @@ public class XbaseInterpreterTestWithNewTypeSystem extends XbaseInterpreterTest 
 		super.testClosure_31();
 	}
 	
+	// re-enabled
+	@Override
+	@Test
+	public void testMapValuesExtension() throws Exception {
+		super.testMapValuesExtension();
+	}
+
+	// re-enabled
+	@Override
+	@Test
+	public void testReduceWithPlusOperator() throws Exception {
+		super.testReduceWithPlusOperator();
+	}
+	
 	@Override
 	@Test
 	@Ignore
@@ -85,31 +99,4 @@ public class XbaseInterpreterTestWithNewTypeSystem extends XbaseInterpreterTest 
 		super.testImplicitOneArgClosure_01();
 	}
 	
-	@Override
-	@Test
-	@Ignore
-	public void testClosure_06_1() throws Exception {
-		super.testClosure_06_1();
-	}
-	
-	@Override
-	@Test
-	@Ignore
-	public void testClosure_10() throws Exception {
-		super.testClosure_10();
-	}
-	
-	@Override
-	@Test
-	@Ignore
-	public void testClosure_10_2() throws Exception {
-		super.testClosure_10_2();
-	}
-	
-	@Override
-	@Test
-	@Ignore
-	public void testStaticMethod_02() throws Exception {
-		super.testStaticMethod_02();
-	}
 }

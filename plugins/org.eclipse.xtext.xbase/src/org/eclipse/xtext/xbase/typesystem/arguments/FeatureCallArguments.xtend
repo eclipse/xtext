@@ -11,6 +11,7 @@ import java.util.List
 import org.eclipse.jdt.annotation.NonNullByDefault
 import org.eclipse.xtext.xbase.XExpression
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference
+import org.eclipse.jdt.annotation.Nullable
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -54,6 +55,7 @@ interface IFeatureCallArgumentSlot {
 	/**
 	 * @throws IllegalStateException iff {@link #isSuperfluous}
 	 */
+	@Nullable
 	def LightweightTypeReference getDeclaredType()
 	
 	def void markProcessed()

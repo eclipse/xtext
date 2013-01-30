@@ -11,7 +11,7 @@ import java.util.Collections;
 import java.util.List;
 
 import org.eclipse.jdt.annotation.NonNullByDefault;
-import org.eclipse.xtext.common.types.JvmFormalParameter;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 
@@ -21,11 +21,11 @@ import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 @NonNullByDefault
 public class StandardFeatureCallArgumentSlot implements IFeatureCallArgumentSlot {
 
-	protected final StandardFeatureCallArguments arguments;
+	protected final StandardFeatureCallArguments parent;
 	protected final int idx;
 
-	protected StandardFeatureCallArgumentSlot(StandardFeatureCallArguments arguments, int idx) {
-		this.arguments = arguments;
+	protected StandardFeatureCallArgumentSlot(StandardFeatureCallArguments parent, int idx) {
+		this.parent = parent;
 		this.idx = idx;
 	}
 	
@@ -42,16 +42,16 @@ public class StandardFeatureCallArgumentSlot implements IFeatureCallArgumentSlot
 	}
 
 	public XExpression getArgumentExpression() {
-		return arguments.doGetArgument(idx);
+		return parent.internalGetArgument(idx);
 	}
 
+	@Nullable
 	public LightweightTypeReference getDeclaredType() {
-		JvmFormalParameter parameter = arguments.getParameters().get(idx);
-		return arguments.toLightweightTypeReference(parameter);
+		return parent.internalGetParameterType(idx);
 	}
 
 	public void markProcessed() {
-		arguments.markProcessed(idx);
+		parent.markProcessed(idx);
 	}
 
 }
