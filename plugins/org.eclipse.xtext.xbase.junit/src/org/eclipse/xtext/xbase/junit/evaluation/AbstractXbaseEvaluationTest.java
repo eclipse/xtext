@@ -2449,10 +2449,12 @@ public abstract class AbstractXbaseEvaluationTest extends Assert {
 	
 	@Ignore("Fails with old impl")
 	@Test public void testMapValuesExtension() throws Exception {
-		assertEvaluatesTo("D", 
+		assertEvaluatesTo("B", 
 				"{ val it = newLinkedHashMap(1->'b', 2->'d') " +
-				"org::junit::Assert::assertEquals('D', it.mapValues[ toUpperCase ].get(2)) " +
-				"return 'D'}");
+				"if ('D' != it.mapValues[ toUpperCase ].get(2)) {\n" +
+				"	throw new RuntimeException" +
+				"} " +
+				"return it.mapValues[ toUpperCase ].get(1)}");
 	}
 	
 	@Ignore("Fails with old impl") 
