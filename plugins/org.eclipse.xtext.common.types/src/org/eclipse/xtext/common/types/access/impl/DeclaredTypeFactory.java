@@ -73,6 +73,7 @@ import com.google.inject.Inject;
  * @noinstantiate This class is not intended to be instantiated by clients.
  * @author Sebastian Zarnekow - Initial contribution and API
  */
+@SuppressWarnings("restriction")
 public class DeclaredTypeFactory implements ITypeFactory<Class<?>> {
 
 	private final static Logger log = Logger.getLogger(DeclaredTypeFactory.class);
@@ -120,8 +121,7 @@ public class DeclaredTypeFactory implements ITypeFactory<Class<?>> {
 					result.getTypeParameters().add(createTypeParameter(variable, result));
 				}
 			} catch(GenericSignatureFormatError error) {
-				if (log.isDebugEnabled())
-					log.debug("Invalid class file for: " + result.getIdentifier(), error);
+				log.warn("Invalid class file for: " + result.getIdentifier(), error);
 			}
 			createAnnotationValues(clazz, result);
 			return result;
@@ -313,6 +313,7 @@ public class DeclaredTypeFactory implements ITypeFactory<Class<?>> {
 				result.getSuperTypes().add(createTypeReference(clazz.getGenericSuperclass()));
 			}
 		} catch(GenericSignatureFormatError error) {
+			log.warn("Invalid class file for: " + clazz.getCanonicalName(), error);
 			if (clazz.getSuperclass() != null) {
 				result.getSuperTypes().add(createTypeReference(clazz.getSuperclass()));
 			}
@@ -321,6 +322,7 @@ public class DeclaredTypeFactory implements ITypeFactory<Class<?>> {
 		try {
 			interfaces = clazz.getGenericInterfaces();
 		} catch(GenericSignatureFormatError error) {
+			log.warn("Invalid class file for: " + clazz.getCanonicalName(), error);
 			interfaces = clazz.getInterfaces();
 		}
 		for (Type type : interfaces) {
@@ -494,7 +496,14 @@ public class DeclaredTypeFactory implements ITypeFactory<Class<?>> {
 		result.setFinal(Modifier.isFinal(field.getModifiers()));
 		result.setStatic(Modifier.isStatic(field.getModifiers()));
 		setVisibility(result, field.getModifiers());
-		result.setType(createTypeReference(field.getGenericType()));
+		Type fieldType = null;
+		try {
+			fieldType = field.getGenericType();
+		} catch(GenericSignatureFormatError error) {
+			log.warn("Invalid class file for: " + field.getDeclaringClass().getCanonicalName(), error);
+			fieldType = field.getType();
+		}
+		result.setType(createTypeReference(fieldType));
 		createAnnotationValues(field, result);
 		return result;
 	}
@@ -512,6 +521,7 @@ public class DeclaredTypeFactory implements ITypeFactory<Class<?>> {
 		try {
 			genericParameterTypes = constructor.getGenericParameterTypes();
 		} catch(GenericSignatureFormatError error) {
+			log.warn("Invalid class file for: " + constructor.getDeclaringClass().getCanonicalName(), error);
 			genericParameterTypes = constructor.getParameterTypes();
 		}
 		if (offset != 0) {
@@ -540,8 +550,15 @@ public class DeclaredTypeFactory implements ITypeFactory<Class<?>> {
 		enhanceExecutable(result, constructor, constructor.getDeclaringClass().getSimpleName(),
 				genericParameterTypes, constructor.getParameterAnnotations(), offset);
 		result.setVarArgs(constructor.isVarArgs());
-		for (Type parameterType : constructor.getGenericExceptionTypes()) {
-			result.getExceptions().add(createTypeReference(parameterType));
+		Type[] exceptionTypes;
+		try {
+			exceptionTypes = constructor.getGenericExceptionTypes();
+		} catch(GenericSignatureFormatError error) {
+			log.warn("Invalid class file for: " + constructor.getDeclaringClass().getCanonicalName(), error);
+			exceptionTypes = constructor.getExceptionTypes();
+		}
+		for (Type exceptionType : exceptionTypes) {
+			result.getExceptions().add(createTypeReference(exceptionType));
 		}
 		createAnnotationValues(constructor, result);
 		return result;
@@ -592,6 +609,7 @@ public class DeclaredTypeFactory implements ITypeFactory<Class<?>> {
 		try {
 			genericParameterTypes = method.getGenericParameterTypes();
 		} catch(GenericSignatureFormatError error) {
+			log.warn("Invalid class file for: " + method.getDeclaringClass().getCanonicalName(), error);
 			genericParameterTypes = method.getParameterTypes();
 		}
 		enhanceGenericDeclaration(result, method);
@@ -604,11 +622,19 @@ public class DeclaredTypeFactory implements ITypeFactory<Class<?>> {
 		try {
 			returnType = method.getGenericReturnType();
 		} catch(GenericSignatureFormatError error) {
+			log.warn("Invalid class file for: " + method.getDeclaringClass().getCanonicalName(), error);
 			returnType = method.getReturnType();
 		}
 		result.setReturnType(createTypeReference(returnType));
-		for (Type parameterType : method.getGenericExceptionTypes()) {
-			result.getExceptions().add(createTypeReference(parameterType));
+		Type[] exceptionTypes;
+		try {
+			exceptionTypes = method.getGenericExceptionTypes();
+		} catch(GenericSignatureFormatError error) {
+			log.warn("Invalid class file for: " + method.getDeclaringClass().getCanonicalName(), error);
+			exceptionTypes = method.getExceptionTypes();
+		}
+		for (Type exceptionType : exceptionTypes) {
+			result.getExceptions().add(createTypeReference(exceptionType));
 		}
 		createAnnotationValues(method, result);
 		return result;
