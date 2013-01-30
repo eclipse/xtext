@@ -1,7 +1,5 @@
 package org.eclipse.xtext.xbase.formatting
 
-import org.eclipse.xtext.preferences.PreferenceKey
-
 class BasicFormatterPreferenceKeys {
 	public static val lineSeparator = new StringKey("line.separator", "\n")
 	public static val indentation = new StringKey("indentation", "\t")
