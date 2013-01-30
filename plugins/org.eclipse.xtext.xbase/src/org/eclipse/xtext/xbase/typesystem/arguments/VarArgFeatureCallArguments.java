@@ -39,5 +39,5 @@ public class VarArgFeatureCallArguments extends StandardFeatureCallArguments {
 		}
 		return new VarArgsFeatureCallArgumentSlot(this, nextUnprocessedArgument);
 	}
-
+	
 }
