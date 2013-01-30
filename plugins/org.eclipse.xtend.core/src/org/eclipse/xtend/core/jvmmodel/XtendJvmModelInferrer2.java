@@ -743,6 +743,7 @@ public class XtendJvmModelInferrer2 implements IJvmModelInferrer {
 	
 	protected void transform(XtendEnumLiteral literal, JvmDeclaredType container) {
 		JvmEnumerationLiteral jvmLiteral = typesFactory.createJvmEnumerationLiteral();
+		associator.associatePrimary(literal, jvmLiteral);
 		jvmLiteral.setSimpleName(literal.getName());
 		jvmLiteral.setVisibility(JvmVisibility.PUBLIC);
 		jvmLiteral.setStatic(true);
