@@ -119,11 +119,12 @@ public abstract class AbstractOutlineTests extends AbstractXtendUITestCase {
 		interfaze.child(1, "foo() : String").numChildren(0);
 	}
 
+	// enum literals are displayed without their type since that one is implicit
 	@Test public void testEnum() throws Exception {
 		AssertBuilder assertBuilder = newAssertBuilder("enum Foo { BAR, BAZ }");
 		AssertBuilder interfaze = assertBuilder.numChildren(1).child(0, "Foo").numChildren(2);
-		interfaze.child(0, "BAR : Foo").numChildren(0);
-		interfaze.child(1, "BAZ : Foo").numChildren(0);
+		interfaze.child(0, "BAR").numChildren(0);
+		interfaze.child(1, "BAZ").numChildren(0);
 	}
 
 	@Test public void testAnnotationType() throws Exception {
