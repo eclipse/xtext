@@ -13,10 +13,15 @@ import com.google.inject.Singleton
 import java.util.List
 import org.eclipse.emf.common.util.URI
 import org.eclipse.emf.ecore.InternalEObject
+import org.eclipse.emf.ecore.resource.Resource
 import org.eclipse.xtext.common.types.JvmIdentifiableElement
 import org.eclipse.xtext.common.types.JvmTypeReference
 import org.eclipse.xtext.junit4.InjectWith
 import org.eclipse.xtext.junit4.XtextRunner
+import org.eclipse.xtext.junit4.internal.StopwatchRule
+import org.eclipse.xtext.junit4.internal.Timed
+import org.eclipse.xtext.linking.impl.XtextLinkingDiagnostic
+import org.eclipse.xtext.resource.XtextSyntaxDiagnostic
 import org.eclipse.xtext.xbase.XAbstractFeatureCall
 import org.eclipse.xtext.xbase.XCasePart
 import org.eclipse.xtext.xbase.XConstructorCall
@@ -41,9 +46,6 @@ import org.junit.Rule
 import org.junit.Test
 import org.junit.rules.Timeout
 import org.junit.runner.RunWith
-import org.eclipse.xtext.resource.XtextSyntaxDiagnostic
-import org.eclipse.xtext.linking.impl.XtextLinkingDiagnostic
-import org.eclipse.emf.ecore.resource.Resource
 
 /**
  * @author Sebastian Zarnekow
@@ -1223,7 +1225,8 @@ class ShuffledTypeResolverTest extends AbstractBatchTypeResolverTest {
 /**
  * @author Sebastian Zarnekow
  */
-abstract class TypeResolverPerformanceTest extends BatchTypeResolverTest {
+@Ignore
+class TypeResolverPerformanceTest extends BatchTypeResolverTest {
 	
 	@Rule
 	public val timeout = new Timeout(100) // TODO improve - aim at something like 100
@@ -1263,7 +1266,57 @@ class InvariantCheckingBatchTypeResolver extends DefaultBatchTypeResolver {
 	override protected createResolver() {
 		resolverProvider.get
 	}
-			
+
+}
+
+/**
+ * @author Sebastian Zarnekow
+ */
+@Ignore
+class TimedBatchTypeResolverTest extends AbstractBatchTypeResolverTest {
+	
+	@Rule
+	public static val rule = new StopwatchRule(false)
+	
+	@Inject
+	TimedBatchTypeResolver typeResolver;
+	
+	override getTypeResolver() {
+		typeResolver
+	}
+	
+	@Test
+	@Timed
+	override testFeatureCall_15_n() throws Exception {
+		super.testFeatureCall_15_n()
+	}
+	
+	@Test
+	@Timed
+	override testFeatureCall_15_n_1() throws Exception {
+		super.testFeatureCall_15_n_1()
+	}
+	
+	@Test
+	@Timed
+	override testFeatureCall_15_n_2() throws Exception {
+		super.testFeatureCall_15_n_2()
+	}
+	
+}
+
+/**
+ * @author Sebastian Zarnekow
+ */
+class TimedBatchTypeResolver extends DefaultBatchTypeResolver {
+
+	@Inject
+	Provider<TimedReentrantTypeResolver> resolverProvider
+
+	override protected createResolver() {
+		resolverProvider.get
+	}
+
 }
 
 /**
