@@ -37,6 +37,9 @@ public class ArrayTypeReference extends LightweightTypeReference {
 //		if (!(component.getType() instanceof JvmComponentType)) {
 //			throw new IllegalArgumentException("Cannot create array reference from non-component type " + component.getIdentifier());
 //		}
+		if (component.isAny()) {
+			throw new IllegalArgumentException("component is invalid");
+		}
 		if (!component.isOwnedBy(owner)) {
 			throw new IllegalArgumentException("component is not valid in current context");
 		}

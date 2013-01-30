@@ -41,12 +41,14 @@ import org.eclipse.xtext.xbase.typesystem.computation.ITypeComputationState;
 import org.eclipse.xtext.xbase.typesystem.computation.ITypeComputer;
 import org.eclipse.xtext.xbase.typesystem.computation.ITypeExpectation;
 import org.eclipse.xtext.xbase.typesystem.conformance.ConformanceHint;
+import org.eclipse.xtext.xbase.typesystem.references.AnyTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.ITypeReferenceOwner;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.OwnedConverter;
 import org.eclipse.xtext.xbase.typesystem.references.ParameterizedTypeReference;
 import org.eclipse.xtext.xbase.validation.IssueCodes;
 
+import com.google.common.base.Strings;
 import com.google.common.collect.Lists;
 
 /**
@@ -109,6 +111,9 @@ public abstract class AbstractTypeComputationState implements ITypeComputationSt
 		ExpressionTypeComputationState state = createExpressionComputationState(expression, stackedResolvedTypes);
 		getResolver().getTypeComputer().computeTypes(expression, state);
 		stackedResolvedTypes.prepareMergeIntoParent();
+		if (stackedResolvedTypes.doGetTypeData(expression) == null) {
+			state.acceptActualType(new AnyTypeReference(stackedResolvedTypes.getReferenceOwner()));
+		}
 		return stackedResolvedTypes;
 	}
 	
@@ -165,7 +170,10 @@ public abstract class AbstractTypeComputationState implements ITypeComputationSt
 	}
 	
 	public void addLocalToCurrentScope(JvmIdentifiableElement element) {
-		QualifiedName elementName = QualifiedName.create(element.getSimpleName());
+		String simpleName = element.getSimpleName();
+		if (Strings.isNullOrEmpty(simpleName))
+			return;
+		QualifiedName elementName = QualifiedName.create(simpleName);
 		addLocalToCurrentScope(elementName, element, !getResolver().isShadowingAllowed(elementName));
 	}
 	
@@ -265,7 +273,7 @@ public abstract class AbstractTypeComputationState implements ITypeComputationSt
 		}
 		EObject proxyOrResolved = (EObject) featureCall.eGet(XbasePackage.Literals.XABSTRACT_FEATURE_CALL__FEATURE, false);
 		if (proxyOrResolved == null) {
-			result = new NullFeatureLinkingCandidate(featureCall);
+			result = new NullFeatureLinkingCandidate(featureCall, this);
 			return Collections.singletonList(result);
 		}
 		if (!proxyOrResolved.eIsProxy()) {
@@ -298,7 +306,7 @@ public abstract class AbstractTypeComputationState implements ITypeComputationSt
 			resultList.add(createCandidate(featureCall, demandComputedTypes, toIdentifiableDescription(description)));
 		}
 		if (resultList.isEmpty()) {
-			throw new IllegalStateException("Linking candidates may not be empty");
+			resultList.add(new NullFeatureLinkingCandidate(featureCall, this));
 		}
 		return resultList;
 	}
@@ -379,7 +387,7 @@ public abstract class AbstractTypeComputationState implements ITypeComputationSt
 		}
 		EObject proxyOrResolved = (EObject) constructorCall.eGet(XbasePackage.Literals.XCONSTRUCTOR_CALL__CONSTRUCTOR, false);
 		if (proxyOrResolved == null) {
-			result = new NullConstructorLinkingCandidate(constructorCall);
+			result = new NullConstructorLinkingCandidate(constructorCall, this);
 			return Collections.singletonList(result);
 		}
 		if (!proxyOrResolved.eIsProxy()) {
@@ -393,7 +401,7 @@ public abstract class AbstractTypeComputationState implements ITypeComputationSt
 			resultList.add(createCandidate(constructorCall, toIdentifiableDescription(description)));
 		}
 		if (resultList.isEmpty()) {
-			throw new IllegalStateException("Linking candidates may not be empty");
+			resultList.add(new NullConstructorLinkingCandidate(constructorCall, this));
 		}
 		return resultList;
 	}

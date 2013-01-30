@@ -11,6 +11,8 @@ import java.util.List;
 
 import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.xtext.xbase.typesystem.conformance.TypeConformanceComputationArgument.Internal;
+import org.eclipse.xtext.xbase.typesystem.references.AnyTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.CompoundTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightBoundTypeArgument;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightMergedBoundTypeArgument;
@@ -38,6 +40,12 @@ class UnboundConformanceStrategy extends TypeConformanceStrategy<UnboundTypeRefe
 		if (result != null)
 			return result;
 		return TypeConformanceResult.create(param, ConformanceHint.INCOMPATIBLE);
+	}
+	
+	@Override
+	protected TypeConformanceResult doVisitAnyTypeReference(UnboundTypeReference left, AnyTypeReference right,
+			Internal<UnboundTypeReference> param) {
+		return TypeConformanceResult.create(param, ConformanceHint.SUCCESS);
 	}
 
 	@Nullable

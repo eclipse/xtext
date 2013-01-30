@@ -128,9 +128,12 @@ public class StackedResolvedTypes extends ResolvedTypes {
 
 	protected void mergeTypeParametersIntoParent(ResolvedTypes parent) {
 		for(UnboundTypeReference unbound: basicGetTypeParameters().values()) {
-			LightweightTypeReference reference = unbound.copyInto(parent.getReferenceOwner());
-			if (reference instanceof UnboundTypeReference) {
-				parent.acceptUnboundTypeReference(unbound.getHandle(), (UnboundTypeReference) reference);
+			LightweightTypeReference resolvedTo = unbound.getResolvedTo();
+			if (resolvedTo == null) {
+				LightweightTypeReference reference = unbound.copyInto(parent.getReferenceOwner());
+				if (reference instanceof UnboundTypeReference) {
+					parent.acceptUnboundTypeReference(unbound.getHandle(), (UnboundTypeReference) reference);
+				}
 			}
 		}
 		ListMultimap<Object, LightweightBoundTypeArgument> typeParameterHints = basicGetTypeParameterHints();

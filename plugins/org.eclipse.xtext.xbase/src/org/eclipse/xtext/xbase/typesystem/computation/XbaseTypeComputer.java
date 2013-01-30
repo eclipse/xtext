@@ -292,9 +292,7 @@ public class XbaseTypeComputer implements ITypeComputer {
 		if (lightweightTypeReference != null && object.getRight() instanceof XClosure) {
 			ITypeComputationState initializerState = state.assignType(object, lightweightTypeReference).withExpectation(lightweightTypeReference);
 			initializerState.computeTypes(object.getRight());
-			LightweightTypeReference primitiveVoid = getPrimitiveVoid(state);
-			state.acceptActualType(primitiveVoid);
-		}else {
+		} else {
 			ITypeComputationState initializerState = lightweightTypeReference != null ? state.withExpectation(lightweightTypeReference) : state.withNonVoidExpectation();
 			ITypeComputationResult computedType = initializerState.computeTypes(object.getRight());
 			/* 
@@ -304,9 +302,9 @@ public class XbaseTypeComputer implements ITypeComputer {
 			 * o.substring(1)
 			 */
 			state.assignType(object, lightweightTypeReference != null ? lightweightTypeReference : computedType.getActualExpressionType(), false);
-			LightweightTypeReference primitiveVoid = getPrimitiveVoid(state);
-			state.acceptActualType(primitiveVoid);
 		}
+		LightweightTypeReference primitiveVoid = getPrimitiveVoid(state);
+		state.acceptActualType(primitiveVoid);
 	}
 
 	protected void _computeTypes(final XConstructorCall constructorCall, ITypeComputationState state) {
@@ -392,12 +390,18 @@ public class XbaseTypeComputer implements ITypeComputer {
 		 * }
 		 */
 		state.withNonVoidExpectation().computeTypes(object.getTarget());
-		state.acceptActualType(state.getConverter().toLightweightReference(object.getType()));
+		JvmTypeReference type = object.getType();
+		if (type != null)
+			state.acceptActualType(state.getConverter().toLightweightReference(type));
 	}
 
 	protected void _computeTypes(final XForLoopExpression object, final ITypeComputationState state) {
-		LightweightTypeReference parameterType = computeForLoopParameterType(object, state);
-		ITypeComputationState eachState = state.withoutExpectation().assignType(object.getDeclaredParam(), parameterType);
+		JvmFormalParameter declaredParam = object.getDeclaredParam();
+		ITypeComputationState eachState = state.withoutExpectation();
+		if (declaredParam != null) {
+			LightweightTypeReference parameterType = computeForLoopParameterType(object, state);
+			eachState = eachState.assignType(declaredParam, parameterType);
+		}
 		eachState.computeTypes(object.getEachExpression());
 		
 		LightweightTypeReference primitiveVoid = getPrimitiveVoid(state);
@@ -530,6 +534,10 @@ public class XbaseTypeComputer implements ITypeComputer {
 	}
 
 	protected void _computeTypes(XTypeLiteral object, ITypeComputationState state) {
+		JvmType type = object.getType();
+		if (type == null) {
+			return;
+		}
 		LightweightTypeReference clazz = new ParameterizedTypeReference(state.getReferenceOwner(), object.getType());
 		for (int i = 0; i < object.getArrayDimensions().size(); i++) {
 			clazz = new ArrayTypeReference(clazz.getOwner(), clazz);
@@ -572,7 +580,10 @@ public class XbaseTypeComputer implements ITypeComputer {
 		state.computeTypes(object.getExpression());
 		for (XCatchClause catchClause : object.getCatchClauses()) {
 			JvmFormalParameter catchClauseParam = catchClause.getDeclaredParam();
-			LightweightTypeReference lightweightReference = state.getConverter().toLightweightReference(catchClauseParam.getParameterType());
+			JvmTypeReference parameterType = catchClauseParam.getParameterType();
+			LightweightTypeReference lightweightReference = parameterType != null 
+					? state.getConverter().toLightweightReference(parameterType)
+					: new AnyTypeReference(state.getReferenceOwner());
 			ITypeComputationState catchClauseState = state.assignType(catchClauseParam, lightweightReference);
 			catchClauseState.computeTypes(catchClause.getExpression());
 		}

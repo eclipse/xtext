@@ -38,9 +38,14 @@ abstract class AbstractTypeResolverTest<Reference> extends AbstractXbaseTestCase
 	override protected expression(CharSequence expression, boolean resolve) throws Exception {
 		val string = expression.toString
 		if (!seenExpressions.add(string)) {
-			fail("Duplicate expression under test: " + expression)
+			handleDuplicateExpression(expression)
+			return null
 		}
 		super.expression(expression, resolve)
+	}
+	
+	def protected handleDuplicateExpression(CharSequence expression) {
+		fail("Duplicate expression under test: " + expression)
 	}
 	
 	@Test def void testRawType_01() throws Exception {

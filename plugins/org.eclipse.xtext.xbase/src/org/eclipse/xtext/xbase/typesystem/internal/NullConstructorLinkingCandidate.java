@@ -10,6 +10,7 @@ package org.eclipse.xtext.xbase.typesystem.internal;
 import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.xtext.common.types.JvmConstructor;
 import org.eclipse.xtext.xbase.XConstructorCall;
+import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.typesystem.computation.IConstructorLinkingCandidate;
 import org.eclipse.xtext.xbase.typesystem.computation.ILinkingCandidate;
 
@@ -19,8 +20,11 @@ import org.eclipse.xtext.xbase.typesystem.computation.ILinkingCandidate;
 @NonNullByDefault
 public class NullConstructorLinkingCandidate extends AbstractNullLinkingCandidate implements IConstructorLinkingCandidate {
 
-	public NullConstructorLinkingCandidate(XConstructorCall constructorCall) {
+	private AbstractTypeComputationState state;
+
+	public NullConstructorLinkingCandidate(XConstructorCall constructorCall, AbstractTypeComputationState state) {
 		super(constructorCall);
+		this.state = state;
 	}
 	
 	public ILinkingCandidate getPreferredCandidate(ILinkingCandidate other) {
@@ -33,6 +37,12 @@ public class NullConstructorLinkingCandidate extends AbstractNullLinkingCandidat
 
 	public JvmConstructor getConstructor() {
 		throw new UnsupportedOperationException();
+	}
+	
+	public void apply() {
+		for(XExpression argument: getConstructorCall().getArguments()) {
+			state.withNonVoidExpectation().computeTypes(argument);
+		}
 	}
 
 }
