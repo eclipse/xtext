@@ -39,7 +39,7 @@ class StringLiteralTest extends AbstractXbaseTestCase {
 		val resolvedTypes = typeResolver.resolveTypes(featureCalls.head)
 		featureCalls.forEach [ featureCall, index |
 			val type = resolvedTypes.getActualType(featureCall)
-			assertEquals('''failed for feature call at «index»''', types.get(index), type.simpleName); 
+			assertEquals('''failed for literal at «index»''', types.get(index), type.simpleName); 
 		]
 	}
 	
@@ -116,5 +116,10 @@ class StringLiteralTest extends AbstractXbaseTestCase {
 	}
 	@Test def void testAmbiguousExpectation_03() throws Exception {
 		"String::valueOf('11')".resolvesStringLiteralsTo("String")
+	}
+	@Test def void testCastToChar_01() throws Exception {
+		// TODO should casts impose a weaker type expectation in order
+		// to influence target typing?
+		"'a' as Character".resolvesStringLiteralsTo("String")
 	}
 }

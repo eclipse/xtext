@@ -37,7 +37,7 @@ public interface IResolvedExecutable {
 	/**
 	 * Returns the resolved signature of this operation. The resolved representation of
 	 * <code>List&lt;String&gt;.addAll(int, Collection&lt;E&gt)</code> is
-	 * <code>add(int,java.util.Collection&lt;String&gt;)</code>.
+	 * <code>addAll(int,java.util.Collection&lt;String&gt;)</code>.
 	 * 
 	 * @return the resolved signature.
 	 */
@@ -46,7 +46,7 @@ public interface IResolvedExecutable {
 	/**
 	 * Returns the simple signature of this operation. The simple signature of
 	 * <code>List&lt;String&gt;.addAll(int, Collection&lt;E&gt)</code> is
-	 * <code>add(int, Collection&lt;String&gt;)</code>.
+	 * <code>addAll(int, Collection&lt;String&gt;)</code>.
 	 * 
 	 * @return the simple, human readable signature.
 	 */
@@ -54,7 +54,8 @@ public interface IResolvedExecutable {
 
 	/**
 	 * Returns the resolved erased signature of this operation. The resolved representation of
-	 * <code>List&lt;String&gt;.addAll(int,java.util.Collection&lt;E&gt)</code> is <code>add(int,Collection)</code>.
+	 * <code>List&lt;String&gt;.addAll(int,java.util.Collection&lt;E&gt)</code> is 
+	 * <code>addAll(int,Collection)</code>.
 	 * 
 	 * @return the erased signature.
 	 */

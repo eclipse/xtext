@@ -349,7 +349,7 @@ public class XbaseTypeComputer implements ITypeComputer {
 				if (expectedType != null) {
 					if (expectedType.isType(Character.TYPE) || expectedType.isType(Character.class)) {
 						LightweightTypeReference charType = getTypeForName(Character.TYPE, state);
-						expectation.acceptActualType(charType, ConformanceHint.UNCHECKED, ConformanceHint.DEMAND_CONVERSION);
+						expectation.acceptActualType(charType, ConformanceHint.CHECKED, ConformanceHint.SUCCESS, ConformanceHint.DEMAND_CONVERSION);
 					} else {
 						LightweightTypeReference type = getTypeForName(String.class, state);
 						expectation.acceptActualType(type, ConformanceHint.UNCHECKED);
