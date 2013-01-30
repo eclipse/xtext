@@ -9,6 +9,7 @@ package org.eclipse.xtext.xbase.typesystem.arguments;
 
 import java.util.List;
 import org.eclipse.jdt.annotation.NonNullByDefault;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 
@@ -34,6 +35,7 @@ public interface IFeatureCallArgumentSlot {
   /**
    * @throws IllegalStateException iff {@link #isSuperfluous}
    */
+  @Nullable
   public abstract LightweightTypeReference getDeclaredType();
   
   public abstract void markProcessed();

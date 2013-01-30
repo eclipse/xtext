@@ -11,6 +11,7 @@ import java.util.List;
 import java.util.NoSuchElementException;
 
 import org.eclipse.jdt.annotation.NonNullByDefault;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.common.types.JvmExecutable;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmTypeReference;
@@ -56,15 +57,21 @@ public class StandardFeatureCallArguments implements IFeatureCallArguments {
 	}
 
 	public XExpression getArgument(int idx) {
-		return doGetArgument(idx - receiverFixup);
+		return internalGetArgument(idx - receiverFixup);
 	}
 	
-	protected XExpression doGetArgument(int idx) {
-		return arguments.get(idx);
-	}
-
 	public int getArgumentCount() {
 		return arguments.size() + receiverFixup;
+	}
+	
+	protected XExpression internalGetArgument(int idx) {
+		return arguments.get(idx);
+	}
+	
+	@Nullable
+	protected LightweightTypeReference internalGetParameterType(int idx) {
+		JvmFormalParameter parameter = parameters.get(idx);
+		return toLightweightTypeReference(parameter);
 	}
 
 	/**
@@ -80,17 +87,13 @@ public class StandardFeatureCallArguments implements IFeatureCallArguments {
 	protected void markProcessed(int argumentIndex) {
 		this.nextUnprocessedArgument = Math.max(argumentIndex + 1, nextUnprocessedArgument);
 	}
-
-	protected List<JvmFormalParameter> getParameters() {
-		return parameters;
-	}
 	
-	protected List<XExpression> getArguments() {
-		return arguments;
-	}
-	
+	@Nullable
 	protected LightweightTypeReference toLightweightTypeReference(JvmFormalParameter parameter) {
 		JvmTypeReference parameterType = parameter.getParameterType();
+		if (parameterType == null) {
+			return null;
+		}
 		LightweightTypeReference result = converter.toLightweightReference(parameterType);
 		return result;
 	}

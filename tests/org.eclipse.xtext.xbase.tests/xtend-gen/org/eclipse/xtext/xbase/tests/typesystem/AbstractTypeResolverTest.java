@@ -1139,13 +1139,11 @@ public abstract class AbstractTypeResolverTest<Reference extends Object> extends
     this.resolvesTo("newTreeSet([a, b|0], \'a\', \'b\')", "TreeSet<String>");
   }
   
-  @Ignore(value = "TODO deferred closure body typing")
   @Test
   public void testNewTreeSet_04() throws Exception {
     this.resolvesTo("newTreeSet([a, b|a.length.compareTo(b.length)], \'a\', \'b\')", "TreeSet<String>");
   }
   
-  @Ignore(value = "TODO deferred closure body typing")
   @Test
   public void testNewTreeSet_05() throws Exception {
     this.resolvesTo("newTreeSet([a, b|a.toString.compareTo(b.toString)], \'a\', \'b\')", "TreeSet<String>");

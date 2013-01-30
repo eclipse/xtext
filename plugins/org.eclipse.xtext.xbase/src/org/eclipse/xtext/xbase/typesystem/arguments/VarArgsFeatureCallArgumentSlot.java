@@ -10,7 +10,9 @@ package org.eclipse.xtext.xbase.typesystem.arguments;
 import java.util.List;
 
 import org.eclipse.jdt.annotation.NonNullByDefault;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.xbase.XExpression;
+import org.eclipse.xtext.xbase.typesystem.references.ArrayTypeReference;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -18,8 +20,8 @@ import org.eclipse.xtext.xbase.XExpression;
 @NonNullByDefault
 public class VarArgsFeatureCallArgumentSlot extends StandardFeatureCallArgumentSlot {
 
-	protected VarArgsFeatureCallArgumentSlot(StandardFeatureCallArguments arguments, int idx) {
-		super(arguments, idx);
+	protected VarArgsFeatureCallArgumentSlot(StandardFeatureCallArguments parent, int idx) {
+		super(parent, idx);
 	}
 	
 	@Override
@@ -34,12 +36,21 @@ public class VarArgsFeatureCallArgumentSlot extends StandardFeatureCallArgumentS
 
 	@Override
 	public List<XExpression> getArgumentExpressions() {
-		return arguments.arguments.subList(idx, arguments.arguments.size());
+		return parent.arguments.subList(idx, parent.arguments.size());
 	}
 	
 	@Override
 	public void markProcessed() {
-		arguments.markProcessed(arguments.arguments.size() - 1);
+		parent.markProcessed(parent.arguments.size() - 1);
+	}
+	
+	/*
+	 * Overridden to specialize the return type.
+	 */
+	@Override
+	@Nullable
+	public ArrayTypeReference getDeclaredType() {
+		return (ArrayTypeReference) super.getDeclaredType();
 	}
 	
 }

@@ -1037,12 +1037,10 @@ abstract class AbstractTypeResolverTest<Reference> extends AbstractXbaseTestCase
         "newTreeSet([a, b|0], 'a', 'b')".resolvesTo("TreeSet<String>") /* character? */
     }
     
-    @Ignore("TODO deferred closure body typing")
     @Test def void testNewTreeSet_04() throws Exception {
         "newTreeSet([a, b|a.length.compareTo(b.length)], 'a', 'b')".resolvesTo("TreeSet<String>")
     }
     
-    @Ignore("TODO deferred closure body typing")
     @Test def void testNewTreeSet_05() throws Exception {
         "newTreeSet([a, b|a.toString.compareTo(b.toString)], 'a', 'b')".resolvesTo("TreeSet<String>")
     }
