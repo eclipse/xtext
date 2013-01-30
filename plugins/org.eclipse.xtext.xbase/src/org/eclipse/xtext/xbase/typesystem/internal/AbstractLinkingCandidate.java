@@ -143,8 +143,13 @@ public abstract class AbstractLinkingCandidate<Expression extends XExpression> i
 				JvmTypeParameter declaredTypeParameter = declaredTypeParameters.get(i);
 				LightweightTypeReference explicitTypeArgument = explicitTypeArguments.get(i);
 				UnboundTypeReference typeReference = state.getResolvedTypes().createUnboundTypeReference(expression, declaredTypeParameter);
-				// TODO create error if explicit type argument is wildcard
-				typeReference.acceptHint(explicitTypeArgument.getInvariantBoundSubstitute(), BoundTypeArgumentSource.EXPLICIT, expression, VarianceInfo.INVARIANT, VarianceInfo.INVARIANT);
+				// TODO create error if explicit type argument is wildcard or primitive or does not match the constraints
+				if (explicitTypeArgument != null && !explicitTypeArgument.isAny() && !explicitTypeArgument.isPrimitiveVoid()) {
+					LightweightTypeReference substitute = explicitTypeArgument.getInvariantBoundSubstitute();
+					if (!substitute.isAny()) {
+						typeReference.acceptHint(substitute, BoundTypeArgumentSource.EXPLICIT, expression, VarianceInfo.INVARIANT, VarianceInfo.INVARIANT);
+					}
+				}
 				typeParameterMapping.put(declaredTypeParameter, new LightweightMergedBoundTypeArgument(typeReference, VarianceInfo.INVARIANT));
 			}
 			for(int i = size; i < declaredTypeParameters.size(); i++) {
@@ -272,6 +277,9 @@ public abstract class AbstractLinkingCandidate<Expression extends XExpression> i
 			computeFixedArityArgumentType(slot, substitutor);
 		} else if (slot.isVarArg()) {
 			ArrayTypeReference lastParameterType = (ArrayTypeReference) slot.getDeclaredType();
+			if (lastParameterType == null) {
+				throw new IllegalStateException();
+			}
 			LightweightTypeReference componentType = lastParameterType.getComponentType();
 			ITypeComputationState argumentState = null;
 			LightweightTypeReference substitutedComponentType = substitutor.substitute(componentType);
@@ -310,6 +318,9 @@ public abstract class AbstractLinkingCandidate<Expression extends XExpression> i
 
 	protected void computeFixedArityArgumentType(IFeatureCallArgumentSlot slot, TypeParameterSubstitutor<?> substitutor) {
 		LightweightTypeReference parameterType = slot.getDeclaredType();
+		if (parameterType == null) {
+			throw new IllegalStateException();
+		}
 		LightweightTypeReference substitutedParameterType = substitutor.substitute(parameterType);
 		XExpression argument = slot.getArgumentExpression();
 		AbstractTypeComputationState argumentState = createLinkingTypeComputationState(substitutedParameterType);

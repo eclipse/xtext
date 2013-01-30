@@ -56,6 +56,9 @@ public class FunctionTypeConformanceStrategy extends
 		}
 		LightweightTypeReference leftReturnType = left.getReturnType();
 		LightweightTypeReference rightReturnType = right.getReturnType();
+		if (leftReturnType!=rightReturnType && (leftReturnType == null || rightReturnType == null)) {
+			return TypeConformanceResult.create(param, ConformanceHint.INCOMPATIBLE);
+		}
 		boolean leftIsVoid = leftReturnType != null && leftReturnType.isPrimitiveVoid();
 		boolean rightIsVoid = rightReturnType != null && rightReturnType.isPrimitiveVoid();
 		if (leftIsVoid) {
@@ -78,7 +81,12 @@ public class FunctionTypeConformanceStrategy extends
 			return TypeConformanceResult.create(param, ConformanceHint.INCOMPATIBLE);
 		}
 		for(int i = 0; i < leftParameterTypes.size(); i++) {
-			if (!conformanceComputer.isConformant(rightParameterTypes.get(i), leftParameterTypes.get(i), argument).isConformant()) {
+			LightweightTypeReference rightParameterType = rightParameterTypes.get(i);
+			LightweightTypeReference leftParameterType = leftParameterTypes.get(i);
+			if (leftParameterType!=rightParameterType && (leftParameterType == null || rightParameterType == null)) {
+				return TypeConformanceResult.create(param, ConformanceHint.INCOMPATIBLE);
+			}
+			if (!conformanceComputer.isConformant(rightParameterType, leftParameterType, argument).isConformant()) {
 				return TypeConformanceResult.create(param, ConformanceHint.INCOMPATIBLE);
 			} 
 		}

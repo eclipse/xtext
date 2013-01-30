@@ -9,6 +9,7 @@ package org.eclipse.xtext.xbase.typesystem.internal;
 
 import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
+import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.typesystem.computation.IFeatureLinkingCandidate;
 import org.eclipse.xtext.xbase.typesystem.computation.ILinkingCandidate;
 
@@ -18,8 +19,11 @@ import org.eclipse.xtext.xbase.typesystem.computation.ILinkingCandidate;
 @NonNullByDefault
 public class NullFeatureLinkingCandidate extends AbstractNullLinkingCandidate implements IFeatureLinkingCandidate {
 
-	public NullFeatureLinkingCandidate(XAbstractFeatureCall featureCall) {
+	private AbstractTypeComputationState state;
+
+	public NullFeatureLinkingCandidate(XAbstractFeatureCall featureCall, AbstractTypeComputationState state) {
 		super(featureCall);
+		this.state = state;
 	}
 	
 	public ILinkingCandidate getPreferredCandidate(ILinkingCandidate other) {
@@ -36,6 +40,15 @@ public class NullFeatureLinkingCandidate extends AbstractNullLinkingCandidate im
 
 	public boolean isExtension() {
 		return false;
+	}
+	
+	public void apply() {
+		FeatureLinkHelper helper = new FeatureLinkHelper();
+		XExpression receiver = helper.getSyntacticReceiver(getFeatureCall());
+		state.withNonVoidExpectation().computeTypes(receiver);
+		for(XExpression argument: helper.getSyntacticArguments(getFeatureCall())) {
+			state.withNonVoidExpectation().computeTypes(argument);
+		}
 	}
 
 }

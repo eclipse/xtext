@@ -73,12 +73,12 @@ public class XtendTypeComputer extends XbaseWithAnnotationsTypeComputer {
 	
 	protected void _computeTypes(RichStringForLoop object, ITypeComputationState state) {
 		LightweightTypeReference charSequence = getTypeForName(CharSequence.class, state);
-		
-		LightweightTypeReference parameterType = computeForLoopParameterType(object, state);
 		ITypeComputationState eachState = state.withExpectation(charSequence);
 		JvmFormalParameter parameter = object.getDeclaredParam();
-		if (parameter != null)
+		if (parameter != null) {
+			LightweightTypeReference parameterType = computeForLoopParameterType(object, state);
 			eachState = eachState.assignType(parameter, parameterType);
+		}
 		eachState.computeTypes(object.getEachExpression());
 		
 		state.withNonVoidExpectation().computeTypes(object.getBefore());

@@ -48,7 +48,7 @@ public class DeferredTypeParameterHintCollector extends AbstractTypeReferencePai
 				if (declaration.internalIsResolved() || getOwner().isResolved(declaration.getHandle())) {
 					declaration.tryResolve();
 					outerVisit(declaration, reference, declaration, getExpectedVariance(), getActualVariance());
-				} else if (!reference.isPrimitiveVoid()) {
+				} else if (!reference.isPrimitiveVoid() && !reference.isAny()) {
 					addHint(declaration, reference);
 				}
 			}

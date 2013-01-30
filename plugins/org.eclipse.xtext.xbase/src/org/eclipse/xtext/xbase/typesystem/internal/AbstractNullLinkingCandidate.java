@@ -30,10 +30,6 @@ public abstract class AbstractNullLinkingCandidate implements ILinkingCandidate 
 		this.featureOrConstructorCall = featureOrConstructorCall;
 	}
 	
-	public void apply() {
-		// no op
-	}
-
 	public void resolveLinkingProxy() {
 		// no op
 	}

@@ -48,13 +48,18 @@ public abstract class AbstractTypeResolverTest<Reference extends Object> extends
       boolean _add = AbstractTypeResolverTest.seenExpressions.add(string);
       boolean _not = (!_add);
       if (_not) {
-        String _plus = ("Duplicate expression under test: " + expression);
-        Assert.fail(_plus);
+        this.handleDuplicateExpression(expression);
+        return null;
       }
       XExpression _expression = super.expression(expression, resolve);
       _xblockexpression = (_expression);
     }
     return _xblockexpression;
+  }
+  
+  protected void handleDuplicateExpression(final CharSequence expression) {
+    String _plus = ("Duplicate expression under test: " + expression);
+    Assert.fail(_plus);
   }
   
   @Test

@@ -78,6 +78,8 @@ public class OwnedConverter extends AbstractXtypeReferenceVisitor<LightweightTyp
 	public LightweightTypeReference doVisitGenericArrayTypeReference(JvmGenericArrayTypeReference reference) {
 		JvmTypeReference originalComponentType = reference.getComponentType();
 		LightweightTypeReference lightweightComponentType = visit(originalComponentType);
+		if (lightweightComponentType.isAny())
+			return lightweightComponentType;
 		return new ArrayTypeReference(owner, lightweightComponentType);
 	}
 	
@@ -131,11 +133,13 @@ public class OwnedConverter extends AbstractXtypeReferenceVisitor<LightweightTyp
 		WildcardTypeReference result = new WildcardTypeReference(owner);
 		boolean upperBoundSeen = false;
 		for(JvmTypeConstraint constraint: reference.getConstraints()) {
-			if (constraint instanceof JvmUpperBound) {
-				upperBoundSeen = true;
-				result.addUpperBound(visit(constraint.getTypeReference()));
-			} else {
-				result.setLowerBound(visit(constraint.getTypeReference()));
+			if (constraint.getTypeReference() != null) {
+				if (constraint instanceof JvmUpperBound) {
+					upperBoundSeen = true;
+					result.addUpperBound(visit(constraint.getTypeReference()));
+				} else {
+					result.setLowerBound(visit(constraint.getTypeReference()));
+				}
 			}
 		}
 		if (!keepUnboundWildcards) {

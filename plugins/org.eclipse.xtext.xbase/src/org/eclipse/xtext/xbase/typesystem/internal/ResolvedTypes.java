@@ -39,17 +39,13 @@ import org.eclipse.xtext.xbase.typesystem.computation.IFeatureLinkingCandidate;
 import org.eclipse.xtext.xbase.typesystem.computation.ILinkingCandidate;
 import org.eclipse.xtext.xbase.typesystem.computation.ITypeExpectation;
 import org.eclipse.xtext.xbase.typesystem.conformance.ConformanceHint;
-import org.eclipse.xtext.xbase.typesystem.references.AnyTypeReference;
-import org.eclipse.xtext.xbase.typesystem.references.ArrayTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.CompoundTypeReference;
-import org.eclipse.xtext.xbase.typesystem.references.FunctionTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.ITypeReferenceOwner;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightBoundTypeArgument;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightMergedBoundTypeArgument;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.OwnedConverter;
 import org.eclipse.xtext.xbase.typesystem.references.ParameterizedTypeReference;
-import org.eclipse.xtext.xbase.typesystem.references.TypeReferenceVisitorWithNonNullResult;
 import org.eclipse.xtext.xbase.typesystem.references.UnboundTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.WildcardTypeReference;
 import org.eclipse.xtext.xbase.typesystem.util.BoundTypeArgumentSource;
@@ -662,12 +658,8 @@ public abstract class ResolvedTypes implements IResolvedTypes {
 				if (boundTypeArgument.getDeclaredVariance().mergeDeclaredWithActual(boundTypeArgument.getActualVariance()) == VarianceInfo.INVARIANT) {
 					resolveDependentTypeArguments(handle, boundTypeArgument);
 				}
-				if (isRecursive(handle, boundTypeArgument.getTypeReference())) {
-					LightweightBoundTypeArgument boundWithoutRecursion = removeRecursiveTypeArguments(handle, boundTypeArgument);
-					ensureTypeParameterHintsMapExists().replaceValues(handle, Collections.singletonList(boundWithoutRecursion));
-				} else {
-					ensureTypeParameterHintsMapExists().replaceValues(handle, Collections.singletonList(boundTypeArgument));
-				}
+				LightweightBoundTypeArgument boundWithoutRecursion = removeRecursiveTypeArguments(handle, boundTypeArgument);
+				ensureTypeParameterHintsMapExists().replaceValues(handle, Collections.singletonList(boundWithoutRecursion));
 			}
 		} else {
 			if (!isResolved(handle)) {
@@ -708,6 +700,7 @@ public abstract class ResolvedTypes implements IResolvedTypes {
 
 	protected LightweightBoundTypeArgument removeRecursiveTypeArguments(final Object handle,
 			LightweightBoundTypeArgument boundTypeArgument) {
+		final Set<Object> handles = Sets.newHashSet(handle);
 		LightweightTypeReference boundArgumentWithoutRecursion = new CustomTypeParameterSubstitutor(Collections.<JvmTypeParameter, LightweightMergedBoundTypeArgument>emptyMap(), boundTypeArgument.getTypeReference().getOwner()) {
 
 			@Override
@@ -744,7 +737,7 @@ public abstract class ResolvedTypes implements IResolvedTypes {
 					return reference;
 				LightweightTypeReference lowerBound = reference.getLowerBound();
 				if (lowerBound instanceof UnboundTypeReference) {
-					if (handle.equals(((UnboundTypeReference) lowerBound).getHandle())) {
+					if (!handles.add(((UnboundTypeReference) lowerBound).getHandle())) {
 						WildcardTypeReference result = new WildcardTypeReference(getOwner());
 						for(LightweightTypeReference upperBound: reference.getUpperBounds()) {
 							result.addUpperBound(visitTypeArgument(upperBound, visiting));
@@ -782,75 +775,6 @@ public abstract class ResolvedTypes implements IResolvedTypes {
 		}
 	}
 	
-	protected boolean isRecursive(final Object handle, LightweightTypeReference typeReference) {
-		return typeReference.accept(new TypeReferenceVisitorWithNonNullResult<Boolean>() {
-			@Override
-			protected Boolean doVisitUnboundTypeReference(UnboundTypeReference reference) {
-				return handle.equals(reference.getHandle());
-			}
-			@Override
-			protected Boolean doVisitAnyTypeReference(AnyTypeReference reference) {
-				return Boolean.FALSE;
-			}
-			@Override
-			protected Boolean doVisitParameterizedTypeReference(ParameterizedTypeReference reference) {
-				if (reference.isResolved())
-					return Boolean.FALSE;
-				for(LightweightTypeReference typeArgument: reference.getTypeArguments()) {
-					if (typeArgument.accept(this)) {
-						return Boolean.TRUE;
-					}
-				}
-				return Boolean.FALSE;
-			}
-			@Override
-			protected Boolean doVisitCompoundTypeReference(CompoundTypeReference reference) {
-				if (reference.isResolved())
-					return Boolean.FALSE;
-				for(LightweightTypeReference component: reference.getMultiTypeComponents()) {
-					if (component.accept(this)) {
-						return Boolean.TRUE;
-					}
-				}
-				return Boolean.FALSE;
-			}
-			@Override
-			protected Boolean doVisitFunctionTypeReference(FunctionTypeReference reference) {
-				if (reference.isResolved())
-					return Boolean.FALSE;
-				LightweightTypeReference returnType = reference.getReturnType();
-				if (returnType != null && returnType.accept(this)) {
-					return Boolean.TRUE;
-				}
-				for(LightweightTypeReference parameterType: reference.getParameterTypes()) {
-					if (parameterType.accept(this)) {
-						return Boolean.TRUE;
-					}
-				}
-				return doVisitParameterizedTypeReference(reference);
-			}
-			@Override
-			protected Boolean doVisitArrayTypeReference(ArrayTypeReference reference) {
-				return reference.getComponentType().accept(this);
-			}
-			@Override
-			protected Boolean doVisitWildcardTypeReference(WildcardTypeReference reference) {
-				if (reference.isResolved())
-					return Boolean.FALSE;
-				LightweightTypeReference lowerBound = reference.getLowerBound();
-				if (lowerBound != null && lowerBound.accept(this)) {
-					return Boolean.TRUE;
-				}
-				for(LightweightTypeReference upperBound: reference.getUpperBounds()) {
-					if (upperBound.accept(this)) {
-						return Boolean.TRUE;
-					}
-				}
-				return Boolean.FALSE;
-			}
-		});
-	}
-
 	public boolean isResolved(Object handle) {
 		return resolvedTypeParameters != null && resolvedTypeParameters.contains(handle);
 	}
