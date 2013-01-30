@@ -15,14 +15,16 @@ import org.eclipse.xtext.xbase.typesystem.IBatchTypeResolver;
 import org.eclipse.xtext.xbase.typesystem.IResolvedTypes;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 import org.junit.Assert;
+import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.rules.Timeout;
 
 /**
  * @author Sebastian Zarnekow
  */
+@Ignore
 @SuppressWarnings("all")
-public abstract class TypeResolverPerformanceTest extends BatchTypeResolverTest {
+public class TypeResolverPerformanceTest extends BatchTypeResolverTest {
   @Rule
   public final Timeout timeout = new Function0<Timeout>() {
     public Timeout apply() {
