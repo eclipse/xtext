@@ -70,4 +70,11 @@ public class XtendFormatterPreferenceKeys extends XbaseFormatterPreferenceKeys {
       return _blankLineKey;
     }
   }.apply();
+  
+  public final static BlankLineKey blankLinesBetweenEnumLiterals = new Function0<BlankLineKey>() {
+    public BlankLineKey apply() {
+      BlankLineKey _blankLineKey = new BlankLineKey("blank.lines.between.enum.literals", Integer.valueOf(0));
+      return _blankLineKey;
+    }
+  }.apply();
 }

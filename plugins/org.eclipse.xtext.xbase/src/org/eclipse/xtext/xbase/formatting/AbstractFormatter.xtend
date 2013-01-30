@@ -1,7 +1,6 @@
 package org.eclipse.xtext.xbase.formatting
 
 import org.eclipse.emf.ecore.EObject
-import org.eclipse.xtext.preferences.IPreferenceValues
 import org.eclipse.xtext.resource.XtextResource
 
 abstract class AbstractFormatter implements IBasicFormatter {

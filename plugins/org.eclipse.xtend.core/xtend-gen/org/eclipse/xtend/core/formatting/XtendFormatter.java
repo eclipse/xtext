@@ -596,7 +596,7 @@ public class XtendFormatter extends XbaseFormatter2 {
               };
             final Procedure1<FormattingDataInit> _function_5 = new Procedure1<FormattingDataInit>() {
                 public void apply(final FormattingDataInit it) {
-                  it.oneSpace();
+                  it.cfg(XtendFormatterPreferenceKeys.blankLinesBetweenEnumLiterals);
                 }
               };
             Function1<? super FormattableDocument,? extends Iterable<FormattingData>> _surround = this._formattingDataFactory.surround(_immediatelyFollowingKeyword, _function_4, _function_5);

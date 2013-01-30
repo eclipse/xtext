@@ -3,6 +3,7 @@ package org.eclipse.xtend.core.tests.formatting
 import org.junit.Test
 
 import static org.eclipse.xtext.xbase.formatting.XbaseFormatterPreferenceKeys.*
+import static org.eclipse.xtend.core.formatting.XtendFormatterPreferenceKeys.*
 
 class XtendEnumFormatterTest extends AbstractXtendFormatterTest {
 	
@@ -27,7 +28,23 @@ class XtendEnumFormatterTest extends AbstractXtendFormatterTest {
 		assertFormatted([
 		],'''
 			enum Bar {
-				FOO, BAR, BAZ
+				FOO,
+				BAR,
+				BAZ
+			}
+		''')	
+	}
+	
+	@Test def formatLiteral03() {
+		assertFormatted([
+			put(blankLinesBetweenEnumLiterals, 1)
+		],'''
+			enum Bar {
+				FOO,
+			
+				BAR,
+			
+				BAZ
 			}
 		''')	
 	}

@@ -12,7 +12,6 @@ import static org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil.*;
 import static org.eclipse.xtext.util.Strings.*;
 
 import java.util.Collection;
-import java.util.List;
 import java.util.Set;
 
 import org.eclipse.emf.common.util.URI;
@@ -28,7 +27,6 @@ import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.editor.syntaxcoloring.DefaultHighlightingConfiguration;
 import org.eclipse.xtext.ui.editor.syntaxcoloring.IHighlightedPositionAcceptor;
 import org.eclipse.xtext.util.StringInputStream;
-import org.eclipse.xtext.util.Strings;
 import org.eclipse.xtext.util.TextRegion;
 import org.eclipse.xtext.xbase.ui.highlighting.XbaseHighlightingConfiguration;
 import org.junit.Test;

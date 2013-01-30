@@ -1,7 +1,5 @@
 package org.eclipse.xtext.xbase.formatting
 
-import org.eclipse.xtext.preferences.PreferenceKey
-
 class XbaseFormatterPreferenceKeys extends BasicFormatterPreferenceKeys {
 	public static val preserveBlankLines = new IntegerKey("preserve.blank.lines", 1)
 	public static val blankLinesAroundExpression = new BlankLineKey("blank.line.around.expressions", 0)

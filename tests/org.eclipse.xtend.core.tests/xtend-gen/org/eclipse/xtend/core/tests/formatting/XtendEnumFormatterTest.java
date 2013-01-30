@@ -1,5 +1,6 @@
 package org.eclipse.xtend.core.tests.formatting;
 
+import org.eclipse.xtend.core.formatting.XtendFormatterPreferenceKeys;
 import org.eclipse.xtend.core.tests.formatting.AbstractXtendFormatterTest;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.preferences.MapBasedPreferenceValues;
@@ -50,7 +51,39 @@ public class XtendEnumFormatterTest extends AbstractXtendFormatterTest {
     _builder.append("enum Bar {");
     _builder.newLine();
     _builder.append("\t");
-    _builder.append("FOO, BAR, BAZ");
+    _builder.append("FOO,");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("BAR,");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("BAZ");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    this.assertFormatted(_function, _builder);
+  }
+  
+  @Test
+  public void formatLiteral03() {
+    final Procedure1<MapBasedPreferenceValues> _function = new Procedure1<MapBasedPreferenceValues>() {
+        public void apply(final MapBasedPreferenceValues it) {
+          XtendEnumFormatterTest.this.put(it, XtendFormatterPreferenceKeys.blankLinesBetweenEnumLiterals, Integer.valueOf(1));
+        }
+      };
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("enum Bar {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("FOO,");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("BAR,");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("BAZ");
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();

@@ -15,5 +15,6 @@ class XtendFormatterPreferenceKeys extends XbaseFormatterPreferenceKeys {
 	public static val blankLinesBetweenFields = new BlankLineKey("blank.lines.between.fields", 0)
 	public static val blankLinesBetweenFieldsAndMethods = new BlankLineKey("blank.lines.between.fields.and.methods", 1)
 	public static val blankLinesBetweenMethods = new BlankLineKey("blank.lines.between.methods", 1)
+	public static val blankLinesBetweenEnumLiterals = new BlankLineKey("blank.lines.between.enum.literals", 0)
 }
 

@@ -3,7 +3,6 @@ package org.eclipse.xtext.xbase.formatting
 import java.util.List
 import java.util.TreeMap
 import org.apache.log4j.Logger
-import org.eclipse.xtext.preferences.IPreferenceValues
 import org.eclipse.xtext.xbase.lib.Pair
 
 import static org.eclipse.xtext.xbase.formatting.BasicFormatterPreferenceKeys.*
