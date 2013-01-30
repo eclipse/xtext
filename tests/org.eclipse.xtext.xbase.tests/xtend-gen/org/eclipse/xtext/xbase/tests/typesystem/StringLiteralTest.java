@@ -61,7 +61,7 @@ public class StringLiteralTest extends AbstractXbaseTestCase {
         public void apply(final XStringLiteral featureCall, final Integer index) {
           final LightweightTypeReference type = resolvedTypes.getActualType(featureCall);
           StringConcatenation _builder = new StringConcatenation();
-          _builder.append("failed for feature call at ");
+          _builder.append("failed for literal at ");
           _builder.append(index, "");
           String _get = ((List<String>)Conversions.doWrapArray(types)).get((index).intValue());
           String _simpleName = type.getSimpleName();
@@ -196,5 +196,10 @@ public class StringLiteralTest extends AbstractXbaseTestCase {
   @Test
   public void testAmbiguousExpectation_03() throws Exception {
     this.resolvesStringLiteralsTo("String::valueOf(\'11\')", "String");
+  }
+  
+  @Test
+  public void testCastToChar_01() throws Exception {
+    this.resolvesStringLiteralsTo("\'a\' as Character", "String");
   }
 }

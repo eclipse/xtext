@@ -20,6 +20,7 @@ import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.XConstructorCall;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XVariableDeclaration;
+import org.eclipse.xtext.xbase.scoping.batch.IFeatureNames;
 import org.eclipse.xtext.xbase.typesystem.conformance.ConformanceHint;
 import org.eclipse.xtext.xbase.typesystem.references.ITypeReferenceOwner;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
@@ -153,7 +154,15 @@ public interface ITypeComputationState {
 	/**
 	 * Assigns the given actual type to the raw type which shall be reachable with the given name.
 	 * This is useful to refine the context of certain expression children, e.g. the body of a lambda
-	 * expression shall use the visibility constraints of implemented SAM type. 
+	 * expression shall use the visibility constraints of the implemented SAM type.
+	 * 
+	 * <pre>
+	 * 	assignType(IFeatureNames.SELF, 'java.util.Comparator', 'java.util.Comparator&lt;String&gt;');
+	 * </pre>
+	 * 
+	 * @param name the name of the feature that should point to the given type, e.g. {@link IFeatureNames#THIS}
+	 * @param rawType the type that declares the context of the expression.
+	 * @param actualType the context type with bound type arguments (possibly unresolved). 
 	 */
 	void assignType(QualifiedName name, JvmType rawType, LightweightTypeReference actualType);
 	
