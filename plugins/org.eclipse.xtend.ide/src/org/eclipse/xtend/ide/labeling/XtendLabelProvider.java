@@ -7,12 +7,14 @@ import java.util.Iterator;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.edit.ui.provider.AdapterFactoryLabelProvider;
+import org.eclipse.jface.viewers.StyledString;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.xtend.core.jvmmodel.IXtendJvmAssociations;
 import org.eclipse.xtend.core.xtend.XtendAnnotationType;
 import org.eclipse.xtend.core.xtend.XtendClass;
 import org.eclipse.xtend.core.xtend.XtendConstructor;
 import org.eclipse.xtend.core.xtend.XtendEnum;
+import org.eclipse.xtend.core.xtend.XtendEnumLiteral;
 import org.eclipse.xtend.core.xtend.XtendField;
 import org.eclipse.xtend.core.xtend.XtendFile;
 import org.eclipse.xtend.core.xtend.XtendFunction;
@@ -83,6 +85,10 @@ public class XtendLabelProvider extends XbaseLabelProvider {
 	public Image image(XtendField element) {
 		return images.forField(element.getVisibility(), element.isStatic(), element.isFinal(), element.isExtension());
 	}
+	
+	public Image image(XtendEnumLiteral element) {
+		return images.forField(element.getVisibility(), element.isStatic(), element.isFinal(), false);
+	}
 
 	public String text(XtendFile element) {
 		return element.eResource().getURI().trimFileExtension().lastSegment();
@@ -104,15 +110,18 @@ public class XtendLabelProvider extends XbaseLabelProvider {
 		return signature(element.getName(), associations.getDirectlyInferredOperation(element));
 	}
 	
-	public String text(XtendField element) {
+	public StyledString text(XtendField element) {
 		if (element.getName() == null && element.isExtension()) {
-			return uiStrings.referenceToString(element.getType(), "extension");
+			return new StyledString(uiStrings.referenceToString(element.getType(), "extension"), StyledString.DECORATIONS_STYLER);
 		}
-		JvmTypeReference type = getType(element);
-		if (type != null) {
-			return element.getName() +" : " + uiStrings.referenceToString(type, "Object");
+		JvmTypeReference fieldType = getType(element);
+		if (fieldType != null) {
+			String type = uiStrings.referenceToString(fieldType, "");
+			if (type.length() != 0) {
+				return new StyledString(element.getName()).append(new StyledString(" : " + type,StyledString.DECORATIONS_STYLER));
+			}
 		}
-		return element.getName();
+		return new StyledString(element.getName());
 	}
 	
 	protected JvmTypeReference getType(XtendField field) {
