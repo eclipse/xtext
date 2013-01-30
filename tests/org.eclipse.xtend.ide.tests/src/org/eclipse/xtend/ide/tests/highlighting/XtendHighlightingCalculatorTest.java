@@ -7,9 +7,12 @@
  *******************************************************************************/
 package org.eclipse.xtend.ide.tests.highlighting;
 
+import static com.google.common.collect.Lists.*;
 import static org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil.*;
+import static org.eclipse.xtext.util.Strings.*;
 
 import java.util.Collection;
+import java.util.List;
 import java.util.Set;
 
 import org.eclipse.emf.common.util.URI;
@@ -25,6 +28,7 @@ import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.editor.syntaxcoloring.DefaultHighlightingConfiguration;
 import org.eclipse.xtext.ui.editor.syntaxcoloring.IHighlightedPositionAcceptor;
 import org.eclipse.xtext.util.StringInputStream;
+import org.eclipse.xtext.util.Strings;
 import org.eclipse.xtext.util.TextRegion;
 import org.eclipse.xtext.xbase.ui.highlighting.XbaseHighlightingConfiguration;
 import org.junit.Test;
@@ -460,6 +464,14 @@ public class XtendHighlightingCalculatorTest extends AbstractXtendUITestCase imp
 		highlight(model);
 	}
 	
+	@Test public void testKeywordsInFeatureCalls() throws Exception {
+		for(String keyword: newArrayList("abstract", "annotation", "class", "create",
+					"def", "dispatch", "extends", "extension", "final", "implements", "import", "interface", 
+					"override", "package", "public", "private", "protected", "static", "throws")) {
+			String model = "{} def get" + toFirstUpper(keyword) + "() {} def bar(Foo it) { "+ keyword + "}";
+			expectAbsolute(model.lastIndexOf(keyword), keyword.length(), DefaultHighlightingConfiguration.DEFAULT_ID);
+		}
+	}
 	
 	protected void highlight(String functionBody) {
 		try {
