@@ -17,7 +17,7 @@ import com.google.inject.Inject;
 
 public class XtendRenameStrategyProvider extends DefaultRenameStrategyProvider {
 	@Inject
-	private com.google.inject.Provider<DispatchMethodRenameStrategy> dispatchStartegyProvider;
+	private com.google.inject.Provider<DispatchMethodRenameStrategy> dispatchStrategyProvider;
 	
 	@Override
 	public IRenameStrategy get(EObject targetEObject, IRenameElementContext renameElementContext) throws NoSuchStrategyException {
@@ -30,7 +30,7 @@ public class XtendRenameStrategyProvider extends DefaultRenameStrategyProvider {
 	@Override
 	protected IRenameStrategy createRenameStrategy(EObject targetEObject, IRenameElementContext renameElementContext) {
 		if (renameElementContext instanceof DispatchMethodRenameContext) 
-			return dispatchStartegyProvider.get();
+			return dispatchStrategyProvider.get();
 		else
 			return super.createRenameStrategy(targetEObject, renameElementContext);
 	}
