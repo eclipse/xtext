@@ -17,6 +17,8 @@ import org.eclipse.xtext.parser.antlr.Lexer;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.tests.typesystem.AbstractSmokeTest;
+import org.junit.Ignore;
+import org.junit.Test;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -57,5 +59,23 @@ public class SkipTokensInBetween extends AbstractSmokeTest {
         this.processExpression(_plus_1);
       }
     }
+  }
+  
+  @Ignore(value = "Disables since it is pretty much the same as testFeatureCall_25_a")
+  @Test
+  public void testFeatureCall_25_b() throws Exception {
+    super.testFeatureCall_25_b();
+  }
+  
+  @Ignore(value = "Disables since it is pretty much the same as testFeatureCall_25_a")
+  @Test
+  public void testFeatureCall_25_c() throws Exception {
+    super.testFeatureCall_25_c();
+  }
+  
+  @Ignore(value = "Disables since it is pretty much the same as testFeatureCall_25_a")
+  @Test
+  public void testFeatureCall_25_d() throws Exception {
+    super.testFeatureCall_25_d();
   }
 }
