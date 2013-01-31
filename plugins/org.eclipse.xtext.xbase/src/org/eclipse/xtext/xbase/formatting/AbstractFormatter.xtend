@@ -7,6 +7,7 @@ abstract class AbstractFormatter implements IBasicFormatter {
 
 	@Property boolean allowIdentityEdits = false
 	@Property boolean diagnoseConflicts = true
+	boolean conflictOccurred = false
 
 	override format(XtextResource res, int offset, int length, FormattingPreferenceValues cfg) {
 		val doc = res.parseResult.rootNode.text
@@ -17,12 +18,17 @@ abstract class AbstractFormatter implements IBasicFormatter {
 			debug.rootTrace = new RuntimeException
 			format(res.contents.head, debug)
 		}
+		conflictOccurred = format.conflictOccurred
 		val edits = format.renderToEdits(offset, length)
 
 		if (allowIdentityEdits)
 			edits
 		else
 			edits.filter[doc.substring(it.offset, it.offset + it.length) != text].toList
+	}
+	
+	def isConflictOccurred() {
+		conflictOccurred
 	}
 
 	def protected dispatch void format(Void expr, FormattableDocument format) {
