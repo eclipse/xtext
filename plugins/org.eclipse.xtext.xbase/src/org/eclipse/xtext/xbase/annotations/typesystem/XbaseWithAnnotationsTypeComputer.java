@@ -88,7 +88,7 @@ public class XbaseWithAnnotationsTypeComputer extends XbaseTypeComputer {
 
 	protected void computeTypes(XAnnotation annotation, JvmOperation operation, XExpression value,
 			ITypeComputationState state) {
-		LightweightTypeReference expectation = operation.eIsProxy() ? null : state.getConverter().toLightweightReference(operation.getReturnType());
+		LightweightTypeReference expectation = operation == null || operation.eIsProxy() ? null : state.getConverter().toLightweightReference(operation.getReturnType());
 		if (expectation != null && expectation.isArray()) {
 			LightweightTypeReference componentType = expectation.getComponentType();
 			if (componentType == null) {
