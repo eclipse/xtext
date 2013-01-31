@@ -303,7 +303,7 @@ public abstract class AbstractXbaseContentAssistTest extends Assert implements R
 		newBuilder().append("''.toString+''").assertTextAtCursorPosition("+''", 1, expect(new String[]{"+"}, getKeywordsAndStatics()));
 	}
 	
-	@Ignore@Test public void testOnStringLiteral_24() throws Exception {
+	@Test public void testOnStringLiteral_24() throws Exception {
 		newBuilder().append("''.toString==''").assertTextAtCursorPosition("==", 1, expect(new String[] {"==", "=>"}, getKeywordsAndStatics()));
 	}
 	
@@ -355,7 +355,7 @@ public abstract class AbstractXbaseContentAssistTest extends Assert implements R
 		newBuilder().append("''.toString +''").assertTextAtCursorPosition("+", expect(STRING_OPERATORS, CAST_INSTANCEOF));
 	}
 	
-	@Ignore@Test public void testOnStringLiteral_37() throws Exception {
+	@Test public void testOnStringLiteral_37() throws Exception {
 		newBuilder().append("''.toString ==''").assertTextAtCursorPosition("==", 1, expect(new String[] {"==", "=>"}, getKeywordsAndStatics()));
 	}
 	
