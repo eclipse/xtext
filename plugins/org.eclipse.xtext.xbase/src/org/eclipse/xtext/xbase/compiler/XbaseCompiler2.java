@@ -23,7 +23,6 @@ import org.eclipse.xtext.common.types.JvmSynonymTypeReference;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.JvmTypeReference;
-import org.eclipse.xtext.common.types.TypesPackage;
 import org.eclipse.xtext.common.types.util.ITypeArgumentContext;
 import org.eclipse.xtext.generator.trace.ILocationData;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
@@ -40,7 +39,6 @@ import org.eclipse.xtext.xbase.typesystem.references.OwnedConverter;
 import org.eclipse.xtext.xbase.typesystem.util.CommonTypeComputationServices;
 import org.eclipse.xtext.xbase.typesystem.util.DeclaratorTypeArgumentCollector;
 import org.eclipse.xtext.xbase.typesystem.util.StandardTypeParameterSubstitutor;
-import org.eclipse.xtext.xtype.XFunctionTypeRef;
 
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
@@ -53,6 +51,7 @@ import com.google.inject.Inject;
  * 
  * @author Sebastian Zarnekow - Initial contribution and API
  */
+@SuppressWarnings("deprecation")
 @NonNullByDefault
 public class XbaseCompiler2 extends XbaseCompiler {
 	
@@ -118,6 +117,9 @@ public class XbaseCompiler2 extends XbaseCompiler {
 				|| ((expectedType instanceof JvmSynonymTypeReference) 
 					&& Iterables.any(((JvmSynonymTypeReference)expectedType).getReferences(), new Predicate<JvmTypeReference>() {
 						public boolean apply(@Nullable JvmTypeReference ref) {
+							if (ref == null) {
+								throw new IllegalStateException();
+							}
 							return EcoreUtil.equals(ref.getType(), functionType.getType());
 						}
 					}))) {
