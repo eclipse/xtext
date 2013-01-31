@@ -105,7 +105,6 @@ class TimedExpressionAwareResolvedTypes extends ExpressionAwareStackedResolvedTy
 		return new TimedExpressionAwareResolvedTypes(this, context, times)
 	}
 	
-	
 }
 
 /**
