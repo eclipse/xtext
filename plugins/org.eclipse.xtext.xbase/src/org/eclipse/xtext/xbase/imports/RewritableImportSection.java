@@ -155,13 +155,13 @@ public class RewritableImportSection {
 	}
 	
 	public boolean removeImport(JvmDeclaredType type) {
-		XImportDeclaration importDeclaration = findOriginalImport(type, originalImportDeclarations, false, false);
-		if(importDeclaration != null) 
-			removedImportDeclarations.add(importDeclaration);
-		else {
-			importDeclaration = findOriginalImport(type, addedImportDeclarations, false, false);
-			if(importDeclaration != null)
-				addedImportDeclarations.remove(importDeclaration);
+		XImportDeclaration importDeclaration = findOriginalImport(type, addedImportDeclarations, false, false);
+		if(importDeclaration != null) { 
+			addedImportDeclarations.remove(importDeclaration);
+		} else {
+			importDeclaration = findOriginalImport(type, originalImportDeclarations, false, false);
+			if(importDeclaration != null) 
+				removedImportDeclarations.add(importDeclaration);
 		}
 		if(importDeclaration != null) {
 			for(Map.Entry<String, JvmDeclaredType> entry: plainImports.entrySet()) {
@@ -256,10 +256,7 @@ public class RewritableImportSection {
 				ICompositeNode node = NodeModelUtils.findActualNodeFor(removedImportDeclaration);
 				if(node != null) {
 					ITextRegion textRegion = new TextRegion(node.getOffset(), node.getLength());
-					if(removedImportDeclaration!=originalImportDeclarations.get(originalImportDeclarations.size()-1) 
-							|| addedImportDeclarations.isEmpty()) {
-						textRegion = regionUtil.addTrailingSingleWhitespace(textRegion, lineSeparator, resource);
-					}
+					textRegion = regionUtil.addTrailingSingleWhitespace(textRegion, lineSeparator, resource);
 					replaceRegions.add(new ReplaceRegion(textRegion, ""));
 				}
 			}
@@ -278,12 +275,10 @@ public class RewritableImportSection {
 			return;
 		ITextRegion region = regionUtil.computeRegion(resource);
 		region = regionUtil.addLeadingWhitespace(region, resource);
+		region = regionUtil.addTrailingSingleWhitespace(region, lineSeparator, resource);
 		int insertOffset = region.getOffset() + region.getLength();
-		if(insertOffset != 0) {
+		if (insertOffset != 0 && originalImportDeclarations.isEmpty())
 			importDeclarationsToAppend.insert(0, lineSeparator);
-			if(originalImportDeclarations.isEmpty()) 
-				importDeclarationsToAppend.insert(0, lineSeparator);
-		}
 		importDeclarationsToAppend.append(lineSeparator);
 		int insertLength = -region.getLength();
 		insertLength += regionUtil.addTrailingWhitespace(region, resource).getLength();
@@ -307,11 +302,30 @@ public class RewritableImportSection {
 				builder.append("extension ");
 			}
 		}
-		String escapedTypeName = nameValueConverter.toString(newImportDeclaration.getImportedTypeName());
+		String escapedTypeName = nameValueConverter.toString(serializeType(newImportDeclaration.getImportedType()));
 		builder.append(escapedTypeName);
 		if (newImportDeclaration.isStatic())
 			builder.append(".*");
 		builder.append(lineSeparator);
+	}
+	
+	/**
+	 * We cannot rely on JvmType#getIdentifier as it is cached and does not pick up changed simpleNames, 
+	 * e.g. in rename refactoring. 
+	 */
+	protected String serializeType(JvmDeclaredType type) {
+		JvmDeclaredType current = type;
+		StringBuffer buffer = new StringBuffer(current.getSimpleName());
+		while(current.getDeclaringType() != null) {
+			current = current.getDeclaringType();
+			buffer.insert(0, "$");
+			buffer.insert(0, current.getSimpleName());
+		}
+		if(!isEmpty(current.getPackageName())) {
+			buffer.insert(0,  ".");
+			buffer.insert(0, current.getPackageName());
+		}
+		return buffer.toString();
 	}
 	
 	protected String serializeImports(List<XImportDeclaration> allDeclarations) {
