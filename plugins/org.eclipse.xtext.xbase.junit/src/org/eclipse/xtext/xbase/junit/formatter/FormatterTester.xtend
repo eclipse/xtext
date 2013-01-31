@@ -39,6 +39,7 @@ class FormatterTester {
 		val length = toBeFormatted.length
 		val edits = <TextReplacement>newLinkedHashSet
 		edits += formatter.format(parsed.eResource as XtextResource, start, length, cfg)
+		switch formatter { AbstractFormatter: if(formatter.conflictOccurred) throw new RuntimeException("There are conflicting text edits, see console for details.") }
 		if (!allowErrors)
 			edits += createMissingEditReplacements(parsed.eResource as XtextResource, edits, start, length)
 		val newDocument = oldDocument.applyEdits(edits)
