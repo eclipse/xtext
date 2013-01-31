@@ -18,6 +18,7 @@ import org.eclipse.xtext.xbase.XCasePart;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XSwitchExpression;
 import org.eclipse.xtext.xbase.lib.Exceptions;
+import org.eclipse.xtext.xbase.lib.InputOutput;
 import org.eclipse.xtext.xbase.lib.IteratorExtensions;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.util.ReflectExtensions;
@@ -61,7 +62,8 @@ public abstract class AbstractSmokeTest extends AbstractTypeResolverTest<Lightwe
   
   public void processExpression(final String expression) throws Exception {
     try {
-      String _replace = expression.replace("$$", "org::eclipse::xtext::xbase::lib::");
+      String _println = InputOutput.<String>println(expression);
+      String _replace = _println.replace("$$", "org::eclipse::xtext::xbase::lib::");
       final XExpression xExpression = this.expression(_replace, false);
       final IResolvedTypes resolvedTypes = this.typeResolver.resolveTypes(xExpression);
       Assert.assertNotNull(resolvedTypes);
@@ -157,6 +159,26 @@ public abstract class AbstractSmokeTest extends AbstractTypeResolverTest<Lightwe
     String _plus_1 = (_plus + type);
     String _identifier = type.getIdentifier();
     Assert.assertNotNull(_plus_1, _identifier);
+  }
+  
+  @Test
+  public void testOverloadedOperators_11() throws Exception {
+    super.testOverloadedOperators_11();
+  }
+  
+  @Test
+  public void testOverloadedOperators_13() throws Exception {
+    super.testOverloadedOperators_13();
+  }
+  
+  @Test
+  public void testClosure_14() throws Exception {
+    super.testClosure_14();
+  }
+  
+  @Test
+  public void testClosure_32() throws Exception {
+    super.testClosure_32();
   }
   
   @Ignore(value = "Disable block expression with 1000+ lines")

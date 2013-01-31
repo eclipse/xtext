@@ -1130,6 +1130,16 @@ public abstract class AbstractTypeResolverTest<Reference extends Object> extends
   }
   
   @Test
+  public void testInvalidClosure_01() throws Exception {
+    this.resolvesTo("5.map[ it ]", "List<Object>");
+  }
+  
+  @Test
+  public void testInvalidClosure_02() throws Exception {
+    this.resolvesTo("5.map[ 5bi ]", "List<BigInteger>");
+  }
+  
+  @Test
   public void testNewTreeSet_01() throws Exception {
     this.resolvesTo("new java.util.TreeSet(newArrayList(\'\'))", "TreeSet<String>");
   }

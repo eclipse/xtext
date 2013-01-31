@@ -107,6 +107,28 @@ abstract class AbstractSmokeTest extends AbstractTypeResolverTest<LightweightTyp
 		assertNotNull(identifiable.toString + " / " + type, type.identifier)	
 	}
 	
+	// some re-enabled tests - those don't fulfil the expectation
+	// of the super class but should not cause any exceptions
+	@Test
+	override testOverloadedOperators_11() throws Exception {
+		super.testOverloadedOperators_11()
+	}
+	
+	@Test
+	override testOverloadedOperators_13() throws Exception {
+		super.testOverloadedOperators_13()
+	}
+	
+	@Test
+	override testClosure_14() throws Exception {
+		super.testClosure_14()
+	}
+	
+	@Test
+	override testClosure_32() throws Exception {
+		super.testClosure_32()
+	}
+	
 	@Ignore("Disable block expression with 1000+ lines")
 	@Test
 	override testBlockExpression_03() throws Exception {

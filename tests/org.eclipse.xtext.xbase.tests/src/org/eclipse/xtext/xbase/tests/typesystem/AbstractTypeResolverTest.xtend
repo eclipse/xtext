@@ -1029,6 +1029,14 @@ abstract class AbstractTypeResolverTest<Reference> extends AbstractXbaseTestCase
 	@Test def void testClosure_33() throws Exception {
         "[ String it | val bytes = new String bytes ]".resolvesTo("(String)=>String").isFunctionAndEquivalentTo("Function1<String, String>")
     }
+    
+    @Test def void testInvalidClosure_01() throws Exception {
+    	"5.map[ it ]".resolvesTo("List<Object>")
+    }
+    
+    @Test def void testInvalidClosure_02() throws Exception {
+    	"5.map[ 5bi ]".resolvesTo("List<BigInteger>")
+    }
 	
 	@Test def void testNewTreeSet_01() throws Exception {
         "new java.util.TreeSet(newArrayList(''))".resolvesTo("TreeSet<String>")
