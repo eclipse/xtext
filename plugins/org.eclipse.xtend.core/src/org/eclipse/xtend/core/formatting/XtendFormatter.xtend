@@ -269,7 +269,6 @@ public class XtendFormatter extends XbaseFormatter2 {
 	def protected dispatch void format(XtendFunction func, FormattableDocument format) {
 		formatAnnotations(func, format, newLineAfterMethodAnnotations)
 		formatModifiers(func, format)
-		format += func.nodeForKeyword("def").append[oneSpace]
 		if (!func.typeParameters.empty) {
 			format += func.nodeForKeyword("<").append[noSpace]
 			for (arg : func.typeParameters) {
