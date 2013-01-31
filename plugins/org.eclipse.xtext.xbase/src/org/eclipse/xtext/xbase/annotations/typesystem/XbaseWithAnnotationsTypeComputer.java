@@ -92,7 +92,7 @@ public class XbaseWithAnnotationsTypeComputer extends XbaseTypeComputer {
 		if (expectation != null && expectation.isArray()) {
 			LightweightTypeReference componentType = expectation.getComponentType();
 			if (componentType == null) {
-				throw new IllegalStateException("Array without component type: " + operation.getReturnType());
+				throw new IllegalStateException("Array without component type: " + expectation.getIdentifier());
 			}
 			ITypeComputationResult result = state.withExpectation(componentType).computeTypes(value);
 			if (!result.getConformanceHints().contains(ConformanceHint.SUCCESS)) {
