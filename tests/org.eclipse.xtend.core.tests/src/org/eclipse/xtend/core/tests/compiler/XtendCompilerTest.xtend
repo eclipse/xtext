@@ -15,6 +15,31 @@ abstract class AbstractXtendCompilerTest extends AbstractXtendTestCase {
 	@Inject JvmModelGenerator generator
 	@Inject IGeneratorConfigProvider generatorConfigProvider
 	
+	@Test def testAnnotationWithIntArray() throws Exception {
+		'''
+			class TestXtend {
+				val static int a = 4
+				
+				@Click({ a, a })
+				def meth() {}
+			}
+			
+			annotation Click {
+				int[] value
+			}
+		'''.assertCompilesTo('''
+			@SuppressWarnings("all")
+			public class TestXtend {
+			  private final static int a = 4;
+			  
+			  @Click({TestXtend.a, TestXtend.a})
+			  public Object meth() {
+			    return null;
+			  }
+			}
+		''')
+	}
+	
 	@Test def testInterface() {
 		'''
 			interface Foo {
@@ -2877,6 +2902,12 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 	@Ignore("Fails with old impl")
 	@Test override testBug391077() {
 		super.testBug391077()
+	}
+	
+	@Ignore("Fails with old impl")
+	@Test
+	override testAnnotationWithIntArray() throws Exception {
+		super.testAnnotationWithIntArray()
 	}
 	
 	/*
