@@ -205,6 +205,23 @@ class SkipTokensInBetween extends AbstractSmokeTest {
 		}		
 	}
 	
+	@Ignore("Disables since it is pretty much the same as testFeatureCall_25_a")
+	@Test
+	override testFeatureCall_25_b() throws Exception {
+		super.testFeatureCall_25_b()
+	}
+	
+	@Ignore("Disables since it is pretty much the same as testFeatureCall_25_a")
+	@Test
+	override testFeatureCall_25_c() throws Exception {
+		super.testFeatureCall_25_c()
+	}
+	
+	@Ignore("Disables since it is pretty much the same as testFeatureCall_25_a")
+	@Test
+	override testFeatureCall_25_d() throws Exception {
+		super.testFeatureCall_25_d()
+	}
 }
 
 
@@ -234,4 +251,21 @@ class SkipNodesInBetween extends AbstractSmokeTest {
 		}
 	}
 	
+	@Ignore("Disables since it is pretty much the same as testFeatureCall_25_a")
+	@Test
+	override testFeatureCall_25_b() throws Exception {
+		super.testFeatureCall_25_b()
+	}
+	
+	@Ignore("Disables since it is pretty much the same as testFeatureCall_25_a")
+	@Test
+	override testFeatureCall_25_c() throws Exception {
+		super.testFeatureCall_25_c()
+	}
+	
+	@Ignore("Disables since it is pretty much the same as testFeatureCall_25_a")
+	@Test
+	override testFeatureCall_25_d() throws Exception {
+		super.testFeatureCall_25_d()
+	}
 }
