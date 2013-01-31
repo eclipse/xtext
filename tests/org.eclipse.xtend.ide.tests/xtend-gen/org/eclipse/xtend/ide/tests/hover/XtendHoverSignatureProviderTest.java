@@ -18,9 +18,12 @@ import org.eclipse.xtend.ide.hover.XtendHoverSignatureProvider;
 import org.eclipse.xtend.ide.tests.AbstractXtendUITestCase;
 import org.eclipse.xtend.ide.tests.WorkbenchTestHelper;
 import org.eclipse.xtend2.lib.StringConcatenation;
+import org.eclipse.xtext.common.types.JvmAnnotationType;
 import org.eclipse.xtext.common.types.JvmConstructor;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
+import org.eclipse.xtext.common.types.JvmType;
+import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.junit4.util.ParseHelper;
 import org.eclipse.xtext.ui.resource.IResourceSetProvider;
 import org.eclipse.xtext.xbase.XBlockExpression;
@@ -31,6 +34,7 @@ import org.eclipse.xtext.xbase.XFeatureCall;
 import org.eclipse.xtext.xbase.XForLoopExpression;
 import org.eclipse.xtext.xbase.XMemberFeatureCall;
 import org.eclipse.xtext.xbase.XVariableDeclaration;
+import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotation;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.junit.After;
@@ -614,6 +618,149 @@ public class XtendHoverSignatureProviderTest extends AbstractXtendUITestCase {
     }
   }
   
+  @Test
+  public void testEnumDeclaration() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("package testPackage");
+      _builder.newLine();
+      _builder.append("enum Foo { BAR, BAZ }");
+      _builder.newLine();
+      ResourceSet _resourceSet = this.getResourceSet();
+      final XtendFile xtendFile = this.parseHelper.parse(_builder, _resourceSet);
+      EList<XtendTypeDeclaration> _xtendTypes = xtendFile.getXtendTypes();
+      final XtendTypeDeclaration en = IterableExtensions.<XtendTypeDeclaration>head(_xtendTypes);
+      String _signature = this.signatureProvider.getSignature(en);
+      Assert.assertEquals("Foo", _signature);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+
+  @Test
+  public void testEnumReference() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("package testPackage");
+      _builder.newLine();
+      _builder.append("class Bar {");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("def baz(Foo f){}");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      _builder.append("enum Foo { BAR, BAZ }");
+      _builder.newLine();
+      ResourceSet _resourceSet = this.getResourceSet();
+      final XtendFile xtendFile = this.parseHelper.parse(_builder, _resourceSet);
+      EList<XtendTypeDeclaration> _xtendTypes = xtendFile.getXtendTypes();
+      XtendTypeDeclaration _head = IterableExtensions.<XtendTypeDeclaration>head(_xtendTypes);
+      EList<XtendMember> _members = _head.getMembers();
+      XtendMember _head_1 = IterableExtensions.<XtendMember>head(_members);
+      EList<XtendParameter> _parameters = ((XtendFunction) _head_1).getParameters();
+      XtendParameter _head_2 = IterableExtensions.<XtendParameter>head(_parameters);
+      JvmTypeReference _parameterType = _head_2.getParameterType();
+      final JvmType en = _parameterType.getType();
+      String _signature = this.signatureProvider.getSignature(en);
+      Assert.assertEquals("Foo", _signature);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+
+  @Test
+  public void testInterfaceDeclaration() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("package testPackage");
+      _builder.newLine();
+      _builder.append("interface Foo { }");
+      _builder.newLine();
+      ResourceSet _resourceSet = this.getResourceSet();
+      final XtendFile xtendFile = this.parseHelper.parse(_builder, _resourceSet);
+      EList<XtendTypeDeclaration> _xtendTypes = xtendFile.getXtendTypes();
+      final XtendTypeDeclaration in = IterableExtensions.<XtendTypeDeclaration>head(_xtendTypes);
+      String _signature = this.signatureProvider.getSignature(in);
+      Assert.assertEquals("Foo", _signature);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+
+  @Test
+  public void testInterfaceReference() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("package testPackage");
+      _builder.newLine();
+      _builder.append("class Bar implements Foo {");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      _builder.append("interface Foo { }");
+      _builder.newLine();
+      ResourceSet _resourceSet = this.getResourceSet();
+      final XtendFile xtendFile = this.parseHelper.parse(_builder, _resourceSet);
+      EList<XtendTypeDeclaration> _xtendTypes = xtendFile.getXtendTypes();
+      XtendTypeDeclaration _head = IterableExtensions.<XtendTypeDeclaration>head(_xtendTypes);
+      EList<JvmTypeReference> _implements = ((XtendClass) _head).getImplements();
+      JvmTypeReference _head_1 = IterableExtensions.<JvmTypeReference>head(_implements);
+      final JvmType in = _head_1.getType();
+      String _signature = this.signatureProvider.getSignature(in);
+      Assert.assertEquals("Foo", _signature);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+
+  @Test
+  public void testAnnotationDeclaration() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("package testPackage");
+      _builder.newLine();
+      _builder.append("annotation Foo { }");
+      _builder.newLine();
+      ResourceSet _resourceSet = this.getResourceSet();
+      final XtendFile xtendFile = this.parseHelper.parse(_builder, _resourceSet);
+      EList<XtendTypeDeclaration> _xtendTypes = xtendFile.getXtendTypes();
+      final XtendTypeDeclaration in = IterableExtensions.<XtendTypeDeclaration>head(_xtendTypes);
+      String _signature = this.signatureProvider.getSignature(in);
+      Assert.assertEquals("Foo", _signature);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+
+  @Test
+  public void testAnnotationReference() {
+    try {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("package testPackage");
+      _builder.newLine();
+      _builder.append("@Foo");
+      _builder.newLine();
+      _builder.append("class Bar {}");
+      _builder.newLine();
+      _builder.append("annotation Foo { }");
+      _builder.newLine();
+      ResourceSet _resourceSet = this.getResourceSet();
+      final XtendFile xtendFile = this.parseHelper.parse(_builder, _resourceSet);
+      EList<XtendTypeDeclaration> _xtendTypes = xtendFile.getXtendTypes();
+      XtendTypeDeclaration _head = IterableExtensions.<XtendTypeDeclaration>head(_xtendTypes);
+      EList<XAnnotation> _annotations = ((XtendClass) _head).getAnnotations();
+      XAnnotation _head_1 = IterableExtensions.<XAnnotation>head(_annotations);
+      final JvmAnnotationType in = _head_1.getAnnotationType();
+      String _signature = this.signatureProvider.getSignature(in);
+      Assert.assertEquals("Foo", _signature);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+
   @Test
   public void test381185() {
     try {

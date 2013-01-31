@@ -12,10 +12,13 @@ import java.util.Set;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.ui.JavaElementLabels;
 import org.eclipse.xtend.core.jvmmodel.IXtendJvmAssociations;
+import org.eclipse.xtend.core.xtend.XtendAnnotationType;
 import org.eclipse.xtend.core.xtend.XtendClass;
 import org.eclipse.xtend.core.xtend.XtendConstructor;
+import org.eclipse.xtend.core.xtend.XtendEnum;
 import org.eclipse.xtend.core.xtend.XtendField;
 import org.eclipse.xtend.core.xtend.XtendFunction;
+import org.eclipse.xtend.core.xtend.XtendInterface;
 import org.eclipse.xtend.core.xtend.XtendParameter;
 import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.common.types.JvmAnyTypeReference;
@@ -104,6 +107,18 @@ public class XtendHoverSignatureProvider extends XbaseDeclarativeHoverSignatureP
 		XtendClass xtendClazz = EcoreUtil2.getContainerOfType(constructor, XtendClass.class);
 		return xtendClazz.getName() + hoverUiStrings.parameters(inferredConstructor)
 				+ getThrowsDeclaration(inferredConstructor);
+	}
+
+	protected String _signature(XtendInterface interfaze , boolean typeAtEnd){
+		return interfaze.getName();
+	}
+
+	protected String _signature(XtendEnum enu , boolean typeAtEnd){
+		return enu.getName();
+	}
+
+	protected String _signature(XtendAnnotationType anno , boolean typeAtEnd){
+		return anno.getName();
 	}
 
 	@Override
