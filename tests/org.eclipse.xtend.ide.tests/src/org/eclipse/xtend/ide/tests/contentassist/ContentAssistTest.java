@@ -65,6 +65,18 @@ public class ContentAssistTest extends AbstractXbaseContentAssistInBlockTest imp
 	@Test public void testForLoop_02() throws Exception {
 		super.testForLoop_02();
 	}
+	
+	@Override
+	@Ignore // see https://bugs.eclipse.org/bugs/show_bug.cgi?id=381327#c3
+	@Test public void testOnStringLiteral_24() throws Exception {
+		super.testOnStringLiteral_24();
+	}
+
+	@Override
+	@Ignore // see https://bugs.eclipse.org/bugs/show_bug.cgi?id=381327#c3
+	@Test public void testOnStringLiteral_37() throws Exception {
+		super.testOnStringLiteral_37();
+	}
 
 	// all these test cases declared a local variable 'this' which is not allowed in Xtend
 	@Override
