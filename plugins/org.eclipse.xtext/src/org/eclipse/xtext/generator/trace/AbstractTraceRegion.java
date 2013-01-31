@@ -344,10 +344,17 @@ public abstract class AbstractTraceRegion {
 				return result;
 			}
 		}
-		if (parent != null && getAssociatedLocations().size() == 1) {
-			return parent.getAssociatedPath();
-		}
-		return null;
+		if (parent == null)
+			return null;
+		boolean uriSeen = false;
+		for (ILocationData associated : getAssociatedLocations())
+			if (associated.getPath() != null) {
+				if (!uriSeen)
+					uriSeen = true;
+				else
+					return null;
+			}
+		return parent.getAssociatedPath();
 	}
 	
 	@Nullable
