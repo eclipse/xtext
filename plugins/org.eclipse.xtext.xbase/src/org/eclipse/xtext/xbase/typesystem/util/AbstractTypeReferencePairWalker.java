@@ -55,6 +55,11 @@ public abstract class AbstractTypeReferencePairWalker extends TypeReferenceVisit
 		}
 		
 		@Override
+		protected void doVisitAnyTypeReference(AnyTypeReference reference, ArrayTypeReference param) {
+			// nothing to do
+		}
+		
+		@Override
 		protected void doVisitUnboundTypeReference(UnboundTypeReference reference, ArrayTypeReference declaration) {
 			if (shouldProcess(reference.getTypeParameter())) {
 				processTypeParameter(reference.getTypeParameter(), declaration);

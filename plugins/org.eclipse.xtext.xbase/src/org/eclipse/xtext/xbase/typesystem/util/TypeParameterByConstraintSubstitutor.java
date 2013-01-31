@@ -12,6 +12,7 @@ import java.util.Map;
 import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
+import org.eclipse.xtext.common.types.JvmTypeParameterDeclarator;
 import org.eclipse.xtext.xbase.typesystem.references.ITypeReferenceOwner;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightMergedBoundTypeArgument;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTraversalData;
@@ -55,7 +56,12 @@ public class TypeParameterByConstraintSubstitutor extends CustomTypeParameterSub
 				LightweightTypeReference result = boundTypeArgument.getTypeReference().accept(this, visiting);
 				return result;
 			} else {
-				LightweightTypeReference mappedReference = getDeclaredUpperBound(visiting.getCurrentDeclarator(), visiting.getCurrentIndex(), visiting);
+				JvmTypeParameterDeclarator currentDeclarator = visiting.getCurrentDeclarator();
+				LightweightTypeReference mappedReference = currentDeclarator != null 
+						? getDeclaredUpperBound(currentDeclarator, visiting.getCurrentIndex(), visiting)
+						: getDeclaredUpperBound(typeParameter, visiting);
+				if (mappedReference == null)
+					mappedReference = getObjectReference(typeParameter);
 				getTypeParameterMapping().put(typeParameter, new LightweightMergedBoundTypeArgument(mappedReference, VarianceInfo.INVARIANT));
 				return mappedReference;
 			}
