@@ -307,6 +307,74 @@ class XtendHoverSignatureProviderTest extends AbstractXtendUITestCase {
 	}
 	
 	@Test
+	def testEnumDeclaration(){
+		val xtendFile = parseHelper.parse('''
+		package testPackage
+		enum Foo { BAR, BAZ }
+		''',resourceSet)
+		val en = xtendFile.xtendTypes.head
+		assertEquals("Foo", signatureProvider.getSignature(en))
+	}
+
+	@Test
+	def testEnumReference(){
+		val xtendFile = parseHelper.parse('''
+		package testPackage
+		class Bar {
+			def baz(Foo f){}
+		}
+		enum Foo { BAR, BAZ }
+		''',resourceSet)
+		val en = (xtendFile.xtendTypes.head.members.head as XtendFunction).parameters.head.parameterType.type
+		assertEquals("Foo", signatureProvider.getSignature(en))
+	}
+
+	@Test
+	def testInterfaceDeclaration(){
+		val xtendFile = parseHelper.parse('''
+		package testPackage
+		interface Foo { }
+		''',resourceSet)
+		val in = xtendFile.xtendTypes.head
+		assertEquals("Foo", signatureProvider.getSignature(in))
+	}
+
+	@Test
+	def testInterfaceReference(){
+		val xtendFile = parseHelper.parse('''
+		package testPackage
+		class Bar implements Foo {
+
+		}
+		interface Foo { }
+		''',resourceSet)
+		val in = (xtendFile.xtendTypes.head as XtendClass).^implements.head.type
+		assertEquals("Foo", signatureProvider.getSignature(in))
+	}
+
+	@Test
+	def testAnnotationDeclaration(){
+		val xtendFile = parseHelper.parse('''
+		package testPackage
+		annotation Foo { }
+		''',resourceSet)
+		val in = xtendFile.xtendTypes.head
+		assertEquals("Foo", signatureProvider.getSignature(in))
+	}
+
+	@Test
+	def testAnnotationReference(){
+		val xtendFile = parseHelper.parse('''
+		package testPackage
+		@Foo
+		class Bar {}
+		annotation Foo { }
+		''',resourceSet)
+		val in = (xtendFile.xtendTypes.head as XtendClass).annotations.head.annotationType
+		assertEquals("Foo", signatureProvider.getSignature(in))
+	}
+
+	@Test
 	def test381185(){
 		val xtendFile = parseHelper.parse('''
 		package testPackage
