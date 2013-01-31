@@ -121,13 +121,18 @@ public class DeclaredTypeFactory implements ITypeFactory<Class<?>> {
 					result.getTypeParameters().add(createTypeParameter(variable, result));
 				}
 			} catch(GenericSignatureFormatError error) {
-				log.warn("Invalid class file for: " + result.getIdentifier(), error);
+				logSignatureFormatError(clazz);
 			}
 			createAnnotationValues(clazz, result);
 			return result;
 		} finally {
 			createTypeTask.stop();
 		}
+	}
+
+	protected void logSignatureFormatError(final Class<?> clazz) {
+		if (log.isDebugEnabled())
+			log.debug("Invalid class file for: " + clazz.getCanonicalName());
 	}
 	
 	private static final Object[] EMPTY_ARRAY = new Object[0];
@@ -313,7 +318,7 @@ public class DeclaredTypeFactory implements ITypeFactory<Class<?>> {
 				result.getSuperTypes().add(createTypeReference(clazz.getGenericSuperclass()));
 			}
 		} catch(GenericSignatureFormatError error) {
-			log.warn("Invalid class file for: " + clazz.getCanonicalName(), error);
+			logSignatureFormatError(clazz);
 			if (clazz.getSuperclass() != null) {
 				result.getSuperTypes().add(createTypeReference(clazz.getSuperclass()));
 			}
@@ -322,7 +327,7 @@ public class DeclaredTypeFactory implements ITypeFactory<Class<?>> {
 		try {
 			interfaces = clazz.getGenericInterfaces();
 		} catch(GenericSignatureFormatError error) {
-			log.warn("Invalid class file for: " + clazz.getCanonicalName(), error);
+			logSignatureFormatError(clazz);
 			interfaces = clazz.getInterfaces();
 		}
 		for (Type type : interfaces) {
@@ -500,7 +505,7 @@ public class DeclaredTypeFactory implements ITypeFactory<Class<?>> {
 		try {
 			fieldType = field.getGenericType();
 		} catch(GenericSignatureFormatError error) {
-			log.warn("Invalid class file for: " + field.getDeclaringClass().getCanonicalName(), error);
+			logSignatureFormatError(field.getDeclaringClass());
 			fieldType = field.getType();
 		}
 		result.setType(createTypeReference(fieldType));
@@ -521,7 +526,7 @@ public class DeclaredTypeFactory implements ITypeFactory<Class<?>> {
 		try {
 			genericParameterTypes = constructor.getGenericParameterTypes();
 		} catch(GenericSignatureFormatError error) {
-			log.warn("Invalid class file for: " + constructor.getDeclaringClass().getCanonicalName(), error);
+			logSignatureFormatError(constructor.getDeclaringClass());
 			genericParameterTypes = constructor.getParameterTypes();
 		}
 		if (offset != 0) {
@@ -554,7 +559,7 @@ public class DeclaredTypeFactory implements ITypeFactory<Class<?>> {
 		try {
 			exceptionTypes = constructor.getGenericExceptionTypes();
 		} catch(GenericSignatureFormatError error) {
-			log.warn("Invalid class file for: " + constructor.getDeclaringClass().getCanonicalName(), error);
+			logSignatureFormatError(constructor.getDeclaringClass());
 			exceptionTypes = constructor.getExceptionTypes();
 		}
 		for (Type exceptionType : exceptionTypes) {
@@ -609,7 +614,7 @@ public class DeclaredTypeFactory implements ITypeFactory<Class<?>> {
 		try {
 			genericParameterTypes = method.getGenericParameterTypes();
 		} catch(GenericSignatureFormatError error) {
-			log.warn("Invalid class file for: " + method.getDeclaringClass().getCanonicalName(), error);
+			logSignatureFormatError(method.getDeclaringClass());
 			genericParameterTypes = method.getParameterTypes();
 		}
 		enhanceGenericDeclaration(result, method);
@@ -622,7 +627,7 @@ public class DeclaredTypeFactory implements ITypeFactory<Class<?>> {
 		try {
 			returnType = method.getGenericReturnType();
 		} catch(GenericSignatureFormatError error) {
-			log.warn("Invalid class file for: " + method.getDeclaringClass().getCanonicalName(), error);
+			logSignatureFormatError(method.getDeclaringClass());
 			returnType = method.getReturnType();
 		}
 		result.setReturnType(createTypeReference(returnType));
@@ -630,7 +635,7 @@ public class DeclaredTypeFactory implements ITypeFactory<Class<?>> {
 		try {
 			exceptionTypes = method.getGenericExceptionTypes();
 		} catch(GenericSignatureFormatError error) {
-			log.warn("Invalid class file for: " + method.getDeclaringClass().getCanonicalName(), error);
+			logSignatureFormatError(method.getDeclaringClass());
 			exceptionTypes = method.getExceptionTypes();
 		}
 		for (Type exceptionType : exceptionTypes) {
