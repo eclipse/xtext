@@ -100,16 +100,53 @@ public class JavaRefactoringIntegrationTest extends AbstractXtendUITestCase {
 	}
 
 	@Test
+	public void testRenameJavaClassReferenceToStaticField() throws Exception {
+		try {
+			testHelper.createFile("JavaClass.java", "public class JavaClass { public static int staticField; }");
+			String xtendModel = "class XtendClass { int foo = JavaClass::staticField }";
+			IFile xtendClass = testHelper.createFile("XtendClass.xtend", xtendModel);
+			IType javaClass = findJavaType("JavaClass");
+			assertNotNull(javaClass);
+			renameJavaElement(javaClass, "NewJavaClass");
+			fileAsserts.assertFileContains(xtendClass, "int foo = NewJavaClass::staticField");
+		} finally {
+			testHelper.getProject().getFile("src/NewJavaClass.java").delete(true, new NullProgressMonitor());
+		}
+	}
+
+	@Test
 	public void testRenameJavaClassAndImport() throws Exception {
 		try {
 			testHelper.createFile("test/JavaClass.java", "package test; public class JavaClass {}");
-			String xtendModel = "import java.util.List import test.JavaClass class XtendClass { List<JavaClass> x }";
+			String xtendModel = "import java.util.List\n"
+					+ "import test.JavaClass\n"
+					+ "\n"
+					+ "class XtendClass { List<JavaClass> x }";
 			IFile xtendClass = testHelper.createFile("XtendClass.xtend", xtendModel);
 			IType javaClass = findJavaType("test.JavaClass");
 			assertNotNull(javaClass);
 			renameJavaElement(javaClass, "NewJavaClass");
 			fileAsserts.assertFileContains(xtendClass, "import test.NewJavaClass");
-			fileAsserts.assertFileContains(xtendClass, "List<NewJavaClass> x");
+			fileAsserts.assertFileContains(xtendClass, xtendModel.replace("JavaClass", "NewJavaClass"));
+		} finally {
+			testHelper.getProject().getFile("src/test/NewJavaClass.java").delete(true, new NullProgressMonitor());
+		}
+	}
+
+	@Test
+	public void testRenameJavaClassAndImportReferenceToStaticField() throws Exception {
+		try {
+			testHelper.createFile("test/JavaClass.java", "package test; public class JavaClass {  public static int staticField; }");
+			String xtendModel = "import java.util.List\n"
+					+ "import test.JavaClass\n"
+					+ "\n"
+					+ "class XtendClass { int foo = JavaClass::staticField }";
+			IFile xtendClass = testHelper.createFile("XtendClass.xtend", xtendModel);
+			IType javaClass = findJavaType("test.JavaClass");
+			assertNotNull(javaClass);
+			renameJavaElement(javaClass, "NewJavaClass");
+			fileAsserts.assertFileContains(xtendClass, "import test.NewJavaClass");
+			fileAsserts.assertFileContains(xtendClass, xtendModel.replace("JavaClass", "NewJavaClass"));
 		} finally {
 			testHelper.getProject().getFile("src/test/NewJavaClass.java").delete(true, new NullProgressMonitor());
 		}
@@ -145,10 +182,65 @@ public class JavaRefactoringIntegrationTest extends AbstractXtendUITestCase {
 	}
 	
 	@Test
+	public void testRenameOuterJavaClass() throws Exception {
+		try {
+			testHelper.createFile("test/JavaClass.java", "package test; public class JavaClass { public static class Inner {} }");
+			String xtendModel = "import test.JavaClass\n"
+					+ "\n"
+					+ "class XtendClass extends JavaClass$Inner {  }";
+			IFile xtendClass = testHelper.createFile("XtendClass.xtend", xtendModel);
+			IType javaClass = findJavaType("test.JavaClass");
+			assertNotNull(javaClass);
+			renameJavaElement(javaClass, "NewJavaClass");
+			fileAsserts.assertFileContains(xtendClass, xtendModel.replace("JavaClass", "NewJavaClass"));
+		} finally {
+			testHelper.getProject().getFile("src/test/NewJavaClass.java").delete(true, new NullProgressMonitor());
+		}
+	}
+
+	@Test
+	public void testRenameInnerJavaClassImportOuter() throws Exception {
+		testHelper.createFile("test/JavaClass.java", "package test; public class JavaClass { public static class Inner {} }");
+		String xtendModel = "import test.JavaClass\n"
+				+ "\n"
+				+ "class XtendClass extends JavaClass$Inner {  }";
+		IFile xtendClass = testHelper.createFile("XtendClass.xtend", xtendModel);
+		IType javaClass = findJavaType("test.JavaClass.Inner");
+		assertNotNull(javaClass);
+		renameJavaElement(javaClass, "NewInner");
+		fileAsserts.assertFileContains(xtendClass, xtendModel.replace("Inner", "NewInner"));
+	}
+
+	@Test
+	public void testRenameInnerJavaClassImportInner() throws Exception {
+		testHelper.createFile("test/JavaClass.java", "package test; public class JavaClass { public static class Inner {} }");
+		String xtendModel = "import test.JavaClass$Inner\n"
+				+ "\n"
+				+ "class XtendClass extends Inner {  }";
+		IFile xtendClass = testHelper.createFile("XtendClass.xtend", xtendModel);
+		IType javaClass = findJavaType("test.JavaClass.Inner");
+		assertNotNull(javaClass);
+		renameJavaElement(javaClass, "NewInner");
+		fileAsserts.assertFileContains(xtendClass, xtendModel.replace("Inner", "NewInner"));
+	}
+
+	@Test
+	public void testRenameMiddleJavaClass() throws Exception {
+		testHelper.createFile("test/JavaClass.java", "package test; public class JavaClass { public static class Middle { public static class Inner {} } }");
+		String xtendModel = "import test.JavaClass\n"
+				+ "\n"
+				+ "class XtendClass extends JavaClass$Middle$Inner {  }";
+		IFile xtendClass = testHelper.createFile("XtendClass.xtend", xtendModel);
+		IType javaClass = findJavaType("test.JavaClass.Middle");
+		assertNotNull(javaClass);
+		renameJavaElement(javaClass, "NewMiddle");
+		fileAsserts.assertFileContains(xtendClass, xtendModel.replace("Middle", "NewMiddle"));
+	}
+
+	@Test
 	public void testRenameJavaTypeInferred() throws Exception {
 		try {
-			testHelper.createFile("JavaClass.java",
-				"public class JavaClass {}");
+			testHelper.createFile("JavaClass.java", "public class JavaClass {}");
 			String xtendModel = "class XtendClass { val foo = new JavaClass() }";
 			IFile xtendClass = testHelper.createFile("XtendClass.xtend", xtendModel);
 			XtextEditor editor = openEditorSafely(xtendClass);
@@ -234,6 +326,32 @@ public class JavaRefactoringIntegrationTest extends AbstractXtendUITestCase {
 	}
 	
 	@Test
+	public void testRenameJavaConstructorOfInnerClass() throws Exception {
+		testHelper.createFile("test/JavaClass.java", "package test; public class JavaClass { public static class Inner {} }");
+		String xtendModel = "import test.JavaClass\n"
+				+ "\n"
+				+ "class XtendClass { def foo() { new JavaClass$Inner() }";
+		IFile xtendClass = testHelper.createFile("XtendClass.xtend", xtendModel);
+		IType javaType = findJavaType("test.JavaClass.Inner");
+		assertNotNull(javaType);
+		renameJavaElement(javaType, "NewInner");
+		fileAsserts.assertFileContains(xtendClass, xtendModel.replace("Inner",  "NewInner"));
+	}
+		
+	@Test
+	public void testRenameJavaConstructorOfImportedInnerClass() throws Exception {
+		testHelper.createFile("test/JavaClass.java", "package test; public class JavaClass { public static class Inner {} }");
+		String xtendModel = "import test.JavaClass$Inner\n"
+				+ "\n"
+				+ "class XtendClass { def foo() { new Inner() }";
+		IFile xtendClass = testHelper.createFile("XtendClass.xtend", xtendModel);
+		IType javaType = findJavaType("test.JavaClass.Inner");
+		assertNotNull(javaType);
+		renameJavaElement(javaType, "NewInner");
+		fileAsserts.assertFileContains(xtendClass, xtendModel.replace("Inner",  "NewInner"));
+	}
+		
+	@Test
 	public void testRenameJavaField() throws Exception {
 		testHelper.createFile("JavaClass.java", "public class JavaClass { protected int foo; }");
 		String xtendModel = "class XtendClass extends JavaClass { int bar = foo }";
@@ -242,6 +360,17 @@ public class JavaRefactoringIntegrationTest extends AbstractXtendUITestCase {
 		assertNotNull(javaField);
 		renameJavaElement(javaField, "baz");
 		fileAsserts.assertFileContains(xtendClass, "int bar = baz");
+	}
+
+	@Test
+	public void testRenameStaticJavaField() throws Exception {
+		testHelper.createFile("JavaClass.java", "public class JavaClass { protected static int foo; }");
+		String xtendModel = "class XtendClass extends JavaClass { int bar = JavaClass::foo }";
+		IFile xtendClass = testHelper.createFile("XtendClass.xtend", xtendModel);
+		IField javaField = findJavaType("JavaClass").getField("foo");
+		assertNotNull(javaField);
+		renameJavaElement(javaField, "baz");
+		fileAsserts.assertFileContains(xtendClass, "int bar = JavaClass::baz");
 	}
 
 	@Test

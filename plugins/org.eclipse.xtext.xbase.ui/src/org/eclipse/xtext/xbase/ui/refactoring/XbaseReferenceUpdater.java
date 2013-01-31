@@ -8,6 +8,7 @@
 package org.eclipse.xtext.xbase.ui.refactoring;
 
 import static com.google.common.collect.Iterables.*;
+import static org.eclipse.xtext.util.Strings.*;
 
 import java.util.List;
 
@@ -19,7 +20,7 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.ltk.core.refactoring.Change;
 import org.eclipse.text.edits.TextEdit;
-import org.eclipse.xtext.EcoreUtil2;
+import org.eclipse.xtext.common.types.JvmConstructor;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmFeature;
 import org.eclipse.xtext.common.types.JvmMember;
@@ -37,8 +38,10 @@ import org.eclipse.xtext.ui.refactoring.IRefactoringUpdateAcceptor;
 import org.eclipse.xtext.ui.refactoring.impl.IRefactoringDocument;
 import org.eclipse.xtext.ui.refactoring.impl.StatusWrapper;
 import org.eclipse.xtext.util.ITextRegion;
+import org.eclipse.xtext.util.Pair;
 import org.eclipse.xtext.util.ReplaceRegion;
-import org.eclipse.xtext.xbase.XAbstractFeatureCall;
+import org.eclipse.xtext.util.Tuples;
+import org.eclipse.xtext.xbase.XFeatureCall;
 import org.eclipse.xtext.xbase.XMemberFeatureCall;
 import org.eclipse.xtext.xbase.XbasePackage;
 import org.eclipse.xtext.xbase.imports.RewritableImportSection;
@@ -50,6 +53,8 @@ import com.google.common.base.Predicate;
 import com.google.inject.Inject;
 
 /**
+ * Handles imports while updating references of renamed elements.
+ * 
  * @author Jan Koehnlein - Initial contribution and API
  */
 public class XbaseReferenceUpdater extends JvmModelReferenceUpdater {
@@ -101,35 +106,36 @@ public class XbaseReferenceUpdater extends JvmModelReferenceUpdater {
 	protected void createTextChange(ITextRegion referenceTextRegion, String newReferenceText, EObject referringElement,
 			EObject newTargetElement, EReference reference, URI referringResourceURI,
 			IRefactoringUpdateAcceptor updateAcceptor) {
-		JvmDeclaredType targetContainerType = getTopLevelContainerType(newTargetElement);
-		if (targetContainerType != null && updateAcceptor instanceof ImportAwareUpdateAcceptor) {
+		if (newReferenceText != null && updateAcceptor instanceof ImportAwareUpdateAcceptor && newTargetElement instanceof JvmMember) {
 			boolean isStaticFeatureCall = isStaticFeatureCall(referringElement, reference, newTargetElement);
-			boolean isStaticExtensionFeatureCall = isStaticExtensionFeatureCall(referringElement, reference, newTargetElement);
-			if(newTargetElement instanceof JvmMember)
-				((ImportAwareUpdateAcceptor) updateAcceptor).removeImport(targetContainerType,
-						isStaticFeatureCall,
-						isStaticExtensionFeatureCall);
-			if (targetContainerType.getIdentifier().contains(".")) {
-				IScope scope = scopeProvider.getScope(referringElement, reference);
-				if (scope != null && newReferenceText != null) {
-					String shortName = (newReferenceText.startsWith(targetContainerType.getIdentifier())) 
-							? newReferenceText.substring(targetContainerType.getPackageName().length() + 1)
-							: newReferenceText;
-					// check for ambiguities if there were an import
-					IEObjectDescription singleElement = scope.getSingleElement(
-							qualifiedNameConverter.toQualifiedName(shortName));
-					EObject resolvedSingleElement = null;
-					if(singleElement != null) 
-						resolvedSingleElement = EcoreUtil.resolve(singleElement.getEObjectOrProxy(), referringElement);
-					if (resolvedSingleElement == newTargetElement) {
-						((ImportAwareUpdateAcceptor) updateAcceptor).acceptImport(targetContainerType,
+			// do nothing on static feature calls with explicit type as the type reference has a separate reference
+			if(!isStaticFeatureCall || ((XFeatureCall) referringElement).getDeclaringType() == null) {
+				Pair<JvmDeclaredType, QualifiedName> importedTypeAndRelativeName = getImportedTypeAndRelativeName((JvmMember)newTargetElement, ((ImportAwareUpdateAcceptor) updateAcceptor).getImportSection());
+				if(importedTypeAndRelativeName != null) {
+					JvmDeclaredType importedType = importedTypeAndRelativeName.getFirst();
+					QualifiedName importRelativeName = importedTypeAndRelativeName.getSecond();
+					boolean isStaticExtensionFeatureCall = isStaticExtensionFeatureCall(referringElement, reference, newTargetElement);
+					IScope scope = scopeProvider.getScope(referringElement, reference);
+					if (scope != null) {
+						((ImportAwareUpdateAcceptor) updateAcceptor).removeImport(importedType,
 								isStaticFeatureCall,
 								isStaticExtensionFeatureCall);
-							newReferenceText = shortName;
-					} else {
-						QualifiedName newTargetQualifiedName = qualifiedNameProvider.getFullyQualifiedName(newTargetElement);
-						// same element on scope with simple name, so use FQNs
-						newReferenceText = qualifiedNameConverter.toString(newTargetQualifiedName);
+						// check for ambiguities if there were an import
+						IEObjectDescription singleElement = scope.getSingleElement(importRelativeName);
+						EObject resolvedSingleElement = null;
+						if(singleElement != null) 
+							resolvedSingleElement = EcoreUtil.resolve(singleElement.getEObjectOrProxy(), referringElement);
+						if (singleElement == null || resolvedSingleElement == newTargetElement) {
+							if(!isEmpty(importedType.getPackageName())) 
+								((ImportAwareUpdateAcceptor) updateAcceptor).acceptImport(importedType,
+										isStaticFeatureCall,
+										isStaticExtensionFeatureCall);
+							newReferenceText = getLinkText(importRelativeName, newReferenceText); 
+						} else if(!isStaticExtensionFeatureCall) {
+							QualifiedName newTargetQualifiedName = qualifiedNameProvider.getFullyQualifiedName(newTargetElement);
+							// name conflict -> use FQN
+							newReferenceText = getLinkText(newTargetQualifiedName, newReferenceText);
+						}
 					}
 				}
 			}
@@ -137,24 +143,53 @@ public class XbaseReferenceUpdater extends JvmModelReferenceUpdater {
 		super.createTextChange(referenceTextRegion, newReferenceText, referringElement, newTargetElement, reference,
 				referringResourceURI, updateAcceptor);
 	}
-	
+
 	protected boolean isStaticFeatureCall(EObject referringElement, EReference reference, EObject newTargetElement) {
-		return referringElement instanceof XAbstractFeatureCall
+		return referringElement instanceof XFeatureCall
 				&& reference == XbasePackage.Literals.XABSTRACT_FEATURE_CALL__FEATURE
 				&& newTargetElement instanceof JvmFeature
 				&& ((JvmFeature)newTargetElement).isStatic();
 	}
 
 	protected boolean isStaticExtensionFeatureCall(EObject referringElement, EReference reference, EObject newTargetElement) {
-		return isStaticFeatureCall(referringElement, reference, newTargetElement) 
-				&& referringElement instanceof XMemberFeatureCall; 
+		return referringElement instanceof XMemberFeatureCall
+				&& reference == XbasePackage.Literals.XABSTRACT_FEATURE_CALL__FEATURE
+				&& newTargetElement instanceof JvmFeature
+				&& ((JvmFeature)newTargetElement).isStatic(); 
 	}
 
-	protected JvmDeclaredType getTopLevelContainerType(EObject newTargetElement) {
-		JvmDeclaredType currentContainerType = EcoreUtil2.getContainerOfType(newTargetElement, JvmDeclaredType.class);
-		while(currentContainerType != null && currentContainerType.getDeclaringType() != null)
-			currentContainerType = currentContainerType.getDeclaringType();
-		return currentContainerType;
+	/**
+	 * @return the currently imported type containing the newTargetElement and the element's name relative to that import.
+	 */
+	protected Pair<JvmDeclaredType, QualifiedName> getImportedTypeAndRelativeName(JvmMember newTargetElement, RewritableImportSection section) {
+		if(newTargetElement instanceof JvmConstructor)
+			return getImportedTypeAndRelativeName(newTargetElement.getDeclaringType(), section);
+		if(!isStaticallyReferrable(newTargetElement)) 
+			return null;
+		StringBuffer relativeName = new StringBuffer(newTargetElement.getSimpleName());
+		JvmMember currentMember = newTargetElement; 
+		while(currentMember.getDeclaringType() != null 
+				&& section.getImportedType(currentMember.getSimpleName()) != currentMember) {
+			currentMember = currentMember.getDeclaringType();
+			relativeName.insert(0, "$");
+			relativeName.insert(0, currentMember.getSimpleName());
+		}
+		return Tuples.create((JvmDeclaredType) currentMember, qualifiedNameConverter.toQualifiedName(relativeName.toString()));
+	}
+	
+	protected boolean isStaticallyReferrable(JvmMember newTargetElement) {
+		if (newTargetElement instanceof JvmDeclaredType) 
+			return true;
+		else if(newTargetElement instanceof JvmFeature)
+			return ((JvmFeature)newTargetElement).isStatic();
+		return false;
+	}
+
+	protected String getLinkText(QualifiedName importRelativeName, String newReferenceText) {
+		if(newReferenceText.endsWith("::")) 
+			return importRelativeName.toString("::") + "::";
+		else 
+			return importRelativeName.toString(".");
 	}
 	
 	public static class ImportAwareUpdateAcceptor implements IRefactoringUpdateAcceptor {
@@ -189,25 +224,25 @@ public class XbaseReferenceUpdater extends JvmModelReferenceUpdater {
 		}
 
 		public boolean acceptImport(JvmDeclaredType type, boolean isStatic, boolean isExtension) {
-			if(isStatic) {
-				if(isExtension)
-					return importSection.addStaticExtensionImport(type);
-				else
-					return importSection.addStaticImport(type);
-			} else {
+			if(isExtension)
+				return importSection.addStaticExtensionImport(type);
+			else if(isStatic) 
+				return importSection.addStaticImport(type);
+			else 
 				return importSection.addImport(type);
-			}
 		}
 
 		public boolean removeImport(JvmDeclaredType type, boolean isStatic, boolean isExtension) {
-			if(isStatic) {
-				if(isExtension)
-					return importSection.removeStaticExtensionImport(type);
-				else
-					return importSection.removeStaticImport(type);
-			} else {
+			if(isExtension)
+				return importSection.removeStaticExtensionImport(type);
+			else if(isStatic) 
+				return importSection.removeStaticImport(type);
+			else
 				return importSection.removeImport(type);
-			}
+		}
+		
+		public RewritableImportSection getImportSection() {
+			return importSection;
 		}
 	}
 
