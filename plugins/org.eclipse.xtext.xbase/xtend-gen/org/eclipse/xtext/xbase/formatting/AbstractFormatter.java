@@ -37,6 +37,8 @@ public abstract class AbstractFormatter implements IBasicFormatter {
     this._diagnoseConflicts = diagnoseConflicts;
   }
   
+  private boolean conflictOccurred = false;
+  
   public List<TextReplacement> format(final XtextResource res, final int offset, final int length, final FormattingPreferenceValues cfg) {
     List<TextReplacement> _xblockexpression = null;
     {
@@ -65,6 +67,8 @@ public abstract class AbstractFormatter implements IBasicFormatter {
         EObject _head_1 = IterableExtensions.<EObject>head(_contents_1);
         this.format(_head_1, debug);
       }
+      boolean _isConflictOccurred_1 = format.isConflictOccurred();
+      this.conflictOccurred = _isConflictOccurred_1;
       final List<TextReplacement> edits = format.renderToEdits(offset, length);
       List<TextReplacement> _xifexpression = null;
       boolean _isAllowIdentityEdits = this.isAllowIdentityEdits();
@@ -90,6 +94,10 @@ public abstract class AbstractFormatter implements IBasicFormatter {
       _xblockexpression = (_xifexpression);
     }
     return _xblockexpression;
+  }
+  
+  public boolean isConflictOccurred() {
+    return this.conflictOccurred;
   }
   
   protected void _format(final Void expr, final FormattableDocument format) {

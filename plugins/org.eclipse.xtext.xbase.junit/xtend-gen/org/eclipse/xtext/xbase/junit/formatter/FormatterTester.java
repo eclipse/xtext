@@ -94,6 +94,19 @@ public class FormatterTester {
       FormattingPreferenceValues _cfg = it.getCfg();
       List<TextReplacement> _format = this.formatter.format(((XtextResource) _eResource_3), start, length, _cfg);
       Iterables.<TextReplacement>addAll(edits, _format);
+      final IBasicFormatter formatter_1 = this.formatter;
+      boolean _matched_1 = false;
+      if (!_matched_1) {
+        if (formatter_1 instanceof AbstractFormatter) {
+          final AbstractFormatter _abstractFormatter = (AbstractFormatter)formatter_1;
+          _matched_1=true;
+          boolean _isConflictOccurred = _abstractFormatter.isConflictOccurred();
+          if (_isConflictOccurred) {
+            RuntimeException _runtimeException = new RuntimeException("There are conflicting text edits, see console for details.");
+            throw _runtimeException;
+          }
+        }
+      }
       boolean _isAllowErrors_1 = it.isAllowErrors();
       boolean _not_1 = (!_isAllowErrors_1);
       if (_not_1) {
