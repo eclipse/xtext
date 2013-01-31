@@ -1,0 +1,10 @@
+Change-Id: I2a10ae4339283ffa3aa840cec62215df7f07e705
+Verified+1: Hudson CI
+Code-Review+2: Holger Schill <Holger.Schill@itemis.de>
+IP-Clean+1: Holger Schill <Holger.Schill@itemis.de>
+Verified+1: Holger Schill <Holger.Schill@itemis.de>
+Submitted-by: Holger Schill <Holger.Schill@itemis.de>
+Submitted-at: Thu, 31 Jan 2013 11:55:18 -0500
+Reviewed-on: https://git.eclipse.org/r/10073
+Project: tmf/org.eclipse.xtext
+Branch: refs/heads/master
