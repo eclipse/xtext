@@ -13,6 +13,12 @@ public class XtendCompilerTest extends AbstractXtendCompilerTest {
     super.testBug391077();
   }
   
+  @Ignore(value = "Fails with old impl")
+  @Test
+  public void testAnnotationWithIntArray() throws Exception {
+    super.testAnnotationWithIntArray();
+  }
+  
   /**
    * Refined questionable expectation.
    */

@@ -29,6 +29,59 @@ public abstract class AbstractXtendCompilerTest extends AbstractXtendTestCase {
   private IGeneratorConfigProvider generatorConfigProvider;
   
   @Test
+  public void testAnnotationWithIntArray() throws Exception {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("class TestXtend {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("val static int a = 4");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("@Click({ a, a })");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def meth() {}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("annotation Click {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("int[] value");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("@SuppressWarnings(\"all\")");
+    _builder_1.newLine();
+    _builder_1.append("public class TestXtend {");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("private final static int a = 4;");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("@Click({TestXtend.a, TestXtend.a})");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("public Object meth() {");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("return null;");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    this.assertCompilesTo(_builder, _builder_1);
+  }
+  
+  @Test
   public void testInterface() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("interface Foo {");
