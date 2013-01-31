@@ -14,12 +14,14 @@ class FileAsserts {
 		val file = project.findMember(fileName)
 		assertTrue(file instanceof IFile)
 		assertTrue(file.exists())
-		return file as IFile;
+		file as IFile
 	}
 
-	def assertFileContains(IFile file, String contents) throws Exception {
+	def assertFileContains(IFile file, String expectedContents) throws Exception {
 		file.refreshLocal(IResource::DEPTH_ZERO, null);
 		val fileContents = getContents(file);
-		assertTrue(fileContents, fileContents.contains(contents));
+		assertTrue('''Substring '«expectedContents»' not found in '«fileContents»' ''', 
+			fileContents.contains(expectedContents)
+		)
 	}
 }
