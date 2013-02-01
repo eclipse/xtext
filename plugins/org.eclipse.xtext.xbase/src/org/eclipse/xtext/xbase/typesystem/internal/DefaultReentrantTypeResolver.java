@@ -8,6 +8,7 @@
 package org.eclipse.xtext.xbase.typesystem.internal;
 
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.naming.QualifiedName;
@@ -29,7 +30,7 @@ import com.google.inject.Inject;
  * TODO JavaDoc, toString
  */
 @NonNullByDefault
-public class DefaultReentrantTypeResolver implements IReentrantTypeResolver {
+public class DefaultReentrantTypeResolver extends AbstractRootedReentrantTypeResolver {
 
 	@Inject
 	private CommonTypeComputationServices services;
@@ -54,11 +55,25 @@ public class DefaultReentrantTypeResolver implements IReentrantTypeResolver {
 	private boolean resolving = false;
 	
 	public void initializeFrom(EObject root) {
+		if (this.root != null) {
+			throw new IllegalStateException("Cannot reinitialize. Resolver has already a root: " + this.root);
+		}
 		this.root = root;
 	}
 	
+	@Override
 	protected EObject getRoot() {
 		return root;
+	}
+	
+	@Override
+	protected boolean isHandled(XExpression expression) {
+		return EcoreUtil.getRootContainer(expression) == getRoot();
+	}
+	
+	@Override
+	protected boolean isHandled(JvmIdentifiableElement identifiableElement) {
+		return EcoreUtil.getRootContainer(identifiableElement) == getRoot();
 	}
 	
 	public IResolvedTypes reentrantResolve() {

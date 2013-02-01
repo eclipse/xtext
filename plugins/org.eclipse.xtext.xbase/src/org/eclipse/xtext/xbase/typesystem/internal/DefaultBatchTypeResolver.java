@@ -11,15 +11,15 @@ import java.util.Collections;
 import java.util.List;
 
 import org.eclipse.emf.common.notify.Adapter;
-import org.eclipse.emf.common.notify.impl.AdapterImpl;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.xtext.common.types.JvmIdentifiableElement;
+import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.typesystem.IBatchTypeResolver;
 import org.eclipse.xtext.xbase.typesystem.IResolvedTypes;
 
-import com.google.common.collect.Lists;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 
@@ -32,35 +32,8 @@ import com.google.inject.Provider;
 @NonNullByDefault
 public class DefaultBatchTypeResolver implements IBatchTypeResolver {
 	
-	public static class TypeResolutionStateAdapter extends AdapterImpl implements IReentrantTypeResolver {
-		
-		private final IReentrantTypeResolver context;
-
-		public TypeResolutionStateAdapter(EObject associatedWith, IReentrantTypeResolver context) {
-			this.context = context;
-			associatedWith.eAdapters().add(this);
-		}
-		
-		@Override
-		public boolean isAdapterForType(@Nullable Object type) {
-			return TypeResolutionStateAdapter.class.equals(type);
-		}
-		
-		public IReentrantTypeResolver getContext() {
-			return context;
-		}
-
-		public void initializeFrom(EObject root) {
-			throw new IllegalStateException("Attempt to reinitialize the root resolver");
-		}
-
-		public IResolvedTypes reentrantResolve() {
-			return context.reentrantResolve();
-		}
-	}
-	
 	@Inject
-	private Provider<IReentrantTypeResolver> typeResolverProvider;
+	private Provider<AbstractRootedReentrantTypeResolver> typeResolverProvider;
 	
 	public IResolvedTypes resolveTypes(@Nullable EObject object) {
 		if (object == null || object.eIsProxy())
@@ -77,40 +50,23 @@ public class DefaultBatchTypeResolver implements IBatchTypeResolver {
 		}
 		CompoundReentrantTypeResolver result = new CompoundReentrantTypeResolver();
 		for(EObject root: roots) {
-			result.initializeFrom(root);
+			result.addResolver(getOrCreateResolver(root));
 		}
 		return result;
 	}
 	
-	public class CompoundReentrantTypeResolver implements IReentrantTypeResolver {
-
-		private List<IReentrantTypeResolver> resolvers = Lists.newArrayList();
-		
-		public void initializeFrom(EObject root) {
-			resolvers.add(getOrCreateResolver(root));
-		}
-
-		public IResolvedTypes reentrantResolve() {
-			for(IReentrantTypeResolver resolver: resolvers) {
-				resolver.reentrantResolve();
-			}
-			return IResolvedTypes.NULL;
-		}
-		
-	}
-
 	protected List<EObject> getEntryPoints(EObject object) {
 		return Collections.singletonList(EcoreUtil.getRootContainer(object));
 	}
-
-	protected IReentrantTypeResolver getOrCreateResolver(EObject root) {
+	
+	protected AbstractRootedReentrantTypeResolver getOrCreateResolver(EObject root) {
 		final List<Adapter> adapters = root.eAdapters();
 		final TypeResolutionStateAdapter currentAdapter = (TypeResolutionStateAdapter) EcoreUtil.getAdapter(adapters, TypeResolutionStateAdapter.class);
 		if (currentAdapter == null) {
-			final IReentrantTypeResolver newResolver = createResolver();
+			final AbstractRootedReentrantTypeResolver newResolver = createResolver();
 			final TypeResolutionStateAdapter newAdapter = new TypeResolutionStateAdapter(root, newResolver);
 			adapters.add(newAdapter);
-			IReentrantTypeResolver result = new IReentrantTypeResolver() {
+			AbstractRootedReentrantTypeResolver result = new AbstractRootedReentrantTypeResolver() {
 				public IResolvedTypes reentrantResolve() {
 					IResolvedTypes result = newResolver.reentrantResolve();
 					if (!adapters.remove(newAdapter)) {
@@ -122,6 +78,21 @@ public class DefaultBatchTypeResolver implements IBatchTypeResolver {
 				public void initializeFrom(EObject root) {
 					newResolver.initializeFrom(root);
 				}
+
+				@Override
+				protected EObject getRoot() {
+					return newResolver.getRoot();
+				}
+				
+				@Override
+				protected boolean isHandled(JvmIdentifiableElement identifiableElement) {
+					return newResolver.isHandled(identifiableElement);
+				}
+				
+				@Override
+				protected boolean isHandled(XExpression expression) {
+					return newResolver.isHandled(expression);
+				}
 			};
 			result.initializeFrom(root);
 			return result;
@@ -130,7 +101,7 @@ public class DefaultBatchTypeResolver implements IBatchTypeResolver {
 		}
 	}
 
-	protected IReentrantTypeResolver createResolver() {
+	protected AbstractRootedReentrantTypeResolver createResolver() {
 		return typeResolverProvider.get();
 	}
 

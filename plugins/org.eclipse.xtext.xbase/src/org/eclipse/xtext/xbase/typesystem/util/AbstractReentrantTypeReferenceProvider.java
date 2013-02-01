@@ -48,4 +48,9 @@ public abstract class AbstractReentrantTypeReferenceProvider implements IJvmType
 	}
 
 	protected abstract JvmTypeReference doGetTypeReference(@NonNull XComputedTypeReferenceImplCustom context);
+	
+	@Override
+	public String toString() {
+		return String.format("%s[computing=%s]", getClass().getSimpleName(), computing);
+	}
 }

@@ -10,8 +10,8 @@ package org.eclipse.xtext.xbase.tests.typesystem;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 import org.eclipse.xtext.xbase.tests.typesystem.TimedReentrantTypeResolver;
+import org.eclipse.xtext.xbase.typesystem.internal.AbstractRootedReentrantTypeResolver;
 import org.eclipse.xtext.xbase.typesystem.internal.DefaultBatchTypeResolver;
-import org.eclipse.xtext.xbase.typesystem.internal.IReentrantTypeResolver;
 
 /**
  * @author Sebastian Zarnekow
@@ -21,7 +21,7 @@ public class TimedBatchTypeResolver extends DefaultBatchTypeResolver {
   @Inject
   private Provider<TimedReentrantTypeResolver> resolverProvider;
   
-  protected IReentrantTypeResolver createResolver() {
+  protected AbstractRootedReentrantTypeResolver createResolver() {
     TimedReentrantTypeResolver _get = this.resolverProvider.get();
     return _get;
   }

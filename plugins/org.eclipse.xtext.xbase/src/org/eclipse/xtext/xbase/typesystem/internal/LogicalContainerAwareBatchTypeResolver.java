@@ -19,6 +19,7 @@ import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.xbase.jvmmodel.ILogicalContainerProvider;
 
+import com.google.common.collect.Lists;
 import com.google.inject.Inject;
 
 /**
@@ -36,11 +37,13 @@ public class LogicalContainerAwareBatchTypeResolver extends DefaultBatchTypeReso
 		if (object.eContainer() == null && object.eResource() != null) {
 			Resource resource = object.eResource();
 			List<EObject> contents = resource.getContents();
+			List<EObject> result = Lists.newArrayList();
 			for(EObject content: contents) {
 				if (content instanceof JvmType) {
-					return Collections.singletonList(content);
+					result.add(content);
 				}
 			}
+			return result;
 		}
 		JvmIdentifiableElement logicalContainer = logicalContainerProvider.getNearestLogicalContainer(object);
 		if (logicalContainer == null) {
