@@ -697,7 +697,7 @@ abstract class AbstractAssignabilityTest extends AbstractTestingTypeReferenceOwn
 	}
 	
 	def private selfBound(String typeName) {
-		typeName.replace("$", "org.eclipse.xtend.core.tests.validation.ScenarioBug395002$SelfBound")
+		typeName.replace("$", "org.eclipse.xtend.core.tests.typesystem.ScenarioBug395002$SelfBound")
 	}
 }
 
