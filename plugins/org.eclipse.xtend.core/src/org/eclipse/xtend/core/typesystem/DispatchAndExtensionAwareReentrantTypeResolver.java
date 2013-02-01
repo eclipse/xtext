@@ -15,7 +15,6 @@ import java.util.List;
 import java.util.Map;
 
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtend.core.jvmmodel.DispatchHelper;
@@ -117,7 +116,7 @@ public class DispatchAndExtensionAwareReentrantTypeResolver extends LogicalConta
 		}
 		
 		@Override
-		protected JvmTypeReference handleReentrantInvocation(@NonNull XComputedTypeReferenceImplCustom context) {
+		protected JvmTypeReference handleReentrantInvocation(XComputedTypeReferenceImplCustom context) {
 			resolvedTypes.addDiagnostic(new EObjectDiagnosticImpl(
 					Severity.WARNING, 
 					IssueCodes.TOO_LITTLE_TYPE_INFORMATION, 
