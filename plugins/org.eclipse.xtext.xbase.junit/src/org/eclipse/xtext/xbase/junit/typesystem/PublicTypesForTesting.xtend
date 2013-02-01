@@ -16,6 +16,7 @@ import org.eclipse.xtext.xbase.typesystem.internal.ResolvedTypes
 import org.eclipse.xtext.xbase.typesystem.internal.RootResolvedTypes
 import org.eclipse.xtext.xbase.typesystem.internal.StackedResolvedTypes
 import org.eclipse.xtext.xbase.typesystem.references.UnboundTypeReference
+import org.eclipse.xtext.validation.IssueSeverities
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -23,8 +24,8 @@ import org.eclipse.xtext.xbase.typesystem.references.UnboundTypeReference
 @SuppressWarnings("restriction")
 @NonNullByDefault
 class PublicResolvedTypes extends RootResolvedTypes {
-	new(DefaultReentrantTypeResolver resolver) {
-		super(resolver)
+	new(DefaultReentrantTypeResolver resolver, IssueSeverities issueSeverities) {
+		super(resolver, issueSeverities)
 	}
 	
 	override public UnboundTypeReference createUnboundTypeReference(XExpression expression, JvmTypeParameter type) {

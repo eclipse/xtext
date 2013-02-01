@@ -18,6 +18,8 @@ import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.common.types.JvmConstructor;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
+import org.eclipse.xtext.validation.IssueSeverities;
+import org.eclipse.xtext.validation.IssueSeveritiesProvider;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.XConstructorCall;
 import org.eclipse.xtext.xbase.XExpression;
@@ -51,6 +53,9 @@ public class RecomputingReentrantTypeResolver extends DefaultReentrantTypeResolv
   @Inject
   private ReflectExtensions _reflectExtensions;
   
+  @Inject
+  private IssueSeveritiesProvider issueSeveritiesProvider;
+  
   private final MapJoiner mapJoiner = new Function0<MapJoiner>() {
     public MapJoiner apply() {
       Joiner _on = Joiner.on("\n");
@@ -60,7 +65,8 @@ public class RecomputingReentrantTypeResolver extends DefaultReentrantTypeResolv
   }.apply();
   
   public RootResolvedTypes createResolvedTypes() {
-    RecordingRootResolvedTypes _recordingRootResolvedTypes = new RecordingRootResolvedTypes(this);
+    IssueSeverities _issueSeverities = this.issueSeveritiesProvider.getIssueSeverities(null);
+    RecordingRootResolvedTypes _recordingRootResolvedTypes = new RecordingRootResolvedTypes(this, _issueSeverities);
     return _recordingRootResolvedTypes;
   }
   

@@ -7,6 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.typesystem.internal;
 
+import java.util.Collection;
 import java.util.EnumSet;
 import java.util.List;
 
@@ -17,6 +18,7 @@ import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.diagnostics.AbstractDiagnostic;
+import org.eclipse.xtext.diagnostics.Severity;
 import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.XConstructorCall;
@@ -237,4 +239,31 @@ public class CompoundTypeComputationState implements ITypeComputationState {
 		throw new UnsupportedOperationException();
 	}
 	
+	public List<LightweightTypeReference> getExpectedExceptions() {
+		List<LightweightTypeReference> result = Lists.newArrayList();
+		for (int i = 0; i < components.length; i++) {
+			result.addAll(components[i].getExpectedExceptions());
+		}
+		return result;
+	}
+	
+	public ITypeComputationState withExpectedExceptions(Collection<LightweightTypeReference> declaredExceptionTypes) {
+		AbstractTypeComputationState[] result = new AbstractTypeComputationState[components.length];
+		for (int i = 0; i < components.length; i++) {
+			result[i] = components[i].withExpectedExceptions(declaredExceptionTypes);
+		}
+		return new CompoundTypeComputationState(owner, result);
+	}
+	
+	public Severity getSeverity(String issueCode) {
+		for (AbstractTypeComputationState state : components)
+			return state.getSeverity(issueCode);
+		throw new IllegalStateException("no components available.");
+	}
+
+	public boolean isIgnored(String issueCode) {
+		for (AbstractTypeComputationState state : components)
+			return state.isIgnored(issueCode);
+		throw new IllegalStateException("no components available.");
+	}
 }

@@ -7,6 +7,8 @@
  */
 package org.eclipse.xtext.xbase.tests.typesystem;
 
+import org.eclipse.xtext.validation.IssueSeverities;
+import org.eclipse.xtext.validation.IssueSeveritiesProvider;
 import org.eclipse.xtext.xbase.tests.typesystem.TimedRootResolvedTypes;
 import org.eclipse.xtext.xbase.tests.typesystem.TypeResolutionTimes;
 import org.eclipse.xtext.xbase.typesystem.internal.DefaultReentrantTypeResolver;
@@ -18,8 +20,10 @@ import org.eclipse.xtext.xbase.typesystem.internal.RootResolvedTypes;
 @SuppressWarnings("all")
 public class TimedReentrantTypeResolver extends DefaultReentrantTypeResolver {
   public RootResolvedTypes createResolvedTypes() {
+    IssueSeveritiesProvider _issueSeveritiesProvider = this.getIssueSeveritiesProvider();
+    IssueSeverities _issueSeverities = _issueSeveritiesProvider.getIssueSeverities(null);
     TypeResolutionTimes _typeResolutionTimes = new TypeResolutionTimes();
-    TimedRootResolvedTypes _timedRootResolvedTypes = new TimedRootResolvedTypes(this, _typeResolutionTimes);
+    TimedRootResolvedTypes _timedRootResolvedTypes = new TimedRootResolvedTypes(this, _issueSeverities, _typeResolutionTimes);
     return _timedRootResolvedTypes;
   }
 }

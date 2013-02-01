@@ -7,6 +7,8 @@
  */
 package org.eclipse.xtext.xbase.tests.typesystem;
 
+import org.eclipse.xtext.validation.IssueSeverities;
+import org.eclipse.xtext.validation.IssueSeveritiesProvider;
 import org.eclipse.xtext.xbase.tests.typesystem.ValidatingRootResolvedTypes;
 import org.eclipse.xtext.xbase.typesystem.internal.DefaultReentrantTypeResolver;
 import org.eclipse.xtext.xbase.typesystem.internal.RootResolvedTypes;
@@ -17,7 +19,9 @@ import org.eclipse.xtext.xbase.typesystem.internal.RootResolvedTypes;
 @SuppressWarnings("all")
 public class ValidatingReentrantTypeResolver extends DefaultReentrantTypeResolver {
   public RootResolvedTypes createResolvedTypes() {
-    ValidatingRootResolvedTypes _validatingRootResolvedTypes = new ValidatingRootResolvedTypes(this);
+    IssueSeveritiesProvider _issueSeveritiesProvider = this.getIssueSeveritiesProvider();
+    IssueSeverities _issueSeverities = _issueSeveritiesProvider.getIssueSeverities(null);
+    ValidatingRootResolvedTypes _validatingRootResolvedTypes = new ValidatingRootResolvedTypes(this, _issueSeverities);
     return _validatingRootResolvedTypes;
   }
 }

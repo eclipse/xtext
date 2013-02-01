@@ -29,6 +29,7 @@ import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.JvmTypeParameterDeclarator;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.diagnostics.AbstractDiagnostic;
+import org.eclipse.xtext.validation.IssueSeverities;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.XClosure;
 import org.eclipse.xtext.xbase.XConstructorCall;
@@ -130,6 +131,8 @@ public abstract class ResolvedTypes implements IResolvedTypes {
 		resolvedTypeParameters = null;
 		declaredTypeParameters = null;
 	}
+	
+	protected abstract IssueSeverities getSeverities();
 	
 	protected OwnedConverter getConverter() {
 		return converter;
@@ -330,6 +333,14 @@ public abstract class ResolvedTypes implements IResolvedTypes {
 	public LightweightTypeReference getExpectedType(XExpression expression) {
 		LightweightTypeReference result = doGetExpectedType(expression, false);
 		return toOwnedReference(result);
+	}
+	
+	public ResolvedTypes pushExpectedExceptions(Collection<LightweightTypeReference> exceptions) {
+		return new ExpectedExceptionsStackedResolvedTypes(this, exceptions);
+	}
+
+	public List<LightweightTypeReference> getExpectedExceptions() {
+		return Collections.<LightweightTypeReference> emptyList();
 	}
 	
 	@Nullable

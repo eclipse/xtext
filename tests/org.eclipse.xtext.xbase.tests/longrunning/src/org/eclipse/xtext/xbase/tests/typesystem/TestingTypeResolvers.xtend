@@ -13,6 +13,7 @@ import com.google.inject.Singleton
 import java.util.List
 import org.eclipse.xtext.common.types.JvmIdentifiableElement
 import org.eclipse.xtext.util.internal.Stopwatches
+import org.eclipse.xtext.validation.IssueSeverities
 import org.eclipse.xtext.xbase.XAbstractFeatureCall
 import org.eclipse.xtext.xbase.XExpression
 import org.eclipse.xtext.xbase.typesystem.computation.ILinkingCandidate
@@ -102,7 +103,7 @@ class EagerReentrantTypeResolver extends DefaultReentrantTypeResolver {
 class InvariantCheckingEagerReentrantTypeResolver extends EagerReentrantTypeResolver {
 	
 	override protected createResolvedTypes() {
-		return new ValidatingRootResolvedTypes(this)
+		return new ValidatingRootResolvedTypes(this, issueSeveritiesProvider.getIssueSeverities(null))
 	}
 	
 }
@@ -143,7 +144,7 @@ class TimedBatchTypeResolver extends DefaultBatchTypeResolver {
 class TimedReentrantTypeResolver extends DefaultReentrantTypeResolver {
 	
 	override createResolvedTypes() {
-		return new TimedRootResolvedTypes(this, new TypeResolutionTimes())
+		return new TimedRootResolvedTypes(this, issueSeveritiesProvider.getIssueSeverities(null), new TypeResolutionTimes())
 	}
 	
 }
@@ -164,8 +165,8 @@ class TimedRootResolvedTypes extends RootResolvedTypes {
 	
 	TypeResolutionTimes times
 	
-	new(DefaultReentrantTypeResolver resolver, TypeResolutionTimes times) {
-		super(resolver)
+	new(DefaultReentrantTypeResolver resolver, IssueSeverities issueSeverities, TypeResolutionTimes times) {
+		super(resolver, issueSeverities)
 		this.times = times
 	}
 	

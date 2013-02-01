@@ -11,6 +11,7 @@ import java.util.List;
 import java.util.Map;
 import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
+import org.eclipse.xtext.validation.IssueSeverities;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.typesystem.internal.DefaultReentrantTypeResolver;
 import org.eclipse.xtext.xbase.typesystem.internal.RootResolvedTypes;
@@ -24,8 +25,8 @@ import org.eclipse.xtext.xbase.typesystem.references.UnboundTypeReference;
 @NonNullByDefault
 @SuppressWarnings("all")
 public class PublicResolvedTypes extends RootResolvedTypes {
-  public PublicResolvedTypes(final DefaultReentrantTypeResolver resolver) {
-    super(resolver);
+  public PublicResolvedTypes(final DefaultReentrantTypeResolver resolver, final IssueSeverities issueSeverities) {
+    super(resolver, issueSeverities);
   }
   
   public UnboundTypeReference createUnboundTypeReference(final XExpression expression, final JvmTypeParameter type) {

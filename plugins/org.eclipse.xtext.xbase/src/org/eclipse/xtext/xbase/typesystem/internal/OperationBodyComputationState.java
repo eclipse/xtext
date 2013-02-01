@@ -26,11 +26,13 @@ import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 @NonNullByDefault
 public class OperationBodyComputationState extends AbstractLogicalContainerAwareRootComputationState {
 
-	public OperationBodyComputationState(ResolvedTypes resolvedTypes,
-			IFeatureScopeSession featureScopeSession,
-			JvmOperation operation) {
-		super(resolvedTypes, featureScopeSession, operation);
-		for(JvmFormalParameter parameter: operation.getParameters()) {
+	public OperationBodyComputationState(ResolvedTypes resolvedTypes, IFeatureScopeSession featureScopeSession, JvmOperation operation) {
+		super(
+				operation.getExceptions().isEmpty() ? resolvedTypes : resolvedTypes.pushExpectedExceptions(resolvedTypes.getConverter().toLightweightReferences(operation.getExceptions())),
+				featureScopeSession,
+				operation
+		);
+		for (JvmFormalParameter parameter : operation.getParameters()) {
 			addLocalToCurrentScope(parameter);
 		}
 	}

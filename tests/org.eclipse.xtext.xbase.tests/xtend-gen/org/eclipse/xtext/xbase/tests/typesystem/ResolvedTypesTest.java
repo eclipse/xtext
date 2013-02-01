@@ -13,6 +13,8 @@ import java.util.List;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.TypesFactory;
 import org.eclipse.xtext.diagnostics.AbstractDiagnostic;
+import org.eclipse.xtext.validation.IssueSeverities;
+import org.eclipse.xtext.validation.IssueSeveritiesProvider;
 import org.eclipse.xtext.xbase.XFeatureCall;
 import org.eclipse.xtext.xbase.XbaseFactory;
 import org.eclipse.xtext.xbase.junit.typesystem.PublicReentrantTypeResolver;
@@ -41,6 +43,17 @@ public class ResolvedTypesTest extends AbstractXbaseTestCase {
     this._resolver = resolver;
   }
   
+  @Inject
+  private IssueSeveritiesProvider _issueSeveritiesProvider;
+  
+  public IssueSeveritiesProvider getIssueSeveritiesProvider() {
+    return this._issueSeveritiesProvider;
+  }
+  
+  public void setIssueSeveritiesProvider(final IssueSeveritiesProvider issueSeveritiesProvider) {
+    this._issueSeveritiesProvider = issueSeveritiesProvider;
+  }
+  
   private TypesFactory typesFactory = TypesFactory.eINSTANCE;
   
   private XbaseFactory xbaseFactory = XbaseFactory.eINSTANCE;
@@ -58,7 +71,9 @@ public class ResolvedTypesTest extends AbstractXbaseTestCase {
   @Before
   public void initResolvedTypes() {
     PublicReentrantTypeResolver _resolver = this.getResolver();
-    PublicResolvedTypes _publicResolvedTypes = new PublicResolvedTypes(_resolver);
+    IssueSeveritiesProvider _issueSeveritiesProvider = this.getIssueSeveritiesProvider();
+    IssueSeverities _issueSeverities = _issueSeveritiesProvider.getIssueSeverities(null);
+    PublicResolvedTypes _publicResolvedTypes = new PublicResolvedTypes(_resolver, _issueSeverities);
     this.setTestMe(_publicResolvedTypes);
   }
   

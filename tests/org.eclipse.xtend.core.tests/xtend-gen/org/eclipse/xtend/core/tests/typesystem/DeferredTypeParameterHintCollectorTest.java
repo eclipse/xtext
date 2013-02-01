@@ -12,19 +12,14 @@ import com.google.inject.Inject;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-import org.eclipse.emf.common.util.EList;
 import org.eclipse.xtend.core.jvmmodel.IXtendJvmAssociations;
 import org.eclipse.xtend.core.tests.typesystem.AbstractTestingTypeReferenceOwner;
-import org.eclipse.xtend.core.tests.typesystem.MockTypeParameterSubstitutor;
 import org.eclipse.xtend.core.xtend.XtendFunction;
 import org.eclipse.xtend2.lib.StringConcatenation;
-import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
-import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.util.Triple;
 import org.eclipse.xtext.util.Tuples;
-import org.eclipse.xtext.xbase.junit.typesystem.PublicResolvedTypes;
 import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Functions.Function0;
@@ -40,7 +35,6 @@ import org.eclipse.xtext.xbase.typesystem.references.LightweightMergedBoundTypeA
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.UnboundTypeReference;
 import org.eclipse.xtext.xbase.typesystem.util.BoundTypeArgumentSource;
-import org.eclipse.xtext.xbase.typesystem.util.DeferredTypeParameterHintCollector;
 import org.eclipse.xtext.xbase.typesystem.util.Multimaps2;
 import org.eclipse.xtext.xbase.typesystem.util.VarianceInfo;
 import org.junit.Assert;
@@ -85,23 +79,8 @@ public class DeferredTypeParameterHintCollectorTest extends AbstractTestingTypeR
   }
   
   public Map<JvmTypeParameter,LightweightMergedBoundTypeArgument> in(final String typeParameters, final String expectedType, final String actualType) {
-    final JvmOperation operation = this.operation(typeParameters, expectedType, actualType);
-    DeferredTypeParameterHintCollector _deferredTypeParameterHintCollector = new DeferredTypeParameterHintCollector(this);
-    final DeferredTypeParameterHintCollector collector = _deferredTypeParameterHintCollector;
-    PublicResolvedTypes _publicResolvedTypes = new PublicResolvedTypes(this.resolver);
-    MockTypeParameterSubstitutor _mockTypeParameterSubstitutor = new MockTypeParameterSubstitutor(this, _publicResolvedTypes);
-    final MockTypeParameterSubstitutor substitutor = _mockTypeParameterSubstitutor;
-    EList<JvmFormalParameter> _parameters = operation.getParameters();
-    JvmFormalParameter _head = IterableExtensions.<JvmFormalParameter>head(_parameters);
-    JvmTypeReference _parameterType = _head.getParameterType();
-    LightweightTypeReference _lightweightReference = this.toLightweightReference(_parameterType);
-    final LightweightTypeReference hasUnbounds = substitutor.substitute(_lightweightReference);
-    EList<JvmFormalParameter> _parameters_1 = operation.getParameters();
-    JvmFormalParameter _last = IterableExtensions.<JvmFormalParameter>last(_parameters_1);
-    JvmTypeReference _parameterType_1 = _last.getParameterType();
-    final LightweightTypeReference isActual = this.toLightweightReference(_parameterType_1);
-    collector.processPairedReferences(hasUnbounds, isActual);
-    return substitutor.getTypeParameterMapping();
+    throw new Error("Unresolved compilation problems:"
+      + "\nInvalid number of arguments. Expected PublicResolvedTypes");
   }
   
   public List<LightweightBoundTypeArgument> hasHintsFor(final Map<JvmTypeParameter,LightweightMergedBoundTypeArgument> mapping, final String typeParamName) {

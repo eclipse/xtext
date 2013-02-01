@@ -20,6 +20,7 @@ import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.util.internal.Stopwatches;
 import org.eclipse.xtext.util.internal.Stopwatches.StoppedTask;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
+import org.eclipse.xtext.validation.IssueSeveritiesProvider;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.scoping.batch.IBatchScopeProvider;
 import org.eclipse.xtext.xbase.scoping.batch.IFeatureScopeSession;
@@ -73,6 +74,9 @@ public class DefaultReentrantTypeResolver extends AbstractRootedReentrantTypeRes
 	@Inject
 	private FeatureNameValidator featureNameValidator;
 	
+	@Inject
+	private IssueSeveritiesProvider issueSeveritiesProvider;
+	
 	private EObject root;
 	
 	private boolean resolving = false;
@@ -97,6 +101,10 @@ public class DefaultReentrantTypeResolver extends AbstractRootedReentrantTypeRes
 	@Override
 	protected boolean isHandled(JvmIdentifiableElement identifiableElement) {
 		return EcoreUtil.getRootContainer(identifiableElement) == getRoot();
+	}
+	
+	protected IssueSeveritiesProvider getIssueSeveritiesProvider() {
+		return issueSeveritiesProvider;
 	}
 	
 	public IResolvedTypes reentrantResolve() {
@@ -140,13 +148,13 @@ public class DefaultReentrantTypeResolver extends AbstractRootedReentrantTypeRes
 	}
 
 	protected RootResolvedTypes createResolvedTypes() {
-		return new RootResolvedTypes(this);
+		return new RootResolvedTypes(this, issueSeveritiesProvider.getIssueSeverities(root.eResource()));
 	}
-	
+
 	protected final ResolvedTypes createResolvedTypesForScoping(final XAbstractFeatureCall featureCall) {
 		DefaultReentrantTypeResolver clone = clone();
 		clone.scopeProviderAccess = createAbortingScopeProviderAccess(featureCall);
-		return new RootResolvedTypes(clone);
+		return new RootResolvedTypes(clone, issueSeveritiesProvider.getIssueSeverities(root.eResource()));
 	}
 
 	@Override

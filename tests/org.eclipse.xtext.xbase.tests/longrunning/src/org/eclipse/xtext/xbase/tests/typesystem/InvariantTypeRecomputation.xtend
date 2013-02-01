@@ -27,6 +27,8 @@ import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference
 import org.junit.Assert
 import org.eclipse.xtext.xbase.typesystem.internal.ImplicitFirstArgument
 import org.eclipse.xtext.xbase.typesystem.internal.TypeInsteadOfConstructorLinkingCandidate
+import org.eclipse.xtext.validation.IssueSeverities
+import org.eclipse.xtext.validation.IssueSeveritiesProvider
 
 /**
  * @author Sebastian Zarnekow
@@ -50,10 +52,12 @@ class RecomputingReentrantTypeResolver extends DefaultReentrantTypeResolver {
 	@Inject
 	extension ReflectExtensions	
 	
+	@Inject IssueSeveritiesProvider issueSeveritiesProvider
+	
 	val mapJoiner = Joiner::on('\n').withKeyValueSeparator('=')
 	
 	override createResolvedTypes() {
-		return new RecordingRootResolvedTypes(this)
+		return new RecordingRootResolvedTypes(this, issueSeveritiesProvider.getIssueSeverities(null))
 	}
 	
 	override resolve() {
@@ -209,8 +213,8 @@ class RecordingRootResolvedTypes extends RootResolvedTypes {
 	@Property
 	Map<XExpression, ILinkingCandidate> resolvedProxies
 	
-	new(DefaultReentrantTypeResolver resolver) {
-		super(resolver)
+	new(DefaultReentrantTypeResolver resolver, IssueSeverities issueSeverities) {
+		super(resolver, issueSeverities)
 	}
 	
 	override resolveProxies() {
