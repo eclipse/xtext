@@ -19,7 +19,7 @@ import com.google.inject.ImplementedBy;
  * TODO JavaDoc, toString
  */
 @NonNullByDefault
-@ImplementedBy(DefaultReentrantTypeResolver.class)
+@ImplementedBy(AbstractRootedReentrantTypeResolver.class)
 public interface IReentrantTypeResolver {
 
 	void initializeFrom(EObject root);

@@ -13,7 +13,6 @@ import java.util.Map;
 
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.common.types.JvmAnnotationAnnotationValue;
@@ -96,7 +95,7 @@ public class LogicalContainerAwareReentrantTypeResolver extends DefaultReentrant
 		}
 		
 		@Override
-		protected JvmTypeReference handleReentrantInvocation(@NonNull XComputedTypeReferenceImplCustom context) {
+		protected JvmTypeReference handleReentrantInvocation(XComputedTypeReferenceImplCustom context) {
 			resolvedTypes.addDiagnostic(new EObjectDiagnosticImpl(
 					Severity.WARNING, 
 					IssueCodes.TOO_LITTLE_TYPE_INFORMATION, 
@@ -163,6 +162,22 @@ public class LogicalContainerAwareReentrantTypeResolver extends DefaultReentrant
 	@Override
 	protected JvmType getRoot() {
 		return (JvmType) super.getRoot();
+	}
+	
+	@Override
+	protected boolean isHandled(JvmIdentifiableElement identifiableElement) {
+		if (identifiableElement instanceof XExpression) {
+			return isHandled((XExpression) identifiableElement);
+		}
+		return super.isHandled(identifiableElement);
+	}
+	
+	@Override
+	protected boolean isHandled(XExpression expression) {
+		JvmIdentifiableElement logicalContainer = logicalContainerProvider.getNearestLogicalContainer(expression);
+		if (logicalContainer == null)
+			return false;
+		return isHandled(logicalContainer);
 	}
 	
 	/**

@@ -38,7 +38,7 @@ class ValidatingBatchTypeResolver extends DefaultBatchTypeResolver {
 	override createResolver() {
 		resolverProvider.get
 	}
-	
+
 }
 
 /**
