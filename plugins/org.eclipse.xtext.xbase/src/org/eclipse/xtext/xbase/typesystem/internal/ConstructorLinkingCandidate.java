@@ -58,7 +58,7 @@ public class ConstructorLinkingCandidate extends AbstractPendingLinkingCandidate
 		return Lists.transform(getConstructorCall().getTypeArguments(), getState().getResolvedTypes().getConverter());
 	}
 	
-	public void resolveLinkingProxy() {
+	public void applyToModel() {
 		resolveLinkingProxy(XbasePackage.Literals.XCONSTRUCTOR_CALL__CONSTRUCTOR, XbasePackage.XCONSTRUCTOR_CALL__CONSTRUCTOR);
 	}
 	

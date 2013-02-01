@@ -21,7 +21,7 @@ public class ImplicitReceiver extends AbstractImplicitFeature {
 		super(featureCall, implicit, state);
 	}
 
-	public void resolveLinkingProxy() {
+	public void applyToModel() {
 		getOwner().setImplicitReceiver(getFeatureCall());
 	}
 

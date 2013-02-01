@@ -75,6 +75,43 @@ abstract class AbstractTypeResolverTest<Reference> extends AbstractXbaseTestCase
 	@Test def void testAssignment_03() throws Exception {
 		"new testdata.FieldAccess().stringField = ''".resolvesTo("String")
 	}
+	
+	@Test def void testAssignment_04() throws Exception {
+		"{
+			var Comparable<Object> it = null
+			switch it {
+	            CharSequence: { it.length it = null }
+        	}
+		}".resolvesTo("Comparable<Object>")
+	}
+	
+	@Test def void testAssignment_05() throws Exception {
+		"{
+			val Comparable<Object> it = null
+			switch it {
+	            CharSequence: it = null
+        	}
+		}".resolvesTo("Comparable<Object> & CharSequence")
+	}
+	
+	@Test def void testAssignment_06() throws Exception {
+		"{
+			var Comparable<Object> it = null
+			switch it {
+	            CharSequence: { it = null it }
+        	}
+		}".resolvesTo("Comparable<Object>")
+	}
+	
+	@Test def void testReassignedTypeDiscarded_01() throws Exception {
+		"{
+			var Comparable<Object> it = null
+			switch it {
+	            CharSequence: it
+        	}
+			it
+		}".resolvesTo("Comparable<Object>")
+	}
 
 	@Test def void testNullLiteral() throws Exception {
 		"null".resolvesTo("null")

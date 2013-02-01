@@ -394,6 +394,13 @@ class OldAPITypeResolverTest extends AbstractTypeResolverTest<JvmTypeReference> 
 		fail("not a timeout but too slow")
 	}
 	
+	@Ignore("fails in old implementation") @Test override testAssignment_05() throws Exception {
+		fail("fails in old implementation")
+	}
+	@Ignore("fails in old implementation") @Test override testAssignment_06() throws Exception {
+		fail("fails in old implementation")
+	}
+	
 	@Ignore("fails in old implementation") @Test override testFeatureCall_03_b() throws Exception {
 		fail("fails in old implementation")
 	}
