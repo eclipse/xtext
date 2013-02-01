@@ -11,6 +11,8 @@ import org.eclipse.xtext.junit4.GlobalRegistries;
 import org.eclipse.xtext.junit4.GlobalRegistries.GlobalStateMemento;
 import org.eclipse.xtext.junit4.IInjectorProvider;
 import org.eclipse.xtext.junit4.IRegistryConfigurator;
+import org.eclipse.xtext.preferences.IPreferenceValuesProvider;
+import org.eclipse.xtext.preferences.IPreferenceValuesProvider.SingletonPreferenceValuesProvider;
 import org.eclipse.xtext.resource.SynchronizedXtextResourceSet;
 import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.scoping.IScopeProvider;
@@ -80,6 +82,10 @@ public class XbaseInjectorProvider implements IInjectorProvider, IRegistryConfig
 
 		public Class<? extends Provider<SynchronizedXtextResourceSet>> provideSynchronizedResourceSet() {
 			return SynchronizedXtextResourceSetProvider.class;
+		}
+		
+		public Class<? extends IPreferenceValuesProvider> bindIPreferenceValuesProvider() {
+			return SingletonPreferenceValuesProvider.class;
 		}
 		
 		@Override
