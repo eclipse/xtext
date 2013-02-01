@@ -340,8 +340,8 @@ public abstract class AbstractTypeComputationState implements ITypeComputationSt
 			ExpressionTypeComputationState state = createExpressionComputationState(featureCall, resolvedTypes);
 			return new FeatureLinkingCandidate(featureCall, description, state) {
 				@Override
-				public void apply() {
-					super.apply();
+				public void applyToComputationState() {
+					super.applyToComputationState();
 					XExpression receiver = getReceiver();
 					if (receiver != null) {
 						LightweightTypeReference receiverType = getReceiverType();

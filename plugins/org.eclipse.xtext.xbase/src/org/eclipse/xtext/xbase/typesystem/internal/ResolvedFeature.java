@@ -68,7 +68,7 @@ public class ResolvedFeature extends AbstractResolvedReference<XAbstractFeatureC
 	}
 	
 	@Override
-	public void apply() {
+	public void applyToComputationState() {
 		XExpression receiver = getImplicitReceiver();
 		if (receiver != null) {
 			ResolvedTypes resolvedTypes = getState().getResolvedTypes();
@@ -79,7 +79,7 @@ public class ResolvedFeature extends AbstractResolvedReference<XAbstractFeatureC
 			}
 			resolvedTypes.acceptType(receiver, expectation, receiverType.copyInto(resolvedTypes.getReferenceOwner()), false, ConformanceHint.UNCHECKED);
 		}
-		super.apply();
+		super.applyToComputationState();
 	}
 	
 	@Override

@@ -15,6 +15,7 @@ import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.diagnostics.AbstractDiagnostic;
 import org.eclipse.xtext.util.IAcceptor;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
+import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.typesystem.computation.IFeatureLinkingCandidate;
 import org.eclipse.xtext.xbase.typesystem.computation.ILinkingCandidate;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
@@ -31,11 +32,11 @@ public class AppliedFeatureLinkingCandidate implements IFeatureLinkingCandidate 
 		this.delegate = delegate;
 	}
 	
-	public void apply() {
+	public void applyToComputationState() {
 		// nothing to do
 	}
 
-	public void resolveLinkingProxy() {
+	public void applyToModel() {
 		// nothing to do
 	}
 	
@@ -55,6 +56,10 @@ public class AppliedFeatureLinkingCandidate implements IFeatureLinkingCandidate 
 
 	public List<LightweightTypeReference> getTypeArguments() {
 		return delegate.getTypeArguments();
+	}
+	
+	public XExpression getExpression() {
+		return delegate.getExpression();
 	}
 
 	public XAbstractFeatureCall getFeatureCall() {

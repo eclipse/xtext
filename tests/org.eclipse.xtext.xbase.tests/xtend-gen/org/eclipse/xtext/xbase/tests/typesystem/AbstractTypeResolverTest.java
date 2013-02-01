@@ -98,6 +98,26 @@ public abstract class AbstractTypeResolverTest<Reference extends Object> extends
   }
   
   @Test
+  public void testAssignment_04() throws Exception {
+    this.resolvesTo("{\n\t\t\tvar Comparable<Object> it = null\n\t\t\tswitch it {\n\t            CharSequence: { it.length it = null }\n        \t}\n\t\t}", "Comparable<Object>");
+  }
+  
+  @Test
+  public void testAssignment_05() throws Exception {
+    this.resolvesTo("{\n\t\t\tval Comparable<Object> it = null\n\t\t\tswitch it {\n\t            CharSequence: it = null\n        \t}\n\t\t}", "Comparable<Object> & CharSequence");
+  }
+  
+  @Test
+  public void testAssignment_06() throws Exception {
+    this.resolvesTo("{\n\t\t\tvar Comparable<Object> it = null\n\t\t\tswitch it {\n\t            CharSequence: { it = null it }\n        \t}\n\t\t}", "Comparable<Object>");
+  }
+  
+  @Test
+  public void testReassignedTypeDiscarded_01() throws Exception {
+    this.resolvesTo("{\n\t\t\tvar Comparable<Object> it = null\n\t\t\tswitch it {\n\t            CharSequence: it\n        \t}\n\t\t\tit\n\t\t}", "Comparable<Object>");
+  }
+  
+  @Test
   public void testNullLiteral() throws Exception {
     this.resolvesTo("null", "null");
   }

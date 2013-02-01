@@ -42,7 +42,7 @@ public class NullFeatureLinkingCandidate extends AbstractNullLinkingCandidate im
 		return false;
 	}
 	
-	public void apply() {
+	public void applyToComputationState() {
 		FeatureLinkHelper helper = new FeatureLinkHelper();
 		XExpression receiver = helper.getSyntacticReceiver(getFeatureCall());
 		state.withNonVoidExpectation().computeTypes(receiver);

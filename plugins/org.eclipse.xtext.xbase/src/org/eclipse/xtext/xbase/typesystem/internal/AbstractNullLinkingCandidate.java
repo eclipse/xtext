@@ -30,13 +30,17 @@ public abstract class AbstractNullLinkingCandidate implements ILinkingCandidate 
 		this.featureOrConstructorCall = featureOrConstructorCall;
 	}
 	
-	public void resolveLinkingProxy() {
+	public void applyToModel() {
 		// no op
 	}
 	
 	public boolean validate(IAcceptor<? super AbstractDiagnostic> result) {
 		// no op
 		return true;
+	}
+	
+	public XExpression getExpression() {
+		return featureOrConstructorCall;
 	}
 
 	public JvmIdentifiableElement getFeature() {

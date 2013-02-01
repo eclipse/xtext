@@ -38,7 +38,7 @@ public abstract class AbstractResolvedReference<Expression extends XExpression> 
 		return typeParameterMapping;
 	}
 
-	public void resolveLinkingProxy() {
+	public void applyToModel() {
 		// nothing to do
 	}
 	

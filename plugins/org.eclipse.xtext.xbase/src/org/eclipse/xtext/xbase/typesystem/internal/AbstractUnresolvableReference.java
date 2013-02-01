@@ -49,11 +49,11 @@ public abstract class AbstractUnresolvableReference implements ILinkingCandidate
 		this.state = state;
 	}
 
-	protected XExpression getExpression() {
+	public XExpression getExpression() {
 		return expression;
 	}
 
-	public void apply() {
+	public void applyToComputationState() {
 		state.getResolvedTypes().acceptLinkingInformation(expression, this);
 		computeArgumentTypes();
 		for (ITypeExpectation expectation : state.getExpectations()) {
@@ -87,7 +87,7 @@ public abstract class AbstractUnresolvableReference implements ILinkingCandidate
 
 	protected abstract List<XExpression> getArguments();
 
-	public void resolveLinkingProxy() {
+	public void applyToModel() {
 		Resource resource = expression.eResource();
 		if (resource instanceof LazyLinkingResource) {
 			LazyLinkingResource lazyLinkingResource = (LazyLinkingResource) resource;

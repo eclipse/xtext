@@ -15,6 +15,7 @@ import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.diagnostics.AbstractDiagnostic;
 import org.eclipse.xtext.util.IAcceptor;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
+import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.typesystem.computation.IFeatureLinkingCandidate;
 import org.eclipse.xtext.xbase.typesystem.computation.ILinkingCandidate;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
@@ -39,7 +40,7 @@ public abstract class AbstractImplicitFeature implements IFeatureLinkingCandidat
 		return state;
 	}
 	
-	public void apply() {
+	public void applyToComputationState() {
 		state.getResolvedTypes().acceptLinkingInformation(implicit, this);
 	}
 	
@@ -64,6 +65,10 @@ public abstract class AbstractImplicitFeature implements IFeatureLinkingCandidat
 	}
 
 	public XAbstractFeatureCall getFeatureCall() {
+		return implicit;
+	}
+	
+	public XExpression getExpression() {
 		return implicit;
 	}
 

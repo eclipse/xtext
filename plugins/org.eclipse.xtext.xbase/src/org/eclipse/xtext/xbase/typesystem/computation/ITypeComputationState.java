@@ -124,22 +124,48 @@ public interface ITypeComputationState {
 
 	/**
 	 * A type checkpoint allows to re-specify the type of an identifiable that was already
-	 * type-computed. The refined type is discarded as soon as the state is left.
+	 * type-computed. The refined type is discarded as soon as the state is left. In that sense,
+	 * the type checkpoint describes the scope of certain type specializations.
 	 */
 	ITypeComputationState withTypeCheckpoint();
 
+	/**
+	 * Triggers type computation for a child expression of the currently considered expression.
+	 * @throws IllegalArgumentException if the given expression is the currently computed expression.
+	 */
 	ITypeComputationResult computeTypes(@Nullable XExpression expression);
 	
 	/**
+	 * Assigns the type to the given element and makes the element available in the scope.
+	 * This is fully equivalent to {@code assignType(element, type, true)}.
+	 * Each element may only be typed once.
+	 * 
+	 * @param element the identifiable that will be annotated with the given type.
 	 * @param type the type of the element. <code>null</code> or other invalid types will be treated as error types.
+	 * @see #assignType(JvmIdentifiableElement, LightweightTypeReference, boolean)
+	 * @see #addLocalToCurrentScope(JvmIdentifiableElement)
+	 * @see #assignTypes()
+	 * @see ITypeAssigner
 	 */
 	ITypeComputationState assignType(JvmIdentifiableElement element, @Nullable LightweightTypeReference type);
 	
 	/**
+	 * Assigns the given type to the given element and optionally adds the element to the scope.
+	 * Each element may only be typed once.
+	 * 
+	 * @param element the identifiable that will be annotated with the given type.
 	 * @param type the type of the element. <code>null</code> or other invalid types will be treated as error types.
+	 * @param addToChildScope <code>true</code> if the element should be added to the child scope, <code>false</code> if only the type
+	 * 	information should be recorded.
+	 * @see ITypeAssigner
+	 * @see #assignTypes()
+	 * @see #addLocalToCurrentScope(JvmIdentifiableElement)
 	 */
 	ITypeComputationState assignType(JvmIdentifiableElement element, @Nullable LightweightTypeReference type, boolean addToChildScope);
 	
+	/**
+	 * Obtain a new {@link ITypeAssigner} that allows to add a bulk of {@link JvmIdentifiableElement elements} to this computation state.
+	 */
 	ITypeAssigner assignTypes();
 	
 	/**
@@ -183,14 +209,53 @@ public interface ITypeComputationState {
 	 */
 	List<? extends IFeatureLinkingCandidate> getLinkingCandidates(XAbstractFeatureCall featureCall);
 	
+	/**
+	 * Annotates the currently considered expression(s) with the given type.
+	 * It is assumed that the type does not depend on the expectation.
+	 */
 	void acceptActualType(LightweightTypeReference type);
 	
+	/**
+	 * Annotates the currently considered expression(s) with the given type.
+	 * It is assumed that the type does not depend on the expectation.
+	 * 
+	 * The conformance hints are used to decide which variant will be finally chosen, if more than
+	 * one type was given.
+	 */
 	void acceptActualType(LightweightTypeReference type, ConformanceHint... hints);
 	
 	// TODO implement this better, especially for instanceof in conditions
-	
+	/**
+	 * Allows to specialize the known type of an identifiable, that was already annotated
+	 * with a type. Type refinements may be used to save casts. Usually only
+	 * simple identifiables should be refined, e.g. {@link XVariableDeclaration local variables}.
+	 * It's the clients responsibility to decide about that.
+	 * 
+	 * Example:
+	 * <pre>
+	 * val Object x = obtainInstance
+	 * if (x instanceof String && x.length > 0) {
+	 *   x.substring(1)
+	 * }
+	 * </pre>
+	 * 
+	 * The instanceof expression may refine the type for subsequent expressions, e.g. in boolean
+	 * conditions or blocks.  
+	 */
 	void reassignType(JvmIdentifiableElement refinable, LightweightTypeReference type);
 	
+	/**
+	 * A reassigned type may become obsolete due to assignments. Those should discard the reassign information.
+	 * Example:
+	 * <pre>
+	 * var node = someNode;
+	 * while(node instanceof ContainerNode) {
+	 * 		node = node.container
+	 * 		node.container // type error
+	 * }
+	 * </pre>
+	 * After the assignment in the while loop, the node is no longer considered to be a ContainerNode. 
+	 */
 	void discardReassignedTypes(JvmIdentifiableElement refinable);
 
 	ITypeReferenceOwner getReferenceOwner();

@@ -35,6 +35,14 @@ public class ExpressionTypeComputationState extends AbstractStackedTypeComputati
 		super(resolvedTypes, featureScopeSession, reentrantTypeResolver, parent);
 		this.expression = expression;
 	}
+	
+	@Override
+	protected ExpressionAwareStackedResolvedTypes doComputeTypes(XExpression expression) {
+		if (expression == this.expression) {
+			throw new IllegalArgumentException("Attempt to compute the type of the currently computed expression: " + expression);
+		}
+		return super.doComputeTypes(expression);
+	}
 
 	@Override
 	protected LightweightTypeReference acceptType(ResolvedTypes resolvedTypes, AbstractTypeExpectation expectation, LightweightTypeReference type, boolean returnType, ConformanceHint... hints) {

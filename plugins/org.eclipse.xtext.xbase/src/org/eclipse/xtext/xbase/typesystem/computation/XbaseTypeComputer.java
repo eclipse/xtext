@@ -24,6 +24,7 @@ import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.XAbstractWhileExpression;
+import org.eclipse.xtext.xbase.XAssignment;
 import org.eclipse.xtext.xbase.XBlockExpression;
 import org.eclipse.xtext.xbase.XBooleanLiteral;
 import org.eclipse.xtext.xbase.XCasePart;
@@ -78,8 +79,8 @@ public class XbaseTypeComputer implements ITypeComputer {
 	private CommonTypeComputationServices services;
 	
 	public void computeTypes(XExpression expression, ITypeComputationState state) {
-		if (expression instanceof XFeatureCall) {
-			_computeTypes((XFeatureCall)expression, state);
+		if (expression instanceof XAssignment) {
+			_computeTypes((XAssignment)expression, state);
 		} else if (expression instanceof XAbstractFeatureCall) {
 			_computeTypes((XAbstractFeatureCall)expression, state);
 		} else if (expression instanceof XAbstractWhileExpression) {
@@ -310,7 +311,7 @@ public class XbaseTypeComputer implements ITypeComputer {
 	protected void _computeTypes(final XConstructorCall constructorCall, ITypeComputationState state) {
 		List<? extends IConstructorLinkingCandidate> candidates = state.getLinkingCandidates(constructorCall);
 		ILinkingCandidate best = getBestCandidate(candidates);
-		best.apply();
+		best.applyToComputationState();
 	}
 	
 	/**
@@ -591,10 +592,20 @@ public class XbaseTypeComputer implements ITypeComputer {
 		state.withoutExpectation().computeTypes(object.getFinallyExpression());
 	}
 	
+	protected void _computeTypes(final XAssignment assignment, ITypeComputationState state) {
+		List<? extends IFeatureLinkingCandidate> candidates = state.getLinkingCandidates(assignment);
+		ILinkingCandidate best = getBestCandidate(candidates);
+		JvmIdentifiableElement feature = best.getFeature();
+		if (feature != null && mustDiscardRefinement(feature)) {
+			state.discardReassignedTypes(feature);
+		}
+		best.applyToComputationState();
+	}
+	
 	protected void _computeTypes(final XAbstractFeatureCall featureCall, ITypeComputationState state) {
 		List<? extends IFeatureLinkingCandidate> candidates = state.getLinkingCandidates(featureCall);
 		ILinkingCandidate best = getBestCandidate(candidates);
-		best.apply();
+		best.applyToComputationState();
 	}
 	
 	protected ILinkingCandidate getBestCandidate(List<? extends ILinkingCandidate> candidates) {
@@ -614,12 +625,26 @@ public class XbaseTypeComputer implements ITypeComputer {
 			List<? extends IFeatureLinkingCandidate> candidates = state.getLinkingCandidates((XFeatureCall)object);
 			if (candidates.size() == 1) {
 				JvmIdentifiableElement linkedFeature = candidates.get(0).getFeature();
-				if (linkedFeature instanceof XVariableDeclaration || linkedFeature instanceof JvmFormalParameter || linkedFeature instanceof JvmField) {
+				if (isRefinableFeature(linkedFeature)) {
 					return linkedFeature;
 				}
 			}
 		}
 		return null;
+	}
+
+	protected boolean isRefinableFeature(JvmIdentifiableElement feature) {
+		return feature instanceof XVariableDeclaration || feature instanceof JvmFormalParameter || feature instanceof JvmField;
+	}
+	
+	protected boolean mustDiscardRefinement(JvmIdentifiableElement feature) {
+		if (feature instanceof XVariableDeclaration) {
+			return ((XVariableDeclaration) feature).isWriteable();
+		}
+		if (feature instanceof JvmField) {
+			return !((JvmField) feature).isFinal();
+		}
+		return false;
 	}
 	
 	// TODO implement this thing

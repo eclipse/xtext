@@ -39,7 +39,7 @@ public class NullConstructorLinkingCandidate extends AbstractNullLinkingCandidat
 		throw new UnsupportedOperationException();
 	}
 	
-	public void apply() {
+	public void applyToComputationState() {
 		for(XExpression argument: getConstructorCall().getArguments()) {
 			state.withNonVoidExpectation().computeTypes(argument);
 		}

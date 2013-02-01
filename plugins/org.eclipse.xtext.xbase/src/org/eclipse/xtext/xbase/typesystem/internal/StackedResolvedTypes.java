@@ -174,10 +174,10 @@ public class StackedResolvedTypes extends ResolvedTypes {
 	
 	@Override
 	@Nullable
-	protected LightweightTypeReference doGetActualType(JvmIdentifiableElement identifiable) {
-		LightweightTypeReference result = super.doGetActualType(identifiable);
+	protected LightweightTypeReference doGetActualType(JvmIdentifiableElement identifiable, boolean ignoreReassignedTypes) {
+		LightweightTypeReference result = super.doGetActualType(identifiable, ignoreReassignedTypes);
 		if (result == null) {
-			result = parent.doGetActualType(identifiable);
+			result = parent.doGetActualType(identifiable, ignoreReassignedTypes);
 		}
 		return result;
 	}

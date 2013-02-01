@@ -487,13 +487,13 @@ public abstract class ResolvedTypes implements IResolvedTypes {
 	
 	@Nullable
 	public LightweightTypeReference getActualType(JvmIdentifiableElement identifiable) {
-		LightweightTypeReference result = doGetActualType(identifiable);
+		LightweightTypeReference result = doGetActualType(identifiable, false);
 		return toOwnedReference(result);
 	}
 
 	@Nullable
-	protected LightweightTypeReference doGetActualType(JvmIdentifiableElement identifiable) {
-		if (reassignedTypes != null) {
+	protected LightweightTypeReference doGetActualType(JvmIdentifiableElement identifiable, boolean ignoreReassignedTypes) {
+		if (reassignedTypes != null && !ignoreReassignedTypes) {
 			LightweightTypeReference result = reassignedTypes.get(identifiable);
 			if (result != null) {
 				return result;

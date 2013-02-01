@@ -197,7 +197,7 @@ public abstract class AbstractLinkingCandidate<Expression extends XExpression> i
 		return Collections.emptyList();
 	}
 	
-	public void apply() {
+	public void applyToComputationState() {
 		preApply();
 		JvmIdentifiableElement feature = getFeature();
 		LightweightTypeReference featureType = getDeclaredType(feature);
@@ -374,9 +374,12 @@ public abstract class AbstractLinkingCandidate<Expression extends XExpression> i
 		return state.getResolvedTypes().getExpectedType(expression);
 	}
 	
+	/**
+	 * Returns the actual type of the given element. Does not consider reassigned types.
+	 */
 	@Nullable
-	protected LightweightTypeReference getActualType(JvmIdentifiableElement identifiableElement) {
-		return state.getResolvedTypes().getActualType(identifiableElement);
+	protected LightweightTypeReference getActualType(JvmIdentifiableElement element, boolean ignoreReassignedTypes) {
+		return state.getResolvedTypes().doGetActualType(element, ignoreReassignedTypes);
 	}
 	
 	@Nullable
@@ -403,7 +406,7 @@ public abstract class AbstractLinkingCandidate<Expression extends XExpression> i
 	
 	public abstract JvmIdentifiableElement getFeature();
 	
-	protected Expression getExpression() {
+	public Expression getExpression() {
 		return expression;
 	}
 	

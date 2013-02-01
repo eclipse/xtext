@@ -43,7 +43,7 @@ public class ExpressionArgumentFactory {
 		} else {
 			if (expression instanceof XAssignment) {
 				XAssignment assignment = (XAssignment) expression;
-				LightweightTypeReference featureType = candidate.getActualType(candidate.getFeature());
+				LightweightTypeReference featureType = candidate.getActualType(candidate.getFeature(), true);
 				return new AssignmentFeatureCallArguments(assignment.getValue(), featureType);
 			} else {
 				return new StandardFeatureCallArguments(candidate.getArguments(), Collections.<JvmFormalParameter>emptyList(), candidate.hasReceiver(), candidate.getState().getConverter());

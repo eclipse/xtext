@@ -291,7 +291,7 @@ public class FeatureLinkingCandidate extends AbstractPendingLinkingCandidate<XAb
 		super.preApply();
 		XExpression implicitFirstArgument = getImplicitFirstArgument();
 		if (implicitFirstArgument != null) {
-			new ImplicitFirstArgument(getFeatureCall(), (XAbstractFeatureCall) implicitFirstArgument, getState()).apply();
+			new ImplicitFirstArgument(getFeatureCall(), (XAbstractFeatureCall) implicitFirstArgument, getState()).applyToComputationState();
 		}
 	}
 	
@@ -306,7 +306,7 @@ public class FeatureLinkingCandidate extends AbstractPendingLinkingCandidate<XAb
 			}
 			resolvedTypes.acceptType(implicitReceiver, expectation, receiverType.copyInto(resolvedTypes.getReferenceOwner()), false, ConformanceHint.UNCHECKED);
 			if (implicitReceiver instanceof XAbstractFeatureCall) {
-				new ImplicitReceiver(getFeatureCall(), (XAbstractFeatureCall) implicitReceiver, getState()).apply();
+				new ImplicitReceiver(getFeatureCall(), (XAbstractFeatureCall) implicitReceiver, getState()).applyToComputationState();
 			} else {
 				throw new IllegalStateException("unexpected implicit receiver, was: " + implicitReceiver);
 			}
@@ -458,7 +458,7 @@ public class FeatureLinkingCandidate extends AbstractPendingLinkingCandidate<XAb
 		return super.getDeclaredType(feature);
 	}
 	
-	public void resolveLinkingProxy() {
+	public void applyToModel() {
 		resolveLinkingProxy(XbasePackage.Literals.XABSTRACT_FEATURE_CALL__FEATURE, XbasePackage.XABSTRACT_FEATURE_CALL__FEATURE);
 	}
 

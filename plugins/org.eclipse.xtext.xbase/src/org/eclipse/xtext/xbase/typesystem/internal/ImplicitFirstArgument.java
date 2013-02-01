@@ -21,7 +21,7 @@ public class ImplicitFirstArgument extends AbstractImplicitFeature {
 		super(featureCall, implicit, state);
 	}
 
-	public void resolveLinkingProxy() {
+	public void applyToModel() {
 		getOwner().setImplicitFirstArgument(getFeatureCall());
 	}
 	

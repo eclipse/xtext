@@ -15,6 +15,7 @@ import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.diagnostics.AbstractDiagnostic;
 import org.eclipse.xtext.util.IAcceptor;
+import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.typesystem.internal.AbstractPendingLinkingCandidate;
 import org.eclipse.xtext.xbase.typesystem.internal.AbstractResolvedReference;
 import org.eclipse.xtext.xbase.typesystem.internal.AbstractUnresolvableReference;
@@ -40,19 +41,22 @@ import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 public interface ILinkingCandidate {
 
 	/**
-	 * Apply this candidate to the underlying model. This propagates
+	 * Apply this candidate to the current computation state model. This propagates
 	 * the type information about arguments and child expressions to the
-	 * currently resolution state.
+	 * currently active resolution state.
 	 */
-	void apply();
+	void applyToComputationState();
 	
 	/**
 	 * Injects the resolved feature into the model with the same semantics as the implicit
 	 * {@link EcoreUtil#resolve(org.eclipse.emf.ecore.EObject, org.eclipse.emf.ecore.EObject) resolve}
 	 * of EMF. This implies that the linked feature call may still point to a proxy afterwards.
 	 */
-	void resolveLinkingProxy();
+	void applyToModel();
 	
+	// TODO we should use a smarter acceptor here
+	// e.g. it should be possible to suppress diagnostics for children of certain expresions
+	// and therefore it should expose something like 'isSuppressed()'
 	/**
 	 * Produce diagnostics for this condidate. It is not the responsibility of this
 	 * candidate to propagate the acceptor to its children.
@@ -63,8 +67,8 @@ public interface ILinkingCandidate {
 	 * Produces the best candidate for the current two candidates. It may turn out
 	 * that both candidates (<code>this</code> and <code>other</code>) are ambiguous 
 	 * so no prefered candidate can be chosen. In that case, a new linking candidate
-	 * may be produced that carries this information and will use that on {@link #apply()},
-	 * {@link #resolveLinkingProxy()}, and {@link #validate(IAcceptor)}.
+	 * may be produced that carries this information and will use that on {@link #applyToComputationState()},
+	 * {@link #applyToModel()}, and {@link #validate(IAcceptor)}.
 	 */
 	ILinkingCandidate getPreferredCandidate(ILinkingCandidate other);
 	
@@ -72,6 +76,11 @@ public interface ILinkingCandidate {
 	 * The currently considered feature (if any). Otherwise <code>null</code>.
 	 */
 	@Nullable JvmIdentifiableElement getFeature();
+	
+	/**
+	 * The current expression that shall be linked.
+	 */
+	XExpression getExpression();
 	
 	/**
 	 * The resolved type arguments.
