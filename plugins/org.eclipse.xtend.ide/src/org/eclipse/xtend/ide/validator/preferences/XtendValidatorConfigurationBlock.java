@@ -22,7 +22,7 @@ public class XtendValidatorConfigurationBlock extends XbaseValidationConfigurati
 		super.fillSettingsPage(composite, nColumns, defaultIndent);
 		fillDispatchSection(new ComboBoxBuilder(this, createSection("Dispatch methods", composite, nColumns),
 				defaultIndent));
-		fillJavaDocSection(new ComboBoxBuilder(this,createSection("JavaDoc", composite, nColumns),
+		fillJavaDocSection(new ComboBoxBuilder(this,createSection("Javadoc", composite, nColumns),
 				defaultIndent));
 	}
 
