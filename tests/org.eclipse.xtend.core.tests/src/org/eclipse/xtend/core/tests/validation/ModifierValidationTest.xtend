@@ -1,13 +1,27 @@
+/*******************************************************************************
+ * Copyright (c) 2013 itemis AG (http://www.itemis.eu) and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *******************************************************************************/
 package org.eclipse.xtend.core.tests.validation
 
 import com.google.inject.Inject
 import org.eclipse.xtend.core.tests.AbstractXtendTestCase
+import org.eclipse.xtend.core.tests.NewTypeSystemRuntimeInjectorProvider
+import org.eclipse.xtext.junit4.InjectWith
+import org.eclipse.xtext.junit4.XtextRunner
 import org.eclipse.xtext.junit4.validation.ValidationTestHelper
 import org.junit.Test
+import org.junit.runner.RunWith
 
 import static org.eclipse.xtend.core.validation.IssueCodes.*
 import static org.eclipse.xtend.core.xtend.XtendPackage$Literals.*
 
+/**
+ * @author Jan Koehnlein - Initial contribution and API
+ */
 class ModifierValidationTest extends AbstractXtendTestCase {
 	
 	@Inject extension ValidationTestHelper
@@ -178,4 +192,9 @@ class ModifierValidationTest extends AbstractXtendTestCase {
 	def protected memberInAnnotation(String model) {
 		annotationType('''annotation Foo { «model» }''').members.get(0)
 	}
+}
+
+@RunWith(typeof(XtextRunner))
+@InjectWith(typeof(NewTypeSystemRuntimeInjectorProvider))
+class ModifierValidationTest2 extends ModifierValidationTest {
 }

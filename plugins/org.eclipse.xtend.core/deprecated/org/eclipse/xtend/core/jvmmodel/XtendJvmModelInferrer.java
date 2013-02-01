@@ -302,7 +302,7 @@ public class XtendJvmModelInferrer implements IJvmModelInferrer {
 		for (XtendMember member : source.getMembers()) {
 			if (member instanceof XtendField
 					|| (member instanceof XtendFunction && ((XtendFunction) member).getName() != null)) {
-				transform(member, inferredJvmType);
+				transform(member, inferredJvmType, false);
 			}
 		}
 		
@@ -344,7 +344,7 @@ public class XtendJvmModelInferrer implements IJvmModelInferrer {
 			if (member instanceof XtendField
 					|| (member instanceof XtendFunction && ((XtendFunction) member).getName() != null)
 					|| member instanceof XtendConstructor) {
-				transform(member, inferredJvmType);
+				transform(member, inferredJvmType, true);
 			}
 		}
 		
@@ -566,9 +566,9 @@ public class XtendJvmModelInferrer implements IJvmModelInferrer {
 		typeExtensions.setSynthetic(constructor, true);
 	}
 
-	protected void transform(XtendMember sourceMember, JvmGenericType container) {
+	protected void transform(XtendMember sourceMember, JvmGenericType container, boolean allowDispatch) {
 		if (sourceMember instanceof XtendFunction) {
-			transform((XtendFunction) sourceMember, container);
+			transform((XtendFunction) sourceMember, container, allowDispatch);
 		} else if (sourceMember instanceof XtendField) {
 			transform((XtendField) sourceMember, container);
 		} else if (sourceMember instanceof XtendConstructor) {
@@ -580,14 +580,14 @@ public class XtendJvmModelInferrer implements IJvmModelInferrer {
 		}
 	}
 
-	protected void transform(XtendFunction source, JvmGenericType container) {
+	protected void transform(XtendFunction source, JvmGenericType container, boolean allowDispatch) {
 		JvmOperation operation = typesFactory.createJvmOperation();
 		operation.setAbstract(source.getExpression()==null);
 		container.getMembers().add(operation);
 		associator.associatePrimary(source, operation);
 		String sourceName = source.getName();
 		JvmVisibility visibility = source.getVisibility();
-		if (source.isDispatch()) {
+		if (allowDispatch && source.isDispatch()) {
 			if (source.getDeclaredVisibility() == null)
 				visibility = JvmVisibility.PROTECTED;
 			sourceName = "_" + sourceName;
