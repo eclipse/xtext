@@ -19,6 +19,7 @@ import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmMember;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.diagnostics.AbstractDiagnostic;
+import org.eclipse.xtext.validation.IssueSeverities;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.XConstructorCall;
 import org.eclipse.xtext.xbase.XExpression;
@@ -213,6 +214,11 @@ public class StackedResolvedTypes extends ResolvedTypes {
 	}
 	
 	@Override
+	public List<LightweightTypeReference> getExpectedExceptions() {
+		return parent.getExpectedExceptions();
+	}
+	
+	@Override
 	public List<JvmTypeParameter> getDeclaredTypeParameters() {
 		List<JvmTypeParameter> result = basicGetDeclardTypeParameters();
 		if (result != null)
@@ -380,5 +386,10 @@ public class StackedResolvedTypes extends ResolvedTypes {
 	@Override
 	protected void markToBeInferred(XExpression expression) {
 		parent.markToBeInferred(expression);
+	}
+
+	@Override
+	protected IssueSeverities getSeverities() {
+		return parent.getSeverities();
 	}
 }

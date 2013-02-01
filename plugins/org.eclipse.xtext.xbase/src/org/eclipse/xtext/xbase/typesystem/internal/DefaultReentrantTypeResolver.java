@@ -9,6 +9,7 @@ package org.eclipse.xtext.xbase.typesystem.internal;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
+import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.jdt.annotation.Nullable;
@@ -20,6 +21,8 @@ import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.util.internal.Stopwatches;
 import org.eclipse.xtext.util.internal.Stopwatches.StoppedTask;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
+import org.eclipse.xtext.validation.IssueSeverities;
+import org.eclipse.xtext.validation.IssueSeveritiesProvider;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.scoping.batch.IBatchScopeProvider;
 import org.eclipse.xtext.xbase.scoping.batch.IFeatureScopeSession;
@@ -73,6 +76,9 @@ public class DefaultReentrantTypeResolver extends AbstractRootedReentrantTypeRes
 	@Inject
 	private FeatureNameValidator featureNameValidator;
 	
+	@Inject
+	private IssueSeveritiesProvider issueSeveritiesProvider;
+	
 	private EObject root;
 	
 	private boolean resolving = false;
@@ -97,6 +103,11 @@ public class DefaultReentrantTypeResolver extends AbstractRootedReentrantTypeRes
 	@Override
 	protected boolean isHandled(JvmIdentifiableElement identifiableElement) {
 		return EcoreUtil.getRootContainer(identifiableElement) == getRoot();
+	}
+	
+	protected IssueSeverities getIssueSeverities() {
+		Resource resource = root == null ? null : root.eResource();
+		return issueSeveritiesProvider.getIssueSeverities(resource);
 	}
 	
 	public IResolvedTypes reentrantResolve() {

@@ -25,4 +25,8 @@ public class MapBasedPreferenceValues implements IPreferenceValues {
 		values.put(key, value);
 	}
 	
+	public void clear() {
+		values.clear();
+	}
+	
 }
