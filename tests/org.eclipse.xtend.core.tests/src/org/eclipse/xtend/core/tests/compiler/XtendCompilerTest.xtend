@@ -830,6 +830,46 @@ abstract class AbstractXtendCompilerTest extends AbstractXtendTestCase {
 	}
 	
 	@Test
+	def testClosureSneakyThrow_02() throws Exception {
+		'''
+			abstract class Foo {
+			 def Object getFoo(String x) throws Exception
+			 def bar() {
+			   <String>newArrayList.toMap[foo]
+			 }
+			}
+		'''.assertCompilesTo('''
+			import java.util.ArrayList;
+			import java.util.Map;
+			import org.eclipse.xtext.xbase.lib.CollectionLiterals;
+			import org.eclipse.xtext.xbase.lib.Exceptions;
+			import org.eclipse.xtext.xbase.lib.Functions.Function1;
+			import org.eclipse.xtext.xbase.lib.IterableExtensions;
+			
+			@SuppressWarnings("all")
+			public abstract class Foo {
+			  public abstract Object getFoo(final String x) throws Exception;
+			  
+			  public Map<Object,String> bar() {
+			    ArrayList<String> _newArrayList = CollectionLiterals.<String>newArrayList();
+			    final Function1<String,Object> _function = new Function1<String,Object>() {
+			        public Object apply(final String it) {
+			          try {
+			            Object _foo = Foo.this.getFoo(it);
+			            return _foo;
+			          } catch (Throwable _e) {
+			            throw Exceptions.sneakyThrow(_e);
+			          }
+			        }
+			      };
+			    Map<Object,String> _map = IterableExtensions.<Object, String>toMap(_newArrayList, _function);
+			    return _map;
+			  }
+			}
+		''')
+	}
+	
+	@Test
 	def testFieldInitialization_01() { 
 		assertCompilesTo('''
 			package foo
@@ -1665,6 +1705,76 @@ abstract class AbstractXtendCompilerTest extends AbstractXtendTestCase {
 			  }
 			}
 			''');
+	}
+	
+	@Test
+	def testStaticMethod_02() {
+		assertCompilesTo('''
+			package foo
+			class Bar<T extends CharSequence> {
+				static def factory() { new Bar }
+				static def concreteFactory() { new Bar<StringBuilder> }
+				static def <X extends String> parameterizedFactory() { new Bar<X> }
+			}
+		''', '''
+			package foo;
+
+			@SuppressWarnings("all")
+			public class Bar<T extends CharSequence> {
+			  public static Bar<CharSequence> factory() {
+			    Bar<CharSequence> _bar = new Bar<CharSequence>();
+			    return _bar;
+			  }
+			  
+			  public static Bar<StringBuilder> concreteFactory() {
+			    Bar<StringBuilder> _bar = new Bar<StringBuilder>();
+			    return _bar;
+			  }
+			  
+			  public static <X extends String> Bar<X> parameterizedFactory() {
+			    Bar<X> _bar = new Bar<X>();
+			    return _bar;
+			  }
+			}
+		''');
+	}
+	
+	@Test
+	def testInstanceMethod() {
+		assertCompilesTo('''
+			package foo
+			class Bar<T extends CharSequence> {
+				def factory() { new Bar }
+				def concreteFactory() { new Bar<String> }
+				def parameterizedFactory() { new Bar<T> }
+				def <X extends T> concreteParameterizedFactory() { new Bar<X> }
+			}
+		''', '''
+			package foo;
+
+			@SuppressWarnings("all")
+			public class Bar<T extends CharSequence> {
+			  public Bar<CharSequence> factory() {
+			    Bar<CharSequence> _bar = new Bar<CharSequence>();
+			    return _bar;
+			  }
+			  
+			  public Bar<String> concreteFactory() {
+			    Bar<String> _bar = new Bar<String>();
+			    return _bar;
+			  }
+			  
+			  public Bar<T> parameterizedFactory() {
+			    Bar<T> _bar = new Bar<T>();
+			    return _bar;
+			  }
+			  
+			  public <X extends T> Bar<X> concreteParameterizedFactory() {
+			    Bar<X> _bar = new Bar<X>();
+			    return _bar;
+			  }
+			}
+		''');
 	}
 	
 	@Test
@@ -2908,6 +3018,24 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 	@Test
 	override testAnnotationWithIntArray() throws Exception {
 		super.testAnnotationWithIntArray()
+	}
+	
+	@Ignore("Fails with old impl")
+	@Test
+	override testStaticMethod_02() {
+		super.testStaticMethod_02()
+	}
+	
+	@Ignore("Fails with old impl")
+	@Test
+	override testInstanceMethod() {
+		super.testInstanceMethod()
+	}
+	
+	@Ignore("Fails with old impl")
+	@Test
+	override testClosureSneakyThrow_02() {
+		super.testClosureSneakyThrow_02()
 	}
 	
 	/*
