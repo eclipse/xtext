@@ -142,10 +142,12 @@ public class DynamicExtensionsScope extends AbstractSessionBasedScope {
 				});
 				if (!allFeatures.isEmpty()) {
 					for(JvmFeature feature: allFeatures) {
-						if (firstArgument != null)
-							result.add(createDescription(name, feature, extensionProvider.getKey(), extensionType, bucket));
-						if (implicit) {
-							result.add(createReceiverDescription(name, feature, extensionProvider.getKey(), extensionType, bucket));
+						if (!feature.isStatic()) {
+							if (firstArgument != null)
+								result.add(createDescription(name, feature, extensionProvider.getKey(), extensionType, bucket));
+							if (implicit) {
+								result.add(createReceiverDescription(name, feature, extensionProvider.getKey(), extensionType, bucket));
+							}
 						}
 					}
 				}

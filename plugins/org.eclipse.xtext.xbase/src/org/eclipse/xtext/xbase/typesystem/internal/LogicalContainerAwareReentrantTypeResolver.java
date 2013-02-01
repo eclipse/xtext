@@ -11,7 +11,6 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
-import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.jdt.annotation.Nullable;
@@ -368,7 +367,7 @@ public class LogicalContainerAwareReentrantTypeResolver extends DefaultReentrant
 				return;
 			throw new IllegalStateException("No resolved type found. Field was: " + field.getIdentifier());
 		}
-		FieldTypeComputationState state = new FieldTypeComputationState(childResolvedTypes, featureScopeSession, field, this);
+		FieldTypeComputationState state = new FieldTypeComputationState(childResolvedTypes, field.isStatic() ? featureScopeSession : featureScopeSession.toInstanceContext(), field, this);
 		// no need to unmark the computing state since we replace the equivalent in #resolveTo
 		markComputing(field.getType());
 		ITypeComputationResult result = state.computeTypes();
@@ -389,7 +388,7 @@ public class LogicalContainerAwareReentrantTypeResolver extends DefaultReentrant
 				return;
 			throw new IllegalStateException("No resolved type found. Constructor was: " + constructor.getIdentifier());
 		}
-		ConstructorBodyComputationState state = new ConstructorBodyComputationState(childResolvedTypes, featureScopeSession, constructor, this);
+		ConstructorBodyComputationState state = new ConstructorBodyComputationState(childResolvedTypes, featureScopeSession.toInstanceContext(), constructor, this);
 		state.computeTypes();
 		computeAnnotationTypes(childResolvedTypes, featureScopeSession, constructor);
 		
@@ -403,8 +402,7 @@ public class LogicalContainerAwareReentrantTypeResolver extends DefaultReentrant
 				return;
 			throw new IllegalStateException("No resolved type found. Operation was: " + operation.getIdentifier());
 		}
-		
-		OperationBodyComputationState state = new OperationBodyComputationState(childResolvedTypes, featureScopeSession, operation, this);
+		OperationBodyComputationState state = new OperationBodyComputationState(childResolvedTypes, operation.isStatic() ? featureScopeSession : featureScopeSession.toInstanceContext(), operation, this);
 		// no need to unmark the computing state since we replace the equivalent in #resolveTo
 		markComputing(operation.getReturnType());
 		setReturnType(operation, state.computeTypes());
@@ -429,12 +427,11 @@ public class LogicalContainerAwareReentrantTypeResolver extends DefaultReentrant
 	}
 	
 	protected void computeAnnotationTypes(ResolvedTypes resolvedTypes, IFeatureScopeSession featureScopeSession, JvmAnnotationTarget annotable) {
-		final EList<JvmAnnotationReference> annotations = annotable.getAnnotations();
+		List<JvmAnnotationReference> annotations = annotable.getAnnotations();
 		computeAnnotationTypes(resolvedTypes, featureScopeSession, annotations);
 	}
 
-	protected void computeAnnotationTypes(ResolvedTypes resolvedTypes, IFeatureScopeSession featureScopeSession,
-			final EList<JvmAnnotationReference> annotations) {
+	protected void computeAnnotationTypes(ResolvedTypes resolvedTypes, IFeatureScopeSession featureScopeSession, List<JvmAnnotationReference> annotations) {
 		for(JvmAnnotationReference annotation: annotations) {
 			for(JvmAnnotationValue value: annotation.getValues()) {
 				if (value instanceof JvmCustomAnnotationValue) {

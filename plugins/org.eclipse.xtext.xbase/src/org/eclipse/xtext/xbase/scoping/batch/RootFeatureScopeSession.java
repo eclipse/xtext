@@ -83,6 +83,15 @@ public class RootFeatureScopeSession extends AbstractFeatureScopeSession {
 	/**
 	 * {@inheritDoc}
 	 * 
+	 * By default, a session is not an instance context.
+	 */
+	public boolean isInstanceContext() {
+		return false;
+	}
+	
+	/**
+	 * {@inheritDoc}
+	 * 
 	 * By default, all public features are considered to be accessible.
 	 */
 	public boolean isVisible(JvmMember member) {
