@@ -26,6 +26,7 @@ import org.eclipse.xtext.diagnostics.Severity;
 import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.validation.EObjectDiagnosticImpl;
+import org.eclipse.xtext.validation.IssueSeverities;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.XConstructorCall;
 import org.eclipse.xtext.xbase.XExpression;
@@ -442,5 +443,20 @@ public abstract class AbstractTypeComputationState implements ITypeComputationSt
 	
 	public OwnedConverter getConverter() {
 		return new OwnedConverter(getReferenceOwner());
+	}
+	
+	public AbstractTypeComputationState withExpectedExceptions(List<JvmType> declaredExceptionTypes, boolean keepParentExceptions) {
+		return new TypeComputationStateWithDeclaredExceptions(resolvedTypes, featureScopeSession,
+				reentrantTypeResolver, this, declaredExceptionTypes);
+	}
+	
+	protected abstract IssueSeverities getSeverities();
+
+	public Severity getSeverity(String issueCode) {
+		return getSeverities().getSeverity(issueCode);
+	}
+
+	public boolean isIgnored(String issueCode) {
+		return getSeverities().isIgnored(issueCode);
 	}
 }

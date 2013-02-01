@@ -11,7 +11,9 @@ import java.util.LinkedHashMap;
 
 import org.eclipse.emf.ecore.resource.Resource;
 
+import com.google.common.collect.Maps;
 import com.google.inject.ImplementedBy;
+import com.google.inject.Singleton;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
@@ -20,12 +22,19 @@ import com.google.inject.ImplementedBy;
 public interface IPreferenceValuesProvider {
 
 	IPreferenceValues getPreferenceValues(Resource context);
-	
+
 	public static class SimplePreferenceValuesProvider implements IPreferenceValuesProvider {
-		
 		public IPreferenceValues getPreferenceValues(Resource context) {
-			return new MapBasedPreferenceValues(new LinkedHashMap<String,String>());
+			return new MapBasedPreferenceValues(new LinkedHashMap<String, String>());
 		}
-		
+	}
+
+	@Singleton
+	public class SingletonPreferenceValuesProvider implements IPreferenceValuesProvider {
+		private IPreferenceValues preferences = new MapBasedPreferenceValues(Maps.<String, String> newLinkedHashMap());
+
+		public IPreferenceValues getPreferenceValues(Resource context) {
+			return preferences;
+		}
 	}
 }

@@ -11,6 +11,8 @@ import org.eclipse.xtend.core.XtendRuntimeModule2;
 import org.eclipse.xtend.core.XtendStandaloneSetup;
 import org.eclipse.xtext.common.types.access.CachingClasspathTypeProviderFactory;
 import org.eclipse.xtext.common.types.access.ClasspathTypeProviderFactory;
+import org.eclipse.xtext.preferences.IPreferenceValuesProvider;
+import org.eclipse.xtext.preferences.IPreferenceValuesProvider.SingletonPreferenceValuesProvider;
 
 import com.google.inject.Guice;
 import com.google.inject.Injector;
@@ -31,6 +33,11 @@ public class NewTypeSystemRuntimeTestSetup extends XtendStandaloneSetup {
 			@SuppressWarnings("unused")
 			public Class<? extends ClasspathTypeProviderFactory> bindClasspathTypeProviderFactory() {
 				return CachingClasspathTypeProviderFactory.class;
+			}
+			
+			@SuppressWarnings("unused")
+			public Class<? extends IPreferenceValuesProvider> bindIPreferenceValuesProvider() {
+				return SingletonPreferenceValuesProvider.class;
 			}
 		});
 	}

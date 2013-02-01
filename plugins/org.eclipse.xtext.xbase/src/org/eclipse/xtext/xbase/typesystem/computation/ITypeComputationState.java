@@ -15,6 +15,7 @@ import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.diagnostics.AbstractDiagnostic;
+import org.eclipse.xtext.diagnostics.Severity;
 import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.XConstructorCall;
@@ -261,5 +262,13 @@ public interface ITypeComputationState {
 	ITypeReferenceOwner getReferenceOwner();
 	
 	OwnedConverter getConverter();
+	
+	ITypeComputationState withExpectedExceptions(List<JvmType> exceptionType, boolean keepParentExceptions);
+	
+	List<JvmType> getDeclaredExceptions();
+	
+	Severity getSeverity(String issueCode);
+	
+	boolean isIgnored(String issueCode);
 	
 }

@@ -7,10 +7,13 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.typesystem.internal;
 
+import java.util.Collections;
 import java.util.List;
 
 import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.xtext.common.types.JvmType;
+import org.eclipse.xtext.validation.IssueSeverities;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.scoping.batch.IFeatureScopeSession;
 import org.eclipse.xtext.xbase.typesystem.computation.ITypeComputationResult;
@@ -23,6 +26,8 @@ import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
  */
 @NonNullByDefault
 public abstract class AbstractRootTypeComputationState extends AbstractTypeComputationState {
+	
+	private IssueSeverities issueSeverities = null;
 	
 	protected AbstractRootTypeComputationState(ResolvedTypes resolvedTypes,
 			IFeatureScopeSession featureScopeSession,
@@ -92,6 +97,17 @@ public abstract class AbstractRootTypeComputationState extends AbstractTypeCompu
 			}
 		};
 		return createTypeAssigner(state);
+	}
+	
+	public List<JvmType> getDeclaredExceptions() {
+		return Collections.emptyList();
+	}
+	
+	@Override
+	protected IssueSeverities getSeverities() {
+		if (issueSeverities == null)
+			issueSeverities = getResolver().getIssueSeveritiesProvider().getIssueSeverities(getNonNullRootExpression().eResource());
+		return issueSeverities;
 	}
 	
 }

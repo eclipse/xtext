@@ -14,6 +14,7 @@ import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.util.internal.Stopwatches;
 import org.eclipse.xtext.util.internal.Stopwatches.StoppedTask;
+import org.eclipse.xtext.validation.IssueSeveritiesProvider;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.scoping.batch.IBatchScopeProvider;
 import org.eclipse.xtext.xbase.scoping.batch.IFeatureScopeSession;
@@ -50,6 +51,9 @@ public class DefaultReentrantTypeResolver extends AbstractRootedReentrantTypeRes
 	@Inject
 	private FeatureNameValidator featureNameValidator;
 	
+	@Inject
+	private IssueSeveritiesProvider issueSeveritiesProvider;
+	
 	private EObject root;
 	
 	private boolean resolving = false;
@@ -66,6 +70,7 @@ public class DefaultReentrantTypeResolver extends AbstractRootedReentrantTypeRes
 		return root;
 	}
 	
+<<<<<<< HEAD
 	@Override
 	protected boolean isHandled(XExpression expression) {
 		return EcoreUtil.getRootContainer(expression) == getRoot();
@@ -74,6 +79,10 @@ public class DefaultReentrantTypeResolver extends AbstractRootedReentrantTypeRes
 	@Override
 	protected boolean isHandled(JvmIdentifiableElement identifiableElement) {
 		return EcoreUtil.getRootContainer(identifiableElement) == getRoot();
+=======
+	protected IssueSeveritiesProvider getIssueSeveritiesProvider() {
+		return issueSeveritiesProvider;
+>>>>>>> multiple fixes
 	}
 	
 	public IResolvedTypes reentrantResolve() {

@@ -7,10 +7,18 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.typesystem.internal;
 
+import java.util.Collections;
+import java.util.List;
+
 import org.eclipse.jdt.annotation.NonNullByDefault;
+import org.eclipse.xtext.common.types.JvmExecutable;
 import org.eclipse.xtext.common.types.JvmMember;
+import org.eclipse.xtext.common.types.JvmType;
+import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.scoping.batch.IFeatureScopeSession;
+
+import com.google.common.collect.Lists;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -36,6 +44,21 @@ public abstract class AbstractLogicalContainerAwareRootComputationState extends 
 	@Override
 	protected XExpression getRootExpression() {
 		return ((LogicalContainerAwareReentrantTypeResolver) getResolver()).getLogicalContainerProvider().getAssociatedExpression(getMember());
+	}
+	
+	@Override
+	public List<JvmType> getDeclaredExceptions() {
+		if (member instanceof JvmExecutable) {
+			JvmExecutable methodOrConstructor = (JvmExecutable) member;
+			if (!methodOrConstructor.getExceptions().isEmpty()) {
+				List<JvmType> result = Lists.newArrayList();
+				for (JvmTypeReference ref : methodOrConstructor.getExceptions())
+					if (ref != null && !ref.eIsProxy() && ref.getType() != null && !ref.eIsProxy())
+						result.add(ref.getType());
+				return result;
+			}
+		}
+		return Collections.emptyList();
 	}
 	
 }

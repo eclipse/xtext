@@ -10,10 +10,14 @@ package org.eclipse.xtext.xbase.typesystem.internal;
 import java.util.List;
 
 import org.eclipse.jdt.annotation.NonNullByDefault;
+import org.eclipse.xtext.common.types.JvmType;
+import org.eclipse.xtext.validation.IssueSeverities;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.scoping.batch.IFeatureScopeSession;
 import org.eclipse.xtext.xbase.typesystem.conformance.ConformanceHint;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
+
+import com.google.common.collect.Lists;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -56,6 +60,27 @@ public abstract class AbstractStackedTypeComputationState extends AbstractTypeCo
 	protected LightweightTypeReference acceptType(XExpression alreadyHandled, ResolvedTypes types, AbstractTypeExpectation expectation,
 			LightweightTypeReference type, boolean returnType, ConformanceHint... hints) {
 		return type;
+	}
+	
+	public List<JvmType> getDeclaredExceptions() {
+		return parent.getDeclaredExceptions();
+	}
+	
+	@Override
+	public AbstractTypeComputationState withExpectedExceptions(List<JvmType> declaredExceptionTypes,
+			boolean keepParentExceptions) {
+		if (keepParentExceptions) {
+			List<JvmType> allExceptions = Lists.newArrayList(parent.getDeclaredExceptions());
+			allExceptions.addAll(declaredExceptionTypes);
+			return super.withExpectedExceptions(allExceptions, false);
+		} else {
+			return super.withExpectedExceptions(declaredExceptionTypes, false);
+		}
+	}
+	
+	@Override
+	protected IssueSeverities getSeverities() {
+		return parent.getSeverities();
 	}
 	
 }

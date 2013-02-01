@@ -22,6 +22,7 @@ import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.JvmTypeReference;
+import org.eclipse.xtext.validation.EObjectDiagnosticImpl;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.XAbstractWhileExpression;
 import org.eclipse.xtext.xbase.XAssignment;
@@ -46,6 +47,7 @@ import org.eclipse.xtext.xbase.XThrowExpression;
 import org.eclipse.xtext.xbase.XTryCatchFinallyExpression;
 import org.eclipse.xtext.xbase.XTypeLiteral;
 import org.eclipse.xtext.xbase.XVariableDeclaration;
+import org.eclipse.xtext.xbase.XbasePackage;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.typesystem.conformance.ConformanceHint;
 import org.eclipse.xtext.xbase.typesystem.conformance.TypeConformanceComputationArgument;
@@ -63,7 +65,9 @@ import org.eclipse.xtext.xbase.typesystem.util.ConstraintAwareTypeArgumentCollec
 import org.eclipse.xtext.xbase.typesystem.util.DeclaratorTypeArgumentCollector;
 import org.eclipse.xtext.xbase.typesystem.util.TypeParameterByConstraintSubstitutor;
 import org.eclipse.xtext.xbase.typesystem.util.TypeParameterSubstitutor;
+import org.eclipse.xtext.xbase.validation.IssueCodes;
 
+import com.google.common.collect.Lists;
 import com.google.inject.Inject;
 
 /**
@@ -567,8 +571,22 @@ public class XbaseTypeComputer implements ITypeComputer {
 	protected void _computeTypes(XThrowExpression object, ITypeComputationState state) {
 		LightweightTypeReference throwable = getTypeForName(Throwable.class, state);
 		ITypeComputationState expressionState = state.withExpectation(throwable);
-		expressionState.computeTypes(object.getExpression());
+		ITypeComputationResult types = expressionState.computeTypes(object.getExpression());
+		LightweightTypeReference thrownException = types.getActualExpressionType();
 		state.acceptActualType(getPrimitiveVoid(state), ConformanceHint.NO_IMPLICIT_RETURN);
+
+		if (!state.isIgnored(IssueCodes.UNHANDLED_EXCEPTION) && !thrownException.isSubtypeOf(RuntimeException.class)) {
+			boolean declarationFound = false;
+			for (JvmType declaredException : state.getDeclaredExceptions())
+				if (thrownException.isSubtypeOf(declaredException)) {
+					declarationFound = true;
+					break;
+				}
+			if (!declarationFound)
+				state.addDiagnostic(new EObjectDiagnosticImpl(expressionState.getSeverity(IssueCodes.UNHANDLED_EXCEPTION),
+						IssueCodes.UNHANDLED_EXCEPTION, "Unhandled exception type " + thrownException.getSimpleName(), object,
+						XbasePackage.Literals.XTHROW_EXPRESSION__EXPRESSION, -1, null));
+		}
 	}
 
 	protected void _computeTypes(XReturnExpression object, ITypeComputationState state) {
@@ -578,7 +596,14 @@ public class XbaseTypeComputer implements ITypeComputer {
 	}
 	
 	protected void _computeTypes(XTryCatchFinallyExpression object, ITypeComputationState state) {
-		state.computeTypes(object.getExpression());
+		List<JvmType> caughtExceptions = Lists.newArrayList();
+		for (XCatchClause catchClause : object.getCatchClauses())
+			if(catchClause.getDeclaredParam() != null && catchClause.getDeclaredParam().getParameterType()!= null) {
+				JvmTypeReference typeReference = catchClause.getDeclaredParam().getParameterType();
+				if(!typeReference.eIsProxy() && typeReference.getType() != null && !typeReference.getType().eIsProxy())
+					caughtExceptions.add(typeReference.getType());
+			}
+		state.withExpectedExceptions(caughtExceptions, true).computeTypes(object.getExpression());
 		for (XCatchClause catchClause : object.getCatchClauses()) {
 			JvmFormalParameter catchClauseParam = catchClause.getDeclaredParam();
 			JvmTypeReference parameterType = catchClauseParam.getParameterType();

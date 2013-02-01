@@ -13,11 +13,16 @@ import static org.eclipse.xtext.xbase.validation.IssueCodes.*;
 import org.eclipse.xtext.common.types.TypesPackage;
 import org.eclipse.xtext.junit4.InjectWith;
 import org.eclipse.xtext.junit4.XtextRunner;
+import org.eclipse.xtext.preferences.IPreferenceValuesProvider;
+import org.eclipse.xtext.preferences.MapBasedPreferenceValues;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.tests.typesystem.XbaseNewTypeSystemInjectorProvider;
+import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+
+import com.google.inject.Inject;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -25,7 +30,24 @@ import org.junit.runner.RunWith;
 @RunWith(XtextRunner.class)
 @InjectWith(XbaseNewTypeSystemInjectorProvider.class)
 public class ValidationTests2 extends ValidationTests {
-
+	
+	private MapBasedPreferenceValues preferences;
+	
+	/**
+	 * we assume a
+	 * {@link org.eclipse.xtext.preferences.IPreferenceValuesProvider.SingletonPreferenceValuesProvider}
+	 * is bound.
+	 */
+	@Inject
+	public void setPreferences(IPreferenceValuesProvider prefProvider) {
+		preferences = (MapBasedPreferenceValues) prefProvider.getPreferenceValues(null);
+	}
+	
+	@Before
+	public void setUp() {
+		preferences.clear();
+	}
+	
 	@Override
 	@Test
 	public void testLocalVarWithArguments_01() throws Exception {
@@ -63,21 +85,80 @@ public class ValidationTests2 extends ValidationTests {
 	}
 	
 	@Override
-	@Test @Ignore("TODO To be implemented")
+	@Test
 	public void testExceptionInClosure_01() throws Exception {
+		preferences.put(UNHANDLED_EXCEPTION, "error");
 		super.testExceptionInClosure_01();
 	}
 
 	@Override
-	@Test @Ignore("TODO To be implemented")
+	@Test
 	public void testExceptionInClosure_03() throws Exception {
+		preferences.put(UNHANDLED_EXCEPTION, "error");
 		super.testExceptionInClosure_03();
 	}
 
 	@Override
-	@Test @Ignore("TODO To be implemented")
+	@Test
 	public void testExceptionInClosure_04() throws Exception {
+		preferences.put(UNHANDLED_EXCEPTION, "error");
 		super.testExceptionInClosure_04();
+	}
+	
+	@Test
+	public void testExceptionInClosure_05() throws Exception {
+		preferences.put(UNHANDLED_EXCEPTION, "error");
+		XExpression expression = expression("{val func = [ throw new RuntimeException() ]}");
+		helper.assertNoError(expression, UNHANDLED_EXCEPTION);
+	}
+	
+	@Test
+	public void testExceptionInTryCatch_01() throws Exception {
+		preferences.put(UNHANDLED_EXCEPTION, "error");
+		XExpression expression = expression("{ try { throw new Exception() } catch (CloneNotSupportedException e) {} }");
+		helper.assertError(expression, XTHROW_EXPRESSION, UNHANDLED_EXCEPTION);
+	}
+	
+	@Test
+	public void testExceptionInTryCatch_02() throws Exception {
+		preferences.put(UNHANDLED_EXCEPTION, "error");
+		XExpression expression = expression("{ try { throw new Exception() } catch (Exception e) {} }");
+		helper.assertNoError(expression, UNHANDLED_EXCEPTION);
+	}
+	
+	@Test
+	public void testExceptionInTryCatch_03() throws Exception {
+		preferences.put(UNHANDLED_EXCEPTION, "error");
+		XExpression expression = expression("{ try { throw new RuntimeException() } catch (CloneNotSupportedException e) {} }");
+		helper.assertNoError(expression, UNHANDLED_EXCEPTION);
+	}
+	
+	@Test
+	public void testExceptionInTryCatchCatch_01() throws Exception {
+		preferences.put(UNHANDLED_EXCEPTION, "error");
+		XExpression expression = expression("{ try { throw new Exception() } catch (CloneNotSupportedException e) {} catch(InstantiationException e2) {} }");
+		helper.assertError(expression, XTHROW_EXPRESSION, UNHANDLED_EXCEPTION);
+	}
+	
+	@Test
+	public void testExceptionInTryCatchCatch_02() throws Exception {
+		preferences.put(UNHANDLED_EXCEPTION, "error");
+		XExpression expression = expression("{ try { throw new CloneNotSupportedException() } catch (CloneNotSupportedException e) {} catch(InstantiationException e2) {} }");
+		helper.assertNoError(expression, UNHANDLED_EXCEPTION);
+	}
+	
+	@Test
+	public void testExceptionInTryCatchCatch_03() throws Exception {
+		preferences.put(UNHANDLED_EXCEPTION, "error");
+		XExpression expression = expression("{ try { throw new InstantiationException() } catch (CloneNotSupportedException e) {} catch(InstantiationException e2) {} }");
+		helper.assertNoError(expression, UNHANDLED_EXCEPTION);
+	}
+	
+	@Test
+	public void testExceptionInTryCatchNested() throws Exception {
+		preferences.put(UNHANDLED_EXCEPTION, "error");
+		XExpression expression = expression("{ try { try { throw new InstantiationException() } catch (CloneNotSupportedException e) {} } catch(InstantiationException e2) {} }");
+		helper.assertNoError(expression, UNHANDLED_EXCEPTION);
 	}
 	
 	@Override
@@ -137,5 +218,5 @@ public class ValidationTests2 extends ValidationTests {
 		XExpression expression = expression("{val (String)=>String func = [x | if (x == null) return x true] func.apply('foo')}");
 		helper.assertError(expression, XCLOSURE, INCOMPATIBLE_TYPES, "(String)=>String", "(String)=>Serializable & Comparable<?>");
 	}
-	
+
 }

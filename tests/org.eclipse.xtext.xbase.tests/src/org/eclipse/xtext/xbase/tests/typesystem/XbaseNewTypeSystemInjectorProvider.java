@@ -9,6 +9,8 @@ import org.eclipse.xtext.common.types.util.FeatureOverridesService;
 import org.eclipse.xtext.common.types.util.TypeArgumentContextProvider;
 import org.eclipse.xtext.common.types.util.VisibilityService;
 import org.eclipse.xtext.linking.LinkingScopeProviderBinding;
+import org.eclipse.xtext.preferences.IPreferenceValuesProvider;
+import org.eclipse.xtext.preferences.IPreferenceValuesProvider.SingletonPreferenceValuesProvider;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.scoping.IScopeProvider;
@@ -22,7 +24,6 @@ import org.eclipse.xtext.xbase.compiler.XbaseCompiler2;
 import org.eclipse.xtext.xbase.interpreter.IExpressionInterpreter;
 import org.eclipse.xtext.xbase.interpreter.impl.XbaseInterpreter2;
 import org.eclipse.xtext.xbase.resource.BatchLinkableResource;
-import org.eclipse.xtext.xbase.scoping.XbaseScopeProvider;
 import org.eclipse.xtext.xbase.scoping.batch.XbaseBatchScopeProvider;
 import org.eclipse.xtext.xbase.serializer.SerializerScopeProvider;
 import org.eclipse.xtext.xbase.tests.XbaseInjectorProvider;
@@ -123,6 +124,10 @@ public class XbaseNewTypeSystemInjectorProvider extends XbaseInjectorProvider {
 			return TypeReferenceSerializer2.class;
 		}
 		
+		public Class<? extends IPreferenceValuesProvider> bindIPreferenceValuesProvider() {
+			return SingletonPreferenceValuesProvider.class;
+		}
+		
 	}
 	
 	public static class DisabledXbaseScopeProvider extends org.eclipse.xtext.xbase.scoping.XbaseScopeProvider {
@@ -131,5 +136,4 @@ public class XbaseNewTypeSystemInjectorProvider extends XbaseInjectorProvider {
 			throw new UnsupportedOperationException();
 		}
 	}
-
 }
