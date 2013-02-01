@@ -25,7 +25,7 @@ import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 public class ConstructorBodyComputationState extends AbstractLogicalContainerAwareRootComputationState {
 
 	public ConstructorBodyComputationState(ResolvedTypes resolvedTypes, IFeatureScopeSession featureScopeSession, JvmConstructor constructor) {
-		super(resolvedTypes, featureScopeSession, constructor);
+		super(resolvedTypes.pushExpectedExceptions(constructor), featureScopeSession, constructor);
 		for(JvmFormalParameter parameter: constructor.getParameters()) {
 			addLocalToCurrentScope(parameter);
 		}

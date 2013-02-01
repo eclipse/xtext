@@ -28,7 +28,7 @@ public class TypeComputationStateWithRootExpectation extends TypeComputationStat
 			IFeatureScopeSession featureScopeSession,
 			AbstractTypeComputationState parent,
 			@Nullable LightweightTypeReference typeReference) {
-		super(resolvedTypes, featureScopeSession, parent, typeReference);
+		super(resolvedTypes.discardExpectedExceptions(), featureScopeSession, parent, typeReference);
 	}
 	
 	@Override
