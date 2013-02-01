@@ -81,6 +81,10 @@ public abstract class AbstractFeatureScopeSession implements IFeatureScopeSessio
 		AbstractNestedFeatureScopeSession result = new FeatureScopeSessionWithDynamicExtensions(this, extensionProviders);
 		return result;
 	}
+	
+	public IFeatureScopeSession toInstanceContext() {
+		return new InstanceFeatureScopeSession(this);
+	}
 
 	public IFeatureScopeSession addLocalElement(QualifiedName name, JvmIdentifiableElement element, ITypeReferenceOwner owner) {
 		IFeatureScopeSession result = addLocalElements(Collections.singletonMap(name, element), owner);

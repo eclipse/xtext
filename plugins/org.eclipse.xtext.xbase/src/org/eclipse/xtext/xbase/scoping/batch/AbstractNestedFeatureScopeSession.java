@@ -92,6 +92,10 @@ public abstract class AbstractNestedFeatureScopeSession extends AbstractFeatureS
 		return parent.getExtensionProviders();
 	}
 	
+	public boolean isInstanceContext() {
+		return parent.isInstanceContext();
+	}
+	
 	@Override
 	protected void addExtensionProviders(List<ExpressionBucket> result) {
 		parent.addExtensionProviders(result);

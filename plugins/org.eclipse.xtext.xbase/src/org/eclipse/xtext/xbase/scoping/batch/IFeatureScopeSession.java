@@ -75,6 +75,18 @@ public interface IFeatureScopeSession extends IVisibilityHelper {
 	IFeatureScopeSession addToExtensionScope(Map<XExpression, LightweightTypeReference> extensionProviders);
 	
 	/**
+	 * Forks this session with an instance context. References to 'this' are only valid in instance contexts.
+	 * @see #isInstanceContext()
+	 */
+	IFeatureScopeSession toInstanceContext();
+	
+	/**
+	 * Returns <code>true</code> if <code>this</code> can be validly resolved in the current scope.
+	 * @see #toInstanceContext()
+	 */
+	boolean isInstanceContext();
+	
+	/**
 	 * All extension providers as expression buckets.
 	 * 
 	 * @return the list of extension providers.

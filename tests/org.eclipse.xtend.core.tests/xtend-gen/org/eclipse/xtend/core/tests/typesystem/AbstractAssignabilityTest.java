@@ -838,7 +838,7 @@ public abstract class AbstractAssignabilityTest extends AbstractTestingTypeRefer
   }
   
   private String selfBound(final String typeName) {
-    String _replace = typeName.replace("$", "org.eclipse.xtend.core.tests.validation.ScenarioBug395002$SelfBound");
+    String _replace = typeName.replace("$", "org.eclipse.xtend.core.tests.typesystem.ScenarioBug395002$SelfBound");
     return _replace;
   }
 }

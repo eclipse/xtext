@@ -128,8 +128,16 @@ public class FeatureLinkingCandidate extends AbstractPendingLinkingCandidate<XAb
 				result.accept(diagnostic);
 				return false;
 			}
+			if (getFeature() instanceof JvmType && !getState().isInstanceContext()) {
+				String message = String.format("Cannot use %s in a static context", getFeatureCall().getConcreteSyntaxFeatureName());
+				AbstractDiagnostic diagnostic = new EObjectDiagnosticImpl(Severity.ERROR,
+						IssueCodes.STATIC_ACCESS_TO_INSTANCE_MEMBER, message, getExpression(),
+						XbasePackage.Literals.XABSTRACT_FEATURE_CALL__FEATURE, -1, null);
+				result.accept(diagnostic);
+				return false;
+			}
 		}
-		return false;
+		return true;
 	}
 
 	protected boolean isExplicitOperationCallOrBuilderSyntax() {

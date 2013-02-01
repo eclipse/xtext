@@ -15,7 +15,6 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.xtext.common.types.JvmFeature;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmMember;
 import org.eclipse.xtext.common.types.JvmType;
@@ -561,6 +560,10 @@ public class ClosureTypeComputerUnitTest extends AbstractXbaseTestCase implement
 
 		@Override
 		protected FeatureScopes getFeatureScopes() {
+			throw new UnsupportedOperationException();
+		}
+		
+		public boolean isInstanceContext() {
 			throw new UnsupportedOperationException();
 		}
 		

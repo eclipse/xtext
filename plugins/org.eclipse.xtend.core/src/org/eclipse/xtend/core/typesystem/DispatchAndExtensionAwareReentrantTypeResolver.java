@@ -283,7 +283,8 @@ public class DispatchAndExtensionAwareReentrantTypeResolver extends LogicalConta
 						throw new IllegalStateException("No resolved type found. Type was: " + dispatchCase.getIdentifier());
 					}
 				} else {
-					OperationBodyComputationState state = new DispatchOperationBodyComputationState(dispatchCaseResolvedTypes, featureScopeSession, dispatchCase, dispatcher, this);
+					OperationBodyComputationState state = new DispatchOperationBodyComputationState(dispatchCaseResolvedTypes, 
+							dispatchCase.isStatic() ? featureScopeSession : featureScopeSession.toInstanceContext(), dispatchCase, dispatcher, this);
 					ITypeComputationResult dispatchCaseResult = state.computeTypes();
 					if (InferredTypeIndicator.isInferred(dispatchCase.getReturnType())) {
 						if (declaredDispatcherType == null) {

@@ -92,6 +92,10 @@ public class ExpressionTypeComputationState extends AbstractStackedTypeComputati
 		boolean result = featureCall.eContainingFeature() == XbasePackage.Literals.XABSTRACT_FEATURE_CALL__IMPLICIT_FIRST_ARGUMENT;
 		return result;
 	}
+	
+	protected boolean isInstanceContext() {
+		return getFeatureScopeSession().isInstanceContext();
+	}
 
 	protected StackedResolvedTypes getStackedResolvedTypes() {
 		return (StackedResolvedTypes) resolvedTypes;
