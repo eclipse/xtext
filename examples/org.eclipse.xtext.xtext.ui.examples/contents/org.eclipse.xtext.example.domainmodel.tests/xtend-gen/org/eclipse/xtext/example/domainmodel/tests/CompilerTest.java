@@ -87,6 +87,8 @@ public class CompilerTest {
             _builder.append("import org.eclipse.xtext.xbase.lib.util.ToStringHelper;");
             _builder.newLine();
             _builder.newLine();
+            _builder.append("@SuppressWarnings(\"all\")");
+            _builder.newLine();
             _builder.append("public class Foo {");
             _builder.newLine();
             _builder.append("  ");
