@@ -19,6 +19,7 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.common.types.JvmConstructor;
+import org.eclipse.xtext.common.types.JvmExecutable;
 import org.eclipse.xtext.common.types.JvmField;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
@@ -29,6 +30,7 @@ import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.JvmTypeParameterDeclarator;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.diagnostics.AbstractDiagnostic;
+import org.eclipse.xtext.validation.IssueSeverities;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.XClosure;
 import org.eclipse.xtext.xbase.XConstructorCall;
@@ -130,6 +132,8 @@ public abstract class ResolvedTypes implements IResolvedTypes {
 		resolvedTypeParameters = null;
 		declaredTypeParameters = null;
 	}
+	
+	protected abstract IssueSeverities getSeverities();
 	
 	protected OwnedConverter getConverter() {
 		return converter;
@@ -332,6 +336,25 @@ public abstract class ResolvedTypes implements IResolvedTypes {
 		return toOwnedReference(result);
 	}
 	
+	protected ResolvedTypes pushExpectedExceptions(List<LightweightTypeReference> exceptions) {
+		return new ExpectedExceptionsStackedResolvedTypes(this, exceptions);
+	}
+	
+	protected ResolvedTypes discardExpectedExceptions() {
+		return new ExpectedExceptionsStackedResolvedTypes(this);
+	}
+	
+	protected ResolvedTypes pushExpectedExceptions(JvmExecutable exceptionDeclarator) {
+		List<JvmTypeReference> executablesExceptions = exceptionDeclarator.getExceptions();
+		if (executablesExceptions.isEmpty())
+			return this;
+		List<LightweightTypeReference> exceptions = Lists.newArrayListWithCapacity(executablesExceptions.size());
+		for(JvmTypeReference exception: executablesExceptions) {
+			exceptions.add(getConverter().toLightweightReference(exception));
+		}
+		return pushExpectedExceptions(exceptions);
+	}
+
 	@Nullable
 	public LightweightTypeReference getExpectedReturnType(XExpression expression) {
 		LightweightTypeReference result = doGetExpectedType(expression, true);
@@ -633,6 +656,7 @@ public abstract class ResolvedTypes implements IResolvedTypes {
 		appendContent(featureLinking, "featureLinking", result, indentation);
 		appendContent(unboundTypeParameters, "unboundTypeParameters", result, indentation);
 		appendListMapContent(typeParameterHints, "typeParameterHints", result, indentation);
+		appendContent(declaredTypeParameters, "declaredTypeParameters", result, indentation);
 		appendContent(diagnostics, "diagnostics", result, indentation);
 	}
 
@@ -815,6 +839,10 @@ public abstract class ResolvedTypes implements IResolvedTypes {
 		} else {
 			declaredTypeParameters.addAll(typeParameters);
 		}
+	}
+	
+	protected List<LightweightTypeReference> getExpectedExceptions() {
+		return Collections.<LightweightTypeReference>emptyList();
 	}
 
 	public List<LightweightBoundTypeArgument> getAllHints(Object handle) {

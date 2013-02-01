@@ -35,6 +35,8 @@ import org.eclipse.xtext.xbase.typesystem.util.DeclaratorTypeArgumentCollector;
 import org.eclipse.xtext.xbase.typesystem.util.DeferredTypeParameterHintCollector;
 import org.eclipse.xtext.xbase.typesystem.util.TypeParameterByUnboundSubstitutor;
 
+import com.google.common.collect.Lists;
+
 /**
  * Strategy to compute types for lambda expression that do not have an expected type.
  * 
@@ -198,7 +200,14 @@ public class ClosureWithExpectationHelper extends AbstractClosureTypeHelper {
 		if (knownType != null && knownType instanceof JvmGenericType) {
 			result.assignType(IFeatureNames.SELF, knownType, expectedType);
 		}
-		return result;
+		List<JvmTypeReference> exceptions = operation.getExceptions();
+		if (exceptions.isEmpty())
+			return result;
+		List<LightweightTypeReference> expectedExceptions = Lists.newArrayListWithCapacity(exceptions.size()); 
+		for(JvmTypeReference exception: exceptions) {
+			expectedExceptions.add(typeAssigner.toLightweightTypeReference(exception));
+		}
+		return result.withExpectedExceptions(expectedExceptions);
 	}
 
 	protected void processExpressionType(ITypeComputationResult expressionResult) {

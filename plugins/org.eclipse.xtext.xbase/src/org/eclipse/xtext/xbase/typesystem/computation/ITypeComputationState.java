@@ -16,6 +16,7 @@ import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.diagnostics.AbstractDiagnostic;
+import org.eclipse.xtext.diagnostics.Severity;
 import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.XConstructorCall;
@@ -136,6 +137,10 @@ public interface ITypeComputationState {
 	 * the type checkpoint describes the scope of certain type specializations.
 	 */
 	ITypeComputationState withTypeCheckpoint();
+	
+	ITypeComputationState withExpectedExceptions(List<LightweightTypeReference> declaredExceptionTypes);
+	
+	List<LightweightTypeReference> getExpectedExceptions();
 
 	/**
 	 * Triggers type computation for a child expression of the currently considered expression.
@@ -283,5 +288,9 @@ public interface ITypeComputationState {
 	 * @param typeParameter the type parameter
 	 */
 	UnboundTypeReference createUnboundTypeReference(XExpression expression, JvmTypeParameter typeParameter);
+
+	Severity getSeverity(String issueCode);
+	
+	boolean isIgnored(String issueCode);
 	
 }

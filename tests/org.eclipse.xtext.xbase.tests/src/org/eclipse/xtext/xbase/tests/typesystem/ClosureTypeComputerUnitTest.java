@@ -25,6 +25,8 @@ import org.eclipse.xtext.junit4.util.ParseHelper;
 import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.scoping.IScopeProvider;
+import org.eclipse.xtext.validation.IssueSeverities;
+import org.eclipse.xtext.validation.IssueSeveritiesProvider;
 import org.eclipse.xtext.xbase.XClosure;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XbaseFactory;
@@ -75,6 +77,9 @@ public class ClosureTypeComputerUnitTest extends AbstractXbaseTestCase implement
 	
 	@Inject
 	private PublicReentrantTypeResolver reentrantResolver;
+	
+	@Inject 
+	private IssueSeveritiesProvider issueSeveritiesProvider;
 	
 	private TestableState state;
 	
@@ -533,6 +538,16 @@ public class ClosureTypeComputerUnitTest extends AbstractXbaseTestCase implement
 		@Override
 		protected PublicResolvedTypes getResolvedTypes() {
 			return (PublicResolvedTypes) super.getResolvedTypes();
+		}
+
+		@Override
+		public List<LightweightTypeReference> getExpectedExceptions() {
+			throw new UnsupportedOperationException();
+		}
+
+		@Override
+		protected IssueSeverities getSeverities() {
+			throw new UnsupportedOperationException();
 		}
 		
 	}
