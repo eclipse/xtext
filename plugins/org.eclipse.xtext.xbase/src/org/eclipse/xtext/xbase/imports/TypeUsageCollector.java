@@ -156,19 +156,17 @@ public class TypeUsageCollector {
 				}
 			} else if (next instanceof XMemberFeatureCall 
 					|| next instanceof XBinaryOperation 
-					|| next instanceof XUnaryOperation 
-					|| next instanceof XAssignment) {
+					|| next instanceof XUnaryOperation
+					|| (next instanceof XAssignment && !contains(currentThisType.getAllFeatures(), ((XAssignment) next).getFeature()))) {
 				final XAbstractFeatureCall featureCall = (XAbstractFeatureCall) next;
 				final JvmIdentifiableElement member = featureCall.getFeature();
-				if(!contains(currentThisType.getAllFeatures(), member)) {
-					if (member instanceof JvmOperation) {
-						if (((JvmOperation) member).isStatic())
-							acceptStaticExtensionImport((JvmMember) member);
-					}
-					if (member instanceof JvmField) {
-						if (((JvmField) member).isStatic())
-							acceptStaticExtensionImport((JvmMember) member);
-					}
+				if (member instanceof JvmOperation) {
+					if (((JvmOperation) member).isStatic())
+						acceptStaticExtensionImport((JvmMember) member);
+				}
+				if (member instanceof JvmField) {
+					if (((JvmField) member).isStatic())
+						acceptStaticExtensionImport((JvmMember) member);
 				}
 			} else {
 				Set<EObject> elements = associations.getJvmElements(next);
