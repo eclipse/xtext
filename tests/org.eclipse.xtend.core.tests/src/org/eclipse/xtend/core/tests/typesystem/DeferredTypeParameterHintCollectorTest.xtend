@@ -34,6 +34,7 @@ import org.eclipse.xtext.xbase.typesystem.references.ITypeReferenceOwner
 
 import static org.eclipse.xtext.xbase.typesystem.util.VarianceInfo.*
 import static org.junit.Assert.*
+import org.eclipse.xtext.validation.IssueSeveritiesProvider
 
 /**
  * @author Sebastian Zarnekow
@@ -45,6 +46,9 @@ class DeferredTypeParameterHintCollectorTest extends AbstractTestingTypeReferenc
 	
 	@Inject
 	DefaultReentrantTypeResolver resolver
+	
+	@Inject 
+	IssueSeveritiesProvider issueSeveritiesProvider
 	
 	ListMultimap<Object, LightweightBoundTypeArgument> hints = Multimaps2::newLinkedHashListMultimap
 	
@@ -59,7 +63,7 @@ class DeferredTypeParameterHintCollectorTest extends AbstractTestingTypeReferenc
 	def in(String typeParameters, String expectedType, String actualType) {
 		val operation = operation(typeParameters, expectedType, actualType)
 		val collector = new DeferredTypeParameterHintCollector(this)
-		val substitutor = new MockTypeParameterSubstitutor(this, new PublicResolvedTypes(resolver))
+		val substitutor = new MockTypeParameterSubstitutor(this, new PublicResolvedTypes(resolver, issueSeveritiesProvider.getIssueSeverities(null)))
 		val hasUnbounds = substitutor.substitute(operation.parameters.head.parameterType.toLightweightReference)
 		val isActual = operation.parameters.last.parameterType.toLightweightReference
 		collector.processPairedReferences(hasUnbounds, isActual)

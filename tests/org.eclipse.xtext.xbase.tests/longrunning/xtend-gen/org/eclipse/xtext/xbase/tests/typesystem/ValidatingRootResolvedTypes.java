@@ -10,6 +10,7 @@ package org.eclipse.xtext.xbase.tests.typesystem;
 import java.util.Collection;
 import java.util.List;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
+import org.eclipse.xtext.validation.IssueSeverities;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
@@ -34,8 +35,8 @@ import org.eclipse.xtext.xbase.typesystem.references.UnboundTypeReference;
  */
 @SuppressWarnings("all")
 public class ValidatingRootResolvedTypes extends RootResolvedTypes {
-  public ValidatingRootResolvedTypes(final DefaultReentrantTypeResolver resolver) {
-    super(resolver);
+  public ValidatingRootResolvedTypes(final DefaultReentrantTypeResolver resolver, final IssueSeverities issueSeverities) {
+    super(resolver, issueSeverities);
   }
   
   public StackedResolvedTypes pushReassigningTypes() {

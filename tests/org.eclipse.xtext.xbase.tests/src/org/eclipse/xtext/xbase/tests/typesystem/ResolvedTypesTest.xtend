@@ -15,6 +15,7 @@ import org.eclipse.xtext.xbase.junit.typesystem.PublicResolvedTypes
 import org.eclipse.xtext.xbase.tests.AbstractXbaseTestCase
 import org.junit.Before
 import org.junit.Test
+import org.eclipse.xtext.validation.IssueSeveritiesProvider
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -25,6 +26,10 @@ class ResolvedTypesTest extends AbstractXbaseTestCase {
 	@Property 
 	PublicReentrantTypeResolver resolver
 	
+	@Inject 
+	@Property
+	IssueSeveritiesProvider issueSeveritiesProvider
+	
 	TypesFactory typesFactory = TypesFactory::eINSTANCE
 	
 	XbaseFactory xbaseFactory = XbaseFactory::eINSTANCE
@@ -34,7 +39,7 @@ class ResolvedTypesTest extends AbstractXbaseTestCase {
 	
 	@Before
 	def void initResolvedTypes() {
-		testMe = new PublicResolvedTypes(resolver)
+		testMe = new PublicResolvedTypes(resolver, issueSeveritiesProvider.getIssueSeverities(null))
 	}
 	
 	@Test

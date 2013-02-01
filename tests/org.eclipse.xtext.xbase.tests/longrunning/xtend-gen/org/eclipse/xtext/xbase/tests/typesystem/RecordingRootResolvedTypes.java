@@ -8,6 +8,7 @@
 package org.eclipse.xtext.xbase.tests.typesystem;
 
 import java.util.Map;
+import org.eclipse.xtext.validation.IssueSeverities;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.typesystem.computation.ILinkingCandidate;
 import org.eclipse.xtext.xbase.typesystem.internal.DefaultReentrantTypeResolver;
@@ -28,8 +29,8 @@ public class RecordingRootResolvedTypes extends RootResolvedTypes {
     this._resolvedProxies = resolvedProxies;
   }
   
-  public RecordingRootResolvedTypes(final DefaultReentrantTypeResolver resolver) {
-    super(resolver);
+  public RecordingRootResolvedTypes(final DefaultReentrantTypeResolver resolver, final IssueSeverities issueSeverities) {
+    super(resolver, issueSeverities);
   }
   
   public void resolveProxies() {

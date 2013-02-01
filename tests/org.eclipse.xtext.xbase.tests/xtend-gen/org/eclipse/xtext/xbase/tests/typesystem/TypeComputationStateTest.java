@@ -14,6 +14,8 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.xtext.validation.IssueSeverities;
+import org.eclipse.xtext.validation.IssueSeveritiesProvider;
 import org.eclipse.xtext.xbase.XBlockExpression;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XMemberFeatureCall;
@@ -52,6 +54,9 @@ public class TypeComputationStateTest extends AbstractXbaseTestCase implements I
   private PublicReentrantTypeResolver resolver;
   
   @Inject
+  private IssueSeveritiesProvider issueSeveritiesProvider;
+  
+  @Inject
   private ReflectExtensions _reflectExtensions;
   
   @Test
@@ -59,7 +64,8 @@ public class TypeComputationStateTest extends AbstractXbaseTestCase implements I
     try {
       this.resolver.setTypeComputer(this);
       final XExpression expression = this.expression("{ null }");
-      PublicResolvedTypes _publicResolvedTypes = new PublicResolvedTypes(this.resolver);
+      IssueSeverities _issueSeverities = this.issueSeveritiesProvider.getIssueSeverities(null);
+      PublicResolvedTypes _publicResolvedTypes = new PublicResolvedTypes(this.resolver, _issueSeverities);
       final PublicResolvedTypes resolution = _publicResolvedTypes;
       ITypeReferenceOwner _referenceOwner = resolution.getReferenceOwner();
       AnyTypeReference _anyTypeReference = new AnyTypeReference(_referenceOwner);
@@ -89,7 +95,8 @@ public class TypeComputationStateTest extends AbstractXbaseTestCase implements I
     try {
       this.resolver.setTypeComputer(this);
       final XExpression expression = this.expression("{ null }");
-      PublicResolvedTypes _publicResolvedTypes = new PublicResolvedTypes(this.resolver);
+      IssueSeverities _issueSeverities = this.issueSeveritiesProvider.getIssueSeverities(null);
+      PublicResolvedTypes _publicResolvedTypes = new PublicResolvedTypes(this.resolver, _issueSeverities);
       final PublicResolvedTypes resolution = _publicResolvedTypes;
       ITypeReferenceOwner _referenceOwner = resolution.getReferenceOwner();
       AnyTypeReference _anyTypeReference = new AnyTypeReference(_referenceOwner);
@@ -157,7 +164,8 @@ public class TypeComputationStateTest extends AbstractXbaseTestCase implements I
       XExpression _expression = this.expression("1.toString");
       final XMemberFeatureCall expression = ((XMemberFeatureCall) _expression);
       this.resolver.initializeFrom(expression);
-      PublicResolvedTypes _publicResolvedTypes = new PublicResolvedTypes(this.resolver);
+      IssueSeverities _issueSeverities = this.issueSeveritiesProvider.getIssueSeverities(null);
+      PublicResolvedTypes _publicResolvedTypes = new PublicResolvedTypes(this.resolver, _issueSeverities);
       final PublicResolvedTypes resolution = _publicResolvedTypes;
       ITypeReferenceOwner _referenceOwner = resolution.getReferenceOwner();
       AnyTypeReference _anyTypeReference = new AnyTypeReference(_referenceOwner);
@@ -198,7 +206,8 @@ public class TypeComputationStateTest extends AbstractXbaseTestCase implements I
       XExpression _expression = this.expression("<String>newArrayList.map[toUpperCase]");
       final XMemberFeatureCall expression = ((XMemberFeatureCall) _expression);
       this.resolver.initializeFrom(expression);
-      PublicResolvedTypes _publicResolvedTypes = new PublicResolvedTypes(this.resolver);
+      IssueSeverities _issueSeverities = this.issueSeveritiesProvider.getIssueSeverities(null);
+      PublicResolvedTypes _publicResolvedTypes = new PublicResolvedTypes(this.resolver, _issueSeverities);
       final PublicResolvedTypes resolution = _publicResolvedTypes;
       ITypeReferenceOwner _referenceOwner = resolution.getReferenceOwner();
       AnyTypeReference _anyTypeReference = new AnyTypeReference(_referenceOwner);

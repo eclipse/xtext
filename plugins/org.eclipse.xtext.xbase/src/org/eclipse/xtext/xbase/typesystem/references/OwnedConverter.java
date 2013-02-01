@@ -8,6 +8,9 @@
 package org.eclipse.xtext.xbase.typesystem.references;
 
 import java.lang.reflect.WildcardType;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.List;
 
 import org.eclipse.xtext.common.types.JvmAnyTypeReference;
 import org.eclipse.xtext.common.types.JvmArrayType;
@@ -30,6 +33,7 @@ import org.eclipse.xtext.xtype.util.AbstractXtypeReferenceVisitor;
 
 import com.google.common.base.Function;
 import com.google.common.base.Preconditions;
+import com.google.common.collect.Lists;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -79,6 +83,15 @@ public class OwnedConverter extends AbstractXtypeReferenceVisitor<LightweightTyp
 
 	public LightweightTypeReference apply(JvmTypeReference reference) {
 		return toLightweightReference(reference);
+	}
+	
+	public List<LightweightTypeReference> toLightweightReferences(Collection<JvmTypeReference> references) {
+		if (references.isEmpty())
+			return Collections.emptyList();
+		List<LightweightTypeReference> result = Lists.newArrayListWithCapacity(references.size());
+		for (JvmTypeReference ref : references)
+			result.add(toLightweightReference(ref));
+		return result;
 	}
 
 	@Override

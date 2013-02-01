@@ -46,8 +46,11 @@ public class XbaseValidationConfigurationBlock extends AbstractValidatorConfigur
 				composite, nColumns);
 		fillRestrictedApiSection(new ComboBoxBuilder(this, restrictedApi, defaultIndent));
 
-		Composite unusedCode = createSection("Unnecessary code", composite, nColumns);
+		Composite unusedCode = createSection("Unnecessary Code", composite, nColumns);
 		fillUnusedCodeSection(new ComboBoxBuilder(this, unusedCode, defaultIndent));
+		
+		Composite exceptions = createSection("Exception Handling", composite, nColumns);
+		fillExceptionsSection(new ComboBoxBuilder(this, exceptions, defaultIndent));
 
 	}
 
@@ -57,6 +60,11 @@ public class XbaseValidationConfigurationBlock extends AbstractValidatorConfigur
 				.addJavaDelegatingComboBox(IssueCodes.IMPORT_UNUSED, "Unused import:")
 				.addJavaDelegatingComboBox(IssueCodes.OBSOLETE_INSTANCEOF, "Unnecessary 'instanceof' operation:")
 				.addJavaDelegatingComboBox(IssueCodes.OBSOLETE_CAST, "Unnecessary 'cast' operation:");
+	}
+	
+	protected void fillExceptionsSection(ComboBoxBuilder comboBoxBuilder) {
+		comboBoxBuilder
+				.addComboBox(IssueCodes.UNHANDLED_EXCEPTION, "Unhandled checked exceptions:");
 	}
 
 	protected void fillRestrictedApiSection(ComboBoxBuilder comboBoxBuilder) {

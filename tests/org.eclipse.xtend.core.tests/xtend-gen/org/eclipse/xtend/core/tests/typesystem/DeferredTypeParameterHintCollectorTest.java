@@ -24,6 +24,8 @@ import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.util.Triple;
 import org.eclipse.xtext.util.Tuples;
+import org.eclipse.xtext.validation.IssueSeverities;
+import org.eclipse.xtext.validation.IssueSeveritiesProvider;
 import org.eclipse.xtext.xbase.junit.typesystem.PublicResolvedTypes;
 import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Exceptions;
@@ -57,6 +59,9 @@ public class DeferredTypeParameterHintCollectorTest extends AbstractTestingTypeR
   @Inject
   private DefaultReentrantTypeResolver resolver;
   
+  @Inject
+  private IssueSeveritiesProvider issueSeveritiesProvider;
+  
   private ListMultimap<Object,LightweightBoundTypeArgument> hints = new Function0<ListMultimap<Object,LightweightBoundTypeArgument>>() {
     public ListMultimap<Object,LightweightBoundTypeArgument> apply() {
       ListMultimap<Object,LightweightBoundTypeArgument> _newLinkedHashListMultimap = Multimaps2.<Object, LightweightBoundTypeArgument>newLinkedHashListMultimap();
@@ -88,7 +93,8 @@ public class DeferredTypeParameterHintCollectorTest extends AbstractTestingTypeR
     final JvmOperation operation = this.operation(typeParameters, expectedType, actualType);
     DeferredTypeParameterHintCollector _deferredTypeParameterHintCollector = new DeferredTypeParameterHintCollector(this);
     final DeferredTypeParameterHintCollector collector = _deferredTypeParameterHintCollector;
-    PublicResolvedTypes _publicResolvedTypes = new PublicResolvedTypes(this.resolver);
+    IssueSeverities _issueSeverities = this.issueSeveritiesProvider.getIssueSeverities(null);
+    PublicResolvedTypes _publicResolvedTypes = new PublicResolvedTypes(this.resolver, _issueSeverities);
     MockTypeParameterSubstitutor _mockTypeParameterSubstitutor = new MockTypeParameterSubstitutor(this, _publicResolvedTypes);
     final MockTypeParameterSubstitutor substitutor = _mockTypeParameterSubstitutor;
     EList<JvmFormalParameter> _parameters = operation.getParameters();

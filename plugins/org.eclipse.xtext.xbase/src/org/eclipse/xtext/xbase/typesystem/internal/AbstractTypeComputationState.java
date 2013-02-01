@@ -8,6 +8,7 @@
 package org.eclipse.xtext.xbase.typesystem.internal;
 
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.EnumSet;
 import java.util.List;
@@ -27,6 +28,7 @@ import org.eclipse.xtext.diagnostics.Severity;
 import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.validation.EObjectDiagnosticImpl;
+import org.eclipse.xtext.validation.IssueSeverities;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.XConstructorCall;
 import org.eclipse.xtext.xbase.XExpression;
@@ -55,6 +57,8 @@ import com.google.common.collect.Lists;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
+ * @author Moritz Eysholdt
+ * 
  * TODO JavaDoc
  */
 @NonNullByDefault
@@ -445,5 +449,25 @@ public abstract class AbstractTypeComputationState implements ITypeComputationSt
 	
 	public OwnedConverter getConverter() {
 		return new OwnedConverter(getReferenceOwner());
+	}
+	
+	public AbstractTypeComputationState withExpectedExceptions(Collection<LightweightTypeReference> declaredExceptionTypes) {
+		return new ExpectedExceptionTypeComputationState(resolvedTypes, featureScopeSession, this, declaredExceptionTypes);
+	}
+	
+	public List<LightweightTypeReference> getExpectedExceptions() {
+		return resolvedTypes.getExpectedExceptions();
+	}
+	
+	protected IssueSeverities getSeverities() {
+		return resolvedTypes.getSeverities();
+	}
+
+	public Severity getSeverity(String issueCode) {
+		return getSeverities().getSeverity(issueCode);
+	}
+
+	public boolean isIgnored(String issueCode) {
+		return getSeverities().isIgnored(issueCode);
 	}
 }
