@@ -8,6 +8,7 @@
 package org.eclipse.xtext.xbase.typesystem.internal;
 
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.EnumSet;
 import java.util.List;
@@ -21,12 +22,14 @@ import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmMember;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
+import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.util.TypeReferences;
 import org.eclipse.xtext.diagnostics.AbstractDiagnostic;
 import org.eclipse.xtext.diagnostics.Severity;
 import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.validation.EObjectDiagnosticImpl;
+import org.eclipse.xtext.validation.IssueSeverities;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.XConstructorCall;
 import org.eclipse.xtext.xbase.XExpression;
@@ -445,5 +448,31 @@ public abstract class AbstractTypeComputationState implements ITypeComputationSt
 	
 	public OwnedConverter getConverter() {
 		return new OwnedConverter(getReferenceOwner());
+	}
+	
+	public AbstractTypeComputationState addExpectedExceptions(Collection<JvmTypeReference> declaredExceptionTypes) {
+		if (declaredExceptionTypes.isEmpty())
+			return this;
+		List<LightweightTypeReference> lwtrs = Lists.newArrayList();
+		for (JvmTypeReference ref : declaredExceptionTypes)
+			lwtrs.add(getConverter().apply(ref));
+		resolvedTypes.addExpectedExceptions(lwtrs);
+		return this;
+	}
+	
+	public List<LightweightTypeReference> getExpectedExceptions() {
+		return resolvedTypes.getExpectedExceptions();
+	}
+	
+	protected IssueSeverities getSeverities() {
+		return resolvedTypes.getSeverities();
+	}
+
+	public Severity getSeverity(String issueCode) {
+		return getSeverities().getSeverity(issueCode);
+	}
+
+	public boolean isIgnored(String issueCode) {
+		return getSeverities().isIgnored(issueCode);
 	}
 }

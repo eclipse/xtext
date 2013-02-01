@@ -18,6 +18,7 @@ import org.eclipse.xtext.diagnostics.AbstractDiagnostic;
 import org.eclipse.xtext.diagnostics.Severity;
 import org.eclipse.xtext.util.IAcceptor;
 import org.eclipse.xtext.validation.EObjectDiagnosticImpl;
+import org.eclipse.xtext.validation.IssueSeverities;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.typesystem.computation.ILinkingCandidate;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
@@ -38,6 +39,8 @@ import com.google.common.collect.Sets;
 public class RootResolvedTypes extends ResolvedTypes {
 
 	private Set<XExpression> toBeInferredRootExpressions;
+	
+	private IssueSeverities issueSeverities;
 	
 	protected RootResolvedTypes(DefaultReentrantTypeResolver resolver) {
 		super(resolver);
@@ -99,7 +102,14 @@ public class RootResolvedTypes extends ResolvedTypes {
 		for(ILinkingCandidate candidate: candidates.values()) {
 			candidate.validate(acceptor);
 		}
-		
+	}
+	
+	@Override
+	protected IssueSeverities getSeverities() {
+		if (issueSeverities == null) {
+			issueSeverities = getResolver().getIssueSeveritiesProvider().getIssueSeverities(getResolver().getRoot().eResource());
+		}
+		return issueSeverities;
 	}
 
 }

@@ -57,5 +57,4 @@ public abstract class AbstractStackedTypeComputationState extends AbstractTypeCo
 			LightweightTypeReference type, boolean returnType, ConformanceHint... hints) {
 		return type;
 	}
-	
 }

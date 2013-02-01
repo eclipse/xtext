@@ -415,6 +415,7 @@ public class LogicalContainerAwareReentrantTypeResolver extends DefaultReentrant
 			preparedResolvedTypes.put(constructor, null);
 		}
 		ConstructorBodyComputationState state = new ConstructorBodyComputationState(childResolvedTypes, featureScopeSession.toInstanceContext(), constructor);
+		state.addExpectedExceptions(constructor.getExceptions());
 		state.computeTypes();
 		computeAnnotationTypes(childResolvedTypes, featureScopeSession, constructor);
 		for(JvmFormalParameter parameter: constructor.getParameters()) {
@@ -434,6 +435,7 @@ public class LogicalContainerAwareReentrantTypeResolver extends DefaultReentrant
 			preparedResolvedTypes.put(operation, null);
 		}
 		OperationBodyComputationState state = new OperationBodyComputationState(childResolvedTypes, operation.isStatic() ? featureScopeSession : featureScopeSession.toInstanceContext(), operation);
+		state.addExpectedExceptions(operation.getExceptions());
 		// no need to unmark the computing state since we replace the equivalent in #resolveTo
 		markComputing(operation.getReturnType());
 		setReturnType(operation, state.computeTypes());

@@ -35,5 +35,4 @@ public abstract class AbstractLogicalContainerAwareRootComputationState extends 
 	protected XExpression getRootExpression() {
 		return ((LogicalContainerAwareReentrantTypeResolver) getResolver()).getLogicalContainerProvider().getAssociatedExpression(getMember());
 	}
-	
 }

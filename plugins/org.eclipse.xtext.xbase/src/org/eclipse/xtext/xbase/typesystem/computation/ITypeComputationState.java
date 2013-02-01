@@ -7,6 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.typesystem.computation;
 
+import java.util.Collection;
 import java.util.List;
 
 import org.eclipse.jdt.annotation.NonNullByDefault;
@@ -15,7 +16,9 @@ import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
+import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.diagnostics.AbstractDiagnostic;
+import org.eclipse.xtext.diagnostics.Severity;
 import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.XConstructorCall;
@@ -283,5 +286,13 @@ public interface ITypeComputationState {
 	 * @param typeParameter the type parameter
 	 */
 	UnboundTypeReference createUnboundTypeReference(XExpression expression, JvmTypeParameter typeParameter);
+	
+	ITypeComputationState addExpectedExceptions(Collection<JvmTypeReference> declaredExceptionTypes);
+	
+	List<LightweightTypeReference> getExpectedExceptions();
+	
+	Severity getSeverity(String issueCode);
+	
+	boolean isIgnored(String issueCode);
 	
 }

@@ -29,6 +29,7 @@ import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.JvmTypeParameterDeclarator;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.diagnostics.AbstractDiagnostic;
+import org.eclipse.xtext.validation.IssueSeverities;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.XClosure;
 import org.eclipse.xtext.xbase.XConstructorCall;
@@ -113,8 +114,10 @@ public abstract class ResolvedTypes implements IResolvedTypes {
 	private Map<Object, List<LightweightBoundTypeArgument>> typeParameterHints;
 	private Set<Object> resolvedTypeParameters;
 	private List<JvmTypeParameter> declaredTypeParameters;
+	private List<LightweightTypeReference> expectedExceptions;
 	
 	protected ResolvedTypes(DefaultReentrantTypeResolver resolver) {
+		System.out.println("new "+getClass()+"@"+System.identityHashCode(this));
 		this.resolver = resolver;
 		this.converter = createConverter();
 	}
@@ -130,6 +133,8 @@ public abstract class ResolvedTypes implements IResolvedTypes {
 		resolvedTypeParameters = null;
 		declaredTypeParameters = null;
 	}
+	
+	protected abstract IssueSeverities getSeverities();
 	
 	protected OwnedConverter getConverter() {
 		return converter;
@@ -330,6 +335,23 @@ public abstract class ResolvedTypes implements IResolvedTypes {
 	public LightweightTypeReference getExpectedType(XExpression expression) {
 		LightweightTypeReference result = doGetExpectedType(expression, false);
 		return toOwnedReference(result);
+	}
+	
+	public void addExpectedExceptions(Collection<LightweightTypeReference> exceptions) {
+		if (expectedExceptions == null)
+			expectedExceptions = Lists.newArrayList(exceptions);
+		else
+			expectedExceptions.addAll(exceptions);
+	}
+
+	public List<LightweightTypeReference> getExpectedExceptions() {
+		if (expectedExceptions == null)
+			return Collections.<LightweightTypeReference> emptyList();
+		return expectedExceptions;
+	}
+	
+	protected List<LightweightTypeReference> basicGetExpectedExceptions() {
+		return expectedExceptions;
 	}
 	
 	@Nullable

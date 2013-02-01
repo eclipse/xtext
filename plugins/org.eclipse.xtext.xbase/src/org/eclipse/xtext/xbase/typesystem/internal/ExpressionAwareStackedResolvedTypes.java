@@ -25,6 +25,7 @@ public class ExpressionAwareStackedResolvedTypes extends StackedResolvedTypes {
 	protected ExpressionAwareStackedResolvedTypes(ResolvedTypes parent, XExpression expression) {
 		super(parent);
 		this.expression = expression;
+		System.out.println("exp --> " + expression);
 	}
 
 	@Override
