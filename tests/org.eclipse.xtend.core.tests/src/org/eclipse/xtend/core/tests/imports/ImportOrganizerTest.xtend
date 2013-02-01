@@ -587,6 +587,52 @@ class ImportOrganizerTest extends AbstractXtendTestCase {
 			}
 		''')
 	}
+	
+	@Test def testLocalOperator() {
+		'''
+			class Foo {
+				def foo() {
+					'' * ''
+				}
+				def operator_multiply(String x, String y) {
+				}
+			}
+		'''.assertIsOrganizedTo('''
+			class Foo {
+				def foo() {
+					'' * ''
+				}
+				def operator_multiply(String x, String y) {
+				}
+			}
+		''')
+	}
+
+	@Test def testStaticLocalOperator() {
+		'''
+			import static extension Foo.*
+
+			class Foo {
+				def foo() {
+					'' * ''
+				}
+				def static operator_multiply(String x, String y) {
+					
+				}
+			}
+		'''.assertIsOrganizedTo('''
+			import static extension Foo.*
+
+			class Foo {
+				def foo() {
+					'' * ''
+				}
+				def static operator_multiply(String x, String y) {
+					
+				}
+			}
+		''')
+	}
 
 	@Test def testImplicitExtensions() {
 		'''
@@ -1109,4 +1155,75 @@ class ImportOrganizerTest extends AbstractXtendTestCase {
 			}
 		''')
 	}
+	
+	// see https://bugs.eclipse.org/bugs/show_bug.cgi?id=397903 
+	@Test def testFeatureCallToStaticLocalField() {
+		'''
+			class Foo {
+				static int foo
+				def bar() {
+					foo
+				}
+			}
+		'''.assertIsOrganizedTo('''
+			class Foo {
+				static int foo
+				def bar() {
+					foo
+				}
+			}
+		''')
+	}
+	
+	@Test def testExtensionFeatureCallToStaticLocal() {
+		'''
+			import static extension Foo.*
+			
+			class Foo {
+				def foo() {
+					''.bar
+				}
+				
+				def static bar(String s) {
+				}
+			}
+		'''.assertIsOrganizedTo('''
+			import static extension Foo.*
+			
+			class Foo {
+				def foo() {
+					''.bar
+				}
+				
+				def static bar(String s) {
+				}
+			}
+		''')
+	}
+	
+	// see https://bugs.eclipse.org/bugs/show_bug.cgi?id=399519
+	@Test def testExtensionFeatureCallToStaticLocalFieldFromSuper() {
+		'''
+			import java.util.Collections
+			
+			import static extension java.util.Collections.*
+
+			class Foo extends Collections {
+				def foo() {
+					''.singleton
+				}
+			}
+		'''.assertIsOrganizedTo('''
+			import java.util.Collections
+			
+			import static extension java.util.Collections.*
+
+			class Foo extends Collections {
+				def foo() {
+					''.singleton
+				}
+			}
+		''')
+	}
+	
 }
