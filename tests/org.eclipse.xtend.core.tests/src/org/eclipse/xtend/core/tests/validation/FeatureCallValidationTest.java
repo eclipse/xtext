@@ -24,6 +24,34 @@ public class FeatureCallValidationTest extends AbstractXtendTestCase {
 	@Inject
 	private ValidationTestHelper helper;
 
+	@Ignore("Fails with old impl - 'this' is not on the scope thus two error messages for this and toString")
+	@Test 
+	public void testThisInStaticContext() throws Exception {
+		XtendClass clazz = clazz("class X { static def meth() { this.toString } }");
+		helper.assertError(clazz, XbasePackage.Literals.XFEATURE_CALL,
+				org.eclipse.xtext.xbase.validation.IssueCodes.STATIC_ACCESS_TO_INSTANCE_MEMBER);
+	}
+	
+	@Test 
+	public void testThisInInstanceContext() throws Exception {
+		XtendClass clazz = clazz("class X { def meth() { this.toString } }");
+		helper.assertNoErrors(clazz);
+	}
+	
+	@Ignore("Fails with old impl - see above")
+	@Test 
+	public void testSuperInStaticContext() throws Exception {
+		XtendClass clazz = clazz("class X { static def meth() { super.toString } }");
+		helper.assertError(clazz, XbasePackage.Literals.XFEATURE_CALL,
+				org.eclipse.xtext.xbase.validation.IssueCodes.STATIC_ACCESS_TO_INSTANCE_MEMBER);
+	}
+	
+	@Test 
+	public void testSuperInInstanceContext() throws Exception {
+		XtendClass clazz = clazz("class X { def meth() { super.toString } }");
+		helper.assertNoErrors(clazz);
+	}
+	
 	@Test public void testXFeatureCallField1() throws Exception {
 		XtendClass clazz = clazz("class X { String foo def meth() { foo.toLowerCase } }");
 		helper.assertNoErrors(clazz);

@@ -8,6 +8,9 @@
 package org.eclipse.xtend.core.tests.linking
 
 import org.eclipse.emf.ecore.EClass
+import org.eclipse.emf.ecore.ENamedElement
+import org.eclipse.emf.ecore.EPackage
+import org.eclipse.emf.ecore.EStructuralFeature
 import org.eclipse.xtend.core.tests.NewTypeSystemRuntimeInjectorProvider
 import org.eclipse.xtend.core.xtend.XtendFunction
 import org.eclipse.xtext.common.types.JvmOperation
@@ -18,10 +21,6 @@ import org.eclipse.xtext.xbase.XBlockExpression
 import org.eclipse.xtext.xbase.XFeatureCall
 import org.junit.Test
 import org.junit.runner.RunWith
-import org.junit.Ignore
-import org.eclipse.emf.ecore.ENamedElement
-import org.eclipse.emf.ecore.EPackage
-import org.eclipse.emf.ecore.EStructuralFeature
 
 @RunWith(typeof(XtextRunner))
 @InjectWith(typeof(NewTypeSystemRuntimeInjectorProvider))

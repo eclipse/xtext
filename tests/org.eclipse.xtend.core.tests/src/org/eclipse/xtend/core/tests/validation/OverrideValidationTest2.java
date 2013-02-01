@@ -19,51 +19,101 @@ import org.junit.runner.RunWith;
 @RunWith(XtextRunner.class)
 @InjectWith(NewTypeSystemRuntimeInjectorProvider.class)
 public class OverrideValidationTest2 extends OverrideValidationTest {
-	
+
 	// These are disabled in the super class
 	@Override
-	@Test public void testOverrideReturnType_1() throws Exception {
+	@Test
+	public void testOverrideReturnType_1() throws Exception {
 		super.testOverrideReturnType_1();
 	}
 
 	@Override
-	@Test public void testOverrideReturnType_2() throws Exception {
+	@Test
+	public void testOverrideReturnType_2() throws Exception {
 		super.testOverrideReturnType_2();
 	}
-	
+
 	@Override
 	@Test
 	public void testOverrideReturnType_4() throws Exception {
 		super.testOverrideReturnType_4();
 	}
-	
+
 	@Override
 	@Test
 	public void testIncompatibleThrowsClause_04() throws Exception {
 		super.testIncompatibleThrowsClause_04();
 	}
-	
+
 	@Override
 	@Test
 	public void testIncompatibleThrowsClause_05() throws Exception {
 		super.testIncompatibleThrowsClause_05();
 	}
-	
+
 	@Override
 	@Test
 	public void testCompatibleThrowsClause_08() throws Exception {
 		super.testCompatibleThrowsClause_08();
 	}
-	
+
 	@Override
 	@Test
 	public void testCompatibleThrowsClause_09() throws Exception {
 		super.testCompatibleThrowsClause_09();
 	}
-	
+
 	@Override
 	@Test
 	public void testCompatibleThrowsClause_10() throws Exception {
 		super.testCompatibleThrowsClause_10();
+	}
+
+	@Override
+	@Test
+	public void testInterfaceOverrideReturnType_1() throws Exception {
+		super.testInterfaceOverrideReturnType_1();
+	}
+
+	@Override
+	@Test
+	public void testInterfaceOverrideReturnType_2() throws Exception {
+		super.testInterfaceOverrideReturnType_2();
+	}
+
+	@Override
+	@Test
+	public void testInterfaceOverrideReturnType_4() throws Exception {
+		super.testInterfaceOverrideReturnType_4();
+	}
+
+	@Override
+	@Test
+	public void testInterfaceIncompatibleThrowsClause_04() throws Exception {
+		super.testInterfaceIncompatibleThrowsClause_04();
+	}
+
+	@Override
+	@Test
+	public void testInterfaceIncompatibleThrowsClause_05() throws Exception {
+		super.testInterfaceIncompatibleThrowsClause_05();
+	}
+
+	@Override
+	@Test
+	public void testInterfaceCompatibleThrowsClause_08() throws Exception {
+		super.testInterfaceCompatibleThrowsClause_08();
+	}
+
+	@Override
+	@Test
+	public void testInterfaceCompatibleThrowsClause_09() throws Exception {
+		super.testInterfaceCompatibleThrowsClause_09();
+	}
+
+	@Override
+	@Test
+	public void testInterfaceCompatibleThrowsClause_10() throws Exception {
+		super.testInterfaceCompatibleThrowsClause_10();
 	}
 }

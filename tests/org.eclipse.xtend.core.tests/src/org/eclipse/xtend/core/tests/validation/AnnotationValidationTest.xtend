@@ -1,15 +1,29 @@
+/*******************************************************************************
+ * Copyright (c) 2013 itemis AG (http://www.itemis.eu) and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *******************************************************************************/
 package org.eclipse.xtend.core.tests.validation
 
 import com.google.inject.Inject
 import org.eclipse.xtend.core.tests.AbstractXtendTestCase
+import org.eclipse.xtend.core.tests.NewTypeSystemRuntimeInjectorProvider
 import org.eclipse.xtend.core.validation.IssueCodes
 import org.eclipse.xtend.core.xtend.XtendFile
+import org.eclipse.xtext.junit4.InjectWith
+import org.eclipse.xtext.junit4.XtextRunner
 import org.eclipse.xtext.junit4.util.ParseHelper
 import org.eclipse.xtext.junit4.validation.ValidationTestHelper
 import org.junit.Test
+import org.junit.runner.RunWith
 
 import static org.eclipse.xtend.core.xtend.XtendPackage$Literals.*
 
+/**
+ * @author Sven Efftinge - Initial contribution and API
+ */
 class AnnotationValidationTest extends AbstractXtendTestCase {
 	
 	@Inject ValidationTestHelper helper
@@ -44,4 +58,12 @@ class AnnotationValidationTest extends AbstractXtendTestCase {
 		helper.assertError(file, XTEND_FIELD, IssueCodes::INVALID_ANNOTATION_VALUE_TYPE)
 	}
 	
+}
+
+/**
+ * @author Sebastian Zarnekow - Initial contribution and API
+ */
+@RunWith(typeof(XtextRunner))
+@InjectWith(typeof(NewTypeSystemRuntimeInjectorProvider))
+class AnnotationValidationTest2 extends AnnotationValidationTest {
 }
