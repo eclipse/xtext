@@ -21,6 +21,7 @@ import org.eclipse.xtext.common.types.util.VisibilityService;
 import org.eclipse.xtext.linking.LinkingScopeProviderBinding;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.scoping.IScopeProvider;
+import org.eclipse.xtext.serializer.tokens.SerializerScopeProviderBinding;
 import org.eclipse.xtext.service.SingletonBinding;
 import org.eclipse.xtext.xbase.annotations.typesystem.XbaseWithAnnotationsBatchScopeProvider;
 import org.eclipse.xtext.xbase.compiler.TypeReferenceSerializer;
@@ -32,6 +33,7 @@ import org.eclipse.xtext.xbase.jvmmodel.IJvmModelInferrer;
 import org.eclipse.xtext.xbase.resource.BatchLinkableResource;
 import org.eclipse.xtext.xbase.scoping.batch.IBatchScopeProvider;
 import org.eclipse.xtext.xbase.scoping.batch.XbaseBatchScopeProvider;
+import org.eclipse.xtext.xbase.serializer.SerializerScopeProvider;
 import org.eclipse.xtext.xbase.typesystem.computation.ITypeComputer;
 import org.eclipse.xtext.xbase.typesystem.internal.DefaultBatchTypeResolver;
 import org.eclipse.xtext.xbase.typesystem.internal.DefaultReentrantTypeResolver;
@@ -59,6 +61,12 @@ public class XtendRuntimeModule2 extends XtendRuntimeModule {
 	public void configureLinkingIScopeProvider(Binder binder) {
 		binder.bind(IScopeProvider.class).annotatedWith(LinkingScopeProviderBinding.class)
 				.to(ExtensionAwareScopeProvider.class);
+	}
+	
+	@Override
+	public void configureSerializerIScopeProvider(Binder binder) {
+		binder.bind(IScopeProvider.class).annotatedWith(SerializerScopeProviderBinding.class)
+			.to(SerializerScopeProvider.class);
 	}
 
 	public Class<? extends IBatchScopeProvider> bindIBatchScopeProvider() {
