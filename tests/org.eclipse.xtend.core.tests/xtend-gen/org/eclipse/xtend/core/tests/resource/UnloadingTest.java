@@ -1,10 +1,16 @@
+/**
+ * Copyright (c) 2013 itemis AG (http://www.itemis.eu) and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ */
 package org.eclipse.xtend.core.tests.resource;
 
 import java.util.List;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.xtend.core.resource.XtendResource;
 import org.eclipse.xtend.core.tests.AbstractXtendTestCase;
 import org.eclipse.xtend.core.xtend.XtendClass;
 import org.eclipse.xtend.core.xtend.XtendConstructor;
@@ -15,11 +21,15 @@ import org.eclipse.xtend.core.xtend.XtendTypeDeclaration;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeReference;
+import org.eclipse.xtext.resource.DerivedStateAwareResource;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.junit.Assert;
 import org.junit.Test;
 
+/**
+ * @author Sven Efftinge - Initial contribution and API
+ */
 @SuppressWarnings("all")
 public class UnloadingTest extends AbstractXtendTestCase {
   @Test
@@ -55,7 +65,7 @@ public class UnloadingTest extends AbstractXtendTestCase {
       final List<XtendFile> parsedFiles = IterableExtensions.<XtendFile>toList(_files);
       XtendFile _get = parsedFiles.get(1);
       Resource _eResource = _get.eResource();
-      final XtendResource resource = ((XtendResource) _eResource);
+      final DerivedStateAwareResource resource = ((DerivedStateAwareResource) _eResource);
       XtendFile _head = IterableExtensions.<XtendFile>head(parsedFiles);
       final Resource resourceA = _head.eResource();
       resource.reparse(fileB);

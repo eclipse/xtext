@@ -2,6 +2,7 @@ package org.eclipse.xtend.core.tests.compiler;
 
 import org.eclipse.xtend.core.tests.compiler.AbstractXtendCompilerTest;
 import org.eclipse.xtend2.lib.StringConcatenation;
+import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.junit.Ignore;
 import org.junit.Test;
 
@@ -17,6 +18,28 @@ public class XtendCompilerTest extends AbstractXtendCompilerTest {
   @Test
   public void testAnnotationWithIntArray() throws Exception {
     super.testAnnotationWithIntArray();
+  }
+  
+  @Ignore(value = "Fails with old impl")
+  @Test
+  public void testStaticMethod_02() {
+    super.testStaticMethod_02();
+  }
+  
+  @Ignore(value = "Fails with old impl")
+  @Test
+  public void testInstanceMethod() {
+    super.testInstanceMethod();
+  }
+  
+  @Ignore(value = "Fails with old impl")
+  @Test
+  public void testClosureSneakyThrow_02() {
+    try {
+      super.testClosureSneakyThrow_02();
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
   }
   
   /**

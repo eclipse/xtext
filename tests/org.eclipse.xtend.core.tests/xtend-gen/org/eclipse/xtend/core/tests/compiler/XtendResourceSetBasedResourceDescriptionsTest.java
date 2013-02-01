@@ -1,3 +1,10 @@
+/**
+ * Copyright (c) 2013 itemis AG (http://www.itemis.eu) and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ */
 package org.eclipse.xtend.core.tests.compiler;
 
 import com.google.inject.Inject;
@@ -7,6 +14,7 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.xtend.core.tests.AbstractXtendTestCase;
 import org.eclipse.xtend2.lib.StringConcatenation;
+import org.eclipse.xtext.resource.DerivedStateAwareResource;
 import org.eclipse.xtext.util.CancelIndicator;
 import org.eclipse.xtext.validation.CheckMode;
 import org.eclipse.xtext.validation.IResourceValidator;
@@ -14,10 +22,12 @@ import org.eclipse.xtext.validation.Issue;
 import org.eclipse.xtext.xbase.compiler.CompilationTestHelper;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Pair;
-import org.eclipse.xtext.xbase.resource.XbaseResource;
 import org.junit.Assert;
 import org.junit.Test;
 
+/**
+ * @author Sven Efftinge - Initial contribution and API
+ */
 @SuppressWarnings("all")
 public class XtendResourceSetBasedResourceDescriptionsTest extends AbstractXtendTestCase {
   @Inject
@@ -93,7 +103,7 @@ public class XtendResourceSetBasedResourceDescriptionsTest extends AbstractXtend
           boolean _isLoaded = res.isLoaded();
           Assert.assertFalse(_isLoaded);
           try {
-            ((XbaseResource) res).installDerivedState(true);
+            ((DerivedStateAwareResource) res).installDerivedState(true);
             Assert.fail("expected exception");
           } catch (final Throwable _t) {
             if (_t instanceof IllegalStateException) {
