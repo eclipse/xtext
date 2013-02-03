@@ -106,7 +106,10 @@ public class XbaseReferenceUpdater extends JvmModelReferenceUpdater {
 	protected void createTextChange(ITextRegion referenceTextRegion, String newReferenceText, EObject referringElement,
 			EObject newTargetElement, EReference reference, URI referringResourceURI,
 			IRefactoringUpdateAcceptor updateAcceptor) {
-		if (newReferenceText != null && updateAcceptor instanceof ImportAwareUpdateAcceptor && newTargetElement instanceof JvmMember) {
+		if (newReferenceText != null
+				&& updateAcceptor instanceof ImportAwareUpdateAcceptor 
+				&& newTargetElement instanceof JvmMember 
+				&& !isImplicitVariable(newTargetElement, reference, newReferenceText)) {
 			boolean isStaticFeatureCall = isStaticFeatureCall(referringElement, reference, newTargetElement);
 			// do nothing on static feature calls with explicit type as the type reference has a separate reference
 			if(!isStaticFeatureCall || ((XFeatureCall) referringElement).getDeclaringType() == null) {
@@ -142,6 +145,10 @@ public class XbaseReferenceUpdater extends JvmModelReferenceUpdater {
 		}
 		super.createTextChange(referenceTextRegion, newReferenceText, referringElement, newTargetElement, reference,
 				referringResourceURI, updateAcceptor);
+	}
+	
+	protected boolean isImplicitVariable(EObject newTargetElement, EReference reference, String newTargetText) {
+		return newTargetElement instanceof JvmDeclaredType && reference == XbasePackage.Literals.XABSTRACT_FEATURE_CALL__FEATURE;
 	}
 
 	protected boolean isStaticFeatureCall(EObject referringElement, EReference reference, EObject newTargetElement) {
