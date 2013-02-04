@@ -18,6 +18,7 @@ import com.google.inject.ImplementedBy;
  * environments outside of the JARs, such as project name and source folders.
  * 
  * @author Moritz Eysholdt - Initial contribution and API
+ * @author Holger Schill
  */
 @ImplementedBy(DefaultTraceURIConverter.class)
 public interface ITraceURIConverter {
@@ -26,5 +27,10 @@ public interface ITraceURIConverter {
 	 * Converts an absolute URI into a format that can be persisted in a trace file.
 	 */
 	URI getURIForTrace(XtextResource context);
+
+	/**
+	 * Converts an absolute URI into a format that can be persisted in a trace file.
+	 */
+	URI getURIForTrace(URI uri);
 
 }
