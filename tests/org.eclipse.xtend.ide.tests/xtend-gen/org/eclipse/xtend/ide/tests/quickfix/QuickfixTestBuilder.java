@@ -336,9 +336,4 @@ public class QuickfixTestBuilder {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
-  public void closeE1ditor(final WorkbenchTestHelper helper) {
-    UnsupportedOperationException _unsupportedOperationException = new UnsupportedOperationException("TODO: auto-generated method stub");
-    throw _unsupportedOperationException;
-  }
 }
