@@ -28,6 +28,7 @@ import org.eclipse.ui.part.FileEditorInput;
 import org.eclipse.ui.texteditor.AbstractTextEditor;
 import org.eclipse.ui.texteditor.IDocumentProvider;
 import org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil;
+import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.Test;
@@ -52,9 +53,13 @@ public class TextChangeCombinerTest {
 		file0 = IResourcesSetupUtil.createFile(PROJECT + "/file0.txt", MODEL);
 	}
 
+	@After
+	public void closeEditors() {
+		PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().closeAllEditors(false);
+	}
+	
 	@AfterClass
 	public static void tearDown() throws Exception {
-		PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().closeAllEditors(false);
 		ResourcesPlugin.getWorkspace().getRoot().getProject(PROJECT).delete(true, new NullProgressMonitor());
 	}
 
