@@ -44,15 +44,8 @@ public class XtendHighlightingCalculatorTest extends AbstractXtendUITestCase imp
 
 	public static final String DEFAULT_CLASS_DEF = "class Foo";
 	
-	private  static final String TEST_HELP_CLASS_STRING = "package test; @Deprecated " +
-			"public class TestClassDeprecated { " +
-			"@Deprecated public static String DEPRECATED_CONSTANT = 'foo'" +
-			"@Deprecated public static String CONSTANT = 'foo'" +
-			"@Deprecated @Test public void testMethodDeprecated(){} " +
-			"@Test public void testMethodNotDeprecated(){} " +
-			"@Deprecated public static void testMethodStaticDeprecated(){} " +
-			"public static void testMethodStaticNotDeprecated(){}}";
-	
+	private static final String DEPRECATED_TEST_CLASS = "org.eclipse.xtend.ide.tests.data.highlighting.TestClassDeprecated";
+
 	private String classDefString = DEFAULT_CLASS_DEF;
 
 	@Inject
@@ -77,6 +70,7 @@ public class XtendHighlightingCalculatorTest extends AbstractXtendUITestCase imp
 		imports = Sets.newHashSet();
 		injects = Sets.newHashSet();
 		classDefString = DEFAULT_CLASS_DEF;
+		waitForAutoBuild();
 	}
 	
 	@Override
@@ -115,8 +109,6 @@ public class XtendHighlightingCalculatorTest extends AbstractXtendUITestCase imp
 
 	
 	protected XtendFile file(String string) throws Exception {
-		createFile(testHelper.getProject().getName() + "/src/test/TestClassDeprecated.java",TEST_HELP_CLASS_STRING);
-		waitForAutoBuild();
 		ResourceSet set = testHelper.getResourceSet();
 		Resource resource = set.createResource(URI.createURI("Foo.xtend"));
 		resource.load(new StringInputStream(string), null);
@@ -375,7 +367,7 @@ public class XtendHighlightingCalculatorTest extends AbstractXtendUITestCase imp
 	}
 	
 	@Test public void testDeprecatedParentClass() throws Exception {
-		addImport("test.TestClassDeprecated");
+		addImport(DEPRECATED_TEST_CLASS);
 		classDefString = "class Bar extends TestClassDeprecated";
 		String model = "{}";
 		expect(getPrefix().lastIndexOf("TestClassDeprecated"), 19, XbaseHighlightingConfiguration.DEPRECATED_MEMBERS);
@@ -383,7 +375,7 @@ public class XtendHighlightingCalculatorTest extends AbstractXtendUITestCase imp
 	}
 
 	@Test public void testDeprecatedStaticFieldAccess() throws Exception {
-		addImport("test.TestClassDeprecated");
+		addImport(DEPRECATED_TEST_CLASS);
 		String model = "{TestClassDeprecated::DEPRECATED_CONSTANT}";
 		expectAbsolute(model.lastIndexOf("DEPRECATED_CONSTANT"), 19, XbaseHighlightingConfiguration.STATIC_FIELD);
 		expectAbsolute(model.lastIndexOf("DEPRECATED_CONSTANT"), 19, XbaseHighlightingConfiguration.DEPRECATED_MEMBERS);
@@ -391,7 +383,7 @@ public class XtendHighlightingCalculatorTest extends AbstractXtendUITestCase imp
 	}
 	
 	@Test public void testDeprecatedMethodAccess() throws Exception {
-		addImport("test.TestClassDeprecated");
+		addImport(DEPRECATED_TEST_CLASS);
 		addImport("com.google.inject.Inject");
 		String model = "{} @Inject TestClassDeprecated clazz def baz(){ clazz.testMethodDeprecated() }";
 		expectAbsolute(model.lastIndexOf("@"), 1,XbaseHighlightingConfiguration.ANNOTATION);
@@ -403,7 +395,7 @@ public class XtendHighlightingCalculatorTest extends AbstractXtendUITestCase imp
 	}
 	
 	@Test public void testNotDeprecatedMethodAccess() throws Exception {
-		addImport("test.TestClassDeprecated");
+		addImport(DEPRECATED_TEST_CLASS);
 		addImport("com.google.inject.Inject");
 		String model = "{} @Inject TestClassDeprecated clazz def baz(){ clazz.testMethodNotDeprecated() }";
 		expectAbsolute(model.lastIndexOf("@"), 1,XbaseHighlightingConfiguration.ANNOTATION);
@@ -415,7 +407,7 @@ public class XtendHighlightingCalculatorTest extends AbstractXtendUITestCase imp
 	}
 	
 	@Test public void testDeprecatedStaticMethodAccess() throws Exception {
-		addImport("test.TestClassDeprecated");
+		addImport(DEPRECATED_TEST_CLASS);
 		String model = "{TestClassDeprecated::testMethodStaticDeprecated() }";
 		expectAbsolute(model.lastIndexOf("testMethodStaticDeprecated"), 26, XbaseHighlightingConfiguration.STATIC_METHOD_INVOCATION);
 		expectAbsolute(model.lastIndexOf("testMethodStaticDeprecated"), 26, XbaseHighlightingConfiguration.DEPRECATED_MEMBERS);
@@ -423,7 +415,7 @@ public class XtendHighlightingCalculatorTest extends AbstractXtendUITestCase imp
 	}
 	
 	@Test public void testNotDeprecatedStaticMethodAccess() throws Exception {
-		addImport("test.TestClassDeprecated");
+		addImport(DEPRECATED_TEST_CLASS);
 		String model = "{TestClassDeprecated::testMethodStaticNotDeprecated() }";
 		expectAbsolute(model.lastIndexOf("testMethodStaticNotDeprecated"), 29, XbaseHighlightingConfiguration.STATIC_METHOD_INVOCATION);
 		notExpectAbsolute(model.lastIndexOf("testMethodStaticNotDeprecated"), 29, XbaseHighlightingConfiguration.DEPRECATED_MEMBERS);
@@ -431,7 +423,7 @@ public class XtendHighlightingCalculatorTest extends AbstractXtendUITestCase imp
 	}
 	
 	@Test public void testDeprecatedXtendField() throws Exception {
-		addImport("test.TestClassDeprecated");
+		addImport(DEPRECATED_TEST_CLASS);
 		addImport("com.google.inject.Inject");
 		String model = "{} @Deprecated @Inject TestClassDeprecated clazz def baz(){ clazz.testMethodNotDeprecated() }";
 		expectAbsolute(model.indexOf("@"), 1,XbaseHighlightingConfiguration.ANNOTATION);
