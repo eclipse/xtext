@@ -276,11 +276,14 @@ public abstract class AbstractLinkingCandidate<Expression extends XExpression> i
 		if (!slot.isVarArg() && !slot.isSuperfluous()) {
 			computeFixedArityArgumentType(slot, substitutor);
 		} else if (slot.isVarArg()) {
-			ArrayTypeReference lastParameterType = (ArrayTypeReference) slot.getDeclaredType();
+			LightweightTypeReference lastParameterType = slot.getDeclaredType();
 			if (lastParameterType == null) {
 				throw new IllegalStateException();
 			}
-			LightweightTypeReference componentType = lastParameterType.getComponentType();
+			LightweightTypeReference componentType = lastParameterType.isArray() ? lastParameterType.getComponentType() : lastParameterType;
+			if (componentType == null) {
+				throw new IllegalStateException();
+			}
 			ITypeComputationState argumentState = null;
 			LightweightTypeReference substitutedComponentType = substitutor.substitute(componentType);
 			List<XExpression> arguments = slot.getArgumentExpressions();

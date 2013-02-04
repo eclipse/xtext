@@ -44,13 +44,4 @@ public class VarArgsFeatureCallArgumentSlot extends StandardFeatureCallArgumentS
 		parent.markProcessed(parent.arguments.size() - 1);
 	}
 	
-	/*
-	 * Overridden to specialize the return type.
-	 */
-	@Override
-	@Nullable
-	public ArrayTypeReference getDeclaredType() {
-		return (ArrayTypeReference) super.getDeclaredType();
-	}
-	
 }

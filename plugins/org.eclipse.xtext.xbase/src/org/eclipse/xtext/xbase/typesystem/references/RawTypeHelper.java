@@ -147,7 +147,7 @@ public class RawTypeHelper implements IRawTypeHelper {
 				List<JvmType> result = Lists.newArrayList();
 				OwnedConverter converter = new OwnedConverter(owner);
 				for(JvmTypeConstraint constraint: constraints) {
-					if (constraint instanceof JvmUpperBound) {
+					if (constraint instanceof JvmUpperBound && constraint.getTypeReference() != null) {
 						result.addAll(converter.toLightweightReference(constraint.getTypeReference()).accept(this, resourceSet));
 					}
 				}
