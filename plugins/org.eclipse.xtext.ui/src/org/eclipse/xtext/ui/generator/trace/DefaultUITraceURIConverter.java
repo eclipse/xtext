@@ -7,9 +7,11 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.generator.trace;
 
+import java.util.Iterator;
+
 import org.apache.log4j.Logger;
 import org.eclipse.core.resources.IProject;
-import org.eclipse.core.resources.IWorkspace;
+import org.eclipse.core.resources.IStorage;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.ResourceSet;
@@ -20,6 +22,8 @@ import org.eclipse.jdt.core.JavaModelException;
 import org.eclipse.xtext.generator.trace.DefaultTraceURIConverter;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.resource.XtextResourceSet;
+import org.eclipse.xtext.ui.resource.IStorage2UriMapper;
+import org.eclipse.xtext.util.Pair;
 
 import com.google.inject.Inject;
 
@@ -32,7 +36,7 @@ public class DefaultUITraceURIConverter extends DefaultTraceURIConverter {
 	private final static Logger LOG = Logger.getLogger(DefaultUITraceURIConverter.class);
 
 	@Inject
-	private IWorkspace workspace;
+	private IStorage2UriMapper mapper;
 
 	@Override
 	public URI getURIForTrace(XtextResource context) {
@@ -51,20 +55,23 @@ public class DefaultUITraceURIConverter extends DefaultTraceURIConverter {
 	@Override
 	public URI getURIForTrace(URI uri) {
 		if (uri.isPlatform() && uri.segmentCount() > 1) {
-			String projectName = uri.segmentsList().get(1);
-			IProject project = workspace.getRoot().getProject(projectName);
-			try {
-				if (project.exists()) {
-					if (project.hasNature(JavaCore.NATURE_ID)) {
-						IJavaProject javaProject = JavaCore.create(project);
-						if (javaProject != null)
-							return computeTraceURI(uri, javaProject);
+			Iterator<Pair<IStorage, IProject>> storagesIterator = mapper.getStorages(uri).iterator();
+			if(storagesIterator.hasNext()){
+				Pair<IStorage, IProject> candidate = storagesIterator.next();
+				IProject project = candidate.getSecond();
+				try {
+					if (project.exists()) {
+						if (project.hasNature(JavaCore.NATURE_ID)) {
+							IJavaProject javaProject = JavaCore.create(project);
+							if (javaProject != null)
+								return computeTraceURI(uri, javaProject);
+						}
 					}
+				} catch (JavaModelException e) {
+					LOG.error(e);
+				} catch (CoreException e) {
+					LOG.error(e);
 				}
-			} catch (JavaModelException e) {
-				LOG.error(e);
-			} catch (CoreException e) {
-				LOG.error(e);
 			}
 		}
 		return super.getURIForTrace(uri);
