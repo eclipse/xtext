@@ -36,6 +36,7 @@ import org.eclipse.xtext.xbase.typesystem.internal.CompoundReentrantTypeResolver
 import org.eclipse.xtext.xbase.typesystem.internal.TypeData
 import org.junit.runner.RunWith
 import org.eclipse.xtext.xbase.typesystem.internal.RootResolvedTypes
+import org.eclipse.xtext.xbase.XClosure
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -79,6 +80,11 @@ abstract class AbstractXtendCompilerSmokeTest extends AbstractXtendCompilerTest 
 							if (content.implicitReceiver != null) {
 								assertExpressionTypeIsResolved(content.implicitReceiver, resolvedTypes)
 							}
+						}
+						XClosure: {
+							assertExpressionTypeIsResolved(content, resolvedTypes)
+							if (content.implicitParameter != null)
+								assertIdentifiableTypeIsResolved(content.implicitParameter, resolvedTypes)
 						}
 						XExpression: {
 							assertExpressionTypeIsResolved(content, resolvedTypes)
