@@ -127,8 +127,4 @@ class QuickfixTestBuilder {
 		yieldToQueuedDisplayJobs(null)
 	}
 	
-	def closeE1ditor(WorkbenchTestHelper helper) {
-		throw new UnsupportedOperationException("TODO: auto-generated method stub")
-	}
-	
 }
