@@ -1,0 +1,13 @@
+Change-Id: I8936625b386efd61ae142d1d5b5ad19cedbc94fa
+Verified+1: Hudson CI
+Code-Review+1: Moritz Eysholdt <moritz.eysholdt@itemis.de>
+IP-Clean+1: Moritz Eysholdt <moritz.eysholdt@itemis.de>
+Verified+1: Moritz Eysholdt <moritz.eysholdt@itemis.de>
+Code-Review+2: Sebastian Zarnekow <Sebastian.Zarnekow@itemis.de>
+IP-Clean+1: Sebastian Zarnekow <Sebastian.Zarnekow@itemis.de>
+Verified+1: Sebastian Zarnekow <Sebastian.Zarnekow@itemis.de>
+Submitted-by: Moritz Eysholdt <moritz.eysholdt@itemis.de>
+Submitted-at: Mon, 04 Feb 2013 18:24:39 -0500
+Reviewed-on: https://git.eclipse.org/r/10150
+Project: tmf/org.eclipse.xtext
+Branch: refs/heads/master
