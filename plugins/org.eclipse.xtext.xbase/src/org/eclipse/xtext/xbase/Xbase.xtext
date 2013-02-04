@@ -123,12 +123,25 @@ XPrimaryExpression returns XExpression:
 	XParenthesizedExpression;
 
 XLiteral returns XExpression:
+	XCollectionLiteral |
 	XClosure |
 	XBooleanLiteral |
 	XNumberLiteral |
 	XNullLiteral |
 	XStringLiteral |
 	XTypeLiteral
+;
+
+XCollectionLiteral:
+	XSetLiteral | XListLiteral
+;
+
+XSetLiteral:
+	{XSetLiteral} '#' '{' (elements+=XExpression (',' elements+=XExpression )*)? '}'
+;
+
+XListLiteral:
+	{XListLiteral} '#' '[' (elements+=XExpression (',' elements+=XExpression )*)? ']'
 ;
 
 XClosure returns XExpression:

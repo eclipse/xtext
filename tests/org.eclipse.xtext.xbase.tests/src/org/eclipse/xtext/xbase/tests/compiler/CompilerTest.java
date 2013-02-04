@@ -455,5 +455,21 @@ public class CompilerTest extends AbstractOutputComparingCompilerTests {
 				"\n'foo'.toFirstUpper");
 	}
 	
-	
+	@Test public void testListLiteralAsList() throws Exception {
+		assertCompilesTo(
+				"java.util.List<String> _xlistliteral = null;\n" + 
+				"com.google.common.collect.ImmutableList.Builder<String> _builder = com.google.common.collect.ImmutableList.builder();\n" + 
+				"_builder.add(\"foo\");\n" + 
+				"_xlistliteral = _builder.build();\n" + 
+				"return _xlistliteral;",
+				"#['foo']");
+	}
+
+	@Test public void testListLiteralAsArray() throws Exception {
+		assertCompilesTo(
+				"String[] _xlistliteral = null;\n" + 
+				"_xlistliteral = new String[] { \"foo\" };\n" + 
+				"final String[] x = _xlistliteral;",
+				"{val String[] x = #['foo']}");
+	}
 }

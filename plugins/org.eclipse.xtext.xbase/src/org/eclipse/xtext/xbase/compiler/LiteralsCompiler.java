@@ -219,4 +219,8 @@ public class LiteralsCompiler extends TypeConvertingCompiler {
 			return false;
 		return super.isVariableDeclarationRequired(expr,b);
 	}
+	
+	protected TypeReferenceSerializer getTypeReferenceSerializer() {
+		return referenceSerializer;
+	}
 }

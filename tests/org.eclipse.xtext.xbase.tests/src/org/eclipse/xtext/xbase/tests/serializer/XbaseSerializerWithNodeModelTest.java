@@ -33,6 +33,11 @@ public class XbaseSerializerWithNodeModelTest extends AbstractXbaseEvaluationTes
 	}
 
 	@Override
+	protected void assertEvaluatesToArray(Object[] object, String string) throws Exception {
+		assertSerializeable(string);
+	}
+
+	@Override
 	protected void assertEvaluatesWithException(Class<? extends Throwable> class1, String string) throws Exception {
 		assertSerializeable(string);
 	}

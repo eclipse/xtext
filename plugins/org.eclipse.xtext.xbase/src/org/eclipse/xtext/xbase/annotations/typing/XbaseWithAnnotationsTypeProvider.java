@@ -93,7 +93,7 @@ public class XbaseWithAnnotationsTypeProvider extends XbaseTypeProvider {
 		}
 		return null;
 	}
-	
+		
 	/**
 	 * @param reference unused but required in dispatch signature 
 	 * @param index unused but required in dispatch signature

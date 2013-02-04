@@ -294,6 +294,74 @@ abstract class AbstractTypeResolverTest<Reference> extends AbstractXbaseTestCase
 		"newArrayList().map[42]".resolvesTo("List<Integer>")
 	}
 	
+	@Test def void testListLiteral_00() {
+		"#[]".resolvesTo("List<Unbound[E]>")	
+	}
+	
+	@Test def void testListLiteral_01() throws Exception {
+		"#['foo']".resolvesTo("List<String>")
+	}
+
+	@Test def void testListLiteral_02() throws Exception {
+		"#['foo', null, 'bar']".resolvesTo("List<String>")
+	}
+
+	@Test def void testListLiteral_03() throws Exception {
+		"#[null]".resolvesTo("List<Unbound[E]>")
+	}
+
+	@Test def void testListLiteral_04() throws Exception {
+		"#[1, 2, 3]".resolvesTo("List<Integer>")
+	}
+
+	@Test def void testListLiteral_05() throws Exception {
+		"#[1, 2.0, 3]".resolvesTo("List<? extends Number & Comparable<?>>")
+	}
+
+	@Test def void testListLiteral_06() throws Exception {
+		"{ val java.util.List<Number> foo = #[1, 2.0, 3bi] foo }".resolvesTo("List<Number>")
+	}
+
+	@Test def void testListLiteral_07() throws Exception {
+		"{ val java.util.List<CharSequence> foo = #['foo', 'bar'] foo }".resolvesTo("List<CharSequence>")
+	}
+
+	@Test def void testListLiteral_08() throws Exception {
+		"{ val String[] foo = #['foo', 'bar'] foo }".resolvesTo("String[]")
+	}
+
+	@Test def void testSetLiteral_00() {
+		"#{}".resolvesTo("Set<Unbound[E]>")	
+	}
+	
+	@Test def void testSetLiteral_01() throws Exception {
+		"#{'foo'}".resolvesTo("Set<String>")
+	}
+
+	@Test def void testSetLiteral_02() throws Exception {
+		"#{'foo', null, 'bar'}".resolvesTo("Set<String>")
+	}
+
+	@Test def void testSetLiteral_03() throws Exception {
+		"#{null}".resolvesTo("Set<Unbound[E]>")
+	}
+
+	@Test def void testSetLiteral_04() throws Exception {
+		"#{1, 2 ,3}".resolvesTo("Set<Integer>")
+	}
+
+	@Test def void testSetLiteral_05() throws Exception {
+		"#{1, 2.0 ,3}".resolvesTo("Set<? extends Number & Comparable<?>>")
+	}
+	
+	@Test def void testSetLiteral_06() throws Exception {
+		"{ val java.util.Set<Number> foo = #[1, 2.0, 3bi] foo }".resolvesTo("Set<Number>")
+	}
+	
+	@Test def void testSetLiteral_07() throws Exception {
+		"{ val java.util.Set<CharSequence> foo = #['foo', 'bar'] foo }".resolvesTo("Set<CharSequence>")
+	}
+
 	@Test def void testOverloadedVarArgs_01() throws Exception {
 		"testdata::OverloadedMethods::overloadedVarArgs(null, null)".resolvesTo("long")
 	}

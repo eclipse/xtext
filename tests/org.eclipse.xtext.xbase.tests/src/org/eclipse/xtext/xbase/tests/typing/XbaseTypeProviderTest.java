@@ -274,6 +274,54 @@ public class XbaseTypeProviderTest extends AbstractXbaseTestCase {
 	@Test public void testNumberLiteral_24() throws Exception {
 		assertResolvedType(Float.TYPE.getName(), "1E10f");
 	}
+	
+	@Test public void testListLiteral_0() throws Exception {
+		assertResolvedType("java.util.List<java.lang.Object>", "#[]");
+	}
+
+	@Test public void testListLiteral_1() throws Exception {
+		assertResolvedType("java.util.List<java.lang.String>", "#['foo']");
+	}
+
+	@Test public void testListLiteral_2() throws Exception {
+		assertResolvedType("java.util.List<java.lang.String>", "#['foo', 'bar', null]");
+	}
+
+	@Test public void testListLiteral_3() throws Exception {
+		assertResolvedType("java.util.List<java.lang.Object>", "#[null]");
+	}
+
+	@Test public void testListLiteral_4() throws Exception {
+		assertResolvedType("java.util.List<java.lang.Integer>", "#[1,2,3]");
+	}
+
+	@Test public void testListLiteral_5() throws Exception {
+		assertResolvedType("java.util.List<? extends java.lang.Number & java.lang.Comparable<? extends java.lang.Object>>", "#[1,2.0,3]");
+	}
+	
+	@Test public void testSetLiteral_0() throws Exception {
+		assertResolvedType("java.util.Set<java.lang.Object>", "#{}");
+	}
+
+	@Test public void testSetLiteral_1() throws Exception {
+		assertResolvedType("java.util.Set<java.lang.String>", "#{'foo'}");
+	}
+
+	@Test public void testSetLiteral_2() throws Exception {
+		assertResolvedType("java.util.Set<java.lang.String>", "#{'foo', 'bar', null}");
+	}
+
+	@Test public void testSetLiteral_3() throws Exception {
+		assertResolvedType("java.util.Set<java.lang.Object>", "#{null}");
+	}
+
+	@Test public void testSetLiteral_4() throws Exception {
+		assertResolvedType("java.util.Set<java.lang.Integer>", "#{1,2,3}");
+	}
+
+	@Test public void testSetLiteral_5() throws Exception {
+		assertResolvedType("java.util.Set<? extends java.lang.Number & java.lang.Comparable<? extends java.lang.Object>>", "#{1,2.0,3}");
+	}
 
 	@Test public void testCastExpression() throws Exception {
 		assertResolvedType(String.class.getName(), "null as String");

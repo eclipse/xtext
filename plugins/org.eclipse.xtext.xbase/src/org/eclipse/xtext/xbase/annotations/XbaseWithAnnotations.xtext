@@ -33,6 +33,7 @@ XAnnotationElementValueStringConcatenation returns xbase::XExpression :
 XAnnotationElementValue returns xbase::XExpression :
 	XAnnotation |
 	XAnnotationValueArray |
+	XListLiteral |
 	XStringLiteral |
 	XBooleanLiteral |
 	XNumberLiteral |

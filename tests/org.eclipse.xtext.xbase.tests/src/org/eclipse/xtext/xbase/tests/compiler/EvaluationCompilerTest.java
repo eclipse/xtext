@@ -79,6 +79,19 @@ public class EvaluationCompilerTest extends AbstractXbaseEvaluationTest {
 	}
 
 	@Override
+	protected void assertEvaluatesToArray(Object[] object, String string) {
+		final String compileToJavaCode = compileToJavaCode(string);
+		try {
+			Object result = compile(string).apply();
+			assertArrayEquals("Java code was " + compileToJavaCode, object, (Object[]) result);
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.err.println(compileToJavaCode);
+			fail("Exception thrown " + e + ".Java code was " + compileToJavaCode);
+		}
+	}
+
+	@Override
 	protected void assertEvaluatesWithException(Class<? extends Throwable> class1, String string) {
 		try {
 			Function0<Object> compile = null;

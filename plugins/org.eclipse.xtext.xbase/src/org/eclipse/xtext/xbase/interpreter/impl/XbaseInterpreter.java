@@ -57,10 +57,12 @@ import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XForLoopExpression;
 import org.eclipse.xtext.xbase.XIfExpression;
 import org.eclipse.xtext.xbase.XInstanceOfExpression;
+import org.eclipse.xtext.xbase.XListLiteral;
 import org.eclipse.xtext.xbase.XMemberFeatureCall;
 import org.eclipse.xtext.xbase.XNullLiteral;
 import org.eclipse.xtext.xbase.XNumberLiteral;
 import org.eclipse.xtext.xbase.XReturnExpression;
+import org.eclipse.xtext.xbase.XSetLiteral;
 import org.eclipse.xtext.xbase.XStringLiteral;
 import org.eclipse.xtext.xbase.XSwitchExpression;
 import org.eclipse.xtext.xbase.XThrowExpression;
@@ -83,6 +85,8 @@ import org.eclipse.xtext.xbase.util.XExpressionHelper;
 
 import com.google.common.base.Function;
 import com.google.common.base.Joiner;
+import com.google.common.collect.ImmutableList;
+import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.inject.Inject;
@@ -253,7 +257,11 @@ public class XbaseInterpreter implements IExpressionInterpreter {
 	    } else if (assignment instanceof XTypeLiteral) {
 	      return _doEvaluate((XTypeLiteral)assignment, context, indicator);
 	    } else if (assignment instanceof XVariableDeclaration) {
-	      return _doEvaluate((XVariableDeclaration)assignment, context, indicator);
+		      return _doEvaluate((XVariableDeclaration)assignment, context, indicator);
+	    } else if (assignment instanceof XListLiteral) {
+		      return _doEvaluate((XListLiteral)assignment, context, indicator);
+	    } else if (assignment instanceof XSetLiteral) {
+		      return _doEvaluate((XSetLiteral)assignment, context, indicator);
 	    } else {
 	      throw new IllegalArgumentException("Unhandled parameter types: " +
 	        Arrays.<Object>asList(assignment, context, indicator).toString());
@@ -317,6 +325,26 @@ public class XbaseInterpreter implements IExpressionInterpreter {
 		} catch (ClassNotFoundException cnfe) {
 			throw new EvaluationException(cnfe);
 		}
+	}
+
+	protected Object _doEvaluate(XListLiteral literal, IEvaluationContext context, CancelIndicator indicator) {
+		ImmutableList.Builder<Object> builder = ImmutableList.builder();
+		for(XExpression element: literal.getElements()) {
+			if (indicator.isCanceled())
+				throw new InterpreterCanceledException();
+			builder.add(internalEvaluate(element, context, indicator));
+		}
+		return builder.build();
+	}
+
+	protected Object _doEvaluate(XSetLiteral literal, IEvaluationContext context, CancelIndicator indicator) {
+		ImmutableSet.Builder<Object> builder = ImmutableSet.builder();
+		for(XExpression element: literal.getElements()) {
+			if (indicator.isCanceled())
+				throw new InterpreterCanceledException();
+			builder.add(internalEvaluate(element, context, indicator));
+		}
+		return builder.build();
 	}
 
 	protected Object _doEvaluate(XClosure closure, IEvaluationContext context, CancelIndicator indicator) {

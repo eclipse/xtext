@@ -15,6 +15,7 @@ import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.diagnostics.Severity;
 import org.eclipse.xtext.validation.EObjectDiagnosticImpl;
 import org.eclipse.xtext.xbase.XExpression;
+import org.eclipse.xtext.xbase.XListLiteral;
 import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotation;
 import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotationElementValueBinaryOperation;
 import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotationElementValuePair;
@@ -94,9 +95,12 @@ public class XbaseWithAnnotationsTypeComputer extends XbaseTypeComputer {
 			if (componentType == null) {
 				throw new IllegalStateException("Array without component type: " + expectation.getIdentifier());
 			}
-			ITypeComputationResult result = state.withExpectation(componentType).computeTypes(value);
+			LightweightTypeReference actualExpectation =  (value instanceof XListLiteral)
+					? expectation
+					: componentType;
+			ITypeComputationResult result = state.withExpectation(actualExpectation).computeTypes(value);
 			if (!result.getConformanceHints().contains(ConformanceHint.SUCCESS)) {
-				if (value instanceof XAnnotationValueArray) {
+				if (value instanceof XListLiteral || value instanceof XAnnotationValueArray) {
 					// our children are incompatible so let's mark the array itself as compatible.
 					state.refineExpectedType(value, result.getActualExpressionType());
 				} else {
@@ -111,7 +115,7 @@ public class XbaseWithAnnotationsTypeComputer extends XbaseTypeComputer {
 		} else {
 			ITypeComputationResult valueType = state.withExpectation(expectation).computeTypes(value);
 			if (valueType.getConformanceHints().contains(ConformanceHint.SUCCESS)) {
-				if (value instanceof XAnnotationValueArray) {
+				if (value instanceof XListLiteral || value instanceof XAnnotationValueArray) {
 					String simpleName = valueType.getActualExpressionType().getSimpleName();
 					state.addDiagnostic(new EObjectDiagnosticImpl(
 							Severity.ERROR, 
