@@ -13,7 +13,6 @@ import static org.eclipse.xtext.util.Strings.*;
 import java.util.Collections;
 import java.util.List;
 
-import org.apache.log4j.Logger;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.jdt.annotation.NonNullByDefault;
@@ -34,7 +33,6 @@ import org.eclipse.xtext.common.types.JvmVisibility;
 import org.eclipse.xtext.common.types.util.Primitives;
 import org.eclipse.xtext.common.types.util.Primitives.Primitive;
 import org.eclipse.xtext.common.types.util.TypeReferences;
-import org.eclipse.xtext.common.types.util.jdt.IJavaElementFinder;
 import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.nodemodel.ILeafNode;
@@ -71,8 +69,6 @@ import com.google.inject.Inject;
 @NonNullByDefault
 public class CreateMemberQuickfixes implements ILinkingIssueQuickfixProvider {
 
-	private static final Logger LOG = Logger.getLogger(CreateMemberQuickfixes.class);
-	
 	@Inject
 	private ITypeProvider typeProvider;
 
@@ -396,7 +392,6 @@ public class CreateMemberQuickfixes implements ILinkingIssueQuickfixProvider {
 			JvmTypeReference argumentType = typeProvider.getType(argument);
 			JvmTypeReference resolved = typeResolver.resolveType(context, argumentType);
 			if(resolved == null) { 
-				LOG.error("Could not resolve argument type", new Exception());
 				argumentTypes.add(typeRefs.getTypeForName(Object.class, context));
 			} else {
 				argumentTypes.add(resolved);

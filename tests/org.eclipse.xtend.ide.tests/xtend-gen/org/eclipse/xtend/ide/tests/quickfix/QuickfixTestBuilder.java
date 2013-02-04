@@ -2,6 +2,7 @@ package org.eclipse.xtend.ide.tests.quickfix;
 
 import com.google.common.collect.Iterables;
 import com.google.inject.Inject;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 import org.eclipse.core.resources.IFile;
@@ -19,10 +20,12 @@ import org.eclipse.xtext.util.concurrent.IUnitOfWork;
 import org.eclipse.xtext.validation.CheckMode;
 import org.eclipse.xtext.validation.IResourceValidator;
 import org.eclipse.xtext.validation.Issue;
+import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
+import org.eclipse.xtext.xbase.lib.ListExtensions;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.junit.Assert;
@@ -59,6 +62,7 @@ public class QuickfixTestBuilder {
         XtextEditor _openEditorSafely = this.openEditorSafely(file);
         this.editor = _openEditorSafely;
         final IXtextDocument document = this.editor.getDocument();
+        Assert.assertNotNull("Error getting document from editor", document);
         final Function1<XtextResource,List<Issue>> _function = new Function1<XtextResource,List<Issue>>() {
             public List<Issue> apply(final XtextResource it) {
               List<Issue> _validate = QuickfixTestBuilder.this._iResourceValidator.validate(it, CheckMode.NORMAL_AND_FAST, CancelIndicator.NullImpl);
@@ -184,14 +188,16 @@ public class QuickfixTestBuilder {
       final List<IssueResolution> resolutions = IterableExtensions.<IssueResolution>toList(_flatten);
       IXtextDocument _document = this.editor.getDocument();
       final String originalModel = _document.get();
-      IssueResolution _head = IterableExtensions.<IssueResolution>head(resolutions);
-      _head.apply();
+      final IssueResolution resolution = IterableExtensions.<IssueResolution>head(resolutions);
+      Assert.assertNotNull(resolution);
+      resolution.apply();
       String _string = expectedModel.toString();
       IXtextDocument _document_1 = this.editor.getDocument();
       String _get = _document_1.get();
       Assert.assertEquals(_string, _get);
       IXtextDocument _document_2 = this.editor.getDocument();
       _document_2.set(originalModel);
+      this._syncUtil.waitForReconciler(this.editor);
       _xblockexpression = (this);
     }
     return _xblockexpression;
@@ -219,14 +225,24 @@ public class QuickfixTestBuilder {
             return Boolean.valueOf(_equals);
           }
         };
-      IssueResolution _findFirst = IterableExtensions.<IssueResolution>findFirst(resolutions, _function_1);
-      _findFirst.apply();
+      final IssueResolution matchingResolution = IterableExtensions.<IssueResolution>findFirst(resolutions, _function_1);
+      ArrayList<String> _newArrayList = CollectionLiterals.<String>newArrayList(label);
+      final Function1<IssueResolution,String> _function_2 = new Function1<IssueResolution,String>() {
+          public String apply(final IssueResolution it) {
+            return label;
+          }
+        };
+      List<String> _map_1 = ListExtensions.<IssueResolution, String>map(resolutions, _function_2);
+      String _error = this.error(_newArrayList, _map_1);
+      Assert.assertNotNull(_error, matchingResolution);
+      matchingResolution.apply();
       String _string = expectedModel.toString();
       IXtextDocument _document_1 = this.editor.getDocument();
       String _get = _document_1.get();
       Assert.assertEquals(_string, _get);
       IXtextDocument _document_2 = this.editor.getDocument();
       _document_2.set(originalModel);
+      this._syncUtil.waitForReconciler(this.editor);
       _xblockexpression = (this);
     }
     return _xblockexpression;
