@@ -33,6 +33,7 @@ import org.eclipse.xtext.xbase.XFeatureCall;
 import org.eclipse.xtext.xbase.XMemberFeatureCall;
 import org.eclipse.xtext.xbase.XVariableDeclaration;
 import org.eclipse.xtext.xbase.XbasePackage;
+import org.eclipse.xtext.xbase.scoping.batch.IFeatureNames;
 import org.eclipse.xtext.xbase.scoping.batch.IIdentifiableElementDescription;
 import org.eclipse.xtext.xbase.typesystem.computation.IFeatureLinkingCandidate;
 import org.eclipse.xtext.xbase.typesystem.computation.ITypeComputationState;
@@ -51,7 +52,7 @@ import com.google.common.collect.Lists;
  * TODO JavaDoc, toString
  */
 @NonNullByDefault
-public class FeatureLinkingCandidate extends AbstractPendingLinkingCandidate<XAbstractFeatureCall> implements IFeatureLinkingCandidate {
+public class FeatureLinkingCandidate extends AbstractPendingLinkingCandidate<XAbstractFeatureCall> implements IFeatureLinkingCandidate, IFeatureNames {
 
 	public FeatureLinkingCandidate(XAbstractFeatureCall featureCall, IIdentifiableElementDescription description,
 			ExpressionTypeComputationState state) {
@@ -129,12 +130,15 @@ public class FeatureLinkingCandidate extends AbstractPendingLinkingCandidate<XAb
 				return false;
 			}
 			if (getFeature() instanceof JvmType && !getState().isInstanceContext()) {
-				String message = String.format("Cannot use %s in a static context", getFeatureCall().getConcreteSyntaxFeatureName());
-				AbstractDiagnostic diagnostic = new EObjectDiagnosticImpl(Severity.ERROR,
-						IssueCodes.STATIC_ACCESS_TO_INSTANCE_MEMBER, message, getExpression(),
-						XbasePackage.Literals.XABSTRACT_FEATURE_CALL__FEATURE, -1, null);
-				result.accept(diagnostic);
-				return false;
+				String featureName = getFeatureCall().getConcreteSyntaxFeatureName();
+				if (!(SELF.getFirstSegment().equals(featureName))) {
+					String message = String.format("Cannot use %s in a static context", getFeatureCall().getConcreteSyntaxFeatureName());
+					AbstractDiagnostic diagnostic = new EObjectDiagnosticImpl(Severity.ERROR,
+							IssueCodes.STATIC_ACCESS_TO_INSTANCE_MEMBER, message, getExpression(),
+							XbasePackage.Literals.XABSTRACT_FEATURE_CALL__FEATURE, -1, null);
+					result.accept(diagnostic);
+					return false;
+				}
 			}
 		}
 		return true;

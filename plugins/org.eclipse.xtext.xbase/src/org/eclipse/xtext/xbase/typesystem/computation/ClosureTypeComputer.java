@@ -116,7 +116,7 @@ public class ClosureTypeComputer {
 				initClosureType(expectedClosureType, operation);
 			} else {
 				expectedClosureType = initKnownClosureType(type, operation);
-				deferredBindTypeArgument(expectedType, expectedClosureType);
+				deferredBindTypeArgument(expectedType, expectedClosureType, BoundTypeArgumentSource.INFERRED_CONSTRAINT);
 			}
 		}
 		
@@ -272,7 +272,7 @@ public class ClosureTypeComputer {
 			if (expectedReturnType == null)
 				throw new IllegalStateException("expected return type may not be null");
 			if (!expressionResultType.isPrimitiveVoid())
-				deferredBindTypeArgument(expectedReturnType, expressionResultType);
+				deferredBindTypeArgument(expectedReturnType, expressionResultType, BoundTypeArgumentSource.INFERRED);
 			if (expectedReturnType.isAssignableFrom(expressionResultType)) {
 				resultClosureType.setReturnType(expressionResultType);
 			} else {
@@ -281,7 +281,7 @@ public class ClosureTypeComputer {
 		}
 	}
 	
-	protected void deferredBindTypeArgument(@Nullable LightweightTypeReference declared, LightweightTypeReference actual) {
+	protected void deferredBindTypeArgument(@Nullable LightweightTypeReference declared, LightweightTypeReference actual, final BoundTypeArgumentSource source) {
 		if (declared != null) { 
 			// TODO double check other clients of the ExpectationTypeParameterHintCollector
 			// It may be possible / necessary to use the very same implementation instead of anonymous 
@@ -299,6 +299,14 @@ public class ClosureTypeComputer {
 							addHint(reference, declaration);
 						}
 					}
+					
+					
+				}
+				
+				@Override
+				protected void addHint(UnboundTypeReference typeParameter, LightweightTypeReference reference) {
+					LightweightTypeReference wrapped = reference.getWrapperTypeIfPrimitive();
+					typeParameter.acceptHint(wrapped, source, getOrigin(), getExpectedVariance(), getActualVariance());
 				}
 				
 				@Override
