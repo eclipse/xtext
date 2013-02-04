@@ -114,10 +114,12 @@ public class DeclaratorTypeArgumentCollector extends TypeReferenceVisitorWithPar
 			List<JvmTypeConstraint> constraints = ((JvmTypeParameter) type).getConstraints();
 			for(JvmTypeConstraint constraint: constraints) {
 				JvmTypeReference constraintReference = constraint.getTypeReference();
-				LightweightTypeReference lightweightSuperType = converter.toLightweightReference(constraintReference);
-				Boolean recursion = lightweightSuperType.accept(this, data);
-				if (recursion != null && recursion.booleanValue()) {
-					return Boolean.TRUE;
+				if (constraintReference != null) {
+					LightweightTypeReference lightweightSuperType = converter.toLightweightReference(constraintReference);
+					Boolean recursion = lightweightSuperType.accept(this, data);
+					if (recursion != null && recursion.booleanValue()) {
+						return Boolean.TRUE;
+					}
 				}
 			}
 		}

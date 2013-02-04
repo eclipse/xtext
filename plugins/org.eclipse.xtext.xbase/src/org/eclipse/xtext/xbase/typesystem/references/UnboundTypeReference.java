@@ -443,10 +443,20 @@ public class UnboundTypeReference extends LightweightTypeReference {
 		return super.getWrapperTypeIfPrimitive();
 	}
 
+	boolean copying = false;
+	
 	@Override
 	protected LightweightTypeReference doCopyInto(ITypeReferenceOwner owner) {
 		if (internalIsResolved()) {
-			return resolvedTo.copyInto(owner);
+			if (copying) {
+				throw new IllegalStateException();
+			}
+			copying = true;
+			try {
+				return resolvedTo.copyInto(owner);
+			} finally {
+				copying = false;
+			}
 		}
 		UnboundTypeReference result = createCopy(owner);
 		return result;

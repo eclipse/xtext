@@ -70,6 +70,10 @@ public class AnnotationValidation extends AbstractDeclarativeValidator {
       _switchResult = reference;
     }
     final JvmTypeReference toCheck = _switchResult;
+    boolean _equals = ObjectExtensions.operator_equals(toCheck, null);
+    if (_equals) {
+      return true;
+    }
     JvmType _type = toCheck.getType();
     if ((_type instanceof JvmPrimitiveType)) {
       return true;
@@ -85,14 +89,14 @@ public class AnnotationValidation extends AbstractDeclarativeValidator {
     boolean _or = false;
     JvmType _type_3 = toCheck.getType();
     String _qualifiedName = _type_3.getQualifiedName();
-    boolean _equals = ObjectExtensions.operator_equals(_qualifiedName, "java.lang.String");
-    if (_equals) {
+    boolean _equals_1 = ObjectExtensions.operator_equals(_qualifiedName, "java.lang.String");
+    if (_equals_1) {
       _or = true;
     } else {
       JvmType _type_4 = toCheck.getType();
       String _qualifiedName_1 = _type_4.getQualifiedName();
-      boolean _equals_1 = ObjectExtensions.operator_equals(_qualifiedName_1, "java.lang.Class");
-      _or = (_equals || _equals_1);
+      boolean _equals_2 = ObjectExtensions.operator_equals(_qualifiedName_1, "java.lang.Class");
+      _or = (_equals_1 || _equals_2);
     }
     if (_or) {
       return true;

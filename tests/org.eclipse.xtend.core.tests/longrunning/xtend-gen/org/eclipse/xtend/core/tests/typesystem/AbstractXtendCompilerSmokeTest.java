@@ -1,67 +1,86 @@
 /**
- * Copyright (c) 2012 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2013 itemis AG (http://www.itemis.eu) and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  */
-package org.eclipse.xtext.xbase.tests.annotations;
+package org.eclipse.xtend.core.tests.typesystem;
 
 import com.google.inject.Inject;
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.TreeIterator;
+import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.xtend.core.tests.NewTypeSystemRuntimeInjectorProvider;
+import org.eclipse.xtend.core.tests.compiler.AbstractXtendCompilerTest;
+import org.eclipse.xtend.core.xtend.XtendFile;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
-import org.eclipse.xtext.junit4.util.ParseHelper;
+import org.eclipse.xtext.junit4.InjectWith;
+import org.eclipse.xtext.junit4.XtextRunner;
+import org.eclipse.xtext.resource.XtextResourceSet;
+import org.eclipse.xtext.util.StringInputStream;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.XCasePart;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XSwitchExpression;
-import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotation;
+import org.eclipse.xtext.xbase.compiler.GeneratorConfig;
 import org.eclipse.xtext.xbase.lib.Exceptions;
+import org.eclipse.xtext.xbase.lib.InputOutput;
+import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.IteratorExtensions;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.util.ReflectExtensions;
-import org.eclipse.xtext.xbase.tests.annotations.AnnotationsValidatorTest2;
-import org.eclipse.xtext.xbase.tests.annotations.NullValidationTestHelper;
 import org.eclipse.xtext.xbase.typesystem.IBatchTypeResolver;
 import org.eclipse.xtext.xbase.typesystem.IResolvedTypes;
+import org.eclipse.xtext.xbase.typesystem.internal.CompoundReentrantTypeResolver;
+import org.eclipse.xtext.xbase.typesystem.internal.RootResolvedTypes;
 import org.eclipse.xtext.xbase.typesystem.internal.TypeData;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 import org.junit.Assert;
-import org.junit.Before;
+import org.junit.runner.RunWith;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
+@RunWith(value = XtextRunner.class)
+@InjectWith(value = NewTypeSystemRuntimeInjectorProvider.class)
 @SuppressWarnings("all")
-public abstract class AbstractSmokeTest extends AnnotationsValidatorTest2 {
+public abstract class AbstractXtendCompilerSmokeTest extends AbstractXtendCompilerTest {
   @Inject
   private IBatchTypeResolver typeResolver;
   
-  @Inject
-  private ParseHelper<EObject> _parseHelper;
-  
-  @Before
-  public void resetTestHelper() {
-    NullValidationTestHelper _nullValidationTestHelper = new NullValidationTestHelper();
-    this.validator = _nullValidationTestHelper;
-  }
-  
-  protected XAnnotation annotation(final String expression, final boolean resolve) throws Exception {
-    this.assertNonSmoking(expression);
-    return null;
-  }
-  
-  public abstract void assertNonSmoking(final String input) throws Exception;
-  
-  public void processExpression(final String expression) throws Exception {
+  public void assertCompilesTo(final CharSequence input, final CharSequence expected, final GeneratorConfig config) {
     try {
-      final EObject xExpression = this._parseHelper.parse(expression);
-      final IResolvedTypes resolvedTypes = this.typeResolver.resolveTypes(xExpression);
+      this.assertNonSmoking(input);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  public XtendFile file(final String string, final boolean validate) throws Exception {
+    XtextResourceSet _resourceSet = this.getResourceSet();
+    URI _createURI = URI.createURI("abcdefg.xtend");
+    final Resource resource = _resourceSet.createResource(_createURI);
+    StringInputStream _stringInputStream = new StringInputStream(string);
+    resource.load(_stringInputStream, null);
+    EList<EObject> _contents = resource.getContents();
+    EObject _head = IterableExtensions.<EObject>head(_contents);
+    final XtendFile file = ((XtendFile) _head);
+    return file;
+  }
+  
+  public abstract void assertNonSmoking(final CharSequence input) throws Exception;
+  
+  public void processFile(final String input) throws Exception {
+    try {
+      final XtendFile file = this.file(input, false);
+      final IResolvedTypes resolvedTypes = this.typeResolver.resolveTypes(file);
       Assert.assertNotNull(resolvedTypes);
-      boolean _notEquals = ObjectExtensions.operator_notEquals(xExpression, null);
+      boolean _notEquals = ObjectExtensions.operator_notEquals(file, null);
       if (_notEquals) {
-        TreeIterator<EObject> _eAllContents = xExpression.eAllContents();
+        TreeIterator<EObject> _eAllContents = file.eAllContents();
         Iterable<EObject> _iterable = IteratorExtensions.<EObject>toIterable(_eAllContents);
         for (final EObject content : _iterable) {
           boolean _matched = false;
@@ -115,7 +134,9 @@ public abstract class AbstractSmokeTest extends AnnotationsValidatorTest2 {
     } catch (final Throwable _t) {
       if (_t instanceof Throwable) {
         final Throwable t = (Throwable)_t;
-        String _plus = ("Expression was: \'" + expression);
+        t.printStackTrace();
+        InputOutput.<String>println(input);
+        String _plus = ("Expression was: \'" + input);
         String _plus_1 = (_plus + "\"");
         RuntimeException _runtimeException = new RuntimeException(_plus_1, t);
         throw _runtimeException;
@@ -131,8 +152,30 @@ public abstract class AbstractSmokeTest extends AnnotationsValidatorTest2 {
   public void assertExpressionTypeIsResolved(final XExpression expression, final IResolvedTypes types) {
     try {
       final Object internalTypes = this._reflectExtensions.invoke(types, "delegate");
-      Object _invoke = this._reflectExtensions.invoke(internalTypes, "getTypeData", expression, Boolean.FALSE);
-      final TypeData type = ((TypeData) _invoke);
+      TypeData _switchResult = null;
+      boolean _matched = false;
+      if (!_matched) {
+        if (internalTypes instanceof CompoundReentrantTypeResolver) {
+          final CompoundReentrantTypeResolver _compoundReentrantTypeResolver = (CompoundReentrantTypeResolver)internalTypes;
+          _matched=true;
+          TypeData _xblockexpression = null;
+          {
+            final Object delegate = this._reflectExtensions.invoke(_compoundReentrantTypeResolver, "getDelegate", expression);
+            TypeData _xifexpression = null;
+            if ((delegate instanceof RootResolvedTypes)) {
+              Object _invoke = this._reflectExtensions.invoke(delegate, "getTypeData", expression, Boolean.FALSE);
+              _xifexpression = ((TypeData) _invoke);
+            }
+            _xblockexpression = (_xifexpression);
+          }
+          _switchResult = _xblockexpression;
+        }
+      }
+      if (!_matched) {
+        Object _invoke = this._reflectExtensions.invoke(internalTypes, "getTypeData", expression, Boolean.FALSE);
+        _switchResult = ((TypeData) _invoke);
+      }
+      final TypeData type = _switchResult;
       String _string = expression.toString();
       String _plus = ("Type is not resolved. Expression: " + _string);
       Assert.assertNotNull(_plus, type);
@@ -142,6 +185,11 @@ public abstract class AbstractSmokeTest extends AnnotationsValidatorTest2 {
   }
   
   public void assertIdentifiableTypeIsResolved(final JvmIdentifiableElement identifiable, final IResolvedTypes types) {
+    String _simpleName = identifiable.getSimpleName();
+    boolean _equals = ObjectExtensions.operator_equals(_simpleName, null);
+    if (_equals) {
+      return;
+    }
     final LightweightTypeReference type = types.getActualType(identifiable);
     String _string = identifiable.toString();
     Assert.assertNotNull(_string, type);

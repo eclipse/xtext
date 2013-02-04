@@ -318,13 +318,14 @@ public abstract class AbstractLinkingCandidate<Expression extends XExpression> i
 
 	protected void computeFixedArityArgumentType(IFeatureCallArgumentSlot slot, TypeParameterSubstitutor<?> substitutor) {
 		LightweightTypeReference parameterType = slot.getDeclaredType();
-		if (parameterType == null) {
-			throw new IllegalStateException();
-		}
-		LightweightTypeReference substitutedParameterType = substitutor.substitute(parameterType);
 		XExpression argument = slot.getArgumentExpression();
-		AbstractTypeComputationState argumentState = createLinkingTypeComputationState(substitutedParameterType);
-		resolveArgumentType(argument, substitutedParameterType, argumentState);
+		if (parameterType == null) {
+			resolveArgumentType(argument, null, state.withNonVoidExpectation());
+		} else {
+			LightweightTypeReference substitutedParameterType = substitutor.substitute(parameterType);
+			AbstractTypeComputationState argumentState = createLinkingTypeComputationState(substitutedParameterType);
+			resolveArgumentType(argument, substitutedParameterType, argumentState);
+		}
 	}
 
 	protected ArgumentTypeComputationState createLinkingTypeComputationState(LightweightTypeReference expectedType) {

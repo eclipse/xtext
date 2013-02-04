@@ -173,7 +173,7 @@ public class ParameterizedTypeReference extends LightweightTypeReference {
 				List<LightweightTypeReference> result = Lists.newArrayListWithCapacity(constraints.size());
 				OwnedConverter converter = new OwnedConverter(getOwner());
 				for(JvmTypeConstraint constraint: constraints) {
-					if (constraint instanceof JvmUpperBound) {
+					if (constraint instanceof JvmUpperBound && constraint.getTypeReference() != null) {
 						LightweightTypeReference upperBound = converter.toLightweightReference(constraint.getTypeReference());
 						result.add(substitutor.substitute(upperBound));
 					}

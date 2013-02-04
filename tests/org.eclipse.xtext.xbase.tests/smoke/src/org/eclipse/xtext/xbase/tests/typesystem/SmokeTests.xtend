@@ -88,7 +88,6 @@ abstract class AbstractSmokeTest extends AbstractTypeResolverTest<LightweightTyp
 				}
 			}
 		} catch(Throwable t) {
-			t.printStackTrace
 			throw new RuntimeException("Expression was: '" + expression + '"', t)
 		}
 	}

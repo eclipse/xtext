@@ -26,4 +26,15 @@ public interface IReentrantTypeResolver {
 
 	IResolvedTypes reentrantResolve();
 	
+	IReentrantTypeResolver NULL = new IReentrantTypeResolver() {
+		
+		public IResolvedTypes reentrantResolve() {
+			return IResolvedTypes.NULL;
+		}
+		
+		public void initializeFrom(EObject root) {
+			// ignore
+		}
+	};
+	
 }

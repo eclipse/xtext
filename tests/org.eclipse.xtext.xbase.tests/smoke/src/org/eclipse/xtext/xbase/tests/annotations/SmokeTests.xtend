@@ -86,7 +86,6 @@ abstract class AbstractSmokeTest extends AnnotationsValidatorTest2 {
 				}
 			}
 		} catch(Throwable t) {
-			t.printStackTrace
 			throw new RuntimeException("Expression was: '" + expression + '"', t)
 		}
 	}

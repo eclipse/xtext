@@ -18,6 +18,7 @@ import org.eclipse.xtext.common.types.JvmSynonymTypeReference;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeConstraint;
 import org.eclipse.xtext.common.types.JvmTypeReference;
+import org.eclipse.xtext.common.types.JvmUnknownTypeReference;
 import org.eclipse.xtext.common.types.JvmUpperBound;
 import org.eclipse.xtext.common.types.JvmWildcardTypeReference;
 import org.eclipse.xtext.xbase.typing.IJvmTypeReferenceProvider;
@@ -77,9 +78,14 @@ public class OwnedConverter extends AbstractXtypeReferenceVisitor<LightweightTyp
 	@Override
 	public LightweightTypeReference doVisitGenericArrayTypeReference(JvmGenericArrayTypeReference reference) {
 		JvmTypeReference originalComponentType = reference.getComponentType();
-		LightweightTypeReference lightweightComponentType = visit(originalComponentType);
-		if (lightweightComponentType.isAny())
-			return lightweightComponentType;
+		LightweightTypeReference lightweightComponentType = null;
+		if (originalComponentType != null) {
+			lightweightComponentType = visit(originalComponentType);
+			if (lightweightComponentType.isAny())
+				return lightweightComponentType;
+		} else {
+			lightweightComponentType = getObjectReference();
+		}
 		return new ArrayTypeReference(owner, lightweightComponentType);
 	}
 	
@@ -144,8 +150,7 @@ public class OwnedConverter extends AbstractXtypeReferenceVisitor<LightweightTyp
 		}
 		if (!keepUnboundWildcards) {
 			if (!upperBoundSeen) {
-				JvmType objectType = owner.getServices().getTypeReferences().findDeclaredType(Object.class, getOwner().getContextResourceSet());
-				ParameterizedTypeReference upperBound = new ParameterizedTypeReference(owner, objectType);
+				ParameterizedTypeReference upperBound = getObjectReference();
 				result.addUpperBound(upperBound);
 			}
 			if (result.getUpperBounds().isEmpty()) {
@@ -153,8 +158,7 @@ public class OwnedConverter extends AbstractXtypeReferenceVisitor<LightweightTyp
 			}
 		} else {
 			if (!upperBoundSeen && result.getLowerBound() != null) {
-				JvmType objectType = owner.getServices().getTypeReferences().findDeclaredType(Object.class, getOwner().getContextResourceSet());
-				ParameterizedTypeReference upperBound = new ParameterizedTypeReference(owner, objectType);
+				ParameterizedTypeReference upperBound = getObjectReference();
 				result.addUpperBound(upperBound);
 			}
 		}
@@ -176,6 +180,17 @@ public class OwnedConverter extends AbstractXtypeReferenceVisitor<LightweightTyp
 		if (reference.getReturnType() != null) {
 			result.setReturnType(visit(reference.getReturnType()));
 		}
+		return result;
+	}
+	
+	@Override
+	public LightweightTypeReference doVisitUnknownTypeReference(JvmUnknownTypeReference reference) {
+		return getObjectReference();
+	}
+
+	protected ParameterizedTypeReference getObjectReference() {
+		JvmType objectType = owner.getServices().getTypeReferences().findDeclaredType(Object.class, getOwner().getContextResourceSet());
+		ParameterizedTypeReference result = new ParameterizedTypeReference(owner, objectType);
 		return result;
 	}
 	

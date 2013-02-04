@@ -54,18 +54,18 @@ public class DefaultReentrantTypeResolver extends AbstractRootedReentrantTypeRes
 	
 	private boolean resolving = false;
 	
-	public void initializeFrom(EObject root) {
+	public final void initializeFrom(EObject root) {
 		if (this.root != null) {
 			throw new IllegalStateException("Cannot reinitialize. Resolver has already a root: " + this.root);
 		}
 		this.root = root;
 	}
-	
+
 	@Override
-	protected EObject getRoot() {
+	protected final EObject getRoot() {
 		return root;
 	}
-	
+
 	@Override
 	protected boolean isHandled(XExpression expression) {
 		return EcoreUtil.getRootContainer(expression) == getRoot();
@@ -158,7 +158,7 @@ public class DefaultReentrantTypeResolver extends AbstractRootedReentrantTypeRes
 		return services.getBoundTypeArgumentMerger();
 	}
 
-	protected EObject getSourceElement(JvmIdentifiableElement element) {
+	protected EObject getSourceElement(EObject element) {
 		return element;
 	}
 }

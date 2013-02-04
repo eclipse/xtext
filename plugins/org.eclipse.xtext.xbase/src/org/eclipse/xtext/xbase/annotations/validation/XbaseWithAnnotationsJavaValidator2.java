@@ -93,6 +93,8 @@ public class XbaseWithAnnotationsJavaValidator2 extends XbaseJavaValidator2 {
 	@Check
 	public void checkAllAttributesConfigured(XAnnotation annotation) {
 		JvmAnnotationType annotationType = annotation.getAnnotationType();
+		if (annotationType == null)
+			return;
 		Iterable<JvmOperation> attributes = annotationType.getDeclaredOperations();
 		for (JvmOperation jvmOperation : attributes) {
 			XExpression value = annotationUtil.findValue(annotation, jvmOperation);

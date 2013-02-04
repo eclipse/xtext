@@ -256,22 +256,24 @@ public class XtendJvmModelInferrer2 implements IJvmModelInferrer {
 		for (XtendMember member : source.getMembers()) {
 			if (member instanceof XtendField) {
 				XtendField field = (XtendField) member;
-				JvmOperation operation = typesFactory.createJvmOperation();
-				associator.associatePrimary(member, operation);
-				operation.setSimpleName(field.getName());
-				JvmTypeReference returnType = null;
-				if (field.getType() != null) {
-					returnType = jvmTypesBuilder.cloneWithProxies(field.getType());
-				} else {
-					returnType = jvmTypesBuilder.inferredNonVoidType();
+				if (!Strings.isEmpty(field.getName())) {
+					JvmOperation operation = typesFactory.createJvmOperation();
+					associator.associatePrimary(member, operation);
+					operation.setSimpleName(field.getName());
+					JvmTypeReference returnType = null;
+					if (field.getType() != null) {
+						returnType = jvmTypesBuilder.cloneWithProxies(field.getType());
+					} else {
+						returnType = jvmTypesBuilder.inferredNonVoidType();
+					}
+					operation.setReturnType(returnType);
+					if (field.getInitialValue() != null)
+						jvmTypesBuilder.setBody(operation, field.getInitialValue());
+					operation.setVisibility(JvmVisibility.PUBLIC);
+					translateAnnotationsTo(member.getAnnotations(), operation);
+					jvmTypesBuilder.setDocumentation(operation, jvmTypesBuilder.getDocumentation(member));
+					inferredJvmType.getMembers().add(operation);
 				}
-				operation.setReturnType(returnType);
-				if (field.getInitialValue() != null)
-					jvmTypesBuilder.setBody(operation, field.getInitialValue());
-				operation.setVisibility(JvmVisibility.PUBLIC);
-				translateAnnotationsTo(member.getAnnotations(), operation);
-				jvmTypesBuilder.setDocumentation(operation, jvmTypesBuilder.getDocumentation(member));
-				inferredJvmType.getMembers().add(operation);
 			}
 		}
 	}
@@ -285,12 +287,13 @@ public class XtendJvmModelInferrer2 implements IJvmModelInferrer {
 		inferredJvmType.setAbstract(source.isAbstract());
 		translateAnnotationsTo(source.getAnnotations(), inferredJvmType);
 		boolean isDataObject = hasAnnotation(source, Data.class);
-		if (source.getExtends() == null) {
+		JvmTypeReference extendsClause = source.getExtends();
+		if (extendsClause == null || extendsClause.getType() == null) {
 			JvmTypeReference typeRefToObject = typeReferences.getTypeForName(Object.class, source);
 			if (typeRefToObject != null)
 				inferredJvmType.getSuperTypes().add(typeRefToObject);
 		} else {
-			inferredJvmType.getSuperTypes().add(jvmTypesBuilder.cloneWithProxies(source.getExtends()));
+			inferredJvmType.getSuperTypes().add(jvmTypesBuilder.cloneWithProxies(extendsClause));
 		}
 		for (JvmTypeReference intf : source.getImplements()) {
 			inferredJvmType.getSuperTypes().add(jvmTypesBuilder.cloneWithProxies(intf));

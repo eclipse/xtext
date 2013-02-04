@@ -144,7 +144,7 @@ public class DispatchHelper {
 	}
 	
 	public boolean isDispatchFunction(JvmOperation inferredOperation) {
-		if (inferredOperation.getSimpleName().startsWith("_")) {
+		if (inferredOperation.getSimpleName() != null && inferredOperation.getSimpleName().startsWith("_")) {
 			EObject sourceElement = associations.getPrimarySourceElement(inferredOperation);
 			if (sourceElement instanceof XtendFunction) {
 				XtendFunction function = (XtendFunction) sourceElement;

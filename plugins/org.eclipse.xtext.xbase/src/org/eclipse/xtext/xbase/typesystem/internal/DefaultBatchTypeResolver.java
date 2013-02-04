@@ -48,6 +48,9 @@ public class DefaultBatchTypeResolver implements IBatchTypeResolver {
 			IReentrantTypeResolver result = getOrCreateResolver(roots.get(0));
 			return result;
 		}
+		if (roots.isEmpty()) {
+			return IReentrantTypeResolver.NULL;
+		}
 		CompoundReentrantTypeResolver result = new CompoundReentrantTypeResolver();
 		for(EObject root: roots) {
 			result.addResolver(getOrCreateResolver(root));

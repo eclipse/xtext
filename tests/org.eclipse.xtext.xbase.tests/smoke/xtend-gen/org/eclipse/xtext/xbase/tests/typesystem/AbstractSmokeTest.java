@@ -121,7 +121,6 @@ public abstract class AbstractSmokeTest extends AbstractTypeResolverTest<Lightwe
     } catch (final Throwable _t) {
       if (_t instanceof Throwable) {
         final Throwable t = (Throwable)_t;
-        t.printStackTrace();
         String _plus = ("Expression was: \'" + expression);
         String _plus_1 = (_plus + "\"");
         RuntimeException _runtimeException = new RuntimeException(_plus_1, t);
