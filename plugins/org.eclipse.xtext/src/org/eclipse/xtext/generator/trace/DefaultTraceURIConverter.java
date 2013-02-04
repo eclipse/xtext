@@ -19,6 +19,10 @@ public class DefaultTraceURIConverter implements ITraceURIConverter {
 
 	public URI getURIForTrace(XtextResource context) {
 		URI uri = context.getURI();
+		return getURIForTrace(uri);
+	}
+
+	public URI getURIForTrace(URI uri) {
 		if (uri.isPlatform()) {
 			// create a URI that is relative to the contained project.
 			List<String> segments = uri.segmentsList().subList(2, uri.segmentCount());
@@ -44,5 +48,4 @@ public class DefaultTraceURIConverter implements ITraceURIConverter {
 				return false;
 		return true;
 	}
-
 }

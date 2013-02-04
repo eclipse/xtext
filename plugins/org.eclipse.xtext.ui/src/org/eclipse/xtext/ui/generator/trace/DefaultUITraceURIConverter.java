@@ -7,6 +7,8 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.generator.trace;
 
+import java.util.List;
+
 import org.apache.log4j.Logger;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.ResourceSet;
@@ -42,6 +44,16 @@ public class DefaultUITraceURIConverter extends DefaultTraceURIConverter {
 			LOG.error(e);
 		}
 		return super.getURIForTrace(context);
+	}
+	
+	@Override
+	public URI getURIForTrace(URI uri) {
+		if (uri.isPlatform()) {
+			// create a URI that is relative to the contained projects sourcefolder.
+			List<String> segments = uri.segmentsList().subList(3, uri.segmentCount());
+			return URI.createHierarchicalURI(segments.toArray(new String[segments.size()]), null, null);
+		}
+		return uri.trimFragment().trimQuery();
 	}
 
 }

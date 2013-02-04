@@ -31,6 +31,7 @@ import org.eclipse.xtext.generator.trace.ILocationData;
 import org.eclipse.xtext.generator.trace.ITrace;
 import org.eclipse.xtext.generator.trace.ITraceInformation;
 import org.eclipse.xtext.generator.trace.ITraceRegionProvider;
+import org.eclipse.xtext.generator.trace.ITraceURIConverter;
 import org.eclipse.xtext.generator.trace.TraceFileNameProvider;
 import org.eclipse.xtext.generator.trace.TraceNotFoundException;
 import org.eclipse.xtext.generator.trace.TraceRegionSerializer;
@@ -74,6 +75,9 @@ public class FileBasedTraceInformation implements ITraceInformation {
 	@Inject 
 	private TraceFileNameProvider traceFileNameProvider;
 	
+	@Inject
+	private ITraceURIConverter traceURIConverter;
+
 	@Nullable
 	public ITrace getTraceToSource(final IStorage derivedResource) {
 		StorageAwareTrace result = traceToSourceProvider.get();
@@ -127,7 +131,10 @@ public class FileBasedTraceInformation implements ITraceInformation {
 											throw new TraceNotFoundException();
 										IPath generatedFilePath = generatedFileForTraceFile.getFullPath();
 										URI generatedFileURI = URI.createPlatformResourceURI(generatedFilePath.toString(), true);
-										result.addAll(traceRegion.invertFor(sourceFileURI, generatedFileURI));
+										URI sourceUriForTrace = traceURIConverter.getURIForTrace(sourceFileURI);
+										URI generatedUriForTrace = traceURIConverter.getURIForTrace(generatedFileURI);
+										if(sourceUriForTrace != null && generatedUriForTrace != null)
+											result.addAll(traceRegion.invertFor(sourceUriForTrace, generatedUriForTrace));
 									} catch (Exception e) {
 										log.error(e.getMessage(), e);
 									} finally {
