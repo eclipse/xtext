@@ -49,14 +49,17 @@ public class CompoundReentrantTypeResolver extends AbstractList<IResolvedTypes> 
 	}
 	
 	public IResolvedTypes reentrantResolve() {
-		if (sealed) {
-			return this;
+		if (!sealed) {
+			sealed = true;
+			delegates = new IResolvedTypes[resolvers.size()];
+		} else {
+			next = next + 1;
 		}
-		sealed = true;
-		delegates = new IResolvedTypes[resolvers.size()];
 		while(next < delegates.length) {
-			delegates[next] = resolvers.get(next).reentrantResolve();
-			next++;
+			int next = this.next;
+			if (delegates[next] == null)
+				delegates[next] = resolvers.get(next).reentrantResolve();
+			this.next++;
 		}
 		return this;
 	}

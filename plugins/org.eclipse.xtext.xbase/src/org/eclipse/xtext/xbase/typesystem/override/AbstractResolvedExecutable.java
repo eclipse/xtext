@@ -15,11 +15,14 @@ import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.common.types.JvmExecutable;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
+import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.JvmTypeReference;
+import org.eclipse.xtext.xbase.typesystem.references.ITypeReferenceOwner;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightMergedBoundTypeArgument;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.OwnedConverter;
+import org.eclipse.xtext.xbase.typesystem.references.ParameterizedTypeReference;
 import org.eclipse.xtext.xbase.typesystem.util.ConstraintVisitingInfo;
 import org.eclipse.xtext.xbase.typesystem.util.TypeParameterByConstraintSubstitutor;
 import org.eclipse.xtext.xbase.typesystem.util.TypeParameterSubstitutor;
@@ -112,7 +115,12 @@ public abstract class AbstractResolvedExecutable implements IResolvedExecutable 
 		return result.toString();
 	}
 	
-	protected LightweightTypeReference getResolvedReference(JvmTypeReference unresolved) {
+	protected LightweightTypeReference getResolvedReference(@Nullable JvmTypeReference unresolved) {
+		if (unresolved == null) {
+			ITypeReferenceOwner owner = getContextType().getOwner();
+			JvmType objectType = owner.getServices().getTypeReferences().findDeclaredType(Object.class, owner.getContextResourceSet());
+			return new ParameterizedTypeReference(owner, objectType);
+		}
 		OwnedConverter converter = new OwnedConverter(getContextType().getOwner());
 		LightweightTypeReference unresolvedLightweight = converter.toLightweightReference(unresolved);
 		if (unresolvedLightweight.isPrimitive() || unresolvedLightweight.isPrimitiveVoid())

@@ -10,6 +10,7 @@ package org.eclipse.xtext.xbase.typesystem.internal;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.annotation.NonNullByDefault;
@@ -22,7 +23,6 @@ import org.eclipse.xtext.common.types.JvmConstructor;
 import org.eclipse.xtext.common.types.JvmCustomAnnotationValue;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmField;
-import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmMember;
@@ -151,17 +151,11 @@ public class LogicalContainerAwareReentrantTypeResolver extends DefaultReentrant
 	@Inject
 	private OverrideHelper overrideHelper;
 	
-	@Override
-	public void initializeFrom(EObject root) {
-		if (!(root instanceof JvmType)) {
-			throw new IllegalArgumentException("only JvmTypes are supported as root by this resolver");
-		}
-		super.initializeFrom(root);
-	}
-	
-	@Override
-	protected JvmType getRoot() {
-		return (JvmType) super.getRoot();
+	protected JvmType getRootJvmType() {
+		EObject result = getRoot();
+		if (result instanceof JvmType)
+			return (JvmType) result;
+		throw new IllegalStateException();
 	}
 	
 	@Override
@@ -190,7 +184,7 @@ public class LogicalContainerAwareReentrantTypeResolver extends DefaultReentrant
 	 */
 	protected Map<JvmIdentifiableElement, ResolvedTypes> prepare(ResolvedTypes resolvedTypes, IFeatureScopeSession featureScopeSession) {
 		Map<JvmIdentifiableElement, ResolvedTypes> resolvedTypesByContext = Maps.newHashMapWithExpectedSize(3); 
-		doPrepare(resolvedTypes, featureScopeSession, getRoot(), resolvedTypesByContext);
+		doPrepare(resolvedTypes, featureScopeSession, getRootJvmType(), resolvedTypesByContext);
 		return resolvedTypesByContext;
 	}
 	
@@ -438,17 +432,22 @@ public class LogicalContainerAwareReentrantTypeResolver extends DefaultReentrant
 
 	protected void computeAnnotationTypes(ResolvedTypes resolvedTypes, IFeatureScopeSession featureScopeSession, List<JvmAnnotationReference> annotations) {
 		for(JvmAnnotationReference annotation: annotations) {
-			for(JvmAnnotationValue value: annotation.getValues()) {
-				if (value instanceof JvmCustomAnnotationValue) {
-					JvmCustomAnnotationValue custom = (JvmCustomAnnotationValue) value;
-					for(Object object: custom.getValues()) {
-						if (object instanceof XExpression) {
-							AnnotationValueTypeComputationState state = new AnnotationValueTypeComputationState(resolvedTypes, featureScopeSession, value, (XExpression) object, this);
-							state.computeTypes();
+			EObject sourceElement = getSourceElement(annotation);
+			if (sourceElement != annotation) {
+				computeTypes(resolvedTypes, featureScopeSession, sourceElement);
+			} else {
+				for(JvmAnnotationValue value: annotation.getValues()) {
+					if (value instanceof JvmCustomAnnotationValue) {
+						JvmCustomAnnotationValue custom = (JvmCustomAnnotationValue) value;
+						for(Object object: custom.getValues()) {
+							if (object instanceof XExpression) {
+								AnnotationValueTypeComputationState state = new AnnotationValueTypeComputationState(resolvedTypes, featureScopeSession, value, (XExpression) object, this);
+								state.computeTypes();
+							}
 						}
+					} else if (value instanceof JvmAnnotationAnnotationValue) {
+						computeAnnotationTypes(resolvedTypes, featureScopeSession, ((JvmAnnotationAnnotationValue) value).getValues());
 					}
-				} else if (value instanceof JvmAnnotationAnnotationValue) {
-					computeAnnotationTypes(resolvedTypes, featureScopeSession, ((JvmAnnotationAnnotationValue) value).getValues());
 				}
 			}
 		}
@@ -534,10 +533,14 @@ public class LogicalContainerAwareReentrantTypeResolver extends DefaultReentrant
 	}
 
 	@Override
-	protected EObject getSourceElement(JvmIdentifiableElement element) {
+	protected EObject getSourceElement(EObject element) {
 		EObject result = associations.getPrimarySourceElement(element);
 		if (result != null)
 			return result;
 		return element;
+	}
+	
+	protected Set<EObject> getInferredElements(EObject element) {
+		return associations.getJvmElements(element);
 	}
 }
