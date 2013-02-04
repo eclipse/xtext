@@ -65,6 +65,7 @@ import org.eclipse.xtext.xbase.lib.ListExtensions;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xbase.services.XbaseGrammarAccess;
+import org.eclipse.xtext.xbase.services.XbaseGrammarAccess.XFeatureCallElements;
 import org.eclipse.xtext.xbase.services.XbaseGrammarAccess.XMemberFeatureCallElements;
 import org.eclipse.xtext.xtype.XFunctionTypeRef;
 
@@ -694,24 +695,35 @@ public class XbaseFormatter2 extends AbstractFormatter {
   
   protected XClosure builder(final List<XExpression> params) {
     XClosure _xifexpression = null;
-    boolean _and = false;
     XExpression _last = IterableExtensions.<XExpression>last(params);
     boolean _notEquals = ObjectExtensions.operator_notEquals(_last, null);
-    if (!_notEquals) {
-      _and = false;
-    } else {
-      XExpression _last_1 = IterableExtensions.<XExpression>last(params);
-      INode _nodeForEObject = this._nodeModelAccess.nodeForEObject(_last_1);
-      INode _firstChild = ((ICompositeNode) _nodeForEObject).getFirstChild();
-      EObject _grammarElement = _firstChild.getGrammarElement();
-      XMemberFeatureCallElements _xMemberFeatureCallAccess = this._xbaseGrammarAccess.getXMemberFeatureCallAccess();
-      RuleCall _memberCallArgumentsXClosureParserRuleCall_1_1_4_0 = _xMemberFeatureCallAccess.getMemberCallArgumentsXClosureParserRuleCall_1_1_4_0();
-      boolean _equals = ObjectExtensions.operator_equals(_grammarElement, _memberCallArgumentsXClosureParserRuleCall_1_1_4_0);
-      _and = (_notEquals && _equals);
-    }
-    if (_and) {
-      XExpression _last_2 = IterableExtensions.<XExpression>last(params);
-      _xifexpression = ((XClosure) _last_2);
+    if (_notEquals) {
+      XClosure _xblockexpression = null;
+      {
+        XExpression _last_1 = IterableExtensions.<XExpression>last(params);
+        INode _nodeForEObject = this._nodeModelAccess.nodeForEObject(_last_1);
+        INode _firstChild = ((ICompositeNode) _nodeForEObject).getFirstChild();
+        final EObject grammarElement = _firstChild.getGrammarElement();
+        XClosure _xifexpression_1 = null;
+        boolean _or = false;
+        XMemberFeatureCallElements _xMemberFeatureCallAccess = this._xbaseGrammarAccess.getXMemberFeatureCallAccess();
+        RuleCall _memberCallArgumentsXClosureParserRuleCall_1_1_4_0 = _xMemberFeatureCallAccess.getMemberCallArgumentsXClosureParserRuleCall_1_1_4_0();
+        boolean _equals = ObjectExtensions.operator_equals(grammarElement, _memberCallArgumentsXClosureParserRuleCall_1_1_4_0);
+        if (_equals) {
+          _or = true;
+        } else {
+          XFeatureCallElements _xFeatureCallAccess = this._xbaseGrammarAccess.getXFeatureCallAccess();
+          RuleCall _featureCallArgumentsXClosureParserRuleCall_5_0 = _xFeatureCallAccess.getFeatureCallArgumentsXClosureParserRuleCall_5_0();
+          boolean _equals_1 = ObjectExtensions.operator_equals(grammarElement, _featureCallArgumentsXClosureParserRuleCall_5_0);
+          _or = (_equals || _equals_1);
+        }
+        if (_or) {
+          XExpression _last_2 = IterableExtensions.<XExpression>last(params);
+          _xifexpression_1 = ((XClosure) _last_2);
+        }
+        _xblockexpression = (_xifexpression_1);
+      }
+      _xifexpression = _xblockexpression;
     }
     return _xifexpression;
   }

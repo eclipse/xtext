@@ -98,4 +98,103 @@ public class XtendFormatterBugTests extends AbstractXtendFormatterTest {
     String _decode_1 = this.decode(_builder_1);
     this.assertFormatted(_decode, _decode_1);
   }
+  
+  @Test
+  public void testBug398625() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("package foo");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("class bar {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def modify(List<? extends MutableMethodDeclaration> annotatedMethods,");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("ModifyContext context) {");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("setExceptions(\"42\", [])");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    this.assertFormatted(_builder);
+  }
+  
+  @Test
+  public void testBug398625_2() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("package foo");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("class bar {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def modify(List<? extends MutableMethodDeclaration> annotatedMethods,");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("ModifyContext context) {");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("setExceptions(\"42\")[]");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    this.assertFormatted(_builder);
+  }
+  
+  @Test
+  public void testBug398625_3() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("package foo");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("class bar {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def modify(List<? extends MutableMethodDeclaration> annotatedMethods,");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("ModifyContext context) {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("ctx = context");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("annotatedMethods.forEach[val type = addTypeParameter(\'A\')");
+    _builder.newLine();
+    _builder.append("\t\t\t");
+    _builder.append("addParameter(\'myParam\',");
+    _builder.newLine();
+    _builder.append("\t\t\t\t");
+    _builder.append("compilationUnit.typeReferenceProvider.newTypeReference(type))");
+    _builder.newLine();
+    _builder.append("\t\t\t");
+    _builder.append("setExceptions(");
+    _builder.newLine();
+    _builder.append("\t\t\t\t");
+    _builder.append("newArrayList(");
+    _builder.newLine();
+    _builder.append("\t\t\t\t\t");
+    _builder.append("compilationUnit.typeReferenceProvider.");
+    _builder.newLine();
+    _builder.append("\t\t\t\t\t\t");
+    _builder.append("newTypeReference(\'java.lang.Exception\')))[]]");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    this.assertFormatted(_builder);
+  }
 }
