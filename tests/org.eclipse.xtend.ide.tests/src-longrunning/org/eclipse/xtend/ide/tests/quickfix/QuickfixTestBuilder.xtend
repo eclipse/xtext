@@ -36,6 +36,7 @@ class QuickfixTestBuilder {
 		val file = createFile(fileName, model.toString.replace("|", ""))
 		editor = openEditorSafely(file)
 		val document = editor.document
+		assertNotNull("Error getting document from editor", document) 
 		document.readOnly [
 			issues = validate(it, CheckMode::NORMAL_AND_FAST, CancelIndicator::NullImpl)
 		]
@@ -70,18 +71,24 @@ class QuickfixTestBuilder {
 	def assertModelAfterQuickfix(CharSequence expectedModel) {
 		val resolutions = issuesAtCaret.map[resolutions].flatten.toList
 		val originalModel = editor.document.get
-		resolutions.head.apply()
+		val resolution = resolutions.head
+		assertNotNull(resolution)
+		resolution.apply()
 		assertEquals(expectedModel.toString, editor.document.get())
 		editor.document.set(originalModel)
+		waitForReconciler(editor)
 		this
 	}
 	
 	def assertModelAfterQuickfix(String label, CharSequence expectedModel) {
 		val resolutions = issuesAtCaret.map[resolutions].flatten.toList
 		val originalModel = editor.document.get
-		resolutions.findFirst[it.label==label].apply()
+		val matchingResolution = resolutions.findFirst[it.label==label]
+		assertNotNull(error(newArrayList(label), resolutions.map[label]), matchingResolution)
+		matchingResolution.apply()
 		assertEquals(expectedModel.toString, editor.document.get())
 		editor.document.set(originalModel)
+		waitForReconciler(editor)
 		this
 	}
 	
