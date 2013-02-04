@@ -284,5 +284,9 @@ public class TreeAppendableTest extends Assert implements ILocationInFileProvide
 	public URI getURIForTrace(XtextResource context) {
 		return context.getURI();
 	}
+
+	public URI getURIForTrace(URI uri) {
+		return uri;
+	}
 	
 }
