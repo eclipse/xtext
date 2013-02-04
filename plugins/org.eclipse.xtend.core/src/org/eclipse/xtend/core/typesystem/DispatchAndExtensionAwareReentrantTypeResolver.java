@@ -44,6 +44,7 @@ import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XFeatureCall;
 import org.eclipse.xtext.xbase.XMemberFeatureCall;
 import org.eclipse.xtext.xbase.XbaseFactory;
+import org.eclipse.xtext.xbase.XbasePackage;
 import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotation;
 import org.eclipse.xtext.xbase.scoping.batch.IFeatureNames;
 import org.eclipse.xtext.xbase.scoping.batch.IFeatureScopeSession;
@@ -64,7 +65,6 @@ import org.eclipse.xtext.xbase.validation.IssueCodes;
 import org.eclipse.xtext.xtype.XComputedTypeReference;
 import org.eclipse.xtext.xtype.impl.XComputedTypeReferenceImplCustom;
 
-import com.google.common.base.Strings;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.inject.Inject;
@@ -330,6 +330,11 @@ public class DispatchAndExtensionAwareReentrantTypeResolver extends LogicalConta
 		if (getRoot() instanceof XtendTypeDeclaration) {
 			boolean result = EcoreUtil.isAncestor(getRoot(), identifiableElement);
 			return result;
+		} else if (identifiableElement instanceof JvmFormalParameter && identifiableElement.eContainingFeature() == XbasePackage.Literals.XCLOSURE__IMPLICIT_PARAMETER) {
+			XtendMember member = EcoreUtil2.getContainerOfType(identifiableElement, XtendMember.class);
+			if (getInferredElements(member).isEmpty()) {
+				return false;
+			}
 		}
 		return super.isHandled(identifiableElement);
 	}

@@ -16,6 +16,7 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtend.core.tests.NewTypeSystemRuntimeInjectorProvider;
 import org.eclipse.xtend.core.tests.compiler.AbstractXtendCompilerTest;
 import org.eclipse.xtend.core.xtend.XtendFile;
+import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.junit4.InjectWith;
 import org.eclipse.xtext.junit4.XtextRunner;
@@ -23,6 +24,7 @@ import org.eclipse.xtext.resource.XtextResourceSet;
 import org.eclipse.xtext.util.StringInputStream;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.XCasePart;
+import org.eclipse.xtext.xbase.XClosure;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XSwitchExpression;
 import org.eclipse.xtext.xbase.compiler.GeneratorConfig;
@@ -106,6 +108,19 @@ public abstract class AbstractXtendCompilerSmokeTest extends AbstractXtendCompil
               if (_notEquals_1) {
                 XExpression _implicitReceiver_1 = _xAbstractFeatureCall.getImplicitReceiver();
                 this.assertExpressionTypeIsResolved(_implicitReceiver_1, resolvedTypes);
+              }
+            }
+          }
+          if (!_matched) {
+            if (content instanceof XClosure) {
+              final XClosure _xClosure = (XClosure)content;
+              _matched=true;
+              this.assertExpressionTypeIsResolved(_xClosure, resolvedTypes);
+              JvmFormalParameter _implicitParameter = _xClosure.getImplicitParameter();
+              boolean _notEquals_1 = ObjectExtensions.operator_notEquals(_implicitParameter, null);
+              if (_notEquals_1) {
+                JvmFormalParameter _implicitParameter_1 = _xClosure.getImplicitParameter();
+                this.assertIdentifiableTypeIsResolved(_implicitParameter_1, resolvedTypes);
               }
             }
           }
