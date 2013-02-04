@@ -45,4 +45,55 @@ class XtendFormatterBugTests extends AbstractXtendFormatterTest {
 			}
 		'''.decode)
 	}
+	
+	@Test
+	def testBug398625(){
+		assertFormatted('''
+			package foo
+			
+			class bar {
+				def modify(List<? extends MutableMethodDeclaration> annotatedMethods,
+					ModifyContext context) {
+			
+					setExceptions("42", [])
+				}
+			}
+		''')	
+	}
+	@Test
+	def testBug398625_2(){
+		assertFormatted('''
+			package foo
+			
+			class bar {
+				def modify(List<? extends MutableMethodDeclaration> annotatedMethods,
+					ModifyContext context) {
+			
+					setExceptions("42")[]
+				}
+			}
+		''')	
+	}
+	
+	@Test
+	def testBug398625_3(){
+		assertFormatted('''
+			package foo
+
+			class bar {
+				def modify(List<? extends MutableMethodDeclaration> annotatedMethods,
+					ModifyContext context) {
+					ctx = context
+					annotatedMethods.forEach[val type = addTypeParameter('A')
+						addParameter('myParam',
+							compilationUnit.typeReferenceProvider.newTypeReference(type))
+						setExceptions(
+							newArrayList(
+								compilationUnit.typeReferenceProvider.
+									newTypeReference('java.lang.Exception')))[]]
+			
+				}
+			}
+		''')	
+	}
 }
