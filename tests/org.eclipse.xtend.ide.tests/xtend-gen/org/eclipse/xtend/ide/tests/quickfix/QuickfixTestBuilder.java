@@ -325,7 +325,7 @@ public class QuickfixTestBuilder {
     try {
       boolean _notEquals = ObjectExtensions.operator_notEquals(this.editor, null);
       if (_notEquals) {
-        this.editor.close(false);
+        this._workbenchTestHelper.closeEditor(this.editor, false);
       }
       boolean _notEquals_1 = ObjectExtensions.operator_notEquals(this.file, null);
       if (_notEquals_1) {
@@ -335,5 +335,10 @@ public class QuickfixTestBuilder {
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
+  }
+  
+  public void closeE1ditor(final WorkbenchTestHelper helper) {
+    UnsupportedOperationException _unsupportedOperationException = new UnsupportedOperationException("TODO: auto-generated method stub");
+    throw _unsupportedOperationException;
   }
 }

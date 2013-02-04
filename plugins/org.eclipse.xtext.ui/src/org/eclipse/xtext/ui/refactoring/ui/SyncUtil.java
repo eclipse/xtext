@@ -9,6 +9,7 @@ package org.eclipse.xtext.ui.refactoring.ui;
 
 import java.lang.reflect.InvocationTargetException;
 
+import org.apache.log4j.Logger;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.OperationCanceledException;
@@ -31,6 +32,7 @@ import com.google.inject.Inject;
  * @author Jan Koehnlein - Initial contribution and API
  */
 public class SyncUtil {
+	private static final Logger LOG = Logger.getLogger(SyncUtil.class);
 
 	@Inject(optional = true)
 	private IWorkbench workbench;
@@ -92,17 +94,21 @@ public class SyncUtil {
 	}
 
 	public void yieldToQueuedDisplayJobs(IProgressMonitor monitor) {
-		yieldToQueuedDisplayJobs(monitor, 100);
+		yieldToQueuedDisplayJobs(monitor, 5000);
 	}
 
 	public void yieldToQueuedDisplayJobs(IProgressMonitor monitor, int maxJobsToYieldTo) {
 		SubMonitor pm = SubMonitor.convert(monitor, maxJobsToYieldTo);
 		int count = 0;
-		if (Display.getCurrent() != null)
+		if (Display.getCurrent() != null) {
 			while (count < maxJobsToYieldTo && Display.getCurrent().readAndDispatch()) {
 				++count;
 				pm.worked(1);
 			}
+			if(count == maxJobsToYieldTo) {
+				LOG.error("maxJobsToYieldTo probably exceeded. Worked: " + count);
+			}
+		}
 	}
 
 }
