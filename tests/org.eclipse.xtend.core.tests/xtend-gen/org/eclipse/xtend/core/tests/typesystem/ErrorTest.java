@@ -21,6 +21,7 @@ import org.eclipse.xtend.core.xtend.XtendField;
 import org.eclipse.xtend.core.xtend.XtendFile;
 import org.eclipse.xtend.core.xtend.XtendFunction;
 import org.eclipse.xtend.core.xtend.XtendMember;
+import org.eclipse.xtend.core.xtend.XtendParameter;
 import org.eclipse.xtend.core.xtend.XtendTypeDeclaration;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
@@ -552,6 +553,64 @@ public class ErrorTest extends AbstractXtendTestCase {
     Assert.assertNotNull(implicit);
     final IResolvedTypes resolvedTypes = this.typeResolver.resolveTypes(implicit);
     LightweightTypeReference _actualType = resolvedTypes.getActualType(implicit);
+    Assert.assertNotNull(_actualType);
+  }
+  
+  @Test
+  public void testErrorModel_18() throws Exception {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("class C {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def m(@");
+    _builder.newLine();
+    final XtendFile file = this.processWithoutException(_builder);
+    EList<XtendTypeDeclaration> _xtendTypes = file.getXtendTypes();
+    final XtendTypeDeclaration c = IterableExtensions.<XtendTypeDeclaration>head(_xtendTypes);
+    EList<XtendMember> _members = c.getMembers();
+    XtendMember _head = IterableExtensions.<XtendMember>head(_members);
+    final XtendFunction function = ((XtendFunction) _head);
+    EList<XtendParameter> _parameters = function.getParameters();
+    final XtendParameter param = IterableExtensions.<XtendParameter>head(_parameters);
+    EList<XAnnotation> _annotations = param.getAnnotations();
+    final XAnnotation annotation = IterableExtensions.<XAnnotation>head(_annotations);
+    final IResolvedTypes resolvedTypes = this.typeResolver.resolveTypes(annotation);
+    LightweightTypeReference _actualType = resolvedTypes.getActualType(annotation);
+    Assert.assertNotNull(_actualType);
+  }
+  
+  @Test
+  public void testErrorModel_19() throws Exception {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("package x");
+    _builder.newLine();
+    _builder.append("import bug396879.*");
+    _builder.newLine();
+    _builder.append("class Z {");
+    _builder.newLine();
+    _builder.append("  \t");
+    _builder.append("def addListeners(BooleanProperty prop) {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("val ChangeListenerBoolean> listener = [ p, oldValue, newValue | ]\t\tprop.addListener(listener)");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    final XtendFile file = this.processWithoutException(_builder);
+    EList<XtendTypeDeclaration> _xtendTypes = file.getXtendTypes();
+    final XtendTypeDeclaration z = IterableExtensions.<XtendTypeDeclaration>head(_xtendTypes);
+    EList<XtendMember> _members = z.getMembers();
+    XtendMember _get = _members.get(1);
+    final XtendField field = ((XtendField) _get);
+    XExpression _initialValue = field.getInitialValue();
+    final XClosure closure = ((XClosure) _initialValue);
+    EList<JvmFormalParameter> _declaredFormalParameters = closure.getDeclaredFormalParameters();
+    final JvmFormalParameter param = IterableExtensions.<JvmFormalParameter>head(_declaredFormalParameters);
+    final IResolvedTypes resolvedTypes = this.typeResolver.resolveTypes(param);
+    LightweightTypeReference _actualType = resolvedTypes.getActualType(param);
     Assert.assertNotNull(_actualType);
   }
   

@@ -77,7 +77,7 @@ public class FunctionTypeConformanceStrategy extends
 			throw new IllegalStateException("rawTypeComputation should have exited earlier");
 		}
 		TypeConformanceComputationArgument argument = new TypeConformanceComputationArgument(false, false, true, false, param.unboundComputationAddsHints, param.allowSynonyms);
-		if (!conformanceComputer.isConformant(leftReturnType, rightReturnType, argument).isConformant()) {
+		if (leftReturnType != rightReturnType && !conformanceComputer.isConformant(leftReturnType, rightReturnType, argument).isConformant()) {
 			return TypeConformanceResult.create(param, ConformanceHint.INCOMPATIBLE);
 		}
 		for(int i = 0; i < leftParameterTypes.size(); i++) {

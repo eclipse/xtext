@@ -222,7 +222,7 @@ public class ParameterizedTypeReference extends LightweightTypeReference {
 		} else if (thisType instanceof JvmTypeParameter) {
 			List<JvmTypeConstraint> constraints = ((JvmTypeParameter) thisType).getConstraints();
 			for(JvmTypeConstraint constraint: constraints) {
-				if (constraint instanceof JvmUpperBound) {
+				if (constraint instanceof JvmUpperBound && constraint.getTypeReference() != null) {
 					JvmTypeReference superType = constraint.getTypeReference();
 					if (superType.getType() == rawType) {
 						return superType;

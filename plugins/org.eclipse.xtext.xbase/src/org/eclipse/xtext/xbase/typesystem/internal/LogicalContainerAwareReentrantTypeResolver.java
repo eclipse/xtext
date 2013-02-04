@@ -22,7 +22,9 @@ import org.eclipse.xtext.common.types.JvmAnnotationValue;
 import org.eclipse.xtext.common.types.JvmConstructor;
 import org.eclipse.xtext.common.types.JvmCustomAnnotationValue;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
+import org.eclipse.xtext.common.types.JvmExecutable;
 import org.eclipse.xtext.common.types.JvmField;
+import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmMember;
@@ -390,6 +392,9 @@ public class LogicalContainerAwareReentrantTypeResolver extends DefaultReentrant
 		ConstructorBodyComputationState state = new ConstructorBodyComputationState(childResolvedTypes, featureScopeSession.toInstanceContext(), constructor, this);
 		state.computeTypes();
 		computeAnnotationTypes(childResolvedTypes, featureScopeSession, constructor);
+		for(JvmFormalParameter parameter: constructor.getParameters()) {
+			computeAnnotationTypes(childResolvedTypes, featureScopeSession, parameter);
+		}
 		
 		mergeChildTypes(preparedResolvedTypes, childResolvedTypes, constructor);
 	}
@@ -408,6 +413,13 @@ public class LogicalContainerAwareReentrantTypeResolver extends DefaultReentrant
 		computeAnnotationTypes(childResolvedTypes, featureScopeSession, operation);
 		
 		mergeChildTypes(preparedResolvedTypes, childResolvedTypes, operation);
+	}
+
+	protected void computeAnnotationTypes(ResolvedTypes resolvedTypes, IFeatureScopeSession sessions, JvmExecutable operation) {
+		computeAnnotationTypes(resolvedTypes, sessions, (JvmAnnotationTarget) operation);
+		for(JvmFormalParameter parameter: operation.getParameters()) {
+			computeAnnotationTypes(resolvedTypes, sessions, parameter);
+		}
 	}
 
 	protected void mergeChildTypes(Map<JvmIdentifiableElement, ResolvedTypes> preparedResolvedTypes, ResolvedTypes childResolvedTypes, JvmIdentifiableElement element) {
