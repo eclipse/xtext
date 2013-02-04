@@ -11,6 +11,7 @@ import org.eclipse.xtend.core.compiler.XtendCompiler2;
 import org.eclipse.xtend.core.jvmmodel.XtendJvmModelInferrer2;
 import org.eclipse.xtend.core.typesystem.DispatchAndExtensionAwareReentrantTypeResolver;
 import org.eclipse.xtend.core.typesystem.ExtensionAwareScopeProvider;
+import org.eclipse.xtend.core.typesystem.TypeDeclarationAwareBatchTypeResolver;
 import org.eclipse.xtend.core.typesystem.XtendTypeComputer;
 import org.eclipse.xtend.core.validation.XtendJavaValidator;
 import org.eclipse.xtend.core.validation.XtendJavaValidator2;
@@ -84,7 +85,7 @@ public class XtendRuntimeModule2 extends XtendRuntimeModule {
 	}
 
 	public Class<? extends DefaultBatchTypeResolver> bindDefaultBatchTypeResolver() {
-		return LogicalContainerAwareBatchTypeResolver.class;
+		return TypeDeclarationAwareBatchTypeResolver.class;
 	}
 
 	public Class<? extends DefaultReentrantTypeResolver> bindReentrantTypeResolver() {

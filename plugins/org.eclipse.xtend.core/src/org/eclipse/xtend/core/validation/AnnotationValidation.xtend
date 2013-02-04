@@ -35,6 +35,8 @@ class AnnotationValidation extends AbstractDeclarativeValidator {
 				reference.componentType
 			default : reference
 		}
+		if (toCheck == null)
+			return true;
 		if (toCheck.type instanceof JvmPrimitiveType) 
 			return true
 		if (toCheck.type instanceof JvmEnumerationType)

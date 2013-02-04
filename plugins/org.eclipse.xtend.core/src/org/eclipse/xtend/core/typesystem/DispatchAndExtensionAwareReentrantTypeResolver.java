@@ -15,13 +15,19 @@ import java.util.List;
 import java.util.Map;
 
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtend.core.jvmmodel.DispatchHelper;
 import org.eclipse.xtend.core.jvmmodel.IXtendJvmAssociations;
 import org.eclipse.xtend.core.xtend.CreateExtensionInfo;
+import org.eclipse.xtend.core.xtend.XtendConstructor;
 import org.eclipse.xtend.core.xtend.XtendField;
 import org.eclipse.xtend.core.xtend.XtendFunction;
+import org.eclipse.xtend.core.xtend.XtendMember;
+import org.eclipse.xtend.core.xtend.XtendPackage;
+import org.eclipse.xtend.core.xtend.XtendTypeDeclaration;
+import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmField;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
@@ -38,6 +44,7 @@ import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XFeatureCall;
 import org.eclipse.xtext.xbase.XMemberFeatureCall;
 import org.eclipse.xtext.xbase.XbaseFactory;
+import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotation;
 import org.eclipse.xtext.xbase.scoping.batch.IFeatureNames;
 import org.eclipse.xtext.xbase.scoping.batch.IFeatureScopeSession;
 import org.eclipse.xtext.xbase.typesystem.InferredTypeIndicator;
@@ -57,6 +64,7 @@ import org.eclipse.xtext.xbase.validation.IssueCodes;
 import org.eclipse.xtext.xtype.XComputedTypeReference;
 import org.eclipse.xtext.xtype.impl.XComputedTypeReferenceImplCustom;
 
+import com.google.common.base.Strings;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.inject.Inject;
@@ -236,6 +244,99 @@ public class DispatchAndExtensionAwareReentrantTypeResolver extends LogicalConta
 	
 	@Inject
 	private XbaseFactory xbaseFactory;
+	
+	@Override
+	protected void computeTypes(ResolvedTypes resolvedTypes, IFeatureScopeSession session) {
+		EObject root = getRoot();
+		if (root instanceof XtendTypeDeclaration) {
+			computeTypes(resolvedTypes, session, root);
+		} else {
+			super.computeTypes(resolvedTypes, session);
+		}
+	}
+	
+	@Override
+	protected void computeTypes(ResolvedTypes resolvedTypes, IFeatureScopeSession featureScopeSession, EObject element) {
+		if (element instanceof XtendTypeDeclaration) {
+			XtendTypeDeclaration typeDeclaration = (XtendTypeDeclaration) element;
+			computeXtendAnnotationTypes(resolvedTypes, featureScopeSession, ((XtendTypeDeclaration) element).getAnnotations());
+			for(XtendMember member: typeDeclaration.getMembers()) {
+				computeTypes(resolvedTypes, featureScopeSession, member);
+			}
+		} else if (element instanceof XtendMember) {
+			XtendMember member = (XtendMember) element;
+			if (getInferredElements(member).isEmpty()) {
+				XExpression expression = null;
+				if (member instanceof XtendFunction) {
+					expression = ((XtendFunction) member).getExpression();
+					CreateExtensionInfo createInfo = ((XtendFunction) member).getCreateExtensionInfo();
+					if (createInfo != null) {
+						computeTypes(resolvedTypes, featureScopeSession, createInfo.getCreateExpression());
+					}
+				} else if (member instanceof XtendConstructor) {
+					expression = ((XtendConstructor) member).getExpression();
+				} else if (member instanceof XtendField) {
+					expression = ((XtendField) member).getInitialValue();
+				}
+				if (expression != null) {
+					computeTypes(resolvedTypes, featureScopeSession, expression);
+				}
+			}
+			computeXtendAnnotationTypes(resolvedTypes, featureScopeSession, member.getAnnotations());
+		} else {
+			super.computeTypes(resolvedTypes, featureScopeSession, element);
+		}
+	}
+	
+	@Override
+	protected boolean isHandled(XExpression expression) {
+		if (getRoot() instanceof XtendTypeDeclaration) {
+			XtendMember member = EcoreUtil2.getContainerOfType(expression, XtendMember.class);
+			if (member != null) {
+				if (getInferredElements(member).isEmpty()) {
+					boolean result = EcoreUtil.isAncestor(getRoot(), expression);
+					return result;
+				}
+				return false;
+			}
+		} else {
+			XAnnotation annotation = EcoreUtil2.getContainerOfType(expression, XAnnotation.class);
+			while(annotation != null) {
+				XAnnotation parent = EcoreUtil2.getContainerOfType(annotation.eContainer(), XAnnotation.class);
+				if (parent != null) {
+					annotation = parent;
+				} else {
+					break;
+				}
+			}
+			if (annotation != null) {
+				if (getInferredElements(annotation).isEmpty()) {
+					return false;
+				}
+			} else {
+				XtendMember member = EcoreUtil2.getContainerOfType(expression, XtendMember.class);
+				if (member instanceof XtendField || member instanceof XtendFunction) {
+					if (getInferredElements(member).isEmpty()) {
+						return false;
+					}
+				}
+			}
+		}
+		return super.isHandled(expression);
+	}
+	
+	@Override
+	protected boolean isHandled(JvmIdentifiableElement identifiableElement) {
+		if (getRoot() instanceof XtendTypeDeclaration) {
+			boolean result = EcoreUtil.isAncestor(getRoot(), identifiableElement);
+			return result;
+		}
+		return super.isHandled(identifiableElement);
+	}
+
+	protected boolean isAnnotationHolder(XtendMember member) {
+		return member.eClass() == XtendPackage.Literals.XTEND_MEMBER || member.eClass() == XtendPackage.Literals.XTEND_TYPE_DECLARATION;
+	}
 
 	@Override
 	protected void _computeTypes(Map<JvmIdentifiableElement, ResolvedTypes> preparedResolvedTypes, ResolvedTypes resolvedTypes, IFeatureScopeSession featureScopeSession,
@@ -319,6 +420,13 @@ public class DispatchAndExtensionAwareReentrantTypeResolver extends LogicalConta
 			JvmDeclaredType type) {
 		IFeatureScopeSession childSession = addExtensionsToMemberSession(resolvedTypes, featureScopeSession, type);
 		super.computeMemberTypes(preparedResolvedTypes, resolvedTypes, childSession, type);
+	}
+
+	protected void computeXtendAnnotationTypes(ResolvedTypes resolvedTypes, IFeatureScopeSession featureScopeSession, List<XAnnotation> annotations) {
+		for(XAnnotation annotation: annotations) {
+			if (getInferredElements(annotation).isEmpty())
+				computeTypes(resolvedTypes, featureScopeSession, annotation);
+		}
 	}
 	
 	@Override

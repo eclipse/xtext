@@ -212,6 +212,8 @@ public class XtendJavaValidator2 extends XbaseWithAnnotationsJavaValidator2 {
 	@Check
 	public void checkAnnotationTarget(XAnnotation annotation) {
 		JvmAnnotationType annotationType = annotation.getAnnotationType();
+		if (annotationType == null)
+			return;
 		Set<ElementType> targets = annotationUtil.getAnnotationTargets(annotationType);
 		if (targets.isEmpty())
 			return;
@@ -703,6 +705,8 @@ public class XtendJavaValidator2 extends XbaseWithAnnotationsJavaValidator2 {
 	@Check
 	public void checkDefaultSuperConstructor(XtendClass xtendClass) {
 		JvmGenericType inferredType = associations.getInferredType(xtendClass);
+		if (inferredType == null)
+			return;
 		Iterable<JvmConstructor> constructors = filter(inferredType.getMembers(), JvmConstructor.class);
 		if(inferredType.getExtendedClass() != null) {
 			JvmType superType = inferredType.getExtendedClass().getType();
@@ -1294,6 +1298,8 @@ public class XtendJavaValidator2 extends XbaseWithAnnotationsJavaValidator2 {
 	@Check
 	public void checkFinalFieldInitialization(XtendClass clazz) {
 		JvmGenericType inferredType = associations.getInferredType(clazz);
+		if (inferredType == null)
+			return;
 		JvmConstructor inferredConstructor = associations.getInferredConstructor(clazz);
 		if(inferredConstructor != null)
 			for (XAnnotation anno : clazz.getAnnotations()) {
@@ -1341,7 +1347,7 @@ public class XtendJavaValidator2 extends XbaseWithAnnotationsJavaValidator2 {
 	
 	protected boolean hasAnnotation(Iterable<? extends XAnnotation> annotations, Class<?> annotationType) {
 		for (XAnnotation anno : annotations) {
-			if (annotationType.getName().equals(anno.getAnnotationType().getIdentifier()))
+			if (anno.getAnnotationType() != null && annotationType.getName().equals(anno.getAnnotationType().getIdentifier()))
 				return true;
 		}
 		return false;

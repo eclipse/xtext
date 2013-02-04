@@ -15,12 +15,12 @@
 <booleanAttribute key="includeOptional" value="true"/>
 <stringAttribute key="location" value="${workspace_loc}/../junit-org.eclipse.xtend.core.tests-slow-workspace"/>
 <listAttribute key="org.eclipse.debug.core.MAPPED_RESOURCE_PATHS">
-<listEntry value="/org.eclipse.xtend.core.tests/longrunning/src"/>
+<listEntry value="/org.eclipse.xtend.core.tests/longrunning/xtend-gen"/>
 </listAttribute>
 <listAttribute key="org.eclipse.debug.core.MAPPED_RESOURCE_TYPES">
 <listEntry value="2"/>
 </listAttribute>
-<stringAttribute key="org.eclipse.jdt.junit.CONTAINER" value="=org.eclipse.xtend.core.tests/longrunning\/src"/>
+<stringAttribute key="org.eclipse.jdt.junit.CONTAINER" value="=org.eclipse.xtend.core.tests/longrunning\/xtend-gen"/>
 <booleanAttribute key="org.eclipse.jdt.junit.KEEPRUNNING_ATTR" value="false"/>
 <stringAttribute key="org.eclipse.jdt.junit.TESTNAME" value=""/>
 <stringAttribute key="org.eclipse.jdt.junit.TEST_KIND" value="org.eclipse.jdt.junit.loader.junit4"/>
