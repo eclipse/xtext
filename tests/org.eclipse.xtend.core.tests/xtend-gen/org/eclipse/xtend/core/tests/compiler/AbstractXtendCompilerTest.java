@@ -1,3 +1,10 @@
+/**
+ * Copyright (c) 2012 itemis AG (http://www.itemis.eu) and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ */
 package org.eclipse.xtend.core.tests.compiler;
 
 import com.google.common.collect.Iterables;
@@ -27,6 +34,90 @@ public abstract class AbstractXtendCompilerTest extends AbstractXtendTestCase {
   
   @Inject
   private IGeneratorConfigProvider generatorConfigProvider;
+  
+  @Test
+  public void testBug399527() throws Exception {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("class Y {");
+    _builder.newLine();
+    _builder.append(" ");
+    _builder.append("static def <T> IExpectationSetters<T> expect(T value) {");
+    _builder.newLine();
+    _builder.append(" ");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append(" ");
+    _builder.append("HeaderAccess<?> unboundedMockHeaderAccess");
+    _builder.newLine();
+    _builder.append(" ");
+    _builder.append("def test() {");
+    _builder.newLine();
+    _builder.append("   ");
+    _builder.append("val Object header = unboundedMockHeaderAccess.header");
+    _builder.newLine();
+    _builder.append("   ");
+    _builder.append("val IExpectationSetters<Object> exp1 = expect(header)");
+    _builder.newLine();
+    _builder.append("   ");
+    _builder.append("val IExpectationSetters<Object> exp2 = expect(unboundedMockHeaderAccess.getHeader())");
+    _builder.newLine();
+    _builder.append(" ");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("interface HeaderAccess<T> {");
+    _builder.newLine();
+    _builder.append("   ");
+    _builder.append("def T getHeader();");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("interface IExpectationSetters<T> {}");
+    _builder.newLine();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("@SuppressWarnings(\"all\")");
+    _builder_1.newLine();
+    _builder_1.append("public class Y {");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("public static <T extends Object> IExpectationSetters<T> expect(final T value) {");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("return null;");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("private HeaderAccess<? extends Object> unboundedMockHeaderAccess;");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("public void test() {");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("final Object header = this.unboundedMockHeaderAccess.getHeader();");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("final IExpectationSetters<Object> exp1 = Y.<Object>expect(header);");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("Object _header = this.unboundedMockHeaderAccess.getHeader();");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("final IExpectationSetters<Object> exp2 = Y.<Object>expect(_header);");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    this.assertCompilesTo(_builder, _builder_1);
+  }
   
   @Test
   public void testAnnotationWithIntArray() throws Exception {
