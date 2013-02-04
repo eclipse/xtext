@@ -226,9 +226,11 @@ class XbaseFormatter2 extends AbstractFormatter {
 	}
 
 	def protected XClosure builder(List<XExpression> params) {
-		if (params.last != null && (params.last.nodeForEObject as ICompositeNode).firstChild.grammarElement ==
-			XMemberFeatureCallAccess.memberCallArgumentsXClosureParserRuleCall_1_1_4_0)
-			params.last as XClosure
+		if (params.last != null){
+			val grammarElement = (params.last.nodeForEObject as ICompositeNode).firstChild.grammarElement
+			if(grammarElement == XMemberFeatureCallAccess.memberCallArgumentsXClosureParserRuleCall_1_1_4_0 || grammarElement == XFeatureCallAccess.getFeatureCallArgumentsXClosureParserRuleCall_5_0)
+				params.last as XClosure
+		}
 	}
 
 	def protected Iterable<XExpression> explicitParams(List<XExpression> params) {
