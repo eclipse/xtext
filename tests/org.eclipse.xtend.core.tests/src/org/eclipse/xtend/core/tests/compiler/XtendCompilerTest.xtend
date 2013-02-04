@@ -1,3 +1,10 @@
+/*******************************************************************************
+ * Copyright (c) 2012 itemis AG (http://www.itemis.eu) and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *******************************************************************************/
 package org.eclipse.xtend.core.tests.compiler
 
 import com.google.inject.Inject
@@ -14,6 +21,41 @@ abstract class AbstractXtendCompilerTest extends AbstractXtendTestCase {
 	
 	@Inject JvmModelGenerator generator
 	@Inject IGeneratorConfigProvider generatorConfigProvider
+	
+	@Test def testBug399527() throws Exception {
+		'''
+			class Y {
+			 static def <T> IExpectationSetters<T> expect(T value) {
+			 }
+			 HeaderAccess<?> unboundedMockHeaderAccess
+			 def test() {
+			   val Object header = unboundedMockHeaderAccess.header
+			   val IExpectationSetters<Object> exp1 = expect(header)
+			   val IExpectationSetters<Object> exp2 = expect(unboundedMockHeaderAccess.getHeader())
+			 }
+			}
+			interface HeaderAccess<T> {
+			   def T getHeader();
+			}
+			interface IExpectationSetters<T> {}
+		'''.assertCompilesTo('''
+			@SuppressWarnings("all")
+			public class Y {
+			  public static <T extends Object> IExpectationSetters<T> expect(final T value) {
+			    return null;
+			  }
+			  
+			  private HeaderAccess<? extends Object> unboundedMockHeaderAccess;
+			  
+			  public void test() {
+			    final Object header = this.unboundedMockHeaderAccess.getHeader();
+			    final IExpectationSetters<Object> exp1 = Y.<Object>expect(header);
+			    Object _header = this.unboundedMockHeaderAccess.getHeader();
+			    final IExpectationSetters<Object> exp2 = Y.<Object>expect(_header);
+			  }
+			}
+		''')
+	}
 	
 	@Test def testAnnotationWithIntArray() throws Exception {
 		'''
