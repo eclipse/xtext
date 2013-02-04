@@ -26,6 +26,7 @@ import org.eclipse.xtend.core.xtend.XtendField;
 import org.eclipse.xtend.core.xtend.XtendFunction;
 import org.eclipse.xtend.core.xtend.XtendMember;
 import org.eclipse.xtend.core.xtend.XtendPackage;
+import org.eclipse.xtend.core.xtend.XtendParameter;
 import org.eclipse.xtend.core.xtend.XtendTypeDeclaration;
 import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
@@ -265,23 +266,29 @@ public class DispatchAndExtensionAwareReentrantTypeResolver extends LogicalConta
 			}
 		} else if (element instanceof XtendMember) {
 			XtendMember member = (XtendMember) element;
-			if (getInferredElements(member).isEmpty()) {
 				XExpression expression = null;
 				if (member instanceof XtendFunction) {
-					expression = ((XtendFunction) member).getExpression();
-					CreateExtensionInfo createInfo = ((XtendFunction) member).getCreateExtensionInfo();
+					XtendFunction function = (XtendFunction) member;
+					expression = function.getExpression();
+					CreateExtensionInfo createInfo = function.getCreateExtensionInfo();
 					if (createInfo != null) {
 						computeTypes(resolvedTypes, featureScopeSession, createInfo.getCreateExpression());
 					}
+					for(XtendParameter parameter: function.getParameters()) {
+						computeXtendAnnotationTypes(resolvedTypes, featureScopeSession, parameter.getAnnotations());
+					}
 				} else if (member instanceof XtendConstructor) {
-					expression = ((XtendConstructor) member).getExpression();
+					XtendConstructor constructor = (XtendConstructor) member;
+					expression = constructor.getExpression();
+					for(XtendParameter parameter: constructor.getParameters()) {
+						computeXtendAnnotationTypes(resolvedTypes, featureScopeSession, parameter.getAnnotations());
+					}
 				} else if (member instanceof XtendField) {
 					expression = ((XtendField) member).getInitialValue();
 				}
-				if (expression != null) {
+				if (expression != null && getInferredElements(member).isEmpty()) {
 					computeTypes(resolvedTypes, featureScopeSession, expression);
 				}
-			}
 			computeXtendAnnotationTypes(resolvedTypes, featureScopeSession, member.getAnnotations());
 		} else {
 			super.computeTypes(resolvedTypes, featureScopeSession, element);
@@ -297,18 +304,16 @@ public class DispatchAndExtensionAwareReentrantTypeResolver extends LogicalConta
 					boolean result = EcoreUtil.isAncestor(getRoot(), expression);
 					return result;
 				}
+				XAnnotation annotation = getOutermostAnnotation(expression);
+				if (annotation != null) {
+					if (getInferredElements(annotation).isEmpty()) {
+						return true;
+					}
+				}
 				return false;
 			}
 		} else {
-			XAnnotation annotation = EcoreUtil2.getContainerOfType(expression, XAnnotation.class);
-			while(annotation != null) {
-				XAnnotation parent = EcoreUtil2.getContainerOfType(annotation.eContainer(), XAnnotation.class);
-				if (parent != null) {
-					annotation = parent;
-				} else {
-					break;
-				}
-			}
+			XAnnotation annotation = getOutermostAnnotation(expression);
 			if (annotation != null) {
 				if (getInferredElements(annotation).isEmpty()) {
 					return false;
@@ -325,12 +330,28 @@ public class DispatchAndExtensionAwareReentrantTypeResolver extends LogicalConta
 		return super.isHandled(expression);
 	}
 	
+	@Nullable
+	protected XAnnotation getOutermostAnnotation(XExpression expression) {
+		XAnnotation annotation = EcoreUtil2.getContainerOfType(expression, XAnnotation.class);
+		while(annotation != null) {
+			XAnnotation parent = EcoreUtil2.getContainerOfType(annotation.eContainer(), XAnnotation.class);
+			if (parent != null) {
+				annotation = parent;
+			} else {
+				break;
+			}
+		}
+		return annotation;
+	}
+	
 	@Override
 	protected boolean isHandled(JvmIdentifiableElement identifiableElement) {
 		if (getRoot() instanceof XtendTypeDeclaration) {
 			boolean result = EcoreUtil.isAncestor(getRoot(), identifiableElement);
 			return result;
-		} else if (identifiableElement instanceof JvmFormalParameter && identifiableElement.eContainingFeature() == XbasePackage.Literals.XCLOSURE__IMPLICIT_PARAMETER) {
+		} else if (identifiableElement instanceof JvmFormalParameter 
+				&& (identifiableElement.eContainingFeature() == XbasePackage.Literals.XCLOSURE__IMPLICIT_PARAMETER
+				|| identifiableElement.eContainingFeature() == XbasePackage.Literals.XCLOSURE__DECLARED_FORMAL_PARAMETERS)) {
 			XtendMember member = EcoreUtil2.getContainerOfType(identifiableElement, XtendMember.class);
 			if (getInferredElements(member).isEmpty()) {
 				return false;
