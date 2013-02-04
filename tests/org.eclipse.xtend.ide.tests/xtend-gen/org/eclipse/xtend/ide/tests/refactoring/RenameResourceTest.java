@@ -2,10 +2,13 @@ package org.eclipse.xtend.ide.tests.refactoring;
 
 import com.google.inject.Inject;
 import org.eclipse.core.resources.IFile;
+import org.eclipse.core.resources.IProject;
+import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.IWorkspace;
 import org.eclipse.core.resources.IWorkspaceRunnable;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.NullProgressMonitor;
+import org.eclipse.core.runtime.Path;
 import org.eclipse.ltk.core.refactoring.Change;
 import org.eclipse.ltk.core.refactoring.participants.RenameRefactoring;
 import org.eclipse.ltk.internal.core.refactoring.resource.RenameResourceProcessor;
@@ -60,6 +63,22 @@ public class RenameResourceTest extends AbstractXtendUITestCase {
     }
   }
   
+  @Test
+  public void testGuardMissingFileExtension() {
+    try {
+      try {
+        IFile _createFile = this._workbenchTestHelper.createFile("Foo", "class Foo {}");
+        IFile _renameTo = this.renameTo(_createFile, "Bar");
+        this._fileAsserts.assertFileContains(_renameTo, "class Foo {}");
+      } finally {
+        IFile _file = this._workbenchTestHelper.getFile("Bar");
+        _file.delete(true, null);
+      }
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
   protected IFile renameTo(final IFile file, final String newFileName) {
     try {
       IFile _xblockexpression = null;
@@ -88,10 +107,14 @@ public class RenameResourceTest extends AbstractXtendUITestCase {
               _function.apply(monitor);
             }
         }, _nullProgressMonitor_2);
-        final IFile newFile = this._workbenchTestHelper.getFile(newFileName);
+        IProject _project = this._workbenchTestHelper.getProject();
+        String _plus = ("src/" + newFileName);
+        Path _path = new Path(_plus);
+        final IResource newFile = _project.findMember(_path);
         boolean _exists = newFile.exists();
         Assert.assertTrue(_exists);
-        _xblockexpression = (newFile);
+        Assert.assertTrue((newFile instanceof IFile));
+        _xblockexpression = (((IFile) newFile));
       }
       return _xblockexpression;
     } catch (Throwable _e) {

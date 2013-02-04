@@ -9,6 +9,7 @@ import org.eclipse.ltk.internal.core.refactoring.resource.RenameResourceProcesso
 import org.eclipse.core.runtime.NullProgressMonitor
 import org.eclipse.core.resources.IWorkspace
 import org.eclipse.core.resources.IFile
+import org.eclipse.core.runtime.Path
 
 class RenameResourceTest extends AbstractXtendUITestCase {
 	
@@ -40,6 +41,17 @@ class RenameResourceTest extends AbstractXtendUITestCase {
 		}
 	}
 	
+	@Test 
+	def void testGuardMissingFileExtension() {
+		try {			
+			createFile('Foo', 'class Foo {}')
+				.renameTo('Bar')
+				.assertFileContains('class Foo {}')
+		} finally {
+			getFile('Bar').delete(true, null)
+		}
+	}
+	
 	def protected renameTo(IFile file, String newFileName) {
 		val renameResourceProcessor = new RenameResourceProcessor(file)
 		renameResourceProcessor.setNewResourceName(newFileName)
@@ -49,8 +61,9 @@ class RenameResourceTest extends AbstractXtendUITestCase {
 		workspace.run([
 			change.perform(it)
 		], new NullProgressMonitor)
-		val newFile = getFile(newFileName)
+		val newFile = project.findMember(new Path("src/" + newFileName))
 		assertTrue(newFile.exists)
-		newFile
+		assertTrue(newFile instanceof IFile)
+		newFile as IFile
 	}
 }
