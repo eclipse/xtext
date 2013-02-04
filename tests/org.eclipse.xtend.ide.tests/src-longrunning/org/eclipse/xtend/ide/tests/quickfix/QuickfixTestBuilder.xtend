@@ -121,9 +121,14 @@ class QuickfixTestBuilder {
 	
 	def tearDown() {
 		if(editor != null)
-			editor.close(false)
+			closeEditor(editor, false)
 		if(file != null)
 			file.delete(true, null)
 		yieldToQueuedDisplayJobs(null)
 	}
+	
+	def closeE1ditor(WorkbenchTestHelper helper) {
+		throw new UnsupportedOperationException("TODO: auto-generated method stub")
+	}
+	
 }

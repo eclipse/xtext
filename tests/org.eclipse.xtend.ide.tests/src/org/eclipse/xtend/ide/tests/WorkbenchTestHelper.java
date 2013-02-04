@@ -59,9 +59,9 @@ import com.google.inject.name.Named;
  */
 @Singleton
 public class WorkbenchTestHelper extends Assert {
-	
-	public static final Logger log = Logger.getLogger(WorkbenchTestHelper.class);  
-	
+
+	public static final Logger log = Logger.getLogger(WorkbenchTestHelper.class);
+
 	public static final String TESTPROJECT_NAME = "test.project";
 
 	private Set<IFile> files = newHashSet();
@@ -107,7 +107,7 @@ public class WorkbenchTestHelper extends Assert {
 		if (isLazyCreatedProject) {
 			deleteProject(getProject(false));
 			isLazyCreatedProject = false;
-		} 
+		}
 	}
 
 	public Set<IFile> getFiles() {
@@ -117,7 +117,7 @@ public class WorkbenchTestHelper extends Assert {
 	public IProject getProject() {
 		return getProject(true);
 	}
-	
+
 	protected IProject getProject(boolean createOnDemand) {
 		IProject project = workspace.getRoot().getProject(TESTPROJECT_NAME);
 		if (createOnDemand && !project.exists()) {
@@ -144,14 +144,13 @@ public class WorkbenchTestHelper extends Assert {
 		String fullFileName = getFullFileName(fileName);
 		return createFileImpl(fullFileName, content);
 	}
-	
+
 	public IFile createFileImpl(String fullFileName, String content) throws Exception {
-		IFile file = IResourcesSetupUtil.createFile(fullFileName,
-				content);
+		IFile file = IResourcesSetupUtil.createFile(fullFileName, content);
 		getFiles().add(file);
 		return file;
 	}
-	
+
 	public IFile getFile(String fileName) {
 		return workspace.getRoot().getFile(new Path(getFullFileName(fileName)));
 	}
@@ -161,15 +160,15 @@ public class WorkbenchTestHelper extends Assert {
 		String fullFileName = getProject().getName() + "/src/" + fileName + extension;
 		return fullFileName;
 	}
-	
+
 	public String getFileExtension() {
 		return fileExtensionProvider.getFileExtensions().iterator().next();
 	}
-	
+
 	public URI uri(IFile file) {
 		return URI.createPlatformResourceURI(file.getFullPath().toString(), true);
 	}
-	
+
 	public XtendFile xtendFile(String fileName, String content) throws Exception {
 		IFile file = createFile(fileName, content);
 		Resource resource = getResourceSet().createResource(uri(file));
@@ -183,7 +182,7 @@ public class WorkbenchTestHelper extends Assert {
 		ResourceSet resourceSet = resourceSetProvider.get(getProject());
 		return resourceSet;
 	}
-	
+
 	public String getEditorID() {
 		return languageName;
 	}
@@ -206,14 +205,11 @@ public class WorkbenchTestHelper extends Assert {
 	}
 
 	public static IProject createPluginProject(String name) throws CoreException {
-		return createPluginProject(name, "com.google.inject",
-				"org.eclipse.xtend.lib", 
-				"org.eclipse.xtext.xbase.lib",
-				"org.eclipse.xtend.ide.tests.data",
-				"org.junit4");
+		return createPluginProject(name, "com.google.inject", "org.eclipse.xtend.lib", "org.eclipse.xtext.xbase.lib",
+				"org.eclipse.xtend.ide.tests.data", "org.junit4");
 	}
-	
-	public static IProject createPluginProject(String name, String ...requiredBundles) throws CoreException {
+
+	public static IProject createPluginProject(String name, String... requiredBundles) throws CoreException {
 		Injector injector = XtendActivator.getInstance().getInjector("org.eclipse.xtend.core.Xtend");
 		PluginProjectFactory projectFactory = injector.getInstance(PluginProjectFactory.class);
 		projectFactory.setProjectName(name);
@@ -256,4 +252,7 @@ public class WorkbenchTestHelper extends Assert {
 		return workbench.getActiveWorkbenchWindow().getActivePage().openEditor(new FileEditorInput(file), editorId);
 	}
 
+	public boolean closeEditor(IEditorPart editor, boolean save) {
+		return workbench.getActiveWorkbenchWindow().getActivePage().closeEditor(editor, save);
+	}
 }
