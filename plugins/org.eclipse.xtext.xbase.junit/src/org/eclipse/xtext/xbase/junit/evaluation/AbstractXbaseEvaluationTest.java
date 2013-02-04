@@ -12,6 +12,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.math.MathContext;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.Stack;
 
@@ -22,12 +23,11 @@ import org.junit.Test;
 import testdata.ExceptionSubclass;
 import testdata.OuterClass;
 
-import com.google.common.collect.Lists;
-import com.google.common.collect.Sets;
-
 import static java.util.Collections.*;
 
 import static com.google.common.collect.Lists.*;
+import static com.google.common.collect.Sets.newHashSet;
+import static com.google.common.collect.Sets.newTreeSet;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -860,14 +860,14 @@ public abstract class AbstractXbaseEvaluationTest extends Assert {
 	}
 	
 	@Test public void testFeatureCall_03() throws Exception {
-		assertEvaluatesTo(Lists.newArrayList(
+		assertEvaluatesTo(newArrayList(
 				new Character('a'), 
 				new Character('b'),
 				new Character('c')), "{ var java.util.List<Character> x = ('abc'.toCharArray as Iterable<Character>).toList() x }");
 	}
 	
 	@Test public void testFeatureCall_03_2() throws Exception {
-		assertEvaluatesTo(Lists.newArrayList(
+		assertEvaluatesTo(newArrayList(
 				new Character('a'), 
 				new Character('b'),
 				new Character('c')), "{ var java.util.List<Character> x = 'abc'.toCharArray x }");
@@ -1576,7 +1576,7 @@ public abstract class AbstractXbaseEvaluationTest extends Assert {
 	
 	@Ignore("TODO see https://bugs.eclipse.org/bugs/show_bug.cgi?id=341048")
 	@Test public void testSpreadOperator_02() throws Exception {
-		assertEvaluatesTo(Lists.newArrayList(
+		assertEvaluatesTo(newArrayList(
 				"A", "B", "C"), "('abc'.toCharArray as Iterable<Character>)*.toString*.toUpperCase");
 	}
 	
@@ -2231,7 +2231,7 @@ public abstract class AbstractXbaseEvaluationTest extends Assert {
 	}
 	
 	@Test public void testArrayConversion_06() throws Exception {
-		assertEvaluatesTo(Lists.newArrayList("b", "c"), 
+		assertEvaluatesTo(newArrayList("b", "c"), 
 				"{" +
 				"  var a = 'a,b,c'.split(',')\n" + 
 				"  a = a.tail" +
@@ -2240,7 +2240,7 @@ public abstract class AbstractXbaseEvaluationTest extends Assert {
 	}
 	
 	@Test public void testArrayConversion_07() throws Exception {
-		assertEvaluatesTo(Lists.newArrayList(2, 3), 
+		assertEvaluatesTo(newArrayList(2, 3), 
 				"{" +
 				"  var int[] result = newArrayList(1, 2, 3)\n" + 
 				"  result = result.tail" +
@@ -2249,7 +2249,7 @@ public abstract class AbstractXbaseEvaluationTest extends Assert {
 	}
 	
 	@Test public void testArrayConversion_08() throws Exception {
-		assertEvaluatesTo(Lists.newArrayList("c", "b"), 
+		assertEvaluatesTo(newArrayList("c", "b"), 
 				"{" +
 				"  var a = 'b,c'.split(',')\n" + 
 				"  new testdata.ArrayClient().swap(a).toList" +
@@ -2257,12 +2257,12 @@ public abstract class AbstractXbaseEvaluationTest extends Assert {
 	}
 	
 	@Test public void testArrayConversion_09() throws Exception {
-		assertEvaluatesTo(Lists.newArrayList("c", "b"), 
+		assertEvaluatesTo(newArrayList("c", "b"), 
 				"new testdata.ArrayClient().swap('b,c'.split(',')).toList");
 	}
 	
 	@Test public void testArrayConversion_10() throws Exception {
-		assertEvaluatesTo(Lists.newArrayList("c", "b"), 
+		assertEvaluatesTo(newArrayList("c", "b"), 
 				"{" +
 				"  var a = 'a,b,c'.split(',')\n" + 
 				"  a = a.tail" +
@@ -2300,11 +2300,11 @@ public abstract class AbstractXbaseEvaluationTest extends Assert {
 	}
 	
 	@Test public void testMethodVarArgs_03() throws Exception {
-		assertEvaluatesTo(Lists.newArrayList("foo", "s1", "s2"), "new testdata.ClassWithVarArgs().stringsToList('s1', 's2')");
+		assertEvaluatesTo(newArrayList("foo", "s1", "s2"), "new testdata.ClassWithVarArgs().stringsToList('s1', 's2')");
 	}
 	
 	@Test public void testMethodVarArgs_04() throws Exception {
-		assertEvaluatesTo(Lists.newArrayList("s1", "s2", "s3"), "new testdata.ClassWithVarArgs().stringsToList('s1', 's2', 's3')");
+		assertEvaluatesTo(newArrayList("s1", "s2", "s3"), "new testdata.ClassWithVarArgs().stringsToList('s1', 's2', 's3')");
 	}
 	
 	@Test public void testMethodVarArgs_05() throws Exception {
@@ -2316,21 +2316,21 @@ public abstract class AbstractXbaseEvaluationTest extends Assert {
 	}
 	
 	@Test public void testMethodVarArgs_07() throws Exception {
-		assertEvaluatesTo(Lists.newArrayList("foo", "s1", "s2"), "{ var x = new testdata.ClassWithVarArgs() x.stringsToList('s1', 's2') }");
+		assertEvaluatesTo(newArrayList("foo", "s1", "s2"), "{ var x = new testdata.ClassWithVarArgs() x.stringsToList('s1', 's2') }");
 	}
 	
 	@Test public void testMethodVarArgs_08() throws Exception {
-		assertEvaluatesTo(Lists.newArrayList("s1", "s2", "s3"), "{ var x = new testdata.ClassWithVarArgs() x.stringsToList('s1', 's2', 's3') }");
+		assertEvaluatesTo(newArrayList("s1", "s2", "s3"), "{ var x = new testdata.ClassWithVarArgs() x.stringsToList('s1', 's2', 's3') }");
 	}
 	
 	@Test public void testMethodVarArgs_09() throws Exception {
-		assertEvaluatesTo(Lists.newArrayList("s1"), "{ var x = new testdata.ClassWithVarArgs() x.stringsToList2('s1') }");
+		assertEvaluatesTo(newArrayList("s1"), "{ var x = new testdata.ClassWithVarArgs() x.stringsToList2('s1') }");
 	}
 	@Test public void testMethodVarArgs_10() throws Exception {
-		assertEvaluatesTo(Lists.newArrayList("s1", "s2"), "{ var x = new testdata.ClassWithVarArgs() x.stringsToList2('s1', 's2') }");
+		assertEvaluatesTo(newArrayList("s1", "s2"), "{ var x = new testdata.ClassWithVarArgs() x.stringsToList2('s1', 's2') }");
 	}
 	@Test public void testMethodVarArgs_11() throws Exception {
-		assertEvaluatesTo(Lists.newArrayList("s1", "s2", "s3"), "{ var x = new testdata.ClassWithVarArgs() x.stringsToList2('s1', 's2', 's3') }");
+		assertEvaluatesTo(newArrayList("s1", "s2", "s3"), "{ var x = new testdata.ClassWithVarArgs() x.stringsToList2('s1', 's2', 's3') }");
 	}
 	
 	@Test public void testMethodVarArgs_12() throws Exception {
@@ -2370,7 +2370,7 @@ public abstract class AbstractXbaseEvaluationTest extends Assert {
 	}
 	
 	@Test public void testIterableExtension_04() throws Exception {
-		assertEvaluatesTo(Lists.newArrayList(2, 3, 2, 3, 4), "newArrayList('a','aa','b','aa','abc').map(s|s.length+1).toList()");
+		assertEvaluatesTo(newArrayList(2, 3, 2, 3, 4), "newArrayList('a','aa','b','aa','abc').map(s|s.length+1).toList()");
 	}
 	
 	@Test public void testIterableExtension_05() throws Exception {
@@ -2382,11 +2382,11 @@ public abstract class AbstractXbaseEvaluationTest extends Assert {
 	}
 	
 	@Test public void testIterableExtension_07() throws Exception {
-		assertEvaluatesTo(Lists.newArrayList("a", "b", "c"), "newArrayList('a','b', 'c', 'd', 'e').take(3).toList()");
+		assertEvaluatesTo(newArrayList("a", "b", "c"), "newArrayList('a','b', 'c', 'd', 'e').take(3).toList()");
 	}
 	
 	@Test public void testIterableExtension_08() throws Exception {
-		assertEvaluatesTo(Lists.newArrayList("d", "e"), "newArrayList('a', 'b', 'c', 'd', 'e').drop(3).toList()");
+		assertEvaluatesTo(newArrayList("d", "e"), "newArrayList('a', 'b', 'c', 'd', 'e').drop(3).toList()");
 	}
 	
 	@Test public void testIterableExtension_09() throws Exception {
@@ -2501,11 +2501,11 @@ public abstract class AbstractXbaseEvaluationTest extends Assert {
 	}
 	
 	@Test public void testStaticMethod_01() throws Exception {
-		assertEvaluatesTo(Sets.newTreeSet(), "newTreeSet(String left, String right|left.compareTo(right))");
+		assertEvaluatesTo(newTreeSet(), "newTreeSet(String left, String right|left.compareTo(right))");
 	}
 	
 	@Test public void testStaticMethod_02() throws Exception {
-		assertEvaluatesTo(Sets.newHashSet("a"), "newTreeSet([left, right|left.compareTo(right)], 'a')");
+		assertEvaluatesTo(newHashSet("a"), "newTreeSet([left, right|left.compareTo(right)], 'a')");
 	}
 	
 	@Test public void testCollectionExtensions_01() throws Exception {
@@ -2548,7 +2548,7 @@ public abstract class AbstractXbaseEvaluationTest extends Assert {
 	}
 	
 	@Test public void testCollectionExtensions_07() throws Exception {
-		assertEvaluatesTo(Lists.newArrayList("a", "b", "c"), "{ var x = newArrayList() x.addAll('a', 'b', 'c') x }");
+		assertEvaluatesTo(newArrayList("a", "b", "c"), "{ var x = newArrayList() x.addAll('a', 'b', 'c') x }");
 		assertEvaluatesTo(Boolean.FALSE, "newHashSet('a', 'b', 'c').addAll('a', 'b', 'c')");
 	}
 	
@@ -2565,26 +2565,26 @@ public abstract class AbstractXbaseEvaluationTest extends Assert {
 	}
 	
 	@Test public void testListExtensions_01() throws Exception {
-		assertEvaluatesTo(Lists.newArrayList("a", "b", "c"), "newArrayList('c', 'a', 'b').sortInplace()");
-		assertEvaluatesTo(Lists.newArrayList("a", "b", "c"), "newArrayList('c', 'a', 'b').sort()");
+		assertEvaluatesTo(newArrayList("a", "b", "c"), "newArrayList('c', 'a', 'b').sortInplace()");
+		assertEvaluatesTo(newArrayList("a", "b", "c"), "newArrayList('c', 'a', 'b').sort()");
 		assertEvaluatesTo("b", "{ var l = newArrayList('c', 'a', 'b', 'd') l.sortInplace() l.get(1) }");
 		assertEvaluatesTo("a", "{ var l = newArrayList('c', 'a', 'b', 'd') l.sort() l.get(1) }");
 	}
 	
 	@Test public void testListExtensions_02() throws Exception {
-		assertEvaluatesTo(Lists.newArrayList("a", "b", "c"), "newArrayList('c', 'a', 'b').sort(a,b|a.compareTo(b))");
-		assertEvaluatesTo(Lists.newArrayList("a", "b", "c"), "newArrayList('c', 'a', 'b').sortInplace(a,b|a.compareTo(b))");
-		assertEvaluatesTo(Lists.newArrayList("c", "b", "a"), "newArrayList('c', 'a', 'b').sort(a,b|b.compareTo(a))");
-		assertEvaluatesTo(Lists.newArrayList("c", "b", "a"), "newArrayList('c', 'a', 'b').sortInplace(a,b|b.compareTo(a))");
+		assertEvaluatesTo(newArrayList("a", "b", "c"), "newArrayList('c', 'a', 'b').sort(a,b|a.compareTo(b))");
+		assertEvaluatesTo(newArrayList("a", "b", "c"), "newArrayList('c', 'a', 'b').sortInplace(a,b|a.compareTo(b))");
+		assertEvaluatesTo(newArrayList("c", "b", "a"), "newArrayList('c', 'a', 'b').sort(a,b|b.compareTo(a))");
+		assertEvaluatesTo(newArrayList("c", "b", "a"), "newArrayList('c', 'a', 'b').sortInplace(a,b|b.compareTo(a))");
 		assertEvaluatesTo("a", "{ var l = newArrayList('c', 'a', 'b', 'd') l.sort(a,b|a.compareTo(b)) l.get(1) }");
 		assertEvaluatesTo("b", "{ var l = newArrayList('c', 'a', 'b', 'd') l.sortInplace(a,b|a.compareTo(b)) l.get(1) }");
 	}
 	
 	@Test public void testListExtensions_03() throws Exception {
-		assertEvaluatesTo(Lists.newArrayList("aaa", "bb", "c"), "newArrayList('c', 'aaa', 'bb').sortBy(s|-s.length)");
-		assertEvaluatesTo(Lists.newArrayList("aaa", "bb", "c"), "newArrayList('c', 'aaa', 'bb').sortInplaceBy(s|-s.length)");
-		assertEvaluatesTo(Lists.newArrayList("c", "bb", "aaa"), "newArrayList('c', 'aaa', 'bb').sortBy(s|s.length)");
-		assertEvaluatesTo(Lists.newArrayList("c", "bb", "aaa"), "newArrayList('c', 'aaa', 'bb').sortInplaceBy(s|s.length)");
+		assertEvaluatesTo(newArrayList("aaa", "bb", "c"), "newArrayList('c', 'aaa', 'bb').sortBy(s|-s.length)");
+		assertEvaluatesTo(newArrayList("aaa", "bb", "c"), "newArrayList('c', 'aaa', 'bb').sortInplaceBy(s|-s.length)");
+		assertEvaluatesTo(newArrayList("c", "bb", "aaa"), "newArrayList('c', 'aaa', 'bb').sortBy(s|s.length)");
+		assertEvaluatesTo(newArrayList("c", "bb", "aaa"), "newArrayList('c', 'aaa', 'bb').sortInplaceBy(s|s.length)");
 		assertEvaluatesTo("a", "{ var l = newArrayList('c', 'a', 'b', 'd') l.sortBy(a|a) l.get(1) }");
 		assertEvaluatesTo("b", "{ var l = newArrayList('c', 'a', 'b', 'd') l.sortInplaceBy(a|a) l.get(1) }");
 	}
@@ -2871,7 +2871,7 @@ public abstract class AbstractXbaseEvaluationTest extends Assert {
 	}
 	
 	@Test public void testFilterArrays_01() throws Exception {
-		assertEvaluatesTo(Lists.newArrayList("a"), 
+		assertEvaluatesTo(newArrayList("a"), 
 				"{\n" +
 				"  val filtered = new testdata.ArrayClient().toStringArray('a', 'c').filter(e|e < 'c')" +
 				"  filtered.toList\n" +
@@ -3010,8 +3010,56 @@ public abstract class AbstractXbaseEvaluationTest extends Assert {
 				"  catch(Exception e) 'bar'");
 	}
 	
+	@Test 
+	public void testListLiteral_0() throws Exception {
+		assertEvaluatesTo(newArrayList(), "#[]");
+	}
+	
+	@Test 
+	public void testListLiteral_1() throws Exception {
+		assertEvaluatesTo(newArrayList("Foo", "Bar"), "#['Foo', 'Bar']");
+	}
+	
+	@SuppressWarnings("unchecked")
+	@Test 
+	public void testListLiteral_2() throws Exception {
+		assertEvaluatesTo(newArrayList(1, "Foo", true), "#[1, 'Foo', true]");
+	}
+		
+	@Test 
+	public void testListLiteral_3() throws Exception {
+		assertEvaluatesToArray(new String[] {"Foo"}, "{ val String[] x = #['Foo']  x }");
+	}
+		
+	@Test 
+	public void testSetLiteral_0() throws Exception {
+		assertEvaluatesTo(newHashSet(), "#{}");
+	}
+	
+	@Test 
+	public void testSetLiteral_1() throws Exception {
+		assertEvaluatesTo(newHashSet("Foo", "Bar"), "#{'Foo', 'Bar'}");
+	}
+	@SuppressWarnings("unchecked")
+	@Test 
+	public void testSetLiteral_2() throws Exception {
+		assertEvaluatesTo(newHashSet(1, "Foo", true), "#{1, 'Foo', true}");
+	}
+	
+	@Test 
+	public void testSetLiteral_3() throws Exception {
+		assertEvaluatesToArray(new String[] {"Foo"}, "{ val String[] x = #{'Foo'}  x}");
+	}
+	
 	protected void assertEvaluatesTo(Object object, String string) throws Exception {
-		assertEquals(object, invokeXbaseExpression(string));
+		Object result = invokeXbaseExpression(string);
+		assertEquals(object, result);
+	}
+
+	protected void assertEvaluatesToArray(Object[] object, String string) throws Exception {
+		Object result = invokeXbaseExpression(string);
+		assertTrue(result.getClass().isArray());
+		assertArrayEquals(object, (Object[])result);
 	}
 
 	protected void assertEvaluatesWithException(Class<? extends Throwable> class1, String string) throws Exception {
