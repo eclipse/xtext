@@ -26,6 +26,7 @@ import org.eclipse.xtext.generator.trace.AbstractTraceRegion;
 import org.eclipse.xtext.generator.trace.ILocationData;
 import org.eclipse.xtext.generator.trace.ILocationInResource;
 import org.eclipse.xtext.generator.trace.ITrace;
+import org.eclipse.xtext.generator.trace.ITraceURIConverter;
 import org.eclipse.xtext.generator.trace.TraceRegion;
 import org.eclipse.xtext.resource.IResourceServiceProvider;
 import org.eclipse.xtext.ui.resource.IResourceSetProvider;
@@ -87,6 +88,9 @@ public abstract class AbstractTrace implements ITrace, ITrace.Internal {
 	@Inject
 	private IWorkspace workspace;
 	
+	@Inject
+	private ITraceURIConverter traceURIConverter;
+
 	private AbstractTraceRegion rootTraceRegion;
 	
 	/**
@@ -287,7 +291,8 @@ public abstract class AbstractTrace implements ITrace, ITrace.Internal {
 	}
 	
 	protected boolean isAssociatedWith(AbstractTraceRegion region, URI uri) {
-		if (uri.equals(region.getAssociatedPath()))
+		URI convertedUri = traceURIConverter.getURIForTrace(uri);
+		if (convertedUri.equals(region.getAssociatedPath()))
 			return true;
 		return false;
 	}
