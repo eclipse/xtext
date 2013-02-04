@@ -22,6 +22,7 @@ import org.eclipse.xtext.common.types.JvmConstructor;
 import org.eclipse.xtext.common.types.JvmCustomAnnotationValue;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmField;
+import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmMember;
@@ -167,6 +168,10 @@ public class LogicalContainerAwareReentrantTypeResolver extends DefaultReentrant
 	protected boolean isHandled(JvmIdentifiableElement identifiableElement) {
 		if (identifiableElement instanceof XExpression) {
 			return isHandled((XExpression) identifiableElement);
+		}
+		JvmIdentifiableElement container = logicalContainerProvider.getNearestLogicalContainer(identifiableElement);
+		if (container != null) {
+			return super.isHandled(container);
 		}
 		return super.isHandled(identifiableElement);
 	}
