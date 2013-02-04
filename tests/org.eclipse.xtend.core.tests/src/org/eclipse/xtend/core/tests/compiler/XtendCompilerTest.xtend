@@ -57,6 +57,108 @@ abstract class AbstractXtendCompilerTest extends AbstractXtendTestCase {
 		''')
 	}
 	
+	@Test def testThrowablesPropagate_01() throws Exception {
+		'''
+			import static extension Throwables.*
+			import java.net.URI
+			
+			class Throwables {
+				def static <T> T propagate(()=>T proc, (Exception)=>Exception handler) {
+					try {
+						proc.apply
+					} catch(Exception e) {
+						throw handler.apply(e)
+					}
+				}
+			}
+			class Client {
+				val uri = [| new URI('')].propagate [ new IllegalArgumentException(it) ]
+				
+				def foo (){
+					uri.toString
+				}
+			}
+		'''.assertCompilesTo('''
+			import org.eclipse.xtext.xbase.lib.Exceptions;
+			import org.eclipse.xtext.xbase.lib.Functions.Function0;
+			import org.eclipse.xtext.xbase.lib.Functions.Function1;
+			
+			@SuppressWarnings("all")
+			public class Throwables {
+			  public static <T extends Object> T propagate(final Function0<? extends T> proc, final Function1<? super Exception,? extends Exception> handler) {
+			    try {
+			      T _xtrycatchfinallyexpression = null;
+			      try {
+			        T _apply = proc.apply();
+			        _xtrycatchfinallyexpression = _apply;
+			      } catch (final Throwable _t) {
+			        if (_t instanceof Exception) {
+			          final Exception e = (Exception)_t;
+			          throw handler.apply(e);
+			        } else {
+			          throw Exceptions.sneakyThrow(_t);
+			        }
+			      }
+			      return _xtrycatchfinallyexpression;
+			    } catch (Throwable _e) {
+			      throw Exceptions.sneakyThrow(_e);
+			    }
+			  }
+			}
+		''')
+	}
+	
+	@Test def testThrowablesPropagate_02() throws Exception {
+		'''
+			import static extension Throwables.*
+			import java.net.URI
+			
+			class Client {
+				val uri = [| new URI('')].propagate [ new IllegalArgumentException(it) ]
+			}
+			class Throwables {
+				def static <T> T propagate(()=>T proc, (Exception)=>Exception handler) {
+					try {
+						proc.apply
+					} catch(Exception e) {
+						throw handler.apply(e)
+					}
+				}
+			}
+		'''.assertCompilesTo('''
+			import java.net.URI;
+			import org.eclipse.xtext.xbase.lib.Exceptions;
+			import org.eclipse.xtext.xbase.lib.Functions.Function0;
+			import org.eclipse.xtext.xbase.lib.Functions.Function1;
+			
+			@SuppressWarnings("all")
+			public class Client {
+			  private final URI uri = new Function0<URI>() {
+			    public URI apply() {
+			      final Function0<URI> _function = new Function0<URI>() {
+			          public URI apply() {
+			            try {
+			              URI _uRI = new URI("");
+			              return _uRI;
+			            } catch (Throwable _e) {
+			              throw Exceptions.sneakyThrow(_e);
+			            }
+			          }
+			        };
+			      final Function1<Exception,IllegalArgumentException> _function_1 = new Function1<Exception,IllegalArgumentException>() {
+			          public IllegalArgumentException apply(final Exception it) {
+			            IllegalArgumentException _illegalArgumentException = new IllegalArgumentException(it);
+			            return _illegalArgumentException;
+			          }
+			        };
+			      URI _propagate = Throwables.<URI>propagate(_function, _function_1);
+			      return _propagate;
+			    }
+			  }.apply();
+			}
+		''')
+	}
+	
 	@Test def testAnnotationWithIntArray() throws Exception {
 		'''
 			class TestXtend {
