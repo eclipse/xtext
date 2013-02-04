@@ -6,7 +6,7 @@
  * http://www.eclipse.org/legal/epl-v10.html
  *
  */
-package org.eclipse.xtext.xbase.annotations.xAnnotations.impl;
+package org.eclipse.xtext.xbase.impl;
 
 import java.util.Collection;
 
@@ -20,44 +20,41 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
+import org.eclipse.xtext.xbase.XCollectionLiteral;
 import org.eclipse.xtext.xbase.XExpression;
-
-import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotationValueArray;
-import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotationsPackage;
-
-import org.eclipse.xtext.xbase.impl.XExpressionImpl;
+import org.eclipse.xtext.xbase.XbasePackage;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>XAnnotation Value Array</b></em>'.
+ * An implementation of the model object '<em><b>XCollection Literal</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.eclipse.xtext.xbase.annotations.xAnnotations.impl.XAnnotationValueArrayImpl#getValues <em>Values</em>}</li>
+ *   <li>{@link org.eclipse.xtext.xbase.impl.XCollectionLiteralImpl#getElements <em>Elements</em>}</li>
  * </ul>
  * </p>
  *
  * @generated
  */
-public class XAnnotationValueArrayImpl extends XExpressionImpl implements XAnnotationValueArray
+public class XCollectionLiteralImpl extends XExpressionImpl implements XCollectionLiteral
 {
 	/**
-	 * The cached value of the '{@link #getValues() <em>Values</em>}' containment reference list.
+	 * The cached value of the '{@link #getElements() <em>Elements</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getValues()
+	 * @see #getElements()
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<XExpression> values;
+	protected EList<XExpression> elements;
 
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected XAnnotationValueArrayImpl()
+	protected XCollectionLiteralImpl()
 	{
 		super();
 	}
@@ -70,7 +67,7 @@ public class XAnnotationValueArrayImpl extends XExpressionImpl implements XAnnot
 	@Override
 	protected EClass eStaticClass()
 	{
-		return XAnnotationsPackage.Literals.XANNOTATION_VALUE_ARRAY;
+		return XbasePackage.Literals.XCOLLECTION_LITERAL;
 	}
 
 	/**
@@ -78,13 +75,13 @@ public class XAnnotationValueArrayImpl extends XExpressionImpl implements XAnnot
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<XExpression> getValues()
+	public EList<XExpression> getElements()
 	{
-		if (values == null)
+		if (elements == null)
 		{
-			values = new EObjectContainmentEList<XExpression>(XExpression.class, this, XAnnotationsPackage.XANNOTATION_VALUE_ARRAY__VALUES);
+			elements = new EObjectContainmentEList<XExpression>(XExpression.class, this, XbasePackage.XCOLLECTION_LITERAL__ELEMENTS);
 		}
-		return values;
+		return elements;
 	}
 
 	/**
@@ -97,8 +94,8 @@ public class XAnnotationValueArrayImpl extends XExpressionImpl implements XAnnot
 	{
 		switch (featureID)
 		{
-			case XAnnotationsPackage.XANNOTATION_VALUE_ARRAY__VALUES:
-				return ((InternalEList<?>)getValues()).basicRemove(otherEnd, msgs);
+			case XbasePackage.XCOLLECTION_LITERAL__ELEMENTS:
+				return ((InternalEList<?>)getElements()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -113,8 +110,8 @@ public class XAnnotationValueArrayImpl extends XExpressionImpl implements XAnnot
 	{
 		switch (featureID)
 		{
-			case XAnnotationsPackage.XANNOTATION_VALUE_ARRAY__VALUES:
-				return getValues();
+			case XbasePackage.XCOLLECTION_LITERAL__ELEMENTS:
+				return getElements();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -130,9 +127,9 @@ public class XAnnotationValueArrayImpl extends XExpressionImpl implements XAnnot
 	{
 		switch (featureID)
 		{
-			case XAnnotationsPackage.XANNOTATION_VALUE_ARRAY__VALUES:
-				getValues().clear();
-				getValues().addAll((Collection<? extends XExpression>)newValue);
+			case XbasePackage.XCOLLECTION_LITERAL__ELEMENTS:
+				getElements().clear();
+				getElements().addAll((Collection<? extends XExpression>)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -148,8 +145,8 @@ public class XAnnotationValueArrayImpl extends XExpressionImpl implements XAnnot
 	{
 		switch (featureID)
 		{
-			case XAnnotationsPackage.XANNOTATION_VALUE_ARRAY__VALUES:
-				getValues().clear();
+			case XbasePackage.XCOLLECTION_LITERAL__ELEMENTS:
+				getElements().clear();
 				return;
 		}
 		super.eUnset(featureID);
@@ -165,10 +162,10 @@ public class XAnnotationValueArrayImpl extends XExpressionImpl implements XAnnot
 	{
 		switch (featureID)
 		{
-			case XAnnotationsPackage.XANNOTATION_VALUE_ARRAY__VALUES:
-				return values != null && !values.isEmpty();
+			case XbasePackage.XCOLLECTION_LITERAL__ELEMENTS:
+				return elements != null && !elements.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}
 
-} //XAnnotationValueArrayImpl
+} //XCollectionLiteralImpl

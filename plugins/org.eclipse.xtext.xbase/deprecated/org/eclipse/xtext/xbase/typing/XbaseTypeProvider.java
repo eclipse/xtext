@@ -44,8 +44,10 @@ import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.JvmVoid;
 import org.eclipse.xtext.common.types.TypesFactory;
 import org.eclipse.xtext.common.types.util.ITypeArgumentContext;
+import org.eclipse.xtext.common.types.util.Primitives;
 import org.eclipse.xtext.common.types.util.SuperTypeCollector;
 import org.eclipse.xtext.common.types.util.TypeArgumentContextProvider;
+import org.eclipse.xtext.common.types.util.TypeReferences;
 import org.eclipse.xtext.util.Triple;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.XAbstractWhileExpression;
@@ -57,16 +59,19 @@ import org.eclipse.xtext.xbase.XCasePart;
 import org.eclipse.xtext.xbase.XCastedExpression;
 import org.eclipse.xtext.xbase.XCatchClause;
 import org.eclipse.xtext.xbase.XClosure;
+import org.eclipse.xtext.xbase.XCollectionLiteral;
 import org.eclipse.xtext.xbase.XConstructorCall;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XFeatureCall;
 import org.eclipse.xtext.xbase.XForLoopExpression;
 import org.eclipse.xtext.xbase.XIfExpression;
 import org.eclipse.xtext.xbase.XInstanceOfExpression;
+import org.eclipse.xtext.xbase.XListLiteral;
 import org.eclipse.xtext.xbase.XMemberFeatureCall;
 import org.eclipse.xtext.xbase.XNullLiteral;
 import org.eclipse.xtext.xbase.XNumberLiteral;
 import org.eclipse.xtext.xbase.XReturnExpression;
+import org.eclipse.xtext.xbase.XSetLiteral;
 import org.eclipse.xtext.xbase.XStringLiteral;
 import org.eclipse.xtext.xbase.XSwitchExpression;
 import org.eclipse.xtext.xbase.XThrowExpression;
@@ -104,6 +109,12 @@ public class XbaseTypeProvider extends AbstractTypeProvider {
 	
 	@Inject
 	private NumberLiterals numberLiterals;
+	
+	@Inject 
+	private TypeReferences typeReferences;
+	
+	@Inject
+	private Primitives primitives;
 
 	@Override
 	protected JvmTypeReference _expectedType(EObject obj, EReference reference, int index, boolean rawType) {
@@ -188,6 +199,10 @@ public class XbaseTypeProvider extends AbstractTypeProvider {
 			return _type((XTypeLiteral)expression, rawExpectation, rawType);
 		} else if (expression instanceof XVariableDeclaration) {
 			return _type((XVariableDeclaration)expression, rawExpectation, rawType);
+		} else if (expression instanceof XListLiteral) {
+			return _type((XListLiteral)expression, rawExpectation, rawType);
+		} else if (expression instanceof XSetLiteral) {
+			return _type((XSetLiteral)expression, rawExpectation, rawType);
 		} else { 
 			return super.type(expression, rawExpectation, rawType);
 		}
@@ -230,6 +245,10 @@ public class XbaseTypeProvider extends AbstractTypeProvider {
 			return _expectedType((XTryCatchFinallyExpression)container, reference, index, rawType);
 		} else if (container instanceof XVariableDeclaration) {
 			return _expectedType((XVariableDeclaration)container, reference, index, rawType);
+		} else if (container instanceof XListLiteral) {
+			return _expectedType((XListLiteral)container, reference, index, rawType);
+		} else if (container instanceof XSetLiteral) {
+			return _expectedType((XSetLiteral)container, reference, index, rawType);
 		} else {
 			return super.expectedType(container, reference, index, rawType);
 		}
@@ -539,6 +558,20 @@ public class XbaseTypeProvider extends AbstractTypeProvider {
 		if (reference == XbasePackage.Literals.XVARIABLE_DECLARATION__RIGHT) {
 			final JvmTypeReference type = expr.getType();
 			return type;
+		}
+		return null; // no expectations
+	}
+
+	protected JvmTypeReference _expectedType(XCollectionLiteral expr, EReference reference, int index, boolean rawType) {
+		if (reference == XbasePackage.Literals.XCOLLECTION_LITERAL__ELEMENTS) {
+			final JvmTypeReference type = getExpectedType(expr);
+			if(type instanceof JvmParameterizedTypeReference) {
+				List<JvmTypeReference> arguments = ((JvmParameterizedTypeReference) type).getArguments();
+				if(!arguments.isEmpty()) {
+					JvmTypeReference jvmTypeReference = arguments.get(0);
+					return jvmTypeReference;
+				}
+			}
 		}
 		return null; // no expectations
 	}
@@ -954,6 +987,37 @@ public class XbaseTypeProvider extends AbstractTypeProvider {
 //		result.getSynonymes().add(stringType);
 //		result.getSynonymes().add(charType);
 //		return result;
+	}
+
+	protected JvmTypeReference _type(XListLiteral literal, JvmTypeReference rawExpectation, boolean rawType) {
+		JvmType list = typeReferences.findDeclaredType(List.class, literal);
+		return getCollectionLiteralType(list, literal, rawExpectation, rawType);
+	}
+
+	protected JvmTypeReference _type(XSetLiteral literal, JvmTypeReference rawExpectation, boolean rawType) {
+		JvmType set = typeReferences.findDeclaredType(Set.class, literal);
+		return getCollectionLiteralType(set, literal, rawExpectation, rawType);
+	}
+
+	protected JvmTypeReference getCollectionLiteralType(JvmType collectionRawType, XCollectionLiteral literal, JvmTypeReference rawExpectation, boolean rawType) {
+		JvmTypeReference commonElementType = getCommonElementType(literal, rawExpectation, rawType);
+		JvmTypeReference typeArgument;
+		if(commonElementType != null && !(commonElementType instanceof JvmAnyTypeReference)) 
+			typeArgument = primitives.asWrapperTypeIfPrimitive(commonElementType);
+		else 
+			typeArgument = typeReferences.getTypeForName(Object.class, literal);
+		return typeReferences.createTypeRef(collectionRawType, typeArgument);
+	}
+	
+	protected JvmTypeReference getCommonElementType(XCollectionLiteral literal, JvmTypeReference rawExpectation, boolean rawType) {
+		List<JvmTypeReference> elementTypes = newArrayList();
+		for(XExpression element: literal.getElements()) {
+			JvmTypeReference type = getType(element, rawExpectation, rawType);
+			if(type != null) {
+				elementTypes.add(type);
+			}
+		}
+		return getCommonType(elementTypes);
 	}
 
 	protected JvmTypeReference _type(final XClosure object, JvmTypeReference rawExpectation, final boolean rawType) {

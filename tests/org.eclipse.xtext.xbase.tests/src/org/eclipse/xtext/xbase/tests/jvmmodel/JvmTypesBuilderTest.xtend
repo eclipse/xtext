@@ -123,15 +123,16 @@ class JvmTypesBuilderTest extends AbstractXbaseTestCase {
 	@Test
 	def void testStringArrayAnnotation() {
 		val f = XAnnotationsFactory::eINSTANCE
+		val f2 = XbaseFactory::eINSTANCE
 		val e = expression("'Foo'");
 		val e2 = expression("'Bar'");
 		
 		val anno = f.createXAnnotation
 		anno.annotationType = references.findDeclaredType(typeof(Inject), e) as JvmAnnotationType
-		val array = f.createXAnnotationValueArray
+		val array = f2.createXListLiteral
 		anno.value = array
-		array.values += e
-		array.values += e2
+		array.elements += e
+		array.elements += e2
 		
 		val type = typesFactory.createJvmGenericType
 		newArrayList(anno).translateAnnotationsTo(type)
@@ -144,11 +145,12 @@ class JvmTypesBuilderTest extends AbstractXbaseTestCase {
 	@Test
 	def void testStringArrayAnnotationWithNullExpression() {
 		val f = XAnnotationsFactory::eINSTANCE
+		val f2 = XbaseFactory::eINSTANCE
 		val context = expression('"foo"')
 		
 		val anno = f.createXAnnotation
 		anno.annotationType = references.findDeclaredType(typeof(Inject), context) as JvmAnnotationType
-		val array = f.createXAnnotationValueArray
+		val array = f2.createXListLiteral
 		anno.value = array
 		
 		val type = typesFactory.createJvmGenericType

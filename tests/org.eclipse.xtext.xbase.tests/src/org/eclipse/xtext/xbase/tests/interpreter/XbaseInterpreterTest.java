@@ -57,6 +57,11 @@ public class XbaseInterpreterTest extends AbstractXbaseEvaluationTest {
 		assertEvaluatesTo(expectation, model, true);
 	}
 	
+	@Override
+	public void assertEvaluatesToArray(Object[] expectation, String model) {
+		assertEvaluatesTo(expectation, model, true);
+	}
+	
 	public void assertEvaluatesTo(Object expectation, String model, boolean validate) {
 		XExpression expression = null;
 		try {
@@ -64,7 +69,10 @@ public class XbaseInterpreterTest extends AbstractXbaseEvaluationTest {
 			IEvaluationResult result = interpreter.evaluate(expression);
 			assertNull("Expected no exception. Model was: " + model + ", Exception was: " + result.getException(),
 					result.getException());
-			assertEquals("Model was: " + model, expectation, result.getResult());
+			if(expectation != null && expectation.getClass().isArray())
+				assertArrayEquals("Model was: " + model, (Object[]) expectation, (Object[]) result.getResult());
+			else
+				assertEquals("Model was: " + model, expectation, result.getResult());
 		} catch (Exception e) {
 			if (e instanceof RuntimeException)
 				throw (RuntimeException) e;

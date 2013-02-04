@@ -192,22 +192,23 @@ public class XbaseWithAnnotationsGrammarAccess extends AbstractGrammarElementFin
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
 		private final RuleCall cXAnnotationParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
 		private final RuleCall cXAnnotationValueArrayParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
-		private final RuleCall cXStringLiteralParserRuleCall_2 = (RuleCall)cAlternatives.eContents().get(2);
-		private final RuleCall cXBooleanLiteralParserRuleCall_3 = (RuleCall)cAlternatives.eContents().get(3);
-		private final RuleCall cXNumberLiteralParserRuleCall_4 = (RuleCall)cAlternatives.eContents().get(4);
-		private final RuleCall cXTypeLiteralParserRuleCall_5 = (RuleCall)cAlternatives.eContents().get(5);
-		private final RuleCall cXAnnotationValueFieldReferenceParserRuleCall_6 = (RuleCall)cAlternatives.eContents().get(6);
-		private final Group cGroup_7 = (Group)cAlternatives.eContents().get(7);
-		private final Keyword cLeftParenthesisKeyword_7_0 = (Keyword)cGroup_7.eContents().get(0);
-		private final RuleCall cXAnnotationElementValueStringConcatenationParserRuleCall_7_1 = (RuleCall)cGroup_7.eContents().get(1);
-		private final Keyword cRightParenthesisKeyword_7_2 = (Keyword)cGroup_7.eContents().get(2);
+		private final RuleCall cXListLiteralParserRuleCall_2 = (RuleCall)cAlternatives.eContents().get(2);
+		private final RuleCall cXStringLiteralParserRuleCall_3 = (RuleCall)cAlternatives.eContents().get(3);
+		private final RuleCall cXBooleanLiteralParserRuleCall_4 = (RuleCall)cAlternatives.eContents().get(4);
+		private final RuleCall cXNumberLiteralParserRuleCall_5 = (RuleCall)cAlternatives.eContents().get(5);
+		private final RuleCall cXTypeLiteralParserRuleCall_6 = (RuleCall)cAlternatives.eContents().get(6);
+		private final RuleCall cXAnnotationValueFieldReferenceParserRuleCall_7 = (RuleCall)cAlternatives.eContents().get(7);
+		private final Group cGroup_8 = (Group)cAlternatives.eContents().get(8);
+		private final Keyword cLeftParenthesisKeyword_8_0 = (Keyword)cGroup_8.eContents().get(0);
+		private final RuleCall cXAnnotationElementValueStringConcatenationParserRuleCall_8_1 = (RuleCall)cGroup_8.eContents().get(1);
+		private final Keyword cRightParenthesisKeyword_8_2 = (Keyword)cGroup_8.eContents().get(2);
 		
 		//XAnnotationElementValue returns xbase::XExpression:
-		//	XAnnotation | XAnnotationValueArray | XStringLiteral | XBooleanLiteral | XNumberLiteral | XTypeLiteral |
-		//	XAnnotationValueFieldReference | "(" XAnnotationElementValueStringConcatenation ")";
+		//	XAnnotation | XAnnotationValueArray | XListLiteral | XStringLiteral | XBooleanLiteral | XNumberLiteral | XTypeLiteral
+		//	| XAnnotationValueFieldReference | "(" XAnnotationElementValueStringConcatenation ")";
 		public ParserRule getRule() { return rule; }
 
-		//XAnnotation | XAnnotationValueArray | XStringLiteral | XBooleanLiteral | XNumberLiteral | XTypeLiteral |
+		//XAnnotation | XAnnotationValueArray | XListLiteral | XStringLiteral | XBooleanLiteral | XNumberLiteral | XTypeLiteral |
 		//XAnnotationValueFieldReference | "(" XAnnotationElementValueStringConcatenation ")"
 		public Alternatives getAlternatives() { return cAlternatives; }
 
@@ -217,32 +218,35 @@ public class XbaseWithAnnotationsGrammarAccess extends AbstractGrammarElementFin
 		//XAnnotationValueArray
 		public RuleCall getXAnnotationValueArrayParserRuleCall_1() { return cXAnnotationValueArrayParserRuleCall_1; }
 
+		//XListLiteral
+		public RuleCall getXListLiteralParserRuleCall_2() { return cXListLiteralParserRuleCall_2; }
+
 		//XStringLiteral
-		public RuleCall getXStringLiteralParserRuleCall_2() { return cXStringLiteralParserRuleCall_2; }
+		public RuleCall getXStringLiteralParserRuleCall_3() { return cXStringLiteralParserRuleCall_3; }
 
 		//XBooleanLiteral
-		public RuleCall getXBooleanLiteralParserRuleCall_3() { return cXBooleanLiteralParserRuleCall_3; }
+		public RuleCall getXBooleanLiteralParserRuleCall_4() { return cXBooleanLiteralParserRuleCall_4; }
 
 		//XNumberLiteral
-		public RuleCall getXNumberLiteralParserRuleCall_4() { return cXNumberLiteralParserRuleCall_4; }
+		public RuleCall getXNumberLiteralParserRuleCall_5() { return cXNumberLiteralParserRuleCall_5; }
 
 		//XTypeLiteral
-		public RuleCall getXTypeLiteralParserRuleCall_5() { return cXTypeLiteralParserRuleCall_5; }
+		public RuleCall getXTypeLiteralParserRuleCall_6() { return cXTypeLiteralParserRuleCall_6; }
 
 		//XAnnotationValueFieldReference
-		public RuleCall getXAnnotationValueFieldReferenceParserRuleCall_6() { return cXAnnotationValueFieldReferenceParserRuleCall_6; }
+		public RuleCall getXAnnotationValueFieldReferenceParserRuleCall_7() { return cXAnnotationValueFieldReferenceParserRuleCall_7; }
 
 		//"(" XAnnotationElementValueStringConcatenation ")"
-		public Group getGroup_7() { return cGroup_7; }
+		public Group getGroup_8() { return cGroup_8; }
 
 		//"("
-		public Keyword getLeftParenthesisKeyword_7_0() { return cLeftParenthesisKeyword_7_0; }
+		public Keyword getLeftParenthesisKeyword_8_0() { return cLeftParenthesisKeyword_8_0; }
 
 		//XAnnotationElementValueStringConcatenation
-		public RuleCall getXAnnotationElementValueStringConcatenationParserRuleCall_7_1() { return cXAnnotationElementValueStringConcatenationParserRuleCall_7_1; }
+		public RuleCall getXAnnotationElementValueStringConcatenationParserRuleCall_8_1() { return cXAnnotationElementValueStringConcatenationParserRuleCall_8_1; }
 
 		//")"
-		public Keyword getRightParenthesisKeyword_7_2() { return cRightParenthesisKeyword_7_2; }
+		public Keyword getRightParenthesisKeyword_8_2() { return cRightParenthesisKeyword_8_2; }
 	}
 
 	public class XAnnotationValueFieldReferenceElements extends AbstractParserRuleElementFinder {
@@ -419,8 +423,8 @@ public class XbaseWithAnnotationsGrammarAccess extends AbstractGrammarElementFin
 	}
 
 	//XAnnotationElementValue returns xbase::XExpression:
-	//	XAnnotation | XAnnotationValueArray | XStringLiteral | XBooleanLiteral | XNumberLiteral | XTypeLiteral |
-	//	XAnnotationValueFieldReference | "(" XAnnotationElementValueStringConcatenation ")";
+	//	XAnnotation | XAnnotationValueArray | XListLiteral | XStringLiteral | XBooleanLiteral | XNumberLiteral | XTypeLiteral
+	//	| XAnnotationValueFieldReference | "(" XAnnotationElementValueStringConcatenation ")";
 	public XAnnotationElementValueElements getXAnnotationElementValueAccess() {
 		return (pXAnnotationElementValue != null) ? pXAnnotationElementValue : (pXAnnotationElementValue = new XAnnotationElementValueElements());
 	}
@@ -699,13 +703,43 @@ public class XbaseWithAnnotationsGrammarAccess extends AbstractGrammarElementFin
 	}
 
 	//XLiteral returns XExpression:
-	//	XClosure | XBooleanLiteral | XNumberLiteral | XNullLiteral | XStringLiteral | XTypeLiteral;
+	//	XCollectionLiteral | XClosure | XBooleanLiteral | XNumberLiteral | XNullLiteral | XStringLiteral | XTypeLiteral;
 	public XbaseGrammarAccess.XLiteralElements getXLiteralAccess() {
 		return gaXbase.getXLiteralAccess();
 	}
 	
 	public ParserRule getXLiteralRule() {
 		return getXLiteralAccess().getRule();
+	}
+
+	//XCollectionLiteral:
+	//	XSetLiteral | XListLiteral;
+	public XbaseGrammarAccess.XCollectionLiteralElements getXCollectionLiteralAccess() {
+		return gaXbase.getXCollectionLiteralAccess();
+	}
+	
+	public ParserRule getXCollectionLiteralRule() {
+		return getXCollectionLiteralAccess().getRule();
+	}
+
+	//XSetLiteral:
+	//	{XSetLiteral} "#" "{" (elements+=XExpression ("," elements+=XExpression)*)? "}";
+	public XbaseGrammarAccess.XSetLiteralElements getXSetLiteralAccess() {
+		return gaXbase.getXSetLiteralAccess();
+	}
+	
+	public ParserRule getXSetLiteralRule() {
+		return getXSetLiteralAccess().getRule();
+	}
+
+	//XListLiteral:
+	//	{XListLiteral} "#" "[" (elements+=XExpression ("," elements+=XExpression)*)? "]";
+	public XbaseGrammarAccess.XListLiteralElements getXListLiteralAccess() {
+		return gaXbase.getXListLiteralAccess();
+	}
+	
+	public ParserRule getXListLiteralRule() {
+		return getXListLiteralAccess().getRule();
 	}
 
 	//XClosure returns XExpression:

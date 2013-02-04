@@ -30,6 +30,7 @@ import org.eclipse.xtext.xbase.XBlockExpression;
 import org.eclipse.xtext.xbase.XCasePart;
 import org.eclipse.xtext.xbase.XCatchClause;
 import org.eclipse.xtext.xbase.XClosure;
+import org.eclipse.xtext.xbase.XCollectionLiteral;
 import org.eclipse.xtext.xbase.XConstructorCall;
 import org.eclipse.xtext.xbase.XDoWhileExpression;
 import org.eclipse.xtext.xbase.XExpression;
@@ -46,7 +47,6 @@ import org.eclipse.xtext.xbase.XVariableDeclaration;
 import org.eclipse.xtext.xbase.XWhileExpression;
 import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotation;
 import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotationElementValuePair;
-import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotationValueArray;
 import org.eclipse.xtext.xbase.formatting.AbstractFormatter;
 import org.eclipse.xtext.xbase.formatting.BasicFormatterPreferenceKeys;
 import org.eclipse.xtext.xbase.formatting.FormattableDocument;
@@ -83,15 +83,23 @@ public class XbaseFormatter2 extends AbstractFormatter {
   @Inject
   private XbaseGrammarAccess _xbaseGrammarAccess;
   
-  protected void _format(final XAnnotationValueArray ann, final FormattableDocument document) {
-    ILeafNode node = this._nodeModelAccess.nodeForKeyword(ann, "{");
-    EList<XExpression> _values = ann.getValues();
-    for (final XExpression value : _values) {
+  protected void _format(final XCollectionLiteral literal, final FormattableDocument document) {
+    ILeafNode _nodeForKeyword = this._nodeModelAccess.nodeForKeyword(literal, "#");
+    final Procedure1<FormattingDataInit> _function = new Procedure1<FormattingDataInit>() {
+        public void apply(final FormattingDataInit it) {
+          it.noSpace();
+        }
+      };
+    Function1<? super FormattableDocument,? extends Iterable<FormattingData>> _surround = this._formattingDataFactory.surround(_nodeForKeyword, _function);
+    document.operator_add(_surround);
+    ILeafNode node = this._nodeModelAccess.nodeForKeyword(literal, "[");
+    EList<XExpression> _elements = literal.getElements();
+    for (final XExpression value : _elements) {
       {
-        final Procedure1<FormattingDataInit> _function = new Procedure1<FormattingDataInit>() {
+        final Procedure1<FormattingDataInit> _function_1 = new Procedure1<FormattingDataInit>() {
             public void apply(final FormattingDataInit it) {
-              EList<XExpression> _values = ann.getValues();
-              XExpression _head = IterableExtensions.<XExpression>head(_values);
+              EList<XExpression> _elements = literal.getElements();
+              XExpression _head = IterableExtensions.<XExpression>head(_elements);
               boolean _equals = ObjectExtensions.operator_equals(value, _head);
               if (_equals) {
                 it.noSpace();
@@ -100,28 +108,28 @@ public class XbaseFormatter2 extends AbstractFormatter {
               }
             }
           };
-        Function1<? super FormattableDocument,? extends Iterable<FormattingData>> _append = this._formattingDataFactory.append(node, _function);
+        Function1<? super FormattableDocument,? extends Iterable<FormattingData>> _append = this._formattingDataFactory.append(node, _function_1);
         document.operator_add(_append);
         this.format(value, document);
         INode _nodeForEObject = this._nodeModelAccess.nodeForEObject(value);
         ILeafNode _immediatelyFollowingKeyword = this._nodeModelAccess.immediatelyFollowingKeyword(_nodeForEObject, ",");
         node = _immediatelyFollowingKeyword;
-        final Procedure1<FormattingDataInit> _function_1 = new Procedure1<FormattingDataInit>() {
+        final Procedure1<FormattingDataInit> _function_2 = new Procedure1<FormattingDataInit>() {
             public void apply(final FormattingDataInit it) {
               it.noSpace();
             }
           };
-        Function1<? super FormattableDocument,? extends Iterable<FormattingData>> _prepend = this._formattingDataFactory.prepend(node, _function_1);
+        Function1<? super FormattableDocument,? extends Iterable<FormattingData>> _prepend = this._formattingDataFactory.prepend(node, _function_2);
         document.operator_add(_prepend);
       }
     }
-    ILeafNode _nodeForKeyword = this._nodeModelAccess.nodeForKeyword(ann, "}");
-    final Procedure1<FormattingDataInit> _function = new Procedure1<FormattingDataInit>() {
+    ILeafNode _nodeForKeyword_1 = this._nodeModelAccess.nodeForKeyword(literal, "]");
+    final Procedure1<FormattingDataInit> _function_1 = new Procedure1<FormattingDataInit>() {
         public void apply(final FormattingDataInit it) {
           it.noSpace();
         }
       };
-    Function1<? super FormattableDocument,? extends Iterable<FormattingData>> _prepend = this._formattingDataFactory.prepend(_nodeForKeyword, _function);
+    Function1<? super FormattableDocument,? extends Iterable<FormattingData>> _prepend = this._formattingDataFactory.prepend(_nodeForKeyword_1, _function_1);
     document.operator_add(_prepend);
   }
   
@@ -2985,6 +2993,9 @@ public class XbaseFormatter2 extends AbstractFormatter {
     } else if (ref instanceof XClosure) {
       _format((XClosure)ref, document);
       return;
+    } else if (ref instanceof XCollectionLiteral) {
+      _format((XCollectionLiteral)ref, document);
+      return;
     } else if (ref instanceof XConstructorCall) {
       _format((XConstructorCall)ref, document);
       return;
@@ -3014,9 +3025,6 @@ public class XbaseFormatter2 extends AbstractFormatter {
       return;
     } else if (ref instanceof XAnnotation) {
       _format((XAnnotation)ref, document);
-      return;
-    } else if (ref instanceof XAnnotationValueArray) {
-      _format((XAnnotationValueArray)ref, document);
       return;
     } else if (ref instanceof JvmTypeConstraint) {
       _format((JvmTypeConstraint)ref, document);

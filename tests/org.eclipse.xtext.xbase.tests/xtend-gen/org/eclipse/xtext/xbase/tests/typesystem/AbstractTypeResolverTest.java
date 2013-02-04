@@ -360,6 +360,91 @@ public abstract class AbstractTypeResolverTest<Reference extends Object> extends
   }
   
   @Test
+  public void testListLiteral_00() {
+    this.resolvesTo("#[]", "List<Unbound[E]>");
+  }
+  
+  @Test
+  public void testListLiteral_01() throws Exception {
+    this.resolvesTo("#[\'foo\']", "List<String>");
+  }
+  
+  @Test
+  public void testListLiteral_02() throws Exception {
+    this.resolvesTo("#[\'foo\', null, \'bar\']", "List<String>");
+  }
+  
+  @Test
+  public void testListLiteral_03() throws Exception {
+    this.resolvesTo("#[null]", "List<Unbound[E]>");
+  }
+  
+  @Test
+  public void testListLiteral_04() throws Exception {
+    this.resolvesTo("#[1, 2, 3]", "List<Integer>");
+  }
+  
+  @Test
+  public void testListLiteral_05() throws Exception {
+    this.resolvesTo("#[1, 2.0, 3]", "List<? extends Number & Comparable<?>>");
+  }
+  
+  @Test
+  public void testListLiteral_06() throws Exception {
+    this.resolvesTo("{ val java.util.List<Number> foo = #[1, 2.0, 3bi] foo }", "List<Number>");
+  }
+  
+  @Test
+  public void testListLiteral_07() throws Exception {
+    this.resolvesTo("{ val java.util.List<CharSequence> foo = #[\'foo\', \'bar\'] foo }", "List<CharSequence>");
+  }
+  
+  @Test
+  public void testListLiteral_08() throws Exception {
+    this.resolvesTo("{ val String[] foo = #[\'foo\', \'bar\'] foo }", "String[]");
+  }
+  
+  @Test
+  public void testSetLiteral_00() {
+    this.resolvesTo("#{}", "Set<Unbound[E]>");
+  }
+  
+  @Test
+  public void testSetLiteral_01() throws Exception {
+    this.resolvesTo("#{\'foo\'}", "Set<String>");
+  }
+  
+  @Test
+  public void testSetLiteral_02() throws Exception {
+    this.resolvesTo("#{\'foo\', null, \'bar\'}", "Set<String>");
+  }
+  
+  @Test
+  public void testSetLiteral_03() throws Exception {
+    this.resolvesTo("#{null}", "Set<Unbound[E]>");
+  }
+  
+  @Test
+  public void testSetLiteral_04() throws Exception {
+    this.resolvesTo("#{1, 2 ,3}", "Set<Integer>");
+  }
+  
+  @Test
+  public void testSetLiteral_05() throws Exception {
+    this.resolvesTo("#{1, 2.0 ,3}", "Set<? extends Number & Comparable<?>>");
+  }
+  
+  @Test
+  public void testSetLiteral_06() throws Exception {
+    this.resolvesTo("{ val java.util.Set<Number> foo = #[1, 2.0, 3bi] foo }", "Set<Number>");
+  }
+  
+  @Test
+  public void testSetLiteral_07() throws Exception {
+    this.resolvesTo("{ val java.util.Set<CharSequence> foo = #[\'foo\', \'bar\'] foo }", "Set<CharSequence>");
+  }
+  
+  @Test
   public void testOverloadedVarArgs_01() throws Exception {
     this.resolvesTo("testdata::OverloadedMethods::overloadedVarArgs(null, null)", "long");
   }

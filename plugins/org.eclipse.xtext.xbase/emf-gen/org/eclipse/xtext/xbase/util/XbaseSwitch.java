@@ -4,6 +4,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
+ *
  */
 package org.eclipse.xtext.xbase.util;
 
@@ -211,6 +212,32 @@ public class XbaseSwitch<T>
 				XStringLiteral xStringLiteral = (XStringLiteral)theEObject;
 				T result = caseXStringLiteral(xStringLiteral);
 				if (result == null) result = caseXExpression(xStringLiteral);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case XbasePackage.XCOLLECTION_LITERAL:
+			{
+				XCollectionLiteral xCollectionLiteral = (XCollectionLiteral)theEObject;
+				T result = caseXCollectionLiteral(xCollectionLiteral);
+				if (result == null) result = caseXExpression(xCollectionLiteral);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case XbasePackage.XLIST_LITERAL:
+			{
+				XListLiteral xListLiteral = (XListLiteral)theEObject;
+				T result = caseXListLiteral(xListLiteral);
+				if (result == null) result = caseXCollectionLiteral(xListLiteral);
+				if (result == null) result = caseXExpression(xListLiteral);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case XbasePackage.XSET_LITERAL:
+			{
+				XSetLiteral xSetLiteral = (XSetLiteral)theEObject;
+				T result = caseXSetLiteral(xSetLiteral);
+				if (result == null) result = caseXCollectionLiteral(xSetLiteral);
+				if (result == null) result = caseXExpression(xSetLiteral);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -562,6 +589,54 @@ public class XbaseSwitch<T>
 	 * @generated
 	 */
 	public T caseXStringLiteral(XStringLiteral object)
+	{
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>XCollection Literal</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>XCollection Literal</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseXCollectionLiteral(XCollectionLiteral object)
+	{
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>XList Literal</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>XList Literal</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseXListLiteral(XListLiteral object)
+	{
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>XSet Literal</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>XSet Literal</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseXSetLiteral(XSetLiteral object)
 	{
 		return null;
 	}

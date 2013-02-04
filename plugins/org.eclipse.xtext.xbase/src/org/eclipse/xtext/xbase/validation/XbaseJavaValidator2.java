@@ -185,7 +185,8 @@ public class XbaseJavaValidator2 extends AbstractXbaseJavaValidator {
 			XbasePackage.Literals.XUNARY_OPERATION__OPERAND,
 			XbasePackage.Literals.XASSIGNMENT__VALUE, 
 			XbasePackage.Literals.XBINARY_OPERATION__RIGHT_OPERAND,
-			XbasePackage.Literals.XFOR_LOOP_EXPRESSION__FOR_EXPRESSION);
+			XbasePackage.Literals.XFOR_LOOP_EXPRESSION__FOR_EXPRESSION,
+			XbasePackage.Literals.XCOLLECTION_LITERAL__ELEMENTS);
 	}
 	
 	protected final Set<EReference> getTypeConformanceCheckedReferences() {

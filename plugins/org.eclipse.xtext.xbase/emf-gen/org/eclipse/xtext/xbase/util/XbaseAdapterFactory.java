@@ -152,6 +152,21 @@ public class XbaseAdapterFactory extends AdapterFactoryImpl
 				return createXStringLiteralAdapter();
 			}
 			@Override
+			public Adapter caseXCollectionLiteral(XCollectionLiteral object)
+			{
+				return createXCollectionLiteralAdapter();
+			}
+			@Override
+			public Adapter caseXListLiteral(XListLiteral object)
+			{
+				return createXListLiteralAdapter();
+			}
+			@Override
+			public Adapter caseXSetLiteral(XSetLiteral object)
+			{
+				return createXSetLiteralAdapter();
+			}
+			@Override
 			public Adapter caseXClosure(XClosure object)
 			{
 				return createXClosureAdapter();
@@ -459,6 +474,51 @@ public class XbaseAdapterFactory extends AdapterFactoryImpl
 	 * @generated
 	 */
 	public Adapter createXStringLiteralAdapter()
+	{
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.xtext.xbase.XCollectionLiteral <em>XCollection Literal</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.xtext.xbase.XCollectionLiteral
+	 * @generated
+	 */
+	public Adapter createXCollectionLiteralAdapter()
+	{
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.xtext.xbase.XListLiteral <em>XList Literal</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.xtext.xbase.XListLiteral
+	 * @generated
+	 */
+	public Adapter createXListLiteralAdapter()
+	{
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.xtext.xbase.XSetLiteral <em>XSet Literal</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.xtext.xbase.XSetLiteral
+	 * @generated
+	 */
+	public Adapter createXSetLiteralAdapter()
 	{
 		return null;
 	}

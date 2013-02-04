@@ -29,34 +29,42 @@ public class AnnotationsValidatorTest extends AbstractXbaseWithAnnotationsTest {
 		XAnnotation annotation = annotation("@testdata.Annotation2('foo')", false);
 		validator.assertNoErrors(annotation);
 	}
+	
 	@Test public void testTypeConformance_02() throws Exception {
 		XAnnotation annotation = annotation("@testdata.Annotation2(value = 'foo')", false);
 		validator.assertNoErrors(annotation);
 	}
+	
 	@Test public void testTypeConformance_03() throws Exception {
 		XAnnotation annotation = annotation("@testdata.Annotation2({'foo'})", false);
 		validator.assertNoErrors(annotation);
 	}
+	
 	@Test public void testTypeConformance_04() throws Exception {
 		XAnnotation annotation = annotation("@testdata.Annotation2(value = {'foo'})", false);
 		validator.assertNoErrors(annotation);
 	}
+	
 	@Test public void testTypeConformance_05() throws Exception {
 		XAnnotation annotation = annotation("@testdata.Annotation2(true)", false);
 		validator.assertError(annotation, XbasePackage.Literals.XBOOLEAN_LITERAL, IssueCodes.INCOMPATIBLE_TYPES, "expected String | String[] but was boolean");
 	}
+	
 	@Test public void testTypeConformance_06() throws Exception {
 		XAnnotation annotation = annotation("@testdata.Annotation2(value = 42)", false);
 		validator.assertError(annotation, XbasePackage.Literals.XNUMBER_LITERAL, IssueCodes.INCOMPATIBLE_TYPES, "String | String[]", "int");
 	}
+	
 	@Test public void testTypeConformance_07() throws Exception {
 		XAnnotation annotation = annotation("@testdata.Annotation2({typeof(String)})", false);
 		validator.assertError(annotation, XbasePackage.Literals.XTYPE_LITERAL, IssueCodes.INCOMPATIBLE_TYPES, "String", "Class<String>");
 	}
+	
 	@Test public void testTypeConformance_08() throws Exception {
 		XAnnotation annotation = annotation("@testdata.Annotation2(value = {true})", false);
 		validator.assertError(annotation, XbasePackage.Literals.XBOOLEAN_LITERAL, IssueCodes.INCOMPATIBLE_TYPES, "String", "boolean");
 	}
+	
 	@Test public void testTypeConformance_09() throws Exception {
 		XAnnotation annotation = annotation("@testdata.Annotation1(true)", false);
 		validator.assertError(annotation, XAnnotationsPackage.Literals.XANNOTATION, IssueCodes.ANNOTATIONS_MISSING_ATTRIBUTE_DEFINITION, "children");
@@ -78,6 +86,32 @@ public class AnnotationsValidatorTest extends AbstractXbaseWithAnnotationsTest {
 		validator.assertError(annotation, XbasePackage.Literals.XNUMBER_LITERAL, IssueCodes.INCOMPATIBLE_TYPES, "String", "int");
 	}
 	
+	@Test public void testTypeConformance_13() throws Exception {
+		XAnnotation annotation = annotation("@testdata.Annotation2(#['foo'])", false);
+		validator.assertNoErrors(annotation);
+	}
+	
+	@Test public void testTypeConformance_14() throws Exception {
+		XAnnotation annotation = annotation("@testdata.Annotation2(value = #['foo'])", false);
+		validator.assertNoErrors(annotation);
+	}
+	
+	@Test public void testTypeConformance_15() throws Exception {
+		XAnnotation annotation = annotation("@testdata.Annotation2(#[typeof(String)])", false);
+		validator.assertError(annotation, XbasePackage.Literals.XTYPE_LITERAL, IssueCodes.INCOMPATIBLE_TYPES, "String", "Class<String>");
+	}
+	
+	@Test public void testTypeConformance_16() throws Exception {
+		XAnnotation annotation = annotation("@testdata.Annotation2(value = #[true])", false);
+		validator.assertError(annotation, XbasePackage.Literals.XBOOLEAN_LITERAL, IssueCodes.INCOMPATIBLE_TYPES, "String", "boolean");
+	}
+	
+	@Test public void testTypeConformance_17() throws Exception {
+		XAnnotation annotation = annotation("@testdata.Annotation2(value = #['', true, 1, ''])", false);
+		validator.assertError(annotation, XbasePackage.Literals.XBOOLEAN_LITERAL, IssueCodes.INCOMPATIBLE_TYPES, "String", "boolean");
+		validator.assertError(annotation, XbasePackage.Literals.XNUMBER_LITERAL, IssueCodes.INCOMPATIBLE_TYPES, "String", "int");
+	}
+	
 	@Test public void testEmptyValueList_01() throws Exception {
 		XAnnotation annotation = annotation("@testdata.Annotation2(value = {})", false);
 		validator.assertNoErrors(annotation);
@@ -85,6 +119,16 @@ public class AnnotationsValidatorTest extends AbstractXbaseWithAnnotationsTest {
 	
 	@Test public void testEmptyValueList_02() throws Exception {
 		XAnnotation annotation = annotation("@testdata.Annotation2({})", false);
+		validator.assertNoErrors(annotation);
+	}
+	
+	@Test public void testEmptyValueList_03() throws Exception {
+		XAnnotation annotation = annotation("@testdata.Annotation2(value = #[])", false);
+		validator.assertNoErrors(annotation);
+	}
+	
+	@Test public void testEmptyValueList_04() throws Exception {
+		XAnnotation annotation = annotation("@testdata.Annotation2(#[])", false);
 		validator.assertNoErrors(annotation);
 	}
 	

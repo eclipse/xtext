@@ -7,6 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.compiler;
 
+import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -16,6 +17,7 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.common.types.JvmAnyTypeReference;
+import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.common.types.JvmOperation;
@@ -25,9 +27,13 @@ import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.util.ITypeArgumentContext;
 import org.eclipse.xtext.generator.trace.ILocationData;
+import org.eclipse.xtext.util.Tuples;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
+import org.eclipse.xtext.xbase.XCollectionLiteral;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XForLoopExpression;
+import org.eclipse.xtext.xbase.XListLiteral;
+import org.eclipse.xtext.xbase.XSetLiteral;
 import org.eclipse.xtext.xbase.compiler.output.ITreeAppendable;
 import org.eclipse.xtext.xbase.typesystem.IBatchTypeResolver;
 import org.eclipse.xtext.xbase.typesystem.IResolvedTypes;
@@ -36,11 +42,14 @@ import org.eclipse.xtext.xbase.typesystem.references.FunctionTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightMergedBoundTypeArgument;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.OwnedConverter;
+import org.eclipse.xtext.xbase.typesystem.references.ParameterizedTypeReference;
 import org.eclipse.xtext.xbase.typesystem.util.CommonTypeComputationServices;
 import org.eclipse.xtext.xbase.typesystem.util.DeclaratorTypeArgumentCollector;
 import org.eclipse.xtext.xbase.typesystem.util.StandardTypeParameterSubstitutor;
 
 import com.google.common.base.Predicate;
+import com.google.common.collect.ImmutableList;
+import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.inject.Inject;
@@ -61,6 +70,100 @@ public class XbaseCompiler2 extends XbaseCompiler {
 	@Inject
 	private CommonTypeComputationServices services;
 	
+	@Override
+	protected void internalToConvertedExpression(XExpression obj, ITreeAppendable appendable) {
+		if (obj instanceof XListLiteral) {
+			_toJavaExpression((XListLiteral) obj, appendable);
+		} else if (obj instanceof XSetLiteral) {
+			_toJavaExpression((XSetLiteral) obj, appendable);
+		} else {
+			super.internalToConvertedExpression(obj, appendable);
+		}
+	}
+	
+	@Override
+	protected void doInternalToJavaStatement(XExpression obj, ITreeAppendable appendable, boolean isReferenced) {
+		if (obj instanceof XListLiteral) {
+			_toJavaStatement((XListLiteral) obj, appendable, isReferenced);
+		} else if (obj instanceof XSetLiteral) {
+			_toJavaStatement((XSetLiteral) obj, appendable, isReferenced);
+		} else {
+			super.doInternalToJavaStatement(obj, appendable, isReferenced);
+		}
+	}
+
+	protected void _toJavaStatement(XListLiteral expr, ITreeAppendable b, boolean isReferenced) {
+		toCollectionBuilderJavaStatement(expr, ImmutableList.Builder.class, b, isReferenced);
+	}
+
+	protected void _toJavaStatement(XSetLiteral expr, ITreeAppendable b, boolean isReferenced) {
+		toCollectionBuilderJavaStatement(expr, ImmutableSet.Builder.class, b, isReferenced);
+	}
+
+	protected void toCollectionBuilderJavaStatement(XCollectionLiteral literal, Class<?> builderClass, ITreeAppendable b,
+			boolean isReferenced) {
+		for(XExpression element: literal.getElements()) 
+			internalToJavaStatement(element, b, true);
+		if(isReferenced)
+			declareSyntheticVariable(literal, b);
+		LightweightTypeReference literalType = batchTypeResolver.resolveTypes(literal).getActualType(literal);
+		if(literalType.isArray()) {
+			if(isReferenced) 
+				b.newLine().append(getVarName(literal, b)).append(" = ");
+			b.append("new ");
+			getTypeReferenceSerializer().serialize(literalType.toTypeReference(), literal, b);
+			b.append(" { ");
+			boolean isFirst = true;
+			for(XExpression element: literal.getElements())  {
+				if(!isFirst)
+					b.append(", ");
+				isFirst = false;
+				internalToJavaExpression(element, b);
+			}
+			b.append(" };");
+		} else {
+			LightweightTypeReference elementType = getCollectionElementType(literal);
+			String builderVar = b.declareSyntheticVariable(getCollectionLiteralBuilderKey(literal), "_builder");
+			JvmType builderRawType = getTypeReferences().findDeclaredType(builderClass, literal);
+			ParameterizedTypeReference builderType = new ParameterizedTypeReference(elementType.getOwner(), builderRawType);
+			builderType.addTypeArgument(elementType);
+			b.newLine();
+			getTypeReferenceSerializer().serialize(builderType.toTypeReference(), literal, b);
+			b.append(" ").append(builderVar).append(" = ");
+			JvmDeclaredType listType = ((JvmDeclaredType) builderType.getType()).getDeclaringType();
+			b.append(listType).append(".builder();").newLine();
+			for(XExpression element: literal.getElements())  {
+				b.append(builderVar).append(".add(");
+				internalToJavaExpression(element, b);
+				b.append(");").newLine();
+			}
+			if(isReferenced) 
+				b.append(getVarName(literal, b)).append(" = ");
+			b.append(builderVar).append(".build();");
+		}
+	}
+	
+	protected LightweightTypeReference getCollectionElementType(XCollectionLiteral literal) {
+		LightweightTypeReference type = batchTypeResolver.resolveTypes(literal).getActualType(literal);
+		if(type.isArray()) 
+			return type.getComponentType();
+		else if(type.isSubtypeOf(Collection.class) && !type.getTypeArguments().isEmpty()) 
+			return type.getTypeArguments().get(0).getInvariantBoundSubstitute();
+		return new ParameterizedTypeReference(type.getOwner(), getTypeReferences().findDeclaredType(Object.class, literal));
+	}
+
+	protected Object getCollectionLiteralBuilderKey(XCollectionLiteral literal) {
+		return Tuples.create(literal, "_builder");
+	}
+	
+	protected Object getCollectionLiteralLoopKey(XCollectionLiteral literal) {
+		return Tuples.create(literal, "_element");
+	}
+	
+	protected void _toJavaExpression(XCollectionLiteral expr, ITreeAppendable b) {
+		b.trace(expr, false).append(getVarName(expr, b));
+	}
+
 	@Override
 	protected List<XExpression> getActualArguments(XAbstractFeatureCall featureCall) {
 		return featureCall.getActualArguments();

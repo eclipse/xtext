@@ -240,6 +240,7 @@ ruleXPrimaryExpression :
 
 // Rule XLiteral
 ruleXLiteral :
+	ruleXCollectionLiteral |
 	( (
 	'['
 	) => ruleXClosure ) |
@@ -248,6 +249,30 @@ ruleXLiteral :
 	ruleXNullLiteral |
 	ruleXStringLiteral |
 	ruleXTypeLiteral
+;
+
+// Rule XCollectionLiteral
+ruleXCollectionLiteral :
+	ruleXSetLiteral |
+	ruleXListLiteral
+;
+
+// Rule XSetLiteral
+ruleXSetLiteral :
+	'#' '{' (
+		ruleXExpression (
+			',' ruleXExpression
+		)*
+	)? '}'
+;
+
+// Rule XListLiteral
+ruleXListLiteral :
+	'#' '[' (
+		ruleXExpression (
+			',' ruleXExpression
+		)*
+	)? ']'
 ;
 
 // Rule XClosure

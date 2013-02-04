@@ -81,6 +81,9 @@ public class XbaseFactoryImpl extends EFactoryImpl implements XbaseFactory
 			case XbasePackage.XNULL_LITERAL: return createXNullLiteral();
 			case XbasePackage.XNUMBER_LITERAL: return createXNumberLiteral();
 			case XbasePackage.XSTRING_LITERAL: return createXStringLiteral();
+			case XbasePackage.XCOLLECTION_LITERAL: return createXCollectionLiteral();
+			case XbasePackage.XLIST_LITERAL: return createXListLiteral();
+			case XbasePackage.XSET_LITERAL: return createXSetLiteral();
 			case XbasePackage.XCLOSURE: return createXClosure();
 			case XbasePackage.XCASTED_EXPRESSION: return createXCastedExpression();
 			case XbasePackage.XBINARY_OPERATION: return createXBinaryOperation();
@@ -230,6 +233,39 @@ public class XbaseFactoryImpl extends EFactoryImpl implements XbaseFactory
 	{
 		XStringLiteralImpl xStringLiteral = new XStringLiteralImpl();
 		return xStringLiteral;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public XCollectionLiteral createXCollectionLiteral()
+	{
+		XCollectionLiteralImpl xCollectionLiteral = new XCollectionLiteralImpl();
+		return xCollectionLiteral;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public XListLiteral createXListLiteral()
+	{
+		XListLiteralImpl xListLiteral = new XListLiteralImpl();
+		return xListLiteral;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public XSetLiteral createXSetLiteral()
+	{
+		XSetLiteralImpl xSetLiteral = new XSetLiteralImpl();
+		return xSetLiteral;
 	}
 
 	/**

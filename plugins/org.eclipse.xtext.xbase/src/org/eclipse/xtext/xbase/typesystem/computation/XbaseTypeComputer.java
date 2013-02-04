@@ -7,6 +7,9 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.typesystem.computation;
 
+import static com.google.common.collect.Lists.*;
+
+import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -31,15 +34,18 @@ import org.eclipse.xtext.xbase.XCasePart;
 import org.eclipse.xtext.xbase.XCastedExpression;
 import org.eclipse.xtext.xbase.XCatchClause;
 import org.eclipse.xtext.xbase.XClosure;
+import org.eclipse.xtext.xbase.XCollectionLiteral;
 import org.eclipse.xtext.xbase.XConstructorCall;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XFeatureCall;
 import org.eclipse.xtext.xbase.XForLoopExpression;
 import org.eclipse.xtext.xbase.XIfExpression;
 import org.eclipse.xtext.xbase.XInstanceOfExpression;
+import org.eclipse.xtext.xbase.XListLiteral;
 import org.eclipse.xtext.xbase.XNullLiteral;
 import org.eclipse.xtext.xbase.XNumberLiteral;
 import org.eclipse.xtext.xbase.XReturnExpression;
+import org.eclipse.xtext.xbase.XSetLiteral;
 import org.eclipse.xtext.xbase.XStringLiteral;
 import org.eclipse.xtext.xbase.XSwitchExpression;
 import org.eclipse.xtext.xbase.XThrowExpression;
@@ -57,6 +63,7 @@ import org.eclipse.xtext.xbase.typesystem.references.LightweightMergedBoundTypeA
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.ParameterizedTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.TypeReferenceVisitorWithResult;
+import org.eclipse.xtext.xbase.typesystem.references.UnboundTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.WildcardTypeReference;
 import org.eclipse.xtext.xbase.typesystem.util.CommonTypeComputationServices;
 import org.eclipse.xtext.xbase.typesystem.util.ConstraintAwareTypeArgumentCollector;
@@ -123,6 +130,10 @@ public class XbaseTypeComputer implements ITypeComputer {
 			_computeTypes((XTypeLiteral)expression, state);
 		} else if (expression instanceof XVariableDeclaration) {
 			_computeTypes((XVariableDeclaration)expression, state);
+		} else if (expression instanceof XListLiteral) {
+			_computeTypes((XListLiteral)expression, state);
+		} else if (expression instanceof XSetLiteral) {
+			_computeTypes((XSetLiteral)expression, state);
 		} else { 
 			throw new UnsupportedOperationException("Missing type computation for expression type: " + expression.eClass().getName() + " / " + state);
 		}
@@ -388,6 +399,54 @@ public class XbaseTypeComputer implements ITypeComputer {
 					LightweightTypeReference type = getTypeForName(String.class, state);
 					expectation.acceptActualType(type, ConformanceHint.UNCHECKED);
 				}
+			}
+		}
+	}
+	
+	protected void _computeTypes(XListLiteral object, ITypeComputationState state) {
+		JvmGenericType list = (JvmGenericType) services.getTypeReferences().findDeclaredType(List.class, object);
+		computeCollectionLiteralTypes(object, list, state);
+	}
+	
+	protected void _computeTypes(XSetLiteral object, ITypeComputationState state) {
+		JvmGenericType set = (JvmGenericType) services.getTypeReferences().findDeclaredType(Set.class, object);
+		computeCollectionLiteralTypes(object, set, state);
+	}
+	
+	protected void computeCollectionLiteralTypes(XCollectionLiteral literal, JvmGenericType collectionType, ITypeComputationState state) {
+		for(ITypeExpectation expectation: state.getExpectations()) {
+			List<LightweightTypeReference> collectionTypeCandidates = newArrayList();
+			LightweightTypeReference elementTypeExpectation = null;
+			LightweightTypeReference expectedType = expectation.getExpectedType();
+			if(expectedType != null) {
+				if(expectedType.isArray()) {
+					elementTypeExpectation = expectedType.getComponentType();
+					for(XExpression element: literal.getElements()) 
+						state.withExpectation(elementTypeExpectation).computeTypes(element);
+					expectation.acceptActualType(expectedType, ConformanceHint.UNCHECKED);
+					return; 
+				} else if(expectedType.isSubtypeOf(Collection.class) &&
+						!expectedType.getTypeArguments().isEmpty()) {
+					elementTypeExpectation = expectedType.getTypeArguments().get(0).getInvariantBoundSubstitute();
+				}
+			}
+			if(!literal.getElements().isEmpty()) {
+				for(XExpression element: literal.getElements()) {
+					ITypeComputationResult elementType = state.withExpectation(elementTypeExpectation).computeTypes(element);
+					if(!elementType.getActualExpressionType().isAny()) {
+						ParameterizedTypeReference collectionTypeCandidate = new ParameterizedTypeReference(state.getReferenceOwner(), collectionType);
+						collectionTypeCandidate.addTypeArgument(elementType.getActualExpressionType().getWrapperTypeIfPrimitive());
+						collectionTypeCandidates.add(collectionTypeCandidate);
+					}
+				}
+			}
+			if(!collectionTypeCandidates.isEmpty()) {
+				LightweightTypeReference commonListType = services.getTypeConformanceComputer().getCommonSuperType(collectionTypeCandidates);
+				expectation.acceptActualType(commonListType, ConformanceHint.UNCHECKED);
+			} else {
+				ParameterizedTypeReference unboundCollectionType = new ParameterizedTypeReference(state.getReferenceOwner(), collectionType);
+				unboundCollectionType.addTypeArgument(new UnboundTypeReference(state.getReferenceOwner(), literal, collectionType.getTypeParameters().get(0)));
+				expectation.acceptActualType(unboundCollectionType, ConformanceHint.UNCHECKED);
 			}
 		}
 	}

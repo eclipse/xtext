@@ -37,13 +37,13 @@ import org.eclipse.xtext.xbase.XTypeLiteral
 import org.eclipse.xtext.xbase.XVariableDeclaration
 import org.eclipse.xtext.xbase.XWhileExpression
 import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotation
-import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotationValueArray
 import org.eclipse.xtext.xbase.services.XbaseGrammarAccess
 import org.eclipse.xtext.xtype.XFunctionTypeRef
 
 import static org.eclipse.xtext.common.types.TypesPackage$Literals.*
 import static org.eclipse.xtext.xbase.XbasePackage$Literals.*
 import static org.eclipse.xtext.xbase.formatting.XbaseFormatterPreferenceKeys.*
+import org.eclipse.xtext.xbase.XCollectionLiteral
 
 class XbaseFormatter2 extends AbstractFormatter {
 	@Inject extension NodeModelAccess
@@ -51,15 +51,16 @@ class XbaseFormatter2 extends AbstractFormatter {
 	@Inject extension FormattingDataFactory
 	@Inject extension XbaseGrammarAccess
 
-	def protected dispatch void format(XAnnotationValueArray ann, FormattableDocument document) {
-		var node = ann.nodeForKeyword("{")
-		for (value : ann.values) {
-			document += node.append[if (value == ann.values.head) noSpace else oneSpace]
+	def protected dispatch void format(XCollectionLiteral literal, FormattableDocument document) {
+		document += literal.nodeForKeyword('#').surround[noSpace]
+		var node = literal.nodeForKeyword("[")
+		for (value : literal.elements) {
+			document += node.append[if (value == literal.elements.head) noSpace else oneSpace]
 			value.format(document)
 			node = value.nodeForEObject.immediatelyFollowingKeyword(",")
 			document += node.prepend[noSpace]
 		}
-		document += ann.nodeForKeyword("}").prepend[noSpace]
+		document += literal.nodeForKeyword("]").prepend[noSpace]
 	}
 
 	def protected dispatch void format(XAnnotation ann, FormattableDocument document) {

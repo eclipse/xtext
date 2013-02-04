@@ -44,6 +44,7 @@ import org.eclipse.xtext.xbase.XBinaryOperation;
 import org.eclipse.xtext.xbase.XBlockExpression;
 import org.eclipse.xtext.xbase.XCatchClause;
 import org.eclipse.xtext.xbase.XClosure;
+import org.eclipse.xtext.xbase.XCollectionLiteral;
 import org.eclipse.xtext.xbase.XConstructorCall;
 import org.eclipse.xtext.xbase.XDoWhileExpression;
 import org.eclipse.xtext.xbase.XExpression;
@@ -59,7 +60,6 @@ import org.eclipse.xtext.xbase.XTypeLiteral;
 import org.eclipse.xtext.xbase.XVariableDeclaration;
 import org.eclipse.xtext.xbase.XWhileExpression;
 import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotation;
-import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotationValueArray;
 import org.eclipse.xtext.xbase.formatting.FormattableDocument;
 import org.eclipse.xtext.xbase.formatting.FormattingData;
 import org.eclipse.xtext.xbase.formatting.FormattingDataFactory;
@@ -1179,6 +1179,9 @@ public class XtendFormatter extends XbaseFormatter2 {
     } else if (annotationType instanceof XClosure) {
       _format((XClosure)annotationType, format);
       return;
+    } else if (annotationType instanceof XCollectionLiteral) {
+      _format((XCollectionLiteral)annotationType, format);
+      return;
     } else if (annotationType instanceof XConstructorCall) {
       _format((XConstructorCall)annotationType, format);
       return;
@@ -1208,9 +1211,6 @@ public class XtendFormatter extends XbaseFormatter2 {
       return;
     } else if (annotationType instanceof XAnnotation) {
       _format((XAnnotation)annotationType, format);
-      return;
-    } else if (annotationType instanceof XAnnotationValueArray) {
-      _format((XAnnotationValueArray)annotationType, format);
       return;
     } else if (annotationType instanceof XtendFile) {
       _format((XtendFile)annotationType, format);

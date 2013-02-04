@@ -23,16 +23,19 @@ import org.eclipse.xtext.xbase.XCasePart;
 import org.eclipse.xtext.xbase.XCastedExpression;
 import org.eclipse.xtext.xbase.XCatchClause;
 import org.eclipse.xtext.xbase.XClosure;
+import org.eclipse.xtext.xbase.XCollectionLiteral;
 import org.eclipse.xtext.xbase.XConstructorCall;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XFeatureCall;
 import org.eclipse.xtext.xbase.XForLoopExpression;
 import org.eclipse.xtext.xbase.XIfExpression;
 import org.eclipse.xtext.xbase.XInstanceOfExpression;
+import org.eclipse.xtext.xbase.XListLiteral;
 import org.eclipse.xtext.xbase.XMemberFeatureCall;
 import org.eclipse.xtext.xbase.XNullLiteral;
 import org.eclipse.xtext.xbase.XNumberLiteral;
 import org.eclipse.xtext.xbase.XReturnExpression;
+import org.eclipse.xtext.xbase.XSetLiteral;
 import org.eclipse.xtext.xbase.XStringLiteral;
 import org.eclipse.xtext.xbase.XSwitchExpression;
 import org.eclipse.xtext.xbase.XThrowExpression;
@@ -86,6 +89,10 @@ public class SomeCustomTypeProviderWithXtend extends XbaseWithAnnotationsTypePro
       return _type((XBinaryOperation)binaryOperation, rawExpectation, rawType);
     } else if (binaryOperation instanceof XFeatureCall) {
       return _type((XFeatureCall)binaryOperation, rawExpectation, rawType);
+    } else if (binaryOperation instanceof XListLiteral) {
+      return _type((XListLiteral)binaryOperation, rawExpectation, rawType);
+    } else if (binaryOperation instanceof XSetLiteral) {
+      return _type((XSetLiteral)binaryOperation, rawExpectation, rawType);
     } else if (binaryOperation instanceof XAbstractFeatureCall) {
       return _type((XAbstractFeatureCall)binaryOperation, rawExpectation, rawType);
     } else if (binaryOperation instanceof XAbstractWhileExpression) {
@@ -157,6 +164,8 @@ public class SomeCustomTypeProviderWithXtend extends XbaseWithAnnotationsTypePro
       return _expectedType((XCastedExpression)assignment, reference, index, rawType);
     } else if (assignment instanceof XClosure) {
       return _expectedType((XClosure)assignment, reference, index, rawType);
+    } else if (assignment instanceof XCollectionLiteral) {
+      return _expectedType((XCollectionLiteral)assignment, reference, index, rawType);
     } else if (assignment instanceof XConstructorCall) {
       return _expectedType((XConstructorCall)assignment, reference, index, rawType);
     } else if (assignment instanceof XForLoopExpression) {

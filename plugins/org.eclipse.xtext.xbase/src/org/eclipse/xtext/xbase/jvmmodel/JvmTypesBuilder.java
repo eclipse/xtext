@@ -10,6 +10,7 @@ package org.eclipse.xtext.xbase.jvmmodel;
 import static com.google.common.collect.Iterables.*;
 
 import java.util.Iterator;
+import java.util.List;
 
 import org.apache.log4j.Logger;
 import org.eclipse.emf.common.notify.Adapter;
@@ -58,9 +59,9 @@ import org.eclipse.xtext.util.Pair;
 import org.eclipse.xtext.util.Strings;
 import org.eclipse.xtext.util.Tuples;
 import org.eclipse.xtext.xbase.XExpression;
+import org.eclipse.xtext.xbase.XListLiteral;
 import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotation;
 import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotationElementValuePair;
-import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotationValueArray;
 import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotationsPackage;
 import org.eclipse.xtext.xbase.compiler.CompilationStrategyAdapter;
 import org.eclipse.xtext.xbase.compiler.DocumentationAdapter;
@@ -1162,10 +1163,10 @@ public class JvmTypesBuilder {
 
 	@Nullable 
 	public JvmAnnotationValue toJvmAnnotationValue(@Nullable XExpression value) {
-		if (value instanceof XAnnotationValueArray) {
-			EList<XExpression> values = ((XAnnotationValueArray) value).getValues();
+		if (value instanceof XListLiteral) {
+			List<XExpression> elements = ((XListLiteral) value).getElements();
 			JvmAnnotationValue result = null;
-			for (XExpression expr : values) {
+			for (XExpression expr : elements) {
 				AnnotationValueTranslator translator = translator(expr);
 				if (translator == null)
 					return null;
