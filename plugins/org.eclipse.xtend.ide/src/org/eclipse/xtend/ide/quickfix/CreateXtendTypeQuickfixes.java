@@ -23,8 +23,12 @@ import org.eclipse.xtend.ide.codebuilder.AbstractAnnotationBuilder;
 import org.eclipse.xtend.ide.codebuilder.AbstractClassBuilder;
 import org.eclipse.xtend.ide.codebuilder.AbstractInterfaceBuilder;
 import org.eclipse.xtend.ide.codebuilder.CodeBuilderFactory;
+import org.eclipse.xtend.ide.wizards.NewXtendAnnotationWizard;
+import org.eclipse.xtend.ide.wizards.NewXtendAnnotationWizardPage;
 import org.eclipse.xtend.ide.wizards.NewXtendClassWizard;
 import org.eclipse.xtend.ide.wizards.NewXtendClassWizardPage;
+import org.eclipse.xtend.ide.wizards.NewXtendInterfaceWizard;
+import org.eclipse.xtend.ide.wizards.NewXtendInterfaceWizardPage;
 import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmVisibility;
@@ -59,6 +63,12 @@ public class CreateXtendTypeQuickfixes extends CreateJavaTypeQuickfixes {
 	private Provider<NewXtendClassWizard> newXtendClassWizardProvider;
 	
 	@Inject
+	private Provider<NewXtendInterfaceWizard> newXtendInterfaceWizardProvider;
+
+	@Inject
+	private Provider<NewXtendAnnotationWizard> newXtendAnnotationWizardProvider;
+
+	@Inject
 	private IXtendJvmAssociations associations;
 	
 	@Inject
@@ -88,16 +98,19 @@ public class CreateXtendTypeQuickfixes extends CreateJavaTypeQuickfixes {
 				newLocalXtendClassQuickfix(typeName, resource, issue, issueResolutionAcceptor);
 			} else if(eContainingFeature == XtendPackage.Literals.XTEND_CLASS__IMPLEMENTS) {
 				newJavaInterfaceQuickfix(typeName, resource, issue, issueResolutionAcceptor);
+				newXtendInterfaceQuickfix(typeName, resource, issue, issueResolutionAcceptor);
 				newLocalXtendInterfaceQuickfix(typeName, resource, issue, issueResolutionAcceptor);
 			} else {
 				newJavaClassQuickfix(typeName, resource, issue, issueResolutionAcceptor);
 				newJavaInterfaceQuickfix(typeName, resource, issue, issueResolutionAcceptor);
 				newXtendClassQuickfix(typeName, resource, issue, issueResolutionAcceptor);
+				newXtendInterfaceQuickfix(typeName, resource, issue, issueResolutionAcceptor);
 				newLocalXtendClassQuickfix(typeName, resource, issue, issueResolutionAcceptor);				
 				newLocalXtendInterfaceQuickfix(typeName, resource, issue, issueResolutionAcceptor);
 			}
 		} else if(unresolvedReference == XAnnotationsPackage.Literals.XANNOTATION__ANNOTATION_TYPE) {
 			newJavaAnnotationQuickfix(typeName, resource, issue, issueResolutionAcceptor);
+			newXtendAnnotationQuickfix(typeName, resource, issue, issueResolutionAcceptor);
 			newLocalXtendAnnotationQuickfix(typeName, resource, issue, issueResolutionAcceptor);
 		}
 	}
@@ -170,6 +183,44 @@ public class CreateXtendTypeQuickfixes extends CreateJavaTypeQuickfixes {
 								NewElementWizard newXtendClassWizard = newXtendClassWizardProvider.get();
 								WizardDialog dialog = createWizardDialog(newXtendClassWizard);
 								NewXtendClassWizardPage page = (NewXtendClassWizardPage) newXtendClassWizard.getStartingPage();
+								configureWizardPage(page, resource.getURI(), typeName);
+								dialog.open();
+							}
+						});
+					}
+				});
+	}
+
+	protected void newXtendInterfaceQuickfix(final String typeName, final XtextResource resource, Issue issue,
+			IssueResolutionAcceptor issueResolutionAcceptor) {
+		issueResolutionAcceptor.accept(issue, "Create Xtend interface '" + typeName + "'",
+				"Opens the new Xtend interface wizard to create the type '" + typeName + "'", "xtend_file.png",
+				new IModification() {
+					public void apply(@Nullable IModificationContext context) throws Exception {
+						runAsyncInDisplayThread(new Runnable() {
+							public void run() {
+								NewElementWizard newXtendInterfaceWizard = newXtendInterfaceWizardProvider.get();
+								WizardDialog dialog = createWizardDialog(newXtendInterfaceWizard);
+								NewXtendInterfaceWizardPage page = (NewXtendInterfaceWizardPage) newXtendInterfaceWizard.getStartingPage();
+								configureWizardPage(page, resource.getURI(), typeName);
+								dialog.open();
+							}
+						});
+					}
+				});
+	}
+
+	protected void newXtendAnnotationQuickfix(final String typeName, final XtextResource resource, Issue issue,
+			IssueResolutionAcceptor issueResolutionAcceptor) {
+		issueResolutionAcceptor.accept(issue, "Create Xtend annotation '" + typeName + "'",
+				"Opens the new Xtend annotation wizard to create the type '" + typeName + "'", "xtend_file.png",
+				new IModification() {
+					public void apply(@Nullable IModificationContext context) throws Exception {
+						runAsyncInDisplayThread(new Runnable() {
+							public void run() {
+								NewElementWizard newXtendAnnotationWizard = newXtendAnnotationWizardProvider.get();
+								WizardDialog dialog = createWizardDialog(newXtendAnnotationWizard);
+								NewXtendAnnotationWizardPage page = (NewXtendAnnotationWizardPage) newXtendAnnotationWizard.getStartingPage();
 								configureWizardPage(page, resource.getURI(), typeName);
 								dialog.open();
 							}
