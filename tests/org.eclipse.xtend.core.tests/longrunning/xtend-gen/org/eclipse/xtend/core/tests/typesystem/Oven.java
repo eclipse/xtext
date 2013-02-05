@@ -80,6 +80,12 @@ public class Oven extends Assert {
                 XExpression _implicitReceiver_1 = _xAbstractFeatureCall.getImplicitReceiver();
                 this.assertExpressionTypeIsResolved(_implicitReceiver_1, resolvedTypes);
               }
+              XExpression _implicitFirstArgument = _xAbstractFeatureCall.getImplicitFirstArgument();
+              boolean _notEquals_2 = ObjectExtensions.operator_notEquals(_implicitFirstArgument, null);
+              if (_notEquals_2) {
+                XExpression _implicitFirstArgument_1 = _xAbstractFeatureCall.getImplicitFirstArgument();
+                this.assertExpressionTypeIsResolved(_implicitFirstArgument_1, resolvedTypes);
+              }
             }
           }
           if (!_matched) {

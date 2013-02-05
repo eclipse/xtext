@@ -25,7 +25,7 @@ import org.junit.runner.RunWith;
 @SuppressWarnings("all")
 public abstract class AbstractXtendCompilerSmokeTest extends AbstractXtendCompilerTest {
   @Inject
-  private Oven chimney;
+  private Oven _oven;
   
   public void assertCompilesTo(final CharSequence input, final CharSequence expected, final GeneratorConfig config) {
     try {
@@ -39,7 +39,7 @@ public abstract class AbstractXtendCompilerSmokeTest extends AbstractXtendCompil
   
   protected void processFile(final String input) {
     try {
-      this.chimney.fireproof(input);
+      this._oven.fireproof(input);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }

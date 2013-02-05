@@ -20,8 +20,12 @@ import org.eclipse.xtext.diagnostics.Severity;
 import org.eclipse.xtext.util.IAcceptor;
 import org.eclipse.xtext.validation.EObjectDiagnosticImpl;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
+import org.eclipse.xtext.xbase.XExpression;
+import org.eclipse.xtext.xbase.XMemberFeatureCall;
 import org.eclipse.xtext.xbase.XVariableDeclaration;
 import org.eclipse.xtext.xbase.XbasePackage;
+import org.eclipse.xtext.xbase.typesystem.conformance.ConformanceHint;
+import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 import org.eclipse.xtext.xbase.validation.IssueCodes;
 
 /**
@@ -33,6 +37,25 @@ public class ImplicitReceiver extends AbstractImplicitFeature {
 	public ImplicitReceiver(XAbstractFeatureCall featureCall, XAbstractFeatureCall implicit,
 			ExpressionTypeComputationState state) {
 		super(featureCall, implicit, state);
+	}
+	
+	@Override
+	public void applyToComputationState() {
+		super.applyToComputationState();
+		XAbstractFeatureCall featureCall = getFeatureCall();
+		if (featureCall instanceof XMemberFeatureCall) {
+			XExpression target = ((XMemberFeatureCall) featureCall).getMemberCallTarget();
+			if (target == null || !(target instanceof XAbstractFeatureCall))
+				throw new IllegalStateException();
+			XAbstractFeatureCall targetFeatureCall = (XAbstractFeatureCall) target;
+			ResolvedTypes resolvedTypes = getState().getResolvedTypes();
+			LightweightTypeReference targetType = resolvedTypes.getActualType(targetFeatureCall.getFeature());
+			if (targetType == null) {
+				throw new IllegalStateException();
+			}
+			TypeExpectation expectation = new TypeExpectation(null, getState(), false);
+			resolvedTypes.acceptType(targetFeatureCall, expectation, targetType.copyInto(resolvedTypes.getReferenceOwner()), false, ConformanceHint.UNCHECKED);
+		}
 	}
 
 	public void applyToModel() {

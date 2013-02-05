@@ -50,7 +50,7 @@ import org.junit.runner.RunWith
 @InjectWith(typeof(NewTypeSystemRuntimeInjectorProvider))
 abstract class AbstractXtendCompilerSmokeTest extends AbstractXtendCompilerTest {
 	
-	@Inject Oven chimney
+	@Inject extension Oven
 	
 	override assertCompilesTo(CharSequence input, CharSequence expected, GeneratorConfig config) {
 		assertNonSmoking(input)
@@ -59,7 +59,7 @@ abstract class AbstractXtendCompilerSmokeTest extends AbstractXtendCompilerTest 
 	protected def void assertNonSmoking(CharSequence input) throws Exception
 
 	protected def void processFile(String input) {
-		chimney.fireproof(input)
+		input.fireproof
 	}
 	
 }
@@ -186,11 +186,15 @@ class Oven extends Assert {
 							if (content.implicitReceiver != null) {
 								assertExpressionTypeIsResolved(content.implicitReceiver, resolvedTypes)
 							}
+							if (content.implicitFirstArgument != null) {
+								assertExpressionTypeIsResolved(content.implicitFirstArgument, resolvedTypes)
+							}
 						}
 						XClosure: {
 							assertExpressionTypeIsResolved(content, resolvedTypes)
-							if (content.implicitParameter != null)
+							if (content.implicitParameter != null) {
 								assertIdentifiableTypeIsResolved(content.implicitParameter, resolvedTypes)
+							}
 						}
 						XExpression: {
 							assertExpressionTypeIsResolved(content, resolvedTypes)

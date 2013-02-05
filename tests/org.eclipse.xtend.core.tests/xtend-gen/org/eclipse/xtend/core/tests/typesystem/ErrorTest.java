@@ -614,6 +614,46 @@ public class ErrorTest extends AbstractXtendTestCase {
     Assert.assertNotNull(_actualType);
   }
   
+  @Test
+  public void testErrorModel_20() throws Exception {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("package x");
+    _builder.newLine();
+    _builder.append("class Y {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("@com.google.inject.Inject extension test.GenericExtensionMethods<String,Integer> x");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def foo(String arg) {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("arg.method");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    final XtendFile file = this.processWithoutException(_builder);
+    EList<XtendTypeDeclaration> _xtendTypes = file.getXtendTypes();
+    final XtendTypeDeclaration y = IterableExtensions.<XtendTypeDeclaration>head(_xtendTypes);
+    EList<XtendMember> _members = y.getMembers();
+    XtendMember _last = IterableExtensions.<XtendMember>last(_members);
+    final XtendFunction function = ((XtendFunction) _last);
+    XExpression _expression = function.getExpression();
+    final XBlockExpression body = ((XBlockExpression) _expression);
+    EList<XExpression> _expressions = body.getExpressions();
+    XExpression _head = IterableExtensions.<XExpression>head(_expressions);
+    final XMemberFeatureCall featureCall = ((XMemberFeatureCall) _head);
+    XExpression _implicitReceiver = featureCall.getImplicitReceiver();
+    final XMemberFeatureCall implicitReceiver = ((XMemberFeatureCall) _implicitReceiver);
+    final XExpression this_ = implicitReceiver.getMemberCallTarget();
+    final IResolvedTypes resolvedTypes = this.typeResolver.resolveTypes(this_);
+    LightweightTypeReference _actualType = resolvedTypes.getActualType(this_);
+    Assert.assertNotNull(_actualType);
+  }
+  
   public XtendFile processWithoutException(final CharSequence input) throws Exception {
     XtextResourceSet _resourceSet = this.getResourceSet();
     URI _createURI = URI.createURI("abcdefg.xtend");
