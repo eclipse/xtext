@@ -441,19 +441,20 @@ public class XtendJavaValidator2 extends XbaseWithAnnotationsJavaValidator2 {
 		if (inferredType instanceof JvmGenericType) {
 			ResolvedOperations resolvedOperations = overrideHelper.getResolvedOperations(inferredType);
 			
-			doCheckDuplicateExecutables((JvmGenericType) inferredType, resolvedOperations);
-			doCheckOverriddenMethods(xtendType, (JvmGenericType) inferredType, resolvedOperations);
-			doCheckFunctionOverrides(resolvedOperations);
+			Set<EObject> flaggedOperations = Sets.newHashSet();
+			doCheckDuplicateExecutables((JvmGenericType) inferredType, resolvedOperations, flaggedOperations);
+			doCheckOverriddenMethods(xtendType, (JvmGenericType) inferredType, resolvedOperations, flaggedOperations);
+			doCheckFunctionOverrides(resolvedOperations, flaggedOperations);
 		}
 	}
 	
-	protected void doCheckDuplicateExecutables(JvmGenericType inferredType,	final ResolvedOperations resolvedOperations) {
+	protected void doCheckDuplicateExecutables(JvmGenericType inferredType,	final ResolvedOperations resolvedOperations, Set<EObject> flaggedOperations) {
 		List<IResolvedOperation> declaredOperations = resolvedOperations.getDeclaredOperations();
 		doCheckDuplicateExecutables(inferredType, declaredOperations, new Function<String, List<IResolvedOperation>>() {
 			public List<IResolvedOperation> apply(String erasedSignature) {
 				return resolvedOperations.getDeclaredOperations(erasedSignature);
 			}
-		});
+		}, flaggedOperations);
 		final List<IResolvedConstructor> declaredConstructors = resolvedOperations.getDeclaredConstructors();
 		doCheckDuplicateExecutables(inferredType, declaredConstructors, new Function<String, List<IResolvedConstructor>>() {
 			public List<IResolvedConstructor> apply(String erasedSignature) {
@@ -471,11 +472,11 @@ public class XtendJavaValidator2 extends XbaseWithAnnotationsJavaValidator2 {
 				}
 				return result;
 			}
-		});
+		}, flaggedOperations);
 	}
 
 	protected <Executable extends IResolvedExecutable> void doCheckDuplicateExecutables(JvmGenericType inferredType,
-			List<Executable> declaredOperations, Function<String, List<Executable>> bySignature) {
+			List<Executable> declaredOperations, Function<String, List<Executable>> bySignature, Set<EObject> flaggedOperations) {
 		Set<Executable> processed = Sets.newHashSet();
 		for(Executable declaredExecutable: declaredOperations) {
 			if (!processed.contains(declaredExecutable)) {
@@ -490,16 +491,18 @@ public class XtendJavaValidator2 extends XbaseWithAnnotationsJavaValidator2 {
 						for(Executable operationWithSameSignature: sameSignature) {
 							JvmExecutable executable = operationWithSameSignature.getDeclaration();
 							EObject otherSource = associations.getPrimarySourceElement(executable);
-							if (sameSignature.size() > 1) {
-								error("Duplicate " + typeLabel(executable) + " " + operationWithSameSignature.getSimpleSignature()
-										+ " in type " + inferredType.getSimpleName(), otherSource,
-										nameFeature(otherSource), DUPLICATE_METHOD);
-							} else {
-								error("The " + typeLabel(executable) + " " + operationWithSameSignature.getSimpleSignature()
-										+ " has the same erasure "
-										+ operationWithSameSignature.getResolvedErasureSignature()
-										+ " as another " + typeLabel(executable) + " in type " + inferredType.getSimpleName(), otherSource,
-										nameFeature(otherSource), DUPLICATE_METHOD);
+							if (flaggedOperations.add(otherSource)) {
+								if (sameSignature.size() > 1) {
+									error("Duplicate " + typeLabel(executable) + " " + operationWithSameSignature.getSimpleSignature()
+											+ " in type " + inferredType.getSimpleName(), otherSource,
+											nameFeature(otherSource), DUPLICATE_METHOD);
+								} else {
+									error("The " + typeLabel(executable) + " " + operationWithSameSignature.getSimpleSignature()
+											+ " has the same erasure "
+											+ operationWithSameSignature.getResolvedErasureSignature()
+											+ " as another " + typeLabel(executable) + " in type " + inferredType.getSimpleName(), otherSource,
+											nameFeature(otherSource), DUPLICATE_METHOD);
+								}
 							}
 						}
 					}
@@ -530,7 +533,7 @@ public class XtendJavaValidator2 extends XbaseWithAnnotationsJavaValidator2 {
 	
 	
 	protected void doCheckOverriddenMethods(XtendTypeDeclaration xtendType, JvmGenericType inferredType,
-			ResolvedOperations resolvedOperations) {
+			ResolvedOperations resolvedOperations, Set<EObject> flaggedOperations) {
 		List<IResolvedOperation> operationsMissingImplementation = null;
 		boolean doCheckAbstract = !inferredType.isAbstract();
 		if (doCheckAbstract) {
@@ -548,16 +551,18 @@ public class XtendJavaValidator2 extends XbaseWithAnnotationsJavaValidator2 {
 					for(IResolvedOperation localOperation: declaredOperationsWithSameErasure) {
 						if (!localOperation.isOverridingOrImplementing(operation.getDeclaration()).isOverridingOrImplementing()) {
 							XtendFunction source = findXtendFunction(localOperation);
-							error("Name clash: The method "
-									+ localOperation.getSimpleSignature() + " of type "
-									+ inferredType.getSimpleName()
-									+ " has the same erasure as "
-									+
-									// use source with other operations parameters to avoid confusion
-									// due to name transformations in JVM model inference
-									operation.getSimpleSignature() + " of type "
-									+ operation.getDeclaration().getDeclaringType().getSimpleName() + " but does not override it.",
-									source, XTEND_FUNCTION__NAME, DUPLICATE_METHOD);
+							if (flaggedOperations.add(source)) {
+								error("Name clash: The method "
+										+ localOperation.getSimpleSignature() + " of type "
+										+ inferredType.getSimpleName()
+										+ " has the same erasure as "
+										+
+										// use source with other operations parameters to avoid confusion
+										// due to name transformations in JVM model inference
+										operation.getSimpleSignature() + " of type "
+										+ operation.getDeclaration().getDeclaringType().getSimpleName() + " but does not override it.",
+										source, XTEND_FUNCTION__NAME, DUPLICATE_METHOD);
+							}
 						}
 					}
 				}
@@ -591,10 +596,10 @@ public class XtendJavaValidator2 extends XbaseWithAnnotationsJavaValidator2 {
 						toArray(uris, String.class));
 	}
 	
-	protected void doCheckFunctionOverrides(ResolvedOperations resolvedOperations) {
+	protected void doCheckFunctionOverrides(ResolvedOperations resolvedOperations, Set<EObject> flaggedOperations) {
 		for(IResolvedOperation operation: resolvedOperations.getDeclaredOperations()) {
 			XtendFunction function = findXtendFunction(operation);
-			if (function != null) {
+			if (function != null && flaggedOperations.add(function)) {
 				List<IResolvedOperation> allInherited = operation.getOverriddenAndImplementedMethods();
 				if (allInherited.isEmpty()) {
 					if (function.isOverride()) {
@@ -633,9 +638,8 @@ public class XtendJavaValidator2 extends XbaseWithAnnotationsJavaValidator2 {
 							XTEND_FUNCTION__NAME, MISSING_OVERRIDE);
 			}
 		}
-		
 	}
-
+	
 	protected void createExceptionMismatchError(IResolvedOperation operation, XtendFunction function,
 			List<IResolvedOperation> exceptionMismatch) {
 		List<LightweightTypeReference> exceptions = operation.getIllegallyDeclaredExceptions();
