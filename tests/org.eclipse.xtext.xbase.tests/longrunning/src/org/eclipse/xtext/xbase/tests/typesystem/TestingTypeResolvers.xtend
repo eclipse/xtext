@@ -1,18 +1,23 @@
 /*******************************************************************************
- * Copyright (c) 2012 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2013 itemis AG (http://www.itemis.eu) and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- */
+ *******************************************************************************/
 package org.eclipse.xtext.xbase.tests.typesystem
 
 import com.google.inject.Inject
 import com.google.inject.Provider
+import com.google.inject.Singleton
+import java.util.List
 import org.eclipse.xtext.common.types.JvmIdentifiableElement
 import org.eclipse.xtext.util.internal.Stopwatches
 import org.eclipse.xtext.xbase.XAbstractFeatureCall
 import org.eclipse.xtext.xbase.XExpression
+import org.eclipse.xtext.xbase.typesystem.computation.ILinkingCandidate
+import org.eclipse.xtext.xbase.typesystem.computation.XbaseTypeComputer
+import org.eclipse.xtext.xbase.typesystem.internal.AbstractPendingLinkingCandidate
 import org.eclipse.xtext.xbase.typesystem.internal.DefaultBatchTypeResolver
 import org.eclipse.xtext.xbase.typesystem.internal.DefaultReentrantTypeResolver
 import org.eclipse.xtext.xbase.typesystem.internal.ExpressionAwareStackedResolvedTypes
@@ -20,6 +25,103 @@ import org.eclipse.xtext.xbase.typesystem.internal.ReassigningStackedResolvedTyp
 import org.eclipse.xtext.xbase.typesystem.internal.ResolvedTypes
 import org.eclipse.xtext.xbase.typesystem.internal.RootResolvedTypes
 import org.eclipse.xtext.xbase.typesystem.internal.StackedResolvedTypes
+
+/**
+ * @author Sebastian Zarnekow
+ */
+class InvariantCheckingBatchTypeResolverTest extends AbstractBatchTypeResolverTest {
+	
+	@Inject
+	InvariantCheckingBatchTypeResolver typeResolver;
+	
+	override getTypeResolver() {
+		typeResolver
+	}
+	
+}
+
+/**
+ * @author Sebastian Zarnekow
+ */
+class InvariantCheckingBatchTypeResolver extends DefaultBatchTypeResolver {
+
+	@Inject
+	Provider<ValidatingReentrantTypeResolver> resolverProvider
+
+	override protected createResolver() {
+		resolverProvider.get
+	}
+
+}
+
+/**
+ * @author Sebastian Zarnekow
+ */
+class EagerBatchTypeResolver extends DefaultBatchTypeResolver {
+
+	@Inject
+	Provider<EagerReentrantTypeResolver> resolverProvider
+
+	override protected createResolver() {
+		resolverProvider.get
+	}
+			
+}
+
+/**
+ * @author Sebastian Zarnekow
+ */
+class InvariantCheckingEagerBatchTypeResolver extends DefaultBatchTypeResolver {
+
+	@Inject
+	Provider<EagerReentrantTypeResolver> resolverProvider
+
+	override protected createResolver() {
+		resolverProvider.get
+	}
+			
+}
+
+/**
+ * @author Sebastian Zarnekow
+ */
+class EagerReentrantTypeResolver extends DefaultReentrantTypeResolver {
+	
+	@Inject
+	EagerArgumentTypeComputer typeComputer
+	
+	override protected getTypeComputer() {
+		typeComputer
+	}
+	
+}
+
+/**
+ * @author Sebastian Zarnekow
+ */
+class InvariantCheckingEagerReentrantTypeResolver extends EagerReentrantTypeResolver {
+	
+	override protected createResolvedTypes() {
+		return new ValidatingRootResolvedTypes(this)
+	}
+	
+}
+
+/**
+ * @author Sebastian Zarnekow
+ */
+@Singleton
+class EagerArgumentTypeComputer extends XbaseTypeComputer {
+	
+	override protected ILinkingCandidate getBestCandidate(List<? extends ILinkingCandidate> candidates) {
+		candidates.forEach[
+			if (it instanceof AbstractPendingLinkingCandidate)
+				(it as AbstractPendingLinkingCandidate).computeArgumentTypes()
+		]
+		super.getBestCandidate(candidates)
+	}
+	
+}
 
 /**
  * @author Sebastian Zarnekow
