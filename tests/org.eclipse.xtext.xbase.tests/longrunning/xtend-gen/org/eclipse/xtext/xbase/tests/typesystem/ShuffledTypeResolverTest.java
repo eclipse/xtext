@@ -11,7 +11,7 @@ import com.google.inject.Inject;
 import org.eclipse.xtext.junit4.InjectWith;
 import org.eclipse.xtext.junit4.XtextRunner;
 import org.eclipse.xtext.xbase.tests.typesystem.AbstractBatchTypeResolverTest;
-import org.eclipse.xtext.xbase.tests.typesystem.XbaseShufflingNewTypeSystemInjectorProvider;
+import org.eclipse.xtext.xbase.tests.typesystem.XbaseShufflingInjectorProvider;
 import org.eclipse.xtext.xbase.typesystem.IBatchTypeResolver;
 import org.junit.runner.RunWith;
 
@@ -21,7 +21,7 @@ import org.junit.runner.RunWith;
  * @author Sebastian Zarnekow
  */
 @RunWith(value = XtextRunner.class)
-@InjectWith(value = XbaseShufflingNewTypeSystemInjectorProvider.class)
+@InjectWith(value = XbaseShufflingInjectorProvider.class)
 @SuppressWarnings("all")
 public class ShuffledTypeResolverTest extends AbstractBatchTypeResolverTest {
   @Inject

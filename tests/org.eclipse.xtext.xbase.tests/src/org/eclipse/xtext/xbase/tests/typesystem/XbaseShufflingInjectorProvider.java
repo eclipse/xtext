@@ -29,14 +29,14 @@ import com.google.inject.Injector;
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public class XbaseShufflingNewTypeSystemInjectorProvider extends XbaseInjectorProvider {
+public class XbaseShufflingInjectorProvider extends XbaseInjectorProvider {
 	
 	@Override
 	protected Injector internalCreateInjector() {
-		return new XbaseShufflingNewTypeSystemTestStandaloneSetup().createInjectorAndDoEMFRegistration();
+		return new XbaseShufflingTestStandaloneSetup().createInjectorAndDoEMFRegistration();
 	}
 
-	public static class XbaseShufflingNewTypeSystemTestStandaloneSetup extends XbaseStandaloneSetup {
+	public static class XbaseShufflingTestStandaloneSetup extends XbaseStandaloneSetup {
 		@Override
 		public Injector createInjector() {
 			return Guice.createInjector(new XbaseTestRuntimeModule() {

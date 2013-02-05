@@ -33,7 +33,7 @@ class RecomputingTypeResolverTest extends AbstractBatchTypeResolverTest {
  * @author Sebastian Zarnekow
  */
 @RunWith(typeof(XtextRunner))
-@InjectWith(typeof(XbaseShufflingNewTypeSystemInjectorProvider))
+@InjectWith(typeof(XbaseShufflingInjectorProvider))
 class ShuffledTypeResolverTest extends AbstractBatchTypeResolverTest {
 	
 	@Inject
