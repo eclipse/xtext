@@ -205,7 +205,7 @@ public abstract class AbstractXbaseEvaluationTest extends Assert {
 		assertEvaluatesTo("foo","[it].apply('foo')");
 	}
 	
-	@Ignore("To be implemented")
+	@Ignore("To be implemented later")
 	@Test public void testImplicitOneArgClosure_01() throws Exception {
 		assertEvaluatesTo(3,"[length].apply('foo')");
 	}
@@ -569,7 +569,6 @@ public abstract class AbstractXbaseEvaluationTest extends Assert {
 		assertEvaluatesTo("bar","'bar' ?: 'foo'");
 	}
 	
-	@Ignore
 	@Test public void testElvisOperator_02() throws Exception {
 		assertEvaluatesTo(null,"null ?: null");
 	}
@@ -1676,6 +1675,20 @@ public abstract class AbstractXbaseEvaluationTest extends Assert {
 		assertEvaluatesTo(42, "switch 'foo' { case 'bar': return 1 default: 42 }");
 	}
 	
+	@Test public void testSwitchExpression_24() throws Exception {
+		assertEvaluatesTo(Character.valueOf('b'), 
+				"{\n" + 
+				"    val Comparable<?> c = 'abc'\n" + 
+				"    switch c {\n" + 
+				"        CharSequence: switch(c) {\n" + 
+				"             java.io.Serializable: {\n" + 
+				"                 c.charAt(1)\n" + 
+				"             }\n" + 
+				"         }\n" + 
+				"    }\n" + 
+				"}");
+	}
+	
 	@Test public void testCastedExpression_01() throws Exception {
 		assertEvaluatesTo("literal", "'literal' as String");
 	}
@@ -1890,6 +1903,21 @@ public abstract class AbstractXbaseEvaluationTest extends Assert {
 	@Test public void testClosure_07_01() throws Exception {
 		assertEvaluatesTo("literal", 
 				"new testdata.ClosureClient().useProvider(|'literal')");
+	}
+	
+	@Test public void testClosure_07_02() throws Exception {
+		assertEvaluatesWithException(NullPointerException.class, 
+				"new testdata.ClosureClient().useProvider(null as =>String[])");
+	}
+	
+	@Test public void testClosure_07_03() throws Exception {
+		assertEvaluatesWithException(NullPointerException.class, 
+				"new testdata.ClosureClient().useSupplier(null as =>Iterable<? extends String[]>[])");
+	}
+	
+	@Test public void testClosure_07_04() throws Exception {
+		assertEvaluatesWithException(NullPointerException.class, 
+				"new testdata.ClosureClient().invoke0(null as =>String[])");
 	}
 	
 	@Test public void testClosure_08() throws Exception {

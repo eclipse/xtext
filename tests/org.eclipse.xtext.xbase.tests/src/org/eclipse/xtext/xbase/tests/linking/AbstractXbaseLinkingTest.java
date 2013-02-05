@@ -643,10 +643,11 @@ public abstract class AbstractXbaseLinkingTest extends AbstractXbaseTestCase {
 		assertTrue(toString.getFeature().eIsProxy());
 	}
 	
+	@Ignore("isNullOrEmpty is ambiguous - should be flagged as such")
 	@Test public void testMemberCallOnNull_02() throws Exception {
 		XMemberFeatureCall nullOrEmpty = (XMemberFeatureCall) expression("null.isNullOrEmpty");
 		JvmIdentifiableElement feature = nullOrEmpty.getFeature();
-		assertTrue(feature.toString(), feature.eIsProxy());
+		assertFalse(feature.toString(), feature.eIsProxy());
 	}
 	
 	@Test public void testMemberCallOnNull_03() throws Exception {
@@ -670,10 +671,11 @@ public abstract class AbstractXbaseLinkingTest extends AbstractXbaseTestCase {
 		assertTrue(toString.getFeature().eIsProxy());
 	}
 	
+	@Ignore("isNullOrEmpty is ambiguous - should be flagged as such")
 	@Test public void testMemberCallOnNull_07() throws Exception {
 		XBlockExpression block = (XBlockExpression) expression("{ var x = null x.isNullOrEmpty }");
 		XMemberFeatureCall nullOrEmpty = (XMemberFeatureCall) block.getExpressions().get(1);
-		assertTrue(nullOrEmpty.getFeature().toString(), nullOrEmpty.getFeature().eIsProxy());
+		assertFalse(nullOrEmpty.getFeature().toString(), nullOrEmpty.getFeature().eIsProxy());
 	}
 	
 	@Test public void testMemberCallOnNull_08() throws Exception {
@@ -700,10 +702,11 @@ public abstract class AbstractXbaseLinkingTest extends AbstractXbaseTestCase {
 		assertTrue(toString.getFeature().eIsProxy());
 	}
 	
+	@Ignore("isNullOrEmpty is ambiguous - should be flagged as such")
 	@Test public void testMemberCallOnNull_12() throws Exception {
 		XBlockExpression block = (XBlockExpression) expression("{ var this = null isNullOrEmpty }");
 		XFeatureCall nullOrEmpty = (XFeatureCall) block.getExpressions().get(1);
-		assertTrue(nullOrEmpty.getFeature().toString(), nullOrEmpty.getFeature().eIsProxy());
+		assertFalse(nullOrEmpty.getFeature().toString(), nullOrEmpty.getFeature().eIsProxy());
 	}
 	
 	@Test public void testMemberCallOnMultiType_01() throws Exception {

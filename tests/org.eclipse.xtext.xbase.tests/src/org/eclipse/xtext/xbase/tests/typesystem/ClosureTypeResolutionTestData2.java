@@ -19,6 +19,7 @@ import org.eclipse.xtext.xbase.tests.typesystem.TypeResolutionTestData.ListFunct
  * @author Sebastian Zarnekow - Initial contribution and API
  * @TODO move to TypeResolutionStateTest
  */
+@SuppressWarnings("unused")
 public class ClosureTypeResolutionTestData2<In> {
 
 	public <Out> List<Out> method_1_1_a(Iterable<In> it, ListFunction1<? super In, ? extends Out> fun) { return null; }

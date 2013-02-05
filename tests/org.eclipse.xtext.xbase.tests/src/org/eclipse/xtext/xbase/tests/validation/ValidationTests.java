@@ -196,9 +196,16 @@ public class ValidationTests extends AbstractXbaseTestCase {
 		helper.assertNoErrors(expr);
 	}
 	
-	@Test public void testLocalVarWithArguments_01() throws Exception {
-		XExpression expr = expression("{ val x = 'foo' x(42) }");
-		helper.assertError(expr, XFEATURE_CALL, LOCAL_VAR_ACCESS_WITH_PARENTHESES, "local", "variable");
+	@Test
+	public void testLocalVarWithArguments_01() throws Exception {
+		XExpression expr = expression("{ val x = 'foo' x(42, 17bd) }");
+		helper.assertError(expr, XFEATURE_CALL, UNRESOLVABLE_PROXY, "method", "x(int, BigDecimal)");
+	}
+	
+	@Test 
+	public void testLocalVarWithArguments_02() throws Exception {
+		XExpression expr = expression("{ val x = 'foo' x() }");
+		helper.assertError(expr, XFEATURE_CALL, UNRESOLVABLE_PROXY, "method", "x()");
 	}
 	
 	@Test public void testLocalVarOfTypeVoid_01() throws Exception {
@@ -252,7 +259,6 @@ public class ValidationTests extends AbstractXbaseTestCase {
 	}
 	
 	@Test
-	@Ignore("Fails with old implementation")
 	public void testVariableShadowing_08() throws Exception {
 		XExpression expression = expression("[ int x, String x | x.substring(1) ]");
 		helper.assertError(expression, TypesPackage.Literals.JVM_FORMAL_PARAMETER, VARIABLE_NAME_SHADOWING, "x");
@@ -260,7 +266,6 @@ public class ValidationTests extends AbstractXbaseTestCase {
 	}
 	
 	@Test 
-	@Ignore("Fails with old implementation")
 	public void testVariableShadowing_09() throws Exception {
 		XExpression expression = expression("[ String x, int x | x.substring(1) ]");
 		helper.assertError(expression, TypesPackage.Literals.JVM_FORMAL_PARAMETER, VARIABLE_NAME_SHADOWING, "x");
@@ -311,14 +316,18 @@ public class ValidationTests extends AbstractXbaseTestCase {
 		helper.assertError(expression, XWHILE_EXPRESSION, INCOMPATIBLE_TYPES);
 	}
 	
-	@Test public void testVoidInReturnExpression_02() throws Exception {
+	@Test
+	public void testVoidInReturnExpression_02() throws Exception {
 		XExpression expression = expression("return if (true) while(false) ('foo'+'bar').length");
-		helper.assertError(expression, XIF_EXPRESSION, INCOMPATIBLE_TYPES);
+		helper.assertError(expression, XWHILE_EXPRESSION, INCOMPATIBLE_TYPES);
+		helper.assertNoIssues(expression, XIF_EXPRESSION);
 	}
 	
 	@Test public void testVoidInReturnExpression_03() throws Exception {
 		XExpression expression = expression("return if (true) while(false) ('foo'+'bar').length else 'zonk'");
-		helper.assertNoErrors(expression);
+		helper.assertError(expression, XWHILE_EXPRESSION, INCOMPATIBLE_TYPES);
+		helper.assertNoIssues(expression, XIF_EXPRESSION);
+		helper.assertNoIssues(expression, XSTRING_LITERAL);
 	}
 	
 	@Test public void testVoidInReturnExpression_04() throws Exception {
@@ -328,12 +337,15 @@ public class ValidationTests extends AbstractXbaseTestCase {
 	
 	@Test public void testVoidInReturnExpression_05() throws Exception {
 		XExpression expression = expression("return if (true) while(false) ('foo'+'bar').length else null");
-		helper.assertNoErrors(expression);
+		helper.assertError(expression, XWHILE_EXPRESSION, INCOMPATIBLE_TYPES);
+		helper.assertNoIssues(expression, XIF_EXPRESSION);
+		helper.assertNoIssues(expression, XNULL_LITERAL);
 	}
 	
-	@Test public void testReturnExpressionInClosure_01() throws Exception {
+	@Test
+	public void testReturnExpressionInClosure_01() throws Exception {
 		XExpression expression = expression("{val (String)=>String func = [x | return true] func.apply('foo')}");
-		helper.assertError(expression, XBOOLEAN_LITERAL, INCOMPATIBLE_TYPES);
+		helper.assertError(expression, XCLOSURE, INCOMPATIBLE_TYPES, "(String)=>String", "(String)=>boolean");
 	}
 	
 	@Test public void testReturnExpressionInClosure_02() throws Exception {
@@ -366,11 +378,18 @@ public class ValidationTests extends AbstractXbaseTestCase {
 		helper.assertNoErrors(expression);
 	}
 	
+	@Test
+	public void testReturnExpressionInClosure_08() throws Exception {
+		XExpression expression = expression("{val (String)=>String func = [x | if (x == null) return x true] func.apply('foo')}");
+		helper.assertError(expression, XCLOSURE, INCOMPATIBLE_TYPES, "(String)=>String", "(String)=>Serializable & Comparable<?>");
+	}
+	
 	@Test public void testExceptionInClosure_00() throws Exception {
 		XExpression expression = expression("{val func = [Integer i| throw new RuntimeException()]}");
 		helper.assertNoErrors(expression);
 	}
 	
+	@Ignore("TODO To be implemented")
 	@Test public void testExceptionInClosure_01() throws Exception {
 		XExpression expression = expression("{val func = [Integer i| throw new Exception() ]}");
 		helper.assertError(expression, XTHROW_EXPRESSION, UNHANDLED_EXCEPTION);
@@ -381,11 +400,13 @@ public class ValidationTests extends AbstractXbaseTestCase {
 		helper.assertNoErrors(expression);
 	}
 	
+	@Ignore("TODO To be implemented")
 	@Test public void testExceptionInClosure_03() throws Exception {
 		XExpression expression = expression("{val func = [Integer i| try { throw new Exception() } catch(NoSuchFieldException e) {} i]}");
 		helper.assertError(expression, XTHROW_EXPRESSION, UNHANDLED_EXCEPTION);
 	}
 
+	@Ignore("TODO To be implemented")
 	@Test public void testExceptionInClosure_04() throws Exception {
 		XExpression expression = expression("{val func = [Integer i| while(i==1) { throw new Exception() } i]}");
 		helper.assertError(expression, XTHROW_EXPRESSION, UNHANDLED_EXCEPTION);
@@ -460,6 +481,7 @@ public class ValidationTests extends AbstractXbaseTestCase {
 		helper.assertError(expression, XbasePackage.Literals.XTHROW_EXPRESSION, INVALID_EARLY_EXIT, "throw", "not allowed", "context");
 	}
 	
+	@Ignore("TODO To be implemented - should be a control flow problem")
 	@Test public void testInvalidEarlyExit_02() throws Exception {
 		XExpression expression = expression("if (throw new Exception()) {}");
 		helper.assertError(expression, XbasePackage.Literals.XTHROW_EXPRESSION, INCOMPATIBLE_TYPES, "void", "boolean");
@@ -470,6 +492,7 @@ public class ValidationTests extends AbstractXbaseTestCase {
 		helper.assertError(expression, XbasePackage.Literals.XRETURN_EXPRESSION, INVALID_EARLY_EXIT, "return", "context");
 	}
 	
+	@Ignore("TODO To be implemented - should be a control flow problem")
 	@Test public void testInvalidEarlyExit_04() throws Exception {
 		XExpression expression = expression("if (return 1) {}");
 		helper.assertError(expression, XbasePackage.Literals.XRETURN_EXPRESSION, INCOMPATIBLE_TYPES, "void", "boolean");
@@ -517,7 +540,7 @@ public class ValidationTests extends AbstractXbaseTestCase {
 				"class");
 	}
 
-	@Test @Ignore public void testCast_0() throws Exception {
+	@Test public void testCast_0() throws Exception {
 		XExpression expression = expression("'foo' as String");
 		helper.assertWarning(expression, TypesPackage.Literals.JVM_PARAMETERIZED_TYPE_REFERENCE, OBSOLETE_CAST, "Unnecessary cast from String to String");
 		helper.assertNoError(expression, INVALID_CAST);
@@ -546,10 +569,18 @@ public class ValidationTests extends AbstractXbaseTestCase {
 		XExpression expression = expression("new Object() as String");
 		helper.assertNoError(expression, INVALID_CAST);
 	}
+	
+	@Test
+	public void testCastInSwitch() throws Exception {
+		XExpression expression = expression("switch('foo') { String: it }");
+		helper.assertWarning(expression, TypesPackage.Literals.JVM_PARAMETERIZED_TYPE_REFERENCE, OBSOLETE_CAST, "Unnecessary cast from String to String");
+		helper.assertNoError(expression, INVALID_CAST);
+	}
 
-	@Test public void testInstanceOf_0() throws Exception {
+	@Test
+	public void testInstanceOf_0() throws Exception {
 		XExpression expression = expression("'foo' instanceof String");
-		helper.assertWarning(expression, XINSTANCE_OF_EXPRESSION, OBSOLETE_INSTANCEOF, "already", "java.lang.String");
+		helper.assertWarning(expression, XINSTANCE_OF_EXPRESSION, OBSOLETE_INSTANCEOF, "already", "String");
 		helper.assertNoError(expression, INVALID_INSTANCEOF);
 	}
 

@@ -46,6 +46,7 @@ import org.junit.Test;
 /**
  * @author Sven Efftinge
  */
+@SuppressWarnings("deprecation")
 public class XbaseParserTest extends AbstractXbaseTestCase {
 	
 	@Override

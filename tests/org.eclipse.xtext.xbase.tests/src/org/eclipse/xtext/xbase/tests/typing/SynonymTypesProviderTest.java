@@ -20,6 +20,7 @@ import com.google.inject.Inject;
 /**
  * @author Sven Efftinge - Initial contribution and API
  */
+@SuppressWarnings("deprecation")
 public class SynonymTypesProviderTest extends AbstractXbaseTestCase {
 	
 	@Inject

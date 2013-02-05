@@ -22,11 +22,6 @@ import org.junit.BeforeClass
 import org.junit.Rule
 import org.junit.rules.ErrorCollector
 
-import static org.junit.Assert.*
-import org.junit.runner.RunWith
-import org.eclipse.xtext.junit4.XtextRunner
-import org.eclipse.xtext.junit4.InjectWith
-
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */

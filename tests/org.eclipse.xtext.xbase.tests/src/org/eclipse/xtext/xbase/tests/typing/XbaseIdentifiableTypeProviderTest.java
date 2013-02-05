@@ -15,7 +15,6 @@ import org.eclipse.xtext.xbase.XForLoopExpression;
 import org.eclipse.xtext.xbase.XMemberFeatureCall;
 import org.eclipse.xtext.xbase.tests.AbstractXbaseTestCase;
 import org.eclipse.xtext.xbase.typing.ITypeProvider;
-import org.junit.Ignore;
 import org.junit.Test;
 
 import com.google.inject.Inject;
@@ -23,6 +22,7 @@ import com.google.inject.Inject;
 /**
  * @author Sven Efftinge - Initial contribution and API
  */
+@SuppressWarnings("deprecation")
 public class XbaseIdentifiableTypeProviderTest extends AbstractXbaseTestCase {
 	
 	@Inject
@@ -45,7 +45,6 @@ public class XbaseIdentifiableTypeProviderTest extends AbstractXbaseTestCase {
 	}
 	
 	@Test
-	@Ignore("TODO Fix this case")
 	public void testClosureParameter() throws Exception {
 //		List<? super String> list = Lists.newArrayList();
 //		ListExtensions.map(list, new Functions.Function1<CharSequence, String>() {

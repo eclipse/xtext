@@ -19,6 +19,7 @@ import com.google.inject.Injector;
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
+@SuppressWarnings("deprecation")
 public class XbaseTypeArgumentContextProviderTest extends TypeArgumentContextProviderTest {
 
 	@Override

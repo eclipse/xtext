@@ -1,11 +1,10 @@
 package org.eclipse.xtext.xbase.tests.formatting
 
-import com.google.inject.Inject
+import org.eclipse.xtext.preferences.MapBasedPreferenceValues
+import org.eclipse.xtext.preferences.PreferenceKey
 import org.junit.Test
 
 import static org.eclipse.xtext.xbase.formatting.XbaseFormatterPreferenceKeys.*
-import org.eclipse.xtext.preferences.MapBasedPreferenceValues
-import org.eclipse.xtext.preferences.PreferenceKey
 
 class XbaseFormatterTest extends AbstractXbaseFormatterTest {
 	
