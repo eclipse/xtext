@@ -353,6 +353,27 @@ class ErrorTest extends AbstractXtendTestCase {
 		assertNotNull(resolvedTypes.getActualType(param))
 	}
 	
+	@Test
+	def void testErrorModel_20() throws Exception {
+		val file = '''
+			package x
+			class Y {
+				@com.google.inject.Inject extension test.GenericExtensionMethods<String,Integer> x
+				def foo(String arg) {
+					arg.method
+				}
+			}
+		'''.processWithoutException
+		val y = file.xtendTypes.head
+		val function = y.members.last as XtendFunction
+		val body = function.expression as XBlockExpression
+		val featureCall = body.expressions.head as XMemberFeatureCall
+		val implicitReceiver = featureCall.implicitReceiver as XMemberFeatureCall
+		val this_ = implicitReceiver.memberCallTarget
+		val resolvedTypes = typeResolver.resolveTypes(this_)
+		assertNotNull(resolvedTypes.getActualType(this_))
+	}
+	
 	def processWithoutException(CharSequence input) throws Exception {
 		val resource = resourceSet.createResource(URI::createURI("abcdefg.xtend"))
 		resource.load(new StringInputStream(input.toString), null)
