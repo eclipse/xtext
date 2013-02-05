@@ -10,24 +10,20 @@ package org.eclipse.xtext.xbase.tests.typesystem
 import com.google.common.collect.Iterables
 import com.google.common.collect.UnmodifiableIterator
 import com.google.inject.Inject
+import java.lang.ref.SoftReference
 import java.util.AbstractList
 import java.util.ArrayList
 import org.eclipse.xtext.common.types.JvmDeclaredType
-import org.eclipse.xtext.junit4.InjectWith
-import org.eclipse.xtext.junit4.XtextRunner
+import org.eclipse.xtext.xbase.XCastedExpression
 import org.eclipse.xtext.xbase.XTypeLiteral
 import org.eclipse.xtext.xbase.tests.AbstractXbaseTestCase
 import org.eclipse.xtext.xbase.typesystem.^override.OverrideHelper
 import org.eclipse.xtext.xbase.typesystem.^override.ResolvedOperations
 import org.junit.Test
-import org.junit.runner.RunWith
-import org.eclipse.xtext.xbase.XCastedExpression
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-@RunWith(typeof(XtextRunner))
-@InjectWith(typeof(XbaseNewTypeSystemInjectorProvider))
 class ResolvedOperationsTest extends AbstractXbaseTestCase {
 	
 	@Inject
@@ -87,7 +83,7 @@ class ResolvedOperationsTest extends AbstractXbaseTestCase {
 	
 	@Test
 	def void testSoftReferenceConstructors() {
-		val resolvedOperations = typeof(java.lang.ref.SoftReference).toResolvedOperations
+		val resolvedOperations = typeof(SoftReference).toResolvedOperations
 		assertEquals(1, resolvedOperations.declaredOperations.size)
 		assertEquals(2, resolvedOperations.declaredConstructors.size)
 		resolvedOperations.declaredConstructors.forEach [

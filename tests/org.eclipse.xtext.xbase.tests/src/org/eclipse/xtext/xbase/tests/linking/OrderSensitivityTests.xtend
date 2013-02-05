@@ -7,21 +7,17 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.tests.linking
 
-import org.eclipse.xtext.junit4.InjectWith
-import org.eclipse.xtext.junit4.XtextRunner
 import org.eclipse.xtext.xbase.XAbstractFeatureCall
 import org.eclipse.xtext.xbase.XBlockExpression
-import org.eclipse.xtext.xbase.tests.AbstractXbaseTestCase
-import org.eclipse.xtext.xbase.tests.typesystem.XbaseNewTypeSystemInjectorProvider
-import org.junit.Test
-import org.junit.runner.RunWith
 import org.eclipse.xtext.xbase.XMemberFeatureCall
+import org.eclipse.xtext.xbase.tests.AbstractXbaseTestCase
 import org.junit.Ignore
+import org.junit.Test
 
 /**
  * @author Sebastian Zarnekow
  */
-abstract class AbstractOrderSensitivityTest extends AbstractXbaseTestCase {
+class OrderSensitivityTests extends AbstractXbaseTestCase {
 	
 	@Test
 	def void testOverloadedMethods_01() {
@@ -98,12 +94,4 @@ abstract class AbstractOrderSensitivityTest extends AbstractXbaseTestCase {
 	
 }
 
-@RunWith(typeof(XtextRunner))
-@InjectWith(typeof(XbaseNewTypeSystemInjectorProvider))
-class OrderSensitivityTest extends AbstractOrderSensitivityTest {
-	
-}
 
-class OldOrderSensitivityTest extends AbstractOrderSensitivityTest {
-	
-}

@@ -13,19 +13,12 @@ import org.eclipse.xtext.nodemodel.util.NodeModelUtils
 import org.eclipse.xtext.xbase.XStringLiteral
 import org.eclipse.xtext.xbase.tests.AbstractXbaseTestCase
 import org.eclipse.xtext.xbase.typesystem.IBatchTypeResolver
-import org.junit.Test
-
-import static org.junit.Assert.*
-import org.eclipse.xtext.junit4.XtextRunner
-import org.junit.runner.RunWith
-import org.eclipse.xtext.junit4.InjectWith
 import org.junit.Ignore
+import org.junit.Test
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-@RunWith(typeof(XtextRunner))
-@InjectWith(typeof(XbaseNewTypeSystemInjectorProvider))
 class StringLiteralTest extends AbstractXbaseTestCase {
 	
 	@Inject

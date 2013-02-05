@@ -9,7 +9,6 @@ package org.eclipse.xtext.xbase.tests.typesystem;
 
 import org.eclipse.xtext.xbase.tests.linking.BatchLinkingTest;
 import org.eclipse.xtext.xbase.tests.typing.ReturnTypeComputationTest2;
-import org.eclipse.xtext.xbase.tests.typing.XbaseIdentifiableTypeProviderTest2;
 import org.eclipse.xtext.xbase.tests.typing.XbaseTypeProviderTest2;
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
@@ -27,7 +26,6 @@ import org.junit.runners.Suite.SuiteClasses;
 	ReturnTypeComputationTest2.class,
 	BatchFeatureCallTypeTest.class,
 	BatchIdentifiableTypeTest.class,
-	XbaseIdentifiableTypeProviderTest2.class,
 	BatchConstructorCallTypeTest.class,
 	RecomputingTypeSystemSuite.class,
 	StringLiteralTest.class,

@@ -30,8 +30,6 @@ import org.eclipse.xtext.junit4.InjectWith
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-@RunWith(typeof(XtextRunner))
-@InjectWith(typeof(XbaseNewTypeSystemInjectorProvider))
 abstract class AbstractClosureTypeTest2 extends AbstractXbaseTestCase {
 	
 	@Inject

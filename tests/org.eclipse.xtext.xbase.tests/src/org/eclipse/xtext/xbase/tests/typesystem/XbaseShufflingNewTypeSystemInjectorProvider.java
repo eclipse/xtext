@@ -16,6 +16,7 @@ import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XIfExpression;
 import org.eclipse.xtext.xbase.XSwitchExpression;
 import org.eclipse.xtext.xbase.XbaseStandaloneSetup;
+import org.eclipse.xtext.xbase.tests.XbaseInjectorProvider;
 import org.eclipse.xtext.xbase.typesystem.arguments.IFeatureCallArguments;
 import org.eclipse.xtext.xbase.typesystem.computation.XbaseTypeComputer;
 import org.eclipse.xtext.xbase.typesystem.internal.ExpressionArgumentFactory;
@@ -28,7 +29,7 @@ import com.google.inject.Injector;
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public class XbaseShufflingNewTypeSystemInjectorProvider extends XbaseNewTypeSystemInjectorProvider {
+public class XbaseShufflingNewTypeSystemInjectorProvider extends XbaseInjectorProvider {
 	
 	@Override
 	protected Injector internalCreateInjector() {
@@ -38,7 +39,7 @@ public class XbaseShufflingNewTypeSystemInjectorProvider extends XbaseNewTypeSys
 	public static class XbaseShufflingNewTypeSystemTestStandaloneSetup extends XbaseStandaloneSetup {
 		@Override
 		public Injector createInjector() {
-			return Guice.createInjector(new XbaseNewTypeSystemTestRuntimeModule() {
+			return Guice.createInjector(new XbaseTestRuntimeModule() {
 				@SuppressWarnings("unused")
 				public Class<? extends XbaseTypeComputer> bindXbaseTypeComputer() {
 					return ShufflingXbaseTypeComputer.class;

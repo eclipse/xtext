@@ -7,17 +7,12 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.tests.serializer;
 
-import org.eclipse.xtext.junit4.InjectWith;
-import org.eclipse.xtext.junit4.XtextRunner;
 import org.junit.Ignore;
 import org.junit.Test;
-import org.junit.runner.RunWith;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-@RunWith(XtextRunner.class)
-@InjectWith(FunctionTypeRefAwareInjectorProvider2.class)
 public class XbaseSerializerWithNodeModelTest2 extends XbaseSerializerWithNodeModelTest {
 	
 	@Override

@@ -18,11 +18,6 @@ import org.eclipse.xtext.xbase.jvmmodel.JvmModelInferrerRegistry;
 import org.eclipse.xtext.xbase.lib.util.ReflectExtensions;
 import org.eclipse.xtext.xbase.tests.AbstractXbaseTestCase;
 import org.eclipse.xtext.xbase.tests.XbaseInjectorProvider;
-import org.eclipse.xtext.xbase.tests.typesystem.XbaseNewTypeSystemInjectorProvider;
-import org.eclipse.xtext.xbase.typesystem.internal.DefaultBatchTypeResolver;
-import org.eclipse.xtext.xbase.typesystem.internal.DefaultReentrantTypeResolver;
-import org.eclipse.xtext.xbase.typesystem.internal.LogicalContainerAwareBatchTypeResolver;
-import org.eclipse.xtext.xbase.typesystem.internal.LogicalContainerAwareReentrantTypeResolver;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.runner.RunWith;
@@ -85,36 +80,6 @@ public abstract class AbstractJvmModelTest extends AbstractXbaseTestCase {
 					public void configure(com.google.inject.Binder binder) {
 						super.configure(binder);
 						binder.bind(IJvmModelInferrer.class).to(SimpleJvmModelInferrer.class);
-					}
-				});
-			}
-		}
-		
-	}
-	
-	public static class SimpleJvmModelTestInjectorProvider2 extends XbaseNewTypeSystemInjectorProvider {
-		@Override
-		protected Injector internalCreateInjector() {
-			return new SimpleJvmModelTestStandaloneSetup().createInjectorAndDoEMFRegistration();
-		}
-
-		@SuppressWarnings("unused")
-		public static class SimpleJvmModelTestStandaloneSetup extends XbaseStandaloneSetup {
-			@Override
-			public Injector createInjector() {
-				return Guice.createInjector(new XbaseNewTypeSystemTestRuntimeModule() {
-					@Override
-					public void configure(com.google.inject.Binder binder) {
-						super.configure(binder);
-						binder.bind(IJvmModelInferrer.class).to(SimpleJvmModelInferrer.class);
-					}
-					
-					public Class<? extends DefaultBatchTypeResolver> bindDefaultBatchTypeResolver() {
-						return LogicalContainerAwareBatchTypeResolver.class;
-					}
-
-					public Class<? extends DefaultReentrantTypeResolver> bindReentrantTypeResolver() {
-						return LogicalContainerAwareReentrantTypeResolver.class;
 					}
 				});
 			}

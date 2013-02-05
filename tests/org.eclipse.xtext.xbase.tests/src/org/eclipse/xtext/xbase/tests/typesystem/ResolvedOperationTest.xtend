@@ -11,8 +11,6 @@ import com.google.inject.Inject
 import java.util.EnumSet
 import org.eclipse.xtext.common.types.JvmOperation
 import org.eclipse.xtext.common.types.JvmVisibility
-import org.eclipse.xtext.junit4.InjectWith
-import org.eclipse.xtext.junit4.XtextRunner
 import org.eclipse.xtext.xbase.XMemberFeatureCall
 import org.eclipse.xtext.xbase.tests.AbstractXbaseTestCase
 import org.eclipse.xtext.xbase.typesystem.IBatchTypeResolver
@@ -21,15 +19,12 @@ import org.eclipse.xtext.xbase.typesystem.^override.IOverrideCheckResult
 import org.eclipse.xtext.xbase.typesystem.^override.IResolvedOperation
 import org.eclipse.xtext.xbase.typesystem.^override.OverrideTester
 import org.junit.Test
-import org.junit.runner.RunWith
 
 import static org.eclipse.xtext.xbase.typesystem.^override.IOverrideCheckResult$OverrideCheckDetails.*
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-@RunWith(typeof(XtextRunner))
-@InjectWith(typeof(XbaseNewTypeSystemInjectorProvider))
 class ResolvedOperationTest extends AbstractXbaseTestCase {
 	
 	@Inject

@@ -8,8 +8,6 @@
 package org.eclipse.xtext.xbase.tests.typesystem
 
 import com.google.inject.Inject
-import org.eclipse.xtext.junit4.InjectWith
-import org.eclipse.xtext.junit4.XtextRunner
 import org.eclipse.xtext.xbase.XBlockExpression
 import org.eclipse.xtext.xbase.XExpression
 import org.eclipse.xtext.xbase.XMemberFeatureCall
@@ -26,13 +24,10 @@ import org.eclipse.xtext.xbase.typesystem.internal.ResolvedTypes
 import org.eclipse.xtext.xbase.typesystem.references.AnyTypeReference
 import org.junit.Ignore
 import org.junit.Test
-import org.junit.runner.RunWith
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-@RunWith(typeof(XtextRunner))
-@InjectWith(typeof(XbaseNewTypeSystemInjectorProvider))
 class TypeComputationStateTest extends AbstractXbaseTestCase implements ITypeComputer {
 		
 	@Inject PublicReentrantTypeResolver resolver

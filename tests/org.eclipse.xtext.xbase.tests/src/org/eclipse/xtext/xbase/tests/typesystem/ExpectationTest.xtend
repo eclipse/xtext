@@ -9,27 +9,22 @@ package org.eclipse.xtext.xbase.tests.typesystem
 
 import com.google.inject.Inject
 import java.util.List
+import org.eclipse.xtext.xbase.XExpression
 import org.eclipse.xtext.xbase.XNullLiteral
+import org.eclipse.xtext.xbase.XReturnExpression
 import org.eclipse.xtext.xbase.junit.typesystem.PublicReentrantTypeResolver
 import org.eclipse.xtext.xbase.tests.AbstractXbaseTestCase
 import org.eclipse.xtext.xbase.typesystem.computation.ITypeComputationState
 import org.eclipse.xtext.xbase.typesystem.computation.ITypeExpectation
 import org.eclipse.xtext.xbase.typesystem.computation.XbaseTypeComputer
 import org.junit.After
+import org.junit.Before
 import org.junit.Ignore
 import org.junit.Test
-import org.junit.Before
-import org.junit.runner.RunWith
-import org.eclipse.xtext.junit4.XtextRunner
-import org.eclipse.xtext.junit4.InjectWith
-import org.eclipse.xtext.xbase.XExpression
-import org.eclipse.xtext.xbase.XReturnExpression
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-@RunWith(typeof(XtextRunner))
-@InjectWith(typeof(XbaseNewTypeSystemInjectorProvider))
 class ExpectationTest extends AbstractXbaseTestCase {
 	
 	@Inject PublicReentrantTypeResolver resolver

@@ -13,8 +13,6 @@ import org.eclipse.emf.common.util.URI
 import org.eclipse.emf.ecore.InternalEObject
 import org.eclipse.emf.ecore.resource.Resource
 import org.eclipse.xtext.common.types.JvmIdentifiableElement
-import org.eclipse.xtext.junit4.InjectWith
-import org.eclipse.xtext.junit4.XtextRunner
 import org.eclipse.xtext.linking.impl.XtextLinkingDiagnostic
 import org.eclipse.xtext.resource.XtextSyntaxDiagnostic
 import org.eclipse.xtext.xbase.XAbstractFeatureCall
@@ -34,13 +32,10 @@ import org.junit.Ignore
 import org.junit.Rule
 import org.junit.Test
 import org.junit.rules.ErrorCollector
-import org.junit.runner.RunWith
 
 /**
  * @author Sebastian Zarnekow
  */
-@RunWith(typeof(XtextRunner))
-@InjectWith(typeof(XbaseNewTypeSystemInjectorProvider))
 abstract class AbstractBatchTypeResolverTest extends AbstractTypeResolverTest<LightweightTypeReference> {
 	
 	override LightweightTypeReference resolvesTo(String expression, String type) {
@@ -197,8 +192,6 @@ class BatchConstructorCallTypeTest extends AbstractConstructorCallTypeTest {
 /**
  * @author Sebastian Zarnekow
  */
-@RunWith(typeof(XtextRunner))
-@InjectWith(typeof(XbaseNewTypeSystemInjectorProvider))
 class BatchClosureTypeTest extends AbstractClosureTypeTest {
 	
 	@Inject
@@ -264,8 +257,6 @@ class BatchClosureTypeTest extends AbstractClosureTypeTest {
 /**
  * @author Sebastian Zarnekow
  */
-@RunWith(typeof(XtextRunner))
-@InjectWith(typeof(XbaseNewTypeSystemInjectorProvider))
 class BatchFeatureCallTypeTest extends AbstractFeatureCallTypeTest {
 	
 	@Inject
@@ -322,8 +313,6 @@ class BatchFeatureCallTypeTest extends AbstractFeatureCallTypeTest {
 /**
  * @author Sebastian Zarnekow
  */
-@RunWith(typeof(XtextRunner))
-@InjectWith(typeof(XbaseNewTypeSystemInjectorProvider))
 class BatchIdentifiableTypeTest extends AbstractIdentifiableTypeTest {
 	
 	@Inject
@@ -351,8 +340,6 @@ class BatchIdentifiableTypeTest extends AbstractIdentifiableTypeTest {
 /**
  * @author Sebastian Zarnekow
  */
-@RunWith(typeof(XtextRunner))
-@InjectWith(typeof(XbaseNewTypeSystemInjectorProvider))
 class BatchTypeArgumentTest extends AbstractTypeArgumentTest {
 	
 	@Inject
