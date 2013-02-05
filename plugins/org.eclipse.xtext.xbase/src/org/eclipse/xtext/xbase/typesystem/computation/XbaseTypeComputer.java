@@ -67,8 +67,12 @@ import org.eclipse.xtext.xbase.typesystem.util.TypeParameterSubstitutor;
 import com.google.inject.Inject;
 
 /**
+ * Base implementation for the {@link ITypeComputer}. The interface contract 
+ * fully applies to this class.
+ * 
+ * This implementation handles all expression that are defined in Xbase.
+ * 
  * @author Sebastian Zarnekow - Initial contribution and API
- * TODO JavaDoc
  */
 public class XbaseTypeComputer implements ITypeComputer {
 
@@ -647,38 +651,4 @@ public class XbaseTypeComputer implements ITypeComputer {
 		return false;
 	}
 	
-	// TODO implement this thing
-	// keep in mind, that the following may happen:
-	/* 
-	 * switch(mutableValue) {
-	 *   SomeType: if (condition) mutableValue = instanceOfAnotherType else mutableValue.doStuffOnSomeType
-	 * }
-	 */
-	
-//	protected void _computeTypes(final XAssignment context, ITypeComputationState state) {
-//		_computeTypes((XAbstractFeatureCall) context, state);
-//		state.discardReassignedTypes(context.getAssignable());
-//	}
-
-//	/**
-//	 * @param expr the casted expression that is the container of the child whose expected type should be computed. May not be <code>null</code>.
-//	 * @param reference the feature that describes the child whose type is expected
-//	 * @param index the feature index 
-//	 * @param rawType <code>true</code> if we are only interested in the raw type
-//	 */
-//	protected JvmTypeReference _expectedType(XCastedExpression expr, EReference reference, int index, boolean rawType) {
-//		// SE: This was previously explicitly set to null :
-//		// "return null; // no expectations!"
-//		// Unfortunately there was no comment explaining why this was the case also no test besides the one which explicitly tested this was failing so I changed it back.
-//		// return expr.getType();
-//		// SZ: reverted the change
-//		// the following xtend thing can be casted but will fail if the expected type is taken from the cast expression
-//		// def <T extends Integer> addFunction() {\n" + 
-//		//	    [T a,T b|a+b] as (T,T)=>T\n" + 
-//		// }
-//		// if the closure expects T to be the return type
-//		// the check for the implicit return of int (a + b) will fail
-//		// since T result =/= Integer
-//		return null;
-//	}
 }
