@@ -69,7 +69,7 @@ public class DispatchingSupportTest extends AbstractXtendTestCase {
 		JvmFormalParameter firstParameter = dispatchMethod.getParameters().get(0);
 		assertEquals("java.lang.Object", firstParameter.getParameterType().getIdentifier());
 		JvmFormalParameter secondParameter = dispatchMethod.getParameters().get(1);
-		assertEquals("java.lang.Void", secondParameter.getParameterType().getIdentifier());
+		assertEquals("java.lang.Object", secondParameter.getParameterType().getIdentifier());
 	}
 	
 	@Test public void testSort_00() throws Exception {

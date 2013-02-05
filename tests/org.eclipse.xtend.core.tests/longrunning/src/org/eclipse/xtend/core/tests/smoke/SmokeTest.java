@@ -54,6 +54,7 @@ import com.google.inject.Provider;
  * @author Sven Efftinge - Initial contribution and API
  * @author Sebastian Zarnekow
  */
+@SuppressWarnings("deprecation")
 public class SmokeTest extends AbstractSmokeTest {
 	
 	private static final Logger logger = Logger.getLogger(SmokeTest.class);

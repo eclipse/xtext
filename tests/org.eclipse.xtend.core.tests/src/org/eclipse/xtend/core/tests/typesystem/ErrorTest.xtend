@@ -10,15 +10,12 @@ package org.eclipse.xtend.core.tests.typesystem
 import com.google.inject.Inject
 import org.eclipse.emf.common.util.URI
 import org.eclipse.xtend.core.tests.AbstractXtendTestCase
-import org.eclipse.xtend.core.tests.NewTypeSystemRuntimeInjectorProvider
 import org.eclipse.xtend.core.xtend.XtendClass
 import org.eclipse.xtend.core.xtend.XtendConstructor
 import org.eclipse.xtend.core.xtend.XtendField
 import org.eclipse.xtend.core.xtend.XtendFile
 import org.eclipse.xtend.core.xtend.XtendFunction
 import org.eclipse.xtext.common.types.JvmOperation
-import org.eclipse.xtext.junit4.InjectWith
-import org.eclipse.xtext.junit4.XtextRunner
 import org.eclipse.xtext.util.CancelIndicator
 import org.eclipse.xtext.util.StringInputStream
 import org.eclipse.xtext.validation.CheckMode
@@ -30,13 +27,10 @@ import org.eclipse.xtext.xbase.XMemberFeatureCall
 import org.eclipse.xtext.xbase.jvmmodel.IJvmModelAssociations
 import org.eclipse.xtext.xbase.typesystem.IBatchTypeResolver
 import org.junit.Test
-import org.junit.runner.RunWith
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-@RunWith(typeof(XtextRunner))
-@InjectWith(typeof(NewTypeSystemRuntimeInjectorProvider))
 class ErrorTest extends AbstractXtendTestCase {
 	
 	@Inject

@@ -139,6 +139,15 @@ public class InferredJvmModelTest extends AbstractXtendTestCase {
 	
 	@Test
 	public void testDispatchFunction_03() throws Exception {
+		testDispatchFunction_03_impl(true);
+	}
+	
+	@Test
+	public void testDispatchFunction_03_noValidate() throws Exception {
+		testDispatchFunction_03_impl(false);
+	}
+	
+	protected void testDispatchFunction_03_impl(boolean validation) throws Exception {
 		XtendFile xtendFile = file(
 				"class Dispatcher {\n" + 
 				"	def dispatch doStuff(org.eclipse.emf.ecore.EClass model) {\n" + 
@@ -150,15 +159,15 @@ public class InferredJvmModelTest extends AbstractXtendTestCase {
 				"	def dispatch doStuff(org.eclipse.emf.ecore.EStructuralFeature feature) {\n" + 
 				"		newArrayList(feature)\n" + 
 				"	}\n" + 
-				"}", true /* TODO if set to false, test fails - see TODO below*/);
+				"}", validation);
 		
 		JvmGenericType inferredType = getInferredType(xtendFile);
 		
 		// one main dispatch
 		Iterable<JvmOperation> operations = inferredType.getDeclaredOperations();
 		JvmOperation dispatch = findByNameAndFirstParameterType(operations, "doStuff", ENamedElement.class);
-		// TODO why does this assertion fail with validate==false? (see above TODO)
-		assertEquals("java.util.List<? extends java.lang.Object>", dispatch.getReturnType().getIdentifier());
+		// TODO ultimately this should be List<? extends NamedElement>
+		assertEquals("java.lang.Object", dispatch.getReturnType().getIdentifier());
 
 		// three internal case methods
 		JvmOperation eClassParam = findByNameAndFirstParameterType(operations, "_doStuff", EClass.class);
@@ -179,7 +188,7 @@ public class InferredJvmModelTest extends AbstractXtendTestCase {
 		Iterable<JvmOperation> operations = inferredType.getDeclaredOperations();
 		JvmOperation dispatch = findByNameAndFirstParameterType(operations, "foo", Object.class);
 		// return type is specialized
-		assertEquals("java.lang.Number & java.lang.Comparable<? extends java.lang.Object>", dispatch.getReturnType().getIdentifier());
+		assertEquals("java.lang.Object", dispatch.getReturnType().getIdentifier());
 		
 		// two internal case methods
 		JvmOperation internal = findByNameAndFirstParameterType(operations, "_foo", Double.class);
@@ -595,14 +604,14 @@ public class InferredJvmModelTest extends AbstractXtendTestCase {
 		XtendFile xtendFile = file("class Foo { def bar() { if (true) null as Double else null as Integer } }");
 		JvmGenericType inferredType = getInferredType(xtendFile);
 		JvmOperation jvmOperation = (JvmOperation) inferredType.getMembers().get(1);
-		assertEquals("java.lang.Number & java.lang.Comparable<? extends java.lang.Object>", jvmOperation.getReturnType().getIdentifier());
+		assertEquals("java.lang.Object", jvmOperation.getReturnType().getIdentifier());
 	}
 	
 	@Test public void testInferredFunctionWithReturnType_05() throws Exception {
 		XtendFile xtendFile = file("class Foo { def bar() { newArrayList(if (true) null as Double else null as Integer) } }");
 		JvmGenericType inferredType = getInferredType(xtendFile);
 		JvmOperation jvmOperation = (JvmOperation) inferredType.getMembers().get(1);
-		assertEquals("java.util.ArrayList<java.lang.Number & java.lang.Comparable<? extends java.lang.Object>>", jvmOperation.getReturnType().getIdentifier());
+		assertEquals("java.util.ArrayList<java.lang.Object>", jvmOperation.getReturnType().getIdentifier());
 	}
 	
 	@Test public void testInferredFunctionWithReturnType_06() throws Exception {

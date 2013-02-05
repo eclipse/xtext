@@ -193,6 +193,7 @@ public class LinkingShadowingTest extends AbstractXtendTestCase {
 		assertLinksTo("aString", featureCall);
 	}
 	
+	@SuppressWarnings("deprecation")
 	@Test public void testLocalVariable_shadows_parameter() throws Exception {
 		XtendClass clazz = clazz(
 				"class SomeClass {\n" +
@@ -611,7 +612,7 @@ public class LinkingShadowingTest extends AbstractXtendTestCase {
 		assertTrue(
 				"testdata.LinkingStaticTypeEquallyNamed.withArgument(java.lang.Object)".equals(linked.getIdentifier()) ||
 				"testdata.LinkingStaticTypeEquallyNamed.withArgument(java.lang.Object,int,int)".equals(linked.getIdentifier()));
-		assertNotNull("Expected issues", featureCall.getInvalidFeatureIssueCode());
+		assertFalse(clazz.eResource().getErrors().isEmpty());
 	}
 	
 	@Test public void testOperationWithParam_noConflict() throws Exception {
@@ -764,11 +765,10 @@ public class LinkingShadowingTest extends AbstractXtendTestCase {
 		assertFalse("is resolved", linked.eIsProxy());
 		assertEquals(identifier, linked.getIdentifier());
 		assertTrue(type.isInstance(linked));
-		if (withIssues)
-			assertNotNull("Expected issues", featureCall.getInvalidFeatureIssueCode());
-		else {
-			assertNull(featureCall.getInvalidFeatureIssueCode(), featureCall.getInvalidFeatureIssueCode());
+		if (!withIssues) {
 			validator.assertNoErrors(featureCall);
+		} else {
+			assertFalse(featureCall.eResource().getErrors().isEmpty());
 		}
 	}
 

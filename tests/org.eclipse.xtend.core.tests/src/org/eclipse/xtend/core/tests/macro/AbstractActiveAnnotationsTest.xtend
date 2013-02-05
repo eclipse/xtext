@@ -1,13 +1,12 @@
 package org.eclipse.xtend.core.tests.macro
 
 import org.eclipse.xtend.core.macro.declaration.CompilationUnitImpl
-import org.eclipse.xtend.lib.macro.declaration.Element
+import org.eclipse.xtend.lib.macro.declaration.MutableFieldDeclaration
 import org.eclipse.xtend.lib.macro.declaration.MutableMethodDeclaration
 import org.eclipse.xtext.xbase.lib.Pair
 import org.junit.Test
 
 import static org.junit.Assert.*
-import org.eclipse.xtend.lib.macro.declaration.MutableFieldDeclaration
 
 abstract class AbstractActiveAnnotationsTest {
 	

@@ -145,8 +145,7 @@ class XtendCompilerErrorHandlingTest extends AbstractXtendTestCase {
 			@SuppressWarnings("all")
 			public class Foo {
 			  public /* Unresolved */Object bar() {
-			    throw new Error("Unresolved compilation problems:"
-			      + "\nIncompatible implicit return type. Expected void but was null");
+			    return null;
 			  }
 			}
 		''')
@@ -250,7 +249,7 @@ class XtendCompilerErrorHandlingTest extends AbstractXtendTestCase {
 		'''.assertCompilesTo( '''
 			@SuppressWarnings("all")
 			public class Foo {
-			  private final /* type is 'null' */ bar /* Skipped initializer because of errors */;
+			  private final Object bar /* Skipped initializer because of errors */;
 			}
 		''')
 	}
@@ -268,7 +267,7 @@ class XtendCompilerErrorHandlingTest extends AbstractXtendTestCase {
 			public class Foo {
 			  public int bar() {
 			    throw new Error("Unresolved compilation problems:"
-			      + "\nIncompatible implicit return type. Expected int or java.lang.Integer but was null");
+			      + "\nIncompatible implicit return type. Expected int or Integer but was null");
 			  }
 			}
 		''')
@@ -287,8 +286,7 @@ class XtendCompilerErrorHandlingTest extends AbstractXtendTestCase {
 			public class Foo {
 			  public int bar() {
 			    throw new Error("Unresolved compilation problems:"
-			      + "\nThe method or field foo is undefined for the type Foo"
-			      + "\nIncompatible implicit return type. Expected int or java.lang.Integer but was void");
+			      + "\nThe method or field foo is undefined for the type Foo");
 			  }
 			}
 		''')

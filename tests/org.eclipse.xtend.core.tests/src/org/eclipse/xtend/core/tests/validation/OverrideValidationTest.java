@@ -15,7 +15,6 @@ import org.eclipse.xtend.core.tests.AbstractXtendTestCase;
 import org.eclipse.xtend.core.xtend.XtendClass;
 import org.eclipse.xtend.core.xtend.XtendInterface;
 import org.eclipse.xtext.junit4.validation.ValidationTestHelper;
-import org.junit.Ignore;
 import org.junit.Test;
 
 import com.google.inject.Inject;
@@ -181,7 +180,6 @@ public class OverrideValidationTest extends AbstractXtendTestCase {
 		helper.assertNoErrors(xtendClass);
 	}
 
-	@Ignore("Make this one green when https://bugs.eclipse.org/bugs/show_bug.cgi?id=376037 is fixed")
 	@Test public void testOverrideReturnType_1() throws Exception {
 		XtendClass xtendClass = clazz("import java.util.List import java.io.Serializable abstract class Foo<T> extends test.GenericSuperTypeClass<T> {  " +
 									"override <T1> T1[] getValue1(List<T1> t) {}" +
@@ -189,7 +187,6 @@ public class OverrideValidationTest extends AbstractXtendTestCase {
 		helper.assertNoErrors(xtendClass);
 	}
 
-	@Ignore("Make this one green when https://bugs.eclipse.org/bugs/show_bug.cgi?id=376037 is fixed")
 	@Test public void testOverrideReturnType_2() throws Exception {
 		XtendClass xtendClass = clazz("import java.util.List import java.io.Serializable abstract class Foo<T> extends test.GenericSuperTypeClass<T> {  " +
 									"override <T3> List<T3> getValue3(List<T3> t) {}" +
@@ -204,7 +201,6 @@ public class OverrideValidationTest extends AbstractXtendTestCase {
 		helper.assertNoErrors(xtendClass);
 	}
 
-	@Ignore("This should issue a warning and not an error")
 	@Test public void testOverrideReturnType_4() throws Exception {
 		XtendClass xtendClass = clazz("abstract class Foo extends test.GenericSuperTypeClass<Integer> {  " +
 									"override String getComparable(){ null }" +
@@ -404,14 +400,12 @@ public class OverrideValidationTest extends AbstractXtendTestCase {
 				"Exception", "not", "compatible", "throws", "clause");
 	}
 	
-	@Ignore("Fails in old impl")
 	@Test public void testIncompatibleThrowsClause_04() throws Exception {
 		XtendClass xtendClass = clazz("class Foo extends test.ExceptionThrowing { override generifiedIoException() throws java.net.URISyntaxException {} }");
 		helper.assertError(xtendClass.getMembers().get(0), XTEND_FUNCTION, INCOMPATIBLE_THROWS_CLAUSE,
 				"Exception", "URISyntaxException", "not", "compatible", "throws", "clause");
 	}
 	
-	@Ignore("Fails in old impl")
 	@Test public void testIncompatibleThrowsClause_05() throws Exception {
 		XtendClass xtendClass = clazz("class Foo extends test.ExceptionThrowing { override generifiedRuntimeException() throws java.io.FileNotFoundException {} }");
 		helper.assertError(xtendClass.getMembers().get(0), XTEND_FUNCTION, INCOMPATIBLE_THROWS_CLAUSE,
@@ -458,19 +452,16 @@ public class OverrideValidationTest extends AbstractXtendTestCase {
 		helper.assertNoError(xtendClass.getMembers().get(0), INCOMPATIBLE_THROWS_CLAUSE);
 	}
 	
-	@Ignore("Fails in old impl")
 	@Test public void testCompatibleThrowsClause_08() throws Exception {
 		XtendClass xtendClass = clazz("class Foo extends test.ExceptionThrowing { override <E extends java.io.IOException> generifiedIoException() throws E {} }");
 		helper.assertNoError(xtendClass.getMembers().get(0), INCOMPATIBLE_THROWS_CLAUSE);
 	}
 	
-	@Ignore("Fails in old impl")
 	@Test public void testCompatibleThrowsClause_09() throws Exception {
 		XtendClass xtendClass = clazz("class Foo extends test.ExceptionThrowing { override <E extends java.io.IOException> generifiedIoException() throws E {} }");
 		helper.assertNoError(xtendClass.getMembers().get(0), INCOMPATIBLE_THROWS_CLAUSE);
 	}
 	
-	@Ignore("Fails in old impl")
 	@Test public void testCompatibleThrowsClause_10() throws Exception {
 		XtendClass xtendClass = clazz("class Foo extends test.ExceptionThrowing { override <E extends java.io.IOException> generifiedIoException() throws E, NullPointerException, OutOfMemoryError {} }");
 		helper.assertNoError(xtendClass.getMembers().get(0), INCOMPATIBLE_THROWS_CLAUSE);
@@ -646,7 +637,6 @@ public class OverrideValidationTest extends AbstractXtendTestCase {
 		helper.assertNoErrors(xtendInterface);
 	}
 
-	@Ignore("Make this one green when https://bugs.eclipse.org/bugs/show_bug.cgi?id=376037 is fixed")
 	@Test public void testInterfaceOverrideReturnType_1() throws Exception {
 		XtendInterface xtendInterface = interfaze("import java.util.List import java.io.Serializable interface Foo<T> extends test.GenericSuperTypeInterface<T> {  " +
 									"override <T1> T1[] getValue1(List<T1> t)" +
@@ -654,7 +644,6 @@ public class OverrideValidationTest extends AbstractXtendTestCase {
 		helper.assertNoErrors(xtendInterface);
 	}
 
-	@Ignore("Make this one green when https://bugs.eclipse.org/bugs/show_bug.cgi?id=376037 is fixed")
 	@Test public void testInterfaceOverrideReturnType_2() throws Exception {
 		XtendInterface xtendInterface = interfaze("import java.util.List import java.io.Serializable interface Foo<T> extends test.GenericSuperTypeInterface<T> {  " +
 									"override <T3> List<T3> getValue3(List<T3> t)" +
@@ -669,7 +658,6 @@ public class OverrideValidationTest extends AbstractXtendTestCase {
 		helper.assertNoErrors(xtendInterface);
 	}
 
-	@Ignore("This should issue a warning and not an error")
 	@Test public void testInterfaceOverrideReturnType_4() throws Exception {
 		XtendInterface xtendInterface = interfaze("interface Foo extends test.GenericSuperTypeInterface<Integer> {  " +
 									"override String getComparable()" +
@@ -796,14 +784,12 @@ public class OverrideValidationTest extends AbstractXtendTestCase {
 				"Exception", "not", "compatible", "throws", "clause");
 	}
 	
-	@Ignore("Fails in old impl")
 	@Test public void testInterfaceIncompatibleThrowsClause_04() throws Exception {
 		XtendInterface xtendInterface = interfaze("interface Foo extends test.ExceptionThrowingInterface { override generifiedIoException() throws java.net.URISyntaxException }");
 		helper.assertError(xtendInterface.getMembers().get(0), XTEND_FUNCTION, INCOMPATIBLE_THROWS_CLAUSE,
 				"Exception", "URISyntaxException", "not", "compatible", "throws", "clause");
 	}
 	
-	@Ignore("Fails in old impl")
 	@Test public void testInterfaceIncompatibleThrowsClause_05() throws Exception {
 		XtendInterface xtendInterface = interfaze("interface Foo extends test.ExceptionThrowingInterface { override generifiedRuntimeException() throws java.io.FileNotFoundException }");
 		helper.assertError(xtendInterface.getMembers().get(0), XTEND_FUNCTION, INCOMPATIBLE_THROWS_CLAUSE,
@@ -850,19 +836,16 @@ public class OverrideValidationTest extends AbstractXtendTestCase {
 		helper.assertNoError(xtendInterface.getMembers().get(0), INCOMPATIBLE_THROWS_CLAUSE);
 	}
 	
-	@Ignore("Fails in old impl")
 	@Test public void testInterfaceCompatibleThrowsClause_08() throws Exception {
 		XtendInterface xtendInterface = interfaze("interface Foo extends test.ExceptionThrowingInterface { override <E extends java.io.IOException> generifiedIoException() throws E }");
 		helper.assertNoError(xtendInterface.getMembers().get(0), INCOMPATIBLE_THROWS_CLAUSE);
 	}
 	
-	@Ignore("Fails in old impl")
 	@Test public void testInterfaceCompatibleThrowsClause_09() throws Exception {
 		XtendInterface xtendInterface = interfaze("interface Foo extends test.ExceptionThrowingInterface { override <E extends java.io.IOException> generifiedIoException() throws E }");
 		helper.assertNoError(xtendInterface.getMembers().get(0), INCOMPATIBLE_THROWS_CLAUSE);
 	}
 	
-	@Ignore("Fails in old impl")
 	@Test public void testInterfaceCompatibleThrowsClause_10() throws Exception {
 		XtendInterface xtendInterface = interfaze("interface Foo extends test.ExceptionThrowingInterface { override <E extends java.io.IOException> generifiedIoException() throws E, NullPointerException, OutOfMemoryError }");
 		helper.assertNoError(xtendInterface.getMembers().get(0), INCOMPATIBLE_THROWS_CLAUSE);

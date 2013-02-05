@@ -10,24 +10,21 @@ package org.eclipse.xtend.core.tests.typesystem
 import com.google.inject.Inject
 import java.util.ArrayList
 import org.eclipse.xtend.core.jvmmodel.IXtendJvmAssociations
-import org.eclipse.xtext.xbase.lib.Pair
-import org.eclipse.xtext.xbase.typesystem.references.AnyTypeReference
-import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference
-import org.junit.Test
-
-import static org.junit.Assert.*
+import org.eclipse.xtend.core.tests.RuntimeInjectorProvider
+import org.eclipse.xtext.common.types.TypesFactory
+import org.eclipse.xtext.common.types.util.Primitives
 import org.eclipse.xtext.common.types.util.TypeConformanceComputer
 import org.eclipse.xtext.common.types.util.TypeReferences
-import org.eclipse.xtext.common.types.util.Primitives
-import org.eclipse.xtext.common.types.TypesFactory
-import org.junit.Ignore
+import org.eclipse.xtext.junit4.InjectWith
+import org.eclipse.xtext.junit4.XtextRunner
+import org.eclipse.xtext.xbase.lib.Pair
+import org.eclipse.xtext.xbase.typesystem.references.AnyTypeReference
 import org.eclipse.xtext.xbase.typesystem.references.FunctionTypeReference
+import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference
 import org.eclipse.xtext.xbase.typesystem.references.ParameterizedTypeReference
 import org.eclipse.xtext.xtype.XFunctionTypeRef
-import org.eclipse.xtext.junit4.XtextRunner
-import org.eclipse.xtext.junit4.InjectWith
+import org.junit.Test
 import org.junit.runner.RunWith
-import org.eclipse.xtend.core.tests.RuntimeInjectorProvider
 
 /**
  * @author Sebastian Zarnekow
@@ -472,93 +469,4 @@ class OldAPICommonSuperTypeTest extends CommonSuperTypeTest {
 		assertEquals(type, (reference as XFunctionTypeRef).equivalent.simpleName)
 	}
 	
-	@Ignore
-	@Test
-	override testCommonSuperType_11() {
-		super.testCommonSuperType_11()
-	}
-	
-	@Ignore
-	@Test
-	override testCommonSuperType_12() {
-		super.testCommonSuperType_12()
-	}
-	
-	@Ignore
-	@Test
-	override testCommonSuperType_37() {
-		super.testCommonSuperType_37()
-	}
-	
-	@Ignore
-	@Test
-	override testCommonSuperType_41() {
-		super.testCommonSuperType_41()
-	}
-	
-	@Ignore
-	@Test
-	override testCommonSuperType_51() {
-		super.testCommonSuperType_51()
-	}
-	
-	@Ignore
-	@Test
-	override testCommonSuperType_52() {
-		super.testCommonSuperType_52()
-	}
-	
-	@Ignore
-	@Test
-	override testCommonSuperType_56() {
-		super.testCommonSuperType_56()
-	}
-	
-	@Ignore
-	@Test
-	override testCommonSuperType_58() {
-		super.testCommonSuperType_58()
-	}
-	
-	@Ignore
-	@Test
-	override testCommonSuperType_59() {
-		super.testCommonSuperType_59()
-	}
-	
-	@Ignore
-	@Test
-	override testCommonSuperType_60() {
-		super.testCommonSuperType_60()
-	}
-	
-	@Ignore
-	@Test
-	override testCommonSuperType_63() {
-		super.testCommonSuperType_63()
-	}
-	
-	@Ignore
-	@Test
-	override testCommonSuperType_64() {
-		super.testCommonSuperType_64()
-	}
-	
-	@Ignore
-	@Test
-	override testCommonSuperType_65() {
-		super.testCommonSuperType_65()
-	}
-	
-	@Ignore
-	@Test
-	override testCommonSuperType_67() {
-		super.testCommonSuperType_67()
-	}
-	
-	@Ignore
-	@Test
-	override testCommonSuperType_68() {
-		super.testCommonSuperType_68()
-	}
 }

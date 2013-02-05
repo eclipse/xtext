@@ -9,12 +9,8 @@ package org.eclipse.xtend.core.tests.validation
 
 import com.google.inject.Inject
 import org.eclipse.xtend.core.tests.AbstractXtendTestCase
-import org.eclipse.xtend.core.tests.NewTypeSystemRuntimeInjectorProvider
-import org.eclipse.xtext.junit4.InjectWith
-import org.eclipse.xtext.junit4.XtextRunner
 import org.eclipse.xtext.junit4.validation.ValidationTestHelper
 import org.junit.Test
-import org.junit.runner.RunWith
 
 import static org.eclipse.xtend.core.validation.IssueCodes.*
 import static org.eclipse.xtend.core.xtend.XtendPackage$Literals.*
@@ -194,7 +190,3 @@ class ModifierValidationTest extends AbstractXtendTestCase {
 	}
 }
 
-@RunWith(typeof(XtextRunner))
-@InjectWith(typeof(NewTypeSystemRuntimeInjectorProvider))
-class ModifierValidationTest2 extends ModifierValidationTest {
-}

@@ -7,11 +7,17 @@
  *******************************************************************************/
 package org.eclipse.xtend.core.tests;
 
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EReference;
 import org.eclipse.xtend.core.XtendRuntimeModule;
 import org.eclipse.xtend.core.XtendStandaloneSetup;
+import org.eclipse.xtend.core.scoping.XtendScopeProvider;
 import org.eclipse.xtend.core.xtend.XtendFactory;
+import org.eclipse.xtext.common.types.TypesPackage;
 import org.eclipse.xtext.common.types.access.CachingClasspathTypeProviderFactory;
 import org.eclipse.xtext.common.types.access.ClasspathTypeProviderFactory;
+import org.eclipse.xtext.scoping.IScope;
+import org.eclipse.xtext.scoping.IScopeProvider;
 
 import com.google.inject.Guice;
 import com.google.inject.Injector;
@@ -19,6 +25,7 @@ import com.google.inject.Injector;
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
+@SuppressWarnings("deprecation")
 public class RuntimeTestSetup extends XtendStandaloneSetup {
 
 	@Override
@@ -38,6 +45,23 @@ public class RuntimeTestSetup extends XtendStandaloneSetup {
 			public Class<? extends ClasspathTypeProviderFactory> bindClasspathTypeProviderFactory() {
 				return CachingClasspathTypeProviderFactory.class;
 			}
+			
+			@Override
+			public Class<? extends IScopeProvider> bindIScopeProvider() {
+				return DisabledXtendScopeProvider.class;
+			}
+			
 		});
+	}
+	
+	public static class DisabledXtendScopeProvider extends XtendScopeProvider {
+		@Deprecated
+		@Override
+		public IScope getScope(EObject context, EReference reference) {
+			if (TypesPackage.Literals.JVM_TYPE == reference.getEReferenceType()) {
+				return super.getScope(context, reference);
+			}
+			throw new UnsupportedOperationException();
+		}
 	}
 }
