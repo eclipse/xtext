@@ -36,6 +36,138 @@ public abstract class AbstractXtendCompilerTest extends AbstractXtendTestCase {
   private IGeneratorConfigProvider generatorConfigProvider;
   
   @Test
+  public void testBug399975_01() throws Exception {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("class A {");
+    _builder.newLine();
+    _builder.append(" ");
+    _builder.append("def void m(Class<?>[] c) {}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("class B extends A{");
+    _builder.newLine();
+    _builder.append(" ");
+    _builder.append("override m(Class<? extends Object>[] c) {}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("@SuppressWarnings(\"all\")");
+    _builder_1.newLine();
+    _builder_1.append("public class A {");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("public void m(final Class<? extends Object>[] c) {");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    this.assertCompilesTo(_builder, _builder_1);
+  }
+  
+  @Test
+  public void testBug399975_02() throws Exception {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("class B extends A{");
+    _builder.newLine();
+    _builder.append(" ");
+    _builder.append("override m(Class<? extends Object>[] c) {}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("class A {");
+    _builder.newLine();
+    _builder.append(" ");
+    _builder.append("def void m(Class<?>[] c) {}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("@SuppressWarnings(\"all\")");
+    _builder_1.newLine();
+    _builder_1.append("public class B extends A {");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("public void m(final Class<? extends Object>[] c) {");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    this.assertCompilesTo(_builder, _builder_1);
+  }
+  
+  @Test
+  public void testBug399975_03() throws Exception {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("class A {");
+    _builder.newLine();
+    _builder.append(" ");
+    _builder.append("def void m(Class<?>... c) {}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("class B extends A{");
+    _builder.newLine();
+    _builder.append(" ");
+    _builder.append("override m(Class<? extends Object>... c) {}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("@SuppressWarnings(\"all\")");
+    _builder_1.newLine();
+    _builder_1.append("public class A {");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("public void m(final Class<? extends Object>... c) {");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    this.assertCompilesTo(_builder, _builder_1);
+  }
+  
+  @Test
+  public void testBug399975_04() throws Exception {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("class B extends A{");
+    _builder.newLine();
+    _builder.append(" ");
+    _builder.append("override m(Class<? extends Object>... c) {}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("class A {");
+    _builder.newLine();
+    _builder.append(" ");
+    _builder.append("def void m(Class<?>... c) {}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("@SuppressWarnings(\"all\")");
+    _builder_1.newLine();
+    _builder_1.append("public class B extends A {");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("public void m(final Class<? extends Object>... c) {");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    this.assertCompilesTo(_builder, _builder_1);
+  }
+  
+  @Test
   public void testBug399527() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("class Y {");
