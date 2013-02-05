@@ -23,6 +23,7 @@ import org.junit.runners.Suite.SuiteClasses;
 	BatchTypeResolverTest.class,
 	XbaseTypeProviderTest2.class,
 	BatchReturnTypeResolverTest.class,
+	PermutingBatchReturnTypeResolverTest.class,
 	ReturnTypeComputationTest2.class,
 	BatchFeatureCallTypeTest.class,
 	BatchIdentifiableTypeTest.class,

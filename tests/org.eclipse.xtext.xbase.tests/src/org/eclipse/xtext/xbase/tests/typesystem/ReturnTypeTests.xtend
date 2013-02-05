@@ -263,15 +263,6 @@ abstract class AbstractBatchReturnTypeTest extends AbstractReturnTypeTest<Lightw
 		val xExpression = expression(replacedExpressionText, false /* true */);
 		assertTrue(xExpression.eResource.errors.toString, xExpression.eResource.errors.isEmpty)
 		assertTrue(xExpression.eResource.warnings.toString, xExpression.eResource.warnings.isEmpty)
-		if (!xExpression.hasReturnExpression) {
-			doResolvesTo('''return («replacedExpressionText»)''', type);
-			doResolvesTo('''{ { return («replacedExpressionText») } }''', type);
-			doResolvesTo('''return {«replacedExpressionText»}''', type);
-			doResolvesTo('''{ { return { ( if (true) «replacedExpressionText» ) {«replacedExpressionText»} }''', type);
-		} else {
-			doResolvesTo('''{ «replacedExpressionText» }''', type);
-			doResolvesTo('''{ ( if (true) «replacedExpressionText» ) {«replacedExpressionText»} }''', type);
-		}
 		val resolvedTypes = getTypeResolver.resolveTypes(xExpression)
 		val resolvedType = resolvedTypes.getReturnType(xExpression)
 		assertEquals(replacedExpressionText, type, resolvedType.simpleName);

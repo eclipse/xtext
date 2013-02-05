@@ -67,45 +67,6 @@ public abstract class AbstractBatchReturnTypeTest extends AbstractReturnTypeTest
       EList<Diagnostic> _warnings_1 = _eResource_3.getWarnings();
       boolean _isEmpty_1 = _warnings_1.isEmpty();
       Assert.assertTrue(_string_1, _isEmpty_1);
-      boolean _hasReturnExpression = this.hasReturnExpression(xExpression);
-      boolean _not = (!_hasReturnExpression);
-      if (_not) {
-        StringConcatenation _builder = new StringConcatenation();
-        _builder.append("return (");
-        _builder.append(replacedExpressionText, "");
-        _builder.append(")");
-        this.doResolvesTo(_builder.toString(), type);
-        StringConcatenation _builder_1 = new StringConcatenation();
-        _builder_1.append("{ { return (");
-        _builder_1.append(replacedExpressionText, "");
-        _builder_1.append(") } }");
-        this.doResolvesTo(_builder_1.toString(), type);
-        StringConcatenation _builder_2 = new StringConcatenation();
-        _builder_2.append("return {");
-        _builder_2.append(replacedExpressionText, "");
-        _builder_2.append("}");
-        this.doResolvesTo(_builder_2.toString(), type);
-        StringConcatenation _builder_3 = new StringConcatenation();
-        _builder_3.append("{ { return { ( if (true) ");
-        _builder_3.append(replacedExpressionText, "");
-        _builder_3.append(" ) {");
-        _builder_3.append(replacedExpressionText, "");
-        _builder_3.append("} }");
-        this.doResolvesTo(_builder_3.toString(), type);
-      } else {
-        StringConcatenation _builder_4 = new StringConcatenation();
-        _builder_4.append("{ ");
-        _builder_4.append(replacedExpressionText, "");
-        _builder_4.append(" }");
-        this.doResolvesTo(_builder_4.toString(), type);
-        StringConcatenation _builder_5 = new StringConcatenation();
-        _builder_5.append("{ ( if (true) ");
-        _builder_5.append(replacedExpressionText, "");
-        _builder_5.append(" ) {");
-        _builder_5.append(replacedExpressionText, "");
-        _builder_5.append("} }");
-        this.doResolvesTo(_builder_5.toString(), type);
-      }
       IBatchTypeResolver _typeResolver = this.getTypeResolver();
       final IResolvedTypes resolvedTypes = _typeResolver.resolveTypes(xExpression);
       final LightweightTypeReference resolvedType = resolvedTypes.getReturnType(xExpression);
