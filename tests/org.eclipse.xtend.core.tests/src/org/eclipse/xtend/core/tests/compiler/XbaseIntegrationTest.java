@@ -7,15 +7,11 @@
  *******************************************************************************/
 package org.eclipse.xtend.core.tests.compiler;
 
-import java.io.IOException;
-
 import org.eclipse.xtend.core.tests.RuntimeInjectorProvider;
 import org.eclipse.xtext.junit4.InjectWith;
 import org.eclipse.xtext.junit4.XtextRunner;
 import org.eclipse.xtext.xbase.junit.evaluation.AbstractXbaseEvaluationTest;
 import org.junit.Before;
-import org.junit.Ignore;
-import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import com.google.inject.Inject;
@@ -35,54 +31,6 @@ public class XbaseIntegrationTest extends AbstractXbaseEvaluationTest {
 		testHelper.setUp();
 	}
 	
-	@Test public void testExceptionInClosure_01() throws Exception {
-		assertEvaluatesWithException(IOException.class, 
-				"{val ()=>void proc = [| throw new java.io.IOException()] proc.apply return null}");
-	}
-	
-	@Test public void testExceptionInClosure_02() throws Exception {
-		assertEvaluatesWithException(IOException.class, 
-				"{ newArrayList('foo').forEach( s | throw new java.io.IOException() ) return null }");
-	}
-	
-	@Test public void testExceptionInClosure_03() throws Exception {
-		assertEvaluatesWithException(IOException.class, 
-				"{val ()=>void proc = [| throw new java.io.IOException] proc.apply return null}");
-	}
-	
-	@Test public void testExceptionInClosure_04() throws Exception {
-		assertEvaluatesWithException(IOException.class, 
-				"{ newArrayList('foo').forEach( s | throw new java.io.IOException ) return null }");
-	}
-	
-	@Test public void testTryCatch_07() throws Exception {
-		assertEvaluatesTo("", 
-				"try new String() " +
-				"  catch(java.io.IOException e) 'foo'" +
-				"  catch(Exception e) 'bar'");
-	}
-	
-	@Test public void testTryCatch_08() throws Exception {
-		assertEvaluatesTo("", 
-				"try new String " +
-				"  catch(java.io.IOException e) 'foo'" +
-				"  catch(Exception e) 'bar'");
-	}
-	
-	@Override
-	@Test
-	@Ignore("Takes very long and produces invalid Java code")
-	public void testBlock_01() throws Exception {
-		super.testBlock_01();
-	}
-	
-	@Override
-	@Test
-	@Ignore("Fails in old implementation")
-	public void testBlock_02() throws Exception {
-		super.testBlock_02();
-	}
-
 	@Override
 	protected void assertEvaluatesTo(Object object, String string) {
 		testHelper.assertEvaluatesTo(object, string);
@@ -93,7 +41,4 @@ public class XbaseIntegrationTest extends AbstractXbaseEvaluationTest {
 		testHelper.assertEvaluatesWithException(class1, string);
 	}
 
-	@Test public void testIteratorExtensions() throws Exception {
-		assertEvaluatesTo("Foo", "newArrayList('Foo').iterator.toIterable.iterator.next");
-	}
 }
