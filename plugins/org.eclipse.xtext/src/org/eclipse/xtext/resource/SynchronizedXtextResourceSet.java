@@ -7,6 +7,7 @@ import java.util.ListIterator;
 
 import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.common.util.AbstractEList;
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 
@@ -30,6 +31,15 @@ public class SynchronizedXtextResourceSet extends XtextResourceSet {
 		}
 	}
 
+	// Befriend the API tooling
+	@Override
+	public EList<Resource> getResources() {
+		return super.getResources();
+	}
+
+	/**
+	 * @since 2.4
+	 */
 	@Override
 	protected ResourcesList createResourceList() {
 		return new ResourcesList() {
