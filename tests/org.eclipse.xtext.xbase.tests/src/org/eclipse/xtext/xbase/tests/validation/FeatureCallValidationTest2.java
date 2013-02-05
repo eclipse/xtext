@@ -10,19 +10,13 @@ package org.eclipse.xtext.xbase.tests.validation;
 import static org.eclipse.xtext.xbase.XbasePackage.Literals.*;
 import static org.eclipse.xtext.xbase.validation.IssueCodes.*;
 
-import org.eclipse.xtext.junit4.InjectWith;
-import org.eclipse.xtext.junit4.XtextRunner;
 import org.eclipse.xtext.xbase.XBlockExpression;
 import org.eclipse.xtext.xbase.XExpression;
-import org.eclipse.xtext.xbase.tests.typesystem.XbaseNewTypeSystemInjectorProvider;
 import org.junit.Test;
-import org.junit.runner.RunWith;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-@RunWith(XtextRunner.class)
-@InjectWith(XbaseNewTypeSystemInjectorProvider.class)
 public class FeatureCallValidationTest2 extends FeatureCallValidationTest {
 
 	@Override

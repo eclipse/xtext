@@ -3,6 +3,7 @@
 */
 package org.eclipse.xtext.xbase.tests.typesystem;
 
+import org.eclipse.xtext.xbase.tests.XbaseInjectorProvider;
 import org.eclipse.xtext.xbase.typesystem.internal.DefaultBatchTypeResolver;
 import org.eclipse.xtext.xbase.typesystem.internal.DefaultReentrantTypeResolver;
 import org.eclipse.xtext.xbase.typesystem.internal.LogicalContainerAwareBatchTypeResolver;
@@ -16,21 +17,21 @@ import com.google.inject.Injector;
  * 
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public class XbaseWithLogicalContainerInjectorProvider extends XbaseNewTypeSystemInjectorProvider {
+public class XbaseWithLogicalContainerInjectorProvider extends XbaseInjectorProvider {
 
 	@Override
 	protected Injector internalCreateInjector() {
 		return new XbaseWithLogicalContainerTestStandaloneSetup().createInjectorAndDoEMFRegistration();
 	}
 
-	public static class XbaseWithLogicalContainerTestStandaloneSetup extends XbaseNewTypeSystemTestStandaloneSetup {
+	public static class XbaseWithLogicalContainerTestStandaloneSetup extends XbaseTestStandaloneSetup {
 		@Override
 		public Injector createInjector() {
 			return Guice.createInjector(new XbaseWithLogicalContainerRuntimeModule());
 		}
 	}
 
-	public static class XbaseWithLogicalContainerRuntimeModule extends XbaseNewTypeSystemTestRuntimeModule {
+	public static class XbaseWithLogicalContainerRuntimeModule extends XbaseTestRuntimeModule {
 
 		public Class<? extends DefaultBatchTypeResolver> bindDefaultBatchTypeResolver() {
 			return LogicalContainerAwareBatchTypeResolver.class; 

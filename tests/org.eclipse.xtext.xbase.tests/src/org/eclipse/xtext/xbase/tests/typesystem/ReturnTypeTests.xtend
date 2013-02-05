@@ -7,28 +7,25 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.tests.typesystem
 
-import org.junit.Test
-import org.junit.runner.RunWith
-import org.eclipse.xtext.junit4.XtextRunner
-import org.eclipse.xtext.junit4.InjectWith
-import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference
+import com.google.inject.Inject
+import org.eclipse.emf.common.util.URI
+import org.eclipse.emf.ecore.InternalEObject
+import org.eclipse.emf.ecore.resource.Resource
+import org.eclipse.xtext.common.types.JvmIdentifiableElement
+import org.eclipse.xtext.linking.impl.XtextLinkingDiagnostic
+import org.eclipse.xtext.resource.XtextSyntaxDiagnostic
+import org.eclipse.xtext.xbase.XClosure
+import org.eclipse.xtext.xbase.XExpression
+import org.eclipse.xtext.xbase.XReturnExpression
+import org.eclipse.xtext.xbase.XThrowExpression
+import org.eclipse.xtext.xbase.XbaseFactory
 import org.eclipse.xtext.xbase.typesystem.IBatchTypeResolver
 import org.eclipse.xtext.xbase.typesystem.IResolvedTypes
-import org.eclipse.xtext.xbase.XbaseFactory
-import org.eclipse.emf.ecore.InternalEObject
-import org.eclipse.emf.common.util.URI
-import org.junit.Ignore
-import org.eclipse.xtext.common.types.JvmIdentifiableElement
-import org.eclipse.xtext.xbase.XExpression
-import org.eclipse.xtext.xbase.typesystem.references.ParameterizedTypeReference
 import org.eclipse.xtext.xbase.typesystem.references.FunctionTypeReference
-import com.google.inject.Inject
-import org.eclipse.xtext.xbase.XReturnExpression
-import org.eclipse.xtext.xbase.XClosure
-import org.eclipse.xtext.xbase.XThrowExpression
-import org.eclipse.emf.ecore.resource.Resource
-import org.eclipse.xtext.resource.XtextSyntaxDiagnostic
-import org.eclipse.xtext.linking.impl.XtextLinkingDiagnostic
+import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference
+import org.eclipse.xtext.xbase.typesystem.references.ParameterizedTypeReference
+import org.junit.Ignore
+import org.junit.Test
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -254,8 +251,6 @@ abstract class AbstractReturnTypeTest<Reference> extends AbstractTypeResolverTes
 /**
  * @author Sebastian Zarnekow
  */
-@RunWith(typeof(XtextRunner))
-@InjectWith(typeof(XbaseNewTypeSystemInjectorProvider))
 abstract class AbstractBatchReturnTypeTest extends AbstractReturnTypeTest<LightweightTypeReference> {
 	
 	override LightweightTypeReference resolvesTo(String expression, String type) {

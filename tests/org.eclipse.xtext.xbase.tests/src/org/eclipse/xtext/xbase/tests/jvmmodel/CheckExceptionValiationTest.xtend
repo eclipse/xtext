@@ -2,14 +2,12 @@ package org.eclipse.xtext.xbase.tests.jvmmodel
 
 import com.google.inject.Inject
 import org.eclipse.xtext.junit4.validation.ValidationTestHelper
-import org.eclipse.xtext.xbase.XbasePackage$Literals
+import org.eclipse.xtext.xbase.XbasePackage
 import org.eclipse.xtext.xbase.validation.IssueCodes
-import org.junit.Test
-import org.junit.runner.RunWith
-import org.eclipse.xtext.junit4.XtextRunner
-import org.eclipse.xtext.junit4.InjectWith
 import org.junit.Ignore
+import org.junit.Test
 
+@Ignore("TODO implement exception validation")
 class CheckExceptionValidationTest extends AbstractJvmModelTest {
 	
 	@Inject ValidationTestHelper helper
@@ -21,8 +19,3 @@ class CheckExceptionValidationTest extends AbstractJvmModelTest {
 	}	
 }
 
-@Ignore("TODO implement exception validation")
-@RunWith(typeof(XtextRunner))
-@InjectWith(typeof(AbstractJvmModelTest$SimpleJvmModelTestInjectorProvider2))
-class CheckExceptionValidationTest2 extends CheckExceptionValidationTest {
-}

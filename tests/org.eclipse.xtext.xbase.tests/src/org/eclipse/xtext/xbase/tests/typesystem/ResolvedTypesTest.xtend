@@ -8,23 +8,17 @@
 package org.eclipse.xtext.xbase.tests.typesystem
 
 import com.google.inject.Inject
-import org.eclipse.xtend.lib.Property
-import org.eclipse.xtext.xbase.tests.AbstractXbaseTestCase
-import org.junit.Before
-import org.junit.Test
 import org.eclipse.xtext.common.types.TypesFactory
 import org.eclipse.xtext.xbase.XbaseFactory
 import org.eclipse.xtext.xbase.junit.typesystem.PublicReentrantTypeResolver
 import org.eclipse.xtext.xbase.junit.typesystem.PublicResolvedTypes
-import org.eclipse.xtext.junit4.XtextRunner
-import org.junit.runner.RunWith
-import org.eclipse.xtext.junit4.InjectWith
+import org.eclipse.xtext.xbase.tests.AbstractXbaseTestCase
+import org.junit.Before
+import org.junit.Test
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-@RunWith(typeof(XtextRunner))
-@InjectWith(typeof(XbaseNewTypeSystemInjectorProvider))
 class ResolvedTypesTest extends AbstractXbaseTestCase {
 	
 	@Inject 

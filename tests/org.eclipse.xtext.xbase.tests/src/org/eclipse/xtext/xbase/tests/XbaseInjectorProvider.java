@@ -3,6 +3,8 @@
 */
 package org.eclipse.xtext.xbase.tests;
 
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EReference;
 import org.eclipse.xtext.common.types.access.CachingClasspathTypeProviderFactory;
 import org.eclipse.xtext.common.types.access.ClasspathTypeProviderFactory;
 import org.eclipse.xtext.junit4.GlobalRegistries;
@@ -10,6 +12,8 @@ import org.eclipse.xtext.junit4.GlobalRegistries.GlobalStateMemento;
 import org.eclipse.xtext.junit4.IInjectorProvider;
 import org.eclipse.xtext.junit4.IRegistryConfigurator;
 import org.eclipse.xtext.resource.SynchronizedXtextResourceSet;
+import org.eclipse.xtext.scoping.IScope;
+import org.eclipse.xtext.scoping.IScopeProvider;
 import org.eclipse.xtext.xbase.XbaseRuntimeModule;
 import org.eclipse.xtext.xbase.XbaseStandaloneSetup;
 import org.eclipse.xtext.xbase.junit.SynchronizedXtextResourceSetProvider;
@@ -23,6 +27,7 @@ import com.google.inject.Provider;
  * 
  * @author Sebastian Zarnekow - Initial contribution and API
  */
+@SuppressWarnings("deprecation")
 public class XbaseInjectorProvider implements IInjectorProvider, IRegistryConfigurator {
 
 	protected GlobalStateMemento stateBeforeInjectorCreation;
@@ -75,6 +80,19 @@ public class XbaseInjectorProvider implements IInjectorProvider, IRegistryConfig
 
 		public Class<? extends Provider<SynchronizedXtextResourceSet>> provideSynchronizedResourceSet() {
 			return SynchronizedXtextResourceSetProvider.class;
+		}
+		
+		@Override
+		public Class<? extends IScopeProvider> bindIScopeProvider() {
+			return DisabledXbaseScopeProvider.class;
+		}
+	}
+	
+	public static class DisabledXbaseScopeProvider extends org.eclipse.xtext.xbase.scoping.XbaseScopeProvider {
+		@Deprecated
+		@Override
+		public IScope getScope(EObject context, EReference reference) {
+			throw new UnsupportedOperationException();
 		}
 	}
 

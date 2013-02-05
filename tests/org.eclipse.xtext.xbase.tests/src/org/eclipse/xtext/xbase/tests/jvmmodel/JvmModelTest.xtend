@@ -1,13 +1,10 @@
 package org.eclipse.xtext.xbase.tests.jvmmodel
 
 import com.google.inject.Inject
-import org.eclipse.xtext.junit4.InjectWith
-import org.eclipse.xtext.junit4.XtextRunner
 import org.eclipse.xtext.junit4.validation.ValidationTestHelper
 import org.eclipse.xtext.resource.IResourceDescription
 import org.eclipse.xtext.xbase.lib.util.ReflectExtensions
 import org.junit.Test
-import org.junit.runner.RunWith
 
 import static org.eclipse.xtext.xbase.XbasePackage$Literals.*
 import static org.eclipse.xtext.xbase.validation.IssueCodes.*
@@ -44,8 +41,3 @@ class JvmModelTest extends AbstractJvmModelTest {
 	
 }
 
-@RunWith(typeof(XtextRunner))
-@InjectWith(typeof(AbstractJvmModelTest$SimpleJvmModelTestInjectorProvider2))
-class JvmModelTest2 extends JvmModelTest {
-	
-}

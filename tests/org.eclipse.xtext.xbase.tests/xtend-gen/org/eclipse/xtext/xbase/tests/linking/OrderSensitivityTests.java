@@ -25,7 +25,7 @@ import org.junit.Test;
  * @author Sebastian Zarnekow
  */
 @SuppressWarnings("all")
-public abstract class AbstractOrderSensitivityTest extends AbstractXbaseTestCase {
+public class OrderSensitivityTests extends AbstractXbaseTestCase {
   @Test
   public void testOverloadedMethods_01() {
     this.doTestOverloadedAndExpect("testdata.ordersensitivity.CaseA", "overloaded(chars, strings)", "overloaded(java.util.Collection,java.lang.Iterable)");

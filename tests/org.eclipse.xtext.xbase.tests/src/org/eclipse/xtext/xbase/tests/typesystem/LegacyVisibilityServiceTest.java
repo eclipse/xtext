@@ -8,18 +8,14 @@
 package org.eclipse.xtext.xbase.tests.typesystem;
 
 import org.eclipse.xtext.common.types.util.JvmVisibilityServiceTest;
-import org.eclipse.xtext.junit4.InjectWith;
-import org.eclipse.xtext.junit4.XtextRunner;
 import org.eclipse.xtext.xbase.typesystem.legacy.LegacyVisibilityService;
-import org.junit.runner.RunWith;
 
 import com.google.inject.Inject;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-@RunWith(XtextRunner.class)
-@InjectWith(XbaseNewTypeSystemInjectorProvider.class)
+@SuppressWarnings("deprecation")
 public class LegacyVisibilityServiceTest extends JvmVisibilityServiceTest {
 
 	@Inject

@@ -7,18 +7,12 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.tests.interpreter;
 
-import org.eclipse.xtext.junit4.InjectWith;
-import org.eclipse.xtext.junit4.XtextRunner;
-import org.eclipse.xtext.xbase.tests.typesystem.XbaseNewTypeSystemInjectorProvider;
 import org.junit.Ignore;
 import org.junit.Test;
-import org.junit.runner.RunWith;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-@RunWith(XtextRunner.class)
-@InjectWith(XbaseNewTypeSystemInjectorProvider.class)
 public class XbaseInterpreterTestWithNewTypeSystem extends XbaseInterpreterTest {
 	
 	@Override

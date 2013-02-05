@@ -7,9 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.tests.typesystem;
 
-import org.eclipse.xtext.xbase.tests.validation.AssignmentTests2;
 import org.eclipse.xtext.xbase.tests.validation.FeatureCallValidationTest2;
-import org.eclipse.xtext.xbase.tests.validation.JvmTypeReferencesValidatorTest2;
 import org.eclipse.xtext.xbase.tests.validation.TypeConformanceValidatorTest2;
 import org.eclipse.xtext.xbase.tests.validation.ValidationTests2;
 import org.junit.runner.RunWith;
@@ -21,9 +19,7 @@ import org.junit.runners.Suite.SuiteClasses;
  */
 @RunWith(Suite.class)
 @SuiteClasses({
-	AssignmentTests2.class,
 	FeatureCallValidationTest2.class,
-	JvmTypeReferencesValidatorTest2.class,
 	TypeConformanceValidatorTest2.class,
 	ValidationTests2.class,
 })

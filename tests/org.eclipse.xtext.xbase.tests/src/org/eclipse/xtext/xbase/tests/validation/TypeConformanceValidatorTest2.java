@@ -8,18 +8,12 @@
 package org.eclipse.xtext.xbase.tests.validation;
 
 import org.eclipse.xtext.common.types.TypesPackage;
-import org.eclipse.xtext.junit4.InjectWith;
-import org.eclipse.xtext.junit4.XtextRunner;
 import org.eclipse.xtext.xbase.XbasePackage;
-import org.eclipse.xtext.xbase.tests.typesystem.XbaseNewTypeSystemInjectorProvider;
 import org.junit.Test;
-import org.junit.runner.RunWith;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-@RunWith(XtextRunner.class)
-@InjectWith(XbaseNewTypeSystemInjectorProvider.class)
 public class TypeConformanceValidatorTest2 extends TypeConformanceValidatorTest {
 	
 	@Override

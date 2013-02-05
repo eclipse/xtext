@@ -14,8 +14,6 @@ import org.antlr.runtime.ANTLRStringStream
 import org.antlr.runtime.CommonToken
 import org.antlr.runtime.Token
 import org.eclipse.xtext.common.types.JvmIdentifiableElement
-import org.eclipse.xtext.junit4.InjectWith
-import org.eclipse.xtext.junit4.XtextRunner
 import org.eclipse.xtext.parser.antlr.Lexer
 import org.eclipse.xtext.resource.XtextResource
 import org.eclipse.xtext.util.ReplaceRegion
@@ -30,13 +28,10 @@ import org.eclipse.xtext.xbase.typesystem.internal.TypeData
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference
 import org.junit.Ignore
 import org.junit.Test
-import org.junit.runner.RunWith
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-@RunWith(typeof(XtextRunner))
-@InjectWith(typeof(XbaseNewTypeSystemInjectorProvider))
 abstract class AbstractSmokeTest extends AbstractTypeResolverTest<LightweightTypeReference> {
 	
 	@Inject
