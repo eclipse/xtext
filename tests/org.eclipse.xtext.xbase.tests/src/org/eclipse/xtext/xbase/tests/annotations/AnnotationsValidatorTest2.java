@@ -8,21 +8,15 @@
 package org.eclipse.xtext.xbase.tests.annotations;
 
 import org.eclipse.xtext.diagnostics.Diagnostic;
-import org.eclipse.xtext.junit4.InjectWith;
-import org.eclipse.xtext.junit4.XtextRunner;
 import org.eclipse.xtext.xbase.XbasePackage;
 import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotation;
 import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotationsPackage;
-import org.eclipse.xtext.xbase.tests.typesystem.XbaseWithAnnotationsNewTypeSystemInjectorProvider;
 import org.eclipse.xtext.xbase.validation.IssueCodes;
 import org.junit.Test;
-import org.junit.runner.RunWith;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-@RunWith(XtextRunner.class)
-@InjectWith(XbaseWithAnnotationsNewTypeSystemInjectorProvider.class)
 public class AnnotationsValidatorTest2 extends AnnotationsValidatorTest {
 	
 	@Override
