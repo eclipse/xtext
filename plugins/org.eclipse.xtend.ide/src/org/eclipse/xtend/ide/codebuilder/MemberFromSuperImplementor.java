@@ -10,6 +10,8 @@ package org.eclipse.xtend.ide.codebuilder;
 import static com.google.common.collect.Iterables.*;
 import static org.eclipse.xtext.util.Strings.*;
 
+import java.util.List;
+
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.xtend.core.jvmmodel.IXtendJvmAssociations;
@@ -17,6 +19,7 @@ import org.eclipse.xtend.core.xtend.XtendClass;
 import org.eclipse.xtext.common.types.JvmConstructor;
 import org.eclipse.xtext.common.types.JvmExecutable;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
+import org.eclipse.xtext.common.types.JvmGenericArrayTypeReference;
 import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmTypeConstraint;
@@ -67,6 +70,7 @@ public class MemberFromSuperImplementor {
 		appendExecutable(overrider, superConstructor, appendable);
 	}
 
+	@SuppressWarnings("deprecation")
 	protected void appendExecutable(final XtendClass overrider, JvmExecutable executableFromSuper,
 			IAppendable appendable) {
 		appendable.openScope();
@@ -113,6 +117,7 @@ public class MemberFromSuperImplementor {
 		appendable.closeScope();
 	}
 	
+	@SuppressWarnings("deprecation")
 	protected void appendSignature(JvmExecutable overridden, EObject context,
 			final ITypeArgumentContext typeArgumentContext, IAppendable appendable, boolean isCall) {
 		boolean isFirst = true;
@@ -149,7 +154,10 @@ public class MemberFromSuperImplementor {
 					}
 				}
 			}
-			appendable.append("> ");
+			appendable.append(">");
+			if (!isCall) {
+				appendable.append(" ");
+			}
 		}
 		if (overridden instanceof JvmConstructor) {
 			if (isCall)
@@ -160,17 +168,26 @@ public class MemberFromSuperImplementor {
 			appendable.append(overridden.getSimpleName());
 		}
 		appendable.append("(");
-		isFirst = true;
-		for (JvmFormalParameter param : overridden.getParameters()) {
-			if (!isFirst)
+		List<JvmFormalParameter> parameterList = overridden.getParameters();
+		for (int i = 0; i < parameterList.size(); i++) {
+			JvmFormalParameter param = parameterList.get(i);
+			if (i != 0)
 				appendable.append(", ");
 			isFirst = false;
 			if (isCall) {
 				appendable.append(appendable.getName(param));
 			} else {
 				JvmTypeReference overriddenParameterType = typeArgumentContext.getLowerBound(param.getParameterType());
+				boolean insertDots = false;
+				if (overridden.isVarArgs() && overriddenParameterType instanceof JvmGenericArrayTypeReference) {
+					overriddenParameterType = ((JvmGenericArrayTypeReference) overriddenParameterType).getComponentType();
+					insertDots = true;
+				}
 				typeReferenceSerializer.serialize(overriddenParameterType, context, appendable, false, false, false,
 						true);
+				if (insertDots) {
+					appendable.append("...");
+				}
 				String declareVariable = (appendable instanceof StringBuilderBasedAppendable) ? ((StringBuilderBasedAppendable) appendable)
 						.declareSyntheticVariable(param, param.getName()) : appendable.declareVariable(param,
 						param.getName());

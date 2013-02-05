@@ -23,7 +23,6 @@ import com.google.inject.Inject;
 /**
  * @author Jan Koehnlein - Initial contribution and API
  */
-
 public class ImplementSuperMemberAssistTest extends AbstractXtendContentAssistBugTest {
 
 	@Inject
@@ -51,6 +50,44 @@ public class ImplementSuperMemberAssistTest extends AbstractXtendContentAssistBu
 
 	@Test public void testStaticMethod() throws Exception {
 		newBuilder().append("class Foo extends Thread { currentT").assertText("");
+	}
+	
+	@Test public void testVarArgsMethod_01() throws Exception {
+		newBuilder().append("class A { def <T> Iterable<T> x(T... args) {} } class B extends A { x").assertText(
+				"\n" + indent + "\n" + indent + "override <T> x(T... args) {\n" +
+				indent + indent + "super.<T>x(args)\n" +
+				indent + "}");
+	}
+	
+	@Test public void testVarArgsMethod_02() throws Exception {
+		newBuilder().append("class A { def void x(String s, int... i) {} } class B extends A { x").assertText(
+				"\n" + indent + "\n" + indent + "override x(String s, int... i) {\n" +
+				indent + indent + "super.x(s, i)\n" +
+				indent + "}");
+	}
+	
+	@Test public void testVarArgsConstructor_01() throws Exception {
+		newBuilder().append("class A { new(Class<?>... c) {} } class B extends A { ne").assertText(
+				"\n" + indent + "\n" + indent + "new(Class<? extends Object>... c) {\n" + // should be Class<?>
+				indent + indent + "super(c)\n" +
+				indent + "}", 
+				"new");
+	}
+	
+	@Test public void testVarArgsConstructor_02() throws Exception {
+		newBuilder().append("class A<X> { new(Class<X>... c) {} } class B<Z> extends A<Z> { ne").assertText(
+				"\n" + indent + "\n" + indent + "new(Class<Z>... c) {\n" +
+				indent + indent + "super(c)\n" +
+				indent + "}", 
+				"new");
+	}
+	
+	@Test public void testVarArgsConstructor_03() throws Exception {
+		newBuilder().append("class A<X> { new(Class<X>... c) {} } class B extends A<String> { ne").assertText(
+				"\n" + indent + "\n" + indent + "new(Class<String>... c) {\n" +
+				indent + indent + "super(c)\n" +
+				indent + "}", 
+				"new");
 	}
 
 	@Test public void testNonStaticMethod() throws Exception {
