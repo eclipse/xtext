@@ -8,23 +8,17 @@
 package org.eclipse.xtend.core.tests.typesystem;
 
 import com.google.inject.Inject;
-import org.eclipse.xtend.core.tests.NewTypeSystemRuntimeInjectorProvider;
-import org.eclipse.xtend.core.tests.compiler.AbstractCompilerTest;
+import org.eclipse.xtend.core.tests.compiler.CompilerTest;
 import org.eclipse.xtend.core.tests.typesystem.Oven;
-import org.eclipse.xtext.junit4.InjectWith;
-import org.eclipse.xtext.junit4.XtextRunner;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.junit.Ignore;
 import org.junit.Test;
-import org.junit.runner.RunWith;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-@RunWith(value = XtextRunner.class)
-@InjectWith(value = NewTypeSystemRuntimeInjectorProvider.class)
 @SuppressWarnings("all")
-public abstract class AbstractCompilerSmokeTest extends AbstractCompilerTest {
+public abstract class AbstractCompilerSmokeTest extends CompilerTest {
   @Inject
   private Oven _oven;
   

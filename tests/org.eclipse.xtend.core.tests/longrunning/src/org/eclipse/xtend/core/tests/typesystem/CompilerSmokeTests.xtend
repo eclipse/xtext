@@ -14,13 +14,8 @@ import org.antlr.runtime.ANTLRStringStream
 import org.antlr.runtime.CommonToken
 import org.antlr.runtime.Token
 import org.eclipse.emf.common.util.URI
-import org.eclipse.xtend.core.tests.NewTypeSystemRuntimeInjectorProvider
-import org.eclipse.xtend.core.tests.compiler.AbstractCompilerTest
-import org.eclipse.xtend.core.tests.compiler.AbstractXtendCompilerTest
 import org.eclipse.xtend.core.xtend.XtendFile
 import org.eclipse.xtext.common.types.JvmIdentifiableElement
-import org.eclipse.xtext.junit4.InjectWith
-import org.eclipse.xtext.junit4.XtextRunner
 import org.eclipse.xtext.junit4.util.ParseHelper
 import org.eclipse.xtext.parser.antlr.Lexer
 import org.eclipse.xtext.resource.XtextResource
@@ -41,14 +36,13 @@ import org.eclipse.xtext.xbase.typesystem.internal.TypeData
 import org.junit.Assert
 import org.junit.Ignore
 import org.junit.Test
-import org.junit.runner.RunWith
+import org.eclipse.xtend.core.tests.compiler.XtendCompilerTest
+import org.eclipse.xtend.core.tests.compiler.CompilerTest
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-@RunWith(typeof(XtextRunner))
-@InjectWith(typeof(NewTypeSystemRuntimeInjectorProvider))
-abstract class AbstractXtendCompilerSmokeTest extends AbstractXtendCompilerTest {
+abstract class AbstractXtendCompilerSmokeTest extends XtendCompilerTest {
 	
 	@Inject extension Oven
 	
@@ -67,9 +61,7 @@ abstract class AbstractXtendCompilerSmokeTest extends AbstractXtendCompilerTest 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-@RunWith(typeof(XtextRunner))
-@InjectWith(typeof(NewTypeSystemRuntimeInjectorProvider))
-abstract class AbstractCompilerSmokeTest extends AbstractCompilerTest {
+abstract class AbstractCompilerSmokeTest extends CompilerTest {
 	
 	@Inject extension Oven
 	

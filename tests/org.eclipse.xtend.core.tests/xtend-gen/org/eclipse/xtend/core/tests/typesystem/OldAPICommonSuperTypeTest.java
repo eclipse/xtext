@@ -36,8 +36,6 @@ import org.eclipse.xtext.xbase.lib.Pair;
 import org.eclipse.xtext.xbase.lib.StringExtensions;
 import org.eclipse.xtext.xtype.XFunctionTypeRef;
 import org.junit.Assert;
-import org.junit.Ignore;
-import org.junit.Test;
 import org.junit.runner.RunWith;
 
 /**
@@ -152,95 +150,5 @@ public class OldAPICommonSuperTypeTest extends CommonSuperTypeTest {
     JvmTypeReference _equivalent = ((XFunctionTypeRef) reference).getEquivalent();
     String _simpleName = _equivalent.getSimpleName();
     Assert.assertEquals(type, _simpleName);
-  }
-  
-  @Ignore
-  @Test
-  public void testCommonSuperType_11() {
-    super.testCommonSuperType_11();
-  }
-  
-  @Ignore
-  @Test
-  public void testCommonSuperType_12() {
-    super.testCommonSuperType_12();
-  }
-  
-  @Ignore
-  @Test
-  public void testCommonSuperType_37() {
-    super.testCommonSuperType_37();
-  }
-  
-  @Ignore
-  @Test
-  public void testCommonSuperType_41() {
-    super.testCommonSuperType_41();
-  }
-  
-  @Ignore
-  @Test
-  public void testCommonSuperType_51() {
-    super.testCommonSuperType_51();
-  }
-  
-  @Ignore
-  @Test
-  public void testCommonSuperType_52() {
-    super.testCommonSuperType_52();
-  }
-  
-  @Ignore
-  @Test
-  public void testCommonSuperType_56() {
-    super.testCommonSuperType_56();
-  }
-  
-  @Ignore
-  @Test
-  public void testCommonSuperType_58() {
-    super.testCommonSuperType_58();
-  }
-  
-  @Ignore
-  @Test
-  public void testCommonSuperType_59() {
-    super.testCommonSuperType_59();
-  }
-  
-  @Ignore
-  @Test
-  public void testCommonSuperType_60() {
-    super.testCommonSuperType_60();
-  }
-  
-  @Ignore
-  @Test
-  public void testCommonSuperType_63() {
-    super.testCommonSuperType_63();
-  }
-  
-  @Ignore
-  @Test
-  public void testCommonSuperType_64() {
-    super.testCommonSuperType_64();
-  }
-  
-  @Ignore
-  @Test
-  public void testCommonSuperType_65() {
-    super.testCommonSuperType_65();
-  }
-  
-  @Ignore
-  @Test
-  public void testCommonSuperType_67() {
-    super.testCommonSuperType_67();
-  }
-  
-  @Ignore
-  @Test
-  public void testCommonSuperType_68() {
-    super.testCommonSuperType_68();
   }
 }

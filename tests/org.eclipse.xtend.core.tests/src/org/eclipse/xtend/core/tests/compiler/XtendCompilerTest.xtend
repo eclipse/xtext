@@ -17,10 +17,261 @@ import org.eclipse.xtext.xbase.compiler.JvmModelGenerator
 import org.junit.Ignore
 import org.junit.Test
 
-abstract class AbstractXtendCompilerTest extends AbstractXtendTestCase {
+class XtendCompilerTest extends AbstractXtendTestCase {
 	
 	@Inject JvmModelGenerator generator
 	@Inject IGeneratorConfigProvider generatorConfigProvider
+	
+	@Test def void testAbstractIterator_01() {
+		assertCompilesTo('''
+			import java.util.Iterator
+			import com.google.common.collect.AbstractIterator
+			public class Foo  {
+			    def <T> Iterator<T> skipNulls(Iterator<T> iter) {
+			    	val AbstractIterator<T> result = [|
+			    		while(iter.hasNext) {
+			    			val elem = iter.next
+			    			if (elem != null)
+			    				return elem
+			    		}
+			    		return self.endOfData
+			    	]
+			    	return result
+			    }
+			}
+		''', '''
+			import com.google.common.collect.AbstractIterator;
+			import java.util.Iterator;
+			import org.eclipse.xtext.xbase.lib.ObjectExtensions;
+			
+			@SuppressWarnings("all")
+			public class Foo {
+			  public <T extends Object> Iterator<T> skipNulls(final Iterator<T> iter) {
+			    final AbstractIterator<T> _function = new AbstractIterator<T>() {
+			        @Override
+			        protected T computeNext() {
+			          boolean _hasNext = iter.hasNext();
+			          boolean _while = _hasNext;
+			          while (_while) {
+			            {
+			              final T elem = iter.next();
+			              boolean _notEquals = ObjectExtensions.operator_notEquals(elem, null);
+			              if (_notEquals) {
+			                return elem;
+			              }
+			            }
+			            boolean _hasNext_1 = iter.hasNext();
+			            _while = _hasNext_1;
+			          }
+			          return this.endOfData();
+			        }
+			      };
+			    final AbstractIterator<T> result = _function;
+			    return result;
+			  }
+			}
+		''')
+	}
+	
+	@Test def void testAbstractIterator_02() {
+		assertCompilesTo('''
+			import com.google.common.collect.AbstractIterator
+			public class Foo  {
+			    def skipNulls() {
+			    	val AbstractIterator<String> result = [|
+			    		toString
+			    		super.toString
+			    		self.toString
+			    	]
+			    	return result
+			    }
+			}
+		''', '''
+			import com.google.common.collect.AbstractIterator;
+			
+			@SuppressWarnings("all")
+			public class Foo {
+			  public AbstractIterator<String> skipNulls() {
+			    final AbstractIterator<String> _function = new AbstractIterator<String>() {
+			        @Override
+			        protected String computeNext() {
+			          String _xblockexpression = null;
+			          {
+			            Foo.this.toString();
+			            Foo.super.toString();
+			            String _string = this.toString();
+			            _xblockexpression = (_string);
+			          }
+			          return _xblockexpression;
+			        }
+			      };
+			    final AbstractIterator<String> result = _function;
+			    return result;
+			  }
+			}
+		''')
+	}
+	
+	// TODO elvis should evaluate the right side lazy
+	@Test def void testAbstractIterator_03() {
+		assertCompilesTo('''
+			import java.util.Iterator
+			import com.google.common.collect.AbstractIterator
+			public class Foo  {
+				def <T> Iterator<T> skipNulls(Iterator<T> iter) {
+					val AbstractIterator<T> result = [|
+						iter.findFirst [ it != null ] ?: self.endOfData
+					]
+					return result
+				}
+			}
+		''', '''
+			import com.google.common.collect.AbstractIterator;
+			import java.util.Iterator;
+			import org.eclipse.xtext.xbase.lib.Functions.Function1;
+			import org.eclipse.xtext.xbase.lib.IteratorExtensions;
+			import org.eclipse.xtext.xbase.lib.ObjectExtensions;
+			
+			@SuppressWarnings("all")
+			public class Foo {
+			  public <T extends Object> Iterator<T> skipNulls(final Iterator<T> iter) {
+			    final AbstractIterator<T> _function = new AbstractIterator<T>() {
+			        @Override
+			        protected T computeNext() {
+			          final Function1<T,Boolean> _function = new Function1<T,Boolean>() {
+			              public Boolean apply(final T it) {
+			                boolean _notEquals = ObjectExtensions.operator_notEquals(it, null);
+			                return Boolean.valueOf(_notEquals);
+			              }
+			            };
+			          T _findFirst = IteratorExtensions.<T>findFirst(iter, _function);
+			          T _endOfData = this.endOfData();
+			          T _elvis = ObjectExtensions.<T>operator_elvis(_findFirst, _endOfData);
+			          return _elvis;
+			        }
+			      };
+			    final AbstractIterator<T> result = _function;
+			    return result;
+			  }
+			}
+		''')
+	}
+	
+	// TODO elvis should evaluate the right side lazy
+	@Test
+	def testAbstractIterator_04() { 
+		assertCompilesTo(
+			'''
+				import java.util.Iterator
+				import com.google.common.collect.AbstractIterator
+				class FindFirstOnIt {
+
+					def <T> Iterator<T> skipNulls(Iterator<T> it) {
+						val AbstractIterator<T> result = [|
+							findFirst [ it != null ] ?: self.endOfData
+						]
+						return result
+					}
+				}
+			''', '''
+				import com.google.common.collect.AbstractIterator;
+				import java.util.Iterator;
+				import org.eclipse.xtext.xbase.lib.Functions.Function1;
+				import org.eclipse.xtext.xbase.lib.IteratorExtensions;
+				import org.eclipse.xtext.xbase.lib.ObjectExtensions;
+				
+				@SuppressWarnings("all")
+				public class FindFirstOnIt {
+				  public <T extends Object> Iterator<T> skipNulls(final Iterator<T> it) {
+				    final AbstractIterator<T> _function = new AbstractIterator<T>() {
+				        @Override
+				        protected T computeNext() {
+				          final Function1<T,Boolean> _function = new Function1<T,Boolean>() {
+				              public Boolean apply(final T it) {
+				                boolean _notEquals = ObjectExtensions.operator_notEquals(it, null);
+				                return Boolean.valueOf(_notEquals);
+				              }
+				            };
+				          T _findFirst = IteratorExtensions.<T>findFirst(it, _function);
+				          T _endOfData = this.endOfData();
+				          T _elvis = ObjectExtensions.<T>operator_elvis(_findFirst, _endOfData);
+				          return _elvis;
+				        }
+				      };
+				    final AbstractIterator<T> result = _function;
+				    return result;
+				  }
+				}
+			''')
+	}
+	
+	@Test def testVoidMethod_01() throws Exception {
+		'''
+			class A {
+				def m() {
+					System::out.println('')
+				}
+			}
+		'''.assertCompilesTo('''
+			@SuppressWarnings("all")
+			public class A {
+			  public void m() {
+			    System.out.println("");
+			  }
+			}
+		''')
+	}
+	
+	@Ignore("TODO implement this stuff for closures")
+	@Test def testVoidMethod_02() throws Exception {
+		'''
+			class A {
+				def m() {
+					[ | System::out.println('') ]
+				}
+			}
+		'''.assertCompilesTo('''
+			import org.eclipse.xtext.xbase.lib.Procedures.Procedure0;
+
+			@SuppressWarnings("all")
+			public class A {
+			  public Procedure0 m() {
+			    final Procedure0 _function = new Procedure0() {
+			        public void apply() {
+			          System.out.println("");
+			        }
+			      };
+			    return _function;
+			  }
+			}
+		''')
+	}
+	
+	@Test def testVoidMethod_03() throws Exception {
+		'''
+			class A {
+				def m() {
+					[ | println('') ]
+				}
+			}
+		'''.assertCompilesTo('''
+			import org.eclipse.xtext.xbase.lib.Functions.Function0;
+			import org.eclipse.xtext.xbase.lib.InputOutput;
+			
+			@SuppressWarnings("all")
+			public class A {
+			  public Function0<String> m() {
+			    final Function0<String> _function = new Function0<String>() {
+			        public String apply() {
+			          String _println = InputOutput.<String>println("");
+			          return _println;
+			        }
+			      };
+			    return _function;
+			  }
+			}
+		''')
+	}
 	
 	@Test def testBug399975_01() throws Exception {
 		'''
@@ -311,7 +562,6 @@ abstract class AbstractXtendCompilerTest extends AbstractXtendTestCase {
 	}
 	
 	@Test def testThreeDataClassesExtendingEachOther() {
-		// part of the Html builder API example. Caused and NPE in which wasn't elsewhere detected in the tests.
 		'''
 			import java.util.ArrayList
 			
@@ -346,7 +596,7 @@ abstract class AbstractXtendCompilerTest extends AbstractXtendTestCase {
 			  }
 			  
 			  public String tagName() {
-			    Class<? extends Object> _class = this.getClass();
+			    Class<? extends Node> _class = this.getClass();
 			    String _simpleName = _class.getSimpleName();
 			    String _lowerCase = _simpleName.toLowerCase();
 			    return _lowerCase;
@@ -654,6 +904,24 @@ abstract class AbstractXtendCompilerTest extends AbstractXtendTestCase {
 		''')
 	}
 	
+	@Test def testBug380062_01_b() {
+		assertCompilesTo('''
+			class Foo<T> {
+			    def Object foo(Foo ^new) {
+			        foo(^new)
+			    }
+			}
+		''','''
+			@SuppressWarnings("all")
+			public class Foo<T extends Object> {
+			  public Object foo(final Foo new_) {
+			    Object _foo = this.foo(new_);
+			    return _foo;
+			  }
+			}
+		''')
+	}
+	
 	@Test def testBug380062_02() {
 		assertCompilesTo('''
 			class Foo<T> {
@@ -883,7 +1151,7 @@ abstract class AbstractXtendCompilerTest extends AbstractXtendTestCase {
 		''')
 	}
 	@Test
-	def testSwitchOverNull() { 
+	def testSwitchOverNull() {
 		assertCompilesTo('''
 			public class Foo  {
 			    def foo() {
@@ -899,8 +1167,8 @@ abstract class AbstractXtendCompilerTest extends AbstractXtendTestCase {
 			
 			@SuppressWarnings("all")
 			public class Foo {
-			  public Object foo() {
-			    Object _switchResult = null;
+			  public Function1<? super Integer,? extends Object> foo() {
+			    Function1<? super Integer,? extends Object> _switchResult = null;
 			    final Object _switchValue = null;
 			    boolean _matched = false;
 			    if (!_matched) {
@@ -2078,10 +2346,28 @@ abstract class AbstractXtendCompilerTest extends AbstractXtendTestCase {
 	}
 
 	@Test
-	def testExplicitBoxingUnboxing() {
+	def testExplicitBoxingUnboxing_01() {
 		assertCompilesTo('''
 			class X {
 				def foo(int p0, Integer p1) {
+					foo(p1,p0)
+				}
+			}
+		''','''
+			@SuppressWarnings("all")
+			public class X {
+			  public Object foo(final int p0, final Integer p1) {
+			    Object _foo = this.foo((p1).intValue(), Integer.valueOf(p0));
+			    return _foo;
+			  }
+			}
+		''')
+	}
+	
+	@Test def testExplicitBoxingUnboxing_02() {
+		assertCompilesTo('''
+			class X {
+				def Object foo(int p0, Integer p1) {
 					foo(p1,p0)
 				}
 			}
@@ -2392,22 +2678,17 @@ abstract class AbstractXtendCompilerTest extends AbstractXtendTestCase {
 				@SuppressWarnings("all")
 				public class MyClass implements ReturnTypeUsesTypeParameter {
 				  public <LocalName extends CharSequence> Inner<LocalName> accept(final LocalName param) {
-				    final Procedure1<Procedure1<? super LocalName>> _function = new Procedure1<Procedure1<? super LocalName>>() {
-				        public void apply(final Procedure1<? super LocalName> it) {
+				    final Inner<LocalName> _function = new Inner<LocalName>() {
+				        public void useProcedure(final Procedure1<? super LocalName> it) {
 				          if (true) {
 				            if (it!=null) it.apply(param);
 				          }
 				        }
 				      };
-				    return new Inner<LocalName>() {
-				        public void useProcedure(Procedure1<? super LocalName> arg0) {
-				          _function.apply(arg0);
-				        }
-				    };
+				    return _function;
 				  }
 				}
 			''')
-		
 	}
 	
 	@Test
@@ -2474,6 +2755,7 @@ abstract class AbstractXtendCompilerTest extends AbstractXtendTestCase {
 			''')
 	}
 	
+	@Ignore("TODO implement better expectation computation for unresolved type parameters")
 	@Test
 	def testRichStringAutoConversionToString_02(){
 		assertCompilesTo(
@@ -2570,6 +2852,7 @@ abstract class AbstractXtendCompilerTest extends AbstractXtendTestCase {
 			''')
 	}
 
+	@Ignore("TODO implement better expectation computation for unresolved type parameters")
 	@Test
 	def testRichStringNoAutoConversionToString_03(){
 		assertCompilesTo(
@@ -3176,7 +3459,7 @@ abstract class AbstractXtendCompilerTest extends AbstractXtendTestCase {
 			''')
 	}
 
-	@Test@Ignore
+	@Test
 	def compileProperty() {
 		val generatorConfig = generatorConfigProvider.get(null)
 		assertCompilesTo(
@@ -3219,79 +3502,50 @@ abstract class AbstractXtendCompilerTest extends AbstractXtendTestCase {
 	}
 }
 
-class XtendCompilerTest extends AbstractXtendCompilerTest {
-	
-	@Ignore("Fails with old impl")
-	@Test override testBug391077() {
-		super.testBug391077()
-	}
-	
-	@Ignore("Fails with old impl")
-	@Test
-	override testAnnotationWithIntArray() throws Exception {
-		super.testAnnotationWithIntArray()
-	}
-	
-	@Ignore("Fails with old impl")
-	@Test
-	override testStaticMethod_02() {
-		super.testStaticMethod_02()
-	}
-	
-	@Ignore("Fails with old impl")
-	@Test
-	override testInstanceMethod() {
-		super.testInstanceMethod()
-	}
-	
-	@Ignore("Fails with old impl")
-	@Test
-	override testClosureSneakyThrow_02() {
-		super.testClosureSneakyThrow_02()
-	}
-	
-	/*
-	 * Refined questionable expectation.
-	 */
-	@Test
-	override testRichStringNoAutoConversionToString_03(){
-		assertCompilesTo(
-			"class Foo { def test(){ System::out.println('''SomeString''') } }", 
-			'''
-				import org.eclipse.xtend2.lib.StringConcatenation;
-				
-				@SuppressWarnings("all")
-				public class Foo {
-				  public void test() {
-				    StringConcatenation _builder = new StringConcatenation();
-				    _builder.append("SomeString");
-				    System.out.println(_builder.toString());
-				  }
-				}
-			''')
-	}
-	
-	/*
-	 * Refined questionable expectation.
-	 */
-	@Test
-	override testRichStringNoAutoConversionToString_04(){
-		assertCompilesTo(
-			"class Foo { def test(){ System::out.println(println('''SomeString''')) } }", 
-			'''
-				import org.eclipse.xtend2.lib.StringConcatenation;
-				import org.eclipse.xtext.xbase.lib.InputOutput;
-				
-				@SuppressWarnings("all")
-				public class Foo {
-				  public void test() {
-				    StringConcatenation _builder = new StringConcatenation();
-				    _builder.append("SomeString");
-				    String _println = InputOutput.<String>println(_builder.toString());
-				    System.out.println(_println);
-				  }
-				}
-			''')
-	}
-	
-}
+//class XtendCompilerTest extends AbstractXtendCompilerTest {
+//	
+//	/*
+//	 * Refined questionable expectation.
+//	 */
+//	@Test
+//	override testRichStringNoAutoConversionToString_03(){
+//		assertCompilesTo(
+//			"class Foo { def test(){ System::out.println('''SomeString''') } }", 
+//			'''
+//				import org.eclipse.xtend2.lib.StringConcatenation;
+//				
+//				@SuppressWarnings("all")
+//				public class Foo {
+//				  public void test() {
+//				    StringConcatenation _builder = new StringConcatenation();
+//				    _builder.append("SomeString");
+//				    System.out.println(_builder.toString());
+//				  }
+//				}
+//			''')
+//	}
+//	
+//	/*
+//	 * Refined questionable expectation.
+//	 */
+//	@Test
+//	override testRichStringNoAutoConversionToString_04(){
+//		assertCompilesTo(
+//			"class Foo { def test(){ System::out.println(println('''SomeString''')) } }", 
+//			'''
+//				import org.eclipse.xtend2.lib.StringConcatenation;
+//				import org.eclipse.xtext.xbase.lib.InputOutput;
+//				
+//				@SuppressWarnings("all")
+//				public class Foo {
+//				  public void test() {
+//				    StringConcatenation _builder = new StringConcatenation();
+//				    _builder.append("SomeString");
+//				    String _println = InputOutput.<String>println(_builder.toString());
+//				    System.out.println(_println);
+//				  }
+//				}
+//			''')
+//	}
+//	
+//}

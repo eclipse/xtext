@@ -37,7 +37,6 @@ import org.eclipse.xtext.resource.XtextResourceSet;
 import org.eclipse.xtext.util.StringInputStream;
 import org.eclipse.xtext.xbase.XBlockExpression;
 import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotationsPackage;
-import org.junit.Ignore;
 import org.junit.Test;
 
 import com.google.inject.Inject;
@@ -359,17 +358,17 @@ public class XtendValidationTest extends AbstractXtendTestCase {
 	
 	@Test public void testShadowingVariableNames_00() throws Exception {
 		XtendClass clazz = clazz("class X { def foo() { val this = 'foo' } }");
-		helper.assertError(clazz, XVARIABLE_DECLARATION, VARIABLE_NAME_SHADOWING);
+		helper.assertError(clazz, XVARIABLE_DECLARATION, VARIABLE_NAME_DISALLOWED);
 	}
 	
 	@Test public void testShadowingVariableNames_01() throws Exception {
 		XtendClass clazz = clazz("class X { def foo() { val ^super = 'foo' } }");
-		helper.assertError(clazz, XVARIABLE_DECLARATION, VARIABLE_NAME_SHADOWING);
+		helper.assertError(clazz, XVARIABLE_DECLARATION, VARIABLE_NAME_DISALLOWED);
 	}
 	
 	@Test public void testShadowingVariableNames_03() throws Exception {
 		XtendClass clazz = clazz("class X { def foo(String this) { } }");
-		helper.assertError(clazz, XTEND_PARAMETER, VARIABLE_NAME_SHADOWING);
+		helper.assertError(clazz, XTEND_PARAMETER, VARIABLE_NAME_DISALLOWED);
 	}
 	
 	@Test public void testShadowingVariableNames_04() throws Exception {
@@ -801,12 +800,29 @@ public class XtendValidationTest extends AbstractXtendTestCase {
 	}
 
 	@Test
-	@Ignore("fails since we do not look at the actual receiver when visibility rules are applied")
 	public void testInaccessibleMethod2() throws Exception {
 		XtendClass xtendClass = clazz("class Foo { def foo() { val o = new Object() o.clone() }}");
 		helper.assertError(((XBlockExpression) ((XtendFunction) xtendClass.getMembers().get(0)).getExpression())
 				.getExpressions().get(1), XABSTRACT_FEATURE_CALL, FEATURE_NOT_VISIBLE, "Feature",
 				"not", "visible");
+	}
+	
+	@Test
+	public void testInaccessibleMethod3() throws Exception {
+		XtendClass xtendClass = clazz("class Foo { def foo() { val o = new Object() clone() }}");
+		helper.assertNoErrors(xtendClass);
+	}
+	
+	@Test
+	public void testInaccessibleMethod4() throws Exception {
+		XtendClass xtendClass = clazz("class Foo { def foo() { val o = new Object() this.clone super.clone }}");
+		helper.assertNoErrors(xtendClass);
+	}
+	
+	@Test
+	public void testInaccessibleMethod5() throws Exception {
+		XtendClass xtendClass = clazz("package java.lang class Foo { def foo() { val o = new Object() o.clone }}");
+		helper.assertNoErrors(xtendClass);
 	}
 
 	@Test public void testDuplicateParameter() throws Exception {
@@ -835,8 +851,7 @@ public class XtendValidationTest extends AbstractXtendTestCase {
 		assertNoConformanceError("'''«IF Boolean::FALSE»«ENDIF»'''");
 		assertNoConformanceError("'''«IF true»«ENDIF»'''");
 		assertNoConformanceError("'''«IF 1 == 1»«ENDIF»'''");
-		assertConformanceError("'''«IF 1»«ENDIF»'''", XNUMBER_LITERAL, "int",
-				"boolean", "java.lang.Boolean");
+		assertConformanceError("'''«IF 1»«ENDIF»'''", XNUMBER_LITERAL, "int", "boolean", "Boolean");
 	}
 	
 	@Test public void testRichStringForLoop() throws Exception {
@@ -844,16 +859,13 @@ public class XtendValidationTest extends AbstractXtendTestCase {
 		assertNoConformanceError("'''«FOR i: 1..10 BEFORE 'a' SEPARATOR 1 AFTER true»«ENDFOR»'''");
 		assertConformanceError(
 				"'''«FOR i: 1..10 BEFORE while(true) null SEPARATOR 'b' AFTER 'c'»«ENDFOR»'''", 
-				XWHILE_EXPRESSION, "void",
-				"java.lang.Object");
+				XWHILE_EXPRESSION, "Unexpected type primitive void");
 		assertConformanceError(
 				"'''«FOR i: 1..10 BEFORE 'a' SEPARATOR while(true) null AFTER 'c'»«ENDFOR»'''", 
-				XWHILE_EXPRESSION, "void",
-				"java.lang.Object");
+				XWHILE_EXPRESSION, "Unexpected type primitive void");
 		assertConformanceError(
 				"'''«FOR i: 1..10 BEFORE 'a' SEPARATOR null AFTER while(true) null»«ENDFOR»'''", 
-				XWHILE_EXPRESSION, "void",
-				"java.lang.Object");
+				XWHILE_EXPRESSION, "Unexpected type primitive void");
 	}
 	
 	@Test public void testBug343089_01() throws Exception {
@@ -917,7 +929,6 @@ public class XtendValidationTest extends AbstractXtendTestCase {
 	}
 	
 	@Test 
-	@Ignore
 	public void testBug343096() throws Exception {
 		XtendFunction function = function(
 				"def <T> test() {\n" + 
@@ -926,6 +937,7 @@ public class XtendValidationTest extends AbstractXtendTestCase {
 				"  }]\n" + 
 				"}");
 		helper.assertNoErrors(function);
+		helper.assertWarning(function, XTEND_FUNCTION, TOO_LITTLE_TYPE_INFORMATION, "recursive", "'Object'");
 	}
 
 	protected void assertConformanceError(String body, EClass objectType, String... messageParts)
@@ -1311,7 +1323,20 @@ public class XtendValidationTest extends AbstractXtendTestCase {
     			"    genericMethod(return null)" +
     			"  }\n" +
     			"}");
-    	helper.assertError(file, XRETURN_EXPRESSION, INCOMPATIBLE_TYPES);
+    	helper.assertError(file, XFEATURE_CALL, UNREACHABLE_CODE);
+    }
+    
+    @Test public void testBug386659_02() throws Exception {
+    	XtendFile file  = file(
+    			"class foo {\n" +
+    			"  def <T> T genericMethod(T t, int i) {\n" +
+    			"    return t\n" +
+    			"  }\n" +
+    			"  def Object test() {\n" +
+    			"    genericMethod(return null, 1)" +
+    			"  }\n" +
+    			"}");
+    	helper.assertError(file, XNUMBER_LITERAL, UNREACHABLE_CODE);
     }
     
     /**

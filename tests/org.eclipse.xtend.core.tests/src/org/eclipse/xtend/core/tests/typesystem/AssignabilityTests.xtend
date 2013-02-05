@@ -9,22 +9,20 @@ package org.eclipse.xtend.core.tests.typesystem
 
 import com.google.inject.Inject
 import org.eclipse.xtend.core.jvmmodel.IXtendJvmAssociations
+import org.eclipse.xtend.core.tests.RuntimeInjectorProvider
+import org.eclipse.xtext.common.types.TypesFactory
+import org.eclipse.xtext.common.types.util.TypeConformanceComputer
+import org.eclipse.xtext.junit4.InjectWith
+import org.eclipse.xtext.junit4.XtextRunner
 import org.eclipse.xtext.xbase.lib.Pair
+import org.eclipse.xtext.xbase.typesystem.conformance.ConformanceHint
+import org.eclipse.xtext.xbase.typesystem.conformance.TypeConformanceComputationArgument
 import org.eclipse.xtext.xbase.typesystem.references.AnyTypeReference
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference
 import org.eclipse.xtext.xbase.typesystem.references.WildcardTypeReference
-import org.junit.Test
-
-import static org.junit.Assert.*
-import org.eclipse.xtext.xbase.typesystem.conformance.TypeConformanceComputationArgument
-import org.eclipse.xtext.common.types.util.TypeConformanceComputer
-import org.eclipse.xtext.common.types.TypesFactory
 import org.junit.Ignore
-import org.eclipse.xtend.core.tests.RuntimeInjectorProvider
-import org.eclipse.xtext.junit4.XtextRunner
+import org.junit.Test
 import org.junit.runner.RunWith
-import org.eclipse.xtext.junit4.InjectWith
-import org.eclipse.xtext.xbase.typesystem.conformance.ConformanceHint
 
 /**
  * @author Sebastian Zarnekow
@@ -1082,36 +1080,6 @@ class OldAPIAssignabilityTest extends AssignabilityTest {
 		val lhsType = if (lhsAndParams.key != null) operation.parameters.head.parameterType else TypesFactory::eINSTANCE.createJvmAnyTypeReference
 		val rhsType = if (rhs != null) operation.parameters.last.parameterType else TypesFactory::eINSTANCE.createJvmAnyTypeReference
 		assertEquals(expectation, conformanceComputer.isConformant(lhsType, rhsType))
-	}
-	
-	@Ignore
-	@Test
-	override testPrimitiveConversion_09() {
-		super.testPrimitiveConversion_09()
-	}
-	
-	@Ignore
-	@Test
-	override testFunctionTypeAsParameterized_01() {
-		super.testFunctionTypeAsParameterized_01()
-	}
-	
-	@Ignore
-	@Test
-	override testDemandConvertedFunctionType_05() {
-		super.testDemandConvertedFunctionType_05()
-	}
-	
-	@Ignore
-	@Test
-	override testTypeParameter_06() {
-		super.testTypeParameter_06()
-	}
-	
-	@Ignore
-	@Test
-	override testTwoTypeParameters_01() {
-		super.testTwoTypeParameters_01()
 	}
 	
 }

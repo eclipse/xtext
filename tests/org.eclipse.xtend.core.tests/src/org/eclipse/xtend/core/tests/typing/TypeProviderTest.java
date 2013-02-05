@@ -21,6 +21,7 @@ import org.eclipse.xtext.xbase.XFeatureCall;
 import org.eclipse.xtext.xbase.XMemberFeatureCall;
 import org.eclipse.xtext.xbase.XReturnExpression;
 import org.eclipse.xtext.xbase.typing.ITypeProvider;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import com.google.inject.Inject;
@@ -28,6 +29,7 @@ import com.google.inject.Inject;
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
+@SuppressWarnings("deprecation")
 public class TypeProviderTest extends AbstractXtendTestCase {
 
 	@Inject
@@ -60,8 +62,8 @@ public class TypeProviderTest extends AbstractXtendTestCase {
 		assertEquals("void", typeProvider.getExpectedType(body).getIdentifier());
 		assertEquals("void", typeProvider.getExpectedReturnType(body, true).getIdentifier());
 		XMemberFeatureCall toString = (XMemberFeatureCall) body.getExpressions().get(0);
-		assertEquals("void", typeProvider.getExpectedType(toString).getIdentifier());
-		assertEquals("void", typeProvider.getExpectedReturnType(toString, true).getIdentifier());
+		assertNull(typeProvider.getExpectedType(toString));
+		assertNull(typeProvider.getExpectedReturnType(toString, true));
 	}
 	
 	@Test public void testReturnTypeInConstructor_02() throws Exception {
@@ -86,8 +88,8 @@ public class TypeProviderTest extends AbstractXtendTestCase {
 		XBlockExpression body = (XBlockExpression) constructor.getExpression();
 		XFeatureCall superCall = (XFeatureCall) body.getExpressions().get(0);
 		assertEquals("void", typeProvider.getType(superCall).getIdentifier());
-		assertEquals("void", typeProvider.getExpectedType(superCall).getIdentifier());
-		assertEquals("void", typeProvider.getExpectedReturnType(superCall, true).getIdentifier());
+		assertNull(typeProvider.getExpectedType(superCall));
+		assertNull(typeProvider.getExpectedReturnType(superCall, true));
 	}
 	
 	@Test public void testTypeOfThisInConstructor() throws Exception {
@@ -99,8 +101,8 @@ public class TypeProviderTest extends AbstractXtendTestCase {
 		XBlockExpression body = (XBlockExpression) constructor.getExpression();
 		XFeatureCall thisCall = (XFeatureCall) body.getExpressions().get(0);
 		assertEquals("void", typeProvider.getType(thisCall).getIdentifier());
-		assertEquals("void", typeProvider.getExpectedType(thisCall).getIdentifier());
-		assertEquals("void", typeProvider.getExpectedReturnType(thisCall, true).getIdentifier());
+		assertNull(typeProvider.getExpectedType(thisCall));
+		assertNull(typeProvider.getExpectedReturnType(thisCall, true));
 	}
 
 	@Test public void testBug380063NoException() throws Exception {
@@ -125,7 +127,6 @@ public class TypeProviderTest extends AbstractXtendTestCase {
 		assertEquals("java.lang.String", typeProvider.getType(expression).getIdentifier());
 	}
 
-	@SuppressWarnings("deprecation")
 	@Test public void testTypeOfRichStringWithExpectedString_1() throws Exception {
 		XtendFunction function = function("def String foo(String x) {" +
 				"foo('''someString''')" +
@@ -136,7 +137,7 @@ public class TypeProviderTest extends AbstractXtendTestCase {
 		assertEquals("java.lang.String", typeProvider.getType(expression).getIdentifier());
 	}
 
-	@SuppressWarnings("deprecation")
+	@Ignore("TODO improve expectation if the expected type is an unresolved type parameter")
 	@Test public void testTypeOfRichStringWithExpectedString_2() throws Exception {
 		XtendFunction function = function("def String foo(String x) {" +
 				"println('''someString''')" +
@@ -147,6 +148,7 @@ public class TypeProviderTest extends AbstractXtendTestCase {
 		assertEquals("java.lang.String", typeProvider.getType(expression).getIdentifier());
 	}
 
+	@Ignore("TODO improve expectation if the expected type is an unresolved type parameter")
 	@Test public void testTypeOfRichStringWithExpectedString_3() throws Exception {
 		XtendFunction function = function("def foo(String x) {" +
 				"System::out.println('''someString''')" +
@@ -165,7 +167,6 @@ public class TypeProviderTest extends AbstractXtendTestCase {
 		assertEquals("java.lang.CharSequence", typeProvider.getType(expression).getIdentifier());
 	}
 
-	@SuppressWarnings("deprecation")
 	@Test public void testTypeOfRichStringWithNoExpectedString_1() throws Exception {
 		XtendFunction function = function("def foo(String x) {" +
 				"println('''someString''')" +

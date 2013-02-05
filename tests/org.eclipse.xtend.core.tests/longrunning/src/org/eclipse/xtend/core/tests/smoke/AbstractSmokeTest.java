@@ -30,7 +30,6 @@ import org.eclipse.xtext.util.CancelIndicator;
 import org.eclipse.xtext.util.Files;
 import org.eclipse.xtext.util.ReplaceRegion;
 import org.eclipse.xtext.util.StringInputStream;
-import org.eclipse.xtext.validation.ResourceValidatorImpl;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;

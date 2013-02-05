@@ -7,25 +7,19 @@
  *******************************************************************************/
 package org.eclipse.xtend.core.tests.typesystem
 
-import org.eclipse.xtend.core.tests.AbstractXtendTestCase
-import org.eclipse.xtext.xbase.typesystem.references.LightweightBoundTypeArgument
-import org.eclipse.xtext.xbase.typesystem.util.CommonTypeComputationServices
 import com.google.inject.Inject
 import org.eclipse.emf.ecore.resource.ResourceSet
-import org.eclipse.xtext.xbase.typesystem.references.OwnedConverter
-import org.junit.After
+import org.eclipse.xtend.core.tests.AbstractXtendTestCase
 import org.eclipse.xtext.common.types.JvmTypeReference
 import org.eclipse.xtext.xbase.typesystem.references.ITypeReferenceOwner
-import org.junit.runner.RunWith
-import org.eclipse.xtext.junit4.XtextRunner
-import org.eclipse.xtext.junit4.InjectWith
-import org.eclipse.xtend.core.tests.NewTypeSystemRuntimeInjectorProvider
+import org.eclipse.xtext.xbase.typesystem.references.LightweightBoundTypeArgument
+import org.eclipse.xtext.xbase.typesystem.references.OwnedConverter
+import org.eclipse.xtext.xbase.typesystem.util.CommonTypeComputationServices
+import org.junit.After
 
 /**
  * @author Sebastian Zarnekow
  */
-@RunWith(typeof(XtextRunner))
-@InjectWith(typeof(NewTypeSystemRuntimeInjectorProvider))
 abstract class AbstractTestingTypeReferenceOwner extends AbstractXtendTestCase implements ITypeReferenceOwner {
 	
 	@Inject

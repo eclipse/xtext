@@ -228,10 +228,7 @@ public class XtendCompilerErrorHandlingTest extends AbstractXtendTestCase {
     _builder_1.append("public /* Unresolved */Object bar() {");
     _builder_1.newLine();
     _builder_1.append("    ");
-    _builder_1.append("throw new Error(\"Unresolved compilation problems:\"");
-    _builder_1.newLine();
-    _builder_1.append("      ");
-    _builder_1.append("+ \"\\nIncompatible implicit return type. Expected void but was null\");");
+    _builder_1.append("return null;");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("}");
@@ -411,7 +408,7 @@ public class XtendCompilerErrorHandlingTest extends AbstractXtendTestCase {
     _builder_1.append("public class Foo {");
     _builder_1.newLine();
     _builder_1.append("  ");
-    _builder_1.append("private final /* type is \'null\' */ bar /* Skipped initializer because of errors */;");
+    _builder_1.append("private final Object bar /* Skipped initializer because of errors */;");
     _builder_1.newLine();
     _builder_1.append("}");
     _builder_1.newLine();
@@ -446,7 +443,7 @@ public class XtendCompilerErrorHandlingTest extends AbstractXtendTestCase {
     _builder_1.append("throw new Error(\"Unresolved compilation problems:\"");
     _builder_1.newLine();
     _builder_1.append("      ");
-    _builder_1.append("+ \"\\nIncompatible implicit return type. Expected int or java.lang.Integer but was null\");");
+    _builder_1.append("+ \"\\nIncompatible implicit return type. Expected int or Integer but was null\");");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("}");
@@ -484,10 +481,7 @@ public class XtendCompilerErrorHandlingTest extends AbstractXtendTestCase {
     _builder_1.append("throw new Error(\"Unresolved compilation problems:\"");
     _builder_1.newLine();
     _builder_1.append("      ");
-    _builder_1.append("+ \"\\nThe method or field foo is undefined for the type Foo\"");
-    _builder_1.newLine();
-    _builder_1.append("      ");
-    _builder_1.append("+ \"\\nIncompatible implicit return type. Expected int or java.lang.Integer but was void\");");
+    _builder_1.append("+ \"\\nThe method or field foo is undefined for the type Foo\");");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("}");

@@ -9,15 +9,11 @@ package org.eclipse.xtend.core.tests.validation
 
 import com.google.inject.Inject
 import org.eclipse.xtend.core.tests.AbstractXtendTestCase
-import org.eclipse.xtend.core.tests.NewTypeSystemRuntimeInjectorProvider
 import org.eclipse.xtend.core.validation.IssueCodes
 import org.eclipse.xtend.core.xtend.XtendFile
-import org.eclipse.xtext.junit4.InjectWith
-import org.eclipse.xtext.junit4.XtextRunner
 import org.eclipse.xtext.junit4.util.ParseHelper
 import org.eclipse.xtext.junit4.validation.ValidationTestHelper
 import org.junit.Test
-import org.junit.runner.RunWith
 
 import static org.eclipse.xtend.core.xtend.XtendPackage$Literals.*
 
@@ -60,10 +56,3 @@ class AnnotationValidationTest extends AbstractXtendTestCase {
 	
 }
 
-/**
- * @author Sebastian Zarnekow - Initial contribution and API
- */
-@RunWith(typeof(XtextRunner))
-@InjectWith(typeof(NewTypeSystemRuntimeInjectorProvider))
-class AnnotationValidationTest2 extends AnnotationValidationTest {
-}

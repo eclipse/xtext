@@ -28,8 +28,6 @@ import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.Pair;
 import org.eclipse.xtext.xbase.lib.StringExtensions;
 import org.junit.Assert;
-import org.junit.Ignore;
-import org.junit.Test;
 import org.junit.runner.RunWith;
 
 /**
@@ -102,35 +100,5 @@ public class OldAPIAssignabilityTest extends AssignabilityTest {
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
-  }
-  
-  @Ignore
-  @Test
-  public void testPrimitiveConversion_09() {
-    super.testPrimitiveConversion_09();
-  }
-  
-  @Ignore
-  @Test
-  public void testFunctionTypeAsParameterized_01() {
-    super.testFunctionTypeAsParameterized_01();
-  }
-  
-  @Ignore
-  @Test
-  public void testDemandConvertedFunctionType_05() {
-    super.testDemandConvertedFunctionType_05();
-  }
-  
-  @Ignore
-  @Test
-  public void testTypeParameter_06() {
-    super.testTypeParameter_06();
-  }
-  
-  @Ignore
-  @Test
-  public void testTwoTypeParameters_01() {
-    super.testTwoTypeParameters_01();
   }
 }

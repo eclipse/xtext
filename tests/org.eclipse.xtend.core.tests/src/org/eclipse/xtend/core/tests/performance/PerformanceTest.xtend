@@ -3,14 +3,10 @@ package org.eclipse.xtend.core.tests.performance
 import com.google.inject.Inject
 import java.util.List
 import org.eclipse.xtend.core.tests.AbstractXtendTestCase
-import org.eclipse.xtend.core.tests.NewTypeSystemRuntimeInjectorProvider
-import org.eclipse.xtext.junit4.InjectWith
-import org.eclipse.xtext.junit4.XtextRunner
 import org.eclipse.xtext.junit4.internal.StopwatchRule
 import org.junit.Ignore
 import org.junit.Rule
 import org.junit.Test
-import org.junit.runner.RunWith
 
 import static org.eclipse.xtext.util.internal.Stopwatches.*
 
@@ -126,21 +122,3 @@ class PerformanceTest extends AbstractXtendTestCase {
 	}
 }
 
-@Ignore
-@RunWith(typeof(XtextRunner))
-@InjectWith(typeof(NewTypeSystemRuntimeInjectorProvider))
-class PerformanceTestNewTypeSystem extends PerformanceTest {
-	
-//	@Inject extension ReflectExtensions
-//	@Inject CachingClasspathTypeProviderFactory factory
-//	
-//	@Before
-//	@After
-//	def void printLoadedClasses() {
-//		val Cache<Class<?>, ?> cache = factory.get("reusedFactory").get("typeCache")
-//		val types = cache.asMap.keySet.map[ canonicalName ].sort
-//		println(types.join('\n'))
-//		println('==========================================')
-//	}
-	
-}

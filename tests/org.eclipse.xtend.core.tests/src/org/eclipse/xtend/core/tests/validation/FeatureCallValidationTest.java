@@ -24,7 +24,6 @@ public class FeatureCallValidationTest extends AbstractXtendTestCase {
 	@Inject
 	private ValidationTestHelper helper;
 
-	@Ignore("Fails with old impl - 'this' is not on the scope thus two error messages for this and toString")
 	@Test 
 	public void testThisInStaticContext() throws Exception {
 		XtendClass clazz = clazz("class X { static def meth() { this.toString } }");
@@ -38,7 +37,6 @@ public class FeatureCallValidationTest extends AbstractXtendTestCase {
 		helper.assertNoErrors(clazz);
 	}
 	
-	@Ignore("Fails with old impl - see above")
 	@Test 
 	public void testSuperInStaticContext() throws Exception {
 		XtendClass clazz = clazz("class X { static def meth() { super.toString } }");
@@ -165,14 +163,12 @@ public class FeatureCallValidationTest extends AbstractXtendTestCase {
 	}
 
 	@Test
-	@Ignore
 	public void testXAssignmentOperation2() throws Exception {
 		XtendClass clazz = clazz("class X { def static setFoo(String x) {} def meth() { foo = '' } }");
 		helper.assertNoErrors(clazz);
 	}
 
 	@Test
-	@Ignore
 	public void testXAssignmentOperation3() throws Exception {
 		XtendClass clazz = clazz("class X { def setFoo(String x) {} def static meth() { foo = '' } }");
 		helper.assertError(clazz, XbasePackage.Literals.XASSIGNMENT,
@@ -180,7 +176,6 @@ public class FeatureCallValidationTest extends AbstractXtendTestCase {
 	}
 
 	@Test
-	@Ignore
 	public void testXAssignmentOperation4() throws Exception {
 		XtendClass clazz = clazz("class X { def static setFoo(String x) {} def static meth() { foo = '' } }");
 		helper.assertNoErrors(clazz);

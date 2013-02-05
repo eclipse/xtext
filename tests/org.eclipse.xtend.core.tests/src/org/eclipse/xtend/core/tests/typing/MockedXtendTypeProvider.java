@@ -18,6 +18,7 @@ import com.google.inject.Singleton;
 /**
  * @author Holger Schill - Initial contribution and API
  */
+@SuppressWarnings("deprecation")
 @Singleton
 public class MockedXtendTypeProvider extends XtendTypeProvider {
 
