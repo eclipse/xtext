@@ -35,7 +35,7 @@ import org.junit.Before
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-abstract class AbstractSmokeTest extends AnnotationsValidatorTest2 {
+abstract class AbstractSmokeTest extends AnnotationsValidatorTest {
 	
 	@Inject
 	IBatchTypeResolver typeResolver

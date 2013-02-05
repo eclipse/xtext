@@ -24,6 +24,8 @@ import org.eclipse.xtext.junit4.XtextRunner
 import org.eclipse.xtext.junit4.InjectWith
 import org.eclipse.xtext.xbase.tests.typesystem.XbaseWithLogicalContainerInjectorProvider
 
+@RunWith(typeof(XtextRunner))
+@InjectWith(typeof(XbaseWithLogicalContainerInjectorProvider))
 class JvmModelBasedLinkingTest extends AbstractXbaseTestCase {
 	
 	@Inject extension JvmTypesBuilder
@@ -97,8 +99,3 @@ class JvmModelBasedLinkingTest extends AbstractXbaseTestCase {
 	}
 }
 
-@RunWith(typeof(XtextRunner))
-@InjectWith(typeof(XbaseWithLogicalContainerInjectorProvider))
-class JvmModelBasedLinkingTest2 extends JvmModelBasedLinkingTest {
-	
-}

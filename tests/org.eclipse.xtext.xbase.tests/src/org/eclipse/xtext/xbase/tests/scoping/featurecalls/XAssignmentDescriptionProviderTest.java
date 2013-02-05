@@ -16,6 +16,7 @@ import org.eclipse.xtext.xbase.scoping.featurecalls.IJvmFeatureDescriptionProvid
 import org.eclipse.xtext.xbase.scoping.featurecalls.JvmFeatureScope;
 import org.eclipse.xtext.xbase.scoping.featurecalls.XAssignmentDescriptionProvider;
 import org.eclipse.xtext.xbase.scoping.featurecalls.XAssignmentSugarDescriptionProvider;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import testdata.FieldAccessSub;
@@ -28,6 +29,7 @@ import com.google.inject.Provider;
 /**
  * @author Sven Efftinge - Initial contribution and API
  */
+@Ignore("Tests obsolete implementation details")
 @SuppressWarnings("deprecation")
 public class XAssignmentDescriptionProviderTest extends AbstractJvmFeatureScopeProviderTest {
 	

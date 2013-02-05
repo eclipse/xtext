@@ -18,6 +18,7 @@ import org.eclipse.xtext.xbase.jvmmodel.JvmModelInferrerRegistry;
 import org.eclipse.xtext.xbase.lib.util.ReflectExtensions;
 import org.eclipse.xtext.xbase.tests.AbstractXbaseTestCase;
 import org.eclipse.xtext.xbase.tests.XbaseInjectorProvider;
+import org.eclipse.xtext.xbase.tests.typesystem.XbaseWithLogicalContainerInjectorProvider;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.runner.RunWith;
@@ -75,7 +76,7 @@ public abstract class AbstractJvmModelTest extends AbstractXbaseTestCase {
 		public static class SimpleJvmModelTestStandaloneSetup extends XbaseStandaloneSetup {
 			@Override
 			public Injector createInjector() {
-				return Guice.createInjector(new XbaseTestRuntimeModule() {
+				return Guice.createInjector(new XbaseWithLogicalContainerInjectorProvider.XbaseWithLogicalContainerRuntimeModule() {
 					@Override
 					public void configure(com.google.inject.Binder binder) {
 						super.configure(binder);

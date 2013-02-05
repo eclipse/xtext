@@ -41,6 +41,7 @@ import com.google.inject.Inject;
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
+@SuppressWarnings("deprecation")
 public class CompilerTraceTest extends AbstractXbaseTestCase {
 	
 	public static class SimpleTrace extends AbstractTrace {
@@ -229,7 +230,7 @@ public class CompilerTraceTest extends AbstractXbaseTestCase {
 	public void testStaticFeatureCall_04() throws Exception {
 		assertTrace( 
 				"\n" + 
-				"List<?> _emptyList = Collections.em#ptyL#ist();\n" + 
+				"List<Object> _emptyList = Collections.<Object>em#ptyL#ist();\n" + 
 				"return _emptyList;", 
 				"java::util::Collections::#emptyList#");
 	}
@@ -297,7 +298,7 @@ public class CompilerTraceTest extends AbstractXbaseTestCase {
 	@Test
 	public void testConstructorCall_04() throws Exception {
 		assertTrace( 
-				"\nArrayList<?> _arrayList = new Array#List<#Object>();\n" +
+				"\nArrayList<Object> _arrayList = new Array#List<#Object>();\n" +
 				"return _arrayList;", 
 				"new #java.util.ArrayList#");
 	}
@@ -338,7 +339,7 @@ public class CompilerTraceTest extends AbstractXbaseTestCase {
 	@Test
 	public void testConstructorCall_09() throws Exception {
 		assertTrace( 
-				"\nArrayList<?> _arrayList = new Array#List<#Object>(5);\n" +
+				"\nArrayList<Object> _arrayList = new Array#List<#Object>(5);\n" +
 				"return _arrayList;", 
 				"((new #java.util.ArrayList#(5)))");
 	}

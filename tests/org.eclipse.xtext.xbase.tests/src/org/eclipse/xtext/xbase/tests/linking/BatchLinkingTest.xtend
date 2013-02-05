@@ -94,35 +94,35 @@ class BatchLinkingTest extends AbstractXbaseLinkingTest {
 		assertNotNull(identifiable.toString + " / " + type, type.identifier)	
 	}
 	
-	@Test
-	@Ignore("Implement me")
-	override testMemberCallOnNull_02() throws Exception {
-		fail("Should be unresolved proxy for now - or ambiguous feature later on")
-	}
-	
-	@Test
-	@Ignore("Implement me")
-	override testMemberCallOnNull_06() throws Exception {
-		fail("Should be unresolved proxy for now - or ambiguous feature later on")
-	}
-	
-	@Test
-	@Ignore("Implement me")
-	override testMemberCallOnNull_07() throws Exception {
-		fail("Should be unresolved proxy for now - or ambiguous feature later on")
-	}
-	
-	@Test
-	@Ignore("Implement me")
-	override testMemberCallOnNull_11() throws Exception {
-		fail("Should be unresolved proxy for now - or ambiguous feature later on")
-	}
-	
-	@Test
-	@Ignore("Implement me")
-	override testMemberCallOnNull_12() throws Exception {
-		fail("Should be unresolved proxy for now - or ambiguous feature later on")
-	}
+//	@Test
+//	@Ignore("Implement me")
+//	override testMemberCallOnNull_02() throws Exception {
+//		fail("Should be unresolved proxy for now - or ambiguous feature later on")
+//	}
+//	
+//	@Test
+//	@Ignore("Implement me")
+//	override testMemberCallOnNull_06() throws Exception {
+//		fail("Should be unresolved proxy for now - or ambiguous feature later on")
+//	}
+//	
+//	@Test
+//	@Ignore("Implement me")
+//	override testMemberCallOnNull_07() throws Exception {
+//		fail("Should be unresolved proxy for now - or ambiguous feature later on")
+//	}
+//	
+//	@Test
+//	@Ignore("Implement me")
+//	override testMemberCallOnNull_11() throws Exception {
+//		fail("Should be unresolved proxy for now - or ambiguous feature later on")
+//	}
+//	
+//	@Test
+//	@Ignore("Implement me")
+//	override testMemberCallOnNull_12() throws Exception {
+//		fail("Should be unresolved proxy for now - or ambiguous feature later on")
+//	}
 	
 	@Test
 	override testMemberCallOnMultiTypeWithUnresolvableArgument_01() throws Exception {

@@ -17,6 +17,7 @@ import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.xbase.scoping.featurecalls.DefaultJvmFeatureDescriptionProvider;
 import org.eclipse.xtext.xbase.scoping.featurecalls.IJvmFeatureDescriptionProvider;
 import org.eclipse.xtext.xbase.scoping.featurecalls.JvmFeatureScope;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import testdata.StaticVisibilitySubClass;
@@ -30,6 +31,7 @@ import com.google.inject.Provider;
 /**
  * @author Moritz Eysholdt - Initial contribution and API
  */
+@Ignore("This class tests obsolete implementation details")
 @SuppressWarnings("deprecation")
 public class ExplicitStaticFeaturesTypeProviderTest extends AbstractJvmFeatureScopeProviderTest {
 

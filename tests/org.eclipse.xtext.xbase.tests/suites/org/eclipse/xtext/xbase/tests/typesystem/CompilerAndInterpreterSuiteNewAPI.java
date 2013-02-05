@@ -8,10 +8,7 @@
 package org.eclipse.xtext.xbase.tests.typesystem;
 
 import org.eclipse.xtext.xbase.tests.compiler.CompilerTestWithNewTypeSystem;
-import org.eclipse.xtext.xbase.tests.compiler.CompilerTests2WithNewTypeSystem;
 import org.eclipse.xtext.xbase.tests.compiler.EvaluationCompilerTestWithNewTypeSystem;
-import org.eclipse.xtext.xbase.tests.compiler.output.CompilerTraceTest2;
-import org.eclipse.xtext.xbase.tests.interpreter.XbaseInterpreterTestWithNewTypeSystem;
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
@@ -23,8 +20,5 @@ import org.junit.runners.Suite.SuiteClasses;
 @SuiteClasses({
 	EvaluationCompilerTestWithNewTypeSystem.class,
 	CompilerTestWithNewTypeSystem.class,
-	CompilerTests2WithNewTypeSystem.class,
-	CompilerTraceTest2.class,
-	XbaseInterpreterTestWithNewTypeSystem.class
 })
 public class CompilerAndInterpreterSuiteNewAPI {}

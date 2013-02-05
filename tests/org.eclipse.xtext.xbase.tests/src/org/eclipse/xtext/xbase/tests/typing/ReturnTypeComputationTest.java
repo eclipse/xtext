@@ -27,6 +27,7 @@ import com.google.inject.Inject;
 /**
  * @author Sven Efftinge - Initial contribution and API
  */
+@SuppressWarnings("deprecation")
 public class ReturnTypeComputationTest extends AbstractXbaseTestCase {
 	@Inject
 	private ITypeProvider typeProvider;
@@ -35,20 +36,24 @@ public class ReturnTypeComputationTest extends AbstractXbaseTestCase {
 		assertReturnType("java.lang.String", "return 'foo'");
 	}
 	
-	@Test public void testReturnType_01() throws Exception {
-		assertReturnType("void", "'foo'");
+	@Test
+	public void testReturnType_01() throws Exception {
+		assertReturnType("java.lang.String", "'foo'");
 	}
 	
 	@Test public void testReturnType_02() throws Exception {
 		assertReturnType("null", "return null");
 	}
 	
-	@Test public void testReturnType_03() throws Exception {
-		assertReturnType("void", "[| return e]");
+	@Test
+	public void testReturnType_03() throws Exception {
+		// unresolved feature 'e' is intentional
+		assertReturnType("()=>java.lang.Object", "[| return e]");
 	}
 	
-	@Test public void testReturnType_04() throws Exception {
-		assertReturnType("void", "{ [| return '']}");
+	@Test
+	public void testReturnType_04() throws Exception {
+		assertReturnType("()=>java.lang.String", "{ [| return '']}");
 	}
 	
 	@Test public void testReturnType_05() throws Exception {

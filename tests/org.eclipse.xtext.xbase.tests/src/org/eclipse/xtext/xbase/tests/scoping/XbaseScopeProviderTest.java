@@ -23,6 +23,7 @@ import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ListExtensions;
 import org.eclipse.xtext.xbase.scoping.XbaseScopeProvider;
 import org.eclipse.xtext.xbase.tests.AbstractXbaseTestCase;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import com.google.common.base.Predicate;
@@ -30,6 +31,7 @@ import com.google.common.base.Predicate;
 /**
  * @author Sven Efftinge - Initial contribution and API
  */
+@Ignore("This tests obsolete implementation details")
 @SuppressWarnings("deprecation")
 public class XbaseScopeProviderTest extends AbstractXbaseTestCase {
 	

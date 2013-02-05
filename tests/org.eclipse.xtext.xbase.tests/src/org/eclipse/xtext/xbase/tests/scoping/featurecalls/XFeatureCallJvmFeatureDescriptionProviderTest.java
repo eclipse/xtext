@@ -16,6 +16,7 @@ import org.eclipse.xtext.xbase.scoping.featurecalls.DefaultJvmFeatureDescription
 import org.eclipse.xtext.xbase.scoping.featurecalls.IJvmFeatureDescriptionProvider;
 import org.eclipse.xtext.xbase.scoping.featurecalls.JvmFeatureScope;
 import org.eclipse.xtext.xbase.scoping.featurecalls.XFeatureCallSugarDescriptionProvider;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import testdata.VisibilitySubClass;
@@ -27,6 +28,7 @@ import com.google.common.collect.Lists;
 /**
  * @author Sven Efftinge - Initial contribution and API
  */
+@Ignore("This class tests obsolete implementation details")
 @SuppressWarnings("deprecation")
 public class XFeatureCallJvmFeatureDescriptionProviderTest extends AbstractJvmFeatureScopeProviderTest {
 	
