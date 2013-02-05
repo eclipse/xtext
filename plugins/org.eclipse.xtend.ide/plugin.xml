@@ -803,6 +803,45 @@
             	%NewXtendClass.description
          	</description>
       </wizard>
+      <wizard
+            category="org.eclipse.xtend.ide.wizards"
+            icon="icons/Xtend-Icon-16.png"
+            id="org.eclipse.xtend.ide.wizards.NewXtendInterfaceWizard"
+            name="%NewXtendInterface.label">
+            <class class="org.eclipse.xtend.ide.XtendExecutableExtensionFactory">
+				<parameter name="javatype" value="true" />
+				<parameter name="guicekey" value="org.eclipse.xtend.ide.wizards.NewXtendInterfaceWizard" />
+			</class>
+			<description>
+		%NewXtendInterface.description
+		</description>
+      </wizard>
+      <wizard
+            category="org.eclipse.xtend.ide.wizards"
+            icon="icons/Xtend-Icon-16.png"
+            id="org.eclipse.xtend.ide.wizards.NewXtendEnumWizard"
+            name="%NewXtendEnum.label">
+            <class class="org.eclipse.xtend.ide.XtendExecutableExtensionFactory">
+				<parameter name="javatype" value="true" />
+				<parameter name="guicekey" value="org.eclipse.xtend.ide.wizards.NewXtendEnumWizard" />
+			</class>
+			<description>
+		%NewXtendEnum.description
+		</description>
+      </wizard>
+      <wizard
+            category="org.eclipse.xtend.ide.wizards"
+            icon="icons/Xtend-Icon-16.png"
+            id="org.eclipse.xtend.ide.wizards.NewXtendAnnotationWizard"
+            name="%NewXtendAnnotation.label">
+            <class class="org.eclipse.xtend.ide.XtendExecutableExtensionFactory">
+				<parameter name="javatype" value="true" />
+				<parameter name="guicekey" value="org.eclipse.xtend.ide.wizards.NewXtendAnnotationWizard" />
+			</class>
+			<description>
+		%NewXtendAnnotation.description
+		</description>
+      </wizard>
    </extension>
    <extension
          point="org.eclipse.ui.perspectiveExtensions">
@@ -811,17 +850,44 @@
          <newWizardShortcut
                id="org.eclipse.xtend.ide.wizards.NewXtendClassWizard">
          </newWizardShortcut>
+         <newWizardShortcut
+               id="org.eclipse.xtend.ide.wizards.NewXtendInterfaceWizard">
+         </newWizardShortcut>
+         <newWizardShortcut
+               id="org.eclipse.xtend.ide.wizards.NewXtendEnumWizard">
+         </newWizardShortcut>
+         <newWizardShortcut
+               id="org.eclipse.xtend.ide.wizards.NewXtendAnnotationWizard">
+         </newWizardShortcut>
       </perspectiveExtension>
       <perspectiveExtension
             targetID="org.eclipse.jdt.ui.JavaBrowsingPerspective">
          <newWizardShortcut
                id="org.eclipse.xtend.ide.wizards.NewXtendClassWizard">
          </newWizardShortcut>
+         <newWizardShortcut
+               id="org.eclipse.xtend.ide.wizards.NewXtendInterfaceWizard">
+         </newWizardShortcut>
+                  <newWizardShortcut
+               id="org.eclipse.xtend.ide.wizards.NewXtendEnumWizard">
+         </newWizardShortcut>
+         <newWizardShortcut
+               id="org.eclipse.xtend.ide.wizards.NewXtendAnnotationWizard">
+         </newWizardShortcut>
       </perspectiveExtension>
       <perspectiveExtension
             targetID="org.eclipse.pde.ui.PDEPerspective">
          <newWizardShortcut
                id="org.eclipse.xtend.ide.wizards.NewXtendClassWizard">
+         </newWizardShortcut>
+         <newWizardShortcut
+               id="org.eclipse.xtend.ide.wizards.NewXtendInterfaceWizard">
+         </newWizardShortcut>
+         <newWizardShortcut
+               id="org.eclipse.xtend.ide.wizards.NewXtendEnumWizard">
+         </newWizardShortcut>
+         <newWizardShortcut
+               id="org.eclipse.xtend.ide.wizards.NewXtendAnnotationWizard">
          </newWizardShortcut>
       </perspectiveExtension>
    </extension>
