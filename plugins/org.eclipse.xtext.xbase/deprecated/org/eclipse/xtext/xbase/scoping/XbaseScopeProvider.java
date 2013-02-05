@@ -21,6 +21,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.xtext.common.types.JvmAnyTypeReference;
 import org.eclipse.xtext.common.types.JvmConstructor;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmExecutable;
@@ -31,6 +32,7 @@ import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmMember;
 import org.eclipse.xtext.common.types.JvmOperation;
+import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.JvmUnknownTypeReference;
 import org.eclipse.xtext.common.types.TypesPackage;
@@ -54,6 +56,7 @@ import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XFeatureCall;
 import org.eclipse.xtext.xbase.XForLoopExpression;
 import org.eclipse.xtext.xbase.XMemberFeatureCall;
+import org.eclipse.xtext.xbase.XNullLiteral;
 import org.eclipse.xtext.xbase.XSwitchExpression;
 import org.eclipse.xtext.xbase.XUnaryOperation;
 import org.eclipse.xtext.xbase.XVariableDeclaration;
@@ -344,7 +347,8 @@ public class XbaseScopeProvider extends DelegatingScopeProvider {
 		if (receiver == null || receiver.eIsProxy())
 			return IScope.NULLSCOPE;
 		JvmTypeReference receiverType = typeProvider.getType(receiver,true);
-		receiverType = unkownToObject(receiverType, receiver);
+		if (context instanceof XNullLiteral)
+			receiverType = unkownToObject(receiverType, receiver);
 		if (receiverType != null) {
 			return createFeatureScopeForTypeRef(receiverType, context, null, IScope.NULLSCOPE);
 		} else {
@@ -433,6 +437,10 @@ public class XbaseScopeProvider extends DelegatingScopeProvider {
 	protected JvmTypeReference unkownToObject(JvmTypeReference receiverType, EObject context) {
 		if (receiverType instanceof JvmUnknownTypeReference) {
 			return typeReferences.getTypeForName(Object.class, context);
+		}
+		if (receiverType instanceof JvmAnyTypeReference && receiverType.getType() != null && receiverType.getType().eIsProxy()) {
+			EObject resolved = EcoreUtil.resolve(receiverType.getType(), context);
+			((JvmAnyTypeReference) receiverType).setType((JvmType) resolved);
 		}
 		return receiverType;
 	}

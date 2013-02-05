@@ -122,8 +122,8 @@ public class LegacyFeatureOverridesService extends FeatureOverridesService {
 	public LightweightTypeReference getDeclaringTypeReference(JvmDeclaredType declaringType, ITypeReferenceOwner owner,
 			ITypeArgumentContext context) {
 		LightweightTypeReference declaringTypeReference = null;
-		if (context instanceof NullTypeArgumentContext) {
-			TypeArgumentContextProvider.Request request = ((NullTypeArgumentContext) context).getRequest();
+		if (context instanceof LegacyTypeArgumentContext) {
+			TypeArgumentContextProvider.Request request = ((LegacyTypeArgumentContext) context).getRequest();
 			JvmTypeReference receiverType = request.getReceiverType();
 			declaringTypeReference = new OwnedConverter(owner).toLightweightReference(receiverType);
 		} else {
