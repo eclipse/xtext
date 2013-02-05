@@ -148,7 +148,7 @@ public class FeatureCallValidationTest extends AbstractXbaseTestCase {
 
 	@Test public void testOperationFeatureCall_0() throws Exception {
 		XExpression expression = expression("{ var this = new testdata.Methods() staticMethod() }");
-		helper.assertNoError(((XBlockExpression) expression).getExpressions().get(1), INSTANCE_ACCESS_TO_STATIC_MEMBER);
+		helper.assertError(((XBlockExpression) expression).getExpressions().get(1), XFEATURE_CALL, INSTANCE_ACCESS_TO_STATIC_MEMBER);
 	}
 
 	@Test public void testOperationFeatureCall_1() throws Exception {
@@ -217,16 +217,22 @@ public class FeatureCallValidationTest extends AbstractXbaseTestCase {
 		helper.assertNoErrors(expression);
 	}
 	
-	@Test public void testOperationFeatureCall_13() throws Exception {
-//		Iterable<String[]> arrays = CollectionLiterals.<String[]>newArrayList("a,b".split(","));
+	@Test
+	public void testOperationFeatureCall_13() throws Exception {
 		XExpression expression = expression("{ var Iterable<String> x = <String[]>newArrayList('a,b'.split(',')).flatten }");
-		helper.assertNoErrors(expression);
+		helper.assertError(expression, XMEMBER_FEATURE_CALL, INCOMPATIBLE_TYPES, "receiver", 
+				"Iterable<? extends Iterable<? extends String>>", 
+				"Iterable<? extends String>[]", 
+				"ArrayList<String[]>");
 	}
 	
-	@Test public void testOperationFeatureCall_14() throws Exception {
-//		Iterable<String[]> arrays = CollectionLiterals.newArrayList("a,b".split(","), "a,b".split(","));
+	@Test
+	public void testOperationFeatureCall_14() throws Exception {
 		XExpression expression = expression("{ var Iterable<String> x = newArrayList('a,b'.split(','), 'a,b'.split(',')).flatten }");
-		helper.assertNoErrors(expression);
+		helper.assertError(expression, XMEMBER_FEATURE_CALL, INCOMPATIBLE_TYPES, "receiver", 
+				"Iterable<? extends Iterable<? extends String>>", 
+				"Iterable<? extends String>[]", 
+				"ArrayList<String[]>");
 	}
 	
 	@Test public void testStaticFeatureAccess_0() throws Exception {
@@ -252,25 +258,34 @@ public class FeatureCallValidationTest extends AbstractXbaseTestCase {
 	/**
 	 * see https://bugs.eclipse.org/bugs/show_bug.cgi?id=350934
 	 */
-	@Test public void testBug_350934_01() throws Exception {
+	@Test
+	public void testBug_350934_01() throws Exception {
 		XExpression expression = expression("'3'>3");
-		helper.assertError(expression, XNUMBER_LITERAL, INCOMPATIBLE_TYPES);
+		helper.assertError(expression, XSTRING_LITERAL, INCOMPATIBLE_TYPES);
 	}
 	
 	/**
 	 * see https://bugs.eclipse.org/bugs/show_bug.cgi?id=350934
 	 */
-	@Test public void testBug_350934_02() throws Exception {
+	@Test
+	public void testBug_350934_02() throws Exception {
 		XExpression expression = expression("'true'<false");
+		helper.assertError(expression, XSTRING_LITERAL, INCOMPATIBLE_TYPES);
+	}
+	
+	/**
+	 * see https://bugs.eclipse.org/bugs/show_bug.cgi?id=350934
+	 */
+	@Test
+	public void testBug_350934_03() throws Exception {
+		XExpression expression = expression("true>=0"); 
 		helper.assertError(expression, XBOOLEAN_LITERAL, INCOMPATIBLE_TYPES);
 	}
-	
-	/**
-	 * see https://bugs.eclipse.org/bugs/show_bug.cgi?id=350934
-	 */
-	@Test public void testBug_350934_03() throws Exception {
-		XExpression expression = expression("true>=0"); 
-		helper.assertError(expression, XNUMBER_LITERAL, INCOMPATIBLE_TYPES);
+
+	@Test
+	public void testBug_350934_04() throws Exception {
+		XExpression expression = expression("{ val z = 1bd val y = 2bi val abc = z * y }"); 
+		helper.assertError(expression, XFEATURE_CALL, INCOMPATIBLE_TYPES, "BigInteger", "BigDecimal");
 	}
 	
 	@Test public void testListExtensionsMap_01() throws Exception {

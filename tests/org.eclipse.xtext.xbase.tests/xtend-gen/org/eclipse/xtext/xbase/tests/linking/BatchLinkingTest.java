@@ -26,7 +26,6 @@ import org.eclipse.xtext.xbase.typesystem.IResolvedTypes;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 import org.junit.Assert;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 
 /**
@@ -154,36 +153,6 @@ public class BatchLinkingTest extends AbstractXbaseLinkingTest {
     String _plus_1 = (_plus + type);
     String _identifier = type.getIdentifier();
     Assert.assertNotNull(_plus_1, _identifier);
-  }
-  
-  @Test
-  @Ignore(value = "Implement me")
-  public void testMemberCallOnNull_02() throws Exception {
-    Assert.fail("Should be unresolved proxy for now - or ambiguous feature later on");
-  }
-  
-  @Test
-  @Ignore(value = "Implement me")
-  public void testMemberCallOnNull_06() throws Exception {
-    Assert.fail("Should be unresolved proxy for now - or ambiguous feature later on");
-  }
-  
-  @Test
-  @Ignore(value = "Implement me")
-  public void testMemberCallOnNull_07() throws Exception {
-    Assert.fail("Should be unresolved proxy for now - or ambiguous feature later on");
-  }
-  
-  @Test
-  @Ignore(value = "Implement me")
-  public void testMemberCallOnNull_11() throws Exception {
-    Assert.fail("Should be unresolved proxy for now - or ambiguous feature later on");
-  }
-  
-  @Test
-  @Ignore(value = "Implement me")
-  public void testMemberCallOnNull_12() throws Exception {
-    Assert.fail("Should be unresolved proxy for now - or ambiguous feature later on");
   }
   
   @Test

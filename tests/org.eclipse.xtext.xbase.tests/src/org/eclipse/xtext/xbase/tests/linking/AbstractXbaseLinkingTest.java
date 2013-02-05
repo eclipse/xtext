@@ -1108,5 +1108,6 @@ public abstract class AbstractXbaseLinkingTest extends AbstractXbaseTestCase {
 		assertEquals(4, new OverloadedMethods<Object>(chars, strings).usedConstructor);
 		assertEquals(4, new OverloadedMethods<Object>(strings, chars).usedConstructor);
 	}
+
 	
 }

@@ -7,10 +7,27 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.tests.compiler
 
-import org.junit.Ignore
 import org.junit.Test
 
-abstract class AbstractCompilerTests2 extends AbstractOutputComparingCompilerTests {
+class CompilerTests2 extends AbstractOutputComparingCompilerTests {
+
+	@Test def void testAbstractIterator() throws Exception {
+		'''
+			{
+				var com.google.common.collect.AbstractIterator<String> iter = [| return self.endOfData ]
+				return iter
+			}
+		'''.compilesTo('''
+			final com.google.common.collect.AbstractIterator<String> _function = new com.google.common.collect.AbstractIterator<String>() {
+			    @Override
+			    protected String computeNext() {
+			      return this.endOfData();
+			    }
+			  };
+			com.google.common.collect.AbstractIterator<String> iter = _function;
+			return iter;
+		''')
+	}
 
 	@Test def void testVariableDeclaration() throws Exception {
 		'''
@@ -102,15 +119,11 @@ abstract class AbstractCompilerTests2 extends AbstractOutputComparingCompilerTes
 		'''
 			new Thread [| ]
 		'''.compilesTo('''
-			final org.eclipse.xtext.xbase.lib.Procedures.Procedure0 _function = new org.eclipse.xtext.xbase.lib.Procedures.Procedure0() {
-			    public void apply() {
+			final Runnable _function = new Runnable() {
+			    public void run() {
 			    }
 			  };
-			Thread _thread = new Thread(new Runnable() {
-			    public void run() {
-			      _function.apply();
-			    }
-			});
+			Thread _thread = new Thread(_function);
 			return _thread;
 		''')
 	}
@@ -262,36 +275,3 @@ abstract class AbstractCompilerTests2 extends AbstractOutputComparingCompilerTes
 	}
 }
 
-class CompilerTests2 extends AbstractCompilerTests2 {
-	
-	@Test 
-	@Ignore("Type check fails in old implementation")
-	override testForLoop_10() throws Exception {
-		fail("Type check fails in old implementation")
-	}
-	
-	@Test 
-	@Ignore("Type check fails in old implementation")
-	override testForLoop_11() throws Exception {
-		fail("Type check fails in old implementation")
-	}
-	
-	@Test 
-	@Ignore("Type check fails in old implementation")
-	override testForLoop_12() throws Exception {
-		fail("Type check fails in old implementation")
-	}
-	
-	@Test 
-	@Ignore("Type check fails in old implementation")
-	override testForLoop_13() throws Exception {
-		fail("Type check fails in old implementation")
-	}
-	
-	@Test 
-	@Ignore("Type check fails in old implementation")
-	override testForLoop_14() throws Exception {
-		fail("Type check fails in old implementation")
-	}
-	
-}

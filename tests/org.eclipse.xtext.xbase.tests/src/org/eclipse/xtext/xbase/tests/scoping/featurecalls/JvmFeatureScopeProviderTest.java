@@ -20,6 +20,7 @@ import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.xbase.scoping.featurecalls.JvmFeatureDescription;
 import org.eclipse.xtext.xbase.scoping.featurecalls.JvmFeatureScope;
 import org.eclipse.xtext.xbase.scoping.featurecalls.XFeatureCallSugarDescriptionProvider;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import testdata.FieldAccess;
@@ -33,6 +34,7 @@ import com.google.inject.Inject;
  * @author Sven Efftinge - Initial contribution and API
  * @author Sebastian Zarnekow
  */
+@Ignore("This class tests obsolete implementation details")
 @SuppressWarnings("deprecation")
 public class JvmFeatureScopeProviderTest extends AbstractJvmFeatureScopeProviderTest {
 

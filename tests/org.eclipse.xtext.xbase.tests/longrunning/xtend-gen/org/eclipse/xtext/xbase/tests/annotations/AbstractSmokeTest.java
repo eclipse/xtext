@@ -21,7 +21,7 @@ import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.IteratorExtensions;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.util.ReflectExtensions;
-import org.eclipse.xtext.xbase.tests.annotations.AnnotationsValidatorTest2;
+import org.eclipse.xtext.xbase.tests.annotations.AnnotationsValidatorTest;
 import org.eclipse.xtext.xbase.tests.annotations.NullValidationTestHelper;
 import org.eclipse.xtext.xbase.typesystem.IBatchTypeResolver;
 import org.eclipse.xtext.xbase.typesystem.IResolvedTypes;
@@ -34,7 +34,7 @@ import org.junit.Before;
  * @author Sebastian Zarnekow - Initial contribution and API
  */
 @SuppressWarnings("all")
-public abstract class AbstractSmokeTest extends AnnotationsValidatorTest2 {
+public abstract class AbstractSmokeTest extends AnnotationsValidatorTest {
   @Inject
   private IBatchTypeResolver typeResolver;
   

@@ -24,7 +24,6 @@ import org.eclipse.xtext.xbase.XVariableDeclaration;
 import org.eclipse.xtext.xbase.XbaseFactory;
 import org.eclipse.xtext.xbase.tests.AbstractXbaseTestCase;
 import org.eclipse.xtext.xbase.typing.ITypeProvider;
-import org.junit.Ignore;
 import org.junit.Test;
 
 import com.google.inject.Inject;
@@ -32,6 +31,7 @@ import com.google.inject.Inject;
 /**
  * @author Sven Efftinge
  */
+@SuppressWarnings("deprecation")
 public class XbaseTypeProviderTest extends AbstractXbaseTestCase {
 	
 	@Test public void testTypeForVoidClosure() throws Exception {
@@ -67,7 +67,6 @@ public class XbaseTypeProviderTest extends AbstractXbaseTestCase {
 	}
 	
 	@Test
-	@Ignore("TODO Fix these cases")
 	public void testClosure_03() throws Exception {
 		XBlockExpression block = (XBlockExpression) expression(
 				"{\n" + 
@@ -81,7 +80,6 @@ public class XbaseTypeProviderTest extends AbstractXbaseTestCase {
 	}
 	
 	@Test
-	@Ignore("TODO Fix these cases")
 	public void testClosure_04() throws Exception {
 		XBlockExpression block = (XBlockExpression) expression(
 				"{\n" + 
@@ -140,7 +138,7 @@ public class XbaseTypeProviderTest extends AbstractXbaseTestCase {
 	@Test public void testTypeGuardedCase_1() throws Exception {
 		XSwitchExpression expression = (XSwitchExpression) expression("switch s: '' as CharSequence { Cloneable: s String: s }", true);
 		assertEquals("java.lang.CharSequence", toString(typeProvider.getType(expression.getSwitch())));
-		assertEquals("java.lang.Cloneable & java.lang.CharSequence", toString(typeProvider.getType(expression.getCases().get(0).getThen())));
+		assertEquals("java.lang.CharSequence & java.lang.Cloneable", toString(typeProvider.getType(expression.getCases().get(0).getThen())));
 		assertEquals("java.lang.String", toString(typeProvider.getType(expression.getCases().get(1).getThen())));
 		assertEquals("java.lang.CharSequence", toString(typeProvider.getType(expression)));
 	}
@@ -282,8 +280,9 @@ public class XbaseTypeProviderTest extends AbstractXbaseTestCase {
 		assertResolvedType(Boolean.class.getName(), "null as Boolean");
 	}
 
-	@Test public void testConstructorCall() throws Exception {
-		assertResolvedType("java.util.ArrayList<E>", "new java.util.ArrayList()");
+	@Test
+	public void testConstructorCall() throws Exception {
+		assertResolvedType("java.util.ArrayList<java.lang.Object>", "new java.util.ArrayList()");
 		assertResolvedType("java.util.ArrayList<java.lang.String>", "new java.util.ArrayList<java.lang.String>()");
 		assertResolvedType("java.util.HashMap<java.lang.String, java.lang.Boolean>",
 				"new java.util.HashMap<java.lang.String, java.lang.Boolean>()");
@@ -347,7 +346,6 @@ public class XbaseTypeProviderTest extends AbstractXbaseTestCase {
 		assertResolvedType("java.util.List<java.lang.Integer>", "newArrayList('').map(s|s.length+1)");
 	}
 	
-	@Ignore
 	@Test public void testFeatureCall_10() throws Exception {
 		assertResolvedType("java.util.List<java.lang.Integer>", "newArrayList('').map(s|1).map(i| i+1)");
 	}
@@ -360,7 +358,6 @@ public class XbaseTypeProviderTest extends AbstractXbaseTestCase {
 		assertResolvedType("java.util.List<java.lang.Integer>", "newArrayList('').map(s|1).toList().map(i|i)");
 	}
 	
-	@Ignore
 	@Test public void testFeatureCall_13() throws Exception {
 		assertResolvedType("java.util.List<java.lang.Integer>", "newArrayList('').map(s|1).toList().map(i|i+1)");
 	}
@@ -391,13 +388,11 @@ public class XbaseTypeProviderTest extends AbstractXbaseTestCase {
 				"newArrayList(newArrayList('').map(s|1)).map(iterable|iterable.size()).map(e|e).map(e|e)");
 	}
 	@Test
-	@Ignore("Performance")
 	public void testFeatureCall_15_c() throws Exception {
 		assertResolvedType("java.util.List<java.lang.Integer>", 
 				"newArrayList(newArrayList('').map(s|1)).map(iterable|iterable.size()).map(e|e).map(e|e).map(e|e)");
 	}
 	@Test
-	@Ignore("Performance")
 	public void testFeatureCall_15_d() throws Exception {
 		assertResolvedType("java.util.List<java.lang.Integer>", 
 				"newArrayList(newArrayList('').map(s|1)).map(iterable|iterable.size()).map(e|e).map(e|e).map(e|e).map(e|e)");
@@ -412,13 +407,11 @@ public class XbaseTypeProviderTest extends AbstractXbaseTestCase {
 				"newArrayList(newArrayList('').map(s|1).map(e|e).map(e|e)).map(iterable|iterable.size())");
 	}
 	@Test
-	@Ignore("Performance")
 	public void testFeatureCall_15_g() throws Exception {
 		assertResolvedType("java.util.List<java.lang.Integer>", 
 				"newArrayList(newArrayList('').map(s|1).map(e|e).map(e|e).map(e|e)).map(iterable|iterable.size())");
 	}
 	@Test
-	@Ignore("Performance")
 	public void testFeatureCall_15_h() throws Exception {
 		assertResolvedType("java.util.List<java.lang.Integer>", 
 				"newArrayList(newArrayList('').map(s|1).map(e|e).map(e|e).map(e|e).map(e|e)).map(iterable|iterable.size())");
@@ -428,19 +421,16 @@ public class XbaseTypeProviderTest extends AbstractXbaseTestCase {
 				"newArrayList(newArrayList('').map(s|1).map(e|e)).map(iterable|iterable.size()).map(e|e)");
 	}
 	@Test
-	@Ignore("Performance")
 	public void testFeatureCall_15_j() throws Exception {
 		assertResolvedType("java.util.List<java.lang.Integer>", 
 				"newArrayList(newArrayList('').map(s|1).map(e|e).map(e|e)).map(iterable|iterable.size()).map(e|e).map(e|e)");
 	}
 	@Test
-	@Ignore("Performance")
 	public void testFeatureCall_15_k() throws Exception {
 		assertResolvedType("java.util.List<java.lang.Integer>", 
 				"newArrayList(newArrayList('').map(s|1).map(e|e).map(e|e).map(e|e)).map(iterable|iterable.size()).map(e|e).map(e|e).map(e|e)");
 	}
 	@Test
-	@Ignore("Performance")
 	public void testFeatureCall_15_l() throws Exception {
 		assertResolvedType("java.util.List<java.lang.Integer>", 
 				"newArrayList(newArrayList('').map(s|1).map(e|e).map(e|e).map(e|e).map(e|e)).map(iterable|iterable.size()).map(e|e).map(e|e).map(e|e).map(e|e)");
@@ -620,8 +610,12 @@ public class XbaseTypeProviderTest extends AbstractXbaseTestCase {
 		assertResolvedType("boolean", "null instanceof java.lang.String");
 	}
 	
-	@Test public void testToList_01() throws Exception {
-		assertResolvedType("java.util.List<? extends java.lang.String>", "{ val Iterable<? extends String> iter = null iter.toList }");
+	@Test
+	public void testToList_01() throws Exception {
+		// TODO fix IterableExtensions.toList
+//		Iterable<? extends String> iter = null;
+//		java.util.List<String> list = IterableExtensions.toList(iter);
+		assertResolvedType("java.util.List<java.lang.String>", "{ val Iterable<? extends String> iter = null iter.toList }");
 	}
 
 	@Test public void testToList_02() throws Exception {

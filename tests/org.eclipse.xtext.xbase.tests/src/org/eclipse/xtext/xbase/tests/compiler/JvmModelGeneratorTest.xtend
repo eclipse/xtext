@@ -1,3 +1,10 @@
+/*******************************************************************************
+ * Copyright (c) 2012 itemis AG (http://www.itemis.eu) and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *******************************************************************************/
 package org.eclipse.xtext.xbase.tests.compiler
 
 import com.google.common.base.Supplier
@@ -30,6 +37,8 @@ import org.junit.Test
 import org.junit.runner.RunWith
 import org.eclipse.xtext.xbase.jvmmodel.JvmModelCompleter
 
+@RunWith(typeof(XtextRunner))
+@InjectWith(typeof(XbaseWithLogicalContainerInjectorProvider))
 class JvmModelGeneratorTest extends AbstractXbaseTestCase {
 	
 	@Inject extension JvmTypesBuilder builder
@@ -38,6 +47,7 @@ class JvmModelGeneratorTest extends AbstractXbaseTestCase {
 	@Inject JvmModelGenerator generator
 	@Inject EclipseRuntimeDependentJavaCompiler javaCompiler
 	@Inject TypesFactory typesFactory;
+	@Inject JvmModelCompleter completer
 
 	@Before
 	def void setUp() {
@@ -181,6 +191,22 @@ class JvmModelGeneratorTest extends AbstractXbaseTestCase {
 	}
 	
 	@Test
+	def void testEnumerationWithCompleter() {
+		val expression = expression("null", false);
+		val enumeration = expression.toEnumerationType("my.test.Foo") [
+			members += expression.toEnumerationLiteral("BAR")
+			members += expression.toEnumerationLiteral("BAZ")
+		]
+		completer.complete(enumeration)
+		val compiled = compile(expression.eResource, enumeration)
+		
+		val valuesMethod = compiled.getMethod("values")
+		val values = valuesMethod.invoke(null) as Object[]
+		assertEquals("BAR", values.get(0).toString())
+		assertEquals("BAZ", values.get(1).toString())
+	}
+	
+	@Test
 	def void testBug377925No_Nullpointer(){
 		val expression = expression("[Object o| null]")
 		val clazz = expression.toClass("my.test.Foo") [
@@ -271,30 +297,3 @@ class JvmModelGeneratorTest extends AbstractXbaseTestCase {
 	}
 }
 
-@RunWith(typeof(XtextRunner))
-@InjectWith(typeof(XbaseWithLogicalContainerInjectorProvider))
-class JvmModelGeneratorTest2 extends JvmModelGeneratorTest {
-	
-	@Inject
-	JvmModelCompleter completer
-	
-	@Inject 
-	extension JvmTypesBuilder builder
-		
-	@Test
-	def void testEnumerationWithCompleter() {
-		val expression = expression("null", false);
-		val enumeration = expression.toEnumerationType("my.test.Foo") [
-			members += expression.toEnumerationLiteral("BAR")
-			members += expression.toEnumerationLiteral("BAZ")
-		]
-		completer.complete(enumeration)
-		val compiled = compile(expression.eResource, enumeration)
-		
-		val valuesMethod = compiled.getMethod("values")
-		val values = valuesMethod.invoke(null) as Object[]
-		assertEquals("BAR", values.get(0).toString())
-		assertEquals("BAZ", values.get(1).toString())
-	}
-	
-} 
