@@ -17,6 +17,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
 import java.lang.reflect.Proxy;
+import java.lang.reflect.UndeclaredThrowableException;
 import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
@@ -864,15 +865,32 @@ public class XbaseInterpreter implements IExpressionInterpreter {
 			if (Modifier.isStatic(method.getModifiers()) && receiver!=null) {
 				throw new IllegalArgumentException("A static method can't be invoked on a receiver.");
 			}
-			method.setAccessible(true);
-			Object result = method.invoke(receiver, argumentValues.toArray(new Object[argumentValues.size()]));
-			return result;
+			if (receiver != null && Proxy.isProxyClass(receiver.getClass())) {
+				InvocationHandler invocationHandler = Proxy.getInvocationHandler(receiver);
+				try {
+					Object result = invocationHandler.invoke(receiver, method, argumentValues.toArray(new Object[argumentValues.size()]));
+					return result;
+				} catch(Throwable throwable) {
+					throw new InvocationTargetException(throwable);
+				}
+			} else {
+				method.setAccessible(true);
+				Object result = method.invoke(receiver, argumentValues.toArray(new Object[argumentValues.size()]));
+				return result;
+			}
 		} catch (EvaluationException e) {
 			throw e;
 		} catch (InvocationTargetException targetException) {
-			if (targetException.getCause() instanceof InterpreterCanceledException)
-				throw (InterpreterCanceledException) targetException.getCause();
-			throw new EvaluationException(targetException.getTargetException());
+			Throwable cause = targetException.getCause();
+			if (cause instanceof InterpreterCanceledException)
+				throw (InterpreterCanceledException) cause;
+			if (cause instanceof UndeclaredThrowableException) {
+				cause = cause.getCause();
+			}
+			if (cause instanceof EvaluationException) {
+				throw (EvaluationException) cause;
+			}
+			throw new EvaluationException(cause);
 		} catch (Exception e) {
 			throw new IllegalStateException("Could not invoke method: " + operation.getIdentifier()
 					+ " on instance: " + receiver, e);

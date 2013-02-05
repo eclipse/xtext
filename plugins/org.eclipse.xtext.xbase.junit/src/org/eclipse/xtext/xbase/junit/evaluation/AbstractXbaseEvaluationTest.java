@@ -7,6 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.junit.evaluation;
 
+import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.math.BigDecimal;
 import java.math.BigInteger;
@@ -2969,6 +2970,44 @@ public abstract class AbstractXbaseEvaluationTest extends Assert {
 	@Test
 	public void testItAssignment_1() throws Exception {
 		assertEvaluatesTo(42l, "{val it = new java.util.Date(); time = 42l; time }");
+	}
+	
+	@Test public void testIteratorExtensions() throws Exception {
+		assertEvaluatesTo("Foo", "newArrayList('Foo').iterator.toIterable.iterator.next");
+	}
+	
+	@Test public void testExceptionInClosure_01() throws Exception {
+		assertEvaluatesWithException(IOException.class, 
+				"{val ()=>void proc = [| throw new java.io.IOException()] proc.apply return null}");
+	}
+	
+	@Test public void testExceptionInClosure_02() throws Exception {
+		assertEvaluatesWithException(IOException.class, 
+				"{ newArrayList('foo').forEach( s | throw new java.io.IOException() ) return null }");
+	}
+	
+	@Test public void testExceptionInClosure_03() throws Exception {
+		assertEvaluatesWithException(IOException.class, 
+				"{val ()=>void proc = [| throw new java.io.IOException] proc.apply return null}");
+	}
+	
+	@Test public void testExceptionInClosure_04() throws Exception {
+		assertEvaluatesWithException(IOException.class, 
+				"{ newArrayList('foo').forEach( s | throw new java.io.IOException ) return null }");
+	}
+	
+	@Test public void testTryCatch_07() throws Exception {
+		assertEvaluatesTo("", 
+				"try new String() " +
+				"  catch(java.io.IOException e) 'foo'" +
+				"  catch(Exception e) 'bar'");
+	}
+	
+	@Test public void testTryCatch_08() throws Exception {
+		assertEvaluatesTo("", 
+				"try new String " +
+				"  catch(java.io.IOException e) 'foo'" +
+				"  catch(Exception e) 'bar'");
 	}
 	
 	protected void assertEvaluatesTo(Object object, String string) throws Exception {
