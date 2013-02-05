@@ -22,6 +22,74 @@ abstract class AbstractXtendCompilerTest extends AbstractXtendTestCase {
 	@Inject JvmModelGenerator generator
 	@Inject IGeneratorConfigProvider generatorConfigProvider
 	
+	@Test def testBug399975_01() throws Exception {
+		'''
+			class A {
+			 def void m(Class<?>[] c) {}
+			}
+			class B extends A{
+			 override m(Class<? extends Object>[] c) {}
+			}
+		'''.assertCompilesTo('''
+			@SuppressWarnings("all")
+			public class A {
+			  public void m(final Class<? extends Object>[] c) {
+			  }
+			}
+		''')
+	}
+	
+	@Test def testBug399975_02() throws Exception {
+		'''
+			class B extends A{
+			 override m(Class<? extends Object>[] c) {}
+			}
+			class A {
+			 def void m(Class<?>[] c) {}
+			}
+		'''.assertCompilesTo('''
+			@SuppressWarnings("all")
+			public class B extends A {
+			  public void m(final Class<? extends Object>[] c) {
+			  }
+			}
+		''')
+	}
+	
+	@Test def testBug399975_03() throws Exception {
+		'''
+			class A {
+			 def void m(Class<?>... c) {}
+			}
+			class B extends A{
+			 override m(Class<? extends Object>... c) {}
+			}
+		'''.assertCompilesTo('''
+			@SuppressWarnings("all")
+			public class A {
+			  public void m(final Class<? extends Object>... c) {
+			  }
+			}
+		''')
+	}
+	
+	@Test def testBug399975_04() throws Exception {
+		'''
+			class B extends A{
+			 override m(Class<? extends Object>... c) {}
+			}
+			class A {
+			 def void m(Class<?>... c) {}
+			}
+		'''.assertCompilesTo('''
+			@SuppressWarnings("all")
+			public class B extends A {
+			  public void m(final Class<? extends Object>... c) {
+			  }
+			}
+		''')
+	}
+	
 	@Test def testBug399527() throws Exception {
 		'''
 			class Y {
