@@ -20,6 +20,7 @@ import org.junit.Test;
 /**
  * @author Sebastian Benz - Initial contribution and API
  */
+@SuppressWarnings("deprecation")
 public class CustomExpressionTest extends AbstractXbaseTestCase {
 
 	@Test public void testBinaryExpressionsShouldReturnArgumentsInInternalEList() throws Exception {

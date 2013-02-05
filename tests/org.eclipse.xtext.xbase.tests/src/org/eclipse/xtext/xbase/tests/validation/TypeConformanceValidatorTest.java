@@ -43,7 +43,7 @@ public class TypeConformanceValidatorTest extends AbstractXbaseTestCase {
 		assertConformanceError("while (27) 'foo'", XbasePackage.Literals.XNUMBER_LITERAL, "int",
 				"boolean");
 		assertNoConformanceError("do 'foo' while (true)");
-		assertConformanceError("do 'foo' while ('bar')", XbasePackage.Literals.XSTRING_LITERAL, "java.lang.String",
+		assertConformanceError("do 'foo' while ('bar')", XbasePackage.Literals.XSTRING_LITERAL, "String",
 				"boolean");
 		
 		assertConformanceError("while (null) 'foo'", XbasePackage.Literals.XNULL_LITERAL, "null", "boolean");
@@ -108,34 +108,38 @@ public class TypeConformanceValidatorTest extends AbstractXbaseTestCase {
 		helper.assertError(xExpression, TypesPackage.Literals.JVM_TYPE_REFERENCE, INVALID_CAST);
 	}
 
-	@Test public void testVariableDeclaration() throws Exception {
+	@Test
+	public void testVariableDeclaration() throws Exception {
 		assertNoConformanceError("{ var s = 'foo' }");
 		assertNoConformanceError("{ var java.lang.String s = 'foo' }");
 		assertConformanceError("{ var java.lang.Boolean s = 'foo' }", XbasePackage.Literals.XSTRING_LITERAL,
-				"java.lang.Boolean", "java.lang.String");
+				"Boolean", "String");
 	}
 
-	@Test public void testCatchClause() throws Exception {
+	@Test
+	public void testCatchClause() throws Exception {
 		assertNoConformanceError("try 'foo' catch (java.lang.Exception foo) 'bar'");
 		assertNoConformanceError("try 'foo' catch (java.lang.IllegalArgumentException foo) 'bar'");
 		assertConformanceError("try 'foo' catch (java.lang.String foo) 'bar'",
-				TypesPackage.Literals.JVM_FORMAL_PARAMETER, "Throwable", "java.lang.String");
+				TypesPackage.Literals.JVM_FORMAL_PARAMETER, "Throwable", "String");
 	}
 
-	@Test public void testThrowsExpression() throws Exception {
+	@Test
+	public void testThrowsExpression() throws Exception {
 		assertNoConformanceError("throw new java.lang.Exception()");
 		assertNoConformanceError("throw new java.lang.IllegalArgumentException()");
 		assertConformanceError("throw 42", XbasePackage.Literals.XNUMBER_LITERAL, "int",
-				"java.lang.Throwable");
+				"Throwable");
 	}
 
-	@Test public void testForLoop() throws Exception {
+	@Test
+	public void testForLoop() throws Exception {
 		assertNoConformanceError("for(String foo : new java.util.ArrayList<String>()) 'bar'");
 		assertConformanceError("for(Integer foo : true) 'bar'", XbasePackage.Literals.XBOOLEAN_LITERAL,
-				"boolean", "java.lang.Integer");
+				"boolean", "Integer");
 		assertConformanceError("for(Integer foo : new java.util.ArrayList<String>()) 'bar'",
-				XbasePackage.Literals.XCONSTRUCTOR_CALL, "java.lang.Iterable<? extends java.lang.Integer>",
-				"java.util.ArrayList<java.lang.String>");
+				XbasePackage.Literals.XCONSTRUCTOR_CALL, "Iterable<? extends Integer>",
+				"ArrayList<String>");
 	}
 	
 	@Test public void testForLoop_02() throws Exception {
@@ -150,22 +154,25 @@ public class TypeConformanceValidatorTest extends AbstractXbaseTestCase {
 		assertNoConformanceError("{ val java.util.Set<String> set = newHashSet() for(String s : set) s }");
 	}
 	
-	@Test public void testForLoop_05() throws Exception {
+	@Test
+	public void testForLoop_05() throws Exception {
 		assertConformanceError("{ val java.util.Set<Object> set = newHashSet() for(String s : set) s }", 
 				XbasePackage.Literals.XFEATURE_CALL, 
-				"java.lang.Iterable<? extends java.lang.String>", "java.lang.String[]", "java.util.Set<java.lang.Object>");
+				"Iterable<? extends String>", "String[]", "Set<Object>");
 	}
 	
-	@Test public void testForLoop_06() throws Exception {
+	@Test
+	public void testForLoop_06() throws Exception {
 		assertConformanceError("{ val java.util.Set set = newHashSet() for(String s : set) s }", 
 				XbasePackage.Literals.XFEATURE_CALL, 
-				"java.lang.Iterable<? extends java.lang.String>", "java.lang.String[]", "java.util.Set");
+				"Iterable<? extends String>", "String[]", "Set");
 	}
 	
-	@Test public void testForLoop_07() throws Exception {
+	@Test
+	public void testForLoop_07() throws Exception {
 		assertConformanceError("{ val java.util.Set set = <String>newHashSet() for(String s : set) s }", 
 				XbasePackage.Literals.XFEATURE_CALL, 
-				"java.lang.Iterable<? extends java.lang.String>", "java.lang.String[]", "java.util.Set");
+				"Iterable<? extends String>", "String[]", "Set");
 	}
 	
 	@Test public void testForLoop_08() throws Exception {
@@ -179,12 +186,10 @@ public class TypeConformanceValidatorTest extends AbstractXbaseTestCase {
 		assertNoConformanceError("return ''");
 	}
 	
-	@Ignore("Fails with old impl")
 	@Test public void testReturn_02() throws Exception {
 		assertNoConformanceError("println(return)");
 	}
 	
-	@Ignore("Fails with old impl")
 	@Test public void testReturn_03() throws Exception {
 		final XExpression xExpression = expression("println(return)", false);
 		helper.assertError(xExpression, XbasePackage.Literals.XFEATURE_CALL, UNREACHABLE_CODE, "Unreachable code.");

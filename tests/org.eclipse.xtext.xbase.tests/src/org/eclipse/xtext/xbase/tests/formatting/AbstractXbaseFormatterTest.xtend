@@ -3,11 +3,11 @@ package org.eclipse.xtext.xbase.tests.formatting
 import javax.inject.Inject
 import org.eclipse.xtext.junit4.InjectWith
 import org.eclipse.xtext.junit4.XtextRunner
-import static org.eclipse.xtext.xbase.formatting.XbaseFormatterPreferenceKeys.*
+import org.eclipse.xtext.preferences.MapBasedPreferenceValues
 import org.eclipse.xtext.xbase.junit.formatter.FormatterTester
 import org.junit.runner.RunWith
-import org.eclipse.xtext.preferences.IPreferenceValues
-import org.eclipse.xtext.preferences.MapBasedPreferenceValues
+
+import static org.eclipse.xtext.xbase.formatting.BasicFormatterPreferenceKeys.*
 
 @RunWith(typeof(XtextRunner))
 @InjectWith(typeof(XbaseFormatterTestInjectorProvider))

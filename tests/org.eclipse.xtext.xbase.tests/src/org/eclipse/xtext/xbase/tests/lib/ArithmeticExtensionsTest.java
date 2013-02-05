@@ -18,6 +18,7 @@ import org.eclipse.xtext.xbase.lib.IntegerExtensions;
 import org.eclipse.xtext.xbase.lib.LongExtensions;
 import org.eclipse.xtext.xbase.tests.AbstractXbaseTestCase;
 import org.eclipse.xtext.xbase.typing.ITypeProvider;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import com.google.inject.Inject;
@@ -25,6 +26,7 @@ import com.google.inject.Inject;
 /**
  * @author Jan Koehnlein - Initial contribution and API
  */
+@SuppressWarnings("deprecation")
 public class ArithmeticExtensionsTest extends AbstractXbaseTestCase {
 
 	@Inject
@@ -39,60 +41,60 @@ public class ArithmeticExtensionsTest extends AbstractXbaseTestCase {
 	
 	@Test public void testPrimitiveBooleanBindings() throws Exception {
 		XExpression expression = expression("{!true||false&&true==false!=true}", true);
-		assertOnlyPrimitveOperationsBound(expression);
+		assertOnlyPrimitiveOperationsBound(expression);
 	}
 
 	@Test public void testPrimitiveIntBindings() throws Exception {
 		XExpression expression = expression("{-1+2**3*4/5%6<9}", true);
-		assertOnlyPrimitveOperationsBound(expression);
+		assertOnlyPrimitiveOperationsBound(expression);
 	}
 	@Test public void testPrimitiveIntBindings_01() throws Exception {
 		XExpression expression = expression("{10<=11}", true);
-		assertOnlyPrimitveOperationsBound(expression);
+		assertOnlyPrimitiveOperationsBound(expression);
 	}
 	@Test public void testPrimitiveIntBindings_02() throws Exception {
 		XExpression expression = expression("{12>13}", true);
-		assertOnlyPrimitveOperationsBound(expression);
+		assertOnlyPrimitiveOperationsBound(expression);
 	}
 	@Test public void testPrimitiveIntBindings_03() throws Exception {
 		XExpression expression = expression("{13>=14}", true);
-		assertOnlyPrimitveOperationsBound(expression);
+		assertOnlyPrimitiveOperationsBound(expression);
 	}
 	@Test public void testPrimitiveIntBindings_04() throws Exception {
 		XExpression expression = expression("{15!=16}", true);
-		assertOnlyPrimitveOperationsBound(expression);
+		assertOnlyPrimitiveOperationsBound(expression);
 	}
 	@Test public void testPrimitiveIntBindings_05() throws Exception {
 		XExpression expression = expression("{17==18}", true);
-		assertOnlyPrimitveOperationsBound(expression);
+		assertOnlyPrimitiveOperationsBound(expression);
 	}
 
 	@Test public void testPrimitiveDoubleBindings() throws Exception {
 		XExpression expression = expression("{val double x=1; -x+x**x*x/x%x<x}", true); 
-		assertOnlyPrimitveOperationsBound(expression);
+		assertOnlyPrimitiveOperationsBound(expression);
 	}
 	@Test public void testPrimitiveDoubleBindings_01() throws Exception {
 		XExpression expression = expression("{val double x=1; x<=x }", true); 
-		assertOnlyPrimitveOperationsBound(expression);
+		assertOnlyPrimitiveOperationsBound(expression);
 	}
 	@Test public void testPrimitiveDoubleBindings_02() throws Exception {
 		XExpression expression = expression("{val double x=1; x>x}", true); 
-		assertOnlyPrimitveOperationsBound(expression);
+		assertOnlyPrimitiveOperationsBound(expression);
 	}
 	@Test public void testPrimitiveDoubleBindings_03() throws Exception {
 		XExpression expression = expression("{val double x=1; x>=x}", true); 
-		assertOnlyPrimitveOperationsBound(expression);
+		assertOnlyPrimitiveOperationsBound(expression);
 	}
 	@Test public void testPrimitiveDoubleBindings_04() throws Exception {
 		XExpression expression = expression("{val double x=1; x!=x}", true); 
-		assertOnlyPrimitveOperationsBound(expression);
+		assertOnlyPrimitiveOperationsBound(expression);
 	}
 	@Test public void testPrimitiveDoubleBindings_05() throws Exception {
 		XExpression expression = expression("{val double x=1; x==x}", true); 
-		assertOnlyPrimitveOperationsBound(expression);
+		assertOnlyPrimitiveOperationsBound(expression);
 	}
 	
-	protected void assertOnlyPrimitveOperationsBound(XExpression expression) {
+	protected void assertOnlyPrimitiveOperationsBound(XExpression expression) {
 		boolean operationsFound = false;
 		for (XAbstractFeatureCall featureCall : EcoreUtil2.eAllOfType(expression, XAbstractFeatureCall.class)) {
 			JvmIdentifiableElement feature = featureCall.getFeature();
@@ -188,14 +190,12 @@ public class ArithmeticExtensionsTest extends AbstractXbaseTestCase {
 		assertEquals("long", typeProvider.getType(expression).getIdentifier());
 	}
 
-	@SuppressWarnings("deprecation")
 	@Test public void testShiftOperators_0() {
 		assertEquals(0x80000000, IntegerExtensions.shiftLeft(0x1, 31));
 		assertEquals(0xffffffff, IntegerExtensions.shiftRight(0x80000000, 31));
 		assertEquals(0x1, IntegerExtensions.shiftRightUnsigned(0x80000000, 31));
 	}
 
-	@SuppressWarnings("deprecation")
 	@Test public void testShiftOperators_1() {
 		assertEquals(0x8000000000000000L, LongExtensions.shiftLeft(0x1L, 63));
 		assertEquals(0xffffffffffffffffL, LongExtensions.shiftRight(0x8000000000000000L, 63));
@@ -210,5 +210,11 @@ public class ArithmeticExtensionsTest extends AbstractXbaseTestCase {
 	@Test public void testBigDecimalAllOperationsBound() throws Exception {
 		XExpression expression = expression("{val a=1bd; -a+a-a*a/a}", true);
 		assertEquals("java.math.BigDecimal", typeProvider.getType(expression).getIdentifier());
+	}
+	
+	@Ignore
+	@Test(timeout=400) public void testManyOperations_01() throws Exception {
+		XExpression expression = expression("{-1+2**3*4/5%6<9+-1+2**3*4/5%6<9+-1+2**3*4/5%6<9-1+2**3*4/5%6<9-1+2**3*4/5%6<9-1+2**3*4/5%6<9}", true);
+		assertOnlyPrimitiveOperationsBound(expression);
 	}
 }

@@ -7,7 +7,6 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.tests.compiler;
 
-import org.junit.Ignore;
 import org.junit.Test;
 
 /**
@@ -129,7 +128,6 @@ public class CompilerTest extends AbstractOutputComparingCompilerTests {
 	}
 	
 	@Test
-	@Ignore("TODO")
 	public void testNoUnneccessaryConversionStatement() throws Exception {
 		assertCompilesTo(
 				"String _xblockexpression = null;\n" + 
@@ -188,7 +186,6 @@ public class CompilerTest extends AbstractOutputComparingCompilerTests {
 	}
 	
 	@Test
-	@Ignore("TODO type inferrence in for-loops does not work properly")
 	public void testForEach_03() throws Exception {	
 		assertCompilesTo(
 				"\njava.util.ArrayList<String> _arrayList = new java.util.ArrayList<String>();\n" + 
@@ -298,7 +295,8 @@ public class CompilerTest extends AbstractOutputComparingCompilerTests {
 				"}");
 	}
 	
-	@Test public void testSwitchTypeGuards_01() throws Exception {
+	@Test
+	public void testSwitchTypeGuards_01() throws Exception {
 		assertCompilesTo(
 				"String _switchResult = null;\n" + 
 				"final CharSequence x = ((CharSequence) \"foo\");\n" + 
@@ -318,7 +316,7 @@ public class CompilerTest extends AbstractOutputComparingCompilerTests {
 				"    _matched=true;\n" + 
 				"    int _compareTo = ((Comparable)_comparable).compareTo(\"jho\");\n" + 
 				"    String _plus = (\"\" + Integer.valueOf(_compareTo));\n" + 
-				"    String _string = ((Comparable)_comparable).toString();\n" + 
+				"    String _string = ((CharSequence)_comparable).toString();\n" + 
 				"    String _plus_1 = (_plus + _string);\n" + 
 				"    _switchResult = _plus_1;\n" + 
 				"  }\n" + 
