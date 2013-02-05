@@ -56,7 +56,17 @@ public class TypeSerializationUtilTest extends AbstractXbaseTestCase {
     this.assertSerializedTypeOfFoo("val foo = [|1]", "()=>int");
     this.assertSerializedTypeOfFoo("val foo = [String x|x.toFirstUpper]", "(String)=>String");
     this.assertSerializedTypeOfFoo("val foo = [String x, int offset|x.substring(offset)]", "(String, int)=>String");
-    this.assertSerializedTypeOfFoo("val foo = [String x|System.out.println(x)]", "(String)=>void");
+  }
+  
+  @Ignore(value = "TODO implement me")
+  @Test
+  public void testClosureToVoid() {
+    this.assertSerializedTypeOfFoo("val foo = [String x|System::out.println(x)]", "(String)=>void");
+  }
+  
+  @Test
+  public void testClosureWithExpectation() {
+    this.assertSerializedTypeOfFoo("val Runnable foo = [|1]", "()=>void");
   }
   
   protected void assertSerializedTypeOfFoo(final CharSequence model, final String expectedOutput, final String... expectedImports) {

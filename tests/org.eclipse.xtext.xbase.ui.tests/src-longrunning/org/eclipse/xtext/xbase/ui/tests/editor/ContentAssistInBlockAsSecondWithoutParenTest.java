@@ -8,6 +8,7 @@
 package org.eclipse.xtext.xbase.ui.tests.editor;
 
 import org.eclipse.xtext.junit4.ui.ContentAssistProcessorTestBuilder;
+import org.junit.Ignore;
 import org.junit.Test;
 
 /**
@@ -64,12 +65,14 @@ public class ContentAssistInBlockAsSecondWithoutParenTest extends ContentAssistI
 	@Test public void testAfterBinaryOperation_05() throws Exception {
 		newBuilder().append("((''+''))").assertText(expect(getKeywordsAndStatics(), VARIABLE_DECL, CAST_INSTANCEOF));
 	}
-	
+
+	@Ignore("TODO implement me")
 	@Override
 	@Test public void testOnStringLiteral_31() throws Exception {
 		newBuilder().append("('').").assertText();
 	}
 	
+	@Ignore("TODO implement me")	
 	@Override
 	@Test public void testAfterBinaryOperation_04() throws Exception {
 		newBuilder().append("(''+'').").assertText();

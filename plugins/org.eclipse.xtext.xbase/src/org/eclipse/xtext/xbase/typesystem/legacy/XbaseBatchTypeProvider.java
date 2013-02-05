@@ -24,6 +24,7 @@ import org.eclipse.xtext.xbase.jvmmodel.ILogicalContainerProvider;
 import org.eclipse.xtext.xbase.typesystem.IBatchTypeResolver;
 import org.eclipse.xtext.xbase.typesystem.IResolvedTypes;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
+import org.eclipse.xtext.xbase.typesystem.util.CommonTypeComputationServices;
 import org.eclipse.xtext.xbase.typing.XbaseTypeProvider;
 
 import com.google.inject.Inject;
@@ -40,6 +41,7 @@ public class XbaseBatchTypeProvider extends XbaseTypeProvider {
 	
 	@Inject private IBatchTypeResolver typeResolver;
 	@Inject private ILogicalContainerProvider containerProvider;
+	@Inject private CommonTypeComputationServices services;
 	
 	@NonNull
 	protected IResolvedTypes getResolvedTypes(EObject object) {
@@ -118,7 +120,7 @@ public class XbaseBatchTypeProvider extends XbaseTypeProvider {
 	public org.eclipse.xtext.common.types.util.ITypeArgumentContext getTypeArgumentContext(XAbstractFeatureCall featureCall,
 			List<XExpression> actualArguments, Provider<JvmTypeReference> receiverTypeProvider,
 			JvmIdentifiableElement feature) {
-		throw new UnsupportedOperationException();
+		return new LegacyTypeArgumentContext(featureCall, actualArguments, receiverTypeProvider != null ? receiverTypeProvider.get() : null , feature, services);
 	}
 
 	@Override
