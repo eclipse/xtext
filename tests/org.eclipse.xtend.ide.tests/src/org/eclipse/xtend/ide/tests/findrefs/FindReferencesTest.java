@@ -123,7 +123,7 @@ public class FindReferencesTest extends AbstractXtendUITestCase {
 	@Test public void testFindReferencesToFunction() throws Exception {
 		XtendClass classFoo = (XtendClass) testHelper.xtendFile("Foo", "class Foo { def foo() {this} def bar() {foo()} }")
 				.getXtendTypes().get(0);
-		XtendClass classBar = (XtendClass) testHelper.xtendFile("Bar", "class Bar { def baz(Foo this) {foo()} }").getXtendTypes().get(0);
+		XtendClass classBar = (XtendClass) testHelper.xtendFile("Bar", "class Bar { def baz(Foo it) {foo()} }").getXtendTypes().get(0);
 		waitForAutoBuild();
 		XtendFunction functionFoo = (XtendFunction) classFoo.getMembers().get(0);
 		XtendFunction functionBar = (XtendFunction) classFoo.getMembers().get(1);
