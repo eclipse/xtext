@@ -27,10 +27,9 @@ public class TypeComputationStateWithExpectation extends AbstractStackedTypeComp
 	protected TypeComputationStateWithExpectation(
 			ResolvedTypes resolvedTypes,
 			IFeatureScopeSession featureScopeSession,
-			DefaultReentrantTypeResolver reentrantTypeResolver,
 			AbstractTypeComputationState parent,
 			@Nullable LightweightTypeReference typeReference) {
-		super(resolvedTypes, featureScopeSession, reentrantTypeResolver, parent);
+		super(resolvedTypes, featureScopeSession, parent);
 		this.expectedType = typeReference;
 	}
 

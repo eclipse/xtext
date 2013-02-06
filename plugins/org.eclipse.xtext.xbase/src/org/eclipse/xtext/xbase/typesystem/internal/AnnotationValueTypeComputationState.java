@@ -30,8 +30,8 @@ public class AnnotationValueTypeComputationState extends AbstractRootTypeComputa
 	private final XExpression expression;
 
 	public AnnotationValueTypeComputationState(ResolvedTypes resolvedTypes, IFeatureScopeSession featureScopeSession,
-			JvmAnnotationValue annotationValue, XExpression expression, LogicalContainerAwareReentrantTypeResolver reentrantTypeResolver) {
-		super(resolvedTypes, featureScopeSession, reentrantTypeResolver);
+			JvmAnnotationValue annotationValue, XExpression expression) {
+		super(resolvedTypes, featureScopeSession);
 		this.annotationValue = annotationValue;
 		this.expression = expression;
 	}

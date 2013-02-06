@@ -431,7 +431,7 @@ public class ClosureTypeComputerUnitTest extends AbstractXbaseTestCase implement
 			public ITypeReferenceOwner getReferenceOwner() {
 				return ClosureTypeComputerUnitTest.this;
 			}
-		}, new NullFeatureScopeSession(), reentrantResolver);
+		}, new NullFeatureScopeSession());
 	}
 	
 	@NonNullByDefault
@@ -502,9 +502,8 @@ public class ClosureTypeComputerUnitTest extends AbstractXbaseTestCase implement
 	@NonNullByDefault
 	class TestableState extends AbstractTypeComputationState {
 
-		protected TestableState(ResolvedTypes resolvedTypes, IFeatureScopeSession featureScopeSession,
-				DefaultReentrantTypeResolver reentrantTypeResolver) {
-			super(resolvedTypes, featureScopeSession, reentrantTypeResolver);
+		protected TestableState(ResolvedTypes resolvedTypes, IFeatureScopeSession featureScopeSession) {
+			super(resolvedTypes, featureScopeSession);
 		}
 
 		@Override

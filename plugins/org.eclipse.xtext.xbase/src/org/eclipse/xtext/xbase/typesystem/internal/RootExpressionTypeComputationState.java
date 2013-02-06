@@ -24,9 +24,11 @@ public class RootExpressionTypeComputationState extends ExpressionTypeComputatio
 	protected LightweightTypeReference expectedType;
 
 	protected RootExpressionTypeComputationState(StackedResolvedTypes resolvedTypes,
-			IFeatureScopeSession featureScopeSession, DefaultReentrantTypeResolver reentrantTypeResolver,
-			AbstractTypeComputationState parent, XExpression expression, @Nullable LightweightTypeReference expectedType) {
-		super(resolvedTypes, featureScopeSession, reentrantTypeResolver, parent, expression);
+			IFeatureScopeSession featureScopeSession,
+			AbstractTypeComputationState parent, 
+			XExpression expression, 
+			@Nullable LightweightTypeReference expectedType) {
+		super(resolvedTypes, featureScopeSession, parent, expression);
 		this.expectedType = expectedType;
 	}
 

@@ -68,7 +68,7 @@ public class TypeComputationStateTest extends AbstractXbaseTestCase implements I
       IBatchScopeProvider _batchScopeProvider = this.resolver.getBatchScopeProvider();
       Resource _eResource = expression.eResource();
       IFeatureScopeSession _newSession = _batchScopeProvider.newSession(_eResource);
-      ExpressionBasedRootTypeComputationState _expressionBasedRootTypeComputationState = new ExpressionBasedRootTypeComputationState(resolution, _newSession, expression, this.resolver, any);
+      ExpressionBasedRootTypeComputationState _expressionBasedRootTypeComputationState = new ExpressionBasedRootTypeComputationState(resolution, _newSession, expression, any);
       _expressionBasedRootTypeComputationState.computeTypes();
       String _string = any.toString();
       LightweightTypeReference _actualType = resolution.getActualType(expression);
@@ -98,7 +98,7 @@ public class TypeComputationStateTest extends AbstractXbaseTestCase implements I
       IBatchScopeProvider _batchScopeProvider = this.resolver.getBatchScopeProvider();
       Resource _eResource = expression.eResource();
       IFeatureScopeSession _newSession = _batchScopeProvider.newSession(_eResource);
-      ExpressionBasedRootTypeComputationState _expressionBasedRootTypeComputationState = new ExpressionBasedRootTypeComputationState(resolution, _newSession, expression, this.resolver, any);
+      ExpressionBasedRootTypeComputationState _expressionBasedRootTypeComputationState = new ExpressionBasedRootTypeComputationState(resolution, _newSession, expression, any);
       _expressionBasedRootTypeComputationState.computeTypes();
       final Multimap<XExpression,TypeData> expressionTypes = resolution.basicGetExpressionTypes();
       EList<XExpression> _expressions = ((XBlockExpression) expression).getExpressions();
@@ -166,7 +166,7 @@ public class TypeComputationStateTest extends AbstractXbaseTestCase implements I
       IBatchScopeProvider _batchScopeProvider = this.resolver.getBatchScopeProvider();
       Resource _eResource = expression.eResource();
       IFeatureScopeSession _newSession = _batchScopeProvider.newSession(_eResource);
-      ExpressionBasedRootTypeComputationState _expressionBasedRootTypeComputationState = new ExpressionBasedRootTypeComputationState(resolution, _newSession, expression, this.resolver, any);
+      ExpressionBasedRootTypeComputationState _expressionBasedRootTypeComputationState = new ExpressionBasedRootTypeComputationState(resolution, _newSession, expression, any);
       _expressionBasedRootTypeComputationState.computeTypes();
       final Multimap<XExpression,TypeData> expressionTypes = resolution.basicGetExpressionTypes();
       TreeIterator<EObject> _eAllContents = expression.eAllContents();
@@ -207,7 +207,7 @@ public class TypeComputationStateTest extends AbstractXbaseTestCase implements I
       IBatchScopeProvider _batchScopeProvider = this.resolver.getBatchScopeProvider();
       Resource _eResource = expression.eResource();
       IFeatureScopeSession _newSession = _batchScopeProvider.newSession(_eResource);
-      ExpressionBasedRootTypeComputationState _expressionBasedRootTypeComputationState = new ExpressionBasedRootTypeComputationState(resolution, _newSession, expression, this.resolver, any);
+      ExpressionBasedRootTypeComputationState _expressionBasedRootTypeComputationState = new ExpressionBasedRootTypeComputationState(resolution, _newSession, expression, any);
       _expressionBasedRootTypeComputationState.computeTypes();
       final Multimap<XExpression,TypeData> expressionTypes = resolution.basicGetExpressionTypes();
       TreeIterator<EObject> _eAllContents = expression.eAllContents();

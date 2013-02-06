@@ -25,9 +25,8 @@ public class TypeComputationStateWithNonVoidExpectation extends AbstractStackedT
 	protected TypeComputationStateWithNonVoidExpectation(
 			ResolvedTypes resolvedTypes,
 			IFeatureScopeSession featureScopeSession,
-			DefaultReentrantTypeResolver reentrantTypeResolver,
 			AbstractTypeComputationState parent) {
-		super(resolvedTypes, featureScopeSession, reentrantTypeResolver, parent);
+		super(resolvedTypes, featureScopeSession, parent);
 	}
 
 	@Override

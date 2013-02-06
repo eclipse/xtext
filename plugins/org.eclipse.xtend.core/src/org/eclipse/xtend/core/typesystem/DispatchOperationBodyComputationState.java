@@ -28,9 +28,8 @@ public class DispatchOperationBodyComputationState extends OperationBodyComputat
 			ResolvedTypes resolvedTypes, 
 			IFeatureScopeSession featureScopeSession,
 			JvmOperation operation,
-			JvmOperation dispatcher,
-			DispatchAndExtensionAwareReentrantTypeResolver reentrantTypeResolver) {
-		super(resolvedTypes, featureScopeSession, operation, reentrantTypeResolver);
+			JvmOperation dispatcher) {
+		super(resolvedTypes, featureScopeSession, operation);
 		this.dispatcher = dispatcher;
 	}
 	

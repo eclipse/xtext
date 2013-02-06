@@ -17,6 +17,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
@@ -30,10 +31,13 @@ import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.util.Strings;
+import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.XExpression;
+import org.eclipse.xtext.xbase.XbasePackage;
 import org.eclipse.xtext.xbase.scoping.batch.IFeatureScopeSession;
 import org.eclipse.xtext.xbase.scoping.batch.IIdentifiableElementDescription;
 import org.eclipse.xtext.xbase.typesystem.IResolvedTypes;
+import org.eclipse.xtext.xbase.typesystem.computation.IFeatureLinkingCandidate;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightMergedBoundTypeArgument;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 
@@ -55,13 +59,37 @@ public class ScopeProviderAccess {
 	@Inject
 	private LazyURIEncoder encoder;
 
+	@NonNullByDefault
+	@Nullable
+	protected IFeatureLinkingCandidate getKnownFeature(XAbstractFeatureCall featureCall, AbstractTypeComputationState state, ResolvedTypes resolvedTypes) {
+		IFeatureLinkingCandidate result = resolvedTypes.getFeature(featureCall);
+		if (result != null) {
+			return new AppliedFeatureLinkingCandidate(result);
+		}
+		EObject proxyOrResolved = (EObject) featureCall.eGet(XbasePackage.Literals.XABSTRACT_FEATURE_CALL__FEATURE, false);
+		if (proxyOrResolved == null) {
+			return new NullFeatureLinkingCandidate(featureCall, state);
+		}
+		if (!proxyOrResolved.eIsProxy()) {
+			return state.createResolvedLink(featureCall, (JvmIdentifiableElement) proxyOrResolved);
+		}
+		if (!encoder.isCrossLinkFragment(featureCall.eResource(), EcoreUtil.getURI(proxyOrResolved).fragment())) {
+			JvmIdentifiableElement feature = featureCall.getFeature();
+			if (!feature.eIsProxy()) {
+				return state.createResolvedLink(featureCall, feature);
+			}
+		}
+		return null;
+	}
+	
 	/**
 	 * Returns a bunch of descriptions most of which are actually {@link IIdentifiableElementDescription describing identifiables}. 
 	 * The provided iterable is never empty but it may contain a single {@link ErrorDescription error description}.
 	 * 
 	 * @return the available descriptions.
 	 */
-	public Iterable<IEObjectDescription> getCandidateDescriptions(XExpression expression, EReference reference, EObject toBeLinked,
+	@NonNullByDefault
+	public Iterable<IEObjectDescription> getCandidateDescriptions(XExpression expression, EReference reference, @Nullable EObject toBeLinked,
 			IFeatureScopeSession session, IResolvedTypes types) throws IllegalNodeException {
 		if (toBeLinked == null) {
 			return Collections.emptyList();

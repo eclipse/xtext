@@ -22,10 +22,8 @@ public abstract class AbstractLogicalContainerAwareRootComputationState extends 
 	private final JvmMember member;
 
 	protected AbstractLogicalContainerAwareRootComputationState(ResolvedTypes resolvedTypes,
-			IFeatureScopeSession featureScopeSession,
-			JvmMember member,
-			LogicalContainerAwareReentrantTypeResolver reentrantTypeResolver) {
-		super(resolvedTypes, featureScopeSession, reentrantTypeResolver);
+			IFeatureScopeSession featureScopeSession, JvmMember member) {
+		super(resolvedTypes, featureScopeSession);
 		this.member = member;
 	}
 	

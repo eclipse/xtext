@@ -33,7 +33,6 @@ import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.editor.XtextEditor;
 import org.eclipse.xtext.ui.refactoring.ui.IRenameElementContext;
 import org.eclipse.xtext.xbase.jvmmodel.IJvmModelAssociations;
-import org.eclipse.xtext.xbase.ui.jvmmodel.refactoring.OperatorMappingUtil;
 
 import com.google.inject.Inject;
 
@@ -44,18 +43,6 @@ public class CombinedJvmJdtRenameContextFactory extends JdtRefactoringContextFac
 
 	@Inject
 	private IJvmModelAssociations associations;
-
-	@Inject
-	private OperatorMappingUtil operatorMappingUtil;
-
-	@Override
-	public IRenameElementContext createRenameElementContext(EObject targetElement, XtextEditor editor,
-			ITextSelection selection, XtextResource resource) {
-		if (operatorMappingUtil.isMappedOperator(targetElement) && selection.getLength() < "operator".length())
-			return null;
-		else
-			return super.createRenameElementContext(targetElement, editor, selection, resource);
-	}
 
 	@Override
 	public IRenameElementContext createLocalRenameElementContext(EObject targetElement, XtextEditor editor,

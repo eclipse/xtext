@@ -11,6 +11,8 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
+import org.eclipse.xtext.scoping.IScope;
+import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.typesystem.internal.CachingBatchTypeResolver;
 
@@ -25,7 +27,7 @@ import com.google.inject.ImplementedBy;
  * any restriction on this one.
  * 
  * The obtained instance of {@link IResolvedTypes resolved types} does not make any promises
- * with respect to eager resolution or lazyness, but answers all queries for types
+ * with respect to eager resolution or laziness, but answers all queries for types
  * that are related to the context that was used to get the resolved types itself.
  * 
  * Generally speaking, all expressions within the very same resource can be used
@@ -46,5 +48,11 @@ public interface IBatchTypeResolver {
 	 */
 	@NonNull
 	IResolvedTypes resolveTypes(@Nullable EObject object);
+	
+	/**
+	 * Returns the currently visible feature in the given context.
+	 */
+	@NonNull
+	IScope getFeatureScope(@Nullable XAbstractFeatureCall featureCall);
 	
 }

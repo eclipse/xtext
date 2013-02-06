@@ -26,10 +26,9 @@ public class TypeComputationStateWithRootExpectation extends TypeComputationStat
 	protected TypeComputationStateWithRootExpectation(
 			ResolvedTypes resolvedTypes,
 			IFeatureScopeSession featureScopeSession,
-			DefaultReentrantTypeResolver reentrantTypeResolver,
 			AbstractTypeComputationState parent,
 			@Nullable LightweightTypeReference typeReference) {
-		super(resolvedTypes, featureScopeSession, reentrantTypeResolver, parent, typeReference);
+		super(resolvedTypes, featureScopeSession, parent, typeReference);
 	}
 	
 	@Override
@@ -41,16 +40,16 @@ public class TypeComputationStateWithRootExpectation extends TypeComputationStat
 	@Override
 	protected ExpressionTypeComputationState createExpressionComputationState(XExpression expression,
 			StackedResolvedTypes typeResolution) {
-		return new RootExpressionTypeComputationState(typeResolution, getFeatureScopeSession(), getResolver(), this, expression, getExpectedType());
+		return new RootExpressionTypeComputationState(typeResolution, getFeatureScopeSession(), this, expression, getExpectedType());
 	}
 	
 	@Override
 	public TypeAssigner assignTypes() {
-		TypeCheckpointComputationState state = new TypeCheckpointComputationState(getResolvedTypes(), getFeatureScopeSession(), getResolver(), this) {
+		TypeCheckpointComputationState state = new TypeCheckpointComputationState(getResolvedTypes(), getFeatureScopeSession(), this) {
 			@Override
 			protected ExpressionTypeComputationState createExpressionComputationState(XExpression expression,
 					StackedResolvedTypes typeResolution) {
-				return new RootExpressionTypeComputationState(typeResolution, getFeatureScopeSession(), getResolver(), this, expression, getExpectedType());
+				return new RootExpressionTypeComputationState(typeResolution, getFeatureScopeSession(), this, expression, getExpectedType());
 			}
 		};
 		return createTypeAssigner(state);

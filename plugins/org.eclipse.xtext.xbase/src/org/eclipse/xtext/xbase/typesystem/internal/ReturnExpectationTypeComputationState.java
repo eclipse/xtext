@@ -25,9 +25,8 @@ public class ReturnExpectationTypeComputationState extends AbstractStackedTypeCo
 	protected ReturnExpectationTypeComputationState(
 			ResolvedTypes resolvedTypes,
 			IFeatureScopeSession featureScopeSession,
-			DefaultReentrantTypeResolver reentrantTypeResolver,
 			AbstractTypeComputationState parent) {
-		super(resolvedTypes, featureScopeSession, reentrantTypeResolver, parent);
+		super(resolvedTypes, featureScopeSession, parent);
 	}
 
 	@Override

@@ -59,7 +59,7 @@ public abstract class AbstractLinkingCandidate<Expression extends XExpression> i
 
 		public ArgumentTypeComputationState(AbstractTypeComputationState parent,
 				LightweightTypeReference expectedType, @Nullable ConformanceHint defaultHint) {
-			super(parent.getResolvedTypes(), parent.getFeatureScopeSession(), parent.getResolver(), parent);
+			super(parent.getResolvedTypes(), parent.getFeatureScopeSession(), parent);
 			this.expectedType = expectedType;
 			this.defaultHint = defaultHint;
 		}

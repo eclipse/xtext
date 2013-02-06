@@ -29,10 +29,9 @@ public class ExpressionTypeComputationState extends AbstractStackedTypeComputati
 
 	protected ExpressionTypeComputationState(StackedResolvedTypes resolvedTypes,
 			IFeatureScopeSession featureScopeSession,
-			DefaultReentrantTypeResolver reentrantTypeResolver, 
 			AbstractTypeComputationState parent,
 			XExpression expression) {
-		super(resolvedTypes, featureScopeSession, reentrantTypeResolver, parent);
+		super(resolvedTypes, featureScopeSession, parent);
 		this.expression = expression;
 	}
 	
@@ -63,12 +62,12 @@ public class ExpressionTypeComputationState extends AbstractStackedTypeComputati
 	
 	@Override
 	public TypeComputationStateWithExpectation withExpectation(@Nullable LightweightTypeReference expectation) {
-		return new ExpressionTypeComputationStateWithExpectation(getResolvedTypes(), getFeatureScopeSession(), getResolver(), this, expectation);
+		return new ExpressionTypeComputationStateWithExpectation(getResolvedTypes(), getFeatureScopeSession(), this, expectation);
 	}
 	
 	@Override
 	public AbstractTypeComputationState withoutExpectation() {
-		return new ExpressionTypeComputationStateWithExpectation(getResolvedTypes(), getFeatureScopeSession(), getResolver(), this, null);
+		return new ExpressionTypeComputationStateWithExpectation(getResolvedTypes(), getFeatureScopeSession(), this, null);
 	}
 	
 	@Override

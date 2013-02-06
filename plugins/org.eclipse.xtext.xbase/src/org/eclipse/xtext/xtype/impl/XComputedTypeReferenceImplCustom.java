@@ -65,7 +65,14 @@ public class XComputedTypeReferenceImplCustom extends XComputedTypeReferenceImpl
 			}
 		}
 		return equivalent;
-		
+	}
+	
+	@Override
+	public JvmTypeReference basicGetEquivalent() {
+		if (equivalent == null) {
+			return getEquivalent();
+		}
+		return super.basicGetEquivalent();
 	}
 	
 }
