@@ -19,6 +19,7 @@ import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.IStorage;
 import org.eclipse.core.runtime.CoreException;
+import org.eclipse.core.runtime.OperationCanceledException;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.jdt.core.IPackageFragmentRoot;
@@ -74,6 +75,8 @@ public class XtendBuilderParticipant extends BuilderParticipant {
 				} finally {
 					elementIssueProviderFactory.detachData(resource);
 				}
+			} catch (OperationCanceledException e) {
+				throw e;
 			} catch (RuntimeException e) {
 				if (e.getCause() instanceof CoreException) {
 					throw (CoreException) e.getCause();
