@@ -301,7 +301,6 @@ public class XtendJvmModelInferrer implements IJvmModelInferrer {
 			inferredJvmType.getSuperTypes().add(typeReferences.getTypeForName(Object.class, source));
 		}
 		copyAndFixTypeParameters(source.getTypeParameters(), inferredJvmType);
-		
 		for (XtendMember member : source.getMembers()) {
 			if (member instanceof XtendField
 					|| (member instanceof XtendFunction && ((XtendFunction) member).getName() != null)) {
