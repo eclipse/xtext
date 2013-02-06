@@ -10,6 +10,7 @@ import org.junit.Test
 import static org.eclipse.xtend.core.validation.IssueCodes.*
 import static org.eclipse.xtext.xbase.validation.IssueCodes.*
 
+@Ignore
 class QuickfixTest extends AbstractXtendUITestCase {
 	
 	@Inject extension QuickfixTestBuilder builder

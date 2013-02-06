@@ -10,6 +10,7 @@ import org.junit.After;
 import org.junit.Ignore;
 import org.junit.Test;
 
+@Ignore
 @SuppressWarnings("all")
 public class QuickfixTest extends AbstractXtendUITestCase {
   @Inject

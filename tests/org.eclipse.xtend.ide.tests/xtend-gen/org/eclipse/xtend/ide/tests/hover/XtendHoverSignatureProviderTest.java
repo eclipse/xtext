@@ -826,10 +826,10 @@ public class XtendHoverSignatureProviderTest extends AbstractXtendUITestCase {
       final XMemberFeatureCall call2 = ((XMemberFeatureCall) _get_3);
       JvmIdentifiableElement _feature = call1.getFeature();
       String _signature = this.signatureProvider.getSignature(_feature);
-      Assert.assertEquals("void Bar.foo()", _signature);
+      Assert.assertEquals("Object Bar.foo()", _signature);
       JvmIdentifiableElement _feature_1 = call2.getFeature();
       String _signature_1 = this.signatureProvider.getSignature(_feature_1);
-      Assert.assertEquals("void Foo.bar()", _signature_1);
+      Assert.assertEquals("Object Foo.bar()", _signature_1);
       XExpression _memberCallTarget = call1.getMemberCallTarget();
       JvmIdentifiableElement _feature_2 = ((XFeatureCall) _memberCallTarget).getFeature();
       String _signature_2 = this.signatureProvider.getSignature(_feature_2);

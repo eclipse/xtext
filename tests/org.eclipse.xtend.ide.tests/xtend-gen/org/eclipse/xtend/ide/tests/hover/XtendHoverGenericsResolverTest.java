@@ -28,8 +28,10 @@ import org.eclipse.xtext.xbase.ui.hover.HoverGenericsResolver;
 import org.eclipse.xtext.xbase.ui.hover.XbaseDeclarativeHoverSignatureProvider;
 import org.junit.After;
 import org.junit.Assert;
+import org.junit.Ignore;
 import org.junit.Test;
 
+@Ignore
 @SuppressWarnings("all")
 public class XtendHoverGenericsResolverTest extends AbstractXtendUITestCase {
   @Inject
