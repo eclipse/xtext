@@ -164,6 +164,9 @@ public abstract class AbstractPendingLinkingCandidate<Expression extends XExpres
 				}
 				return other;
 			}
+			if(this.isVarArgs() && !right.isVarArgs()) {
+				return right;
+			}
 			return getThis();
 		}
 		throw new IllegalArgumentException("other was " + other);
@@ -173,6 +176,10 @@ public abstract class AbstractPendingLinkingCandidate<Expression extends XExpres
 	
 	protected boolean isVisible() {
 		return description.isVisible();
+	}
+
+	protected boolean isVarArgs() {
+		return getFeature() instanceof JvmExecutable && ((JvmExecutable)getFeature()).isVarArgs();
 	}
 	
 	protected int compareByArgumentTypes(AbstractPendingLinkingCandidate<?> right) {
