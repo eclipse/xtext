@@ -146,6 +146,7 @@ public class SmokeTest extends AbstractSmokeTest {
 				logger.trace("New Text: >>>" + newText + "<<<");
 			}
 			resource.update(offset, length, newText);
+			resource.resolveLazyCrossReferences(CancelIndicator.NullImpl);
 			String text = resource.getParseResult().getRootNode().getText();
 			if (logger.isDebugEnabled()) {
 				logger.debug("... took " + (System.currentTimeMillis() - time));
