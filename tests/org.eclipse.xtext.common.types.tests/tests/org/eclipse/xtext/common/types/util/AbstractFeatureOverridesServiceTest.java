@@ -17,6 +17,7 @@ import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.TypesFactory;
 import org.eclipse.xtext.common.types.access.IJvmTypeProvider;
 import org.eclipse.xtext.common.types.access.jdt.MockJavaProjectProvider;
+import org.eclipse.xtext.common.types.testSetups.Concrete;
 import org.eclipse.xtext.common.types.testSetups.GenericSuperClass;
 import org.eclipse.xtext.common.types.testSetups.SubClass;
 import org.eclipse.xtext.common.types.testSetups.SubOfGenericClass;
@@ -67,16 +68,15 @@ public abstract class AbstractFeatureOverridesServiceTest extends Assert {
     }
     
     @Test public void testSimple() throws Exception {
-        JvmTypeReference reference = typeRefs.typeReference("java.util.ArrayList").wildCardExtends("java.lang.CharSequence").create();
+        JvmTypeReference reference = typeRefs.typeReference(Concrete.class.getName()).wildCardExtends("java.lang.CharSequence").create();
         Iterable<JvmFeature> iterable = service.getAllJvmFeatures(reference);
         HashSet<JvmFeature> set = Sets.newHashSet(iterable);
         
-        assertFalse(set.contains(findOperation("java.util.AbstractList","add(int,E)")));
-        assertFalse(set.contains(findOperation("java.util.List","add(int,E)")));
-        assertTrue(set.contains(findOperation("java.util.ArrayList","add(int,E)")));
-        assertFalse(set.contains(findOperation("java.util.List","iterator()")));
-        //TODO use our own types, since ArrayList has changed in Java7
-        assertTrue(set.contains(findOperation("java.util.AbstractList","iterator()")));
+        assertFalse(set.contains(findOperation("org.eclipse.xtext.common.types.testSetups.Interface", "overriddenByAll(T)")));
+        assertFalse(set.contains(findOperation("org.eclipse.xtext.common.types.testSetups.Abstract", "overriddenByAll(T)")));
+        assertTrue(set.contains(findOperation("org.eclipse.xtext.common.types.testSetups.Concrete", "overriddenByAll(T)")));
+        assertFalse(set.contains(findOperation("org.eclipse.xtext.common.types.testSetups.Interface", "inherited()")));
+        assertTrue(set.contains(findOperation("org.eclipse.xtext.common.types.testSetups.Abstract", "inherited()")));
     }
     
     @Test public void testContainsFields() throws Exception {
