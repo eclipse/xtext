@@ -15,15 +15,22 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.TypesPackage;
 import org.eclipse.xtext.scoping.IScope;
-import org.eclipse.xtext.scoping.impl.DelegatingScopeProvider;
+import org.eclipse.xtext.scoping.IScopeProvider;
+import org.eclipse.xtext.scoping.impl.AbstractDeclarativeScopeProvider;
 import org.eclipse.xtext.xbase.typesystem.IResolvedTypes;
 
 import com.google.inject.Inject;
+import com.google.inject.name.Named;
 
+/*
+ * The delegating scope provider is explicitly not implemented since we'd run into infinite recursion.
+ * A resource would always be affected by the changes in the Java types that it produces. Therefore
+ * we cannot extend the DelegatingScopeProvider
+ */
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public class XbaseBatchScopeProvider extends DelegatingScopeProvider implements IBatchScopeProvider {
+public class XbaseBatchScopeProvider implements IBatchScopeProvider /* , IDelegatingScopeProvider */  {
 
 	@Inject
 	private IFeatureScopeSession rootSession;
@@ -34,7 +41,22 @@ public class XbaseBatchScopeProvider extends DelegatingScopeProvider implements 
 	@Inject
 	private FeatureScopes featureScopes;
 	
-	@Override
+	@Inject
+	@Named(AbstractDeclarativeScopeProvider.NAMED_DELEGATE)
+	private IScopeProvider delegate;
+	
+	protected IScope delegateGetScope(EObject context, EReference reference) {
+		return getDelegate().getScope(context, reference);
+	}
+
+	public void setDelegate(IScopeProvider delegate) {
+		this.delegate = delegate;
+	}
+
+	public IScopeProvider getDelegate() {
+		return delegate;
+	}
+	
 	public IScope getScope(EObject context, EReference reference) {
 		if (isFeatureCallScope(reference)) {
 			// TODO use a valid instance of resolved types
