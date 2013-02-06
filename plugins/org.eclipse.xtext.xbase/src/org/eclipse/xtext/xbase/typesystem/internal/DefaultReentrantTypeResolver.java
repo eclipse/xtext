@@ -115,6 +115,9 @@ public class DefaultReentrantTypeResolver extends AbstractRootedReentrantTypeRes
 	}
 	
 	protected IResolvedTypes resolve() {
+		if (root == null || root.eResource() == null || root.eResource().getResourceSet() == null) {
+			return IResolvedTypes.NULL;
+		}
 		RootResolvedTypes result = createResolvedTypes();
 		IFeatureScopeSession session = batchScopeProvider.newSession(root.eResource());
 		computeTypes(result, session);

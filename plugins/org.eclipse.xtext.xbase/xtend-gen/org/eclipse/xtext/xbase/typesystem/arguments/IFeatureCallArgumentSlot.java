@@ -25,11 +25,16 @@ public interface IFeatureCallArgumentSlot {
   
   public abstract boolean isSuperfluous();
   
+  /**
+   * The list of expressions. The list is never <code>null</code> but may contain
+   * <code>null</code> entries.
+   */
   public abstract List<XExpression> getArgumentExpressions();
   
   /**
    * @throws IllegalStateException iff {@link #isVarArg}
    */
+  @Nullable
   public abstract XExpression getArgumentExpression();
   
   /**

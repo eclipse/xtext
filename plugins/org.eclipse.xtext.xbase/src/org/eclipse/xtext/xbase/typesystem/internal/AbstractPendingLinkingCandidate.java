@@ -281,6 +281,9 @@ public abstract class AbstractPendingLinkingCandidate<Expression extends XExpres
 			computeArgumentType(arguments.getNextUnprocessedArgumentSlot());
 		}
 		XExpression argument = arguments.getArgument(idx);
+		if (argument == null) {
+			return EnumSet.of(ConformanceHint.INCOMPATIBLE);
+		}
 		return getState().getStackedResolvedTypes().getConformanceHints(argument, recompute);
 	}
 

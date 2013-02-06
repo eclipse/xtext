@@ -608,6 +608,40 @@ public class PartialParserTest extends AbstractXtendTestCase {
 		doTestUpdateAtOffset(model, 527, 1, ".", "Case_14.xtend");
 	}
 	
+	@Test public void testSmokeTestFailure_04() throws Exception {
+		String model = 
+				"package org.eclipse.xtend.core.tests.smoke\n" + 
+				"\n" + 
+				"//interface HeaderAccess<T> {\n" + 
+				"//   def T getHeader()\n" + 
+				"//}\n" + 
+				"//\n" + 
+				"//interface IExpectationSetters<T> {\n" + 
+				"//}\n" + 
+				"//\n" + 
+				"//class Y {\n" + 
+				"// def public static <T> IExpectationSetters<T> expect(T value) {\n" + 
+				"//     return null;\n" + 
+				"// }\n" + 
+				"//\n" + 
+				"// private HeaderAccess<?> unboundedMockHeaderAccess;\n" + 
+				"//\n" + 
+				"// def public void test() {\n" + 
+				"//   // no error:\n" + 
+				"//   val Object header = unboundedMockHeaderAccess.getHeader();\n" + 
+				"//   val IExpectationSetters<Object> exp1 = expect(header);\n" + 
+				"//   val IExpectationSetters<Object> exp2 = expect(unboundedMockHeaderAccess.getHeader());\n" + 
+				"// }\n" + 
+				"//}\n" + 
+				"\n" + 
+				"class MyClass {\n" + 
+				"\n" + 
+				"}\n" + 
+				"class X {\n" + 
+				"	def <T ";
+		doTestUpdateAtEnd(model, 'e', "Smoke.xtend");
+	}
+	
 	protected void validateWithoutException(XtextResource resource) {
 		ResourceValidatorImpl validator = resourceValidatorProvider.get();
 		assertNotSame(validator, resource.getResourceServiceProvider().getResourceValidator());
@@ -665,13 +699,10 @@ public class PartialParserTest extends AbstractXtendTestCase {
 		assertEquals(newModel, resource.getParseResult().getRootNode().getText());
 		newResource.load(new StringInputStream(newModel), null);
 		assertEquals(newResource.getContents().size(), resource.getContents().size());
+		EcoreUtil.resolveAll(resource);
+		EcoreUtil.resolveAll(newResource);
 		for(int i = 0; i < resource.getContents().size(); i++) {
-			if (!EcoreUtil.equals(resource.getContents().get(i), newResource.getContents().get(i))) {
-				for(int j = 0; j < resource.getContents().size(); j++) {
-					String actualContent = EmfFormatter.objToStr(resource.getContents().get(j));
-					assertEquals(actualContent, EmfFormatter.objToStr(newResource.getContents().get(j)), actualContent);
-				}
-			}
+			assertEquals(EmfFormatter.objToStr(newResource.getContents().get(i)), EmfFormatter.objToStr(resource.getContents().get(i)));
 		}
 		assertEqualNodes(newResource, resource);
 	}

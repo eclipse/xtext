@@ -7,13 +7,20 @@
  *******************************************************************************/
 package org.eclipse.xtend.core.resource;
 
+import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtend.core.jvmmodel.DispatchHelper;
 import org.eclipse.xtend.core.xtend.XtendField;
 import org.eclipse.xtend.core.xtend.XtendFunction;
 import org.eclipse.xtext.common.types.JvmField;
 import org.eclipse.xtext.common.types.JvmOperation;
+import org.eclipse.xtext.common.types.JvmTypeReference;
+import org.eclipse.xtext.resource.IEObjectDescription;
+import org.eclipse.xtext.resource.IReferenceDescription;
+import org.eclipse.xtext.util.IAcceptor;
+import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.resource.XbaseResourceDescriptionStrategy;
+import org.eclipse.xtext.xtype.XComputedTypeReference;
 
 import com.google.common.collect.ImmutableMap;
 import com.google.inject.Inject;
@@ -30,6 +37,21 @@ public class XtendResourceDescriptionStrategy extends XbaseResourceDescriptionSt
 
 	@Inject
 	private DescriptionFlags descriptionFlags;
+	
+	@Override
+	public boolean createEObjectDescriptions(EObject eObject, IAcceptor<IEObjectDescription> acceptor) {
+		if (eObject instanceof JvmTypeReference || eObject instanceof XExpression)
+			return false;
+		return super.createEObjectDescriptions(eObject, acceptor);
+	}
+	
+	@Override
+	public boolean createReferenceDescriptions(EObject from, URI exportedContainerURI,
+			IAcceptor<IReferenceDescription> acceptor) {
+		if (from instanceof XComputedTypeReference)
+			return false;
+		return super.createReferenceDescriptions(from, exportedContainerURI, acceptor);
+	}
 	
 	@Override
 	protected void createUserData(EObject eObject, ImmutableMap.Builder<String, String> userData) {
@@ -69,4 +91,5 @@ public class XtendResourceDescriptionStrategy extends XbaseResourceDescriptionSt
 	protected int getFlags(XtendFunction function) {
 		return (function.isStatic()) ? descriptionFlags.setStatic(0) : 0;
 	}
+	
 }

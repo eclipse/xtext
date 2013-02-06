@@ -379,13 +379,15 @@ public class DispatchAndExtensionAwareReentrantTypeResolver extends LogicalConta
 			
 			// no associated expression, we just resolve it to the common super type of all associated cases
 			// see #createTypeProvider and #_doPrepare
+			preparedResolvedTypes.put(operation, null);
 			computeAnnotationTypes(childResolvedTypes, featureScopeSession, operation);
 			
-			mergeChildTypes(preparedResolvedTypes, childResolvedTypes, operation);
+			mergeChildTypes(childResolvedTypes);
 		} else if (dispatchHelper.isDispatchFunction(operation) && InferredTypeIndicator.isInferred(operation.getReturnType())) {
 			JvmOperation dispatcher = dispatchHelper.getDispatcherOperation(operation);
 			if (dispatcher == null) {
-				throw new IllegalStateException("Cannot locate dispatcher for operation " + operation.getIdentifier());
+				super._computeTypes(preparedResolvedTypes, resolvedTypes, featureScopeSession, operation);
+				return;
 			}
 			LightweightTypeReference declaredDispatcherType = getReturnTypeOfOverriddenOperation(dispatcher, childResolvedTypes, featureScopeSession);
 			List<JvmOperation> dispatchCases = dispatchHelper.getDispatchCases(dispatcher);
@@ -410,6 +412,7 @@ public class DispatchAndExtensionAwareReentrantTypeResolver extends LogicalConta
 						throw new IllegalStateException("No resolved type found. Type was: " + dispatchCase.getIdentifier());
 					}
 				} else {
+					preparedResolvedTypes.put(dispatchCase, null);
 					OperationBodyComputationState state = new DispatchOperationBodyComputationState(dispatchCaseResolvedTypes, 
 							dispatchCase.isStatic() ? featureScopeSession : featureScopeSession.toInstanceContext(), dispatchCase, dispatcher);
 					ITypeComputationResult dispatchCaseResult = state.computeTypes();
@@ -422,7 +425,7 @@ public class DispatchAndExtensionAwareReentrantTypeResolver extends LogicalConta
 						dispatchCaseResults.add(dispatchCaseResolvedTypes.getActualType(dispatchCase));
 					}
 					computeAnnotationTypes(dispatchCaseResolvedTypes, featureScopeSession, dispatchCase);
-					mergeChildTypes(preparedResolvedTypes, dispatchCaseResolvedTypes, dispatchCase); 
+					mergeChildTypes(dispatchCaseResolvedTypes); 
 				}
 			}
 			if (hasInferredCase) {

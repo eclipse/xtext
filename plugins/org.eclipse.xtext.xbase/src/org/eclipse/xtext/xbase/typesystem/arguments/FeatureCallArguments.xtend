@@ -25,6 +25,7 @@ interface IFeatureCallArguments {
 	
 	def IFeatureCallArgumentSlot getNextUnprocessedArgumentSlot()
 	
+	@Nullable
 	def XExpression getArgument(int idx)
 	
 	def int getArgumentCount()
@@ -45,11 +46,16 @@ interface IFeatureCallArgumentSlot {
 	
 	def boolean isSuperfluous()
 	
+	/**
+	 * The list of expressions. The list is never <code>null</code> but may contain
+	 * <code>null</code> entries.
+	 */
 	def List<XExpression> getArgumentExpressions()
 
 	/**
 	 * @throws IllegalStateException iff {@link #isVarArg}
 	 */
+	@Nullable
 	def XExpression getArgumentExpression()
 	
 	/**

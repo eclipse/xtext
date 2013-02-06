@@ -17,7 +17,6 @@ import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.JvmTypeReference;
-import org.eclipse.xtext.common.types.JvmWildcardTypeReference;
 import org.eclipse.xtext.common.types.util.ITypeArgumentContext;
 import org.eclipse.xtext.common.types.util.TypeArgumentContextProvider;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
@@ -78,7 +77,8 @@ public class LegacyTypeArgumentContext implements ITypeArgumentContext {
 	protected Map<JvmTypeParameter, LightweightMergedBoundTypeArgument> getTypeParameterMapping() {
 		if (receiver == null || resource == null)
 			return Collections.emptyMap();
-		
+		if (typeParameterMapping != null)
+			return typeParameterMapping;
 		StandardTypeReferenceOwner owner = new StandardTypeReferenceOwner(services, resource);
 		LightweightTypeReference lightweightReceiver = new OwnedConverter(owner).toLightweightReference(receiver).getLowerBoundSubstitute();
 		return typeParameterMapping = new DeclaratorTypeArgumentCollector().getTypeParameterMapping(lightweightReceiver);

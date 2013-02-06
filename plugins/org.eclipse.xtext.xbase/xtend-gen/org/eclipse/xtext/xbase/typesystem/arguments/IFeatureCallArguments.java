@@ -8,6 +8,7 @@
 package org.eclipse.xtext.xbase.typesystem.arguments;
 
 import org.eclipse.jdt.annotation.NonNullByDefault;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.typesystem.arguments.IFeatureCallArgumentSlot;
 
@@ -23,6 +24,7 @@ public interface IFeatureCallArguments {
   
   public abstract IFeatureCallArgumentSlot getNextUnprocessedArgumentSlot();
   
+  @Nullable
   public abstract XExpression getArgument(final int idx);
   
   public abstract int getArgumentCount();

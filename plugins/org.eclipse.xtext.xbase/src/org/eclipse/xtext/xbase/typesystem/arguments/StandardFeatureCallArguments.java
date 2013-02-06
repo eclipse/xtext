@@ -56,6 +56,7 @@ public class StandardFeatureCallArguments implements IFeatureCallArguments {
 		return new SuperfluousFeatureCallArgumentSlot(this, nextUnprocessedArgument);
 	}
 
+	@Nullable
 	public XExpression getArgument(int idx) {
 		return internalGetArgument(idx - receiverFixup);
 	}
@@ -64,6 +65,7 @@ public class StandardFeatureCallArguments implements IFeatureCallArguments {
 		return arguments.size() + receiverFixup;
 	}
 	
+	@Nullable
 	protected XExpression internalGetArgument(int idx) {
 		return arguments.get(idx);
 	}

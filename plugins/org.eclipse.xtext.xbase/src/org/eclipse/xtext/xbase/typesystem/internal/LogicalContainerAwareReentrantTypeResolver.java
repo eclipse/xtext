@@ -367,6 +367,8 @@ public class LogicalContainerAwareReentrantTypeResolver extends DefaultReentrant
 			if (preparedResolvedTypes.containsKey(field))
 				return;
 			throw new IllegalStateException("No resolved type found. Field was: " + field.getIdentifier());
+		} else {
+			preparedResolvedTypes.put(field, null);
 		}
 		FieldTypeComputationState state = new FieldTypeComputationState(childResolvedTypes, field.isStatic() ? featureScopeSession : featureScopeSession.toInstanceContext(), field);
 		// no need to unmark the computing state since we replace the equivalent in #resolveTo
@@ -379,7 +381,7 @@ public class LogicalContainerAwareReentrantTypeResolver extends DefaultReentrant
 		}
 		computeAnnotationTypes(childResolvedTypes, featureScopeSession, field);
 		
-		mergeChildTypes(preparedResolvedTypes, childResolvedTypes, field);
+		mergeChildTypes(childResolvedTypes);
 	}
 	
 	protected void _computeTypes(Map<JvmIdentifiableElement, ResolvedTypes> preparedResolvedTypes, ResolvedTypes resolvedTypes, IFeatureScopeSession featureScopeSession, JvmConstructor constructor) {
@@ -388,6 +390,8 @@ public class LogicalContainerAwareReentrantTypeResolver extends DefaultReentrant
 			if (preparedResolvedTypes.containsKey(constructor))
 				return;
 			throw new IllegalStateException("No resolved type found. Constructor was: " + constructor.getIdentifier());
+		} else {
+			preparedResolvedTypes.put(constructor, null);
 		}
 		ConstructorBodyComputationState state = new ConstructorBodyComputationState(childResolvedTypes, featureScopeSession.toInstanceContext(), constructor);
 		state.computeTypes();
@@ -396,7 +400,7 @@ public class LogicalContainerAwareReentrantTypeResolver extends DefaultReentrant
 			computeAnnotationTypes(childResolvedTypes, featureScopeSession, parameter);
 		}
 		
-		mergeChildTypes(preparedResolvedTypes, childResolvedTypes, constructor);
+		mergeChildTypes(childResolvedTypes);
 	}
 	
 	protected void _computeTypes(Map<JvmIdentifiableElement, ResolvedTypes> preparedResolvedTypes, ResolvedTypes resolvedTypes, IFeatureScopeSession featureScopeSession, JvmOperation operation) {
@@ -405,6 +409,8 @@ public class LogicalContainerAwareReentrantTypeResolver extends DefaultReentrant
 			if (preparedResolvedTypes.containsKey(operation))
 				return;
 			throw new IllegalStateException("No resolved type found. Operation was: " + operation.getIdentifier());
+		} else {
+			preparedResolvedTypes.put(operation, null);
 		}
 		OperationBodyComputationState state = new OperationBodyComputationState(childResolvedTypes, operation.isStatic() ? featureScopeSession : featureScopeSession.toInstanceContext(), operation);
 		// no need to unmark the computing state since we replace the equivalent in #resolveTo
@@ -412,7 +418,7 @@ public class LogicalContainerAwareReentrantTypeResolver extends DefaultReentrant
 		setReturnType(operation, state.computeTypes());
 		computeAnnotationTypes(childResolvedTypes, featureScopeSession, operation);
 		
-		mergeChildTypes(preparedResolvedTypes, childResolvedTypes, operation);
+		mergeChildTypes(childResolvedTypes);
 	}
 
 	protected void computeAnnotationTypes(ResolvedTypes resolvedTypes, IFeatureScopeSession sessions, JvmExecutable operation) {
@@ -422,10 +428,9 @@ public class LogicalContainerAwareReentrantTypeResolver extends DefaultReentrant
 		}
 	}
 
-	protected void mergeChildTypes(Map<JvmIdentifiableElement, ResolvedTypes> preparedResolvedTypes, ResolvedTypes childResolvedTypes, JvmIdentifiableElement element) {
+	protected void mergeChildTypes(ResolvedTypes childResolvedTypes) {
 		if (childResolvedTypes instanceof StackedResolvedTypes)
 			((StackedResolvedTypes) childResolvedTypes).mergeIntoParent();
-		preparedResolvedTypes.put(element, null);
 	}
 
 	protected void setReturnType(JvmOperation operation, ITypeComputationResult computedType) {
@@ -473,7 +478,7 @@ public class LogicalContainerAwareReentrantTypeResolver extends DefaultReentrant
 		computeMemberTypes(preparedResolvedTypes, childResolvedTypes, childSession, type);
 		computeAnnotationTypes(childResolvedTypes, featureScopeSession, type);
 		
-		mergeChildTypes(preparedResolvedTypes, childResolvedTypes, type);
+		mergeChildTypes(childResolvedTypes);
 	}
 
 	protected void computeMemberTypes(Map<JvmIdentifiableElement, ResolvedTypes> preparedResolvedTypes, ResolvedTypes resolvedTypes, IFeatureScopeSession featureScopeSession,

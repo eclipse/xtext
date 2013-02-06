@@ -19,6 +19,7 @@ import org.eclipse.xtend.core.xtend.XtendFunction;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.resource.XtextResourceSet;
+import org.eclipse.xtext.util.IResourceScopeCache;
 import org.eclipse.xtext.util.StringInputStream;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.typing.ITypeProvider;
@@ -34,6 +35,9 @@ public class TypeProviderErrorTest extends AbstractXtendTestCase {
 
 	@Inject
 	private ITypeProvider typeProvider;
+	
+	@Inject
+	private IResourceScopeCache cache;
 	
 	@Test public void testNoException_01() throws Exception {
 		XtendFunction function = function(
@@ -192,6 +196,120 @@ public class TypeProviderErrorTest extends AbstractXtendTestCase {
 			if (object instanceof XExpression) {
 				XExpression expression = (XExpression) object;
 				typeProvider.getCommonReturnType(expression, true);
+			}
+		}
+	}
+	
+	@Test public void testNoException_09() throws Exception {
+		XtendFile file = file(
+				"package org.eclipse.xtend.core.tests.smoke\n" + 
+				"\n" + 
+				"class MyClass {\n" + 
+				"}\n" + 
+				"class X {\n" + 
+				"	def <T extends Exception> m() {\n" + 
+				"	}\n" + 
+				"	\n" + 
+				"	def Object bar(Object[] o) {\n" + 
+				"	}\n" + 
+				"}\n" + 
+				"\n" + 
+				"@Data\n" + 
+				"class Case_0 extends X {\n" + 
+				"	int id\n" + 
+				"\n" + 
+				"	def test() {\n" + 
+				"	}\n" + 
+				"\n" + 
+				"	def returnInWhileLoop() {\n" + 
+				"		while (false)\n" + 
+				"			return 1\n" + 
+				"	}\n" + 
+				"\n" + 
+				"	def String foo(String a, String b) {\n" + 
+				"		var list = newArrayList()\n" + 
+				"		for (i : 0 .. list.size - 1) {\n" + 
+				"			println(i.toString + \" \" + list.get(i))\n" + 
+				"		}\n" + 
+				"		if (isUpper(a)) {\n" + 
+				"			another(a, b + 'holla')\n" + 
+				"		} else {\n" + 
+				"			var x = a;\n" + 
+				"			for (y : b.toCharArray) {\n" + 
+				"				x =\n" + 
+				"			}\n" + 
+				"			x\n" + 
+				"		}\n" + 
+				"	}\n" + 
+				"\n" + 
+				"	def isUpper(String s) {\n" + 
+				"		s.toUpperCase == s\n" + 
+				"	}\n" + 
+				"\n" + 
+				"	def another(String x, String y) {\n" + 
+				"		y + x\n" + 
+				"	}\n" + 
+				"\n" + 
+				"}\n" + 
+				"");
+		{
+			Iterator<Object> contents = EcoreUtil.getAllContents(file.eResource(), true);
+			while(contents.hasNext()) {
+				EObject object = (EObject) contents.next();
+				if (object instanceof XExpression) {
+					XExpression expression = (XExpression) object;
+					typeProvider.getExpectedType(expression);
+				}
+			}
+		}
+		cache.clear(file.eResource());
+		{
+			Iterator<Object> contents = EcoreUtil.getAllContents(file.eResource(), true);
+			while(contents.hasNext()) {
+				EObject object = (EObject) contents.next();
+				if (object instanceof XExpression) {
+					XExpression expression = (XExpression) object;
+					typeProvider.getExpectedType(expression);
+				}
+			}
+		}
+	}
+	
+	@Test public void testNoException_10() throws Exception {
+		XtendFile file = file(
+				"package org.eclipse.xtend.core.tests.smoke\n" + 
+				"\n" + 
+				"import org.eclipse.emf.ecore.ENamedElement\n" + 
+				"import org.eclipse.emf.ecore.EObject\n" + 
+				"import java.util.List\n" + 
+				"\n" + 
+				"class Case_9 extends Case_8 {\n" + 
+				"	\n" + 
+				"	def dispatch CharSequence generateTypeRef(ENamedElement c) {\n" + 
+				"		  if (c.eContainer != null)\n" + 
+				"		    c.eContainer.generateTypeRef\n" + 
+				"		  else if (c.eIsProxy)\n" + 
+				"		    '''«c.name»'''\n" + 
+				"		  else\n" + 
+				"		    ''''''\n" + 
+				"		}\n" + 
+				"\n" + 
+				"	def dispatch  generateTypeRef(EObject o) {\n" + 
+				"	  	o.eContainer.generateTypeRef\n" + 
+				"	}  \n" + 
+				"	\n" + 
+				"	override <T1> /*List<List<T1>>*/ foo(T1 t) {\n" + 
+				"        val List<List<T1>> x = super.foo(t)\n" + 
+				"        return null\n" + 
+				"    }\n" + 
+				"		\n" + 
+				"}");
+		Iterator<Object> contents = EcoreUtil.getAllContents(file.eResource(), true);
+		while(contents.hasNext()) {
+			EObject object = (EObject) contents.next();
+			if (object instanceof XExpression) {
+				XExpression expression = (XExpression) object;
+				typeProvider.getExpectedType(expression);
 			}
 		}
 	}
