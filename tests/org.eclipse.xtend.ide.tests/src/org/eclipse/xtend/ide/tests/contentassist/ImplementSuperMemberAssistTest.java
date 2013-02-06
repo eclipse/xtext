@@ -16,6 +16,7 @@ import org.eclipse.xtext.util.ReplaceRegion;
 import org.eclipse.xtext.xbase.imports.RewritableImportSection;
 import org.eclipse.xtext.xbase.ui.contentassist.ImportOrganizingProposal;
 import org.eclipse.xtext.xbase.ui.contentassist.ReplacingAppendable;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import com.google.inject.Inject;
@@ -23,6 +24,7 @@ import com.google.inject.Inject;
 /**
  * @author Jan Koehnlein - Initial contribution and API
  */
+@Ignore
 public class ImplementSuperMemberAssistTest extends AbstractXtendContentAssistBugTest {
 
 	@Inject
