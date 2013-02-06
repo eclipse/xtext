@@ -296,11 +296,15 @@ public abstract class AbstractLinkingCandidate<Expression extends XExpression> i
 				argumentState = createVarArgTypeComputationState(substitutedComponentType);
 			}
 			for(XExpression argument: arguments) {
-				resolveArgumentType(argument, substitutedComponentType, argumentState);
+				if (argument != null) {
+					resolveArgumentType(argument, substitutedComponentType, argumentState);
+				}
 			}
 		} else {
 			XExpression argument = slot.getArgumentExpression();
-			resolveArgumentType(argument, null, state.withNonVoidExpectation());
+			if (argument != null) {
+				resolveArgumentType(argument, null, state.withNonVoidExpectation());
+			}
 		}
 		slot.markProcessed();
 	}
@@ -320,14 +324,16 @@ public abstract class AbstractLinkingCandidate<Expression extends XExpression> i
 	}
 
 	protected void computeFixedArityArgumentType(IFeatureCallArgumentSlot slot, TypeParameterSubstitutor<?> substitutor) {
-		LightweightTypeReference parameterType = slot.getDeclaredType();
 		XExpression argument = slot.getArgumentExpression();
-		if (parameterType == null) {
-			resolveArgumentType(argument, null, state.withNonVoidExpectation());
-		} else {
-			LightweightTypeReference substitutedParameterType = substitutor.substitute(parameterType);
-			AbstractTypeComputationState argumentState = createLinkingTypeComputationState(substitutedParameterType);
-			resolveArgumentType(argument, substitutedParameterType, argumentState);
+		if (argument != null) {
+			LightweightTypeReference parameterType = slot.getDeclaredType();
+			if (parameterType == null) {
+				resolveArgumentType(argument, null, state.withNonVoidExpectation());
+			} else {
+				LightweightTypeReference substitutedParameterType = substitutor.substitute(parameterType);
+				AbstractTypeComputationState argumentState = createLinkingTypeComputationState(substitutedParameterType);
+				resolveArgumentType(argument, substitutedParameterType, argumentState);
+			}
 		}
 	}
 
@@ -396,6 +402,8 @@ public abstract class AbstractLinkingCandidate<Expression extends XExpression> i
 	@Nullable
 	protected LightweightTypeReference getSubstitutedExpectedType(int argumentIndex) {
 		XExpression expression = arguments.getArgument(argumentIndex);
+		if (expression == null)
+			return null;
 		LightweightTypeReference expectedType = getExpectedType(expression);
 		if (expectedType != null) {
 			TypeParameterByConstraintSubstitutor substitutor = new TypeParameterByConstraintSubstitutor(

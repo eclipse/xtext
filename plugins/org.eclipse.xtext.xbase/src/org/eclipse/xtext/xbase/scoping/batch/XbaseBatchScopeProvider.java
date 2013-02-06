@@ -62,6 +62,9 @@ public class XbaseBatchScopeProvider implements IBatchScopeProvider /* , IDelega
 	}
 	
 	public IScope getScope(EObject context, EReference reference) {
+		if (context == null || context.eResource() == null || context.eResource().getResourceSet() == null) {
+			return IScope.NULLSCOPE;
+		}
 		if (isFeatureCallScope(reference)) {
 			if (context instanceof XAbstractFeatureCall) {
 				IScope result = typeResolver.getFeatureScope((XAbstractFeatureCall) context);

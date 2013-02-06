@@ -97,12 +97,17 @@ public class WildcardTypeReference extends LightweightTypeReference {
 		WildcardTypeReference result = new WildcardTypeReference(owner);
 		if (upperBounds != null && !upperBounds.isEmpty()) {
 			for(LightweightTypeReference upperBound: upperBounds) {
-				result.addUpperBound(upperBound.copyInto(owner).getInvariantBoundSubstitute());
+				LightweightTypeReference copiedUpperBound = upperBound.copyInto(owner).getInvariantBoundSubstitute();
+				if (!(copiedUpperBound.isPrimitive() || copiedUpperBound.isPrimitiveVoid())) {
+					result.addUpperBound(copiedUpperBound);
+				}
 			}
 		}
 		if (lowerBound != null) {
-			LightweightTypeReference copiedLowerBound = lowerBound.copyInto(owner);
-			result.setLowerBound(copiedLowerBound.getInvariantBoundSubstitute());
+			LightweightTypeReference copiedLowerBound = lowerBound.copyInto(owner).getInvariantBoundSubstitute();
+			if (!(copiedLowerBound.isPrimitive() || copiedLowerBound.isPrimitiveVoid())) {
+				result.setLowerBound(copiedLowerBound);
+			}
 		}
 		return result;
 	}
@@ -182,13 +187,13 @@ public class WildcardTypeReference extends LightweightTypeReference {
 		if (upperBounds != null && !upperBounds.isEmpty()) {
 			for(LightweightTypeReference typeArgument: upperBounds) {
 				JvmUpperBound constraint = typesFactory.createJvmUpperBound();
-				constraint.setTypeReference(typeArgument.toTypeReference());
+				constraint.setTypeReference(typeArgument.getWrapperTypeIfPrimitive().toTypeReference());
 				result.getConstraints().add(constraint);
 			}
 		}
 		if (lowerBound != null) {
 			JvmLowerBound constraint = typesFactory.createJvmLowerBound();
-			constraint.setTypeReference(lowerBound.toTypeReference());
+			constraint.setTypeReference(lowerBound.getWrapperTypeIfPrimitive().toTypeReference());
 			result.getConstraints().add(constraint);
 		}
 		return result;
@@ -223,6 +228,9 @@ public class WildcardTypeReference extends LightweightTypeReference {
 		if (upperBound instanceof WildcardTypeReference) {
 			throw new IllegalArgumentException("Wildcards are not supported as upper bounds");
 		}
+		if (upperBound.isPrimitive() || upperBound.isPrimitiveVoid()) {
+			throw new IllegalArgumentException("Constraints may not be primitives");
+		}
 		if (upperBounds == null)
 			upperBounds = Lists.newArrayListWithCapacity(2);
 		upperBounds.add(upperBound);
@@ -239,9 +247,13 @@ public class WildcardTypeReference extends LightweightTypeReference {
 		if (lowerBound instanceof WildcardTypeReference) {
 			throw new IllegalArgumentException("Wildcards are not supported as lower bounds");
 		}
+		if (lowerBound.isPrimitive() || lowerBound.isPrimitiveVoid()) {
+			throw new IllegalArgumentException("Constraints may not be primitives");
+		}
 		if (this.lowerBound != null && this.lowerBound != lowerBound) {
 			throw new IllegalStateException("only one lower bound is supported");
 		}
+		
 		this.lowerBound = lowerBound;
 		resolved = resolved && lowerBound.isResolved();
 	}

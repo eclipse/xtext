@@ -41,6 +41,7 @@ public class StandardFeatureCallArgumentSlot implements IFeatureCallArgumentSlot
 		return Collections.singletonList(getArgumentExpression());
 	}
 
+	@Nullable
 	public XExpression getArgumentExpression() {
 		return parent.internalGetArgument(idx);
 	}
