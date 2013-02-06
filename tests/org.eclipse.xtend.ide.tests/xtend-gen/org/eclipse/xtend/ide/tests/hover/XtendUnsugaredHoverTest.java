@@ -783,6 +783,8 @@ public class XtendUnsugaredHoverTest extends AbstractXtendUITestCase {
     _builder.newLine();
     _builder.append("import static java.lang.Integer.*");
     _builder.newLine();
+    _builder.append("import static extension java.lang.String.*");
+    _builder.newLine();
     _builder.append("class Foo {");
     _builder.newLine();
     _builder.append("\t");

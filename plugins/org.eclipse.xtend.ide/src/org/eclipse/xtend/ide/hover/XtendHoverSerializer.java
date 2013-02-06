@@ -11,7 +11,6 @@ import java.util.List;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.common.types.JvmExecutable;
-import org.eclipse.xtext.common.types.JvmField;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmMember;
 import org.eclipse.xtext.common.types.JvmOperation;
@@ -24,25 +23,18 @@ import org.eclipse.xtext.util.Tuples;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XMemberFeatureCall;
-import org.eclipse.xtext.xbase.impl.FeatureCallToJavaMapping;
-import org.eclipse.xtext.xbase.scoping.XbaseScopeProvider;
+import org.eclipse.xtext.xbase.scoping.batch.IFeatureNames;
 import org.eclipse.xtext.xbase.util.XbaseSwitch;
 
-import com.google.common.collect.Lists;
-import com.google.inject.Inject;
-
 /**
- * 
  * @author Holger Schill - Initial contribution and API
  * @since 2.3
  */
-public class XtendHoverSerializer {
+public class XtendHoverSerializer implements IFeatureNames {
 
 	private static final String STATICDELIMITER = "::";
-	private static final String SEPERATOR = ", ";
+	private static final String SEPARATOR = ", ";
 	private static final String DELIMITER = ".";
-	@Inject
-	private FeatureCallToJavaMapping featureCallToJavaMapping;
 
 	public String computeUnsugaredExpression(EObject object) {
 		if (object instanceof XAbstractFeatureCall) {
@@ -57,21 +49,19 @@ public class XtendHoverSerializer {
 					}
 				}
 				if (featureCall.getImplicitReceiver() != null || featureCall.getImplicitFirstArgument() != null) {
-					if ((feature instanceof JvmField && ((JvmField) feature).isStatic())
-							|| (feature instanceof JvmOperation && ((JvmOperation) feature).isStatic())) {
+					if (featureCall.isStatic()) {
 						return stringBuilder.append(getStaticCallDesugaredVersion(featureCall, (JvmMember) feature)).toString();
 					}
-					XExpression receiver = featureCallToJavaMapping.getActualReceiver(featureCall);
+					XExpression receiver = featureCall.getActualReceiver();
 					if (receiver instanceof XMemberFeatureCall) {
-						stringBuilder.append(XbaseScopeProvider.THIS).append(DELIMITER);
-						stringBuilder.append(((XMemberFeatureCall) receiver).getFeature().getSimpleName()).append(
-								DELIMITER);
+						stringBuilder.append(THIS).append(DELIMITER);
+						stringBuilder.append(((XMemberFeatureCall) receiver).getFeature().getSimpleName()).append(DELIMITER);
 					} else if (receiver instanceof XAbstractFeatureCall) {
 						JvmIdentifiableElement receiverFeature = ((XAbstractFeatureCall) receiver).getFeature();
-						if (receiverFeature.getSimpleName().equals(XbaseScopeProvider.IT.toString()))
-							stringBuilder.append(XbaseScopeProvider.IT).append(DELIMITER);
+						if (receiverFeature.getSimpleName().equals(IT.toString()))
+							stringBuilder.append(IT).append(DELIMITER);
 						if (receiverFeature == feature.eContainer())
-							stringBuilder.append(XbaseScopeProvider.THIS).append(DELIMITER);
+							stringBuilder.append(THIS).append(DELIMITER);
 					}
 					stringBuilder.append(feature.getSimpleName());
 					if (feature instanceof JvmExecutable)
@@ -96,55 +86,23 @@ public class XtendHoverSerializer {
 	public String computeArguments(XAbstractFeatureCall featureCall) {
 		StringBuilder stringBuilder = new StringBuilder("(");
 		if (featureCall != null) {
-			XExpression implicitFirstArgument = null;
-			List<XExpression> arguments = Lists.newArrayList();
-			boolean needsSeperator = false;
-			if (featureCall instanceof XMemberFeatureCall) {
-				arguments = ((XMemberFeatureCall) featureCall).getMemberCallArguments();
-				implicitFirstArgument = ((XMemberFeatureCall) featureCall).getMemberCallTarget();
-				needsSeperator = implicitFirstArgument != null && arguments.size() > 0;
-			} else {
-				implicitFirstArgument = featureCall.getImplicitFirstArgument();
-				arguments = featureCallToJavaMapping.getActualArguments(featureCall);
-				if (arguments.size() > 0)
-					if (featureCall.getImplicitReceiver() == arguments.get(0))
-						implicitFirstArgument = arguments.get(0);
-				needsSeperator = implicitFirstArgument != null && arguments.size() > 1;
-			}
-
-			XbaseSwitch<String> xbaseSwitch = new XtendHoverXbaseSwitch();
+			XExpression implicitFirstArgument = featureCall.getImplicitFirstArgument();
+			List<XExpression> arguments = featureCall.getActualArguments();
 			if (implicitFirstArgument != null) {
+				XbaseSwitch<String> xbaseSwitch = new XtendHoverXbaseSwitch();
 				String doSwitch = xbaseSwitch.doSwitch(implicitFirstArgument).trim();
 				if (doSwitch != null)
 					stringBuilder.append(doSwitch);
 			}
-			if (arguments.size() > 0) {
-				XExpression first = arguments.get(0);
-				if (needsSeperator)
-					stringBuilder.append(SEPERATOR);
-
-				if (first == implicitFirstArgument && arguments.size() > 1) {
-					first = arguments.get(1);
+			int start = implicitFirstArgument != null ? 1 : 0;
+			for(int i = start; i < arguments.size(); i++) {
+				if (i != 0) {
+					stringBuilder.append(SEPARATOR);
 				}
-				XExpression last = arguments.get(arguments.size() - 1);
-				if (last != implicitFirstArgument) {
-					ICompositeNode startNode = NodeModelUtils.getNode(first);
-
-					ICompositeNode endNode = NodeModelUtils.getNode(last);
-					if (startNode != null && endNode != null) {
-						int startOffset = startNode.getTotalOffset();
-						int endOffset = endNode.getTotalEndOffset();
-
-						XtextResource resource = (XtextResource) featureCall.eResource();
-						if (resource != null) {
-							IParseResult parseResult = resource.getParseResult();
-							if (parseResult != null) {
-								String model = parseResult.getRootNode().getText();
-								stringBuilder.append(model.substring(startOffset, endOffset).trim());
-							}
-						}
-					}
-				}
+				XExpression expression = arguments.get(i);
+				ICompositeNode node = NodeModelUtils.findActualNodeFor(expression);
+				if (node != null)
+					stringBuilder.append(node.getText().trim());
 			}
 		}
 		stringBuilder.append(")");
@@ -154,7 +112,7 @@ public class XtendHoverSerializer {
 	private static final class XtendHoverXbaseSwitch extends XbaseSwitch<String> {
 		@Override
 		public String caseXAbstractFeatureCall(XAbstractFeatureCall object) {
-			ICompositeNode node = NodeModelUtils.getNode(object);
+			ICompositeNode node = NodeModelUtils.findActualNodeFor(object);
 			if (node != null)
 				return node.getText();
 			else
@@ -164,7 +122,7 @@ public class XtendHoverSerializer {
 		@Override
 		public String caseXExpression(XExpression object) {
 			if (object != null) {
-				ICompositeNode node = NodeModelUtils.getNode(object);
+				ICompositeNode node = NodeModelUtils.findActualNodeFor(object);
 				if (node != null)
 					return node.getText();
 			}

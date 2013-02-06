@@ -94,7 +94,7 @@ class DispatchRenameSupportTest extends AbstractXtendUITestCase {
 	def testJavaSuperClass() {
 		createFile('Super.java', '''
 			public class Super {
-				publc void _foo(Double x) {}
+				public void _foo(Double x) {}
 			}
 		''')
 		val subFile = createFile("Sub", '''
@@ -460,7 +460,7 @@ class DispatchRenameSupportTest extends AbstractXtendUITestCase {
 		waitForAutoBuild
 		val dispatchOperations = dispatchRenameSupport.getAllDispatchOperations(targetFile.firstMethod).map[signature]
 		for(signature: signatures) {
-			assertTrue(signature + " not found. Only got" + dispatchOperations.join('\n'), dispatchOperations.contains(signature))
+			assertTrue(signature + " not found. Only got " + dispatchOperations.join('\n'), dispatchOperations.contains(signature))
 		}
 		assertEquals("Expected " + signatures.join('\n') + 'but got '+dispatchOperations.join('\n'), 
 			signatures.size, dispatchOperations.size

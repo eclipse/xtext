@@ -381,6 +381,7 @@ Test«"'''"»)'''.toString, serializer.computeUnsugaredExpression(call))
 		val xtendFile = testHelper.xtendFile(FILEPATH, '''
 		package testpackage
 		import static java.lang.Integer.*
+		import static extension java.lang.String.*
 		class Foo {
 			def void foo(String it) {
 				valueOf()

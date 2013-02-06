@@ -636,7 +636,7 @@ public class XtendHoverSignatureProviderTest extends AbstractXtendUITestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-
+  
   @Test
   public void testEnumReference() {
     try {
@@ -668,7 +668,7 @@ public class XtendHoverSignatureProviderTest extends AbstractXtendUITestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-
+  
   @Test
   public void testInterfaceDeclaration() {
     try {
@@ -687,7 +687,7 @@ public class XtendHoverSignatureProviderTest extends AbstractXtendUITestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-
+  
   @Test
   public void testInterfaceReference() {
     try {
@@ -696,7 +696,6 @@ public class XtendHoverSignatureProviderTest extends AbstractXtendUITestCase {
       _builder.newLine();
       _builder.append("class Bar implements Foo {");
       _builder.newLine();
-      _builder.append("\t");
       _builder.newLine();
       _builder.append("}");
       _builder.newLine();
@@ -715,7 +714,7 @@ public class XtendHoverSignatureProviderTest extends AbstractXtendUITestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-
+  
   @Test
   public void testAnnotationDeclaration() {
     try {
@@ -734,7 +733,7 @@ public class XtendHoverSignatureProviderTest extends AbstractXtendUITestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-
+  
   @Test
   public void testAnnotationReference() {
     try {
@@ -760,7 +759,7 @@ public class XtendHoverSignatureProviderTest extends AbstractXtendUITestCase {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-
+  
   @Test
   public void test381185() {
     try {

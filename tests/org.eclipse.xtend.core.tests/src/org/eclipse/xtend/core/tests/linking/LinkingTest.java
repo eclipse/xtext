@@ -88,6 +88,35 @@ public class LinkingTest extends AbstractXtendTestCase {
 	@Inject
 	private ITypeProvider typeProvider;
 	
+	@Test public void testCircularRecursion_01() throws Exception {
+		XtendFile file = file(
+				"package testPackage\n" + 
+				"class Foo{\n" + 
+				"	Bar b\n" + 
+				"	def bar(){ \n" + 
+				"		b.foo\n" + 
+				"	}\n" + 
+				"}\n" + 
+				"class Bar {\n" + 
+				"	Foo f\n" + 
+				"	def foo() {\n" + 
+				"		f.bar\n" + 
+				"	}\n" + 
+				"}");
+		XtendClass foo = (XtendClass) file.getXtendTypes().get(0);
+		XtendClass bar = (XtendClass) file.getXtendTypes().get(1);
+		XAbstractFeatureCall fooInvoke = findSingleFeatureCall(foo);
+		XAbstractFeatureCall barInvoke = findSingleFeatureCall(bar);
+		assertEquals("testPackage.Bar.foo()", fooInvoke.getFeature().getIdentifier());
+		assertEquals("testPackage.Foo.bar()", barInvoke.getFeature().getIdentifier());
+	}
+	
+	private XAbstractFeatureCall findSingleFeatureCall(XtendClass fooOrBar) {
+		XtendFunction function = (XtendFunction) fooOrBar.getMembers().get(1);
+		XBlockExpression block = (XBlockExpression) function.getExpression();
+		return (XAbstractFeatureCall) block.getExpressions().get(0);
+	}
+	
 	@Test public void testDeclaredConstructor_01() throws Exception {
 		XtendClass clazz = clazz(
 				"class Foo { " +

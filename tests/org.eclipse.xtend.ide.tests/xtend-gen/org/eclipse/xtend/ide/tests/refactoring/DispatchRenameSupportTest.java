@@ -164,7 +164,7 @@ public class DispatchRenameSupportTest extends AbstractXtendUITestCase {
       _builder.append("public class Super {");
       _builder.newLine();
       _builder.append("\t");
-      _builder.append("publc void _foo(Double x) {}");
+      _builder.append("public void _foo(Double x) {}");
       _builder.newLine();
       _builder.append("}");
       _builder.newLine();
@@ -797,7 +797,7 @@ public class DispatchRenameSupportTest extends AbstractXtendUITestCase {
       };
     final Iterable<String> dispatchOperations = IterableExtensions.<JvmOperation, String>map(_allDispatchOperations, _function);
     for (final String signature : signatures) {
-      String _plus = (signature + " not found. Only got");
+      String _plus = (signature + " not found. Only got ");
       String _join = IterableExtensions.join(dispatchOperations, "\n");
       String _plus_1 = (_plus + _join);
       boolean _contains = Iterables.contains(dispatchOperations, signature);

@@ -66,9 +66,13 @@ public class LegacyTypeArgumentContext implements ITypeArgumentContext {
 	public TypeArgumentContextProvider.Request getRequest() {
 		return request;
 	}
-
+	
 	public JvmTypeReference getBoundArgument(JvmTypeParameter parameter) {
-		throw new UnsupportedOperationException();
+		LightweightMergedBoundTypeArgument argument = getTypeParameterMapping().get(parameter);
+		if (argument != null) {
+			return argument.getTypeReference().toTypeReference();
+		}
+		return null;
 	}
 	
 	protected Map<JvmTypeParameter, LightweightMergedBoundTypeArgument> getTypeParameterMapping() {

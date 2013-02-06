@@ -38,7 +38,7 @@ class QuickfixTestBuilder {
 		val document = editor.document
 		assertNotNull("Error getting document from editor", document) 
 		document.readOnly [
-			issues = validate(it, CheckMode::NORMAL_AND_FAST, CancelIndicator::NullImpl)
+			issues = validate(CheckMode::NORMAL_AND_FAST, CancelIndicator::NullImpl)
 		]
 		caretOffset = model.toString.indexOf("|")
 		this
