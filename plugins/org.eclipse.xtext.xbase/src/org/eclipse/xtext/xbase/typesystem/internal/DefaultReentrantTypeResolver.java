@@ -8,16 +8,23 @@
 package org.eclipse.xtext.xbase.typesystem.internal;
 
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.jdt.annotation.NonNullByDefault;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
+import org.eclipse.xtext.linking.impl.IllegalNodeException;
 import org.eclipse.xtext.naming.QualifiedName;
+import org.eclipse.xtext.resource.IEObjectDescription;
+import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.util.internal.Stopwatches;
 import org.eclipse.xtext.util.internal.Stopwatches.StoppedTask;
+import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.scoping.batch.IBatchScopeProvider;
 import org.eclipse.xtext.xbase.scoping.batch.IFeatureScopeSession;
 import org.eclipse.xtext.xbase.typesystem.IResolvedTypes;
+import org.eclipse.xtext.xbase.typesystem.computation.IFeatureLinkingCandidate;
 import org.eclipse.xtext.xbase.typesystem.computation.ITypeComputer;
 import org.eclipse.xtext.xbase.typesystem.util.BoundTypeArgumentMerger;
 import org.eclipse.xtext.xbase.typesystem.util.CommonTypeComputationServices;
@@ -30,8 +37,24 @@ import com.google.inject.Inject;
  * TODO JavaDoc, toString
  */
 @NonNullByDefault
-public class DefaultReentrantTypeResolver extends AbstractRootedReentrantTypeResolver {
+public class DefaultReentrantTypeResolver extends AbstractRootedReentrantTypeResolver implements Cloneable {
 
+	protected static class AbortTypeComputation extends RuntimeException {
+
+		private static final long serialVersionUID = 1L;
+
+		private IScope scope;
+
+		public AbortTypeComputation(IScope scope) {
+			this.scope = scope;
+		}
+		
+		public IScope getScope() {
+			return scope;
+		}
+		
+	}
+	
 	@Inject
 	private CommonTypeComputationServices services;
 	
@@ -100,11 +123,61 @@ public class DefaultReentrantTypeResolver extends AbstractRootedReentrantTypeRes
 		result.addDiagnostics(root.eResource());
 		return result;
 	}
+	
+	@Override
+	protected IScope getFeatureScope(XAbstractFeatureCall featureCall) {
+		ResolvedTypes resolvedTypes = createResolvedTypesForScoping(featureCall);
+		IFeatureScopeSession session = batchScopeProvider.newSession(root.eResource());
+		try {
+			computeTypes(resolvedTypes, session);
+		} catch(AbortTypeComputation e) {
+			return e.getScope();
+		}
+		return IScope.NULLSCOPE;
+	}
 
 	protected RootResolvedTypes createResolvedTypes() {
 		return new RootResolvedTypes(this);
 	}
 	
+	protected final ResolvedTypes createResolvedTypesForScoping(final XAbstractFeatureCall featureCall) {
+		DefaultReentrantTypeResolver clone = clone();
+		clone.scopeProviderAccess = createAbortingScopeProviderAccess(featureCall);
+		return new RootResolvedTypes(clone);
+	}
+
+	@Override
+	public DefaultReentrantTypeResolver clone() {
+		try {
+			return (DefaultReentrantTypeResolver) super.clone();
+		} catch (CloneNotSupportedException e) {
+			throw new RuntimeException();
+		}
+	}
+	
+	protected ScopeProviderAccess createAbortingScopeProviderAccess(final XAbstractFeatureCall abortOn) {
+		return new ScopeProviderAccess() {
+			@Override
+			@Nullable
+			protected IFeatureLinkingCandidate getKnownFeature(XAbstractFeatureCall featureCall, AbstractTypeComputationState state, ResolvedTypes resolvedTypes) {
+				if (abortOn == featureCall) {
+					return null;
+				}
+				return scopeProviderAccess.getKnownFeature(featureCall, state, resolvedTypes);
+			}
+			
+			@Override
+			public Iterable<IEObjectDescription> getCandidateDescriptions(XExpression expression, EReference reference, @Nullable EObject toBeLinked,
+					IFeatureScopeSession session, IResolvedTypes types) throws IllegalNodeException {
+				if (expression == abortOn) {
+					IScope scope = session.getScope(expression, reference, types);
+					throw new AbortTypeComputation(scope);
+				}
+				return scopeProviderAccess.getCandidateDescriptions(expression, reference, toBeLinked, session, types);
+			}
+		};
+	}
+
 	protected void computeTypes(ResolvedTypes resolvedTypes, IFeatureScopeSession session) {
 		computeTypes(resolvedTypes, session, root);
 	}
@@ -118,7 +191,7 @@ public class DefaultReentrantTypeResolver extends AbstractRootedReentrantTypeRes
 	}
 
 	protected void _computeTypes(ResolvedTypes resolvedTypes, IFeatureScopeSession session, XExpression expression) {
-		ExpressionBasedRootTypeComputationState state = new ExpressionBasedRootTypeComputationState(resolvedTypes, session, expression, this);
+		ExpressionBasedRootTypeComputationState state = new ExpressionBasedRootTypeComputationState(resolvedTypes, session, expression);
 		state.computeTypes();
 	}
 	

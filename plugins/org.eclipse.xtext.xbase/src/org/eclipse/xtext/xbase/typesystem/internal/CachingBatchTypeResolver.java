@@ -12,8 +12,10 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.util.OnChangeEvictingCache;
 import org.eclipse.xtext.util.concurrent.IUnitOfWork;
+import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.typesystem.IBatchTypeResolver;
 import org.eclipse.xtext.xbase.typesystem.IResolvedTypes;
 
@@ -53,6 +55,11 @@ public class CachingBatchTypeResolver implements IBatchTypeResolver {
 			}
 		});
 		return result;
+	}
+	
+	@NonNull
+	public IScope getFeatureScope(@Nullable XAbstractFeatureCall featureCall) {
+		return delegate.getFeatureScope(featureCall);
 	}
 	
 	@NonNullByDefault

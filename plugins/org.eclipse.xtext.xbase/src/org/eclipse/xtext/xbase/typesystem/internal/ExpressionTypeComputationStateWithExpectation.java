@@ -21,9 +21,10 @@ import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 public class ExpressionTypeComputationStateWithExpectation extends TypeComputationStateWithExpectation {
 	
 	protected ExpressionTypeComputationStateWithExpectation(ResolvedTypes resolvedTypes,
-			IFeatureScopeSession featureScopeSession, DefaultReentrantTypeResolver reentrantTypeResolver,
-			AbstractTypeComputationState parent, @Nullable LightweightTypeReference expectation) {
-		super(resolvedTypes, featureScopeSession, reentrantTypeResolver, parent, expectation);
+			IFeatureScopeSession featureScopeSession,
+			AbstractTypeComputationState parent, 
+			@Nullable LightweightTypeReference expectation) {
+		super(resolvedTypes, featureScopeSession, parent, expectation);
 	}
 
 	@Override

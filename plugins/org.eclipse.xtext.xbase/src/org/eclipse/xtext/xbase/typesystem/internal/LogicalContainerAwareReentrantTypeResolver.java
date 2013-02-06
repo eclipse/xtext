@@ -368,7 +368,7 @@ public class LogicalContainerAwareReentrantTypeResolver extends DefaultReentrant
 				return;
 			throw new IllegalStateException("No resolved type found. Field was: " + field.getIdentifier());
 		}
-		FieldTypeComputationState state = new FieldTypeComputationState(childResolvedTypes, field.isStatic() ? featureScopeSession : featureScopeSession.toInstanceContext(), field, this);
+		FieldTypeComputationState state = new FieldTypeComputationState(childResolvedTypes, field.isStatic() ? featureScopeSession : featureScopeSession.toInstanceContext(), field);
 		// no need to unmark the computing state since we replace the equivalent in #resolveTo
 		markComputing(field.getType());
 		ITypeComputationResult result = state.computeTypes();
@@ -389,7 +389,7 @@ public class LogicalContainerAwareReentrantTypeResolver extends DefaultReentrant
 				return;
 			throw new IllegalStateException("No resolved type found. Constructor was: " + constructor.getIdentifier());
 		}
-		ConstructorBodyComputationState state = new ConstructorBodyComputationState(childResolvedTypes, featureScopeSession.toInstanceContext(), constructor, this);
+		ConstructorBodyComputationState state = new ConstructorBodyComputationState(childResolvedTypes, featureScopeSession.toInstanceContext(), constructor);
 		state.computeTypes();
 		computeAnnotationTypes(childResolvedTypes, featureScopeSession, constructor);
 		for(JvmFormalParameter parameter: constructor.getParameters()) {
@@ -406,7 +406,7 @@ public class LogicalContainerAwareReentrantTypeResolver extends DefaultReentrant
 				return;
 			throw new IllegalStateException("No resolved type found. Operation was: " + operation.getIdentifier());
 		}
-		OperationBodyComputationState state = new OperationBodyComputationState(childResolvedTypes, operation.isStatic() ? featureScopeSession : featureScopeSession.toInstanceContext(), operation, this);
+		OperationBodyComputationState state = new OperationBodyComputationState(childResolvedTypes, operation.isStatic() ? featureScopeSession : featureScopeSession.toInstanceContext(), operation);
 		// no need to unmark the computing state since we replace the equivalent in #resolveTo
 		markComputing(operation.getReturnType());
 		setReturnType(operation, state.computeTypes());
@@ -453,7 +453,7 @@ public class LogicalContainerAwareReentrantTypeResolver extends DefaultReentrant
 						JvmCustomAnnotationValue custom = (JvmCustomAnnotationValue) value;
 						for(Object object: custom.getValues()) {
 							if (object instanceof XExpression) {
-								AnnotationValueTypeComputationState state = new AnnotationValueTypeComputationState(resolvedTypes, featureScopeSession, value, (XExpression) object, this);
+								AnnotationValueTypeComputationState state = new AnnotationValueTypeComputationState(resolvedTypes, featureScopeSession, value, (XExpression) object);
 								state.computeTypes();
 							}
 						}

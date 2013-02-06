@@ -16,6 +16,8 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
+import org.eclipse.xtext.scoping.IScope;
+import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.typesystem.IBatchTypeResolver;
 import org.eclipse.xtext.xbase.typesystem.IResolvedTypes;
@@ -40,6 +42,20 @@ public class DefaultBatchTypeResolver implements IBatchTypeResolver {
 			return IResolvedTypes.NULL;
 		IReentrantTypeResolver reentrantResolver = getTypeResolver(object);
 		return reentrantResolver.reentrantResolve();
+	}
+	
+	public IScope getFeatureScope(@Nullable XAbstractFeatureCall featureCall) {
+		if (featureCall == null || featureCall.eIsProxy()) {
+			return IScope.NULLSCOPE;
+		}
+		List<EObject> roots = getEntryPoints(featureCall);
+		for(EObject root: roots) {
+			AbstractRootedReentrantTypeResolver resolver = getOrCreateResolver(root);
+			if (resolver.isHandled(featureCall)) {
+				return resolver.getFeatureScope(featureCall);
+			}
+		}
+		return IScope.NULLSCOPE;
 	}
 
 	protected IReentrantTypeResolver getTypeResolver(EObject object) {
@@ -70,12 +86,20 @@ public class DefaultBatchTypeResolver implements IBatchTypeResolver {
 			final TypeResolutionStateAdapter newAdapter = new TypeResolutionStateAdapter(root, newResolver);
 			adapters.add(newAdapter);
 			AbstractRootedReentrantTypeResolver result = new AbstractRootedReentrantTypeResolver() {
+				
+				private int reentrance = 0;
+				
 				public IResolvedTypes reentrantResolve() {
-					IResolvedTypes result = newResolver.reentrantResolve();
-					if (!adapters.remove(newAdapter)) {
-						throw new IllegalStateException("The TypeResolutionStateAdapter was removed while resolving");
+					try {
+						reentrance++;
+						IResolvedTypes result = newResolver.reentrantResolve();
+						return result;
+					} finally {
+						reentrance--;
+						if (reentrance == 0 && !adapters.remove(newAdapter)) {
+							throw new IllegalStateException("The TypeResolutionStateAdapter was removed while resolving");
+						}
 					}
-					return result;
 				}
 				
 				public void initializeFrom(EObject root) {
@@ -95,6 +119,11 @@ public class DefaultBatchTypeResolver implements IBatchTypeResolver {
 				@Override
 				protected boolean isHandled(XExpression expression) {
 					return newResolver.isHandled(expression);
+				}
+
+				@Override
+				protected IScope getFeatureScope(XAbstractFeatureCall featureCall) {
+					return newResolver.getFeatureScope(featureCall);
 				}
 			};
 			result.initializeFrom(root);

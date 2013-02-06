@@ -25,9 +25,8 @@ import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 public abstract class AbstractRootTypeComputationState extends AbstractTypeComputationState {
 	
 	protected AbstractRootTypeComputationState(ResolvedTypes resolvedTypes,
-			IFeatureScopeSession featureScopeSession,
-			DefaultReentrantTypeResolver reentrantTypeResolver) {
-		super(resolvedTypes, featureScopeSession, reentrantTypeResolver);
+			IFeatureScopeSession featureScopeSession) {
+		super(resolvedTypes, featureScopeSession);
 	}
 	
 	public ITypeComputationResult computeTypes() {
@@ -79,16 +78,16 @@ public abstract class AbstractRootTypeComputationState extends AbstractTypeCompu
 	@Override
 	protected ExpressionTypeComputationState createExpressionComputationState(XExpression expression,
 			StackedResolvedTypes typeResolution) {
-		return new RootExpressionTypeComputationState(typeResolution, getFeatureScopeSession(), getResolver(), this, expression, getExpectedType());
+		return new RootExpressionTypeComputationState(typeResolution, getFeatureScopeSession(), this, expression, getExpectedType());
 	}
 	
 	@Override
 	public TypeAssigner assignTypes() {
-		TypeCheckpointComputationState state = new TypeCheckpointComputationState(getResolvedTypes(), getFeatureScopeSession(), getResolver(), this) {
+		TypeCheckpointComputationState state = new TypeCheckpointComputationState(getResolvedTypes(), getFeatureScopeSession(), this) {
 			@Override
 			protected ExpressionTypeComputationState createExpressionComputationState(XExpression expression,
 					StackedResolvedTypes typeResolution) {
-				return new RootExpressionTypeComputationState(typeResolution, getFeatureScopeSession(), getResolver(), this, expression, getExpectedType());
+				return new RootExpressionTypeComputationState(typeResolution, getFeatureScopeSession(), this, expression, getExpectedType());
 			}
 		};
 		return createTypeAssigner(state);

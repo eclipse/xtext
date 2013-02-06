@@ -22,8 +22,8 @@ public class TypeCheckpointComputationState extends AbstractStackedTypeComputati
 
 	protected TypeCheckpointComputationState(ResolvedTypes resolvedTypes,
 			IFeatureScopeSession featureScopeSession,
-			DefaultReentrantTypeResolver reentrantTypeResolver, AbstractTypeComputationState parent) {
-		super(resolvedTypes.pushReassigningTypes(), featureScopeSession, reentrantTypeResolver, parent);
+			AbstractTypeComputationState parent) {
+		super(resolvedTypes.pushReassigningTypes(), featureScopeSession, parent);
 	}
 	
 	@Override

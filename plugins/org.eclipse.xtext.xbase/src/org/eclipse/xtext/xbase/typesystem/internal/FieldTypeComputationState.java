@@ -26,8 +26,8 @@ import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 public class FieldTypeComputationState extends AbstractLogicalContainerAwareRootComputationState {
 
 	public FieldTypeComputationState(ResolvedTypes resolvedTypes, IFeatureScopeSession featureScopeSession,
-			JvmField field, LogicalContainerAwareReentrantTypeResolver reentrantTypeResolver) {
-		super(resolvedTypes, featureScopeSession, field, reentrantTypeResolver);
+			JvmField field) {
+		super(resolvedTypes, featureScopeSession, field);
 	}
 
 	@Override

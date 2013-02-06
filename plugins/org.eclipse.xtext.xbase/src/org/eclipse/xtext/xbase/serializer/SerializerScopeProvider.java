@@ -78,6 +78,9 @@ public class SerializerScopeProvider extends XbaseBatchScopeProvider implements 
 			QualifiedName name = QualifiedName.create(feature.getSimpleName());
 			if (call instanceof XBinaryOperation || call instanceof XUnaryOperation) {
 				QualifiedName operator = operatorMapping.getOperator(name);
+				if (operator == null) {
+					return IScope.NULLSCOPE;
+				}
 				return new SingletonScope(EObjectDescription.create(operator, feature), IScope.NULLSCOPE);
 			}
 			if (call instanceof XAssignment) {

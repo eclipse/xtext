@@ -28,9 +28,8 @@ public class OperationBodyComputationState extends AbstractLogicalContainerAware
 
 	public OperationBodyComputationState(ResolvedTypes resolvedTypes,
 			IFeatureScopeSession featureScopeSession,
-			JvmOperation operation,
-			LogicalContainerAwareReentrantTypeResolver reentrantTypeResolver) {
-		super(resolvedTypes, featureScopeSession, operation, reentrantTypeResolver);
+			JvmOperation operation) {
+		super(resolvedTypes, featureScopeSession, operation);
 		for(JvmFormalParameter parameter: operation.getParameters()) {
 			addLocalToCurrentScope(parameter);
 		}

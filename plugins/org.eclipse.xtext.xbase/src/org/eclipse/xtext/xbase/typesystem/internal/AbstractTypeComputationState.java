@@ -64,11 +64,10 @@ public abstract class AbstractTypeComputationState implements ITypeComputationSt
 	private List<AbstractTypeExpectation> returnExpectations;
 	
 	protected AbstractTypeComputationState(ResolvedTypes resolvedTypes,
-			IFeatureScopeSession featureScopeSession,
-			DefaultReentrantTypeResolver reentrantTypeResolver) {
+			IFeatureScopeSession featureScopeSession) {
 		this.resolvedTypes = resolvedTypes;
 		this.featureScopeSession = featureScopeSession;
-		this.reentrantTypeResolver = reentrantTypeResolver;
+		this.reentrantTypeResolver = resolvedTypes.getResolver();
 	}
 	
 	protected ResolvedTypes getResolvedTypes() {
@@ -119,7 +118,7 @@ public abstract class AbstractTypeComputationState implements ITypeComputationSt
 	
 	protected ExpressionTypeComputationState createExpressionComputationState(XExpression expression,
 			StackedResolvedTypes typeResolution) {
-		return new ExpressionTypeComputationState(typeResolution, featureScopeSession, reentrantTypeResolver, this, expression);
+		return new ExpressionTypeComputationState(typeResolution, featureScopeSession, this, expression);
 	}
 	
 	/*
@@ -127,7 +126,7 @@ public abstract class AbstractTypeComputationState implements ITypeComputationSt
 	 * a subtype of TypeComputationStateWithExpectation is used.
 	 */
 	public TypeComputationStateWithExpectation withExpectation(@Nullable LightweightTypeReference expectation) {
-		return new TypeComputationStateWithExpectation(resolvedTypes, featureScopeSession, reentrantTypeResolver, this, expectation);
+		return new TypeComputationStateWithExpectation(resolvedTypes, featureScopeSession, this, expectation);
 	}
 	
 	public void refineExpectedType(XExpression expression, LightweightTypeReference expectation) {
@@ -136,7 +135,7 @@ public abstract class AbstractTypeComputationState implements ITypeComputationSt
 	}
 	
 	public TypeComputationStateWithExpectation withRootExpectation(@Nullable LightweightTypeReference expectation) {
-		return new TypeComputationStateWithRootExpectation(resolvedTypes, featureScopeSession, reentrantTypeResolver, this, expectation);
+		return new TypeComputationStateWithRootExpectation(resolvedTypes, featureScopeSession, this, expectation);
 	}
 	
 	public AbstractTypeComputationState withNonVoidExpectation() {
@@ -144,19 +143,19 @@ public abstract class AbstractTypeComputationState implements ITypeComputationSt
 	}
 	
 	protected AbstractTypeComputationState withNonVoidExpectation(ResolvedTypes resolvedTypes) {
-		return new TypeComputationStateWithNonVoidExpectation(resolvedTypes, featureScopeSession, reentrantTypeResolver, this);
+		return new TypeComputationStateWithNonVoidExpectation(resolvedTypes, featureScopeSession, this);
 	}
 
 	public AbstractTypeComputationState withReturnExpectation() {
-		return new ReturnExpectationTypeComputationState(resolvedTypes, featureScopeSession, reentrantTypeResolver, this);
+		return new ReturnExpectationTypeComputationState(resolvedTypes, featureScopeSession, this);
 	}
 
 	public AbstractTypeComputationState withoutExpectation() {
-		return new TypeComputationStateWithExpectation(resolvedTypes, featureScopeSession, reentrantTypeResolver, this, null);
+		return new TypeComputationStateWithExpectation(resolvedTypes, featureScopeSession, this, null);
 	}
 	
 	public AbstractTypeComputationState withTypeCheckpoint() {
-		return new TypeCheckpointComputationState(resolvedTypes, featureScopeSession, reentrantTypeResolver, this);
+		return new TypeCheckpointComputationState(resolvedTypes, featureScopeSession, this);
 	}
 	
 	public AbstractTypeComputationState assignType(JvmIdentifiableElement element, @Nullable  LightweightTypeReference type) {
@@ -211,7 +210,7 @@ public abstract class AbstractTypeComputationState implements ITypeComputationSt
 	}
 	
 	public TypeAssigner assignTypes() {
-		TypeCheckpointComputationState state = new TypeCheckpointComputationState(resolvedTypes, featureScopeSession, reentrantTypeResolver, this);
+		TypeCheckpointComputationState state = new TypeCheckpointComputationState(resolvedTypes, featureScopeSession, this);
 		return createTypeAssigner(state);
 	}
 	
@@ -267,19 +266,11 @@ public abstract class AbstractTypeComputationState implements ITypeComputationSt
 	}
 
 	public List<IFeatureLinkingCandidate> getLinkingCandidates(XAbstractFeatureCall featureCall) {
-		IFeatureLinkingCandidate result = resolvedTypes.getFeature(featureCall);
+		IFeatureLinkingCandidate result = reentrantTypeResolver.getScopeProviderAccess().getKnownFeature(featureCall, this, resolvedTypes);
 		if (result != null) {
-			return Collections.<IFeatureLinkingCandidate>singletonList(new AppliedFeatureLinkingCandidate(result));
+			return Collections.singletonList(result);
 		}
 		EObject proxyOrResolved = (EObject) featureCall.eGet(XbasePackage.Literals.XABSTRACT_FEATURE_CALL__FEATURE, false);
-		if (proxyOrResolved == null) {
-			result = new NullFeatureLinkingCandidate(featureCall, this);
-			return Collections.singletonList(result);
-		}
-		if (!proxyOrResolved.eIsProxy()) {
-			result = createResolvedLink(featureCall, (JvmIdentifiableElement) proxyOrResolved);
-			return Collections.singletonList(result);
-		}
 		StackedResolvedTypes demandComputedTypes = resolvedTypes.pushTypes();
 		final AbstractTypeComputationState forked = withNonVoidExpectation(demandComputedTypes);
 		ForwardingResolvedTypes demandResolvedTypes = new ForwardingResolvedTypes() {

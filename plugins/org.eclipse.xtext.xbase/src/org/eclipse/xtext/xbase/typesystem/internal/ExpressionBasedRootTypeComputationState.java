@@ -28,14 +28,13 @@ public class ExpressionBasedRootTypeComputationState extends AbstractRootTypeCom
 	private final LightweightTypeReference expectedType;
 
 	public ExpressionBasedRootTypeComputationState(ResolvedTypes resolvedTypes, 
-			IFeatureScopeSession featureScopeSession, XExpression expression,
-			DefaultReentrantTypeResolver defaultReentrantTypeResolver) {
-		this(resolvedTypes, featureScopeSession, expression, defaultReentrantTypeResolver, null);
+			IFeatureScopeSession featureScopeSession, XExpression expression) {
+		this(resolvedTypes, featureScopeSession, expression, null);
 	}
 	
-	public ExpressionBasedRootTypeComputationState(ResolvedTypes resolvedTypes, IFeatureScopeSession featureScopeSession, XExpression expression,
-			DefaultReentrantTypeResolver defaultReentrantTypeResolver, @Nullable LightweightTypeReference expectedType) {
-		super(resolvedTypes, featureScopeSession, defaultReentrantTypeResolver);
+	public ExpressionBasedRootTypeComputationState(ResolvedTypes resolvedTypes, IFeatureScopeSession featureScopeSession, XExpression expression, 
+			@Nullable LightweightTypeReference expectedType) {
+		super(resolvedTypes, featureScopeSession);
 		this.expression = expression;
 		this.expectedType = expectedType;
 	}

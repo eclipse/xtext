@@ -27,8 +27,8 @@ public abstract class AbstractStackedTypeComputationState extends AbstractTypeCo
 	protected AbstractStackedTypeComputationState(
 			ResolvedTypes resolvedTypes,
 			IFeatureScopeSession featureScopeSession,
-			DefaultReentrantTypeResolver reentrantTypeResolver, AbstractTypeComputationState parent) {
-		super(resolvedTypes, featureScopeSession, reentrantTypeResolver);
+			AbstractTypeComputationState parent) {
+		super(resolvedTypes, featureScopeSession);
 		this.parent = parent;
 	}
 	

@@ -17,7 +17,8 @@ import org.eclipse.xtext.common.types.TypesPackage;
 import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.scoping.IScopeProvider;
 import org.eclipse.xtext.scoping.impl.AbstractDeclarativeScopeProvider;
-import org.eclipse.xtext.xbase.typesystem.IResolvedTypes;
+import org.eclipse.xtext.xbase.XAbstractFeatureCall;
+import org.eclipse.xtext.xbase.typesystem.IBatchTypeResolver;
 
 import com.google.inject.Inject;
 import com.google.inject.name.Named;
@@ -45,6 +46,9 @@ public class XbaseBatchScopeProvider implements IBatchScopeProvider /* , IDelega
 	@Named(AbstractDeclarativeScopeProvider.NAMED_DELEGATE)
 	private IScopeProvider delegate;
 	
+	@Inject
+	private IBatchTypeResolver typeResolver;
+	
 	protected IScope delegateGetScope(EObject context, EReference reference) {
 		return getDelegate().getScope(context, reference);
 	}
@@ -59,9 +63,11 @@ public class XbaseBatchScopeProvider implements IBatchScopeProvider /* , IDelega
 	
 	public IScope getScope(EObject context, EReference reference) {
 		if (isFeatureCallScope(reference)) {
-			// TODO use a valid instance of resolved types
-			IFeatureScopeSession session = newSession(context.eResource());
-			return session.getScope(context, reference, IResolvedTypes.NULL);
+			if (context instanceof XAbstractFeatureCall) {
+				IScope result = typeResolver.getFeatureScope((XAbstractFeatureCall) context);
+				return result;
+			}
+			return IScope.NULLSCOPE;
 		}
 		return delegateGetScope(context, reference);
 	}
