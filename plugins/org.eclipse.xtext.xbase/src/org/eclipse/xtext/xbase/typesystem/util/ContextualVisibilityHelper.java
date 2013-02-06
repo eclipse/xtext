@@ -58,27 +58,24 @@ public class ContextualVisibilityHelper implements IVisibilityHelper {
 		if (type == rawContextType) {
 			return true;
 		}
-		if (type != null) {
+		if (type != null && visibility == JvmVisibility.PROTECTED) {
 			if (superTypeNames == null) {
 				List<LightweightTypeReference> superTypes = contextType.getRawTypeReference().getAllSuperTypes();
 				Set<String> superTypeNames = Sets.newHashSetWithExpectedSize(superTypes.size());
 				for(LightweightTypeReference superType: superTypes) {
-					superTypeNames.add(superType.getIdentifier());
+					superTypeNames.add(superType.getRawTypeReference().getIdentifier());
 				}
 				this.superTypeNames = superTypeNames;
 			}
 			if (superTypeNames.contains(type.getIdentifier())) {
-				if (visibility == JvmVisibility.PROTECTED) {
-					return true;
-				}
+				return true;
 			}
 		}
-		if (type != null && rawContextType instanceof JvmDeclaredType) {
+		if (type != null && rawContextType instanceof JvmDeclaredType && (visibility == JvmVisibility.DEFAULT || visibility == JvmVisibility.PROTECTED)) {
 			String packageName = ((JvmDeclaredType) rawContextType).getPackageName();
 			if (Strings.isEmpty(packageName) && Strings.isEmpty(type.getPackageName())
 					|| (packageName != null && packageName.equals(type.getPackageName()))) {
-				if (visibility == JvmVisibility.DEFAULT || visibility == JvmVisibility.PROTECTED)
-					return true;
+				return true;
 			}
 		}
 		return parent.isVisible(member);
