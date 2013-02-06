@@ -94,6 +94,13 @@ public class EclipseResourceFileSystemAccess2 extends AbstractFileSystemAccess2 
 	protected Multimap<URI, IPath> getSourceTraces(){
 		return sourceTraces;
 	}
+	
+	/**
+	 * @since 2.4
+	 */
+	protected void resetSourceTraces() {
+		sourceTraces = null;
+	}
 
 	/**
 	 * @since 2.4
