@@ -3473,15 +3473,15 @@ class XtendCompilerTest extends AbstractXtendTestCase {
 			''',
 			'''
 				package foo;
-
+				
 				@SuppressWarnings("all")
 				public class Bar {
 				  private boolean _generateExpressions = true;
-
+				  
 				  public boolean isGenerateExpressions() {
 				    return this._generateExpressions;
 				  }
-
+				  
 				  public void setGenerateExpressions(final boolean generateExpressions) {
 				    this._generateExpressions = generateExpressions;
 				  }
