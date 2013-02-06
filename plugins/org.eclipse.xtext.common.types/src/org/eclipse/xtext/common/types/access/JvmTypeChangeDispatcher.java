@@ -59,7 +59,10 @@ public class JvmTypeChangeDispatcher extends AdapterImpl {
 				return;
 			Iterator<Runnable> iterator = listeners.iterator();
 			while(iterator.hasNext()) {
-				iterator.next().run();
+				Runnable runnable = iterator.next();
+				if (runnable != null) {
+					runnable.run();
+				}
 				iterator.remove();
 			}
 		}
