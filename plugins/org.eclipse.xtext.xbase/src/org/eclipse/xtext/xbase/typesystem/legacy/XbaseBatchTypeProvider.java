@@ -125,7 +125,7 @@ public class XbaseBatchTypeProvider extends XbaseTypeProvider {
 
 	@Override
 	public org.eclipse.xtext.common.types.util.ITypeArgumentContext getTypeArgumentContext(XConstructorCall constructorCall, JvmConstructor constructor) {
-		throw new UnsupportedOperationException();
+		return new LegacyTypeArgumentContext(null, null, null , constructor, services);
 	}
 
 }
