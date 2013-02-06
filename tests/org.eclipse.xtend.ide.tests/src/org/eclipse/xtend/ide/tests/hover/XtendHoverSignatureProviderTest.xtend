@@ -1,6 +1,8 @@
 package org.eclipse.xtend.ide.tests.hover
 
 import com.google.inject.Inject
+import org.eclipse.emf.ecore.util.EcoreUtil
+import org.eclipse.xtend.core.xtend.XtendClass
 import org.eclipse.xtend.core.xtend.XtendField
 import org.eclipse.xtend.core.xtend.XtendFile
 import org.eclipse.xtend.core.xtend.XtendFunction
@@ -14,14 +16,10 @@ import org.eclipse.xtext.xbase.XClosure
 import org.eclipse.xtext.xbase.XConstructorCall
 import org.eclipse.xtext.xbase.XFeatureCall
 import org.eclipse.xtext.xbase.XForLoopExpression
+import org.eclipse.xtext.xbase.XMemberFeatureCall
 import org.eclipse.xtext.xbase.XVariableDeclaration
 import org.junit.After
 import org.junit.Test
-
-import static org.junit.Assert.*
-import org.eclipse.emf.ecore.util.EcoreUtil
-import org.eclipse.xtext.xbase.XMemberFeatureCall
-import org.eclipse.xtend.core.xtend.XtendClass
 
 class XtendHoverSignatureProviderTest extends AbstractXtendUITestCase {
 	@Inject
@@ -400,8 +398,8 @@ class XtendHoverSignatureProviderTest extends AbstractXtendUITestCase {
 		val expression2 = function2.expression as XBlockExpression
 		val call1 = expression1.expressions.get(0) as XMemberFeatureCall
 		val call2 = expression2.expressions.get(0) as XMemberFeatureCall
-		assertEquals("void Bar.foo()",signatureProvider.getSignature(call1.feature))
-		assertEquals("void Foo.bar()",signatureProvider.getSignature(call2.feature))
+		assertEquals("Object Bar.foo()",signatureProvider.getSignature(call1.feature))
+		assertEquals("Object Foo.bar()",signatureProvider.getSignature(call2.feature))
 		assertEquals("Bar Foo.b", signatureProvider.getSignature((call1.memberCallTarget as XFeatureCall).feature))
 		assertEquals("Foo Bar.f", signatureProvider.getSignature((call2.memberCallTarget as XFeatureCall).feature))
 		
