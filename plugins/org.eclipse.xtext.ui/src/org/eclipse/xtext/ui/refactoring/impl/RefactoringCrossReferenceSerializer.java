@@ -9,6 +9,7 @@ package org.eclipse.xtext.ui.refactoring.impl;
 
 import static org.eclipse.ltk.core.refactoring.RefactoringStatus.*;
 
+import org.apache.log4j.Logger;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.ltk.core.refactoring.RefactoringStatus;
@@ -23,6 +24,7 @@ import org.eclipse.xtext.parsetree.reconstr.impl.CrossReferenceSerializer;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.scoping.IScopeProvider;
+import org.eclipse.xtext.serializer.tokens.SerializerScopeProviderBinding;
 import org.eclipse.xtext.util.ITextRegion;
 
 import com.google.inject.Inject;
@@ -39,7 +41,10 @@ import com.google.inject.Inject;
  */
 public class RefactoringCrossReferenceSerializer {
 
+	private static final Logger log = Logger.getLogger(RefactoringCrossReferenceSerializer.class);
+	
 	@Inject
+	@SerializerScopeProviderBinding
 	private IScopeProvider scopeProvider;
 
 	@Inject
@@ -82,6 +87,7 @@ public class RefactoringCrossReferenceSerializer {
 			return bestRefText;
 
 		} catch (Exception exc) {
+			log.error(exc.getMessage(), exc);
 			status.add(ERROR, exc.getMessage(), owner, linkTextRegion);
 			return null;
 		}
