@@ -7413,6 +7413,7 @@ public class XtendCompilerTest extends AbstractXtendTestCase {
     _builder_1.append("  ");
     _builder_1.append("private boolean _generateExpressions = true;");
     _builder_1.newLine();
+    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public boolean isGenerateExpressions() {");
@@ -7423,6 +7424,7 @@ public class XtendCompilerTest extends AbstractXtendTestCase {
     _builder_1.append("  ");
     _builder_1.append("}");
     _builder_1.newLine();
+    _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public void setGenerateExpressions(final boolean generateExpressions) {");
