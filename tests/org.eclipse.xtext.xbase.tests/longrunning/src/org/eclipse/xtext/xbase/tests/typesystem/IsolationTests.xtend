@@ -12,6 +12,7 @@ import org.eclipse.xtext.junit4.InjectWith
 import org.eclipse.xtext.junit4.XtextRunner
 import org.eclipse.xtext.xbase.typesystem.IBatchTypeResolver
 import org.junit.runner.RunWith
+import org.junit.Test
 
 /**
  * @author Sebastian Zarnekow
@@ -173,6 +174,22 @@ class PermutingBatchReturnTypeResolverTest extends BatchReturnTypeResolverTest {
 		assertTrue(xExpression.eResource.linkingAndSyntaxErrors.toString, xExpression.eResource.linkingAndSyntaxErrors.isEmpty)
 		assertTrue(xExpression.eResource.warnings.toString, xExpression.eResource.warnings.isEmpty)
 		return resolvedType
+	}
+	
+	@Test override void testIfExpression_27() throws Exception {
+		// a permutation of this one is 'return (if (true) while ..))' which indicates that the result should not be void
+		// "if (true) while(false) ('foo'+'bar').length".resolvesTo("null")
+		"return if (true) while(false) ('a'+'b').length".resolvesTo("null")
+	}
+	
+	@Test override void testSwitchExpression_11() throws Exception {
+		// a permutation of this one is 'return switch ..' which indicates that the switch result should not be void
+//		"switch null {
+//		  Object : return 
+//		}".resolvesTo("void")
+		"return switch null {
+		  Object : return 
+		}".resolvesTo("null")
 	}
 	
 }

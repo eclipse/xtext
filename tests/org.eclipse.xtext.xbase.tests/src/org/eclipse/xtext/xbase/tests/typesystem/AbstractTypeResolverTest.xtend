@@ -1183,7 +1183,7 @@ abstract class AbstractTypeResolverTest<Reference> extends AbstractXbaseTestCase
 	}
 	
 	@Test def void testIfExpression_18() throws Exception {
-		"if (true) return".resolvesTo("null")
+		"if (true) return".resolvesTo("void")
 	}
 	
 	@Test def void testIfExpression_19() throws Exception {
@@ -1219,11 +1219,15 @@ abstract class AbstractTypeResolverTest<Reference> extends AbstractXbaseTestCase
 	}
 	
 	@Test def void testIfExpression_27() throws Exception {
-		"if (true) while(false) ('foo'+'bar').length".resolvesTo("null")
+		"if (true) while(false) ('foo'+'bar').length".resolvesTo("void")
 	}
 	
 	@Test def void testIfExpression_28() throws Exception {
 		"if (true) return '' else 1".resolvesTo("int")
+	}
+	
+	@Test def void testIfExpression_29() throws Exception {
+		"if (true) while(true) ''.toString else while(true) ''.toString".resolvesTo("void")
 	}
 	
 	@Test def void testSwitchExpression() throws Exception {
@@ -1338,7 +1342,7 @@ abstract class AbstractTypeResolverTest<Reference> extends AbstractXbaseTestCase
 	@Test def void testSwitchExpression_11() throws Exception {
 		"switch null {
 		  Object : return 
-		}".resolvesTo("null")
+		}".resolvesTo("void")
 	}
 	
 	@Test def void testSwitchExpression_12() throws Exception {

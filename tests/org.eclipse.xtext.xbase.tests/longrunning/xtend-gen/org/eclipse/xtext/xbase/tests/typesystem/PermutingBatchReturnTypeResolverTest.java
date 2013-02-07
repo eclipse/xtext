@@ -19,6 +19,7 @@ import org.eclipse.xtext.xbase.typesystem.IBatchTypeResolver;
 import org.eclipse.xtext.xbase.typesystem.IResolvedTypes;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 import org.junit.Assert;
+import org.junit.Test;
 
 /**
  * @author Sebastian Zarnekow
@@ -105,5 +106,15 @@ public class PermutingBatchReturnTypeResolverTest extends BatchReturnTypeResolve
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
+  }
+  
+  @Test
+  public void testIfExpression_27() throws Exception {
+    this.resolvesTo("return if (true) while(false) (\'a\'+\'b\').length", "null");
+  }
+  
+  @Test
+  public void testSwitchExpression_11() throws Exception {
+    this.resolvesTo("return switch null {\n\t\t  Object : return \n\t\t}", "null");
   }
 }

@@ -1315,7 +1315,7 @@ public abstract class AbstractTypeResolverTest<Reference extends Object> extends
   
   @Test
   public void testIfExpression_18() throws Exception {
-    this.resolvesTo("if (true) return", "null");
+    this.resolvesTo("if (true) return", "void");
   }
   
   @Test
@@ -1360,12 +1360,17 @@ public abstract class AbstractTypeResolverTest<Reference extends Object> extends
   
   @Test
   public void testIfExpression_27() throws Exception {
-    this.resolvesTo("if (true) while(false) (\'foo\'+\'bar\').length", "null");
+    this.resolvesTo("if (true) while(false) (\'foo\'+\'bar\').length", "void");
   }
   
   @Test
   public void testIfExpression_28() throws Exception {
     this.resolvesTo("if (true) return \'\' else 1", "int");
+  }
+  
+  @Test
+  public void testIfExpression_29() throws Exception {
+    this.resolvesTo("if (true) while(true) \'\'.toString else while(true) \'\'.toString", "void");
   }
   
   @Test
@@ -1427,7 +1432,7 @@ public abstract class AbstractTypeResolverTest<Reference extends Object> extends
   
   @Test
   public void testSwitchExpression_11() throws Exception {
-    this.resolvesTo("switch null {\n\t\t  Object : return \n\t\t}", "null");
+    this.resolvesTo("switch null {\n\t\t  Object : return \n\t\t}", "void");
   }
   
   @Test
