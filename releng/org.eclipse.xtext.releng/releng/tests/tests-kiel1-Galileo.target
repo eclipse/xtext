@@ -11,7 +11,7 @@
 <unit id="org.junit" version="3.8.2.v3_8_2_v20100427-1100"/>
 <unit id="org.eclipse.jdt.annotation" version="0.0.0"/>
 <unit id="org.eclipse.emf.feature.group" version="2.5.0.v200906151043"/>
-<unit id="org.eclipse.emf.compare.sdk.feature.group" version="1.0.1.v200909161031"/>
+<unit id="org.eclipse.emf.compare.feature.group" version="0.0.0"/>
 <unit id="com.google.guava" version="0.0.0"/>
 <unit id="com.google.inject" version="0.0.0"/>
 <unit id="org.apache.log4j" version="0.0.0"/>
