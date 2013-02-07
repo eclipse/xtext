@@ -187,11 +187,16 @@ public abstract class AbstractAssignabilityTest extends AbstractTestingTypeRefer
     boolean _doIsAssignable_2 = this.doIsAssignable(rhs, _lightweightReference_1);
     Assert.assertTrue(_doIsAssignable_2);
     final boolean result = this.doIsAssignable(lhs, rhs);
-    WildcardTypeReference _wildcardTypeReference = new WildcardTypeReference(this);
-    final WildcardTypeReference wcRhs = _wildcardTypeReference;
-    wcRhs.addUpperBound(rhs);
-    boolean _doIsAssignable_3 = this.doIsAssignable(lhs, wcRhs);
-    Assert.assertEquals(Boolean.valueOf(result), Boolean.valueOf(_doIsAssignable_3));
+    boolean _isPrimitiveVoid = rhs.isPrimitiveVoid();
+    boolean _not = (!_isPrimitiveVoid);
+    if (_not) {
+      WildcardTypeReference _wildcardTypeReference = new WildcardTypeReference(this);
+      final WildcardTypeReference wcRhs = _wildcardTypeReference;
+      LightweightTypeReference _wrapperTypeIfPrimitive = rhs.getWrapperTypeIfPrimitive();
+      wcRhs.addUpperBound(_wrapperTypeIfPrimitive);
+      boolean _doIsAssignable_3 = this.doIsAssignable(lhs, wcRhs);
+      Assert.assertEquals(Boolean.valueOf(result), Boolean.valueOf(_doIsAssignable_3));
+    }
     return result;
   }
   
