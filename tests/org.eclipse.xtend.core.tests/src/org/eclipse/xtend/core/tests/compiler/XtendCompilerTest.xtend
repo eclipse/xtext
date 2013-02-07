@@ -22,6 +22,56 @@ class XtendCompilerTest extends AbstractXtendTestCase {
 	@Inject JvmModelGenerator generator
 	@Inject IGeneratorConfigProvider generatorConfigProvider
 	
+	@Test def void testIfWithVoid() {
+		assertCompilesTo('''
+			public class C  {
+			    def m() {
+			    	if (false) while(true) ''.toString
+				}
+			}
+		''', '''
+			@SuppressWarnings("all")
+			public class C {
+			  public void m() {
+			    if (false) {
+			      boolean _while = true;
+			      while (_while) {
+			        "".toString();
+			        _while = true;
+			      }
+			    }
+			  }
+			}
+		''')
+	}
+	
+	@Test def void testIfWithVoidButNonVoidExpectation() {
+		assertCompilesTo('''
+			public class C  {
+			    def m() {
+			    	val x = if (false) return;
+			    	x
+				}
+			}
+		''', '''
+			@SuppressWarnings("all")
+			public class C {
+			  public Object m() {
+			    Object _xblockexpression = null;
+			    {
+			      Object _xifexpression = null;
+			      if (false) {
+			        return;
+			      }
+			      final Object x = _xifexpression;
+			      _xblockexpression = (x);
+			    }
+			    return _xblockexpression;
+			  }
+			}
+		''')
+	}
+	
 	@Test def void testAbstractIterator_01() {
 		assertCompilesTo('''
 			import java.util.Iterator
@@ -1150,6 +1200,113 @@ class XtendCompilerTest extends AbstractXtendTestCase {
 			}
 		''')
 	}
+	
+	@Test def void testSwitchAsVoid() {
+		assertCompilesTo('''
+			public class C  {
+			    def m(Object a) {
+			    	switch a {
+			    		case 'b': while(true) ''.toString
+			    		case 'c': if (true) return
+			    		case 'd': for(i: 1..1) i.toString
+			    	}
+				}
+			}
+		''', '''
+			import com.google.common.base.Objects;
+			import org.eclipse.xtext.xbase.lib.IntegerRange;
+			
+			@SuppressWarnings("all")
+			public class C {
+			  public void m(final Object a) {
+			    boolean _matched = false;
+			    if (!_matched) {
+			      if (Objects.equal(a,"b")) {
+			        _matched=true;
+			        boolean _while = true;
+			        while (_while) {
+			          "".toString();
+			          _while = true;
+			        }
+			      }
+			    }
+			    if (!_matched) {
+			      if (Objects.equal(a,"c")) {
+			        _matched=true;
+			        if (true) {
+			          return;
+			        }
+			      }
+			    }
+			    if (!_matched) {
+			      if (Objects.equal(a,"d")) {
+			        _matched=true;
+			        IntegerRange _upTo = new IntegerRange(1, 1);
+			        for (final Integer i : _upTo) {
+			          i.toString();
+			        }
+			      }
+			    }
+			  }
+			}
+		''')
+	}
+	
+	@Test def void testSwitchWithNonVoidReturn() {
+		assertCompilesTo('''
+			public class C  {
+			    def m(Object a) {
+			    	switch a {
+			    		case 'b': while(true) ''.toString
+			    		case 'c': if (true) return 'a'
+			    		case 'd': for(i: 1..1) i.toString
+			    	}
+				}
+			}
+		''', '''
+			import com.google.common.base.Objects;
+			import org.eclipse.xtext.xbase.lib.IntegerRange;
+			
+			@SuppressWarnings("all")
+			public class C {
+			  public String m(final Object a) {
+			    String _switchResult = null;
+			    boolean _matched = false;
+			    if (!_matched) {
+			      if (Objects.equal(a,"b")) {
+			        _matched=true;
+			        boolean _while = true;
+			        while (_while) {
+			          "".toString();
+			          _while = true;
+			        }
+			      }
+			    }
+			    if (!_matched) {
+			      if (Objects.equal(a,"c")) {
+			        _matched=true;
+			        String _xifexpression = null;
+			        if (true) {
+			          return "a";
+			        }
+			        _switchResult = _xifexpression;
+			      }
+			    }
+			    if (!_matched) {
+			      if (Objects.equal(a,"d")) {
+			        _matched=true;
+			        IntegerRange _upTo = new IntegerRange(1, 1);
+			        for (final Integer i : _upTo) {
+			          i.toString();
+			        }
+			      }
+			    }
+			    return _switchResult;
+			  }
+			}
+		''')
+	}
+	
 	@Test
 	def testSwitchOverNull() {
 		assertCompilesTo('''
