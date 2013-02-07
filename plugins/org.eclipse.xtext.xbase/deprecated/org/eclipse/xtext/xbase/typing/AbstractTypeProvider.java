@@ -37,8 +37,6 @@ import org.eclipse.xtext.common.types.JvmTypeParameterDeclarator;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.JvmWildcardTypeReference;
 import org.eclipse.xtext.common.types.access.TypeResource;
-import org.eclipse.xtext.common.types.util.TypeArgumentContextProvider;
-import org.eclipse.xtext.common.types.util.TypeConformanceComputer;
 import org.eclipse.xtext.common.types.util.TypeReferences;
 import org.eclipse.xtext.util.IResourceScopeCache;
 import org.eclipse.xtext.util.OnChangeEvictingCache;
@@ -63,7 +61,6 @@ import com.google.inject.Singleton;
  * @author Sven Efftinge - Initial contribution and API
  */
 @Deprecated
-@SuppressWarnings("deprecation")
 public abstract class AbstractTypeProvider implements ITypeProvider {
 
 	private static final Logger logger = Logger.getLogger(AbstractTypeProvider.class);

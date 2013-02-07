@@ -21,7 +21,6 @@ import com.google.inject.Inject;
  * @author Sebastian Zarnekow - Initial contribution and API
  */
 @Deprecated
-@SuppressWarnings("deprecation")
 public class XbaseTypeArgumentContextProvider extends TypeArgumentContextProvider {
 
 	@Inject
