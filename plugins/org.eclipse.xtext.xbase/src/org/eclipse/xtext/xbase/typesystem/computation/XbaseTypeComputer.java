@@ -147,11 +147,22 @@ public class XbaseTypeComputer implements ITypeComputer {
 		conditionExpectation.computeTypes(object.getIf());
 		// TODO instanceof may specialize the types in the nested expression
 		// TODO then expression may influence the expected type of else and vice versa
-		state.computeTypes(getThen(object));
+		XExpression thenExpression = getThen(object);
+		ITypeComputationResult thenResult = state.computeTypes(thenExpression);
 		XExpression elseExpression = getElse(object);
 		if (elseExpression != null) {
 			state.computeTypes(elseExpression);
 		} else {
+			LightweightTypeReference expressionReturnType = thenResult.getReturnType();
+			if (expressionReturnType != null && expressionReturnType.isPrimitiveVoid()) {
+				for(ITypeExpectation expectation: state.getExpectations()) {
+					if (!expectation.isVoidTypeAllowed()) {
+						AnyTypeReference anyType = new AnyTypeReference(state.getReferenceOwner());
+						expectation.acceptActualType(anyType, ConformanceHint.UNCHECKED);
+					}
+				}
+				return;
+			}
 			AnyTypeReference anyType = new AnyTypeReference(state.getReferenceOwner());
 			state.acceptActualType(anyType);
 		}
@@ -182,6 +193,7 @@ public class XbaseTypeComputer implements ITypeComputer {
 		if (object.getLocalVarName() != null) {
 			allCasePartsState = allCasePartsState.assignType(object, computedType.getActualExpressionType());
 		}
+		boolean casesAreVoid = true;
 		// TODO case expressions may influence the expected type of other cases
 		for(XCasePart casePart: getCases(object)) {
 			// assign the type for the switch expression if possible and use that one for the remaining things
@@ -202,12 +214,27 @@ public class XbaseTypeComputer implements ITypeComputer {
 				ITypeComputationState caseState = casePartState.withNonVoidExpectation(); 
 				caseState.computeTypes(casePart.getCase());
 			}
-			casePartState.computeTypes(casePart.getThen());
+			ITypeComputationResult thenResult = casePartState.computeTypes(casePart.getThen());
+			if (casesAreVoid) {
+				LightweightTypeReference expressionReturnType = thenResult.getReturnType();
+				if (expressionReturnType == null || !expressionReturnType.isPrimitiveVoid()) {
+					casesAreVoid = false;
+				}
+			}
 		}
 		XExpression defaultCase = object.getDefault();
 		if (defaultCase != null) {
 			allCasePartsState.computeTypes(object.getDefault());
 		} else {
+			if (casesAreVoid) {
+				for(ITypeExpectation expectation: state.getExpectations()) {
+					if (!expectation.isVoidTypeAllowed()) {
+						AnyTypeReference anyType = new AnyTypeReference(state.getReferenceOwner());
+						expectation.acceptActualType(anyType, ConformanceHint.UNCHECKED);
+					}
+				}
+				return;
+			}
 			AnyTypeReference anyType = new AnyTypeReference(state.getReferenceOwner());
 			state.acceptActualType(anyType);
 		}
