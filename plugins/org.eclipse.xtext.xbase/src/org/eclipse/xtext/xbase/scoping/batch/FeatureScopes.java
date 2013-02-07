@@ -68,7 +68,7 @@ public class FeatureScopes implements IFeatureNames {
 		}
 		XAbstractFeatureCall call = (XAbstractFeatureCall) context;
 		final XExpression syntacticalReceiver = getSyntacticalReceiver(call);
-		if (syntacticalReceiver == null) { // featureCall instanceof XFeatureCall || ((featureCall instanceof XAssignment) && ((XAssignment) featureCall).getAssignable() == null);
+		if (syntacticalReceiver == null) {
 			IScope result = createSimpleFeatureCallScope(call, reference, session, resolvedTypes);
 			return result;
 		}

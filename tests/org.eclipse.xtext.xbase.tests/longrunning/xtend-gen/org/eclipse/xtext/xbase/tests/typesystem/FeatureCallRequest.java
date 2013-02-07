@@ -15,18 +15,18 @@ import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmTypeParameterDeclarator;
 import org.eclipse.xtext.common.types.JvmTypeReference;
-import org.eclipse.xtext.common.types.util.TypeArgumentContextProvider.AbstractRequest;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.jvmmodel.ILogicalContainerProvider;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.util.ToStringHelper;
+import org.eclipse.xtext.xbase.typing.XbaseTypeArgumentContextProvider.AbstractFeatureCallRequest;
 
 /**
  * @author Sebastian Zarnekow
  */
 @Data
 @SuppressWarnings("all")
-public class FeatureCallRequest extends AbstractRequest {
+public class FeatureCallRequest extends AbstractFeatureCallRequest {
   private final XAbstractFeatureCall _call;
   
   public XAbstractFeatureCall getCall() {
@@ -124,6 +124,11 @@ public class FeatureCallRequest extends AbstractRequest {
       _switchResult = null;
     }
     return _switchResult;
+  }
+  
+  public XAbstractFeatureCall getFeatureCall() {
+    XAbstractFeatureCall _call = this.getCall();
+    return _call;
   }
   
   public FeatureCallRequest(final XAbstractFeatureCall call, final JvmExecutable feature, final JvmTypeReference receiverType, final JvmTypeReference expectedType, final List<JvmTypeReference> argumentTypes, final ILogicalContainerProvider contextProvider) {

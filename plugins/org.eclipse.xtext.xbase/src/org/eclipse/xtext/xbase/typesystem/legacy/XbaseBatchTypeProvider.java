@@ -7,18 +7,14 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.typesystem.legacy;
 
-import java.util.List;
-
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.xtext.EcoreUtil2;
-import org.eclipse.xtext.common.types.JvmConstructor;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmTypeReference;
-import org.eclipse.xtext.xbase.XAbstractFeatureCall;
+import org.eclipse.xtext.common.types.util.TypeArgumentContextProvider;
 import org.eclipse.xtext.xbase.XClosure;
-import org.eclipse.xtext.xbase.XConstructorCall;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.jvmmodel.ILogicalContainerProvider;
 import org.eclipse.xtext.xbase.typesystem.IBatchTypeResolver;
@@ -28,7 +24,6 @@ import org.eclipse.xtext.xbase.typesystem.util.CommonTypeComputationServices;
 import org.eclipse.xtext.xbase.typing.XbaseTypeProvider;
 
 import com.google.inject.Inject;
-import com.google.inject.Provider;
 import com.google.inject.Singleton;
 
 /**
@@ -42,6 +37,7 @@ public class XbaseBatchTypeProvider extends XbaseTypeProvider {
 	@Inject private IBatchTypeResolver typeResolver;
 	@Inject private ILogicalContainerProvider containerProvider;
 	@Inject private CommonTypeComputationServices services;
+	@Inject private TypeArgumentContextProvider legacyContextProvider;
 	
 	@NonNull
 	protected IResolvedTypes getResolvedTypes(EObject object) {
@@ -117,15 +113,8 @@ public class XbaseBatchTypeProvider extends XbaseTypeProvider {
 	}
 
 	@Override
-	public org.eclipse.xtext.common.types.util.ITypeArgumentContext getTypeArgumentContext(XAbstractFeatureCall featureCall,
-			List<XExpression> actualArguments, Provider<JvmTypeReference> receiverTypeProvider,
-			JvmIdentifiableElement feature) {
-		return new LegacyTypeArgumentContext(featureCall, actualArguments, receiverTypeProvider != null ? receiverTypeProvider.get() : null , feature, services);
-	}
-
-	@Override
-	public org.eclipse.xtext.common.types.util.ITypeArgumentContext getTypeArgumentContext(XConstructorCall constructorCall, JvmConstructor constructor) {
-		return new LegacyTypeArgumentContext(null, null, null , constructor, services);
+	protected TypeArgumentContextProvider getTypeArgumentContextProvider() {
+		return legacyContextProvider;
 	}
 
 }

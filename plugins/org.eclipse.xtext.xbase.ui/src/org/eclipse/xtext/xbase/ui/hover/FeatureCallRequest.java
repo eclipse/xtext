@@ -23,6 +23,7 @@ import org.eclipse.xtext.xbase.XMemberFeatureCall;
 import org.eclipse.xtext.xbase.impl.FeatureCallToJavaMapping;
 import org.eclipse.xtext.xbase.jvmmodel.ILogicalContainerProvider;
 import org.eclipse.xtext.xbase.typing.ITypeProvider;
+import org.eclipse.xtext.xbase.typing.XbaseTypeArgumentContextProvider;
 
 import com.google.common.collect.Lists;
 import com.google.inject.ImplementedBy;
@@ -32,7 +33,8 @@ import com.google.inject.Inject;
  * @author Holger Schill - Initial contribution and API
  * @since 2.3
  */
-public class FeatureCallRequest extends AbstractRequest {
+@SuppressWarnings("deprecation")
+public class FeatureCallRequest extends XbaseTypeArgumentContextProvider.AbstractFeatureCallRequest {
 	
 	@Inject
 	private ILogicalContainerProvider contextProvider;
@@ -103,6 +105,11 @@ public class FeatureCallRequest extends AbstractRequest {
 			argumentTypes.add(typeProvider.getType(argument));
 		}
 		return argumentTypes;
+	}
+	
+	@Override
+	public XAbstractFeatureCall getFeatureCall() {
+		return featureCall;
 	}
 	
 	@ImplementedBy(FeatureCallRequestProvider.class)

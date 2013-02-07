@@ -8,14 +8,8 @@
 package org.eclipse.xtext.xbase.tests.typesystem;
 
 import com.google.inject.Inject;
-import java.util.List;
-import org.eclipse.xtend2.lib.StringConcatenation;
-import org.eclipse.xtext.common.types.JvmIdentifiableElement;
-import org.eclipse.xtext.common.types.JvmTypeReference;
-import org.eclipse.xtext.xbase.lib.Conversions;
-import org.eclipse.xtext.xbase.lib.IterableExtensions;
-import org.eclipse.xtext.xbase.lib.Procedures.Procedure2;
-import org.eclipse.xtext.xbase.tests.typesystem.AbstractIdentifiableTypeTest;
+import org.eclipse.xtext.xbase.tests.typesystem.AbstractOldAPIIdentifiableTypeTest;
+import org.eclipse.xtext.xbase.typing.ITypeProvider;
 import org.eclipse.xtext.xbase.typing.XbaseTypeProvider;
 import org.junit.Assert;
 import org.junit.Ignore;
@@ -25,25 +19,12 @@ import org.junit.Test;
  * @author Sebastian Zarnekow
  */
 @SuppressWarnings("all")
-public class OldAPIIdentifiableTypeTest extends AbstractIdentifiableTypeTest {
+public class OldAPIIdentifiableTypeTest extends AbstractOldAPIIdentifiableTypeTest {
   @Inject
   private XbaseTypeProvider typeProvider;
   
-  public void resolvesIdentifiablesTo(final String expression, final String... types) {
-    final String expressionWithQualifiedNames = expression.replace("$$", "org::eclipse::xtext::xbase::lib::");
-    final List<JvmIdentifiableElement> identifiables = this.findIdentifiables(expressionWithQualifiedNames);
-    final Procedure2<JvmIdentifiableElement,Integer> _function = new Procedure2<JvmIdentifiableElement,Integer>() {
-        public void apply(final JvmIdentifiableElement identifiable, final Integer index) {
-          final JvmTypeReference type = OldAPIIdentifiableTypeTest.this.typeProvider.getTypeForIdentifiable(identifiable);
-          StringConcatenation _builder = new StringConcatenation();
-          _builder.append("failed for identifiable at ");
-          _builder.append(index, "");
-          String _get = ((List<String>)Conversions.doWrapArray(types)).get((index).intValue());
-          String _simpleName = type.getSimpleName();
-          Assert.assertEquals(_builder.toString(), _get, _simpleName);
-        }
-      };
-    IterableExtensions.<JvmIdentifiableElement>forEach(identifiables, _function);
+  protected ITypeProvider getTypeProvider() {
+    return this.typeProvider;
   }
   
   @Ignore(value = "fails in old implementation")

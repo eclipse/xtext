@@ -19,7 +19,6 @@ import org.junit.runners.Suite.SuiteClasses;
 @SuiteClasses({
 	BatchTypeResolverTest.class,
 	BatchReturnTypeResolverTest.class,
-	PermutingBatchReturnTypeResolverTest.class,
 	BatchFeatureCallTypeTest.class,
 	BatchIdentifiableTypeTest.class,
 	BatchConstructorCallTypeTest.class,

@@ -14,7 +14,7 @@ import org.junit.Test;
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-@Ignore
+@Ignore("TODO fix me")
 public class Bug348446Test extends AbstractXtendContentAssistBugTest {
 
 	@Test public void testVar() throws Exception {

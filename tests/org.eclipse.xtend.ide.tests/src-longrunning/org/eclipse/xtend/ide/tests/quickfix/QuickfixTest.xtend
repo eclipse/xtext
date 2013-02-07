@@ -10,7 +10,6 @@ import org.junit.Test
 import static org.eclipse.xtend.core.validation.IssueCodes.*
 import static org.eclipse.xtext.xbase.validation.IssueCodes.*
 
-@Ignore
 class QuickfixTest extends AbstractXtendUITestCase {
 	
 	@Inject extension QuickfixTestBuilder builder
@@ -575,6 +574,7 @@ class QuickfixTest extends AbstractXtendUITestCase {
 		''')
 	}
 	
+	@Ignore("TODO")
 	@Test 
 	def void missingOperatorSameClass() {
 		create('Foo.xtend', '''
@@ -606,6 +606,7 @@ class QuickfixTest extends AbstractXtendUITestCase {
 		''')
 	}
 	
+	@Ignore("TODO")
 	@Test 
 	def void missingOperatorOtherClass() {
 		create('Foo.xtend', '''
@@ -760,7 +761,8 @@ class QuickfixTest extends AbstractXtendUITestCase {
 	
 	// TODO: reenable when exception validation can be switched on
 	// https://bugs.eclipse.org/bugs/show_bug.cgi?id=398273))
-	@Ignore@Test 
+	@Ignore
+	@Test 
 	def void unhandledCheckedException() {
 		create('Foo.xtend', '''
 			class Foo {
@@ -984,6 +986,7 @@ class QuickfixTest extends AbstractXtendUITestCase {
 		''')
 	}
 	
+	@Ignore("TODO")
 	@Test 
 	def void useObjectForUnknownParams() {
 		create('Foo.xtend', '''

@@ -11,10 +11,7 @@ import com.google.inject.Inject
 import java.util.List
 import org.eclipse.emf.common.util.URI
 import org.eclipse.emf.ecore.InternalEObject
-import org.eclipse.emf.ecore.resource.Resource
 import org.eclipse.xtext.common.types.JvmIdentifiableElement
-import org.eclipse.xtext.linking.impl.XtextLinkingDiagnostic
-import org.eclipse.xtext.resource.XtextSyntaxDiagnostic
 import org.eclipse.xtext.xbase.XAbstractFeatureCall
 import org.eclipse.xtext.xbase.XCasePart
 import org.eclipse.xtext.xbase.XConstructorCall
@@ -39,7 +36,7 @@ import org.junit.rules.ErrorCollector
 abstract class AbstractBatchTypeResolverTest extends AbstractTypeResolverTest<LightweightTypeReference> {
 	
 	override LightweightTypeReference resolvesTo(String expression, String type) {
-		val xExpression = expression(expression.replace('$$', 'org::eclipse::xtext::xbase::lib::'), false /* true */);
+		val xExpression = expression(expression, false /* true */);
 		assertTrue(xExpression.eResource.errors.toString, xExpression.eResource.errors.isEmpty)
 		assertTrue(xExpression.eResource.warnings.toString, xExpression.eResource.warnings.isEmpty)
 		val resolvedTypes = getTypeResolver.resolveTypes(xExpression)
@@ -92,10 +89,6 @@ abstract class AbstractBatchTypeResolverTest extends AbstractTypeResolverTest<Li
 		return resolvedType
 	}
 	
-	def linkingAndSyntaxErrors(Resource resource) {
-		resource.errors.filter[ it instanceof XtextSyntaxDiagnostic || it instanceof XtextLinkingDiagnostic]
-	}
-	
 	override void isFunctionAndEquivalentTo(LightweightTypeReference reference, String type) {
 		assertTrue(reference instanceof FunctionTypeReference)
 		assertEquals(type, (reference as FunctionTypeReference).equivalent)
@@ -137,7 +130,8 @@ abstract class AbstractBatchTypeResolverTest extends AbstractTypeResolverTest<Li
 		assertEquals(IResolvedTypes::NULL, typeResolution)
 	}
 	
-	@Ignore("TODO discuss the preference - list or array?") @Test override testIfExpression_10() throws Exception {
+	@Ignore("TODO discuss the preference - list or array?") 
+	@Test override testIfExpression_10() throws Exception {
 		super.testIfExpression_10()
 	}
 	
@@ -245,11 +239,13 @@ class BatchClosureTypeTest extends AbstractClosureTypeTest {
 		return '''«type.type.simpleName»<«type.typeArguments.join(', ') [simpleName]»>'''
 	}
 	
-	@Ignore("TODO the assertion should hold") @Test override void testClosure_51() throws Exception {
+	@Ignore("TODO the assertion should hold") 
+	@Test override void testClosure_51() throws Exception {
 		super.testClosure_51
 	}
 	
-	@Ignore("TODO the assertion should hold") @Test override void testClosure_52() throws Exception {
+	@Ignore("TODO the assertion should hold") 
+	@Test override void testClosure_52() throws Exception {
 		super.testClosure_52
 	}
 }

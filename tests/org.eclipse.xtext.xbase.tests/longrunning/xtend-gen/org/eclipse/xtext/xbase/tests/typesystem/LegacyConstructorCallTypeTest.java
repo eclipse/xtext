@@ -8,18 +8,17 @@
 package org.eclipse.xtext.xbase.tests.typesystem;
 
 import com.google.inject.Inject;
-import org.eclipse.xtext.xbase.tests.typesystem.AbstractOldAPITypeResolverTest;
+import org.eclipse.xtext.xbase.tests.typesystem.AbstractOldAPIConstructorCallTypeTest;
 import org.eclipse.xtext.xbase.typesystem.legacy.XbaseBatchTypeProvider;
 import org.eclipse.xtext.xbase.typing.ITypeProvider;
 import org.junit.Assert;
-import org.junit.Ignore;
 import org.junit.Test;
 
 /**
  * @author Sebastian Zarnekow
  */
 @SuppressWarnings("all")
-public class LegacyTypeResolverTest extends AbstractOldAPITypeResolverTest {
+public class LegacyConstructorCallTypeTest extends AbstractOldAPIConstructorCallTypeTest {
   @Inject
   private ITypeProvider typeProvider;
   
@@ -30,17 +29,5 @@ public class LegacyTypeResolverTest extends AbstractOldAPITypeResolverTest {
   @Test
   public void testSetup() {
     Assert.assertTrue((this.typeProvider instanceof XbaseBatchTypeProvider));
-  }
-  
-  @Ignore(value = "TODO discuss the preference - list or array?")
-  @Test
-  public void testIfExpression_10() throws Exception {
-    super.testIfExpression_10();
-  }
-  
-  @Ignore(value = "TODO this should work")
-  @Test
-  public void testBug_391758() throws Exception {
-    super.testBug_391758();
   }
 }

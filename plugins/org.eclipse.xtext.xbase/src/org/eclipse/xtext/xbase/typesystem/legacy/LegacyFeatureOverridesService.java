@@ -16,6 +16,7 @@ import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmFeature;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
+import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.common.types.JvmMember;
 import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmParameterizedTypeReference;
@@ -45,6 +46,7 @@ import org.eclipse.xtext.xbase.typesystem.util.TypeParameterByConstraintSubstitu
 import org.eclipse.xtext.xbase.typesystem.util.TypeParameterSubstitutor;
 
 import com.google.common.collect.Iterables;
+import com.google.common.collect.Lists;
 import com.google.inject.Inject;
 
 /**
@@ -62,11 +64,28 @@ public class LegacyFeatureOverridesService extends FeatureOverridesService {
 	@Inject
 	private TypeReferences typeReferences;
 	
+	/**
+	 * Returns all operations, the declared constructors and the inherited constructors
+	 * of the given type.
+	 */
 	@Override
 	public Iterable<JvmFeature> getAllJvmFeatures(JvmTypeReference type) {
 		ITypeReferenceOwner owner = createTypeReferenceOwner(type.getType());
 		LightweightTypeReference lightweightReference = new OwnedConverter(owner).toLightweightReference(type);
-		return Iterables.filter(overrideHelper.getAllOperations(lightweightReference, IVisibilityHelper.ALL), JvmFeature.class);
+		List<JvmFeature> result = Lists.<JvmFeature>newArrayList(overrideHelper.getAllOperations(lightweightReference, IVisibilityHelper.ALL));
+		// add constructors from super types and own constructors
+		addDeclaredConstructors(lightweightReference, result);
+		for(LightweightTypeReference superType: lightweightReference.getSuperTypes()) {
+			addDeclaredConstructors(superType, result);
+		}
+		return result;
+	}
+
+	protected void addDeclaredConstructors(LightweightTypeReference lightweightReference, List<JvmFeature> result) {
+		JvmType rawType = lightweightReference.getRawTypeReference().getType();
+		if (rawType instanceof JvmGenericType) {
+			Iterables.addAll(result, ((JvmGenericType) rawType).getDeclaredConstructors());
+		}
 	}
 
 	public ITypeReferenceOwner createTypeReferenceOwner(EObject context) {

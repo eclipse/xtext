@@ -15,6 +15,9 @@ import org.junit.Assert;
 import org.junit.Ignore;
 import org.junit.Test;
 
+/**
+ * @author Sebastian Zarnekow
+ */
 @SuppressWarnings("all")
 public class OldAPITypeResolverTest extends AbstractOldAPITypeResolverTest {
   @Inject

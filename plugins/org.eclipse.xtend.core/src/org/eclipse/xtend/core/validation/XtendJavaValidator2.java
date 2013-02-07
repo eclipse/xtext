@@ -1215,24 +1215,29 @@ public class XtendJavaValidator2 extends XbaseWithAnnotationsJavaValidator2 {
 	
 	@Check
 	public void checkDeclaredExceptions(XtendFunction function){
-		JvmOperation jvmType = associations.getDirectlyInferredOperation(function);
-		if (jvmType != null) {
-			checkExceptions(function,jvmType.getExceptions(), XtendPackage.Literals.XTEND_FUNCTION__EXCEPTIONS);
+		JvmOperation jvmOperation = associations.getDirectlyInferredOperation(function);
+		if (jvmOperation != null) {
+			checkExceptions(function,jvmOperation.getExceptions(), XtendPackage.Literals.XTEND_FUNCTION__EXCEPTIONS);
 		}
 	}
 	
 	private void checkExceptions(EObject context, List<JvmTypeReference> exceptions, EReference reference) {
 		Set<String> declaredExceptionNames = Sets.newHashSet();
 		JvmTypeReference throwableType = getServices().getTypeReferences().getTypeForName(Throwable.class, context);
+		if (throwableType == null) {
+			return;
+		}
 		ITypeReferenceOwner owner = new StandardTypeReferenceOwner(getServices(), context);
 		LightweightTypeReference throwableReference = new OwnedConverter(owner).toLightweightReference(throwableType);
 		for(JvmTypeReference exception : exceptions){
 			// throwables may not carry generics thus the raw comparison is sufficient
-			if(!throwableReference.isAssignableFrom(exception.getType()))
-				error("No exception of type " + exception.getSimpleName() + " can be thrown; an exception type must be a subclass of Throwable"
-						, reference, exceptions.indexOf(exception), EXCEPTION_NOT_THROWABLE);
-			if(!declaredExceptionNames.add(exception.getQualifiedName()))
-				error("Exception " + exception.getSimpleName() + " is declared twice", reference, exceptions.indexOf(exception), EXCEPTION_DECLARED_TWICE);
+			if (exception.getType() != null && !exception.getType().eIsProxy()) {
+				if(!throwableReference.isAssignableFrom(exception.getType()))
+					error("No exception of type " + exception.getSimpleName() + " can be thrown; an exception type must be a subclass of Throwable"
+							, reference, exceptions.indexOf(exception), EXCEPTION_NOT_THROWABLE);
+				if(!declaredExceptionNames.add(exception.getQualifiedName()))
+					error("Exception " + exception.getSimpleName() + " is declared twice", reference, exceptions.indexOf(exception), EXCEPTION_DECLARED_TWICE);
+			}
 		}
 	}
 	

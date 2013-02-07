@@ -9,9 +9,16 @@ package org.eclipse.xtext.xbase.tests.typesystem;
 
 import java.util.HashSet;
 import java.util.Set;
+import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.resource.Resource.Diagnostic;
+import org.eclipse.xtext.linking.impl.XtextLinkingDiagnostic;
+import org.eclipse.xtext.resource.XtextSyntaxDiagnostic;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
+import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IntegerRange;
+import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.tests.AbstractXbaseTestCase;
 import org.junit.AfterClass;
 import org.junit.Assert;
@@ -44,17 +51,35 @@ public abstract class AbstractTypeResolverTest<Reference extends Object> extends
   protected XExpression expression(final CharSequence expression, final boolean resolve) throws Exception {
     XExpression _xblockexpression = null;
     {
-      final String string = expression.toString();
+      String _string = expression.toString();
+      final String string = _string.replace("$$", "org::eclipse::xtext::xbase::lib::");
       boolean _add = AbstractTypeResolverTest.seenExpressions.add(string);
       boolean _not = (!_add);
       if (_not) {
         this.handleDuplicateExpression(expression);
         return null;
       }
-      XExpression _expression = super.expression(expression, resolve);
+      XExpression _expression = super.expression(string, resolve);
       _xblockexpression = (_expression);
     }
     return _xblockexpression;
+  }
+  
+  public Iterable<Diagnostic> getLinkingAndSyntaxErrors(final Resource resource) {
+    EList<Diagnostic> _errors = resource.getErrors();
+    final Function1<Diagnostic,Boolean> _function = new Function1<Diagnostic,Boolean>() {
+        public Boolean apply(final Diagnostic it) {
+          boolean _or = false;
+          if ((it instanceof XtextSyntaxDiagnostic)) {
+            _or = true;
+          } else {
+            _or = ((it instanceof XtextSyntaxDiagnostic) || (it instanceof XtextLinkingDiagnostic));
+          }
+          return Boolean.valueOf(_or);
+        }
+      };
+    Iterable<Diagnostic> _filter = IterableExtensions.<Diagnostic>filter(_errors, _function);
+    return _filter;
   }
   
   protected void handleDuplicateExpression(final CharSequence expression) {
@@ -1119,6 +1144,8 @@ public abstract class AbstractTypeResolverTest<Reference extends Object> extends
   @Test
   public void testClosure_29() throws Exception {
     this.resolvesTo("[].apply()", "Object");
+    this.resolvesTo("[].apply(\'\')", "Object");
+    this.resolvesTo("[].apply(\'\', \'\')", "Object");
   }
   
   @Test

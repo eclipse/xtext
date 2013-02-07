@@ -23,7 +23,6 @@ import com.google.inject.Inject;
 /**
  * @author Jan Koehnlein - Initial contribution and API
  */
-@Ignore
 public class QuickOutlineTests extends AbstractOutlineTests {
 
 	@Inject
@@ -143,6 +142,7 @@ public class QuickOutlineTests extends AbstractOutlineTests {
 	}
 	
 	
+	@Ignore("TODO fix me")
 	@Test public void testMixedDispatch_0() throws Exception {
 		setShowInherited(false);
 		workbenchHelper.createFile("test/Super.java", 

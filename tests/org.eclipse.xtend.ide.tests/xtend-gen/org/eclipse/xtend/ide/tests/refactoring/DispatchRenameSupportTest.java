@@ -31,7 +31,7 @@ import org.junit.Assert;
 import org.junit.Ignore;
 import org.junit.Test;
 
-@Ignore
+@Ignore(value = "TODO fix those")
 @SuppressWarnings("all")
 public class DispatchRenameSupportTest extends AbstractXtendUITestCase {
   @Inject

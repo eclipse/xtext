@@ -17,7 +17,6 @@ import org.junit.runners.Suite.SuiteClasses;
 @RunWith(Suite.class)
 @SuiteClasses({
 	OldAPITypeResolverTest.class,
-	LegacyTypeResolverTest.class,
 	OldAPIFeatureCallTypeTest.class,
 	OldAPIClosureTypeTest.class,
 	OldAPIIdentifiableTypeTest.class,

@@ -8,14 +8,8 @@
 package org.eclipse.xtext.xbase.tests.typesystem;
 
 import com.google.inject.Inject;
-import java.util.List;
-import org.eclipse.xtend2.lib.StringConcatenation;
-import org.eclipse.xtext.common.types.JvmTypeReference;
-import org.eclipse.xtext.xbase.XConstructorCall;
-import org.eclipse.xtext.xbase.lib.Conversions;
-import org.eclipse.xtext.xbase.lib.IterableExtensions;
-import org.eclipse.xtext.xbase.lib.Procedures.Procedure2;
-import org.eclipse.xtext.xbase.tests.typesystem.AbstractConstructorCallTypeTest;
+import org.eclipse.xtext.xbase.tests.typesystem.AbstractOldAPIConstructorCallTypeTest;
+import org.eclipse.xtext.xbase.typing.ITypeProvider;
 import org.eclipse.xtext.xbase.typing.XbaseTypeProvider;
 import org.junit.Assert;
 import org.junit.Ignore;
@@ -25,25 +19,12 @@ import org.junit.Test;
  * @author Sebastian Zarnekow
  */
 @SuppressWarnings("all")
-public class OldAPIConstructorCallTypeTest extends AbstractConstructorCallTypeTest {
+public class OldAPIConstructorCallTypeTest extends AbstractOldAPIConstructorCallTypeTest {
   @Inject
   private XbaseTypeProvider typeProvider;
   
-  public void resolvesConstructorCallsTo(final String expression, final String... types) {
-    final String expressionWithQualifiedNames = expression.replace("$$", "org::eclipse::xtext::xbase::lib::");
-    final List<XConstructorCall> featureCalls = this.findConstructorCalls(expressionWithQualifiedNames);
-    final Procedure2<XConstructorCall,Integer> _function = new Procedure2<XConstructorCall,Integer>() {
-        public void apply(final XConstructorCall featureCall, final Integer index) {
-          final JvmTypeReference type = OldAPIConstructorCallTypeTest.this.typeProvider.getType(featureCall);
-          StringConcatenation _builder = new StringConcatenation();
-          _builder.append("failed for constructor call at ");
-          _builder.append(index, "");
-          String _get = ((List<String>)Conversions.doWrapArray(types)).get((index).intValue());
-          String _simpleName = type.getSimpleName();
-          Assert.assertEquals(_builder.toString(), _get, _simpleName);
-        }
-      };
-    IterableExtensions.<XConstructorCall>forEach(featureCalls, _function);
+  protected ITypeProvider getTypeProvider() {
+    return this.typeProvider;
   }
   
   @Ignore(value = "fails in old implementation")

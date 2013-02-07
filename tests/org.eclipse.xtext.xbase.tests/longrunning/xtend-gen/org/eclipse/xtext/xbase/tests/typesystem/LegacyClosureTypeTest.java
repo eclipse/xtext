@@ -8,7 +8,7 @@
 package org.eclipse.xtext.xbase.tests.typesystem;
 
 import com.google.inject.Inject;
-import org.eclipse.xtext.xbase.tests.typesystem.AbstractOldAPITypeResolverTest;
+import org.eclipse.xtext.xbase.tests.typesystem.AbstractOldAPIClosureTypeTest;
 import org.eclipse.xtext.xbase.typesystem.legacy.XbaseBatchTypeProvider;
 import org.eclipse.xtext.xbase.typing.ITypeProvider;
 import org.junit.Assert;
@@ -19,7 +19,7 @@ import org.junit.Test;
  * @author Sebastian Zarnekow
  */
 @SuppressWarnings("all")
-public class LegacyTypeResolverTest extends AbstractOldAPITypeResolverTest {
+public class LegacyClosureTypeTest extends AbstractOldAPIClosureTypeTest {
   @Inject
   private ITypeProvider typeProvider;
   
@@ -32,15 +32,15 @@ public class LegacyTypeResolverTest extends AbstractOldAPITypeResolverTest {
     Assert.assertTrue((this.typeProvider instanceof XbaseBatchTypeProvider));
   }
   
-  @Ignore(value = "TODO discuss the preference - list or array?")
+  @Ignore(value = "TODO the assertion should hold")
   @Test
-  public void testIfExpression_10() throws Exception {
-    super.testIfExpression_10();
+  public void testClosure_51() throws Exception {
+    super.testClosure_51();
   }
   
-  @Ignore(value = "TODO this should work")
+  @Ignore(value = "TODO the assertion should hold")
   @Test
-  public void testBug_391758() throws Exception {
-    super.testBug_391758();
+  public void testClosure_52() throws Exception {
+    super.testClosure_52();
   }
 }

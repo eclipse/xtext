@@ -18,6 +18,7 @@ import org.eclipse.xtext.xbase.XCasePart;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XSwitchExpression;
 import org.eclipse.xtext.xbase.lib.Exceptions;
+import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.IteratorExtensions;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.tests.typesystem.AbstractTypeResolverTest;
@@ -83,11 +84,11 @@ public abstract class AbstractOldAPITypeResolverTest extends AbstractTypeResolve
         }
       }
       Resource _eResource_2 = xExpression.eResource();
-      EList<Diagnostic> _errors_1 = _eResource_2.getErrors();
-      String _string = _errors_1.toString();
+      Iterable<Diagnostic> _linkingAndSyntaxErrors = this.getLinkingAndSyntaxErrors(_eResource_2);
+      String _string = _linkingAndSyntaxErrors.toString();
       Resource _eResource_3 = xExpression.eResource();
-      EList<Diagnostic> _errors_2 = _eResource_3.getErrors();
-      boolean _isEmpty_2 = _errors_2.isEmpty();
+      Iterable<Diagnostic> _linkingAndSyntaxErrors_1 = this.getLinkingAndSyntaxErrors(_eResource_3);
+      boolean _isEmpty_2 = IterableExtensions.isEmpty(_linkingAndSyntaxErrors_1);
       Assert.assertTrue(_string, _isEmpty_2);
       Resource _eResource_4 = xExpression.eResource();
       EList<Diagnostic> _warnings_1 = _eResource_4.getWarnings();
