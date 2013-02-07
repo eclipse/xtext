@@ -14,10 +14,8 @@ import org.eclipse.xtext.xbase.XBlockExpression
 import org.eclipse.xtext.xbase.ui.hover.HoverGenericsResolver
 import org.eclipse.xtext.xbase.ui.hover.XbaseDeclarativeHoverSignatureProvider
 import org.junit.After
-import org.junit.Ignore
 import org.junit.Test
 
-@Ignore
 class XtendHoverGenericsResolverTest extends AbstractXtendUITestCase {
 	@Inject
 	private ParseHelper<XtendFile> parseHelper;

@@ -93,12 +93,7 @@ public class ImplementMemberFromSuperAssist {
 		if (inferredType == null)
 			return emptySet();
 		ITypeArgumentContext typeArgumentContext = typeArgumentContextProvider
-				.getTypeArgumentContext(new TypeArgumentContextProvider.AbstractRequest() {
-					@Override
-					public JvmTypeReference getReceiverType() {
-						return typeReferences.createTypeRef(inferredType);
-					}
-				});
+				.getTypeArgumentContext(new TypeArgumentContextProvider.ReceiverRequest(typeReferences.createTypeRef(inferredType)));
 		Set<TypeErasedSignature> erasureKeys = newHashSet();
 		for (JvmOperation op : inferredType.getDeclaredOperations()) {
 			erasureKeys.add(signatureProvider.get(op));

@@ -227,12 +227,14 @@ class XtendUIValidationTests extends AbstractXtendUITestCase {
 		helper.assertWarning(typeParameter, JVM_TYPE_REFERENCE, DISCOURAGED_REFERENCE)
 	}
 	
-	@Test@Ignore("Enable on demand")
+	@Test
+	@Ignore("Enable on demand")
 	def void testPerformance_1() {
 		testPerformance
 	}
 	
-	@Test@Ignore("Enable on demand")
+	@Test
+	@Ignore("Enable on demand")
 	def void testPerformance_2() {
 		testPerformance
 	}
