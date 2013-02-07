@@ -391,7 +391,7 @@ public abstract class AbstractPendingLinkingCandidate<Expression extends XExpres
 				return 0;
 			}
 		}
-		return fixedArityParamCount - arguments.size();
+		return Math.abs(fixedArityParamCount - arguments.size());
 	}
 	
 	@Override
