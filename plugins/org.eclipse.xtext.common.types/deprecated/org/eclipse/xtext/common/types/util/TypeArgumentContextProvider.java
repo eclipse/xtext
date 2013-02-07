@@ -325,7 +325,7 @@ public class TypeArgumentContextProvider {
 						if (!lowers.isEmpty() && upperIndex < lowerIndex) {
 							boolean conformant = true;
 							for(ResolveInfo lower: lowers) {
-								if (!conformanceComputer.isConformant(info.reference, lower.reference)) {
+								if (!getConformanceComputer().isConformant(info.reference, lower.reference)) {
 									conformant = false;
 									break;
 								}
@@ -649,23 +649,6 @@ public class TypeArgumentContextProvider {
 	}
 	
 	protected JvmTypeReference getWithObjectUpperBoundIfNecessary(JvmTypeReference reference) {
-//		if (reference instanceof JvmWildcardTypeReference && reference.eResource() != null) {
-//			List<JvmLowerBound> lowerBounds = Lists.newArrayList();
-//			for(JvmTypeConstraint constraint: ((JvmWildcardTypeReference) reference).getConstraints()) {
-//				if (constraint instanceof JvmUpperBound)
-//					return reference;
-//				else {
-//					JvmLowerBound lowerBound = typesFactory.createJvmLowerBound();
-//					JvmDelegateTypeReference delegate = typesFactory.createJvmDelegateTypeReference();
-//					delegate.setDelegate(constraint.getTypeReference());
-//					lowerBound.setTypeReference(delegate);
-//					lowerBounds.add(lowerBound);
-//				}
-//			}
-//			JvmWildcardTypeReference result = typeReferences.wildCardExtends(typeReferences.getTypeForName(Object.class, reference));
-//			result.getConstraints().addAll(lowerBounds);
-//			return result;
-//		}
 		return reference;
 	}
 	
@@ -762,7 +745,7 @@ public class TypeArgumentContextProvider {
 						}
 						actualVarArgTypes = wrappedVarArgTypes;
 					}
-					JvmTypeReference commonVarArgType = conformanceComputer.getCommonSuperType(actualVarArgTypes);
+					JvmTypeReference commonVarArgType = getConformanceComputer().getCommonSuperType(actualVarArgTypes);
 					resolveAgainstActualType(varArgComponentType, commonVarArgType, result, true, paramCount);
 				}
 			}
@@ -771,6 +754,10 @@ public class TypeArgumentContextProvider {
 		if (normalized.isEmpty())
 			return null;
 		return new TypeArgumentContext(normalized, typeReferences, typesFactory, rawTypeHelper, primitives);
+	}
+	
+	protected TypeConformanceComputer getConformanceComputer() {
+		return conformanceComputer;
 	}
 
 	protected void resolveAgainstActualType(JvmTypeReference declaredType, JvmTypeReference actualType,

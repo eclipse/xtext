@@ -28,6 +28,7 @@ import org.eclipse.xtext.xbase.typesystem.legacy.LegacyFeatureOverridesService;
 import org.eclipse.xtext.xbase.typesystem.legacy.LegacyTypeArgumentContextProvider;
 import org.eclipse.xtext.xbase.typesystem.legacy.LegacyVisibilityService;
 import org.eclipse.xtext.xbase.typesystem.legacy.XbaseBatchTypeProvider;
+import org.eclipse.xtext.xbase.typing.ITypeProvider;
 import org.eclipse.xtext.xbase.typing.XbaseTypeProvider;
 import org.eclipse.xtext.xbase.validation.XbaseJavaValidator;
 import org.eclipse.xtext.xbase.validation.XbaseJavaValidator2;
@@ -57,7 +58,8 @@ public class XbaseRuntimeModule extends AbstractXbaseRuntimeModule {
 		return BatchLinkableResource.class;
 	}
 
-	public Class<? extends XbaseTypeProvider> bindXbaseTypeProvider() {
+	@Override
+	public Class<? extends ITypeProvider> bindITypeProvider() {
 		return XbaseBatchTypeProvider.class;
 	}
 	

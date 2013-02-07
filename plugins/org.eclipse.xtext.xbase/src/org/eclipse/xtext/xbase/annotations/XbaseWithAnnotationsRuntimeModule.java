@@ -45,8 +45,7 @@ import com.google.inject.Binder;
 @SuppressWarnings("deprecation")
 public class XbaseWithAnnotationsRuntimeModule extends org.eclipse.xtext.xbase.annotations.AbstractXbaseWithAnnotationsRuntimeModule {
 	
-	@Override
-	public Class<? extends ITypeProvider> bindITypeProvider() {
+	public Class<? extends XbaseTypeProvider> bindXbaseTypeProvider() {
 		return XbaseWithAnnotationsTypeProvider.class;
 	}
 	
@@ -66,7 +65,8 @@ public class XbaseWithAnnotationsRuntimeModule extends org.eclipse.xtext.xbase.a
 		return BatchLinkableResource.class;
 	}
 
-	public Class<? extends XbaseTypeProvider> bindXbaseTypeProvider() {
+	@Override
+	public Class<? extends ITypeProvider> bindITypeProvider() {
 		return XbaseBatchTypeProvider.class;
 	}
 	

@@ -9,6 +9,7 @@ package org.eclipse.xtext.xbase.typing;
 
 import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.common.types.JvmTypeReference;
+import org.eclipse.xtext.common.types.util.TypeArgumentContextProvider;
 import org.eclipse.xtext.common.types.util.TypeConformanceComputationArgument;
 import org.eclipse.xtext.common.types.util.TypeConformanceComputer;
 import org.eclipse.xtext.common.types.util.TypeConformanceResult;
@@ -33,6 +34,9 @@ public class XbaseTypeConformanceComputer extends TypeConformanceComputer {
 	
 	@Inject
 	private SynonymTypesProvider synonymTypeProvider;
+	
+	@Inject
+	private XbaseTypeArgumentContextProvider typeArgumentContextProvider;
 
 	@Override
 	public TypeConformanceResult isConformant(JvmTypeReference left, JvmTypeReference right,
@@ -79,6 +83,11 @@ public class XbaseTypeConformanceComputer extends TypeConformanceComputer {
 			}
 		}
 		return false;
+	}
+	
+	@Override
+	protected XbaseTypeArgumentContextProvider getTypeArgumentContextProvider() {
+		return typeArgumentContextProvider;
 	}
 	
 }

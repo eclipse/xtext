@@ -12,6 +12,7 @@ import java.util.Set;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.util.TypeArgumentContextProvider;
+import org.eclipse.xtext.common.types.util.TypeConformanceComputer;
 
 import com.google.common.collect.Multimap;
 import com.google.inject.Inject;
@@ -29,6 +30,9 @@ public class XbaseTypeArgumentContextProvider extends TypeArgumentContextProvide
 	@Inject
 	private SynonymTypesProvider synonymTypeProvider;
 	
+	@Inject
+	private XbaseTypeConformanceComputer conformanceComputer;
+	
 	@Override
 	protected void resolveAgainstActualType(JvmTypeReference declaredType, JvmTypeReference actualType,
 			Multimap<JvmTypeParameter, ResolveInfo> result, boolean allowWildcardResolutions, int hint) {
@@ -43,6 +47,11 @@ public class XbaseTypeArgumentContextProvider extends TypeArgumentContextProvide
 		} else {
 			super.resolveAgainstActualType(declaredClosureType, actualClosureType, result, allowWildcardResolutions, hint);
 		}
+	}
+	
+	@Override
+	protected TypeConformanceComputer getConformanceComputer() {
+		return conformanceComputer;
 	}
 	
 }

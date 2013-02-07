@@ -17,6 +17,7 @@ import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.XExpression;
+import org.eclipse.xtext.xbase.resource.BatchLinkableResource;
 import org.eclipse.xtext.xbase.resource.LinkingAssumptions;
 
 import com.google.common.collect.Lists;
@@ -43,6 +44,9 @@ public class FeatureCallToJavaMapping {
 	}
 	
 	public XExpression getActualReceiver(XAbstractFeatureCall call) {
+		if (call.eResource() instanceof BatchLinkableResource) {
+			return call.getActualReceiver();
+		}
 		return getActualReceiver(call, getFeature(call), getImplicitReceiver(call));
 	}
 
@@ -71,6 +75,9 @@ public class FeatureCallToJavaMapping {
 	}
 	
 	public List<XExpression> getActualArguments(XAbstractFeatureCall featureCall) {
+		if (featureCall.eResource() instanceof BatchLinkableResource) {
+			return featureCall.getActualArguments();
+		}
 		return getActualArguments(
 				featureCall, 
 				getFeature(featureCall), 

@@ -17,20 +17,20 @@ import java.util.Map;
  */
 public class TypeResolutionTestData {
 
-	interface NestedList<T> extends List<List<T>> {}
+	public interface NestedList<T> extends List<List<T>> {}
 
-	static <T> List<T> fixedToList(Iterable<T> iter) { return null; }
-	static <T> List<T> brokenToList(Iterable<? extends T> iter) { return null; }
-	static <T> List<T> brokenToList2(Iterable<? super T> iter) { return null; }
+	public static <T> List<T> fixedToList(Iterable<T> iter) { return null; }
+	public static <T> List<T> brokenToList(Iterable<? extends T> iter) { return null; }
+	public static <T> List<T> brokenToList2(Iterable<? super T> iter) { return null; }
 	
-	static <T> void copyIntoList(Iterable<T> from, List<? super T> to) {}
-	static <T extends Serializable> void constrainedCopyIntoList(Iterable<T> from, List<? super T> to) {}
-	static <T> List<T> copyAndReturnAsList(Iterable<T> from, List<? super T> to) { return null; }
-	static <T extends Serializable> List<T> constrainedCopyAndReturnAsList(Iterable<T> from, List<? super T> to) { return null; }
+	public static <T> void copyIntoList(Iterable<T> from, List<? super T> to) {}
+	public static <T extends Serializable> void constrainedCopyIntoList(Iterable<T> from, List<? super T> to) {}
+	public static <T> List<T> copyAndReturnAsList(Iterable<T> from, List<? super T> to) { return null; }
+	public static <T extends Serializable> List<T> constrainedCopyAndReturnAsList(Iterable<T> from, List<? super T> to) { return null; }
 	
-	static <T, R> Iterable<R> copyIntoMap(Iterable<T> from, Map<? super T, ? extends R> to) { return null; }
-	static <T, R extends T> Iterable<R> constrainedCopyIntoMap(Iterable<T> from, Map<? super T, ? extends R> to) { return null; }
-	static <T, R extends CharSequence & Serializable> Iterable<R> constrainedCopyIntoMap2(Iterable<T> from, Map<? super T, ? extends R> to) { return null; }
+	public static <T, R> Iterable<R> copyIntoMap(Iterable<T> from, Map<? super T, ? extends R> to) { return null; }
+	public static <T, R extends T> Iterable<R> constrainedCopyIntoMap(Iterable<T> from, Map<? super T, ? extends R> to) { return null; }
+	public static <T, R extends CharSequence & Serializable> Iterable<R> constrainedCopyIntoMap2(Iterable<T> from, Map<? super T, ? extends R> to) { return null; }
 
 	public static int overloaded(List<? extends CharSequence> list, Object o) {
 		return 1;
@@ -45,23 +45,23 @@ public class TypeResolutionTestData {
 		return 1;
 	}
 	
-	interface ListFunction1<T, R> {
+	public interface ListFunction1<T, R> {
 		List<R> apply(List<T> in);
 	}
 	
-	interface ListFunction2<T, R> {
+	public interface ListFunction2<T, R> {
 		List<R> apply(List<? super T> in);
 	}
 	
-	interface ListFunction3<T, R> {
+	public interface ListFunction3<T, R> {
 		List<R> apply(List<? extends T> in);
 	}
 	
-	interface ListFunction4<T, R> {
+	public interface ListFunction4<T, R> {
 		List<? extends R> apply(List<T> in);
 	}
 	
-	interface ListFunction5<T, R> {
+	public interface ListFunction5<T, R> {
 		List<? super R> apply(List<T> in);
 	}
 	

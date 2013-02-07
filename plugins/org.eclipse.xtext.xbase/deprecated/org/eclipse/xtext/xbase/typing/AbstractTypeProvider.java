@@ -69,13 +69,13 @@ public abstract class AbstractTypeProvider implements ITypeProvider {
 	private static final Logger logger = Logger.getLogger(AbstractTypeProvider.class);
 	
 	@Inject 
-	private TypeConformanceComputer typeConformanceComputer;
+	private XbaseTypeConformanceComputer typeConformanceComputer;
 	
 	@Inject 
 	private TypeReferences typeReferences;
 	
 	@Inject
-	private TypeArgumentContextProvider typeArgumentContextProvider;
+	private XbaseTypeArgumentContextProvider typeArgumentContextProvider;
 	
 	@Inject
 	private ILogicalContainerProvider logicalContainerProvider;
@@ -574,7 +574,7 @@ public abstract class AbstractTypeProvider implements ITypeProvider {
 		}
 	}
 	
-	protected TypeConformanceComputer getTypeConformanceComputer() {
+	protected XbaseTypeConformanceComputer getTypeConformanceComputer() {
 		return typeConformanceComputer;
 	}
 	
@@ -582,7 +582,7 @@ public abstract class AbstractTypeProvider implements ITypeProvider {
 		return typeReferences;
 	}
 	
-	protected TypeArgumentContextProvider getTypeArgumentContextProvider() {
+	protected XbaseTypeArgumentContextProvider getTypeArgumentContextProvider() {
 		return typeArgumentContextProvider;
 	}
 	
