@@ -526,7 +526,7 @@ public class TypeConformanceComputer {
 
 	protected void initializeDistance(final JvmTypeReference firstType, Multimap<JvmType, JvmTypeReference> all,
 			Multiset<JvmType> cumulatedDistance) {
-		ITypeArgumentContext firstContext = typeArgumentContextProvider.getTypeArgumentContext(
+		ITypeArgumentContext firstContext = getTypeArgumentContextProvider().getTypeArgumentContext(
 				new TypeArgumentContextProvider.ReceiverRequest(firstType));
 		MaxDistanceRawTypeAcceptor acceptor = new MaxDistanceRawTypeAcceptor(
 				cumulatedDistance, all, new ArgumentResolver(firstContext));

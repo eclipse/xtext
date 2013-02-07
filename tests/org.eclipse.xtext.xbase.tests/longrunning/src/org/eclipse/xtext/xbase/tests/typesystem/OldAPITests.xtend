@@ -25,19 +25,16 @@ import org.eclipse.xtext.xbase.XSwitchExpression
 import org.eclipse.xtext.xbase.impl.FeatureCallToJavaMapping
 import org.eclipse.xtext.xbase.jvmmodel.ILogicalContainerProvider
 import org.eclipse.xtext.xbase.typing.ITypeProvider
+import org.eclipse.xtext.xbase.typing.XbaseTypeArgumentContextProvider
+import org.eclipse.xtext.xbase.typing.XbaseTypeProvider
 import org.eclipse.xtext.xtype.XFunctionTypeRef
 import org.junit.Ignore
 import org.junit.Test
 
-import static extension org.junit.Assert.*
-
 /**
  * @author Sebastian Zarnekow
  */
-class OldAPITypeResolverTest extends AbstractTypeResolverTest<JvmTypeReference> {
-	
-	@Inject
-	ITypeProvider typeProvider
+abstract class AbstractOldAPITypeResolverTest extends AbstractTypeResolverTest<JvmTypeReference> {
 	
 	override JvmTypeReference resolvesTo(String expression, String type) {
 		val xExpression = expression(expression, false /* true */);
@@ -62,7 +59,7 @@ class OldAPITypeResolverTest extends AbstractTypeResolverTest<JvmTypeReference> 
 				}
 			}
 		}
-		assertTrue(xExpression.eResource.errors.isEmpty)
+		assertTrue(xExpression.eResource.errors.toString, xExpression.eResource.errors.isEmpty)
 		assertTrue(xExpression.eResource.warnings.isEmpty)
 		return resolvedType
 	}
@@ -84,6 +81,30 @@ class OldAPITypeResolverTest extends AbstractTypeResolverTest<JvmTypeReference> 
 		val type = typeProvider.getTypeForIdentifiable(identifiable)
 		assertNotNull(identifiable.toString, type)
 		assertNotNull(identifiable.toString + " / " + type, type.identifier)	
+	}
+	
+	protected def ITypeProvider getTypeProvider()
+}
+
+@Ignore
+class LegacyTypeResolverTest extends AbstractOldAPITypeResolverTest {
+
+	@Inject
+	ITypeProvider typeProvider
+	
+	override protected getTypeProvider() {
+		typeProvider
+	}
+	
+}
+
+class OldAPITypeResolverTest extends AbstractOldAPITypeResolverTest {
+
+	@Inject
+	XbaseTypeProvider typeProvider
+	
+	override protected getTypeProvider() {
+		typeProvider
 	}
 	
 	@Ignore("not a timeout but too slow")
@@ -1062,10 +1083,10 @@ class OldAPITypeResolverTest extends AbstractTypeResolverTest<JvmTypeReference> 
 class OldAPITypeArgumentTest extends AbstractTypeArgumentTest {
 	
 	@Inject
-	TypeArgumentContextProvider typeArgumentContextProvider
+	XbaseTypeArgumentContextProvider typeArgumentContextProvider
 	
 	@Inject
-	ITypeProvider typeProvider
+	XbaseTypeProvider typeProvider
 	
 	@Inject
 	FeatureCallToJavaMapping featureCallToJavaMapping
@@ -1836,7 +1857,7 @@ class FeatureCallRequest extends TypeArgumentContextProvider$AbstractRequest {
 class OldAPIClosureTypeTest extends AbstractClosureTypeTest {
 	
 	@Inject
-	ITypeProvider typeProvider
+	XbaseTypeProvider typeProvider
 	
 	override List<Object> resolvesClosuresTo(String expression, String... types) {
 		val closures = expression.findClosures
@@ -2579,7 +2600,7 @@ class OldAPIClosureTypeTest extends AbstractClosureTypeTest {
 class OldAPIConstructorCallTypeTest extends AbstractConstructorCallTypeTest {
 	
 	@Inject
-	ITypeProvider typeProvider
+	XbaseTypeProvider typeProvider
 	
 	override resolvesConstructorCallsTo(String expression, String... types) {
 		val expressionWithQualifiedNames = expression.replace('$$', 'org::eclipse::xtext::xbase::lib::')
@@ -2880,7 +2901,7 @@ class OldAPIConstructorCallTypeTest extends AbstractConstructorCallTypeTest {
 class OldAPIFeatureCallTypeTest extends AbstractFeatureCallTypeTest {
 	
 	@Inject
-	ITypeProvider typeProvider
+	XbaseTypeProvider typeProvider
 	
 	override resolvesFeatureCallsTo(String expression, String... types) {
 		val expressionWithQualifiedNames = expression.replace('$$', 'org::eclipse::xtext::xbase::lib::')
@@ -3163,7 +3184,7 @@ class OldAPIFeatureCallTypeTest extends AbstractFeatureCallTypeTest {
 class OldAPIIdentifiableTypeTest extends AbstractIdentifiableTypeTest {
 	
 	@Inject
-	ITypeProvider typeProvider
+	XbaseTypeProvider typeProvider
 	
 	override resolvesIdentifiablesTo(String expression, String... types) {
 		val expressionWithQualifiedNames = expression.replace('$$', 'org::eclipse::xtext::xbase::lib::')

@@ -16,7 +16,7 @@ import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure2;
 import org.eclipse.xtext.xbase.tests.typesystem.AbstractFeatureCallTypeTest;
-import org.eclipse.xtext.xbase.typing.ITypeProvider;
+import org.eclipse.xtext.xbase.typing.XbaseTypeProvider;
 import org.junit.Assert;
 import org.junit.Ignore;
 import org.junit.Test;
@@ -27,7 +27,7 @@ import org.junit.Test;
 @SuppressWarnings("all")
 public class OldAPIFeatureCallTypeTest extends AbstractFeatureCallTypeTest {
   @Inject
-  private ITypeProvider typeProvider;
+  private XbaseTypeProvider typeProvider;
   
   public void resolvesFeatureCallsTo(final String expression, final String... types) {
     final String expressionWithQualifiedNames = expression.replace("$$", "org::eclipse::xtext::xbase::lib::");

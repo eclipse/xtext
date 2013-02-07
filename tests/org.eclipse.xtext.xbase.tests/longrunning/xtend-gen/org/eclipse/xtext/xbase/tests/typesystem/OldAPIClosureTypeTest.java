@@ -18,7 +18,7 @@ import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure2;
 import org.eclipse.xtext.xbase.tests.typesystem.AbstractClosureTypeTest;
-import org.eclipse.xtext.xbase.typing.ITypeProvider;
+import org.eclipse.xtext.xbase.typing.XbaseTypeProvider;
 import org.eclipse.xtext.xtype.XFunctionTypeRef;
 import org.junit.Assert;
 import org.junit.Ignore;
@@ -30,7 +30,7 @@ import org.junit.Test;
 @SuppressWarnings("all")
 public class OldAPIClosureTypeTest extends AbstractClosureTypeTest {
   @Inject
-  private ITypeProvider typeProvider;
+  private XbaseTypeProvider typeProvider;
   
   public List<Object> resolvesClosuresTo(final String expression, final String... types) {
     final List<XClosure> closures = this.findClosures(expression);

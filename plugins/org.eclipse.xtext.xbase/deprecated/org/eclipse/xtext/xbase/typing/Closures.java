@@ -65,7 +65,7 @@ public class Closures {
 	private IRawTypeHelper rawTypeHelper;
 	
 	@Inject
-	private TypeArgumentContextProvider typeArgumentContextProvider;
+	private XbaseTypeArgumentContextProvider typeArgumentContextProvider;
 
 	/**
 	 * @return a compatible function type reference or <code>null</code>.

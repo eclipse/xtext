@@ -18,7 +18,6 @@ import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.JvmTypeParameterDeclarator;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.util.ITypeArgumentContext;
-import org.eclipse.xtext.common.types.util.TypeArgumentContextProvider;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.XConstructorCall;
 import org.eclipse.xtext.xbase.XExpression;
@@ -32,7 +31,8 @@ import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure2;
 import org.eclipse.xtext.xbase.tests.typesystem.AbstractTypeArgumentTest;
 import org.eclipse.xtext.xbase.tests.typesystem.FeatureCallRequest;
-import org.eclipse.xtext.xbase.typing.ITypeProvider;
+import org.eclipse.xtext.xbase.typing.XbaseTypeArgumentContextProvider;
+import org.eclipse.xtext.xbase.typing.XbaseTypeProvider;
 import org.junit.Assert;
 import org.junit.Ignore;
 import org.junit.Test;
@@ -43,10 +43,10 @@ import org.junit.Test;
 @SuppressWarnings("all")
 public class OldAPITypeArgumentTest extends AbstractTypeArgumentTest {
   @Inject
-  private TypeArgumentContextProvider typeArgumentContextProvider;
+  private XbaseTypeArgumentContextProvider typeArgumentContextProvider;
   
   @Inject
-  private ITypeProvider typeProvider;
+  private XbaseTypeProvider typeProvider;
   
   @Inject
   private FeatureCallToJavaMapping featureCallToJavaMapping;
