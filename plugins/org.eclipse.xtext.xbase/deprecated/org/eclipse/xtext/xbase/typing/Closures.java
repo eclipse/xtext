@@ -47,9 +47,8 @@ import com.google.inject.Singleton;
  * @author Sven Efftinge - Initial contribution and API
  * @author Sebastian Zarnekow
  */
-@Singleton
 @Deprecated
-@SuppressWarnings("deprecation")
+@Singleton
 public class Closures {
 
 	@Inject
