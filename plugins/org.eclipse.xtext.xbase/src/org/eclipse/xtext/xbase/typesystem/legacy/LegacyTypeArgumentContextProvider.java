@@ -7,9 +7,15 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.typesystem.legacy;
 
+import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.util.ITypeArgumentContext;
 import org.eclipse.xtext.common.types.util.TypeArgumentContextProvider;
+import org.eclipse.xtext.xbase.XAbstractFeatureCall;
+import org.eclipse.xtext.xbase.typesystem.IBatchTypeResolver;
+import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
+import org.eclipse.xtext.xbase.typesystem.references.OwnedConverter;
 import org.eclipse.xtext.xbase.typesystem.util.CommonTypeComputationServices;
+import org.eclipse.xtext.xbase.typing.XbaseTypeArgumentContextProvider;
 
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
@@ -19,13 +25,26 @@ import com.google.inject.Singleton;
  */
 @Deprecated
 @Singleton
-public class LegacyTypeArgumentContextProvider extends TypeArgumentContextProvider {
+public class LegacyTypeArgumentContextProvider extends XbaseTypeArgumentContextProvider {
 
 	@Inject
 	private CommonTypeComputationServices services;
 	
+	@Inject
+	private IBatchTypeResolver typeResolver;
+	
 	@Override
-	public ITypeArgumentContext getTypeArgumentContext(Request request) {
+	public ITypeArgumentContext getTypeArgumentContext(TypeArgumentContextProvider.Request request) {
+		if (request instanceof XbaseTypeArgumentContextProvider.AbstractFeatureCallRequest) {
+			XAbstractFeatureCall featureCall = ((XbaseTypeArgumentContextProvider.AbstractFeatureCallRequest) request).getFeatureCall();
+			JvmTypeReference receiverType = request.getReceiverType();
+			LightweightTypeReference receiver = null;
+			if (receiverType != null) {
+				StandardTypeReferenceOwner owner = new StandardTypeReferenceOwner(services, featureCall);
+				receiver = new OwnedConverter(owner).toLightweightReference(receiverType);
+			}
+			return new FeatureCallTypeArgumentContext(featureCall, receiver, typeResolver);
+		}
 		return new LegacyTypeArgumentContext(request, services);
 	}
 	

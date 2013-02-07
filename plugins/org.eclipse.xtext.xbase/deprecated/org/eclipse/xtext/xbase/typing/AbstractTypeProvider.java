@@ -37,6 +37,7 @@ import org.eclipse.xtext.common.types.JvmTypeParameterDeclarator;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.JvmWildcardTypeReference;
 import org.eclipse.xtext.common.types.access.TypeResource;
+import org.eclipse.xtext.common.types.util.TypeArgumentContextProvider;
 import org.eclipse.xtext.common.types.util.TypeReferences;
 import org.eclipse.xtext.util.IResourceScopeCache;
 import org.eclipse.xtext.util.OnChangeEvictingCache;
@@ -579,7 +580,7 @@ public abstract class AbstractTypeProvider implements ITypeProvider {
 		return typeReferences;
 	}
 	
-	protected XbaseTypeArgumentContextProvider getTypeArgumentContextProvider() {
+	protected TypeArgumentContextProvider getTypeArgumentContextProvider() {
 		return typeArgumentContextProvider;
 	}
 	

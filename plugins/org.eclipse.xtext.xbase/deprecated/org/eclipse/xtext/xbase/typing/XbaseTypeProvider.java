@@ -371,11 +371,15 @@ public class XbaseTypeProvider extends AbstractTypeProvider {
 	protected ITypeArgumentContext getFeatureCallTypeArgContext(
 			final XAbstractFeatureCall expr, 
 			final boolean rawType) {
-		return getTypeArgumentContextProvider().getTypeArgumentContext(new TypeArgumentContextProvider.AbstractRequest() {
+		return getTypeArgumentContextProvider().getTypeArgumentContext(new XbaseTypeArgumentContextProvider.AbstractFeatureCallRequest() {
 			@Override
 			public JvmTypeReference getReceiverType() {
 				JvmTypeReference result = XbaseTypeProvider.this.getReceiverType(expr, rawType);
 				return result;
+			}
+			@Override
+			public XAbstractFeatureCall getFeatureCall() {
+				return expr;
 			}
 			@Override
 			public String toString() {
@@ -1176,12 +1180,16 @@ public class XbaseTypeProvider extends AbstractTypeProvider {
 			final List<XExpression> actualArguments,
 			final Provider<JvmTypeReference> receiverTypeProvider,
 			final JvmIdentifiableElement feature) {
-		ITypeArgumentContext context = getTypeArgumentContextProvider().getTypeArgumentContext(new TypeArgumentContextProvider.AbstractRequest() {
+		ITypeArgumentContext context = getTypeArgumentContextProvider().getTypeArgumentContext(new XbaseTypeArgumentContextProvider.AbstractFeatureCallRequest() {
 			@Override
 			public JvmFeature getFeature() {
 				if (feature instanceof JvmFeature)
 					return (JvmFeature)feature;
 				return null;
+			}
+			@Override
+			public XAbstractFeatureCall getFeatureCall() {
+				return featureCall;
 			}
 			@Override
 			public String toString() {

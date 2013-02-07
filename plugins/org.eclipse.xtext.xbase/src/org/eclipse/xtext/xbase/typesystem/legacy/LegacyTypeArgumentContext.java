@@ -8,19 +8,15 @@
 package org.eclipse.xtext.xbase.typesystem.legacy;
 
 import java.util.Collections;
-import java.util.List;
 import java.util.Map;
 
 import org.eclipse.emf.common.notify.Notifier;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.util.ITypeArgumentContext;
 import org.eclipse.xtext.common.types.util.TypeArgumentContextProvider;
-import org.eclipse.xtext.xbase.XAbstractFeatureCall;
-import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightMergedBoundTypeArgument;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.OwnedConverter;
@@ -34,10 +30,10 @@ import org.eclipse.xtext.xbase.typesystem.util.StandardTypeParameterSubstitutor;
 @Deprecated
 public class LegacyTypeArgumentContext implements ITypeArgumentContext {
 
-	private CommonTypeComputationServices services;
-	private TypeArgumentContextProvider.Request request;
-	private JvmTypeReference receiver;
-	private Resource resource;
+	private final CommonTypeComputationServices services;
+	private final TypeArgumentContextProvider.Request request;
+	private final JvmTypeReference receiver;
+	private final Resource resource;
 	private Map<JvmTypeParameter, LightweightMergedBoundTypeArgument> typeParameterMapping;
 
 	public LegacyTypeArgumentContext(TypeArgumentContextProvider.Request request, CommonTypeComputationServices services) {
@@ -49,19 +45,11 @@ public class LegacyTypeArgumentContext implements ITypeArgumentContext {
 			if (resource == null) {
 //				throw new IllegalArgumentException();
 			}
+		} else {
+			resource = null;
 		}
 	}
 	
-	public LegacyTypeArgumentContext(XAbstractFeatureCall featureCall, List<XExpression> actualArguments, JvmTypeReference receiver,
-			JvmIdentifiableElement feature, CommonTypeComputationServices services) {
-		this.services = services;
-		this.receiver = receiver;
-		this.resource = feature.eResource();
-		if (resource == null) {
-			throw new IllegalArgumentException();
-		}
-	}
-
 	public TypeArgumentContextProvider.Request getRequest() {
 		return request;
 	}

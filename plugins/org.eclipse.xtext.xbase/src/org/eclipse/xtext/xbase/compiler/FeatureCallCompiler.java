@@ -41,7 +41,6 @@ import org.eclipse.xtext.common.types.JvmVoid;
 import org.eclipse.xtext.common.types.JvmWildcardTypeReference;
 import org.eclipse.xtext.common.types.util.ITypeArgumentContext;
 import org.eclipse.xtext.common.types.util.Primitives;
-import org.eclipse.xtext.common.types.util.TypeArgumentContextProvider;
 import org.eclipse.xtext.generator.trace.ILocationData;
 import org.eclipse.xtext.generator.trace.LocationData;
 import org.eclipse.xtext.nodemodel.ICompositeNode;
@@ -64,6 +63,7 @@ import org.eclipse.xtext.xbase.featurecalls.IdentifiableSimpleNameProvider;
 import org.eclipse.xtext.xbase.impl.FeatureCallToJavaMapping;
 import org.eclipse.xtext.xbase.jvmmodel.ILogicalContainerProvider;
 import org.eclipse.xtext.xbase.typing.JvmOnlyTypeConformanceComputer;
+import org.eclipse.xtext.xbase.typing.XbaseTypeArgumentContextProvider;
 import org.eclipse.xtext.xbase.util.XExpressionHelper;
 
 import com.google.common.collect.Lists;
@@ -73,6 +73,7 @@ import com.google.inject.Inject;
  * @author Sven Efftinge - Initial contribution and API
  */
 @NonNullByDefault
+@SuppressWarnings("deprecation")
 public class FeatureCallCompiler extends LiteralsCompiler {
 
 	@Inject
@@ -327,10 +328,15 @@ public class FeatureCallCompiler extends LiteralsCompiler {
 				}
 
 				ITypeArgumentContext typeArgumentContext = getContextProvider().getTypeArgumentContext(
-						new TypeArgumentContextProvider.AbstractRequest() {
+						new XbaseTypeArgumentContextProvider.AbstractFeatureCallRequest() {
 							@Override
 							public JvmFeature getFeature() {
 								return executable;
+							}
+							
+							@Override
+							public XAbstractFeatureCall getFeatureCall() {
+								return call;
 							}
 
 							@Nullable

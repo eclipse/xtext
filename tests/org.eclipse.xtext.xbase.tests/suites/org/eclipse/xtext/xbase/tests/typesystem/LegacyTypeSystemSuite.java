@@ -16,11 +16,11 @@ import org.junit.runners.Suite.SuiteClasses;
  */
 @RunWith(Suite.class)
 @SuiteClasses({
-	IsolationTest.class,
-	InvariantCheckingIsolationTest.class,
-	InvariantCheckingBatchTypeResolverTest.class,
-	ShuffledTypeResolverTest.class,
-	PermutingBatchReturnTypeResolverTest.class,
-	TypeSystemSuite.class,
+	LegacyTypeResolverTest.class,
+	LegacyFeatureCallTypeTest.class,
+	LegacyClosureTypeTest.class,
+	LegacyIdentifiableTypeTest.class,
+	LegacyConstructorCallTypeTest.class,
+	LegacyTypeArgumentTest.class
 })
-public class CompleteTypeSystemSuite {}
+public class LegacyTypeSystemSuite {}

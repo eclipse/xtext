@@ -8,6 +8,9 @@
 package org.eclipse.xtext.xbase.tests.typesystem
 
 import java.util.Set
+import org.eclipse.emf.ecore.resource.Resource
+import org.eclipse.xtext.linking.impl.XtextLinkingDiagnostic
+import org.eclipse.xtext.resource.XtextSyntaxDiagnostic
 import org.eclipse.xtext.xbase.tests.AbstractXbaseTestCase
 import org.junit.AfterClass
 import org.junit.BeforeClass
@@ -36,12 +39,16 @@ abstract class AbstractTypeResolverTest<Reference> extends AbstractXbaseTestCase
 	}
 	
 	override protected expression(CharSequence expression, boolean resolve) throws Exception {
-		val string = expression.toString
+		val string = expression.toString.replace('$$', 'org::eclipse::xtext::xbase::lib::')
 		if (!seenExpressions.add(string)) {
 			handleDuplicateExpression(expression)
 			return null
 		}
-		super.expression(expression, resolve)
+		super.expression(string, resolve)
+	}
+	
+	def getLinkingAndSyntaxErrors(Resource resource) {
+		resource.errors.filter[ it instanceof XtextSyntaxDiagnostic || it instanceof XtextLinkingDiagnostic]
 	}
 	
 	def protected handleDuplicateExpression(CharSequence expression) {
@@ -1045,6 +1052,8 @@ abstract class AbstractTypeResolverTest<Reference> extends AbstractXbaseTestCase
 	
 	@Test def void testClosure_29() throws Exception {
 		"[].apply()".resolvesTo("Object")
+		"[].apply('')".resolvesTo("Object")
+		"[].apply('', '')".resolvesTo("Object")
 	}
 	
 	@Test def void testClosure_30() throws Exception {

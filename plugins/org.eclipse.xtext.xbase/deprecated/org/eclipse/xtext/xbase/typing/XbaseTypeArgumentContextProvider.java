@@ -13,6 +13,8 @@ import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.util.TypeArgumentContextProvider;
 import org.eclipse.xtext.common.types.util.TypeConformanceComputer;
+import org.eclipse.xtext.common.types.util.TypeArgumentContextProvider.Request;
+import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 
 import com.google.common.collect.Multimap;
 import com.google.inject.Inject;
@@ -23,6 +25,12 @@ import com.google.inject.Inject;
 @Deprecated
 public class XbaseTypeArgumentContextProvider extends TypeArgumentContextProvider {
 
+	public static abstract class AbstractFeatureCallRequest extends AbstractRequest {
+		
+		public abstract XAbstractFeatureCall getFeatureCall();
+		
+	}
+	
 	@Inject
 	private Closures closures;
 	

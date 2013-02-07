@@ -41,6 +41,7 @@ import com.google.inject.Inject;
  * @author Sven Efftinge - Initial contribution and API
  */
 @NonNullByDefault
+@SuppressWarnings("deprecation")
 public class TypeConvertingCompiler extends AbstractXbaseCompiler {
 
 	@Inject
