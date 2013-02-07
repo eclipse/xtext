@@ -106,9 +106,11 @@ abstract class AbstractAssignabilityTest extends AbstractTestingTypeReferenceOwn
 		assertTrue(lhs.doIsAssignable(lhs.toTypeReference.toLightweightReference))
 		assertTrue(rhs.doIsAssignable(rhs.toTypeReference.toLightweightReference))
 		val boolean result = lhs.doIsAssignable(rhs)
-		val wcRhs = new WildcardTypeReference(this)
-		wcRhs.addUpperBound(rhs)
-		assertEquals(result, lhs.doIsAssignable(wcRhs))
+		if (!rhs.primitiveVoid) {
+			val wcRhs = new WildcardTypeReference(this)
+			wcRhs.addUpperBound(rhs.wrapperTypeIfPrimitive)
+			assertEquals(result, lhs.doIsAssignable(wcRhs))
+		}
 		return result
 	}
 	
