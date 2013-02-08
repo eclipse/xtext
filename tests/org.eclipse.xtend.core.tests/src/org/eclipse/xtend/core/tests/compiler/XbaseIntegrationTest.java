@@ -37,6 +37,11 @@ public class XbaseIntegrationTest extends AbstractXbaseEvaluationTest {
 	}
 	
 	@Override
+	protected void assertEvaluatesToArray(Object[] object, String string) {
+		testHelper.assertEvaluatesToArray(object, string);
+	}
+	
+	@Override
 	protected void assertEvaluatesWithException(Class<? extends Throwable> class1, String string) {
 		testHelper.assertEvaluatesWithException(class1, string);
 	}
