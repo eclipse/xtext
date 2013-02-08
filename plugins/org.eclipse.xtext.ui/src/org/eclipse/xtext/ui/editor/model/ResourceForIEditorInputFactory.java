@@ -8,8 +8,11 @@
 package org.eclipse.xtext.ui.editor.model;
 
 import org.eclipse.core.resources.IFile;
+import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IStorage;
+import org.eclipse.core.resources.IWorkspace;
 import org.eclipse.core.runtime.CoreException;
+import org.eclipse.core.runtime.IPath;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.common.util.WrappedException;
 import org.eclipse.emf.ecore.resource.ContentHandler;
@@ -42,6 +45,9 @@ public class ResourceForIEditorInputFactory implements IResourceForEditorInputFa
 
 	@Inject
 	private IExternalContentProvider externalContentProvider;
+	
+	@Inject(optional = true)
+	private IWorkspace workspace;
 
 	/**
 	 * @throws IllegalArgumentException
@@ -105,6 +111,16 @@ public class ResourceForIEditorInputFactory implements IResourceForEditorInputFa
 	protected ResourceSet getResourceSet(IStorage storage) {
 		if (storage instanceof IFile) {
 			return resourceSetProvider.get(((IFile) storage).getProject());
+		}
+		if (workspace != null) {
+			IPath path = storage.getFullPath();
+			if (path != null && !path.isEmpty()) {
+				String firstSegment = path.segment(0);
+				IProject project = workspace.getRoot().getProject(firstSegment);
+				if (project.isAccessible()) {
+					return resourceSetProvider.get(project);
+				}
+			}
 		}
 		return resourceSetProvider.get(null);
 	}
