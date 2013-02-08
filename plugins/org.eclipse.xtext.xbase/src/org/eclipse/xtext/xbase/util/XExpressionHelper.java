@@ -7,16 +7,12 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.util;
 
-import static org.eclipse.xtext.xbase.XbasePackage.*;
-
 import java.util.List;
 
 import org.eclipse.xtext.common.types.JvmAnnotationReference;
 import org.eclipse.xtext.common.types.JvmAnnotationTarget;
 import org.eclipse.xtext.common.types.JvmConstructor;
 import org.eclipse.xtext.common.types.JvmExecutable;
-import org.eclipse.xtext.common.types.JvmField;
-import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmTypeReference;
@@ -27,15 +23,14 @@ import org.eclipse.xtext.xbase.XAssignment;
 import org.eclipse.xtext.xbase.XBinaryOperation;
 import org.eclipse.xtext.xbase.XBooleanLiteral;
 import org.eclipse.xtext.xbase.XClosure;
+import org.eclipse.xtext.xbase.XCollectionLiteral;
 import org.eclipse.xtext.xbase.XConstructorCall;
 import org.eclipse.xtext.xbase.XExpression;
-import org.eclipse.xtext.xbase.XFeatureCall;
 import org.eclipse.xtext.xbase.XNullLiteral;
 import org.eclipse.xtext.xbase.XNumberLiteral;
 import org.eclipse.xtext.xbase.XStringLiteral;
 import org.eclipse.xtext.xbase.XTypeLiteral;
-import org.eclipse.xtext.xbase.XVariableDeclaration;
-import org.eclipse.xtext.xbase.XbasePackage;
+import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotation;
 import org.eclipse.xtext.xbase.lib.Inline;
 import org.eclipse.xtext.xbase.lib.Pure;
 import org.eclipse.xtext.xbase.typing.ITypeProvider;
@@ -57,37 +52,6 @@ public class XExpressionHelper {
 	@Inject
 	private TypeReferences typeReferences;
 
-	public boolean isLiteral(XExpression expr) {
-		if (expr.eClass().getEPackage() != XbasePackage.eINSTANCE)
-			return false;
-		switch (expr.eClass().getClassifierID()) {
-			case XCLOSURE:
-			case XBOOLEAN_LITERAL:
-			case XNUMBER_LITERAL:
-			case XNULL_LITERAL:
-			case XSTRING_LITERAL:
-			case XTYPE_LITERAL:
-				return true;
-			default:
-				return false;
-		}
-	}
-
-	public boolean isFieldOrVariableReference(XExpression expr) {
-		if (expr instanceof XFeatureCall) {
-			XFeatureCall featureCall = (XFeatureCall) expr;
-			final JvmIdentifiableElement feature = featureCall.getFeature();
-			if (feature == null || feature.eIsProxy())
-				return false;
-			if (feature instanceof JvmField
-				|| feature instanceof JvmFormalParameter
-				|| feature instanceof XVariableDeclaration) {
-				return true;
-			}
-		}
-		return false;
-	}
-	
 	/**
 	 * @return whether the expression itself (not its children) possibly causes a side-effect
 	 */
@@ -98,8 +62,16 @@ public class XExpressionHelper {
 			|| expr instanceof XBooleanLiteral
 			|| expr instanceof XNumberLiteral
 			|| expr instanceof XNullLiteral
+			|| expr instanceof XAnnotation
 			)
 			return false;
+		if(expr instanceof XCollectionLiteral) {
+			for(XExpression element: ((XCollectionLiteral)expr).getElements()) {
+				if(hasSideEffects(element))
+					return true;
+			}
+			return false;
+		}
 		if (expr instanceof XAbstractFeatureCall) {
 			XAbstractFeatureCall featureCall = (XAbstractFeatureCall) expr;
 			return hasSideEffects(featureCall, true);

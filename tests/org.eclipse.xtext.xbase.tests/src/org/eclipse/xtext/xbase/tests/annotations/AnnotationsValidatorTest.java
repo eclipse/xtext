@@ -112,6 +112,16 @@ public class AnnotationsValidatorTest extends AbstractXbaseWithAnnotationsTest {
 		validator.assertError(annotation, XbasePackage.Literals.XNUMBER_LITERAL, IssueCodes.INCOMPATIBLE_TYPES, "String", "int");
 	}
 	
+	@Test public void testSideEffect() throws Exception {
+		XAnnotation annotation = annotation("@testdata.Annotation2(value = #['' + ''])", false);
+		validator.assertNoErrors(annotation);
+	}
+	
+	@Test public void testSideEffect_1() throws Exception {
+		XAnnotation annotation = annotation("@testdata.Annotation2(value = #['foo'.replace('foo', 'bar')])", false);
+		validator.assertError(annotation, XAnnotationsPackage.Literals.XANNOTATION, IssueCodes.ANNOTATIONS_ILLEGAL_ATTRIBUTE, "constant");
+	}
+	
 	@Test public void testEmptyValueList_01() throws Exception {
 		XAnnotation annotation = annotation("@testdata.Annotation2(value = {})", false);
 		validator.assertNoErrors(annotation);
