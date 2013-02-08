@@ -1015,7 +1015,16 @@ public class XbaseCompiler extends FeatureCallCompiler {
 				if (i != closureParams.size() - 1)
 					b.append(", ");
 			}
-			b.append(") {");
+			b.append(")");
+			if(!operation.getExceptions().isEmpty()) {
+				b.append(" throws ");
+				for (int i = 0; i < operation.getExceptions().size(); ++i) {
+					serialize(operation.getExceptions().get(i), closure, b, false, false, false, false);
+					if(i != operation.getExceptions().size() -1)
+						b.append(", ");
+				}
+			}
+			b.append(" {");
 			b.increaseIndentation();
 			reassignThisInClosure(b, type.getType());
 			compile(closure.getExpression(), b, operation.getReturnType(), newHashSet(operation.getExceptions()));
