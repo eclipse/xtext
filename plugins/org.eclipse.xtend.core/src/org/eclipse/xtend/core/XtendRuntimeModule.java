@@ -3,7 +3,7 @@
  */
 package org.eclipse.xtend.core;
 
-import org.eclipse.xtend.core.compiler.XtendCompiler2;
+import org.eclipse.xtend.core.compiler.XtendCompiler;
 import org.eclipse.xtend.core.compiler.XtendOutputConfigurationProvider;
 import org.eclipse.xtend.core.conversion.XtendValueConverterService;
 import org.eclipse.xtend.core.formatting.XtendFormatter;
@@ -202,7 +202,7 @@ public class XtendRuntimeModule extends org.eclipse.xtend.core.AbstractXtendRunt
 	}
 
 	public Class<? extends XbaseCompiler> bindXbaseCompiler() {
-		return XtendCompiler2.class;
+		return XtendCompiler.class;
 	}
 
 	@Override
