@@ -11,7 +11,6 @@ import java.util.LinkedList;
 import java.util.List;
 
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtend.core.richstring.AbstractRichStringPartAcceptor;
@@ -334,9 +333,7 @@ public class XtendCompiler extends XbaseCompiler {
 	
 	public void _toJavaExpression(RichString richString, ITreeAppendable b) {
 		b.append(getVarName(richString, b));
-		JvmTypeReference stringType = getTypeReferences().getTypeForName(String.class, richString);
-		if(EcoreUtil.equals(typeProvider.getExpectedType(richString), stringType))
+		if(getTypeReferences().is(typeProvider.getType(richString), String.class))
 			b.append(".toString()");
 	}
-
 }

@@ -9,22 +9,28 @@ package org.eclipse.xtext.xbase.compiler;
 
 import static com.google.common.collect.Sets.*;
 
+import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.Keyword;
+import org.eclipse.xtext.common.types.JvmAnyTypeReference;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmExecutable;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmOperation;
+import org.eclipse.xtext.common.types.JvmSynonymTypeReference;
 import org.eclipse.xtext.common.types.JvmType;
+import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.TypesPackage;
 import org.eclipse.xtext.common.types.util.ITypeArgumentContext;
@@ -34,11 +40,13 @@ import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 import org.eclipse.xtext.util.Tuples;
+import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.XBlockExpression;
 import org.eclipse.xtext.xbase.XCasePart;
 import org.eclipse.xtext.xbase.XCastedExpression;
 import org.eclipse.xtext.xbase.XCatchClause;
 import org.eclipse.xtext.xbase.XClosure;
+import org.eclipse.xtext.xbase.XCollectionLiteral;
 import org.eclipse.xtext.xbase.XConstructorCall;
 import org.eclipse.xtext.xbase.XDoWhileExpression;
 import org.eclipse.xtext.xbase.XExpression;
@@ -46,7 +54,9 @@ import org.eclipse.xtext.xbase.XFeatureCall;
 import org.eclipse.xtext.xbase.XForLoopExpression;
 import org.eclipse.xtext.xbase.XIfExpression;
 import org.eclipse.xtext.xbase.XInstanceOfExpression;
+import org.eclipse.xtext.xbase.XListLiteral;
 import org.eclipse.xtext.xbase.XReturnExpression;
+import org.eclipse.xtext.xbase.XSetLiteral;
 import org.eclipse.xtext.xbase.XSwitchExpression;
 import org.eclipse.xtext.xbase.XThrowExpression;
 import org.eclipse.xtext.xbase.XTryCatchFinallyExpression;
@@ -57,9 +67,24 @@ import org.eclipse.xtext.xbase.compiler.output.ITreeAppendable;
 import org.eclipse.xtext.xbase.controlflow.IEarlyExitComputer;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Pair;
+import org.eclipse.xtext.xbase.typesystem.IBatchTypeResolver;
+import org.eclipse.xtext.xbase.typesystem.IResolvedTypes;
+import org.eclipse.xtext.xbase.typesystem.legacy.StandardTypeReferenceOwner;
+import org.eclipse.xtext.xbase.typesystem.references.FunctionTypeReference;
+import org.eclipse.xtext.xbase.typesystem.references.LightweightMergedBoundTypeArgument;
+import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
+import org.eclipse.xtext.xbase.typesystem.references.OwnedConverter;
+import org.eclipse.xtext.xbase.typesystem.references.ParameterizedTypeReference;
+import org.eclipse.xtext.xbase.typesystem.util.CommonTypeComputationServices;
+import org.eclipse.xtext.xbase.typesystem.util.DeclaratorTypeArgumentCollector;
+import org.eclipse.xtext.xbase.typesystem.util.StandardTypeParameterSubstitutor;
 import org.eclipse.xtext.xbase.typing.Closures;
 
 import com.google.common.base.Objects;
+import com.google.common.base.Predicate;
+import com.google.common.collect.ImmutableList;
+import com.google.common.collect.ImmutableSet;
+import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.inject.Inject;
 
@@ -71,6 +96,223 @@ public class XbaseCompiler extends FeatureCallCompiler {
 	
 	@Inject 
 	private IEarlyExitComputer earlyExitComputer;
+	
+	@Inject 
+	private IBatchTypeResolver batchTypeResolver;
+	
+	@Inject
+	private CommonTypeComputationServices services;
+	
+	protected void _toJavaStatement(XListLiteral expr, ITreeAppendable b, boolean isReferenced) {
+		toCollectionBuilderJavaStatement(expr, ImmutableList.Builder.class, b, isReferenced);
+	}
+
+	protected void _toJavaStatement(XSetLiteral expr, ITreeAppendable b, boolean isReferenced) {
+		toCollectionBuilderJavaStatement(expr, ImmutableSet.Builder.class, b, isReferenced);
+	}
+
+	protected void toCollectionBuilderJavaStatement(XCollectionLiteral literal, Class<?> builderClass, ITreeAppendable b,
+			boolean isReferenced) {
+		for(XExpression element: literal.getElements()) 
+			internalToJavaStatement(element, b, true);
+		if(isReferenced)
+			declareSyntheticVariable(literal, b);
+		LightweightTypeReference literalType = batchTypeResolver.resolveTypes(literal).getActualType(literal);
+		if(literalType.isArray()) {
+			if(isReferenced) 
+				b.newLine().append(getVarName(literal, b)).append(" = ");
+			b.append("new ");
+			getTypeReferenceSerializer().serialize(literalType.toTypeReference(), literal, b);
+			b.append(" { ");
+			boolean isFirst = true;
+			for(XExpression element: literal.getElements())  {
+				if(!isFirst)
+					b.append(", ");
+				isFirst = false;
+				internalToJavaExpression(element, b);
+			}
+			b.append(" };");
+		} else {
+			LightweightTypeReference elementType = getCollectionElementType(literal);
+			String builderVar = b.declareSyntheticVariable(getCollectionLiteralBuilderKey(literal), "_builder");
+			JvmType builderRawType = getTypeReferences().findDeclaredType(builderClass, literal);
+			ParameterizedTypeReference builderType = new ParameterizedTypeReference(elementType.getOwner(), builderRawType);
+			builderType.addTypeArgument(elementType);
+			b.newLine();
+			getTypeReferenceSerializer().serialize(builderType.toTypeReference(), literal, b);
+			b.append(" ").append(builderVar).append(" = ");
+			JvmDeclaredType listType = ((JvmDeclaredType) builderType.getType()).getDeclaringType();
+			b.append(listType).append(".builder();").newLine();
+			for(XExpression element: literal.getElements())  {
+				b.append(builderVar).append(".add(");
+				internalToJavaExpression(element, b);
+				b.append(");").newLine();
+			}
+			if(isReferenced) 
+				b.append(getVarName(literal, b)).append(" = ");
+			b.append(builderVar).append(".build();");
+		}
+	}
+	
+	protected LightweightTypeReference getCollectionElementType(XCollectionLiteral literal) {
+		LightweightTypeReference type = batchTypeResolver.resolveTypes(literal).getActualType(literal);
+		if(type.isArray()) 
+			return type.getComponentType();
+		else if(type.isSubtypeOf(Collection.class) && !type.getTypeArguments().isEmpty()) 
+			return type.getTypeArguments().get(0).getInvariantBoundSubstitute();
+		return new ParameterizedTypeReference(type.getOwner(), getTypeReferences().findDeclaredType(Object.class, literal));
+	}
+
+	protected Object getCollectionLiteralBuilderKey(XCollectionLiteral literal) {
+		return Tuples.create(literal, "_builder");
+	}
+	
+	protected Object getCollectionLiteralLoopKey(XCollectionLiteral literal) {
+		return Tuples.create(literal, "_element");
+	}
+	
+	protected void _toJavaExpression(XCollectionLiteral expr, ITreeAppendable b) {
+		b.trace(expr, false).append(getVarName(expr, b));
+	}
+
+	@Override
+	protected List<XExpression> getActualArguments(XAbstractFeatureCall featureCall) {
+		return featureCall.getActualArguments();
+	}
+	@Nullable
+	@Override
+	protected XExpression getActualReceiver(XAbstractFeatureCall featureCall) {
+		return featureCall.getActualReceiver();
+	}
+	@Override
+	protected boolean isMemberCall(XAbstractFeatureCall call) {
+		return !call.isStatic();
+	}
+	
+	@Override
+	protected ITreeAppendable appendTypeArguments(XAbstractFeatureCall call, ITreeAppendable original) {
+		if (!call.getTypeArguments().isEmpty()) {
+			return super.appendTypeArguments(call, original);
+		}
+		ILocationData completeLocationData = getLocationWithTypeArguments(call);
+		ITreeAppendable completeFeatureCallAppendable = completeLocationData != null ? original.trace(completeLocationData) : original;
+		IResolvedTypes resolvedTypes = batchTypeResolver.resolveTypes(call);
+		List<LightweightTypeReference> typeArguments = resolvedTypes.getActualTypeArguments(call);
+		if (!typeArguments.isEmpty()) {
+			List<JvmTypeReference> resolvedTypeArguments = Lists.newArrayListWithCapacity(typeArguments.size());
+			for(LightweightTypeReference typeArgument: typeArguments) {
+				if (typeArgument.isWildcard()) {
+					return completeFeatureCallAppendable;
+				}
+				JvmTypeReference jvmTypeReference = typeArgument.toJavaCompliantTypeReference();
+				resolvedTypeArguments.add(jvmTypeReference);
+			}
+			completeFeatureCallAppendable.append("<");
+			for (int i = 0; i < resolvedTypeArguments.size(); i++) {
+				if (i != 0) {
+					completeFeatureCallAppendable.append(", ");
+				}
+				JvmTypeReference typeArgument = resolvedTypeArguments.get(i);
+				serialize(typeArgument, call, completeFeatureCallAppendable);
+			}
+			completeFeatureCallAppendable.append(">");
+		}
+		return completeFeatureCallAppendable;
+	}
+	
+	@Override
+	protected void convertFunctionType(JvmTypeReference expectedType, final JvmTypeReference functionType,
+			ITreeAppendable appendable, Later expression, XExpression context) {
+		if (expectedType.getIdentifier().equals(Object.class.getName())
+				|| EcoreUtil.equals(expectedType.getType(), functionType.getType())
+				|| ((expectedType instanceof JvmSynonymTypeReference) 
+					&& Iterables.any(((JvmSynonymTypeReference)expectedType).getReferences(), new Predicate<JvmTypeReference>() {
+						public boolean apply(@Nullable JvmTypeReference ref) {
+							if (ref == null) {
+								throw new IllegalStateException();
+							}
+							return EcoreUtil.equals(ref.getType(), functionType.getType());
+						}
+					}))) {
+			// same raw type but different type parameters
+			// at this point we know that we are compatible so we have to convince the Java compiler about that ;-)
+			if (!getTypeConformanceComputer().isConformant(expectedType, functionType)) {
+				// insert a cast
+				appendable.append("(");
+				serialize(expectedType, context, appendable);
+				appendable.append(")");
+			}
+			expression.exec(appendable);
+			return;
+		}
+		JvmOperation operation = getClosures().findImplementingOperation(expectedType, context.eResource());
+		if (operation == null) {
+			throw new IllegalStateException("expected type " + expectedType + " not mappable from " + functionType);
+		}
+		appendable.append("new ");
+		StandardTypeReferenceOwner owner = new StandardTypeReferenceOwner(services, context.eResource().getResourceSet());
+		LightweightTypeReference lightweightExpectedType = new OwnedConverter(owner).toLightweightReference(expectedType);
+		FunctionTypeReference functionTypeReference = lightweightExpectedType.tryConvertToFunctionTypeReference(false);
+		if (functionTypeReference == null)
+			throw new IllegalStateException("Expected type does not seem to be a SAM type");
+		JvmTypeReference convertedExpectedType = functionTypeReference.toInstanceTypeReference().toTypeReference();
+		serialize(convertedExpectedType, context, appendable, false, false);
+		appendable.append("() {");
+		appendable.increaseIndentation().increaseIndentation();
+		appendable.newLine().append("public ");
+		LightweightTypeReference returnType = functionTypeReference.getReturnType();
+		if (returnType == null)
+			throw new IllegalStateException("Could not find return type");
+		serialize(returnType.toTypeReference(), context, appendable, false, false);
+		appendable.append(" ").append(operation.getSimpleName()).append("(");
+		List<JvmFormalParameter> params = operation.getParameters();
+		for (int i = 0; i < params.size(); i++) {
+			if (i != 0)
+				appendable.append(",");
+			JvmFormalParameter p = params.get(i);
+			final String name = p.getName();
+			serialize(functionTypeReference.getParameterTypes().get(i).toTypeReference(), context, appendable, false, false);
+			appendable.append(" ").append(name);
+		}
+		appendable.append(") {");
+		appendable.increaseIndentation();
+		if (!getTypeReferences().is(operation.getReturnType(), Void.TYPE))
+			appendable.newLine().append("return ");
+		else
+			appendable.newLine();
+		expression.exec(appendable);
+		appendable.append(".");
+		JvmOperation actualOperation = getClosures().findImplementingOperation(functionType, context.eResource());
+		appendable.append(actualOperation.getSimpleName());
+		appendable.append("(");
+		for (Iterator<JvmFormalParameter> iterator = params.iterator(); iterator.hasNext();) {
+			JvmFormalParameter p = iterator.next();
+			final String name = p.getName();
+			appendable.append(name);
+			if (iterator.hasNext())
+				appendable.append(",");
+		}
+		appendable.append(");");
+		appendable.decreaseIndentation();
+		appendable.newLine().append("}");
+		appendable.decreaseIndentation().decreaseIndentation();
+		appendable.newLine().append("}");
+	}
+	
+	@Override
+	protected JvmTypeReference getTypeForVariableDeclaration(XExpression expr) {
+		JvmTypeReference type = getTypeProvider().getType(expr);
+		//TODO we need to replace any occurrence of JvmAnyTypeReference with a better match from the expected type
+		if (type instanceof JvmAnyTypeReference) {
+			JvmTypeReference expectedType = getTypeProvider().getExpectedType(expr);
+			if (expectedType == null) {
+				expectedType = getTypeProvider().getExpectedReturnType(expr, false);
+			}
+			if (expectedType!=null && !(expectedType.getType() instanceof JvmTypeParameter))
+				type = expectedType;
+		}
+		return type;
+	}
 	
 	@Override
 	protected void internalToConvertedExpression(XExpression obj, ITreeAppendable appendable) {
@@ -90,6 +332,10 @@ public class XbaseCompiler extends FeatureCallCompiler {
 			_toJavaExpression((XSwitchExpression) obj, appendable);
 		} else if (obj instanceof XTryCatchFinallyExpression) {
 			_toJavaExpression((XTryCatchFinallyExpression) obj, appendable);
+		} else if (obj instanceof XListLiteral) {
+			_toJavaExpression((XListLiteral) obj, appendable);
+		} else if (obj instanceof XSetLiteral) {
+			_toJavaExpression((XSetLiteral) obj, appendable);
 		} else {
 			super.internalToConvertedExpression(obj, appendable);
 		}
@@ -125,6 +371,10 @@ public class XbaseCompiler extends FeatureCallCompiler {
 			_toJavaStatement((XVariableDeclaration) obj, appendable, isReferenced);
 		} else if (obj instanceof XWhileExpression) {
 			_toJavaStatement((XWhileExpression) obj, appendable, isReferenced);
+		} else if (obj instanceof XListLiteral) {
+			_toJavaStatement((XListLiteral) obj, appendable, isReferenced);
+		} else if (obj instanceof XSetLiteral) {
+			_toJavaStatement((XSetLiteral) obj, appendable, isReferenced);
 		} else {
 			super.doInternalToJavaStatement(obj, appendable, isReferenced);
 		}
@@ -400,6 +650,10 @@ public class XbaseCompiler extends FeatureCallCompiler {
 	}
 
 	protected JvmTypeReference getForLoopParameterType(XForLoopExpression expr) {
+		JvmTypeReference declaredType = expr.getDeclaredParam().getParameterType();
+		if (declaredType != null) {
+			return declaredType;
+		}
 		return getTypeProvider().getTypeForIdentifiable(expr.getDeclaredParam());
 	}
 
@@ -726,14 +980,10 @@ public class XbaseCompiler extends FeatureCallCompiler {
 	@Inject
 	private Closures closures;
 	
-	@Inject
-	private TypeArgumentContextProvider ctxProvider;
-	
 	protected void _toJavaStatement(final XClosure closure, final ITreeAppendable b, boolean isReferenced) {
 		if (!isReferenced)
 			throw new IllegalArgumentException("a closure definition does not cause any side-effects");
 		JvmTypeReference type = getTypeProvider().getType(closure);
-		ITypeArgumentContext context = ctxProvider.getTypeArgumentContext(new TypeArgumentContextProvider.ReceiverRequest(type));
 		b.newLine().append("final ");
 		serialize(type, closure, b);
 		b.append(" ");
@@ -747,16 +997,15 @@ public class XbaseCompiler extends FeatureCallCompiler {
 		try {
 			b.openScope();
 			JvmOperation operation = findImplementingOperation(type, closure);
-			final JvmTypeReference returnType = getClosureOperationReturnType(type, context, operation);
+			final JvmTypeReference returnType = getClosureOperationReturnType(type, operation);
 			appendOperationVisibility(b, operation);
 			serialize(returnType, closure, b, false, false, true, true);
 			b.append(" ").append(operation.getSimpleName());
 			b.append("(");
 			List<JvmFormalParameter> closureParams = closure.getFormalParameters();
-			List<JvmFormalParameter> operationParams = operation.getParameters();
 			for (int i = 0; i < closureParams.size(); i++) {
 				JvmFormalParameter closureParam = closureParams.get(i);
-				JvmTypeReference parameterType = getClosureOperationParameterType(type, context, operation, i);
+				JvmTypeReference parameterType = getClosureOperationParameterType(type, operation, i);
 				b.append("final ");
 				serialize(parameterType, closure, b, false, false, true, true);
 				b.append(" ");
@@ -778,24 +1027,6 @@ public class XbaseCompiler extends FeatureCallCompiler {
 		b.decreaseIndentation().newLine().append("};").decreaseIndentation();
 	}
 
-	protected void reassignThisInClosure(final ITreeAppendable b, JvmType rawClosureType) {
-		if (b.hasObject("this")) {
-			Object element = b.getObject("this");
-			if (element instanceof JvmType) {
-				final String proposedName = ((JvmType) element).getSimpleName()+".this";
-				if (!b.hasObject(proposedName)) {
-					b.declareSyntheticVariable(element, proposedName);
-					if (b.hasObject("super")) {
-						Object superElement = b.getObject("super");
-						if (superElement instanceof JvmType) {
-							b.declareSyntheticVariable(superElement, ((JvmType) element).getSimpleName()+".super");
-						}
-					}
-				}
-			}
-		}
-	}
-
 	protected void appendOperationVisibility(final ITreeAppendable b, JvmOperation operation) {
 		b.newLine();
 		JvmDeclaredType declaringType = operation.getDeclaringType();
@@ -810,19 +1041,52 @@ public class XbaseCompiler extends FeatureCallCompiler {
 		}
 	}
 
-	protected JvmOperation findImplementingOperation(JvmTypeReference declaringType, EObject context) {
-		return closures.findImplementingOperation(declaringType, context.eResource());
+	protected JvmOperation findImplementingOperation(JvmTypeReference closureType, EObject context) {
+		StandardTypeReferenceOwner owner = new StandardTypeReferenceOwner(services, context);
+		OwnedConverter converter = new OwnedConverter(owner);
+		LightweightTypeReference lightweightTypeReference = converter.toLightweightReference(closureType);
+		return services.getFunctionTypes().findImplementingOperation(lightweightTypeReference);
+	}
+	
+	protected void reassignThisInClosure(final ITreeAppendable b, JvmType rawClosureType) {
+		boolean registerClosureAsThis = rawClosureType instanceof JvmGenericType && !((JvmGenericType) rawClosureType).isInterface();
+		if (b.hasObject("this")) {
+			Object element = b.getObject("this");
+			if (element instanceof JvmType) {
+				final String proposedName = ((JvmType) element).getSimpleName()+".this";
+				if (!b.hasObject(proposedName)) {
+					b.declareSyntheticVariable(element, proposedName);
+					if (b.hasObject("super")) {
+						Object superElement = b.getObject("super");
+						if (superElement instanceof JvmType) {
+							b.declareSyntheticVariable(superElement, ((JvmType) element).getSimpleName()+".super");
+						}
+					}
+				}
+			} else {
+				registerClosureAsThis = false;
+			}
+		}
+		if (registerClosureAsThis)
+			b.declareVariable(rawClosureType, "this");
+	}
+	
+	protected JvmTypeReference getClosureOperationParameterType(JvmTypeReference closureType, JvmOperation operation, int i) {
+		StandardTypeReferenceOwner owner = new StandardTypeReferenceOwner(services, operation.eResource().getResourceSet());
+		OwnedConverter converter = new OwnedConverter(owner);
+		LightweightTypeReference lightweightTypeReference = converter.toLightweightReference(closureType);
+		Map<JvmTypeParameter, LightweightMergedBoundTypeArgument> mapping = new DeclaratorTypeArgumentCollector().getTypeParameterMapping(lightweightTypeReference);
+		LightweightTypeReference parameterType = converter.toLightweightReference(operation.getParameters().get(i).getParameterType());
+		return new StandardTypeParameterSubstitutor(mapping, owner).substitute(parameterType).toJavaCompliantTypeReference();
 	}
 
-	protected JvmTypeReference getClosureOperationParameterType(JvmTypeReference closureType, ITypeArgumentContext context,
-			JvmOperation operation, int i) {
-		JvmFormalParameter operationParam = operation.getParameters().get(i);
-		JvmTypeReference parameterType = context.resolve(operationParam.getParameterType());
-		return parameterType;
-	}
-
-	protected JvmTypeReference getClosureOperationReturnType(JvmTypeReference closureType, ITypeArgumentContext context, JvmOperation operation) {
-		return context.resolve(operation.getReturnType());
+	protected JvmTypeReference getClosureOperationReturnType(JvmTypeReference closureType, JvmOperation operation) {
+		StandardTypeReferenceOwner owner = new StandardTypeReferenceOwner(services, operation.eResource().getResourceSet());
+		OwnedConverter converter = new OwnedConverter(owner);
+		LightweightTypeReference lightweightTypeReference = converter.toLightweightReference(closureType);
+		Map<JvmTypeParameter, LightweightMergedBoundTypeArgument> mapping = new DeclaratorTypeArgumentCollector().getTypeParameterMapping(lightweightTypeReference);
+		LightweightTypeReference parameterType = converter.toLightweightReference(operation.getReturnType());
+		return new StandardTypeParameterSubstitutor(mapping, owner).substitute(parameterType).toJavaCompliantTypeReference();
 	}
 	
 	protected void _toJavaExpression(final XClosure call, final ITreeAppendable b) {
