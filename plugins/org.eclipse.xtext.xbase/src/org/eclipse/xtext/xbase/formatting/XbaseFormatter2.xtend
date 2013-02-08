@@ -54,14 +54,15 @@ class XbaseFormatter2 extends AbstractFormatter {
 
 	def protected dispatch void format(XCollectionLiteral literal, FormattableDocument document) {
 		document += literal.nodeForKeyword('#').append[noSpace]
-		var node = literal.nodeForKeyword("[")
+		var node = literal.nodeForKeyword("[") ?: literal.nodeForKeyword("{")
 		for (value : literal.elements) {
 			document += node.append[if (value == literal.elements.head) noSpace else oneSpace]
 			value.format(document)
 			node = value.nodeForEObject.immediatelyFollowingKeyword(",")
 			document += node.prepend[noSpace]
 		}
-		document += literal.nodeForKeyword("]").prepend[noSpace]
+		node = literal.nodeForKeyword("]") ?: literal.nodeForKeyword("}")
+		document += (node).prepend[noSpace]
 	}
 
 	def protected dispatch void format(XAnnotation ann, FormattableDocument document) {

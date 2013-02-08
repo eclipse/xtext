@@ -92,7 +92,9 @@ public class XbaseFormatter2 extends AbstractFormatter {
       };
     Function1<? super FormattableDocument,? extends Iterable<FormattingData>> _append = this._formattingDataFactory.append(_nodeForKeyword, _function);
     document.operator_add(_append);
-    ILeafNode node = this._nodeModelAccess.nodeForKeyword(literal, "[");
+    ILeafNode _nodeForKeyword_1 = this._nodeModelAccess.nodeForKeyword(literal, "[");
+    ILeafNode _nodeForKeyword_2 = this._nodeModelAccess.nodeForKeyword(literal, "{");
+    ILeafNode node = ObjectExtensions.<ILeafNode>operator_elvis(_nodeForKeyword_1, _nodeForKeyword_2);
     EList<XExpression> _elements = literal.getElements();
     for (final XExpression value : _elements) {
       {
@@ -123,13 +125,16 @@ public class XbaseFormatter2 extends AbstractFormatter {
         document.operator_add(_prepend);
       }
     }
-    ILeafNode _nodeForKeyword_1 = this._nodeModelAccess.nodeForKeyword(literal, "]");
+    ILeafNode _nodeForKeyword_3 = this._nodeModelAccess.nodeForKeyword(literal, "]");
+    ILeafNode _nodeForKeyword_4 = this._nodeModelAccess.nodeForKeyword(literal, "}");
+    ILeafNode _elvis = ObjectExtensions.<ILeafNode>operator_elvis(_nodeForKeyword_3, _nodeForKeyword_4);
+    node = _elvis;
     final Procedure1<FormattingDataInit> _function_1 = new Procedure1<FormattingDataInit>() {
         public void apply(final FormattingDataInit it) {
           it.noSpace();
         }
       };
-    Function1<? super FormattableDocument,? extends Iterable<FormattingData>> _prepend = this._formattingDataFactory.prepend(_nodeForKeyword_1, _function_1);
+    Function1<? super FormattableDocument,? extends Iterable<FormattingData>> _prepend = this._formattingDataFactory.prepend(node, _function_1);
     document.operator_add(_prepend);
   }
   
