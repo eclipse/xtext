@@ -359,8 +359,9 @@ public abstract class AbstractLinkingCandidate<Expression extends XExpression> i
 	
 	protected LightweightTypeReference getDeclaredType(JvmIdentifiableElement feature) {
 		LightweightTypeReference result = state.getResolvedTypes().getActualType(feature);
-		if (result == null)
-			throw new IllegalStateException("Cannot determine type for " + feature.getIdentifier());
+		if (result == null) {
+			return new AnyTypeReference(getState().getReferenceOwner());
+		}
 		return result;
 	}
 

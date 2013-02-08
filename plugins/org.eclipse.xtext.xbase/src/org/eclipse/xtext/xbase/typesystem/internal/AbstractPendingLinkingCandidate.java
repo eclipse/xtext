@@ -7,7 +7,6 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.typesystem.internal;
 
-import java.util.Arrays;
 import java.util.EnumSet;
 import java.util.List;
 import java.util.Map;
@@ -237,12 +236,20 @@ public abstract class AbstractPendingLinkingCandidate<Expression extends XExpres
 		int upTo = Math.min(arguments.getArgumentCount(), right.arguments.getArgumentCount());
 		int leftBoxing = 0;
 		int rightBoxing = 0;
+		int leftDemand = 0;
+		int rightDemand = 0;
 		for(int i = 0; i < upTo; i++) {
 			EnumSet<ConformanceHint> leftConformance = getConformanceHints(i, recompute);
 			EnumSet<ConformanceHint> rightConformance = right.getConformanceHints(i, recompute);
 			int hintCompareResult = ConformanceHint.compareHints(leftConformance, rightConformance);
 			if (hintCompareResult != 0)
 				return hintCompareResult;
+			if (leftConformance.contains(ConformanceHint.DEMAND_CONVERSION)) {
+				leftDemand++;
+			}
+			if (rightConformance.contains(ConformanceHint.DEMAND_CONVERSION)) {
+				rightDemand++;
+			}
 			if (leftConformance.contains(ConformanceHint.BOXING) || leftConformance.contains(ConformanceHint.UNBOXING)) {
 				leftBoxing++;
 			}
@@ -250,35 +257,15 @@ public abstract class AbstractPendingLinkingCandidate<Expression extends XExpres
 				rightBoxing++;
 			}
 		}
+		if (leftDemand != rightDemand) {
+			if (leftDemand < rightDemand)
+				return -1;
+			return 1;
+		}
 		if (leftBoxing != rightBoxing) {
 			if (leftBoxing < rightBoxing)
 				return -1;
 			return 1;
-		}
-		return 0;
-	}
-	
-	protected int compareByConformanceHints(EnumSet<ConformanceHint> leftConformance, EnumSet<ConformanceHint> rightConformance) {
-		for(ConformanceHint hint: Arrays.asList(ConformanceHint.DEMAND_CONVERSION, ConformanceHint.SYNONYM, ConformanceHint.VAR_ARG, 
-				ConformanceHint.BOXING, ConformanceHint.UNBOXING, ConformanceHint.PRIMITIVE_WIDENING)) {
-			boolean leftContains = leftConformance.contains(hint);
-			boolean rightContains = rightConformance.contains(hint);
-			if (leftContains != rightContains) {
-				if (leftContains)
-					return 1;
-				return -1;
-			}
-		}
-		return 0;
-	}
-	
-	protected int compareByConformanceHint(EnumSet<ConformanceHint> leftConformance, EnumSet<ConformanceHint> rightConformance, ConformanceHint unexpectedHint) {
-		boolean leftContains = leftConformance.contains(unexpectedHint);
-		boolean rightContains = rightConformance.contains(unexpectedHint);
-		if (leftContains != rightContains) {
-			if (leftContains)
-				return 1;
-			return -1;
 		}
 		return 0;
 	}

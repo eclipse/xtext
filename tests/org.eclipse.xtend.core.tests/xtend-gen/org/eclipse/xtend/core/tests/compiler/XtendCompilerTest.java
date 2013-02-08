@@ -394,6 +394,59 @@ public class XtendCompilerTest extends AbstractXtendTestCase {
   }
   
   @Test
+  public void testLocalExtensionForPairStringString_09() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("import org.eclipse.xtext.xbase.lib.Pair");
+    _builder.newLine();
+    _builder.append("public class C  {");
+    _builder.newLine();
+    _builder.append("    ");
+    _builder.append("def String m(Pair<String, String> in) {");
+    _builder.newLine();
+    _builder.append("    \t");
+    _builder.append("(\"\"->");
+    _builder.append("\'\'\'\'\'\'", "    	");
+    _builder.append(").m");
+    _builder.newLineIfNotEmpty();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("import org.eclipse.xtend2.lib.StringConcatenation;");
+    _builder_1.newLine();
+    _builder_1.append("import org.eclipse.xtext.xbase.lib.Pair;");
+    _builder_1.newLine();
+    _builder_1.newLine();
+    _builder_1.append("@SuppressWarnings(\"all\")");
+    _builder_1.newLine();
+    _builder_1.append("public class C {");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("public String m(final Pair<String,String> in) {");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("StringConcatenation _builder = new StringConcatenation();");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("Pair<String,String> _mappedTo = Pair.<String, String>of(\"\", _builder.toString());");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("String _m = this.m(_mappedTo);");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("return _m;");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    this.assertCompilesTo(_builder, _builder_1);
+  }
+  
+  @Test
   public void testIfWithVoid() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("public class C  {");
@@ -6791,7 +6844,6 @@ public class XtendCompilerTest extends AbstractXtendTestCase {
       "class Foo { def String test() \'\'\'SomeString\'\'\' }", _builder);
   }
   
-  @Ignore(value = "TODO implement better expectation computation for unresolved type parameters")
   @Test
   public void testRichStringAutoConversionToString_02() {
     StringConcatenation _builder = new StringConcatenation();
@@ -6828,11 +6880,12 @@ public class XtendCompilerTest extends AbstractXtendTestCase {
       "class Foo { def String test() { println(\'\'\'SomeString\'\'\') } }", _builder);
   }
   
-  @Ignore(value = "TODO implement deferred expectations for untyped local variables")
   @Test
   public void testRichStringAutoConversionToString_03() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("import org.eclipse.xtend2.lib.StringConcatenation;");
+    _builder.newLine();
+    _builder.append("import org.eclipse.xtext.xbase.lib.InputOutput;");
     _builder.newLine();
     _builder.newLine();
     _builder.append("@SuppressWarnings(\"all\")");
@@ -6840,16 +6893,31 @@ public class XtendCompilerTest extends AbstractXtendTestCase {
     _builder.append("public class Foo {");
     _builder.newLine();
     _builder.append("  ");
-    _builder.append("public CharSequence test() {");
+    _builder.append("public String test() {");
     _builder.newLine();
     _builder.append("    ");
+    _builder.append("String _xblockexpression = null;");
+    _builder.newLine();
+    _builder.append("    ");
+    _builder.append("{");
+    _builder.newLine();
+    _builder.append("      ");
     _builder.append("StringConcatenation _builder = new StringConcatenation();");
     _builder.newLine();
-    _builder.append("    ");
+    _builder.append("      ");
     _builder.append("_builder.append(\"SomeString\");");
     _builder.newLine();
+    _builder.append("      ");
+    _builder.append("final String x = InputOutput.<String>println(_builder.toString());");
+    _builder.newLine();
+    _builder.append("      ");
+    _builder.append("_xblockexpression = (x);");
+    _builder.newLine();
     _builder.append("    ");
-    _builder.append("return _builder;");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("    ");
+    _builder.append("return _xblockexpression;");
     _builder.newLine();
     _builder.append("  ");
     _builder.append("}");
@@ -6860,7 +6928,6 @@ public class XtendCompilerTest extends AbstractXtendTestCase {
       "class Foo { def String test() { val x = println(\'\'\'SomeString\'\'\') x } }", _builder);
   }
   
-  @Ignore(value = "TODO implement deferred expectations for untyped local variables")
   @Test
   public void testRichStringAutoConversionToString_04() {
     StringConcatenation _builder = new StringConcatenation();
@@ -6872,16 +6939,31 @@ public class XtendCompilerTest extends AbstractXtendTestCase {
     _builder.append("public class Foo {");
     _builder.newLine();
     _builder.append("  ");
-    _builder.append("public CharSequence test() {");
+    _builder.append("public String test() {");
     _builder.newLine();
     _builder.append("    ");
+    _builder.append("String _xblockexpression = null;");
+    _builder.newLine();
+    _builder.append("    ");
+    _builder.append("{");
+    _builder.newLine();
+    _builder.append("      ");
     _builder.append("StringConcatenation _builder = new StringConcatenation();");
     _builder.newLine();
-    _builder.append("    ");
+    _builder.append("      ");
     _builder.append("_builder.append(\"SomeString\");");
     _builder.newLine();
+    _builder.append("      ");
+    _builder.append("final String x = _builder.toString();");
+    _builder.newLine();
+    _builder.append("      ");
+    _builder.append("_xblockexpression = (x);");
+    _builder.newLine();
     _builder.append("    ");
-    _builder.append("return _builder;");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("    ");
+    _builder.append("return _xblockexpression;");
     _builder.newLine();
     _builder.append("  ");
     _builder.append("}");
@@ -6924,7 +7006,7 @@ public class XtendCompilerTest extends AbstractXtendTestCase {
   }
   
   @Test
-  public void testRichStringNoAutoConversionToString_02() {
+  public void testRichStringAutoConversionDueToUnboundTypeParam_01() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("import org.eclipse.xtend2.lib.StringConcatenation;");
     _builder.newLine();
@@ -6936,7 +7018,7 @@ public class XtendCompilerTest extends AbstractXtendTestCase {
     _builder.append("public class Foo {");
     _builder.newLine();
     _builder.append("  ");
-    _builder.append("public CharSequence test() {");
+    _builder.append("public String test() {");
     _builder.newLine();
     _builder.append("    ");
     _builder.append("StringConcatenation _builder = new StringConcatenation();");
@@ -6945,7 +7027,7 @@ public class XtendCompilerTest extends AbstractXtendTestCase {
     _builder.append("_builder.append(\"SomeString\");");
     _builder.newLine();
     _builder.append("    ");
-    _builder.append("CharSequence _println = InputOutput.<CharSequence>println(_builder);");
+    _builder.append("String _println = InputOutput.<String>println(_builder.toString());");
     _builder.newLine();
     _builder.append("    ");
     _builder.append("return _println;");
@@ -6959,9 +7041,8 @@ public class XtendCompilerTest extends AbstractXtendTestCase {
       "class Foo { def test() { println(\'\'\'SomeString\'\'\') } }", _builder);
   }
   
-  @Ignore(value = "TODO implement better expectation computation for unresolved type parameters")
   @Test
-  public void testRichStringNoAutoConversionToString_03() {
+  public void testRichStringNoAutoConversionToString_02() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("import org.eclipse.xtend2.lib.StringConcatenation;");
     _builder.newLine();
@@ -6992,7 +7073,7 @@ public class XtendCompilerTest extends AbstractXtendTestCase {
   }
   
   @Test
-  public void testRichStringNoAutoConversionToString_04() {
+  public void testRichStringAutoConversionDueToUnboundTypeParam_02() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("import org.eclipse.xtend2.lib.StringConcatenation;");
     _builder.newLine();
@@ -7013,7 +7094,7 @@ public class XtendCompilerTest extends AbstractXtendTestCase {
     _builder.append("_builder.append(\"SomeString\");");
     _builder.newLine();
     _builder.append("    ");
-    _builder.append("CharSequence _println = InputOutput.<CharSequence>println(_builder);");
+    _builder.append("String _println = InputOutput.<String>println(_builder.toString());");
     _builder.newLine();
     _builder.append("    ");
     _builder.append("System.out.println(_println);");

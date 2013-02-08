@@ -45,7 +45,7 @@ public enum ConformanceHint {
 	 */
 	NO_IMPLICIT_RETURN;  
 	
-	private static ConformanceHint[] shallowCheckedHints = { ConformanceHint.DEMAND_CONVERSION, ConformanceHint.SYNONYM, ConformanceHint.VAR_ARG };
+	private static ConformanceHint[] shallowCheckedHints = { ConformanceHint.SYNONYM, ConformanceHint.VAR_ARG };
 	
 	public static int compareHints(EnumSet<ConformanceHint> leftConformance, EnumSet<ConformanceHint> rightConformance) {
 		if (leftConformance.contains(ConformanceHint.SUCCESS) != rightConformance.contains(ConformanceHint.SUCCESS)) {

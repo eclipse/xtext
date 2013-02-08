@@ -63,7 +63,11 @@ public class XtendTypeComputer extends XbaseWithAnnotationsTypeComputer {
 		for(ITypeExpectation expectation: state.getExpectations()) {
 			LightweightTypeReference expectedType = expectation.getExpectedType();
 			if (expectedType != null && expectedType.isType(String.class)) {
-				expectation.acceptActualType(expectedType, ConformanceHint.CHECKED);
+				expectation.acceptActualType(expectedType, ConformanceHint.SUCCESS, ConformanceHint.CHECKED, ConformanceHint.DEMAND_CONVERSION);
+				// TODO this special treatment here should become obsolete as soon as the expectations are properly propagated
+			} else if (expectedType != null && !expectedType.isResolved() || expectedType == null && !expectation.isVoidTypeAllowed()) {
+				LightweightTypeReference type = getTypeForName(String.class, state);
+				expectation.acceptActualType(type, ConformanceHint.UNCHECKED, ConformanceHint.DEMAND_CONVERSION);
 			} else {
 				LightweightTypeReference type = getTypeForName(CharSequence.class, state);
 				expectation.acceptActualType(type, ConformanceHint.UNCHECKED);

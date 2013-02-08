@@ -2883,7 +2883,10 @@ public class CompilerTest extends AbstractXtendTestCase {
 	@Test public void testRichStringAndSwitch() throws Exception {
 		invokeAndExpect2(
 				"foo", 
-				"def x() { runTest().toString() } def runTest() '''«switch x : '''test''' { CharSequence : '''foo''' }»'''", 
+				"def x() { " +
+				"	runTest().toString() " +
+				"} " +
+				"def runTest() '''«switch x : '''test''' { CharSequence : '''foo''' }»'''", 
 				"x");
 	}
 	
