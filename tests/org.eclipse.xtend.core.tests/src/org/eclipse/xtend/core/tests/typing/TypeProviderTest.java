@@ -53,6 +53,29 @@ public class TypeProviderTest extends AbstractXtendTestCase {
 		return (XtendConstructor) clazz.getMembers().get(0);
 	}
 	
+	@Test public void testParameterizedExtension() throws Exception {
+		XtendFile file = file(
+				"package testPackage\n" +
+				"import org.eclipse.xtext.junit4.util.ParseHelper\n" +
+				"import org.eclipse.xtend.core.xtend.XtendFile\n" + 
+				"class C {\n" + 
+				"	extension ParseHelper<XtendFile>\n" +
+				"	def m() {" +
+				"		parse('')\n" +
+				"	}\n" + 
+				"}\n"); 
+		XtendClass c = (XtendClass) file.getXtendTypes().get(0);
+		XAbstractFeatureCall parse = findSingleFeatureCall(c);
+		assertEquals("org.eclipse.xtext.junit4.util.ParseHelper.parse(java.lang.CharSequence)", parse.getFeature().getIdentifier());
+		assertEquals("XtendFile", typeProvider.getType(parse).getSimpleName());
+	}
+	
+	private XAbstractFeatureCall findSingleFeatureCall(XtendClass xtendClass) {
+		XtendFunction function = (XtendFunction) xtendClass.getMembers().get(xtendClass.getMembers().size() - 1);
+		XBlockExpression block = (XBlockExpression) function.getExpression();
+		return (XAbstractFeatureCall) block.getExpressions().get(0);
+	}
+	
 	@Test public void testExpectationRelevantExpressionType_01() throws Exception {
 		String clazzString = "import java.util.Set\n" +
 			"import org.eclipse.xtext.xbase.typesystem.util.TypeParameterSubstitutor\n" +
@@ -138,7 +161,7 @@ public class TypeProviderTest extends AbstractXtendTestCase {
 		XMemberFeatureCall invocation = (XMemberFeatureCall) body.getExpressions().get(0);
 		XFeatureCall newArrayList = (XFeatureCall) invocation.getActualArguments().get(1);
 		assertEquals("newArrayList", newArrayList.getFeature().getSimpleName());
-		assertEquals("Class<T>[]", typeProvider.getExpectedType(newArrayList).getSimpleName());
+		assertEquals("Class<? super T>[]", typeProvider.getExpectedType(newArrayList).getSimpleName());
 		assertEquals("ArrayList<Class<? super T>>", typeProvider.getType(newArrayList).getSimpleName());
 	}
 	
@@ -155,7 +178,7 @@ public class TypeProviderTest extends AbstractXtendTestCase {
 		XMemberFeatureCall invocation = (XMemberFeatureCall) body.getExpressions().get(0);
 		XFeatureCall newArrayList = (XFeatureCall) invocation.getActualArguments().get(1);
 		assertEquals("newArrayList", newArrayList.getFeature().getSimpleName());
-		assertEquals("Class<T>[]", typeProvider.getExpectedType(newArrayList).getSimpleName());
+		assertEquals("Class<? extends T>[]", typeProvider.getExpectedType(newArrayList).getSimpleName());
 		assertEquals("ArrayList<Class<? extends T>>", typeProvider.getType(newArrayList).getSimpleName());
 	}
 	

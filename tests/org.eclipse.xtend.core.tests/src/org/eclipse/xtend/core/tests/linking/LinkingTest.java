@@ -88,6 +88,22 @@ public class LinkingTest extends AbstractXtendTestCase {
 	@Inject
 	private ITypeProvider typeProvider;
 	
+	@Test public void testParameterizedExtension() throws Exception {
+		XtendFile file = file(
+				"package testPackage\n" +
+				"import org.eclipse.xtext.junit4.util.ParseHelper\n" +
+				"import org.eclipse.xtend.core.xtend.XtendFile\n" + 
+				"class C {\n" + 
+				"	extension ParseHelper<XtendFile>\n" +
+				"	def m() {" +
+				"		parse('').xtendTypes\n" +
+				"	}\n" + 
+				"}\n"); 
+		XtendClass c = (XtendClass) file.getXtendTypes().get(0);
+		XAbstractFeatureCall substring = findSingleFeatureCall(c);
+		assertEquals("org.eclipse.xtend.core.xtend.XtendFile.getXtendTypes()", substring.getFeature().getIdentifier());
+	}
+	
 	@Test public void testCircularRecursion_01() throws Exception {
 		XtendFile file = file(
 				"package testPackage\n" + 
