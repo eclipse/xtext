@@ -29,6 +29,12 @@ public interface ITypeExpectation {
 	
 	ITypeReferenceOwner getReferenceOwner();
 	
+	/**
+	 * Create a new, managed {@link UnboundTypeReference} for the given type parameter which was
+	 * first encountered for the given expression.
+	 * @param expression the expression that used / referenced the type parameter
+	 * @param typeParameter the type parameter
+	 */
 	UnboundTypeReference createUnboundTypeReference(XExpression expression, JvmTypeParameter typeParameter);
 	
 	ITypeExpectation copyInto(ITypeReferenceOwner referenceOwner);

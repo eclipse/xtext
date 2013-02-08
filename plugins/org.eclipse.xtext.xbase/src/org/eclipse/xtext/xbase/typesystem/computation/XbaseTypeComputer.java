@@ -445,7 +445,7 @@ public class XbaseTypeComputer implements ITypeComputer {
 				expectation.acceptActualType(commonListType, ConformanceHint.UNCHECKED);
 			} else {
 				ParameterizedTypeReference unboundCollectionType = new ParameterizedTypeReference(state.getReferenceOwner(), collectionType);
-				unboundCollectionType.addTypeArgument(new UnboundTypeReference(state.getReferenceOwner(), literal, collectionType.getTypeParameters().get(0)));
+				unboundCollectionType.addTypeArgument(expectation.createUnboundTypeReference(literal, collectionType.getTypeParameters().get(0)));
 				expectation.acceptActualType(unboundCollectionType, ConformanceHint.UNCHECKED);
 			}
 		}

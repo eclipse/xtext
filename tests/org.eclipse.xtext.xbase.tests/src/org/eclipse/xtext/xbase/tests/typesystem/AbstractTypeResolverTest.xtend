@@ -295,7 +295,7 @@ abstract class AbstractTypeResolverTest<Reference> extends AbstractXbaseTestCase
 	}
 	
 	@Test def void testListLiteral_00() {
-		"#[]".resolvesTo("List<Unbound[E]>")	
+		"#[]".resolvesTo("List<Object>")
 	}
 	
 	@Test def void testListLiteral_01() throws Exception {
@@ -307,7 +307,7 @@ abstract class AbstractTypeResolverTest<Reference> extends AbstractXbaseTestCase
 	}
 
 	@Test def void testListLiteral_03() throws Exception {
-		"#[null]".resolvesTo("List<Unbound[E]>")
+		"#[null]".resolvesTo("List<Object>")
 	}
 
 	@Test def void testListLiteral_04() throws Exception {
@@ -330,8 +330,24 @@ abstract class AbstractTypeResolverTest<Reference> extends AbstractXbaseTestCase
 		"{ val String[] foo = #['foo', 'bar'] foo }".resolvesTo("String[]")
 	}
 
+	@Test def void testListLiteral_09() throws Exception {
+		"{ val x = #[] val String[] y = x x }".resolvesTo("List<String>")
+	}
+
+	@Test def void testListLiteral_10() throws Exception {
+		"{ val x = #[null] val String[] y = x x }".resolvesTo("List<String>")
+	}
+
+	@Test def void testListLiteral_11() throws Exception {
+		"{ val x = #[] val Iterable<String> y = x x }".resolvesTo("List<String>")
+	}
+
+	@Test def void testListLiteral_12() throws Exception {
+		"{ val x = #[null] val java.util.Set<String> y = x x }".resolvesTo("List<String>")
+	}
+
 	@Test def void testSetLiteral_00() {
-		"#{}".resolvesTo("Set<Unbound[E]>")	
+		"#{}".resolvesTo("Set<Object>")
 	}
 	
 	@Test def void testSetLiteral_01() throws Exception {
@@ -343,7 +359,7 @@ abstract class AbstractTypeResolverTest<Reference> extends AbstractXbaseTestCase
 	}
 
 	@Test def void testSetLiteral_03() throws Exception {
-		"#{null}".resolvesTo("Set<Unbound[E]>")
+		"#{null}".resolvesTo("Set<Object>")
 	}
 
 	@Test def void testSetLiteral_04() throws Exception {
