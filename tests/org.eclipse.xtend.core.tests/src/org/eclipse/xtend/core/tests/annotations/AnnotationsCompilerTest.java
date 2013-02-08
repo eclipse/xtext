@@ -100,7 +100,23 @@ public class AnnotationsCompilerTest extends AbstractXtendTestCase {
 
 	@Test public void testBug351554_02() throws Exception {
 		final String text = 
-			"@testdata.Annotation1(children = @testdata.Annotation2({'a', 'b'}), value=true)\n" +
+				"@testdata.Annotation1(children = @testdata.Annotation2({'a', 'b'}), value=true)\n" +
+						"class Foo {}";
+		Annotation1 annotation = getAnnotationOnClass(text, Annotation1.class);
+		assertNotNull(annotation);
+		assertNotNull(annotation.children());
+		assertEquals(1, annotation.children().length);
+		Annotation2 nestedAnnotation = annotation.children()[0];
+		assertNotNull(nestedAnnotation);
+		assertNotNull(nestedAnnotation.value());
+		assertEquals(2, nestedAnnotation.value().length);
+		assertEquals("a", nestedAnnotation.value()[0]);
+		assertEquals("b", nestedAnnotation.value()[1]);
+	}
+	
+	@Test public void testBug351554_03() throws Exception {
+		final String text = 
+			"@testdata.Annotation1(children = @testdata.Annotation2(#['a', 'b']), value=true)\n" +
 			"class Foo {}";
 		Annotation1 annotation = getAnnotationOnClass(text, Annotation1.class);
 		assertNotNull(annotation);
