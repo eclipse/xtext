@@ -51,6 +51,9 @@ public abstract class AbstractTypeReferencePairWalker extends TypeReferenceVisit
 					JvmTypeParameter typeParameter = (JvmTypeParameter) type;
 					processTypeParameter(typeParameter, declaration);
 				}
+			} else {
+				ParameterizedTypeReference declarationAsList = declaration.tryConvertToListType();
+				outerVisit(declarationAsList, reference);
 			}
 		}
 		

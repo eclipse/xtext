@@ -91,6 +91,74 @@ public class TypeProviderTest extends AbstractXtendTestCase {
 		assertEquals("Set<T>", typeProvider.getExpectedType(newHashSet).getSimpleName());
 	}
 	
+	@Test public void testExpectationRelevantExpressionType_03() throws Exception {
+		String clazzString = 
+			"class C {\n" +
+			"  def m() {\n" + 
+			"    typeof(C).getMethod('', newArrayList)\n" +  
+			"  }\n" +
+			"}";
+		XtendClass clazz = (XtendClass) file(clazzString, false).getXtendTypes().get(0);
+		XtendFunction function = (XtendFunction) clazz.getMembers().get(0);
+		XBlockExpression body = (XBlockExpression) function.getExpression();
+		XMemberFeatureCall invocation = (XMemberFeatureCall) body.getExpressions().get(0);
+		XFeatureCall newArrayList = (XFeatureCall) invocation.getActualArguments().get(1);
+		assertEquals("newArrayList", newArrayList.getFeature().getSimpleName());
+		assertEquals("Class<?>[]", typeProvider.getExpectedType(newArrayList).getSimpleName());
+		assertEquals("ArrayList<Class<?>>", typeProvider.getType(newArrayList).getSimpleName());
+	}
+	
+	@Test public void testExpectationRelevantExpressionType_04() throws Exception {
+		String clazzString = 
+			"class C<T> {\n" +
+			"  def String m(String s, Class<T>[] types) {\n" + 
+			"    this.m('', newArrayList)\n" +  
+			"  }\n" +
+			"}";
+		XtendClass clazz = (XtendClass) file(clazzString, false).getXtendTypes().get(0);
+		XtendFunction function = (XtendFunction) clazz.getMembers().get(0);
+		XBlockExpression body = (XBlockExpression) function.getExpression();
+		XMemberFeatureCall invocation = (XMemberFeatureCall) body.getExpressions().get(0);
+		XFeatureCall newArrayList = (XFeatureCall) invocation.getActualArguments().get(1);
+		assertEquals("newArrayList", newArrayList.getFeature().getSimpleName());
+		assertEquals("Class<T>[]", typeProvider.getExpectedType(newArrayList).getSimpleName());
+		assertEquals("ArrayList<Class<T>>", typeProvider.getType(newArrayList).getSimpleName());
+	}
+	
+	@Test public void testExpectationRelevantExpressionType_05() throws Exception {
+		String clazzString = 
+				"class C<T> {\n" +
+				"  def String m(String s, Class<? super T>[] types) {\n" + 
+				"    this.m('', newArrayList)\n" +  
+				"  }\n" +
+				"}";
+		XtendClass clazz = (XtendClass) file(clazzString, false).getXtendTypes().get(0);
+		XtendFunction function = (XtendFunction) clazz.getMembers().get(0);
+		XBlockExpression body = (XBlockExpression) function.getExpression();
+		XMemberFeatureCall invocation = (XMemberFeatureCall) body.getExpressions().get(0);
+		XFeatureCall newArrayList = (XFeatureCall) invocation.getActualArguments().get(1);
+		assertEquals("newArrayList", newArrayList.getFeature().getSimpleName());
+		assertEquals("Class<T>[]", typeProvider.getExpectedType(newArrayList).getSimpleName());
+		assertEquals("ArrayList<Class<? super T>>", typeProvider.getType(newArrayList).getSimpleName());
+	}
+	
+	@Test public void testExpectationRelevantExpressionType_06() throws Exception {
+		String clazzString = 
+				"class C<T> {\n" +
+				"  def String m(String s, Class<? extends T>[] types) {\n" + 
+				"    this.m('', newArrayList)\n" +  
+				"  }\n" +
+				"}";
+		XtendClass clazz = (XtendClass) file(clazzString, false).getXtendTypes().get(0);
+		XtendFunction function = (XtendFunction) clazz.getMembers().get(0);
+		XBlockExpression body = (XBlockExpression) function.getExpression();
+		XMemberFeatureCall invocation = (XMemberFeatureCall) body.getExpressions().get(0);
+		XFeatureCall newArrayList = (XFeatureCall) invocation.getActualArguments().get(1);
+		assertEquals("newArrayList", newArrayList.getFeature().getSimpleName());
+		assertEquals("Class<T>[]", typeProvider.getExpectedType(newArrayList).getSimpleName());
+		assertEquals("ArrayList<Class<? extends T>>", typeProvider.getType(newArrayList).getSimpleName());
+	}
+	
 	@Test public void testReturnTypeInConstructor_01() throws Exception {
 		XtendConstructor constructor = constructor(
 				"new() {\n" + 
