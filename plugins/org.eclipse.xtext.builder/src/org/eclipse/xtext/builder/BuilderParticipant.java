@@ -12,6 +12,7 @@ import static com.google.common.collect.Maps.*;
 import static com.google.common.collect.Sets.*;
 import static org.eclipse.xtext.ui.util.ResourceUtil.*;
 
+import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -74,6 +75,20 @@ public class BuilderParticipant implements IXtextBuilderParticipant {
 	private EclipseOutputConfigurationProvider outputConfigurationProvider;
 	private BuilderPreferenceAccess builderPreferenceAccess;
 
+	/**
+	 * @since 2.4
+	 */
+	protected IDerivedResourceMarkers getDerivedResourceMarkers(){
+		return derivedResourceMarkers;
+	}
+
+	/**
+	 * @since 2.4
+	 */
+	protected GeneratorIdProvider getGeneratorIdProvider(){
+		return generatorIdProvider;
+	}
+
 	public BuilderPreferenceAccess getBuilderPreferenceAccess() {
 		return builderPreferenceAccess;
 	}
@@ -104,6 +119,21 @@ public class BuilderParticipant implements IXtextBuilderParticipant {
 	@Inject
 	public void setOutputConfigurationProvider(EclipseOutputConfigurationProvider outputConfigurationProvider) {
 		this.outputConfigurationProvider = outputConfigurationProvider;
+	}
+
+	/**
+	 * @since 2.4
+	 */
+	protected Map<OutputConfiguration, Iterable<IMarker>> getGeneratorMarkers(IProject builtProject, Collection<OutputConfiguration> outputConfigurations) throws CoreException{
+		Map<OutputConfiguration, Iterable<IMarker>> generatorMarkers = newHashMap();
+		for (OutputConfiguration config : outputConfigurations) {
+			if (config.isCleanUpDerivedResources()) {
+				IContainer container = getContainer(builtProject, config.getOutputDirectory());
+				final Iterable<IMarker> markers = derivedResourceMarkers.findDerivedResourceMarkers(container, generatorIdProvider.getGeneratorIdentifier());
+				generatorMarkers.put(config, markers);
+			}
+		}
+		return generatorMarkers;
 	}
 
 	public void build(final IBuildContext context, IProgressMonitor monitor) throws CoreException {
@@ -137,16 +167,7 @@ public class BuilderParticipant implements IXtextBuilderParticipant {
 			if (context.getBuildType() == BuildType.CLEAN)
 				return;
 		}
-		
-        Map<OutputConfiguration, Iterable<IMarker>> generatorMarkers = newHashMap();
-        for (OutputConfiguration config : outputConfigurations.values()) {
-            if (config.isCleanUpDerivedResources()) {
-                IContainer container = getContainer(builtProject, config.getOutputDirectory());
-				final Iterable<IMarker> markers = derivedResourceMarkers.findDerivedResourceMarkers(container, generatorIdProvider.getGeneratorIdentifier());
-				generatorMarkers.put(config, markers);
-            }
-        }
-		
+		Map<OutputConfiguration, Iterable<IMarker>> generatorMarkers = getGeneratorMarkers(builtProject, outputConfigurations.values());
 		for (int i = 0 ; i < numberOfDeltas ; i++) {
 			final IResourceDescription.Delta delta = deltas.get(i);
 			
