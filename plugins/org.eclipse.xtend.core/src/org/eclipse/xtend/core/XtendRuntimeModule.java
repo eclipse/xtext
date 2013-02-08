@@ -24,7 +24,7 @@ import org.eclipse.xtend.core.typing.XtendExpressionHelper;
 import org.eclipse.xtend.core.validation.XtendConfigurableIssueCodes;
 import org.eclipse.xtend.core.validation.XtendEarlyExitValidator;
 import org.eclipse.xtend.core.validation.XtendJavaValidator;
-import org.eclipse.xtend.core.validation.XtendJavaValidator2;
+import org.eclipse.xtend.core.validation.XtendJavaValidator;
 import org.eclipse.xtend.core.xtend.XtendFactory;
 import org.eclipse.xtext.common.types.util.FeatureOverridesService;
 import org.eclipse.xtext.common.types.util.TypeArgumentContextProvider;
@@ -220,8 +220,8 @@ public class XtendRuntimeModule extends org.eclipse.xtend.core.AbstractXtendRunt
 	}
 
 	@SingletonBinding(eager = true)
-	public Class<? extends XtendJavaValidator2> bindXtendJavaValidator2() {
-		return XtendJavaValidator2.class;
+	public Class<? extends XtendJavaValidator> bindXtendJavaValidator2() {
+		return XtendJavaValidator.class;
 	}
 
 	public Class<? extends VisibilityService> bindVisibilityService() {

@@ -19,7 +19,7 @@ import org.eclipse.xtext.xbase.annotations.typesystem.XbaseWithAnnotationsBatchS
 import org.eclipse.xtext.xbase.annotations.typesystem.XbaseWithAnnotationsTypeComputer;
 import org.eclipse.xtext.xbase.annotations.typing.XbaseWithAnnotationsTypeProvider;
 import org.eclipse.xtext.xbase.annotations.validation.XbaseWithAnnotationsJavaValidator;
-import org.eclipse.xtext.xbase.annotations.validation.XbaseWithAnnotationsJavaValidator2;
+import org.eclipse.xtext.xbase.annotations.validation.XbaseWithAnnotationsJavaValidator;
 import org.eclipse.xtext.xbase.compiler.TypeReferenceSerializer;
 import org.eclipse.xtext.xbase.compiler.TypeReferenceSerializer2;
 import org.eclipse.xtext.xbase.interpreter.IExpressionInterpreter;
@@ -88,8 +88,8 @@ public class XbaseWithAnnotationsRuntimeModule extends org.eclipse.xtext.xbase.a
 	}
 	
 	@SingletonBinding(eager=true)	
-	public Class<? extends XbaseWithAnnotationsJavaValidator2> bindDefaultXbaseValidator() {
-		return XbaseWithAnnotationsJavaValidator2.class;
+	public Class<? extends XbaseWithAnnotationsJavaValidator> bindDefaultXbaseValidator() {
+		return XbaseWithAnnotationsJavaValidator.class;
 	}
 	
 	public Class<? extends VisibilityService> bindVisibilityService() {
