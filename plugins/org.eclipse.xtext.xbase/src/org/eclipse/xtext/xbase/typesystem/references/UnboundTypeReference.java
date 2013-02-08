@@ -17,6 +17,7 @@ import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.xbase.XExpression;
+import org.eclipse.xtext.xbase.typesystem.computation.ITypeExpectation;
 import org.eclipse.xtext.xbase.typesystem.conformance.TypeConformanceComputationArgument;
 import org.eclipse.xtext.xbase.typesystem.util.BoundTypeArgumentSource;
 import org.eclipse.xtext.xbase.typesystem.util.TypeParameterByConstraintSubstitutor;
@@ -28,6 +29,11 @@ import com.google.common.collect.Lists;
 
 /**
  * A type reference that points to a type parameter that is not yet resolved.
+ * 
+ * {@link UnboundTypeReference} should be created with a concrete {@link ITypeExpectation}
+ * via the factory method {@link ITypeExpectation#createUnboundTypeReference(XExpression, JvmTypeParameter)}
+ * or {@link #create(ITypeExpectation, XExpression, JvmTypeParameter)} respectively.
+ * 
  * Such type references may be produced in cases like
  * <code>
  *   val x = newArrayList
@@ -65,7 +71,18 @@ public class UnboundTypeReference extends LightweightTypeReference {
 	 */
 	private final XExpression expression;
 	
-	public UnboundTypeReference(ITypeReferenceOwner owner, XExpression expression, JvmTypeParameter typeParameter) {
+	/**
+	 * Create a new, managed unbound type reference for the given type parameter which was
+	 * first encountered for the given expression.
+	 * @param expression the expression that used / referenced the type parameter
+	 * @param typeParameter the type parameter
+	 * @param expectation the decision path that uses the type parameter
+	 */
+	public static UnboundTypeReference create(ITypeExpectation expectation, XExpression expression, JvmTypeParameter typeParameter) {
+		return expectation.createUnboundTypeReference(expression, typeParameter);
+	}
+	
+	protected UnboundTypeReference(ITypeReferenceOwner owner, XExpression expression, JvmTypeParameter typeParameter) {
 		this(owner, expression, typeParameter, new Object());
 	}
 	

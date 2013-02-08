@@ -578,7 +578,10 @@ public abstract class ResolvedTypes implements IResolvedTypes {
 	}
 
 	protected UnboundTypeReference createUnboundTypeReference(XExpression expression, JvmTypeParameter type) {
-		UnboundTypeReference result = new UnboundTypeReference(getReferenceOwner(), expression, type);
+		UnboundTypeReference result = new UnboundTypeReference(getReferenceOwner(), expression, type) {
+			// the constructor is protected since this guides developers better
+			// therefore we use an anonymous class, here
+		};
 		acceptUnboundTypeReference(result.getHandle(), result);
 		return result;
 	}

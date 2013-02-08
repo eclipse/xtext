@@ -411,6 +411,9 @@ class OldAPITypeResolverTest extends AbstractOldAPITypeResolverTest {
 	@Ignore("fails in old implementation") @Test override testSwitchExpression_10() throws Exception {
 		fail("fails in old implementation")
 	}
+	@Ignore("fails in old implementation") @Test override testSwitchExpression_11() throws Exception {
+		fail("fails in old implementation")
+	}
 	
 	@Ignore("fails in old implementation") @Test override testTypeLiteral_2() throws Exception {
 		fail("fails in old implementation")
@@ -990,6 +993,38 @@ class OldAPITypeResolverTest extends AbstractOldAPITypeResolverTest {
 	}
 	
 	@Ignore("fails in old implementation") @Test override testRawType_02() throws Exception {
+		fail("fails in old implementation")
+	}
+	
+	@Ignore("fails in old implementation") @Test override testListLiteral_00() {
+		fail("fails in old implementation")
+	}
+	@Ignore("fails in old implementation") @Test override testListLiteral_03() {
+		fail("fails in old implementation")
+	}
+	@Ignore("fails in old implementation") @Test override testListLiteral_05() {
+		fail("fails in old implementation")
+	}
+	@Ignore("fails in old implementation") @Test override testListLiteral_09() {
+		fail("fails in old implementation")
+	}
+	@Ignore("fails in old implementation") @Test override testListLiteral_10() {
+		fail("fails in old implementation")
+	}
+	@Ignore("fails in old implementation") @Test override testListLiteral_11() {
+		fail("fails in old implementation")
+	}
+	@Ignore("fails in old implementation") @Test override testListLiteral_12() {
+		fail("fails in old implementation")
+	}
+	
+	@Ignore("fails in old implementation") @Test override testSetLiteral_00() {
+		fail("fails in old implementation")
+	}
+	@Ignore("fails in old implementation") @Test override testSetLiteral_03() {
+		fail("fails in old implementation")
+	}
+	@Ignore("fails in old implementation") @Test override testSetLiteral_05() {
 		fail("fails in old implementation")
 	}
 	

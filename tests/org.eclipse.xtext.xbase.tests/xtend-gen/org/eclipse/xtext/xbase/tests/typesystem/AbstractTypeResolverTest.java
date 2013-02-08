@@ -361,7 +361,7 @@ public abstract class AbstractTypeResolverTest<Reference extends Object> extends
   
   @Test
   public void testListLiteral_00() {
-    this.resolvesTo("#[]", "List<Unbound[E]>");
+    this.resolvesTo("#[]", "List<Object>");
   }
   
   @Test
@@ -376,7 +376,7 @@ public abstract class AbstractTypeResolverTest<Reference extends Object> extends
   
   @Test
   public void testListLiteral_03() throws Exception {
-    this.resolvesTo("#[null]", "List<Unbound[E]>");
+    this.resolvesTo("#[null]", "List<Object>");
   }
   
   @Test
@@ -405,8 +405,28 @@ public abstract class AbstractTypeResolverTest<Reference extends Object> extends
   }
   
   @Test
+  public void testListLiteral_09() throws Exception {
+    this.resolvesTo("{ val x = #[] val String[] y = x x }", "List<String>");
+  }
+  
+  @Test
+  public void testListLiteral_10() throws Exception {
+    this.resolvesTo("{ val x = #[null] val String[] y = x x }", "List<String>");
+  }
+  
+  @Test
+  public void testListLiteral_11() throws Exception {
+    this.resolvesTo("{ val x = #[] val Iterable<String> y = x x }", "List<String>");
+  }
+  
+  @Test
+  public void testListLiteral_12() throws Exception {
+    this.resolvesTo("{ val x = #[null] val java.util.Set<String> y = x x }", "List<String>");
+  }
+  
+  @Test
   public void testSetLiteral_00() {
-    this.resolvesTo("#{}", "Set<Unbound[E]>");
+    this.resolvesTo("#{}", "Set<Object>");
   }
   
   @Test
@@ -421,7 +441,7 @@ public abstract class AbstractTypeResolverTest<Reference extends Object> extends
   
   @Test
   public void testSetLiteral_03() throws Exception {
-    this.resolvesTo("#{null}", "Set<Unbound[E]>");
+    this.resolvesTo("#{null}", "Set<Object>");
   }
   
   @Test
