@@ -136,7 +136,10 @@ public class OutlinePage extends ContentOutlinePage implements ISourceViewerAwar
 	public void dispose() {
 		contribution.deregister(this);
 		sourceViewer.removeTextInputListener(textInputListener);
-		xtextDocument.removeModelListener(modelListener);
+		if (modelListener != null) {
+			xtextDocument.removeModelListener(modelListener);
+			modelListener = null;
+		}
 		contentProvider.dispose();
 		super.dispose();
 	}
@@ -156,10 +159,10 @@ public class OutlinePage extends ContentOutlinePage implements ISourceViewerAwar
 		textInputListener = new ITextInputListener() {
 			public void inputDocumentChanged(IDocument oldInput, IDocument newInput) {
 				try {
-					if (xtextDocument != null)
+					if (xtextDocument != null && modelListener != null)
 						xtextDocument.removeModelListener(modelListener);
 					xtextDocument = XtextDocumentUtil.get(newInput);
-					if (xtextDocument != null) {
+					if (xtextDocument != null && modelListener != null) {
 						xtextDocument.addModelListener(modelListener);
 						scheduleRefresh();
 					}
