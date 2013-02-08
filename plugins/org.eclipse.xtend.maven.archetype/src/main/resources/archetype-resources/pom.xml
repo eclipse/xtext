@@ -21,7 +21,8 @@
 	</pluginRepositories>
 
 	<properties>
-		<xtend.version>2.4.0-SNAPSHOT</xtend.version>
+        <project.build.sourceEncoding>${sourceEncoding}</project.build.sourceEncoding>
+        <xtend.version>2.4.0-SNAPSHOT</xtend.version>
 	</properties>
 
 	<build>
