@@ -12,7 +12,6 @@ import java.lang.reflect.InvocationTargetException;
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.math.MathContext;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.Stack;
 
@@ -22,12 +21,10 @@ import org.junit.Test;
 
 import testdata.ExceptionSubclass;
 import testdata.OuterClass;
-
-import static java.util.Collections.*;
-
-import static com.google.common.collect.Lists.*;
+import static com.google.common.collect.Lists.newArrayList;
 import static com.google.common.collect.Sets.newHashSet;
 import static com.google.common.collect.Sets.newTreeSet;
+import static java.util.Collections.emptyList;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -2158,6 +2155,11 @@ public abstract class AbstractXbaseEvaluationTest extends Assert {
 	@Test public void testClosure_31() throws Exception {
 		assertEvaluatesTo(Integer.valueOf(15), 
 				"{ val (int)=>int fun = [ if (it == 0) 0 else fun.apply(it - 1) + it ] fun.apply(5) }");
+	}
+	
+	@Test public void testExceptionOnClosure() throws Exception {
+		assertEvaluatesWithException(java.beans.PropertyVetoException.class, 
+				"{ val java.beans.VetoableChangeListener x = [ throw new java.beans.PropertyVetoException('', it) ] x.vetoableChange(null) }");
 	}
 	
 	/**

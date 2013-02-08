@@ -472,4 +472,14 @@ public class CompilerTest extends AbstractOutputComparingCompilerTests {
 				"final String[] x = _xlistliteral;",
 				"{val String[] x = #['foo']}");
 	}
+
+	@Test public void testExceptionOnClosure() throws Exception {
+		assertCompilesTo(
+				"final java.beans.VetoableChangeListener _function = new java.beans.VetoableChangeListener() {\n" + 
+				"    public void vetoableChange(final java.beans.PropertyChangeEvent it) throws java.beans.PropertyVetoException {\n" + 
+				"    }\n" + 
+				"  };\n" + 
+				"final java.beans.VetoableChangeListener x = _function;",
+				"{val java.beans.VetoableChangeListener x = []}");
+	}
 }
