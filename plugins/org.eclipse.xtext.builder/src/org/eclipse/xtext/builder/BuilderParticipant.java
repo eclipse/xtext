@@ -219,6 +219,8 @@ public class BuilderParticipant implements IXtextBuilderParticipant {
 			if (delta.getNew() != null) {
 				try {
 					handleChangedContents(delta, context, access);
+				} catch (OperationCanceledException e) {
+					throw e;
 				} catch (Exception e) {
 					logger.error("Error during compilation of '"+delta.getUri()+"'.", e);
 				}
