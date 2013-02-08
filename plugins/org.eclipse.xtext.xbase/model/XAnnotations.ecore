@@ -23,8 +23,4 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="operator" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
         defaultValueLiteral="+"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="XAnnotationValueArray" eSuperTypes="Xbase.ecore#//XExpression">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="values" upperBound="-1"
-        eType="ecore:EClass Xbase.ecore#//XExpression" containment="true"/>
-  </eClassifiers>
 </ecore:EPackage>

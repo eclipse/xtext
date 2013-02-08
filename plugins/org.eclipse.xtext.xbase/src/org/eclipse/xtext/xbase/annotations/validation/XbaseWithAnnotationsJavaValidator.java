@@ -38,8 +38,7 @@ public class XbaseWithAnnotationsJavaValidator extends XbaseJavaValidator {
 		acceptor.add(XAnnotationsPackage.Literals.XANNOTATION__VALUE, 
 				XAnnotationsPackage.Literals.XANNOTATION_ELEMENT_VALUE_BINARY_OPERATION__LEFT_OPERAND,
 				XAnnotationsPackage.Literals.XANNOTATION_ELEMENT_VALUE_BINARY_OPERATION__RIGHT_OPERAND,
-				XAnnotationsPackage.Literals.XANNOTATION_ELEMENT_VALUE_PAIR__VALUE,
-				XAnnotationsPackage.Literals.XANNOTATION_VALUE_ARRAY__VALUES);
+				XAnnotationsPackage.Literals.XANNOTATION_ELEMENT_VALUE_PAIR__VALUE);
 	}
 	
 	@Override

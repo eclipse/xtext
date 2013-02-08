@@ -22,6 +22,7 @@ import org.eclipse.xtext.xbase.XBinaryOperation
 import org.eclipse.xtext.xbase.XBlockExpression
 import org.eclipse.xtext.xbase.XCatchClause
 import org.eclipse.xtext.xbase.XClosure
+import org.eclipse.xtext.xbase.XCollectionLiteral
 import org.eclipse.xtext.xbase.XConstructorCall
 import org.eclipse.xtext.xbase.XDoWhileExpression
 import org.eclipse.xtext.xbase.XExpression
@@ -42,9 +43,8 @@ import org.eclipse.xtext.xtype.XFunctionTypeRef
 
 import static org.eclipse.xtext.common.types.TypesPackage$Literals.*
 import static org.eclipse.xtext.xbase.XbasePackage$Literals.*
+import static org.eclipse.xtext.xbase.formatting.BasicFormatterPreferenceKeys.*
 import static org.eclipse.xtext.xbase.formatting.XbaseFormatterPreferenceKeys.*
-import org.eclipse.xtext.xbase.XCollectionLiteral
-import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotationValueArray
 
 class XbaseFormatter2 extends AbstractFormatter {
 	@Inject extension NodeModelAccess
@@ -62,17 +62,6 @@ class XbaseFormatter2 extends AbstractFormatter {
 			document += node.prepend[noSpace]
 		}
 		document += literal.nodeForKeyword("]").prepend[noSpace]
-	}
-
-	def protected dispatch void format(XAnnotationValueArray literal, FormattableDocument document) {
-		var node = literal.nodeForKeyword("{")
-		for (value : literal.values) {
-			document += node.append[if (value == literal.values.head) noSpace else oneSpace]
-			value.format(document)
-			node = value.nodeForEObject.immediatelyFollowingKeyword(",")
-			document += node.prepend[noSpace]
-		}
-		document += literal.nodeForKeyword("}").prepend[noSpace]
 	}
 
 	def protected dispatch void format(XAnnotation ann, FormattableDocument document) {
