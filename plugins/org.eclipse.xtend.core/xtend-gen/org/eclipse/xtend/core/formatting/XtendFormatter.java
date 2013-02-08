@@ -60,6 +60,7 @@ import org.eclipse.xtext.xbase.XTypeLiteral;
 import org.eclipse.xtext.xbase.XVariableDeclaration;
 import org.eclipse.xtext.xbase.XWhileExpression;
 import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotation;
+import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotationValueArray;
 import org.eclipse.xtext.xbase.formatting.FormattableDocument;
 import org.eclipse.xtext.xbase.formatting.FormattingData;
 import org.eclipse.xtext.xbase.formatting.FormattingDataFactory;
@@ -1211,6 +1212,9 @@ public class XtendFormatter extends XbaseFormatter2 {
       return;
     } else if (annotationType instanceof XAnnotation) {
       _format((XAnnotation)annotationType, format);
+      return;
+    } else if (annotationType instanceof XAnnotationValueArray) {
+      _format((XAnnotationValueArray)annotationType, format);
       return;
     } else if (annotationType instanceof XtendFile) {
       _format((XtendFile)annotationType, format);
