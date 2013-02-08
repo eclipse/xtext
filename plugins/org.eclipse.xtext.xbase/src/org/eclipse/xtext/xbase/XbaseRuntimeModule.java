@@ -28,7 +28,7 @@ import org.eclipse.xtext.xbase.typesystem.legacy.LegacyVisibilityService;
 import org.eclipse.xtext.xbase.typesystem.legacy.XbaseBatchTypeProvider;
 import org.eclipse.xtext.xbase.typing.ITypeProvider;
 import org.eclipse.xtext.xbase.validation.XbaseJavaValidator;
-import org.eclipse.xtext.xbase.validation.XbaseJavaValidator2;
+import org.eclipse.xtext.xbase.validation.XbaseJavaValidator;
 
 import com.google.inject.Binder;
 
@@ -72,8 +72,8 @@ public class XbaseRuntimeModule extends AbstractXbaseRuntimeModule {
 	}
 	
 	@SingletonBinding(eager=true)	
-	public Class<? extends XbaseJavaValidator2> bindDefaultXbaseValidator() {
-		return XbaseJavaValidator2.class;
+	public Class<? extends XbaseJavaValidator> bindDefaultXbaseValidator() {
+		return XbaseJavaValidator.class;
 	}
 	
 	public Class<? extends VisibilityService> bindVisibilityService() {
