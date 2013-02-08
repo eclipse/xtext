@@ -13,6 +13,8 @@ import java.util.Map;
 import java.util.Set;
 
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EStructuralFeature;
+import org.eclipse.internal.xtend.xtend.parser.XtendParser;
 import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.common.types.JvmAnnotationAnnotationValue;
@@ -98,12 +100,14 @@ public class LogicalContainerAwareReentrantTypeResolver extends DefaultReentrant
 		
 		@Override
 		protected JvmTypeReference handleReentrantInvocation(XComputedTypeReferenceImplCustom context) {
+			EObject sourceElement = getSourceElement(member);
+			EStructuralFeature feature = sourceElement.eClass().getEStructuralFeature("name");
 			resolvedTypes.addDiagnostic(new EObjectDiagnosticImpl(
 					Severity.WARNING, 
 					IssueCodes.TOO_LITTLE_TYPE_INFORMATION, 
 					"Cannot infer type from recursive usage. Type 'Object' is used.",
 					getSourceElement(member), 
-					null, 
+					feature, 
 					-1, 
 					null));
 			AnyTypeReference result = new AnyTypeReference(resolvedTypes.getReferenceOwner());
