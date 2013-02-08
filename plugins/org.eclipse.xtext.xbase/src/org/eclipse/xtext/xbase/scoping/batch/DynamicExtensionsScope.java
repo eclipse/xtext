@@ -82,8 +82,9 @@ public class DynamicExtensionsScope extends AbstractSessionBasedScope {
 					}
 				}
 				if (!allFeatures.isEmpty()) {
+					Map<JvmTypeParameter, LightweightMergedBoundTypeArgument> receiverTypeParameterMapping = new DeclaratorTypeArgumentCollector().getTypeParameterMapping(extensionType);
 					for (JvmFeature feature : allFeatures) {
-						addDescriptions(feature, extensionProvider.getKey(), extensionType, bucket, result);
+						addDescriptions(feature, extensionProvider.getKey(), extensionType, receiverTypeParameterMapping, bucket, result);
 					}
 				}
 			}
@@ -92,20 +93,20 @@ public class DynamicExtensionsScope extends AbstractSessionBasedScope {
 	}
 
 	protected void addDescriptions(JvmFeature feature, XExpression receiver, LightweightTypeReference receiverType,
-			ExpressionBucket bucket, List<IEObjectDescription> result) {
+			Map<JvmTypeParameter, LightweightMergedBoundTypeArgument> receiverTypeParameterMapping, ExpressionBucket bucket, List<IEObjectDescription> result) {
 		// TODO property names?
 		QualifiedName featureName = QualifiedName.create(feature.getSimpleName());
 		if (firstArgument != null)
-			result.add(createDescription(featureName, feature, receiver, receiverType, bucket));
+			result.add(createDescription(featureName, feature, receiver, receiverType, receiverTypeParameterMapping, bucket));
 		if (implicit) {
-			result.add(createReceiverDescription(featureName, feature, receiver, receiverType, bucket));
+			result.add(createReceiverDescription(featureName, feature, receiver, receiverType, receiverTypeParameterMapping, bucket));
 		}
 		QualifiedName operator = operatorMapping.getOperator(featureName);
 		if (operator != null) {
 			if (firstArgument != null)
-				result.add(createDescription(operator, feature, receiver, receiverType, bucket));
+				result.add(createDescription(operator, feature, receiver, receiverType, receiverTypeParameterMapping, bucket));
 			if (implicit) {
-				result.add(createReceiverDescription(operator, feature, receiver, receiverType, bucket));
+				result.add(createReceiverDescription(operator, feature, receiver, receiverType, receiverTypeParameterMapping, bucket));
 			}
 		}
 	}
@@ -141,12 +142,13 @@ public class DynamicExtensionsScope extends AbstractSessionBasedScope {
 					}
 				});
 				if (!allFeatures.isEmpty()) {
+					Map<JvmTypeParameter, LightweightMergedBoundTypeArgument> receiverTypeParameterMapping = new DeclaratorTypeArgumentCollector().getTypeParameterMapping(extensionType);
 					for(JvmFeature feature: allFeatures) {
 						if (!feature.isStatic()) {
 							if (firstArgument != null)
-								result.add(createDescription(name, feature, extensionProvider.getKey(), extensionType, bucket));
+								result.add(createDescription(name, feature, extensionProvider.getKey(), extensionType, receiverTypeParameterMapping, bucket));
 							if (implicit) {
-								result.add(createReceiverDescription(name, feature, extensionProvider.getKey(), extensionType, bucket));
+								result.add(createReceiverDescription(name, feature, extensionProvider.getKey(), extensionType, receiverTypeParameterMapping, bucket));
 							}
 						}
 					}
@@ -167,15 +169,44 @@ public class DynamicExtensionsScope extends AbstractSessionBasedScope {
 		}
 	}
 	
-	protected BucketedEObjectDescription createDescription(QualifiedName name, JvmFeature feature, XExpression receiver, LightweightTypeReference receiverType, ExpressionBucket bucket) {
+	protected BucketedEObjectDescription createDescription(QualifiedName name, JvmFeature feature, XExpression receiver, LightweightTypeReference receiverType,
+			Map<JvmTypeParameter, LightweightMergedBoundTypeArgument> receiverTypeParameterMapping, ExpressionBucket bucket) {
 		if (implicit) {
-			return new InstanceExtensionDescriptionWithImplicitFirstArgument(name, feature, receiver, receiverType, Collections.<JvmTypeParameter, LightweightMergedBoundTypeArgument>emptyMap(), firstArgument, argumentType, getArgumentTypeParameterMapping(), bucket.getId(), getSession().isVisible(feature));
+			return new InstanceExtensionDescriptionWithImplicitFirstArgument(
+					name, 
+					feature, 
+					receiver, 
+					receiverType, 
+					receiverTypeParameterMapping, 
+					firstArgument, 
+					argumentType, 
+					getArgumentTypeParameterMapping(), 
+					bucket.getId(), 
+					getSession().isVisible(feature));
 		}
-		return new InstanceExtensionDescription(name, feature, receiver, receiverType, Collections.<JvmTypeParameter, LightweightMergedBoundTypeArgument>emptyMap(), firstArgument, argumentType, getArgumentTypeParameterMapping(), bucket.getId(), getSession().isVisible(feature));
+		return new InstanceExtensionDescription(
+				name, 
+				feature, 
+				receiver, 
+				receiverType, 
+				receiverTypeParameterMapping, 
+				firstArgument, 
+				argumentType, 
+				getArgumentTypeParameterMapping(), 
+				bucket.getId(), 
+				getSession().isVisible(feature));
 	}
 	
-	protected BucketedEObjectDescription createReceiverDescription(QualifiedName name, JvmFeature feature, XExpression receiver, LightweightTypeReference receiverType, ExpressionBucket bucket) {
-		return new InstanceFeatureDescriptionWithImplicitReceiver(name, feature, receiver, receiverType, Collections.<JvmTypeParameter, LightweightMergedBoundTypeArgument>emptyMap(), bucket.getId(), getSession().isVisible(feature));
+	protected BucketedEObjectDescription createReceiverDescription(QualifiedName name, JvmFeature feature, XExpression receiver,
+			LightweightTypeReference receiverType, Map<JvmTypeParameter, LightweightMergedBoundTypeArgument> receiverTypeParameterMapping, ExpressionBucket bucket) {
+		return new InstanceFeatureDescriptionWithImplicitReceiver(
+				name, 
+				feature, 
+				receiver, 
+				receiverType, 
+				receiverTypeParameterMapping, 
+				bucket.getId(), 
+				getSession().isVisible(feature));
 	}
 	
 }
