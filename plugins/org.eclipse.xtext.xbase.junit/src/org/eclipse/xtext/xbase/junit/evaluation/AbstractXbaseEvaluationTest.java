@@ -2159,7 +2159,7 @@ public abstract class AbstractXbaseEvaluationTest extends Assert {
 	
 	@Test public void testExceptionOnClosure() throws Exception {
 		assertEvaluatesWithException(java.beans.PropertyVetoException.class, 
-				"{ val java.beans.VetoableChangeListener x = [ throw new java.beans.PropertyVetoException('', it) ] x.vetoableChange(null) }");
+				"{ val java.beans.VetoableChangeListener x = [ throw new java.beans.PropertyVetoException('', it) ] x.vetoableChange(null) true }");
 	}
 	
 	/**
