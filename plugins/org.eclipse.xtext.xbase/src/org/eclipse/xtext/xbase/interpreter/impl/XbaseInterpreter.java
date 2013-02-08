@@ -72,7 +72,6 @@ import org.eclipse.xtext.xbase.XVariableDeclaration;
 import org.eclipse.xtext.xbase.XWhileExpression;
 import org.eclipse.xtext.xbase.XbasePackage;
 import org.eclipse.xtext.xbase.featurecalls.IdentifiableSimpleNameProvider;
-import org.eclipse.xtext.xbase.impl.FeatureCallToJavaMapping;
 import org.eclipse.xtext.xbase.interpreter.IEvaluationContext;
 import org.eclipse.xtext.xbase.interpreter.IEvaluationResult;
 import org.eclipse.xtext.xbase.interpreter.IExpressionInterpreter;
@@ -142,9 +141,6 @@ public class XbaseInterpreter implements IExpressionInterpreter {
 
 	@Inject
 	private JavaReflectAccess javaReflectAccess;
-	
-	@Inject
-	private FeatureCallToJavaMapping callToJavaMapping;
 	
 	@Inject
 	private ITypeProvider typeProvider;
@@ -797,13 +793,13 @@ public class XbaseInterpreter implements IExpressionInterpreter {
 	}
 
 	protected List<XExpression> getActualArguments(XAbstractFeatureCall featureCall) {
-		return callToJavaMapping.getActualArguments(featureCall);
+		return featureCall.getActualArguments();
 	}
 
 	protected XExpression getActualReceiver(XAbstractFeatureCall featureCall) {
-		return callToJavaMapping.getActualReceiver(featureCall);
+		return featureCall.getActualReceiver();
 	}
-
+	
 	protected Object invokeFeature(JvmIdentifiableElement feature, XAbstractFeatureCall featureCall, Object receiverObj,
 			IEvaluationContext context, CancelIndicator indicator) {
 		if (feature instanceof JvmField) {
