@@ -195,6 +195,30 @@ class XtendCompilerTest extends AbstractXtendTestCase {
 		''')
 	}
 	
+	@Test def void testLocalExtensionForPairStringString_09() {
+		assertCompilesTo('''
+			import org.eclipse.xtext.xbase.lib.Pair
+			public class C  {
+			    def String m(Pair<String, String> in) {
+			    	(""->«"''''''"»).m
+				}
+			}
+		''', '''
+			import org.eclipse.xtend2.lib.StringConcatenation;
+			import org.eclipse.xtext.xbase.lib.Pair;
+			
+			@SuppressWarnings("all")
+			public class C {
+			  public String m(final Pair<String,String> in) {
+			    StringConcatenation _builder = new StringConcatenation();
+			    Pair<String,String> _mappedTo = Pair.<String, String>of("", _builder.toString());
+			    String _m = this.m(_mappedTo);
+			    return _m;
+			  }
+			}
+		''')
+	}
+	
 	@Test def void testIfWithVoid() {
 		assertCompilesTo('''
 			public class C  {
@@ -3085,7 +3109,6 @@ class XtendCompilerTest extends AbstractXtendTestCase {
 			''')
 	}
 	
-	@Ignore("TODO implement better expectation computation for unresolved type parameters")
 	@Test
 	def testRichStringAutoConversionToString_02(){
 		assertCompilesTo(
@@ -3106,26 +3129,30 @@ class XtendCompilerTest extends AbstractXtendTestCase {
 			''')
 	}
 	
-	@Ignore("TODO implement deferred expectations for untyped local variables")
 	@Test
 	def testRichStringAutoConversionToString_03(){
 		assertCompilesTo(
 			"class Foo { def String test() { val x = println('''SomeString''') x } }",
 			'''
 				import org.eclipse.xtend2.lib.StringConcatenation;
+				import org.eclipse.xtext.xbase.lib.InputOutput;
 				
 				@SuppressWarnings("all")
 				public class Foo {
-				  public CharSequence test() {
-				    StringConcatenation _builder = new StringConcatenation();
-				    _builder.append("SomeString");
-				    return _builder;
+				  public String test() {
+				    String _xblockexpression = null;
+				    {
+				      StringConcatenation _builder = new StringConcatenation();
+				      _builder.append("SomeString");
+				      final String x = InputOutput.<String>println(_builder.toString());
+				      _xblockexpression = (x);
+				    }
+				    return _xblockexpression;
 				  }
 				}
 			''')
 	}
 	
-	@Ignore("TODO implement deferred expectations for untyped local variables")
 	@Test
 	def testRichStringAutoConversionToString_04(){
 		assertCompilesTo(
@@ -3135,10 +3162,15 @@ class XtendCompilerTest extends AbstractXtendTestCase {
 				
 				@SuppressWarnings("all")
 				public class Foo {
-				  public CharSequence test() {
-				    StringConcatenation _builder = new StringConcatenation();
-				    _builder.append("SomeString");
-				    return _builder;
+				  public String test() {
+				    String _xblockexpression = null;
+				    {
+				      StringConcatenation _builder = new StringConcatenation();
+				      _builder.append("SomeString");
+				      final String x = _builder.toString();
+				      _xblockexpression = (x);
+				    }
+				    return _xblockexpression;
 				  }
 				}
 			''')
@@ -3163,7 +3195,7 @@ class XtendCompilerTest extends AbstractXtendTestCase {
 	}
 	
 	@Test
-	def testRichStringNoAutoConversionToString_02(){
+	def testRichStringAutoConversionDueToUnboundTypeParam_01(){
 		assertCompilesTo(
 			"class Foo { def test() { println('''SomeString''') } }",
 			'''
@@ -3172,19 +3204,18 @@ class XtendCompilerTest extends AbstractXtendTestCase {
 				
 				@SuppressWarnings("all")
 				public class Foo {
-				  public CharSequence test() {
+				  public String test() {
 				    StringConcatenation _builder = new StringConcatenation();
 				    _builder.append("SomeString");
-				    CharSequence _println = InputOutput.<CharSequence>println(_builder);
+				    String _println = InputOutput.<String>println(_builder.toString());
 				    return _println;
 				  }
 				}
 			''')
 	}
-
-	@Ignore("TODO implement better expectation computation for unresolved type parameters")
+	
 	@Test
-	def testRichStringNoAutoConversionToString_03(){
+	def testRichStringNoAutoConversionToString_02(){
 		assertCompilesTo(
 			"class Foo { def test(){ System::out.println('''SomeString''') } }", 
 			'''
@@ -3202,7 +3233,7 @@ class XtendCompilerTest extends AbstractXtendTestCase {
 	}
 	
 	@Test
-	def testRichStringNoAutoConversionToString_04(){
+	def testRichStringAutoConversionDueToUnboundTypeParam_02(){
 		assertCompilesTo(
 			"class Foo { def test(){ System::out.println(println('''SomeString''')) } }", 
 			'''
@@ -3214,7 +3245,7 @@ class XtendCompilerTest extends AbstractXtendTestCase {
 				  public void test() {
 				    StringConcatenation _builder = new StringConcatenation();
 				    _builder.append("SomeString");
-				    CharSequence _println = InputOutput.<CharSequence>println(_builder);
+				    String _println = InputOutput.<String>println(_builder.toString());
 				    System.out.println(_println);
 				  }
 				}
