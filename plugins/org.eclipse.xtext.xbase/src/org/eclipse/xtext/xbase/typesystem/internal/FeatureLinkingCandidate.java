@@ -42,7 +42,6 @@ import org.eclipse.xtext.xbase.typesystem.references.ITypeReferenceOwner;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightMergedBoundTypeArgument;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.ParameterizedTypeReference;
-import org.eclipse.xtext.xbase.typesystem.references.UnboundTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.WildcardTypeReference;
 import org.eclipse.xtext.xbase.typesystem.util.DeferredTypeParameterHintCollector;
 import org.eclipse.xtext.xbase.typesystem.util.VarianceInfo;

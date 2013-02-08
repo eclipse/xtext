@@ -63,7 +63,6 @@ import org.eclipse.xtext.xbase.typesystem.references.LightweightMergedBoundTypeA
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.ParameterizedTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.TypeReferenceVisitorWithResult;
-import org.eclipse.xtext.xbase.typesystem.references.UnboundTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.WildcardTypeReference;
 import org.eclipse.xtext.xbase.typesystem.util.CommonTypeComputationServices;
 import org.eclipse.xtext.xbase.typesystem.util.ConstraintAwareTypeArgumentCollector;
