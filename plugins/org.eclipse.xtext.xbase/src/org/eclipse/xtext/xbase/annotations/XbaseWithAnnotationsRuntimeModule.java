@@ -22,8 +22,6 @@ import org.eclipse.xtext.xbase.annotations.validation.XbaseWithAnnotationsJavaVa
 import org.eclipse.xtext.xbase.annotations.validation.XbaseWithAnnotationsJavaValidator2;
 import org.eclipse.xtext.xbase.compiler.TypeReferenceSerializer;
 import org.eclipse.xtext.xbase.compiler.TypeReferenceSerializer2;
-import org.eclipse.xtext.xbase.compiler.XbaseCompiler;
-import org.eclipse.xtext.xbase.compiler.XbaseCompiler2;
 import org.eclipse.xtext.xbase.interpreter.IExpressionInterpreter;
 import org.eclipse.xtext.xbase.interpreter.impl.XbaseInterpreter2;
 import org.eclipse.xtext.xbase.resource.BatchLinkableResource;
@@ -73,10 +71,6 @@ public class XbaseWithAnnotationsRuntimeModule extends org.eclipse.xtext.xbase.a
 	@Override
 	public Class<? extends IExpressionInterpreter> bindIExpressionInterpreter() {
 		return XbaseInterpreter2.class;
-	}
-	
-	public Class<? extends XbaseCompiler> bindCompiler() {
-		return XbaseCompiler2.class;
 	}
 	
 	public Class<? extends ITypeComputer> bindITypeComputer() {

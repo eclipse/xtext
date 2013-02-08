@@ -6,8 +6,6 @@ package org.eclipse.xtext.purexbase;
 import org.eclipse.xtext.linking.LinkingScopeProviderBinding;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.scoping.IScopeProvider;
-import org.eclipse.xtext.xbase.compiler.XbaseCompiler;
-import org.eclipse.xtext.xbase.compiler.XbaseCompiler2;
 import org.eclipse.xtext.xbase.interpreter.IExpressionInterpreter;
 import org.eclipse.xtext.xbase.interpreter.impl.XbaseInterpreter2;
 import org.eclipse.xtext.xbase.resource.BatchLinkableResource;
@@ -54,10 +52,6 @@ public class PureXbaseRuntimeModule extends org.eclipse.xtext.purexbase.Abstract
 	
 	public Class<? extends DefaultReentrantTypeResolver> bindReentrantTypeResolver() {
 		return LogicalContainerAwareReentrantTypeResolver.class;
-	}
-	
-	public Class<? extends XbaseCompiler> bindCompiler() {
-		return XbaseCompiler2.class;
 	}
 	
 	@Override
