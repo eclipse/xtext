@@ -19,11 +19,9 @@ import org.eclipse.xtext.xbase.XListLiteral;
 import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotation;
 import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotationElementValueBinaryOperation;
 import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotationElementValuePair;
-import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotationValueArray;
 import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotationsPackage;
 import org.eclipse.xtext.xbase.typesystem.computation.ITypeComputationResult;
 import org.eclipse.xtext.xbase.typesystem.computation.ITypeComputationState;
-import org.eclipse.xtext.xbase.typesystem.computation.ITypeExpectation;
 import org.eclipse.xtext.xbase.typesystem.computation.XbaseTypeComputer;
 import org.eclipse.xtext.xbase.typesystem.conformance.ConformanceHint;
 import org.eclipse.xtext.xbase.typesystem.references.CompoundTypeReference;
@@ -44,8 +42,6 @@ public class XbaseWithAnnotationsTypeComputer extends XbaseTypeComputer {
 			_computeTypes((XAnnotation)expression, state);
 		} else if (expression instanceof XAnnotationElementValueBinaryOperation) {
 			_computeTypes((XAnnotationElementValueBinaryOperation)expression, state);
-		} else if (expression instanceof XAnnotationValueArray) {
-			_computeTypes((XAnnotationValueArray)expression, state);
 		} else {
 			super.computeTypes(expression, state);
 		}
@@ -100,7 +96,7 @@ public class XbaseWithAnnotationsTypeComputer extends XbaseTypeComputer {
 					: componentType;
 			ITypeComputationResult result = state.withExpectation(actualExpectation).computeTypes(value);
 			if (!result.getConformanceHints().contains(ConformanceHint.SUCCESS)) {
-				if (value instanceof XListLiteral || value instanceof XAnnotationValueArray) {
+				if (value instanceof XListLiteral) {
 					// our children are incompatible so let's mark the array itself as compatible.
 					state.refineExpectedType(value, result.getActualExpressionType());
 				} else {
@@ -115,7 +111,7 @@ public class XbaseWithAnnotationsTypeComputer extends XbaseTypeComputer {
 		} else {
 			ITypeComputationResult valueType = state.withExpectation(expectation).computeTypes(value);
 			if (valueType.getConformanceHints().contains(ConformanceHint.SUCCESS)) {
-				if (value instanceof XListLiteral || value instanceof XAnnotationValueArray) {
+				if (value instanceof XListLiteral) {
 					String simpleName = valueType.getActualExpressionType().getSimpleName();
 					state.addDiagnostic(new EObjectDiagnosticImpl(
 							Severity.ERROR, 
@@ -134,19 +130,4 @@ public class XbaseWithAnnotationsTypeComputer extends XbaseTypeComputer {
 		state.computeTypes(object.getRightOperand());
 	}
 	
-	protected void _computeTypes(XAnnotationValueArray object, ITypeComputationState state) {
-		List<XExpression> values = object.getValues();
-		if (values.isEmpty()) {
-			for(ITypeExpectation expectation: state.getExpectations()) {
-				LightweightTypeReference expectedType = expectation.getExpectedType();
-				if (expectedType != null) {
-					expectation.acceptActualType(expectedType, ConformanceHint.CHECKED, ConformanceHint.SUCCESS);
-				}
-			}
-		} else {
-			for(XExpression value: object.getValues()) {
-				state.computeTypes(value);
-			}
-		}
-	}
 }

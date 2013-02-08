@@ -53,7 +53,6 @@ import org.eclipse.xtext.xbase.annotations.services.XbaseWithAnnotationsGrammarA
 import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotation;
 import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotationElementValueBinaryOperation;
 import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotationElementValuePair;
-import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotationValueArray;
 import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotationsPackage;
 import org.eclipse.xtext.xbase.serializer.XbaseSemanticSequencer;
 import org.eclipse.xtext.xtype.XFunctionTypeRef;
@@ -147,15 +146,6 @@ public abstract class AbstractXbaseWithAnnotationsSemanticSequencer extends Xbas
 			case XAnnotationsPackage.XANNOTATION_ELEMENT_VALUE_PAIR:
 				if(context == grammarAccess.getXAnnotationElementValuePairRule()) {
 					sequence_XAnnotationElementValuePair(context, (XAnnotationElementValuePair) semanticObject); 
-					return; 
-				}
-				else break;
-			case XAnnotationsPackage.XANNOTATION_VALUE_ARRAY:
-				if(context == grammarAccess.getXAnnotationElementValueRule() ||
-				   context == grammarAccess.getXAnnotationElementValueStringConcatenationRule() ||
-				   context == grammarAccess.getXAnnotationElementValueStringConcatenationAccess().getXAnnotationElementValueBinaryOperationLeftOperandAction_1_0() ||
-				   context == grammarAccess.getXAnnotationValueArrayRule()) {
-					sequence_XAnnotationValueArray(context, (XAnnotationValueArray) semanticObject); 
 					return; 
 				}
 				else break;
@@ -586,13 +576,20 @@ public abstract class AbstractXbaseWithAnnotationsSemanticSequencer extends Xbas
 				}
 				else break;
 			case XbasePackage.XLIST_LITERAL:
-				if(context == grammarAccess.getXAdditiveExpressionRule() ||
+				if(context == grammarAccess.getXAnnotationElementValueRule() ||
+				   context == grammarAccess.getXAnnotationElementValueStringConcatenationRule() ||
+				   context == grammarAccess.getXAnnotationElementValueStringConcatenationAccess().getXAnnotationElementValueBinaryOperationLeftOperandAction_1_0()) {
+					sequence_XAnnotationElementValue_XAnnotationValueArray_XListLiteral(context, (XListLiteral) semanticObject); 
+					return; 
+				}
+				else if(context == grammarAccess.getXAnnotationValueArrayRule()) {
+					sequence_XAnnotationValueArray(context, (XListLiteral) semanticObject); 
+					return; 
+				}
+				else if(context == grammarAccess.getXAdditiveExpressionRule() ||
 				   context == grammarAccess.getXAdditiveExpressionAccess().getXBinaryOperationLeftOperandAction_1_0_0_0() ||
 				   context == grammarAccess.getXAndExpressionRule() ||
 				   context == grammarAccess.getXAndExpressionAccess().getXBinaryOperationLeftOperandAction_1_0_0_0() ||
-				   context == grammarAccess.getXAnnotationElementValueRule() ||
-				   context == grammarAccess.getXAnnotationElementValueStringConcatenationRule() ||
-				   context == grammarAccess.getXAnnotationElementValueStringConcatenationAccess().getXAnnotationElementValueBinaryOperationLeftOperandAction_1_0() ||
 				   context == grammarAccess.getXAssignmentRule() ||
 				   context == grammarAccess.getXAssignmentAccess().getXBinaryOperationLeftOperandAction_1_1_0_0_0() ||
 				   context == grammarAccess.getXCastedExpressionRule() ||
@@ -1112,9 +1109,18 @@ public abstract class AbstractXbaseWithAnnotationsSemanticSequencer extends Xbas
 	
 	/**
 	 * Constraint:
-	 *     ((values+=XAnnotationElementValue values+=XAnnotationElementValue*)?)
+	 *     (((elements+=XAnnotationElementValue elements+=XAnnotationElementValue*)?) | ((elements+=XExpression elements+=XExpression*)?))
 	 */
-	protected void sequence_XAnnotationValueArray(EObject context, XAnnotationValueArray semanticObject) {
+	protected void sequence_XAnnotationElementValue_XAnnotationValueArray_XListLiteral(EObject context, XListLiteral semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Constraint:
+	 *     ((elements+=XAnnotationElementValue elements+=XAnnotationElementValue*)?)
+	 */
+	protected void sequence_XAnnotationValueArray(EObject context, XListLiteral semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	

@@ -73,7 +73,6 @@ import org.eclipse.xtext.xbase.annotations.serializer.XbaseWithAnnotationsSemant
 import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotation;
 import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotationElementValueBinaryOperation;
 import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotationElementValuePair;
-import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotationValueArray;
 import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotationsPackage;
 import org.eclipse.xtext.xtype.XFunctionTypeRef;
 import org.eclipse.xtext.xtype.XImportDeclaration;
@@ -166,15 +165,6 @@ public abstract class AbstractXtendSemanticSequencer extends XbaseWithAnnotation
 			case XAnnotationsPackage.XANNOTATION_ELEMENT_VALUE_PAIR:
 				if(context == grammarAccess.getXAnnotationElementValuePairRule()) {
 					sequence_XAnnotationElementValuePair(context, (XAnnotationElementValuePair) semanticObject); 
-					return; 
-				}
-				else break;
-			case XAnnotationsPackage.XANNOTATION_VALUE_ARRAY:
-				if(context == grammarAccess.getXAnnotationElementValueRule() ||
-				   context == grammarAccess.getXAnnotationElementValueStringConcatenationRule() ||
-				   context == grammarAccess.getXAnnotationElementValueStringConcatenationAccess().getXAnnotationElementValueBinaryOperationLeftOperandAction_1_0() ||
-				   context == grammarAccess.getXAnnotationValueArrayRule()) {
-					sequence_XAnnotationValueArray(context, (XAnnotationValueArray) semanticObject); 
 					return; 
 				}
 				else break;
@@ -617,14 +607,21 @@ public abstract class AbstractXtendSemanticSequencer extends XbaseWithAnnotation
 				}
 				else break;
 			case XbasePackage.XLIST_LITERAL:
-				if(context == grammarAccess.getRichStringPartRule() ||
+				if(context == grammarAccess.getXAnnotationElementValueRule() ||
+				   context == grammarAccess.getXAnnotationElementValueStringConcatenationRule() ||
+				   context == grammarAccess.getXAnnotationElementValueStringConcatenationAccess().getXAnnotationElementValueBinaryOperationLeftOperandAction_1_0()) {
+					sequence_XAnnotationElementValue_XAnnotationValueArray_XListLiteral(context, (XListLiteral) semanticObject); 
+					return; 
+				}
+				else if(context == grammarAccess.getXAnnotationValueArrayRule()) {
+					sequence_XAnnotationValueArray(context, (XListLiteral) semanticObject); 
+					return; 
+				}
+				else if(context == grammarAccess.getRichStringPartRule() ||
 				   context == grammarAccess.getXAdditiveExpressionRule() ||
 				   context == grammarAccess.getXAdditiveExpressionAccess().getXBinaryOperationLeftOperandAction_1_0_0_0() ||
 				   context == grammarAccess.getXAndExpressionRule() ||
 				   context == grammarAccess.getXAndExpressionAccess().getXBinaryOperationLeftOperandAction_1_0_0_0() ||
-				   context == grammarAccess.getXAnnotationElementValueRule() ||
-				   context == grammarAccess.getXAnnotationElementValueStringConcatenationRule() ||
-				   context == grammarAccess.getXAnnotationElementValueStringConcatenationAccess().getXAnnotationElementValueBinaryOperationLeftOperandAction_1_0() ||
 				   context == grammarAccess.getXAssignmentRule() ||
 				   context == grammarAccess.getXAssignmentAccess().getXBinaryOperationLeftOperandAction_1_1_0_0_0() ||
 				   context == grammarAccess.getXCastedExpressionRule() ||

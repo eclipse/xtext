@@ -22,7 +22,6 @@ import org.eclipse.xtext.xbase.XbasePackage;
 import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotation;
 import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotationElementValueBinaryOperation;
 import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotationElementValuePair;
-import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotationValueArray;
 import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotationsFactory;
 import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotationsPackage;
 
@@ -60,13 +59,6 @@ public class XAnnotationsPackageImpl extends EPackageImpl implements XAnnotation
 	 * @generated
 	 */
 	private EClass xAnnotationElementValueBinaryOperationEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass xAnnotationValueArrayEClass = null;
 
 	/**
 	 * Creates an instance of the model <b>Package</b>, registered with
@@ -257,26 +249,6 @@ public class XAnnotationsPackageImpl extends EPackageImpl implements XAnnotation
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EClass getXAnnotationValueArray()
-	{
-		return xAnnotationValueArrayEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getXAnnotationValueArray_Values()
-	{
-		return (EReference)xAnnotationValueArrayEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public XAnnotationsFactory getXAnnotationsFactory()
 	{
 		return (XAnnotationsFactory)getEFactoryInstance();
@@ -315,9 +287,6 @@ public class XAnnotationsPackageImpl extends EPackageImpl implements XAnnotation
 		createEReference(xAnnotationElementValueBinaryOperationEClass, XANNOTATION_ELEMENT_VALUE_BINARY_OPERATION__LEFT_OPERAND);
 		createEReference(xAnnotationElementValueBinaryOperationEClass, XANNOTATION_ELEMENT_VALUE_BINARY_OPERATION__RIGHT_OPERAND);
 		createEAttribute(xAnnotationElementValueBinaryOperationEClass, XANNOTATION_ELEMENT_VALUE_BINARY_OPERATION__OPERATOR);
-
-		xAnnotationValueArrayEClass = createEClass(XANNOTATION_VALUE_ARRAY);
-		createEReference(xAnnotationValueArrayEClass, XANNOTATION_VALUE_ARRAY__VALUES);
 	}
 
 	/**
@@ -355,7 +324,6 @@ public class XAnnotationsPackageImpl extends EPackageImpl implements XAnnotation
 		// Add supertypes to classes
 		xAnnotationEClass.getESuperTypes().add(theXbasePackage.getXExpression());
 		xAnnotationElementValueBinaryOperationEClass.getESuperTypes().add(theXbasePackage.getXExpression());
-		xAnnotationValueArrayEClass.getESuperTypes().add(theXbasePackage.getXExpression());
 
 		// Initialize classes and features; add operations and parameters
 		initEClass(xAnnotationEClass, XAnnotation.class, "XAnnotation", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -371,9 +339,6 @@ public class XAnnotationsPackageImpl extends EPackageImpl implements XAnnotation
 		initEReference(getXAnnotationElementValueBinaryOperation_LeftOperand(), theXbasePackage.getXExpression(), null, "leftOperand", null, 0, 1, XAnnotationElementValueBinaryOperation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getXAnnotationElementValueBinaryOperation_RightOperand(), theXbasePackage.getXExpression(), null, "rightOperand", null, 0, 1, XAnnotationElementValueBinaryOperation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getXAnnotationElementValueBinaryOperation_Operator(), ecorePackage.getEString(), "operator", "+", 0, 1, XAnnotationElementValueBinaryOperation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-		initEClass(xAnnotationValueArrayEClass, XAnnotationValueArray.class, "XAnnotationValueArray", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getXAnnotationValueArray_Values(), theXbasePackage.getXExpression(), null, "values", null, 0, -1, XAnnotationValueArray.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Create resource
 		createResource(eNS_URI);

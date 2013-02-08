@@ -453,8 +453,8 @@ public class XtendParser extends AbstractContentAssistParser {
 					put(grammarAccess.getXAnnotationElementValueStringConcatenationAccess().getRightOperandAssignment_1_2(), "rule__XAnnotationElementValueStringConcatenation__RightOperandAssignment_1_2");
 					put(grammarAccess.getXAnnotationValueFieldReferenceAccess().getDeclaringTypeAssignment_1(), "rule__XAnnotationValueFieldReference__DeclaringTypeAssignment_1");
 					put(grammarAccess.getXAnnotationValueFieldReferenceAccess().getFeatureAssignment_2(), "rule__XAnnotationValueFieldReference__FeatureAssignment_2");
-					put(grammarAccess.getXAnnotationValueArrayAccess().getValuesAssignment_2_0(), "rule__XAnnotationValueArray__ValuesAssignment_2_0");
-					put(grammarAccess.getXAnnotationValueArrayAccess().getValuesAssignment_2_1_1(), "rule__XAnnotationValueArray__ValuesAssignment_2_1_1");
+					put(grammarAccess.getXAnnotationValueArrayAccess().getElementsAssignment_2_0(), "rule__XAnnotationValueArray__ElementsAssignment_2_0");
+					put(grammarAccess.getXAnnotationValueArrayAccess().getElementsAssignment_2_1_1(), "rule__XAnnotationValueArray__ElementsAssignment_2_1_1");
 					put(grammarAccess.getXAssignmentAccess().getFeatureAssignment_0_1(), "rule__XAssignment__FeatureAssignment_0_1");
 					put(grammarAccess.getXAssignmentAccess().getValueAssignment_0_3(), "rule__XAssignment__ValueAssignment_0_3");
 					put(grammarAccess.getXAssignmentAccess().getFeatureAssignment_1_1_0_0_1(), "rule__XAssignment__FeatureAssignment_1_1_0_0_1");

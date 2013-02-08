@@ -37,7 +37,7 @@ import org.eclipse.xtext.xbase.XbasePackage;
  *
  * @generated
  */
-public class XCollectionLiteralImpl extends XExpressionImpl implements XCollectionLiteral
+public abstract class XCollectionLiteralImpl extends XExpressionImpl implements XCollectionLiteral
 {
 	/**
 	 * The cached value of the '{@link #getElements() <em>Elements</em>}' containment reference list.

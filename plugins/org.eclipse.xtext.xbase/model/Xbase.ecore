@@ -136,7 +136,7 @@
   <eClassifiers xsi:type="ecore:EClass" name="XStringLiteral" eSuperTypes="#//XExpression">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="XCollectionLiteral" eSuperTypes="#//XExpression">
+  <eClassifiers xsi:type="ecore:EClass" name="XCollectionLiteral" eSuperTypes="#//XExpression" abstract="true">
     <eStructuralFeatures xsi:type="ecore:EReference" name="elements" upperBound="-1"
         eType="#//XExpression" containment="true"/>
   </eClassifiers>

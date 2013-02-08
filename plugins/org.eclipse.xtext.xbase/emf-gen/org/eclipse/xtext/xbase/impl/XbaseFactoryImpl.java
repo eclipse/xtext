@@ -4,6 +4,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
+ *
  */
 package org.eclipse.xtext.xbase.impl;
 
@@ -81,7 +82,6 @@ public class XbaseFactoryImpl extends EFactoryImpl implements XbaseFactory
 			case XbasePackage.XNULL_LITERAL: return createXNullLiteral();
 			case XbasePackage.XNUMBER_LITERAL: return createXNumberLiteral();
 			case XbasePackage.XSTRING_LITERAL: return createXStringLiteral();
-			case XbasePackage.XCOLLECTION_LITERAL: return createXCollectionLiteral();
 			case XbasePackage.XLIST_LITERAL: return createXListLiteral();
 			case XbasePackage.XSET_LITERAL: return createXSetLiteral();
 			case XbasePackage.XCLOSURE: return createXClosure();
@@ -233,17 +233,6 @@ public class XbaseFactoryImpl extends EFactoryImpl implements XbaseFactory
 	{
 		XStringLiteralImpl xStringLiteral = new XStringLiteralImpl();
 		return xStringLiteral;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public XCollectionLiteral createXCollectionLiteral()
-	{
-		XCollectionLiteralImpl xCollectionLiteral = new XCollectionLiteralImpl();
-		return xCollectionLiteral;
 	}
 
 	/**

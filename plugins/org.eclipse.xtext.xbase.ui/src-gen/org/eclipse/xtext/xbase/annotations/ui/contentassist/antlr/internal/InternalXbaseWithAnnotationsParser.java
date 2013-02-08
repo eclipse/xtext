@@ -13466,7 +13466,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalContentA
             // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/annotations/ui/contentassist/antlr/internal/InternalXbaseWithAnnotations.g:4111:1: ()
             {
             if ( state.backtracking==0 ) {
-               before(grammarAccess.getXAnnotationValueArrayAccess().getXAnnotationValueArrayAction_0()); 
+               before(grammarAccess.getXAnnotationValueArrayAccess().getXListLiteralAction_0()); 
             }
             // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/annotations/ui/contentassist/antlr/internal/InternalXbaseWithAnnotations.g:4112:1: ()
             // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/annotations/ui/contentassist/antlr/internal/InternalXbaseWithAnnotations.g:4114:1: 
@@ -13474,7 +13474,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalContentA
             }
 
             if ( state.backtracking==0 ) {
-               after(grammarAccess.getXAnnotationValueArrayAccess().getXAnnotationValueArrayAction_0()); 
+               after(grammarAccess.getXAnnotationValueArrayAccess().getXListLiteralAction_0()); 
             }
 
             }
@@ -13785,26 +13785,26 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalContentA
 
 
     // $ANTLR start "rule__XAnnotationValueArray__Group_2__0__Impl"
-    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/annotations/ui/contentassist/antlr/internal/InternalXbaseWithAnnotations.g:4234:1: rule__XAnnotationValueArray__Group_2__0__Impl : ( ( rule__XAnnotationValueArray__ValuesAssignment_2_0 ) ) ;
+    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/annotations/ui/contentassist/antlr/internal/InternalXbaseWithAnnotations.g:4234:1: rule__XAnnotationValueArray__Group_2__0__Impl : ( ( rule__XAnnotationValueArray__ElementsAssignment_2_0 ) ) ;
     public final void rule__XAnnotationValueArray__Group_2__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/annotations/ui/contentassist/antlr/internal/InternalXbaseWithAnnotations.g:4238:1: ( ( ( rule__XAnnotationValueArray__ValuesAssignment_2_0 ) ) )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/annotations/ui/contentassist/antlr/internal/InternalXbaseWithAnnotations.g:4239:1: ( ( rule__XAnnotationValueArray__ValuesAssignment_2_0 ) )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/annotations/ui/contentassist/antlr/internal/InternalXbaseWithAnnotations.g:4238:1: ( ( ( rule__XAnnotationValueArray__ElementsAssignment_2_0 ) ) )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/annotations/ui/contentassist/antlr/internal/InternalXbaseWithAnnotations.g:4239:1: ( ( rule__XAnnotationValueArray__ElementsAssignment_2_0 ) )
             {
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/annotations/ui/contentassist/antlr/internal/InternalXbaseWithAnnotations.g:4239:1: ( ( rule__XAnnotationValueArray__ValuesAssignment_2_0 ) )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/annotations/ui/contentassist/antlr/internal/InternalXbaseWithAnnotations.g:4240:1: ( rule__XAnnotationValueArray__ValuesAssignment_2_0 )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/annotations/ui/contentassist/antlr/internal/InternalXbaseWithAnnotations.g:4239:1: ( ( rule__XAnnotationValueArray__ElementsAssignment_2_0 ) )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/annotations/ui/contentassist/antlr/internal/InternalXbaseWithAnnotations.g:4240:1: ( rule__XAnnotationValueArray__ElementsAssignment_2_0 )
             {
             if ( state.backtracking==0 ) {
-               before(grammarAccess.getXAnnotationValueArrayAccess().getValuesAssignment_2_0()); 
+               before(grammarAccess.getXAnnotationValueArrayAccess().getElementsAssignment_2_0()); 
             }
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/annotations/ui/contentassist/antlr/internal/InternalXbaseWithAnnotations.g:4241:1: ( rule__XAnnotationValueArray__ValuesAssignment_2_0 )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/annotations/ui/contentassist/antlr/internal/InternalXbaseWithAnnotations.g:4241:2: rule__XAnnotationValueArray__ValuesAssignment_2_0
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/annotations/ui/contentassist/antlr/internal/InternalXbaseWithAnnotations.g:4241:1: ( rule__XAnnotationValueArray__ElementsAssignment_2_0 )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/annotations/ui/contentassist/antlr/internal/InternalXbaseWithAnnotations.g:4241:2: rule__XAnnotationValueArray__ElementsAssignment_2_0
             {
-            pushFollow(FOLLOW_rule__XAnnotationValueArray__ValuesAssignment_2_0_in_rule__XAnnotationValueArray__Group_2__0__Impl9056);
-            rule__XAnnotationValueArray__ValuesAssignment_2_0();
+            pushFollow(FOLLOW_rule__XAnnotationValueArray__ElementsAssignment_2_0_in_rule__XAnnotationValueArray__Group_2__0__Impl9056);
+            rule__XAnnotationValueArray__ElementsAssignment_2_0();
 
             state._fsp--;
             if (state.failed) return ;
@@ -13812,7 +13812,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalContentA
             }
 
             if ( state.backtracking==0 ) {
-               after(grammarAccess.getXAnnotationValueArrayAccess().getValuesAssignment_2_0()); 
+               after(grammarAccess.getXAnnotationValueArrayAccess().getElementsAssignment_2_0()); 
             }
 
             }
@@ -14050,26 +14050,26 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalContentA
 
 
     // $ANTLR start "rule__XAnnotationValueArray__Group_2_1__1__Impl"
-    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/annotations/ui/contentassist/antlr/internal/InternalXbaseWithAnnotations.g:4325:1: rule__XAnnotationValueArray__Group_2_1__1__Impl : ( ( rule__XAnnotationValueArray__ValuesAssignment_2_1_1 ) ) ;
+    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/annotations/ui/contentassist/antlr/internal/InternalXbaseWithAnnotations.g:4325:1: rule__XAnnotationValueArray__Group_2_1__1__Impl : ( ( rule__XAnnotationValueArray__ElementsAssignment_2_1_1 ) ) ;
     public final void rule__XAnnotationValueArray__Group_2_1__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/annotations/ui/contentassist/antlr/internal/InternalXbaseWithAnnotations.g:4329:1: ( ( ( rule__XAnnotationValueArray__ValuesAssignment_2_1_1 ) ) )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/annotations/ui/contentassist/antlr/internal/InternalXbaseWithAnnotations.g:4330:1: ( ( rule__XAnnotationValueArray__ValuesAssignment_2_1_1 ) )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/annotations/ui/contentassist/antlr/internal/InternalXbaseWithAnnotations.g:4329:1: ( ( ( rule__XAnnotationValueArray__ElementsAssignment_2_1_1 ) ) )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/annotations/ui/contentassist/antlr/internal/InternalXbaseWithAnnotations.g:4330:1: ( ( rule__XAnnotationValueArray__ElementsAssignment_2_1_1 ) )
             {
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/annotations/ui/contentassist/antlr/internal/InternalXbaseWithAnnotations.g:4330:1: ( ( rule__XAnnotationValueArray__ValuesAssignment_2_1_1 ) )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/annotations/ui/contentassist/antlr/internal/InternalXbaseWithAnnotations.g:4331:1: ( rule__XAnnotationValueArray__ValuesAssignment_2_1_1 )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/annotations/ui/contentassist/antlr/internal/InternalXbaseWithAnnotations.g:4330:1: ( ( rule__XAnnotationValueArray__ElementsAssignment_2_1_1 ) )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/annotations/ui/contentassist/antlr/internal/InternalXbaseWithAnnotations.g:4331:1: ( rule__XAnnotationValueArray__ElementsAssignment_2_1_1 )
             {
             if ( state.backtracking==0 ) {
-               before(grammarAccess.getXAnnotationValueArrayAccess().getValuesAssignment_2_1_1()); 
+               before(grammarAccess.getXAnnotationValueArrayAccess().getElementsAssignment_2_1_1()); 
             }
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/annotations/ui/contentassist/antlr/internal/InternalXbaseWithAnnotations.g:4332:1: ( rule__XAnnotationValueArray__ValuesAssignment_2_1_1 )
-            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/annotations/ui/contentassist/antlr/internal/InternalXbaseWithAnnotations.g:4332:2: rule__XAnnotationValueArray__ValuesAssignment_2_1_1
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/annotations/ui/contentassist/antlr/internal/InternalXbaseWithAnnotations.g:4332:1: ( rule__XAnnotationValueArray__ElementsAssignment_2_1_1 )
+            // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/annotations/ui/contentassist/antlr/internal/InternalXbaseWithAnnotations.g:4332:2: rule__XAnnotationValueArray__ElementsAssignment_2_1_1
             {
-            pushFollow(FOLLOW_rule__XAnnotationValueArray__ValuesAssignment_2_1_1_in_rule__XAnnotationValueArray__Group_2_1__1__Impl9237);
-            rule__XAnnotationValueArray__ValuesAssignment_2_1_1();
+            pushFollow(FOLLOW_rule__XAnnotationValueArray__ElementsAssignment_2_1_1_in_rule__XAnnotationValueArray__Group_2_1__1__Impl9237);
+            rule__XAnnotationValueArray__ElementsAssignment_2_1_1();
 
             state._fsp--;
             if (state.failed) return ;
@@ -14077,7 +14077,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalContentA
             }
 
             if ( state.backtracking==0 ) {
-               after(grammarAccess.getXAnnotationValueArrayAccess().getValuesAssignment_2_1_1()); 
+               after(grammarAccess.getXAnnotationValueArrayAccess().getElementsAssignment_2_1_1()); 
             }
 
             }
@@ -46368,9 +46368,9 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalContentA
     // $ANTLR end "rule__XAnnotationValueFieldReference__FeatureAssignment_2"
 
 
-    // $ANTLR start "rule__XAnnotationValueArray__ValuesAssignment_2_0"
-    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/annotations/ui/contentassist/antlr/internal/InternalXbaseWithAnnotations.g:16112:1: rule__XAnnotationValueArray__ValuesAssignment_2_0 : ( ruleXAnnotationElementValue ) ;
-    public final void rule__XAnnotationValueArray__ValuesAssignment_2_0() throws RecognitionException {
+    // $ANTLR start "rule__XAnnotationValueArray__ElementsAssignment_2_0"
+    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/annotations/ui/contentassist/antlr/internal/InternalXbaseWithAnnotations.g:16112:1: rule__XAnnotationValueArray__ElementsAssignment_2_0 : ( ruleXAnnotationElementValue ) ;
+    public final void rule__XAnnotationValueArray__ElementsAssignment_2_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
@@ -46382,15 +46382,15 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalContentA
             // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/annotations/ui/contentassist/antlr/internal/InternalXbaseWithAnnotations.g:16118:1: ruleXAnnotationElementValue
             {
             if ( state.backtracking==0 ) {
-               before(grammarAccess.getXAnnotationValueArrayAccess().getValuesXAnnotationElementValueParserRuleCall_2_0_0()); 
+               before(grammarAccess.getXAnnotationValueArrayAccess().getElementsXAnnotationElementValueParserRuleCall_2_0_0()); 
             }
-            pushFollow(FOLLOW_ruleXAnnotationElementValue_in_rule__XAnnotationValueArray__ValuesAssignment_2_032407);
+            pushFollow(FOLLOW_ruleXAnnotationElementValue_in_rule__XAnnotationValueArray__ElementsAssignment_2_032407);
             ruleXAnnotationElementValue();
 
             state._fsp--;
             if (state.failed) return ;
             if ( state.backtracking==0 ) {
-               after(grammarAccess.getXAnnotationValueArrayAccess().getValuesXAnnotationElementValueParserRuleCall_2_0_0()); 
+               after(grammarAccess.getXAnnotationValueArrayAccess().getElementsXAnnotationElementValueParserRuleCall_2_0_0()); 
             }
 
             }
@@ -46410,12 +46410,12 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalContentA
         }
         return ;
     }
-    // $ANTLR end "rule__XAnnotationValueArray__ValuesAssignment_2_0"
+    // $ANTLR end "rule__XAnnotationValueArray__ElementsAssignment_2_0"
 
 
-    // $ANTLR start "rule__XAnnotationValueArray__ValuesAssignment_2_1_1"
-    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/annotations/ui/contentassist/antlr/internal/InternalXbaseWithAnnotations.g:16127:1: rule__XAnnotationValueArray__ValuesAssignment_2_1_1 : ( ruleXAnnotationElementValue ) ;
-    public final void rule__XAnnotationValueArray__ValuesAssignment_2_1_1() throws RecognitionException {
+    // $ANTLR start "rule__XAnnotationValueArray__ElementsAssignment_2_1_1"
+    // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/annotations/ui/contentassist/antlr/internal/InternalXbaseWithAnnotations.g:16127:1: rule__XAnnotationValueArray__ElementsAssignment_2_1_1 : ( ruleXAnnotationElementValue ) ;
+    public final void rule__XAnnotationValueArray__ElementsAssignment_2_1_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
@@ -46427,15 +46427,15 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalContentA
             // ../org.eclipse.xtext.xbase.ui/src-gen/org/eclipse/xtext/xbase/annotations/ui/contentassist/antlr/internal/InternalXbaseWithAnnotations.g:16133:1: ruleXAnnotationElementValue
             {
             if ( state.backtracking==0 ) {
-               before(grammarAccess.getXAnnotationValueArrayAccess().getValuesXAnnotationElementValueParserRuleCall_2_1_1_0()); 
+               before(grammarAccess.getXAnnotationValueArrayAccess().getElementsXAnnotationElementValueParserRuleCall_2_1_1_0()); 
             }
-            pushFollow(FOLLOW_ruleXAnnotationElementValue_in_rule__XAnnotationValueArray__ValuesAssignment_2_1_132438);
+            pushFollow(FOLLOW_ruleXAnnotationElementValue_in_rule__XAnnotationValueArray__ElementsAssignment_2_1_132438);
             ruleXAnnotationElementValue();
 
             state._fsp--;
             if (state.failed) return ;
             if ( state.backtracking==0 ) {
-               after(grammarAccess.getXAnnotationValueArrayAccess().getValuesXAnnotationElementValueParserRuleCall_2_1_1_0()); 
+               after(grammarAccess.getXAnnotationValueArrayAccess().getElementsXAnnotationElementValueParserRuleCall_2_1_1_0()); 
             }
 
             }
@@ -46455,7 +46455,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalContentA
         }
         return ;
     }
-    // $ANTLR end "rule__XAnnotationValueArray__ValuesAssignment_2_1_1"
+    // $ANTLR end "rule__XAnnotationValueArray__ElementsAssignment_2_1_1"
 
 
     // $ANTLR start "rule__XAssignment__FeatureAssignment_0_1"
@@ -56096,14 +56096,14 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalContentA
     public static final BitSet FOLLOW_49_in_rule__XAnnotationValueArray__Group__3__Impl8987 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__XAnnotationValueArray__Group_2__0__Impl_in_rule__XAnnotationValueArray__Group_2__09026 = new BitSet(new long[]{0x0000800000000000L});
     public static final BitSet FOLLOW_rule__XAnnotationValueArray__Group_2__1_in_rule__XAnnotationValueArray__Group_2__09029 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__XAnnotationValueArray__ValuesAssignment_2_0_in_rule__XAnnotationValueArray__Group_2__0__Impl9056 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__XAnnotationValueArray__ElementsAssignment_2_0_in_rule__XAnnotationValueArray__Group_2__0__Impl9056 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__XAnnotationValueArray__Group_2__1__Impl_in_rule__XAnnotationValueArray__Group_2__19086 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__XAnnotationValueArray__Group_2_1__0_in_rule__XAnnotationValueArray__Group_2__1__Impl9113 = new BitSet(new long[]{0x0000800000000002L});
     public static final BitSet FOLLOW_rule__XAnnotationValueArray__Group_2_1__0__Impl_in_rule__XAnnotationValueArray__Group_2_1__09148 = new BitSet(new long[]{0x00113FC0000001F0L,0x0000000000010010L});
     public static final BitSet FOLLOW_rule__XAnnotationValueArray__Group_2_1__1_in_rule__XAnnotationValueArray__Group_2_1__09151 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_47_in_rule__XAnnotationValueArray__Group_2_1__0__Impl9179 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__XAnnotationValueArray__Group_2_1__1__Impl_in_rule__XAnnotationValueArray__Group_2_1__19210 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__XAnnotationValueArray__ValuesAssignment_2_1_1_in_rule__XAnnotationValueArray__Group_2_1__1__Impl9237 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__XAnnotationValueArray__ElementsAssignment_2_1_1_in_rule__XAnnotationValueArray__Group_2_1__1__Impl9237 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__XAssignment__Group_0__0__Impl_in_rule__XAssignment__Group_0__09271 = new BitSet(new long[]{0x000003C000000010L});
     public static final BitSet FOLLOW_rule__XAssignment__Group_0__1_in_rule__XAssignment__Group_0__09274 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rule__XAssignment__Group_0__1__Impl_in_rule__XAssignment__Group_0__19332 = new BitSet(new long[]{0x0000000000002000L});
@@ -57035,8 +57035,8 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalContentA
     public static final BitSet FOLLOW_ruleXAnnotationElementValue_in_rule__XAnnotationElementValueStringConcatenation__RightOperandAssignment_1_232298 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleStaticQualifier_in_rule__XAnnotationValueFieldReference__DeclaringTypeAssignment_132333 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleIdOrSuper_in_rule__XAnnotationValueFieldReference__FeatureAssignment_232372 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleXAnnotationElementValue_in_rule__XAnnotationValueArray__ValuesAssignment_2_032407 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleXAnnotationElementValue_in_rule__XAnnotationValueArray__ValuesAssignment_2_1_132438 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleXAnnotationElementValue_in_rule__XAnnotationValueArray__ElementsAssignment_2_032407 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleXAnnotationElementValue_in_rule__XAnnotationValueArray__ElementsAssignment_2_1_132438 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleFeatureCallID_in_rule__XAssignment__FeatureAssignment_0_132473 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleXAssignment_in_rule__XAssignment__ValueAssignment_0_332508 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleOpMultiAssign_in_rule__XAssignment__FeatureAssignment_1_1_0_0_132543 = new BitSet(new long[]{0x0000000000000002L});

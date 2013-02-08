@@ -1429,26 +1429,26 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
 
     // $ANTLR start "ruleXAnnotationValueArray"
-    // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:492:1: ruleXAnnotationValueArray returns [EObject current=null] : ( () otherlv_1= '{' ( ( (lv_values_2_0= ruleXAnnotationElementValue ) ) (otherlv_3= ',' ( (lv_values_4_0= ruleXAnnotationElementValue ) ) )* )? otherlv_5= '}' ) ;
+    // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:492:1: ruleXAnnotationValueArray returns [EObject current=null] : ( () otherlv_1= '{' ( ( (lv_elements_2_0= ruleXAnnotationElementValue ) ) (otherlv_3= ',' ( (lv_elements_4_0= ruleXAnnotationElementValue ) ) )* )? otherlv_5= '}' ) ;
     public final EObject ruleXAnnotationValueArray() throws RecognitionException {
         EObject current = null;
 
         Token otherlv_1=null;
         Token otherlv_3=null;
         Token otherlv_5=null;
-        EObject lv_values_2_0 = null;
+        EObject lv_elements_2_0 = null;
 
-        EObject lv_values_4_0 = null;
+        EObject lv_elements_4_0 = null;
 
 
          enterRule(); 
             
         try {
-            // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:495:28: ( ( () otherlv_1= '{' ( ( (lv_values_2_0= ruleXAnnotationElementValue ) ) (otherlv_3= ',' ( (lv_values_4_0= ruleXAnnotationElementValue ) ) )* )? otherlv_5= '}' ) )
-            // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:496:1: ( () otherlv_1= '{' ( ( (lv_values_2_0= ruleXAnnotationElementValue ) ) (otherlv_3= ',' ( (lv_values_4_0= ruleXAnnotationElementValue ) ) )* )? otherlv_5= '}' )
+            // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:495:28: ( ( () otherlv_1= '{' ( ( (lv_elements_2_0= ruleXAnnotationElementValue ) ) (otherlv_3= ',' ( (lv_elements_4_0= ruleXAnnotationElementValue ) ) )* )? otherlv_5= '}' ) )
+            // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:496:1: ( () otherlv_1= '{' ( ( (lv_elements_2_0= ruleXAnnotationElementValue ) ) (otherlv_3= ',' ( (lv_elements_4_0= ruleXAnnotationElementValue ) ) )* )? otherlv_5= '}' )
             {
-            // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:496:1: ( () otherlv_1= '{' ( ( (lv_values_2_0= ruleXAnnotationElementValue ) ) (otherlv_3= ',' ( (lv_values_4_0= ruleXAnnotationElementValue ) ) )* )? otherlv_5= '}' )
-            // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:496:2: () otherlv_1= '{' ( ( (lv_values_2_0= ruleXAnnotationElementValue ) ) (otherlv_3= ',' ( (lv_values_4_0= ruleXAnnotationElementValue ) ) )* )? otherlv_5= '}'
+            // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:496:1: ( () otherlv_1= '{' ( ( (lv_elements_2_0= ruleXAnnotationElementValue ) ) (otherlv_3= ',' ( (lv_elements_4_0= ruleXAnnotationElementValue ) ) )* )? otherlv_5= '}' )
+            // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:496:2: () otherlv_1= '{' ( ( (lv_elements_2_0= ruleXAnnotationElementValue ) ) (otherlv_3= ',' ( (lv_elements_4_0= ruleXAnnotationElementValue ) ) )* )? otherlv_5= '}'
             {
             // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:496:2: ()
             // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:497:5: 
@@ -1456,7 +1456,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
             if ( state.backtracking==0 ) {
 
                       current = forceCreateModelElement(
-                          grammarAccess.getXAnnotationValueArrayAccess().getXAnnotationValueArrayAction_0(),
+                          grammarAccess.getXAnnotationValueArrayAccess().getXListLiteralAction_0(),
                           current);
                   
             }
@@ -1469,7 +1469,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
                   	newLeafNode(otherlv_1, grammarAccess.getXAnnotationValueArrayAccess().getLeftCurlyBracketKeyword_1());
                   
             }
-            // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:506:1: ( ( (lv_values_2_0= ruleXAnnotationElementValue ) ) (otherlv_3= ',' ( (lv_values_4_0= ruleXAnnotationElementValue ) ) )* )?
+            // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:506:1: ( ( (lv_elements_2_0= ruleXAnnotationElementValue ) ) (otherlv_3= ',' ( (lv_elements_4_0= ruleXAnnotationElementValue ) ) )* )?
             int alt8=2;
             int LA8_0 = input.LA(1);
 
@@ -1478,21 +1478,21 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
             }
             switch (alt8) {
                 case 1 :
-                    // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:506:2: ( (lv_values_2_0= ruleXAnnotationElementValue ) ) (otherlv_3= ',' ( (lv_values_4_0= ruleXAnnotationElementValue ) ) )*
+                    // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:506:2: ( (lv_elements_2_0= ruleXAnnotationElementValue ) ) (otherlv_3= ',' ( (lv_elements_4_0= ruleXAnnotationElementValue ) ) )*
                     {
-                    // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:506:2: ( (lv_values_2_0= ruleXAnnotationElementValue ) )
-                    // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:507:1: (lv_values_2_0= ruleXAnnotationElementValue )
+                    // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:506:2: ( (lv_elements_2_0= ruleXAnnotationElementValue ) )
+                    // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:507:1: (lv_elements_2_0= ruleXAnnotationElementValue )
                     {
-                    // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:507:1: (lv_values_2_0= ruleXAnnotationElementValue )
-                    // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:508:3: lv_values_2_0= ruleXAnnotationElementValue
+                    // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:507:1: (lv_elements_2_0= ruleXAnnotationElementValue )
+                    // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:508:3: lv_elements_2_0= ruleXAnnotationElementValue
                     {
                     if ( state.backtracking==0 ) {
                        
-                      	        newCompositeNode(grammarAccess.getXAnnotationValueArrayAccess().getValuesXAnnotationElementValueParserRuleCall_2_0_0()); 
+                      	        newCompositeNode(grammarAccess.getXAnnotationValueArrayAccess().getElementsXAnnotationElementValueParserRuleCall_2_0_0()); 
                       	    
                     }
                     pushFollow(FOLLOW_ruleXAnnotationElementValue_in_ruleXAnnotationValueArray1137);
-                    lv_values_2_0=ruleXAnnotationElementValue();
+                    lv_elements_2_0=ruleXAnnotationElementValue();
 
                     state._fsp--;
                     if (state.failed) return current;
@@ -1503,8 +1503,8 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
                       	        }
                              		add(
                              			current, 
-                             			"values",
-                              		lv_values_2_0, 
+                             			"elements",
+                              		lv_elements_2_0, 
                               		"XAnnotationElementValue");
                       	        afterParserOrEnumRuleCall();
                       	    
@@ -1515,7 +1515,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
                     }
 
-                    // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:524:2: (otherlv_3= ',' ( (lv_values_4_0= ruleXAnnotationElementValue ) ) )*
+                    // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:524:2: (otherlv_3= ',' ( (lv_elements_4_0= ruleXAnnotationElementValue ) ) )*
                     loop7:
                     do {
                         int alt7=2;
@@ -1528,7 +1528,7 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
 
                         switch (alt7) {
                     	case 1 :
-                    	    // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:524:4: otherlv_3= ',' ( (lv_values_4_0= ruleXAnnotationElementValue ) )
+                    	    // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:524:4: otherlv_3= ',' ( (lv_elements_4_0= ruleXAnnotationElementValue ) )
                     	    {
                     	    otherlv_3=(Token)match(input,15,FOLLOW_15_in_ruleXAnnotationValueArray1150); if (state.failed) return current;
                     	    if ( state.backtracking==0 ) {
@@ -1536,19 +1536,19 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
                     	          	newLeafNode(otherlv_3, grammarAccess.getXAnnotationValueArrayAccess().getCommaKeyword_2_1_0());
                     	          
                     	    }
-                    	    // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:528:1: ( (lv_values_4_0= ruleXAnnotationElementValue ) )
-                    	    // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:529:1: (lv_values_4_0= ruleXAnnotationElementValue )
+                    	    // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:528:1: ( (lv_elements_4_0= ruleXAnnotationElementValue ) )
+                    	    // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:529:1: (lv_elements_4_0= ruleXAnnotationElementValue )
                     	    {
-                    	    // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:529:1: (lv_values_4_0= ruleXAnnotationElementValue )
-                    	    // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:530:3: lv_values_4_0= ruleXAnnotationElementValue
+                    	    // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:529:1: (lv_elements_4_0= ruleXAnnotationElementValue )
+                    	    // ../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/annotations/parser/antlr/internal/InternalXbaseWithAnnotations.g:530:3: lv_elements_4_0= ruleXAnnotationElementValue
                     	    {
                     	    if ( state.backtracking==0 ) {
                     	       
-                    	      	        newCompositeNode(grammarAccess.getXAnnotationValueArrayAccess().getValuesXAnnotationElementValueParserRuleCall_2_1_1_0()); 
+                    	      	        newCompositeNode(grammarAccess.getXAnnotationValueArrayAccess().getElementsXAnnotationElementValueParserRuleCall_2_1_1_0()); 
                     	      	    
                     	    }
                     	    pushFollow(FOLLOW_ruleXAnnotationElementValue_in_ruleXAnnotationValueArray1171);
-                    	    lv_values_4_0=ruleXAnnotationElementValue();
+                    	    lv_elements_4_0=ruleXAnnotationElementValue();
 
                     	    state._fsp--;
                     	    if (state.failed) return current;
@@ -1559,8 +1559,8 @@ public class InternalXbaseWithAnnotationsParser extends AbstractInternalAntlrPar
                     	      	        }
                     	             		add(
                     	             			current, 
-                    	             			"values",
-                    	              		lv_values_4_0, 
+                    	             			"elements",
+                    	              		lv_elements_4_0, 
                     	              		"XAnnotationElementValue");
                     	      	        afterParserOrEnumRuleCall();
                     	      	    

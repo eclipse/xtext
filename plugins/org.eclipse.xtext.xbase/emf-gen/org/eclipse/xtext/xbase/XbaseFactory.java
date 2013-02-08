@@ -137,15 +137,6 @@ public interface XbaseFactory extends EFactory
 	XStringLiteral createXStringLiteral();
 
 	/**
-	 * Returns a new object of class '<em>XCollection Literal</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>XCollection Literal</em>'.
-	 * @generated
-	 */
-	XCollectionLiteral createXCollectionLiteral();
-
-	/**
 	 * Returns a new object of class '<em>XList Literal</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

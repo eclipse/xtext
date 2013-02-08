@@ -2547,7 +2547,7 @@ public class XtendGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//XAnnotationValueArray returns xbase::XExpression:
-	//	{XAnnotationValueArray} "{" (values+=XAnnotationElementValue ("," values+=XAnnotationElementValue)*)? "}";
+	//	{xbase::XListLiteral} "{" (elements+=XAnnotationElementValue ("," elements+=XAnnotationElementValue)*)? "}";
 	public XbaseWithAnnotationsGrammarAccess.XAnnotationValueArrayElements getXAnnotationValueArrayAccess() {
 		return gaXbaseWithAnnotations.getXAnnotationValueArrayAccess();
 	}

@@ -10978,26 +10978,26 @@ public class InternalXtendParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleXAnnotationValueArray"
-    // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:3815:1: ruleXAnnotationValueArray returns [EObject current=null] : ( () otherlv_1= '{' ( ( (lv_values_2_0= ruleXAnnotationElementValue ) ) (otherlv_3= ',' ( (lv_values_4_0= ruleXAnnotationElementValue ) ) )* )? otherlv_5= '}' ) ;
+    // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:3815:1: ruleXAnnotationValueArray returns [EObject current=null] : ( () otherlv_1= '{' ( ( (lv_elements_2_0= ruleXAnnotationElementValue ) ) (otherlv_3= ',' ( (lv_elements_4_0= ruleXAnnotationElementValue ) ) )* )? otherlv_5= '}' ) ;
     public final EObject ruleXAnnotationValueArray() throws RecognitionException {
         EObject current = null;
 
         Token otherlv_1=null;
         Token otherlv_3=null;
         Token otherlv_5=null;
-        EObject lv_values_2_0 = null;
+        EObject lv_elements_2_0 = null;
 
-        EObject lv_values_4_0 = null;
+        EObject lv_elements_4_0 = null;
 
 
          enterRule(); 
             
         try {
-            // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:3818:28: ( ( () otherlv_1= '{' ( ( (lv_values_2_0= ruleXAnnotationElementValue ) ) (otherlv_3= ',' ( (lv_values_4_0= ruleXAnnotationElementValue ) ) )* )? otherlv_5= '}' ) )
-            // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:3819:1: ( () otherlv_1= '{' ( ( (lv_values_2_0= ruleXAnnotationElementValue ) ) (otherlv_3= ',' ( (lv_values_4_0= ruleXAnnotationElementValue ) ) )* )? otherlv_5= '}' )
+            // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:3818:28: ( ( () otherlv_1= '{' ( ( (lv_elements_2_0= ruleXAnnotationElementValue ) ) (otherlv_3= ',' ( (lv_elements_4_0= ruleXAnnotationElementValue ) ) )* )? otherlv_5= '}' ) )
+            // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:3819:1: ( () otherlv_1= '{' ( ( (lv_elements_2_0= ruleXAnnotationElementValue ) ) (otherlv_3= ',' ( (lv_elements_4_0= ruleXAnnotationElementValue ) ) )* )? otherlv_5= '}' )
             {
-            // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:3819:1: ( () otherlv_1= '{' ( ( (lv_values_2_0= ruleXAnnotationElementValue ) ) (otherlv_3= ',' ( (lv_values_4_0= ruleXAnnotationElementValue ) ) )* )? otherlv_5= '}' )
-            // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:3819:2: () otherlv_1= '{' ( ( (lv_values_2_0= ruleXAnnotationElementValue ) ) (otherlv_3= ',' ( (lv_values_4_0= ruleXAnnotationElementValue ) ) )* )? otherlv_5= '}'
+            // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:3819:1: ( () otherlv_1= '{' ( ( (lv_elements_2_0= ruleXAnnotationElementValue ) ) (otherlv_3= ',' ( (lv_elements_4_0= ruleXAnnotationElementValue ) ) )* )? otherlv_5= '}' )
+            // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:3819:2: () otherlv_1= '{' ( ( (lv_elements_2_0= ruleXAnnotationElementValue ) ) (otherlv_3= ',' ( (lv_elements_4_0= ruleXAnnotationElementValue ) ) )* )? otherlv_5= '}'
             {
             // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:3819:2: ()
             // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:3820:5: 
@@ -11005,7 +11005,7 @@ public class InternalXtendParser extends AbstractInternalAntlrParser {
             if ( state.backtracking==0 ) {
 
                       current = forceCreateModelElement(
-                          grammarAccess.getXAnnotationValueArrayAccess().getXAnnotationValueArrayAction_0(),
+                          grammarAccess.getXAnnotationValueArrayAccess().getXListLiteralAction_0(),
                           current);
                   
             }
@@ -11018,7 +11018,7 @@ public class InternalXtendParser extends AbstractInternalAntlrParser {
                   	newLeafNode(otherlv_1, grammarAccess.getXAnnotationValueArrayAccess().getLeftCurlyBracketKeyword_1());
                   
             }
-            // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:3829:1: ( ( (lv_values_2_0= ruleXAnnotationElementValue ) ) (otherlv_3= ',' ( (lv_values_4_0= ruleXAnnotationElementValue ) ) )* )?
+            // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:3829:1: ( ( (lv_elements_2_0= ruleXAnnotationElementValue ) ) (otherlv_3= ',' ( (lv_elements_4_0= ruleXAnnotationElementValue ) ) )* )?
             int alt93=2;
             int LA93_0 = input.LA(1);
 
@@ -11027,21 +11027,21 @@ public class InternalXtendParser extends AbstractInternalAntlrParser {
             }
             switch (alt93) {
                 case 1 :
-                    // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:3829:2: ( (lv_values_2_0= ruleXAnnotationElementValue ) ) (otherlv_3= ',' ( (lv_values_4_0= ruleXAnnotationElementValue ) ) )*
+                    // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:3829:2: ( (lv_elements_2_0= ruleXAnnotationElementValue ) ) (otherlv_3= ',' ( (lv_elements_4_0= ruleXAnnotationElementValue ) ) )*
                     {
-                    // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:3829:2: ( (lv_values_2_0= ruleXAnnotationElementValue ) )
-                    // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:3830:1: (lv_values_2_0= ruleXAnnotationElementValue )
+                    // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:3829:2: ( (lv_elements_2_0= ruleXAnnotationElementValue ) )
+                    // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:3830:1: (lv_elements_2_0= ruleXAnnotationElementValue )
                     {
-                    // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:3830:1: (lv_values_2_0= ruleXAnnotationElementValue )
-                    // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:3831:3: lv_values_2_0= ruleXAnnotationElementValue
+                    // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:3830:1: (lv_elements_2_0= ruleXAnnotationElementValue )
+                    // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:3831:3: lv_elements_2_0= ruleXAnnotationElementValue
                     {
                     if ( state.backtracking==0 ) {
                        
-                      	        newCompositeNode(grammarAccess.getXAnnotationValueArrayAccess().getValuesXAnnotationElementValueParserRuleCall_2_0_0()); 
+                      	        newCompositeNode(grammarAccess.getXAnnotationValueArrayAccess().getElementsXAnnotationElementValueParserRuleCall_2_0_0()); 
                       	    
                     }
                     pushFollow(FOLLOW_ruleXAnnotationElementValue_in_ruleXAnnotationValueArray7500);
-                    lv_values_2_0=ruleXAnnotationElementValue();
+                    lv_elements_2_0=ruleXAnnotationElementValue();
 
                     state._fsp--;
                     if (state.failed) return current;
@@ -11052,8 +11052,8 @@ public class InternalXtendParser extends AbstractInternalAntlrParser {
                       	        }
                              		add(
                              			current, 
-                             			"values",
-                              		lv_values_2_0, 
+                             			"elements",
+                              		lv_elements_2_0, 
                               		"XAnnotationElementValue");
                       	        afterParserOrEnumRuleCall();
                       	    
@@ -11064,7 +11064,7 @@ public class InternalXtendParser extends AbstractInternalAntlrParser {
 
                     }
 
-                    // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:3847:2: (otherlv_3= ',' ( (lv_values_4_0= ruleXAnnotationElementValue ) ) )*
+                    // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:3847:2: (otherlv_3= ',' ( (lv_elements_4_0= ruleXAnnotationElementValue ) ) )*
                     loop92:
                     do {
                         int alt92=2;
@@ -11077,7 +11077,7 @@ public class InternalXtendParser extends AbstractInternalAntlrParser {
 
                         switch (alt92) {
                     	case 1 :
-                    	    // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:3847:4: otherlv_3= ',' ( (lv_values_4_0= ruleXAnnotationElementValue ) )
+                    	    // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:3847:4: otherlv_3= ',' ( (lv_elements_4_0= ruleXAnnotationElementValue ) )
                     	    {
                     	    otherlv_3=(Token)match(input,24,FOLLOW_24_in_ruleXAnnotationValueArray7513); if (state.failed) return current;
                     	    if ( state.backtracking==0 ) {
@@ -11085,19 +11085,19 @@ public class InternalXtendParser extends AbstractInternalAntlrParser {
                     	          	newLeafNode(otherlv_3, grammarAccess.getXAnnotationValueArrayAccess().getCommaKeyword_2_1_0());
                     	          
                     	    }
-                    	    // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:3851:1: ( (lv_values_4_0= ruleXAnnotationElementValue ) )
-                    	    // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:3852:1: (lv_values_4_0= ruleXAnnotationElementValue )
+                    	    // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:3851:1: ( (lv_elements_4_0= ruleXAnnotationElementValue ) )
+                    	    // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:3852:1: (lv_elements_4_0= ruleXAnnotationElementValue )
                     	    {
-                    	    // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:3852:1: (lv_values_4_0= ruleXAnnotationElementValue )
-                    	    // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:3853:3: lv_values_4_0= ruleXAnnotationElementValue
+                    	    // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:3852:1: (lv_elements_4_0= ruleXAnnotationElementValue )
+                    	    // ../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g:3853:3: lv_elements_4_0= ruleXAnnotationElementValue
                     	    {
                     	    if ( state.backtracking==0 ) {
                     	       
-                    	      	        newCompositeNode(grammarAccess.getXAnnotationValueArrayAccess().getValuesXAnnotationElementValueParserRuleCall_2_1_1_0()); 
+                    	      	        newCompositeNode(grammarAccess.getXAnnotationValueArrayAccess().getElementsXAnnotationElementValueParserRuleCall_2_1_1_0()); 
                     	      	    
                     	    }
                     	    pushFollow(FOLLOW_ruleXAnnotationElementValue_in_ruleXAnnotationValueArray7534);
-                    	    lv_values_4_0=ruleXAnnotationElementValue();
+                    	    lv_elements_4_0=ruleXAnnotationElementValue();
 
                     	    state._fsp--;
                     	    if (state.failed) return current;
@@ -11108,8 +11108,8 @@ public class InternalXtendParser extends AbstractInternalAntlrParser {
                     	      	        }
                     	             		add(
                     	             			current, 
-                    	             			"values",
-                    	              		lv_values_4_0, 
+                    	             			"elements",
+                    	              		lv_elements_4_0, 
                     	              		"XAnnotationElementValue");
                     	      	        afterParserOrEnumRuleCall();
                     	      	    

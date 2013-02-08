@@ -193,34 +193,6 @@ public interface XAnnotationsPackage extends EPackage
 	 */
 	int XANNOTATION_ELEMENT_VALUE_BINARY_OPERATION_FEATURE_COUNT = XbasePackage.XEXPRESSION_FEATURE_COUNT + 3;
 
-	/**
-	 * The meta object id for the '{@link org.eclipse.xtext.xbase.annotations.xAnnotations.impl.XAnnotationValueArrayImpl <em>XAnnotation Value Array</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see org.eclipse.xtext.xbase.annotations.xAnnotations.impl.XAnnotationValueArrayImpl
-	 * @see org.eclipse.xtext.xbase.annotations.xAnnotations.impl.XAnnotationsPackageImpl#getXAnnotationValueArray()
-	 * @generated
-	 */
-	int XANNOTATION_VALUE_ARRAY = 3;
-
-	/**
-	 * The feature id for the '<em><b>Values</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int XANNOTATION_VALUE_ARRAY__VALUES = XbasePackage.XEXPRESSION_FEATURE_COUNT + 0;
-
-	/**
-	 * The number of structural features of the '<em>XAnnotation Value Array</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int XANNOTATION_VALUE_ARRAY_FEATURE_COUNT = XbasePackage.XEXPRESSION_FEATURE_COUNT + 1;
-
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotation <em>XAnnotation</em>}'.
@@ -341,27 +313,6 @@ public interface XAnnotationsPackage extends EPackage
 	EAttribute getXAnnotationElementValueBinaryOperation_Operator();
 
 	/**
-	 * Returns the meta object for class '{@link org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotationValueArray <em>XAnnotation Value Array</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>XAnnotation Value Array</em>'.
-	 * @see org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotationValueArray
-	 * @generated
-	 */
-	EClass getXAnnotationValueArray();
-
-	/**
-	 * Returns the meta object for the containment reference list '{@link org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotationValueArray#getValues <em>Values</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Values</em>'.
-	 * @see org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotationValueArray#getValues()
-	 * @see #getXAnnotationValueArray()
-	 * @generated
-	 */
-	EReference getXAnnotationValueArray_Values();
-
-	/**
 	 * Returns the factory that creates the instances of the model.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -477,24 +428,6 @@ public interface XAnnotationsPackage extends EPackage
 		 * @generated
 		 */
 		EAttribute XANNOTATION_ELEMENT_VALUE_BINARY_OPERATION__OPERATOR = eINSTANCE.getXAnnotationElementValueBinaryOperation_Operator();
-
-		/**
-		 * The meta object literal for the '{@link org.eclipse.xtext.xbase.annotations.xAnnotations.impl.XAnnotationValueArrayImpl <em>XAnnotation Value Array</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see org.eclipse.xtext.xbase.annotations.xAnnotations.impl.XAnnotationValueArrayImpl
-		 * @see org.eclipse.xtext.xbase.annotations.xAnnotations.impl.XAnnotationsPackageImpl#getXAnnotationValueArray()
-		 * @generated
-		 */
-		EClass XANNOTATION_VALUE_ARRAY = eINSTANCE.getXAnnotationValueArray();
-
-		/**
-		 * The meta object literal for the '<em><b>Values</b></em>' containment reference list feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference XANNOTATION_VALUE_ARRAY__VALUES = eINSTANCE.getXAnnotationValueArray_Values();
 
 	}
 

@@ -3819,7 +3819,7 @@ ruleXAnnotationValueArray returns [EObject current=null]
 ((
     {
         $current = forceCreateModelElement(
-            grammarAccess.getXAnnotationValueArrayAccess().getXAnnotationValueArrayAction_0(),
+            grammarAccess.getXAnnotationValueArrayAccess().getXListLiteralAction_0(),
             $current);
     }
 )	otherlv_1='{' 
@@ -3829,16 +3829,16 @@ ruleXAnnotationValueArray returns [EObject current=null]
 ((
 (
 		{ 
-	        newCompositeNode(grammarAccess.getXAnnotationValueArrayAccess().getValuesXAnnotationElementValueParserRuleCall_2_0_0()); 
+	        newCompositeNode(grammarAccess.getXAnnotationValueArrayAccess().getElementsXAnnotationElementValueParserRuleCall_2_0_0()); 
 	    }
-		lv_values_2_0=ruleXAnnotationElementValue		{
+		lv_elements_2_0=ruleXAnnotationElementValue		{
 	        if ($current==null) {
 	            $current = createModelElementForParent(grammarAccess.getXAnnotationValueArrayRule());
 	        }
        		add(
        			$current, 
-       			"values",
-        		lv_values_2_0, 
+       			"elements",
+        		lv_elements_2_0, 
         		"XAnnotationElementValue");
 	        afterParserOrEnumRuleCall();
 	    }
@@ -3851,16 +3851,16 @@ ruleXAnnotationValueArray returns [EObject current=null]
 (
 (
 		{ 
-	        newCompositeNode(grammarAccess.getXAnnotationValueArrayAccess().getValuesXAnnotationElementValueParserRuleCall_2_1_1_0()); 
+	        newCompositeNode(grammarAccess.getXAnnotationValueArrayAccess().getElementsXAnnotationElementValueParserRuleCall_2_1_1_0()); 
 	    }
-		lv_values_4_0=ruleXAnnotationElementValue		{
+		lv_elements_4_0=ruleXAnnotationElementValue		{
 	        if ($current==null) {
 	            $current = createModelElementForParent(grammarAccess.getXAnnotationValueArrayRule());
 	        }
        		add(
        			$current, 
-       			"values",
-        		lv_values_4_0, 
+       			"elements",
+        		lv_elements_4_0, 
         		"XAnnotationElementValue");
 	        afterParserOrEnumRuleCall();
 	    }

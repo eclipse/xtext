@@ -49,7 +49,7 @@ XAnnotationValueFieldReference returns xbase::XExpression :
 ;
 
 XAnnotationValueArray returns xbase::XExpression :
-	{XAnnotationValueArray} 
-	'{' (values+=XAnnotationElementValue (',' values+=XAnnotationElementValue)*)? '}'
+	{xbase::XListLiteral} 
+	'{' (elements+=XAnnotationElementValue (',' elements+=XAnnotationElementValue)*)? '}'
 ;
 

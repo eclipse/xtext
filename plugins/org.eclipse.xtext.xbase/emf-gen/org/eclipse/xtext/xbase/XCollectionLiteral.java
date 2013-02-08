@@ -23,7 +23,7 @@ import org.eclipse.emf.common.util.EList;
  * </p>
  *
  * @see org.eclipse.xtext.xbase.XbasePackage#getXCollectionLiteral()
- * @model
+ * @model abstract="true"
  * @generated
  */
 public interface XCollectionLiteral extends XExpression
