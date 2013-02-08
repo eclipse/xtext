@@ -41,7 +41,7 @@ import com.google.inject.Injector;
  * &#064;Check
  * void checkName(ParserRule rule) {
  * 	if (!toFirstUpper(rule.getName()).equals(rule.getName())) {
- * 		warning(&quot;Name should start with a capital.&quot;, XtextPackage.ABSTRACT_RULE__NAME);
+ * 		warning(&quot;Name should start with a capital.&quot;, XtextPackage.Literals.ABSTRACT_RULE__NAME);
  * 	}
  * }
  * </pre>
