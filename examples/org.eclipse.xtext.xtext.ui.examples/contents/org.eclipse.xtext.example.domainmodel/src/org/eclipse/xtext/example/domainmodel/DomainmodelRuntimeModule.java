@@ -11,7 +11,7 @@ import org.eclipse.xtext.linking.LinkingScopeProviderBinding;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.scoping.IScopeProvider;
 import org.eclipse.xtext.xbase.interpreter.IExpressionInterpreter;
-import org.eclipse.xtext.xbase.interpreter.impl.XbaseInterpreter2;
+import org.eclipse.xtext.xbase.interpreter.impl.XbaseInterpreter;
 import org.eclipse.xtext.xbase.resource.BatchLinkableResource;
 import org.eclipse.xtext.xbase.scoping.batch.XbaseBatchScopeProvider;
 import org.eclipse.xtext.xbase.typesystem.internal.DefaultBatchTypeResolver;
@@ -54,7 +54,7 @@ public class DomainmodelRuntimeModule extends AbstractDomainmodelRuntimeModule {
 	
 	@Override
 	public Class<? extends IExpressionInterpreter> bindIExpressionInterpreter() {
-		return XbaseInterpreter2.class;
+		return XbaseInterpreter.class;
 	}
 	
 }

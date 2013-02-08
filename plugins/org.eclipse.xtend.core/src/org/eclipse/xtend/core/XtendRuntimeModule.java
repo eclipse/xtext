@@ -53,7 +53,7 @@ import org.eclipse.xtext.xbase.compiler.output.TraceAwarePostProcessor;
 import org.eclipse.xtext.xbase.formatting.IBasicFormatter;
 import org.eclipse.xtext.xbase.imports.IImportsConfiguration;
 import org.eclipse.xtext.xbase.interpreter.IExpressionInterpreter;
-import org.eclipse.xtext.xbase.interpreter.impl.XbaseInterpreter2;
+import org.eclipse.xtext.xbase.interpreter.impl.XbaseInterpreter;
 import org.eclipse.xtext.xbase.jvmmodel.IJvmModelInferrer;
 import org.eclipse.xtext.xbase.jvmmodel.JvmModelAssociator;
 import org.eclipse.xtext.xbase.resource.BatchLinkableResource;
@@ -207,7 +207,7 @@ public class XtendRuntimeModule extends org.eclipse.xtend.core.AbstractXtendRunt
 
 	@Override
 	public Class<? extends IExpressionInterpreter> bindIExpressionInterpreter() {
-		return XbaseInterpreter2.class;
+		return XbaseInterpreter.class;
 	}
 
 	public Class<? extends IJvmModelInferrer> bindIJvmModelInferrer() {

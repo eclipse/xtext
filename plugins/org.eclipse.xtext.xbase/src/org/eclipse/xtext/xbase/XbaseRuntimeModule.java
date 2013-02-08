@@ -18,7 +18,7 @@ import org.eclipse.xtext.service.SingletonBinding;
 import org.eclipse.xtext.xbase.compiler.TypeReferenceSerializer;
 import org.eclipse.xtext.xbase.compiler.TypeReferenceSerializer2;
 import org.eclipse.xtext.xbase.interpreter.IExpressionInterpreter;
-import org.eclipse.xtext.xbase.interpreter.impl.XbaseInterpreter2;
+import org.eclipse.xtext.xbase.interpreter.impl.XbaseInterpreter;
 import org.eclipse.xtext.xbase.resource.BatchLinkableResource;
 import org.eclipse.xtext.xbase.scoping.batch.XbaseBatchScopeProvider;
 import org.eclipse.xtext.xbase.serializer.SerializerScopeProvider;
@@ -62,7 +62,7 @@ public class XbaseRuntimeModule extends AbstractXbaseRuntimeModule {
 	
 	@Override
 	public Class<? extends IExpressionInterpreter> bindIExpressionInterpreter() {
-		return XbaseInterpreter2.class;
+		return XbaseInterpreter.class;
 	}
 	
 	@Override
