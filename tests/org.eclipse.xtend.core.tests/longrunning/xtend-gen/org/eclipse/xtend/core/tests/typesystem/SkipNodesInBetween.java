@@ -78,7 +78,8 @@ public class SkipNodesInBetween extends AbstractXtendCompilerSmokeTest {
             if (_or) {
               ReplaceRegion _replaceRegion = new ReplaceRegion(offset, length, "");
               region = _replaceRegion;
-              StringBuilder _stringBuilder = new StringBuilder(input);
+              String _text = rootNode.getText();
+              StringBuilder _stringBuilder = new StringBuilder(_text);
               final StringBuilder builder = _stringBuilder;
               region.applyTo(builder);
               String _string = builder.toString();

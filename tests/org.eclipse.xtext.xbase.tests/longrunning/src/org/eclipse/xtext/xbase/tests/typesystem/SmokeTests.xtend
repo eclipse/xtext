@@ -258,7 +258,7 @@ class SkipNodesInBetween extends AbstractSmokeTest {
 				if (length != 0) {
 					if (region == null || region.offset != offset || region.length != length) {
 						region = new ReplaceRegion(offset, length, "")
-						val builder = new StringBuilder(input)
+						val builder = new StringBuilder(rootNode.text)
 						region.applyTo(builder)
 						processExpression(builder.toString)
 					}
