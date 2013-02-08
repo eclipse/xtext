@@ -242,7 +242,7 @@ public class WildcardTypeReference extends LightweightTypeReference {
 			throw new NullPointerException("lowerBound may not be null");
 		}
 		if (!lowerBound.isOwnedBy(getOwner())) {
-			throw new NullPointerException("lowerBound is not valid in current context");
+			throw new IllegalArgumentException("lowerBound is not valid in current context");
 		}
 		if (lowerBound instanceof WildcardTypeReference) {
 			throw new IllegalArgumentException("Wildcards are not supported as lower bounds");
