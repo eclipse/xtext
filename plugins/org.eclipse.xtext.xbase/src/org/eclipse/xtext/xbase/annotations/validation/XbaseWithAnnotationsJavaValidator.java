@@ -56,8 +56,13 @@ public class XbaseWithAnnotationsJavaValidator extends XbaseJavaValidator {
 		Iterable<JvmOperation> attributes = annotationType.getDeclaredOperations();
 		for (JvmOperation jvmOperation : attributes) {
 			XExpression value = annotationUtil.findValue(annotation, jvmOperation);
+			if(getExpressionHelper().hasSideEffects(value)) {
+				error("The value for annotation attribute " + annotationType.getSimpleName() + "." + jvmOperation.getSimpleName() + 
+						" must be a constant expression", null, ANNOTATIONS_ILLEGAL_ATTRIBUTE);
+			}
 			if (value == null && jvmOperation.getDefaultValue() == null) {
-				error("The annotation must define the attribute '"+jvmOperation.getSimpleName()+"'.", annotation, null, ValidationMessageAcceptor.INSIGNIFICANT_INDEX, ANNOTATIONS_MISSING_ATTRIBUTE_DEFINITION);
+				error("The annotation must define the attribute '"+jvmOperation.getSimpleName()+"'.", annotation, null, 
+						ValidationMessageAcceptor.INSIGNIFICANT_INDEX, ANNOTATIONS_MISSING_ATTRIBUTE_DEFINITION);
 			}
 		}
 	}

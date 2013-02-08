@@ -1294,4 +1294,7 @@ public class XbaseJavaValidator extends AbstractXbaseJavaValidator {
 		return earlyExitComputer;
 	}
 	
+	protected XExpressionHelper getExpressionHelper() {
+		return expressionHelper;
+	}
 }
