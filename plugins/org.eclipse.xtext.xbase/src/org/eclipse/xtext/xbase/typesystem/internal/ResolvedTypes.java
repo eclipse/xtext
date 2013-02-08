@@ -52,6 +52,7 @@ import org.eclipse.xtext.xbase.typesystem.util.BoundTypeArgumentSource;
 import org.eclipse.xtext.xbase.typesystem.util.CommonTypeComputationServices;
 import org.eclipse.xtext.xbase.typesystem.util.ConstraintVisitingInfo;
 import org.eclipse.xtext.xbase.typesystem.util.CustomTypeParameterSubstitutor;
+import org.eclipse.xtext.xbase.typesystem.util.ExpectationTypeParameterHintCollector;
 import org.eclipse.xtext.xbase.typesystem.util.MultimapJoiner;
 import org.eclipse.xtext.xbase.typesystem.util.Multimaps2;
 import org.eclipse.xtext.xbase.typesystem.util.TypeParameterByUnboundSubstitutor;
@@ -769,6 +770,11 @@ public abstract class ResolvedTypes implements IResolvedTypes {
 					// resolve similar pending type arguments, too
 					if (existingTypeArgument.getDeclaredVariance() == existingTypeArgument.getActualVariance()) {
 						acceptHint(existingReference.getHandle(), boundTypeArgument);
+					}
+				} else if (existingTypeArgument.getTypeReference() != null && existingTypeArgument.getTypeReference() != boundTypeArgument.getTypeReference()) {
+					if (!existingTypeArgument.getTypeReference().isResolved()) {
+						ExpectationTypeParameterHintCollector collector = new ExpectationTypeParameterHintCollector(getReferenceOwner());
+						collector.processPairedReferences(boundTypeArgument.getTypeReference(), existingTypeArgument.getTypeReference());
 					}
 				}
 			}

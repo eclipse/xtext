@@ -53,6 +53,44 @@ public class TypeProviderTest extends AbstractXtendTestCase {
 		return (XtendConstructor) clazz.getMembers().get(0);
 	}
 	
+	@Test public void testExpectationRelevantExpressionType_01() throws Exception {
+		String clazzString = "import java.util.Set\n" +
+			"import org.eclipse.xtext.xbase.typesystem.util.TypeParameterSubstitutor\n" +
+			"import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference\n" +
+			"class C extends TypeParameterSubstitutor<Set<String>> {\n" +
+			"  override substitute(LightweightTypeReference original) {\n" + 
+			"    original.accept(this, newHashSet)\n" + 
+			"  }" +
+			"}";
+		XtendClass clazz = (XtendClass) file(clazzString, false).getXtendTypes().get(0);
+		XtendFunction function = (XtendFunction) clazz.getMembers().get(0);
+		XBlockExpression body = (XBlockExpression) function.getExpression();
+		XMemberFeatureCall invocation = (XMemberFeatureCall) body.getExpressions().get(0);
+		XFeatureCall newHashSet = (XFeatureCall) invocation.getActualArguments().get(1);
+		assertEquals("newHashSet", newHashSet.getFeature().getSimpleName());
+		assertEquals("Set<String>", typeProvider.getExpectedType(newHashSet).getSimpleName());
+		assertEquals("HashSet<String>", typeProvider.getType(newHashSet).getSimpleName());
+	}
+	
+	@Test public void testExpectationRelevantExpressionType_02() throws Exception {
+		String clazzString = "import java.util.Set\n" +
+				"import org.eclipse.xtext.xbase.typesystem.util.TypeParameterSubstitutor\n" +
+				"import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference\n" +
+				"class C<T> extends TypeParameterSubstitutor<Set<T>> {\n" +
+				"  override substitute(LightweightTypeReference original) {\n" + 
+				"    original.accept(this, newHashSet)\n" + 
+				"  }" +
+				"}";
+		XtendClass clazz = (XtendClass) file(clazzString, false).getXtendTypes().get(0);
+		XtendFunction function = (XtendFunction) clazz.getMembers().get(0);
+		XBlockExpression body = (XBlockExpression) function.getExpression();
+		XMemberFeatureCall invocation = (XMemberFeatureCall) body.getExpressions().get(0);
+		XFeatureCall newHashSet = (XFeatureCall) invocation.getActualArguments().get(1);
+		assertEquals("newHashSet", newHashSet.getFeature().getSimpleName());
+		assertEquals("HashSet<T>", typeProvider.getType(newHashSet).getSimpleName());
+		assertEquals("Set<T>", typeProvider.getExpectedType(newHashSet).getSimpleName());
+	}
+	
 	@Test public void testReturnTypeInConstructor_01() throws Exception {
 		XtendConstructor constructor = constructor(
 				"new() {\n" + 

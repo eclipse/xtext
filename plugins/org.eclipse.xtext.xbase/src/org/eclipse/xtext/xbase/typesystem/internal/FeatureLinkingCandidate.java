@@ -38,11 +38,14 @@ import org.eclipse.xtext.xbase.scoping.batch.IIdentifiableElementDescription;
 import org.eclipse.xtext.xbase.typesystem.computation.IFeatureLinkingCandidate;
 import org.eclipse.xtext.xbase.typesystem.computation.ITypeComputationState;
 import org.eclipse.xtext.xbase.typesystem.conformance.ConformanceHint;
+import org.eclipse.xtext.xbase.typesystem.references.ITypeReferenceOwner;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightMergedBoundTypeArgument;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.ParameterizedTypeReference;
+import org.eclipse.xtext.xbase.typesystem.references.UnboundTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.WildcardTypeReference;
 import org.eclipse.xtext.xbase.typesystem.util.DeferredTypeParameterHintCollector;
+import org.eclipse.xtext.xbase.typesystem.util.VarianceInfo;
 import org.eclipse.xtext.xbase.validation.IssueCodes;
 
 import com.google.common.collect.Lists;
@@ -71,6 +74,17 @@ public class FeatureLinkingCandidate extends AbstractPendingLinkingCandidate<XAb
 	@Override
 	protected IFeatureLinkingCandidate getThis() {
 		return this;
+	}
+	
+	@Override
+	protected void initializeMapping(JvmTypeParameter typeParameter, Map<JvmTypeParameter, LightweightMergedBoundTypeArgument> result) {
+		ITypeReferenceOwner owner = getState().getReferenceOwner();
+		if (typeParameter.getDeclarator() instanceof JvmType && owner.getDeclaredTypeParameters().contains(typeParameter)) {
+			ParameterizedTypeReference typeReference = new ParameterizedTypeReference(owner, typeParameter);
+			result.put(typeParameter, new LightweightMergedBoundTypeArgument(typeReference, VarianceInfo.INVARIANT));
+		} else {
+			super.initializeMapping(typeParameter, result);
+		}
 	}
 
 	@Override
