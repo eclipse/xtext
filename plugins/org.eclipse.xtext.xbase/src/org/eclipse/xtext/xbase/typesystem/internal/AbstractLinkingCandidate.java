@@ -346,12 +346,14 @@ public abstract class AbstractLinkingCandidate<Expression extends XExpression> i
 	}
 	
 	protected void resolveAgainstActualType(LightweightTypeReference declaredType, LightweightTypeReference actualType, final AbstractTypeComputationState state) {
-		// TODO this(..) and super(..) for generic types
-		List<JvmTypeParameter> typeParameters = getDeclaredTypeParameters();
-		if (!typeParameters.isEmpty()) {
-			// TODO actualType -(hint for)-> declared type == inferred
-			// declared type -(hint for)-> actual type == expected
-			TypeArgumentFromComputedTypeCollector.resolveAgainstActualType(declaredType, actualType, typeParameters, getTypeParameterMapping(), BoundTypeArgumentSource.EXPECTATION, state.getReferenceOwner());
+		if (!actualType.isAny()) {
+			// TODO this(..) and super(..) for generic types
+			List<JvmTypeParameter> typeParameters = getDeclaredTypeParameters();
+			if (!typeParameters.isEmpty()) {
+				// TODO actualType -(hint for)-> declared type == inferred
+				// declared type -(hint for)-> actual type == expected
+				TypeArgumentFromComputedTypeCollector.resolveAgainstActualType(declaredType, actualType, typeParameters, getTypeParameterMapping(), BoundTypeArgumentSource.EXPECTATION, state.getReferenceOwner());
+			}
 		}
 	}
 	

@@ -22,6 +22,179 @@ class XtendCompilerTest extends AbstractXtendTestCase {
 	@Inject JvmModelGenerator generator
 	@Inject IGeneratorConfigProvider generatorConfigProvider
 	
+	@Test def void testLocalExtensionForPairStringString_01() {
+		assertCompilesTo('''
+			import org.eclipse.xtext.xbase.lib.Pair
+			public class C  {
+			    def String m(Pair<String, String> in) {
+			    	(''->'').m
+				}
+			}
+		''', '''
+			import org.eclipse.xtext.xbase.lib.Pair;
+			
+			@SuppressWarnings("all")
+			public class C {
+			  public String m(final Pair<String,String> in) {
+			    Pair<String,String> _mappedTo = Pair.<String, String>of("", "");
+			    String _m = this.m(_mappedTo);
+			    return _m;
+			  }
+			}
+		''')
+	}
+	
+	@Test def void testLocalExtensionForPairStringString_02() {
+		assertCompilesTo('''
+			import org.eclipse.xtext.xbase.lib.Pair
+			public class C  {
+			    def String m(Pair<String, String> in) {
+			    	(null->null).m
+				}
+			}
+		''', '''
+			import org.eclipse.xtext.xbase.lib.Pair;
+			
+			@SuppressWarnings("all")
+			public class C {
+			  public String m(final Pair<String,String> in) {
+			    Pair<String,String> _mappedTo = Pair.<String, String>of(null, null);
+			    String _m = this.m(_mappedTo);
+			    return _m;
+			  }
+			}
+		''')
+	}
+	
+	@Test def void testLocalExtensionForPairStringString_03() {
+		assertCompilesTo('''
+			import org.eclipse.xtext.xbase.lib.Pair
+			public class C  {
+			    def String m(Pair<String, String> in) {
+			    	in.m
+				}
+			}
+		''', '''
+			import org.eclipse.xtext.xbase.lib.Pair;
+			
+			@SuppressWarnings("all")
+			public class C {
+			  public String m(final Pair<String,String> in) {
+			    String _m = this.m(in);
+			    return _m;
+			  }
+			}
+		''')
+	}
+	
+	@Test def void testLocalExtensionForPairStringString_04() {
+		assertCompilesTo('''
+			import org.eclipse.xtext.xbase.lib.Pair
+			public class C  {
+			    def <T> T m(Pair<T, T> in) {
+			    	in.m
+				}
+			}
+		''', '''
+			import org.eclipse.xtext.xbase.lib.Pair;
+			
+			@SuppressWarnings("all")
+			public class C {
+			  public <T extends Object> T m(final Pair<T,T> in) {
+			    T _m = this.<T>m(in);
+			    return _m;
+			  }
+			}
+		''')
+	}
+	
+	@Test def void testLocalExtensionForPairStringString_05() {
+		assertCompilesTo('''
+			import org.eclipse.xtext.xbase.lib.Pair
+			public class C  {
+			    def <T> T m(Pair<T, T> in) {
+			    	(null->null).m
+				}
+			}
+		''', '''
+			import org.eclipse.xtext.xbase.lib.Pair;
+			
+			@SuppressWarnings("all")
+			public class C {
+			  public <T extends Object> T m(final Pair<T,T> in) {
+			    Pair<T,T> _mappedTo = Pair.<T, T>of(null, null);
+			    T _m = this.<T>m(_mappedTo);
+			    return _m;
+			  }
+			}
+		''')
+	}
+	
+	@Test def void testLocalExtensionForPairStringString_06() {
+		assertCompilesTo('''
+			import org.eclipse.xtext.xbase.lib.Pair
+			public class C  {
+			    def <T> String m(Pair<T, T> in) {
+			    	(''->'').m
+				}
+			}
+		''', '''
+			import org.eclipse.xtext.xbase.lib.Pair;
+			
+			@SuppressWarnings("all")
+			public class C {
+			  public <T extends Object> String m(final Pair<T,T> in) {
+			    Pair<String,String> _mappedTo = Pair.<String, String>of("", "");
+			    String _m = this.<String>m(_mappedTo);
+			    return _m;
+			  }
+			}
+		''')
+	}
+	
+	@Test def void testLocalExtensionForPairStringString_07() {
+		assertCompilesTo('''
+			import org.eclipse.xtext.xbase.lib.Pair
+			public class C  {
+			    def <T extends CharSequence> T m(Pair<T, T> in) {
+			    	in.m
+				}
+			}
+		''', '''
+			import org.eclipse.xtext.xbase.lib.Pair;
+			
+			@SuppressWarnings("all")
+			public class C {
+			  public <T extends CharSequence> T m(final Pair<T,T> in) {
+			    T _m = this.<T>m(in);
+			    return _m;
+			  }
+			}
+		''')
+	}
+	
+	@Test def void testLocalExtensionForPairStringString_08() {
+		assertCompilesTo('''
+			import org.eclipse.xtext.xbase.lib.Pair
+			public class C  {
+			    def <T extends CharSequence> T m(Pair<T, T> in) {
+			    	(null->null).m
+				}
+			}
+		''', '''
+			import org.eclipse.xtext.xbase.lib.Pair;
+			
+			@SuppressWarnings("all")
+			public class C {
+			  public <T extends CharSequence> T m(final Pair<T,T> in) {
+			    Pair<T,T> _mappedTo = Pair.<T, T>of(null, null);
+			    T _m = this.<T>m(_mappedTo);
+			    return _m;
+			  }
+			}
+		''')
+	}
+	
 	@Test def void testIfWithVoid() {
 		assertCompilesTo('''
 			public class C  {

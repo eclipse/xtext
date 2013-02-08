@@ -35,6 +35,365 @@ public class XtendCompilerTest extends AbstractXtendTestCase {
   private IGeneratorConfigProvider generatorConfigProvider;
   
   @Test
+  public void testLocalExtensionForPairStringString_01() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("import org.eclipse.xtext.xbase.lib.Pair");
+    _builder.newLine();
+    _builder.append("public class C  {");
+    _builder.newLine();
+    _builder.append("    ");
+    _builder.append("def String m(Pair<String, String> in) {");
+    _builder.newLine();
+    _builder.append("    \t");
+    _builder.append("(\'\'->\'\').m");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("import org.eclipse.xtext.xbase.lib.Pair;");
+    _builder_1.newLine();
+    _builder_1.newLine();
+    _builder_1.append("@SuppressWarnings(\"all\")");
+    _builder_1.newLine();
+    _builder_1.append("public class C {");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("public String m(final Pair<String,String> in) {");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("Pair<String,String> _mappedTo = Pair.<String, String>of(\"\", \"\");");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("String _m = this.m(_mappedTo);");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("return _m;");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    this.assertCompilesTo(_builder, _builder_1);
+  }
+  
+  @Test
+  public void testLocalExtensionForPairStringString_02() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("import org.eclipse.xtext.xbase.lib.Pair");
+    _builder.newLine();
+    _builder.append("public class C  {");
+    _builder.newLine();
+    _builder.append("    ");
+    _builder.append("def String m(Pair<String, String> in) {");
+    _builder.newLine();
+    _builder.append("    \t");
+    _builder.append("(null->null).m");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("import org.eclipse.xtext.xbase.lib.Pair;");
+    _builder_1.newLine();
+    _builder_1.newLine();
+    _builder_1.append("@SuppressWarnings(\"all\")");
+    _builder_1.newLine();
+    _builder_1.append("public class C {");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("public String m(final Pair<String,String> in) {");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("Pair<String,String> _mappedTo = Pair.<String, String>of(null, null);");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("String _m = this.m(_mappedTo);");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("return _m;");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    this.assertCompilesTo(_builder, _builder_1);
+  }
+  
+  @Test
+  public void testLocalExtensionForPairStringString_03() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("import org.eclipse.xtext.xbase.lib.Pair");
+    _builder.newLine();
+    _builder.append("public class C  {");
+    _builder.newLine();
+    _builder.append("    ");
+    _builder.append("def String m(Pair<String, String> in) {");
+    _builder.newLine();
+    _builder.append("    \t");
+    _builder.append("in.m");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("import org.eclipse.xtext.xbase.lib.Pair;");
+    _builder_1.newLine();
+    _builder_1.newLine();
+    _builder_1.append("@SuppressWarnings(\"all\")");
+    _builder_1.newLine();
+    _builder_1.append("public class C {");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("public String m(final Pair<String,String> in) {");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("String _m = this.m(in);");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("return _m;");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    this.assertCompilesTo(_builder, _builder_1);
+  }
+  
+  @Test
+  public void testLocalExtensionForPairStringString_04() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("import org.eclipse.xtext.xbase.lib.Pair");
+    _builder.newLine();
+    _builder.append("public class C  {");
+    _builder.newLine();
+    _builder.append("    ");
+    _builder.append("def <T> T m(Pair<T, T> in) {");
+    _builder.newLine();
+    _builder.append("    \t");
+    _builder.append("in.m");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("import org.eclipse.xtext.xbase.lib.Pair;");
+    _builder_1.newLine();
+    _builder_1.newLine();
+    _builder_1.append("@SuppressWarnings(\"all\")");
+    _builder_1.newLine();
+    _builder_1.append("public class C {");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("public <T extends Object> T m(final Pair<T,T> in) {");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("T _m = this.<T>m(in);");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("return _m;");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    this.assertCompilesTo(_builder, _builder_1);
+  }
+  
+  @Test
+  public void testLocalExtensionForPairStringString_05() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("import org.eclipse.xtext.xbase.lib.Pair");
+    _builder.newLine();
+    _builder.append("public class C  {");
+    _builder.newLine();
+    _builder.append("    ");
+    _builder.append("def <T> T m(Pair<T, T> in) {");
+    _builder.newLine();
+    _builder.append("    \t");
+    _builder.append("(null->null).m");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("import org.eclipse.xtext.xbase.lib.Pair;");
+    _builder_1.newLine();
+    _builder_1.newLine();
+    _builder_1.append("@SuppressWarnings(\"all\")");
+    _builder_1.newLine();
+    _builder_1.append("public class C {");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("public <T extends Object> T m(final Pair<T,T> in) {");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("Pair<T,T> _mappedTo = Pair.<T, T>of(null, null);");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("T _m = this.<T>m(_mappedTo);");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("return _m;");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    this.assertCompilesTo(_builder, _builder_1);
+  }
+  
+  @Test
+  public void testLocalExtensionForPairStringString_06() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("import org.eclipse.xtext.xbase.lib.Pair");
+    _builder.newLine();
+    _builder.append("public class C  {");
+    _builder.newLine();
+    _builder.append("    ");
+    _builder.append("def <T> String m(Pair<T, T> in) {");
+    _builder.newLine();
+    _builder.append("    \t");
+    _builder.append("(\'\'->\'\').m");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("import org.eclipse.xtext.xbase.lib.Pair;");
+    _builder_1.newLine();
+    _builder_1.newLine();
+    _builder_1.append("@SuppressWarnings(\"all\")");
+    _builder_1.newLine();
+    _builder_1.append("public class C {");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("public <T extends Object> String m(final Pair<T,T> in) {");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("Pair<String,String> _mappedTo = Pair.<String, String>of(\"\", \"\");");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("String _m = this.<String>m(_mappedTo);");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("return _m;");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    this.assertCompilesTo(_builder, _builder_1);
+  }
+  
+  @Test
+  public void testLocalExtensionForPairStringString_07() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("import org.eclipse.xtext.xbase.lib.Pair");
+    _builder.newLine();
+    _builder.append("public class C  {");
+    _builder.newLine();
+    _builder.append("    ");
+    _builder.append("def <T extends CharSequence> T m(Pair<T, T> in) {");
+    _builder.newLine();
+    _builder.append("    \t");
+    _builder.append("in.m");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("import org.eclipse.xtext.xbase.lib.Pair;");
+    _builder_1.newLine();
+    _builder_1.newLine();
+    _builder_1.append("@SuppressWarnings(\"all\")");
+    _builder_1.newLine();
+    _builder_1.append("public class C {");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("public <T extends CharSequence> T m(final Pair<T,T> in) {");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("T _m = this.<T>m(in);");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("return _m;");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    this.assertCompilesTo(_builder, _builder_1);
+  }
+  
+  @Test
+  public void testLocalExtensionForPairStringString_08() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("import org.eclipse.xtext.xbase.lib.Pair");
+    _builder.newLine();
+    _builder.append("public class C  {");
+    _builder.newLine();
+    _builder.append("    ");
+    _builder.append("def <T extends CharSequence> T m(Pair<T, T> in) {");
+    _builder.newLine();
+    _builder.append("    \t");
+    _builder.append("(null->null).m");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("import org.eclipse.xtext.xbase.lib.Pair;");
+    _builder_1.newLine();
+    _builder_1.newLine();
+    _builder_1.append("@SuppressWarnings(\"all\")");
+    _builder_1.newLine();
+    _builder_1.append("public class C {");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("public <T extends CharSequence> T m(final Pair<T,T> in) {");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("Pair<T,T> _mappedTo = Pair.<T, T>of(null, null);");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("T _m = this.<T>m(_mappedTo);");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("return _m;");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    this.assertCompilesTo(_builder, _builder_1);
+  }
+  
+  @Test
   public void testIfWithVoid() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("public class C  {");
