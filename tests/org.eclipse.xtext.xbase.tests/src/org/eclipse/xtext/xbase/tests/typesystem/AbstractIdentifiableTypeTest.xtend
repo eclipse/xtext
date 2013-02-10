@@ -211,7 +211,11 @@ abstract class AbstractIdentifiableTypeTest extends AbstractXbaseTestCase {
 	@Test def void testForExpression_05() throws Exception {
 		"for(x : null as java.util.Set) x.toString".resolvesIdentifiablesTo("Object")
 	}
-
+	
+	@Test def void testForExpression_06() throws Exception {
+		"for(x : null as Iterable<String>?:emptyList) x.toString".resolvesIdentifiablesTo("String")
+	}
+	
 	@Test def void testMethodTypeParamInference_00() throws Exception {
 		"new java.util.ArrayList<String>().findFirst(e | true)".resolvesIdentifiablesTo("String")
 	}
