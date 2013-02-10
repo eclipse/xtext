@@ -112,13 +112,15 @@ public class ResourceForIEditorInputFactory implements IResourceForEditorInputFa
 		if (storage instanceof IFile) {
 			return resourceSetProvider.get(((IFile) storage).getProject());
 		}
-		if (workspace != null) {
+		if (workspace != null && storage != null) {
 			IPath path = storage.getFullPath();
 			if (path != null && !path.isEmpty()) {
 				String firstSegment = path.segment(0);
-				IProject project = workspace.getRoot().getProject(firstSegment);
-				if (project.isAccessible()) {
-					return resourceSetProvider.get(project);
+				if (firstSegment != null) {
+					IProject project = workspace.getRoot().getProject(firstSegment);
+					if (project.isAccessible()) {
+						return resourceSetProvider.get(project);
+					}
 				}
 			}
 		}
