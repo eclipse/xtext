@@ -28,6 +28,12 @@ import org.eclipse.xtext.common.types.util.Primitives;
 import org.eclipse.xtext.common.types.util.TypeReferences;
 import org.eclipse.xtext.util.Strings;
 import org.eclipse.xtext.xbase.jvmmodel.IJvmModelAssociations;
+import org.eclipse.xtext.xbase.typesystem.legacy.StandardTypeReferenceOwner;
+import org.eclipse.xtext.xbase.typesystem.references.ITypeReferenceOwner;
+import org.eclipse.xtext.xbase.typesystem.references.ParameterizedTypeReference;
+import org.eclipse.xtext.xbase.typesystem.util.CommonTypeComputationServices;
+import org.eclipse.xtext.xbase.typesystem.util.ContextualVisibilityHelper;
+import org.eclipse.xtext.xbase.typesystem.util.IVisibilityHelper;
 
 import com.google.common.collect.ArrayListMultimap;
 import com.google.common.collect.ListMultimap;
@@ -134,7 +140,13 @@ public class DispatchHelper {
 	
 	@Inject
 	private TypeReferences typeRefs;
-
+	
+	@Inject
+	private IVisibilityHelper visibilityHelper;
+	
+	@Inject
+	private CommonTypeComputationServices services;
+	
 	public boolean isDispatcherFunction(JvmOperation inferredOperation) {
 		final Iterator<XtendFunction> filter = filter(associations.getSourceElements(inferredOperation), XtendFunction.class).iterator();
 		if (!filter.hasNext())
@@ -155,21 +167,6 @@ public class DispatchHelper {
 		}
 		return false;
 	}
-	
-//	protected boolean isDispatchOperation(JvmOperation operation, JvmGenericType contextType) {
-//		if (visibilityService.isVisible(operation, contextType)) {
-//			List<XtendFunction> sourceElements = newArrayList(filter(associations.getSourceElements(operation),
-//					XtendFunction.class));
-//			if (sourceElements.size() == 1) {
-//				final XtendFunction xtendFunction = sourceElements.get(0);
-//				return xtendFunction.isDispatch() && operation.getSimpleName().equals("_" + xtendFunction.getName());
-//			}
-//			return !operation.getParameters().isEmpty() && !operation.isStatic()
-//					&& operation.getSimpleName().startsWith("_");
-//		} else {
-//			return false;
-//		}
-//	}
 	
 	@Nullable
 	public JvmOperation getDispatcherOperation(JvmOperation dispatchCase) {
@@ -225,6 +222,17 @@ public class DispatchHelper {
 	}
 	
 	/**
+	 * Return the local cases that are associated with the given dispatch operation.
+	 */
+	public List<JvmOperation> getAllDispatchCases(JvmOperation dispatcherOperation) {
+		DispatchSignature dispatchSignature = new DispatchSignature(dispatcherOperation.getSimpleName(), dispatcherOperation.getParameters().size());
+		JvmDeclaredType type = dispatcherOperation.getDeclaringType();
+		ITypeReferenceOwner owner = new StandardTypeReferenceOwner(services, type);
+		ContextualVisibilityHelper contextualVisibilityHelper = new ContextualVisibilityHelper(visibilityHelper, new ParameterizedTypeReference(owner, type));
+		return getDeclaredDispatchMethods(dispatchSignature, type, contextualVisibilityHelper);
+	}
+	
+	/**
 	 * Computes all the dispatch methods that are declared in the given type or altered
 	 * by additional cases in this type. The associated operations are sorted by according their parameter types
 	 * from left to right where the most special types occur before more common types. Ambiguous
@@ -243,26 +251,35 @@ public class DispatchHelper {
 	public ListMultimap<DispatchSignature, JvmOperation> getDeclaredDispatchMethods(JvmDeclaredType type) {
 		ListMultimap<DispatchSignature, JvmOperation> result = ArrayListMultimap.create();
 		Iterable<JvmOperation> operations = type.getDeclaredOperations();
+		ITypeReferenceOwner owner = new StandardTypeReferenceOwner(services, type);
+		ContextualVisibilityHelper contextualVisibilityHelper = new ContextualVisibilityHelper(visibilityHelper, new ParameterizedTypeReference(owner, type));
 		for(JvmOperation operation: operations) {
 			if (isDispatchFunction(operation)) {
 				DispatchSignature signature = new DispatchSignature(operation.getSimpleName().substring(1), operation.getParameters().size());
 				if (!result.containsKey(signature)) {
-					List<JvmOperation> allOperations = Lists.newArrayListWithExpectedSize(5);
-					Iterable<JvmFeature> allFeatures = type.findAllFeaturesByName(operation.getSimpleName());
-					for(JvmFeature feature: allFeatures) {
-						if (feature instanceof JvmOperation) {
-							JvmOperation operationByName = (JvmOperation) feature;
-							if (signature.isDispatchCase(operationByName)) {
-								allOperations.add(operationByName);
-							}
-						}
-					}
-					sort(allOperations);
+					List<JvmOperation> allOperations = getDeclaredDispatchMethods(signature, type,
+							contextualVisibilityHelper);
 					result.putAll(signature, allOperations);
 				}
 			}
 		}
 		return result;
+	}
+
+	protected List<JvmOperation> getDeclaredDispatchMethods(DispatchSignature signature, JvmDeclaredType type,
+			ContextualVisibilityHelper contextualVisibilityHelper) {
+		List<JvmOperation> allOperations = Lists.newArrayListWithExpectedSize(5);
+		Iterable<JvmFeature> allFeatures = type.findAllFeaturesByName(signature.simpleName);
+		for(JvmFeature feature: allFeatures) {
+			if (feature instanceof JvmOperation) {
+				JvmOperation operationByName = (JvmOperation) feature;
+				if (signature.isDispatchCase(operationByName) && contextualVisibilityHelper.isVisible(operationByName)) {
+					allOperations.add(operationByName);
+				}
+			}
+		}
+		sort(allOperations);
+		return allOperations;
 	}
 
 	protected void sort(List<JvmOperation> operations) {
