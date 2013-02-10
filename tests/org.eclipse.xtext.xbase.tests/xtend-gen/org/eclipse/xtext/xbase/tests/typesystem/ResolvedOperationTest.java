@@ -222,14 +222,14 @@ public class ResolvedOperationTest extends AbstractXbaseTestCase {
   protected IResolvedOperation has(final IResolvedOperation operation, final int candidates) {
     final List<JvmOperation> actualCandidates = operation.getOverriddenAndImplementedMethodCandidates();
     int _size = actualCandidates.size();
-    Assert.assertEquals(candidates, _size);
+    Assert.assertEquals("candidates", candidates, _size);
     return operation;
   }
   
   protected IResolvedOperation candidatesAndOverrides(final IResolvedOperation operation, final int overrides) {
     final List<IResolvedOperation> actualOverrides = operation.getOverriddenAndImplementedMethods();
     int _size = actualOverrides.size();
-    Assert.assertEquals(overrides, _size);
+    Assert.assertEquals("overrides", overrides, _size);
     return operation;
   }
   
@@ -552,6 +552,10 @@ public class ResolvedOperationTest extends AbstractXbaseTestCase {
   @Test
   public void testShadowedMethodResolution_06() {
     final IResolvedOperation operation = this.toOperation("(null as testdata.MethodOverrides4).<CharSequence>staticM5()");
+    JvmOperation _declaration = operation.getDeclaration();
+    JvmDeclaredType _declaringType = _declaration.getDeclaringType();
+    String _simpleName = _declaringType.getSimpleName();
+    Assert.assertEquals("MethodOverrides3", _simpleName);
     IResolvedOperation _has = this.has(operation, 0);
     this.candidatesAndOverrides(_has, 0);
   }

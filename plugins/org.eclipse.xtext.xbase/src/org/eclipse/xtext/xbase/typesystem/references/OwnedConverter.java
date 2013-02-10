@@ -124,7 +124,7 @@ public class OwnedConverter extends AbstractXtypeReferenceVisitor<LightweightTyp
 		}
 		ParameterizedTypeReference result = new ParameterizedTypeReference(owner, type);
 		for(JvmTypeReference argument: reference.getArguments()) {
-			result.addTypeArgument(visit(argument));
+			result.addTypeArgument(visit(argument).getWrapperTypeIfPrimitive());
 		}
 		return result;
 	}
@@ -142,9 +142,9 @@ public class OwnedConverter extends AbstractXtypeReferenceVisitor<LightweightTyp
 			if (constraint.getTypeReference() != null) {
 				if (constraint instanceof JvmUpperBound) {
 					upperBoundSeen = true;
-					result.addUpperBound(visit(constraint.getTypeReference()));
+					result.addUpperBound(visit(constraint.getTypeReference()).getWrapperTypeIfPrimitive());
 				} else {
-					result.setLowerBound(visit(constraint.getTypeReference()));
+					result.setLowerBound(visit(constraint.getTypeReference()).getWrapperTypeIfPrimitive());
 				}
 			}
 		}

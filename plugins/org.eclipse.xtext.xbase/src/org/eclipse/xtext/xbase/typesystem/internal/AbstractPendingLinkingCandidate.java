@@ -336,6 +336,11 @@ public abstract class AbstractPendingLinkingCandidate<Expression extends XExpres
 		return 0;
 	}
 	
+	/**
+	 * Returns the mismatch of actually given arguments and declared parameters.
+	 * Receivers and staticness of the feature is taken into account, too. The mismatch
+	 * may either be negative or positive.
+	 */
 	public int getArityMismatch() {
 		JvmIdentifiableElement identifiable = getFeature();
 		if (identifiable instanceof JvmExecutable) {
@@ -385,7 +390,7 @@ public abstract class AbstractPendingLinkingCandidate<Expression extends XExpres
 				return 0;
 			}
 		}
-		return Math.abs(fixedArityParamCount - arguments.size());
+		return fixedArityParamCount - arguments.size();
 	}
 	
 	@Override
