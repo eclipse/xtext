@@ -19,8 +19,6 @@ import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeReference;
-import org.eclipse.xtext.common.types.util.Primitives;
-import org.eclipse.xtext.common.types.util.TypeConformanceComputer;
 import org.eclipse.xtext.common.types.util.TypeReferences;
 import org.eclipse.xtext.util.Strings;
 import org.eclipse.xtext.xbase.compiler.IAppendable;
@@ -29,6 +27,11 @@ import org.eclipse.xtext.xbase.compiler.TreeAppendableUtil;
 import org.eclipse.xtext.xbase.compiler.TypeReferenceSerializer;
 import org.eclipse.xtext.xbase.compiler.output.ITreeAppendable;
 import org.eclipse.xtext.xbase.lib.Procedures;
+import org.eclipse.xtext.xbase.typesystem.conformance.TypeConformanceComputationArgument;
+import org.eclipse.xtext.xbase.typesystem.legacy.StandardTypeReferenceOwner;
+import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
+import org.eclipse.xtext.xbase.typesystem.references.OwnedConverter;
+import org.eclipse.xtext.xbase.typesystem.util.CommonTypeComputationServices;
 
 import com.google.inject.Inject;
 
@@ -39,16 +42,13 @@ public class DispatchMethodCompileStrategy implements Procedures.Procedure1<ITre
 	private TypeReferences typeReferences;
 
 	@Inject
-	private TypeConformanceComputer typeConformanceComputer;
-
-	@Inject
-	private Primitives primitives;
-
-	@Inject
 	private TypeReferenceSerializer typeReferenceSerializer;
 	
 	@Inject
 	private TreeAppendableUtil treeAppendableUtil;
+	
+	@Inject
+	private CommonTypeComputationServices services;
 	
 	private List<JvmOperation> sortedDispatchOperations;
 
@@ -77,16 +77,18 @@ public class DispatchMethodCompileStrategy implements Procedures.Procedure1<ITre
 				}
 			}
 		}
+		StandardTypeReferenceOwner owner = new StandardTypeReferenceOwner(services, dispatchOperation);
+		OwnedConverter converter = new OwnedConverter(owner);
 		for (JvmOperation operation : sortedDispatchOperations) {
 			ITreeAppendable operationAppendable = treeAppendableUtil.traceSignificant(a, operation, true);
 			final List<Later> laters = newArrayList();
 			for (int i = 0; i < parameterCount; i++) {
 				final JvmFormalParameter dispatchParam = dispatchOperation.getParameters().get(i);
-				final JvmTypeReference dispatchParamType = dispatchParam.getParameterType();
+				final LightweightTypeReference dispatchParamType = converter.toLightweightReference(dispatchParam.getParameterType());
 				final JvmFormalParameter caseParam = operation.getParameters().get(i);
-				final JvmTypeReference caseParamType = caseParam.getParameterType();
+				final LightweightTypeReference caseParamType = converter.toLightweightReference(caseParam.getParameterType());
 				final String name = getVarName(dispatchParam, operationAppendable);
-				if (typeReferences.is(caseParamType, Void.class)) {
+				if (caseParamType.isType(Void.class)) {
 					laters.add(new Later() {
 						public void exec(ITreeAppendable appendable) {
 							appendable.append(name).append(" == null");
@@ -95,11 +97,16 @@ public class DispatchMethodCompileStrategy implements Procedures.Procedure1<ITre
 				} else if (!allCasesSameType[i]) {
 					laters.add(new Later() {
 						public void exec(ITreeAppendable appendable) {
-							if (typeConformanceComputer.isConformant(caseParamType, dispatchParamType, true) && !primitives.isPrimitive(dispatchParamType)) {
+							if (caseParamType.isAssignableFrom(dispatchParamType, 
+									new TypeConformanceComputationArgument(true, false, true, true, false, false)) && !dispatchParamType.isPrimitive()) {
 								appendable.append(name).append(" != null");
 							} else {
 								appendable.append(name).append(" instanceof ");
-								appendable.append(primitives.asWrapperTypeIfPrimitive(caseParamType).getType());
+								JvmType type = caseParamType.getWrapperTypeIfPrimitive().getType();
+								if (type == null) {
+									throw new IllegalStateException(String.valueOf(caseParamType));
+								}
+								appendable.append(type);
 							}
 						}
 					});
@@ -129,16 +136,16 @@ public class DispatchMethodCompileStrategy implements Procedures.Procedure1<ITre
 			final boolean isCurrentVoid = typeReferences.is(operation.getReturnType(), Void.TYPE);
 			final boolean isDispatchVoid = typeReferences.is(dispatchOperation.getReturnType(), Void.TYPE);
 			if (isDispatchVoid) {
-				generateActualDispatchCall(dispatchOperation, operation, operationAppendable);
+				generateActualDispatchCall(dispatchOperation, operation, operationAppendable, converter);
 				// we generate a redundant return statement here to get a better debugging experience
 				operationAppendable.append(";").newLine().append("return;");
 			} else {
 				if (isCurrentVoid) {
-					generateActualDispatchCall(dispatchOperation, operation, operationAppendable);
+					generateActualDispatchCall(dispatchOperation, operation, operationAppendable, converter);
 					operationAppendable.append(";").newLine().append("return null");
 				} else {
 					operationAppendable.append("return ");
-					generateActualDispatchCall(dispatchOperation, operation, operationAppendable);
+					generateActualDispatchCall(dispatchOperation, operation, operationAppendable, converter);
 				}
 				operationAppendable.append(";");
 			}
@@ -168,16 +175,17 @@ public class DispatchMethodCompileStrategy implements Procedures.Procedure1<ITre
 	}
 
 	protected void generateActualDispatchCall(JvmOperation dispatchOperation, JvmOperation actualOperationToCall,
-			ITreeAppendable a) {
+			ITreeAppendable a, OwnedConverter converter) {
 		a.append(actualOperationToCall.getSimpleName()).append("(");
 		Iterator<JvmFormalParameter> iter1 = dispatchOperation.getParameters().iterator();
 		for (Iterator<JvmFormalParameter> iter2 = actualOperationToCall.getParameters().iterator(); iter2.hasNext();) {
 			JvmFormalParameter p1 = iter1.next();
 			JvmFormalParameter p2 = iter2.next();
-			if (!typeConformanceComputer.isConformant(p2.getParameterType(), p1.getParameterType(), true)) {
+			LightweightTypeReference type1 = converter.toLightweightReference(p1.getParameterType());
+			LightweightTypeReference type2 = converter.toLightweightReference(p2.getParameterType());
+			if (!type2.isAssignableFrom(type1, new TypeConformanceComputationArgument(true, false, true, true, false, false))) {
 				a.append("(");
-				typeReferenceSerializer.serialize(primitives.asWrapperTypeIfPrimitive(p2.getParameterType()),
-						dispatchOperation, a);
+				typeReferenceSerializer.serialize(type2.getWrapperTypeIfPrimitive().toTypeReference(), dispatchOperation, a);
 				a.append(")");
 			}
 			if (typeReferences.is(p2.getParameterType(), Void.class)) {

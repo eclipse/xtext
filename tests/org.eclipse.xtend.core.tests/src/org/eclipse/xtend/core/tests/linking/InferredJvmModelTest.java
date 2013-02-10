@@ -198,7 +198,6 @@ public class InferredJvmModelTest extends AbstractXtendTestCase {
 		assertEquals(dispatch.getReturnType().getIdentifier(), internal.getReturnType().getIdentifier());
 	}
 	
-	
 	@Test public void testDispatchFunction_05() throws Exception {
 		XtendFile xtendFile = file("class Foo {" + 
 				"  def private dispatch private_private  (Integer x) {} def private   dispatch private_private  (Double x) {}" +
@@ -285,6 +284,26 @@ public class InferredJvmModelTest extends AbstractXtendTestCase {
 		});
 		String identifier = dispatcher.getReturnType().getIdentifier();
 		assertEquals("java.util.ArrayList<java.lang.Object>", identifier);
+	}
+	
+	@Test public void testDispatchFunction_09() throws Exception {
+		XtendFile xtendFile = file(
+			"import org.eclipse.xtext.xbase.jvmmodel.IJvmDeclaredTypeAcceptor\n" +
+			"import org.eclipse.xtend.core.xtend.XtendClass\n" +
+			"import org.eclipse.xtext.xbase.jvmmodel.AbstractModelInferrer\n" +
+			"class Z extends AbstractModelInferrer {\n" +
+			"  def dispatch infer(XtendClass x, IJvmDeclaredTypeAcceptor acceptor, boolean preIndexingPhase) {}\n" +
+			"}\n");
+		Iterable<JvmOperation> operations = getInferredType(xtendFile).getDeclaredOperations();
+		JvmOperation dispatcher = find(operations, new Predicate<JvmOperation>() {
+			public boolean apply(JvmOperation input) {
+				return equal("infer", input.getSimpleName());
+			}
+		});
+		JvmFormalParameter firstParameter = dispatcher.getParameters().get(0);
+		assertEquals("EObject", firstParameter.getParameterType().getSimpleName());
+		String returnType = dispatcher.getReturnType().getIdentifier();
+		assertEquals("void", returnType);
 	}
 	
 	@Test public void testBug_340611() throws Exception {

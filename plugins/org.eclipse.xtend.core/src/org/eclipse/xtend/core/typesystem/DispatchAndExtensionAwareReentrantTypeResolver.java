@@ -99,7 +99,7 @@ public class DispatchAndExtensionAwareReentrantTypeResolver extends LogicalConta
 				return expectedType.toJavaCompliantTypeReference();
 			}
 			
-			List<JvmOperation> cases = dispatchHelper.getDispatchCases(operation);
+			List<JvmOperation> cases = dispatchHelper.getAllDispatchCases(operation);
 			List<LightweightTypeReference> types = Lists.newArrayListWithCapacity(cases.size());
 			for(JvmOperation operation: cases) {
 				LightweightTypeReference caseType = resolvedTypes.getActualType(operation);
@@ -154,7 +154,7 @@ public class DispatchAndExtensionAwareReentrantTypeResolver extends LogicalConta
 		@Nullable
 		protected JvmTypeReference doGetTypeReference(XComputedTypeReferenceImplCustom context) {
 			// TODO type parameters on dispatch operations
-			List<JvmOperation> cases = dispatchHelper.getDispatchCases(operation);
+			List<JvmOperation> cases = dispatchHelper.getAllDispatchCases(operation);
 			TypeConformanceComputer conformanceComputer = getServices().getTypeConformanceComputer();
 			List<LightweightTypeReference> parameterTypes = Lists.newArrayListWithCapacity(cases.size());
 			for(JvmOperation caseOperation: cases) {
