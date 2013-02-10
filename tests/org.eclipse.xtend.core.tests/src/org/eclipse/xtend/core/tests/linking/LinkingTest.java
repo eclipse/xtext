@@ -88,13 +88,139 @@ public class LinkingTest extends AbstractXtendTestCase {
 	@Inject
 	private ITypeProvider typeProvider;
 	
-	@Test public void testParameterizedExtension() throws Exception {
+	@Test public void testParameterizedExtension_01() throws Exception {
 		XtendFile file = file(
 				"package testPackage\n" +
 				"import org.eclipse.xtext.junit4.util.ParseHelper\n" +
 				"import org.eclipse.xtend.core.xtend.XtendFile\n" + 
 				"class C {\n" + 
 				"	extension ParseHelper<XtendFile>\n" +
+				"	def m() {" +
+				"		parse('').xtendTypes\n" +
+				"	}\n" + 
+				"}\n"); 
+		XtendClass c = (XtendClass) file.getXtendTypes().get(0);
+		XAbstractFeatureCall substring = findSingleFeatureCall(c);
+		assertEquals("org.eclipse.xtend.core.xtend.XtendFile.getXtendTypes()", substring.getFeature().getIdentifier());
+	}
+	
+	@Test public void testParameterizedExtension_02() throws Exception {
+		XtendFile file = file(
+				"package testPackage\n" +
+				"import org.eclipse.xtext.junit4.util.ParseHelper\n" +
+				"import org.eclipse.xtend.core.xtend.XtendFile\n" + 
+				"class C<T extends ParseHelper<XtendFile>> {\n" + 
+				"	extension T\n" +
+				"	def m() {" +
+				"		parse('').xtendTypes\n" +
+				"	}\n" + 
+				"}\n"); 
+		XtendClass c = (XtendClass) file.getXtendTypes().get(0);
+		XAbstractFeatureCall substring = findSingleFeatureCall(c);
+		assertEquals("org.eclipse.xtend.core.xtend.XtendFile.getXtendTypes()", substring.getFeature().getIdentifier());
+	}
+	
+	@Test public void testParameterizedExtension_03() throws Exception {
+		XtendFile file = file(
+				"package testPackage\n" +
+				"import org.eclipse.xtext.junit4.util.ParseHelper\n" +
+				"import org.eclipse.xtend.core.xtend.XtendFile\n" + 
+				"class C<T extends XtendFile> {\n" + 
+				"	extension ParseHelper<T>\n" +
+				"	def m() {" +
+				"		parse('').xtendTypes\n" +
+				"	}\n" + 
+				"}\n"); 
+		XtendClass c = (XtendClass) file.getXtendTypes().get(0);
+		XAbstractFeatureCall substring = findSingleFeatureCall(c);
+		assertEquals("org.eclipse.xtend.core.xtend.XtendFile.getXtendTypes()", substring.getFeature().getIdentifier());
+	}
+	
+	@Test public void testParameterizedExtension_04() throws Exception {
+		XtendFile file = file(
+				"package testPackage\n" +
+				"import org.eclipse.xtext.junit4.util.ParseHelper\n" +
+				"import org.eclipse.xtend.core.xtend.XtendFile\n" + 
+				"class C<T extends ParseHelper<? extends XtendFile>> {\n" + 
+				"	extension T\n" +
+				"	def m() {" +
+				"		parse('').xtendTypes\n" +
+				"	}\n" + 
+				"}\n"); 
+		XtendClass c = (XtendClass) file.getXtendTypes().get(0);
+		XAbstractFeatureCall substring = findSingleFeatureCall(c);
+		assertEquals("org.eclipse.xtend.core.xtend.XtendFile.getXtendTypes()", substring.getFeature().getIdentifier());
+	}
+	
+	@Test public void testParameterizedExtension_05() throws Exception {
+		XtendFile file = file(
+				"package testPackage\n" +
+				"import org.eclipse.xtext.junit4.util.ParseHelper\n" +
+				"import org.eclipse.xtend.core.xtend.XtendFile\n" + 
+				"class C<F extends XtendFile, T extends ParseHelper<? extends F>> {\n" + 
+				"	extension T\n" +
+				"	def m() {" +
+				"		parse('').xtendTypes\n" +
+				"	}\n" + 
+				"}\n"); 
+		XtendClass c = (XtendClass) file.getXtendTypes().get(0);
+		XAbstractFeatureCall substring = findSingleFeatureCall(c);
+		assertEquals("org.eclipse.xtend.core.xtend.XtendFile.getXtendTypes()", substring.getFeature().getIdentifier());
+	}
+	
+	@Test public void testParameterizedExtension_06() throws Exception {
+		XtendFile file = file(
+				"package testPackage\n" +
+				"import org.eclipse.xtext.junit4.util.ParseHelper\n" +
+				"import org.eclipse.xtend.core.xtend.XtendFile\n" + 
+				"class C<F extends XtendFile, T extends ParseHelper<F>> {\n" + 
+				"	extension T\n" +
+				"	def m() {" +
+				"		parse('').xtendTypes\n" +
+				"	}\n" + 
+				"}\n"); 
+		XtendClass c = (XtendClass) file.getXtendTypes().get(0);
+		XAbstractFeatureCall substring = findSingleFeatureCall(c);
+		assertEquals("org.eclipse.xtend.core.xtend.XtendFile.getXtendTypes()", substring.getFeature().getIdentifier());
+	}
+	
+	@Test public void testParameterizedExtension_07() throws Exception {
+		XtendFile file = file(
+				"package testPackage\n" +
+				"import org.eclipse.xtext.junit4.util.ParseHelper\n" +
+				"import org.eclipse.xtend.core.xtend.XtendFile\n" + 
+				"class C<T extends XtendFile> {\n" + 
+				"	extension ParseHelper<? extends T>\n" +
+				"	def m() {" +
+				"		parse('').xtendTypes\n" +
+				"	}\n" + 
+				"}\n"); 
+		XtendClass c = (XtendClass) file.getXtendTypes().get(0);
+		XAbstractFeatureCall substring = findSingleFeatureCall(c);
+		assertEquals("org.eclipse.xtend.core.xtend.XtendFile.getXtendTypes()", substring.getFeature().getIdentifier());
+	}
+	
+	@Test public void testParameterizedExtension_08() throws Exception {
+		XtendFile file = file(
+				"package testPackage\n" +
+				"import org.eclipse.xtext.junit4.util.ParseHelper\n" +
+				"import org.eclipse.xtend.core.xtend.XtendFile\n" + 
+				"class C<T extends XtendFile> extends ParseHelper<T> {\n" + 
+				"	def m() {" +
+				"		parse('').xtendTypes\n" +
+				"	}\n" + 
+				"}\n"); 
+		XtendClass c = (XtendClass) file.getXtendTypes().get(0);
+		XAbstractFeatureCall substring = findSingleFeatureCall(c);
+		assertEquals("org.eclipse.xtend.core.xtend.XtendFile.getXtendTypes()", substring.getFeature().getIdentifier());
+	}
+	
+	@Test public void testParameterizedExtension_09() throws Exception {
+		XtendFile file = file(
+				"package testPackage\n" +
+				"import org.eclipse.xtext.junit4.util.ParseHelper\n" +
+				"import org.eclipse.xtend.core.xtend.XtendFile\n" + 
+				"class C extends ParseHelper<XtendFile> {\n" + 
 				"	def m() {" +
 				"		parse('').xtendTypes\n" +
 				"	}\n" + 
@@ -127,8 +253,8 @@ public class LinkingTest extends AbstractXtendTestCase {
 		assertEquals("testPackage.Foo.bar()", barInvoke.getFeature().getIdentifier());
 	}
 	
-	private XAbstractFeatureCall findSingleFeatureCall(XtendClass fooOrBar) {
-		XtendFunction function = (XtendFunction) fooOrBar.getMembers().get(1);
+	private XAbstractFeatureCall findSingleFeatureCall(XtendClass clazz) {
+		XtendFunction function = (XtendFunction) clazz.getMembers().get(clazz.getMembers().size() - 1);
 		XBlockExpression block = (XBlockExpression) function.getExpression();
 		return (XAbstractFeatureCall) block.getExpressions().get(0);
 	}
