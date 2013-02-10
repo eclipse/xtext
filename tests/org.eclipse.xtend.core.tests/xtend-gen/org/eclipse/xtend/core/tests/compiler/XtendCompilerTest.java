@@ -7507,6 +7507,40 @@ public class XtendCompilerTest extends AbstractXtendTestCase {
   }
   
   @Test
+  public void testRichStringAutoConversionToString_05() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("import org.eclipse.xtend2.lib.StringConcatenation;");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("@SuppressWarnings(\"all\")");
+    _builder.newLine();
+    _builder.append("public class Foo {");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append("public String test() {");
+    _builder.newLine();
+    _builder.append("    ");
+    _builder.append("StringConcatenation _builder = new StringConcatenation();");
+    _builder.newLine();
+    _builder.append("    ");
+    _builder.append("_builder.append(\"SomeString\");");
+    _builder.newLine();
+    _builder.append("    ");
+    _builder.append("String _string = _builder.toString();");
+    _builder.newLine();
+    _builder.append("    ");
+    _builder.append("return _string;");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    this.assertCompilesTo(
+      "class Foo { def String test() { \'\'\'SomeString\'\'\'.toString } }", _builder);
+  }
+  
+  @Test
   public void testRichStringNoAutoConversionToString_01() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("import org.eclipse.xtend2.lib.StringConcatenation;");
