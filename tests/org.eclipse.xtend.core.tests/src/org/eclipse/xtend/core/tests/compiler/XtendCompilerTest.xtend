@@ -22,6 +22,90 @@ class XtendCompilerTest extends AbstractXtendTestCase {
 	@Inject JvmModelGenerator generator
 	@Inject IGeneratorConfigProvider generatorConfigProvider
 	
+	@Test def void testForLoopWithTypeParameter_01() {
+		'''
+			class C<T extends CharSequence> {
+				def void m(Iterable<T> iter) {
+					for(x: iter) {
+						x.charAt(1)
+					}
+				}
+			}
+		'''.assertCompilesTo('''
+			@SuppressWarnings("all")
+			public class C<T extends CharSequence> {
+			  public void m(final Iterable<T> iter) {
+			    for (final T x : iter) {
+			      x.charAt(1);
+			    }
+			  }
+			}
+		''')
+	}
+	
+	@Test def void testForLoopWithTypeParameter_02() {
+		'''
+			class C {
+				def <T extends CharSequence> void m(Iterable<T> iter) {
+					for(x: iter) {
+						x.charAt(1)
+					}
+				}
+			}
+		'''.assertCompilesTo('''
+			@SuppressWarnings("all")
+			public class C {
+			  public <T extends CharSequence> void m(final Iterable<T> iter) {
+			    for (final T x : iter) {
+			      x.charAt(1);
+			    }
+			  }
+			}
+		''')
+	}
+	
+	@Test def void testForLoopWithTypeParameter_03() {
+		'''
+			class C<T extends CharSequence> {
+				def <L extends Iterable<T>> void m(L iter) {
+					for(x: iter) {
+						x.charAt(1)
+					}
+				}
+			}
+		'''.assertCompilesTo('''
+			@SuppressWarnings("all")
+			public class C<T extends CharSequence> {
+			  public <L extends Iterable<T>> void m(final L iter) {
+			    for (final T x : iter) {
+			      x.charAt(1);
+			    }
+			  }
+			}
+		''')
+	}
+	
+	@Test def void testForLoopWithTypeParameter_04() {
+		'''
+			abstract class C<T extends CharSequence> implements Iterable<T> {
+				def void m() {
+					for(x: this) {
+						x.charAt(1)
+					}
+				}
+			}
+		'''.assertCompilesTo('''
+			@SuppressWarnings("all")
+			public abstract class C<T extends CharSequence> implements Iterable<T> {
+			  public void m() {
+			    for (final T x : this) {
+			      x.charAt(1);
+			    }
+			  }
+			}
+		''')
+	}
+	
 	@Test def void testBug400347_01() {
 		'''
 			import java.util.LinkedList
