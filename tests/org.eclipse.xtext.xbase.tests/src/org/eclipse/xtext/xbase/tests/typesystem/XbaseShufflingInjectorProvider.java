@@ -10,6 +10,7 @@ package org.eclipse.xtext.xbase.tests.typesystem;
 import java.util.List;
 
 import org.eclipse.jdt.annotation.NonNullByDefault;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.xbase.XCasePart;
 import org.eclipse.xtext.xbase.XExpression;
@@ -29,6 +30,7 @@ import com.google.inject.Injector;
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
+@NonNullByDefault
 public class XbaseShufflingInjectorProvider extends XbaseInjectorProvider {
 	
 	@Override
@@ -60,6 +62,7 @@ public class XbaseShufflingInjectorProvider extends XbaseInjectorProvider {
 			return Lists.reverse(result);
 		}
 		
+		@Nullable
 		@Override
 		protected XExpression getThen(XIfExpression ifExpression) {
 			if (ifExpression.getElse() != null)
@@ -67,6 +70,7 @@ public class XbaseShufflingInjectorProvider extends XbaseInjectorProvider {
 			return super.getThen(ifExpression);
 		}
 		
+		@Nullable
 		@Override
 		protected XExpression getElse(XIfExpression ifExpression) {
 			if (ifExpression.getElse() != null)
@@ -75,7 +79,6 @@ public class XbaseShufflingInjectorProvider extends XbaseInjectorProvider {
 		}
 	}
 	
-	@NonNullByDefault
 	public static class ShufflingExpressionArgumentFactory extends ExpressionArgumentFactory {
 		
 		@Override
