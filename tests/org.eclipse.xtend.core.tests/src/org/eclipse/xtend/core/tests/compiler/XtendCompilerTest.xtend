@@ -3250,6 +3250,39 @@ class XtendCompilerTest extends AbstractXtendTestCase {
 			''')
 	}
 	
+	@Test 
+	def void testReturnType_03() {
+		'''
+			import java.util.LinkedList
+			
+			class B extends A {
+				def String client(CharSequence c) {
+					client(m)
+				}
+				override m() {
+					''
+				}
+			}
+			
+			abstract class A {
+				def CharSequence m() 
+			}
+		'''.assertCompilesTo('''
+			@SuppressWarnings("all")
+			public class B extends A {
+			  public String client(final CharSequence c) {
+			    CharSequence _m = this.m();
+			    String _client = this.client(_m);
+			    return _client;
+			  }
+			  
+			  public CharSequence m() {
+			    return "";
+			  }
+			}
+		''')
+	}
+	
 	@Test
 	def testBug373482() {
 		assertCompilesTo(
