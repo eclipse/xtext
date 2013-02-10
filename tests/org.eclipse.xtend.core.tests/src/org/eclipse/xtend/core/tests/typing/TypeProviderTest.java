@@ -13,6 +13,7 @@ import org.eclipse.xtend.core.xtend.XtendConstructor;
 import org.eclipse.xtend.core.xtend.XtendFile;
 import org.eclipse.xtend.core.xtend.XtendFunction;
 import org.eclipse.xtend.core.xtend.XtendParameter;
+import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.XBlockExpression;
@@ -497,6 +498,14 @@ public class TypeProviderTest extends AbstractXtendTestCase {
 		XtendFunction function = function("def foo()'''someString'''");
 		XExpression expression = function.getExpression();
 		assertEquals("java.lang.String", mockedTypeProvider.getType(expression).getIdentifier());
+	}
+	
+	@Test public void testTypeOfRichStringWithExpectedStringConcatenation() throws Exception {
+		XtendFunction function = function("def org.eclipse.xtend2.lib.StringConcatenation foo() '''" +
+				"SomeString" +
+				"'''");
+		XExpression expression = function.getExpression();
+		assertEquals(StringConcatenation.class.getCanonicalName(), typeProvider.getType(expression).getIdentifier());
 	}
 
 }
