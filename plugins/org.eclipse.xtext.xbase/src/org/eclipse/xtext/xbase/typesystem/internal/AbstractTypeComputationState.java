@@ -20,6 +20,7 @@ import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmMember;
 import org.eclipse.xtext.common.types.JvmType;
+import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.util.TypeReferences;
 import org.eclipse.xtext.diagnostics.AbstractDiagnostic;
 import org.eclipse.xtext.diagnostics.Severity;
@@ -46,6 +47,7 @@ import org.eclipse.xtext.xbase.typesystem.references.ITypeReferenceOwner;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.OwnedConverter;
 import org.eclipse.xtext.xbase.typesystem.references.ParameterizedTypeReference;
+import org.eclipse.xtext.xbase.typesystem.references.UnboundTypeReference;
 import org.eclipse.xtext.xbase.validation.IssueCodes;
 
 import com.google.common.base.Strings;
@@ -429,6 +431,10 @@ public abstract class AbstractTypeComputationState implements ITypeComputationSt
 
 	public ITypeReferenceOwner getReferenceOwner() {
 		return resolvedTypes.getReferenceOwner();
+	}
+	
+	public UnboundTypeReference createUnboundTypeReference(XExpression expression, JvmTypeParameter typeParameter) {
+		return getResolvedTypes().createUnboundTypeReference(expression, typeParameter);
 	}
 	
 	public OwnedConverter getConverter() {

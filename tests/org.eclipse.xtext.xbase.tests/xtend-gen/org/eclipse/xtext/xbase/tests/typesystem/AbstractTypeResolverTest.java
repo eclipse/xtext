@@ -3547,6 +3547,21 @@ public abstract class AbstractTypeResolverTest<Reference extends Object> extends
   }
   
   @Test
+  public void testDeferredTypeArgumentResolution_161() throws Exception {
+    this.resolvesTo("{\n\t\t\tval list = newArrayList\n\t\t\tfor(s: list) {\n\t\t\t\tval String x = s\n\t\t\t\tx.toString\n\t\t\t}\n\t\t\tlist\n\t\t}", "ArrayList<String>");
+  }
+  
+  @Test
+  public void testDeferredTypeArgumentResolution_162() throws Exception {
+    this.resolvesTo("{\n\t\t\tval list = newArrayList\n\t\t\tfor(s: newArrayList) {\n\t\t\t\tlist.add(s)\n\t\t\t\tval String x = s\n\t\t\t\tx.toString\n\t\t\t}\n\t\t\tlist\n\t\t}", "ArrayList<String>");
+  }
+  
+  @Test
+  public void testDeferredTypeArgumentResolution_163() throws Exception {
+    this.resolvesTo("{\n\t\t\tval list = newArrayList\n\t\t\tval literal = #{}\n\t\t\tlist += literal\n\t\t\tfor(s: newArrayList) {\n\t\t\t\tlist.add(s)\n\t\t\t\tval String x = s\n\t\t\t\tx.toString\n\t\t\t}\n\t\t\tliteral\n\t\t}", "Set<String>");
+  }
+  
+  @Test
   public void testRecursiveTypeArgumentResolution_01() throws Exception {
     this.resolvesTo("{\n\t\t\tval list = newArrayList\n\t\t\tlist.addAll(list)\n\t\t\tlist\n\t\t}", "ArrayList<Object>");
   }

@@ -62,12 +62,13 @@ import org.eclipse.xtext.xbase.typesystem.references.LightweightMergedBoundTypeA
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.ParameterizedTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.TypeReferenceVisitorWithResult;
+import org.eclipse.xtext.xbase.typesystem.references.UnboundTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.WildcardTypeReference;
 import org.eclipse.xtext.xbase.typesystem.util.CommonTypeComputationServices;
 import org.eclipse.xtext.xbase.typesystem.util.ConstraintAwareTypeArgumentCollector;
 import org.eclipse.xtext.xbase.typesystem.util.DeclaratorTypeArgumentCollector;
-import org.eclipse.xtext.xbase.typesystem.util.TypeParameterByConstraintSubstitutor;
 import org.eclipse.xtext.xbase.typesystem.util.TypeParameterSubstitutor;
+import org.eclipse.xtext.xbase.typesystem.util.UnboundTypeParameterPreservingSubstitutor;
 
 import com.google.inject.Inject;
 
@@ -575,15 +576,17 @@ public class XbaseTypeComputer implements ITypeComputer {
 			}
 		} else {
 			WildcardTypeReference wildcard = new WildcardTypeReference(state.getReferenceOwner());
-			wildcard.addUpperBound(getTypeForName(Object.class, state));
-			ParameterizedTypeReference iterable = new ParameterizedTypeReference(state.getReferenceOwner(), services.getTypeReferences().findDeclaredType(Iterable.class, object));
+			JvmGenericType iterableType = (JvmGenericType) services.getTypeReferences().findDeclaredType(Iterable.class, object);
+			ParameterizedTypeReference iterable = new ParameterizedTypeReference(state.getReferenceOwner(), iterableType);
+			UnboundTypeReference unbound = state.createUnboundTypeReference(object, iterableType.getTypeParameters().get(0));
+			wildcard.addUpperBound(unbound);
 			iterable.addTypeArgument(wildcard);
 			// TODO do we have to add synonyms, too?
 			ITypeComputationState iterableState = state.withExpectation(iterable); 
 			ITypeComputationResult forExpressionResult = iterableState.computeTypes(object.getForExpression());
 			LightweightTypeReference forExpressionType = forExpressionResult.getActualExpressionType();
 			if (forExpressionType != null) {
-				if (forExpressionType.isResolved() && !forExpressionType.isAny() && iterable.isAssignableFrom(forExpressionType)) {
+				if (forExpressionType.isResolved() && !forExpressionType.isAny() && (iterable.isAssignableFrom(forExpressionType) || forExpressionType.isArray())) {
 					iterableState.refineExpectedType(object.getForExpression(), forExpressionType);
 				}
 				parameterType = forExpressionType.accept(new TypeReferenceVisitorWithResult<LightweightTypeReference>() {
@@ -591,10 +594,14 @@ public class XbaseTypeComputer implements ITypeComputer {
 					public LightweightTypeReference doVisitParameterizedTypeReference(ParameterizedTypeReference reference) {
 						DeclaratorTypeArgumentCollector typeArgumentCollector = new ConstraintAwareTypeArgumentCollector(state.getReferenceOwner());
 						Map<JvmTypeParameter, LightweightMergedBoundTypeArgument> typeParameterMapping = typeArgumentCollector.getTypeParameterMapping(reference);
-						TypeParameterSubstitutor<?> substitutor = new TypeParameterByConstraintSubstitutor(typeParameterMapping, state.getReferenceOwner());
+						TypeParameterSubstitutor<?> substitutor = new UnboundTypeParameterPreservingSubstitutor(typeParameterMapping, state.getReferenceOwner());
 						JvmGenericType iterable = (JvmGenericType) services.getTypeReferences().findDeclaredType(Iterable.class, object);
 						ParameterizedTypeReference substituteMe = new ParameterizedTypeReference(state.getReferenceOwner(), iterable.getTypeParameters().get(0));
 						LightweightTypeReference substitutedArgument = substitutor.substitute(substituteMe).getUpperBoundSubstitute();
+						if (substitutedArgument.getType() instanceof JvmTypeParameter && 
+								!(state.getReferenceOwner().getDeclaredTypeParameters().contains(substitutedArgument.getType()))) {
+							return substitutedArgument.getRawTypeReference();
+						}
 						return substitutedArgument;
 					}
 					@Override

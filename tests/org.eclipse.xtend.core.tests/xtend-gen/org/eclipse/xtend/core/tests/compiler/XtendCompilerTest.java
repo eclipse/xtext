@@ -35,6 +35,194 @@ public class XtendCompilerTest extends AbstractXtendTestCase {
   private IGeneratorConfigProvider generatorConfigProvider;
   
   @Test
+  public void testForLoopWithTypeParameter_01() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("class C<T extends CharSequence> {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def void m(Iterable<T> iter) {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("for(x: iter) {");
+    _builder.newLine();
+    _builder.append("\t\t\t");
+    _builder.append("x.charAt(1)");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("@SuppressWarnings(\"all\")");
+    _builder_1.newLine();
+    _builder_1.append("public class C<T extends CharSequence> {");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("public void m(final Iterable<T> iter) {");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("for (final T x : iter) {");
+    _builder_1.newLine();
+    _builder_1.append("      ");
+    _builder_1.append("x.charAt(1);");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    this.assertCompilesTo(_builder, _builder_1);
+  }
+  
+  @Test
+  public void testForLoopWithTypeParameter_02() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("class C {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def <T extends CharSequence> void m(Iterable<T> iter) {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("for(x: iter) {");
+    _builder.newLine();
+    _builder.append("\t\t\t");
+    _builder.append("x.charAt(1)");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("@SuppressWarnings(\"all\")");
+    _builder_1.newLine();
+    _builder_1.append("public class C {");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("public <T extends CharSequence> void m(final Iterable<T> iter) {");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("for (final T x : iter) {");
+    _builder_1.newLine();
+    _builder_1.append("      ");
+    _builder_1.append("x.charAt(1);");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    this.assertCompilesTo(_builder, _builder_1);
+  }
+  
+  @Test
+  public void testForLoopWithTypeParameter_03() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("class C<T extends CharSequence> {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def <L extends Iterable<T>> void m(L iter) {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("for(x: iter) {");
+    _builder.newLine();
+    _builder.append("\t\t\t");
+    _builder.append("x.charAt(1)");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("@SuppressWarnings(\"all\")");
+    _builder_1.newLine();
+    _builder_1.append("public class C<T extends CharSequence> {");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("public <L extends Iterable<T>> void m(final L iter) {");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("for (final T x : iter) {");
+    _builder_1.newLine();
+    _builder_1.append("      ");
+    _builder_1.append("x.charAt(1);");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    this.assertCompilesTo(_builder, _builder_1);
+  }
+  
+  @Test
+  public void testForLoopWithTypeParameter_04() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("abstract class C<T extends CharSequence> implements Iterable<T> {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def void m() {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("for(x: this) {");
+    _builder.newLine();
+    _builder.append("\t\t\t");
+    _builder.append("x.charAt(1)");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("@SuppressWarnings(\"all\")");
+    _builder_1.newLine();
+    _builder_1.append("public abstract class C<T extends CharSequence> implements Iterable<T> {");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("public void m() {");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("for (final T x : this) {");
+    _builder_1.newLine();
+    _builder_1.append("      ");
+    _builder_1.append("x.charAt(1);");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    this.assertCompilesTo(_builder, _builder_1);
+  }
+  
+  @Test
   public void testBug400347_01() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("import java.util.LinkedList");

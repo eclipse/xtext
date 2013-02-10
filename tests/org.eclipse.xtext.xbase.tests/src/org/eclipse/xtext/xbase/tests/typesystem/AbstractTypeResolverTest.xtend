@@ -4037,6 +4037,43 @@ abstract class AbstractTypeResolverTest<Reference> extends AbstractXbaseTestCase
 		}".resolvesTo("ArrayList<String>")
 	}
 	
+	@Test def void testDeferredTypeArgumentResolution_161() throws Exception {
+		"{
+			val list = newArrayList
+			for(s: list) {
+				val String x = s
+				x.toString
+			}
+			list
+		}".resolvesTo("ArrayList<String>")
+	}
+	
+	@Test def void testDeferredTypeArgumentResolution_162() throws Exception {
+		"{
+			val list = newArrayList
+			for(s: newArrayList) {
+				list.add(s)
+				val String x = s
+				x.toString
+			}
+			list
+		}".resolvesTo("ArrayList<String>")
+	}
+	
+	@Test def void testDeferredTypeArgumentResolution_163() throws Exception {
+		"{
+			val list = newArrayList
+			val literal = #{}
+			list += literal
+			for(s: newArrayList) {
+				list.add(s)
+				val String x = s
+				x.toString
+			}
+			literal
+		}".resolvesTo("Set<String>")
+	}
+	
 	@Test def void testRecursiveTypeArgumentResolution_01() throws Exception {
 		"{
 			val list = newArrayList

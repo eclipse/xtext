@@ -14,6 +14,7 @@ import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmType;
+import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.diagnostics.AbstractDiagnostic;
 import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
@@ -25,6 +26,7 @@ import org.eclipse.xtext.xbase.typesystem.conformance.ConformanceHint;
 import org.eclipse.xtext.xbase.typesystem.references.ITypeReferenceOwner;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.OwnedConverter;
+import org.eclipse.xtext.xbase.typesystem.references.UnboundTypeReference;
 import org.eclipse.xtext.xbase.validation.FeatureNameValidator;
 
 /**
@@ -258,8 +260,22 @@ public interface ITypeComputationState {
 	 */
 	void discardReassignedTypes(JvmIdentifiableElement refinable);
 
+	/**
+	 * The current type reference owner for newly converted type references.
+	 */
 	ITypeReferenceOwner getReferenceOwner();
 	
+	/**
+	 * Provides access to a configured {@link OwnedConverter converter}.
+	 */
 	OwnedConverter getConverter();
+
+	/**
+	 * Create a new, managed {@link UnboundTypeReference} for the given type parameter which was
+	 * first encountered for the given expression.
+	 * @param expression the expression that used / referenced the type parameter
+	 * @param typeParameter the type parameter
+	 */
+	UnboundTypeReference createUnboundTypeReference(XExpression expression, JvmTypeParameter typeParameter);
 	
 }

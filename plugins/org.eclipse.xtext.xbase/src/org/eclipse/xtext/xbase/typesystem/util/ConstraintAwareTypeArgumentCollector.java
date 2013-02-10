@@ -48,7 +48,9 @@ public class ConstraintAwareTypeArgumentCollector extends DeclaratorTypeArgument
 					OwnedConverter converter = new OwnedConverter(owner);
 					for(JvmTypeConstraint constraint: constraints) {
 						if (constraint instanceof JvmUpperBound && constraint.getTypeReference() != null) {
-							upperBounds.add(converter.toLightweightReference(constraint.getTypeReference()));
+							LightweightTypeReference upperBound = converter.toLightweightReference(constraint.getTypeReference());
+							upperBound.accept(this, data);
+							upperBounds.add(upperBound);
 						}
 					}
 					if (upperBounds.size() > 1) {
