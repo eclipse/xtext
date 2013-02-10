@@ -3413,6 +3413,25 @@ class XtendCompilerTest extends AbstractXtendTestCase {
 				}
 			''')
 	}
+	
+	@Test
+	def testRichStringAutoConversionToString_05(){
+		assertCompilesTo(
+			"class Foo { def String test() { '''SomeString'''.toString } }",
+			'''
+				import org.eclipse.xtend2.lib.StringConcatenation;
+				
+				@SuppressWarnings("all")
+				public class Foo {
+				  public String test() {
+				    StringConcatenation _builder = new StringConcatenation();
+				    _builder.append("SomeString");
+				    String _string = _builder.toString();
+				    return _string;
+				  }
+				}
+			''')
+	}
 
 	@Test
 	def testRichStringNoAutoConversionToString_01(){
