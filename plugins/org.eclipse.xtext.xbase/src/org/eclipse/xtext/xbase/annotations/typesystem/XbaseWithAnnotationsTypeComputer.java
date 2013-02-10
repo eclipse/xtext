@@ -9,6 +9,8 @@ package org.eclipse.xtext.xbase.annotations.typesystem;
 
 import java.util.List;
 
+import org.eclipse.jdt.annotation.NonNullByDefault;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.common.types.JvmAnnotationType;
 import org.eclipse.xtext.common.types.JvmFeature;
 import org.eclipse.xtext.common.types.JvmOperation;
@@ -34,6 +36,7 @@ import com.google.common.collect.Iterables;
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
+@NonNullByDefault
 public class XbaseWithAnnotationsTypeComputer extends XbaseTypeComputer {
 
 	@Override
@@ -83,7 +86,7 @@ public class XbaseWithAnnotationsTypeComputer extends XbaseTypeComputer {
 		}
 	}
 
-	protected void computeTypes(XAnnotation annotation, JvmOperation operation, XExpression value,
+	protected void computeTypes(XAnnotation annotation, @Nullable JvmOperation operation, XExpression value,
 			ITypeComputationState state) {
 		LightweightTypeReference expectation = operation == null || operation.eIsProxy() ? null : state.getConverter().toLightweightReference(operation.getReturnType());
 		if (expectation != null && expectation.isArray()) {

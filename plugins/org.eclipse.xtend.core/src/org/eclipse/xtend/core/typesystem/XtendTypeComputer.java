@@ -9,6 +9,7 @@ package org.eclipse.xtend.core.typesystem;
 
 import java.util.List;
 
+import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.xtend.core.xtend.RichString;
 import org.eclipse.xtend.core.xtend.RichStringElseIf;
 import org.eclipse.xtend.core.xtend.RichStringForLoop;
@@ -32,6 +33,7 @@ import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
  * 
  * @author Sebastian Zarnekow - Initial contribution and API
  */
+@NonNullByDefault
 public class XtendTypeComputer extends XbaseWithAnnotationsTypeComputer {
 
 	@Override
