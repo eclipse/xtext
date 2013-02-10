@@ -638,20 +638,4 @@
 	    </page>
 	</extension>
 
-   <extension
-         point="org.eclipse.xtext.builder.participant">
-      <participant
-            class="org.eclipse.xtext.common.types.xtext.ui.ui.ContentAssistTestLanguageExecutableExtensionFactory:org.eclipse.xtext.builder.IXtextBuilderParticipant">
-      </participant>
-   </extension>
-   <extension
-            point="org.eclipse.ui.preferencePages">
-        <page
-            category="org.eclipse.xtext.common.types.xtext.ui.ContentAssistTestLanguage"
-            class="org.eclipse.xtext.common.types.xtext.ui.ui.ContentAssistTestLanguageExecutableExtensionFactory:org.eclipse.xtext.builder.preferences.BuilderPreferencePage"
-            id="org.eclipse.xtext.common.types.xtext.ui.ContentAssistTestLanguage.builder"
-            name="Building">
-            <keywordReference id="org.eclipse.xtext.common.types.xtext.ui.ui.keyword_ContentAssistTestLanguage"/>
-        </page>
-    </extension>
 </plugin>
