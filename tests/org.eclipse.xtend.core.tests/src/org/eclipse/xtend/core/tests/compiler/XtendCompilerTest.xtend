@@ -22,6 +22,127 @@ class XtendCompilerTest extends AbstractXtendTestCase {
 	@Inject JvmModelGenerator generator
 	@Inject IGeneratorConfigProvider generatorConfigProvider
 	
+	@Test def void testBug400347_01() {
+		'''
+			import java.util.LinkedList
+			
+			interface XType {}
+			
+			class XItem<T extends XType> {
+				XList<T> gen
+				T item
+				
+				new(XList<T> gen, T item) {
+					this.gen = gen
+					this.item = item
+				}
+			}
+			
+			class XList<T extends XType> {
+				val items = new LinkedList<XItem<T>>
+				
+				def add(T item) {
+					val result = new XItem<T>(this, item)
+					items.add(result)
+				}
+			}
+		'''.assertCompilesTo('''
+			@SuppressWarnings("all")
+			public interface XType {
+			}
+		''')
+	}
+	
+	@Test def void testBug400347_02() {
+		'''
+			import java.util.LinkedList
+			
+			class XItem<T extends XType> {
+				XList<T> gen
+				T item
+				
+				new(XList<T> gen, T item) {
+					this.gen = gen
+					this.item = item
+				}
+			}
+			
+			interface XType {}
+			
+			class XList<T extends XType> {
+				val items = new LinkedList<XItem<T>>
+				
+				def add(T item) {
+					val result = new XItem<T>(this, item)
+					items.add(result)
+				}
+			}
+		'''.assertCompilesTo('''
+			@SuppressWarnings("all")
+			public class XItem<T extends XType> {
+			  private XList<T> gen;
+			  
+			  private T item;
+			  
+			  public XItem(final XList<T> gen, final T item) {
+			    this.gen = gen;
+			    this.item = item;
+			  }
+			}
+		''')
+	}
+	
+	@Test def void testBug400347_03() {
+		'''
+			import java.util.LinkedList
+			
+			class XList<T extends XType> {
+				val items = new LinkedList<XItem<T>>
+				
+				def add(T item) {
+					val result = new XItem<T>(this, item)
+					items.add(result)
+				}
+			}
+			
+			interface XType {}
+			
+			class XItem<T extends XType> {
+				XList<T> gen
+				T item
+				
+				new(XList<T> gen, T item) {
+					this.gen = gen
+					this.item = item
+				}
+			}
+		'''.assertCompilesTo('''
+			import java.util.LinkedList;
+			import org.eclipse.xtext.xbase.lib.Functions.Function0;
+			
+			@SuppressWarnings("all")
+			public class XList<T extends XType> {
+			  private final LinkedList<XItem<T>> items = new Function0<LinkedList<XItem<T>>>() {
+			    public LinkedList<XItem<T>> apply() {
+			      LinkedList<XItem<T>> _linkedList = new LinkedList<XItem<T>>();
+			      return _linkedList;
+			    }
+			  }.apply();
+			  
+			  public boolean add(final T item) {
+			    boolean _xblockexpression = false;
+			    {
+			      XItem<T> _xItem = new XItem<T>(this, item);
+			      final XItem<T> result = _xItem;
+			      boolean _add = this.items.add(result);
+			      _xblockexpression = (_add);
+			    }
+			    return _xblockexpression;
+			  }
+			}
+		''')
+	}
+	
 	@Test def void testLocalExtensionForPairStringString_01() {
 		assertCompilesTo('''
 			import org.eclipse.xtext.xbase.lib.Pair
