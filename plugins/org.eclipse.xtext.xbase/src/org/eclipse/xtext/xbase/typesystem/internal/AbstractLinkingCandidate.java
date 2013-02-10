@@ -254,7 +254,7 @@ public abstract class AbstractLinkingCandidate<Expression extends XExpression> i
 			// TODO enhance with expectation
 			LightweightTypeReference substitutedFeatureType = substitutor.substitute(featureType).getUpperBoundSubstitute();
 			deferredBindTypeArgument(expectation, substitutedFeatureType);
-			expectation.acceptActualType(substitutedFeatureType, ConformanceHint.UNCHECKED); // TODO NATIVE, EXPECTATION_INDEPENDENT ?
+			expectation.acceptActualType(substitutedFeatureType, ConformanceHint.UNCHECKED);
 		}
 		state.getStackedResolvedTypes().mergeIntoParent();
 	}
@@ -302,17 +302,25 @@ public abstract class AbstractLinkingCandidate<Expression extends XExpression> i
 			ITypeComputationState argumentState = null;
 			LightweightTypeReference substitutedComponentType = substitutor.substitute(componentType);
 			List<XExpression> arguments = slot.getArgumentExpressions();
-			if (arguments.size() == 1) {
-				ArgumentTypeComputationState first = createVarArgTypeComputationState(substitutedComponentType);
-				ArrayTypeReference arrayTypeReference = new ArrayTypeReference(substitutedComponentType.getOwner(), substitutedComponentType);
-				ArgumentTypeComputationState second = createLinkingTypeComputationState(arrayTypeReference);
-				argumentState = new CompoundTypeComputationState(substitutedComponentType.getOwner(), first, second);
+			if (!substitutedComponentType.isAny()) {
+				if (arguments.size() == 1) {
+					ArgumentTypeComputationState first = createVarArgTypeComputationState(substitutedComponentType);
+					ArrayTypeReference arrayTypeReference = new ArrayTypeReference(substitutedComponentType.getOwner(), substitutedComponentType);
+					ArgumentTypeComputationState second = createLinkingTypeComputationState(arrayTypeReference);
+					argumentState = new CompoundTypeComputationState(substitutedComponentType.getOwner(), first, second);
+				} else {
+					argumentState = createVarArgTypeComputationState(substitutedComponentType);
+				}
+				for(XExpression argument: arguments) {
+					if (argument != null) {
+						resolveArgumentType(argument, substitutedComponentType, argumentState);
+					}
+				}
 			} else {
-				argumentState = createVarArgTypeComputationState(substitutedComponentType);
-			}
-			for(XExpression argument: arguments) {
-				if (argument != null) {
-					resolveArgumentType(argument, substitutedComponentType, argumentState);
+				for(XExpression argument: arguments) {
+					if (argument != null) {
+						resolveArgumentType(argument, null, state.withNonVoidExpectation());
+					}
 				}
 			}
 		} else {
