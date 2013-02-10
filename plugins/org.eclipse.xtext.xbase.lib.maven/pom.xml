@@ -1,38 +1,16 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <groupId>org.eclipse.xtend</groupId>
+        <artifactId>org.eclipse.xtend.maven</artifactId>
+        <version>2.4.0-SNAPSHOT</version>
+        <relativePath>../org.eclipse.xtend.maven</relativePath>
+    </parent>
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.eclipse.xtext</groupId>
 	<artifactId>org.eclipse.xtext.xbase.lib</artifactId>
 	<name>Eclipse Xbase Runtime Library</name>
-	<version>2.4.0-SNAPSHOT</version>
 	<description>The runtime library for the Xbase programming language.</description>
-	<distributionManagement>
-		<repository>
-			<id>local-repository</id>
-			<url>${deployment.url}</url>
-		</repository>
-		<snapshotRepository>
-			<id>local-repository</id>
-			<url>${deployment.url}</url>
-		</snapshotRepository>
-	</distributionManagement>
-	<repositories>
-		<repository>
-			<id>build-eclipse-org-xtend</id>
-			<name>${xtend.repo.name}</name>
-			<url>http://build.eclipse.org/common/xtend/maven/</url>
-		</repository>
-		<repository>
-			<id>local-org-xtend</id>
-			<name>Xtext-Xtend local repository</name>
-			<url>file:///shared/common/xtend/maven/</url>
-		</repository>
-	</repositories>
-	<properties>
-		<deployment.folder>/shared/common/xtend/maven/</deployment.folder>
-		<deployment.url>file://${deployment.folder}</deployment.url>
-		<xtend.repo.name>Xtend provisional repository</xtend.repo.name>
-	</properties>
 	<dependencies>
 		<dependency>
 			<groupId>com.google.guava</groupId>
@@ -58,30 +36,6 @@
 								<source>../org.eclipse.xtend2.lib/src/</source>
 							</sources>
 						</configuration>
-					</execution>
-				</executions>
-			</plugin>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-source-plugin</artifactId>
-				<executions>
-					<execution>
-						<id>attach-sources</id>
-						<goals>
-							<goal>jar</goal>
-						</goals>
-					</execution>
-				</executions>
-			</plugin>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-javadoc-plugin</artifactId>
-				<executions>
-					<execution>
-						<id>attach-javadocs</id>
-						<goals>
-							<goal>jar</goal>
-						</goals>
 					</execution>
 				</executions>
 			</plugin>

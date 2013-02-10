@@ -1,5 +1,11 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<parent>
+        <groupId>org.eclipse.xtend</groupId>
+        <artifactId>org.eclipse.xtend.maven</artifactId>
+        <version>2.4.0-SNAPSHOT</version>
+        <relativePath>../org.eclipse.xtend.maven</relativePath>
+    </parent>
 	<modelVersion>4.0.0</modelVersion>
 	<artifactId>org.eclipse.xtend.lib</artifactId>
 	<name>Eclipse Xtend Runtime Library</name>
@@ -18,44 +24,5 @@
 	</dependencies>
 	<build>
 		<sourceDirectory>../org.eclipse.xtend.lib/src</sourceDirectory>
-		<plugins>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-source-plugin</artifactId>
-				<executions>
-					<execution>
-						<id>attach-sources</id>
-						<goals>
-							<goal>jar</goal>
-						</goals>
-					</execution>
-				</executions>
-			</plugin>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-javadoc-plugin</artifactId>
-				<executions>
-					<execution>
-						<id>attach-javadocs</id>
-						<goals>
-							<goal>jar</goal>
-						</goals>
-					</execution>
-				</executions>
-			</plugin>
-		</plugins>
 	</build>
-	<repositories>
-		<repository>
-			<id>build-eclipse-org-xtend</id>
-			<name>Xtext/Xtend provisional repository</name>
-			<url>http://build.eclipse.org/common/xtend/maven/</url>
-		</repository>
-	</repositories>
-	<parent>
-		<groupId>org.eclipse.xtend</groupId>
-		<artifactId>org.eclipse.xtend.maven</artifactId>
-		<version>2.4.0-SNAPSHOT</version>
-		<relativePath>../org.eclipse.xtend.maven</relativePath>
-	</parent>
 </project>

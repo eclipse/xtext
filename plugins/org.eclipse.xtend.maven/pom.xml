@@ -6,13 +6,21 @@
 	<packaging>pom</packaging>
 	<version>2.4.0-SNAPSHOT</version>
 	<modules>
-		<module>../../../org.eclipse.xtext/plugins/org.eclipse.xtext.xbase.lib.maven</module>
-		<module>../../../org.eclipse.xtext/plugins/org.eclipse.xtext.xbase.lib.gwt</module>
+		<module>../org.eclipse.xtext.xbase.lib.maven</module>
+		<module>../org.eclipse.xtext.xbase.lib.gwt</module>
 		<module>../org.eclipse.xtend.lib.maven</module>
 		<module>../org.eclipse.xtend.lib.gwt</module>
 		<module>../org.eclipse.xtend.maven.plugin</module>
 		<module>../org.eclipse.xtend.maven.archetype</module> 
 	</modules>
+	<name>Xtend Parent/Container</name>
+    <repositories>
+        <repository>
+            <id>build-eclipse-org-xtend</id>
+            <name>${xtend.repo.name}</name>
+            <url>http://build.eclipse.org/common/xtend/maven/</url>
+        </repository>
+    </repositories>
 	<distributionManagement>
 		<repository>
 			<id>local-repository</id>
@@ -35,6 +43,7 @@
 		<plugin>
 			<groupId>org.apache.maven.plugins</groupId>
 			<artifactId>maven-compiler-plugin</artifactId>
+			<version>2.3.2</version>
 			<configuration>
 				<compilerId>eclipse</compilerId>
 				<source>1.5</source>
@@ -84,19 +93,30 @@
 					</arguments>
 				</configuration>
 			</plugin>
-		</plugins>
+        <plugin>
+			<groupId>org.apache.maven.plugins</groupId>
+			<artifactId>maven-source-plugin</artifactId>
+			<executions>
+				<execution>
+					<id>attach-sources</id>
+					<goals>
+						<goal>jar</goal>
+					</goals>
+				</execution>
+			</executions>
+		</plugin>
+		<plugin>
+			<groupId>org.apache.maven.plugins</groupId>
+			<artifactId>maven-javadoc-plugin</artifactId>
+			<executions>
+				<execution>
+					<id>attach-javadocs</id>
+					<goals>
+						<goal>jar</goal>
+					</goals>
+				</execution>
+			</executions>
+        </plugin>
+    </plugins>
 	</build>
-	<name>Xtend Parent/Container</name>
-	<repositories>
-		<repository>
-			<id>build-eclipse-org-xtend</id>
-			<name>${xtend.repo.name}</name>
-			<url>http://build.eclipse.org/common/xtend/maven/</url>
-		</repository>
-		<repository>
-			<id>local-org-xtend</id>
-			<name>Xtext-Xtend local repository</name>
-			<url>file:///shared/common/xtend/maven/</url>
-		</repository>
-	</repositories>
 </project>
