@@ -18,6 +18,7 @@ import org.eclipse.emf.common.util.WrappedException;
 import org.eclipse.emf.ecore.resource.ContentHandler;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ui.IEditorInput;
 import org.eclipse.ui.IStorageEditorInput;
 import org.eclipse.ui.IURIEditorInput;
@@ -108,7 +109,7 @@ public class ResourceForIEditorInputFactory implements IResourceForEditorInputFa
 		return (XtextResource) aResource;
 	}
 
-	protected ResourceSet getResourceSet(IStorage storage) {
+	protected ResourceSet getResourceSet(@Nullable IStorage storage) {
 		if (storage instanceof IFile) {
 			return resourceSetProvider.get(((IFile) storage).getProject());
 		}
