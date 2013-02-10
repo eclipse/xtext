@@ -90,7 +90,9 @@ public class LogicalContainerAwareReentrantTypeResolver extends DefaultReentrant
 			LightweightTypeReference actualType = returnType ? resolvedTypes.getReturnType(expression) : resolvedTypes.getActualType(expression);
 			if (actualType == null) {
 				computeTypes(resolvedTypesByContext, resolvedTypes, session, member);
-				actualType = returnType ? resolvedTypes.getReturnType(expression) : resolvedTypes.getActualType(expression);
+				actualType = returnType ? resolvedTypes.getExpectedReturnType(expression) : resolvedTypes.getExpectedType(expression);
+				if (actualType == null)
+					actualType = returnType ? resolvedTypes.getReturnType(expression) : resolvedTypes.getActualType(expression);
 			}
 			if (actualType == null)
 				return null;

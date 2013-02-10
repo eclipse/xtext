@@ -7183,6 +7183,78 @@ public class XtendCompilerTest extends AbstractXtendTestCase {
   }
   
   @Test
+  public void testReturnType_03() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("import java.util.LinkedList");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("class B extends A {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def String client(CharSequence c) {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("client(m)");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("override m() {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("\'\'");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("abstract class A {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def CharSequence m() ");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("@SuppressWarnings(\"all\")");
+    _builder_1.newLine();
+    _builder_1.append("public class B extends A {");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("public String client(final CharSequence c) {");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("CharSequence _m = this.m();");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("String _client = this.client(_m);");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("return _client;");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("public CharSequence m() {");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("return \"\";");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    this.assertCompilesTo(_builder, _builder_1);
+  }
+  
+  @Test
   public void testBug373482() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("class X {");
