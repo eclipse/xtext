@@ -7,6 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.typesystem.computation;
 
+import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.annotations.typesystem.XbaseWithAnnotationsTypeComputer;
 
@@ -94,6 +95,7 @@ import com.google.inject.ImplementedBy;
  * @author Sebastian Zarnekow - Initial contribution and API
  */
 @ImplementedBy(XbaseTypeComputer.class)
+@NonNullByDefault
 public interface ITypeComputer {
 
 	/**

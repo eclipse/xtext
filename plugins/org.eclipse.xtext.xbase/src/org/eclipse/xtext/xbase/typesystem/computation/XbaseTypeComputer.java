@@ -15,7 +15,6 @@ import java.util.Map;
 import java.util.Set;
 
 import org.eclipse.emf.ecore.resource.ResourceSet;
-import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.common.types.JvmField;
@@ -80,6 +79,7 @@ import com.google.inject.Inject;
  * 
  * @author Sebastian Zarnekow - Initial contribution and API
  */
+@NonNullByDefault
 public class XbaseTypeComputer implements ITypeComputer {
 
 	@Inject
@@ -138,7 +138,6 @@ public class XbaseTypeComputer implements ITypeComputer {
 		}
 	}
 
-	@NonNull
 	protected LightweightTypeReference getTypeForName(Class<?> clazz, ITypeComputationState state) {
 		ResourceSet resourceSet = state.getReferenceOwner().getContextResourceSet();
 		JvmTypeReference typeReference = services.getTypeReferences().getTypeForName(clazz, resourceSet);
@@ -147,7 +146,6 @@ public class XbaseTypeComputer implements ITypeComputer {
 		return state.getConverter().toLightweightReference(typeReference);
 	}
 	
-	@NonNull
 	protected LightweightTypeReference getPrimitiveVoid(ITypeComputationState state) {
 		return getTypeForName(Void.TYPE, state);
 	}
@@ -183,6 +181,7 @@ public class XbaseTypeComputer implements ITypeComputer {
 	 * @nooverride This method is not intended to be re-implemented or extended by clients.
 	 * @noreference This method is not intended to be referenced by clients.
 	 */
+	@Nullable
 	protected XExpression getElse(XIfExpression ifExpression) {
 		return ifExpression.getElse();
 	}
@@ -192,6 +191,7 @@ public class XbaseTypeComputer implements ITypeComputer {
 	 * @nooverride This method is not intended to be re-implemented or extended by clients.
 	 * @noreference This method is not intended to be referenced by clients.
 	 */
+	@Nullable
 	protected XExpression getThen(XIfExpression ifExpression) {
 		return ifExpression.getThen();
 	}
@@ -498,14 +498,12 @@ public class XbaseTypeComputer implements ITypeComputer {
 		state.acceptActualType(primitiveVoid);
 	}
 
-	@NonNullByDefault
 	@Nullable
 	protected LightweightTypeReference computeForLoopParameterType(final XForLoopExpression object,
 			final ITypeComputationState state) {
 		JvmFormalParameter declaredParam = object.getDeclaredParam();
-		LightweightTypeReference parameterType = null;
-		if (declaredParam.getParameterType() != null) {
-			parameterType = state.getConverter().toLightweightReference(declaredParam.getParameterType());
+		LightweightTypeReference parameterType = getDeclaredParameterType(declaredParam, state);
+		if (parameterType != null && !parameterType.isPrimitiveVoid()) {
 			LightweightTypeReference iterableOrArray = null;
 			if (parameterType.isPrimitive()) {
 				iterableOrArray = new ArrayTypeReference(state.getReferenceOwner(), parameterType);
@@ -613,6 +611,14 @@ public class XbaseTypeComputer implements ITypeComputer {
 		return parameterType;
 	}
 
+	@Nullable
+	protected LightweightTypeReference getDeclaredParameterType(JvmFormalParameter declaredParam, final ITypeComputationState state) {
+		JvmTypeReference parameterType = declaredParam.getParameterType();
+		if (parameterType == null)
+			return null;
+		return state.getConverter().toLightweightReference(parameterType);
+	}
+
 	protected void _computeTypes(XAbstractWhileExpression object, ITypeComputationState state) {
 		ITypeComputationState conditionExpectation = state.withExpectation(getTypeForName(Boolean.TYPE, state));
 		conditionExpectation.computeTypes(object.getPredicate());
@@ -706,6 +712,7 @@ public class XbaseTypeComputer implements ITypeComputer {
 		return result;
 	}
 
+	@Nullable
 	protected JvmIdentifiableElement getRefinableCandidate(XExpression object, ITypeComputationState state) {
 		if (object instanceof XSwitchExpression) {
 			return (XSwitchExpression) object;
@@ -722,7 +729,7 @@ public class XbaseTypeComputer implements ITypeComputer {
 		return null;
 	}
 
-	protected boolean isRefinableFeature(JvmIdentifiableElement feature) {
+	protected boolean isRefinableFeature(@Nullable JvmIdentifiableElement feature) {
 		return feature instanceof XVariableDeclaration || feature instanceof JvmFormalParameter || feature instanceof JvmField;
 	}
 	

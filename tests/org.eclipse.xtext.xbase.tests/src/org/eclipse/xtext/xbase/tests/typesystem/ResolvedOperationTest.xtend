@@ -138,13 +138,13 @@ class ResolvedOperationTest extends AbstractXbaseTestCase {
 	
 	def protected has(IResolvedOperation operation, int candidates) {
 		val actualCandidates = operation.overriddenAndImplementedMethodCandidates
-		assertEquals(candidates, actualCandidates.size)
+		assertEquals("candidates", candidates, actualCandidates.size)
 		return operation
 	}
 	
 	def protected candidatesAndOverrides(IResolvedOperation operation, int overrides) {
 		val actualOverrides = operation.overriddenAndImplementedMethods
-		assertEquals(overrides, actualOverrides.size)
+		assertEquals("overrides", overrides, actualOverrides.size)
 		return operation
 	}
 	
@@ -372,6 +372,7 @@ class ResolvedOperationTest extends AbstractXbaseTestCase {
 	@Test
 	def void testShadowedMethodResolution_06() {
 		val operation = '(null as testdata.MethodOverrides4).<CharSequence>staticM5()'.toOperation
+		assertEquals("MethodOverrides3", operation.declaration.declaringType.simpleName)
 		operation.has(0).candidatesAndOverrides(0)
 	}
 	
