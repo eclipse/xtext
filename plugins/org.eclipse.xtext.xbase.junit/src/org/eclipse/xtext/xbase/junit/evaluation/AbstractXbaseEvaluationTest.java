@@ -32,6 +32,22 @@ import static java.util.Collections.emptyList;
  */
 public abstract class AbstractXbaseEvaluationTest extends Assert {
 	
+	@Test public void testReservedWordEnum() throws Exception {
+		assertEvaluatesTo(Boolean.TRUE, "typeof(java.lang.annotation.RetentionPolicy).enum");
+	}
+	
+	@Test public void testReservedWordInterface() throws Exception {
+		assertEvaluatesTo(Boolean.TRUE, "typeof(Iterable).interface");
+	}
+	
+	@Test public void testReservedWordAnnotation() throws Exception {
+		assertEvaluatesTo(Boolean.TRUE, "typeof(Override).annotation");
+	}
+	
+	@Test public void testReservedWordClass() throws Exception {
+		assertEvaluatesTo(Class.class, "typeof(Override).class");
+	}
+	
 	@Test public void testDoubleSwitch() throws Exception {
 		assertEvaluatesTo("foo","{ val x = 'foo' switch x.length { case 2 : 'bla'.toString } switch x.length { case 3 : 'foo'.toString } }");
 	}
