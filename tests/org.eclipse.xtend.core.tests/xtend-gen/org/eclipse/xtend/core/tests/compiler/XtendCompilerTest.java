@@ -35,6 +35,52 @@ public class XtendCompilerTest extends AbstractXtendTestCase {
   private IGeneratorConfigProvider generatorConfigProvider;
   
   @Test
+  public void testBug400433_01() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("class Test<T> {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("new(()=>T arg) {}");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("static def <P> newInstance(()=>P arg) { new Test(arg) }");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("import org.eclipse.xtext.xbase.lib.Functions.Function0;");
+    _builder_1.newLine();
+    _builder_1.newLine();
+    _builder_1.append("@SuppressWarnings(\"all\")");
+    _builder_1.newLine();
+    _builder_1.append("public class Test<T extends Object> {");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("public Test(final Function0<? extends T> arg) {");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("public static <P extends Object> Test<P> newInstance(final Function0<? extends P> arg) {");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("Test<P> _test = new Test<P>(arg);");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("return _test;");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    this.assertCompilesTo(_builder, _builder_1);
+  }
+  
+  @Test
   public void testForLoopWithTypeParameter_01() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("class C<T extends CharSequence> {");

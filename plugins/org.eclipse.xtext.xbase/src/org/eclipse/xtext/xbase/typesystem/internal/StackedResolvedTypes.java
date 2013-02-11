@@ -209,6 +209,8 @@ public class StackedResolvedTypes extends ResolvedTypes {
 	
 	@Override
 	public void addDeclaredTypeParameters(List<JvmTypeParameter> typeParameters) {
+		if (typeParameters.isEmpty())
+			return;
 		List<JvmTypeParameter> list = basicGetDeclardTypeParameters();
 		if (list == null) {
 			super.addDeclaredTypeParameters(parent.getDeclaredTypeParameters());
@@ -216,6 +218,14 @@ public class StackedResolvedTypes extends ResolvedTypes {
 		} else { 
 			list.addAll(typeParameters);
 		}
+	}
+	
+	public void replaceDeclaredTypeParameters(List<JvmTypeParameter> typeParameters) {
+		List<JvmTypeParameter> list = basicGetDeclardTypeParameters();
+		if (list != null) {
+			throw new IllegalStateException("Cannot replace declared type parameters if there are already type parameters in this StackedResolvedTypes");
+		}
+		super.addDeclaredTypeParameters(typeParameters);
 	}
 	
 	@Override

@@ -22,6 +22,28 @@ class XtendCompilerTest extends AbstractXtendTestCase {
 	@Inject JvmModelGenerator generator
 	@Inject IGeneratorConfigProvider generatorConfigProvider
 	
+	@Test def void testBug400433_01() {
+		'''
+			class Test<T> {
+				new(()=>T arg) {}
+				static def <P> newInstance(()=>P arg) { new Test(arg) }
+			}
+		'''.assertCompilesTo('''
+			import org.eclipse.xtext.xbase.lib.Functions.Function0;
+			
+			@SuppressWarnings("all")
+			public class Test<T extends Object> {
+			  public Test(final Function0<? extends T> arg) {
+			  }
+			  
+			  public static <P extends Object> Test<P> newInstance(final Function0<? extends P> arg) {
+			    Test<P> _test = new Test<P>(arg);
+			    return _test;
+			  }
+			}
+		''')
+	}
+	
 	@Test def void testForLoopWithTypeParameter_01() {
 		'''
 			class C<T extends CharSequence> {
