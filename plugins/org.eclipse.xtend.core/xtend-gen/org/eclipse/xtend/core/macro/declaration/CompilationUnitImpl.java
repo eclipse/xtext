@@ -95,7 +95,7 @@ import org.eclipse.xtext.common.types.TypesPackage;
 import org.eclipse.xtext.common.types.util.TypeReferences;
 import org.eclipse.xtext.diagnostics.Severity;
 import org.eclipse.xtext.validation.EObjectDiagnosticImpl;
-import org.eclipse.xtext.xbase.compiler.TypeReferenceSerializer2;
+import org.eclipse.xtext.xbase.compiler.TypeReferenceSerializer;
 import org.eclipse.xtext.xbase.compiler.output.ITreeAppendable;
 import org.eclipse.xtext.xbase.jvmmodel.JvmTypesBuilder;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
@@ -184,7 +184,7 @@ public class CompilationUnitImpl implements CompilationUnit, TypeReferenceProvid
   private JvmTypesBuilder typesBuilder;
   
   @Inject
-  private TypeReferenceSerializer2 typeRefSerializer;
+  private TypeReferenceSerializer typeRefSerializer;
   
   @Inject
   private IXtendJvmAssociations associations;

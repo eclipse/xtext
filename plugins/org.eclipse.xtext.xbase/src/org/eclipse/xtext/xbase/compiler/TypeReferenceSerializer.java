@@ -27,13 +27,16 @@ import org.eclipse.xtext.common.types.JvmUpperBound;
 import org.eclipse.xtext.common.types.JvmWildcardTypeReference;
 import org.eclipse.xtext.common.types.TypesPackage;
 import org.eclipse.xtext.common.types.util.Primitives;
-import org.eclipse.xtext.common.types.util.TypeConformanceComputer;
 import org.eclipse.xtext.generator.trace.LocationData;
 import org.eclipse.xtext.resource.ILocationInFileProvider;
 import org.eclipse.xtext.util.ITextRegion;
 import org.eclipse.xtext.util.ITextRegionWithLineInformation;
 import org.eclipse.xtext.xbase.compiler.output.ITreeAppendable;
 import org.eclipse.xtext.xbase.jvmmodel.ILogicalContainerProvider;
+import org.eclipse.xtext.xbase.typesystem.legacy.StandardTypeReferenceOwner;
+import org.eclipse.xtext.xbase.typesystem.references.ITypeReferenceOwner;
+import org.eclipse.xtext.xbase.typesystem.references.OwnedConverter;
+import org.eclipse.xtext.xbase.typesystem.util.CommonTypeComputationServices;
 
 import com.google.inject.Inject;
 
@@ -46,14 +49,14 @@ public class TypeReferenceSerializer {
 	@Inject
 	private Primitives primitives;
 	
-	@Inject
-	private TypeConformanceComputer typeConformanceComputer;
-	
 	@Inject 
 	private ILogicalContainerProvider contextProvider;
 	
 	@Inject
 	private ILocationInFileProvider locationProvider;
+	
+	@Inject
+	private CommonTypeComputationServices services;
 	
 	public boolean isLocalTypeParameter(EObject context, JvmTypeParameter parameter) {
 		if (context == parameter.getDeclarator()) 
@@ -173,12 +176,7 @@ public class TypeReferenceSerializer {
 	}
 	
 	public JvmTypeReference resolveMultiType(JvmTypeReference reference, EObject context) {
-		if (reference instanceof JvmMultiTypeReference) {
-			JvmTypeReference result = typeConformanceComputer.getCommonSuperType(((JvmMultiTypeReference) reference).getReferences());
-			if (result instanceof JvmMultiTypeReference)
-				return resolveMultiType(result, context);
-			return result;
-		}
-		return reference;
+		ITypeReferenceOwner owner = new StandardTypeReferenceOwner(services, context.eResource().getResourceSet());
+		return new OwnedConverter(owner).toLightweightReference(reference).toJavaCompliantTypeReference();
 	}
 }

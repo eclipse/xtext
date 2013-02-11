@@ -7,7 +7,7 @@ import org.eclipse.xtend.lib.macro.type.TypeReference;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.xbase.compiler.ImportManager;
 import org.eclipse.xtext.xbase.compiler.StringBuilderBasedAppendable;
-import org.eclipse.xtext.xbase.compiler.TypeReferenceSerializer2;
+import org.eclipse.xtext.xbase.compiler.TypeReferenceSerializer;
 import org.eclipse.xtext.xbase.compiler.output.ITreeAppendable;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Functions.Function0;
@@ -29,9 +29,9 @@ public class CompilationContextImpl implements CompilationContext {
   
   private CompilationUnitImpl compilationUnit;
   
-  private TypeReferenceSerializer2 typeRefSerializer;
+  private TypeReferenceSerializer typeRefSerializer;
   
-  public CompilationContextImpl(final ITreeAppendable appendable, final CompilationUnitImpl compilationUnit, final TypeReferenceSerializer2 typeRefSerializer) {
+  public CompilationContextImpl(final ITreeAppendable appendable, final CompilationUnitImpl compilationUnit, final TypeReferenceSerializer typeRefSerializer) {
     this.appendable = appendable;
     ImportManager _importManager = this.getImportManager(appendable);
     this.importManager = _importManager;
