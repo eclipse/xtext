@@ -160,7 +160,7 @@ public class FormattingDataFactory {
   }
   
   protected Function1<? super FormattableDocument,? extends Iterable<FormattingData>> _newFormattingData(final HiddenLeafs leafs, final PreferenceKey key, final FormattingDataInit it) {
-    Class<? extends PreferenceKey> _class = key.getClass();
+    Class<? extends Object> _class = key.getClass();
     String _plus = ("Unknown configuration key kind: " + _class);
     RuntimeException _runtimeException = new RuntimeException(_plus);
     throw _runtimeException;
@@ -193,6 +193,7 @@ public class FormattingDataFactory {
     ArrayList<FormattingData> _xblockexpression = null;
     {
       final ArrayList<FormattingData> result = CollectionLiterals.<FormattingData>newArrayList();
+      boolean isFirst = true;
       List<LeafInfo> _leafs = leafs.getLeafs();
       for (final LeafInfo leaf : _leafs) {
         boolean _matched = false;
@@ -202,13 +203,20 @@ public class FormattingDataFactory {
             _matched=true;
             int _offset = _whitespaceInfo.getOffset();
             int _length = _whitespaceInfo.getLength();
-            RuntimeException _xifexpression = null;
+            int _xifexpression = (int) 0;
+            if (isFirst) {
+              _xifexpression = indentationChange;
+            } else {
+              _xifexpression = 0;
+            }
+            RuntimeException _xifexpression_1 = null;
             if (trace) {
               RuntimeException _runtimeException = new RuntimeException();
-              _xifexpression = _runtimeException;
+              _xifexpression_1 = _runtimeException;
             }
-            WhitespaceData _whitespaceData = new WhitespaceData(_offset, _length, indentationChange, _xifexpression, space);
+            WhitespaceData _whitespaceData = new WhitespaceData(_offset, _length, _xifexpression, _xifexpression_1, space);
             result.add(_whitespaceData);
+            isFirst = false;
           }
         }
         if (!_matched) {
