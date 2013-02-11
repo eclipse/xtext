@@ -218,7 +218,7 @@ public class AbstractSyntacticSequencer extends GeneratedFile {
       _builder.append("}");
       _builder.newLine();
       String _string = _builder.toString();
-      file.setBody(_string);
+      file.body = _string;
       String _string_1 = file.toString();
       _xblockexpression = (_string_1);
     }

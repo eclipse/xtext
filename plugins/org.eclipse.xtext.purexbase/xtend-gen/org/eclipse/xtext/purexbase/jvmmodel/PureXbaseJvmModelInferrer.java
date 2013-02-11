@@ -52,7 +52,7 @@ public class PureXbaseJvmModelInferrer extends AbstractModelInferrer {
               }
             };
           JvmOperation _method = PureXbaseJvmModelInferrer.this._jvmTypesBuilder.toMethod(e, "myMethod", _inferredType, _function);
-          PureXbaseJvmModelInferrer.this._jvmTypesBuilder.<JvmOperation>operator_add(_members, _method);
+          PureXbaseJvmModelInferrer.this._jvmTypesBuilder.<JvmMember>operator_add(_members, _method);
         }
       };
     _accept.initializeLater(_function);

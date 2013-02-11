@@ -91,6 +91,6 @@ public class XtendClassDeclarationImpl extends XtendTypeDeclarationImpl<XtendCla
           return _xtendMemberDeclaration;
         }
       };
-    return ListExtensions.<XtendMember, MemberDeclaration>map(_members, _function);
+    return ListExtensions.<XtendMember, XtendMemberDeclarationImpl>map(_members, _function);
   }
 }

@@ -8141,7 +8141,7 @@ public class XtendCompilerTest extends AbstractXtendTestCase {
       _builder.newLine();
       _builder.append("}");
       _builder.newLine();
-      final CharSequence input = _builder;
+      final String input = _builder.toString();
       StringConcatenation _builder_1 = new StringConcatenation();
       _builder_1.append("/**");
       _builder_1.newLine();
@@ -8175,7 +8175,7 @@ public class XtendCompilerTest extends AbstractXtendTestCase {
       _builder_1.newLine();
       _builder_1.append("}");
       _builder_1.newLine();
-      final CharSequence expectedBarClass = _builder_1;
+      final String expectedBarClass = _builder_1.toString();
       StringConcatenation _builder_2 = new StringConcatenation();
       _builder_2.append("/**");
       _builder_2.newLine();
@@ -8209,7 +8209,7 @@ public class XtendCompilerTest extends AbstractXtendTestCase {
       _builder_2.newLine();
       _builder_2.append("}");
       _builder_2.newLine();
-      final CharSequence expectedBazClass = _builder_2;
+      final String expectedBazClass = _builder_2.toString();
       String _string = input.toString();
       final XtendFile file = this.file(_string, true);
       Resource _eResource = file.eResource();

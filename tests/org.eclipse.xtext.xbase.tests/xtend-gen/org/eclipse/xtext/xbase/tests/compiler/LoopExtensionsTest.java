@@ -258,7 +258,7 @@ public class LoopExtensionsTest extends AbstractXbaseTestCase {
     final Procedure1<String> _function_1 = new Procedure1<String>() {
         public void apply(final String it) {
           Boolean _apply = append.apply(it);
-          boolean _not = (!_apply);
+          boolean _not = (!(_apply).booleanValue());
           if (_not) {
             app.append(it);
           }

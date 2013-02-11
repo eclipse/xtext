@@ -1003,7 +1003,7 @@ public class XtendFormatter extends XbaseFormatter2 {
           XtendFormatter.this.format(obj, doc);
         }
       };
-    final Procedure2<EObject,FormattableDocument> callback = _function;
+    final Procedure2<? super EObject,? super FormattableDocument> callback = _function;
     this.richStringFormatter.format(callback, format, rs);
   }
   

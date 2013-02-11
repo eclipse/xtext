@@ -58,7 +58,7 @@ public class OldAPIAllSuperTypeTest extends AllSuperTypesTest {
       String _key = type.getKey();
       _builder.append(_key, "");
       _builder.append(" type) {}");
-      final CharSequence signature = _builder;
+      final String signature = _builder.toString();
       String _string = signature.toString();
       final XtendFunction function = this.function(_string);
       final JvmOperation operation = this._iXtendJvmAssociations.getDirectlyInferredOperation(function);
@@ -66,7 +66,7 @@ public class OldAPIAllSuperTypeTest extends AllSuperTypesTest {
       JvmFormalParameter _head = IterableExtensions.<JvmFormalParameter>head(_parameters);
       final JvmTypeReference subtype = _head.getParameterType();
       final Set<JvmTypeReference> computedSuperTypes = this.superTypeCollector.collectSuperTypes(subtype);
-      final Set<String> expectedSupertypesAsSet = IterableExtensions.<String>toSet(((Iterable<? extends String>)Conversions.doWrapArray(superTypes)));
+      final Set<String> expectedSupertypesAsSet = IterableExtensions.<String>toSet(((Iterable<String>)Conversions.doWrapArray(superTypes)));
       final Function1<JvmTypeReference,String> _function = new Function1<JvmTypeReference,String>() {
           public String apply(final JvmTypeReference it) {
             String _simpleName = it.getSimpleName();

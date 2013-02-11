@@ -10,7 +10,6 @@ import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
-import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xbase.resource.XbaseResourceDescriptionStrategy;
 import org.eclipse.xtext.xbase.tests.AbstractXbaseTestCase;
 import org.junit.Assert;
@@ -28,16 +27,12 @@ public class XbaseResourceDescriptionStrategyTest extends AbstractXbaseTestCase 
     interfaceType.setPackageName("foo");
     interfaceType.setSimpleName("MyType");
     final ArrayList<IEObjectDescription> list = CollectionLiterals.<IEObjectDescription>newArrayList();
-    final Procedure1<IEObjectDescription> _function = new Procedure1<IEObjectDescription>() {
-        public void apply(final IEObjectDescription it) {
+    final IAcceptor<IEObjectDescription> _function = new IAcceptor<IEObjectDescription>() {
+        public void accept(final IEObjectDescription it) {
           list.add(it);
         }
       };
-    this.descriptionStrategy.createEObjectDescriptions(interfaceType, new IAcceptor<IEObjectDescription>() {
-        public void accept(IEObjectDescription t) {
-          _function.apply(t);
-        }
-    });
+    this.descriptionStrategy.createEObjectDescriptions(interfaceType, _function);
     final Function1<IEObjectDescription,Boolean> _function_1 = new Function1<IEObjectDescription,Boolean>() {
         public Boolean apply(final IEObjectDescription it) {
           String _userData = it.getUserData(XbaseResourceDescriptionStrategy.IS_INTERFACE);
@@ -56,16 +51,12 @@ public class XbaseResourceDescriptionStrategyTest extends AbstractXbaseTestCase 
     interfaceType.setPackageName("foo");
     interfaceType.setSimpleName("MyType");
     final ArrayList<IEObjectDescription> list = CollectionLiterals.<IEObjectDescription>newArrayList();
-    final Procedure1<IEObjectDescription> _function = new Procedure1<IEObjectDescription>() {
-        public void apply(final IEObjectDescription it) {
+    final IAcceptor<IEObjectDescription> _function = new IAcceptor<IEObjectDescription>() {
+        public void accept(final IEObjectDescription it) {
           list.add(it);
         }
       };
-    this.descriptionStrategy.createEObjectDescriptions(interfaceType, new IAcceptor<IEObjectDescription>() {
-        public void accept(IEObjectDescription t) {
-          _function.apply(t);
-        }
-    });
+    this.descriptionStrategy.createEObjectDescriptions(interfaceType, _function);
     final Function1<IEObjectDescription,Boolean> _function_1 = new Function1<IEObjectDescription,Boolean>() {
         public Boolean apply(final IEObjectDescription it) {
           String _userData = it.getUserData(XbaseResourceDescriptionStrategy.IS_INTERFACE);

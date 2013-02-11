@@ -65,7 +65,7 @@ public class BoundTypeArgumentMergerTest extends AbstractTestingTypeReferenceOwn
       String _join = IterableExtensions.<Triple<String,VarianceInfo,VarianceInfo>>join(((Iterable<Triple<String,VarianceInfo,VarianceInfo>>)Conversions.doWrapArray(mergeUs)), null, " p, ", " p", _function);
       _builder.append(_join, "");
       _builder.append(") {}");
-      final CharSequence signature = _builder;
+      final String signature = _builder.toString();
       String _string = signature.toString();
       final XtendFunction function = this.function(_string);
       final JvmOperation operation = this._iXtendJvmAssociations.getDirectlyInferredOperation(function);

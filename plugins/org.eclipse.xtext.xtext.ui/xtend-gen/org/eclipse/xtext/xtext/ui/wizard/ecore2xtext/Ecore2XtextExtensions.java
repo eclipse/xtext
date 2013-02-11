@@ -806,20 +806,13 @@ public class Ecore2XtextExtensions {
       }
     }
     if (!_matched) {
-      if (eClassifier instanceof EClassifier) {
-        final EClassifier _eClassifier = (EClassifier)eClassifier;
-        _matched=true;
-        _switchResult = true;
-      }
-    }
-    if (!_matched) {
       _switchResult = true;
     }
     return _switchResult;
   }
   
   public static boolean needsDispatcherRule(final EClassifier eClassifier) {
-    Boolean _switchResult = null;
+    boolean _switchResult = false;
     boolean _matched = false;
     if (!_matched) {
       if (eClassifier instanceof EClass) {
@@ -839,13 +832,9 @@ public class Ecore2XtextExtensions {
       }
     }
     if (!_matched) {
-      if (eClassifier instanceof EClassifier) {
-        final EClassifier _eClassifier = (EClassifier)eClassifier;
-        _matched=true;
-        _switchResult = false;
-      }
+      _switchResult = false;
     }
-    return (_switchResult).booleanValue();
+    return _switchResult;
   }
   
   /**

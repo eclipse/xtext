@@ -73,8 +73,8 @@ public abstract class AbstractClosureTypeTest2 extends AbstractXbaseTestCase {
     final Procedure2<XClosure,Integer> _function = new Procedure2<XClosure,Integer>() {
         public void apply(final XClosure closure, final Integer index) {
           final LightweightTypeReference closureType = resolvedTypes.getActualType(closure);
-          final Function0<Object> _function = new Function0<Object>() {
-              public Object apply() {
+          final Callable<Object> _function = new Callable<Object>() {
+              public Object call() throws Exception {
                 StringConcatenation _builder = new StringConcatenation();
                 _builder.append("failed for closure at ");
                 _builder.append(index, "");
@@ -84,13 +84,9 @@ public abstract class AbstractClosureTypeTest2 extends AbstractXbaseTestCase {
                 return null;
               }
             };
-          AbstractClosureTypeTest2.this.collector.checkSucceeds(new Callable<Object>() {
-              public Object call() {
-                return _function.apply();
-              }
-          });
-          final Function0<Object> _function_1 = new Function0<Object>() {
-              public Object apply() {
+          AbstractClosureTypeTest2.this.collector.checkSucceeds(_function);
+          final Callable<Object> _function_1 = new Callable<Object>() {
+              public Object call() throws Exception {
                 StringConcatenation _builder = new StringConcatenation();
                 _builder.append("failed for closure at ");
                 _builder.append(index, "");
@@ -100,11 +96,7 @@ public abstract class AbstractClosureTypeTest2 extends AbstractXbaseTestCase {
                 return null;
               }
             };
-          AbstractClosureTypeTest2.this.collector.checkSucceeds(new Callable<Object>() {
-              public Object call() {
-                return _function_1.apply();
-              }
-          });
+          AbstractClosureTypeTest2.this.collector.checkSucceeds(_function_1);
           result.add(closureType);
         }
       };
@@ -115,30 +107,22 @@ public abstract class AbstractClosureTypeTest2 extends AbstractXbaseTestCase {
   public void withEquivalents(final List<Object> references, final String... types) {
     final Procedure2<Object,Integer> _function = new Procedure2<Object,Integer>() {
         public void apply(final Object reference, final Integer index) {
-          final Function0<Object> _function = new Function0<Object>() {
-              public Object apply() {
+          final Callable<Object> _function = new Callable<Object>() {
+              public Object call() throws Exception {
                 Assert.assertTrue((reference instanceof FunctionTypeReference));
                 return null;
               }
             };
-          AbstractClosureTypeTest2.this.collector.checkSucceeds(new Callable<Object>() {
-              public Object call() {
-                return _function.apply();
-              }
-          });
-          final Function0<Object> _function_1 = new Function0<Object>() {
-              public Object apply() {
+          AbstractClosureTypeTest2.this.collector.checkSucceeds(_function);
+          final Callable<Object> _function_1 = new Callable<Object>() {
+              public Object call() throws Exception {
                 String _get = ((List<String>)Conversions.doWrapArray(types)).get((index).intValue());
                 String _equivalent = AbstractClosureTypeTest2.this.getEquivalent(((FunctionTypeReference) reference));
                 Assert.assertEquals(_get, _equivalent);
                 return null;
               }
             };
-          AbstractClosureTypeTest2.this.collector.checkSucceeds(new Callable<Object>() {
-              public Object call() {
-                return _function_1.apply();
-              }
-          });
+          AbstractClosureTypeTest2.this.collector.checkSucceeds(_function_1);
         }
       };
     IterableExtensions.<Object>forEach(references, _function);

@@ -962,17 +962,17 @@ public class XtendFileGenerator {
   }
   
   public Map<String,? extends CharSequence> getDependencies() {
-    Pair<String,CharSequence> _amount = this.getAmount();
-    Pair<String,CharSequence> _circle = this.getCircle();
-    Pair<String,CharSequence> _netNode = this.getNetNode();
-    Pair<String,CharSequence> _person = this.getPerson();
-    Pair<String,CharSequence> _rectangle = this.getRectangle();
-    Pair<String,CharSequence> _shape = this.getShape();
-    HashMap<String,CharSequence> _newHashMap = CollectionLiterals.<String, CharSequence>newHashMap(_amount, _circle, _netNode, _person, _rectangle, _shape);
+    Pair<String,String> _amount = this.getAmount();
+    Pair<String,String> _circle = this.getCircle();
+    Pair<String,String> _netNode = this.getNetNode();
+    Pair<String,String> _person = this.getPerson();
+    Pair<String,String> _rectangle = this.getRectangle();
+    Pair<String,String> _shape = this.getShape();
+    HashMap<String,String> _newHashMap = CollectionLiterals.<String, String>newHashMap(_amount, _circle, _netNode, _person, _rectangle, _shape);
     return _newHashMap;
   }
   
-  public Pair<String,CharSequence> getAmount() {
+  public Pair<String,String> getAmount() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("package xtend.tutorial.util;");
     _builder.newLine();
@@ -1067,11 +1067,11 @@ public class XtendFileGenerator {
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
-    Pair<String,CharSequence> _mappedTo = Pair.<String, CharSequence>of("xtend/tutorial/util/Amount.xtend", _builder);
+    Pair<String,String> _mappedTo = Pair.<String, String>of("xtend/tutorial/util/Amount.xtend", _builder.toString());
     return _mappedTo;
   }
   
-  public Pair<String,CharSequence> getCircle() {
+  public Pair<String,String> getCircle() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("package xtend.tutorial.util;");
     _builder.newLine();
@@ -1098,11 +1098,11 @@ public class XtendFileGenerator {
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
-    Pair<String,CharSequence> _mappedTo = Pair.<String, CharSequence>of("xtend/tutorial/util/Circle.xtend", _builder);
+    Pair<String,String> _mappedTo = Pair.<String, String>of("xtend/tutorial/util/Circle.xtend", _builder.toString());
     return _mappedTo;
   }
   
-  public Pair<String,CharSequence> getNetNode() {
+  public Pair<String,String> getNetNode() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("package xtend.tutorial.util;");
     _builder.newLine();
@@ -1166,11 +1166,11 @@ public class XtendFileGenerator {
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
-    Pair<String,CharSequence> _mappedTo = Pair.<String, CharSequence>of("xtend/tutorial/util/NetNode.xtend", _builder);
+    Pair<String,String> _mappedTo = Pair.<String, String>of("xtend/tutorial/util/NetNode.xtend", _builder.toString());
     return _mappedTo;
   }
   
-  public Pair<String,CharSequence> getPerson() {
+  public Pair<String,String> getPerson() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("package xtend.tutorial.util;");
     _builder.newLine();
@@ -1285,11 +1285,11 @@ public class XtendFileGenerator {
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
-    Pair<String,CharSequence> _mappedTo = Pair.<String, CharSequence>of("xtend/tutorial/util/Person.xtend", _builder);
+    Pair<String,String> _mappedTo = Pair.<String, String>of("xtend/tutorial/util/Person.xtend", _builder.toString());
     return _mappedTo;
   }
   
-  public Pair<String,CharSequence> getRectangle() {
+  public Pair<String,String> getRectangle() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("package xtend.tutorial.util;");
     _builder.newLine();
@@ -1324,11 +1324,11 @@ public class XtendFileGenerator {
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
-    Pair<String,CharSequence> _mappedTo = Pair.<String, CharSequence>of("xtend/tutorial/util/Rectangle.xtend", _builder);
+    Pair<String,String> _mappedTo = Pair.<String, String>of("xtend/tutorial/util/Rectangle.xtend", _builder.toString());
     return _mappedTo;
   }
   
-  public Pair<String,CharSequence> getShape() {
+  public Pair<String,String> getShape() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("package xtend.tutorial.util;");
     _builder.newLine();
@@ -1337,7 +1337,7 @@ public class XtendFileGenerator {
     _builder.newLine();
     _builder.append("}");
     _builder.newLine();
-    Pair<String,CharSequence> _mappedTo = Pair.<String, CharSequence>of("xtend/tutorial/util/Shape.xtend", _builder);
+    Pair<String,String> _mappedTo = Pair.<String, String>of("xtend/tutorial/util/Shape.xtend", _builder.toString());
     return _mappedTo;
   }
 }

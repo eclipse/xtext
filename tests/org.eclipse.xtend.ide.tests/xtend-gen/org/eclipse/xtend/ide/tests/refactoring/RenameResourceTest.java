@@ -6,6 +6,7 @@ import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.IWorkspace;
 import org.eclipse.core.resources.IWorkspaceRunnable;
+import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.core.runtime.Path;
@@ -16,7 +17,6 @@ import org.eclipse.xtend.ide.tests.AbstractXtendUITestCase;
 import org.eclipse.xtend.ide.tests.WorkbenchTestHelper;
 import org.eclipse.xtend.ide.tests.refactoring.FileAsserts;
 import org.eclipse.xtext.xbase.lib.Exceptions;
-import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -92,21 +92,13 @@ public class RenameResourceTest extends AbstractXtendUITestCase {
         renameRefactoring.checkAllConditions(_nullProgressMonitor);
         NullProgressMonitor _nullProgressMonitor_1 = new NullProgressMonitor();
         final Change change = renameRefactoring.createChange(_nullProgressMonitor_1);
-        final Procedure1<IProgressMonitor> _function = new Procedure1<IProgressMonitor>() {
-            public void apply(final IProgressMonitor it) {
-              try {
-                change.perform(it);
-              } catch (Throwable _e) {
-                throw Exceptions.sneakyThrow(_e);
-              }
+        final IWorkspaceRunnable _function = new IWorkspaceRunnable() {
+            public void run(final IProgressMonitor it) throws CoreException {
+              change.perform(it);
             }
           };
         NullProgressMonitor _nullProgressMonitor_2 = new NullProgressMonitor();
-        this.workspace.run(new IWorkspaceRunnable() {
-            public void run(IProgressMonitor monitor) {
-              _function.apply(monitor);
-            }
-        }, _nullProgressMonitor_2);
+        this.workspace.run(_function, _nullProgressMonitor_2);
         IProject _project = this._workbenchTestHelper.getProject();
         String _plus = ("src/" + newFileName);
         Path _path = new Path(_plus);

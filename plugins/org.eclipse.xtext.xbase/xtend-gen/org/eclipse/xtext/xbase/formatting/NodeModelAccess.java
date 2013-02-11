@@ -150,6 +150,7 @@ public class NodeModelAccess {
   }
   
   public ILeafNode findNextLeaf(final INode node, final Function1<? super ILeafNode,? extends Boolean> matches) {
+    ILeafNode _xifexpression = null;
     boolean _notEquals = ObjectExtensions.operator_notEquals(node, null);
     if (_notEquals) {
       boolean _and = false;
@@ -184,6 +185,6 @@ public class NodeModelAccess {
         _while = _hasNext_1;
       }
     }
-    return null;
+    return _xifexpression;
   }
 }

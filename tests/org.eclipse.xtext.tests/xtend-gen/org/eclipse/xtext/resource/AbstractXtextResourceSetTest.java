@@ -51,7 +51,7 @@ public abstract class AbstractXtextResourceSetTest extends AbstractResourceSetTe
     URI _createURI = URI.createURI("foo");
     resource.setURI(_createURI);
     EList<Resource> _resources = rs.getResources();
-    ArrayList<XtextResource> _newArrayList = CollectionLiterals.<XtextResource>newArrayList(resource);
+    ArrayList<Resource> _newArrayList = CollectionLiterals.<Resource>newArrayList(resource);
     Iterables.<Resource>addAll(_resources, _newArrayList);
     Map<URI,Resource> _uRIResourceMap_1 = rs.getURIResourceMap();
     int _size_1 = _uRIResourceMap_1.size();

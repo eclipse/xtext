@@ -25,7 +25,6 @@ import org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil;
 import org.eclipse.xtext.ui.refactoring.IDependentElementsCalculator;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Exceptions;
-import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.junit.Assert;
@@ -123,17 +122,13 @@ public class DependentElementsCalculatorTests extends AbstractXtendUITestCase {
       JvmGenericType _inferredType = this.associations.getInferredType(fooClass);
       EList<JvmMember> _members_2 = _inferredType.getMembers();
       Iterable<EObject> _plus = Iterables.<EObject>concat(_members_1, _members_2);
-      final Function1<EObject,Boolean> _function = new Function1<EObject,Boolean>() {
-          public Boolean apply(final EObject it) {
+      final Predicate<EObject> _function = new Predicate<EObject>() {
+          public boolean apply(final EObject it) {
             boolean _not = (!(it instanceof JvmConstructor));
             return _not;
           }
         };
-      Iterable<EObject> _filter = Iterables.<EObject>filter(_plus, new Predicate<EObject>() {
-          public boolean apply(EObject input) {
-            return _function.apply(input);
-          }
-      });
+      Iterable<EObject> _filter = Iterables.<EObject>filter(_plus, _function);
       List<EObject> _list = IterableExtensions.<EObject>toList(_filter);
       final Procedure1<EObject> _function_1 = new Procedure1<EObject>() {
           public void apply(final EObject it) {

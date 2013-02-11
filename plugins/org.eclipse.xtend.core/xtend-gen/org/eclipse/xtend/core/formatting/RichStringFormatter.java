@@ -432,25 +432,32 @@ public class RichStringFormatter {
   }
   
   protected void fmt(final Procedure2<? super EObject,? super FormattableDocument> formatter, final FormattableDocument doc, final EObject expr) {
-    if (expr instanceof RichString) {
+    if (formatter != null
+         && expr instanceof RichString) {
       _fmt(formatter, doc, (RichString)expr);
       return;
-    } else if (expr instanceof RichStringForLoop) {
+    } else if (formatter != null
+         && expr instanceof RichStringForLoop) {
       _fmt(formatter, doc, (RichStringForLoop)expr);
       return;
-    } else if (expr instanceof RichStringLiteral) {
+    } else if (formatter != null
+         && expr instanceof RichStringLiteral) {
       _fmt(formatter, doc, (RichStringLiteral)expr);
       return;
-    } else if (expr instanceof RichStringIf) {
+    } else if (formatter != null
+         && expr instanceof RichStringIf) {
       _fmt(formatter, doc, (RichStringIf)expr);
       return;
-    } else if (expr instanceof RichStringElseIf) {
+    } else if (formatter != null
+         && expr instanceof RichStringElseIf) {
       _fmt(formatter, doc, (RichStringElseIf)expr);
       return;
-    } else if (expr instanceof XExpression) {
+    } else if (formatter != null
+         && expr instanceof XExpression) {
       _fmt(formatter, doc, (XExpression)expr);
       return;
-    } else if (expr == null) {
+    } else if (formatter != null
+         && expr == null) {
       _fmt(formatter, doc, (Void)null);
       return;
     } else {

@@ -20,14 +20,14 @@ public class Case_0 {
   public String foo(final String a, final String b) {
     String _xblockexpression = null;
     {
-      ArrayList<Object> list = CollectionLiterals.<Object>newArrayList();
+      ArrayList<String> list = CollectionLiterals.<String>newArrayList();
       int _size = list.size();
       int _minus = (_size - 1);
       IntegerRange _upTo = new IntegerRange(0, _minus);
       for (final Integer i : _upTo) {
         String _string = i.toString();
         String _plus = (_string + " ");
-        Object _get = list.get((i).intValue());
+        String _get = list.get((i).intValue());
         String _plus_1 = (_plus + _get);
         InputOutput.<String>println(_plus_1);
       }

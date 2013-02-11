@@ -38,7 +38,6 @@ import org.eclipse.xtext.util.internal.Stopwatches.StoppedTask;
 import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotation;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Exceptions;
-import org.eclipse.xtext.xbase.lib.Functions.Function0;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
@@ -71,13 +70,13 @@ public class ActiveAnnotationContextProvider {
         List<ActiveAnnotationContext> _xtrycatchfinallyexpression = null;
         try {
           Resource _eResource = file.eResource();
-          final Function0<List<ActiveAnnotationContext>> _function = new Function0<List<ActiveAnnotationContext>>() {
-              public List<ActiveAnnotationContext> apply() {
+          final Provider<List<ActiveAnnotationContext>> _function = new Provider<List<ActiveAnnotationContext>>() {
+              public List<ActiveAnnotationContext> get() {
                 final Map<JvmAnnotationType,ActiveAnnotationContext> annotatedElements = CollectionLiterals.<JvmAnnotationType, ActiveAnnotationContext>newHashMap();
                 final CompilationUnitImpl compilationUnit = ActiveAnnotationContextProvider.this.compilationUnitProvider.get();
                 compilationUnit.setXtendFile(file);
-                final Procedure1<Pair<JvmAnnotationType,XAnnotation>> _function = new Procedure1<Pair<JvmAnnotationType,XAnnotation>>() {
-                    public void apply(final Pair<JvmAnnotationType,XAnnotation> it) {
+                final IAcceptor<Pair<JvmAnnotationType,XAnnotation>> _function = new IAcceptor<Pair<JvmAnnotationType,XAnnotation>>() {
+                    public void accept(final Pair<JvmAnnotationType,XAnnotation> it) {
                       JvmAnnotationType _key = it.getKey();
                       boolean _containsKey = annotatedElements.containsKey(_key);
                       boolean _not = (!_containsKey);
@@ -100,20 +99,12 @@ public class ActiveAnnotationContextProvider {
                       _annotatedSourceElements.add(_annotatedTarget);
                     }
                   };
-                ActiveAnnotationContextProvider.this.searchAnnotatedElements(file, new IAcceptor<Pair<JvmAnnotationType,XAnnotation>>() {
-                    public void accept(Pair<JvmAnnotationType,XAnnotation> t) {
-                      _function.apply(t);
-                    }
-                });
+                ActiveAnnotationContextProvider.this.searchAnnotatedElements(file, _function);
                 Collection<ActiveAnnotationContext> _values = annotatedElements.values();
                 return IterableExtensions.<ActiveAnnotationContext>toList(_values);
               }
             };
-          List<ActiveAnnotationContext> _get = this.cache.<List<ActiveAnnotationContext>>get("annotation context", _eResource, new Provider<List<ActiveAnnotationContext>>() {
-              public List<ActiveAnnotationContext> get() {
-                return _function.apply();
-              }
-          });
+          List<ActiveAnnotationContext> _get = this.cache.<List<ActiveAnnotationContext>>get("annotation context", _eResource, _function);
           _xtrycatchfinallyexpression = _get;
         } catch (final Throwable _t) {
           if (_t instanceof Throwable) {

@@ -261,7 +261,7 @@ public class Ecore2XtextGrammarCreator {
         final EReference _eReference = (EReference)it;
         _matched=true;
         CharSequence _xifexpression = null;
-        boolean _isContainment = Ecore2XtextExtensions.isContainment(_eReference);
+        boolean _isContainment = _eReference.isContainment();
         if (_isContainment) {
           EClass _eReferenceType = _eReference.getEReferenceType();
           String _uniqueName = UniqueNameUtil.uniqueName(_eReferenceType);

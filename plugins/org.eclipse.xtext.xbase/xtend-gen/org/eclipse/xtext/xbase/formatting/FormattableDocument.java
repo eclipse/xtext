@@ -666,7 +666,7 @@ public class FormattableDocument {
           String _text = edit.getText();
           _builder.append(_text, "");
           _builder.append("]");
-          debugTrace.append(_builder.toString());
+          debugTrace.append(_builder);
           int _offset_3 = edit.getOffset();
           int _length_1 = edit.getLength();
           int _plus_1 = (_offset_3 + _length_1);

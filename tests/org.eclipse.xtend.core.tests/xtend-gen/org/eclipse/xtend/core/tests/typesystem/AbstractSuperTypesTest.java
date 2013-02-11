@@ -67,7 +67,7 @@ public abstract class AbstractSuperTypesTest extends AbstractTestingTypeReferenc
       String _key = type.getKey();
       _builder.append(_key, "");
       _builder.append(" type) {}");
-      final CharSequence signature = _builder;
+      final String signature = _builder.toString();
       String _string = signature.toString();
       final XtendFunction function = this.function(_string);
       final JvmOperation operation = this._iXtendJvmAssociations.getDirectlyInferredOperation(function);
@@ -75,7 +75,7 @@ public abstract class AbstractSuperTypesTest extends AbstractTestingTypeReferenc
       JvmFormalParameter _head = IterableExtensions.<JvmFormalParameter>head(_parameters);
       JvmTypeReference _parameterType = _head.getParameterType();
       final LightweightTypeReference subtype = this.toLightweightReference(_parameterType);
-      List<String> _list = IterableExtensions.<String>toList(((Iterable<? extends String>)Conversions.doWrapArray(superTypes)));
+      List<String> _list = IterableExtensions.<String>toList(((Iterable<String>)Conversions.doWrapArray(superTypes)));
       Iterable<LightweightTypeReference> _collectSuperTypes = this.collectSuperTypes(subtype);
       final Function1<LightweightTypeReference,String> _function = new Function1<LightweightTypeReference,String>() {
           public String apply(final LightweightTypeReference it) {
@@ -85,7 +85,7 @@ public abstract class AbstractSuperTypesTest extends AbstractTestingTypeReferenc
         };
       Iterable<String> _map = IterableExtensions.<LightweightTypeReference, String>map(_collectSuperTypes, _function);
       List<String> _list_1 = IterableExtensions.<String>toList(_map);
-      Assert.assertEquals(_list, ((Object) _list_1));
+      Assert.assertEquals(_list, _list_1);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }

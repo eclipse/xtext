@@ -234,7 +234,7 @@ public class JvmClassDeclarationImpl extends JvmTypeDeclarationImpl<JvmGenericTy
               };
             List<TypeReference> _map = ListExtensions.<MutableParameterDeclaration, TypeReference>map(_parameters, _function);
             List<TypeReference> _list = IterableExtensions.<TypeReference>toList(_map);
-            List<TypeReference> _list_1 = IterableExtensions.<TypeReference>toList(((Iterable<? extends TypeReference>)Conversions.doWrapArray(parameterTypes)));
+            List<TypeReference> _list_1 = IterableExtensions.<TypeReference>toList(((Iterable<TypeReference>)Conversions.doWrapArray(parameterTypes)));
             boolean _equals_1 = ObjectExtensions.operator_equals(_list, _list_1);
             _and = (_equals && _equals_1);
           }

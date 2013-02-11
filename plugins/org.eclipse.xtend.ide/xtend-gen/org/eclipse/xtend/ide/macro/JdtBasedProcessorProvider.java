@@ -124,7 +124,7 @@ public class JdtBasedProcessorProvider extends ProcessorInstanceForJvmTypeProvid
           }
         }
       }
-      Class<? extends Object> _class = this.getClass();
+      Class<? extends JdtBasedProcessorProvider> _class = this.getClass();
       ClassLoader _classLoader = _class.getClassLoader();
       URLClassLoader _uRLClassLoader = new URLClassLoader(((URL[])Conversions.unwrapArray(urls, URL.class)), _classLoader);
       return _uRLClassLoader;

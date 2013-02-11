@@ -23,7 +23,6 @@ import org.eclipse.xtext.xbase.jvmmodel.JvmModelAssociator;
 import org.eclipse.xtext.xbase.jvmmodel.JvmTypesBuilder;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
-import org.eclipse.xtext.xbase.lib.Procedures.Procedure3;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -43,8 +42,8 @@ public class Case_14 extends AbstractXtendTestCase {
   
   @Test
   public void testInference() {
-    final Procedure3<EObject,IJvmDeclaredTypeAcceptor,Boolean> _function = new Procedure3<EObject,IJvmDeclaredTypeAcceptor,Boolean>() {
-        public void apply(final EObject obj, final IJvmDeclaredTypeAcceptor acceptor, final Boolean preIndexing) {
+    final IJvmModelInferrer _function = new IJvmModelInferrer() {
+        public void infer(final EObject obj, final IJvmDeclaredTypeAcceptor acceptor, final boolean preIndexing) {
           final JvmGenericType firstType = Case_14.this._jvmTypesBuilder.toClass(obj, "foo.Bar");
           final JvmGenericType secondType = Case_14.this._jvmTypesBuilder.toClass(obj, "foo.Baz");
           Resource _eResource = secondType.eResource();
@@ -71,21 +70,17 @@ public class Case_14 extends AbstractXtendTestCase {
           _accept_1.initializeLater(_function_1);
         }
       };
-    this.assoc.setInferrer(new IJvmModelInferrer() {
-        public void infer(EObject e,IJvmDeclaredTypeAcceptor acceptor,boolean preIndexingPhase) {
-          _function.apply(e,acceptor,preIndexingPhase);
-        }
-    });
+    this.assoc.setInferrer(_function);
     this.resource.setDerivedStateComputer(null);
     URI _createURI = URI.createURI("foo.txt");
     this.resource.setURI(_createURI);
-    Class<? extends Object> _class = this.getClass();
+    Class<? extends Case_14> _class = this.getClass();
     this.resourceSet.setClasspathURIContext(_class);
     EList<Resource> _resources = this.resourceSet.getResources();
-    this._jvmTypesBuilder.<DerivedStateAwareResource>operator_add(_resources, this.resource);
+    this._jvmTypesBuilder.<Resource>operator_add(_resources, this.resource);
     EList<EObject> _contents = this.resource.getContents();
     EClass _createEClass = EcoreFactory.eINSTANCE.createEClass();
-    this._jvmTypesBuilder.<EClass>operator_add(_contents, _createEClass);
+    this._jvmTypesBuilder.<EObject>operator_add(_contents, _createEClass);
     this.assoc.installDerivedState(this.resource, true);
     EList<EObject> _contents_1 = this.resource.getContents();
     EObject _get = _contents_1.get(1);
@@ -95,7 +90,7 @@ public class Case_14 extends AbstractXtendTestCase {
     _contents_2.clear();
     EList<EObject> _contents_3 = this.resource.getContents();
     EClass _createEClass_1 = EcoreFactory.eINSTANCE.createEClass();
-    this._jvmTypesBuilder.<EClass>operator_add(_contents_3, _createEClass_1);
+    this._jvmTypesBuilder.<EObject>operator_add(_contents_3, _createEClass_1);
     this.assoc.installDerivedState(this.resource, false);
     EList<EObject> _contents_4 = this.resource.getContents();
     EObject _get_1 = _contents_4.get(1);

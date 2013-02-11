@@ -70,7 +70,7 @@ public class ArithmeticExtensionGenerator {
           CharSequence _xifexpression = null;
           boolean _exists = file.exists();
           if (_exists) {
-            CharSequence _xblockexpression = null;
+            String _xblockexpression = null;
             {
               String _absolutePath = file.getAbsolutePath();
               final String content = Files.readFileIntoString(_absolutePath);
@@ -92,7 +92,7 @@ public class ArithmeticExtensionGenerator {
               String _substring_1 = content.substring(_plus_2);
               _builder.append(_substring_1, "");
               _builder.newLineIfNotEmpty();
-              _xblockexpression = (_builder);
+              _xblockexpression = (_builder.toString());
             }
             _xifexpression = _xblockexpression;
           } else {

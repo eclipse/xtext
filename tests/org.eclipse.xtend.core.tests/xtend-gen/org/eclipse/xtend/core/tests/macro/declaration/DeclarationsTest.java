@@ -309,12 +309,12 @@ public class DeclarationsTest extends AbstractXtendTestCase {
                 TypeReference _string = ((CompilationUnitImpl) _compilationUnit).getString();
                 it.setReturnType(_string);
                 it.setVisibility(Visibility.PRIVATE);
-                final Function1<CompilationContext,CharSequence> _function = new Function1<CompilationContext,CharSequence>() {
-                    public CharSequence apply(final CompilationContext it) {
+                final Function1<CompilationContext,String> _function = new Function1<CompilationContext,String>() {
+                    public String apply(final CompilationContext it) {
                       StringConcatenation _builder = new StringConcatenation();
                       _builder.append("return \"foo\";");
                       _builder.newLine();
-                      return _builder;
+                      return _builder.toString();
                     }
                   };
                 it.setBody(_function);

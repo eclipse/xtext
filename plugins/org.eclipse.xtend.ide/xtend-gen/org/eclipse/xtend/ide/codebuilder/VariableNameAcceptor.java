@@ -18,7 +18,6 @@ import org.eclipse.swt.graphics.Image;
 import org.eclipse.xtext.common.types.xtext.ui.JdtVariableCompletions.CompletionDataAcceptor;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Functions.Function0;
-import org.eclipse.xtext.xbase.lib.Functions.Function2;
 
 @SuppressWarnings("all")
 public class VariableNameAcceptor implements CompletionDataAcceptor {
@@ -42,19 +41,15 @@ public class VariableNameAcceptor implements CompletionDataAcceptor {
   
   public String getVariableName() {
     final ArrayList<String> candidates = Lists.<String>newArrayList(this.variableNames);
-    final Function2<String,String,Integer> _function = new Function2<String,String,Integer>() {
-        public Integer apply(final String left, final String right) {
+    final Comparator<String> _function = new Comparator<String>() {
+        public int compare(final String left, final String right) {
           int _length = left.length();
           int _length_1 = right.length();
           int _minus = (_length - _length_1);
           return _minus;
         }
       };
-    Collections.<String>sort(candidates, new Comparator<String>() {
-        public int compare(String o1,String o2) {
-          return _function.apply(o1,o2);
-        }
-    });
+    Collections.<String>sort(candidates, _function);
     int _size = candidates.size();
     boolean _greaterThan = (_size > 0);
     if (_greaterThan) {

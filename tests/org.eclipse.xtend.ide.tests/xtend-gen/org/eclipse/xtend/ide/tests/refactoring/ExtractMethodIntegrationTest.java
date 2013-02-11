@@ -19,7 +19,6 @@ import org.eclipse.xtext.ui.editor.model.IXtextDocument;
 import org.eclipse.xtext.util.concurrent.IUnitOfWork;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.lib.Exceptions;
-import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xbase.ui.refactoring.ExpressionUtil;
 import org.junit.After;
@@ -1077,51 +1076,43 @@ public class ExtractMethodIntegrationTest extends AbstractXtendUITestCase {
       final XtextEditor editor = this.workbenchTestHelper.openEditor(file);
       try {
         IXtextDocument _document = editor.getDocument();
-        final Function1<XtextResource,Change> _function = new Function1<XtextResource,Change>() {
-            public Change apply(final XtextResource it) {
-              try {
-                Change _xblockexpression = null;
-                {
-                  int _indexOf = inputString.indexOf("$");
-                  int _lastIndexOf = inputString.lastIndexOf("$");
-                  int _indexOf_1 = inputString.indexOf("$");
-                  int _minus = (_lastIndexOf - _indexOf_1);
-                  int _minus_1 = (_minus - 1);
-                  TextSelection _textSelection = new TextSelection(_indexOf, _minus_1);
-                  final List<XExpression> selection = ExtractMethodIntegrationTest.this.util.findSelectedSiblingExpressions(it, _textSelection);
-                  final ExtractMethodRefactoring refactoring = ExtractMethodIntegrationTest.this.refactoringProvider.get();
-                  IXtextDocument _document = editor.getDocument();
-                  refactoring.initialize(_document, selection);
-                  refactoring.setMethodName("bar");
-                  NullProgressMonitor _nullProgressMonitor = new NullProgressMonitor();
-                  RefactoringStatus status = refactoring.checkInitialConditions(_nullProgressMonitor);
-                  String _string = status.toString();
-                  boolean _isOK = status.isOK();
-                  Assert.assertTrue(_string, _isOK);
-                  initializer.apply(refactoring);
-                  NullProgressMonitor _nullProgressMonitor_1 = new NullProgressMonitor();
-                  RefactoringStatus _checkFinalConditions = refactoring.checkFinalConditions(_nullProgressMonitor_1);
-                  status = _checkFinalConditions;
-                  String _string_1 = status.toString();
-                  boolean _isOK_1 = status.isOK();
-                  Assert.assertTrue(_string_1, _isOK_1);
-                  NullProgressMonitor _nullProgressMonitor_2 = new NullProgressMonitor();
-                  Change _createChange = refactoring.createChange(_nullProgressMonitor_2);
-                  NullProgressMonitor _nullProgressMonitor_3 = new NullProgressMonitor();
-                  Change _perform = _createChange.perform(_nullProgressMonitor_3);
-                  _xblockexpression = (_perform);
-                }
-                return _xblockexpression;
-              } catch (Throwable _e) {
-                throw Exceptions.sneakyThrow(_e);
+        final IUnitOfWork<Change,XtextResource> _function = new IUnitOfWork<Change,XtextResource>() {
+            public Change exec(final XtextResource it) throws Exception {
+              Change _xblockexpression = null;
+              {
+                int _indexOf = inputString.indexOf("$");
+                int _lastIndexOf = inputString.lastIndexOf("$");
+                int _indexOf_1 = inputString.indexOf("$");
+                int _minus = (_lastIndexOf - _indexOf_1);
+                int _minus_1 = (_minus - 1);
+                TextSelection _textSelection = new TextSelection(_indexOf, _minus_1);
+                final List<XExpression> selection = ExtractMethodIntegrationTest.this.util.findSelectedSiblingExpressions(it, _textSelection);
+                final ExtractMethodRefactoring refactoring = ExtractMethodIntegrationTest.this.refactoringProvider.get();
+                IXtextDocument _document = editor.getDocument();
+                refactoring.initialize(_document, selection);
+                refactoring.setMethodName("bar");
+                NullProgressMonitor _nullProgressMonitor = new NullProgressMonitor();
+                RefactoringStatus status = refactoring.checkInitialConditions(_nullProgressMonitor);
+                String _string = status.toString();
+                boolean _isOK = status.isOK();
+                Assert.assertTrue(_string, _isOK);
+                initializer.apply(refactoring);
+                NullProgressMonitor _nullProgressMonitor_1 = new NullProgressMonitor();
+                RefactoringStatus _checkFinalConditions = refactoring.checkFinalConditions(_nullProgressMonitor_1);
+                status = _checkFinalConditions;
+                String _string_1 = status.toString();
+                boolean _isOK_1 = status.isOK();
+                Assert.assertTrue(_string_1, _isOK_1);
+                NullProgressMonitor _nullProgressMonitor_2 = new NullProgressMonitor();
+                Change _createChange = refactoring.createChange(_nullProgressMonitor_2);
+                NullProgressMonitor _nullProgressMonitor_3 = new NullProgressMonitor();
+                Change _perform = _createChange.perform(_nullProgressMonitor_3);
+                _xblockexpression = (_perform);
               }
+              return _xblockexpression;
             }
           };
-        _document.<Change>readOnly(new IUnitOfWork<Change,XtextResource>() {
-            public Change exec(XtextResource state) {
-              return _function.apply(state);
-            }
-        });
+        _document.<Change>readOnly(_function);
         String _string = expected.toString();
         IXtextDocument _document_1 = editor.getDocument();
         String _get = _document_1.get();
@@ -1142,49 +1133,41 @@ public class ExtractMethodIntegrationTest extends AbstractXtendUITestCase {
       final XtextEditor editor = this.workbenchTestHelper.openEditor(file);
       try {
         IXtextDocument _document = editor.getDocument();
-        final Function1<XtextResource,String> _function = new Function1<XtextResource,String>() {
-            public String apply(final XtextResource it) {
-              try {
-                String _xblockexpression = null;
-                {
-                  int _indexOf = inputString.indexOf("$");
-                  int _lastIndexOf = inputString.lastIndexOf("$");
-                  int _indexOf_1 = inputString.indexOf("$");
-                  int _minus = (_lastIndexOf - _indexOf_1);
-                  int _minus_1 = (_minus - 1);
-                  TextSelection _textSelection = new TextSelection(_indexOf, _minus_1);
-                  final List<XExpression> selection = ExtractMethodIntegrationTest.this.util.findSelectedSiblingExpressions(it, _textSelection);
-                  final ExtractMethodRefactoring refactoring = ExtractMethodIntegrationTest.this.refactoringProvider.get();
-                  IXtextDocument _document = editor.getDocument();
-                  refactoring.initialize(_document, selection);
-                  refactoring.setMethodName("bar");
-                  NullProgressMonitor _nullProgressMonitor = new NullProgressMonitor();
-                  final RefactoringStatus status = refactoring.checkInitialConditions(_nullProgressMonitor);
-                  initializer.apply(refactoring);
-                  NullProgressMonitor _nullProgressMonitor_1 = new NullProgressMonitor();
-                  RefactoringStatus _checkFinalConditions = refactoring.checkFinalConditions(_nullProgressMonitor_1);
-                  status.merge(_checkFinalConditions);
-                  String _string = status.toString();
-                  boolean _hasError = status.hasError();
-                  Assert.assertTrue(_string, _hasError);
-                  final String message = status.getMessageMatchingSeverity(RefactoringStatus.ERROR);
-                  String _lowerCase = message.toLowerCase();
-                  String _lowerCase_1 = messageFragment.toLowerCase();
-                  boolean _contains = _lowerCase.contains(_lowerCase_1);
-                  Assert.assertTrue(message, _contains);
-                  _xblockexpression = ("");
-                }
-                return _xblockexpression;
-              } catch (Throwable _e) {
-                throw Exceptions.sneakyThrow(_e);
+        final IUnitOfWork<String,XtextResource> _function = new IUnitOfWork<String,XtextResource>() {
+            public String exec(final XtextResource it) throws Exception {
+              String _xblockexpression = null;
+              {
+                int _indexOf = inputString.indexOf("$");
+                int _lastIndexOf = inputString.lastIndexOf("$");
+                int _indexOf_1 = inputString.indexOf("$");
+                int _minus = (_lastIndexOf - _indexOf_1);
+                int _minus_1 = (_minus - 1);
+                TextSelection _textSelection = new TextSelection(_indexOf, _minus_1);
+                final List<XExpression> selection = ExtractMethodIntegrationTest.this.util.findSelectedSiblingExpressions(it, _textSelection);
+                final ExtractMethodRefactoring refactoring = ExtractMethodIntegrationTest.this.refactoringProvider.get();
+                IXtextDocument _document = editor.getDocument();
+                refactoring.initialize(_document, selection);
+                refactoring.setMethodName("bar");
+                NullProgressMonitor _nullProgressMonitor = new NullProgressMonitor();
+                final RefactoringStatus status = refactoring.checkInitialConditions(_nullProgressMonitor);
+                initializer.apply(refactoring);
+                NullProgressMonitor _nullProgressMonitor_1 = new NullProgressMonitor();
+                RefactoringStatus _checkFinalConditions = refactoring.checkFinalConditions(_nullProgressMonitor_1);
+                status.merge(_checkFinalConditions);
+                String _string = status.toString();
+                boolean _hasError = status.hasError();
+                Assert.assertTrue(_string, _hasError);
+                final String message = status.getMessageMatchingSeverity(RefactoringStatus.ERROR);
+                String _lowerCase = message.toLowerCase();
+                String _lowerCase_1 = messageFragment.toLowerCase();
+                boolean _contains = _lowerCase.contains(_lowerCase_1);
+                Assert.assertTrue(message, _contains);
+                _xblockexpression = ("");
               }
+              return _xblockexpression;
             }
           };
-        _document.<String>readOnly(new IUnitOfWork<String,XtextResource>() {
-            public String exec(XtextResource state) {
-              return _function.apply(state);
-            }
-        });
+        _document.<String>readOnly(_function);
       } finally {
         editor.close(false);
       }

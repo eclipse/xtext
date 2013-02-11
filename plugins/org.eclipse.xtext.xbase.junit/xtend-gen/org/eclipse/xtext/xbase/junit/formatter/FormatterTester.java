@@ -238,7 +238,7 @@ public class FormatterTester {
           String _text = edit.getText();
           _builder.append(_text, "");
           _builder.append("]");
-          debugTrace.append(_builder.toString());
+          debugTrace.append(_builder);
           int _offset_3 = edit.getOffset();
           int _length_1 = edit.getLength();
           int _plus_1 = (_offset_3 + _length_1);
@@ -271,7 +271,7 @@ public class FormatterTester {
       ICompositeNode _rootNode = _parseResult==null?(ICompositeNode)null:_parseResult.getRootNode();
       Iterable<ILeafNode> _leafNodes = _rootNode==null?(Iterable<ILeafNode>)null:_rootNode.getLeafNodes();
       List<ILeafNode> _emptyList = CollectionLiterals.<ILeafNode>emptyList();
-      Iterable<ILeafNode> _elvis = ObjectExtensions.<Iterable<ILeafNode>>operator_elvis(_leafNodes, _emptyList);
+      Iterable<? extends ILeafNode> _elvis = ObjectExtensions.<Iterable<? extends ILeafNode>>operator_elvis(_leafNodes, _emptyList);
       for (final ILeafNode leaf : _elvis) {
         boolean _or = false;
         boolean _isHidden = leaf.isHidden();

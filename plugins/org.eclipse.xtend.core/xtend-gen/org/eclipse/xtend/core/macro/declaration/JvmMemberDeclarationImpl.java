@@ -32,7 +32,7 @@ public abstract class JvmMemberDeclarationImpl<T extends JvmMember> extends JvmN
   
   public Visibility getVisibility() {
     CompilationUnitImpl _compilationUnit = this.getCompilationUnit();
-    JvmMember _delegate = this.getDelegate();
+    T _delegate = this.getDelegate();
     JvmVisibility _visibility = _delegate.getVisibility();
     Visibility _visibility_1 = _compilationUnit.toVisibility(_visibility);
     return _visibility_1;
@@ -71,7 +71,7 @@ public abstract class JvmMemberDeclarationImpl<T extends JvmMember> extends JvmN
   
   public MutableTypeDeclaration getDeclaringType() {
     CompilationUnitImpl _compilationUnit = this.getCompilationUnit();
-    JvmMember _delegate = this.getDelegate();
+    T _delegate = this.getDelegate();
     JvmDeclaredType _declaringType = _delegate.getDeclaringType();
     TypeDeclaration _typeDeclaration = _compilationUnit.toTypeDeclaration(_declaringType);
     return ((MutableTypeDeclaration) _typeDeclaration);

@@ -269,6 +269,7 @@ public class XAnnotationExtensions {
               return ((JvmAnnotationType) _head);
             }
           }
+          return null;
         }
       }
     }

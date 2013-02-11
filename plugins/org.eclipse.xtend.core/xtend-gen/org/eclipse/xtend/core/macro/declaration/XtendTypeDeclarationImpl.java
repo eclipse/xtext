@@ -17,13 +17,13 @@ import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 @SuppressWarnings("all")
 public abstract class XtendTypeDeclarationImpl<T extends XtendTypeDeclaration> extends XtendMemberDeclarationImpl<T> implements TypeDeclaration {
   public String getPackageName() {
-    EObject _delegate = this.getDelegate();
+    T _delegate = this.getDelegate();
     EObject _eContainer = _delegate.eContainer();
     return ((XtendFile) _eContainer).getPackage();
   }
   
   public String getSimpleName() {
-    XtendTypeDeclaration _delegate = this.getDelegate();
+    T _delegate = this.getDelegate();
     String _name = _delegate.getName();
     return _name;
   }

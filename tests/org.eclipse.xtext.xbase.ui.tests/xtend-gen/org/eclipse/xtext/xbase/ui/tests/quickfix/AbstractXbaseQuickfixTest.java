@@ -84,7 +84,7 @@ public abstract class AbstractXbaseQuickfixTest extends AbstractXbaseUITestCase 
   }
   
   protected String getProjectName() {
-    Class<? extends Object> _class = this.getClass();
+    Class<? extends AbstractXbaseQuickfixTest> _class = this.getClass();
     String _simpleName = _class.getSimpleName();
     return (_simpleName + "Project");
   }

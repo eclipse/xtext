@@ -64,17 +64,17 @@ public class TutorialJvmModelInferrer extends AbstractModelInferrer {
           }
         };
       JvmField _field = this._jvmTypesBuilder.toField(property, _name, _type, _function);
-      this._jvmTypesBuilder.<JvmField>operator_add(_members, _field);
+      this._jvmTypesBuilder.<JvmMember>operator_add(_members, _field);
       EList<JvmMember> _members_1 = javaClass.getMembers();
       String _name_1 = property.getName();
       JvmTypeReference _type_1 = property.getType();
       JvmOperation _getter = this._jvmTypesBuilder.toGetter(property, _name_1, _type_1);
-      this._jvmTypesBuilder.<JvmOperation>operator_add(_members_1, _getter);
+      this._jvmTypesBuilder.<JvmMember>operator_add(_members_1, _getter);
       EList<JvmMember> _members_2 = javaClass.getMembers();
       String _name_2 = property.getName();
       JvmTypeReference _type_2 = property.getType();
       JvmOperation _setter = this._jvmTypesBuilder.toSetter(property, _name_2, _type_2);
-      boolean _add = this._jvmTypesBuilder.<JvmOperation>operator_add(_members_2, _setter);
+      boolean _add = this._jvmTypesBuilder.<JvmMember>operator_add(_members_2, _setter);
       _xblockexpression = (_add);
     }
     return _xblockexpression;

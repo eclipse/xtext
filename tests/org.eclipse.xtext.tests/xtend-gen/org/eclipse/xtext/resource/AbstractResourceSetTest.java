@@ -7,7 +7,6 @@ import org.eclipse.emf.ecore.resource.Resource.Factory;
 import org.eclipse.emf.ecore.resource.Resource.Factory.Registry;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.xtext.resource.NullResource;
-import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -18,8 +17,8 @@ public abstract class AbstractResourceSetTest {
   @Test
   public void testDemandLoadedResourcesAreInMap() {
     final ResourceSetImpl rs = this.createEmptyResourceSet();
-    final Function1<URI,NullResource> _function = new Function1<URI,NullResource>() {
-        public NullResource apply(final URI uri) {
+    final Factory _function = new Factory() {
+        public Resource createResource(final URI uri) {
           NullResource _xblockexpression = null;
           {
             NullResource _nullResource = new NullResource();
@@ -30,11 +29,7 @@ public abstract class AbstractResourceSetTest {
           return _xblockexpression;
         }
       };
-    final Factory nullFactory = new Factory() {
-        public Resource createResource(URI uri) {
-          return _function.apply(uri);
-        }
-    };
+    final Factory nullFactory = _function;
     Registry _resourceFactoryRegistry = rs.getResourceFactoryRegistry();
     Map<String,Object> _extensionToFactoryMap = _resourceFactoryRegistry.getExtensionToFactoryMap();
     _extensionToFactoryMap.put("xmi", nullFactory);

@@ -22,7 +22,7 @@ import org.eclipse.xtext.xbase.lib.ListExtensions;
 @SuppressWarnings("all")
 public abstract class JvmTypeDeclarationImpl<T extends JvmDeclaredType> extends JvmMemberDeclarationImpl<T> implements MutableTypeDeclaration {
   public List<? extends MutableMemberDeclaration> getMembers() {
-    JvmDeclaredType _delegate = this.getDelegate();
+    T _delegate = this.getDelegate();
     EList<JvmMember> _members = _delegate.getMembers();
     final Function1<JvmMember,MutableMemberDeclaration> _function = new Function1<JvmMember,MutableMemberDeclaration>() {
         public MutableMemberDeclaration apply(final JvmMember it) {
@@ -36,19 +36,19 @@ public abstract class JvmTypeDeclarationImpl<T extends JvmDeclaredType> extends 
   }
   
   public String getPackageName() {
-    JvmDeclaredType _delegate = this.getDelegate();
+    T _delegate = this.getDelegate();
     String _packageName = _delegate.getPackageName();
     return _packageName;
   }
   
   public String getSimpleName() {
-    JvmMember _delegate = this.getDelegate();
+    T _delegate = this.getDelegate();
     String _simpleName = _delegate.getSimpleName();
     return _simpleName;
   }
   
   public String getName() {
-    JvmMember _delegate = this.getDelegate();
+    T _delegate = this.getDelegate();
     String _identifier = _delegate.getIdentifier();
     return _identifier;
   }

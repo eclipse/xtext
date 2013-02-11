@@ -123,118 +123,102 @@ public class CodeBuilderQuickfix {
   }
   
   protected IModification getXtendModification(final Xtend builder) {
-    final Procedure1<IModificationContext> _function = new Procedure1<IModificationContext>() {
-        public void apply(final IModificationContext it) {
-          try {
-            final XtendTypeDeclaration xtendClass = builder.getXtendType();
-            URI _uRI = EcoreUtil.getURI(xtendClass);
-            final IEditorPart editor = CodeBuilderQuickfix.this.editorOpener.open(_uRI, false);
-            boolean _not = (!(editor instanceof XtextEditor));
-            if (_not) {
-              return;
-            }
-            final XtextEditor xtextEditor = ((XtextEditor) editor);
-            final IXtextDocument document = xtextEditor.getDocument();
-            int offset = builder.getInsertOffset();
-            int _indentationLevel = builder.getIndentationLevel();
-            final ReplacingAppendable appendable = CodeBuilderQuickfix.this.appendableFactory.get(document, xtendClass, offset, 0, _indentationLevel, true);
-            builder.build(appendable);
-            appendable.commitChanges();
-            int _plus = (offset + 1);
-            int _length = appendable.length();
-            xtextEditor.setHighlightRange(_plus, _length, true);
-          } catch (Throwable _e) {
-            throw Exceptions.sneakyThrow(_e);
+    final IModification _function = new IModification() {
+        public void apply(final IModificationContext it) throws Exception {
+          final XtendTypeDeclaration xtendClass = builder.getXtendType();
+          URI _uRI = EcoreUtil.getURI(xtendClass);
+          final IEditorPart editor = CodeBuilderQuickfix.this.editorOpener.open(_uRI, false);
+          boolean _not = (!(editor instanceof XtextEditor));
+          if (_not) {
+            return;
           }
+          final XtextEditor xtextEditor = ((XtextEditor) editor);
+          final IXtextDocument document = xtextEditor.getDocument();
+          int offset = builder.getInsertOffset();
+          int _indentationLevel = builder.getIndentationLevel();
+          final ReplacingAppendable appendable = CodeBuilderQuickfix.this.appendableFactory.get(document, xtendClass, offset, 0, _indentationLevel, true);
+          builder.build(appendable);
+          appendable.commitChanges();
+          int _plus = (offset + 1);
+          int _length = appendable.length();
+          xtextEditor.setHighlightRange(_plus, _length, true);
         }
       };
-    return new IModification() {
-        public void apply(IModificationContext context) {
-          _function.apply(context);
-        }
-    };
+    return _function;
   }
   
   protected IModification getJavaModification(final Java builder) {
-    final Procedure1<IModificationContext> _function = new Procedure1<IModificationContext>() {
-        public void apply(final IModificationContext it) {
-          try {
-            final IType type = builder.getIType();
-            char _charAt = ".".charAt(0);
-            ImportManager _importManager = new ImportManager(true, _charAt);
-            final ImportManager importManager = _importManager;
-            StringBuilderBasedAppendable _stringBuilderBasedAppendable = new StringBuilderBasedAppendable(importManager);
-            final StringBuilderBasedAppendable content = _stringBuilderBasedAppendable;
-            builder.build(content);
-            List<String> _imports = importManager.getImports();
-            final Procedure1<String> _function = new Procedure1<String>() {
-                public void apply(final String it) {
-                  try {
-                    ICompilationUnit _compilationUnit = type.getCompilationUnit();
-                    NullProgressMonitor _nullProgressMonitor = new NullProgressMonitor();
-                    _compilationUnit.createImport(it, null, _nullProgressMonitor);
-                  } catch (Throwable _e) {
-                    throw Exceptions.sneakyThrow(_e);
-                  }
+    final IModification _function = new IModification() {
+        public void apply(final IModificationContext it) throws Exception {
+          final IType type = builder.getIType();
+          char _charAt = ".".charAt(0);
+          ImportManager _importManager = new ImportManager(true, _charAt);
+          final ImportManager importManager = _importManager;
+          StringBuilderBasedAppendable _stringBuilderBasedAppendable = new StringBuilderBasedAppendable(importManager);
+          final StringBuilderBasedAppendable content = _stringBuilderBasedAppendable;
+          builder.build(content);
+          List<String> _imports = importManager.getImports();
+          final Procedure1<String> _function = new Procedure1<String>() {
+              public void apply(final String it) {
+                try {
+                  ICompilationUnit _compilationUnit = type.getCompilationUnit();
+                  NullProgressMonitor _nullProgressMonitor = new NullProgressMonitor();
+                  _compilationUnit.createImport(it, null, _nullProgressMonitor);
+                } catch (Throwable _e) {
+                  throw Exceptions.sneakyThrow(_e);
+                }
+              }
+            };
+          IterableExtensions.<String>forEach(_imports, _function);
+          Object _switchResult = null;
+          boolean _matched = false;
+          if (!_matched) {
+            if (builder instanceof JavaFieldBuilder) {
+              final JavaFieldBuilder _javaFieldBuilder = (JavaFieldBuilder)builder;
+              _matched=true;
+              String _string = content.toString();
+              NullProgressMonitor _nullProgressMonitor = new NullProgressMonitor();
+              IField _createField = type.createField(_string, null, true, _nullProgressMonitor);
+              _switchResult = _createField;
+            }
+          }
+          if (!_matched) {
+            if (builder instanceof JavaConstructorBuilder) {
+              final JavaConstructorBuilder _javaConstructorBuilder = (JavaConstructorBuilder)builder;
+              _matched=true;
+              String _string = content.toString();
+              NullProgressMonitor _nullProgressMonitor = new NullProgressMonitor();
+              IMethod _createMethod = type.createMethod(_string, null, true, _nullProgressMonitor);
+              _switchResult = _createMethod;
+            }
+          }
+          if (!_matched) {
+            if (builder instanceof JavaMethodBuilder) {
+              final JavaMethodBuilder _javaMethodBuilder = (JavaMethodBuilder)builder;
+              _matched=true;
+              String _string = content.toString();
+              NullProgressMonitor _nullProgressMonitor = new NullProgressMonitor();
+              IMethod _createMethod = type.createMethod(_string, null, true, _nullProgressMonitor);
+              _switchResult = _createMethod;
+            }
+          }
+          if (!_matched) {
+            _switchResult = null;
+          }
+          final Object element = _switchResult;
+          boolean _notEquals = ObjectExtensions.operator_notEquals(((IAnnotatable)element), null);
+          if (_notEquals) {
+            JdtHyperlink _jdtHyperlink = new JdtHyperlink();
+            final Procedure1<JdtHyperlink> _function_1 = new Procedure1<JdtHyperlink>() {
+                public void apply(final JdtHyperlink it) {
+                  it.setJavaElement(((IMember)element));
+                  it.open();
                 }
               };
-            IterableExtensions.<String>forEach(_imports, _function);
-            Object _switchResult = null;
-            boolean _matched = false;
-            if (!_matched) {
-              if (builder instanceof JavaFieldBuilder) {
-                final JavaFieldBuilder _javaFieldBuilder = (JavaFieldBuilder)builder;
-                _matched=true;
-                String _string = content.toString();
-                NullProgressMonitor _nullProgressMonitor = new NullProgressMonitor();
-                IField _createField = type.createField(_string, null, true, _nullProgressMonitor);
-                _switchResult = _createField;
-              }
-            }
-            if (!_matched) {
-              if (builder instanceof JavaConstructorBuilder) {
-                final JavaConstructorBuilder _javaConstructorBuilder = (JavaConstructorBuilder)builder;
-                _matched=true;
-                String _string = content.toString();
-                NullProgressMonitor _nullProgressMonitor = new NullProgressMonitor();
-                IMethod _createMethod = type.createMethod(_string, null, true, _nullProgressMonitor);
-                _switchResult = _createMethod;
-              }
-            }
-            if (!_matched) {
-              if (builder instanceof JavaMethodBuilder) {
-                final JavaMethodBuilder _javaMethodBuilder = (JavaMethodBuilder)builder;
-                _matched=true;
-                String _string = content.toString();
-                NullProgressMonitor _nullProgressMonitor = new NullProgressMonitor();
-                IMethod _createMethod = type.createMethod(_string, null, true, _nullProgressMonitor);
-                _switchResult = _createMethod;
-              }
-            }
-            if (!_matched) {
-              _switchResult = null;
-            }
-            final Object element = _switchResult;
-            boolean _notEquals = ObjectExtensions.operator_notEquals(((IAnnotatable)element), null);
-            if (_notEquals) {
-              JdtHyperlink _jdtHyperlink = new JdtHyperlink();
-              final Procedure1<JdtHyperlink> _function_1 = new Procedure1<JdtHyperlink>() {
-                  public void apply(final JdtHyperlink it) {
-                    it.setJavaElement(((IMember)element));
-                    it.open();
-                  }
-                };
-              ObjectExtensions.<JdtHyperlink>operator_doubleArrow(_jdtHyperlink, _function_1);
-            }
-          } catch (Throwable _e) {
-            throw Exceptions.sneakyThrow(_e);
+            ObjectExtensions.<JdtHyperlink>operator_doubleArrow(_jdtHyperlink, _function_1);
           }
         }
       };
-    return new IModification() {
-        public void apply(IModificationContext context) {
-          _function.apply(context);
-        }
-    };
+    return _function;
   }
 }

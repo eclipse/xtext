@@ -87,7 +87,7 @@ public class OldAPICommonSuperTypeTest extends CommonSuperTypeTest {
         }
       }
       _builder.append(") {}");
-      final CharSequence signature = _builder;
+      final String signature = _builder.toString();
       String _string = signature.toString();
       final XtendFunction function = this.function(_string);
       final JvmOperation operation = this._iXtendJvmAssociations.getDirectlyInferredOperation(function);
@@ -130,7 +130,7 @@ public class OldAPICommonSuperTypeTest extends CommonSuperTypeTest {
       if (_not_1) {
         JvmAnyTypeReference _createJvmAnyTypeReference = TypesFactory.eINSTANCE.createJvmAnyTypeReference();
         JvmAnyTypeReference _createJvmAnyTypeReference_1 = TypesFactory.eINSTANCE.createJvmAnyTypeReference();
-        List<JvmAnyTypeReference> _newImmutableList = CollectionLiterals.<JvmAnyTypeReference>newImmutableList(_createJvmAnyTypeReference, _createJvmAnyTypeReference_1);
+        List<JvmTypeReference> _newImmutableList = CollectionLiterals.<JvmTypeReference>newImmutableList(_createJvmAnyTypeReference, _createJvmAnyTypeReference_1);
         Iterable<JvmTypeReference> _plus_1 = Iterables.<JvmTypeReference>concat(typeReferences, _newImmutableList);
         List<JvmTypeReference> _list_1 = IterableExtensions.<JvmTypeReference>toList(_plus_1);
         JvmTypeReference _commonSuperType_2 = this.typeConformanceComputer.getCommonSuperType(_list_1);

@@ -66,7 +66,7 @@ public class OldAPIAssignabilityTest extends AssignabilityTest {
       String _fixup_1 = this.fixup(rhs);
       _builder.append(_fixup_1, "");
       _builder.append(" rhs) {}");
-      final CharSequence signature = _builder;
+      final String signature = _builder.toString();
       String _string = signature.toString();
       final XtendFunction function = this.function(_string);
       final JvmOperation operation = this._iXtendJvmAssociations.getDirectlyInferredOperation(function);

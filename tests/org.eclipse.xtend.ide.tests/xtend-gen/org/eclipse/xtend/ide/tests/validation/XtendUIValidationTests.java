@@ -549,8 +549,7 @@ public class XtendUIValidationTests extends AbstractXtendUITestCase {
   @Test
   public void testConfigurableIssueCode() {
     try {
-      IPersistentPreferenceStore _xtendPreferencesStore = this.getXtendPreferencesStore();
-      final IPersistentPreferenceStore xtendPrefStore = ((IPersistentPreferenceStore) _xtendPreferencesStore);
+      final IPersistentPreferenceStore xtendPrefStore = this.getXtendPreferencesStore();
       xtendPrefStore.setValue(IssueCodes.UNUSED_PRIVATE_MEMBER, "warning");
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("class TestConfigurableIssueCode {");

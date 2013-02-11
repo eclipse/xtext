@@ -25,7 +25,7 @@ public abstract class XtendMemberDeclarationImpl<T extends XtendMember> extends 
   
   public TypeDeclaration getDeclaringType() {
     XtendTypeDeclarationImpl<? extends XtendTypeDeclaration> _switchResult = null;
-    EObject _delegate = this.getDelegate();
+    T _delegate = this.getDelegate();
     EObject _eContainer = _delegate.eContainer();
     final EObject container = _eContainer;
     boolean _matched = false;

@@ -63,18 +63,14 @@ public class QuickfixTestBuilder {
         this.editor = _openEditorSafely;
         final IXtextDocument document = this.editor.getDocument();
         Assert.assertNotNull("Error getting document from editor", document);
-        final Function1<XtextResource,List<Issue>> _function = new Function1<XtextResource,List<Issue>>() {
-            public List<Issue> apply(final XtextResource it) {
+        final IUnitOfWork<List<Issue>,XtextResource> _function = new IUnitOfWork<List<Issue>,XtextResource>() {
+            public List<Issue> exec(final XtextResource it) throws Exception {
               List<Issue> _validate = QuickfixTestBuilder.this._iResourceValidator.validate(it, CheckMode.NORMAL_AND_FAST, CancelIndicator.NullImpl);
               List<Issue> _issues = QuickfixTestBuilder.this.issues = _validate;
               return _issues;
             }
           };
-        document.<List<Issue>>readOnly(new IUnitOfWork<List<Issue>,XtextResource>() {
-            public List<Issue> exec(XtextResource state) {
-              return _function.apply(state);
-            }
-        });
+        document.<List<Issue>>readOnly(_function);
         String _string_1 = model.toString();
         int _indexOf = _string_1.indexOf("|");
         this.caretOffset = _indexOf;

@@ -9,7 +9,6 @@ import org.eclipse.xtext.util.IAcceptor;
 import org.eclipse.xtext.xbase.compiler.CompilationTestHelper;
 import org.eclipse.xtext.xbase.compiler.CompilationTestHelper.Result;
 import org.eclipse.xtext.xbase.lib.Exceptions;
-import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xbase.lib.util.ReflectExtensions;
 import org.junit.Assert;
 import org.junit.Test;
@@ -45,8 +44,8 @@ public class CompilerTest {
       _builder.newLine();
       _builder.append("}");
       _builder.newLine();
-      final Procedure1<Result> _function = new Procedure1<Result>() {
-          public void apply(final Result it) {
+      final IAcceptor<Result> _function = new IAcceptor<Result>() {
+          public void accept(final Result it) {
             try {
               Class<? extends Object> _compiledClass = it.getCompiledClass();
               final Object obj = _compiledClass.newInstance();
@@ -58,11 +57,7 @@ public class CompilerTest {
             }
           }
         };
-      this._compilationTestHelper.compile(_builder, new IAcceptor<Result>() {
-          public void accept(Result t) {
-            _function.apply(t);
-          }
-      });
+      this._compilationTestHelper.compile(_builder, _function);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -79,8 +74,8 @@ public class CompilerTest {
       _builder.newLine();
       _builder.append("}");
       _builder.newLine();
-      final Procedure1<Result> _function = new Procedure1<Result>() {
-          public void apply(final Result it) {
+      final IAcceptor<Result> _function = new IAcceptor<Result>() {
+          public void accept(final Result it) {
             StringConcatenation _builder = new StringConcatenation();
             _builder.append("import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;");
             _builder.newLine();
@@ -159,11 +154,7 @@ public class CompilerTest {
             Assert.assertEquals(_string, _singleGeneratedCode);
           }
         };
-      this._compilationTestHelper.compile(_builder, new IAcceptor<Result>() {
-          public void accept(Result t) {
-            _function.apply(t);
-          }
-      });
+      this._compilationTestHelper.compile(_builder, _function);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }

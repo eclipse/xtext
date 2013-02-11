@@ -48,14 +48,14 @@ public class ActiveAnnotationsRuntimeTest extends AbstractActiveAnnotationsTest 
     try {
       ResourceSet _unLoadedResourceSet = this.compiler.unLoadedResourceSet(macroFile);
       final XtextResourceSet macroResourceSet = ((XtextResourceSet) _unLoadedResourceSet);
-      Class<? extends Object> _class = this.getClass();
+      Class<? extends ActiveAnnotationsRuntimeTest> _class = this.getClass();
       ClassLoader _classLoader = _class.getClassLoader();
       macroResourceSet.setClasspathURIContext(_classLoader);
       ResourceSet _unLoadedResourceSet_1 = this.compiler.unLoadedResourceSet(clientFile);
       final XtextResourceSet resourceSet = ((XtextResourceSet) _unLoadedResourceSet_1);
-      final Procedure1<Result> _function = new Procedure1<Result>() {
-          public void apply(final Result result) {
-            Class<? extends Object> _class = ActiveAnnotationsRuntimeTest.this.getClass();
+      final IAcceptor<Result> _function = new IAcceptor<Result>() {
+          public void accept(final Result result) {
+            Class<? extends ActiveAnnotationsRuntimeTest> _class = ActiveAnnotationsRuntimeTest.this.getClass();
             ClassLoader _classLoader = _class.getClassLoader();
             final Function1<String,Class<? extends Object>> _function = new Function1<String,Class<? extends Object>>() {
                 public Class<? extends Object> apply(final String it) {
@@ -67,15 +67,11 @@ public class ActiveAnnotationsRuntimeTest extends AbstractActiveAnnotationsTest 
             resourceSet.setClasspathURIContext(_delegatingClassloader);
           }
         };
-      this.compiler.compile(macroResourceSet, new IAcceptor<Result>() {
-          public void accept(Result t) {
-            _function.apply(t);
-          }
-      });
+      this.compiler.compile(macroResourceSet, _function);
       EList<Resource> _resources = resourceSet.getResources();
       final Resource singleResource = IterableExtensions.<Resource>head(_resources);
-      final Procedure1<Result> _function_1 = new Procedure1<Result>() {
-          public void apply(final Result it) {
+      final IAcceptor<Result> _function_1 = new IAcceptor<Result>() {
+          public void accept(final Result it) {
             final CompilationUnitImpl unit = ActiveAnnotationsRuntimeTest.this.compilationUnitProvider.get();
             EList<EObject> _contents = singleResource.getContents();
             Iterable<XtendFile> _filter = Iterables.<XtendFile>filter(_contents, XtendFile.class);
@@ -84,11 +80,7 @@ public class ActiveAnnotationsRuntimeTest extends AbstractActiveAnnotationsTest 
             expectations.apply(unit);
           }
         };
-      this.compiler.compile(resourceSet, new IAcceptor<Result>() {
-          public void accept(Result t) {
-            _function_1.apply(t);
-          }
-      });
+      this.compiler.compile(resourceSet, _function_1);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }

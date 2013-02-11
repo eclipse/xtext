@@ -1335,23 +1335,34 @@ public class XbaseFormatter2 extends AbstractFormatter {
   }
   
   protected AbstractRule binaryOperationPrecedence(final EObject op) {
-    final INode node = this._nodeModelAccess.nodeForFeature(op, org.eclipse.xtext.xbase.XbasePackage.Literals.XABSTRACT_FEATURE_CALL__FEATURE);
-    boolean _and = false;
-    boolean _notEquals = ObjectExtensions.operator_notEquals(node, null);
-    if (!_notEquals) {
-      _and = false;
-    } else {
-      EObject _grammarElement = node.getGrammarElement();
-      _and = (_notEquals && (_grammarElement instanceof CrossReference));
-    }
-    if (_and) {
-      EObject _grammarElement_1 = node.getGrammarElement();
-      final AbstractElement terminal = ((CrossReference) _grammarElement_1).getTerminal();
-      if ((terminal instanceof RuleCall)) {
-        return ((RuleCall) terminal).getRule();
+    AbstractRule _xblockexpression = null;
+    {
+      final INode node = this._nodeModelAccess.nodeForFeature(op, org.eclipse.xtext.xbase.XbasePackage.Literals.XABSTRACT_FEATURE_CALL__FEATURE);
+      AbstractRule _xifexpression = null;
+      boolean _and = false;
+      boolean _notEquals = ObjectExtensions.operator_notEquals(node, null);
+      if (!_notEquals) {
+        _and = false;
+      } else {
+        EObject _grammarElement = node.getGrammarElement();
+        _and = (_notEquals && (_grammarElement instanceof CrossReference));
       }
+      if (_and) {
+        AbstractRule _xblockexpression_1 = null;
+        {
+          EObject _grammarElement_1 = node.getGrammarElement();
+          final AbstractElement terminal = ((CrossReference) _grammarElement_1).getTerminal();
+          AbstractRule _xifexpression_1 = null;
+          if ((terminal instanceof RuleCall)) {
+            return ((RuleCall) terminal).getRule();
+          }
+          _xblockexpression_1 = (_xifexpression_1);
+        }
+        _xifexpression = _xblockexpression_1;
+      }
+      _xblockexpression = (_xifexpression);
     }
-    return null;
+    return _xblockexpression;
   }
   
   protected boolean isMultiline(final XExpression expression, final FormattableDocument doc) {
@@ -2720,16 +2731,8 @@ public class XbaseFormatter2 extends AbstractFormatter {
       }
     }
     if (!_matched) {
-      if (x instanceof XExpression) {
-        final XExpression _xExpression = (XExpression)x;
-        _matched=true;
-        ArrayList<XExpression> _newArrayList = CollectionLiterals.<XExpression>newArrayList(_xExpression);
-        _switchResult = _newArrayList;
-      }
-    }
-    if (!_matched) {
-      List<XExpression> _emptyList = CollectionLiterals.<XExpression>emptyList();
-      _switchResult = _emptyList;
+      ArrayList<XExpression> _newArrayList = CollectionLiterals.<XExpression>newArrayList(x);
+      _switchResult = _newArrayList;
     }
     final List<XExpression> children = _switchResult;
     boolean _and = false;
@@ -2955,6 +2958,19 @@ public class XbaseFormatter2 extends AbstractFormatter {
     format.operator_add(_prepend_1);
   }
   
+  protected boolean isMultiParamInOwnLine(final XExpression fc, final FormattableDocument doc) {
+    if (fc instanceof XFeatureCall) {
+      return _isMultiParamInOwnLine((XFeatureCall)fc, doc);
+    } else if (fc instanceof XMemberFeatureCall) {
+      return _isMultiParamInOwnLine((XMemberFeatureCall)fc, doc);
+    } else if (fc instanceof XConstructorCall) {
+      return _isMultiParamInOwnLine((XConstructorCall)fc, doc);
+    } else {
+      throw new IllegalArgumentException("Unhandled parameter types: " +
+        Arrays.<Object>asList(fc, doc).toString());
+    }
+  }
+  
   protected void format(final EObject ref, final FormattableDocument document) {
     if (ref instanceof JvmTypeParameter) {
       _format((JvmTypeParameter)ref, document);
@@ -3049,19 +3065,6 @@ public class XbaseFormatter2 extends AbstractFormatter {
     } else {
       throw new IllegalArgumentException("Unhandled parameter types: " +
         Arrays.<Object>asList(ref, document).toString());
-    }
-  }
-  
-  protected boolean isMultiParamInOwnLine(final XExpression fc, final FormattableDocument doc) {
-    if (fc instanceof XFeatureCall) {
-      return _isMultiParamInOwnLine((XFeatureCall)fc, doc);
-    } else if (fc instanceof XMemberFeatureCall) {
-      return _isMultiParamInOwnLine((XMemberFeatureCall)fc, doc);
-    } else if (fc instanceof XConstructorCall) {
-      return _isMultiParamInOwnLine((XConstructorCall)fc, doc);
-    } else {
-      throw new IllegalArgumentException("Unhandled parameter types: " +
-        Arrays.<Object>asList(fc, doc).toString());
     }
   }
 }

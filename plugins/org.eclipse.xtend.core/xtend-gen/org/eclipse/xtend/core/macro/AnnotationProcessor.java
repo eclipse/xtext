@@ -67,42 +67,34 @@ public class AnnotationProcessor {
     return _xblockexpression;
   }
   
-  public Object inferencePhase(final ActiveAnnotationContext ctx, final CancelIndicator monitor) {
-    Object _xblockexpression = null;
-    {
-      final StoppedTask task = Stopwatches.forTask("[macros] inferencePhase (AnnotationProcessor.inferencePhase)");
-      task.start();
-      Object _xtrycatchfinallyexpression = null;
-      try {
-        Object _switchResult = null;
-        Object _processorInstance = ctx.getProcessorInstance();
-        final Object processor = _processorInstance;
-        boolean _matched = false;
-        if (!_matched) {
-          if (processor instanceof ModifyProcessor) {
-            final ModifyProcessor _modifyProcessor = (ModifyProcessor)processor;
-            _matched=true;
-            final ModifyContextImpl modifyCtx = this.modifyContextProvider.get();
-            CompilationUnitImpl _compilationUnit = ctx.getCompilationUnit();
-            modifyCtx.setUnit(_compilationUnit);
-            List<XtendAnnotationTarget> _annotatedSourceElements = ctx.getAnnotatedSourceElements();
-            final Function1<XtendAnnotationTarget,MutableNamedElement> _function = new Function1<XtendAnnotationTarget,MutableNamedElement>() {
-                public MutableNamedElement apply(final XtendAnnotationTarget it) {
-                  CompilationUnitImpl _compilationUnit = ctx.getCompilationUnit();
-                  final XtendMemberDeclarationImpl xtendMember = _compilationUnit.toXtendMemberDeclaration(((XtendMember) it));
-                  return modifyCtx.getGeneratedElement(xtendMember);
-                }
-              };
-            List<MutableNamedElement> _map = ListExtensions.<XtendAnnotationTarget, MutableNamedElement>map(_annotatedSourceElements, _function);
-            _modifyProcessor.modify(_map, modifyCtx);
-          }
+  public void inferencePhase(final ActiveAnnotationContext ctx, final CancelIndicator monitor) {
+    final StoppedTask task = Stopwatches.forTask("[macros] inferencePhase (AnnotationProcessor.inferencePhase)");
+    task.start();
+    try {
+      Object _processorInstance = ctx.getProcessorInstance();
+      final Object processor = _processorInstance;
+      boolean _matched = false;
+      if (!_matched) {
+        if (processor instanceof ModifyProcessor) {
+          final ModifyProcessor _modifyProcessor = (ModifyProcessor)processor;
+          _matched=true;
+          final ModifyContextImpl modifyCtx = this.modifyContextProvider.get();
+          CompilationUnitImpl _compilationUnit = ctx.getCompilationUnit();
+          modifyCtx.setUnit(_compilationUnit);
+          List<XtendAnnotationTarget> _annotatedSourceElements = ctx.getAnnotatedSourceElements();
+          final Function1<XtendAnnotationTarget,MutableNamedElement> _function = new Function1<XtendAnnotationTarget,MutableNamedElement>() {
+              public MutableNamedElement apply(final XtendAnnotationTarget it) {
+                CompilationUnitImpl _compilationUnit = ctx.getCompilationUnit();
+                final XtendMemberDeclarationImpl xtendMember = _compilationUnit.toXtendMemberDeclaration(((XtendMember) it));
+                return modifyCtx.getGeneratedElement(xtendMember);
+              }
+            };
+          List<MutableNamedElement> _map = ListExtensions.<XtendAnnotationTarget, MutableNamedElement>map(_annotatedSourceElements, _function);
+          _modifyProcessor.modify(_map, modifyCtx);
         }
-        _xtrycatchfinallyexpression = _switchResult;
-      } finally {
-        task.stop();
       }
-      _xblockexpression = (_xtrycatchfinallyexpression);
+    } finally {
+      task.stop();
     }
-    return _xblockexpression;
   }
 }

@@ -160,7 +160,7 @@ public class FormattingDataFactory {
   }
   
   protected Function1<? super FormattableDocument,? extends Iterable<FormattingData>> _newFormattingData(final HiddenLeafs leafs, final PreferenceKey key, final FormattingDataInit it) {
-    Class<? extends Object> _class = key.getClass();
+    Class<? extends PreferenceKey> _class = key.getClass();
     String _plus = ("Unknown configuration key kind: " + _class);
     RuntimeException _runtimeException = new RuntimeException(_plus);
     throw _runtimeException;

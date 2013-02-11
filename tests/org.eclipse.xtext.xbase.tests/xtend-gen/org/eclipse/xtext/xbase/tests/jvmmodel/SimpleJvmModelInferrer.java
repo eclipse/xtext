@@ -41,7 +41,7 @@ public class SimpleJvmModelInferrer implements IJvmModelInferrer {
               }
             };
           JvmOperation _method = SimpleJvmModelInferrer.this._jvmTypesBuilder.toMethod(e, "doStuff", _typeForName, _function);
-          SimpleJvmModelInferrer.this._jvmTypesBuilder.<JvmOperation>operator_add(_members, _method);
+          SimpleJvmModelInferrer.this._jvmTypesBuilder.<JvmMember>operator_add(_members, _method);
         }
       };
     _accept.initializeLater(_function);

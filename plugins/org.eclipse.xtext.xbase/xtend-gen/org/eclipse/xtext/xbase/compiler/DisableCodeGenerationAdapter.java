@@ -17,7 +17,7 @@ import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 @SuppressWarnings("all")
 public class DisableCodeGenerationAdapter extends AdapterImpl {
   public boolean isAdapterForType(final Object type) {
-    Class<? extends Object> _class = this.getClass();
+    Class<? extends DisableCodeGenerationAdapter> _class = this.getClass();
     boolean _equals = ObjectExtensions.operator_equals(_class, type);
     return _equals;
   }

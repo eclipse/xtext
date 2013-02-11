@@ -99,9 +99,8 @@ public class RichStringToLineModel extends ForLoopOnce {
     return _xifexpression;
   }
   
-  public boolean finish() {
-    boolean _acceptLineBreak = this.acceptLineBreak(0, false, false);
-    return _acceptLineBreak;
+  public void finish() {
+    this.acceptLineBreak(0, false, false);
   }
   
   protected int literalPrefixLenght(final INode node) {
@@ -212,91 +211,84 @@ public class RichStringToLineModel extends ForLoopOnce {
     this.offset = _plus;
   }
   
-  public boolean acceptLineBreak(final int charCount, final boolean semantic, final boolean startNewLine) {
-    boolean _xblockexpression = false;
-    {
-      this.startContent();
-      boolean _greaterThan = (this.contentStartOffset > 0);
-      if (_greaterThan) {
-        final String lastLinesContent = this.document.substring(this.contentStartOffset, this.offset);
-        LineModel _model = this.getModel();
-        List<Line> _lines = _model.getLines();
-        boolean _isEmpty = _lines.isEmpty();
-        if (_isEmpty) {
-          LineModel _model_1 = this.getModel();
-          _model_1.setLeadingText(lastLinesContent);
-          this.contentStartColumn = 0;
-        } else {
-          LineModel _model_2 = this.getModel();
-          List<Line> _lines_1 = _model_2.getLines();
-          final Line lastLine = IterableExtensions.<Line>last(_lines_1);
-          lastLine.setContent(lastLinesContent);
-          int _offset = lastLine.getOffset();
-          int _newLineCharCount = lastLine.getNewLineCharCount();
-          int _plus = (_offset + _newLineCharCount);
-          final int newContentStartColumn = (this.contentStartOffset - _plus);
-          boolean _isLeadingSemanticNewLine = lastLine.isLeadingSemanticNewLine();
-          if (_isLeadingSemanticNewLine) {
-            boolean _greaterThan_1 = (newContentStartColumn > this.contentStartColumn);
-            if (_greaterThan_1) {
-              final int length = (newContentStartColumn - this.contentStartColumn);
-              int _minus = (this.contentStartOffset - length);
-              final String text = this.document.substring(_minus, this.contentStartOffset);
-              SemanticWhitespace _semanticWhitespace = new SemanticWhitespace(text, newContentStartColumn);
-              this.indentationStack.push(_semanticWhitespace);
-            }
+  public void acceptLineBreak(final int charCount, final boolean semantic, final boolean startNewLine) {
+    this.startContent();
+    boolean _greaterThan = (this.contentStartOffset > 0);
+    if (_greaterThan) {
+      final String lastLinesContent = this.document.substring(this.contentStartOffset, this.offset);
+      LineModel _model = this.getModel();
+      List<Line> _lines = _model.getLines();
+      boolean _isEmpty = _lines.isEmpty();
+      if (_isEmpty) {
+        LineModel _model_1 = this.getModel();
+        _model_1.setLeadingText(lastLinesContent);
+        this.contentStartColumn = 0;
+      } else {
+        LineModel _model_2 = this.getModel();
+        List<Line> _lines_1 = _model_2.getLines();
+        final Line lastLine = IterableExtensions.<Line>last(_lines_1);
+        lastLine.setContent(lastLinesContent);
+        int _offset = lastLine.getOffset();
+        int _newLineCharCount = lastLine.getNewLineCharCount();
+        int _plus = (_offset + _newLineCharCount);
+        final int newContentStartColumn = (this.contentStartOffset - _plus);
+        boolean _isLeadingSemanticNewLine = lastLine.isLeadingSemanticNewLine();
+        if (_isLeadingSemanticNewLine) {
+          boolean _greaterThan_1 = (newContentStartColumn > this.contentStartColumn);
+          if (_greaterThan_1) {
+            final int length = (newContentStartColumn - this.contentStartColumn);
+            int _minus = (this.contentStartOffset - length);
+            final String text = this.document.substring(_minus, this.contentStartOffset);
+            SemanticWhitespace _semanticWhitespace = new SemanticWhitespace(text, newContentStartColumn);
+            this.indentationStack.push(_semanticWhitespace);
           }
-          boolean _lessThan = (newContentStartColumn < this.contentStartColumn);
-          if (_lessThan) {
-            Iterable<SemanticWhitespace> _filter = Iterables.<SemanticWhitespace>filter(this.indentationStack, SemanticWhitespace.class);
-            List<SemanticWhitespace> _list = IterableExtensions.<SemanticWhitespace>toList(_filter);
-            for (final SemanticWhitespace ws : _list) {
-              int _column = ws.getColumn();
-              boolean _greaterThan_2 = (_column > newContentStartColumn);
-              if (_greaterThan_2) {
-                this.indentationStack.remove(ws);
-              }
-            }
-          }
-          if (this._outdentThisLine) {
-            boolean _empty = this.indentationStack.empty();
-            boolean _not = (!_empty);
-            if (_not) {
-              this.indentationStack.pop();
-            }
-            this._outdentThisLine = false;
-          }
-          lastLine.setIndentLength(newContentStartColumn);
-          boolean _notEquals = (newContentStartColumn != 0);
-          if (_notEquals) {
-            this.contentStartColumn = newContentStartColumn;
-          }
-          LineModel _model_3 = this.getModel();
-          List<Line> _lines_2 = _model_3.getLines();
-          Line _last = IterableExtensions.<Line>last(_lines_2);
-          List<Chunk> _chunks = _last.getChunks();
-          Iterables.<Chunk>addAll(_chunks, this.indentationStack);
         }
+        boolean _lessThan = (newContentStartColumn < this.contentStartColumn);
+        if (_lessThan) {
+          Iterable<SemanticWhitespace> _filter = Iterables.<SemanticWhitespace>filter(this.indentationStack, SemanticWhitespace.class);
+          List<SemanticWhitespace> _list = IterableExtensions.<SemanticWhitespace>toList(_filter);
+          for (final SemanticWhitespace ws : _list) {
+            int _column = ws.getColumn();
+            boolean _greaterThan_2 = (_column > newContentStartColumn);
+            if (_greaterThan_2) {
+              this.indentationStack.remove(ws);
+            }
+          }
+        }
+        if (this._outdentThisLine) {
+          boolean _empty = this.indentationStack.empty();
+          boolean _not = (!_empty);
+          if (_not) {
+            this.indentationStack.pop();
+          }
+          this._outdentThisLine = false;
+        }
+        lastLine.setIndentLength(newContentStartColumn);
+        boolean _notEquals = (newContentStartColumn != 0);
+        if (_notEquals) {
+          this.contentStartColumn = newContentStartColumn;
+        }
+        LineModel _model_3 = this.getModel();
+        List<Line> _lines_2 = _model_3.getLines();
+        Line _last = IterableExtensions.<Line>last(_lines_2);
+        List<Chunk> _chunks = _last.getChunks();
+        Iterables.<Chunk>addAll(_chunks, this.indentationStack);
       }
-      if (this.indentNextLine) {
-        TemplateWhitespace _templateWhitespace = new TemplateWhitespace("");
-        this.indentationStack.push(_templateWhitespace);
-        this.indentNextLine = false;
-      }
-      int _minus_1 = (-1);
-      this.contentStartOffset = _minus_1;
-      this.content = false;
-      boolean _xifexpression = false;
-      if (startNewLine) {
-        LineModel _model_4 = this.getModel();
-        List<Line> _lines_3 = _model_4.getLines();
-        Line _line = new Line(this.offset, semantic, charCount);
-        boolean _add = _lines_3.add(_line);
-        _xifexpression = _add;
-      }
-      _xblockexpression = (_xifexpression);
     }
-    return _xblockexpression;
+    if (this.indentNextLine) {
+      TemplateWhitespace _templateWhitespace = new TemplateWhitespace("");
+      this.indentationStack.push(_templateWhitespace);
+      this.indentNextLine = false;
+    }
+    int _minus_1 = (-1);
+    this.contentStartOffset = _minus_1;
+    this.content = false;
+    if (startNewLine) {
+      LineModel _model_4 = this.getModel();
+      List<Line> _lines_3 = _model_4.getLines();
+      Line _line = new Line(this.offset, semantic, charCount);
+      _lines_3.add(_line);
+    }
   }
   
   public void startContent() {

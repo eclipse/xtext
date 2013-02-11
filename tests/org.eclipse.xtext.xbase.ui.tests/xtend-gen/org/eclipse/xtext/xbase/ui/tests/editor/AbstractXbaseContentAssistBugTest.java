@@ -84,7 +84,7 @@ public class AbstractXbaseContentAssistBugTest extends AbstractXbaseUITestCase i
   }
   
   protected String getProjectName() {
-    Class<? extends Object> _class = this.getClass();
+    Class<? extends AbstractXbaseContentAssistBugTest> _class = this.getClass();
     String _simpleName = _class.getSimpleName();
     return (_simpleName + "Project");
   }

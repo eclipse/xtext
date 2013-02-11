@@ -16,7 +16,6 @@ import org.eclipse.xtext.ui.editor.model.IXtextDocument;
 import org.eclipse.xtext.util.concurrent.IUnitOfWork;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.lib.Exceptions;
-import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.ui.refactoring.ExpressionUtil;
 import org.eclipse.xtext.xbase.ui.refactoring.ExtractVariableRefactoring;
 import org.junit.After;
@@ -496,44 +495,36 @@ public class ExtractVariableIntegrationTest extends AbstractXtendUITestCase {
       final XtextEditor editor = this.workbenchTestHelper.openEditor(file);
       try {
         IXtextDocument _document = editor.getDocument();
-        final Function1<XtextResource,Change> _function = new Function1<XtextResource,Change>() {
-            public Change apply(final XtextResource it) {
-              try {
-                Change _xblockexpression = null;
-                {
-                  final int offset = inputString.indexOf("$");
-                  int _lastIndexOf = inputString.lastIndexOf("$");
-                  int _minus = (_lastIndexOf - 1);
-                  final int length = (_minus - offset);
-                  TextSelection _textSelection = new TextSelection(offset, length);
-                  final TextSelection textSelection = _textSelection;
-                  final XExpression selection = ExtractVariableIntegrationTest.this.util.findSelectedExpression(it, textSelection);
-                  final ExtractVariableRefactoring refactoring = ExtractVariableIntegrationTest.this.refactoringProvider.get();
-                  refactoring.setFinal(isFinal);
-                  IXtextDocument _document = editor.getDocument();
-                  refactoring.initialize(_document, selection);
-                  NullProgressMonitor _nullProgressMonitor = new NullProgressMonitor();
-                  final RefactoringStatus status = refactoring.checkAllConditions(_nullProgressMonitor);
-                  String _string = status.toString();
-                  boolean _isOK = status.isOK();
-                  Assert.assertTrue(_string, _isOK);
-                  NullProgressMonitor _nullProgressMonitor_1 = new NullProgressMonitor();
-                  Change _createChange = refactoring.createChange(_nullProgressMonitor_1);
-                  NullProgressMonitor _nullProgressMonitor_2 = new NullProgressMonitor();
-                  Change _perform = _createChange.perform(_nullProgressMonitor_2);
-                  _xblockexpression = (_perform);
-                }
-                return _xblockexpression;
-              } catch (Throwable _e) {
-                throw Exceptions.sneakyThrow(_e);
+        final IUnitOfWork<Change,XtextResource> _function = new IUnitOfWork<Change,XtextResource>() {
+            public Change exec(final XtextResource it) throws Exception {
+              Change _xblockexpression = null;
+              {
+                final int offset = inputString.indexOf("$");
+                int _lastIndexOf = inputString.lastIndexOf("$");
+                int _minus = (_lastIndexOf - 1);
+                final int length = (_minus - offset);
+                TextSelection _textSelection = new TextSelection(offset, length);
+                final TextSelection textSelection = _textSelection;
+                final XExpression selection = ExtractVariableIntegrationTest.this.util.findSelectedExpression(it, textSelection);
+                final ExtractVariableRefactoring refactoring = ExtractVariableIntegrationTest.this.refactoringProvider.get();
+                refactoring.setFinal(isFinal);
+                IXtextDocument _document = editor.getDocument();
+                refactoring.initialize(_document, selection);
+                NullProgressMonitor _nullProgressMonitor = new NullProgressMonitor();
+                final RefactoringStatus status = refactoring.checkAllConditions(_nullProgressMonitor);
+                String _string = status.toString();
+                boolean _isOK = status.isOK();
+                Assert.assertTrue(_string, _isOK);
+                NullProgressMonitor _nullProgressMonitor_1 = new NullProgressMonitor();
+                Change _createChange = refactoring.createChange(_nullProgressMonitor_1);
+                NullProgressMonitor _nullProgressMonitor_2 = new NullProgressMonitor();
+                Change _perform = _createChange.perform(_nullProgressMonitor_2);
+                _xblockexpression = (_perform);
               }
+              return _xblockexpression;
             }
           };
-        _document.<Change>readOnly(new IUnitOfWork<Change,XtextResource>() {
-            public Change exec(XtextResource state) {
-              return _function.apply(state);
-            }
-        });
+        _document.<Change>readOnly(_function);
         String _string = expected.toString();
         IXtextDocument _document_1 = editor.getDocument();
         String _get = _document_1.get();

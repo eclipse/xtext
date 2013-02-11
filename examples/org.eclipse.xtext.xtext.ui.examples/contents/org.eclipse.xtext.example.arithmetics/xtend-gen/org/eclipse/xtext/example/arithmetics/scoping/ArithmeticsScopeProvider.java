@@ -11,7 +11,6 @@ import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.scoping.impl.AbstractDeclarativeScopeProvider;
 import org.eclipse.xtext.scoping.impl.FilteringScope;
-import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 
 /**
@@ -29,8 +28,8 @@ public class ArithmeticsScopeProvider extends AbstractDeclarativeScopeProvider {
     FilteringScope _xblockexpression = null;
     {
       final IScope scope = super.getScope(context, reference);
-      final Function1<IEObjectDescription,Boolean> _function = new Function1<IEObjectDescription,Boolean>() {
-          public Boolean apply(final IEObjectDescription it) {
+      final Predicate<IEObjectDescription> _function = new Predicate<IEObjectDescription>() {
+          public boolean apply(final IEObjectDescription it) {
             boolean _and = false;
             boolean _and_1 = false;
             boolean _notEquals = ObjectExtensions.operator_notEquals(it, null);
@@ -52,11 +51,7 @@ public class ArithmeticsScopeProvider extends AbstractDeclarativeScopeProvider {
             return _and;
           }
         };
-      FilteringScope _filteringScope = new FilteringScope(scope, new Predicate<IEObjectDescription>() {
-          public boolean apply(IEObjectDescription input) {
-            return _function.apply(input);
-          }
-      });
+      FilteringScope _filteringScope = new FilteringScope(scope, _function);
       _xblockexpression = (_filteringScope);
     }
     return _xblockexpression;

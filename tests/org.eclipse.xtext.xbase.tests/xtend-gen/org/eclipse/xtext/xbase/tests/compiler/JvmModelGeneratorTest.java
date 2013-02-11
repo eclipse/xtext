@@ -91,7 +91,7 @@ public class JvmModelGeneratorTest extends AbstractXbaseTestCase {
   @Before
   public void setUp() {
     this.javaCompiler.clearClassPath();
-    Class<? extends Object> _class = this.getClass();
+    Class<? extends JvmModelGeneratorTest> _class = this.getClass();
     this.javaCompiler.addClassPathOfClass(_class);
     this.javaCompiler.addClassPathOfClass(AbstractXbaseEvaluationTest.class);
     this.javaCompiler.addClassPathOfClass(Functions.class);
@@ -108,9 +108,9 @@ public class JvmModelGeneratorTest extends AbstractXbaseTestCase {
             final JvmGenericType innerClass = JvmModelGeneratorTest.this.builder.toClass(it, "InnerClass");
             final JvmGenericType innerClassString = JvmModelGeneratorTest.this.builder.toClass(it, "String");
             EList<JvmMember> _members = it.getMembers();
-            JvmModelGeneratorTest.this.builder.<JvmGenericType>operator_add(_members, innerClass);
+            JvmModelGeneratorTest.this.builder.<JvmMember>operator_add(_members, innerClass);
             EList<JvmMember> _members_1 = it.getMembers();
-            JvmModelGeneratorTest.this.builder.<JvmGenericType>operator_add(_members_1, innerClassString);
+            JvmModelGeneratorTest.this.builder.<JvmMember>operator_add(_members_1, innerClassString);
             EList<JvmMember> _members_2 = it.getMembers();
             JvmTypeReference _typeForName = JvmModelGeneratorTest.this.references.getTypeForName(String.class, expression);
             final Procedure1<JvmOperation> _function = new Procedure1<JvmOperation>() {
@@ -127,7 +127,7 @@ public class JvmModelGeneratorTest extends AbstractXbaseTestCase {
                 }
               };
             JvmOperation _method = JvmModelGeneratorTest.this.builder.toMethod(it, "foo", _typeForName, _function);
-            JvmModelGeneratorTest.this.builder.<JvmOperation>operator_add(_members_2, _method);
+            JvmModelGeneratorTest.this.builder.<JvmMember>operator_add(_members_2, _method);
           }
         };
       final JvmGenericType clazz = this.builder.toClass(expression, "my.test.Outer", _function);
@@ -135,7 +135,7 @@ public class JvmModelGeneratorTest extends AbstractXbaseTestCase {
       _eResource.eSetDeliver(false);
       Resource _eResource_1 = expression.eResource();
       EList<EObject> _contents = _eResource_1.getContents();
-      this.builder.<JvmGenericType>operator_add(_contents, clazz);
+      this.builder.<EObject>operator_add(_contents, clazz);
       Resource _eResource_2 = expression.eResource();
       _eResource_2.eSetDeliver(true);
       InMemoryFileSystemAccess _inMemoryFileSystemAccess = new InMemoryFileSystemAccess();
@@ -191,7 +191,7 @@ public class JvmModelGeneratorTest extends AbstractXbaseTestCase {
                 }
               };
             JvmOperation _method = JvmModelGeneratorTest.this.builder.toMethod(expression, "doStuff", _typeForName, _function);
-            JvmModelGeneratorTest.this.builder.<JvmOperation>operator_add(_members, _method);
+            JvmModelGeneratorTest.this.builder.<JvmMember>operator_add(_members, _method);
           }
         };
       final JvmGenericType clazz = this.builder.toClass(expression, "my.test.Foo", _function);
@@ -220,7 +220,7 @@ public class JvmModelGeneratorTest extends AbstractXbaseTestCase {
                 }
               };
             JvmOperation _method = JvmModelGeneratorTest.this.builder.toMethod(expression, "theTruth", _typeForName, _function);
-            JvmModelGeneratorTest.this.builder.<JvmOperation>operator_add(_members, _method);
+            JvmModelGeneratorTest.this.builder.<JvmMember>operator_add(_members, _method);
           }
         };
       final JvmAnnotationType clazz = this.builder.toAnnotationType(expression, "my.test.Foo", _function);
@@ -254,7 +254,7 @@ public class JvmModelGeneratorTest extends AbstractXbaseTestCase {
                 }
               };
             JvmOperation _method = JvmModelGeneratorTest.this.builder.toMethod(expression, "value", _typeForName, _function);
-            JvmModelGeneratorTest.this.builder.<JvmOperation>operator_add(_members, _method);
+            JvmModelGeneratorTest.this.builder.<JvmMember>operator_add(_members, _method);
             EList<JvmMember> _members_1 = it.getMembers();
             JvmTypeReference _typeForName_1 = JvmModelGeneratorTest.this.references.getTypeForName(int.class, expression);
             final Procedure1<JvmOperation> _function_1 = new Procedure1<JvmOperation>() {
@@ -262,7 +262,7 @@ public class JvmModelGeneratorTest extends AbstractXbaseTestCase {
                 }
               };
             JvmOperation _method_1 = JvmModelGeneratorTest.this.builder.toMethod(expression, "otherValue", _typeForName_1, _function_1);
-            JvmModelGeneratorTest.this.builder.<JvmOperation>operator_add(_members_1, _method_1);
+            JvmModelGeneratorTest.this.builder.<JvmMember>operator_add(_members_1, _method_1);
           }
         };
       final JvmAnnotationType clazz = this.builder.toAnnotationType(expression, "my.test.Foo", _function);
@@ -352,15 +352,15 @@ public class JvmModelGeneratorTest extends AbstractXbaseTestCase {
             EList<JvmMember> _members = it.getMembers();
             JvmTypeReference _typeRef = JvmModelGeneratorTest.this.typeRef(expression, String.class);
             JvmField _field = JvmModelGeneratorTest.this.builder.toField(expression, "x", _typeRef);
-            JvmModelGeneratorTest.this.builder.<JvmField>operator_add(_members, _field);
+            JvmModelGeneratorTest.this.builder.<JvmMember>operator_add(_members, _field);
             EList<JvmMember> _members_1 = it.getMembers();
             JvmTypeReference _typeRef_1 = JvmModelGeneratorTest.this.typeRef(expression, String.class);
             JvmOperation _getter = JvmModelGeneratorTest.this.builder.toGetter(expression, "x", _typeRef_1);
-            JvmModelGeneratorTest.this.builder.<JvmOperation>operator_add(_members_1, _getter);
+            JvmModelGeneratorTest.this.builder.<JvmMember>operator_add(_members_1, _getter);
             EList<JvmMember> _members_2 = it.getMembers();
             JvmTypeReference _typeRef_2 = JvmModelGeneratorTest.this.typeRef(expression, String.class);
             JvmOperation _setter = JvmModelGeneratorTest.this.builder.toSetter(expression, "x", _typeRef_2);
-            JvmModelGeneratorTest.this.builder.<JvmOperation>operator_add(_members_2, _setter);
+            JvmModelGeneratorTest.this.builder.<JvmMember>operator_add(_members_2, _setter);
           }
         };
       final JvmGenericType clazz = this.builder.toClass(expression, "my.test.Foo", _function);
@@ -391,7 +391,7 @@ public class JvmModelGeneratorTest extends AbstractXbaseTestCase {
                 }
               };
             JvmEnumerationLiteral _enumerationLiteral = JvmModelGeneratorTest.this.builder.toEnumerationLiteral(expression, "BAR", _function);
-            JvmModelGeneratorTest.this.builder.<JvmEnumerationLiteral>operator_add(_members, _enumerationLiteral);
+            JvmModelGeneratorTest.this.builder.<JvmMember>operator_add(_members, _enumerationLiteral);
             EList<JvmMember> _members_1 = it.getMembers();
             final Procedure1<JvmEnumerationLiteral> _function_1 = new Procedure1<JvmEnumerationLiteral>() {
                 public void apply(final JvmEnumerationLiteral literal) {
@@ -400,7 +400,7 @@ public class JvmModelGeneratorTest extends AbstractXbaseTestCase {
                 }
               };
             JvmEnumerationLiteral _enumerationLiteral_1 = JvmModelGeneratorTest.this.builder.toEnumerationLiteral(expression, "BAZ", _function_1);
-            JvmModelGeneratorTest.this.builder.<JvmEnumerationLiteral>operator_add(_members_1, _enumerationLiteral_1);
+            JvmModelGeneratorTest.this.builder.<JvmMember>operator_add(_members_1, _enumerationLiteral_1);
           }
         };
       final JvmEnumerationType enumeration = this.builder.toEnumerationType(expression, "my.test.Foo", _function);
@@ -428,10 +428,10 @@ public class JvmModelGeneratorTest extends AbstractXbaseTestCase {
           public void apply(final JvmEnumerationType it) {
             EList<JvmMember> _members = it.getMembers();
             JvmEnumerationLiteral _enumerationLiteral = JvmModelGeneratorTest.this.builder.toEnumerationLiteral(expression, "BAR");
-            JvmModelGeneratorTest.this.builder.<JvmEnumerationLiteral>operator_add(_members, _enumerationLiteral);
+            JvmModelGeneratorTest.this.builder.<JvmMember>operator_add(_members, _enumerationLiteral);
             EList<JvmMember> _members_1 = it.getMembers();
             JvmEnumerationLiteral _enumerationLiteral_1 = JvmModelGeneratorTest.this.builder.toEnumerationLiteral(expression, "BAZ");
-            JvmModelGeneratorTest.this.builder.<JvmEnumerationLiteral>operator_add(_members_1, _enumerationLiteral_1);
+            JvmModelGeneratorTest.this.builder.<JvmMember>operator_add(_members_1, _enumerationLiteral_1);
           }
         };
       final JvmEnumerationType enumeration = this.builder.toEnumerationType(expression, "my.test.Foo", _function);
@@ -466,7 +466,7 @@ public class JvmModelGeneratorTest extends AbstractXbaseTestCase {
                 }
               };
             JvmOperation _method = JvmModelGeneratorTest.this.builder.toMethod(expression, "doStuff", _typeForName, _function);
-            JvmModelGeneratorTest.this.builder.<JvmOperation>operator_add(_members, _method);
+            JvmModelGeneratorTest.this.builder.<JvmMember>operator_add(_members, _method);
           }
         };
       final JvmGenericType clazz = this.builder.toClass(expression, "my.test.Foo", _function);
@@ -500,13 +500,13 @@ public class JvmModelGeneratorTest extends AbstractXbaseTestCase {
                   JvmAnnotationReference _annotation_2 = JvmModelGeneratorTest.this.builder.toAnnotation(expression, TestAnnotation.class);
                   JvmModelGeneratorTest.this.builder.<JvmAnnotationReference>operator_add(_values_2, _annotation_2);
                   EList<JvmAnnotationValue> _values_3 = annotation.getValues();
-                  JvmModelGeneratorTest.this.builder.<JvmAnnotationAnnotationValue>operator_add(_values_3, annotationAnnotationValue);
+                  JvmModelGeneratorTest.this.builder.<JvmAnnotationValue>operator_add(_values_3, annotationAnnotationValue);
                   EList<JvmAnnotationReference> _annotations = it.getAnnotations();
                   JvmModelGeneratorTest.this.builder.<JvmAnnotationReference>operator_add(_annotations, annotation);
                 }
               };
             JvmOperation _method = JvmModelGeneratorTest.this.builder.toMethod(expression, "doStuff", _typeForName, _function);
-            JvmModelGeneratorTest.this.builder.<JvmOperation>operator_add(_members, _method);
+            JvmModelGeneratorTest.this.builder.<JvmMember>operator_add(_members, _method);
           }
         };
       final JvmGenericType clazz = this.builder.toClass(expression, "my.test.Foo", _function);
@@ -541,7 +541,7 @@ public class JvmModelGeneratorTest extends AbstractXbaseTestCase {
                 }
               };
             JvmOperation _method = JvmModelGeneratorTest.this.builder.toMethod(expression, "doStuff", _typeForName, _function);
-            JvmModelGeneratorTest.this.builder.<JvmOperation>operator_add(_members, _method);
+            JvmModelGeneratorTest.this.builder.<JvmMember>operator_add(_members, _method);
           }
         };
       final JvmGenericType clazz = this.builder.toClass(expression, "my.test.Foo", _function);
@@ -566,7 +566,7 @@ public class JvmModelGeneratorTest extends AbstractXbaseTestCase {
                 }
               };
             JvmEnumerationLiteral _enumerationLiteral = JvmModelGeneratorTest.this.builder.toEnumerationLiteral(expression, "WARN", _function);
-            JvmModelGeneratorTest.this.builder.<JvmEnumerationLiteral>operator_add(_members, _enumerationLiteral);
+            JvmModelGeneratorTest.this.builder.<JvmMember>operator_add(_members, _enumerationLiteral);
             EList<JvmMember> _members_1 = it.getMembers();
             final Procedure1<JvmEnumerationLiteral> _function_1 = new Procedure1<JvmEnumerationLiteral>() {
                 public void apply(final JvmEnumerationLiteral literal) {
@@ -575,7 +575,7 @@ public class JvmModelGeneratorTest extends AbstractXbaseTestCase {
                 }
               };
             JvmEnumerationLiteral _enumerationLiteral_1 = JvmModelGeneratorTest.this.builder.toEnumerationLiteral(expression, "ERROR", _function_1);
-            JvmModelGeneratorTest.this.builder.<JvmEnumerationLiteral>operator_add(_members_1, _enumerationLiteral_1);
+            JvmModelGeneratorTest.this.builder.<JvmMember>operator_add(_members_1, _enumerationLiteral_1);
             EList<JvmMember> _members_2 = it.getMembers();
             final Procedure1<JvmEnumerationLiteral> _function_2 = new Procedure1<JvmEnumerationLiteral>() {
                 public void apply(final JvmEnumerationLiteral literal) {
@@ -584,7 +584,7 @@ public class JvmModelGeneratorTest extends AbstractXbaseTestCase {
                 }
               };
             JvmEnumerationLiteral _enumerationLiteral_2 = JvmModelGeneratorTest.this.builder.toEnumerationLiteral(expression, "DEBUG", _function_2);
-            JvmModelGeneratorTest.this.builder.<JvmEnumerationLiteral>operator_add(_members_2, _enumerationLiteral_2);
+            JvmModelGeneratorTest.this.builder.<JvmMember>operator_add(_members_2, _enumerationLiteral_2);
             EList<JvmMember> _members_3 = it.getMembers();
             JvmTypeReference _typeForName = JvmModelGeneratorTest.this.references.getTypeForName("java.lang.Object", expression);
             final Procedure1<JvmOperation> _function_3 = new Procedure1<JvmOperation>() {
@@ -593,7 +593,7 @@ public class JvmModelGeneratorTest extends AbstractXbaseTestCase {
                 }
               };
             JvmOperation _method = JvmModelGeneratorTest.this.builder.toMethod(expression, "doStuff", _typeForName, _function_3);
-            JvmModelGeneratorTest.this.builder.<JvmOperation>operator_add(_members_3, _method);
+            JvmModelGeneratorTest.this.builder.<JvmMember>operator_add(_members_3, _method);
           }
         };
       final JvmEnumerationType clazz = this.builder.toEnumerationType(expression, "my.test.Level", _function);
@@ -624,7 +624,7 @@ public class JvmModelGeneratorTest extends AbstractXbaseTestCase {
   public Class<? extends Object> compile(final Resource res, final JvmDeclaredType type) {
     res.eSetDeliver(false);
     EList<EObject> _contents = res.getContents();
-    this.builder.<JvmDeclaredType>operator_add(_contents, type);
+    this.builder.<EObject>operator_add(_contents, type);
     res.eSetDeliver(true);
     InMemoryFileSystemAccess _inMemoryFileSystemAccess = new InMemoryFileSystemAccess();
     final InMemoryFileSystemAccess fsa = _inMemoryFileSystemAccess;

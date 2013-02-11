@@ -64,7 +64,7 @@ public class ResolvedTypesTest extends AbstractXbaseTestCase {
   
   @Test
   public void testDiagnostics() {
-    List<?> _emptyList = CollectionLiterals.emptyList();
+    List<Object> _emptyList = CollectionLiterals.<Object>emptyList();
     PublicResolvedTypes _testMe = this.getTestMe();
     Collection<AbstractDiagnostic> _queuedDiagnostics = _testMe.getQueuedDiagnostics();
     Assert.assertEquals(((Object) _emptyList), _queuedDiagnostics);

@@ -18,13 +18,13 @@ import org.eclipse.xtext.xbase.lib.ListExtensions;
 public class Case_6 {
   protected List<? extends Object> _transform(final EPackage packageDecl) {
     EList<EObject> _eContents = packageDecl.eContents();
-    final Function1<EObject,List<? extends Object>> _function = new Function1<EObject,List<? extends Object>>() {
-        public List<? extends Object> apply(final EObject e) {
-          List<? extends Object> _transform = Case_6.this.transform(((EStructuralFeature) e));
+    final Function1<EObject,Object> _function = new Function1<EObject,Object>() {
+        public Object apply(final EObject e) {
+          Object _transform = Case_6.this.transform(((EStructuralFeature) e));
           return _transform;
         }
       };
-    List<List<? extends Object>> _map = ListExtensions.<EObject, List<? extends Object>>map(_eContents, _function);
+    List<Object> _map = ListExtensions.<EObject, Object>map(_eContents, _function);
     return _map;
   }
   
@@ -40,17 +40,17 @@ public class Case_6 {
   
   protected List<? extends Object> _transform(final EClass model) {
     EList<ETypeParameter> _eTypeParameters = model.getETypeParameters();
-    final Function1<ETypeParameter,List<? extends Object>> _function = new Function1<ETypeParameter,List<? extends Object>>() {
-        public List<? extends Object> apply(final ETypeParameter e) {
-          List<? extends Object> _transform = Case_6.this.transform(e);
+    final Function1<ETypeParameter,Object> _function = new Function1<ETypeParameter,Object>() {
+        public Object apply(final ETypeParameter e) {
+          Object _transform = Case_6.this.transform(e);
           return _transform;
         }
       };
-    List<List<? extends Object>> _map = ListExtensions.<ETypeParameter, List<? extends Object>>map(_eTypeParameters, _function);
+    List<Object> _map = ListExtensions.<ETypeParameter, Object>map(_eTypeParameters, _function);
     return _map;
   }
   
-  public List<? extends Object> transform(final ENamedElement model) {
+  public Object transform(final ENamedElement model) {
     if (model instanceof EClass) {
       return _transform((EClass)model);
     } else if (model instanceof EStructuralFeature) {

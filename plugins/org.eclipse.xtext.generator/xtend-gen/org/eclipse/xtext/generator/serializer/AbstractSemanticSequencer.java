@@ -51,7 +51,6 @@ import org.eclipse.xtext.serializer.sequencer.ITransientValueService.ValueTransi
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
-import org.eclipse.xtext.xbase.lib.Functions.Function2;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.Pair;
@@ -74,19 +73,15 @@ public class AbstractSemanticSequencer extends GeneratedFile {
   private Context2NameFunction ctx2name;
   
   public <T extends ENamedElement> List<T> sortByName(final Iterable<T> iterable) {
-    final Function2<T,T,Integer> _function = new Function2<T,T,Integer>() {
-        public Integer apply(final T p1, final T p2) {
+    final Comparator<T> _function = new Comparator<T>() {
+        public int compare(final T p1, final T p2) {
           String _name = p1.getName();
           String _name_1 = p2.getName();
           int _compareTo = _name.compareTo(_name_1);
           return _compareTo;
         }
       };
-    List<T> _sort = IterableExtensions.<T>sort(iterable, new Comparator<T>() {
-        public int compare(T o1,T o2) {
-          return _function.apply(o1,o2);
-        }
-    });
+    List<T> _sort = IterableExtensions.<T>sort(iterable, _function);
     return _sort;
   }
   
@@ -256,7 +251,7 @@ public class AbstractSemanticSequencer extends GeneratedFile {
       _builder.append("}");
       _builder.newLine();
       String _string = _builder.toString();
-      file.setBody(_string);
+      file.body = _string;
       String _string_1 = file.toString();
       _xblockexpression = (_string_1);
     }

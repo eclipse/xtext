@@ -1,6 +1,5 @@
 package org.eclipse.xtext.xbase.junit.ui;
 
-import com.google.common.collect.Iterables;
 import com.google.inject.Inject;
 import com.google.inject.Injector;
 import com.google.inject.Provider;
@@ -20,8 +19,8 @@ import org.eclipse.xtext.junit4.util.ResourceLoadHelper;
 import org.eclipse.xtext.resource.FileExtensionProvider;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.resource.XtextResourceSet;
+import org.eclipse.xtext.xbase.lib.CollectionExtensions;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
-import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
@@ -64,7 +63,7 @@ public class AbstractContentAssistTest implements ResourceLoadHelper, IJavaProje
   protected ArrayList<String> expect(final String[]... arrays) {
     final ArrayList<String> expectation = CollectionLiterals.<String>newArrayList();
     for (final String[] array : arrays) {
-      Iterables.<String>addAll(expectation, ((Iterable<? extends String>)Conversions.doWrapArray(array)));
+      CollectionExtensions.<String>addAll(expectation, array);
     }
     return expectation;
   }

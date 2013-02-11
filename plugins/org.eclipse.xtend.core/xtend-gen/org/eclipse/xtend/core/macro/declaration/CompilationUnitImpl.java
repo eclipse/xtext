@@ -526,9 +526,9 @@ public class CompilationUnitImpl implements CompilationUnit, TypeReferenceProvid
   }
   
   public XtendMemberDeclarationImpl toXtendMemberDeclaration(final XtendMember delegate) {
-    final Function1<XtendMember,XtendMemberDeclarationImpl<?>> _function = new Function1<XtendMember,XtendMemberDeclarationImpl<?>>() {
-        public XtendMemberDeclarationImpl<?> apply(final XtendMember it) {
-          XtendMemberDeclarationImpl<?> _switchResult = null;
+    final Function1<XtendMember,XtendMemberDeclarationImpl<? extends XtendMember>> _function = new Function1<XtendMember,XtendMemberDeclarationImpl<? extends XtendMember>>() {
+        public XtendMemberDeclarationImpl<? extends XtendMember> apply(final XtendMember it) {
+          XtendMemberDeclarationImpl<? extends XtendMember> _switchResult = null;
           boolean _matched = false;
           if (!_matched) {
             if (delegate instanceof XtendTypeDeclaration) {
@@ -586,7 +586,7 @@ public class CompilationUnitImpl implements CompilationUnit, TypeReferenceProvid
           return _switchResult;
         }
       };
-    XtendMemberDeclarationImpl<?> _get = this.<XtendMember, XtendMemberDeclarationImpl<?>>get(delegate, _function);
+    XtendMemberDeclarationImpl _get = this.<XtendMember, XtendMemberDeclarationImpl>get(delegate, _function);
     return _get;
   }
   

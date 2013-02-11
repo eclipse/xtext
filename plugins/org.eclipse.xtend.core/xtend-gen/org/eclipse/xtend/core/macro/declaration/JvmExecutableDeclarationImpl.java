@@ -23,7 +23,6 @@ import org.eclipse.xtext.common.types.JvmExecutable;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmTypeConstraint;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
-import org.eclipse.xtext.common.types.JvmTypeParameterDeclarator;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.JvmUpperBound;
 import org.eclipse.xtext.common.types.TypesFactory;
@@ -34,7 +33,7 @@ import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 @SuppressWarnings("all")
 public abstract class JvmExecutableDeclarationImpl<T extends JvmExecutable> extends JvmMemberDeclarationImpl<T> implements MutableExecutableDeclaration {
   public List<MutableTypeParameterDeclaration> getTypeParameters() {
-    JvmTypeParameterDeclarator _delegate = this.getDelegate();
+    T _delegate = this.getDelegate();
     EList<JvmTypeParameter> _typeParameters = _delegate.getTypeParameters();
     final Function1<JvmTypeParameter,MutableTypeParameterDeclaration> _function = new Function1<JvmTypeParameter,MutableTypeParameterDeclaration>() {
         public MutableTypeParameterDeclaration apply(final JvmTypeParameter it) {
@@ -48,13 +47,13 @@ public abstract class JvmExecutableDeclarationImpl<T extends JvmExecutable> exte
   }
   
   public boolean isVarArgs() {
-    JvmExecutable _delegate = this.getDelegate();
+    T _delegate = this.getDelegate();
     boolean _isVarArgs = _delegate.isVarArgs();
     return _isVarArgs;
   }
   
   public List<MutableParameterDeclaration> getParameters() {
-    JvmExecutable _delegate = this.getDelegate();
+    T _delegate = this.getDelegate();
     EList<JvmFormalParameter> _parameters = _delegate.getParameters();
     final Function1<JvmFormalParameter,MutableParameterDeclaration> _function = new Function1<JvmFormalParameter,MutableParameterDeclaration>() {
         public MutableParameterDeclaration apply(final JvmFormalParameter it) {
@@ -68,7 +67,7 @@ public abstract class JvmExecutableDeclarationImpl<T extends JvmExecutable> exte
   }
   
   public List<TypeReference> getExceptions() {
-    JvmExecutable _delegate = this.getDelegate();
+    T _delegate = this.getDelegate();
     EList<JvmTypeReference> _exceptions = _delegate.getExceptions();
     final Function1<JvmTypeReference,TypeReference> _function = new Function1<JvmTypeReference,TypeReference>() {
         public TypeReference apply(final JvmTypeReference it) {
@@ -92,13 +91,13 @@ public abstract class JvmExecutableDeclarationImpl<T extends JvmExecutable> exte
   }
   
   public void setExceptions(final TypeReference... exceptions) {
-    JvmExecutable _delegate = this.getDelegate();
+    T _delegate = this.getDelegate();
     EList<JvmTypeReference> _exceptions = _delegate.getExceptions();
     _exceptions.clear();
     for (final TypeReference exceptionType : exceptions) {
       boolean _notEquals = ObjectExtensions.operator_notEquals(exceptionType, null);
       if (_notEquals) {
-        JvmExecutable _delegate_1 = this.getDelegate();
+        T _delegate_1 = this.getDelegate();
         EList<JvmTypeReference> _exceptions_1 = _delegate_1.getExceptions();
         CompilationUnitImpl _compilationUnit = this.getCompilationUnit();
         JvmTypeReference _jvmTypeReference = _compilationUnit.toJvmTypeReference(exceptionType);
@@ -108,14 +107,14 @@ public abstract class JvmExecutableDeclarationImpl<T extends JvmExecutable> exte
   }
   
   public void setVarArgs(final boolean isVarArgs) {
-    JvmExecutable _delegate = this.getDelegate();
+    T _delegate = this.getDelegate();
     _delegate.setVarArgs(isVarArgs);
   }
   
   public MutableTypeParameterDeclaration addTypeParameter(final String name, final TypeReference[] upperBounds) {
     final JvmTypeParameter param = TypesFactory.eINSTANCE.createJvmTypeParameter();
     param.setName(name);
-    JvmTypeParameterDeclarator _delegate = this.getDelegate();
+    T _delegate = this.getDelegate();
     EList<JvmTypeParameter> _typeParameters = _delegate.getTypeParameters();
     _typeParameters.add(param);
     for (final TypeReference upper : upperBounds) {
@@ -135,7 +134,7 @@ public abstract class JvmExecutableDeclarationImpl<T extends JvmExecutable> exte
   
   public void setBody(final Function1<? super CompilationContext,? extends CharSequence> compilationStrategy) {
     CompilationUnitImpl _compilationUnit = this.getCompilationUnit();
-    JvmExecutable _delegate = this.getDelegate();
+    T _delegate = this.getDelegate();
     _compilationUnit.setCompilationStrategy(_delegate, compilationStrategy);
   }
   
@@ -145,7 +144,7 @@ public abstract class JvmExecutableDeclarationImpl<T extends JvmExecutable> exte
     CompilationUnitImpl _compilationUnit = this.getCompilationUnit();
     JvmTypeReference _jvmTypeReference = _compilationUnit.toJvmTypeReference(type);
     param.setParameterType(_jvmTypeReference);
-    JvmExecutable _delegate = this.getDelegate();
+    T _delegate = this.getDelegate();
     EList<JvmFormalParameter> _parameters = _delegate.getParameters();
     _parameters.add(param);
     CompilationUnitImpl _compilationUnit_1 = this.getCompilationUnit();

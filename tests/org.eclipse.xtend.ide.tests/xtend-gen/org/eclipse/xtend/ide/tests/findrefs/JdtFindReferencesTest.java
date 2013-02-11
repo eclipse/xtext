@@ -1075,8 +1075,8 @@ public class JdtFindReferencesTest extends AbstractXtendUITestCase {
         final ArrayList<Object> elements = CollectionLiterals.<Object>newArrayList();
         final ISearchResult searchResult = query.getSearchResult();
         final MatchFilter[] filters = ((AbstractTextSearchResult) searchResult).getActiveMatchFilters();
-        final Procedure1<SearchResultEvent> _function = new Procedure1<SearchResultEvent>() {
-            public void apply(final SearchResultEvent it) {
+        final ISearchResultListener _function = new ISearchResultListener() {
+            public void searchResultChanged(final SearchResultEvent it) {
               events.add(it);
               if ((it instanceof MatchEvent)) {
                 Match[] _matches = ((MatchEvent) it).getMatches();
@@ -1116,11 +1116,7 @@ public class JdtFindReferencesTest extends AbstractXtendUITestCase {
               }
             }
           };
-        searchResult.addListener(new ISearchResultListener() {
-            public void searchResultChanged(SearchResultEvent e) {
-              _function.apply(e);
-            }
-        });
+        searchResult.addListener(_function);
         IWorkbenchWindow _activeWorkbenchWindow = this.workbench.getActiveWorkbenchWindow();
         SearchUtil.runQueryInForeground(_activeWorkbenchWindow, query);
         SearchResultEvent _head = IterableExtensions.<SearchResultEvent>head(events);
