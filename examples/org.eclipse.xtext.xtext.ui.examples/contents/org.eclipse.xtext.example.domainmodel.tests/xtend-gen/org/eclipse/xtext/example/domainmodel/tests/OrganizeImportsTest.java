@@ -21,6 +21,9 @@ import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+/**
+ * @author Jan Koehnlein - copied and adapted form Xtend
+ */
 @RunWith(value = XtextRunner.class)
 @InjectWith(value = DomainmodelInjectorProvider.class)
 @SuppressWarnings("all")
