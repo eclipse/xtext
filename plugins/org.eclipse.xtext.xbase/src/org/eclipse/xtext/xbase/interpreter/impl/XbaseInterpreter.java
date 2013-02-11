@@ -21,6 +21,7 @@ import java.lang.reflect.UndeclaredThrowableException;
 import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 import org.eclipse.xtext.common.types.JvmConstructor;
 import org.eclipse.xtext.common.types.JvmExecutable;
@@ -78,6 +79,9 @@ import org.eclipse.xtext.xbase.interpreter.IExpressionInterpreter;
 import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Functions;
 import org.eclipse.xtext.xbase.lib.Procedures;
+import org.eclipse.xtext.xbase.typesystem.IBatchTypeResolver;
+import org.eclipse.xtext.xbase.typesystem.IResolvedTypes;
+import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 import org.eclipse.xtext.xbase.typing.ITypeProvider;
 import org.eclipse.xtext.xbase.typing.NumberLiterals;
 import org.eclipse.xtext.xbase.util.XExpressionHelper;
@@ -85,6 +89,7 @@ import org.eclipse.xtext.xbase.util.XExpressionHelper;
 import com.google.common.base.Function;
 import com.google.common.base.Joiner;
 import com.google.common.collect.ImmutableList;
+import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
@@ -156,11 +161,14 @@ public class XbaseInterpreter implements IExpressionInterpreter {
 	
 	@Inject
 	private NumberLiterals numberLiterals;
+
+	@Inject
+	private IBatchTypeResolver typeResolver;
 	
 	private ClassFinder classFinder;
 
 	private ClassLoader classLoader;
-
+	
 	@Inject
 	public void setClassLoader(ClassLoader classLoader) {
 		this.classFinder = new ClassFinder(classLoader);
@@ -328,23 +336,39 @@ public class XbaseInterpreter implements IExpressionInterpreter {
 	}
 
 	protected Object _doEvaluate(XListLiteral literal, IEvaluationContext context, CancelIndicator indicator) {
+		LightweightTypeReference type = typeResolver.resolveTypes(literal).getActualType(literal);
 		ImmutableList.Builder<Object> builder = ImmutableList.builder();
 		for(XExpression element: literal.getElements()) {
 			if (indicator.isCanceled())
 				throw new InterpreterCanceledException();
 			builder.add(internalEvaluate(element, context, indicator));
 		}
-		return builder.build();
+		if(type.isArray())
+			return Iterables.toArray(builder.build(), Object.class);
+		else
+			return builder.build();
 	}
 
 	protected Object _doEvaluate(XSetLiteral literal, IEvaluationContext context, CancelIndicator indicator) {
-		ImmutableSet.Builder<Object> builder = ImmutableSet.builder();
-		for(XExpression element: literal.getElements()) {
-			if (indicator.isCanceled())
-				throw new InterpreterCanceledException();
-			builder.add(internalEvaluate(element, context, indicator));
+		LightweightTypeReference type = typeResolver.resolveTypes(literal).getActualType(literal);
+		if(type.isType(Map.class)) {
+			ImmutableMap.Builder<Object, Object> builder = ImmutableMap.builder();
+			for(XExpression element: literal.getElements()) {
+				if (indicator.isCanceled())
+					throw new InterpreterCanceledException();
+				builder.put(internalEvaluate(((XBinaryOperation)element).getLeftOperand(), context, indicator),
+					internalEvaluate(((XBinaryOperation)element).getRightOperand(), context, indicator));
+			}
+			return builder.build();
+		} else {
+			ImmutableSet.Builder<Object> builder = ImmutableSet.builder();
+			for(XExpression element: literal.getElements()) {
+				if (indicator.isCanceled())
+					throw new InterpreterCanceledException();
+				builder.add(internalEvaluate(element, context, indicator));
+			}
+			return builder.build();
 		}
-		return builder.build();
 	}
 
 	protected Object _doEvaluate(XClosure closure, IEvaluationContext context, CancelIndicator indicator) {
