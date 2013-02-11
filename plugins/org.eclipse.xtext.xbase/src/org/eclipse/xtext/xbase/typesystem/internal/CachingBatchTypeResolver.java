@@ -12,6 +12,7 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.xtext.resource.ISynchronizable;
 import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.util.OnChangeEvictingCache;
 import org.eclipse.xtext.util.concurrent.IUnitOfWork;
@@ -41,11 +42,11 @@ public class CachingBatchTypeResolver implements IBatchTypeResolver {
 		if (object == null || object.eIsProxy()) {
 			return IResolvedTypes.NULL;
 		}
-		Resource resource = object.eResource();
+		final Resource resource = object.eResource();
 		final LazyResolvedTypes result = cache.get(CachingBatchTypeResolver.class, resource, new Provider<LazyResolvedTypes>() {
 			public LazyResolvedTypes get() {
 				final IReentrantTypeResolver resolver = delegate.getTypeResolver(object);
-				return new LazyResolvedTypes(resolver);
+				return new LazyResolvedTypes(resolver, resource);
 			}
 		});
 		cache.execWithoutCacheClear(resource, new IUnitOfWork.Void<Resource>() {
@@ -59,7 +60,16 @@ public class CachingBatchTypeResolver implements IBatchTypeResolver {
 	
 	@NonNull
 	public IScope getFeatureScope(@Nullable XAbstractFeatureCall featureCall) {
-		return delegate.getFeatureScope(featureCall);
+		if (featureCall != null) {
+			Resource resource = featureCall.eResource();
+			if (resource instanceof ISynchronizable<?>) {
+				synchronized(((ISynchronizable<?>) resource).getLock()) {
+					return delegate.getFeatureScope(featureCall);
+				}
+			}
+			return delegate.getFeatureScope(featureCall);
+		}
+		return IScope.NULLSCOPE;
 	}
 	
 	@NonNullByDefault
@@ -67,16 +77,19 @@ public class CachingBatchTypeResolver implements IBatchTypeResolver {
 
 		private final IReentrantTypeResolver resolver;
 
+		private final Resource resource;
+		
 		private volatile IResolvedTypes delegate;
 		
-		public LazyResolvedTypes(IReentrantTypeResolver resolver) {
+		public LazyResolvedTypes(IReentrantTypeResolver resolver, Resource resource) {
 			this.resolver = resolver;
+			this.resource = resource;
 		}
 
 		@Override
 		protected IResolvedTypes delegate() {
 			if (this.delegate == null) {
-				synchronized (this) {
+				synchronized (getLock()) {
 					if (this.delegate == null) {
 						IResolvedTypes result = resolver.reentrantResolve();
 						this.delegate = result;
@@ -85,6 +98,13 @@ public class CachingBatchTypeResolver implements IBatchTypeResolver {
 				}
 			}
 			return delegate;
+		}
+		
+		protected Object getLock() {
+			if (resource instanceof ISynchronizable<?>) {
+				return ((ISynchronizable<?>) resource).getLock();
+			}
+			return resource;
 		}
 		
 	}
