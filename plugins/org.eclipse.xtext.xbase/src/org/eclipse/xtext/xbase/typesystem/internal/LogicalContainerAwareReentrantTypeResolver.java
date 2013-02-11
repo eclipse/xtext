@@ -24,6 +24,7 @@ import org.eclipse.xtext.common.types.JvmConstructor;
 import org.eclipse.xtext.common.types.JvmCustomAnnotationValue;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmExecutable;
+import org.eclipse.xtext.common.types.JvmFeature;
 import org.eclipse.xtext.common.types.JvmField;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmGenericType;
@@ -242,10 +243,25 @@ public class LogicalContainerAwareReentrantTypeResolver extends DefaultReentrant
 	protected StackedResolvedTypes declareTypeParameters(ResolvedTypes resolvedTypes, JvmIdentifiableElement declarator,
 			Map<JvmIdentifiableElement, ResolvedTypes> resolvedTypesByContext) {
 		StackedResolvedTypes childResolvedTypes = resolvedTypes.pushTypes();
-		if (declarator instanceof JvmTypeParameterDeclarator)
-			childResolvedTypes.addDeclaredTypeParameters(((JvmTypeParameterDeclarator) declarator).getTypeParameters());
+		if (declarator instanceof JvmTypeParameterDeclarator) {
+			if (isStatic(declarator)) {
+				childResolvedTypes.replaceDeclaredTypeParameters(((JvmTypeParameterDeclarator) declarator).getTypeParameters());
+			} else {
+				childResolvedTypes.addDeclaredTypeParameters(((JvmTypeParameterDeclarator) declarator).getTypeParameters());
+			}
+		}
 		resolvedTypesByContext.put(declarator, childResolvedTypes);
 		return childResolvedTypes;
+	}
+	
+	protected boolean isStatic(JvmIdentifiableElement declarator) {
+		if (declarator instanceof JvmFeature) {
+			return ((JvmFeature) declarator).isStatic();
+		}
+		if (declarator instanceof JvmDeclaredType) {
+			return ((JvmDeclaredType) declarator).isStatic();
+		}
+		return false;
 	}
 
 	protected void _doPrepare(ResolvedTypes resolvedTypes, IFeatureScopeSession featureScopeSession, JvmField field, Map<JvmIdentifiableElement, ResolvedTypes> resolvedTypesByContext) {
