@@ -666,9 +666,8 @@ public class IterableExtensions {
 	 *         implements {@link List}, otherwise a copy is returned. Never <code>null</code>.
 	 */
 	@Beta
-	public static <T> List<T> toList(Iterable<? extends T> iterable) {
+	public static <T> List<T> toList(Iterable<T> iterable) {
 		if (iterable instanceof List<?>) {
-			@SuppressWarnings("unchecked")
 			List<T> result = (List<T>) iterable;
 			return result;
 		}
@@ -686,9 +685,8 @@ public class IterableExtensions {
 	 *         implements {@link Set}, otherwise a copy is returned. Never <code>null</code>.
 	 */
 	@Beta
-	public static <T> Set<T> toSet(Iterable<? extends T> iterable) {
+	public static <T> Set<T> toSet(Iterable<T> iterable) {
 		if (iterable instanceof Set<?>) {
-			@SuppressWarnings("unchecked")
 			Set<T> result = (Set<T>) iterable;
 			return result;
 		}
