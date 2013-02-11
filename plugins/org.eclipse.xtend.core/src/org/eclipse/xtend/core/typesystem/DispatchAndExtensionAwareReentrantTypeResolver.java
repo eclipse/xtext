@@ -62,12 +62,12 @@ import org.eclipse.xtext.xbase.typesystem.references.OwnedConverter;
 import org.eclipse.xtext.xbase.typesystem.references.ParameterizedTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.WildcardTypeReference;
 import org.eclipse.xtext.xbase.typesystem.util.AbstractReentrantTypeReferenceProvider;
+import org.eclipse.xtext.xbase.typesystem.util.Maps2;
 import org.eclipse.xtext.xbase.validation.IssueCodes;
 import org.eclipse.xtext.xtype.XComputedTypeReference;
 import org.eclipse.xtext.xtype.impl.XComputedTypeReferenceImplCustom;
 
 import com.google.common.collect.Lists;
-import com.google.common.collect.Maps;
 import com.google.inject.Inject;
 
 /**
@@ -505,7 +505,7 @@ public class DispatchAndExtensionAwareReentrantTypeResolver extends LogicalConta
 		for(JvmField field: fields) {
 			if (isExtensionField(field)) {
 				if (extensionProviders == null)
-					extensionProviders = Maps.newHashMapWithExpectedSize(3);
+					extensionProviders = Maps2.newLinkedHashMapWithExpectedSize(3);
 				XMemberFeatureCall extensionProvider = createExtensionProvider(thisFeature, field);
 				LightweightTypeReference fieldType = resolvedTypes.getActualType(field);
 				extensionProviders.put(extensionProvider, fieldType);
