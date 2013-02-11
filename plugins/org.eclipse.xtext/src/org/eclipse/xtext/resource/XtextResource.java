@@ -23,6 +23,7 @@ import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.impl.ResourceImpl;
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.Constants;
 import org.eclipse.xtext.diagnostics.Severity;
@@ -285,6 +286,19 @@ public class XtextResource extends ResourceImpl {
 
 	@Override
 	public EObject getEObject(String uriFragment) {
+		return basicGetEObject(uriFragment);
+	}
+
+	/**
+	 * Resolves a fragment to an {@link EObject}. The returned object is not necessarily
+	 * contained in this resource. It may resolve to a different one, instead.
+	 * The result may be <code>null</code>.
+	 * 
+	 * @see ResourceImpl#getEObject(String)
+	 * @see IFragmentProvider
+	 * @since 2.4
+	 */
+	protected EObject basicGetEObject(@NonNull String uriFragment) {
 		if (fragmentProvider != null) {
 			EObject result = fragmentProvider.getEObject(this, uriFragment, fragmentProviderFallback);
 			return result;

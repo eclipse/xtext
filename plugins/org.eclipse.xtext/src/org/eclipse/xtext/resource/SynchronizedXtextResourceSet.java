@@ -10,11 +10,14 @@ import org.eclipse.emf.common.util.AbstractEList;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.NonNullByDefault;
+import org.eclipse.xtext.util.concurrent.IUnitOfWork;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public class SynchronizedXtextResourceSet extends XtextResourceSet {
+public class SynchronizedXtextResourceSet extends XtextResourceSet implements ISynchronizable<SynchronizedXtextResourceSet> {
 	private final Object lock = new Object();
 
 	@Override
@@ -35,6 +38,27 @@ public class SynchronizedXtextResourceSet extends XtextResourceSet {
 	@Override
 	public EList<Resource> getResources() {
 		return super.getResources();
+	}
+	
+	/**
+	 * Returns a synchronization lock that works for the complete resource set.
+	 * @since 2.4
+	 */
+	@NonNull
+	public Object getLock() {
+		return lock;
+	}
+	
+	/**
+	 * {@inheritDoc}
+	 * 
+	 * @since 2.4
+	 */
+	@NonNullByDefault
+	public <Result> Result execute(IUnitOfWork<Result, ? super SynchronizedXtextResourceSet> unit) throws Exception {
+		synchronized (getLock()) {
+			return unit.exec(this);
+		}
 	}
 
 	/**
