@@ -198,7 +198,7 @@ public class XtendFormatterBugTests extends AbstractXtendFormatterTest {
     _builder.newLine();
     this.assertFormatted(_builder);
   }
-
+  
   @Test
   public void testBug400030() {
     StringConcatenation _builder = new StringConcatenation();
@@ -215,7 +215,7 @@ public class XtendFormatterBugTests extends AbstractXtendFormatterTest {
     _builder.newLine();
     this.assertFormatted(_builder);
   }
-
+  
   @Ignore
   @Test
   public void testBug400025() {
@@ -229,7 +229,7 @@ public class XtendFormatterBugTests extends AbstractXtendFormatterTest {
     _builder.newLine();
     this.assertFormattedExpression(_builder);
   }
-
+  
   @Ignore
   @Test
   public void testBug400025_1() {
@@ -249,7 +249,7 @@ public class XtendFormatterBugTests extends AbstractXtendFormatterTest {
     _builder.newLine();
     this.assertFormattedExpression(_builder);
   }
-
+  
   @Ignore
   @Test
   public void testBug400025_2() {
@@ -266,7 +266,7 @@ public class XtendFormatterBugTests extends AbstractXtendFormatterTest {
     _builder.newLine();
     this.assertFormattedExpression(_builder);
   }
-
+  
   @Ignore
   @Test
   public void testBug400024() {
@@ -299,7 +299,7 @@ public class XtendFormatterBugTests extends AbstractXtendFormatterTest {
     _builder.newLine();
     this.assertFormatted(_builder);
   }
-
+  
   @Ignore
   @Test
   public void testBug400024_1() {
