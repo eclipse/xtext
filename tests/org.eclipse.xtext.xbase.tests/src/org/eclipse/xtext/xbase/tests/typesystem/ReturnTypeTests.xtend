@@ -277,7 +277,7 @@ abstract class AbstractBatchReturnTypeTest extends AbstractReturnTypeTest<Lightw
 		assertEquals(expression, type, resolvedType.simpleName);
 	}
 	
-	def hasReturnExpression(XExpression expression) {
+	def boolean hasReturnExpression(XExpression expression) {
 		switch(expression) {
 			XReturnExpression: true
 			XThrowExpression: true

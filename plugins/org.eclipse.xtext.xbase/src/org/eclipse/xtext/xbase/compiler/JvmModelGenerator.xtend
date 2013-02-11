@@ -139,7 +139,7 @@ class JvmModelGenerator implements IGenerator {
 	}
 	
 	
-	def dispatch generateBody(JvmGenericType it, ITreeAppendable appendable, GeneratorConfig config) {
+	def dispatch ITreeAppendable generateBody(JvmGenericType it, ITreeAppendable appendable, GeneratorConfig config) {
 		generateJavaDoc(appendable, config)
 		val childAppendable = appendable.trace(it)
 		if(config.generateSyntheticSuppressWarnings)
@@ -176,7 +176,7 @@ class JvmModelGenerator implements IGenerator {
 		appendable.append('''@SuppressWarnings("all")''').newLine
 	}
 
-	def dispatch generateBody(JvmEnumerationType it, ITreeAppendable appendable, GeneratorConfig config) {
+	def dispatch ITreeAppendable generateBody(JvmEnumerationType it, ITreeAppendable appendable, GeneratorConfig config) {
 		generateJavaDoc(appendable, config)
 		val childAppendable = appendable.trace(it)
 		if(config.generateSyntheticSuppressWarnings)
@@ -211,7 +211,7 @@ class JvmModelGenerator implements IGenerator {
 		// TODO: constructor args
 	}
 	
-	def dispatch generateBody(JvmAnnotationType it, ITreeAppendable appendable, GeneratorConfig config) {
+	def dispatch ITreeAppendable generateBody(JvmAnnotationType it, ITreeAppendable appendable, GeneratorConfig config) {
 		generateJavaDoc(appendable, config)
 		val childAppendable = appendable.trace(it)
 		annotations.generateAnnotations(childAppendable, true, config)

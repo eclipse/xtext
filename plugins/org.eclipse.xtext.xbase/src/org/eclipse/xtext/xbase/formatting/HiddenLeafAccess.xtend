@@ -86,6 +86,7 @@ class HiddenLeafAccess {
 					return previous as ILeafNode
 			}
 		}
+		return null
 	}
 	
 	def protected List<ILeafNode> findPreviousHiddenLeafs(INode node) {

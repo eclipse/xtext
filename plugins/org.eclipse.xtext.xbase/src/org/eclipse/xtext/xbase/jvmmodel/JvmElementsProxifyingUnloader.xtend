@@ -20,7 +20,7 @@ class JvmElementsProxifyingUnloader implements IReferableElementsUnloader {
 		}
 	}
 	
-	def protected unloadRecursively(JvmIdentifiableElement element) {
+	def protected void unloadRecursively(JvmIdentifiableElement element) {
 //		Adapters would have to be removed first, because you end up with a StackOverflow if a content adapted is unloaded
 //		However, this is disabled, as we are very selectively proxifying elements here, and it isn't sound to remove only half of the adapters.
 //		element.eAdapters.clear;
