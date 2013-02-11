@@ -59,7 +59,7 @@ import org.eclipse.xtext.common.types.TypesPackage
 import org.eclipse.xtext.common.types.util.TypeReferences
 import org.eclipse.xtext.diagnostics.Severity
 import org.eclipse.xtext.validation.EObjectDiagnosticImpl
-import org.eclipse.xtext.xbase.compiler.TypeReferenceSerializer2
+import org.eclipse.xtext.xbase.compiler.TypeReferenceSerializer
 import org.eclipse.xtext.xbase.jvmmodel.JvmTypesBuilder
 import org.eclipse.xtext.xbase.typesystem.legacy.StandardTypeReferenceOwner
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference
@@ -97,7 +97,7 @@ class CompilationUnitImpl implements CompilationUnit, TypeReferenceProvider, Pro
 	@Inject CommonTypeComputationServices services;
 	@Inject TypeReferences typeReferences
 	@Inject JvmTypesBuilder typesBuilder
-	@Inject TypeReferenceSerializer2 typeRefSerializer
+	@Inject TypeReferenceSerializer typeRefSerializer
 	@Inject IXtendJvmAssociations associations
 	
 	Map<EObject, Object> identityCache = newHashMap
