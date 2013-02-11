@@ -1,6 +1,7 @@
 package org.eclipse.xtend.core.tests.formatting
 
 import org.junit.Test
+import org.junit.Ignore
 
 class XtendFormatterBugTests extends AbstractXtendFormatterTest {
 
@@ -96,4 +97,79 @@ class XtendFormatterBugTests extends AbstractXtendFormatterTest {
 			}
 		''')	
 	}
+
+	@Test
+	def testBug400030(){
+		assertFormatted('''
+		class Foo {
+
+			/** foo */
+			val bar = 3
+		}
+		''')
+	}
+	@Ignore
+	@Test
+	def testBug400025(){
+		assertFormattedExpression('''
+		{
+			// foo
+		}
+		''')
+	}
+	@Ignore
+	@Test
+	def testBug400025_1(){
+		assertFormattedExpression('''
+		{
+			/*
+			* foo
+			*/
+		}
+		''')
+	}
+	@Ignore
+	@Test
+	def testBug400025_2(){
+		assertFormattedExpression('''
+		{
+			// foo
+			val foo = 42
+		}
+		''')
+	}
+	@Ignore
+	@Test
+	def testBug400024(){
+		assertFormatted('''
+		class Foo {
+
+			def bar() {
+				typeof(XtextAntlrGeneratorFragment).getInstance => [
+					// options = new AntlrOptions => [
+					//  backtrack = true
+					// ]
+				]
+			}
+		}
+		''')
+	}
+	@Ignore
+	@Test
+	def testBug400024_1(){
+		assertFormatted('''
+		class Foo {
+
+			def bar() {
+				typeof(XtextAntlrGeneratorFragment).getInstance => [
+					/*
+					 * Foo.
+					 */
+				]
+			}
+		}
+		''')
+	}
+
+
 }
