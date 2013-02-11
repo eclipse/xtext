@@ -20,8 +20,6 @@ import org.eclipse.emf.ecore.EcoreFactory;
 import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.impl.ResourceImpl;
-import org.eclipse.xtext.XtextFactory;
-import org.eclipse.xtext.XtextPackage;
 import org.eclipse.xtext.validation.ValidationTestHelper.TestChain;
 import org.junit.After;
 import org.junit.Assert;
@@ -73,7 +71,6 @@ public class DeclarativeValidatorTest extends Assert {
 	@SuppressWarnings("serial")
 	@Test public void testSkipExpensive() throws Exception {
 		AbstractDeclarativeValidator test = new ValidationTestHelper.TestValidator() {
-			@SuppressWarnings("unused")
 			@Check(CheckType.EXPENSIVE)
 			public void bar(Object x) {
 				error("fooObject", EcorePackage.Literals.ECLASS__EALL_ATTRIBUTES);
@@ -110,7 +107,6 @@ public class DeclarativeValidatorTest extends Assert {
 
 	@Test public void testGuard() throws Exception {
 		AbstractDeclarativeValidator validator = new AbstractDeclarativeValidator() {
-			@SuppressWarnings("unused")
 			@Check
 			public void guarded(EClass x) {
 				guard("".equals(x.getName()));
@@ -203,7 +199,6 @@ public class DeclarativeValidatorTest extends Assert {
 	@Test public void testError() {
 		AbstractDeclarativeValidator test = new AbstractDeclarativeValidator() {
 			@Check
-			@SuppressWarnings("unused")
 			public void foo(Object x) {
 				error("Error Message", EcorePackage.Literals.ENAMED_ELEMENT__NAME);
 			}
@@ -221,7 +216,6 @@ public class DeclarativeValidatorTest extends Assert {
 	@Test public void testErrorWithSource() {
 		AbstractDeclarativeValidator test = new AbstractDeclarativeValidator() {
 			@Check
-			@SuppressWarnings("unused")
 			public void foo(Object x) {
 				error(
 						"Error Message", 
@@ -243,7 +237,6 @@ public class DeclarativeValidatorTest extends Assert {
 	@Test public void testErrorWithCode() {
 		AbstractDeclarativeValidator test = new AbstractDeclarativeValidator() {
 			@Check
-			@SuppressWarnings("unused")
 			public void foo(Object x) {
 				error(
 						"Error Message", 
@@ -267,7 +260,6 @@ public class DeclarativeValidatorTest extends Assert {
 	@Test public void testWarning() {
 		AbstractDeclarativeValidator test = new AbstractDeclarativeValidator() {
 			@Check
-			@SuppressWarnings("unused")
 			public void foo(Object x) {
 				warning("Error Message", EcorePackage.Literals.ENAMED_ELEMENT__NAME);
 			}
@@ -285,7 +277,6 @@ public class DeclarativeValidatorTest extends Assert {
 	@Test public void testWarningWithSource() {
 		AbstractDeclarativeValidator test = new AbstractDeclarativeValidator() {
 			@Check
-			@SuppressWarnings("unused")
 			public void foo(Object x) {
 				warning(
 						"Error Message", 
@@ -307,7 +298,6 @@ public class DeclarativeValidatorTest extends Assert {
 	@Test public void testWarningWithCode() {
 		AbstractDeclarativeValidator test = new AbstractDeclarativeValidator() {
 			@Check
-			@SuppressWarnings("unused")
 			public void foo(Object x) {
 				warning(
 						"Error Message", 
