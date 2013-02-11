@@ -34,8 +34,8 @@ import org.eclipse.xtext.xbase.typesystem.references.ParameterizedTypeReference;
 import org.eclipse.xtext.xbase.typesystem.util.CommonTypeComputationServices;
 import org.eclipse.xtext.xbase.typesystem.util.ContextualVisibilityHelper;
 import org.eclipse.xtext.xbase.typesystem.util.IVisibilityHelper;
+import org.eclipse.xtext.xbase.typesystem.util.Multimaps2;
 
-import com.google.common.collect.ArrayListMultimap;
 import com.google.common.collect.ListMultimap;
 import com.google.common.collect.Lists;
 import com.google.inject.Inject;
@@ -249,7 +249,7 @@ public class DispatchHelper {
 	 * @return a mapping from {@link DispatchSignature signature} to sorted operations.
 	 */
 	public ListMultimap<DispatchSignature, JvmOperation> getDeclaredDispatchMethods(JvmDeclaredType type) {
-		ListMultimap<DispatchSignature, JvmOperation> result = ArrayListMultimap.create();
+		ListMultimap<DispatchSignature, JvmOperation> result = Multimaps2.newLinkedHashListMultimap(2,4);
 		Iterable<JvmOperation> operations = type.getDeclaredOperations();
 		ITypeReferenceOwner owner = new StandardTypeReferenceOwner(services, type);
 		ContextualVisibilityHelper contextualVisibilityHelper = new ContextualVisibilityHelper(visibilityHelper, new ParameterizedTypeReference(owner, type));
