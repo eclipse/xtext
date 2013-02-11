@@ -33,14 +33,13 @@ import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.TypesPackage;
-import org.eclipse.xtext.common.types.util.ITypeArgumentContext;
-import org.eclipse.xtext.common.types.util.TypeArgumentContextProvider;
 import org.eclipse.xtext.generator.trace.ILocationData;
 import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 import org.eclipse.xtext.util.Tuples;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
+import org.eclipse.xtext.xbase.XBinaryOperation;
 import org.eclipse.xtext.xbase.XBlockExpression;
 import org.eclipse.xtext.xbase.XCasePart;
 import org.eclipse.xtext.xbase.XCastedExpression;
@@ -83,6 +82,7 @@ import org.eclipse.xtext.xbase.typing.Closures;
 import com.google.common.base.Objects;
 import com.google.common.base.Predicate;
 import com.google.common.collect.ImmutableList;
+import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
@@ -103,16 +103,7 @@ public class XbaseCompiler extends FeatureCallCompiler {
 	@Inject
 	private CommonTypeComputationServices services;
 	
-	protected void _toJavaStatement(XListLiteral expr, ITreeAppendable b, boolean isReferenced) {
-		toCollectionBuilderJavaStatement(expr, ImmutableList.Builder.class, b, isReferenced);
-	}
-
-	protected void _toJavaStatement(XSetLiteral expr, ITreeAppendable b, boolean isReferenced) {
-		toCollectionBuilderJavaStatement(expr, ImmutableSet.Builder.class, b, isReferenced);
-	}
-
-	protected void toCollectionBuilderJavaStatement(XCollectionLiteral literal, Class<?> builderClass, ITreeAppendable b,
-			boolean isReferenced) {
+	protected void _toJavaStatement(XListLiteral literal, ITreeAppendable b, boolean isReferenced) {
 		for(XExpression element: literal.getElements()) 
 			internalToJavaStatement(element, b, true);
 		if(isReferenced)
@@ -133,25 +124,68 @@ public class XbaseCompiler extends FeatureCallCompiler {
 			}
 			b.append(" };");
 		} else {
-			LightweightTypeReference elementType = getCollectionElementType(literal);
+			toCollectionBuilderJavaStatement(literal, ImmutableList.Builder.class, b, isReferenced);
+		}
+	}
+
+	protected void _toJavaStatement(XSetLiteral literal, ITreeAppendable b, boolean isReferenced) {
+		if(isReferenced)
+			declareSyntheticVariable(literal, b);
+		LightweightTypeReference literalType = batchTypeResolver.resolveTypes(literal).getActualType(literal);
+		if(literalType.isType(Map.class)) {
+			for(XExpression element: literal.getElements()) {
+				internalToJavaStatement(((XBinaryOperation) element).getLeftOperand(), b, true);
+				internalToJavaStatement(((XBinaryOperation) element).getRightOperand(), b, true);
+			}
 			String builderVar = b.declareSyntheticVariable(getCollectionLiteralBuilderKey(literal), "_builder");
-			JvmType builderRawType = getTypeReferences().findDeclaredType(builderClass, literal);
-			ParameterizedTypeReference builderType = new ParameterizedTypeReference(elementType.getOwner(), builderRawType);
-			builderType.addTypeArgument(elementType);
+			LightweightTypeReference keyType = literalType.getTypeArguments().get(0);
+			LightweightTypeReference valueType = literalType.getTypeArguments().get(1);
+			JvmType builderRawType = getTypeReferences().findDeclaredType(ImmutableMap.Builder.class, literal);
+			ParameterizedTypeReference builderType = new ParameterizedTypeReference(keyType.getOwner(), builderRawType);
+			builderType.addTypeArgument(keyType);
+			builderType.addTypeArgument(valueType);
 			b.newLine();
 			getTypeReferenceSerializer().serialize(builderType.toTypeReference(), literal, b);
 			b.append(" ").append(builderVar).append(" = ");
-			JvmDeclaredType listType = ((JvmDeclaredType) builderType.getType()).getDeclaringType();
-			b.append(listType).append(".builder();").newLine();
+			JvmDeclaredType collectionType = ((JvmDeclaredType) builderType.getType()).getDeclaringType();
+			b.append(collectionType).append(".builder();").newLine();
 			for(XExpression element: literal.getElements())  {
-				b.append(builderVar).append(".add(");
-				internalToJavaExpression(element, b);
+				b.append(builderVar).append(".put(");
+				internalToJavaExpression(((XBinaryOperation) element).getLeftOperand(), b);
+				b.append(", ");
+				internalToJavaExpression(((XBinaryOperation) element).getRightOperand(), b);
 				b.append(");").newLine();
 			}
 			if(isReferenced) 
 				b.append(getVarName(literal, b)).append(" = ");
 			b.append(builderVar).append(".build();");
+		} else {
+			for(XExpression element: literal.getElements()) 
+				internalToJavaStatement(element, b, true);
+			toCollectionBuilderJavaStatement(literal, ImmutableSet.Builder.class, b, isReferenced);
 		}
+	}
+
+	protected void toCollectionBuilderJavaStatement(XCollectionLiteral literal, Class<?> builderClass, ITreeAppendable b,
+			boolean isReferenced) {
+		LightweightTypeReference elementType = getCollectionElementType(literal);
+		String builderVar = b.declareSyntheticVariable(getCollectionLiteralBuilderKey(literal), "_builder");
+		JvmType builderRawType = getTypeReferences().findDeclaredType(builderClass, literal);
+		ParameterizedTypeReference builderType = new ParameterizedTypeReference(elementType.getOwner(), builderRawType);
+		builderType.addTypeArgument(elementType);
+		b.newLine();
+		getTypeReferenceSerializer().serialize(builderType.toTypeReference(), literal, b);
+		b.append(" ").append(builderVar).append(" = ");
+		JvmDeclaredType collectionType = ((JvmDeclaredType) builderType.getType()).getDeclaringType();
+		b.append(collectionType).append(".builder();").newLine();
+		for(XExpression element: literal.getElements())  {
+			b.append(builderVar).append(".add(");
+			internalToJavaExpression(element, b);
+			b.append(");").newLine();
+		}
+		if(isReferenced) 
+			b.append(getVarName(literal, b)).append(" = ");
+		b.append(builderVar).append(".build();");
 	}
 	
 	protected LightweightTypeReference getCollectionElementType(XCollectionLiteral literal) {

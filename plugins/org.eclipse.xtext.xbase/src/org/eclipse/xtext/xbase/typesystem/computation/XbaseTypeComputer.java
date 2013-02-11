@@ -9,7 +9,6 @@ package org.eclipse.xtext.xbase.typesystem.computation;
 
 import static com.google.common.collect.Lists.*;
 
-import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -52,6 +51,7 @@ import org.eclipse.xtext.xbase.XTryCatchFinallyExpression;
 import org.eclipse.xtext.xbase.XTypeLiteral;
 import org.eclipse.xtext.xbase.XVariableDeclaration;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
+import org.eclipse.xtext.xbase.lib.Pair;
 import org.eclipse.xtext.xbase.typesystem.conformance.ConformanceHint;
 import org.eclipse.xtext.xbase.typesystem.conformance.TypeConformanceComputationArgument;
 import org.eclipse.xtext.xbase.typesystem.conformance.TypeConformanceResult;
@@ -403,52 +403,86 @@ public class XbaseTypeComputer implements ITypeComputer {
 		}
 	}
 	
-	protected void _computeTypes(XListLiteral object, ITypeComputationState state) {
-		JvmGenericType list = (JvmGenericType) services.getTypeReferences().findDeclaredType(List.class, object);
-		computeCollectionLiteralTypes(object, list, state);
-	}
-	
-	protected void _computeTypes(XSetLiteral object, ITypeComputationState state) {
-		JvmGenericType set = (JvmGenericType) services.getTypeReferences().findDeclaredType(Set.class, object);
-		computeCollectionLiteralTypes(object, set, state);
-	}
-	
-	protected void computeCollectionLiteralTypes(XCollectionLiteral literal, JvmGenericType collectionType, ITypeComputationState state) {
+	protected void _computeTypes(XListLiteral literal, ITypeComputationState state) {
+		JvmGenericType listType = (JvmGenericType) services.getTypeReferences().findDeclaredType(List.class, literal);
 		for(ITypeExpectation expectation: state.getExpectations()) {
-			List<LightweightTypeReference> collectionTypeCandidates = newArrayList();
 			LightweightTypeReference elementTypeExpectation = null;
 			LightweightTypeReference expectedType = expectation.getExpectedType();
 			if(expectedType != null) {
+				elementTypeExpectation = getElementOrComponentType(expectedType, state);
 				if(expectedType.isArray()) {
 					elementTypeExpectation = expectedType.getComponentType();
 					for(XExpression element: literal.getElements()) 
 						state.withExpectation(elementTypeExpectation).computeTypes(element);
 					expectation.acceptActualType(expectedType, ConformanceHint.UNCHECKED);
 					return; 
-				} else if(expectedType.isSubtypeOf(Collection.class) &&
-						!expectedType.getTypeArguments().isEmpty()) {
-					elementTypeExpectation = expectedType.getTypeArguments().get(0).getInvariantBoundSubstitute();
 				}
 			}
-			if(!literal.getElements().isEmpty()) {
-				for(XExpression element: literal.getElements()) {
-					ITypeComputationResult elementType = state.withExpectation(elementTypeExpectation).computeTypes(element);
-					if(!elementType.getActualExpressionType().isAny()) {
-						ParameterizedTypeReference collectionTypeCandidate = new ParameterizedTypeReference(state.getReferenceOwner(), collectionType);
-						collectionTypeCandidate.addTypeArgument(elementType.getActualExpressionType().getWrapperTypeIfPrimitive());
-						collectionTypeCandidates.add(collectionTypeCandidate);
-					}
-				}
-			}
-			if(!collectionTypeCandidates.isEmpty()) {
-				LightweightTypeReference commonListType = services.getTypeConformanceComputer().getCommonSuperType(collectionTypeCandidates);
+			List<LightweightTypeReference> listTypeCandidates = computeCollectionTypeCandidates(literal, listType, elementTypeExpectation, state);
+			if(!listTypeCandidates.isEmpty()) {
+				LightweightTypeReference commonListType = services.getTypeConformanceComputer().getCommonSuperType(listTypeCandidates);
 				expectation.acceptActualType(commonListType, ConformanceHint.UNCHECKED);
 			} else {
-				ParameterizedTypeReference unboundCollectionType = new ParameterizedTypeReference(state.getReferenceOwner(), collectionType);
-				unboundCollectionType.addTypeArgument(expectation.createUnboundTypeReference(literal, collectionType.getTypeParameters().get(0)));
+				ParameterizedTypeReference unboundCollectionType = new ParameterizedTypeReference(state.getReferenceOwner(), listType);
+				unboundCollectionType.addTypeArgument(expectation.createUnboundTypeReference(literal, listType.getTypeParameters().get(0)));
 				expectation.acceptActualType(unboundCollectionType, ConformanceHint.UNCHECKED);
 			}
 		}
+
+	}
+	
+	protected void _computeTypes(XSetLiteral literal, ITypeComputationState state) {
+		JvmGenericType setType = (JvmGenericType) services.getTypeReferences().findDeclaredType(Set.class, literal);
+		JvmGenericType mapType = (JvmGenericType) services.getTypeReferences().findDeclaredType(Map.class, literal);
+		for(ITypeExpectation expectation: state.getExpectations()) {
+			LightweightTypeReference elementTypeExpectation = null;
+			LightweightTypeReference expectedType = expectation.getExpectedType();
+			if(expectedType != null) {
+				elementTypeExpectation = getElementOrComponentType(expectedType, state);
+			}
+			List<LightweightTypeReference> setTypeCandidates = computeCollectionTypeCandidates(literal, setType, elementTypeExpectation, state);
+			if(!setTypeCandidates.isEmpty()) {
+				LightweightTypeReference commonSetType = services.getTypeConformanceComputer().getCommonSuperType(setTypeCandidates);
+				LightweightTypeReference commonElementType = commonSetType.getTypeArguments().get(0).getInvariantBoundSubstitute();
+				JvmGenericType pairType = (JvmGenericType) services.getTypeReferences().findDeclaredType(Pair.class, literal);
+				if(!(expectedType != null && expectedType.isType(Set.class)) && commonElementType.getType() == pairType) {
+					Map<JvmTypeParameter, LightweightMergedBoundTypeArgument> typeParameterMapping = new DeclaratorTypeArgumentCollector().getTypeParameterMapping(commonElementType);
+					ParameterizedTypeReference boundMapType = new ParameterizedTypeReference(state.getReferenceOwner(), mapType);
+					boundMapType.addTypeArgument(typeParameterMapping.get(pairType.getTypeParameters().get(0)).getTypeReference().getInvariantBoundSubstitute());
+					boundMapType.addTypeArgument(typeParameterMapping.get(pairType.getTypeParameters().get(1)).getTypeReference().getInvariantBoundSubstitute());
+					expectation.acceptActualType(boundMapType, ConformanceHint.UNCHECKED);
+				} else {
+					expectation.acceptActualType(commonSetType, ConformanceHint.UNCHECKED);
+				}
+			} else {
+				if(expectedType != null && expectedType.isType(Map.class)) {
+					ParameterizedTypeReference unboundCollectionType = new ParameterizedTypeReference(state.getReferenceOwner(), mapType);
+					unboundCollectionType.addTypeArgument(expectation.createUnboundTypeReference(literal, mapType.getTypeParameters().get(0)));
+					unboundCollectionType.addTypeArgument(expectation.createUnboundTypeReference(literal, mapType.getTypeParameters().get(1)));
+					expectation.acceptActualType(unboundCollectionType, ConformanceHint.UNCHECKED);
+				} else {
+					ParameterizedTypeReference unboundCollectionType = new ParameterizedTypeReference(state.getReferenceOwner(), setType);
+					unboundCollectionType.addTypeArgument(expectation.createUnboundTypeReference(literal, setType.getTypeParameters().get(0)));
+					expectation.acceptActualType(unboundCollectionType, ConformanceHint.UNCHECKED);
+				}
+			}
+		}
+	}
+
+	private List<LightweightTypeReference> computeCollectionTypeCandidates(XCollectionLiteral literal, JvmGenericType collectionType,
+			LightweightTypeReference elementTypeExpectation, ITypeComputationState state) {
+		List<LightweightTypeReference> elementTypes = newArrayList();
+		if(!literal.getElements().isEmpty()) {
+			for(XExpression element: literal.getElements()) {
+				ITypeComputationResult elementType = state.withExpectation(elementTypeExpectation).computeTypes(element);
+				if(!elementType.getActualExpressionType().isAny()) {
+					ParameterizedTypeReference collectionTypeCandidate = new ParameterizedTypeReference(state.getReferenceOwner(), collectionType);
+					collectionTypeCandidate.addTypeArgument(elementType.getActualExpressionType().getWrapperTypeIfPrimitive());
+					elementTypes.add(collectionTypeCandidate);
+				}
+			}
+		}
+		return elementTypes;
 	}
 	
 	protected void _computeTypes(XClosure object, ITypeComputationState state) {
@@ -589,32 +623,39 @@ public class XbaseTypeComputer implements ITypeComputer {
 				if (forExpressionType.isResolved() && !forExpressionType.isAny() && (iterable.isAssignableFrom(forExpressionType) || forExpressionType.isArray())) {
 					iterableState.refineExpectedType(object.getForExpression(), forExpressionType);
 				}
-				parameterType = forExpressionType.accept(new TypeReferenceVisitorWithResult<LightweightTypeReference>() {
-					@Override
-					public LightweightTypeReference doVisitParameterizedTypeReference(ParameterizedTypeReference reference) {
-						DeclaratorTypeArgumentCollector typeArgumentCollector = new ConstraintAwareTypeArgumentCollector(state.getReferenceOwner());
-						Map<JvmTypeParameter, LightweightMergedBoundTypeArgument> typeParameterMapping = typeArgumentCollector.getTypeParameterMapping(reference);
-						TypeParameterSubstitutor<?> substitutor = new UnboundTypeParameterPreservingSubstitutor(typeParameterMapping, state.getReferenceOwner());
-						JvmGenericType iterable = (JvmGenericType) services.getTypeReferences().findDeclaredType(Iterable.class, object);
-						ParameterizedTypeReference substituteMe = new ParameterizedTypeReference(state.getReferenceOwner(), iterable.getTypeParameters().get(0));
-						LightweightTypeReference substitutedArgument = substitutor.substitute(substituteMe).getUpperBoundSubstitute();
-						if (substitutedArgument.getType() instanceof JvmTypeParameter && 
-								!(state.getReferenceOwner().getDeclaredTypeParameters().contains(substitutedArgument.getType()))) {
-							return substitutedArgument.getRawTypeReference();
-						}
-						return substitutedArgument;
-					}
-					@Override
-					protected LightweightTypeReference doVisitAnyTypeReference(AnyTypeReference reference) {
-						return reference;
-					}
-					@Override
-					public LightweightTypeReference doVisitArrayTypeReference(ArrayTypeReference reference) {
-						return reference.getComponentType();
-					}
-				});
+				parameterType = getElementOrComponentType(forExpressionType, state);
 			}
 		}
+		return parameterType;
+	}
+
+	private LightweightTypeReference getElementOrComponentType(final LightweightTypeReference iterableOrArray,
+			final ITypeComputationState state) {
+		LightweightTypeReference parameterType;
+		parameterType = iterableOrArray.accept(new TypeReferenceVisitorWithResult<LightweightTypeReference>() {
+			@Override
+			public LightweightTypeReference doVisitParameterizedTypeReference(ParameterizedTypeReference reference) {
+				DeclaratorTypeArgumentCollector typeArgumentCollector = new ConstraintAwareTypeArgumentCollector(state.getReferenceOwner());
+				Map<JvmTypeParameter, LightweightMergedBoundTypeArgument> typeParameterMapping = typeArgumentCollector.getTypeParameterMapping(reference);
+				TypeParameterSubstitutor<?> substitutor = new UnboundTypeParameterPreservingSubstitutor(typeParameterMapping, state.getReferenceOwner());
+				JvmGenericType iterable = (JvmGenericType) services.getTypeReferences().findDeclaredType(Iterable.class, iterableOrArray.getOwner().getContextResourceSet());
+				ParameterizedTypeReference substituteMe = new ParameterizedTypeReference(state.getReferenceOwner(), iterable.getTypeParameters().get(0));
+				LightweightTypeReference substitutedArgument = substitutor.substitute(substituteMe).getUpperBoundSubstitute();
+				if (substitutedArgument.getType() instanceof JvmTypeParameter && 
+						!(state.getReferenceOwner().getDeclaredTypeParameters().contains(substitutedArgument.getType()))) {
+					return substitutedArgument.getRawTypeReference();
+				}
+				return substitutedArgument;
+			}
+			@Override
+			protected LightweightTypeReference doVisitAnyTypeReference(AnyTypeReference reference) {
+				return reference;
+			}
+			@Override
+			public LightweightTypeReference doVisitArrayTypeReference(ArrayTypeReference reference) {
+				return reference.getComponentType();
+			}
+		});
 		return parameterType;
 	}
 
