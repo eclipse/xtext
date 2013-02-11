@@ -14,9 +14,7 @@ import org.junit.Test
 import static org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil.*
 
 import static extension com.google.common.collect.Iterables.*
-import org.junit.Ignore
 
-@Ignore("TODO fix those")
 class DispatchRenameSupportTest extends AbstractXtendUITestCase {
 	
 	@Inject extension WorkbenchTestHelper testHelper;

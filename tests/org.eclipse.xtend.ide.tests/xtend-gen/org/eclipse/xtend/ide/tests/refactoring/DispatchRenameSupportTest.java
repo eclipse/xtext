@@ -28,10 +28,8 @@ import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.junit.Assert;
-import org.junit.Ignore;
 import org.junit.Test;
 
-@Ignore(value = "TODO fix those")
 @SuppressWarnings("all")
 public class DispatchRenameSupportTest extends AbstractXtendUITestCase {
   @Inject
