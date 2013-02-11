@@ -14,11 +14,11 @@ import org.junit.runner.RunWith
 
 import static org.junit.Assert.*
 
-@RunWith(typeof(XtextRunner))
-@InjectWith(typeof(DomainmodelInjectorProvider))
 /**
  * @author Jan Koehnlein - copied and adapted form Xtend
  */
+@RunWith(typeof(XtextRunner))
+@InjectWith(typeof(DomainmodelInjectorProvider))
 class OrganizeImportsTest {
 	
 	@Inject extension ParseHelper<DomainModel> 
