@@ -781,8 +781,7 @@ class XbaseFormatter2 extends AbstractFormatter {
 		val close = expr.nodeForKeyword("]")
 		val children = switch x:expr.expression {
 			XBlockExpression: x.expressions
-			XExpression: newArrayList(x)
-			default: <XExpression>emptyList
+			default: newArrayList(x)
 		}
 		if (expr.declaredFormalParameters.empty && children.empty) {
 			format += expr.nodeForKeyword("[").append[noSpace]

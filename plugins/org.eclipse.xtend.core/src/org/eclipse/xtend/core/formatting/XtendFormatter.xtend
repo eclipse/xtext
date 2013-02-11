@@ -307,7 +307,7 @@ public class XtendFormatter extends XbaseFormatter2 {
 	}
 
 	def protected dispatch void format(RichString rs, FormattableDocument format) {
-		val callback = [EObject obj, FormattableDocument doc|obj.format(doc)]
+		val (EObject, FormattableDocument)=>void callback = [EObject obj, FormattableDocument doc|obj.format(doc)]
 		richStringFormatter.format(callback, format, rs)
 	}
 	

@@ -48,7 +48,7 @@ class ActualTypeArgumentCollectorTest extends AbstractTestingTypeReferenceOwner 
 				assertNotNull(mappedTypes)
 				val mappingData = mapping.get(key)
 				assertEquals(mappingData.map['''«typeReference»(«declaredVariance»/«actualVariance»)'''].toString, mappedTypes.size, mappingData.size)
-				assertEquals(mappedTypes.toList as Object, mappingData.map[ Tuples::create(typeReference.toString, declaredVariance, actualVariance) ].toList)
+				assertEquals(mappedTypes.toList, mappingData.map[ Tuples::create(typeReference.toString, declaredVariance, actualVariance) ].toList)
 				return mapping
 			}
 		}

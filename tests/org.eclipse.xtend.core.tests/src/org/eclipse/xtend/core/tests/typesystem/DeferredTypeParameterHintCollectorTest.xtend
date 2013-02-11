@@ -70,7 +70,7 @@ class DeferredTypeParameterHintCollectorTest extends AbstractTestingTypeReferenc
 		val allKeys = mapping.keySet
 		for(key: allKeys) {
 			if (key.simpleName == typeParamName) {
-				val unbound = (mapping.get(key) as LightweightMergedBoundTypeArgument).typeReference as UnboundTypeReference
+				val unbound = mapping.get(key).typeReference as UnboundTypeReference
 				unbound.getAllHints.forEach [ assertEquals( BoundTypeArgumentSource::INFERRED_LATER, source ) ]
 				return unbound.getAllHints
 			}
@@ -82,7 +82,7 @@ class DeferredTypeParameterHintCollectorTest extends AbstractTestingTypeReferenc
 		val allKeys = mapping.keySet
 		for(key: allKeys) {
 			if (key.simpleName == typeParamName) {
-				val unbound = (mapping.get(key) as LightweightMergedBoundTypeArgument).typeReference as UnboundTypeReference
+				val unbound = mapping.get(key).typeReference as UnboundTypeReference
 				if (!unbound.getAllHints.empty)
 					fail('''Unexpected mapping for «typeParamName» in «mapping.keySet.map[simpleName]»'''.toString)
 			}
@@ -91,8 +91,8 @@ class DeferredTypeParameterHintCollectorTest extends AbstractTestingTypeReferenc
 	}
 	
 	def like(List<LightweightBoundTypeArgument> mappingData, Triple<String, VarianceInfo, VarianceInfo>... mappedTypes) {
-		assertEquals(mappingData.map[ o | val it = o as LightweightBoundTypeArgument '''«typeReference.toString»(«declaredVariance»/«actualVariance»)'''].toString, mappedTypes.size, mappingData.size)
-		assertEquals(mappedTypes.toList as Object, mappingData.map[ o | val it = o as LightweightBoundTypeArgument Tuples::create(typeReference.toString, declaredVariance, actualVariance) ].toList)
+		assertEquals(mappingData.map[ '''«typeReference.toString»(«declaredVariance»/«actualVariance»)'''].toString, mappedTypes.size, mappingData.size)
+		assertEquals(mappedTypes.toList as Object, mappingData.map[ Tuples::create(typeReference.toString, declaredVariance, actualVariance) ].toList)
 		return mappingData
 	}
 

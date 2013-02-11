@@ -44,7 +44,7 @@ abstract class AbstractSuperTypesTest extends AbstractTestingTypeReferenceOwner 
 		val function = function(signature.toString)
 		val operation = function.directlyInferredOperation
 		val subtype = operation.parameters.head.parameterType.toLightweightReference
-		assertEquals(superTypes.toList, subtype.collectSuperTypes.map[ simpleName ].toList as Object)
+		assertEquals(superTypes.toList, subtype.collectSuperTypes.map[ simpleName ].toList)
 	}
 	
 	def Iterable<LightweightTypeReference> collectSuperTypes(LightweightTypeReference reference)
