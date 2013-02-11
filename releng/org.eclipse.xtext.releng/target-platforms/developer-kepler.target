@@ -17,7 +17,7 @@
 <repository location="http://download.eclipse.org/modeling/emf/compare/updates/milestones/2.1"/>
 </location>
 <location includeAllPlatforms="false" includeConfigurePhase="true" includeMode="planner" includeSource="true" type="InstallableUnit">
-<unit id="org.eclipse.jdt.feature.group" version="3.9.0.v20120730-103744-8-8sFsJFNOfwKDRof2XLLkiPe834"/>
+<unit id="org.eclipse.jdt.feature.group" version="0.0.0"/>
 <unit id="org.eclipse.pde.core" version="0.0.0"/>
 <unit id="org.eclipse.pde.ui" version="0.0.0"/>
 <unit id="org.junit4" version="0.0.0"/>
