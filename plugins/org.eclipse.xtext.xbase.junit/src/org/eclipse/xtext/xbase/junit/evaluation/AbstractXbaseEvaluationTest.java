@@ -7,6 +7,11 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.junit.evaluation;
 
+import static com.google.common.collect.Lists.newArrayList;
+import static com.google.common.collect.Sets.newHashSet;
+import static com.google.common.collect.Sets.newTreeSet;
+import static java.util.Collections.emptyList;
+
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.math.BigDecimal;
@@ -15,16 +20,15 @@ import java.math.MathContext;
 import java.util.Collections;
 import java.util.Stack;
 
+import org.eclipse.xtext.xbase.lib.Pair;
 import org.junit.Assert;
 import org.junit.Ignore;
 import org.junit.Test;
 
+import com.google.common.collect.ImmutableMap;
+
 import testdata.ExceptionSubclass;
 import testdata.OuterClass;
-import static com.google.common.collect.Lists.newArrayList;
-import static com.google.common.collect.Sets.newHashSet;
-import static com.google.common.collect.Sets.newTreeSet;
-import static java.util.Collections.emptyList;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -3081,6 +3085,27 @@ public abstract class AbstractXbaseEvaluationTest extends Assert {
 	@Test 
 	public void testSetLiteral_3() throws Exception {
 		assertEvaluatesToArray(new String[] {"Foo"}, "{ val String[] x = #{'Foo'}  x}");
+	}
+	
+	@SuppressWarnings("unchecked")
+	@Test 
+	public void testSetLiteral_4() throws Exception {
+		assertEvaluatesTo(newHashSet(Pair.of("foo", "bar")), "{ val java.util.Set x = #{'foo' -> 'bar'} x }");
+	}
+	
+	@Test 
+	public void testMapLiteral_0() throws Exception {
+		assertEvaluatesTo(ImmutableMap.builder().put("foo", "bar").build(), "#{'foo' -> 'bar'}");
+	}
+	
+	@Test 
+	public void testMapLiteral_1() throws Exception {
+		assertEvaluatesTo(Collections.emptyMap(), "{val java.util.Map x = #{} x}");
+	}
+	
+	@Test 
+	public void testMapLiteral_2() throws Exception {
+		assertEvaluatesTo(ImmutableMap.builder().put("foo", 1).put("bar", true).build(), "#{'foo'->1, 'bar'->true}");
 	}
 	
 	protected void assertEvaluatesTo(Object object, String string) throws Exception {

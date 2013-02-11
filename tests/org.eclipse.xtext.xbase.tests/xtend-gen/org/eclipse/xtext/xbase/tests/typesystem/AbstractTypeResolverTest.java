@@ -456,12 +456,37 @@ public abstract class AbstractTypeResolverTest<Reference extends Object> extends
   
   @Test
   public void testSetLiteral_06() throws Exception {
-    this.resolvesTo("{ val java.util.Set<Number> foo = #[1, 2.0, 3bi] foo }", "Set<Number>");
+    this.resolvesTo("{ val java.util.Set<Number> foo = #{1, 2.0, 3bi} foo }", "Set<Number>");
   }
   
   @Test
   public void testSetLiteral_07() throws Exception {
-    this.resolvesTo("{ val java.util.Set<CharSequence> foo = #[\'foo\', \'bar\'] foo }", "Set<CharSequence>");
+    this.resolvesTo("{ val java.util.Set<CharSequence> foo = #{\'foo\', \'bar\'} foo }", "Set<CharSequence>");
+  }
+  
+  @Test
+  public void testSetLiteral_08() throws Exception {
+    this.resolvesTo("#{\'foo\' -> \'bar\'}", "Map<String, String>");
+  }
+  
+  @Test
+  public void testSetLiteral_09() throws Exception {
+    this.resolvesTo("#{\'foo\' -> true, \'bar\' -> false}", "Map<String, Boolean>");
+  }
+  
+  @Test
+  public void testSetLiteral_10() throws Exception {
+    this.resolvesTo("#{\'foo\'-> new Exception(\'ohoh\'),\'bar\'->new Error(\'ohohoh\')}", "Map<String, Throwable>");
+  }
+  
+  @Test
+  public void testSetLiteral_11() throws Exception {
+    this.resolvesTo("{ val java.util.Map<String,String> x = #{} x }", "Map<String, String>");
+  }
+  
+  @Test
+  public void testSetLiteral_12() throws Exception {
+    this.resolvesTo("{ val java.util.Set<org.eclipse.xtext.xbase.lib.Pair<String,Object>> foo = #{\'foo\'->\'bar\'} foo }", "Set<Pair<String, Object>>");
   }
   
   @Test
