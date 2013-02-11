@@ -9,7 +9,7 @@ import org.eclipse.xtend.core.conversion.XtendValueConverterService;
 import org.eclipse.xtend.core.formatting.XtendFormatter;
 import org.eclipse.xtend.core.imports.XtendImportsConfiguration;
 import org.eclipse.xtend.core.jvmmodel.IXtendJvmAssociations;
-import org.eclipse.xtend.core.jvmmodel.XtendJvmModelInferrer2;
+import org.eclipse.xtend.core.jvmmodel.XtendJvmModelInferrer;
 import org.eclipse.xtend.core.linking.XtendLinkingDiagnosticMessageProvider;
 import org.eclipse.xtend.core.naming.XtendQualifiedNameProvider;
 import org.eclipse.xtend.core.resource.XtendLocationInFileProvider;
@@ -165,7 +165,7 @@ public class XtendRuntimeModule extends org.eclipse.xtend.core.AbstractXtendRunt
 	}
 
 	public Class<? extends IJvmModelInferrer> bindIJvmModelInferrer() {
-		return XtendJvmModelInferrer2.class;
+		return XtendJvmModelInferrer.class;
 	}
 
 }
