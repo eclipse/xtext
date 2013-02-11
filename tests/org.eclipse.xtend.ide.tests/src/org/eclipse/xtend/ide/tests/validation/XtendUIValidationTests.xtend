@@ -278,7 +278,7 @@ class XtendUIValidationTests extends AbstractXtendUITestCase {
 	
 	@Test
 	def void testConfigurableIssueCode() {
-		val xtendPrefStore = (xtendPreferencesStore as IPersistentPreferenceStore)
+		val xtendPrefStore = xtendPreferencesStore
 		xtendPrefStore.setValue(IssueCodes::UNUSED_PRIVATE_MEMBER, "warning")
 		
 		testHelper.xtendFile("TestConfigurableIssueCode.xtend",'''

@@ -114,6 +114,7 @@ class XAnnotationExtensions {
 						return (candidates.head as JvmAnnotationType)
 					}
 				}
+				return null
 			}
 			JvmAnnotationType : {
 				return proxy

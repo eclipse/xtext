@@ -208,7 +208,7 @@ class RichStringToLineModel extends AbstractRichStringPartAcceptor$ForLoopOnce {
 		offset = offset + charCount
 	}
 	
-	def acceptLineBreak(int charCount, boolean semantic, boolean startNewLine) {
+	def void acceptLineBreak(int charCount, boolean semantic, boolean startNewLine) {
 		startContent()
 		if(contentStartOffset > 0) {
 			val lastLinesContent = document.substring(contentStartOffset, offset)
