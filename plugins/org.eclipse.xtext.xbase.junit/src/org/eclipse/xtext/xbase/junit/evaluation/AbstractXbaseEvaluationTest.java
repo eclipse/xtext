@@ -755,6 +755,20 @@ public abstract class AbstractXbaseEvaluationTest extends Assert {
 		assertEvaluatesTo("lite\r\nr\\al", "'lite\r\nr\\\\al'");
 	}
 	
+	@Test public void testStringLiteral_04() throws Exception {
+		assertEvaluatesTo('\n', "{ val char x = '\n' x}");
+	}
+	@Test public void testStringLiteral_05() throws Exception {
+		assertEvaluatesTo(' ', "{ val char x = ' ' x}");
+	}
+	@Test public void testStringLiteral_06() throws Exception {
+		assertEvaluatesTo('«', "{ val char x = '«' x}");
+	}
+	
+	@Test public void testStringLiteral_07() throws Exception {
+		assertEvaluatesTo('«', "{ val Character x = '«' x}");
+	}
+	
 	@Test public void testBooleanLiteral_01() throws Exception {
 		assertEvaluatesTo(Boolean.TRUE, "true");
 	}
