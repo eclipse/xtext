@@ -142,35 +142,6 @@ public class SomeCustomTypeProviderWithXtend extends XbaseWithAnnotationsTypePro
     }
   }
   
-  public JvmTypeReference typeForIdentifiable(final JvmIdentifiableElement constructor, final boolean rawType) {
-    if (constructor instanceof JvmConstructor) {
-      return _typeForIdentifiable((JvmConstructor)constructor, rawType);
-    } else if (constructor instanceof JvmOperation) {
-      return _typeForIdentifiable((JvmOperation)constructor, rawType);
-    } else if (constructor instanceof JvmField) {
-      return _typeForIdentifiable((JvmField)constructor, rawType);
-    } else if (constructor instanceof JvmGenericType) {
-      return _typeForIdentifiable((JvmGenericType)constructor, rawType);
-    } else if (constructor instanceof JvmDeclaredType) {
-      return _typeForIdentifiable((JvmDeclaredType)constructor, rawType);
-    } else if (constructor instanceof JvmFormalParameter) {
-      return _typeForIdentifiable((JvmFormalParameter)constructor, rawType);
-    } else if (constructor instanceof JvmType) {
-      return _typeForIdentifiable((JvmType)constructor, rawType);
-    } else if (constructor instanceof XCasePart) {
-      return _typeForIdentifiable((XCasePart)constructor, rawType);
-    } else if (constructor instanceof XSwitchExpression) {
-      return _typeForIdentifiable((XSwitchExpression)constructor, rawType);
-    } else if (constructor instanceof XVariableDeclaration) {
-      return _typeForIdentifiable((XVariableDeclaration)constructor, rawType);
-    } else if (constructor != null) {
-      return _typeForIdentifiable(constructor, rawType);
-    } else {
-      throw new IllegalArgumentException("Unhandled parameter types: " +
-        Arrays.<Object>asList(constructor, rawType).toString());
-    }
-  }
-  
   public JvmTypeReference expectedType(final EObject assignment, final EReference reference, final int index, final boolean rawType) {
     if (assignment instanceof XAssignment) {
       return _expectedType((XAssignment)assignment, reference, index, rawType);
@@ -221,6 +192,35 @@ public class SomeCustomTypeProviderWithXtend extends XbaseWithAnnotationsTypePro
     } else {
       throw new IllegalArgumentException("Unhandled parameter types: " +
         Arrays.<Object>asList(assignment, reference, index, rawType).toString());
+    }
+  }
+  
+  public JvmTypeReference typeForIdentifiable(final JvmIdentifiableElement constructor, final boolean rawType) {
+    if (constructor instanceof JvmConstructor) {
+      return _typeForIdentifiable((JvmConstructor)constructor, rawType);
+    } else if (constructor instanceof JvmOperation) {
+      return _typeForIdentifiable((JvmOperation)constructor, rawType);
+    } else if (constructor instanceof JvmField) {
+      return _typeForIdentifiable((JvmField)constructor, rawType);
+    } else if (constructor instanceof JvmGenericType) {
+      return _typeForIdentifiable((JvmGenericType)constructor, rawType);
+    } else if (constructor instanceof JvmDeclaredType) {
+      return _typeForIdentifiable((JvmDeclaredType)constructor, rawType);
+    } else if (constructor instanceof JvmFormalParameter) {
+      return _typeForIdentifiable((JvmFormalParameter)constructor, rawType);
+    } else if (constructor instanceof JvmType) {
+      return _typeForIdentifiable((JvmType)constructor, rawType);
+    } else if (constructor instanceof XCasePart) {
+      return _typeForIdentifiable((XCasePart)constructor, rawType);
+    } else if (constructor instanceof XSwitchExpression) {
+      return _typeForIdentifiable((XSwitchExpression)constructor, rawType);
+    } else if (constructor instanceof XVariableDeclaration) {
+      return _typeForIdentifiable((XVariableDeclaration)constructor, rawType);
+    } else if (constructor != null) {
+      return _typeForIdentifiable(constructor, rawType);
+    } else {
+      throw new IllegalArgumentException("Unhandled parameter types: " +
+        Arrays.<Object>asList(constructor, rawType).toString());
     }
   }
 }

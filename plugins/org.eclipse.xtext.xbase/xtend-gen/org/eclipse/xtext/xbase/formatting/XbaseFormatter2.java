@@ -2958,19 +2958,6 @@ public class XbaseFormatter2 extends AbstractFormatter {
     format.operator_add(_prepend_1);
   }
   
-  protected boolean isMultiParamInOwnLine(final XExpression fc, final FormattableDocument doc) {
-    if (fc instanceof XFeatureCall) {
-      return _isMultiParamInOwnLine((XFeatureCall)fc, doc);
-    } else if (fc instanceof XMemberFeatureCall) {
-      return _isMultiParamInOwnLine((XMemberFeatureCall)fc, doc);
-    } else if (fc instanceof XConstructorCall) {
-      return _isMultiParamInOwnLine((XConstructorCall)fc, doc);
-    } else {
-      throw new IllegalArgumentException("Unhandled parameter types: " +
-        Arrays.<Object>asList(fc, doc).toString());
-    }
-  }
-  
   protected void format(final EObject ref, final FormattableDocument document) {
     if (ref instanceof JvmTypeParameter) {
       _format((JvmTypeParameter)ref, document);
@@ -3065,6 +3052,19 @@ public class XbaseFormatter2 extends AbstractFormatter {
     } else {
       throw new IllegalArgumentException("Unhandled parameter types: " +
         Arrays.<Object>asList(ref, document).toString());
+    }
+  }
+  
+  protected boolean isMultiParamInOwnLine(final XExpression fc, final FormattableDocument doc) {
+    if (fc instanceof XFeatureCall) {
+      return _isMultiParamInOwnLine((XFeatureCall)fc, doc);
+    } else if (fc instanceof XMemberFeatureCall) {
+      return _isMultiParamInOwnLine((XMemberFeatureCall)fc, doc);
+    } else if (fc instanceof XConstructorCall) {
+      return _isMultiParamInOwnLine((XConstructorCall)fc, doc);
+    } else {
+      throw new IllegalArgumentException("Unhandled parameter types: " +
+        Arrays.<Object>asList(fc, doc).toString());
     }
   }
 }

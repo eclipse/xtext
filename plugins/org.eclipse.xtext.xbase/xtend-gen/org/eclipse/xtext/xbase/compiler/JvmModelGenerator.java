@@ -1703,6 +1703,32 @@ public class JvmModelGenerator implements IGenerator {
     return _filter;
   }
   
+  public void internalDoGenerate(final EObject type, final IFileSystemAccess fsa) {
+    if (type instanceof JvmDeclaredType) {
+      _internalDoGenerate((JvmDeclaredType)type, fsa);
+      return;
+    } else if (type != null) {
+      _internalDoGenerate(type, fsa);
+      return;
+    } else {
+      throw new IllegalArgumentException("Unhandled parameter types: " +
+        Arrays.<Object>asList(type, fsa).toString());
+    }
+  }
+  
+  public ITreeAppendable generateBody(final JvmDeclaredType it, final ITreeAppendable appendable, final GeneratorConfig config) {
+    if (it instanceof JvmAnnotationType) {
+      return _generateBody((JvmAnnotationType)it, appendable, config);
+    } else if (it instanceof JvmEnumerationType) {
+      return _generateBody((JvmEnumerationType)it, appendable, config);
+    } else if (it instanceof JvmGenericType) {
+      return _generateBody((JvmGenericType)it, appendable, config);
+    } else {
+      throw new IllegalArgumentException("Unhandled parameter types: " +
+        Arrays.<Object>asList(it, appendable, config).toString());
+    }
+  }
+  
   public ITreeAppendable generateModifier(final JvmMember it, final ITreeAppendable appendable, final GeneratorConfig config) {
     if (it instanceof JvmConstructor) {
       return _generateModifier((JvmConstructor)it, appendable, config);
@@ -1718,13 +1744,17 @@ public class JvmModelGenerator implements IGenerator {
     }
   }
   
-  public ITreeAppendable generateBody(final JvmDeclaredType it, final ITreeAppendable appendable, final GeneratorConfig config) {
-    if (it instanceof JvmAnnotationType) {
-      return _generateBody((JvmAnnotationType)it, appendable, config);
-    } else if (it instanceof JvmEnumerationType) {
-      return _generateBody((JvmEnumerationType)it, appendable, config);
+  public ITreeAppendable generateMember(final JvmMember it, final ITreeAppendable appendable, final GeneratorConfig config) {
+    if (it instanceof JvmConstructor) {
+      return _generateMember((JvmConstructor)it, appendable, config);
+    } else if (it instanceof JvmOperation) {
+      return _generateMember((JvmOperation)it, appendable, config);
+    } else if (it instanceof JvmField) {
+      return _generateMember((JvmField)it, appendable, config);
     } else if (it instanceof JvmGenericType) {
-      return _generateBody((JvmGenericType)it, appendable, config);
+      return _generateMember((JvmGenericType)it, appendable, config);
+    } else if (it != null) {
+      return _generateMember(it, appendable, config);
     } else {
       throw new IllegalArgumentException("Unhandled parameter types: " +
         Arrays.<Object>asList(it, appendable, config).toString());
@@ -1774,36 +1804,6 @@ public class JvmModelGenerator implements IGenerator {
     } else {
       throw new IllegalArgumentException("Unhandled parameter types: " +
         Arrays.<Object>asList(value, appendable, config).toString());
-    }
-  }
-  
-  public ITreeAppendable generateMember(final JvmMember it, final ITreeAppendable appendable, final GeneratorConfig config) {
-    if (it instanceof JvmConstructor) {
-      return _generateMember((JvmConstructor)it, appendable, config);
-    } else if (it instanceof JvmOperation) {
-      return _generateMember((JvmOperation)it, appendable, config);
-    } else if (it instanceof JvmField) {
-      return _generateMember((JvmField)it, appendable, config);
-    } else if (it instanceof JvmGenericType) {
-      return _generateMember((JvmGenericType)it, appendable, config);
-    } else if (it != null) {
-      return _generateMember(it, appendable, config);
-    } else {
-      throw new IllegalArgumentException("Unhandled parameter types: " +
-        Arrays.<Object>asList(it, appendable, config).toString());
-    }
-  }
-  
-  public void internalDoGenerate(final EObject type, final IFileSystemAccess fsa) {
-    if (type instanceof JvmDeclaredType) {
-      _internalDoGenerate((JvmDeclaredType)type, fsa);
-      return;
-    } else if (type != null) {
-      _internalDoGenerate(type, fsa);
-      return;
-    } else {
-      throw new IllegalArgumentException("Unhandled parameter types: " +
-        Arrays.<Object>asList(type, fsa).toString());
     }
   }
 }
