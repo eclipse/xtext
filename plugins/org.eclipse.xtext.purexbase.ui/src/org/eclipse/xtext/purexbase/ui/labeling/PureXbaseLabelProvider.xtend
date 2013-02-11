@@ -5,7 +5,6 @@ package org.eclipse.xtext.purexbase.ui.labeling
 
 import com.google.inject.Inject
 import org.eclipse.emf.edit.ui.provider.AdapterFactoryLabelProvider
-import org.eclipse.xtext.purexbase.pureXbase.Model
 import org.eclipse.xtext.xbase.ui.labeling.XbaseLabelProvider
 
 /**
