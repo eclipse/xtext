@@ -15,7 +15,6 @@ import org.eclipse.xtend.ide.tests.WorkbenchTestHelper;
 import org.eclipse.xtext.ui.editor.outline.impl.OutlineFilterAndSorter;
 import org.eclipse.xtext.ui.editor.outline.impl.OutlineMode;
 import org.eclipse.xtext.ui.editor.outline.quickoutline.QuickOutlineFilterAndSorter;
-import org.junit.Ignore;
 import org.junit.Test;
 
 import com.google.inject.Inject;
@@ -142,7 +141,6 @@ public class QuickOutlineTests extends AbstractOutlineTests {
 	}
 	
 	
-	@Ignore("TODO fix me")
 	@Test public void testMixedDispatch_0() throws Exception {
 		setShowInherited(false);
 		workbenchHelper.createFile("test/Super.java", 
