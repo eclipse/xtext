@@ -2,6 +2,7 @@ package org.eclipse.xtend.core.tests.formatting;
 
 import org.eclipse.xtend.core.tests.formatting.AbstractXtendFormatterTest;
 import org.eclipse.xtend2.lib.StringConcatenation;
+import org.junit.Ignore;
 import org.junit.Test;
 
 @SuppressWarnings("all")
@@ -189,6 +190,140 @@ public class XtendFormatterBugTests extends AbstractXtendFormatterTest {
     _builder.append("\t\t\t\t\t\t");
     _builder.append("newTypeReference(\'java.lang.Exception\')))[]]");
     _builder.newLine();
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    this.assertFormatted(_builder);
+  }
+
+  @Test
+  public void testBug400030() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("class Foo {");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("/** foo */");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("val bar = 3");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    this.assertFormatted(_builder);
+  }
+
+  @Ignore
+  @Test
+  public void testBug400025() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("{");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("// foo");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    this.assertFormattedExpression(_builder);
+  }
+
+  @Ignore
+  @Test
+  public void testBug400025_1() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("{");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("/*");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("* foo");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("*/");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    this.assertFormattedExpression(_builder);
+  }
+
+  @Ignore
+  @Test
+  public void testBug400025_2() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("{");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("// foo");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("val foo = 42");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    this.assertFormattedExpression(_builder);
+  }
+
+  @Ignore
+  @Test
+  public void testBug400024() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("class Foo {");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def bar() {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("typeof(XtextAntlrGeneratorFragment).getInstance => [");
+    _builder.newLine();
+    _builder.append("\t\t\t");
+    _builder.append("// options = new AntlrOptions => [");
+    _builder.newLine();
+    _builder.append("\t\t\t");
+    _builder.append("//  backtrack = true");
+    _builder.newLine();
+    _builder.append("\t\t\t");
+    _builder.append("// ]");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("]");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    this.assertFormatted(_builder);
+  }
+
+  @Ignore
+  @Test
+  public void testBug400024_1() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("class Foo {");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def bar() {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("typeof(XtextAntlrGeneratorFragment).getInstance => [");
+    _builder.newLine();
+    _builder.append("\t\t\t");
+    _builder.append("/*");
+    _builder.newLine();
+    _builder.append("\t\t\t ");
+    _builder.append("* Foo.");
+    _builder.newLine();
+    _builder.append("\t\t\t ");
+    _builder.append("*/");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("]");
     _builder.newLine();
     _builder.append("\t");
     _builder.append("}");

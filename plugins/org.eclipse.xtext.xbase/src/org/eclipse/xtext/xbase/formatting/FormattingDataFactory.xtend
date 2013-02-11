@@ -92,11 +92,13 @@ class FormattingDataFactory {
 		boolean trace
 	) {
 		val result = <FormattingData>newArrayList
+		var isFirst = true
 		for (leaf : leafs.leafs)
 			switch leaf {
 				WhitespaceInfo: {
-					result += new WhitespaceData(leaf.offset, leaf.length, indentationChange,
+					result += new WhitespaceData(leaf.offset, leaf.length, if(isFirst) indentationChange else 0,
 						if (trace) new RuntimeException, space)
+					isFirst = false
 				}
 				CommentInfo: {
 				}
