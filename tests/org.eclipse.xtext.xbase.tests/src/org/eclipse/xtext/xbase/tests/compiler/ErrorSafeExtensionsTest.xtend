@@ -1,25 +1,23 @@
 package org.eclipse.xtext.xbase.tests.compiler
 
+import com.google.inject.Inject
+import org.eclipse.emf.ecore.EObject
+import org.eclipse.xtext.generator.trace.ITraceURIConverter
+import org.eclipse.xtext.nodemodel.util.NodeModelUtils
+import org.eclipse.xtext.resource.ILocationInFileProvider
+import org.eclipse.xtext.util.CancelIndicator
+import org.eclipse.xtext.validation.CheckMode
+import org.eclipse.xtext.validation.IResourceValidator
+import org.eclipse.xtext.xbase.XBlockExpression
+import org.eclipse.xtext.xbase.XCastedExpression
+import org.eclipse.xtext.xbase.compiler.ElementIssueProvider
+import org.eclipse.xtext.xbase.compiler.ErrorSafeExtensions
+import org.eclipse.xtext.xbase.compiler.ImportManager
+import org.eclipse.xtext.xbase.compiler.LoopParams
+import org.eclipse.xtext.xbase.compiler.output.TreeAppendable
+import org.eclipse.xtext.xbase.jvmmodel.IJvmModelAssociations
 import org.eclipse.xtext.xbase.tests.AbstractXbaseTestCase
 import org.junit.Test
-import org.eclipse.xtext.resource.ILocationInFileProvider
-import com.google.inject.Inject
-import org.eclipse.xtext.xbase.jvmmodel.IJvmModelAssociations
-import org.eclipse.emf.ecore.EObject
-import org.eclipse.xtext.xbase.compiler.output.TreeAppendable
-import org.eclipse.xtext.xbase.compiler.ImportManager
-import org.eclipse.xtext.validation.IResourceValidator
-import org.eclipse.xtext.util.CancelIndicator
-import org.eclipse.xtext.xbase.compiler.ElementIssueProvider
-import org.eclipse.xtext.util.OnChangeEvictingCache
-import org.eclipse.xtext.xbase.compiler.IElementIssueProvider
-import org.eclipse.xtext.validation.CheckMode
-import org.eclipse.xtext.xbase.compiler.ErrorSafeExtensions
-import org.eclipse.xtext.xbase.XBlockExpression
-import org.eclipse.xtext.xbase.compiler.LoopParams
-import org.eclipse.xtext.nodemodel.util.NodeModelUtils
-import org.eclipse.xtext.xbase.XCastedExpression
-import org.eclipse.xtext.generator.trace.ITraceURIConverter
 
 class ErrorSafeExtensionsTest extends AbstractXbaseTestCase {
 	
