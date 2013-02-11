@@ -45,7 +45,7 @@ class AbstractContentAssistTest implements ResourceLoadHelper, IJavaProjectProvi
 	
 	@SuppressWarnings("unchecked")
 	def protected expect(String[]... arrays) {
-		val expectation = <String>newArrayList()
+		val expectation = newArrayList()
 		for(array: arrays) {
 			expectation.addAll(array)
 		}

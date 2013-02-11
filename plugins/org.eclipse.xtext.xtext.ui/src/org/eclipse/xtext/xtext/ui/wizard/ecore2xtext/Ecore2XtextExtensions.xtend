@@ -85,7 +85,7 @@ class Ecore2XtextExtensions {
 			: (acceptor.addAll(classifiers) -> 
 			 classifiers.typeSelect(EClass).collect(c|c.allAssignedClassifiers(acceptor))));
 	 */
-	def private static allAssignedClassifiers(EClass eClazz, Collection acceptor) {
+	def private static void allAssignedClassifiers(EClass eClazz, Collection acceptor) {
 		val classifiers = eClazz.EAllStructuralFeatures.filter([f|needsAssignment(f)]).map([EType]).toList
 		classifiers += subClasses(eClazz)
 		classifiers.removeAll(acceptor)
@@ -250,8 +250,6 @@ def static boolean isID(EStructuralFeature it) {
 		switch(eClassifier) {
 			EClass: 
 				!eClassifier.^abstract && !eClassifier.isInterface
-			EClassifier:
-				true
 			default:
 				true
 		}
@@ -262,7 +260,7 @@ def static boolean isID(EStructuralFeature it) {
 		switch(eClassifier) {
 			EClass:
 				!subClasses(eClassifier).filter([c|needsConcreteRule(c)]).isEmpty
-			EClassifier:
+			default:
 				false
 		}
 	}
