@@ -131,7 +131,7 @@ ValidID:
 ;
 
 FeatureCallID:
-	ID | 'abstract' | 'annotation' | 'class' | 'create' | 'def' | 'dispatch' | 'extends' | 'extension' 
+	ID | 'abstract' | 'annotation' | 'class' | 'create' | 'def' | 'dispatch' | 'enum' | 'extends' | 'extension' 
 	   | 'final' | 'implements' | 'import' | 'interface' | 'override' | 'package' | 'public' | 'private' 
 	   | 'protected' | 'static' | 'throws'
 ;

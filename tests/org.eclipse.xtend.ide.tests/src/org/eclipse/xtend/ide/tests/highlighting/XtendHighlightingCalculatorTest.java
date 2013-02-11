@@ -456,7 +456,7 @@ public class XtendHighlightingCalculatorTest extends AbstractXtendUITestCase imp
 	
 	@Test public void testKeywordsInFeatureCalls() throws Exception {
 		for(String keyword: newArrayList("abstract", "annotation", "class", "create",
-					"def", "dispatch", "extends", "extension", "final", "implements", "import", "interface", 
+					"def", "dispatch", "enum", "extends", "extension", "final", "implements", "import", "interface", 
 					"override", "package", "public", "private", "protected", "static", "throws")) {
 			String model = "{} def get" + toFirstUpper(keyword) + "() {} def bar(Foo it) { "+ keyword + "}";
 			expectAbsolute(model.lastIndexOf(keyword), keyword.length(), DefaultHighlightingConfiguration.DEFAULT_ID);
