@@ -172,6 +172,7 @@ ruleFeatureCallID :
 	'create' |
 	'def' |
 	'dispatch' |
+	'enum' |
 	'extends' |
 	'extension' |
 	'final' |

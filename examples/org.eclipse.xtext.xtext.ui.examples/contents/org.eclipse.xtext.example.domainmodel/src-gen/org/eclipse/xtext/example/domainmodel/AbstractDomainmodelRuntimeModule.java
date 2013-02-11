@@ -165,28 +165,28 @@ public abstract class AbstractDomainmodelRuntimeModule extends DefaultRuntimeMod
 	}
 
 	// contributed by org.eclipse.xtext.generator.xbase.XbaseGeneratorFragment
-	public Class<? extends org.eclipse.xtext.xbase.typing.ITypeProvider> bindITypeProvider() {
-		return org.eclipse.xtext.xbase.typing.XbaseTypeProvider.class;
-	}
-
-	// contributed by org.eclipse.xtext.generator.xbase.XbaseGeneratorFragment
 	public Class<? extends org.eclipse.xtext.conversion.IValueConverterService> bindIValueConverterService() {
 		return org.eclipse.xtext.xbase.conversion.XbaseValueConverterService.class;
 	}
 
 	// contributed by org.eclipse.xtext.generator.xbase.XbaseGeneratorFragment
 	public void configureLinkingIScopeProvider(com.google.inject.Binder binder) {
-		binder.bind(org.eclipse.xtext.scoping.IScopeProvider.class).annotatedWith(org.eclipse.xtext.linking.LinkingScopeProviderBinding.class).to(org.eclipse.xtext.xbase.linking.XbaseLinkingScopeProvider.class);
+		binder.bind(org.eclipse.xtext.scoping.IScopeProvider.class).annotatedWith(org.eclipse.xtext.linking.LinkingScopeProviderBinding.class).to(org.eclipse.xtext.xbase.scoping.batch.IBatchScopeProvider.class);
+	}
+
+	// contributed by org.eclipse.xtext.generator.xbase.XbaseGeneratorFragment
+	public void configureSerializerIScopeProvider(com.google.inject.Binder binder) {
+		binder.bind(org.eclipse.xtext.scoping.IScopeProvider.class).annotatedWith(org.eclipse.xtext.serializer.tokens.SerializerScopeProviderBinding.class).to(org.eclipse.xtext.xbase.serializer.SerializerScopeProvider.class);
+	}
+
+	// contributed by org.eclipse.xtext.generator.xbase.XbaseGeneratorFragment
+	public Class<? extends org.eclipse.xtext.xbase.typing.ITypeProvider> bindITypeProvider() {
+		return org.eclipse.xtext.xbase.typesystem.legacy.XbaseBatchTypeProvider.class;
 	}
 
 	// contributed by org.eclipse.xtext.generator.xbase.XbaseGeneratorFragment
 	public void configureIScopeProviderDelegate(com.google.inject.Binder binder) {
 		binder.bind(org.eclipse.xtext.scoping.IScopeProvider.class).annotatedWith(Names.named(org.eclipse.xtext.scoping.impl.AbstractDeclarativeScopeProvider.NAMED_DELEGATE)).to(org.eclipse.xtext.xbase.scoping.XImportSectionNamespaceScopeProvider.class);
-	}
-
-	// contributed by org.eclipse.xtext.generator.xbase.XbaseGeneratorFragment
-	public Class<? extends org.eclipse.xtext.scoping.IScopeProvider> bindIScopeProvider() {
-		return org.eclipse.xtext.xbase.scoping.XbaseScopeProvider.class;
 	}
 
 	// contributed by org.eclipse.xtext.generator.xbase.XbaseGeneratorFragment
@@ -196,12 +196,12 @@ public abstract class AbstractDomainmodelRuntimeModule extends DefaultRuntimeMod
 
 	// contributed by org.eclipse.xtext.generator.xbase.XbaseGeneratorFragment
 	public Class<? extends org.eclipse.xtext.common.types.util.TypeConformanceComputer> bindTypeConformanceComputer() {
-		return org.eclipse.xtext.xbase.typing.XbaseTypeConformanceComputer.class;
+		return org.eclipse.xtext.xbase.typesystem.legacy.LegacyTypeConformanceComputer.class;
 	}
 
 	// contributed by org.eclipse.xtext.generator.xbase.XbaseGeneratorFragment
 	public Class<? extends org.eclipse.xtext.resource.XtextResource> bindXtextResource() {
-		return org.eclipse.xtext.xbase.resource.XbaseResource.class;
+		return org.eclipse.xtext.xbase.resource.BatchLinkableResource.class;
 	}
 
 	// contributed by org.eclipse.xtext.generator.xbase.XbaseGeneratorFragment
@@ -236,7 +236,7 @@ public abstract class AbstractDomainmodelRuntimeModule extends DefaultRuntimeMod
 
 	// contributed by org.eclipse.xtext.generator.xbase.XbaseGeneratorFragment
 	public Class<? extends org.eclipse.xtext.common.types.util.TypeArgumentContextProvider> bindTypeArgumentContextProvider() {
-		return org.eclipse.xtext.xbase.typing.XbaseTypeArgumentContextProvider.class;
+		return org.eclipse.xtext.xbase.typesystem.legacy.LegacyTypeArgumentContextProvider.class;
 	}
 
 	// contributed by org.eclipse.xtext.generator.xbase.XbaseGeneratorFragment
@@ -265,6 +265,16 @@ public abstract class AbstractDomainmodelRuntimeModule extends DefaultRuntimeMod
 	}
 
 	// contributed by org.eclipse.xtext.generator.xbase.XbaseGeneratorFragment
+	public Class<? extends org.eclipse.xtext.common.types.util.VisibilityService> bindVisibilityService() {
+		return org.eclipse.xtext.xbase.typesystem.legacy.LegacyVisibilityService.class;
+	}
+
+	// contributed by org.eclipse.xtext.generator.xbase.XbaseGeneratorFragment
+	public Class<? extends org.eclipse.xtext.common.types.util.FeatureOverridesService> bindFeatureOverridesService() {
+		return org.eclipse.xtext.xbase.typesystem.legacy.LegacyFeatureOverridesService.class;
+	}
+
+	// contributed by org.eclipse.xtext.generator.xbase.XbaseGeneratorFragment
 	public Class<? extends org.eclipse.xtext.resource.ILocationInFileProvider> bindILocationInFileProvider() {
 		return org.eclipse.xtext.xbase.jvmmodel.JvmLocationInFileProvider.class;
 	}
@@ -272,6 +282,36 @@ public abstract class AbstractDomainmodelRuntimeModule extends DefaultRuntimeMod
 	// contributed by org.eclipse.xtext.generator.xbase.XbaseGeneratorFragment
 	public Class<? extends org.eclipse.xtext.scoping.IGlobalScopeProvider> bindIGlobalScopeProvider() {
 		return org.eclipse.xtext.common.types.xtext.TypesAwareDefaultGlobalScopeProvider.class;
+	}
+
+	// contributed by org.eclipse.xtext.generator.xbase.XbaseGeneratorFragment
+	public Class<? extends org.eclipse.xtext.xbase.typesystem.computation.ITypeComputer> bindITypeComputer() {
+		return org.eclipse.xtext.xbase.annotations.typesystem.XbaseWithAnnotationsTypeComputer.class;
+	}
+
+	// contributed by org.eclipse.xtext.generator.xbase.XbaseGeneratorFragment
+	public Class<? extends org.eclipse.xtext.scoping.IScopeProvider> bindIScopeProvider() {
+		return org.eclipse.xtext.xbase.annotations.scoping.XbaseWithAnnotationsScopeProvider.class;
+	}
+
+	// contributed by org.eclipse.xtext.generator.xbase.XbaseGeneratorFragment
+	public Class<? extends org.eclipse.xtext.xbase.scoping.batch.XbaseBatchScopeProvider> bindXbaseBatchScopeProvider() {
+		return org.eclipse.xtext.xbase.annotations.typesystem.XbaseWithAnnotationsBatchScopeProvider.class;
+	}
+
+	// contributed by org.eclipse.xtext.generator.xbase.XbaseGeneratorFragment
+	public Class<? extends org.eclipse.xtext.xbase.validation.FeatureNameValidator> bindFeatureNameValidator() {
+		return org.eclipse.xtext.xbase.validation.LogicalContainerAwareFeatureNameValidator.class;
+	}
+
+	// contributed by org.eclipse.xtext.generator.xbase.XbaseGeneratorFragment
+	public Class<? extends org.eclipse.xtext.xbase.typesystem.internal.DefaultBatchTypeResolver> bindDefaultBatchTypeResolver() {
+		return org.eclipse.xtext.xbase.typesystem.internal.LogicalContainerAwareBatchTypeResolver.class;
+	}
+
+	// contributed by org.eclipse.xtext.generator.xbase.XbaseGeneratorFragment
+	public Class<? extends org.eclipse.xtext.xbase.typesystem.internal.DefaultReentrantTypeResolver> bindDefaultReentrantTypeResolver() {
+		return org.eclipse.xtext.xbase.typesystem.internal.LogicalContainerAwareReentrantTypeResolver.class;
 	}
 
 	// contributed by org.eclipse.xtext.generator.xbase.XbaseGeneratorFragment

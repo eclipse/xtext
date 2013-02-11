@@ -23,13 +23,7 @@ import org.eclipse.xtend.core.typesystem.XtendTypeComputer;
 import org.eclipse.xtend.core.typing.XtendExpressionHelper;
 import org.eclipse.xtend.core.validation.XtendConfigurableIssueCodes;
 import org.eclipse.xtend.core.validation.XtendEarlyExitValidator;
-import org.eclipse.xtend.core.validation.XtendJavaValidator;
-import org.eclipse.xtend.core.validation.XtendJavaValidator;
 import org.eclipse.xtend.core.xtend.XtendFactory;
-import org.eclipse.xtext.common.types.util.FeatureOverridesService;
-import org.eclipse.xtext.common.types.util.TypeArgumentContextProvider;
-import org.eclipse.xtext.common.types.util.TypeConformanceComputer;
-import org.eclipse.xtext.common.types.util.VisibilityService;
 import org.eclipse.xtext.conversion.IValueConverterService;
 import org.eclipse.xtext.generator.IFilePostProcessor;
 import org.eclipse.xtext.generator.IOutputConfigurationProvider;
@@ -38,41 +32,22 @@ import org.eclipse.xtext.linking.LinkingScopeProviderBinding;
 import org.eclipse.xtext.naming.IQualifiedNameProvider;
 import org.eclipse.xtext.resource.IDefaultResourceDescriptionStrategy;
 import org.eclipse.xtext.resource.ILocationInFileProvider;
-import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.scoping.IScopeProvider;
 import org.eclipse.xtext.scoping.impl.AbstractDeclarativeScopeProvider;
-import org.eclipse.xtext.serializer.tokens.SerializerScopeProviderBinding;
-import org.eclipse.xtext.service.SingletonBinding;
 import org.eclipse.xtext.validation.ConfigurableIssueCodesProvider;
 import org.eclipse.xtext.xbase.XbaseFactory;
-import org.eclipse.xtext.xbase.annotations.typesystem.XbaseWithAnnotationsBatchScopeProvider;
-import org.eclipse.xtext.xbase.compiler.TypeReferenceSerializer;
-import org.eclipse.xtext.xbase.compiler.TypeReferenceSerializer2;
 import org.eclipse.xtext.xbase.compiler.XbaseCompiler;
 import org.eclipse.xtext.xbase.compiler.output.TraceAwarePostProcessor;
 import org.eclipse.xtext.xbase.formatting.IBasicFormatter;
 import org.eclipse.xtext.xbase.imports.IImportsConfiguration;
-import org.eclipse.xtext.xbase.interpreter.IExpressionInterpreter;
-import org.eclipse.xtext.xbase.interpreter.impl.XbaseInterpreter;
 import org.eclipse.xtext.xbase.jvmmodel.IJvmModelInferrer;
 import org.eclipse.xtext.xbase.jvmmodel.JvmModelAssociator;
-import org.eclipse.xtext.xbase.resource.BatchLinkableResource;
-import org.eclipse.xtext.xbase.scoping.batch.IBatchScopeProvider;
 import org.eclipse.xtext.xbase.scoping.batch.XbaseBatchScopeProvider;
-import org.eclipse.xtext.xbase.serializer.SerializerScopeProvider;
 import org.eclipse.xtext.xbase.typesystem.computation.ITypeComputer;
 import org.eclipse.xtext.xbase.typesystem.internal.DefaultBatchTypeResolver;
 import org.eclipse.xtext.xbase.typesystem.internal.DefaultReentrantTypeResolver;
-import org.eclipse.xtext.xbase.typesystem.legacy.LegacyFeatureOverridesService;
-import org.eclipse.xtext.xbase.typesystem.legacy.LegacyTypeArgumentContextProvider;
-import org.eclipse.xtext.xbase.typesystem.legacy.LegacyTypeConformanceComputer;
-import org.eclipse.xtext.xbase.typesystem.legacy.LegacyVisibilityService;
-import org.eclipse.xtext.xbase.typesystem.legacy.XbaseBatchTypeProvider;
-import org.eclipse.xtext.xbase.typing.ITypeProvider;
 import org.eclipse.xtext.xbase.util.XExpressionHelper;
 import org.eclipse.xtext.xbase.validation.EarlyExitValidator;
-import org.eclipse.xtext.xbase.validation.FeatureNameValidator;
-import org.eclipse.xtext.xbase.validation.LogicalContainerAwareFeatureNameValidator;
 
 import com.google.inject.Binder;
 import com.google.inject.name.Names;
@@ -99,7 +74,7 @@ public class XtendRuntimeModule extends org.eclipse.xtend.core.AbstractXtendRunt
 	@Override
 	public void configureIScopeProviderDelegate(Binder binder) {
 		binder.bind(IScopeProvider.class).annotatedWith(Names.named(AbstractDeclarativeScopeProvider.NAMED_DELEGATE))
-		.to(XtendImportedNamespaceScopeProvider.class);
+			.to(XtendImportedNamespaceScopeProvider.class);
 	}
 
 	@Override
@@ -125,7 +100,7 @@ public class XtendRuntimeModule extends org.eclipse.xtend.core.AbstractXtendRunt
 	}
 	
 	@Override
-	public java.lang.Class<? extends IScopeProvider> bindIScopeProvider() {
+	public Class<? extends IScopeProvider> bindIScopeProvider() {
 		return XtendScopeProvider.class;
 	}
 
@@ -166,87 +141,31 @@ public class XtendRuntimeModule extends org.eclipse.xtend.core.AbstractXtendRunt
 	}
 	
 	@Override
-	public void configureSerializerIScopeProvider(Binder binder) {
-		binder.bind(IScopeProvider.class).annotatedWith(SerializerScopeProviderBinding.class)
-			.to(SerializerScopeProvider.class);
-	}
-
-	public Class<? extends IBatchScopeProvider> bindIBatchScopeProvider() {
+	public Class<? extends XbaseBatchScopeProvider> bindXbaseBatchScopeProvider() {
 		return ExtensionAwareScopeProvider.class;
 	}
 
 	@Override
-	public Class<? extends XtextResource> bindXtextResource() {
-		return BatchLinkableResource.class;
-	}
-
-	@Override
-	public Class<? extends ITypeProvider> bindITypeProvider() {
-		return XbaseBatchTypeProvider.class;
-	}
-
 	public Class<? extends DefaultBatchTypeResolver> bindDefaultBatchTypeResolver() {
 		return TypeDeclarationAwareBatchTypeResolver.class;
 	}
 
-	public Class<? extends DefaultReentrantTypeResolver> bindReentrantTypeResolver() {
+	@Override
+	public Class<? extends DefaultReentrantTypeResolver> bindDefaultReentrantTypeResolver() {
 		return DispatchAndExtensionAwareReentrantTypeResolver.class;
 	}
-
-	public Class<? extends ITypeComputer> bindTypeComputer() {
-		return XtendTypeComputer.class;
-	}
-
-	public Class<? extends XbaseBatchScopeProvider> bindBatchScopeProvider() {
-		return XbaseWithAnnotationsBatchScopeProvider.class;
-	}
-
+	
 	public Class<? extends XbaseCompiler> bindXbaseCompiler() {
 		return XtendCompiler.class;
 	}
 
 	@Override
-	public Class<? extends IExpressionInterpreter> bindIExpressionInterpreter() {
-		return XbaseInterpreter.class;
+	public Class<? extends ITypeComputer> bindITypeComputer() {
+		return XtendTypeComputer.class;
 	}
 
 	public Class<? extends IJvmModelInferrer> bindIJvmModelInferrer() {
 		return XtendJvmModelInferrer2.class;
 	}
 
-	@Override
-	public Class<? extends XtendJavaValidator> bindXtendJavaValidator() {
-		return null;
-	}
-
-	@SingletonBinding(eager = true)
-	public Class<? extends XtendJavaValidator> bindXtendJavaValidator2() {
-		return XtendJavaValidator.class;
-	}
-
-	public Class<? extends VisibilityService> bindVisibilityService() {
-		return LegacyVisibilityService.class;
-	}
-
-	public Class<? extends FeatureOverridesService> bindFeatureOverridesService() {
-		return LegacyFeatureOverridesService.class;
-	}
-
-	@Override
-	public Class<? extends TypeArgumentContextProvider> bindTypeArgumentContextProvider() {
-		return LegacyTypeArgumentContextProvider.class;
-	}
-
-	public Class<? extends TypeReferenceSerializer> bindTypeReferenceSerializer() {
-		return TypeReferenceSerializer2.class;
-	}
-
-	public Class<? extends FeatureNameValidator> bindFeatureNameValidator() {
-		return LogicalContainerAwareFeatureNameValidator.class;
-	}
-	
-	@Override
-	public Class<? extends TypeConformanceComputer> bindTypeConformanceComputer() {
-		return LegacyTypeConformanceComputer.class;
-	}
 }

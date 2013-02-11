@@ -578,6 +578,7 @@
         <elements xsi:type="xtext:Keyword" value="create"/>
         <elements xsi:type="xtext:Keyword" value="def"/>
         <elements xsi:type="xtext:Keyword" value="dispatch"/>
+        <elements xsi:type="xtext:Keyword" value="enum"/>
         <elements xsi:type="xtext:Keyword" value="extends"/>
         <elements xsi:type="xtext:Keyword" value="extension"/>
         <elements xsi:type="xtext:Keyword" value="final"/>

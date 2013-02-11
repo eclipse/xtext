@@ -1459,27 +1459,28 @@ public class XtendGrammarAccess extends AbstractGrammarElementFinder {
 		private final Keyword cCreateKeyword_4 = (Keyword)cAlternatives.eContents().get(4);
 		private final Keyword cDefKeyword_5 = (Keyword)cAlternatives.eContents().get(5);
 		private final Keyword cDispatchKeyword_6 = (Keyword)cAlternatives.eContents().get(6);
-		private final Keyword cExtendsKeyword_7 = (Keyword)cAlternatives.eContents().get(7);
-		private final Keyword cExtensionKeyword_8 = (Keyword)cAlternatives.eContents().get(8);
-		private final Keyword cFinalKeyword_9 = (Keyword)cAlternatives.eContents().get(9);
-		private final Keyword cImplementsKeyword_10 = (Keyword)cAlternatives.eContents().get(10);
-		private final Keyword cImportKeyword_11 = (Keyword)cAlternatives.eContents().get(11);
-		private final Keyword cInterfaceKeyword_12 = (Keyword)cAlternatives.eContents().get(12);
-		private final Keyword cOverrideKeyword_13 = (Keyword)cAlternatives.eContents().get(13);
-		private final Keyword cPackageKeyword_14 = (Keyword)cAlternatives.eContents().get(14);
-		private final Keyword cPublicKeyword_15 = (Keyword)cAlternatives.eContents().get(15);
-		private final Keyword cPrivateKeyword_16 = (Keyword)cAlternatives.eContents().get(16);
-		private final Keyword cProtectedKeyword_17 = (Keyword)cAlternatives.eContents().get(17);
-		private final Keyword cStaticKeyword_18 = (Keyword)cAlternatives.eContents().get(18);
-		private final Keyword cThrowsKeyword_19 = (Keyword)cAlternatives.eContents().get(19);
+		private final Keyword cEnumKeyword_7 = (Keyword)cAlternatives.eContents().get(7);
+		private final Keyword cExtendsKeyword_8 = (Keyword)cAlternatives.eContents().get(8);
+		private final Keyword cExtensionKeyword_9 = (Keyword)cAlternatives.eContents().get(9);
+		private final Keyword cFinalKeyword_10 = (Keyword)cAlternatives.eContents().get(10);
+		private final Keyword cImplementsKeyword_11 = (Keyword)cAlternatives.eContents().get(11);
+		private final Keyword cImportKeyword_12 = (Keyword)cAlternatives.eContents().get(12);
+		private final Keyword cInterfaceKeyword_13 = (Keyword)cAlternatives.eContents().get(13);
+		private final Keyword cOverrideKeyword_14 = (Keyword)cAlternatives.eContents().get(14);
+		private final Keyword cPackageKeyword_15 = (Keyword)cAlternatives.eContents().get(15);
+		private final Keyword cPublicKeyword_16 = (Keyword)cAlternatives.eContents().get(16);
+		private final Keyword cPrivateKeyword_17 = (Keyword)cAlternatives.eContents().get(17);
+		private final Keyword cProtectedKeyword_18 = (Keyword)cAlternatives.eContents().get(18);
+		private final Keyword cStaticKeyword_19 = (Keyword)cAlternatives.eContents().get(19);
+		private final Keyword cThrowsKeyword_20 = (Keyword)cAlternatives.eContents().get(20);
 		
 		//FeatureCallID:
-		//	ID | "abstract" | "annotation" | "class" | "create" | "def" | "dispatch" | "extends" | "extension" | "final" |
-		//	"implements" | "import" | "interface" | "override" | "package" | "public" | "private" | "protected" | "static" |
+		//	ID | "abstract" | "annotation" | "class" | "create" | "def" | "dispatch" | "enum" | "extends" | "extension" | "final"
+		//	| "implements" | "import" | "interface" | "override" | "package" | "public" | "private" | "protected" | "static" |
 		//	"throws";
 		public ParserRule getRule() { return rule; }
 
-		//ID | "abstract" | "annotation" | "class" | "create" | "def" | "dispatch" | "extends" | "extension" | "final" |
+		//ID | "abstract" | "annotation" | "class" | "create" | "def" | "dispatch" | "enum" | "extends" | "extension" | "final" |
 		//"implements" | "import" | "interface" | "override" | "package" | "public" | "private" | "protected" | "static" |
 		//"throws"
 		public Alternatives getAlternatives() { return cAlternatives; }
@@ -1505,44 +1506,47 @@ public class XtendGrammarAccess extends AbstractGrammarElementFinder {
 		//"dispatch"
 		public Keyword getDispatchKeyword_6() { return cDispatchKeyword_6; }
 
+		//"enum"
+		public Keyword getEnumKeyword_7() { return cEnumKeyword_7; }
+
 		//"extends"
-		public Keyword getExtendsKeyword_7() { return cExtendsKeyword_7; }
+		public Keyword getExtendsKeyword_8() { return cExtendsKeyword_8; }
 
 		//"extension"
-		public Keyword getExtensionKeyword_8() { return cExtensionKeyword_8; }
+		public Keyword getExtensionKeyword_9() { return cExtensionKeyword_9; }
 
 		//"final"
-		public Keyword getFinalKeyword_9() { return cFinalKeyword_9; }
+		public Keyword getFinalKeyword_10() { return cFinalKeyword_10; }
 
 		//"implements"
-		public Keyword getImplementsKeyword_10() { return cImplementsKeyword_10; }
+		public Keyword getImplementsKeyword_11() { return cImplementsKeyword_11; }
 
 		//"import"
-		public Keyword getImportKeyword_11() { return cImportKeyword_11; }
+		public Keyword getImportKeyword_12() { return cImportKeyword_12; }
 
 		//"interface"
-		public Keyword getInterfaceKeyword_12() { return cInterfaceKeyword_12; }
+		public Keyword getInterfaceKeyword_13() { return cInterfaceKeyword_13; }
 
 		//"override"
-		public Keyword getOverrideKeyword_13() { return cOverrideKeyword_13; }
+		public Keyword getOverrideKeyword_14() { return cOverrideKeyword_14; }
 
 		//"package"
-		public Keyword getPackageKeyword_14() { return cPackageKeyword_14; }
+		public Keyword getPackageKeyword_15() { return cPackageKeyword_15; }
 
 		//"public"
-		public Keyword getPublicKeyword_15() { return cPublicKeyword_15; }
+		public Keyword getPublicKeyword_16() { return cPublicKeyword_16; }
 
 		//"private"
-		public Keyword getPrivateKeyword_16() { return cPrivateKeyword_16; }
+		public Keyword getPrivateKeyword_17() { return cPrivateKeyword_17; }
 
 		//"protected"
-		public Keyword getProtectedKeyword_17() { return cProtectedKeyword_17; }
+		public Keyword getProtectedKeyword_18() { return cProtectedKeyword_18; }
 
 		//"static"
-		public Keyword getStaticKeyword_18() { return cStaticKeyword_18; }
+		public Keyword getStaticKeyword_19() { return cStaticKeyword_19; }
 
 		//"throws"
-		public Keyword getThrowsKeyword_19() { return cThrowsKeyword_19; }
+		public Keyword getThrowsKeyword_20() { return cThrowsKeyword_20; }
 	}
 
 	public class ParameterElements extends AbstractParserRuleElementFinder {
@@ -2303,8 +2307,8 @@ public class XtendGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//FeatureCallID:
-	//	ID | "abstract" | "annotation" | "class" | "create" | "def" | "dispatch" | "extends" | "extension" | "final" |
-	//	"implements" | "import" | "interface" | "override" | "package" | "public" | "private" | "protected" | "static" |
+	//	ID | "abstract" | "annotation" | "class" | "create" | "def" | "dispatch" | "enum" | "extends" | "extension" | "final"
+	//	| "implements" | "import" | "interface" | "override" | "package" | "public" | "private" | "protected" | "static" |
 	//	"throws";
 	public FeatureCallIDElements getFeatureCallIDAccess() {
 		return (pFeatureCallID != null) ? pFeatureCallID : (pFeatureCallID = new FeatureCallIDElements());
