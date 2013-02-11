@@ -75,6 +75,7 @@ import com.google.inject.Provider;
  * 
  * @author Sven Efftinge
  */
+@SuppressWarnings("deprecation")
 public class FeatureCallChecker {
 
 	private PolymorphicDispatcher<String> dispatcher = new PolymorphicDispatcher<String>("_case", 4, 4,
