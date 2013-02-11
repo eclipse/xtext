@@ -85,6 +85,7 @@ public class Storage2UriMapperJavaImpl extends Storage2UriMapperImpl implements 
 	/**
 	 * Ignores Java output folders when traversing a project.
 	 * @return <code>false</code> if the folder is a java output folder. Otherwise <code>true</code>.
+	 * @since 2.4
 	 */
 	@Override
 	protected boolean isHandled(IFolder folder) {

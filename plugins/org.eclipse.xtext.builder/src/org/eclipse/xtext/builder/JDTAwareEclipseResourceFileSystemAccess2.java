@@ -8,6 +8,7 @@
 package org.eclipse.xtext.builder;
 
 import org.eclipse.core.resources.IContainer;
+import org.eclipse.core.resources.IFolder;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.jdt.core.IClasspathEntry;
 import org.eclipse.jdt.core.IJavaProject;
@@ -20,6 +21,18 @@ import org.eclipse.xtext.builder.EclipseResourceFileSystemAccess2;
  */
 public class JDTAwareEclipseResourceFileSystemAccess2 extends EclipseResourceFileSystemAccess2 {
 
+	/*
+	 * Overridden to convince the API tooling that this method still exists.
+	 */
+	@Override
+	@Deprecated
+	protected void createFolder(IFolder folder) throws CoreException {
+		super.createFolder(folder);
+	}
+	
+	/**
+	 * @since 2.4
+	 */
 	@Override
 	protected void createContainer(IContainer container) throws CoreException {
 		super.createContainer(container);

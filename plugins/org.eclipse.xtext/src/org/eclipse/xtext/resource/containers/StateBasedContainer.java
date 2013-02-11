@@ -126,6 +126,9 @@ public class StateBasedContainer extends ResourceDescriptionsBasedContainer {
 		return super.getExportedObjects(type, qualifiedName, ignoreCase);
 	}
 	
+	/**
+	 * @since 2.4
+	 */
 	@Override
 	public String toString() {
 		return "["+getClass().getSimpleName()+"] "+ state;
