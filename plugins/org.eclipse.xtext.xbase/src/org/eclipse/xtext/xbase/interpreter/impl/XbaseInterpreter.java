@@ -283,6 +283,10 @@ public class XbaseInterpreter implements IExpressionInterpreter {
 	 * @param indicator unused in this context but required for dispatching
 	 */
 	protected Object _doEvaluate(XStringLiteral literal, IEvaluationContext context, CancelIndicator indicator) {
+		JvmTypeReference type = this.typeProvider.getType(literal);
+		if (typeRefs.is(type, Character.TYPE) || typeRefs.is(type, Character.class)) {
+			return literal.getValue().charAt(0);
+		}
 		return literal.getValue();
 	}
 
