@@ -92,8 +92,8 @@ public class SyntheticNameClashResolver {
 		}
 		EObject source = associations.getPrimarySourceElement(element);
 		return (isCreateExtension(source) && (simpleName
-				.startsWith(XtendJvmModelInferrer2.CREATE_CHACHE_VARIABLE_PREFIX) || simpleName
-				.startsWith(XtendJvmModelInferrer2.CREATE_INITIALIZER_PREFIX)))
+				.startsWith(XtendJvmModelInferrer.CREATE_CHACHE_VARIABLE_PREFIX) || simpleName
+				.startsWith(XtendJvmModelInferrer.CREATE_INITIALIZER_PREFIX)))
 				|| isAnonymousExtensionField(source);
 	}
 
