@@ -371,12 +371,32 @@ abstract class AbstractTypeResolverTest<Reference> extends AbstractXbaseTestCase
 	}
 	
 	@Test def void testSetLiteral_06() throws Exception {
-		"{ val java.util.Set<Number> foo = #[1, 2.0, 3bi] foo }".resolvesTo("Set<Number>")
+		"{ val java.util.Set<Number> foo = #{1, 2.0, 3bi} foo }".resolvesTo("Set<Number>")
 	}
 	
 	@Test def void testSetLiteral_07() throws Exception {
-		"{ val java.util.Set<CharSequence> foo = #['foo', 'bar'] foo }".resolvesTo("Set<CharSequence>")
+		"{ val java.util.Set<CharSequence> foo = #{'foo', 'bar'} foo }".resolvesTo("Set<CharSequence>")
 	}
+
+	@Test def void testSetLiteral_08() throws Exception {
+		"#{'foo' -> 'bar'}".resolvesTo("Map<String, String>")
+	}
+
+	@Test def void testSetLiteral_09() throws Exception {
+		"#{'foo' -> true, 'bar' -> false}".resolvesTo("Map<String, Boolean>")
+	}
+
+	@Test def void testSetLiteral_10() throws Exception {
+		"#{'foo'-> new Exception('ohoh'),'bar'->new Error('ohohoh')}".resolvesTo("Map<String, Throwable>")
+	}
+
+	@Test def void testSetLiteral_11() throws Exception {
+		"{ val java.util.Map<String,String> x = #{} x }".resolvesTo("Map<String, String>")
+	} 
+
+	@Test def void testSetLiteral_12() throws Exception {
+		"{ val java.util.Set<org.eclipse.xtext.xbase.lib.Pair<String,Object>> foo = #{'foo'->'bar'} foo }".resolvesTo("Set<Pair<String, Object>>")
+	} 
 
 	@Test def void testOverloadedVarArgs_01() throws Exception {
 		"testdata::OverloadedMethods::overloadedVarArgs(null, null)".resolvesTo("long")
