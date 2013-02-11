@@ -192,7 +192,6 @@ public class GenericModuleTest extends Assert {
 		Foo.instantiations = 0;
 
 		AbstractGenericModule m = new AbstractGenericModule() {
-			@SuppressWarnings("unused")
 			@SingletonBinding()
 			public Class<Foo> bindFoo() {
 				return Foo.class;
@@ -212,7 +211,6 @@ public class GenericModuleTest extends Assert {
 		Foo.instantiations = 0;
 
 		AbstractGenericModule m = new AbstractGenericModule() {
-			@SuppressWarnings("unused")
 			@SingletonBinding(eager = true)
 			public Class<Foo> bindFoo() {
 				return Foo.class;
