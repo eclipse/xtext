@@ -73,8 +73,17 @@ public class LiteralsCompiler extends TypeConvertingCompiler {
 	}
 	
 	public void _toJavaExpression(XStringLiteral expr, ITreeAppendable b) {
-		String javaString = Strings.convertToJavaString(expr.getValue());
-		b.append("\"").append(javaString).append("\"");
+		JvmTypeReference type = getTypeProvider().getType(expr);
+		if (getTypeReferences().is(type, Character.TYPE)) {
+			String javaString = Strings.convertToJavaString(expr.getValue());
+			b.append("'").append(javaString).append("'");
+		} else if (getTypeReferences().is(type, Character.class)) {
+			String javaString = Strings.convertToJavaString(expr.getValue());
+			b.append("Character.valueOf('").append(javaString).append("')");
+		} else {
+			String javaString = Strings.convertToJavaString(expr.getValue());
+			b.append("\"").append(javaString).append("\"");
+		}
 	}
 	
 	public void _toJavaStatement(final XStringLiteral expr, ITreeAppendable b, boolean isReferenced) {
