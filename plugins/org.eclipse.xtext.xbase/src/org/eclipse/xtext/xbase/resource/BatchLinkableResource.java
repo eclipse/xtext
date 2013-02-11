@@ -11,46 +11,103 @@ import org.apache.log4j.Logger;
 import org.eclipse.emf.common.util.WrappedException;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
+import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.xtext.diagnostics.ExceptionDiagnostic;
+import org.eclipse.xtext.linking.lazy.LazyURIEncoder;
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.parser.IParseResult;
 import org.eclipse.xtext.resource.DerivedStateAwareResource;
+import org.eclipse.xtext.resource.ISynchronizable;
 import org.eclipse.xtext.util.CancelIndicator;
 import org.eclipse.xtext.util.Triple;
+import org.eclipse.xtext.util.concurrent.IUnitOfWork;
 
 import com.google.inject.Inject;
 
 /**
+ * A specialized EMF resource that is capable of resolving proxies in batch mode.
+ * That is, on {@link #getEObject(String)}, the {@link BatchLinkingService} is used
+ * to resolve a chunk of proxies. 
+ * 
  * @author Sebastian Zarnekow - Linking assumptions
  */
-public class BatchLinkableResource extends DerivedStateAwareResource {
+public class BatchLinkableResource extends DerivedStateAwareResource implements ISynchronizable<BatchLinkableResource> {
 	
 	private static final Logger log = Logger.getLogger(BatchLinkableResource.class);
 	
 	@Inject
 	private BatchLinkingService batchLinkingService;
 	
-	@Override
-	public synchronized EObject getEObject(String uriFragment) {
-		try {
-			if (getEncoder().isCrossLinkFragment(this, uriFragment)) {
-				Triple<EObject, EReference, INode> triple = getEncoder().decode(this, uriFragment);
-				if (batchLinkingService.isBatchLinkable(triple.getSecond())) {
-					return batchLinkingService.resolveBatched(triple.getFirst(), triple.getSecond(), uriFragment);
-				} else {
-					return super.getEObject(uriFragment, triple);
-				}
-			}
-		} catch (RuntimeException e) {
-			getErrors().add(new ExceptionDiagnostic(e));
-			log.error("resolution of uriFragment '" + uriFragment + "' failed.", e);
-			// wrapped because the javaDoc of this method states that WrappedExceptions are thrown
-			// logged because EcoreUtil.resolve will ignore any exceptions.
-			throw new WrappedException(e);
+	/**
+	 * Returns the lock of the owning {@link ResourceSet}, if it exposes such a lock.
+	 * Otherwise this resource itself is used as the lock context.
+	 */
+	@NonNull
+	public Object getLock() {
+		ResourceSet resourceSet = getResourceSet();
+		if (resourceSet instanceof ISynchronizable<?>) {
+			return ((ISynchronizable<?>) resourceSet).getLock();
 		}
-		return super.getEObject(uriFragment);
+		return this;
 	}
 	
+	/**
+	 * {@inheritDoc}
+	 * 
+	 * @since 2.4
+	 */
+	@NonNullByDefault
+	public <Result> Result execute(IUnitOfWork<Result, ? super BatchLinkableResource> unit) throws Exception {
+		synchronized (getLock()) {
+			return unit.exec(this);
+		}
+	}
+	
+	/**
+	 * {@inheritDoc}
+	 * 
+	 * Delegates to the {@link BatchLinkingService} if the requested reference is 
+	 * {@link BatchLinkingService#isBatchLinkable(EReference) linkeable in batch mode}.
+	 * 
+	 * Implementation detail: This specialization of {@link #getEObject(String) getEObject}
+	 * synchronizes on the {@link #getLock() lock} which is exposed by the synchronizable
+	 * resource rather than on the resource directly. This guards against reentrant resolution
+	 * from different threads that could block each other.
+	 * 
+	 * Usually one would want to lock only in the {@link BatchLinkingService} but we could
+	 * have intermixed {@link LazyURIEncoder#isCrossLinkFragment(org.eclipse.emf.ecore.resource.Resource, String)
+	 * lazy cross reference} and vanilla EMF cross references which again could lead to a
+	 * dead lock.
+	 */
+	@SuppressWarnings("sync-override")
+	@Override
+	public EObject getEObject(String uriFragment) {
+		synchronized (getLock()) {
+			try {
+				if (getEncoder().isCrossLinkFragment(this, uriFragment)) {
+					Triple<EObject, EReference, INode> triple = getEncoder().decode(this, uriFragment);
+					if (batchLinkingService.isBatchLinkable(triple.getSecond())) {
+						return batchLinkingService.resolveBatched(triple.getFirst(), triple.getSecond(), uriFragment);
+					}
+					return super.getEObject(uriFragment, triple);
+				}
+				return basicGetEObject(uriFragment);
+			} catch (RuntimeException e) {
+				getErrors().add(new ExceptionDiagnostic(e));
+				log.error("resolution of uriFragment '" + uriFragment + "' failed.", e);
+				// wrapped because the javaDoc of this method states that WrappedExceptions are thrown
+				// logged because EcoreUtil.resolve will ignore any exceptions.
+				throw new WrappedException(e);
+			}
+		}
+	}
+	
+	/**
+	 * Delegates to the BatchLinkingService to resolve all references. The linking service
+	 * is responsible to lock the resource or resource set. 
+	 */
 	@Override
 	public void resolveLazyCrossReferences(CancelIndicator monitor) {
 		IParseResult parseResult = getParseResult();
