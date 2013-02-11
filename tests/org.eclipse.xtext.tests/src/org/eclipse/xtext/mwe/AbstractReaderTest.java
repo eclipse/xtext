@@ -14,7 +14,6 @@ import java.util.Collection;
 import java.util.List;
 
 import org.eclipse.emf.common.util.URI;
-import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.mwe.core.WorkflowContext;
 import org.eclipse.emf.mwe.core.WorkflowContextDefaultImpl;
 import org.eclipse.emf.mwe.core.WorkflowInterruptedException;
@@ -27,8 +26,6 @@ import org.eclipse.xtext.index.indexTestLanguage.Entity;
 import org.eclipse.xtext.index.indexTestLanguage.IndexTestLanguagePackage;
 import org.eclipse.xtext.junit4.AbstractXtextTests;
 import org.junit.Test;
-
-import com.google.common.base.Predicate;
 
 /**
  * @author Sven Efftinge - Initial contribution and API

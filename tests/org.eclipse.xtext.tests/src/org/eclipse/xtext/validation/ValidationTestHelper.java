@@ -99,7 +99,6 @@ public class ValidationTestHelper {
 			}
 		}
 		
-		@SuppressWarnings("unused")
 		@Check
 		private void foo(EClass x) {
 			error("fooString", EcorePackage.Literals.ECLASS__ABSTRACT);
