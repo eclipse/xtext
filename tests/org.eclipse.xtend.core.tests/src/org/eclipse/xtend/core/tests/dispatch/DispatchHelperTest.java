@@ -8,7 +8,6 @@
 package org.eclipse.xtend.core.tests.dispatch;
 
 import java.io.Serializable;
-import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 
@@ -19,18 +18,13 @@ import org.eclipse.xtend.core.jvmmodel.DispatchHelper.DispatchSignature;
 import org.eclipse.xtend.core.jvmmodel.IXtendJvmAssociations;
 import org.eclipse.xtend.core.tests.AbstractXtendTestCase;
 import org.eclipse.xtend.core.xtend.XtendClass;
-import org.eclipse.xtend.core.xtend.XtendFile;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.common.types.JvmOperation;
-import org.eclipse.xtext.util.Pair;
 import org.eclipse.xtext.util.StringInputStream;
-import org.eclipse.xtext.util.Tuples;
-import org.eclipse.xtext.xbase.jvmmodel.IJvmModelAssociations;
 import org.junit.Test;
 
 import com.google.common.collect.ListMultimap;
-import com.google.common.collect.Multimap;
 import com.google.inject.Inject;
 
 /**
