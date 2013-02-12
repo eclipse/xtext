@@ -186,7 +186,7 @@ public class TypeUsageCollector {
 	}
 	
 	protected void addJavaDocReferences(EObject element) {
-		if(element != null && documentationProvider != null) {
+		if(element != null && documentationProvider != null && currentThisType != null) {
 			for(INode documentationNode: documentationProvider.getDocumentationNodes(element)) {
 				for(ReplaceRegion docTypeReference: javaDocTypeReferenceProvider.computeTypeRefRegions(documentationNode)) {
 					JvmTypeReference typeRef = typeReferences.getTypeForName(docTypeReference.getText(), currentThisType);
@@ -290,10 +290,12 @@ public class TypeUsageCollector {
 	}
 	
 	protected void acceptType(JvmType type, String refText, ITextRegion refRegion) {
-		if (type == null || type.eIsProxy()) {
-			typeUsages.addUnresolved(refText, refRegion, currentContext);
-		} else if (type instanceof JvmDeclaredType) {
-			typeUsages.addTypeUsage((JvmDeclaredType) type, refText, refRegion, currentContext);
+		if(currentContext != null) {
+			if (type == null || type.eIsProxy()) {
+				typeUsages.addUnresolved(refText, refRegion, currentContext);
+			} else if (type instanceof JvmDeclaredType) {
+				typeUsages.addTypeUsage((JvmDeclaredType) type, refText, refRegion, currentContext);
+			}
 		}
 	}
 	
@@ -301,7 +303,7 @@ public class TypeUsageCollector {
 		JvmDeclaredType declarator = member.getDeclaringType();
 		if (currentThisType == declarator || implicitStaticImports.contains(declarator))
 			return;
-		if (knownTypesForStaticImports == null) {
+		if (knownTypesForStaticImports == null && currentThisType != null) {
 			JvmParameterizedTypeReference reference = TypesFactory.eINSTANCE.createJvmParameterizedTypeReference();
 			reference.setType(currentThisType);
 			knownTypesForStaticImports = superTypeCollector.collectSuperTypesAsRawTypes(reference);
