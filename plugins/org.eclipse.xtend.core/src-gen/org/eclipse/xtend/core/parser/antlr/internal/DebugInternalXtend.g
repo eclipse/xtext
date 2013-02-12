@@ -300,7 +300,6 @@ ruleXAnnotationElementValueStringConcatenation :
 // Rule XAnnotationElementValue
 ruleXAnnotationElementValue :
 	ruleXAnnotation |
-	ruleXAnnotationValueArray |
 	ruleXListLiteral |
 	ruleXStringLiteral |
 	ruleXBooleanLiteral |
@@ -313,15 +312,6 @@ ruleXAnnotationElementValue :
 // Rule XAnnotationValueFieldReference
 ruleXAnnotationValueFieldReference :
 	ruleStaticQualifier? ruleIdOrSuper
-;
-
-// Rule XAnnotationValueArray
-ruleXAnnotationValueArray :
-	'{' (
-		ruleXAnnotationElementValue (
-			',' ruleXAnnotationElementValue
-		)*
-	)? '}'
 ;
 
 // Rule XExpression

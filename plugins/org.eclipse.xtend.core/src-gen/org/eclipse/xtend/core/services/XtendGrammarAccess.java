@@ -2529,8 +2529,8 @@ public class XtendGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//XAnnotationElementValue returns xbase::XExpression:
-	//	XAnnotation | XAnnotationValueArray | XListLiteral | XStringLiteral | XBooleanLiteral | XNumberLiteral | XTypeLiteral
-	//	| XAnnotationValueFieldReference | "(" XAnnotationElementValueStringConcatenation ")";
+	//	XAnnotation | XListLiteral | XStringLiteral | XBooleanLiteral | XNumberLiteral | XTypeLiteral |
+	//	XAnnotationValueFieldReference | "(" XAnnotationElementValueStringConcatenation ")";
 	public XbaseWithAnnotationsGrammarAccess.XAnnotationElementValueElements getXAnnotationElementValueAccess() {
 		return gaXbaseWithAnnotations.getXAnnotationElementValueAccess();
 	}
@@ -2548,16 +2548,6 @@ public class XtendGrammarAccess extends AbstractGrammarElementFinder {
 	
 	public ParserRule getXAnnotationValueFieldReferenceRule() {
 		return getXAnnotationValueFieldReferenceAccess().getRule();
-	}
-
-	//XAnnotationValueArray returns xbase::XExpression:
-	//	{xbase::XListLiteral} "{" (elements+=XAnnotationElementValue ("," elements+=XAnnotationElementValue)*)? "}";
-	public XbaseWithAnnotationsGrammarAccess.XAnnotationValueArrayElements getXAnnotationValueArrayAccess() {
-		return gaXbaseWithAnnotations.getXAnnotationValueArrayAccess();
-	}
-	
-	public ParserRule getXAnnotationValueArrayRule() {
-		return getXAnnotationValueArrayAccess().getRule();
 	}
 
 	//XExpression:

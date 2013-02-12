@@ -32,7 +32,6 @@ XAnnotationElementValueStringConcatenation returns xbase::XExpression :
 
 XAnnotationElementValue returns xbase::XExpression :
 	XAnnotation |
-	XAnnotationValueArray |
 	XListLiteral |
 	XStringLiteral |
 	XBooleanLiteral |
@@ -47,9 +46,3 @@ XAnnotationValueFieldReference returns xbase::XExpression :
 	(declaringType=[types::JvmDeclaredType|StaticQualifier])?
 	feature=[types::JvmIdentifiableElement|IdOrSuper] 
 ;
-
-XAnnotationValueArray returns xbase::XExpression :
-	{xbase::XListLiteral} 
-	'{' (elements+=XAnnotationElementValue (',' elements+=XAnnotationElementValue)*)? '}'
-;
-
