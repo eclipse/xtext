@@ -13,6 +13,7 @@ import org.junit.Test
 import org.junit.runner.RunWith
 
 import static org.junit.Assert.*
+import org.eclipse.xtext.util.ReplaceRegion
 
 /**
  * @author Jan Koehnlein - copied and adapted form Xtend
@@ -28,7 +29,14 @@ class OrganizeImportsTest {
 		val domainModel = parse(model.toString)
 		val changes = importOrganizer.getOrganizedImportChanges(domainModel.eResource as XtextResource)
 		val builder = new StringBuilder(model)
-		for(it: changes.sortBy[offset].reverse)
+		val sortedChanges= changes.sortBy[offset]
+		var ReplaceRegion lastChange = null
+		for(it: sortedChanges) {
+			if(lastChange != null && lastChange.endOffset > offset)
+				fail("Overlapping text edits: " + lastChange + ' and ' +it)
+			lastChange = it
+		}
+		for(it: sortedChanges.reverse)
 			builder.replace(offset, offset + length, text)
 		assertEquals(expected.toString, builder.toString)
 	}

@@ -16,6 +16,7 @@ import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ListExtensions;
+import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.junit.Assert;
 import org.junit.Ignore;
 import org.junit.Test;
@@ -48,14 +49,36 @@ public class OrganizeImportsTest {
             return Integer.valueOf(_offset);
           }
         };
-      List<ReplaceRegion> _sortBy = IterableExtensions.<ReplaceRegion, Integer>sortBy(changes, _function);
-      List<ReplaceRegion> _reverse = ListExtensions.<ReplaceRegion>reverse(_sortBy);
-      for (final ReplaceRegion it : _reverse) {
-        int _offset = it.getOffset();
-        int _offset_1 = it.getOffset();
-        int _length = it.getLength();
+      final List<ReplaceRegion> sortedChanges = IterableExtensions.<ReplaceRegion, Integer>sortBy(changes, _function);
+      ReplaceRegion lastChange = null;
+      for (final ReplaceRegion it : sortedChanges) {
+        {
+          boolean _and = false;
+          boolean _notEquals = ObjectExtensions.operator_notEquals(lastChange, null);
+          if (!_notEquals) {
+            _and = false;
+          } else {
+            int _endOffset = lastChange.getEndOffset();
+            int _offset = it.getOffset();
+            boolean _greaterThan = (_endOffset > _offset);
+            _and = (_notEquals && _greaterThan);
+          }
+          if (_and) {
+            String _plus = ("Overlapping text edits: " + lastChange);
+            String _plus_1 = (_plus + " and ");
+            String _plus_2 = (_plus_1 + it);
+            Assert.fail(_plus_2);
+          }
+          lastChange = it;
+        }
+      }
+      List<ReplaceRegion> _reverse = ListExtensions.<ReplaceRegion>reverse(sortedChanges);
+      for (final ReplaceRegion it_1 : _reverse) {
+        int _offset = it_1.getOffset();
+        int _offset_1 = it_1.getOffset();
+        int _length = it_1.getLength();
         int _plus = (_offset_1 + _length);
-        String _text = it.getText();
+        String _text = it_1.getText();
         builder.replace(_offset, _plus, _text);
       }
       String _string_1 = expected.toString();
