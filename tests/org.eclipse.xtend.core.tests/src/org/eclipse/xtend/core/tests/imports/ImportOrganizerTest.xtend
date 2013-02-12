@@ -12,6 +12,7 @@ import org.eclipse.xtend.core.tests.AbstractXtendTestCase
 import org.eclipse.xtext.resource.XtextResource
 import org.eclipse.xtext.xbase.imports.ImportOrganizer
 import org.junit.Test
+import org.eclipse.xtext.util.ReplaceRegion
 
 /**
  * @author Jan Koehnlein - Initial conribution and API
@@ -28,7 +29,14 @@ class ImportOrganizerTest extends AbstractXtendTestCase {
 		val xtendFile = file(model.toString, validate)
 		val changes = importOrganizer.getOrganizedImportChanges(xtendFile.eResource as XtextResource)
 		val builder = new StringBuilder(model)
-		for(it: changes.sortBy[offset].reverse)
+		val sortedChanges= changes.sortBy[offset]
+		var ReplaceRegion lastChange = null
+		for(it: sortedChanges) {
+			if(lastChange != null && lastChange.endOffset > offset)
+				fail("Overlapping text edits: " + lastChange + ' and ' +it)
+			lastChange = it
+		}
+		for(it: sortedChanges.reverse)
 			builder.replace(offset, offset + length, text)
 		assertEquals(expected.toString, builder.toString)
 	}
