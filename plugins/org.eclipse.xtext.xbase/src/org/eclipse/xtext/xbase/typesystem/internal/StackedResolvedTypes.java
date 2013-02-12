@@ -35,7 +35,6 @@ import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.UnboundTypeReference;
 import org.eclipse.xtext.xbase.typesystem.util.VarianceInfo;
 
-import com.google.common.collect.ListMultimap;
 import com.google.common.collect.Lists;
 
 /**
@@ -86,7 +85,7 @@ public class StackedResolvedTypes extends ResolvedTypes {
 	}
 
 	protected void mergeExpressionTypesIntoParent(ResolvedTypes parent) {
-		for(Map.Entry<XExpression, Collection<TypeData>> entry: basicGetExpressionTypes().asMap().entrySet()) {
+		for(Map.Entry<XExpression, List<TypeData>> entry: basicGetExpressionTypes().entrySet()) {
 			for(TypeData typeData: entry.getValue()) {
 				parent.acceptType(entry.getKey(), prepareMerge(typeData, parent.getReferenceOwner()));
 			}
@@ -136,19 +135,21 @@ public class StackedResolvedTypes extends ResolvedTypes {
 				}
 			}
 		}
-		ListMultimap<Object, LightweightBoundTypeArgument> typeParameterHints = basicGetTypeParameterHints();
-		for(Map.Entry<Object, LightweightBoundTypeArgument> hint: typeParameterHints.entries()) {
+		Map<Object, List<LightweightBoundTypeArgument>> typeParameterHints = basicGetTypeParameterHints();
+		for(Map.Entry<Object, List<LightweightBoundTypeArgument>> hint: typeParameterHints.entrySet()) {
 			if (!parent.isResolved(hint.getKey())) {
-				LightweightBoundTypeArgument boundTypeArgument = hint.getValue();
-				if (boundTypeArgument.getOrigin() instanceof VarianceInfo) {
-					parent.acceptHint(hint.getKey(), boundTypeArgument);
-				} else {
-					LightweightBoundTypeArgument copy = new LightweightBoundTypeArgument(
-							boundTypeArgument.getTypeReference().copyInto(parent.getReferenceOwner()), 
-							boundTypeArgument.getSource(), boundTypeArgument.getOrigin(), 
-							boundTypeArgument.getDeclaredVariance(), 
-							boundTypeArgument.getActualVariance());
-					parent.acceptHint(hint.getKey(), copy);
+				List<LightweightBoundTypeArgument> boundTypeArguments = hint.getValue();
+				for(LightweightBoundTypeArgument boundTypeArgument: boundTypeArguments) {
+					if (boundTypeArgument.getOrigin() instanceof VarianceInfo) {
+						parent.acceptHint(hint.getKey(), boundTypeArgument);
+					} else {
+						LightweightBoundTypeArgument copy = new LightweightBoundTypeArgument(
+								boundTypeArgument.getTypeReference().copyInto(parent.getReferenceOwner()), 
+								boundTypeArgument.getSource(), boundTypeArgument.getOrigin(), 
+								boundTypeArgument.getDeclaredVariance(), 
+								boundTypeArgument.getActualVariance());
+						parent.acceptHint(hint.getKey(), copy);
+					}
 				}
 			}
 		}

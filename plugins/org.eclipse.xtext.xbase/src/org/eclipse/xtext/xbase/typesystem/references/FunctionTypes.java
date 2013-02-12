@@ -7,7 +7,6 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.typesystem.references;
 
-import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
@@ -35,7 +34,6 @@ import org.eclipse.xtext.xbase.typesystem.util.UnboundTypeParameterPreservingSub
 import org.eclipse.xtext.xbase.typesystem.util.VarianceInfo;
 
 import com.google.common.collect.Iterables;
-import com.google.common.collect.ListMultimap;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.inject.Inject;
@@ -72,7 +70,7 @@ public class FunctionTypes {
 		}
 	}
 	
-	public ListMultimap<JvmTypeParameter, LightweightBoundTypeArgument> getFunctionTypeParameterMapping(
+	public Map<JvmTypeParameter, List<LightweightBoundTypeArgument>> getFunctionTypeParameterMapping(
 			LightweightTypeReference functionType, JvmOperation operation,
 			ActualTypeArgumentCollector typeArgumentCollector, ITypeReferenceOwner owner) {
 		/* 
@@ -92,7 +90,7 @@ public class FunctionTypes {
 		JvmParameterizedTypeReference operationTypeDeclarator = typeReferences.createTypeRef(operation.getDeclaringType());
 		LightweightTypeReference lightweightTypeReference = new OwnedConverter(owner).toLightweightReference(operationTypeDeclarator);
 		typeArgumentCollector.populateTypeParameterMapping(lightweightTypeReference, functionType);
-		ListMultimap<JvmTypeParameter, LightweightBoundTypeArgument> typeParameterMapping = typeArgumentCollector.rawGetTypeParameterMapping();
+		Map<JvmTypeParameter, List<LightweightBoundTypeArgument>> typeParameterMapping = typeArgumentCollector.rawGetTypeParameterMapping();
 		return typeParameterMapping;
 	}
 	
@@ -230,10 +228,10 @@ public class FunctionTypes {
 		}
 		List<JvmTypeParameter> allTypeParameters = collectAllTypeParameters(typeReference, operation);
 		ActualTypeArgumentCollector typeArgumentCollector = new UnboundTypeParameterAwareTypeArgumentCollector(allTypeParameters, BoundTypeArgumentSource.CONSTRAINT, typeReference.getOwner());
-		ListMultimap<JvmTypeParameter,LightweightBoundTypeArgument> typeParameterMapping = getFunctionTypeParameterMapping(
+		Map<JvmTypeParameter, List<LightweightBoundTypeArgument>> typeParameterMapping = getFunctionTypeParameterMapping(
 				typeReference, operation, typeArgumentCollector, typeReference.getOwner());
 		Map<JvmTypeParameter, LightweightMergedBoundTypeArgument> mergedTypeParameterMapping = Maps.newLinkedHashMap();
-		for(Map.Entry<JvmTypeParameter, Collection<LightweightBoundTypeArgument>> mapping: typeParameterMapping.asMap().entrySet()) {
+		for(Map.Entry<JvmTypeParameter, List<LightweightBoundTypeArgument>> mapping: typeParameterMapping.entrySet()) {
 			mergedTypeParameterMapping.put(mapping.getKey(), typeReference.getServices().getBoundTypeArgumentMerger().merge(mapping.getValue(), typeReference.getOwner()));			
 		}
 		UnboundTypeParameterPreservingSubstitutor substitutor = new UnboundTypeParameterPreservingSubstitutor(mergedTypeParameterMapping, typeReference.getOwner()) {

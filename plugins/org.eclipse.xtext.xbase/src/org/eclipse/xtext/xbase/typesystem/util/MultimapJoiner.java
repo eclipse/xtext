@@ -10,6 +10,7 @@ package org.eclipse.xtext.xbase.typesystem.util;
 import java.io.IOException;
 import java.util.Collection;
 import java.util.Iterator;
+import java.util.Map;
 import java.util.Map.Entry;
 
 import com.google.common.base.Joiner;
@@ -44,6 +45,14 @@ public class MultimapJoiner {
 	public <A extends Appendable> A appendTo(A appendable, Multimap<?, ?> map) throws IOException {
 		return appendTo(appendable, map.asMap().entrySet());
 	}
+	
+	/**
+	 * Appends the string representation of each entry of {@code map}, using the previously configured separator and
+	 * key-value separator, to {@code appendable}.
+	 */
+	public <A extends Appendable> A appendTo(A appendable, Map<?, ? extends Collection<?>> map) throws IOException {
+		return appendTo(appendable, map.entrySet());
+	}
 
 	/**
 	 * Appends the string representation of each entry of {@code map}, using the previously configured separator and
@@ -52,6 +61,15 @@ public class MultimapJoiner {
 	 */
 	public StringBuilder appendTo(StringBuilder builder, Multimap<?, ?> map) {
 		return appendTo(builder, map.asMap().entrySet());
+	}
+	
+	/**
+	 * Appends the string representation of each entry of {@code map}, using the previously configured separator and
+	 * key-value separator, to {@code builder}. Identical to {@link #appendTo(Appendable, Map)}, except that it
+	 * does not throw {@link IOException}.
+	 */
+	public StringBuilder appendTo(StringBuilder builder, Map<?, ? extends Collection<?>> map) {
+		return appendTo(builder, map.entrySet());
 	}
 
 	/**

@@ -53,20 +53,16 @@ import org.eclipse.xtext.xbase.typesystem.util.CommonTypeComputationServices;
 import org.eclipse.xtext.xbase.typesystem.util.ConstraintVisitingInfo;
 import org.eclipse.xtext.xbase.typesystem.util.CustomTypeParameterSubstitutor;
 import org.eclipse.xtext.xbase.typesystem.util.ExpectationTypeParameterHintCollector;
+import org.eclipse.xtext.xbase.typesystem.util.Maps2;
 import org.eclipse.xtext.xbase.typesystem.util.MultimapJoiner;
-import org.eclipse.xtext.xbase.typesystem.util.Multimaps2;
 import org.eclipse.xtext.xbase.typesystem.util.TypeParameterByUnboundSubstitutor;
 import org.eclipse.xtext.xbase.typesystem.util.TypeParameterSubstitutor;
 import org.eclipse.xtext.xbase.typesystem.util.VarianceInfo;
 
 import com.google.common.base.Joiner;
 import com.google.common.base.Joiner.MapJoiner;
-import com.google.common.collect.ImmutableListMultimap;
-import com.google.common.collect.ImmutableMultimap;
-import com.google.common.collect.ListMultimap;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
-import com.google.common.collect.Multimap;
 import com.google.common.collect.Sets;
 
 /**
@@ -111,12 +107,12 @@ public abstract class ResolvedTypes implements IResolvedTypes {
 	private Set<AbstractDiagnostic> diagnostics;
 	private Map<JvmIdentifiableElement, LightweightTypeReference> types;
 	private Map<JvmIdentifiableElement, LightweightTypeReference> reassignedTypes;
-	private Multimap<XExpression, TypeData> expressionTypes;
+	private Map<XExpression, List<TypeData>> expressionTypes;
+	private Map<XExpression, ILinkingCandidate> featureLinking;
 	private Map<Object, UnboundTypeReference> unboundTypeParameters;
-	private ListMultimap<Object, LightweightBoundTypeArgument> typeParameterHints;
+	private Map<Object, List<LightweightBoundTypeArgument>> typeParameterHints;
 	private Set<Object> resolvedTypeParameters;
 	private List<JvmTypeParameter> declaredTypeParameters;
-	private Map<XExpression, ILinkingCandidate> featureLinking;
 	
 	protected ResolvedTypes(DefaultReentrantTypeResolver resolver) {
 		this.resolver = resolver;
@@ -190,10 +186,8 @@ public abstract class ResolvedTypes implements IResolvedTypes {
 	
 	@Nullable
 	protected Collection<TypeData> doGetTypeData(XExpression expression) {
-		Multimap<XExpression, TypeData> multimap = basicGetExpressionTypes();
-		if (multimap.containsKey(expression))
-			return multimap.get(expression);
-		return null;
+		List<TypeData> result = basicGetExpressionTypes().get(expression);
+		return result;
 	}
 	
 	@Nullable
@@ -423,7 +417,7 @@ public abstract class ResolvedTypes implements IResolvedTypes {
 	}
 	
 	protected void acceptType(XExpression expression, TypeData typeData) {
-		ensureExpressionTypesMapExists().put(expression, typeData);
+		Maps2.putIntoListMap(expression, typeData, ensureExpressionTypesMapExists());
 	}
 	
 	protected Map<JvmIdentifiableElement, LightweightTypeReference> basicGetTypes() {
@@ -444,13 +438,13 @@ public abstract class ResolvedTypes implements IResolvedTypes {
 		return reassignedTypes;
 	}
 	
-	protected Multimap<XExpression, TypeData> basicGetExpressionTypes() {
-		return expressionTypes != null ? expressionTypes : ImmutableMultimap.<XExpression, TypeData>of();
+	protected Map<XExpression, List<TypeData>> basicGetExpressionTypes() {
+		return expressionTypes != null ? expressionTypes : Collections.<XExpression, List<TypeData>>emptyMap();
 	}
 	
-	private Multimap<XExpression, TypeData> ensureExpressionTypesMapExists() {
+	private Map<XExpression, List<TypeData>> ensureExpressionTypesMapExists() {
 		if (expressionTypes == null) {
-			expressionTypes = createExpressionTypesMap();
+			expressionTypes = Maps.newHashMap();
 		}
 		return expressionTypes;
 	}
@@ -463,28 +457,20 @@ public abstract class ResolvedTypes implements IResolvedTypes {
 			TypeData newTypeData = new TypeData(receiver, refinedExpectation, existing.getActualType(), existing.getConformanceHints(), existing.isReturnType());
 			replaced.add(newTypeData);
 		}
-		ensureExpressionTypesMapExists().replaceValues(receiver, replaced);
+		ensureExpressionTypesMapExists().put(receiver, replaced);
 	}
 	
-	private Multimap<XExpression, TypeData> createExpressionTypesMap() {
-		return createMultiMap();
-	}
-
-	protected ListMultimap<Object, LightweightBoundTypeArgument> basicGetTypeParameterHints() {
-		return typeParameterHints != null ? typeParameterHints : ImmutableListMultimap.<Object, LightweightBoundTypeArgument>of();
+	protected Map<Object, List<LightweightBoundTypeArgument>> basicGetTypeParameterHints() {
+		return typeParameterHints != null ? typeParameterHints : Collections.<Object, List<LightweightBoundTypeArgument>>emptyMap();
 	}
 	
-	private ListMultimap<Object, LightweightBoundTypeArgument> ensureTypeParameterHintsMapExists() {
+	private Map<Object, List<LightweightBoundTypeArgument>> ensureTypeParameterHintsMapExists() {
 		if (typeParameterHints == null) {
-			typeParameterHints = createMultiMap();
+			typeParameterHints = Maps.newHashMap();
 		}
 		return typeParameterHints;
 	}
 
-	private <K, V> ListMultimap<K, V> createMultiMap() {
-		return Multimaps2.newLinkedHashListMultimap(2, 2);
-	}
-	
 	private Map<XExpression, ILinkingCandidate> ensureLinkingMapExists() {
 		if (featureLinking == null) {
 			featureLinking = Maps.newLinkedHashMap();
@@ -629,10 +615,10 @@ public abstract class ResolvedTypes implements IResolvedTypes {
 	protected void appendContent(StringBuilder result, String indentation) {
 		appendContent(types, "types", result, indentation);
 		appendContent(reassignedTypes, "reassignedTypes", result, indentation);
-		appendContent(expressionTypes, "expressionTypes", result, indentation);
+		appendListMapContent(expressionTypes, "expressionTypes", result, indentation);
 		appendContent(featureLinking, "featureLinking", result, indentation);
 		appendContent(unboundTypeParameters, "unboundTypeParameters", result, indentation);
-		appendContent(typeParameterHints, "typeParameterHints", result, indentation);
+		appendListMapContent(typeParameterHints, "typeParameterHints", result, indentation);
 		appendContent(diagnostics, "diagnostics", result, indentation);
 	}
 
@@ -652,7 +638,7 @@ public abstract class ResolvedTypes implements IResolvedTypes {
 		}
 	}
 	
-	protected void appendContent(@Nullable Multimap<?, ?> map, String prefix, StringBuilder result, String indentation) {
+	protected void appendListMapContent(@Nullable Map<?, ? extends Collection<?>> map, String prefix, StringBuilder result, String indentation) {
 		if (map != null) {
 			MultimapJoiner joiner = new MultimapJoiner(
 					Joiner.on("\n    " + indentation), 
@@ -673,18 +659,19 @@ public abstract class ResolvedTypes implements IResolvedTypes {
 					resolveDependentTypeArguments(handle, boundTypeArgument);
 				}
 				LightweightBoundTypeArgument boundWithoutRecursion = removeRecursiveTypeArguments(handle, boundTypeArgument);
-				ensureTypeParameterHintsMapExists().replaceValues(handle, Collections.singletonList(boundWithoutRecursion));
+				ensureTypeParameterHintsMapExists().put(handle, Collections.singletonList(boundWithoutRecursion));
 			}
 		} else {
 			if (!isResolved(handle)) {
 				if (boundTypeArgument.getTypeReference() instanceof UnboundTypeReference) {
 					UnboundTypeReference other = (UnboundTypeReference) boundTypeArgument.getTypeReference();
+					Object otherHandle = other.getHandle();
 					if (ensureTypeParameterHintsMapExists().containsKey(handle)) {
 						// don't add fully redundant hints
 						List<LightweightBoundTypeArgument> existingValues = ensureTypeParameterHintsMapExists().get(handle);
 						for(LightweightBoundTypeArgument existingValue: existingValues) {
 							if (existingValue.getTypeReference() instanceof UnboundTypeReference) {
-								if (((UnboundTypeReference) existingValue.getTypeReference()).getHandle() == other.getHandle()) {
+								if (((UnboundTypeReference) existingValue.getTypeReference()).getHandle() == otherHandle) {
 									if (existingValue.getActualVariance() == boundTypeArgument.getActualVariance() 
 											&& existingValue.getDeclaredVariance() == boundTypeArgument.getDeclaredVariance()
 											&& existingValue.getSource() == boundTypeArgument.getSource()) {
@@ -695,10 +682,9 @@ public abstract class ResolvedTypes implements IResolvedTypes {
 						}
 					}
 					UnboundTypeReference currentUnbound = getUnboundTypeReference(handle);
-					ensureTypeParameterHintsMapExists().put(
-							other.getHandle(), copyBoundTypeArgument(currentUnbound, boundTypeArgument));
+					Maps2.putIntoListMap(otherHandle, copyBoundTypeArgument(currentUnbound, boundTypeArgument), ensureTypeParameterHintsMapExists());
 				}
-				ensureTypeParameterHintsMapExists().put(handle, boundTypeArgument);
+				Maps2.putIntoListMap(handle, boundTypeArgument, ensureTypeParameterHintsMapExists());
 			} else {
 				throw new IllegalStateException("Cannot add hints if the reference was already resolved");
 			}
@@ -775,19 +761,21 @@ public abstract class ResolvedTypes implements IResolvedTypes {
 
 	protected void resolveDependentTypeArguments(final Object handle, LightweightBoundTypeArgument boundTypeArgument) {
 		List<LightweightBoundTypeArgument> existingTypeArguments = ensureTypeParameterHintsMapExists().get(handle);
-		for(int i = 0; i < existingTypeArguments.size(); i++) {
-			LightweightBoundTypeArgument existingTypeArgument = existingTypeArguments.get(i);
-			if (existingTypeArgument.getSource() == BoundTypeArgumentSource.INFERRED) {
-				if (existingTypeArgument.getTypeReference() instanceof UnboundTypeReference) {
-					UnboundTypeReference existingReference = (UnboundTypeReference) existingTypeArgument.getTypeReference();
-					// resolve similar pending type arguments, too
-					if (existingTypeArgument.getDeclaredVariance() == existingTypeArgument.getActualVariance()) {
-						acceptHint(existingReference.getHandle(), boundTypeArgument);
-					}
-				} else if (existingTypeArgument.getTypeReference() != null && existingTypeArgument.getTypeReference() != boundTypeArgument.getTypeReference()) {
-					if (!existingTypeArgument.getTypeReference().isResolved()) {
-						ExpectationTypeParameterHintCollector collector = new ExpectationTypeParameterHintCollector(getReferenceOwner());
-						collector.processPairedReferences(boundTypeArgument.getTypeReference(), existingTypeArgument.getTypeReference());
+		if (existingTypeArguments != null) {
+			for(int i = 0; i < existingTypeArguments.size(); i++) {
+				LightweightBoundTypeArgument existingTypeArgument = existingTypeArguments.get(i);
+				if (existingTypeArgument.getSource() == BoundTypeArgumentSource.INFERRED) {
+					if (existingTypeArgument.getTypeReference() instanceof UnboundTypeReference) {
+						UnboundTypeReference existingReference = (UnboundTypeReference) existingTypeArgument.getTypeReference();
+						// resolve similar pending type arguments, too
+						if (existingTypeArgument.getDeclaredVariance() == existingTypeArgument.getActualVariance()) {
+							acceptHint(existingReference.getHandle(), boundTypeArgument);
+						}
+					} else if (existingTypeArgument.getTypeReference() != null && existingTypeArgument.getTypeReference() != boundTypeArgument.getTypeReference()) {
+						if (!existingTypeArgument.getTypeReference().isResolved()) {
+							ExpectationTypeParameterHintCollector collector = new ExpectationTypeParameterHintCollector(getReferenceOwner());
+							collector.processPairedReferences(boundTypeArgument.getTypeReference(), existingTypeArgument.getTypeReference());
+						}
 					}
 				}
 			}
@@ -836,9 +824,9 @@ public abstract class ResolvedTypes implements IResolvedTypes {
 	}
 
 	protected List<LightweightBoundTypeArgument> getHints(Object handle) {
-		ListMultimap<Object,LightweightBoundTypeArgument> multimap = basicGetTypeParameterHints();
-		if (multimap.containsKey(handle))
-			return multimap.get(handle);
+		List<LightweightBoundTypeArgument> result = basicGetTypeParameterHints().get(handle);
+		if (result != null)
+			return result;
 		return Collections.emptyList();
 	}
 
