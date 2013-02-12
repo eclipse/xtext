@@ -8,6 +8,7 @@
 package org.eclipse.xtext.xbase.typesystem.util;
 
 import java.util.Collection;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -24,7 +25,7 @@ import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.OwnedConverter;
 import org.eclipse.xtext.xbase.typesystem.references.ParameterizedTypeReference;
 
-import com.google.common.collect.ListMultimap;
+import com.google.common.collect.Maps;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API 
@@ -44,7 +45,7 @@ public class ActualTypeArgumentCollector extends AbstractTypeReferencePairWalker
 		}
 	}
 
-	private final ListMultimap<JvmTypeParameter, LightweightBoundTypeArgument> typeParameterMapping;
+	private final Map<JvmTypeParameter, List<LightweightBoundTypeArgument>> typeParameterMapping;
 	private final Collection<JvmTypeParameter> parametersToBeMapped;
 	private final BoundTypeArgumentSource defaultSource;
 
@@ -52,7 +53,7 @@ public class ActualTypeArgumentCollector extends AbstractTypeReferencePairWalker
 		super(owner);
 		this.parametersToBeMapped = parametersToBeMapped;
 		this.defaultSource = defaultSource;
-		typeParameterMapping = Multimaps2.newLinkedHashListMultimap(parametersToBeMapped.size(), 3);
+		typeParameterMapping = Maps2.newLinkedHashMapWithExpectedSize(parametersToBeMapped.size());
 	}
 
 	public void populateTypeParameterMapping(LightweightTypeReference declaredType, LightweightTypeReference actualType) {
@@ -74,10 +75,10 @@ public class ActualTypeArgumentCollector extends AbstractTypeReferencePairWalker
 	
 	@Override
 	protected void processTypeParameter(JvmTypeParameter typeParameter, LightweightTypeReference reference) {
-		typeParameterMapping.put(typeParameter, boundByDefaultSource(reference));
+		Maps2.putIntoListMap(typeParameter, boundByDefaultSource(reference), typeParameterMapping);
 	}
 	
-	public ListMultimap<JvmTypeParameter, LightweightBoundTypeArgument> rawGetTypeParameterMapping() {
+	public Map<JvmTypeParameter, List<LightweightBoundTypeArgument>> rawGetTypeParameterMapping() {
 		return typeParameterMapping;
 	}
 	
@@ -97,11 +98,11 @@ public class ActualTypeArgumentCollector extends AbstractTypeReferencePairWalker
 		super.processPairedReferences(declaredType, actualType);
 	}
 	
-	public ListMultimap<JvmTypeParameter, LightweightBoundTypeArgument> getTypeParameterMapping() {
+	public Map<JvmTypeParameter, List<LightweightBoundTypeArgument>> getTypeParameterMapping() {
 		if (typeParameterMapping.keySet().containsAll(getParametersToProcess())) {
 			return typeParameterMapping;
 		}
-		ListMultimap<JvmTypeParameter, LightweightBoundTypeArgument> result = Multimaps2.newLinkedHashListMultimap(typeParameterMapping);
+		Map<JvmTypeParameter,List<LightweightBoundTypeArgument>> result = Maps.newLinkedHashMap(typeParameterMapping);
 		OwnedConverter converter = new OwnedConverter(getOwner());
 		for(JvmTypeParameter pendingParameter: getParametersToProcess()) {
 			if (!result.containsKey(pendingParameter)) {
@@ -119,13 +120,13 @@ public class ActualTypeArgumentCollector extends AbstractTypeReferencePairWalker
 								LightweightTypeReference resolvedConstraint = lightweightReference.accept(
 										new TypeParameterByConstraintSubstitutor(constraintParameterMapping, getOwner()), 
 										new ConstraintVisitingInfo(pendingParameter));
-								result.put(pendingParameter, boundByConstraint(resolvedConstraint, pendingParameter));
+								Maps2.putIntoListMap(pendingParameter, boundByConstraint(resolvedConstraint, pendingParameter), result);
 							} else {
 								ParameterizedTypeReference lightweightReference = new ParameterizedTypeReference(getOwner(), getOwner().getServices().getTypeReferences().findDeclaredType(Object.class, constraintType));
-								result.put(pendingParameter, boundByConstraint(lightweightReference, pendingParameter));
+								Maps2.putIntoListMap(pendingParameter, boundByConstraint(lightweightReference, pendingParameter), result);
 							}
 						} else {
-							result.putAll(pendingParameter, result.get((JvmTypeParameter) constraintType));
+							Maps2.putAllIntoListMap(pendingParameter, result.get(constraintType), result);
 						}
 					}
 				}

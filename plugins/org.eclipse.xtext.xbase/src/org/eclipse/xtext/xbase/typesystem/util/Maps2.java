@@ -7,9 +7,13 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.typesystem.util;
 
+import java.util.Collection;
 import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
 
 import com.google.common.base.Preconditions;
+import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.common.primitives.Ints;
 
@@ -34,6 +38,33 @@ public class Maps2 {
 	 */
 	public static <K, V> LinkedHashMap<K, V> newLinkedHashMapWithExpectedSize(int expectedSize) {
 		return new LinkedHashMap<K, V>(capacity(expectedSize));
+	}
+	
+	/**
+	 * Puts a value into a map that supports lists as values.
+	 * The list is created on-demand.
+	 */
+	public static <K, V> void putIntoListMap(K key, V value, Map<? super K, List<V>> map) {
+		List<V> list = map.get(key);
+		if (list == null) {
+			list = Lists.newArrayListWithCapacity(2);
+			map.put(key, list);
+		}
+		list.add(value);
+	}
+	
+	/**
+	 * Puts a value into a map that supports lists as values.
+	 * The list is created on-demand.
+	 */
+	public static <K, V> void putAllIntoListMap(K key, Collection<? extends V> values, Map<? super K, List<V>> map) {
+		List<V> list = map.get(key);
+		if (list == null) {
+			list = Lists.newArrayList(values);
+			map.put(key, list);
+		} else {
+			list.addAll(values);
+		}
 	}
 
 	/**

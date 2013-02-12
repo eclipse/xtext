@@ -35,7 +35,7 @@ public class ExpressionAwareStackedResolvedTypes extends StackedResolvedTypes {
 			}
 		}
 		Collection<TypeData> result = basicGetExpressionTypes().get(expression);
-		if (!result.isEmpty()) {
+		if (result != null && !result.isEmpty()) {
 			TypeData returnTypeData = mergeTypeData(expression, result, true, true);
 			TypeData actualTypeData = mergeTypeData(expression, result, false, true);
 			result.clear();

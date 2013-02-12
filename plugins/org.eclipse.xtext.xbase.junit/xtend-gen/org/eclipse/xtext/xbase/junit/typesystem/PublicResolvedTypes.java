@@ -7,8 +7,8 @@
  */
 package org.eclipse.xtext.xbase.junit.typesystem;
 
-import com.google.common.collect.Multimap;
 import java.util.List;
+import java.util.Map;
 import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.xbase.XExpression;
@@ -43,8 +43,8 @@ public class PublicResolvedTypes extends RootResolvedTypes {
     return _hints;
   }
   
-  public Multimap<XExpression,TypeData> basicGetExpressionTypes() {
-    Multimap<XExpression,TypeData> _basicGetExpressionTypes = super.basicGetExpressionTypes();
+  public Map<XExpression,List<TypeData>> basicGetExpressionTypes() {
+    Map<XExpression,List<TypeData>> _basicGetExpressionTypes = super.basicGetExpressionTypes();
     return _basicGetExpressionTypes;
   }
 }

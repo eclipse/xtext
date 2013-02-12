@@ -7,8 +7,8 @@
  *******************************************************************************/
 package org.eclipse.xtend.core.tests.typesystem
 
-import com.google.common.collect.Multimap
 import com.google.inject.Inject
+import java.util.List
 import java.util.Map
 import org.eclipse.xtend.core.jvmmodel.IXtendJvmAssociations
 import org.eclipse.xtext.common.types.JvmTypeParameter
@@ -22,7 +22,6 @@ import org.eclipse.xtext.xbase.typesystem.util.VarianceInfo
 import org.junit.Test
 
 import static org.eclipse.xtext.xbase.typesystem.util.VarianceInfo.*
-import static org.junit.Assert.*
 
 /**
  * @author Sebastian Zarnekow
@@ -41,7 +40,7 @@ class ActualTypeArgumentCollectorTest extends AbstractTestingTypeReferenceOwner 
 		return collector.typeParameterMapping
 	}
 	
-	def assertMapping(Multimap<JvmTypeParameter, LightweightBoundTypeArgument> mapping, String typeParamName, Triple<String,VarianceInfo,VarianceInfo>... mappedTypes) {
+	def assertMapping(Map<JvmTypeParameter, List<LightweightBoundTypeArgument>> mapping, String typeParamName, Triple<String,VarianceInfo,VarianceInfo>... mappedTypes) {
 		val allKeys = mapping.keySet
 		for(key: allKeys) {
 			if (key.simpleName == typeParamName) {
@@ -57,7 +56,7 @@ class ActualTypeArgumentCollectorTest extends AbstractTestingTypeReferenceOwner 
 		return mapping
 	}
 	
-	def assertOrigins(Multimap<JvmTypeParameter, LightweightBoundTypeArgument> mapping, String typeParamName, int count) {
+	def assertOrigins(Map<JvmTypeParameter, List<LightweightBoundTypeArgument>> mapping, String typeParamName, int count) {
 		val allKeys = mapping.keySet
 		for(key: allKeys) {
 			if (key.simpleName == typeParamName) {

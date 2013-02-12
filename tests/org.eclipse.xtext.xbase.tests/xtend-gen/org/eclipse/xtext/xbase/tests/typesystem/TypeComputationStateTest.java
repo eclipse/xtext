@@ -7,10 +7,9 @@
  */
 package org.eclipse.xtext.xbase.tests.typesystem;
 
-import com.google.common.collect.Multimap;
 import com.google.inject.Inject;
-import java.util.Collection;
 import java.util.List;
+import java.util.Map;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EObject;
@@ -100,10 +99,10 @@ public class TypeComputationStateTest extends AbstractXbaseTestCase implements I
       IFeatureScopeSession _newSession = _batchScopeProvider.newSession(_eResource);
       ExpressionBasedRootTypeComputationState _expressionBasedRootTypeComputationState = new ExpressionBasedRootTypeComputationState(resolution, _newSession, expression, any);
       _expressionBasedRootTypeComputationState.computeTypes();
-      final Multimap<XExpression,TypeData> expressionTypes = resolution.basicGetExpressionTypes();
+      final Map<XExpression,List<TypeData>> expressionTypes = resolution.basicGetExpressionTypes();
       EList<XExpression> _expressions = ((XBlockExpression) expression).getExpressions();
       XExpression _head = IterableExtensions.<XExpression>head(_expressions);
-      final Collection<TypeData> typesForNullLiteral = expressionTypes.get(_head);
+      final List<TypeData> typesForNullLiteral = expressionTypes.get(_head);
       String _string = typesForNullLiteral.toString();
       final Function1<TypeData,Boolean> _function = new Function1<TypeData,Boolean>() {
           public Boolean apply(final TypeData it) {
@@ -125,7 +124,7 @@ public class TypeComputationStateTest extends AbstractXbaseTestCase implements I
       Iterable<TypeData> _filter_1 = IterableExtensions.<TypeData>filter(typesForNullLiteral, _function_1);
       int _size_1 = IterableExtensions.size(_filter_1);
       Assert.assertEquals(_string_1, 1, _size_1);
-      final Collection<TypeData> typesForBlock = expressionTypes.get(expression);
+      final List<TypeData> typesForBlock = expressionTypes.get(expression);
       String _string_2 = typesForBlock.toString();
       final Function1<TypeData,Boolean> _function_2 = new Function1<TypeData,Boolean>() {
           public Boolean apply(final TypeData it) {
@@ -168,11 +167,11 @@ public class TypeComputationStateTest extends AbstractXbaseTestCase implements I
       IFeatureScopeSession _newSession = _batchScopeProvider.newSession(_eResource);
       ExpressionBasedRootTypeComputationState _expressionBasedRootTypeComputationState = new ExpressionBasedRootTypeComputationState(resolution, _newSession, expression, any);
       _expressionBasedRootTypeComputationState.computeTypes();
-      final Multimap<XExpression,TypeData> expressionTypes = resolution.basicGetExpressionTypes();
+      final Map<XExpression,List<TypeData>> expressionTypes = resolution.basicGetExpressionTypes();
       TreeIterator<EObject> _eAllContents = expression.eAllContents();
       final Procedure1<EObject> _function = new Procedure1<EObject>() {
           public void apply(final EObject it) {
-            final Collection<TypeData> types = expressionTypes.get(((XExpression) it));
+            final List<TypeData> types = expressionTypes.get(((XExpression) it));
             String _string = types.toString();
             final Function1<TypeData,Boolean> _function = new Function1<TypeData,Boolean>() {
                 public Boolean apply(final TypeData it) {
@@ -209,11 +208,11 @@ public class TypeComputationStateTest extends AbstractXbaseTestCase implements I
       IFeatureScopeSession _newSession = _batchScopeProvider.newSession(_eResource);
       ExpressionBasedRootTypeComputationState _expressionBasedRootTypeComputationState = new ExpressionBasedRootTypeComputationState(resolution, _newSession, expression, any);
       _expressionBasedRootTypeComputationState.computeTypes();
-      final Multimap<XExpression,TypeData> expressionTypes = resolution.basicGetExpressionTypes();
+      final Map<XExpression,List<TypeData>> expressionTypes = resolution.basicGetExpressionTypes();
       TreeIterator<EObject> _eAllContents = expression.eAllContents();
       final Procedure1<EObject> _function = new Procedure1<EObject>() {
           public void apply(final EObject it) {
-            final Collection<TypeData> typesForMemberFeatureCall = expressionTypes.get(((XExpression) it));
+            final List<TypeData> typesForMemberFeatureCall = expressionTypes.get(((XExpression) it));
             String _plus = (it + " ");
             String _string = typesForMemberFeatureCall.toString();
             String _plus_1 = (_plus + _string);
