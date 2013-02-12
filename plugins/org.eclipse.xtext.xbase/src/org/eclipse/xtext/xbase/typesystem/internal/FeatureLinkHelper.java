@@ -12,6 +12,10 @@ import java.util.List;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.xtext.common.types.JvmConstructor;
+import org.eclipse.xtext.common.types.JvmDeclaredType;
+import org.eclipse.xtext.common.types.JvmTypeParameter;
+import org.eclipse.xtext.common.types.JvmTypeParameterDeclarator;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.XAssignment;
 import org.eclipse.xtext.xbase.XBinaryOperation;
@@ -19,6 +23,8 @@ import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XFeatureCall;
 import org.eclipse.xtext.xbase.XMemberFeatureCall;
 import org.eclipse.xtext.xbase.XUnaryOperation;
+
+import com.google.common.collect.Lists;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -64,6 +70,29 @@ public class FeatureLinkHelper {
 		// explicit condition to make sure we thought about it
 		if (expression instanceof XUnaryOperation) {
 			return Collections.emptyList();
+		}
+		return Collections.emptyList();
+	}
+	
+	public List<JvmTypeParameter> getDeclaredTypeParameters(JvmConstructor constructor) {
+		List<JvmTypeParameter> constructorTypeParameters = constructor.getTypeParameters();
+		if (constructorTypeParameters.isEmpty()) {
+			JvmDeclaredType createdType = constructor.getDeclaringType();
+			if (createdType instanceof JvmTypeParameterDeclarator) {
+				return ((JvmTypeParameterDeclarator) createdType).getTypeParameters();
+			}
+		} else {
+			JvmDeclaredType createdType = constructor.getDeclaringType();
+			if (createdType instanceof JvmTypeParameterDeclarator) {
+				List<JvmTypeParameter> typeParameters = ((JvmTypeParameterDeclarator) createdType).getTypeParameters();
+				if (typeParameters.isEmpty()) {
+					return constructorTypeParameters;
+				}
+				List<JvmTypeParameter> result = Lists.newArrayList(constructorTypeParameters);
+				result.addAll(typeParameters);
+				return result;
+			}
+			return constructorTypeParameters;
 		}
 		return Collections.emptyList();
 	}

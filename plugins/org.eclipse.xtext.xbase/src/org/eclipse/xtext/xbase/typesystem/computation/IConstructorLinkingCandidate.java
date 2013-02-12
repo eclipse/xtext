@@ -7,9 +7,12 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.typesystem.computation;
 
+import java.util.List;
+
 import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.xtext.common.types.JvmConstructor;
 import org.eclipse.xtext.xbase.XConstructorCall;
+import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 
 /**
  * A constructor linking candidate represents an actual or a possible
@@ -25,5 +28,20 @@ public interface IConstructorLinkingCandidate extends ILinkingCandidate {
 	XConstructorCall getConstructorCall();
 	 
 	JvmConstructor getConstructor();
-	
+
+	/**
+	 * The resolved type arguments. If the constructor itself defines type parameters,
+	 * their resolved representation is appended to the list of type arguments.
+	 * Consider the following type:
+	 * 
+	 * <pre>
+	 * class C&lt;T, V&gt; {
+	 *   public <P> C(P p) {}
+	 * }
+	 * </pre>
+	 * 
+	 * An invocation of the constructor {@code C} will return three type arguments, the bound
+	 * values of for {@code T}, {@code V} and {@code P}.
+	 */
+	List<LightweightTypeReference> getTypeArguments();
 }

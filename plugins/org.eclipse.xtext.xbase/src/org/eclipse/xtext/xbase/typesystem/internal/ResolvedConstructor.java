@@ -58,17 +58,7 @@ public class ResolvedConstructor extends AbstractResolvedReference<XConstructorC
 	
 	@Override
 	public List<JvmTypeParameter> getDeclaredTypeParameters() {
-		JvmDeclaredType createdType = getConstructor().getDeclaringType();
-		if (createdType instanceof JvmTypeParameterDeclarator) {
-			return ((JvmTypeParameterDeclarator) createdType).getTypeParameters();
-		}
-		return Collections.emptyList();
+		return new FeatureLinkHelper().getDeclaredTypeParameters(getConstructor());
 	}
-
-//	@Override
-//	@Nullable
-//	protected XExpression getReceiver() {
-//		return null;
-//	}
 	
 }
