@@ -43,7 +43,7 @@ public abstract class AbstractFilterOutlineContribution extends AbstractToggleOu
 	
 	@Override
 	protected void stateChanged(boolean newState) {
-		if(!treeViewer.getTree().isDisposed()) 
+		if(treeViewer != null && !treeViewer.getTree().isDisposed()) 
 			treeViewer.refresh();
 	}
 
@@ -58,6 +58,11 @@ public abstract class AbstractFilterOutlineContribution extends AbstractToggleOu
 	@Override
 	public void deregister(OutlinePage outlinePage) {
 		super.deregister(outlinePage);
-		outlineFilterAndSorter.removeFilter(getFilter());
+		if (filter != null) {
+			outlineFilterAndSorter.removeFilter(getFilter());
+			filter = null;
+		}
+		outlineFilterAndSorter = null;
+		treeViewer = null;
 	}
 }
