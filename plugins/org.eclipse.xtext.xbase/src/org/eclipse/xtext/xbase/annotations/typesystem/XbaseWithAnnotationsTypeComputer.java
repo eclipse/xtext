@@ -25,7 +25,6 @@ import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotationsPackage;
 import org.eclipse.xtext.xbase.typesystem.computation.ITypeComputationResult;
 import org.eclipse.xtext.xbase.typesystem.computation.ITypeComputationState;
 import org.eclipse.xtext.xbase.typesystem.computation.XbaseTypeComputer;
-import org.eclipse.xtext.xbase.typesystem.conformance.ConformanceHint;
 import org.eclipse.xtext.xbase.typesystem.references.CompoundTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.ParameterizedTypeReference;
@@ -98,10 +97,11 @@ public class XbaseWithAnnotationsTypeComputer extends XbaseTypeComputer {
 					? expectation
 					: componentType;
 			ITypeComputationResult result = state.withExpectation(actualExpectation).computeTypes(value);
-			if (!actualExpectation.isAssignableFrom(result.getActualExpressionType())) {
+			LightweightTypeReference resultType = result.getActualExpressionType();
+			if (resultType != null && !actualExpectation.isAssignableFrom(resultType)) {
 				if (value instanceof XListLiteral) {
 					// our children are incompatible so let's mark the array itself as compatible.
-					state.refineExpectedType(value, result.getActualExpressionType());
+					state.refineExpectedType(value, resultType);
 				} else {
 					CompoundTypeReference bothExpectations = new CompoundTypeReference(state.getReferenceOwner(), true);
 					bothExpectations.addComponent(componentType);
@@ -112,10 +112,11 @@ public class XbaseWithAnnotationsTypeComputer extends XbaseTypeComputer {
 		} else if (expectation == null) {
 			state.withNonVoidExpectation().computeTypes(value);
 		} else {
-			ITypeComputationResult valueType = state.withExpectation(expectation).computeTypes(value);
-			if (valueType.getConformanceHints().contains(ConformanceHint.SUCCESS)) {
+			ITypeComputationResult valueResult = state.withExpectation(expectation).computeTypes(value);
+			LightweightTypeReference valueResultType = valueResult.getActualExpressionType();
+			if (valueResultType != null && !expectation.isAssignableFrom(valueResultType)) {
 				if (value instanceof XListLiteral) {
-					String simpleName = valueType.getActualExpressionType().getSimpleName();
+					String simpleName = valueResultType.getSimpleName();
 					state.addDiagnostic(new EObjectDiagnosticImpl(
 							Severity.ERROR, 
 							IssueCodes.INCOMPATIBLE_TYPES, 

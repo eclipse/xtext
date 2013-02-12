@@ -9,7 +9,9 @@ package org.eclipse.xtext.xbase.typesystem.computation;
 
 import java.util.EnumSet;
 
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.NonNullByDefault;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XIfExpression;
 import org.eclipse.xtext.xbase.typesystem.conformance.ConformanceHint;
@@ -38,13 +40,13 @@ import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
  * 
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-@NonNullByDefault(false)
 public interface ITypeComputationResult {
 
 	/**
 	 * Returns the type of the expression (if known).
 	 * May return <code>null</code>.
 	 */
+	@Nullable
 	LightweightTypeReference getActualExpressionType();
 
 	/**
@@ -52,6 +54,7 @@ public interface ITypeComputationResult {
 	 * 
 	 * TODO expose the {@link ITypeExpectation} instead which carries more information.
 	 */
+	@Nullable
 	LightweightTypeReference getExpectedExpressionType();
 	
 	/**
@@ -60,6 +63,7 @@ public interface ITypeComputationResult {
 	 * from the {@link #getActualExpressionType() actual type} since
 	 * its value escapes the current context.
 	 */
+	@Nullable
 	LightweightTypeReference getReturnType();
 	
 	/**
@@ -67,17 +71,20 @@ public interface ITypeComputationResult {
 	 * 
 	 * TODO expose the {@link ITypeExpectation} instead which carries more information.
 	 */
+	@Nullable
 	LightweightTypeReference getExpectedReturnType();
 	
 	/**
 	 * The expression that is associated with this result.
 	 */
+	@Nullable
 	XExpression getExpression();
 	
 	/**
 	 * Conformance information about the actual expression type and
 	 * the expectation.
 	 */
+	@NonNull
 	EnumSet<ConformanceHint> getConformanceHints();
 	
 //	EnumSet<ConformanceHint> getReturnTypeConformanceHints();
