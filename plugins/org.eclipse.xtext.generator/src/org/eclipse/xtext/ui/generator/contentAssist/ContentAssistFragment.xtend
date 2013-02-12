@@ -77,7 +77,7 @@ class ContentAssistFragment extends Xtend2GeneratorFragment implements IInheriti
 	}
 	
 	def getSuperClassName() {
-		val superGrammar = grammar.nonTerminalsSuperGrammar
+		val superGrammar = grammar.usedGrammars.head
 		if(inheritImplementation && superGrammar != null)
 			superGrammar.proposalProviderName
 		else
