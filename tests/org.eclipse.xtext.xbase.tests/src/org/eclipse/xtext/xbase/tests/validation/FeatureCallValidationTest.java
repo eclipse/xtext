@@ -10,6 +10,7 @@ package org.eclipse.xtext.xbase.tests.validation;
 import static org.eclipse.xtext.xbase.XbasePackage.Literals.*;
 import static org.eclipse.xtext.xbase.validation.IssueCodes.*;
 
+import org.eclipse.xtext.diagnostics.Diagnostic;
 import org.eclipse.xtext.junit4.validation.ValidationTestHelper;
 import org.eclipse.xtext.xbase.XBlockExpression;
 import org.eclipse.xtext.xbase.XExpression;
@@ -44,6 +45,41 @@ public class FeatureCallValidationTest extends AbstractXbaseTestCase {
 	@Test public void testConstructorCall_3() throws Exception {
 		XExpression expression = expression("new testdata.Constructors2(42)");
 		helper.assertError(expression, XCONSTRUCTOR_CALL, FEATURE_NOT_VISIBLE);
+	}
+	
+	@Test public void testConstructorCall_4() throws Exception {
+		XExpression expression = expression("new int");
+		helper.assertError(expression, XCONSTRUCTOR_CALL, ILLEGAL_CLASS_INSTANTIATION, "Cannot instantiate the primitive type int");
+	}
+	
+	@Test public void testConstructorCall_5() throws Exception {
+		XExpression expression = expression("new Override");
+		helper.assertError(expression, XCONSTRUCTOR_CALL, ILLEGAL_CLASS_INSTANTIATION, "Cannot instantiate the annotation type Override");
+	}
+	
+	@Test public void testConstructorCall_6() throws Exception {
+		XExpression expression = expression("new java.lang.annotation.RetentionPolicy");
+		helper.assertError(expression, XCONSTRUCTOR_CALL, ILLEGAL_CLASS_INSTANTIATION, "Cannot instantiate the enum type RetentionPolicy");
+	}
+	
+	@Test public void testConstructorCall_7() throws Exception {
+		XExpression expression = expression("new Iterable<String>");
+		helper.assertError(expression, XCONSTRUCTOR_CALL, ILLEGAL_CLASS_INSTANTIATION, "Cannot instantiate the interface type Iterable");
+	}
+	
+	@Test public void testConstructorCall_8() throws Exception {
+		XExpression expression = expression("new java.util.AbstractList<String>");
+		helper.assertError(expression, XCONSTRUCTOR_CALL, ABSTRACT_CLASS_INSTANTIATION, "Cannot instantiate the abstract type AbstractList");
+	}
+	
+	@Test public void testConstructorCall_9() throws Exception {
+		XExpression expression = expression("new void");
+		helper.assertError(expression, XCONSTRUCTOR_CALL, ILLEGAL_CLASS_INSTANTIATION, "Cannot instantiate the primitive type void");
+	}
+	
+	@Test public void testConstructorCall_10() throws Exception {
+		XExpression expression = expression("new DoesNotExist");
+		helper.assertError(expression, XCONSTRUCTOR_CALL, Diagnostic.LINKING_DIAGNOSTIC);
 	}
 
 	// TODO: constructor type arguments

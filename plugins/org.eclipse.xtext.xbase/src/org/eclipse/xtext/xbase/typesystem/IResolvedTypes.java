@@ -13,7 +13,9 @@ import java.util.List;
 
 import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.xtext.common.types.JvmConstructor;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
+import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.diagnostics.AbstractDiagnostic;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.XConstructorCall;
@@ -96,6 +98,17 @@ public interface IResolvedTypes {
 	 */
 	@Nullable
 	JvmIdentifiableElement getLinkedFeature(@Nullable XAbstractFeatureCall featureCall);
+	
+	/**
+	 * Returns the intermediate linking result for the given constructor call, if any.
+	 * If the constructor call is <code>null</code>, the result is <code>null</code>.
+	 * If the constructor call is broken, it may return a {@link JvmType} instead of 
+	 * a {@link JvmConstructor}.
+	 * @param constructorCall the constructor call that is queried for the current linking state.
+	 * @return the potentially intermediate linking state or <code>null</code> if none.
+	 */
+	@Nullable
+	JvmIdentifiableElement getLinkedFeature(@Nullable XConstructorCall constructorCall);
 
 	IResolvedTypes NULL = new NullResolvedTypes();
 
@@ -147,6 +160,11 @@ public interface IResolvedTypes {
 		
 		@Nullable
 		public JvmIdentifiableElement getLinkedFeature(@Nullable XAbstractFeatureCall featureCall) {
+			return null;
+		}
+		
+		@Nullable
+		public JvmIdentifiableElement getLinkedFeature(@Nullable XConstructorCall constructorCall) {
 			return null;
 		}
 	}

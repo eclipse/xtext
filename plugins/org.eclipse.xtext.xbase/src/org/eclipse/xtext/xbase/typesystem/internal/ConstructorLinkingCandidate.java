@@ -11,13 +11,19 @@ import java.util.List;
 
 import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.xtext.common.types.JvmConstructor;
+import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
+import org.eclipse.xtext.diagnostics.AbstractDiagnostic;
+import org.eclipse.xtext.diagnostics.Severity;
+import org.eclipse.xtext.util.IAcceptor;
+import org.eclipse.xtext.validation.EObjectDiagnosticImpl;
 import org.eclipse.xtext.xbase.XConstructorCall;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XbasePackage;
 import org.eclipse.xtext.xbase.scoping.batch.IIdentifiableElementDescription;
 import org.eclipse.xtext.xbase.typesystem.computation.IConstructorLinkingCandidate;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
+import org.eclipse.xtext.xbase.validation.IssueCodes;
 
 import com.google.common.collect.Lists;
 
@@ -48,6 +54,28 @@ public class ConstructorLinkingCandidate extends AbstractPendingLinkingCandidate
 	@Override
 	protected IConstructorLinkingCandidate getThis() {
 		return this;
+	}
+	
+	@Override
+	public boolean validate(IAcceptor<? super AbstractDiagnostic> result) {
+		JvmDeclaredType declaringType = getConstructor().getDeclaringType();
+		if (declaringType.isAbstract()) {
+			String message = "Cannot instantiate the abstract type " + declaringType.getSimpleName();
+			AbstractDiagnostic diagnostic = new EObjectDiagnosticImpl(
+					Severity.ERROR, 
+					IssueCodes.ABSTRACT_CLASS_INSTANTIATION, 
+					message, 
+					getExpression(), 
+					XbasePackage.Literals.XCONSTRUCTOR_CALL__CONSTRUCTOR, -1, null);
+			result.accept(diagnostic);
+			return false;
+		}
+		return super.validate(result);
+	}
+	
+	@Override
+	protected String getFeatureTypeName() {
+		return "constructor";
 	}
 	
 	@Override

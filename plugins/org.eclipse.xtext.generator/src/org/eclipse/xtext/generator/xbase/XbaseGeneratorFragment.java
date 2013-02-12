@@ -34,6 +34,7 @@ import org.eclipse.xtext.linking.LinkingScopeProviderBinding;
 import org.eclipse.xtext.naming.IQualifiedNameConverter;
 import org.eclipse.xtext.naming.IQualifiedNameProvider;
 import org.eclipse.xtext.resource.DerivedStateAwareResourceDescriptionManager;
+import org.eclipse.xtext.resource.EObjectAtOffsetHelper;
 import org.eclipse.xtext.resource.IDefaultResourceDescriptionStrategy;
 import org.eclipse.xtext.resource.IDerivedStateComputer;
 import org.eclipse.xtext.resource.ILocationInFileProvider;
@@ -180,6 +181,7 @@ public class XbaseGeneratorFragment extends AbstractGeneratorFragment {
 				.addTypeToType(ConfigurableIssueCodesProvider.class.getCanonicalName(),"org.eclipse.xtext.xbase.validation.XbaseConfigurableIssueCodes")
 				.addTypeToType("org.eclipse.xtext.common.types.util.VisibilityService", "org.eclipse.xtext.xbase.typesystem.legacy.LegacyVisibilityService")
 				.addTypeToType("org.eclipse.xtext.common.types.util.FeatureOverridesService", "org.eclipse.xtext.xbase.typesystem.legacy.LegacyFeatureOverridesService")
+				.addTypeToType(EObjectAtOffsetHelper.class.getCanonicalName(), "org.eclipse.xtext.xbase.linking.BrokenConstructorCallAwareEObjectAtOffsetHelper")
 				;
 		if (doesUseXbaseWithAnnotations(grammar)) {
 			config = config

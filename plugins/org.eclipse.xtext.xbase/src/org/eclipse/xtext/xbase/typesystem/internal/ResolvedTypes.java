@@ -160,9 +160,19 @@ public abstract class ResolvedTypes implements IResolvedTypes {
 	
 	@Nullable
 	public JvmIdentifiableElement getLinkedFeature(@Nullable XAbstractFeatureCall featureCall) {
-		if (featureLinking == null || featureCall == null)
+		return doGetLinkedFeature(featureCall);
+	}
+	
+	@Nullable
+	public JvmIdentifiableElement getLinkedFeature(@Nullable XConstructorCall constructorCall) {
+		return doGetLinkedFeature(constructorCall);
+	}
+	
+	@Nullable
+	protected JvmIdentifiableElement doGetLinkedFeature(@Nullable XExpression featureOrConstructorCall) {
+		if (featureLinking == null || featureOrConstructorCall == null)
 			return null;
-		ILinkingCandidate candidate = featureLinking.get(featureCall);
+		ILinkingCandidate candidate = featureLinking.get(featureOrConstructorCall);
 		if (candidate == null)
 			return null;
 		return candidate.getFeature();

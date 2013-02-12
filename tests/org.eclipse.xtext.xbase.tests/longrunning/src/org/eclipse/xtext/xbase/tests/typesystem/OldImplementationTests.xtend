@@ -1036,6 +1036,22 @@ class OldAPITypeResolverTest extends AbstractOldAPITypeResolverTest {
 	@Ignore("fails in old implementation") @Test override testSetLiteral_05() {
 		fail("fails in old implementation")
 	}
+	@Ignore("fails in old implementation") @Test override testSetLiteral_08() {
+		fail("fails in old implementation")
+	}
+	@Ignore("fails in old implementation") @Test override testSetLiteral_09() {
+		fail("fails in old implementation")
+	}
+	@Ignore("fails in old implementation") @Test override testSetLiteral_10() {
+		fail("fails in old implementation")
+	}
+	
+	@Ignore("fails in old implementation") @Test override testBrokenConstructorCall_01() throws Exception {
+		fail("fails in old implementation")
+	}
+	@Ignore("fails in old implementation") @Test override testBrokenConstructorCall_02() throws Exception {
+		fail("fails in old implementation")
+	}
 	
 }
 

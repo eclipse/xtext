@@ -10,6 +10,7 @@ package org.eclipse.xtext.xbase.typesystem.computation;
 import java.util.List;
 
 import org.eclipse.jdt.annotation.NonNullByDefault;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.common.types.JvmConstructor;
 import org.eclipse.xtext.xbase.XConstructorCall;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
@@ -27,6 +28,7 @@ public interface IConstructorLinkingCandidate extends ILinkingCandidate {
 
 	XConstructorCall getConstructorCall();
 	 
+	@Nullable
 	JvmConstructor getConstructor();
 
 	/**

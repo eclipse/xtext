@@ -18,7 +18,7 @@ import org.eclipse.xtext.util.IAcceptor;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.typesystem.internal.AbstractPendingLinkingCandidate;
 import org.eclipse.xtext.xbase.typesystem.internal.AbstractResolvedReference;
-import org.eclipse.xtext.xbase.typesystem.internal.AbstractUnresolvableReference;
+import org.eclipse.xtext.xbase.typesystem.internal.AbstractUnresolvableReferenceWithNode;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 
 /**
@@ -32,7 +32,7 @@ import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
  * @see IFeatureLinkingCandidate
  * @see IConstructorLinkingCandidate
  * @see AbstractPendingLinkingCandidate
- * @see AbstractUnresolvableReference
+ * @see AbstractUnresolvableReferenceWithNode
  * @see AbstractResolvedReference
  * 
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -60,6 +60,7 @@ public interface ILinkingCandidate {
 	/**
 	 * Produce diagnostics for this condidate. It is not the responsibility of this
 	 * candidate to propagate the acceptor to its children.
+	 * @return <code>true</code> if further validation should be performed.
 	 */
 	boolean validate(IAcceptor<? super AbstractDiagnostic> result);
 	
