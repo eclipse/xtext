@@ -315,7 +315,7 @@ public class FeatureCallValidationTest extends AbstractXbaseTestCase {
 	@Test
 	public void testBug_350934_03() throws Exception {
 		XExpression expression = expression("true>=0"); 
-		helper.assertError(expression, XBOOLEAN_LITERAL, INCOMPATIBLE_TYPES);
+		helper.assertError(expression, XNUMBER_LITERAL, INCOMPATIBLE_TYPES, "Expected boolean or Boolean but was int");
 	}
 
 	@Test
