@@ -93,7 +93,7 @@ public class JavaValidatorFragment extends AbstractInheritingGeneratorFragment {
 	}
 
 	protected String getValidatorSuperClassName(Grammar grammar) {
-		Grammar superGrammar = getSuperGrammar(grammar);
+		Grammar superGrammar = Util.getNonTerminalsSuperGrammar(grammar);
 		if (isInheritImplementation() && superGrammar != null) 
 			return getValidatorName(superGrammar, "", getNaming());
 		else 

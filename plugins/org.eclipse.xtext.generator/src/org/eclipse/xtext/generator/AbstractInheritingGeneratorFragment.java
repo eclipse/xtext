@@ -8,7 +8,6 @@
 package org.eclipse.xtext.generator;
 
 import org.eclipse.xtext.Grammar;
-import static org.eclipse.xtext.generator.IInheriting.Util.*;
 
 /**
  * A generator fragment that generates code which inherits form the generated code
@@ -46,7 +45,14 @@ public class AbstractInheritingGeneratorFragment extends AbstractGeneratorFragme
 		}
 	}
 
+	/**
+	 * @return the super grammar 
+	 */
 	protected Grammar getSuperGrammar(Grammar grammar) {
-		return getNonTerminalsSuperGrammar(grammar);
+		if(!grammar.getUsedGrammars().isEmpty()) {
+			return grammar.getUsedGrammars().get(0);
+		} else {
+			return null;
+		}
 	}
 }

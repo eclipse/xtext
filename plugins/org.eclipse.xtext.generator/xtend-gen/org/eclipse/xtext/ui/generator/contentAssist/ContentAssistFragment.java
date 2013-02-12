@@ -14,6 +14,7 @@ import java.util.List;
 import java.util.Set;
 import javax.inject.Inject;
 import javax.inject.Named;
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.xpand2.XpandExecutionContext;
 import org.eclipse.xpand2.XpandFacade;
 import org.eclipse.xtend2.lib.StringConcatenation;
@@ -23,13 +24,13 @@ import org.eclipse.xtext.generator.BindFactory;
 import org.eclipse.xtext.generator.Binding;
 import org.eclipse.xtext.generator.Generator;
 import org.eclipse.xtext.generator.IInheriting;
-import org.eclipse.xtext.generator.IInheriting.Util;
 import org.eclipse.xtext.generator.IStubGenerating;
 import org.eclipse.xtext.generator.Naming;
 import org.eclipse.xtext.generator.Xtend2ExecutionContext;
 import org.eclipse.xtext.generator.Xtend2GeneratorFragment;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Conversions;
+import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 
 /**
@@ -131,7 +132,8 @@ public class ContentAssistFragment extends Xtend2GeneratorFragment implements II
   public String getSuperClassName() {
     String _xblockexpression = null;
     {
-      final Grammar superGrammar = Util.getNonTerminalsSuperGrammar(this.grammar);
+      EList<Grammar> _usedGrammars = this.grammar.getUsedGrammars();
+      final Grammar superGrammar = IterableExtensions.<Grammar>head(_usedGrammars);
       String _xifexpression = null;
       boolean _and = false;
       boolean _isInheritImplementation = this.isInheritImplementation();
