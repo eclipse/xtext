@@ -1,0 +1,9 @@
+Verified+1: Hudson CI
+Code-Review+2: Jan Koehnlein <jan.koehnlein@itemis.de>
+IP-Clean+1: Jan Koehnlein <jan.koehnlein@itemis.de>
+Verified+1: Jan Koehnlein <jan.koehnlein@itemis.de>
+Submitted-by: Jan Koehnlein <jan.koehnlein@itemis.de>
+Submitted-at: Tue, 12 Feb 2013 07:04:44 -0500
+Reviewed-on: https://git.eclipse.org/r/10303
+Project: tmf/org.eclipse.xtext
+Branch: refs/heads/master
