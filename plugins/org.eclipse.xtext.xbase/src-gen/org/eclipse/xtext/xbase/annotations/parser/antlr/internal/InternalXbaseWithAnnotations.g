@@ -330,90 +330,80 @@ ruleXAnnotationElementValue returns [EObject current=null]
 
     |
     { 
-        newCompositeNode(grammarAccess.getXAnnotationElementValueAccess().getXAnnotationValueArrayParserRuleCall_1()); 
+        newCompositeNode(grammarAccess.getXAnnotationElementValueAccess().getXListLiteralParserRuleCall_1()); 
     }
-    this_XAnnotationValueArray_1=ruleXAnnotationValueArray
+    this_XListLiteral_1=ruleXListLiteral
     { 
-        $current = $this_XAnnotationValueArray_1.current; 
+        $current = $this_XListLiteral_1.current; 
         afterParserOrEnumRuleCall();
     }
 
     |
     { 
-        newCompositeNode(grammarAccess.getXAnnotationElementValueAccess().getXListLiteralParserRuleCall_2()); 
+        newCompositeNode(grammarAccess.getXAnnotationElementValueAccess().getXStringLiteralParserRuleCall_2()); 
     }
-    this_XListLiteral_2=ruleXListLiteral
+    this_XStringLiteral_2=ruleXStringLiteral
     { 
-        $current = $this_XListLiteral_2.current; 
+        $current = $this_XStringLiteral_2.current; 
         afterParserOrEnumRuleCall();
     }
 
     |
     { 
-        newCompositeNode(grammarAccess.getXAnnotationElementValueAccess().getXStringLiteralParserRuleCall_3()); 
+        newCompositeNode(grammarAccess.getXAnnotationElementValueAccess().getXBooleanLiteralParserRuleCall_3()); 
     }
-    this_XStringLiteral_3=ruleXStringLiteral
+    this_XBooleanLiteral_3=ruleXBooleanLiteral
     { 
-        $current = $this_XStringLiteral_3.current; 
+        $current = $this_XBooleanLiteral_3.current; 
         afterParserOrEnumRuleCall();
     }
 
     |
     { 
-        newCompositeNode(grammarAccess.getXAnnotationElementValueAccess().getXBooleanLiteralParserRuleCall_4()); 
+        newCompositeNode(grammarAccess.getXAnnotationElementValueAccess().getXNumberLiteralParserRuleCall_4()); 
     }
-    this_XBooleanLiteral_4=ruleXBooleanLiteral
+    this_XNumberLiteral_4=ruleXNumberLiteral
     { 
-        $current = $this_XBooleanLiteral_4.current; 
+        $current = $this_XNumberLiteral_4.current; 
         afterParserOrEnumRuleCall();
     }
 
     |
     { 
-        newCompositeNode(grammarAccess.getXAnnotationElementValueAccess().getXNumberLiteralParserRuleCall_5()); 
+        newCompositeNode(grammarAccess.getXAnnotationElementValueAccess().getXTypeLiteralParserRuleCall_5()); 
     }
-    this_XNumberLiteral_5=ruleXNumberLiteral
+    this_XTypeLiteral_5=ruleXTypeLiteral
     { 
-        $current = $this_XNumberLiteral_5.current; 
+        $current = $this_XTypeLiteral_5.current; 
         afterParserOrEnumRuleCall();
     }
 
     |
     { 
-        newCompositeNode(grammarAccess.getXAnnotationElementValueAccess().getXTypeLiteralParserRuleCall_6()); 
+        newCompositeNode(grammarAccess.getXAnnotationElementValueAccess().getXAnnotationValueFieldReferenceParserRuleCall_6()); 
     }
-    this_XTypeLiteral_6=ruleXTypeLiteral
+    this_XAnnotationValueFieldReference_6=ruleXAnnotationValueFieldReference
     { 
-        $current = $this_XTypeLiteral_6.current; 
+        $current = $this_XAnnotationValueFieldReference_6.current; 
         afterParserOrEnumRuleCall();
     }
 
-    |
-    { 
-        newCompositeNode(grammarAccess.getXAnnotationElementValueAccess().getXAnnotationValueFieldReferenceParserRuleCall_7()); 
-    }
-    this_XAnnotationValueFieldReference_7=ruleXAnnotationValueFieldReference
-    { 
-        $current = $this_XAnnotationValueFieldReference_7.current; 
-        afterParserOrEnumRuleCall();
-    }
-
-    |(	otherlv_8='(' 
+    |(	otherlv_7='(' 
     {
-    	newLeafNode(otherlv_8, grammarAccess.getXAnnotationElementValueAccess().getLeftParenthesisKeyword_8_0());
+    	newLeafNode(otherlv_7, grammarAccess.getXAnnotationElementValueAccess().getLeftParenthesisKeyword_7_0());
     }
 
     { 
-        newCompositeNode(grammarAccess.getXAnnotationElementValueAccess().getXAnnotationElementValueStringConcatenationParserRuleCall_8_1()); 
+        newCompositeNode(grammarAccess.getXAnnotationElementValueAccess().getXAnnotationElementValueStringConcatenationParserRuleCall_7_1()); 
     }
-    this_XAnnotationElementValueStringConcatenation_9=ruleXAnnotationElementValueStringConcatenation
+    this_XAnnotationElementValueStringConcatenation_8=ruleXAnnotationElementValueStringConcatenation
     { 
-        $current = $this_XAnnotationElementValueStringConcatenation_9.current; 
+        $current = $this_XAnnotationElementValueStringConcatenation_8.current; 
         afterParserOrEnumRuleCall();
     }
-	otherlv_10=')' 
+	otherlv_9=')' 
     {
-    	newLeafNode(otherlv_10, grammarAccess.getXAnnotationElementValueAccess().getRightParenthesisKeyword_8_2());
+    	newLeafNode(otherlv_9, grammarAccess.getXAnnotationElementValueAccess().getRightParenthesisKeyword_7_2());
     }
 ))
 ;
@@ -473,81 +463,6 @@ ruleXAnnotationValueFieldReference returns [EObject current=null]
 
 )
 ))
-;
-
-
-
-
-
-// Entry rule entryRuleXAnnotationValueArray
-entryRuleXAnnotationValueArray returns [EObject current=null] 
-	:
-	{ newCompositeNode(grammarAccess.getXAnnotationValueArrayRule()); }
-	 iv_ruleXAnnotationValueArray=ruleXAnnotationValueArray 
-	 { $current=$iv_ruleXAnnotationValueArray.current; } 
-	 EOF 
-;
-
-// Rule XAnnotationValueArray
-ruleXAnnotationValueArray returns [EObject current=null] 
-    @init { enterRule(); 
-    }
-    @after { leaveRule(); }:
-((
-    {
-        $current = forceCreateModelElement(
-            grammarAccess.getXAnnotationValueArrayAccess().getXListLiteralAction_0(),
-            $current);
-    }
-)	otherlv_1='{' 
-    {
-    	newLeafNode(otherlv_1, grammarAccess.getXAnnotationValueArrayAccess().getLeftCurlyBracketKeyword_1());
-    }
-((
-(
-		{ 
-	        newCompositeNode(grammarAccess.getXAnnotationValueArrayAccess().getElementsXAnnotationElementValueParserRuleCall_2_0_0()); 
-	    }
-		lv_elements_2_0=ruleXAnnotationElementValue		{
-	        if ($current==null) {
-	            $current = createModelElementForParent(grammarAccess.getXAnnotationValueArrayRule());
-	        }
-       		add(
-       			$current, 
-       			"elements",
-        		lv_elements_2_0, 
-        		"XAnnotationElementValue");
-	        afterParserOrEnumRuleCall();
-	    }
-
-)
-)(	otherlv_3=',' 
-    {
-    	newLeafNode(otherlv_3, grammarAccess.getXAnnotationValueArrayAccess().getCommaKeyword_2_1_0());
-    }
-(
-(
-		{ 
-	        newCompositeNode(grammarAccess.getXAnnotationValueArrayAccess().getElementsXAnnotationElementValueParserRuleCall_2_1_1_0()); 
-	    }
-		lv_elements_4_0=ruleXAnnotationElementValue		{
-	        if ($current==null) {
-	            $current = createModelElementForParent(grammarAccess.getXAnnotationValueArrayRule());
-	        }
-       		add(
-       			$current, 
-       			"elements",
-        		lv_elements_4_0, 
-        		"XAnnotationElementValue");
-	        afterParserOrEnumRuleCall();
-	    }
-
-)
-))*)?	otherlv_5='}' 
-    {
-    	newLeafNode(otherlv_5, grammarAccess.getXAnnotationValueArrayAccess().getRightCurlyBracketKeyword_3());
-    }
-)
 ;
 
 

@@ -576,20 +576,13 @@ public abstract class AbstractXbaseWithAnnotationsSemanticSequencer extends Xbas
 				}
 				else break;
 			case XbasePackage.XLIST_LITERAL:
-				if(context == grammarAccess.getXAnnotationElementValueRule() ||
-				   context == grammarAccess.getXAnnotationElementValueStringConcatenationRule() ||
-				   context == grammarAccess.getXAnnotationElementValueStringConcatenationAccess().getXAnnotationElementValueBinaryOperationLeftOperandAction_1_0()) {
-					sequence_XAnnotationElementValue_XAnnotationValueArray_XListLiteral(context, (XListLiteral) semanticObject); 
-					return; 
-				}
-				else if(context == grammarAccess.getXAnnotationValueArrayRule()) {
-					sequence_XAnnotationValueArray(context, (XListLiteral) semanticObject); 
-					return; 
-				}
-				else if(context == grammarAccess.getXAdditiveExpressionRule() ||
+				if(context == grammarAccess.getXAdditiveExpressionRule() ||
 				   context == grammarAccess.getXAdditiveExpressionAccess().getXBinaryOperationLeftOperandAction_1_0_0_0() ||
 				   context == grammarAccess.getXAndExpressionRule() ||
 				   context == grammarAccess.getXAndExpressionAccess().getXBinaryOperationLeftOperandAction_1_0_0_0() ||
+				   context == grammarAccess.getXAnnotationElementValueRule() ||
+				   context == grammarAccess.getXAnnotationElementValueStringConcatenationRule() ||
+				   context == grammarAccess.getXAnnotationElementValueStringConcatenationAccess().getXAnnotationElementValueBinaryOperationLeftOperandAction_1_0() ||
 				   context == grammarAccess.getXAssignmentRule() ||
 				   context == grammarAccess.getXAssignmentAccess().getXBinaryOperationLeftOperandAction_1_1_0_0_0() ||
 				   context == grammarAccess.getXCastedExpressionRule() ||
@@ -1104,24 +1097,6 @@ public abstract class AbstractXbaseWithAnnotationsSemanticSequencer extends Xbas
 		feeder.accept(grammarAccess.getXAnnotationElementValueStringConcatenationAccess().getOperatorPlusSignKeyword_1_1_0(), semanticObject.getOperator());
 		feeder.accept(grammarAccess.getXAnnotationElementValueStringConcatenationAccess().getRightOperandXAnnotationElementValueParserRuleCall_1_2_0(), semanticObject.getRightOperand());
 		feeder.finish();
-	}
-	
-	
-	/**
-	 * Constraint:
-	 *     (((elements+=XAnnotationElementValue elements+=XAnnotationElementValue*)?) | ((elements+=XExpression elements+=XExpression*)?))
-	 */
-	protected void sequence_XAnnotationElementValue_XAnnotationValueArray_XListLiteral(EObject context, XListLiteral semanticObject) {
-		genericSequencer.createSequence(context, semanticObject);
-	}
-	
-	
-	/**
-	 * Constraint:
-	 *     ((elements+=XAnnotationElementValue elements+=XAnnotationElementValue*)?)
-	 */
-	protected void sequence_XAnnotationValueArray(EObject context, XListLiteral semanticObject) {
-		genericSequencer.createSequence(context, semanticObject);
 	}
 	
 	

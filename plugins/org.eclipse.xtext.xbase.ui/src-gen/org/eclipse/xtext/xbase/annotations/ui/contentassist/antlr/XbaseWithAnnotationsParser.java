@@ -81,11 +81,8 @@ public class XbaseWithAnnotationsParser extends AbstractContentAssistParser {
 					put(grammarAccess.getXAnnotationElementValuePairAccess().getGroup(), "rule__XAnnotationElementValuePair__Group__0");
 					put(grammarAccess.getXAnnotationElementValueStringConcatenationAccess().getGroup(), "rule__XAnnotationElementValueStringConcatenation__Group__0");
 					put(grammarAccess.getXAnnotationElementValueStringConcatenationAccess().getGroup_1(), "rule__XAnnotationElementValueStringConcatenation__Group_1__0");
-					put(grammarAccess.getXAnnotationElementValueAccess().getGroup_8(), "rule__XAnnotationElementValue__Group_8__0");
+					put(grammarAccess.getXAnnotationElementValueAccess().getGroup_7(), "rule__XAnnotationElementValue__Group_7__0");
 					put(grammarAccess.getXAnnotationValueFieldReferenceAccess().getGroup(), "rule__XAnnotationValueFieldReference__Group__0");
-					put(grammarAccess.getXAnnotationValueArrayAccess().getGroup(), "rule__XAnnotationValueArray__Group__0");
-					put(grammarAccess.getXAnnotationValueArrayAccess().getGroup_2(), "rule__XAnnotationValueArray__Group_2__0");
-					put(grammarAccess.getXAnnotationValueArrayAccess().getGroup_2_1(), "rule__XAnnotationValueArray__Group_2_1__0");
 					put(grammarAccess.getXAssignmentAccess().getGroup_0(), "rule__XAssignment__Group_0__0");
 					put(grammarAccess.getXAssignmentAccess().getGroup_1(), "rule__XAssignment__Group_1__0");
 					put(grammarAccess.getXAssignmentAccess().getGroup_1_1(), "rule__XAssignment__Group_1_1__0");
@@ -248,8 +245,6 @@ public class XbaseWithAnnotationsParser extends AbstractContentAssistParser {
 					put(grammarAccess.getXAnnotationElementValueStringConcatenationAccess().getRightOperandAssignment_1_2(), "rule__XAnnotationElementValueStringConcatenation__RightOperandAssignment_1_2");
 					put(grammarAccess.getXAnnotationValueFieldReferenceAccess().getDeclaringTypeAssignment_1(), "rule__XAnnotationValueFieldReference__DeclaringTypeAssignment_1");
 					put(grammarAccess.getXAnnotationValueFieldReferenceAccess().getFeatureAssignment_2(), "rule__XAnnotationValueFieldReference__FeatureAssignment_2");
-					put(grammarAccess.getXAnnotationValueArrayAccess().getElementsAssignment_2_0(), "rule__XAnnotationValueArray__ElementsAssignment_2_0");
-					put(grammarAccess.getXAnnotationValueArrayAccess().getElementsAssignment_2_1_1(), "rule__XAnnotationValueArray__ElementsAssignment_2_1_1");
 					put(grammarAccess.getXAssignmentAccess().getFeatureAssignment_0_1(), "rule__XAssignment__FeatureAssignment_0_1");
 					put(grammarAccess.getXAssignmentAccess().getValueAssignment_0_3(), "rule__XAssignment__ValueAssignment_0_3");
 					put(grammarAccess.getXAssignmentAccess().getFeatureAssignment_1_1_0_0_1(), "rule__XAssignment__FeatureAssignment_1_1_0_0_1");

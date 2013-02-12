@@ -56,8 +56,8 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
     public static final int T__58=58;
     public static final int T__16=16;
     public static final int T__51=51;
-    public static final int T__15=15;
     public static final int T__52=52;
+    public static final int T__15=15;
     public static final int T__53=53;
     public static final int T__18=18;
     public static final int T__54=54;
@@ -48699,11 +48699,11 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
         state.failed=false;
         return success;
     }
-    public final boolean synpred77_InternalXbase() {
+    public final boolean synpred119_InternalXbase() {
         state.backtracking++;
         int start = input.mark();
         try {
-            synpred77_InternalXbase_fragment(); // can never throw exception
+            synpred119_InternalXbase_fragment(); // can never throw exception
         } catch (RecognitionException re) {
             System.err.println("impossible: "+re);
         }
@@ -48713,11 +48713,11 @@ public class InternalXbaseParser extends AbstractInternalContentAssistParser {
         state.failed=false;
         return success;
     }
-    public final boolean synpred119_InternalXbase() {
+    public final boolean synpred77_InternalXbase() {
         state.backtracking++;
         int start = input.mark();
         try {
-            synpred119_InternalXbase_fragment(); // can never throw exception
+            synpred77_InternalXbase_fragment(); // can never throw exception
         } catch (RecognitionException re) {
             System.err.println("impossible: "+re);
         }
