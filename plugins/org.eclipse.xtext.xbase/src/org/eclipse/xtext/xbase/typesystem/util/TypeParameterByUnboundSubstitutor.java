@@ -11,6 +11,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.eclipse.jdt.annotation.NonNullByDefault;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.xbase.typesystem.references.ITypeReferenceOwner;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightMergedBoundTypeArgument;
@@ -41,10 +42,14 @@ public abstract class TypeParameterByUnboundSubstitutor extends CustomTypeParame
 		if (declaredTypeParameters.contains(type)) {
 			return reference.copyInto(getOwner());
 		}
-		UnboundTypeReference result = createUnboundTypeReference(type);
+		LightweightTypeReference result = createUnboundTypeReference(type);
+		if (result == null) {
+			result = new TypeParameterByConstraintSubstitutor(getTypeParameterMapping(), getOwner()).substitute(type);
+		}
 		return result;
 	}
 	
+	@Nullable
 	protected abstract UnboundTypeReference createUnboundTypeReference(JvmTypeParameter type);
 	
 }
