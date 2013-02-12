@@ -67,8 +67,9 @@ public class StackedResolvedTypes extends ResolvedTypes {
 	protected void performMergeIntoParent() {
 		ResolvedTypes parent = getParent();
 		mergeInto(parent);
+		clear();
 	}
-
+	
 	protected void mergeInto(ResolvedTypes parent) {
 		mergeTypeParametersIntoParent(parent);
 		mergeExpressionTypesIntoParent(parent);

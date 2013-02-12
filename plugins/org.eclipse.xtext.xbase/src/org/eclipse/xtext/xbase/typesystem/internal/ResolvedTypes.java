@@ -119,6 +119,18 @@ public abstract class ResolvedTypes implements IResolvedTypes {
 		this.converter = createConverter();
 	}
 	
+	protected void clear() {
+		diagnostics = null;
+		types = null;
+		reassignedTypes = null;
+		expressionTypes = null;
+		featureLinking = null;
+		unboundTypeParameters = null;
+		typeParameterHints = null;
+		resolvedTypeParameters = null;
+		declaredTypeParameters = null;
+	}
+	
 	protected OwnedConverter getConverter() {
 		return converter;
 	}
@@ -403,11 +415,12 @@ public abstract class ResolvedTypes implements IResolvedTypes {
 		
 		TypeParameterSubstitutor<?> substitutor = new TypeParameterByUnboundSubstitutor(Collections.<JvmTypeParameter, LightweightMergedBoundTypeArgument>emptyMap(), getReferenceOwner()) {
 			@Override
+			@Nullable
 			protected UnboundTypeReference createUnboundTypeReference(JvmTypeParameter type) {
 				if (expression instanceof XAbstractFeatureCall || expression instanceof XConstructorCall || expression instanceof XClosure) {
 					return ResolvedTypes.this.createUnboundTypeReference(expression, type);
 				} else {
-					throw new IllegalStateException("expression was: " + expression);
+					return null;
 				}
 			}
 		};
