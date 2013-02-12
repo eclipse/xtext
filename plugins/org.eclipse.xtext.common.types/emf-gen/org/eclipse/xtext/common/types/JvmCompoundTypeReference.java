@@ -67,7 +67,7 @@ public interface JvmCompoundTypeReference extends JvmTypeReference
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>References</em>' containment reference list.
 	 * @see org.eclipse.xtext.common.types.TypesPackage#getJvmCompoundTypeReference_References()
-	 * @model containment="true" resolveProxies="true"
+	 * @model containment="true"
 	 * @generated
 	 */
 	EList<JvmTypeReference> getReferences();

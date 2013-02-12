@@ -72,33 +72,6 @@ public abstract class JvmComponentTypeImpl extends JvmTypeImpl implements JvmCom
 	 */
 	public JvmArrayType getArrayType()
 	{
-		if (arrayType != null && arrayType.eIsProxy())
-		{
-			InternalEObject oldArrayType = (InternalEObject)arrayType;
-			arrayType = (JvmArrayType)eResolveProxy(oldArrayType);
-			if (arrayType != oldArrayType)
-			{
-				InternalEObject newArrayType = (InternalEObject)arrayType;
-				NotificationChain msgs =  oldArrayType.eInverseRemove(this, TypesPackage.JVM_ARRAY_TYPE__COMPONENT_TYPE, JvmArrayType.class, null);
-				if (newArrayType.eInternalContainer() == null)
-				{
-					msgs =  newArrayType.eInverseAdd(this, TypesPackage.JVM_ARRAY_TYPE__COMPONENT_TYPE, JvmArrayType.class, msgs);
-				}
-				if (msgs != null) msgs.dispatch();
-				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, TypesPackage.JVM_COMPONENT_TYPE__ARRAY_TYPE, oldArrayType, arrayType));
-			}
-		}
-		return arrayType;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public JvmArrayType basicGetArrayType()
-	{
 		return arrayType;
 	}
 
@@ -185,8 +158,7 @@ public abstract class JvmComponentTypeImpl extends JvmTypeImpl implements JvmCom
 		switch (featureID)
 		{
 			case TypesPackage.JVM_COMPONENT_TYPE__ARRAY_TYPE:
-				if (resolve) return getArrayType();
-				return basicGetArrayType();
+				return getArrayType();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}

@@ -78,7 +78,7 @@ public class JvmAnnotationAnnotationValueImpl extends JvmAnnotationValueImplCust
 	{
 		if (values == null)
 		{
-			values = new EObjectContainmentEList.Resolving<JvmAnnotationReference>(JvmAnnotationReference.class, this, TypesPackage.JVM_ANNOTATION_ANNOTATION_VALUE__VALUES);
+			values = new EObjectContainmentEList<JvmAnnotationReference>(JvmAnnotationReference.class, this, TypesPackage.JVM_ANNOTATION_ANNOTATION_VALUE__VALUES);
 		}
 		return values;
 	}

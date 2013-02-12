@@ -64,7 +64,7 @@ public interface JvmFormalParameter extends JvmAnnotationTarget
 	 * @return the value of the '<em>Parameter Type</em>' containment reference.
 	 * @see #setParameterType(JvmTypeReference)
 	 * @see org.eclipse.xtext.common.types.TypesPackage#getJvmFormalParameter_ParameterType()
-	 * @model containment="true" resolveProxies="true"
+	 * @model containment="true"
 	 * @generated
 	 */
 	JvmTypeReference getParameterType();

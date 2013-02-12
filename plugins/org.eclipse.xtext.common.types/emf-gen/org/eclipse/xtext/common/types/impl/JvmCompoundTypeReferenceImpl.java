@@ -137,7 +137,7 @@ public abstract class JvmCompoundTypeReferenceImpl extends JvmTypeReferenceImplC
 	{
 		if (references == null)
 		{
-			references = new EObjectContainmentEList.Resolving<JvmTypeReference>(JvmTypeReference.class, this, TypesPackage.JVM_COMPOUND_TYPE_REFERENCE__REFERENCES);
+			references = new EObjectContainmentEList<JvmTypeReference>(JvmTypeReference.class, this, TypesPackage.JVM_COMPOUND_TYPE_REFERENCE__REFERENCES);
 		}
 		return references;
 	}

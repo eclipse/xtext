@@ -161,33 +161,6 @@ public class JvmFieldImpl extends JvmFeatureImpl implements JvmField
 	 */
 	public JvmTypeReference getType()
 	{
-		if (type != null && type.eIsProxy())
-		{
-			InternalEObject oldType = (InternalEObject)type;
-			type = (JvmTypeReference)eResolveProxy(oldType);
-			if (type != oldType)
-			{
-				InternalEObject newType = (InternalEObject)type;
-				NotificationChain msgs = oldType.eInverseRemove(this, EOPPOSITE_FEATURE_BASE - TypesPackage.JVM_FIELD__TYPE, null, null);
-				if (newType.eInternalContainer() == null)
-				{
-					msgs = newType.eInverseAdd(this, EOPPOSITE_FEATURE_BASE - TypesPackage.JVM_FIELD__TYPE, null, msgs);
-				}
-				if (msgs != null) msgs.dispatch();
-				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, TypesPackage.JVM_FIELD__TYPE, oldType, type));
-			}
-		}
-		return type;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public JvmTypeReference basicGetType()
-	{
 		return type;
 	}
 
@@ -260,8 +233,7 @@ public class JvmFieldImpl extends JvmFeatureImpl implements JvmField
 			case TypesPackage.JVM_FIELD__FINAL:
 				return isFinal();
 			case TypesPackage.JVM_FIELD__TYPE:
-				if (resolve) return getType();
-				return basicGetType();
+				return getType();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}

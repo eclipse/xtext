@@ -137,17 +137,6 @@ public abstract class JvmMemberImpl extends JvmAnnotationTargetImplCustom implem
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public JvmDeclaredType basicGetDeclaringType()
-	{
-		if (eContainerFeatureID() != TypesPackage.JVM_MEMBER__DECLARING_TYPE) return null;
-		return (JvmDeclaredType)eInternalContainer();
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public NotificationChain basicSetDeclaringType(JvmDeclaredType newDeclaringType, NotificationChain msgs)
 	{
 		msgs = eBasicSetContainer((InternalEObject)newDeclaringType, TypesPackage.JVM_MEMBER__DECLARING_TYPE, msgs);
@@ -308,8 +297,7 @@ public abstract class JvmMemberImpl extends JvmAnnotationTargetImplCustom implem
 		switch (featureID)
 		{
 			case TypesPackage.JVM_MEMBER__DECLARING_TYPE:
-				if (resolve) return getDeclaringType();
-				return basicGetDeclaringType();
+				return getDeclaringType();
 			case TypesPackage.JVM_MEMBER__VISIBILITY:
 				return getVisibility();
 			case TypesPackage.JVM_MEMBER__SIMPLE_NAME:
@@ -377,7 +365,7 @@ public abstract class JvmMemberImpl extends JvmAnnotationTargetImplCustom implem
 		switch (featureID)
 		{
 			case TypesPackage.JVM_MEMBER__DECLARING_TYPE:
-				return basicGetDeclaringType() != null;
+				return getDeclaringType() != null;
 			case TypesPackage.JVM_MEMBER__VISIBILITY:
 				return visibility != VISIBILITY_EDEFAULT;
 			case TypesPackage.JVM_MEMBER__SIMPLE_NAME:

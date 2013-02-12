@@ -79,7 +79,7 @@ public class JvmWildcardTypeReferenceImpl extends JvmTypeReferenceImplCustom imp
 	{
 		if (constraints == null)
 		{
-			constraints = new EObjectContainmentWithInverseEList.Resolving<JvmTypeConstraint>(JvmTypeConstraint.class, this, TypesPackage.JVM_WILDCARD_TYPE_REFERENCE__CONSTRAINTS, TypesPackage.JVM_TYPE_CONSTRAINT__OWNER);
+			constraints = new EObjectContainmentWithInverseEList<JvmTypeConstraint>(JvmTypeConstraint.class, this, TypesPackage.JVM_WILDCARD_TYPE_REFERENCE__CONSTRAINTS, TypesPackage.JVM_TYPE_CONSTRAINT__OWNER);
 		}
 		return constraints;
 	}

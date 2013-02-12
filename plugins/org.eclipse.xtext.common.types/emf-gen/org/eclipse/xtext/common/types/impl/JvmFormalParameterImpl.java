@@ -116,33 +116,6 @@ public class JvmFormalParameterImpl extends JvmAnnotationTargetImplCustom implem
 	 */
 	public JvmTypeReference getParameterType()
 	{
-		if (parameterType != null && parameterType.eIsProxy())
-		{
-			InternalEObject oldParameterType = (InternalEObject)parameterType;
-			parameterType = (JvmTypeReference)eResolveProxy(oldParameterType);
-			if (parameterType != oldParameterType)
-			{
-				InternalEObject newParameterType = (InternalEObject)parameterType;
-				NotificationChain msgs = oldParameterType.eInverseRemove(this, EOPPOSITE_FEATURE_BASE - TypesPackage.JVM_FORMAL_PARAMETER__PARAMETER_TYPE, null, null);
-				if (newParameterType.eInternalContainer() == null)
-				{
-					msgs = newParameterType.eInverseAdd(this, EOPPOSITE_FEATURE_BASE - TypesPackage.JVM_FORMAL_PARAMETER__PARAMETER_TYPE, null, msgs);
-				}
-				if (msgs != null) msgs.dispatch();
-				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, TypesPackage.JVM_FORMAL_PARAMETER__PARAMETER_TYPE, oldParameterType, parameterType));
-			}
-		}
-		return parameterType;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public JvmTypeReference basicGetParameterType()
-	{
 		return parameterType;
 	}
 
@@ -213,8 +186,7 @@ public class JvmFormalParameterImpl extends JvmAnnotationTargetImplCustom implem
 			case TypesPackage.JVM_FORMAL_PARAMETER__NAME:
 				return getName();
 			case TypesPackage.JVM_FORMAL_PARAMETER__PARAMETER_TYPE:
-				if (resolve) return getParameterType();
-				return basicGetParameterType();
+				return getParameterType();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}

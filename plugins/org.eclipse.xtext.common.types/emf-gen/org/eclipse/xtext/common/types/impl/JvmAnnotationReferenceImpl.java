@@ -137,7 +137,7 @@ public class JvmAnnotationReferenceImpl extends MinimalEObjectImpl.Container imp
 	{
 		if (values == null)
 		{
-			values = new EObjectContainmentEList.Resolving<JvmAnnotationValue>(JvmAnnotationValue.class, this, TypesPackage.JVM_ANNOTATION_REFERENCE__VALUES);
+			values = new EObjectContainmentEList<JvmAnnotationValue>(JvmAnnotationValue.class, this, TypesPackage.JVM_ANNOTATION_REFERENCE__VALUES);
 		}
 		return values;
 	}

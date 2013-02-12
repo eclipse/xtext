@@ -80,7 +80,7 @@ public abstract class JvmTypeParameterDeclaratorImpl extends MinimalEObjectImpl.
 	{
 		if (typeParameters == null)
 		{
-			typeParameters = new EObjectContainmentWithInverseEList.Resolving<JvmTypeParameter>(JvmTypeParameter.class, this, TypesPackage.JVM_TYPE_PARAMETER_DECLARATOR__TYPE_PARAMETERS, TypesPackage.JVM_TYPE_PARAMETER__DECLARATOR);
+			typeParameters = new EObjectContainmentWithInverseEList<JvmTypeParameter>(JvmTypeParameter.class, this, TypesPackage.JVM_TYPE_PARAMETER_DECLARATOR__TYPE_PARAMETERS, TypesPackage.JVM_TYPE_PARAMETER__DECLARATOR);
 		}
 		return typeParameters;
 	}

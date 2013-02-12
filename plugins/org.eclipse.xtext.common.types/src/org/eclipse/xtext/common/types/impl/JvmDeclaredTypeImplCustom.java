@@ -68,7 +68,7 @@ public abstract class JvmDeclaredTypeImplCustom extends JvmDeclaredTypeImpl {
 			case TypesPackage.JVM_DECLARED_TYPE__ARRAY_TYPE:
 				// don't demand-create the array if queried reflectively
 				if (resolve && arrayType != null) return getArrayType();
-				return basicGetArrayType();
+				return null;
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}

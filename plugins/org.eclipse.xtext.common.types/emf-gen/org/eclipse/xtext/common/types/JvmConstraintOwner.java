@@ -42,7 +42,7 @@ public interface JvmConstraintOwner extends EObject
 	 * @return the value of the '<em>Constraints</em>' containment reference list.
 	 * @see org.eclipse.xtext.common.types.TypesPackage#getJvmConstraintOwner_Constraints()
 	 * @see org.eclipse.xtext.common.types.JvmTypeConstraint#getOwner
-	 * @model opposite="owner" containment="true" resolveProxies="true"
+	 * @model opposite="owner" containment="true"
 	 * @generated
 	 */
 	EList<JvmTypeConstraint> getConstraints();

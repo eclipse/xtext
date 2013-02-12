@@ -42,7 +42,7 @@ public interface JvmTypeParameterDeclarator extends EObject
 	 * @return the value of the '<em>Type Parameters</em>' containment reference list.
 	 * @see org.eclipse.xtext.common.types.TypesPackage#getJvmTypeParameterDeclarator_TypeParameters()
 	 * @see org.eclipse.xtext.common.types.JvmTypeParameter#getDeclarator
-	 * @model opposite="declarator" containment="true" resolveProxies="true"
+	 * @model opposite="declarator" containment="true"
 	 * @generated
 	 */
 	EList<JvmTypeParameter> getTypeParameters();

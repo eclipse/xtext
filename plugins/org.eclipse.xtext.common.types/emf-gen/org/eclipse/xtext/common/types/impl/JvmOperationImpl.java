@@ -217,33 +217,6 @@ public class JvmOperationImpl extends JvmExecutableImplCustom implements JvmOper
 	 */
 	public JvmTypeReference getReturnType()
 	{
-		if (returnType != null && returnType.eIsProxy())
-		{
-			InternalEObject oldReturnType = (InternalEObject)returnType;
-			returnType = (JvmTypeReference)eResolveProxy(oldReturnType);
-			if (returnType != oldReturnType)
-			{
-				InternalEObject newReturnType = (InternalEObject)returnType;
-				NotificationChain msgs = oldReturnType.eInverseRemove(this, EOPPOSITE_FEATURE_BASE - TypesPackage.JVM_OPERATION__RETURN_TYPE, null, null);
-				if (newReturnType.eInternalContainer() == null)
-				{
-					msgs = newReturnType.eInverseAdd(this, EOPPOSITE_FEATURE_BASE - TypesPackage.JVM_OPERATION__RETURN_TYPE, null, msgs);
-				}
-				if (msgs != null) msgs.dispatch();
-				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, TypesPackage.JVM_OPERATION__RETURN_TYPE, oldReturnType, returnType));
-			}
-		}
-		return returnType;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public JvmTypeReference basicGetReturnType()
-	{
 		return returnType;
 	}
 
@@ -291,33 +264,6 @@ public class JvmOperationImpl extends JvmExecutableImplCustom implements JvmOper
 	 * @generated
 	 */
 	public JvmAnnotationValue getDefaultValue()
-	{
-		if (defaultValue != null && defaultValue.eIsProxy())
-		{
-			InternalEObject oldDefaultValue = (InternalEObject)defaultValue;
-			defaultValue = (JvmAnnotationValue)eResolveProxy(oldDefaultValue);
-			if (defaultValue != oldDefaultValue)
-			{
-				InternalEObject newDefaultValue = (InternalEObject)defaultValue;
-				NotificationChain msgs = oldDefaultValue.eInverseRemove(this, EOPPOSITE_FEATURE_BASE - TypesPackage.JVM_OPERATION__DEFAULT_VALUE, null, null);
-				if (newDefaultValue.eInternalContainer() == null)
-				{
-					msgs = newDefaultValue.eInverseAdd(this, EOPPOSITE_FEATURE_BASE - TypesPackage.JVM_OPERATION__DEFAULT_VALUE, null, msgs);
-				}
-				if (msgs != null) msgs.dispatch();
-				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, TypesPackage.JVM_OPERATION__DEFAULT_VALUE, oldDefaultValue, defaultValue));
-			}
-		}
-		return defaultValue;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public JvmAnnotationValue basicGetDefaultValue()
 	{
 		return defaultValue;
 	}
@@ -395,11 +341,9 @@ public class JvmOperationImpl extends JvmExecutableImplCustom implements JvmOper
 			case TypesPackage.JVM_OPERATION__ABSTRACT:
 				return isAbstract();
 			case TypesPackage.JVM_OPERATION__RETURN_TYPE:
-				if (resolve) return getReturnType();
-				return basicGetReturnType();
+				return getReturnType();
 			case TypesPackage.JVM_OPERATION__DEFAULT_VALUE:
-				if (resolve) return getDefaultValue();
-				return basicGetDefaultValue();
+				return getDefaultValue();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}

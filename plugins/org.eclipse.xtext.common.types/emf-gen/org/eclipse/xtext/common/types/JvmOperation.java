@@ -119,7 +119,7 @@ public interface JvmOperation extends JvmExecutable
 	 * @return the value of the '<em>Return Type</em>' containment reference.
 	 * @see #setReturnType(JvmTypeReference)
 	 * @see org.eclipse.xtext.common.types.TypesPackage#getJvmOperation_ReturnType()
-	 * @model containment="true" resolveProxies="true"
+	 * @model containment="true"
 	 * @generated
 	 */
 	JvmTypeReference getReturnType();
@@ -145,7 +145,7 @@ public interface JvmOperation extends JvmExecutable
 	 * @return the value of the '<em>Default Value</em>' containment reference.
 	 * @see #setDefaultValue(JvmAnnotationValue)
 	 * @see org.eclipse.xtext.common.types.TypesPackage#getJvmOperation_DefaultValue()
-	 * @model containment="true" resolveProxies="true"
+	 * @model containment="true"
 	 * @generated
 	 */
 	JvmAnnotationValue getDefaultValue();

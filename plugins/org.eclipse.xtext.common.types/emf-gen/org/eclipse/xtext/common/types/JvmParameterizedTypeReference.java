@@ -39,7 +39,7 @@ public interface JvmParameterizedTypeReference extends JvmTypeReference
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Arguments</em>' containment reference list.
 	 * @see org.eclipse.xtext.common.types.TypesPackage#getJvmParameterizedTypeReference_Arguments()
-	 * @model containment="true" resolveProxies="true"
+	 * @model containment="true"
 	 * @generated
 	 */
 	EList<JvmTypeReference> getArguments();

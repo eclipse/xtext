@@ -91,7 +91,7 @@ public interface JvmField extends JvmFeature
 	 * @return the value of the '<em>Type</em>' containment reference.
 	 * @see #setType(JvmTypeReference)
 	 * @see org.eclipse.xtext.common.types.TypesPackage#getJvmField_Type()
-	 * @model containment="true" resolveProxies="true"
+	 * @model containment="true"
 	 * @generated
 	 */
 	JvmTypeReference getType();

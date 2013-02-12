@@ -39,7 +39,7 @@ public interface JvmComponentType extends JvmType
 	 * @see #setArrayType(JvmArrayType)
 	 * @see org.eclipse.xtext.common.types.TypesPackage#getJvmComponentType_ArrayType()
 	 * @see org.eclipse.xtext.common.types.JvmArrayType#getComponentType
-	 * @model opposite="componentType" containment="true" resolveProxies="true"
+	 * @model opposite="componentType" containment="true"
 	 * @generated
 	 */
 	JvmArrayType getArrayType();

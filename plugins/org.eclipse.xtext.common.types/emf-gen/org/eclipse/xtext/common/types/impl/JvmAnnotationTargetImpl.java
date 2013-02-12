@@ -78,7 +78,7 @@ public abstract class JvmAnnotationTargetImpl extends JvmIdentifiableElementImpl
 	{
 		if (annotations == null)
 		{
-			annotations = new EObjectContainmentEList.Resolving<JvmAnnotationReference>(JvmAnnotationReference.class, this, TypesPackage.JVM_ANNOTATION_TARGET__ANNOTATIONS);
+			annotations = new EObjectContainmentEList<JvmAnnotationReference>(JvmAnnotationReference.class, this, TypesPackage.JVM_ANNOTATION_TARGET__ANNOTATIONS);
 		}
 		return annotations;
 	}

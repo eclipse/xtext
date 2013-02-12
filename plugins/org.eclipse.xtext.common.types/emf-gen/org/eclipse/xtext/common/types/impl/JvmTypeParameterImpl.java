@@ -106,7 +106,7 @@ public class JvmTypeParameterImpl extends JvmComponentTypeImplCustom implements 
 	{
 		if (constraints == null)
 		{
-			constraints = new EObjectContainmentWithInverseEList.Resolving<JvmTypeConstraint>(JvmTypeConstraint.class, this, TypesPackage.JVM_TYPE_PARAMETER__CONSTRAINTS, TypesPackage.JVM_TYPE_CONSTRAINT__OWNER);
+			constraints = new EObjectContainmentWithInverseEList<JvmTypeConstraint>(JvmTypeConstraint.class, this, TypesPackage.JVM_TYPE_PARAMETER__CONSTRAINTS, TypesPackage.JVM_TYPE_CONSTRAINT__OWNER);
 		}
 		return constraints;
 	}
@@ -143,17 +143,6 @@ public class JvmTypeParameterImpl extends JvmComponentTypeImplCustom implements 
 	{
 		if (eContainerFeatureID() != TypesPackage.JVM_TYPE_PARAMETER__DECLARATOR) return null;
 		return (JvmTypeParameterDeclarator)eContainer();
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public JvmTypeParameterDeclarator basicGetDeclarator()
-	{
-		if (eContainerFeatureID() != TypesPackage.JVM_TYPE_PARAMETER__DECLARATOR) return null;
-		return (JvmTypeParameterDeclarator)eInternalContainer();
 	}
 
 	/**
@@ -260,8 +249,7 @@ public class JvmTypeParameterImpl extends JvmComponentTypeImplCustom implements 
 			case TypesPackage.JVM_TYPE_PARAMETER__NAME:
 				return getName();
 			case TypesPackage.JVM_TYPE_PARAMETER__DECLARATOR:
-				if (resolve) return getDeclarator();
-				return basicGetDeclarator();
+				return getDeclarator();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -329,7 +317,7 @@ public class JvmTypeParameterImpl extends JvmComponentTypeImplCustom implements 
 			case TypesPackage.JVM_TYPE_PARAMETER__NAME:
 				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
 			case TypesPackage.JVM_TYPE_PARAMETER__DECLARATOR:
-				return basicGetDeclarator() != null;
+				return getDeclarator() != null;
 		}
 		return super.eIsSet(featureID);
 	}

@@ -39,7 +39,7 @@ public interface JvmTypeConstraint extends EObject
 	 * @return the value of the '<em>Type Reference</em>' containment reference.
 	 * @see #setTypeReference(JvmTypeReference)
 	 * @see org.eclipse.xtext.common.types.TypesPackage#getJvmTypeConstraint_TypeReference()
-	 * @model containment="true" resolveProxies="true"
+	 * @model containment="true"
 	 * @generated
 	 */
 	JvmTypeReference getTypeReference();

@@ -73,17 +73,6 @@ public class JvmArrayTypeImpl extends JvmComponentTypeImplCustom implements JvmA
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public JvmComponentType basicGetComponentType()
-	{
-		if (eContainerFeatureID() != TypesPackage.JVM_ARRAY_TYPE__COMPONENT_TYPE) return null;
-		return (JvmComponentType)eInternalContainer();
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public NotificationChain basicSetComponentType(JvmComponentType newComponentType, NotificationChain msgs)
 	{
 		msgs = eBasicSetContainer((InternalEObject)newComponentType, TypesPackage.JVM_ARRAY_TYPE__COMPONENT_TYPE, msgs);
@@ -186,8 +175,7 @@ public class JvmArrayTypeImpl extends JvmComponentTypeImplCustom implements JvmA
 		switch (featureID)
 		{
 			case TypesPackage.JVM_ARRAY_TYPE__COMPONENT_TYPE:
-				if (resolve) return getComponentType();
-				return basicGetComponentType();
+				return getComponentType();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -237,7 +225,7 @@ public class JvmArrayTypeImpl extends JvmComponentTypeImplCustom implements JvmA
 		switch (featureID)
 		{
 			case TypesPackage.JVM_ARRAY_TYPE__COMPONENT_TYPE:
-				return basicGetComponentType() != null;
+				return getComponentType() != null;
 		}
 		return super.eIsSet(featureID);
 	}

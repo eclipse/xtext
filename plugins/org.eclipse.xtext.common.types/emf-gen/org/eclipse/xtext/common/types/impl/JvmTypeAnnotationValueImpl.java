@@ -78,7 +78,7 @@ public class JvmTypeAnnotationValueImpl extends JvmAnnotationValueImplCustom imp
 	{
 		if (values == null)
 		{
-			values = new EObjectContainmentEList.Resolving<JvmTypeReference>(JvmTypeReference.class, this, TypesPackage.JVM_TYPE_ANNOTATION_VALUE__VALUES);
+			values = new EObjectContainmentEList<JvmTypeReference>(JvmTypeReference.class, this, TypesPackage.JVM_TYPE_ANNOTATION_VALUE__VALUES);
 		}
 		return values;
 	}

@@ -38,7 +38,7 @@ public interface JvmGenericArrayTypeReference extends JvmTypeReference
 	 * @return the value of the '<em>Component Type</em>' containment reference.
 	 * @see #setComponentType(JvmTypeReference)
 	 * @see org.eclipse.xtext.common.types.TypesPackage#getJvmGenericArrayTypeReference_ComponentType()
-	 * @model containment="true" resolveProxies="true"
+	 * @model containment="true"
 	 * @generated
 	 */
 	JvmTypeReference getComponentType();

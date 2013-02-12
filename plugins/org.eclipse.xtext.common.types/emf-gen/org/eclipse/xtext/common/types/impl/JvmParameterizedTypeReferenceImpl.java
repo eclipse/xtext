@@ -93,7 +93,7 @@ public class JvmParameterizedTypeReferenceImpl extends JvmTypeReferenceImplCusto
 	{
 		if (arguments == null)
 		{
-			arguments = new EObjectContainmentEList.Resolving<JvmTypeReference>(JvmTypeReference.class, this, TypesPackage.JVM_PARAMETERIZED_TYPE_REFERENCE__ARGUMENTS);
+			arguments = new EObjectContainmentEList<JvmTypeReference>(JvmTypeReference.class, this, TypesPackage.JVM_PARAMETERIZED_TYPE_REFERENCE__ARGUMENTS);
 		}
 		return arguments;
 	}

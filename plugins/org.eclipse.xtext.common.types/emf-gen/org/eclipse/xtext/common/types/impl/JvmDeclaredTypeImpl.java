@@ -195,33 +195,6 @@ public abstract class JvmDeclaredTypeImpl extends JvmMemberImplCustom implements
 	 */
 	public JvmArrayType getArrayType()
 	{
-		if (arrayType != null && arrayType.eIsProxy())
-		{
-			InternalEObject oldArrayType = (InternalEObject)arrayType;
-			arrayType = (JvmArrayType)eResolveProxy(oldArrayType);
-			if (arrayType != oldArrayType)
-			{
-				InternalEObject newArrayType = (InternalEObject)arrayType;
-				NotificationChain msgs =  oldArrayType.eInverseRemove(this, TypesPackage.JVM_ARRAY_TYPE__COMPONENT_TYPE, JvmArrayType.class, null);
-				if (newArrayType.eInternalContainer() == null)
-				{
-					msgs =  newArrayType.eInverseAdd(this, TypesPackage.JVM_ARRAY_TYPE__COMPONENT_TYPE, JvmArrayType.class, msgs);
-				}
-				if (msgs != null) msgs.dispatch();
-				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, TypesPackage.JVM_DECLARED_TYPE__ARRAY_TYPE, oldArrayType, arrayType));
-			}
-		}
-		return arrayType;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public JvmArrayType basicGetArrayType()
-	{
 		return arrayType;
 	}
 
@@ -272,7 +245,7 @@ public abstract class JvmDeclaredTypeImpl extends JvmMemberImplCustom implements
 	{
 		if (superTypes == null)
 		{
-			superTypes = new EObjectContainmentEList.Resolving<JvmTypeReference>(JvmTypeReference.class, this, TypesPackage.JVM_DECLARED_TYPE__SUPER_TYPES);
+			superTypes = new EObjectContainmentEList<JvmTypeReference>(JvmTypeReference.class, this, TypesPackage.JVM_DECLARED_TYPE__SUPER_TYPES);
 		}
 		return superTypes;
 	}
@@ -286,7 +259,7 @@ public abstract class JvmDeclaredTypeImpl extends JvmMemberImplCustom implements
 	{
 		if (members == null)
 		{
-			members = new EObjectContainmentWithInverseEList.Resolving<JvmMember>(JvmMember.class, this, TypesPackage.JVM_DECLARED_TYPE__MEMBERS, TypesPackage.JVM_MEMBER__DECLARING_TYPE);
+			members = new EObjectContainmentWithInverseEList<JvmMember>(JvmMember.class, this, TypesPackage.JVM_DECLARED_TYPE__MEMBERS, TypesPackage.JVM_MEMBER__DECLARING_TYPE);
 		}
 		return members;
 	}
@@ -483,8 +456,7 @@ public abstract class JvmDeclaredTypeImpl extends JvmMemberImplCustom implements
 		switch (featureID)
 		{
 			case TypesPackage.JVM_DECLARED_TYPE__ARRAY_TYPE:
-				if (resolve) return getArrayType();
-				return basicGetArrayType();
+				return getArrayType();
 			case TypesPackage.JVM_DECLARED_TYPE__SUPER_TYPES:
 				return getSuperTypes();
 			case TypesPackage.JVM_DECLARED_TYPE__MEMBERS:

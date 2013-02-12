@@ -38,7 +38,7 @@ public interface JvmAnnotationTarget extends JvmIdentifiableElement
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Annotations</em>' containment reference list.
 	 * @see org.eclipse.xtext.common.types.TypesPackage#getJvmAnnotationTarget_Annotations()
-	 * @model containment="true" resolveProxies="true"
+	 * @model containment="true"
 	 * @generated
 	 */
 	EList<JvmAnnotationReference> getAnnotations();

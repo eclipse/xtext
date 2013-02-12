@@ -38,7 +38,7 @@ public interface JvmTypeAnnotationValue extends JvmAnnotationValue
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Values</em>' containment reference list.
 	 * @see org.eclipse.xtext.common.types.TypesPackage#getJvmTypeAnnotationValue_Values()
-	 * @model containment="true" resolveProxies="true"
+	 * @model containment="true"
 	 * @generated
 	 */
 	EList<JvmTypeReference> getValues();

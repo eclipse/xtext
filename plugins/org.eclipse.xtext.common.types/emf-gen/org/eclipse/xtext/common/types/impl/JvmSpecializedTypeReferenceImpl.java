@@ -72,33 +72,6 @@ public abstract class JvmSpecializedTypeReferenceImpl extends JvmTypeReferenceIm
 	 */
 	public JvmTypeReference getEquivalent()
 	{
-		if (equivalent != null && equivalent.eIsProxy())
-		{
-			InternalEObject oldEquivalent = (InternalEObject)equivalent;
-			equivalent = (JvmTypeReference)eResolveProxy(oldEquivalent);
-			if (equivalent != oldEquivalent)
-			{
-				InternalEObject newEquivalent = (InternalEObject)equivalent;
-				NotificationChain msgs = oldEquivalent.eInverseRemove(this, EOPPOSITE_FEATURE_BASE - TypesPackage.JVM_SPECIALIZED_TYPE_REFERENCE__EQUIVALENT, null, null);
-				if (newEquivalent.eInternalContainer() == null)
-				{
-					msgs = newEquivalent.eInverseAdd(this, EOPPOSITE_FEATURE_BASE - TypesPackage.JVM_SPECIALIZED_TYPE_REFERENCE__EQUIVALENT, null, msgs);
-				}
-				if (msgs != null) msgs.dispatch();
-				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, TypesPackage.JVM_SPECIALIZED_TYPE_REFERENCE__EQUIVALENT, oldEquivalent, equivalent));
-			}
-		}
-		return equivalent;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public JvmTypeReference basicGetEquivalent()
-	{
 		return equivalent;
 	}
 
@@ -167,8 +140,7 @@ public abstract class JvmSpecializedTypeReferenceImpl extends JvmTypeReferenceIm
 		switch (featureID)
 		{
 			case TypesPackage.JVM_SPECIALIZED_TYPE_REFERENCE__EQUIVALENT:
-				if (resolve) return getEquivalent();
-				return basicGetEquivalent();
+				return getEquivalent();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}

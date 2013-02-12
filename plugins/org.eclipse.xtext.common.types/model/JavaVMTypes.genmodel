@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <genmodel:GenModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
-    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" copyrightText="Copyright (c) 2011-2013 itemis AG (http://www.itemis.eu) and others.&#xA;All rights reserved. This program and the accompanying materials&#xA;are made available under the terms of the Eclipse Public License v1.0&#xA;which accompanies this distribution, and is available at&#xA;http://www.eclipse.org/legal/epl-v10.html" 
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" copyrightText="Copyright (c) 2011-2013 itemis AG (http://www.itemis.eu) and others.&#xA;All rights reserved. This program and the accompanying materials&#xA;are made available under the terms of the Eclipse Public License v1.0&#xA;which accompanies this distribution, and is available at&#xA;http://www.eclipse.org/legal/epl-v10.html"
     modelDirectory="/org.eclipse.xtext.common.types/emf-gen" editDirectory="/org.eclipse.xtext.common.types.edit/emf-gen"
     editorDirectory="/org.eclipse.xtext.types.editor/src" modelPluginID="org.eclipse.xtext.common.types"
-    forceOverwrite="true" modelName="Types" updateClasspath="false" rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container"
-    importerID="org.eclipse.emf.importer.ecore" containmentProxies="true" complianceLevel="5.0"
-    suppressGenModelAnnotations="false" copyrightFields="false" editPluginID="org.eclipse.xtext.common.types.edit"
-    editorPluginID="org.eclipse.xtext.types.editor"
-    runtimeVersion="2.5">
+    forceOverwrite="true" modelName="Types" modelPluginClass="" updateClasspath="false"
+    rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container" rootImplementsInterface=""
+    importerID="org.eclipse.emf.importer.ecore" complianceLevel="5.0" suppressGenModelAnnotations="false"
+    copyrightFields="false" editPluginID="org.eclipse.xtext.common.types.edit" editorPluginID="org.eclipse.xtext.types.editor"
+    runtimeVersion="2.5" interfaceNamePattern="" classNamePattern="">
   <foreignModel>JavaVMTypes.ecore</foreignModel>
   <genPackages prefix="Types" basePackage="org.eclipse.xtext.common" disposableProviderFactory="true"
       ecorePackage="JavaVMTypes.ecore#/">
@@ -170,7 +170,6 @@
     </genClasses>
     <genClasses ecoreClass="JavaVMTypes.ecore#//JvmAnnotationReference">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference JavaVMTypes.ecore#//JvmAnnotationReference/annotation"/>
-      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference JavaVMTypes.ecore#//JvmAnnotationReference/target"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference JavaVMTypes.ecore#//JvmAnnotationReference/values"/>
     </genClasses>
     <genClasses image="false" ecoreClass="JavaVMTypes.ecore#//JvmAnnotationValue">
