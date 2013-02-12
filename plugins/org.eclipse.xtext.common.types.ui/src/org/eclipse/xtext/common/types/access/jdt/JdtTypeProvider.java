@@ -7,7 +7,10 @@
  *******************************************************************************/
 package org.eclipse.xtext.common.types.access.jdt;
 
+import java.io.IOException;
+
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.common.util.WrappedException;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
@@ -111,9 +114,16 @@ public class JdtTypeProvider extends AbstractJvmTypeProvider implements IJdtType
 					packageName = topLevelType.substring(0, lastDot);
 				}
 				if (javaProject.findType(packageName, typeName) != null) {
-					resource = (TypeResource) getResourceForJavaURI(resourceURI, true);
-					JvmType result = findTypeBySignature(signature, resource);
-					return result;
+					try {
+						resource = (TypeResource) getResourceForJavaURI(resourceURI, true);
+						JvmType result = findTypeBySignature(signature, resource);
+						return result;
+					} catch(WrappedException wrapped) {
+						if (wrapped.getCause() instanceof IOException) {
+							return null;
+						}
+						throw wrapped;
+					}
 				} else {
 					return null;
 				}
