@@ -165,6 +165,7 @@ public class FeatureLinkingCandidate extends AbstractPendingLinkingCandidate<XAb
 		return featureCall.isExplicitOperationCallOrBuilderSyntax();
 	}
 
+	@Override
 	protected String getFeatureTypeName() {
 		JvmIdentifiableElement feature = getFeature();
 		if (feature instanceof JvmFormalParameter) {
