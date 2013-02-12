@@ -8,6 +8,7 @@
 package org.eclipse.xtext.xbase.resource;
 
 import org.apache.log4j.Logger;
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.WrappedException;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
@@ -101,6 +102,26 @@ public class BatchLinkableResource extends DerivedStateAwareResource implements 
 				// logged because EcoreUtil.resolve will ignore any exceptions.
 				throw new WrappedException(e);
 			}
+		}
+	}
+	
+	/**
+	 * {@inheritDoc}
+	 * 
+	 * <p>Implementation detail: Overridden to use the shared {@link #getLock() lock}.</p> 
+	 */
+	@Override
+	public synchronized EList<EObject> getContents() {
+		synchronized (getLock()) {
+			if (isLoaded && !isLoading && !isInitializing && !isUpdating && !fullyInitialized) {
+				try {
+					eSetDeliver(false);
+					installDerivedState(false);
+				} finally {
+					eSetDeliver(true);
+				}
+			}
+			return doGetContents();
 		}
 	}
 	
