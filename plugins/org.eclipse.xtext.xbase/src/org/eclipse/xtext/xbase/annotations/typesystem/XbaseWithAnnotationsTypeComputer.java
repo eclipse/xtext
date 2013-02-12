@@ -98,7 +98,7 @@ public class XbaseWithAnnotationsTypeComputer extends XbaseTypeComputer {
 					? expectation
 					: componentType;
 			ITypeComputationResult result = state.withExpectation(actualExpectation).computeTypes(value);
-			if (!result.getConformanceHints().contains(ConformanceHint.SUCCESS)) {
+			if (!actualExpectation.isAssignableFrom(result.getActualExpressionType())) {
 				if (value instanceof XListLiteral) {
 					// our children are incompatible so let's mark the array itself as compatible.
 					state.refineExpectedType(value, result.getActualExpressionType());
