@@ -2136,7 +2136,7 @@ public class XtendCompilerTest extends AbstractXtendTestCase {
     _builder.append("\t");
     _builder.newLine();
     _builder.append("\t");
-    _builder.append("@Click({ a, a })");
+    _builder.append("@Click(#[ a, a ])");
     _builder.newLine();
     _builder.append("\t");
     _builder.append("def meth() {}");

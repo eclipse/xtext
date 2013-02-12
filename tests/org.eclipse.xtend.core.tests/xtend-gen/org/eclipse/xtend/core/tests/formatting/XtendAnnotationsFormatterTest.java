@@ -515,39 +515,6 @@ public class XtendAnnotationsFormatterTest extends AbstractXtendFormatterTest {
   }
   
   @Test
-  public void formatAnnotationListValue0() {
-    StringConcatenation _builder = new StringConcatenation();
-    _builder.append("@SuppressWarnings({})");
-    _builder.newLine();
-    StringConcatenation _builder_1 = new StringConcatenation();
-    _builder_1.append("@SuppressWarnings(  {  }  )");
-    _builder_1.newLine();
-    this.assertFormattedAnnotation(_builder, _builder_1);
-  }
-  
-  @Test
-  public void formatAnnotationListValue1() {
-    StringConcatenation _builder = new StringConcatenation();
-    _builder.append("@SuppressWarnings({\"all\"})");
-    _builder.newLine();
-    StringConcatenation _builder_1 = new StringConcatenation();
-    _builder_1.append("@SuppressWarnings(  {  \"all\"  }  )");
-    _builder_1.newLine();
-    this.assertFormattedAnnotation(_builder, _builder_1);
-  }
-  
-  @Test
-  public void formatAnnotationListValue2() {
-    StringConcatenation _builder = new StringConcatenation();
-    _builder.append("@SuppressWarnings({\"all\", \"access\"})");
-    _builder.newLine();
-    StringConcatenation _builder_1 = new StringConcatenation();
-    _builder_1.append("@SuppressWarnings(  {  \"all\"  ,   \"access\"  }  )");
-    _builder_1.newLine();
-    this.assertFormattedAnnotation(_builder, _builder_1);
-  }
-  
-  @Test
   public void formatAnnotationListValue3() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("@SuppressWarnings(#[])");
@@ -587,17 +554,6 @@ public class XtendAnnotationsFormatterTest extends AbstractXtendFormatterTest {
     _builder.newLine();
     StringConcatenation _builder_1 = new StringConcatenation();
     _builder_1.append("@SuppressWarnings(  value  =  \"all\"  )");
-    _builder_1.newLine();
-    this.assertFormattedAnnotation(_builder, _builder_1);
-  }
-  
-  @Test
-  public void formatAnnotationAssignedListValue() {
-    StringConcatenation _builder = new StringConcatenation();
-    _builder.append("@SuppressWarnings(value={\"all\", \"access\"})");
-    _builder.newLine();
-    StringConcatenation _builder_1 = new StringConcatenation();
-    _builder_1.append("@SuppressWarnings(  value  =  {  \"all\"  ,   \"access\"  }  )");
     _builder_1.newLine();
     this.assertFormattedAnnotation(_builder, _builder_1);
   }

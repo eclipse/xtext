@@ -957,7 +957,7 @@ class XtendCompilerTest extends AbstractXtendTestCase {
 			class TestXtend {
 				val static int a = 4
 				
-				@Click({ a, a })
+				@Click(#[ a, a ])
 				def meth() {}
 			}
 			

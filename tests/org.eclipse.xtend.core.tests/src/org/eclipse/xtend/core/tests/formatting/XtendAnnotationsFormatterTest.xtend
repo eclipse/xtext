@@ -324,30 +324,6 @@ class XtendAnnotationsFormatterTest extends AbstractXtendFormatterTest {
 		''')	
 	}
 	
-	@Test def formatAnnotationListValue0() {
-		assertFormattedAnnotation('''
-			@SuppressWarnings({})
-		''', '''
-			@SuppressWarnings(  {  }  )
-		''')	
-	}
-	
-	@Test def formatAnnotationListValue1() {
-		assertFormattedAnnotation('''
-			@SuppressWarnings({"all"})
-		''', '''
-			@SuppressWarnings(  {  "all"  }  )
-		''')	
-	}
-	
-	@Test def formatAnnotationListValue2() {
-		assertFormattedAnnotation('''
-			@SuppressWarnings({"all", "access"})
-		''', '''
-			@SuppressWarnings(  {  "all"  ,   "access"  }  )
-		''')	
-	}
-	
 	@Test def formatAnnotationListValue3() {
 		assertFormattedAnnotation('''
 			@SuppressWarnings(#[])
@@ -377,14 +353,6 @@ class XtendAnnotationsFormatterTest extends AbstractXtendFormatterTest {
 			@SuppressWarnings(value="all")
 		''', '''
 			@SuppressWarnings(  value  =  "all"  )
-		''')	
-	}
-	
-	@Test def formatAnnotationAssignedListValue() {
-		assertFormattedAnnotation('''
-			@SuppressWarnings(value={"all", "access"})
-		''', '''
-			@SuppressWarnings(  value  =  {  "all"  ,   "access"  }  )
 		''')	
 	}
 	
