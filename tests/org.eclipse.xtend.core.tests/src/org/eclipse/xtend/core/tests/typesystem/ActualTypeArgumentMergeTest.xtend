@@ -7,8 +7,9 @@
  *******************************************************************************/
 package org.eclipse.xtend.core.tests.typesystem
 
-import com.google.common.collect.ListMultimap
 import com.google.inject.Inject
+import java.util.List
+import java.util.Map
 import org.eclipse.xtend.core.jvmmodel.IXtendJvmAssociations
 import org.eclipse.xtext.common.types.JvmTypeParameter
 import org.eclipse.xtext.xbase.lib.Pair
@@ -21,7 +22,6 @@ import org.eclipse.xtext.xbase.typesystem.util.VarianceInfo
 import org.junit.Test
 
 import static org.eclipse.xtext.xbase.typesystem.util.VarianceInfo.*
-import static org.junit.Assert.*
 
 /**
  * @author Sebastian Zarnekow
@@ -46,7 +46,7 @@ class ActualTypeArgumentMergeTest extends AbstractTestingTypeReferenceOwner {
 		return collector.typeParameterMapping
 	}
 	
-	def merge(ListMultimap<JvmTypeParameter, LightweightBoundTypeArgument> mapping, String typeParamName) {
+	def merge(Map<JvmTypeParameter, List<LightweightBoundTypeArgument>> mapping, String typeParamName) {
 		val allKeys = mapping.keySet
 		for(key: allKeys) {
 			if (key.simpleName == typeParamName) {
@@ -57,7 +57,7 @@ class ActualTypeArgumentMergeTest extends AbstractTestingTypeReferenceOwner {
 		fail('''No mapping for «typeParamName» in «mapping.keySet.map[simpleName]»'''.toString)
 	}
 	
-	def to(Pair<ListMultimap<JvmTypeParameter, LightweightBoundTypeArgument>, LightweightMergedBoundTypeArgument> merged, String type, VarianceInfo variance) {
+	def to(Pair<Map<JvmTypeParameter, List<LightweightBoundTypeArgument>>, LightweightMergedBoundTypeArgument> merged, String type, VarianceInfo variance) {
 		if (type == null) {
 			assertNull(merged.value)
 		} else {
