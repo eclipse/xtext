@@ -660,10 +660,7 @@ public class XbaseTypeProviderTest extends AbstractXbaseTestCase {
 	
 	@Test
 	public void testToList_01() throws Exception {
-		// TODO fix IterableExtensions.toList
-//		Iterable<? extends String> iter = null;
-//		java.util.List<String> list = IterableExtensions.toList(iter);
-		assertResolvedType("java.util.List<java.lang.String>", "{ val Iterable<? extends String> iter = null iter.toList }");
+		assertResolvedType("java.util.List<? extends java.lang.String>", "{ val Iterable<? extends String> iter = null iter.toList }");
 	}
 
 	@Test public void testToList_02() throws Exception {
