@@ -47,4 +47,47 @@ class OrganizeImportsTest extends AbstractXtendUITestCase {
 			}
 		''')
 	}
+	
+	// see https://bugs.eclipse.org/bugs/show_bug.cgi?id=398623
+	@Test def testWildcardType_0() {
+		'''
+			class Foo {
+				Class<?> bar
+			}
+		'''.assertIsOrganizedTo('''
+			class Foo {
+				Class<?> bar
+			}
+		''')
+	}
+
+	// see https://bugs.eclipse.org/bugs/show_bug.cgi?id=398623
+	@Test def testWildcardType_1() {
+		'''
+			class Foo {
+				Class<? extends Serializable> bar
+			}
+		'''.assertIsOrganizedTo('''
+			import java.io.Serializable
+			
+			class Foo {
+				Class<? extends Serializable> bar
+			}
+		''')
+	}
+	
+	// see https://bugs.eclipse.org/bugs/show_bug.cgi?id=398623
+	@Test def testWildcardType_2() {
+		'''
+			class Foo {
+				Class<Serializable> bar
+			}
+		'''.assertIsOrganizedTo('''
+			import java.io.Serializable
+			
+			class Foo {
+				Class<Serializable> bar
+			}
+		''')
+	}
 }

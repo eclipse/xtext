@@ -205,16 +205,18 @@ public class TypeUsageCollector {
 			return;
 		if (ref.eContainer() instanceof XFunctionTypeRef && ref.eContainmentFeature() == TypesPackage.Literals.JVM_SPECIALIZED_TYPE_REFERENCE__EQUIVALENT)
 			return;
-		acceptPreferredType(ref);
-		if (ref instanceof JvmParameterizedTypeReference) {
-			List<JvmTypeReference> list = ((JvmParameterizedTypeReference) ref).getArguments();
-			for (JvmTypeReference jvmTypeReference : list) {
-				acceptPreferredType(jvmTypeReference);
-			}
-		} else if (ref instanceof JvmWildcardTypeReference) {
+		if (ref instanceof JvmWildcardTypeReference) {
 			List<JvmTypeConstraint> constraints = ((JvmWildcardTypeReference) ref).getConstraints();
 			for (JvmTypeConstraint jvmTypeConstraint : constraints) {
-				acceptPreferredType(jvmTypeConstraint.getTypeReference());
+				acceptType(jvmTypeConstraint.getTypeReference());
+			}
+		} else {
+			acceptPreferredType(ref);
+			if (ref instanceof JvmParameterizedTypeReference) {
+				List<JvmTypeReference> list = ((JvmParameterizedTypeReference) ref).getArguments();
+				for (JvmTypeReference jvmTypeReference : list) {
+					acceptType(jvmTypeReference);
+				}
 			}
 		}
 	}
