@@ -146,8 +146,7 @@ public class JvmTypesBuilderTest extends AbstractXbaseTestCase {
       EList<JvmAnnotationValue> _values_2 = _head_4.getValues();
       JvmAnnotationValue _head_5 = IterableExtensions.<JvmAnnotationValue>head(_values_2);
       JvmOperation _operation = _head_5.getOperation();
-      String _simpleName = _operation.getSimpleName();
-      Assert.assertEquals("value", _simpleName);
+      Assert.assertNull(_operation);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
