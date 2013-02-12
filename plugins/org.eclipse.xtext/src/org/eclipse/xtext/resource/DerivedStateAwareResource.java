@@ -53,6 +53,9 @@ public class DerivedStateAwareResource extends LazyLinkingResource {
 		return super.getContents();
 	}
 	
+	/**
+	 * @since 2.4
+	 */
 	@Override
 	protected void clearInternalState() {
 		if (fullyInitialized) {
