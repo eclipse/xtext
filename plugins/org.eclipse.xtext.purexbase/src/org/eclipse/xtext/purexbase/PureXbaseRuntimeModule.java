@@ -3,60 +3,10 @@
  */
 package org.eclipse.xtext.purexbase;
 
-import org.eclipse.xtext.linking.LinkingScopeProviderBinding;
-import org.eclipse.xtext.resource.XtextResource;
-import org.eclipse.xtext.scoping.IScopeProvider;
-import org.eclipse.xtext.xbase.interpreter.IExpressionInterpreter;
-import org.eclipse.xtext.xbase.interpreter.impl.XbaseInterpreter;
-import org.eclipse.xtext.xbase.resource.BatchLinkableResource;
-import org.eclipse.xtext.xbase.scoping.batch.XbaseBatchScopeProvider;
-import org.eclipse.xtext.xbase.typesystem.internal.DefaultBatchTypeResolver;
-import org.eclipse.xtext.xbase.typesystem.internal.DefaultReentrantTypeResolver;
-import org.eclipse.xtext.xbase.typesystem.internal.LogicalContainerAwareBatchTypeResolver;
-import org.eclipse.xtext.xbase.typesystem.internal.LogicalContainerAwareReentrantTypeResolver;
-import org.eclipse.xtext.xbase.typesystem.legacy.XbaseBatchTypeProvider;
-import org.eclipse.xtext.xbase.typing.ITypeProvider;
-
-import com.google.inject.Binder;
-
-
 /**
- * Use this class to register components to be used at runtime / without the Equinox extension registry.
+ * Use this class to register components to be used at runtime / without the
+ * Equinox extension registry.
  */
-@SuppressWarnings("restriction")
-public class PureXbaseRuntimeModule extends org.eclipse.xtext.purexbase.AbstractPureXbaseRuntimeModule {
-	
-	@Override
-	public Class<? extends IScopeProvider> bindIScopeProvider() {
-		return XbaseBatchScopeProvider.class;
-	}
-	
-	@Override
-	public void configureLinkingIScopeProvider(Binder binder) {
-		binder.bind(IScopeProvider.class).annotatedWith(LinkingScopeProviderBinding.class)
-				.to(XbaseBatchScopeProvider.class);
-	}
-	
-	@Override
-	public Class<? extends XtextResource> bindXtextResource() {
-		return BatchLinkableResource.class;
-	}
-	
-	public Class<? extends ITypeProvider> bindITypeProvider() {
-		return XbaseBatchTypeProvider.class;
-	}
-	
-	public Class<? extends DefaultBatchTypeResolver> bindDefaultBatchTypeResolver() {
-		return LogicalContainerAwareBatchTypeResolver.class;
-	}
-	
-	public Class<? extends DefaultReentrantTypeResolver> bindReentrantTypeResolver() {
-		return LogicalContainerAwareReentrantTypeResolver.class;
-	}
-	
-	@Override
-	public Class<? extends IExpressionInterpreter> bindIExpressionInterpreter() {
-		return XbaseInterpreter.class;
-	}
-	
+public class PureXbaseRuntimeModule extends AbstractPureXbaseRuntimeModule {
+
 }
