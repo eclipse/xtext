@@ -80,7 +80,7 @@ class JvmTypesBuilderTest extends AbstractXbaseTestCase {
 		
 		assertEquals(anno.annotationType, type.annotations.head.annotation)
 		assertTrue((type.annotations.head.values.head as JvmCustomAnnotationValue).values.head instanceof XStringLiteral)
-		assertEquals("value", type.annotations.head.values.head.operation.simpleName)
+		assertNull(type.annotations.head.values.head.operation)
 	}
 	
 	@Test
