@@ -220,6 +220,26 @@ public abstract class AbstractConstructorCallTypeTest extends AbstractXbaseTestC
   }
   
   @Test
+  public void testConstructorTypeParameters_05() throws Exception {
+    this.resolvesConstructorCallsTo("new constructorTypeParameters.KeyValue(null, \'\')", "KeyValue");
+  }
+  
+  @Test
+  public void testConstructorTypeParameters_06() throws Exception {
+    this.resolvesConstructorCallsTo("new constructorTypeParameters.KeyValue(new constructorTypeParameters.WritableValue, \'\')", "KeyValue", "WritableValue<String>");
+  }
+  
+  @Test
+  public void testConstructorTypeParameters_07() throws Exception {
+    this.resolvesConstructorCallsTo("new constructorTypeParameters.KeyValue(new constructorTypeParameters.WritableDoubleValue, 1.0)", "KeyValue", "WritableDoubleValue");
+  }
+  
+  @Test
+  public void testConstructorTypeParameters_08() throws Exception {
+    this.resolvesConstructorCallsTo("new constructorTypeParameters.KeyValue(new constructorTypeParameters.WritableValue, 1.0)", "KeyValue", "WritableValue<Double>");
+  }
+  
+  @Test
   public void testConstructorTypeInference_01() throws Exception {
     this.resolvesConstructorCallsTo("{ var Iterable<? extends String> it = new java.util.ArrayList() }", "ArrayList<String>");
   }

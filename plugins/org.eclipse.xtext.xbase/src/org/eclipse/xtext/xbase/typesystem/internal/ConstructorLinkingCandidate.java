@@ -7,14 +7,11 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.typesystem.internal;
 
-import java.util.Collections;
 import java.util.List;
 
 import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.xtext.common.types.JvmConstructor;
-import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
-import org.eclipse.xtext.common.types.JvmTypeParameterDeclarator;
 import org.eclipse.xtext.xbase.XConstructorCall;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XbasePackage;
@@ -64,11 +61,7 @@ public class ConstructorLinkingCandidate extends AbstractPendingLinkingCandidate
 	
 	@Override
 	public List<JvmTypeParameter> getDeclaredTypeParameters() {
-		JvmDeclaredType createdType = getConstructor().getDeclaringType();
-		if (createdType instanceof JvmTypeParameterDeclarator) {
-			return ((JvmTypeParameterDeclarator) createdType).getTypeParameters();
-		}
-		return Collections.emptyList();
+		return new FeatureLinkHelper().getDeclaredTypeParameters(getConstructor());
 	}
 	
 }

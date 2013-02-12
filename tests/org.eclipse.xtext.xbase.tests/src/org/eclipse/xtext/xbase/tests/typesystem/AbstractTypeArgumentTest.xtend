@@ -664,6 +664,14 @@ abstract class AbstractTypeArgumentTest extends AbstractXbaseTestCase {
 		"new java.util.HashMap<? super String,Boolean>".bindTypeArgumentsTo("String", "Boolean").done
 	}
 	
+	@Test def void testConstructorTypeParameters_01() throws Exception {
+		"new constructorTypeParameters.KeyValue(new constructorTypeParameters.WritableValue, '')".bindTypeArgumentsTo("String").done
+	}
+	
+	@Test def void testConstructorTypeParameters_02() throws Exception {
+		"new constructorTypeParameters.KeyValue(new constructorTypeParameters.WritableValue, 1.0)".bindTypeArgumentsTo("Double").done
+	}
+	
 	@Test def void testConstructorTypeInference_01() throws Exception {
 		"new testdata.GenericType1('')".bindTypeArgumentsTo("String").done
 	}

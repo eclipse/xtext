@@ -890,6 +890,18 @@ public abstract class AbstractTypeArgumentTest extends AbstractXbaseTestCase {
   }
   
   @Test
+  public void testConstructorTypeParameters_01() throws Exception {
+    Iterator<XExpression> _bindTypeArgumentsTo = this.bindTypeArgumentsTo("new constructorTypeParameters.KeyValue(new constructorTypeParameters.WritableValue, \'\')", "String");
+    this.done(_bindTypeArgumentsTo);
+  }
+  
+  @Test
+  public void testConstructorTypeParameters_02() throws Exception {
+    Iterator<XExpression> _bindTypeArgumentsTo = this.bindTypeArgumentsTo("new constructorTypeParameters.KeyValue(new constructorTypeParameters.WritableValue, 1.0)", "Double");
+    this.done(_bindTypeArgumentsTo);
+  }
+  
+  @Test
   public void testConstructorTypeInference_01() throws Exception {
     Iterator<XExpression> _bindTypeArgumentsTo = this.bindTypeArgumentsTo("new testdata.GenericType1(\'\')", "String");
     this.done(_bindTypeArgumentsTo);
