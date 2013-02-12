@@ -77,7 +77,7 @@ class ErrorTest extends AbstractXtendTestCase {
 			class TestXtend {
 				val static int a = 4
 				
-				@Click({ a, a })
+				@Click(#[ a, a ])
 				d
 		'''.processWithoutException
 		val clazz = file.xtendTypes.head as XtendClass
@@ -93,7 +93,7 @@ class ErrorTest extends AbstractXtendTestCase {
 			class TestXtend {
 				val static int a = 4
 				
-				@Click({ a, a })
+				@Click(#[ a, a ])
 				def m
 		'''.processWithoutException
 		val clazz = file.xtendTypes.head as XtendClass
