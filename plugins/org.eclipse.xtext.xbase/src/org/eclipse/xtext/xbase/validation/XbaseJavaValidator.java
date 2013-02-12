@@ -917,20 +917,6 @@ public class XbaseJavaValidator extends AbstractXbaseJavaValidator {
 	}
 
 	@Check
-	public void checkInstantiationOfAbstractClass(XConstructorCall constructorCall) {
-		JvmConstructor constructor = constructorCall.getConstructor();
-		if (constructor == null || constructor.eIsProxy())
-			return;
-		JvmDeclaredType declaringType = constructor.getDeclaringType();
-		if (declaringType == null || declaringType.eIsProxy())
-			return;
-		if (declaringType.isAbstract()) {
-			error("Cannot instantiate abstract class", null, ValidationMessageAcceptor.INSIGNIFICANT_INDEX,
-					ABSTRACT_CLASS_INSTANTIATION);
-		}
-	}
-	
-	@Check
 	public void checkDelegateConstructorIsFirst(XFeatureCall featureCall) {
 		JvmIdentifiableElement feature = featureCall.getFeature();
 		if (feature != null && !feature.eIsProxy() && feature instanceof JvmConstructor) {

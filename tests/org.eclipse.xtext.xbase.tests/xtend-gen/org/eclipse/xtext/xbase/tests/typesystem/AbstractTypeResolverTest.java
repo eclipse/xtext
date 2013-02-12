@@ -1730,6 +1730,16 @@ public abstract class AbstractTypeResolverTest<Reference extends Object> extends
   }
   
   @Test
+  public void testBrokenConstructorCall_01() throws Exception {
+    this.resolvesTo("new Iterable<String>()", "Iterable<String>");
+  }
+  
+  @Test
+  public void testBrokenConstructorCall_02() throws Exception {
+    this.resolvesTo("new java.util.Map<String>()", "Map<String, Object>");
+  }
+  
+  @Test
   public void testConstructorTypeInference_01() throws Exception {
     this.resolvesTo("new testdata.GenericType1(\'\')", "GenericType1<String>");
   }

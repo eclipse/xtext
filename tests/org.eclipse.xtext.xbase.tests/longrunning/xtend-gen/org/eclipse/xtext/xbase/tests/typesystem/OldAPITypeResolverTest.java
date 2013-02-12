@@ -1789,4 +1789,34 @@ public class OldAPITypeResolverTest extends AbstractOldAPITypeResolverTest {
   public void testSetLiteral_05() {
     Assert.fail("fails in old implementation");
   }
+  
+  @Ignore(value = "fails in old implementation")
+  @Test
+  public void testSetLiteral_08() {
+    Assert.fail("fails in old implementation");
+  }
+  
+  @Ignore(value = "fails in old implementation")
+  @Test
+  public void testSetLiteral_09() {
+    Assert.fail("fails in old implementation");
+  }
+  
+  @Ignore(value = "fails in old implementation")
+  @Test
+  public void testSetLiteral_10() {
+    Assert.fail("fails in old implementation");
+  }
+  
+  @Ignore(value = "fails in old implementation")
+  @Test
+  public void testBrokenConstructorCall_01() throws Exception {
+    Assert.fail("fails in old implementation");
+  }
+  
+  @Ignore(value = "fails in old implementation")
+  @Test
+  public void testBrokenConstructorCall_02() throws Exception {
+    Assert.fail("fails in old implementation");
+  }
 }

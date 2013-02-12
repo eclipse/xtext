@@ -37,6 +37,7 @@ import org.eclipse.xtext.xbase.typesystem.internal.DefaultReentrantTypeResolver;
 import org.eclipse.xtext.xbase.typesystem.internal.ImplicitFirstArgument;
 import org.eclipse.xtext.xbase.typesystem.internal.ImplicitReceiver;
 import org.eclipse.xtext.xbase.typesystem.internal.RootResolvedTypes;
+import org.eclipse.xtext.xbase.typesystem.internal.TypeInsteadOfConstructorLinkingCandidate;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightMergedBoundTypeArgument;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 import org.eclipse.xtext.xbase.typesystem.util.VarianceInfo;
@@ -124,6 +125,44 @@ public class RecomputingReentrantTypeResolver extends DefaultReentrantTypeResolv
     XConstructorCall _constructorCall_1 = right.getConstructorCall();
     Assert.assertEquals("constructorCall", _constructorCall, _constructorCall_1);
     this.doAssertEqualLinkingData(left, right);
+  }
+  
+  protected void _assertEqualLinkingData(final TypeInsteadOfConstructorLinkingCandidate left, final IConstructorLinkingCandidate right) {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append(left, "");
+    _builder.append(" vs ");
+    _builder.append(right, "");
+    Assert.fail(_builder.toString());
+  }
+  
+  protected void _assertEqualLinkingData(final IConstructorLinkingCandidate left, final TypeInsteadOfConstructorLinkingCandidate right) {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append(left, "");
+    _builder.append(" vs ");
+    _builder.append(right, "");
+    Assert.fail(_builder.toString());
+  }
+  
+  protected void _assertEqualLinkingData(final TypeInsteadOfConstructorLinkingCandidate left, final TypeInsteadOfConstructorLinkingCandidate right) {
+    try {
+      JvmIdentifiableElement _feature = left.getFeature();
+      JvmIdentifiableElement _feature_1 = right.getFeature();
+      Assert.assertEquals("feature", _feature, _feature_1);
+      XConstructorCall _constructorCall = left.getConstructorCall();
+      XConstructorCall _constructorCall_1 = right.getConstructorCall();
+      Assert.assertEquals("constructorCall", _constructorCall, _constructorCall_1);
+      List<LightweightTypeReference> _typeArguments = left.getTypeArguments();
+      List<LightweightTypeReference> _typeArguments_1 = right.getTypeArguments();
+      this.assertEqualReferences("typeArguments", _typeArguments, _typeArguments_1);
+      List<LightweightTypeReference> _invokeAndCast = this.<List<LightweightTypeReference>>invokeAndCast(left, "getSyntacticTypeArguments");
+      List<LightweightTypeReference> _invokeAndCast_1 = this.<List<LightweightTypeReference>>invokeAndCast(right, "getSyntacticTypeArguments");
+      this.assertEqualReferences("syntacticTypeArguments", _invokeAndCast, _invokeAndCast_1);
+      Object _invoke = this._reflectExtensions.invoke(left, "getArguments");
+      Object _invoke_1 = this._reflectExtensions.invoke(right, "getArguments");
+      Assert.assertEquals("arguments", _invoke, _invoke_1);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
   }
   
   protected void _assertEqualLinkingData(final ImplicitReceiver left, final IFeatureLinkingCandidate right) {
@@ -344,9 +383,21 @@ public class RecomputingReentrantTypeResolver extends DefaultReentrantTypeResolv
          && right instanceof IFeatureLinkingCandidate) {
       _assertEqualLinkingData((ImplicitReceiver)left, (IFeatureLinkingCandidate)right);
       return;
+    } else if (left instanceof TypeInsteadOfConstructorLinkingCandidate
+         && right instanceof TypeInsteadOfConstructorLinkingCandidate) {
+      _assertEqualLinkingData((TypeInsteadOfConstructorLinkingCandidate)left, (TypeInsteadOfConstructorLinkingCandidate)right);
+      return;
+    } else if (left instanceof TypeInsteadOfConstructorLinkingCandidate
+         && right instanceof IConstructorLinkingCandidate) {
+      _assertEqualLinkingData((TypeInsteadOfConstructorLinkingCandidate)left, (IConstructorLinkingCandidate)right);
+      return;
     } else if (left instanceof IFeatureLinkingCandidate
          && right instanceof ImplicitReceiver) {
       _assertEqualLinkingData((IFeatureLinkingCandidate)left, (ImplicitReceiver)right);
+      return;
+    } else if (left instanceof IConstructorLinkingCandidate
+         && right instanceof TypeInsteadOfConstructorLinkingCandidate) {
+      _assertEqualLinkingData((IConstructorLinkingCandidate)left, (TypeInsteadOfConstructorLinkingCandidate)right);
       return;
     } else if (left instanceof IConstructorLinkingCandidate
          && right instanceof IConstructorLinkingCandidate) {

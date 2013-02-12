@@ -11,6 +11,7 @@ import org.eclipse.xtend.core.tests.AbstractXtendTestCase;
 import org.eclipse.xtend.core.xtend.XtendClass;
 import org.eclipse.xtext.junit4.validation.ValidationTestHelper;
 import org.eclipse.xtext.xbase.XbasePackage;
+import org.eclipse.xtext.xbase.validation.IssueCodes;
 import org.junit.Ignore;
 import org.junit.Test;
 
@@ -24,6 +25,13 @@ public class FeatureCallValidationTest extends AbstractXtendTestCase {
 	@Inject
 	private ValidationTestHelper helper;
 
+	@Test 
+	public void testConstructInstanceOfTypeParameter() throws Exception {
+		XtendClass clazz = clazz("class X<T> { def m() { new T } }");
+		helper.assertError(clazz, XbasePackage.Literals.XCONSTRUCTOR_CALL,
+				IssueCodes.ILLEGAL_CLASS_INSTANTIATION, "Cannot instantiate the type parameter T");
+	}
+	
 	@Test 
 	public void testThisInStaticContext() throws Exception {
 		XtendClass clazz = clazz("class X { static def meth() { this.toString } }");

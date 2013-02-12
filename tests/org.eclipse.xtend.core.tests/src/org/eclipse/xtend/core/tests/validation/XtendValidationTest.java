@@ -788,14 +788,14 @@ public class XtendValidationTest extends AbstractXtendTestCase {
 	@Test public void testInaccessibleMethod() throws Exception {
 		XtendClass xtendClass = clazz("class Foo extends test.SuperClass { def foo() { privateMethod() }}");
 		helper.assertError(((XBlockExpression) ((XtendFunction) xtendClass.getMembers().get(0)).getExpression())
-				.getExpressions().get(0), XABSTRACT_FEATURE_CALL, FEATURE_NOT_VISIBLE, "Feature",
+				.getExpressions().get(0), XABSTRACT_FEATURE_CALL, FEATURE_NOT_VISIBLE, "The method privateMethod",
 				"not", "visible");
 	}
 	
 	@Test public void testInaccessibleStaticMethod() throws Exception {
 		XtendClass xtendClass = clazz("class Foo extends test.SuperClass { def foo() { privateStaticMethod() }}");
 		helper.assertError(((XBlockExpression) ((XtendFunction) xtendClass.getMembers().get(0)).getExpression())
-				.getExpressions().get(0), XABSTRACT_FEATURE_CALL, FEATURE_NOT_VISIBLE, "Feature",
+				.getExpressions().get(0), XABSTRACT_FEATURE_CALL, FEATURE_NOT_VISIBLE, "The method privateStaticMethod",
 				"not", "visible");
 	}
 
@@ -803,7 +803,7 @@ public class XtendValidationTest extends AbstractXtendTestCase {
 	public void testInaccessibleMethod2() throws Exception {
 		XtendClass xtendClass = clazz("class Foo { def foo() { val o = new Object() o.clone() }}");
 		helper.assertError(((XBlockExpression) ((XtendFunction) xtendClass.getMembers().get(0)).getExpression())
-				.getExpressions().get(1), XABSTRACT_FEATURE_CALL, FEATURE_NOT_VISIBLE, "Feature",
+				.getExpressions().get(1), XABSTRACT_FEATURE_CALL, FEATURE_NOT_VISIBLE, "The method clone",
 				"not", "visible");
 	}
 	

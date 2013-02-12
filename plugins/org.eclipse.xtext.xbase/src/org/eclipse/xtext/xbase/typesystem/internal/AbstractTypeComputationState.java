@@ -419,6 +419,8 @@ public abstract class AbstractTypeComputationState implements ITypeComputationSt
 		ExpressionTypeComputationState state = createExpressionComputationState(constructorCall, stackedResolvedTypes);
 		if (description instanceof ScopeProviderAccess.ErrorDescription) {
 			return new UnresolvableConstructorCall(constructorCall, ((ScopeProviderAccess.ErrorDescription) description).getNode(), description.getName().toString(), state);
+		} else if (description.getElementOrProxy() instanceof JvmType) {
+			return new TypeInsteadOfConstructorLinkingCandidate(constructorCall, description, state);
 		} else {
 			return new ConstructorLinkingCandidate(constructorCall, description, state);
 		}

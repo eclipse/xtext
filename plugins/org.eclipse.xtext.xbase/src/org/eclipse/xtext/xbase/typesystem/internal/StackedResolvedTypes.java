@@ -184,13 +184,13 @@ public class StackedResolvedTypes extends ResolvedTypes {
 	
 	@Override
 	@Nullable
-	public JvmIdentifiableElement getLinkedFeature(@Nullable XAbstractFeatureCall featureCall) {
-		if (featureCall == null)
+	protected JvmIdentifiableElement doGetLinkedFeature(@Nullable XExpression featureOrConstructorCall) {
+		if (featureOrConstructorCall == null)
 			return null;
-		JvmIdentifiableElement result = super.getLinkedFeature(featureCall);
+		JvmIdentifiableElement result = super.doGetLinkedFeature(featureOrConstructorCall);
 		if (result != null)
 			return result;
-		return parent.getLinkedFeature(featureCall);
+		return parent.doGetLinkedFeature(featureOrConstructorCall);
 	}
 	
 	@Override

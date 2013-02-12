@@ -26,6 +26,7 @@ import org.eclipse.xtext.xbase.typesystem.references.LightweightMergedBoundTypeA
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference
 import org.junit.Assert
 import org.eclipse.xtext.xbase.typesystem.internal.ImplicitFirstArgument
+import org.eclipse.xtext.xbase.typesystem.internal.TypeInsteadOfConstructorLinkingCandidate
 
 /**
  * @author Sebastian Zarnekow
@@ -85,6 +86,24 @@ class RecomputingReentrantTypeResolver extends DefaultReentrantTypeResolver {
 		Assert::assertEquals('constructor', left.constructor, right.constructor)
 		Assert::assertEquals('constructorCall', left.constructorCall, right.constructorCall)
 		doAssertEqualLinkingData(left, right)
+	}
+	
+	def dispatch void assertEqualLinkingData(TypeInsteadOfConstructorLinkingCandidate left, IConstructorLinkingCandidate right) {
+		Assert::fail('''«left» vs «right»''')
+	}
+	
+	def dispatch void assertEqualLinkingData(IConstructorLinkingCandidate left, TypeInsteadOfConstructorLinkingCandidate right) {
+		Assert::fail('''«left» vs «right»''')
+	}
+	
+	def dispatch void assertEqualLinkingData(TypeInsteadOfConstructorLinkingCandidate left, TypeInsteadOfConstructorLinkingCandidate right) {
+		Assert::assertEquals('feature', left.feature, right.feature)
+		Assert::assertEquals('constructorCall', left.constructorCall, right.constructorCall)
+		
+		assertEqualReferences('typeArguments', left.typeArguments, right.typeArguments)
+		assertEqualReferences('syntacticTypeArguments', left.invokeAndCast('getSyntacticTypeArguments'), right.invokeAndCast('getSyntacticTypeArguments'))
+		
+		Assert::assertEquals('arguments', left.invoke('getArguments'), right.invoke('getArguments'))
 	}
 	
 	def dispatch void assertEqualLinkingData(ImplicitReceiver left, IFeatureLinkingCandidate right) {

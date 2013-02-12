@@ -59,10 +59,12 @@ public abstract class AbstractPendingLinkingCandidate<Expression extends XExpres
 		return typeParameterMapping;
 	}
 	
+	protected abstract String getFeatureTypeName();
+	
 	public boolean validate(IAcceptor<? super AbstractDiagnostic> result) {
 		// TODO improve messages
 		if (!isVisible()) {
-			String message = "Feature " + getFeature().getSimpleName() + " is not visible";
+			String message = "The " + getFeatureTypeName() + " " + getFeature().getSimpleName() + " is not visible";
 			AbstractDiagnostic diagnostic = new EObjectDiagnosticImpl(
 					Severity.ERROR, 
 					IssueCodes.FEATURE_NOT_VISIBLE, 

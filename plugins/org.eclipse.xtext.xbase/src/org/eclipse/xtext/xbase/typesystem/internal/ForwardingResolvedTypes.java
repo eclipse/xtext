@@ -15,6 +15,7 @@ import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.diagnostics.AbstractDiagnostic;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
+import org.eclipse.xtext.xbase.XConstructorCall;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.typesystem.IResolvedTypes;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
@@ -70,5 +71,10 @@ public abstract class ForwardingResolvedTypes extends ForwardingObject implement
 	@Nullable
 	public JvmIdentifiableElement getLinkedFeature(@Nullable XAbstractFeatureCall featureCall) {
 		return delegate().getLinkedFeature(featureCall);
+	}
+	
+	@Nullable
+	public JvmIdentifiableElement getLinkedFeature(@Nullable XConstructorCall constructorCall) {
+		return delegate().getLinkedFeature(constructorCall);
 	}
 }

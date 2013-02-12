@@ -1641,6 +1641,14 @@ abstract class AbstractTypeResolverTest<Reference> extends AbstractXbaseTestCase
 		"new java.util.HashMap<? super String,Boolean>".resolvesTo("HashMap<String, Boolean>");
 	}
 	
+	@Test def void testBrokenConstructorCall_01() throws Exception {
+		"new Iterable<String>()".resolvesTo("Iterable<String>")
+	}
+	
+	@Test def void testBrokenConstructorCall_02() throws Exception {
+		"new java.util.Map<String>()".resolvesTo("Map<String, Object>")
+	}
+	
 	@Test def void testConstructorTypeInference_01() throws Exception {
 		"new testdata.GenericType1('')".resolvesTo("GenericType1<String>")
 	}
