@@ -110,8 +110,9 @@ public class BatchLinkableResource extends DerivedStateAwareResource implements 
 	 * 
 	 * <p>Implementation detail: Overridden to use the shared {@link #getLock() lock}.</p> 
 	 */
+	@SuppressWarnings("sync-override")
 	@Override
-	public synchronized EList<EObject> getContents() {
+	public EList<EObject> getContents() {
 		synchronized (getLock()) {
 			if (isLoaded && !isLoading && !isInitializing && !isUpdating && !fullyInitialized) {
 				try {
