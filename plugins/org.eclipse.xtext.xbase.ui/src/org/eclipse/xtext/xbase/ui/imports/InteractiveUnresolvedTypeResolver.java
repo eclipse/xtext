@@ -84,11 +84,12 @@ public class InteractiveUnresolvedTypeResolver implements IUnresolvedTypeResolve
 			final List<JvmDeclaredType> candidateTypes = newArrayList();
 			JvmMember context = usages.iterator().next().getContext();
 			JvmDeclaredType contextType = EcoreUtil2.getContainerOfType(context, JvmDeclaredType.class);
-			findCandidateTypes(contextType, name, javaSearchScope, new IAcceptor<JvmDeclaredType>() {
-				public void accept(JvmDeclaredType t) {
-					candidateTypes.add(t);
-				}
-			});
+			if(contextType != null)
+				findCandidateTypes(contextType, name, javaSearchScope, new IAcceptor<JvmDeclaredType>() {
+					public void accept(JvmDeclaredType t) {
+						candidateTypes.add(t);
+					}
+				});
 			if (candidateTypes.isEmpty())
 				return null;
 			else if (candidateTypes.size() == 1)
