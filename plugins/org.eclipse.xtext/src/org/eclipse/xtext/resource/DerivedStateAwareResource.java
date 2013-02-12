@@ -50,6 +50,13 @@ public class DerivedStateAwareResource extends LazyLinkingResource {
 				eSetDeliver(true);
 			}
 		}
+		return doGetContents();
+	}
+
+	/**
+	 * @since 2.4
+	 */
+	protected EList<EObject> doGetContents() {
 		return super.getContents();
 	}
 	
