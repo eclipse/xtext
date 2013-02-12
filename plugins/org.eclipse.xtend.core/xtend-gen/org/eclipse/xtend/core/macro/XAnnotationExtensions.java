@@ -205,10 +205,18 @@ public class XAnnotationExtensions {
     EList<JvmAnnotationValue> _values = activeAnnotation.getValues();
     final Function1<JvmAnnotationValue,Boolean> _function_1 = new Function1<JvmAnnotationValue,Boolean>() {
         public Boolean apply(final JvmAnnotationValue it) {
+          boolean _or = false;
           JvmOperation _operation = it.getOperation();
-          String _simpleName = _operation.getSimpleName();
-          boolean _equals = ObjectExtensions.operator_equals(_simpleName, "value");
-          return Boolean.valueOf(_equals);
+          boolean _equals = ObjectExtensions.operator_equals(_operation, null);
+          if (_equals) {
+            _or = true;
+          } else {
+            JvmOperation _operation_1 = it.getOperation();
+            String _simpleName = _operation_1.getSimpleName();
+            boolean _equals_1 = ObjectExtensions.operator_equals(_simpleName, "value");
+            _or = (_equals || _equals_1);
+          }
+          return Boolean.valueOf(_or);
         }
       };
     final JvmAnnotationValue annoVal = IterableExtensions.<JvmAnnotationValue>findFirst(_values, _function_1);

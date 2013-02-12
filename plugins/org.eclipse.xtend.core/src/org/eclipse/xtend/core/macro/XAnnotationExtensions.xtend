@@ -84,7 +84,8 @@ class XAnnotationExtensions {
 			annotation?.identifier == typeof(Active).name
 		]
 		val annoVal = activeAnnotation.values.findFirst [
-			operation.simpleName == 'value'
+			// identifier 'value' is optional
+			operation == null || operation.simpleName == 'value'
 		]
 		switch annoVal {
 			JvmTypeAnnotationValue : {
