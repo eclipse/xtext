@@ -656,6 +656,10 @@ public class XbaseTypeComputer implements ITypeComputer {
 			public LightweightTypeReference doVisitArrayTypeReference(ArrayTypeReference reference) {
 				return reference.getComponentType();
 			}
+			@Override
+			protected LightweightTypeReference doVisitUnboundTypeReference(UnboundTypeReference reference) {
+				return null;
+			}
 		});
 		return parameterType;
 	}
