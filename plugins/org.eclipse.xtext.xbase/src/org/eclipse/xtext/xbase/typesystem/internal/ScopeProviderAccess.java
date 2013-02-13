@@ -240,6 +240,7 @@ public class ScopeProviderAccess {
 			return false;
 		}
 
+		@NonNull
 		public EnumSet<ConformanceHint> getReceiverConformanceHints() {
 			return EnumSet.of(ConformanceHint.SUCCESS, ConformanceHint.CHECKED);
 		}
