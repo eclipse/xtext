@@ -9,7 +9,6 @@ package org.eclipse.xtext.xbase.typesystem.computation;
 
 import static com.google.common.collect.Lists.*;
 
-import java.util.EnumSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -59,6 +58,7 @@ import org.eclipse.xtext.xbase.typesystem.conformance.TypeConformanceResult;
 import org.eclipse.xtext.xbase.typesystem.references.AnyTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.ArrayTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.CompoundTypeReference;
+import org.eclipse.xtext.xbase.typesystem.references.ITypeReferenceOwner;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightMergedBoundTypeArgument;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.ParameterizedTypeReference;
@@ -539,56 +539,12 @@ public class XbaseTypeComputer implements ITypeComputer {
 			final ITypeComputationState state) {
 		JvmFormalParameter declaredParam = object.getDeclaredParam();
 		LightweightTypeReference parameterType = getDeclaredParameterType(declaredParam, state);
+		final JvmGenericType iterableType = (JvmGenericType) services.getTypeReferences().findDeclaredType(Iterable.class, object);
+		
 		if (parameterType != null && !parameterType.isPrimitiveVoid()) {
-			LightweightTypeReference iterableOrArray = null;
-			if (parameterType.isPrimitive()) {
-				iterableOrArray = new ArrayTypeReference(state.getReferenceOwner(), parameterType);
-			} else {
-				ParameterizedTypeReference reference = new ParameterizedTypeReference(state.getReferenceOwner(), services.getTypeReferences().findDeclaredType(Iterable.class, object));
-				WildcardTypeReference wildcard = new WildcardTypeReference(state.getReferenceOwner());
-				wildcard.addUpperBound(parameterType);
-				reference.addTypeArgument(wildcard);
-				iterableOrArray = reference;
-			}
-			final CompoundTypeReference withSynonyms = new CompoundTypeReference(iterableOrArray.getOwner(), true);
-			withSynonyms.addComponent(iterableOrArray);
-			services.getSynonymTypesProvider().collectSynonymTypes(iterableOrArray, new SynonymTypesProvider.Acceptor() {
-				@Override
-				protected boolean accept(LightweightTypeReference synonym, EnumSet<ConformanceHint> hints) {
-					if (synonym.isType(List.class)) {
-						List<LightweightTypeReference> superTypes = synonym.getAllSuperTypes();
-						for(LightweightTypeReference superType: superTypes) {
-							if (superType.isType(Iterable.class)) {
-								if (superType.getTypeArguments().size() == 1) {
-									LightweightTypeReference argument = superType.getTypeArguments().get(0);
-									if (argument.isWildcard()) {
-										withSynonyms.addComponent(superType);
-										return true;
-									} else {
-										JvmType rawSuperType = superType.getType();
-										if (rawSuperType == null) {
-											withSynonyms.addComponent(superType);
-											return true;
-										}
-										ParameterizedTypeReference parameterized = new ParameterizedTypeReference(superType.getOwner(), rawSuperType);
-										WildcardTypeReference wildcard = new WildcardTypeReference(superType.getOwner());
-										wildcard.addUpperBound(argument);
-										parameterized.addTypeArgument(wildcard);
-										withSynonyms.addComponent(parameterized);
-										return true;
-									}
-								} else {
-									withSynonyms.addComponent(superType);
-									return true;
-								}
-							}
-						}
-					} else {
-						withSynonyms.addComponent(synonym);
-					}
-					return true;
-				}
-			});
+			final CompoundTypeReference withSynonyms = new CompoundTypeReference(state.getReferenceOwner(), true);
+			LightweightTypeReference iterableOrArray = getAndEnhanceIterableOrArrayFromComponent(parameterType, iterableType, withSynonyms);
+			
 			ITypeComputationState iterableState = state.withExpectation(withSynonyms);
 			ITypeComputationResult forExpressionResult = iterableState.computeTypes(object.getForExpression());
 			LightweightTypeReference forExpressionType = forExpressionResult.getActualExpressionType();
@@ -610,9 +566,9 @@ public class XbaseTypeComputer implements ITypeComputer {
 				}
 			}
 		} else {
-			WildcardTypeReference wildcard = new WildcardTypeReference(state.getReferenceOwner());
-			JvmGenericType iterableType = (JvmGenericType) services.getTypeReferences().findDeclaredType(Iterable.class, object);
-			ParameterizedTypeReference iterable = new ParameterizedTypeReference(state.getReferenceOwner(), iterableType);
+			ITypeReferenceOwner owner = state.getReferenceOwner();
+			WildcardTypeReference wildcard = new WildcardTypeReference(owner);
+			ParameterizedTypeReference iterable = new ParameterizedTypeReference(owner, iterableType);
 			UnboundTypeReference unbound = state.createUnboundTypeReference(object, iterableType.getTypeParameters().get(0));
 			wildcard.addUpperBound(unbound);
 			iterable.addTypeArgument(wildcard);
@@ -628,6 +584,34 @@ public class XbaseTypeComputer implements ITypeComputer {
 			}
 		}
 		return parameterType;
+	}
+
+	protected LightweightTypeReference getAndEnhanceIterableOrArrayFromComponent(LightweightTypeReference parameterType, JvmGenericType iterableType,
+			final CompoundTypeReference compoundResult) {
+		ITypeReferenceOwner owner = compoundResult.getOwner();
+		LightweightTypeReference iterableOrArray = null;
+		LightweightTypeReference addAsArrayComponentAndIterable = null;
+		if (parameterType.isPrimitive()) {
+			iterableOrArray = new ArrayTypeReference(owner, parameterType);
+			compoundResult.addComponent(iterableOrArray);
+			addAsArrayComponentAndIterable = parameterType.getWrapperTypeIfPrimitive();
+		} else {
+			addAsArrayComponentAndIterable = parameterType;
+		}
+		ParameterizedTypeReference reference = new ParameterizedTypeReference(owner, iterableType);
+		WildcardTypeReference wildcard = new WildcardTypeReference(owner);
+		wildcard.addUpperBound(addAsArrayComponentAndIterable);
+		reference.addTypeArgument(wildcard);
+		compoundResult.addComponent(reference);
+		if (iterableOrArray == null) {
+			iterableOrArray = reference;
+			LightweightTypeReference potentialPrimitive = addAsArrayComponentAndIterable.getPrimitiveIfWrapperType();
+			if (potentialPrimitive != addAsArrayComponentAndIterable) {
+				compoundResult.addComponent(new ArrayTypeReference(owner, potentialPrimitive));
+			}
+		}
+		compoundResult.addComponent(new ArrayTypeReference(owner, addAsArrayComponentAndIterable));
+		return iterableOrArray;
 	}
 
 	private LightweightTypeReference getElementOrComponentType(final LightweightTypeReference iterableOrArray,
