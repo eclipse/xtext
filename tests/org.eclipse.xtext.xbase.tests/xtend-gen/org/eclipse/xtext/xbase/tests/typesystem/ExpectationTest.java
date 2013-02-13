@@ -246,7 +246,7 @@ public class ExpectationTest extends AbstractXbaseTestCase {
   }
   
   @Test
-  @Ignore(value = "TODO null type is bound differently")
+  @Ignore("TODO null type is bound differently")
   public void testExtensionReceiver_01() {
     ExpectationTest _expects = this.expects("null.isNullOrEmpty()");
     _expects.types("String", "Iterable<Unbound[T]>");
@@ -289,8 +289,8 @@ public class ExpectationTest extends AbstractXbaseTestCase {
   @Test
   public void testForLoop_01() {
     ExpectationTest _expects = this.expects("for(int x: null) {}");
-    ExpectationTest _types = _expects.types("int[] | Iterable<? extends Integer> | Integer[]");
-    _types.finalizedAs("int[] | Iterable<? extends Integer> | Integer[]");
+    ExpectationTest _types = _expects.types("int[] | Iterable<? extends Integer>");
+    _types.finalizedAs("int[] | Iterable<? extends Integer>");
   }
   
   @Test

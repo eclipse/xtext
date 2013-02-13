@@ -74,21 +74,9 @@ public class SynonymTypesProvider {
 					if (!acceptor.accept(listType, EnumSet.of(ConformanceHint.DEMAND_CONVERSION, ConformanceHint.BOXING))) {
 						return;
 					}
-					LightweightTypeReference wrapperType = componentType.getWrapperTypeIfPrimitive();
-					ArrayTypeReference wrapperArrayType = new ArrayTypeReference(type.getOwner(), wrapperType);
-					if (!acceptor.accept(wrapperArrayType, EnumSet.of(ConformanceHint.DEMAND_CONVERSION, ConformanceHint.BOXING))) {
-						return;
-					}
 				} else {
 					if (!acceptor.accept(listType, ConformanceHint.DEMAND_CONVERSION)) {
 						return;
-					}
-					if (componentType.isWrapper()) {
-						LightweightTypeReference primitive = componentType.getPrimitiveIfWrapperType();
-						ArrayTypeReference primitiveArrayType = new ArrayTypeReference(type.getOwner(), primitive);
-						if (!acceptor.accept(primitiveArrayType, EnumSet.of(ConformanceHint.DEMAND_CONVERSION, ConformanceHint.UNBOXING))) {
-							return;
-						}
 					}
 				}
 			}
