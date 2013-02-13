@@ -46,25 +46,25 @@ public class OrderSensitivityTests extends AbstractXbaseTestCase {
     this.doTestOverloadedAndExpect("testdata.ordersensitivity.CaseB", "overloaded(strings, chars)", "overloaded(java.lang.Iterable,java.util.Collection)");
   }
   
-  @Ignore(value = "https://bugs.eclipse.org/bugs/show_bug.cgi?id=397424")
+  @Ignore("https://bugs.eclipse.org/bugs/show_bug.cgi?id=397424")
   @Test
   public void testOverloadedClosureMethods_01() {
     this.doTestClosureMethodAndExpect("testdata.ordersensitivity.CaseC", "\'hello\'", "RunnerWithResult");
   }
   
-  @Ignore(value = "https://bugs.eclipse.org/bugs/show_bug.cgi?id=397424")
+  @Ignore("https://bugs.eclipse.org/bugs/show_bug.cgi?id=397424")
   @Test
   public void testOverloadedClosureMethods_02() {
     this.doTestClosureMethodAndExpect("testdata.ordersensitivity.CaseD", "\'hello\'", "RunnerWithResult");
   }
   
-  @Ignore(value = "https://bugs.eclipse.org/bugs/show_bug.cgi?id=397424")
+  @Ignore("https://bugs.eclipse.org/bugs/show_bug.cgi?id=397424")
   @Test
   public void testOverloadedClosureMethods_03() {
     this.doTestClosureMethodAndExpect("testdata.ordersensitivity.CaseC", "System::out.println()", "Runner");
   }
   
-  @Ignore(value = "https://bugs.eclipse.org/bugs/show_bug.cgi?id=397424")
+  @Ignore("https://bugs.eclipse.org/bugs/show_bug.cgi?id=397424")
   @Test
   public void testOverloadedClosureMethods_04() {
     this.doTestClosureMethodAndExpect("testdata.ordersensitivity.CaseD", "System::out.println()", "Runner");

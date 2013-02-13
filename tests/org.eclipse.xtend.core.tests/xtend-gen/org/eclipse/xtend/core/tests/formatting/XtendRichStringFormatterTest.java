@@ -408,7 +408,7 @@ public class XtendRichStringFormatterTest extends AbstractXtendFormatterTest {
     this.assertFormattedRichStringExpression(_builder);
   }
   
-  @Ignore(value = "https://bugs.eclipse.org/bugs/show_bug.cgi?id=394277")
+  @Ignore("https://bugs.eclipse.org/bugs/show_bug.cgi?id=394277")
   @Test
   public void testForEmpty() {
     StringConcatenation _builder = new StringConcatenation();

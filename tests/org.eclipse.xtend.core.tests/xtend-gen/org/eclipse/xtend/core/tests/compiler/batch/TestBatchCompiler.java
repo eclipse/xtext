@@ -28,8 +28,8 @@ import org.junit.runner.RunWith;
  * Batch compiler tests.
  * @see org.eclipse.xtend.core.compiler.batch.XtendBatchCompiler
  */
-@RunWith(value = XtextRunner.class)
-@InjectWith(value = RuntimeInjectorProvider.class)
+@RunWith(XtextRunner.class)
+@InjectWith(RuntimeInjectorProvider.class)
 @SuppressWarnings("all")
 public class TestBatchCompiler {
   @Inject
