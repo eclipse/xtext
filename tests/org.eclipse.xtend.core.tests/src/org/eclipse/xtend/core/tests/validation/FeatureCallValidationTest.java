@@ -25,6 +25,35 @@ public class FeatureCallValidationTest extends AbstractXtendTestCase {
 	@Inject
 	private ValidationTestHelper helper;
 
+	/**
+	 * see https://bugs.eclipse.org/bugs/show_bug.cgi?id=362240
+	 */
+	@Test
+	public void testBug362240_1() throws Exception {
+		XtendClass clazz = clazz("class Bar { def <T> bar(T t) { <Integer>bar(t) }}");
+		helper.assertError(clazz, XbasePackage.Literals.XFEATURE_CALL,
+				IssueCodes.INCOMPATIBLE_TYPES, "Expected Integer or int but was T");
+	}
+	
+	/**
+	 * see https://bugs.eclipse.org/bugs/show_bug.cgi?id=362240
+	 */
+	@Test
+	public void testBug362240_2() throws Exception {
+		XtendClass clazz = clazz("class Bar<T> { def <X> void bar(X x) { val T t = null; <Integer>bar(t) }}");
+		helper.assertError(clazz, XbasePackage.Literals.XFEATURE_CALL,
+				IssueCodes.INCOMPATIBLE_TYPES, "Expected Integer or int but was T");
+	}
+	
+	/**
+	 * see https://bugs.eclipse.org/bugs/show_bug.cgi?id=362240
+	 */
+	@Test
+	public void testBug362240_3() throws Exception {
+		XtendClass clazz = clazz("class Bar<T extends Integer> { def <X> void bar(X x) { val T t = null; <Integer>bar(t) }}");
+		helper.assertNoErrors(clazz);
+	}
+	
 	@Test 
 	public void testBug400653() throws Exception {
 		XtendClass clazz = clazz("class X { def void m(String x) { x.m2 } def m2(char c) {}}");

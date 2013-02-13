@@ -1322,6 +1322,7 @@ public class CompilerTest extends AbstractXtendTestCase {
 //		void generate() {
 //			List<CharSequence> seq = null;
 //			List<String> strings = null;
+//			this.addAll2(seq, strings);
 //			java.util.Collection<String> result = this.addAll2(seq, strings);
 //		}
 //		<T> java.util.Collection<T> addAll2(java.util.Collection<? super T> collection, Iterable<? extends T> elements) {
@@ -3262,24 +3263,22 @@ public class CompilerTest extends AbstractXtendTestCase {
 	 * StackOveflowError see https://bugs.eclipse.org/bugs/show_bug.cgi?id=362240
 	 */
 	@Test
-	@Ignore
-	public void testGenericsBug362240() throws Exception {
+	public void testGenericsBug362240_01() throws Exception {
 		String code = "package generics" + " class Bar {" + "def <T extends (Object)=>T> T bar(T t) {"
 				+ " bar(t).apply(bar(t))" + "}}";
 		Class<?> javaCode = compileJavaCode("generics.Bar", code);
 		assertNotNull("Example code does not compile to java", javaCode);
 	}
-
+	
 	/**
-	 * Java compile error: <br>
-	 * The parameterized method <Integer>bar(Integer) of type TestBug376037 is not applicable for the arguments (T)<br>
-	 * see https://bugs.eclipse.org/bugs/show_bug.cgi?id=362240
+	 * StackOveflowError see https://bugs.eclipse.org/bugs/show_bug.cgi?id=362240
 	 */
 	@Test
-	@Ignore
-	public void testGenericsBug362240_1() throws Exception {
-		String code = "package generics" + " class Bar {" + "def <T> bar(T t) {" + "<Integer>bar(t)" + "}}";
+	public void testGenericsBug362240_02() throws Exception {
+		String code = "package generics class Bar<T extends (Object)=>T> {" +
+				"def T bar(T t) { bar(t).apply(bar(t)) } }";
 		Class<?> javaCode = compileJavaCode("generics.Bar", code);
 		assertNotNull("Example code does not compile to java", javaCode);
 	}
+
 }
