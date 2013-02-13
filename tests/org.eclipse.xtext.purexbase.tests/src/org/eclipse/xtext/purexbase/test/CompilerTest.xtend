@@ -729,7 +729,7 @@ class CompilerTest {
 			    "string".toCharArray();
 			    final List<Character> l = ((List<Character>)Conversions.doWrapArray("string".toCharArray()));
 			    char[] _charArray = "string".toCharArray();
-			    ((List<Character>)Conversions.doWrapArray(_charArray)).get(3);
+			    _charArray[3];
 			    final Comparator<String> _function = new Comparator<String>() {
 			        public int compare(final String a, final String b) {
 			          int _length = a.length();
