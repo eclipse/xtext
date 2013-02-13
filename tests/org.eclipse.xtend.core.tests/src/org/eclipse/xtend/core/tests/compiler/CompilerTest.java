@@ -3257,4 +3257,29 @@ public class CompilerTest extends AbstractXtendTestCase {
 		SuperClass sc = (SuperClass) code.newInstance();
 		assertNotNull(sc);
 	}
+
+	/**
+	 * StackOveflowError see https://bugs.eclipse.org/bugs/show_bug.cgi?id=362240
+	 */
+	@Test
+	@Ignore
+	public void testGenericsBug362240() throws Exception {
+		String code = "package generics" + " class Bar {" + "def <T extends (Object)=>T> T bar(T t) {"
+				+ " bar(t).apply(bar(t))" + "}}";
+		Class<?> javaCode = compileJavaCode("generics.Bar", code);
+		assertNotNull("Example code does not compile to java", javaCode);
+	}
+
+	/**
+	 * Java compile error: <br>
+	 * The parameterized method <Integer>bar(Integer) of type TestBug376037 is not applicable for the arguments (T)<br>
+	 * see https://bugs.eclipse.org/bugs/show_bug.cgi?id=362240
+	 */
+	@Test
+	@Ignore
+	public void testGenericsBug362240_1() throws Exception {
+		String code = "package generics" + " class Bar {" + "def <T> bar(T t) {" + "<Integer>bar(t)" + "}}";
+		Class<?> javaCode = compileJavaCode("generics.Bar", code);
+		assertNotNull("Example code does not compile to java", javaCode);
+	}
 }
