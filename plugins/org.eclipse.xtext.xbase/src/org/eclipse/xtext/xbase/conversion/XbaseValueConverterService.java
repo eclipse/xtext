@@ -42,6 +42,8 @@ public class XbaseValueConverterService extends DefaultTerminalConverters {
 		private final static Set<String> operators = ImmutableSet.of(
 			"->",
 			"..",
+			"..<",
+			">..",
 			"=>",
 			">>",
 			">>>",

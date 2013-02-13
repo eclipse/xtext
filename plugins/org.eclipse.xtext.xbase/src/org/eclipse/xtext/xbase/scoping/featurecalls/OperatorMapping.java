@@ -37,7 +37,9 @@ public class OperatorMapping {
 	public static final QualifiedName OR = create("||");
 	public static final QualifiedName AND = create("&&");
 	public static final QualifiedName ADD = create("+=");
+	public static final QualifiedName REMOVE = create("-=");
 	public static final QualifiedName EQUALS = create("==");
+	public static final QualifiedName TRIPLE_EQUALS = create("===");
 	public static final QualifiedName NOT_EQUALS = create("!=");
 	public static final QualifiedName LESS_THAN = create("<");
 	public static final QualifiedName LESS_EQUALS_THAN = create("<=");
@@ -45,6 +47,8 @@ public class OperatorMapping {
 	public static final QualifiedName GREATER_EQUALS_THAN = create(">=");
 	public static final QualifiedName MAPPED_TO = create("->");
 	public static final QualifiedName UP_TO = create("..");
+	public static final QualifiedName DOUBLE_DOT_LESS_THAN = create("..<");
+	public static final QualifiedName GREATER_THAN_DOUBLE_DOT = create(">..");
 	public static final QualifiedName NOT = create("!");
 	public static final QualifiedName DOUBLE_ARROW = create("=>");
 	
@@ -73,7 +77,9 @@ public class OperatorMapping {
 		map.put(OR, create(OP_PREFIX+"or"));
 		map.put(AND, create(OP_PREFIX+"and"));
 		map.put(ADD, create(OP_PREFIX+"add"));
+		map.put(REMOVE, create(OP_PREFIX+"remove"));
 		map.put(EQUALS, create(OP_PREFIX+"equals"));
+		map.put(TRIPLE_EQUALS, create(OP_PREFIX+"tripleEquals"));
 		map.put(NOT_EQUALS, create(OP_PREFIX+"notEquals"));
 		map.put(LESS_THAN, create(OP_PREFIX+"lessThan"));
 		map.put(LESS_EQUALS_THAN, create(OP_PREFIX+"lessEqualsThan"));
@@ -81,6 +87,8 @@ public class OperatorMapping {
 		map.put(GREATER_EQUALS_THAN, create(OP_PREFIX+"greaterEqualsThan"));
 		map.put(MAPPED_TO, create(OP_PREFIX+"mappedTo"));
 		map.put(UP_TO, create(OP_PREFIX+"upTo"));
+		map.put(DOUBLE_DOT_LESS_THAN, create(OP_PREFIX+"doubleDotLessThan"));
+		map.put(GREATER_THAN_DOUBLE_DOT, create(OP_PREFIX+"greaterThanDoubleDot"));
 		map.put(NOT, create(OP_PREFIX+"not"));
 		map.put(DOUBLE_ARROW, create(OP_PREFIX+"doubleArrow"));
 	}

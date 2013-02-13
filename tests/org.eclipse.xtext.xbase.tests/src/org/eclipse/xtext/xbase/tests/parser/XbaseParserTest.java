@@ -70,6 +70,10 @@ public class XbaseParserTest extends AbstractXbaseTestCase {
 		expression("(foo).bar = baz");
 	}
 	
+	@Test public void testExclusiveRange() throws Exception {
+		expression("1..<2");
+	}
+	
 	@Test public void testOrAndAndPrecedence() throws Exception {
 		XBinaryOperation or = (XBinaryOperation) expression("foo && bar || baz");
 		assertEquals(2,or.getExplicitArguments().size());
