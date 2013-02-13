@@ -62,6 +62,10 @@ import org.eclipse.xtext.xbase.compiler.output.ITreeAppendable;
 import org.eclipse.xtext.xbase.featurecalls.IdentifiableSimpleNameProvider;
 import org.eclipse.xtext.xbase.impl.FeatureCallToJavaMapping;
 import org.eclipse.xtext.xbase.jvmmodel.ILogicalContainerProvider;
+import org.eclipse.xtext.xbase.typesystem.IBatchTypeResolver;
+import org.eclipse.xtext.xbase.typesystem.IResolvedTypes;
+import org.eclipse.xtext.xbase.typesystem.internal.ResolvedTypes;
+import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 import org.eclipse.xtext.xbase.typing.JvmOnlyTypeConformanceComputer;
 import org.eclipse.xtext.xbase.typing.XbaseTypeArgumentContextProvider;
 import org.eclipse.xtext.xbase.util.XExpressionHelper;
@@ -629,12 +633,6 @@ public class FeatureCallCompiler extends LiteralsCompiler {
 		}
 	}
 
-//	protected boolean isInlined(XAbstractFeatureCall featureCall) {
-//		JvmAnnotationReference inlineAnnotation = findInlineAnnotation(featureCall);
-//		return inlineAnnotation != null;
-//	}
-
-
 
 	protected String getDefaultLiteral(JvmPrimitiveType primitiveType) {
 		final String name = primitiveType.getIdentifier();
@@ -724,6 +722,8 @@ public class FeatureCallCompiler extends LiteralsCompiler {
 
 	private Pattern pattern = Pattern.compile("\\$(\\$|[0-9]+)");
 	
+	@Inject IBatchTypeResolver batchTypeResolver;
+	
 	protected void appendInlineFeatureCall(XAbstractFeatureCall call, ITreeAppendable b) {
 		JvmAnnotationReference inlineAnnotation = expressionHelper.findInlineAnnotation(call);
 		String formatString = null;
@@ -738,6 +738,7 @@ public class FeatureCallCompiler extends LiteralsCompiler {
 		}
 		if (formatString == null)
 			throw new IllegalStateException();
+		IResolvedTypes resolvedTypes = batchTypeResolver.resolveTypes(call);
 		List<XExpression> arguments = getActualArguments(call);
 		Matcher matcher = pattern.matcher(formatString);
 		int prevEnd = 0;
@@ -751,9 +752,15 @@ public class FeatureCallCompiler extends LiteralsCompiler {
 				b.append("$");
 			} else {
 				int index = Integer.parseInt(indexOrDollar) - 1;
-				if (index >= arguments.size() && index < arguments.size() + importedTypes.size()) {
-					serialize(importedTypes.get(index - arguments.size()), call, b);
-				} else if (index == arguments.size() + importedTypes.size()) {
+				int numberImports = importedTypes.size();
+				int numberArguments = arguments.size();
+				if (index > numberArguments+numberImports) {
+					List<LightweightTypeReference> typeArguments = resolvedTypes.getActualTypeArguments(call);
+					LightweightTypeReference typeArgument = typeArguments.get(index - (numberArguments+numberImports+1));
+					serialize(typeArgument.getUpperBoundSubstitute().toTypeReference(), call, b);
+				} else if (index >= numberArguments && index < numberArguments + numberImports) {
+					serialize(importedTypes.get(index - numberArguments), call, b);
+				} else if (index == numberArguments + numberImports) {
 					appendTypeArguments(call, b);
 				} else {
 					XExpression argument = arguments.get(index);

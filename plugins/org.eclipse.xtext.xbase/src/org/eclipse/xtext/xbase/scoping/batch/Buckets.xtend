@@ -16,6 +16,7 @@ import org.eclipse.xtext.xbase.XExpression
 import org.eclipse.xtext.xbase.typesystem.conformance.ConformanceHint
 import java.util.Map
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference
+import java.util.EnumSet
 
 /**
  * A type bucket collects a number of types that originate in the 
@@ -53,7 +54,7 @@ class ExpressionBucket {
  */
 @Data
 class SynonymTypeBucket extends TypeBucket {
-	Set<ConformanceHint> hints
+	EnumSet<ConformanceHint> hints
 }
 
 /**

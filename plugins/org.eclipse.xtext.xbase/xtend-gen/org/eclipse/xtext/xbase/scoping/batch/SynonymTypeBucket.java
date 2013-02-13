@@ -7,8 +7,8 @@
  */
 package org.eclipse.xtext.xbase.scoping.batch;
 
+import java.util.EnumSet;
 import java.util.List;
-import java.util.Set;
 import org.eclipse.xtend.lib.Data;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.xbase.lib.util.ToStringHelper;
@@ -24,13 +24,13 @@ import org.eclipse.xtext.xbase.typesystem.conformance.ConformanceHint;
 @Data
 @SuppressWarnings("all")
 public class SynonymTypeBucket extends TypeBucket {
-  private final Set<ConformanceHint> _hints;
+  private final EnumSet<ConformanceHint> _hints;
   
-  public Set<ConformanceHint> getHints() {
+  public EnumSet<ConformanceHint> getHints() {
     return this._hints;
   }
   
-  public SynonymTypeBucket(final int id, final List<? extends JvmType> types, final Set<ConformanceHint> hints) {
+  public SynonymTypeBucket(final int id, final List<? extends JvmType> types, final EnumSet<ConformanceHint> hints) {
     super(id, types);
     this._hints = hints;
   }

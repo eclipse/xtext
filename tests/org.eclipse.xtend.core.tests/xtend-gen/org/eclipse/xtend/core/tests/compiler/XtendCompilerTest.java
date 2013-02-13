@@ -1071,6 +1071,151 @@ public class XtendCompilerTest extends AbstractXtendTestCase {
   }
   
   @Test
+  public void testWorkWithArrays_01() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("public class Foo  {");
+    _builder.newLine();
+    _builder.append("    ");
+    _builder.append("def void doStuff() {");
+    _builder.newLine();
+    _builder.append("    \t");
+    _builder.append("val strings = newArrayOfSize(2)");
+    _builder.newLine();
+    _builder.append("    \t");
+    _builder.append("strings.set(0, \'world\')");
+    _builder.newLine();
+    _builder.append("    \t");
+    _builder.append("strings.set(1, \'hello\')");
+    _builder.newLine();
+    _builder.append("    \t");
+    _builder.append("println(strings.get(1) + \' \' + strings.get(0))");
+    _builder.newLine();
+    _builder.append("    ");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("import org.eclipse.xtext.xbase.lib.InputOutput;");
+    _builder_1.newLine();
+    _builder_1.newLine();
+    _builder_1.append("@SuppressWarnings(\"all\")");
+    _builder_1.newLine();
+    _builder_1.append("public class Foo {");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("public void doStuff() {");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("final String[] strings = new String[2];");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("strings[0] = \"world\";");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("strings[1] = \"hello\";");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("String _get = strings[1];");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("String _plus = (_get + \" \");");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("String _get_1 = strings[0];");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("String _plus_1 = (_plus + _get_1);");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("InputOutput.<String>println(_plus_1);");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    this.assertCompilesTo(_builder, _builder_1);
+  }
+  
+  @Test
+  public void testWorkWithArrays_02() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("public class Foo  {");
+    _builder.newLine();
+    _builder.append("    ");
+    _builder.append("def void doStuff() {");
+    _builder.newLine();
+    _builder.append("    \t");
+    _builder.append("val numbers = newIntArrayOfSize(2)");
+    _builder.newLine();
+    _builder.append("    \t");
+    _builder.append("numbers.set(0, 42)");
+    _builder.newLine();
+    _builder.append("    \t");
+    _builder.append("numbers.set(1, 44)");
+    _builder.newLine();
+    _builder.append("    \t");
+    _builder.append("println(numbers.get(1) + \' \' + numbers.get(0) + \' length : \' + numbers.length)");
+    _builder.newLine();
+    _builder.append("    ");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("import org.eclipse.xtext.xbase.lib.InputOutput;");
+    _builder_1.newLine();
+    _builder_1.newLine();
+    _builder_1.append("@SuppressWarnings(\"all\")");
+    _builder_1.newLine();
+    _builder_1.append("public class Foo {");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("public void doStuff() {");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("final int[] numbers = new int[2];");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("numbers[0] = 42;");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("numbers[1] = 44;");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("int _get = numbers[1];");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("String _plus = (Integer.valueOf(_get) + \" \");");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("int _get_1 = numbers[0];");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("String _plus_1 = (_plus + Integer.valueOf(_get_1));");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("String _plus_2 = (_plus_1 + \" length : \");");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("int _length = numbers.length;");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("String _plus_3 = (_plus_2 + Integer.valueOf(_length));");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("InputOutput.<String>println(_plus_3);");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    this.assertCompilesTo(_builder, _builder_1);
+  }
+  
+  @Test
   public void testAbstractIterator_01() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("import java.util.Iterator");
@@ -1547,7 +1692,7 @@ public class XtendCompilerTest extends AbstractXtendTestCase {
     this.assertCompilesTo(_builder, _builder_1);
   }
   
-  @Ignore(value = "TODO implement this stuff for closures")
+  @Ignore("TODO implement this stuff for closures")
   @Test
   public void testVoidMethod_02() throws Exception {
     StringConcatenation _builder = new StringConcatenation();

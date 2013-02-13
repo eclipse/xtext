@@ -14,6 +14,7 @@ import static org.eclipse.xtext.xbase.validation.IssueCodes.*;
 import java.io.Serializable;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.EnumSet;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
@@ -555,7 +556,7 @@ public class XbaseJavaValidator extends AbstractXbaseJavaValidator {
 		getServices().getSynonymTypesProvider().collectSynonymTypes(expectedType, new SynonymTypesProvider.Acceptor() {
 			@Override
 			@NonNullByDefault
-			protected boolean accept(LightweightTypeReference synonym, Set<ConformanceHint> hints) {
+			protected boolean accept(LightweightTypeReference synonym, EnumSet<ConformanceHint> hints) {
 				result.append(" or ").append(canonicalName(synonym));
 				return true;
 			}

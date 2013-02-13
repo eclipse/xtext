@@ -7,6 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.scoping.batch;
 
+import java.util.EnumSet;
 import java.util.Map;
 
 import org.eclipse.jdt.annotation.NonNullByDefault;
@@ -16,6 +17,7 @@ import org.eclipse.xtext.common.types.JvmFeature;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.xbase.XExpression;
+import org.eclipse.xtext.xbase.typesystem.conformance.ConformanceHint;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightMergedBoundTypeArgument;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 
@@ -35,8 +37,8 @@ public class InstanceExtensionDescription extends InstanceFeatureDescription {
 			XExpression firstArgument, LightweightTypeReference firstArgumentType,
 			Map<JvmTypeParameter, LightweightMergedBoundTypeArgument> argumentTypeParameterMapping, 
 			int bucketId,
-			boolean visible) {
-		super(qualifiedName, feature, EcoreUtil2.clone(receiver), receiverType, typeParameterMapping, bucketId, visible);
+			boolean visible, @Nullable EnumSet<ConformanceHint> receiverConformanceHints) {
+		super(qualifiedName, feature, EcoreUtil2.clone(receiver), receiverType, typeParameterMapping, bucketId, visible, receiverConformanceHints);
 		this.firstArgument = firstArgument;
 		this.firstArgumentType = firstArgumentType;
 		this.argumentTypeParameterMapping = argumentTypeParameterMapping;
