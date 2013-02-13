@@ -802,7 +802,6 @@ class XtendCompilerTest extends AbstractXtendTestCase {
 		''')
 	}
 	
-	@Ignore("TODO implement this stuff for closures")
 	@Test def testVoidMethod_02() throws Exception {
 		'''
 			class A {

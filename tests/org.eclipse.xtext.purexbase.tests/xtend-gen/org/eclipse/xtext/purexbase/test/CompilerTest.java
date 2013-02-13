@@ -1745,7 +1745,7 @@ public class CompilerTest {
       _builder_1.append("char[] _charArray = \"string\".toCharArray();");
       _builder_1.newLine();
       _builder_1.append("    ");
-      _builder_1.append("((List<Character>)Conversions.doWrapArray(_charArray)).get(3);");
+      _builder_1.append("_charArray[3];");
       _builder_1.newLine();
       _builder_1.append("    ");
       _builder_1.append("final Comparator<String> _function = new Comparator<String>() {");

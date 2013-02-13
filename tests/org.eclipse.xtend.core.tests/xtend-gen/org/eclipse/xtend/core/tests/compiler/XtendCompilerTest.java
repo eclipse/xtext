@@ -23,7 +23,6 @@ import org.eclipse.xtext.xbase.compiler.JvmModelGenerator;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.junit.Assert;
-import org.junit.Ignore;
 import org.junit.Test;
 
 @SuppressWarnings("all")
@@ -1787,7 +1786,6 @@ public class XtendCompilerTest extends AbstractXtendTestCase {
     this.assertCompilesTo(_builder, _builder_1);
   }
   
-  @Ignore("TODO implement this stuff for closures")
   @Test
   public void testVoidMethod_02() throws Exception {
     StringConcatenation _builder = new StringConcatenation();

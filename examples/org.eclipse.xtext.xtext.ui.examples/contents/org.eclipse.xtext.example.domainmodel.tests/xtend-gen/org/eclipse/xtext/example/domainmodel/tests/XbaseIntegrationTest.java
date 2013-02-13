@@ -100,44 +100,4 @@ public class XbaseIntegrationTest extends AbstractXbaseEvaluationTest {
       throw Exceptions.sneakyThrow(_e);
     }
   }
-  
-  @Test
-  @Ignore
-  public void testClosure_06_1() {
-    try {
-      super.testClosure_06_1();
-    } catch (Throwable _e) {
-      throw Exceptions.sneakyThrow(_e);
-    }
-  }
-  
-  @Test
-  @Ignore
-  public void testClosure_10() {
-    try {
-      super.testClosure_10();
-    } catch (Throwable _e) {
-      throw Exceptions.sneakyThrow(_e);
-    }
-  }
-  
-  @Test
-  @Ignore
-  public void testClosure_10_2() {
-    try {
-      super.testClosure_10_2();
-    } catch (Throwable _e) {
-      throw Exceptions.sneakyThrow(_e);
-    }
-  }
-  
-  @Test
-  @Ignore
-  public void testStaticMethod_02() {
-    try {
-      super.testStaticMethod_02();
-    } catch (Throwable _e) {
-      throw Exceptions.sneakyThrow(_e);
-    }
-  }
 }

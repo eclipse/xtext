@@ -60,34 +60,6 @@ public class XbaseIntegrationTest extends AbstractXbaseEvaluationTest {
 	}
 	
 	@Override
-	@Test
-	@Ignore
-	public void testClosure_06_1() throws Exception {
-		super.testClosure_06_1();
-	}
-	
-	@Override
-	@Test
-	@Ignore
-	public void testClosure_10() throws Exception {
-		super.testClosure_10();
-	}
-	
-	@Override
-	@Test
-	@Ignore
-	public void testClosure_10_2() throws Exception {
-		super.testClosure_10_2();
-	}
-	
-	@Override
-	@Test
-	@Ignore
-	public void testStaticMethod_02() throws Exception {
-		super.testStaticMethod_02();
-	}
-	
-	@Override
 	@Test 
 	@Ignore("Wrong type")
 	public void testReturnExpression_07() throws Exception {

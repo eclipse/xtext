@@ -68,27 +68,4 @@ public class XbaseIntegrationTest extends AbstractXbaseEvaluationTest {
 		super.testImplicitOneArgClosure_01()
 	}
 	
-	@Test
-	@Ignore
-	override testClosure_06_1() {
-		super.testClosure_06_1()
-	}
-	
-	@Test
-	@Ignore
-	override testClosure_10() {
-		super.testClosure_10()
-	}
-	
-	@Test
-	@Ignore
-	override testClosure_10_2() {
-		super.testClosure_10_2()
-	}
-	
-	@Test
-	@Ignore
-	override testStaticMethod_02() {
-		super.testStaticMethod_02()
-	}
 }
