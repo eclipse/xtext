@@ -59,7 +59,7 @@ public class AbstractContentAssistTest implements ResourceLoadHelper, IJavaProje
     }
   }
   
-  @SuppressWarnings(value = "unchecked")
+  @SuppressWarnings("unchecked")
   protected ArrayList<String> expect(final String[]... arrays) {
     final ArrayList<String> expectation = CollectionLiterals.<String>newArrayList();
     for (final String[] array : arrays) {

@@ -12,8 +12,8 @@ import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xbase.tests.formatting.XbaseFormatterTestInjectorProvider;
 import org.junit.runner.RunWith;
 
-@RunWith(value = XtextRunner.class)
-@InjectWith(value = XbaseFormatterTestInjectorProvider.class)
+@RunWith(XtextRunner.class)
+@InjectWith(XbaseFormatterTestInjectorProvider.class)
 @SuppressWarnings("all")
 public abstract class AbstractXbaseFormatterTest {
   @Inject

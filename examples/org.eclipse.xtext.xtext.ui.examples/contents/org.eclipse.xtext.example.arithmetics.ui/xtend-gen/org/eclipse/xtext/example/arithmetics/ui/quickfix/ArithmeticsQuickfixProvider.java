@@ -21,7 +21,7 @@ import org.eclipse.xtext.xbase.lib.Conversions;
  */
 @SuppressWarnings("all")
 public class ArithmeticsQuickfixProvider extends DefaultQuickfixProvider {
-  @Fix(value = ArithmeticsValidator.NORMALIZABLE)
+  @Fix(ArithmeticsValidator.NORMALIZABLE)
   public void normalize(final Issue issue, final IssueResolutionAcceptor acceptor) {
     String[] _data = issue.getData();
     final String string = ((List<String>)Conversions.doWrapArray(_data)).get(0);
