@@ -9,6 +9,7 @@ package org.eclipse.xtext.xbase.scoping.batch;
 
 import java.util.Collection;
 import java.util.Collections;
+import java.util.EnumSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -26,6 +27,7 @@ import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.scoping.featurecalls.OperatorMapping;
+import org.eclipse.xtext.xbase.typesystem.conformance.ConformanceHint;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightMergedBoundTypeArgument;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 import org.eclipse.xtext.xbase.typesystem.util.DeclaratorTypeArgumentCollector;
@@ -86,10 +88,16 @@ public class ReceiverFeatureScope extends AbstractSessionBasedScope implements I
 	}
 
 	protected IEObjectDescription createDescription(QualifiedName name, JvmFeature feature, TypeBucket bucket) {
-		if (implicit) {
-			return new InstanceFeatureDescriptionWithImplicitReceiver(name, feature, receiver, receiverType, getReceiverTypeParameterMapping(), bucket.getId(), isVisible(feature));
+		EnumSet<ConformanceHint> hints = null;
+		if (bucket instanceof SynonymTypeBucket) {
+			hints = ((SynonymTypeBucket) bucket).getHints();
 		} else {
-			return new InstanceFeatureDescription(name, feature, receiver, receiverType, getReceiverTypeParameterMapping(), bucket.getId(), isVisible(feature));
+			hints = EnumSet.of(ConformanceHint.CHECKED, ConformanceHint.SUCCESS);
+		}
+		if (implicit) {
+			return new InstanceFeatureDescriptionWithImplicitReceiver(name, feature, receiver, receiverType, getReceiverTypeParameterMapping(), bucket.getId(), isVisible(feature), hints);
+		} else {
+			return new InstanceFeatureDescription(name, feature, receiver, receiverType, getReceiverTypeParameterMapping(), bucket.getId(), isVisible(feature), hints);
 		}
 	}
 

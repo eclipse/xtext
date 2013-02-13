@@ -12,6 +12,8 @@ import java.util.List;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.util.TypeReferences;
+import org.eclipse.xtext.xbase.lib.ArrayExtensions;
+import org.eclipse.xtext.xbase.lib.ArrayLiterals;
 import org.eclipse.xtext.xbase.lib.BigDecimalExtensions;
 import org.eclipse.xtext.xbase.lib.BigIntegerExtensions;
 import org.eclipse.xtext.xbase.lib.BooleanExtensions;
@@ -84,6 +86,7 @@ public class ImplicitlyImportedTypes {
 	 */
 	protected List<Class<?>> getStaticImportClasses() {
 		return Lists.<Class<?>> newArrayList(
+			ArrayLiterals.class,
 			CollectionLiterals.class,
 			InputOutput.class);
 	}
@@ -93,6 +96,7 @@ public class ImplicitlyImportedTypes {
 	 */
 	protected List<Class<?>> getExtensionClasses() {
 		return Lists.<Class<?>> newArrayList(
+			ArrayExtensions.class,
 			BigDecimalExtensions.class,
 			BigIntegerExtensions.class,
 			BooleanExtensions.class,

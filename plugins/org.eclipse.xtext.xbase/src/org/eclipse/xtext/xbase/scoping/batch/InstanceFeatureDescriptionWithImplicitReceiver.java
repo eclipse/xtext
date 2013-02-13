@@ -8,6 +8,7 @@
 package org.eclipse.xtext.xbase.scoping.batch;
 
 import java.util.Collections;
+import java.util.EnumSet;
 import java.util.Map;
 
 import org.eclipse.jdt.annotation.NonNullByDefault;
@@ -17,6 +18,7 @@ import org.eclipse.xtext.common.types.JvmFeature;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.xbase.XExpression;
+import org.eclipse.xtext.xbase.typesystem.conformance.ConformanceHint;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightMergedBoundTypeArgument;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 
@@ -29,8 +31,8 @@ public class InstanceFeatureDescriptionWithImplicitReceiver extends InstanceFeat
 	protected InstanceFeatureDescriptionWithImplicitReceiver(QualifiedName qualifiedName,
 			JvmFeature feature, XExpression receiver, LightweightTypeReference receiverType,
 			Map<JvmTypeParameter, LightweightMergedBoundTypeArgument> typeParameterMapping, int bucketId,
-			boolean visible) {
-		super(qualifiedName, feature, EcoreUtil2.clone(receiver), receiverType, typeParameterMapping, bucketId, visible);
+			boolean visible, @Nullable EnumSet<ConformanceHint> receiverConformanceHints) {
+		super(qualifiedName, feature, EcoreUtil2.clone(receiver), receiverType, typeParameterMapping, bucketId, visible, receiverConformanceHints);
 	}
 	
 	@Override

@@ -88,10 +88,10 @@ public class FeatureLinkingCandidate extends AbstractPendingLinkingCandidate<XAb
 
 	@Override
 	protected List<XExpression> getArguments() {
-		boolean isStatic = isStatic();
+		boolean isStaticExtension = isExtension() && isStatic();
 		XExpression syntacticReceiver = getSyntacticReceiver();
 		List<XExpression> syntacticArguments = getSyntacticArguments();
-		if (isStatic) {
+		if (isStaticExtension) {
 			if (syntacticReceiver != null) {
 				return createArgumentList(syntacticReceiver, syntacticArguments);
 			}
@@ -249,8 +249,10 @@ public class FeatureLinkingCandidate extends AbstractPendingLinkingCandidate<XAb
 	@Override
 	protected EnumSet<ConformanceHint> getConformanceHints(int idx, boolean recompute) {
 		if (idx == 0 && hasReceiver()) {
-			if (!isExtension() || getImplicitReceiver() != null)
-				return EnumSet.of(ConformanceHint.CHECKED, ConformanceHint.SUCCESS);
+			if (!isExtension() || getImplicitReceiver() != null) {
+				EnumSet<ConformanceHint> receiverConformanceHints = description.getReceiverConformanceHints();
+				return receiverConformanceHints;
+			}
 			XExpression receiver = getReceiver();
 			if (receiver == null) {
 				throw new IllegalStateException("receiver may not be null");

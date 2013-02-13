@@ -8,6 +8,7 @@
 package org.eclipse.xtext.xbase.scoping.batch;
 
 import java.util.Collections;
+import java.util.EnumSet;
 import java.util.Map;
 
 import org.eclipse.emf.ecore.EObject;
@@ -22,6 +23,7 @@ import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.EObjectDescription;
 import org.eclipse.xtext.xbase.XExpression;
+import org.eclipse.xtext.xbase.typesystem.conformance.ConformanceHint;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightMergedBoundTypeArgument;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 
@@ -166,6 +168,10 @@ public abstract class BucketedEObjectDescription extends EObjectDescription impl
 
 	public boolean isExtension() {
 		return false;
+	}
+	
+	public EnumSet<ConformanceHint> getReceiverConformanceHints() {
+		return EnumSet.of(ConformanceHint.SUCCESS, ConformanceHint.CHECKED);
 	}
 
 }

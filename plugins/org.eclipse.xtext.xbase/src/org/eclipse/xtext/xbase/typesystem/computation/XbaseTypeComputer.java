@@ -9,6 +9,7 @@ package org.eclipse.xtext.xbase.typesystem.computation;
 
 import static com.google.common.collect.Lists.*;
 
+import java.util.EnumSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -553,7 +554,7 @@ public class XbaseTypeComputer implements ITypeComputer {
 			withSynonyms.addComponent(iterableOrArray);
 			services.getSynonymTypesProvider().collectSynonymTypes(iterableOrArray, new SynonymTypesProvider.Acceptor() {
 				@Override
-				protected boolean accept(LightweightTypeReference synonym, Set<ConformanceHint> hints) {
+				protected boolean accept(LightweightTypeReference synonym, EnumSet<ConformanceHint> hints) {
 					if (synonym.isType(List.class)) {
 						List<LightweightTypeReference> superTypes = synonym.getAllSuperTypes();
 						for(LightweightTypeReference superType: superTypes) {

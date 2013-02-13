@@ -8,8 +8,8 @@
 package org.eclipse.xtext.xbase.scoping.batch;
 
 import java.util.Collections;
+import java.util.EnumSet;
 import java.util.List;
-import java.util.Set;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
@@ -122,7 +122,7 @@ public class FeatureScopes implements IFeatureNames {
 			
 			@NonNullByDefault
 			@Override
-			protected boolean accept(LightweightTypeReference synonymType, Set<ConformanceHint> hints) {
+			protected boolean accept(LightweightTypeReference synonymType, EnumSet<ConformanceHint> hints) {
 				List<JvmType> rawTypes = synonymType.getRawTypes();
 				SynonymTypeBucket bucket = new SynonymTypeBucket(id++, rawTypes, hints);
 				wrapper.set(new ReceiverFeatureScope(wrapper.get(), session, receiver, synonymType, implicit, asAbstractFeatureCall(featureCall), bucket, receiverFeature, operatorMapping));

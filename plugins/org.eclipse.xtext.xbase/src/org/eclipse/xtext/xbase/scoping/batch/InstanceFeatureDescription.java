@@ -7,6 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.scoping.batch;
 
+import java.util.EnumSet;
 import java.util.Map;
 
 import org.eclipse.jdt.annotation.NonNullByDefault;
@@ -15,6 +16,7 @@ import org.eclipse.xtext.common.types.JvmFeature;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.xbase.XExpression;
+import org.eclipse.xtext.xbase.typesystem.conformance.ConformanceHint;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightMergedBoundTypeArgument;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 
@@ -27,15 +29,17 @@ public class InstanceFeatureDescription extends BucketedEObjectDescription {
 	private final XExpression receiver;
 	private final LightweightTypeReference receiverType;
 	private final Map<JvmTypeParameter, LightweightMergedBoundTypeArgument> typeParameterMapping;
+	private EnumSet<ConformanceHint> receiverConformanceHints;
 
 	protected InstanceFeatureDescription(
 			QualifiedName qualifiedName, JvmFeature feature,
 			XExpression receiver, LightweightTypeReference receiverType, Map<JvmTypeParameter, LightweightMergedBoundTypeArgument> typeParameterMapping, 
-			int bucketId, boolean visible) {
+			int bucketId, boolean visible, @Nullable EnumSet<ConformanceHint> receiverConformanceHints) {
 		super(qualifiedName, feature, bucketId, visible);
 		this.receiver = receiver;
 		this.receiverType = receiverType;
 		this.typeParameterMapping = typeParameterMapping;
+		this.receiverConformanceHints = receiverConformanceHints;
 	}
 	
 	@Override
@@ -60,4 +64,10 @@ public class InstanceFeatureDescription extends BucketedEObjectDescription {
 		return ((JvmFeature) getElementOrProxy()).isStatic();
 	}
 
+	@Override
+	public EnumSet<ConformanceHint> getReceiverConformanceHints() {
+		if (receiverConformanceHints == null)
+			return super.getReceiverConformanceHints();
+		return receiverConformanceHints;
+	}
 }

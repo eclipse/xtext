@@ -8,7 +8,6 @@
 package org.eclipse.xtext.xbase.typesystem.computation;
 
 import java.util.EnumSet;
-import java.util.Set;
 
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.NonNullByDefault;
@@ -36,13 +35,13 @@ public class SynonymTypesProvider {
 		 *   further computation.
 		 */
 		protected boolean accept(LightweightTypeReference synonym, ConformanceHint hint) {
-			return accept(synonym, EnumSet.of(hint));
+			return accept(synonym, EnumSet.of(hint, ConformanceHint.SUCCESS, ConformanceHint.CHECKED));
 		}
 		/**
 		 * @return <code>true</code> if the client is interested in more synonyms. <code>false</code> to skip
 		 *   further computation.
 		 */
-		protected abstract boolean accept(LightweightTypeReference synonym, Set<ConformanceHint> hints);
+		protected abstract boolean accept(LightweightTypeReference synonym, EnumSet<ConformanceHint> hints);
 	}
 	
 	public void collectSynonymTypes(@Nullable LightweightTypeReference type, @NonNull Acceptor acceptor) {

@@ -8,9 +8,9 @@
 package org.eclipse.xtext.xbase.typesystem.internal;
 
 import java.util.Collections;
+import java.util.EnumSet;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.jdt.annotation.Nullable;
@@ -170,7 +170,7 @@ public class ResolvedFeature extends AbstractResolvedReference<XAbstractFeatureC
 					synonymProvider.collectSynonymTypes(receiverType, new SynonymTypesProvider.Acceptor() {
 						
 						@Override
-						protected boolean accept(LightweightTypeReference synonym, Set<ConformanceHint> hints) {
+						protected boolean accept(LightweightTypeReference synonym, EnumSet<ConformanceHint> hints) {
 							if (declaringTypeReference.isAssignableFrom(synonym, rawConformanceCheck)) {
 								receiverTypeParameterMapping.set(new DeclaratorTypeArgumentCollector().getTypeParameterMapping(synonym));
 								return false;

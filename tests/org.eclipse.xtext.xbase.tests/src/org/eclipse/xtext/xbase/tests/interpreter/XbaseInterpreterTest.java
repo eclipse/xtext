@@ -18,6 +18,7 @@ import org.eclipse.xtext.xbase.interpreter.IExpressionInterpreter;
 import org.eclipse.xtext.xbase.junit.evaluation.AbstractXbaseEvaluationTest;
 import org.eclipse.xtext.xbase.tests.XbaseInjectorProvider;
 import org.junit.After;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -115,6 +116,16 @@ public class XbaseInterpreterTest extends AbstractXbaseEvaluationTest {
 	@Override
 	@Test public void testClosure_31() throws Exception {
 		super.testClosure_31();
+	}
+	
+	@Override
+	@Ignore @Test public void testArrays_01() throws Exception {
+		super.testArrays_01();
+	}
+	
+	@Override
+	@Ignore @Test public void testArrays_02() throws Exception {
+		super.testArrays_02();
 	}
 	
 }

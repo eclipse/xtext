@@ -182,7 +182,7 @@ public class DynamicExtensionsScope extends AbstractSessionBasedScope {
 					argumentType, 
 					getArgumentTypeParameterMapping(), 
 					bucket.getId(), 
-					getSession().isVisible(feature));
+					getSession().isVisible(feature), null);
 		}
 		return new InstanceExtensionDescription(
 				name, 
@@ -194,7 +194,7 @@ public class DynamicExtensionsScope extends AbstractSessionBasedScope {
 				argumentType, 
 				getArgumentTypeParameterMapping(), 
 				bucket.getId(), 
-				getSession().isVisible(feature));
+				getSession().isVisible(feature), null);
 	}
 	
 	protected BucketedEObjectDescription createReceiverDescription(QualifiedName name, JvmFeature feature, XExpression receiver,
@@ -206,7 +206,7 @@ public class DynamicExtensionsScope extends AbstractSessionBasedScope {
 				receiverType, 
 				receiverTypeParameterMapping, 
 				bucket.getId(), 
-				getSession().isVisible(feature));
+				getSession().isVisible(feature), null);
 	}
 	
 }
