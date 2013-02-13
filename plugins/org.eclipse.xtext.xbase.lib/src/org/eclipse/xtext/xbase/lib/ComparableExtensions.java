@@ -72,4 +72,19 @@ import com.google.common.annotations.GwtCompatible;
 	public static <C> boolean operator_greaterEqualsThan(Comparable<? super C> left, C right) {
 		return left.compareTo(right) >= 0;
 	}
+	
+	/**
+	 * The spaceship operator <code>&lt;=&gt;</code>.
+	 * 
+	 * @param left
+	 *            a comparable
+	 * @param right
+	 *            the value to compare with
+	 * @return <code>left.compareTo(right)</code>
+	 * @since 2.4
+	 */
+	@Inline("($1.compareTo($2))")
+	public static <C> int operator_spaceship(Comparable<? super C> left, C right) {
+		return left.compareTo(right);
+	}
 }

@@ -97,7 +97,7 @@ import static com.google.common.collect.Sets.*;
 	 * @see #removeAll(Collection, Collection)
 	 * @since 2.4
 	 */
-	@Inline(value="$3.$4removeAll($1, $2)", imported=Iterables.class)
+	@Inline(value="$3.removeAll($1, $2)", imported=Iterables.class)
 	public static <E> boolean operator_remove(Collection<E> collection, Collection<? extends E> newElements) {
 		return removeAll(collection, newElements);
 	}
