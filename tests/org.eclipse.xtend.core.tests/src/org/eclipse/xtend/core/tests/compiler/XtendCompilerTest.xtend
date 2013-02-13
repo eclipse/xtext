@@ -496,6 +496,67 @@ class XtendCompilerTest extends AbstractXtendTestCase {
 		''')
 	}
 	
+	@Test def void testWorkWithArrays_01() {
+		assertCompilesTo('''
+			public class Foo  {
+			    def void doStuff() {
+			    	val strings = newArrayOfSize(2)
+			    	strings.set(0, 'world')
+			    	strings.set(1, 'hello')
+			    	println(strings.get(1) + ' ' + strings.get(0))
+			    }
+			}
+		''', '''
+			import org.eclipse.xtext.xbase.lib.InputOutput;
+			
+			@SuppressWarnings("all")
+			public class Foo {
+			  public void doStuff() {
+			    final String[] strings = new String[2];
+			    strings[0] = "world";
+			    strings[1] = "hello";
+			    String _get = strings[1];
+			    String _plus = (_get + " ");
+			    String _get_1 = strings[0];
+			    String _plus_1 = (_plus + _get_1);
+			    InputOutput.<String>println(_plus_1);
+			  }
+			}
+		''')
+	}
+	
+	@Test def void testWorkWithArrays_02() {
+		assertCompilesTo('''
+			public class Foo  {
+			    def void doStuff() {
+			    	val numbers = newIntArrayOfSize(2)
+			    	numbers.set(0, 42)
+			    	numbers.set(1, 44)
+			    	println(numbers.get(1) + ' ' + numbers.get(0) + ' length : ' + numbers.length)
+			    }
+			}
+		''', '''
+			import org.eclipse.xtext.xbase.lib.InputOutput;
+			
+			@SuppressWarnings("all")
+			public class Foo {
+			  public void doStuff() {
+			    final int[] numbers = new int[2];
+			    numbers[0] = 42;
+			    numbers[1] = 44;
+			    int _get = numbers[1];
+			    String _plus = (Integer.valueOf(_get) + " ");
+			    int _get_1 = numbers[0];
+			    String _plus_1 = (_plus + Integer.valueOf(_get_1));
+			    String _plus_2 = (_plus_1 + " length : ");
+			    int _length = numbers.length;
+			    String _plus_3 = (_plus_2 + Integer.valueOf(_length));
+			    InputOutput.<String>println(_plus_3);
+			  }
+			}
+		''')
+	}
+	
 	@Test def void testAbstractIterator_01() {
 		assertCompilesTo('''
 			import java.util.Iterator
@@ -1415,6 +1476,7 @@ class XtendCompilerTest extends AbstractXtendTestCase {
 			}
 		''')
 	}
+	
 	@Test
 	def testDataClasses_01() { 
 		assertCompilesTo('''
