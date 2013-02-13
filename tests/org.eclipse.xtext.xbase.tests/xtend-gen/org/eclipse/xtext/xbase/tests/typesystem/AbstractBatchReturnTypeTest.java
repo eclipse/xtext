@@ -235,7 +235,7 @@ public abstract class AbstractBatchReturnTypeTest extends AbstractReturnTypeTest
     Assert.assertEquals(IResolvedTypes.NULL, typeResolution);
   }
   
-  @Ignore(value = "TODO discuss the preference - list or array?")
+  @Ignore("TODO discuss the preference - list or array?")
   @Test
   public void testIfExpression_10() throws Exception {
     super.testIfExpression_10();

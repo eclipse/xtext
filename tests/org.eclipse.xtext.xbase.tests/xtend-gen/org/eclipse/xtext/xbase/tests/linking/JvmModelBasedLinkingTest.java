@@ -33,8 +33,8 @@ import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-@RunWith(value = XtextRunner.class)
-@InjectWith(value = XbaseWithLogicalContainerInjectorProvider.class)
+@RunWith(XtextRunner.class)
+@InjectWith(XbaseWithLogicalContainerInjectorProvider.class)
 @SuppressWarnings("all")
 public class JvmModelBasedLinkingTest extends AbstractXbaseTestCase {
   @Inject

@@ -42,7 +42,7 @@ public class FormatterTester {
   @Inject
   private IBasicFormatter formatter;
   
-  @SuppressWarnings(value = "unchecked")
+  @SuppressWarnings("unchecked")
   public void assertFormatted(final Procedure1<? super AssertingFormatterData> init) {
     AssertingFormatterData _assertingFormatterData = new AssertingFormatterData();
     final AssertingFormatterData data = _assertingFormatterData;

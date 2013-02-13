@@ -194,7 +194,7 @@ public class CompilerTraceTest extends AbstractXtendTestCase {
   }
   
   @Test
-  @Ignore(value = "This one should succeed as soon as the case above is fixed")
+  @Ignore("This one should succeed as soon as the case above is fixed")
   public void testClassWithComment_Ignored() throws Exception {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("package pack");

@@ -146,13 +146,13 @@ public class BatchClosureTypeTest extends AbstractClosureTypeTest {
     return _builder.toString();
   }
   
-  @Ignore(value = "TODO the assertion should hold")
+  @Ignore("TODO the assertion should hold")
   @Test
   public void testClosure_51() throws Exception {
     super.testClosure_51();
   }
   
-  @Ignore(value = "TODO the assertion should hold")
+  @Ignore("TODO the assertion should hold")
   @Test
   public void testClosure_52() throws Exception {
     super.testClosure_52();

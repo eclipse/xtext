@@ -557,7 +557,7 @@ public abstract class AbstractTypeArgumentTest extends AbstractXbaseTestCase {
     this.done(_bindTypeArgumentsTo);
   }
   
-  @Ignore(value = "TODO subsequent usages of local vars should contribute to the expectation")
+  @Ignore("TODO subsequent usages of local vars should contribute to the expectation")
   @Test
   public void testMethodTypeParamInference_23() throws Exception {
     Iterator<XExpression> _bindTypeArgumentsTo = this.bindTypeArgumentsTo("{\n\t\t\tval actual = testdata::OverloadedMethods::addAllSuperExtends2(null as java.util.List<CharSequence>, null as java.util.List<String>)\n\t\t\tval Iterable<String> expectation = actual\n\t\t}", "String");
@@ -576,7 +576,7 @@ public abstract class AbstractTypeArgumentTest extends AbstractXbaseTestCase {
     this.done(_bindTypeArgumentsTo);
   }
   
-  @Ignore(value = "TODO")
+  @Ignore("TODO")
   @Test
   public void testMethodTypeParamInference_26() throws Exception {
     Iterator<XExpression> _bindTypeArgumentsTo = this.bindTypeArgumentsTo("{\n\t\t\tval actual = testdata::OverloadedMethods::addAllSuperExtends2(null as java.util.List<Object>, null as java.util.List<String>)\n\t\t\tval Iterable<CharSequence> expectation = actual\n\t\t}", "CharSequence");
@@ -1807,7 +1807,7 @@ public abstract class AbstractTypeArgumentTest extends AbstractXbaseTestCase {
     this.done(_and);
   }
   
-  @Ignore(value = "TODO this should work")
+  @Ignore("TODO this should work")
   @Test
   public void testBug_391758() throws Exception {
     Iterator<XExpression> _bindTypeArgumentsTo = this.bindTypeArgumentsTo("{\n\t\t\tval iterable = newArrayList\n\t\t\titerable.fold(newArrayList) [ list , elem | null as java.util.List<String> ]\n\t\t}", "Object");

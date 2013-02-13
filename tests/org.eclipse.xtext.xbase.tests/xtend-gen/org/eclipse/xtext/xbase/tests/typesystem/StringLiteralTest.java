@@ -105,19 +105,19 @@ public class StringLiteralTest extends AbstractXbaseTestCase {
   }
   
   @Test
-  @Ignore(value = "Improve typing according to expectation")
+  @Ignore("Improve typing according to expectation")
   public void testMemberCall_02() throws Exception {
     this.resolvesStringLiteralsTo("\'1\'.charValue", "char");
   }
   
   @Test
-  @Ignore(value = "Improve typing according to expectation")
+  @Ignore("Improve typing according to expectation")
   public void testMemberCall_03() throws Exception {
     this.resolvesStringLiteralsTo("\'1\'.compareTo(null as Character)", "char");
   }
   
   @Test
-  @Ignore(value = "Improve typing according to expectation")
+  @Ignore("Improve typing according to expectation")
   public void testBinaryOperation_01() throws Exception {
     this.resolvesStringLiteralsTo("{ var char c = \'1\' \'1\' == c", "char", "char");
   }

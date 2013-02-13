@@ -66,7 +66,7 @@ public class ContentAssistFragment extends Xtend2GeneratorFragment implements II
   }
   
   @Inject
-  @Named(value = "fileHeader")
+  @Named("fileHeader")
   private String fileHeader;
   
   public String getProposalProviderName(final Grammar grammar) {

@@ -172,13 +172,13 @@ public abstract class AbstractSmokeTest extends AbstractTypeResolverTest<Lightwe
     super.testClosure_32();
   }
   
-  @Ignore(value = "Disable block expression with 1000+ lines")
+  @Ignore("Disable block expression with 1000+ lines")
   @Test
   public void testBlockExpression_03() throws Exception {
     super.testBlockExpression_03();
   }
   
-  @Ignore(value = "Disable member feature calls with plenty of nested target expressions")
+  @Ignore("Disable member feature calls with plenty of nested target expressions")
   @Test
   public void testFeatureCall_15_m() throws Exception {
     super.testFeatureCall_15_m();

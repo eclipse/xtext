@@ -81,31 +81,31 @@ public class OldAPIAllSuperTypeTest extends AllSuperTypesTest {
     }
   }
   
-  @Ignore(value = "Old API does not support this properly")
+  @Ignore("Old API does not support this properly")
   @Test
   public void testRawCollection() {
     Assert.fail("Old API does not support this properly");
   }
   
-  @Ignore(value = "Old API does not support this properly")
+  @Ignore("Old API does not support this properly")
   @Test
   public void testStringCollection() {
     Assert.fail("Old API does not support this properly");
   }
   
-  @Ignore(value = "Old API does not support this properly")
+  @Ignore("Old API does not support this properly")
   @Test
   public void testRawList() {
     Assert.fail("Old API does not support this properly");
   }
   
-  @Ignore(value = "Old API does not support this properly")
+  @Ignore("Old API does not support this properly")
   @Test
   public void testStringList() {
     Assert.fail("Old API does not support this properly");
   }
   
-  @Ignore(value = "Old API does not support this properly")
+  @Ignore("Old API does not support this properly")
   @Test
   public void testStringArrayArrayList() {
     Assert.fail("Old API does not support this properly");

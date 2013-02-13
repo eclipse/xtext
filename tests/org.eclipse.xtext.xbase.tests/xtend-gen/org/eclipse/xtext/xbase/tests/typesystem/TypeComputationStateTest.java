@@ -191,7 +191,7 @@ public class TypeComputationStateTest extends AbstractXbaseTestCase implements I
     }
   }
   
-  @Ignore(value = "TODO FixMe")
+  @Ignore("TODO FixMe")
   @Test
   public void testTypeOnlyRegisteredOnce_03() {
     try {

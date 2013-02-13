@@ -319,14 +319,14 @@ public abstract class AbstractClosureTypeTest extends AbstractXbaseTestCase {
     this.withEquivalents(_resolvesClosuresTo, "Function1<Integer, BigInteger>", "Function2<BigInteger, BigInteger, BigInteger>");
   }
   
-  @Ignore(value = "i1 and i2 should become T -> Object thus + maps to String + Object")
+  @Ignore("i1 and i2 should become T -> Object thus + maps to String + Object")
   @Test
   public void testOverloadedOperators_05() throws Exception {
     List<Object> _resolvesClosuresTo = this.resolvesClosuresTo("(1..2).map[ new java.math.BigInteger(toString) ].reduce[ i1, i2 | i1.toString + i2 ]", "(Integer)=>BigInteger", "(Object, Object)=>String");
     this.withEquivalents(_resolvesClosuresTo, "Function1<Integer, BigInteger>", "Function2<Object, Object, String>");
   }
   
-  @Ignore(value = "i1 and i2 should become T -> Object thus + maps to Object + String")
+  @Ignore("i1 and i2 should become T -> Object thus + maps to Object + String")
   @Test
   public void testOverloadedOperators_06() throws Exception {
     List<Object> _resolvesClosuresTo = this.resolvesClosuresTo("(1..2).map[ new java.math.BigInteger(toString) ].reduce[ i1, i2| i1 + String::valueOf(i2) ]", "(Integer)=>BigInteger", "(Object, Object)=>String");
@@ -435,14 +435,14 @@ public abstract class AbstractClosureTypeTest extends AbstractXbaseTestCase {
     this.withEquivalents(_resolvesClosuresTo, "Function1<Integer, BigInteger>", "Function2<BigInteger, BigInteger, BigInteger>");
   }
   
-  @Ignore(value = "i1 and i2 should become T -> Object thus + maps to String + Object")
+  @Ignore("i1 and i2 should become T -> Object thus + maps to String + Object")
   @Test
   public void testOverloadedOperators_24() throws Exception {
     List<Object> _resolvesClosuresTo = this.resolvesClosuresTo("(1..2).map[ return new java.math.BigInteger(toString) ].reduce[ i1, i2 | return i1.toString + i2 ]", "(Integer)=>BigInteger", "(Object, Object)=>String");
     this.withEquivalents(_resolvesClosuresTo, "Function1<Integer, BigInteger>", "Function2<Object, Object, String>");
   }
   
-  @Ignore(value = "i1 and i2 should become T -> Object thus + maps to Object + String")
+  @Ignore("i1 and i2 should become T -> Object thus + maps to Object + String")
   @Test
   public void testOverloadedOperators_25() throws Exception {
     List<Object> _resolvesClosuresTo = this.resolvesClosuresTo("(1..2).map[ return new java.math.BigInteger(toString) ].reduce[ i1, i2| return i1 + String::valueOf(i2) ]", "(Integer)=>BigInteger", "(Object, Object)=>String");
@@ -683,7 +683,7 @@ public abstract class AbstractClosureTypeTest extends AbstractXbaseTestCase {
     this.withEquivalents(_resolvesClosuresTo, "Function1<Integer, Integer>", "Function1<Integer, Boolean>");
   }
   
-  @Ignore(value = "TODO deferred Closure body typing")
+  @Ignore("TODO deferred Closure body typing")
   @Test
   public void testClosure_07() throws Exception {
     List<Object> _resolvesClosuresTo = this.resolvesClosuresTo("{ \n\t\t\tval mapper = [ x | x.charAt(0) ]\n\t\t\tnewArrayList(\'\').map(mapper)\n\t\t}", "Function1<String, Character>");
@@ -870,7 +870,7 @@ public abstract class AbstractClosureTypeTest extends AbstractXbaseTestCase {
     this.withEquivalents(_resolvesClosuresTo, "Function1<Integer, Integer>", "Function1<Integer, Boolean>");
   }
   
-  @Ignore(value = "TODO deferred Closure body typing")
+  @Ignore("TODO deferred Closure body typing")
   @Test
   public void testClosure_35() throws Exception {
     List<Object> _resolvesClosuresTo = this.resolvesClosuresTo("{ \n\t\t\tval mapper = [ x | return x.charAt(0) ]\n\t\t\tnewArrayList(\'\').map(mapper)\n\t\t}", "Function1<String, Character>");
@@ -1129,7 +1129,7 @@ public abstract class AbstractClosureTypeTest extends AbstractXbaseTestCase {
     this.withEquivalents(_resolvesClosuresTo, "Runnable");
   }
   
-  @Ignore(value = "TODO implement this")
+  @Ignore("TODO implement this")
   @Test
   public void testIncompatibleExpression_02() throws Exception {
     List<Object> _resolvesClosuresTo = this.resolvesClosuresTo("(null as Iterable<String>).filter [ it ]", "(String)=>Boolean");
@@ -1484,7 +1484,7 @@ public abstract class AbstractClosureTypeTest extends AbstractXbaseTestCase {
     this.withEquivalents(_resolvesClosuresTo, "Function1<String, Integer>", "Function1<Integer, Integer>");
   }
   
-  @Ignore(value = "Too slow")
+  @Ignore("Too slow")
   @Test
   public void testFeatureCall_055() throws Exception {
     List<Object> _resolvesClosuresTo = this.resolvesClosuresTo("newArrayList(\'\').map[ length + 1 * 5 - length + 1 * 5 ].map [ it / 5 + 1 / it ).head", "(String)=>int", "(Integer)=>int");
@@ -1917,7 +1917,7 @@ public abstract class AbstractClosureTypeTest extends AbstractXbaseTestCase {
     this.withEquivalents(_resolvesClosuresTo, "Function1<String, Integer>", "Function1<Integer, Integer>");
   }
   
-  @Ignore(value = "Too slow")
+  @Ignore("Too slow")
   @Test
   public void testFeatureCall_125() throws Exception {
     List<Object> _resolvesClosuresTo = this.resolvesClosuresTo("newArrayList(\'\').map[ return length + 1 * 5 - length + 1 * 5 ].map [ return it / 5 + 1 / it ).head", "(String)=>int", "(Integer)=>int");

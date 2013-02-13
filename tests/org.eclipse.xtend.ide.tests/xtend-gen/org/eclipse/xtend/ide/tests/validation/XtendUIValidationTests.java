@@ -454,13 +454,13 @@ public class XtendUIValidationTests extends AbstractXtendUITestCase {
   }
   
   @Test
-  @Ignore(value = "Enable on demand")
+  @Ignore("Enable on demand")
   public void testPerformance_1() {
     this.testPerformance();
   }
   
   @Test
-  @Ignore(value = "Enable on demand")
+  @Ignore("Enable on demand")
   public void testPerformance_2() {
     this.testPerformance();
   }

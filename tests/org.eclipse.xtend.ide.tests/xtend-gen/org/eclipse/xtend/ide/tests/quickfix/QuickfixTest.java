@@ -1110,7 +1110,7 @@ public class QuickfixTest extends AbstractXtendUITestCase {
     _assertModelAfterQuickfix.assertModelAfterQuickfix("Make class abstract", _builder_2);
   }
   
-  @Ignore(value = "TODO")
+  @Ignore("TODO")
   @Test
   public void missingOperatorSameClass() {
     StringConcatenation _builder = new StringConcatenation();
@@ -1170,7 +1170,7 @@ public class QuickfixTest extends AbstractXtendUITestCase {
     _assertResolutionLabels.assertModelAfterQuickfix("Create method \'operator_multiply(Foo)\'", _builder_1);
   }
   
-  @Ignore(value = "TODO")
+  @Ignore("TODO")
   @Test
   public void missingOperatorOtherClass() {
     StringConcatenation _builder = new StringConcatenation();
@@ -1805,7 +1805,7 @@ public class QuickfixTest extends AbstractXtendUITestCase {
     _assertResolutionLabelsSubset.assertModelAfterQuickfix("Create local Xtend annotation \'@Bar\'", _builder_1);
   }
   
-  @Ignore(value = "TODO")
+  @Ignore("TODO")
   @Test
   public void useObjectForUnknownParams() {
     StringConcatenation _builder = new StringConcatenation();

@@ -69,7 +69,7 @@ public class ValidatorFragment extends Xtend2GeneratorFragment implements IInher
   private Grammar grammar;
   
   @Inject
-  @Named(value = "fileHeader")
+  @Named("fileHeader")
   private String fileHeader;
   
   private final ArrayList<String> composedChecks = new Function0<ArrayList<String>>() {

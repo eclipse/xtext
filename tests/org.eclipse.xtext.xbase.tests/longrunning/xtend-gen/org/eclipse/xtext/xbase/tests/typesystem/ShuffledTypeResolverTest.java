@@ -20,8 +20,8 @@ import org.junit.runner.RunWith;
  * Furthermore it will shuffle the order of branches in if and switch expressions.
  * @author Sebastian Zarnekow
  */
-@RunWith(value = XtextRunner.class)
-@InjectWith(value = XbaseShufflingInjectorProvider.class)
+@RunWith(XtextRunner.class)
+@InjectWith(XbaseShufflingInjectorProvider.class)
 @SuppressWarnings("all")
 public class ShuffledTypeResolverTest extends AbstractBatchTypeResolverTest {
   @Inject

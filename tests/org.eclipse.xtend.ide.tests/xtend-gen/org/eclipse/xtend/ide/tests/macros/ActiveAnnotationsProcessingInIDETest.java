@@ -43,8 +43,8 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-@RunWith(value = XtextRunner.class)
-@InjectWith(value = XtendIDEInjectorProvider.class)
+@RunWith(XtextRunner.class)
+@InjectWith(XtendIDEInjectorProvider.class)
 @SuppressWarnings("all")
 public class ActiveAnnotationsProcessingInIDETest extends AbstractActiveAnnotationsTest {
   @Test

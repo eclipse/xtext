@@ -41,8 +41,8 @@ import org.junit.runner.RunWith;
 /**
  * @author Sebastian Zarnekow
  */
-@RunWith(value = XtextRunner.class)
-@InjectWith(value = RuntimeInjectorProvider.class)
+@RunWith(XtextRunner.class)
+@InjectWith(RuntimeInjectorProvider.class)
 @SuppressWarnings("all")
 public class OldAPICommonSuperTypeTest extends CommonSuperTypeTest {
   @Inject

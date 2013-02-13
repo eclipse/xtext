@@ -228,7 +228,7 @@ public abstract class AbstractIdentifiableTypeTest extends AbstractXbaseTestCase
     this.resolvesIdentifiablesTo("(1..2).map[ new java.math.BigInteger(toString) ].reduce[ i1, i2| i1 + i2 ]", "Integer", "BigInteger", "BigInteger");
   }
   
-  @Ignore(value = "i1 and i2 should become T -> Object thus + maps to String + Object")
+  @Ignore("i1 and i2 should become T -> Object thus + maps to String + Object")
   @Test
   public void testOverloadedOperators_11() throws Exception {
     this.resolvesIdentifiablesTo("(1..2).map[ new java.math.BigInteger(toString) ].reduce[ i1, i2 | i1.toString + i2 ]", "Integer", "Object", "Object");
@@ -239,7 +239,7 @@ public abstract class AbstractIdentifiableTypeTest extends AbstractXbaseTestCase
     this.resolvesIdentifiablesTo("{\n\t\t\tval i = 1bi\n\t\t\tval s = \'\'\n\t\t\ts + i\n\t\t}", "BigInteger", "String");
   }
   
-  @Ignore(value = "i1 and i2 should become T -> Object thus + maps to Object + String")
+  @Ignore("i1 and i2 should become T -> Object thus + maps to Object + String")
   @Test
   public void testOverloadedOperators_13() throws Exception {
     this.resolvesIdentifiablesTo("(1..2).map[ new java.math.BigInteger(toString) ].reduce[ i1, i2| i1 + String::valueOf(i2) ]", "Integer", "Object", "Object");
@@ -406,7 +406,7 @@ public abstract class AbstractIdentifiableTypeTest extends AbstractXbaseTestCase
     this.resolvesIdentifiablesTo("{ \n\t\t\tval mapper = [ x | x ]\n\t\t\tnewArrayList(1).map(mapper).findFirst [ true ]\n\t\t}", "(Integer)=>Integer", "Integer", "Integer");
   }
   
-  @Ignore(value = "TODO deferred closure body typing")
+  @Ignore("TODO deferred closure body typing")
   @Test
   public void testClosure_14() throws Exception {
     this.resolvesIdentifiablesTo("{ \n\t\t\tval mapper = [ x | x.charAt(0) ]\n\t\t\tnewArrayList(\'\').map(mapper)\n\t\t}", "(String)=>char", "String");
@@ -754,7 +754,7 @@ public abstract class AbstractIdentifiableTypeTest extends AbstractXbaseTestCase
     this.resolvesIdentifiablesTo("<String>newArrayList.map(e|newArrayList(e)).flatten", "String");
   }
   
-  @Ignore(value = "TODO this should work")
+  @Ignore("TODO this should work")
   @Test
   public void testBug_391758() throws Exception {
     this.resolvesIdentifiablesTo("{\n\t\t\tval iterable = newArrayList\n\t\t\titerable.fold(newArrayList) [ list , elem | null as java.util.List<String> ]\n\t\t}", "ArrayList<Object>", "List<String>", "Object");

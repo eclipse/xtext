@@ -10,7 +10,7 @@ import org.eclipse.xtext.xbase.validation.IssueCodes;
 import org.junit.Ignore;
 import org.junit.Test;
 
-@Ignore(value = "TODO implement exception validation")
+@Ignore("TODO implement exception validation")
 @SuppressWarnings("all")
 public class CheckExceptionValidationTest extends AbstractJvmModelTest {
   @Inject

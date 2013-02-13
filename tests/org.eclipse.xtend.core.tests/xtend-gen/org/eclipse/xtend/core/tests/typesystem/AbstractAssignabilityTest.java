@@ -824,7 +824,7 @@ public abstract class AbstractAssignabilityTest extends AbstractTestingTypeRefer
     this.isAssignableFrom(_mappedTo, "A");
   }
   
-  @Ignore(value = "Substitutions are not applied recursively according to JLS - see ticket 395002")
+  @Ignore("Substitutions are not applied recursively according to JLS - see ticket 395002")
   @Test
   public void testBug395002_02() {
     String _selfBound = this.selfBound("$<? extends $<?, A>, ?>");
@@ -833,7 +833,7 @@ public abstract class AbstractAssignabilityTest extends AbstractTestingTypeRefer
     this.isAssignableFrom(_mappedTo, "$<?, A>");
   }
   
-  @Ignore(value = "Substitutions are not applied recursively according to JLS - see ticket 395002")
+  @Ignore("Substitutions are not applied recursively according to JLS - see ticket 395002")
   @Test
   public void testBug395002_03() {
     String _selfBound = this.selfBound("$<? extends $<?, A>, ?>");

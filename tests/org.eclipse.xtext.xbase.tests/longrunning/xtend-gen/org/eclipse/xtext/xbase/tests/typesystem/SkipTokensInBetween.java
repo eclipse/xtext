@@ -61,19 +61,19 @@ public class SkipTokensInBetween extends AbstractSmokeTest {
     }
   }
   
-  @Ignore(value = "Disables since it is pretty much the same as testFeatureCall_25_a")
+  @Ignore("Disables since it is pretty much the same as testFeatureCall_25_a")
   @Test
   public void testFeatureCall_25_b() throws Exception {
     super.testFeatureCall_25_b();
   }
   
-  @Ignore(value = "Disables since it is pretty much the same as testFeatureCall_25_a")
+  @Ignore("Disables since it is pretty much the same as testFeatureCall_25_a")
   @Test
   public void testFeatureCall_25_c() throws Exception {
     super.testFeatureCall_25_c();
   }
   
-  @Ignore(value = "Disables since it is pretty much the same as testFeatureCall_25_a")
+  @Ignore("Disables since it is pretty much the same as testFeatureCall_25_a")
   @Test
   public void testFeatureCall_25_d() throws Exception {
     super.testFeatureCall_25_d();
