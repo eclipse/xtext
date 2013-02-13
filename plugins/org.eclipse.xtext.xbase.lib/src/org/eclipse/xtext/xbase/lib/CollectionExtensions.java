@@ -24,6 +24,8 @@ import com.google.common.collect.ImmutableSortedMap;
 import com.google.common.collect.ImmutableSortedSet;
 import com.google.common.collect.Iterables;
 
+import static com.google.common.collect.Sets.*;
+
 /**
  * This is an extension library for {@link Collection collections}.
  * 
@@ -63,6 +65,41 @@ import com.google.common.collect.Iterables;
 	@Inline(value="$3.$4addAll($1, $2)", imported=Iterables.class)
 	public static <E> boolean operator_add(Collection<E> collection, Iterable<? extends E> newElements) {
 		return addAll(collection, newElements);
+	}
+
+	/**
+	 * The operator mapping from {@code -=} to {@link Collection#remove(Object)}. Returns <code>true</code> if the
+	 * collection changed due to this operation.
+	 * 
+	 * @param collection
+	 *            the to-be-changed collection. May not be <code>null</code>.
+	 * @param value
+	 *            the value that should be removed from the collection.
+	 * @return <code>true</code> if the collection changed due to this operation.
+	 * @see Collection#remove(Object)
+	 * @since 2.4
+	 */
+	@Inline(value="$1.remove($2)")
+	public static <E> boolean operator_remove(Collection<? super E> collection, E value) {
+		return collection.remove(value);
+	}
+
+	/**
+	 * The operator mapping from {@code -=} to {@link #removeAll(Collection, Collection)}. Returns <code>true</code> if the
+	 * collection changed due to this operation.
+	 * 
+	 * @param collection
+	 *            the to-be-changed collection. May not be <code>null</code>.
+	 * @param newElements
+	 *            elements to be removed from the collection. May not be <code>null</code> but may contain
+	 *            <code>null</code> elements if the the target collection supports <code>null</code> elements.
+	 * @return <code>true</code> if the collection changed due to this operation.
+	 * @see #removeAll(Collection, Collection)
+	 * @since 2.4
+	 */
+	@Inline(value="$3.$4removeAll($1, $2)", imported=Iterables.class)
+	public static <E> boolean operator_remove(Collection<E> collection, Collection<? extends E> newElements) {
+		return removeAll(collection, newElements);
 	}
 
 	/**
@@ -230,5 +267,51 @@ import com.google.common.collect.Iterables;
 	@Inline(value="$3.$4addAll($1, $2)", imported=Iterables.class)
 	public static <T> boolean addAll(Collection<T> collection, Iterable<? extends T> elements) {
 		return Iterables.addAll(collection, elements);
+	}
+	
+	/**
+	 * Removes all of the specified elements from the specified collection.
+	 * 
+	 * @param collection
+	 *            the collection from which the {@code elements} are to be removed. May not be <code>null</code>.
+	 * @param elements
+	 *            the elements be remove from the {@code collection}. May not be <code>null</code> but may contain
+	 *            <code>null</code> entries if the {@code collection} allows that.
+	 * @return <code>true</code> if the collection changed as a result of the call
+	 * @since 2.4
+	 */
+	public static <T> boolean removeAll(Collection<? super T> collection, T... elements) {
+		return collection.removeAll(Arrays.asList(elements));
+	}
+
+	/**
+	 * Removes all of the specified elements from the specified collection.
+	 *
+	 * @param collection
+	 *            the collection from which the {@code elements} are to be removed. May not be <code>null</code>.
+	 * @param elements
+	 *            the elements to remove from the {@code collection}. May not be <code>null</code> but may contain
+	 *            <code>null</code> entries if the {@code collection} allows that.
+	 * @return <code>true</code> if the collection changed as a result of the call
+	 * @since 2.4
+	 */
+	@Inline(value="$3.$4removeAll($1, $2)", imported=Iterables.class)
+	public static <T> boolean removeAll(Collection<T> collection, Collection<? extends T> elements) {
+		return Iterables.removeAll(collection, elements);
+	}
+
+	/**
+	 * Removes all of the specified elements from the specified collection.
+	 * 
+	 * @param collection
+	 *            the collection from which the {@code elements} are to be removed. May not be <code>null</code>.
+	 * @param elements
+	 *            the elements to remove from the {@code collection}. May not be <code>null</code> but may contain
+	 *            <code>null</code> entries if the {@code collection} allows that.
+	 * @return <code>true</code> if the collection changed as a result of the call
+	 * @since 2.4
+	 */
+	public static <T> boolean removeAll(Collection<T> collection, Iterable<? extends T> elements) {
+		return Iterables.removeAll(collection, newHashSet(elements));
 	}
 }

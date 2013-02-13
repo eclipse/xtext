@@ -30,7 +30,7 @@ public class PureXbaseFactoryImpl extends EFactoryImpl implements PureXbaseFacto
   {
     try
     {
-      PureXbaseFactory thePureXbaseFactory = (PureXbaseFactory)EPackage.Registry.INSTANCE.getEFactory("http://www.eclipse.org/xtext/purexbase/PureXbase"); 
+      PureXbaseFactory thePureXbaseFactory = (PureXbaseFactory)EPackage.Registry.INSTANCE.getEFactory(PureXbasePackage.eNS_URI);
       if (thePureXbaseFactory != null)
       {
         return thePureXbaseFactory;

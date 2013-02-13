@@ -30,7 +30,7 @@ public class TutorialFactoryImpl extends EFactoryImpl implements TutorialFactory
   {
     try
     {
-      TutorialFactory theTutorialFactory = (TutorialFactory)EPackage.Registry.INSTANCE.getEFactory("http://www.eclipse.org/xtext/example/tutorial/Tutorial"); 
+      TutorialFactory theTutorialFactory = (TutorialFactory)EPackage.Registry.INSTANCE.getEFactory(TutorialPackage.eNS_URI);
       if (theTutorialFactory != null)
       {
         return theTutorialFactory;

@@ -35,8 +35,8 @@ import org.junit.runner.RunWith;
  * 
  * @author Sven Efftinge
  */
-@RunWith(value = XtextRunner.class)
-@InjectWith(value = InjectorProviderCustom.class)
+@RunWith(XtextRunner.class)
+@InjectWith(InjectorProviderCustom.class)
 @SuppressWarnings("all")
 public class XbaseIntegrationTest extends AbstractXbaseEvaluationTest {
   @Inject

@@ -579,6 +579,30 @@ public abstract class AbstractXbaseEvaluationTest extends Assert {
 		assertEvaluatesTo(new Integer(9),"(9..13).iterator().next()");
 	}
 	
+	@Test public void testExclusiveRangeOperator_0() throws Exception {
+		assertEvaluatesTo("0,1,2,3", "(0..<4).join(',')");
+	}
+	
+	@Test public void testExclusiveRangeOperator_1() throws Exception {
+		assertEvaluatesTo("3,2,1,0", "(4>..0).join(',')");
+	}
+	
+	@Test public void testExclusiveRangeOperator_2() throws Exception {
+		assertEvaluatesTo("", "(0..<0).join(',')");
+	}
+	
+	@Test public void testExclusiveRangeOperator_3() throws Exception {
+		assertEvaluatesTo("", "(0>..0).join(',')");
+	}
+	
+	@Test public void testExclusiveRangeOperator_4() throws Exception {
+		assertEvaluatesTo("", "(0..<-1).join(',')");
+	}
+	
+	@Test public void testExclusiveRangeOperator_5() throws Exception {
+		assertEvaluatesTo("", "(-1>..0).join(',')");
+	}
+	
 	@Test public void testElvisOperator() throws Exception {
 		assertEvaluatesTo("foo","null as String?:'foo'");
 	}
@@ -803,6 +827,14 @@ public abstract class AbstractXbaseEvaluationTest extends Assert {
 	
 	@Test public void testTypeLiteral_04() throws Exception {
 		assertEvaluatesTo(int[][].class, "typeof(int[][])");
+	}
+	
+	@Test public void testIdentityEquals_0() throws Exception {
+		assertEvaluatesTo(true, "1===1");
+	}
+	
+	@Test public void testIdentityEquals_1() throws Exception {
+		assertEvaluatesTo(false, "new Object===new Object");
 	}
 	
 	@Test public void testIfExpression_00() throws Exception {
@@ -1298,6 +1330,24 @@ public abstract class AbstractXbaseEvaluationTest extends Assert {
 				"  c = [ s1, s2 | s1.compareTo(s2) ]" +
 				"  c.compare('', '')" +
 				"}");
+	}
+	
+	@Test public void testAssignment_39() throws Exception {
+		assertEvaluatesTo(newArrayList("bar"), 
+				"{"
+				+ "  val list = newArrayList('foo','bar')"
+				+ "  list -= 'foo'"
+				+ "  list"
+				+ "}");
+	}
+	
+	@Test public void testAssignment_40() throws Exception {
+		assertEvaluatesTo(emptyList(), 
+				"{"
+				+ "  val list = newArrayList('foo','bar')"
+				+ "  list -= #['foo', 'bar']"
+				+ "  list"
+				+ "}");
 	}
 	
 	@Test public void testAssignmentInBlock_01() throws Exception {

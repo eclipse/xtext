@@ -270,6 +270,11 @@ public abstract class AbstractXtendRuntimeModule extends DefaultRuntimeModule {
 	}
 
 	// contributed by org.eclipse.xtext.generator.xbase.XbaseGeneratorFragment
+	public Class<? extends org.eclipse.xtext.resource.EObjectAtOffsetHelper> bindEObjectAtOffsetHelper() {
+		return org.eclipse.xtext.xbase.linking.BrokenConstructorCallAwareEObjectAtOffsetHelper.class;
+	}
+
+	// contributed by org.eclipse.xtext.generator.xbase.XbaseGeneratorFragment
 	public Class<? extends org.eclipse.xtext.xbase.typesystem.computation.ITypeComputer> bindITypeComputer() {
 		return org.eclipse.xtext.xbase.annotations.typesystem.XbaseWithAnnotationsTypeComputer.class;
 	}

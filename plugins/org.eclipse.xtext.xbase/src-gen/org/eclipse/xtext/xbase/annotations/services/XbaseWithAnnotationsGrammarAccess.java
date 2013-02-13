@@ -421,7 +421,7 @@ public class XbaseWithAnnotationsGrammarAccess extends AbstractGrammarElementFin
 	}
 
 	//OpMultiAssign:
-	//	"+=";
+	//	"+=" | "-=";
 	public XbaseGrammarAccess.OpMultiAssignElements getOpMultiAssignAccess() {
 		return gaXbase.getOpMultiAssignAccess();
 	}
@@ -484,7 +484,7 @@ public class XbaseWithAnnotationsGrammarAccess extends AbstractGrammarElementFin
 	}
 
 	//OpEquality:
-	//	"==" | "!=";
+	//	"==" | "!=" | "===";
 	public XbaseGrammarAccess.OpEqualityElements getOpEqualityAccess() {
 		return gaXbase.getOpEqualityAccess();
 	}
@@ -527,7 +527,7 @@ public class XbaseWithAnnotationsGrammarAccess extends AbstractGrammarElementFin
 	}
 
 	//OpOther:
-	//	"->" | ".." | "=>" | ">" (=> (">" ">") | ">") | "<" (=> ("<" "<") | "<") | "<>" | "?:" | "<=>";
+	//	"->" | "..<" | ">" ".." | ".." | "=>" | ">" (=> (">" ">") | ">") | "<" (=> ("<" "<") | "<") | "<>" | "?:" | "<=>";
 	public XbaseGrammarAccess.OpOtherElements getOpOtherAccess() {
 		return gaXbase.getOpOtherAccess();
 	}

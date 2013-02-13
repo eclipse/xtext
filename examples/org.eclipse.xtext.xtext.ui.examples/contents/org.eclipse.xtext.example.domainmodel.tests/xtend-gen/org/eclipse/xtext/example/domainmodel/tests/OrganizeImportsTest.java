@@ -25,8 +25,8 @@ import org.junit.runner.RunWith;
 /**
  * @author Jan Koehnlein - copied and adapted form Xtend
  */
-@RunWith(value = XtextRunner.class)
-@InjectWith(value = DomainmodelInjectorProvider.class)
+@RunWith(XtextRunner.class)
+@InjectWith(DomainmodelInjectorProvider.class)
 @SuppressWarnings("all")
 public class OrganizeImportsTest {
   @Inject

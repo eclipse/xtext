@@ -7,8 +7,11 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase;
 
+import java.util.Set;
+
 import org.eclipse.xtext.naming.QualifiedName;
 
+import com.google.common.collect.ImmutableSet;
 import com.google.inject.Singleton;
 
 /**
@@ -17,14 +20,16 @@ import com.google.inject.Singleton;
 @Singleton
 public class XbaseQualifiedNameConverter extends org.eclipse.xtext.naming.IQualifiedNameConverter.DefaultImpl {
 	
+	private static final Set<String> criticalOperatorNames = ImmutableSet.<String>builder().add("..", "..<", ">..").build();
+	
 	/**
 	 * the '..' operator would be rejected by {@link org.eclipse.xtext.naming.IQualifiedNameConverter.DefaultImpl}
 	 * so we have to enable it here.
 	 */
 	@Override
 	public QualifiedName toQualifiedName(String qualifiedNameAsString) {
-		if ("..".equals(qualifiedNameAsString))
-			return QualifiedName.create("..");
+		if (criticalOperatorNames.contains(qualifiedNameAsString))
+			return QualifiedName.create(qualifiedNameAsString);
 		return super.toQualifiedName(qualifiedNameAsString);
 	}
 }

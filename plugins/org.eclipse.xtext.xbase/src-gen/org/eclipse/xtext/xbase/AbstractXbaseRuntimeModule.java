@@ -255,6 +255,11 @@ public abstract class AbstractXbaseRuntimeModule extends DefaultRuntimeModule {
 	}
 
 	// contributed by org.eclipse.xtext.generator.xbase.XbaseGeneratorFragment
+	public Class<? extends org.eclipse.xtext.resource.EObjectAtOffsetHelper> bindEObjectAtOffsetHelper() {
+		return org.eclipse.xtext.xbase.linking.BrokenConstructorCallAwareEObjectAtOffsetHelper.class;
+	}
+
+	// contributed by org.eclipse.xtext.generator.xbase.XbaseGeneratorFragment
 	public Class<? extends org.eclipse.xtext.scoping.IScopeProvider> bindIScopeProvider() {
 		return org.eclipse.xtext.xbase.scoping.XbaseScopeProvider.class;
 	}

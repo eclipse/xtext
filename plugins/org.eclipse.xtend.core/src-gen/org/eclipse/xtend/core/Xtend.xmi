@@ -1236,7 +1236,10 @@
       <type metamodel="/2/@metamodelDeclarations.2">
         <classifier xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
       </type>
-      <alternatives xsi:type="xtext:Keyword" value="+="/>
+      <alternatives xsi:type="xtext:Alternatives">
+        <elements xsi:type="xtext:Keyword" value="+="/>
+        <elements xsi:type="xtext:Keyword" value="-="/>
+      </alternatives>
     </rules>
     <rules xsi:type="xtext:ParserRule" name="XOrExpression">
       <type metamodel="/2/@metamodelDeclarations.0">
@@ -1347,6 +1350,7 @@
       <alternatives xsi:type="xtext:Alternatives">
         <elements xsi:type="xtext:Keyword" value="=="/>
         <elements xsi:type="xtext:Keyword" value="!="/>
+        <elements xsi:type="xtext:Keyword" value="==="/>
       </alternatives>
     </rules>
     <rules xsi:type="xtext:ParserRule" name="XRelationalExpression">
@@ -1443,6 +1447,11 @@
       </type>
       <alternatives xsi:type="xtext:Alternatives">
         <elements xsi:type="xtext:Keyword" value="->"/>
+        <elements xsi:type="xtext:Keyword" value="..&lt;"/>
+        <elements xsi:type="xtext:Group">
+          <elements xsi:type="xtext:Keyword" value=">"/>
+          <elements xsi:type="xtext:Keyword" value=".."/>
+        </elements>
         <elements xsi:type="xtext:Keyword" value=".."/>
         <elements xsi:type="xtext:Keyword" value="=>"/>
         <elements xsi:type="xtext:Group">

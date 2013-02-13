@@ -9,8 +9,8 @@ import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-@RunWith(value = XtextRunner.class)
-@InjectWith(value = DomainmodelUiInjectorProvider.class)
+@RunWith(XtextRunner.class)
+@InjectWith(DomainmodelUiInjectorProvider.class)
 @SuppressWarnings("all")
 public class ContentAssistTest extends AbstractContentAssistTest {
   @Test

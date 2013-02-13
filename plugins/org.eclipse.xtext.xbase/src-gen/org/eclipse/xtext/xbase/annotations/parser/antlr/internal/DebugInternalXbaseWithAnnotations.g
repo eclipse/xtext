@@ -68,7 +68,8 @@ ruleOpSingleAssign :
 
 // Rule OpMultiAssign
 ruleOpMultiAssign :
-	'+='
+	'+=' |
+	'-='
 ;
 
 // Rule XOrExpression
@@ -111,7 +112,8 @@ ruleXEqualityExpression :
 // Rule OpEquality
 ruleOpEquality :
 	'==' |
-	'!='
+	'!=' |
+	'==='
 ;
 
 // Rule XRelationalExpression
@@ -146,6 +148,8 @@ ruleXOtherOperatorExpression :
 // Rule OpOther
 ruleOpOther :
 	'->' |
+	'..<' |
+	'>' '..' |
 	'..' |
 	'=>' |
 	'>' (

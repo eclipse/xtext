@@ -745,13 +745,20 @@ ruleOpMultiAssign returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleT
     @init { enterRule(); 
     }
     @after { leaveRule(); }:
-
+(
 	kw='+=' 
     {
         $current.merge(kw);
-        newLeafNode(kw, grammarAccess.getOpMultiAssignAccess().getPlusSignEqualsSignKeyword()); 
+        newLeafNode(kw, grammarAccess.getOpMultiAssignAccess().getPlusSignEqualsSignKeyword_0()); 
     }
 
+    |
+	kw='-=' 
+    {
+        $current.merge(kw);
+        newLeafNode(kw, grammarAccess.getOpMultiAssignAccess().getHyphenMinusEqualsSignKeyword_1()); 
+    }
+)
     ;
 
 
@@ -1061,6 +1068,13 @@ ruleOpEquality returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToke
         $current.merge(kw);
         newLeafNode(kw, grammarAccess.getOpEqualityAccess().getExclamationMarkEqualsSignKeyword_1()); 
     }
+
+    |
+	kw='===' 
+    {
+        $current.merge(kw);
+        newLeafNode(kw, grammarAccess.getOpEqualityAccess().getEqualsSignEqualsSignEqualsSignKeyword_2()); 
+    }
 )
     ;
 
@@ -1317,24 +1331,44 @@ ruleOpOther returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()
     }
 
     |
+	kw='..<' 
+    {
+        $current.merge(kw);
+        newLeafNode(kw, grammarAccess.getOpOtherAccess().getFullStopFullStopLessThanSignKeyword_1()); 
+    }
+
+    |(
+	kw='>' 
+    {
+        $current.merge(kw);
+        newLeafNode(kw, grammarAccess.getOpOtherAccess().getGreaterThanSignKeyword_2_0()); 
+    }
+
 	kw='..' 
     {
         $current.merge(kw);
-        newLeafNode(kw, grammarAccess.getOpOtherAccess().getFullStopFullStopKeyword_1()); 
+        newLeafNode(kw, grammarAccess.getOpOtherAccess().getFullStopFullStopKeyword_2_1()); 
+    }
+)
+    |
+	kw='..' 
+    {
+        $current.merge(kw);
+        newLeafNode(kw, grammarAccess.getOpOtherAccess().getFullStopFullStopKeyword_3()); 
     }
 
     |
 	kw='=>' 
     {
         $current.merge(kw);
-        newLeafNode(kw, grammarAccess.getOpOtherAccess().getEqualsSignGreaterThanSignKeyword_2()); 
+        newLeafNode(kw, grammarAccess.getOpOtherAccess().getEqualsSignGreaterThanSignKeyword_4()); 
     }
 
     |(
 	kw='>' 
     {
         $current.merge(kw);
-        newLeafNode(kw, grammarAccess.getOpOtherAccess().getGreaterThanSignKeyword_3_0()); 
+        newLeafNode(kw, grammarAccess.getOpOtherAccess().getGreaterThanSignKeyword_5_0()); 
     }
 ((((
 	'>' 
@@ -1344,27 +1378,27 @@ ruleOpOther returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()
 	kw='>' 
     {
         $current.merge(kw);
-        newLeafNode(kw, grammarAccess.getOpOtherAccess().getGreaterThanSignKeyword_3_1_0_0_0()); 
+        newLeafNode(kw, grammarAccess.getOpOtherAccess().getGreaterThanSignKeyword_5_1_0_0_0()); 
     }
 
 	kw='>' 
     {
         $current.merge(kw);
-        newLeafNode(kw, grammarAccess.getOpOtherAccess().getGreaterThanSignKeyword_3_1_0_0_1()); 
+        newLeafNode(kw, grammarAccess.getOpOtherAccess().getGreaterThanSignKeyword_5_1_0_0_1()); 
     }
 ))
     |
 	kw='>' 
     {
         $current.merge(kw);
-        newLeafNode(kw, grammarAccess.getOpOtherAccess().getGreaterThanSignKeyword_3_1_1()); 
+        newLeafNode(kw, grammarAccess.getOpOtherAccess().getGreaterThanSignKeyword_5_1_1()); 
     }
 ))
     |(
 	kw='<' 
     {
         $current.merge(kw);
-        newLeafNode(kw, grammarAccess.getOpOtherAccess().getLessThanSignKeyword_4_0()); 
+        newLeafNode(kw, grammarAccess.getOpOtherAccess().getLessThanSignKeyword_6_0()); 
     }
 ((((
 	'<' 
@@ -1374,41 +1408,41 @@ ruleOpOther returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()
 	kw='<' 
     {
         $current.merge(kw);
-        newLeafNode(kw, grammarAccess.getOpOtherAccess().getLessThanSignKeyword_4_1_0_0_0()); 
+        newLeafNode(kw, grammarAccess.getOpOtherAccess().getLessThanSignKeyword_6_1_0_0_0()); 
     }
 
 	kw='<' 
     {
         $current.merge(kw);
-        newLeafNode(kw, grammarAccess.getOpOtherAccess().getLessThanSignKeyword_4_1_0_0_1()); 
+        newLeafNode(kw, grammarAccess.getOpOtherAccess().getLessThanSignKeyword_6_1_0_0_1()); 
     }
 ))
     |
 	kw='<' 
     {
         $current.merge(kw);
-        newLeafNode(kw, grammarAccess.getOpOtherAccess().getLessThanSignKeyword_4_1_1()); 
+        newLeafNode(kw, grammarAccess.getOpOtherAccess().getLessThanSignKeyword_6_1_1()); 
     }
 ))
     |
 	kw='<>' 
     {
         $current.merge(kw);
-        newLeafNode(kw, grammarAccess.getOpOtherAccess().getLessThanSignGreaterThanSignKeyword_5()); 
+        newLeafNode(kw, grammarAccess.getOpOtherAccess().getLessThanSignGreaterThanSignKeyword_7()); 
     }
 
     |
 	kw='?:' 
     {
         $current.merge(kw);
-        newLeafNode(kw, grammarAccess.getOpOtherAccess().getQuestionMarkColonKeyword_6()); 
+        newLeafNode(kw, grammarAccess.getOpOtherAccess().getQuestionMarkColonKeyword_8()); 
     }
 
     |
 	kw='<=>' 
     {
         $current.merge(kw);
-        newLeafNode(kw, grammarAccess.getOpOtherAccess().getLessThanSignEqualsSignGreaterThanSignKeyword_7()); 
+        newLeafNode(kw, grammarAccess.getOpOtherAccess().getLessThanSignEqualsSignGreaterThanSignKeyword_9()); 
     }
 )
     ;

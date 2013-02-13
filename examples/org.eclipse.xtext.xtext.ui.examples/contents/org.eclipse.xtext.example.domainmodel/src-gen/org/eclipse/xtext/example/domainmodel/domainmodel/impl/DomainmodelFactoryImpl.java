@@ -30,7 +30,7 @@ public class DomainmodelFactoryImpl extends EFactoryImpl implements DomainmodelF
   {
     try
     {
-      DomainmodelFactory theDomainmodelFactory = (DomainmodelFactory)EPackage.Registry.INSTANCE.getEFactory("http://www.xtext.org/example/Domainmodel"); 
+      DomainmodelFactory theDomainmodelFactory = (DomainmodelFactory)EPackage.Registry.INSTANCE.getEFactory(DomainmodelPackage.eNS_URI);
       if (theDomainmodelFactory != null)
       {
         return theDomainmodelFactory;

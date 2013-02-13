@@ -14,8 +14,8 @@ import org.eclipse.xtext.xtype.XtypePackage.Literals;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-@RunWith(value = XtextRunner.class)
-@InjectWith(value = InjectorProviderCustom.class)
+@RunWith(XtextRunner.class)
+@InjectWith(InjectorProviderCustom.class)
 @SuppressWarnings("all")
 public class ValidationTests {
   @Inject
