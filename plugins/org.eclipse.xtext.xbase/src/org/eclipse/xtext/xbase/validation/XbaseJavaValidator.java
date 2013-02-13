@@ -175,17 +175,21 @@ public class XbaseJavaValidator extends AbstractXbaseJavaValidator {
 			XbasePackage.Literals.XRETURN_EXPRESSION__EXPRESSION,
 			XbasePackage.Literals.XSWITCH_EXPRESSION__SWITCH, 
 			XbasePackage.Literals.XCASE_PART__CASE,
-			XbasePackage.Literals.XASSIGNMENT__ASSIGNABLE, 
+			XbasePackage.Literals.XASSIGNMENT__ASSIGNABLE,
+			XbasePackage.Literals.XASSIGNMENT__VALUE,
 			XbasePackage.Literals.XABSTRACT_WHILE_EXPRESSION__PREDICATE,
 			XbasePackage.Literals.XMEMBER_FEATURE_CALL__MEMBER_CALL_ARGUMENTS,
+			XbasePackage.Literals.XMEMBER_FEATURE_CALL__MEMBER_CALL_TARGET,
+			// those are not part of eContents in EMF < 2.9 thus we validate them explicitly.
+//			XbasePackage.Literals.XABSTRACT_FEATURE_CALL__IMPLICIT_FIRST_ARGUMENT,
+//			XbasePackage.Literals.XABSTRACT_FEATURE_CALL__IMPLICIT_RECEIVER,
 			XbasePackage.Literals.XCONSTRUCTOR_CALL__ARGUMENTS,
 			XbasePackage.Literals.XFEATURE_CALL__FEATURE_CALL_ARGUMENTS,
 			//TODO these references might point to the receiver, which is the basis of why a certain feature was picked in scoping.
 			// Should be checked in case of extension methods only (i.e. when they are arguments)
 			XbasePackage.Literals.XBINARY_OPERATION__LEFT_OPERAND,
-			XbasePackage.Literals.XUNARY_OPERATION__OPERAND,
-			XbasePackage.Literals.XASSIGNMENT__VALUE, 
 			XbasePackage.Literals.XBINARY_OPERATION__RIGHT_OPERAND,
+			XbasePackage.Literals.XUNARY_OPERATION__OPERAND,
 			XbasePackage.Literals.XFOR_LOOP_EXPRESSION__FOR_EXPRESSION,
 			XbasePackage.Literals.XCOLLECTION_LITERAL__ELEMENTS);
 	}
@@ -425,70 +429,49 @@ public class XbaseJavaValidator extends AbstractXbaseJavaValidator {
 
 	@Check
 	public void checkTypes(final XExpression obj) {
-		if (obj instanceof XAbstractFeatureCall) {
-			XExpression firstArgument = ((XAbstractFeatureCall) obj).getImplicitFirstArgument();
-			if (firstArgument != null) {
-				doValidateType(firstArgument, new Procedures.Procedure2<LightweightTypeReference, LightweightTypeReference>() {
-					public void apply(LightweightTypeReference expectedType, LightweightTypeReference actualType) {
-						if (expectedType != null) {
-							error("Incompatible implicit first argument. Expected " + getNameOfTypes(expectedType)
-									+ " but was " + canonicalName(actualType), obj, null,
-									ValidationMessageAcceptor.INSIGNIFICANT_INDEX, INCOMPATIBLE_TYPES);
-						} else {
-							error("Incompatible implicit first argument. Unexpected type primitive void.", obj, null,
-									ValidationMessageAcceptor.INSIGNIFICANT_INDEX, INCOMPATIBLE_TYPES);
-						}
-					}
-				});
-			}
-		}
-		if (!getTypeConformanceCheckedReferences().contains(obj.eContainingFeature())) {
+		final EStructuralFeature containingReference = obj.eContainingFeature();
+		if (!getTypeConformanceCheckedReferences().contains(containingReference)) {
 			return;
 		}
+		doCheckTypes(obj, containingReference);
+	}
+	
+	@Check
+	public void checkImplicitTypes(final XAbstractFeatureCall obj) {
+		EStructuralFeature containingFeature = obj.eContainingFeature();
+		if (containingFeature == XbasePackage.Literals.XABSTRACT_FEATURE_CALL__IMPLICIT_FIRST_ARGUMENT
+				|| containingFeature == XbasePackage.Literals.XABSTRACT_FEATURE_CALL__IMPLICIT_RECEIVER)
+			return;
+		doCheckTypes(obj.getImplicitFirstArgument(), XbasePackage.Literals.XABSTRACT_FEATURE_CALL__IMPLICIT_FIRST_ARGUMENT);
+		doCheckTypes(obj.getImplicitReceiver(), XbasePackage.Literals.XABSTRACT_FEATURE_CALL__IMPLICIT_RECEIVER);
+	}
+
+	protected void doCheckTypes(final XExpression obj, final EStructuralFeature containingReference) {
+		if (obj == null)
+			return;
 		doValidateType(obj, new Procedures.Procedure2<LightweightTypeReference, LightweightTypeReference>() {
 			public void apply(LightweightTypeReference expectedType, LightweightTypeReference actualType) {
+				String firstPart = "Incompatible types.";
+				XExpression errorModel = obj;
+				if (containingReference == XbasePackage.Literals.XMEMBER_FEATURE_CALL__MEMBER_CALL_TARGET) {
+					firstPart = "Incompatible receiver type.";
+					errorModel = (XExpression) errorModel.eContainer();
+				} else if (containingReference == XbasePackage.Literals.XABSTRACT_FEATURE_CALL__IMPLICIT_FIRST_ARGUMENT) {
+					firstPart = "Incompatible implicit first argument.";
+				}
 				if (expectedType != null) {
-					error("Incompatible types. Expected " + getNameOfTypes(expectedType) + " but was "
-							+ canonicalName(actualType), obj, null, ValidationMessageAcceptor.INSIGNIFICANT_INDEX,
+					error(firstPart + " Expected " + getNameOfTypes(expectedType) + " but was "
+							+ canonicalName(actualType), errorModel, null, ValidationMessageAcceptor.INSIGNIFICANT_INDEX,
 							INCOMPATIBLE_TYPES);
 				} else {
-					error("Incompatible types. Unexpected type primitive void.", obj, null, ValidationMessageAcceptor.INSIGNIFICANT_INDEX,
+					error(firstPart + " Unexpected type primitive void.", errorModel, null, ValidationMessageAcceptor.INSIGNIFICANT_INDEX,
 							INCOMPATIBLE_TYPES);
 				}
 			}
 		});
 	}
 
-	@Check
-	public void checkReceiverOfStaticFeature(XMemberFeatureCall featureCall) {
-		doCheckReceiverOfStaticFeature(featureCall, featureCall.getMemberCallTarget());
-	}
 
-	@Check
-	public void checkReceiverOfStaticFeature(XFeatureCall featureCall) {
-		doCheckReceiverOfStaticFeature(featureCall, featureCall.getImplicitReceiver());
-	}
-
-	protected void doCheckReceiverOfStaticFeature(final XAbstractFeatureCall featureCall, XExpression receiver) {
-		if (receiver != null && featureCall.getFeature() instanceof JvmOperation) {
-			JvmOperation operation = (JvmOperation) featureCall.getFeature();
-			if (operation.isStatic()) {
-				doValidateType(receiver, new Procedures.Procedure2<LightweightTypeReference, LightweightTypeReference>() {
-					public void apply(LightweightTypeReference expectedType, LightweightTypeReference actualType) {
-						if (expectedType != null) {
-							error("Incompatible receiver type. Expected " + getNameOfTypes(expectedType) + " but was "
-									+ canonicalName(actualType), featureCall,
-									XbasePackage.Literals.XABSTRACT_FEATURE_CALL__FEATURE,
-									ValidationMessageAcceptor.INSIGNIFICANT_INDEX, INCOMPATIBLE_TYPES);
-						} else {
-							error("Incompatible receiver type. Unexpected type primitive void.", featureCall, null,
-									ValidationMessageAcceptor.INSIGNIFICANT_INDEX, INCOMPATIBLE_TYPES);
-						}
-					}
-				});
-			}
-		}
-	}
 
 	@Check
 	public void checkImplicitReturn(XExpression expr) {
@@ -514,17 +497,6 @@ public class XbaseJavaValidator extends AbstractXbaseJavaValidator {
 		if (expectedReturnType == null) {
 			return;
 		}
-//		if (expectedReturnType == null) {
-//			if (expr.getExpression() != null) {
-//				LightweightTypeReference expressionType = getActualType(expr.getExpression());
-//				if (expressionType.isPrimitiveVoid()) {
-//					error("Incompatible types. Expected java.lang.Object but was " + canonicalName(expressionType),
-//							expr.getExpression(), null, ValidationMessageAcceptor.INSIGNIFICANT_INDEX,
-//							INCOMPATIBLE_TYPES);
-//				}
-//			}
-//			return;
-//		}
 		if (expectedReturnType.isPrimitiveVoid()) {
 			if (expr.getExpression() != null)
 				error("Void functions cannot return a value.", expr, null,

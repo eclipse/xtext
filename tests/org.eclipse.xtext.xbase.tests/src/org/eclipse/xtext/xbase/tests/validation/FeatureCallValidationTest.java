@@ -14,6 +14,8 @@ import org.eclipse.xtext.diagnostics.Diagnostic;
 import org.eclipse.xtext.junit4.validation.ValidationTestHelper;
 import org.eclipse.xtext.xbase.XBlockExpression;
 import org.eclipse.xtext.xbase.XExpression;
+import org.eclipse.xtext.xbase.XMemberFeatureCall;
+import org.eclipse.xtext.xbase.XbasePackage;
 import org.eclipse.xtext.xbase.tests.AbstractXbaseTestCase;
 import org.junit.Test;
 
@@ -363,6 +365,16 @@ public class FeatureCallValidationTest extends AbstractXbaseTestCase {
 				"    list.map(e|e == null)\n" +
 				"}");
 		helper.assertNoErrors(expression);
+	}
+	
+	@Test public void testInvalidReceiverForExtension_01() throws Exception {
+		XExpression expression = expression("''.toList");
+		helper.assertError(expression, XbasePackage.Literals.XMEMBER_FEATURE_CALL, INCOMPATIBLE_TYPES, "Iterable<Object>", "Object[]", "String", "receiver");
+	}
+	
+	@Test public void testInvalidReceiverForExtension_02() throws Exception {
+		XExpression expression = expression("{ var it = '' toList }");
+		helper.assertError(expression, XbasePackage.Literals.XFEATURE_CALL, INCOMPATIBLE_TYPES, "Iterable<Object>", "Object[]", "String", "first", "argument");
 	}
 	
 }

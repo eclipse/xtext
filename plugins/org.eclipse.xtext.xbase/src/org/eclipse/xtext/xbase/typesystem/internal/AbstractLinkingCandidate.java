@@ -14,6 +14,7 @@ import java.util.Map;
 import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
+import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeConstraint;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.JvmTypeParameterDeclarator;
@@ -340,7 +341,7 @@ public abstract class AbstractLinkingCandidate<Expression extends XExpression> i
 				@Override
 				@Nullable
 				protected LightweightTypeReference getBoundTypeArgument(ParameterizedTypeReference reference, JvmTypeParameter type, Object visiting) {
-					if (getOwner().getDeclaredTypeParameters().contains(type)) {
+					if ((type.getDeclarator() instanceof JvmType) && getOwner().getDeclaredTypeParameters().contains(type)) {
 						return null;
 					}
 					return super.getBoundTypeArgument(reference, type, visiting);
