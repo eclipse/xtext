@@ -2307,6 +2307,32 @@ public abstract class AbstractXbaseEvaluationTest extends Assert {
 				"}");
 	}
 	
+	@Test public void testArrays_01() throws Exception {
+		assertEvaluatesTo(42, 
+				"{" +
+				"  var Integer[] a = newArrayOfSize(42)" + 
+				"  a.length" +
+				"}");
+	}
+	
+	@Test public void testArrays_02() throws Exception {
+		assertEvaluatesTo(38, 
+				"{" +
+						"  var a = newArrayOfSize(42)" + 
+						"  a.set(40, 4)" + 
+						"  a.length - a.get(40)" +
+				"}");
+	}
+	
+	@Test public void testArrays_03() throws Exception {
+		assertEvaluatesTo('x', 
+				"{" +
+						"  var a = newCharArrayOfSize(42)" + 
+						"  a.set(40, 'x')" + 
+						"  a.get(40)" +
+				"}");
+	}
+	
 	@Test public void testConstructorVarArgs_01() throws Exception {
 		assertEvaluatesTo(Boolean.TRUE, "new testdata.ClassWithVarArgs().defaultConstructor");
 	}
