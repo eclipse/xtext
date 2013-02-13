@@ -8,8 +8,8 @@
 package org.eclipse.xtext.xbase.lib;
 
 /**
- * An extension library for arrays, to be used with Xtend.
- * It allows to work with array without converting it to a list first.
+ * An extension library for arrays, to be used with Xtend. It allows to use an array without converting it to a list
+ * first.
  * 
  * @author Sven Efftinge - Initial contribution and API
  * @since 2.4
@@ -17,28 +17,34 @@ package org.eclipse.xtext.xbase.lib;
 public class ArrayExtensions {
 
 	/**
-	 * @param array - the array
+	 * @param array
+	 *            the array
 	 * @return the length of the given array
 	 */
 	@Inline("$1.length")
-	public static <T> int length(T[] array) {
+	public static int length(Object[] array) {
 		return array.length;
 	}
-	
+
 	/**
-	 * @param array - the array 
-	 * @param index - the index the value should be set at
-	 * @param value - the value to set at the given index
+	 * @param array
+	 *            the array
+	 * @param index
+	 *            the index the value should be set at
+	 * @param value
+	 *            the value to set at the given index
 	 */
 	@Inline("$1[$2] = $3")
 	public static <T> void set(T[] array, int index, T value) {
 		array[index] = value;
 	}
-	
+
 	/**
-	 * @param array - the array 
-	 * @param index - the index
-	 * @return - the value at the given index
+	 * @param array
+	 *            the array
+	 * @param index
+	 *            the index
+	 * @return the value at the given index
 	 */
 	@Inline("$1[$2]")
 	public static <T> T get(T[] array, int index) {
@@ -46,18 +52,22 @@ public class ArrayExtensions {
 	}
 
 	/**
-	 * @param array - the array
+	 * @param array
+	 *            the array
 	 * @return the length of the given array
 	 */
 	@Inline("$1.length")
-	public static <T> int length(byte[] array) {
+	public static int length(byte[] array) {
 		return array.length;
 	}
 
 	/**
-	 * @param array - the array 
-	 * @param index - the index the value should be set at
-	 * @param value - the value to set at the given index
+	 * @param array
+	 *            the array
+	 * @param index
+	 *            the index the value should be set at
+	 * @param value
+	 *            the value to set at the given index
 	 */
 	@Inline("$1[$2] = $3")
 	public static void set(byte[] array, int index, byte value) {
@@ -65,9 +75,11 @@ public class ArrayExtensions {
 	}
 
 	/**
-	 * @param array - the array 
-	 * @param index - the index
-	 * @return - the value at the given index
+	 * @param array
+	 *            the array
+	 * @param index
+	 *            the index
+	 * @return the value at the given index
 	 */
 	@Inline("$1[$2]")
 	public static byte get(byte[] array, int index) {
@@ -75,18 +87,22 @@ public class ArrayExtensions {
 	}
 
 	/**
-	 * @param array - the array
+	 * @param array
+	 *            the array
 	 * @return the length of the given array
 	 */
 	@Inline("$1.length")
-	public static <T> int length(short[] array) {
+	public static int length(short[] array) {
 		return array.length;
 	}
 
 	/**
-	 * @param array - the array 
-	 * @param index - the index the value should be set at
-	 * @param value - the value to set at the given index
+	 * @param array
+	 *            the array
+	 * @param index
+	 *            the index the value should be set at
+	 * @param value
+	 *            the value to set at the given index
 	 */
 	@Inline("$1[$2] = $3")
 	public static void set(short[] array, int index, short value) {
@@ -94,9 +110,11 @@ public class ArrayExtensions {
 	}
 
 	/**
-	 * @param array - the array 
-	 * @param index - the index
-	 * @return - the value at the given index
+	 * @param array
+	 *            the array
+	 * @param index
+	 *            the index
+	 * @return the value at the given index
 	 */
 	@Inline("$1[$2]")
 	public static short get(short[] array, int index) {
@@ -104,18 +122,22 @@ public class ArrayExtensions {
 	}
 
 	/**
-	 * @param array - the array
+	 * @param array
+	 *            the array
 	 * @return the length of the given array
 	 */
 	@Inline("$1.length")
-	public static <T> int length(char[] array) {
+	public static int length(char[] array) {
 		return array.length;
 	}
 
 	/**
-	 * @param array - the array 
-	 * @param index - the index the value should be set at
-	 * @param value - the value to set at the given index
+	 * @param array
+	 *            the array
+	 * @param index
+	 *            the index the value should be set at
+	 * @param value
+	 *            the value to set at the given index
 	 */
 	@Inline("$1[$2] = $3")
 	public static void set(char[] array, int index, char value) {
@@ -123,9 +145,11 @@ public class ArrayExtensions {
 	}
 
 	/**
-	 * @param array - the array 
-	 * @param index - the index
-	 * @return - the value at the given index
+	 * @param array
+	 *            the array
+	 * @param index
+	 *            the index
+	 * @return the value at the given index
 	 */
 	@Inline("$1[$2]")
 	public static char get(char[] array, int index) {
@@ -133,18 +157,22 @@ public class ArrayExtensions {
 	}
 
 	/**
-	 * @param array - the array
+	 * @param array
+	 *            the array
 	 * @return the length of the given array
 	 */
 	@Inline("$1.length")
-	public static <T> int length(int[] array) {
+	public static int length(int[] array) {
 		return array.length;
 	}
 
 	/**
-	 * @param array - the array 
-	 * @param index - the index the value should be set at
-	 * @param value - the value to set at the given index
+	 * @param array
+	 *            the array
+	 * @param index
+	 *            the index the value should be set at
+	 * @param value
+	 *            the value to set at the given index
 	 */
 	@Inline("$1[$2] = $3")
 	public static void set(int[] array, int index, int value) {
@@ -152,9 +180,11 @@ public class ArrayExtensions {
 	}
 
 	/**
-	 * @param array - the array 
-	 * @param index - the index
-	 * @return - the value at the given index
+	 * @param array
+	 *            the array
+	 * @param index
+	 *            the index
+	 * @return the value at the given index
 	 */
 	@Inline("$1[$2]")
 	public static int get(int[] array, int index) {
@@ -162,18 +192,22 @@ public class ArrayExtensions {
 	}
 
 	/**
-	 * @param array - the array
+	 * @param array
+	 *            the array
 	 * @return the length of the given array
 	 */
 	@Inline("$1.length")
-	public static <T> int length(long[] array) {
+	public static int length(long[] array) {
 		return array.length;
 	}
 
 	/**
-	 * @param array - the array 
-	 * @param index - the index the value should be set at
-	 * @param value - the value to set at the given index
+	 * @param array
+	 *            the array
+	 * @param index
+	 *            the index the value should be set at
+	 * @param value
+	 *            the value to set at the given index
 	 */
 	@Inline("$1[$2] = $3")
 	public static void set(long[] array, int index, long value) {
@@ -181,9 +215,11 @@ public class ArrayExtensions {
 	}
 
 	/**
-	 * @param array - the array 
-	 * @param index - the index
-	 * @return - the value at the given index
+	 * @param array
+	 *            the array
+	 * @param index
+	 *            the index
+	 * @return the value at the given index
 	 */
 	@Inline("$1[$2]")
 	public static long get(long[] array, int index) {
@@ -191,18 +227,22 @@ public class ArrayExtensions {
 	}
 
 	/**
-	 * @param array - the array
+	 * @param array
+	 *            the array
 	 * @return the length of the given array
 	 */
 	@Inline("$1.length")
-	public static <T> int length(float[] array) {
+	public static int length(float[] array) {
 		return array.length;
 	}
 
 	/**
-	 * @param array - the array 
-	 * @param index - the index the value should be set at
-	 * @param value - the value to set at the given index
+	 * @param array
+	 *            the array
+	 * @param index
+	 *            the index the value should be set at
+	 * @param value
+	 *            the value to set at the given index
 	 */
 	@Inline("$1[$2] = $3")
 	public static void set(float[] array, int index, float value) {
@@ -210,9 +250,11 @@ public class ArrayExtensions {
 	}
 
 	/**
-	 * @param array - the array 
-	 * @param index - the index
-	 * @return - the value at the given index
+	 * @param array
+	 *            the array
+	 * @param index
+	 *            the index
+	 * @return the value at the given index
 	 */
 	@Inline("$1[$2]")
 	public static float get(float[] array, int index) {
@@ -220,18 +262,22 @@ public class ArrayExtensions {
 	}
 
 	/**
-	 * @param array - the array
+	 * @param array
+	 *            the array
 	 * @return the length of the given array
 	 */
 	@Inline("$1.length")
-	public static <T> int length(double[] array) {
+	public static int length(double[] array) {
 		return array.length;
 	}
 
 	/**
-	 * @param array - the array 
-	 * @param index - the index the value should be set at
-	 * @param value - the value to set at the given index
+	 * @param array
+	 *            the array
+	 * @param index
+	 *            the index the value should be set at
+	 * @param value
+	 *            the value to set at the given index
 	 */
 	@Inline("$1[$2] = $3")
 	public static void set(double[] array, int index, double value) {
@@ -239,9 +285,11 @@ public class ArrayExtensions {
 	}
 
 	/**
-	 * @param array - the array 
-	 * @param index - the index
-	 * @return - the value at the given index
+	 * @param array
+	 *            the array
+	 * @param index
+	 *            the index
+	 * @return the value at the given index
 	 */
 	@Inline("$1[$2]")
 	public static double get(double[] array, int index) {
@@ -249,18 +297,22 @@ public class ArrayExtensions {
 	}
 
 	/**
-	 * @param array - the array
+	 * @param array
+	 *            the array
 	 * @return the length of the given array
 	 */
 	@Inline("$1.length")
-	public static <T> int length(boolean[] array) {
+	public static int length(boolean[] array) {
 		return array.length;
 	}
 
 	/**
-	 * @param array - the array 
-	 * @param index - the index the value should be set at
-	 * @param value - the value to set at the given index
+	 * @param array
+	 *            the array
+	 * @param index
+	 *            the index the value should be set at
+	 * @param value
+	 *            the value to set at the given index
 	 */
 	@Inline("$1[$2] = $3")
 	public static void set(boolean[] array, int index, boolean value) {
@@ -268,9 +320,11 @@ public class ArrayExtensions {
 	}
 
 	/**
-	 * @param array - the array 
-	 * @param index - the index
-	 * @return - the value at the given index
+	 * @param array
+	 *            the array
+	 * @param index
+	 *            the index
+	 * @return the value at the given index
 	 */
 	@Inline("$1[$2]")
 	public static boolean get(boolean[] array, int index) {
