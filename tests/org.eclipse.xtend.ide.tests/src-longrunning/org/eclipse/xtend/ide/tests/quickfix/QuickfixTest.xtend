@@ -574,7 +574,7 @@ class QuickfixTest extends AbstractXtendUITestCase {
 		''')
 	}
 	
-	@Ignore("TODO")
+	@Ignore("TODO there is currently no linking diagnostic")
 	@Test 
 	def void missingOperatorSameClass() {
 		create('Foo.xtend', '''
@@ -606,7 +606,7 @@ class QuickfixTest extends AbstractXtendUITestCase {
 		''')
 	}
 	
-	@Ignore("TODO")
+	@Ignore("TODO there is no linking diagnostic")
 	@Test 
 	def void missingOperatorOtherClass() {
 		create('Foo.xtend', '''
@@ -986,7 +986,6 @@ class QuickfixTest extends AbstractXtendUITestCase {
 		''')
 	}
 	
-	@Ignore("TODO")
 	@Test 
 	def void useObjectForUnknownParams() {
 		create('Foo.xtend', '''
