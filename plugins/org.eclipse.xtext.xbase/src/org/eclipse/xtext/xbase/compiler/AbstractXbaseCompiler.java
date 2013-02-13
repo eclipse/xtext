@@ -443,6 +443,12 @@ public abstract class AbstractXbaseCompiler {
 		//TODO we need to replace any occurrence of JvmAnyTypeReference with a better match from the expected type
 		if (type instanceof JvmAnyTypeReference) {
 			JvmTypeReference expectedType = getTypeProvider().getExpectedType(expr);
+			if (expectedType == null) {
+				expectedType = getTypeProvider().getExpectedReturnType(expr, false);
+				if (expectedType == null) {
+					expectedType = getTypeProvider().getCommonReturnType(expr, true);
+				}
+			}
 			if (expectedType!=null && !(expectedType.getType() instanceof JvmTypeParameter))
 				type = expectedType;
 		}
