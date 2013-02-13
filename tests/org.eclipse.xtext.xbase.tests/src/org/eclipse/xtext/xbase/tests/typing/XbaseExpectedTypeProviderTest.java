@@ -240,11 +240,11 @@ public class XbaseExpectedTypeProviderTest extends AbstractXbaseTestCase {
 	}
 	@Test public void testForLoopExpression_2_b() throws Exception {
 		XForLoopExpression loop = (XForLoopExpression) expression("for (int x : new Object) null");
-		assertExpected("int[] | java.lang.Iterable<? extends java.lang.Integer>", loop.getForExpression());
+		assertExpected("int[] | java.lang.Iterable<? extends java.lang.Integer> | java.lang.Integer[]", loop.getForExpression());
 	}
 	@Test public void testForLoopExpression_2_c() throws Exception {
 		XForLoopExpression loop = (XForLoopExpression) expression("for (double x : null as Iterable<? super Integer>) null");
-		assertExpected("double[] | java.lang.Iterable<? extends java.lang.Double>", loop.getForExpression());
+		assertExpected("double[] | java.lang.Iterable<? extends java.lang.Double> | java.lang.Double[]", loop.getForExpression());
 	}
 	@Test public void testForLoopExpression_2_d() throws Exception {
 		XForLoopExpression loop = (XForLoopExpression) expression("for(Double d: null as int[])) {}");
