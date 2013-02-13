@@ -334,21 +334,6 @@ public class XbaseCompiler extends FeatureCallCompiler {
 	}
 	
 	@Override
-	protected JvmTypeReference getTypeForVariableDeclaration(XExpression expr) {
-		JvmTypeReference type = getTypeProvider().getType(expr);
-		//TODO we need to replace any occurrence of JvmAnyTypeReference with a better match from the expected type
-		if (type instanceof JvmAnyTypeReference) {
-			JvmTypeReference expectedType = getTypeProvider().getExpectedType(expr);
-			if (expectedType == null) {
-				expectedType = getTypeProvider().getExpectedReturnType(expr, false);
-			}
-			if (expectedType!=null && !(expectedType.getType() instanceof JvmTypeParameter))
-				type = expectedType;
-		}
-		return type;
-	}
-	
-	@Override
 	protected void internalToConvertedExpression(XExpression obj, ITreeAppendable appendable) {
 		if (obj instanceof XBlockExpression) {
 			_toJavaExpression((XBlockExpression) obj, appendable);
