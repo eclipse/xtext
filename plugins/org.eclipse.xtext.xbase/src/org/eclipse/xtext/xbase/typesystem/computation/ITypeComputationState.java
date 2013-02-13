@@ -82,6 +82,12 @@ public interface ITypeComputationState {
 	ITypeComputationState withRootExpectation(LightweightTypeReference expectation);
 	
 	/**
+	 * The outer context is ignored for child expressions and the newly produced context
+	 * does not impose any restrictions on the expectation.
+	 */
+	ITypeComputationState withoutRootExpectation();
+	
+	/**
 	 * Keep the current return expectation and assume an actual expectation that is not void.
 	 * 
 	 * Example:

@@ -867,8 +867,44 @@ abstract class AbstractTypeResolverTest<Reference> extends AbstractXbaseTestCase
 		"null instanceof String".resolvesTo("boolean")
 	}
 	
-	@Test def void testTypeForVoidClosure() throws Exception {
+	@Test def void testTypeForVoidClosure_01() throws Exception {
 		"newArrayList('foo','bar').forEach []".resolvesTo("void")
+	}
+	
+	@Test def void testTypeForVoidClosure_02() throws Exception {
+		"[ return ]".resolvesTo("(Object)=>void").isFunctionAndEquivalentTo("Procedure1<Object>")
+	}
+	
+	@Test def void testTypeForVoidClosure_03() throws Exception {
+		"[| return ]".resolvesTo("()=>void").isFunctionAndEquivalentTo("Procedure0")
+	}
+	
+	@Test def void testTypeForVoidClosure_04() throws Exception {
+		"[a, b| return ]".resolvesTo("(Object, Object)=>void").isFunctionAndEquivalentTo("Procedure2<Object, Object>")
+	}
+	
+	@Test def void testTypeForVoidClosure_05() throws Exception {
+		"[ System::out.println ]".resolvesTo("(Object)=>void").isFunctionAndEquivalentTo("Procedure1<Object>")
+	}
+	
+	@Test def void testTypeForVoidClosure_06() throws Exception {
+		"[| System::out.println ]".resolvesTo("()=>void").isFunctionAndEquivalentTo("Procedure0")
+	}
+	
+	@Test def void testTypeForVoidClosure_07() throws Exception {
+		"[a, b| System::out.println ]".resolvesTo("(Object, Object)=>void").isFunctionAndEquivalentTo("Procedure2<Object, Object>")
+	}
+	
+	@Test def void testTypeForEmptyClosure_01() throws Exception {
+		"[]".resolvesTo("(Object)=>Object").isFunctionAndEquivalentTo("Function1<Object, Object>")
+	}
+	
+	@Test def void testTypeForEmptyClosure_02() throws Exception {
+		"[|]".resolvesTo("()=>Object").isFunctionAndEquivalentTo("Function0<Object>")
+	}
+	
+	@Test def void testTypeForEmptyClosure_03() throws Exception {
+		"[a, b|]".resolvesTo("(Object, Object)=>Object").isFunctionAndEquivalentTo("Function2<Object, Object, Object>")
 	}
 
 	@Test def void testFeatureCallWithArrayToIterableConversion_01() throws Exception {

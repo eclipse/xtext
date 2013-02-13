@@ -972,8 +972,62 @@ public abstract class AbstractTypeResolverTest<Reference extends Object> extends
   }
   
   @Test
-  public void testTypeForVoidClosure() throws Exception {
+  public void testTypeForVoidClosure_01() throws Exception {
     this.resolvesTo("newArrayList(\'foo\',\'bar\').forEach []", "void");
+  }
+  
+  @Test
+  public void testTypeForVoidClosure_02() throws Exception {
+    Reference _resolvesTo = this.resolvesTo("[ return ]", "(Object)=>void");
+    this.isFunctionAndEquivalentTo(_resolvesTo, "Procedure1<Object>");
+  }
+  
+  @Test
+  public void testTypeForVoidClosure_03() throws Exception {
+    Reference _resolvesTo = this.resolvesTo("[| return ]", "()=>void");
+    this.isFunctionAndEquivalentTo(_resolvesTo, "Procedure0");
+  }
+  
+  @Test
+  public void testTypeForVoidClosure_04() throws Exception {
+    Reference _resolvesTo = this.resolvesTo("[a, b| return ]", "(Object, Object)=>void");
+    this.isFunctionAndEquivalentTo(_resolvesTo, "Procedure2<Object, Object>");
+  }
+  
+  @Test
+  public void testTypeForVoidClosure_05() throws Exception {
+    Reference _resolvesTo = this.resolvesTo("[ System::out.println ]", "(Object)=>void");
+    this.isFunctionAndEquivalentTo(_resolvesTo, "Procedure1<Object>");
+  }
+  
+  @Test
+  public void testTypeForVoidClosure_06() throws Exception {
+    Reference _resolvesTo = this.resolvesTo("[| System::out.println ]", "()=>void");
+    this.isFunctionAndEquivalentTo(_resolvesTo, "Procedure0");
+  }
+  
+  @Test
+  public void testTypeForVoidClosure_07() throws Exception {
+    Reference _resolvesTo = this.resolvesTo("[a, b| System::out.println ]", "(Object, Object)=>void");
+    this.isFunctionAndEquivalentTo(_resolvesTo, "Procedure2<Object, Object>");
+  }
+  
+  @Test
+  public void testTypeForEmptyClosure_01() throws Exception {
+    Reference _resolvesTo = this.resolvesTo("[]", "(Object)=>Object");
+    this.isFunctionAndEquivalentTo(_resolvesTo, "Function1<Object, Object>");
+  }
+  
+  @Test
+  public void testTypeForEmptyClosure_02() throws Exception {
+    Reference _resolvesTo = this.resolvesTo("[|]", "()=>Object");
+    this.isFunctionAndEquivalentTo(_resolvesTo, "Function0<Object>");
+  }
+  
+  @Test
+  public void testTypeForEmptyClosure_03() throws Exception {
+    Reference _resolvesTo = this.resolvesTo("[a, b|]", "(Object, Object)=>Object");
+    this.isFunctionAndEquivalentTo(_resolvesTo, "Function2<Object, Object, Object>");
   }
   
   @Test

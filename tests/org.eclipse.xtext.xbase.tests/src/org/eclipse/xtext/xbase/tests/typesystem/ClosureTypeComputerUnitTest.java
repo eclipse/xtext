@@ -101,7 +101,7 @@ public class ClosureTypeComputerUnitTest extends AbstractXbaseTestCase implement
 		
 		TypeExpectation expectation = new TypeExpectation(iterableTypeReference, state, false);
 		ClosureTypeComputer computer = new ClosureTypeComputer(closure("[|]", getContextResourceSet()), expectation, state);
-		computer.prepareComputation();
+		computer.selectStrategy();
 		LightweightTypeReference closureType = computer.getExpectedClosureType();
 		assertEquals("java.lang.Iterable.iterator()", computer.getOperation().getIdentifier());
 		assertEquals("Iterable<Unbound[T]>", getEquivalentSimpleName(closureType));
@@ -116,7 +116,7 @@ public class ClosureTypeComputerUnitTest extends AbstractXbaseTestCase implement
 		
 		TypeExpectation expectation = new TypeExpectation(iterableTypeReference, state, false);
 		ClosureTypeComputer computer = new ClosureTypeComputer(closure("[|]", getContextResourceSet()), expectation, state);
-		computer.prepareComputation();
+		computer.selectStrategy();
 		LightweightTypeReference closureType = computer.getExpectedClosureType();
 		assertEquals("java.lang.Iterable.iterator()", computer.getOperation().getIdentifier());
 		assertEquals("StringIterable", getEquivalentSimpleName(closureType));
@@ -133,7 +133,7 @@ public class ClosureTypeComputerUnitTest extends AbstractXbaseTestCase implement
 		
 		TypeExpectation expectation = new TypeExpectation(iterableTypeReference, state, false);
 		ClosureTypeComputer computer = new ClosureTypeComputer(closure("[|]", getContextResourceSet()), expectation, state);
-		computer.prepareComputation();
+		computer.selectStrategy();
 		LightweightTypeReference closureType = computer.getExpectedClosureType();
 		assertEquals("java.lang.Iterable.iterator()", computer.getOperation().getIdentifier());
 		assertEquals("CharSequenceIterable<Unbound[C]>", getEquivalentSimpleName(closureType));
@@ -150,7 +150,7 @@ public class ClosureTypeComputerUnitTest extends AbstractXbaseTestCase implement
 		
 		TypeExpectation expectation = new TypeExpectation(iterableTypeReference, state, false);
 		ClosureTypeComputer computer = new ClosureTypeComputer(closure("[|]", getContextResourceSet()), expectation, state);
-		computer.prepareComputation();
+		computer.selectStrategy();
 		LightweightTypeReference closureType = computer.getExpectedClosureType();
 		assertEquals("org.eclipse.xtext.xbase.tests.typesystem.ClosureTypeComputerUnitTest$ListIteratorIterable.iterator()", computer.getOperation().getIdentifier());
 		assertEquals("ListIteratorIterable<Unbound[E]>", getEquivalentSimpleName(closureType));
@@ -167,7 +167,7 @@ public class ClosureTypeComputerUnitTest extends AbstractXbaseTestCase implement
 		
 		TypeExpectation expectation = new TypeExpectation(iterableTypeReference, state, false);
 		ClosureTypeComputer computer = new ClosureTypeComputer(closure("[|]", getContextResourceSet()), expectation, state);
-		computer.prepareComputation();
+		computer.selectStrategy();
 		LightweightTypeReference closureType = computer.getExpectedClosureType();
 		assertEquals("java.lang.Iterable.iterator()", computer.getOperation().getIdentifier());
 		assertEquals("Iterable<Unbound[T]>", getEquivalentSimpleName(closureType));
@@ -182,22 +182,20 @@ public class ClosureTypeComputerUnitTest extends AbstractXbaseTestCase implement
 		
 		TypeExpectation expectation = new TypeExpectation(stringTypeReference, state, false);
 		ClosureTypeComputer computer = new ClosureTypeComputer(closure("[]", getContextResourceSet()), expectation, state);
-		computer.prepareComputation();
+		computer.selectStrategy();
 		LightweightTypeReference closureType = computer.getExpectedClosureType();
-		assertEquals("org.eclipse.xtext.xbase.lib.Functions$Function1.apply(Param)", computer.getOperation().getIdentifier());
-		assertEquals("Function1<Unbound[Param], Unbound[Result]>", getEquivalentSimpleName(closureType));
-		assertEquals("(Unbound[Param])=>Unbound[Result]", closureType.getSimpleName());
+		assertEquals("org.eclipse.xtext.xbase.lib.Procedures$Procedure1.apply(Param)", computer.getOperation().getIdentifier());
+		assertEquals("Procedure1<Unbound[Param]>", getEquivalentSimpleName(closureType));
 	}
 	
 	@Test
 	public void testPrepareComputation_07() throws Exception {
 		TypeExpectation expectation = new TypeExpectation(null, state, false);
 		ClosureTypeComputer computer = new ClosureTypeComputer(closure("[]", getContextResourceSet()), expectation, state);
-		computer.prepareComputation();
+		computer.selectStrategy();
 		LightweightTypeReference closureType = computer.getExpectedClosureType();
-		assertEquals("org.eclipse.xtext.xbase.lib.Functions$Function1.apply(Param)", computer.getOperation().getIdentifier());
-		assertEquals("Function1<Unbound[Param], Unbound[Result]>", getEquivalentSimpleName(closureType));
-		assertEquals("(Unbound[Param])=>Unbound[Result]", closureType.getSimpleName());
+		assertEquals("org.eclipse.xtext.xbase.lib.Procedures$Procedure1.apply(Param)", computer.getOperation().getIdentifier());
+		assertEquals("Procedure1<Unbound[Param]>", getEquivalentSimpleName(closureType));
 	}
 	
 	@Test
@@ -211,11 +209,10 @@ public class ClosureTypeComputerUnitTest extends AbstractXbaseTestCase implement
 		TypeExpectation expectation = new TypeExpectation(iterableTypeReference, state, false);
 		// closure indicates Function1 but Iterable is Function0 - type is Function1
 		ClosureTypeComputer computer = new ClosureTypeComputer(closure("[]", getContextResourceSet()), expectation, state);
-		computer.prepareComputation();
+		computer.selectStrategy();
 		LightweightTypeReference closureType = computer.getExpectedClosureType();
-		assertEquals("org.eclipse.xtext.xbase.lib.Functions$Function1.apply(Param)", computer.getOperation().getIdentifier());
-		assertEquals("Function1<Unbound[Param], Unbound[Result]>", getEquivalentSimpleName(closureType));
-		assertEquals("(Unbound[Param])=>Unbound[Result]", closureType.getSimpleName());
+		assertEquals("org.eclipse.xtext.xbase.lib.Procedures$Procedure1.apply(Param)", computer.getOperation().getIdentifier());
+		assertEquals("Procedure1<Unbound[Param]>", getEquivalentSimpleName(closureType));
 	}
 	
 	@Test
@@ -226,7 +223,7 @@ public class ClosureTypeComputerUnitTest extends AbstractXbaseTestCase implement
 		
 		TypeExpectation expectation = new TypeExpectation(runnableTypeReference, state, false);
 		ClosureTypeComputer computer = new ClosureTypeComputer(closure("[|]", getContextResourceSet()), expectation, state);
-		computer.prepareComputation();
+		computer.selectStrategy();
 		LightweightTypeReference closureType = computer.getExpectedClosureType();
 		assertEquals("java.lang.Runnable.run()", computer.getOperation().getIdentifier());
 		assertEquals("Runnable", getEquivalentSimpleName(closureType));
@@ -244,7 +241,7 @@ public class ClosureTypeComputerUnitTest extends AbstractXbaseTestCase implement
 		
 		TypeExpectation expectation = new TypeExpectation(runnableTypeReference, state, false);
 		ClosureTypeComputer computer = new ClosureTypeComputer(closure("[|]", getContextResourceSet()), expectation, state);
-		computer.prepareComputation();
+		computer.selectStrategy();
 		LightweightTypeReference closureType = computer.getExpectedClosureType();
 		assertEquals("java.lang.Runnable.run()", computer.getOperation().getIdentifier());
 		assertEquals("Runnable", getEquivalentSimpleName(closureType));
@@ -262,7 +259,7 @@ public class ClosureTypeComputerUnitTest extends AbstractXbaseTestCase implement
 		
 		TypeExpectation expectation = new TypeExpectation(listFunctionTypeReference, state, false);
 		ClosureTypeComputer computer = new ClosureTypeComputer(closure("[]", getContextResourceSet()), expectation, state);
-		computer.prepareComputation();
+		computer.selectStrategy();
 		LightweightTypeReference closureType = computer.getExpectedClosureType();
 		assertEquals("org.eclipse.xtext.xbase.tests.typesystem.TypeResolutionTestData$ListFunction1.apply(java.util.List)", computer.getOperation().getIdentifier());
 		assertEquals("ListFunction1<Unbound[T], Unbound[R]>", getEquivalentSimpleName(closureType));
@@ -280,7 +277,7 @@ public class ClosureTypeComputerUnitTest extends AbstractXbaseTestCase implement
 		
 		TypeExpectation expectation = new TypeExpectation(comparatorTypeReference, state, false);
 		ClosureTypeComputer computer = new ClosureTypeComputer(closure("[x, y|]", getContextResourceSet()), expectation, state);
-		computer.prepareComputation();
+		computer.selectStrategy();
 		LightweightTypeReference closureType = computer.getExpectedClosureType();
 		assertEquals("java.util.Comparator.compare(T,T)", computer.getOperation().getIdentifier());
 		assertEquals("Comparator<Unbound[T]>", getEquivalentSimpleName(closureType));
@@ -295,7 +292,7 @@ public class ClosureTypeComputerUnitTest extends AbstractXbaseTestCase implement
 		
 		TypeExpectation expectation = new TypeExpectation(functionTypeReference, state, false);
 		ClosureTypeComputer computer = new ClosureTypeComputer(closure("[x, y|]", getContextResourceSet()), expectation, state);
-		computer.prepareComputation();
+		computer.selectStrategy();
 		LightweightTypeReference closureType = computer.getExpectedClosureType();
 		assertEquals("org.eclipse.xtext.xbase.tests.typesystem.ClosureTypeComputerUnitTest$IntFunction.apply(int,int)", computer.getOperation().getIdentifier());
 		assertEquals("IntFunction", getEquivalentSimpleName(closureType));
@@ -314,7 +311,7 @@ public class ClosureTypeComputerUnitTest extends AbstractXbaseTestCase implement
 		
 		TypeExpectation expectation = new TypeExpectation(iterableTypeReference, state, false);
 		ClosureTypeComputer computer = new ClosureTypeComputer(closure("[|]", getContextResourceSet()), expectation, state);
-		computer.prepareComputation();
+		computer.selectStrategy();
 		LightweightTypeReference closureType = computer.getExpectedClosureType();
 		assertEquals("java.lang.Iterable.iterator()", computer.getOperation().getIdentifier());
 		assertEquals("Iterable<Unbound[T]>", getEquivalentSimpleName(closureType));
@@ -333,7 +330,7 @@ public class ClosureTypeComputerUnitTest extends AbstractXbaseTestCase implement
 		
 		TypeExpectation expectation = new TypeExpectation(iterableTypeReference, state, false);
 		ClosureTypeComputer computer = new ClosureTypeComputer(closure("[|]", getContextResourceSet()), expectation, state);
-		computer.prepareComputation();
+		computer.selectStrategy();
 		FunctionTypeReference closureType = computer.getExpectedClosureType();
 		assertEquals("java.lang.Iterable.iterator()", computer.getOperation().getIdentifier());
 		assertEquals("Iterable<Unbound[T]>", getEquivalentSimpleName(closureType));
@@ -357,7 +354,7 @@ public class ClosureTypeComputerUnitTest extends AbstractXbaseTestCase implement
 		
 		TypeExpectation expectation = new TypeExpectation(iterableTypeReference, state, false);
 		ClosureTypeComputer computer = new ClosureTypeComputer(closure("[|]", getContextResourceSet()), expectation, state);
-		computer.prepareComputation();
+		computer.selectStrategy();
 		FunctionTypeReference closureType = computer.getExpectedClosureType();
 		assertEquals("java.lang.Iterable.iterator()", computer.getOperation().getIdentifier());
 		assertEquals("Iterable<Unbound[T]>", getEquivalentSimpleName(closureType));
@@ -381,7 +378,7 @@ public class ClosureTypeComputerUnitTest extends AbstractXbaseTestCase implement
 		
 		TypeExpectation expectation = new TypeExpectation(iterableTypeReference, state, false);
 		ClosureTypeComputer computer = new ClosureTypeComputer(closure("[|]", getContextResourceSet()), expectation, state);
-		computer.prepareComputation();
+		computer.selectStrategy();
 		FunctionTypeReference closureType = computer.getExpectedClosureType();
 		assertEquals("java.lang.Iterable.iterator()", computer.getOperation().getIdentifier());
 		assertEquals("Iterable<Unbound[T]>", getEquivalentSimpleName(closureType));

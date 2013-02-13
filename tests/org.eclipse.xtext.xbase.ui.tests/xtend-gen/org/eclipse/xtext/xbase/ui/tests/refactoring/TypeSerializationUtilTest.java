@@ -44,7 +44,7 @@ public class TypeSerializationUtilTest extends AbstractXbaseTestCase {
     this.assertSerializedTypeOfFoo("val foo = 1", "int");
   }
   
-  @Ignore
+  @Ignore("https://bugs.eclipse.org/bugs/show_bug.cgi?id=397422")
   @Test
   public void testGenerics() {
     this.assertSerializedTypeOfFoo("val foo = newArrayList(new java.util.Date)", "ArrayList<Date>", "java.util.ArrayList", "java.util.Date");
@@ -58,7 +58,6 @@ public class TypeSerializationUtilTest extends AbstractXbaseTestCase {
     this.assertSerializedTypeOfFoo("val foo = [String x, int offset|x.substring(offset)]", "(String, int)=>String");
   }
   
-  @Ignore("TODO implement me")
   @Test
   public void testClosureToVoid() {
     this.assertSerializedTypeOfFoo("val foo = [String x|System::out.println(x)]", "(String)=>void");

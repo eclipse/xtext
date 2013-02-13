@@ -28,7 +28,7 @@ class TypeSerializationUtilTest extends AbstractXbaseTestCase {
 		"val foo = 1".assertSerializedTypeOfFoo('int')	
 	}
 	
-	@Ignore
+	@Ignore("https://bugs.eclipse.org/bugs/show_bug.cgi?id=397422")
 	@Test def testGenerics() {
 		"val foo = newArrayList(new java.util.Date)".assertSerializedTypeOfFoo('ArrayList<Date>', 'java.util.ArrayList', 'java.util.Date')	
 		"val foo = newHashMap('x'->1, 'y'->2)".assertSerializedTypeOfFoo('HashMap<String,Integer>', 'java.util.HashMap')	
@@ -40,7 +40,6 @@ class TypeSerializationUtilTest extends AbstractXbaseTestCase {
 		"val foo = [String x, int offset|x.substring(offset)]".assertSerializedTypeOfFoo('(String, int)=>String')
 	}
 	
-	@Ignore("TODO implement me")
 	@Test def testClosureToVoid() {
 		"val foo = [String x|System::out.println(x)]".assertSerializedTypeOfFoo('(String)=>void')	
 	}
