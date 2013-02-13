@@ -837,6 +837,18 @@ public abstract class AbstractXbaseEvaluationTest extends Assert {
 		assertEvaluatesTo(false, "new Object===new Object");
 	}
 	
+	@Test public void testSpaceship_0() throws Exception {
+		assertEvaluatesTo(1, "2<=>1");
+	}
+	
+	@Test public void testSpaceship_1() throws Exception {
+		assertEvaluatesTo(-1, "1<=>2");
+	}
+	
+	@Test public void testSpaceship_2() throws Exception {
+		assertEvaluatesTo(0, "'bar'<=>'bar'");
+	}
+	
 	@Test public void testIfExpression_00() throws Exception {
 		assertEvaluatesTo(null, "if (0==1) 'literal'");
 	}
