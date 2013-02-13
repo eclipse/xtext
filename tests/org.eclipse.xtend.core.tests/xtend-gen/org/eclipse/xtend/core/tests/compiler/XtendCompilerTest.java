@@ -953,6 +953,101 @@ public class XtendCompilerTest extends AbstractXtendTestCase {
   }
   
   @Test
+  public void testLocalExtensionForPairStringString_10() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("import org.eclipse.xtext.xbase.lib.Pair");
+    _builder.newLine();
+    _builder.append("public class C  {");
+    _builder.newLine();
+    _builder.append("    ");
+    _builder.append("def <T> String m(Pair<T, T> it) {");
+    _builder.newLine();
+    _builder.append("    \t");
+    _builder.append("m");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("import org.eclipse.xtext.xbase.lib.Pair;");
+    _builder_1.newLine();
+    _builder_1.newLine();
+    _builder_1.append("@SuppressWarnings(\"all\")");
+    _builder_1.newLine();
+    _builder_1.append("public class C {");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("public <T extends Object> String m(final Pair<T,T> it) {");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("String _m = this.<T>m(it);");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("return _m;");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    this.assertCompilesTo(_builder, _builder_1);
+  }
+  
+  @Test
+  public void testLocalExtensionForPairStringString_11() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("import org.eclipse.xtext.xbase.lib.Pair");
+    _builder.newLine();
+    _builder.append("public class C  {");
+    _builder.newLine();
+    _builder.append("    ");
+    _builder.append("def <T> String m(Pair<T, T> it) {");
+    _builder.newLine();
+    _builder.append("    \t");
+    _builder.append("(key->value).m");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("import org.eclipse.xtext.xbase.lib.Pair;");
+    _builder_1.newLine();
+    _builder_1.newLine();
+    _builder_1.append("@SuppressWarnings(\"all\")");
+    _builder_1.newLine();
+    _builder_1.append("public class C {");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("public <T extends Object> String m(final Pair<T,T> it) {");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("T _key = it.getKey();");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("T _value = it.getValue();");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("Pair<T,T> _mappedTo = Pair.<T, T>of(_key, _value);");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("String _m = this.<T>m(_mappedTo);");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("return _m;");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    this.assertCompilesTo(_builder, _builder_1);
+  }
+  
+  @Test
   public void testIfWithVoid() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("public class C  {");

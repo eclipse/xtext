@@ -246,7 +246,7 @@ public class ExpectationTest extends AbstractXbaseTestCase {
   }
   
   @Test
-  @Ignore(value = "TODO null type is bound differently")
+  @Ignore("TODO null type is bound differently")
   public void testExtensionReceiver_01() {
     ExpectationTest _expects = this.expects("null.isNullOrEmpty()");
     _expects.types("String", "Iterable<Unbound[T]>");
