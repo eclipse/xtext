@@ -35,6 +35,34 @@ import com.google.common.annotations.GwtCompatible;
 	}
 	
 	/**
+	 * The <code>..&lt;</code> operator yields an {@link ExclusiveRange}.
+	 * 
+	 * @param a the start of the range (probably inclusive).
+	 * @param b the end of the range (never inclusive).
+	 * @return an {@link ExclusiveRange}. Never <code>null</code>.
+	 * @since 2.4
+	 */
+	@Pure
+	@Inline(value="new $3($1, $2, true)", imported=ExclusiveRange.class, statementExpression=false)
+	public static ExclusiveRange operator_doubleDotLessThan(final int a, final int b) {
+		return new ExclusiveRange(a, b, true);
+	}
+	
+	/**
+	 * The <code>&gt;..</code> operator yields an {@link ExclusiveRange}.
+	 * 
+	 * @param a the start of the range (never inclusive).
+	 * @param b the end of the range (probably inclusive).
+	 * @return an {@link ExclusiveRange}. Never <code>null</code>.
+	 * @since 2.4
+	 */
+	@Pure
+	@Inline(value="new $3($1, $2, false)", imported=ExclusiveRange.class, statementExpression=false)
+	public static ExclusiveRange operator_greaterThanDoubleDot(final int a, final int b) {
+		return new ExclusiveRange(a, b, false);
+	}
+	
+	/**
 	 * The bitwise inclusive <code>or</code> operation. This is the equivalent to the java <code>|</code> operator.
 	 * 
 	 * @param a

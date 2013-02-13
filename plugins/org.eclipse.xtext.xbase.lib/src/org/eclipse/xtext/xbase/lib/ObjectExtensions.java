@@ -69,6 +69,23 @@ import com.google.common.base.Objects;
 	}
 
 	/**
+	 * The <code>identity equals</code> operator. This is the equivalent to Java's <code>==</code>
+	 * operator.
+	 * 
+	 * @param a
+	 *            an object.
+	 * @param b
+	 *            another object.
+	 * @return Java's <code>a == b</code>
+	 * @since 2.4
+	 */
+	@Pure
+	@Inline("$1 == $2")
+	public static boolean operator_tripleEquals(Object a, Object b) {
+		return a == b;
+	}
+
+	/**
 	 * The <code>mappedTo</code> operator yields a {@link Pair} with {@code a} as the {@link Pair#getKey() key} and
 	 * {@code b} as its {@link Pair#getValue() value}.
 	 * 
