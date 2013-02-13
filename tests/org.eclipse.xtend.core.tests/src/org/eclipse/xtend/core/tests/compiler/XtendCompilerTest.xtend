@@ -446,6 +446,51 @@ class XtendCompilerTest extends AbstractXtendTestCase {
 		''')
 	}
 	
+	@Test def void testLocalExtensionForPairStringString_10() {
+		assertCompilesTo('''
+			import org.eclipse.xtext.xbase.lib.Pair
+			public class C  {
+			    def <T> String m(Pair<T, T> it) {
+			    	m
+				}
+			}
+		''', '''
+			import org.eclipse.xtext.xbase.lib.Pair;
+			
+			@SuppressWarnings("all")
+			public class C {
+			  public <T extends Object> String m(final Pair<T,T> it) {
+			    String _m = this.<T>m(it);
+			    return _m;
+			  }
+			}
+		''')
+	}
+	
+	@Test def void testLocalExtensionForPairStringString_11() {
+		assertCompilesTo('''
+			import org.eclipse.xtext.xbase.lib.Pair
+			public class C  {
+			    def <T> String m(Pair<T, T> it) {
+			    	(key->value).m
+				}
+			}
+		''', '''
+			import org.eclipse.xtext.xbase.lib.Pair;
+			
+			@SuppressWarnings("all")
+			public class C {
+			  public <T extends Object> String m(final Pair<T,T> it) {
+			    T _key = it.getKey();
+			    T _value = it.getValue();
+			    Pair<T,T> _mappedTo = Pair.<T, T>of(_key, _value);
+			    String _m = this.<T>m(_mappedTo);
+			    return _m;
+			  }
+			}
+		''')
+	}
+	
 	@Test def void testIfWithVoid() {
 		assertCompilesTo('''
 			public class C  {

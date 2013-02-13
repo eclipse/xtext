@@ -26,6 +26,20 @@ public class FeatureCallValidationTest extends AbstractXtendTestCase {
 	private ValidationTestHelper helper;
 
 	@Test 
+	public void testBug400653() throws Exception {
+		XtendClass clazz = clazz("class X { def void m(String x) { x.m2 } def m2(char c) {}}");
+		helper.assertError(clazz, XbasePackage.Literals.XMEMBER_FEATURE_CALL,
+				IssueCodes.INCOMPATIBLE_TYPES, "String", "char", "Character", "receiver");
+	}
+	
+	@Test 
+	public void testBug400653_02() throws Exception {
+		XtendClass clazz = clazz("class X { def void m(String it) { m2 } def m2(char c) {}}");
+		helper.assertError(clazz, XbasePackage.Literals.XFEATURE_CALL,
+				IssueCodes.INCOMPATIBLE_TYPES, "String", "char", "Character", "implicit first argument");
+	}
+	
+	@Test 
 	public void testConstructInstanceOfTypeParameter() throws Exception {
 		XtendClass clazz = clazz("class X<T> { def m() { new T } }");
 		helper.assertError(clazz, XbasePackage.Literals.XCONSTRUCTOR_CALL,
