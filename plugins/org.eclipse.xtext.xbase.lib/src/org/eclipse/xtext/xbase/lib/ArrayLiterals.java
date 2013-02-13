@@ -8,7 +8,7 @@
 package org.eclipse.xtext.xbase.lib;
 
 /**
- * Factory methods for arrays. 
+ * Factory methods for arrays.
  * 
  * @author Sven Efftinge - Initial contribution and API
  * @since 2.4
@@ -16,17 +16,20 @@ package org.eclipse.xtext.xbase.lib;
 public class ArrayLiterals {
 
 	/**
-	 * @param size the size for the array to be created 
+	 * @param size
+	 *            the size for the array to be created
 	 * @return an array of the given size
 	 * @since 2.4
 	 */
 	@Inline("new $3[$1]")
 	public static <T> T[] newArrayOfSize(int size) {
-	  throw new UnsupportedOperationException("This method relies on the inlined compilation (see @Inline annotation), and cannot be used from Java or with an uncustomized interpreter.");
+		throw new UnsupportedOperationException(
+				"This method relies on the inlined compilation (see @Inline annotation), and cannot be used from Java or with an uncustomized interpreter.");
 	}
-	
+
 	/**
-	 * @param size the size for the array to be created 
+	 * @param size
+	 *            the size for the array to be created
 	 * @return an array of the given size
 	 * @since 2.4
 	 */
@@ -34,9 +37,10 @@ public class ArrayLiterals {
 	public static char[] newCharArrayOfSize(int size) {
 		return new char[size];
 	}
-	
+
 	/**
-	 * @param size the size for the array to be created 
+	 * @param size
+	 *            the size for the array to be created
 	 * @return an array of the given size
 	 * @since 2.4
 	 */
@@ -44,9 +48,10 @@ public class ArrayLiterals {
 	public static int[] newIntArrayOfSize(int size) {
 		return new int[size];
 	}
-	
+
 	/**
-	 * @param size the size for the array to be created 
+	 * @param size
+	 *            the size for the array to be created
 	 * @return an array of the given size
 	 * @since 2.4
 	 */
@@ -54,9 +59,10 @@ public class ArrayLiterals {
 	public static boolean[] newBooleanArrayOfSize(int size) {
 		return new boolean[size];
 	}
-	
+
 	/**
-	 * @param size the size for the array to be created 
+	 * @param size
+	 *            the size for the array to be created
 	 * @return an array of the given size
 	 * @since 2.4
 	 */
@@ -64,9 +70,10 @@ public class ArrayLiterals {
 	public static short[] newShortArrayOfSize(int size) {
 		return new short[size];
 	}
-	
+
 	/**
-	 * @param size the size for the array to be created 
+	 * @param size
+	 *            the size for the array to be created
 	 * @return an array of the given size
 	 * @since 2.4
 	 */
@@ -74,9 +81,10 @@ public class ArrayLiterals {
 	public static long[] newlongArrayOfSize(int size) {
 		return new long[size];
 	}
-	
+
 	/**
-	 * @param size the size for the array to be created 
+	 * @param size
+	 *            the size for the array to be created
 	 * @return an array of the given size
 	 * @since 2.4
 	 */
@@ -84,9 +92,10 @@ public class ArrayLiterals {
 	public static float[] newFloatArrayOfSize(int size) {
 		return new float[size];
 	}
-	
+
 	/**
-	 * @param size the size for the array to be created 
+	 * @param size
+	 *            the size for the array to be created
 	 * @return an array of the given size
 	 * @since 2.4
 	 */
@@ -94,9 +103,10 @@ public class ArrayLiterals {
 	public static double[] newDoubleArrayOfSize(int size) {
 		return new double[size];
 	}
-	
+
 	/**
-	 * @param size the size for the array to be created 
+	 * @param size
+	 *            the size for the array to be created
 	 * @return an array of the given size
 	 * @since 2.4
 	 */
