@@ -136,8 +136,12 @@ public abstract class AbstractTypeComputationState implements ITypeComputationSt
 		getResolvedTypes().refineExpectedType(expression, typeExpectation);
 	}
 	
-	public TypeComputationStateWithExpectation withRootExpectation(@Nullable LightweightTypeReference expectation) {
+	public TypeComputationStateWithRootExpectation withRootExpectation(@Nullable LightweightTypeReference expectation) {
 		return new TypeComputationStateWithRootExpectation(resolvedTypes, featureScopeSession, this, expectation);
+	}
+	
+	public TypeComputationStateWithRootExpectation withoutRootExpectation() {
+		return new TypeComputationStateWithRootExpectation(resolvedTypes, featureScopeSession, this, null);
 	}
 	
 	public AbstractTypeComputationState withNonVoidExpectation() {

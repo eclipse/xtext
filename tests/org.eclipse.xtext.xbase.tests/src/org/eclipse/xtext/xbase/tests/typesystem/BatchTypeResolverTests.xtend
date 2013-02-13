@@ -95,7 +95,7 @@ abstract class AbstractBatchTypeResolverTest extends AbstractTypeResolverTest<Li
 	}
 	
 	def String getEquivalent(ParameterizedTypeReference type) {
-		'''«type.type.simpleName»<«type.typeArguments.join(', ') [simpleName]»>'''
+		'''«type.type.simpleName»«type.typeArguments.join('<', ', ', '>') [simpleName]»'''
 	}
 		
 	def void assertExpressionTypeIsResolved(XExpression expression, IResolvedTypes types) {
