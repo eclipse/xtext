@@ -1805,6 +1805,7 @@ public class QuickfixTest extends AbstractXtendUITestCase {
     _assertResolutionLabelsSubset.assertModelAfterQuickfix("Create local Xtend annotation \'@Bar\'", _builder_1);
   }
   
+  @Ignore
   @Test
   public void useObjectForUnknownParams() {
     StringConcatenation _builder = new StringConcatenation();
