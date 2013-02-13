@@ -218,7 +218,7 @@ public class FeatureLinkingCandidate extends AbstractPendingLinkingCandidate<XAb
 	@Override
 	public int getArityMismatch() {
 		int result = super.getArityMismatch();
-		if (isStatic() && getImplicitReceiver() != null) {
+		if (isStatic() && (getImplicitReceiver() != null || getSyntacticReceiver() != null && !isExtension())) {
 			if (result < 0)
 				result--;
 			else

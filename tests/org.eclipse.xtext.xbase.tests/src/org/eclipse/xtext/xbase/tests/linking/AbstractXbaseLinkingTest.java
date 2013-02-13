@@ -439,6 +439,16 @@ public abstract class AbstractXbaseLinkingTest extends AbstractXbaseTestCase {
 		assertEquals(exp1.getFeature().getIdentifier(),exp2.getFeature().getIdentifier());
 	}
 	
+	@Test public void testPropertyAccess_6() throws Exception {
+		XMemberFeatureCall exp = (XMemberFeatureCall) expression("(null as instanceVsStatic.C).OK");
+		assertEquals("instanceVsStatic.C.isOK()", exp.getFeature().getIdentifier());
+	}
+	
+	@Test public void testPropertyAccess_7() throws Exception {
+		XFeatureCall exp = (XFeatureCall) expression("instanceVsStatic::C::OK");
+		assertEquals("instanceVsStatic.C.OK", exp.getFeature().getIdentifier());
+	}
+	
 	@Test public void testPropertySetter_1() throws Exception {
 		XAssignment exp = (XAssignment) expression("new testdata.Properties1().prop1 = 'Text'");
 		assertEquals(((XConstructorCall)exp.getAssignable()).getConstructor().getDeclaringType(), ((JvmField)exp.getFeature()).getDeclaringType());
@@ -447,6 +457,46 @@ public abstract class AbstractXbaseLinkingTest extends AbstractXbaseTestCase {
 	@Test public void testPropertySetter_2() throws Exception {
 		XAssignment exp = (XAssignment) expression("new testdata.Properties1().prop2 = 'Text'");
 		assertEquals("testdata.Properties1.setProp2(java.lang.String)", exp.getFeature().getIdentifier());
+	}
+	
+	@Test public void testStaticVsInstance_1() throws Exception {
+		XMemberFeatureCall exp = (XMemberFeatureCall) expression("(null as instanceVsStatic.C).toString");
+		assertEquals("java.lang.Object.toString()", exp.getFeature().getIdentifier());
+	}
+	
+	@Test public void testStaticVsInstance_2() throws Exception {
+		XMemberFeatureCall exp = (XMemberFeatureCall) expression("(null as instanceVsStatic.C).toString(null)");
+		assertEquals("instanceVsStatic.C.toString(instanceVsStatic.C)", exp.getFeature().getIdentifier());
+	}
+	
+	@Test public void testStaticVsInstance_3() throws Exception {
+		XMemberFeatureCall exp = (XMemberFeatureCall) expression("(null as instanceVsStatic.C).m1(1)");
+		assertEquals("instanceVsStatic.C.m1(int)", exp.getFeature().getIdentifier());
+	}
+	
+	@Test public void testStaticVsInstance_4() throws Exception {
+		XMemberFeatureCall exp = (XMemberFeatureCall) expression("(null as instanceVsStatic.C).m1(1, 2)");
+		assertEquals("instanceVsStatic.C.m1(instanceVsStatic.C,int)", exp.getFeature().getIdentifier());
+	}
+	
+	@Test public void testStaticVsInstance_5() throws Exception {
+		XMemberFeatureCall exp = (XMemberFeatureCall) expression("(null as instanceVsStatic.C).m1(null)");
+		assertEquals("instanceVsStatic.C.m1(int)", exp.getFeature().getIdentifier());
+	}
+	
+	@Test public void testStaticVsInstance_6() throws Exception {
+		XMemberFeatureCall exp = (XMemberFeatureCall) expression("(null as instanceVsStatic.C).m2(1)");
+		assertEquals("instanceVsStatic.C.m2(int)", exp.getFeature().getIdentifier());
+	}
+	
+	@Test public void testStaticVsInstance_7() throws Exception {
+		XMemberFeatureCall exp = (XMemberFeatureCall) expression("(null as instanceVsStatic.C).m2(1, 2)");
+		assertEquals("instanceVsStatic.C.m2(int)", exp.getFeature().getIdentifier());
+	}
+	
+	@Test public void testStaticVsInstance_8() throws Exception {
+		XFeatureCall exp = (XFeatureCall) expression("instanceVsStatic::C::m2(1, 2)");
+		assertEquals("instanceVsStatic.C.m2(instanceVsStatic.C,int,int)", exp.getFeature().getIdentifier());
 	}
 	
 	@Test public void testShadowing_1() throws Exception {

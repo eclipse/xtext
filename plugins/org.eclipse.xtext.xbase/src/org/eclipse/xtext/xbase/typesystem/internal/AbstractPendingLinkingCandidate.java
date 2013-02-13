@@ -327,14 +327,6 @@ public abstract class AbstractPendingLinkingCandidate<Expression extends XExpres
 			if (rightArityMismatch > 0)
 				return 1;
 		}
-		if (Math.abs(leftArityMismatch) < Math.abs(rightArityMismatch))
-			return -1;
-		if (Math.abs(leftArityMismatch) > Math.abs(rightArityMismatch))
-			return 1;
-		if (leftArityMismatch > 0)
-			return -1;
-		if (rightArityMismatch > 0)
-			return 1;
 		return 0;
 	}
 	
