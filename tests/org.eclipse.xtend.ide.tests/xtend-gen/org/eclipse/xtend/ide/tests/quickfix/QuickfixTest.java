@@ -23,6 +23,69 @@ public class QuickfixTest extends AbstractXtendUITestCase {
   }
   
   @Test
+  public void fixPackageName_0() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("|class Foo {");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    QuickfixTestBuilder _create = this.builder.create("test/Foo.xtend", _builder);
+    QuickfixTestBuilder _assertIssueCodes = _create.assertIssueCodes(IssueCodes.WRONG_PACKAGE);
+    QuickfixTestBuilder _assertResolutionLabels = _assertIssueCodes.assertResolutionLabels("Change package declaration to \'test\'");
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("package test class Foo {");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _assertResolutionLabels.assertModelAfterQuickfix(_builder_1);
+  }
+  
+  @Test
+  public void fixPackageName_1() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("package bar|");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("class Foo {");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    QuickfixTestBuilder _create = this.builder.create("test/Foo.xtend", _builder);
+    QuickfixTestBuilder _assertIssueCodes = _create.assertIssueCodes(IssueCodes.WRONG_PACKAGE);
+    QuickfixTestBuilder _assertResolutionLabels = _assertIssueCodes.assertResolutionLabels("Change package declaration to \'test\'");
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("package test");
+    _builder_1.newLine();
+    _builder_1.newLine();
+    _builder_1.append("class Foo {");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _assertResolutionLabels.assertModelAfterQuickfix(_builder_1);
+  }
+  
+  @Test
+  public void fixPackageName_2() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("package bar|");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("class Foo {");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    QuickfixTestBuilder _create = this.builder.create("Foo.xtend", _builder);
+    QuickfixTestBuilder _assertIssueCodes = _create.assertIssueCodes(IssueCodes.WRONG_PACKAGE);
+    QuickfixTestBuilder _assertResolutionLabels = _assertIssueCodes.assertResolutionLabels("Change package declaration to \'\'");
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("class Foo {");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _assertResolutionLabels.assertModelAfterQuickfix(_builder_1);
+  }
+  
+  @Test
   public void missingMember() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("class Foo {");

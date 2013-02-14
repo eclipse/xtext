@@ -8,6 +8,7 @@
 package org.eclipse.xtend.ide.quickfix;
 
 import static com.google.common.collect.Sets.*;
+import static org.eclipse.xtext.util.Strings.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,6 +26,7 @@ import org.eclipse.jface.text.BadLocationException;
 import org.eclipse.xtend.core.services.XtendGrammarAccess;
 import org.eclipse.xtend.core.validation.IssueCodes;
 import org.eclipse.xtend.core.xtend.XtendClass;
+import org.eclipse.xtend.core.xtend.XtendFile;
 import org.eclipse.xtend.core.xtend.XtendFunction;
 import org.eclipse.xtend.ide.buildpath.XtendLibClasspathAdder;
 import org.eclipse.xtend.ide.codebuilder.InsertionOffsets;
@@ -336,6 +338,19 @@ public class XtendQuickfixProvider extends XbaseQuickfixProvider {
 							}
 						}
 					});
+	}
+	
+	@Fix(IssueCodes.WRONG_PACKAGE)
+	public void fixPackageName(final Issue issue, IssueResolutionAcceptor acceptor) {
+		if (issue.getData() != null && issue.getData().length == 1) {
+			final String expectedPackage = issue.getData()[0];
+			acceptor.accept(issue, "Change package declaration to '" + expectedPackage + "'", "Change package declaration to '" + expectedPackage + "'", "package_obj.gif",
+					new ISemanticModification() {
+						public void apply(EObject element, IModificationContext context) throws Exception {
+							((XtendFile) element).setPackage(isEmpty(expectedPackage) ? null : expectedPackage);
+						}
+			});
+		}
 	}
 
 	protected XExpression findContainerExpressionInBlockExpression(EObject expr) {
