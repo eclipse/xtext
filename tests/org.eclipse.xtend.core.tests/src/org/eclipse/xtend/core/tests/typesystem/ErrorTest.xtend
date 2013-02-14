@@ -367,7 +367,44 @@ class ErrorTest extends AbstractXtendTestCase {
 		val resolvedTypes = typeResolver.resolveTypes(this_)
 		assertNotNull(resolvedTypes.getActualType(this_))
 	}
+
+	@Test
+	def void testErrorModel_21() throws Exception {
+		'''
+			package x class Z {
+				def generate(java.util.List<String> d, String fsa) {
+					d.iter(e | e.generate(fsa))
+				}
+				def void generate(String e, String fsa) {}
+				def <T,R> iter(java.util.List<T> list, (T)=>void proc) {
+					for(element  list) { proc.apply(element); }
+				}
+			}
+		'''.processWithoutException
+	}
+
+	@Test
+	def void testErrorModel_22() throws Exception {
+		'''
+			package generics class Bar {
+				def <T extends (Object)=>T> T bar( t) {
+					bar(t).apply(bar(t))
+				}
+			}
+		'''.processWithoutException
+	}
 	
+	@Test
+	def void testErrorModel_23() throws Exception {
+		'''
+			package generics class Bar {
+				def <T extends (Object)=>T> T bar() {
+					bar(t).apply(bar(t))
+				}
+			}
+		'''.processWithoutException
+	}
+		
 	def processWithoutException(CharSequence input) throws Exception {
 		val resource = resourceSet.createResource(URI::createURI("abcdefg.xtend"))
 		resource.load(new StringInputStream(input.toString), null)
