@@ -20,11 +20,11 @@ public class SyntacticSequencer extends GeneratedFile {
   private SerializerGenFileNames names;
   
   @Inject
-  @Named(value = "generateXtendStub")
+  @Named("generateXtendStub")
   private Boolean generateXtendStub;
   
   @Inject
-  @Named(value = "fileHeader")
+  @Named("fileHeader")
   private String fileHeader;
   
   public CharSequence getFileContents(final GenFileName filename) {

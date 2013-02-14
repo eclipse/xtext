@@ -32,13 +32,13 @@ public class LegacyTypeResolverTest extends AbstractOldAPITypeResolverTest {
     Assert.assertTrue((this.typeProvider instanceof XbaseBatchTypeProvider));
   }
   
-  @Ignore(value = "TODO discuss the preference - list or array?")
+  @Ignore("TODO discuss the preference - list or array?")
   @Test
   public void testIfExpression_10() throws Exception {
     super.testIfExpression_10();
   }
   
-  @Ignore(value = "TODO this should work")
+  @Ignore("TODO this should work")
   @Test
   public void testBug_391758() throws Exception {
     super.testBug_391758();

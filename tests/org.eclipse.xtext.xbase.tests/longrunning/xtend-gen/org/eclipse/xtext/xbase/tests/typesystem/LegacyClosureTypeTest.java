@@ -32,13 +32,13 @@ public class LegacyClosureTypeTest extends AbstractOldAPIClosureTypeTest {
     Assert.assertTrue((this.typeProvider instanceof XbaseBatchTypeProvider));
   }
   
-  @Ignore(value = "TODO the assertion should hold")
+  @Ignore("TODO the assertion should hold")
   @Test
   public void testClosure_51() throws Exception {
     super.testClosure_51();
   }
   
-  @Ignore(value = "TODO the assertion should hold")
+  @Ignore("TODO the assertion should hold")
   @Test
   public void testClosure_52() throws Exception {
     super.testClosure_52();
