@@ -49,7 +49,7 @@ public class BatchConstructorCallTypeTest extends AbstractConstructorCallTypeTes
           StringConcatenation _builder = new StringConcatenation();
           _builder.append("failed for constructor call at ");
           _builder.append(index, "");
-          String _get = ((List<String>)Conversions.doWrapArray(types)).get((index).intValue());
+          String _get = types[(index).intValue()];
           String _simpleName = type.getSimpleName();
           Assert.assertEquals(_builder.toString(), _get, _simpleName);
         }

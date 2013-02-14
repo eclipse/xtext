@@ -409,10 +409,10 @@ public class JvmModelGeneratorTest extends AbstractXbaseTestCase {
       final Method valuesMethod = compiled.getMethod("values");
       Object _invoke = valuesMethod.invoke(null);
       final Object[] values = ((Object[]) _invoke);
-      Object _get = ((List<Object>)Conversions.doWrapArray(values)).get(0);
+      Object _get = values[0];
       String _string = _get.toString();
       Assert.assertEquals("BAR", _string);
-      Object _get_1 = ((List<Object>)Conversions.doWrapArray(values)).get(1);
+      Object _get_1 = values[1];
       String _string_1 = _get_1.toString();
       Assert.assertEquals("BAZ", _string_1);
     } catch (Throwable _e) {
@@ -441,10 +441,10 @@ public class JvmModelGeneratorTest extends AbstractXbaseTestCase {
       final Method valuesMethod = compiled.getMethod("values");
       Object _invoke = valuesMethod.invoke(null);
       final Object[] values = ((Object[]) _invoke);
-      Object _get = ((List<Object>)Conversions.doWrapArray(values)).get(0);
+      Object _get = values[0];
       String _string = _get.toString();
       Assert.assertEquals("BAR", _string);
-      Object _get_1 = ((List<Object>)Conversions.doWrapArray(values)).get(1);
+      Object _get_1 = values[1];
       String _string_1 = _get_1.toString();
       Assert.assertEquals("BAZ", _string_1);
     } catch (Throwable _e) {

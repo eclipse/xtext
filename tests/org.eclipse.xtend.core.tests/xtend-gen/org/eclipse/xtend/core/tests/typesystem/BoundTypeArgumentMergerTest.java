@@ -9,7 +9,6 @@ package org.eclipse.xtend.core.tests.typesystem;
 
 import com.google.inject.Inject;
 import java.util.ArrayList;
-import java.util.List;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.xtend.core.jvmmodel.IXtendJvmAssociations;
 import org.eclipse.xtend.core.tests.typesystem.AbstractTestingTypeReferenceOwner;
@@ -73,7 +72,7 @@ public class BoundTypeArgumentMergerTest extends AbstractTestingTypeReferenceOwn
       EList<JvmFormalParameter> _parameters = operation.getParameters();
       final Procedure2<JvmFormalParameter,Integer> _function_1 = new Procedure2<JvmFormalParameter,Integer>() {
           public void apply(final JvmFormalParameter p, final Integer i) {
-            final Triple<String,VarianceInfo,VarianceInfo> input = ((List<Triple<String,VarianceInfo,VarianceInfo>>)Conversions.doWrapArray(mergeUs)).get((i).intValue());
+            final Triple<String,VarianceInfo,VarianceInfo> input = mergeUs[(i).intValue()];
             JvmTypeReference _parameterType = p.getParameterType();
             LightweightTypeReference _lightweightReference = BoundTypeArgumentMergerTest.this.toLightweightReference(_parameterType);
             Object _object = new Object();

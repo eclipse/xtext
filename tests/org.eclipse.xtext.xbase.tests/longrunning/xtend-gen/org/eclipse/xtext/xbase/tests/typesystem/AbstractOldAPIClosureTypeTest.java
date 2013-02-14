@@ -13,7 +13,6 @@ import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.xbase.XClosure;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
-import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure2;
 import org.eclipse.xtext.xbase.tests.typesystem.AbstractClosureTypeTest;
@@ -42,7 +41,7 @@ public abstract class AbstractOldAPIClosureTypeTest extends AbstractClosureTypeT
           StringConcatenation _builder_1 = new StringConcatenation();
           _builder_1.append("failed for closure at ");
           _builder_1.append(index, "");
-          String _get = ((List<String>)Conversions.doWrapArray(types)).get((index).intValue());
+          String _get = types[(index).intValue()];
           String _simpleName = closureType.getSimpleName();
           Assert.assertEquals(_builder_1.toString(), _get, _simpleName);
           result.add(closureType);
@@ -56,7 +55,7 @@ public abstract class AbstractOldAPIClosureTypeTest extends AbstractClosureTypeT
     final Procedure2<Object,Integer> _function = new Procedure2<Object,Integer>() {
         public void apply(final Object reference, final Integer index) {
           Assert.assertTrue((reference instanceof XFunctionTypeRef));
-          String _get = ((List<String>)Conversions.doWrapArray(types)).get((index).intValue());
+          String _get = types[(index).intValue()];
           JvmTypeReference _equivalent = ((XFunctionTypeRef) reference).getEquivalent();
           String _simpleName = _equivalent.getSimpleName();
           Assert.assertEquals(_get, _simpleName);

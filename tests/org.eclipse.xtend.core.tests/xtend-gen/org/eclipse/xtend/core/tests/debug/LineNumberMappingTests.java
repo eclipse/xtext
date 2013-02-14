@@ -290,7 +290,7 @@ public class LineNumberMappingTests extends AbstractXtendTestCase {
     for (final Integer lineNumber : _upTo) {
       {
         final LineMapping mapping = this.findMapping(normalizedMappings, lineNumber);
-        final String line = ((List<String>)Conversions.doWrapArray(lines)).get((lineNumber).intValue());
+        final String line = lines[(lineNumber).intValue()];
         boolean _notEquals = ObjectExtensions.operator_notEquals(mapping, null);
         if (_notEquals) {
           int _indexOf = line.indexOf("//");

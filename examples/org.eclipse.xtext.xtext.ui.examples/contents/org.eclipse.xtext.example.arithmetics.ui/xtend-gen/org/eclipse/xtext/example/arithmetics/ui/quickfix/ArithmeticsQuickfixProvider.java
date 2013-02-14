@@ -3,7 +3,6 @@
  */
 package org.eclipse.xtext.example.arithmetics.ui.quickfix;
 
-import java.util.List;
 import org.eclipse.xtext.example.arithmetics.validation.ArithmeticsValidator;
 import org.eclipse.xtext.ui.editor.model.IXtextDocument;
 import org.eclipse.xtext.ui.editor.model.edit.IModification;
@@ -12,7 +11,6 @@ import org.eclipse.xtext.ui.editor.quickfix.DefaultQuickfixProvider;
 import org.eclipse.xtext.ui.editor.quickfix.Fix;
 import org.eclipse.xtext.ui.editor.quickfix.IssueResolutionAcceptor;
 import org.eclipse.xtext.validation.Issue;
-import org.eclipse.xtext.xbase.lib.Conversions;
 
 /**
  * Custom quickfixes.
@@ -24,7 +22,7 @@ public class ArithmeticsQuickfixProvider extends DefaultQuickfixProvider {
   @Fix(ArithmeticsValidator.NORMALIZABLE)
   public void normalize(final Issue issue, final IssueResolutionAcceptor acceptor) {
     String[] _data = issue.getData();
-    final String string = ((List<String>)Conversions.doWrapArray(_data)).get(0);
+    final String string = _data[0];
     String _plus = ("Replace with " + string);
     String _plus_1 = ("Replace expression with \'" + string);
     String _plus_2 = (_plus_1 + "\'");

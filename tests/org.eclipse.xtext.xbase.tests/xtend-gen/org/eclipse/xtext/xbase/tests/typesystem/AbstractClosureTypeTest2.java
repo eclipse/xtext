@@ -90,7 +90,7 @@ public abstract class AbstractClosureTypeTest2 extends AbstractXbaseTestCase {
                 StringConcatenation _builder = new StringConcatenation();
                 _builder.append("failed for closure at ");
                 _builder.append(index, "");
-                String _get = ((List<String>)Conversions.doWrapArray(types)).get((index).intValue());
+                String _get = types[(index).intValue()];
                 String _simpleName = closureType.getSimpleName();
                 Assert.assertEquals(_builder.toString(), _get, _simpleName);
                 return null;
@@ -116,7 +116,7 @@ public abstract class AbstractClosureTypeTest2 extends AbstractXbaseTestCase {
           AbstractClosureTypeTest2.this.collector.checkSucceeds(_function);
           final Callable<Object> _function_1 = new Callable<Object>() {
               public Object call() throws Exception {
-                String _get = ((List<String>)Conversions.doWrapArray(types)).get((index).intValue());
+                String _get = types[(index).intValue()];
                 String _equivalent = AbstractClosureTypeTest2.this.getEquivalent(((FunctionTypeReference) reference));
                 Assert.assertEquals(_get, _equivalent);
                 return null;

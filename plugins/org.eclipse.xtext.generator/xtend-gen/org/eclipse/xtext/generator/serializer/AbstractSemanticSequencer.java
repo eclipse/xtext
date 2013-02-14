@@ -571,7 +571,7 @@ public class AbstractSemanticSequencer extends GeneratedFile {
           for(final IFeatureInfo f_1 : _xifexpression_1) {
             _builder.append("\t");
             IConstraintElement[] _assignments = f_1.getAssignments();
-            final IConstraintElement assignment = ((List<IConstraintElement>)Conversions.doWrapArray(_assignments)).get(0);
+            final IConstraintElement assignment = _assignments[0];
             _builder.newLineIfNotEmpty();
             _builder.append("\t");
             _builder.append("feeder.accept(grammarAccess.");

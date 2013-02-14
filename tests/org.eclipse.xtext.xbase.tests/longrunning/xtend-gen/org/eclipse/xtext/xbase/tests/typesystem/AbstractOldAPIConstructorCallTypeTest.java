@@ -11,7 +11,6 @@ import java.util.List;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.xbase.XConstructorCall;
-import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure2;
 import org.eclipse.xtext.xbase.tests.typesystem.AbstractConstructorCallTypeTest;
@@ -33,7 +32,7 @@ public abstract class AbstractOldAPIConstructorCallTypeTest extends AbstractCons
           StringConcatenation _builder = new StringConcatenation();
           _builder.append("failed for constructor call at ");
           _builder.append(index, "");
-          String _get = ((List<String>)Conversions.doWrapArray(types)).get((index).intValue());
+          String _get = types[(index).intValue()];
           String _simpleName = type.getSimpleName();
           Assert.assertEquals(_builder.toString(), _get, _simpleName);
         }
