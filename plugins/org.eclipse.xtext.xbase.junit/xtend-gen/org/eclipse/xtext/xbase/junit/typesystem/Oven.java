@@ -5,12 +5,13 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  */
-package org.eclipse.xtend.core.tests.typesystem;
+package org.eclipse.xtext.xbase.junit.typesystem;
 
+import com.google.common.annotations.Beta;
 import com.google.inject.Inject;
+import com.google.inject.Singleton;
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.xtend.core.xtend.XtendFile;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.junit4.util.ParseHelper;
@@ -19,7 +20,9 @@ import org.eclipse.xtext.xbase.XCasePart;
 import org.eclipse.xtext.xbase.XClosure;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XSwitchExpression;
+import org.eclipse.xtext.xbase.junit.typesystem.SimpleBloomFilter;
 import org.eclipse.xtext.xbase.lib.Exceptions;
+import org.eclipse.xtext.xbase.lib.Functions.Function0;
 import org.eclipse.xtext.xbase.lib.InputOutput;
 import org.eclipse.xtext.xbase.lib.IteratorExtensions;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
@@ -33,22 +36,39 @@ import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 import org.junit.Assert;
 
 /**
+ * Utility to check a given expression for exceptions and integrity
+ * after it was processed by the {@link IBatchTypeResolver}
+ * 
  * @author Sebastian Zarnekow - Initial contribution and API
  */
+@Beta
+@Singleton
 @SuppressWarnings("all")
 public class Oven extends Assert {
   @Inject
   private IBatchTypeResolver typeResolver;
   
+  private final SimpleBloomFilter alreadyBaked = new Function0<SimpleBloomFilter>() {
+    public SimpleBloomFilter apply() {
+      SimpleBloomFilter _create = SimpleBloomFilter.create(100000);
+      return _create;
+    }
+  }.apply();
+  
   @Inject
   private ReflectExtensions _reflectExtensions;
   
   @Inject
-  private ParseHelper<XtendFile> _parseHelper;
+  private ParseHelper<EObject> _parseHelper;
   
   public void fireproof(final String input) throws Exception {
+    boolean _put = this.alreadyBaked.put(input);
+    boolean _not = (!_put);
+    if (_not) {
+      return;
+    }
     try {
-      final XtendFile file = this._parseHelper.parse(input);
+      final EObject file = this._parseHelper.parse(input);
       final IResolvedTypes resolvedTypes = this.typeResolver.resolveTypes(file);
       Assert.assertNotNull(resolvedTypes);
       boolean _notEquals = ObjectExtensions.operator_notEquals(file, null);

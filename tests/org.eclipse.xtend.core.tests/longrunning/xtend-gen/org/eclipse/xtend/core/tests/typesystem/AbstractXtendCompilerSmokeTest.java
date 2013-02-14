@@ -9,8 +9,8 @@ package org.eclipse.xtend.core.tests.typesystem;
 
 import com.google.inject.Inject;
 import org.eclipse.xtend.core.tests.compiler.XtendCompilerTest;
-import org.eclipse.xtend.core.tests.typesystem.Oven;
 import org.eclipse.xtext.xbase.compiler.GeneratorConfig;
+import org.eclipse.xtext.xbase.junit.typesystem.Oven;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 
 /**

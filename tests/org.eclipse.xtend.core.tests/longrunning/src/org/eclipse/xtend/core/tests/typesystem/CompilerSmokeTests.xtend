@@ -14,30 +14,17 @@ import org.antlr.runtime.ANTLRStringStream
 import org.antlr.runtime.CommonToken
 import org.antlr.runtime.Token
 import org.eclipse.emf.common.util.URI
+import org.eclipse.xtend.core.tests.compiler.CompilerTest
+import org.eclipse.xtend.core.tests.compiler.XtendCompilerTest
 import org.eclipse.xtend.core.xtend.XtendFile
-import org.eclipse.xtext.common.types.JvmIdentifiableElement
-import org.eclipse.xtext.junit4.util.ParseHelper
 import org.eclipse.xtext.parser.antlr.Lexer
 import org.eclipse.xtext.resource.XtextResource
 import org.eclipse.xtext.util.ReplaceRegion
 import org.eclipse.xtext.util.StringInputStream
-import org.eclipse.xtext.xbase.XAbstractFeatureCall
-import org.eclipse.xtext.xbase.XCasePart
-import org.eclipse.xtext.xbase.XClosure
-import org.eclipse.xtext.xbase.XExpression
-import org.eclipse.xtext.xbase.XSwitchExpression
 import org.eclipse.xtext.xbase.compiler.GeneratorConfig
-import org.eclipse.xtext.xbase.lib.util.ReflectExtensions
-import org.eclipse.xtext.xbase.typesystem.IBatchTypeResolver
-import org.eclipse.xtext.xbase.typesystem.IResolvedTypes
-import org.eclipse.xtext.xbase.typesystem.internal.CompoundReentrantTypeResolver
-import org.eclipse.xtext.xbase.typesystem.internal.RootResolvedTypes
-import org.eclipse.xtext.xbase.typesystem.internal.TypeData
-import org.junit.Assert
+import org.eclipse.xtext.xbase.junit.typesystem.Oven
 import org.junit.Ignore
 import org.junit.Test
-import org.eclipse.xtend.core.tests.compiler.XtendCompilerTest
-import org.eclipse.xtend.core.tests.compiler.CompilerTest
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -144,87 +131,6 @@ abstract class AbstractCompilerSmokeTest extends CompilerTest {
 		input.fireproof
 	}
 	
-}
-
-/**
- * @author Sebastian Zarnekow - Initial contribution and API
- */
-class Oven extends Assert {
-	
-	@Inject
-	IBatchTypeResolver typeResolver
-	
-	@Inject extension ReflectExtensions
-	
-	@Inject extension ParseHelper<XtendFile>
-	
-	
-	def void fireproof(String input) throws Exception {
-		try {
-			val file = input.parse
-			val resolvedTypes = typeResolver.resolveTypes(file)
-			assertNotNull(resolvedTypes)
-			if (file != null) {
-				for(content: file.eAllContents.toIterable) {
-					switch(content) {
-						XSwitchExpression: {
-							assertExpressionTypeIsResolved(content, resolvedTypes)
-							if (content.localVarName != null) {
-								assertIdentifiableTypeIsResolved(content, resolvedTypes)
-							}
-						}
-						XAbstractFeatureCall: {
-							assertExpressionTypeIsResolved(content, resolvedTypes)
-							if (content.implicitReceiver != null) {
-								assertExpressionTypeIsResolved(content.implicitReceiver, resolvedTypes)
-							}
-							if (content.implicitFirstArgument != null) {
-								assertExpressionTypeIsResolved(content.implicitFirstArgument, resolvedTypes)
-							}
-						}
-						XClosure: {
-							assertExpressionTypeIsResolved(content, resolvedTypes)
-							if (content.implicitParameter != null) {
-								assertIdentifiableTypeIsResolved(content.implicitParameter, resolvedTypes)
-							}
-						}
-						XExpression: {
-							assertExpressionTypeIsResolved(content, resolvedTypes)
-						}
-						XCasePart : { /* skip */}
-						JvmIdentifiableElement: {
-							assertIdentifiableTypeIsResolved(content, resolvedTypes)
-						}
-					}
-				}
-			}
-		} catch(Throwable t) {
-			t.printStackTrace
-			println(input)
-			throw new RuntimeException("Expression was: '" + input + '"', t)
-		}
-	}
-	
-	def void assertExpressionTypeIsResolved(XExpression expression, IResolvedTypes types) {
-		val internalTypes = types.invoke('delegate')
-		val type = switch(internalTypes) {
-			CompoundReentrantTypeResolver: {
-				val delegate = internalTypes.invoke("getDelegate", expression)
-				if (delegate instanceof RootResolvedTypes)
-					delegate.invoke("getTypeData", expression, Boolean::FALSE) as TypeData
-			} 
-			default: internalTypes.invoke("getTypeData", expression, Boolean::FALSE) as TypeData
-		}
-		assertNotNull("Type is not resolved. Expression: " + expression.toString, type)
-	}
-	
-	def void assertIdentifiableTypeIsResolved(JvmIdentifiableElement identifiable, IResolvedTypes types) {
-		if (identifiable.simpleName == null)
-			return;
-		val type = types.getActualType(identifiable)
-		assertNotNull(identifiable.toString, type)
-		assertNotNull(identifiable.toString + " / " + type, type.identifier)	
-	}
 }
 
 /**

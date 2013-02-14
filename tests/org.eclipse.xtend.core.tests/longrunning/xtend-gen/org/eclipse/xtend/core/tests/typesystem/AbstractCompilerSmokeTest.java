@@ -9,7 +9,7 @@ package org.eclipse.xtend.core.tests.typesystem;
 
 import com.google.inject.Inject;
 import org.eclipse.xtend.core.tests.compiler.CompilerTest;
-import org.eclipse.xtend.core.tests.typesystem.Oven;
+import org.eclipse.xtext.xbase.junit.typesystem.Oven;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.junit.Ignore;
 import org.junit.Test;

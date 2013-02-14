@@ -13,18 +13,10 @@ import java.util.List
 import org.antlr.runtime.ANTLRStringStream
 import org.antlr.runtime.CommonToken
 import org.antlr.runtime.Token
-import org.eclipse.xtext.common.types.JvmIdentifiableElement
 import org.eclipse.xtext.parser.antlr.Lexer
 import org.eclipse.xtext.resource.XtextResource
 import org.eclipse.xtext.util.ReplaceRegion
-import org.eclipse.xtext.xbase.XAbstractFeatureCall
-import org.eclipse.xtext.xbase.XCasePart
-import org.eclipse.xtext.xbase.XExpression
-import org.eclipse.xtext.xbase.XSwitchExpression
-import org.eclipse.xtext.xbase.lib.util.ReflectExtensions
-import org.eclipse.xtext.xbase.typesystem.IBatchTypeResolver
-import org.eclipse.xtext.xbase.typesystem.IResolvedTypes
-import org.eclipse.xtext.xbase.typesystem.internal.TypeData
+import org.eclipse.xtext.xbase.junit.typesystem.Oven
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference
 import org.junit.Ignore
 import org.junit.Test
@@ -34,8 +26,7 @@ import org.junit.Test
  */
 abstract class AbstractSmokeTest extends AbstractTypeResolverTest<LightweightTypeReference> {
 	
-	@Inject
-	IBatchTypeResolver typeResolver
+	@Inject extension Oven
 	
 	override resolvesTo(String expression, String type) {
 		expression.assertNonSmoking
@@ -50,55 +41,13 @@ abstract class AbstractSmokeTest extends AbstractTypeResolverTest<LightweightTyp
 		// don't process them twice
 	}
 	
+	/**
+	 * Processes the input and uses permutations of it to check for raised exceptions.
+	 */
 	def void assertNonSmoking(String input) throws Exception
 
 	def void processExpression(String expression) throws Exception {
-		try {
-			val xExpression = expression(expression.replace('$$', 'org::eclipse::xtext::xbase::lib::'), false /* true */);
-			val resolvedTypes = typeResolver.resolveTypes(xExpression)
-			assertNotNull(resolvedTypes)
-			if (xExpression != null) {
-				for(content: xExpression.eAllContents.toIterable) {
-					switch(content) {
-						XSwitchExpression: {
-							assertExpressionTypeIsResolved(content, resolvedTypes)
-							if (content.localVarName != null) {
-								assertIdentifiableTypeIsResolved(content, resolvedTypes)
-							}
-						}
-						XAbstractFeatureCall: {
-							assertExpressionTypeIsResolved(content, resolvedTypes)
-							if (content.implicitReceiver != null) {
-								assertExpressionTypeIsResolved(content.implicitReceiver, resolvedTypes)
-							}
-						}
-						XExpression: {
-							assertExpressionTypeIsResolved(content, resolvedTypes)
-						}
-						XCasePart : { /* skip */}
-						JvmIdentifiableElement: {
-							assertIdentifiableTypeIsResolved(content, resolvedTypes)
-						}
-					}
-				}
-			}
-		} catch(Throwable t) {
-			throw new RuntimeException("Expression was: '" + expression + '"', t)
-		}
-	}
-	
-	@Inject extension ReflectExtensions
-	
-	def void assertExpressionTypeIsResolved(XExpression expression, IResolvedTypes types) {
-		val internalTypes = types.invoke('delegate')
-		val type = internalTypes.invoke("getTypeData", expression, Boolean::FALSE) as TypeData
-		assertNotNull("Type is not resolved. Expression: " + expression.toString, type)
-	}
-	
-	def void assertIdentifiableTypeIsResolved(JvmIdentifiableElement identifiable, IResolvedTypes types) {
-		val type = types.getActualType(identifiable)
-		assertNotNull(identifiable.toString, type)
-		assertNotNull(identifiable.toString + " / " + type, type.identifier)	
+		expression.fireproof
 	}
 	
 	// some re-enabled tests - those don't fulfil the expectation
