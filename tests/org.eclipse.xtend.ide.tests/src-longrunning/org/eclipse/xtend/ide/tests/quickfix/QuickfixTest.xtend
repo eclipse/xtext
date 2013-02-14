@@ -20,8 +20,55 @@ class QuickfixTest extends AbstractXtendUITestCase {
 	override tearDown() {
 		builder.tearDown
 	}
-	
-	
+
+	@Test 
+	def void fixPackageName_0() {
+		create('test/Foo.xtend', '''
+			|class Foo {
+			}
+		''')
+		.assertIssueCodes(WRONG_PACKAGE)
+		.assertResolutionLabels("Change package declaration to 'test'")
+		.assertModelAfterQuickfix('''
+			package test class Foo {
+			}
+		''')
+	}
+		
+	@Test 
+	def void fixPackageName_1() {
+		create('test/Foo.xtend', '''
+			package bar|
+			
+			class Foo {
+			}
+		''')
+		.assertIssueCodes(WRONG_PACKAGE)
+		.assertResolutionLabels("Change package declaration to 'test'")
+		.assertModelAfterQuickfix('''
+			package test
+			
+			class Foo {
+			}
+		''')
+	}
+		
+	@Test 
+	def void fixPackageName_2() {
+		create('Foo.xtend', '''
+			package bar|
+			
+			class Foo {
+			}
+		''')
+		.assertIssueCodes(WRONG_PACKAGE)
+		.assertResolutionLabels("Change package declaration to ''")
+		.assertModelAfterQuickfix('''
+			class Foo {
+			}
+		''')
+	}
+		
 	@Test 
 	def void missingMember() {
 		create('Foo.xtend', '''
