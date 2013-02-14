@@ -648,6 +648,75 @@ public class ErrorTest extends AbstractXtendTestCase {
     Assert.assertNotNull(_actualType);
   }
   
+  @Test
+  public void testErrorModel_21() throws Exception {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("package x class Z {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def generate(java.util.List<String> d, String fsa) {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("d.iter(e | e.generate(fsa))");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def void generate(String e, String fsa) {}");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def <T,R> iter(java.util.List<T> list, (T)=>void proc) {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("for(element  list) { proc.apply(element); }");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    this.processWithoutException(_builder);
+  }
+  
+  @Test
+  public void testErrorModel_22() throws Exception {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("package generics class Bar {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def <T extends (Object)=>T> T bar( t) {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("bar(t).apply(bar(t))");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    this.processWithoutException(_builder);
+  }
+  
+  @Test
+  public void testErrorModel_23() throws Exception {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("package generics class Bar {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def <T extends (Object)=>T> T bar() {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("bar(t).apply(bar(t))");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    this.processWithoutException(_builder);
+  }
+  
   public XtendFile processWithoutException(final CharSequence input) throws Exception {
     XtextResourceSet _resourceSet = this.getResourceSet();
     URI _createURI = URI.createURI("abcdefg.xtend");
