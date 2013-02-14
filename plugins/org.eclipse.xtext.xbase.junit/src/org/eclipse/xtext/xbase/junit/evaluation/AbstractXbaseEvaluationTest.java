@@ -619,6 +619,14 @@ public abstract class AbstractXbaseEvaluationTest extends Assert {
 		assertEvaluatesTo(null,"null as String ?: null as String");
 	}
 	
+	@Test public void testElvisOperator_04() throws Exception {
+		assertEvaluatesTo("foo","{var foo='foo'\nval x=foo?:{foo='bar' foo}\nfoo}");
+	}
+	
+	@Test public void testElvisOperator_05() throws Exception {
+		assertEvaluatesTo("bar","{var foo=null val x=foo?:foo='bar' foo}");
+	}
+	
 	@Test public void testStringConcatenation_00() throws Exception {
 		assertEvaluatesTo("foobar", "'foo'+ ('bar' as Object)");
 	}
