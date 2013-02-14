@@ -141,10 +141,16 @@ public class XExpressionHelper {
 		return "||";
 	}
 
-	public boolean isShortCircuiteBooleanOperation(XAbstractFeatureCall featureCall) {
+	public String getElvisOperator() {
+		return "?:";
+	}
+
+	public boolean isShortCircuitOperation(XAbstractFeatureCall featureCall) {
 		if (featureCall instanceof XBinaryOperation) {
 			XExpression leftOperand = ((XBinaryOperation) featureCall).getLeftOperand();
 			final String op = featureCall.getConcreteSyntaxFeatureName();
+			if(getElvisOperator().equals(op))
+				return true;
 			if (getAndOperator().equals(op) || getOrOperator().equals(op)) {
 				JvmTypeReference booleanType = typeReferences.getTypeForName(Boolean.TYPE, leftOperand);
 				JvmTypeReference leftOperandType = typeProvider.getType(leftOperand);

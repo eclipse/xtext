@@ -790,7 +790,7 @@ public class XbaseInterpreter implements IExpressionInterpreter {
 	}
 
 	protected Object _doEvaluate(XAbstractFeatureCall featureCall, IEvaluationContext context, CancelIndicator indicator) {
-		if (expressionHelper.isShortCircuiteBooleanOperation(featureCall)) {
+		if (expressionHelper.isShortCircuitOperation(featureCall)) {
 			XExpression leftOperand = ((XBinaryOperation)featureCall).getLeftOperand();
 			Object result = internalEvaluate(leftOperand, context, indicator);
 			final boolean isAND = featureCall.getConcreteSyntaxFeatureName().equals(expressionHelper.getAndOperator());
