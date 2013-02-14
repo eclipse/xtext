@@ -7,6 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.validation;
 
+import static com.google.common.collect.Iterables.*;
 import static com.google.common.collect.Lists.*;
 import static org.eclipse.xtext.xbase.XbasePackage.*;
 import static org.eclipse.xtext.xbase.validation.IssueCodes.*;
@@ -37,6 +38,7 @@ import org.eclipse.xtext.TerminalRule;
 import org.eclipse.xtext.common.types.JvmConstructor;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmExecutable;
+import org.eclipse.xtext.common.types.JvmFeature;
 import org.eclipse.xtext.common.types.JvmField;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmGenericType;
@@ -1110,6 +1112,7 @@ public class XbaseJavaValidator extends AbstractXbaseJavaValidator {
 	public void checkImports(XImportSection importSection) {
 		final Map<JvmType, XImportDeclaration> imports = Maps.newHashMap();
 		final Map<JvmType, XImportDeclaration> staticImports = Maps.newHashMap();
+		final Map<JvmType, XImportDeclaration> extensionImports = Maps.newHashMap();
 		final Map<String, JvmType> importedNames = Maps.newHashMap();
 		
 		for (XImportDeclaration imp : importSection.getImportDeclarations()) {
@@ -1118,7 +1121,9 @@ public class XbaseJavaValidator extends AbstractXbaseJavaValidator {
 			} else {
 				JvmType importedType = imp.getImportedType();
 				if (importedType != null && !importedType.eIsProxy()) {
-					Map<JvmType, XImportDeclaration> map = imp.isStatic() ? staticImports : imports;
+					Map<JvmType, XImportDeclaration> map = imp.isStatic() 
+							? (imp.isExtension() ? extensionImports : staticImports) 
+						    : imports;
 					if (map.containsKey(importedType)) {
 						addIssue(imp, IssueCodes.IMPORT_DUPLICATE, "Duplicate import of '" + importedType.getSimpleName() + "'.");
 					} else {
@@ -1167,9 +1172,8 @@ public class XbaseJavaValidator extends AbstractXbaseJavaValidator {
 					if (n.getGrammarElement() instanceof CrossReference) {
 						EClassifier classifier = ((CrossReference) n.getGrammarElement()).getType().getClassifier();
 						if (classifier instanceof EClass
-								&& (TypesPackage.Literals.JVM_TYPE.isSuperTypeOf((EClass) classifier) 
-										|| TypesPackage.Literals.JVM_CONSTRUCTOR
-										.isSuperTypeOf((EClass) classifier))) {
+							 && (TypesPackage.Literals.JVM_TYPE.isSuperTypeOf((EClass) classifier) 
+									|| TypesPackage.Literals.JVM_CONSTRUCTOR.isSuperTypeOf((EClass) classifier))) {
 							// Filter out HiddenLeafNodes to avoid confusion by comments etc.
 							StringBuilder builder = new StringBuilder();
 							for(ILeafNode leafNode : n.getLeafNodes()){
@@ -1194,7 +1198,7 @@ public class XbaseJavaValidator extends AbstractXbaseJavaValidator {
 								}
 							}
 						}
-					} else if( n.getGrammarElement() instanceof TerminalRule && ((TerminalRule) n.getGrammarElement()).getName().equals("ML_COMMENT")){
+					} else if (n.getGrammarElement() instanceof TerminalRule && ((TerminalRule) n.getGrammarElement()).getName().equals("ML_COMMENT")){
 						List<ReplaceRegion> typeRefRegions = javaDocTypeReferenceProvider.computeTypeRefRegions(n);
 						for(ReplaceRegion replaceRegion : typeRefRegions){
 							String simpleName = replaceRegion.getText();
@@ -1202,12 +1206,31 @@ public class XbaseJavaValidator extends AbstractXbaseJavaValidator {
 								imports.remove(importedNames.remove(simpleName));
 							}
 						}
+					} else if (n.getSemanticElement() instanceof XAbstractFeatureCall) {
+						XAbstractFeatureCall featureCall = (XAbstractFeatureCall) n.getSemanticElement();
+						if(featureCall.isStatic()
+								&& (featureCall.getFeature() instanceof JvmField ||
+									featureCall.getFeature() instanceof JvmOperation)) {
+							JvmFeature feature = (JvmFeature) featureCall.getFeature();
+							if(feature.getDeclaringType() != null) {
+								JvmIdentifiableElement logicalContainer = logicalContainerProvider.getNearestLogicalContainer(feature);
+								JvmDeclaredType featureCallOwner = EcoreUtil2.getContainerOfType(logicalContainer, JvmDeclaredType.class);
+								if(featureCallOwner != feature.getDeclaringType()) {
+									if(featureCall.isExtension()) {
+										extensionImports.remove(feature.getDeclaringType());
+									} else {
+										staticImports.remove(feature.getDeclaringType());
+									}
+								}
+							}
+						}
 					}
 				}
 			}
 		}
 		if(!isIgnored(IMPORT_UNUSED)) {
-			for (XImportDeclaration imp : imports.values()) {
+			Iterable<XImportDeclaration> obsoleteImports = concat(imports.values(), staticImports.values(), extensionImports.values());
+			for (XImportDeclaration imp : obsoleteImports) {
 				addIssue(imp, IMPORT_UNUSED, "The import '" + imp.getImportedTypeName() + "' is never used.");
 			}
 		}
