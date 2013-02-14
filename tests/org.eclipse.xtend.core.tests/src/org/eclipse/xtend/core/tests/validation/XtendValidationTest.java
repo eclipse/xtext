@@ -996,6 +996,26 @@ public class XtendValidationTest extends AbstractXtendTestCase {
 		helper.assertNoIssues(clazz.eContainer());
 	}
 
+	@Test public void testStaticImportUnused_0() throws Exception {
+		XtendClass clazz = clazz("import static java.util.Collections.* class X {}");
+		helper.assertWarning(clazz.eContainer(), XIMPORT_DECLARATION, IMPORT_UNUSED);
+	}
+
+	@Test public void testStaticImportUnused_1() throws Exception {
+		XtendClass clazz = clazz("import static java.util.Collections.* class X { var x = singleton('') }");
+		helper.assertNoIssues(clazz.eContainer(), XIMPORT_DECLARATION);
+	}
+
+	@Test public void testStaticExtensionImportUnused_0() throws Exception {
+		XtendClass clazz = clazz("import static extension java.util.Collections.* class X {}");
+		helper.assertWarning(clazz.eContainer(), XIMPORT_DECLARATION, IMPORT_UNUSED);
+	}
+
+	@Test public void testStaticExtensionImportUnused_1() throws Exception {
+		XtendClass clazz = clazz("import static extension java.util.Collections.* class X { var x = singleton }");
+		helper.assertNoIssues(clazz.eContainer(), XIMPORT_DECLARATION);
+	}
+
 	@Test public void testImportDuplicate() throws Exception {
 		XtendClass clazz = clazz("import java.util.List import java.util.List class X { private List sb def foo(){sb}}");
 		helper.assertWarning(clazz.eContainer(), XIMPORT_DECLARATION, IMPORT_DUPLICATE);
