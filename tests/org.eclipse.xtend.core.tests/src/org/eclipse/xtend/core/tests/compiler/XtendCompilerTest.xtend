@@ -14,7 +14,6 @@ import org.eclipse.xtext.xbase.compiler.DisableCodeGenerationAdapter
 import org.eclipse.xtext.xbase.compiler.GeneratorConfig
 import org.eclipse.xtext.xbase.compiler.IGeneratorConfigProvider
 import org.eclipse.xtext.xbase.compiler.JvmModelGenerator
-import org.junit.Ignore
 import org.junit.Test
 
 class XtendCompilerTest extends AbstractXtendTestCase {
@@ -692,7 +691,6 @@ class XtendCompilerTest extends AbstractXtendTestCase {
 		''')
 	}
 	
-	// TODO elvis should evaluate the right side lazy
 	@Test def void testAbstractIterator_03() {
 		assertCompilesTo('''
 			import java.util.Iterator
@@ -742,7 +740,6 @@ class XtendCompilerTest extends AbstractXtendTestCase {
 		''')
 	}
 	
-	// TODO elvis should evaluate the right side lazy
 	@Test
 	def testAbstractIterator_04() { 
 		assertCompilesTo(
