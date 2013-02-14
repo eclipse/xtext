@@ -8,6 +8,7 @@
 package org.eclipse.xtext.xbase.imports;
 
 import static com.google.common.collect.Iterables.*;
+import static org.eclipse.xtext.common.types.TypesPackage.Literals.*;
 
 import java.util.List;
 import java.util.Set;
@@ -23,16 +24,15 @@ import org.eclipse.xtext.common.types.JvmMember;
 import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmParameterizedTypeReference;
 import org.eclipse.xtext.common.types.JvmType;
-import org.eclipse.xtext.common.types.JvmTypeConstraint;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.JvmWildcardTypeReference;
 import org.eclipse.xtext.common.types.TypesFactory;
-import org.eclipse.xtext.common.types.TypesPackage;
 import org.eclipse.xtext.common.types.util.SuperTypeCollector;
 import org.eclipse.xtext.common.types.util.TypeReferences;
 import org.eclipse.xtext.documentation.IEObjectDocumentationProvider;
 import org.eclipse.xtext.documentation.IEObjectDocumentationProviderExtension;
 import org.eclipse.xtext.documentation.IJavaDocTypeReferenceProvider;
+import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 import org.eclipse.xtext.parser.IParseResult;
@@ -138,22 +138,7 @@ public class TypeUsageCollector {
 			} else if (next instanceof XFeatureCall) {
 				final XFeatureCall featureCall = (XFeatureCall) next;
 				if (featureCall.getDeclaringType() == null) {
-					final JvmIdentifiableElement member = featureCall.getFeature();
-					if (member instanceof JvmOperation) {
-						JvmOperation operation = (JvmOperation) member;
-						if (operation.isStatic()) {
-							if (!operation.isVarArgs() && operation.getParameters().size() > featureCall.getExplicitArguments().size()) {
-								acceptStaticExtensionImport(operation);
-							} else {
-								acceptStaticImport(operation);
-							}
-						}
-					}
-					if (member instanceof JvmField) {
-						if (((JvmField) member).isStatic()) {
-							acceptStaticImport((JvmMember) member);
-						}
-					}
+					collectStaticImportsFrom(featureCall);
 				} else {
 					acceptPreferredType(featureCall, XbasePackage.Literals.XFEATURE_CALL__DECLARING_TYPE);
 				}
@@ -161,16 +146,7 @@ public class TypeUsageCollector {
 					|| next instanceof XBinaryOperation 
 					|| next instanceof XUnaryOperation
 					|| (next instanceof XAssignment && !contains(currentThisType.getAllFeatures(), ((XAssignment) next).getFeature()))) {
-				final XAbstractFeatureCall featureCall = (XAbstractFeatureCall) next;
-				final JvmIdentifiableElement member = featureCall.getFeature();
-				if (member instanceof JvmOperation) {
-					if (((JvmOperation) member).isStatic())
-						acceptStaticExtensionImport((JvmMember) member);
-				}
-				if (member instanceof JvmField) {
-					if (((JvmField) member).isStatic())
-						acceptStaticExtensionImport((JvmMember) member);
-				}
+				collectStaticImportsFrom((XAbstractFeatureCall) next);
 			} else {
 				Set<EObject> elements = associations.getJvmElements(next);
 				if (!elements.isEmpty()) {
@@ -184,6 +160,17 @@ public class TypeUsageCollector {
 					}
 				} 
 				addJavaDocReferences(next);
+			}
+		}
+	}
+
+	private void collectStaticImportsFrom(final XAbstractFeatureCall featureCall) {
+		JvmIdentifiableElement feature = featureCall.getFeature();
+		if((feature instanceof JvmOperation || feature instanceof JvmField) && featureCall.isStatic()) {
+			if (featureCall.isExtension()) {
+				acceptStaticExtensionImport((JvmMember) feature);
+			} else {
+				acceptStaticImport((JvmMember) feature);
 			}
 		}
 	}
@@ -204,29 +191,19 @@ public class TypeUsageCollector {
 	}
 	
 	protected void acceptType(JvmTypeReference ref) {
-		if (ref instanceof XFunctionTypeRef)
+		if (ref instanceof XFunctionTypeRef 
+		 || ref instanceof JvmWildcardTypeReference
+		 || (ref.eContainer() instanceof XFunctionTypeRef 
+				 && ref.eContainmentFeature() == JVM_SPECIALIZED_TYPE_REFERENCE__EQUIVALENT)
+		 || NodeModelUtils.findActualNodeFor(ref) == null) 
 			return;
-		if (ref.eContainer() instanceof XFunctionTypeRef && ref.eContainmentFeature() == TypesPackage.Literals.JVM_SPECIALIZED_TYPE_REFERENCE__EQUIVALENT)
-			return;
-		if (ref instanceof JvmWildcardTypeReference) {
-			List<JvmTypeConstraint> constraints = ((JvmWildcardTypeReference) ref).getConstraints();
-			for (JvmTypeConstraint jvmTypeConstraint : constraints) {
-				acceptType(jvmTypeConstraint.getTypeReference());
-			}
-		} else {
+		else 
 			acceptPreferredType(ref);
-			if (ref instanceof JvmParameterizedTypeReference) {
-				List<JvmTypeReference> list = ((JvmParameterizedTypeReference) ref).getArguments();
-				for (JvmTypeReference jvmTypeReference : list) {
-					acceptType(jvmTypeReference);
-				}
-			}
-		}
 	}
 	
 	protected void acceptPreferredType(JvmTypeReference ref) {
 		if (ref instanceof JvmParameterizedTypeReference) {
-			acceptPreferredType(ref, TypesPackage.Literals.JVM_PARAMETERIZED_TYPE_REFERENCE__TYPE);
+			acceptPreferredType(ref, JVM_PARAMETERIZED_TYPE_REFERENCE__TYPE);
 		} else {
 			acceptType(ref.getType(), ref.getIdentifier(), locationInFileProvider.getSignificantTextRegion(ref));
 		}
