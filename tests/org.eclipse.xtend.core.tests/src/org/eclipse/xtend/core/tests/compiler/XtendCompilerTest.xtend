@@ -718,6 +718,7 @@ class XtendCompilerTest extends AbstractXtendTestCase {
 			    final AbstractIterator<T> _function = new AbstractIterator<T>() {
 			        @Override
 			        protected T computeNext() {
+			          T _elvis = null;
 			          final Function1<T,Boolean> _function = new Function1<T,Boolean>() {
 			              public Boolean apply(final T it) {
 			                boolean _notEquals = ObjectExtensions.operator_notEquals(it, null);
@@ -725,8 +726,12 @@ class XtendCompilerTest extends AbstractXtendTestCase {
 			              }
 			            };
 			          T _findFirst = IteratorExtensions.<T>findFirst(iter, _function);
-			          T _endOfData = this.endOfData();
-			          T _elvis = ObjectExtensions.<T>operator_elvis(_findFirst, _endOfData);
+			          if (_findFirst != null) {
+			            _elvis = _findFirst;
+			          } else {
+			            T _endOfData = this.endOfData();
+			            _elvis = ObjectExtensions.<T>operator_elvis(_findFirst, _endOfData);
+			          }
 			          return _elvis;
 			        }
 			      };
@@ -766,6 +771,7 @@ class XtendCompilerTest extends AbstractXtendTestCase {
 				    final AbstractIterator<T> _function = new AbstractIterator<T>() {
 				        @Override
 				        protected T computeNext() {
+				          T _elvis = null;
 				          final Function1<T,Boolean> _function = new Function1<T,Boolean>() {
 				              public Boolean apply(final T it) {
 				                boolean _notEquals = ObjectExtensions.operator_notEquals(it, null);
@@ -773,8 +779,12 @@ class XtendCompilerTest extends AbstractXtendTestCase {
 				              }
 				            };
 				          T _findFirst = IteratorExtensions.<T>findFirst(it, _function);
-				          T _endOfData = this.endOfData();
-				          T _elvis = ObjectExtensions.<T>operator_elvis(_findFirst, _endOfData);
+				          if (_findFirst != null) {
+				            _elvis = _findFirst;
+				          } else {
+				            T _endOfData = this.endOfData();
+				            _elvis = ObjectExtensions.<T>operator_elvis(_findFirst, _endOfData);
+				          }
 				          return _elvis;
 				        }
 				      };
