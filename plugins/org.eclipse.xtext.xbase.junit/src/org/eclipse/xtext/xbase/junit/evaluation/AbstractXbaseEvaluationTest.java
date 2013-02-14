@@ -620,11 +620,11 @@ public abstract class AbstractXbaseEvaluationTest extends Assert {
 	}
 	
 	@Test public void testElvisOperator_04() throws Exception {
-		assertEvaluatesTo("foo","{var foo='foo'\nval x=foo?:{foo='bar' foo}\nfoo}");
+		assertEvaluatesTo("foo","{var foo='foo' val x=foo?:{foo='bar' foo} foo}");
 	}
 	
 	@Test public void testElvisOperator_05() throws Exception {
-		assertEvaluatesTo("bar","{var foo=null val x=foo?:foo='bar' foo}");
+		assertEvaluatesTo("bar","{var String foo=null val x=foo?:{foo='bar' foo} foo}");
 	}
 	
 	@Test public void testStringConcatenation_00() throws Exception {
