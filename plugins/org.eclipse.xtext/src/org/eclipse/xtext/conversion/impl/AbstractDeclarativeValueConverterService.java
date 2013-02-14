@@ -11,12 +11,12 @@ package org.eclipse.xtext.conversion.impl;
 import static org.eclipse.xtext.GrammarUtil.*;
 
 import java.lang.reflect.Method;
-import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 
 import org.apache.log4j.Logger;
 import org.eclipse.emf.ecore.EDataType;
+import org.eclipse.emf.ecore.EFactory;
 import org.eclipse.xtext.AbstractRule;
 import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.GrammarUtil;
@@ -24,14 +24,23 @@ import org.eclipse.xtext.IGrammarAccess;
 import org.eclipse.xtext.ParserRule;
 import org.eclipse.xtext.TerminalRule;
 import org.eclipse.xtext.conversion.IValueConverter;
+import org.eclipse.xtext.conversion.IValueConverterService;
 import org.eclipse.xtext.conversion.ValueConverter;
 import org.eclipse.xtext.conversion.ValueConverterException;
 import org.eclipse.xtext.nodemodel.INode;
 
+import com.google.common.collect.ImmutableMap;
+import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
 import com.google.inject.Inject;
 
 /**
+ * Abstract base implementation for the {@link IValueConverterService}.
+ * 
+ * All methods that are annotated with {@link ValueConverter @ValueConverter} are
+ * used to collect the strategies for this language. Furthermore, the {@link EFactory EMF factories}
+ * are inspected to create converters for data types that have not yet been mapped.
+ * 
  * @author Sven Efftinge - Initial contribution and API
  */
 public abstract class AbstractDeclarativeValueConverterService extends AbstractValueConverterService {
@@ -73,14 +82,24 @@ public abstract class AbstractDeclarativeValueConverterService extends AbstractV
 
 	protected Map<String, IValueConverter<Object>> getConverters() {
 		if (converters == null) {
-			converters = new HashMap<String, IValueConverter<Object>>();
-			internalRegisterForClass(getClass());
+			synchronized(this) {
+				if (converters == null) {
+					Map<String, IValueConverter<Object>> converters = Maps.newHashMap(); 
+					internalRegisterForClass(getClass(), converters);
+					this.converters = ImmutableMap.copyOf(converters);
+				}
+			}
 		}
 		return converters;
 	}
 
+	/**
+	 * @since 2.4
+	 * @nooverride This method is not intended to be re-implemented or extended by clients.
+	 * @noreference This method is not intended to be referenced by clients.
+	 */
 	@SuppressWarnings("unchecked")
-	protected void internalRegisterForClass(Class<?> clazz) {
+	protected void internalRegisterForClass(Class<?> clazz, Map<String, IValueConverter<Object>> converters) {
 		Method[] methods = clazz.getDeclaredMethods();
 		Set<String> thisConverters = Sets.newHashSet();
 		for (Method method : methods) {
@@ -114,9 +133,9 @@ public abstract class AbstractDeclarativeValueConverterService extends AbstractV
 			}
 		}
 		if (clazz.getSuperclass() != null) {
-			internalRegisterForClass(clazz.getSuperclass());
+			internalRegisterForClass(clazz.getSuperclass(), converters);
 		}
-		registerEFactoryConverters();
+		registerEFactoryConverters(converters);
 	}
 
 	protected boolean isConfigurationMethod(Method method) {
@@ -124,7 +143,12 @@ public abstract class AbstractDeclarativeValueConverterService extends AbstractV
 				&& IValueConverter.class.isAssignableFrom(method.getReturnType());
 	}
 
-	protected void registerEFactoryConverters() {
+	/**
+	 * @since 2.4
+	 * @nooverride This method is not intended to be re-implemented or extended by clients.
+	 * @noreference This method is not intended to be referenced by clients.
+	 */
+	protected void registerEFactoryConverters(Map<String, IValueConverter<Object>> converters) {
 		for (ParserRule parserRule : allParserRules(getGrammar())) {
 			if (isDatatypeRule(parserRule) && !converters.containsKey(parserRule.getName())) {
 				EDataType datatype = (EDataType) parserRule.getType().getClassifier();
