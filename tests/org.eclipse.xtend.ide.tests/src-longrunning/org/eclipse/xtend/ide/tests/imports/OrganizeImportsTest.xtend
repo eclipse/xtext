@@ -48,6 +48,49 @@ class OrganizeImportsTest extends AbstractXtendUITestCase {
 		''')
 	}
 	
+	@Test def testConstructorCallToEnum() {
+		'''
+			import java.lang.annotation.RetentionPolicy
+			class Foo {
+				Object bar = new RetentionPolicy
+			}
+		'''.assertIsOrganizedTo('''
+			import java.lang.annotation.RetentionPolicy
+			
+			class Foo {
+				Object bar = new RetentionPolicy
+			}
+		''')
+	}
+	
+	@Test def testFullyQualifiedConstructorCallToEnum() {
+		'''
+			class Foo {
+				Object bar = new java.lang.annotation.RetentionPolicy
+			}
+		'''.assertIsOrganizedTo('''
+			import java.lang.annotation.RetentionPolicy
+			
+			class Foo {
+				Object bar = new RetentionPolicy
+			}
+		''')
+	}
+	
+	@Test def testUnresolvedConstructorCallToEnum() {
+		'''
+			class Foo {
+				Object bar = new RetentionPolicy
+			}
+		'''.assertIsOrganizedTo('''
+			import java.lang.annotation.RetentionPolicy
+			
+			class Foo {
+				Object bar = new RetentionPolicy
+			}
+		''')
+	}
+	
 	// see https://bugs.eclipse.org/bugs/show_bug.cgi?id=398623
 	@Test def testWildcardType_0() {
 		'''
