@@ -12,6 +12,7 @@ import static com.google.common.collect.Iterables.*;
 import org.eclipse.xtext.common.types.JvmConstructor;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmEnumerationLiteral;
+import org.eclipse.xtext.common.types.JvmEnumerationType;
 import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmTypeReference;
@@ -51,11 +52,18 @@ public class JvmModelCompleter {
 		if(element instanceof JvmConstructor) {
 			completeJvmConstructor((JvmConstructor) element);
 		}
+		if (element instanceof JvmEnumerationType) {
+			completeJvmEnumerationType((JvmEnumerationType)element);
+		}
 		if (element instanceof JvmEnumerationLiteral) {
 			completeJvmEnumerationLiteral((JvmEnumerationLiteral)element);
 		}
 	}
 	
+	protected void completeJvmEnumerationType(JvmEnumerationType element) {
+		ensureSuperTypeObject(element);
+	}
+
 	protected void completeJvmEnumerationLiteral(JvmEnumerationLiteral element) {
 		if (element.getType() == null) {
 			element.setType(references.createTypeRef(element.getDeclaringType()));
@@ -75,13 +83,9 @@ public class JvmModelCompleter {
 	}
 	
 	protected void completeJvmGenericType(JvmGenericType element) {
+		// if no super type add Object
+		ensureSuperTypeObject(element);
 		if (!element.isInterface()) {
-			// if no super type add Object
-			if (element.getSuperTypes().isEmpty()) {
-				JvmTypeReference objectType = references.getTypeForName(Object.class, element);
-				if (objectType != null)
-					element.getSuperTypes().add(objectType);
-			}
 			// if no constructors have been added, add a default constructor
 			if (isEmpty(element.getDeclaredConstructors())) {
 				JvmConstructor constructor = TypesFactory.eINSTANCE.createJvmConstructor();
@@ -89,6 +93,14 @@ public class JvmModelCompleter {
 				constructor.setVisibility(JvmVisibility.PUBLIC);
 				element.getMembers().add(constructor);
 			}
+		}
+	}
+
+	protected void ensureSuperTypeObject(JvmDeclaredType element) {
+		if (element.getSuperTypes().isEmpty()) {
+			JvmTypeReference objectType = references.getTypeForName(Object.class, element);
+			if (objectType != null)
+				element.getSuperTypes().add(objectType);
 		}
 	}
 }
