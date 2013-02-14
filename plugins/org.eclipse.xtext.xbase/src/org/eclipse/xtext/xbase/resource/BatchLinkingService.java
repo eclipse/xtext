@@ -26,8 +26,6 @@ public class BatchLinkingService {
 	private IBatchTypeResolver batchTypeResolver;
 
 	public boolean isBatchLinkable(EReference reference) {
-		if (reference.isMany())
-			throw new IllegalArgumentException("Not yet implemented for #many references");
 		return batchScopeProvider.isBatchScopeable(reference);
 	}
 	
