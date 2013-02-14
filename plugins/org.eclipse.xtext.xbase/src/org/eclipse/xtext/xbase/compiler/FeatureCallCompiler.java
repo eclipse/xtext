@@ -64,7 +64,6 @@ import org.eclipse.xtext.xbase.impl.FeatureCallToJavaMapping;
 import org.eclipse.xtext.xbase.jvmmodel.ILogicalContainerProvider;
 import org.eclipse.xtext.xbase.typesystem.IBatchTypeResolver;
 import org.eclipse.xtext.xbase.typesystem.IResolvedTypes;
-import org.eclipse.xtext.xbase.typesystem.internal.ResolvedTypes;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 import org.eclipse.xtext.xbase.typing.JvmOnlyTypeConformanceComputer;
 import org.eclipse.xtext.xbase.typing.XbaseTypeArgumentContextProvider;
@@ -122,7 +121,7 @@ public class FeatureCallCompiler extends LiteralsCompiler {
 	}
 
 	protected void _toJavaStatement(final XAbstractFeatureCall expr, ITreeAppendable b, final boolean isReferenced) {
-		if (expressionHelper.isShortCircuiteBooleanOperation(expr)) {
+		if (expressionHelper.isShortCircuitOperation(expr)) {
 			generateShortCircuitInvocation(expr, b);
 		} else {
 			XExpression receiver = getActualReceiver(expr);
@@ -177,20 +176,29 @@ public class FeatureCallCompiler extends LiteralsCompiler {
 	}
 
 	protected void generateShortCircuitInvocation(final XAbstractFeatureCall binaryOperation, final ITreeAppendable b) {
-		XExpression leftOperand = ((XBinaryOperation) binaryOperation).getLeftOperand();
+		final XExpression leftOperand = ((XBinaryOperation) binaryOperation).getLeftOperand();
 		declareSyntheticVariable(binaryOperation, b);
+		boolean isElvis = binaryOperation.getConcreteSyntaxFeatureName().equals(expressionHelper.getElvisOperator());
 		prepareExpression(leftOperand, b);
-		b.newLine().append("if (");
-		if (binaryOperation.getConcreteSyntaxFeatureName().equals(expressionHelper.getAndOperator())) {
-			b.append("!");
+		if(isElvis) {
+			b.newLine().append("if (");
+			toJavaExpression(leftOperand, b);
+			b.append(" != null) {").increaseIndentation();
+			b.newLine().append(b.getName(binaryOperation)).append(" = ");
+			toJavaExpression(leftOperand, b);
+			b.append(";");
+		} else {
+			b.newLine().append("if (");
+			if (binaryOperation.getConcreteSyntaxFeatureName().equals(expressionHelper.getAndOperator())) {
+				b.append("!");
+			}
+			toJavaExpression(leftOperand, b);
+			b.append(") {").increaseIndentation();
+			boolean rightOperand = binaryOperation.getConcreteSyntaxFeatureName().equals(expressionHelper.getOrOperator());
+			b.newLine().append(b.getName(binaryOperation)).append(" = ");
+			b.append(Boolean.toString(rightOperand)).append(";");
 		}
-		toJavaExpression(leftOperand, b);
-		b.append(") {").increaseIndentation();
-		boolean rightOperand = binaryOperation.getConcreteSyntaxFeatureName().equals(expressionHelper.getOrOperator());
-		b.newLine().append(b.getName(binaryOperation)).append(" = ").append(Boolean.toString(rightOperand)).append(";");
-
 		b.decreaseIndentation().newLine().append("} else {").increaseIndentation();
-
 		if (binaryOperation.getImplicitReceiver() != null) {
 			internalToJavaStatement(binaryOperation.getImplicitReceiver(), b, true);
 		}
@@ -198,13 +206,12 @@ public class FeatureCallCompiler extends LiteralsCompiler {
 			if (arg != leftOperand)
 				prepareExpression(arg, b);
 		}
-
 		b.newLine().append(b.getName(binaryOperation)).append(" = ");
 		featureCalltoJavaExpression(binaryOperation, b, true);
 		b.append(";");
 		b.decreaseIndentation().newLine().append("}");
 	}
-
+	
 	@Override
 	protected boolean isVariableDeclarationRequired(XExpression expr, ITreeAppendable b) {
 		if (expr instanceof XAssignment)
