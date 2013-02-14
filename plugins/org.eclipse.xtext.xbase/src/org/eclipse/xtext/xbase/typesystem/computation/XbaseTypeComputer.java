@@ -13,7 +13,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.jdt.annotation.Nullable;
@@ -147,6 +146,12 @@ public class XbaseTypeComputer implements ITypeComputer {
 		if (typeReference == null)
 			throw new IllegalStateException("Cannot find type " + clazz.getCanonicalName());
 		return state.getConverter().toLightweightReference(typeReference);
+	}
+	
+	protected ParameterizedTypeReference getRawTypeForName(Class<?> clazz, ITypeReferenceOwner owner) {
+		JvmType clazzType = services.getTypeReferences().findDeclaredType(clazz, owner.getContextResourceSet());
+		ParameterizedTypeReference result = new ParameterizedTypeReference(owner, clazzType);
+		return result;
 	}
 	
 	protected LightweightTypeReference getPrimitiveVoid(ITypeComputationState state) {
@@ -596,7 +601,7 @@ public class XbaseTypeComputer implements ITypeComputer {
 			compoundResult.addComponent(iterableOrArray);
 			addAsArrayComponentAndIterable = parameterType.getWrapperTypeIfPrimitive();
 		} else if (parameterType.isAny()) {
-			addAsArrayComponentAndIterable = getObjectType(iterableType, parameterType.getOwner());
+			addAsArrayComponentAndIterable = getRawTypeForName(Object.class, parameterType.getOwner());
 		} else {
 			addAsArrayComponentAndIterable = parameterType;
 		}
@@ -687,19 +692,13 @@ public class XbaseTypeComputer implements ITypeComputer {
 				clazz = clazz.getWrapperTypeIfPrimitive();
 			}
 		}
-		ParameterizedTypeReference result = getObjectType(object, owner);
+		ParameterizedTypeReference result = getRawTypeForName(Class.class, owner);
 		result.addTypeArgument(clazz);
 		state.acceptActualType(result);
 	}
 
-	protected ParameterizedTypeReference getObjectType(EObject context, ITypeReferenceOwner owner) {
-		JvmType clazzType = services.getTypeReferences().findDeclaredType(Class.class, context);
-		ParameterizedTypeReference result = new ParameterizedTypeReference(owner, clazzType);
-		return result;
-	}
-	
 	protected void _computeTypes(XInstanceOfExpression object, ITypeComputationState state) {
-		ITypeComputationState expressionState = state.withExpectation(getObjectType(object, state.getReferenceOwner()));
+		ITypeComputationState expressionState = state.withExpectation(getRawTypeForName(Object.class, state.getReferenceOwner()));
 		expressionState.computeTypes(object.getExpression());
 		LightweightTypeReference bool = getTypeForName(Boolean.TYPE, state);
 		state.acceptActualType(bool);
