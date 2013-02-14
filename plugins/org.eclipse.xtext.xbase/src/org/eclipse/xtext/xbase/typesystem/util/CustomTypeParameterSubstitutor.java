@@ -51,6 +51,9 @@ public abstract class CustomTypeParameterSubstitutor extends TypeParameterSubsti
 						getTypeParameterMapping().put((JvmTypeParameter)type, new LightweightMergedBoundTypeArgument(mappedReference, VarianceInfo.INVARIANT));
 						return mappedReference;
 					} else {
+						LightweightMergedBoundTypeArgument candidate = getTypeParameterMapping().get(typeParameter);
+						if (candidate != null && candidate.getTypeReference() != null)
+							return candidate.getTypeReference();
 						LightweightTypeReference mappedReference = getDeclaredUpperBound(typeParameter, visiting);
 						if (mappedReference == null) {
 							mappedReference = getObjectReference(typeParameter);

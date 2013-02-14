@@ -32,7 +32,9 @@ import org.eclipse.xtext.xbase.typesystem.conformance.TypeConformanceResult;
 import org.eclipse.xtext.xbase.typesystem.references.ITypeReferenceOwner;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightBoundTypeArgument;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
+import org.eclipse.xtext.xbase.typesystem.references.ParameterizedTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.UnboundTypeReference;
+import org.eclipse.xtext.xbase.typesystem.util.BoundTypeArgumentSource;
 import org.eclipse.xtext.xbase.typesystem.util.VarianceInfo;
 
 import com.google.common.collect.Lists;
@@ -130,9 +132,18 @@ public class StackedResolvedTypes extends ResolvedTypes {
 		for(UnboundTypeReference unbound: basicGetTypeParameters().values()) {
 			LightweightTypeReference resolvedTo = unbound.getResolvedTo();
 			if (resolvedTo == null) {
-				LightweightTypeReference reference = unbound.copyInto(parent.getReferenceOwner());
-				if (reference instanceof UnboundTypeReference) {
-					parent.acceptUnboundTypeReference(unbound.getHandle(), (UnboundTypeReference) reference);
+				List<JvmTypeParameter> typeParameters = basicGetDeclardTypeParameters();
+				if (typeParameters != null && typeParameters.contains(unbound.getTypeParameter())) {
+					unbound.tryResolve();
+					if (!unbound.isResolved()) {
+						unbound.acceptHint(new ParameterizedTypeReference(unbound.getOwner(), unbound.getTypeParameter()), 
+								BoundTypeArgumentSource.RESOLVED, unbound, VarianceInfo.INVARIANT, VarianceInfo.INVARIANT);
+					}
+				} else {
+					LightweightTypeReference reference = unbound.copyInto(parent.getReferenceOwner());
+					if (reference instanceof UnboundTypeReference) {
+						parent.acceptUnboundTypeReference(unbound.getHandle(), (UnboundTypeReference) reference);
+					}
 				}
 			}
 		}
