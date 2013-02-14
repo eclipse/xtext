@@ -13,6 +13,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.jdt.annotation.Nullable;
@@ -594,6 +595,8 @@ public class XbaseTypeComputer implements ITypeComputer {
 			iterableOrArray = new ArrayTypeReference(owner, parameterType);
 			compoundResult.addComponent(iterableOrArray);
 			addAsArrayComponentAndIterable = parameterType.getWrapperTypeIfPrimitive();
+		} else if (parameterType.isAny()) {
+			addAsArrayComponentAndIterable = getObjectType(iterableType, parameterType.getOwner());
 		} else {
 			addAsArrayComponentAndIterable = parameterType;
 		}
@@ -640,6 +643,7 @@ public class XbaseTypeComputer implements ITypeComputer {
 				return reference.getComponentType();
 			}
 			@Override
+			@Nullable
 			protected LightweightTypeReference doVisitUnboundTypeReference(UnboundTypeReference reference) {
 				return null;
 			}
@@ -670,26 +674,32 @@ public class XbaseTypeComputer implements ITypeComputer {
 		if (type == null) {
 			return;
 		}
-		LightweightTypeReference clazz = new ParameterizedTypeReference(state.getReferenceOwner(), object.getType());
+		ITypeReferenceOwner owner = state.getReferenceOwner();
+		LightweightTypeReference clazz = new ParameterizedTypeReference(owner, object.getType());
 		for (int i = 0; i < object.getArrayDimensions().size(); i++) {
 			clazz = new ArrayTypeReference(clazz.getOwner(), clazz);
 		}
 		if (object.getArrayDimensions().isEmpty()) {
 			if (clazz.isPrimitiveVoid()) {
 				JvmType voidType = services.getTypeReferences().findDeclaredType(Void.class, object);
-				clazz = new ParameterizedTypeReference(state.getReferenceOwner(), voidType);
+				clazz = new ParameterizedTypeReference(owner, voidType);
 			} else {
 				clazz = clazz.getWrapperTypeIfPrimitive();
 			}
 		}
-		JvmType clazzType = services.getTypeReferences().findDeclaredType(Class.class, object);
-		ParameterizedTypeReference result = new ParameterizedTypeReference(state.getReferenceOwner(), clazzType);
+		ParameterizedTypeReference result = getObjectType(object, owner);
 		result.addTypeArgument(clazz);
 		state.acceptActualType(result);
 	}
+
+	protected ParameterizedTypeReference getObjectType(EObject context, ITypeReferenceOwner owner) {
+		JvmType clazzType = services.getTypeReferences().findDeclaredType(Class.class, context);
+		ParameterizedTypeReference result = new ParameterizedTypeReference(owner, clazzType);
+		return result;
+	}
 	
 	protected void _computeTypes(XInstanceOfExpression object, ITypeComputationState state) {
-		ITypeComputationState expressionState = state.withExpectation(getTypeForName(Object.class, state));
+		ITypeComputationState expressionState = state.withExpectation(getObjectType(object, state.getReferenceOwner()));
 		expressionState.computeTypes(object.getExpression());
 		LightweightTypeReference bool = getTypeForName(Boolean.TYPE, state);
 		state.acceptActualType(bool);
