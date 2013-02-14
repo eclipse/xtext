@@ -37,7 +37,6 @@ import org.eclipse.xtext.common.types.access.impl.ClassFinder;
 import org.eclipse.xtext.common.types.util.JavaReflectAccess;
 import org.eclipse.xtext.common.types.util.Primitives;
 import org.eclipse.xtext.common.types.util.Primitives.Primitive;
-import org.eclipse.xtext.common.types.util.TypeReferences;
 import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
@@ -80,10 +79,11 @@ import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Functions;
 import org.eclipse.xtext.xbase.lib.Procedures;
 import org.eclipse.xtext.xbase.typesystem.IBatchTypeResolver;
-import org.eclipse.xtext.xbase.typesystem.IResolvedTypes;
+import org.eclipse.xtext.xbase.typesystem.computation.NumberLiterals;
+import org.eclipse.xtext.xbase.typesystem.legacy.StandardTypeReferenceOwner;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
-import org.eclipse.xtext.xbase.typing.ITypeProvider;
-import org.eclipse.xtext.xbase.typing.NumberLiterals;
+import org.eclipse.xtext.xbase.typesystem.references.OwnedConverter;
+import org.eclipse.xtext.xbase.typesystem.util.CommonTypeComputationServices;
 import org.eclipse.xtext.xbase.util.XExpressionHelper;
 
 import com.google.common.base.Function;
@@ -135,6 +135,9 @@ public class XbaseInterpreter implements IExpressionInterpreter {
 	}
 
 	@Inject
+	private CommonTypeComputationServices services;
+	
+	@Inject
 	private IdentifiableSimpleNameProvider featureNameProvider;
 
 	public void setFeatureNameProvider(IdentifiableSimpleNameProvider featureNameProvider) {
@@ -146,15 +149,6 @@ public class XbaseInterpreter implements IExpressionInterpreter {
 
 	@Inject
 	private JavaReflectAccess javaReflectAccess;
-	
-	@Inject
-	private ITypeProvider typeProvider;
-	
-	@Inject
-	private TypeReferences typeRefs;
-	
-	@Inject
-	private Primitives primitives;
 	
 	@Inject
 	private XExpressionHelper expressionHelper;
@@ -209,8 +203,9 @@ public class XbaseInterpreter implements IExpressionInterpreter {
 		if (indicator.isCanceled())
 			throw new InterpreterCanceledException();
 		Object result = doEvaluate(expression, context, indicator);
-		final JvmTypeReference expectedType = typeProvider.getExpectedType(expression);
-		result = wrapOrUnwrapArray(result, expectedType);
+		final LightweightTypeReference expectedType = typeResolver.resolveTypes(expression).getExpectedType(expression);
+		if(expectedType != null)
+			result = wrapOrUnwrapArray(result, expectedType);
 		return result;
 	}
 	
@@ -291,8 +286,8 @@ public class XbaseInterpreter implements IExpressionInterpreter {
 	 * @param indicator unused in this context but required for dispatching
 	 */
 	protected Object _doEvaluate(XStringLiteral literal, IEvaluationContext context, CancelIndicator indicator) {
-		JvmTypeReference type = this.typeProvider.getType(literal);
-		if (typeRefs.is(type, Character.TYPE) || typeRefs.is(type, Character.class)) {
+		LightweightTypeReference type = typeResolver.resolveTypes(literal).getActualType(literal);
+		if (type.isType(Character.TYPE) || type.isType(Character.class)) {
 			return literal.getValue().charAt(0);
 		}
 		return literal.getValue();
@@ -464,14 +459,16 @@ public class XbaseInterpreter implements IExpressionInterpreter {
 
 	protected Object _doEvaluate(XCastedExpression castedExpression, IEvaluationContext context, CancelIndicator indicator) {
 		Object result = internalEvaluate(castedExpression.getTarget(), context, indicator);
-		result = wrapOrUnwrapArray(result, castedExpression.getType());
+		StandardTypeReferenceOwner owner = new StandardTypeReferenceOwner(services, castedExpression);
+		LightweightTypeReference targetType = new OwnedConverter(owner).toLightweightReference(castedExpression.getType());
+		result = wrapOrUnwrapArray(result, targetType);
 		result = coerceArgumentType(result, castedExpression.getType());
 		JvmType castType = castedExpression.getType().getType();
 		if (castType instanceof JvmPrimitiveType) {
 			if (result == null) {
 				throwNullPointerException(castedExpression, "Cannot cast null to primitive " + castType.getIdentifier());
 			}
-			return castToPrimitiveType(result, primitives.primitiveKind((JvmPrimitiveType) castType));
+			return castToPrimitiveType(result, services.getPrimitives().primitiveKind((JvmPrimitiveType) castType));
 		} else {
 			String typeName = castType.getQualifiedName();
 			Class<?> expectedType = null;
@@ -616,12 +613,12 @@ public class XbaseInterpreter implements IExpressionInterpreter {
 				+ " but got: " + result.getClass().getCanonicalName()));
 	}
 
-	protected Object wrapOrUnwrapArray(Object result, JvmTypeReference expectedType) {
-		if (typeRefs.isInstanceOf(expectedType, Iterable.class)) {
-			return Conversions.doWrapArray(result);
-		} else if (typeRefs.isArray(expectedType)) {
+	protected Object wrapOrUnwrapArray(Object result, LightweightTypeReference expectedType) {
+		if (expectedType.isArray()) {
 			Class<?> arrayType = getJavaReflectAccess().getRawType(expectedType.getType());
 			return Conversions.unwrapArray(result, arrayType.getComponentType());
+		} else if (expectedType.isSubtypeOf(Iterable.class)) {
+			return Conversions.doWrapArray(result);
 		}
 		return result;
 	}
@@ -706,18 +703,18 @@ public class XbaseInterpreter implements IExpressionInterpreter {
 			XExpression receiver = getActualReceiver(featureCall); //, featureCall.getFeature(), featureCall.getImplicitReceiver());
 			Object receiverObj = receiver==null?null:internalEvaluate(receiver, context, indicator);
 			if (featureCall.isNullSafe() && receiverObj==null) {
-				return getDefaultObjectValue(typeProvider.getType(featureCall));
+				return getDefaultObjectValue(typeResolver.resolveTypes(featureCall).getActualType(featureCall));
 			}
 			return invokeFeature(featureCall.getFeature(), featureCall, receiverObj, context, indicator);
 		}
 	}
 
-	protected Object getDefaultObjectValue(JvmTypeReference type) {
-		if(!primitives.isPrimitive(type))
+	protected Object getDefaultObjectValue(LightweightTypeReference type) {
+		if(!type.isPrimitive())
 			return null;
 		else {
 			JvmPrimitiveType primitive = (JvmPrimitiveType) type.getType();
-			switch (primitives.primitiveKind(primitive)) {
+			switch (services.getPrimitives().primitiveKind(primitive)) {
 				case Byte :
 					return Byte.valueOf((byte)0);
 				case Short :
@@ -762,8 +759,8 @@ public class XbaseInterpreter implements IExpressionInterpreter {
 		if (variableDecl.getRight()!=null) {
 			initialValue = internalEvaluate(variableDecl.getRight(), context, indicator);
 		} else {
-			if (primitives.isPrimitive(variableDecl.getType())) {
-				Primitive primitiveKind = primitives.primitiveKind((JvmPrimitiveType) variableDecl.getType().getType());
+			if (services.getPrimitives().isPrimitive(variableDecl.getType())) {
+				Primitive primitiveKind = services.getPrimitives().primitiveKind((JvmPrimitiveType) variableDecl.getType().getType());
 				switch(primitiveKind) {
 					case Boolean:
 						initialValue = Boolean.FALSE; break;
