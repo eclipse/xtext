@@ -134,9 +134,9 @@ public abstract class AbstractXbaseContentAssistTest extends Assert implements R
 	};
 	
 	protected static String[] STRING_OPERATORS = {
-		"==", "!=",
+		"===", "==", "!=",
 		"+",
-		"<=", ">=", "<", ">",
+		"<=", "<=>", ">=", "<", ">",
 		"->","=>", "?:"
 	};
 	
@@ -232,15 +232,15 @@ public abstract class AbstractXbaseContentAssistTest extends Assert implements R
 	}
 	
 	@Test public void testOnStringLiteral_07() throws Exception {
-		newBuilder().append("''==''").assertTextAtCursorPosition("==", 2, expect(new String[]{"=="}, getKeywordsAndStatics()));
+		newBuilder().append("''==''").assertTextAtCursorPosition("==", 2, expect(new String[]{"==", "==="}, getKeywordsAndStatics()));
 	}
 	
 	@Test public void testOnStringLiteral_08() throws Exception {
-		newBuilder().append("''<=''").assertTextAtCursorPosition("<=", 1, expect(new String[]{"<", "<="}, getKeywordsAndStatics()));
+		newBuilder().append("''<=''").assertTextAtCursorPosition("<=", 1, expect(new String[]{"<", "<=", "<=>"}, getKeywordsAndStatics()));
 	}
 	
 	@Test public void testOnStringLiteral_09() throws Exception {
-		newBuilder().append("''<=''").assertTextAtCursorPosition("<=", 2, expect(new String[]{"<="}, getKeywordsAndStatics()));
+		newBuilder().append("''<=''").assertTextAtCursorPosition("<=", 2, expect(new String[]{"<=", "<=>"}, getKeywordsAndStatics()));
 	}
 	
 	@Test public void testOnStringLiteral_10() throws Exception {
@@ -270,16 +270,16 @@ public abstract class AbstractXbaseContentAssistTest extends Assert implements R
 	}
 	
 	@Test public void testOnStringLiteral_16() throws Exception {
-		newBuilder().append("'' == ''").assertTextAtCursorPosition("==", 2, expect(new String[]{"=="}, getKeywordsAndStatics()));
+		newBuilder().append("'' == ''").assertTextAtCursorPosition("==", 2, expect(new String[]{"==", "==="}, getKeywordsAndStatics()));
 		newBuilder().append("'' == ''").assertTextAtCursorPosition("==", 3, getKeywordsAndStatics());
 	}
 	
 	@Test public void testOnStringLiteral_17() throws Exception {
-		newBuilder().append("'' <= ''").assertTextAtCursorPosition("<=", 1, expect(new String[]{"<", "<="}, getKeywordsAndStatics()));
+		newBuilder().append("'' <= ''").assertTextAtCursorPosition("<=", 1, expect(new String[]{"<", "<=", "<=>"}, getKeywordsAndStatics()));
 	}
 	
 	@Test public void testOnStringLiteral_18() throws Exception {
-		newBuilder().append("'' <= ''").assertTextAtCursorPosition("<=", 2, expect(new String[]{"<="}, getKeywordsAndStatics()));
+		newBuilder().append("'' <= ''").assertTextAtCursorPosition("<=", 2, expect(new String[]{"<=", "<=>"}, getKeywordsAndStatics()));
 		newBuilder().append("'' <= ''").assertTextAtCursorPosition("<=", 3, getKeywordsAndStatics());
 	}
 	
@@ -308,15 +308,15 @@ public abstract class AbstractXbaseContentAssistTest extends Assert implements R
 	}
 	
 	@Test public void testOnStringLiteral_25() throws Exception {
-		newBuilder().append("''.toString==''").assertTextAtCursorPosition("==", 2, expect(new String[]{"=="}, getKeywordsAndStatics()));
+		newBuilder().append("''.toString==''").assertTextAtCursorPosition("==", 2, expect(new String[]{"==", "==="}, getKeywordsAndStatics()));
 	}
 	
 	@Test public void testOnStringLiteral_26() throws Exception {
-		newBuilder().append("''.toString<=''").assertTextAtCursorPosition("<=", 1, expect(new String[]{"<", "<="}, getKeywordsAndStatics()));
+		newBuilder().append("''.toString<=''").assertTextAtCursorPosition("<=", 1, expect(new String[]{"<", "<=", "<=>"}, getKeywordsAndStatics()));
 	}
 	
 	@Test public void testOnStringLiteral_27() throws Exception {
-		newBuilder().append("''.toString<=''").assertTextAtCursorPosition("<=", 2, expect(new String[]{"<="}, getKeywordsAndStatics()));
+		newBuilder().append("''.toString<=''").assertTextAtCursorPosition("<=", 2, expect(new String[]{"<=", "<=>"}, getKeywordsAndStatics()));
 	}
 	
 	@Test public void testOnStringLiteral_28() throws Exception {
@@ -392,15 +392,15 @@ public abstract class AbstractXbaseContentAssistTest extends Assert implements R
 	}
 
 	@Test public void testAfterBinaryOperation_08() throws Exception {
-		newBuilder().append("((''+(''.bytes)))").assertTextAtCursorPosition(")", "==", "!=", "+=", "+", "->", "=>", "?:", "bytes");
+		newBuilder().append("((''+(''.bytes)))").assertTextAtCursorPosition(")", "==", "===", "!=", "+=", "-=", "+", "->", "=>", "?:", "bytes");
 	}
 	
 	@Test public void testAfterBinaryOperation_09() throws Exception {
-		newBuilder().append("((''+''.bytes))").assertTextAtCursorPosition(")", "==", "!=", "+=", "+", "->", "=>", "?:", "bytes");
+		newBuilder().append("((''+''.bytes))").assertTextAtCursorPosition(")", "==", "===", "!=", "+=", "-=", "+", "->", "=>", "?:", "bytes");
 	}
 	
 	@Test public void testAfterBinaryOperation_10() throws Exception {
-		newBuilder().append("((''+null))").assertTextAtCursorPosition(")", "null", "!=", "==", "->", "=>", "+", "?:");
+		newBuilder().append("((''+null))").assertTextAtCursorPosition(")", "null", "!=", "==", "===", "->", "=>", "+", "?:");
 	}
 	
 	// TODO: limit to static features
@@ -409,7 +409,7 @@ public abstract class AbstractXbaseContentAssistTest extends Assert implements R
 	}
 	
 	@Test public void testNull() throws Exception {
-		newBuilder().append("null").assertText("null", "!=", "+", "==", "->", "?:", "=>");
+		newBuilder().append("null").assertText("null", "!=", "+", "==", "===", "->", "?:", "=>");
 	}
 	
 	@Test public void testForLoop_01() throws Exception {
