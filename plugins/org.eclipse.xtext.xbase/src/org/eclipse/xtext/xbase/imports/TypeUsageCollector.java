@@ -28,7 +28,6 @@ import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.JvmWildcardTypeReference;
 import org.eclipse.xtext.common.types.TypesFactory;
 import org.eclipse.xtext.common.types.TypesPackage;
-import org.eclipse.xtext.common.types.util.FeatureOverridesService;
 import org.eclipse.xtext.common.types.util.SuperTypeCollector;
 import org.eclipse.xtext.common.types.util.TypeReferences;
 import org.eclipse.xtext.documentation.IEObjectDocumentationProvider;
@@ -58,6 +57,7 @@ import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotation;
 import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotationsPackage;
 import org.eclipse.xtext.xbase.jvmmodel.IJvmModelAssociations;
 import org.eclipse.xtext.xbase.scoping.batch.ImplicitlyImportedTypes;
+import org.eclipse.xtext.xbase.typesystem.IBatchTypeResolver;
 import org.eclipse.xtext.xtype.XFunctionTypeRef;
 
 import com.google.inject.Inject;
@@ -87,6 +87,9 @@ public class TypeUsageCollector {
 	
 	@Inject
 	private TypeUsages typeUsages;
+	
+	@Inject
+	private IBatchTypeResolver batchTypeResolver;
 	
 	private JvmDeclaredType currentThisType;
 	
@@ -244,6 +247,12 @@ public class TypeUsageCollector {
 	 */
 	protected Pair<? extends JvmType, String> findPreferredType(EObject owner, EReference reference) {
 		JvmIdentifiableElement referencedThing = (JvmIdentifiableElement) owner.eGet(reference);
+		if (referencedThing != null && owner instanceof XConstructorCall && referencedThing.eIsProxy()) {
+			JvmIdentifiableElement potentiallyLinkedType = batchTypeResolver.resolveTypes(owner).getLinkedFeature((XConstructorCall)owner);
+			if (potentiallyLinkedType != null && !potentiallyLinkedType.eIsProxy()) {
+				referencedThing = potentiallyLinkedType;
+			}
+		}
 		JvmDeclaredType referencedType = null;
 		if (referencedThing instanceof JvmDeclaredType) {
 			referencedType = (JvmDeclaredType) referencedThing;
