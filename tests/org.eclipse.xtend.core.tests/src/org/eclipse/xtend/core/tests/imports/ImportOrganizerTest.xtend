@@ -1244,4 +1244,66 @@ class ImportOrganizerTest extends AbstractXtendTestCase {
 		''')
 	}
 	
+	@Test def testFunctionType() {
+		'''
+			class Foo {
+				def bar() {
+					val (String) => boolean foo = null	
+				}
+			}
+		'''.assertIsOrganizedTo('''
+			class Foo {
+				def bar() {
+					val (String) => boolean foo = null	
+				}
+			}
+		''')
+	}
+	
+	@Test def testFunctionType_1() {
+		'''
+			class Foo {
+				def bar() {
+					val (java.io.File) => java.io.File foo = null	
+				}
+			}
+		'''.assertIsOrganizedTo('''
+			import java.io.File
+			
+			class Foo {
+				def bar() {
+					val (File) => File foo = null	
+				}
+			}
+		''')
+	}
+	
+	@Test def testWildcard() {
+		'''
+			class Foo {
+				var java.util.List<?> x
+			}
+		'''.assertIsOrganizedTo('''
+			import java.util.List
+			
+			class Foo {
+				var List<?> x
+			}
+		''')
+	}
+	
+	@Test def testWildcard_1() {
+		'''
+			class Foo {
+				var java.util.List<? extends java.io.File> x
+			}
+		'''.assertIsOrganizedTo('''
+			import java.io.File
+			import java.util.List
+			
+			class Foo {
+				var List<? extends File> x
+			}
+		''')
+	}
 }
