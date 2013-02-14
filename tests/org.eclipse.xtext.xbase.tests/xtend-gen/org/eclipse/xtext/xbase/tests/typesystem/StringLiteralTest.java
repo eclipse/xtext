@@ -169,7 +169,7 @@ public class StringLiteralTest extends AbstractXbaseTestCase {
   
   @Test
   public void testCharacterExpectation_02() throws Exception {
-    this.resolvesStringLiteralsTo("{ var Character c = \'1\' }", "char");
+    this.resolvesStringLiteralsTo("{ var Character c = \'1\' }", "Character");
   }
   
   @Test

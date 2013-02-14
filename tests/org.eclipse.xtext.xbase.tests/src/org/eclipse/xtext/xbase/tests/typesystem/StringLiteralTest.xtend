@@ -95,7 +95,7 @@ class StringLiteralTest extends AbstractXbaseTestCase {
 		"{ var Character c = '' }".resolvesStringLiteralsTo("String")
 	}
 	@Test def void testCharacterExpectation_02() throws Exception {
-		"{ var Character c = '1' }".resolvesStringLiteralsTo("char")
+		"{ var Character c = '1' }".resolvesStringLiteralsTo("Character")
 	}
 	@Test def void testCharacterExpectation_03() throws Exception {
 		"{ var Character c = '11' }".resolvesStringLiteralsTo("String")
