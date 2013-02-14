@@ -39,7 +39,7 @@ public class JvmComponentTypeImplCustom extends JvmComponentTypeImpl {
 		{
 			case TypesPackage.JVM_COMPONENT_TYPE__ARRAY_TYPE:
 				// don't demand-create the array if queried reflectively
-				if (resolve || arrayType != null) return getArrayType();
+				if (arrayType != null) return getArrayType();
 				return null;
 		}
 		return super.eGet(featureID, resolve, coreType);
