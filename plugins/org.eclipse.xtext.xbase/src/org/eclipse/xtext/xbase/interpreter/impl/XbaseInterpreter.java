@@ -8,6 +8,7 @@
 package org.eclipse.xtext.xbase.interpreter.impl;
 
 import static com.google.common.collect.Lists.*;
+import static org.eclipse.xtext.util.Strings.*;
 
 import java.lang.reflect.Array;
 import java.lang.reflect.Constructor;
@@ -793,11 +794,16 @@ public class XbaseInterpreter implements IExpressionInterpreter {
 		if (expressionHelper.isShortCircuitOperation(featureCall)) {
 			XExpression leftOperand = ((XBinaryOperation)featureCall).getLeftOperand();
 			Object result = internalEvaluate(leftOperand, context, indicator);
-			final boolean isAND = featureCall.getConcreteSyntaxFeatureName().equals(expressionHelper.getAndOperator());
-			if (isAND && !(Boolean)result) {
-				return false;
-			} else if (!isAND && (Boolean)result) {
-				return true;
+			String operatorName = featureCall.getConcreteSyntaxFeatureName();
+			if (equal(expressionHelper.getElvisOperator() ,operatorName)) {
+				if(result != null)
+					return result;
+			} else if (equal(expressionHelper.getAndOperator(), operatorName)) {
+				if (!(Boolean)result) 
+					return false;
+			} else if (equal(expressionHelper.getOrOperator(), operatorName)) {
+				if((Boolean) result)
+					return true;
 			}
 			JvmOperation operation = (JvmOperation) featureCall.getFeature();
 			XExpression receiver = getActualReceiver(featureCall);
@@ -811,7 +817,7 @@ public class XbaseInterpreter implements IExpressionInterpreter {
 				}
 			}
 			return invokeOperation(operation, receiver, argumentValues, context, indicator);
-		}
+			}
 		XExpression receiver = getActualReceiver(featureCall);
 		Object receiverObj = receiver==null?null:internalEvaluate(receiver, context, indicator);
 		return invokeFeature(featureCall.getFeature(), featureCall, receiverObj, context, indicator);
