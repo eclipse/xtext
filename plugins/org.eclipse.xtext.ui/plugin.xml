@@ -94,18 +94,21 @@
       <!-- find references -->
 	  <command 
 			id="org.eclipse.xtext.ui.editor.FindReferences"
+            categoryId="org.eclipse.ui.category.navigate"
 			name="%FindReferencesCommand_name"
 			description="%FindReferencesCommand_description">
 	  </command>
 	  <!-- hyperlinking -->
 	  <command
 			id="org.eclipse.xtext.ui.editor.hyperlinking.OpenDeclaration"
+            categoryId="org.eclipse.ui.category.navigate"
 			name="%OpenDeclarationCommand_name"
 			description="%OpenDeclarationCommand_description">
       </command>
       <!-- refactoring -->
       <command
             id="org.eclipse.xtext.ui.refactoring.RenameElement"
+            categoryId="org.eclipse.xtext.ui.category.refactoring"
             name="%RenameElementCommand_name"
             description="%RenameElementCommand_description">
       </command>
@@ -139,6 +142,11 @@
             description="%XtextCommandCategory_description"
             id="org.eclipse.xtext.ui.category.XtextEditor"
             name="%XtextCommandCategory_name">
+      </category>
+      <category
+            name="%category.refactoring.name"
+            description="%category.refactoring.description"
+            id="org.eclipse.xtext.ui.category.refactoring">
       </category>
    </extension>
    <extension point="org.eclipse.core.expressions.propertyTesters">
