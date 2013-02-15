@@ -12,12 +12,9 @@ import org.eclipse.xtend.lib.macro.declaration.FieldDeclaration
 import org.eclipse.xtend.lib.macro.declaration.MethodDeclaration
 import org.eclipse.xtend.lib.macro.declaration.MutableClassDeclaration
 import org.eclipse.xtend.lib.macro.declaration.MutableMethodDeclaration
-import org.junit.Test
-
-import static extension org.junit.Assert.*
+import org.eclipse.xtend.lib.macro.declaration.TypeReference
 import org.eclipse.xtend.lib.macro.declaration.Visibility
-
-import org.eclipse.xtend.lib.macro.type.TypeReference
+import org.junit.Test
 
 class DeclarationsTest extends AbstractXtendTestCase {
 	

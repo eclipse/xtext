@@ -8,19 +8,19 @@
 
 package org.eclipse.xtend.core.macro.declaration
 
+import org.eclipse.emf.ecore.EObject
+import org.eclipse.xtend.lib.macro.declaration.NamedElement
 import org.eclipse.xtend.lib.macro.declaration.PrimitiveType
 import org.eclipse.xtend.lib.macro.declaration.TypeParameterDeclaration
 import org.eclipse.xtend.lib.macro.declaration.TypeParameterDeclarator
+import org.eclipse.xtend.lib.macro.declaration.TypeReference
 import org.eclipse.xtend.lib.macro.declaration.VoidType
-import org.eclipse.xtend.lib.macro.type.TypeReference
 import org.eclipse.xtext.common.types.JvmExecutable
 import org.eclipse.xtext.common.types.JvmPrimitiveType
 import org.eclipse.xtext.common.types.JvmTypeParameter
 import org.eclipse.xtext.common.types.JvmUpperBound
 import org.eclipse.xtext.common.types.JvmVoid
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference
-import org.eclipse.emf.ecore.EObject
-import org.eclipse.xtend.lib.macro.declaration.NamedElement
 
 abstract class AbstractDeclarationImpl<T> {
 	@Property T delegate
