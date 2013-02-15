@@ -7,6 +7,8 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.imports;
 
+import static org.eclipse.xtext.util.Strings.*;
+
 import org.apache.log4j.Logger;
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
@@ -63,11 +65,12 @@ public class ImportSectionRegionUtil {
 	public ITextRegion addTrailingSingleWhitespace(ITextRegion textRegion, String lineSeparator, XtextResource resource) {
 		String text = resource.getParseResult().getRootNode().getText();
 		String theFollowing = text.substring(textRegion.getOffset() + textRegion.getLength());
-		if(theFollowing.startsWith(lineSeparator)) 
-			return new TextRegion(textRegion.getOffset(), textRegion.getLength() + lineSeparator.length());
-		else if(Character.isWhitespace(theFollowing.charAt(0)))
-			return new TextRegion(textRegion.getOffset(), textRegion.getLength() + 1);
-		else
-			return textRegion;
+		if(!isEmpty(theFollowing)) { 
+			if(theFollowing.startsWith(lineSeparator)) 
+				return new TextRegion(textRegion.getOffset(), textRegion.getLength() + lineSeparator.length());
+			else if(Character.isWhitespace(theFollowing.charAt(0)))
+				return new TextRegion(textRegion.getOffset(), textRegion.getLength() + 1);
+		}
+		return textRegion;
 	}
 }
