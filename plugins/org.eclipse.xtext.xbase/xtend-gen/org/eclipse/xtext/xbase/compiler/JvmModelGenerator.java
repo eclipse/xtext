@@ -301,7 +301,7 @@ public class JvmModelGenerator implements IGenerator {
             String _name = SuppressWarnings.class.getName();
             boolean _equals = _identifier==null?false:_identifier.equals(_name);
             boolean _not = (!_equals);
-            return Boolean.valueOf(_not);
+            return _not;
           }
         };
       final Function1<JvmAnnotationReference,Boolean> noSuppressWarningsFilter = _function;

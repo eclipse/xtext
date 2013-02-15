@@ -5,12 +5,9 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtend.lib.macro.type;
+package org.eclipse.xtend.lib.macro.declaration;
 
 import java.util.List;
-
-import org.eclipse.xtend.lib.macro.declaration.Element;
-import org.eclipse.xtend.lib.macro.declaration.Type;
 
 import com.google.common.annotations.Beta;
 
