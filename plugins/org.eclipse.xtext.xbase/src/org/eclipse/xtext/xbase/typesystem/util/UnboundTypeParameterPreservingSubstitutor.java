@@ -44,7 +44,7 @@ public class UnboundTypeParameterPreservingSubstitutor extends TypeParameterSubs
 			LightweightTypeReference boundReference = boundTypeArgument.getTypeReference();
 			if (boundReference != null && reference != boundReference) {
 				if (boundReference instanceof UnboundTypeReference)
-					return boundReference;
+					return boundReference.copyInto(getOwner());
 				if (boundReference.getType() != type)
 					return boundReference.accept(this, visiting);
 			}
