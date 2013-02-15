@@ -14,7 +14,6 @@ import org.eclipse.xtext.diagnostics.Diagnostic;
 import org.eclipse.xtext.junit4.validation.ValidationTestHelper;
 import org.eclipse.xtext.xbase.XBlockExpression;
 import org.eclipse.xtext.xbase.XExpression;
-import org.eclipse.xtext.xbase.XMemberFeatureCall;
 import org.eclipse.xtext.xbase.XbasePackage;
 import org.eclipse.xtext.xbase.tests.AbstractXbaseTestCase;
 import org.junit.Test;
@@ -291,6 +290,31 @@ public class FeatureCallValidationTest extends AbstractXbaseTestCase {
 	@Test public void testNullSafeOnPrimitiveReveiver() throws Exception {
 		XExpression expression = expression("1?.toString()");
 		helper.assertError(expression, XABSTRACT_FEATURE_CALL, NULL_SAFE_FEATURE_CALL_ON_PRIMITIVE);
+	}
+	
+	@Test public void testElvisOnPrimitiveReveiver() throws Exception {
+		XExpression expression = expression("{ val int x=42 x?:''");
+		helper.assertError(expression, XBINARY_OPERATION, PRIMITIVE_COMPARED_TO_NULL);
+	}
+	
+	@Test public void testPrimitiveEqualsNull_0() throws Exception {
+		XExpression expression = expression("{ val int x=42 x==null");
+		helper.assertError(expression, XBINARY_OPERATION, PRIMITIVE_COMPARED_TO_NULL);
+	}
+	
+	@Test public void testPrimitiveEqualsNull_1() throws Exception {
+		XExpression expression = expression("{ val int x=42 null==x");
+		helper.assertError(expression, XBINARY_OPERATION, PRIMITIVE_COMPARED_TO_NULL);
+	}
+	
+	@Test public void testPrimitiveEqualsNull_2() throws Exception {
+		XExpression expression = expression("{ val int x=42 x===null");
+		helper.assertError(expression, XBINARY_OPERATION, PRIMITIVE_COMPARED_TO_NULL);
+	}
+	
+	@Test public void testPrimitiveEqualsNull_3() throws Exception {
+		XExpression expression = expression("{ val int x=42 null===x");
+		helper.assertError(expression, XBINARY_OPERATION, PRIMITIVE_COMPARED_TO_NULL);
 	}
 	
 	/**
