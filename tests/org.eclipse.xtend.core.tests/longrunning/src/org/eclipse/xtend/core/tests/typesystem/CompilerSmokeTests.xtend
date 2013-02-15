@@ -180,6 +180,22 @@ class SkipCharacterInBetween extends AbstractXtendCompilerSmokeTest {
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
+class SkipThreeCharactersInBetween extends AbstractXtendCompilerSmokeTest {
+	
+	override void assertNonSmoking(CharSequence input) throws Exception {
+		val string = input.toString
+		if (input.length > 1) {
+			for(i: 0..input.length - 4) {
+				processFile(string.substring(0, i) + string.substring(i+3))
+			}
+		}
+	}
+	
+}
+
+/**
+ * @author Sebastian Zarnekow - Initial contribution and API
+ */
 class SkipTokensInBetween extends AbstractXtendCompilerSmokeTest {
 	
 	@Inject
@@ -281,6 +297,22 @@ class SkipCharacterInBetween2 extends AbstractCompilerSmokeTest {
 		if (input.length > 1) {
 			for(i: 0..input.length - 2) {
 				processFile(string.substring(0, i) + string.substring(i+1))
+			}
+		}
+	}
+	
+}
+
+/**
+ * @author Sebastian Zarnekow - Initial contribution and API
+ */
+class SkipThreeCharactersInBetween2 extends AbstractCompilerSmokeTest {
+	
+	override void assertNonSmoking(CharSequence input) throws Exception {
+		val string = input.toString
+		if (input.length > 1) {
+			for(i: 0..input.length - 4) {
+				processFile(string.substring(0, i) + string.substring(i+3))
 			}
 		}
 	}

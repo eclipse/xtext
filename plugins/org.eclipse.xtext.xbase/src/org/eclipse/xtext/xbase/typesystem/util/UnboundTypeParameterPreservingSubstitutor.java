@@ -10,10 +10,12 @@ package org.eclipse.xtext.xbase.typesystem.util;
 import java.util.Map;
 
 import org.eclipse.jdt.annotation.NonNullByDefault;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.xbase.typesystem.references.ITypeReferenceOwner;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightMergedBoundTypeArgument;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
+import org.eclipse.xtext.xbase.typesystem.references.ParameterizedTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.UnboundTypeReference;
 
 /**
@@ -32,6 +34,22 @@ public class UnboundTypeParameterPreservingSubstitutor extends TypeParameterSubs
 	public LightweightTypeReference doVisitUnboundTypeReference(UnboundTypeReference reference,
 			Object param) {
 		return reference.copyInto(getOwner());
+	}
+	
+	@Override
+	@Nullable
+	protected LightweightTypeReference getBoundTypeArgument(ParameterizedTypeReference reference, JvmTypeParameter type, Object visiting) {
+		LightweightMergedBoundTypeArgument boundTypeArgument = getTypeParameterMapping().get(type);
+		if (boundTypeArgument != null) {
+			LightweightTypeReference boundReference = boundTypeArgument.getTypeReference();
+			if (boundReference != null && reference != boundReference) {
+				if (boundReference instanceof UnboundTypeReference)
+					return boundReference;
+				if (boundReference.getType() != type)
+					return boundReference.accept(this, visiting);
+			}
+		}
+		return null;
 	}
 
 	@Override

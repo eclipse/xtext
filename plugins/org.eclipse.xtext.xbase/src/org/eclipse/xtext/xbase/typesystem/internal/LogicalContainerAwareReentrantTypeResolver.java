@@ -244,10 +244,11 @@ public class LogicalContainerAwareReentrantTypeResolver extends DefaultReentrant
 			Map<JvmIdentifiableElement, ResolvedTypes> resolvedTypesByContext) {
 		StackedResolvedTypes childResolvedTypes = resolvedTypes.pushTypes();
 		if (declarator instanceof JvmTypeParameterDeclarator) {
+			JvmTypeParameterDeclarator casted = (JvmTypeParameterDeclarator) declarator;
 			if (isStatic(declarator)) {
-				childResolvedTypes.replaceDeclaredTypeParameters(((JvmTypeParameterDeclarator) declarator).getTypeParameters());
+				childResolvedTypes.replaceDeclaredTypeParameters(casted.getTypeParameters());
 			} else {
-				childResolvedTypes.addDeclaredTypeParameters(((JvmTypeParameterDeclarator) declarator).getTypeParameters());
+				childResolvedTypes.addDeclaredTypeParameters(casted.getTypeParameters());
 			}
 		}
 		resolvedTypesByContext.put(declarator, childResolvedTypes);

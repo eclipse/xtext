@@ -97,8 +97,11 @@ public abstract class TypeParameterSubstitutor<Visiting> extends TypeReferenceVi
 	protected LightweightTypeReference getBoundTypeArgument(ParameterizedTypeReference reference, JvmTypeParameter type,
 			Visiting visiting) {
 		LightweightMergedBoundTypeArgument boundTypeArgument = typeParameterMapping.get(type);
-		if (boundTypeArgument != null && boundTypeArgument.getTypeReference() != reference) {
-			return boundTypeArgument.getTypeReference().accept(this, visiting);
+		if (boundTypeArgument != null) {
+			LightweightTypeReference boundReference = boundTypeArgument.getTypeReference();
+			if (boundReference != null && reference != boundReference && boundReference.getType() != type) {
+				return boundReference.accept(this, visiting);
+			}
 		}
 		return null;
 	}
