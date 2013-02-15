@@ -1,4 +1,4 @@
-package org.eclipse.xtend.lib.macro;
+package org.eclipse.xtend.lib.macro.services;
 
 import org.eclipse.xtend.lib.macro.declaration.Type;
 import org.eclipse.xtend.lib.macro.type.TypeReference;
