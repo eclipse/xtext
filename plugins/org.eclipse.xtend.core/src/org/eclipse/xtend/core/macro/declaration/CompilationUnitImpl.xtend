@@ -22,10 +22,7 @@ import org.eclipse.xtend.core.xtend.XtendMember
 import org.eclipse.xtend.core.xtend.XtendPackage
 import org.eclipse.xtend.core.xtend.XtendParameter
 import org.eclipse.xtend.core.xtend.XtendTypeDeclaration
-import org.eclipse.xtend.lib.macro.CompilationContext
-import org.eclipse.xtend.lib.macro.Problem
-import org.eclipse.xtend.lib.macro.ProblemSupport
-import org.eclipse.xtend.lib.macro.TypeReferenceProvider
+import org.eclipse.xtend.lib.macro.declaration.CompilationStrategy
 import org.eclipse.xtend.lib.macro.declaration.CompilationUnit
 import org.eclipse.xtend.lib.macro.declaration.Element
 import org.eclipse.xtend.lib.macro.declaration.MemberDeclaration
@@ -37,6 +34,9 @@ import org.eclipse.xtend.lib.macro.declaration.Type
 import org.eclipse.xtend.lib.macro.declaration.TypeDeclaration
 import org.eclipse.xtend.lib.macro.declaration.TypeParameterDeclaration
 import org.eclipse.xtend.lib.macro.declaration.Visibility
+import org.eclipse.xtend.lib.macro.services.Problem
+import org.eclipse.xtend.lib.macro.services.ProblemSupport
+import org.eclipse.xtend.lib.macro.services.TypeReferenceProvider
 import org.eclipse.xtend.lib.macro.type.TypeReference
 import org.eclipse.xtext.common.types.JvmAnnotationType
 import org.eclipse.xtext.common.types.JvmConstructor
@@ -109,7 +109,7 @@ class CompilationUnitImpl implements CompilationUnit, TypeReferenceProvider, Pro
 			new StandardTypeReferenceOwner(services, xtendFile.eResource.resourceSet))
 	}
 
-	def private <IN extends EObject, OUT> OUT get(IN in, (IN)=>OUT provider) {
+	def private <IN extends EObject, OUT> OUT getOrCreate(IN in, (IN)=>OUT provider) {
 		if (identityCache.containsKey(in))
 			return identityCache.get(in) as OUT
 		val result = provider.apply(in)
@@ -127,7 +127,7 @@ class CompilationUnitImpl implements CompilationUnit, TypeReferenceProvider, Pro
 	}
 
 	def Type toType(JvmType delegate) {
-		get(delegate) [
+		getOrCreate(delegate) [
 			switch delegate {
 				JvmDeclaredType:
 					toTypeDeclaration(delegate)
@@ -147,7 +147,7 @@ class CompilationUnitImpl implements CompilationUnit, TypeReferenceProvider, Pro
 		]}
 
 	def TypeDeclaration toTypeDeclaration(JvmDeclaredType delegate) {
-		get(delegate) [
+		getOrCreate(delegate) [
 			switch delegate {
 				JvmGenericType case delegate.isInterface:
 					null
@@ -168,7 +168,7 @@ class CompilationUnitImpl implements CompilationUnit, TypeReferenceProvider, Pro
 		]}
 
 	def TypeParameterDeclaration toTypeParameterDeclaration(JvmTypeParameter delegate) {
-		get(delegate) [
+		getOrCreate(delegate) [
 			new JvmTypeParameterDeclarationImpl => [
 				it.delegate = delegate
 				it.compilationUnit = this
@@ -176,7 +176,7 @@ class CompilationUnitImpl implements CompilationUnit, TypeReferenceProvider, Pro
 		]}
 
 	def ParameterDeclaration toParameterDeclaration(JvmFormalParameter delegate) {
-		get(delegate) [
+		getOrCreate(delegate) [
 			new JvmParameterDeclarationImpl => [
 				it.delegate = delegate
 				it.compilationUnit = this
@@ -184,7 +184,7 @@ class CompilationUnitImpl implements CompilationUnit, TypeReferenceProvider, Pro
 		]}
 
 	def MemberDeclaration toMemberDeclaration(JvmMember delegate) {
-		get(delegate) [
+		getOrCreate(delegate) [
 			switch delegate {
 				JvmDeclaredType:
 					toTypeDeclaration(delegate)
@@ -218,7 +218,7 @@ class CompilationUnitImpl implements CompilationUnit, TypeReferenceProvider, Pro
 		 */
 		if (delegate == null)
 			return null
-		get(delegate) [
+		getOrCreate(delegate) [
 			toTypeReference(typeRefConverter.toLightweightReference(delegate))
 		]}
 
@@ -232,7 +232,7 @@ class CompilationUnitImpl implements CompilationUnit, TypeReferenceProvider, Pro
 	}
 
 	def XtendTypeDeclarationImpl<? extends XtendTypeDeclaration> toXtendTypeDeclaration(XtendTypeDeclaration delegate) {
-		get(delegate) [
+		getOrCreate(delegate) [
 			switch (delegate) {
 				XtendClass:
 					new XtendClassDeclarationImpl => [
@@ -244,7 +244,7 @@ class CompilationUnitImpl implements CompilationUnit, TypeReferenceProvider, Pro
 		]}
 
 	def XtendMemberDeclarationImpl toXtendMemberDeclaration(XtendMember delegate) {
-		get(delegate) [
+		getOrCreate(delegate) [
 			switch (delegate) {
 				XtendTypeDeclaration:
 					toXtendTypeDeclaration(delegate)
@@ -267,7 +267,7 @@ class CompilationUnitImpl implements CompilationUnit, TypeReferenceProvider, Pro
 		]}
 
 	def XtendParameterDeclarationImpl toXtendParameterDeclaration(XtendParameter delegate) {
-		get(delegate) [
+		getOrCreate(delegate) [
 			new XtendParameterDeclarationImpl => [
 				it.delegate = delegate
 				it.compilationUnit = this
@@ -275,7 +275,7 @@ class CompilationUnitImpl implements CompilationUnit, TypeReferenceProvider, Pro
 		]}
 
 	def XtendTypeParameterDeclarationImpl toXtendTypeParameterDeclaration(JvmTypeParameter delegate) {
-		get(delegate) [
+		getOrCreate(delegate) [
 			new XtendTypeParameterDeclarationImpl => [
 				it.delegate = delegate
 				it.compilationUnit = this
@@ -401,10 +401,10 @@ class CompilationUnitImpl implements CompilationUnit, TypeReferenceProvider, Pro
 		return (typeRef as TypeReferenceImpl).lightWeightTypeReference.toJavaCompliantTypeReference
 	}
 	
-	def void setCompilationStrategy(JvmExecutable executable, (CompilationContext)=>CharSequence compilationStrategy) {
+	def void setCompilationStrategy(JvmExecutable executable, CompilationStrategy compilationStrategy) {
 		typesBuilder.setBody(executable) [
 			val context = new CompilationContextImpl(it, this, typeRefSerializer)
-			it.append(compilationStrategy.apply(context))
+			it.append(compilationStrategy.compile(context))
 		]
 	}
 	

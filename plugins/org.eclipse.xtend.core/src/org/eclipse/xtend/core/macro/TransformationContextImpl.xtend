@@ -5,7 +5,6 @@ import org.eclipse.emf.ecore.EObject
 import org.eclipse.xtend.core.jvmmodel.IXtendJvmAssociations
 import org.eclipse.xtend.core.macro.declaration.AbstractNamedElementImpl
 import org.eclipse.xtend.core.macro.declaration.CompilationUnitImpl
-import org.eclipse.xtend.lib.macro.ModifyContext
 import org.eclipse.xtend.lib.macro.declaration.ClassDeclaration
 import org.eclipse.xtend.lib.macro.declaration.ConstructorDeclaration
 import org.eclipse.xtend.lib.macro.declaration.FieldDeclaration
@@ -18,8 +17,9 @@ import org.eclipse.xtend.lib.macro.declaration.MutableNamedElement
 import org.eclipse.xtend.lib.macro.declaration.NamedElement
 import org.eclipse.xtext.common.types.JvmMember
 import org.eclipse.xtend.lib.macro.declaration.Element
+import org.eclipse.xtend.lib.macro.TransformationContext
 
-class ModifyContextImpl implements ModifyContext {
+class TransformationContextImpl implements TransformationContext {
 	
 	@Inject IXtendJvmAssociations associations
 	

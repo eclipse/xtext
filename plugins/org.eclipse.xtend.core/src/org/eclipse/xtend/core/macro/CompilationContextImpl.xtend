@@ -1,7 +1,7 @@
 package org.eclipse.xtend.core.macro
 
 import org.eclipse.xtend.core.macro.declaration.CompilationUnitImpl
-import org.eclipse.xtend.lib.macro.CompilationContext
+import org.eclipse.xtend.lib.macro.declaration.CompilationStrategy
 import org.eclipse.xtend.lib.macro.type.TypeReference
 import org.eclipse.xtext.xbase.compiler.ImportManager
 import org.eclipse.xtext.xbase.compiler.StringBuilderBasedAppendable
@@ -9,7 +9,7 @@ import org.eclipse.xtext.xbase.compiler.TypeReferenceSerializer
 import org.eclipse.xtext.xbase.compiler.output.ITreeAppendable
 import org.eclipse.xtext.xbase.lib.util.ReflectExtensions
 
-class CompilationContextImpl implements CompilationContext {
+class CompilationContextImpl implements CompilationStrategy$CompilationContext {
 
 	extension ReflectExtensions reflectExtensions = new ReflectExtensions
 

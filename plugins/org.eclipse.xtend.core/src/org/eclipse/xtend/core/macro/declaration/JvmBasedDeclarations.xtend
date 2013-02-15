@@ -8,7 +8,6 @@
 package org.eclipse.xtend.core.macro.declaration
 
 import java.util.List
-import org.eclipse.xtend.lib.macro.CompilationContext
 import org.eclipse.xtend.lib.macro.declaration.MutableClassDeclaration
 import org.eclipse.xtend.lib.macro.declaration.MutableConstructorDeclaration
 import org.eclipse.xtend.lib.macro.declaration.MutableExecutableDeclaration
@@ -35,6 +34,7 @@ import org.eclipse.xtext.common.types.JvmOperation
 import org.eclipse.xtext.common.types.JvmVisibility
 import org.eclipse.xtext.common.types.TypesFactory
 import org.eclipse.xtext.xbase.lib.Procedures$Procedure1
+import org.eclipse.xtend.lib.macro.declaration.CompilationStrategy
 
 abstract class JvmNamedElementImpl<T extends JvmIdentifiableElement> extends AbstractDeclarationImpl<T> implements MutableNamedElement {
 	
@@ -269,7 +269,7 @@ abstract class JvmExecutableDeclarationImpl<T extends JvmExecutable> extends Jvm
 		return compilationUnit.toTypeParameterDeclaration(param) as MutableTypeParameterDeclaration
 	}
 	
-	override setBody((CompilationContext)=>CharSequence compilationStrategy) {
+	override setBody(CompilationStrategy compilationStrategy) {
 		compilationUnit.setCompilationStrategy(delegate, compilationStrategy)
 	}
 	
