@@ -7,17 +7,21 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.util;
 
+import static com.google.common.collect.Iterables.*;
+import static org.eclipse.xtext.util.Strings.*;
+
 import java.util.List;
 
 import org.eclipse.xtext.common.types.JvmAnnotationReference;
 import org.eclipse.xtext.common.types.JvmAnnotationTarget;
 import org.eclipse.xtext.common.types.JvmConstructor;
+import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmExecutable;
+import org.eclipse.xtext.common.types.JvmFeature;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmOperation;
-import org.eclipse.xtext.common.types.JvmTypeReference;
-import org.eclipse.xtext.common.types.util.TypeConformanceComputer;
 import org.eclipse.xtext.common.types.util.TypeReferences;
+import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.XAssignment;
 import org.eclipse.xtext.xbase.XBinaryOperation;
@@ -31,26 +35,24 @@ import org.eclipse.xtext.xbase.XNumberLiteral;
 import org.eclipse.xtext.xbase.XStringLiteral;
 import org.eclipse.xtext.xbase.XTypeLiteral;
 import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotation;
+import org.eclipse.xtext.xbase.lib.BooleanExtensions;
 import org.eclipse.xtext.xbase.lib.Inline;
+import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.Pure;
-import org.eclipse.xtext.xbase.typing.ITypeProvider;
+import org.eclipse.xtext.xbase.scoping.featurecalls.OperatorMapping;
 
 import com.google.inject.Inject;
 
 /**
  * @author Jan Koehnlein - Initial contribution and API
  */
-@SuppressWarnings("deprecation")
 public class XExpressionHelper {
 
 	@Inject
-	private ITypeProvider typeProvider;
-
-	@Inject
-	private TypeConformanceComputer conformanceComputer;
-
-	@Inject
 	private TypeReferences typeReferences;
+	
+	@Inject 
+	private OperatorMapping operatorMapping; 
 
 	/**
 	 * @return whether the expression itself (not its children) possibly causes a side-effect
@@ -147,19 +149,22 @@ public class XExpressionHelper {
 
 	public boolean isShortCircuitOperation(XAbstractFeatureCall featureCall) {
 		if (featureCall instanceof XBinaryOperation) {
-			XExpression leftOperand = ((XBinaryOperation) featureCall).getLeftOperand();
-			final String op = featureCall.getConcreteSyntaxFeatureName();
-			if(getElvisOperator().equals(op))
+			if(isOperatorFromExtension(featureCall, OperatorMapping.ELVIS, ObjectExtensions.class))
 				return true;
-			if (getAndOperator().equals(op) || getOrOperator().equals(op)) {
-				JvmTypeReference booleanType = typeReferences.getTypeForName(Boolean.TYPE, leftOperand);
-				JvmTypeReference leftOperandType = typeProvider.getType(leftOperand);
-				JvmTypeReference operationReturnType = typeProvider.getType(featureCall);
-				return (conformanceComputer.isConformant(booleanType, leftOperandType) && conformanceComputer
-						.isConformant(booleanType, operationReturnType));
-			}
+			else 
+				return (isOperatorFromExtension(featureCall, OperatorMapping.AND, BooleanExtensions.class) 
+					|| isOperatorFromExtension(featureCall, OperatorMapping.OR, BooleanExtensions.class));
 		}
 		return false;
+	}
+
+	public boolean isOperatorFromExtension(XAbstractFeatureCall featureCall, QualifiedName operatorSymbol, Class<?> definingExtensionClass) {
+		if(!equal(featureCall.getConcreteSyntaxFeatureName(), operatorSymbol.getLastSegment()))
+			return false;
+		QualifiedName methodName = operatorMapping.getMethodName(operatorSymbol);
+		JvmDeclaredType definingJvmType = (JvmDeclaredType) typeReferences.findDeclaredType(definingExtensionClass, featureCall);
+		Iterable<JvmFeature> operatorImplementations = definingJvmType.findAllFeaturesByName(methodName.getLastSegment());
+		return contains(operatorImplementations, featureCall.getFeature());
 	}
 
 	public boolean isInlined(XAbstractFeatureCall call) {
