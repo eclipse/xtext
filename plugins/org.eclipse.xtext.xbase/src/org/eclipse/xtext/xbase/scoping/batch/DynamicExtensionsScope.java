@@ -14,7 +14,10 @@ import java.util.Map;
 import java.util.Set;
 
 import org.eclipse.xtext.common.types.JvmDeclaredType;
+import org.eclipse.xtext.common.types.JvmExecutable;
 import org.eclipse.xtext.common.types.JvmFeature;
+import org.eclipse.xtext.common.types.JvmFormalParameter;
+import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.naming.QualifiedName;
@@ -145,8 +148,11 @@ public class DynamicExtensionsScope extends AbstractSessionBasedScope {
 					Map<JvmTypeParameter, LightweightMergedBoundTypeArgument> receiverTypeParameterMapping = new DeclaratorTypeArgumentCollector().getTypeParameterMapping(extensionType);
 					for(JvmFeature feature: allFeatures) {
 						if (!feature.isStatic()) {
-							if (firstArgument != null)
-								result.add(createDescription(name, feature, extensionProvider.getKey(), extensionType, receiverTypeParameterMapping, bucket));
+							if (firstArgument != null) {
+								IIdentifiableElementDescription description = createDescription(name, feature, extensionProvider.getKey(), extensionType, receiverTypeParameterMapping, bucket);
+								if (description != null)
+									result.add(description);
+							}
 							if (implicit) {
 								result.add(createReceiverDescription(name, feature, extensionProvider.getKey(), extensionType, receiverTypeParameterMapping, bucket));
 							}
@@ -171,6 +177,13 @@ public class DynamicExtensionsScope extends AbstractSessionBasedScope {
 	
 	protected BucketedEObjectDescription createDescription(QualifiedName name, JvmFeature feature, XExpression receiver, LightweightTypeReference receiverType,
 			Map<JvmTypeParameter, LightweightMergedBoundTypeArgument> receiverTypeParameterMapping, ExpressionBucket bucket) {
+		if (!(feature instanceof JvmOperation)) {
+			return null;
+		}
+		List<JvmFormalParameter> parameters = ((JvmExecutable) feature).getParameters();
+		if (parameters.isEmpty()) {
+			return null;
+		}
 		if (implicit) {
 			return new InstanceExtensionDescriptionWithImplicitFirstArgument(
 					name, 

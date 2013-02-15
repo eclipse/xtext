@@ -22,6 +22,9 @@ public class FeatureScopeSessionWithStaticTypes extends AbstractNestedFeatureSco
 
 	private final List<? extends JvmType> staticFeatureProviders;
 	private final List<? extends JvmType> extensionProviders;
+	
+	private List<TypeBucket> staticallyImportedTypes;
+	private List<TypeBucket> staticallyImportedExtensions;
 
 	public FeatureScopeSessionWithStaticTypes(AbstractFeatureScopeSession featureScopeSession,
 			List<? extends JvmType> staticFeatureProviders,
@@ -33,11 +36,15 @@ public class FeatureScopeSessionWithStaticTypes extends AbstractNestedFeatureSco
 	
 	@Override
 	public List<TypeBucket> getStaticallyImportedTypes() {
-		return concatTypeBuckets(staticFeatureProviders, super.getStaticallyImportedTypes());
+		if (staticallyImportedTypes != null)
+			return staticallyImportedTypes;
+		return staticallyImportedTypes = concatTypeBuckets(staticFeatureProviders, super.getStaticallyImportedTypes());
 	}
 	
 	@Override
 	public List<TypeBucket> getStaticallyImportedExtensionTypes() {
+		if (staticallyImportedExtensions != null)
+			return staticallyImportedExtensions;
 		return concatTypeBuckets(extensionProviders, super.getStaticallyImportedExtensionTypes());
 	}
 

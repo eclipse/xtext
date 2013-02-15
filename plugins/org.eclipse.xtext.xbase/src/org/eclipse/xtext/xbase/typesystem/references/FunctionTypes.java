@@ -286,6 +286,8 @@ public class FunctionTypes {
 
 	@Nullable
 	protected FunctionTypeReference getAsFunctionOrNull(ParameterizedTypeReference typeReference) {
+		if (typeReference.isRawType())
+			return null;
 		FunctionTypeReference functionType = new FunctionTypeReference(typeReference.getOwner(), typeReference.getType());
 		List<LightweightTypeReference> allTypeArguments = typeReference.getTypeArguments();
 		if (!tryAssignTypeArguments(allTypeArguments.subList(0, allTypeArguments.size() - 1), functionType))

@@ -255,10 +255,6 @@ class OldAPITypeResolverTest extends AbstractOldAPITypeResolverTest {
 		fail("fails in old implementation")
 	}
 	
-	@Ignore("fails in old implementation") @Test override testOverloadedOperators_20() throws Exception {
-		fail("fails in old implementation")
-	}
-	
 	@Ignore("fails in old implementation") @Test override testImplicitImportPrintln_01() throws Exception {
 		fail("fails in old implementation")
 	}
@@ -352,13 +348,6 @@ class OldAPITypeResolverTest extends AbstractOldAPITypeResolverTest {
 		fail("fails in old implementation")
 	}
 	@Ignore("fails in old implementation") @Test override testClosure_31() throws Exception {
-		fail("fails in old implementation")
-	}
-	
-	@Ignore("fails in old implementation") @Test override testInvalidClosure_01() throws Exception {
-		fail("fails in old implementation")
-	}
-	@Ignore("fails in old implementation") @Test override testInvalidClosure_02() throws Exception {
 		fail("fails in old implementation")
 	}
 	
@@ -1053,6 +1042,28 @@ class OldAPITypeResolverTest extends AbstractOldAPITypeResolverTest {
 		fail("fails in old implementation")
 	}
 	
+	@Ignore("fails in old implementation") @Test override testTypeForVoidClosure_02() throws Exception {
+		fail("fails in old implementation")
+	}
+	@Ignore("fails in old implementation") @Test override testTypeForVoidClosure_04() throws Exception {
+		fail("fails in old implementation")
+	}
+	@Ignore("fails in old implementation") @Test override testTypeForVoidClosure_05() throws Exception {
+		fail("fails in old implementation")
+	}
+	@Ignore("fails in old implementation") @Test override testTypeForVoidClosure_07() throws Exception {
+		fail("fails in old implementation")
+	}
+	
+	@Ignore("fails in old implementation") @Test override testTypeForEmptyClosure_01() throws Exception {
+		fail("fails in old implementation")
+	}
+	@Ignore("fails in old implementation") @Test override testTypeForEmptyClosure_02() throws Exception {
+		fail("fails in old implementation")
+	}
+	@Ignore("fails in old implementation") @Test override testTypeForEmptyClosure_03() throws Exception {
+		fail("fails in old implementation")
+	}
 }
 
 /**

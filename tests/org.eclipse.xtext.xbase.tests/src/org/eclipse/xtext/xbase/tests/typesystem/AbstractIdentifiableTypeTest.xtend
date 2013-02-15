@@ -201,7 +201,7 @@ abstract class AbstractIdentifiableTypeTest extends AbstractXbaseTestCase {
 	}
 	
 	@Test def void testForExpression_03() throws Exception {
-		"for(String x : null as String[][]) x.size".resolvesIdentifiablesTo("String")
+		"for(String x : null as String[][]) x.length".resolvesIdentifiablesTo("String")
 	}
 	
 	@Test def void testForExpression_04() throws Exception {

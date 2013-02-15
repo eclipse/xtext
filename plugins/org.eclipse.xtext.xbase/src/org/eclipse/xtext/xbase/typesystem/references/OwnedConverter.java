@@ -10,6 +10,8 @@ package org.eclipse.xtext.xbase.typesystem.references;
 import java.lang.reflect.WildcardType;
 
 import org.eclipse.xtext.common.types.JvmAnyTypeReference;
+import org.eclipse.xtext.common.types.JvmArrayType;
+import org.eclipse.xtext.common.types.JvmComponentType;
 import org.eclipse.xtext.common.types.JvmCompoundTypeReference;
 import org.eclipse.xtext.common.types.JvmGenericArrayTypeReference;
 import org.eclipse.xtext.common.types.JvmMultiTypeReference;
@@ -64,6 +66,15 @@ public class OwnedConverter extends AbstractXtypeReferenceVisitor<LightweightTyp
 	
 	public LightweightTypeReference toLightweightReference(JvmTypeReference reference) {
 		return visit(reference);
+	}
+	
+	public LightweightTypeReference toRawLightweightReference(JvmType type) {
+		if (type instanceof JvmArrayType) {
+			JvmComponentType componentType = ((JvmArrayType) type).getComponentType();
+			LightweightTypeReference componentTypeReference = toRawLightweightReference(componentType);
+			return new ArrayTypeReference(getOwner(), componentTypeReference);
+		}
+		return new ParameterizedTypeReference(getOwner(), type);
 	}
 
 	public LightweightTypeReference apply(JvmTypeReference reference) {

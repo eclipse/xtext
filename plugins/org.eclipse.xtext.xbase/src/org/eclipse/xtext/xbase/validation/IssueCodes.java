@@ -55,7 +55,6 @@ public class IssueCodes {
 	public static final String TOO_MANY_PARAMS_IN_CLOSURE = ISSUE_CODE_PREFIX + "too_many_params_in_closure";
 	public static final String UNHANDLED_EXCEPTION = ISSUE_CODE_PREFIX + "unhandled_exception";
 	public static final String UNREACHABLE_CODE = ISSUE_CODE_PREFIX + "unreachable_code";
-	public static final String UNRESOLVABLE_PROXY = ISSUE_CODE_PREFIX + "unresolvable_proxy";
 	public static final String VARIABLE_NAME_SHADOWING = ISSUE_CODE_PREFIX + "variable_name_shadowing";
 	public static final String VARIABLE_NAME_DISALLOWED = ISSUE_CODE_PREFIX + "variable_name_disallowed";
 	public static final String NULL_SAFE_FEATURE_CALL_ON_PRIMITIVE = ISSUE_CODE_PREFIX + "null_safe_feature_call_on_primitive";

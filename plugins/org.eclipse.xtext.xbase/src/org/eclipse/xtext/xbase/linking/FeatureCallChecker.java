@@ -32,6 +32,7 @@ import org.eclipse.xtext.common.types.util.TypeConformanceComputationArgument;
 import org.eclipse.xtext.common.types.util.TypeConformanceComputer;
 import org.eclipse.xtext.common.types.util.TypeConformanceResult;
 import org.eclipse.xtext.common.types.util.TypeConformanceResult.Kind;
+import org.eclipse.xtext.diagnostics.Diagnostic;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.util.PolymorphicDispatcher;
 import org.eclipse.xtext.util.Strings;
@@ -170,7 +171,7 @@ public class FeatureCallChecker {
 				identifiable = (JvmIdentifiableElement) EcoreUtil.resolve(identifiable, context);
 			String issueCode;
 			if (identifiable.eIsProxy())
-				issueCode = UNRESOLVABLE_PROXY;
+				issueCode = Diagnostic.LINKING_DIAGNOSTIC;
 			else if (!validatedDescription.isValid()) {
 				if (Strings.isEmpty(validatedDescription.getIssueCode()))
 					issueCode = FEATURE_NOT_VISIBLE;
