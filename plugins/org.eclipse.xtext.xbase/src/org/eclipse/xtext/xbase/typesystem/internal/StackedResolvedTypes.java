@@ -135,7 +135,7 @@ public class StackedResolvedTypes extends ResolvedTypes {
 				List<JvmTypeParameter> typeParameters = basicGetDeclardTypeParameters();
 				if (typeParameters != null && typeParameters.contains(unbound.getTypeParameter())) {
 					unbound.tryResolve();
-					if (!unbound.isResolved()) {
+					if (!unbound.internalIsResolved()) {
 						unbound.acceptHint(new ParameterizedTypeReference(unbound.getOwner(), unbound.getTypeParameter()), 
 								BoundTypeArgumentSource.RESOLVED, unbound, VarianceInfo.INVARIANT, VarianceInfo.INVARIANT);
 					}

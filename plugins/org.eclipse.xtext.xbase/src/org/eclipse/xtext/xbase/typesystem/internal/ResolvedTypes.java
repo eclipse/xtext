@@ -391,7 +391,8 @@ public abstract class ResolvedTypes implements IResolvedTypes {
 				ensureReassignedTypesMapExists().put(identifiable, reference);
 			}
 		} else {
-			ensureReassignedTypesMapExists().remove(identifiable);
+			if (reassignedTypes != null)
+				ensureReassignedTypesMapExists().remove(identifiable);
 		}
 	}
 	
