@@ -296,7 +296,7 @@ public abstract class AbstractIdentifiableTypeTest extends AbstractXbaseTestCase
   
   @Test
   public void testForExpression_03() throws Exception {
-    this.resolvesIdentifiablesTo("for(String x : null as String[][]) x.size", "String");
+    this.resolvesIdentifiablesTo("for(String x : null as String[][]) x.length", "String");
   }
   
   @Test

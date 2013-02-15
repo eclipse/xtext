@@ -682,11 +682,6 @@ public abstract class AbstractTypeResolverTest<Reference extends Object> extends
   }
   
   @Test
-  public void testOverloadedOperators_20() throws Exception {
-    this.resolvesTo("\'a\' - 1", "int");
-  }
-  
-  @Test
   public void testCastExpression() throws Exception {
     this.resolvesTo("null as String", "String");
     this.resolvesTo("null as Boolean", "Boolean");
@@ -1358,16 +1353,6 @@ public abstract class AbstractTypeResolverTest<Reference extends Object> extends
   public void testClosure_33() throws Exception {
     Reference _resolvesTo = this.resolvesTo("[ String it | val bytes = new String bytes ]", "(String)=>String");
     this.isFunctionAndEquivalentTo(_resolvesTo, "Function1<String, String>");
-  }
-  
-  @Test
-  public void testInvalidClosure_01() throws Exception {
-    this.resolvesTo("5.map[ it ]", "List<Object>");
-  }
-  
-  @Test
-  public void testInvalidClosure_02() throws Exception {
-    this.resolvesTo("5.map[ 5bi ]", "List<BigInteger>");
   }
   
   @Test

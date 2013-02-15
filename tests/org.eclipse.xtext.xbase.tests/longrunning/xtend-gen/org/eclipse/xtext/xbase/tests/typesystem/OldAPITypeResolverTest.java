@@ -286,12 +286,6 @@ public class OldAPITypeResolverTest extends AbstractOldAPITypeResolverTest {
   
   @Ignore("fails in old implementation")
   @Test
-  public void testOverloadedOperators_20() throws Exception {
-    Assert.fail("fails in old implementation");
-  }
-  
-  @Ignore("fails in old implementation")
-  @Test
   public void testImplicitImportPrintln_01() throws Exception {
     Assert.fail("fails in old implementation");
   }
@@ -467,18 +461,6 @@ public class OldAPITypeResolverTest extends AbstractOldAPITypeResolverTest {
   @Ignore("fails in old implementation")
   @Test
   public void testClosure_31() throws Exception {
-    Assert.fail("fails in old implementation");
-  }
-  
-  @Ignore("fails in old implementation")
-  @Test
-  public void testInvalidClosure_01() throws Exception {
-    Assert.fail("fails in old implementation");
-  }
-  
-  @Ignore("fails in old implementation")
-  @Test
-  public void testInvalidClosure_02() throws Exception {
     Assert.fail("fails in old implementation");
   }
   
@@ -1817,6 +1799,48 @@ public class OldAPITypeResolverTest extends AbstractOldAPITypeResolverTest {
   @Ignore("fails in old implementation")
   @Test
   public void testBrokenConstructorCall_02() throws Exception {
+    Assert.fail("fails in old implementation");
+  }
+  
+  @Ignore("fails in old implementation")
+  @Test
+  public void testTypeForVoidClosure_02() throws Exception {
+    Assert.fail("fails in old implementation");
+  }
+  
+  @Ignore("fails in old implementation")
+  @Test
+  public void testTypeForVoidClosure_04() throws Exception {
+    Assert.fail("fails in old implementation");
+  }
+  
+  @Ignore("fails in old implementation")
+  @Test
+  public void testTypeForVoidClosure_05() throws Exception {
+    Assert.fail("fails in old implementation");
+  }
+  
+  @Ignore("fails in old implementation")
+  @Test
+  public void testTypeForVoidClosure_07() throws Exception {
+    Assert.fail("fails in old implementation");
+  }
+  
+  @Ignore("fails in old implementation")
+  @Test
+  public void testTypeForEmptyClosure_01() throws Exception {
+    Assert.fail("fails in old implementation");
+  }
+  
+  @Ignore("fails in old implementation")
+  @Test
+  public void testTypeForEmptyClosure_02() throws Exception {
+    Assert.fail("fails in old implementation");
+  }
+  
+  @Ignore("fails in old implementation")
+  @Test
+  public void testTypeForEmptyClosure_03() throws Exception {
     Assert.fail("fails in old implementation");
   }
 }

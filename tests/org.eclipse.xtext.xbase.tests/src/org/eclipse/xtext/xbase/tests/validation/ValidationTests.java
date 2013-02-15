@@ -14,6 +14,7 @@ import java.math.BigInteger;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.xtext.common.types.TypesPackage;
+import org.eclipse.xtext.diagnostics.Diagnostic;
 import org.eclipse.xtext.junit4.validation.ValidationTestHelper;
 import org.eclipse.xtext.xbase.XBlockExpression;
 import org.eclipse.xtext.xbase.XCasePart;
@@ -199,13 +200,13 @@ public class ValidationTests extends AbstractXbaseTestCase {
 	@Test
 	public void testLocalVarWithArguments_01() throws Exception {
 		XExpression expr = expression("{ val x = 'foo' x(42, 17bd) }");
-		helper.assertError(expr, XFEATURE_CALL, UNRESOLVABLE_PROXY, "method", "x(int, BigDecimal)");
+		helper.assertError(expr, XFEATURE_CALL, Diagnostic.LINKING_DIAGNOSTIC, "method", "x(int, BigDecimal)");
 	}
 	
 	@Test 
 	public void testLocalVarWithArguments_02() throws Exception {
 		XExpression expr = expression("{ val x = 'foo' x() }");
-		helper.assertError(expr, XFEATURE_CALL, UNRESOLVABLE_PROXY, "method", "x()");
+		helper.assertError(expr, XFEATURE_CALL, Diagnostic.LINKING_DIAGNOSTIC, "method", "x()");
 	}
 	
 	@Test public void testLocalVarOfTypeVoid_01() throws Exception {
@@ -262,14 +263,14 @@ public class ValidationTests extends AbstractXbaseTestCase {
 	public void testVariableShadowing_08() throws Exception {
 		XExpression expression = expression("[ int x, String x | x.substring(1) ]");
 		helper.assertError(expression, TypesPackage.Literals.JVM_FORMAL_PARAMETER, VARIABLE_NAME_SHADOWING, "x");
-		helper.assertNoError(expression, UNRESOLVABLE_PROXY);
+		helper.assertNoError(expression, Diagnostic.LINKING_DIAGNOSTIC);
 	}
 	
 	@Test 
 	public void testVariableShadowing_09() throws Exception {
 		XExpression expression = expression("[ String x, int x | x.substring(1) ]");
 		helper.assertError(expression, TypesPackage.Literals.JVM_FORMAL_PARAMETER, VARIABLE_NAME_SHADOWING, "x");
-		helper.assertError(expression, XMEMBER_FEATURE_CALL, UNRESOLVABLE_PROXY, "substring(int)");
+		helper.assertError(expression, XMEMBER_FEATURE_CALL, Diagnostic.LINKING_DIAGNOSTIC, "substring(int)");
 	}
 	
 	@Test public void testNoPrimitivesInTypeArgs_00() throws Exception {

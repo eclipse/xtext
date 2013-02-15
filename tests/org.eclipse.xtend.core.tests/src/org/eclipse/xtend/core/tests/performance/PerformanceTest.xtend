@@ -85,8 +85,54 @@ class PerformanceTest extends AbstractXtendTestCase {
 	Task 'Crosslink resolution' took 10582ms (11902 measurements).
 	Task 'validation' took 7569ms (57 measurements).
 	-------------------------------------------------------------------------------------------------------------------------
-	
-	
+	Test 'doCompile(org.eclipse.xtend.core.tests.performance.PerformanceTest)' :
+	-------------------------------------------------------------------------------------------------------------------------
+	Task 'PerformanceTest.doCompile' took 9253ms (1 measurements).
+	Task 'AbstractParser.parse' took 696ms (57 measurements).
+	Task 'primary JVM Model inference (JvmModelAssociator.installDerivedState)' took 1485ms (57 measurements).
+	Task '[macros] findActiveAnnotations (ActiveAnnotationContextProvider.computeContext)' took 1113ms (57 measurements).
+	Task 'ClassFinder.forName' took 237ms (172817 measurements).
+	Task 'secondary (i.e. Macros) JVM Model inference (JvmModelAssociator.installDerivedState)' took 0ms (57 measurements).
+	Task 'Crosslink resolution (DefaultLinkingService.getLinkedObjects)' took 2225ms (4074 measurements).
+	Task 'ResourceValidatorImpl.validation' took 6575ms (57 measurements).
+	Task 'DefaultReentrantTypeResolver.resolve' took 5101ms (114 measurements).
+	Task 'LightweightTypeReference.copyInto' took 70ms (274432 measurements).
+	Task 'LightweightTypeReference#internalIsAssignableFrom' took 1295ms (265117 measurements).
+	Task 'LightweightTypeReference#collectSuperTypes' took 5ms (62 measurements).
+	Task 'DeclaratorTypeArgumentCollector.getTypeParameterMapping' took 57ms (12012 measurements).
+	-------------------------------------------------------------------------------------------------------------------------
+	Test 'doCompile(org.eclipse.xtend.core.tests.performance.PerformanceTest)' :
+	(without warmup)
+	-------------------------------------------------------------------------------------------------------------------------
+	Task 'PerformanceTest.doCompile' took 8441ms (1 measurements).
+	Task 'AbstractParser.parse' took 723ms (57 measurements).
+	Task 'primary JVM Model inference (JvmModelAssociator.installDerivedState)' took 1507ms (57 measurements).
+	Task '[macros] findActiveAnnotations (ActiveAnnotationContextProvider.computeContext)' took 1105ms (57 measurements).
+	Task 'ClassFinder.forName' took 199ms (72275 measurements).
+	Task 'secondary (i.e. Macros) JVM Model inference (JvmModelAssociator.installDerivedState)' took 0ms (57 measurements).
+	Task 'Crosslink resolution (DefaultLinkingService.getLinkedObjects)' took 2312ms (4074 measurements).
+	Task 'ResourceValidatorImpl.validation' took 5690ms (57 measurements).
+	Task 'DefaultReentrantTypeResolver.resolve' took 3923ms (114 measurements).
+	Task 'LightweightTypeReference.copyInto' took 44ms (94082 measurements).
+	Task 'LightweightTypeReference#internalIsAssignableFrom' took 491ms (74909 measurements).
+	Task 'LightweightTypeReference#collectSuperTypes' took 6ms (62 measurements).
+	Task 'DeclaratorTypeArgumentCollector.getTypeParameterMapping' took 73ms (11369 measurements).
+	-------------------------------------------------------------------------------------------------------------------------
+	(with warmup)
+	Task 'PerformanceTest.doCompile' took 6106ms (1 measurements).
+	Task 'AbstractParser.parse' took 408ms (57 measurements).
+	Task 'primary JVM Model inference (JvmModelAssociator.installDerivedState)' took 349ms (57 measurements).
+	Task '[macros] findActiveAnnotations (ActiveAnnotationContextProvider.computeContext)' took 159ms (57 measurements).
+	Task 'ClassFinder.forName' took 311ms (72275 measurements).
+	Task 'secondary (i.e. Macros) JVM Model inference (JvmModelAssociator.installDerivedState)' took 0ms (57 measurements).
+	Task 'Crosslink resolution (DefaultLinkingService.getLinkedObjects)' took 1267ms (4074 measurements).
+	Task 'ResourceValidatorImpl.validation' took 5108ms (57 measurements).
+	Task 'DefaultReentrantTypeResolver.resolve' took 3730ms (114 measurements).
+	Task 'LightweightTypeReference.copyInto' took 24ms (94082 measurements).
+	Task 'LightweightTypeReference#internalIsAssignableFrom' took 442ms (74909 measurements).
+	Task 'LightweightTypeReference#collectSuperTypes' took 0ms (62 measurements).
+	Task 'DeclaratorTypeArgumentCollector.getTypeParameterMapping' took 54ms (11369 measurements).
+	-------------------------------------------------------------------------------------------------------------------------
 	 */
 	@Test def void doCompile() {
 		val num = 50;
@@ -116,6 +162,16 @@ class PerformanceTest extends AbstractXtendTestCase {
 	@Test
 	@Ignore
 	def void doCompileThreeTimes() {
+		doCompile
+		doCompile
+		doCompile
+	}
+	
+	@Test
+	@Ignore
+	def void doCompileFiveTimes() {
+		doCompile
+		doCompile
 		doCompile
 		doCompile
 		doCompile

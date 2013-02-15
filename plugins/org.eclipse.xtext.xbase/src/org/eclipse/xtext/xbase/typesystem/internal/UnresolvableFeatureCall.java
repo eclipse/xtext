@@ -25,7 +25,6 @@ import org.eclipse.xtext.xbase.XbasePackage;
 import org.eclipse.xtext.xbase.typesystem.IResolvedTypes;
 import org.eclipse.xtext.xbase.typesystem.computation.IFeatureLinkingCandidate;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
-import org.eclipse.xtext.xbase.validation.IssueCodes;
 
 import com.google.common.collect.Lists;
 
@@ -98,7 +97,7 @@ public class UnresolvableFeatureCall extends AbstractUnresolvableReferenceWithNo
 					argumentTypes = argumentTypesBuilder.toString();
 				}
 				messageString = "The method " + getLinkText()  + "(" + argumentTypes + ") is undefined";
-				issueCode = IssueCodes.UNRESOLVABLE_PROXY;
+				issueCode = org.eclipse.xtext.diagnostics.Diagnostic.LINKING_DIAGNOSTIC;
 			}
 		}
 		Diagnostic diagnostic = new XtextLinkingDiagnostic(

@@ -77,8 +77,11 @@ public abstract class AbstractStaticImportsScope extends AbstractSessionBasedSco
 						if (type instanceof JvmDeclaredType) {
 							Iterable<JvmFeature> features = ((JvmDeclaredType) type).findAllFeaturesByName(simpleName);
 							for(JvmFeature feature: features) {
-								if (feature.isStatic())
-									result.add(createDescription(name, feature, bucket));
+								if (feature.isStatic()) {
+									IIdentifiableElementDescription description = createDescription(name, feature, bucket);
+									if (description != null)
+										result.add(description);
+								}
 							}
 							
 						}
