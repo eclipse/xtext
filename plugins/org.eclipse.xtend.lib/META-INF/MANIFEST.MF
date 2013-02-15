@@ -10,7 +10,6 @@ Export-Package: org.eclipse.xtend.lib,
  org.eclipse.xtend.lib.macro,
  org.eclipse.xtend.lib.macro.declaration,
  org.eclipse.xtend.lib.macro.expression,
- org.eclipse.xtend.lib.macro.services,
- org.eclipse.xtend.lib.macro.type
+ org.eclipse.xtend.lib.macro.services
 Import-Package: com.google.common.annotations;version="10.0.1"
 Require-Bundle: org.eclipse.xtext.xbase.lib;bundle-version="2.4.0";visibility:=reexport

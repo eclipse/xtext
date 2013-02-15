@@ -15,7 +15,6 @@ import com.google.common.annotations.Beta;
 
 /**
  * 
- * 
  * @param <T> the type which this processor processes. FeatureCall in case of a regualar macro, or any subtype of AnnotationTarget for active annotations.
  * 
  * @author Sven Efftinge
