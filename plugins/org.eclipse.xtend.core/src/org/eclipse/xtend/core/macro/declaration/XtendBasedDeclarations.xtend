@@ -115,7 +115,8 @@ class XtendMethodDeclarationImpl extends XtendMemberDeclarationImpl<XtendFunctio
 		false
 	}
 	
-	override isOverride() {
+	//TODO declare in interface
+	def isOverride() {
 		delegate.isOverride
 	}
 	
