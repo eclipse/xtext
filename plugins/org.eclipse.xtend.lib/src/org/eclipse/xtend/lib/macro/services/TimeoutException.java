@@ -5,14 +5,12 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtend.lib.macro.declaration;
+package org.eclipse.xtend.lib.macro.services;
 
 import com.google.common.annotations.Beta;
 
 @Beta
-public interface MutableMethodDeclaration extends MutableExecutableDeclaration, MethodDeclaration {
-	void setReturnType(TypeReference type);
-	void setStatic(boolean isStatic);
-	void setFinal(boolean isFinal);
-	void setAbstract(boolean isAbstract);
+@SuppressWarnings("serial")
+public class TimeoutException extends RuntimeException {
+
 }
