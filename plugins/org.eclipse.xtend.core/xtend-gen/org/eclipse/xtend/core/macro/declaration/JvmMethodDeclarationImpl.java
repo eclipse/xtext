@@ -30,11 +30,6 @@ public class JvmMethodDeclarationImpl extends JvmExecutableDeclarationImpl<JvmOp
     return _isFinal;
   }
   
-  public boolean isOverride() {
-    UnsupportedOperationException _unsupportedOperationException = new UnsupportedOperationException("Auto-Jvm function stub");
-    throw _unsupportedOperationException;
-  }
-  
   public boolean isStatic() {
     JvmOperation _delegate = this.getDelegate();
     boolean _isStatic = _delegate.isStatic();
@@ -54,5 +49,20 @@ public class JvmMethodDeclarationImpl extends JvmExecutableDeclarationImpl<JvmOp
     LightweightTypeReference _lightWeightTypeReference = ((TypeReferenceImpl) type).getLightWeightTypeReference();
     JvmTypeReference _javaCompliantTypeReference = _lightWeightTypeReference.toJavaCompliantTypeReference();
     _delegate.setReturnType(_javaCompliantTypeReference);
+  }
+  
+  public void setAbstract(final boolean isAbstract) {
+    JvmOperation _delegate = this.getDelegate();
+    _delegate.setAbstract(isAbstract);
+  }
+  
+  public void setFinal(final boolean isFinal) {
+    JvmOperation _delegate = this.getDelegate();
+    _delegate.setFinal(isFinal);
+  }
+  
+  public void setStatic(final boolean isStatic) {
+    JvmOperation _delegate = this.getDelegate();
+    _delegate.setStatic(isStatic);
   }
 }

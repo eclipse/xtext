@@ -175,6 +175,7 @@ public class JvmClassDeclarationImpl extends JvmTypeDeclarationImpl<JvmGenericTy
   public void addField(final String name, final Procedure1<MutableFieldDeclaration> initializer) {
     final JvmField newField = TypesFactory.eINSTANCE.createJvmField();
     newField.setSimpleName(name);
+    newField.setVisibility(JvmVisibility.PRIVATE);
     JvmGenericType _delegate = this.getDelegate();
     EList<JvmMember> _members = _delegate.getMembers();
     _members.add(newField);

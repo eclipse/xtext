@@ -68,6 +68,7 @@ import org.eclipse.xtend.lib.macro.declaration.TypeReference;
 import org.eclipse.xtend.lib.macro.declaration.Visibility;
 import org.eclipse.xtend.lib.macro.services.Problem;
 import org.eclipse.xtend.lib.macro.services.ProblemSupport;
+import org.eclipse.xtend.lib.macro.services.TimeoutException;
 import org.eclipse.xtend.lib.macro.services.TypeReferenceProvider;
 import org.eclipse.xtext.common.types.JvmAnnotationType;
 import org.eclipse.xtext.common.types.JvmAnyTypeReference;
@@ -168,6 +169,20 @@ public class CompilationUnitImpl implements CompilationUnit, TypeReferenceProvid
     return _list;
   }
   
+  private boolean isTimeout = false;
+  
+  public boolean setTimeout(final boolean timeout) {
+    boolean _isTimeout = this.isTimeout = timeout;
+    return _isTimeout;
+  }
+  
+  public void checkTimeout() {
+    if (this.isTimeout) {
+      TimeoutException _timeoutException = new TimeoutException();
+      throw _timeoutException;
+    }
+  }
+  
   private XtendFile _xtendFile;
   
   public XtendFile getXtendFile() {
@@ -208,6 +223,7 @@ public class CompilationUnitImpl implements CompilationUnit, TypeReferenceProvid
   }
   
   private <IN extends EObject, OUT extends Object> OUT getOrCreate(final IN in, final Function1<? super IN,? extends OUT> provider) {
+    this.checkTimeout();
     boolean _containsKey = this.identityCache.containsKey(in);
     if (_containsKey) {
       Object _get = this.identityCache.get(in);
@@ -481,6 +497,7 @@ public class CompilationUnitImpl implements CompilationUnit, TypeReferenceProvid
   public TypeReference toTypeReference(final LightweightTypeReference delegate) {
     TypeReferenceImpl _xblockexpression = null;
     {
+      this.checkTimeout();
       boolean _equals = ObjectExtensions.operator_equals(delegate, null);
       if (_equals) {
         return null;
@@ -702,15 +719,21 @@ public class CompilationUnitImpl implements CompilationUnit, TypeReferenceProvid
   }
   
   public TypeReference newArrayTypeReference(final TypeReference componentType) {
-    JvmTypeReference _jvmTypeReference = this.toJvmTypeReference(componentType);
-    JvmGenericArrayTypeReference _createArrayType = this.typeReferences.createArrayType(_jvmTypeReference);
-    TypeReference _typeReference = this.toTypeReference(_createArrayType);
-    return _typeReference;
+    TypeReference _xblockexpression = null;
+    {
+      this.checkTimeout();
+      JvmTypeReference _jvmTypeReference = this.toJvmTypeReference(componentType);
+      JvmGenericArrayTypeReference _createArrayType = this.typeReferences.createArrayType(_jvmTypeReference);
+      TypeReference _typeReference = this.toTypeReference(_createArrayType);
+      _xblockexpression = (_typeReference);
+    }
+    return _xblockexpression;
   }
   
   public TypeReference newTypeReference(final String typeName, final TypeReference... typeArguments) {
     TypeReference _xblockexpression = null;
     {
+      this.checkTimeout();
       XtendFile _xtendFile = this.getXtendFile();
       final JvmType type = this.typeReferences.findDeclaredType(typeName, _xtendFile);
       boolean _equals = ObjectExtensions.operator_equals(type, null);
@@ -734,6 +757,7 @@ public class CompilationUnitImpl implements CompilationUnit, TypeReferenceProvid
   public TypeReference newTypeReference(final Type typeDeclaration, final TypeReference... typeArguments) {
     TypeReference _xblockexpression = null;
     {
+      this.checkTimeout();
       JvmComponentType _switchResult = null;
       boolean _matched = false;
       if (!_matched) {
@@ -881,11 +905,13 @@ public class CompilationUnitImpl implements CompilationUnit, TypeReferenceProvid
   }
   
   public JvmTypeReference toJvmTypeReference(final TypeReference typeRef) {
+    this.checkTimeout();
     LightweightTypeReference _lightWeightTypeReference = ((TypeReferenceImpl) typeRef).getLightWeightTypeReference();
     return _lightWeightTypeReference.toJavaCompliantTypeReference();
   }
   
   public void setCompilationStrategy(final JvmExecutable executable, final CompilationStrategy compilationStrategy) {
+    this.checkTimeout();
     final Procedure1<ITreeAppendable> _function = new Procedure1<ITreeAppendable>() {
         public void apply(final ITreeAppendable it) {
           CompilationContextImpl _compilationContextImpl = new CompilationContextImpl(it, CompilationUnitImpl.this, CompilationUnitImpl.this.typeRefSerializer);
@@ -898,6 +924,7 @@ public class CompilationUnitImpl implements CompilationUnit, TypeReferenceProvid
   }
   
   public void addError(final Element element, final String message) {
+    this.checkTimeout();
     final Pair<Resource,EObject> resAndObj = this.getResourceAndEObject(element);
     Resource _key = resAndObj.getKey();
     EList<Diagnostic> _errors = _key.getErrors();
@@ -910,9 +937,11 @@ public class CompilationUnitImpl implements CompilationUnit, TypeReferenceProvid
   }
   
   public void addInfo(final Element element, final String message) {
+    this.checkTimeout();
   }
   
   public void addWarning(final Element element, final String message) {
+    this.checkTimeout();
     final Pair<Resource,EObject> resAndObj = this.getResourceAndEObject(element);
     Resource _key = resAndObj.getKey();
     EList<Diagnostic> _warnings = _key.getWarnings();
@@ -925,6 +954,7 @@ public class CompilationUnitImpl implements CompilationUnit, TypeReferenceProvid
   }
   
   public List<Problem> getProblems(final Element element) {
+    this.checkTimeout();
     final Pair<Resource,EObject> resAndObj = this.getResourceAndEObject(element);
     final Resource resource = resAndObj.getKey();
     EList<Diagnostic> _errors = resource.getErrors();
@@ -993,6 +1023,7 @@ public class CompilationUnitImpl implements CompilationUnit, TypeReferenceProvid
   }
   
   private Pair<Resource,EObject> getResourceAndEObject(final Element element) {
+    this.checkTimeout();
     boolean _matched = false;
     if (!_matched) {
       if (element instanceof XtendNamedElementImpl) {

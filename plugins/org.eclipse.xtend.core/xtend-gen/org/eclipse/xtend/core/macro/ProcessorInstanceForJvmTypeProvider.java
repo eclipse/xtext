@@ -1,5 +1,6 @@
 package org.eclipse.xtend.core.macro;
 
+import com.google.inject.Inject;
 import org.apache.log4j.Logger;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
@@ -17,6 +18,9 @@ public class ProcessorInstanceForJvmTypeProvider {
       return _logger;
     }
   }.apply();
+  
+  @Inject
+  private ClassLoader classLoader;
   
   /**
    * @return an instance of the given JvmType
@@ -67,10 +71,10 @@ public class ProcessorInstanceForJvmTypeProvider {
             return _class.getClassLoader();
           }
         }
-        Class<? extends Object> _class = classLoaderCtx==null?(Class<? extends Object>)null:classLoaderCtx.getClass();
-        String _name = _class.getName();
-        String _plus = ("Unsupported classloader context in resource set : " + _name);
-        ProcessorInstanceForJvmTypeProvider.logger.error(_plus);
+        {
+          ProcessorInstanceForJvmTypeProvider.logger.info("No classloader attached to the resource set. Using injected classloader.");
+          return this.classLoader;
+        }
       }
     }
     return null;

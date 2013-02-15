@@ -35,6 +35,7 @@ import org.eclipse.xtext.common.types.JvmOperation
 import org.eclipse.xtext.common.types.JvmVisibility
 import org.eclipse.xtext.common.types.TypesFactory
 import org.eclipse.xtext.xbase.lib.Procedures$Procedure1
+import com.google.common.collect.ImmutableList
 
 abstract class JvmNamedElementImpl<T extends JvmIdentifiableElement> extends AbstractDeclarationImpl<T> implements MutableNamedElement {
 	
@@ -88,7 +89,7 @@ abstract class JvmMemberDeclarationImpl<T extends JvmMember> extends JvmNamedEle
 abstract class JvmTypeDeclarationImpl<T extends JvmDeclaredType> extends JvmMemberDeclarationImpl<T> implements MutableTypeDeclaration {
 	
 	override getMembers() {
-		delegate.members.map[compilationUnit.toMemberDeclaration(it) as MutableMemberDeclaration]
+		ImmutableList::copyOf(delegate.members.map[compilationUnit.toMemberDeclaration(it) as MutableMemberDeclaration])
 	}
 	
 	override getPackageName() {
@@ -181,6 +182,7 @@ class JvmClassDeclarationImpl extends JvmTypeDeclarationImpl<JvmGenericType> imp
 	override addField(String name, Procedure1<MutableFieldDeclaration> initializer) {
 		val newField = TypesFactory::eINSTANCE.createJvmField
 		newField.simpleName = name
+		newField.visibility = JvmVisibility::PRIVATE
 		delegate.members.add(newField)
 		initializer.apply(compilationUnit.toMemberDeclaration(newField) as MutableFieldDeclaration)
 	}
@@ -309,9 +311,9 @@ class JvmMethodDeclarationImpl extends JvmExecutableDeclarationImpl<JvmOperation
 		delegate.isFinal
 	}
 	
-	override isOverride() {
-		throw new UnsupportedOperationException("Auto-Jvm function stub")
-	}
+//	override isOverride() {
+//		throw new UnsupportedOperationException("Auto-Jvm function stub")
+//	}
 	
 	override isStatic() {
 		delegate.isStatic
@@ -323,6 +325,22 @@ class JvmMethodDeclarationImpl extends JvmExecutableDeclarationImpl<JvmOperation
 
 	override setReturnType(TypeReference type) {
 		delegate.setReturnType((type as TypeReferenceImpl).lightWeightTypeReference.toJavaCompliantTypeReference)
+	}
+	
+	override setAbstract(boolean isAbstract) {
+		delegate.setAbstract(isAbstract)
+	}
+	
+	override setFinal(boolean isFinal) {
+		delegate.setFinal(isFinal)
+	}
+	
+//	override setOverride(boolean isOverride) {
+//		delegate.setOverride(isOverride)
+//	}
+	
+	override setStatic(boolean isStatic) {
+		delegate.setStatic(isStatic)
 	}
 	
 }

@@ -25,8 +25,6 @@ public interface MethodDeclaration extends ExecutableDeclaration {
 
 	boolean isAbstract();
 
-	boolean isOverride();
-
 	boolean isStatic();
 	
 	TypeReference getReturnType();

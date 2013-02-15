@@ -7,6 +7,7 @@
  */
 package org.eclipse.xtend.core.macro.declaration;
 
+import com.google.common.collect.ImmutableList;
 import java.util.List;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.xtend.core.macro.declaration.CompilationUnitImpl;
@@ -32,7 +33,8 @@ public abstract class JvmTypeDeclarationImpl<T extends JvmDeclaredType> extends 
         }
       };
     List<MutableMemberDeclaration> _map = ListExtensions.<JvmMember, MutableMemberDeclaration>map(_members, _function);
-    return _map;
+    ImmutableList<MutableMemberDeclaration> _copyOf = ImmutableList.<MutableMemberDeclaration>copyOf(_map);
+    return _copyOf;
   }
   
   public String getPackageName() {

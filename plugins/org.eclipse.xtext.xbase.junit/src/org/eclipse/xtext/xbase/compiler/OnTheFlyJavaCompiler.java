@@ -8,6 +8,10 @@ package org.eclipse.xtext.xbase.compiler;
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
 
+import static com.google.common.collect.Lists.newArrayList;
+import static com.google.common.collect.Maps.newHashMap;
+import static java.util.Collections.singletonMap;
+
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileFilter;
@@ -41,12 +45,6 @@ import org.eclipse.xtext.xbase.lib.Functions.Function0;
 
 import com.google.inject.Inject;
 import com.google.inject.internal.MoreTypes;
-
-import static java.util.Collections.*;
-
-import static com.google.common.collect.Lists.*;
-
-import static com.google.common.collect.Maps.*;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
@@ -261,7 +259,10 @@ public class OnTheFlyJavaCompiler {
 		} else {
 			String resolvedRawPath;
 			try {
-				resolvedRawPath = URIUtil.toURI(url).getRawPath();
+				if (url.toExternalForm().contains(" "))
+					resolvedRawPath = URIUtil.toURI(url).getRawPath();
+				else
+					resolvedRawPath = url.toURI().getRawPath();
 			} catch (URISyntaxException e) {
 				throw new WrappedException(e);
 			}
@@ -435,7 +436,7 @@ public class OnTheFlyJavaCompiler {
 				sb.append(File.pathSeparator);
 		}
 		sb.append('"');
-		return sb.toString();
+		return sb.toString().replace("%20", " ");
 	}
 
 	public void initializeClassPath() {
