@@ -14,8 +14,16 @@ import org.eclipse.xtext.validation.Check;
 import org.eclipse.xtext.validation.EValidatorRegistrar;
 import org.eclipse.xtext.validation.ValidationMessageAcceptor;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
+import org.eclipse.xtext.xbase.XBinaryOperation;
 import org.eclipse.xtext.xbase.XConstructorCall;
+import org.eclipse.xtext.xbase.XExpression;
+import org.eclipse.xtext.xbase.XNullLiteral;
 import org.eclipse.xtext.xbase.featurecalls.IdentifiableSimpleNameProvider;
+import org.eclipse.xtext.xbase.lib.ObjectExtensions;
+import org.eclipse.xtext.xbase.scoping.featurecalls.OperatorMapping;
+import org.eclipse.xtext.xbase.typesystem.IBatchTypeResolver;
+import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
+import org.eclipse.xtext.xbase.util.XExpressionHelper;
 
 import com.google.inject.Inject;
 
@@ -30,6 +38,12 @@ public class FeatureCallValidator extends AbstractDeclarativeValidator {
 	@Inject
 	private IdentifiableSimpleNameProvider nameProvider;
 
+	@Inject
+	private IBatchTypeResolver typeResolver;
+	
+	@Inject
+	private XExpressionHelper expressionHelper;
+	
 	@SuppressWarnings("deprecation")
 	@Check
 	public void checkInvalidFeatureLinked(XAbstractFeatureCall featureCall) {
@@ -38,6 +52,38 @@ public class FeatureCallValidator extends AbstractDeclarativeValidator {
 		}
 	}
 
+	@Check
+	public void checkPrimitiveComparedToNull(XBinaryOperation binaryOperation) {
+		String operatorSymbol = binaryOperation.getConcreteSyntaxFeatureName();
+		XExpression left = binaryOperation.getLeftOperand();
+		XExpression right = binaryOperation.getRightOperand();
+		if(expressionHelper.isOperatorFromExtension(binaryOperation, OperatorMapping.EQUALS, ObjectExtensions.class) 
+				|| expressionHelper.isOperatorFromExtension(binaryOperation, OperatorMapping.TRIPLE_EQUALS, ObjectExtensions.class)) {
+			if(right instanceof XNullLiteral) {
+				LightweightTypeReference leftType = typeResolver.resolveTypes(left).getActualType(left);
+				if(leftType != null && leftType.isPrimitive()) 
+					error("The operator '" + operatorSymbol + "' is undefined for the argument types " + leftType.getSimpleName() + " and null", binaryOperation, null, PRIMITIVE_COMPARED_TO_NULL);
+			}
+			if(left instanceof XNullLiteral) {
+				LightweightTypeReference rightType = typeResolver.resolveTypes(right).getActualType(right);
+				if(rightType != null && rightType.isPrimitive()) 
+					error("The operator '" + operatorSymbol + "' is undefined for the argument types null and " + rightType.getSimpleName(), binaryOperation, null, PRIMITIVE_COMPARED_TO_NULL);
+			}
+		} else if(expressionHelper.isOperatorFromExtension(binaryOperation, OperatorMapping.ELVIS, ObjectExtensions.class)) {
+			LightweightTypeReference leftType = typeResolver.resolveTypes(left).getActualType(left);
+			if(leftType.isPrimitive()) 
+				error("The operator '" + operatorSymbol + "' is undefined for arguments of type " + leftType.getSimpleName(), binaryOperation, null, PRIMITIVE_COMPARED_TO_NULL);
+		}
+	}
+		
+	protected boolean isPrimitiveAndNull(XExpression left, XExpression right) {
+		if(right instanceof XNullLiteral) {
+			LightweightTypeReference leftType = typeResolver.resolveTypes(left).getActualType(left);
+			return leftType.isPrimitive();
+		}
+		return false;
+	}
+	
 	@Check
 	public void checkInvalidFeatureLinked(XConstructorCall constructorCall) {
 		if (!constructorCall.isValidFeature()) {
