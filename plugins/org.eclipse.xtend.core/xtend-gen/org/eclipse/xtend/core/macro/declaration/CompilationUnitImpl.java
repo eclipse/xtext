@@ -52,11 +52,8 @@ import org.eclipse.xtend.core.xtend.XtendMember;
 import org.eclipse.xtend.core.xtend.XtendPackage;
 import org.eclipse.xtend.core.xtend.XtendParameter;
 import org.eclipse.xtend.core.xtend.XtendTypeDeclaration;
-import org.eclipse.xtend.lib.macro.CompilationContext;
-import org.eclipse.xtend.lib.macro.Problem;
-import org.eclipse.xtend.lib.macro.ProblemSupport;
-import org.eclipse.xtend.lib.macro.TypeReferenceProvider;
 import org.eclipse.xtend.lib.macro.declaration.ClassDeclaration;
+import org.eclipse.xtend.lib.macro.declaration.CompilationStrategy;
 import org.eclipse.xtend.lib.macro.declaration.CompilationUnit;
 import org.eclipse.xtend.lib.macro.declaration.Element;
 import org.eclipse.xtend.lib.macro.declaration.MemberDeclaration;
@@ -68,6 +65,9 @@ import org.eclipse.xtend.lib.macro.declaration.Type;
 import org.eclipse.xtend.lib.macro.declaration.TypeDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.TypeParameterDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.Visibility;
+import org.eclipse.xtend.lib.macro.services.Problem;
+import org.eclipse.xtend.lib.macro.services.ProblemSupport;
+import org.eclipse.xtend.lib.macro.services.TypeReferenceProvider;
 import org.eclipse.xtend.lib.macro.type.TypeReference;
 import org.eclipse.xtext.common.types.JvmAnnotationType;
 import org.eclipse.xtext.common.types.JvmAnyTypeReference;
@@ -207,7 +207,7 @@ public class CompilationUnitImpl implements CompilationUnit, TypeReferenceProvid
     this.typeRefConverter = _ownedConverter;
   }
   
-  private <IN extends EObject, OUT extends Object> OUT get(final IN in, final Function1<? super IN,? extends OUT> provider) {
+  private <IN extends EObject, OUT extends Object> OUT getOrCreate(final IN in, final Function1<? super IN,? extends OUT> provider) {
     boolean _containsKey = this.identityCache.containsKey(in);
     if (_containsKey) {
       Object _get = this.identityCache.get(in);
@@ -302,8 +302,8 @@ public class CompilationUnitImpl implements CompilationUnit, TypeReferenceProvid
           return _switchResult;
         }
       };
-    Type _get = this.<JvmType, Type>get(delegate, _function);
-    return _get;
+    Type _orCreate = this.<JvmType, Type>getOrCreate(delegate, _function);
+    return _orCreate;
   }
   
   public TypeDeclaration toTypeDeclaration(final JvmDeclaredType delegate) {
@@ -353,8 +353,8 @@ public class CompilationUnitImpl implements CompilationUnit, TypeReferenceProvid
           return _switchResult;
         }
       };
-    JvmClassDeclarationImpl _get = this.<JvmDeclaredType, JvmClassDeclarationImpl>get(delegate, _function);
-    return _get;
+    JvmClassDeclarationImpl _orCreate = this.<JvmDeclaredType, JvmClassDeclarationImpl>getOrCreate(delegate, _function);
+    return _orCreate;
   }
   
   public TypeParameterDeclaration toTypeParameterDeclaration(final JvmTypeParameter delegate) {
@@ -371,8 +371,8 @@ public class CompilationUnitImpl implements CompilationUnit, TypeReferenceProvid
           return _doubleArrow;
         }
       };
-    JvmTypeParameterDeclarationImpl _get = this.<JvmTypeParameter, JvmTypeParameterDeclarationImpl>get(delegate, _function);
-    return _get;
+    JvmTypeParameterDeclarationImpl _orCreate = this.<JvmTypeParameter, JvmTypeParameterDeclarationImpl>getOrCreate(delegate, _function);
+    return _orCreate;
   }
   
   public ParameterDeclaration toParameterDeclaration(final JvmFormalParameter delegate) {
@@ -389,8 +389,8 @@ public class CompilationUnitImpl implements CompilationUnit, TypeReferenceProvid
           return _doubleArrow;
         }
       };
-    JvmParameterDeclarationImpl _get = this.<JvmFormalParameter, JvmParameterDeclarationImpl>get(delegate, _function);
-    return _get;
+    JvmParameterDeclarationImpl _orCreate = this.<JvmFormalParameter, JvmParameterDeclarationImpl>getOrCreate(delegate, _function);
+    return _orCreate;
   }
   
   public MemberDeclaration toMemberDeclaration(final JvmMember delegate) {
@@ -454,8 +454,8 @@ public class CompilationUnitImpl implements CompilationUnit, TypeReferenceProvid
           return _switchResult;
         }
       };
-    MemberDeclaration _get = this.<JvmMember, MemberDeclaration>get(delegate, _function);
-    return _get;
+    MemberDeclaration _orCreate = this.<JvmMember, MemberDeclaration>getOrCreate(delegate, _function);
+    return _orCreate;
   }
   
   public TypeReference toTypeReference(final JvmTypeReference delegate) {
@@ -472,8 +472,8 @@ public class CompilationUnitImpl implements CompilationUnit, TypeReferenceProvid
             return _typeReference;
           }
         };
-      TypeReference _get = this.<JvmTypeReference, TypeReference>get(delegate, _function);
-      _xblockexpression = (_get);
+      TypeReference _orCreate = this.<JvmTypeReference, TypeReference>getOrCreate(delegate, _function);
+      _xblockexpression = (_orCreate);
     }
     return _xblockexpression;
   }
@@ -521,8 +521,8 @@ public class CompilationUnitImpl implements CompilationUnit, TypeReferenceProvid
           return _switchResult;
         }
       };
-    XtendClassDeclarationImpl _get = this.<XtendTypeDeclaration, XtendClassDeclarationImpl>get(delegate, _function);
-    return _get;
+    XtendClassDeclarationImpl _orCreate = this.<XtendTypeDeclaration, XtendClassDeclarationImpl>getOrCreate(delegate, _function);
+    return _orCreate;
   }
   
   public XtendMemberDeclarationImpl toXtendMemberDeclaration(final XtendMember delegate) {
@@ -586,8 +586,8 @@ public class CompilationUnitImpl implements CompilationUnit, TypeReferenceProvid
           return _switchResult;
         }
       };
-    XtendMemberDeclarationImpl _get = this.<XtendMember, XtendMemberDeclarationImpl>get(delegate, _function);
-    return _get;
+    XtendMemberDeclarationImpl _orCreate = this.<XtendMember, XtendMemberDeclarationImpl>getOrCreate(delegate, _function);
+    return _orCreate;
   }
   
   public XtendParameterDeclarationImpl toXtendParameterDeclaration(final XtendParameter delegate) {
@@ -604,8 +604,8 @@ public class CompilationUnitImpl implements CompilationUnit, TypeReferenceProvid
           return _doubleArrow;
         }
       };
-    XtendParameterDeclarationImpl _get = this.<XtendParameter, XtendParameterDeclarationImpl>get(delegate, _function);
-    return _get;
+    XtendParameterDeclarationImpl _orCreate = this.<XtendParameter, XtendParameterDeclarationImpl>getOrCreate(delegate, _function);
+    return _orCreate;
   }
   
   public XtendTypeParameterDeclarationImpl toXtendTypeParameterDeclaration(final JvmTypeParameter delegate) {
@@ -622,8 +622,8 @@ public class CompilationUnitImpl implements CompilationUnit, TypeReferenceProvid
           return _doubleArrow;
         }
       };
-    XtendTypeParameterDeclarationImpl _get = this.<JvmTypeParameter, XtendTypeParameterDeclarationImpl>get(delegate, _function);
-    return _get;
+    XtendTypeParameterDeclarationImpl _orCreate = this.<JvmTypeParameter, XtendTypeParameterDeclarationImpl>getOrCreate(delegate, _function);
+    return _orCreate;
   }
   
   public TypeReference getAnyType() {
@@ -885,13 +885,13 @@ public class CompilationUnitImpl implements CompilationUnit, TypeReferenceProvid
     return _lightWeightTypeReference.toJavaCompliantTypeReference();
   }
   
-  public void setCompilationStrategy(final JvmExecutable executable, final Function1<? super CompilationContext,? extends CharSequence> compilationStrategy) {
+  public void setCompilationStrategy(final JvmExecutable executable, final CompilationStrategy compilationStrategy) {
     final Procedure1<ITreeAppendable> _function = new Procedure1<ITreeAppendable>() {
         public void apply(final ITreeAppendable it) {
           CompilationContextImpl _compilationContextImpl = new CompilationContextImpl(it, CompilationUnitImpl.this, CompilationUnitImpl.this.typeRefSerializer);
           final CompilationContextImpl context = _compilationContextImpl;
-          CharSequence _apply = compilationStrategy.apply(context);
-          it.append(_apply);
+          CharSequence _compile = compilationStrategy.compile(context);
+          it.append(_compile);
         }
       };
     this.typesBuilder.setBody(executable, _function);
@@ -945,7 +945,7 @@ public class CompilationUnitImpl implements CompilationUnit, TypeReferenceProvid
           String _code = diag.getCode();
           String _message = diag.getMessage();
           Severity _severity = diag.getSeverity();
-          org.eclipse.xtend.lib.macro.Problem.Severity _translateSeverity = CompilationUnitImpl.this.translateSeverity(_severity);
+          org.eclipse.xtend.lib.macro.services.Problem.Severity _translateSeverity = CompilationUnitImpl.this.translateSeverity(_severity);
           ProblemImpl _problemImpl = new ProblemImpl(_code, _message, _translateSeverity);
           return ((Problem) _problemImpl);
         }
@@ -1024,31 +1024,31 @@ public class CompilationUnitImpl implements CompilationUnit, TypeReferenceProvid
     throw _illegalArgumentException;
   }
   
-  private org.eclipse.xtend.lib.macro.Problem.Severity translateSeverity(final Severity severity) {
-    org.eclipse.xtend.lib.macro.Problem.Severity _switchResult = null;
+  private org.eclipse.xtend.lib.macro.services.Problem.Severity translateSeverity(final Severity severity) {
+    org.eclipse.xtend.lib.macro.services.Problem.Severity _switchResult = null;
     boolean _matched = false;
     if (!_matched) {
       if (Objects.equal(severity,Severity.ERROR)) {
         _matched=true;
-        _switchResult = org.eclipse.xtend.lib.macro.Problem.Severity.ERROR;
+        _switchResult = org.eclipse.xtend.lib.macro.services.Problem.Severity.ERROR;
       }
     }
     if (!_matched) {
       if (Objects.equal(severity,Severity.WARNING)) {
         _matched=true;
-        _switchResult = org.eclipse.xtend.lib.macro.Problem.Severity.WARNING;
+        _switchResult = org.eclipse.xtend.lib.macro.services.Problem.Severity.WARNING;
       }
     }
     if (!_matched) {
       if (Objects.equal(severity,Severity.INFO)) {
         _matched=true;
-        _switchResult = org.eclipse.xtend.lib.macro.Problem.Severity.INFO;
+        _switchResult = org.eclipse.xtend.lib.macro.services.Problem.Severity.INFO;
       }
     }
     if (!_matched) {
       if (Objects.equal(severity,Severity.IGNORE)) {
         _matched=true;
-        _switchResult = org.eclipse.xtend.lib.macro.Problem.Severity.IGNORE;
+        _switchResult = org.eclipse.xtend.lib.macro.services.Problem.Severity.IGNORE;
       }
     }
     return _switchResult;

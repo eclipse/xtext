@@ -8,16 +8,16 @@
 package org.eclipse.xtend.core.macro;
 
 import com.google.inject.Inject;
-import com.google.inject.Provider;
 import java.util.List;
+import javax.inject.Provider;
 import org.eclipse.xtend.core.macro.ActiveAnnotationContext;
-import org.eclipse.xtend.core.macro.ModifyContextImpl;
+import org.eclipse.xtend.core.macro.TransformationContextImpl;
 import org.eclipse.xtend.core.macro.declaration.CompilationUnitImpl;
 import org.eclipse.xtend.core.macro.declaration.XtendMemberDeclarationImpl;
 import org.eclipse.xtend.core.xtend.XtendAnnotationTarget;
 import org.eclipse.xtend.core.xtend.XtendMember;
-import org.eclipse.xtend.lib.macro.ModifyProcessor;
-import org.eclipse.xtend.lib.macro.PreModifyProcessor;
+import org.eclipse.xtend.lib.macro.RegisterGlobalsParticipant;
+import org.eclipse.xtend.lib.macro.TransformationParticipant;
 import org.eclipse.xtend.lib.macro.declaration.MutableNamedElement;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.util.CancelIndicator;
@@ -35,7 +35,7 @@ import org.eclipse.xtext.xbase.lib.ListExtensions;
 @SuppressWarnings("all")
 public class AnnotationProcessor {
   @Inject
-  private Provider<ModifyContextImpl> modifyContextProvider;
+  private Provider<TransformationContextImpl> modifyContextProvider;
   
   /**
    * gets called from Xtend compiler, during "model inference", i.e. translation of Xtend AST to Java AST
@@ -52,8 +52,8 @@ public class AnnotationProcessor {
         final Object processor = _processorInstance;
         boolean _matched = false;
         if (!_matched) {
-          if (processor instanceof PreModifyProcessor) {
-            final PreModifyProcessor _preModifyProcessor = (PreModifyProcessor)processor;
+          if (processor instanceof RegisterGlobalsParticipant) {
+            final RegisterGlobalsParticipant _registerGlobalsParticipant = (RegisterGlobalsParticipant)processor;
             _matched=true;
             _switchResult = null;
           }
@@ -75,10 +75,10 @@ public class AnnotationProcessor {
       final Object processor = _processorInstance;
       boolean _matched = false;
       if (!_matched) {
-        if (processor instanceof ModifyProcessor) {
-          final ModifyProcessor _modifyProcessor = (ModifyProcessor)processor;
+        if (processor instanceof TransformationParticipant) {
+          final TransformationParticipant _transformationParticipant = (TransformationParticipant)processor;
           _matched=true;
-          final ModifyContextImpl modifyCtx = this.modifyContextProvider.get();
+          final TransformationContextImpl modifyCtx = this.modifyContextProvider.get();
           CompilationUnitImpl _compilationUnit = ctx.getCompilationUnit();
           modifyCtx.setUnit(_compilationUnit);
           List<XtendAnnotationTarget> _annotatedSourceElements = ctx.getAnnotatedSourceElements();
@@ -90,7 +90,7 @@ public class AnnotationProcessor {
               }
             };
           List<MutableNamedElement> _map = ListExtensions.<XtendAnnotationTarget, MutableNamedElement>map(_annotatedSourceElements, _function);
-          _modifyProcessor.modify(_map, modifyCtx);
+          _transformationParticipant.doTransform(_map, modifyCtx);
         }
       }
     } finally {

@@ -1,4 +1,4 @@
-package org.eclipse.xtend.lib.macro;
+package org.eclipse.xtend.lib.macro.services;
 
 public interface Problem {
 	

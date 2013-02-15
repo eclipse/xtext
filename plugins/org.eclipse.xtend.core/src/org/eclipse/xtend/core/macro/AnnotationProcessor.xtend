@@ -9,14 +9,19 @@
 package org.eclipse.xtend.core.macro
 
 import com.google.inject.Inject
-import com.google.inject.Provider
+import java.util.List
+import javax.inject.Provider
+import org.eclipse.emf.ecore.EClass
+import org.eclipse.emf.ecore.EPackage
 import org.eclipse.xtend.core.xtend.XtendMember
-import org.eclipse.xtend.lib.macro.ModifyProcessor
-import org.eclipse.xtend.lib.macro.PreModifyProcessor
+import org.eclipse.xtend.lib.macro.RegisterGlobalsParticipant
+import org.eclipse.xtend.lib.macro.TransformationParticipant
 import org.eclipse.xtext.common.types.JvmDeclaredType
 import org.eclipse.xtext.util.CancelIndicator
 import org.eclipse.xtext.util.IAcceptor
 import org.eclipse.xtext.util.internal.Stopwatches
+
+import static extension org.eclipse.xtend.core.macro.AnnotationProcessor.*
 
 /**
  * It checks whether the files contain macro annotations and calls their register and processing functions.
@@ -25,7 +30,7 @@ import org.eclipse.xtext.util.internal.Stopwatches
  */
 class AnnotationProcessor {
 	
-	@Inject Provider<ModifyContextImpl> modifyContextProvider
+	@Inject Provider<TransformationContextImpl> modifyContextProvider
 
 	/**
 	 * gets called from Xtend compiler, during "model inference", i.e. translation of Xtend AST to Java AST
@@ -35,7 +40,7 @@ class AnnotationProcessor {
 		task.start
 		try {
 			switch processor : ctx.processorInstance{
-				PreModifyProcessor: {
+				RegisterGlobalsParticipant: {
 					//TODO
 				}
 			}
@@ -49,10 +54,10 @@ class AnnotationProcessor {
 		task.start
 		try {
 			switch processor : ctx.processorInstance{
-				ModifyProcessor: {
+				TransformationParticipant: {
 					val modifyCtx = modifyContextProvider.get
 					modifyCtx.unit = ctx.compilationUnit
-					processor.modify(ctx.annotatedSourceElements.map[
+					processor.doTransform(ctx.annotatedSourceElements.map[
 						val xtendMember = ctx.compilationUnit.toXtendMemberDeclaration(it as XtendMember)
 						return modifyCtx.getGeneratedElement(xtendMember)
 					], modifyCtx)

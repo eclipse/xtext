@@ -9,10 +9,10 @@ package org.eclipse.xtend.lib.macro;
 
 import com.google.common.annotations.Beta;
 
-/**
- * @author Sven Efftinge
- */
 @Beta
-public @interface Macro {
-
+public interface RegisterGlobalsContext {
+	void registerClass(String name);
+	void registerInterface(String name);
+	void registerAnnotation(String name);
+	void registerEnum(String name);
 }

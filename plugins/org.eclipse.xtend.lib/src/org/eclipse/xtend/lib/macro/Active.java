@@ -15,6 +15,18 @@ import java.lang.annotation.Target;
 import com.google.common.annotations.Beta;
 
 /**
+ * The active annotation is used to register compilation participants
+ * with annotations. 
+ * 
+ *  They allow for enhancing and changing how Xtend code is translated to Java.
+ *  
+ *  There are three different compiler phases in which an active annotation can participate, each with different possibilities and constraints:
+ *  <ul>
+ *  	<li>Phase 1: Register Globals {@link RegisterGlobalsParticipant}</li>
+ *  	<li>Phase 2: Transformation {@link TransformationParticipant}</li>
+ *  	<li>Phase 3: Validation {@link ValidationParticipant}</li>
+ *  </ul>
+ * 
  * @author Sven Efftinge
  */
 @Beta
@@ -24,8 +36,8 @@ public @interface Active {
 
 	/**
 	 * @return the processor to call during compilation. should implement one or
-	 *         more of the processor interfaces {@link PreModifyProcessor},
-	 *         {@link ModifyProcessor}, and {@link PostModifyProcessor}.
+	 *         more of the processor interfaces {@link RegisterGlobalsParticipant},
+	 *         {@link TransformationParticipant}, and {@link ValidationParticipant}.
 	 */
 	Class<?> value();
 }

@@ -6,8 +6,9 @@ import javax.inject.Inject;
 import org.eclipse.xtend.core.macro.declaration.CompilationUnitImpl;
 import org.eclipse.xtend.core.tests.AbstractXtendTestCase;
 import org.eclipse.xtend.core.xtend.XtendFile;
-import org.eclipse.xtend.lib.macro.CompilationContext;
 import org.eclipse.xtend.lib.macro.declaration.ClassDeclaration;
+import org.eclipse.xtend.lib.macro.declaration.CompilationStrategy;
+import org.eclipse.xtend.lib.macro.declaration.CompilationStrategy.CompilationContext;
 import org.eclipse.xtend.lib.macro.declaration.CompilationUnit;
 import org.eclipse.xtend.lib.macro.declaration.ConstructorDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.FieldDeclaration;
@@ -26,7 +27,6 @@ import org.eclipse.xtend.lib.macro.declaration.Visibility;
 import org.eclipse.xtend.lib.macro.type.TypeReference;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.xbase.lib.Exceptions;
-import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.junit.Assert;
@@ -309,12 +309,12 @@ public class DeclarationsTest extends AbstractXtendTestCase {
                 TypeReference _string = ((CompilationUnitImpl) _compilationUnit).getString();
                 it.setReturnType(_string);
                 it.setVisibility(Visibility.PRIVATE);
-                final Function1<CompilationContext,String> _function = new Function1<CompilationContext,String>() {
-                    public String apply(final CompilationContext it) {
+                final CompilationStrategy _function = new CompilationStrategy() {
+                    public CharSequence compile(final CompilationContext it) {
                       StringConcatenation _builder = new StringConcatenation();
                       _builder.append("return \"foo\";");
                       _builder.newLine();
-                      return _builder.toString();
+                      return _builder;
                     }
                   };
                 it.setBody(_function);

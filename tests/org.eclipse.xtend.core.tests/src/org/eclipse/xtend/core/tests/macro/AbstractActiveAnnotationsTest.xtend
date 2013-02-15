@@ -17,17 +17,17 @@ abstract class AbstractActiveAnnotationsTest {
 				
 				import java.util.List
 				import org.eclipse.xtend.lib.macro.Active
-				import org.eclipse.xtend.lib.macro.ModifyContext
-				import org.eclipse.xtend.lib.macro.ModifyProcessor
+				import org.eclipse.xtend.lib.macro.TransformationContext
+				import org.eclipse.xtend.lib.macro.TransformationParticipant
 				import org.eclipse.xtend.lib.macro.declaration.MutableClassDeclaration
 
 				@Active(typeof(AbstractProcessor))
 				annotation Abstract { }
-				class AbstractProcessor implements ModifyProcessor<MutableClassDeclaration> {
+				class AbstractProcessor implements TransformationParticipant<MutableClassDeclaration> {
 					
-					extension ModifyContext ctx
+					extension TransformationContext ctx
 					
-					override modify(List<? extends MutableClassDeclaration> annotatedSourceClasses, ModifyContext context) {
+					override doTransform(List<? extends MutableClassDeclaration> annotatedSourceClasses, TransformationContext context) {
 						ctx = context
 						annotatedSourceClasses.forEach [
 							^abstract = true
@@ -57,17 +57,17 @@ abstract class AbstractActiveAnnotationsTest {
 				
 				import java.util.List
 				import org.eclipse.xtend.lib.macro.Active
-				import org.eclipse.xtend.lib.macro.ModifyContext
-				import org.eclipse.xtend.lib.macro.ModifyProcessor
+				import org.eclipse.xtend.lib.macro.TransformationContext
+				import org.eclipse.xtend.lib.macro.TransformationParticipant
 				import org.eclipse.xtend.lib.macro.declaration.MutableFieldDeclaration
 
 				@Active(typeof(PropertyProcessor))
 				annotation Property2 { }
-				class PropertyProcessor implements ModifyProcessor<MutableFieldDeclaration> {
+				class PropertyProcessor implements TransformationParticipant<MutableFieldDeclaration> {
 					
-					extension ModifyContext ctx
+					extension TransformationContext ctx
 					
-					override modify(List<? extends MutableFieldDeclaration> annotatedSourceFields, ModifyContext context) {
+					override doTransform(List<? extends MutableFieldDeclaration> annotatedSourceFields, TransformationContext context) {
 						ctx = context
 						annotatedSourceFields.forEach [ field |
 							field.declaringType.addMethod(field.getterName) [
@@ -119,17 +119,17 @@ abstract class AbstractActiveAnnotationsTest {
 				
 				import java.util.List
 				import org.eclipse.xtend.lib.macro.Active
-				import org.eclipse.xtend.lib.macro.ModifyContext
-				import org.eclipse.xtend.lib.macro.ModifyProcessor
+				import org.eclipse.xtend.lib.macro.TransformationContext
+				import org.eclipse.xtend.lib.macro.TransformationParticipant
 				import org.eclipse.xtend.lib.macro.declaration.MutableMethodDeclaration
 
 				@Active(typeof(ThrowsAndTypeParamProcessor))
 				annotation ThrowsAndTypeParam { }
-				class ThrowsAndTypeParamProcessor implements ModifyProcessor<MutableMethodDeclaration> {
+				class ThrowsAndTypeParamProcessor implements TransformationParticipant<MutableMethodDeclaration> {
 					
-					extension ModifyContext ctx
+					extension TransformationContext ctx
 					
-					override modify(List<? extends MutableMethodDeclaration> annotatedMethods, ModifyContext context) {
+					override doTransform(List<? extends MutableMethodDeclaration> annotatedMethods, TransformationContext context) {
 						ctx = context
 						annotatedMethods.forEach [
 							val type = addTypeParameter('A')
@@ -165,18 +165,18 @@ abstract class AbstractActiveAnnotationsTest {
 				
 				import java.util.List
 				import org.eclipse.xtend.lib.macro.Active
-				import org.eclipse.xtend.lib.macro.ModifyContext
-				import org.eclipse.xtend.lib.macro.ModifyProcessor
+				import org.eclipse.xtend.lib.macro.TransformationContext
+				import org.eclipse.xtend.lib.macro.TransformationParticipant
 				import org.eclipse.xtend.lib.macro.declaration.MutableNamedElement
 				import org.eclipse.xtend.lib.macro.declaration.MutableFieldDeclaration
 
 				@Active(typeof(ValidatedProcessor))
 				annotation Validated { }
-				class ValidatedProcessor implements ModifyProcessor<MutableNamedElement> {
+				class ValidatedProcessor implements TransformationParticipant<MutableNamedElement> {
 					
-					extension ModifyContext ctx
+					extension TransformationContext ctx
 					
-					override modify(List<? extends MutableNamedElement> annotatedMethods, ModifyContext context) {
+					override doTransform(List<? extends MutableNamedElement> annotatedMethods, TransformationContext context) {
 						ctx = context
 						annotatedMethods.forEach [ ele |
 							switch ele {

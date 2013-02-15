@@ -11,7 +11,7 @@ import java.util.List;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.xtend.core.macro.declaration.CompilationUnitImpl;
 import org.eclipse.xtend.core.macro.declaration.JvmMemberDeclarationImpl;
-import org.eclipse.xtend.lib.macro.CompilationContext;
+import org.eclipse.xtend.lib.macro.declaration.CompilationStrategy;
 import org.eclipse.xtend.lib.macro.declaration.MutableExecutableDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.MutableParameterDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.MutableTypeParameterDeclaration;
@@ -132,7 +132,7 @@ public abstract class JvmExecutableDeclarationImpl<T extends JvmExecutable> exte
     return ((MutableTypeParameterDeclaration) _typeParameterDeclaration);
   }
   
-  public void setBody(final Function1<? super CompilationContext,? extends CharSequence> compilationStrategy) {
+  public void setBody(final CompilationStrategy compilationStrategy) {
     CompilationUnitImpl _compilationUnit = this.getCompilationUnit();
     T _delegate = this.getDelegate();
     _compilationUnit.setCompilationStrategy(_delegate, compilationStrategy);

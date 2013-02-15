@@ -7,8 +7,8 @@
  */
 package org.eclipse.xtend.core.macro.declaration;
 
-import org.eclipse.xtend.lib.macro.Problem;
-import org.eclipse.xtend.lib.macro.Problem.Severity;
+import org.eclipse.xtend.lib.macro.services.Problem;
+import org.eclipse.xtend.lib.macro.services.Problem.Severity;
 
 @SuppressWarnings("all")
 public class ProblemImpl implements Problem {
