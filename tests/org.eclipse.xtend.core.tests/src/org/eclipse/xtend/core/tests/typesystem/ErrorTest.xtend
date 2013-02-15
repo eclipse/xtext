@@ -404,6 +404,21 @@ class ErrorTest extends AbstractXtendTestCase {
 			}
 		'''.processWithoutException
 	}
+	
+	@Test
+	def void testErrorModel_24() throws Exception {
+		'''
+			class Bug<A> {
+				A a
+				new(A a) {
+					this.a = a
+				}
+				def static of (A a) {
+					new Bug<A>(a)
+				}
+			}
+		'''.processWithoutException
+	}
 		
 	def processWithoutException(CharSequence input) throws Exception {
 		val resource = resourceSet.createResource(URI::createURI("abcdefg.xtend"))
