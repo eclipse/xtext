@@ -419,6 +419,184 @@ class ErrorTest extends AbstractXtendTestCase {
 			}
 		'''.processWithoutException
 	}
+	
+	@Test
+	def void testErrorModel_25() throws Exception {
+		'''
+			package x class Y {
+				def bug343090(Integer a, Integer b) {
+			    	<Integer>addFunction.apply(a, b)
+				}
+				def <T extends> addFunction() {
+			    	[T a,T b|a+b] as (T,T)=>T
+				}
+			}
+		'''.processWithoutException
+	}
+	
+	@Test
+	def void testErrorModel_26() throws Exception {
+		'''
+			package x class Y {
+				def bug343090(Integer a, Integer b) {
+			    	addFunction.apply(a, b)
+				}
+				def <T extends> addFunction() {
+			    	[T a,T b|a+b] as (T,T)=>T
+				}
+			}
+		'''.processWithoutException
+	}
+	
+	@Test
+	def void testErrorModel_27() throws Exception {
+		'''
+			package x class Y {
+				def bug343090(Integer a, Integer b) {
+				    <Integer>addFunction.apply(a, b)
+				}
+				def <T extends> addFunction() {
+				    [T a,T b|(a+b) as Integer] as (T,T)=>T
+				}
+			}
+		'''.processWithoutException
+	}
+	
+	@Test
+	def void testErrorModel_28() throws Exception {
+		'''
+			package x class Y {
+				def bug343090(Integer a, Integer b) {
+			    	<Integer>addFunction.apply(a, b)
+				}
+				def <T extends> addFunction() {
+			    	[T a,T b|(a+b) as T] as (T,T)=>T
+				}
+			}
+		'''.processWithoutException
+	}
+	
+	@Test
+	def void testErrorModel_30() throws Exception {
+		'''
+			package x class Y {
+				def bug343088(Integer a, Integer b) {
+				    addFunction.apply(a, b)
+				}
+				def <T extends> (T,T)=>T addFunction() {
+				    [T a,T b|(a+(b as Integer)) as T]
+				}
+			}
+		'''.processWithoutException
+	}
+	
+	@Test
+	def void testErrorModel_31() throws Exception {
+		'''
+			package x class Y {
+				def bug343088(Integer a, Integer b) {
+			    	addFunction.apply(a, b)
+				}
+				def <T extends> (T,T)=>T addFunction() {
+				    [T a,T b|(a+b) as T]
+				}
+			}
+		'''.processWithoutException
+	}
+	
+	@Test
+	def void testErrorModel_32() throws Exception {
+		'''
+			package x class Y {
+				def bug343090(Integer a, Integer b) {
+				    <Integer>addFunction.apply(a, b)
+				}
+				def <T extends > addFunction() {
+				    [T a,T b|a+b] as (T,T)=>T
+				}
+			}
+		'''.processWithoutException
+	}
+	
+	@Test
+	def void testErrorModel_33() throws Exception {
+		'''
+			package x
+			import java.util.Collection
+			import java.util.List
+			class Z {
+				def generate() {
+					val List<CharSequence> seq = null
+					val List<String> strings = null
+					val result = seq.addAll2(strings)
+					val Collection<String> test = result
+					val result2 = strings.addAll3(seq)
+					val Collection<String> test2 = result2
+				}
+				def <N extends N> Collection<K> addAll2(Collection<N> collection, Iterable<K> elements){
+				    collection.addAll(elements)
+				    null
+				}
+				def <N, K extends N> Collection<K> addAll3(Iterable<K> elements, Collection<N> collection){
+				    collection.addAll(elements)
+				    null
+				}
+			}
+		'''.processWithoutException
+	}
+	
+	@Test
+	def void testErrorModel_34() throws Exception {
+		'''
+			package x
+			import java.util.Collection
+			import java.util.List
+			class Z {
+				def generate() {
+					val List<CharSequence> seq = null
+					val List<String> strings = null
+					val result = seq.addAll2(strings)
+					val Collection<CharSequence> test = result
+					val result2 = strings.addAll3(seq)
+					val Collection<CharSequence> test2 = result2
+				}
+				def <T extends T> Collection<T> addAll2(Collection<T> collection, Iterable<U> elements){
+				    collection.addAll(elements)
+				    collection.<T>addAll(elements)
+				    null
+				}
+				def <T, U extends T> Collection<T> addAll3(Iterable<U> elements, Collection<T> collection){
+				    collection.addAll(elements)
+				    collection.<T>addAll(elements)
+				    null
+				}
+			}
+		'''.processWithoutException
+	}
+	
+	@Test
+	def void testErrorModel_35() throws Exception {
+		'''
+			package x
+			import java.util.Collection
+			import java.util.List
+			class Z {
+				def generate() {
+					val List<CharSequence> seq = null
+					val List<String> strings = null
+					val result = seq.addAll2(strings)
+					val Collection<CharSequence> test = result
+					val result2 = strings.addAll3(seq)
+					val Collection<CharSequence> test2 = result2
+				}
+				def <T1 extends T2, T2 extends T1> Collection<T1> addAll2(Collection<T1> collection, Iterable<T2> elements){
+				    collection.addAll(elements)
+				    collection.<T2>addAll(elements)
+				    null
+				}
+			}
+		'''.processWithoutException
+	}
 		
 	def processWithoutException(CharSequence input) throws Exception {
 		val resource = resourceSet.createResource(URI::createURI("abcdefg.xtend"))

@@ -9,6 +9,8 @@ package org.eclipse.xtext.common.types.util;
 
 import static com.google.common.collect.Iterables.*;
 
+import java.util.Set;
+
 import org.eclipse.emf.common.notify.Notifier;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
@@ -21,6 +23,7 @@ import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.JvmUpperBound;
 
+import com.google.common.collect.Sets;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 
@@ -174,6 +177,8 @@ public class Primitives {
 	public JvmTypeReference asPrimitiveIfWrapperType(JvmTypeReference type) {
 		return new AbstractTypeReferenceVisitor.InheritanceAware<JvmTypeReference>() {
 
+			private Set<JvmType> visiting = Sets.newHashSetWithExpectedSize(2);
+			
 			@Override
 			public JvmTypeReference doVisitMultiTypeReference(JvmMultiTypeReference reference) {
 				for(JvmTypeReference ref: reference.getReferences()) {
@@ -186,7 +191,7 @@ public class Primitives {
 			
 			@Override
 			public JvmTypeReference doVisitParameterizedTypeReference(JvmParameterizedTypeReference type) {
-				if(type.getType() instanceof JvmTypeParameter) {
+				if(type.getType() instanceof JvmTypeParameter && visiting.add(type.getType())) {
 					EList<JvmTypeConstraint> constraints = ((JvmTypeParameter)type.getType()).getConstraints();
 					for(JvmUpperBound upperBound: filter(constraints, JvmUpperBound.class)) {
 						JvmTypeReference upperBoundType = upperBound.getTypeReference();

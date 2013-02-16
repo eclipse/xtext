@@ -748,6 +748,391 @@ public class ErrorTest extends AbstractXtendTestCase {
     this.processWithoutException(_builder);
   }
   
+  @Test
+  public void testErrorModel_25() throws Exception {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("package x class Y {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def bug343090(Integer a, Integer b) {");
+    _builder.newLine();
+    _builder.append("    \t");
+    _builder.append("<Integer>addFunction.apply(a, b)");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def <T extends> addFunction() {");
+    _builder.newLine();
+    _builder.append("    \t");
+    _builder.append("[T a,T b|a+b] as (T,T)=>T");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    this.processWithoutException(_builder);
+  }
+  
+  @Test
+  public void testErrorModel_26() throws Exception {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("package x class Y {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def bug343090(Integer a, Integer b) {");
+    _builder.newLine();
+    _builder.append("    \t");
+    _builder.append("addFunction.apply(a, b)");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def <T extends> addFunction() {");
+    _builder.newLine();
+    _builder.append("    \t");
+    _builder.append("[T a,T b|a+b] as (T,T)=>T");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    this.processWithoutException(_builder);
+  }
+  
+  @Test
+  public void testErrorModel_27() throws Exception {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("package x class Y {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def bug343090(Integer a, Integer b) {");
+    _builder.newLine();
+    _builder.append("\t    ");
+    _builder.append("<Integer>addFunction.apply(a, b)");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def <T extends> addFunction() {");
+    _builder.newLine();
+    _builder.append("\t    ");
+    _builder.append("[T a,T b|(a+b) as Integer] as (T,T)=>T");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    this.processWithoutException(_builder);
+  }
+  
+  @Test
+  public void testErrorModel_28() throws Exception {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("package x class Y {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def bug343090(Integer a, Integer b) {");
+    _builder.newLine();
+    _builder.append("    \t");
+    _builder.append("<Integer>addFunction.apply(a, b)");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def <T extends> addFunction() {");
+    _builder.newLine();
+    _builder.append("    \t");
+    _builder.append("[T a,T b|(a+b) as T] as (T,T)=>T");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    this.processWithoutException(_builder);
+  }
+  
+  @Test
+  public void testErrorModel_30() throws Exception {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("package x class Y {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def bug343088(Integer a, Integer b) {");
+    _builder.newLine();
+    _builder.append("\t    ");
+    _builder.append("addFunction.apply(a, b)");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def <T extends> (T,T)=>T addFunction() {");
+    _builder.newLine();
+    _builder.append("\t    ");
+    _builder.append("[T a,T b|(a+(b as Integer)) as T]");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    this.processWithoutException(_builder);
+  }
+  
+  @Test
+  public void testErrorModel_31() throws Exception {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("package x class Y {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def bug343088(Integer a, Integer b) {");
+    _builder.newLine();
+    _builder.append("    \t");
+    _builder.append("addFunction.apply(a, b)");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def <T extends> (T,T)=>T addFunction() {");
+    _builder.newLine();
+    _builder.append("\t    ");
+    _builder.append("[T a,T b|(a+b) as T]");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    this.processWithoutException(_builder);
+  }
+  
+  @Test
+  public void testErrorModel_32() throws Exception {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("package x class Y {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def bug343090(Integer a, Integer b) {");
+    _builder.newLine();
+    _builder.append("\t    ");
+    _builder.append("<Integer>addFunction.apply(a, b)");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def <T extends > addFunction() {");
+    _builder.newLine();
+    _builder.append("\t    ");
+    _builder.append("[T a,T b|a+b] as (T,T)=>T");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    this.processWithoutException(_builder);
+  }
+  
+  @Test
+  public void testErrorModel_33() throws Exception {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("package x");
+    _builder.newLine();
+    _builder.append("import java.util.Collection");
+    _builder.newLine();
+    _builder.append("import java.util.List");
+    _builder.newLine();
+    _builder.append("class Z {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def generate() {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("val List<CharSequence> seq = null");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("val List<String> strings = null");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("val result = seq.addAll2(strings)");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("val Collection<String> test = result");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("val result2 = strings.addAll3(seq)");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("val Collection<String> test2 = result2");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def <N extends N> Collection<K> addAll2(Collection<N> collection, Iterable<K> elements){");
+    _builder.newLine();
+    _builder.append("\t    ");
+    _builder.append("collection.addAll(elements)");
+    _builder.newLine();
+    _builder.append("\t    ");
+    _builder.append("null");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def <N, K extends N> Collection<K> addAll3(Iterable<K> elements, Collection<N> collection){");
+    _builder.newLine();
+    _builder.append("\t    ");
+    _builder.append("collection.addAll(elements)");
+    _builder.newLine();
+    _builder.append("\t    ");
+    _builder.append("null");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    this.processWithoutException(_builder);
+  }
+  
+  @Test
+  public void testErrorModel_34() throws Exception {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("package x");
+    _builder.newLine();
+    _builder.append("import java.util.Collection");
+    _builder.newLine();
+    _builder.append("import java.util.List");
+    _builder.newLine();
+    _builder.append("class Z {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def generate() {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("val List<CharSequence> seq = null");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("val List<String> strings = null");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("val result = seq.addAll2(strings)");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("val Collection<CharSequence> test = result");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("val result2 = strings.addAll3(seq)");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("val Collection<CharSequence> test2 = result2");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def <T extends T> Collection<T> addAll2(Collection<T> collection, Iterable<U> elements){");
+    _builder.newLine();
+    _builder.append("\t    ");
+    _builder.append("collection.addAll(elements)");
+    _builder.newLine();
+    _builder.append("\t    ");
+    _builder.append("collection.<T>addAll(elements)");
+    _builder.newLine();
+    _builder.append("\t    ");
+    _builder.append("null");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def <T, U extends T> Collection<T> addAll3(Iterable<U> elements, Collection<T> collection){");
+    _builder.newLine();
+    _builder.append("\t    ");
+    _builder.append("collection.addAll(elements)");
+    _builder.newLine();
+    _builder.append("\t    ");
+    _builder.append("collection.<T>addAll(elements)");
+    _builder.newLine();
+    _builder.append("\t    ");
+    _builder.append("null");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    this.processWithoutException(_builder);
+  }
+  
+  @Test
+  public void testErrorModel_35() throws Exception {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("package x");
+    _builder.newLine();
+    _builder.append("import java.util.Collection");
+    _builder.newLine();
+    _builder.append("import java.util.List");
+    _builder.newLine();
+    _builder.append("class Z {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def generate() {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("val List<CharSequence> seq = null");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("val List<String> strings = null");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("val result = seq.addAll2(strings)");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("val Collection<CharSequence> test = result");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("val result2 = strings.addAll3(seq)");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("val Collection<CharSequence> test2 = result2");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def <T1 extends T2, T2 extends T1> Collection<T1> addAll2(Collection<T1> collection, Iterable<T2> elements){");
+    _builder.newLine();
+    _builder.append("\t    ");
+    _builder.append("collection.addAll(elements)");
+    _builder.newLine();
+    _builder.append("\t    ");
+    _builder.append("collection.<T2>addAll(elements)");
+    _builder.newLine();
+    _builder.append("\t    ");
+    _builder.append("null");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    this.processWithoutException(_builder);
+  }
+  
   public XtendFile processWithoutException(final CharSequence input) throws Exception {
     XtextResourceSet _resourceSet = this.getResourceSet();
     URI _createURI = URI.createURI("abcdefg.xtend");

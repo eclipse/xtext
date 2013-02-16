@@ -20,6 +20,7 @@ import org.eclipse.xtext.common.types.JvmComponentType;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeConstraint;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
+import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.JvmUpperBound;
 import org.eclipse.xtext.common.types.TypesFactory;
 import org.eclipse.xtext.common.types.access.impl.ClassURIHelper;
@@ -247,13 +248,18 @@ public class RawTypeHelper implements IRawTypeHelper {
 					CompoundTypeReference result = new CompoundTypeReference(owner, false);
 					for(JvmTypeConstraint constraint: constraints) {
 						if (constraint instanceof JvmUpperBound) {
-							result.addComponent(converter.toLightweightReference(constraint.getTypeReference()).accept(this, resourceSet));
+							JvmTypeReference typeReference = constraint.getTypeReference();
+							if (typeReference != null)
+								result.addComponent(converter.toLightweightReference(typeReference).accept(this, resourceSet));
 						}
 					}
 					return result;
 				} else {
-					LightweightTypeReference result = converter.toLightweightReference(constraints.get(0).getTypeReference()).accept(this, resourceSet);
-					return result;
+					JvmTypeReference typeReference = constraints.get(0).getTypeReference();
+					if (typeReference != null) {
+						LightweightTypeReference result = converter.toLightweightReference(typeReference).accept(this, resourceSet);
+						return result;
+					}
 				}
 			}
 			return createObjectReference(owner, resourceSet);
