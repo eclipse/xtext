@@ -1,0 +1,10 @@
+Change-Id: I623610ef565333ffb87ad591fef4ee70c375f8b5
+Verified+1: Hudson CI
+Code-Review+2: Sebastian Zarnekow <Sebastian.Zarnekow@itemis.de>
+IP-Clean+1: Sebastian Zarnekow <Sebastian.Zarnekow@itemis.de>
+Verified+1: Sebastian Zarnekow <Sebastian.Zarnekow@itemis.de>
+Submitted-by: Sebastian Zarnekow <Sebastian.Zarnekow@itemis.de>
+Submitted-at: Sat, 16 Feb 2013 16:58:21 -0500
+Reviewed-on: https://git.eclipse.org/r/10409
+Project: tmf/org.eclipse.xtext
+Branch: refs/heads/master
