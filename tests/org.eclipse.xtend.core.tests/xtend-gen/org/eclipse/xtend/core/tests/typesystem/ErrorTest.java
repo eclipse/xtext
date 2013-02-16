@@ -1165,6 +1165,40 @@ public class ErrorTest extends AbstractXtendTestCase {
     this.processWithoutException(_builder);
   }
   
+  @Test
+  public void testErrorModel_38() throws Exception {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("import bug380058.Amount");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("import static bug380058.SI.*");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("class JScienceTest {");
+    _builder.newLine();
+    _builder.append("    ");
+    _builder.append("def void test() { ");
+    _builder.newLine();
+    _builder.append("        ");
+    _builder.append("val w = Amount::valueOf(100, MILLIMETER)");
+    _builder.newLine();
+    _builder.append("        ");
+    _builder.append("val h = Amount::valueOf(50, MILLIMETER)");
+    _builder.newLine();
+    _builder.append("        ");
+    _builder.append("val perim = w.plus(h).times(2)");
+    _builder.newLine();
+    _builder.append("        ");
+    _builder.append("println(\"perim = \" + perim)");
+    _builder.newLine();
+    _builder.append("    ");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    this.processWithoutException(_builder);
+  }
+  
   public XtendFile processWithoutException(final CharSequence input) throws Exception {
     XtextResourceSet _resourceSet = this.getResourceSet();
     URI _createURI = URI.createURI("abcdefg.xtend");
