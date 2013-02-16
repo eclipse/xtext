@@ -1133,6 +1133,38 @@ public class ErrorTest extends AbstractXtendTestCase {
     this.processWithoutException(_builder);
   }
   
+  @Test
+  public void testErrorModel_36() throws Exception {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("class Bar<T extends T> {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("new Bar(T t) {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    this.processWithoutException(_builder);
+  }
+  
+  @Test
+  public void testErrorModel_37() throws Exception {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("class Bar<T1 extends T2, T2 extends T1> {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("new Bar(T1 t1, T2 t2) {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    this.processWithoutException(_builder);
+  }
+  
   public XtendFile processWithoutException(final CharSequence input) throws Exception {
     XtextResourceSet _resourceSet = this.getResourceSet();
     URI _createURI = URI.createURI("abcdefg.xtend");
