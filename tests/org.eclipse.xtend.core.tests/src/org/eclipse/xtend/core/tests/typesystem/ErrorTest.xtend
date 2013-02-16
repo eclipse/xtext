@@ -617,6 +617,24 @@ class ErrorTest extends AbstractXtendTestCase {
 			}
 		'''.processWithoutException
 	}
+	
+	@Test
+	def void testErrorModel_38() throws Exception {
+		'''
+			import bug380058.Amount
+			
+			import static bug380058.SI.*
+			
+			class JScienceTest {
+			    def void test() { 
+			        val w = Amount::valueOf(100, MILLIMETER)
+			        val h = Amount::valueOf(50, MILLIMETER)
+			        val perim = w.plus(h).times(2)
+			        println("perim = " + perim)
+			    }
+			}
+		'''.processWithoutException
+	}
 		
 	def processWithoutException(CharSequence input) throws Exception {
 		val resource = resourceSet.createResource(URI::createURI("abcdefg.xtend"))

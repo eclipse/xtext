@@ -21,6 +21,44 @@ class XtendCompilerTest extends AbstractXtendTestCase {
 	@Inject JvmModelGenerator generator
 	@Inject IGeneratorConfigProvider generatorConfigProvider
 	
+	@Test def void testBug380058_01() {
+		'''
+			import bug380058.Amount
+			
+			import static bug380058.SI.*
+			
+			class JScienceTest {
+			    def test() { 
+			        val w = Amount::valueOf(100, MILLIMETER)
+			        val h = Amount::valueOf(50, MILLIMETER)
+			        val perim = w.plus(h).times(2)
+			        println(perim)
+			    }
+			}
+		'''.assertCompilesTo('''
+			import bug380058.Amount;
+			import bug380058.Length;
+			import bug380058.SI;
+			import org.eclipse.xtext.xbase.lib.InputOutput;
+			
+			@SuppressWarnings("all")
+			public class JScienceTest {
+			  public Amount<Length> test() {
+			    Amount<Length> _xblockexpression = null;
+			    {
+			      final Amount<Length> w = Amount.<Length>valueOf(100, SI.MILLIMETER);
+			      final Amount<Length> h = Amount.<Length>valueOf(50, SI.MILLIMETER);
+			      Amount<Length> _plus = w.plus(h);
+			      final Amount<Length> perim = _plus.times(2);
+			      Amount<Length> _println = InputOutput.<Amount<Length>>println(perim);
+			      _xblockexpression = (_println);
+			    }
+			    return _xblockexpression;
+			  }
+			}
+		''')
+	}
+	
 	@Test def void testBug400433_01() {
 		'''
 			class Test<T> {
