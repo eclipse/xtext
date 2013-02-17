@@ -151,7 +151,7 @@ public class DefaultReferenceFinder implements IReferenceFinder {
 		for(EReference ref: sourceCandidate.eClass().getEAllReferences()) {
 			if(sourceCandidate.eIsSet(ref)) {
 				if(ref.isContainment()) {
-					Object content = sourceCandidate.eGet(ref, false);
+					Object content = sourceCandidate.eGet(ref, true);
 					if(ref.isMany()) {
 						InternalEList<EObject> contentList = (InternalEList<EObject>) content;
 						for(int i=0; i<contentList.size(); ++i) {
