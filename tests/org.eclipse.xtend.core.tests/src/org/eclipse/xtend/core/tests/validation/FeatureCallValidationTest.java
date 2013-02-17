@@ -7,9 +7,12 @@
  *******************************************************************************/
 package org.eclipse.xtend.core.tests.validation;
 
+import java.util.List;
+
 import org.eclipse.xtend.core.tests.AbstractXtendTestCase;
 import org.eclipse.xtend.core.xtend.XtendClass;
 import org.eclipse.xtext.junit4.validation.ValidationTestHelper;
+import org.eclipse.xtext.validation.Issue;
 import org.eclipse.xtext.xbase.XbasePackage;
 import org.eclipse.xtext.xbase.validation.IssueCodes;
 import org.junit.Ignore;
@@ -66,6 +69,20 @@ public class FeatureCallValidationTest extends AbstractXtendTestCase {
 		XtendClass clazz = clazz("class X { def void m(String it) { m2 } def m2(char c) {}}");
 		helper.assertError(clazz, XbasePackage.Literals.XFEATURE_CALL,
 				IssueCodes.INCOMPATIBLE_TYPES, "String", "char", "Character", "implicit first argument");
+	}
+	
+	@Test
+	public void testBug400989() throws Exception {
+		String content = "abstract class Bar<E> extends java.util.AbstractList<E> { protected new() { new Object() => [add && remove] }}";
+		XtendClass clazz = clazz(content);
+		List<Issue> issues = helper.validate(clazz);
+		assertEquals(1, issues.size());
+		Issue issue = issues.get(0);
+		assertEquals(IssueCodes.INCOMPATIBLE_TYPES, issue.getCode());
+		assertTrue(issue.getMessage().contains("Incompatible implicit first argument."));
+		assertEquals(1, issue.getLineNumber().intValue());
+		assertEquals(content.indexOf("add"), issue.getOffset().intValue());
+		assertEquals(3, issue.getLength().intValue());
 	}
 	
 	@Test 
