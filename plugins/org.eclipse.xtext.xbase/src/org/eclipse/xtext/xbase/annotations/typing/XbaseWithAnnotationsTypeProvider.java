@@ -25,6 +25,7 @@ import com.google.inject.Singleton;
 /**
  * @author Sven Efftinge - Initial contribution and API
  */
+@SuppressWarnings("deprecation")
 @Singleton
 public class XbaseWithAnnotationsTypeProvider extends XbaseTypeProvider {
 	

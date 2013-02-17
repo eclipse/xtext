@@ -1531,7 +1531,6 @@ public class XbasePackageImpl extends EPackageImpl implements XbasePackage
 		xIfExpressionEClass.getESuperTypes().add(this.getXExpression());
 		xSwitchExpressionEClass.getESuperTypes().add(this.getXExpression());
 		xSwitchExpressionEClass.getESuperTypes().add(theTypesPackage.getJvmIdentifiableElement());
-		xCasePartEClass.getESuperTypes().add(theTypesPackage.getJvmIdentifiableElement());
 		xBlockExpressionEClass.getESuperTypes().add(this.getXExpression());
 		xVariableDeclarationEClass.getESuperTypes().add(this.getXExpression());
 		xVariableDeclarationEClass.getESuperTypes().add(theTypesPackage.getJvmIdentifiableElement());

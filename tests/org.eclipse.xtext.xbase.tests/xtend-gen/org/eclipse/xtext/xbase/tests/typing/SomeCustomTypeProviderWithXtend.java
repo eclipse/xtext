@@ -155,8 +155,6 @@ public class SomeCustomTypeProviderWithXtend extends XbaseWithAnnotationsTypePro
       return _expectedType((XAbstractWhileExpression)assignment, reference, index, rawType);
     } else if (assignment instanceof XBlockExpression) {
       return _expectedType((XBlockExpression)assignment, reference, index, rawType);
-    } else if (assignment instanceof XCasePart) {
-      return _expectedType((XCasePart)assignment, reference, index, rawType);
     } else if (assignment instanceof XCastedExpression) {
       return _expectedType((XCastedExpression)assignment, reference, index, rawType);
     } else if (assignment instanceof XClosure) {
@@ -183,6 +181,8 @@ public class SomeCustomTypeProviderWithXtend extends XbaseWithAnnotationsTypePro
       return _expectedType((XAnnotation)assignment, reference, index, rawType);
     } else if (assignment instanceof XAnnotationElementValueBinaryOperation) {
       return _expectedType((XAnnotationElementValueBinaryOperation)assignment, reference, index, rawType);
+    } else if (assignment instanceof XCasePart) {
+      return _expectedType((XCasePart)assignment, reference, index, rawType);
     } else if (assignment instanceof XCatchClause) {
       return _expectedType((XCatchClause)assignment, reference, index, rawType);
     } else if (assignment instanceof XAnnotationElementValuePair) {
@@ -210,8 +210,6 @@ public class SomeCustomTypeProviderWithXtend extends XbaseWithAnnotationsTypePro
       return _typeForIdentifiable((JvmFormalParameter)constructor, rawType);
     } else if (constructor instanceof JvmType) {
       return _typeForIdentifiable((JvmType)constructor, rawType);
-    } else if (constructor instanceof XCasePart) {
-      return _typeForIdentifiable((XCasePart)constructor, rawType);
     } else if (constructor instanceof XSwitchExpression) {
       return _typeForIdentifiable((XSwitchExpression)constructor, rawType);
     } else if (constructor instanceof XVariableDeclaration) {

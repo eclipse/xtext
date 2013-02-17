@@ -13,7 +13,6 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
-import org.eclipse.xtext.xbase.XCasePart;
 import org.eclipse.xtext.xbase.XConstructorCall;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XSwitchExpression;
@@ -81,12 +80,6 @@ public class BatchLinkingTest extends AbstractXbaseLinkingTest {
           final XExpression _xExpression = (XExpression)content;
           _matched=true;
           this.assertExpressionTypeIsResolved(_xExpression, resolvedTypes);
-        }
-      }
-      if (!_matched) {
-        if (content instanceof XCasePart) {
-          final XCasePart _xCasePart = (XCasePart)content;
-          _matched=true;
         }
       }
       if (!_matched) {

@@ -14,7 +14,6 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.Resource.Diagnostic;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmTypeReference;
-import org.eclipse.xtext.xbase.XCasePart;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XSwitchExpression;
 import org.eclipse.xtext.xbase.lib.Exceptions;
@@ -67,12 +66,6 @@ public abstract class AbstractOldAPITypeResolverTest extends AbstractTypeResolve
             final XExpression _xExpression = (XExpression)content;
             _matched=true;
             this.assertExpressionTypeIsResolved(_xExpression);
-          }
-        }
-        if (!_matched) {
-          if (content instanceof XCasePart) {
-            final XCasePart _xCasePart = (XCasePart)content;
-            _matched=true;
           }
         }
         if (!_matched) {

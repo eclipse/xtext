@@ -11,7 +11,6 @@ import com.google.inject.Inject
 import org.eclipse.emf.ecore.InternalEObject
 import org.eclipse.xtext.common.types.JvmIdentifiableElement
 import org.eclipse.xtext.xbase.XAbstractFeatureCall
-import org.eclipse.xtext.xbase.XCasePart
 import org.eclipse.xtext.xbase.XConstructorCall
 import org.eclipse.xtext.xbase.XExpression
 import org.eclipse.xtext.xbase.XSwitchExpression
@@ -57,7 +56,6 @@ class BatchLinkingTest extends AbstractXbaseLinkingTest {
 				XExpression: {
 					assertExpressionTypeIsResolved(content, resolvedTypes)
 				}
-				XCasePart : { /* skip */}
 				JvmIdentifiableElement: {
 					assertIdentifiableTypeIsResolved(content, resolvedTypes)
 				}

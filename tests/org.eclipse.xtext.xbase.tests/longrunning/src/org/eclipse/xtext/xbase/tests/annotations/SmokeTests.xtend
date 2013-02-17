@@ -23,7 +23,6 @@ import org.eclipse.xtext.parser.antlr.Lexer
 import org.eclipse.xtext.resource.XtextResource
 import org.eclipse.xtext.util.ReplaceRegion
 import org.eclipse.xtext.xbase.XAbstractFeatureCall
-import org.eclipse.xtext.xbase.XCasePart
 import org.eclipse.xtext.xbase.XExpression
 import org.eclipse.xtext.xbase.XSwitchExpression
 import org.eclipse.xtext.xbase.lib.util.ReflectExtensions
@@ -78,7 +77,6 @@ abstract class AbstractSmokeTest extends AnnotationsValidatorTest {
 						XExpression: {
 							assertExpressionTypeIsResolved(content, resolvedTypes)
 						}
-						XCasePart : { /* skip */}
 						JvmIdentifiableElement: {
 							assertIdentifiableTypeIsResolved(content, resolvedTypes)
 						}

@@ -19,7 +19,6 @@ import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
-import org.eclipse.xtext.xbase.XCasePart;
 import org.eclipse.xtext.xbase.XConstructorCall;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XFeatureCall;
@@ -102,12 +101,6 @@ public abstract class AbstractBatchTypeResolverTest extends AbstractTypeResolver
             final XExpression _xExpression = (XExpression)content;
             _matched=true;
             this.assertExpressionTypeIsResolved(_xExpression, resolvedTypes);
-          }
-        }
-        if (!_matched) {
-          if (content instanceof XCasePart) {
-            final XCasePart _xCasePart = (XCasePart)content;
-            _matched=true;
           }
         }
         if (!_matched) {
