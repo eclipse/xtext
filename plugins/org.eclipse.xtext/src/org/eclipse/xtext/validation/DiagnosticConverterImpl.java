@@ -216,8 +216,14 @@ public class DiagnosticConverterImpl implements IDiagnosticConverter {
 					parserNode = nodes.get(index);
 			}
 			return getLocationForNode(parserNode);
+		} else if (obj.eContainer() != null) {
+			return getLocationData(obj.eContainer(), obj.eContainingFeature(), ValidationMessageAcceptor.INSIGNIFICANT_INDEX);
 		}
-		return null;
+		IssueLocation result = new IssueLocation();
+		result.lineNumber = 0;
+		result.offset = 0;
+		result.length = 0;
+		return result;
 	}
 
 	protected IssueLocation getLocationForNode(INode node) {
