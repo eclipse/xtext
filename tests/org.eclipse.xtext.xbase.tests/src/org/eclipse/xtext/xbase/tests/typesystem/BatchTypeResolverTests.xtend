@@ -13,7 +13,6 @@ import org.eclipse.emf.common.util.URI
 import org.eclipse.emf.ecore.InternalEObject
 import org.eclipse.xtext.common.types.JvmIdentifiableElement
 import org.eclipse.xtext.xbase.XAbstractFeatureCall
-import org.eclipse.xtext.xbase.XCasePart
 import org.eclipse.xtext.xbase.XConstructorCall
 import org.eclipse.xtext.xbase.XExpression
 import org.eclipse.xtext.xbase.XSwitchExpression
@@ -59,7 +58,6 @@ abstract class AbstractBatchTypeResolverTest extends AbstractTypeResolverTest<Li
 				XExpression: {
 					assertExpressionTypeIsResolved(content, resolvedTypes)
 				}
-				XCasePart : { /* skip */}
 				JvmIdentifiableElement: {
 					assertIdentifiableTypeIsResolved(content, resolvedTypes)
 				}

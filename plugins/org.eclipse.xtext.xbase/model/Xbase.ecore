@@ -19,7 +19,7 @@
         containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="localVarName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="XCasePart" eSuperTypes="platform:/resource/org.eclipse.xtext.common.types/model/JavaVMTypes.ecore#//JvmIdentifiableElement">
+  <eClassifiers xsi:type="ecore:EClass" name="XCasePart">
     <eStructuralFeatures xsi:type="ecore:EReference" name="case" eType="#//XExpression"
         containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="then" eType="#//XExpression"

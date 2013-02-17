@@ -18,7 +18,6 @@ import org.eclipse.xtext.common.types.JvmTypeParameterDeclarator
 import org.eclipse.xtext.common.types.JvmTypeReference
 import org.eclipse.xtext.common.types.util.TypeArgumentContextProvider
 import org.eclipse.xtext.xbase.XAbstractFeatureCall
-import org.eclipse.xtext.xbase.XCasePart
 import org.eclipse.xtext.xbase.XConstructorCall
 import org.eclipse.xtext.xbase.XExpression
 import org.eclipse.xtext.xbase.XSwitchExpression
@@ -50,7 +49,6 @@ abstract class AbstractOldAPITypeResolverTest extends AbstractTypeResolverTest<J
 				XExpression: {
 					assertExpressionTypeIsResolved(content)
 				}
-				XCasePart : { /* skip */}
 				JvmIdentifiableElement: {
 					assertIdentifiableTypeIsResolved(content)
 				}

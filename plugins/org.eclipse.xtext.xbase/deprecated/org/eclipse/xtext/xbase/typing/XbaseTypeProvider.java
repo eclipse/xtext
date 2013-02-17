@@ -146,8 +146,6 @@ public class XbaseTypeProvider extends AbstractTypeProvider {
 			return _typeForIdentifiable((JvmOperation)identifiable, rawType);
 		} else if (identifiable instanceof JvmType) {
 			return _typeForIdentifiable((JvmType)identifiable, rawType);
-		} else if (identifiable instanceof XCasePart) {
-			return _typeForIdentifiable((XCasePart)identifiable, rawType);
 		} else if (identifiable instanceof XSwitchExpression) {
 			return _typeForIdentifiable((XSwitchExpression)identifiable, rawType);
 		} else if (identifiable instanceof XVariableDeclaration) {
@@ -562,6 +560,10 @@ public class XbaseTypeProvider extends AbstractTypeProvider {
 		return null; // no expectations
 	}
 
+	/**
+	 * @param index the feature index 
+	 * @param rawType <code>true</code> if we are only interested in the raw type
+	 */
 	protected JvmTypeReference _expectedType(XCollectionLiteral expr, EReference reference, int index, boolean rawType) {
 		if (reference == XbasePackage.Literals.XCOLLECTION_LITERAL__ELEMENTS) {
 			final JvmTypeReference type = getExpectedType(expr);
@@ -1303,20 +1305,6 @@ public class XbaseTypeProvider extends AbstractTypeProvider {
 			return result;
 		}
 		return null;
-	}
-
-	/**
-	 * {@link XCasePart} are no longer considered to be identifiables. Therefore this one throws an exception.
-	 * @param object the case part.
-	 * @param rawType <code>true</code> if we are only interested in the raw type
-	 * @throws IllegalStateException always.
-	 */
-	protected JvmTypeReference _typeForIdentifiable(XCasePart object, boolean rawType) {
-		throw new IllegalStateException();
-//		if (object.getTypeGuard() != null) {
-//			return object.getTypeGuard();
-//		}
-//		return null;
 	}
 
 	protected JvmTypeReference _typeForIdentifiable(XVariableDeclaration object, boolean rawType) {
