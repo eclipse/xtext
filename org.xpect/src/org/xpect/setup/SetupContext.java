@@ -18,7 +18,7 @@ import org.xpect.XjmMethod;
 import org.xpect.XpectFile;
 import org.xpect.XpectInvocation;
 import org.xpect.runner.IXpectURIProvider;
-import org.xpect.setup.IXpectSetup.ITestSetupContext;
+import org.xpect.setup.IXpectRunnerSetup.ITestSetupContext;
 import org.xpect.util.ITypedAdapter;
 import org.xpect.util.ITypedProvider;
 

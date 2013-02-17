@@ -18,7 +18,7 @@ import org.xpect.XpectInvocation;
 import org.xpect.runner.IXpectParameterProvider.IClaimedRegion;
 import org.xpect.runner.IXpectParameterProvider.IXpectMultiParameterProvider;
 import org.xpect.runner.IXpectParameterProvider.IXpectSingleParameterProvider;
-import org.xpect.setup.IXpectSetup;
+import org.xpect.setup.IXpectRunnerSetup;
 import org.xpect.setup.SetupContext;
 import org.xpect.util.IRegion;
 import org.xpect.util.ITypedAdapter;
@@ -144,7 +144,7 @@ public class XpectTestRunner extends AbstractTestRunner {
 	}
 
 	@Override
-	protected void runInternal(IXpectSetup<Object, Object, Object, Object> setup, SetupContext ctx) throws Throwable {
+	protected void runInternal(IXpectRunnerSetup<Object, Object, Object, Object> setup, SetupContext ctx) throws Throwable {
 		List<List<ITypedProvider>> allParameters = collectAllParameters();
 		Object test = getUriRunner().getRunner().getTestClass().getJavaClass().newInstance();
 		// ctx.setAllParameters(allParameters);

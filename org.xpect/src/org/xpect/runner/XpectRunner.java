@@ -20,11 +20,11 @@ import org.junit.runner.notification.Failure;
 import org.junit.runner.notification.RunNotifier;
 import org.junit.runners.ParentRunner;
 import org.junit.runners.model.InitializationError;
-import org.xpect.Environment;
-import org.xpect.XjmSetup;
 import org.xpect.XpectJavaModel;
 import org.xpect.XpectStandaloneSetup;
-import org.xpect.setup.IXpectSetup;
+import org.xpect.setup.IXpectPluginTestSetup;
+import org.xpect.setup.IXpectRunnerSetup;
+import org.xpect.setup.IXpectStandaloneTestSetup;
 import org.xpect.setup.SetupContext;
 import org.xpect.util.AnnotationUtil;
 import org.xpect.util.XpectJavaModelFactory;
@@ -43,7 +43,6 @@ public class XpectRunner extends ParentRunner<XpectFileRunner> {
 	private final XpectJavaModel xpectJavaModel;
 	private final Set<String> names = Sets.newHashSet();
 	private final IXpectURIProvider uriProvider;
-	private final Environment environment;
 	private final Injector xpectInjector;
 
 	public XpectRunner(Class<?> testClass) throws InitializationError {
@@ -51,13 +50,6 @@ public class XpectRunner extends ParentRunner<XpectFileRunner> {
 		this.uriProvider = findUriProvider(testClass);
 		this.xpectInjector = findXpectInjector();
 		this.xpectJavaModel = this.xpectInjector.getInstance(XpectJavaModelFactory.class).createJavaModel(testClass);
-		this.environment = detectEnvironment();
-	}
-
-	protected Environment detectEnvironment() {
-		if (EcorePlugin.IS_ECLIPSE_RUNNING)
-			return Environment.PLUGIN_TEST;
-		return Environment.STANDALONE_TEST;
 	}
 
 	protected Injector getXpectInjector() {
@@ -88,34 +80,22 @@ public class XpectRunner extends ParentRunner<XpectFileRunner> {
 		return result;
 	}
 
-	// protected XpectFrameworkMethod createCrameworkMethod(JvmOperation op)
-	// throws InitializationError {
-	// return new XpectFrameworkMethod(getTestClass().getJavaClass(), op);
-	// }
-	//
-	@SuppressWarnings("unchecked")
-	protected IXpectSetup<Object, Object, Object, Object> createSetup() {
-		EList<XjmSetup> setups = xpectJavaModel.getSetups(environment);
+	@SuppressWarnings({ "unchecked", "rawtypes" })
+	protected IXpectRunnerSetup<Object, Object, Object, Object> createSetup() {
+		Class<? extends IXpectRunnerSetup> cls;
+		if (EcorePlugin.IS_ECLIPSE_RUNNING)
+			cls = IXpectPluginTestSetup.class;
+		else
+			cls = IXpectStandaloneTestSetup.class;
+		EList<? extends IXpectRunnerSetup> setups = xpectJavaModel.getSetups(cls);
 		if (setups.isEmpty())
 			return null;
 		if (setups.size() != 1)
 			throw new IllegalStateException("For now, only one setup per test/suite is supported.");
-		Class<?> javaClass = setups.get(0).getJavaClass();
-		try {
-			Object setup = javaClass.newInstance();
-			return (IXpectSetup<Object, Object, Object, Object>) setup;
-		} catch (InstantiationException e) {
-			throw new RuntimeException(e);
-		} catch (IllegalAccessException e) {
-			throw new RuntimeException(e);
-		}
+		return setups.get(0);
 	}
 
-	protected Environment getEnvironment() {
-		return environment;
-	}
-
-	protected SetupContext createSetupContext(IXpectSetup<Object, Object, Object, Object> setup) {
+	protected SetupContext createSetupContext(IXpectRunnerSetup<Object, Object, Object, Object> setup) {
 		return new SetupContext();
 	}
 
@@ -179,7 +159,7 @@ public class XpectRunner extends ParentRunner<XpectFileRunner> {
 
 	@Override
 	protected void runChild(XpectFileRunner child, RunNotifier notifier) {
-		IXpectSetup<Object, Object, Object, Object> setup = createSetup();
+		IXpectRunnerSetup<Object, Object, Object, Object> setup = createSetup();
 		SetupContext ctx = createSetupContext(setup);
 		ctx.setAllFiles(getFiles());
 		ctx.setTestClass(getTestClass().getJavaClass());

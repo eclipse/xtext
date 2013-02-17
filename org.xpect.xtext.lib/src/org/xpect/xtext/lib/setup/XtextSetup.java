@@ -8,7 +8,7 @@
 package org.xpect.xtext.lib.setup;
 
 import org.xpect.setup.AbstractXpectSetup;
-import org.xpect.setup.IXpectSetup;
+import org.xpect.setup.IXpectRunnerSetup;
 import org.xpect.xtext.lib.setup.XtextSetup.ClassCtx;
 import org.xpect.xtext.lib.setup.XtextSetup.TestCtx;
 
@@ -26,7 +26,7 @@ public class XtextSetup extends AbstractXpectSetup<ClassCtx, FileCtx, TestCtx, O
 	protected static class TestCtx extends FileCtx {
 	}
 
-	public void add(IXpectSetup<?, ?, ?, ?> delegate) {
+	public void add(IXpectRunnerSetup<?, ?, ?, ?> delegate) {
 
 	}
 

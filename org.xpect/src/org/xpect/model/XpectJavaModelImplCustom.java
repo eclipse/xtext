@@ -10,11 +10,7 @@ import java.util.Map;
 import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.EMap;
-import org.eclipse.xtext.common.types.JvmAnnotationAnnotationValue;
-import org.eclipse.xtext.common.types.JvmAnnotationReference;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
-import org.eclipse.xtext.common.types.JvmEnumAnnotationValue;
-import org.eclipse.xtext.common.types.JvmEnumerationLiteral;
 import org.eclipse.xtext.common.types.JvmFeature;
 import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmTypeAnnotationValue;
@@ -23,18 +19,14 @@ import org.eclipse.xtext.common.types.JvmVisibility;
 import org.eclipse.xtext.util.Pair;
 import org.eclipse.xtext.util.Tuples;
 import org.junit.Test;
-import org.xpect.Environment;
 import org.xpect.XjmFactory;
 import org.xpect.XjmMethod;
-import org.xpect.XjmModule;
 import org.xpect.XjmSetup;
 import org.xpect.XjmTest;
 import org.xpect.runner.Xpect;
 import org.xpect.runner.XpectSuiteClasses;
-import org.xpect.setup.XpectModule;
-import org.xpect.setup.XpectModules;
+import org.xpect.setup.IXpectSetup;
 import org.xpect.setup.XpectSetup;
-import org.xpect.setup.XpectSetups;
 import org.xpect.util.JvmAnnotationUtil;
 
 import com.google.common.base.Joiner;
@@ -47,7 +39,6 @@ import com.google.common.collect.Multimap;
 public class XpectJavaModelImplCustom extends XpectJavaModelImpl {
 
 	private boolean methodsInitialized = false;
-	private boolean modulesInitialized = false;
 	private boolean setupsInitialized = false;
 	private boolean testsInitalized = false;
 
@@ -67,74 +58,36 @@ public class XpectJavaModelImplCustom extends XpectJavaModelImpl {
 		}
 	}
 
-	private List<Pair<Environment, JvmDeclaredType>> getAnnotated(JvmDeclaredType type, Class<? extends Annotation> singular,
-			Class<? extends Annotation> plural) {
-		List<JvmAnnotationReference> refs = Lists.newArrayList();
-		JvmAnnotationAnnotationValue val = JvmAnnotationUtil.getAnnotationValue(type, plural, JvmAnnotationAnnotationValue.class);
-		if (val != null && !val.eIsProxy())
-			for (JvmAnnotationReference ref : val.getValues())
-				if (ref != null && !ref.eIsProxy())
-					refs.add(ref);
-
-		JvmAnnotationReference reference = JvmAnnotationUtil.getAnnotation(type, singular);
-		if (reference != null)
-			refs.add(reference);
-
-		List<Pair<Environment, JvmDeclaredType>> result = Lists.newArrayList();
-		for (JvmAnnotationReference ref : refs) {
-			Environment key = getEnvironment(JvmAnnotationUtil.getAnnotationValue(ref, JvmEnumAnnotationValue.class));
-			JvmDeclaredType value = getDeclaredType(JvmAnnotationUtil.getAnnotationValue(ref, JvmTypeAnnotationValue.class));
-			result.add(Tuples.create(key, value));
-		}
-		return result;
+	private List<JvmDeclaredType> getAnnotated(JvmDeclaredType type, Class<? extends Annotation> singular) {
+		return getDeclaredType(JvmAnnotationUtil.getAnnotationValue(JvmAnnotationUtil.getAnnotation(type, singular),
+				JvmTypeAnnotationValue.class));
 	}
 
 	@Override
-	public EList<XjmSetup> getSetups(Environment environment) {
-		EList<XjmSetup> result = new BasicEList<XjmSetup>();
-		for (XjmTest test : getTests()) {
-			XjmSetup setup = test.getSetups().get(environment);
-			if (setup != null)
-				result.add(setup);
+	@SuppressWarnings("unchecked")
+	public <T extends IXpectSetup> EList<T> getSetups(Class<T> clazz) {
+		EList<T> result = new BasicEList<T>();
+		for (XjmSetup setup : getSetups()) {
+			IXpectSetup instance = setup.getInstance();
+			if (clazz.isInstance(instance))
+				result.add((T) instance);
 		}
 		return result;
 	}
 
-	@Override
-	public EList<XjmModule> getModules(Environment environment) {
-		EList<XjmModule> result = new BasicEList<XjmModule>();
-		for (XjmTest test : getTests()) {
-			XjmModule module = test.getModules().get(environment);
-			if (module != null)
-				result.add(module);
-		}
+	private List<JvmDeclaredType> getDeclaredType(JvmTypeAnnotationValue value) {
+		List<JvmDeclaredType> result = Lists.newArrayList();
+		if (value != null)
+			for (JvmTypeReference ref : value.getValues())
+				if (ref != null && !ref.eIsProxy() && ref.getType() instanceof JvmDeclaredType && !ref.getType().eIsProxy())
+					result.add((JvmDeclaredType) ref.getType());
 		return result;
-	}
-
-	private JvmDeclaredType getDeclaredType(JvmTypeAnnotationValue value) {
-		for (JvmTypeReference ref : value.getValues())
-			if (ref != null && !ref.eIsProxy() && ref.getType() instanceof JvmDeclaredType && !ref.getType().eIsProxy())
-				return (JvmDeclaredType) ref.getType();
-		return null;
-	}
-
-	private Environment getEnvironment(JvmEnumAnnotationValue key) {
-		for (JvmEnumerationLiteral lit : key.getValues())
-			if (lit != null && !lit.eIsProxy())
-				return Environment.get(lit.getSimpleName());
-		return null;
 	}
 
 	@Override
 	public EMap<String, XjmMethod> getMethods() {
 		initTestClassMethods();
 		return super.getMethods();
-	}
-
-	@Override
-	public EList<XjmModule> getModules() {
-		initModules();
-		return super.getModules();
 	}
 
 	@Override
@@ -149,39 +102,20 @@ public class XpectJavaModelImplCustom extends XpectJavaModelImpl {
 		return super.getTests();
 	}
 
-	public void initModules() {
-		if (modulesInitialized)
-			return;
-
-		Map<String, XjmModule> cache = Maps.newLinkedHashMap();
-		for (XjmTest test : getTests())
-			for (Pair<Environment, JvmDeclaredType> p : getAnnotated(test.getJvmClass(), XpectModule.class, XpectModules.class)) {
-				XjmModule module = cache.get(p.getSecond().getQualifiedName());
-				if (module == null) {
-					module = XjmFactory.eINSTANCE.createXjmModule();
-					module.setJvmClass(p.getSecond());
-					cache.put(p.getSecond().getQualifiedName(), module);
-				}
-				((XjmTestImplCustom) test).putModule(p.getFirst(), module);
-			}
-		super.getModules().addAll(cache.values());
-		modulesInitialized = true;
-	}
-
 	public void initSetups() {
 		if (setupsInitialized)
 			return;
 
 		Map<String, XjmSetup> cache = Maps.newLinkedHashMap();
 		for (XjmTest test : getTests())
-			for (Pair<Environment, JvmDeclaredType> p : getAnnotated(test.getJvmClass(), XpectSetup.class, XpectSetups.class)) {
-				XjmSetup setup = cache.get(p.getSecond().getQualifiedName());
+			for (JvmDeclaredType p : getAnnotated(test.getJvmClass(), XpectSetup.class)) {
+				XjmSetup setup = cache.get(p.getQualifiedName());
 				if (setup == null) {
 					setup = XjmFactory.eINSTANCE.createXjmSetup();
-					setup.setJvmClass(p.getSecond());
-					cache.put(p.getSecond().getQualifiedName(), setup);
+					setup.setJvmClass(p);
+					cache.put(p.getQualifiedName(), setup);
 				}
-				((XjmTestImplCustom) test).putSetup(p.getFirst(), setup);
+				((XjmTestImplCustom) test).putSetup(setup);
 			}
 		super.getSetups().addAll(cache.values());
 		setupsInitialized = true;
@@ -229,7 +163,7 @@ public class XpectJavaModelImplCustom extends XpectJavaModelImpl {
 
 	@Override
 	public String toString() {
-		Iterable<Object> iterable = Iterables.<Object> concat(getModules(), getSetups(), getTests());
+		Iterable<Object> iterable = Iterables.<Object> concat(getSetups(), getTests());
 		String body = " {\n  " + Joiner.on("\n").join(iterable).replace("\n", "\n  ") + "\n}";
 		return "suite " + getTestOrSuite().getJvmClass().getQualifiedName() + body;
 	}

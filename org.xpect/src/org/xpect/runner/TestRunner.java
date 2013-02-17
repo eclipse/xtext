@@ -11,7 +11,7 @@ import java.lang.reflect.InvocationTargetException;
 
 import org.xpect.XjmTestMethod;
 import org.xpect.XpectInvocation;
-import org.xpect.setup.IXpectSetup;
+import org.xpect.setup.IXpectRunnerSetup;
 import org.xpect.setup.SetupContext;
 
 /**
@@ -31,7 +31,7 @@ public class TestRunner extends AbstractTestRunner {
 	}
 
 	@Override
-	protected void runInternal(IXpectSetup<Object, Object, Object, Object> setup, SetupContext ctx) throws Throwable {
+	protected void runInternal(IXpectRunnerSetup<Object, Object, Object, Object> setup, SetupContext ctx) throws Throwable {
 		Object test = getUriRunner().getRunner().getTestClass().getJavaClass().newInstance();
 		ctx.setXpectInvocation(getInvocation());
 		ctx.setMethod(method);

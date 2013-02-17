@@ -12,7 +12,7 @@ import java.io.InputStream;
 
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
-import org.xpect.setup.IXpectSetup.IFileSetupContext;
+import org.xpect.setup.IXpectRunnerSetup.IFileSetupContext;
 
 /**
  * @author Moritz Eysholdt - Initial contribution and API

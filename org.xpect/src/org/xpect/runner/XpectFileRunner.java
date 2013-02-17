@@ -28,7 +28,7 @@ import org.xpect.XjmXpectMethod;
 import org.xpect.XpectFile;
 import org.xpect.XpectInvocation;
 import org.xpect.setup.ISetupInitializer;
-import org.xpect.setup.IXpectSetup;
+import org.xpect.setup.IXpectRunnerSetup;
 import org.xpect.setup.SetupContext;
 import org.xpect.setup.SetupInitializer;
 import org.xpect.util.IssueVisualizer;
@@ -135,7 +135,7 @@ public class XpectFileRunner {
 		return new SetupInitializer<Object>(xpectFile.getTest());
 	}
 
-	public void run(RunNotifier notifier, IXpectSetup<Object, Object, Object, Object> setup, SetupContext ctx) {
+	public void run(RunNotifier notifier, IXpectRunnerSetup<Object, Object, Object, Object> setup, SetupContext ctx) {
 		if (error != null) {
 			notifier.fireTestFailure(new Failure(getDescription(), error));
 		} else if (xpectFile.getTest() == null) {

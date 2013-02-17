@@ -16,7 +16,7 @@ import org.junit.runner.notification.Failure;
 import org.junit.runner.notification.RunNotifier;
 import org.xpect.XjmMethod;
 import org.xpect.XpectInvocation;
-import org.xpect.setup.IXpectSetup;
+import org.xpect.setup.IXpectRunnerSetup;
 import org.xpect.setup.SetupContext;
 import org.xpect.util.TestDataUtil;
 
@@ -76,7 +76,7 @@ public abstract class AbstractTestRunner {
 		return uriRunner;
 	}
 
-	public void run(RunNotifier notifier, IXpectSetup<Object, Object, Object, Object> setup, SetupContext ctx) {
+	public void run(RunNotifier notifier, IXpectRunnerSetup<Object, Object, Object, Object> setup, SetupContext ctx) {
 		notifier.fireTestStarted(getDescription());
 		try {
 			if (invocation.isIgnore())
@@ -91,6 +91,6 @@ public abstract class AbstractTestRunner {
 		}
 	}
 
-	protected abstract void runInternal(IXpectSetup<Object, Object, Object, Object> setup, SetupContext ctx) throws Throwable;
+	protected abstract void runInternal(IXpectRunnerSetup<Object, Object, Object, Object> setup, SetupContext ctx) throws Throwable;
 
 }

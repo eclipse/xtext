@@ -11,7 +11,7 @@ import java.io.IOException;
 import java.io.InputStream;
 
 import org.eclipse.emf.common.util.URI;
-import org.xpect.setup.IXpectSetup.IFileSetupContext;
+import org.xpect.setup.IXpectRunnerSetup.IFileSetupContext;
 
 /**
  * @author Moritz Eysholdt - Initial contribution and API
