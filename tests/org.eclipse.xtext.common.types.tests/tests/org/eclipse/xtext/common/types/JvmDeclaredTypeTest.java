@@ -10,14 +10,14 @@ package org.eclipse.xtext.common.types;
 import java.util.Iterator;
 
 import org.eclipse.emf.ecore.resource.impl.ResourceImpl;
-import org.junit.Assert;
 import org.junit.Test;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public abstract class JvmDeclaredTypeTest extends Assert {
+public abstract class JvmDeclaredTypeTest extends JvmComponentTypeTest {
 
+	@Override
 	protected abstract JvmDeclaredType getObjectUnderTest();
 
 	@Test public void testGetIdentifier_01() {
@@ -261,4 +261,5 @@ public abstract class JvmDeclaredTypeTest extends Assert {
 		assertSame(operation, iterator.next());
 		assertFalse(iterator.hasNext());
 	}
+	
 }
