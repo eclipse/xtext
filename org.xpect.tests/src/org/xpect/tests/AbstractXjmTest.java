@@ -1,5 +1,7 @@
 package org.xpect.tests;
 
+import java.lang.reflect.Constructor;
+
 import junit.framework.Assert;
 
 import org.eclipse.xtext.common.types.util.TypeReferences;
@@ -26,7 +28,9 @@ public abstract class AbstractXjmTest {
 	protected void assertXjm(Class<?> clazz) {
 		try {
 			XpectJavaModel javaModel = factory.createJavaModel(clazz);
-			String expected = clazz.newInstance().toString();
+			Constructor<?> constructor = clazz.getDeclaredConstructor();
+			constructor.setAccessible(true);
+			String expected = constructor.newInstance().toString();
 			String actual = javaModel.toString();
 			Assert.assertEquals(expected, actual);
 		} catch (Exception e) {

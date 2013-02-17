@@ -11,7 +11,7 @@ import org.xpect.tests.XjmMethodsTest.SuiteWithNesting.SuiteMember2;
 
 public class XjmMethodsTest extends AbstractXjmTest {
 
-	public static class SingleTestWithMethods {
+	protected static class SingleTestWithMethods {
 		@Test
 		void packageTest() {
 		}
@@ -58,9 +58,10 @@ public class XjmMethodsTest extends AbstractXjmTest {
 	}
 
 	@XpectSuiteClasses(LoopMember1.class)
-	public static class SuiteWithLoop {
+	protected static class SuiteWithLoop {
+
 		@XpectSuiteClasses(SuiteWithLoop.class)
-		public static class LoopMember1 {
+		protected static class LoopMember1 {
 			@Test
 			public void testMember1() {
 			}
@@ -87,8 +88,8 @@ public class XjmMethodsTest extends AbstractXjmTest {
 	}
 
 	@XpectSuiteClasses({ Conflict1.class, Conflict2.class })
-	public static class SuiteWithNameConflicts {
-		public static class AbstractConflict {
+	protected static class SuiteWithNameConflicts {
+		protected static class AbstractConflict {
 			@Test
 			public void TestConflict0() {
 			}
@@ -98,7 +99,7 @@ public class XjmMethodsTest extends AbstractXjmTest {
 			}
 		}
 
-		public static class Conflict1 {
+		protected static class Conflict1 {
 			@Xpect
 			public void noConflict() {
 			}
@@ -112,7 +113,7 @@ public class XjmMethodsTest extends AbstractXjmTest {
 			}
 		}
 
-		public static class Conflict2 {
+		protected static class Conflict2 {
 			@Test
 			public void noConflict() {
 			}
@@ -143,8 +144,8 @@ public class XjmMethodsTest extends AbstractXjmTest {
 	}
 
 	@XpectSuiteClasses({ SuiteMember1.class, SuiteMember2.class })
-	public static class SuiteWithNesting {
-		public static class SuiteMember1 {
+	protected static class SuiteWithNesting {
+		protected static class SuiteMember1 {
 			@Test
 			public void testMember1() {
 			}
@@ -155,7 +156,7 @@ public class XjmMethodsTest extends AbstractXjmTest {
 		}
 
 		@XpectSuiteClasses(SuiteMember3.class)
-		public static class SuiteMember2 {
+		protected static class SuiteMember2 {
 			@Test
 			public void testMember2() {
 			}
@@ -165,7 +166,7 @@ public class XjmMethodsTest extends AbstractXjmTest {
 			}
 		}
 
-		public static class SuiteMember3 {
+		protected static class SuiteMember3 {
 			@Test
 			public void testMember3() {
 			}

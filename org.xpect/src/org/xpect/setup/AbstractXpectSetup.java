@@ -7,6 +7,10 @@
  *******************************************************************************/
 package org.xpect.setup;
 
+import java.util.EnumSet;
+
+import org.xpect.Environment;
+
 /**
  * @author Moritz Eysholdt - Initial contribution and API
  */
@@ -31,6 +35,10 @@ public abstract class AbstractXpectSetup<T, K, V, X> implements IXpectRunnerSetu
 	}
 
 	public void afterClass(IClassSetupContext frameworkCtx, T userCtx) throws Exception {
+	}
+
+	public EnumSet<Environment> getEnvironments() {
+		return EnumSet.noneOf(Environment.class);
 	}
 
 }
