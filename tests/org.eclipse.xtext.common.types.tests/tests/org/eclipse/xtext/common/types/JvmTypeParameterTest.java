@@ -7,20 +7,24 @@
  *******************************************************************************/
 package org.eclipse.xtext.common.types;
 
-import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public class JvmTypeParameterTest extends Assert {
+public class JvmTypeParameterTest extends JvmComponentTypeTest {
 
 	private JvmTypeParameter typeParameter;
 
 	@Before
 	public void setUp() throws Exception {
 		typeParameter = TypesFactory.eINSTANCE.createJvmTypeParameter();
+	}
+	
+	@Override
+	protected JvmTypeParameter getObjectUnderTest() {
+		return typeParameter;
 	}
 	
 	@Test public void testGetIdentifier_01() {
