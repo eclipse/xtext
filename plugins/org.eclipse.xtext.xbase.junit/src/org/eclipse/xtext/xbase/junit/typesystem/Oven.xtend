@@ -14,7 +14,6 @@ import org.eclipse.emf.ecore.EObject
 import org.eclipse.xtext.common.types.JvmIdentifiableElement
 import org.eclipse.xtext.junit4.util.ParseHelper
 import org.eclipse.xtext.xbase.XAbstractFeatureCall
-import org.eclipse.xtext.xbase.XCasePart
 import org.eclipse.xtext.xbase.XClosure
 import org.eclipse.xtext.xbase.XExpression
 import org.eclipse.xtext.xbase.XSwitchExpression
@@ -79,7 +78,6 @@ class Oven extends Assert {
 						XExpression: {
 							assertExpressionTypeIsResolved(content, resolvedTypes)
 						}
-						XCasePart : { /* skip */}
 						JvmIdentifiableElement: {
 							assertIdentifiableTypeIsResolved(content, resolvedTypes)
 						}
