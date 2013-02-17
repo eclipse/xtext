@@ -11,6 +11,7 @@ import static com.google.common.collect.Lists.*;
 
 import java.util.List;
 
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.resource.Resource.Diagnostic;
@@ -216,8 +217,18 @@ public class DiagnosticConverterImpl implements IDiagnosticConverter {
 					parserNode = nodes.get(index);
 			}
 			return getLocationForNode(parserNode);
+		} else if (obj.eContainer() != null) {
+			EObject container = obj.eContainer();
+			EStructuralFeature containingFeature = obj.eContainingFeature();
+			return getLocationData(container, containingFeature,
+					containingFeature.isMany() ? ((EList<?>) container.eGet(containingFeature)).indexOf(obj)
+							: ValidationMessageAcceptor.INSIGNIFICANT_INDEX);
 		}
-		return null;
+		IssueLocation result = new IssueLocation();
+		result.lineNumber = 0;
+		result.offset = 0;
+		result.length = 0;
+		return result;
 	}
 
 	protected IssueLocation getLocationForNode(INode node) {
