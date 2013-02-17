@@ -19,6 +19,7 @@ import org.eclipse.xtext.common.types.JvmVisibility;
 import org.eclipse.xtext.util.Pair;
 import org.eclipse.xtext.util.Tuples;
 import org.junit.Test;
+import org.xpect.Environment;
 import org.xpect.XjmFactory;
 import org.xpect.XjmMethod;
 import org.xpect.XjmSetup;
@@ -65,11 +66,11 @@ public class XpectJavaModelImplCustom extends XpectJavaModelImpl {
 
 	@Override
 	@SuppressWarnings("unchecked")
-	public <T extends IXpectSetup> EList<T> getSetups(Class<T> clazz) {
+	public <T extends IXpectSetup> EList<T> getSetups(Class<T> clazz, Environment env) {
 		EList<T> result = new BasicEList<T>();
 		for (XjmSetup setup : getSetups()) {
 			IXpectSetup instance = setup.getInstance();
-			if (clazz.isInstance(instance))
+			if (instance.getEnvironments().contains(env) && clazz.isInstance(instance))
 				result.add((T) instance);
 		}
 		return result;

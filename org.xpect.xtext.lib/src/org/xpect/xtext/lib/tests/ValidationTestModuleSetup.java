@@ -1,10 +1,3 @@
-/*******************************************************************************
- * Copyright (c) 2012 itemis AG (http://www.itemis.eu) and others.
- * All rights reserved. This program and the accompanying materials
- * are made available under the terms of the Eclipse Public License v1.0
- * which accompanies this distribution, and is available at
- * http://www.eclipse.org/legal/epl-v10.html
- *******************************************************************************/
 package org.xpect.xtext.lib.tests;
 
 import static com.google.common.collect.Iterables.addAll;
@@ -12,6 +5,7 @@ import static com.google.common.collect.Iterables.filter;
 import static com.google.common.collect.Lists.newArrayList;
 
 import java.util.Collections;
+import java.util.EnumSet;
 import java.util.List;
 import java.util.Set;
 
@@ -22,10 +16,12 @@ import org.eclipse.xtext.util.CancelIndicator;
 import org.eclipse.xtext.validation.CheckMode;
 import org.eclipse.xtext.validation.IResourceValidator;
 import org.eclipse.xtext.validation.Issue;
+import org.xpect.Environment;
 import org.xpect.XpectFile;
 import org.xpect.XpectInvocation;
 import org.xpect.registry.AbstractDelegatingModule;
 import org.xpect.registry.DefaultBinding;
+import org.xpect.setup.IXpectGuiceModuleSetup;
 import org.xpect.ui.services.XtResourceValidator;
 import org.xpect.ui.util.XpectFileAccess;
 import org.xpect.xtext.lib.setup.ThisOffset.ThisOffsetProvider;
@@ -34,18 +30,19 @@ import org.xpect.xtext.lib.util.IssueOverlapsRangePredicate;
 import com.google.common.collect.Sets;
 import com.google.inject.Binder;
 import com.google.inject.Key;
+import com.google.inject.Module;
 
 /**
  * @author Moritz Eysholdt - Initial contribution and API
  */
-public class ValidationTestWorkbenchModule extends AbstractDelegatingModule {
+public class ValidationTestModuleSetup implements IXpectGuiceModuleSetup {
 
 	public static class TestingResourceValidator extends XtResourceValidator {
 
 		protected Severity getExpectedSeverity(XpectInvocation inv) {
-			if (inv == null || inv.eIsProxy() || inv.getElement() == null || inv.getElement().eIsProxy())
+			if (inv == null || inv.eIsProxy() || inv.getMethod() == null || inv.getMethod().eIsProxy())
 				return null;
-			String methodName = inv.getElement().getSimpleName();
+			String methodName = inv.getMethod().getName();
 			if (methodName.startsWith("error"))
 				return Severity.ERROR;
 			if (methodName.startsWith("warning"))
@@ -53,6 +50,10 @@ public class ValidationTestWorkbenchModule extends AbstractDelegatingModule {
 			if (methodName.startsWith("info"))
 				return Severity.INFO;
 			return null;
+		}
+
+		public List<Issue> unfilteredValidate(Resource resource, CheckMode mode, CancelIndicator indicator) {
+			return super.validate(resource, mode, indicator);
 		}
 
 		@Override
@@ -77,8 +78,21 @@ public class ValidationTestWorkbenchModule extends AbstractDelegatingModule {
 		}
 	}
 
-	public void configure(Binder binder) {
-		binder.bind(IResourceValidator.class).to(ValidationTestWorkbenchModule.TestingResourceValidator.class);
-		binder.bind(IResourceValidator.class).annotatedWith(DefaultBinding.class).to(getOriginalType(Key.get(IResourceValidator.class)));
+	public static class ValidationTestWorkbenchModule extends AbstractDelegatingModule {
+
+		public void configure(Binder binder) {
+			binder.bind(IResourceValidator.class).to(TestingResourceValidator.class);
+			binder.bind(IResourceValidator.class).annotatedWith(DefaultBinding.class)
+					.to(getOriginalType(Key.get(IResourceValidator.class)));
+		}
 	}
+
+	public EnumSet<Environment> getEnvironments() {
+		return EnumSet.of(Environment.PLUGIN_TEST, Environment.STANDALONE_TEST, Environment.WORKBENCH);
+	}
+
+	public Class<? extends Module> getModule() {
+		return ValidationTestWorkbenchModule.class;
+	}
+
 }

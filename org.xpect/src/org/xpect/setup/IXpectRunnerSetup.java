@@ -11,12 +11,16 @@ import java.lang.annotation.Annotation;
 import java.util.Collection;
 
 import org.eclipse.emf.common.util.URI;
+import org.xpect.Environment;
 import org.xpect.XjmMethod;
 import org.xpect.XpectFile;
 import org.xpect.XpectInvocation;
+import org.xpect.XpectJavaModel;
 import org.xpect.runner.IXpectURIProvider;
 import org.xpect.util.ITypedAdapter;
 import org.xpect.util.ITypedProvider;
+
+import com.google.inject.Injector;
 
 /**
  * @author Moritz Eysholdt - Initial contribution and API
@@ -29,15 +33,23 @@ public interface IXpectRunnerSetup<T, K, V, X> extends IXpectSetup {
 
 		Class<?> getTestClass();
 
+		XpectJavaModel getXpectJavaModel();
+
+		Environment getEnvironment();
+
 		void installParameterAdapter(ITypedAdapter adapter);
 
 		void installParameterValue(Class<? extends Annotation> key, ITypedProvider provider);
+
+		Injector getInjector(URI uri);
 
 		IXpectURIProvider getURIProvider();
 	}
 
 	public interface IFileSetupContext extends IClassSetupContext {
 		XpectFile getXpectFile();
+
+		Injector getInjector();
 	}
 
 	public interface ITestSetupContext extends IFileSetupContext {

@@ -13,17 +13,24 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
+import org.xpect.Environment;
 import org.xpect.XjmMethod;
 import org.xpect.XpectFile;
 import org.xpect.XpectInvocation;
+import org.xpect.XpectJavaModel;
+import org.xpect.registry.ILanguageInfo;
 import org.xpect.runner.IXpectURIProvider;
 import org.xpect.setup.IXpectRunnerSetup.ITestSetupContext;
 import org.xpect.util.ITypedAdapter;
 import org.xpect.util.ITypedProvider;
+import org.xpect.util.URIDelegationHandler;
 
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
+import com.google.inject.Injector;
+import com.google.inject.Module;
 
 /**
  * @author Moritz Eysholdt - Initial contribution and API
@@ -193,6 +200,52 @@ public class SetupContext implements ITestSetupContext {
 
 	public void setXpectInvocation(XpectInvocation xpectInvocation) {
 		this.xpectInvocation = xpectInvocation;
+	}
+
+	private Map<String, Injector> ext2Injector = Maps.newHashMap();
+
+	public Injector getInjector(URI uri) {
+		String ext = new URIDelegationHandler().getOriginalFileExtension(uri.lastSegment());
+		Injector injector = ext2Injector.get(ext);
+		if (injector != null)
+			return injector;
+		ILanguageInfo info = ILanguageInfo.Registry.INSTANCE.getLanguageByFileExtension(ext);
+		if (info == null)
+			throw new IllegalStateException("No Xtext language configuration found for file extension '" + ext + "'.");
+		EList<IXpectGuiceModuleSetup> moduleSetups = xpectJavaModel.getSetups(IXpectGuiceModuleSetup.class, getEnvironment());
+		injector = info.getInjector();
+		if (!moduleSetups.isEmpty()) {
+			List<Module> modules = Lists.newArrayList();
+			for (IXpectGuiceModuleSetup moduleSetup : moduleSetups)
+				modules.add(injector.getInstance(moduleSetup.getModule()));
+			injector = info.getInjector(modules.toArray(new Module[modules.size()]));
+		}
+		ext2Injector.put(ext, injector);
+		return injector;
+	}
+
+	private XpectJavaModel xpectJavaModel;
+
+	public XpectJavaModel getXpectJavaModel() {
+		return xpectJavaModel;
+	}
+
+	public void setXpectJavaModel(XpectJavaModel xpectJavaModel) {
+		this.xpectJavaModel = xpectJavaModel;
+	}
+
+	private Environment environment;
+
+	public Environment getEnvironment() {
+		return environment;
+	}
+
+	public void setEnvironment(Environment environment) {
+		this.environment = environment;
+	}
+
+	public Injector getInjector() {
+		return getInjector(xpectFile.eResource().getURI());
 	}
 
 }

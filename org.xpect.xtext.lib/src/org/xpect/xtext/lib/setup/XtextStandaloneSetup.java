@@ -8,32 +8,26 @@
 package org.xpect.xtext.lib.setup;
 
 import java.io.IOException;
+import java.util.EnumSet;
 
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.xtext.common.types.JvmDeclaredType;
-import org.eclipse.xtext.common.types.util.JavaReflectAccess;
 import org.eclipse.xtext.resource.IResourceFactory;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.resource.XtextResourceSet;
-import org.xpect.XpectFile;
-import org.xpect.registry.ILanguageInfo;
+import org.xpect.Environment;
 import org.xpect.setup.AbstractXpectSetup;
 import org.xpect.setup.ISetupInitializer;
-import org.xpect.setup.XpectModule;
 import org.xpect.util.TypedProvider;
-import org.xpect.util.URIDelegationHandler;
 import org.xpect.xtext.lib.setup.ThisOffset.ThisOffsetProvider;
 import org.xpect.xtext.lib.setup.XtextStandaloneSetup.ClassCtx;
 import org.xpect.xtext.lib.setup.XtextStandaloneSetup.TestCtx;
 
 import com.google.inject.Injector;
-import com.google.inject.Module;
 
 /**
  * @author Moritz Eysholdt - Initial contribution and API
  */
-@SuppressWarnings("restriction")
 public class XtextStandaloneSetup extends AbstractXpectSetup<ClassCtx, FileCtx, TestCtx, FileCtx> {
 
 	protected static class ClassCtx {
@@ -47,34 +41,11 @@ public class XtextStandaloneSetup extends AbstractXpectSetup<ClassCtx, FileCtx, 
 		return new ClassCtx();
 	}
 
-	protected Class<? extends Module> getTestModule(XpectFile file) {
-		JvmDeclaredType testClass = file.getTest().getTestClass();
-		if (testClass == null)
-			return null;
-		Class<?> type = new JavaReflectAccess().getRawType(testClass);
-		XpectModule annotation = type.getAnnotation(XpectModule.class);
-		if (annotation != null)
-			return annotation.standaloneTestModule();
-		return null;
-	}
-
-	protected Injector getInjector(XpectFile file) {
-		String ext = new URIDelegationHandler().getOriginalFileExtension(file.eResource().getURI().lastSegment());
-		ILanguageInfo info = ILanguageInfo.Registry.INSTANCE.getLanguageByFileExtension(ext);
-		if (info == null)
-			throw new IllegalStateException("No Xtext language configuration found for file extension '" + ext + "'.");
-		Class<? extends Module> testModule = getTestModule(file);
-		if (testModule != null)
-			return info.getInjector(info.getInjector().getInstance(testModule));
-		return info.getInjector();
-	}
-
 	@Override
 	public FileCtx beforeFile(IFileSetupContext frameworkCtx, ClassCtx userCtx, ISetupInitializer<FileCtx> initializer) throws IOException {
 		FileCtx ctx = new FileCtx();
 		initializer.initialize(ctx);
-		Injector injector = getInjector(frameworkCtx.getXpectFile());
-		Resource resource = loadThisResource(injector, frameworkCtx, ctx);
+		Resource resource = loadThisResource(frameworkCtx.getInjector(), frameworkCtx, ctx);
 		validate(ctx, resource);
 		return ctx;
 	}
@@ -85,7 +56,7 @@ public class XtextStandaloneSetup extends AbstractXpectSetup<ClassCtx, FileCtx, 
 
 	@Override
 	public TestCtx beforeTest(ITestSetupContext frameworkCtx, FileCtx userCtx) throws IOException {
-		Injector injector = getInjector(frameworkCtx.getXpectFile());
+		Injector injector = frameworkCtx.getInjector();
 		injector.injectMembers(frameworkCtx.getTestInstance());
 		XtextResource res = loadThisResource(injector, frameworkCtx, userCtx);
 		frameworkCtx.installParameterAdapter(new XtextOffsetAdapter(res));
@@ -118,6 +89,10 @@ public class XtextStandaloneSetup extends AbstractXpectSetup<ClassCtx, FileCtx, 
 			res.load(resourceSet.getURIConverter().createInputStream(thisURI), null);
 			return (XtextResource) res;
 		}
+	}
+
+	public EnumSet<Environment> getEnvironments() {
+		return EnumSet.of(Environment.STANDALONE_TEST);
 	}
 
 }

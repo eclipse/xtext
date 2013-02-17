@@ -14,12 +14,10 @@ import static com.google.common.collect.Lists.newArrayList;
 import java.util.Collection;
 import java.util.List;
 
-import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtext.diagnostics.Severity;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.util.CancelIndicator;
 import org.eclipse.xtext.validation.CheckMode;
-import org.eclipse.xtext.validation.IResourceValidator;
 import org.eclipse.xtext.validation.Issue;
 import org.junit.runner.RunWith;
 import org.xpect.parameters.ILinesExpectation;
@@ -27,12 +25,10 @@ import org.xpect.parameters.LinesExpectation;
 import org.xpect.runner.Xpect;
 import org.xpect.runner.XpectRunner;
 import org.xpect.setup.XpectSetup;
-import org.xpect.setup.XpectModule;
-import org.xpect.xtext.lib.setup.FileCtx;
 import org.xpect.xtext.lib.setup.ThisOffset;
 import org.xpect.xtext.lib.setup.ThisResource;
 import org.xpect.xtext.lib.setup.XtextStandaloneSetup;
-import org.xpect.xtext.lib.tests.ValidationTest.XtextValidationStandaloneSetuo;
+import org.xpect.xtext.lib.tests.ValidationTestModuleSetup.TestingResourceValidator;
 import org.xpect.xtext.lib.util.IssueFormatter;
 import org.xpect.xtext.lib.util.IssueOverlapsRangePredicate;
 
@@ -40,15 +36,8 @@ import org.xpect.xtext.lib.util.IssueOverlapsRangePredicate;
  * @author Moritz Eysholdt - Initial contribution and API
  */
 @RunWith(XpectRunner.class)
-@XpectSetup(XtextValidationStandaloneSetuo.class)
-@XpectModule(workbenchModule = ValidationTestWorkbenchModule.class)
+@XpectSetup({ XtextStandaloneSetup.class, ValidationTestModuleSetup.class })
 public class ValidationTest {
-
-	public static class XtextValidationStandaloneSetuo extends XtextStandaloneSetup {
-		@Override
-		protected void validate(FileCtx ctx, Resource resource) {
-		}
-	}
 
 	@Xpect
 	public void errors(@LinesExpectation ILinesExpectation expectation, @ThisResource XtextResource resource, @ThisOffset int offset) {
@@ -69,8 +58,8 @@ public class ValidationTest {
 	}
 
 	protected List<String> validate(XtextResource resource, int offset, Severity severity) {
-		IResourceValidator validator = resource.getResourceServiceProvider().getResourceValidator();
-		Collection<Issue> allIssues = validator.validate(resource, CheckMode.ALL, CancelIndicator.NullImpl);
+		TestingResourceValidator validator = (TestingResourceValidator) resource.getResourceServiceProvider().getResourceValidator();
+		Collection<Issue> allIssues = validator.unfilteredValidate(resource, CheckMode.ALL, CancelIndicator.NullImpl);
 		List<Issue> issuesInLine = newArrayList(filter(allIssues, new IssueOverlapsRangePredicate(resource, offset, severity)));
 		List<String> formattedIssues = newArrayList(transform(issuesInLine, new IssueFormatter(resource, false)));
 		return formattedIssues;

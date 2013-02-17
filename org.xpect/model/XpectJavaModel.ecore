@@ -12,6 +12,7 @@
           <eTypeArguments eTypeParameter="#//XpectJavaModel/getSetups/T"/>
         </eGenericType>
       </eParameters>
+      <eParameters name="environment" eType="#//Environment"/>
     </eOperations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="testOrSuite" eType="#//XjmTest"
         containment="true" resolveProxies="false"/>
@@ -51,7 +52,7 @@
   <eClassifiers xsi:type="ecore:EClass" name="XjmXpectMethod" eSuperTypes="#//XjmMethod">
     <eOperations name="getParameterCount" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="singleParameterProviders"
-        upperBound="-1" eType="#//SingleParameterProvider" derived="true"/>
+        unique="false" upperBound="-1" eType="#//SingleParameterProvider" derived="true"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="multiParameterProviders"
         upperBound="-1" eType="#//MultiParameterProvider" derived="true"/>
   </eClassifiers>
@@ -63,4 +64,9 @@
   <eClassifiers xsi:type="ecore:EDataType" name="SingleParameterProvider" instanceClassName="org.xpect.runner.IXpectParameterProvider$IXpectSingleParameterProvider"/>
   <eClassifiers xsi:type="ecore:EDataType" name="MultiParameterProvider" instanceClassName="org.xpect.runner.IXpectParameterProvider$IXpectMultiParameterProvider"/>
   <eClassifiers xsi:type="ecore:EDataType" name="XpectSetup" instanceClassName="org.xpect.setup.IXpectSetup"/>
+  <eClassifiers xsi:type="ecore:EEnum" name="Environment">
+    <eLiterals name="STANDALONE_TEST"/>
+    <eLiterals name="PLUGIN_TEST" value="1"/>
+    <eLiterals name="WORKBENCH" value="2"/>
+  </eClassifiers>
 </ecore:EPackage>

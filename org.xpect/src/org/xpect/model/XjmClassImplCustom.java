@@ -22,9 +22,9 @@ public class XjmClassImplCustom extends XjmClassImpl {
 		JvmDeclaredType jvmClass = getJvmClass();
 		if (jvmClass == null || jvmClass.eIsProxy())
 			return null;
-		Class<?> context = (Class<?>) ((XtextResourceSet) eResource().getResourceSet()).getClasspathURIContext();
+		ClassLoader context = (ClassLoader) ((XtextResourceSet) eResource().getResourceSet()).getClasspathURIContext();
 		try {
-			result = context.getClassLoader().loadClass(jvmClass.getQualifiedName());
+			result = context.loadClass(jvmClass.getQualifiedName());
 			super.setJavaClass(result);
 		} catch (ClassNotFoundException e) {
 			logger.error(e);

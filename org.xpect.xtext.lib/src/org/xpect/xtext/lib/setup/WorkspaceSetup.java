@@ -7,6 +7,9 @@
  *******************************************************************************/
 package org.xpect.xtext.lib.setup;
 
+import java.util.EnumSet;
+
+import org.xpect.Environment;
 import org.xpect.setup.AbstractXpectSetup;
 import org.xpect.xtext.lib.setup.WorkspaceSetup.ClassCtx;
 import org.xpect.xtext.lib.setup.WorkspaceSetup.TestCtx;
@@ -22,5 +25,9 @@ public class WorkspaceSetup extends AbstractXpectSetup<ClassCtx, FileCtx, TestCt
 	}
 
 	protected static class TestCtx extends FileCtx {
+	}
+
+	public EnumSet<Environment> getEnvironments() {
+		return EnumSet.of(Environment.PLUGIN_TEST);
 	}
 }

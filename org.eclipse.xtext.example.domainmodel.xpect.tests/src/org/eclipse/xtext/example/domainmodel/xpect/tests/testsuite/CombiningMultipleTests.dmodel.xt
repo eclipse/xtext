@@ -1,0 +1,23 @@
+/* XPECT_SETUP org.eclipse.xtext.example.domainmodel.xpect.tests.testsuite.DMXtextTests END_SETUP */
+
+import pkg2.MyEntity2
+
+package pkg1 {
+	entity MyEntity1 {
+		
+		// int should be the java primitive
+		// XPECT linkedName at id --> int
+		id:int
+		
+		// String should be from java.lang 
+		// XPECT linkedName at String --> java.lang.String
+		name:String
+		
+		// besides "int", we can reference... and we can not reference foooobar
+		// XPECT scope at int --> int, String, java.lang.String, boolean, !foooobar, !innnnteger, ...
+		id:int
+		
+		// XPECT errors --> "Couldn't resolve reference to JvmType 'integer'." at "integer"
+		id:integer
+	}
+}

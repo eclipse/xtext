@@ -11,7 +11,6 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Set;
 
-import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
 import org.eclipse.xtext.resource.IResourceServiceProvider;
@@ -20,11 +19,10 @@ import org.junit.runner.notification.Failure;
 import org.junit.runner.notification.RunNotifier;
 import org.junit.runners.ParentRunner;
 import org.junit.runners.model.InitializationError;
+import org.xpect.Environment;
 import org.xpect.XpectJavaModel;
 import org.xpect.XpectStandaloneSetup;
-import org.xpect.setup.IXpectPluginTestSetup;
 import org.xpect.setup.IXpectRunnerSetup;
-import org.xpect.setup.IXpectStandaloneTestSetup;
 import org.xpect.setup.SetupContext;
 import org.xpect.util.AnnotationUtil;
 import org.xpect.util.XpectJavaModelFactory;
@@ -80,14 +78,16 @@ public class XpectRunner extends ParentRunner<XpectFileRunner> {
 		return result;
 	}
 
+	public Environment getEnvironment() {
+		if (EcorePlugin.IS_ECLIPSE_RUNNING)
+			return Environment.PLUGIN_TEST;
+		else
+			return Environment.STANDALONE_TEST;
+	}
+
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	protected IXpectRunnerSetup<Object, Object, Object, Object> createSetup() {
-		Class<? extends IXpectRunnerSetup> cls;
-		if (EcorePlugin.IS_ECLIPSE_RUNNING)
-			cls = IXpectPluginTestSetup.class;
-		else
-			cls = IXpectStandaloneTestSetup.class;
-		EList<? extends IXpectRunnerSetup> setups = xpectJavaModel.getSetups(cls);
+		List<IXpectRunnerSetup> setups = xpectJavaModel.getSetups(IXpectRunnerSetup.class, getEnvironment());
 		if (setups.isEmpty())
 			return null;
 		if (setups.size() != 1)
@@ -161,9 +161,11 @@ public class XpectRunner extends ParentRunner<XpectFileRunner> {
 	protected void runChild(XpectFileRunner child, RunNotifier notifier) {
 		IXpectRunnerSetup<Object, Object, Object, Object> setup = createSetup();
 		SetupContext ctx = createSetupContext(setup);
+		ctx.setXpectJavaModel(xpectJavaModel);
 		ctx.setAllFiles(getFiles());
 		ctx.setTestClass(getTestClass().getJavaClass());
 		ctx.setUriProvider(uriProvider);
+		ctx.setEnvironment(getEnvironment());
 		try {
 			if (setup != null)
 				setup.beforeClass(ctx);

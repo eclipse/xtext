@@ -1,4 +1,4 @@
-package org.eclipse.xtext.example.domainmodel.xpect.tests.featurebased;
+package org.eclipse.xtext.example.domainmodel.xpect.tests.testsuite;
 
 import org.junit.runner.RunWith;
 import org.xpect.runner.XpectRunner;

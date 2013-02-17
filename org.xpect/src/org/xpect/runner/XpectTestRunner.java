@@ -146,7 +146,7 @@ public class XpectTestRunner extends AbstractTestRunner {
 	@Override
 	protected void runInternal(IXpectRunnerSetup<Object, Object, Object, Object> setup, SetupContext ctx) throws Throwable {
 		List<List<ITypedProvider>> allParameters = collectAllParameters();
-		Object test = getUriRunner().getRunner().getTestClass().getJavaClass().newInstance();
+		Object test = getInvocation().getMethod().getTest().getJavaClass().newInstance();
 		// ctx.setAllParameters(allParameters);
 		ctx.setXpectInvocation(getInvocation());
 		ctx.setMethod(method);

@@ -10,7 +10,7 @@ package org.xpect.setup;
 /**
  * @author Moritz Eysholdt - Initial contribution and API
  */
-public class AbstractXpectSetup<T, K, V, X> implements IXpectRunnerSetup<T, K, V, X> {
+public abstract class AbstractXpectSetup<T, K, V, X> implements IXpectRunnerSetup<T, K, V, X> {
 
 	public T beforeClass(IClassSetupContext frameworkCtx) throws Exception {
 		return null;
