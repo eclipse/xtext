@@ -206,7 +206,7 @@ public class DiagnosticConverterImpl implements IDiagnosticConverter {
 	 * @return the location data for the given diagnostic.
 	 */
 	protected IssueLocation getLocationData(EObject obj, EStructuralFeature structuralFeature, int index) {
-		INode parserNode = NodeModelUtils.getNode(obj);
+		INode parserNode = NodeModelUtils.findActualNodeFor(obj);
 		if (parserNode != null) {
 			if (structuralFeature != null) {
 				List<INode> nodes = NodeModelUtils.findNodesForFeature(obj, structuralFeature);
@@ -217,7 +217,11 @@ public class DiagnosticConverterImpl implements IDiagnosticConverter {
 			}
 			return getLocationForNode(parserNode);
 		}
-		return null;
+		IssueLocation result = new IssueLocation();
+		result.lineNumber = 0;
+		result.offset = 0;
+		result.length = 0;
+		return result;
 	}
 
 	protected IssueLocation getLocationForNode(INode node) {
