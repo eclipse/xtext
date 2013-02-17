@@ -20,7 +20,7 @@ import org.xpect.XpectFile;
 import org.xpect.registry.ILanguageInfo;
 import org.xpect.setup.AbstractXpectSetup;
 import org.xpect.setup.ISetupInitializer;
-import org.xpect.setup.XtextInjectorSetup;
+import org.xpect.setup.XpectModule;
 import org.xpect.util.TypedProvider;
 import org.xpect.util.URIDelegationHandler;
 import org.xpect.xtext.lib.setup.ThisOffset.ThisOffsetProvider;
@@ -52,7 +52,7 @@ public class XtextStandaloneSetup extends AbstractXpectSetup<ClassCtx, FileCtx, 
 		if (testClass == null)
 			return null;
 		Class<?> type = new JavaReflectAccess().getRawType(testClass);
-		XtextInjectorSetup annotation = type.getAnnotation(XtextInjectorSetup.class);
+		XpectModule annotation = type.getAnnotation(XpectModule.class);
 		if (annotation != null)
 			return annotation.standaloneTestModule();
 		return null;

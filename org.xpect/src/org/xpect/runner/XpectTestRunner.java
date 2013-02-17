@@ -13,11 +13,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
-import org.eclipse.emf.ecore.util.EcoreUtil;
-import org.eclipse.xtext.resource.XtextResource;
-import org.junit.runner.Description;
-import org.junit.runner.notification.Failure;
-import org.junit.runner.notification.RunNotifier;
+import org.xpect.XjmXpectMethod;
 import org.xpect.XpectInvocation;
 import org.xpect.runner.IXpectParameterProvider.IClaimedRegion;
 import org.xpect.runner.IXpectParameterProvider.IXpectMultiParameterProvider;
@@ -27,15 +23,13 @@ import org.xpect.setup.SetupContext;
 import org.xpect.util.IRegion;
 import org.xpect.util.ITypedAdapter;
 import org.xpect.util.ITypedProvider;
-import org.xpect.util.TestDataUtil;
 
 import com.google.common.collect.Lists;
-import com.google.common.collect.Maps;
 
 /**
  * @author Moritz Eysholdt - Initial contribution and API
  */
-public class XpectTestRunner {
+public class XpectTestRunner extends AbstractTestRunner {
 
 	public static class ClaimedRegion implements IClaimedRegion {
 		private final IXpectParameterProvider claimer;
@@ -60,22 +54,11 @@ public class XpectTestRunner {
 		}
 	}
 
-	private Description description;
+	private XjmXpectMethod method;
 
-	private Throwable error;
-	private XpectInvocation invocation;
-	private XpectFrameworkMethod method;
-	private XpectFileRunner uriRunner;
-
-	public XpectTestRunner(XpectFileRunner uriRunner, XpectInvocation invocation) {
-		super();
-		this.uriRunner = uriRunner;
-		this.invocation = invocation;
-		try {
-			this.method = uriRunner.getRunner().getFrameworkMethod(invocation.getElement());
-		} catch (Throwable e) {
-			this.error = e;
-		}
+	public XpectTestRunner(XpectFileRunner uriRunner, XpectInvocation invocation, XjmXpectMethod method) {
+		super(uriRunner, invocation);
+		this.method = method;
 	}
 
 	protected List<List<ITypedProvider>> collectAllParameters() throws Exception {
@@ -83,7 +66,7 @@ public class XpectTestRunner {
 		List<List<ITypedProvider>> result = Lists.newArrayList();
 		List<ITypedProvider> first = null;
 		for (int i = 0; i < method.getParameterCount(); i++) {
-			IXpectSingleParameterProvider claimer = method.getSingleParameterProvider().get(i);
+			IXpectSingleParameterProvider claimer = method.getSingleParameterProviders().get(i);
 			if (claimer != null) {
 				if (first == null)
 					first = Arrays.asList(new ITypedProvider[method.getParameterCount()]);
@@ -93,7 +76,7 @@ public class XpectTestRunner {
 		}
 		if (first != null)
 			result.add(first);
-		for (IXpectMultiParameterProvider claimer : method.getMultiParameterProvider())
+		for (IXpectMultiParameterProvider claimer : method.getMultiParameterProviders())
 			result.add(claimer.parseRegion(this, claimedRegions));
 		return result;
 	}
@@ -101,14 +84,14 @@ public class XpectTestRunner {
 	protected List<IClaimedRegion> collectClaimedRegions() {
 		List<IClaimedRegion> result = Lists.newArrayList();
 		for (int i = 0; i < method.getParameterCount(); i++) {
-			IXpectSingleParameterProvider claimer = method.getSingleParameterProvider().get(i);
+			IXpectSingleParameterProvider claimer = method.getSingleParameterProviders().get(i);
 			if (claimer != null) {
 				IRegion claim = claimer.claimRegion(this, i);
 				if (claim != null)
 					result.add(new ClaimedRegion(claimer, claim));
 			}
 		}
-		for (IXpectMultiParameterProvider claimer : method.getMultiParameterProvider()) {
+		for (IXpectMultiParameterProvider claimer : method.getMultiParameterProviders()) {
 			IRegion claim = claimer.claimRegion(this);
 			if (claim != null)
 				result.add(new ClaimedRegion(claimer, claim));
@@ -117,7 +100,7 @@ public class XpectTestRunner {
 	}
 
 	protected ITypedProvider collectProposedParameter(int paramIndex, List<ITypedProvider> candidates, List<ITypedAdapter> adapter) {
-		Class<?> expectedType = method.getMethod().getParameterTypes()[paramIndex];
+		Class<?> expectedType = method.getJavaMethod().getParameterTypes()[paramIndex];
 		for (ITypedProvider tp : candidates)
 			if (tp.canProvide(expectedType))
 				return tp;
@@ -136,7 +119,7 @@ public class XpectTestRunner {
 			for (List<ITypedProvider> col : allParams)
 				if (col.get(i) != null)
 					candidates.add(col.get(i));
-			for (Annotation ann : method.getMethod().getParameterAnnotations()[i]) {
+			for (Annotation ann : method.getJavaMethod().getParameterAnnotations()[i]) {
 				ITypedProvider provider = setupValues.get(ann.annotationType());
 				if (provider != null)
 					candidates.add(provider);
@@ -146,83 +129,26 @@ public class XpectTestRunner {
 		return result;
 	}
 
-	protected String getTitle() {
-		return new XpectTestTitleProvider().getTitle(this);
-	}
-
-	protected String getFullName() {
-		Map<String, String> result = Maps.newLinkedHashMap();
-		result.put("title", uriRunner.getRunner().getUniqueName(getTitle()));
-		if (invocation.getElement() != null && !invocation.getElement().eIsProxy())
-			result.put("method", invocation.getElement().getSimpleName());
-		result.put("file", EcoreUtil.getURI(invocation).toString());
-		return TestDataUtil.encode(result);
-	}
-
-	public Description createDescription() {
-		XpectRunner runner = uriRunner.getRunner();
-		Class<?> javaClass = runner.getTestClass().getJavaClass();
-		return Description.createTestDescription(javaClass, getFullName());
-	}
-
 	protected Object[] createParameterValues(List<ITypedProvider> proposedParameters) {
 		Object[] params = new Object[method.getParameterCount()];
 		for (int i = 0; i < method.getParameterCount(); i++) {
-			Class<?>[] expectedTypes = method.getMethod().getParameterTypes();
+			Class<?>[] expectedTypes = method.getJavaMethod().getParameterTypes();
 			if (proposedParameters.get(i) != null)
 				params[i] = proposedParameters.get(i).get(expectedTypes[i]);
 		}
 		return params;
 	}
 
-	public Description getDescription() {
-		if (this.description == null)
-			this.description = createDescription();
-		return description;
-	}
-
-	public String getDocument() {
-		return ((XtextResource) invocation.eResource()).getParseResult().getRootNode().getText();
-	}
-
-	public Throwable getError() {
-		return error;
-	}
-
-	public XpectInvocation getInvocation() {
-		return invocation;
-	}
-
-	public XpectFrameworkMethod getMethod() {
+	public XjmXpectMethod getMethod() {
 		return method;
 	}
 
-	public XpectFileRunner getUriRunner() {
-		return uriRunner;
-	}
-
-	public void run(RunNotifier notifier, IXpectSetup<Object, Object, Object, Object> setup, SetupContext ctx) {
-		notifier.fireTestStarted(getDescription());
-		try {
-			if (invocation.isIgnore())
-				notifier.fireTestIgnored(getDescription());
-			else if (error != null)
-				notifier.fireTestFailure(new Failure(getDescription(), error));
-			else {
-				runInternal(setup, ctx);
-			}
-		} catch (Throwable t) {
-			notifier.fireTestFailure(new Failure(getDescription(), t));
-		} finally {
-			notifier.fireTestFinished(getDescription());
-		}
-	}
-
+	@Override
 	protected void runInternal(IXpectSetup<Object, Object, Object, Object> setup, SetupContext ctx) throws Throwable {
 		List<List<ITypedProvider>> allParameters = collectAllParameters();
-		Object test = uriRunner.getRunner().getTestClass().getJavaClass().newInstance();
+		Object test = getUriRunner().getRunner().getTestClass().getJavaClass().newInstance();
 		// ctx.setAllParameters(allParameters);
-		ctx.setXpectInvocation(invocation);
+		ctx.setXpectInvocation(getInvocation());
 		ctx.setMethod(method);
 		ctx.setTestInstance(test);
 		try {
@@ -231,7 +157,7 @@ public class XpectTestRunner {
 			List<ITypedProvider> proposedParameters = collectProposedParameters(allParameters, ctx.getParamValues(), ctx.getParamAdapters());
 			// ctx.setProposedParameters(proposedParameters);
 			Object[] params = createParameterValues(proposedParameters);
-			method.getMethod().invoke(test, params);
+			method.getJavaMethod().invoke(test, params);
 		} catch (InvocationTargetException e) {
 			throw e.getCause();
 		} finally {

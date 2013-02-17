@@ -17,6 +17,7 @@ import com.google.common.collect.Iterables;
  * @author Moritz Eysholdt - Initial contribution and API
  */
 public class XpectFileImplCustom extends XpectFileImpl {
+
 	@Override
 	public Iterable<XpectInvocation> getInvocations() {
 		return Iterables.filter(getMembers(), XpectInvocation.class);

@@ -146,7 +146,7 @@ public class JUnitJavaElementDelegate implements IAdaptable {
 		if (test != null) {
 			IJavaElementFinder finder = ((XtextResource) test.eResource()).getResourceServiceProvider().get(IJavaElementFinder.class);
 			if (test != null) {
-				JvmDeclaredType testClass = test.getTestClass();
+				JvmDeclaredType testClass = test.getTestClassOrSuite().getTestOrSuite().getJvmClass();
 				if (testClass != null && !testClass.eIsProxy())
 					return finder.findElementFor(testClass);
 			}

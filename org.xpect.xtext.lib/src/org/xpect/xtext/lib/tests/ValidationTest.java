@@ -27,7 +27,7 @@ import org.xpect.parameters.LinesExpectation;
 import org.xpect.runner.Xpect;
 import org.xpect.runner.XpectRunner;
 import org.xpect.setup.XpectSetup;
-import org.xpect.setup.XtextInjectorSetup;
+import org.xpect.setup.XpectModule;
 import org.xpect.xtext.lib.setup.FileCtx;
 import org.xpect.xtext.lib.setup.ThisOffset;
 import org.xpect.xtext.lib.setup.ThisResource;
@@ -41,7 +41,7 @@ import org.xpect.xtext.lib.util.IssueOverlapsRangePredicate;
  */
 @RunWith(XpectRunner.class)
 @XpectSetup(XtextValidationStandaloneSetuo.class)
-@XtextInjectorSetup(workbenchModule = ValidationTestWorkbenchModule.class)
+@XpectModule(workbenchModule = ValidationTestWorkbenchModule.class)
 public class ValidationTest {
 
 	public static class XtextValidationStandaloneSetuo extends XtextStandaloneSetup {

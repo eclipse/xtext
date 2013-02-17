@@ -13,6 +13,8 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
+import org.xpect.Environment;
+
 /**
  * @author Moritz Eysholdt - Initial contribution and API
  */
@@ -20,5 +22,7 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.RUNTIME)
 @Target({ ElementType.TYPE })
 public @interface XpectSetup {
-	Class<? extends IXpectSetup<?, ?, ?, ?>> value();
+	Environment environment() default Environment.STANDALONE_TEST;
+
+	Class<? extends IXpectSetup<?, ?, ?, ?>> setup();
 }

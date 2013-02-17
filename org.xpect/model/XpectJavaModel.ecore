@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="xpect" nsURI="http://www.eclipse.org/xpect/XpectJavaModel" nsPrefix="xpect">
+  <eClassifiers xsi:type="ecore:EClass" name="XpectJavaModel">
+    <eOperations name="getModules" upperBound="-1" eType="#//XjmModule">
+      <eParameters name="environment" eType="#//Environment"/>
+    </eOperations>
+    <eOperations name="getSetups" upperBound="-1" eType="#//XjmSetup">
+      <eParameters name="environment" eType="#//Environment"/>
+    </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="testOrSuite" eType="#//XjmTest"
+        containment="true" resolveProxies="false"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="modules" upperBound="-1"
+        eType="#//XjmModule" containment="true" resolveProxies="false"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="setups" upperBound="-1"
+        eType="#//XjmSetup" containment="true" resolveProxies="false"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="tests" upperBound="-1"
+        eType="#//XjmTest" containment="true" resolveProxies="false"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="methods" upperBound="-1"
+        eType="#//NameToMethodEntry" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="XjmClass" abstract="true">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="jvmClass" eType="ecore:EClass ../../org.eclipse.xtext.common.types/model/JavaVMTypes.ecore#//JvmDeclaredType"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="javaClass" derived="true">
+      <eGenericType eClassifier="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaClass">
+        <eTypeArguments/>
+      </eGenericType>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="XjmTest" eSuperTypes="#//XjmClass">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="modules" upperBound="-1"
+        eType="#//EnvironmentToModuleEntry" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="setups" upperBound="-1"
+        eType="#//EnvironmentToSetupEntry" transient="true" containment="true" resolveProxies="false"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="methods" upperBound="-1"
+        eType="#//XjmMethod" containment="true" resolveProxies="false" eOpposite="#//XjmMethod/test"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="XjmSetup" eSuperTypes="#//XjmClass"/>
+  <eClassifiers xsi:type="ecore:EClass" name="XjmModule" eSuperTypes="#//XjmClass"/>
+  <eClassifiers xsi:type="ecore:EClass" name="XjmMethod" abstract="true">
+    <eOperations name="getName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="test" eType="#//XjmTest"
+        resolveProxies="false" eOpposite="#//XjmTest/methods"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="jvmMethod" eType="ecore:EClass ../../org.eclipse.xtext.common.types/model/JavaVMTypes.ecore#//JvmOperation"
+        resolveProxies="false"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="javaMethod" eType="#//JavaMethod"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="XjmTestMethod" eSuperTypes="#//XjmMethod"/>
+  <eClassifiers xsi:type="ecore:EClass" name="XjmXpectMethod" eSuperTypes="#//XjmMethod">
+    <eOperations name="getParameterCount" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="singleParameterProviders"
+        upperBound="-1" eType="#//SingleParameterProvider" derived="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="multiParameterProviders"
+        upperBound="-1" eType="#//MultiParameterProvider" derived="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="Environment">
+    <eLiterals name="STANDALONE_TEST"/>
+    <eLiterals name="PLUGIN_TEST" value="1"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="EnvironmentToSetupEntry" instanceClassName="java.util.Map$Entry">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="key" eType="#//Environment"
+        iD="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="value" eType="#//XjmSetup"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="EnvironmentToModuleEntry" instanceClassName="java.util.Map$Entry">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="key" eType="#//Environment"
+        iD="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="value" eType="#//XjmModule"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="NameToMethodEntry" instanceClassName="java.util.Map$Entry">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="key" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="value" eType="#//XjmMethod"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EDataType" name="JavaMethod" instanceClassName="java.lang.reflect.Method"/>
+  <eClassifiers xsi:type="ecore:EDataType" name="SingleParameterProvider" instanceClassName="org.xpect.runner.IXpectParameterProvider$IXpectSingleParameterProvider"/>
+  <eClassifiers xsi:type="ecore:EDataType" name="MultiParameterProvider" instanceClassName="org.xpect.runner.IXpectParameterProvider$IXpectMultiParameterProvider"/>
+</ecore:EPackage>

@@ -5,13 +5,20 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.xpect.runner;
+package org.xpect.setup;
 
-import org.xpect.XpectInvocation;
+import java.lang.annotation.ElementType;
+import java.lang.annotation.Inherited;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+import java.lang.annotation.Target;
 
 /**
  * @author Moritz Eysholdt - Initial contribution and API
  */
-public interface IXpectTestTitleProvider {
-	String getTitle(XpectInvocation runner);
+@Inherited
+@Retention(RetentionPolicy.RUNTIME)
+@Target({ ElementType.TYPE })
+public @interface XpectSetups {
+	XpectSetup[] value();
 }

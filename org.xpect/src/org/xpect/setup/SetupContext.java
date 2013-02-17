@@ -14,10 +14,10 @@ import java.util.List;
 import java.util.Map;
 
 import org.eclipse.emf.common.util.URI;
+import org.xpect.XjmMethod;
 import org.xpect.XpectFile;
 import org.xpect.XpectInvocation;
 import org.xpect.runner.IXpectURIProvider;
-import org.xpect.runner.XpectFrameworkMethod;
 import org.xpect.setup.IXpectSetup.ITestSetupContext;
 import org.xpect.util.ITypedAdapter;
 import org.xpect.util.ITypedProvider;
@@ -34,7 +34,7 @@ public class SetupContext implements ITestSetupContext {
 
 	// private List<List<ITypedProvider>> allParameters;
 
-	private XpectFrameworkMethod method;
+	private XjmMethod method;
 
 	private List<ITypedAdapter> paramAdapters;
 
@@ -72,7 +72,7 @@ public class SetupContext implements ITestSetupContext {
 	// return allParameters.get(parameterIndex);
 	// }
 
-	public XpectFrameworkMethod getMethod() {
+	public XjmMethod getMethod() {
 		return method;
 	}
 
@@ -149,7 +149,7 @@ public class SetupContext implements ITestSetupContext {
 	// this.allParameters = allParameters;
 	// }
 
-	public void setMethod(XpectFrameworkMethod method) {
+	public void setMethod(XjmMethod method) {
 		this.method = method;
 	}
 

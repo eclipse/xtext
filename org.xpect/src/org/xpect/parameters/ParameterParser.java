@@ -29,9 +29,9 @@ import org.eclipse.xtext.util.formallang.NfaUtil;
 import org.eclipse.xtext.util.formallang.NfaUtil.BacktrackHandler;
 import org.eclipse.xtext.util.formallang.StringProduction;
 import org.eclipse.xtext.util.formallang.StringProduction.ProdElement;
+import org.xpect.XjmXpectMethod;
 import org.xpect.parameters.ParameterParser.ParameterParserImpl;
 import org.xpect.runner.IXpectParameterProvider.IXpectMultiParameterProvider;
-import org.xpect.runner.XpectFrameworkMethod;
 import org.xpect.runner.XpectMultiParameterProvider;
 import org.xpect.runner.XpectTestRunner;
 import org.xpect.util.AbstractOffsetProvider;
@@ -133,7 +133,7 @@ public @interface ParameterParser {
 		}
 
 		protected List<ITypedProvider> associateParameterValues(XpectTestRunner invocation, Map<String, ITypedProvider> parsedParams) {
-			XpectFrameworkMethod method = invocation.getMethod();
+			XjmXpectMethod method = invocation.getMethod();
 			ITypedProvider[] result = new ITypedProvider[method.getParameterCount()];
 			for (int i = 0; i < result.length; i++)
 				result[i] = parsedParams.get("arg" + i);

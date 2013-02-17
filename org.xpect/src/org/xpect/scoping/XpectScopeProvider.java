@@ -13,9 +13,8 @@ import java.util.Set;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
+import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.xtext.EcoreUtil2;
-import org.eclipse.xtext.common.types.JvmAnnotationReference;
-import org.eclipse.xtext.common.types.JvmAnnotationType;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmFeature;
 import org.eclipse.xtext.common.types.JvmOperation;
@@ -30,13 +29,15 @@ import org.eclipse.xtext.scoping.impl.ImportNormalizer;
 import org.eclipse.xtext.scoping.impl.ImportScope;
 import org.eclipse.xtext.scoping.impl.SimpleScope;
 import org.eclipse.xtext.util.Strings;
-import org.junit.Test;
 import org.xpect.AbstractComponent;
 import org.xpect.Component;
+import org.xpect.XjmMethod;
+import org.xpect.XjmPackage;
+import org.xpect.XjmTest;
 import org.xpect.XpectFile;
+import org.xpect.XpectJavaModel;
 import org.xpect.XpectPackage;
 import org.xpect.XpectTest;
-import org.xpect.runner.Xpect;
 
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
@@ -68,14 +69,22 @@ public class XpectScopeProvider extends AbstractScopeProvider {
 	}
 
 	public IScope getScope(EObject context, EReference reference) {
-		if (reference == XpectPackage.Literals.XPECT_INVOCATION__ELEMENT)
-			return getScopeForXpectInvocationElement(EcoreUtil2.getContainerOfType(context, XpectFile.class));
+		if (reference == XpectPackage.Literals.XPECT_TEST__TEST_CLASS_OR_SUITE)
+			return getScopeForTestClassOrSuite(EcoreUtil2.getContainerOfType(context, XpectFile.class));
+		if (reference == XpectPackage.Literals.XPECT_INVOCATION__METHOD)
+			return getScopeForXpectInvocationTestMethod(EcoreUtil2.getContainerOfType(context, XpectFile.class));
 		if (reference == XpectPackage.Literals.ASSIGNMENT__DECLARED_TARGET)
 			return getScopeForAssignmentTarget(EcoreUtil2.getContainerOfType(context, AbstractComponent.class));
 		if (reference == XpectPackage.Literals.COMPONENT__COMPONENT_CLASS) {
 			return getScopeForInstanceType(EcoreUtil2.getContainerOfType(context, AbstractComponent.class), reference);
 		}
 		return delegate.getScope(context, reference);
+	}
+
+	private IScope getScopeForTestClassOrSuite(XpectFile xpectFile) {
+		IScope scope = delegate.getScope(xpectFile, XjmPackage.Literals.XJM_CLASS__JVM_CLASS);
+		ResourceSet resourceSet = xpectFile.eResource().getResourceSet();
+		return new XpectJavaModelScope(resourceSet, scope);
 	}
 
 	private IScope getScopeForAssignmentTarget(AbstractComponent owner) {
@@ -106,9 +115,10 @@ public class XpectScopeProvider extends AbstractScopeProvider {
 						packages.add(componentClass.getPackageName());
 					current = ((Component) current).getAssignment().getInstance();
 				} else if (current instanceof XpectTest) {
-					JvmDeclaredType setup = ((XpectTest) current).getSetupClass();
-					if (setup != null)
-						packages.add(setup.getPackageName());
+					// JvmDeclaredType setup = ((XpectTest)
+					// current).getSetupClass();
+					// if (setup != null)
+					// packages.add(setup.getPackageName());
 					break;
 				} else
 					break;
@@ -124,33 +134,18 @@ public class XpectScopeProvider extends AbstractScopeProvider {
 		return IScope.NULLSCOPE;
 	}
 
-	private IScope getScopeForXpectInvocationElement(XpectFile file) {
+	private IScope getScopeForXpectInvocationTestMethod(XpectFile file) {
 		XpectTest test = file.getTest();
 		if (test == null)
 			return IScope.NULLSCOPE;
-		JvmDeclaredType testClass = test.getTestClass();
-		if (testClass == null || test.getTestClass().eIsProxy())
+		XpectJavaModel model = test.getTestClassOrSuite();
+		if (model == null || model.eIsProxy())
 			return IScope.NULLSCOPE;
-		JvmDeclaredType type = test.getTestClass();
 		List<IEObjectDescription> descs = Lists.newArrayList();
-		for (JvmFeature feature : type.getAllFeatures())
-			if (isXpectInvocationOperation(feature))
-				descs.add(EObjectDescription.create(QualifiedName.create(feature.getSimpleName()), feature));
+		for (XjmTest op : model.getTests())
+			for (XjmMethod method : op.getMethods())
+				descs.add(EObjectDescription.create(QualifiedName.create(method.getJvmMethod().getSimpleName()), method));
 		return new SimpleScope(descs);
 	}
 
-	private boolean isXpectInvocationOperation(JvmFeature feature) {
-		if (feature instanceof JvmOperation) {
-			for (JvmAnnotationReference ref : feature.getAnnotations()) {
-				JvmAnnotationType annotation = ref.getAnnotation();
-				if (annotation != null && !annotation.eIsProxy()) {
-					if (annotation.getQualifiedName().equals(Test.class.getName()))
-						return true;
-					if (annotation.getQualifiedName().equals(Xpect.class.getName()))
-						return true;
-				}
-			}
-		}
-		return false;
-	}
 }

@@ -9,6 +9,7 @@ package org.xpect.runner;
 
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
+import org.xpect.XjmMethod;
 import org.xpect.XpectInvocation;
 import org.xpect.XpectPackage;
 
@@ -17,14 +18,13 @@ import org.xpect.XpectPackage;
  */
 public class XpectTestTitleProvider implements IXpectTestTitleProvider {
 
-	public String getTitle(XpectTestRunner runner) {
-		XpectInvocation invocation = runner.getInvocation();
+	public String getTitle(XpectInvocation invocation) {
 		INode node = NodeModelUtils.findActualNodeFor(invocation);
 		String document = node.getRootNode().getText();
 		String title = findTitle(document, node.getOffset());
 		if (title != null && title.startsWith("XPECT"))
 			title = null;
-		String method = findMethodName(runner);
+		String method = findMethodName(invocation);
 		if (title != null && method != null)
 			return method + ": " + title;
 		if (title != null)
@@ -34,11 +34,11 @@ public class XpectTestTitleProvider implements IXpectTestTitleProvider {
 		return "(error)";
 	}
 
-	protected String findMethodName(XpectTestRunner runner) {
-		XpectFrameworkMethod method = runner.getMethod();
-		if (method != null && method.getMethod() != null)
-			return method.getMethod().getName();
-		for (INode n : NodeModelUtils.findNodesForFeature(runner.getInvocation(), XpectPackage.Literals.XPECT_INVOCATION__ELEMENT))
+	protected String findMethodName(XpectInvocation invocation) {
+		XjmMethod method = invocation.getMethod();
+		if (method != null)
+			return method.getName();
+		for (INode n : NodeModelUtils.findNodesForFeature(invocation, XpectPackage.Literals.XPECT_INVOCATION__METHOD))
 			return NodeModelUtils.getTokenText(n);
 		return null;
 	}

@@ -13,13 +13,12 @@
         eType="#//Member" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="XpectTest" eSuperTypes="#//Member #//AbstractComponent">
-    <eOperations name="getSetupClass" eType="ecore:EClass ../../org.eclipse.xtext.common.types/model/JavaVMTypes.ecore#//JvmDeclaredType"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="testClass" eType="ecore:EClass ../../org.eclipse.xtext.common.types/model/JavaVMTypes.ecore#//JvmDeclaredType"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="testClassOrSuite" eType="ecore:EClass XpectJavaModel.ecore#//XpectJavaModel"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="XpectIgnore" eSuperTypes="#//Member"/>
   <eClassifiers xsi:type="ecore:EClass" name="XpectInvocation" eSuperTypes="#//Member">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="ignore" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="element" eType="ecore:EClass ../../org.eclipse.xtext.common.types/model/JavaVMTypes.ecore#//JvmOperation"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="method" eType="ecore:EClass XpectJavaModel.ecore#//XjmMethod"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Member"/>
   <eClassifiers xsi:type="ecore:EClass" name="Text" eSuperTypes="#//Member">

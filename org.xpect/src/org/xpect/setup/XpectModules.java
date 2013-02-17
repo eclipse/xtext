@@ -13,24 +13,12 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
-import com.google.inject.Binder;
-import com.google.inject.Module;
-
 /**
  * @author Moritz Eysholdt - Initial contribution and API
  */
 @Inherited
 @Target(ElementType.TYPE)
 @Retention(RetentionPolicy.RUNTIME)
-public @interface XtextInjectorSetup {
-	public class NullModule implements Module {
-		public void configure(Binder binder) {
-		}
-	}
-
-	Class<? extends Module> pluginTestModule() default NullModule.class;
-
-	Class<? extends Module> standaloneTestModule() default NullModule.class;
-
-	Class<? extends Module> workbenchModule() default NullModule.class;
+public @interface XpectModules {
+	XpectModule[] value();
 }

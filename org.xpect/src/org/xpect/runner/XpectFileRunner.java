@@ -12,11 +12,8 @@ import java.util.List;
 
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.plugin.EcorePlugin;
-import org.eclipse.xtext.resource.IResourceServiceProvider;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.resource.XtextResourceFactory;
-import org.eclipse.xtext.resource.XtextResourceSet;
 import org.eclipse.xtext.util.CancelIndicator;
 import org.eclipse.xtext.validation.CheckMode;
 import org.eclipse.xtext.validation.IResourceValidator;
@@ -25,9 +22,11 @@ import org.junit.ComparisonFailure;
 import org.junit.runner.Description;
 import org.junit.runner.notification.Failure;
 import org.junit.runner.notification.RunNotifier;
+import org.xpect.XjmMethod;
+import org.xpect.XjmTestMethod;
+import org.xpect.XjmXpectMethod;
 import org.xpect.XpectFile;
 import org.xpect.XpectInvocation;
-import org.xpect.XpectStandaloneSetup;
 import org.xpect.setup.ISetupInitializer;
 import org.xpect.setup.IXpectSetup;
 import org.xpect.setup.SetupContext;
@@ -40,37 +39,44 @@ import com.google.common.collect.Lists;
  * @author Moritz Eysholdt - Initial contribution and API
  */
 public class XpectFileRunner {
-	private List<XpectTestRunner> children;
+	private List<AbstractTestRunner> children;
 	private Description description;
 	private Throwable error;
-	private XpectRunner runner;
-	private URI uri;
-	private XpectFile xpectFile;
+	private final XpectRunner runner;
+	private final URI uri;
+	private final XpectFile xpectFile;
 
 	public XpectFileRunner(XpectRunner runner, URI uri) {
 		this.runner = runner;
 		this.uri = uri;
+		XpectFile file = null;
 		try {
-			this.xpectFile = loadXpectFile(loadXpectResource(uri));
+			file = loadXpectFile(loadXpectResource(uri));
 		} catch (Throwable t) {
 			this.error = t;
 		}
+		this.xpectFile = file;
 	}
 
 	protected Description createDescription() {
 		String title = runner.getUriProvider().getTitle(getUri());
 		Description result = Description.createSuiteDescription(title);
 		if (error == null)
-			for (XpectTestRunner child : getChildren())
+			for (AbstractTestRunner child : getChildren())
 				result.addChild(child.getDescription());
 		return result;
 	}
 
-	protected XpectTestRunner createTestRunner(XpectInvocation invocation) {
-		return new XpectTestRunner(this, invocation);
+	protected AbstractTestRunner createTestRunner(XpectInvocation invocation) {
+		XjmMethod method = invocation.getMethod();
+		if (method instanceof XjmXpectMethod)
+			return new XpectTestRunner(this, invocation, (XjmXpectMethod) method);
+		if (method instanceof XjmTestMethod)
+			return new TestRunner(this, invocation, (XjmTestMethod) method);
+		throw new RuntimeException();
 	}
 
-	public List<XpectTestRunner> getChildren() {
+	public List<AbstractTestRunner> getChildren() {
 		if (children == null) {
 			children = Lists.newArrayList();
 			for (XpectInvocation inv : xpectFile.getInvocations())
@@ -119,17 +125,8 @@ public class XpectFileRunner {
 	}
 
 	protected XtextResource loadXpectResource(URI uri) throws IOException {
-		IResourceServiceProvider rssp = IResourceServiceProvider.Registry.INSTANCE.getResourceServiceProvider(URI.createURI("foo.xpect"));
-		if (rssp == null) {
-			if (!EcorePlugin.IS_ECLIPSE_RUNNING)
-				rssp = new XpectStandaloneSetup().createInjectorAndDoEMFRegistration().getInstance(IResourceServiceProvider.class);
-			else
-				throw new IllegalStateException("The language *.xpect is not activated");
-		}
-		XtextResourceSet resourceSet = rssp.get(XtextResourceSet.class);
-		resourceSet.setClasspathURIContext(runner.getTestClass().getJavaClass().getClassLoader());
-		XtextResource resource = (XtextResource) rssp.get(XtextResourceFactory.class).createResource(uri);
-		resourceSet.getResources().add(resource);
+		XtextResource resource = (XtextResource) runner.getXpectInjector().getInstance(XtextResourceFactory.class).createResource(uri);
+		runner.getXpectJavaModel().eResource().getResourceSet().getResources().add(resource);
 		resource.load(null);
 		return resource;
 	}
@@ -152,7 +149,7 @@ public class XpectFileRunner {
 					notifier.fireTestStarted(getDescription());
 					notifier.fireTestFinished(getDescription());
 				} else
-					for (XpectTestRunner child : getChildren())
+					for (AbstractTestRunner child : getChildren())
 						try {
 							child.run(notifier, setup, ctx);
 						} catch (Throwable t) {

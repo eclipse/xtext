@@ -11,10 +11,10 @@ import java.lang.annotation.Annotation;
 import java.util.Collection;
 
 import org.eclipse.emf.common.util.URI;
+import org.xpect.XjmMethod;
 import org.xpect.XpectFile;
 import org.xpect.XpectInvocation;
 import org.xpect.runner.IXpectURIProvider;
-import org.xpect.runner.XpectFrameworkMethod;
 import org.xpect.util.ITypedAdapter;
 import org.xpect.util.ITypedProvider;
 
@@ -43,7 +43,7 @@ public interface IXpectSetup<T, K, V, X> {
 	public interface ITestSetupContext extends IFileSetupContext {
 		// Collection<ITypedProvider> getAllParameterValues(int parameterIndex);
 
-		XpectFrameworkMethod getMethod();
+		XjmMethod getMethod();
 
 		// ITypedProvider getProposedParameterValue(int parameterIndex);
 

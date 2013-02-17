@@ -21,7 +21,7 @@ import org.eclipse.xtext.util.Pair;
 import org.xpect.XpectFile;
 import org.xpect.XtRuntimeModule;
 import org.xpect.registry.ILanguageInfo;
-import org.xpect.setup.XtextInjectorSetup;
+import org.xpect.setup.XpectModule;
 import org.xpect.ui.XtUIModule;
 
 import com.google.common.collect.Sets;
@@ -68,7 +68,7 @@ public class XtInjectorSetupUtil {
 					JvmDeclaredType candidate = candidates.pop();
 					Class<?> testClass = TypeUiUtil.getWorkspaceTypeFromHostPlatform(candidate);
 					if (testClass != null) {
-						XtextInjectorSetup xtextInjectorSetup = testClass.getAnnotation(XtextInjectorSetup.class);
+						XpectModule xtextInjectorSetup = testClass.getAnnotation(XpectModule.class);
 						if (xtextInjectorSetup != null)
 							return xtextInjectorSetup.workbenchModule();
 					}
