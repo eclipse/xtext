@@ -77,7 +77,7 @@ public class XtEditorExecutableExtensionFactory extends AbstractGuiceAwareExecut
 				for (int i = references.length - 1; i >= 0; i--)
 
 					// only care about Xt-Editors that are *not* yet initialized
-					if (references[i].getId().equals(XpectPluginActivator.XT_EDITOR_ID) && references[i].getPart(false) != null) {
+					if (references[i].getId().equals(XpectPluginActivator.XT_EDITOR_ID) && references[i].getPart(false) == null) {
 						IEditorInput input = references[i].getEditorInput();
 						if (input instanceof IFileEditorInput)
 							return ((IFileEditorInput) input).getFile();

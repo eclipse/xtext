@@ -144,7 +144,8 @@ public class XpectScopeProvider extends AbstractScopeProvider {
 		List<IEObjectDescription> descs = Lists.newArrayList();
 		for (XjmTest op : model.getTests())
 			for (XjmMethod method : op.getMethods())
-				descs.add(EObjectDescription.create(QualifiedName.create(method.getJvmMethod().getSimpleName()), method));
+				if (method != null)
+					descs.add(EObjectDescription.create(QualifiedName.create(method.getName()), method));
 		return new SimpleScope(descs);
 	}
 

@@ -1,12 +1,13 @@
 package org.xpect.model;
 
-import org.apache.log4j.Logger;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
-import org.eclipse.xtext.resource.XtextResourceSet;
+import org.xpect.XpectConstants;
+import org.xpect.registry.ILanguageInfo;
+import org.xpect.util.IJavaReflectAccess;
+
+import com.google.inject.Injector;
 
 public class XjmClassImplCustom extends XjmClassImpl {
-
-	private static Logger logger = Logger.getLogger(XjmClassImplCustom.class);
 
 	@Override
 	public void setJvmClass(JvmDeclaredType newJvmClass) {
@@ -22,14 +23,10 @@ public class XjmClassImplCustom extends XjmClassImpl {
 		JvmDeclaredType jvmClass = getJvmClass();
 		if (jvmClass == null || jvmClass.eIsProxy())
 			return null;
-		ClassLoader context = (ClassLoader) ((XtextResourceSet) eResource().getResourceSet()).getClasspathURIContext();
-		try {
-			result = context.loadClass(jvmClass.getQualifiedName());
-			super.setJavaClass(result);
-		} catch (ClassNotFoundException e) {
-			logger.error(e);
-		}
-		return result;
+		Injector injector = ILanguageInfo.Registry.INSTANCE.getLanguageByFileExtension(XpectConstants.XPECT_FILE_EXT).getInjector();
+		Class<?> type = injector.getInstance(IJavaReflectAccess.class).getRawType(jvmClass);
+		super.setJavaClass(type);
+		return type;
 	}
 
 }

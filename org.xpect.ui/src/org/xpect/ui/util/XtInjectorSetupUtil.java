@@ -7,24 +7,24 @@
  *******************************************************************************/
 package org.xpect.ui.util;
 
-import java.util.Set;
-import java.util.Stack;
+import java.util.List;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IStorage;
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
-import org.eclipse.xtext.common.types.JvmDeclaredType;
-import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.ui.shared.Access;
 import org.eclipse.xtext.util.Pair;
+import org.xpect.Environment;
 import org.xpect.XpectFile;
+import org.xpect.XpectJavaModel;
 import org.xpect.XtRuntimeModule;
 import org.xpect.registry.ILanguageInfo;
-import org.xpect.setup.XpectModule;
+import org.xpect.setup.IXpectGuiceModuleSetup;
 import org.xpect.ui.XtUIModule;
 
-import com.google.common.collect.Sets;
+import com.google.common.collect.Lists;
 import com.google.inject.Injector;
 import com.google.inject.Module;
 
@@ -33,15 +33,16 @@ import com.google.inject.Module;
  */
 public class XtInjectorSetupUtil {
 	public static Injector getWorkbenchInjector(ILanguageInfo lang, IFile file) {
-		Injector defaultInjector = lang.getInjector();
-		Module xtUIModule = defaultInjector.getInstance(XtUIModule.class);
-		Module xtRuntimeModule = defaultInjector.getInstance(XtRuntimeModule.class);
+		Injector injector = lang.getInjector();
 		XpectFile xpectFile = XpectUtil.load(file);
-		Class<? extends Module> workbenchModule = XtInjectorSetupUtil.getWorkbenchModule(xpectFile);
-		if (workbenchModule != null)
-			return lang.getInjector(xtRuntimeModule, xtUIModule, defaultInjector.getInstance(workbenchModule));
-		else
-			return lang.getInjector(xtRuntimeModule, xtUIModule);
+		XpectJavaModel javaModel = xpectFile.getTest().getTestClassOrSuite();
+		EList<IXpectGuiceModuleSetup> moduleSetups = javaModel.getSetups(IXpectGuiceModuleSetup.class, Environment.WORKBENCH);
+		List<Module> modules = Lists.newArrayList();
+		modules.add(injector.getInstance(XtRuntimeModule.class));
+		modules.add(injector.getInstance(XtUIModule.class));
+		for (IXpectGuiceModuleSetup moduleSetup : moduleSetups)
+			modules.add(injector.getInstance(moduleSetup.getModule()));
+		return lang.getInjector(modules.toArray(new Module[modules.size()]));
 	}
 
 	public static Injector getWorkbenchInjector(URI uri, String fileExtension) {
@@ -54,33 +55,6 @@ public class XtInjectorSetupUtil {
 				else
 					return null;
 			}
-		return null;
-	}
-
-	private static Class<? extends Module> getWorkbenchModule(XpectFile xpectFile) {
-		if (xpectFile != null && xpectFile.getTest() != null) {
-			JvmDeclaredType testType = xpectFile.getTest().getTestClass();
-			if (testType != null && !testType.eIsProxy()) {
-				Stack<JvmDeclaredType> candidates = new Stack<JvmDeclaredType>();
-				candidates.add(testType);
-				Set<JvmDeclaredType> visited = Sets.newHashSet(testType);
-				while (!candidates.isEmpty()) {
-					JvmDeclaredType candidate = candidates.pop();
-					Class<?> testClass = TypeUiUtil.getWorkspaceTypeFromHostPlatform(candidate);
-					if (testClass != null) {
-						XpectModule xtextInjectorSetup = testClass.getAnnotation(XpectModule.class);
-						if (xtextInjectorSetup != null)
-							return xtextInjectorSetup.workbenchModule();
-					}
-					for (JvmTypeReference ref : candidate.getSuperTypes())
-						if (ref.getType() instanceof JvmDeclaredType && !ref.getType().eIsProxy()) {
-							JvmDeclaredType type = (JvmDeclaredType) ref.getType();
-							if (visited.add(type))
-								candidates.push(type);
-						}
-				}
-			}
-		}
 		return null;
 	}
 

@@ -1,10 +1,3 @@
-/*******************************************************************************
- * Copyright (c) 2012 itemis AG (http://www.itemis.eu) and others.
- * All rights reserved. This program and the accompanying materials
- * are made available under the terms of the Eclipse Public License v1.0
- * which accompanies this distribution, and is available at
- * http://www.eclipse.org/legal/epl-v10.html
- *******************************************************************************/
 package org.xpect.ui.util;
 
 import java.io.File;
@@ -24,16 +17,13 @@ import org.eclipse.xtext.common.types.access.IMirror;
 import org.eclipse.xtext.common.types.access.TypeResource;
 import org.eclipse.xtext.common.types.access.jdt.JdtTypeMirror;
 import org.osgi.framework.Bundle;
+import org.xpect.util.IJavaReflectAccess;
 
-/**
- * @author Moritz Eysholdt - Initial contribution and API
- */
 @SuppressWarnings("restriction")
-public class TypeUiUtil {
-
+public class UIJavaReflectAccess implements IJavaReflectAccess {
 	private static final String BUNDLE_SYMBOLIC_NAME = "Bundle-SymbolicName";
 
-	private static IPackageFragmentRoot getPackageFragmentRoot(IJavaElement ele) {
+	private IPackageFragmentRoot getPackageFragmentRoot(IJavaElement ele) {
 		IJavaElement current = ele;
 		while (current != null) {
 			if (current instanceof IPackageFragmentRoot)
@@ -43,7 +33,7 @@ public class TypeUiUtil {
 		return null;
 	}
 
-	private static String getBundleNameFromDir(File file) {
+	private String getBundleNameFromDir(File file) {
 		File current = file;
 		int counter = 5;
 		while (current != null && counter > 0) {
@@ -72,11 +62,11 @@ public class TypeUiUtil {
 		return null;
 	}
 
-	private static String getBundleNameFromJar(Manifest manifest) {
+	private String getBundleNameFromJar(Manifest manifest) {
 		return manifest.getMainAttributes().getValue(BUNDLE_SYMBOLIC_NAME);
 	}
 
-	private static String getBundleNameFromJar(File file) {
+	private String getBundleNameFromJar(File file) {
 		try {
 			return getBundleNameFromJar(new JarFile(file).getManifest());
 		} catch (IOException e) {
@@ -85,7 +75,7 @@ public class TypeUiUtil {
 		}
 	}
 
-	public static Class<?> getWorkspaceTypeFromHostPlatform(JvmType jvmType) {
+	public Class<?> getRawType(JvmType jvmType) {
 		if (jvmType == null || jvmType.eIsProxy())
 			return null;
 		if (!(jvmType.eResource() instanceof TypeResource))
@@ -116,4 +106,5 @@ public class TypeUiUtil {
 			return null;
 		}
 	}
+
 }
