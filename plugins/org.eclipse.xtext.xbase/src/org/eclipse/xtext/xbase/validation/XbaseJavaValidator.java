@@ -1124,6 +1124,16 @@ public class XbaseJavaValidator extends AbstractXbaseJavaValidator {
 					Map<JvmType, XImportDeclaration> map = imp.isStatic() 
 							? (imp.isExtension() ? extensionImports : staticImports) 
 						    : imports;
+					if(imp.isStatic()) {
+						if(imp.isExtension()) {
+							XImportDeclaration staticImport = staticImports.get(importedType);
+							if(staticImport != null) {
+								addIssue(staticImport, IssueCodes.IMPORT_DUPLICATE, "Obsolete static import of '" + importedType.getSimpleName() + "'.");
+							}
+						} else if(extensionImports.containsKey(importedType)) {
+							addIssue(imp, IssueCodes.IMPORT_DUPLICATE, "Obsolete static import of '" + importedType.getSimpleName() + "'.");
+						}
+					}
 					if (map.containsKey(importedType)) {
 						addIssue(imp, IssueCodes.IMPORT_DUPLICATE, "Duplicate import of '" + importedType.getSimpleName() + "'.");
 					} else {
@@ -1213,13 +1223,11 @@ public class XbaseJavaValidator extends AbstractXbaseJavaValidator {
 									featureCall.getFeature() instanceof JvmOperation)) {
 							JvmFeature feature = (JvmFeature) featureCall.getFeature();
 							if(feature.getDeclaringType() != null) {
-								JvmIdentifiableElement logicalContainer = logicalContainerProvider.getNearestLogicalContainer(feature);
+								JvmIdentifiableElement logicalContainer = logicalContainerProvider.getNearestLogicalContainer(featureCall);
 								JvmDeclaredType featureCallOwner = EcoreUtil2.getContainerOfType(logicalContainer, JvmDeclaredType.class);
 								if(featureCallOwner != feature.getDeclaringType()) {
-									if(featureCall.isExtension()) {
+									if(featureCall.isExtension() || staticImports.remove(feature.getDeclaringType()) == null) {
 										extensionImports.remove(feature.getDeclaringType());
-									} else {
-										staticImports.remove(feature.getDeclaringType());
 									}
 								}
 							}
