@@ -691,6 +691,68 @@ class ImportOrganizerTest extends AbstractXtendTestCase {
 		''')
 	}
 
+	@Test def testObsoleteStatic() {
+		'''
+			import static java.util.Collections.*
+			import static extension java.util.Collections.*
+			class Foo {
+			  def test() {
+			    ''.singleton
+			  }
+			}
+		'''.assertIsOrganizedTo('''
+			import static extension java.util.Collections.*
+
+			class Foo {
+			  def test() {
+			    ''.singleton
+			  }
+			}
+		''')
+	}
+
+	@Test def testObsoleteStatic_2() {
+		'''
+			import static java.util.Collections.*
+			import static extension java.util.Collections.*
+			class Foo {
+			  def test() {
+			    ''.singleton
+			    singleton('')
+			  }
+			}
+		'''.assertIsOrganizedTo('''
+			import static extension java.util.Collections.*
+
+			class Foo {
+			  def test() {
+			    ''.singleton
+			    singleton('')
+			  }
+			}
+		''')
+	}
+
+	@Test def testObsoleteStaticExtension() {
+		'''
+			import static java.util.Collections.*
+			import static extension java.util.Collections.*
+			class Foo {
+			  def test() {
+			    singleton('')
+			  }
+			}
+		'''.assertIsOrganizedTo('''
+			import static java.util.Collections.*
+
+			class Foo {
+			  def test() {
+			    singleton('')
+			  }
+			}
+		''')
+	}
+
 	@Test def testInnerClassImport_01() {
 		'''
 			package foo.bar
