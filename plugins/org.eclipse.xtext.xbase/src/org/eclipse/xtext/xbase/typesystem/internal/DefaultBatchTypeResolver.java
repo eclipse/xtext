@@ -40,7 +40,13 @@ public class DefaultBatchTypeResolver implements IBatchTypeResolver {
 	public IResolvedTypes resolveTypes(@Nullable EObject object) {
 		if (object == null || object.eIsProxy())
 			return IResolvedTypes.NULL;
-		IReentrantTypeResolver reentrantResolver = getTypeResolver(object);
+		// TODO: remove when we switch to an Xtend scope provider without artificial feature calls  
+		EObject nonArtificialObject = object;
+		if(object.eResource() == null && object instanceof XAbstractFeatureCall) {
+			nonArtificialObject = ((XAbstractFeatureCall) object).getFeature();
+		}
+		// TODO end
+		IReentrantTypeResolver reentrantResolver = getTypeResolver(nonArtificialObject);
 		return reentrantResolver.reentrantResolve();
 	}
 	
