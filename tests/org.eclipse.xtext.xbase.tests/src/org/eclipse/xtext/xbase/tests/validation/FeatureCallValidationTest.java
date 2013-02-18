@@ -29,6 +29,16 @@ public class FeatureCallValidationTest extends AbstractXbaseTestCase {
 	@Inject
 	protected ValidationTestHelper helper;
 
+	@Test public void testNonFinalVariableAccess() throws Exception {
+		XExpression expression = expression("{ var x = '' [ x ].apply('') }");
+		helper.assertError(expression, XFEATURE_CALL, INVALID_MUTABLE_VARIABLE_ACCESS, "Cannot refer to a non-final variable x from within a closure");
+	}
+	
+	@Test public void testFinalVariableAccess() throws Exception {
+		XExpression expression = expression("{ val x = '' [ x ].apply('') }");
+		helper.assertNoErrors(expression);
+	}
+	
 	@Test public void testConstructorCall_0() throws Exception {
 		XExpression expression = expression("new testdata.Constructors()");
 		helper.assertError(expression, XCONSTRUCTOR_CALL, INVALID_NUMBER_OF_ARGUMENTS);
