@@ -1337,6 +1337,132 @@ public class ImportOrganizerTest extends AbstractXtendTestCase {
   }
   
   @Test
+  public void testObsoleteStatic() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("import static java.util.Collections.*");
+    _builder.newLine();
+    _builder.append("import static extension java.util.Collections.*");
+    _builder.newLine();
+    _builder.append("class Foo {");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append("def test() {");
+    _builder.newLine();
+    _builder.append("    ");
+    _builder.append("\'\'.singleton");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("import static extension java.util.Collections.*");
+    _builder_1.newLine();
+    _builder_1.newLine();
+    _builder_1.append("class Foo {");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("def test() {");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("\'\'.singleton");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    this.assertIsOrganizedTo(_builder, _builder_1);
+  }
+  
+  @Test
+  public void testObsoleteStatic_2() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("import static java.util.Collections.*");
+    _builder.newLine();
+    _builder.append("import static extension java.util.Collections.*");
+    _builder.newLine();
+    _builder.append("class Foo {");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append("def test() {");
+    _builder.newLine();
+    _builder.append("    ");
+    _builder.append("\'\'.singleton");
+    _builder.newLine();
+    _builder.append("    ");
+    _builder.append("singleton(\'\')");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("import static extension java.util.Collections.*");
+    _builder_1.newLine();
+    _builder_1.newLine();
+    _builder_1.append("class Foo {");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("def test() {");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("\'\'.singleton");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("singleton(\'\')");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    this.assertIsOrganizedTo(_builder, _builder_1);
+  }
+  
+  @Test
+  public void testObsoleteStaticExtension() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("import static java.util.Collections.*");
+    _builder.newLine();
+    _builder.append("import static extension java.util.Collections.*");
+    _builder.newLine();
+    _builder.append("class Foo {");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append("def test() {");
+    _builder.newLine();
+    _builder.append("    ");
+    _builder.append("singleton(\'\')");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("import static java.util.Collections.*");
+    _builder_1.newLine();
+    _builder_1.newLine();
+    _builder_1.append("class Foo {");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("def test() {");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("singleton(\'\')");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    this.assertIsOrganizedTo(_builder, _builder_1);
+  }
+  
+  @Test
   public void testInnerClassImport_01() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("package foo.bar");
