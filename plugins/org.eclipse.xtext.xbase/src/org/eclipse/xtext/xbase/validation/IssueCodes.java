@@ -75,6 +75,8 @@ public class IssueCodes {
 	public static final String FORBIDDEN_REFERENCE = ISSUE_CODE_PREFIX	+ "forbidden_reference";
 	public static final String DISCOURAGED_REFERENCE = ISSUE_CODE_PREFIX	+ "discouraged_reference";
 	
+	public static final String RAW_TYPE = ISSUE_CODE_PREFIX	+ "raw_type";
+	
 	// list is not necessarily complete
 	// list is sorted from least important issue to worst issue
 	private static final List<String> sortedIssueCodes = ImmutableList.of(

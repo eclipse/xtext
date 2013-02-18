@@ -43,4 +43,19 @@ public class JvmTypeReferencesValidatorTest extends AbstractXbaseTestCase {
 		helper.assertError(expression, TypesPackage.Literals.JVM_TYPE_REFERENCE, IssueCodes.INVALID_USE_OF_TYPE);
 	}
 	
+	@Test public void testNoTypeArg() throws Exception {
+		XExpression expression = expression("{ val java.util.List x = null }");
+		helper.assertWarning(expression, TypesPackage.Literals.JVM_TYPE_REFERENCE, IssueCodes.RAW_TYPE);
+	}
+	
+	@Test public void testWrongNumberOfTypeArgs_0() throws Exception {
+		XExpression expression = expression("{ val java.util.List<String, String> x = null }");
+		helper.assertError(expression, TypesPackage.Literals.JVM_TYPE_REFERENCE, IssueCodes.INVALID_NUMBER_OF_TYPE_ARGUMENTS);
+	}
+	
+	@Test public void testWrongNumberOfTypeArgs_1() throws Exception {
+		XExpression expression = expression("{ val java.util.Map<String> x = null }");
+		helper.assertError(expression, TypesPackage.Literals.JVM_TYPE_REFERENCE, IssueCodes.INVALID_NUMBER_OF_TYPE_ARGUMENTS);
+	}
+	
 }
