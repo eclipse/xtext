@@ -95,7 +95,7 @@ class XtendUIValidationTests extends AbstractXtendUITestCase {
 		val xtendFile = testHelper.xtendFile("Clazz.xtend",'''
 		import java.util.List
 		class Foo {
-			def bar(List l){}
+			def bar(List<?> l){}
 		}
 
 		''')
