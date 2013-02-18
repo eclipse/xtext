@@ -193,10 +193,10 @@ public abstract class AbstractActiveAnnotationsTest {
     _builder.append("val type = addTypeParameter(\'A\')");
     _builder.newLine();
     _builder.append("\t\t\t");
-    _builder.append("addParameter(\'myParam\', typeReferenceProvider.newTypeReference(type))");
+    _builder.append("addParameter(\'myParam\', newTypeReference(type))");
     _builder.newLine();
     _builder.append("\t\t\t");
-    _builder.append("setExceptions(typeReferenceProvider.newTypeReference(\'java.lang.Exception\'))");
+    _builder.append("setExceptions(newTypeReference(\'java.lang.Exception\'))");
     _builder.newLine();
     _builder.append("\t\t");
     _builder.append("]");

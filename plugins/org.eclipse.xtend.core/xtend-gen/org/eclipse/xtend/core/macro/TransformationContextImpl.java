@@ -21,8 +21,9 @@ import org.eclipse.xtend.lib.macro.declaration.MutableFieldDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.MutableMethodDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.MutableNamedElement;
 import org.eclipse.xtend.lib.macro.declaration.NamedElement;
+import org.eclipse.xtend.lib.macro.declaration.Type;
+import org.eclipse.xtend.lib.macro.declaration.TypeReference;
 import org.eclipse.xtend.lib.macro.services.Problem;
-import org.eclipse.xtend.lib.macro.services.TypeReferenceProvider;
 import org.eclipse.xtext.common.types.JvmMember;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 
@@ -114,7 +115,7 @@ public class TransformationContextImpl implements TransformationContext {
     throw _unsupportedOperationException;
   }
   
-  public TypeReferenceProvider getTypeReferenceProvider() {
+  public CompilationUnitImpl getTypeReferenceProvider() {
     return this.getUnit();
   }
   
@@ -137,5 +138,119 @@ public class TransformationContextImpl implements TransformationContext {
     CompilationUnitImpl _unit = this.getUnit();
     List<Problem> _problems = _unit.getProblems(element);
     return _problems;
+  }
+  
+  public TypeReference getAnyType() {
+    CompilationUnitImpl _unit = this.getUnit();
+    TypeReference _anyType = _unit.getAnyType();
+    return _anyType;
+  }
+  
+  public TypeReference getList(final TypeReference param) {
+    CompilationUnitImpl _unit = this.getUnit();
+    TypeReference _list = _unit.getList(param);
+    return _list;
+  }
+  
+  public TypeReference getObject() {
+    CompilationUnitImpl _unit = this.getUnit();
+    TypeReference _object = _unit.getObject();
+    return _object;
+  }
+  
+  public TypeReference getPrimitiveBoolean() {
+    CompilationUnitImpl _unit = this.getUnit();
+    TypeReference _primitiveBoolean = _unit.getPrimitiveBoolean();
+    return _primitiveBoolean;
+  }
+  
+  public TypeReference getPrimitiveByte() {
+    CompilationUnitImpl _unit = this.getUnit();
+    TypeReference _primitiveByte = _unit.getPrimitiveByte();
+    return _primitiveByte;
+  }
+  
+  public TypeReference getPrimitiveChar() {
+    CompilationUnitImpl _unit = this.getUnit();
+    TypeReference _primitiveChar = _unit.getPrimitiveChar();
+    return _primitiveChar;
+  }
+  
+  public TypeReference getPrimitiveDouble() {
+    CompilationUnitImpl _unit = this.getUnit();
+    TypeReference _primitiveDouble = _unit.getPrimitiveDouble();
+    return _primitiveDouble;
+  }
+  
+  public TypeReference getPrimitiveFloat() {
+    CompilationUnitImpl _unit = this.getUnit();
+    TypeReference _primitiveFloat = _unit.getPrimitiveFloat();
+    return _primitiveFloat;
+  }
+  
+  public TypeReference getPrimitiveInt() {
+    CompilationUnitImpl _unit = this.getUnit();
+    TypeReference _primitiveInt = _unit.getPrimitiveInt();
+    return _primitiveInt;
+  }
+  
+  public TypeReference getPrimitiveLong() {
+    CompilationUnitImpl _unit = this.getUnit();
+    TypeReference _primitiveLong = _unit.getPrimitiveLong();
+    return _primitiveLong;
+  }
+  
+  public TypeReference getPrimitiveShort() {
+    CompilationUnitImpl _unit = this.getUnit();
+    TypeReference _primitiveShort = _unit.getPrimitiveShort();
+    return _primitiveShort;
+  }
+  
+  public TypeReference getPrimitiveVoid() {
+    CompilationUnitImpl _unit = this.getUnit();
+    TypeReference _primitiveVoid = _unit.getPrimitiveVoid();
+    return _primitiveVoid;
+  }
+  
+  public TypeReference getSet(final TypeReference param) {
+    CompilationUnitImpl _unit = this.getUnit();
+    TypeReference _set = _unit.getSet(param);
+    return _set;
+  }
+  
+  public TypeReference getString() {
+    CompilationUnitImpl _unit = this.getUnit();
+    TypeReference _string = _unit.getString();
+    return _string;
+  }
+  
+  public TypeReference newArrayTypeReference(final TypeReference componentType) {
+    CompilationUnitImpl _unit = this.getUnit();
+    TypeReference _newArrayTypeReference = _unit.newArrayTypeReference(componentType);
+    return _newArrayTypeReference;
+  }
+  
+  public TypeReference newTypeReference(final String typeName, final TypeReference... typeArguments) {
+    CompilationUnitImpl _unit = this.getUnit();
+    TypeReference _newTypeReference = _unit.newTypeReference(typeName, typeArguments);
+    return _newTypeReference;
+  }
+  
+  public TypeReference newTypeReference(final Type typeDeclaration, final TypeReference... typeArguments) {
+    CompilationUnitImpl _unit = this.getUnit();
+    TypeReference _newTypeReference = _unit.newTypeReference(typeDeclaration, typeArguments);
+    return _newTypeReference;
+  }
+  
+  public TypeReference newWildcardTypeReference() {
+    CompilationUnitImpl _unit = this.getUnit();
+    TypeReference _newWildcardTypeReference = _unit.newWildcardTypeReference();
+    return _newWildcardTypeReference;
+  }
+  
+  public TypeReference newWildcardTypeReference(final TypeReference upperBound) {
+    CompilationUnitImpl _unit = this.getUnit();
+    TypeReference _newWildcardTypeReference = _unit.newWildcardTypeReference(upperBound);
+    return _newWildcardTypeReference;
   }
 }

@@ -133,8 +133,8 @@ abstract class AbstractActiveAnnotationsTest {
 						ctx = context
 						annotatedMethods.forEach [
 							val type = addTypeParameter('A')
-							addParameter('myParam', typeReferenceProvider.newTypeReference(type))
-							setExceptions(typeReferenceProvider.newTypeReference('java.lang.Exception'))
+							addParameter('myParam', newTypeReference(type))
+							setExceptions(newTypeReference('java.lang.Exception'))
 						]
 					}
 					

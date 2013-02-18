@@ -18,6 +18,8 @@ import org.eclipse.xtend.lib.macro.declaration.NamedElement
 import org.eclipse.xtext.common.types.JvmMember
 import org.eclipse.xtend.lib.macro.declaration.Element
 import org.eclipse.xtend.lib.macro.TransformationContext
+import org.eclipse.xtend.lib.macro.declaration.TypeReference
+import org.eclipse.xtend.lib.macro.declaration.Type
 
 class TransformationContextImpl implements TransformationContext {
 	
@@ -90,6 +92,82 @@ class TransformationContextImpl implements TransformationContext {
 	
 	override getProblems(Element element) {
 		unit.getProblems(element)
+	}
+	
+	override getAnyType() {
+		unit.anyType
+	}
+	
+	override getList(TypeReference param) {
+		unit.getList(param)
+	}
+	
+	override getObject() {
+		unit.getObject
+	}
+	
+	override getPrimitiveBoolean() {
+		unit.primitiveBoolean
+	}
+	
+	override getPrimitiveByte() {
+		unit.primitiveByte
+	}
+	
+	override getPrimitiveChar() {
+		unit.primitiveChar
+	}
+	
+	override getPrimitiveDouble() {
+		unit.primitiveDouble
+	}
+	
+	override getPrimitiveFloat() {
+		unit.primitiveFloat
+	}
+	
+	override getPrimitiveInt() {
+		unit.primitiveInt
+	}
+	
+	override getPrimitiveLong() {
+		unit.primitiveLong
+	}
+	
+	override getPrimitiveShort() {
+		unit.primitiveShort
+	}
+	
+	override getPrimitiveVoid() {
+		unit.primitiveVoid
+	}
+	
+	override getSet(TypeReference param) {
+		unit.getSet(param)
+	}
+	
+	override getString() {
+		unit.string
+	}
+	
+	override newArrayTypeReference(TypeReference componentType) {
+		unit.newArrayTypeReference(componentType)
+	}
+	
+	override newTypeReference(String typeName, TypeReference... typeArguments) {
+		unit.newTypeReference(typeName, typeArguments)
+	}
+	
+	override newTypeReference(Type typeDeclaration, TypeReference... typeArguments) {
+		unit.newTypeReference(typeDeclaration, typeArguments)
+	}
+	
+	override newWildcardTypeReference() {
+		unit.newWildcardTypeReference
+	}
+	
+	override newWildcardTypeReference(TypeReference upperBound) {
+		unit.newWildcardTypeReference(upperBound)
 	}
 	
 }
