@@ -119,7 +119,6 @@ abstract class AbstractRewritableImportSectionTest extends AbstractXtendTestCase
 		section.addImport(typeof(Set))
 		section.assertEquals('''
 			import static extension java.util.Set.*
-			import static java.util.Set.*
 			import java.util.Set
 		''')
 	}
