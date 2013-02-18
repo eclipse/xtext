@@ -30,11 +30,22 @@ public class ContextualVisibilityHelper implements IVisibilityHelper {
 	private JvmType rawContextType;
 	private Set<String> superTypeNames;
 	private IVisibilityHelper parent;
+	private String packageName;
 
 	public ContextualVisibilityHelper(IVisibilityHelper parent, LightweightTypeReference contextType) {
 		this.parent = parent;
 		this.contextType = contextType;
 		this.rawContextType = contextType.getType();
+		if (rawContextType instanceof JvmDeclaredType) {
+			this.packageName = ((JvmDeclaredType) rawContextType).getPackageName();
+		}
+	}
+	
+	public ContextualVisibilityHelper(IVisibilityHelper parent, LightweightTypeReference contextType, String packageName) {
+		this.parent = parent;
+		this.contextType = contextType;
+		this.rawContextType = contextType.getType();
+		this.packageName = packageName;
 	}
 	
 	public ContextualVisibilityHelper(LightweightTypeReference contextType) {
@@ -72,7 +83,6 @@ public class ContextualVisibilityHelper implements IVisibilityHelper {
 			}
 		}
 		if (type != null && rawContextType instanceof JvmDeclaredType && (visibility == JvmVisibility.DEFAULT || visibility == JvmVisibility.PROTECTED)) {
-			String packageName = ((JvmDeclaredType) rawContextType).getPackageName();
 			if (Strings.isEmpty(packageName) && Strings.isEmpty(type.getPackageName())
 					|| (packageName != null && packageName.equals(type.getPackageName()))) {
 				return true;

@@ -16,6 +16,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.naming.QualifiedName;
@@ -110,6 +111,16 @@ public abstract class AbstractFeatureScopeSession implements IFeatureScopeSessio
 		if (elements.containsKey(thisName)) {
 			JvmIdentifiableElement associatedWithThis = elements.get(thisName);
 			if (associatedWithThis instanceof JvmType) {
+				if (IFeatureNames.SELF.equals(thisName)) {
+					IEObjectDescription thisDescription = getLocalElement(IFeatureNames.THIS);
+					if (thisDescription != null && thisDescription.getEObjectOrProxy() instanceof JvmDeclaredType) {
+						JvmDeclaredType thisType = (JvmDeclaredType) thisDescription.getEObjectOrProxy();
+						LightweightTypeReference context = new ParameterizedTypeReference(owner, (JvmType) associatedWithThis);
+						FeatureScopeSessionWithContext contextSession = new FeatureScopeSessionWithContext(this, context, thisType.getPackageName());
+						AbstractNestedFeatureScopeSession result = new FeatureScopeSessionWithLocalElements(contextSession, elements);
+						return result;
+					}
+				}
 				LightweightTypeReference context = new ParameterizedTypeReference(owner, (JvmType) associatedWithThis);
 				FeatureScopeSessionWithContext contextSession = new FeatureScopeSessionWithContext(this, context);
 				AbstractNestedFeatureScopeSession result = new FeatureScopeSessionWithLocalElements(contextSession, elements);
