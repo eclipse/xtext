@@ -28,6 +28,24 @@ public class FeatureCallValidationTest extends AbstractXtendTestCase {
 	@Inject
 	private ValidationTestHelper helper;
 
+	@Test
+	public void testBrokenModel_01() throws Exception {
+		XtendClass clazz = clazz("class C { def m(DoesNotExist d) { d.unknown.unknown }}");
+		helper.assertNoError(clazz, org.eclipse.xtend.core.validation.IssueCodes.FEATURECALL_LINKING_DIAGNOSTIC);
+	}
+	
+	@Test
+	public void testBrokenModel_02() throws Exception {
+		XtendClass clazz = clazz("class C { def m(DoesNotExist it) { unknown.unknown }}");
+		helper.assertError(clazz, XbasePackage.Literals.XFEATURE_CALL, org.eclipse.xtend.core.validation.IssueCodes.FEATURECALL_LINKING_DIAGNOSTIC);
+	}
+	
+	@Test
+	public void testBrokenModel_03() throws Exception {
+		XtendClass clazz = clazz("class C { def void m(DoesNotExist d) { m('') }}");
+		helper.assertNoError(clazz, IssueCodes.INCOMPATIBLE_TYPES);
+	}
+	
 	/**
 	 * see https://bugs.eclipse.org/bugs/show_bug.cgi?id=362240
 	 */

@@ -67,6 +67,7 @@ import org.eclipse.xtext.xbase.typesystem.references.OwnedConverter;
 import org.eclipse.xtext.xbase.typesystem.references.ParameterizedTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.TypeReferenceVisitorWithResult;
 import org.eclipse.xtext.xbase.typesystem.references.UnboundTypeReference;
+import org.eclipse.xtext.xbase.typesystem.references.UnknownTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.WildcardTypeReference;
 import org.eclipse.xtext.xbase.typesystem.util.CommonTypeComputationServices;
 import org.eclipse.xtext.xbase.typesystem.util.ConstraintAwareTypeArgumentCollector;
@@ -647,6 +648,10 @@ public class XbaseTypeComputer implements ITypeComputer {
 			}
 			@Override
 			protected LightweightTypeReference doVisitAnyTypeReference(AnyTypeReference reference) {
+				return reference;
+			}
+			@Override
+			protected LightweightTypeReference doVisitUnknownTypeReference(UnknownTypeReference reference) {
 				return reference;
 			}
 			@Override

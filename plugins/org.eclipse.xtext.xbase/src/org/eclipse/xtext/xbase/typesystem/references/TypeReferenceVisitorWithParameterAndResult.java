@@ -27,6 +27,11 @@ public abstract class TypeReferenceVisitorWithParameterAndResult<Param, Result> 
 	}
 	
 	@Nullable
+	protected Result doVisitUnknownTypeReference(UnknownTypeReference reference, Param param) {
+		return doVisitTypeReference(reference, param);
+	}
+	
+	@Nullable
 	protected Result doVisitCompoundTypeReference(CompoundTypeReference reference, Param param) {
 		return doVisitTypeReference(reference, param);
 	}

@@ -22,6 +22,7 @@ import org.eclipse.xtext.xbase.typesystem.references.FunctionTypes
 import org.eclipse.xtext.xbase.typesystem.computation.SynonymTypesProvider
 import org.eclipse.xtext.xbase.typesystem.references.ArrayTypes
 import com.google.inject.Singleton
+import org.eclipse.xtext.xbase.jvmmodel.IJvmModelAssociations
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -60,6 +61,10 @@ class CommonTypeComputationServices {
 	@Inject
 	@Property
 	SynonymTypesProvider synonymTypesProvider
+	
+	@Inject
+	@Property
+	IJvmModelAssociations jvmModelAssociations
 	
 	@Inject(optional = true)
 	@Property

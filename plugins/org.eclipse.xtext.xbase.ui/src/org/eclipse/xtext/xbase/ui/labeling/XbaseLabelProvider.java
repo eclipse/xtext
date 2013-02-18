@@ -22,6 +22,9 @@ import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.XCasePart;
 import org.eclipse.xtext.xbase.XSwitchExpression;
 import org.eclipse.xtext.xbase.XVariableDeclaration;
+import org.eclipse.xtext.xbase.typesystem.IBatchTypeResolver;
+import org.eclipse.xtext.xbase.typesystem.IResolvedTypes;
+import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 import org.eclipse.xtext.xbase.typing.ITypeProvider;
 import org.eclipse.xtext.xbase.validation.UIStrings;
 import org.eclipse.xtext.xtype.XImportDeclaration;
@@ -41,7 +44,7 @@ public class XbaseLabelProvider extends DefaultEObjectLabelProvider {
 	private UIStrings uiStrings;
 	
 	@Inject
-	private ITypeProvider typeProvider;
+	private IBatchTypeResolver typeResolver;
 	
 	@Inject
 	public XbaseLabelProvider(AdapterFactoryLabelProvider delegate) {
@@ -120,7 +123,8 @@ public class XbaseLabelProvider extends DefaultEObjectLabelProvider {
 	}
 
 	public String text(XVariableDeclaration variableDeclaration){
-		JvmTypeReference type = typeProvider.getTypeForIdentifiable(variableDeclaration);
+		IResolvedTypes resolvedTypes = typeResolver.resolveTypes(variableDeclaration);
+		LightweightTypeReference type = resolvedTypes.getActualType((JvmIdentifiableElement)variableDeclaration);
 		String result = variableDeclaration.getName();
 		if(type != null)
 			result =  type.getSimpleName() + " " + result;
@@ -144,14 +148,11 @@ public class XbaseLabelProvider extends DefaultEObjectLabelProvider {
 	}
 	
 	protected StyledString signature(String simpleName, JvmIdentifiableElement element) {
-		JvmTypeReference returnType = typeProvider.getTypeForIdentifiable(element);
+		IResolvedTypes resolvedTypes = typeResolver.resolveTypes(element);
+		LightweightTypeReference returnType = resolvedTypes.getActualType(element);
 		String returnTypeString = "void";
 		if (returnType != null) {
-			if (returnType instanceof JvmAnyTypeReference) {
-				returnTypeString = "Object";
-			} else {
-				returnTypeString = uiStrings.referenceToString(returnType, "Object");
-			}
+			returnTypeString = returnType.getSimpleName();
 		}
 		return new StyledString(simpleName + uiStrings.parameters(element)).append(new StyledString(" : " + returnTypeString,StyledString.DECORATIONS_STYLER));
 	}

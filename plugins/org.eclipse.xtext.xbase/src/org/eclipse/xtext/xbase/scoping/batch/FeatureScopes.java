@@ -20,6 +20,7 @@ import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.scoping.IScope;
+import org.eclipse.xtext.scoping.impl.SimpleScope;
 import org.eclipse.xtext.util.Wrapper;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.XAssignment;
@@ -34,6 +35,7 @@ import org.eclipse.xtext.xbase.scoping.featurecalls.OperatorMapping;
 import org.eclipse.xtext.xbase.typesystem.IResolvedTypes;
 import org.eclipse.xtext.xbase.typesystem.computation.SynonymTypesProvider;
 import org.eclipse.xtext.xbase.typesystem.conformance.ConformanceHint;
+import org.eclipse.xtext.xbase.typesystem.internal.ScopeProviderAccess;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 
 import com.google.inject.Inject;
@@ -151,7 +153,7 @@ public class FeatureScopes implements IFeatureNames {
 		if (receiver == null || receiver.eIsProxy())
 			return IScope.NULLSCOPE;
 		LightweightTypeReference receiverType = resolvedTypes.getActualType(receiver);
-		if (receiverType != null) {
+		if (receiverType != null && !receiverType.isUnknown()) {
 			JvmIdentifiableElement linkedReceiver = resolvedTypes.getLinkedFeature(asAbstractFeatureCall(receiver));
 			// check if 'super' was used as receiver which renders extension features and static features invalid
 			if (isValidFeatureCallArgument(receiver, linkedReceiver, session)) {
@@ -173,7 +175,12 @@ public class FeatureScopes implements IFeatureNames {
 				return createFeatureScopeForTypeRef(receiver, receiverType, false, featureCall, session, linkedReceiver, IScope.NULLSCOPE);
 			}
 		} else {
-			return IScope.NULLSCOPE;
+			return new SimpleScope(Collections.<IEObjectDescription>emptyList()) {
+				@Override
+				public Iterable<IEObjectDescription> getElements(QualifiedName name) {
+					return Collections.<IEObjectDescription>singletonList(new ScopeProviderAccess.ErrorDescription());
+				}
+			};
 		}
 	}
 	
@@ -245,9 +252,12 @@ public class FeatureScopes implements IFeatureNames {
 		if (firstArgumentDescription != null) {
 			JvmIdentifiableElement feature = (JvmIdentifiableElement) firstArgumentDescription.getEObjectOrProxy();
 			LightweightTypeReference type = resolvedTypes.getActualType(feature);
-			XFeatureCall implicitArgument = xbaseFactory.createXFeatureCall();
-			implicitArgument.setFeature(feature);
-			return createDynamicExtensionsScope(implicitArgument, type, true, featureCall, parent, session);
+			if (type != null && !type.isUnknown()) {
+				XFeatureCall implicitArgument = xbaseFactory.createXFeatureCall();
+				implicitArgument.setFeature(feature);
+				return createDynamicExtensionsScope(implicitArgument, type, true, featureCall, parent, session);
+			}
+			return parent;
 		} else {
 			return createDynamicExtensionsScope(null, null, true, featureCall, parent, session);
 		}
@@ -296,10 +306,11 @@ public class FeatureScopes implements IFeatureNames {
 		if (thisDescription != null) {
 			JvmIdentifiableElement thisElement = (JvmIdentifiableElement) thisDescription.getEObjectOrProxy();
 			LightweightTypeReference type = resolvedTypes.getActualType(thisElement);
-			
-			XFeatureCall implicitReceiver = xbaseFactory.createXFeatureCall();
-			implicitReceiver.setFeature(thisElement);
-			return createFeatureScopeForTypeRef(implicitReceiver, type, true, featureCall, session, thisElement, parent);
+			if (type !=null && !type.isUnknown()) {
+				XFeatureCall implicitReceiver = xbaseFactory.createXFeatureCall();
+				implicitReceiver.setFeature(thisElement);
+				return createFeatureScopeForTypeRef(implicitReceiver, type, true, featureCall, session, thisElement, parent);
+			}
 		}
 		return parent;
 	}
@@ -310,9 +321,11 @@ public class FeatureScopes implements IFeatureNames {
 		if (thisDescription != null) {
 			JvmIdentifiableElement thisElement = (JvmIdentifiableElement) thisDescription.getEObjectOrProxy();
 			LightweightTypeReference type = resolvedTypes.getActualType(thisElement);
-			XFeatureCall implicitReceiver = xbaseFactory.createXFeatureCall();
-			implicitReceiver.setFeature(thisElement);
-			return createStaticExtensionsScope(implicitReceiver, type, true, featureCall, parent, session);
+			if (type != null && !type.isUnknown()) {
+				XFeatureCall implicitReceiver = xbaseFactory.createXFeatureCall();
+				implicitReceiver.setFeature(thisElement);
+				return createStaticExtensionsScope(implicitReceiver, type, true, featureCall, parent, session);
+			}
 		}
 		return parent;
 	}
@@ -323,7 +336,7 @@ public class FeatureScopes implements IFeatureNames {
 		if (thisDescription != null) {
 			JvmIdentifiableElement thisElement = (JvmIdentifiableElement) thisDescription.getEObjectOrProxy();
 			LightweightTypeReference type = resolvedTypes.getActualType(thisElement);
-			if (type != null) {
+			if (type != null && !type.isUnknown()) {
 				TypeBucket receiverBucket = new TypeBucket(-1, Collections.singletonList(type.getType()));
 				return new StaticFeatureScope(parent, session, featureCall, null, type, receiverBucket, operatorMapping);
 			}
