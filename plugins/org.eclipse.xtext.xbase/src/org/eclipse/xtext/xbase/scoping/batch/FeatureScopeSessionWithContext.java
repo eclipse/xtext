@@ -31,6 +31,11 @@ public class FeatureScopeSessionWithContext extends AbstractNestedFeatureScopeSe
 		this.visibilityHelper = new ContextualVisibilityHelper(parent, contextType);
 	}
 	
+	public FeatureScopeSessionWithContext(AbstractFeatureScopeSession parent, LightweightTypeReference contextType, String packageName) {
+		super(parent);
+		this.visibilityHelper = new ContextualVisibilityHelper(parent, contextType, packageName);
+	}
+	
 	@Override
 	public boolean isVisible(JvmMember member) {
 		return visibilityHelper.isVisible(member);
