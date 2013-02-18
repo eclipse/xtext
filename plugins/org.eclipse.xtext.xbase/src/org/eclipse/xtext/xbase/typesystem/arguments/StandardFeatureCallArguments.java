@@ -67,6 +67,8 @@ public class StandardFeatureCallArguments implements IFeatureCallArguments {
 	
 	@Nullable
 	protected XExpression internalGetArgument(int idx) {
+		if (idx < 0)
+			return null;
 		return arguments.get(idx);
 	}
 	
