@@ -29,19 +29,27 @@ public class InstanceExtensionDescription extends InstanceFeatureDescription {
 
 	private final XExpression firstArgument;
 	private final LightweightTypeReference firstArgumentType;
-	private final Map<JvmTypeParameter, LightweightMergedBoundTypeArgument> argumentTypeParameterMapping;
+	private final Map<JvmTypeParameter, LightweightMergedBoundTypeArgument> firstArgumentTypeParameterMapping;
+	private final EnumSet<ConformanceHint> firstArgumentConformanceHints;
 
-	protected InstanceExtensionDescription(QualifiedName qualifiedName, JvmFeature feature,
-			XExpression receiver, LightweightTypeReference receiverType,
+	protected InstanceExtensionDescription(
+			QualifiedName qualifiedName, 
+			JvmFeature feature,
+			XExpression receiver,
+			LightweightTypeReference receiverType,
 			Map<JvmTypeParameter, LightweightMergedBoundTypeArgument> typeParameterMapping,
-			XExpression firstArgument, LightweightTypeReference firstArgumentType,
-			Map<JvmTypeParameter, LightweightMergedBoundTypeArgument> argumentTypeParameterMapping, 
+			EnumSet<ConformanceHint> receiverConformanceHints,
+			XExpression firstArgument,
+			LightweightTypeReference firstArgumentType,
+			Map<JvmTypeParameter, LightweightMergedBoundTypeArgument> firstArgumentTypeParameterMapping,
+			EnumSet<ConformanceHint> firstArgumentConformanceHints,
 			int bucketId,
-			boolean visible, @Nullable EnumSet<ConformanceHint> receiverConformanceHints) {
-		super(qualifiedName, feature, EcoreUtil2.clone(receiver), receiverType, typeParameterMapping, bucketId, visible, receiverConformanceHints);
+			boolean visible) {
+		super(qualifiedName, feature, EcoreUtil2.clone(receiver), receiverType, typeParameterMapping, receiverConformanceHints, bucketId, visible);
 		this.firstArgument = firstArgument;
 		this.firstArgumentType = firstArgumentType;
-		this.argumentTypeParameterMapping = argumentTypeParameterMapping;
+		this.firstArgumentTypeParameterMapping = firstArgumentTypeParameterMapping;
+		this.firstArgumentConformanceHints = firstArgumentConformanceHints;
 	}
 	
 	@Override
@@ -67,6 +75,11 @@ public class InstanceExtensionDescription extends InstanceFeatureDescription {
 	}
 	
 	@Override
+	public EnumSet<ConformanceHint> getImplicitReceiverConformanceHints() {
+		return super.getSyntacticReceiverConformanceHints();
+	}
+	
+	@Override
 	@Nullable
 	public XExpression getSyntacticReceiver() {
 		return firstArgument;
@@ -80,7 +93,12 @@ public class InstanceExtensionDescription extends InstanceFeatureDescription {
 	
 	@Override
 	public Map<JvmTypeParameter, LightweightMergedBoundTypeArgument> getSyntacticReceiverTypeParameterMapping() {
-		return argumentTypeParameterMapping;
+		return firstArgumentTypeParameterMapping;
+	}
+	
+	@Override
+	public EnumSet<ConformanceHint> getSyntacticReceiverConformanceHints() {
+		return firstArgumentConformanceHints;
 	}
 
 }

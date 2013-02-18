@@ -82,22 +82,18 @@ public class ReceiverFeatureScope extends AbstractSessionBasedScope implements I
 			return Collections.emptyList();
 		List<IEObjectDescription> allDescriptions = Lists.newArrayListWithCapacity(allFeatures.size());
 		for(JvmFeature feature: allFeatures) {
-			allDescriptions.add(createDescription(name, feature, bucket));
+			if (!feature.isStatic())
+				allDescriptions.add(createDescription(name, feature, bucket));
 		}
 		return allDescriptions;
 	}
 
 	protected IEObjectDescription createDescription(QualifiedName name, JvmFeature feature, TypeBucket bucket) {
-		EnumSet<ConformanceHint> hints = null;
-		if (bucket instanceof SynonymTypeBucket) {
-			hints = ((SynonymTypeBucket) bucket).getHints();
-		} else {
-			hints = EnumSet.of(ConformanceHint.CHECKED, ConformanceHint.SUCCESS);
-		}
+		EnumSet<ConformanceHint> conformanceHints = bucket.getHints();
 		if (implicit) {
-			return new InstanceFeatureDescriptionWithImplicitReceiver(name, feature, receiver, receiverType, getReceiverTypeParameterMapping(), bucket.getId(), isVisible(feature), hints);
+			return new InstanceFeatureDescriptionWithImplicitReceiver(name, feature, receiver, receiverType, getReceiverTypeParameterMapping(), conformanceHints, bucket.getId(), isVisible(feature));
 		} else {
-			return new InstanceFeatureDescription(name, feature, receiver, receiverType, getReceiverTypeParameterMapping(), bucket.getId(), isVisible(feature), hints);
+			return new InstanceFeatureDescription(name, feature, receiver, receiverType, getReceiverTypeParameterMapping(), conformanceHints, bucket.getId(), isVisible(feature));
 		}
 	}
 

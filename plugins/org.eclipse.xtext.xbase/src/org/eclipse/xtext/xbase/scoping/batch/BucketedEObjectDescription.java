@@ -15,10 +15,8 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.common.types.JvmExecutable;
-import org.eclipse.xtext.common.types.JvmField;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
-import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.EObjectDescription;
@@ -116,6 +114,10 @@ public abstract class BucketedEObjectDescription extends EObjectDescription impl
 		return Collections.emptyMap();
 	}
 	
+	public EnumSet<ConformanceHint> getImplicitReceiverConformanceHints() {
+		return EnumSet.noneOf(ConformanceHint.class);
+	}
+	
 	@Nullable
 	public LightweightTypeReference getSyntacticReceiverType() {
 		return null;
@@ -130,22 +132,17 @@ public abstract class BucketedEObjectDescription extends EObjectDescription impl
 		return Collections.emptyMap();
 	}
 	
+	public EnumSet<ConformanceHint> getSyntacticReceiverConformanceHints() {
+		return EnumSet.noneOf(ConformanceHint.class);
+	}
+	
 	public boolean isVisible() {
 		return visible;
 	}
 
-	public boolean isStatic() {
-		JvmIdentifiableElement identifiable = getElementOrProxy();
-		if (identifiable instanceof JvmField)
-			return ((JvmField) identifiable).isStatic();
-		if (identifiable instanceof JvmOperation)
-			return ((JvmOperation) identifiable).isStatic();
-		return false;
-	}
-	
 	@Override
 	public String toString() {
-		return getElementOrProxy().getIdentifier();
+		return String.format("%s [key: %s]", getElementOrProxy().getIdentifier(), getShadowingKey());
 	}
 
 	public JvmIdentifiableElement getElementOrProxy() {
@@ -160,18 +157,6 @@ public abstract class BucketedEObjectDescription extends EObjectDescription impl
 	@Nullable
 	public LightweightTypeReference getImplicitFirstArgumentType() {
 		return null;
-	}
-
-	public Map<JvmTypeParameter, LightweightMergedBoundTypeArgument> getImplicitFirstArgumentTypeParameterMapping() {
-		return Collections.emptyMap();
-	}
-
-	public boolean isExtension() {
-		return false;
-	}
-	
-	public EnumSet<ConformanceHint> getReceiverConformanceHints() {
-		return EnumSet.of(ConformanceHint.SUCCESS, ConformanceHint.CHECKED);
 	}
 
 }

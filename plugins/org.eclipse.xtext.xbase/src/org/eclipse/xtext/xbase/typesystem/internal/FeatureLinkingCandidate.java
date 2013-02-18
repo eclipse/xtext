@@ -35,6 +35,7 @@ import org.eclipse.xtext.xbase.XVariableDeclaration;
 import org.eclipse.xtext.xbase.XbasePackage;
 import org.eclipse.xtext.xbase.scoping.batch.IFeatureNames;
 import org.eclipse.xtext.xbase.scoping.batch.IIdentifiableElementDescription;
+import org.eclipse.xtext.xbase.typesystem.arguments.IFeatureCallArgumentSlot;
 import org.eclipse.xtext.xbase.typesystem.computation.IFeatureLinkingCandidate;
 import org.eclipse.xtext.xbase.typesystem.computation.ITypeComputationState;
 import org.eclipse.xtext.xbase.typesystem.conformance.ConformanceHint;
@@ -44,6 +45,7 @@ import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.ParameterizedTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.WildcardTypeReference;
 import org.eclipse.xtext.xbase.typesystem.util.DeferredTypeParameterHintCollector;
+import org.eclipse.xtext.xbase.typesystem.util.TypeParameterSubstitutor;
 import org.eclipse.xtext.xbase.typesystem.util.VarianceInfo;
 import org.eclipse.xtext.xbase.validation.IssueCodes;
 
@@ -86,28 +88,16 @@ public class FeatureLinkingCandidate extends AbstractPendingLinkingCandidate<XAb
 		}
 	}
 
+	/**
+	 * Returns the actual arguments of the expression. These do not include the
+	 * receiver.  
+	 */
 	@Override
 	protected List<XExpression> getArguments() {
-		boolean isStaticExtension = isExtension() && isStatic();
-		XExpression syntacticReceiver = getSyntacticReceiver();
 		List<XExpression> syntacticArguments = getSyntacticArguments();
-		if (isStaticExtension) {
-			if (syntacticReceiver != null) {
-				return createArgumentList(syntacticReceiver, syntacticArguments);
-			}
-			XExpression implicitFirstArgument = getImplicitFirstArgument();
-			if (implicitFirstArgument != null) {
-				return createArgumentList(implicitFirstArgument, syntacticArguments);
-			}
-		} else {
-			XExpression implicitReceiver = getImplicitReceiver();
-			if (implicitReceiver != null && syntacticReceiver != null) {
-				return createArgumentList(syntacticReceiver, syntacticArguments);
-			}
-			XExpression implicitFirstArgument = getImplicitFirstArgument();
-			if (implicitFirstArgument != null) {
-				return createArgumentList(implicitFirstArgument, syntacticArguments);
-			}
+		XExpression firstArgument = getFirstArgument();
+		if (firstArgument != null) {
+			return createArgumentList(firstArgument, syntacticArguments);
 		}
 		return syntacticArguments;
 	}
@@ -195,7 +185,7 @@ public class FeatureLinkingCandidate extends AbstractPendingLinkingCandidate<XAb
 	}
 	
 	protected boolean isInstanceAccessSyntax() {
-		if (getImplicitReceiver() != null)
+		if (getImplicitReceiverType() != null)
 			return true;
 		XAbstractFeatureCall featureCall = getFeatureCall();
 		if (featureCall instanceof XAssignment) {
@@ -248,16 +238,11 @@ public class FeatureLinkingCandidate extends AbstractPendingLinkingCandidate<XAb
 	
 	@Override
 	protected EnumSet<ConformanceHint> getConformanceHints(int idx, boolean recompute) {
-		if (idx == 0 && hasReceiver()) {
-			if (!isExtension() || getImplicitReceiver() != null) {
-				EnumSet<ConformanceHint> receiverConformanceHints = description.getReceiverConformanceHints();
-				return receiverConformanceHints;
+		if (idx == 0) {
+			if (getReceiver() != null) {
+				EnumSet<ConformanceHint> result = getReceiverConformanceHints();
+				return result;
 			}
-			XExpression receiver = getReceiver();
-			if (receiver == null) {
-				throw new IllegalStateException("receiver may not be null");
-			}
-			return getState().getStackedResolvedTypes().getConformanceHints(receiver, recompute);
 		}
 		return super.getConformanceHints(idx, recompute);
 	}
@@ -265,8 +250,10 @@ public class FeatureLinkingCandidate extends AbstractPendingLinkingCandidate<XAb
 	@Override
 	@Nullable
 	protected LightweightTypeReference getSubstitutedExpectedType(int idx) {
-		if (idx == 0 && !isStatic()) {
-			return getReceiverType();
+		if (idx == 0) {
+			if (getReceiver() != null) {
+				return null;
+			}
 		}
 		return super.getSubstitutedExpectedType(idx);
 	}
@@ -303,17 +290,57 @@ public class FeatureLinkingCandidate extends AbstractPendingLinkingCandidate<XAb
 	}
 	
 	@Override
-	protected int compareByArgumentTypes(AbstractPendingLinkingCandidate<?> right) {
-		int result = super.compareByArgumentTypes(right);
-		if (result != 0 || !(right instanceof FeatureLinkingCandidate))
+	protected int compareByArgumentTypes(AbstractPendingLinkingCandidate<?> right, int argumentIndex, EnumSet<ConformanceHint> leftConformance,
+			EnumSet<ConformanceHint> rightConformance) {
+		int result = super.compareByArgumentTypes(right, argumentIndex, leftConformance, rightConformance);
+		if (result != 0 || leftConformance.contains(ConformanceHint.SUCCESS) || !(right instanceof FeatureLinkingCandidate))
 			return result;
-		FeatureLinkingCandidate casted = (FeatureLinkingCandidate) right;
-		if (isExtension() != casted.isExtension()) {
-			if (isExtension())
+		// both types do not match - pick the one which is not an extension
+		boolean firstArgumentMismatch = isFirstArgument(argumentIndex);
+		boolean rightFirstArgumentMismatch = ((FeatureLinkingCandidate) right).isFirstArgument(argumentIndex);
+		if (firstArgumentMismatch != rightFirstArgumentMismatch) {
+			if (firstArgumentMismatch)
 				return 1;
 			return -1;
 		}
 		return result;
+	}
+	
+	protected boolean isFirstArgument(int argumentIndex) {
+		if (argumentIndex > 1 || getFirstArgument() == null)
+			return false;
+		if (isStatic())
+			return argumentIndex == 0;
+		return argumentIndex == 1;
+	}
+	
+	@Override
+	protected int compareByArgumentTypes(AbstractPendingLinkingCandidate<?> right, int leftBoxing, int rightBoxing, int leftDemand, int rightDemand) {
+		if (leftDemand != rightDemand) {
+			if (leftDemand < rightDemand)
+				return -1;
+			return 1;
+		}
+		if (right instanceof FeatureLinkingCandidate) {
+			FeatureLinkingCandidate casted = (FeatureLinkingCandidate) right;
+			if (isExtension() != casted.isExtension()) {
+				if (isExtension())
+					return 1;
+				return -1;
+			}
+			if (isStatic() != casted.isStatic()) {
+				if (isStatic()) {
+					return 1;
+				}
+				return -1;
+			}
+		}
+		if (leftBoxing != rightBoxing) {
+			if (leftBoxing < rightBoxing)
+				return -1;
+			return 1;
+		}
+		return 0;
 	}
 	
 	@Override
@@ -327,19 +354,21 @@ public class FeatureLinkingCandidate extends AbstractPendingLinkingCandidate<XAb
 	}
 	
 	protected void applyImplicitReceiver() {
-		XExpression implicitReceiver = getImplicitReceiver();
-		if (implicitReceiver != null) {
-			ResolvedTypes resolvedTypes = getState().getResolvedTypes();
-			LightweightTypeReference receiverType = getImplicitReceiverType();
-			TypeExpectation expectation = new TypeExpectation(null, getState(), false);
-			if (receiverType == null) {
-				throw new IllegalStateException("Cannot determine the receiver's type");
-			}
-			resolvedTypes.acceptType(implicitReceiver, expectation, receiverType.copyInto(resolvedTypes.getReferenceOwner()), false, ConformanceHint.UNCHECKED);
-			if (implicitReceiver instanceof XAbstractFeatureCall) {
-				new ImplicitReceiver(getFeatureCall(), (XAbstractFeatureCall) implicitReceiver, getState()).applyToComputationState();
-			} else {
-				throw new IllegalStateException("unexpected implicit receiver, was: " + implicitReceiver);
+		if (!isStatic()) {
+			XExpression implicitReceiver = getImplicitReceiver();
+			if (implicitReceiver != null) {
+				ResolvedTypes resolvedTypes = getState().getResolvedTypes();
+				LightweightTypeReference receiverType = getImplicitReceiverType();
+				TypeExpectation expectation = new TypeExpectation(null, getState(), false);
+				if (receiverType == null) {
+					throw new IllegalStateException("Cannot determine the receiver's type");
+				}
+				resolvedTypes.acceptType(implicitReceiver, expectation, receiverType.copyInto(resolvedTypes.getReferenceOwner()), false, ConformanceHint.UNCHECKED);
+				if (implicitReceiver instanceof XAbstractFeatureCall) {
+					new ImplicitReceiver(getFeatureCall(), (XAbstractFeatureCall) implicitReceiver, getState()).applyToComputationState();
+				} else {
+					throw new IllegalStateException("unexpected implicit receiver, was: " + implicitReceiver);
+				}
 			}
 		}
 	}
@@ -369,7 +398,7 @@ public class FeatureLinkingCandidate extends AbstractPendingLinkingCandidate<XAb
 			if (receiverType != null) {
 				resolveKnownArgumentType(argument, receiverType, declaredType, argumentState);
 			}
-		} else if (argument == description.getImplicitFirstArgument()) {
+		} else if (argument == getImplicitFirstArgument()) {
 			LightweightTypeReference argumentType = getImplicitFirstArgumentType();
 			if (argumentType != null) {
 				resolveKnownArgumentType(argument, argumentType, declaredType, argumentState);
@@ -396,6 +425,18 @@ public class FeatureLinkingCandidate extends AbstractPendingLinkingCandidate<XAb
 	}
 	
 	@Override
+	protected void computeVarArgumentType(IFeatureCallArgumentSlot slot, TypeParameterSubstitutor<?> substitutor) {
+		if (isExtension()) {
+			List<XExpression> arguments = slot.getArgumentExpressions();
+			if (arguments.size() == 1 && arguments.get(0) == getFirstArgument()) {
+				computeFixedArityArgumentType(slot, substitutor);
+				return;
+			}
+		}
+		super.computeVarArgumentType(slot, substitutor);
+	}
+	
+	@Override
 	protected Map<JvmTypeParameter, LightweightMergedBoundTypeArgument> getDeclaratorParameterMapping() {
 		if (isStatic())
 			return super.getDeclaratorParameterMapping();
@@ -413,7 +454,7 @@ public class FeatureLinkingCandidate extends AbstractPendingLinkingCandidate<XAb
 			return result;
 		return getSyntacticReceiver();
 	}
-	
+
 	@Nullable
 	protected LightweightTypeReference getReceiverType() {
 		if (isStatic())
@@ -424,6 +465,41 @@ public class FeatureLinkingCandidate extends AbstractPendingLinkingCandidate<XAb
 		else
 			result = getSyntacticReceiverType();
 		return result;
+	}
+	
+	protected EnumSet<ConformanceHint> getReceiverConformanceHints() {
+		if (isStatic())
+			throw new IllegalStateException();
+		if (getImplicitReceiver() != null) {
+			return description.getImplicitReceiverConformanceHints();
+		} else if (getSyntacticReceiver() != null) {
+			return description.getSyntacticReceiverConformanceHints();
+		}
+		throw new IllegalStateException();
+	}
+	
+	/**
+	 * Returns the first argument if this is an extension. This may be
+	 * the implicit first argument or the syntactic receiver of the feature call.
+	 */
+	@Nullable
+	protected XExpression getFirstArgument() {
+		if (!isExtension())
+			return null;
+		XExpression firstArgument = getImplicitFirstArgument();
+		if (firstArgument != null)
+			return firstArgument;
+		return getSyntacticReceiver();
+	}
+
+	@Nullable
+	protected LightweightTypeReference getFirstArgumentType() {
+		if (!isExtension())
+			return null;
+		LightweightTypeReference result = getImplicitFirstArgumentType();
+		if (result != null)
+			return result;
+		return getSyntacticReceiverType();
 	}
 	
 	@Nullable

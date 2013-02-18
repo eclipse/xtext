@@ -7,21 +7,29 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.scoping.batch;
 
+import java.util.EnumSet;
+
+import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.xtext.common.types.JvmIdentifiableElement;
+import org.eclipse.xtext.common.types.JvmFeature;
 import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.xbase.XExpression;
+import org.eclipse.xtext.xbase.typesystem.conformance.ConformanceHint;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
+@NonNullByDefault
 public class StaticExtensionFeatureDescriptionWithImplicitFirstArgument extends StaticExtensionFeatureDescription {
 
-	protected StaticExtensionFeatureDescriptionWithImplicitFirstArgument(QualifiedName qualifiedName,
-			JvmIdentifiableElement element, XExpression firstArgument,
-			LightweightTypeReference firstArgumentType, int bucketId, boolean visible) {
-		super(qualifiedName, element, firstArgument, firstArgumentType, bucketId, visible);
+	protected StaticExtensionFeatureDescriptionWithImplicitFirstArgument(
+			QualifiedName qualifiedName,
+			JvmFeature feature, 
+			XExpression firstArgument,
+			LightweightTypeReference firstArgumentType,
+			int bucketId, boolean visible) {
+		super(qualifiedName, feature, firstArgument, firstArgumentType, bucketId, visible);
 	}
 
 	@Override
@@ -37,6 +45,11 @@ public class StaticExtensionFeatureDescriptionWithImplicitFirstArgument extends 
 	}
 	
 	@Override
+	public EnumSet<ConformanceHint> getSyntacticReceiverConformanceHints() {
+		return EnumSet.noneOf(ConformanceHint.class);
+	}
+	
+	@Override
 	@Nullable
 	public XExpression getImplicitFirstArgument() {
 		return super.getSyntacticReceiver();
@@ -47,4 +60,5 @@ public class StaticExtensionFeatureDescriptionWithImplicitFirstArgument extends 
 	public LightweightTypeReference getImplicitFirstArgumentType() {
 		return super.getSyntacticReceiverType();
 	}
+	
 }

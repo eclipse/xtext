@@ -95,6 +95,10 @@ public class SimpleIdentifiableElementDescription implements IIdentifiableElemen
 	public Map<JvmTypeParameter, LightweightMergedBoundTypeArgument> getImplicitReceiverTypeParameterMapping() {
 		return Collections.emptyMap();
 	}
+	
+	public EnumSet<ConformanceHint> getImplicitReceiverConformanceHints() {
+		return EnumSet.noneOf(ConformanceHint.class);
+	}
 
 	@Nullable
 	public LightweightTypeReference getSyntacticReceiverType() {
@@ -109,6 +113,10 @@ public class SimpleIdentifiableElementDescription implements IIdentifiableElemen
 	public Map<JvmTypeParameter, LightweightMergedBoundTypeArgument> getSyntacticReceiverTypeParameterMapping() {
 		return Collections.emptyMap();
 	}
+	
+	public EnumSet<ConformanceHint> getSyntacticReceiverConformanceHints() {
+		return EnumSet.noneOf(ConformanceHint.class);
+	}
 
 	@Nullable
 	public XExpression getImplicitFirstArgument() {
@@ -118,10 +126,6 @@ public class SimpleIdentifiableElementDescription implements IIdentifiableElemen
 	@Nullable
 	public LightweightTypeReference getImplicitFirstArgumentType() {
 		return null;
-	}
-
-	public Map<JvmTypeParameter, LightweightMergedBoundTypeArgument> getImplicitFirstArgumentTypeParameterMapping() {
-		return Collections.emptyMap();
 	}
 
 	public boolean isVisible() {
@@ -136,8 +140,4 @@ public class SimpleIdentifiableElementDescription implements IIdentifiableElemen
 		return false;
 	}
 
-	public EnumSet<ConformanceHint> getReceiverConformanceHints() {
-		return EnumSet.of(ConformanceHint.SUCCESS, ConformanceHint.CHECKED);
-	}
-	
 }

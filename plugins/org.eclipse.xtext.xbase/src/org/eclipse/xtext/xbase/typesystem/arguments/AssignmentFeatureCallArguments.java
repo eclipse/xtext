@@ -77,5 +77,10 @@ public class AssignmentFeatureCallArguments implements IFeatureCallArguments, IF
 	public void markProcessed() {
 		this.processed = true;
 	}
+	
+	@Override
+	public String toString() {
+		return String.format("AssignmentFeatureCallArguments for %s [processed = %s]", expression, String.valueOf(processed));
+	}
 
 }

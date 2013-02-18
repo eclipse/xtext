@@ -14,6 +14,7 @@ import java.util.List;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.jdt.annotation.NonNullByDefault;
+import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.naming.QualifiedName;
@@ -88,14 +89,14 @@ public class FeatureScopes implements IFeatureNames {
 	public IScope createSimpleFeatureCallScope(EObject context, EReference reference, IFeatureScopeSession session, IResolvedTypes resolvedTypes) {
 		if (context instanceof XFeatureCall) {
 			XFeatureCall featureCall = (XFeatureCall) context;
-			if (featureCall.getDeclaringType() != null) {
-				TypeBucket receiverBucket = new TypeBucket(-1, Collections.<JvmType>singletonList(featureCall.getDeclaringType()));
-				return new StaticFeatureScope(IScope.NULLSCOPE, session, asAbstractFeatureCall(context), receiverBucket, operatorMapping);
+			JvmDeclaredType declaringType = featureCall.getDeclaringType();
+			if (declaringType != null) {
+				return createStaticScope(featureCall, declaringType, null, null, IScope.NULLSCOPE, session);
 			}
 		}
-		
 		IScope staticImports = createStaticFeaturesScope(context, IScope.NULLSCOPE, session);
-		IScope staticExtensions = createStaticExtensionsScope(null, null, context, staticImports, session, resolvedTypes);
+		IScope staticMembers = createStaticScope(asAbstractFeatureCall(context), null, null, staticImports, session, resolvedTypes);
+		IScope staticExtensions = createStaticExtensionsScope(null, null, context, staticMembers, session, resolvedTypes);
 		IScope dynamicExtensions = createDynamicExtensionsScope(null, null, context, staticExtensions, session, resolvedTypes);
 		IScope implicitReceivers = createImplicitFeatureCallScope(context, dynamicExtensions, session, resolvedTypes);
 		IScope constructors = new ConstructorDelegateScope(implicitReceivers, session, asAbstractFeatureCall(context));
@@ -151,25 +152,76 @@ public class FeatureScopes implements IFeatureNames {
 			return IScope.NULLSCOPE;
 		LightweightTypeReference receiverType = resolvedTypes.getActualType(receiver);
 		if (receiverType != null) {
-			IScope staticExtensionScope = createStaticExtensionsScope(receiver, receiverType, featureCall, IScope.NULLSCOPE, session, resolvedTypes);
-			IScope extensionScope = createDynamicExtensionsScope(receiver, receiverType, featureCall, staticExtensionScope, session, resolvedTypes);
 			JvmIdentifiableElement linkedReceiver = resolvedTypes.getLinkedFeature(asAbstractFeatureCall(receiver));
-			return createFeatureScopeForTypeRef(receiver, receiverType, false, featureCall, session, linkedReceiver, extensionScope);
+			// check if 'super' was used as receiver which renders extension features and static features invalid
+			if (isValidFeatureCallArgument(receiver, linkedReceiver, session)) {
+				
+				// static members that are invoked on a receiver, e.g. myString.CASE_INSENSITIVE_ORDER
+				IScope staticScope = createStaticScope(asAbstractFeatureCall(featureCall), receiver, receiverType, IScope.NULLSCOPE, session, resolvedTypes);
+				
+				// static extensions, if any, e.g. iterable.map [], or things that have been imported by means of import static extension MyType
+				IScope staticExtensionScope = createStaticExtensionsScope(receiver, receiverType, featureCall, staticScope, session, resolvedTypes);
+				
+				// instance extensions, e.g. extension ReflectionUtils with myObject.get('privateField')
+				IScope extensionScope = createDynamicExtensionsScope(receiver, receiverType, featureCall, staticExtensionScope, session, resolvedTypes);
+				
+				// instance members, e.g. this.toString
+				return createFeatureScopeForTypeRef(receiver, receiverType, false, featureCall, session, linkedReceiver, extensionScope);
+			} else {
+				
+				// put only instance members into the scope
+				return createFeatureScopeForTypeRef(receiver, receiverType, false, featureCall, session, linkedReceiver, IScope.NULLSCOPE);
+			}
 		} else {
 			return IScope.NULLSCOPE;
 		}
+	}
+	
+	/**
+	 * Returns <code>true</code> if the linked receiver may be passed as an argument. Basically everything could
+	 * be passed as an argument except the linked receiver is null, a proxy or a reference to <code>super</code>.
+	 */
+	protected boolean isValidFeatureCallArgument(XExpression expression, JvmIdentifiableElement linkedReceiver, IFeatureScopeSession session) {
+		if (linkedReceiver instanceof JvmType) {
+			IEObjectDescription knownSuperType = session.getLocalElement(SUPER);
+			if (knownSuperType != null && linkedReceiver == knownSuperType.getEObjectOrProxy()) {
+				return false;
+			}
+		}
+		return !(expression instanceof XAbstractFeatureCall) || linkedReceiver != null && !linkedReceiver.eIsProxy();
 	}
 
 	protected IScope createStaticExtensionsScope(XExpression receiver, LightweightTypeReference receiverType, EObject featureCall, IScope parent, IFeatureScopeSession session, IResolvedTypes resolvedTypes) {
 		IScope result = parent;
 		if (receiver == null) {
+			// 'this' is a valid implicit first argument, e.g. implementations of Iterable may use #filter on themselves
 			result = createImplicitExtensionScope(THIS, featureCall, session, resolvedTypes, result);
+			// 'it' has a higher priority than 'this' as implicit first argument
 			result = createImplicitExtensionScope(IT, featureCall, session, resolvedTypes, result);
 			return result;
 		} else {
 			result = createStaticExtensionsScope(receiver, receiverType, false, featureCall, parent, session);
 		}
 		return result;
+	}
+	
+	protected IScope createStaticScope(XAbstractFeatureCall featureCall, XExpression receiver, LightweightTypeReference receiverType, IScope parent,
+			IFeatureScopeSession session, IResolvedTypes resolvedTypes) {
+		IScope result = parent;
+		if (receiver == null) {
+			result = createImplicitStaticScope(THIS, featureCall, session, resolvedTypes, result);
+			result = createImplicitStaticScope(IT, featureCall, session, resolvedTypes, result);
+			return result;
+		} else {
+			TypeBucket receiverBucket = new TypeBucket(-1, Collections.singletonList(receiverType.getType()));
+			return new StaticFeatureScope(parent, session, featureCall, receiver, receiverType, receiverBucket, operatorMapping);
+		}
+	}
+
+	protected IScope createStaticScope(XAbstractFeatureCall featureCall, JvmType type, XExpression receiver, LightweightTypeReference receiverType,
+			IScope parent, IFeatureScopeSession session) {
+		TypeBucket receiverBucket = new TypeBucket(-1, Collections.singletonList(type));
+		return new StaticFeatureScope(parent, session, featureCall, receiver, receiverType, receiverBucket, operatorMapping);
 	}
 	
 	protected IScope createDynamicExtensionsScope(XExpression firstArgument, LightweightTypeReference firstArgumentType, EObject featureCall, IScope parent, IFeatureScopeSession session, IResolvedTypes resolvedTypes) {
@@ -265,4 +317,17 @@ public class FeatureScopes implements IFeatureNames {
 		return parent;
 	}
 	
+	protected IScope createImplicitStaticScope(QualifiedName implicitName, XAbstractFeatureCall featureCall, IFeatureScopeSession session,
+			IResolvedTypes resolvedTypes, IScope parent) {
+		IEObjectDescription thisDescription = session.getLocalElement(implicitName);
+		if (thisDescription != null) {
+			JvmIdentifiableElement thisElement = (JvmIdentifiableElement) thisDescription.getEObjectOrProxy();
+			LightweightTypeReference type = resolvedTypes.getActualType(thisElement);
+			if (type != null) {
+				TypeBucket receiverBucket = new TypeBucket(-1, Collections.singletonList(type.getType()));
+				return new StaticFeatureScope(parent, session, featureCall, null, type, receiverBucket, operatorMapping);
+			}
+		}
+		return parent;
+	}
 }

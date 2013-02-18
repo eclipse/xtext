@@ -28,14 +28,20 @@ import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 @NonNullByDefault
 public class InstanceExtensionDescriptionWithImplicitFirstArgument extends InstanceExtensionDescription {
 
-	protected InstanceExtensionDescriptionWithImplicitFirstArgument(QualifiedName qualifiedName,
-			JvmFeature feature, XExpression receiver, LightweightTypeReference receiverType,
-			Map<JvmTypeParameter, LightweightMergedBoundTypeArgument> typeParameterMapping, 
-			XExpression firstArgument, LightweightTypeReference firstArgumentType,
-			Map<JvmTypeParameter, LightweightMergedBoundTypeArgument> argumentTypeParameterMapping, int bucketId,
-			boolean visible, @Nullable EnumSet<ConformanceHint> receiverConformanceHints) {
-		super(qualifiedName, feature, receiver, receiverType, typeParameterMapping, EcoreUtil2.clone(firstArgument), firstArgumentType,
-				argumentTypeParameterMapping, bucketId, visible, receiverConformanceHints);
+	public InstanceExtensionDescriptionWithImplicitFirstArgument(
+			QualifiedName qualifiedName,
+			JvmFeature feature,
+			XExpression receiver,
+			LightweightTypeReference receiverType,
+			Map<JvmTypeParameter, LightweightMergedBoundTypeArgument> receiverTypeParameterMapping,
+			EnumSet<ConformanceHint> receiverConformanceHints,
+			XExpression firstArgument,
+			LightweightTypeReference firstArgumentType,
+			Map<JvmTypeParameter, LightweightMergedBoundTypeArgument> firstArgumentTypeParameterMapping,
+			int bucketId,
+			boolean visible) {
+		super(qualifiedName, feature, receiver, receiverType, receiverTypeParameterMapping, receiverConformanceHints, EcoreUtil2.clone(firstArgument), firstArgumentType,
+				firstArgumentTypeParameterMapping, EnumSet.noneOf(ConformanceHint.class), bucketId, visible);
 	}
 
 	@Override
@@ -56,6 +62,11 @@ public class InstanceExtensionDescriptionWithImplicitFirstArgument extends Insta
 	}
 	
 	@Override
+	public EnumSet<ConformanceHint> getSyntacticReceiverConformanceHints() {
+		return EnumSet.noneOf(ConformanceHint.class);
+	}
+	
+	@Override
 	@Nullable
 	public XExpression getImplicitFirstArgument() {
 		return super.getSyntacticReceiver();
@@ -67,9 +78,4 @@ public class InstanceExtensionDescriptionWithImplicitFirstArgument extends Insta
 		return super.getSyntacticReceiverType();
 	}
 	
-	@Override
-	public Map<JvmTypeParameter, LightweightMergedBoundTypeArgument> getImplicitFirstArgumentTypeParameterMapping() {
-		return super.getSyntacticReceiverTypeParameterMapping();
-	}
-
 }

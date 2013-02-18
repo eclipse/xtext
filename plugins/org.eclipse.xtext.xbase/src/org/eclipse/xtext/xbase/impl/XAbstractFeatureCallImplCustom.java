@@ -37,7 +37,9 @@ public abstract class XAbstractFeatureCallImplCustom extends XAbstractFeatureCal
 	public String getConcreteSyntaxFeatureName() {
 		List<INode> list = NodeModelUtils.findNodesForFeature(this, XbasePackage.Literals.XABSTRACT_FEATURE_CALL__FEATURE);
 		if (list.size()!=1) {
-			return "<unkown>";
+			if (feature == null || feature.eIsProxy())
+				return "<unkown>";
+			return String.format("<implicit: %s>", feature.getIdentifier());
 		}
 		INode node = list.get(0);
 		if (node instanceof ILeafNode) {

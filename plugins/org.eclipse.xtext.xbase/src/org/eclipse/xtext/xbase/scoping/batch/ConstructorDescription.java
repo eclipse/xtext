@@ -20,4 +20,14 @@ public class ConstructorDescription extends BucketedEObjectDescription {
 		super(qualifiedName, constructor, bucketId, visible);
 	}
 
+	/**
+	 * Constructors of non-member types are considered to be static.
+	 */
+	public boolean isStatic() {
+		return true;
+	}
+	
+	public boolean isExtension() {
+		return false;
+	}
 }

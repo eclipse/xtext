@@ -11,7 +11,7 @@ import java.util.Map;
 import java.util.Set;
 
 import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.common.types.JvmMember;
 import org.eclipse.xtext.diagnostics.AbstractDiagnostic;
@@ -37,6 +37,7 @@ import com.google.common.collect.Sets;
  * TODO guard against unresolved type references
  * TODO toString
  */
+@NonNullByDefault
 public class RootResolvedTypes extends ResolvedTypes {
 
 	private Set<XExpression> toBeInferredRootExpressions;
@@ -63,7 +64,7 @@ public class RootResolvedTypes extends ResolvedTypes {
 	
 	@Override
 	@Nullable
-	protected LightweightTypeReference getExpectedTypeForAssociatedExpression(@NonNull JvmMember member, @NonNull XExpression expression) {
+	protected LightweightTypeReference getExpectedTypeForAssociatedExpression(JvmMember member, XExpression expression) {
 		if (toBeInferredRootExpressions != null && toBeInferredRootExpressions.contains(expression)) {
 			return null;
 		}
@@ -71,7 +72,7 @@ public class RootResolvedTypes extends ResolvedTypes {
 	}
 	
 	@Override
-	protected void markToBeInferred(@NonNull XExpression expression) {
+	protected void markToBeInferred(XExpression expression) {
 		if (toBeInferredRootExpressions == null) {
 			toBeInferredRootExpressions = Sets.newHashSet();
 		}
@@ -81,7 +82,7 @@ public class RootResolvedTypes extends ResolvedTypes {
 	public void addDiagnostics(final Resource resource) {
 		class DiagnosticAcceptor implements IAcceptor<AbstractDiagnostic> {
 
-			public void accept(AbstractDiagnostic diagnostic) {
+			public void accept(@Nullable AbstractDiagnostic diagnostic) {
 				if (diagnostic instanceof EObjectDiagnosticImpl) {
 					Severity severity = ((EObjectDiagnosticImpl) diagnostic).getSeverity();
 					if (severity == Severity.ERROR) {
