@@ -42,7 +42,13 @@ public class CachingBatchTypeResolver implements IBatchTypeResolver {
 		if (object == null || object.eIsProxy()) {
 			return IResolvedTypes.NULL;
 		}
-		final Resource resource = object.eResource();
+		// TODO: remove when we switch to an Xtend scope provider without artificial feature calls  
+		EObject nonArtificialObject = object;
+		if(object.eResource() == null && object instanceof XAbstractFeatureCall) {
+			nonArtificialObject = ((XAbstractFeatureCall) object).getFeature();
+		}
+		// TODO
+		final Resource resource = nonArtificialObject.eResource();
 		final LazyResolvedTypes result = cache.get(CachingBatchTypeResolver.class, resource, new Provider<LazyResolvedTypes>() {
 			public LazyResolvedTypes get() {
 				final IReentrantTypeResolver resolver = delegate.getTypeResolver(object);
