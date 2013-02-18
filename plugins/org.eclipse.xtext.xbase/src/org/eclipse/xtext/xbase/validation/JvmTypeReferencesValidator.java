@@ -9,13 +9,18 @@ package org.eclipse.xtext.xbase.validation;
 
 import static com.google.common.collect.Lists.*;
 
+import java.util.Iterator;
 import java.util.List;
 
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
+import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.common.types.JvmParameterizedTypeReference;
+import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeConstraint;
+import org.eclipse.xtext.common.types.JvmTypeParameter;
+import org.eclipse.xtext.common.types.JvmTypeParameterDeclarator;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.TypesPackage;
 import org.eclipse.xtext.common.types.util.Primitives;
@@ -49,6 +54,54 @@ public class JvmTypeReferencesValidator extends AbstractDeclarativeValidator {
 			JvmTypeReference jvmTypeReference = arguments.get(i);
 			checkNotPrimitive(jvmTypeReference);
 		}
+	}
+	
+	@Check
+	public void checkTypeArgsAgainstTypeParameters(JvmParameterizedTypeReference typeRef) {
+		if(typeRef.getType() instanceof JvmGenericType) {
+			int numTypeParameters = ((JvmGenericType) typeRef.getType()).getTypeParameters().size();
+			if(typeRef.getArguments().size() > 0) {
+				if(numTypeParameters != typeRef.getArguments().size()) 
+					error("Incorrect number of arguments for type " 
+							+ getTypeSignature(typeRef.getType()) 
+							+ "; it cannot be parameterized with arguments " 
+							+ getTypeArguments(typeRef),
+						TypesPackage.Literals.JVM_PARAMETERIZED_TYPE_REFERENCE__TYPE, -1, IssueCodes.INVALID_NUMBER_OF_TYPE_ARGUMENTS);
+			} else {
+				if(numTypeParameters > 0) 
+					warning(typeRef.getType().getSimpleName() 
+							+ " is a raw type. References to generic type " 
+							+ getTypeSignature(typeRef.getType()) 
+							+ " should be parameterized",
+							TypesPackage.Literals.JVM_PARAMETERIZED_TYPE_REFERENCE__TYPE, -1, IssueCodes.RAW_TYPE);
+			}
+		}
+	}
+	
+	protected String getTypeSignature(JvmType type) {
+		StringBuffer b = new StringBuffer(type.getSimpleName());
+		if(type instanceof JvmTypeParameterDeclarator) {
+			b.append("<");
+			for(Iterator<JvmTypeParameter> i =  ((JvmTypeParameterDeclarator)type).getTypeParameters().iterator(); i.hasNext();) {
+				b.append(i.next().getName());
+				if(i.hasNext())
+					b.append(",");
+			}
+			b.append(">");
+		}
+		return b.toString();
+	}
+	
+	protected String getTypeArguments(JvmParameterizedTypeReference typeRef) {
+		StringBuffer b = new StringBuffer();
+		b.append("<");
+		for(Iterator<JvmTypeReference> i = typeRef.getArguments().iterator(); i.hasNext();) {
+			b.append(i.next().getSimpleName());
+			if(i.hasNext()) 
+				b.append(",");
+		}
+		b.append(">");
+		return b.toString();
 	}
 	
 	@Check
