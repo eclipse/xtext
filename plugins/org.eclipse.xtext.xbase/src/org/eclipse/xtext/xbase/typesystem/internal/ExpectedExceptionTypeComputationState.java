@@ -9,6 +9,7 @@ package org.eclipse.xtext.xbase.typesystem.internal;
 
 import java.util.List;
 
+import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.scoping.batch.IFeatureScopeSession;
 import org.eclipse.xtext.xbase.typesystem.conformance.ConformanceHint;
@@ -17,6 +18,7 @@ import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 /**
  * @author Moritz Eysholdt - Initial contribution and API
  */
+@NonNullByDefault
 public class ExpectedExceptionTypeComputationState extends AbstractStackedTypeComputationState {
 
 	protected ExpectedExceptionTypeComputationState(ResolvedTypes resolvedTypes, IFeatureScopeSession featureScopeSession, AbstractTypeComputationState parent,
