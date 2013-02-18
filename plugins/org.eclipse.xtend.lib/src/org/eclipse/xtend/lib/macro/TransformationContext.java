@@ -19,9 +19,8 @@ import com.google.common.annotations.Beta;
  * @author Sven Efftinge
  */
 @Beta
-public interface TransformationContext extends Tracability, ProblemSupport {
+public interface TransformationContext extends Tracability, ProblemSupport, TypeReferenceProvider {
 	
 	MutableClassDeclaration findGeneratedClass(String name);
 	
-	TypeReferenceProvider getTypeReferenceProvider();
 }
