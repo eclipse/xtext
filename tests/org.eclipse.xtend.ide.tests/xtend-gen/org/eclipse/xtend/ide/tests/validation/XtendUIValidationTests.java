@@ -163,7 +163,7 @@ public class XtendUIValidationTests extends AbstractXtendUITestCase {
       _builder.append("class Foo {");
       _builder.newLine();
       _builder.append("\t");
-      _builder.append("def bar(List l){}");
+      _builder.append("def bar(List<?> l){}");
       _builder.newLine();
       _builder.append("}");
       _builder.newLine();
