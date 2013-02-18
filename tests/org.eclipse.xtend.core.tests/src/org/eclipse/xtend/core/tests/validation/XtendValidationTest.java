@@ -985,27 +985,27 @@ public class XtendValidationTest extends AbstractXtendTestCase {
 	
 	@Test public void testImportUnused_2() throws Exception {
 		XtendClass clazz = clazz("import java.util.List class X { private List sb def foo(){sb}}");
-		helper.assertNoIssues(clazz.eContainer());
+		helper.assertNoIssues(clazz.eContainer(), XIMPORT_DECLARATION);
 	}
 	
 	@Test public void testImportUnused_3() throws Exception {
 		XtendClass clazz = clazz("import java.util.Map$Entry class X { private Entry sb def foo(){sb}}");
-		helper.assertNoIssues(clazz.eContainer());
+		helper.assertNoIssues(clazz.eContainer(), XIMPORT_DECLARATION);
 	}
 	
 	@Test public void testImportUnused_4() throws Exception {
 		XtendClass clazz = clazz("import java.util.Map class X { private Map$Entry sb def foo(){sb}}");
-		helper.assertNoIssues(clazz.eContainer());
+		helper.assertNoIssues(clazz.eContainer(), XIMPORT_DECLARATION);
 	}
 	
 	@Test public void testImportUnused_5() throws Exception {
 		XtendClass clazz = clazz("import java.util.Map$Entry class X { private Map$Entry sb def foo(){sb}}");
-		helper.assertNoIssues(clazz.eContainer());
+		helper.assertNoIssues(clazz.eContainer(), XIMPORT_DECLARATION);
 	}
 	
 	@Test public void testImportUnused_6() throws Exception {
 		XtendClass clazz = clazz("import java.awt.Label /** {@link Label} */ class X{} ");
-		helper.assertNoIssues(clazz.eContainer());
+		helper.assertNoIssues(clazz.eContainer(), XIMPORT_DECLARATION);
 	}
 
 	@Test public void testImportUnused_7() throws Exception {
@@ -1075,12 +1075,12 @@ public class XtendValidationTest extends AbstractXtendTestCase {
 	
 	@Test public void testUnusedField() throws Exception {
 		XtendClass clazz = clazz("import java.util.List class X { protected List foo public List bar}");
-		helper.assertNoIssues(clazz.eContainer());
+		helper.assertNoIssues(clazz.eContainer(), XTEND_FIELD);
 	}
 	
 	@Test public void testUnusedFieldWithPropertyAnnotation() throws Exception {
 		XtendClass clazz = clazz("class X { @Property String foo }");
-		helper.assertNoIssues(clazz.eContainer());
+		helper.assertNoIssues(clazz.eContainer(), XTEND_FIELD);
 	}
 	
 	@Test public void testUnusedExtensionField() throws Exception {
@@ -1120,22 +1120,22 @@ public class XtendValidationTest extends AbstractXtendTestCase {
 	
 	@Test public void testUsedMemberOfExtensionField() throws Exception {
 		XtendClass clazz = clazz("class X { extension java.util.Collection def foo(){ add('42') }}");
-		helper.assertNoIssues(clazz.eContainer());
+		helper.assertNoIssues(clazz.eContainer(), XTEND_FIELD);
 	}
 	
 	@Test public void testUnusedMemberOfExtensionField() throws Exception {
 		XtendClass clazz = clazz("class X { extension java.util.Collection def foo(){  }}");
-		helper.assertWarning(clazz, XTEND_FIELD,UNUSED_PRIVATE_MEMBER , "not");
+		helper.assertWarning(clazz, XTEND_FIELD, UNUSED_PRIVATE_MEMBER , "not");
 	}
 	
 	@Test public void testUsedMemberOfExtensionFieldWithName() throws Exception {
 		XtendClass clazz = clazz("class X { extension java.util.Collection bar def foo(){ add('42') }}");
-		helper.assertNoIssues(clazz.eContainer());
+		helper.assertNoIssues(clazz.eContainer(), XTEND_FIELD);
 	}
 	
 	@Test public void testUsedMemberOfExtensionFieldWithName_2() throws Exception {
 		XtendClass clazz = clazz("class X { extension java.util.Collection bar def foo(){ bar.add('42') }}");
-		helper.assertNoIssues(clazz.eContainer());
+		helper.assertNoIssues(clazz.eContainer(), XTEND_FIELD);
 	}
 	
 	@Test public void testUnusedMemberOfExtensionFieldWithName() throws Exception {
@@ -1556,4 +1556,141 @@ public class XtendValidationTest extends AbstractXtendTestCase {
 		XtendMember field = clazz.getMembers().get(0);
 		helper.assertError(field, XTEND_FIELD, IssueCodes.JAVA_DOC_LINKING_DIAGNOSTIC, "javaDoc","List","cannot be resolved to a type");
 	}
+	
+	@Test
+	public void testInvalidNumOfTypeParameters_0() throws Exception {
+		XtendFile file = file(
+				"class Foo extends Bar<T> {" 
+				+ "}"
+				+ ""
+				+ "class Bar<T,U> {"
+				+ "}");
+		helper.assertError(file.getXtendTypes().get(0), TypesPackage.Literals.JVM_PARAMETERIZED_TYPE_REFERENCE, INVALID_NUMBER_OF_TYPE_ARGUMENTS);
+	}
+
+	@Test
+	public void testInvalidNumOfTypeParameters_1() throws Exception {
+		XtendFile file = file(
+				"class Foo extends Bar<T,U> {" 
+				+ "}"
+				+ ""
+				+ "class Bar<T> {"
+				+ "}");
+		helper.assertError(file.getXtendTypes().get(0), TypesPackage.Literals.JVM_PARAMETERIZED_TYPE_REFERENCE, INVALID_NUMBER_OF_TYPE_ARGUMENTS);
+	}
+
+	@Test
+	public void testInvalidNumOfTypeParameters_2() throws Exception {
+		XtendFile file = file(
+				"class Foo extends Bar<T> {" 
+				+ "}"
+				+ ""
+				+ "class Bar {"
+				+ "}");
+		helper.assertError(file.getXtendTypes().get(0), TypesPackage.Literals.JVM_PARAMETERIZED_TYPE_REFERENCE, INVALID_NUMBER_OF_TYPE_ARGUMENTS);
+	}
+
+	@Test
+	public void testRawType() throws Exception {
+		XtendFile file = file(
+				"class Foo extends Bar {" 
+				+ "}"
+				+ ""
+				+ "class Bar<T> {"
+				+ "}");
+		helper.assertWarning(file.getXtendTypes().get(0), TypesPackage.Literals.JVM_PARAMETERIZED_TYPE_REFERENCE, RAW_TYPE);
+	}
+
+	@Test
+	public void testReturnTypeInvalidNumOfTypeParameters_0() throws Exception {
+		XtendFile file = file(
+				"class Foo {"
+				+ " def <T> Bar<T> foo() {}"
+				+ "}"
+				+ ""
+				+ "class Bar<T,U> {"
+				+ "}");
+		helper.assertError(file.getXtendTypes().get(0), TypesPackage.Literals.JVM_PARAMETERIZED_TYPE_REFERENCE, INVALID_NUMBER_OF_TYPE_ARGUMENTS);
+	}
+
+	@Test
+	public void testReturnTypeInvalidNumOfTypeParameters_1() throws Exception {
+		XtendFile file = file(
+				"class Foo {" 
+				+ " def <T,U> Bar<T,U> foo() {}"
+				+ "}"
+				+ ""
+				+ "class Bar<T> {"
+				+ "}");
+		helper.assertError(file.getXtendTypes().get(0), TypesPackage.Literals.JVM_PARAMETERIZED_TYPE_REFERENCE, INVALID_NUMBER_OF_TYPE_ARGUMENTS);
+	}
+
+	@Test
+	public void testReturnTypeInvalidNumOfTypeParameters_2() throws Exception {
+		XtendFile file = file(
+				"class Foo {" 
+				+ " def <T> Bar<T> foo() {}"
+				+ "}"
+				+ ""
+				+ "class Bar {"
+				+ "}");
+		helper.assertError(file.getXtendTypes().get(0), TypesPackage.Literals.JVM_PARAMETERIZED_TYPE_REFERENCE, INVALID_NUMBER_OF_TYPE_ARGUMENTS);
+	}
+
+	@Test
+	public void testReturnTypeRawType() throws Exception {
+		XtendFile file = file(
+				"class Foo {" 
+				+ " def Bar foo() {}"
+				+ "}"
+				+ ""
+				+ "class Bar<T> {"
+				+ "}");
+		helper.assertWarning(file.getXtendTypes().get(0), TypesPackage.Literals.JVM_PARAMETERIZED_TYPE_REFERENCE, RAW_TYPE);
+	}
+
+	@Test
+	public void testWildcardSuperType_0() throws Exception {
+		XtendFile file = file(
+				"class Foo extends Bar<?>{" 
+				+ "}"
+				+ ""
+				+ "class Bar<T> {"
+				+ "}");
+		helper.assertError(file.getXtendTypes().get(0), XTEND_CLASS, WILDCARD_IN_SUPERTYPE);
+	}
+
+	@Test
+	public void testWildcardSuperType_1() throws Exception {
+		XtendFile file = file(
+				"class Foo implements Bar<? extends String>{" 
+				+ "}"
+				+ ""
+				+ "interface Bar<T> {"
+				+ "}");
+		helper.assertError(file.getXtendTypes().get(0), XTEND_CLASS, WILDCARD_IN_SUPERTYPE);
+	}
+
+	@Test
+	public void testWildcardSuperType_2() throws Exception {
+		XtendFile file = file(
+				"interface Foo extends Bar<? super String>{" 
+				+ "}"
+				+ ""
+				+ "interface Bar<T> {"
+				+ "}");
+		helper.assertError(file.getXtendTypes().get(0), XTEND_INTERFACE, WILDCARD_IN_SUPERTYPE);
+	}
+
+	@Test
+	public void testWildcardSuperType_3() throws Exception {
+		XtendFile file = file(
+				"interface Foo extends Bar<Class<?>>{" 
+				+ "}"
+				+ ""
+				+ "interface Bar<T> {"
+				+ "}");
+		helper.assertNoError(file.getXtendTypes().get(0), WILDCARD_IN_SUPERTYPE);
+	}
+
 }

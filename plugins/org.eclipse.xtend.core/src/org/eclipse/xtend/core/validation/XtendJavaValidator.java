@@ -64,10 +64,12 @@ import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmOperation;
+import org.eclipse.xtext.common.types.JvmParameterizedTypeReference;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.JvmVisibility;
+import org.eclipse.xtext.common.types.JvmWildcardTypeReference;
 import org.eclipse.xtext.common.types.TypesPackage;
 import org.eclipse.xtext.common.types.util.TypeReferences;
 import org.eclipse.xtext.diagnostics.Severity;
@@ -389,6 +391,7 @@ public class XtendJavaValidator extends XbaseWithAnnotationsJavaValidator {
 					error("The inheritance hierarchy of " + notNull(xtendClass.getName()) + " contains cycles",
 							XTEND_TYPE_DECLARATION__NAME, CYCLIC_INHERITANCE);
 				}
+				checkWildcardSupertype(xtendClass, superClass, XTEND_CLASS__EXTENDS, INSIGNIFICANT_INDEX);
 			}
 		}
 		for (int i = 0; i < xtendClass.getImplements().size(); ++i) {
@@ -397,6 +400,7 @@ public class XtendJavaValidator extends XbaseWithAnnotationsJavaValidator {
 					|| !((JvmGenericType) implementedType.getType()).isInterface()) {
 				error("Implemented interface must be an interface", XTEND_CLASS__IMPLEMENTS, i, INTERFACE_EXPECTED);
 			}
+			checkWildcardSupertype(xtendClass, implementedType, XTEND_CLASS__IMPLEMENTS, i);
 		}
 	}
 
@@ -408,12 +412,35 @@ public class XtendJavaValidator extends XbaseWithAnnotationsJavaValidator {
 					|| !((JvmGenericType) implementedType.getType()).isInterface()) {
 				error("Extended interface must be an interface", XTEND_INTERFACE__EXTENDS, i, INTERFACE_EXPECTED);
 			}
+			checkWildcardSupertype(xtendInterface, implementedType, XTEND_INTERFACE__EXTENDS, i);
 		}
 		JvmGenericType inferredType = associations.getInferredType(xtendInterface);
 		if(inferredType != null && hasCycleInHierarchy(inferredType, Sets.<JvmGenericType> newHashSet())) {
 			error("The inheritance hierarchy of " + notNull(xtendInterface.getName()) + " contains cycles",
 					XTEND_TYPE_DECLARATION__NAME, CYCLIC_INHERITANCE);
 		}
+	}
+	
+	protected void checkWildcardSupertype(XtendTypeDeclaration xtendType, JvmTypeReference superTypeReference,
+			EStructuralFeature feature, int index) { 
+		if(isInvalidWildcard(superTypeReference)) 
+			error("The type " 
+					+ notNull(xtendType.getName()) 
+					+ " cannot extend or implement "
+					+ superTypeReference.getIdentifier() 
+					+ ". A supertype may not specify any wildcard", feature, index, WILDCARD_IN_SUPERTYPE);
+	}
+	
+	protected boolean isInvalidWildcard(JvmTypeReference typeRef) {
+		if (typeRef instanceof JvmWildcardTypeReference)
+			return true;
+		else if (typeRef instanceof JvmParameterizedTypeReference) {
+			for(JvmTypeReference typeArgument: ((JvmParameterizedTypeReference) typeRef).getArguments()) {
+				if(typeArgument instanceof JvmWildcardTypeReference) 
+					return true;
+			}
+		}
+		return false;
 	}
 
 	protected boolean hasCycleInHierarchy(JvmGenericType type, Set<JvmGenericType> processedSuperTypes) {
