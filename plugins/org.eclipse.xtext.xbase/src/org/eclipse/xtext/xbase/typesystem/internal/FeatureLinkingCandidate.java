@@ -11,8 +11,10 @@ import java.util.EnumSet;
 import java.util.List;
 import java.util.Map;
 
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.common.types.JvmConstructor;
 import org.eclipse.xtext.common.types.JvmExecutable;
 import org.eclipse.xtext.common.types.JvmField;
@@ -28,6 +30,7 @@ import org.eclipse.xtext.validation.EObjectDiagnosticImpl;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.XAssignment;
 import org.eclipse.xtext.xbase.XBinaryOperation;
+import org.eclipse.xtext.xbase.XClosure;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XFeatureCall;
 import org.eclipse.xtext.xbase.XMemberFeatureCall;
@@ -138,6 +141,18 @@ public class FeatureLinkingCandidate extends AbstractPendingLinkingCandidate<XAb
 					String message = String.format("Cannot use %s in a static context", getFeatureCall().getConcreteSyntaxFeatureName());
 					AbstractDiagnostic diagnostic = new EObjectDiagnosticImpl(Severity.ERROR,
 							IssueCodes.STATIC_ACCESS_TO_INSTANCE_MEMBER, message, getExpression(),
+							XbasePackage.Literals.XABSTRACT_FEATURE_CALL__FEATURE, -1, null);
+					result.accept(diagnostic);
+					return false;
+				}
+			}
+			JvmIdentifiableElement feature = getFeature();
+			if (feature instanceof XVariableDeclaration && ((XVariableDeclaration) feature).isWriteable()) {
+				XClosure containingClosure = EcoreUtil2.getContainerOfType(getExpression(), XClosure.class);
+				if (containingClosure != null && !EcoreUtil.isAncestor(containingClosure, feature)) {
+					String message = String.format("Cannot refer to a non-final variable %s from within a closure", feature.getSimpleName());
+					AbstractDiagnostic diagnostic = new EObjectDiagnosticImpl(Severity.ERROR,
+							IssueCodes.INVALID_MUTABLE_VARIABLE_ACCESS, message, getExpression(),
 							XbasePackage.Literals.XABSTRACT_FEATURE_CALL__FEATURE, -1, null);
 					result.accept(diagnostic);
 					return false;
