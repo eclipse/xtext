@@ -4,10 +4,13 @@ import org.eclipse.xtext.common.types.JvmType
 import org.eclipse.xtext.resource.XtextResourceSet
 import org.eclipse.emf.ecore.EObject
 import org.apache.log4j.Logger
+import com.google.inject.Inject
 
 class ProcessorInstanceForJvmTypeProvider {
 	
 	static val logger = Logger::getLogger(typeof(ProcessorInstanceForJvmTypeProvider))
+	
+	@Inject ClassLoader classLoader;
 	
 	/**
 	 * @return an instance of the given JvmType
@@ -31,7 +34,8 @@ class ProcessorInstanceForJvmTypeProvider {
 					ClassLoader : return classLoaderCtx
 					Class<?> : return classLoaderCtx.classLoader
 					default : {
-						logger.error("Unsupported classloader context in resource set : "+classLoaderCtx?.getClass.name)
+						logger.info("No classloader attached to the resource set. Using injected classloader.")
+						return classLoader
 					}
 				}
 			}

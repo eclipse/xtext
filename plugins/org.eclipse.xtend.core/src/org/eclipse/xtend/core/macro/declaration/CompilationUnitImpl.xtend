@@ -37,6 +37,7 @@ import org.eclipse.xtend.lib.macro.declaration.TypeReference
 import org.eclipse.xtend.lib.macro.declaration.Visibility
 import org.eclipse.xtend.lib.macro.services.Problem
 import org.eclipse.xtend.lib.macro.services.ProblemSupport
+import org.eclipse.xtend.lib.macro.services.TimeoutException
 import org.eclipse.xtend.lib.macro.services.TypeReferenceProvider
 import org.eclipse.xtext.common.types.JvmAnnotationType
 import org.eclipse.xtext.common.types.JvmConstructor
@@ -92,6 +93,16 @@ class CompilationUnitImpl implements CompilationUnit, TypeReferenceProvider, Pro
 	override getGeneratedClassDeclarations() {
 		generatedTypeDeclarations.filter(typeof(MutableClassDeclaration)).toList
 	}
+	
+	boolean isTimeout = false
+	
+	def setTimeout(boolean timeout) {
+		this.isTimeout = timeout
+	}
+	def checkTimeout() {
+		if (isTimeout)
+			throw new TimeoutException()
+	}
 
 	@Property XtendFile xtendFile
 	@Inject CommonTypeComputationServices services;
@@ -110,6 +121,7 @@ class CompilationUnitImpl implements CompilationUnit, TypeReferenceProvider, Pro
 	}
 
 	def private <IN extends EObject, OUT> OUT getOrCreate(IN in, (IN)=>OUT provider) {
+		checkTimeout
 		if (identityCache.containsKey(in))
 			return identityCache.get(in) as OUT
 		val result = provider.apply(in)
@@ -223,6 +235,7 @@ class CompilationUnitImpl implements CompilationUnit, TypeReferenceProvider, Pro
 		]}
 
 	def TypeReference toTypeReference(LightweightTypeReference delegate) {
+		checkTimeout
 		if (delegate == null)
 			return null
 		new TypeReferenceImpl => [
@@ -339,10 +352,12 @@ class CompilationUnitImpl implements CompilationUnit, TypeReferenceProvider, Pro
 	}
 	
 	override newArrayTypeReference(TypeReference componentType) {
+		checkTimeout
 		toTypeReference(typeReferences.createArrayType(componentType.toJvmTypeReference))
 	}
 	
 	override newTypeReference(String typeName, TypeReference... typeArguments) {
+		checkTimeout
 		val type = typeReferences.findDeclaredType(typeName, xtendFile)
 		if (type == null)
 			return null
@@ -350,6 +365,7 @@ class CompilationUnitImpl implements CompilationUnit, TypeReferenceProvider, Pro
 	}
 	
 	override newTypeReference(Type typeDeclaration, TypeReference... typeArguments) {
+		checkTimeout
 		val type = switch typeDeclaration {
 			JvmTypeDeclarationImpl<? extends JvmDeclaredType> : {
 				typeDeclaration.delegate
@@ -398,10 +414,12 @@ class CompilationUnitImpl implements CompilationUnit, TypeReferenceProvider, Pro
 	}
 	
 	def JvmTypeReference toJvmTypeReference(TypeReference typeRef) {
+		checkTimeout
 		return (typeRef as TypeReferenceImpl).lightWeightTypeReference.toJavaCompliantTypeReference
 	}
 	
 	def void setCompilationStrategy(JvmExecutable executable, CompilationStrategy compilationStrategy) {
+		checkTimeout
 		typesBuilder.setBody(executable) [
 			val context = new CompilationContextImpl(it, this, typeRefSerializer)
 			it.append(compilationStrategy.compile(context))
@@ -409,21 +427,25 @@ class CompilationUnitImpl implements CompilationUnit, TypeReferenceProvider, Pro
 	}
 	
 	override addError(Element element, String message) {
+		checkTimeout
 		val resAndObj = getResourceAndEObject(element)
 		resAndObj.key.errors.add(new EObjectDiagnosticImpl(Severity::ERROR, 'user.issue', message, resAndObj.value, getSignificantFeature(resAndObj.value), -1, null))
 	}
 	
 	override addInfo(Element element, String message) {
+		checkTimeout
 //		val resAndObj = getResourceAndEObject(element)
 //		resAndObj.key.errors.add(new EObjectDiagnosticImpl(Severity::INFO, 'user.issue', message, resAndObj.value, getSignificantFeature(resAndObj.value), -1, null))
 	}
 	
 	override addWarning(Element element, String message) {
+		checkTimeout
 		val resAndObj = getResourceAndEObject(element)
 		resAndObj.key.warnings.add(new EObjectDiagnosticImpl(Severity::WARNING, 'user.issue', message, resAndObj.value, getSignificantFeature(resAndObj.value), -1, null))
 	}
 	
 	override getProblems(Element element) {
+		checkTimeout
 		val resAndObj = getResourceAndEObject(element)
 		val resource = resAndObj.key
 		val issues = (resource.errors + resource.warnings).filter(typeof(EObjectDiagnosticImpl))
@@ -446,6 +468,7 @@ class CompilationUnitImpl implements CompilationUnit, TypeReferenceProvider, Pro
 	}
 	
 	def private getResourceAndEObject(Element element) {
+		checkTimeout
 		switch element {
 			XtendNamedElementImpl<? extends EObject>: {
 				val resource = element.delegate.eResource
