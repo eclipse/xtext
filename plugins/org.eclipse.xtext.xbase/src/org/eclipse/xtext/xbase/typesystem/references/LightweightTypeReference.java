@@ -175,6 +175,10 @@ public abstract class LightweightTypeReference {
 		return false;
 	}
 	
+	public boolean isUnknown() {
+		return false;
+	}
+	
 	/**
 	 * Returns the list representation of this reference if it represents an array or is
 	 * already a subtype of {@link List}.

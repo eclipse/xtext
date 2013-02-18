@@ -758,7 +758,7 @@ public abstract class AbstractAssignabilityTest extends AbstractTestingTypeRefer
   public void testDemandConvertedFunctionType_04() {
     this.isNotAssignableFrom("$Function<String, CharSequence>", "()=>CharSequence");
     this.isNotAssignableFrom("Iterable<CharSequence>", "(CharSequence)=>String");
-    this.isNotAssignableFrom("Comparator<CharSequence>", "(String)=>String");
+    this.isNotAssignableFrom("java.util.Comparator<CharSequence>", "(String)=>String");
   }
   
   @Test

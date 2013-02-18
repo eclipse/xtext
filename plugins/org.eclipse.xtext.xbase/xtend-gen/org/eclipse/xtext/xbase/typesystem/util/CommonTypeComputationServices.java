@@ -12,6 +12,7 @@ import com.google.inject.Singleton;
 import org.eclipse.xtext.common.types.TypesFactory;
 import org.eclipse.xtext.common.types.util.Primitives;
 import org.eclipse.xtext.common.types.util.TypeReferences;
+import org.eclipse.xtext.xbase.jvmmodel.IJvmModelAssociations;
 import org.eclipse.xtext.xbase.typesystem.computation.SynonymTypesProvider;
 import org.eclipse.xtext.xbase.typesystem.conformance.IRawTypeHelper;
 import org.eclipse.xtext.xbase.typesystem.conformance.TypeConformanceComputer;
@@ -113,6 +114,17 @@ public class CommonTypeComputationServices {
   
   public void setSynonymTypesProvider(final SynonymTypesProvider synonymTypesProvider) {
     this._synonymTypesProvider = synonymTypesProvider;
+  }
+  
+  @Inject
+  private IJvmModelAssociations _jvmModelAssociations;
+  
+  public IJvmModelAssociations getJvmModelAssociations() {
+    return this._jvmModelAssociations;
+  }
+  
+  public void setJvmModelAssociations(final IJvmModelAssociations jvmModelAssociations) {
+    this._jvmModelAssociations = jvmModelAssociations;
   }
   
   @Inject(optional = true)

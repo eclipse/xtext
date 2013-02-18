@@ -25,6 +25,10 @@ public abstract class TypeReferenceVisitor {
 		doVisitTypeReference(reference);
 	}
 	
+	protected void doVisitUnknownTypeReference(UnknownTypeReference reference) {
+		doVisitTypeReference(reference);
+	}
+	
 	protected void doVisitCompoundTypeReference(CompoundTypeReference reference) {
 		List<LightweightTypeReference> components = reference.getMultiTypeComponents();
 		if (components.isEmpty())

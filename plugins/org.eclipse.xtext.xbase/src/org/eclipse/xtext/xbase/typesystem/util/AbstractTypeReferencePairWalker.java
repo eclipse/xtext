@@ -27,6 +27,7 @@ import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.ParameterizedTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.TypeReferenceVisitorWithParameter;
 import org.eclipse.xtext.xbase.typesystem.references.UnboundTypeReference;
+import org.eclipse.xtext.xbase.typesystem.references.UnknownTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.WildcardTypeReference;
 
 import com.google.common.collect.Sets;
@@ -60,6 +61,11 @@ public abstract class AbstractTypeReferencePairWalker extends TypeReferenceVisit
 		
 		@Override
 		protected void doVisitAnyTypeReference(AnyTypeReference reference, ArrayTypeReference param) {
+			// nothing to do
+		}
+		
+		@Override
+		protected void doVisitUnknownTypeReference(UnknownTypeReference reference, ArrayTypeReference param) {
 			// nothing to do
 		}
 		
@@ -185,6 +191,11 @@ public abstract class AbstractTypeReferencePairWalker extends TypeReferenceVisit
 
 		@Override
 		protected void doVisitAnyTypeReference(AnyTypeReference reference, ParameterizedTypeReference param) {
+			// nothing to do
+		}
+		
+		@Override
+		protected void doVisitUnknownTypeReference(UnknownTypeReference reference, ParameterizedTypeReference param) {
 			// nothing to do
 		}
 
@@ -348,6 +359,11 @@ public abstract class AbstractTypeReferencePairWalker extends TypeReferenceVisit
 	
 	@Override
 	protected void doVisitAnyTypeReference(AnyTypeReference reference, LightweightTypeReference param) {
+		// nothing to do
+	}
+	
+	@Override
+	protected void doVisitUnknownTypeReference(UnknownTypeReference reference, LightweightTypeReference param) {
 		// nothing to do
 	}
 

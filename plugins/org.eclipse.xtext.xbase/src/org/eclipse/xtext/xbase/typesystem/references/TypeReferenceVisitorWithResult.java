@@ -27,6 +27,11 @@ public abstract class TypeReferenceVisitorWithResult<Result> {
 	}
 	
 	@Nullable
+	protected Result doVisitUnknownTypeReference(UnknownTypeReference reference) {
+		return doVisitTypeReference(reference);
+	}
+	
+	@Nullable
 	protected Result doVisitCompoundTypeReference(CompoundTypeReference reference) {
 		return doVisitTypeReference(reference);
 	}
