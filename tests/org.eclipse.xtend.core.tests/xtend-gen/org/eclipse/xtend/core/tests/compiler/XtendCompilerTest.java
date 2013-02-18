@@ -34,6 +34,71 @@ public class XtendCompilerTest extends AbstractXtendTestCase {
   private IGeneratorConfigProvider generatorConfigProvider;
   
   @Test
+  public void testBug400823_01() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("package test.plugin");
+    _builder.newLine();
+    _builder.append("import static extension test.plugin.Foo.*");
+    _builder.newLine();
+    _builder.append("class Foo {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def foo() {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("this - this");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def static operator_minus(Foo x, Foo y) {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("1");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("package test.plugin;");
+    _builder_1.newLine();
+    _builder_1.newLine();
+    _builder_1.append("@SuppressWarnings(\"all\")");
+    _builder_1.newLine();
+    _builder_1.append("public class Foo {");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("public int foo() {");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("int _minus = Foo.operator_minus(this, this);");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("return _minus;");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("public static int operator_minus(final Foo x, final Foo y) {");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("return 1;");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    this.assertCompilesTo(_builder, _builder_1);
+  }
+  
+  @Test
   public void testBug380058_01() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("import bug380058.Amount");
