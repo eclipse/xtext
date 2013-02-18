@@ -240,6 +240,7 @@ public class RewritableImportSection {
 	}
 
 	public List<ReplaceRegion> rewrite() {
+		removeObsoleteStaticImports();
 		final List<ReplaceRegion> replaceRegions = newArrayList();
 		if(isSort) {
 			List<XImportDeclaration> allImportDeclarations = newArrayList();
@@ -267,6 +268,13 @@ public class RewritableImportSection {
 			});
 		}
 		return replaceRegions;
+	}
+
+	private void removeObsoleteStaticImports() {
+		for(JvmDeclaredType staticExtensionImport: staticExtensionImports) {
+			if(staticImports.contains(staticExtensionImport)) 
+				removeStaticImport(staticExtensionImport);
+		}
 	}
 
 	protected void addSectionToAppend(IAcceptor<ReplaceRegion> acceptor) {
