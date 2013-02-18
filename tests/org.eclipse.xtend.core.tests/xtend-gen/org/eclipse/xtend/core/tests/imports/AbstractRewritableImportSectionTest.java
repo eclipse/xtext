@@ -78,8 +78,6 @@ public abstract class AbstractRewritableImportSectionTest extends AbstractXtendT
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("import static extension java.util.Set.*");
     _builder.newLine();
-    _builder.append("import static java.util.Set.*");
-    _builder.newLine();
     _builder.append("import java.util.Set");
     _builder.newLine();
     this.assertEquals(section, _builder);
