@@ -120,6 +120,7 @@ public abstract class AbstractPendingLinkingCandidate<Expression extends XExpres
 	}
 	
 	protected boolean isDefiniteEarlyExit(XExpression expression) {
+		// TODO this needs some serious refinement
 		return expression instanceof XReturnExpression || expression instanceof XThrowExpression;
 	}
 	
