@@ -216,9 +216,13 @@ class FormattableDocument {
 		
 		// calculate length between \n or NewLineData and offset
 		var lengthDiff = 0
-		for(f:formattings.subMap(lastWrap.offset + 1, offset).values) 
-			if(f instanceof WhitespaceData)
-				lengthDiff = lengthDiff + (((f as WhitespaceData).space?.length ?: 0) - f.length)
+		for(f:formattings.subMap(lastWrap.offset + 1, offset).values) {
+			if(f instanceof WhitespaceData) {
+				val space = (f as WhitespaceData).space
+				val length = if (space == null) 0 else space.length
+				lengthDiff = lengthDiff + length - f.length
+			}
+		}
 		(offset - lineStart) + getIndentationLenght(currentIndentation) + lengthDiff  
 	}
 	

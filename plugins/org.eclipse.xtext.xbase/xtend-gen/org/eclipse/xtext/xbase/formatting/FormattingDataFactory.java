@@ -416,17 +416,27 @@ public class FormattingDataFactory {
             final ArrayList<FormattingData> result = CollectionLiterals.<FormattingData>newArrayList();
             boolean _notEquals = ObjectExtensions.operator_notEquals(node, null);
             if (_notEquals) {
+              Iterable<FormattingData> _elvis = null;
               HiddenLeafs _hiddenLeafsBefore = FormattingDataFactory.this._hiddenLeafAccess.getHiddenLeafsBefore(node);
               Function1<? super FormattableDocument,? extends Iterable<FormattingData>> _newFormattingData = FormattingDataFactory.this.newFormattingData(_hiddenLeafsBefore, init);
               Iterable<FormattingData> _apply = _newFormattingData==null?(Iterable<FormattingData>)null:_newFormattingData.apply(doc);
-              List<FormattingData> _emptyList = CollectionLiterals.<FormattingData>emptyList();
-              Iterable<FormattingData> _elvis = ObjectExtensions.<Iterable<FormattingData>>operator_elvis(_apply, _emptyList);
+              if (_apply != null) {
+                _elvis = _apply;
+              } else {
+                List<FormattingData> _emptyList = CollectionLiterals.<FormattingData>emptyList();
+                _elvis = ObjectExtensions.<Iterable<FormattingData>>operator_elvis(_apply, _emptyList);
+              }
               Iterables.<FormattingData>addAll(result, _elvis);
+              Iterable<FormattingData> _elvis_1 = null;
               HiddenLeafs _hiddenLeafsAfter = FormattingDataFactory.this._hiddenLeafAccess.getHiddenLeafsAfter(node);
               Function1<? super FormattableDocument,? extends Iterable<FormattingData>> _newFormattingData_1 = FormattingDataFactory.this.newFormattingData(_hiddenLeafsAfter, init);
               Iterable<FormattingData> _apply_1 = _newFormattingData_1==null?(Iterable<FormattingData>)null:_newFormattingData_1.apply(doc);
-              List<FormattingData> _emptyList_1 = CollectionLiterals.<FormattingData>emptyList();
-              Iterable<FormattingData> _elvis_1 = ObjectExtensions.<Iterable<FormattingData>>operator_elvis(_apply_1, _emptyList_1);
+              if (_apply_1 != null) {
+                _elvis_1 = _apply_1;
+              } else {
+                List<FormattingData> _emptyList_1 = CollectionLiterals.<FormattingData>emptyList();
+                _elvis_1 = ObjectExtensions.<Iterable<FormattingData>>operator_elvis(_apply_1, _emptyList_1);
+              }
               Iterables.<FormattingData>addAll(result, _elvis_1);
             }
             _xblockexpression = (result);
@@ -445,17 +455,27 @@ public class FormattingDataFactory {
             final ArrayList<FormattingData> result = CollectionLiterals.<FormattingData>newArrayList();
             boolean _notEquals = ObjectExtensions.operator_notEquals(node, null);
             if (_notEquals) {
+              Iterable<FormattingData> _elvis = null;
               HiddenLeafs _hiddenLeafsBefore = FormattingDataFactory.this._hiddenLeafAccess.getHiddenLeafsBefore(node);
               Function1<? super FormattableDocument,? extends Iterable<FormattingData>> _newFormattingData = FormattingDataFactory.this.newFormattingData(_hiddenLeafsBefore, before);
               Iterable<FormattingData> _apply = _newFormattingData==null?(Iterable<FormattingData>)null:_newFormattingData.apply(doc);
-              List<FormattingData> _emptyList = CollectionLiterals.<FormattingData>emptyList();
-              Iterable<FormattingData> _elvis = ObjectExtensions.<Iterable<FormattingData>>operator_elvis(_apply, _emptyList);
+              if (_apply != null) {
+                _elvis = _apply;
+              } else {
+                List<FormattingData> _emptyList = CollectionLiterals.<FormattingData>emptyList();
+                _elvis = ObjectExtensions.<Iterable<FormattingData>>operator_elvis(_apply, _emptyList);
+              }
               Iterables.<FormattingData>addAll(result, _elvis);
+              Iterable<FormattingData> _elvis_1 = null;
               HiddenLeafs _hiddenLeafsAfter = FormattingDataFactory.this._hiddenLeafAccess.getHiddenLeafsAfter(node);
               Function1<? super FormattableDocument,? extends Iterable<FormattingData>> _newFormattingData_1 = FormattingDataFactory.this.newFormattingData(_hiddenLeafsAfter, after);
               Iterable<FormattingData> _apply_1 = _newFormattingData_1==null?(Iterable<FormattingData>)null:_newFormattingData_1.apply(doc);
-              List<FormattingData> _emptyList_1 = CollectionLiterals.<FormattingData>emptyList();
-              Iterable<FormattingData> _elvis_1 = ObjectExtensions.<Iterable<FormattingData>>operator_elvis(_apply_1, _emptyList_1);
+              if (_apply_1 != null) {
+                _elvis_1 = _apply_1;
+              } else {
+                List<FormattingData> _emptyList_1 = CollectionLiterals.<FormattingData>emptyList();
+                _elvis_1 = ObjectExtensions.<Iterable<FormattingData>>operator_elvis(_apply_1, _emptyList_1);
+              }
               Iterables.<FormattingData>addAll(result, _elvis_1);
             }
             _xblockexpression = (result);

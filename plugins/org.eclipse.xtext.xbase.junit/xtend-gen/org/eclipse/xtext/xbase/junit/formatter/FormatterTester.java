@@ -267,11 +267,16 @@ public class FormatterTester {
       final Set<Integer> offsets = IterableExtensions.<Integer>toSet(_map);
       final ArrayList<TextReplacement> result = CollectionLiterals.<TextReplacement>newArrayList();
       int lastOffset = 0;
+      Iterable<? extends ILeafNode> _elvis = null;
       IParseResult _parseResult = res.getParseResult();
       ICompositeNode _rootNode = _parseResult==null?(ICompositeNode)null:_parseResult.getRootNode();
       Iterable<ILeafNode> _leafNodes = _rootNode==null?(Iterable<ILeafNode>)null:_rootNode.getLeafNodes();
-      List<ILeafNode> _emptyList = CollectionLiterals.<ILeafNode>emptyList();
-      Iterable<? extends ILeafNode> _elvis = ObjectExtensions.<Iterable<? extends ILeafNode>>operator_elvis(_leafNodes, _emptyList);
+      if (_leafNodes != null) {
+        _elvis = _leafNodes;
+      } else {
+        List<ILeafNode> _emptyList = CollectionLiterals.<ILeafNode>emptyList();
+        _elvis = ObjectExtensions.<Iterable<? extends ILeafNode>>operator_elvis(_leafNodes, _emptyList);
+      }
       for (final ILeafNode leaf : _elvis) {
         boolean _or = false;
         boolean _isHidden = leaf.isHidden();

@@ -92,9 +92,15 @@ public class XbaseFormatter2 extends AbstractFormatter {
       };
     Function1<? super FormattableDocument,? extends Iterable<FormattingData>> _append = this._formattingDataFactory.append(_nodeForKeyword, _function);
     document.operator_add(_append);
+    ILeafNode _elvis = null;
     ILeafNode _nodeForKeyword_1 = this._nodeModelAccess.nodeForKeyword(literal, "[");
-    ILeafNode _nodeForKeyword_2 = this._nodeModelAccess.nodeForKeyword(literal, "{");
-    ILeafNode node = ObjectExtensions.<ILeafNode>operator_elvis(_nodeForKeyword_1, _nodeForKeyword_2);
+    if (_nodeForKeyword_1 != null) {
+      _elvis = _nodeForKeyword_1;
+    } else {
+      ILeafNode _nodeForKeyword_2 = this._nodeModelAccess.nodeForKeyword(literal, "{");
+      _elvis = ObjectExtensions.<ILeafNode>operator_elvis(_nodeForKeyword_1, _nodeForKeyword_2);
+    }
+    ILeafNode node = _elvis;
     EList<XExpression> _elements = literal.getElements();
     for (final XExpression value : _elements) {
       {
@@ -125,10 +131,15 @@ public class XbaseFormatter2 extends AbstractFormatter {
         document.operator_add(_prepend);
       }
     }
+    ILeafNode _elvis_1 = null;
     ILeafNode _nodeForKeyword_3 = this._nodeModelAccess.nodeForKeyword(literal, "]");
-    ILeafNode _nodeForKeyword_4 = this._nodeModelAccess.nodeForKeyword(literal, "}");
-    ILeafNode _elvis = ObjectExtensions.<ILeafNode>operator_elvis(_nodeForKeyword_3, _nodeForKeyword_4);
-    node = _elvis;
+    if (_nodeForKeyword_3 != null) {
+      _elvis_1 = _nodeForKeyword_3;
+    } else {
+      ILeafNode _nodeForKeyword_4 = this._nodeModelAccess.nodeForKeyword(literal, "}");
+      _elvis_1 = ObjectExtensions.<ILeafNode>operator_elvis(_nodeForKeyword_3, _nodeForKeyword_4);
+    }
+    node = _elvis_1;
     final Procedure1<FormattingDataInit> _function_1 = new Procedure1<FormattingDataInit>() {
         public void apply(final FormattingDataInit it) {
           it.noSpace();
@@ -2815,7 +2826,12 @@ public class XbaseFormatter2 extends AbstractFormatter {
         XExpression _last = IterableExtensions.<XExpression>last(children);
         boolean _notEquals_1 = ObjectExtensions.operator_notEquals(c, _last);
         if (_notEquals_1) {
-          INode _elvis = ObjectExtensions.<INode>operator_elvis(semicolon, node);
+          INode _elvis = null;
+          if (semicolon != null) {
+            _elvis = semicolon;
+          } else {
+            _elvis = ObjectExtensions.<INode>operator_elvis(semicolon, node);
+          }
           final Procedure1<FormattingDataInit> _function_5 = new Procedure1<FormattingDataInit>() {
               public void apply(final FormattingDataInit it) {
                 it.newLine();

@@ -595,13 +595,20 @@ public class FormattableDocument {
       Collection<FormattingData> _values_2 = _subMap_1.values();
       for (final FormattingData f_2 : _values_2) {
         if ((f_2 instanceof WhitespaceData)) {
-          String _space = ((WhitespaceData) f_2).getSpace();
-          int _length_1 = _space==null?0:_space.length();
-          Integer _elvis = ObjectExtensions.<Integer>operator_elvis(Integer.valueOf(_length_1), Integer.valueOf(0));
+          final String space = ((WhitespaceData) f_2).getSpace();
+          int _xifexpression = (int) 0;
+          boolean _equals = ObjectExtensions.operator_equals(space, null);
+          if (_equals) {
+            _xifexpression = 0;
+          } else {
+            int _length_1 = space.length();
+            _xifexpression = _length_1;
+          }
+          final int length = _xifexpression;
+          int _plus_3 = (lengthDiff + length);
           int _length_2 = f_2.getLength();
-          int _minus = ((_elvis).intValue() - _length_2);
-          int _plus_3 = (lengthDiff + _minus);
-          lengthDiff = _plus_3;
+          int _minus = (_plus_3 - _length_2);
+          lengthDiff = _minus;
         }
       }
       int _minus_1 = (offset - lineStart);
