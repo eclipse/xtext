@@ -11,6 +11,7 @@ import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Set;
 
 import org.apache.log4j.Logger;
 import org.eclipse.core.resources.IContainer;
@@ -36,6 +37,8 @@ import org.eclipse.xtext.generator.trace.TraceAsSmapInstaller;
 import org.eclipse.xtext.resource.IResourceServiceProvider;
 import org.eclipse.xtext.ui.XtextProjectHelper;
 import org.eclipse.xtext.ui.util.ResourceUtil;
+import org.eclipse.xtext.util.internal.Stopwatches;
+import org.eclipse.xtext.util.internal.Stopwatches.StoppedTask;
 
 import com.google.common.collect.Lists;
 import com.google.common.io.ByteStreams;
@@ -70,11 +73,17 @@ public class DebugSourceInstallingCompilationParticipant extends CompilationPart
 			return null;
 		EclipseOutputConfigurationProvider cfgProvider = serviceProvider.get(EclipseOutputConfigurationProvider.class);
 		IProject project = generatedJavaFile.getProject();
-		for (OutputConfiguration out : cfgProvider.getOutputConfigurations(project)) {
-			IContainer container = ResourceUtil.getContainer(project, out.getOutputDirectory());
-			if (container != null && container.getFullPath().isPrefixOf(generatedJavaFile.getFullPath()))
-				return out;
+		Set<OutputConfiguration> configurations = cfgProvider.getOutputConfigurations(project);
+		if (!configurations.isEmpty()) {
+			if (configurations.size() == 1)
+				return configurations.iterator().next();
+			for (OutputConfiguration out : configurations) {
+				IContainer container = ResourceUtil.getContainer(project, out.getOutputDirectory());
+				if (container != null && container.getFullPath().isPrefixOf(generatedJavaFile.getFullPath()))
+					return out;
+			}
 		}
+		log.error("Could not find output configuration for file " + generatedJavaFile.getFullPath());
 		return null;
 	}
 
@@ -91,7 +100,9 @@ public class DebugSourceInstallingCompilationParticipant extends CompilationPart
 
 	@Override
 	public void buildFinished(IJavaProject project) {
+		StoppedTask task = Stopwatches.forTask("DebugSourceInstallingCompilationParticipant.install");
 		try {
+			task.start();
 			super.buildFinished(project);
 			if (files == null)
 				return;
@@ -132,6 +143,7 @@ public class DebugSourceInstallingCompilationParticipant extends CompilationPart
 			}
 		} finally {
 			files = null;
+			task.stop();
 		}
 	}
 
