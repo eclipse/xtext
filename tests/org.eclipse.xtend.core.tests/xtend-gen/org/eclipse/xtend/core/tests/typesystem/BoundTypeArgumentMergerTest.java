@@ -75,8 +75,13 @@ public class BoundTypeArgumentMergerTest extends AbstractTestingTypeReferenceOwn
             final Triple<String,VarianceInfo,VarianceInfo> input = mergeUs[(i).intValue()];
             JvmTypeReference _parameterType = p.getParameterType();
             LightweightTypeReference _lightweightReference = BoundTypeArgumentMergerTest.this.toLightweightReference(_parameterType);
-            Object _object = new Object();
-            Object _elvis = ObjectExtensions.<Object>operator_elvis(source, _object);
+            Object _elvis = null;
+            if (source != null) {
+              _elvis = source;
+            } else {
+              Object _object = new Object();
+              _elvis = ObjectExtensions.<Object>operator_elvis(source, _object);
+            }
             VarianceInfo _second = input.getSecond();
             VarianceInfo _third = input.getThird();
             LightweightBoundTypeArgument _lightweightBoundTypeArgument = new LightweightBoundTypeArgument(_lightweightReference, null, _elvis, _second, _third);

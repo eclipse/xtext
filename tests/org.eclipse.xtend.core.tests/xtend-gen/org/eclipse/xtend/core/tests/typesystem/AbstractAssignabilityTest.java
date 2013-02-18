@@ -167,11 +167,16 @@ public abstract class AbstractAssignabilityTest extends AbstractTestingTypeRefer
   }
   
   protected String fixup(final String type) {
+    String _elvis = null;
     String _replace = type==null?(String)null:type.replace("$Procedure", "org.eclipse.xtext.xbase.lib.Procedures$Procedure");
     String _replace_1 = _replace==null?(String)null:_replace.replace("$Function<", "com.google.common.base.Function<");
     String _replace_2 = _replace_1==null?(String)null:_replace_1.replace("$Predicate<", "com.google.common.base.Predicate<");
     String _replace_3 = _replace_2==null?(String)null:_replace_2.replace("$Function", "org.eclipse.xtext.xbase.lib.Functions$Function");
-    String _elvis = ObjectExtensions.<String>operator_elvis(_replace_3, "Object");
+    if (_replace_3 != null) {
+      _elvis = _replace_3;
+    } else {
+      _elvis = ObjectExtensions.<String>operator_elvis(_replace_3, "Object");
+    }
     return _elvis;
   }
   
