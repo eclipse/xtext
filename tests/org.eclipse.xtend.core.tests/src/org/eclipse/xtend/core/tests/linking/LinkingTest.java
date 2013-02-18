@@ -88,6 +88,24 @@ public class LinkingTest extends AbstractXtendTestCase {
 	@Inject
 	private ITypeProvider typeProvider;
 	
+	@Test public void testBug400807() throws Exception {
+		XtendFile file = file(
+				"package testPackage\n" +
+				"import bug400807.Bug400807\n" +
+				"class C {\n" +
+				"	def Bug400807 m() {\n" +
+				"		[ string ]\n" +
+				"	}\n" + 
+				"}\n"); 
+		XtendClass c = (XtendClass) file.getXtendTypes().get(0);
+		XtendFunction m = (XtendFunction) c.getMembers().get(0);
+		XBlockExpression body = (XBlockExpression) m.getExpression();
+		XClosure lambda = (XClosure) body.getExpressions().get(0);
+		XBlockExpression innerBody = (XBlockExpression) lambda.getExpression();
+		XAbstractFeatureCall string = (XAbstractFeatureCall) innerBody.getExpressions().get(0);
+		assertEquals("bug400807.Bug400807Param.getString()", string.getFeature().getIdentifier());
+	}
+	
 	@Test public void testOverloadedMethod_01() throws Exception {
 		XtendFile file = file(
 				"package testPackage\n" +
