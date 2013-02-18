@@ -8,6 +8,8 @@
 package org.eclipse.xtext.xbase.typesystem.conformance;
 
 import org.eclipse.jdt.annotation.NonNullByDefault;
+import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.xtext.xbase.typesystem.conformance.TypeConformanceComputationArgument.Internal;
 import org.eclipse.xtext.xbase.typesystem.references.AnyTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.ArrayTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.CompoundTypeReference;
@@ -15,6 +17,7 @@ import org.eclipse.xtext.xbase.typesystem.references.FunctionTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.ParameterizedTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.UnboundTypeReference;
+import org.eclipse.xtext.xbase.typesystem.references.UnknownTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.WildcardTypeReference;
 
 // TODO would we benefit from injection?
@@ -32,7 +35,8 @@ public class TypeConformanceStrategySelector extends AbstractConformanceVisitor<
 	private final TypeConformanceStrategy<CompoundTypeReference> synonymTypeDispatcher;
 	private final TypeConformanceStrategy<ParameterizedTypeReference> parameterizedTypeDispatcher;
 	private final TypeConformanceStrategy<FunctionTypeReference> functionTypeDispatcher;
-	private final TypeConformanceStrategy<UnboundTypeReference> unknownTypeDispatcher;
+	private final TypeConformanceStrategy<UnboundTypeReference> unboundTypeDispatcher;
+	private final TypeConformanceStrategy<UnknownTypeReference> unknownTypeDispatcher;
 	private final TypeConformanceStrategy<WildcardTypeReference> wildcardTypeDispatcher;
 
 	public TypeConformanceStrategySelector(TypeConformanceComputer conformanceComputer) {
@@ -44,7 +48,8 @@ public class TypeConformanceStrategySelector extends AbstractConformanceVisitor<
 		multiTypeDispatcher = createMultiTypeDispatcher();
 		synonymTypeDispatcher = createSynonymTypeDispatcher();
 		parameterizedTypeDispatcher = createParameterizedTypeDispatcher();
-		unknownTypeDispatcher = createUnboundTypeDispatcher();
+		unboundTypeDispatcher = createUnboundTypeDispatcher();
+		unknownTypeDispatcher = createUnknownTypeDispatcher();
 		wildcardTypeDispatcher = createWildcardTypeDispatcher();
 	}
 
@@ -56,6 +61,11 @@ public class TypeConformanceStrategySelector extends AbstractConformanceVisitor<
 	protected TypeConformanceResult doVisitAnyTypeReference(AnyTypeReference reference,
 			TypeConformanceComputationArgument.Internal<LightweightTypeReference> param) {
 		return param.reference.accept(anyTypeDispatcher, copyArgument(reference, param));
+	}
+	
+	@Override
+	protected TypeConformanceResult doVisitUnknownTypeReference(UnknownTypeReference reference, Internal<LightweightTypeReference> param) {
+		return param.reference.accept(unknownTypeDispatcher, copyArgument(reference, param));
 	}
 
 	@Override
@@ -91,7 +101,7 @@ public class TypeConformanceStrategySelector extends AbstractConformanceVisitor<
 	@Override
 	protected TypeConformanceResult doVisitUnboundTypeReference(UnboundTypeReference reference,
 			TypeConformanceComputationArgument.Internal<LightweightTypeReference> param) {
-		return param.reference.accept(unknownTypeDispatcher, copyArgument(reference, param));
+		return param.reference.accept(unboundTypeDispatcher, copyArgument(reference, param));
 	}
 
 	@Override
@@ -126,6 +136,10 @@ public class TypeConformanceStrategySelector extends AbstractConformanceVisitor<
 
 	protected TypeConformanceStrategy<UnboundTypeReference> createUnboundTypeDispatcher() {
 		return new UnboundConformanceStrategy(conformanceComputer);
+	}
+	
+	protected TypeConformanceStrategy<UnknownTypeReference> createUnknownTypeDispatcher() {
+		return new UnknownTypeConformanceStrategy(conformanceComputer);
 	}
 
 	protected TypeConformanceStrategy<WildcardTypeReference> createWildcardTypeDispatcher() {

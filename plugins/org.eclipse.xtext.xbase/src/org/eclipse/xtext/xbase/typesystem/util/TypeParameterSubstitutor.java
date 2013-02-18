@@ -22,6 +22,7 @@ import org.eclipse.xtext.xbase.typesystem.references.LightweightMergedBoundTypeA
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.ParameterizedTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.TypeReferenceVisitorWithParameterAndNonNullResult;
+import org.eclipse.xtext.xbase.typesystem.references.UnknownTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.WildcardTypeReference;
 
 import com.google.common.collect.Maps;
@@ -148,6 +149,11 @@ public abstract class TypeParameterSubstitutor<Visiting> extends TypeReferenceVi
 	
 	@Override
 	protected LightweightTypeReference doVisitAnyTypeReference(AnyTypeReference reference, Visiting visiting) {
+		return reference;
+	}
+	
+	@Override
+	protected LightweightTypeReference doVisitUnknownTypeReference(UnknownTypeReference reference, Visiting param) {
 		return reference;
 	}
 	

@@ -8,7 +8,11 @@
 package org.eclipse.xtext.xbase.typesystem.references;
 
 import java.lang.reflect.WildcardType;
+import java.util.List;
+import java.util.Set;
 
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.jdt.core.dom.TypeParameter;
 import org.eclipse.xtext.common.types.JvmAnyTypeReference;
 import org.eclipse.xtext.common.types.JvmArrayType;
 import org.eclipse.xtext.common.types.JvmComponentType;
@@ -23,6 +27,9 @@ import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.JvmUnknownTypeReference;
 import org.eclipse.xtext.common.types.JvmUpperBound;
 import org.eclipse.xtext.common.types.JvmWildcardTypeReference;
+import org.eclipse.xtext.common.types.TypesPackage;
+import org.eclipse.xtext.nodemodel.INode;
+import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 import org.eclipse.xtext.xbase.typing.IJvmTypeReferenceProvider;
 import org.eclipse.xtext.xtype.XComputedTypeReference;
 import org.eclipse.xtext.xtype.XFunctionTypeRef;
@@ -30,6 +37,7 @@ import org.eclipse.xtext.xtype.util.AbstractXtypeReferenceVisitor;
 
 import com.google.common.base.Function;
 import com.google.common.base.Preconditions;
+import com.google.common.collect.Iterables;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -131,7 +139,30 @@ public class OwnedConverter extends AbstractXtypeReferenceVisitor<LightweightTyp
 	public LightweightTypeReference doVisitParameterizedTypeReference(JvmParameterizedTypeReference reference) {
 		JvmType type = reference.getType();
 		if (type == null || type.eIsProxy()) {
-			return new AnyTypeReference(owner);
+			List<INode> nodes = NodeModelUtils.findNodesForFeature(reference, TypesPackage.Literals.JVM_PARAMETERIZED_TYPE_REFERENCE__TYPE);
+			if (nodes.isEmpty()) {
+				Set<EObject> sourceElements = owner.getServices().getJvmModelAssociations().getSourceElements(reference);
+				EObject firstSource = Iterables.getFirst(sourceElements, null);
+				if (firstSource instanceof JvmParameterizedTypeReference) {
+					nodes = NodeModelUtils.findNodesForFeature(firstSource, TypesPackage.Literals.JVM_PARAMETERIZED_TYPE_REFERENCE__TYPE);
+				}
+			}
+			if (nodes.size() == 1) {
+				String name = nodes.get(0).getText();
+				if (name != null) {
+					int lastDot = name.lastIndexOf('.');
+					int lastDollar = name.lastIndexOf('$');
+					int lastDotOrDollar = Math.max(lastDot, lastDollar);
+					if (lastDotOrDollar != -1 && lastDotOrDollar != name.length() - 1) {
+						String shortName = name.substring(lastDotOrDollar + 1);
+						if (shortName.length() != 0) {
+							name = shortName;
+						}
+					}
+					return new UnknownTypeReference(owner, name);
+				}
+			}
+			return new UnknownTypeReference(owner);
 		}
 		ParameterizedTypeReference result = new ParameterizedTypeReference(owner, type);
 		for(JvmTypeReference argument: reference.getArguments()) {
@@ -196,7 +227,12 @@ public class OwnedConverter extends AbstractXtypeReferenceVisitor<LightweightTyp
 	
 	@Override
 	public LightweightTypeReference doVisitUnknownTypeReference(JvmUnknownTypeReference reference) {
-		return getObjectReference();
+		return new UnknownTypeReference(getOwner());
+	}
+	
+	@Override
+	protected LightweightTypeReference handleNullReference() {
+		return new UnknownTypeReference(getOwner());
 	}
 
 	protected ParameterizedTypeReference getObjectReference() {

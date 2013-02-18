@@ -18,6 +18,7 @@ import org.eclipse.xtext.xbase.typesystem.references.FunctionTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.ParameterizedTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.UnboundTypeReference;
+import org.eclipse.xtext.xbase.typesystem.references.UnknownTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.WildcardTypeReference;
 
 /**
@@ -43,6 +44,15 @@ public abstract class TypeConformanceStrategy<T extends LightweightTypeReference
 	
 	protected TypeConformanceResult doVisitAnyTypeReference(T left, AnyTypeReference right, TypeConformanceComputationArgument.Internal<T> param) {
 		return doVisitTypeReference(left, right, param);
+	}
+	
+	@Override
+	protected final TypeConformanceResult doVisitUnknownTypeReference(UnknownTypeReference right, TypeConformanceComputationArgument.Internal<T> param) {
+		return doVisitUnknownTypeReference(getLeft(param), right, param);
+	}
+	
+	protected TypeConformanceResult doVisitUnknownTypeReference(T left, UnknownTypeReference right, TypeConformanceComputationArgument.Internal<T> param) {
+		return TypeConformanceResult.create(param, ConformanceHint.SUCCESS);
 	}
 	
 	@Override

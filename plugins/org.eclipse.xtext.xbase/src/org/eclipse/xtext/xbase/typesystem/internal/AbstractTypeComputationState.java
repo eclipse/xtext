@@ -360,6 +360,10 @@ public abstract class AbstractTypeComputationState implements ITypeComputationSt
 		ExpressionAwareStackedResolvedTypes resolvedTypes = this.resolvedTypes.pushTypes(featureCall);
 		ExpressionTypeComputationState state = createExpressionComputationState(featureCall, resolvedTypes);
 		if (description instanceof ScopeProviderAccess.ErrorDescription) {
+			boolean followUpError = ((ScopeProviderAccess.ErrorDescription) description).isFollowUpError();
+			if (followUpError) {
+				return new FollowUpError(featureCall, state);
+			}
 			return new UnresolvableFeatureCall(featureCall, ((ScopeProviderAccess.ErrorDescription) description).getNode(), description.getName().toString(), state);
 		} else {
 			return new FeatureLinkingCandidate(featureCall, description, state);

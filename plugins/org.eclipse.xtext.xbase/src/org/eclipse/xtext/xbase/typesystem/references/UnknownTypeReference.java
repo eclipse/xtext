@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2012 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2013 itemis AG (http://www.itemis.eu) and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -14,17 +14,62 @@ import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeReference;
+import org.eclipse.xtext.util.Strings;
 import org.eclipse.xtext.xbase.typesystem.conformance.SuperTypeAcceptor;
 import org.eclipse.xtext.xbase.typesystem.util.TypeParameterSubstitutor;
 
 /**
+ * Represents a JvmType that could not be resolved, e.g. a proxy or null.
+ * 
+ * Generally speaking, unknown type references define features on demand,
+ * thus they do not produce conformance problems or follow up linking errors.
+ * 
  * @author Sebastian Zarnekow - Initial contribution and API
  */
 @NonNullByDefault
-public class AnyTypeReference extends LightweightTypeReference {
+public class UnknownTypeReference extends LightweightTypeReference {
 
-	public AnyTypeReference(ITypeReferenceOwner owner) {
+	private String name;
+
+	public UnknownTypeReference(ITypeReferenceOwner owner, @Nullable String name) {
 		super(owner);
+		this.name = Strings.isEmpty(name) ? "[Unknown]" : name;
+	}
+	
+	public UnknownTypeReference(ITypeReferenceOwner owner) {
+		this(owner, null);
+	}
+	
+	@Override
+	public boolean isUnknown() {
+		return true;
+	}
+
+	@Override
+	public JvmTypeReference toTypeReference() {
+		return getTypesFactory().createJvmUnknownTypeReference();
+	}
+
+	@Override
+	public JvmTypeReference toJavaCompliantTypeReference() {
+		return getOwner().getServices().getTypeReferences().getTypeForName(Object.class, getOwner().getContextResourceSet());
+	}
+
+	@Override
+	@Nullable
+	public JvmType getType() {
+		return null;
+	}
+	
+	@Override
+	public LightweightTypeReference toJavaType() {
+		JvmType objectType = getServices().getTypeReferences().findDeclaredType(Object.class, getOwner().getContextResourceSet());
+		return new ParameterizedTypeReference(getOwner(), objectType);
+	}
+
+	@Override
+	protected List<LightweightTypeReference> getSuperTypes(TypeParameterSubstitutor<?> substitutor) {
+		return Collections.emptyList();
 	}
 
 	@Override
@@ -33,49 +78,23 @@ public class AnyTypeReference extends LightweightTypeReference {
 	}
 
 	@Override
-	public JvmTypeReference toTypeReference() {
-		return getTypesFactory().createJvmAnyTypeReference();
-	}
-	
-	@Override
-	public JvmTypeReference toJavaCompliantTypeReference() {
-		return getOwner().getServices().getTypeReferences().getTypeForName(Object.class, getOwner().getContextResourceSet());
+	public String getSimpleName() {
+		return name;
 	}
 
 	@Override
-	public boolean isAny() {
-		return true;
-	}
-	
-	@Override
-	public String getSimpleName() {
-		return "null";
-	}
-	
-	@Override
 	public String getIdentifier() {
-		return "null";
+		return getSimpleName();
 	}
-	
+
 	@Override
 	public String getJavaIdentifier() {
 		return "java.lang.Object";
 	}
-	
+
 	@Override
 	public boolean isType(Class<?> clazz) {
 		return false;
-	}
-	
-	@Override
-	@Nullable
-	public JvmType getType() {
-		return null;
-	}
-	
-	@Override
-	protected List<LightweightTypeReference> getSuperTypes(TypeParameterSubstitutor<?> substitutor) {
-		return Collections.emptyList();
 	}
 	
 	@Override
@@ -85,28 +104,24 @@ public class AnyTypeReference extends LightweightTypeReference {
 	
 	@Override
 	public void accept(TypeReferenceVisitor visitor) {
-		visitor.doVisitAnyTypeReference(this);
+		visitor.doVisitUnknownTypeReference(this);
 	}
 	
 	@Override
 	public <Param> void accept(TypeReferenceVisitorWithParameter<Param> visitor, Param param) {
-		visitor.doVisitAnyTypeReference(this, param);
+		visitor.doVisitUnknownTypeReference(this, param);
 	}
 	
 	@Override
 	@Nullable
 	public <Result> Result accept(TypeReferenceVisitorWithResult<Result> visitor) {
-		return visitor.doVisitAnyTypeReference(this);
+		return visitor.doVisitUnknownTypeReference(this);
 	}
 	
 	@Override
 	@Nullable
 	public <Param, Result> Result accept(TypeReferenceVisitorWithParameterAndResult<Param, Result> visitor, Param param) {
-		return visitor.doVisitAnyTypeReference(this, param);
+		return visitor.doVisitUnknownTypeReference(this, param);
 	}
-	
-	@Override
-	public LightweightTypeReference toJavaType() {
-		JvmType objectType = getServices().getTypeReferences().findDeclaredType(Object.class, getOwner().getContextResourceSet());
-		return new ParameterizedTypeReference(getOwner(), objectType);
-	}}
+
+}

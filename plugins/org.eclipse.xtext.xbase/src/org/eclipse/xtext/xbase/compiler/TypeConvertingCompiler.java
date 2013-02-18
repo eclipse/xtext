@@ -119,7 +119,10 @@ public class TypeConvertingCompiler extends AbstractXbaseCompiler {
 	}
 	
 	protected boolean identifierStartWith(JvmTypeReference typeReference, String prefix) {
-		String identifier = typeReference.getType().getIdentifier();
+		JvmType type = typeReference.getType();
+		if (type == null)
+			return false;
+		String identifier = type.getIdentifier();
 		if (identifier != null)
 			return identifier.startsWith(prefix);
 		return false;

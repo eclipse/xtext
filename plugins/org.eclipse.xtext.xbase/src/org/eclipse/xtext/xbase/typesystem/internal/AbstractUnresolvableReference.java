@@ -19,9 +19,9 @@ import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.typesystem.computation.ILinkingCandidate;
 import org.eclipse.xtext.xbase.typesystem.computation.ITypeExpectation;
 import org.eclipse.xtext.xbase.typesystem.conformance.ConformanceHint;
-import org.eclipse.xtext.xbase.typesystem.references.AnyTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.OwnedConverter;
+import org.eclipse.xtext.xbase.typesystem.references.UnknownTypeReference;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -53,7 +53,7 @@ public abstract class AbstractUnresolvableReference implements ILinkingCandidate
 			if (expectedType != null) {
 				expectation.acceptActualType(expectedType, ConformanceHint.CHECKED);
 			} else {
-				expectation.acceptActualType(new AnyTypeReference(expectation.getReferenceOwner()),
+				expectation.acceptActualType(new UnknownTypeReference(expectation.getReferenceOwner()),
 						ConformanceHint.CHECKED);
 			}
 		}
