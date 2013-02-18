@@ -59,6 +59,146 @@ class XtendCompilerTest extends AbstractXtendTestCase {
 		''')
 	}
 	
+	@Test def void testBug380059_01() {
+		'''
+			class C<T> {
+				def m() {
+					val C<?> c = this
+					c
+				}
+			}
+		'''.assertCompilesTo('''
+			@SuppressWarnings("all")
+			public class C<T extends Object> {
+			  public C<? extends Object> m() {
+			    C<? extends Object> _xblockexpression = null;
+			    {
+			      final C<?> c = this;
+			      _xblockexpression = (c);
+			    }
+			    return _xblockexpression;
+			  }
+			}
+		''')
+	}
+	
+	@Test def void testBug362285_01() {
+		'''
+			public class C<T> {
+				def m() {
+					[T x|x].apply(null)
+				}	
+			}
+		'''.assertCompilesTo('''
+			import org.eclipse.xtext.xbase.lib.Functions.Function1;
+
+			@SuppressWarnings("all")
+			public class C<T extends Object> {
+			  public T m() {
+			    final Function1<T,T> _function = new Function1<T,T>() {
+			        public T apply(final T x) {
+			          return x;
+			        }
+			      };
+			    T _apply = _function.apply(null);
+			    return _apply;
+			  }
+			}
+		''')
+	}
+	
+	@Test def void testBug362285_02() {
+		'''
+			public class C {
+				def <T> m() {
+					[T x|x].apply(null)
+				}	
+			}
+		'''.assertCompilesTo('''
+			import org.eclipse.xtext.xbase.lib.Functions.Function1;
+			
+			@SuppressWarnings("all")
+			public class C {
+			  public <T extends Object> T m() {
+			    final Function1<T,T> _function = new Function1<T,T>() {
+			        public T apply(final T x) {
+			          return x;
+			        }
+			      };
+			    T _apply = _function.apply(null);
+			    return _apply;
+			  }
+			}
+		''')
+	}
+	
+	@Test def void testBug380525_01() {
+		'''
+			abstract class L<E> extends java.util.AbstractList<E> {
+				protected new() {
+					new Object() => [add(it as E) && remove]
+				}
+			}
+		'''.assertCompilesTo('''
+			import java.util.AbstractList;
+			import org.eclipse.xtext.xbase.lib.ObjectExtensions;
+			import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
+			
+			@SuppressWarnings("all")
+			public abstract class L<E extends Object> extends AbstractList<E> {
+			  protected L() {
+			    Object _object = new Object();
+			    final Procedure1<Object> _function = new Procedure1<Object>() {
+			        public void apply(final Object it) {
+			          boolean _and = false;
+			          boolean _add = L.this.add(((E) it));
+			          if (!_add) {
+			            _and = false;
+			          } else {
+			            boolean _remove = L.this.remove(it);
+			            _and = (_add && _remove);
+			          }
+			        }
+			      };
+			    ObjectExtensions.<Object>operator_doubleArrow(_object, _function);
+			  }
+			}
+		''')
+	}
+	
+	@Test def void testBug380525_02() {
+		'''
+			abstract class L<E> extends java.util.AbstractList<E> {
+				protected new(E e) {
+					e => [add && remove]
+				}
+			}
+		'''.assertCompilesTo('''
+			import java.util.AbstractList;
+			import org.eclipse.xtext.xbase.lib.ObjectExtensions;
+			import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
+			
+			@SuppressWarnings("all")
+			public abstract class L<E extends Object> extends AbstractList<E> {
+			  protected L(final E e) {
+			    final Procedure1<E> _function = new Procedure1<E>() {
+			        public void apply(final E it) {
+			          boolean _and = false;
+			          boolean _add = L.this.add(it);
+			          if (!_add) {
+			            _and = false;
+			          } else {
+			            boolean _remove = L.this.remove(it);
+			            _and = (_add && _remove);
+			          }
+			        }
+			      };
+			    ObjectExtensions.<E>operator_doubleArrow(e, _function);
+			  }
+			}
+		''')
+	}
+	
 	@Test def void testBug400433_01() {
 		'''
 			class Test<T> {
@@ -2675,7 +2815,7 @@ class XtendCompilerTest extends AbstractXtendTestCase {
 	}
 	
 	@Test
-	def testSuperCall() {
+	def testSuperCall_01() {
 		assertCompilesTo('''
 			package x class Y extends Object {
 				override boolean equals(Object p){
@@ -2702,6 +2842,110 @@ class XtendCompilerTest extends AbstractXtendTestCase {
 			      _xifexpression = _equals_1;
 			    }
 			    return _xifexpression;
+			  }
+			}
+		''')
+	}
+	
+	@Test
+	def testSuperCall_02() {
+		assertCompilesTo('''
+			package x
+			class A {
+				def String getThing() {
+					this.getThing('')
+					''.getThing
+					this.thing
+					''.thing
+					thing
+					getThing('')
+				}
+				def protected String getThing(String s) {
+					return s
+				}
+			}
+			class B extends A {
+				override getThing() {
+					if (true)
+						return super.getThing
+					return getThing('')
+				}
+			}
+		''', '''
+			package x;
+			
+			@SuppressWarnings("all")
+			public class A {
+			  public String getThing() {
+			    String _xblockexpression = null;
+			    {
+			      this.getThing("");
+			      this.getThing("");
+			      this.getThing();
+			      this.getThing("");
+			      this.getThing();
+			      String _thing = this.getThing("");
+			      _xblockexpression = (_thing);
+			    }
+			    return _xblockexpression;
+			  }
+			  
+			  protected String getThing(final String s) {
+			    return s;
+			  }
+			}
+		''')
+	}
+	
+	@Test
+	def testSuperCall_03() {
+		assertCompilesTo('''
+			package x
+			class B extends A {
+				override getThing() {
+					this.getThing('')
+					''.getThing
+					this.thing
+					''.thing
+					thing
+					getThing('')
+					super.getThing('')
+					super.thing
+					super.getThing
+					super.getThing()
+				}
+			}
+			class A {
+				def String getThing() {
+					getThing('')
+				}
+				def protected String getThing(String s) {
+					return s
+				}
+			}
+		''', '''
+			package x;
+			
+			import x.A;
+			
+			@SuppressWarnings("all")
+			public class B extends A {
+			  public String getThing() {
+			    String _xblockexpression = null;
+			    {
+			      this.getThing("");
+			      this.getThing("");
+			      this.getThing();
+			      this.getThing("");
+			      this.getThing();
+			      this.getThing("");
+			      super.getThing("");
+			      super.getThing();
+			      super.getThing();
+			      String _thing = super.getThing();
+			      _xblockexpression = (_thing);
+			    }
+			    return _xblockexpression;
 			  }
 			}
 		''')
