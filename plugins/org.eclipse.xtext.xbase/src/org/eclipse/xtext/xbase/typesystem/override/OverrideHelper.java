@@ -248,9 +248,14 @@ public class OverrideHelper {
 						} else {
 							signature.append("(");
 							for(JvmFormalParameter parameter: parameters) {
-								LightweightTypeReference parameterType =
-										substitutor.substitute(converter.toLightweightReference(parameter.getParameterType()));
-								signature.append(parameterType.getJavaIdentifier());
+								JvmTypeReference pType = parameter.getParameterType();
+								if (pType != null) {
+									LightweightTypeReference parameterType =
+											substitutor.substitute(converter.toLightweightReference(pType));
+									signature.append(parameterType.getJavaIdentifier());
+								} else {
+									signature.append("<Unknown>");
+								}
 								signature.append(",");
 							}
 							signature.replace(signature.length() - 1, signature.length(), ")");
