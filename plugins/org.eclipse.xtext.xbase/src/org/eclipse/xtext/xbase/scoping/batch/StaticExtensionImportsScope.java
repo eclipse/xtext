@@ -83,6 +83,9 @@ public class StaticExtensionImportsScope extends AbstractStaticImportsScope {
 				if (parameterTypeReference.isResolved() && !parameterTypeReference.isAssignableFrom(rawReceiverType)) {
 					return null;
 				}
+				if (parameterTypeReference.isArray() && !rawReceiverType.isArray() && !rawReceiverType.isSubtypeOf(Iterable.class)) {
+					return null;
+				}
 			}
 		}
 		if (implicit) {

@@ -183,6 +183,10 @@ public abstract class AbstractPendingLinkingCandidate<Expression extends XExpres
 		return getFeature() instanceof JvmExecutable && ((JvmExecutable)getFeature()).isVarArgs();
 	}
 	
+	protected boolean isExtension() {
+		return false;
+	}
+	
 	protected int compareByArgumentTypes(AbstractPendingLinkingCandidate<?> right) {
 		initializeArgumentTypeComputation();
 		right.initializeArgumentTypeComputation();
@@ -235,7 +239,7 @@ public abstract class AbstractPendingLinkingCandidate<Expression extends XExpres
 	}
 	
 	protected int compareByArgumentTypes(AbstractPendingLinkingCandidate<?> right, boolean recompute) {
-		int upTo = Math.min(arguments.getArgumentCount(), right.arguments.getArgumentCount());
+		int upTo = Math.max(arguments.getArgumentCount(), right.arguments.getArgumentCount());
 		int leftBoxing = 0;
 		int rightBoxing = 0;
 		int leftDemand = 0;
@@ -243,7 +247,7 @@ public abstract class AbstractPendingLinkingCandidate<Expression extends XExpres
 		for(int i = 0; i < upTo; i++) {
 			EnumSet<ConformanceHint> leftConformance = getConformanceHints(i, recompute);
 			EnumSet<ConformanceHint> rightConformance = right.getConformanceHints(i, recompute);
-			int hintCompareResult = ConformanceHint.compareHints(leftConformance, rightConformance);
+			int hintCompareResult = compareByArgumentTypes(right, i, leftConformance, rightConformance);
 			if (hintCompareResult != 0)
 				return hintCompareResult;
 			if (leftConformance.contains(ConformanceHint.DEMAND_CONVERSION)) {
@@ -259,6 +263,15 @@ public abstract class AbstractPendingLinkingCandidate<Expression extends XExpres
 				rightBoxing++;
 			}
 		}
+		return compareByArgumentTypes(right, leftBoxing, rightBoxing, leftDemand, rightDemand);
+	}
+
+	protected int compareByArgumentTypes(AbstractPendingLinkingCandidate<?> right, int argumentIndex, EnumSet<ConformanceHint> leftConformance, EnumSet<ConformanceHint> rightConformance) {
+		int hintCompareResult = ConformanceHint.compareHints(leftConformance, rightConformance);
+		return hintCompareResult;
+	}
+
+	protected int compareByArgumentTypes(AbstractPendingLinkingCandidate<?> right, int leftBoxing, int rightBoxing, int leftDemand, int rightDemand) {
 		if (leftDemand != rightDemand) {
 			if (leftDemand < rightDemand)
 				return -1;
@@ -275,6 +288,9 @@ public abstract class AbstractPendingLinkingCandidate<Expression extends XExpres
 	protected EnumSet<ConformanceHint> getConformanceHints(int idx, boolean recompute) {
 		while(!arguments.isProcessed(idx)) {
 			computeArgumentType(arguments.getNextUnprocessedArgumentSlot());
+		}
+		if (idx >= arguments.getArgumentCount()) {
+			return EnumSet.of(ConformanceHint.SUCCESS, ConformanceHint.CHECKED); 
 		}
 		XExpression argument = arguments.getArgument(idx);
 		if (argument == null) {

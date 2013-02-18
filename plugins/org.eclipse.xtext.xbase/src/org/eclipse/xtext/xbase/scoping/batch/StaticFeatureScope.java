@@ -19,7 +19,9 @@ import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
+import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.scoping.featurecalls.OperatorMapping;
+import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
@@ -32,10 +34,20 @@ public class StaticFeatureScope extends AbstractSessionBasedScope {
 
 	private final TypeBucket bucket;
 	private final OperatorMapping operatorMapping;
+	private final XExpression receiver;
+	private final LightweightTypeReference receiverType;
 
-	protected StaticFeatureScope(IScope parent, IFeatureScopeSession session, 
-			XAbstractFeatureCall featureCall, TypeBucket bucket, OperatorMapping operatorMapping) {
+	protected StaticFeatureScope(
+			IScope parent,
+			IFeatureScopeSession session,
+			XAbstractFeatureCall featureCall,
+			XExpression receiver,
+			LightweightTypeReference receiverType,
+			TypeBucket bucket,
+			OperatorMapping operatorMapping) {
 		super(parent, session, featureCall);
+		this.receiver = receiver;
+		this.receiverType = receiverType;
 		this.bucket = bucket;
 		this.operatorMapping = operatorMapping;
 	}
@@ -57,13 +69,27 @@ public class StaticFeatureScope extends AbstractSessionBasedScope {
 			return Collections.emptyList();
 		List<IEObjectDescription> allDescriptions = Lists.newArrayListWithCapacity(allFeatures.size());
 		for(JvmFeature feature: allFeatures) {
-			allDescriptions.add(createDescription(name, feature, bucket));
+			if (feature.isStatic())
+				allDescriptions.add(createDescription(name, feature, bucket));
+			else if (receiver == null && receiverType == null) {
+				allDescriptions.add(createInstanceDescription(name, feature, bucket));
+			}
 		}
 		return allDescriptions;
 	}
 
 	protected IEObjectDescription createDescription(QualifiedName name, JvmFeature feature, TypeBucket bucket) {
+		if (receiver != null) {
+			return new StaticFeatureDescriptionWithSyntacticReceiver(name, feature, receiver, receiverType, bucket.getId(), getSession().isVisible(feature));
+		}
+		if (receiverType != null) {
+			return new StaticFeatureDescriptionWithImplicitReceiver(name, feature, receiverType, bucket.getId(), getSession().isVisible(feature));
+		}
 		return new StaticFeatureDescription(name, feature, bucket.getId(), getSession().isVisible(feature));
+	}
+	
+	protected IEObjectDescription createInstanceDescription(QualifiedName name, JvmFeature feature, TypeBucket bucket) {
+		return new InstanceFeatureDescriptionWithoutReceiver(name, feature, bucket.getId(), getSession().isVisible(feature));
 	}
 
 	@Override

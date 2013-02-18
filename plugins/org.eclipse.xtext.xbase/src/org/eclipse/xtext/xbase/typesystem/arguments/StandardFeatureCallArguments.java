@@ -80,7 +80,7 @@ public class StandardFeatureCallArguments implements IFeatureCallArguments {
 	 * @param argumentIndex the external argument index.
 	 */
 	public boolean isProcessed(int argumentIndex) {
-		return argumentIndex - receiverFixup < nextUnprocessedArgument;
+		return argumentIndex - receiverFixup < nextUnprocessedArgument || argumentIndex >= getArgumentCount();
 	}
 	
 	/**
@@ -98,5 +98,10 @@ public class StandardFeatureCallArguments implements IFeatureCallArguments {
 		}
 		LightweightTypeReference result = converter.toLightweightReference(parameterType);
 		return result;
+	}
+	
+	@Override
+	public String toString() {
+		return String.format("%s with %s", getClass().getSimpleName(), arguments);
 	}
 }

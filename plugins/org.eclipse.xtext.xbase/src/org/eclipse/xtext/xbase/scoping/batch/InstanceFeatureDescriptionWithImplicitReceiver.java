@@ -28,11 +28,16 @@ import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 @NonNullByDefault
 public class InstanceFeatureDescriptionWithImplicitReceiver extends InstanceFeatureDescription {
 
-	protected InstanceFeatureDescriptionWithImplicitReceiver(QualifiedName qualifiedName,
-			JvmFeature feature, XExpression receiver, LightweightTypeReference receiverType,
-			Map<JvmTypeParameter, LightweightMergedBoundTypeArgument> typeParameterMapping, int bucketId,
-			boolean visible, @Nullable EnumSet<ConformanceHint> receiverConformanceHints) {
-		super(qualifiedName, feature, EcoreUtil2.clone(receiver), receiverType, typeParameterMapping, bucketId, visible, receiverConformanceHints);
+	protected InstanceFeatureDescriptionWithImplicitReceiver(
+			QualifiedName qualifiedName,
+			JvmFeature feature,
+			XExpression receiver,
+			LightweightTypeReference receiverType,
+			Map<JvmTypeParameter, LightweightMergedBoundTypeArgument> typeParameterMapping,
+			EnumSet<ConformanceHint> receiverConformanceHints,
+			int bucketId,
+			boolean visible) {
+		super(qualifiedName, feature, EcoreUtil2.clone(receiver), receiverType, typeParameterMapping, receiverConformanceHints, bucketId, visible);
 	}
 	
 	@Override
@@ -53,6 +58,11 @@ public class InstanceFeatureDescriptionWithImplicitReceiver extends InstanceFeat
 	}
 	
 	@Override
+	public EnumSet<ConformanceHint> getImplicitReceiverConformanceHints() {
+		return super.getSyntacticReceiverConformanceHints();
+	}
+	
+	@Override
 	@Nullable
 	public XExpression getSyntacticReceiver() {
 		return null;
@@ -69,4 +79,8 @@ public class InstanceFeatureDescriptionWithImplicitReceiver extends InstanceFeat
 		return Collections.emptyMap();
 	}
 
+	@Override
+	public EnumSet<ConformanceHint> getSyntacticReceiverConformanceHints() {
+		return EnumSet.noneOf(ConformanceHint.class);
+	}
 }

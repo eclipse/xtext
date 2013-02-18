@@ -29,6 +29,10 @@ public class VarArgsFeatureCallArgumentSlot extends StandardFeatureCallArgumentS
 
 	@Override
 	public XExpression getArgumentExpression() {
+		List<XExpression> arguments = getArgumentExpressions();
+		if (arguments.size() == 1) {
+			return arguments.get(0);
+		}
 		throw new IllegalStateException("Var args have to be queried for all expressions");
 	}
 

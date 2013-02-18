@@ -7,10 +7,12 @@
  */
 package org.eclipse.xtext.xbase.scoping.batch;
 
+import java.util.EnumSet;
 import java.util.List;
 import org.eclipse.xtend.lib.Data;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.xbase.lib.util.ToStringHelper;
+import org.eclipse.xtext.xbase.typesystem.conformance.ConformanceHint;
 
 /**
  * A type bucket collects a number of types that originate in the
@@ -33,6 +35,11 @@ public class TypeBucket {
   
   public List<? extends JvmType> getTypes() {
     return this._types;
+  }
+  
+  public EnumSet<ConformanceHint> getHints() {
+    EnumSet<ConformanceHint> _of = EnumSet.<ConformanceHint>of(ConformanceHint.CHECKED, ConformanceHint.SUCCESS);
+    return _of;
   }
   
   public TypeBucket(final int id, final List<? extends JvmType> types) {

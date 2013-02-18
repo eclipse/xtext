@@ -33,8 +33,6 @@ public interface IIdentifiableElementDescription extends IEObjectDescription {
 	
 	int getBucketId();
 	
-	EnumSet<ConformanceHint> getReceiverConformanceHints();
-
 	@Nullable
 	LightweightTypeReference getImplicitReceiverType();
 
@@ -42,6 +40,8 @@ public interface IIdentifiableElementDescription extends IEObjectDescription {
 	XExpression getImplicitReceiver();
 	
 	Map<JvmTypeParameter, LightweightMergedBoundTypeArgument> getImplicitReceiverTypeParameterMapping();
+	
+	EnumSet<ConformanceHint> getImplicitReceiverConformanceHints();
 	
 	@Nullable
 	LightweightTypeReference getSyntacticReceiverType();
@@ -51,13 +51,13 @@ public interface IIdentifiableElementDescription extends IEObjectDescription {
 	
 	Map<JvmTypeParameter, LightweightMergedBoundTypeArgument> getSyntacticReceiverTypeParameterMapping();
 	
+	EnumSet<ConformanceHint> getSyntacticReceiverConformanceHints();
+	
 	@Nullable
 	XExpression getImplicitFirstArgument();
 	
 	@Nullable
 	LightweightTypeReference getImplicitFirstArgumentType();
-	
-	Map<JvmTypeParameter, LightweightMergedBoundTypeArgument> getImplicitFirstArgumentTypeParameterMapping();
 	
 	boolean isVisible();
 

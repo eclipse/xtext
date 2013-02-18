@@ -8,7 +8,6 @@
 package org.eclipse.xtext.xbase.scoping.batch
 
 import java.util.List
-import java.util.Set
 import org.eclipse.xtend.lib.Data
 import org.eclipse.xtext.common.types.JvmType
 import org.eclipse.xtext.common.types.JvmTypeReference
@@ -30,6 +29,9 @@ import java.util.EnumSet
 class TypeBucket {
 	int id
 	List<? extends JvmType> types
+	def getHints() {
+		EnumSet::of(ConformanceHint::CHECKED, ConformanceHint::SUCCESS)
+	}
 }
 
 /**

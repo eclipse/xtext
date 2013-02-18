@@ -54,5 +54,10 @@ public class StandardFeatureCallArgumentSlot implements IFeatureCallArgumentSlot
 	public void markProcessed() {
 		parent.markProcessed(idx);
 	}
+	
+	@Override
+	public String toString() {
+		return String.format("%s @ %d for %s", getClass().getSimpleName(), idx, getArgumentExpressions());
+	}
 
 }

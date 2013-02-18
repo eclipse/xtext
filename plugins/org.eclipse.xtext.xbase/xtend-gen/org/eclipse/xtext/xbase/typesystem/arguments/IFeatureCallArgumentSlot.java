@@ -32,7 +32,7 @@ public interface IFeatureCallArgumentSlot {
   public abstract List<XExpression> getArgumentExpressions();
   
   /**
-   * @throws IllegalStateException iff {@link #isVarArg}
+   * @throws IllegalStateException iff {@link #isVarArg} and the number of arguments is not equal to '1'.
    */
   @Nullable
   public abstract XExpression getArgumentExpression();

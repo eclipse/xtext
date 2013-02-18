@@ -17,9 +17,13 @@ import org.junit.runners.Suite.SuiteClasses;
  */
 @RunWith(Suite.class)
 @SuiteClasses({
+	LinkingTest.class,
+	AssignmentLinkingTest.class,
+	LinkingErrorTest.class,
+	LinkingShadowingTest.class,
+	InferredJvmModelShadowingJavaLinkingTests.class,
 	InheritedStaticMethodTest.class,
 	InheritedInstanceMethodTest.class
 })
-public class OverloadSuite {
-
+public class LinkingSuite {
 }

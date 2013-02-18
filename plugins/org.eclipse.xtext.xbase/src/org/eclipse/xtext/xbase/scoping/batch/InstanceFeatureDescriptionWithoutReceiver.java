@@ -7,26 +7,29 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.scoping.batch;
 
+import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.xtext.common.types.JvmFeature;
 import org.eclipse.xtext.naming.QualifiedName;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
- * 
- * TODO JavaDoc - no implicit receiver, implicit argument or whatever
  */
-public class StaticFeatureDescription extends BucketedEObjectDescription {
+@NonNullByDefault
+public class InstanceFeatureDescriptionWithoutReceiver extends BucketedEObjectDescription {
 
-	public StaticFeatureDescription(QualifiedName qualifiedName, JvmFeature feature, int bucketId,
+	protected InstanceFeatureDescriptionWithoutReceiver(
+			QualifiedName qualifiedName, 
+			JvmFeature feature,
+			int bucketId,
 			boolean visible) {
 		super(qualifiedName, feature, bucketId, visible);
-		if (!feature.isStatic()) {
+		if (feature.isStatic()) {
 			throw new IllegalArgumentException(String.valueOf(feature));
 		}
 	}
 	
 	public boolean isStatic() {
-		return true;
+		return false;
 	}
 	
 	public boolean isExtension() {

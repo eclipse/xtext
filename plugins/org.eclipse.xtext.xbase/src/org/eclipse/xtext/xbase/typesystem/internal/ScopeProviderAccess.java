@@ -131,10 +131,22 @@ public class ScopeProviderAccess {
 
 		private QualifiedName name;
 		private INode node;
+		private boolean followUp;
 
 		public ErrorDescription(INode node, QualifiedName name) {
 			this.node = node;
 			this.name = name;
+			this.followUp = false;
+		}
+		
+		public ErrorDescription() {
+			this.node = null;
+			this.name = null;
+			this.followUp = true;
+		}
+		
+		public boolean isFollowUpError() {
+			return followUp;
 		}
 		
 		public QualifiedName getName() {
@@ -197,6 +209,11 @@ public class ScopeProviderAccess {
 		public Map<JvmTypeParameter, LightweightMergedBoundTypeArgument> getImplicitReceiverTypeParameterMapping() {
 			return Collections.emptyMap();
 		}
+		
+		@NonNull
+		public EnumSet<ConformanceHint> getImplicitReceiverConformanceHints() {
+			return EnumSet.noneOf(ConformanceHint.class);
+		}
 
 		@Nullable
 		public LightweightTypeReference getSyntacticReceiverType() {
@@ -211,6 +228,11 @@ public class ScopeProviderAccess {
 		@NonNull
 		public Map<JvmTypeParameter, LightweightMergedBoundTypeArgument> getSyntacticReceiverTypeParameterMapping() {
 			return Collections.emptyMap();
+		}
+		
+		@NonNull
+		public EnumSet<ConformanceHint> getSyntacticReceiverConformanceHints() {
+			return EnumSet.noneOf(ConformanceHint.class);
 		}
 
 		@Nullable
@@ -227,6 +249,11 @@ public class ScopeProviderAccess {
 		public Map<JvmTypeParameter, LightweightMergedBoundTypeArgument> getImplicitFirstArgumentTypeParameterMapping() {
 			return Collections.emptyMap();
 		}
+		
+		@NonNull
+		public EnumSet<ConformanceHint> getImplicitFirstArgumentConformanceHints() {
+			return EnumSet.noneOf(ConformanceHint.class);
+		}
 
 		public boolean isVisible() {
 			return true;
@@ -240,11 +267,6 @@ public class ScopeProviderAccess {
 			return false;
 		}
 
-		@NonNull
-		public EnumSet<ConformanceHint> getReceiverConformanceHints() {
-			return EnumSet.of(ConformanceHint.SUCCESS, ConformanceHint.CHECKED);
-		}
-		
 	}
 
 }

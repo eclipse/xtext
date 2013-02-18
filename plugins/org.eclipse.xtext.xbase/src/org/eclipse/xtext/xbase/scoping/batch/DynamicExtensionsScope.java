@@ -9,6 +9,7 @@ package org.eclipse.xtext.xbase.scoping.batch;
 
 import java.util.Collection;
 import java.util.Collections;
+import java.util.EnumSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -26,6 +27,7 @@ import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.scoping.featurecalls.OperatorMapping;
+import org.eclipse.xtext.xbase.typesystem.conformance.ConformanceHint;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightMergedBoundTypeArgument;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 import org.eclipse.xtext.xbase.typesystem.util.DeclaratorTypeArgumentCollector;
@@ -45,9 +47,14 @@ public class DynamicExtensionsScope extends AbstractSessionBasedScope {
 	private final boolean implicit;
 	private Map<JvmTypeParameter, LightweightMergedBoundTypeArgument> argumentTypeParameterMapping;
 
-	public DynamicExtensionsScope(IScope parent, IFeatureScopeSession session, 
-			XExpression firstArgument, LightweightTypeReference argumentType, boolean implicit,
-			XAbstractFeatureCall context, OperatorMapping operatorMapping) {
+	public DynamicExtensionsScope(
+			IScope parent,
+			IFeatureScopeSession session, 
+			XExpression firstArgument,
+			LightweightTypeReference argumentType,
+			boolean implicit,
+			XAbstractFeatureCall context,
+			OperatorMapping operatorMapping) {
 		super(parent, session, context);
 		this.firstArgument = firstArgument;
 		this.argumentType = argumentType;
@@ -186,40 +193,44 @@ public class DynamicExtensionsScope extends AbstractSessionBasedScope {
 		}
 		if (implicit) {
 			return new InstanceExtensionDescriptionWithImplicitFirstArgument(
-					name, 
-					feature, 
-					receiver, 
-					receiverType, 
-					receiverTypeParameterMapping, 
-					firstArgument, 
-					argumentType, 
-					getArgumentTypeParameterMapping(), 
+					name,
+					feature,
+					receiver,
+					receiverType,
+					receiverTypeParameterMapping,
+					EnumSet.of(ConformanceHint.SUCCESS, ConformanceHint.CHECKED),
+					firstArgument,
+					argumentType,
+					getArgumentTypeParameterMapping(),
 					bucket.getId(), 
-					getSession().isVisible(feature), null);
+					getSession().isVisible(feature));
 		}
 		return new InstanceExtensionDescription(
-				name, 
-				feature, 
-				receiver, 
-				receiverType, 
-				receiverTypeParameterMapping, 
-				firstArgument, 
-				argumentType, 
-				getArgumentTypeParameterMapping(), 
-				bucket.getId(), 
-				getSession().isVisible(feature), null);
+				name,
+				feature,
+				receiver,
+				receiverType,
+				receiverTypeParameterMapping,
+				EnumSet.of(ConformanceHint.SUCCESS, ConformanceHint.CHECKED),
+				firstArgument,
+				argumentType,
+				getArgumentTypeParameterMapping(),
+				EnumSet.of(ConformanceHint.UNCHECKED),
+				bucket.getId(),
+				getSession().isVisible(feature));
 	}
 	
 	protected BucketedEObjectDescription createReceiverDescription(QualifiedName name, JvmFeature feature, XExpression receiver,
 			LightweightTypeReference receiverType, Map<JvmTypeParameter, LightweightMergedBoundTypeArgument> receiverTypeParameterMapping, ExpressionBucket bucket) {
 		return new InstanceFeatureDescriptionWithImplicitReceiver(
-				name, 
-				feature, 
-				receiver, 
+				name,
+				feature,
+				receiver,
 				receiverType, 
-				receiverTypeParameterMapping, 
-				bucket.getId(), 
-				getSession().isVisible(feature), null);
+				receiverTypeParameterMapping,
+				EnumSet.of(ConformanceHint.SUCCESS, ConformanceHint.CHECKED),
+				bucket.getId(),
+				getSession().isVisible(feature));
 	}
 	
 }

@@ -292,38 +292,7 @@ public abstract class AbstractLinkingCandidate<Expression extends XExpression> i
 		if (!slot.isVarArg() && !slot.isSuperfluous()) {
 			computeFixedArityArgumentType(slot, substitutor);
 		} else if (slot.isVarArg()) {
-			LightweightTypeReference lastParameterType = slot.getDeclaredType();
-			if (lastParameterType == null) {
-				throw new IllegalStateException();
-			}
-			LightweightTypeReference componentType = lastParameterType.isArray() ? lastParameterType.getComponentType() : lastParameterType;
-			if (componentType == null) {
-				throw new IllegalStateException();
-			}
-			ITypeComputationState argumentState = null;
-			LightweightTypeReference substitutedComponentType = substitutor.substitute(componentType);
-			List<XExpression> arguments = slot.getArgumentExpressions();
-			if (!substitutedComponentType.isAny()) {
-				if (arguments.size() == 1) {
-					ArgumentTypeComputationState first = createVarArgTypeComputationState(substitutedComponentType);
-					ArrayTypeReference arrayTypeReference = new ArrayTypeReference(substitutedComponentType.getOwner(), substitutedComponentType);
-					ArgumentTypeComputationState second = createLinkingTypeComputationState(arrayTypeReference);
-					argumentState = new CompoundTypeComputationState(substitutedComponentType.getOwner(), first, second);
-				} else {
-					argumentState = createVarArgTypeComputationState(substitutedComponentType);
-				}
-				for(XExpression argument: arguments) {
-					if (argument != null) {
-						resolveArgumentType(argument, substitutedComponentType, argumentState);
-					}
-				}
-			} else {
-				for(XExpression argument: arguments) {
-					if (argument != null) {
-						resolveArgumentType(argument, null, state.withNonVoidExpectation());
-					}
-				}
-			}
+			computeVarArgumentType(slot, substitutor);
 		} else {
 			XExpression argument = slot.getArgumentExpression();
 			if (argument != null) {
@@ -331,6 +300,41 @@ public abstract class AbstractLinkingCandidate<Expression extends XExpression> i
 			}
 		}
 		slot.markProcessed();
+	}
+
+	protected void computeVarArgumentType(IFeatureCallArgumentSlot slot, TypeParameterSubstitutor<?> substitutor) {
+		LightweightTypeReference lastParameterType = slot.getDeclaredType();
+		if (lastParameterType == null) {
+			throw new IllegalStateException();
+		}
+		LightweightTypeReference componentType = lastParameterType.isArray() ? lastParameterType.getComponentType() : lastParameterType;
+		if (componentType == null) {
+			throw new IllegalStateException();
+		}
+		ITypeComputationState argumentState = null;
+		LightweightTypeReference substitutedComponentType = substitutor.substitute(componentType);
+		List<XExpression> arguments = slot.getArgumentExpressions();
+		if (!substitutedComponentType.isAny()) {
+			if (arguments.size() == 1) {
+				ArgumentTypeComputationState first = createVarArgTypeComputationState(substitutedComponentType);
+				ArrayTypeReference arrayTypeReference = new ArrayTypeReference(substitutedComponentType.getOwner(), substitutedComponentType);
+				ArgumentTypeComputationState second = createLinkingTypeComputationState(arrayTypeReference);
+				argumentState = new CompoundTypeComputationState(substitutedComponentType.getOwner(), first, second);
+			} else {
+				argumentState = createVarArgTypeComputationState(substitutedComponentType);
+			}
+			for(XExpression argument: arguments) {
+				if (argument != null) {
+					resolveArgumentType(argument, substitutedComponentType, argumentState);
+				}
+			}
+		} else {
+			for(XExpression argument: arguments) {
+				if (argument != null) {
+					resolveArgumentType(argument, null, state.withNonVoidExpectation());
+				}
+			}
+		}
 	}
 
 	protected TypeParameterSubstitutor<?> createArgumentTypeSubstitutor() {
@@ -458,11 +462,10 @@ public abstract class AbstractLinkingCandidate<Expression extends XExpression> i
 		return expression;
 	}
 	
+	/**
+	 * Returns <code>true</code> if the argument at index 0 will be considered as the receiver.
+	 */
 	protected boolean hasReceiver() {
-		return false;
-	}
-	
-	protected boolean isExtension() {
 		return false;
 	}
 	

@@ -88,6 +88,85 @@ public class LinkingTest extends AbstractXtendTestCase {
 	@Inject
 	private ITypeProvider typeProvider;
 	
+	@Test public void testOverloadedMethod_01() throws Exception {
+		XtendFile file = file(
+				"package testPackage\n" +
+				"class C {\n" +
+				"	def String m(String s) {\n" +
+				"		return null\n" +
+				"	}\n" + 
+				"	def String m() {" +
+				"		this.m\n" +
+				"	}\n" + 
+				"}\n"); 
+		XtendClass c = (XtendClass) file.getXtendTypes().get(0);
+		XAbstractFeatureCall substring = findSingleFeatureCall(c);
+		assertEquals("testPackage.C.m()", substring.getFeature().getIdentifier());
+	}
+	
+	@Test public void testOverloadedMethod_02() throws Exception {
+		XtendFile file = file(
+				"package testPackage\n" +
+				"class B extends A {\n" +
+				"	override m() {\n" +
+				"		super.m\n" +
+				"	}\n" +
+				"}\n" +
+				"class A {\n" +
+				"	def String m(String s) {\n" +
+				"		return null\n" +
+				"	}\n" + 
+				"	def String m() {\n" +
+				"		return null\n" +
+				"	}\n" + 
+				"}"); 
+		XtendClass c = (XtendClass) file.getXtendTypes().get(0);
+		XAbstractFeatureCall substring = findSingleFeatureCall(c);
+		assertEquals("testPackage.A.m()", substring.getFeature().getIdentifier());
+	}
+	
+	@Test public void testOverloadedMethod_03() throws Exception {
+		XtendFile file = file(
+				"package testPackage\n" +
+				"class B extends A {\n" +
+				"	def m() {\n" +
+				"		super.m('')\n" +
+				"	}\n" +
+				"}\n" +
+				"class A {\n" +
+				"	def String m(String s) {\n" +
+				"		return null\n" +
+				"	}\n" + 
+				"	def String m(A a, String s) {\n" +
+				"		return null\n" +
+				"	}\n" + 
+				"}"); 
+		XtendClass c = (XtendClass) file.getXtendTypes().get(0);
+		XAbstractFeatureCall substring = findSingleFeatureCall(c);
+		assertEquals("testPackage.A.m(java.lang.String)", substring.getFeature().getIdentifier());
+	}
+	
+	@Test public void testOverloadedMethod_04() throws Exception {
+		XtendFile file = file(
+				"package testPackage\n" +
+				"class B extends A {\n" +
+				"	def m() {\n" +
+				"		super.m('')\n" +
+				"	}\n" +
+				"}\n" +
+				"class A {\n" +
+				"	def String m(String s) {\n" +
+				"		return null\n" +
+				"	}\n" + 
+				"	def String m(B b, String s) {\n" +
+				"		return null\n" +
+				"	}\n" + 
+				"}"); 
+		XtendClass c = (XtendClass) file.getXtendTypes().get(0);
+		XAbstractFeatureCall substring = findSingleFeatureCall(c);
+		assertEquals("testPackage.A.m(java.lang.String)", substring.getFeature().getIdentifier());
+	}
+	
 	@Test public void testParameterizedExtension_01() throws Exception {
 		XtendFile file = file(
 				"package testPackage\n" +
@@ -447,6 +526,204 @@ public class LinkingTest extends AbstractXtendTestCase {
 		assertNull(call.getInvalidFeatureIssueCode(), call.getInvalidFeatureIssueCode());
 		JvmOperation operation = associator.getDirectlyInferredOperation(func);
 		assertEquals("Iterable<String>", operation.getReturnType().getSimpleName());
+	}
+	
+	@Test public void testExtensionMethodCall_04() throws Exception {
+		XtendClass clazz = clazz("" +
+				"abstract class MyIterable implements Iterable<String> {" +
+				"  def doSomething() {\n" + 
+				"    this.filter [ s.toUpperCase != null ]\n" +
+				"  }\n" +
+				"}");
+		XtendFunction func = (XtendFunction) clazz.getMembers().get(0);
+		final XAbstractFeatureCall call = (XAbstractFeatureCall)((XBlockExpression)func.getExpression()).getExpressions().get(0);
+		assertEquals("org.eclipse.xtext.xbase.lib.IterableExtensions.filter(java.lang.Iterable,org.eclipse.xtext.xbase.lib.Functions$Function1)", call.getFeature().getIdentifier());
+		JvmOperation operation = associator.getDirectlyInferredOperation(func);
+		assertEquals("Iterable<String>", operation.getReturnType().getSimpleName());
+	}
+	
+	@Test public void testExtensionMethodCall_05() throws Exception {
+		XtendClass clazz = clazz("" +
+				"class C {" +
+				"  def m() {\n" + 
+				"    ''.m\n" +
+				"  }\n" +
+				"  def void m(String... s) {" +
+				"  }" +
+				"}");
+		XtendFunction func = (XtendFunction) clazz.getMembers().get(0);
+		XMemberFeatureCall call = (XMemberFeatureCall)((XBlockExpression)func.getExpression()).getExpressions().get(0);
+		assertFalse(call.getFeature().getIdentifier(), call.getFeature().eIsProxy());
+		assertEquals("C.m(java.lang.String[])", call.getFeature().getIdentifier());
+	}
+	
+	@Test public void testExtensionMethodCall_06() throws Exception {
+		XtendClass clazz = clazz("" +
+				"class C {" +
+				"  def m() {\n" + 
+				"    ''.m('')\n" +
+				"  }\n" +
+				"  def void m(String... s) {" +
+				"  }" +
+				"}");
+		XtendFunction func = (XtendFunction) clazz.getMembers().get(0);
+		XMemberFeatureCall call = (XMemberFeatureCall)((XBlockExpression)func.getExpression()).getExpressions().get(0);
+		assertFalse(call.getFeature().getIdentifier(), call.getFeature().eIsProxy());
+		assertEquals("C.m(java.lang.String[])", call.getFeature().getIdentifier());
+	}
+	
+	@Test public void testExtensionMethodCall_07() throws Exception {
+		XtendClass clazz = clazz("" +
+				"class C {" +
+				"  def m() {\n" + 
+				"    (null as String[]).m\n" +
+				"  }\n" +
+				"  def void m(String[] s) {" +
+				"  }" +
+				"}");
+		XtendFunction func = (XtendFunction) clazz.getMembers().get(0);
+		XMemberFeatureCall call = (XMemberFeatureCall)((XBlockExpression)func.getExpression()).getExpressions().get(0);
+		assertFalse(call.getFeature().eIsProxy());
+		assertEquals("C.m(java.lang.String[])", call.getFeature().getIdentifier());
+	}
+	
+	@Test public void testExtensionMethodCall_08() throws Exception {
+		XtendClass clazz = clazz("" +
+				"class C {" +
+				"  def m() {\n" + 
+				"    (null as String[]).m\n" +
+				"  }\n" +
+				"  def void m(String... s) {}\n" +
+				"  def void m(String s) {}\n" +
+				"}");
+		XtendFunction func = (XtendFunction) clazz.getMembers().get(0);
+		XMemberFeatureCall call = (XMemberFeatureCall)((XBlockExpression)func.getExpression()).getExpressions().get(0);
+		assertFalse(call.getFeature().eIsProxy());
+		assertEquals("C.m(java.lang.String[])", call.getFeature().getIdentifier());
+	}
+
+	@Test public void testExtensionMethodCall_09() throws Exception {
+		XtendClass clazz = clazz("" +
+				"class C {" +
+				"  def m() {\n" + 
+				"    (null as String[]).m\n" +
+				"  }\n" +
+				"  def void m(String... s) {" +
+				"  }" +
+				"}");
+		XtendFunction func = (XtendFunction) clazz.getMembers().get(0);
+		XMemberFeatureCall call = (XMemberFeatureCall)((XBlockExpression)func.getExpression()).getExpressions().get(0);
+		assertFalse(call.getFeature().eIsProxy());
+		assertEquals("C.m(java.lang.String[])", call.getFeature().getIdentifier());
+	}
+	
+	@Test public void testExtensionMethodCall_10() throws Exception {
+		XtendClass clazz = clazz("" +
+				"class C {" +
+				"  def m() {\n" + 
+				"    ''.m('', '', '')\n" +
+				"    ''.m\n" +
+				"    this.m('')\n" +
+				"  }\n" +
+				"  def void m(String s, String... s2) {" +
+				"  }" +
+				"}");
+		XtendFunction func = (XtendFunction) clazz.getMembers().get(0);
+		XBlockExpression block = (XBlockExpression) func.getExpression();
+		for(XExpression element: block.getExpressions()) {
+			XMemberFeatureCall call = (XMemberFeatureCall) element;
+			assertFalse(call.getFeature().eIsProxy());
+			assertEquals("C.m(java.lang.String,java.lang.String[])", call.getFeature().getIdentifier());
+		}
+	}
+	
+	@Test public void testInstanceOverExtension_01() throws Exception {
+		XtendClass clazz = clazz("" +
+				"class C {" +
+				"  def get(java.util.Map<String, String> map, String s) {\n" + 
+				"    map.get(s)\n" +
+				"  }\n" +
+				"}");
+		XAbstractFeatureCall substring = findSingleFeatureCall(clazz);
+		assertEquals("java.util.Map.get(java.lang.Object)", substring.getFeature().getIdentifier());
+	}
+	
+	@Test public void testInstanceOverExtension_02() throws Exception {
+		XtendClass clazz = clazz("" +
+				"class C {" +
+				"  def put(java.util.Map<String, String> map, String s1, String s2) {\n" + 
+				"    map.put(s1, s2)\n" +
+				"  }\n" +
+				"}");
+		XAbstractFeatureCall substring = findSingleFeatureCall(clazz);
+		assertEquals("java.util.Map.put(K,V)", substring.getFeature().getIdentifier());
+	}
+	
+	@Test public void testInstanceOverExtension_03() throws Exception {
+		XtendClass clazz = clazz("" +
+				"class C {" +
+				"  def put(java.util.Map<Integer, Integer> map, int i, int j) {\n" + 
+				"    map.put(i, j)\n" +
+				"  }\n" +
+				"}");
+		XAbstractFeatureCall substring = findSingleFeatureCall(clazz);
+		assertEquals("java.util.Map.put(K,V)", substring.getFeature().getIdentifier());
+	}
+	
+	@Test public void testInstanceOverExtension_04() throws Exception {
+		XtendClass clazz = clazz("" +
+				"class C {" +
+				"  def m(java.util.List<String> list) {\n" + 
+				"    list.get(0)\n" +
+				"  }\n" +
+				"}");
+		XAbstractFeatureCall substring = findSingleFeatureCall(clazz);
+		assertEquals("java.util.List.get(int)", substring.getFeature().getIdentifier());
+	}
+	
+	@Test public void testExtensionOverDemandConversion_01() throws Exception {
+		XtendClass clazz = clazz("" +
+				"class C {" +
+				"  def m(Object[] array) {\n" + 
+				"    array.get(0)\n" +
+				"  }\n" +
+				"}");
+		XAbstractFeatureCall substring = findSingleFeatureCall(clazz);
+		assertEquals("org.eclipse.xtext.xbase.lib.ArrayExtensions.get(T[],int)", substring.getFeature().getIdentifier());
+	}
+	
+	@Test public void testInstanceExtensionOverStaticConversion_01() throws Exception {
+		XtendClass clazz = clazz("" +
+				"class C {" +
+				"  def void get(Object[] array, int i) {}\n" +
+				"  def m(Object[] array) {\n" + 
+				"    array.get(0)\n" +
+				"  }\n" +
+				"}");
+		XAbstractFeatureCall substring = findSingleFeatureCall(clazz);
+		assertEquals("C.get(java.lang.Object[],int)", substring.getFeature().getIdentifier());
+	}
+	
+	@Test public void testInstanceOverExtensionIfReceiverMismatch_01() throws Exception {
+		XtendClass clazz = clazz("" +
+				"class C {" +
+				"  def put(java.util.Map<String, String> map, Integer i, Integer j) {\n" + 
+				"    (null as java.util.Map<String, CharSequence>).put(i, j)\n" +
+				"  }\n" +
+				"}");
+		XAbstractFeatureCall substring = findSingleFeatureCall(clazz);
+		assertEquals("java.util.Map.put(K,V)", substring.getFeature().getIdentifier());
+	}
+	
+	@Test public void testExtensionOverInstanceIfIncompatible_01() throws Exception {
+		XtendClass clazz = clazz("" +
+				"class C {" +
+				"  def put(java.util.Map<String, String> map, Integer i, Integer j) {\n" + 
+				"    map.put(i, j)\n" +
+				"  }\n" +
+				"}");
+		XAbstractFeatureCall substring = findSingleFeatureCall(clazz);
+		assertEquals("C.put(java.util.Map,java.lang.Integer,java.lang.Integer)", substring.getFeature().getIdentifier());
 	}
 	
 	@Test public void testCaseFunction_00() throws Exception {
