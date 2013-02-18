@@ -1,0 +1,10 @@
+Change-Id: Iea9d241feef6ac1d2c78860170cbc5048acb1781
+Verified+1: Hudson CI
+Code-Review+2: Sven Efftinge <sven.efftinge@itemis.de>
+IP-Clean+1: Sven Efftinge <sven.efftinge@itemis.de>
+Verified+1: Sven Efftinge <sven.efftinge@itemis.de>
+Submitted-by: Sven Efftinge <sven.efftinge@itemis.de>
+Submitted-at: Mon, 18 Feb 2013 09:18:07 -0500
+Reviewed-on: https://git.eclipse.org/r/10430
+Project: tmf/org.eclipse.xtext
+Branch: refs/heads/master
