@@ -21,6 +21,35 @@ class XtendCompilerTest extends AbstractXtendTestCase {
 	@Inject JvmModelGenerator generator
 	@Inject IGeneratorConfigProvider generatorConfigProvider
 	
+	@Test def void testBug400823_01() {
+		'''
+			package test.plugin
+			import static extension test.plugin.Foo.*
+			class Foo {
+				def foo() {
+					this - this
+				}
+				def static operator_minus(Foo x, Foo y) {
+					1
+				}
+			}
+		'''.assertCompilesTo('''
+			package test.plugin;
+			
+			@SuppressWarnings("all")
+			public class Foo {
+			  public int foo() {
+			    int _minus = Foo.operator_minus(this, this);
+			    return _minus;
+			  }
+			  
+			  public static int operator_minus(final Foo x, final Foo y) {
+			    return 1;
+			  }
+			}
+		''')
+	}
+	
 	@Test def void testBug380058_01() {
 		'''
 			import bug380058.Amount
