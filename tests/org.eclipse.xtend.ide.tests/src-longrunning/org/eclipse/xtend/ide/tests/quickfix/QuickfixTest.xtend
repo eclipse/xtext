@@ -514,6 +514,31 @@ class QuickfixTest extends AbstractXtendUITestCase {
 	}
 	
 	@Test
+	def void missingConstructorSameClass_1() {
+		create('Foo.xtend', '''
+			class Foo {
+				new() {
+					this|(1)
+				}
+			}
+		''')
+		.assertIssueCodes(INVALID_NUMBER_OF_ARGUMENTS, CIRCULAR_CONSTRUCTOR_INVOCATION)
+		.assertResolutionLabels("Create constructor 'new(int)'")
+		.assertModelAfterQuickfix('''
+			class Foo {
+				new() {
+					this(1)
+				}
+				
+				new(int i) {
+					«defaultBody»
+				}
+				
+			}
+		''')
+	}
+	
+	@Test
 	def void missingConstructorOtherClass() {
 		create('Foo.xtend', '''
 			class Foo {
@@ -544,25 +569,6 @@ class QuickfixTest extends AbstractXtendUITestCase {
 		''')
 	}
 	
-	@Test
-	def void invalidNumberOfArguments() {
-		create('Foo.xtend', '''
-			class Foo {
-				def foo() {
-					bar|(1)
-				}
-				def bar() {}
-			}
-		''')
-		.assertIssueCodes(INVALID_NUMBER_OF_ARGUMENTS)
-//		.assertResolutionLabels("Make class abstract")
-//		.assertModelAfterQuickfix(0, '''
-//			abstract class Foo {
-//				def void bar()
-//			}
-//		''')
-	}
-
 	@Test
 	def void missingConcreteMembers() {
 		create('Foo.xtend', '''
