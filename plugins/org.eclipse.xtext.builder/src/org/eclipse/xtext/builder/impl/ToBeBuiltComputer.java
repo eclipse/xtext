@@ -157,7 +157,7 @@ public class ToBeBuiltComputer {
 	}
 
 	protected boolean isValid(URI uri, IStorage storage) {
-		return uriValidator.isValid(uri, storage);
+		return uriValidator.canBuild(uri, storage);
 	}
 	
 	protected IStorage2UriMapper getMapper() {

@@ -36,6 +36,25 @@ public class UriValidator {
 		return false;
 	}
 	
+	/**
+	 * @since 2.4
+	 */
+	public boolean canBuild(URI uri, IStorage storage) {
+		if (uri == null)
+			return false;
+		IResourceServiceProvider resourceServiceProvider = registry.getResourceServiceProvider(uri);
+		if (resourceServiceProvider != null) {
+			if (resourceServiceProvider instanceof IResourceUIServiceProviderExtension) {
+				return ((IResourceUIServiceProviderExtension) resourceServiceProvider).canBuild(uri, storage);
+			} else if (resourceServiceProvider instanceof IResourceUIServiceProvider) {
+				return ((IResourceUIServiceProvider) resourceServiceProvider).canHandle(uri, storage);
+			} else {
+				return resourceServiceProvider.canHandle(uri);
+			}
+		}
+		return false;
+	}
+	
 	
 	/**
 	 * @return whether there's possibly an {@link IResourceServiceProvider} for the given storage
