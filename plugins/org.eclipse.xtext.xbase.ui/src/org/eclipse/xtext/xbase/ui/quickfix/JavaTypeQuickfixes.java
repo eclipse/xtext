@@ -7,6 +7,8 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.ui.quickfix;
 
+import static org.eclipse.xtext.util.Strings.*;
+
 import java.util.List;
 import java.util.Set;
 
@@ -112,21 +114,19 @@ public class JavaTypeQuickfixes implements ILinkingIssueQuickfixProvider {
 			scope = getImportedTypesScope(referenceOwner, issueString, scope, javaSearchScope);
 		}
 		List<IEObjectDescription> discardedDescriptions = Lists.newArrayList();
-		Set<String> qualifiedNames = Sets.newHashSet();
+		Set<String> proposedSolutions = Sets.newHashSet();
 		int addedDescriptions = 0;
 		int checkedDescriptions = 0;
 		for (IEObjectDescription referableElement : scope.getAllElements()) {
-			String referableElementQualifiedName = qualifiedNameConverter.toString(
-					referableElement.getQualifiedName());
-			if (useJavaSearch
-					|| similarityMatcher.isSimilar(issueString,
-							qualifiedNameConverter.toString(referableElement.getName()))) {
-				addedDescriptions++;
-				createResolution(issue, issueResolutionAcceptor, issueString, referableElement);
-				qualifiedNames.add(referableElementQualifiedName);
-			} else {
-				if (qualifiedNames.add(referableElementQualifiedName))
+			String solution = qualifiedNameConverter.toString(referableElement.getName());
+			if(!equal(issueString, solution) && proposedSolutions.add(solution)) {
+				if (useJavaSearch || similarityMatcher.isSimilar(issueString, solution)) {
+					addedDescriptions++;
+					createResolution(issue, issueResolutionAcceptor, issueString, referableElement);
+					proposedSolutions.add(solution);
+				} else {
 					discardedDescriptions.add(referableElement);
+				}
 			}
 			checkedDescriptions++;
 			if (checkedDescriptions > 100)
