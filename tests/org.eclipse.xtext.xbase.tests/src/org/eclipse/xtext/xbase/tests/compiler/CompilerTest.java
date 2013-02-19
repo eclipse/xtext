@@ -19,6 +19,41 @@ public class CompilerTest extends AbstractOutputComparingCompilerTests {
 				"return _length;", "'foo'.length");
 	}
 	
+	@Test public void testImplicitReferenceToMultitype() throws Exception {
+		assertCompilesTo(
+				"Iterable<Object> _plus = com.google.common.collect.Iterables.<Object>concat(((Iterable<StringBuilder>) null), ((Iterable<StringBuffer>) null));\n" + 
+				"Iterable<Object> _plus_1 = com.google.common.collect.Iterables.<Object>concat(_plus, ((Iterable<String>) null));\n" + 
+				"final org.eclipse.xtext.xbase.lib.Procedures.Procedure1<Object> _function = new org.eclipse.xtext.xbase.lib.Procedures.Procedure1<Object>() {\n" + 
+				"    public void apply(final Object it) {\n" + 
+				"      ((CharSequence)it).length();\n" + 
+				"    }\n" + 
+				"  };\n" + 
+				"org.eclipse.xtext.xbase.lib.IterableExtensions.<Object>forEach(_plus_1, _function);", 
+				"((null as Iterable<StringBuilder>) + (null as Iterable<StringBuffer>) + (null as Iterable<String>)).forEach[ length ]");
+	}
+	
+	@Test public void testImplicitReferenceToSynonym() throws Exception {
+		assertCompilesTo(
+				"final org.eclipse.xtext.xbase.lib.Procedures.Procedure1<String[]> _function = new org.eclipse.xtext.xbase.lib.Procedures.Procedure1<String[]>() {\n" + 
+				"    public void apply(final String[] it) {\n" + 
+				"      org.eclipse.xtext.xbase.lib.IterableExtensions.size(((Iterable<? extends Object>)org.eclipse.xtext.xbase.lib.Conversions.doWrapArray(it)));\n" + 
+				"    }\n" + 
+				"  };\n" + 
+				"org.eclipse.xtext.xbase.lib.IterableExtensions.<String[]>forEach(((Iterable<String[]>) null), _function);", 
+				"(null as Iterable<String[]>).forEach[ size ]");
+	}
+	
+	@Test public void testImplicitReferenceToArray() throws Exception {
+		assertCompilesTo(
+				"final org.eclipse.xtext.xbase.lib.Procedures.Procedure1<String[]> _function = new org.eclipse.xtext.xbase.lib.Procedures.Procedure1<String[]>() {\n" + 
+				"    public void apply(final String[] it) {\n" + 
+				"      it.length;\n" + 
+				"    }\n" + 
+				"  };\n" + 
+				"org.eclipse.xtext.xbase.lib.IterableExtensions.<String[]>forEach(((Iterable<String[]>) null), _function);", 
+				"(null as Iterable<String[]>).forEach[ length ]");
+	}
+	
 	@Test public void testFieldAccessDontGetAVariableDeclaration() throws Exception {
 		assertCompilesTo(
 				"\ntestdata.Properties1 _properties1 = new testdata.Properties1();" + 
