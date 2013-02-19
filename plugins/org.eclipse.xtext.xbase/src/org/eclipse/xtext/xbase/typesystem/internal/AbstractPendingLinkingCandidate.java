@@ -18,8 +18,13 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.xtext.common.types.JvmExecutable;
+import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
+import org.eclipse.xtext.common.types.JvmTypeConstraint;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
+import org.eclipse.xtext.common.types.JvmTypeParameterDeclarator;
+import org.eclipse.xtext.common.types.JvmTypeReference;
+import org.eclipse.xtext.common.types.JvmUpperBound;
 import org.eclipse.xtext.diagnostics.AbstractDiagnostic;
 import org.eclipse.xtext.diagnostics.Severity;
 import org.eclipse.xtext.util.IAcceptor;
@@ -34,6 +39,7 @@ import org.eclipse.xtext.xbase.typesystem.computation.ILinkingCandidate;
 import org.eclipse.xtext.xbase.typesystem.conformance.ConformanceHint;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightMergedBoundTypeArgument;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
+import org.eclipse.xtext.xbase.typesystem.references.OwnedConverter;
 import org.eclipse.xtext.xbase.typesystem.util.TypeParameterByConstraintSubstitutor;
 import org.eclipse.xtext.xbase.validation.IssueCodes;
 
@@ -61,10 +67,90 @@ public abstract class AbstractPendingLinkingCandidate<Expression extends XExpres
 	
 	protected abstract String getFeatureTypeName();
 	
+	protected String getArgumentTypesAsString() {
+		if(!getArguments().isEmpty()) {
+			StringBuilder b = new StringBuilder();
+			for(int i=0; i<getArguments().size(); ++i) {
+				LightweightTypeReference actualType = getActualType(getArguments().get(i));
+				if(actualType != null) 
+					b.append(actualType.getSimpleName());
+				else 
+					b.append("null");
+				if(i < getArguments().size()-1)
+					b.append(",");
+			}
+			return b.toString();
+		}
+		return "";
+	}
+	
+	protected String getFeatureParameterTypesAsString() {
+		if(getFeature() instanceof JvmExecutable) {
+			OwnedConverter ownedConverter = new OwnedConverter(getState().getReferenceOwner());
+			List<JvmFormalParameter> parameters = ((JvmExecutable) getFeature()).getParameters();
+			StringBuilder b = new StringBuilder();
+			for(int i=0; i<parameters.size(); ++i) {
+				JvmTypeReference parameterType = parameters.get(i).getParameterType();
+				ownedConverter.apply(parameterType);
+				b.append(parameterType.getSimpleName());
+				if(i < parameters.size()-1)
+					b.append(",");
+			}
+			return b.toString();
+		}
+		return "";
+	}
+	
+	protected String getFeatureTypeParamtersAsString() {
+		if(getFeature() instanceof JvmTypeParameterDeclarator) {
+			List<JvmTypeParameter> typeParameters = ((JvmTypeParameterDeclarator)getFeature()).getTypeParameters();
+			if(!typeParameters.isEmpty()) {
+				OwnedConverter ownedConverter = new OwnedConverter(getState().getReferenceOwner());
+				StringBuilder b = new StringBuilder();
+				for(int i=0; i<typeParameters.size(); ++i) {
+					JvmTypeParameter typeParameter = typeParameters.get(i);
+					b.append(typeParameter.getName());
+					if(!typeParameter.getConstraints().isEmpty()) {
+						for(int j=0; j<typeParameter.getConstraints().size(); ++j) {
+							JvmTypeConstraint constraint = typeParameter.getConstraints().get(j);
+							LightweightTypeReference typeRef = ownedConverter.apply(constraint.getTypeReference());
+							if(constraint instanceof JvmUpperBound) {
+								if(typeRef.isType(Object.class))
+									continue;
+								b.append(" extends ");
+							} else 
+								b.append(" super ");
+							b.append(typeRef.getSimpleName());
+						}
+					}
+					if(i < typeParameters.size()-1)
+						b.append(",");
+				}
+				return b.toString();
+			}
+		}
+		return "";
+	}
+	
+	protected String getTypeArgumentsAsString() {
+		if(!getSyntacticTypeArguments().isEmpty()) {
+			StringBuilder b = new StringBuilder();
+			for(int i=0; i<getSyntacticTypeArguments().size(); ++i) {
+				b.append(getSyntacticTypeArguments().get(i).getSimpleName());
+				if(i < getSyntacticTypeArguments().size()-1)
+					b.append(",");
+			}
+			return b.toString();
+		}
+		return "";
+	}
+	
 	public boolean validate(IAcceptor<? super AbstractDiagnostic> result) {
-		// TODO improve messages
 		if (!isVisible()) {
-			String message = "The " + getFeatureTypeName() + " " + getFeature().getSimpleName() + " is not visible";
+			String message = String.format("The %1$s %2$s(%3$S) is not visible", 
+					getFeatureTypeName(),
+					getFeature().getSimpleName(),
+					getFeatureParameterTypesAsString());
 			AbstractDiagnostic diagnostic = new EObjectDiagnosticImpl(
 					Severity.ERROR, 
 					IssueCodes.FEATURE_NOT_VISIBLE, 
@@ -74,7 +160,11 @@ public abstract class AbstractPendingLinkingCandidate<Expression extends XExpres
 			result.accept(diagnostic);
 			return false;
 		} else if (getArityMismatch() != 0) {
-			String message = "Invalid number of arguments. Expected " + getFeature().getSimpleName();
+			String message = String.format("Invalid number of arguments. The %1$s %2$s(%3$s) is not applicable for the arguments (%4$s)" , 
+					getFeatureTypeName(), 
+					getFeature().getSimpleName(), 
+					getFeatureParameterTypesAsString(), 
+					getArgumentTypesAsString());
 			AbstractDiagnostic diagnostic = new EObjectDiagnosticImpl(
 					Severity.ERROR, 
 					IssueCodes.INVALID_NUMBER_OF_ARGUMENTS, 
@@ -84,7 +174,11 @@ public abstract class AbstractPendingLinkingCandidate<Expression extends XExpres
 			result.accept(diagnostic);
 			return false;
 		} else if (getTypeArityMismatch() != 0) {
-			String message = "Invalid number of type arguments. Expected " + getFeature().getSimpleName();
+			String message = String.format("Invalid number of type arguments. The %1$s %2$s<%3$s> is not applicable for the type arguments <%4$s>",
+					getFeatureTypeName(), 
+					getFeature().getSimpleName(), 
+					getFeatureTypeParamtersAsString(),
+					getTypeArgumentsAsString());
 			AbstractDiagnostic diagnostic = new EObjectDiagnosticImpl(
 					Severity.ERROR, 
 					IssueCodes.INVALID_NUMBER_OF_TYPE_ARGUMENTS, 
