@@ -43,7 +43,9 @@ public class Main {
 				xtendBatchCompiler.setSourcePath(argument);
 			}
 		}
-		xtendBatchCompiler.compile();
+		if (!xtendBatchCompiler.compile()) {
+			System.exit(1);
+		}
 	}
 	
 	private static void printUsage() {
