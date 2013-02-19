@@ -14,6 +14,7 @@ import java.util.List;
 import org.eclipse.emf.common.util.BasicEList;
 import org.eclipse.emf.common.util.ECollections;
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.xtext.common.types.JvmConstructor;
 import org.eclipse.xtext.common.types.JvmFeature;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.nodemodel.ILeafNode;
@@ -102,7 +103,7 @@ public abstract class XAbstractFeatureCallImplCustom extends XAbstractFeatureCal
 	public boolean isStatic() {
 		JvmIdentifiableElement element = getFeature();
 		if (element != null && !element.eIsProxy()) {
-			if (element instanceof JvmFeature)
+			if (element instanceof JvmFeature && !(element instanceof JvmConstructor))
 				return ((JvmFeature) element).isStatic();
 		}
 		return false;

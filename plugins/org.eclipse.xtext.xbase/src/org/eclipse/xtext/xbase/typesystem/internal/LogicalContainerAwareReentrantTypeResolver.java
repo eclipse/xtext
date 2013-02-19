@@ -245,7 +245,7 @@ public class LogicalContainerAwareReentrantTypeResolver extends DefaultReentrant
 		StackedResolvedTypes childResolvedTypes = resolvedTypes.pushTypes();
 		if (declarator instanceof JvmTypeParameterDeclarator) {
 			JvmTypeParameterDeclarator casted = (JvmTypeParameterDeclarator) declarator;
-			if (isStatic(declarator)) {
+			if (isStatic(declarator) && !(declarator instanceof JvmConstructor)) {
 				childResolvedTypes.replaceDeclaredTypeParameters(casted.getTypeParameters());
 			} else {
 				childResolvedTypes.addDeclaredTypeParameters(casted.getTypeParameters());
