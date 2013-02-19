@@ -26,7 +26,7 @@ import org.junit.Test;
 import com.google.common.collect.Iterables;
 
 /**
- * @author svenefftinge - Initial contribution and API
+ * @author Sven Efftinge - Initial contribution and API
  */
 public class DefaultFoldingRegionProviderTest extends AbstractEditorTest {
 
@@ -43,6 +43,7 @@ public class DefaultFoldingRegionProviderTest extends AbstractEditorTest {
 		assertEquals(0, regions.size());
 	}
 
+	@SuppressWarnings("deprecation")
 	protected DefaultFoldingRegionProvider createFoldingRegionProvider() {
 		return new DefaultFoldingRegionProvider(new DefaultLocationInFileProvider());
 	}
@@ -247,6 +248,7 @@ public class DefaultFoldingRegionProviderTest extends AbstractEditorTest {
 		assertEquals("element\n".length(), projectionRegions[0].getLength());
 	}
 	
+	@SuppressWarnings("deprecation")
 	@Test public void testShouldProcessContent() throws Exception {
 		IFile iFile = createFile("foo/bar.foldingtestlanguage", 
 				"element foo \n" +
@@ -268,6 +270,7 @@ public class DefaultFoldingRegionProviderTest extends AbstractEditorTest {
 		assertEquals(0, regions.iterator().next().getOffset());
 	}
 
+	@SuppressWarnings("deprecation")
 	@Test public void testIsHandled() throws Exception {
 		IFile iFile = createFile("foo/bar.foldingtestlanguage", 
 				"element foo \n" +
