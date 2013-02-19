@@ -45,7 +45,8 @@ class CommonSuperTypeTest extends AbstractTestingTypeReferenceOwner {
 		val function = function(signature.toString)
 		val operation = function.directlyInferredOperation
 		val typeReferences = new ArrayList(operation.parameters.map [ parameterType.toLightweightReference ])
-		var computedSuperType = services.typeConformanceComputer.getCommonSuperType(typeReferences)
+		val conformanceComputer = services.typeConformanceComputer 
+		var computedSuperType = conformanceComputer.getCommonSuperType(typeReferences)
 		assertEquals(superTypeAndParam.key, computedSuperType?.simpleName)
 		computedSuperType = services.typeConformanceComputer.getCommonSuperType((typeReferences + typeReferences).toList)
 		assertEquals(superTypeAndParam.key, computedSuperType?.simpleName)
@@ -54,6 +55,13 @@ class CommonSuperTypeTest extends AbstractTestingTypeReferenceOwner {
 		if (!(computedSuperType?.primitiveVoid || computedSuperType?.primitive)) {
 			computedSuperType = services.typeConformanceComputer.getCommonSuperType((typeReferences + newImmutableList(new AnyTypeReference(this), new AnyTypeReference(this))).toList)
 			assertEquals(superTypeAndParam.key, computedSuperType?.simpleName)
+		}
+		if (computedSuperType != null) {
+			computedSuperType => [ superType |
+				typeReferences.forEach [
+					assertEquals(superTypeAndParam.key, conformanceComputer.getCommonSuperType(#[it, superType])?.simpleName)
+				]
+			]
 		}
 		if (computedSuperType != null) {
 			for(subType: typeReferences) {
@@ -423,6 +431,17 @@ class CommonSuperTypeTest extends AbstractTestingTypeReferenceOwner {
 	def void testCommonSuperType_68() {
 		"Comparable<?> & Serializable".isSuperTypeOf("Integer", "String", "String")
 	}
+	
+	@Test
+	def void testCommonSuperType_69() {
+		"Iterable<?>".isSuperTypeOf("Iterable<?>", "Iterable<? extends CharSequence>")
+	}
+	
+	@Test
+	def void testCommonSuperType_70() {
+		"Iterable<?>".isSuperTypeOf("Iterable<? super CharSequence>", "Iterable<?>")
+	}
+	
 }
 
 /**

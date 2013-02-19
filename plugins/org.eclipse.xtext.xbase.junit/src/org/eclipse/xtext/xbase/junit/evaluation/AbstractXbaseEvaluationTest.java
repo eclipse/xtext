@@ -2753,10 +2753,12 @@ public abstract class AbstractXbaseEvaluationTest extends Assert {
 		assertEvaluatesTo(Integer.valueOf(20), "{ var x = if (false) new Double('-10') else new Integer('20') x.intValue }");
 	}
 	
+	@Ignore("This is actually not conformant except if generics are ignored")
 	@Test public void testMemberCallOnMultiType_07() throws Exception {
 		assertEvaluatesTo(Boolean.TRUE, "(if (false) new Double('-20') else new Integer('10')) >= 0");
 	}
 	
+	@Ignore("This is actually not conformant except if generics are ignored")
 	@Test public void testMemberCallOnMultiType_08() throws Exception {
 		assertEvaluatesTo(Boolean.FALSE, "(if (false) new Double('-20') else new Integer('10')) < 0");
 	}

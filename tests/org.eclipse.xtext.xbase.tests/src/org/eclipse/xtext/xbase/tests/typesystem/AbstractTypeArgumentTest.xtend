@@ -218,6 +218,11 @@ abstract class AbstractTypeArgumentTest extends AbstractXbaseTestCase {
 	@Test def void testOverloadedOperators_17() throws Exception {
 		"(0..Math::sqrt(1l).intValue).filter[ i | 1l % i == 0 ].empty".bindTypeArgumentsTo("Integer").done
 	}
+	
+	@Test def void testOverloadedOperators_20() throws Exception {
+		"(null as Iterable<StringBuilder>) + (null as Iterable<StringBuffer>) + (null as Iterable<String>)"
+			.bindTypeArgumentsTo("AbstractStringBuilder & Serializable").and("Serializable & CharSequence").done
+	}
 
 	@Test def void testForExpression_01() throws Exception {
 		"for(String x : new java.util.ArrayList<String>()) x.length".bindTypeArgumentsTo("String").done

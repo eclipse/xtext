@@ -354,6 +354,13 @@ public abstract class AbstractTypeArgumentTest extends AbstractXbaseTestCase {
   }
   
   @Test
+  public void testOverloadedOperators_20() throws Exception {
+    Iterator<XExpression> _bindTypeArgumentsTo = this.bindTypeArgumentsTo("(null as Iterable<StringBuilder>) + (null as Iterable<StringBuffer>) + (null as Iterable<String>)", "AbstractStringBuilder & Serializable");
+    Iterator<XExpression> _and = this.and(_bindTypeArgumentsTo, "Serializable & CharSequence");
+    this.done(_and);
+  }
+  
+  @Test
   public void testForExpression_01() throws Exception {
     Iterator<XExpression> _bindTypeArgumentsTo = this.bindTypeArgumentsTo("for(String x : new java.util.ArrayList<String>()) x.length", "String");
     this.done(_bindTypeArgumentsTo);

@@ -15,6 +15,7 @@ import org.eclipse.xtext.xbase.typesystem.references.AnyTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.ArrayTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.ParameterizedTypeReference;
+import org.eclipse.xtext.xbase.typesystem.references.UnboundTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.WildcardTypeReference;
 
 /**
@@ -87,6 +88,14 @@ public class ArrayConformanceStrategy extends TypeConformanceStrategy<ArrayTypeR
 	@Override
 	protected TypeConformanceResult doVisitAnyTypeReference(ArrayTypeReference left, AnyTypeReference reference, TypeConformanceComputationArgument.Internal<ArrayTypeReference> param) {
 		return TypeConformanceResult.create(param, ConformanceHint.SUCCESS);
+	}
+	
+	@Override
+	protected TypeConformanceResult doVisitUnboundTypeReference(ArrayTypeReference left, UnboundTypeReference right, Internal<ArrayTypeReference> param) {
+		if (right.canResolveTo(left)) {
+			return TypeConformanceResult.create(param, ConformanceHint.SUCCESS);
+		}
+		return TypeConformanceResult.create(param, ConformanceHint.INCOMPATIBLE);
 	}
 
 	@Override

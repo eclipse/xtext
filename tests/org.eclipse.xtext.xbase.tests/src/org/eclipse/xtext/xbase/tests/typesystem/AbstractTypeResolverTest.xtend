@@ -604,10 +604,18 @@ abstract class AbstractTypeResolverTest<Reference> extends AbstractXbaseTestCase
 	@Test def void testOverloadedOperators_19() throws Exception {
 		"'aa' + 1".resolvesTo("String")
 	}
+	
+	@Test def void testOverloadedOperators_20() throws Exception {
+		"(null as Iterable<StringBuilder>) + (null as Iterable<StringBuffer>) + (null as Iterable<String>)".resolvesTo("Iterable<Serializable & CharSequence>")
+	}
 
 	@Test def void testCastExpression() throws Exception {
 		"null as String".resolvesTo("String")
 		"null as Boolean".resolvesTo("Boolean")
+	}
+	
+	@Test def void testCastExpression_02() throws Exception {
+		"(null as Iterable<String[]>)".resolvesTo("Iterable<String[]>")
 	}
 	
 	@Test def void testThrowExpression() throws Exception {

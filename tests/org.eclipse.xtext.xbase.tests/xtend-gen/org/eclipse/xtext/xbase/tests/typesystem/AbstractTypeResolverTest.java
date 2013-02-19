@@ -682,9 +682,19 @@ public abstract class AbstractTypeResolverTest<Reference extends Object> extends
   }
   
   @Test
+  public void testOverloadedOperators_20() throws Exception {
+    this.resolvesTo("(null as Iterable<StringBuilder>) + (null as Iterable<StringBuffer>) + (null as Iterable<String>)", "Iterable<Serializable & CharSequence>");
+  }
+  
+  @Test
   public void testCastExpression() throws Exception {
     this.resolvesTo("null as String", "String");
     this.resolvesTo("null as Boolean", "Boolean");
+  }
+  
+  @Test
+  public void testCastExpression_02() throws Exception {
+    this.resolvesTo("(null as Iterable<String[]>)", "Iterable<String[]>");
   }
   
   @Test
