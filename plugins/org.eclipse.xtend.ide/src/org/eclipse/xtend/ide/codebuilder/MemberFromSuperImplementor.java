@@ -40,6 +40,7 @@ import com.google.inject.Inject;
  * @author Jan Koehnlein - Initial contribution and API
  */
 // TODO: reimplement using ICodeBuilder
+@SuppressWarnings("deprecation")
 public class MemberFromSuperImplementor {
 
 	public static final String DEFAULT_BODY = "throw new UnsupportedOperationException(\"TODO: auto-generated method stub\")";
@@ -70,7 +71,6 @@ public class MemberFromSuperImplementor {
 		appendExecutable(overrider, superConstructor, appendable);
 	}
 
-	@SuppressWarnings("deprecation")
 	protected void appendExecutable(final XtendClass overrider, JvmExecutable executableFromSuper,
 			IAppendable appendable) {
 		appendable.openScope();
@@ -117,7 +117,6 @@ public class MemberFromSuperImplementor {
 		appendable.closeScope();
 	}
 	
-	@SuppressWarnings("deprecation")
 	protected void appendSignature(JvmExecutable overridden, EObject context,
 			final ITypeArgumentContext typeArgumentContext, IAppendable appendable, boolean isCall) {
 		boolean isFirst = true;

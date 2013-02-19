@@ -13,7 +13,6 @@ import org.eclipse.jface.text.IRegion;
 import org.eclipse.xtext.formatting.IIndentationInformation;
 import org.eclipse.xtext.ui.editor.autoedit.DefaultAutoEditStrategyProvider;
 import org.eclipse.xtext.ui.editor.autoedit.MultiLineTerminalsEditStrategy;
-import org.eclipse.xtext.ui.editor.model.TerminalsTokenTypeToPartitionMapper;
 
 import com.google.inject.Inject;
 import com.google.inject.MembersInjector;

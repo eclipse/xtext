@@ -42,6 +42,7 @@ import com.google.inject.Inject;
  * @author Holger Schill - Initial contribution and API
  * @since 2.3
  */
+@SuppressWarnings("deprecation")
 public class XtendHoverDocumentationProvider extends XbaseHoverDocumentationProvider {
 	
 	@Inject

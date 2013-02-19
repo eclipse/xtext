@@ -8,10 +8,9 @@
 package org.eclipse.xtend.ide.editor;
 
 import static com.google.common.collect.Iterables.*;
-import static org.eclipse.xtext.nodemodel.util.NodeModelUtils.findNodesForFeature;
+import static org.eclipse.xtext.nodemodel.util.NodeModelUtils.*;
 
 import java.util.Collections;
-import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -25,7 +24,6 @@ import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.IWorkbenchPartSite;
 import org.eclipse.xtend.core.typing.XtendOverridesService;
-import org.eclipse.xtend.core.xtend.XtendClass;
 import org.eclipse.xtend.core.xtend.XtendFile;
 import org.eclipse.xtend.core.xtend.XtendFunction;
 import org.eclipse.xtend.core.xtend.XtendPackage;
@@ -50,6 +48,7 @@ import com.google.inject.Inject;
 /**
  * @author Michael Clay - Initial contribution and API
  */
+@SuppressWarnings("deprecation")
 public class OverrideIndicatorModelListener extends NullImpl implements IXtextModelListener {
 	private XtextEditor xtextEditor;
 	private Set<Annotation> overrideIndicatorAnnotations = Sets.newHashSet();

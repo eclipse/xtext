@@ -26,7 +26,6 @@ import org.eclipse.xtend.ide.labeling.XtendImages;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmFeature;
 import org.eclipse.xtext.common.types.JvmField;
-import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.common.types.JvmMember;
 import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmTypeReference;
@@ -55,6 +54,7 @@ import com.google.inject.Inject;
  * 
  * @author Jan Koehnlein
  */
+@SuppressWarnings("deprecation")
 public class XtendOutlineTreeProvider extends ModeAwareOutlineTreeProvider {
 
 	private static final OutlineMode SHOW_INHERITED_MODE = new OutlineMode("show", "show inherited members");
