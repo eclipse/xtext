@@ -70,7 +70,6 @@ import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 import org.eclipse.xtext.util.CancelIndicator;
 import org.eclipse.xtext.util.IAcceptor;
 import org.eclipse.xtext.util.Strings;
-import org.eclipse.xtext.xbase.XbasePackage;
 import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotation;
 import org.eclipse.xtext.xbase.compiler.DisableCodeGenerationAdapter;
 import org.eclipse.xtext.xbase.compiler.output.ITreeAppendable;

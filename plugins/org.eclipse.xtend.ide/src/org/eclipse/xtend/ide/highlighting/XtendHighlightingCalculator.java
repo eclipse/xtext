@@ -171,7 +171,6 @@ public class XtendHighlightingCalculator extends XbaseHighlightingCalculator {
 		}
 	}
 
-	@SuppressWarnings("null")
 	protected RichStringHighlighter createRichStringHighlighter(IHighlightedPositionAcceptor acceptor) {
 		return new RichStringHighlighter(acceptor);
 	}

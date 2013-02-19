@@ -15,7 +15,6 @@ import java.util.Collections;
 import java.util.Map;
 import java.util.Set;
 
-import org.apache.log4j.Logger;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.SubMonitor;
 import org.eclipse.emf.common.util.URI;
@@ -47,8 +46,6 @@ import com.google.inject.Inject;
  * @since 2.3
  */
 public class DefaultReferenceFinder implements IReferenceFinder {
-
-	private static final Logger LOG = Logger.getLogger(DefaultReferenceFinder.class);
 
 	private IResourceDescriptions indexData;
 

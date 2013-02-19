@@ -110,9 +110,14 @@ public class DomainmodelJvmModelInferrer extends AbstractModelInferrer {
                 _matched=true;
                 EList<JvmMember> _members_2 = it.getMembers();
                 String _name = _operation.getName();
+                JvmTypeReference _elvis = null;
                 JvmTypeReference _type = _operation.getType();
-                JvmTypeReference _inferredType = DomainmodelJvmModelInferrer.this._jvmTypesBuilder.inferredType();
-                JvmTypeReference _elvis = ObjectExtensions.<JvmTypeReference>operator_elvis(_type, _inferredType);
+                if (_type != null) {
+                  _elvis = _type;
+                } else {
+                  JvmTypeReference _inferredType = DomainmodelJvmModelInferrer.this._jvmTypesBuilder.inferredType();
+                  _elvis = ObjectExtensions.<JvmTypeReference>operator_elvis(_type, _inferredType);
+                }
                 final Procedure1<JvmOperation> _function_2 = new Procedure1<JvmOperation>() {
                     public void apply(final JvmOperation it) {
                       String _documentation = DomainmodelJvmModelInferrer.this._jvmTypesBuilder.getDocumentation(_operation);

@@ -21,7 +21,6 @@ import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.Keyword;
-import org.eclipse.xtext.common.types.JvmAnyTypeReference;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmExecutable;
 import org.eclipse.xtext.common.types.JvmFormalParameter;

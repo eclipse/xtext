@@ -36,13 +36,21 @@ public class FormatterProfileStore extends ProfileStore {
 		this.profilesVersionKeyCopy = XTEND_PROFILES_KEY + VERSION_KEY_SUFFIX;
 	}
 
+	/*
+	 * Eclipse 3.5 uses raw types thus we have to use them here, too
+	 */
+	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@Override
 	public List readProfiles(IScopeContext scope) throws CoreException {
 		return readProfilesFromString(scope.getNode(xtendNodeID).get(XTEND_PROFILES_KEY, null));
 	}
 
+	/*
+	 * Eclipse 3.5 uses raw types thus we have to use them here, too
+	 */
+	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@Override
-	public void writeProfiles(@SuppressWarnings("rawtypes") Collection profiles, IScopeContext instanceScope)
+	public void writeProfiles(Collection profiles, IScopeContext instanceScope)
 			throws CoreException {
 		ByteArrayOutputStream stream = new ByteArrayOutputStream(2000);
 		try {

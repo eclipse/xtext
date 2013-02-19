@@ -13,7 +13,6 @@ import java.util.concurrent.TimeoutException;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.runtime.preferences.InstanceScope;
-import org.eclipse.jdt.internal.launching.EECompilationParticipant;
 import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.IStructuredSelection;

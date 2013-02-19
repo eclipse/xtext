@@ -172,6 +172,10 @@ public abstract class AbstractProfileManager extends org.eclipse.jdt.internal.ui
 		}
 	}
 
+	/*
+	 * Suppress deprecation warning which is not present in 3.5
+	 */
+	@SuppressWarnings("all")
 	@Override
 	protected String getSelectedProfileId(IScopeContext instanceScope) {
 		if (fProfileKey != null) {

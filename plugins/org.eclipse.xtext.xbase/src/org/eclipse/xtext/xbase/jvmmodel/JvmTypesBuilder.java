@@ -32,7 +32,6 @@ import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmEnumerationLiteral;
 import org.eclipse.xtext.common.types.JvmEnumerationType;
 import org.eclipse.xtext.common.types.JvmExecutable;
-import org.eclipse.xtext.common.types.JvmFeature;
 import org.eclipse.xtext.common.types.JvmField;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmGenericType;
@@ -85,6 +84,7 @@ import com.google.inject.Inject;
  * @author Sven Efftinge - Initial contribution and API
  * @author Jan Koehnlein
  */
+@SuppressWarnings("deprecation")
 @NonNullByDefault
 public class JvmTypesBuilder {
 
