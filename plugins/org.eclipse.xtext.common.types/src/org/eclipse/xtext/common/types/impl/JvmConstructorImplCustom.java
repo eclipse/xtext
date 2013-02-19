@@ -24,6 +24,6 @@ public class JvmConstructorImplCustom extends JvmConstructorImpl {
 	
 	@Override
 	public boolean isStatic() {
-		return false;
+		return true;
 	}
 }
