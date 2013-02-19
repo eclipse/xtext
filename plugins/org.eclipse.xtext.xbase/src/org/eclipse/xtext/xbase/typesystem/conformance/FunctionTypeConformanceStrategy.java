@@ -81,8 +81,8 @@ public class FunctionTypeConformanceStrategy extends
 			return TypeConformanceResult.create(param, ConformanceHint.INCOMPATIBLE);
 		}
 		for(int i = 0; i < leftParameterTypes.size(); i++) {
-			LightweightTypeReference rightParameterType = rightParameterTypes.get(i);
 			LightweightTypeReference leftParameterType = leftParameterTypes.get(i);
+			LightweightTypeReference rightParameterType = rightParameterTypes.get(i);
 			if (leftParameterType!=rightParameterType && (leftParameterType == null || rightParameterType == null)) {
 				return TypeConformanceResult.create(param, ConformanceHint.INCOMPATIBLE);
 			}
