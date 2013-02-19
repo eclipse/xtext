@@ -37,16 +37,15 @@ public class XtendResourceUiServiceProvider extends DefaultResourceUIServiceProv
 	}
 	
 	@Override
-	public boolean canHandle(URI uri, IStorage storage) {
-		if (!(storage instanceof IFile)) {
-			return false;
+	public boolean canBuild(URI uri, IStorage storage) {
+		// we don't want to build+index .xtend files from JARs, because cross references target .class files
+		if (storage instanceof IFile) {
+			IFile file = (IFile) storage;
+			IProject project = file.getProject();
+			IJavaProject javaProject = JavaCore.create(project);
+			return isInSourceFolder(javaProject, file);
 		}
-		IFile file = (IFile) storage;
-		if (!super.canHandle(uri, storage))
-			return false;
-		IProject project = file.getProject();
-		IJavaProject javaProject = JavaCore.create(project);
-		return isInSourceFolder(javaProject, file);
+		return false;
 	}
 
 	public boolean isInSourceFolder(IJavaProject javaProject, IFile resource) {
