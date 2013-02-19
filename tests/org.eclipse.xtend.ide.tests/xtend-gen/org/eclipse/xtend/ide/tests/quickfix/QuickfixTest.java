@@ -994,6 +994,55 @@ public class QuickfixTest extends AbstractXtendUITestCase {
   }
   
   @Test
+  public void missingConstructorSameClass_1() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("class Foo {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("new() {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("this|(1)");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    QuickfixTestBuilder _create = this.builder.create("Foo.xtend", _builder);
+    QuickfixTestBuilder _assertIssueCodes = _create.assertIssueCodes(org.eclipse.xtext.xbase.validation.IssueCodes.INVALID_NUMBER_OF_ARGUMENTS, org.eclipse.xtext.xbase.validation.IssueCodes.CIRCULAR_CONSTRUCTOR_INVOCATION);
+    QuickfixTestBuilder _assertResolutionLabels = _assertIssueCodes.assertResolutionLabels("Create constructor \'new(int)\'");
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("class Foo {");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("new() {");
+    _builder_1.newLine();
+    _builder_1.append("\t\t");
+    _builder_1.append("this(1)");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("new(int i) {");
+    _builder_1.newLine();
+    _builder_1.append("\t\t");
+    _builder_1.append(QuickfixTest.defaultBody, "		");
+    _builder_1.newLineIfNotEmpty();
+    _builder_1.append("\t");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _assertResolutionLabels.assertModelAfterQuickfix(_builder_1);
+  }
+  
+  @Test
   public void missingConstructorOtherClass() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("class Foo {");
@@ -1050,29 +1099,6 @@ public class QuickfixTest extends AbstractXtendUITestCase {
     _builder_1.append("}");
     _builder_1.newLine();
     _assertResolutionLabels.assertModelAfterQuickfix(_builder_1);
-  }
-  
-  @Test
-  public void invalidNumberOfArguments() {
-    StringConcatenation _builder = new StringConcatenation();
-    _builder.append("class Foo {");
-    _builder.newLine();
-    _builder.append("\t");
-    _builder.append("def foo() {");
-    _builder.newLine();
-    _builder.append("\t\t");
-    _builder.append("bar|(1)");
-    _builder.newLine();
-    _builder.append("\t");
-    _builder.append("}");
-    _builder.newLine();
-    _builder.append("\t");
-    _builder.append("def bar() {}");
-    _builder.newLine();
-    _builder.append("}");
-    _builder.newLine();
-    QuickfixTestBuilder _create = this.builder.create("Foo.xtend", _builder);
-    _create.assertIssueCodes(org.eclipse.xtext.xbase.validation.IssueCodes.INVALID_NUMBER_OF_ARGUMENTS);
   }
   
   @Test

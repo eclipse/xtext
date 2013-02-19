@@ -25,6 +25,7 @@ import org.eclipse.xtend.ide.codebuilder.AbstractMethodBuilder;
 import org.eclipse.xtend.ide.codebuilder.CodeBuilderFactory;
 import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.Keyword;
+import org.eclipse.xtext.common.types.JvmConstructor;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmPrimitiveType;
@@ -137,6 +138,9 @@ public class CreateMemberQuickfixes implements ILinkingIssueQuickfixProvider {
 					if(operatorMethodName != null) 
 						newMethodQuickfixes(operatorMethodName, call, issue, issueResolutionAcceptor);
 				}
+			}
+			if(call instanceof XFeatureCall && call.getFeature() instanceof JvmConstructor) {
+				newConstructorQuickfix(issue, issueResolutionAcceptor, (XFeatureCall) call);
 			}
 		}
 		if(referenceOwner instanceof XConstructorCall) {
@@ -331,10 +335,21 @@ public class CreateMemberQuickfixes implements ILinkingIssueQuickfixProvider {
 	protected void newConstructorQuickfix(Issue issue, IssueResolutionAcceptor issueResolutionAcceptor,
 			XConstructorCall call) {
 		JvmDeclaredType ownerType = call.getConstructor().getDeclaringType();
+		newConstructorQuickfix(issue, issueResolutionAcceptor, ownerType, call, call.getArguments());
+	}
+	
+	protected void newConstructorQuickfix(Issue issue, IssueResolutionAcceptor issueResolutionAcceptor,
+			XFeatureCall call) {
+		JvmDeclaredType ownerType = ((JvmConstructor) call.getFeature()).getDeclaringType();
+		newConstructorQuickfix(issue, issueResolutionAcceptor, ownerType, call, call.getActualArguments());
+	}
+	
+	protected void newConstructorQuickfix(Issue issue, IssueResolutionAcceptor issueResolutionAcceptor,
+			JvmDeclaredType ownerType, XExpression call, List<XExpression> arguments) {
 		if(ownerType != null) {
 			AbstractConstructorBuilder constructorBuilder = codeBuilderFactory.createConstructorBuilder(ownerType);
 			constructorBuilder.setContext(call);
-			constructorBuilder.setParameterTypes(getResolvedArgumentTypes(call, call.getArguments()));
+			constructorBuilder.setParameterTypes(getResolvedArgumentTypes(call, arguments));
 			constructorBuilder.setVisibility(JvmVisibility.PUBLIC);
 			StringBuffer label = new StringBuffer("Create constructor '");
 			if(constructorBuilder.getOwnerSource() instanceof XtendClass)
