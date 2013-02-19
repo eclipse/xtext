@@ -9,7 +9,7 @@ package org.eclipse.xtext.xbase.validation;
 
 import static com.google.common.collect.Iterables.*;
 import static com.google.common.collect.Lists.*;
-import static org.eclipse.xtext.xbase.XbasePackage.*;
+import static org.eclipse.xtext.xbase.XbasePackage.Literals.*;
 import static org.eclipse.xtext.xbase.validation.IssueCodes.*;
 
 import java.io.Serializable;
@@ -62,6 +62,7 @@ import org.eclipse.xtext.validation.ValidationMessageAcceptor;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.XAbstractWhileExpression;
 import org.eclipse.xtext.xbase.XAssignment;
+import org.eclipse.xtext.xbase.XBinaryOperation;
 import org.eclipse.xtext.xbase.XBlockExpression;
 import org.eclipse.xtext.xbase.XCasePart;
 import org.eclipse.xtext.xbase.XCastedExpression;
@@ -74,6 +75,7 @@ import org.eclipse.xtext.xbase.XForLoopExpression;
 import org.eclipse.xtext.xbase.XIfExpression;
 import org.eclipse.xtext.xbase.XInstanceOfExpression;
 import org.eclipse.xtext.xbase.XMemberFeatureCall;
+import org.eclipse.xtext.xbase.XNullLiteral;
 import org.eclipse.xtext.xbase.XNumberLiteral;
 import org.eclipse.xtext.xbase.XReturnExpression;
 import org.eclipse.xtext.xbase.XSwitchExpression;
@@ -86,7 +88,9 @@ import org.eclipse.xtext.xbase.XbasePackage.Literals;
 import org.eclipse.xtext.xbase.controlflow.IEarlyExitComputer;
 import org.eclipse.xtext.xbase.jvmmodel.IJvmModelAssociations;
 import org.eclipse.xtext.xbase.jvmmodel.ILogicalContainerProvider;
+import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures;
+import org.eclipse.xtext.xbase.scoping.featurecalls.OperatorMapping;
 import org.eclipse.xtext.xbase.typesystem.IBatchTypeResolver;
 import org.eclipse.xtext.xbase.typesystem.computation.NumberLiterals;
 import org.eclipse.xtext.xbase.typesystem.computation.SynonymTypesProvider;
@@ -124,7 +128,7 @@ import com.google.inject.Inject;
  * 
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-@ComposedChecks(validators = { FeatureCallValidator.class, EarlyExitValidator.class })
+@ComposedChecks(validators = { EarlyExitValidator.class })
 public class XbaseJavaValidator extends AbstractXbaseJavaValidator {
 
 	@Inject
@@ -957,7 +961,7 @@ public class XbaseJavaValidator extends AbstractXbaseJavaValidator {
 				Set<JvmConstructor> visited = Sets.newHashSet(currentConstructor);
 				while(calledConstructor.getDeclaringType() == currentConstructor.getDeclaringType()) {
 					if (!visited.add(calledConstructor)) {
-						error("Recursive constructor invocation", null, CIRCULAR_CONSTRUCTOR_INVOCATION);
+						error("Recursive constructor invocation", XABSTRACT_FEATURE_CALL__FEATURE, CIRCULAR_CONSTRUCTOR_INVOCATION);
 						return;
 					}
 					XExpression constructorBody = logicalContainerProvider.getAssociatedExpression(calledConstructor);
@@ -1244,6 +1248,38 @@ public class XbaseJavaValidator extends AbstractXbaseJavaValidator {
 		}
 	}
 	
+	@Check
+	public void checkPrimitiveComparedToNull(XBinaryOperation binaryOperation) {
+		String operatorSymbol = binaryOperation.getConcreteSyntaxFeatureName();
+		XExpression left = binaryOperation.getLeftOperand();
+		XExpression right = binaryOperation.getRightOperand();
+		if(expressionHelper.isOperatorFromExtension(binaryOperation, OperatorMapping.EQUALS, ObjectExtensions.class) 
+				|| expressionHelper.isOperatorFromExtension(binaryOperation, OperatorMapping.TRIPLE_EQUALS, ObjectExtensions.class)) {
+			if(right instanceof XNullLiteral) {
+				LightweightTypeReference leftType = typeResolver.resolveTypes(left).getActualType(left);
+				if(leftType != null && leftType.isPrimitive()) 
+					error("The operator '" + operatorSymbol + "' is undefined for the argument types " + leftType.getSimpleName() + " and null", binaryOperation, null, PRIMITIVE_COMPARED_TO_NULL);
+			}
+			if(left instanceof XNullLiteral) {
+				LightweightTypeReference rightType = typeResolver.resolveTypes(right).getActualType(right);
+				if(rightType != null && rightType.isPrimitive()) 
+					error("The operator '" + operatorSymbol + "' is undefined for the argument types null and " + rightType.getSimpleName(), binaryOperation, null, PRIMITIVE_COMPARED_TO_NULL);
+			}
+		} else if(expressionHelper.isOperatorFromExtension(binaryOperation, OperatorMapping.ELVIS, ObjectExtensions.class)) {
+			LightweightTypeReference leftType = typeResolver.resolveTypes(left).getActualType(left);
+			if(leftType.isPrimitive()) 
+				error("The operator '" + operatorSymbol + "' is undefined for arguments of type " + leftType.getSimpleName(), binaryOperation, null, PRIMITIVE_COMPARED_TO_NULL);
+		}
+	}
+		
+	protected boolean isPrimitiveAndNull(XExpression left, XExpression right) {
+		if(right instanceof XNullLiteral) {
+			LightweightTypeReference leftType = typeResolver.resolveTypes(left).getActualType(left);
+			return leftType.isPrimitive();
+		}
+		return false;
+	}
+	
 	protected Iterable<JvmDeclaredType> getAllDeclaredTypes(Resource resource) {
 		final List<JvmDeclaredType> allDeclaredTypes = newArrayList();
 		addDeclaredTypes(resource.getContents(), new IAcceptor<JvmDeclaredType>() {
@@ -1269,7 +1305,7 @@ public class XbaseJavaValidator extends AbstractXbaseJavaValidator {
 
 	@Override
 	protected List<EPackage> getEPackages() {
-		return Lists.newArrayList(eINSTANCE, XtypePackage.eINSTANCE);
+		return Lists.newArrayList(XbasePackage.eINSTANCE, XtypePackage.eINSTANCE);
 	}
 
 	protected String canonicalName(LightweightTypeReference typeRef) {
