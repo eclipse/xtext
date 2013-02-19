@@ -7,8 +7,12 @@
  */
 package org.eclipse.xtend.core.tests.typesystem;
 
+import com.google.common.collect.ImmutableList;
+import com.google.common.collect.ImmutableList.Builder;
 import com.google.inject.Inject;
 import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.xtend.core.jvmmodel.IXtendJvmAssociations;
 import org.eclipse.xtend.core.tests.typesystem.AbstractTestingTypeReferenceOwner;
@@ -90,6 +94,79 @@ public class BoundTypeArgumentMergerTest extends AbstractTestingTypeReferenceOwn
         };
       IterableExtensions.<JvmFormalParameter>forEach(_parameters, _function_1);
       return this.merger.merge(mergable, this);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  public LightweightMergedBoundTypeArgument mergeSuccessive(final Triple<String,VarianceInfo,VarianceInfo>... mergeUs) {
+    try {
+      int _length = mergeUs.length;
+      boolean _greaterThan = (_length > 2);
+      Assert.assertTrue(_greaterThan);
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("def void method(");
+      final Function1<Triple<String,VarianceInfo,VarianceInfo>,String> _function = new Function1<Triple<String,VarianceInfo,VarianceInfo>,String>() {
+          public String apply(final Triple<String,VarianceInfo,VarianceInfo> it) {
+            String _first = it.getFirst();
+            return _first;
+          }
+        };
+      String _join = IterableExtensions.<Triple<String,VarianceInfo,VarianceInfo>>join(((Iterable<Triple<String,VarianceInfo,VarianceInfo>>)Conversions.doWrapArray(mergeUs)), null, " p, ", " p", _function);
+      _builder.append(_join, "");
+      _builder.append(") {}");
+      final String signature = _builder.toString();
+      String _string = signature.toString();
+      final XtendFunction function = this.function(_string);
+      final JvmOperation operation = this._iXtendJvmAssociations.getDirectlyInferredOperation(function);
+      final ArrayList<LightweightBoundTypeArgument> mergable = CollectionLiterals.<LightweightBoundTypeArgument>newArrayList();
+      EList<JvmFormalParameter> _parameters = operation.getParameters();
+      final Procedure2<JvmFormalParameter,Integer> _function_1 = new Procedure2<JvmFormalParameter,Integer>() {
+          public void apply(final JvmFormalParameter p, final Integer i) {
+            final Triple<String,VarianceInfo,VarianceInfo> input = mergeUs[(i).intValue()];
+            JvmTypeReference _parameterType = p.getParameterType();
+            LightweightTypeReference _lightweightReference = BoundTypeArgumentMergerTest.this.toLightweightReference(_parameterType);
+            Object _object = new Object();
+            VarianceInfo _second = input.getSecond();
+            VarianceInfo _third = input.getThird();
+            LightweightBoundTypeArgument _lightweightBoundTypeArgument = new LightweightBoundTypeArgument(_lightweightReference, null, _object, _second, _third);
+            mergable.add(_lightweightBoundTypeArgument);
+          }
+        };
+      IterableExtensions.<JvmFormalParameter>forEach(_parameters, _function_1);
+      final Iterator<LightweightBoundTypeArgument> iterator = mergable.iterator();
+      LightweightBoundTypeArgument first = iterator.next();
+      LightweightBoundTypeArgument second = iterator.next();
+      List<LightweightBoundTypeArgument> _xlistliteral = null;
+      Builder<LightweightBoundTypeArgument> _builder_1 = ImmutableList.builder();
+      _builder_1.add(first);
+      _builder_1.add(second);
+      _xlistliteral = _builder_1.build();
+      LightweightMergedBoundTypeArgument merged = this.merger.merge(_xlistliteral, this);
+      boolean _hasNext = iterator.hasNext();
+      boolean _while = _hasNext;
+      while (_while) {
+        {
+          LightweightTypeReference _typeReference = merged.getTypeReference();
+          Object _object = new Object();
+          VarianceInfo _variance = merged.getVariance();
+          VarianceInfo _variance_1 = merged.getVariance();
+          LightweightBoundTypeArgument _lightweightBoundTypeArgument = new LightweightBoundTypeArgument(_typeReference, null, _object, _variance, _variance_1);
+          first = _lightweightBoundTypeArgument;
+          LightweightBoundTypeArgument _next = iterator.next();
+          second = _next;
+          List<LightweightBoundTypeArgument> _xlistliteral_1 = null;
+          Builder<LightweightBoundTypeArgument> _builder_2 = ImmutableList.builder();
+          _builder_2.add(first);
+          _builder_2.add(second);
+          _xlistliteral_1 = _builder_2.build();
+          LightweightMergedBoundTypeArgument _merge = this.merger.merge(_xlistliteral_1, this);
+          merged = _merge;
+        }
+        boolean _hasNext_1 = iterator.hasNext();
+        _while = _hasNext_1;
+      }
+      return merged;
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -1004,5 +1081,51 @@ public class BoundTypeArgumentMergerTest extends AbstractTestingTypeReferenceOwn
     Triple<String,VarianceInfo,VarianceInfo> _mappedTo_3 = this.operator_mappedTo(_mappedTo_2, VarianceInfo.IN);
     LightweightMergedBoundTypeArgument _mergeWithSource = this.mergeWithSource(_object, _mappedTo_1, _mappedTo_3);
     this.to(_mergeWithSource, "Object", VarianceInfo.INVARIANT);
+  }
+  
+  @Test
+  public void testMergeMultiType_01() {
+    Pair<String,VarianceInfo> _mappedTo = Pair.<String, VarianceInfo>of("StringBuilder", VarianceInfo.OUT);
+    Triple<String,VarianceInfo,VarianceInfo> _mappedTo_1 = this.operator_mappedTo(_mappedTo, VarianceInfo.OUT);
+    Pair<String,VarianceInfo> _mappedTo_2 = Pair.<String, VarianceInfo>of("StringBuffer", VarianceInfo.OUT);
+    Triple<String,VarianceInfo,VarianceInfo> _mappedTo_3 = this.operator_mappedTo(_mappedTo_2, VarianceInfo.OUT);
+    LightweightMergedBoundTypeArgument _merge = this.merge(_mappedTo_1, _mappedTo_3);
+    this.to(_merge, "AbstractStringBuilder & Serializable", VarianceInfo.INVARIANT);
+  }
+  
+  @Test
+  public void testMergeMultiType_02() {
+    Pair<String,VarianceInfo> _mappedTo = Pair.<String, VarianceInfo>of("StringBuilder", VarianceInfo.OUT);
+    Triple<String,VarianceInfo,VarianceInfo> _mappedTo_1 = this.operator_mappedTo(_mappedTo, VarianceInfo.OUT);
+    Pair<String,VarianceInfo> _mappedTo_2 = Pair.<String, VarianceInfo>of("StringBuffer", VarianceInfo.OUT);
+    Triple<String,VarianceInfo,VarianceInfo> _mappedTo_3 = this.operator_mappedTo(_mappedTo_2, VarianceInfo.OUT);
+    Pair<String,VarianceInfo> _mappedTo_4 = Pair.<String, VarianceInfo>of("StringBuilder", VarianceInfo.OUT);
+    Triple<String,VarianceInfo,VarianceInfo> _mappedTo_5 = this.operator_mappedTo(_mappedTo_4, VarianceInfo.OUT);
+    LightweightMergedBoundTypeArgument _mergeSuccessive = this.mergeSuccessive(_mappedTo_1, _mappedTo_3, _mappedTo_5);
+    this.to(_mergeSuccessive, "AbstractStringBuilder & Serializable", VarianceInfo.INVARIANT);
+  }
+  
+  @Test
+  public void testMergeMultiType_03() {
+    Pair<String,VarianceInfo> _mappedTo = Pair.<String, VarianceInfo>of("StringBuilder", VarianceInfo.OUT);
+    Triple<String,VarianceInfo,VarianceInfo> _mappedTo_1 = this.operator_mappedTo(_mappedTo, VarianceInfo.INVARIANT);
+    Pair<String,VarianceInfo> _mappedTo_2 = Pair.<String, VarianceInfo>of("StringBuffer", VarianceInfo.OUT);
+    Triple<String,VarianceInfo,VarianceInfo> _mappedTo_3 = this.operator_mappedTo(_mappedTo_2, VarianceInfo.INVARIANT);
+    Pair<String,VarianceInfo> _mappedTo_4 = Pair.<String, VarianceInfo>of("String", VarianceInfo.OUT);
+    Triple<String,VarianceInfo,VarianceInfo> _mappedTo_5 = this.operator_mappedTo(_mappedTo_4, VarianceInfo.INVARIANT);
+    LightweightMergedBoundTypeArgument _merge = this.merge(_mappedTo_1, _mappedTo_3, _mappedTo_5);
+    this.to(_merge, "Serializable & CharSequence", VarianceInfo.INVARIANT);
+  }
+  
+  @Test
+  public void testMergeMultiType_04() {
+    Pair<String,VarianceInfo> _mappedTo = Pair.<String, VarianceInfo>of("AbstractStringBuilder", VarianceInfo.OUT);
+    Triple<String,VarianceInfo,VarianceInfo> _mappedTo_1 = this.operator_mappedTo(_mappedTo, VarianceInfo.INVARIANT);
+    Pair<String,VarianceInfo> _mappedTo_2 = Pair.<String, VarianceInfo>of("java.io.Serializable", VarianceInfo.OUT);
+    Triple<String,VarianceInfo,VarianceInfo> _mappedTo_3 = this.operator_mappedTo(_mappedTo_2, VarianceInfo.INVARIANT);
+    Pair<String,VarianceInfo> _mappedTo_4 = Pair.<String, VarianceInfo>of("String", VarianceInfo.OUT);
+    Triple<String,VarianceInfo,VarianceInfo> _mappedTo_5 = this.operator_mappedTo(_mappedTo_4, VarianceInfo.INVARIANT);
+    LightweightMergedBoundTypeArgument _merge = this.merge(_mappedTo_1, _mappedTo_3, _mappedTo_5);
+    this.to(_merge, "Object", VarianceInfo.INVARIANT);
   }
 }

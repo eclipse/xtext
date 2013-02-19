@@ -112,6 +112,15 @@ public abstract class AbstractTypeReferencePairWalker extends TypeReferenceVisit
 		}
 		
 		@Override
+		protected void doVisitCompoundTypeReference(CompoundTypeReference reference, WildcardTypeReference param) {
+			if (!reference.isSynonym()) {
+				doVisitTypeReference(reference, param);
+			} else {
+				super.doVisitCompoundTypeReference(reference, param);
+			}
+		}
+		
+		@Override
 		public void doVisitTypeReference(LightweightTypeReference reference, WildcardTypeReference declaration) {
 			LightweightTypeReference declaredLowerBound = declaration.getLowerBound();
 			if (declaredLowerBound != null) {

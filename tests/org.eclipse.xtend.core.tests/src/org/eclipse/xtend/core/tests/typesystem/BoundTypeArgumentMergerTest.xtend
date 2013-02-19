@@ -37,7 +37,6 @@ class BoundTypeArgumentMergerTest extends AbstractTestingTypeReferenceOwner {
 	}
 	
 	def mergeWithSource(Object source, Triple<String,VarianceInfo,VarianceInfo>... mergeUs) {
-		// TODO synthesize unique variable names as soon as the function should be validated
 		val signature = '''def void method(«mergeUs.join(null, ' p, ', ' p') [first]») {}'''
 		val function = function(signature.toString)
 		val operation = function.directlyInferredOperation
@@ -48,6 +47,30 @@ class BoundTypeArgumentMergerTest extends AbstractTestingTypeReferenceOwner {
 		]
 		return merger.merge(mergable, this)
 	}
+	
+	def mergeSuccessive(Triple<String,VarianceInfo,VarianceInfo>... mergeUs) {
+		assertTrue(mergeUs.length > 2)
+		
+		val signature = '''def void method(«mergeUs.join(null, ' p, ', ' p') [first]») {}'''
+		val function = function(signature.toString)
+		val operation = function.directlyInferredOperation
+		val mergable = <LightweightBoundTypeArgument>newArrayList
+		operation.parameters.forEach[ p, i |
+			val input = mergeUs.get(i)
+			mergable += new LightweightBoundTypeArgument(p.parameterType.toLightweightReference, null, new Object, input.second, input.third)
+		]
+		val iterator = mergable.iterator
+		var first = iterator.next
+		var second = iterator.next
+		var merged = merger.merge(#[first, second], this)
+		while(iterator.hasNext) {
+			first = new LightweightBoundTypeArgument(merged.typeReference, null, new Object, merged.variance, merged.variance)
+			second = iterator.next
+			merged = merger.merge(#[first, second], this)
+		}
+		return merged
+	}
+	
 	
 	def to(LightweightMergedBoundTypeArgument merged, String type, VarianceInfo variance) {
 		if (type == null) {
@@ -416,275 +439,20 @@ class BoundTypeArgumentMergerTest extends AbstractTestingTypeReferenceOwner {
 	@Test def void testValidityPrecedence_01() {
 		mergeWithSource(new Object(), 'Object'->OUT->OUT, 'String'->OUT->IN).to('Object', INVARIANT)
 	}
-	
-//	
-//	@Test def void testNoParams_02() {
-//		assertTrue(''.mappedBy('java.util.List<?>', 'java.util.ArrayList<String>').empty)
-//	}
-//	
-//	@Test def void testUnusedParam() {
-//		'T'.mappedBy('CharSequence', 'String').assertMapping('T', 'Object'->OUT->OUT)
-//	}
-//	
-//	@Test def void testUnusedParams_01() {
-//		'T, T2'.mappedBy('CharSequence', 'String')
-//			.assertMapping('T', 'Object'->OUT->OUT)
-//			.assertMapping('T2', 'Object'->OUT->OUT)
-//	}
-//	
-//	@Test def void testUnusedParams_02() {
-//		'T extends CharSequence, T2'.mappedBy('CharSequence', 'String')
-//			.assertMapping('T', 'CharSequence'->OUT->OUT)
-//			.assertMapping('T2', 'Object'->OUT->OUT)
-//	}
-//	
-//	@Test def void testUnusedParams_03() {
-//		'T extends CharSequence, T2 extends T'.mappedBy('CharSequence', 'String')
-//			.assertMapping('T', 'CharSequence'->OUT->OUT)
-//			.assertMapping('T2', 'CharSequence'->OUT->OUT)
-//	}
-//	
-//	@Test def void testUnusedParams_04() {
-//		'T extends T2, T2'.mappedBy('CharSequence', 'String')
-//			.assertMapping('T', 'Object'->OUT->OUT)
-//			.assertMapping('T2', 'Object'->OUT->OUT)
-//	}
-//	
-//	@Test def void testUnusedParams_05() {
-//		'T extends T2, T2 extends CharSequence'.mappedBy('CharSequence', 'String')
-//			.assertMapping('T', 'Object'->OUT->OUT)
-//			.assertMapping('T2', 'CharSequence'->OUT->OUT)
-//	}
-//	
-//	@Test def void testUnambiguousMapping_01() {
-//		'T'.mappedBy('java.util.List<T>', 'java.util.List<String>').assertMapping('T', 'String'->INVARIANT->INVARIANT)
-//	}
-//	
-//	@Test def void testUnambiguousMapping_02() {
-//		'T'.mappedBy('java.util.Map<T, T>', 'java.util.Map<String, String>').assertMapping('T', 'String'->INVARIANT->INVARIANT, 'String'->INVARIANT->INVARIANT)
-//	}
-//	
-//	@Test def void testUnambiguousMapping_03() {
-//		'K, V'.mappedBy('java.util.Map<K, V>', 'java.util.Map<String, Integer>')
-//			.assertMapping('K', 'String'->INVARIANT->INVARIANT)
-//			.assertMapping('V', 'Integer'->INVARIANT->INVARIANT)
-//	}
-//	
-//	@Test def void testUnambiguousMapping_04() {
-//		'T'.mappedBy('T', 'CharSequence', 'T', 'CharSequence')
-//			.assertMapping('T', 'CharSequence'->OUT->OUT, 'CharSequence'->OUT->OUT)
-//	}
-//	
-//	@Test def void testUnambiguousMapping_05() {
-//		'T, T2'.mappedBy('T', 'CharSequence', 'T2', 'CharSequence')
-//			.assertMapping('T', 'CharSequence'->OUT->OUT)
-//			.assertMapping('T2', 'CharSequence'->OUT->OUT)
-//	}
-//	
-//	@Test def void testUsedTwice_01() {
-//		'T'.mappedBy('T', 'CharSequence', 'T', 'String')
-//			.assertMapping('T', 'CharSequence'->OUT->OUT, 'String'->OUT->OUT)
-//	}
-//	
-//	@Test def void testUsedTwice_02() {
-//		'T'.mappedBy('T', 'String', 'T', 'CharSequence')
-//			.assertMapping('T', 'String'->OUT->OUT, 'CharSequence'->OUT->OUT)
-//	}
-//	
-//	@Test def void testBestEffortMapping_01() {
-//		'T'.mappedBy('java.util.List<T>', 'java.util.Set<String>').assertMapping('T', 'String'->INVARIANT->INVARIANT)
-//	}
-//	
-//	@Test def void testBestEffortMapping_02() {
-//		'T'.mappedBy('java.util.ArrayList<T>', 'java.util.HashSet<String>').assertMapping('T', 'String'->INVARIANT->INVARIANT)
-//	}
-//	
-//	@Test def void testBestEffortMapping_03() {
-//		'T'.mappedBy('java.util.ArrayList<T>', 'Iterable<String>').assertMapping('T', 'String'->INVARIANT->INVARIANT)
-//	}
-//	
-//	@Test def void testBestEffortMapping_04() {
-//		'T'.mappedBy('java.util.HashMap<java.util.ArrayList<T>, java.util.ArrayList<T>>', 'java.util.Map<Iterable<String>, java.util.HashSet<Integer>>')
-//			.assertMapping('T', 'String'->INVARIANT->INVARIANT, 'Integer'->INVARIANT->INVARIANT)
-//	}
-//	
-//	@Test def void testBestEffortMapping_05() {
-//		'T'.mappedBy('org.eclipse.xtend.core.tests.typesystem.MapType<T>', 'java.util.HashMap<String, Integer>')
-//			.assertMapping('T', 'String'->INVARIANT->INVARIANT, 'Integer'->INVARIANT->INVARIANT)
-//	}
-//	
-//	@Test def void testInheritanceMapping_01() {
-//		'E'.mappedBy('Iterable<E>', 'java.util.ArrayList<String>')
-//			.assertMapping('E', 'String'->INVARIANT->INVARIANT)
-//	}
-//	
-//	@Test def void testInheritanceMapping_02() {
-//		'C'.mappedBy('Comparable<C>', 'String')
-//			.assertMapping('C', 'String'->INVARIANT->INVARIANT)
-//	}
-//	
-//	@Test def void testMappedGenericType_01() {
-//		'T'.mappedBy('Iterable<T>', 'Iterable<Iterable<String>>').assertMapping('T', 'Iterable<String>'->INVARIANT->INVARIANT)
-//	}
-//	
-//	@Test def void testMappedArray_01() {
-//		'T'.mappedBy('T[]', 'String[]').assertMapping('T', 'String'->OUT->OUT)
-//	}
-//	
-//	@Test def void testMappedArray_02() {
-//		'T'.mappedBy('T[]', 'String[][]').assertMapping('T', 'String[]'->OUT->OUT)
-//	}
-//	
-//	@Test def void testUpperBound_01() {
-//		'T'.mappedBy('Iterable<? extends T>', 'Iterable<String>').assertMapping('T', 'String'->OUT->INVARIANT)
-//	}
-//	
-//	@Test def void testUpperBound_02() {
-//		'T'.mappedBy('Iterable<? extends T>', 'Iterable<? extends String>').assertMapping('T', 'String'->OUT->OUT)
-//	}
-//	
-//	@Test def void testUpperBound_03() {
-//		'T'.mappedBy('Iterable<? extends T>', 'Iterable<? super String>').assertMapping('T', 'Object'->OUT->OUT, 'String'->OUT->IN)
-//	}
-//	
-//	@Test def void testUpperBound_04() {
-//		'T'.mappedBy('Iterable<T>', 'Iterable<? extends String>').assertMapping('T', 'String'->INVARIANT->OUT)
-//	}
-//	
-//	@Test def void testUpperBound_05() {
-//		'T'.mappedBy('Iterable<Iterable<T>>', 'Iterable<Iterable<? extends CharSequence>>').assertMapping('T', 'CharSequence'->INVARIANT->OUT)
-//	}
-//	
-//	@Test def void testUpperBound_06() {
-//		'T'.mappedBy('Iterable<T>', 'Iterable<Iterable<? extends CharSequence>>').assertMapping('T', 'Iterable<? extends CharSequence>'->INVARIANT->INVARIANT)
-//	}
-//	
-//	@Test def void testUpperBound_07() {
-//		'T'.mappedBy('Iterable<? extends Iterable<T>>', 'Iterable<Iterable<? extends CharSequence>>').assertMapping('T', 'CharSequence'->INVARIANT->OUT)
-//	}
-//	
-//	@Test def void testUpperBound_08() {
-//		'T'.mappedBy('Iterable<? extends Iterable<T>>', 'Iterable<Iterable<CharSequence>>').assertMapping('T', 'CharSequence'->INVARIANT->INVARIANT)
-//	}
-//	
-//	@Test def void testUpperBound_09() {
-//		'T'.mappedBy('Iterable<? extends Iterable<T>>', 'Iterable<? extends Iterable<CharSequence>>').assertMapping('T', 'CharSequence'->INVARIANT->INVARIANT)
-//	}
-//	
-//	@Test def void testUpperBound_10() {
-//		'T'.mappedBy('Iterable<? extends Iterable<T>>', 'Iterable<? super Iterable<CharSequence>>').assertMapping('T', 'CharSequence'->INVARIANT->INVARIANT)
-//	}
-//	
-//	@Test def void testUpperBound_11() {
-//		'T'.mappedBy('java.util.Map<? extends T, ? extends T>', 'java.util.Map<String, Integer>').assertMapping('T', 'String'->OUT->INVARIANT, 'Integer'->OUT->INVARIANT)
-//	}
-//	
-//	@Test def void testLowerBound_01() {
-//		'T'.mappedBy('Iterable<? super T>', 'Iterable<String>').assertMapping('T', 'String'->IN->INVARIANT)
-//	}
-//	
-//	@Test def void testLowerBound_02() {
-//		'T'.mappedBy('Iterable<? super T>', 'Iterable<? super String>').assertMapping('T', 'String'->IN->IN)
-//	}
-//	
-//	@Test def void testLowerBound_03() {
-//		'T'.mappedBy('Iterable<? super T>', 'Iterable<? extends String>').assertMapping('T', 'String'->IN->OUT)
-//	}
-//	
-//	@Test def void testLowerBound_04() {
-//		'T, T2 extends T'.mappedBy('Iterable<? super T>', 'Iterable<? extends String>')
-//			.assertMapping('T', 'String'->IN->OUT)
-//			.assertMapping('T2', 'String'->IN->OUT)
-//	}
-//	
-//	@Test def void testLowerBound_05() {
-//		'T, T2 extends T'.mappedBy('java.util.Map<? super T, T>', 'java.util.Map<? extends String, Integer>')
-//			.assertMapping('T', 'String'->IN->OUT, 'Integer'->INVARIANT->INVARIANT)
-//			.assertMapping('T2', 'String'->IN->OUT, 'Integer'->INVARIANT->INVARIANT)
-//	}
-//	
-//	@Test def void testLowerBound_06() {
-//		'T'.mappedBy('Iterable<T>', 'Iterable<? super String>').assertMapping('T', 'String'->INVARIANT->IN)
-//	}
-//	
-//	@Test def void testLowerBound_07() {
-//		'T'.mappedBy('Iterable<Iterable<T>>', 'java.util.LinkedList<Iterable<? super String>>').assertMapping('T', 'String'->INVARIANT->IN)
-//	}
-//	
-//	@Test def void testLowerBound_08() {
-//		'T'.mappedBy('Iterable<T>', 'Iterable<Iterable<? super String>>').assertMapping('T', 'Iterable<? super String>'->INVARIANT->INVARIANT)
-//	}
-//	
-//	@Test def void testLowerBound_09() {
-//		'T extends T2, T2'.mappedBy('Iterable<? super T2>', 'Iterable<? extends String>')
-//			.assertMapping('T', 'String'->IN->OUT)
-//			.assertMapping('T2', 'String'->IN->OUT)
-//	}
-//	
-//	@Test def void testDependentTypeParams_01() {
-//		'T extends CharSequence, T2 extends T'.mappedBy('java.util.Map<T, T2>', 'java.util.Map<String, String>')
-//			.assertMapping('T', 'String'->INVARIANT->INVARIANT)
-//			.assertMapping('T2', 'String'->INVARIANT->INVARIANT)
-//	}
-//	
-//	@Test def void testDependentTypeParams_02() {
-//		'T, T2 extends T'.mappedBy('Iterable<T>', 'Iterable<String>')
-//			.assertMapping('T', 'String'->INVARIANT->INVARIANT)
-//			.assertMapping('T2', 'String'->INVARIANT->INVARIANT)
-//	}
-//	
-//	@Test def void testDependentTypeParams_03() {
-//		'T extends T2, T2 extends CharSequence'.mappedBy('Iterable<T2>', 'Iterable<String>')
-//			.assertMapping('T', 'String'->INVARIANT->INVARIANT)
-//			.assertMapping('T2', 'String'->INVARIANT->INVARIANT)
-//	}
-//	
-//	@Test def void testDependentTypeParams_04() {
-//		'T, T2 extends T, T3 extends T2'.mappedBy('java.util.Map<T, T3>', 'java.util.Map<String, Integer>')
-//			.assertMapping('T', 'String'->INVARIANT->INVARIANT)
-//			.assertMapping('T2', 'String'->INVARIANT->INVARIANT)
-//			.assertMapping('T3', 'Integer'->INVARIANT->INVARIANT)
-//	}
-//	
-//	@Test def void testCircularTypeParams_01() {
-//		'T extends T'.mappedBy('String', 'String')
-//			.assertMapping('T', 'Object'->OUT->OUT)
-//	}
-//	
-//	@Test def void testCircularTypeParams_02() {
-//		'T extends Iterable<T>'.mappedBy('CharSequence', 'String')
-//			.assertMapping('T', 'Iterable<Object>'->OUT->OUT)
-//	}
-//	
-//	@Test def void testCircularTypeParams_03() {
-//		'T extends Iterable<T>'.mappedBy('T', 'java.util.List<String>')
-//			.assertMapping('T', 'List<String>'->OUT->OUT)
-//	}
-//	
-//	@Test def void testCircularTypeParams_04() {
-//		'T extends Iterable<T>'.mappedBy('Iterable<? extends T>', 'java.util.List<String>')
-//			.assertMapping('T', 'String'->OUT->INVARIANT)
-//	}
-//	
-//	@Test def void testCircularTypeParams_05() {
-//		'T extends Iterable<? extends T>'.mappedBy('CharSequence', 'String')
-//			.assertMapping('T', 'Iterable<Object>'->OUT->OUT)
-//	}
-//	
-//	@Test def void testCircularTypeParams_06() {
-//		'T extends org.eclipse.xtend.core.tests.typesystem.CharIterable<T>'.mappedBy('CharSequence', 'String')
-//			.assertMapping('T', 'CharIterable<CharSequence>'->OUT->OUT)
-//	}
-//	
-//	@Test def void testCircularTypeParams_07() {
-//		'T extends org.eclipse.xtend.core.tests.typesystem.CharIterable<? extends T>'.mappedBy('CharSequence', 'String')
-//			.assertMapping('T', 'CharIterable<CharSequence>'->OUT->OUT)
-//	}
-//	
-//	@Test def void testCircularTypeParams_08() {
-//		'T extends Iterable<T>, T2 extends Iterable<T>'.mappedBy('CharSequence', 'String')
-//			.assertMapping('T', 'Iterable<Object>'->OUT->OUT)
-//			.assertMapping('T2', 'Iterable<Iterable<Object>>'->OUT->OUT)
-//	}
 
+	@Test def void testMergeMultiType_01() {
+		merge('StringBuilder'->OUT->OUT, 'StringBuffer'->OUT->OUT).to('AbstractStringBuilder & Serializable', INVARIANT)
+	}
+
+	@Test def void testMergeMultiType_02() {
+		mergeSuccessive('StringBuilder'->OUT->OUT, 'StringBuffer'->OUT->OUT, 'StringBuilder'->OUT->OUT).to('AbstractStringBuilder & Serializable', INVARIANT)
+	}
+	
+	@Test def void testMergeMultiType_03() {
+		merge('StringBuilder'->OUT->INVARIANT, 'StringBuffer'->OUT->INVARIANT, 'String'->OUT->INVARIANT).to('Serializable & CharSequence', INVARIANT)
+	}
+	
+	@Test def void testMergeMultiType_04() {
+		merge('AbstractStringBuilder'->OUT->INVARIANT, 'java.io.Serializable'->OUT->INVARIANT, 'String'->OUT->INVARIANT).to('Object', INVARIANT)
+	}
 }
