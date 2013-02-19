@@ -10,10 +10,12 @@ package org.eclipse.xtext.xbase.typesystem.internal;
 import java.util.Collections;
 import java.util.List;
 
-import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.common.types.JvmConstructor;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
+import org.eclipse.xtext.common.types.JvmIdentifiableElement;
+import org.eclipse.xtext.common.types.JvmMember;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.JvmTypeParameterDeclarator;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
@@ -23,17 +25,19 @@ import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XFeatureCall;
 import org.eclipse.xtext.xbase.XMemberFeatureCall;
 import org.eclipse.xtext.xbase.XUnaryOperation;
+import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
+import org.eclipse.xtext.xbase.typesystem.references.ParameterizedTypeReference;
 
 import com.google.common.collect.Lists;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
+@NonNullByDefault
 public class FeatureLinkHelper {
 
-	// TODO this should be part of XAbstractFeatureCall or even XExpression
 	@Nullable
-	public XExpression getSyntacticReceiver(@NonNull XExpression expression) {
+	public XExpression getSyntacticReceiver(XExpression expression) {
 		if (expression instanceof XAbstractFeatureCall) {
 			if (expression instanceof XFeatureCall) {
 				return null;
@@ -95,6 +99,21 @@ public class FeatureLinkHelper {
 			return constructorTypeParameters;
 		}
 		return Collections.emptyList();
+	}
+	
+	@Nullable
+	public LightweightTypeReference getExpectedReceiverType(JvmIdentifiableElement linkedFeature, LightweightTypeReference receiverType) {
+		if (receiverType.isMultiType() && linkedFeature instanceof JvmMember) {
+			ParameterizedTypeReference declaratorReference = new ParameterizedTypeReference(receiverType.getOwner(), ((JvmMember) linkedFeature).getDeclaringType());
+			if (!declaratorReference.isAssignableFrom(receiverType.toJavaType())) {
+				for(LightweightTypeReference multiTypeComponent: receiverType.getMultiTypeComponents()) {
+					if (declaratorReference.isAssignableFrom(multiTypeComponent)) {
+						return multiTypeComponent;
+					}
+				}
+			}
+		}
+		return receiverType;
 	}
 	
 }
