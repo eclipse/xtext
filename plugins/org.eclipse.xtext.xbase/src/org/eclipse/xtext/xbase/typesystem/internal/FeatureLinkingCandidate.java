@@ -11,11 +11,13 @@ import java.util.EnumSet;
 import java.util.List;
 import java.util.Map;
 
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.common.types.JvmConstructor;
+import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmExecutable;
 import org.eclipse.xtext.common.types.JvmField;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
@@ -109,14 +111,23 @@ public class FeatureLinkingCandidate extends AbstractPendingLinkingCandidate<XAb
 	public boolean validate(IAcceptor<? super AbstractDiagnostic> result) {
 		// TODO improve error messages
 		if (isStatic() && !isExtension() && isInstanceAccessSyntax()) {
-			String message = "Instance access to static member " + getFeature().getSimpleName();
+			String message = String.format("The static %1$s %2$s%3$s should be accessed in a static way",
+					getFeatureTypeName(),
+					getFeature().getSimpleName(),
+					getFeatureParameterTypesAsString());
 			AbstractDiagnostic diagnostic = new EObjectDiagnosticImpl(Severity.ERROR,
 					IssueCodes.INSTANCE_ACCESS_TO_STATIC_MEMBER, message, getExpression(),
 					XbasePackage.Literals.XABSTRACT_FEATURE_CALL__FEATURE, -1, null);
 			result.accept(diagnostic);
 			return false;
 		} else if (!isStatic() && isStaticAccessSyntax()) {
-			String message = "Static access to instance member " + getFeature().getSimpleName();
+			EObject featureOwner = getFeature().eContainer();
+			String message = String.format("Cannot make a static reference to the non-static %1$s %2$s%3$s",
+					getFeatureTypeName(),
+					getFeature().getSimpleName(),
+					getFeatureParameterTypesAsString());
+			if(featureOwner instanceof JvmDeclaredType) 
+				message += " from the type " + ((JvmDeclaredType) featureOwner).getSimpleName();
 			AbstractDiagnostic diagnostic = new EObjectDiagnosticImpl(Severity.ERROR,
 					IssueCodes.STATIC_ACCESS_TO_INSTANCE_MEMBER, message, getExpression(),
 					XbasePackage.Literals.XABSTRACT_FEATURE_CALL__FEATURE, -1, null);
@@ -150,7 +161,7 @@ public class FeatureLinkingCandidate extends AbstractPendingLinkingCandidate<XAb
 			if (feature instanceof XVariableDeclaration && ((XVariableDeclaration) feature).isWriteable()) {
 				XClosure containingClosure = EcoreUtil2.getContainerOfType(getExpression(), XClosure.class);
 				if (containingClosure != null && !EcoreUtil.isAncestor(containingClosure, feature)) {
-					String message = String.format("Cannot refer to a non-final variable %s from within a closure", feature.getSimpleName());
+					String message = String.format("Cannot refer to a non-final variable %s inside a closure", feature.getSimpleName());
 					AbstractDiagnostic diagnostic = new EObjectDiagnosticImpl(Severity.ERROR,
 							IssueCodes.INVALID_MUTABLE_VARIABLE_ACCESS, message, getExpression(),
 							XbasePackage.Literals.XABSTRACT_FEATURE_CALL__FEATURE, -1, null);
