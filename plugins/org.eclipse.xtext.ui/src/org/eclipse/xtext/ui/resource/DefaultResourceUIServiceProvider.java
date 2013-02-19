@@ -25,7 +25,7 @@ import com.google.inject.Inject;
 /**
  * @author Jan Koehnlein - Initial contribution and API
  */
-public class DefaultResourceUIServiceProvider implements IResourceUIServiceProvider {
+public class DefaultResourceUIServiceProvider implements IResourceUIServiceProvider, IResourceUIServiceProviderExtension {
 
 	private IResourceServiceProvider delegate;
 	
@@ -80,6 +80,13 @@ public class DefaultResourceUIServiceProvider implements IResourceUIServiceProvi
 			return true;
 		}
 		return false;
+	}
+	
+	/**
+	 * @since 2.4
+	 */
+	public boolean canBuild(URI uri, IStorage storage) {
+		return canHandle(uri, storage);
 	}
 
 	/**
