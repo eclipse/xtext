@@ -1,4 +1,4 @@
-### Build trigger ####
+### Build trigger #####
 ### Indigo ###
 #7 9 5 * * wget --auth-no-challenge  --spider "https://hudson.eclipse.org/hudson/job/Xtext-nightly-HEAD/buildWithParameters?ECLIPSE.TARGET.ALIAS=Indigo&cause=Dennis+Cron+Job" 
 
