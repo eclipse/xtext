@@ -1756,4 +1756,79 @@ public class XtendValidationTest extends AbstractXtendTestCase {
 		helper.assertNoError(file, STATIC_ACCESS_TO_INSTANCE_MEMBER);
 	}
 
+	@Test 
+	public void testTypeParameterForwardReference_0() throws Exception {
+		XtendFile file = file(
+				"class Foo<T extends T> {"
+				+ "}");
+		helper.assertNoError(file, TYPE_PARAMETER_FORWARD_REFERENCE);		
+	}
+	
+	@Test 
+	public void testTypeParameterForwardReference_1() throws Exception {
+		XtendFile file = file(
+				"class Foo<T extends U, U> {"
+				+ "}");
+		helper.assertError(file, TypesPackage.Literals.JVM_TYPE_REFERENCE, TYPE_PARAMETER_FORWARD_REFERENCE);		
+	}
+	
+	@Test 
+	public void testTypeParameterForwardReference_2() throws Exception {
+		XtendFile file = file(
+				"class Foo<T, U extends List<? extends V>, V> {"
+				+ "}");
+		helper.assertError(file, TypesPackage.Literals.JVM_TYPE_REFERENCE, TYPE_PARAMETER_FORWARD_REFERENCE);		
+	}
+	
+	@Test 
+	public void testTypeParameterForwardReference_3() throws Exception {
+		XtendFile file = file(
+				"interface Foo<T extends T> {"
+				+ "}");
+		helper.assertNoError(file, TYPE_PARAMETER_FORWARD_REFERENCE);		
+	}
+	
+	@Test 
+	public void testTypeParameterForwardReference_4() throws Exception {
+		XtendFile file = file(
+				"interface Foo<T extends U, U> {"
+				+ "}");
+		helper.assertError(file, TypesPackage.Literals.JVM_TYPE_REFERENCE, TYPE_PARAMETER_FORWARD_REFERENCE);		
+	}
+	
+	@Test 
+	public void testTypeParameterForwardReference_5() throws Exception {
+		XtendFile file = file(
+				"interface Foo<T, U extends List<? extends V>, V> {"
+				+ "}");
+		helper.assertError(file, TypesPackage.Literals.JVM_TYPE_REFERENCE, TYPE_PARAMETER_FORWARD_REFERENCE);		
+	}
+
+	@Test 
+	public void testTypeParameterForwardReference_6() throws Exception {
+		XtendFile file = file(
+				"class Foo {"
+				+ "  def <T extends T> foo() {}"
+				+ "}");
+		helper.assertNoError(file, TYPE_PARAMETER_FORWARD_REFERENCE);		
+	}
+	
+	@Test 
+	public void testTypeParameterForwardReference_7() throws Exception {
+		XtendFile file = file(
+				"class Foo {"
+				+ "  def <T extends U, U> foo() {}"
+				+ "}");
+		helper.assertError(file, TypesPackage.Literals.JVM_TYPE_REFERENCE, TYPE_PARAMETER_FORWARD_REFERENCE);		
+	}
+	
+	@Test 
+	public void testTypeParameterForwardReference_8() throws Exception {
+		XtendFile file = file(
+				"class Foo {"
+				+ "  def <T, U extends List<? extends V>, V> foo() {}"
+				+ "}");
+		helper.assertError(file, TypesPackage.Literals.JVM_TYPE_REFERENCE, TYPE_PARAMETER_FORWARD_REFERENCE);		
+	}
+
 }
