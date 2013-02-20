@@ -1692,5 +1692,68 @@ public class XtendValidationTest extends AbstractXtendTestCase {
 				+ "}");
 		helper.assertNoError(file.getXtendTypes().get(0), WILDCARD_IN_SUPERTYPE);
 	}
+	
+	@Test 
+	public void testTypeParameterAccessedFromStaticMember_0() throws Exception {
+		XtendFile file = file(
+				"class Foo<T> {"
+				+ " public T x"
+				+ "}");
+		helper.assertNoError(file, STATIC_ACCESS_TO_INSTANCE_MEMBER);
+	}
+
+	@Test 
+	public void testTypeParameterAccessedFromStaticMember_1() throws Exception {
+		XtendFile file = file(
+				"class Foo<T> {"
+				+ " def T x(T y) { val T z=y z }"
+				+ "}");
+		helper.assertNoError(file, STATIC_ACCESS_TO_INSTANCE_MEMBER);
+	}
+
+	@Test 
+	public void testTypeParameterAccessedFromStaticMember_2() throws Exception {
+		XtendFile file = file(
+				"class Foo<T> {"
+				+ " def static T x() { null }"
+				+ "}");
+		helper.assertError(file, TypesPackage.Literals.JVM_TYPE_REFERENCE, STATIC_ACCESS_TO_INSTANCE_MEMBER);
+	}
+
+	@Test 
+	public void testTypeParameterAccessedFromStaticMember_3() throws Exception {
+		XtendFile file = file(
+				"class Foo<T> {"
+				+ " def static void x(T t) { null }"
+				+ "}");
+		helper.assertError(file, TypesPackage.Literals.JVM_TYPE_REFERENCE, STATIC_ACCESS_TO_INSTANCE_MEMBER);
+	}
+
+	@Test 
+	public void testTypeParameterAccessedFromStaticMember_4() throws Exception {
+		XtendFile file = file(
+				"class Foo<T> {"
+				+ " def static Foo<T> x() { null }"
+				+ "}");
+		helper.assertError(file, TypesPackage.Literals.JVM_TYPE_REFERENCE, STATIC_ACCESS_TO_INSTANCE_MEMBER);
+	}
+
+	@Test 
+	public void testTypeParameterAccessedFromStaticMember_5() throws Exception {
+		XtendFile file = file(
+				"class Foo<T> {"
+				+ " def static void x() { new Foo<T>() }"
+				+ "}");
+		helper.assertError(file, TypesPackage.Literals.JVM_TYPE_REFERENCE, STATIC_ACCESS_TO_INSTANCE_MEMBER);
+	}
+
+	@Test 
+	public void testTypeParameterAccessedFromStaticMember_6() throws Exception {
+		XtendFile file = file(
+				"class Foo<T> {"
+				+ " def static <T> void x(T x) {}"
+				+ "}");
+		helper.assertNoError(file, STATIC_ACCESS_TO_INSTANCE_MEMBER);
+	}
 
 }
