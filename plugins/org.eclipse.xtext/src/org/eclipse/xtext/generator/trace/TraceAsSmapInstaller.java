@@ -38,6 +38,9 @@ public class TraceAsSmapInstaller implements ITraceToBytecodeInstaller {
 
 	@Inject
 	private IResourceServiceProvider.Registry serviceProviderRegistry;
+	
+	@Inject
+	private ITraceURIConverter traceURIConverter; 
 
 	protected String smap;
 
@@ -50,7 +53,7 @@ public class TraceAsSmapInstaller implements ITraceToBytecodeInstaller {
 	}
 
 	protected String getPath(URI path) {
-		return path.lastSegment();
+		return traceURIConverter.getURIForTrace(path).toString();
 	}
 
 	protected String getStratumName(final URI path) {
