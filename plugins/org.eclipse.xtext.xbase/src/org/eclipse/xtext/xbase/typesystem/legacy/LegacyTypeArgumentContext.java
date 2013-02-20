@@ -40,7 +40,7 @@ public class LegacyTypeArgumentContext implements ITypeArgumentContext {
 		this.request = request;
 		this.services = services;
 		this.receiver = request.getReceiverType();
-		if (this.receiver != null) {
+		if (this.receiver != null && receiver.getType() != null) {
 			this.resource = receiver.getType().eResource();
 			if (resource == null) {
 //				throw new IllegalArgumentException();
