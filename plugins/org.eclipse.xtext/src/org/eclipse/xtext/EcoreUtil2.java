@@ -127,7 +127,7 @@ public class EcoreUtil2 extends EcoreUtil {
 	 */
 	@SuppressWarnings("unchecked")
 	public static <T extends EObject> T clone(T eObject) {
-		return EcoreUtil.copy(eObject);
+		return (T) EcoreUtil.copy(eObject);
 	}
 	
 	/**
