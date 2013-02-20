@@ -40,6 +40,11 @@ public class ConstraintVisitingInfo {
     return this.visiting.add(parameter);
   }
   
+  public boolean canVisit(final JvmTypeParameter parameter) {
+    boolean _contains = this.visiting.contains(parameter);
+    return (!_contains);
+  }
+  
   public void didVisit(final JvmTypeParameter parameter) {
     this.visiting.remove(parameter);
   }

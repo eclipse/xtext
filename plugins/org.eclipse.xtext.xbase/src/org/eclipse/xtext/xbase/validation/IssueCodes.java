@@ -76,6 +76,9 @@ public class IssueCodes {
 	public static final String DISCOURAGED_REFERENCE = ISSUE_CODE_PREFIX	+ "discouraged_reference";
 	
 	public static final String RAW_TYPE = ISSUE_CODE_PREFIX	+ "raw_type";
+	public static final String TYPE_BOUNDS_MISSMATCH = ISSUE_CODE_PREFIX + "type_bounds_missmatch";
+	public static final String TYPE_PARAMETER_FORWARD_REFERENCE = ISSUE_CODE_PREFIX + "type_parameter_forward_reference";
+
 	
 	// list is not necessarily complete
 	// list is sorted from least important issue to worst issue

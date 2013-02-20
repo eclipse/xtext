@@ -73,7 +73,19 @@ public abstract class TypeParameterSubstitutor<Visiting> extends TypeReferenceVi
 		return result;
 	}
 
+	/**
+	 * This is equivalent to {@code visitTypeArgument(reference, visiting, false)}.
+	 * 
+	 * @see #visitTypeArgument(LightweightTypeReference, Object, boolean)
+	 */
 	protected LightweightTypeReference visitTypeArgument(LightweightTypeReference reference, Visiting visiting) {
+		return visitTypeArgument(reference, visiting, false);
+	}
+	
+	/**
+	 * @param lowerBound if the given reference was used as the lower bound of a wildcard
+	 */
+	protected LightweightTypeReference visitTypeArgument(LightweightTypeReference reference, Visiting visiting, boolean lowerBound) {
 		return reference.accept(this, visiting);
 	}
 	
@@ -106,7 +118,7 @@ public abstract class TypeParameterSubstitutor<Visiting> extends TypeReferenceVi
 		}
 		return null;
 	}
-		
+	
 	@Override
 	protected LightweightTypeReference doVisitWildcardTypeReference(WildcardTypeReference reference, Visiting visiting) {
 		if (reference.isResolved() && reference.isOwnedBy(getOwner()))
@@ -114,7 +126,7 @@ public abstract class TypeParameterSubstitutor<Visiting> extends TypeReferenceVi
 		WildcardTypeReference result = new WildcardTypeReference(getOwner());
 		LightweightTypeReference lowerBound = reference.getLowerBound();
 		if (lowerBound != null) {
-			LightweightTypeReference visited = visitTypeArgument(lowerBound, visiting);
+			LightweightTypeReference visited = visitTypeArgument(lowerBound, visiting, true);
 			if (visited.isWildcard()) {
 				LightweightTypeReference lowerBoundSubstitute = visited.getLowerBoundSubstitute();
 				if (lowerBoundSubstitute.isAny()) {

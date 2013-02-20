@@ -109,7 +109,6 @@ public class FeatureLinkingCandidate extends AbstractPendingLinkingCandidate<XAb
 	
 	@Override
 	public boolean validate(IAcceptor<? super AbstractDiagnostic> result) {
-		// TODO improve error messages
 		if (isStatic() && !isExtension() && isInstanceAccessSyntax()) {
 			String message = String.format("The static %1$s %2$s%3$s should be accessed in a static way",
 					getFeatureTypeName(),
@@ -169,6 +168,8 @@ public class FeatureLinkingCandidate extends AbstractPendingLinkingCandidate<XAb
 					return false;
 				}
 			}
+		} else {
+			
 		}
 		return true;
 	}
