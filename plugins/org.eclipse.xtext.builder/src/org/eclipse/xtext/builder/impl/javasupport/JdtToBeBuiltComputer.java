@@ -99,8 +99,11 @@ public class JdtToBeBuiltComputer extends ToBeBuiltComputer {
 					return toBeBuilt;
 				if (shouldHandle(root) && !isBuiltByUpstream(root, project, orderedProjects.projects)) {
 					Map<URI, IStorage> rootData = storage2UriMapperJavaImpl.getAllEntries(root);
-					toBeBuilt.getToBeDeleted().addAll(rootData.keySet());
-					toBeBuilt.getToBeUpdated().addAll(rootData.keySet());
+					for (Map.Entry<URI, IStorage> e : rootData.entrySet())
+						if (uriValidator.canBuild(e.getKey(), e.getValue())) {
+							toBeBuilt.getToBeDeleted().add(e.getKey());
+							toBeBuilt.getToBeUpdated().add(e.getKey());
+						}
 				}
 				progress.worked(1);
 			}
