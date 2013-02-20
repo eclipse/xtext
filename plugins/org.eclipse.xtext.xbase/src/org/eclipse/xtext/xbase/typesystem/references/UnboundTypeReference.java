@@ -563,8 +563,8 @@ public class UnboundTypeReference extends LightweightTypeReference {
 	public void acceptHint(
 			LightweightTypeReference hint, BoundTypeArgumentSource source, Object origin,
 			VarianceInfo expectedVariance, VarianceInfo actualVariance) {
-		if (hint.isPrimitiveVoid() || hint.isAny())
-			throw new IllegalArgumentException("Hint may not be primitive void or <any>");
+		if (!hint.isValidHint())
+			throw new IllegalArgumentException("Hint may not be primitive void, <any> or <unknown>");
 		acceptHint(new LightweightBoundTypeArgument(hint.getWrapperTypeIfPrimitive(), source, origin, expectedVariance, actualVariance));
 	}
 	
