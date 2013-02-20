@@ -9,6 +9,7 @@ package org.eclipse.xtend.core.macro;
 
 import com.google.inject.Inject;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicBoolean;
 import javax.inject.Provider;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.resource.Resource;
@@ -131,47 +132,40 @@ public class AnnotationProcessor {
    * when the given amount of milliseconds have passed by.
    */
   private Boolean runWithTimeout(final ActiveAnnotationContext ctx, final int timeout, final Runnable runnable) {
-    Boolean _xblockexpression = null;
+    boolean _xblockexpression = false;
     {
+      AtomicBoolean _atomicBoolean = new AtomicBoolean(false);
+      final AtomicBoolean isFinished = _atomicBoolean;
       final Runnable _function = new Runnable() {
           public void run() {
             try {
-              runnable.run();
-            } catch (final Throwable _t) {
-              if (_t instanceof TimeoutException) {
-                final TimeoutException e = (TimeoutException)_t;
-                AnnotationProcessor.this.handelTimeout(ctx, e);
-              } else {
-                throw Exceptions.sneakyThrow(_t);
+              Thread.sleep(timeout);
+              boolean _get = isFinished.get();
+              boolean _not = (!_get);
+              if (_not) {
+                CompilationUnitImpl _compilationUnit = ctx.getCompilationUnit();
+                _compilationUnit.setTimeout(true);
               }
+            } catch (Throwable _e) {
+              throw Exceptions.sneakyThrow(_e);
             }
           }
         };
       Thread _thread = new Thread(_function);
-      final Thread thread = _thread;
-      thread.run();
-      Boolean _xtrycatchfinallyexpression = null;
+      _thread.start();
+      boolean _xtrycatchfinallyexpression = false;
       try {
-        Boolean _xblockexpression_1 = null;
-        {
-          thread.join(timeout);
-          Boolean _xifexpression = null;
-          boolean _isAlive = thread.isAlive();
-          if (_isAlive) {
-            CompilationUnitImpl _compilationUnit = ctx.getCompilationUnit();
-            boolean _setTimeout = _compilationUnit.setTimeout(true);
-            _xifexpression = _setTimeout;
-          }
-          _xblockexpression_1 = (_xifexpression);
-        }
-        _xtrycatchfinallyexpression = _xblockexpression_1;
+        runnable.run();
       } catch (final Throwable _t) {
-        if (_t instanceof InterruptedException) {
-          final InterruptedException e = (InterruptedException)_t;
-          _xtrycatchfinallyexpression = null;
+        if (_t instanceof TimeoutException) {
+          final TimeoutException e = (TimeoutException)_t;
+          boolean _handelTimeout = this.handelTimeout(ctx, e);
+          _xtrycatchfinallyexpression = _handelTimeout;
         } else {
           throw Exceptions.sneakyThrow(_t);
         }
+      } finally {
+        isFinished.set(true);
       }
       _xblockexpression = (_xtrycatchfinallyexpression);
     }
