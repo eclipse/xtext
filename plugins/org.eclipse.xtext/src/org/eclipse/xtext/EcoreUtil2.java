@@ -43,6 +43,7 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.URIConverter;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.xtext.linking.lazy.LazyLinkingResource;
 import org.eclipse.xtext.resource.ClassloaderClasspathUriResolver;
 import org.eclipse.xtext.util.CancelIndicator;
@@ -126,7 +127,7 @@ public class EcoreUtil2 extends EcoreUtil {
 	 */
 	@SuppressWarnings("unchecked")
 	public static <T extends EObject> T clone(T eObject) {
-		return (T) EcoreUtil.copy(eObject);
+		return EcoreUtil.copy(eObject);
 	}
 	
 	/**
@@ -607,5 +608,56 @@ public class EcoreUtil2 extends EcoreUtil {
 		} else {
 			return URIConverter.INSTANCE.normalize(resource.getURI());
 		}
+	}
+	
+	/**
+	 * A better performing alternative to the {@link org.eclipse.emf.ecore.util.EcoreUtil.CrossReferencer}.
+	 * 
+	 * @since 2.4
+	 */
+	@SuppressWarnings("unchecked")
+	public static void findCrossReferences(EObject rootElement, Set<? extends EObject> targets, ElementReferenceAcceptor acceptor) {
+		for(EReference ref: rootElement.eClass().getEAllReferences()) {
+			if(rootElement.eIsSet(ref)) {
+				if(ref.isContainment()) {
+					Object content = rootElement.eGet(ref, false);
+					if(ref.isMany()) {
+						InternalEList<EObject> contentList = (InternalEList<EObject>) content;
+						for(int i=0; i<contentList.size(); ++i) {
+							EObject childElement = contentList.basicGet(i);
+							if(!childElement.eIsProxy())
+								findCrossReferences(childElement, targets, acceptor);
+						}
+					} else {
+						EObject childElement = (EObject) content;
+						if(!childElement.eIsProxy())
+							findCrossReferences(childElement, targets, acceptor);
+					}
+				} else if (!ref.isContainer()) {
+					Object value = rootElement.eGet(ref, false);
+					if(ref.isMany()) {
+						InternalEList<EObject> values = (InternalEList<EObject>) value;
+						for(int i=0; i< values.size(); ++i) {
+							EObject refElement = values.get(i);
+							if(targets.contains(refElement)) {
+								acceptor.accept(rootElement, refElement, ref, i);
+							}
+						}
+					} else {
+						EObject refElement = (EObject) value;
+						if(targets.contains(refElement)) {
+							acceptor.accept(rootElement, refElement, ref, -1);
+						}
+					}
+				}
+			}
+		}
+	}
+	
+	/**
+	 * @since 2.4
+	 */
+	public static interface ElementReferenceAcceptor {
+		void accept(EObject referrer, EObject referenced, EReference reference, int index);
 	}
 }

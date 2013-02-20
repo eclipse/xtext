@@ -9,6 +9,7 @@ package org.eclipse.xtext.xbase.validation;
 
 import static com.google.common.collect.Iterables.*;
 import static com.google.common.collect.Lists.*;
+import static com.google.common.collect.Sets.*;
 import static org.eclipse.xtext.xbase.XbasePackage.Literals.*;
 import static org.eclipse.xtext.xbase.validation.IssueCodes.*;
 
@@ -22,6 +23,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EClassifier;
@@ -34,6 +36,7 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.xtext.CrossReference;
 import org.eclipse.xtext.EcoreUtil2;
+import org.eclipse.xtext.EcoreUtil2.ElementReferenceAcceptor;
 import org.eclipse.xtext.TerminalRule;
 import org.eclipse.xtext.common.types.JvmConstructor;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
@@ -45,9 +48,10 @@ import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmMember;
 import org.eclipse.xtext.common.types.JvmOperation;
-import org.eclipse.xtext.common.types.JvmParameterizedTypeReference;
 import org.eclipse.xtext.common.types.JvmType;
+import org.eclipse.xtext.common.types.JvmTypeConstraint;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
+import org.eclipse.xtext.common.types.JvmTypeParameterDeclarator;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.JvmVoid;
 import org.eclipse.xtext.common.types.TypesPackage;
@@ -114,6 +118,7 @@ import org.eclipse.xtext.xtype.XImportDeclaration;
 import org.eclipse.xtext.xtype.XImportSection;
 import org.eclipse.xtext.xtype.XtypePackage;
 
+import com.google.common.base.Function;
 import com.google.common.base.Joiner;
 import com.google.common.base.Predicate;
 import com.google.common.collect.ImmutableSet;
@@ -577,6 +582,29 @@ public class XbaseJavaValidator extends AbstractXbaseJavaValidator {
 		if(element instanceof JvmDeclaredType)
 			return ((JvmDeclaredType) element).isStatic() || ((JvmDeclaredType)element).getDeclaringType() == null;
 		return false;
+	}
+	
+	/**
+	 * Java 5 does not allow forward references in type parameters, so we have to validate this, too
+	 */
+	public void doCheckTypeParameterForwardReference(List<JvmTypeParameter> sourceTypeParameters) {
+		if (sourceTypeParameters.size() > 1) {
+			final Set<JvmTypeParameter> forbidden = newHashSet(); 
+			for (int i=sourceTypeParameters.size()-2; i>=0; --i) {
+				JvmTypeParameter current = sourceTypeParameters.get(i);
+				for (EObject jvmElement: associations.getJvmElements(sourceTypeParameters.get(i+1))) 
+					if(jvmElement instanceof JvmTypeParameter)
+						forbidden.add((JvmTypeParameter) jvmElement);
+				for (JvmTypeConstraint constraint: current.getConstraints()) {
+					EcoreUtil2.findCrossReferences(constraint.getTypeReference(), forbidden, new ElementReferenceAcceptor() {
+						public void accept(EObject referrer, EObject referenced, EReference reference, int index) {
+							error("Illegal forward reference to type parameter " + ((JvmTypeParameter)referenced).getSimpleName(), 
+									referrer, reference, index, TYPE_PARAMETER_FORWARD_REFERENCE);
+						}
+					});
+				}
+			}
+		}
 	}
 	
 	@Check
