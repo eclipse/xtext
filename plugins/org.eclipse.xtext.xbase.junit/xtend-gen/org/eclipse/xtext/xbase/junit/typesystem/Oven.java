@@ -49,7 +49,7 @@ public class Oven extends Assert {
   
   private final SimpleBloomFilter alreadyBaked = new Function0<SimpleBloomFilter>() {
     public SimpleBloomFilter apply() {
-      SimpleBloomFilter _create = SimpleBloomFilter.create(100000);
+      SimpleBloomFilter _create = SimpleBloomFilter.create(5000000);
       return _create;
     }
   }.apply();

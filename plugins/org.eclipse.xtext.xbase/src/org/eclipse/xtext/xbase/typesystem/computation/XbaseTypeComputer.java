@@ -488,9 +488,10 @@ public class XbaseTypeComputer implements ITypeComputer {
 		if(!literal.getElements().isEmpty()) {
 			for(XExpression element: literal.getElements()) {
 				ITypeComputationResult elementType = state.withExpectation(elementTypeExpectation).computeTypes(element);
-				if(!elementType.getActualExpressionType().isAny()) {
+				LightweightTypeReference actualType = elementType.getActualExpressionType();
+				if(actualType != null && !actualType.isAny() && !actualType.isUnknown()) {
 					ParameterizedTypeReference collectionTypeCandidate = new ParameterizedTypeReference(state.getReferenceOwner(), collectionType);
-					collectionTypeCandidate.addTypeArgument(elementType.getActualExpressionType().getWrapperTypeIfPrimitive());
+					collectionTypeCandidate.addTypeArgument(actualType.getWrapperTypeIfPrimitive());
 					elementTypes.add(collectionTypeCandidate);
 				}
 			}
@@ -561,7 +562,7 @@ public class XbaseTypeComputer implements ITypeComputer {
 			ITypeComputationResult forExpressionResult = iterableState.computeTypes(object.getForExpression());
 			LightweightTypeReference forExpressionType = forExpressionResult.getActualExpressionType();
 			if (forExpressionType!= null) {
-				if (forExpressionType.isAny()) {
+				if (forExpressionType.isAny() || forExpressionType.isUnknown()) {
 					iterableState.refineExpectedType(object.getForExpression(), iterableOrArray);
 				} else if (forExpressionType.isResolved()) {
 					TypeConformanceResult assignability = iterableOrArray.internalIsAssignableFrom(forExpressionType, new TypeConformanceComputationArgument());
@@ -600,6 +601,8 @@ public class XbaseTypeComputer implements ITypeComputer {
 
 	protected LightweightTypeReference getAndEnhanceIterableOrArrayFromComponent(LightweightTypeReference parameterType, JvmGenericType iterableType,
 			final CompoundTypeReference compoundResult) {
+		if (parameterType.isUnknown())
+			return parameterType;
 		ITypeReferenceOwner owner = compoundResult.getOwner();
 		LightweightTypeReference iterableOrArray = null;
 		LightweightTypeReference addAsArrayComponentAndIterable = null;

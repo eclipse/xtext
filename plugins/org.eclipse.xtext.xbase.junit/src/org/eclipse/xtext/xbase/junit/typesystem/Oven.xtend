@@ -38,7 +38,7 @@ class Oven extends Assert {
 	@Inject
 	IBatchTypeResolver typeResolver
 	
-	val SimpleBloomFilter alreadyBaked = SimpleBloomFilter::create(100000)
+	val SimpleBloomFilter alreadyBaked = SimpleBloomFilter::create(5000000)
 	
 	@Inject extension ReflectExtensions
 	

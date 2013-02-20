@@ -861,8 +861,8 @@ public class XbaseJavaValidator extends AbstractXbaseJavaValidator {
 			error("Cannot perform instanceof check against parameterized type " + getNameOfTypes(rightType), null, ValidationMessageAcceptor.INSIGNIFICANT_INDEX, INVALID_INSTANCEOF);
 			return;
 		}
-		if (leftType.isAny()) {
-			return; // null is ok
+		if (leftType.isAny() || leftType.isUnknown()) {
+			return; // null / unknown is ok
 		}
 		if (rightType.isPrimitive()) {
 			error("Cannot perform instanceof check against primitive type " + this.getNameOfTypes(rightType), null, ValidationMessageAcceptor.INSIGNIFICANT_INDEX, INVALID_INSTANCEOF);
