@@ -15,6 +15,7 @@ import java.lang.reflect.Field;
 import java.lang.reflect.GenericArrayType;
 import java.lang.reflect.GenericDeclaration;
 import java.lang.reflect.GenericSignatureFormatError;
+import java.lang.reflect.MalformedParameterizedTypeException;
 import java.lang.reflect.Member;
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
@@ -121,6 +122,8 @@ public class DeclaredTypeFactory implements ITypeFactory<Class<?>> {
 					result.getTypeParameters().add(createTypeParameter(variable, result));
 				}
 			} catch(GenericSignatureFormatError error) {
+				logSignatureFormatError(clazz);
+			} catch(MalformedParameterizedTypeException error) {
 				logSignatureFormatError(clazz);
 			}
 			createAnnotationValues(clazz, result);
@@ -322,6 +325,11 @@ public class DeclaredTypeFactory implements ITypeFactory<Class<?>> {
 			if (clazz.getSuperclass() != null) {
 				result.getSuperTypes().add(createTypeReference(clazz.getSuperclass()));
 			}
+		} catch(MalformedParameterizedTypeException error) {
+			logSignatureFormatError(clazz);
+			if (clazz.getSuperclass() != null) {
+				result.getSuperTypes().add(createTypeReference(clazz.getSuperclass()));
+			}
 		}
 		Type[] interfaces = null;
 		try {
@@ -329,7 +337,11 @@ public class DeclaredTypeFactory implements ITypeFactory<Class<?>> {
 		} catch(GenericSignatureFormatError error) {
 			logSignatureFormatError(clazz);
 			interfaces = clazz.getInterfaces();
+		} catch(MalformedParameterizedTypeException error) {
+			logSignatureFormatError(clazz);
+			interfaces = clazz.getInterfaces();
 		}
+		
 		for (Type type : interfaces) {
 			result.getSuperTypes().add(createTypeReference(type));
 		}
@@ -504,7 +516,10 @@ public class DeclaredTypeFactory implements ITypeFactory<Class<?>> {
 		Type fieldType = null;
 		try {
 			fieldType = field.getGenericType();
-		} catch(GenericSignatureFormatError error) {
+		} catch (GenericSignatureFormatError error) {
+			logSignatureFormatError(field.getDeclaringClass());
+			fieldType = field.getType();
+		} catch (MalformedParameterizedTypeException error) {
 			logSignatureFormatError(field.getDeclaringClass());
 			fieldType = field.getType();
 		}
@@ -526,6 +541,9 @@ public class DeclaredTypeFactory implements ITypeFactory<Class<?>> {
 		try {
 			genericParameterTypes = constructor.getGenericParameterTypes();
 		} catch(GenericSignatureFormatError error) {
+			logSignatureFormatError(constructor.getDeclaringClass());
+			genericParameterTypes = constructor.getParameterTypes();
+		} catch (MalformedParameterizedTypeException error) {
 			logSignatureFormatError(constructor.getDeclaringClass());
 			genericParameterTypes = constructor.getParameterTypes();
 		}
@@ -559,6 +577,9 @@ public class DeclaredTypeFactory implements ITypeFactory<Class<?>> {
 		try {
 			exceptionTypes = constructor.getGenericExceptionTypes();
 		} catch(GenericSignatureFormatError error) {
+			logSignatureFormatError(constructor.getDeclaringClass());
+			exceptionTypes = constructor.getExceptionTypes();
+		} catch(MalformedParameterizedTypeException error) {
 			logSignatureFormatError(constructor.getDeclaringClass());
 			exceptionTypes = constructor.getExceptionTypes();
 		}
@@ -616,6 +637,9 @@ public class DeclaredTypeFactory implements ITypeFactory<Class<?>> {
 		} catch(GenericSignatureFormatError error) {
 			logSignatureFormatError(method.getDeclaringClass());
 			genericParameterTypes = method.getParameterTypes();
+		} catch(MalformedParameterizedTypeException error) {
+			logSignatureFormatError(method.getDeclaringClass());
+			genericParameterTypes = method.getParameterTypes();
 		}
 		enhanceGenericDeclaration(result, method);
 		enhanceExecutable(result, method, method.getName(), genericParameterTypes, method.getParameterAnnotations(), 0);
@@ -629,12 +653,18 @@ public class DeclaredTypeFactory implements ITypeFactory<Class<?>> {
 		} catch(GenericSignatureFormatError error) {
 			logSignatureFormatError(method.getDeclaringClass());
 			returnType = method.getReturnType();
+		} catch(MalformedParameterizedTypeException error) {
+			logSignatureFormatError(method.getDeclaringClass());
+			returnType = method.getReturnType();
 		}
 		result.setReturnType(createTypeReference(returnType));
 		Type[] exceptionTypes;
 		try {
 			exceptionTypes = method.getGenericExceptionTypes();
 		} catch(GenericSignatureFormatError error) {
+			logSignatureFormatError(method.getDeclaringClass());
+			exceptionTypes = method.getExceptionTypes();
+		} catch(MalformedParameterizedTypeException error) {
 			logSignatureFormatError(method.getDeclaringClass());
 			exceptionTypes = method.getExceptionTypes();
 		}
