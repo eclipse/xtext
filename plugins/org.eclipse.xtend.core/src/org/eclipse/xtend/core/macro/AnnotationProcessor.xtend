@@ -9,6 +9,7 @@
 package org.eclipse.xtend.core.macro
 
 import com.google.inject.Inject
+import java.util.concurrent.atomic.AtomicBoolean
 import javax.inject.Provider
 import org.eclipse.xtend.core.xtend.XtendMember
 import org.eclipse.xtend.lib.macro.RegisterGlobalsParticipant
@@ -77,20 +78,19 @@ class AnnotationProcessor {
 	 * when the given amount of milliseconds have passed by.
 	 */
 	private def runWithTimeout(ActiveAnnotationContext ctx, int timeout, Runnable runnable) {
-		val thread = new Thread ([|
-			try {
-				runnable.run
-			} catch (TimeoutException e) {
-				handelTimeout(ctx, e)
-			}
-		])
-		thread.run
-		try {
-			thread.join(timeout)
-			if (thread.alive) {
+		val AtomicBoolean isFinished = new AtomicBoolean(false)
+		new Thread ([|
+			Thread::sleep(timeout)
+			if (!isFinished.get)
 				ctx.compilationUnit.timeout = true
-			}
-		} catch (InterruptedException e) {}
+		]).start
+		try {
+			runnable.run
+		} catch (TimeoutException e) {
+			handelTimeout(ctx, e)
+		} finally {
+			isFinished.set(true)
+		}
 	}
 	
 	def handelTimeout(ActiveAnnotationContext context, TimeoutException exception) {
