@@ -117,9 +117,9 @@ public class ActualTypeArgumentCollector extends AbstractTypeReferencePairWalker
 							if (!getParametersToProcess().contains(constraintType)) {
 								LightweightTypeReference lightweightReference = converter.toLightweightReference(constraintReference);
 								Map<JvmTypeParameter, LightweightMergedBoundTypeArgument> constraintParameterMapping = new DeclaratorTypeArgumentCollector().getTypeParameterMapping(lightweightReference);
+								TypeParameterByConstraintSubstitutor substitutor = new TypeParameterByConstraintSubstitutor(constraintParameterMapping, getOwner());
 								LightweightTypeReference resolvedConstraint = lightweightReference.accept(
-										new TypeParameterByConstraintSubstitutor(constraintParameterMapping, getOwner()), 
-										new ConstraintVisitingInfo(pendingParameter));
+										substitutor, substitutor.createVisiting(pendingParameter));
 								Maps2.putIntoListMap(pendingParameter, boundByConstraint(resolvedConstraint, pendingParameter), result);
 							} else {
 								ParameterizedTypeReference lightweightReference = new ParameterizedTypeReference(getOwner(), getOwner().getServices().getTypeReferences().findDeclaredType(Object.class, constraintType));

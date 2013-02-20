@@ -175,4 +175,10 @@ public abstract class CustomTypeParameterSubstitutor extends TypeParameterSubsti
 	protected ConstraintVisitingInfo createVisiting() {
 		return new ConstraintVisitingInfo();
 	}
+	
+	protected ConstraintVisitingInfo createVisiting(JvmTypeParameter initialValue) {
+		ConstraintVisitingInfo result = createVisiting();
+		result.tryVisit(initialValue);
+		return result;
+	}
 }

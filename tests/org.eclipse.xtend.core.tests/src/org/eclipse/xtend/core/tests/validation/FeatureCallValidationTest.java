@@ -326,4 +326,27 @@ public class FeatureCallValidationTest extends AbstractXtendTestCase {
 		helper.assertError(clazz, XbasePackage.Literals.XCONSTRUCTOR_CALL,
 				org.eclipse.xtext.xbase.validation.IssueCodes.FEATURE_NOT_VISIBLE);
 	}
+
+	@Test public void testFeatureCallTypeBounds_0() throws Exception {
+		XtendClass clazz = clazz("class X { def <T extends CharSequence> T foo() {} var bar = <Object>foo }");
+		helper.assertError(clazz, XbasePackage.Literals.XFEATURE_CALL,
+				org.eclipse.xtext.xbase.validation.IssueCodes.TYPE_BOUNDS_MISSMATCH);
+	}
+
+	@Test public void testFeatureCallTypeBounds_1() throws Exception {
+		XtendClass clazz = clazz("class X { def <T extends CharSequence> T foo() {} var bar = <String>foo }");
+		helper.assertNoError(clazz, org.eclipse.xtext.xbase.validation.IssueCodes.TYPE_BOUNDS_MISSMATCH);
+	}
+	
+	@Test public void testFeatureCallTypeBounds_2() throws Exception {
+		XtendClass clazz = clazz("class X { def <T extends CharSequence, U extends T> T foo() {} var bar = <String, CharSequence>foo }");
+		helper.assertError(clazz, XbasePackage.Literals.XFEATURE_CALL,
+				org.eclipse.xtext.xbase.validation.IssueCodes.TYPE_BOUNDS_MISSMATCH);
+	}
+	
+	@Test public void testFeatureCallTypeBounds_3() throws Exception {
+		XtendClass clazz = clazz("class X { def <T extends CharSequence, U extends T> T foo() {} var bar = <CharSequence, String>foo }");
+		helper.assertNoError(clazz, 
+				org.eclipse.xtext.xbase.validation.IssueCodes.TYPE_BOUNDS_MISSMATCH);
+	}
 }

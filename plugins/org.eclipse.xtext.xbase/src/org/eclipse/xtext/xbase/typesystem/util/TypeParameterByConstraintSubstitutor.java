@@ -8,17 +8,25 @@
 package org.eclipse.xtext.xbase.typesystem.util;
 
 import java.util.Map;
+import java.util.Set;
 
 import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.xtext.common.types.JvmType;
+import org.eclipse.xtext.common.types.JvmTypeConstraint;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.JvmTypeParameterDeclarator;
+import org.eclipse.xtext.common.types.JvmUpperBound;
 import org.eclipse.xtext.xbase.typesystem.references.ITypeReferenceOwner;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightMergedBoundTypeArgument;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTraversalData;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
+import org.eclipse.xtext.xbase.typesystem.references.OwnedConverter;
 import org.eclipse.xtext.xbase.typesystem.references.ParameterizedTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.UnboundTypeReference;
+import org.eclipse.xtext.xbase.typesystem.references.WildcardTypeReference;
+
+import com.google.common.collect.Sets;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -70,6 +78,56 @@ public class TypeParameterByConstraintSubstitutor extends CustomTypeParameterSub
 		}
 	}
 	
+	@Override
+	protected LightweightTypeReference visitTypeArgument(LightweightTypeReference reference, ConstraintVisitingInfo visiting, boolean lowerBound) {
+		if (lowerBound && (reference instanceof ParameterizedTypeReference)) {
+			if (reference.getType() instanceof JvmTypeParameter) {
+				JvmTypeParameter typeParameter = (JvmTypeParameter) reference.getType();
+				// don't recurse into lower bounds of wildcards, e.g. constraint bound of 
+				// C extends Comparable<? super C> 
+				// is not 
+				// Comparable<? super Object> 
+				// but 
+				// Comparable<?>
+				if (!visiting.canVisit(typeParameter)) {
+					WildcardTypeReference result = new WildcardTypeReference(reference.getOwner());
+					JvmType objectType = getOwner().getServices().getTypeReferences().findDeclaredType(Object.class, getOwner().getContextResourceSet());
+					result.addUpperBound(new ParameterizedTypeReference(getOwner(), objectType));
+					return result;
+				}
+			}
+		}
+		return super.visitTypeArgument(reference, visiting, lowerBound);
+	}
+	
+	@Override
+	@Nullable
+	protected LightweightTypeReference getDeclaredUpperBound(JvmTypeParameter typeParameter, ConstraintVisitingInfo visiting) {
+		if (!typeParameter.getConstraints().isEmpty() &&
+					((DeclaredConstraintVisitingInfo)visiting).tryVisitDeclaredUpperBoundsOf(typeParameter)) {
+			try {
+				JvmTypeConstraint constraint = typeParameter.getConstraints().get(0);
+				if (constraint instanceof JvmUpperBound) {
+					LightweightTypeReference reference = new OwnedConverter(getOwner()).toLightweightReference(constraint.getTypeReference());
+					if (visiting.getCurrentDeclarator() != reference.getType()) {
+						return reference.accept(this, visiting);
+					}
+					WildcardTypeReference result = new WildcardTypeReference(getOwner());
+					result.addUpperBound(getObjectReference(typeParameter));
+					return result;
+				}
+			} finally {
+				((DeclaredConstraintVisitingInfo)visiting).didVisitDeclaredUpperBoundsOf(typeParameter);
+			}
+		}
+		return null;
+	}
+	
+	@Override
+	protected DeclaredConstraintVisitingInfo createVisiting() {
+		return new DeclaredConstraintVisitingInfo();
+	}
+	
 	public LightweightTypeReference substitute(JvmTypeParameter original) {
 		return substitute(new ParameterizedTypeReference(getOwner(), original));
 	}
@@ -95,4 +153,15 @@ public class TypeParameterByConstraintSubstitutor extends CustomTypeParameterSub
 		return null;
 	}
 	
+	protected static class DeclaredConstraintVisitingInfo extends ConstraintVisitingInfo {
+		private Set<JvmTypeParameter> upperBounds = Sets.newHashSetWithExpectedSize(2);
+		
+		public boolean tryVisitDeclaredUpperBoundsOf(JvmTypeParameter typeParameter) {
+			return upperBounds.add(typeParameter);
+		}
+		
+		public void didVisitDeclaredUpperBoundsOf(JvmTypeParameter typeParameter) {
+			upperBounds.remove(typeParameter);
+		}
+	}
 }

@@ -717,7 +717,7 @@ public class ActualTypeArgumentCollectorTest extends AbstractTestingTypeReferenc
   @Test
   public void testCircularTypeParams_07() {
     Map<JvmTypeParameter,List<LightweightBoundTypeArgument>> _mappedBy = this.mappedBy("T extends Iterable<? super T>", "CharSequence", "String");
-    Pair<String,VarianceInfo> _mappedTo = Pair.<String, VarianceInfo>of("Iterable<? super Object>", VarianceInfo.OUT);
+    Pair<String,VarianceInfo> _mappedTo = Pair.<String, VarianceInfo>of("Iterable<?>", VarianceInfo.OUT);
     Triple<String,VarianceInfo,VarianceInfo> _mappedTo_1 = this.operator_mappedTo(_mappedTo, VarianceInfo.OUT);
     this.assertMapping(_mappedBy, "T", _mappedTo_1);
   }
@@ -745,6 +745,44 @@ public class ActualTypeArgumentCollectorTest extends AbstractTestingTypeReferenc
     Triple<String,VarianceInfo,VarianceInfo> _mappedTo_1 = this.operator_mappedTo(_mappedTo, VarianceInfo.OUT);
     Map<JvmTypeParameter,List<LightweightBoundTypeArgument>> _assertMapping = this.assertMapping(_mappedBy, "T", _mappedTo_1);
     Pair<String,VarianceInfo> _mappedTo_2 = Pair.<String, VarianceInfo>of("Iterable<Iterable<Object>>", VarianceInfo.OUT);
+    Triple<String,VarianceInfo,VarianceInfo> _mappedTo_3 = this.operator_mappedTo(_mappedTo_2, VarianceInfo.OUT);
+    this.assertMapping(_assertMapping, "T2", _mappedTo_3);
+  }
+  
+  @Test
+  public void testCircularTypeParams_11() {
+    Map<JvmTypeParameter,List<LightweightBoundTypeArgument>> _mappedBy = this.mappedBy("T extends (Object)=>T", "T", "Object");
+    Pair<String,VarianceInfo> _mappedTo = Pair.<String, VarianceInfo>of("Object", VarianceInfo.OUT);
+    Triple<String,VarianceInfo,VarianceInfo> _mappedTo_1 = this.operator_mappedTo(_mappedTo, VarianceInfo.OUT);
+    this.assertMapping(_mappedBy, "T", _mappedTo_1);
+  }
+  
+  @Test
+  public void testCircularTypeParams_12() {
+    Map<JvmTypeParameter,List<LightweightBoundTypeArgument>> _mappedBy = this.mappedBy("T extends (Object)=>T", "T", "(Object)=>Object");
+    Pair<String,VarianceInfo> _mappedTo = Pair.<String, VarianceInfo>of("(Object)=>Object", VarianceInfo.OUT);
+    Triple<String,VarianceInfo,VarianceInfo> _mappedTo_1 = this.operator_mappedTo(_mappedTo, VarianceInfo.OUT);
+    this.assertMapping(_mappedBy, "T", _mappedTo_1);
+  }
+  
+  @Test
+  public void testCircularTypeParams_13() {
+    Map<JvmTypeParameter,List<LightweightBoundTypeArgument>> _mappedBy = this.mappedBy("T extends T2, T2 extends T", "T2", "String");
+    Pair<String,VarianceInfo> _mappedTo = Pair.<String, VarianceInfo>of("String", VarianceInfo.OUT);
+    Triple<String,VarianceInfo,VarianceInfo> _mappedTo_1 = this.operator_mappedTo(_mappedTo, VarianceInfo.OUT);
+    Map<JvmTypeParameter,List<LightweightBoundTypeArgument>> _assertMapping = this.assertMapping(_mappedBy, "T", _mappedTo_1);
+    Pair<String,VarianceInfo> _mappedTo_2 = Pair.<String, VarianceInfo>of("String", VarianceInfo.OUT);
+    Triple<String,VarianceInfo,VarianceInfo> _mappedTo_3 = this.operator_mappedTo(_mappedTo_2, VarianceInfo.OUT);
+    this.assertMapping(_assertMapping, "T2", _mappedTo_3);
+  }
+  
+  @Test
+  public void testCircularTypeParams_14() {
+    Map<JvmTypeParameter,List<LightweightBoundTypeArgument>> _mappedBy = this.mappedBy("T extends T2, T2 extends T", "T", "String");
+    Pair<String,VarianceInfo> _mappedTo = Pair.<String, VarianceInfo>of("String", VarianceInfo.OUT);
+    Triple<String,VarianceInfo,VarianceInfo> _mappedTo_1 = this.operator_mappedTo(_mappedTo, VarianceInfo.OUT);
+    Map<JvmTypeParameter,List<LightweightBoundTypeArgument>> _assertMapping = this.assertMapping(_mappedBy, "T", _mappedTo_1);
+    Pair<String,VarianceInfo> _mappedTo_2 = Pair.<String, VarianceInfo>of("String", VarianceInfo.OUT);
     Triple<String,VarianceInfo,VarianceInfo> _mappedTo_3 = this.operator_mappedTo(_mappedTo_2, VarianceInfo.OUT);
     this.assertMapping(_assertMapping, "T2", _mappedTo_3);
   }
