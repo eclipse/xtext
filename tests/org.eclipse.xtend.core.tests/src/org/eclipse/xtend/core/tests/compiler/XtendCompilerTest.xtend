@@ -215,6 +215,49 @@ class XtendCompilerTest extends AbstractXtendTestCase {
 		''')
 	}
 	
+	@Test def void testBug401269_05() {
+		'''
+			import java.util.Map
+			class C {
+				def <A> Map<A, Expression<A>> then(Expression<A> expr) {}
+				def <A extends Number & Comparable<?>> Map<A, NumberExpression<A>> then(NumberExpression<A> expr) {}
+				
+				def void m() {
+					val NumberPath<Long> count = null
+					val y = then(count)
+					println(y)
+				}
+			}
+			
+			class NumberPath<T extends Number & Comparable<?>> extends NumberExpression<T> {}
+			class NumberExpression<T extends Number & Comparable<?>> extends ComparableExpressionBase<T> {}
+			class ComparableExpressionBase<T extends Comparable<?>> extends SimpleExpression<T> {}
+			class SimpleExpression<T> extends ExpressionBase<T> {}
+			class ExpressionBase<T> implements Expression<T> {}
+			interface Expression<T> {}
+		'''.assertCompilesTo('''
+			import java.util.Map;
+			import org.eclipse.xtext.xbase.lib.InputOutput;
+			
+			@SuppressWarnings("all")
+			public class C {
+			  public <A extends Object> Map<A,Expression<A>> then(final Expression<A> expr) {
+			    return null;
+			  }
+			  
+			  public <A extends Number & Comparable<?>> Map<A,NumberExpression<A>> then(final NumberExpression<A> expr) {
+			    return null;
+			  }
+			  
+			  public void m() {
+			    final NumberPath<Long> count = null;
+			    final Map<Long,NumberExpression<Long>> y = this.<Long>then(count);
+			    InputOutput.<Map<Long,NumberExpression<Long>>>println(y);
+			  }
+			}
+		''')
+	}
+	
 	@Test def void testBug400823_01() {
 		'''
 			package test.plugin
