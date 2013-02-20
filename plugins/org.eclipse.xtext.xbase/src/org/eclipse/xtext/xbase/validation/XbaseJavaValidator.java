@@ -45,7 +45,9 @@ import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmMember;
 import org.eclipse.xtext.common.types.JvmOperation;
+import org.eclipse.xtext.common.types.JvmParameterizedTypeReference;
 import org.eclipse.xtext.common.types.JvmType;
+import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.JvmVoid;
 import org.eclipse.xtext.common.types.TypesPackage;
@@ -477,8 +479,6 @@ public class XbaseJavaValidator extends AbstractXbaseJavaValidator {
 		});
 	}
 
-
-
 	@Check
 	public void checkImplicitReturn(XExpression expr) {
 		if (!isImplicitReturn(expr))
@@ -553,6 +553,32 @@ public class XbaseJavaValidator extends AbstractXbaseJavaValidator {
 		}
 	}
 
+	@Check 
+	public void checkTypeParameterNotUsedInStaticContext(JvmTypeReference ref) {
+		if(ref.getType() instanceof JvmTypeParameter) {
+			JvmTypeParameter typeParameter = (JvmTypeParameter) ref.getType();
+			EObject currentParent = logicalContainerProvider.getNearestLogicalContainer(ref);
+			while(currentParent != null) {
+				if(currentParent == typeParameter.eContainer())
+					return;
+				else if(isStaticContext(currentParent)) 
+					error("Cannot make a static reference to the non-static type " + typeParameter.getName(), 
+							ref, TypesPackage.Literals.JVM_PARAMETERIZED_TYPE_REFERENCE__TYPE, -1, STATIC_ACCESS_TO_INSTANCE_MEMBER);
+				currentParent = currentParent.eContainer();
+			}
+		}
+	}
+	
+	protected boolean isStaticContext(EObject element) {
+		if(element instanceof JvmConstructor)
+			return false;
+		if(element instanceof JvmFeature)
+			return ((JvmFeature) element).isStatic();
+		if(element instanceof JvmDeclaredType)
+			return ((JvmDeclaredType) element).isStatic() || ((JvmDeclaredType)element).getDeclaringType() == null;
+		return false;
+	}
+	
 	@Check
 	public void checkAssignment(XAssignment assignment) {
 		JvmIdentifiableElement assignmentFeature = assignment.getFeature();
@@ -1305,7 +1331,7 @@ public class XbaseJavaValidator extends AbstractXbaseJavaValidator {
 
 	@Override
 	protected List<EPackage> getEPackages() {
-		return Lists.newArrayList(XbasePackage.eINSTANCE, XtypePackage.eINSTANCE);
+		return Lists.newArrayList(XbasePackage.eINSTANCE, XtypePackage.eINSTANCE, TypesPackage.eINSTANCE);
 	}
 
 	protected String canonicalName(LightweightTypeReference typeRef) {
