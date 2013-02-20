@@ -3152,11 +3152,11 @@ public class CompilerTest extends AbstractXtendTestCase {
 	@Test public void testDiamondOperator() throws Exception {
 		invokeAndExpect2("FOOBARBAZ", 
 				"def String foo() {" +
-						"  'foo' <> 'bar' <> 'baz'" +
-						"}" +
-						"def String operator_diamond(String a, String b) { " +
-						"  a.toUpperCase + b.toUpperCase" +
-						"}", "foo");
+				"  'foo' <> 'bar' <> 'baz'" +
+				"}" +
+				"def String operator_diamond(String a, String b) { " +
+				"  a.toUpperCase + b.toUpperCase" +
+				"}", "foo");
 	}
 	
 	@Test public void testTripleLessThanOperator() throws Exception {
@@ -3264,8 +3264,13 @@ public class CompilerTest extends AbstractXtendTestCase {
 	 */
 	@Test
 	public void testGenericsBug362240_01() throws Exception {
-		String code = "package generics" + " class Bar {" + "def <T extends (Object)=>T> T bar(T t) {"
-				+ " bar(t).apply(bar(t))" + "}}";
+		String code = 
+				"package generics" + 
+				" class Bar {" + 
+				"	def <T extends (Object)=>T> T bar(T t) {" +
+				" 		bar(t).apply(bar(t))" + 
+				"	}" +
+				"}";
 		Class<?> javaCode = compileJavaCode("generics.Bar", code);
 		assertNotNull("Example code does not compile to java", javaCode);
 	}

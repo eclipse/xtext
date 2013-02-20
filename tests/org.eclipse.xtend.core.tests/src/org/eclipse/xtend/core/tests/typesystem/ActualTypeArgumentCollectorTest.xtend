@@ -351,7 +351,7 @@ class ActualTypeArgumentCollectorTest extends AbstractTestingTypeReferenceOwner 
 	
 	@Test def void testCircularTypeParams_07() {
 		'T extends Iterable<? super T>'.mappedBy('CharSequence', 'String')
-			.assertMapping('T', 'Iterable<? super Object>'->OUT->OUT)
+			.assertMapping('T', 'Iterable<?>'->OUT->OUT)
 	}
 	
 	@Test def void testCircularTypeParams_08() {
@@ -368,6 +368,28 @@ class ActualTypeArgumentCollectorTest extends AbstractTestingTypeReferenceOwner 
 		'T extends Iterable<T>, T2 extends Iterable<T>'.mappedBy('CharSequence', 'String')
 			.assertMapping('T', 'Iterable<Object>'->OUT->OUT)
 			.assertMapping('T2', 'Iterable<Iterable<Object>>'->OUT->OUT)
+	}
+	
+	@Test def void testCircularTypeParams_11() {
+		'T extends (Object)=>T'.mappedBy('T', 'Object')
+			.assertMapping('T', 'Object'->OUT->OUT)
+	}
+	
+	@Test def void testCircularTypeParams_12() {
+		'T extends (Object)=>T'.mappedBy('T', '(Object)=>Object')
+			.assertMapping('T', '(Object)=>Object'->OUT->OUT)
+	}
+	
+	@Test def void testCircularTypeParams_13() {
+		'T extends T2, T2 extends T'.mappedBy('T2', 'String')
+			.assertMapping('T', 'String'->OUT->OUT)
+			.assertMapping('T2', 'String'->OUT->OUT)
+	}
+	
+	@Test def void testCircularTypeParams_14() {
+		'T extends T2, T2 extends T'.mappedBy('T', 'String')
+			.assertMapping('T', 'String'->OUT->OUT)
+			.assertMapping('T2', 'String'->OUT->OUT)
 	}
 }
 
