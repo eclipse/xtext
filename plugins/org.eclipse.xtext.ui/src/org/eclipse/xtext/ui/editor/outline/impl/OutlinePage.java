@@ -15,12 +15,18 @@ import java.util.List;
 
 import org.apache.log4j.Logger;
 import org.eclipse.core.runtime.Assert;
+import org.eclipse.jface.action.IMenuListener;
+import org.eclipse.jface.action.IMenuManager;
+import org.eclipse.jface.action.MenuManager;
+import org.eclipse.jface.action.Separator;
 import org.eclipse.jface.text.IDocument;
 import org.eclipse.jface.text.ITextInputListener;
 import org.eclipse.jface.text.source.ISourceViewer;
 import org.eclipse.jface.viewers.StructuredSelection;
 import org.eclipse.jface.viewers.TreeViewer;
 import org.eclipse.swt.widgets.Composite;
+import org.eclipse.swt.widgets.Menu;
+import org.eclipse.ui.IWorkbenchActionConstants;
 import org.eclipse.ui.views.contentoutline.ContentOutlinePage;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.editor.ISourceViewerAware;
@@ -38,10 +44,15 @@ import com.google.inject.Inject;
 
 /**
  * @author Jan Koehnlein - Initial contribution and API
+ * @author Anton Kosyakov - Added registering of a context menu
  */
-public class OutlinePage extends ContentOutlinePage implements ISourceViewerAware {
+public class OutlinePage extends ContentOutlinePage implements ISourceViewerAware, IMenuListener {
+
+	private static final String MENU_ID = "org.eclipse.xtext.ui.outline";
 
 	private static final Logger LOG = Logger.getLogger(OutlinePage.class);
+
+	private static final String CONTEXT_MENU_ID = "OutlinePageContextMenu";
 
 	@Inject
 	private OutlineNodeLabelProvider labelProvider;
@@ -52,9 +63,9 @@ public class OutlinePage extends ContentOutlinePage implements ISourceViewerAwar
 	@Inject
 	private IOutlineTreeProvider treeProvider;
 
-	@Inject 
+	@Inject
 	private OutlineFilterAndSorter filterAndSorter;
-	
+
 	@Inject
 	private IOutlineContribution.Composite contribution;
 
@@ -69,6 +80,8 @@ public class OutlinePage extends ContentOutlinePage implements ISourceViewerAwar
 	@Inject
 	private OutlineRefreshJob refreshJob;
 
+	private Menu contextMenu;
+
 	@Override
 	public void createControl(Composite parent) {
 		super.createControl(parent);
@@ -76,6 +89,7 @@ public class OutlinePage extends ContentOutlinePage implements ISourceViewerAwar
 		configureModelListener();
 		configureActions();
 		refreshJob.setOutlinePage(this);
+		configureContextMenu();
 	}
 
 	protected void configureTree() {
@@ -130,6 +144,26 @@ public class OutlinePage extends ContentOutlinePage implements ISourceViewerAwar
 
 	protected void configureActions() {
 		contribution.register(this);
+	}
+
+	/**
+	 * @since 2.4
+	 */
+	protected void configureContextMenu() {
+		MenuManager menuManager = new MenuManager(CONTEXT_MENU_ID, CONTEXT_MENU_ID);
+		menuManager.add(new Separator(IWorkbenchActionConstants.MB_ADDITIONS));
+		menuManager.setRemoveAllWhenShown(true);
+		menuManager.addMenuListener(this);
+		contextMenu = menuManager.createContextMenu(getTreeViewer().getTree());
+		getTreeViewer().getTree().setMenu(contextMenu);
+		getSite().registerContextMenu(MENU_ID, menuManager, getTreeViewer());
+	}
+	
+	/**
+	 * @since 2.4
+	 */
+	public void menuAboutToShow(IMenuManager manager) {
+		
 	}
 
 	@Override
@@ -209,7 +243,7 @@ public class OutlinePage extends ContentOutlinePage implements ISourceViewerAwar
 	public OutlineFilterAndSorter getFilterAndSorter() {
 		return filterAndSorter;
 	}
-	
+
 	protected void refreshViewer(final IOutlineNode rootNode, final Collection<IOutlineNode> nodesToBeExpanded,
 			final Collection<IOutlineNode> selectedNodes) {
 		DisplayRunHelper.runAsyncInDisplayThread(new Runnable() {
