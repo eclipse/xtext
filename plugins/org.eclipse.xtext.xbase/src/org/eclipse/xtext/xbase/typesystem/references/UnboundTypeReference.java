@@ -241,6 +241,13 @@ public class UnboundTypeReference extends LightweightTypeReference {
 		resolvedTo = substitute;
 	}
 	
+	public boolean isConformantToConstraints(LightweightTypeReference typeReference) {
+		TypeParameterByConstraintSubstitutor unboundSubstitutor = new TypeParameterByConstraintSubstitutor(
+				Collections.<JvmTypeParameter, LightweightMergedBoundTypeArgument>emptyMap(), getOwner(), true);
+		LightweightTypeReference substitute = unboundSubstitutor.substitute(new ParameterizedTypeReference(getOwner(), typeParameter));
+		return substitute.isAssignableFrom(typeReference);
+	}
+	
 	protected boolean canResolveTo(LightweightTypeReference reference, List<LightweightBoundTypeArgument> allHints) {
 		List<LightweightBoundTypeArgument> inferredHints = Lists.newArrayListWithCapacity(allHints.size());
 		List<LightweightBoundTypeArgument> effectiveHints = Lists.newArrayListWithCapacity(allHints.size());

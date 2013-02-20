@@ -55,6 +55,9 @@ class UnboundConformanceStrategy extends TypeConformanceStrategy<UnboundTypeRefe
 		if (hints.isEmpty() && !param.unboundComputationAddsHints) {
 			return TypeConformanceResult.create(param, ConformanceHint.INCOMPATIBLE); 
 		}
+		if (!left.isConformantToConstraints(right)) {
+			return TypeConformanceResult.create(param, ConformanceHint.INCOMPATIBLE);
+		}
 		List<LightweightBoundTypeArgument> hintsToProcess = Lists.newArrayListWithCapacity(hints.size());
 		List<LightweightBoundTypeArgument> inferredHintsToProcess = Lists.newArrayListWithCapacity(hints.size());
 		int laterCount = 0;
