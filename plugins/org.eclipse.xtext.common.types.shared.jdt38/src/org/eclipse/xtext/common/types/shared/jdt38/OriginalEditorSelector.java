@@ -5,8 +5,8 @@ import java.util.List;
 
 import org.apache.log4j.Logger;
 import org.eclipse.core.resources.IFile;
-import org.eclipse.core.resources.IResource;
 import org.eclipse.core.runtime.content.IContentType;
+import org.eclipse.emf.common.util.URI;
 import org.eclipse.ui.IEditorDescriptor;
 import org.eclipse.ui.IEditorInput;
 import org.eclipse.ui.IEditorRegistry;
@@ -27,7 +27,9 @@ import com.google.inject.Inject;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
+ * @author Moritz Eysholdt
  */
+@SuppressWarnings("restriction")
 public class OriginalEditorSelector implements IEditorAssociationOverride {
 
 	private static final Logger logger = Logger. getLogger(OriginalEditorSelector.class);
@@ -44,8 +46,10 @@ public class OriginalEditorSelector implements IEditorAssociationOverride {
 	@Inject
 	private StacktraceBasedEditorDecider decisions;
 	
-	public IEditorDescriptor[] overrideEditors(IEditorInput editorInput,
-			IContentType contentType, IEditorDescriptor[] editorDescriptors) {
+	@Inject
+	private DebugPluginListener debugPluginListener;
+	
+	public IEditorDescriptor[] overrideEditors(IEditorInput editorInput, IContentType contentType, IEditorDescriptor[] editorDescriptors) {
 		IEditorDescriptor xbaseEditor = findXbaseEditor(editorInput);
 		if (xbaseEditor != null) {
 			List<IEditorDescriptor> result = Lists.asList(xbaseEditor, editorDescriptors);
@@ -54,21 +58,26 @@ public class OriginalEditorSelector implements IEditorAssociationOverride {
 		return editorDescriptors;
 	}
 
-	public IEditorDescriptor[] overrideEditors(String fileName,
-			IContentType contentType, IEditorDescriptor[] editorDescriptors) {
+	public IEditorDescriptor[] overrideEditors(String fileName, IContentType contentType, IEditorDescriptor[] editorDescriptors) {
+		IEditorDescriptor xbaseEditor = findXbaseEditor(fileName);
+		if (xbaseEditor != null) {
+			List<IEditorDescriptor> result = Lists.asList(xbaseEditor, editorDescriptors);
+			return (IEditorDescriptor[]) result.toArray(new IEditorDescriptor[result.size()]);
+		}
 		return editorDescriptors;
 	}
 
-	public IEditorDescriptor overrideDefaultEditor(IEditorInput editorInput,
-			IContentType contentType, IEditorDescriptor editorDescriptor) {
+	public IEditorDescriptor overrideDefaultEditor(IEditorInput editorInput, IContentType contentType, IEditorDescriptor editorDescriptor) {
 		IEditorDescriptor result = findXbaseEditor(editorInput);
 		if (result != null)
 			return result;
 		return editorDescriptor;
 	}
 
-	public IEditorDescriptor overrideDefaultEditor(String fileName,
-			IContentType contentType, IEditorDescriptor editorDescriptor) {
+	public IEditorDescriptor overrideDefaultEditor(String fileName, IContentType contentType, IEditorDescriptor editorDescriptor) {
+		IEditorDescriptor result = findXbaseEditor(fileName);
+		if (result != null)
+			return result;
 		return editorDescriptor;
 	}
 	
@@ -89,23 +98,33 @@ public class OriginalEditorSelector implements IEditorAssociationOverride {
 			if (traceToSource != null) {
 				Iterator<ILocationInResource> sourceInformationIterator = traceToSource.getAllAssociatedLocations().iterator();
 				if (sourceInformationIterator.hasNext()) {
-					ILocationInResource sourceInformation = sourceInformationIterator.next();
-					IResourceServiceProvider serviceProvider = resourceServiceProviderRegistry
-							.getResourceServiceProvider(sourceInformation.getResourceURI());
-					if (serviceProvider != null) {
-						XtextEditorInfo editorInfo = serviceProvider.get(XtextEditorInfo.class);
-						if (editorInfo != null) {
-							IEditorRegistry editorRegistry = workbench.getEditorRegistry();
-							IEditorDescriptor result = editorRegistry.findEditor(editorInfo.getEditorId());
-							// null is ok
-							return result;
-						}
-					}
+					URI uri = sourceInformationIterator.next().getResourceURI();
+					return getXtextEditor(uri);
 				}
 			}
 		} catch(Exception e) {
 			logger.debug(e.getMessage(), e);
 			// ignore
+		}
+		return null;
+	}
+	
+	protected IEditorDescriptor findXbaseEditor(String name) {
+		String file = debugPluginListener.findXtextSourceFileNameForClassFile(name);
+		if (file == null)
+			return null;
+		return getXtextEditor(URI.createURI(file));
+	}
+
+	protected IEditorDescriptor getXtextEditor(URI uri) {
+		IResourceServiceProvider serviceProvider = resourceServiceProviderRegistry.getResourceServiceProvider(uri);
+		if (serviceProvider != null) {
+			XtextEditorInfo editorInfo = serviceProvider.get(XtextEditorInfo.class);
+			if (editorInfo != null) {
+				IEditorRegistry editorRegistry = workbench.getEditorRegistry();
+				IEditorDescriptor result = editorRegistry.findEditor(editorInfo.getEditorId());
+				return result; // null is ok
+			}
 		}
 		return null;
 	}
