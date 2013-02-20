@@ -48,7 +48,7 @@ public class ReturnTypeComputationTest extends AbstractXbaseTestCase {
 	@Test
 	public void testReturnType_03() throws Exception {
 		// unresolved feature 'e' is intentional
-		assertReturnType("()=>java.lang.Object", "[| return e]");
+		assertReturnType("()=>[unknown]", "[| return e]");
 	}
 	
 	@Test
