@@ -1237,6 +1237,21 @@ public class XtendJavaValidator extends XbaseWithAnnotationsJavaValidator {
 	}
 	
 	@Check
+	public void checkTypeParameterForwardReferences(XtendClass xtendClass) {
+		doCheckTypeParameterForwardReference(xtendClass.getTypeParameters());
+	}
+	
+	@Check
+	public void checkTypeParameterForwardReferences(XtendInterface xtendInterface) {
+		doCheckTypeParameterForwardReference(xtendInterface.getTypeParameters());
+	}
+	
+	@Check
+	public void checkTypeParameterForwardReferences(XtendFunction xtendFunction) {
+		doCheckTypeParameterForwardReference(xtendFunction.getTypeParameters());
+	}
+	
+	@Check
 	public void checkTypeParametersAreUnsupported(XtendConstructor constructor){
 		if (!constructor.getTypeParameters().isEmpty()) {
 			error("Type parameters are not supported for constructors", XtendPackage.Literals.XTEND_CONSTRUCTOR__TYPE_PARAMETERS, INSIGNIFICANT_INDEX, CONSTRUCTOR_TYPE_PARAMS_NOT_SUPPORTED);
