@@ -179,4 +179,9 @@ public abstract class TypeParameterSubstitutor<Visiting> extends TypeReferenceVi
 	protected LightweightTypeReference copy(LightweightTypeReference reference) {
 		return reference.copyInto(getOwner());
 	}
+	
+	@Override
+	public String toString() {
+		return String.format("%s with mapping: %s", getClass().getSimpleName(), getTypeParameterMapping());
+	}
 }
