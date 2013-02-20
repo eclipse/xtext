@@ -4140,6 +4140,20 @@ abstract class AbstractTypeResolverTest<Reference> extends AbstractXbaseTestCase
 		"{
 			val list = newArrayList
 			val literal = #{}
+			list.addAll(literal)
+			for(s: newArrayList) {
+				list.add(s)
+				val String x = s
+				x.toString
+			}
+			literal
+		}".resolvesTo("Set<String>")
+	}
+	
+	@Test def void testDeferredTypeArgumentResolution_164() throws Exception {
+		"{
+			val list = newArrayList
+			val literal = #{}
 			list += literal
 			for(s: newArrayList) {
 				list.add(s)
@@ -4148,6 +4162,30 @@ abstract class AbstractTypeResolverTest<Reference> extends AbstractXbaseTestCase
 			}
 			literal
 		}".resolvesTo("Set<String>")
+	}
+	
+	@Test def void testDeferredTypeArgumentResolution_165() throws Exception {
+		"{
+			val list = newArrayList
+			val literal = #{}
+			list.add(literal.flatten.head)
+			for(s: newArrayList) {
+				list.add(s)
+				val String x = s
+				x.toString
+			}
+			literal
+		}".resolvesTo("Set<Iterable<? extends String>>")
+	}
+	
+	@Ignore("+= resolves the type parameter since Integer is a resolved type")
+	@Test def void testDeferredTypeArgumentResolution_166() throws Exception {
+		"{
+			val list = newArrayList
+			list += 1
+			list += 1.0
+			list
+		}".resolvesTo("ArrayList<Number & Comparable<?>>")
 	}
 	
 	@Test def void testRecursiveTypeArgumentResolution_01() throws Exception {

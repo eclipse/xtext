@@ -39,7 +39,6 @@ import org.eclipse.xtext.xbase.typesystem.util.ConstraintVisitingInfo;
 import org.eclipse.xtext.xbase.typesystem.util.ExpectationTypeParameterHintCollector;
 import org.eclipse.xtext.xbase.typesystem.util.RawTypeSubstitutor;
 import org.eclipse.xtext.xbase.typesystem.util.TypeArgumentFromComputedTypeCollector;
-import org.eclipse.xtext.xbase.typesystem.util.TypeParameterByConstraintSubstitutor;
 import org.eclipse.xtext.xbase.typesystem.util.TypeParameterByUnboundSubstitutor;
 import org.eclipse.xtext.xbase.typesystem.util.TypeParameterSubstitutor;
 import org.eclipse.xtext.xbase.typesystem.util.UnboundTypeParameterPreservingSubstitutor;
@@ -446,12 +445,13 @@ public abstract class AbstractLinkingCandidate<Expression extends XExpression> i
 			return null;
 		LightweightTypeReference expectedType = getExpectedType(expression);
 		if (expectedType != null) {
-			TypeParameterByConstraintSubstitutor substitutor = new TypeParameterByConstraintSubstitutor(
-					getDeclaratorParameterMapping(), state.getReferenceOwner());
-			LightweightTypeReference result = substitutor.substitute(expectedType);
-			return result;
+			// don't use expectedType.getRawTypeReference since that would potentially resolve an unbound candidate
+			if (expectedType instanceof UnboundTypeReference) {
+				expectedType = new ParameterizedTypeReference(expectedType.getOwner(), ((UnboundTypeReference) expectedType).getTypeParameter());
+			}
+			expectedType = expectedType.getRawTypeReference();
 		}
-		return null;
+		return expectedType;
 	}
 
 	protected abstract List<LightweightTypeReference> getSyntacticTypeArguments();
