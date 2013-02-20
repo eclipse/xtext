@@ -38,7 +38,7 @@ import org.eclipse.xtext.xbase.typesystem.util.TypeParameterByUnboundSubstitutor
 import com.google.common.collect.Lists;
 
 /**
- * Strategy to compute types for lambda expression that do not have an expected type.
+ * Strategy to compute types for lambda expression that do have an expected type.
  * 
  * @see ClosureWithoutExpectationHelper
  * @noinstantiate This class is not intended to be instantiated by clients.
