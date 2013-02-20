@@ -17,6 +17,7 @@ import static org.eclipse.xtext.util.Strings.*;
 import static org.eclipse.xtext.xbase.validation.IssueCodes.*;
 
 import java.lang.annotation.ElementType;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.EnumSet;
@@ -192,7 +193,9 @@ public class XtendJavaValidator extends XbaseWithAnnotationsJavaValidator {
 
 	@Override
 	protected List<EPackage> getEPackages() {
-		return newArrayList(XtendPackage.eINSTANCE, XtypePackage.eINSTANCE, XbasePackage.eINSTANCE, XAnnotationsPackage.eINSTANCE);
+		List<EPackage> ePackages = newArrayList(super.getEPackages());
+		ePackages.add(XtendPackage.eINSTANCE);
+		return ePackages;
 	}
 
 	@Check
