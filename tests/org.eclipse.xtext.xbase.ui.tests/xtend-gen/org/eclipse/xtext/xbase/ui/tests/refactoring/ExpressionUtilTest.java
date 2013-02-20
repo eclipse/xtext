@@ -60,6 +60,14 @@ public class ExpressionUtilTest extends AbstractXbaseTestCase {
     this.assertExpressionSelected("newArrayList(\'jan\',\'hein\',\'claas\',\'pit\').map[it$|$toFirstUpper]", "[it|toFirstUpper]");
     this.assertExpressionSelected("newArrayList(\'jan\',\'hein\',\'claas\',\'pit\').map$[it|toFirstUpper]$", "[it|toFirstUpper]");
     this.assertExpressionSelected("newArrayList(\'jan\',\'hein\',\'claas\',\'pit\').map$[it|toFirstUpper$]", "[it|toFirstUpper]");
+    this.assertExpressionSelected("newArrayList(\'jan\',\'hein\',\'claas\',\'pit\').map$[it|toFirstUpper$]", "[it|toFirstUpper]");
+  }
+  
+  @Test
+  public void testBug401082() {
+    this.assertExpressionSelected("{ var Object x val result = ($(x as String).toString$ ?:\"foo\") }", "(x as String).toString");
+    this.assertExpressionSelected("{ var Object x val result = ($(x as String).$toString ?:\"foo\") }", "(x as String).toString");
+    this.assertExpressionSelected("{ var Object x val result = ($(x as String)$.toString ?:\"foo\") }", "x as String");
   }
   
   @Test
@@ -132,6 +140,8 @@ public class ExpressionUtilTest extends AbstractXbaseTestCase {
   @Test
   public void testInsertionPointClosure() {
     this.assertInsertionPoint("[|2+$3]", "2+3");
+    this.assertInsertionPoint("[|2$+3]", "2+3");
+    this.assertInsertionPoint("[|$2+3]", "2+3");
   }
   
   @Test
