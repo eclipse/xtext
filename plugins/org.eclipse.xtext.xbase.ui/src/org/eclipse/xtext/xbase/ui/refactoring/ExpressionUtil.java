@@ -41,20 +41,25 @@ public class ExpressionUtil {
 			if (node != null &&
 					(((ILeafNode) node).isHidden() || isBeginOfASymbol(node, selection))) {
 				node = NodeModelUtils.findLeafNodeAtOffset(parseResult.getRootNode(),
-						selection.getOffset() - node.getLength());
+						selection.getOffset() - 1);
 			}
-			while (node != null
-					&& (!nodeContainsSelection(node, selection) || node.getSemanticElement() == null || !(node
-							.getSemanticElement() instanceof XExpression)))
-				node = node.getParent();
-			if (node != null && node.getSemanticElement() != null)
-				return (XExpression) node.getSemanticElement();
+			if(node != null) {
+				EObject currentSemanticElement =  NodeModelUtils.findActualSemanticObjectFor(node);
+				while (!(nodeContainsSelection(node, selection)
+							&& currentSemanticElement instanceof XExpression)) {
+					node = node.getParent();
+					if(node == null)
+						return null;
+					currentSemanticElement = NodeModelUtils.findActualSemanticObjectFor(node);
+				}
+				return (XExpression) currentSemanticElement;
+			}
 		}
 		return null;
 	}
 
 	/**
-	 * @returns the list of sibling expressions containing the selection.  
+	 * @returns the list of sibling expressions (expressions in the same block expression) containing the selection.  
 	 */
 	public List<XExpression> findSelectedSiblingExpressions(XtextResource resource, ITextSelection selection) {
 		ITextSelection trimmedSelection = trimSelection(resource, selection);
@@ -89,7 +94,8 @@ public class ExpressionUtil {
 		return node.getOffset() == selection.getOffset() 
 				&& node.getLength() > 0 
 				&& !Character.isLetterOrDigit(node.getText().charAt(0))
-				&& node.getText().charAt(0) != '[';
+				&& node.getText().charAt(0) != '['
+				&& node.getText().charAt(0) != '(';
 	}
 
 	protected boolean nodeContainsSelection(INode node, ITextSelection selection) {
