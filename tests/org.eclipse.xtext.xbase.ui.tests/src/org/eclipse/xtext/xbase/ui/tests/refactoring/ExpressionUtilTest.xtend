@@ -48,6 +48,14 @@ class ExpressionUtilTest extends AbstractXbaseTestCase {
 		assertExpressionSelected("newArrayList('jan','hein','claas','pit').map[it$|$toFirstUpper]", '[it|toFirstUpper]')
 		assertExpressionSelected("newArrayList('jan','hein','claas','pit').map$[it|toFirstUpper]$", '[it|toFirstUpper]')
 		assertExpressionSelected("newArrayList('jan','hein','claas','pit').map$[it|toFirstUpper$]", '[it|toFirstUpper]')
+		assertExpressionSelected("newArrayList('jan','hein','claas','pit').map$[it|toFirstUpper$]", '[it|toFirstUpper]')
+	}
+	
+	@Test
+	def testBug401082() {
+		assertExpressionSelected('{ var Object x val result = ($(x as String).toString$ ?:"foo") }', '(x as String).toString')
+		assertExpressionSelected('{ var Object x val result = ($(x as String).$toString ?:"foo") }', '(x as String).toString')
+		assertExpressionSelected('{ var Object x val result = ($(x as String)$.toString ?:"foo") }', 'x as String')
 	}
 
 	@Test
@@ -121,6 +129,8 @@ class ExpressionUtilTest extends AbstractXbaseTestCase {
 	@Test 
 	def testInsertionPointClosure() {
 		assertInsertionPoint('[|2+$3]', '2+3')
+		assertInsertionPoint('[|2$+3]', '2+3')
+		assertInsertionPoint('[|$2+3]', '2+3')
 	}
 	
 	@Test 
