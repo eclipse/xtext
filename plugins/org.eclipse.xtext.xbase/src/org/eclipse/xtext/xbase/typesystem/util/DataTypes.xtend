@@ -93,6 +93,9 @@ class ConstraintVisitingInfo {
 	def boolean tryVisit(JvmTypeParameter parameter) {
 		return visiting.add(parameter);
 	}
+	def boolean canVisit(JvmTypeParameter parameter) {
+		return !visiting.contains(parameter)
+	}
 	def void didVisit(JvmTypeParameter parameter) {
 		visiting.remove(parameter);
 	}

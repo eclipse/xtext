@@ -11,6 +11,7 @@ import java.util.Map;
 
 import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.JvmTypeParameterDeclarator;
 import org.eclipse.xtext.xbase.typesystem.references.ITypeReferenceOwner;
@@ -19,6 +20,7 @@ import org.eclipse.xtext.xbase.typesystem.references.LightweightTraversalData;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.ParameterizedTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.UnboundTypeReference;
+import org.eclipse.xtext.xbase.typesystem.references.WildcardTypeReference;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -68,6 +70,28 @@ public class TypeParameterByConstraintSubstitutor extends CustomTypeParameterSub
 		} finally {
 			visiting.didVisit(typeParameter);
 		}
+	}
+	
+	@Override
+	protected LightweightTypeReference visitTypeArgument(LightweightTypeReference reference, ConstraintVisitingInfo visiting, boolean lowerBound) {
+		if (lowerBound && (reference instanceof ParameterizedTypeReference)) {
+			if (reference.getType() instanceof JvmTypeParameter) {
+				JvmTypeParameter typeParameter = (JvmTypeParameter) reference.getType();
+				// don't recurse into lower bounds of wildcards, e.g. constraint bound of 
+				// C extends Comparable<? super C> 
+				// is not 
+				// Comparable<? super Object> 
+				// but 
+				// Comparable<?>
+				if (!visiting.canVisit(typeParameter)) {
+					WildcardTypeReference result = new WildcardTypeReference(reference.getOwner());
+					JvmType objectType = getOwner().getServices().getTypeReferences().findDeclaredType(Object.class, getOwner().getContextResourceSet());
+					result.addUpperBound(new ParameterizedTypeReference(getOwner(), objectType));
+					return result;
+				}
+			}
+		}
+		return super.visitTypeArgument(reference, visiting, lowerBound);
 	}
 	
 	public LightweightTypeReference substitute(JvmTypeParameter original) {
