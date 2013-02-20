@@ -3662,7 +3662,23 @@ public abstract class AbstractTypeResolverTest<Reference extends Object> extends
   
   @Test
   public void testDeferredTypeArgumentResolution_163() throws Exception {
+    this.resolvesTo("{\n\t\t\tval list = newArrayList\n\t\t\tval literal = #{}\n\t\t\tlist.addAll(literal)\n\t\t\tfor(s: newArrayList) {\n\t\t\t\tlist.add(s)\n\t\t\t\tval String x = s\n\t\t\t\tx.toString\n\t\t\t}\n\t\t\tliteral\n\t\t}", "Set<String>");
+  }
+  
+  @Test
+  public void testDeferredTypeArgumentResolution_164() throws Exception {
     this.resolvesTo("{\n\t\t\tval list = newArrayList\n\t\t\tval literal = #{}\n\t\t\tlist += literal\n\t\t\tfor(s: newArrayList) {\n\t\t\t\tlist.add(s)\n\t\t\t\tval String x = s\n\t\t\t\tx.toString\n\t\t\t}\n\t\t\tliteral\n\t\t}", "Set<String>");
+  }
+  
+  @Test
+  public void testDeferredTypeArgumentResolution_165() throws Exception {
+    this.resolvesTo("{\n\t\t\tval list = newArrayList\n\t\t\tval literal = #{}\n\t\t\tlist.add(literal.flatten.head)\n\t\t\tfor(s: newArrayList) {\n\t\t\t\tlist.add(s)\n\t\t\t\tval String x = s\n\t\t\t\tx.toString\n\t\t\t}\n\t\t\tliteral\n\t\t}", "Set<Iterable<? extends String>>");
+  }
+  
+  @Ignore("+= resolves the type parameter since Integer is a resolved type")
+  @Test
+  public void testDeferredTypeArgumentResolution_166() throws Exception {
+    this.resolvesTo("{\n\t\t\tval list = newArrayList\n\t\t\tlist += 1\n\t\t\tlist += 1.0\n\t\t\tlist\n\t\t}", "ArrayList<Number & Comparable<?>>");
   }
   
   @Test

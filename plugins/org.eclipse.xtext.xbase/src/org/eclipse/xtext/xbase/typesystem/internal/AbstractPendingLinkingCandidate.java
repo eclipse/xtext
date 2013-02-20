@@ -300,7 +300,7 @@ public abstract class AbstractPendingLinkingCandidate<Expression extends XExpres
 		int result = compareByArgumentTypes(right, false);
 		if (result != 0)
 			return result;
-		result = compareDeclaredParameterTypes(right);
+		result = compareExpectedArgumentTypes(right);
 		if (result != 0)
 			return result;
 		// subsequent parameters may have altered the bound type arguments
@@ -405,7 +405,7 @@ public abstract class AbstractPendingLinkingCandidate<Expression extends XExpres
 		return getState().getStackedResolvedTypes().getConformanceHints(argument, recompute);
 	}
 
-	protected int compareDeclaredParameterTypes(AbstractPendingLinkingCandidate<?> right) {
+	protected int compareExpectedArgumentTypes(AbstractPendingLinkingCandidate<?> right) {
 		int result = 0;
 		int upTo = Math.min(arguments.getArgumentCount(), right.arguments.getArgumentCount());
 		for(int i = 0; i < upTo; i++) {
