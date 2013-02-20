@@ -21,6 +21,200 @@ class XtendCompilerTest extends AbstractXtendTestCase {
 	@Inject JvmModelGenerator generator
 	@Inject IGeneratorConfigProvider generatorConfigProvider
 	
+	@Test def void testBug401269_01() {
+		'''
+			import java.util.Map
+			import java.util.List
+			import java.util.ArrayList
+			class C {
+				def <A> Map<A, Iterable<A>> then(Iterable<A> iter) {
+					null
+				}	
+				def <A extends Number & Comparable<?>> Map<A, List<A>> then(List<A> expr) {
+					null
+				}
+				def client(ArrayList<Long> arrayList) {
+					val plainInvocation = then(arrayList)
+					plainInvocation.toString
+					val extensionInvocation = arrayList.then
+					extensionInvocation.toString
+				}
+			}
+		'''.assertCompilesTo('''
+			import java.util.ArrayList;
+			import java.util.List;
+			import java.util.Map;
+			
+			@SuppressWarnings("all")
+			public class C {
+			  public <A extends Object> Map<A,Iterable<A>> then(final Iterable<A> iter) {
+			    return null;
+			  }
+			  
+			  public <A extends Number & Comparable<?>> Map<A,List<A>> then(final List<A> expr) {
+			    return null;
+			  }
+			  
+			  public String client(final ArrayList<Long> arrayList) {
+			    String _xblockexpression = null;
+			    {
+			      final Map<Long,List<Long>> plainInvocation = this.<Long>then(arrayList);
+			      plainInvocation.toString();
+			      final Map<Long,List<Long>> extensionInvocation = this.<Long>then(arrayList);
+			      String _string = extensionInvocation.toString();
+			      _xblockexpression = (_string);
+			    }
+			    return _xblockexpression;
+			  }
+			}
+		''')
+	}
+	
+	@Test def void testBug401269_02() {
+		'''
+			import java.util.Map
+			import java.util.List
+			class C {
+				def <A> Map<A, Iterable<A>> then(Iterable<A> iter) {
+					null
+				}	
+				def <A extends Number & Comparable<?>> Map<A, List<A>> then(List<A> expr) {
+					null
+				}
+				def client(Iterable<Long> iterable) {
+					val plainInvocation = then(iterable)
+					plainInvocation.toString
+					val extensionInvocation = iterable.then
+					extensionInvocation.toString
+				}
+			}
+		'''.assertCompilesTo('''
+			import java.util.List;
+			import java.util.Map;
+			
+			@SuppressWarnings("all")
+			public class C {
+			  public <A extends Object> Map<A,Iterable<A>> then(final Iterable<A> iter) {
+			    return null;
+			  }
+			  
+			  public <A extends Number & Comparable<?>> Map<A,List<A>> then(final List<A> expr) {
+			    return null;
+			  }
+			  
+			  public String client(final Iterable<Long> iterable) {
+			    String _xblockexpression = null;
+			    {
+			      final Map<Long,Iterable<Long>> plainInvocation = this.<Long>then(iterable);
+			      plainInvocation.toString();
+			      final Map<Long,Iterable<Long>> extensionInvocation = this.<Long>then(iterable);
+			      String _string = extensionInvocation.toString();
+			      _xblockexpression = (_string);
+			    }
+			    return _xblockexpression;
+			  }
+			}
+		''')
+	}
+	
+	@Test def void testBug401269_03() {
+		'''
+			import java.util.Map
+			import java.util.List
+			import java.util.LinkedList
+			class C {
+				def <A> Map<A, Iterable<A>> then(Iterable<A> iter) {
+					null
+				}	
+				def <A extends Number & Comparable<?>> Map<A, List<A>> then(List<A> expr) {
+					null
+				}
+				def client(LinkedList<String> linkedList) {
+					val plainInvocation = then(linkedList)
+					plainInvocation.toString
+					val extensionInvocation = linkedList.then
+					extensionInvocation.toString
+				}
+			}
+		'''.assertCompilesTo('''
+			import java.util.LinkedList;
+			import java.util.List;
+			import java.util.Map;
+			
+			@SuppressWarnings("all")
+			public class C {
+			  public <A extends Object> Map<A,Iterable<A>> then(final Iterable<A> iter) {
+			    return null;
+			  }
+			  
+			  public <A extends Number & Comparable<?>> Map<A,List<A>> then(final List<A> expr) {
+			    return null;
+			  }
+			  
+			  public String client(final LinkedList<String> linkedList) {
+			    String _xblockexpression = null;
+			    {
+			      final Map<String,Iterable<String>> plainInvocation = this.<String>then(linkedList);
+			      plainInvocation.toString();
+			      final Map<String,Iterable<String>> extensionInvocation = this.<String>then(linkedList);
+			      String _string = extensionInvocation.toString();
+			      _xblockexpression = (_string);
+			    }
+			    return _xblockexpression;
+			  }
+			}
+		''')
+	}
+	
+	@Test def void testBug401269_04() {
+		'''
+			import java.util.Map
+			import java.util.List
+			import java.util.Set
+			class C {
+				def <A> Map<A, Iterable<A>> then(Iterable<A> iter) {
+					null
+				}	
+				def <A extends Number & Comparable<?>> Map<A, List<A>> then(List<A> expr) {
+					null
+				}
+				def client(Set<Integer> set) {
+					val plainInvocation = then(set)
+					plainInvocation.toString
+					val extensionInvocation = set.then
+					extensionInvocation.toString
+				}
+			}
+		'''.assertCompilesTo('''
+			import java.util.List;
+			import java.util.Map;
+			import java.util.Set;
+			
+			@SuppressWarnings("all")
+			public class C {
+			  public <A extends Object> Map<A,Iterable<A>> then(final Iterable<A> iter) {
+			    return null;
+			  }
+			  
+			  public <A extends Number & Comparable<?>> Map<A,List<A>> then(final List<A> expr) {
+			    return null;
+			  }
+			  
+			  public String client(final Set<Integer> set) {
+			    String _xblockexpression = null;
+			    {
+			      final Map<Integer,Iterable<Integer>> plainInvocation = this.<Integer>then(set);
+			      plainInvocation.toString();
+			      final Map<Integer,Iterable<Integer>> extensionInvocation = this.<Integer>then(set);
+			      String _string = extensionInvocation.toString();
+			      _xblockexpression = (_string);
+			    }
+			    return _xblockexpression;
+			  }
+			}
+		''')
+	}
+	
 	@Test def void testBug400823_01() {
 		'''
 			package test.plugin
