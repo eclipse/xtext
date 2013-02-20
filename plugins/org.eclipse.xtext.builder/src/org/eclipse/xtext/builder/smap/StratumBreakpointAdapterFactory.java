@@ -7,6 +7,8 @@
  *******************************************************************************/
 package org.eclipse.xtext.builder.smap;
 
+import java.util.Map;
+
 import org.apache.log4j.Logger;
 import org.eclipse.core.resources.IMarker;
 import org.eclipse.core.resources.IResource;
@@ -43,20 +45,29 @@ import org.eclipse.xtext.debug.IStratumBreakpointSupport;
 import org.eclipse.xtext.resource.IResourceServiceProvider;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.editor.XtextEditor;
+import org.eclipse.xtext.ui.editor.model.JarFileMarkerAnnotationModel;
 import org.eclipse.xtext.ui.resource.IResourceSetProvider;
 import org.eclipse.xtext.ui.resource.IStorage2UriMapper;
 import org.eclipse.xtext.util.concurrent.IUnitOfWork;
 
+import com.google.common.collect.Maps;
 import com.google.inject.Inject;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
+ * @author Moritz Eysholdt
  */
 public class StratumBreakpointAdapterFactory implements IAdapterFactory, IToggleBreakpointsTargetExtension {
 
 	private final static Logger log = Logger.getLogger(StratumBreakpointAdapterFactory.class);
-	private @Inject IResourceServiceProvider.Registry providerRegistry;
-	private @Inject IStorage2UriMapper uriMapper;
+	
+	private static final String ORG_ECLIPSE_JDT_DEBUG_CORE_SOURCE_NAME = "org.eclipse.jdt.debug.core.sourceName";
+
+	@Inject
+	private IResourceServiceProvider.Registry providerRegistry;
+
+	@Inject
+	private IStorage2UriMapper uriMapper;
 
 	@SuppressWarnings({ "rawtypes"}) 
 	public Object getAdapter(Object adaptableObject, Class adapterType) {
@@ -84,6 +95,13 @@ public class StratumBreakpointAdapterFactory implements IAdapterFactory, IToggle
 		}
 		return null;
 	}
+	
+	protected static class Data {
+		protected URI uri;
+		protected String types;
+		protected boolean valid;
+		protected LanguageInfo lang;
+	}
 
 	public void toggleBreakpoints(IWorkbenchPart part, ISelection selection) throws CoreException {
 		if (!(part instanceof XtextEditor) || !(selection instanceof ITextSelection)) {
@@ -95,48 +113,43 @@ public class StratumBreakpointAdapterFactory implements IAdapterFactory, IToggle
 			final int offset = ((TextSelection) selection).getOffset();
 			final int line = xtextEditor.getDocument().getLineOfOffset(offset) + 1;
 
-			IJavaStratumLineBreakpoint existingBreakpoint = findExistingBreakpoint(res, line);
+			Data data = xtextEditor.getDocument().readOnly(new IUnitOfWork<Data, XtextResource>() {
+				public Data exec(XtextResource state) throws Exception {
+					IResourceServiceProvider provider = state.getResourceServiceProvider();
+					IStratumBreakpointSupport breakpointSupport = provider.get(IStratumBreakpointSupport.class);
+					Data result = new Data();
+					result.uri = state.getURI();
+					result.valid = breakpointSupport != null && breakpointSupport.isValidLineForBreakPoint(state, line);
+					result.types = getClassNamePattern(state);
+					result.lang = provider.get(LanguageInfo.class);
+					return result;
+				}
+			});
+			
+			IJavaStratumLineBreakpoint existingBreakpoint = findExistingBreakpoint(res, data.uri, line);
+			
 			if (existingBreakpoint != null) {
 				existingBreakpoint.delete();
 				return;
 			}
 			
-			URI uri = xtextEditor.getDocument().readOnly(new IUnitOfWork<URI, XtextResource>() {
-				public URI exec(XtextResource state) throws Exception {
-					return state.getURI();
-				}
-			});
-			final IResourceServiceProvider serviceProvider = providerRegistry.getResourceServiceProvider(uri);
-			if (serviceProvider == null)
-				return;
-			final IStratumBreakpointSupport breakpointSupport = serviceProvider.get(IStratumBreakpointSupport.class);
-			if (breakpointSupport == null)
-				return;
-			// check whether it's a sensible line for a breakpoint
-			boolean isBreakpointLocation = xtextEditor.getDocument().readOnly(new IUnitOfWork<Boolean, XtextResource>(){
-				public Boolean exec(XtextResource state) throws Exception {
-					return breakpointSupport.isValidLineForBreakPoint(state, line);
-				}
-			});
-			if (!isBreakpointLocation)
+			if (!data.valid || data.types == null)
 				return;
 			
-			String types = xtextEditor.getDocument().readOnly(new IUnitOfWork<String, XtextResource>(){
-				public String exec(XtextResource state) throws Exception {
-					return getClassNamePattern(state);
-				}
-			});
-			if (types == null)
-				return;
 			if (log.isDebugEnabled()) {
-				log.debug("Types the breakpoint listens for : "+types);
+				log.debug("Types the breakpoint listens for : "+data.types);
 			}
 			final IRegion information = xtextEditor.getDocument().getLineInformation(line-1);
 			final int charStart = information.getOffset();
 			final int charEnd = information.getOffset() + information.getLength();
 
-			final String shortName = serviceProvider.get(LanguageInfo.class).getShortName();
-			final IJavaStratumLineBreakpoint breakpoint = JDIDebugModel.createStratumBreakpoint(res, shortName, null, null, types, line, charStart, charEnd, 0, true, null);
+			final String shortName = data.lang.getShortName();
+			
+			Map<String, Object> attributes = Maps.newHashMap();
+			attributes.put(JarFileMarkerAnnotationModel.MARKER_URI, data.uri.toString());
+			attributes.put(ORG_ECLIPSE_JDT_DEBUG_CORE_SOURCE_NAME, data.uri.lastSegment());
+			
+			final IJavaStratumLineBreakpoint breakpoint = JDIDebugModel.createStratumBreakpoint(res, shortName, null, null, data.types, line, charStart, charEnd, 0, true, attributes);
 			
 			// make sure the class name pattern gets updated on change
 			final IMarker marker = breakpoint.getMarker();
@@ -173,12 +186,14 @@ public class StratumBreakpointAdapterFactory implements IAdapterFactory, IToggle
 		}
 	}
 
-	protected IJavaStratumLineBreakpoint findExistingBreakpoint(IResource res, final int line) throws CoreException {
+	protected IJavaStratumLineBreakpoint findExistingBreakpoint(IResource res, URI uri, final int line) throws CoreException {
 		IBreakpointManager manager = DebugPlugin.getDefault().getBreakpointManager();
 		IBreakpoint[] breakpoints = manager.getBreakpoints();
+		String uriStirng = uri.toString();
 		for (IBreakpoint breakpoint : breakpoints) {
-			if (breakpoint instanceof IJavaStratumLineBreakpoint 
-				&& breakpoint.getMarker().getResource().equals(res)) {
+			IMarker marker = breakpoint.getMarker();
+			if (breakpoint instanceof IJavaStratumLineBreakpoint && marker.getResource().equals(res)
+					&& uriStirng.equals(marker.getAttribute(JarFileMarkerAnnotationModel.MARKER_URI))) {
 				final IJavaStratumLineBreakpoint stratumBreakpoint = (IJavaStratumLineBreakpoint) breakpoint;
 				if (stratumBreakpoint.getLineNumber() == line) {
 					return stratumBreakpoint;
