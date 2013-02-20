@@ -1849,6 +1849,26 @@ public abstract class AbstractTypeResolverTest<Reference extends Object> extends
   }
   
   @Test
+  public void testClassGetSuperclass_01() throws Exception {
+    this.resolvesTo("typeof(String).superclass", "Class<? super String>");
+  }
+  
+  @Test
+  public void testClassGetSuperclass_02() throws Exception {
+    this.resolvesTo("typeof(String).superclass.superclass", "Class<? super String>");
+  }
+  
+  @Test
+  public void testClassGetSuperclass_03() throws Exception {
+    this.resolvesTo("{ var c = Class::forName(\'\') c.superclass }", "Class<?>");
+  }
+  
+  @Test
+  public void testClassGetSuperclass_04() throws Exception {
+    this.resolvesTo("{ var c = Class::forName(\'\') println(c.superclass) }", "Class<?>");
+  }
+  
+  @Test
   public void testVarArgs_01() throws Exception {
     this.resolvesTo("newArrayList(new Double(\'-20\'), new Integer(\'20\'))", "ArrayList<Number & Comparable<?>>");
   }

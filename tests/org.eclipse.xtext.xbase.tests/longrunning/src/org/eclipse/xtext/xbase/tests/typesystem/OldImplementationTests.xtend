@@ -1042,6 +1042,13 @@ class OldAPITypeResolverTest extends AbstractOldAPITypeResolverTest {
 		fail("fails in old implementation")
 	}
 	
+	@Ignore("fails in old implementation") @Test override testClassGetSuperclass_03() throws Exception {
+		fail("fails in old implementation")
+	}
+	@Ignore("fails in old implementation") @Test override testClassGetSuperclass_04() throws Exception {
+		fail("fails in old implementation")
+	}
+	
 	@Ignore("fails in old implementation") @Test override testTypeForVoidClosure_02() throws Exception {
 		fail("fails in old implementation")
 	}

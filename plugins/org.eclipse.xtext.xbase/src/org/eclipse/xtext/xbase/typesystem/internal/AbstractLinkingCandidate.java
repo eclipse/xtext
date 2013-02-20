@@ -237,12 +237,12 @@ public abstract class AbstractLinkingCandidate<Expression extends XExpression> i
 					if (result != null && result.getVariance() == VarianceInfo.INVARIANT) {
 						LightweightTypeReference typeReference = result.getTypeReference();
 						if (typeReference.isWildcard() && typeReference.getLowerBoundSubstitute().isAny() && typeReference.getUpperBoundSubstitute().isType(Object.class)) {
-							// assume unbound wildcard
+							// assume unbound wildcard - use the constraints of the respective type parameter
 							if (!typeParameter.getConstraints().isEmpty()) {
 								JvmTypeConstraint constraint = typeParameter.getConstraints().get(0);
 								if (constraint instanceof JvmUpperBound) {
 									LightweightTypeReference reference = new OwnedConverter(getOwner()).toLightweightReference(constraint.getTypeReference());
-									return new LightweightMergedBoundTypeArgument(reference, VarianceInfo.INVARIANT);
+									return new LightweightMergedBoundTypeArgument(reference, VarianceInfo.OUT);
 								}
 							}
 						}

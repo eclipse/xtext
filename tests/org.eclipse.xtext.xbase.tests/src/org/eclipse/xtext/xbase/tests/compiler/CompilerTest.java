@@ -19,6 +19,22 @@ public class CompilerTest extends AbstractOutputComparingCompilerTests {
 				"return _length;", "'foo'.length");
 	}
 	
+	@Test public void testBug377855() throws Exception {
+		assertCompilesToStatement(
+				"\n" + 
+				"try {\n" + 
+				"  Class<? extends Object> clazz = Class.forName(\"java.lang.String\");\n" + 
+				"  Class<? extends Object> _superclass = clazz.getSuperclass();\n" + 
+				"  org.eclipse.xtext.xbase.lib.InputOutput.<Class<? extends Object>>println(_superclass);\n" + 
+				"} catch (Throwable _e) {\n" + 
+				"  throw org.eclipse.xtext.xbase.lib.Exceptions.sneakyThrow(_e);\n" + 
+				"}", 
+				"{" +
+				"  var clazz = Class::forName('java.lang.String')\n" + 
+				"  println(clazz.superclass)\n" +
+				"}");
+	}
+	
 	@Test public void testImplicitReferenceToMultitype() throws Exception {
 		assertCompilesTo(
 				"Iterable<Object> _plus = com.google.common.collect.Iterables.<Object>concat(((Iterable<StringBuilder>) null), ((Iterable<StringBuffer>) null));\n" + 

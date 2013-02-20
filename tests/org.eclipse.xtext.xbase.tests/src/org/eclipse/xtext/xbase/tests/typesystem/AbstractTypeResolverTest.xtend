@@ -1729,6 +1729,22 @@ abstract class AbstractTypeResolverTest<Reference> extends AbstractXbaseTestCase
 		"typeof(String).newInstance".resolvesTo("String")
 	}
 	
+	@Test def void testClassGetSuperclass_01() throws Exception {
+		"typeof(String).superclass".resolvesTo("Class<? super String>")
+	}
+	
+	@Test def void testClassGetSuperclass_02() throws Exception {
+		"typeof(String).superclass.superclass".resolvesTo("Class<? super String>")
+	}
+	
+	@Test def void testClassGetSuperclass_03() throws Exception {
+		"{ var c = Class::forName('') c.superclass }".resolvesTo("Class<?>")
+	}
+	
+	@Test def void testClassGetSuperclass_04() throws Exception {
+		"{ var c = Class::forName('') println(c.superclass) }".resolvesTo("Class<?>")
+	}
+	
 	@Test def void testVarArgs_01() throws Exception {
 		"newArrayList(new Double('-20'), new Integer('20'))".resolvesTo("ArrayList<Number & Comparable<?>>");
 	}
