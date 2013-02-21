@@ -1,0 +1,9 @@
+Change-Id: Ibf627318d6d43284db25daf8053ed541cda243a2
+Code-Review+2: Moritz Eysholdt <moritz.eysholdt@itemis.de>
+IP-Clean+1: Moritz Eysholdt <moritz.eysholdt@itemis.de>
+Verified+1: Moritz Eysholdt <moritz.eysholdt@itemis.de>
+Submitted-by: Moritz Eysholdt <moritz.eysholdt@itemis.de>
+Submitted-at: Thu, 21 Feb 2013 07:57:43 -0500
+Reviewed-on: https://git.eclipse.org/r/10527
+Project: tmf/org.eclipse.xtext
+Branch: refs/heads/master
