@@ -15,6 +15,7 @@ import org.eclipse.jdt.internal.core.JavaProject;
 import org.eclipse.osgi.util.NLS;
 import org.eclipse.swt.widgets.Combo;
 import org.eclipse.swt.widgets.Composite;
+import org.eclipse.swt.widgets.Control;
 import org.eclipse.xtext.preferences.PreferenceKey;
 import org.eclipse.xtext.ui.preferences.OptionsConfigurationBlock;
 import org.eclipse.xtext.ui.validation.AbstractValidatorConfigurationBlock;
@@ -40,15 +41,22 @@ public class XbaseValidationConfigurationBlock extends AbstractValidatorConfigur
 	private ConfigurableIssueCodesProvider issueCodeProvider;
 
 	@Override
+	public Control doCreateContents(Composite parent) {
+		Control createContents = super.doCreateContents(parent);
+		adjustComboWidth(comboBoxes);
+		return createContents;
+	}
+
+	@Override
 	protected void fillSettingsPage(Composite composite, int nColumns, int defaultIndent) {
 
-		Composite restrictedApi = createSection(Messages.XbaseValidationConfigurationBlock_restricted_api_section_title,
-				composite, nColumns);
+		Composite restrictedApi = createSection(
+				Messages.XbaseValidationConfigurationBlock_restricted_api_section_title, composite, nColumns);
 		fillRestrictedApiSection(new ComboBoxBuilder(this, restrictedApi, defaultIndent));
 
 		Composite unusedCode = createSection("Unnecessary code", composite, nColumns);
 		fillUnusedCodeSection(new ComboBoxBuilder(this, unusedCode, defaultIndent));
-		
+
 		Composite exceptions = createSection("Exception handling", composite, nColumns);
 		fillExceptionsSection(new ComboBoxBuilder(this, exceptions, defaultIndent));
 
@@ -61,10 +69,9 @@ public class XbaseValidationConfigurationBlock extends AbstractValidatorConfigur
 				.addJavaDelegatingComboBox(IssueCodes.OBSOLETE_INSTANCEOF, "Unnecessary 'instanceof' operation:")
 				.addJavaDelegatingComboBox(IssueCodes.OBSOLETE_CAST, "Unnecessary 'cast' operation:");
 	}
-	
+
 	protected void fillExceptionsSection(ComboBoxBuilder comboBoxBuilder) {
-		comboBoxBuilder
-				.addComboBox(IssueCodes.UNHANDLED_EXCEPTION, "Unhandled checked exceptions:");
+		comboBoxBuilder.addComboBox(IssueCodes.UNHANDLED_EXCEPTION, "Unhandled checked exceptions:");
 	}
 
 	protected void fillRestrictedApiSection(ComboBoxBuilder comboBoxBuilder) {
@@ -129,7 +136,7 @@ public class XbaseValidationConfigurationBlock extends AbstractValidatorConfigur
 
 	@Override
 	protected void validateSettings(String changedKey, String oldValue, String newValue) {
-		// TODO Auto-generated method stub
+		// Clients may override
 	}
 
 	protected String javaValue(final String javaIssueCode) {
@@ -145,23 +152,22 @@ public class XbaseValidationConfigurationBlock extends AbstractValidatorConfigur
 
 	protected static final class ComboBoxBuilder {
 		private int defaultIndent;
-		private Composite unusedCodeSection;
+		private Composite section;
 		private final XbaseValidationConfigurationBlock xbaseConfBlock;
 
-		public ComboBoxBuilder(XbaseValidationConfigurationBlock xbaseConfBlock, Composite unusedCodeSection,
-				int defaultIndent) {
+		public ComboBoxBuilder(XbaseValidationConfigurationBlock xbaseConfBlock, Composite section, int defaultIndent) {
+			this.section = section;
 			this.xbaseConfBlock = xbaseConfBlock;
-			this.unusedCodeSection = unusedCodeSection;
 			this.defaultIndent = defaultIndent;
 		}
 
 		public ComboBoxBuilder addJavaDelegatingComboBox(String key, String label) {
-			xbaseConfBlock.addJavaDelegatingComboBox(key, label, unusedCodeSection, defaultIndent);
+			xbaseConfBlock.addJavaDelegatingComboBox(key, label, section, defaultIndent);
 			return this;
 		}
 
 		public ComboBoxBuilder addComboBox(String key, String label) {
-			xbaseConfBlock.addComboBox(key, label, unusedCodeSection, defaultIndent);
+			xbaseConfBlock.addComboBox(key, label, section, defaultIndent);
 			return this;
 		}
 
