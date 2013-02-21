@@ -535,9 +535,6 @@ public class XbaseProposalProvider extends AbstractXbaseProposalProvider impleme
 							return null;
 						}
 					}
-					if (proposal.startsWith("^")) {
-						return null;
-					}
 					if (withParenths) {
 						proposal = proposal + "()";
 					}
