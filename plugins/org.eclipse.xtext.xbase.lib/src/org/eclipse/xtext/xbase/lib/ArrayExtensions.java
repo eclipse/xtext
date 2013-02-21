@@ -21,6 +21,7 @@ public class ArrayExtensions {
 	 *            the array
 	 * @return the length of the given array
 	 */
+	@Pure
 	@Inline("$1.length")
 	public static int length(Object[] array) {
 		return array.length;
@@ -46,6 +47,7 @@ public class ArrayExtensions {
 	 *            the index
 	 * @return the value at the given index
 	 */
+	@Pure
 	@Inline("$1[$2]")
 	public static <T> T get(T[] array, int index) {
 		return array[index];
@@ -56,6 +58,7 @@ public class ArrayExtensions {
 	 *            the array
 	 * @return the length of the given array
 	 */
+	@Pure
 	@Inline("$1.length")
 	public static int length(byte[] array) {
 		return array.length;
@@ -81,6 +84,7 @@ public class ArrayExtensions {
 	 *            the index
 	 * @return the value at the given index
 	 */
+	@Pure
 	@Inline("$1[$2]")
 	public static byte get(byte[] array, int index) {
 		return array[index];
@@ -91,6 +95,7 @@ public class ArrayExtensions {
 	 *            the array
 	 * @return the length of the given array
 	 */
+	@Pure
 	@Inline("$1.length")
 	public static int length(short[] array) {
 		return array.length;
@@ -116,6 +121,7 @@ public class ArrayExtensions {
 	 *            the index
 	 * @return the value at the given index
 	 */
+	@Pure
 	@Inline("$1[$2]")
 	public static short get(short[] array, int index) {
 		return array[index];
@@ -126,6 +132,7 @@ public class ArrayExtensions {
 	 *            the array
 	 * @return the length of the given array
 	 */
+	@Pure
 	@Inline("$1.length")
 	public static int length(char[] array) {
 		return array.length;
@@ -151,6 +158,7 @@ public class ArrayExtensions {
 	 *            the index
 	 * @return the value at the given index
 	 */
+	@Pure
 	@Inline("$1[$2]")
 	public static char get(char[] array, int index) {
 		return array[index];
@@ -161,6 +169,7 @@ public class ArrayExtensions {
 	 *            the array
 	 * @return the length of the given array
 	 */
+	@Pure
 	@Inline("$1.length")
 	public static int length(int[] array) {
 		return array.length;
@@ -186,6 +195,7 @@ public class ArrayExtensions {
 	 *            the index
 	 * @return the value at the given index
 	 */
+	@Pure
 	@Inline("$1[$2]")
 	public static int get(int[] array, int index) {
 		return array[index];
@@ -196,6 +206,7 @@ public class ArrayExtensions {
 	 *            the array
 	 * @return the length of the given array
 	 */
+	@Pure
 	@Inline("$1.length")
 	public static int length(long[] array) {
 		return array.length;
@@ -221,6 +232,7 @@ public class ArrayExtensions {
 	 *            the index
 	 * @return the value at the given index
 	 */
+	@Pure
 	@Inline("$1[$2]")
 	public static long get(long[] array, int index) {
 		return array[index];
@@ -231,6 +243,7 @@ public class ArrayExtensions {
 	 *            the array
 	 * @return the length of the given array
 	 */
+	@Pure
 	@Inline("$1.length")
 	public static int length(float[] array) {
 		return array.length;
@@ -256,6 +269,7 @@ public class ArrayExtensions {
 	 *            the index
 	 * @return the value at the given index
 	 */
+	@Pure
 	@Inline("$1[$2]")
 	public static float get(float[] array, int index) {
 		return array[index];
@@ -266,6 +280,7 @@ public class ArrayExtensions {
 	 *            the array
 	 * @return the length of the given array
 	 */
+	@Pure
 	@Inline("$1.length")
 	public static int length(double[] array) {
 		return array.length;
@@ -291,6 +306,7 @@ public class ArrayExtensions {
 	 *            the index
 	 * @return the value at the given index
 	 */
+	@Pure
 	@Inline("$1[$2]")
 	public static double get(double[] array, int index) {
 		return array[index];
@@ -301,6 +317,7 @@ public class ArrayExtensions {
 	 *            the array
 	 * @return the length of the given array
 	 */
+	@Pure
 	@Inline("$1.length")
 	public static int length(boolean[] array) {
 		return array.length;
@@ -326,6 +343,7 @@ public class ArrayExtensions {
 	 *            the index
 	 * @return the value at the given index
 	 */
+	@Pure
 	@Inline("$1[$2]")
 	public static boolean get(boolean[] array, int index) {
 		return array[index];

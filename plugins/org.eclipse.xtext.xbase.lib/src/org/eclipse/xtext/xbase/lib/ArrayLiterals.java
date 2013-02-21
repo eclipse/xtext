@@ -21,6 +21,7 @@ public class ArrayLiterals {
 	 * @return an array of the given size
 	 * @since 2.4
 	 */
+	@Pure
 	@Inline("new $3[$1]")
 	public static <T> T[] newArrayOfSize(int size) {
 		throw new UnsupportedOperationException(
@@ -33,6 +34,7 @@ public class ArrayLiterals {
 	 * @return an array of the given size
 	 * @since 2.4
 	 */
+	@Pure
 	@Inline("new char[$1]")
 	public static char[] newCharArrayOfSize(int size) {
 		return new char[size];
@@ -44,6 +46,7 @@ public class ArrayLiterals {
 	 * @return an array of the given size
 	 * @since 2.4
 	 */
+	@Pure
 	@Inline("new int[$1]")
 	public static int[] newIntArrayOfSize(int size) {
 		return new int[size];
@@ -55,6 +58,7 @@ public class ArrayLiterals {
 	 * @return an array of the given size
 	 * @since 2.4
 	 */
+	@Pure
 	@Inline("new boolean[$1]")
 	public static boolean[] newBooleanArrayOfSize(int size) {
 		return new boolean[size];
@@ -66,6 +70,7 @@ public class ArrayLiterals {
 	 * @return an array of the given size
 	 * @since 2.4
 	 */
+	@Pure
 	@Inline("new short[$1]")
 	public static short[] newShortArrayOfSize(int size) {
 		return new short[size];
@@ -77,6 +82,7 @@ public class ArrayLiterals {
 	 * @return an array of the given size
 	 * @since 2.4
 	 */
+	@Pure
 	@Inline("new long[$1]")
 	public static long[] newlongArrayOfSize(int size) {
 		return new long[size];
@@ -88,6 +94,7 @@ public class ArrayLiterals {
 	 * @return an array of the given size
 	 * @since 2.4
 	 */
+	@Pure
 	@Inline("new float[$1]")
 	public static float[] newFloatArrayOfSize(int size) {
 		return new float[size];
@@ -99,6 +106,7 @@ public class ArrayLiterals {
 	 * @return an array of the given size
 	 * @since 2.4
 	 */
+	@Pure
 	@Inline("new double[$1]")
 	public static double[] newDoubleArrayOfSize(int size) {
 		return new double[size];
@@ -110,6 +118,7 @@ public class ArrayLiterals {
 	 * @return an array of the given size
 	 * @since 2.4
 	 */
+	@Pure
 	@Inline("new byte[$1]")
 	public static byte[] newByteArrayOfSize(int size) {
 		return new byte[size];
