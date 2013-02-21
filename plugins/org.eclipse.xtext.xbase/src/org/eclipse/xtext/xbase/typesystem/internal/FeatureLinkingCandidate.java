@@ -161,7 +161,7 @@ public class FeatureLinkingCandidate extends AbstractPendingLinkingCandidate<XAb
 			if (feature instanceof XVariableDeclaration && ((XVariableDeclaration) feature).isWriteable()) {
 				XClosure containingClosure = EcoreUtil2.getContainerOfType(getExpression(), XClosure.class);
 				if (containingClosure != null && !EcoreUtil.isAncestor(containingClosure, feature)) {
-					String message = String.format("Cannot refer to the non-final variable %s inside a closure", feature.getSimpleName());
+					String message = String.format("Cannot refer to the non-final variable %s inside a lambda expression", feature.getSimpleName());
 					AbstractDiagnostic diagnostic = new EObjectDiagnosticImpl(Severity.ERROR,
 							IssueCodes.INVALID_MUTABLE_VARIABLE_ACCESS, message, getExpression(),
 							XbasePackage.Literals.XABSTRACT_FEATURE_CALL__FEATURE, -1, null);
