@@ -74,7 +74,7 @@ public class ValidationJob extends Job {
 		final List<Issue> issues = xtextDocument
 				.readOnly(new IUnitOfWork<List<Issue>, XtextResource>() {
 					public List<Issue> exec(XtextResource resource) throws Exception {
-						if (resource == null)
+						if (resource == null || resource.isValidationDisabled())
 							return Collections.emptyList();
 						return resourceValidator.validate(resource, getCheckMode(), new CancelIndicator() {
 							public boolean isCanceled() {

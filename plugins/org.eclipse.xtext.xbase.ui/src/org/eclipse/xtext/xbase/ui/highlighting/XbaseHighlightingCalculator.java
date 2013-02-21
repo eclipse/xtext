@@ -77,7 +77,7 @@ public class XbaseHighlightingCalculator implements ISemanticHighlightingCalcula
 	private BitSet idLengthsToHighlight;
 
 	public void provideHighlightingFor(XtextResource resource, IHighlightedPositionAcceptor acceptor) {
-		if (resource == null)
+		if (resource == null || resource.isValidationDisabled())
 			return;
 		IParseResult parseResult = resource.getParseResult();
 		if (parseResult == null || parseResult.getRootASTElement() == null)
@@ -91,7 +91,7 @@ public class XbaseHighlightingCalculator implements ISemanticHighlightingCalcula
 		}
 		doProvideHighlightingFor(resource, acceptor);
 	}
-
+	
 	/**
 	 * <p>
 	 * Actual implementation of the semantic highlighting calculation. It is ensured, that the given resource is not

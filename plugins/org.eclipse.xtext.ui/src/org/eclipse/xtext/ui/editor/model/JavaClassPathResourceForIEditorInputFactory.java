@@ -43,8 +43,16 @@ public class JavaClassPathResourceForIEditorInputFactory extends ResourceForIEdi
 		URI uri = storageToUriMapper.getUri(storage);
 		configureResourceSet(resourceSet, uri);
 		XtextResource resource = createResource(resourceSet, uri);
-		resource.setValidationDisabled(true);
+		resource.setValidationDisabled(isValidationDisabled(storage));
 		return resource;
+	}
+	
+	@Override
+	protected boolean isValidationDisabled(IStorage storage) {
+		if (storage instanceof IJarEntryResource) {
+			return true;
+		}
+		return super.isValidationDisabled(storage);
 	}
 
 	@Override

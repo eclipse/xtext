@@ -11,6 +11,7 @@ import java.net.URL;
 
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.jdt.core.IJavaElement;
 import org.eclipse.jdt.core.JavaModelException;
@@ -41,6 +42,7 @@ import org.eclipse.xtext.common.types.access.jdt.TypeURIHelper;
 import org.eclipse.xtext.common.types.util.jdt.IJavaElementFinder;
 import org.eclipse.xtext.common.types.xtext.ui.JdtHoverProvider.JavadocHoverWrapper;
 import org.eclipse.xtext.resource.IGlobalServiceProvider;
+import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.XtextUIMessages;
 import org.eclipse.xtext.ui.editor.IURIEditorOpener;
 import org.eclipse.xtext.ui.editor.hover.html.DefaultEObjectHoverProvider;
@@ -94,7 +96,7 @@ public class XbaseHoverProvider extends DefaultEObjectHoverProvider {
 	protected XtextBrowserInformationControlInput getHoverInfo(EObject element, IRegion hoverRegion,
 			XtextBrowserInformationControlInput previous) {
 		EObject objectToView = getObjectToView(element);
-		if(objectToView == null || objectToView.eIsProxy())
+		if(objectToView == null || objectToView.eIsProxy() || isValidationDisabled(objectToView))
 			return null;
 		IJavaElement javaElement = null;
 		if (objectToView != element && objectToView instanceof JvmIdentifiableElement) {
@@ -109,6 +111,13 @@ public class XbaseHoverProvider extends DefaultEObjectHoverProvider {
 			return new XbaseInformationControlInput(previous, objectToView, javaElement, html, labelProvider);
 		}
 		return null;
+	}
+	
+	private boolean isValidationDisabled(EObject objectToView) {
+		Resource resource = objectToView.eResource();
+		if (resource instanceof XtextResource)
+			return ((XtextResource)resource).isValidationDisabled();
+		return true; 
 	}
 
 	/**
