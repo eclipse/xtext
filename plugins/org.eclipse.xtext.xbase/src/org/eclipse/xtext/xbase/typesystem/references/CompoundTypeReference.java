@@ -126,6 +126,8 @@ public class CompoundTypeReference extends LightweightTypeReference {
 	
 	@Override
 	public boolean isType(Class<?> clazz) {
+		if (components == null)
+			return false;
 		if (isSynonym()) {
 			for(LightweightTypeReference component: components) {
 				if (component.isType(clazz))

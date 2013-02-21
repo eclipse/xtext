@@ -27,4 +27,10 @@ public class JvmWildcardTypeReferenceTest extends Assert {
 		assertEquals("?", typeArgument.getIdentifier());
 	}
 	
+	@Test public void testGetIdentifier_02() {
+		JvmUpperBound upperBoundWithoutTypeRef = TypesFactory.eINSTANCE.createJvmUpperBound();
+		typeArgument.getConstraints().add(upperBoundWithoutTypeRef);
+		assertEquals("?", typeArgument.getIdentifier());
+	}
+	
 }

@@ -56,10 +56,15 @@ class NameConcatHelper {
 
 	static String computeFor(JvmWildcardTypeReference typeReference, char innerClassDelimiter, NameType nameType) {
 		if (typeReference.eIsSet(TypesPackage.Literals.JVM_CONSTRAINT_OWNER__CONSTRAINTS)) {
-			if (typeReference.getConstraints().size() == 1 && nameType != NameType.ID && nameType != NameType.TO_STRING) {
+			if (typeReference.getConstraints().size() == 1) {
 				JvmTypeConstraint onlyConstraint = typeReference.getConstraints().get(0);
-				if (onlyConstraint instanceof JvmUpperBound && 
-						Object.class.getCanonicalName().equals(onlyConstraint.getTypeReference().getIdentifier())) {
+				if (nameType != NameType.ID && nameType != NameType.TO_STRING) {
+					JvmTypeReference reference = onlyConstraint.getTypeReference();
+					if (reference == null || (onlyConstraint instanceof JvmUpperBound && 
+							Object.class.getCanonicalName().equals(onlyConstraint.getTypeReference().getIdentifier()))) {
+						return "?";
+					}
+				} else if (nameType == NameType.ID && onlyConstraint.getTypeReference() == null) {
 					return "?";
 				}
 			}
