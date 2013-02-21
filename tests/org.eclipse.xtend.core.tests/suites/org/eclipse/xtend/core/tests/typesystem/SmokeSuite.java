@@ -25,7 +25,7 @@ import org.junit.runners.Suite.SuiteClasses;
 	SkipLastCharacters.class,
 	SkipFirstCharacters.class,
 	SkipCharacterInBetween.class,
-	SkipThreeCharactersInBetween2.class,
+	SkipThreeCharactersInBetween.class,
 	SkipTokensInBetween.class,
 	SkipNodesInBetween.class
 })
