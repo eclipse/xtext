@@ -20,15 +20,16 @@ import com.google.inject.Inject;
  * @author Dennis Huebner - Initial contribution and API
  */
 public class FormatterResourceProvider implements IEditedResourceProvider {
-
+	
 	@Inject
 	private IResourceSetProvider resourceSetProvider;
-
+	
 	public XtextResource createResource() {
 		ResourceSet resourceSet = resourceSetProvider.get(null);
 		XtextResource result = (XtextResource) resourceSet.createResource(URI
 				.createURI(TemplateResourceProvider.SYNTHETIC_SCHEME + ":/" + "FormatterPreview.xtend"));
+		result.setValidationDisabled(true);
 		return result;
 	}
-
+	
 }

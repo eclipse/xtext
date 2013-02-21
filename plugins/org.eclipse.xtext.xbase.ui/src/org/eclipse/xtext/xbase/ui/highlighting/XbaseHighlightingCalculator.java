@@ -89,9 +89,14 @@ public class XbaseHighlightingCalculator implements ISemanticHighlightingCalcula
 				idLengthsToHighlight.set(s.length());
 			}
 		}
+		//TODO remove this check when the typesystem works without a java project
+		if (resource.isValidationDisabled()) {
+			highlightSpecialIdentifiers(acceptor, parseResult.getRootNode());
+			return;
+		}
 		doProvideHighlightingFor(resource, acceptor);
 	}
-
+	
 	/**
 	 * <p>
 	 * Actual implementation of the semantic highlighting calculation. It is ensured, that the given resource is not
