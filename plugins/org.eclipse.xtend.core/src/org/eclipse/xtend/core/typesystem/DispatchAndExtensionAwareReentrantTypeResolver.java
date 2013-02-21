@@ -106,10 +106,10 @@ public class DispatchAndExtensionAwareReentrantTypeResolver extends LogicalConta
 				types.add(caseType);
 			}
 			TypeConformanceComputer conformanceComputer = getServices().getTypeConformanceComputer();
+			if (types.isEmpty())
+				return null;
 			LightweightTypeReference result = conformanceComputer.getCommonSuperType(types);
 			if (result == null) {
-				if (types.isEmpty())
-					return null;
 				Iterator<LightweightTypeReference> iterator = types.iterator();
 				while(iterator.hasNext()) {
 					if (iterator.next().isPrimitiveVoid()) {
