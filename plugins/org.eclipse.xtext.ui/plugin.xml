@@ -22,6 +22,15 @@
             </adapt>
          </with>
       </definition>
+      <definition
+            id="isXtextEditorActive">
+         <with
+               variable="activeEditor">
+            <adapt
+                  type="org.eclipse.xtext.ui.editor.XtextEditor">
+            </adapt>
+         </with>
+      </definition>
    </extension>
    
    <extension point="org.eclipse.ui.menus">
