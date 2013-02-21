@@ -14,6 +14,7 @@ import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.common.types.JvmField;
 import org.eclipse.xtext.common.types.JvmTypeReference;
+import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.scoping.batch.IFeatureScopeSession;
 import org.eclipse.xtext.xbase.typesystem.computation.ITypeComputationResult;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
@@ -33,7 +34,9 @@ public class FieldTypeComputationState extends AbstractLogicalContainerAwareRoot
 	@Override
 	protected List<AbstractTypeExpectation> getExpectations(AbstractTypeComputationState actualState, boolean returnType) {
 		LightweightTypeReference type = getExpectedType();
-		AbstractTypeExpectation result = returnType ? new TypeExpectation(type, actualState, returnType) : new RootTypeExpectation(type, actualState);
+		AbstractTypeExpectation result = returnType 
+				? new TypeExpectation(type, actualState, returnType)
+				: new RootTypeExpectation(type, actualState);
 		return Collections.singletonList(result);
 	}
 
@@ -59,5 +62,11 @@ public class FieldTypeComputationState extends AbstractLogicalContainerAwareRoot
 			}
 		}
 		return new NoTypeResult(getMember(), resolvedTypes.getReferenceOwner());
+	}
+	
+	@Override
+	protected ExpressionTypeComputationState createExpressionComputationState(XExpression expression, StackedResolvedTypes typeResolution) {
+		return new RootExpressionTypeComputationStateWithNonVoidExpectation(typeResolution, getFeatureScopeSession(), this, expression, getExpectedType());
+		
 	}
 }
