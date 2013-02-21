@@ -19,6 +19,9 @@ import com.google.common.annotations.GwtCompatible;
  * Whether the constructor or method causes any side-effects to
  * non-local state.
  * 
+ * On {@link Inline}d methods this is means the compiler cannot 
+ * use the resulting Java expression as a statement. 
+ *  
  * @author Sven Efftinge - Initial contribution and API
  * 
  * @since 2.3
