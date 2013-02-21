@@ -69,7 +69,7 @@ public class XtendUIValidator extends XbaseUIValidator {
 			if(storage.getFirst() instanceof IFile) {
 				IPath fileWorkspacePath = storage.getFirst().getFullPath();
 				IJavaProject javaProject = JavaCore.create(storage.getSecond());
-				if(javaProject != null) {
+				if(javaProject != null && javaProject.exists() && javaProject.isOpen()) {
 					try {
 						for(IPackageFragmentRoot root: javaProject.getPackageFragmentRoots()) {
 							if(!root.isArchive() && !root.isExternal()) {
