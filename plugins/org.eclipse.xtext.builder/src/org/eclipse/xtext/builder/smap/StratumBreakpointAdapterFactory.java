@@ -26,6 +26,7 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.jdt.core.IJarEntryResource;
 import org.eclipse.jdt.debug.core.IJavaStratumLineBreakpoint;
 import org.eclipse.jdt.debug.core.JDIDebugModel;
 import org.eclipse.jface.text.BadLocationException;
@@ -33,6 +34,8 @@ import org.eclipse.jface.text.IRegion;
 import org.eclipse.jface.text.ITextSelection;
 import org.eclipse.jface.text.TextSelection;
 import org.eclipse.jface.viewers.ISelection;
+import org.eclipse.ui.IEditorInput;
+import org.eclipse.ui.IStorageEditorInput;
 import org.eclipse.ui.IWorkbenchPart;
 import org.eclipse.xtext.LanguageInfo;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
@@ -66,6 +69,21 @@ public class StratumBreakpointAdapterFactory implements IAdapterFactory, IToggle
 	public Class<?>[] getAdapterList() {
 		return new Class[] { IToggleBreakpointsTargetExtension.class };
 	}
+	
+	protected IResource getBreakpointResource(XtextEditor editor) throws CoreException {
+		IEditorInput input = editor.getEditorInput();
+		Object adapter = input.getAdapter(IResource.class);
+		if (adapter != null)
+			return (IResource) adapter;
+		if (input instanceof IStorageEditorInput) {
+			IStorage storage = ((IStorageEditorInput) input).getStorage();
+			if (storage instanceof IResource)
+				return (IResource) storage;
+			if (storage instanceof IJarEntryResource)
+				return ((IJarEntryResource) storage).getPackageFragmentRoot().getUnderlyingResource();
+		}
+		return null;
+	}
 
 	public void toggleBreakpoints(IWorkbenchPart part, ISelection selection) throws CoreException {
 		if (!(part instanceof XtextEditor) || !(selection instanceof ITextSelection)) {
@@ -73,7 +91,7 @@ public class StratumBreakpointAdapterFactory implements IAdapterFactory, IToggle
 		}
 		try {
 			final XtextEditor xtextEditor = (XtextEditor) part;
-			final IResource res = xtextEditor.getResource();
+			final IResource res = getBreakpointResource(xtextEditor);
 			final int offset = ((TextSelection) selection).getOffset();
 			final int line = xtextEditor.getDocument().getLineOfOffset(offset) + 1;
 
@@ -83,7 +101,11 @@ public class StratumBreakpointAdapterFactory implements IAdapterFactory, IToggle
 				return;
 			}
 			
-			URI uri = uriMapper.getUri((IStorage)res);
+			URI uri = xtextEditor.getDocument().readOnly(new IUnitOfWork<URI, XtextResource>() {
+				public URI exec(XtextResource state) throws Exception {
+					return state.getURI();
+				}
+			});
 			final IResourceServiceProvider serviceProvider = providerRegistry.getResourceServiceProvider(uri);
 			if (serviceProvider == null)
 				return;
