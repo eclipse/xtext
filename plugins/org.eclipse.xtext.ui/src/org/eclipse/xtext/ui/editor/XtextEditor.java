@@ -89,7 +89,6 @@ import org.eclipse.xtext.ui.editor.model.CommonWordIterator;
 import org.eclipse.xtext.ui.editor.model.DocumentCharacterIterator;
 import org.eclipse.xtext.ui.editor.model.ITokenTypeToPartitionTypeMapperExtension;
 import org.eclipse.xtext.ui.editor.model.IXtextDocument;
-import org.eclipse.xtext.ui.editor.model.TerminalsTokenTypeToPartitionMapper;
 import org.eclipse.xtext.ui.editor.model.XtextDocumentProvider;
 import org.eclipse.xtext.ui.editor.model.XtextDocumentUtil;
 import org.eclipse.xtext.ui.editor.preferences.IPreferenceStoreAccess;
@@ -1264,29 +1263,54 @@ public class XtextEditor extends TextEditor {
 			}
 
 			int index = super.getLineStartPosition(document, line, length, offset);
-			if (tokenTypeToPartitionTypeMapperExtension.isMultiLineComment(type) || tokenTypeToPartitionTypeMapperExtension.isSingleLineComment(type)) {
-				if (index < length - 1 && line.charAt(index) == '*' && line.charAt(index + 1) != '/') {
-					do {
-						++index;
-					} while (index < length && Character.isWhitespace(line.charAt(index)));
-				} else if (index < length - 1 && line.charAt(index) == '/'
-						&& (line.charAt(index + 1) == '/' || line.charAt(index + 1) == '*')) {
-					index++;
-					do {
-						++index;
-					} while (index < length && Character.isWhitespace(line.charAt(index)));
-				}
-			} else if (type.equals(IDocument.DEFAULT_CONTENT_TYPE)) {
-				if (index < length - 1 && line.charAt(index) == '/'
-						&& (line.charAt(index + 1) == '/' || line.charAt(index + 1) == '*')) {
-					index++;
-					do {
-						++index;
-					} while (index < length && Character.isWhitespace(line.charAt(index)));
+			if (tokenTypeToPartitionTypeMapperExtension.isMultiLineComment(type)
+					|| tokenTypeToPartitionTypeMapperExtension.isSingleLineComment(type)) {
+				return getCommentLineStartPosition(line, length, offset, index);
+			} 
+			if (type.equals(IDocument.DEFAULT_CONTENT_TYPE)) {
+				if (isStartOfSingleLineComment(line, length, index) && !isStartOfMultiLineComment(line, length, index)) {
+					return getTextStartPosition(line, length, index + 1);
 				}
 			}
 			return index;
 		}
+
+		private int getCommentLineStartPosition(final String line, final int length, final int offset, int index) {
+			if (isMiddleOfMultiLineComment(line, length, index)) {
+				return getTextStartPosition(line, length, index);
+			} 
+			if (isStartOfMultiLineComment(line, length, index)) {
+				int textStartPosition = getTextStartPosition(line, length, index + 2);
+				return offset > textStartPosition ? textStartPosition : index;
+			} 
+			if (isStartOfSingleLineComment(line, length, index)) {
+				return getTextStartPosition(line, length, index + 1);
+			}
+			return index;
+		}
+
+		private boolean isStartOfSingleLineComment(final String line, final int length, int index) {
+			return index < length - 1 && line.charAt(index) == '/'
+					&& (line.charAt(index + 1) == '/' || line.charAt(index + 1) == '*');
+		}
+
+		private boolean isStartOfMultiLineComment(final String line, final int length, int index) {
+			return index < length - 2 && line.charAt(index) == '/'
+					&& (line.charAt(index + 1) == '*' && line.charAt(index + 2) == '*');
+		}
+
+		private boolean isMiddleOfMultiLineComment(final String line, final int length, int index) {
+			return index < length - 1 && line.charAt(index) == '*' && line.charAt(index + 1) != '/';
+		}
+
+		private int getTextStartPosition(final String line, final int length, int index) {
+			int textStartPosition = index;
+			do {
+				++textStartPosition;
+			} while (textStartPosition < length && Character.isWhitespace(line.charAt(textStartPosition)));
+			return textStartPosition;
+		}
+		
 	}
 
 }
