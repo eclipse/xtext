@@ -127,8 +127,25 @@ public class ValidationTestHelper {
 				return false;
 			}
 		});
-		if (Iterables.isEmpty(matchingErrors))
-			fail("Expected "+severity+" '" + code + "' but got " + validate);
+		if (Iterables.isEmpty(matchingErrors)) {
+			StringBuilder message = new StringBuilder("Expected ")
+				.append(severity)
+				.append(" '")
+				.append(code)
+				.append("' on ")
+				.append(objectType.getName())
+				.append(" but got\n");
+			for(Issue issue: validate) {
+				EObject eObject = model.eResource().getResourceSet().getEObject(issue.getUriToProblem(), true);
+				message.append(issue.getSeverity())
+					.append(" '")
+					.append(issue.getCode()) 
+					.append("' on ")
+					.append(eObject.eClass().getName())
+					.append("\n");
+			}
+			fail(message.toString());
+		}
 	}
 
 	public void assertWarning(final EObject model, final EClass objectType, final String code,
