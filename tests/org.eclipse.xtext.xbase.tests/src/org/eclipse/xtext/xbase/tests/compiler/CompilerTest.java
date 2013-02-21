@@ -63,11 +63,12 @@ public class CompilerTest extends AbstractOutputComparingCompilerTests {
 		assertCompilesTo(
 				"final org.eclipse.xtext.xbase.lib.Procedures.Procedure1<String[]> _function = new org.eclipse.xtext.xbase.lib.Procedures.Procedure1<String[]>() {\n" + 
 				"    public void apply(final String[] it) {\n" + 
-				"      it.length;\n" + 
+				"      int _length = it.length;\n" +
+				"      org.eclipse.xtext.xbase.lib.InputOutput.<Integer>println(Integer.valueOf(_length));\n" + 
 				"    }\n" + 
 				"  };\n" + 
 				"org.eclipse.xtext.xbase.lib.IterableExtensions.<String[]>forEach(((Iterable<String[]>) null), _function);", 
-				"(null as Iterable<String[]>).forEach[ length ]");
+				"(null as Iterable<String[]>).forEach[ println(length) ]");
 	}
 	
 	@Test public void testFieldAccessDontGetAVariableDeclaration() throws Exception {
