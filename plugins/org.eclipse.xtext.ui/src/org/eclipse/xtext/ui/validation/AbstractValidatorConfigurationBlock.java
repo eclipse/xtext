@@ -7,10 +7,15 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.validation;
 
+import java.util.List;
+
 import org.eclipse.jface.dialogs.IDialogSettings;
+import org.eclipse.jface.viewers.CellEditor.LayoutData;
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.graphics.Point;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
+import org.eclipse.swt.widgets.Combo;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Label;
@@ -55,7 +60,6 @@ public abstract class AbstractValidatorConfigurationBlock extends OptionsConfigu
 		GridData gridData = new GridData(GridData.FILL, GridData.FILL, true, true);
 		gridData.heightHint = fPixelConverter.convertHeightInCharsToPixels(20);
 		commonComposite.setLayoutData(gridData);
-
 		validateSettings(null, null, null);
 		return mainComp;
 
@@ -82,11 +86,34 @@ public abstract class AbstractValidatorConfigurationBlock extends OptionsConfigu
 		int defaultIndent = indentStep * 0;
 
 		fillSettingsPage(composite, nColumns, defaultIndent);
-		new Label(composite, SWT.NONE);
-		restoreSectionExpansionStates(section);
 
+		new Label(composite, SWT.NONE); // TODO what's this?
+		restoreSectionExpansionStates(section);
 		return sc1;
 
+	}
+
+	/**
+	 * Computes the common width hint (the largest width) and set it as {@link GridData#widthHint} for all combos, if
+	 * the combo has a {@link GridData} as {@link LayoutData}.
+	 */
+	protected void adjustComboWidth(List<Combo> combos) {
+		int withHint = SWT.DEFAULT;
+		for (Combo comboBox : combos) {
+			comboBox.pack(true);
+			Point computeSize = comboBox.computeSize(SWT.DEFAULT, SWT.DEFAULT);
+			int pixels = computeSize.x;
+			if (pixels > withHint) {
+				withHint = pixels;
+			}
+		}
+		for (Combo comboBox : combos) {
+			Object ld = comboBox.getLayoutData();
+			if (ld instanceof GridData) {
+				GridData layoutData = (GridData) ld;
+				layoutData.widthHint = withHint;
+			}
+		}
 	}
 
 	private String lastSegment(String languageFQN) {
@@ -109,6 +136,5 @@ public abstract class AbstractValidatorConfigurationBlock extends OptionsConfigu
 		excomposite.setClient(inner);
 		return inner;
 	}
-
 
 }
