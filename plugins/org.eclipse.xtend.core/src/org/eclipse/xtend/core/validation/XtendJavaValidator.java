@@ -182,7 +182,8 @@ public class XtendJavaValidator extends XbaseWithAnnotationsJavaValidator {
 	@Override
 	protected void initTypeConformanceCheckedReferences(Builder<EReference> acceptor) {
 		super.initTypeConformanceCheckedReferences(acceptor);
-		acceptor.add(XtendPackage.Literals.RICH_STRING_FOR_LOOP__AFTER, 
+		acceptor.add(XtendPackage.Literals.XTEND_FIELD__INITIAL_VALUE,
+					XtendPackage.Literals.RICH_STRING_FOR_LOOP__AFTER, 
 					XtendPackage.Literals.RICH_STRING_FOR_LOOP__BEFORE,
 					XtendPackage.Literals.RICH_STRING_FOR_LOOP__SEPARATOR, 
 					XtendPackage.Literals.RICH_STRING_IF__IF,

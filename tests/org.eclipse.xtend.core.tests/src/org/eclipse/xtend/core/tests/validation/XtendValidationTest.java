@@ -1830,5 +1830,25 @@ public class XtendValidationTest extends AbstractXtendTestCase {
 				+ "}");
 		helper.assertError(file, TypesPackage.Literals.JVM_TYPE_REFERENCE, TYPE_PARAMETER_FORWARD_REFERENCE);		
 	}
+	
+	@Test
+	public void testFieldInitializerNonVoid_0() throws Exception {
+		XtendFile file = file(
+				"class Foo {"
+				+ "public val x = voidFunction()"
+				+ "def void voidFunction() {}"
+				+ "}");
+		helper.assertError(file, XFEATURE_CALL, INCOMPATIBLE_TYPES);
+	}
+
+	@Test
+	public void testFieldInitializerNonVoid_1() throws Exception {
+		XtendFile file = file(
+				"class Foo {"
+				+ "public val int x = voidFunction()"
+				+ "def void voidFunction() {}"
+				+ "}");
+		helper.assertError(file, XFEATURE_CALL, INCOMPATIBLE_TYPES);
+	}
 
 }
