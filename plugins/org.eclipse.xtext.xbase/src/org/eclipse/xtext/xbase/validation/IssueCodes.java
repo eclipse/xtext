@@ -78,6 +78,7 @@ public class IssueCodes {
 	public static final String RAW_TYPE = ISSUE_CODE_PREFIX	+ "raw_type";
 	public static final String TYPE_BOUNDS_MISSMATCH = ISSUE_CODE_PREFIX + "type_bounds_missmatch";
 	public static final String TYPE_PARAMETER_FORWARD_REFERENCE = ISSUE_CODE_PREFIX + "type_parameter_forward_reference";
+	public static final String INVALID_TYPE_PARAMETER_BOUNDS = ISSUE_CODE_PREFIX + "invalid_type_parameter_bounds";
 
 	
 	// list is not necessarily complete

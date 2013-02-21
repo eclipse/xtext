@@ -23,7 +23,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EClassifier;
@@ -44,6 +43,7 @@ import org.eclipse.xtext.common.types.JvmExecutable;
 import org.eclipse.xtext.common.types.JvmFeature;
 import org.eclipse.xtext.common.types.JvmField;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
+import org.eclipse.xtext.common.types.JvmGenericArrayTypeReference;
 import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmMember;
@@ -51,7 +51,6 @@ import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeConstraint;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
-import org.eclipse.xtext.common.types.JvmTypeParameterDeclarator;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.JvmVoid;
 import org.eclipse.xtext.common.types.TypesPackage;
@@ -118,7 +117,6 @@ import org.eclipse.xtext.xtype.XImportDeclaration;
 import org.eclipse.xtext.xtype.XImportSection;
 import org.eclipse.xtext.xtype.XtypePackage;
 
-import com.google.common.base.Function;
 import com.google.common.base.Joiner;
 import com.google.common.base.Predicate;
 import com.google.common.collect.ImmutableSet;
@@ -573,7 +571,7 @@ public class XbaseJavaValidator extends AbstractXbaseJavaValidator {
 			}
 		}
 	}
-	
+		
 	protected boolean isStaticContext(EObject element) {
 		if(element instanceof JvmConstructor)
 			return false;
@@ -582,6 +580,18 @@ public class XbaseJavaValidator extends AbstractXbaseJavaValidator {
 		if(element instanceof JvmDeclaredType)
 			return ((JvmDeclaredType) element).isStatic() || ((JvmDeclaredType)element).getDeclaringType() == null;
 		return false;
+	}
+	
+	@Check
+	public void checkTypeParameterConstraintIsValid(JvmTypeParameter typeParameter) {
+		if(!typeParameter.getConstraints().isEmpty()) {
+			for(JvmTypeConstraint constraint: typeParameter.getConstraints()) {
+				JvmTypeReference typeReference = constraint.getTypeReference();
+				if(typeReference instanceof JvmGenericArrayTypeReference)
+					error(String.format("The array type %s cannot be used as a type parameter bound", typeReference.toString()),
+							typeReference, null, INVALID_TYPE_PARAMETER_BOUNDS);
+			}
+		}
 	}
 	
 	/**
