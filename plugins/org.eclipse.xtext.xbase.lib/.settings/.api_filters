@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<component id="org.eclipse.xtext.util" version="2">
+<component id="org.eclipse.xtext.xbase.lib" version="2">
     <resource path="META-INF/MANIFEST.MF">
-        <filter comment="Guice changed" id="923795461">
+        <filter id="923795461">
             <message_arguments>
+                <message_argument value="2.4.0"/>
                 <message_argument value="2.3.0"/>
-                <message_argument value="2.2.1"/>
             </message_arguments>
         </filter>
         <filter id="927989779">
