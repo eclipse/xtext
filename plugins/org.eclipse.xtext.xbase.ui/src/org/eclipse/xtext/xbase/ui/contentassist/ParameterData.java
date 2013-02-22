@@ -51,7 +51,9 @@ public class ParameterData {
 	public void addOverloaded(String string, boolean varArgs) {
 		cachedDisplayString = null;
 		sorted = false;
-		variants.add(Tuples.create(string, varArgs));
+		Pair<String, Boolean> newVariant = Tuples.create(string, varArgs);
+		if(!variants.contains(newVariant)) 
+			variants.add(newVariant);
 	}
 	
 	public boolean isVarArgs(int variant) {

@@ -247,4 +247,17 @@ public class RichStringAwareSourceViewer extends XtextSourceViewer {
 
 		return -1;
 	}
+	
+	@Override
+	public void doOperation(int operation) {
+		if (getTextWidget() == null || (!redraws() && operation != FORMAT))
+			return;
+
+		if(operation == CONTENTASSIST_PROPOSALS) {
+			fContentAssistant.showPossibleCompletions();
+			fContentAssistant.showContextInformation();
+		} else {	
+			super.doOperation(operation);
+		}
+	}
 }

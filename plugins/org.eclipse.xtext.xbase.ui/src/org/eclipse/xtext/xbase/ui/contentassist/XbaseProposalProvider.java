@@ -558,8 +558,9 @@ public class XbaseProposalProvider extends AbstractXbaseProposalProvider impleme
 						ConfigurableCompletionProposal casted = (ConfigurableCompletionProposal) result;
 						casted.setAdditionalProposalInfo(objectOrProxy);
 						casted.setHover(getHover());
+						int offset = casted.getReplacementOffset() + proposal.length() - 1;
 						if (withParenths) {
-							casted.setSelectionStart(casted.getReplacementOffset() + proposal.length() - 1);
+							casted.setSelectionStart(offset);
 							casted.setSelectionLength(0);
 							casted.setAutoInsertable(false);
 							casted.setSimpleLinkedMode(myContentAssistContext.getViewer(), '\t', '\n', '\r');
@@ -576,7 +577,7 @@ public class XbaseProposalProvider extends AbstractXbaseProposalProvider impleme
 									simpleNameToParameterList.put(myCandidate.getName(), parameterData);
 								}
 								parameterData.addOverloaded(parameterList.toString(), executable.isVarArgs());
-								IContextInformation contextInformation = new ParameterContextInformation(parameterData, displayString.toString(), casted.getReplacementOffset() + proposal.length() - 1);
+								IContextInformation contextInformation = new ParameterContextInformation(parameterData, displayString.toString(), offset, offset);
 								casted.setContextInformation(contextInformation);
 							}
 						}
