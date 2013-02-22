@@ -150,8 +150,9 @@ public class XbaseTypeComputer implements ITypeComputer {
 	protected LightweightTypeReference getTypeForName(Class<?> clazz, ITypeComputationState state) {
 		ResourceSet resourceSet = state.getReferenceOwner().getContextResourceSet();
 		JvmTypeReference typeReference = services.getTypeReferences().getTypeForName(clazz, resourceSet);
-		if (typeReference == null)
-			throw new IllegalStateException("Cannot find type " + clazz.getCanonicalName());
+		if (typeReference == null) {
+			return new UnknownTypeReference(state.getReferenceOwner(), clazz.getName());
+		}
 		return state.getConverter().toLightweightReference(typeReference);
 	}
 	
@@ -580,12 +581,18 @@ public class XbaseTypeComputer implements ITypeComputer {
 			}
 		} else {
 			ITypeReferenceOwner owner = state.getReferenceOwner();
-			WildcardTypeReference wildcard = new WildcardTypeReference(owner);
-			ParameterizedTypeReference iterable = new ParameterizedTypeReference(owner, iterableType);
-			UnboundTypeReference unbound = state.createUnboundTypeReference(object, iterableType.getTypeParameters().get(0));
-			wildcard.addUpperBound(unbound);
-			iterable.addTypeArgument(wildcard);
-			// TODO do we have to add synonyms, too?
+			LightweightTypeReference iterable = null;
+			if (iterableType == null) {
+				iterable = new UnknownTypeReference(owner, Iterable.class.getName());
+			} else {
+				WildcardTypeReference wildcard = new WildcardTypeReference(owner);
+				ParameterizedTypeReference iterableTypeRef = new ParameterizedTypeReference(owner, iterableType);
+				UnboundTypeReference unbound = state.createUnboundTypeReference(object, iterableType.getTypeParameters().get(0));
+				wildcard.addUpperBound(unbound);
+				iterableTypeRef.addTypeArgument(wildcard);
+				iterable = iterableTypeRef;
+				// TODO do we have to add synonyms, too?
+			}
 			ITypeComputationState iterableState = state.withExpectation(iterable); 
 			ITypeComputationResult forExpressionResult = iterableState.computeTypes(object.getForExpression());
 			LightweightTypeReference forExpressionType = forExpressionResult.getActualExpressionType();
