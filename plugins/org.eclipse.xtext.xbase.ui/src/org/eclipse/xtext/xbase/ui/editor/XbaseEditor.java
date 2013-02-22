@@ -18,7 +18,12 @@ import org.eclipse.core.resources.IWorkspace;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.Path;
+import org.eclipse.jdt.core.IClassFile;
+import org.eclipse.jdt.core.IJavaElement;
+import org.eclipse.jdt.core.IPackageFragment;
 import org.eclipse.jdt.core.JavaCore;
+import org.eclipse.jdt.core.JavaModelException;
+import org.eclipse.jdt.internal.ui.javaeditor.IClassFileEditorInput;
 import org.eclipse.jface.text.BadLocationException;
 import org.eclipse.jface.text.Document;
 import org.eclipse.jface.text.IDocument;
@@ -42,6 +47,8 @@ import org.eclipse.xtext.util.ITextRegion;
 import org.eclipse.xtext.util.ITextRegionWithLineInformation;
 import org.eclipse.xtext.util.TextRegion;
 import org.eclipse.xtext.xbase.jvmmodel.IJvmModelAssociations;
+import org.objectweb.asm.ClassReader;
+import org.objectweb.asm.commons.EmptyVisitor;
 
 import com.google.inject.Inject;
 
@@ -53,6 +60,37 @@ import com.google.inject.Inject;
  * @author Sebastian Zarnekow - Initial contribution and API
  */
 public class XbaseEditor extends XtextEditor {
+
+	private final class SourceFileNameExtractor extends EmptyVisitor {
+		private String name;
+		
+		protected String parseSMAP(String smap) {
+			if (smap != null) {
+				String[] lines = smap.split("\n");
+				for (int i = 0; i < lines.length; i++) {
+					String line = lines[i].trim();
+					if ("*F".equals(line)) {
+						String[] tokens = lines[i + 1].trim().split(" ");
+						return tokens[tokens.length - 1];
+					}
+				}
+			}
+			return null;
+		}
+
+		@Override
+		public void visitSource(String source, String debug) {
+			String name = parseSMAP(debug);
+			if (name != null)
+				this.name = name;
+			else
+				this.name = source;
+		}
+
+		public String getName() {
+			return name;
+		}
+	}
 
 	private final static Logger log = Logger.getLogger(XbaseEditor.class);
 	
@@ -114,40 +152,73 @@ public class XbaseEditor extends XtextEditor {
 		}
 		return result;
 	}
-	
-	@Override
-	protected void doSetInput(IEditorInput input) throws CoreException {
-		try {
-			// TODO set javaResource to null if input is Xbase file that does not match the Java case (needs reversed trace data)
-			IFile resource = ResourceUtil.getFile(input);
+
+	protected IEditorInput redirectEditorInput(IEditorInput input) throws JavaModelException {
+		IFile resource = ResourceUtil.getFile(input);
+		if (resource != null) {
 			ITrace trace = traceInformation.getTraceToSource(resource);
-			if (trace == null) {
-				super.doSetInput(input);
-				return;
-			}
+			if (trace == null)
+				return input;
 			Iterator<ILocationInResource> allLocations = trace.getAllAssociatedLocations().iterator();
 			ILocationInResource sourceInformation = null;
-			while(allLocations.hasNext() && sourceInformation == null) {
+			while (allLocations.hasNext() && sourceInformation == null) {
 				ILocationInResource candidate = allLocations.next();
 				if (languageInfo.equals(candidate.getLanguage())) {
 					sourceInformation = candidate;
 				}
 			}
-			if (sourceInformation == null) {
-				super.doSetInput(input);
-				return;
-			}
+			if (sourceInformation == null)
+				return input;
 			IStorage originalStorage = sourceInformation.getStorage();
-			if (originalStorage instanceof IFile) {
-				super.doSetInput(new FileEditorInput((IFile) originalStorage));
-			} else {
-				super.doSetInput(new XtextReadonlyEditorInput(originalStorage));
-			}
-			if (JavaCore.isJavaLikeFileName(resource.getName())) {
+			if (originalStorage instanceof IFile)
+				return new FileEditorInput((IFile) originalStorage);
+			else
+				return new XtextReadonlyEditorInput(originalStorage);
+		} else if (input instanceof IClassFileEditorInput) {
+			// we get this editor input for class files from within JARs
+			IClassFile file = ((IClassFileEditorInput) input).getClassFile();
+
+			/*
+			 * It's a bit overkill to parse the .class file here again, but we have to do so, since due to 
+			 * https://bugs.eclipse.org/bugs/show_bug.cgi?id=401527 we can't load the trace information 
+			 * for JARed .java files.
+			 * 
+			 * For the xbase-as-primary-source scenario it might work to access 
+			 * org.eclipse.jdt.internal.compiler.env.IBinaryType.sourceFileName()
+			 * However, this won't provide the right source file name in the JSR-45 (SMAP) scenario.
+			 * 
+			 * Sadly org.eclipse.jdt.internal.compiler.classfmt.ClassFileReader.ClassFileReader(byte[], char[], boolean) doesn't parse the SourceDebugExtension.
+			 * 
+			 * The debugger loads the SMAP data straight from the JVM. See
+			 * org.eclipse.jdi.internal.SourceDebugExtensionParser
+			 */
+
+			ClassReader cr = new ClassReader(file.getBytes());
+			SourceFileNameExtractor sourceName = new SourceFileNameExtractor();
+			cr.accept(sourceName, 0);
+			IJavaElement parent = file.getParent();
+			if (parent instanceof IPackageFragment)
+				for (Object obj : ((IPackageFragment) parent).getNonJavaResources())
+					if (obj instanceof IStorage) {
+						IStorage storage = (IStorage) obj;
+						if (storage.getName().equals(sourceName.getName()))
+							return new XtextReadonlyEditorInput((IStorage) obj);
+					}
+		}
+		return input;
+	}
+	
+	@Override
+	protected void doSetInput(IEditorInput input) throws CoreException {
+		try {
+			// TODO set javaResource to null if input is Xbase file that does not match the Java case (needs reversed trace data)
+			super.doSetInput(redirectEditorInput(input));
+			IFile resource = ResourceUtil.getFile(input);
+			if (resource != null && JavaCore.isJavaLikeFileName(resource.getName())) {
 				markNextSelectionAsJavaOffset(resource);
 			}
 			return;
-		} catch(CoreException e) { 
+		} catch (CoreException e) {
 			// ignore
 		}
 		super.doSetInput(input);
