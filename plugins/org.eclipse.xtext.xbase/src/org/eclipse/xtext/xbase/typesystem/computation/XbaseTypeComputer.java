@@ -708,7 +708,11 @@ public class XbaseTypeComputer implements ITypeComputer {
 		if (object.getArrayDimensions().isEmpty()) {
 			if (clazz.isPrimitiveVoid()) {
 				JvmType voidType = services.getTypeReferences().findDeclaredType(Void.class, object);
-				clazz = new ParameterizedTypeReference(owner, voidType);
+				if (voidType == null) {
+					clazz = new UnknownTypeReference(owner, Void.class.getName());
+				} else {
+					clazz = new ParameterizedTypeReference(owner, voidType);
+				}
 			} else {
 				clazz = clazz.getWrapperTypeIfPrimitive();
 			}
