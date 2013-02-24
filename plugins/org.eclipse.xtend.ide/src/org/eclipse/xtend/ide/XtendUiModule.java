@@ -100,7 +100,6 @@ import org.eclipse.xtext.ui.resource.IResourceUIServiceProvider;
 import org.eclipse.xtext.ui.validation.AbstractValidatorConfigurationBlock;
 import org.eclipse.xtext.validation.IssueSeveritiesProvider;
 import org.eclipse.xtext.xbase.formatting.IFormattingPreferenceValuesProvider;
-import org.eclipse.xtext.xbase.ui.contentassist.ParameterContextInformation;
 import org.eclipse.xtext.xbase.ui.contentassist.ParameterContextInformationProvider;
 import org.eclipse.xtext.xbase.ui.editor.XbaseEditor;
 import org.eclipse.xtext.xbase.ui.editor.XbaseResourceForEditorInputFactory;
