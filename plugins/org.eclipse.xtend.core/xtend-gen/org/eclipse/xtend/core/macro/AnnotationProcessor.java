@@ -64,7 +64,7 @@ public class AnnotationProcessor {
         boolean _matched = false;
         if (!_matched) {
           if (processor instanceof RegisterGlobalsParticipant) {
-            final RegisterGlobalsParticipant _registerGlobalsParticipant = (RegisterGlobalsParticipant)processor;
+            final RegisterGlobalsParticipant<?> _registerGlobalsParticipant = (RegisterGlobalsParticipant<?>)processor;
             _matched=true;
             _switchResult = null;
           }
@@ -91,7 +91,7 @@ public class AnnotationProcessor {
         boolean _matched = false;
         if (!_matched) {
           if (processor instanceof TransformationParticipant) {
-            final TransformationParticipant _transformationParticipant = (TransformationParticipant)processor;
+            final TransformationParticipant<MutableNamedElement> _transformationParticipant = (TransformationParticipant<MutableNamedElement>)processor;
             _matched=true;
             Boolean _xblockexpression_1 = null;
             {
@@ -128,7 +128,7 @@ public class AnnotationProcessor {
   }
   
   /**
-   * runs the given runnable in a new thread and sets the timeout property on the compilation unit to true
+   * runs the given runnable and another thread in parallel, that sets the timeout property on the compilation unit to true
    * when the given amount of milliseconds have passed by.
    */
   private Boolean runWithTimeout(final ActiveAnnotationContext ctx, final int timeout, final Runnable runnable) {
