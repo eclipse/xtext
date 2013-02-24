@@ -7,6 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.typesystem.internal;
 
+import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.scoping.batch.IFeatureScopeSession;
@@ -15,6 +16,7 @@ import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 /**
  * @author Jan Koehnlein - Initial contribution and API
  */
+@NonNullByDefault
 public class RootExpressionTypeComputationStateWithNonVoidExpectation extends RootExpressionTypeComputationState {
 
 	protected RootExpressionTypeComputationStateWithNonVoidExpectation(StackedResolvedTypes resolvedTypes, IFeatureScopeSession featureScopeSession,
