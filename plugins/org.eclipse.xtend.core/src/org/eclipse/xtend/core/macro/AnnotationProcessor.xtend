@@ -14,6 +14,7 @@ import javax.inject.Provider
 import org.eclipse.xtend.core.xtend.XtendMember
 import org.eclipse.xtend.lib.macro.RegisterGlobalsParticipant
 import org.eclipse.xtend.lib.macro.TransformationParticipant
+import org.eclipse.xtend.lib.macro.declaration.MutableNamedElement
 import org.eclipse.xtend.lib.macro.services.TimeoutException
 import org.eclipse.xtext.common.types.JvmDeclaredType
 import org.eclipse.xtext.diagnostics.Severity
@@ -41,7 +42,7 @@ class AnnotationProcessor {
 		task.start
 		try {
 			switch processor : ctx.processorInstance{
-				RegisterGlobalsParticipant: {
+				RegisterGlobalsParticipant<?>: {
 					//TODO
 				}
 			}
@@ -55,7 +56,7 @@ class AnnotationProcessor {
 		task.start
 		try {
 			switch processor : ctx.processorInstance{
-				TransformationParticipant: {
+				TransformationParticipant<MutableNamedElement>: {
 					val modifyCtx = modifyContextProvider.get
 					modifyCtx.unit = ctx.compilationUnit
 					
@@ -74,7 +75,7 @@ class AnnotationProcessor {
 	}
 	
 	/**
-	 * runs the given runnable in a new thread and sets the timeout property on the compilation unit to true
+	 * runs the given runnable and another thread in parallel, that sets the timeout property on the compilation unit to true
 	 * when the given amount of milliseconds have passed by.
 	 */
 	private def runWithTimeout(ActiveAnnotationContext ctx, int timeout, Runnable runnable) {
