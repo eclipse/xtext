@@ -21,6 +21,66 @@ class XtendCompilerTest extends AbstractXtendTestCase {
 	@Inject JvmModelGenerator generator
 	@Inject IGeneratorConfigProvider generatorConfigProvider
 	
+	@Test def void testExtensionForArrayOfT_01() {
+		'''
+			class C {
+				def m1() {
+					val String[] chars = newArrayList('foo','bar')
+					chars.at(2)
+				}
+				def m2() {
+					newArrayList('foo','bar').at(2)
+				}
+				def m3() {
+					newArrayList('foo','bar') => [ at(2) ]
+				}
+				def <T> T at(T[] obj, int index) {
+					return obj.get(index)
+				}
+			}
+		'''.assertCompilesTo('''
+			import java.util.ArrayList;
+			import org.eclipse.xtext.xbase.lib.CollectionLiterals;
+			import org.eclipse.xtext.xbase.lib.Conversions;
+			import org.eclipse.xtext.xbase.lib.ObjectExtensions;
+			import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
+			
+			@SuppressWarnings("all")
+			public class C {
+			  public String m1() {
+			    String _xblockexpression = null;
+			    {
+			      final String[] chars = ((String[])Conversions.unwrapArray(CollectionLiterals.<String>newArrayList("foo", "bar"), String.class));
+			      String _at = this.<String>at(chars, 2);
+			      _xblockexpression = (_at);
+			    }
+			    return _xblockexpression;
+			  }
+			  
+			  public String m2() {
+			    ArrayList<String> _newArrayList = CollectionLiterals.<String>newArrayList("foo", "bar");
+			    String _at = this.<String>at(((String[])Conversions.unwrapArray(_newArrayList, String.class)), 2);
+			    return _at;
+			  }
+			  
+			  public ArrayList<String> m3() {
+			    ArrayList<String> _newArrayList = CollectionLiterals.<String>newArrayList("foo", "bar");
+			    final Procedure1<ArrayList<String>> _function = new Procedure1<ArrayList<String>>() {
+			        public void apply(final ArrayList<String> it) {
+			          C.this.<String>at(((String[])Conversions.unwrapArray(it, String.class)), 2);
+			        }
+			      };
+			    ArrayList<String> _doubleArrow = ObjectExtensions.<ArrayList<String>>operator_doubleArrow(_newArrayList, _function);
+			    return _doubleArrow;
+			  }
+			  
+			  public <T extends Object> T at(final T[] obj, final int index) {
+			    return obj[index];
+			  }
+			}
+		''')
+	}
+	
 	@Test def void testBug401269_01() {
 		'''
 			import java.util.Map

@@ -54,6 +54,93 @@ public class TypeProviderTest extends AbstractXtendTestCase {
 		return (XtendConstructor) clazz.getMembers().get(0);
 	}
 	
+	@Test public void testClosureType_01() throws Exception {
+		XtendFile file = file(
+				"package testPackage\n" +
+				"class C {\n" +
+				"	def <T1, T2, T3> a((T1)=>T2 p1, (T2)=>T3 p2) {\n" + 
+				"		[T1 p|p2.apply(p1.apply(p))]\n" + 
+				"	}\n" + 
+				"}\n"); 
+		XtendClass c = (XtendClass) file.getXtendTypes().get(0);
+		XtendFunction function = (XtendFunction) c.getMembers().get(0);
+		XBlockExpression body = (XBlockExpression) function.getExpression();
+		XExpression lambda = body.getExpressions().get(0);
+		assertEquals("(T1)=>T3", typeProvider.getType(lambda).getSimpleName());
+	}
+	
+	@Test public void testDeferredTypeArgumentResolution_01() throws Exception {
+		XtendFile file = file(
+				"package testPackage\n" +
+						"class C {\n" +
+						"	def String m(String s) {\n" +
+						"		newArrayList().iterator.next\n" + 
+						"	}\n" + 
+				"}\n"); 
+		XtendClass c = (XtendClass) file.getXtendTypes().get(0);
+		XAbstractFeatureCall next = findSingleFeatureCall(c);
+		assertEquals("java.util.Iterator.next()", next.getFeature().getIdentifier());
+		assertEquals("String", typeProvider.getType(next).getSimpleName());
+	}
+	
+	@Test public void testDeferredTypeArgumentResolution_02() throws Exception {
+		XtendFile file = file(
+				"package testPackage\n" +
+				"class C {\n" +
+				"	def CharSequence m(String s) {\n" +
+				"		newArrayList().get(0)	\n" + 
+				"	}\n" + 
+				"}\n"); 
+		XtendClass c = (XtendClass) file.getXtendTypes().get(0);
+		XAbstractFeatureCall get = findSingleFeatureCall(c);
+		assertEquals("java.util.ArrayList.get(int)", get.getFeature().getIdentifier());
+		assertEquals("CharSequence", typeProvider.getType(get).getSimpleName());
+	}
+	
+	@Test public void testDeferredTypeArgumentResolution_03() throws Exception {
+		XtendFile file = file(
+				"package testPackage\n" +
+				"class C {\n" +
+				"	def String m(String s) {\n" +
+				"		newArrayList.flatten.head\n" +
+				"	}\n" + 
+				"}\n"); 
+		XtendClass c = (XtendClass) file.getXtendTypes().get(0);
+		XAbstractFeatureCall head = findSingleFeatureCall(c);
+		assertEquals("org.eclipse.xtext.xbase.lib.IterableExtensions.head(java.lang.Iterable)", head.getFeature().getIdentifier());
+		assertEquals("String", typeProvider.getType(head).getSimpleName());
+	}
+	
+	@Ignore("TODO")
+	@Test public void testDeferredTypeArgumentResolution_04() throws Exception {
+		XtendFile file = file(
+				"package testPackage\n" +
+				"class C {\n" +
+				"	def <T> T method(java.util.Collection<T> c, (T, T)=>T fun) {}\n" +
+				"	def m() {\n" +
+				"		method(newArrayList('')) [ CharSequence cs, s2 | cs + s2 ]\n" +
+				"	}\n" + 
+				"}\n"); 
+		XtendClass c = (XtendClass) file.getXtendTypes().get(0);
+		XAbstractFeatureCall head = findSingleFeatureCall(c);
+		assertEquals("CharSequence", typeProvider.getType(head).getSimpleName());
+	}
+	
+	@Ignore("TODO")
+	@Test public void testDeferredTypeArgumentResolution_05() throws Exception {
+		XtendFile file = file(
+				"package testPackage\n" +
+				"class C {\n" +
+				"	def <T> T method(java.util.Collection<T> c, (T, T)=>T fun) {}\n" +
+				"	def m() {\n" +
+				"		method(newArrayList('')) [ s1, s2 | null as CharSequence ]\n" +
+				"	}\n" + 
+				"}\n"); 
+		XtendClass c = (XtendClass) file.getXtendTypes().get(0);
+		XAbstractFeatureCall head = findSingleFeatureCall(c);
+		assertEquals("CharSequence", typeProvider.getType(head).getSimpleName());
+	}
+	
 	@Test public void testParameterizedExtension_01() throws Exception {
 		XtendFile file = file(
 				"package testPackage\n" +
