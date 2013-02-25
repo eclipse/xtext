@@ -314,4 +314,9 @@ public abstract class AbstractXtendRuntimeModule extends DefaultRuntimeModule {
 		return org.eclipse.xtext.xbase.typesystem.internal.LogicalContainerAwareReentrantTypeResolver.class;
 	}
 
+	// contributed by org.eclipse.xtext.generator.xbase.XbaseGeneratorFragment
+	public Class<? extends org.eclipse.xtext.validation.IResourceValidator> bindIResourceValidator() {
+		return org.eclipse.xtext.xbase.annotations.validation.DerivedStateAwareResourceValidator.class;
+	}
+
 }

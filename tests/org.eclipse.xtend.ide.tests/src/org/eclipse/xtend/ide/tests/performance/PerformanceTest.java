@@ -223,7 +223,27 @@ Task 'DeclaratorTypeArgumentCollector.getTypeParameterMapping' took 207ms (57935
 Task 'ResourceValidatorImpl.validation' took 4767ms (280 measurements).
 Task 'LightweightTypeReference#collectSuperTypes' took 5ms (305 measurements).
 -------------------------------------------------------------------------------------------------------------------------
-
+2013-02-25 / Sebastian - DerivedStateAwareResourceValidator
+Task 'DebugSourceInstallingCompilationParticipant.install' took 1567ms (9 measurements).
+Task 'XtextBuilder.build' took 32258ms (10 measurements).
+Task 'AbstractParser.parse' took 1624ms (280 measurements).
+Task 'primary JVM Model inference (JvmModelAssociator.installDerivedState)' took 1667ms (560 measurements).
+Task '[macros] findActiveAnnotations (ActiveAnnotationContextProvider.computeContext)' took 910ms (560 measurements).
+Task 'Crosslink resolution (DefaultLinkingService.getLinkedObjects)' took 3152ms (20980 measurements).
+Task 'resolve annotations (JdtBasedTypeFactory)' took 439ms (15250 measurements).
+Task 'resolve members (JdtBasedTypeFactory)' took 1680ms (1150 measurements).
+Task 'resolve typeParams (JdtBasedTypeFactory)' took 34ms (1860 measurements).
+Task 'resolve binding (JdtBasedTypeFactory)' took 261ms (395 measurements).
+Task 'JdtBasedTypeFactory.createType (JdtBasedTypeFactory)' took 1784ms (395 measurements).
+Task 'secondary (i.e. Macros) JVM Model inference (JvmModelAssociator.installDerivedState)' took 5ms (560 measurements).
+Task 'resolve param names (JdtBasedTypeFactory)' took 0ms (0 measurements).
+Task 'DefaultReentrantTypeResolver.resolve' took 11492ms (560 measurements).
+Task 'LightweightTypeReference.copyInto' took 149ms (647905 measurements).
+Task 'LightweightTypeReference#internalIsAssignableFrom' took 2067ms (377665 measurements).
+Task 'DeclaratorTypeArgumentCollector.getTypeParameterMapping' took 187ms (57940 measurements).
+Task 'ResourceValidatorImpl.validation' took 3901ms (280 measurements).
+Task 'LightweightTypeReference#collectSuperTypes' took 10ms (305 measurements).
+-------------------------------------------------------------------------------------------------------------------------
 
  */
 

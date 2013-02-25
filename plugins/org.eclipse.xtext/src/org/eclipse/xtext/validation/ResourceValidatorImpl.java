@@ -94,40 +94,59 @@ public class ResourceValidatorImpl implements IResourceValidator {
 				logCheckStatus(resource, syntaxDiagFail, "Syntax");
 	
 				// Validation errors
-				// Collect validator Diagnostics
-				for (EObject ele : resource.getContents()) {
-					try {
-						if (monitor.isCanceled())
-							return null;
-						Map<Object, Object> options = Maps.newHashMap();
-						options.put(CheckMode.KEY, mode);
-						options.put(CancelableDiagnostician.CANCEL_INDICATOR, monitor);
-						// disable concrete syntax validation, since a semantic model that has been parsed 
-						// from the concrete syntax always complies with it - otherwise there are parse errors.
-						options.put(ConcreteSyntaxEValidator.DISABLE_CONCRETE_SYNTAX_EVALIDATOR, Boolean.TRUE);
-						// see EObjectValidator.getRootEValidator(Map<Object, Object>)
-						options.put(EValidator.class, diagnostician);
-						if (resource instanceof XtextResource) {
-							options.put(AbstractInjectableValidator.CURRENT_LANGUAGE_NAME, ((XtextResource) resource).getLanguageName());						
-						}
-						Diagnostic diagnostic = diagnostician.validate(ele, options);
-						if (!diagnostic.getChildren().isEmpty()) {
-							for (Diagnostic childDiagnostic : diagnostic.getChildren()) {
-								issueFromEValidatorDiagnostic(childDiagnostic, acceptor);
-							}
-						} else {
-							issueFromEValidatorDiagnostic(diagnostic, acceptor);
-						}
-					} catch (RuntimeException e) {
-						log.error(e.getMessage(), e);
-					}
-				}
+				// Collect validator diagnostics
+				validate(resource, mode, monitor, acceptor);
+				if (monitor.isCanceled())
+					return null;
 			} catch (RuntimeException e) {
 				log.error(e.getMessage(), e);
 			}
 			return result;
 		} finally {
 			task.stop();
+		}
+	}
+
+	/**
+	 * @since 2.4
+	 */
+	protected void validate(Resource resource, final CheckMode mode, final CancelIndicator monitor,
+			IAcceptor<Issue> acceptor) {
+		for (EObject ele : resource.getContents()) {
+			if (monitor.isCanceled())
+				return;
+			validate(resource, ele, mode, monitor, acceptor);
+		}
+	}
+
+	/**
+	 * @since 2.4
+	 */
+	protected void validate(Resource resource, EObject element, final CheckMode mode, final CancelIndicator monitor,
+			IAcceptor<Issue> acceptor) {
+		try {
+			Map<Object, Object> options = Maps.newHashMap();
+			options.put(CheckMode.KEY, mode);
+			options.put(CancelableDiagnostician.CANCEL_INDICATOR, monitor);
+			// disable concrete syntax validation, since a semantic model that has been parsed 
+			// from the concrete syntax always complies with it - otherwise there are parse errors.
+			options.put(ConcreteSyntaxEValidator.DISABLE_CONCRETE_SYNTAX_EVALIDATOR, Boolean.TRUE);
+			// see EObjectValidator.getRootEValidator(Map<Object, Object>)
+			options.put(EValidator.class, diagnostician);
+			if (resource instanceof XtextResource) {
+				options.put(AbstractInjectableValidator.CURRENT_LANGUAGE_NAME,
+						((XtextResource) resource).getLanguageName());
+			}
+			Diagnostic diagnostic = diagnostician.validate(element, options);
+			if (!diagnostic.getChildren().isEmpty()) {
+				for (Diagnostic childDiagnostic : diagnostic.getChildren()) {
+					issueFromEValidatorDiagnostic(childDiagnostic, acceptor);
+				}
+			} else {
+				issueFromEValidatorDiagnostic(diagnostic, acceptor);
+			}
+		} catch (RuntimeException e) {
+			log.error(e.getMessage(), e);
 		}
 	}
 

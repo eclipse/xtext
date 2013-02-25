@@ -46,6 +46,7 @@ import org.eclipse.xtext.scoping.impl.AbstractDeclarativeScopeProvider;
 import org.eclipse.xtext.serializer.tokens.SerializerScopeProviderBinding;
 import org.eclipse.xtext.util.Strings;
 import org.eclipse.xtext.validation.ConfigurableIssueCodesProvider;
+import org.eclipse.xtext.validation.IResourceValidator;
 import org.eclipse.xtext.validation.SeverityConverter;
 import org.eclipse.xtext.xtext.UsedRulesFinder;
 
@@ -206,7 +207,10 @@ public class XbaseGeneratorFragment extends AbstractGeneratorFragment {
 					.addTypeToType("org.eclipse.xtext.xbase.typesystem.internal.DefaultBatchTypeResolver",
 							"org.eclipse.xtext.xbase.typesystem.internal.LogicalContainerAwareBatchTypeResolver")
 					.addTypeToType("org.eclipse.xtext.xbase.typesystem.internal.DefaultReentrantTypeResolver",
-							"org.eclipse.xtext.xbase.typesystem.internal.LogicalContainerAwareReentrantTypeResolver");
+							"org.eclipse.xtext.xbase.typesystem.internal.LogicalContainerAwareReentrantTypeResolver")
+					.addTypeToType(IResourceValidator.class.getCanonicalName(), 
+							"org.eclipse.xtext.xbase.annotations.validation.DerivedStateAwareResourceValidator")
+					;
 			if(generateXtendInferrer) {
 				config = config
 					.addTypeToType("org.eclipse.xtext.xbase.jvmmodel.IJvmModelInferrer",
