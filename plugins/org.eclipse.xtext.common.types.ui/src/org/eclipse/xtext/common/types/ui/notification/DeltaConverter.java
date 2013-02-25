@@ -266,11 +266,13 @@ public class DeltaConverter {
 				try {
 					for(ICompilationUnit cu: fragment.getCompilationUnits()) {
 						for(IType type: cu.getTypes()) {
-							URI uri = getURIFor(type);
-							List<IEObjectDescription> exported = getExportedEObjects(type);
-							TypeResourceDescription newDescription = new TypeResourceDescription(uri, exported);
-							IResourceDescription.Delta resourceDelta = new ChangedResourceDescriptionDelta(null, newDescription);
-							result.add(resourceDelta);
+							if (!isDerived(type)) {
+								URI uri = getURIFor(type);
+								List<IEObjectDescription> exported = getExportedEObjects(type);
+								TypeResourceDescription newDescription = new TypeResourceDescription(uri, exported);
+								IResourceDescription.Delta resourceDelta = new ChangedResourceDescriptionDelta(null, newDescription);
+								result.add(resourceDelta);
+							}
 						}
 					}
 				} catch(JavaModelException e) {
