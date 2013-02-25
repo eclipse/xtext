@@ -1,0 +1,9 @@
+Change-Id: I9ccf9555d206f7eea39990dc8b231a5094b8ea70
+Code-Review+2: Sebastian Zarnekow <Sebastian.Zarnekow@itemis.de>
+IP-Clean+1: Sebastian Zarnekow <Sebastian.Zarnekow@itemis.de>
+Verified+1: Sebastian Zarnekow <Sebastian.Zarnekow@itemis.de>
+Submitted-by: Sebastian Zarnekow <Sebastian.Zarnekow@itemis.de>
+Submitted-at: Mon, 25 Feb 2013 14:19:16 -0500
+Reviewed-on: https://git.eclipse.org/r/10623
+Project: tmf/org.eclipse.xtext
+Branch: refs/heads/master
