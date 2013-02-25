@@ -210,6 +210,11 @@ public class ParameterizedTypeReference extends LightweightTypeReference {
 
 	@Nullable
 	protected JvmTypeReference getSuperType(JvmType rawType, JvmType thisType) {
+		if (thisType instanceof JvmGenericType && rawType instanceof JvmGenericType) {
+			if (((JvmGenericType) thisType).isInterface() && !((JvmGenericType) rawType).isInterface()) {
+				return null;
+			}
+		}
 		if (thisType instanceof JvmDeclaredType) {
 			List<JvmTypeReference> superTypes = ((JvmDeclaredType) thisType).getSuperTypes();
 			for(JvmTypeReference superType: superTypes) {
