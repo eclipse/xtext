@@ -29,6 +29,7 @@ import org.eclipse.xtend.core.xtend.XtendFile;
 import org.eclipse.xtend.core.xtend.XtendTypeDeclaration;
 import org.eclipse.xtend.ide.tests.AbstractXtendUITestCase;
 import org.eclipse.xtend.ide.tests.WorkbenchTestHelper;
+import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.common.types.TypesPackage.Literals;
 import org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil;
 import org.eclipse.xtext.junit4.validation.ValidationTestHelper;
@@ -80,6 +81,20 @@ public class AccessRestrictionInWorkspaceTest extends AbstractXtendUITestCase {
     }
   }
   
+  @Test
+  public void testForbiddenReferenceInImplicitLambdaParameter() {
+    try {
+      IFile _createFile = IResourcesSetupUtil.createFile("secondProject/src/Dummy.xtend", "class C { new () { new discouraged.B().accept[] } }");
+      final XtendFile xtendFile = this.parse(_createFile);
+      EList<XtendTypeDeclaration> _xtendTypes = xtendFile.getXtendTypes();
+      XtendTypeDeclaration _head = IterableExtensions.<XtendTypeDeclaration>head(_xtendTypes);
+      final XtendClass c = ((XtendClass) _head);
+      this._validationTestHelper.assertError(c, Literals.JVM_TYPE_REFERENCE, IssueCodes.FORBIDDEN_REFERENCE, "Access restriction: The type A is not accessible", "on required project firstProject");
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
   public XtendFile parse(final IFile file) {
     IProject _project = file.getProject();
     final ResourceSet resourceSet = this._iResourceSetProvider.get(_project);
@@ -98,8 +113,29 @@ public class AccessRestrictionInWorkspaceTest extends AbstractXtendUITestCase {
     IProject _createPluginProject = WorkbenchTestHelper.createPluginProject("firstProject");
     IJavaProject _create = JavaCore.create(_createPluginProject);
     this.configure(_create);
-    IResourcesSetupUtil.createFile("firstProject/src/restricted/A.java", "package restricted; public class A {}");
-    IResourcesSetupUtil.createFile("firstProject/src/discouraged/B.java", "package discouraged; public class B {}");
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("package restricted; public class A {}");
+    IResourcesSetupUtil.createFile("firstProject/src/restricted/A.java", _builder.toString());
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("package discouraged;");
+    _builder_1.newLine();
+    _builder_1.append("public class B {");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("public interface I {");
+    _builder_1.newLine();
+    _builder_1.append("\t\t");
+    _builder_1.append("void accept(Iterable<restricted.A> a);");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("public void accept(I i) {}");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    IResourcesSetupUtil.createFile("firstProject/src/discouraged/B.java", _builder_1.toString());
     IProject _createPluginProject_1 = WorkbenchTestHelper.createPluginProject("secondProject", "firstProject");
     JavaCore.create(_createPluginProject_1);
     IResourcesSetupUtil.waitForAutoBuild();

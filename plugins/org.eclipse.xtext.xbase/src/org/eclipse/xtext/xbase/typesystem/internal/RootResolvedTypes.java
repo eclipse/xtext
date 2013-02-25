@@ -13,6 +13,8 @@ import java.util.Set;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.xtext.common.types.JvmFormalParameter;
+import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmMember;
 import org.eclipse.xtext.diagnostics.AbstractDiagnostic;
 import org.eclipse.xtext.diagnostics.Severity;
@@ -20,6 +22,7 @@ import org.eclipse.xtext.util.IAcceptor;
 import org.eclipse.xtext.validation.EObjectDiagnosticImpl;
 import org.eclipse.xtext.validation.IssueSeverities;
 import org.eclipse.xtext.xbase.XExpression;
+import org.eclipse.xtext.xbase.XbasePackage;
 import org.eclipse.xtext.xbase.typesystem.computation.ILinkingCandidate;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.UnboundTypeReference;
@@ -59,6 +62,13 @@ public class RootResolvedTypes extends ResolvedTypes {
 		Map<XExpression, ILinkingCandidate> candidates = basicGetLinkingCandidates();
 		for(ILinkingCandidate candidate: candidates.values()) {
 			candidate.applyToModel();
+		}
+		for(Map.Entry<JvmIdentifiableElement, LightweightTypeReference> entry: basicGetTypes().entrySet()) {
+			JvmIdentifiableElement identifiable = entry.getKey();
+			if (identifiable instanceof JvmFormalParameter && identifiable.eContainingFeature() == XbasePackage.Literals.XCLOSURE__IMPLICIT_PARAMETER) {
+				JvmFormalParameter implicitLambdaParameter = (JvmFormalParameter) identifiable;
+				implicitLambdaParameter.setParameterType(entry.getValue().toTypeReference());
+			}
 		}
 	}
 	
