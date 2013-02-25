@@ -3,6 +3,8 @@
 */
 package org.eclipse.xtext.xbase.tests.typesystem;
 
+import org.eclipse.xtext.validation.IResourceValidator;
+import org.eclipse.xtext.xbase.annotations.validation.DerivedStateAwareResourceValidator;
 import org.eclipse.xtext.xbase.tests.XbaseInjectorProvider;
 import org.eclipse.xtext.xbase.typesystem.internal.DefaultBatchTypeResolver;
 import org.eclipse.xtext.xbase.typesystem.internal.DefaultReentrantTypeResolver;
@@ -41,6 +43,9 @@ public class XbaseWithLogicalContainerInjectorProvider extends XbaseInjectorProv
 			return LogicalContainerAwareReentrantTypeResolver.class;
 		}
 		
+		public Class<? extends IResourceValidator> bindIResourceValidator() {
+			return DerivedStateAwareResourceValidator.class;
+		}
 	}
 
 }
