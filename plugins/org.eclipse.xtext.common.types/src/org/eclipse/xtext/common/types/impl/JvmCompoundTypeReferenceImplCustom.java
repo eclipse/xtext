@@ -50,7 +50,7 @@ public class JvmCompoundTypeReferenceImplCustom extends JvmCompoundTypeReference
 			if (type == null) {
 				JvmGenericType objectType = TypesFactory.eINSTANCE.createJvmGenericType();
 				((InternalEObject) objectType).eSetProxyURI(new ClassURIHelper().getFullURI(Object.class));
-				setType(objectType);
+				type = objectType;
 			}
 		}
 		return super.getType();

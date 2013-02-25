@@ -1178,11 +1178,125 @@ public class XbaseJavaValidator extends AbstractXbaseJavaValidator {
 
 	@Check
 	public void checkImports(XImportSection importSection) {
+		if (importSection.getImportDeclarations().isEmpty())
+			return;
+		
 		final Map<JvmType, XImportDeclaration> imports = Maps.newHashMap();
 		final Map<JvmType, XImportDeclaration> staticImports = Maps.newHashMap();
 		final Map<JvmType, XImportDeclaration> extensionImports = Maps.newHashMap();
 		final Map<String, JvmType> importedNames = Maps.newHashMap();
 		
+		populateMaps(importSection, imports, staticImports, extensionImports, importedNames);
+		Set<EObject> primarySourceElements = collectPrimarySourceElements(importSection, imports, importedNames);
+		if(!isIgnored(IMPORT_UNUSED)) {
+			for(EObject primarySourceElement: primarySourceElements) {
+				ICompositeNode node = NodeModelUtils.findActualNodeFor(primarySourceElement);
+				if (node != null) {
+					for (INode n : node.getAsTreeIterable()) {
+						if (n.getGrammarElement() instanceof CrossReference) {
+							handleTypeUsageInCrossReference(imports, importedNames, n);
+						} else if (n.getGrammarElement() instanceof TerminalRule && ((TerminalRule) n.getGrammarElement()).getName().equals("ML_COMMENT")){
+							handleTypeUsageInComment(imports, importedNames, n);
+						} else if (n.getSemanticElement() instanceof XAbstractFeatureCall) {
+							handleTypeUsageInStaticFeatureCall(staticImports, extensionImports, n);
+						}
+					}
+				}
+			}
+		
+			Iterable<XImportDeclaration> obsoleteImports = concat(imports.values(), staticImports.values(), extensionImports.values());
+			for (XImportDeclaration imp : obsoleteImports) {
+				addIssue(imp, IMPORT_UNUSED, "The import '" + imp.getImportedTypeName() + "' is never used.");
+			}
+		}
+	}
+
+	protected void handleTypeUsageInStaticFeatureCall(final Map<JvmType, XImportDeclaration> staticImports,
+			final Map<JvmType, XImportDeclaration> extensionImports, INode n) {
+		XAbstractFeatureCall featureCall = (XAbstractFeatureCall) n.getSemanticElement();
+		if(featureCall.isStatic()
+				&& (featureCall.getFeature() instanceof JvmField ||
+					featureCall.getFeature() instanceof JvmOperation)) {
+			JvmFeature feature = (JvmFeature) featureCall.getFeature();
+			if(feature.getDeclaringType() != null) {
+				JvmIdentifiableElement logicalContainer = logicalContainerProvider.getNearestLogicalContainer(featureCall);
+				JvmDeclaredType featureCallOwner = EcoreUtil2.getContainerOfType(logicalContainer, JvmDeclaredType.class);
+				if(featureCallOwner != feature.getDeclaringType()) {
+					if(featureCall.isExtension() || staticImports.remove(feature.getDeclaringType()) == null) {
+						extensionImports.remove(feature.getDeclaringType());
+					}
+				}
+			}
+		}
+	}
+
+	protected void handleTypeUsageInComment(final Map<JvmType, XImportDeclaration> imports, final Map<String, JvmType> importedNames, INode n) {
+		List<ReplaceRegion> typeRefRegions = javaDocTypeReferenceProvider.computeTypeRefRegions(n);
+		for(ReplaceRegion replaceRegion : typeRefRegions){
+			String simpleName = replaceRegion.getText();
+			if (importedNames.containsKey(simpleName)) {
+				imports.remove(importedNames.remove(simpleName));
+			}
+		}
+	}
+
+	protected void handleTypeUsageInCrossReference(final Map<JvmType, XImportDeclaration> imports, final Map<String, JvmType> importedNames, INode n) {
+		CrossReference crossReference = (CrossReference) n.getGrammarElement();
+		EClassifier classifier = crossReference.getType().getClassifier();
+		if (classifier instanceof EClass
+			 && (TypesPackage.Literals.JVM_TYPE.isSuperTypeOf((EClass) classifier) 
+					|| TypesPackage.Literals.JVM_CONSTRUCTOR.isSuperTypeOf((EClass) classifier))) {
+			// Filter out HiddenLeafNodes to avoid confusion by comments etc.
+			StringBuilder builder = new StringBuilder();
+			for(ILeafNode leafNode : n.getLeafNodes()){
+				if(!leafNode.isHidden()){
+					builder.append(leafNode.getText());
+				}
+			}
+			String simpleName = builder.toString().trim();
+			if (simpleName.endsWith("::"))
+				simpleName = simpleName.substring(0, simpleName.length() - 2);
+			// handle StaticQualifier Workaround (see Xbase grammar)
+			if (importedNames.containsKey(simpleName)) {
+				JvmType type = importedNames.remove(simpleName);
+				imports.remove(type);
+			} else {
+				while (simpleName.contains("$")) {
+					simpleName = simpleName.substring(0, simpleName.lastIndexOf('$'));
+					if (importedNames.containsKey(simpleName)) {
+						imports.remove(importedNames.remove(simpleName));
+						break;
+					}
+				}
+			}
+		}
+	}
+
+	protected Set<EObject> collectPrimarySourceElements(XImportSection importSection, final Map<JvmType, XImportDeclaration> imports,
+			final Map<String, JvmType> importedNames) {
+		Set<EObject> primarySourceElements = Sets.newHashSet();
+		for (JvmDeclaredType declaredType : getAllDeclaredTypes(importSection.eResource())) {
+			if(importedNames.containsKey(declaredType.getSimpleName())){
+				JvmType importedType = importedNames.get(declaredType.getSimpleName());
+				if (importedType != declaredType  && importedType.eResource() != importSection.eResource()) {
+					XImportDeclaration importDeclaration = imports.get(importedType);
+					if(importDeclaration != null)
+						error("The import '" 
+								+ importedType.getIdentifier() 
+								+ "' conflicts with a type defined in the same file", 
+								importDeclaration, null, IssueCodes.IMPORT_CONFLICT );
+				}
+			}
+			EObject primarySourceElement = associations.getPrimarySourceElement(declaredType);
+			if(primarySourceElement != null)
+				primarySourceElements.add(primarySourceElement);
+		}
+		return primarySourceElements;
+	}
+
+	protected void populateMaps(XImportSection importSection, final Map<JvmType, XImportDeclaration> imports,
+			final Map<JvmType, XImportDeclaration> staticImports, final Map<JvmType, XImportDeclaration> extensionImports,
+			final Map<String, JvmType> importedNames) {
 		for (XImportDeclaration imp : importSection.getImportDeclarations()) {
 			if (imp.getImportedNamespace() != null) { 
 				addIssue(imp, IMPORT_WILDCARD_DEPRECATED, "The use of wildcard imports is deprecated.");
@@ -1224,90 +1338,6 @@ public class XbaseJavaValidator extends AbstractXbaseJavaValidator {
 						}
 					}
 				}
-			}
-		}
-		Set<EObject> primarySourceElements = Sets.newHashSet();
-		for (JvmDeclaredType declaredType : getAllDeclaredTypes(importSection.eResource())) {
-			if(importedNames.containsKey(declaredType.getSimpleName())){
-				JvmType importedType = importedNames.get(declaredType.getSimpleName());
-				if (importedType != declaredType  && importedType.eResource() != importSection.eResource()) {
-					XImportDeclaration importDeclaration = imports.get(importedType);
-					if(importDeclaration != null)
-						error("The import '" 
-								+ importedType.getIdentifier() 
-								+ "' conflicts with a type defined in the same file", 
-								importDeclaration, null, IssueCodes.IMPORT_CONFLICT );
-				}
-			}
-			EObject primarySourceElement = associations.getPrimarySourceElement(declaredType);
-			if(primarySourceElement != null)
-				primarySourceElements.add(primarySourceElement);
-		}
-		for(EObject primarySourceElement: primarySourceElements) {
-			ICompositeNode node = NodeModelUtils.findActualNodeFor(primarySourceElement);
-			if (node != null) {
-				for (INode n : node.getAsTreeIterable()) {
-					if (n.getGrammarElement() instanceof CrossReference) {
-						EClassifier classifier = ((CrossReference) n.getGrammarElement()).getType().getClassifier();
-						if (classifier instanceof EClass
-							 && (TypesPackage.Literals.JVM_TYPE.isSuperTypeOf((EClass) classifier) 
-									|| TypesPackage.Literals.JVM_CONSTRUCTOR.isSuperTypeOf((EClass) classifier))) {
-							// Filter out HiddenLeafNodes to avoid confusion by comments etc.
-							StringBuilder builder = new StringBuilder();
-							for(ILeafNode leafNode : n.getLeafNodes()){
-								if(!leafNode.isHidden()){
-									builder.append(leafNode.getText());
-								}
-							}
-							String simpleName = builder.toString().trim();
-							// handle StaticQualifier Workaround (see Xbase grammar)
-							if (simpleName.endsWith("::"))
-								simpleName = simpleName.substring(0, simpleName.length() - 2);
-							if (importedNames.containsKey(simpleName)) {
-								JvmType type = importedNames.remove(simpleName);
-								imports.remove(type);
-							} else {
-								while (simpleName.contains("$")) {
-									simpleName = simpleName.substring(0, simpleName.lastIndexOf('$'));
-									if (importedNames.containsKey(simpleName)) {
-										imports.remove(importedNames.remove(simpleName));
-										break;
-									}
-								}
-							}
-						}
-					} else if (n.getGrammarElement() instanceof TerminalRule && ((TerminalRule) n.getGrammarElement()).getName().equals("ML_COMMENT")){
-						List<ReplaceRegion> typeRefRegions = javaDocTypeReferenceProvider.computeTypeRefRegions(n);
-						for(ReplaceRegion replaceRegion : typeRefRegions){
-							String simpleName = replaceRegion.getText();
-							if (importedNames.containsKey(simpleName)) {
-								imports.remove(importedNames.remove(simpleName));
-							}
-						}
-					} else if (n.getSemanticElement() instanceof XAbstractFeatureCall) {
-						XAbstractFeatureCall featureCall = (XAbstractFeatureCall) n.getSemanticElement();
-						if(featureCall.isStatic()
-								&& (featureCall.getFeature() instanceof JvmField ||
-									featureCall.getFeature() instanceof JvmOperation)) {
-							JvmFeature feature = (JvmFeature) featureCall.getFeature();
-							if(feature.getDeclaringType() != null) {
-								JvmIdentifiableElement logicalContainer = logicalContainerProvider.getNearestLogicalContainer(featureCall);
-								JvmDeclaredType featureCallOwner = EcoreUtil2.getContainerOfType(logicalContainer, JvmDeclaredType.class);
-								if(featureCallOwner != feature.getDeclaringType()) {
-									if(featureCall.isExtension() || staticImports.remove(feature.getDeclaringType()) == null) {
-										extensionImports.remove(feature.getDeclaringType());
-									}
-								}
-							}
-						}
-					}
-				}
-			}
-		}
-		if(!isIgnored(IMPORT_UNUSED)) {
-			Iterable<XImportDeclaration> obsoleteImports = concat(imports.values(), staticImports.values(), extensionImports.values());
-			for (XImportDeclaration imp : obsoleteImports) {
-				addIssue(imp, IMPORT_UNUSED, "The import '" + imp.getImportedTypeName() + "' is never used.");
 			}
 		}
 	}
