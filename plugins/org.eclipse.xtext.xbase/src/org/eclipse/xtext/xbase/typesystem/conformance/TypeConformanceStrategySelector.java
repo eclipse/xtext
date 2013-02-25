@@ -8,7 +8,6 @@
 package org.eclipse.xtext.xbase.typesystem.conformance;
 
 import org.eclipse.jdt.annotation.NonNullByDefault;
-import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.xbase.typesystem.conformance.TypeConformanceComputationArgument.Internal;
 import org.eclipse.xtext.xbase.typesystem.references.AnyTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.ArrayTypeReference;

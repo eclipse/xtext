@@ -10,7 +10,6 @@ package org.eclipse.xtext.xbase.typesystem.computation;
 import java.util.EnumSet;
 
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XIfExpression;
