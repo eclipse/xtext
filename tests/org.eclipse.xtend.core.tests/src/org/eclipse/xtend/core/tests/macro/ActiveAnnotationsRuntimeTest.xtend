@@ -53,9 +53,9 @@ class ActiveAnnotationsRuntimeTest extends AbstractActiveAnnotationsTest {
 }
 
 class DelegatingClassloader extends ClassLoader {
-	(String)=>Class classFinder
+	(String)=>Class<?> classFinder
 	
-	new(ClassLoader parent, (String)=>Class classFinder) {
+	new(ClassLoader parent, (String)=>Class<?> classFinder) {
 		super(parent)
 		this.classFinder = classFinder
 	}
