@@ -77,7 +77,7 @@ public class XtendBuilderParticipant extends BuilderParticipant {
 			try {
 				registerCurrentSourceFolder(delta, fileSystemAccess);
 				final List<Issue> issues = newArrayList();
-				for (IMarker marker : file.findMarkers(null, true, IResource.DEPTH_ONE)) {
+				for (IMarker marker : file.findMarkers(IMarker.PROBLEM, true, IResource.DEPTH_ZERO)) {
 					issues.add(issueUtil.createIssue(marker));
 				}
 				try {
