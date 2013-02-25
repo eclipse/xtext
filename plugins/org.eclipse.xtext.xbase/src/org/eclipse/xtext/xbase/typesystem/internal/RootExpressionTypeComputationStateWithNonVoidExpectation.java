@@ -20,7 +20,7 @@ import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 public class RootExpressionTypeComputationStateWithNonVoidExpectation extends RootExpressionTypeComputationState {
 
 	protected RootExpressionTypeComputationStateWithNonVoidExpectation(StackedResolvedTypes resolvedTypes, IFeatureScopeSession featureScopeSession,
-			AbstractTypeComputationState parent, XExpression expression, LightweightTypeReference expectedType) {
+			AbstractTypeComputationState parent, XExpression expression, @Nullable LightweightTypeReference expectedType) {
 		super(resolvedTypes, featureScopeSession, parent, expression, expectedType);
 	}
 	
