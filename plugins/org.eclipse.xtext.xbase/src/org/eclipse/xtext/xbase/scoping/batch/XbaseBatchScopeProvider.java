@@ -17,21 +17,17 @@ import org.eclipse.xtext.common.types.TypesPackage;
 import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.scoping.IScopeProvider;
 import org.eclipse.xtext.scoping.impl.AbstractDeclarativeScopeProvider;
+import org.eclipse.xtext.scoping.impl.IDelegatingScopeProvider;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.typesystem.IBatchTypeResolver;
 
 import com.google.inject.Inject;
 import com.google.inject.name.Named;
 
-/*
- * The delegating scope provider is explicitly not implemented since we'd run into infinite recursion.
- * A resource would always be affected by the changes in the Java types that it produces. Therefore
- * we cannot extend the DelegatingScopeProvider
- */
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public class XbaseBatchScopeProvider implements IBatchScopeProvider /* , IDelegatingScopeProvider */  {
+public class XbaseBatchScopeProvider implements IBatchScopeProvider , IDelegatingScopeProvider  {
 
 	@Inject
 	private IFeatureScopeSession rootSession;
