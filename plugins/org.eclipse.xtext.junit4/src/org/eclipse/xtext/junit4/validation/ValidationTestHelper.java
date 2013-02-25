@@ -138,8 +138,10 @@ public class ValidationTestHelper {
 			for(Issue issue: validate) {
 				EObject eObject = model.eResource().getResourceSet().getEObject(issue.getUriToProblem(), true);
 				message.append(issue.getSeverity())
-					.append(" '")
+					.append(" (")
 					.append(issue.getCode()) 
+					.append(") '")
+					.append(issue.getMessage()) 
 					.append("' on ")
 					.append(eObject.eClass().getName())
 					.append("\n");
