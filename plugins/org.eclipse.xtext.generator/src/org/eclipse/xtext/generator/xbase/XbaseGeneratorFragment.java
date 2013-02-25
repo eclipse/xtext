@@ -45,6 +45,7 @@ import org.eclipse.xtext.scoping.IScopeProvider;
 import org.eclipse.xtext.scoping.impl.AbstractDeclarativeScopeProvider;
 import org.eclipse.xtext.serializer.tokens.SerializerScopeProviderBinding;
 import org.eclipse.xtext.util.Strings;
+import org.eclipse.xtext.validation.CancelableDiagnostician;
 import org.eclipse.xtext.validation.ConfigurableIssueCodesProvider;
 import org.eclipse.xtext.validation.IResourceValidator;
 import org.eclipse.xtext.validation.SeverityConverter;
@@ -183,6 +184,7 @@ public class XbaseGeneratorFragment extends AbstractGeneratorFragment {
 				.addTypeToType("org.eclipse.xtext.common.types.util.VisibilityService", "org.eclipse.xtext.xbase.typesystem.legacy.LegacyVisibilityService")
 				.addTypeToType("org.eclipse.xtext.common.types.util.FeatureOverridesService", "org.eclipse.xtext.xbase.typesystem.legacy.LegacyFeatureOverridesService")
 				.addTypeToType(EObjectAtOffsetHelper.class.getCanonicalName(), "org.eclipse.xtext.xbase.linking.BrokenConstructorCallAwareEObjectAtOffsetHelper")
+				.addTypeToType(CancelableDiagnostician.class.getCanonicalName(), "org.eclipse.xtext.xbase.validation.XbaseDiagnostician")
 				;
 		if (doesUseXbaseWithAnnotations(grammar)) {
 			config = config
