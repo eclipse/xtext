@@ -125,7 +125,8 @@ public class XbaseUIValidator extends AbstractDeclarativeValidator {
 				return;
 			}
 			javaProject = javaElement.getJavaProject();
-			restriction = computeRestriction((IType) javaElement);
+			restriction = computeRestriction(projectProvider.getJavaProject(context.eResource().getResourceSet()), 
+					(IType) javaElement);
 			validationContext.put(typeToCheck, restriction);
 		}
 		
@@ -148,13 +149,13 @@ public class XbaseUIValidator extends AbstractDeclarativeValidator {
 		}
 	}
 
-	protected RestrictionKind computeRestriction(IType type) {
+	protected RestrictionKind computeRestriction(IJavaProject project, IType type) {
 		try {
 			IPackageFragmentRoot root = (IPackageFragmentRoot) type.getAncestor(IJavaElement.PACKAGE_FRAGMENT_ROOT);
 			if (root == null) {
 				return RestrictionKind.VALID;
 			}
-			IClasspathEntry entry = getResolvedClasspathEntry(root);
+			IClasspathEntry entry = getResolvedClasspathEntry(project, root);
 			if (entry == null) {
 				return RestrictionKind.VALID;
 			}
@@ -183,14 +184,18 @@ public class XbaseUIValidator extends AbstractDeclarativeValidator {
 	 * Therefore we inline the implementation here but avoid throwing an exception in case there is no entry
 	 */
 	@Nullable 
-	protected IClasspathEntry getResolvedClasspathEntry(@NonNull IPackageFragmentRoot root) throws JavaModelException {
+	protected IClasspathEntry getResolvedClasspathEntry(IJavaProject javaProject, @NonNull IPackageFragmentRoot root) throws JavaModelException {
 		IClasspathEntry result = null;
-		JavaProject project = (JavaProject) root.getJavaProject();
-		project.getResolvedClasspath(); // force the resolved entry cache to be populated
+		JavaProject castedProject = (JavaProject) javaProject;
+		castedProject.getResolvedClasspath(); // force the resolved entry cache to be populated
 		@SuppressWarnings("rawtypes")
-		Map rootPathToResolvedEntries = project.getPerProjectInfo().rootPathToResolvedEntries;
+		Map rootPathToResolvedEntries = castedProject.getPerProjectInfo().rootPathToResolvedEntries;
 		if (rootPathToResolvedEntries != null) {
-			result = (IClasspathEntry) rootPathToResolvedEntries.get(root.getPath());
+			if (root.getJavaProject().equals(javaProject)) {
+				result = (IClasspathEntry) rootPathToResolvedEntries.get(root.getPath());
+			} else {
+				result = (IClasspathEntry) rootPathToResolvedEntries.get(root.getJavaProject().getPath());
+			}
 		}
 		return result;
 	}
