@@ -36,6 +36,7 @@
         <cs:dependency name="org.eclipse.pde.junit.runtime" componentType="osgi.bundle"/>
         <cs:dependency name="org.eclipse.pde.ui" componentType="osgi.bundle"/>
         <cs:dependency name="org.eclipse.rcp" componentType="eclipse.feature"/>
+        <cs:dependency name="org.eclipse.platform" componentType="eclipse.feature"/>
         <cs:dependency name="org.eclipse.xpand" componentType="osgi.bundle"/>
         <cs:dependency name="org.eclipse.xtend" componentType="osgi.bundle"/>
         <cs:dependency name="org.eclipse.xtend.typesystem.emf" componentType="osgi.bundle"/>
