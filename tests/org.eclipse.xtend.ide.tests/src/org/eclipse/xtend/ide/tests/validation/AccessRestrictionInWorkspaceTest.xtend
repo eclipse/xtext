@@ -53,6 +53,13 @@ class AccessRestrictionInWorkspaceTest extends AbstractXtendUITestCase {
 		c.assertWarning(JVM_TYPE_REFERENCE, DISCOURAGED_REFERENCE, 'Discouraged access: The type B is not accessible', 'on required project firstProject')
 	}
 	
+	@Test
+	def void testForbiddenReferenceInImplicitLambdaParameter() {
+		val xtendFile = 'secondProject/src/Dummy.xtend'.createFile('class C { new () { new discouraged.B().accept[] } }').parse
+		val c = xtendFile.xtendTypes.head as XtendClass
+		c.assertError(JVM_TYPE_REFERENCE, FORBIDDEN_REFERENCE, 'Access restriction: The type A is not accessible', 'on required project firstProject')
+	}
+	
 	def parse(IFile file) {
 		val resourceSet = get(file.project)
 		val uri = URI::createPlatformResourceURI(file.fullPath.toString, true)
@@ -63,8 +70,16 @@ class AccessRestrictionInWorkspaceTest extends AbstractXtendUITestCase {
 	@Before def setUp() throws Exception {
 		super.setUp()
 		JavaCore::create(createPluginProject("firstProject")).configure
-		'firstProject/src/restricted/A.java'.createFile('package restricted; public class A {}')
-		'firstProject/src/discouraged/B.java'.createFile('package discouraged; public class B {}')
+		'firstProject/src/restricted/A.java'.createFile('''package restricted; public class A {}''')
+		'firstProject/src/discouraged/B.java'.createFile('''
+			package discouraged;
+			public class B {
+				public interface I {
+					void accept(Iterable<restricted.A> a);
+				}
+				public void accept(I i) {}
+			}
+		''')
 		
 		JavaCore::create(createPluginProject("secondProject", "firstProject"))
 		waitForAutoBuild
