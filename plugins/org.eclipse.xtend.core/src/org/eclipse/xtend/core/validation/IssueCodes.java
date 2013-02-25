@@ -46,6 +46,8 @@ public final class IssueCodes {
 	public static final String INCONSISTENT_INDENTATION = ISSUE_CODE_PREFIX + "inconsistent_indentation";
 
 	public static final String XBASE_LIB_NOT_ON_CLASSPATH = ISSUE_CODE_PREFIX + "xbase_lib_not_on_classpath";
+	public static final String JAVA_IS_MISSING = ISSUE_CODE_PREFIX + "java_is_missing";
+	public static final String JAVA_SOURCE_LEVEL_MISMATCH = ISSUE_CODE_PREFIX + "java_source_level_mismatch";
 
 	public static final String CLASS_MUST_BE_ABSTRACT = ISSUE_CODE_PREFIX + "class_must_be_defined_abstract";
 	public static final String DUPLICATE_PARAMETER_NAME = ISSUE_CODE_PREFIX + "duplicate_parameter_name";

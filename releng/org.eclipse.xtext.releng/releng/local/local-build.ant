@@ -17,7 +17,7 @@
 	<property name="build.root" location="${user.home}/hudsonbuild/tmf-xtext-head/buildroot" />
 
 	<!-- Buckminster headless 3.7 to use. See http://www.eclipse.org/buckminster/downloads.html -->
-	<property name="buckminster.home" location="${user.home}/Entwicklung/buckminster" />
+	<property name="buckminster.home" location="${user.home}/buckminster" />
 
 	<!-- Local Xtext git repository -->
 	<property name="checkout.location" value="${user.home}/git/org.eclipse.xtext/" />
@@ -26,7 +26,7 @@
 	<!--<property name="commands.file" value="${releng.project.location}/releng/tests/Xtext-test-buckminster-commands.txt" />-->
 	<property name="commands.file" value="${releng.project.location}/releng/local/commands.txt" />
 
-	<!-- Against which platform to build (Galileo,Indigo)-->
+	<!-- Against which platform to build (Galileo,Latest)-->
 	<property name="ECLIPSE.TARGET.ALIAS" value="Galileo" />
 
 	<!-- ================================= 
