@@ -17,7 +17,6 @@ import static org.eclipse.xtext.util.Strings.*;
 import static org.eclipse.xtext.xbase.validation.IssueCodes.*;
 
 import java.lang.annotation.ElementType;
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.EnumSet;
@@ -97,7 +96,6 @@ import org.eclipse.xtext.xbase.XbasePackage.Literals;
 import org.eclipse.xtext.xbase.annotations.typing.XAnnotationUtil;
 import org.eclipse.xtext.xbase.annotations.validation.XbaseWithAnnotationsJavaValidator;
 import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotation;
-import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotationsPackage;
 import org.eclipse.xtext.xbase.compiler.JavaKeywords;
 import org.eclipse.xtext.xbase.jvmmodel.ILogicalContainerProvider;
 import org.eclipse.xtext.xbase.jvmmodel.JvmTypeExtensions;
@@ -116,7 +114,6 @@ import org.eclipse.xtext.xbase.typesystem.references.OwnedConverter;
 import org.eclipse.xtext.xbase.typesystem.util.ContextualVisibilityHelper;
 import org.eclipse.xtext.xbase.typesystem.util.IVisibilityHelper;
 import org.eclipse.xtext.xbase.validation.UIStrings;
-import org.eclipse.xtext.xtype.XtypePackage;
 
 import com.google.common.base.Function;
 import com.google.common.base.Predicate;
@@ -342,13 +339,17 @@ public class XtendJavaValidator extends XbaseWithAnnotationsJavaValidator {
 	public void checkClassPath(XtendTypeDeclaration type) {
 		TypeReferences typeReferences = getServices().getTypeReferences();
 		final JvmGenericType listType = (JvmGenericType) typeReferences.findDeclaredType(List.class, type);
-		if (listType == null || listType.getTypeParameters().isEmpty()) {
+		if (listType == null) {
+			error("Java is probably missing on the classpath.", type, XTEND_TYPE_DECLARATION__NAME,
+					IssueCodes.JAVA_IS_MISSING);
+		} else if (listType.getTypeParameters().isEmpty()) {
 			error("Xtend requires Java source level 1.5.", type, XTEND_TYPE_DECLARATION__NAME,
-					IssueCodes.XBASE_LIB_NOT_ON_CLASSPATH);
+					IssueCodes.JAVA_SOURCE_LEVEL_MISMATCH);
 		}
-		if (typeReferences.findDeclaredType(StringConcatenation.class, type) == null || typeReferences.findDeclaredType(Exceptions.class, type) == null) {
-			error("Mandatory library bundle 'org.eclipse.xtext.xbase.lib' 2.3.0 or higher not found on the classpath.", type,
-					XTEND_TYPE_DECLARATION__NAME, IssueCodes.XBASE_LIB_NOT_ON_CLASSPATH);
+		if (typeReferences.findDeclaredType(StringConcatenation.class, type) == null
+				|| typeReferences.findDeclaredType(Exceptions.class, type) == null) {
+			error("Mandatory library bundle 'org.eclipse.xtext.xbase.lib' 2.3.0 or higher not found on the classpath.",
+					type, XTEND_TYPE_DECLARATION__NAME, IssueCodes.XBASE_LIB_NOT_ON_CLASSPATH);
 		}
 	}
 	
