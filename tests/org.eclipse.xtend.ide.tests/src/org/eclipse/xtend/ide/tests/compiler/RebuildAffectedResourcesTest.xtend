@@ -1,21 +1,23 @@
 package org.eclipse.xtend.ide.tests.compiler
 
 import com.google.inject.Inject
+import org.eclipse.core.resources.IFile
+import org.eclipse.core.resources.IMarker
+import org.eclipse.core.resources.IResource
+import org.eclipse.core.resources.ResourcesPlugin
 import org.eclipse.xtend.ide.tests.AbstractXtendUITestCase
 import org.eclipse.xtend.ide.tests.WorkbenchTestHelper
+import org.eclipse.xtext.junit4.internal.StopwatchRule
+import org.eclipse.xtext.util.StringInputStream
+import org.eclipse.xtext.util.internal.Stopwatches
+import org.junit.Ignore
+import org.junit.Rule
 import org.junit.Test
 
 import static org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil.*
-import org.eclipse.core.resources.ResourcesPlugin
-import org.eclipse.core.resources.IMarker
-import org.eclipse.core.resources.IResource
-import org.eclipse.ui.texteditor.MarkerUtilities
-import org.eclipse.xtext.util.StringInputStream
-import org.eclipse.core.resources.IFile
-import org.junit.Ignore
-import org.junit.Rule
-import org.eclipse.xtext.junit4.internal.StopwatchRule
-import org.eclipse.xtext.util.internal.Stopwatches
+
+import static extension org.eclipse.ui.texteditor.MarkerUtilities.*
+import org.junit.After
 
 class RebuildAffectedResourcesTest extends AbstractXtendUITestCase {
 
@@ -23,6 +25,10 @@ class RebuildAffectedResourcesTest extends AbstractXtendUITestCase {
 	private WorkbenchTestHelper workbenchTestHelper;
 	
 	@Rule public static StopwatchRule rule = new StopwatchRule(true)
+	
+	@After override void tearDown() {
+		workbenchTestHelper.project.delete(true, null)
+	}
 	
 	@Test def void testRemoveReferencedType() {
 		val type1 = workbenchTestHelper.createFile('Type1.xtend', '''
@@ -93,11 +99,74 @@ class RebuildAffectedResourcesTest extends AbstractXtendUITestCase {
 		assertNoErrorsInWorkspace
 	}
 	
+	@Test def void testExtendedClassChanges() {
+		val type3 = workbenchTestHelper.createFile('Type3.xtend', '''
+			class Type3 {
+			}
+		''')
+		workbenchTestHelper.createFile('Type1.xtend', '''
+			class Type1 extends Type3 {
+			}
+		''')
+		val type2 = workbenchTestHelper.createFile('Type2.xtend', '''
+			class Type2 {
+				def void doStuff(Type1 foo) {
+					foo.bar
+				}
+			}
+		''')
+		waitForAutoBuild()
+		type2.assertHasErrors("bar")
+		type3.setContents(new StringInputStream('''
+			class Type3 {
+				def void bar() {}
+			}
+		'''),true,true, null)
+		waitForAutoBuild()
+		assertNoErrorsInWorkspace
+		
+		type3.setContents(new StringInputStream('''
+			class Type3 {
+				def void baz() {}
+			}
+		'''),true,true, null)
+		waitForAutoBuild()
+		type2.assertHasErrors("bar")
+	}
+	
+	/**
+	 * see https://bugs.eclipse.org/bugs/show_bug.cgi?id=388828
+	 */
+	@Test def void testBug388828() {
+		val typeA = workbenchTestHelper.createFile('A.xtend', '''
+			abstract class A {}
+		''')
+		val typeB = workbenchTestHelper.createFile('B.xtend', '''
+			class B extends A {
+			}
+		''')
+		waitForAutoBuild()
+		assertNoErrorsInWorkspace
+		typeA.setContents(new StringInputStream('''
+			abst ract class A {
+			}
+		'''),true,true, null)
+		waitForAutoBuild()
+		typeA.assertHasErrors('abst')
+		typeB.assertHasErrors('A')
+		
+		typeA.setContents(new StringInputStream('''
+			abstract class A {}
+		'''),true,true, null)
+		waitForAutoBuild()
+		assertNoErrorsInWorkspace
+	}
+	
 	
 	def void assertNoErrorsInWorkspace() {
 		val findMarkers = ResourcesPlugin::workspace.root.findMarkers(IMarker::PROBLEM, true, IResource::DEPTH_INFINITE)
 		for (iMarker : findMarkers) {
-			assertFalse(MarkerUtilities::getMessage(iMarker), MarkerUtilities::getSeverity(iMarker) == IMarker::SEVERITY_ERROR)
+			assertFalse(iMarker.message, iMarker.severity == IMarker::SEVERITY_ERROR)
 		}
 	}
 	
@@ -115,11 +184,11 @@ class RebuildAffectedResourcesTest extends AbstractXtendUITestCase {
 	def void assertHasErrors(IFile file, String msgPart) {
 		val findMarkers = file.findMarkers(IMarker::PROBLEM, true, IResource::DEPTH_INFINITE)
 		for (iMarker : findMarkers) {
-			if (MarkerUtilities::getSeverity(iMarker) == IMarker::SEVERITY_ERROR && MarkerUtilities::getMessage(iMarker).contains(msgPart)) {
+			if (iMarker.severity == IMarker::SEVERITY_ERROR && iMarker.message.contains(msgPart)) {
 				return;
 			}
 		}
-		fail("Exected an error marker containing '"+msgPart+"' on "+file.fullPath)
+		fail("Expected an error marker containing '"+msgPart+"' on "+file.fullPath+" but found "+findMarkers.map[message].join(','))
 	}
 	
 }
