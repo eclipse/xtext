@@ -16,7 +16,9 @@ import java.util.Map;
 import java.util.Set;
 
 import org.eclipse.emf.common.notify.Notifier;
+import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.common.util.WrappedException;
+import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtext.common.types.JvmArrayType;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
@@ -25,6 +27,7 @@ import org.eclipse.xtext.common.types.JvmField;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmMember;
 import org.eclipse.xtext.common.types.JvmOperation;
+import org.eclipse.xtext.common.types.JvmParameterizedTypeReference;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.TypesFactory;
@@ -33,6 +36,7 @@ import org.eclipse.xtext.common.types.access.IMirror;
 import org.eclipse.xtext.common.types.access.IMirrorExtension;
 import org.eclipse.xtext.common.types.access.JvmTypeChangeDispatcher;
 import org.eclipse.xtext.common.types.access.TypeResource;
+import org.eclipse.xtext.common.types.access.impl.URIHelperConstants;
 import org.eclipse.xtext.common.types.util.RawTypeHelper.RawTypeReferenceImplementation;
 import org.eclipse.xtext.resource.ISynchronizable;
 import org.eclipse.xtext.util.Strings;
@@ -163,9 +167,9 @@ public abstract class JvmDeclaredTypeImplCustom extends JvmDeclaredTypeImpl {
 								} else {
 									signature.append("(");
 									for (JvmFormalParameter parameter : parameters) {
-										JvmType parameterType = getRawType(parameter.getParameterType());
+										String parameterType = getRawTypeIdentifier(parameter.getParameterType());
 										if (parameterType != null) {
-											signature.append(parameterType.getIdentifier());
+											signature.append(parameterType);
 											signature.append(",");
 										}
 									}
@@ -329,6 +333,31 @@ public abstract class JvmDeclaredTypeImplCustom extends JvmDeclaredTypeImpl {
 				}});
 		}
 		return allFeatures;
+	}
+	
+	protected String getRawTypeIdentifier(JvmTypeReference reference) {
+		if (reference instanceof JvmParameterizedTypeReference) {
+			JvmType typeOrProxy = (JvmType) reference.eGet(TypesPackage.Literals.JVM_PARAMETERIZED_TYPE_REFERENCE__TYPE, false);
+			if (typeOrProxy.eIsProxy()) {
+				URI uri = ((InternalEObject)typeOrProxy).eProxyURI();
+				if (URIHelperConstants.PROTOCOL.equals(uri.scheme())) {
+					if (URIHelperConstants.PRIMITIVES.regionMatches(1, uri.segment(0), 0, URIHelperConstants.PRIMITIVES.length() - 1)) {
+						String fragment = uri.fragment();
+						return fragment;
+					} else if (URIHelperConstants.OBJECTS.regionMatches(1, uri.segment(0), 0, URIHelperConstants.OBJECTS.length() - 2)) {
+						String fragment = uri.fragment();
+						if (fragment.lastIndexOf('/') == -1)
+							return fragment;
+					}
+				}
+			}
+		}
+		RawTypeReferenceImplementation strategy = new RawTypeReferenceImplementation(TypesFactory.eINSTANCE);
+		JvmTypeReference result = strategy.getRawTypeReference(reference, eResource());
+		if (result == null)
+			return null;
+		JvmType rawResult = result.getType();
+		return rawResult == null ? null : rawResult.getIdentifier();
 	}
 
 	protected JvmType getRawType(JvmTypeReference reference) {

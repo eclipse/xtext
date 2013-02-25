@@ -8,22 +8,58 @@
 package org.eclipse.xtext.common.types.access.impl;
 
 import java.util.List;
+import java.util.Map;
 
+import org.eclipse.emf.common.notify.impl.AdapterImpl;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.access.IMirror;
 import org.eclipse.xtext.common.types.access.TypeResource;
 import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.util.Strings;
 
+import com.google.common.collect.Maps;
+
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
 public class ClasspathTypeProvider extends AbstractJvmTypeProvider {
 
+	protected static class TypeInResourceSetAdapter extends AdapterImpl {
+		
+		private Map<String, JvmType> typeByQueryString = Maps.newHashMap();
+		
+		@Override
+		public boolean isAdapterForType(Object type) {
+			return TypeInResourceSetAdapter.class.equals(type);
+		}
+		
+		protected JvmType tryFindTypeInIndex(String name, IndexedJvmTypeAccess indexAccess, ResourceSet resourceSet) {
+			if (indexAccess != null) {
+				JvmType result = typeByQueryString.get(name);
+				if (result != null)
+					return result;
+				int index = name.indexOf('$');
+				if (index < 0)
+					index = name.indexOf('[');
+				String qualifiedNameString = index < 0 ? name : name.substring(0, index);
+				List<String> nameSegments = Strings.split(qualifiedNameString, '.');
+				QualifiedName qualifiedName = QualifiedName.create(nameSegments);
+				EObject candidate = indexAccess.getIndexedJvmType(qualifiedName, name, resourceSet);
+				if (candidate instanceof JvmType) {
+					typeByQueryString.put(name, (JvmType) candidate);
+					return (JvmType) candidate;
+				}
+			}
+			return null;
+		}
+		
+	}
+	
 	private final ClassFinder classFinder;
 	
 	private final DeclaredTypeFactory declaredTypeFactory;
@@ -40,6 +76,12 @@ public class ClasspathTypeProvider extends AbstractJvmTypeProvider {
 	@Deprecated
 	public ClasspathTypeProvider(ClassLoader classLoader, ResourceSet resourceSet) {
 		this(classLoader, resourceSet, null);
+	}
+	
+	@Override
+	protected void registerProtocol(ResourceSet resourceSet) {
+		super.registerProtocol(resourceSet);
+		resourceSet.eAdapters().add(new TypeInResourceSetAdapter());
 	}
 
 	protected ClassFinder createClassFinder(ClassLoader classLoader) {
@@ -103,18 +145,23 @@ public class ClasspathTypeProvider extends AbstractJvmTypeProvider {
 	}
 
 	protected JvmType tryFindTypeInIndex(String name, IndexedJvmTypeAccess indexAccess) {
-		if (indexAccess != null) {
-			int index = name.indexOf('$');
-			if (index < 0)
-				index = name.indexOf('[');
-			String qualifiedNameString = index < 0 ? name : name.substring(0, index);
-			List<String> nameSegments = Strings.split(qualifiedNameString, '.');
-			QualifiedName qualifiedName = QualifiedName.create(nameSegments);
-			EObject candidate = indexAccess.getIndexedJvmType(qualifiedName, name, getResourceSet());
-			if (candidate instanceof JvmType)
-				return (JvmType) candidate;
+		TypeInResourceSetAdapter adapter = (TypeInResourceSetAdapter) EcoreUtil.getAdapter(getResourceSet().eAdapters(), TypeInResourceSetAdapter.class);
+		if (adapter != null) {
+			return adapter.tryFindTypeInIndex(name, indexAccess, getResourceSet());
+		} else {
+			if (indexAccess != null) {
+				int index = name.indexOf('$');
+				if (index < 0)
+					index = name.indexOf('[');
+				String qualifiedNameString = index < 0 ? name : name.substring(0, index);
+				List<String> nameSegments = Strings.split(qualifiedNameString, '.');
+				QualifiedName qualifiedName = QualifiedName.create(nameSegments);
+				EObject candidate = indexAccess.getIndexedJvmType(qualifiedName, name, getResourceSet());
+				if (candidate instanceof JvmType)
+					return (JvmType) candidate;
+			}
+			return null;
 		}
-		return null;
 	}
 	
 	@Override
