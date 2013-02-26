@@ -14,7 +14,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.jdt.annotation.NonNullByDefault;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.diagnostics.ExceptionDiagnostic;
 import org.eclipse.xtext.linking.lazy.LazyURIEncoder;
 import org.eclipse.xtext.nodemodel.INode;
@@ -59,8 +59,8 @@ public class BatchLinkableResource extends DerivedStateAwareResource implements 
 	 * 
 	 * @since 2.4
 	 */
-	@NonNullByDefault
-	public <Result> Result execute(IUnitOfWork<Result, ? super BatchLinkableResource> unit) throws Exception {
+	@Nullable
+	public <Result> Result execute(@NonNull IUnitOfWork<Result, ? super BatchLinkableResource> unit) throws Exception {
 		synchronized (getLock()) {
 			return unit.exec(this);
 		}
