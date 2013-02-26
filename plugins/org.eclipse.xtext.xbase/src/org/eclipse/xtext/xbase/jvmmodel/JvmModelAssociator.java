@@ -7,12 +7,10 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.jvmmodel;
 
-import static com.google.common.collect.Lists.*;
-import static com.google.common.collect.Maps.*;
-import static com.google.common.collect.Sets.*;
-
+import java.util.AbstractSet;
 import java.util.Collections;
 import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -36,9 +34,9 @@ import org.eclipse.xtext.util.internal.Stopwatches.StoppedTask;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.lib.Pair;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
+import org.eclipse.xtext.xbase.typesystem.util.Maps2;
 
-import com.google.common.collect.LinkedListMultimap;
-import com.google.common.collect.ListMultimap;
+import com.google.common.collect.Lists;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import com.google.inject.name.Named;
@@ -77,8 +75,10 @@ public class JvmModelAssociator implements IJvmModelAssociations, IJvmModelAssoc
 	}
 	
 	protected static class Adapter extends AdapterImpl {
-		public ListMultimap<EObject, EObject> sourceToTargetMap = LinkedListMultimap.create();
-		public Map<EObject, JvmIdentifiableElement> logicalContainerMap = newHashMap();
+		
+		public Map<EObject, Set<EObject>> sourceToTargetMap = Maps2.newLinkedHashMapWithExpectedSize(40);
+		public Map<EObject, Set<EObject>> targetToSourceMap = Maps2.newLinkedHashMapWithExpectedSize(40);
+		public Map<EObject, JvmIdentifiableElement> logicalContainerMap = Maps2.newLinkedHashMapWithExpectedSize(40);
 		
 		@Override
 		public boolean isAdapterForType(Object type) {
@@ -165,8 +165,12 @@ public class JvmModelAssociator implements IJvmModelAssociations, IJvmModelAssoc
 		}
 	}
 
-	protected ListMultimap<EObject, EObject> sourceToTargetMap(Resource res) {
+	protected Map<EObject, Set<EObject>> sourceToTargetMap(Resource res) {
 		return getOrInstall(res).sourceToTargetMap;
+	}
+	
+	protected Map<EObject, Set<EObject>> targetToSourceMap(Resource res) {
+		return getOrInstall(res).targetToSourceMap;
 	}
 
 	protected Resource getResource(Notifier ctx) {
@@ -185,51 +189,98 @@ public class JvmModelAssociator implements IJvmModelAssociations, IJvmModelAssoc
 
 	public void associate(EObject sourceElement, EObject jvmElement) {
 		if (sourceElement != null) {
-			ListMultimap<EObject, EObject> map = sourceToTargetMap(sourceElement.eResource());
-			map.put(sourceElement, jvmElement);
+			Resource resource = sourceElement.eResource();
+			Map<EObject, Set<EObject>> sourceToTargetMap = sourceToTargetMap(resource);
+			putIntoSmallSetMap(sourceElement, jvmElement, sourceToTargetMap);
+			Map<EObject, Set<EObject>> targetToSourceMap = targetToSourceMap(resource);
+			putIntoSmallSetMap(jvmElement, sourceElement, targetToSourceMap);
 		}
 	}
 
 	public void associatePrimary(EObject sourceElement, EObject jvmElement) {
 		if (sourceElement != null) {
-			ListMultimap<EObject, EObject> map = sourceToTargetMap(sourceElement.eResource());
-			if (map.containsKey(sourceElement)) {
-				map.get(sourceElement).add(0, jvmElement);
-			} else {
-				map.put(sourceElement, jvmElement);
-			}
+			Resource resource = sourceElement.eResource();
+			Map<EObject, Set<EObject>> sourceToTargetMap = sourceToTargetMap(resource);
+			putIntoSmallSetMap(sourceElement, jvmElement, sourceToTargetMap, true);
+			Map<EObject, Set<EObject>> targetToSourceMap = targetToSourceMap(resource);
+			putIntoSmallSetMap(jvmElement, sourceElement, targetToSourceMap, true);
 		}
+	}
+	
+	public static <K, V> void putIntoSmallSetMap(K key, V value, Map<? super K, Set<V>> map) {
+		Set<V> set = map.get(key);
+		if (set == null) {
+			set = new ListBasedSet<V>();
+			map.put(key, set);
+		}
+		set.add(value);
+	}
+	
+	public static <K, V> void putIntoSmallSetMap(K key, V value, Map<? super K, Set<V>> map, boolean head) {
+		if (head) {
+			Set<V> list = map.get(key);
+			if (list == null) {
+				list = new ListBasedSet<V>();
+				map.put(key, list);
+			}
+			list.remove(value);
+			((ListBasedSet<V>)list).elements.addFirst(value);
+		} else {
+			putIntoSmallSetMap(key, value, map);
+		}
+	}
+	
+	protected static class ListBasedSet<E> extends AbstractSet<E> {
+
+		private LinkedList<E> elements = Lists.newLinkedList();
+		
+		@Override
+		public boolean add(E e) {
+			if (elements.contains(e))
+				return false;
+			return elements.add(e);
+		}
+		
+		@Override
+		public Iterator<E> iterator() {
+			return elements.iterator();
+		}
+
+		@Override
+		public int size() {
+			return elements.size();
+		}
+		
 	}
 
 	public Set<EObject> getJvmElements(EObject sourceElement) {
 		if (sourceElement == null)
 			return Collections.emptySet();
-		final ListMultimap<EObject, EObject> sourceToTargetMap = sourceToTargetMap(sourceElement.eResource());
-		final List<EObject> elements = sourceToTargetMap.get(sourceElement);
-		return newLinkedHashSet(elements);
+		Map<EObject, Set<EObject>> map = sourceToTargetMap(sourceElement.eResource());
+		Set<EObject> result = map.get(sourceElement);
+		if (result != null)
+			return result;
+		return Collections.emptySet();
 	}
 
 	public Set<EObject> getSourceElements(EObject jvmElement) {
 		if (jvmElement == null)
 			return Collections.emptySet();
 		//If this turns out to be too slow we should improve the internal data structure :-)
-		ListMultimap<EObject,EObject> map = sourceToTargetMap(jvmElement.eResource());
-		Set<EObject> sourceElements = newLinkedHashSet();
-		for (Map.Entry<EObject, EObject> entry : map.entries()) {
-			if (entry.getValue() == jvmElement)
-				sourceElements.add(entry.getKey());
-		}
-		return sourceElements;
+		Map<EObject, Set<EObject>> map = targetToSourceMap(jvmElement.eResource());
+		Set<EObject> result = map.get(jvmElement);
+		if (result != null)
+			return result;
+		return Collections.emptySet();
 	}
 
 	public EObject getPrimarySourceElement(EObject jvmElement) {
 		if (jvmElement == null)
 			return null;
-		ListMultimap<EObject,EObject> map = sourceToTargetMap(jvmElement.eResource());
-		for (Map.Entry<EObject, EObject> entry : map.entries()) {
-			if (entry.getValue() == jvmElement)
-				return entry.getKey();
-		}
+		Map<EObject, Set<EObject>> map = targetToSourceMap(jvmElement.eResource());
+		Set<EObject> result = map.get(jvmElement);
+		if (result != null)
+			return result.iterator().next();
 		return null;
 	}
 
@@ -286,7 +337,7 @@ public class JvmModelAssociator implements IJvmModelAssociations, IJvmModelAssoc
 	}
 
 	public void cleanAssociationState(Resource resource) {
-		List<EObject> derived = newArrayList();
+		List<EObject> derived = Lists.newArrayList();
 		EList<EObject> resourcesContentsList = resource.getContents();
 		for (int i = 1; i< resourcesContentsList.size(); i++) {
 			EObject eObject = resourcesContentsList.get(i);
@@ -295,11 +346,12 @@ public class JvmModelAssociator implements IJvmModelAssociations, IJvmModelAssoc
 		}
 		resourcesContentsList.removeAll(derived);
 		sourceToTargetMap(resource).clear();
+		targetToSourceMap(resource).clear();
 		getLogicalContainerMapping(resource).clear();
 	}
 	
 	public static class JvmDeclaredTypeAcceptor implements IJvmDeclaredTypeAcceptor, IJvmDeclaredTypeAcceptor.IPostIndexingInitializing<JvmDeclaredType> {
-		public List<Pair<JvmDeclaredType,Procedure1<? super JvmDeclaredType>>> later = newArrayList();
+		public List<Pair<JvmDeclaredType,Procedure1<? super JvmDeclaredType>>> later = Lists.newArrayList();
 		private JvmDeclaredType lastAccepted = null;
 		private DerivedStateAwareResource resource;
 
