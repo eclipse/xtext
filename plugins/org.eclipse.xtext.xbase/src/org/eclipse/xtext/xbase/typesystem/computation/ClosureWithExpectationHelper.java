@@ -20,6 +20,7 @@ import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.JvmTypeParameterDeclarator;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.xbase.XClosure;
+import org.eclipse.xtext.xbase.XbasePackage;
 import org.eclipse.xtext.xbase.scoping.batch.IFeatureNames;
 import org.eclipse.xtext.xbase.typesystem.conformance.ConformanceHint;
 import org.eclipse.xtext.xbase.typesystem.references.AnyTypeReference;
@@ -162,7 +163,7 @@ public class ClosureWithExpectationHelper extends AbstractClosureTypeHelper {
 		for(int i = 0; i < paramCount; i++) {
 			JvmFormalParameter closureParameter = closureParameters.get(i);
 			final LightweightTypeReference operationParameterType = operationParameterTypes.get(i);
-			if (closureParameter.getParameterType() != null) {
+			if (closureParameter.eContainingFeature() != XbasePackage.Literals.XCLOSURE__IMPLICIT_PARAMETER && closureParameter.getParameterType() != null) {
 				final LightweightTypeReference closureParameterType = typeAssigner.toLightweightTypeReference(closureParameter.getParameterType());
 				new DeferredTypeParameterHintCollector(getExpectation().getReferenceOwner()) {
 					@Override
