@@ -11,7 +11,7 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.jdt.annotation.NonNullByDefault;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.util.concurrent.IUnitOfWork;
 
 /**
@@ -54,8 +54,8 @@ public class SynchronizedXtextResourceSet extends XtextResourceSet implements IS
 	 * 
 	 * @since 2.4
 	 */
-	@NonNullByDefault
-	public <Result> Result execute(IUnitOfWork<Result, ? super SynchronizedXtextResourceSet> unit) throws Exception {
+	@Nullable
+	public <Result> Result execute(@NonNull IUnitOfWork<Result, ? super SynchronizedXtextResourceSet> unit) throws Exception {
 		synchronized (getLock()) {
 			return unit.exec(this);
 		}
