@@ -17,6 +17,8 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceImpl;
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.access.impl.IndexedJvmTypeAccess;
 import org.eclipse.xtext.resource.IFragmentProvider;
@@ -132,6 +134,7 @@ public class TypeResource extends ResourceImpl implements ISynchronizable<TypeRe
 	 * Returns the lock of the owning {@link ResourceSet}, if it exposes such a lock.
 	 * Otherwise this resource itself is used as the lock context.
 	 */
+	@NonNull
 	public Object getLock() {
 		ResourceSet resourceSet = getResourceSet();
 		if (resourceSet instanceof ISynchronizable<?>) {
@@ -145,7 +148,8 @@ public class TypeResource extends ResourceImpl implements ISynchronizable<TypeRe
 	 * 
 	 * @since 2.4
 	 */
-	public <Result> Result execute(IUnitOfWork<Result, ? super TypeResource> unit) throws Exception {
+	@Nullable
+	public <Result> Result execute(@NonNull IUnitOfWork<Result, ? super TypeResource> unit) throws Exception {
 		synchronized (getLock()) {
 			return unit.exec(this);
 		}
