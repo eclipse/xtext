@@ -41,21 +41,67 @@ class AccessRestrictionInWorkspaceTest extends AbstractXtendUITestCase {
 	
 	@Test
 	def void testForbiddenReferenceInOtherProject() {
-		val xtendFile = 'secondProject/src/Dummy.xtend'.createFile('class C { restricted.A a }').parse
+		val xtendFile = 'secondProject/src/Dummy.xtend'.createFile('class D { restricted.A a }').parse
 		val c = xtendFile.xtendTypes.head as XtendClass
 		c.assertError(JVM_TYPE_REFERENCE, FORBIDDEN_REFERENCE, 'Access restriction: The type A is not accessible', 'on required project firstProject')
 	}
 	
 	@Test
 	def void testDiscouragedReferenceInOtherProject() {
-		val xtendFile = 'secondProject/src/Dummy.xtend'.createFile('class C { discouraged.B b }').parse
+		val xtendFile = 'secondProject/src/Dummy.xtend'.createFile('class D { discouraged.B b }').parse
 		val c = xtendFile.xtendTypes.head as XtendClass
 		c.assertWarning(JVM_TYPE_REFERENCE, DISCOURAGED_REFERENCE, 'Discouraged access: The type B is not accessible', 'on required project firstProject')
 	}
 	
 	@Test
+	def void testForbiddenReferenceInSameProject() {
+		val xtendFile = 'firstProject/src/Dummy.xtend'.createFile('class D { restricted.A a }').parse
+		val c = xtendFile.xtendTypes.head as XtendClass
+		c.assertNoError(DISCOURAGED_REFERENCE)
+		c.assertNoError(FORBIDDEN_REFERENCE)
+	}
+	
+	@Test
+	def void testDiscouragedReferenceInSameProject() {
+		val xtendFile = 'firstProject/src/Dummy.xtend'.createFile('class D { discouraged.B b }').parse
+		val c = xtendFile.xtendTypes.head as XtendClass
+		c.assertNoError(DISCOURAGED_REFERENCE)
+		c.assertNoError(FORBIDDEN_REFERENCE)
+	}
+	
+	@Test
+	def void testExportedByOtherProject() {
+		val xtendFile = 'secondProject/src/Dummy.xtend'.createFile('class D { allowed.C c }').parse
+		val c = xtendFile.xtendTypes.head as XtendClass
+		c.assertNoError(DISCOURAGED_REFERENCE)
+		c.assertNoError(FORBIDDEN_REFERENCE)
+	}
+	
+	@Test
+	def void testForbiddenReferenceInReexportedProject() {
+		val xtendFile = 'thirdProject/src/Dummy.xtend'.createFile('class D { restricted.A a }').parse
+		val c = xtendFile.xtendTypes.head as XtendClass
+		c.assertError(JVM_TYPE_REFERENCE, FORBIDDEN_REFERENCE, 'Access restriction: The type A is not accessible', 'on required project firstProject')
+	}
+	
+	@Test
+	def void testDiscouragedReferenceInReexportedProject() {
+		val xtendFile = 'thirdProject/src/Dummy.xtend'.createFile('class D { discouraged.B b }').parse
+		val c = xtendFile.xtendTypes.head as XtendClass
+		c.assertWarning(JVM_TYPE_REFERENCE, DISCOURAGED_REFERENCE, 'Discouraged access: The type B is not accessible', 'on required project firstProject')
+	}
+	
+	@Test
+	def void testReexported() {
+		val xtendFile = 'thirdProject/src/Dummy.xtend'.createFile('class D { allowed.C c }').parse
+		val c = xtendFile.xtendTypes.head as XtendClass
+		c.assertNoError(DISCOURAGED_REFERENCE)
+		c.assertNoError(FORBIDDEN_REFERENCE)
+	}
+	
+	@Test
 	def void testForbiddenReferenceInImplicitLambdaParameter() {
-		val xtendFile = 'secondProject/src/Dummy.xtend'.createFile('class C { new () { new discouraged.B().accept[] } }').parse
+		val xtendFile = 'secondProject/src/Dummy.xtend'.createFile('class D { new () { new discouraged.B().accept[] } }').parse
 		val c = xtendFile.xtendTypes.head as XtendClass
 		c.assertError(JVM_TYPE_REFERENCE, FORBIDDEN_REFERENCE, 'Access restriction: The type A is not accessible', 'on required project firstProject')
 	}
@@ -69,7 +115,7 @@ class AccessRestrictionInWorkspaceTest extends AbstractXtendUITestCase {
 	
 	@Before def setUp() throws Exception {
 		super.setUp()
-		JavaCore::create(createPluginProject("firstProject")).configure
+		JavaCore::create(createPluginProject("firstProject")).configureExportedPackages
 		'firstProject/src/restricted/A.java'.createFile('''package restricted; public class A {}''')
 		'firstProject/src/discouraged/B.java'.createFile('''
 			package discouraged;
@@ -80,8 +126,10 @@ class AccessRestrictionInWorkspaceTest extends AbstractXtendUITestCase {
 				public void accept(I i) {}
 			}
 		''')
+		'firstProject/src/allowed/C.java'.createFile('''package allowed; public class C {}''')
 		
-		JavaCore::create(createPluginProject("secondProject", "firstProject"))
+		JavaCore::create(createPluginProject("secondProject", "firstProject;visibility:=reexport"))
+		JavaCore::create(createPluginProject("thirdProject", "secondProject"))
 		waitForAutoBuild
 	}
 	
@@ -89,14 +137,15 @@ class AccessRestrictionInWorkspaceTest extends AbstractXtendUITestCase {
 		cleanWorkspace();
 	}
 	
-	private def configure(IJavaProject pluginProject) {
+	private def configureExportedPackages(IJavaProject pluginProject) {
 		val manifestFile = pluginProject.project.getFile("META-INF/MANIFEST.MF")
 		val manifest = new MergeableManifest(manifestFile.contents)
-		manifest.addExportedPackages(#{'discouraged;x-internal:=true'})
+		manifest.addExportedPackages(#{'allowed', 'discouraged;x-internal:=true'})
 		val out = new ByteArrayOutputStream()
 		manifest.write(out)
 		val in = new ByteArrayInputStream(out.toByteArray)
 		manifestFile.setContents(in, true, true, null)
 		return pluginProject
 	}
+	
 }
