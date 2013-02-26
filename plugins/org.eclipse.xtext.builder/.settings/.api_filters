@@ -7,5 +7,12 @@
                 <message_argument value="updateSmapInformation(IFile, CharSequence, IFile)"/>
             </message_arguments>
         </filter>
+        <filter id="643842064">
+            <message_arguments>
+                <message_argument value="TraceMarkers"/>
+                <message_argument value="EclipseResourceFileSystemAccess2"/>
+                <message_argument value="getTraceMarkers()"/>
+            </message_arguments>
+        </filter>
     </resource>
 </component>
