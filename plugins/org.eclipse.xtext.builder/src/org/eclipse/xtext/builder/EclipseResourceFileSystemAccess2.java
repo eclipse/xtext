@@ -31,6 +31,7 @@ import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.OperationCanceledException;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.builder.trace.FileBasedTraceInformation;
 import org.eclipse.xtext.builder.trace.TraceMarkers;
 import org.eclipse.xtext.generator.AbstractFileSystemAccess2;
@@ -178,7 +179,8 @@ public class EclipseResourceFileSystemAccess2 extends AbstractFileSystemAccess2 
 					if (file.isDerived() != outputConfig.isSetDerivedProperty()) {
 						setDerived(file, outputConfig.isSetDerivedProperty());
 					}
-					updateTraceInformation(traceFile, postProcessedContent, outputConfig.isSetDerivedProperty());
+					if (traceFile != null)
+						updateTraceInformation(traceFile, postProcessedContent, outputConfig.isSetDerivedProperty());
 					if (callBack != null)
 						callBack.afterFileUpdate(file);
 				}
@@ -188,7 +190,8 @@ public class EclipseResourceFileSystemAccess2 extends AbstractFileSystemAccess2 
 				if (outputConfig.isSetDerivedProperty()) {
 					setDerived(file, true);
 				}
-				updateTraceInformation(traceFile, postProcessedContent, outputConfig.isSetDerivedProperty());
+				if (traceFile != null)
+					updateTraceInformation(traceFile, postProcessedContent, outputConfig.isSetDerivedProperty());
 				if (callBack != null)
 					callBack.afterFileCreation(file);
 			}
@@ -448,12 +451,25 @@ public class EclipseResourceFileSystemAccess2 extends AbstractFileSystemAccess2 
 	/**
 	 * @since 2.3
 	 */
+	@Nullable
 	protected IFile getTraceFile(IFile file) {
 		IStorage traceFile = fileBasedTraceInformation.getTraceFile(file);
 		if (traceFile instanceof IFile) {
-			return (IFile) traceFile;
+			IFile result = (IFile) traceFile;
+			syncIfNecessary(result);
+			return result;
 		}
 		return null;
+	}
+
+	private void syncIfNecessary(IFile result) {
+		if (!result.isSynchronized(IResource.DEPTH_ZERO)) {
+			try {
+				result.refreshLocal(IResource.DEPTH_ZERO, monitor);
+			} catch(CoreException c) {
+				// ignore
+			}
+		}
 	}
 
 	@Override
@@ -474,7 +490,7 @@ public class EclipseResourceFileSystemAccess2 extends AbstractFileSystemAccess2 
 		if ((callBack == null || callBack.beforeFileDeletion(file)) && file.exists()) {
 			IFile traceFile = getTraceFile(file);
 			file.delete(IResource.KEEP_HISTORY, monitor);
-			if (traceFile.exists()) {
+			if (traceFile != null && traceFile.exists()) {
 				traceFile.delete(IResource.KEEP_HISTORY, monitor);
 			}
 		}
@@ -483,7 +499,9 @@ public class EclipseResourceFileSystemAccess2 extends AbstractFileSystemAccess2 
 	protected IFile getFile(String fileName, String outputName) {
 		OutputConfiguration configuration = getOutputConfig(outputName);
 		IContainer container = getContainer(configuration);
-		return container.getFile(new Path(fileName));
+		IFile result = container.getFile(new Path(fileName));
+		syncIfNecessary(result);
+		return result;
 	}
 	
 	/**
