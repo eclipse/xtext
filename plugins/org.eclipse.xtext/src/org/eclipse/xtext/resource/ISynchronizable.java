@@ -21,7 +21,7 @@ import com.google.common.annotations.Beta;
  */
 @Beta
 @NonNullByDefault
-public interface ISynchronizable<Synchronizable extends ISynchronizable<Synchronizable>> {
+public interface ISynchronizable<Synchronizable> {
 
 	/**
 	 * Exposes the coarse grained lock for this {@link ISynchronizable}.
