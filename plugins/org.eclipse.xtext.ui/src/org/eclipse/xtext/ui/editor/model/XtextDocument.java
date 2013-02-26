@@ -28,6 +28,7 @@ import org.eclipse.jface.text.Document;
 import org.eclipse.jface.text.DocumentEvent;
 import org.eclipse.jface.text.IRegion;
 import org.eclipse.jface.text.Position;
+import org.eclipse.xtext.resource.ISynchronizable;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.editor.model.IXtextDocumentContentObserver.Processor;
 import org.eclipse.xtext.ui.editor.model.edit.ITextEditComposer;
@@ -185,7 +186,14 @@ public class XtextDocument extends Document implements IXtextDocument {
 				if (validationJob!=null) {
 					validationJob.cancel();
 				}
-				return super.modify(work);
+				Object state = getState();
+				if (state instanceof ISynchronizable<?>) {
+					synchronized (((ISynchronizable<?>) state).getLock()) {
+						return super.modify(work);
+					}
+				} else {
+					return super.modify(work);
+				}
 			} catch (RuntimeException e) {
 				try {
 					XtextResource state = getState();
@@ -196,6 +204,18 @@ public class XtextDocument extends Document implements IXtextDocument {
 				throw e;
 			} finally {
 				checkAndUpdateAnnotations();
+			}
+		}
+		
+		@Override
+		public <T> T readOnly(IUnitOfWork<T, XtextResource> work) {
+			Object state = getState();
+			if (state instanceof ISynchronizable<?>) {
+				synchronized (((ISynchronizable<?>) state).getLock()) {
+					return super.readOnly(work);
+				}
+			} else {
+				return super.readOnly(work);
 			}
 		}
 
