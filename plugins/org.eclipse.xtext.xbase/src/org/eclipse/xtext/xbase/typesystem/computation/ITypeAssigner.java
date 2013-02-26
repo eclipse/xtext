@@ -12,6 +12,7 @@ import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmTypeReference;
+import org.eclipse.xtext.xbase.typesystem.references.ITypeReferenceOwner;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 
 /**
@@ -33,6 +34,11 @@ public interface ITypeAssigner {
 	 * Returns the forked state that knows about the newly assigned types.
 	 */
 	ITypeComputationState getForkedState();
+	
+	/**
+	 * Returns the current owner.
+	 */
+	ITypeReferenceOwner getReferenceOwner();
 	
 	/**
 	 * Can be used to convert {@link JvmTypeReference JvmTypeReferences} in the context of
