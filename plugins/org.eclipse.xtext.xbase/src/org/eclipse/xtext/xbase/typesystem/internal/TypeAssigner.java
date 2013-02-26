@@ -13,6 +13,7 @@ import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.xbase.typesystem.computation.ITypeAssigner;
 import org.eclipse.xtext.xbase.typesystem.references.AnyTypeReference;
+import org.eclipse.xtext.xbase.typesystem.references.ITypeReferenceOwner;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.OwnedConverter;
 
@@ -50,6 +51,10 @@ public class TypeAssigner implements ITypeAssigner {
 
 	protected OwnedConverter getConverter() {
 		return state.getResolvedTypes().getConverter();
+	}
+	
+	public ITypeReferenceOwner getReferenceOwner() {
+		return state.getReferenceOwner();
 	}
 
 	public LightweightTypeReference toLightweightTypeReference(JvmTypeReference reference) {

@@ -42,6 +42,7 @@ import com.google.inject.Singleton;
 /**
  * @author Sebastian Zarnekow
  */
+@NonNullByDefault
 @Singleton
 public class FunctionTypes {
 	
@@ -94,6 +95,7 @@ public class FunctionTypes {
 		return typeParameterMapping;
 	}
 	
+	@Nullable
 	public JvmOperation findImplementingOperation(LightweightTypeReference functionType) {
 		// TODO use org.eclipse.xtext.xbase.typesystem.override.ResolvedOperations instead (if fast enough)
 		List<JvmType> rawTypes = functionType.getRawTypes();
@@ -134,13 +136,24 @@ public class FunctionTypes {
 		}
 		return false;
 	}
+	
+	public boolean isFunctionAndProcedureAvailable(ITypeReferenceOwner owner) {
+		JvmType type = typeReferences.findDeclaredType(Procedures.Procedure1.class, owner.getContextResourceSet());
+		if (type == null) {
+			return false;
+		}
+		if (type instanceof JvmTypeParameterDeclarator) {
+			return !((JvmTypeParameterDeclarator) type).getTypeParameters().isEmpty();
+		}
+		return false;
+	}
 
 	public FunctionTypeReference createRawFunctionTypeRef(ITypeReferenceOwner owner, EObject context, int parameterCount, boolean procedure) {
 		String simpleClassName = (procedure ? "Procedure" : "Function") + Math.min(6, parameterCount);
 		final Class<?> loadFunctionClass = loadFunctionClass(simpleClassName, procedure);
 		JvmType declaredType = typeReferences.findDeclaredType(loadFunctionClass, context);
 		if (declaredType == null || !(declaredType instanceof JvmTypeParameterDeclarator))
-			return null;
+			throw new IllegalStateException("Cannot load raw function type ref");
 		FunctionTypeReference result = new FunctionTypeReference(owner, declaredType);
 		return result;
 	}
@@ -149,7 +162,7 @@ public class FunctionTypes {
 			ITypeReferenceOwner owner,
 			LightweightTypeReference functionType, 
 			List<LightweightTypeReference> parameterTypes,
-			LightweightTypeReference returnType) {
+			@Nullable LightweightTypeReference returnType) {
 		JvmType type = functionType.getType();
 		if (type == null)
 			throw new IllegalArgumentException("type may not be null");
@@ -237,7 +250,6 @@ public class FunctionTypes {
 		UnboundTypeParameterPreservingSubstitutor substitutor = new UnboundTypeParameterPreservingSubstitutor(mergedTypeParameterMapping, typeReference.getOwner()) {
 			@Override
 			@Nullable
-			@NonNullByDefault
 			protected LightweightTypeReference getBoundTypeArgument(ParameterizedTypeReference reference, JvmTypeParameter type,
 					Object visiting) {
 				LightweightMergedBoundTypeArgument boundTypeArgument = getTypeParameterMapping().get(type);
