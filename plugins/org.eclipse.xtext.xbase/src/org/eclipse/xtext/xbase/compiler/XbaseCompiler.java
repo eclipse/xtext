@@ -1015,42 +1015,44 @@ public class XbaseCompiler extends FeatureCallCompiler {
 		try {
 			b.openScope();
 			JvmOperation operation = findImplementingOperation(type, closure);
-			final JvmTypeReference returnType = getClosureOperationReturnType(type, operation);
-			appendOperationVisibility(b, operation);
-			serialize(returnType, closure, b, false, false, true, true);
-			b.append(" ").append(operation.getSimpleName());
-			b.append("(");
-			List<JvmFormalParameter> closureParams = closure.getFormalParameters();
-			for (int i = 0; i < closureParams.size(); i++) {
-				JvmFormalParameter closureParam = closureParams.get(i);
-				JvmTypeReference parameterType = getClosureOperationParameterType(type, operation, i);
-				b.append("final ");
-				serialize(parameterType, closure, b, false, false, true, true);
-				b.append(" ");
-				final String proposedParamName = makeJavaIdentifier(closureParam.getName());
-				String name = b.declareVariable(closureParam, proposedParamName);
-				b.append(name);
-				if (i != closureParams.size() - 1)
-					b.append(", ");
-			}
-			b.append(")");
-			if(!operation.getExceptions().isEmpty()) {
-				b.append(" throws ");
-				for (int i = 0; i < operation.getExceptions().size(); ++i) {
-					serialize(operation.getExceptions().get(i), closure, b, false, false, false, false);
-					if(i != operation.getExceptions().size() -1)
+			if (operation != null) {
+				final JvmTypeReference returnType = getClosureOperationReturnType(type, operation);
+				appendOperationVisibility(b, operation);
+				serialize(returnType, closure, b, false, false, true, true);
+				b.append(" ").append(operation.getSimpleName());
+				b.append("(");
+				List<JvmFormalParameter> closureParams = closure.getFormalParameters();
+				for (int i = 0; i < closureParams.size(); i++) {
+					JvmFormalParameter closureParam = closureParams.get(i);
+					JvmTypeReference parameterType = getClosureOperationParameterType(type, operation, i);
+					b.append("final ");
+					serialize(parameterType, closure, b, false, false, true, true);
+					b.append(" ");
+					final String proposedParamName = makeJavaIdentifier(closureParam.getName());
+					String name = b.declareVariable(closureParam, proposedParamName);
+					b.append(name);
+					if (i != closureParams.size() - 1)
 						b.append(", ");
 				}
+				b.append(")");
+				if(!operation.getExceptions().isEmpty()) {
+					b.append(" throws ");
+					for (int i = 0; i < operation.getExceptions().size(); ++i) {
+						serialize(operation.getExceptions().get(i), closure, b, false, false, false, false);
+						if(i != operation.getExceptions().size() -1)
+							b.append(", ");
+					}
+				}
+				b.append(" {");
+				b.increaseIndentation();
+				reassignThisInClosure(b, type.getType());
+				compile(closure.getExpression(), b, operation.getReturnType(), newHashSet(operation.getExceptions()));
+				b.decreaseIndentation();
+				b.newLine().append("}");
 			}
-			b.append(" {");
-			b.increaseIndentation();
-			reassignThisInClosure(b, type.getType());
-			compile(closure.getExpression(), b, operation.getReturnType(), newHashSet(operation.getExceptions()));
 		} finally {
 			b.closeScope();
 		}
-		b.decreaseIndentation();
-		b.newLine().append("}");
 		b.decreaseIndentation().newLine().append("};").decreaseIndentation();
 	}
 
@@ -1068,6 +1070,7 @@ public class XbaseCompiler extends FeatureCallCompiler {
 		}
 	}
 
+	@Nullable
 	protected JvmOperation findImplementingOperation(JvmTypeReference closureType, EObject context) {
 		StandardTypeReferenceOwner owner = new StandardTypeReferenceOwner(services, context);
 		OwnedConverter converter = new OwnedConverter(owner);

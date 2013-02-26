@@ -47,6 +47,9 @@ public class JavaClassPathResourceForIEditorInputFactory extends ResourceForIEdi
 		return resource;
 	}
 	
+	/**
+	 * @since 2.4
+	 */
 	@Override
 	protected boolean isValidationDisabled(IStorage storage) {
 		if (storage instanceof IJarEntryResource) {

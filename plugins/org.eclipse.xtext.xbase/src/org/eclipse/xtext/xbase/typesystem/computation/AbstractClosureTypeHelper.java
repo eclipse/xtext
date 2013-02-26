@@ -66,6 +66,7 @@ public abstract class AbstractClosureTypeHelper {
 	 * 
 	 * @noreference This method is not intended to be referenced by clients.
 	 */
+	@Nullable
 	public abstract FunctionTypeReference getExpectedClosureType();
 
 	/**
@@ -73,6 +74,7 @@ public abstract class AbstractClosureTypeHelper {
 	 * 
 	 * @noreference This method is not intended to be referenced by clients.
 	 */
+	@Nullable
 	public abstract JvmOperation getOperation();
 
 	protected void deferredBindTypeArgument(@Nullable LightweightTypeReference declared, LightweightTypeReference actual, final BoundTypeArgumentSource source) {
