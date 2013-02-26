@@ -211,8 +211,12 @@ public class ParameterizedTypeReference extends LightweightTypeReference {
 	@Nullable
 	protected JvmTypeReference getSuperType(JvmType rawType, JvmType thisType) {
 		if (thisType instanceof JvmGenericType && rawType instanceof JvmGenericType) {
-			if (((JvmGenericType) thisType).isInterface() && !((JvmGenericType) rawType).isInterface()) {
-				return null;
+			if (!"java.lang.Object".equals(rawType.getIdentifier())) {
+				if (((JvmGenericType) thisType).isInterface() && !((JvmGenericType) rawType).isInterface()) {
+					return null;
+				}
+			} else {
+				return getServices().getTypeReferences().createTypeRef(rawType);
 			}
 		}
 		if (thisType instanceof JvmDeclaredType) {
