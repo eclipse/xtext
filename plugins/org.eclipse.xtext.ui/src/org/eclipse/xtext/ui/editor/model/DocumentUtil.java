@@ -58,7 +58,8 @@ public class DocumentUtil {
 		while(toFind.length() > subtractMe && Character.isWhitespace(toFind.charAt(subtractMe)))
 			subtractMe++;
 		ignoredPrefix = Math.max(ignoredPrefix - subtractMe, 0);
-		int indexOf = preProcessSearchString(document.get().substring(ignoredPrefix)).indexOf(toFind);
+		String text = document.get();
+		int indexOf = preProcessSearchString(text.substring(ignoredPrefix)).indexOf(toFind);
 		if (indexOf!=-1)
 			indexOf+=ignoredPrefix;
 		while (indexOf>=0 && indexOf<document.getLength()) {
@@ -67,7 +68,7 @@ public class DocumentUtil {
 				return new Region(indexOf,toFind.length());
 			}
 			ignoredPrefix = partition2.getOffset()+partition2.getLength();
-			indexOf=preProcessSearchString(document.get().substring(ignoredPrefix)).indexOf(toFind);
+			indexOf=preProcessSearchString(text.substring(ignoredPrefix)).indexOf(toFind);
 			if (indexOf!=-1)
 				indexOf+=ignoredPrefix;
 		}
