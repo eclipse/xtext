@@ -14,16 +14,19 @@ import java.util.Map;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.InternalEObject;
+import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceImpl;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.access.impl.IndexedJvmTypeAccess;
 import org.eclipse.xtext.resource.IFragmentProvider;
+import org.eclipse.xtext.resource.ISynchronizable;
+import org.eclipse.xtext.util.concurrent.IUnitOfWork;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public class TypeResource extends ResourceImpl {
+public class TypeResource extends ResourceImpl implements ISynchronizable<TypeResource>{
 
 	private IMirror mirror;
 	
@@ -123,6 +126,29 @@ public class TypeResource extends ResourceImpl {
 
 	public void setIndexedJvmTypeAccess(IndexedJvmTypeAccess indexedJvmTypeAccess) {
 		this.indexedJvmTypeAccess = indexedJvmTypeAccess;
+	}
+
+	/**
+	 * Returns the lock of the owning {@link ResourceSet}, if it exposes such a lock.
+	 * Otherwise this resource itself is used as the lock context.
+	 */
+	public Object getLock() {
+		ResourceSet resourceSet = getResourceSet();
+		if (resourceSet instanceof ISynchronizable<?>) {
+			return ((ISynchronizable<?>) resourceSet).getLock();
+		}
+		return this;
+	}
+	
+	/**
+	 * {@inheritDoc}
+	 * 
+	 * @since 2.4
+	 */
+	public <Result> Result execute(IUnitOfWork<Result, ? super TypeResource> unit) throws Exception {
+		synchronized (getLock()) {
+			return unit.exec(this);
+		}
 	}
 	
 }

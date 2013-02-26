@@ -55,15 +55,17 @@ public class JvmTypeChangeDispatcher extends AdapterImpl {
 		@Override
 		public void notifyChanged(Notification notification) {
 			super.notifyChanged(notification);
-			if (listeners.isEmpty() || (notification.isTouch() && !isRemoveThis(notification))) 
-				return;
-			Iterator<Runnable> iterator = listeners.iterator();
-			while(iterator.hasNext()) {
-				Runnable runnable = iterator.next();
-				if (runnable != null) {
-					runnable.run();
+			synchronized (listeners) {
+				if (listeners.isEmpty() || (notification.isTouch() && !isRemoveThis(notification))) 
+					return;
+				Iterator<Runnable> iterator = listeners.iterator();
+				while(iterator.hasNext()) {
+					Runnable runnable = iterator.next();
+					if (runnable != null) {
+						runnable.run();
+					}
+					iterator.remove();
 				}
-				iterator.remove();
 			}
 		}
 		
@@ -105,7 +107,9 @@ public class JvmTypeChangeDispatcher extends AdapterImpl {
 			result = new NotificationDispatcher(notifier);
 			notifier.eAdapters().add(result);
 		}
-		listeners.add(runnable);
+		synchronized (listeners) {
+			listeners.add(runnable);
+		}
 	}
 	
 	@Override
