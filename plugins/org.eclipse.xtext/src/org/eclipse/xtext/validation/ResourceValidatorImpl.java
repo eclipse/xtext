@@ -67,7 +67,7 @@ public class ResourceValidatorImpl implements IResourceValidator {
 			resolveProxies(resource, monitor);
 			if (monitor.isCanceled())
 				return null;
-	
+
 			final List<Issue> result = Lists.newArrayListWithExpectedSize(resource.getErrors().size()
 					+ resource.getWarnings().size());
 			try {
@@ -80,19 +80,19 @@ public class ResourceValidatorImpl implements IResourceValidator {
 							return null;
 						issueFromXtextResourceDiagnostic(resource.getErrors().get(i), Severity.ERROR, acceptor);
 					}
-	
+
 					for (int i = 0; i < resource.getWarnings().size(); i++) {
 						if (monitor.isCanceled())
 							return null;
 						issueFromXtextResourceDiagnostic(resource.getWarnings().get(i), Severity.WARNING, acceptor);
 					}
 				}
-	
+
 				if (monitor.isCanceled())
 					return null;
 				boolean syntaxDiagFail = !result.isEmpty();
 				logCheckStatus(resource, syntaxDiagFail, "Syntax");
-	
+
 				// Validation errors
 				// Collect validator diagnostics
 				validate(resource, mode, monitor, acceptor);

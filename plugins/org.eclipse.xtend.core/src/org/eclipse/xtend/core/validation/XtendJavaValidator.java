@@ -336,20 +336,19 @@ public class XtendJavaValidator extends XbaseWithAnnotationsJavaValidator {
 	}
 	
 	@Check
-	public void checkClassPath(XtendTypeDeclaration type) {
+	public void checkClassPath(XtendFile xtendFile) {
 		TypeReferences typeReferences = getServices().getTypeReferences();
-		final JvmGenericType listType = (JvmGenericType) typeReferences.findDeclaredType(List.class, type);
+		final JvmGenericType listType = (JvmGenericType) typeReferences.findDeclaredType(List.class, xtendFile);
 		if (listType == null) {
-			error("Java is probably missing on the classpath.", type, XTEND_TYPE_DECLARATION__NAME,
+			error("Java is probably missing on the classpath.", xtendFile, XTEND_FILE__PACKAGE,
 					IssueCodes.JAVA_IS_MISSING);
 		} else if (listType.getTypeParameters().isEmpty()) {
-			error("Xtend requires Java source level 1.5.", type, XTEND_TYPE_DECLARATION__NAME,
+			error("Xtend requires Java source level 1.5.", xtendFile, XTEND_FILE__PACKAGE,
 					IssueCodes.JAVA_SOURCE_LEVEL_MISMATCH);
-		}
-		if (typeReferences.findDeclaredType(StringConcatenation.class, type) == null
-				|| typeReferences.findDeclaredType(Exceptions.class, type) == null) {
+		} else if (typeReferences.findDeclaredType(StringConcatenation.class, xtendFile) == null
+				|| typeReferences.findDeclaredType(Exceptions.class, xtendFile) == null) {
 			error("Mandatory library bundle 'org.eclipse.xtext.xbase.lib' 2.3.0 or higher not found on the classpath.",
-					type, XTEND_TYPE_DECLARATION__NAME, IssueCodes.XBASE_LIB_NOT_ON_CLASSPATH);
+					xtendFile, XTEND_FILE__PACKAGE, IssueCodes.XBASE_LIB_NOT_ON_CLASSPATH);
 		}
 	}
 	

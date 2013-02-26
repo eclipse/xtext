@@ -10,12 +10,11 @@ package org.eclipse.xtend.ide.tests.buildpath;
 import java.util.Collections;
 
 import org.eclipse.core.resources.IFile;
-import org.eclipse.core.resources.IMarker;
 import org.eclipse.core.resources.IProject;
-import org.eclipse.core.resources.IResource;
-import org.eclipse.core.runtime.CoreException;
 import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.jdt.core.JavaCore;
+import org.eclipse.xtend.core.validation.IssueCodes;
+import org.eclipse.xtend.ide.buildpath.XtendLibClasspathAdder;
 import org.eclipse.xtend.ide.tests.AbstractXtendUITestCase;
 import org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil;
 import org.eclipse.xtext.junit4.ui.util.JavaProjectSetupUtil;
@@ -23,7 +22,6 @@ import org.eclipse.xtext.ui.XtextProjectHelper;
 import org.eclipse.xtext.ui.util.JavaProjectFactory;
 import org.eclipse.xtext.ui.util.PluginProjectFactory;
 import org.eclipse.xtext.util.StringInputStream;
-import org.eclipse.xtend.ide.buildpath.XtendLibClasspathAdder;
 import org.junit.Test;
 
 import com.google.inject.Inject;
@@ -32,9 +30,10 @@ import com.google.inject.Inject;
  * @author Jan Koehnlein - Initial contribution and API
  */
 public class XtendLibClasspathAdderTest extends AbstractXtendUITestCase {
-
 	@Inject
 	private XtendLibClasspathAdder adder;
+	@Inject
+	private MarkerAssertions markerAssert;
 
 	@Inject
 	private JavaProjectFactory javaProjectFactory;
@@ -47,7 +46,8 @@ public class XtendLibClasspathAdderTest extends AbstractXtendUITestCase {
 		IResourcesSetupUtil.cleanWorkspace();
 	}
 
-	@Test public void testAddToJavaProject() throws Exception {
+	@Test
+	public void testAddToJavaProject() throws Exception {
 		javaProjectFactory.setProjectName("test");
 		javaProjectFactory.addFolders(Collections.singletonList("src"));
 		javaProjectFactory.addBuilderIds(JavaCore.BUILDER_ID, XtextProjectHelper.BUILDER_ID);
@@ -56,15 +56,17 @@ public class XtendLibClasspathAdderTest extends AbstractXtendUITestCase {
 		IJavaProject javaProject = JavaCore.create(project);
 		JavaProjectSetupUtil.makeJava5Compliant(javaProject);
 		IFile file = project.getFile("src/Foo.xtend");
-		file.create(new StringInputStream("import org.eclipse.xtend.lib.Property class Foo { @Property int bar }"), true, null);
+		file.create(new StringInputStream("import org.eclipse.xtend.lib.Property class Foo { @Property int bar }"),
+				true, null);
 		IResourcesSetupUtil.waitForAutoBuild();
-		assertErrorMarker(file);
+		markerAssert.assertErrorMarker(file, IssueCodes.XBASE_LIB_NOT_ON_CLASSPATH);
 		adder.addLibsToClasspath(javaProject, null);
 		IResourcesSetupUtil.waitForAutoBuild();
-		assertNoErrorMarker(file);
+		markerAssert.assertNoErrorMarker(file);
 	}
 
-	@Test public void testAddToPlugin() throws Exception {
+	@Test
+	public void testAddToPlugin() throws Exception {
 		pluginProjectFactory.setProjectName("test");
 		pluginProjectFactory.addFolders(Collections.singletonList("src"));
 		pluginProjectFactory.addBuilderIds(JavaCore.BUILDER_ID, "org.eclipse.pde.ManifestBuilder",
@@ -75,15 +77,17 @@ public class XtendLibClasspathAdderTest extends AbstractXtendUITestCase {
 		IJavaProject javaProject = JavaCore.create(project);
 		JavaProjectSetupUtil.makeJava5Compliant(javaProject);
 		IFile file = project.getFile("src/Foo.xtend");
-		file.create(new StringInputStream("import org.eclipse.xtend.lib.Property class Foo { @Property int bar }"), true, null);
+		file.create(new StringInputStream("import org.eclipse.xtend.lib.Property class Foo { @Property int bar }"),
+				true, null);
 		IResourcesSetupUtil.waitForAutoBuild();
-		assertErrorMarker(file);
+		markerAssert.assertErrorMarker(file, IssueCodes.XBASE_LIB_NOT_ON_CLASSPATH);
 		adder.addLibsToClasspath(javaProject, null);
 		IResourcesSetupUtil.waitForAutoBuild();
-		assertNoErrorMarker(file);
+		markerAssert.assertNoErrorMarker(file);
 	}
 
-	@Test public void testAddToBrokenPlugin() throws Exception {
+	@Test
+	public void testAddToBrokenPlugin() throws Exception {
 		pluginProjectFactory.setProjectName("test");
 		pluginProjectFactory.addFolders(Collections.singletonList("src"));
 		pluginProjectFactory.addBuilderIds(JavaCore.BUILDER_ID, "org.eclipse.pde.ManifestBuilder",
@@ -95,28 +99,13 @@ public class XtendLibClasspathAdderTest extends AbstractXtendUITestCase {
 		JavaProjectSetupUtil.makeJava5Compliant(javaProject);
 		project.findMember("META-INF").delete(true, null);
 		IFile file = project.getFile("src/Foo.xtend");
-		file.create(new StringInputStream("import org.eclipse.xtend.lib.Property class Foo { @Property int bar }"), true, null);
+		file.create(new StringInputStream("import org.eclipse.xtend.lib.Property class Foo { @Property int bar }"),
+				true, null);
 		IResourcesSetupUtil.waitForAutoBuild();
-		assertErrorMarker(file);
+		markerAssert.assertErrorMarker(file, IssueCodes.XBASE_LIB_NOT_ON_CLASSPATH);
 		adder.addLibsToClasspath(javaProject, null);
 		IResourcesSetupUtil.waitForAutoBuild();
-		assertNoErrorMarker(file);
-	}
-
-	protected void assertErrorMarker(IFile file) throws CoreException {
-		int severity = file.findMaxProblemSeverity(null, true, IResource.DEPTH_INFINITE);
-		assertEquals("Expected error marker", IMarker.SEVERITY_ERROR, severity);
-	}
-
-	protected void assertNoErrorMarker(IFile file) throws CoreException {
-		int severity = file.findMaxProblemSeverity(null, true, IResource.DEPTH_INFINITE);
-		if (severity != -1) {
-			StringBuilder errors = new StringBuilder();
-			for (IMarker marker : file.findMarkers(null, true, IResource.DEPTH_INFINITE)) {
-				errors.append("\n").append(marker.getAttribute(IMarker.MESSAGE));
-			}
-			fail("Expected no error but got" + errors.toString());
-		}
+		markerAssert.assertNoErrorMarker(file);
 	}
 
 }
