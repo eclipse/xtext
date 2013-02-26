@@ -30,22 +30,26 @@ public class MarkerAssertions {
 	private IssueUtil issueUtil;
 
 	public void assertErrorMarker(IFile file, String issueCode) throws CoreException {
+		assertErrorMarker(file, issueCode, 1);
+	}
+
+	public void assertErrorMarker(IFile file, String issueCode, int expectedIssuesCount) throws CoreException {
 		IMarker[] findMarkers = file.findMarkers(null, true, IResource.DEPTH_INFINITE);
-		boolean codeFound = false;
+		int matchingIssuesFound = 0;
 		List<String> allCodes = new ArrayList<String>();
 		for (IMarker iMarker : findMarkers) {
 			String code = issueUtil.getCode(iMarker);
 			if (code != null) {
 				allCodes.add(code);
 				if (issueCode.equals(code)) {
-					codeFound = true;
-					break;
+					matchingIssuesFound++;
 				}
 			}
 		}
 		String message = "Expected error marker not found: '" + issueCode
 				+ (allCodes.isEmpty() ? "'" : "' but found '" + Strings.concat(",", allCodes) + "'");
-		assertTrue(message, codeFound);
+		assertTrue(message, matchingIssuesFound > 0);
+		assertEquals("Expected error marker count for '" + issueCode + "'", expectedIssuesCount, matchingIssuesFound);
 	}
 
 	public void assertNoErrorMarker(IFile file) throws CoreException {
