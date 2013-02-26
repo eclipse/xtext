@@ -37,7 +37,6 @@ import org.eclipse.xtend.lib.macro.declaration.TypeReference
 import org.eclipse.xtend.lib.macro.declaration.Visibility
 import org.eclipse.xtend.lib.macro.services.Problem
 import org.eclipse.xtend.lib.macro.services.ProblemSupport
-import org.eclipse.xtend.lib.macro.services.TimeoutException
 import org.eclipse.xtend.lib.macro.services.TypeReferenceProvider
 import org.eclipse.xtext.common.types.JvmAnnotationType
 import org.eclipse.xtext.common.types.JvmConstructor
@@ -66,6 +65,7 @@ import org.eclipse.xtext.xbase.typesystem.legacy.StandardTypeReferenceOwner
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference
 import org.eclipse.xtext.xbase.typesystem.references.OwnedConverter
 import org.eclipse.xtext.xbase.typesystem.util.CommonTypeComputationServices
+import java.util.concurrent.CancellationException
 
 class CompilationUnitImpl implements CompilationUnit, TypeReferenceProvider, ProblemSupport {
 
@@ -94,14 +94,15 @@ class CompilationUnitImpl implements CompilationUnit, TypeReferenceProvider, Pro
 		generatedTypeDeclarations.filter(typeof(MutableClassDeclaration)).toList
 	}
 	
-	boolean isTimeout = false
+	boolean canceled = false
 	
-	def setTimeout(boolean timeout) {
-		this.isTimeout = timeout
+	def setCanceled(boolean canceled) {
+		this.canceled = canceled
 	}
-	def checkTimeout() {
-		if (isTimeout)
-			throw new TimeoutException()
+	
+	def checkCanceled() {
+		if (canceled)
+			throw new CancellationException("compilation was canceled.")
 	}
 
 	@Property XtendFile xtendFile
@@ -121,7 +122,7 @@ class CompilationUnitImpl implements CompilationUnit, TypeReferenceProvider, Pro
 	}
 
 	def private <IN extends EObject, OUT> OUT getOrCreate(IN in, (IN)=>OUT provider) {
-		checkTimeout
+		checkCanceled
 		if (identityCache.containsKey(in))
 			return identityCache.get(in) as OUT
 		val result = provider.apply(in)
@@ -235,7 +236,7 @@ class CompilationUnitImpl implements CompilationUnit, TypeReferenceProvider, Pro
 		]}
 
 	def TypeReference toTypeReference(LightweightTypeReference delegate) {
-		checkTimeout
+		checkCanceled
 		if (delegate == null)
 			return null
 		new TypeReferenceImpl => [
@@ -256,7 +257,7 @@ class CompilationUnitImpl implements CompilationUnit, TypeReferenceProvider, Pro
 			}
 		]}
 
-	def XtendMemberDeclarationImpl toXtendMemberDeclaration(XtendMember delegate) {
+	def toXtendMemberDeclaration(XtendMember delegate) {
 		getOrCreate(delegate) [
 			switch (delegate) {
 				XtendTypeDeclaration:
@@ -352,12 +353,12 @@ class CompilationUnitImpl implements CompilationUnit, TypeReferenceProvider, Pro
 	}
 	
 	override newArrayTypeReference(TypeReference componentType) {
-		checkTimeout
+		checkCanceled
 		toTypeReference(typeReferences.createArrayType(componentType.toJvmTypeReference))
 	}
 	
 	override newTypeReference(String typeName, TypeReference... typeArguments) {
-		checkTimeout
+		checkCanceled
 		val type = typeReferences.findDeclaredType(typeName, xtendFile)
 		if (type == null)
 			return null
@@ -365,7 +366,7 @@ class CompilationUnitImpl implements CompilationUnit, TypeReferenceProvider, Pro
 	}
 	
 	override newTypeReference(Type typeDeclaration, TypeReference... typeArguments) {
-		checkTimeout
+		checkCanceled
 		val type = switch typeDeclaration {
 			JvmTypeDeclarationImpl<? extends JvmDeclaredType> : {
 				typeDeclaration.delegate
@@ -414,12 +415,12 @@ class CompilationUnitImpl implements CompilationUnit, TypeReferenceProvider, Pro
 	}
 	
 	def JvmTypeReference toJvmTypeReference(TypeReference typeRef) {
-		checkTimeout
+		checkCanceled
 		return (typeRef as TypeReferenceImpl).lightWeightTypeReference.toJavaCompliantTypeReference
 	}
 	
 	def void setCompilationStrategy(JvmExecutable executable, CompilationStrategy compilationStrategy) {
-		checkTimeout
+		checkCanceled
 		typesBuilder.setBody(executable) [
 			val context = new CompilationContextImpl(it, this, typeRefSerializer)
 			it.append(compilationStrategy.compile(context))
@@ -427,25 +428,25 @@ class CompilationUnitImpl implements CompilationUnit, TypeReferenceProvider, Pro
 	}
 	
 	override addError(Element element, String message) {
-		checkTimeout
+		checkCanceled
 		val resAndObj = getResourceAndEObject(element)
 		resAndObj.key.errors.add(new EObjectDiagnosticImpl(Severity::ERROR, 'user.issue', message, resAndObj.value, getSignificantFeature(resAndObj.value), -1, null))
 	}
 	
 	override addInfo(Element element, String message) {
-		checkTimeout
+		checkCanceled
 //		val resAndObj = getResourceAndEObject(element)
 //		resAndObj.key.errors.add(new EObjectDiagnosticImpl(Severity::INFO, 'user.issue', message, resAndObj.value, getSignificantFeature(resAndObj.value), -1, null))
 	}
 	
 	override addWarning(Element element, String message) {
-		checkTimeout
+		checkCanceled
 		val resAndObj = getResourceAndEObject(element)
 		resAndObj.key.warnings.add(new EObjectDiagnosticImpl(Severity::WARNING, 'user.issue', message, resAndObj.value, getSignificantFeature(resAndObj.value), -1, null))
 	}
 	
 	override getProblems(Element element) {
-		checkTimeout
+		checkCanceled
 		val resAndObj = getResourceAndEObject(element)
 		val resource = resAndObj.key
 		val issues = (resource.errors + resource.warnings).filter(typeof(EObjectDiagnosticImpl))
@@ -468,7 +469,7 @@ class CompilationUnitImpl implements CompilationUnit, TypeReferenceProvider, Pro
 	}
 	
 	def private getResourceAndEObject(Element element) {
-		checkTimeout
+		checkCanceled
 		switch element {
 			XtendNamedElementImpl<? extends EObject>: {
 				val resource = element.delegate.eResource
