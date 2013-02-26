@@ -8,6 +8,7 @@
 package org.eclipse.xtext.xbase.typesystem.computation;
 
 import org.eclipse.jdt.annotation.NonNullByDefault;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.xbase.XClosure;
@@ -58,13 +59,13 @@ public class ClosureTypeComputer {
 	public void selectStrategy() {
 		LightweightTypeReference expectedType = expectation.getExpectedType();
 		if (expectedType == null) {
-			strategy = new ClosureWithoutExpectationHelper(closure, expectation, state);
+			strategy = getClosureWithoutExpectationHelper();
 		} else {
 			JvmOperation operation = functionTypes.findImplementingOperation(expectedType);
 			JvmType type = expectedType.getType();
 			int closureParameterSize = closure.getFormalParameters().size();
 			if (operation == null || operation.getParameters().size() != closureParameterSize || type == null) {
-				strategy = new ClosureWithoutExpectationHelper(closure, expectation, state);
+				strategy = getClosureWithoutExpectationHelper();
 			} else {
 				strategy = new ClosureWithExpectationHelper(closure, operation, expectation, state);
 			}
@@ -72,12 +73,21 @@ public class ClosureTypeComputer {
 		
 	}
 
+	protected AbstractClosureTypeHelper getClosureWithoutExpectationHelper() {
+		if (functionTypes.isFunctionAndProcedureAvailable(expectation.getReferenceOwner()))
+			return new ClosureWithoutExpectationHelper(closure, expectation, state);
+		return new UnknownClosureTypeHelper(closure, expectation, state);
+	}
+
 	/**
 	 * This method is only public for testing purpose.
 	 * 
 	 * @noreference This method is not intended to be referenced by clients.
 	 */
+	@Nullable
 	public FunctionTypeReference getExpectedClosureType() {
+		if (strategy == null)
+			selectStrategy();
 		return strategy.getExpectedClosureType();
 	}
 
@@ -86,7 +96,10 @@ public class ClosureTypeComputer {
 	 * 
 	 * @noreference This method is not intended to be referenced by clients.
 	 */
+	@Nullable
 	public JvmOperation getOperation() {
+		if (strategy == null)
+			selectStrategy();
 		return strategy.getOperation();
 	}
 }

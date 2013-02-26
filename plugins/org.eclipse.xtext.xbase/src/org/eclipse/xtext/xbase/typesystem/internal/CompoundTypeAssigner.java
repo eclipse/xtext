@@ -49,4 +49,8 @@ public class CompoundTypeAssigner implements ITypeAssigner {
 		return new OwnedConverter(owner).toLightweightReference(reference);
 	}
 	
+	public ITypeReferenceOwner getReferenceOwner() {
+		return owner;
+	}
+	
 }

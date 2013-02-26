@@ -137,7 +137,10 @@ public abstract class AbstractXbaseCompiler {
 				} else {
 					procedureOrFunction = typeReferences.getTypeForName(Functions.Function0.class, obj, expectedType);
 				}
-				referenceSerializer.serialize(procedureOrFunction, obj, appendable, false, false, true, false);
+				if (procedureOrFunction != null)
+					referenceSerializer.serialize(procedureOrFunction, obj, appendable, false, false, true, false);
+				else
+					appendable.append("Object");
 				appendable.append("() {").increaseIndentation();
 				appendable.newLine().append("public ");
 				referenceSerializer.serialize(primitives.asWrapperTypeIfPrimitive(expectedType), obj, appendable);

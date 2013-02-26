@@ -365,6 +365,9 @@ public class XbaseJavaValidator extends AbstractXbaseJavaValidator {
 	public void checkClosureParameterTypes(XClosure closure) {
 		if (closure.getFormalParameters().isEmpty())
 			return;
+		LightweightTypeReference closureType = getActualType(closure);
+		if (closureType != null && closureType.isUnknown())
+			return;
 		boolean checkedClosure = false;
 		for (JvmFormalParameter p : closure.getFormalParameters()) {
 			if (p.getParameterType() == null) {

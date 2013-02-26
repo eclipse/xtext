@@ -71,7 +71,11 @@ public class ClosureWithoutExpectationHelper extends AbstractClosureTypeHelper {
 	
 	@Override
 	public JvmOperation getOperation() {
-		return functionTypes.findImplementingOperation(getExpectedClosureType());
+		JvmOperation result = functionTypes.findImplementingOperation(getExpectedClosureType());
+		if (result == null) {
+			throw new IllegalStateException();
+		}
+		return result;
 	}
 	
 	/**

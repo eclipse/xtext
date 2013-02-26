@@ -23,6 +23,7 @@ import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeConstraint;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.JvmTypeReference;
+import org.eclipse.xtext.common.types.JvmUnknownTypeReference;
 import org.eclipse.xtext.common.types.JvmUpperBound;
 import org.eclipse.xtext.common.types.JvmWildcardTypeReference;
 import org.eclipse.xtext.common.types.TypesPackage;
@@ -170,6 +171,8 @@ public class TypeReferenceSerializer {
 				tracedAppendable.append("Object");
 		} else if (type instanceof JvmSpecializedTypeReference) {
 			serialize(((JvmSpecializedTypeReference) type).getEquivalent(), context, tracedAppendable, withoutConstraints, paramsToWildcard, paramsToObject, allowPrimitives);
+		} else if (type instanceof JvmUnknownTypeReference) {
+			tracedAppendable.append("Object");
 		} else {
 			throw new IllegalArgumentException(String.valueOf(type));
 		}
