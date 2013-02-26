@@ -451,9 +451,21 @@ public class EclipseResourceFileSystemAccess2 extends AbstractFileSystemAccess2 
 	protected IFile getTraceFile(IFile file) {
 		IStorage traceFile = fileBasedTraceInformation.getTraceFile(file);
 		if (traceFile instanceof IFile) {
-			return (IFile) traceFile;
+			IFile result = (IFile) traceFile;
+			syncIfNecessary(result);
+			return result;
 		}
 		return null;
+	}
+
+	private void syncIfNecessary(IFile result) {
+		if (!result.isSynchronized(IResource.DEPTH_ZERO)) {
+			try {
+				result.refreshLocal(IResource.DEPTH_ZERO, monitor);
+			} catch(CoreException c) {
+				// ignore
+			}
+		}
 	}
 
 	@Override
@@ -483,7 +495,9 @@ public class EclipseResourceFileSystemAccess2 extends AbstractFileSystemAccess2 
 	protected IFile getFile(String fileName, String outputName) {
 		OutputConfiguration configuration = getOutputConfig(outputName);
 		IContainer container = getContainer(configuration);
-		return container.getFile(new Path(fileName));
+		IFile result = container.getFile(new Path(fileName));
+		syncIfNecessary(result);
+		return result;
 	}
 	
 	/**
