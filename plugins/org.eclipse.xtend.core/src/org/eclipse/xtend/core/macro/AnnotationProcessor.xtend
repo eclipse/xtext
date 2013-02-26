@@ -17,11 +17,10 @@ import org.eclipse.xtend.lib.macro.TransformationParticipant
 import org.eclipse.xtend.lib.macro.declaration.MutableNamedElement
 import org.eclipse.xtend.lib.macro.services.TimeoutException
 import org.eclipse.xtext.common.types.JvmDeclaredType
-import org.eclipse.xtext.diagnostics.Severity
 import org.eclipse.xtext.util.CancelIndicator
 import org.eclipse.xtext.util.IAcceptor
 import org.eclipse.xtext.util.internal.Stopwatches
-import org.eclipse.xtext.validation.EObjectDiagnosticImpl
+import java.util.concurrent.CancellationException
 
 /**
  * It checks whether the files contain macro annotations and calls their register and processing functions.
@@ -29,8 +28,6 @@ import org.eclipse.xtext.validation.EObjectDiagnosticImpl
  * @author Sven Efftinge
  */
 class AnnotationProcessor {
-	
-	val timeout = 2000
 	
 	@Inject Provider<TransformationContextImpl> modifyContextProvider
 
@@ -60,7 +57,7 @@ class AnnotationProcessor {
 					val modifyCtx = modifyContextProvider.get
 					modifyCtx.unit = ctx.compilationUnit
 					
-					runWithTimeout(ctx, timeout) [|
+					runWithCancelIndiciator(ctx, monitor) [|
 						val map = ctx.annotatedSourceElements.map[
 							val xtendMember = ctx.compilationUnit.toXtendMemberDeclaration(it as XtendMember)
 							return modifyCtx.getGeneratedElement(xtendMember)
@@ -78,32 +75,23 @@ class AnnotationProcessor {
 	 * runs the given runnable and another thread in parallel, that sets the timeout property on the compilation unit to true
 	 * when the given amount of milliseconds have passed by.
 	 */
-	private def runWithTimeout(ActiveAnnotationContext ctx, int timeout, Runnable runnable) {
+	private def runWithCancelIndiciator(ActiveAnnotationContext ctx, CancelIndicator cancelIndicator, Runnable runnable) {
 		val AtomicBoolean isFinished = new AtomicBoolean(false)
 		new Thread ([|
-			Thread::sleep(timeout)
-			if (!isFinished.get)
-				ctx.compilationUnit.timeout = true
+			while (!isFinished.get) {
+				if (cancelIndicator.canceled) {
+					ctx.compilationUnit.canceled = true
+					return;
+				}
+				Thread::sleep(100)
+			}
 		]).start
 		try {
 			runnable.run
-		} catch (TimeoutException e) {
-			handelTimeout(ctx, e)
+		} catch (CancellationException e) {
 		} finally {
 			isFinished.set(true)
 		}
-	}
-	
-	def handelTimeout(ActiveAnnotationContext context, TimeoutException exception) {
-		val resource = context.annotatedSourceElements.head.eResource
-		resource.errors.add(new EObjectDiagnosticImpl(
-					Severity::ERROR, 
-					"time out", 
-					"Timeout (exceeded "+timeout+"ms) during annotation processing.",
-					context.annotatedSourceElements.head, 
-					null, 
-					-1, 
-					null))
 	}
 	
 }

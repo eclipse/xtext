@@ -38,7 +38,7 @@ public class XtendParameterDeclarationImpl extends AbstractDeclarationImpl<Xtend
     CompilationUnitImpl _compilationUnit = this.getCompilationUnit();
     XtendParameter _delegate = this.getDelegate();
     EObject _eContainer = _delegate.eContainer();
-    XtendMemberDeclarationImpl _xtendMemberDeclaration = _compilationUnit.toXtendMemberDeclaration(((XtendMember) _eContainer));
+    XtendMemberDeclarationImpl<? extends XtendMember> _xtendMemberDeclaration = _compilationUnit.toXtendMemberDeclaration(((XtendMember) _eContainer));
     return ((ExecutableDeclaration) _xtendMemberDeclaration);
   }
 }

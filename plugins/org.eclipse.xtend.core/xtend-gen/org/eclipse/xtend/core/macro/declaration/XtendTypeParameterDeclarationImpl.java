@@ -56,7 +56,7 @@ public class XtendTypeParameterDeclarationImpl extends AbstractDeclarationImpl<J
       JvmTypeParameter _delegate = this.getDelegate();
       final EObject eContainer = _delegate.eContainer();
       CompilationUnitImpl _compilationUnit = this.getCompilationUnit();
-      XtendMemberDeclarationImpl _xtendMemberDeclaration = _compilationUnit.toXtendMemberDeclaration(((XtendMember) eContainer));
+      XtendMemberDeclarationImpl<? extends XtendMember> _xtendMemberDeclaration = _compilationUnit.toXtendMemberDeclaration(((XtendMember) eContainer));
       _xblockexpression = (((TypeParameterDeclarator) _xtendMemberDeclaration));
     }
     return _xblockexpression;

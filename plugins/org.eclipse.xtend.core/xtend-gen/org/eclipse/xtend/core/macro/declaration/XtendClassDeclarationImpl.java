@@ -84,13 +84,13 @@ public class XtendClassDeclarationImpl extends XtendTypeDeclarationImpl<XtendCla
   public List<? extends MemberDeclaration> getMembers() {
     XtendClass _delegate = this.getDelegate();
     EList<XtendMember> _members = _delegate.getMembers();
-    final Function1<XtendMember,XtendMemberDeclarationImpl> _function = new Function1<XtendMember,XtendMemberDeclarationImpl>() {
-        public XtendMemberDeclarationImpl apply(final XtendMember it) {
+    final Function1<XtendMember,XtendMemberDeclarationImpl<? extends XtendMember>> _function = new Function1<XtendMember,XtendMemberDeclarationImpl<? extends XtendMember>>() {
+        public XtendMemberDeclarationImpl<? extends XtendMember> apply(final XtendMember it) {
           CompilationUnitImpl _compilationUnit = XtendClassDeclarationImpl.this.getCompilationUnit();
-          XtendMemberDeclarationImpl _xtendMemberDeclaration = _compilationUnit.toXtendMemberDeclaration(it);
+          XtendMemberDeclarationImpl<? extends XtendMember> _xtendMemberDeclaration = _compilationUnit.toXtendMemberDeclaration(it);
           return _xtendMemberDeclaration;
         }
       };
-    return ListExtensions.<XtendMember, XtendMemberDeclarationImpl>map(_members, _function);
+    return ListExtensions.<XtendMember, XtendMemberDeclarationImpl<? extends XtendMember>>map(_members, _function);
   }
 }
