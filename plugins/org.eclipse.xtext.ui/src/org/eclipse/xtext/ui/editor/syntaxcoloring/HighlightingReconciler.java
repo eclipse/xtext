@@ -10,6 +10,10 @@ package org.eclipse.xtext.ui.editor.syntaxcoloring;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.core.runtime.IStatus;
+import org.eclipse.core.runtime.Status;
+import org.eclipse.core.runtime.jobs.Job;
 import org.eclipse.jface.text.IDocument;
 import org.eclipse.jface.text.ITextInputListener;
 import org.eclipse.jface.text.TextAttribute;
@@ -246,12 +250,19 @@ public class HighlightingReconciler implements ITextInputListener, IXtextModelLi
 	 */
 	public void refresh() {
 		if (calculator != null) {
-			((XtextDocument) sourceViewer.getDocument()).readOnly(new IUnitOfWork.Void<XtextResource>() {
+			new Job("calculating highlighting") {
 				@Override
-				public void process(XtextResource state) throws Exception {
-					modelChanged(state);
+				protected IStatus run(IProgressMonitor monitor) {
+					((XtextDocument) sourceViewer.getDocument()).readOnly(new IUnitOfWork.Void<XtextResource>() {
+						@Override
+						public void process(XtextResource state) throws Exception {
+							modelChanged(state);
+						}
+					});
+					return Status.OK_STATUS;
 				}
-			});
+			}.schedule();
+			
 		} else {
 			Display display = getDisplay();
 			display.asyncExec(presenter.createSimpleUpdateRunnable());

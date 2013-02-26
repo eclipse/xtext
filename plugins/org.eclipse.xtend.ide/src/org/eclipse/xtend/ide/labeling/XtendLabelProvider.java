@@ -6,7 +6,6 @@ package org.eclipse.xtend.ide.labeling;
 import java.util.Iterator;
 
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.edit.ui.provider.AdapterFactoryLabelProvider;
 import org.eclipse.jface.viewers.StyledString;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.xtend.core.jvmmodel.IXtendJvmAssociations;
@@ -44,9 +43,8 @@ public class XtendLabelProvider extends XbaseLabelProvider {
 	@Inject
 	private IXtendJvmAssociations associations;
 
-	@Inject
-	public XtendLabelProvider(AdapterFactoryLabelProvider delegate) {
-		super(delegate);
+	public XtendLabelProvider() {
+		super(null);
 	}
 
 	public Image image(XtendFile element) {

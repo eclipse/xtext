@@ -15,6 +15,11 @@ import java.util.List;
 
 import org.apache.log4j.Logger;
 import org.eclipse.core.runtime.Assert;
+import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.core.runtime.IStatus;
+import org.eclipse.core.runtime.Status;
+import org.eclipse.core.runtime.jobs.Job;
+import org.eclipse.emf.edit.ui.provider.ExtendedImageRegistry;
 import org.eclipse.jface.action.MenuManager;
 import org.eclipse.jface.action.Separator;
 import org.eclipse.jface.text.IDocument;
@@ -94,13 +99,21 @@ public class OutlinePage extends ContentOutlinePage implements ISourceViewerAwar
 		treeViewer.setContentProvider(contentProvider);
 		contentProvider.setFilterAndSorter(filterAndSorter);
 		treeViewer.setUseHashlookup(true);
-		List<IOutlineNode> initiallyExpandedNodes = xtextDocument
-				.readOnly(new IUnitOfWork<List<IOutlineNode>, XtextResource>() {
-					public List<IOutlineNode> exec(XtextResource resource) throws Exception {
-						return getInitiallyExpandedNodes();
-					}
-				});
-		refreshViewer(initiallyExpandedNodes.get(0), initiallyExpandedNodes, Collections.<IOutlineNode> emptySet());
+		// access EMF's image registry now, since it needs a UI-thread.
+		ExtendedImageRegistry.getInstance();
+		new Job("Initializing Outline") {
+			@Override
+			protected IStatus run(IProgressMonitor monitor) {
+				List<IOutlineNode> initiallyExpandedNodes = xtextDocument
+						.readOnly(new IUnitOfWork<List<IOutlineNode>, XtextResource>() {
+							public List<IOutlineNode> exec(XtextResource resource) throws Exception {
+								return getInitiallyExpandedNodes();
+							}
+						});
+				refreshViewer(initiallyExpandedNodes.get(0), initiallyExpandedNodes, Collections.<IOutlineNode> emptySet());
+				return Status.OK_STATUS;
+			}
+		}.schedule();
 	}
 
 	protected List<IOutlineNode> getInitiallyExpandedNodes() {
