@@ -37,7 +37,16 @@ public class Maps2 {
 	 *             if {@code expectedSize} is negative
 	 */
 	public static <K, V> LinkedHashMap<K, V> newLinkedHashMapWithExpectedSize(int expectedSize) {
-		return new LinkedHashMap<K, V>(capacity(expectedSize));
+		return new LinkedHashMap<K, V>(capacity(expectedSize)) {
+			private static final long serialVersionUID = 1L;
+
+			@Override
+			public void clear() {
+				if (isEmpty())
+					return;
+				super.clear();
+			}
+		};
 	}
 	
 	/**
