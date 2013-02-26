@@ -16,6 +16,7 @@ import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmMember;
+import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.diagnostics.AbstractDiagnostic;
 import org.eclipse.xtext.diagnostics.Severity;
 import org.eclipse.xtext.util.IAcceptor;
@@ -66,8 +67,10 @@ public class RootResolvedTypes extends ResolvedTypes {
 		for(Map.Entry<JvmIdentifiableElement, LightweightTypeReference> entry: basicGetTypes().entrySet()) {
 			JvmIdentifiableElement identifiable = entry.getKey();
 			if (identifiable instanceof JvmFormalParameter && identifiable.eContainingFeature() == XbasePackage.Literals.XCLOSURE__IMPLICIT_PARAMETER) {
-				JvmFormalParameter implicitLambdaParameter = (JvmFormalParameter) identifiable;
-				implicitLambdaParameter.setParameterType(entry.getValue().toTypeReference());
+				final JvmFormalParameter implicitLambdaParameter = (JvmFormalParameter) identifiable;
+				JvmTypeReference typeReference = entry.getValue().toTypeReference();
+				// is unset in XbaseLazyLinker again
+				implicitLambdaParameter.setParameterType(typeReference);
 			}
 		}
 	}
