@@ -12,14 +12,15 @@ import java.util.List;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.xtend.core.macro.declaration.CompilationUnitImpl;
 import org.eclipse.xtend.core.macro.declaration.JvmTypeDeclarationImpl;
-import org.eclipse.xtend.lib.macro.declaration.MemberDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.MutableClassDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.MutableFieldDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.MutableMemberDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.MutableMethodDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.MutableParameterDeclaration;
+import org.eclipse.xtend.lib.macro.declaration.MutableTypeParameterDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.TypeParameterDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.TypeReference;
+import org.eclipse.xtend.lib.macro.services.TypeReferenceProvider;
 import org.eclipse.xtext.common.types.JvmField;
 import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.common.types.JvmMember;
@@ -102,14 +103,14 @@ public class JvmClassDeclarationImpl extends JvmTypeDeclarationImpl<JvmGenericTy
   public List<? extends TypeParameterDeclaration> getTypeParameters() {
     JvmGenericType _delegate = this.getDelegate();
     EList<JvmTypeParameter> _typeParameters = _delegate.getTypeParameters();
-    final Function1<JvmTypeParameter,TypeParameterDeclaration> _function = new Function1<JvmTypeParameter,TypeParameterDeclaration>() {
-        public TypeParameterDeclaration apply(final JvmTypeParameter it) {
+    final Function1<JvmTypeParameter,MutableTypeParameterDeclaration> _function = new Function1<JvmTypeParameter,MutableTypeParameterDeclaration>() {
+        public MutableTypeParameterDeclaration apply(final JvmTypeParameter it) {
           CompilationUnitImpl _compilationUnit = JvmClassDeclarationImpl.this.getCompilationUnit();
-          TypeParameterDeclaration _typeParameterDeclaration = _compilationUnit.toTypeParameterDeclaration(it);
+          MutableTypeParameterDeclaration _typeParameterDeclaration = _compilationUnit.toTypeParameterDeclaration(it);
           return _typeParameterDeclaration;
         }
       };
-    List<TypeParameterDeclaration> _map = ListExtensions.<JvmTypeParameter, TypeParameterDeclaration>map(_typeParameters, _function);
+    List<MutableTypeParameterDeclaration> _map = ListExtensions.<JvmTypeParameter, MutableTypeParameterDeclaration>map(_typeParameters, _function);
     return _map;
   }
   
@@ -180,7 +181,7 @@ public class JvmClassDeclarationImpl extends JvmTypeDeclarationImpl<JvmGenericTy
     EList<JvmMember> _members = _delegate.getMembers();
     _members.add(newField);
     CompilationUnitImpl _compilationUnit = this.getCompilationUnit();
-    MemberDeclaration _memberDeclaration = _compilationUnit.toMemberDeclaration(newField);
+    MutableMemberDeclaration _memberDeclaration = _compilationUnit.toMemberDeclaration(newField);
     initializer.apply(((MutableFieldDeclaration) _memberDeclaration));
   }
   
@@ -190,14 +191,15 @@ public class JvmClassDeclarationImpl extends JvmTypeDeclarationImpl<JvmGenericTy
     newMethod.setSimpleName(name);
     CompilationUnitImpl _compilationUnit = this.getCompilationUnit();
     CompilationUnitImpl _compilationUnit_1 = this.getCompilationUnit();
-    TypeReference _primitiveVoid = _compilationUnit_1.getPrimitiveVoid();
+    TypeReferenceProvider _typeReferenceProvider = _compilationUnit_1.getTypeReferenceProvider();
+    TypeReference _primitiveVoid = _typeReferenceProvider.getPrimitiveVoid();
     JvmTypeReference _jvmTypeReference = _compilationUnit.toJvmTypeReference(_primitiveVoid);
     newMethod.setReturnType(_jvmTypeReference);
     JvmGenericType _delegate = this.getDelegate();
     EList<JvmMember> _members = _delegate.getMembers();
     _members.add(newMethod);
     CompilationUnitImpl _compilationUnit_2 = this.getCompilationUnit();
-    MemberDeclaration _memberDeclaration = _compilationUnit_2.toMemberDeclaration(newMethod);
+    MutableMemberDeclaration _memberDeclaration = _compilationUnit_2.toMemberDeclaration(newMethod);
     initializer.apply(((MutableMethodDeclaration) _memberDeclaration));
   }
   

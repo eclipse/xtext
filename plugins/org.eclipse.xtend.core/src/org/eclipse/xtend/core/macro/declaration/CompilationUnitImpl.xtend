@@ -23,14 +23,13 @@ import org.eclipse.xtend.core.xtend.XtendParameter
 import org.eclipse.xtend.core.xtend.XtendTypeDeclaration
 import org.eclipse.xtend.lib.macro.declaration.CompilationStrategy
 import org.eclipse.xtend.lib.macro.declaration.CompilationUnit
-import org.eclipse.xtend.lib.macro.declaration.MemberDeclaration
 import org.eclipse.xtend.lib.macro.declaration.MutableClassDeclaration
+import org.eclipse.xtend.lib.macro.declaration.MutableMemberDeclaration
+import org.eclipse.xtend.lib.macro.declaration.MutableNamedElement
+import org.eclipse.xtend.lib.macro.declaration.MutableParameterDeclaration
 import org.eclipse.xtend.lib.macro.declaration.MutableTypeDeclaration
-import org.eclipse.xtend.lib.macro.declaration.ParameterDeclaration
-import org.eclipse.xtend.lib.macro.declaration.PrimitiveType
+import org.eclipse.xtend.lib.macro.declaration.MutableTypeParameterDeclaration
 import org.eclipse.xtend.lib.macro.declaration.Type
-import org.eclipse.xtend.lib.macro.declaration.TypeDeclaration
-import org.eclipse.xtend.lib.macro.declaration.TypeParameterDeclaration
 import org.eclipse.xtend.lib.macro.declaration.TypeReference
 import org.eclipse.xtend.lib.macro.declaration.Visibility
 import org.eclipse.xtend.lib.macro.services.Problem
@@ -44,6 +43,7 @@ import org.eclipse.xtext.common.types.JvmExecutable
 import org.eclipse.xtext.common.types.JvmField
 import org.eclipse.xtext.common.types.JvmFormalParameter
 import org.eclipse.xtext.common.types.JvmGenericType
+import org.eclipse.xtext.common.types.JvmIdentifiableElement
 import org.eclipse.xtext.common.types.JvmMember
 import org.eclipse.xtext.common.types.JvmOperation
 import org.eclipse.xtext.common.types.JvmPrimitiveType
@@ -60,7 +60,7 @@ import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference
 import org.eclipse.xtext.xbase.typesystem.references.OwnedConverter
 import org.eclipse.xtext.xbase.typesystem.util.CommonTypeComputationServices
 
-class CompilationUnitImpl implements CompilationUnit, TypeReferenceProvider {
+class CompilationUnitImpl implements CompilationUnit {
 
 	override getDocComment() {
 		throw new UnsupportedOperationException("Auto-generated function stub")
@@ -104,13 +104,19 @@ class CompilationUnitImpl implements CompilationUnit, TypeReferenceProvider {
 	@Inject JvmTypesBuilder typesBuilder
 	@Inject TypeReferenceSerializer typeRefSerializer
 	@Inject IXtendJvmAssociations associations
+	
 	@Property val ProblemSupport problemSupport = new ProblemSupportImpl(this)
+	@Property val TypeReferenceProvider typeReferenceProvider = new TypeReferenceProviderImpl(this)
 	
 	Map<EObject, Object> identityCache = newHashMap
 	OwnedConverter typeRefConverter
 	
 	def getJvmAssociations() {
 		return associations
+	}
+	
+	def getTypeReferences() {
+		typeReferences
 	}
 	
 	def void setXtendFile(XtendFile xtendFile) {
@@ -121,6 +127,8 @@ class CompilationUnitImpl implements CompilationUnit, TypeReferenceProvider {
 
 	def private <IN extends EObject, OUT> OUT getOrCreate(IN in, (IN)=>OUT provider) {
 		checkCanceled
+		if (in == null)
+			return null
 		if (identityCache.containsKey(in))
 			return identityCache.get(in) as OUT
 		val result = provider.apply(in)
@@ -157,7 +165,7 @@ class CompilationUnitImpl implements CompilationUnit, TypeReferenceProvider {
 			}
 		]}
 
-	def TypeDeclaration toTypeDeclaration(JvmDeclaredType delegate) {
+	def MutableTypeDeclaration toTypeDeclaration(JvmDeclaredType delegate) {
 		getOrCreate(delegate) [
 			switch delegate {
 				JvmGenericType case delegate.isInterface:
@@ -178,7 +186,7 @@ class CompilationUnitImpl implements CompilationUnit, TypeReferenceProvider {
 			}
 		]}
 
-	def TypeParameterDeclaration toTypeParameterDeclaration(JvmTypeParameter delegate) {
+	def MutableTypeParameterDeclaration toTypeParameterDeclaration(JvmTypeParameter delegate) {
 		getOrCreate(delegate) [
 			new JvmTypeParameterDeclarationImpl => [
 				it.delegate = delegate
@@ -186,7 +194,7 @@ class CompilationUnitImpl implements CompilationUnit, TypeReferenceProvider {
 			]
 		]}
 
-	def ParameterDeclaration toParameterDeclaration(JvmFormalParameter delegate) {
+	def MutableParameterDeclaration toParameterDeclaration(JvmFormalParameter delegate) {
 		getOrCreate(delegate) [
 			new JvmParameterDeclarationImpl => [
 				it.delegate = delegate
@@ -194,7 +202,7 @@ class CompilationUnitImpl implements CompilationUnit, TypeReferenceProvider {
 			]
 		]}
 
-	def MemberDeclaration toMemberDeclaration(JvmMember delegate) {
+	def MutableMemberDeclaration toMemberDeclaration(JvmMember delegate) {
 		getOrCreate(delegate) [
 			switch delegate {
 				JvmDeclaredType:
@@ -218,6 +226,17 @@ class CompilationUnitImpl implements CompilationUnit, TypeReferenceProvider {
 			//TODO JvmEnumerationLiteral
 			}
 		]}
+	
+	def MutableNamedElement toNamedElement(JvmIdentifiableElement delegate) {
+		getOrCreate(delegate) [
+			switch delegate {
+				JvmMember : toMemberDeclaration(delegate)
+				JvmTypeParameter : toTypeParameterDeclaration(delegate)
+				JvmFormalParameter : toParameterDeclaration(delegate)
+				default : throw new UnsupportedOperationException("Couldn't translate '"+delegate)
+			}
+		]
+	}
 
 	def TypeReference toTypeReference(JvmTypeReference delegate) {
 
@@ -293,124 +312,6 @@ class CompilationUnitImpl implements CompilationUnit, TypeReferenceProvider {
 				it.compilationUnit = this
 			]
 		]}
-
-	override getAnyType() {
-		toTypeReference(typeReferences.createAnyTypeReference(xtendFile))
-	}
-	
-	override getList(TypeReference param) {
-		newTypeReference("java.util.List", param)
-	}
-	
-	override getObject() {
-		toTypeReference(typeReferences.createTypeRef(typeReferences.findDeclaredType(typeof(Object), xtendFile)))
-	}
-	
-	override getPrimitiveBoolean() {
-		newTypeReference("boolean")
-	}
-	
-	override getPrimitiveByte() {
-		newTypeReference("byte")
-	}
-	
-	override getPrimitiveChar() {
-		newTypeReference("char")
-	}
-	
-	override getPrimitiveDouble() {
-		newTypeReference("double")
-	}
-	
-	override getPrimitiveFloat() {
-		newTypeReference("float")
-	}
-	
-	override getPrimitiveInt() {
-		newTypeReference("int")
-	}
-	
-	override getPrimitiveLong() {
-		newTypeReference("long")
-	}
-	
-	override getPrimitiveShort() {
-		newTypeReference("short")
-	}
-	
-	override getPrimitiveVoid() {
-		newTypeReference("void")
-	}
-	
-	override getSet(TypeReference param) {
-		newTypeReference("java.util.Set", param)
-	}
-	
-	override getString() {
-		newTypeReference("java.lang.String")
-	}
-	
-	override newArrayTypeReference(TypeReference componentType) {
-		checkCanceled
-		toTypeReference(typeReferences.createArrayType(componentType.toJvmTypeReference))
-	}
-	
-	override newTypeReference(String typeName, TypeReference... typeArguments) {
-		checkCanceled
-		val type = typeReferences.findDeclaredType(typeName, xtendFile)
-		if (type == null)
-			return null
-		toTypeReference(typeReferences.createTypeRef(type, typeArguments.map[toJvmTypeReference] as JvmTypeReference[]))
-	}
-	
-	override newTypeReference(Type typeDeclaration, TypeReference... typeArguments) {
-		checkCanceled
-		val type = switch typeDeclaration {
-			JvmTypeDeclarationImpl<? extends JvmDeclaredType> : {
-				typeDeclaration.delegate
-			}
-			XtendTypeDeclarationImpl<? extends XtendTypeDeclaration> : {
-				associations.getInferredType(typeDeclaration.delegate)
-			}
-			JvmTypeParameterDeclarationImpl : {
-				typeDeclaration.delegate
-			}
-			PrimitiveTypeImpl : {
-				return switch typeDeclaration.kind {
-					case PrimitiveType$Kind::BOOLEAN : primitiveBoolean
-					case PrimitiveType$Kind::BYTE : primitiveByte
-					case PrimitiveType$Kind::CHAR : primitiveChar
-					case PrimitiveType$Kind::DOUBLE : primitiveDouble
-					case PrimitiveType$Kind::FLOAT : primitiveFloat
-					case PrimitiveType$Kind::INT : primitiveInt
-					case PrimitiveType$Kind::LONG : primitiveLong
-					case PrimitiveType$Kind::SHORT : primitiveShort
-				}
-			}
-			VoidTypeImpl : {
-				return primitiveVoid
-			}
-			default : {
-				throw new IllegalArgumentException("couln't construct type refernce for type "+typeDeclaration)
-			}
-		}
-		
-		if (type == null)
-			return null
-		toTypeReference(typeReferences.createTypeRef(type, typeArguments.map[toJvmTypeReference] as JvmTypeReference[]))
-	}
-	
-	override newWildcardTypeReference() {
-		newWildcardTypeReference(null);
-	}
-	
-	override newWildcardTypeReference(TypeReference upperBound) {
-		if (upperBound == null) {
-			toTypeReference(typeReferences.wildCard())
-		} else {
-			toTypeReference(typeReferences.wildCardExtends(upperBound.toJvmTypeReference))
-		}
-	}
 	
 	def JvmTypeReference toJvmTypeReference(TypeReference typeRef) {
 		checkCanceled

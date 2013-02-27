@@ -15,7 +15,6 @@ import org.eclipse.xtend.core.xtend.XtendMember
 import org.eclipse.xtend.lib.macro.RegisterGlobalsParticipant
 import org.eclipse.xtend.lib.macro.TransformationParticipant
 import org.eclipse.xtend.lib.macro.declaration.MutableNamedElement
-import org.eclipse.xtend.lib.macro.services.TimeoutException
 import org.eclipse.xtext.common.types.JvmDeclaredType
 import org.eclipse.xtext.util.CancelIndicator
 import org.eclipse.xtext.util.IAcceptor
@@ -60,7 +59,7 @@ class AnnotationProcessor {
 					runWithCancelIndiciator(ctx, monitor) [|
 						val map = ctx.annotatedSourceElements.map[
 							val xtendMember = ctx.compilationUnit.toXtendMemberDeclaration(it as XtendMember)
-							return modifyCtx.getGeneratedElement(xtendMember)
+							return modifyCtx.getPrimaryGeneratedJavaElement(xtendMember)
 						]
 						processor.doTransform(map, modifyCtx)
 					]
