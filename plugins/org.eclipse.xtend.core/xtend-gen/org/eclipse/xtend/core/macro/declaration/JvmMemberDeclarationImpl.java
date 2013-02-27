@@ -12,7 +12,6 @@ import org.eclipse.xtend.core.macro.declaration.CompilationUnitImpl;
 import org.eclipse.xtend.core.macro.declaration.JvmNamedElementImpl;
 import org.eclipse.xtend.lib.macro.declaration.MutableMemberDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.MutableTypeDeclaration;
-import org.eclipse.xtend.lib.macro.declaration.TypeDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.Visibility;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmMember;
@@ -73,7 +72,7 @@ public abstract class JvmMemberDeclarationImpl<T extends JvmMember> extends JvmN
     CompilationUnitImpl _compilationUnit = this.getCompilationUnit();
     T _delegate = this.getDelegate();
     JvmDeclaredType _declaringType = _delegate.getDeclaringType();
-    TypeDeclaration _typeDeclaration = _compilationUnit.toTypeDeclaration(_declaringType);
+    MutableTypeDeclaration _typeDeclaration = _compilationUnit.toTypeDeclaration(_declaringType);
     return ((MutableTypeDeclaration) _typeDeclaration);
   }
   

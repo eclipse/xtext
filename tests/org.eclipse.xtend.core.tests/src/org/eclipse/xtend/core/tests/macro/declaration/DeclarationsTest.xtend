@@ -125,7 +125,7 @@ class DeclarationsTest extends AbstractXtendTestCase {
 			val genClazz = generatedTypeDeclarations.head as MutableClassDeclaration
 			
 			genClazz.addMethod('newMethod') [
-				returnType = (genClazz.compilationUnit as CompilationUnitImpl).string 
+				returnType = (genClazz.compilationUnit as CompilationUnitImpl).typeReferenceProvider.string 
 				visibility = Visibility::PRIVATE
 				body = ['''
 					return "foo";
@@ -148,34 +148,34 @@ class DeclarationsTest extends AbstractXtendTestCase {
 		}
 		''').asCompilationUnit [
 			val typeReferenceProvider = (it as CompilationUnitImpl)
-			val anyType = typeReferenceProvider.anyType
+			val anyType = typeReferenceProvider.typeReferenceProvider.anyType
 			assertTrue(anyType.anyType)
 			
-			val stringType = typeReferenceProvider.string
-			val charsequenceType = typeReferenceProvider.newTypeReference(typeof(CharSequence).name)
+			val stringType = typeReferenceProvider.typeReferenceProvider.string
+			val charsequenceType = typeReferenceProvider.typeReferenceProvider.newTypeReference(typeof(CharSequence).name)
 			assertTrue(charsequenceType.isAssignableFrom(stringType))
 			assertTrue(stringType.isAssignableFrom(anyType))
 			assertFalse(stringType.isAssignableFrom(charsequenceType))
 			
-			checkPrimitive(typeReferenceProvider.primitiveBoolean, 'java.lang.Boolean')
-			checkPrimitive(typeReferenceProvider.primitiveInt, 'java.lang.Integer')
-			checkPrimitive(typeReferenceProvider.primitiveLong, 'java.lang.Long')
-			checkPrimitive(typeReferenceProvider.primitiveShort, 'java.lang.Short')
-			checkPrimitive(typeReferenceProvider.primitiveChar, 'java.lang.Character')
-			checkPrimitive(typeReferenceProvider.primitiveByte, 'java.lang.Byte')
-			checkPrimitive(typeReferenceProvider.primitiveFloat, 'java.lang.Float')
-			checkPrimitive(typeReferenceProvider.primitiveDouble, 'java.lang.Double')
-			val primitiveVoid = typeReferenceProvider.primitiveVoid
-			assertTrue(primitiveVoid.void)
+			checkPrimitive(typeReferenceProvider.typeReferenceProvider.primitiveBoolean, 'java.lang.Boolean')
+			checkPrimitive(typeReferenceProvider.typeReferenceProvider.primitiveInt, 'java.lang.Integer')
+			checkPrimitive(typeReferenceProvider.typeReferenceProvider.primitiveLong, 'java.lang.Long')
+			checkPrimitive(typeReferenceProvider.typeReferenceProvider.primitiveShort, 'java.lang.Short')
+			checkPrimitive(typeReferenceProvider.typeReferenceProvider.primitiveChar, 'java.lang.Character')
+			checkPrimitive(typeReferenceProvider.typeReferenceProvider.primitiveByte, 'java.lang.Byte')
+			checkPrimitive(typeReferenceProvider.typeReferenceProvider.primitiveFloat, 'java.lang.Float')
+			checkPrimitive(typeReferenceProvider.typeReferenceProvider.primitiveDouble, 'java.lang.Double')
+			val primitiveVoid = typeReferenceProvider.typeReferenceProvider.primitiveVoid
+			assertTrue(primitiveVoid.isVoid)
 			
-			val listOfStringType = typeReferenceProvider.getList(typeReferenceProvider.string)
-			val setOfString = typeReferenceProvider.getSet(listOfStringType.actualTypeArguments.head)
+			val listOfStringType = typeReferenceProvider.typeReferenceProvider.getList(typeReferenceProvider.typeReferenceProvider.string)
+			val setOfString = typeReferenceProvider.typeReferenceProvider.getSet(listOfStringType.actualTypeArguments.head)
 			assertEquals('List<String>', listOfStringType.toString)
 			assertEquals('String',listOfStringType.actualTypeArguments.head.toString)
 			assertEquals('Set<String>', setOfString.toString)
 			assertEquals('String',setOfString.actualTypeArguments.head.toString)
-			assertEquals('Set<?>', typeReferenceProvider.getSet(typeReferenceProvider.newWildcardTypeReference).toString)
-			assertEquals('Set<? extends List<String>>', typeReferenceProvider.getSet(typeReferenceProvider.newWildcardTypeReference(listOfStringType)).toString)
+			assertEquals('Set<?>', typeReferenceProvider.typeReferenceProvider.getSet(typeReferenceProvider.typeReferenceProvider.newWildcardTypeReference).toString)
+			assertEquals('Set<? extends List<String>>', typeReferenceProvider.typeReferenceProvider.getSet(typeReferenceProvider.typeReferenceProvider.newWildcardTypeReference(listOfStringType)).toString)
 		]
 	}
 	
