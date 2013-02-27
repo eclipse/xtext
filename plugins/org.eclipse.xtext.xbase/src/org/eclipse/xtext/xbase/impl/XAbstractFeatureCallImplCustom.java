@@ -79,6 +79,12 @@ public abstract class XAbstractFeatureCallImplCustom extends XAbstractFeatureCal
 		return super.getImplicitReceiver();
 	}
 	
+	@Override
+	public XExpression getImplicitFirstArgument() {
+		ensureFeatureLinked();
+		return super.getImplicitFirstArgument();
+	}
+	
 	/**
 	 * checks whether the feature was successfully linked
 	 * Any features which rely on side effects done during linking of feature should call this method.
