@@ -15,11 +15,8 @@ import java.util.Map;
 import java.util.concurrent.CancellationException;
 import javax.inject.Inject;
 import org.eclipse.emf.common.util.EList;
-import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.emf.ecore.resource.Resource.Diagnostic;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.xtend.core.jvmmodel.IXtendJvmAssociations;
 import org.eclipse.xtend.core.macro.CompilationContextImpl;
@@ -27,12 +24,11 @@ import org.eclipse.xtend.core.macro.declaration.JvmClassDeclarationImpl;
 import org.eclipse.xtend.core.macro.declaration.JvmConstructorDeclarationImpl;
 import org.eclipse.xtend.core.macro.declaration.JvmFieldDeclarationImpl;
 import org.eclipse.xtend.core.macro.declaration.JvmMethodDeclarationImpl;
-import org.eclipse.xtend.core.macro.declaration.JvmNamedElementImpl;
 import org.eclipse.xtend.core.macro.declaration.JvmParameterDeclarationImpl;
 import org.eclipse.xtend.core.macro.declaration.JvmTypeDeclarationImpl;
 import org.eclipse.xtend.core.macro.declaration.JvmTypeParameterDeclarationImpl;
 import org.eclipse.xtend.core.macro.declaration.PrimitiveTypeImpl;
-import org.eclipse.xtend.core.macro.declaration.ProblemImpl;
+import org.eclipse.xtend.core.macro.declaration.ProblemSupportImpl;
 import org.eclipse.xtend.core.macro.declaration.TypeReferenceImpl;
 import org.eclipse.xtend.core.macro.declaration.VoidTypeImpl;
 import org.eclipse.xtend.core.macro.declaration.XtendClassDeclarationImpl;
@@ -40,7 +36,6 @@ import org.eclipse.xtend.core.macro.declaration.XtendConstructorDeclarationImpl;
 import org.eclipse.xtend.core.macro.declaration.XtendFieldDeclarationImpl;
 import org.eclipse.xtend.core.macro.declaration.XtendMemberDeclarationImpl;
 import org.eclipse.xtend.core.macro.declaration.XtendMethodDeclarationImpl;
-import org.eclipse.xtend.core.macro.declaration.XtendNamedElementImpl;
 import org.eclipse.xtend.core.macro.declaration.XtendParameterDeclarationImpl;
 import org.eclipse.xtend.core.macro.declaration.XtendTypeDeclarationImpl;
 import org.eclipse.xtend.core.macro.declaration.XtendTypeParameterDeclarationImpl;
@@ -50,13 +45,11 @@ import org.eclipse.xtend.core.xtend.XtendField;
 import org.eclipse.xtend.core.xtend.XtendFile;
 import org.eclipse.xtend.core.xtend.XtendFunction;
 import org.eclipse.xtend.core.xtend.XtendMember;
-import org.eclipse.xtend.core.xtend.XtendPackage;
 import org.eclipse.xtend.core.xtend.XtendParameter;
 import org.eclipse.xtend.core.xtend.XtendTypeDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.ClassDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.CompilationStrategy;
 import org.eclipse.xtend.lib.macro.declaration.CompilationUnit;
-import org.eclipse.xtend.lib.macro.declaration.Element;
 import org.eclipse.xtend.lib.macro.declaration.MemberDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.MutableClassDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.MutableTypeDeclaration;
@@ -67,7 +60,6 @@ import org.eclipse.xtend.lib.macro.declaration.TypeDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.TypeParameterDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.TypeReference;
 import org.eclipse.xtend.lib.macro.declaration.Visibility;
-import org.eclipse.xtend.lib.macro.services.Problem;
 import org.eclipse.xtend.lib.macro.services.ProblemSupport;
 import org.eclipse.xtend.lib.macro.services.TypeReferenceProvider;
 import org.eclipse.xtext.common.types.JvmAnnotationType;
@@ -81,7 +73,6 @@ import org.eclipse.xtext.common.types.JvmField;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmGenericArrayTypeReference;
 import org.eclipse.xtext.common.types.JvmGenericType;
-import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmMember;
 import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmParameterizedTypeReference;
@@ -92,10 +83,7 @@ import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.JvmVisibility;
 import org.eclipse.xtext.common.types.JvmVoid;
 import org.eclipse.xtext.common.types.JvmWildcardTypeReference;
-import org.eclipse.xtext.common.types.TypesPackage;
 import org.eclipse.xtext.common.types.util.TypeReferences;
-import org.eclipse.xtext.diagnostics.Severity;
-import org.eclipse.xtext.validation.EObjectDiagnosticImpl;
 import org.eclipse.xtext.xbase.compiler.TypeReferenceSerializer;
 import org.eclipse.xtext.xbase.compiler.output.ITreeAppendable;
 import org.eclipse.xtext.xbase.jvmmodel.JvmTypesBuilder;
@@ -106,7 +94,6 @@ import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ListExtensions;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
-import org.eclipse.xtext.xbase.lib.Pair;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xbase.typesystem.legacy.StandardTypeReferenceOwner;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
@@ -114,7 +101,7 @@ import org.eclipse.xtext.xbase.typesystem.references.OwnedConverter;
 import org.eclipse.xtext.xbase.typesystem.util.CommonTypeComputationServices;
 
 @SuppressWarnings("all")
-public class CompilationUnitImpl implements CompilationUnit, TypeReferenceProvider, ProblemSupport {
+public class CompilationUnitImpl implements CompilationUnit, TypeReferenceProvider {
   public String getDocComment() {
     UnsupportedOperationException _unsupportedOperationException = new UnsupportedOperationException("Auto-generated function stub");
     throw _unsupportedOperationException;
@@ -204,6 +191,17 @@ public class CompilationUnitImpl implements CompilationUnit, TypeReferenceProvid
   @Inject
   private IXtendJvmAssociations associations;
   
+  private final ProblemSupport _problemSupport = new Function0<ProblemSupport>() {
+    public ProblemSupport apply() {
+      ProblemSupportImpl _problemSupportImpl = new ProblemSupportImpl(CompilationUnitImpl.this);
+      return _problemSupportImpl;
+    }
+  }.apply();
+  
+  public ProblemSupport getProblemSupport() {
+    return this._problemSupport;
+  }
+  
   private Map<EObject,Object> identityCache = new Function0<Map<EObject,Object>>() {
     public Map<EObject,Object> apply() {
       HashMap<EObject,Object> _newHashMap = CollectionLiterals.<EObject, Object>newHashMap();
@@ -212,6 +210,10 @@ public class CompilationUnitImpl implements CompilationUnit, TypeReferenceProvid
   }.apply();
   
   private OwnedConverter typeRefConverter;
+  
+  public IXtendJvmAssociations getJvmAssociations() {
+    return this.associations;
+  }
   
   public void setXtendFile(final XtendFile xtendFile) {
     this._xtendFile = xtendFile;
@@ -921,167 +923,5 @@ public class CompilationUnitImpl implements CompilationUnit, TypeReferenceProvid
         }
       };
     this.typesBuilder.setBody(executable, _function);
-  }
-  
-  public void addError(final Element element, final String message) {
-    this.checkCanceled();
-    final Pair<Resource,EObject> resAndObj = this.getResourceAndEObject(element);
-    Resource _key = resAndObj.getKey();
-    EList<Diagnostic> _errors = _key.getErrors();
-    EObject _value = resAndObj.getValue();
-    EObject _value_1 = resAndObj.getValue();
-    EStructuralFeature _significantFeature = this.getSignificantFeature(_value_1);
-    int _minus = (-1);
-    EObjectDiagnosticImpl _eObjectDiagnosticImpl = new EObjectDiagnosticImpl(Severity.ERROR, "user.issue", message, _value, _significantFeature, _minus, null);
-    _errors.add(_eObjectDiagnosticImpl);
-  }
-  
-  public void addInfo(final Element element, final String message) {
-    this.checkCanceled();
-  }
-  
-  public void addWarning(final Element element, final String message) {
-    this.checkCanceled();
-    final Pair<Resource,EObject> resAndObj = this.getResourceAndEObject(element);
-    Resource _key = resAndObj.getKey();
-    EList<Diagnostic> _warnings = _key.getWarnings();
-    EObject _value = resAndObj.getValue();
-    EObject _value_1 = resAndObj.getValue();
-    EStructuralFeature _significantFeature = this.getSignificantFeature(_value_1);
-    int _minus = (-1);
-    EObjectDiagnosticImpl _eObjectDiagnosticImpl = new EObjectDiagnosticImpl(Severity.WARNING, "user.issue", message, _value, _significantFeature, _minus, null);
-    _warnings.add(_eObjectDiagnosticImpl);
-  }
-  
-  public List<Problem> getProblems(final Element element) {
-    this.checkCanceled();
-    final Pair<Resource,EObject> resAndObj = this.getResourceAndEObject(element);
-    final Resource resource = resAndObj.getKey();
-    EList<Diagnostic> _errors = resource.getErrors();
-    EList<Diagnostic> _warnings = resource.getWarnings();
-    Iterable<Diagnostic> _plus = Iterables.<Diagnostic>concat(_errors, _warnings);
-    final Iterable<EObjectDiagnosticImpl> issues = Iterables.<EObjectDiagnosticImpl>filter(_plus, EObjectDiagnosticImpl.class);
-    final Function1<EObjectDiagnosticImpl,Boolean> _function = new Function1<EObjectDiagnosticImpl,Boolean>() {
-        public Boolean apply(final EObjectDiagnosticImpl diag) {
-          EObject _problematicObject = diag.getProblematicObject();
-          EObject _value = resAndObj.getValue();
-          boolean _equals = ObjectExtensions.operator_equals(_problematicObject, _value);
-          return Boolean.valueOf(_equals);
-        }
-      };
-    Iterable<EObjectDiagnosticImpl> _filter = IterableExtensions.<EObjectDiagnosticImpl>filter(issues, _function);
-    final Function1<EObjectDiagnosticImpl,Problem> _function_1 = new Function1<EObjectDiagnosticImpl,Problem>() {
-        public Problem apply(final EObjectDiagnosticImpl diag) {
-          String _code = diag.getCode();
-          String _message = diag.getMessage();
-          Severity _severity = diag.getSeverity();
-          org.eclipse.xtend.lib.macro.services.Problem.Severity _translateSeverity = CompilationUnitImpl.this.translateSeverity(_severity);
-          ProblemImpl _problemImpl = new ProblemImpl(_code, _message, _translateSeverity);
-          return ((Problem) _problemImpl);
-        }
-      };
-    final Iterable<Problem> result = IterableExtensions.<EObjectDiagnosticImpl, Problem>map(_filter, _function_1);
-    return IterableExtensions.<Problem>toList(result);
-  }
-  
-  public EStructuralFeature getSignificantFeature(final EObject obj) {
-    EAttribute _switchResult = null;
-    boolean _matched = false;
-    if (!_matched) {
-      if (obj instanceof XtendTypeDeclaration) {
-        final XtendTypeDeclaration _xtendTypeDeclaration = (XtendTypeDeclaration)obj;
-        _matched=true;
-        EAttribute _xtendTypeDeclaration_Name = XtendPackage.eINSTANCE.getXtendTypeDeclaration_Name();
-        _switchResult = _xtendTypeDeclaration_Name;
-      }
-    }
-    if (!_matched) {
-      if (obj instanceof XtendField) {
-        final XtendField _xtendField = (XtendField)obj;
-        _matched=true;
-        EAttribute _xtendField_Name = XtendPackage.eINSTANCE.getXtendField_Name();
-        _switchResult = _xtendField_Name;
-      }
-    }
-    if (!_matched) {
-      if (obj instanceof XtendFunction) {
-        final XtendFunction _xtendFunction = (XtendFunction)obj;
-        _matched=true;
-        EAttribute _xtendFunction_Name = XtendPackage.eINSTANCE.getXtendFunction_Name();
-        _switchResult = _xtendFunction_Name;
-      }
-    }
-    if (!_matched) {
-      if (obj instanceof JvmFormalParameter) {
-        final JvmFormalParameter _jvmFormalParameter = (JvmFormalParameter)obj;
-        _matched=true;
-        EAttribute _jvmFormalParameter_Name = TypesPackage.eINSTANCE.getJvmFormalParameter_Name();
-        _switchResult = _jvmFormalParameter_Name;
-      }
-    }
-    return _switchResult;
-  }
-  
-  private Pair<Resource,EObject> getResourceAndEObject(final Element element) {
-    this.checkCanceled();
-    boolean _matched = false;
-    if (!_matched) {
-      if (element instanceof XtendNamedElementImpl) {
-        final XtendNamedElementImpl<? extends EObject> _xtendNamedElementImpl = (XtendNamedElementImpl<? extends EObject>)element;
-        _matched=true;
-        EObject _delegate = _xtendNamedElementImpl.getDelegate();
-        final Resource resource = _delegate.eResource();
-        final EObject eobject = _xtendNamedElementImpl.getDelegate();
-        return Pair.<Resource, EObject>of(resource, eobject);
-      }
-    }
-    if (!_matched) {
-      if (element instanceof JvmNamedElementImpl) {
-        final JvmNamedElementImpl<JvmIdentifiableElement> _jvmNamedElementImpl = (JvmNamedElementImpl<JvmIdentifiableElement>)element;
-        _matched=true;
-        JvmIdentifiableElement _delegate = _jvmNamedElementImpl.getDelegate();
-        final Resource resource = _delegate.eResource();
-        XtendFile _xtendFile = this.getXtendFile();
-        Resource _eResource = _xtendFile.eResource();
-        boolean _equals = ObjectExtensions.operator_equals(resource, _eResource);
-        if (_equals) {
-          JvmIdentifiableElement _delegate_1 = _jvmNamedElementImpl.getDelegate();
-          final EObject eobject = this.associations.getPrimarySourceElement(_delegate_1);
-          return Pair.<Resource, EObject>of(resource, eobject);
-        }
-      }
-    }
-    IllegalArgumentException _illegalArgumentException = new IllegalArgumentException("You can only add issues on locally declared elements.");
-    throw _illegalArgumentException;
-  }
-  
-  private org.eclipse.xtend.lib.macro.services.Problem.Severity translateSeverity(final Severity severity) {
-    org.eclipse.xtend.lib.macro.services.Problem.Severity _switchResult = null;
-    boolean _matched = false;
-    if (!_matched) {
-      if (Objects.equal(severity,Severity.ERROR)) {
-        _matched=true;
-        _switchResult = org.eclipse.xtend.lib.macro.services.Problem.Severity.ERROR;
-      }
-    }
-    if (!_matched) {
-      if (Objects.equal(severity,Severity.WARNING)) {
-        _matched=true;
-        _switchResult = org.eclipse.xtend.lib.macro.services.Problem.Severity.WARNING;
-      }
-    }
-    if (!_matched) {
-      if (Objects.equal(severity,Severity.INFO)) {
-        _matched=true;
-        _switchResult = org.eclipse.xtend.lib.macro.services.Problem.Severity.INFO;
-      }
-    }
-    if (!_matched) {
-      if (Objects.equal(severity,Severity.IGNORE)) {
-        _matched=true;
-        _switchResult = org.eclipse.xtend.lib.macro.services.Problem.Severity.IGNORE;
-      }
-    }
-    return _switchResult;
   }
 }

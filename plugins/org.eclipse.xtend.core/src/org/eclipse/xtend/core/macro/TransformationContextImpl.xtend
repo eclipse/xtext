@@ -27,11 +27,11 @@ class TransformationContextImpl implements TransformationContext {
 	
 	@Property CompilationUnitImpl unit
 	
-	def private CompilationUnitImpl unit(NamedElement element) {
+	private def CompilationUnitImpl unit(NamedElement element) {
 		element.compilationUnit as CompilationUnitImpl
 	}
 	
-	def private EObject delegate(NamedElement element) {
+	private def EObject delegate(NamedElement element) {
 		switch element { 
 			AbstractNamedElementImpl<? extends EObject> : element.delegate
 		}
@@ -79,19 +79,19 @@ class TransformationContextImpl implements TransformationContext {
 	}
 
 	override addError(Element element, String message) {
-		unit.addError(element, message)
+		unit.problemSupport.addError(element, message)
 	}
 	
 	override addInfo(Element element, String message) {
-		unit.addInfo(element, message)
+		unit.problemSupport.addInfo(element, message)
 	}
 	
 	override addWarning(Element element, String message) {
-		unit.addWarning(element, message)
+		unit.problemSupport.addWarning(element, message)
 	}
 	
 	override getProblems(Element element) {
-		unit.getProblems(element)
+		unit.problemSupport.getProblems(element)
 	}
 	
 	override getAnyType() {

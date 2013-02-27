@@ -24,6 +24,7 @@ import org.eclipse.xtend.lib.macro.declaration.NamedElement;
 import org.eclipse.xtend.lib.macro.declaration.Type;
 import org.eclipse.xtend.lib.macro.declaration.TypeReference;
 import org.eclipse.xtend.lib.macro.services.Problem;
+import org.eclipse.xtend.lib.macro.services.ProblemSupport;
 import org.eclipse.xtext.common.types.JvmMember;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 
@@ -121,22 +122,26 @@ public class TransformationContextImpl implements TransformationContext {
   
   public void addError(final Element element, final String message) {
     CompilationUnitImpl _unit = this.getUnit();
-    _unit.addError(element, message);
+    ProblemSupport _problemSupport = _unit.getProblemSupport();
+    _problemSupport.addError(element, message);
   }
   
   public void addInfo(final Element element, final String message) {
     CompilationUnitImpl _unit = this.getUnit();
-    _unit.addInfo(element, message);
+    ProblemSupport _problemSupport = _unit.getProblemSupport();
+    _problemSupport.addInfo(element, message);
   }
   
   public void addWarning(final Element element, final String message) {
     CompilationUnitImpl _unit = this.getUnit();
-    _unit.addWarning(element, message);
+    ProblemSupport _problemSupport = _unit.getProblemSupport();
+    _problemSupport.addWarning(element, message);
   }
   
   public List<Problem> getProblems(final Element element) {
     CompilationUnitImpl _unit = this.getUnit();
-    List<Problem> _problems = _unit.getProblems(element);
+    ProblemSupport _problemSupport = _unit.getProblemSupport();
+    List<Problem> _problems = _problemSupport.getProblems(element);
     return _problems;
   }
   
