@@ -15,6 +15,7 @@ import org.eclipse.xtend.core.macro.declaration.AbstractDeclarationImpl;
 import org.eclipse.xtend.core.macro.declaration.CompilationUnitImpl;
 import org.eclipse.xtend.core.macro.declaration.XtendMemberDeclarationImpl;
 import org.eclipse.xtend.core.xtend.XtendMember;
+import org.eclipse.xtend.lib.macro.declaration.AnnotationReference;
 import org.eclipse.xtend.lib.macro.declaration.TypeParameterDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.TypeParameterDeclarator;
 import org.eclipse.xtend.lib.macro.declaration.TypeReference;
@@ -22,6 +23,7 @@ import org.eclipse.xtext.common.types.JvmTypeConstraint;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.JvmUpperBound;
+import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 
@@ -60,5 +62,10 @@ public class XtendTypeParameterDeclarationImpl extends AbstractDeclarationImpl<J
       _xblockexpression = (((TypeParameterDeclarator) _xtendMemberDeclaration));
     }
     return _xblockexpression;
+  }
+  
+  public List<AnnotationReference> getAnnotations() {
+    List<AnnotationReference> _emptyList = CollectionLiterals.<AnnotationReference>emptyList();
+    return _emptyList;
   }
 }

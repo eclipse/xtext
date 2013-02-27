@@ -1,11 +1,15 @@
 package org.eclipse.xtend.core.tests.macro.declaration;
 
+import com.google.common.collect.Iterables;
 import com.google.inject.Provider;
 import java.util.List;
 import javax.inject.Inject;
 import org.eclipse.xtend.core.macro.declaration.CompilationUnitImpl;
 import org.eclipse.xtend.core.tests.AbstractXtendTestCase;
 import org.eclipse.xtend.core.xtend.XtendFile;
+import org.eclipse.xtend.lib.macro.declaration.AnnotationReference;
+import org.eclipse.xtend.lib.macro.declaration.AnnotationTypeDeclaration;
+import org.eclipse.xtend.lib.macro.declaration.AnnotationTypeElementDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.ClassDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.CompilationStrategy;
 import org.eclipse.xtend.lib.macro.declaration.CompilationStrategy.CompilationContext;
@@ -37,6 +41,61 @@ import org.junit.Test;
 public class DeclarationsTest extends AbstractXtendTestCase {
   @Inject
   private Provider<CompilationUnitImpl> compilationUnitProvider;
+  
+  @Test
+  public void testAnnotation() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("@SuppressWarnings(\"unused\")");
+    _builder.newLine();
+    _builder.append("class MyClass {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("@com.google.inject.Inject(optional=true) MyClass foo");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    _builder.newLine();
+    XtendFile _validFile = this.validFile(_builder);
+    final Procedure1<CompilationUnit> _function = new Procedure1<CompilationUnit>() {
+        public void apply(final CompilationUnit it) {
+          String _packageName = it.getPackageName();
+          Assert.assertNull(_packageName);
+          List<? extends TypeDeclaration> _sourceTypeDeclarations = it.getSourceTypeDeclarations();
+          TypeDeclaration _head = IterableExtensions.head(_sourceTypeDeclarations);
+          final ClassDeclaration clazz = ((ClassDeclaration) _head);
+          String _name = clazz.getName();
+          Assert.assertEquals("MyClass", _name);
+          List<AnnotationReference> _annotations = clazz.getAnnotations();
+          final AnnotationReference suppressWarning = IterableExtensions.<AnnotationReference>head(_annotations);
+          final AnnotationTypeDeclaration supressWarningsDeclaration = suppressWarning.getAnnotationTypeDeclaration();
+          String _name_1 = supressWarningsDeclaration.getName();
+          Assert.assertEquals("java.lang.SuppressWarnings", _name_1);
+          Object _value = suppressWarning.getValue("value");
+          Assert.assertEquals("unused", _value);
+          List<AnnotationReference> _annotations_1 = supressWarningsDeclaration.getAnnotations();
+          int _size = _annotations_1.size();
+          Assert.assertEquals(2, _size);
+          List<? extends MemberDeclaration> _members = supressWarningsDeclaration.getMembers();
+          Iterable<AnnotationTypeElementDeclaration> _filter = Iterables.<AnnotationTypeElementDeclaration>filter(_members, AnnotationTypeElementDeclaration.class);
+          final AnnotationTypeElementDeclaration valueProperty = IterableExtensions.<AnnotationTypeElementDeclaration>head(_filter);
+          TypeReference _type = valueProperty.getType();
+          String _string = _type.toString();
+          Assert.assertEquals("String[]", _string);
+          String _name_2 = valueProperty.getName();
+          Assert.assertEquals("value", _name_2);
+          List<? extends MemberDeclaration> _members_1 = clazz.getMembers();
+          MemberDeclaration _head_1 = IterableExtensions.head(_members_1);
+          final FieldDeclaration field = ((FieldDeclaration) _head_1);
+          List<AnnotationReference> _annotations_2 = field.getAnnotations();
+          final AnnotationReference inject = IterableExtensions.<AnnotationReference>head(_annotations_2);
+          Object _value_1 = inject.getValue("optional");
+          Assert.assertTrue((((Boolean) _value_1)).booleanValue());
+        }
+      };
+    this.asCompilationUnit(_validFile, _function);
+  }
   
   @Test
   public void testSimpleClassWithField() {
@@ -161,7 +220,7 @@ public class DeclarationsTest extends AbstractXtendTestCase {
           List<? extends MemberDeclaration> _members_1 = clazz.getMembers();
           MemberDeclaration _head_6 = IterableExtensions.head(_members_1);
           final FieldDeclaration field = ((FieldDeclaration) _head_6);
-          ClassDeclaration _declaringType = field.getDeclaringType();
+          TypeDeclaration _declaringType = field.getDeclaringType();
           Assert.assertSame(clazz, _declaringType);
           String _name_2 = field.getName();
           Assert.assertEquals("myField", _name_2);

@@ -60,6 +60,7 @@ abstract class AbstractActiveAnnotationsTest {
 				import org.eclipse.xtend.lib.macro.TransformationContext
 				import org.eclipse.xtend.lib.macro.TransformationParticipant
 				import org.eclipse.xtend.lib.macro.declaration.MutableFieldDeclaration
+				import org.eclipse.xtend.lib.macro.declaration.MutableClassDeclaration
 
 				@Active(typeof(PropertyProcessor))
 				annotation Property2 { }
@@ -70,13 +71,14 @@ abstract class AbstractActiveAnnotationsTest {
 					override doTransform(List<? extends MutableFieldDeclaration> annotatedSourceFields, TransformationContext context) {
 						ctx = context
 						annotatedSourceFields.forEach [ field |
-							field.declaringType.addMethod(field.getterName) [
+							val declaringType = field.declaringType as MutableClassDeclaration 
+							declaringType.addMethod(field.getterName) [
 								returnType = field.type
 								body = ['''
 									return this.«field.name»;
 								''']
 							]
-							field.declaringType.addMethod('set'+field.name.toFirstUpper) [
+							declaringType.addMethod('set'+field.name.toFirstUpper) [
 								addParameter(field.name, field.type)
 								body = ['''
 									this.«field.name» = «field.name»;

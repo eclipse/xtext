@@ -9,7 +9,7 @@ package org.eclipse.xtend.core.macro.declaration;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtend.core.macro.declaration.CompilationUnitImpl;
-import org.eclipse.xtend.core.macro.declaration.JvmNamedElementImpl;
+import org.eclipse.xtend.core.macro.declaration.JvmAnnotationTargetImpl;
 import org.eclipse.xtend.lib.macro.declaration.MutableExecutableDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.MutableMemberDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.MutableParameterDeclaration;
@@ -19,7 +19,7 @@ import org.eclipse.xtext.common.types.JvmMember;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 
 @SuppressWarnings("all")
-public class JvmParameterDeclarationImpl extends JvmNamedElementImpl<JvmFormalParameter> implements MutableParameterDeclaration {
+public class JvmParameterDeclarationImpl extends JvmAnnotationTargetImpl<JvmFormalParameter> implements MutableParameterDeclaration {
   public TypeReference getType() {
     CompilationUnitImpl _compilationUnit = this.getCompilationUnit();
     JvmFormalParameter _delegate = this.getDelegate();
