@@ -9,6 +9,11 @@ package org.eclipse.xtend.lib.macro.declaration;
 
 import com.google.common.annotations.Beta;
 
+/**
+ * Represents an annotation property.
+ * 
+ * @author Sven Efftinge
+ */
 @Beta
 public interface MutableAnnotationTypeElementDeclaration extends MutableMemberDeclaration, AnnotationTypeElementDeclaration {
 	

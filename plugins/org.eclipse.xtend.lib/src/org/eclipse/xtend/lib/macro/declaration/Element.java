@@ -7,6 +7,11 @@
  *******************************************************************************/
 package org.eclipse.xtend.lib.macro.declaration;
 
+/**
+ * The super type of all AST elements used in this package
+ * 
+ * @author Sven Efftinge
+ */
 public interface Element {
 
 }
