@@ -1,0 +1,15 @@
+/org/eclipse/xtext/xbase/formatting/AbstractFormatter.xtend.txt
+/org/eclipse/xtext/xbase/formatting/BasicFormatterPreferenceKeys.xtend.txt
+/org/eclipse/xtext/xbase/formatting/FormattableDocument.xtend.txt
+/org/eclipse/xtext/xbase/formatting/FormattingDataFactory.xtend.txt
+/org/eclipse/xtext/xbase/formatting/FormattingPreferenceValues.java.txt
+/org/eclipse/xtext/xbase/formatting/HiddenLeafAccess.xtend.txt
+/org/eclipse/xtext/xbase/formatting/IBasicFormatter.java.txt
+/org/eclipse/xtext/xbase/formatting/IFormattingPreferenceValuesProvider.java.txt
+/org/eclipse/xtext/xbase/formatting/NodeModelAccess.xtend.txt
+/org/eclipse/xtext/xbase/formatting/PreferenceKeys.xtend.txt
+/org/eclipse/xtext/xbase/formatting/TextReplacement.xtend.txt
+/org/eclipse/xtext/xbase/formatting/XbaseFormatter.java.txt
+/org/eclipse/xtext/xbase/formatting/XbaseFormatter2.xtend.txt
+/org/eclipse/xtext/xbase/formatting/XbaseFormatterConfigKeys.xtend.txt
+/org/eclipse/xtext/xbase/formatting/XtypeFormatter.java.txt
