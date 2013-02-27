@@ -13,7 +13,7 @@ import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmSpecializedTypeReference;
 import org.eclipse.xtext.linking.lazy.LazyLinker;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
-import org.eclipse.xtext.xbase.XbasePackage;
+import org.eclipse.xtext.xbase.XClosure;
 import org.eclipse.xtext.xtype.XtypePackage;
 
 /**
@@ -34,9 +34,11 @@ public class XbaseLazyLinker extends LazyLinker {
 			if (ref == XtypePackage.Literals.XFUNCTION_TYPE_REF__TYPE) {
 				obj.eUnset(ref);
 			}
-		} else if (obj instanceof JvmFormalParameter && obj.eContainingFeature() == XbasePackage.Literals.XCLOSURE__IMPLICIT_PARAMETER) {
-			JvmFormalParameter parameter = (JvmFormalParameter) obj;
-			parameter.setParameterType(null);
+		} else if (obj instanceof XClosure) {
+			// EMF 2.5 does not dive into derived contained things thus we do it explicitly
+			JvmFormalParameter implicitParameter = ((XClosure) obj).getImplicitParameter();
+			if (implicitParameter != null)
+				implicitParameter.setParameterType(null);
 		}
 	}
 
