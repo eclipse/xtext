@@ -1,3 +1,10 @@
+/**
+ * Copyright (c) 2013 itemis AG (http://www.itemis.eu) and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ */
 package org.eclipse.xtend.core.macro.declaration;
 
 import com.google.common.base.Objects;
@@ -55,10 +62,6 @@ public class ProblemSupportImpl implements ProblemSupport {
     int _minus = (-1);
     EObjectDiagnosticImpl _eObjectDiagnosticImpl = new EObjectDiagnosticImpl(Severity.ERROR, "user.issue", message, _value, _significantFeature, _minus, null);
     _errors.add(_eObjectDiagnosticImpl);
-  }
-  
-  public void addInfo(final Element element, final String message) {
-    this.checkCanceled();
   }
   
   public void addWarning(final Element element, final String message) {
