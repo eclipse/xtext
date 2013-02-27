@@ -8,7 +8,6 @@
 package org.eclipse.xtext.ui.editor;
 
 import java.util.Collection;
-import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -120,8 +119,8 @@ public class DirtyStateEditorSupport implements IXtextModelListener, IResourceDe
 					if (resource == null || resource.getResourceSet() == null)
 						return null;
 					Collection<Resource> affectedResources = collectAffectedResources(resource, event.getFirst());
-					if (monitor.isCanceled())
-						return Collections.emptySet();
+					if (monitor.isCanceled() || !affectedResources.isEmpty())
+						return affectedResources;
 					isReparseRequired[0] = isReparseRequired(resource, event.getFirst());
 					return affectedResources;
 				}
