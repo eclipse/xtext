@@ -50,7 +50,7 @@ public abstract class AbstractEObjectHover extends AbstractHover implements IEOb
 		if(xtextDocument == null) 
 			return null;
 		//TODO this is being called on change in the UI-thread. Not a good idea to do such expensive stuff.
-		// returning a region with the given offset and length 0 seems to do it in most cases.
+		// returning the region on a per token basis would be better.
 		return xtextDocument.readOnly(new IUnitOfWork<IRegion, XtextResource>() {
 			public IRegion exec(XtextResource state) throws Exception {
 				// resource can be null e.g. read only zip/jar entry
