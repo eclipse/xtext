@@ -207,6 +207,9 @@ public class XtextDocument extends Document implements IXtextDocument {
 			}
 		}
 		
+		/**
+		 * @since 2.4
+		 */
 		@Override
 		public <T> T readOnly(IUnitOfWork<T, XtextResource> work) {
 			Object state = getState();
