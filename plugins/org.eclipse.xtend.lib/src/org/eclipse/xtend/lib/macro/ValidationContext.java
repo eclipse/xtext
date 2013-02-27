@@ -14,8 +14,9 @@ import com.google.common.annotations.Beta;
 /**
  * Provides services for the Validation phase.
  * 
- * @see {@link ValidationParticipant}
  * @author Sven Efftinge
+ * 
+ * @see ValidationParticipant
  */
 @Beta
 public interface ValidationContext extends ProblemSupport {

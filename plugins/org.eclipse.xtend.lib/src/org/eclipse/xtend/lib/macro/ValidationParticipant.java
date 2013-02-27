@@ -19,6 +19,7 @@ import com.google.common.annotations.Beta;
  * The purpose of this phase is to add validation problems
  * 
  * @author Sven Efftinge
+ * @param <T> the type of the annotated source elements
  */
 @Beta
 public interface ValidationParticipant<T extends NamedElement> {

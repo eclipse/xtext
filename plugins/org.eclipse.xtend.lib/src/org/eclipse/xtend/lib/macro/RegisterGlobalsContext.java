@@ -9,10 +9,89 @@ package org.eclipse.xtend.lib.macro;
 
 import com.google.common.annotations.Beta;
 
+/**
+ * Provides services to be used during register-globals phase.
+ * 
+ * @author Sven Efftinge
+ * 
+ * @see RegisterGlobalsParticipant
+ */
 @Beta
 public interface RegisterGlobalsContext {
-	void registerClass(String name);
-	void registerInterface(String name);
-	void registerAnnotation(String name);
-	void registerEnum(String name);
+	
+	/**
+	 * Registers and creates an empty Java class with given qualified name
+	 * 
+	 * If the name's namespace part refers to another derived Java type, this type will become a static member of that type.
+	 * 
+	 * For instance, given an 
+	 * <pre>
+	 *  // creates a type 'MyClass' in the package 'my.pack'
+	 *  registerClass("my.pack.MyClass") 
+	 * 
+	 *  // creates a type 'MyInnerClass' as a member of the type 'my.pack.MyClass'
+	 *  registerClass("my.pack.MyClass.MyInnerClass") 
+	 * </pre>
+	 * 
+	 * @param qualifiedName
+	 * @throws IllegalArgumentException if the qualifiedName conflicts with any existing types.
+	 */
+	void registerClass(String qualifiedName) throws IllegalArgumentException ;
+	
+	/**
+	 * Registers and creates an empty Java interface with given qualified name
+	 * 
+	 * If the name's namespace part refers to another derived Java type, this type will become a static member of that type.
+	 * 
+	 * For instance, given an 
+	 * <pre>
+	 *  // creates a type 'MyClass' in the package 'my.pack'
+	 *  registerClass("my.pack.MyClass") 
+	 * 
+	 *  // creates a type 'MyInnerClass' as a member of the type 'my.pack.MyClass'
+	 *  registerClass("my.pack.MyClass.MyInnerClass") 
+	 * </pre>
+	 * 
+	 * @param qualifiedName
+	 * @throws IllegalArgumentException if the qualifiedName conflicts with any existing types.
+	 */
+	void registerInterface(String qualifiedName) throws IllegalArgumentException ;
+	
+	/**
+	 * Registers and creates an empty Java annotation type with given qualified name
+	 * 
+	 * If the name's namespace part refers to another derived Java type, this type will become a static member of that type.
+	 * 
+	 * For instance, given an 
+	 * <pre>
+	 *  // creates a type 'MyClass' in the package 'my.pack'
+	 *  registerClass("my.pack.MyClass") 
+	 * 
+	 *  // creates a type 'MyInnerClass' as a member of the type 'my.pack.MyClass'
+	 *  registerClass("my.pack.MyClass.MyInnerClass") 
+	 * </pre>
+	 * 
+	 * @param qualifiedName
+	 * @throws IllegalArgumentException if the qualifiedName conflicts with any existing types.
+	 */
+	void registerAnnotation(String qualifiedName) throws IllegalArgumentException ;
+	
+	/**
+	 * Registers and creates an empty Java enumeration type with given qualified name
+	 * 
+	 * If the name's namespace part refers to another derived Java type, this type will become a static member of that type.
+	 * 
+	 * For instance, given an 
+	 * <pre>
+	 *  // creates a type 'MyClass' in the package 'my.pack'
+	 *  registerClass("my.pack.MyClass") 
+	 * 
+	 *  // creates a type 'MyInnerClass' as a member of the type 'my.pack.MyClass'
+	 *  registerClass("my.pack.MyClass.MyInnerClass") 
+	 * </pre>
+	 * 
+	 * @param qualifiedName
+	 * @throws IllegalArgumentException if the qualifiedName conflicts with any existing types.
+	 */
+	void registerEnum(String qualifiedName) throws IllegalArgumentException ;
 }
