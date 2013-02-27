@@ -126,12 +126,6 @@ public class TransformationContextImpl implements TransformationContext {
     _problemSupport.addError(element, message);
   }
   
-  public void addInfo(final Element element, final String message) {
-    CompilationUnitImpl _unit = this.getUnit();
-    ProblemSupport _problemSupport = _unit.getProblemSupport();
-    _problemSupport.addInfo(element, message);
-  }
-  
   public void addWarning(final Element element, final String message) {
     CompilationUnitImpl _unit = this.getUnit();
     ProblemSupport _problemSupport = _unit.getProblemSupport();
