@@ -82,10 +82,6 @@ class TransformationContextImpl implements TransformationContext {
 		unit.problemSupport.addError(element, message)
 	}
 	
-	override addInfo(Element element, String message) {
-		unit.problemSupport.addInfo(element, message)
-	}
-	
 	override addWarning(Element element, String message) {
 		unit.problemSupport.addWarning(element, message)
 	}
