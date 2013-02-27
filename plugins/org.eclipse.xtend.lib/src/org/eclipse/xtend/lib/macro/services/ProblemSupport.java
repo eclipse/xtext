@@ -10,6 +10,7 @@ package org.eclipse.xtend.lib.macro.services;
 import java.util.List;
 
 import org.eclipse.xtend.lib.macro.declaration.Element;
+import org.eclipse.xtend.lib.macro.services.Problem.Severity;
 
 import com.google.common.annotations.Beta;
 
