@@ -245,7 +245,7 @@
 
 	<target name="-addMirrorsURL" if="build.stable">
 		<ant antfile="${ant.file}/../deployment/p2mirrorsAdd.ant" target="addMirrorsUrl" dir="${downloads.area}/updates/${composite.repository.base}">
-			<property name="deployment.repository_root" value="${composite.repository.base}" />
+			<property name="deployment.repository_root" value="${downloads.area}/updates/${composite.repository.base}" />
 		</ant>
 	</target>
 
