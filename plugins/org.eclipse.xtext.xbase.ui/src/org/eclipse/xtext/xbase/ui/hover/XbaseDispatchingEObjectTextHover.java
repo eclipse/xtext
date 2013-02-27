@@ -8,6 +8,7 @@
 package org.eclipse.xtext.xbase.ui.hover;
 
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.jdt.internal.ui.text.JavaWordFinder;
 import org.eclipse.jface.text.IRegion;
 import org.eclipse.jface.text.ITextViewer;
 import org.eclipse.jface.text.Region;
@@ -40,6 +41,10 @@ public class XbaseDispatchingEObjectTextHover extends DispatchingEObjectTextHove
 		IXtextDocument xtextDocument = XtextDocumentUtil.get(textViewer);
 		if(xtextDocument == null || offset<0 || xtextDocument.getLength() < offset) 
 			return null;
+		IRegion word = JavaWordFinder.findWord(xtextDocument, offset);
+		if (word!= null)
+			return word;
+		//TODO return null for non-operators.
 		return new Region(offset, 0);
 	}
 
