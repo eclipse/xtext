@@ -12,7 +12,6 @@ import java.util.List;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.xtend.core.macro.declaration.CompilationUnitImpl;
 import org.eclipse.xtend.core.macro.declaration.JvmMemberDeclarationImpl;
-import org.eclipse.xtend.lib.macro.declaration.MemberDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.MutableMemberDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.MutableTypeDeclaration;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
@@ -28,7 +27,7 @@ public abstract class JvmTypeDeclarationImpl<T extends JvmDeclaredType> extends 
     final Function1<JvmMember,MutableMemberDeclaration> _function = new Function1<JvmMember,MutableMemberDeclaration>() {
         public MutableMemberDeclaration apply(final JvmMember it) {
           CompilationUnitImpl _compilationUnit = JvmTypeDeclarationImpl.this.getCompilationUnit();
-          MemberDeclaration _memberDeclaration = _compilationUnit.toMemberDeclaration(it);
+          MutableMemberDeclaration _memberDeclaration = _compilationUnit.toMemberDeclaration(it);
           return ((MutableMemberDeclaration) _memberDeclaration);
         }
       };

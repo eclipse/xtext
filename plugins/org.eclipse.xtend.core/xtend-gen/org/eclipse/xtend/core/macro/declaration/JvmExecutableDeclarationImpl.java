@@ -15,8 +15,6 @@ import org.eclipse.xtend.lib.macro.declaration.CompilationStrategy;
 import org.eclipse.xtend.lib.macro.declaration.MutableExecutableDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.MutableParameterDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.MutableTypeParameterDeclaration;
-import org.eclipse.xtend.lib.macro.declaration.ParameterDeclaration;
-import org.eclipse.xtend.lib.macro.declaration.TypeParameterDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.TypeReference;
 import org.eclipse.xtend.lib.macro.expression.Expression;
 import org.eclipse.xtext.common.types.JvmExecutable;
@@ -38,7 +36,7 @@ public abstract class JvmExecutableDeclarationImpl<T extends JvmExecutable> exte
     final Function1<JvmTypeParameter,MutableTypeParameterDeclaration> _function = new Function1<JvmTypeParameter,MutableTypeParameterDeclaration>() {
         public MutableTypeParameterDeclaration apply(final JvmTypeParameter it) {
           CompilationUnitImpl _compilationUnit = JvmExecutableDeclarationImpl.this.getCompilationUnit();
-          TypeParameterDeclaration _typeParameterDeclaration = _compilationUnit.toTypeParameterDeclaration(it);
+          MutableTypeParameterDeclaration _typeParameterDeclaration = _compilationUnit.toTypeParameterDeclaration(it);
           return ((MutableTypeParameterDeclaration) _typeParameterDeclaration);
         }
       };
@@ -58,7 +56,7 @@ public abstract class JvmExecutableDeclarationImpl<T extends JvmExecutable> exte
     final Function1<JvmFormalParameter,MutableParameterDeclaration> _function = new Function1<JvmFormalParameter,MutableParameterDeclaration>() {
         public MutableParameterDeclaration apply(final JvmFormalParameter it) {
           CompilationUnitImpl _compilationUnit = JvmExecutableDeclarationImpl.this.getCompilationUnit();
-          ParameterDeclaration _parameterDeclaration = _compilationUnit.toParameterDeclaration(it);
+          MutableParameterDeclaration _parameterDeclaration = _compilationUnit.toParameterDeclaration(it);
           return ((MutableParameterDeclaration) _parameterDeclaration);
         }
       };
@@ -128,7 +126,7 @@ public abstract class JvmExecutableDeclarationImpl<T extends JvmExecutable> exte
       }
     }
     CompilationUnitImpl _compilationUnit = this.getCompilationUnit();
-    TypeParameterDeclaration _typeParameterDeclaration = _compilationUnit.toTypeParameterDeclaration(param);
+    MutableTypeParameterDeclaration _typeParameterDeclaration = _compilationUnit.toTypeParameterDeclaration(param);
     return ((MutableTypeParameterDeclaration) _typeParameterDeclaration);
   }
   
@@ -148,7 +146,7 @@ public abstract class JvmExecutableDeclarationImpl<T extends JvmExecutable> exte
     EList<JvmFormalParameter> _parameters = _delegate.getParameters();
     _parameters.add(param);
     CompilationUnitImpl _compilationUnit_1 = this.getCompilationUnit();
-    ParameterDeclaration _parameterDeclaration = _compilationUnit_1.toParameterDeclaration(param);
+    MutableParameterDeclaration _parameterDeclaration = _compilationUnit_1.toParameterDeclaration(param);
     return ((MutableParameterDeclaration) _parameterDeclaration);
   }
 }

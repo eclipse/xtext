@@ -10,8 +10,8 @@ package org.eclipse.xtend.core.macro.declaration;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtend.core.macro.declaration.CompilationUnitImpl;
 import org.eclipse.xtend.core.macro.declaration.JvmNamedElementImpl;
-import org.eclipse.xtend.lib.macro.declaration.MemberDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.MutableExecutableDeclaration;
+import org.eclipse.xtend.lib.macro.declaration.MutableMemberDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.MutableParameterDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.TypeReference;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
@@ -32,7 +32,7 @@ public class JvmParameterDeclarationImpl extends JvmNamedElementImpl<JvmFormalPa
     CompilationUnitImpl _compilationUnit = this.getCompilationUnit();
     JvmFormalParameter _delegate = this.getDelegate();
     EObject _eContainer = _delegate.eContainer();
-    MemberDeclaration _memberDeclaration = _compilationUnit.toMemberDeclaration(((JvmMember) _eContainer));
+    MutableMemberDeclaration _memberDeclaration = _compilationUnit.toMemberDeclaration(((JvmMember) _eContainer));
     return ((MutableExecutableDeclaration) _memberDeclaration);
   }
   

@@ -97,7 +97,7 @@ public class AnnotationProcessor {
                         public MutableNamedElement apply(final XtendAnnotationTarget it) {
                           CompilationUnitImpl _compilationUnit = ctx.getCompilationUnit();
                           final XtendMemberDeclarationImpl<? extends XtendMember> xtendMember = _compilationUnit.toXtendMemberDeclaration(((XtendMember) it));
-                          return modifyCtx.getGeneratedElement(xtendMember);
+                          return modifyCtx.getPrimaryGeneratedJavaElement(xtendMember);
                         }
                       };
                     final List<MutableNamedElement> map = ListExtensions.<XtendAnnotationTarget, MutableNamedElement>map(_annotatedSourceElements, _function);

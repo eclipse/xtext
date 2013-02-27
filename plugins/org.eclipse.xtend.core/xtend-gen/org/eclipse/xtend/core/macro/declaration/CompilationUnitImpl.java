@@ -25,11 +25,11 @@ import org.eclipse.xtend.core.macro.declaration.JvmConstructorDeclarationImpl;
 import org.eclipse.xtend.core.macro.declaration.JvmFieldDeclarationImpl;
 import org.eclipse.xtend.core.macro.declaration.JvmMethodDeclarationImpl;
 import org.eclipse.xtend.core.macro.declaration.JvmParameterDeclarationImpl;
-import org.eclipse.xtend.core.macro.declaration.JvmTypeDeclarationImpl;
 import org.eclipse.xtend.core.macro.declaration.JvmTypeParameterDeclarationImpl;
 import org.eclipse.xtend.core.macro.declaration.PrimitiveTypeImpl;
 import org.eclipse.xtend.core.macro.declaration.ProblemSupportImpl;
 import org.eclipse.xtend.core.macro.declaration.TypeReferenceImpl;
+import org.eclipse.xtend.core.macro.declaration.TypeReferenceProviderImpl;
 import org.eclipse.xtend.core.macro.declaration.VoidTypeImpl;
 import org.eclipse.xtend.core.macro.declaration.XtendClassDeclarationImpl;
 import org.eclipse.xtend.core.macro.declaration.XtendConstructorDeclarationImpl;
@@ -50,45 +50,41 @@ import org.eclipse.xtend.core.xtend.XtendTypeDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.ClassDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.CompilationStrategy;
 import org.eclipse.xtend.lib.macro.declaration.CompilationUnit;
-import org.eclipse.xtend.lib.macro.declaration.MemberDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.MutableClassDeclaration;
+import org.eclipse.xtend.lib.macro.declaration.MutableDeclaration;
+import org.eclipse.xtend.lib.macro.declaration.MutableMemberDeclaration;
+import org.eclipse.xtend.lib.macro.declaration.MutableNamedElement;
+import org.eclipse.xtend.lib.macro.declaration.MutableParameterDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.MutableTypeDeclaration;
-import org.eclipse.xtend.lib.macro.declaration.ParameterDeclaration;
-import org.eclipse.xtend.lib.macro.declaration.PrimitiveType.Kind;
+import org.eclipse.xtend.lib.macro.declaration.MutableTypeParameterDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.Type;
 import org.eclipse.xtend.lib.macro.declaration.TypeDeclaration;
-import org.eclipse.xtend.lib.macro.declaration.TypeParameterDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.TypeReference;
 import org.eclipse.xtend.lib.macro.declaration.Visibility;
 import org.eclipse.xtend.lib.macro.services.ProblemSupport;
 import org.eclipse.xtend.lib.macro.services.TypeReferenceProvider;
 import org.eclipse.xtext.common.types.JvmAnnotationType;
-import org.eclipse.xtext.common.types.JvmAnyTypeReference;
-import org.eclipse.xtext.common.types.JvmComponentType;
 import org.eclipse.xtext.common.types.JvmConstructor;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmEnumerationType;
 import org.eclipse.xtext.common.types.JvmExecutable;
 import org.eclipse.xtext.common.types.JvmField;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
-import org.eclipse.xtext.common.types.JvmGenericArrayTypeReference;
 import org.eclipse.xtext.common.types.JvmGenericType;
+import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmMember;
 import org.eclipse.xtext.common.types.JvmOperation;
-import org.eclipse.xtext.common.types.JvmParameterizedTypeReference;
 import org.eclipse.xtext.common.types.JvmPrimitiveType;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.JvmVisibility;
 import org.eclipse.xtext.common.types.JvmVoid;
-import org.eclipse.xtext.common.types.JvmWildcardTypeReference;
 import org.eclipse.xtext.common.types.util.TypeReferences;
 import org.eclipse.xtext.xbase.compiler.TypeReferenceSerializer;
 import org.eclipse.xtext.xbase.compiler.output.ITreeAppendable;
 import org.eclipse.xtext.xbase.jvmmodel.JvmTypesBuilder;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
-import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Functions.Function0;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
@@ -101,7 +97,7 @@ import org.eclipse.xtext.xbase.typesystem.references.OwnedConverter;
 import org.eclipse.xtext.xbase.typesystem.util.CommonTypeComputationServices;
 
 @SuppressWarnings("all")
-public class CompilationUnitImpl implements CompilationUnit, TypeReferenceProvider {
+public class CompilationUnitImpl implements CompilationUnit {
   public String getDocComment() {
     UnsupportedOperationException _unsupportedOperationException = new UnsupportedOperationException("Auto-generated function stub");
     throw _unsupportedOperationException;
@@ -140,7 +136,7 @@ public class CompilationUnitImpl implements CompilationUnit, TypeReferenceProvid
     Iterable<JvmDeclaredType> _filter = Iterables.<JvmDeclaredType>filter(_contents, JvmDeclaredType.class);
     final Function1<JvmDeclaredType,MutableTypeDeclaration> _function = new Function1<JvmDeclaredType,MutableTypeDeclaration>() {
         public MutableTypeDeclaration apply(final JvmDeclaredType it) {
-          TypeDeclaration _typeDeclaration = CompilationUnitImpl.this.toTypeDeclaration(it);
+          MutableTypeDeclaration _typeDeclaration = CompilationUnitImpl.this.toTypeDeclaration(it);
           return ((MutableTypeDeclaration) _typeDeclaration);
         }
       };
@@ -202,6 +198,17 @@ public class CompilationUnitImpl implements CompilationUnit, TypeReferenceProvid
     return this._problemSupport;
   }
   
+  private final TypeReferenceProvider _typeReferenceProvider = new Function0<TypeReferenceProvider>() {
+    public TypeReferenceProvider apply() {
+      TypeReferenceProviderImpl _typeReferenceProviderImpl = new TypeReferenceProviderImpl(CompilationUnitImpl.this);
+      return _typeReferenceProviderImpl;
+    }
+  }.apply();
+  
+  public TypeReferenceProvider getTypeReferenceProvider() {
+    return this._typeReferenceProvider;
+  }
+  
   private Map<EObject,Object> identityCache = new Function0<Map<EObject,Object>>() {
     public Map<EObject,Object> apply() {
       HashMap<EObject,Object> _newHashMap = CollectionLiterals.<EObject, Object>newHashMap();
@@ -215,6 +222,10 @@ public class CompilationUnitImpl implements CompilationUnit, TypeReferenceProvid
     return this.associations;
   }
   
+  public TypeReferences getTypeReferences() {
+    return this.typeReferences;
+  }
+  
   public void setXtendFile(final XtendFile xtendFile) {
     this._xtendFile = xtendFile;
     Resource _eResource = xtendFile.eResource();
@@ -226,6 +237,10 @@ public class CompilationUnitImpl implements CompilationUnit, TypeReferenceProvid
   
   private <IN extends EObject, OUT extends Object> OUT getOrCreate(final IN in, final Function1<? super IN,? extends OUT> provider) {
     this.checkCanceled();
+    boolean _equals = ObjectExtensions.operator_equals(in, null);
+    if (_equals) {
+      return null;
+    }
     boolean _containsKey = this.identityCache.containsKey(in);
     if (_containsKey) {
       Object _get = this.identityCache.get(in);
@@ -275,7 +290,7 @@ public class CompilationUnitImpl implements CompilationUnit, TypeReferenceProvid
             if (delegate instanceof JvmDeclaredType) {
               final JvmDeclaredType _jvmDeclaredType = (JvmDeclaredType)delegate;
               _matched=true;
-              TypeDeclaration _typeDeclaration = CompilationUnitImpl.this.toTypeDeclaration(_jvmDeclaredType);
+              MutableTypeDeclaration _typeDeclaration = CompilationUnitImpl.this.toTypeDeclaration(_jvmDeclaredType);
               _switchResult = _typeDeclaration;
             }
           }
@@ -283,7 +298,7 @@ public class CompilationUnitImpl implements CompilationUnit, TypeReferenceProvid
             if (delegate instanceof JvmTypeParameter) {
               final JvmTypeParameter _jvmTypeParameter = (JvmTypeParameter)delegate;
               _matched=true;
-              TypeParameterDeclaration _typeParameterDeclaration = CompilationUnitImpl.this.toTypeParameterDeclaration(_jvmTypeParameter);
+              MutableTypeParameterDeclaration _typeParameterDeclaration = CompilationUnitImpl.this.toTypeParameterDeclaration(_jvmTypeParameter);
               _switchResult = _typeParameterDeclaration;
             }
           }
@@ -324,7 +339,7 @@ public class CompilationUnitImpl implements CompilationUnit, TypeReferenceProvid
     return _orCreate;
   }
   
-  public TypeDeclaration toTypeDeclaration(final JvmDeclaredType delegate) {
+  public MutableTypeDeclaration toTypeDeclaration(final JvmDeclaredType delegate) {
     final Function1<JvmDeclaredType,JvmClassDeclarationImpl> _function = new Function1<JvmDeclaredType,JvmClassDeclarationImpl>() {
         public JvmClassDeclarationImpl apply(final JvmDeclaredType it) {
           JvmClassDeclarationImpl _switchResult = null;
@@ -375,7 +390,7 @@ public class CompilationUnitImpl implements CompilationUnit, TypeReferenceProvid
     return _orCreate;
   }
   
-  public TypeParameterDeclaration toTypeParameterDeclaration(final JvmTypeParameter delegate) {
+  public MutableTypeParameterDeclaration toTypeParameterDeclaration(final JvmTypeParameter delegate) {
     final Function1<JvmTypeParameter,JvmTypeParameterDeclarationImpl> _function = new Function1<JvmTypeParameter,JvmTypeParameterDeclarationImpl>() {
         public JvmTypeParameterDeclarationImpl apply(final JvmTypeParameter it) {
           JvmTypeParameterDeclarationImpl _jvmTypeParameterDeclarationImpl = new JvmTypeParameterDeclarationImpl();
@@ -393,7 +408,7 @@ public class CompilationUnitImpl implements CompilationUnit, TypeReferenceProvid
     return _orCreate;
   }
   
-  public ParameterDeclaration toParameterDeclaration(final JvmFormalParameter delegate) {
+  public MutableParameterDeclaration toParameterDeclaration(final JvmFormalParameter delegate) {
     final Function1<JvmFormalParameter,JvmParameterDeclarationImpl> _function = new Function1<JvmFormalParameter,JvmParameterDeclarationImpl>() {
         public JvmParameterDeclarationImpl apply(final JvmFormalParameter it) {
           JvmParameterDeclarationImpl _jvmParameterDeclarationImpl = new JvmParameterDeclarationImpl();
@@ -411,16 +426,16 @@ public class CompilationUnitImpl implements CompilationUnit, TypeReferenceProvid
     return _orCreate;
   }
   
-  public MemberDeclaration toMemberDeclaration(final JvmMember delegate) {
-    final Function1<JvmMember,MemberDeclaration> _function = new Function1<JvmMember,MemberDeclaration>() {
-        public MemberDeclaration apply(final JvmMember it) {
-          MemberDeclaration _switchResult = null;
+  public MutableMemberDeclaration toMemberDeclaration(final JvmMember delegate) {
+    final Function1<JvmMember,MutableMemberDeclaration> _function = new Function1<JvmMember,MutableMemberDeclaration>() {
+        public MutableMemberDeclaration apply(final JvmMember it) {
+          MutableMemberDeclaration _switchResult = null;
           boolean _matched = false;
           if (!_matched) {
             if (delegate instanceof JvmDeclaredType) {
               final JvmDeclaredType _jvmDeclaredType = (JvmDeclaredType)delegate;
               _matched=true;
-              TypeDeclaration _typeDeclaration = CompilationUnitImpl.this.toTypeDeclaration(_jvmDeclaredType);
+              MutableTypeDeclaration _typeDeclaration = CompilationUnitImpl.this.toTypeDeclaration(_jvmDeclaredType);
               _switchResult = _typeDeclaration;
             }
           }
@@ -472,7 +487,48 @@ public class CompilationUnitImpl implements CompilationUnit, TypeReferenceProvid
           return _switchResult;
         }
       };
-    MemberDeclaration _orCreate = this.<JvmMember, MemberDeclaration>getOrCreate(delegate, _function);
+    MutableMemberDeclaration _orCreate = this.<JvmMember, MutableMemberDeclaration>getOrCreate(delegate, _function);
+    return _orCreate;
+  }
+  
+  public MutableNamedElement toNamedElement(final JvmIdentifiableElement delegate) {
+    final Function1<JvmIdentifiableElement,MutableDeclaration> _function = new Function1<JvmIdentifiableElement,MutableDeclaration>() {
+        public MutableDeclaration apply(final JvmIdentifiableElement it) {
+          MutableDeclaration _switchResult = null;
+          boolean _matched = false;
+          if (!_matched) {
+            if (delegate instanceof JvmMember) {
+              final JvmMember _jvmMember = (JvmMember)delegate;
+              _matched=true;
+              MutableMemberDeclaration _memberDeclaration = CompilationUnitImpl.this.toMemberDeclaration(_jvmMember);
+              _switchResult = _memberDeclaration;
+            }
+          }
+          if (!_matched) {
+            if (delegate instanceof JvmTypeParameter) {
+              final JvmTypeParameter _jvmTypeParameter = (JvmTypeParameter)delegate;
+              _matched=true;
+              MutableTypeParameterDeclaration _typeParameterDeclaration = CompilationUnitImpl.this.toTypeParameterDeclaration(_jvmTypeParameter);
+              _switchResult = _typeParameterDeclaration;
+            }
+          }
+          if (!_matched) {
+            if (delegate instanceof JvmFormalParameter) {
+              final JvmFormalParameter _jvmFormalParameter = (JvmFormalParameter)delegate;
+              _matched=true;
+              MutableParameterDeclaration _parameterDeclaration = CompilationUnitImpl.this.toParameterDeclaration(_jvmFormalParameter);
+              _switchResult = _parameterDeclaration;
+            }
+          }
+          if (!_matched) {
+            String _plus = ("Couldn\'t translate \'" + delegate);
+            UnsupportedOperationException _unsupportedOperationException = new UnsupportedOperationException(_plus);
+            throw _unsupportedOperationException;
+          }
+          return _switchResult;
+        }
+      };
+    MutableDeclaration _orCreate = this.<JvmIdentifiableElement, MutableDeclaration>getOrCreate(delegate, _function);
     return _orCreate;
   }
   
@@ -643,267 +699,6 @@ public class CompilationUnitImpl implements CompilationUnit, TypeReferenceProvid
       };
     XtendTypeParameterDeclarationImpl _orCreate = this.<JvmTypeParameter, XtendTypeParameterDeclarationImpl>getOrCreate(delegate, _function);
     return _orCreate;
-  }
-  
-  public TypeReference getAnyType() {
-    XtendFile _xtendFile = this.getXtendFile();
-    JvmAnyTypeReference _createAnyTypeReference = this.typeReferences.createAnyTypeReference(_xtendFile);
-    TypeReference _typeReference = this.toTypeReference(_createAnyTypeReference);
-    return _typeReference;
-  }
-  
-  public TypeReference getList(final TypeReference param) {
-    TypeReference _newTypeReference = this.newTypeReference("java.util.List", param);
-    return _newTypeReference;
-  }
-  
-  public TypeReference getObject() {
-    XtendFile _xtendFile = this.getXtendFile();
-    JvmType _findDeclaredType = this.typeReferences.findDeclaredType(Object.class, _xtendFile);
-    JvmParameterizedTypeReference _createTypeRef = this.typeReferences.createTypeRef(_findDeclaredType);
-    TypeReference _typeReference = this.toTypeReference(_createTypeRef);
-    return _typeReference;
-  }
-  
-  public TypeReference getPrimitiveBoolean() {
-    TypeReference _newTypeReference = this.newTypeReference("boolean");
-    return _newTypeReference;
-  }
-  
-  public TypeReference getPrimitiveByte() {
-    TypeReference _newTypeReference = this.newTypeReference("byte");
-    return _newTypeReference;
-  }
-  
-  public TypeReference getPrimitiveChar() {
-    TypeReference _newTypeReference = this.newTypeReference("char");
-    return _newTypeReference;
-  }
-  
-  public TypeReference getPrimitiveDouble() {
-    TypeReference _newTypeReference = this.newTypeReference("double");
-    return _newTypeReference;
-  }
-  
-  public TypeReference getPrimitiveFloat() {
-    TypeReference _newTypeReference = this.newTypeReference("float");
-    return _newTypeReference;
-  }
-  
-  public TypeReference getPrimitiveInt() {
-    TypeReference _newTypeReference = this.newTypeReference("int");
-    return _newTypeReference;
-  }
-  
-  public TypeReference getPrimitiveLong() {
-    TypeReference _newTypeReference = this.newTypeReference("long");
-    return _newTypeReference;
-  }
-  
-  public TypeReference getPrimitiveShort() {
-    TypeReference _newTypeReference = this.newTypeReference("short");
-    return _newTypeReference;
-  }
-  
-  public TypeReference getPrimitiveVoid() {
-    TypeReference _newTypeReference = this.newTypeReference("void");
-    return _newTypeReference;
-  }
-  
-  public TypeReference getSet(final TypeReference param) {
-    TypeReference _newTypeReference = this.newTypeReference("java.util.Set", param);
-    return _newTypeReference;
-  }
-  
-  public TypeReference getString() {
-    TypeReference _newTypeReference = this.newTypeReference("java.lang.String");
-    return _newTypeReference;
-  }
-  
-  public TypeReference newArrayTypeReference(final TypeReference componentType) {
-    TypeReference _xblockexpression = null;
-    {
-      this.checkCanceled();
-      JvmTypeReference _jvmTypeReference = this.toJvmTypeReference(componentType);
-      JvmGenericArrayTypeReference _createArrayType = this.typeReferences.createArrayType(_jvmTypeReference);
-      TypeReference _typeReference = this.toTypeReference(_createArrayType);
-      _xblockexpression = (_typeReference);
-    }
-    return _xblockexpression;
-  }
-  
-  public TypeReference newTypeReference(final String typeName, final TypeReference... typeArguments) {
-    TypeReference _xblockexpression = null;
-    {
-      this.checkCanceled();
-      XtendFile _xtendFile = this.getXtendFile();
-      final JvmType type = this.typeReferences.findDeclaredType(typeName, _xtendFile);
-      boolean _equals = ObjectExtensions.operator_equals(type, null);
-      if (_equals) {
-        return null;
-      }
-      final Function1<TypeReference,JvmTypeReference> _function = new Function1<TypeReference,JvmTypeReference>() {
-          public JvmTypeReference apply(final TypeReference it) {
-            JvmTypeReference _jvmTypeReference = CompilationUnitImpl.this.toJvmTypeReference(it);
-            return _jvmTypeReference;
-          }
-        };
-      List<JvmTypeReference> _map = ListExtensions.<TypeReference, JvmTypeReference>map(((List<TypeReference>)Conversions.doWrapArray(typeArguments)), _function);
-      JvmParameterizedTypeReference _createTypeRef = this.typeReferences.createTypeRef(type, ((JvmTypeReference[]) ((JvmTypeReference[])Conversions.unwrapArray(_map, JvmTypeReference.class))));
-      TypeReference _typeReference = this.toTypeReference(_createTypeRef);
-      _xblockexpression = (_typeReference);
-    }
-    return _xblockexpression;
-  }
-  
-  public TypeReference newTypeReference(final Type typeDeclaration, final TypeReference... typeArguments) {
-    TypeReference _xblockexpression = null;
-    {
-      this.checkCanceled();
-      JvmComponentType _switchResult = null;
-      boolean _matched = false;
-      if (!_matched) {
-        if (typeDeclaration instanceof JvmTypeDeclarationImpl) {
-          final JvmTypeDeclarationImpl<? extends JvmDeclaredType> _jvmTypeDeclarationImpl = (JvmTypeDeclarationImpl<? extends JvmDeclaredType>)typeDeclaration;
-          _matched=true;
-          JvmDeclaredType _delegate = _jvmTypeDeclarationImpl.getDelegate();
-          _switchResult = _delegate;
-        }
-      }
-      if (!_matched) {
-        if (typeDeclaration instanceof XtendTypeDeclarationImpl) {
-          final XtendTypeDeclarationImpl<? extends XtendTypeDeclaration> _xtendTypeDeclarationImpl = (XtendTypeDeclarationImpl<? extends XtendTypeDeclaration>)typeDeclaration;
-          _matched=true;
-          XtendTypeDeclaration _delegate = _xtendTypeDeclarationImpl.getDelegate();
-          JvmDeclaredType _inferredType = this.associations.getInferredType(_delegate);
-          _switchResult = _inferredType;
-        }
-      }
-      if (!_matched) {
-        if (typeDeclaration instanceof JvmTypeParameterDeclarationImpl) {
-          final JvmTypeParameterDeclarationImpl _jvmTypeParameterDeclarationImpl = (JvmTypeParameterDeclarationImpl)typeDeclaration;
-          _matched=true;
-          JvmTypeParameter _delegate = _jvmTypeParameterDeclarationImpl.getDelegate();
-          _switchResult = _delegate;
-        }
-      }
-      if (!_matched) {
-        if (typeDeclaration instanceof PrimitiveTypeImpl) {
-          final PrimitiveTypeImpl _primitiveTypeImpl = (PrimitiveTypeImpl)typeDeclaration;
-          _matched=true;
-          TypeReference _switchResult_1 = null;
-          Kind _kind = _primitiveTypeImpl.getKind();
-          final Kind _switchValue = _kind;
-          boolean _matched_1 = false;
-          if (!_matched_1) {
-            if (Objects.equal(_switchValue,Kind.BOOLEAN)) {
-              _matched_1=true;
-              TypeReference _primitiveBoolean = this.getPrimitiveBoolean();
-              _switchResult_1 = _primitiveBoolean;
-            }
-          }
-          if (!_matched_1) {
-            if (Objects.equal(_switchValue,Kind.BYTE)) {
-              _matched_1=true;
-              TypeReference _primitiveByte = this.getPrimitiveByte();
-              _switchResult_1 = _primitiveByte;
-            }
-          }
-          if (!_matched_1) {
-            if (Objects.equal(_switchValue,Kind.CHAR)) {
-              _matched_1=true;
-              TypeReference _primitiveChar = this.getPrimitiveChar();
-              _switchResult_1 = _primitiveChar;
-            }
-          }
-          if (!_matched_1) {
-            if (Objects.equal(_switchValue,Kind.DOUBLE)) {
-              _matched_1=true;
-              TypeReference _primitiveDouble = this.getPrimitiveDouble();
-              _switchResult_1 = _primitiveDouble;
-            }
-          }
-          if (!_matched_1) {
-            if (Objects.equal(_switchValue,Kind.FLOAT)) {
-              _matched_1=true;
-              TypeReference _primitiveFloat = this.getPrimitiveFloat();
-              _switchResult_1 = _primitiveFloat;
-            }
-          }
-          if (!_matched_1) {
-            if (Objects.equal(_switchValue,Kind.INT)) {
-              _matched_1=true;
-              TypeReference _primitiveInt = this.getPrimitiveInt();
-              _switchResult_1 = _primitiveInt;
-            }
-          }
-          if (!_matched_1) {
-            if (Objects.equal(_switchValue,Kind.LONG)) {
-              _matched_1=true;
-              TypeReference _primitiveLong = this.getPrimitiveLong();
-              _switchResult_1 = _primitiveLong;
-            }
-          }
-          if (!_matched_1) {
-            if (Objects.equal(_switchValue,Kind.SHORT)) {
-              _matched_1=true;
-              TypeReference _primitiveShort = this.getPrimitiveShort();
-              _switchResult_1 = _primitiveShort;
-            }
-          }
-          return _switchResult_1;
-        }
-      }
-      if (!_matched) {
-        if (typeDeclaration instanceof VoidTypeImpl) {
-          final VoidTypeImpl _voidTypeImpl = (VoidTypeImpl)typeDeclaration;
-          _matched=true;
-          return this.getPrimitiveVoid();
-        }
-      }
-      if (!_matched) {
-        String _plus = ("couln\'t construct type refernce for type " + typeDeclaration);
-        IllegalArgumentException _illegalArgumentException = new IllegalArgumentException(_plus);
-        throw _illegalArgumentException;
-      }
-      final JvmComponentType type = _switchResult;
-      boolean _equals = ObjectExtensions.operator_equals(type, null);
-      if (_equals) {
-        return null;
-      }
-      final Function1<TypeReference,JvmTypeReference> _function = new Function1<TypeReference,JvmTypeReference>() {
-          public JvmTypeReference apply(final TypeReference it) {
-            JvmTypeReference _jvmTypeReference = CompilationUnitImpl.this.toJvmTypeReference(it);
-            return _jvmTypeReference;
-          }
-        };
-      List<JvmTypeReference> _map = ListExtensions.<TypeReference, JvmTypeReference>map(((List<TypeReference>)Conversions.doWrapArray(typeArguments)), _function);
-      JvmParameterizedTypeReference _createTypeRef = this.typeReferences.createTypeRef(type, ((JvmTypeReference[]) ((JvmTypeReference[])Conversions.unwrapArray(_map, JvmTypeReference.class))));
-      TypeReference _typeReference = this.toTypeReference(_createTypeRef);
-      _xblockexpression = (_typeReference);
-    }
-    return _xblockexpression;
-  }
-  
-  public TypeReference newWildcardTypeReference() {
-    TypeReference _newWildcardTypeReference = this.newWildcardTypeReference(null);
-    return _newWildcardTypeReference;
-  }
-  
-  public TypeReference newWildcardTypeReference(final TypeReference upperBound) {
-    TypeReference _xifexpression = null;
-    boolean _equals = ObjectExtensions.operator_equals(upperBound, null);
-    if (_equals) {
-      JvmWildcardTypeReference _wildCard = this.typeReferences.wildCard();
-      TypeReference _typeReference = this.toTypeReference(_wildCard);
-      _xifexpression = _typeReference;
-    } else {
-      JvmTypeReference _jvmTypeReference = this.toJvmTypeReference(upperBound);
-      JvmWildcardTypeReference _wildCardExtends = this.typeReferences.wildCardExtends(_jvmTypeReference);
-      TypeReference _typeReference_1 = this.toTypeReference(_wildCardExtends);
-      _xifexpression = _typeReference_1;
-    }
-    return _xifexpression;
   }
   
   public JvmTypeReference toJvmTypeReference(final TypeReference typeRef) {

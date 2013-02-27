@@ -1,25 +1,16 @@
 package org.eclipse.xtend.core.macro
 
 import com.google.inject.Inject
-import org.eclipse.emf.ecore.EObject
 import org.eclipse.xtend.core.jvmmodel.IXtendJvmAssociations
-import org.eclipse.xtend.core.macro.declaration.AbstractNamedElementImpl
 import org.eclipse.xtend.core.macro.declaration.CompilationUnitImpl
-import org.eclipse.xtend.lib.macro.declaration.ClassDeclaration
-import org.eclipse.xtend.lib.macro.declaration.ConstructorDeclaration
-import org.eclipse.xtend.lib.macro.declaration.FieldDeclaration
-import org.eclipse.xtend.lib.macro.declaration.MethodDeclaration
-import org.eclipse.xtend.lib.macro.declaration.MutableClassDeclaration
-import org.eclipse.xtend.lib.macro.declaration.MutableConstructorDeclaration
-import org.eclipse.xtend.lib.macro.declaration.MutableFieldDeclaration
-import org.eclipse.xtend.lib.macro.declaration.MutableMethodDeclaration
-import org.eclipse.xtend.lib.macro.declaration.MutableNamedElement
-import org.eclipse.xtend.lib.macro.declaration.NamedElement
-import org.eclipse.xtext.common.types.JvmMember
-import org.eclipse.xtend.lib.macro.declaration.Element
+import org.eclipse.xtend.core.macro.declaration.JvmNamedElementImpl
+import org.eclipse.xtend.core.macro.declaration.XtendNamedElementImpl
 import org.eclipse.xtend.lib.macro.TransformationContext
-import org.eclipse.xtend.lib.macro.declaration.TypeReference
+import org.eclipse.xtend.lib.macro.declaration.Element
+import org.eclipse.xtend.lib.macro.declaration.NamedElement
 import org.eclipse.xtend.lib.macro.declaration.Type
+import org.eclipse.xtend.lib.macro.declaration.TypeReference
+import org.eclipse.xtext.common.types.JvmIdentifiableElement
 
 class TransformationContextImpl implements TransformationContext {
 	
@@ -27,57 +18,36 @@ class TransformationContextImpl implements TransformationContext {
 	
 	@Property CompilationUnitImpl unit
 	
-	private def CompilationUnitImpl unit(NamedElement element) {
-		element.compilationUnit as CompilationUnitImpl
-	}
-	
-	private def EObject delegate(NamedElement element) {
-		switch element { 
-			AbstractNamedElementImpl<? extends EObject> : element.delegate
-		}
-	}
-	
-	override getGeneratedClass(ClassDeclaration source) {
-		getGeneratedElement(source) as MutableClassDeclaration
-	}
-	
-	override getGeneratedConstructor(ConstructorDeclaration source) {
-		getGeneratedElement(source) as MutableConstructorDeclaration
-	}
-	
-	override getGeneratedElement(NamedElement source) {
-		val generated = associations.getJvmElements(source.delegate).head as JvmMember
-		source.unit.toMemberDeclaration(generated) as MutableNamedElement
-	}
-	
-	override getGeneratedField(FieldDeclaration source) {
-		getGeneratedElement(source) as MutableFieldDeclaration
-	}
-	
-	override getGeneratedMethod(MethodDeclaration source) {
-		getGeneratedElement(source) as MutableMethodDeclaration
-	}
-	
 	override isExternal(NamedElement element) {
-		throw new UnsupportedOperationException("Auto-generated function stub")
+		!isSource(element) && !isGenerated(element)
 	}
 	
 	override isGenerated(NamedElement element) {
-		throw new UnsupportedOperationException("Auto-generated function stub")
+		switch element {
+			JvmNamedElementImpl<? extends JvmIdentifiableElement> : {
+				return element.delegate.eResource == unit.xtendFile.eResource
+			}
+			default: false
+		}
 	}
 	
 	override isSource(NamedElement element) {
-		throw new UnsupportedOperationException("Auto-generated function stub")
+		element instanceof XtendNamedElementImpl<?>
+	}
+	
+	override getPrimaryGeneratedJavaElement(NamedElement source) {
+		if (isSource(source)) {
+			val derivedElement = associations.getJvmElements((source as XtendNamedElementImpl<?>).delegate).filter(typeof(JvmIdentifiableElement)).head
+			if (derivedElement != null)
+				return unit.toNamedElement(derivedElement)
+		}
+		return null
 	}
 
 	override findGeneratedClass(String name) {
 		throw new UnsupportedOperationException("Auto-generated function stub")
 	}
 	
-	override getTypeReferenceProvider() {
-		return unit
-	}
-
 	override addError(Element element, String message) {
 		unit.problemSupport.addError(element, message)
 	}
@@ -91,79 +61,79 @@ class TransformationContextImpl implements TransformationContext {
 	}
 	
 	override getAnyType() {
-		unit.anyType
+		unit.typeReferenceProvider.anyType
 	}
 	
 	override getList(TypeReference param) {
-		unit.getList(param)
+		unit.typeReferenceProvider.getList(param)
 	}
 	
 	override getObject() {
-		unit.getObject
+		unit.typeReferenceProvider.getObject
 	}
 	
 	override getPrimitiveBoolean() {
-		unit.primitiveBoolean
+		unit.typeReferenceProvider.primitiveBoolean
 	}
 	
 	override getPrimitiveByte() {
-		unit.primitiveByte
+		unit.typeReferenceProvider.primitiveByte
 	}
 	
 	override getPrimitiveChar() {
-		unit.primitiveChar
+		unit.typeReferenceProvider.primitiveChar
 	}
 	
 	override getPrimitiveDouble() {
-		unit.primitiveDouble
+		unit.typeReferenceProvider.primitiveDouble
 	}
 	
 	override getPrimitiveFloat() {
-		unit.primitiveFloat
+		unit.typeReferenceProvider.primitiveFloat
 	}
 	
 	override getPrimitiveInt() {
-		unit.primitiveInt
+		unit.typeReferenceProvider.primitiveInt
 	}
 	
 	override getPrimitiveLong() {
-		unit.primitiveLong
+		unit.typeReferenceProvider.primitiveLong
 	}
 	
 	override getPrimitiveShort() {
-		unit.primitiveShort
+		unit.typeReferenceProvider.primitiveShort
 	}
 	
 	override getPrimitiveVoid() {
-		unit.primitiveVoid
+		unit.typeReferenceProvider.primitiveVoid
 	}
 	
 	override getSet(TypeReference param) {
-		unit.getSet(param)
+		unit.typeReferenceProvider.getSet(param)
 	}
 	
 	override getString() {
-		unit.string
+		unit.typeReferenceProvider.string
 	}
 	
 	override newArrayTypeReference(TypeReference componentType) {
-		unit.newArrayTypeReference(componentType)
+		unit.typeReferenceProvider.newArrayTypeReference(componentType)
 	}
 	
 	override newTypeReference(String typeName, TypeReference... typeArguments) {
-		unit.newTypeReference(typeName, typeArguments)
+		unit.typeReferenceProvider.newTypeReference(typeName, typeArguments)
 	}
 	
 	override newTypeReference(Type typeDeclaration, TypeReference... typeArguments) {
-		unit.newTypeReference(typeDeclaration, typeArguments)
+		unit.typeReferenceProvider.newTypeReference(typeDeclaration, typeArguments)
 	}
 	
 	override newWildcardTypeReference() {
-		unit.newWildcardTypeReference
+		unit.typeReferenceProvider.newWildcardTypeReference
 	}
 	
 	override newWildcardTypeReference(TypeReference upperBound) {
-		unit.newWildcardTypeReference(upperBound)
+		unit.typeReferenceProvider.newWildcardTypeReference(upperBound)
 	}
 	
 }

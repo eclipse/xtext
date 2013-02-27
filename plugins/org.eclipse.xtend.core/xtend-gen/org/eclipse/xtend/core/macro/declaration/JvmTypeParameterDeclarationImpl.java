@@ -11,7 +11,7 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtend.core.macro.declaration.CompilationUnitImpl;
 import org.eclipse.xtend.core.macro.declaration.TypeParameterDeclarationImpl;
-import org.eclipse.xtend.lib.macro.declaration.MemberDeclaration;
+import org.eclipse.xtend.lib.macro.declaration.MutableMemberDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.MutableTypeParameterDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.MutableTypeParameterDeclarator;
 import org.eclipse.xtext.common.types.JvmExecutable;
@@ -24,7 +24,7 @@ public class JvmTypeParameterDeclarationImpl extends TypeParameterDeclarationImp
     CompilationUnitImpl _compilationUnit = this.getCompilationUnit();
     JvmTypeParameter _delegate = this.getDelegate();
     EObject _eContainer = _delegate.eContainer();
-    MemberDeclaration _memberDeclaration = _compilationUnit.toMemberDeclaration(((JvmExecutable) _eContainer));
+    MutableMemberDeclaration _memberDeclaration = _compilationUnit.toMemberDeclaration(((JvmExecutable) _eContainer));
     return ((MutableTypeParameterDeclarator) _memberDeclaration);
   }
   
