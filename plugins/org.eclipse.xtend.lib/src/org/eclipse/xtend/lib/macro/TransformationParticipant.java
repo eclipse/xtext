@@ -10,12 +10,18 @@ package org.eclipse.xtend.lib.macro;
 import java.util.List;
 
 import org.eclipse.xtend.lib.macro.declaration.MutableNamedElement;
+import org.eclipse.xtend.lib.macro.declaration.TypeReference;
 
 import com.google.common.annotations.Beta;
 
 /**
+ * A callback interface for the transformation phase, in which the Xtend AST is translated
+ * to the Java elements. This callback is invoked after the primary translation by the Xtend compiler is done.
  * 
- * @param <T> the type which this processor processes. FeatureCall in case of a regualar macro, or any subtype of AnnotationTarget for active annotations.
+ * It is safe to resolve any {@link TypeReference}s during this phase as long as they are not
+ * inferred from an expression. It's not allowed to resolve any expressions during this phase.
+ * 
+ * @param <T> the type which this processor processes.
  * 
  * @author Sven Efftinge
  */
