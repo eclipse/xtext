@@ -65,7 +65,13 @@ public abstract class AbstractXtendInstallDebugInfoMojo extends AbstractXtendMoj
 
 	protected void collectJavaSourceFile2traceFile(String root, String subdir,
 			Map<String, File> javaSourceFile2traceFile) {
-		for (File child : new File(root + "/" + subdir).listFiles()) {
+		File file = new File(root + "/" + subdir);
+		File[] listFiles = file.listFiles();
+		if (listFiles == null) {
+			getLog().warn("Directory "+ file.getPath() +" is empty. Can't process.");
+			return;
+		}
+		for (File child : listFiles) {
 			String name = child.getName();
 			if (child.isDirectory())
 				collectJavaSourceFile2traceFile(root, subdir + "/" + name, javaSourceFile2traceFile);
