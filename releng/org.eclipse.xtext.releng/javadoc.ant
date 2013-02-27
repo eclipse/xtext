@@ -3,7 +3,7 @@
 
 		<property name="projectName" value="Xtext" />
 
-		<!-- workspace defaults -->
+		<!-- workspace default properties -->
 		<property name="output" value="./javadoc" />
 		<property name="checkoutLocation" value="../.." />
 		<property name="targetPlatform" value="${eclipse.home}" />
