@@ -7,12 +7,20 @@
  *******************************************************************************/
 package org.eclipse.xtend.lib.macro.declaration;
 
+import java.util.List;
+
 import com.google.common.annotations.Beta;
 
 /**
+ * Something that can be annotated
+ * 
  * @author Sven Efftinge
  */
 @Beta
-public interface AnnotationTarget {
+public interface AnnotationTarget extends NamedElement {
 	
+	/**
+	 * @return the annotations this element is annotated with
+	 */
+	List<AnnotationReference> getAnnotations();
 }

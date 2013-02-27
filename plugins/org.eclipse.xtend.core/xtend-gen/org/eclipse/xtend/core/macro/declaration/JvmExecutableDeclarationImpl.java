@@ -37,7 +37,7 @@ public abstract class JvmExecutableDeclarationImpl<T extends JvmExecutable> exte
         public MutableTypeParameterDeclaration apply(final JvmTypeParameter it) {
           CompilationUnitImpl _compilationUnit = JvmExecutableDeclarationImpl.this.getCompilationUnit();
           MutableTypeParameterDeclaration _typeParameterDeclaration = _compilationUnit.toTypeParameterDeclaration(it);
-          return ((MutableTypeParameterDeclaration) _typeParameterDeclaration);
+          return _typeParameterDeclaration;
         }
       };
     List<MutableTypeParameterDeclaration> _map = ListExtensions.<JvmTypeParameter, MutableTypeParameterDeclaration>map(_typeParameters, _function);
@@ -57,7 +57,7 @@ public abstract class JvmExecutableDeclarationImpl<T extends JvmExecutable> exte
         public MutableParameterDeclaration apply(final JvmFormalParameter it) {
           CompilationUnitImpl _compilationUnit = JvmExecutableDeclarationImpl.this.getCompilationUnit();
           MutableParameterDeclaration _parameterDeclaration = _compilationUnit.toParameterDeclaration(it);
-          return ((MutableParameterDeclaration) _parameterDeclaration);
+          return _parameterDeclaration;
         }
       };
     List<MutableParameterDeclaration> _map = ListExtensions.<JvmFormalParameter, MutableParameterDeclaration>map(_parameters, _function);
@@ -126,8 +126,7 @@ public abstract class JvmExecutableDeclarationImpl<T extends JvmExecutable> exte
       }
     }
     CompilationUnitImpl _compilationUnit = this.getCompilationUnit();
-    MutableTypeParameterDeclaration _typeParameterDeclaration = _compilationUnit.toTypeParameterDeclaration(param);
-    return ((MutableTypeParameterDeclaration) _typeParameterDeclaration);
+    return _compilationUnit.toTypeParameterDeclaration(param);
   }
   
   public void setBody(final CompilationStrategy compilationStrategy) {
@@ -146,7 +145,6 @@ public abstract class JvmExecutableDeclarationImpl<T extends JvmExecutable> exte
     EList<JvmFormalParameter> _parameters = _delegate.getParameters();
     _parameters.add(param);
     CompilationUnitImpl _compilationUnit_1 = this.getCompilationUnit();
-    MutableParameterDeclaration _parameterDeclaration = _compilationUnit_1.toParameterDeclaration(param);
-    return ((MutableParameterDeclaration) _parameterDeclaration);
+    return _compilationUnit_1.toParameterDeclaration(param);
   }
 }

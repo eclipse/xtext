@@ -28,7 +28,7 @@ public abstract class JvmTypeDeclarationImpl<T extends JvmDeclaredType> extends 
         public MutableMemberDeclaration apply(final JvmMember it) {
           CompilationUnitImpl _compilationUnit = JvmTypeDeclarationImpl.this.getCompilationUnit();
           MutableMemberDeclaration _memberDeclaration = _compilationUnit.toMemberDeclaration(it);
-          return ((MutableMemberDeclaration) _memberDeclaration);
+          return _memberDeclaration;
         }
       };
     List<MutableMemberDeclaration> _map = ListExtensions.<JvmMember, MutableMemberDeclaration>map(_members, _function);

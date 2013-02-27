@@ -8,6 +8,7 @@
 package org.eclipse.xtend.core.macro.declaration;
 
 import com.google.common.base.Objects;
+import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Iterables;
 import java.util.HashMap;
 import java.util.List;
@@ -15,22 +16,31 @@ import java.util.Map;
 import java.util.concurrent.CancellationException;
 import javax.inject.Inject;
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.xtend.core.jvmmodel.IXtendJvmAssociations;
 import org.eclipse.xtend.core.macro.CompilationContextImpl;
+import org.eclipse.xtend.core.macro.declaration.JvmAnnotationTypeDeclarationImpl;
+import org.eclipse.xtend.core.macro.declaration.JvmAnnotationTypeElementDeclarationImpl;
+import org.eclipse.xtend.core.macro.declaration.JvmBasedAnnotationReferenceImpl;
 import org.eclipse.xtend.core.macro.declaration.JvmClassDeclarationImpl;
 import org.eclipse.xtend.core.macro.declaration.JvmConstructorDeclarationImpl;
+import org.eclipse.xtend.core.macro.declaration.JvmEnumerationTypeDeclarationImpl;
 import org.eclipse.xtend.core.macro.declaration.JvmFieldDeclarationImpl;
+import org.eclipse.xtend.core.macro.declaration.JvmInterfaceDeclarationImpl;
+import org.eclipse.xtend.core.macro.declaration.JvmMemberDeclarationImpl;
 import org.eclipse.xtend.core.macro.declaration.JvmMethodDeclarationImpl;
 import org.eclipse.xtend.core.macro.declaration.JvmParameterDeclarationImpl;
+import org.eclipse.xtend.core.macro.declaration.JvmTypeDeclarationImpl;
 import org.eclipse.xtend.core.macro.declaration.JvmTypeParameterDeclarationImpl;
 import org.eclipse.xtend.core.macro.declaration.PrimitiveTypeImpl;
 import org.eclipse.xtend.core.macro.declaration.ProblemSupportImpl;
 import org.eclipse.xtend.core.macro.declaration.TypeReferenceImpl;
 import org.eclipse.xtend.core.macro.declaration.TypeReferenceProviderImpl;
 import org.eclipse.xtend.core.macro.declaration.VoidTypeImpl;
+import org.eclipse.xtend.core.macro.declaration.XtendAnnotationReferenceImpl;
 import org.eclipse.xtend.core.macro.declaration.XtendClassDeclarationImpl;
 import org.eclipse.xtend.core.macro.declaration.XtendConstructorDeclarationImpl;
 import org.eclipse.xtend.core.macro.declaration.XtendFieldDeclarationImpl;
@@ -47,6 +57,7 @@ import org.eclipse.xtend.core.xtend.XtendFunction;
 import org.eclipse.xtend.core.xtend.XtendMember;
 import org.eclipse.xtend.core.xtend.XtendParameter;
 import org.eclipse.xtend.core.xtend.XtendTypeDeclaration;
+import org.eclipse.xtend.lib.macro.declaration.AnnotationReference;
 import org.eclipse.xtend.lib.macro.declaration.ClassDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.CompilationStrategy;
 import org.eclipse.xtend.lib.macro.declaration.CompilationUnit;
@@ -63,28 +74,48 @@ import org.eclipse.xtend.lib.macro.declaration.TypeReference;
 import org.eclipse.xtend.lib.macro.declaration.Visibility;
 import org.eclipse.xtend.lib.macro.services.ProblemSupport;
 import org.eclipse.xtend.lib.macro.services.TypeReferenceProvider;
+import org.eclipse.xtext.common.types.JvmAnnotationAnnotationValue;
+import org.eclipse.xtext.common.types.JvmAnnotationReference;
 import org.eclipse.xtext.common.types.JvmAnnotationType;
+import org.eclipse.xtext.common.types.JvmAnnotationValue;
+import org.eclipse.xtext.common.types.JvmBooleanAnnotationValue;
+import org.eclipse.xtext.common.types.JvmByteAnnotationValue;
+import org.eclipse.xtext.common.types.JvmCharAnnotationValue;
 import org.eclipse.xtext.common.types.JvmConstructor;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
+import org.eclipse.xtext.common.types.JvmDoubleAnnotationValue;
+import org.eclipse.xtext.common.types.JvmEnumAnnotationValue;
+import org.eclipse.xtext.common.types.JvmEnumerationLiteral;
 import org.eclipse.xtext.common.types.JvmEnumerationType;
 import org.eclipse.xtext.common.types.JvmExecutable;
 import org.eclipse.xtext.common.types.JvmField;
+import org.eclipse.xtext.common.types.JvmFloatAnnotationValue;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
+import org.eclipse.xtext.common.types.JvmIntAnnotationValue;
+import org.eclipse.xtext.common.types.JvmLongAnnotationValue;
 import org.eclipse.xtext.common.types.JvmMember;
 import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmPrimitiveType;
+import org.eclipse.xtext.common.types.JvmShortAnnotationValue;
+import org.eclipse.xtext.common.types.JvmStringAnnotationValue;
 import org.eclipse.xtext.common.types.JvmType;
+import org.eclipse.xtext.common.types.JvmTypeAnnotationValue;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.JvmVisibility;
 import org.eclipse.xtext.common.types.JvmVoid;
 import org.eclipse.xtext.common.types.util.TypeReferences;
+import org.eclipse.xtext.xbase.XExpression;
+import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotation;
 import org.eclipse.xtext.xbase.compiler.TypeReferenceSerializer;
 import org.eclipse.xtext.xbase.compiler.output.ITreeAppendable;
+import org.eclipse.xtext.xbase.interpreter.IEvaluationResult;
+import org.eclipse.xtext.xbase.interpreter.impl.XbaseInterpreter;
 import org.eclipse.xtext.xbase.jvmmodel.JvmTypesBuilder;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
+import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Functions.Function0;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
@@ -98,6 +129,24 @@ import org.eclipse.xtext.xbase.typesystem.util.CommonTypeComputationServices;
 
 @SuppressWarnings("all")
 public class CompilationUnitImpl implements CompilationUnit {
+  public List<AnnotationReference> getAnnotations() {
+    List<AnnotationReference> _emptyList = CollectionLiterals.<AnnotationReference>emptyList();
+    return _emptyList;
+  }
+  
+  public String getName() {
+    XtendFile _xtendFile = this.getXtendFile();
+    Resource _eResource = _xtendFile.eResource();
+    URI _uRI = _eResource.getURI();
+    String _lastSegment = _uRI.lastSegment();
+    String _string = _lastSegment.toString();
+    return _string;
+  }
+  
+  public CompilationUnit getCompilationUnit() {
+    return this;
+  }
+  
   public String getDocComment() {
     UnsupportedOperationException _unsupportedOperationException = new UnsupportedOperationException("Auto-generated function stub");
     throw _unsupportedOperationException;
@@ -137,7 +186,7 @@ public class CompilationUnitImpl implements CompilationUnit {
     final Function1<JvmDeclaredType,MutableTypeDeclaration> _function = new Function1<JvmDeclaredType,MutableTypeDeclaration>() {
         public MutableTypeDeclaration apply(final JvmDeclaredType it) {
           MutableTypeDeclaration _typeDeclaration = CompilationUnitImpl.this.toTypeDeclaration(it);
-          return ((MutableTypeDeclaration) _typeDeclaration);
+          return _typeDeclaration;
         }
       };
     Iterable<MutableTypeDeclaration> _map = IterableExtensions.<JvmDeclaredType, MutableTypeDeclaration>map(_filter, _function);
@@ -186,6 +235,9 @@ public class CompilationUnitImpl implements CompilationUnit {
   
   @Inject
   private IXtendJvmAssociations associations;
+  
+  @Inject
+  private XbaseInterpreter interpreter;
   
   private final ProblemSupport _problemSupport = new Function0<ProblemSupport>() {
     public ProblemSupport apply() {
@@ -340,9 +392,9 @@ public class CompilationUnitImpl implements CompilationUnit {
   }
   
   public MutableTypeDeclaration toTypeDeclaration(final JvmDeclaredType delegate) {
-    final Function1<JvmDeclaredType,JvmClassDeclarationImpl> _function = new Function1<JvmDeclaredType,JvmClassDeclarationImpl>() {
-        public JvmClassDeclarationImpl apply(final JvmDeclaredType it) {
-          JvmClassDeclarationImpl _switchResult = null;
+    final Function1<JvmDeclaredType,JvmTypeDeclarationImpl<? extends JvmDeclaredType>> _function = new Function1<JvmDeclaredType,JvmTypeDeclarationImpl<? extends JvmDeclaredType>>() {
+        public JvmTypeDeclarationImpl<? extends JvmDeclaredType> apply(final JvmDeclaredType it) {
+          JvmTypeDeclarationImpl<? extends JvmDeclaredType> _switchResult = null;
           boolean _matched = false;
           if (!_matched) {
             if (delegate instanceof JvmGenericType) {
@@ -350,7 +402,15 @@ public class CompilationUnitImpl implements CompilationUnit {
               boolean _isInterface = _jvmGenericType.isInterface();
               if (_isInterface) {
                 _matched=true;
-                _switchResult = null;
+                JvmInterfaceDeclarationImpl _jvmInterfaceDeclarationImpl = new JvmInterfaceDeclarationImpl();
+                final Procedure1<JvmInterfaceDeclarationImpl> _function = new Procedure1<JvmInterfaceDeclarationImpl>() {
+                    public void apply(final JvmInterfaceDeclarationImpl it) {
+                      it.setDelegate(_jvmGenericType);
+                      it.setCompilationUnit(CompilationUnitImpl.this);
+                    }
+                  };
+                JvmInterfaceDeclarationImpl _doubleArrow = ObjectExtensions.<JvmInterfaceDeclarationImpl>operator_doubleArrow(_jvmInterfaceDeclarationImpl, _function);
+                _switchResult = _doubleArrow;
               }
             }
           }
@@ -373,20 +433,36 @@ public class CompilationUnitImpl implements CompilationUnit {
             if (delegate instanceof JvmAnnotationType) {
               final JvmAnnotationType _jvmAnnotationType = (JvmAnnotationType)delegate;
               _matched=true;
-              _switchResult = null;
+              JvmAnnotationTypeDeclarationImpl _jvmAnnotationTypeDeclarationImpl = new JvmAnnotationTypeDeclarationImpl();
+              final Procedure1<JvmAnnotationTypeDeclarationImpl> _function = new Procedure1<JvmAnnotationTypeDeclarationImpl>() {
+                  public void apply(final JvmAnnotationTypeDeclarationImpl it) {
+                    it.setDelegate(_jvmAnnotationType);
+                    it.setCompilationUnit(CompilationUnitImpl.this);
+                  }
+                };
+              JvmAnnotationTypeDeclarationImpl _doubleArrow = ObjectExtensions.<JvmAnnotationTypeDeclarationImpl>operator_doubleArrow(_jvmAnnotationTypeDeclarationImpl, _function);
+              _switchResult = _doubleArrow;
             }
           }
           if (!_matched) {
             if (delegate instanceof JvmEnumerationType) {
               final JvmEnumerationType _jvmEnumerationType = (JvmEnumerationType)delegate;
               _matched=true;
-              _switchResult = null;
+              JvmEnumerationTypeDeclarationImpl _jvmEnumerationTypeDeclarationImpl = new JvmEnumerationTypeDeclarationImpl();
+              final Procedure1<JvmEnumerationTypeDeclarationImpl> _function = new Procedure1<JvmEnumerationTypeDeclarationImpl>() {
+                  public void apply(final JvmEnumerationTypeDeclarationImpl it) {
+                    it.setDelegate(_jvmEnumerationType);
+                    it.setCompilationUnit(CompilationUnitImpl.this);
+                  }
+                };
+              JvmEnumerationTypeDeclarationImpl _doubleArrow = ObjectExtensions.<JvmEnumerationTypeDeclarationImpl>operator_doubleArrow(_jvmEnumerationTypeDeclarationImpl, _function);
+              _switchResult = _doubleArrow;
             }
           }
           return _switchResult;
         }
       };
-    JvmClassDeclarationImpl _orCreate = this.<JvmDeclaredType, JvmClassDeclarationImpl>getOrCreate(delegate, _function);
+    JvmTypeDeclarationImpl<? extends JvmDeclaredType> _orCreate = this.<JvmDeclaredType, JvmTypeDeclarationImpl<? extends JvmDeclaredType>>getOrCreate(delegate, _function);
     return _orCreate;
   }
   
@@ -443,15 +519,30 @@ public class CompilationUnitImpl implements CompilationUnit {
             if (delegate instanceof JvmOperation) {
               final JvmOperation _jvmOperation = (JvmOperation)delegate;
               _matched=true;
-              JvmMethodDeclarationImpl _jvmMethodDeclarationImpl = new JvmMethodDeclarationImpl();
-              final Procedure1<JvmMethodDeclarationImpl> _function = new Procedure1<JvmMethodDeclarationImpl>() {
-                  public void apply(final JvmMethodDeclarationImpl it) {
-                    it.setDelegate(_jvmOperation);
-                    it.setCompilationUnit(CompilationUnitImpl.this);
-                  }
-                };
-              JvmMethodDeclarationImpl _doubleArrow = ObjectExtensions.<JvmMethodDeclarationImpl>operator_doubleArrow(_jvmMethodDeclarationImpl, _function);
-              _switchResult = _doubleArrow;
+              JvmMemberDeclarationImpl<JvmOperation> _xifexpression = null;
+              JvmDeclaredType _declaringType = _jvmOperation.getDeclaringType();
+              if ((_declaringType instanceof JvmAnnotationType)) {
+                JvmAnnotationTypeElementDeclarationImpl _jvmAnnotationTypeElementDeclarationImpl = new JvmAnnotationTypeElementDeclarationImpl();
+                final Procedure1<JvmAnnotationTypeElementDeclarationImpl> _function = new Procedure1<JvmAnnotationTypeElementDeclarationImpl>() {
+                    public void apply(final JvmAnnotationTypeElementDeclarationImpl it) {
+                      it.setDelegate(_jvmOperation);
+                      it.setCompilationUnit(CompilationUnitImpl.this);
+                    }
+                  };
+                JvmAnnotationTypeElementDeclarationImpl _doubleArrow = ObjectExtensions.<JvmAnnotationTypeElementDeclarationImpl>operator_doubleArrow(_jvmAnnotationTypeElementDeclarationImpl, _function);
+                _xifexpression = _doubleArrow;
+              } else {
+                JvmMethodDeclarationImpl _jvmMethodDeclarationImpl = new JvmMethodDeclarationImpl();
+                final Procedure1<JvmMethodDeclarationImpl> _function_1 = new Procedure1<JvmMethodDeclarationImpl>() {
+                    public void apply(final JvmMethodDeclarationImpl it) {
+                      it.setDelegate(_jvmOperation);
+                      it.setCompilationUnit(CompilationUnitImpl.this);
+                    }
+                  };
+                JvmMethodDeclarationImpl _doubleArrow_1 = ObjectExtensions.<JvmMethodDeclarationImpl>operator_doubleArrow(_jvmMethodDeclarationImpl, _function_1);
+                _xifexpression = _doubleArrow_1;
+              }
+              _switchResult = _xifexpression;
             }
           }
           if (!_matched) {
@@ -718,5 +809,181 @@ public class CompilationUnitImpl implements CompilationUnit {
         }
       };
     this.typesBuilder.setBody(executable, _function);
+  }
+  
+  public AnnotationReference toAnnotationReference(final XAnnotation delegate) {
+    final Function1<XAnnotation,XtendAnnotationReferenceImpl> _function = new Function1<XAnnotation,XtendAnnotationReferenceImpl>() {
+        public XtendAnnotationReferenceImpl apply(final XAnnotation it) {
+          XtendAnnotationReferenceImpl _xtendAnnotationReferenceImpl = new XtendAnnotationReferenceImpl();
+          final Procedure1<XtendAnnotationReferenceImpl> _function = new Procedure1<XtendAnnotationReferenceImpl>() {
+              public void apply(final XtendAnnotationReferenceImpl it) {
+                it.setDelegate(delegate);
+                it.setCompilationUnit(CompilationUnitImpl.this);
+              }
+            };
+          XtendAnnotationReferenceImpl _doubleArrow = ObjectExtensions.<XtendAnnotationReferenceImpl>operator_doubleArrow(_xtendAnnotationReferenceImpl, _function);
+          return _doubleArrow;
+        }
+      };
+    XtendAnnotationReferenceImpl _orCreate = this.<XAnnotation, XtendAnnotationReferenceImpl>getOrCreate(delegate, _function);
+    return _orCreate;
+  }
+  
+  public AnnotationReference toAnnotationReference(final JvmAnnotationReference delegate) {
+    final Function1<JvmAnnotationReference,JvmBasedAnnotationReferenceImpl> _function = new Function1<JvmAnnotationReference,JvmBasedAnnotationReferenceImpl>() {
+        public JvmBasedAnnotationReferenceImpl apply(final JvmAnnotationReference it) {
+          JvmBasedAnnotationReferenceImpl _jvmBasedAnnotationReferenceImpl = new JvmBasedAnnotationReferenceImpl();
+          final Procedure1<JvmBasedAnnotationReferenceImpl> _function = new Procedure1<JvmBasedAnnotationReferenceImpl>() {
+              public void apply(final JvmBasedAnnotationReferenceImpl it) {
+                it.setDelegate(delegate);
+                it.setCompilationUnit(CompilationUnitImpl.this);
+              }
+            };
+          JvmBasedAnnotationReferenceImpl _doubleArrow = ObjectExtensions.<JvmBasedAnnotationReferenceImpl>operator_doubleArrow(_jvmBasedAnnotationReferenceImpl, _function);
+          return _doubleArrow;
+        }
+      };
+    JvmBasedAnnotationReferenceImpl _orCreate = this.<JvmAnnotationReference, JvmBasedAnnotationReferenceImpl>getOrCreate(delegate, _function);
+    return _orCreate;
+  }
+  
+  public Object translateAnnotationValue(final JvmAnnotationValue value) {
+    List<? extends Object> _switchResult = null;
+    boolean _matched = false;
+    if (!_matched) {
+      if (value instanceof JvmTypeAnnotationValue) {
+        final JvmTypeAnnotationValue _jvmTypeAnnotationValue = (JvmTypeAnnotationValue)value;
+        _matched=true;
+        EList<JvmTypeReference> _values = _jvmTypeAnnotationValue.getValues();
+        final Function1<JvmTypeReference,TypeReference> _function = new Function1<JvmTypeReference,TypeReference>() {
+            public TypeReference apply(final JvmTypeReference it) {
+              TypeReference _typeReference = CompilationUnitImpl.this.toTypeReference(it);
+              return _typeReference;
+            }
+          };
+        List<TypeReference> _map = ListExtensions.<JvmTypeReference, TypeReference>map(_values, _function);
+        _switchResult = _map;
+      }
+    }
+    if (!_matched) {
+      if (value instanceof JvmAnnotationAnnotationValue) {
+        final JvmAnnotationAnnotationValue _jvmAnnotationAnnotationValue = (JvmAnnotationAnnotationValue)value;
+        _matched=true;
+        EList<JvmAnnotationReference> _values = _jvmAnnotationAnnotationValue.getValues();
+        final Function1<JvmAnnotationReference,AnnotationReference> _function = new Function1<JvmAnnotationReference,AnnotationReference>() {
+            public AnnotationReference apply(final JvmAnnotationReference it) {
+              AnnotationReference _annotationReference = CompilationUnitImpl.this.toAnnotationReference(it);
+              return _annotationReference;
+            }
+          };
+        List<AnnotationReference> _map = ListExtensions.<JvmAnnotationReference, AnnotationReference>map(_values, _function);
+        _switchResult = _map;
+      }
+    }
+    if (!_matched) {
+      if (value instanceof JvmStringAnnotationValue) {
+        final JvmStringAnnotationValue _jvmStringAnnotationValue = (JvmStringAnnotationValue)value;
+        _matched=true;
+        EList<String> _values = _jvmStringAnnotationValue.getValues();
+        _switchResult = _values;
+      }
+    }
+    if (!_matched) {
+      if (value instanceof JvmBooleanAnnotationValue) {
+        final JvmBooleanAnnotationValue _jvmBooleanAnnotationValue = (JvmBooleanAnnotationValue)value;
+        _matched=true;
+        EList<Boolean> _values = _jvmBooleanAnnotationValue.getValues();
+        _switchResult = _values;
+      }
+    }
+    if (!_matched) {
+      if (value instanceof JvmIntAnnotationValue) {
+        final JvmIntAnnotationValue _jvmIntAnnotationValue = (JvmIntAnnotationValue)value;
+        _matched=true;
+        EList<Integer> _values = _jvmIntAnnotationValue.getValues();
+        _switchResult = _values;
+      }
+    }
+    if (!_matched) {
+      if (value instanceof JvmByteAnnotationValue) {
+        final JvmByteAnnotationValue _jvmByteAnnotationValue = (JvmByteAnnotationValue)value;
+        _matched=true;
+        EList<Byte> _values = _jvmByteAnnotationValue.getValues();
+        _switchResult = _values;
+      }
+    }
+    if (!_matched) {
+      if (value instanceof JvmCharAnnotationValue) {
+        final JvmCharAnnotationValue _jvmCharAnnotationValue = (JvmCharAnnotationValue)value;
+        _matched=true;
+        EList<Character> _values = _jvmCharAnnotationValue.getValues();
+        _switchResult = _values;
+      }
+    }
+    if (!_matched) {
+      if (value instanceof JvmDoubleAnnotationValue) {
+        final JvmDoubleAnnotationValue _jvmDoubleAnnotationValue = (JvmDoubleAnnotationValue)value;
+        _matched=true;
+        EList<Double> _values = _jvmDoubleAnnotationValue.getValues();
+        _switchResult = _values;
+      }
+    }
+    if (!_matched) {
+      if (value instanceof JvmEnumAnnotationValue) {
+        final JvmEnumAnnotationValue _jvmEnumAnnotationValue = (JvmEnumAnnotationValue)value;
+        _matched=true;
+        EList<JvmEnumerationLiteral> _values = _jvmEnumAnnotationValue.getValues();
+        _switchResult = _values;
+      }
+    }
+    if (!_matched) {
+      if (value instanceof JvmFloatAnnotationValue) {
+        final JvmFloatAnnotationValue _jvmFloatAnnotationValue = (JvmFloatAnnotationValue)value;
+        _matched=true;
+        EList<Float> _values = _jvmFloatAnnotationValue.getValues();
+        _switchResult = _values;
+      }
+    }
+    if (!_matched) {
+      if (value instanceof JvmLongAnnotationValue) {
+        final JvmLongAnnotationValue _jvmLongAnnotationValue = (JvmLongAnnotationValue)value;
+        _matched=true;
+        EList<Long> _values = _jvmLongAnnotationValue.getValues();
+        _switchResult = _values;
+      }
+    }
+    if (!_matched) {
+      if (value instanceof JvmShortAnnotationValue) {
+        final JvmShortAnnotationValue _jvmShortAnnotationValue = (JvmShortAnnotationValue)value;
+        _matched=true;
+        EList<Short> _values = _jvmShortAnnotationValue.getValues();
+        _switchResult = _values;
+      }
+    }
+    if (!_matched) {
+      List<Object> _emptyList = CollectionLiterals.<Object>emptyList();
+      _switchResult = _emptyList;
+    }
+    final List<?> result = _switchResult;
+    int _size = result.size();
+    boolean _greaterThan = (_size > 1);
+    if (_greaterThan) {
+      return ImmutableList.<Object>copyOf(result);
+    }
+    return IterableExtensions.head(result);
+  }
+  
+  public Object evaluate(final XExpression expression) {
+    try {
+      final IEvaluationResult result = this.interpreter.evaluate(expression);
+      Throwable _exception = result.getException();
+      boolean _notEquals = ObjectExtensions.operator_notEquals(_exception, null);
+      if (_notEquals) {
+        throw result.getException();
+      }
+      return result.getResult();
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
   }
 }

@@ -15,10 +15,40 @@ import org.eclipse.xtend.lib.macro.declaration.MutableMethodDeclaration
 import org.eclipse.xtend.lib.macro.declaration.TypeReference
 import org.eclipse.xtend.lib.macro.declaration.Visibility
 import org.junit.Test
+import org.eclipse.xtend.lib.macro.declaration.AnnotationTypeElementDeclaration
 
 class DeclarationsTest extends AbstractXtendTestCase {
 	
 	@Inject Provider<CompilationUnitImpl> compilationUnitProvider
+	
+	@Test def testAnnotation() {
+		validFile('''
+		@SuppressWarnings("unused")
+		class MyClass {
+			
+			@com.google.inject.Inject(optional=true) MyClass foo
+		}
+		
+		''').asCompilationUnit [
+			assertNull(packageName)
+			val clazz = sourceTypeDeclarations.head as ClassDeclaration
+			assertEquals('MyClass', clazz.name)
+			val suppressWarning = clazz.annotations.head
+			val supressWarningsDeclaration = suppressWarning.annotationTypeDeclaration
+			assertEquals('java.lang.SuppressWarnings', supressWarningsDeclaration.name)
+			assertEquals('unused', suppressWarning.getValue('value'))
+			
+			assertEquals(2, supressWarningsDeclaration.annotations.size)
+			
+			val valueProperty = supressWarningsDeclaration.members.filter(typeof(AnnotationTypeElementDeclaration)).head
+			assertEquals("String[]", valueProperty.type.toString)
+			assertEquals("value", valueProperty.name)
+			
+			val field = clazz.members.head as FieldDeclaration
+			val inject = field.annotations.head
+			assertTrue(inject.getValue('optional') as Boolean)
+		]
+	}
 	
 	@Test def testSimpleClassWithField() {
 		validFile('''

@@ -9,9 +9,28 @@ package org.eclipse.xtend.lib.macro.declaration;
 
 import com.google.common.annotations.Beta;
 
+/**
+ * 
+ * @author Sven Efftinge
+ */
 @Beta
 public interface MutableMemberDeclaration extends MutableDeclaration, MemberDeclaration {
+	
+	/**
+	 * Sets the JavaDoc comment for this member
+	 * @param docComment
+	 */
 	public void setDocComment(String docComment);
+	
+	/**
+	 * Sets the {@link Visibility} of this member.
+	 * 
+	 * @param visibility
+	 */
 	public void setVisibility(Visibility visibility);
+	
+	/**
+	 * @return the type declaring this member
+	 */
 	public MutableTypeDeclaration getDeclaringType();
 }

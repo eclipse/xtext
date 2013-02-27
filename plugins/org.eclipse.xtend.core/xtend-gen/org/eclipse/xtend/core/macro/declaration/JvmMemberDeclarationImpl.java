@@ -9,7 +9,7 @@ package org.eclipse.xtend.core.macro.declaration;
 
 import com.google.common.base.Objects;
 import org.eclipse.xtend.core.macro.declaration.CompilationUnitImpl;
-import org.eclipse.xtend.core.macro.declaration.JvmNamedElementImpl;
+import org.eclipse.xtend.core.macro.declaration.JvmAnnotationTargetImpl;
 import org.eclipse.xtend.lib.macro.declaration.MutableMemberDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.MutableTypeDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.Visibility;
@@ -18,7 +18,7 @@ import org.eclipse.xtext.common.types.JvmMember;
 import org.eclipse.xtext.common.types.JvmVisibility;
 
 @SuppressWarnings("all")
-public abstract class JvmMemberDeclarationImpl<T extends JvmMember> extends JvmNamedElementImpl<T> implements MutableMemberDeclaration {
+public abstract class JvmMemberDeclarationImpl<T extends JvmMember> extends JvmAnnotationTargetImpl<T> implements MutableMemberDeclaration {
   public String getDocComment() {
     UnsupportedOperationException _unsupportedOperationException = new UnsupportedOperationException("Auto-Jvm function stub");
     throw _unsupportedOperationException;
@@ -73,7 +73,7 @@ public abstract class JvmMemberDeclarationImpl<T extends JvmMember> extends JvmN
     T _delegate = this.getDelegate();
     JvmDeclaredType _declaringType = _delegate.getDeclaringType();
     MutableTypeDeclaration _typeDeclaration = _compilationUnit.toTypeDeclaration(_declaringType);
-    return ((MutableTypeDeclaration) _typeDeclaration);
+    return _typeDeclaration;
   }
   
   public void setName(final String name) {
