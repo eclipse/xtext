@@ -202,8 +202,8 @@ abstract class AbstractActiveAnnotationsTest {
 		) [
 			val method = generatedClassDeclarations.head.members.filter(typeof(MutableMethodDeclaration)).head
 			val field = generatedClassDeclarations.head.members.filter(typeof(MutableFieldDeclaration)).head
-			assertEquals('field-warning', getProblems(field).head.message)
-			assertEquals('warning', getProblems(method).head.message)
+			assertEquals('field-warning', problemSupport.getProblems(field).head.message)
+			assertEquals('warning', problemSupport.getProblems(method).head.message)
 		]
 	}
 	
