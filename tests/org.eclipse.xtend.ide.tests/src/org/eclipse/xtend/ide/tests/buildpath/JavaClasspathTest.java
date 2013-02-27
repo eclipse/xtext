@@ -26,6 +26,8 @@ import com.google.inject.Inject;
  * @author Dennis Huebner - Initial contribution and API
  */
 public class JavaClasspathTest extends AbstractXtendUITestCase {
+	private static final String TEST_CLAZZ = "import org.eclipse.xtend.lib.Property class Foo { @Property int bar }";
+
 	@Inject
 	private MarkerAssertions markerAssert;
 
@@ -39,12 +41,12 @@ public class JavaClasspathTest extends AbstractXtendUITestCase {
 
 		IFile file = project.getFile("src/Foo.xtend");
 		if (!file.exists())
-			file.create(new StringInputStream("import org.eclipse.xtend.lib.Property class Foo { @Property int bar }"),
+			file.create(new StringInputStream(TEST_CLAZZ),
 					true, null);
-		
+
 		IClasspathEntry jrePath = JavaProjectSetupUtil.getJreContainerClasspathEntry(javaProject);
 		assertNotNull("JRE Lib classpath entry not found.", jrePath);
-		
+
 		JavaProjectSetupUtil.deleteClasspathEntry(javaProject, jrePath.getPath()); // remove JRE Lib
 		IResourcesSetupUtil.waitForAutoBuild();
 		markerAssert.assertErrorMarker(file, IssueCodes.JDK_NOT_ON_CLASSPATH);
@@ -57,13 +59,14 @@ public class JavaClasspathTest extends AbstractXtendUITestCase {
 	@Test
 	public void testJavaSourceLevelMismatch() throws Exception {
 		IProject project = testHelper.getProject();
-		
+
 		// create a fake java.util.List without type param
 		IFile list = project.getFile("src/java.util.List.xtend");
 		list.create(new StringInputStream("package java.util; class List {}"), true, null);
-		
+
 		IFile file = project.getFile("src/Foo.xtend");
-		file.create(new StringInputStream("import org.eclipse.xtend.lib.Property class Foo { @Property int bar }"),
+		if (!file.exists())
+			file.create(new StringInputStream(TEST_CLAZZ),
 					true, null);
 		IResourcesSetupUtil.cleanBuild();
 		IResourcesSetupUtil.waitForAutoBuild();
