@@ -143,4 +143,8 @@ class TypeParameterDeclarationImpl extends AbstractDeclarationImpl<JvmTypeParame
 		compilationUnit.toMemberDeclaration(delegate.eContainer as JvmExecutable) as TypeParameterDeclarator
 	}
 	
+	override getAnnotations() {
+		emptyList
+	}
+	
 }

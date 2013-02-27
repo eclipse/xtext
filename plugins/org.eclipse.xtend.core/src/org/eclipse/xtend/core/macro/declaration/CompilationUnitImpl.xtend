@@ -7,6 +7,8 @@
  *******************************************************************************/
 package org.eclipse.xtend.core.macro.declaration
 
+import com.google.common.collect.ImmutableList
+import java.util.List
 import java.util.Map
 import java.util.concurrent.CancellationException
 import javax.inject.Inject
@@ -21,6 +23,7 @@ import org.eclipse.xtend.core.xtend.XtendFunction
 import org.eclipse.xtend.core.xtend.XtendMember
 import org.eclipse.xtend.core.xtend.XtendParameter
 import org.eclipse.xtend.core.xtend.XtendTypeDeclaration
+import org.eclipse.xtend.lib.macro.declaration.AnnotationReference
 import org.eclipse.xtend.lib.macro.declaration.CompilationStrategy
 import org.eclipse.xtend.lib.macro.declaration.CompilationUnit
 import org.eclipse.xtend.lib.macro.declaration.MutableClassDeclaration
@@ -35,25 +38,42 @@ import org.eclipse.xtend.lib.macro.declaration.Visibility
 import org.eclipse.xtend.lib.macro.services.Problem
 import org.eclipse.xtend.lib.macro.services.ProblemSupport
 import org.eclipse.xtend.lib.macro.services.TypeReferenceProvider
+import org.eclipse.xtext.common.types.JvmAnnotationAnnotationValue
+import org.eclipse.xtext.common.types.JvmAnnotationReference
 import org.eclipse.xtext.common.types.JvmAnnotationType
+import org.eclipse.xtext.common.types.JvmAnnotationValue
+import org.eclipse.xtext.common.types.JvmBooleanAnnotationValue
+import org.eclipse.xtext.common.types.JvmByteAnnotationValue
+import org.eclipse.xtext.common.types.JvmCharAnnotationValue
 import org.eclipse.xtext.common.types.JvmConstructor
 import org.eclipse.xtext.common.types.JvmDeclaredType
+import org.eclipse.xtext.common.types.JvmDoubleAnnotationValue
+import org.eclipse.xtext.common.types.JvmEnumAnnotationValue
 import org.eclipse.xtext.common.types.JvmEnumerationType
 import org.eclipse.xtext.common.types.JvmExecutable
 import org.eclipse.xtext.common.types.JvmField
+import org.eclipse.xtext.common.types.JvmFloatAnnotationValue
 import org.eclipse.xtext.common.types.JvmFormalParameter
 import org.eclipse.xtext.common.types.JvmGenericType
 import org.eclipse.xtext.common.types.JvmIdentifiableElement
+import org.eclipse.xtext.common.types.JvmIntAnnotationValue
+import org.eclipse.xtext.common.types.JvmLongAnnotationValue
 import org.eclipse.xtext.common.types.JvmMember
 import org.eclipse.xtext.common.types.JvmOperation
 import org.eclipse.xtext.common.types.JvmPrimitiveType
+import org.eclipse.xtext.common.types.JvmShortAnnotationValue
+import org.eclipse.xtext.common.types.JvmStringAnnotationValue
 import org.eclipse.xtext.common.types.JvmType
+import org.eclipse.xtext.common.types.JvmTypeAnnotationValue
 import org.eclipse.xtext.common.types.JvmTypeParameter
 import org.eclipse.xtext.common.types.JvmTypeReference
 import org.eclipse.xtext.common.types.JvmVisibility
 import org.eclipse.xtext.common.types.JvmVoid
 import org.eclipse.xtext.common.types.util.TypeReferences
+import org.eclipse.xtext.xbase.XExpression
+import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotation
 import org.eclipse.xtext.xbase.compiler.TypeReferenceSerializer
+import org.eclipse.xtext.xbase.interpreter.impl.XbaseInterpreter
 import org.eclipse.xtext.xbase.jvmmodel.JvmTypesBuilder
 import org.eclipse.xtext.xbase.typesystem.legacy.StandardTypeReferenceOwner
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference
@@ -61,6 +81,18 @@ import org.eclipse.xtext.xbase.typesystem.references.OwnedConverter
 import org.eclipse.xtext.xbase.typesystem.util.CommonTypeComputationServices
 
 class CompilationUnitImpl implements CompilationUnit {
+	
+	override getAnnotations() {
+		emptyList
+	}
+	
+	override getName() {
+		xtendFile.eResource.URI.lastSegment.toString
+	}
+	
+	override getCompilationUnit() {
+		this
+	}
 
 	override getDocComment() {
 		throw new UnsupportedOperationException("Auto-generated function stub")
@@ -79,8 +111,7 @@ class CompilationUnitImpl implements CompilationUnit {
 	}
 
 	override getGeneratedTypeDeclarations() {
-		xtendFile.eResource.contents.filter(typeof(JvmDeclaredType)).map[toTypeDeclaration(it) as MutableTypeDeclaration].
-			toList
+		xtendFile.eResource.contents.filter(typeof(JvmDeclaredType)).map[toTypeDeclaration(it)].toList
 	}
 
 	override getGeneratedClassDeclarations() {
@@ -104,6 +135,7 @@ class CompilationUnitImpl implements CompilationUnit {
 	@Inject JvmTypesBuilder typesBuilder
 	@Inject TypeReferenceSerializer typeRefSerializer
 	@Inject IXtendJvmAssociations associations
+	@Inject XbaseInterpreter interpreter
 	
 	@Property val ProblemSupport problemSupport = new ProblemSupportImpl(this)
 	@Property val TypeReferenceProvider typeReferenceProvider = new TypeReferenceProviderImpl(this)
@@ -169,20 +201,25 @@ class CompilationUnitImpl implements CompilationUnit {
 		getOrCreate(delegate) [
 			switch delegate {
 				JvmGenericType case delegate.isInterface:
-					null
-				//					new InterfaceDeclarationJavaImpl => [
-				//						it.delegate = delegate 
-				//						it.compilationUnit = this
-				//					]
+					new JvmInterfaceDeclarationImpl => [
+						it.delegate = delegate 
+						it.compilationUnit = this
+					]
 				JvmGenericType:
 					new JvmClassDeclarationImpl => [
 						it.delegate = delegate
 						it.compilationUnit = this
 					]
 				JvmAnnotationType:
-					null //TODO
+					new JvmAnnotationTypeDeclarationImpl => [
+						it.delegate = delegate
+						it.compilationUnit = this
+					]
 				JvmEnumerationType:
-					null //TODO
+					new JvmEnumerationTypeDeclarationImpl => [
+						it.delegate = delegate
+						it.compilationUnit = this
+					]
 			}
 		]}
 
@@ -207,12 +244,19 @@ class CompilationUnitImpl implements CompilationUnit {
 			switch delegate {
 				JvmDeclaredType:
 					toTypeDeclaration(delegate)
-				JvmOperation: 
-					// TODO handle annotation properties	
-					new JvmMethodDeclarationImpl => [
-						it.delegate = delegate
-						it.compilationUnit = this
-					]
+				JvmOperation: {
+					if (delegate.declaringType instanceof JvmAnnotationType) {
+						new JvmAnnotationTypeElementDeclarationImpl => [
+							it.delegate = delegate
+							it.compilationUnit = this
+						]
+					} else {
+						new JvmMethodDeclarationImpl => [
+							it.delegate = delegate
+							it.compilationUnit = this
+						]
+					}
+				} 
 				JvmConstructor:
 					new JvmConstructorDeclarationImpl => [
 						it.delegate = delegate
@@ -324,6 +368,53 @@ class CompilationUnitImpl implements CompilationUnit {
 			val context = new CompilationContextImpl(it, this, typeRefSerializer)
 			it.append(compilationStrategy.compile(context))
 		]
+	}
+	
+	def AnnotationReference toAnnotationReference(XAnnotation delegate) {
+		getOrCreate(delegate) [
+			new XtendAnnotationReferenceImpl => [
+				it.delegate = delegate
+				it.compilationUnit = this
+			]
+		]
+	}
+	
+	def AnnotationReference toAnnotationReference(JvmAnnotationReference delegate) {
+		getOrCreate(delegate) [
+			new JvmBasedAnnotationReferenceImpl => [
+				it.delegate = delegate
+				it.compilationUnit = this
+			]
+		]
+	}
+	
+	
+	def translateAnnotationValue(JvmAnnotationValue value) {
+		val List<?> result = switch value {
+			JvmTypeAnnotationValue : value.values.map[toTypeReference(it)]
+			JvmAnnotationAnnotationValue : value.values.map[toAnnotationReference(it)]
+			JvmStringAnnotationValue : value.values
+			JvmBooleanAnnotationValue : value.values
+			JvmIntAnnotationValue : value.values
+			JvmByteAnnotationValue : value.values
+			JvmCharAnnotationValue : value.values
+			JvmDoubleAnnotationValue : value.values
+			JvmEnumAnnotationValue : value.values
+			JvmFloatAnnotationValue : value.values
+			JvmLongAnnotationValue : value.values
+			JvmShortAnnotationValue : value.values
+			default : emptyList
+		}
+		if (result.size > 1)
+			return ImmutableList::copyOf(result)
+		return result.head
+	}
+	
+	def evaluate(XExpression expression) {
+		val result = interpreter.evaluate(expression)
+		if (result.exception != null)
+			throw result.exception
+		return result.result
 	}
 	
 }

@@ -31,11 +31,25 @@ import org.eclipse.xtext.common.types.JvmUpperBound
 import org.eclipse.xtend.lib.macro.declaration.ExecutableDeclaration
 import org.eclipse.emf.ecore.EObject
 import org.eclipse.xtend.lib.macro.declaration.NamedElement
+import org.eclipse.xtend.core.xtend.XtendAnnotationTarget
+import org.eclipse.xtend.lib.macro.declaration.AnnotationTarget
+import com.google.common.collect.ImmutableList
+import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotation
+import org.eclipse.xtend.lib.macro.declaration.AnnotationReference
+import org.eclipse.xtend.lib.macro.declaration.AnnotationTypeDeclaration
 
 abstract class XtendNamedElementImpl<T extends EObject> extends AbstractNamedElementImpl<T> implements NamedElement {
 }
 
-abstract class XtendMemberDeclarationImpl<T extends XtendMember> extends XtendNamedElementImpl<T> implements MemberDeclaration {
+abstract class XtendAnnotationTargetImpl<T extends XtendAnnotationTarget> extends XtendNamedElementImpl<T> implements AnnotationTarget {
+	
+	override getAnnotations() {
+		ImmutableList::copyOf( this.delegate.annotations.map[compilationUnit.toAnnotationReference(it)].toList )
+	}
+	
+}
+
+abstract class XtendMemberDeclarationImpl<T extends XtendMember> extends XtendAnnotationTargetImpl<T> implements MemberDeclaration {
 	
 	override getDocComment() {
 		throw new UnsupportedOperationException("Auto-generated function stub")
@@ -190,7 +204,7 @@ class XtendConstructorDeclarationImpl extends XtendMemberDeclarationImpl<XtendCo
 	
 }
 
-class XtendParameterDeclarationImpl extends AbstractDeclarationImpl<XtendParameter> implements ParameterDeclaration {
+class XtendParameterDeclarationImpl extends XtendAnnotationTargetImpl<XtendParameter> implements ParameterDeclaration {
 
 	override getType() {
 		compilationUnit.toTypeReference(delegate.parameterType)
@@ -251,6 +265,32 @@ class XtendTypeParameterDeclarationImpl extends AbstractDeclarationImpl<JvmTypeP
 	override getTypeParameterDeclarator() {
 		val eContainer = delegate.eContainer
 		compilationUnit.toXtendMemberDeclaration(eContainer as XtendMember) as TypeParameterDeclarator
+	}
+	
+	override getAnnotations() {
+		emptyList
+	}
+	
+}
+
+class XtendAnnotationReferenceImpl extends AbstractDeclarationImpl<XAnnotation> implements AnnotationReference {
+	
+	override getAnnotationTypeDeclaration() {
+		compilationUnit.toTypeDeclaration(delegate.annotationType) as AnnotationTypeDeclaration
+	}
+	
+	override getExpression(String property) {
+		throw new UnsupportedOperationException("TODO: auto-generated method stub")
+	}
+	
+	override getValue(String property) {
+		if (property == 'value' && delegate.value != null) {
+			return compilationUnit.evaluate(delegate.value)
+		}
+		val expression = delegate.elementValuePairs.findFirst[element.simpleName == property]?.value
+		if (expression != null)
+			return compilationUnit.evaluate(expression)
+		return null
 	}
 	
 }
