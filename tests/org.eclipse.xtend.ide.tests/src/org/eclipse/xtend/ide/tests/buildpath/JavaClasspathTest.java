@@ -7,8 +7,6 @@
  *******************************************************************************/
 package org.eclipse.xtend.ide.tests.buildpath;
 
-import java.util.Map;
-
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.jdt.core.IClasspathEntry;
@@ -49,7 +47,7 @@ public class JavaClasspathTest extends AbstractXtendUITestCase {
 		
 		JavaProjectSetupUtil.deleteClasspathEntry(javaProject, jrePath.getPath()); // remove JRE Lib
 		IResourcesSetupUtil.waitForAutoBuild();
-		markerAssert.assertErrorMarker(file, IssueCodes.JAVA_IS_MISSING);
+		markerAssert.assertErrorMarker(file, IssueCodes.JDK_NOT_ON_CLASSPATH);
 
 		JavaProjectSetupUtil.addToClasspath(javaProject, jrePath); // add JRE back
 		IResourcesSetupUtil.waitForAutoBuild();
@@ -59,19 +57,19 @@ public class JavaClasspathTest extends AbstractXtendUITestCase {
 	@Test
 	public void testJavaSourceLevelMismatch() throws Exception {
 		IProject project = testHelper.getProject();
-		IJavaProject javaProject = JavaCore.create(project);
-		Map<?, ?> options = javaProject.getOptions(false);
-		JavaCore.setComplianceOptions(JavaCore.VERSION_1_4, options);
-		javaProject.setOptions(options);
+		
+		// create a fake java.util.List without type param
+		IFile list = project.getFile("src/java.util.List.xtend");
+		list.create(new StringInputStream("package java.util; class List {}"), true, null);
+		
 		IFile file = project.getFile("src/Foo.xtend");
-		if (!file.exists())
-			file.create(new StringInputStream("import org.eclipse.xtend.lib.Property class Foo { @Property int bar }"),
+		file.create(new StringInputStream("import org.eclipse.xtend.lib.Property class Foo { @Property int bar }"),
 					true, null);
 		IResourcesSetupUtil.cleanBuild();
 		IResourcesSetupUtil.waitForAutoBuild();
-		markerAssert.assertErrorMarker(file, IssueCodes.JAVA_SOURCE_LEVEL_MISMATCH);
+		markerAssert.assertErrorMarker(file, IssueCodes.JDK_NOT_ON_CLASSPATH);
 
-		JavaProjectSetupUtil.makeJava5Compliant(javaProject);
+		list.delete(true, null);
 		IResourcesSetupUtil.cleanBuild();
 		IResourcesSetupUtil.waitForAutoBuild();
 		markerAssert.assertNoErrorMarker(file);

@@ -339,15 +339,12 @@ public class XtendJavaValidator extends XbaseWithAnnotationsJavaValidator {
 	public void checkClassPath(XtendFile xtendFile) {
 		TypeReferences typeReferences = getServices().getTypeReferences();
 		final JvmGenericType listType = (JvmGenericType) typeReferences.findDeclaredType(List.class, xtendFile);
-		if (listType == null) {
-			error("Java is probably missing on the classpath.", xtendFile, XTEND_FILE__PACKAGE,
-					IssueCodes.JAVA_IS_MISSING);
-		} else if (listType.getTypeParameters().isEmpty()) {
-			error("Xtend requires Java source level 1.5.", xtendFile, XTEND_FILE__PACKAGE,
-					IssueCodes.JAVA_SOURCE_LEVEL_MISMATCH);
+		if (listType == null || listType.getTypeParameters().isEmpty()) {
+			error("Couldn't find a JDK 1.5 or higher on the project's classpath.", xtendFile, XTEND_FILE__PACKAGE,
+					IssueCodes.JDK_NOT_ON_CLASSPATH);
 		} else if (typeReferences.findDeclaredType(StringConcatenation.class, xtendFile) == null
 				|| typeReferences.findDeclaredType(Exceptions.class, xtendFile) == null) {
-			error("Mandatory library bundle 'org.eclipse.xtext.xbase.lib' 2.3.0 or higher not found on the classpath.",
+			error("Couldn't find the mandatory library 'org.eclipse.xtext.xbase.lib' 2.3.0 or higher on the project's classpath.",
 					xtendFile, XTEND_FILE__PACKAGE, IssueCodes.XBASE_LIB_NOT_ON_CLASSPATH);
 		}
 	}
