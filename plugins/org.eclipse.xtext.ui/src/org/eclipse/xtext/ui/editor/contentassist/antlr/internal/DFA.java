@@ -11,6 +11,7 @@ import org.antlr.runtime.IntStream;
 import org.antlr.runtime.NoViableAltException;
 import org.antlr.runtime.RecognitionException;
 import org.antlr.runtime.Token;
+import org.eclipse.xtext.parser.antlr.IUnorderedGroupHelper;
 import org.eclipse.xtext.parser.antlr.XtextTokenStream;
 
 /**
@@ -30,6 +31,13 @@ public class DFA extends org.antlr.runtime.DFA {
 	
 	protected AbstractInternalContentAssistParser getRecognizer() {
 		return (AbstractInternalContentAssistParser) recognizer;
+	}
+	
+	/**
+	 * @since 2.4
+	 */
+	protected IUnorderedGroupHelper getUnorderedGroupHelper() {
+		return getRecognizer().getUnorderedGroupHelper();
 	}
 	
 	/**
