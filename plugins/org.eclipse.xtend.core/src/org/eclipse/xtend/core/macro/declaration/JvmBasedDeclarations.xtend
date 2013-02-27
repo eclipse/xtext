@@ -7,12 +7,20 @@
  *******************************************************************************/
 package org.eclipse.xtend.core.macro.declaration
 
+import com.google.common.collect.ImmutableList
 import java.util.List
+import org.eclipse.xtend.lib.macro.declaration.AnnotationTypeDeclaration
 import org.eclipse.xtend.lib.macro.declaration.CompilationStrategy
+import org.eclipse.xtend.lib.macro.declaration.MutableAnnotationReference
+import org.eclipse.xtend.lib.macro.declaration.MutableAnnotationTarget
+import org.eclipse.xtend.lib.macro.declaration.MutableAnnotationTypeDeclaration
+import org.eclipse.xtend.lib.macro.declaration.MutableAnnotationTypeElementDeclaration
 import org.eclipse.xtend.lib.macro.declaration.MutableClassDeclaration
 import org.eclipse.xtend.lib.macro.declaration.MutableConstructorDeclaration
+import org.eclipse.xtend.lib.macro.declaration.MutableEnumerationTypeDeclaration
 import org.eclipse.xtend.lib.macro.declaration.MutableExecutableDeclaration
 import org.eclipse.xtend.lib.macro.declaration.MutableFieldDeclaration
+import org.eclipse.xtend.lib.macro.declaration.MutableInterfaceDeclaration
 import org.eclipse.xtend.lib.macro.declaration.MutableMemberDeclaration
 import org.eclipse.xtend.lib.macro.declaration.MutableMethodDeclaration
 import org.eclipse.xtend.lib.macro.declaration.MutableNamedElement
@@ -23,8 +31,12 @@ import org.eclipse.xtend.lib.macro.declaration.MutableTypeParameterDeclarator
 import org.eclipse.xtend.lib.macro.declaration.TypeReference
 import org.eclipse.xtend.lib.macro.declaration.Visibility
 import org.eclipse.xtend.lib.macro.expression.Expression
+import org.eclipse.xtext.common.types.JvmAnnotationReference
+import org.eclipse.xtext.common.types.JvmAnnotationTarget
+import org.eclipse.xtext.common.types.JvmAnnotationType
 import org.eclipse.xtext.common.types.JvmConstructor
 import org.eclipse.xtext.common.types.JvmDeclaredType
+import org.eclipse.xtext.common.types.JvmEnumerationType
 import org.eclipse.xtext.common.types.JvmExecutable
 import org.eclipse.xtext.common.types.JvmField
 import org.eclipse.xtext.common.types.JvmFormalParameter
@@ -35,7 +47,6 @@ import org.eclipse.xtext.common.types.JvmOperation
 import org.eclipse.xtext.common.types.JvmVisibility
 import org.eclipse.xtext.common.types.TypesFactory
 import org.eclipse.xtext.xbase.lib.Procedures$Procedure1
-import com.google.common.collect.ImmutableList
 
 abstract class JvmNamedElementImpl<T extends JvmIdentifiableElement> extends AbstractDeclarationImpl<T> implements MutableNamedElement {
 	
@@ -53,7 +64,13 @@ abstract class JvmNamedElementImpl<T extends JvmIdentifiableElement> extends Abs
 	
 }
 
-abstract class JvmMemberDeclarationImpl<T extends JvmMember> extends JvmNamedElementImpl<T> implements MutableMemberDeclaration {
+abstract class JvmAnnotationTargetImpl<T extends JvmAnnotationTarget> extends JvmNamedElementImpl<T> implements MutableAnnotationTarget {
+	override getAnnotations() {
+		ImmutableList::copyOf(delegate.annotations.map[compilationUnit.toAnnotationReference(it)])
+	}	
+}
+
+abstract class JvmMemberDeclarationImpl<T extends JvmMember> extends JvmAnnotationTargetImpl<T> implements MutableMemberDeclaration {
 	
 	override getDocComment() {
 		throw new UnsupportedOperationException("Auto-Jvm function stub")
@@ -77,7 +94,7 @@ abstract class JvmMemberDeclarationImpl<T extends JvmMember> extends JvmNamedEle
 	}
 	
 	override getDeclaringType() {
-		compilationUnit.toTypeDeclaration(delegate.declaringType) as MutableTypeDeclaration
+		compilationUnit.toTypeDeclaration(delegate.declaringType)
 	}
 	
 	override setName(String name) {
@@ -89,7 +106,7 @@ abstract class JvmMemberDeclarationImpl<T extends JvmMember> extends JvmNamedEle
 abstract class JvmTypeDeclarationImpl<T extends JvmDeclaredType> extends JvmMemberDeclarationImpl<T> implements MutableTypeDeclaration {
 	
 	override getMembers() {
-		ImmutableList::copyOf(delegate.members.map[compilationUnit.toMemberDeclaration(it) as MutableMemberDeclaration])
+		ImmutableList::copyOf(delegate.members.map[compilationUnit.toMemberDeclaration(it)])
 	}
 	
 	override getPackageName() {
@@ -122,6 +139,26 @@ abstract class JvmTypeDeclarationImpl<T extends JvmDeclaredType> extends JvmMemb
 			delegate.simpleName = name.substring(idx)
 		}
 	}
+	
+}
+
+class JvmInterfaceDeclarationImpl extends JvmTypeDeclarationImpl<JvmGenericType> implements MutableInterfaceDeclaration {
+	
+	override getSuperInterfaces() {
+		val filtered = delegate.superTypes.filter[(it.type as JvmGenericType).interface]
+		filtered.map[compilationUnit.toTypeReference(it)].toList
+	}
+	
+	override getTypeParameters() {
+		delegate.typeParameters.map[compilationUnit.toTypeParameterDeclaration(it)]
+	}
+}
+
+class JvmAnnotationTypeDeclarationImpl extends JvmTypeDeclarationImpl<JvmAnnotationType> implements MutableAnnotationTypeDeclaration {
+	
+}
+
+class JvmEnumerationTypeDeclarationImpl extends JvmTypeDeclarationImpl<JvmEnumerationType> implements MutableEnumerationTypeDeclaration {
 	
 }
 
@@ -206,22 +243,10 @@ class JvmClassDeclarationImpl extends JvmTypeDeclarationImpl<JvmGenericType> imp
 
 }
 
-//class InterfaceDeclarationJavaImpl extends JvmTypeDeclarationImpl<JvmGenericType> implements JvmInterfaceDeclaration {
-//	
-//	override getSuperInterfaces() {
-//		delegate.superTypes.map[compilationUnit.toTypeReference(it)]
-//	}
-//	
-//	override getTypeParameters() {
-//		delegate.typeParameters.map[compilationUnit.toTypeParameterDeclaration(it)]
-//	}
-//	
-//}
-
 abstract class JvmExecutableDeclarationImpl<T extends JvmExecutable> extends JvmMemberDeclarationImpl<T> implements MutableExecutableDeclaration {
 	
 	override getTypeParameters() {
-		delegate.typeParameters.map[compilationUnit.toTypeParameterDeclaration(it) as MutableTypeParameterDeclaration]
+		delegate.typeParameters.map[compilationUnit.toTypeParameterDeclaration(it)]
 	}
 	
 	override isVarArgs() {
@@ -229,7 +254,7 @@ abstract class JvmExecutableDeclarationImpl<T extends JvmExecutable> extends Jvm
 	}
 	
 	override getParameters() {
-		delegate.parameters.map[compilationUnit.toParameterDeclaration(it) as MutableParameterDeclaration]
+		delegate.parameters.map[compilationUnit.toParameterDeclaration(it)]
 	}
 	
 	override getExceptions() {
@@ -268,7 +293,7 @@ abstract class JvmExecutableDeclarationImpl<T extends JvmExecutable> extends Jvm
 			jvmUpperBound.setTypeReference(typeRef)
 			param.constraints.add(jvmUpperBound)
 		}
-		return compilationUnit.toTypeParameterDeclaration(param) as MutableTypeParameterDeclaration
+		return compilationUnit.toTypeParameterDeclaration(param)
 	}
 	
 	override setBody(CompilationStrategy compilationStrategy) {
@@ -280,12 +305,12 @@ abstract class JvmExecutableDeclarationImpl<T extends JvmExecutable> extends Jvm
 		param.name = name
 		param.parameterType = compilationUnit.toJvmTypeReference(type)
 		delegate.parameters.add(param)
-		return compilationUnit.toParameterDeclaration(param) as MutableParameterDeclaration
+		return compilationUnit.toParameterDeclaration(param)
 	}
 	
 }
 
-class JvmParameterDeclarationImpl extends JvmNamedElementImpl<JvmFormalParameter> implements MutableParameterDeclaration {
+class JvmParameterDeclarationImpl extends JvmAnnotationTargetImpl<JvmFormalParameter> implements MutableParameterDeclaration {
 
 	override getType() {
 		compilationUnit.toTypeReference(delegate.parameterType)
@@ -412,3 +437,35 @@ class JvmTypeParameterDeclarationImpl extends TypeParameterDeclarationImpl imple
 	}
 }
 
+class JvmAnnotationTypeElementDeclarationImpl extends JvmMemberDeclarationImpl<JvmOperation> implements MutableAnnotationTypeElementDeclaration {
+	
+	override getDefaultValue() {
+		return compilationUnit.translateAnnotationValue(delegate.defaultValue)
+	}
+	
+	override getType() {
+		compilationUnit.toTypeReference( delegate.returnType )
+	}
+	
+	override getDefaultValueExpression() {
+		return null
+	}
+	
+}
+
+class JvmBasedAnnotationReferenceImpl extends AbstractDeclarationImpl<JvmAnnotationReference> implements MutableAnnotationReference {
+	
+	override getAnnotationTypeDeclaration() {
+		compilationUnit.toTypeDeclaration(delegate.annotation) as AnnotationTypeDeclaration
+	}
+	
+	override getExpression(String property) {
+		return null
+	}
+	
+	override getValue(String property) {
+		val annotationValue = delegate.values.findFirst[valueName == property]
+		return compilationUnit.translateAnnotationValue(annotationValue)
+	}
+	
+}

@@ -5,14 +5,17 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
+
 package org.eclipse.xtend.lib.macro.declaration;
 
 import com.google.common.annotations.Beta;
 
 /**
+ * Represents an annotation.
+ * 
  * @author Sven Efftinge
  */
 @Beta
-public interface ConstructorDeclaration extends ExecutableDeclaration {
+public interface MutableAnnotationReference extends AnnotationReference {
 	
 }
