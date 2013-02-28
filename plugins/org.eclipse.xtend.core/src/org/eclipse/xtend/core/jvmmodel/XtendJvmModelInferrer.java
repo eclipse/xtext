@@ -483,7 +483,7 @@ public class XtendJvmModelInferrer implements IJvmModelInferrer {
 	}
 
 	protected void appendSyntheticDispatchMethods(XtendClass source, JvmGenericType target) {
-		ListMultimap<DispatchHelper.DispatchSignature, JvmOperation> methods = dispatchHelper.getDeclaredDispatchMethods(target);
+		ListMultimap<DispatchHelper.DispatchSignature, JvmOperation> methods = dispatchHelper.getDeclaredOrEnhancedDispatchMethods(target);
 		for (DispatchHelper.DispatchSignature signature : methods.keySet()) {
 			List<JvmOperation> operations = methods.get(signature);
 			JvmOperation operation = deriveGenericDispatchOperationSignature(operations, target);

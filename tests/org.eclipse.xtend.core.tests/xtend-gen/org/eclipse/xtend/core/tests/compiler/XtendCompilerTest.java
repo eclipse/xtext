@@ -23,6 +23,7 @@ import org.eclipse.xtext.xbase.compiler.JvmModelGenerator;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.junit.Assert;
+import org.junit.Ignore;
 import org.junit.Test;
 
 @SuppressWarnings("all")
@@ -32,6 +33,217 @@ public class XtendCompilerTest extends AbstractXtendTestCase {
   
   @Inject
   private IGeneratorConfigProvider generatorConfigProvider;
+  
+  /**
+   * Do not throw an exception for inherited dispatch methods.
+   */
+  @Test
+  public void testInheritedDispatchMethods_01() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("class C {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def dispatch testFunction1(String s) {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("s.length");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def dispatch testFunction1(Integer i) {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("i.intValue");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("class D extends C {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def dispatch testFunction1(Double d) {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("d.intValue");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("import java.util.Arrays;");
+    _builder_1.newLine();
+    _builder_1.newLine();
+    _builder_1.append("@SuppressWarnings(\"all\")");
+    _builder_1.newLine();
+    _builder_1.append("public class C {");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("protected int _testFunction1(final String s) {");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("int _length = s.length();");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("return _length;");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("protected int _testFunction1(final Integer i) {");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("int _intValue = i.intValue();");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("return _intValue;");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("public int testFunction1(final Object i) {");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("if (i instanceof Integer) {");
+    _builder_1.newLine();
+    _builder_1.append("      ");
+    _builder_1.append("return _testFunction1((Integer)i);");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("} else if (i instanceof String) {");
+    _builder_1.newLine();
+    _builder_1.append("      ");
+    _builder_1.append("return _testFunction1((String)i);");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("} else {");
+    _builder_1.newLine();
+    _builder_1.append("      ");
+    _builder_1.append("throw new IllegalArgumentException(\"Unhandled parameter types: \" +");
+    _builder_1.newLine();
+    _builder_1.append("        ");
+    _builder_1.append("Arrays.<Object>asList(i).toString());");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    this.assertCompilesTo(_builder, _builder_1);
+  }
+  
+  @Ignore("TODO")
+  @Test
+  public void testInheritedDispatchMethods_02() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("class D extends C {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def dispatch testFunction1(Double d) {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("d.intValue");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("class C {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def dispatch testFunction1(String s) {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("s.length");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def dispatch testFunction1(Integer i) {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("i.intValue");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("TODO");
+    _builder_1.newLine();
+    this.assertCompilesTo(_builder, _builder_1);
+  }
+  
+  @Ignore("TODO")
+  @Test
+  public void testInheritedDispatchMethods_03() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("class D extends C {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def dispatch testFunction1(Double d) {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("d.intValue");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def dispatch testFunction1(Number n) {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("n.intValue");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("class C {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def dispatch testFunction1(String s) {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("s.length");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def dispatch testFunction1(Integer i) {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("i.intValue");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("TODO");
+    _builder_1.newLine();
+    this.assertCompilesTo(_builder, _builder_1);
+  }
   
   @Test
   public void testExtensionForArrayOfT_01() {

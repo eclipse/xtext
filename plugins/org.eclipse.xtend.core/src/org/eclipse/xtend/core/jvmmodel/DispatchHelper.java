@@ -199,7 +199,7 @@ public class DispatchHelper {
 	/**
 	 * Return the local cases that are associated with the given dispatch operation.
 	 */
-	public List<JvmOperation> getDispatchCases(JvmOperation dispatcherOperation) {
+	public List<JvmOperation> getLocalDispatchCases(JvmOperation dispatcherOperation) {
 		Set<EObject> sourceElements = associations.getSourceElements(dispatcherOperation);
 		List<JvmOperation> result = Lists.newArrayList();
 		for(EObject sourceElement: sourceElements) {
@@ -210,7 +210,7 @@ public class DispatchHelper {
 					for(EObject jvmElement: jvmElements) {
 						if (jvmElement != dispatcherOperation && jvmElement instanceof JvmOperation) {
 							JvmOperation candidate = (JvmOperation) jvmElement;
-							if (Strings.equal(candidate.getSimpleName(), '_' + function.getName())) {
+							if (candidate.getDeclaringType() == dispatcherOperation.getDeclaringType() && Strings.equal(candidate.getSimpleName(), '_' + function.getName())) {
 								result.add(candidate);
 							}
 						}
@@ -222,14 +222,14 @@ public class DispatchHelper {
 	}
 	
 	/**
-	 * Return the local cases that are associated with the given dispatch operation.
+	 * Return all the cases that are associated with the given dispatch operation.
 	 */
 	public List<JvmOperation> getAllDispatchCases(JvmOperation dispatcherOperation) {
 		DispatchSignature dispatchSignature = new DispatchSignature(dispatcherOperation.getSimpleName(), dispatcherOperation.getParameters().size());
 		JvmDeclaredType type = dispatcherOperation.getDeclaringType();
 		ITypeReferenceOwner owner = new StandardTypeReferenceOwner(services, type);
 		ContextualVisibilityHelper contextualVisibilityHelper = new ContextualVisibilityHelper(visibilityHelper, new ParameterizedTypeReference(owner, type));
-		return getDeclaredDispatchMethods(dispatchSignature, type, contextualVisibilityHelper);
+		return getAllDispatchMethods(dispatchSignature, type, contextualVisibilityHelper);
 	}
 	
 	/**
@@ -248,7 +248,7 @@ public class DispatchHelper {
 	 * 
 	 * @return a mapping from {@link DispatchSignature signature} to sorted operations.
 	 */
-	public ListMultimap<DispatchSignature, JvmOperation> getDeclaredDispatchMethods(JvmDeclaredType type) {
+	public ListMultimap<DispatchSignature, JvmOperation> getDeclaredOrEnhancedDispatchMethods(JvmDeclaredType type) {
 		ListMultimap<DispatchSignature, JvmOperation> result = Multimaps2.newLinkedHashListMultimap(2,4);
 		Iterable<JvmOperation> operations = type.getDeclaredOperations();
 		ITypeReferenceOwner owner = new StandardTypeReferenceOwner(services, type);
@@ -257,7 +257,7 @@ public class DispatchHelper {
 			if (isDispatchFunction(operation)) {
 				DispatchSignature signature = new DispatchSignature(operation.getSimpleName().substring(1), operation.getParameters().size());
 				if (!result.containsKey(signature)) {
-					List<JvmOperation> allOperations = getDeclaredDispatchMethods(signature, type,
+					List<JvmOperation> allOperations = getAllDispatchMethods(signature, type,
 							contextualVisibilityHelper);
 					result.putAll(signature, allOperations);
 				}
@@ -266,7 +266,7 @@ public class DispatchHelper {
 		return result;
 	}
 
-	protected List<JvmOperation> getDeclaredDispatchMethods(DispatchSignature signature, JvmDeclaredType type,
+	protected List<JvmOperation> getAllDispatchMethods(DispatchSignature signature, JvmDeclaredType type,
 			ContextualVisibilityHelper contextualVisibilityHelper) {
 		List<JvmOperation> allOperations = Lists.newArrayListWithExpectedSize(5);
 		Iterable<JvmFeature> allFeatures = type.findAllFeaturesByName(signature.simpleName);
