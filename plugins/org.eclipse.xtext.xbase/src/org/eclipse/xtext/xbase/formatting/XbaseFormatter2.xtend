@@ -697,7 +697,7 @@ class XbaseFormatter2 extends AbstractFormatter {
 	def protected dispatch void format(XSwitchExpression expr, FormattableDocument format) {
 		val containsBlockExpr = expr.cases.exists[then instanceof XBlockExpression]
 		val switchSL = !containsBlockExpr && !expr.nodeForEObject.text.trim.contains("\n")
-		val caseSL = !containsBlockExpr && !expr.cases.exists[nodeForEObject.text.trim.contains("\n")] && !expr?.^default?.nodeForEObject?.text?.contains("\n")
+		val caseSL = !containsBlockExpr && !expr.cases.exists[nodeForEObject.text.trim.contains("\n")] && !expr.^default?.nodeForEObject?.text?.contains("\n")
 		val open = expr.nodeForKeyword("{")
 		val close = expr.nodeForKeyword("}")
 		format += expr.nodeForKeyword("switch").append[oneSpace]
