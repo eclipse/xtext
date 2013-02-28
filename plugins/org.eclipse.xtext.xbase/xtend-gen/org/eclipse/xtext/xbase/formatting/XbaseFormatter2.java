@@ -2336,7 +2336,7 @@ public class XbaseFormatter2 extends AbstractFormatter {
     if (!_and_2) {
       _and_1 = false;
     } else {
-      XExpression _default = expr==null?(XExpression)null:expr.getDefault();
+      XExpression _default = expr.getDefault();
       INode _nodeForEObject_1 = _default==null?(INode)null:this._nodeModelAccess.nodeForEObject(_default);
       String _text_1 = _nodeForEObject_1==null?(String)null:_nodeForEObject_1.getText();
       boolean _contains_1 = _text_1==null?false:_text_1.contains("\n");
