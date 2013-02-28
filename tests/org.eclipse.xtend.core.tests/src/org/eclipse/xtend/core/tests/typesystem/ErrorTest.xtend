@@ -635,6 +635,52 @@ class ErrorTest extends AbstractXtendTestCase {
 			}
 		'''.processWithoutException
 	}
+	
+	@Test
+	def void testErrorModel_39() throws Exception {
+		'''
+			abstract class Option<T> {
+			  def <X> Option<X> map((T)=>X f) { switch this {
+			    Some<T> : new Some<X>(f.apply(get))
+			    None<T> : new None<X>
+			  }}
+			}
+			class Some<T> extends Option<T> {}
+			class None<T> extends Option<T> {}
+		'''.processWithoutException
+	}
+	
+	@Test
+	def void testErrorModel_40() throws Exception {
+		'''
+			abstract class Option<T> {
+			  def <X> Option<X> map((T)=>X f) { switch this {
+			    Some<T> : new Some<X>(f.apply(get))
+			    None<T> : new None<X>
+			  }}
+			}
+			class Intermediate1<T> extends Option<T> {}
+			class Intermediate2<T> extends Intermediate1<T> {}
+			class Some<T> extends Intermediate2<T> {}
+			class None<T> extends Intermediate2<T> {}
+		'''.processWithoutException
+	}
+	
+	@Test
+	def void testErrorModel_41() throws Exception {
+		'''
+			class E<T> extends E<T> {}
+		'''.processWithoutException
+	}
+	
+	@Test
+	def void testErrorModel_42() throws Exception {
+		'''
+			class C<T> extends E<T> {}
+			class D<T> extends C<T> {}
+			class E<T> extends D<T> {}
+		'''.processWithoutException
+	}
 		
 	def processWithoutException(CharSequence input) throws Exception {
 		val resource = resourceSet.createResource(URI::createURI("abcdefg.xtend"))

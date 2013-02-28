@@ -62,6 +62,77 @@ class XtendCompilerTest extends AbstractXtendTestCase {
 		''')
 	}
 	
+	@Test
+	def testBug383551_01() {
+		assertCompilesTo('''
+			abstract class Option<T> {
+			  def <X> Option<X> map((T)=>X f) { switch this {
+			    Some<T> : new Some<X>
+			    None<T> : new None<X>
+			  }}
+			}
+			class Some<T> extends Option<T> {}
+			class None<T> extends Option<T> {}
+		''', '''
+			import org.eclipse.xtext.xbase.lib.Functions.Function1;
+
+			@SuppressWarnings("all")
+			public abstract class Option<T extends Object> {
+			  public <X extends Object> Option<X> map(final Function1<? super T,? extends X> f) {
+			    Option<X> _switchResult = null;
+			    boolean _matched = false;
+			    if (!_matched) {
+			      if (this instanceof Some) {
+			        final Some<T> _some = (Some<T>)this;
+			        _matched=true;
+			        Some<X> _some_1 = new Some<X>();
+			        _switchResult = _some_1;
+			      }
+			    }
+			    if (!_matched) {
+			      if (this instanceof None) {
+			        final None<T> _none = (None<T>)this;
+			        _matched=true;
+			        None<X> _none_1 = new None<X>();
+			        _switchResult = _none_1;
+			      }
+			    }
+			    return _switchResult;
+			  }
+			}
+		''')
+	}
+	
+	@Test
+	def testBug383551_02() {
+		assertCompilesTo('''
+			abstract class C<C_T> {
+			  def <X> C<X> m() { switch this {
+			    E<C_T> : new E<X>
+			  }}
+			}
+			class D<D_T> extends C<D_T> {}
+			class E<E_T> extends D<E_T> {}
+		''', '''
+			@SuppressWarnings("all")
+			public abstract class C<C_T extends Object> {
+			  public <X extends Object> C<X> m() {
+			    E<X> _switchResult = null;
+			    boolean _matched = false;
+			    if (!_matched) {
+			      if (this instanceof E) {
+			        final E<C_T> _e = (E<C_T>)this;
+			        _matched=true;
+			        E<X> _e_1 = new E<X>();
+			        _switchResult = _e_1;
+			      }
+			    }
+			    return _switchResult;
+			  }
+			}
+		''')
+	}
+	
 	/**
 	 * Do not throw an exception for inherited dispatch methods.
 	 */
