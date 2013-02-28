@@ -15,11 +15,107 @@ import org.eclipse.xtext.xbase.compiler.GeneratorConfig
 import org.eclipse.xtext.xbase.compiler.IGeneratorConfigProvider
 import org.eclipse.xtext.xbase.compiler.JvmModelGenerator
 import org.junit.Test
+import org.junit.Ignore
 
 class XtendCompilerTest extends AbstractXtendTestCase {
 	
 	@Inject JvmModelGenerator generator
 	@Inject IGeneratorConfigProvider generatorConfigProvider
+	
+	/**
+	 * Do not throw an exception for inherited dispatch methods.
+	 */
+	@Test
+	def testInheritedDispatchMethods_01() {
+		assertCompilesTo('''
+			class C {
+				def dispatch testFunction1(String s) {
+					s.length
+				}
+				def dispatch testFunction1(Integer i) {
+					i.intValue
+				}
+			}
+			class D extends C {
+				def dispatch testFunction1(Double d) {
+					d.intValue
+				}
+			}
+		''', '''
+			import java.util.Arrays;
+			
+			@SuppressWarnings("all")
+			public class C {
+			  protected int _testFunction1(final String s) {
+			    int _length = s.length();
+			    return _length;
+			  }
+			  
+			  protected int _testFunction1(final Integer i) {
+			    int _intValue = i.intValue();
+			    return _intValue;
+			  }
+			  
+			  public int testFunction1(final Object i) {
+			    if (i instanceof Integer) {
+			      return _testFunction1((Integer)i);
+			    } else if (i instanceof String) {
+			      return _testFunction1((String)i);
+			    } else {
+			      throw new IllegalArgumentException("Unhandled parameter types: " +
+			        Arrays.<Object>asList(i).toString());
+			    }
+			  }
+			}
+		''')
+	}
+	
+	@Ignore("TODO")
+	@Test
+	def testInheritedDispatchMethods_02() {
+		assertCompilesTo('''
+			class D extends C {
+				def dispatch testFunction1(Double d) {
+					d.intValue
+				}
+			}
+			class C {
+				def dispatch testFunction1(String s) {
+					s.length
+				}
+				def dispatch testFunction1(Integer i) {
+					i.intValue
+				}
+			}
+		''', '''
+			TODO
+		''')
+	}
+	
+	@Ignore("TODO")
+	@Test
+	def testInheritedDispatchMethods_03() {
+		assertCompilesTo('''
+			class D extends C {
+				def dispatch testFunction1(Double d) {
+					d.intValue
+				}
+				def dispatch testFunction1(Number n) {
+					n.intValue
+				}
+			}
+			class C {
+				def dispatch testFunction1(String s) {
+					s.length
+				}
+				def dispatch testFunction1(Integer i) {
+					i.intValue
+				}
+			}
+		''', '''
+			TODO
+		''')
+	}
 	
 	@Test def void testExtensionForArrayOfT_01() {
 		'''

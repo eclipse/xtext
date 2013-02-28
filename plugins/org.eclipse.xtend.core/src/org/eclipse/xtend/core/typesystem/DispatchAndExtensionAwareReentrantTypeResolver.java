@@ -390,7 +390,7 @@ public class DispatchAndExtensionAwareReentrantTypeResolver extends LogicalConta
 				return;
 			}
 			LightweightTypeReference declaredDispatcherType = getReturnTypeOfOverriddenOperation(dispatcher, childResolvedTypes, featureScopeSession);
-			List<JvmOperation> dispatchCases = dispatchHelper.getDispatchCases(dispatcher);
+			List<JvmOperation> dispatchCases = dispatchHelper.getLocalDispatchCases(dispatcher);
 			List<LightweightTypeReference> dispatchCaseResults = Lists.newArrayListWithCapacity(dispatchCases.size());
 			boolean hasInferredCase = false;
 			for(JvmOperation dispatchCase: dispatchCases) {

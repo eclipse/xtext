@@ -922,7 +922,7 @@ public class XtendJavaValidator extends XbaseWithAnnotationsJavaValidator {
 	public void checkDispatchFunctions(XtendClass clazz) {
 		JvmGenericType type = associations.getInferredType(clazz);
 		if (type != null) {
-			Multimap<DispatchHelper.DispatchSignature, JvmOperation> dispatchMethods = dispatchHelper.getDeclaredDispatchMethods(type);
+			Multimap<DispatchHelper.DispatchSignature, JvmOperation> dispatchMethods = dispatchHelper.getDeclaredOrEnhancedDispatchMethods(type);
 			checkDispatchNonDispatchConflict(clazz, dispatchMethods);
 			for (DispatchHelper.DispatchSignature signature : dispatchMethods.keySet()) {
 				Collection<JvmOperation> dispatchOperations = dispatchMethods.get(signature);

@@ -86,7 +86,7 @@ public class DispatchHelperTest extends AbstractXtendTestCase {
 				" def dispatch foo(CharSequence i) {null}" +
 			"}");
 		JvmGenericType type = associations.getInferredType(clazz);
-		ListMultimap<DispatchSignature,JvmOperation> multimap = dispatchHelper.getDeclaredDispatchMethods(type);
+		ListMultimap<DispatchSignature,JvmOperation> multimap = dispatchHelper.getDeclaredOrEnhancedDispatchMethods(type);
 		List<JvmOperation> list = multimap.get(new DispatchHelper.DispatchSignature("foo", 1));
 		Iterator<JvmOperation> i = list.iterator();
 		assertEquals(Integer.class.getName(), i.next().getParameters().get(0).getParameterType().getIdentifier());
@@ -106,7 +106,7 @@ public class DispatchHelperTest extends AbstractXtendTestCase {
 				" def dispatch foo(String i) {null}" +
 		"}");
 		JvmGenericType type = associations.getInferredType(clazz);
-		ListMultimap<DispatchSignature,JvmOperation> multimap = dispatchHelper.getDeclaredDispatchMethods(type);
+		ListMultimap<DispatchSignature,JvmOperation> multimap = dispatchHelper.getDeclaredOrEnhancedDispatchMethods(type);
 		List<JvmOperation> list = multimap.get(new DispatchHelper.DispatchSignature("foo", 1));
 		Iterator<JvmOperation> i = list.iterator();
 		assertEquals(Integer.class.getName(), i.next().getParameters().get(0).getParameterType().getIdentifier());
@@ -121,7 +121,7 @@ public class DispatchHelperTest extends AbstractXtendTestCase {
 				" def dispatch foo(Object i, String b) {null}" +
 		"}");
 		JvmGenericType type = associations.getInferredType(clazz);
-		ListMultimap<DispatchSignature,JvmOperation> multimap = dispatchHelper.getDeclaredDispatchMethods(type);
+		ListMultimap<DispatchSignature,JvmOperation> multimap = dispatchHelper.getDeclaredOrEnhancedDispatchMethods(type);
 		List<JvmOperation> list = multimap.get(new DispatchHelper.DispatchSignature("foo", 2));
 		Iterator<JvmOperation> i = list.iterator();
 		assertEquals(Integer.TYPE.getName(), i.next().getParameters().get(0).getParameterType().getIdentifier());
@@ -141,7 +141,7 @@ public class DispatchHelperTest extends AbstractXtendTestCase {
 				"  def dispatch foo(Number x) {}\n" +
 				"}"), null);
 		JvmGenericType type = (JvmGenericType) subResource.getContents().get(1);
-		ListMultimap<DispatchSignature,JvmOperation> multimap = dispatchHelper.getDeclaredDispatchMethods(type);
+		ListMultimap<DispatchSignature,JvmOperation> multimap = dispatchHelper.getDeclaredOrEnhancedDispatchMethods(type);
 		List<JvmOperation> list = multimap.get(new DispatchHelper.DispatchSignature("foo", 1));
 		assertEquals(2, list.size());
 	}
@@ -158,7 +158,7 @@ public class DispatchHelperTest extends AbstractXtendTestCase {
 				"  def dispatch foo(Number x) {}\n" +
 				"}"), null);
 		JvmGenericType type = (JvmGenericType) subResource.getContents().get(1);
-		ListMultimap<DispatchSignature,JvmOperation> multimap = dispatchHelper.getDeclaredDispatchMethods(type);
+		ListMultimap<DispatchSignature,JvmOperation> multimap = dispatchHelper.getDeclaredOrEnhancedDispatchMethods(type);
 		List<JvmOperation> list = multimap.get(new DispatchHelper.DispatchSignature("foo", 1));
 		assertEquals(3, list.size());
 	}
