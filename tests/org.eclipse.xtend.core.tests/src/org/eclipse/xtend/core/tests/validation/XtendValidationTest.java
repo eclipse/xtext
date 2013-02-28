@@ -294,7 +294,7 @@ public class XtendValidationTest extends AbstractXtendTestCase {
 	}
 	
 	@Test public void testConstructorDuplicateErasure() throws Exception {
-		XtendClass clazz = clazz("class K { new(List<Object> o) {} new(List<String> o) {} }");
+		XtendClass clazz = clazz("class K { new(java.util.List<Object> o) {} new(java.util.List<String> o) {} }");
 		helper.assertError(clazz, XTEND_CONSTRUCTOR, DUPLICATE_METHOD);
 		helper.assertError(clazz, XTEND_CONSTRUCTOR, DUPLICATE_METHOD);
 	}
