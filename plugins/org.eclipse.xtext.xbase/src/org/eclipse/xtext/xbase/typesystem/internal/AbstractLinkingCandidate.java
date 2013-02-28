@@ -210,48 +210,54 @@ public abstract class AbstractLinkingCandidate<Expression extends XExpression> i
 		for(ITypeExpectation expectation: state.getExpectations()) {
 			// TODO implement bounds / type parameter resolution
 			// TODO consider expectation if any
-			Map<JvmTypeParameter, LightweightMergedBoundTypeArgument> declaratorParameterMapping = getDeclaratorParameterMapping();
-			TypeParameterSubstitutor<?> substitutor = new TypeParameterByUnboundSubstitutor(declaratorParameterMapping, expectation.getReferenceOwner()) {
-
-				@Override
-				protected UnboundTypeReference createUnboundTypeReference(JvmTypeParameter type) {
-					UnboundTypeReference result = state.getResolvedTypes().createUnboundTypeReference(expression, type);
-					return result;
-				}
-				
-				@Override
-				@Nullable
-				protected LightweightTypeReference getBoundTypeArgument(ParameterizedTypeReference reference, JvmTypeParameter type,
-						ConstraintVisitingInfo visiting) {
-					if (getOwner().getDeclaredTypeParameters().contains(type)) {
-						return null;
+			
+			TypeParameterSubstitutor<?> substitutor = null;
+			if (!isRawTypeContext()) {
+				Map<JvmTypeParameter, LightweightMergedBoundTypeArgument> declaratorParameterMapping = getDeclaratorParameterMapping();
+				substitutor = new TypeParameterByUnboundSubstitutor(declaratorParameterMapping, expectation.getReferenceOwner()) {
+	
+					@Override
+					protected UnboundTypeReference createUnboundTypeReference(JvmTypeParameter type) {
+						UnboundTypeReference result = state.getResolvedTypes().createUnboundTypeReference(expression, type);
+						return result;
 					}
-					return super.getBoundTypeArgument(reference, type, visiting);
-				}
-				
-				@Override
-				@Nullable
-				protected LightweightMergedBoundTypeArgument getBoundTypeArgument(JvmTypeParameter typeParameter,
-						ConstraintVisitingInfo info) {
-					LightweightMergedBoundTypeArgument result = super.getBoundTypeArgument(typeParameter, info);
-					if (result != null && result.getVariance() == VarianceInfo.INVARIANT) {
-						LightweightTypeReference typeReference = result.getTypeReference();
-						if (typeReference.isWildcard() && typeReference.getLowerBoundSubstitute().isAny() && typeReference.getUpperBoundSubstitute().isType(Object.class)) {
-							// assume unbound wildcard - use the constraints of the respective type parameter
-							if (!typeParameter.getConstraints().isEmpty()) {
-								JvmTypeConstraint constraint = typeParameter.getConstraints().get(0);
-								if (constraint instanceof JvmUpperBound) {
-									LightweightTypeReference reference = new OwnedConverter(getOwner()).toLightweightReference(constraint.getTypeReference());
-									return new LightweightMergedBoundTypeArgument(reference, VarianceInfo.OUT);
+					
+					@Override
+					@Nullable
+					protected LightweightTypeReference getBoundTypeArgument(ParameterizedTypeReference reference, JvmTypeParameter type,
+							ConstraintVisitingInfo visiting) {
+						if (getOwner().getDeclaredTypeParameters().contains(type)) {
+							return null;
+						}
+						return super.getBoundTypeArgument(reference, type, visiting);
+					}
+					
+					@Override
+					@Nullable
+					protected LightweightMergedBoundTypeArgument getBoundTypeArgument(JvmTypeParameter typeParameter,
+							ConstraintVisitingInfo info) {
+						LightweightMergedBoundTypeArgument result = super.getBoundTypeArgument(typeParameter, info);
+						if (result != null && result.getVariance() == VarianceInfo.INVARIANT) {
+							LightweightTypeReference typeReference = result.getTypeReference();
+							if (typeReference.isWildcard() && typeReference.getLowerBoundSubstitute().isAny() && typeReference.getUpperBoundSubstitute().isType(Object.class)) {
+								// assume unbound wildcard - use the constraints of the respective type parameter
+								if (!typeParameter.getConstraints().isEmpty()) {
+									JvmTypeConstraint constraint = typeParameter.getConstraints().get(0);
+									if (constraint instanceof JvmUpperBound) {
+										LightweightTypeReference reference = new OwnedConverter(getOwner()).toLightweightReference(constraint.getTypeReference());
+										return new LightweightMergedBoundTypeArgument(reference, VarianceInfo.OUT);
+									}
 								}
 							}
 						}
+						return result;
 					}
-					return result;
-				}
-				
-			};
-			substitutor.enhanceMapping(getTypeParameterMapping());
+					
+				};
+				substitutor.enhanceMapping(getTypeParameterMapping());
+			} else {
+				substitutor = new RawTypeSubstitutor(expectation.getReferenceOwner());
+			}
 			// TODO enhance with expectation
 			LightweightTypeReference substitutedFeatureType = substitutor.substitute(featureType).getUpperBoundSubstitute();
 			deferredBindTypeArgument(expectation, substitutedFeatureType);
