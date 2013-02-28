@@ -10,6 +10,7 @@ package org.eclipse.xtext.xbase.typesystem.references;
 import java.io.Serializable;
 import java.util.Collections;
 import java.util.List;
+import java.util.Set;
 
 import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.jdt.annotation.Nullable;
@@ -30,6 +31,7 @@ import com.google.common.base.Function;
 import com.google.common.base.Joiner;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
+import com.google.common.collect.Sets;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -189,15 +191,16 @@ public class ParameterizedTypeReference extends LightweightTypeReference {
 	public LightweightTypeReference getSuperType(JvmType rawType) {
 		if (rawType == type)
 			return this;
-		JvmTypeReference superType = getSuperType(rawType, type);
+		JvmTypeReference superType = getSuperType(rawType, type, Sets.<JvmType>newHashSetWithExpectedSize(3));
 		if (superType != null) {
 			if (superType instanceof JvmParameterizedTypeReference) {
 				if (((JvmParameterizedTypeReference) superType).getArguments().isEmpty()) {
 					return new ParameterizedTypeReference(getOwner(), rawType);
 				}
 			}
+			JvmParameterizedTypeReference plainSuperType = getServices().getTypeReferences().createTypeRef(rawType);
 			OwnedConverter converter = new OwnedConverter(getOwner());
-			LightweightTypeReference unresolved = converter.toLightweightReference(superType);
+			LightweightTypeReference unresolved = converter.toLightweightReference(plainSuperType);
 			TypeParameterSubstitutor<?> substitutor = createSubstitutor();
 			LightweightTypeReference result = substitutor.substitute(unresolved);
 			if (isRawType()) {
@@ -209,7 +212,10 @@ public class ParameterizedTypeReference extends LightweightTypeReference {
 	}
 
 	@Nullable
-	protected JvmTypeReference getSuperType(JvmType rawType, JvmType thisType) {
+	protected JvmTypeReference getSuperType(JvmType rawType, JvmType thisType, Set<JvmType> seenTypes) {
+		if (thisType == rawType || !seenTypes.add(thisType)) {
+			return null;
+		}
 		if (thisType instanceof JvmGenericType && rawType instanceof JvmGenericType) {
 			if (!"java.lang.Object".equals(rawType.getIdentifier())) {
 				if (((JvmGenericType) thisType).isInterface() && !((JvmGenericType) rawType).isInterface()) {
@@ -224,7 +230,7 @@ public class ParameterizedTypeReference extends LightweightTypeReference {
 			for(JvmTypeReference superType: superTypes) {
 				if (superType.getType() == rawType)
 					return superType;
-				JvmTypeReference result = getSuperType(rawType, superType.getType());
+				JvmTypeReference result = getSuperType(rawType, superType.getType(), seenTypes);
 				if (result != null)
 					return result;
 			}
@@ -236,7 +242,7 @@ public class ParameterizedTypeReference extends LightweightTypeReference {
 					if (superType.getType() == rawType) {
 						return superType;
 					}
-					JvmTypeReference result = getSuperType(rawType, superType.getType());
+					JvmTypeReference result = getSuperType(rawType, superType.getType(), seenTypes);
 					if (result != null)
 						return result;
 				}

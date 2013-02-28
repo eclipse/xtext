@@ -1199,6 +1199,82 @@ public class ErrorTest extends AbstractXtendTestCase {
     this.processWithoutException(_builder);
   }
   
+  @Test
+  public void testErrorModel_39() throws Exception {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("abstract class Option<T> {");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append("def <X> Option<X> map((T)=>X f) { switch this {");
+    _builder.newLine();
+    _builder.append("    ");
+    _builder.append("Some<T> : new Some<X>(f.apply(get))");
+    _builder.newLine();
+    _builder.append("    ");
+    _builder.append("None<T> : new None<X>");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append("}}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("class Some<T> extends Option<T> {}");
+    _builder.newLine();
+    _builder.append("class None<T> extends Option<T> {}");
+    _builder.newLine();
+    this.processWithoutException(_builder);
+  }
+  
+  @Test
+  public void testErrorModel_40() throws Exception {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("abstract class Option<T> {");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append("def <X> Option<X> map((T)=>X f) { switch this {");
+    _builder.newLine();
+    _builder.append("    ");
+    _builder.append("Some<T> : new Some<X>(f.apply(get))");
+    _builder.newLine();
+    _builder.append("    ");
+    _builder.append("None<T> : new None<X>");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append("}}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("class Intermediate1<T> extends Option<T> {}");
+    _builder.newLine();
+    _builder.append("class Intermediate2<T> extends Intermediate1<T> {}");
+    _builder.newLine();
+    _builder.append("class Some<T> extends Intermediate2<T> {}");
+    _builder.newLine();
+    _builder.append("class None<T> extends Intermediate2<T> {}");
+    _builder.newLine();
+    this.processWithoutException(_builder);
+  }
+  
+  @Test
+  public void testErrorModel_41() throws Exception {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("class E<T> extends E<T> {}");
+    _builder.newLine();
+    this.processWithoutException(_builder);
+  }
+  
+  @Test
+  public void testErrorModel_42() throws Exception {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("class C<T> extends E<T> {}");
+    _builder.newLine();
+    _builder.append("class D<T> extends C<T> {}");
+    _builder.newLine();
+    _builder.append("class E<T> extends D<T> {}");
+    _builder.newLine();
+    this.processWithoutException(_builder);
+  }
+  
   public XtendFile processWithoutException(final CharSequence input) throws Exception {
     XtextResourceSet _resourceSet = this.getResourceSet();
     URI _createURI = URI.createURI("abcdefg.xtend");
