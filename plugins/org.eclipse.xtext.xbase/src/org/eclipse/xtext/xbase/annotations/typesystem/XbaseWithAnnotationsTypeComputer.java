@@ -51,7 +51,7 @@ public class XbaseWithAnnotationsTypeComputer extends XbaseTypeComputer {
 	
 	protected void _computeTypes(XAnnotation object, ITypeComputationState state) {
 		JvmAnnotationType annotationType = object.getAnnotationType();
-		if (annotationType != null) {
+		if (annotationType != null && !annotationType.eIsProxy()) {
 			XExpression expression = object.getValue();
 			if (expression != null) {
 				Iterable<JvmFeature> iterable = annotationType.findAllFeaturesByName("value");

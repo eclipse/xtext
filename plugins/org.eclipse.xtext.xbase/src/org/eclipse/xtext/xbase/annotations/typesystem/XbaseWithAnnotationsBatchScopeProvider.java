@@ -35,6 +35,9 @@ public class XbaseWithAnnotationsBatchScopeProvider extends XbaseBatchScopeProvi
 		if (reference == XAnnotationsPackage.Literals.XANNOTATION_ELEMENT_VALUE_PAIR__ELEMENT) {
 			XAnnotation annotation = EcoreUtil2.getContainerOfType(context, XAnnotation.class);
 			JvmAnnotationType annotationType = annotation.getAnnotationType();
+			if (annotationType == null || annotationType.eIsProxy()) {
+				return IScope.NULLSCOPE;
+			}
 			Iterable<JvmOperation> operations = annotationType.getDeclaredOperations();
 			Iterable<IEObjectDescription> descriptions = transform(operations, new Function<JvmOperation, IEObjectDescription>() {
 				public IEObjectDescription apply(JvmOperation from) {

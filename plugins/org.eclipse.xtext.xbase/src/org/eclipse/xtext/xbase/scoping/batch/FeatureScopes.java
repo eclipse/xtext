@@ -93,6 +93,9 @@ public class FeatureScopes implements IFeatureNames {
 			XFeatureCall featureCall = (XFeatureCall) context;
 			JvmDeclaredType declaringType = featureCall.getDeclaringType();
 			if (declaringType != null) {
+				if (declaringType.eIsProxy()) {
+					return createFollowUpErrorScope();
+				}
 				return createStaticScope(featureCall, declaringType, null, null, IScope.NULLSCOPE, session);
 			}
 		}
@@ -175,13 +178,17 @@ public class FeatureScopes implements IFeatureNames {
 				return createFeatureScopeForTypeRef(receiver, receiverType, false, featureCall, session, linkedReceiver, IScope.NULLSCOPE);
 			}
 		} else {
-			return new SimpleScope(Collections.<IEObjectDescription>emptyList()) {
-				@Override
-				public Iterable<IEObjectDescription> getElements(QualifiedName name) {
-					return Collections.<IEObjectDescription>singletonList(new ScopeProviderAccess.ErrorDescription());
-				}
-			};
+			return createFollowUpErrorScope();
 		}
+	}
+
+	protected IScope createFollowUpErrorScope() {
+		return new SimpleScope(Collections.<IEObjectDescription>emptyList()) {
+			@Override
+			public Iterable<IEObjectDescription> getElements(QualifiedName name) {
+				return Collections.<IEObjectDescription>singletonList(new ScopeProviderAccess.ErrorDescription());
+			}
+		};
 	}
 	
 	/**
