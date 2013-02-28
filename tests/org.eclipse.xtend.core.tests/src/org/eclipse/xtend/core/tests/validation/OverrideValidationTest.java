@@ -75,6 +75,11 @@ public class OverrideValidationTest extends AbstractXtendTestCase {
 		XtendClass xtendClass = clazz("class Foo { def <T extends CharSequence> bar(T t) { '' } def <V extends String> bar(V v) { 1 } }");
 		helper.assertNoErrors(xtendClass);
 	}
+	
+	@Test public void testDuplicateMethod_8() throws Exception {
+		XtendClass xtendClass = clazz("class Foo { def bar(Unknown x) {true} def bar(Unknown x) {true} def bar(DoesNotExist x) {false} }");
+		helper.assertNoError(xtendClass, DUPLICATE_METHOD);
+	}
 
 	@Test public void testOverrideGenericMethod_1() throws Exception {
 		XtendClass xtendClass = clazz(" import java.util.List abstract class Foo<T> extends test.GenericSuperTypeClass<T> {  " +

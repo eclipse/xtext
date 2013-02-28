@@ -988,7 +988,7 @@ class QuickfixTest extends AbstractXtendUITestCase {
 				}
 			}
 		''')
-		.assertIssueCodes(FEATURECALL_LINKING_DIAGNOSTIC)
+		.assertIssueCodes(Diagnostic::LINKING_DIAGNOSTIC)
 		.assertResolutionLabelsSubset("Import 'Collections' (java.util)")
 		.assertModelAfterQuickfix('''
 			import java.util.Collections

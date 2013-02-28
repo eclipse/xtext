@@ -122,7 +122,6 @@ import com.google.common.collect.ImmutableSet.Builder;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Multimap;
-import com.google.common.collect.Multimaps;
 import com.google.common.collect.Sets;
 import com.google.inject.Inject;
 
@@ -510,26 +509,31 @@ public class XtendJavaValidator extends XbaseWithAnnotationsJavaValidator {
 			if (!processed.contains(declaredExecutable)) {
 				List<Executable> sameErasure = bySignature.apply(declaredExecutable.getResolvedErasureSignature());
 				if (sameErasure.size() > 1) {
-					Multimap<String, Executable> perSignature = Multimaps.index(sameErasure, new Function<Executable, String>() {
-						public String apply(Executable input) {
-							return input.getResolvedSignature();
+					Multimap<String, Executable> perSignature = HashMultimap.create(sameErasure.size(), 2);
+					outer: for(Executable executable: sameErasure) {
+						for(LightweightTypeReference parameterType: executable.getResolvedParameterTypes()) {
+							if (parameterType.isUnknown())
+								continue outer;
 						}
-					});
-					for(Collection<Executable> sameSignature: perSignature.asMap().values()) {
-						for(Executable operationWithSameSignature: sameSignature) {
-							JvmExecutable executable = operationWithSameSignature.getDeclaration();
-							EObject otherSource = associations.getPrimarySourceElement(executable);
-							if (flaggedOperations.add(otherSource)) {
-								if (sameSignature.size() > 1) {
-									error("Duplicate " + typeLabel(executable) + " " + operationWithSameSignature.getSimpleSignature()
-											+ " in type " + inferredType.getSimpleName(), otherSource,
-											nameFeature(otherSource), DUPLICATE_METHOD);
-								} else {
-									error("The " + typeLabel(executable) + " " + operationWithSameSignature.getSimpleSignature()
-											+ " has the same erasure "
-											+ operationWithSameSignature.getResolvedErasureSignature()
-											+ " as another " + typeLabel(executable) + " in type " + inferredType.getSimpleName(), otherSource,
-											nameFeature(otherSource), DUPLICATE_METHOD);
+						perSignature.put(executable.getResolvedSignature(), executable);
+					}
+					if (perSignature.size() > 1) {
+						for(Collection<Executable> sameSignature: perSignature.asMap().values()) {
+							for(Executable operationWithSameSignature: sameSignature) {
+								JvmExecutable executable = operationWithSameSignature.getDeclaration();
+								EObject otherSource = associations.getPrimarySourceElement(executable);
+								if (flaggedOperations.add(otherSource)) {
+									if (sameSignature.size() > 1) {
+										error("Duplicate " + typeLabel(executable) + " " + operationWithSameSignature.getSimpleSignature()
+												+ " in type " + inferredType.getSimpleName(), otherSource,
+												nameFeature(otherSource), DUPLICATE_METHOD);
+									} else {
+										error("The " + typeLabel(executable) + " " + operationWithSameSignature.getSimpleSignature()
+												+ " has the same erasure "
+												+ operationWithSameSignature.getResolvedErasureSignature()
+												+ " as another " + typeLabel(executable) + " in type " + inferredType.getSimpleName(), otherSource,
+												nameFeature(otherSource), DUPLICATE_METHOD);
+									}
 								}
 							}
 						}

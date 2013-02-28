@@ -1822,7 +1822,7 @@ public class QuickfixTest extends AbstractXtendUITestCase {
     _builder.append("}");
     _builder.newLine();
     QuickfixTestBuilder _create = this.builder.create("Foo.xtend", _builder);
-    QuickfixTestBuilder _assertIssueCodes = _create.assertIssueCodes(IssueCodes.FEATURECALL_LINKING_DIAGNOSTIC);
+    QuickfixTestBuilder _assertIssueCodes = _create.assertIssueCodes(Diagnostic.LINKING_DIAGNOSTIC);
     QuickfixTestBuilder _assertResolutionLabelsSubset = _assertIssueCodes.assertResolutionLabelsSubset("Import \'Collections\' (java.util)");
     StringConcatenation _builder_1 = new StringConcatenation();
     _builder_1.append("import java.util.Collections");

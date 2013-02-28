@@ -11,9 +11,11 @@ import java.util.List;
 
 import org.eclipse.xtend.core.tests.AbstractXtendTestCase;
 import org.eclipse.xtend.core.xtend.XtendClass;
+import org.eclipse.xtext.diagnostics.Diagnostic;
 import org.eclipse.xtext.junit4.validation.ValidationTestHelper;
 import org.eclipse.xtext.validation.Issue;
 import org.eclipse.xtext.xbase.XbasePackage;
+import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotationsPackage;
 import org.eclipse.xtext.xbase.validation.IssueCodes;
 import org.junit.Ignore;
 import org.junit.Test;
@@ -44,6 +46,34 @@ public class FeatureCallValidationTest extends AbstractXtendTestCase {
 	public void testBrokenModel_03() throws Exception {
 		XtendClass clazz = clazz("class C { def void m(DoesNotExist d) { m('') }}");
 		helper.assertNoError(clazz, IssueCodes.INCOMPATIBLE_TYPES);
+	}
+	
+	@Test
+	public void testBrokenModel_04() throws Exception {
+		XtendClass clazz = clazz("class C { def void m() { DoesNotExist::unknown }}");
+		helper.assertNoError(clazz, IssueCodes.INCOMPATIBLE_TYPES);
+		helper.assertError(clazz, XbasePackage.Literals.XFEATURE_CALL, Diagnostic.LINKING_DIAGNOSTIC, "DoesNotExist cannot be resolved to a type.");
+		helper.assertNoError(clazz, org.eclipse.xtend.core.validation.IssueCodes.FEATURECALL_LINKING_DIAGNOSTIC);
+	}
+	
+	@Test
+	public void testBrokenModel_05() throws Exception {
+		XtendClass clazz = clazz("class C { @DoesNotExist(unknown='zonk') def void m() {}}");
+		helper.assertNoError(clazz, IssueCodes.INCOMPATIBLE_TYPES);
+		helper.assertError(clazz, XAnnotationsPackage.Literals.XANNOTATION, Diagnostic.LINKING_DIAGNOSTIC, "DoesNotExist cannot be resolved to an annotation type.");
+		helper.assertNoError(clazz, org.eclipse.xtend.core.validation.IssueCodes.FEATURECALL_LINKING_DIAGNOSTIC);
+	}
+	
+	@Test
+	public void testLocationForDeclaratorMarker() throws Exception {
+		String input = "class C { def void m() { com::acme::Unknown::unknown }}";
+		XtendClass clazz = clazz(input);
+		List<Issue> issues = helper.validate(clazz);
+		assertEquals(String.valueOf(issues), 1, issues.size());
+		Issue issue = issues.get(0);
+		assertEquals(input.indexOf("com::acme"), issue.getOffset().intValue());
+		assertEquals("com::acme::Unknown".length(), issue.getLength().intValue());
+		assertEquals(1, issue.getLineNumber().intValue());
 	}
 	
 	/**
