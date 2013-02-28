@@ -20,7 +20,6 @@ import org.eclipse.jdt.core.IMember;
 import org.eclipse.jdt.core.JavaModelException;
 import org.eclipse.jface.text.IRegion;
 import org.eclipse.jface.text.ITextViewer;
-import org.eclipse.jface.text.Region;
 import org.eclipse.jface.text.hyperlink.AbstractHyperlinkDetector;
 import org.eclipse.jface.text.hyperlink.IHyperlink;
 import org.eclipse.ui.IEditorInput;
@@ -28,6 +27,8 @@ import org.eclipse.ui.texteditor.ITextEditor;
 import org.eclipse.xtext.generator.trace.ILocationInResource;
 import org.eclipse.xtext.generator.trace.ITrace;
 import org.eclipse.xtext.generator.trace.ITraceInformation;
+import org.eclipse.xtext.resource.IResourceServiceProvider;
+import org.eclipse.xtext.ui.resource.IResourceUIServiceProvider;
 import org.eclipse.xtext.util.TextRegion;
 
 import com.google.common.collect.Lists;
@@ -47,6 +48,9 @@ public class LinkToOriginDetector extends AbstractHyperlinkDetector {
 	
 	@Inject
 	private ITraceInformation traceInformation;
+	
+	@Inject
+	private IResourceUIServiceProvider.Registry serviceProviderRegistry;
 	
 	public IHyperlink[] detectHyperlinks(ITextViewer textViewer, IRegion region, boolean canShowMultipleHyperlinks) {
 		try {
@@ -70,7 +74,12 @@ public class LinkToOriginDetector extends AbstractHyperlinkDetector {
 				// to its origin if it's contained in a 'derived' resource
 				IJavaElement[] javaElements = compilationUnit.codeSelect(selectedWord.getOffset(), selectedWord.getLength());
 				for(IJavaElement javaElement: javaElements) {
-					if (javaElement instanceof IMember) {
+					/**
+					 * if IDE 3.8 is available the default 'Open Declaration' navigation will already open the original editor
+					 * So we don't need the additional hyperlinks.
+					 */
+					boolean provideHyperlinkOnReferences = !is_ORG_ECLIPSE_UI_IDE_3_8_Enabled() || compilationUnit.equals(((IMember) javaElement).getCompilationUnit());
+					if (javaElement instanceof IMember && provideHyperlinkOnReferences) {
 						IMember selectedMember = (IMember) javaElement;
 						IResource resource = selectedMember.getResource();
 						if (resource instanceof IFile) {
@@ -82,18 +91,17 @@ public class LinkToOriginDetector extends AbstractHyperlinkDetector {
 							List<ILocationInResource> sourceInformationAsList = Lists.newArrayList(sourceInformation);
 							if (!canShowMultipleHyperlinks && sourceInformationAsList.size() > 1)
 								return null;
-							List<IHyperlink> result = Lists.newArrayListWithCapacity(sourceInformationAsList.size());
+							List<LinkToOrigin> result = Lists.newArrayListWithCapacity(sourceInformationAsList.size());
 							for(ILocationInResource source: sourceInformationAsList) {
 								try {
 									URI resourceURI = source.getResourceURI();
 									if (resourceURI != null) {
-										LinkToOrigin hyperlink = hyperlinkProvider.get();
-										hyperlink.setHyperlinkRegion(new Region(selectedWord.getOffset(), selectedWord.getLength()));
-										hyperlink.setURI(resourceURI);
-										hyperlink.setHyperlinkText("Go to " + resourceURI.lastSegment());
-										hyperlink.setTypeLabel("Navigate to source artifact");
-										hyperlink.setMember(selectedMember);
-										result.add(hyperlink);
+										IResourceServiceProvider serviceProvider = serviceProviderRegistry.getResourceServiceProvider(resourceURI);
+										LinkToOriginProvider provider = serviceProvider.get(LinkToOriginProvider.class);
+										LinkToOrigin hyperlink = provider.createLinkToOrigin(source, selectedWord, selectedMember, compilationUnit, result);
+										if (hyperlink != null) {
+											result.add(hyperlink);
+										}
 									}
 								} catch(IllegalArgumentException e) { /* invalid URI - ignore */ }
 							}
@@ -109,6 +117,15 @@ public class LinkToOriginDetector extends AbstractHyperlinkDetector {
 			}
 		} catch(Throwable t) {
 			return null;
+		}
+	}
+
+	private boolean is_ORG_ECLIPSE_UI_IDE_3_8_Enabled() {
+		try {
+			Class<?> clazz = getClass().getClassLoader().loadClass("org.eclipse.ui.ide.IDE");
+			return clazz != null;
+		} catch (ClassNotFoundException e) {
+			return false;
 		}
 	}
 
