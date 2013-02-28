@@ -21,6 +21,7 @@ import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeReference;
+import org.eclipse.xtext.common.types.JvmUnknownTypeReference;
 import org.eclipse.xtext.common.types.JvmVisibility;
 import org.eclipse.xtext.common.types.util.jdt.IJavaElementFinder;
 import org.eclipse.xtext.common.types.xtext.ui.JdtVariableCompletions;
@@ -207,9 +208,9 @@ public abstract class AbstractCodeBuilder implements ICodeBuilder {
             appendable.append(" ");
             VariableNameAcceptor _variableNameAcceptor = new VariableNameAcceptor(notAllowed);
             final VariableNameAcceptor acceptor = _variableNameAcceptor;
-            String _identifier = typeRef.getIdentifier();
+            String _identifierOrObject = this.getIdentifierOrObject(typeRef);
             EObject _context = this.getContext();
-            this._jdtVariableCompletions.getVariableProposals(_identifier, _context, 
+            this._jdtVariableCompletions.getVariableProposals(_identifierOrObject, _context, 
               VariableType.PARAMETER, notAllowed, acceptor);
             String _variableName = acceptor.getVariableName();
             appendable.append(_variableName);
@@ -226,6 +227,23 @@ public abstract class AbstractCodeBuilder implements ICodeBuilder {
       _xblockexpression = (_append);
     }
     return _xblockexpression;
+  }
+  
+  protected String getIdentifierOrObject(final JvmTypeReference typeReference) {
+    String _switchResult = null;
+    boolean _matched = false;
+    if (!_matched) {
+      if (typeReference instanceof JvmUnknownTypeReference) {
+        final JvmUnknownTypeReference _jvmUnknownTypeReference = (JvmUnknownTypeReference)typeReference;
+        _matched=true;
+        _switchResult = "java.lang.Object";
+      }
+    }
+    if (!_matched) {
+      String _identifier = typeReference.getIdentifier();
+      _switchResult = _identifier;
+    }
+    return _switchResult;
   }
   
   protected boolean isInterface(final JvmType t) {

@@ -37,7 +37,7 @@ public class TypeResolver {
 				Collections.<JvmTypeParameter, LightweightMergedBoundTypeArgument> emptyMap(),
 				owner);
 		JvmTypeReference resolvedExpectedType = substitutor.substitute(
-				new OwnedConverter(owner).toLightweightReference(type)).toTypeReference();
+				new OwnedConverter(owner).toLightweightReference(type)).toJavaCompliantTypeReference();
 		return resolvedExpectedType;
 	}
 }
