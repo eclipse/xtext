@@ -309,23 +309,29 @@ public class XbaseCompiler extends FeatureCallCompiler {
 		}
 		appendable.append(") {");
 		appendable.increaseIndentation();
-		if (!getTypeReferences().is(operation.getReturnType(), Void.TYPE))
-			appendable.newLine().append("return ");
-		else
-			appendable.newLine();
-		expression.exec(appendable);
-		appendable.append(".");
-		JvmOperation actualOperation = getClosures().findImplementingOperation(functionType, context.eResource());
-		appendable.append(actualOperation.getSimpleName());
-		appendable.append("(");
-		for (Iterator<JvmFormalParameter> iterator = params.iterator(); iterator.hasNext();) {
-			JvmFormalParameter p = iterator.next();
-			final String name = p.getName();
-			appendable.append(name);
-			if (iterator.hasNext())
-				appendable.append(",");
+		try {
+			appendable.openScope();
+			reassignThisInClosure(appendable, operation.getDeclaringType());
+			if (!getTypeReferences().is(operation.getReturnType(), Void.TYPE))
+				appendable.newLine().append("return ");
+			else
+				appendable.newLine();
+			expression.exec(appendable);
+			appendable.append(".");
+			JvmOperation actualOperation = getClosures().findImplementingOperation(functionType, context.eResource());
+			appendable.append(actualOperation.getSimpleName());
+			appendable.append("(");
+			for (Iterator<JvmFormalParameter> iterator = params.iterator(); iterator.hasNext();) {
+				JvmFormalParameter p = iterator.next();
+				final String name = p.getName();
+				appendable.append(name);
+				if (iterator.hasNext())
+					appendable.append(",");
+			}
+			appendable.append(");");
+		} finally {
+			appendable.closeScope();
 		}
-		appendable.append(");");
 		appendable.decreaseIndentation();
 		appendable.newLine().append("}");
 		appendable.decreaseIndentation().decreaseIndentation();

@@ -34,6 +34,93 @@ public class XtendCompilerTest extends AbstractXtendTestCase {
   @Inject
   private IGeneratorConfigProvider generatorConfigProvider;
   
+  @Test
+  public void testBug386110() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("import com.google.common.util.concurrent.ListenableFuture");
+    _builder.newLine();
+    _builder.append("import com.google.common.util.concurrent.MoreExecutors");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("class Foo<O> {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("val () => O operation = null");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def ListenableFuture<O> run() {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("val result = MoreExecutors::sameThreadExecutor.submit(operation)");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("operation.apply");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("return result");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("import com.google.common.util.concurrent.ListenableFuture;");
+    _builder_1.newLine();
+    _builder_1.append("import com.google.common.util.concurrent.ListeningExecutorService;");
+    _builder_1.newLine();
+    _builder_1.append("import com.google.common.util.concurrent.MoreExecutors;");
+    _builder_1.newLine();
+    _builder_1.append("import java.util.concurrent.Callable;");
+    _builder_1.newLine();
+    _builder_1.append("import org.eclipse.xtext.xbase.lib.Functions.Function0;");
+    _builder_1.newLine();
+    _builder_1.newLine();
+    _builder_1.append("@SuppressWarnings(\"all\")");
+    _builder_1.newLine();
+    _builder_1.append("public class Foo<O extends Object> {");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("private final Function0<? extends O> operation = null;");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("public ListenableFuture<O> run() {");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("ListeningExecutorService _sameThreadExecutor = MoreExecutors.sameThreadExecutor();");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("final ListenableFuture<O> result = _sameThreadExecutor.<O>submit(new Callable<O>() {");
+    _builder_1.newLine();
+    _builder_1.append("        ");
+    _builder_1.append("public O call() {");
+    _builder_1.newLine();
+    _builder_1.append("          ");
+    _builder_1.append("return Foo.this.operation.apply();");
+    _builder_1.newLine();
+    _builder_1.append("        ");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("});");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("this.operation.apply();");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("return result;");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    this.assertCompilesTo(_builder, _builder_1);
+  }
+  
   /**
    * Do not throw an exception for inherited dispatch methods.
    */
