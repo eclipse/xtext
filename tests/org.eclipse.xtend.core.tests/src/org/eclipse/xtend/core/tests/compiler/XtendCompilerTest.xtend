@@ -22,6 +22,46 @@ class XtendCompilerTest extends AbstractXtendTestCase {
 	@Inject JvmModelGenerator generator
 	@Inject IGeneratorConfigProvider generatorConfigProvider
 	
+	@Test
+	def testBug386110() {
+		assertCompilesTo('''
+			import com.google.common.util.concurrent.ListenableFuture
+			import com.google.common.util.concurrent.MoreExecutors
+			
+			class Foo<O> {
+				val () => O operation = null
+			
+				def ListenableFuture<O> run() {
+					val result = MoreExecutors::sameThreadExecutor.submit(operation)
+					operation.apply
+					return result
+				}
+			}
+		''', '''
+			import com.google.common.util.concurrent.ListenableFuture;
+			import com.google.common.util.concurrent.ListeningExecutorService;
+			import com.google.common.util.concurrent.MoreExecutors;
+			import java.util.concurrent.Callable;
+			import org.eclipse.xtext.xbase.lib.Functions.Function0;
+			
+			@SuppressWarnings("all")
+			public class Foo<O extends Object> {
+			  private final Function0<? extends O> operation = null;
+			  
+			  public ListenableFuture<O> run() {
+			    ListeningExecutorService _sameThreadExecutor = MoreExecutors.sameThreadExecutor();
+			    final ListenableFuture<O> result = _sameThreadExecutor.<O>submit(new Callable<O>() {
+			        public O call() {
+			          return Foo.this.operation.apply();
+			        }
+			    });
+			    this.operation.apply();
+			    return result;
+			  }
+			}
+		''')
+	}
+	
 	/**
 	 * Do not throw an exception for inherited dispatch methods.
 	 */
