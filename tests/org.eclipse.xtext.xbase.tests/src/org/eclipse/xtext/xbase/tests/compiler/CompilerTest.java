@@ -35,6 +35,31 @@ public class CompilerTest extends AbstractOutputComparingCompilerTests {
 				"}");
 	}
 	
+	@Test public void testBug383551() throws Exception {
+		assertCompilesToStatement(
+				"\n" + 
+				"final java.util.List<String> list = null;\n" + 
+				"Object _switchResult = null;\n" + 
+				"boolean _matched = false;\n" + 
+				"if (!_matched) {\n" + 
+				"  if (list instanceof java.util.ArrayList) {\n" + 
+				"    final java.util.ArrayList _arrayList = (java.util.ArrayList)list;\n" + 
+				"    _matched=true;\n" + 
+				"    Object _get = _arrayList.get(1);\n" + 
+				"    _switchResult = _get;\n" + 
+				"  }\n" + 
+				"}\n" + 
+				"final Object it = _switchResult;\n" + 
+				"it.toString();", 
+				"{" +
+				"  val java.util.List<String> list = null\n" +
+				"  val Object it = switch list {\n" +
+				"    java.util.ArrayList: list.get(1)\n" +
+				"  }\n" +
+				"  toString" + 
+				"}");
+	}
+	
 	@Test public void testImplicitReferenceToMultitype() throws Exception {
 		assertCompilesTo(
 				"Iterable<Object> _plus = com.google.common.collect.Iterables.<Object>concat(((Iterable<StringBuilder>) null), ((Iterable<StringBuffer>) null));\n" + 
