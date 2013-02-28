@@ -25,6 +25,7 @@ import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.nodemodel.ILeafNode;
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
+import org.eclipse.xtext.resource.EObjectAtOffsetHelper;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.scoping.IScopeProvider;
@@ -32,6 +33,7 @@ import org.eclipse.xtext.ui.editor.contentassist.ContentAssistContext;
 import org.eclipse.xtext.ui.editor.contentassist.IContextInformationAcceptor;
 import org.eclipse.xtext.ui.editor.contentassist.IContextInformationProvider;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
+import org.eclipse.xtext.xbase.XClosure;
 import org.eclipse.xtext.xbase.XConstructorCall;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XFeatureCall;
@@ -39,6 +41,7 @@ import org.eclipse.xtext.xbase.XMemberFeatureCall;
 import org.eclipse.xtext.xbase.XbasePackage;
 import org.eclipse.xtext.xbase.scoping.featurecalls.JvmFeatureDescription;
 import org.eclipse.xtext.xbase.services.XbaseGrammarAccess;
+import org.eclipse.xtext.xbase.typesystem.references.OwnedConverter;
 
 import com.google.inject.Inject;
 
@@ -58,9 +61,13 @@ public class ParameterContextInformationProvider implements IContextInformationP
 	
 	@Inject
 	private IQualifiedNameConverter qualifiedNameConverter;
+	
+	@Inject
+	private EObjectAtOffsetHelper eObjectAtOffsetHelper;
 
 	public void getContextInformation(ContentAssistContext context, IContextInformationAcceptor acceptor) {
-		XExpression containerCall = getContainerCall(context.getCurrentModel());
+		XExpression containerCall = getContainerCall(eObjectAtOffsetHelper.resolveContainedElementAt(context.getResource(), context.getOffset()));
+		OwnedConverter converter = proposalProvider.getTypeConverter(context.getResource());
 		if (containerCall != null) {
 			ICompositeNode containerCallNode = NodeModelUtils.findActualNodeFor(containerCall);
 			if(containerCallNode.getOffset() > context.getOffset()
@@ -83,7 +90,7 @@ public class ParameterContextInformationProvider implements IContextInformationP
 							if(!executable.getParameters().isEmpty()) {
 								StyledString styledString = new StyledString();
 								proposalProvider.appendParameters(styledString, executable,
-										featureDescription.getNumberOfIrrelevantArguments());
+										featureDescription.getNumberOfIrrelevantArguments(), converter);
 								parameterData.addOverloaded(styledString.toString(), executable.isVarArgs());
 								candidatesFound = true;
 							}
@@ -93,7 +100,7 @@ public class ParameterContextInformationProvider implements IContextInformationP
 				if (candidatesFound) {
 					StyledString displayString = proposalProvider.getStyledDisplayString((JvmExecutable) calledFeature, true, 0, 
 							qualifiedNameConverter.toString(qualifiedNameProvider.getFullyQualifiedName(calledFeature)), 
-							calledFeature.getSimpleName());
+							calledFeature.getSimpleName(), converter);
 					ParameterContextInformation parameterContextInformation = new ParameterContextInformation(
 							parameterData, displayString.toString(), getParameterListOffset(containerCall), context.getOffset());
 					acceptor.accept(parameterContextInformation);
@@ -103,12 +110,12 @@ public class ParameterContextInformationProvider implements IContextInformationP
 	}
 
 	protected XExpression getContainerCall(EObject element) {
-		if (element == null)
+		if (element == null || element instanceof XClosure)
 			return null;
 		else if (element instanceof XConstructorCall || element instanceof XFeatureCall
 				|| element instanceof XMemberFeatureCall)
 			return (XExpression) element;
-		else
+		else 
 			return getContainerCall(element.eContainer());
 	}
 
