@@ -163,7 +163,7 @@ public class ContentAssistTest extends AbstractXbaseContentAssistInBlockTest imp
 	@Test public void testRichString_08() throws Exception {
 		newBuilder().append("'''\n««« comment foobar«null»'''").assertTextAtCursorPosition("foobar");
 	}
-	
+		
 	@Override
 	protected String[] getKeywordsAndStatics() {
 		List<String> result = Lists.newArrayList(super.getKeywordsAndStatics());
