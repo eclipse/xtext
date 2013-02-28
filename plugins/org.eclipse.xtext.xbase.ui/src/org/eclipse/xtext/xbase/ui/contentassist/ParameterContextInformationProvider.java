@@ -18,7 +18,10 @@ import org.eclipse.xtext.Keyword;
 import org.eclipse.xtext.common.types.JvmExecutable;
 import org.eclipse.xtext.common.types.JvmFeature;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
+import org.eclipse.xtext.naming.IQualifiedNameConverter;
+import org.eclipse.xtext.naming.IQualifiedNameProvider;
 import org.eclipse.xtext.naming.QualifiedName;
+import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.nodemodel.ILeafNode;
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
@@ -49,12 +52,24 @@ public class ParameterContextInformationProvider implements IContextInformationP
 	
 	@Inject
 	private XbaseGrammarAccess grammarAccess;
+	
+	@Inject
+	private IQualifiedNameProvider qualifiedNameProvider;
+	
+	@Inject
+	private IQualifiedNameConverter qualifiedNameConverter;
 
 	public void getContextInformation(ContentAssistContext context, IContextInformationAcceptor acceptor) {
 		XExpression containerCall = getContainerCall(context.getCurrentModel());
 		if (containerCall != null) {
+			ICompositeNode containerCallNode = NodeModelUtils.findActualNodeFor(containerCall);
+			if(containerCallNode.getOffset() > context.getOffset()
+					|| containerCallNode.getOffset() + containerCallNode.getLength() < context.getOffset()) 
+				return;
 			JvmIdentifiableElement calledFeature = getCalledFeature(containerCall);
 			if (calledFeature instanceof JvmExecutable) {
+				if(getParameterListOffset(containerCall) > context.getOffset()) 
+					return;
 				ParameterData parameterData = new ParameterData();
 				IScope scope = getScope(containerCall);
 				QualifiedName qualifiedName = QualifiedName.create(getCalledFeatureName(containerCall));
@@ -64,18 +79,23 @@ public class ParameterContextInformationProvider implements IContextInformationP
 						JvmFeatureDescription featureDescription = (JvmFeatureDescription) element;
 						JvmFeature featureCandidate = featureDescription.getJvmFeature();
 						if (featureCandidate instanceof JvmExecutable) {
-							StyledString styledString = new StyledString();
 							JvmExecutable executable = (JvmExecutable) featureCandidate;
-							proposalProvider.appendParameters(styledString, executable,
-									featureDescription.getNumberOfIrrelevantArguments());
-							parameterData.addOverloaded(styledString.toString(), executable.isVarArgs());
-							candidatesFound = true;
+							if(!executable.getParameters().isEmpty()) {
+								StyledString styledString = new StyledString();
+								proposalProvider.appendParameters(styledString, executable,
+										featureDescription.getNumberOfIrrelevantArguments());
+								parameterData.addOverloaded(styledString.toString(), executable.isVarArgs());
+								candidatesFound = true;
+							}
 						}
 					}
 				}
 				if (candidatesFound) {
+					StyledString displayString = proposalProvider.getStyledDisplayString((JvmExecutable) calledFeature, true, 0, 
+							qualifiedNameConverter.toString(qualifiedNameProvider.getFullyQualifiedName(calledFeature)), 
+							calledFeature.getSimpleName());
 					ParameterContextInformation parameterContextInformation = new ParameterContextInformation(
-							parameterData, "what's this?", getParameterListOffset(containerCall), context.getOffset());
+							parameterData, displayString.toString(), getParameterListOffset(containerCall), context.getOffset());
 					acceptor.accept(parameterContextInformation);
 				}
 			}
