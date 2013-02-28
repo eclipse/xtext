@@ -250,8 +250,6 @@ public class DeltaConverter {
 	
 	protected void convertCompilationUnits(IJavaElementDelta delta, List<IResourceDescription.Delta> result) {
 		IJavaElement element = delta.getElement();
-		if (delta.getKind() != IJavaElementDelta.REMOVED && hasStructureErrors(element)) 
-			return;
 		if (element.getElementType() == IJavaElement.COMPILATION_UNIT) {
 			convertCompilationUnit(delta, result);
 		}
@@ -280,16 +278,6 @@ public class DeltaConverter {
 						logger.debug(e, e);
 				}
 			}
-		}
-	}
-
-	protected boolean hasStructureErrors(IJavaElement element) {
-		try {
-			return !element.isStructureKnown();
-		} catch (JavaModelException e) {
-			if (logger.isDebugEnabled())
-				logger.debug(e, e);
-			return true;
 		}
 	}
 
