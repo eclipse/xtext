@@ -43,7 +43,7 @@ public class XtendDocumentTokenSource extends DocumentTokenSource {
 			}
 		}
 		if(multilineTokenType == -1){
-			new RuntimeException("No Token for RULE ML_COMMENT found in tokenTypeDefs!");
+			throw new RuntimeException("No Token for RULE ML_COMMENT found in tokenTypeDefs!");
 		}
 		return super.createTokenInfos(string);
 	}
