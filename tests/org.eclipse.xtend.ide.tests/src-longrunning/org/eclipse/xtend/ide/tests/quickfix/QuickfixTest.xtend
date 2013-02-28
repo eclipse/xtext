@@ -1037,7 +1037,6 @@ class QuickfixTest extends AbstractXtendUITestCase {
 		''')
 	}
 	
-	@Ignore
 	@Test 
 	def void useObjectForUnknownParams() {
 		create('Foo.xtend', '''
