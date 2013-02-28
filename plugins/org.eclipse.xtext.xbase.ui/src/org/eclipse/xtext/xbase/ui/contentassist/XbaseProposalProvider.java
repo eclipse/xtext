@@ -27,6 +27,7 @@ import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmGenericArrayTypeReference;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmOperation;
+import org.eclipse.xtext.common.types.JvmParameterizedTypeReference;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.TypesPackage;
 import org.eclipse.xtext.common.types.xtext.ui.ITypesProposalProvider;
@@ -41,6 +42,7 @@ import org.eclipse.xtext.nodemodel.ILeafNode;
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 import org.eclipse.xtext.resource.IEObjectDescription;
+import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.ui.editor.contentassist.ConfigurableCompletionProposal;
 import org.eclipse.xtext.ui.editor.contentassist.ContentAssistContext;
@@ -63,6 +65,12 @@ import org.eclipse.xtext.xbase.scoping.featurecalls.IValidatedEObjectDescription
 import org.eclipse.xtext.xbase.scoping.featurecalls.JvmFeatureDescription;
 import org.eclipse.xtext.xbase.scoping.featurecalls.OperatorMapping;
 import org.eclipse.xtext.xbase.services.XbaseGrammarAccess;
+import org.eclipse.xtext.xbase.typesystem.legacy.StandardTypeReferenceOwner;
+import org.eclipse.xtext.xbase.typesystem.references.FunctionTypeReference;
+import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
+import org.eclipse.xtext.xbase.typesystem.references.OwnedConverter;
+import org.eclipse.xtext.xbase.typesystem.references.ParameterizedTypeReference;
+import org.eclipse.xtext.xbase.typesystem.util.CommonTypeComputationServices;
 import org.eclipse.xtext.xtype.XtypePackage;
 
 import com.google.common.base.Function;
@@ -96,6 +104,10 @@ public class XbaseProposalProvider extends AbstractXbaseProposalProvider impleme
 	@Inject
 	private StaticQualifierPrefixMatcher staticQualifierPrefixMatcher;
 	
+	@Inject
+	private CommonTypeComputationServices services; 
+	
+
 	public String getNextCategory() {
 		return getXbaseCrossReferenceProposalCreator().getNextCategory();
 	}
@@ -525,7 +537,6 @@ public class XbaseProposalProvider extends AbstractXbaseProposalProvider impleme
 				if (myCandidate instanceof IValidatedEObjectDescription && (isIdRule(ruleName))) {
 					ICompletionProposal result = null;
 					String key = ((IValidatedEObjectDescription) myCandidate).getKey();
-					boolean withParenths = key.endsWith(")");
 					String proposal = getQualifiedNameConverter().toString(myCandidate.getName());
 					if (ruleName != null) {
 						try {
@@ -535,37 +546,40 @@ public class XbaseProposalProvider extends AbstractXbaseProposalProvider impleme
 							return null;
 						}
 					}
-					if (withParenths) {
-						proposal = proposal + "()";
-					}
+					ProposalBracketInfo bracketInfo = getProposalBracketInfo(myCandidate, contentAssistContext);
+					proposal += bracketInfo.brackets;
 					int insignificantParameters = 0;
-					if (myCandidate instanceof JvmFeatureDescription) {
+					if(myCandidate instanceof JvmFeatureDescription) 
 						insignificantParameters = ((JvmFeatureDescription) myCandidate).getNumberOfIrrelevantArguments();
-					}
+					OwnedConverter converter = getTypeConverter(contentAssistContext.getResource());
 					EObject objectOrProxy = myCandidate.getEObjectOrProxy();
 					StyledString displayString = objectOrProxy instanceof JvmFeature 
 							? getStyledDisplayString((JvmFeature)objectOrProxy,
-								withParenths, insignificantParameters,
+								!isEmpty(bracketInfo.brackets), insignificantParameters,
 								getQualifiedNameConverter().toString(myCandidate.getQualifiedName()),
-								getQualifiedNameConverter().toString(myCandidate.getName()))
-							: getStyledDisplayString(objectOrProxy, getQualifiedNameConverter().toString(myCandidate.getQualifiedName()), 
+								getQualifiedNameConverter().toString(myCandidate.getName()),
+								converter)
+							: getStyledDisplayString(objectOrProxy, 
+								getQualifiedNameConverter().toString(myCandidate.getQualifiedName()), 
 								getQualifiedNameConverter().toString(myCandidate.getName()));
 					result = createCompletionProposal(proposal, displayString, null, myContentAssistContext);
 					if (result instanceof ConfigurableCompletionProposal) {
 						ConfigurableCompletionProposal casted = (ConfigurableCompletionProposal) result;
 						casted.setAdditionalProposalInfo(objectOrProxy);
 						casted.setHover(getHover());
-						int offset = casted.getReplacementOffset() + proposal.length() - 1;
-						if (withParenths) {
+						int offset = casted.getReplacementOffset() + proposal.length();
+						casted.setCursorPosition(casted.getCursorPosition() + bracketInfo.caretOffset);
+						if (bracketInfo.selectionOffset != 0) {
+							offset += bracketInfo.selectionOffset;
 							casted.setSelectionStart(offset);
-							casted.setSelectionLength(0);
+							casted.setSelectionLength(bracketInfo.selectionLength);
 							casted.setAutoInsertable(false);
 							casted.setSimpleLinkedMode(myContentAssistContext.getViewer(), '\t', '\n', '\r');
 						}
 						if (objectOrProxy instanceof JvmExecutable) {
 							JvmExecutable executable = (JvmExecutable) objectOrProxy;
 							StyledString parameterList = new StyledString();
-							appendParameters(parameterList, executable, insignificantParameters);
+							appendParameters(parameterList, executable, insignificantParameters, converter);
 							// TODO how should we display overloaded methods were one variant does not take arguments?
 							if (parameterList.length() > 0) {
 								ParameterData parameterData = simpleNameToParameterList.get(myCandidate.getName());
@@ -587,22 +601,76 @@ public class XbaseProposalProvider extends AbstractXbaseProposalProvider impleme
 		};
 	}
 	
-	protected StyledString getStyledDisplayString(JvmFeature feature, boolean withParenths, int insignificantParameters, String qualifiedNameAsString, String shortName) {
+	protected static class ProposalBracketInfo {
+		String brackets = "";
+		int selectionOffset = 0;
+		int selectionLength = 0;
+		int caretOffset = 0;
+	}
+	
+	protected ProposalBracketInfo getProposalBracketInfo(IEObjectDescription proposedDescription, ContentAssistContext contentAssistContext) {
+		ProposalBracketInfo info = new ProposalBracketInfo();
+		if (proposedDescription instanceof JvmFeatureDescription) {
+			JvmFeatureDescription jvmFeatureDescription = (JvmFeatureDescription)proposedDescription;
+			JvmFeature jvmFeature = jvmFeatureDescription.getJvmFeature();
+			if(jvmFeature instanceof JvmExecutable) {
+				List<JvmFormalParameter> parameters = ((JvmExecutable) jvmFeature).getParameters();
+				if (parameters.size() - jvmFeatureDescription.getNumberOfIrrelevantArguments() == 1) {
+					JvmTypeReference parameterType = parameters.get(parameters.size()-1).getParameterType();
+					LightweightTypeReference light = getTypeConverter(contentAssistContext.getResource()).apply(parameterType);
+					if(light.isFunctionType()) {
+						int numParameters = light.getAsFunctionTypeReference().getParameterTypes().size();
+						if(numParameters == 1) {
+							info.brackets = "[]"; 
+							info.caretOffset = -1;
+							return info;
+						} else if(numParameters == 0) {
+					 		info.brackets = "[|]"; 
+							info.caretOffset = -1;
+							return info;
+						} else {
+					 		final StringBuilder b = new StringBuilder();
+					 		for(int i=0; i<numParameters; ++i) {
+					 			if (i!=0) {
+					 				b.append(", ");
+					 			}
+					 			b.append("p"+ (i+1));
+					 		}
+					 		info.brackets = "[" + b.toString() + "|]";
+					 		info.caretOffset = -1;
+					 		info.selectionOffset = -b.length() - 2;
+					 		info.selectionLength = b.length();
+					 		return info;
+					 	}
+					}
+				} 
+			}
+			if (jvmFeatureDescription.getKey().endsWith(")")) {
+				info.brackets = "()";
+				info.selectionOffset = -1;
+			}		
+		}
+		return info;
+	}
+	
+	protected StyledString getStyledDisplayString(JvmFeature feature, boolean withParenths, 
+			int insignificantParameters, String qualifiedNameAsString, String shortName,
+			OwnedConverter converter) {
 		StyledString result = new StyledString(shortName);
 		if (feature instanceof JvmOperation) {
 			JvmOperation operation = (JvmOperation) feature;
 			if (withParenths) {
 				result.append('(');
-				appendParameters(result, (JvmExecutable)feature, insignificantParameters);
+				appendParameters(result, (JvmExecutable)feature, insignificantParameters, converter);
 				result.append(')');
 			}
 			JvmTypeReference returnType = operation.getReturnType();
 			if (returnType != null && returnType.getSimpleName() != null) {
 				result.append(" : ");
-				result.append(returnType.getSimpleName());
+				result.append(converter.apply(returnType).getSimpleName());
 			}
 			result.append(" - ", StyledString.QUALIFIER_STYLER);
-			result.append(feature.getDeclaringType().getSimpleName(), StyledString.QUALIFIER_STYLER);
+			result.append(converter.toRawLightweightReference(feature.getDeclaringType()).getSimpleName(), StyledString.QUALIFIER_STYLER);
 			if (!withParenths) {
 				result.append(".", StyledString.QUALIFIER_STYLER);
 				result.append(feature.getSimpleName(), StyledString.QUALIFIER_STYLER);
@@ -612,23 +680,23 @@ public class XbaseProposalProvider extends AbstractXbaseProposalProvider impleme
 			JvmField field = (JvmField) feature;
 			result.append(" : ");
 			if (field.getType() != null) {
-				String fieldType = field.getType().getSimpleName();
+				String fieldType = converter.apply(field.getType()).getSimpleName();
 				if (fieldType != null)
 					result.append(fieldType);
 			}
 			result.append(" - ", StyledString.QUALIFIER_STYLER);
-			result.append(feature.getDeclaringType().getSimpleName(), StyledString.QUALIFIER_STYLER);
+			result.append(converter.toRawLightweightReference(feature.getDeclaringType()).getSimpleName(), StyledString.QUALIFIER_STYLER);
 		} else if (feature instanceof JvmConstructor) {
 			if (withParenths) {
 				result.append('(');
-				appendParameters(result, (JvmExecutable)feature, insignificantParameters);
+				appendParameters(result, (JvmExecutable)feature, insignificantParameters, converter);
 				result.append(')');
 			}
 		}
 		return result;
 	}
 
-	protected void appendParameters(StyledString result, JvmExecutable executable, int insignificantParameters) {
+	protected void appendParameters(StyledString result, JvmExecutable executable, int insignificantParameters, OwnedConverter ownedConverter) {
 		List<JvmFormalParameter> declaredParameters = executable.getParameters();
 		List<JvmFormalParameter> relevantParameters = declaredParameters.subList(Math.min(insignificantParameters, declaredParameters.size()), declaredParameters.size());
 		for(int i = 0; i < relevantParameters.size(); i++) {
@@ -637,11 +705,11 @@ public class XbaseProposalProvider extends AbstractXbaseProposalProvider impleme
 				result.append(", ");
 			if (i == relevantParameters.size() - 1 && executable.isVarArgs() && parameter.getParameterType() instanceof JvmGenericArrayTypeReference) {
 				JvmGenericArrayTypeReference parameterType = (JvmGenericArrayTypeReference) parameter.getParameterType();
-				result.append(parameterType.getComponentType().getSimpleName());
+				result.append(ownedConverter.apply(parameterType.getComponentType()).getSimpleName());
 				result.append("...");
 			} else {
 				if (parameter.getParameterType()!= null) {
-					String simpleName = parameter.getParameterType().getSimpleName();
+					String simpleName = ownedConverter.apply(parameter.getParameterType()).getSimpleName();
 					if (simpleName != null) // is null if the file is not on the class path
 						result.append(simpleName);
 				}
@@ -649,6 +717,17 @@ public class XbaseProposalProvider extends AbstractXbaseProposalProvider impleme
 			result.append(' ');
 			result.append(notNull(parameter.getName()));
 		}
+	}
+
+	protected OwnedConverter getTypeConverter(XtextResource context) {
+		return new OwnedConverter(new StandardTypeReferenceOwner(services, context)) {
+			@Override
+			public LightweightTypeReference doVisitParameterizedTypeReference(JvmParameterizedTypeReference reference) {
+				ParameterizedTypeReference parameterizedTypeReference = (ParameterizedTypeReference) super.doVisitParameterizedTypeReference(reference);
+				FunctionTypeReference functionTypeReference = services.getFunctionTypes().getAsFunctionTypeReference(parameterizedTypeReference);
+				return functionTypeReference != null ? functionTypeReference : parameterizedTypeReference;
+			}
+		};
 	}
 	
 	protected Predicate<IEObjectDescription> getFeatureDescriptionPredicate(ContentAssistContext contentAssistContext) {
