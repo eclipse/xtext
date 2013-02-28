@@ -11,6 +11,7 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.jdt.annotation.Nullable;
@@ -36,6 +37,7 @@ import com.google.common.base.Preconditions;
 import com.google.common.collect.HashMultiset;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Multiset;
+import com.google.common.collect.Sets;
 import com.google.common.primitives.Ints;
 
 /**
@@ -303,16 +305,17 @@ public abstract class LightweightTypeReference {
 			task.start();
 			TypeParameterSubstitutor<?> substitutor = createSubstitutor();
 			List<LightweightTypeReference> superTypes = getSuperTypes(substitutor);
-			collectSuperTypes(1, superTypes, substitutor, acceptor);
+			collectSuperTypes(1, superTypes, substitutor, acceptor, Sets.<JvmType>newHashSet(getType()));
 		} finally {
 			task.stop();
 		}
 	}
 	
-	protected void collectSuperTypes(int level, List<LightweightTypeReference> references, TypeParameterSubstitutor<?> substitutor, SuperTypeAcceptor acceptor) {
+	protected void collectSuperTypes(int level, List<LightweightTypeReference> references, TypeParameterSubstitutor<?> substitutor, SuperTypeAcceptor acceptor, Set<JvmType> seenTypes) {
 		for(LightweightTypeReference reference: references) {
 			if (acceptor.accept(reference, level)) {
-				collectSuperTypes(level + 1, reference.getSuperTypes(substitutor), substitutor, acceptor);
+				if (seenTypes.add(reference.getType()))
+					collectSuperTypes(level + 1, reference.getSuperTypes(substitutor), substitutor, acceptor, seenTypes);
 			}
 		}
 	}

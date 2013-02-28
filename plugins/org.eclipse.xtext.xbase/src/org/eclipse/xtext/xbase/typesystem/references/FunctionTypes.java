@@ -10,6 +10,7 @@ package org.eclipse.xtext.xbase.typesystem.references;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import org.eclipse.emf.common.util.WrappedException;
 import org.eclipse.emf.ecore.EObject;
@@ -251,7 +252,7 @@ public class FunctionTypes {
 			@Override
 			@Nullable
 			protected LightweightTypeReference getBoundTypeArgument(ParameterizedTypeReference reference, JvmTypeParameter type,
-					Object visiting) {
+					Set<JvmTypeParameter> visiting) {
 				LightweightMergedBoundTypeArgument boundTypeArgument = getTypeParameterMapping().get(type);
 				if (boundTypeArgument != null && boundTypeArgument.getTypeReference() != reference) {
 					LightweightTypeReference boundReference = boundTypeArgument.getTypeReference();
