@@ -8,7 +8,6 @@
 package org.eclipse.xtext.xbase.validation;
 
 import static com.google.common.collect.Iterables.*;
-import static com.google.common.collect.Lists.*;
 import static com.google.common.collect.Sets.*;
 import static org.eclipse.xtext.xbase.XbasePackage.Literals.*;
 import static org.eclipse.xtext.xbase.validation.IssueCodes.*;
@@ -30,7 +29,6 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EStructuralFeature;
-import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.xtext.CrossReference;
@@ -59,7 +57,7 @@ import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.nodemodel.ILeafNode;
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
-import org.eclipse.xtext.util.IAcceptor;
+import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.util.ReplaceRegion;
 import org.eclipse.xtext.validation.Check;
 import org.eclipse.xtext.validation.ComposedChecks;
@@ -91,6 +89,7 @@ import org.eclipse.xtext.xbase.XVariableDeclaration;
 import org.eclipse.xtext.xbase.XbasePackage;
 import org.eclipse.xtext.xbase.XbasePackage.Literals;
 import org.eclipse.xtext.xbase.controlflow.IEarlyExitComputer;
+import org.eclipse.xtext.xbase.imports.IImportsConfiguration;
 import org.eclipse.xtext.xbase.jvmmodel.IJvmModelAssociations;
 import org.eclipse.xtext.xbase.jvmmodel.ILogicalContainerProvider;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
@@ -162,6 +161,9 @@ public class XbaseJavaValidator extends AbstractXbaseJavaValidator {
 	
 	@Inject
 	private IJavaDocTypeReferenceProvider javaDocTypeReferenceProvider;
+	
+	@Inject 
+	private IImportsConfiguration importsConfiguration;
 	
 	private final Set<EReference> typeConformanceCheckedReferences;
 	
@@ -1280,7 +1282,7 @@ public class XbaseJavaValidator extends AbstractXbaseJavaValidator {
 	protected Set<EObject> collectPrimarySourceElements(XImportSection importSection, final Map<JvmType, XImportDeclaration> imports,
 			final Map<String, JvmType> importedNames) {
 		Set<EObject> primarySourceElements = Sets.newHashSet();
-		for (JvmDeclaredType declaredType : getAllDeclaredTypes(importSection.eResource())) {
+		for (JvmDeclaredType declaredType : importsConfiguration.getLocallyDefinedTypes((XtextResource)importSection.eResource())) {
 			if(importedNames.containsKey(declaredType.getSimpleName())){
 				JvmType importedType = importedNames.get(declaredType.getSimpleName());
 				if (importedType != declaredType  && importedType.eResource() != importSection.eResource()) {
@@ -1377,25 +1379,6 @@ public class XbaseJavaValidator extends AbstractXbaseJavaValidator {
 			return leftType.isPrimitive();
 		}
 		return false;
-	}
-	
-	protected Iterable<JvmDeclaredType> getAllDeclaredTypes(Resource resource) {
-		final List<JvmDeclaredType> allDeclaredTypes = newArrayList();
-		addDeclaredTypes(resource.getContents(), new IAcceptor<JvmDeclaredType>() {
-			public void accept(JvmDeclaredType t) {
-				allDeclaredTypes.add(t);
-			}
-		});
-		return allDeclaredTypes;
-	}
-	
-	protected void addDeclaredTypes(List<? extends EObject> elements, IAcceptor<JvmDeclaredType> result) {
-		for(EObject element: elements) {
-			if (element instanceof JvmDeclaredType) {
-				result.accept((JvmDeclaredType) element);
-				addDeclaredTypes(((JvmDeclaredType) element).getMembers(), result);
-			}
-		}
 	}
 	
 	protected boolean isLocallyUsed(EObject target, EObject containerToFindUsage) {
