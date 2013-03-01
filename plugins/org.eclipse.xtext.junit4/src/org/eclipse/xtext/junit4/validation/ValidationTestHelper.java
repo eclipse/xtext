@@ -22,6 +22,7 @@ import org.eclipse.xtext.validation.CheckMode;
 import org.eclipse.xtext.validation.IResourceValidator;
 import org.eclipse.xtext.validation.Issue;
 
+import com.google.common.base.Joiner;
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
 
@@ -146,6 +147,7 @@ public class ValidationTestHelper {
 					.append(eObject.eClass().getName())
 					.append("\n");
 			}
+			assertEquals(Joiner.on('\n').join(messageParts), message.toString());
 			fail(message.toString());
 		}
 	}
