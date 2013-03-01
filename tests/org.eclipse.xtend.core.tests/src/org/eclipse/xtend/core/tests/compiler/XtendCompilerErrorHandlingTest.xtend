@@ -267,7 +267,7 @@ class XtendCompilerErrorHandlingTest extends AbstractXtendTestCase {
 			public class Foo {
 			  public int bar() {
 			    throw new Error("Unresolved compilation problems:"
-			      + "\nIncompatible implicit return type. Expected int or Integer but was null");
+			      + "\nType mismatch: cannot convert from null to int");
 			  }
 			}
 		''')

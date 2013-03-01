@@ -2909,17 +2909,17 @@ public class CompilerTest extends AbstractXtendTestCase {
 	@Test public void testBug366293_related() throws Exception {
 		invokeAndExpect2("success", 
 				"def String whileLoopTest () {\n" + 
-						"        do {\n" + 
-						"            try {\n" + 
-						"                toString()\n" +
-						"                return 'success'\n" + 
-						"            }\n" + 
-						"            catch (Exception ex)\n" + 
-						"            {\n" + 
-						"                throw ex\n" + 
-						"            }\n" +
-						"		  } while (true)" + 
-						"    }", "whileLoopTest");
+				"  do {\n" + 
+				"    try {\n" + 
+				"      toString()\n" +
+				"      return 'success'\n" + 
+				"    }\n" + 
+				"    catch (Exception ex)\n" + 
+				"    {\n" + 
+				"      throw ex\n" + 
+				"    }\n" +
+				"  } while (true)" + 
+				"}", "whileLoopTest");
 	}
 	
 	@Test public void testBug366525_0() throws Exception {

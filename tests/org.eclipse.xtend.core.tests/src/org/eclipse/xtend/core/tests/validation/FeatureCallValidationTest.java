@@ -83,7 +83,7 @@ public class FeatureCallValidationTest extends AbstractXtendTestCase {
 	public void testBug362240_1() throws Exception {
 		XtendClass clazz = clazz("class Bar { def <T> bar(T t) { <Integer>bar(t) }}");
 		helper.assertError(clazz, XbasePackage.Literals.XFEATURE_CALL,
-				IssueCodes.INCOMPATIBLE_TYPES, "Expected Integer or int but was T");
+				IssueCodes.INCOMPATIBLE_TYPES, "Type mismatch: cannot convert from T to Integer");
 	}
 	
 	/**
@@ -93,7 +93,7 @@ public class FeatureCallValidationTest extends AbstractXtendTestCase {
 	public void testBug362240_2() throws Exception {
 		XtendClass clazz = clazz("class Bar<T> { def <X> void bar(X x) { val T t = null; <Integer>bar(t) }}");
 		helper.assertError(clazz, XbasePackage.Literals.XFEATURE_CALL,
-				IssueCodes.INCOMPATIBLE_TYPES, "Expected Integer or int but was T");
+				IssueCodes.INCOMPATIBLE_TYPES, "Type mismatch: cannot convert from T to Integer");
 	}
 	
 	/**
@@ -108,15 +108,15 @@ public class FeatureCallValidationTest extends AbstractXtendTestCase {
 	@Test 
 	public void testBug400653() throws Exception {
 		XtendClass clazz = clazz("class X { def void m(String x) { x.m2 } def m2(char c) {}}");
-		helper.assertError(clazz, XbasePackage.Literals.XMEMBER_FEATURE_CALL,
-				IssueCodes.INCOMPATIBLE_TYPES, "String", "char", "Character", "receiver");
+		helper.assertError(clazz, XbasePackage.Literals.XFEATURE_CALL,
+				IssueCodes.INCOMPATIBLE_TYPES, "Type mismatch: cannot convert from String to char");
 	}
 	
 	@Test 
 	public void testBug400653_02() throws Exception {
 		XtendClass clazz = clazz("class X { def void m(String it) { m2 } def m2(char c) {}}");
 		helper.assertError(clazz, XbasePackage.Literals.XFEATURE_CALL,
-				IssueCodes.INCOMPATIBLE_TYPES, "String", "char", "Character", "implicit first argument");
+				IssueCodes.INCOMPATIBLE_TYPES, "Type mismatch: cannot convert implicit first argument from String to c");
 	}
 	
 	@Test
@@ -127,10 +127,10 @@ public class FeatureCallValidationTest extends AbstractXtendTestCase {
 		assertEquals(1, issues.size());
 		Issue issue = issues.get(0);
 		assertEquals(IssueCodes.INCOMPATIBLE_TYPES, issue.getCode());
-		assertTrue(issue.getMessage().contains("Incompatible implicit first argument."));
-		assertEquals(1, issue.getLineNumber().intValue());
+		assertTrue(issue.getMessage(), issue.getMessage().contains("cannot convert implicit first argument from Object to E"));
 		assertEquals(content.indexOf("add"), issue.getOffset().intValue());
 		assertEquals(3, issue.getLength().intValue());
+		assertEquals(1, issue.getLineNumber().intValue());
 	}
 	
 	@Test 
