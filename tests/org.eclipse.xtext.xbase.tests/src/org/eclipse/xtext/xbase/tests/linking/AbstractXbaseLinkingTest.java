@@ -9,6 +9,9 @@ package org.eclipse.xtext.xbase.tests.linking;
 
 import java.util.List;
 
+import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.resource.Resource.Diagnostic;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.common.types.JvmConstructor;
 import org.eclipse.xtext.common.types.JvmField;
@@ -351,7 +354,9 @@ public abstract class AbstractXbaseLinkingTest extends AbstractXbaseTestCase {
 		// linking is ok but should trigger a validation error
 		XExpression expression = expression("(null as testdata.GenericType1<? extends java.lang.String>) += 'foo'", false);
 		EcoreUtil.resolveAll(expression);
-		assertTrue(expression.eResource().getErrors().isEmpty());
+		List<Resource.Diagnostic> errors = expression.eResource().getErrors();
+		assertEquals(errors.toString(), 1, errors.size());
+		assertEquals("Type mismatch: type String is not applicable at this location", errors.get(0).getMessage());
 	}
 	
 	@Test public void testGenerics_2() throws Exception {

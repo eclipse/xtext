@@ -14,7 +14,6 @@ import static org.eclipse.xtext.xbase.validation.IssueCodes.*;
 
 import java.io.Serializable;
 import java.util.Collection;
-import java.util.Collections;
 import java.util.EnumSet;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -29,7 +28,6 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EStructuralFeature;
-import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.xtext.CrossReference;
 import org.eclipse.xtext.EcoreUtil2;
@@ -93,14 +91,12 @@ import org.eclipse.xtext.xbase.imports.IImportsConfiguration;
 import org.eclipse.xtext.xbase.jvmmodel.IJvmModelAssociations;
 import org.eclipse.xtext.xbase.jvmmodel.ILogicalContainerProvider;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
-import org.eclipse.xtext.xbase.lib.Procedures;
 import org.eclipse.xtext.xbase.scoping.featurecalls.OperatorMapping;
 import org.eclipse.xtext.xbase.typesystem.IBatchTypeResolver;
 import org.eclipse.xtext.xbase.typesystem.computation.NumberLiterals;
 import org.eclipse.xtext.xbase.typesystem.computation.SynonymTypesProvider;
 import org.eclipse.xtext.xbase.typesystem.conformance.ConformanceHint;
 import org.eclipse.xtext.xbase.typesystem.conformance.TypeConformanceComputationArgument;
-import org.eclipse.xtext.xbase.typesystem.conformance.TypeConformanceResult;
 import org.eclipse.xtext.xbase.typesystem.legacy.StandardTypeReferenceOwner;
 import org.eclipse.xtext.xbase.typesystem.references.ArrayTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
@@ -118,7 +114,6 @@ import org.eclipse.xtext.xtype.XtypePackage;
 
 import com.google.common.base.Joiner;
 import com.google.common.base.Predicate;
-import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
@@ -165,86 +160,8 @@ public class XbaseJavaValidator extends AbstractXbaseJavaValidator {
 	@Inject 
 	private IImportsConfiguration importsConfiguration;
 	
-	private final Set<EReference> typeConformanceCheckedReferences;
-	
-	{
-		ImmutableSet.Builder<EReference> builder = ImmutableSet.builder();
-		initTypeConformanceCheckedReferences(builder);
-		typeConformanceCheckedReferences = builder.build();
-		for(EReference reference: typeConformanceCheckedReferences) {
-			if (!XbasePackage.Literals.XEXPRESSION.isSuperTypeOf(reference.getEReferenceType())) {
-				throw new IllegalStateException("not a subtype of XExpression: " + reference);
-			}
-		}
-	}
-
-	protected void initTypeConformanceCheckedReferences(ImmutableSet.Builder<EReference> acceptor) {
-		acceptor.add(
-			XbasePackage.Literals.XVARIABLE_DECLARATION__RIGHT, 
-			XbasePackage.Literals.XIF_EXPRESSION__IF,
-			XbasePackage.Literals.XIF_EXPRESSION__THEN,
-			XbasePackage.Literals.XIF_EXPRESSION__ELSE,
-			XbasePackage.Literals.XTHROW_EXPRESSION__EXPRESSION, 
-			XbasePackage.Literals.XRETURN_EXPRESSION__EXPRESSION,
-			XbasePackage.Literals.XSWITCH_EXPRESSION__SWITCH, 
-			XbasePackage.Literals.XCASE_PART__CASE,
-			XbasePackage.Literals.XASSIGNMENT__ASSIGNABLE,
-			XbasePackage.Literals.XASSIGNMENT__VALUE,
-			XbasePackage.Literals.XABSTRACT_WHILE_EXPRESSION__PREDICATE,
-			XbasePackage.Literals.XMEMBER_FEATURE_CALL__MEMBER_CALL_ARGUMENTS,
-			XbasePackage.Literals.XMEMBER_FEATURE_CALL__MEMBER_CALL_TARGET,
-			// those are not part of eContents in EMF < 2.9 thus we validate them explicitly.
-//			XbasePackage.Literals.XABSTRACT_FEATURE_CALL__IMPLICIT_FIRST_ARGUMENT,
-//			XbasePackage.Literals.XABSTRACT_FEATURE_CALL__IMPLICIT_RECEIVER,
-			XbasePackage.Literals.XCONSTRUCTOR_CALL__ARGUMENTS,
-			XbasePackage.Literals.XFEATURE_CALL__FEATURE_CALL_ARGUMENTS,
-			//TODO these references might point to the receiver, which is the basis of why a certain feature was picked in scoping.
-			// Should be checked in case of extension methods only (i.e. when they are arguments)
-			XbasePackage.Literals.XBINARY_OPERATION__LEFT_OPERAND,
-			XbasePackage.Literals.XBINARY_OPERATION__RIGHT_OPERAND,
-			XbasePackage.Literals.XUNARY_OPERATION__OPERAND,
-			XbasePackage.Literals.XFOR_LOOP_EXPRESSION__FOR_EXPRESSION,
-			XbasePackage.Literals.XCOLLECTION_LITERAL__ELEMENTS);
-	}
-	
-	protected final Set<EReference> getTypeConformanceCheckedReferences() {
-		return typeConformanceCheckedReferences;
-	}
-	
 	protected CommonTypeComputationServices getServices() {
 		return services;
-	}
-	
-	protected void doValidateType(XExpression expression, Procedures.Procedure2<LightweightTypeReference, LightweightTypeReference> messageProducer) {
-		LightweightTypeReference expectedType = getExpectedType(expression);
-		if (expectedType == null) {
-			if (!typeResolver.resolveTypes(expression).isVoidTypeAllowed(expression)) {
-				LightweightTypeReference actualType = getActualType(expression);
-				if (actualType == null)
-					return;
-				if (actualType.isPrimitiveVoid() && !isDefiniteEarlyExit(expression)) {
-					messageProducer.apply(null, actualType);
-				}
-			}
-			return;
-		}
-		LightweightTypeReference actualType = getActualType(expression);
-		if (actualType == null)
-			return;
-		if (actualType.isPrimitiveVoid() && isDefiniteEarlyExit(expression)) {
-			return;
-		}
-		if (isRawConformanceAllowed(expression)) {
-			boolean valid = expectedType.isAssignableFrom(actualType);
-			if (!valid) {
-				messageProducer.apply(expectedType, actualType);
-			}
-		} else {
-			TypeConformanceResult assignability = expectedType.internalIsAssignableFrom(actualType, new TypeConformanceComputationArgument());
-			if (!assignability.isConformant() || assignability.getConformanceHints().contains(ConformanceHint.RAWTYPE_CONVERSION)) {
-				messageProducer.apply(expectedType, actualType);
-			}
-		}
 	}
 	
 	protected boolean isDefiniteEarlyExit(XExpression expression) {
@@ -263,13 +180,6 @@ public class XbaseJavaValidator extends AbstractXbaseJavaValidator {
 			return isDefiniteEarlyExit(((XIfExpression) expression).getThen()) && isDefiniteEarlyExit(((XIfExpression) expression).getElse());
 		}
 		return expression instanceof XReturnExpression || expression instanceof XThrowExpression;
-	}
-	
-	protected boolean isRawConformanceAllowed(XExpression expression) {
-		if (expression.eContainingFeature() == XbasePackage.Literals.XFOR_LOOP_EXPRESSION__FOR_EXPRESSION) {
-			return false;
-		}
-		return true;
 	}
 	
 	protected LightweightTypeReference getActualType(EObject context, JvmIdentifiableElement element) {
@@ -440,68 +350,6 @@ public class XbaseJavaValidator extends AbstractXbaseJavaValidator {
 			if (toLightweightTypeReference(expression.getTypeGuard()).isPrimitiveVoid()) {
 				error("Primitive void cannot be used here.", expression.getTypeGuard(), null, INVALID_USE_OF_TYPE);
 			}
-		}
-	}
-
-	@Check
-	public void checkTypes(final XExpression obj) {
-		final EStructuralFeature containingReference = obj.eContainingFeature();
-		if (!getTypeConformanceCheckedReferences().contains(containingReference)) {
-			return;
-		}
-		doCheckTypes(obj, containingReference);
-	}
-	
-	@Check
-	public void checkImplicitTypes(final XAbstractFeatureCall obj) {
-		EStructuralFeature containingFeature = obj.eContainingFeature();
-		if (containingFeature == XbasePackage.Literals.XABSTRACT_FEATURE_CALL__IMPLICIT_FIRST_ARGUMENT
-				|| containingFeature == XbasePackage.Literals.XABSTRACT_FEATURE_CALL__IMPLICIT_RECEIVER)
-			return;
-		doCheckTypes(obj.getImplicitFirstArgument(), XbasePackage.Literals.XABSTRACT_FEATURE_CALL__IMPLICIT_FIRST_ARGUMENT);
-		doCheckTypes(obj.getImplicitReceiver(), XbasePackage.Literals.XABSTRACT_FEATURE_CALL__IMPLICIT_RECEIVER);
-	}
-
-	protected void doCheckTypes(final XExpression obj, final EStructuralFeature containingReference) {
-		if (obj == null)
-			return;
-		doValidateType(obj, new Procedures.Procedure2<LightweightTypeReference, LightweightTypeReference>() {
-			public void apply(LightweightTypeReference expectedType, LightweightTypeReference actualType) {
-				String firstPart = "Incompatible types.";
-				XExpression errorModel = obj;
-				if (containingReference == XbasePackage.Literals.XMEMBER_FEATURE_CALL__MEMBER_CALL_TARGET) {
-					firstPart = "Incompatible receiver type.";
-					errorModel = (XExpression) errorModel.eContainer();
-				} else if (containingReference == XbasePackage.Literals.XABSTRACT_FEATURE_CALL__IMPLICIT_FIRST_ARGUMENT) {
-					firstPart = "Incompatible implicit first argument.";
-				}
-				if (expectedType != null) {
-					error(firstPart + " Expected " + getNameOfTypes(expectedType) + " but was "
-							+ canonicalName(actualType), errorModel, null, ValidationMessageAcceptor.INSIGNIFICANT_INDEX,
-							INCOMPATIBLE_TYPES);
-				} else {
-					error(firstPart + " Unexpected type primitive void.", errorModel, null, ValidationMessageAcceptor.INSIGNIFICANT_INDEX,
-							INCOMPATIBLE_TYPES);
-				}
-			}
-		});
-	}
-
-	@Check
-	public void checkImplicitReturn(XExpression expr) {
-		if (!isImplicitReturn(expr))
-			return;
-		LightweightTypeReference expectedType = getExpectedType(expr);
-		// TODO what's this special case here?
-		if (expectedType == null || expectedType.isPrimitiveVoid())
-			return;
-		LightweightTypeReference type = typeResolver.resolveTypes(expr).getReturnType(expr);
-		if (type == null)
-			return;
-		if (!expectedType.isAssignableFrom(type)) {
-			error("Incompatible implicit return type. Expected " + getNameOfTypes(expectedType) + " but was "
-					+ canonicalName(type), expr, null, ValidationMessageAcceptor.INSIGNIFICANT_INDEX,
-					INCOMPATIBLE_RETURN_TYPE);
 		}
 	}
 
@@ -1097,54 +945,6 @@ public class XbaseJavaValidator extends AbstractXbaseJavaValidator {
 		}
 	}
 
-	@Check
-	public void checkExceptionsInClosure(XClosure closure) {
-		if (supportsCheckedExceptions())
-			doCheckUnhandledException(closure.getExpression(), Collections.<JvmTypeReference> emptyList());
-	}
-	
-	@Check
-	public void checkUnhandledException(XExpression expression) {
-		if (supportsCheckedExceptions()) {
-			final JvmIdentifiableElement logicalContainer = logicalContainerProvider.getLogicalContainer(expression);
-			if (logicalContainer instanceof JvmExecutable) {
-				JvmExecutable executable = (JvmExecutable) logicalContainer;
-				doCheckUnhandledException(expression, executable.getExceptions());
-			}
-		}
-	}
-
-	protected boolean supportsCheckedExceptions() {
-		return true;
-	}
-
-	@Inject
-	private ExceptionInExpressionFinder exceptionInExpressionFinder;
-
-	protected void doCheckUnhandledException(XExpression expression, List<JvmTypeReference> declaredExceptions) {
-		// TODO implement
-//		for(JvmTypeReference unhandledException: findUnhandledExceptions(expression, typeProvider.getThrownExceptionTypes(expression), declaredExceptions)) {
-//			reportUnhandledException(expression, unhandledException);
-//		}
-	}
-	
-	
-
-	protected Iterable<JvmTypeReference> findUnhandledExceptions(EObject context,
-			Iterable<JvmTypeReference> thrownExceptions, List<JvmTypeReference> declaredExceptions) {
-		return jvmExceptions.findUnhandledExceptions(context, thrownExceptions, declaredExceptions);
-	}
-
-	protected void reportUnhandledException(XExpression element, JvmTypeReference thrownException) {
-		for (EObject childThrowingException : exceptionInExpressionFinder.findChildrenThrowingException(element,
-				thrownException)) {
-			String expressionTypeURI = EcoreUtil.getURI(thrownException.getType()).toString();
-			String childURI = EcoreUtil.getURI(childThrowingException).toString();
-			error("Unhandled exception type " + thrownException.getSimpleName(), childThrowingException, null,
-					ValidationMessageAcceptor.INSIGNIFICANT_INDEX, UNHANDLED_EXCEPTION, expressionTypeURI, childURI);
-		}
-	}
-
 	//TODO switch expression not of type boolean
 	//TODO apply cast rules case's type guards
 	//TODO null guard is not allowed with any other primitives but boolean (null -> false)
@@ -1367,20 +1167,12 @@ public class XbaseJavaValidator extends AbstractXbaseJavaValidator {
 					error("The operator '" + operatorSymbol + "' is undefined for the argument types null and " + rightType.getSimpleName(), binaryOperation, null, PRIMITIVE_COMPARED_TO_NULL);
 			}
 		} else if(expressionHelper.isOperatorFromExtension(binaryOperation, OperatorMapping.ELVIS, ObjectExtensions.class)) {
-			LightweightTypeReference leftType = typeResolver.resolveTypes(left).getActualType(left);
+			LightweightTypeReference leftType = getActualType(left);
 			if(leftType.isPrimitive()) 
 				error("The operator '" + operatorSymbol + "' is undefined for arguments of type " + leftType.getSimpleName(), binaryOperation, null, PRIMITIVE_COMPARED_TO_NULL);
 		}
 	}
 		
-	protected boolean isPrimitiveAndNull(XExpression left, XExpression right) {
-		if(right instanceof XNullLiteral) {
-			LightweightTypeReference leftType = typeResolver.resolveTypes(left).getActualType(left);
-			return leftType.isPrimitive();
-		}
-		return false;
-	}
-	
 	protected boolean isLocallyUsed(EObject target, EObject containerToFindUsage) {
 		return !XbaseUsageCrossReferencer.find(target, containerToFindUsage).isEmpty();
 	}
@@ -1396,10 +1188,6 @@ public class XbaseJavaValidator extends AbstractXbaseJavaValidator {
 
 	protected boolean isInterface(JvmType type) {
 		return type instanceof JvmGenericType && ((JvmGenericType) type).isInterface();
-	}
-
-	protected IEarlyExitComputer getEarlyExitComputer() {
-		return earlyExitComputer;
 	}
 	
 	protected XExpressionHelper getExpressionHelper() {

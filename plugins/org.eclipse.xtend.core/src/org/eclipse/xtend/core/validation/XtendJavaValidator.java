@@ -9,7 +9,6 @@ package org.eclipse.xtend.core.validation;
 
 import static com.google.common.collect.Iterables.*;
 import static com.google.common.collect.Lists.*;
-import static com.google.common.collect.Maps.*;
 import static com.google.common.collect.Sets.*;
 import static org.eclipse.xtend.core.validation.IssueCodes.*;
 import static org.eclipse.xtend.core.xtend.XtendPackage.Literals.*;
@@ -118,7 +117,8 @@ import org.eclipse.xtext.xbase.validation.UIStrings;
 import com.google.common.base.Function;
 import com.google.common.base.Predicate;
 import com.google.common.collect.HashMultimap;
-import com.google.common.collect.ImmutableSet.Builder;
+import com.google.common.collect.ImmutableMap;
+import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Multimap;
@@ -175,18 +175,20 @@ public class XtendJavaValidator extends XbaseWithAnnotationsJavaValidator {
 	@Inject
 	private IQualifiedNameConverter qualifiedNameConverter;
 
-	@Override
-	protected void initTypeConformanceCheckedReferences(Builder<EReference> acceptor) {
-		super.initTypeConformanceCheckedReferences(acceptor);
-		acceptor.add(XtendPackage.Literals.XTEND_FIELD__INITIAL_VALUE,
-					XtendPackage.Literals.RICH_STRING_FOR_LOOP__AFTER, 
-					XtendPackage.Literals.RICH_STRING_FOR_LOOP__BEFORE,
-					XtendPackage.Literals.RICH_STRING_FOR_LOOP__SEPARATOR, 
-					XtendPackage.Literals.RICH_STRING_IF__IF,
-					XtendPackage.Literals.RICH_STRING_ELSE_IF__IF);
-	}
+	protected final Set<String> visibilityModifers = ImmutableSet.of("public", "private", "protected", "package");
+	protected final Map<Class<?>, ElementType> targetInfos;
 	
-	protected final Set<String> visibilityModifers = newHashSet("public", "private", "protected", "package");
+	{
+		ImmutableMap.Builder<Class<?>, ElementType> result = ImmutableMap.builder();
+		result.put(XtendClass.class, ElementType.TYPE);
+		result.put(XtendInterface.class, ElementType.TYPE);
+		result.put(XtendEnum.class, ElementType.TYPE);
+		result.put(XtendAnnotationType.class, ElementType.ANNOTATION_TYPE);
+		result.put(XtendField.class, ElementType.FIELD);
+		result.put(XtendFunction.class, ElementType.METHOD);
+		result.put(XtendParameter.class, ElementType.PARAMETER);
+		targetInfos = result.build();
+	}
 
 	@Override
 	protected List<EPackage> getEPackages() {
@@ -220,7 +222,6 @@ public class XtendJavaValidator extends XbaseWithAnnotationsJavaValidator {
 		if (targets.isEmpty())
 			return;
 		final EObject eContainer = getContainingAnnotationTarget(annotation);
-		final Map<Class<?>, ElementType> targetInfos = getTargetInfos();
 		for (Entry<Class<?>, ElementType> mapping : targetInfos.entrySet()) {
 			if (mapping.getKey().isInstance(eContainer)) {
 				if (!targets.contains(mapping.getValue())) {
@@ -239,18 +240,6 @@ public class XtendJavaValidator extends XbaseWithAnnotationsJavaValidator {
 			return eContainer.eContainer();
 		}
 		return eContainer;
-	}
-
-	protected Map<Class<?>, ElementType> getTargetInfos() {
-		Map<Class<?>, ElementType> result = newHashMap();
-		result.put(XtendClass.class, ElementType.TYPE);
-		result.put(XtendInterface.class, ElementType.TYPE);
-		result.put(XtendEnum.class, ElementType.TYPE);
-		result.put(XtendAnnotationType.class, ElementType.ANNOTATION_TYPE);
-		result.put(XtendField.class, ElementType.FIELD);
-		result.put(XtendFunction.class, ElementType.METHOD);
-		result.put(XtendParameter.class, ElementType.PARAMETER);
-		return result;
 	}
 
 	@Override
@@ -457,11 +446,6 @@ public class XtendJavaValidator extends XbaseWithAnnotationsJavaValidator {
 		return false;
 	}
 	
-	@Override
-	protected boolean supportsCheckedExceptions() {
-		return false;
-	}
-
 	@Check
 	public void checkDuplicateAndOverriddenFunctions(XtendTypeDeclaration xtendType) {
 		final JvmDeclaredType inferredType = associations.getInferredType(xtendType);
@@ -1094,15 +1078,6 @@ public class XtendJavaValidator extends XbaseWithAnnotationsJavaValidator {
 		collectReturnExpressions(func.getCreateExtensionInfo().getCreateExpression(), found);
 		for (XReturnExpression xReturnExpression : found) {
 			error("Return is not allowed in creation expression", xReturnExpression, null, INVALID_EARLY_EXIT);
-		}
-
-		found.clear();
-		collectReturnExpressions(func.getExpression(), found);
-		for (XReturnExpression ret : found) {
-			if (ret.getExpression() != null) {
-				error("Return with expression is not allowed within an initializer of a create method.", ret, null,
-						INVALID_EARLY_EXIT);
-			}
 		}
 	}
 

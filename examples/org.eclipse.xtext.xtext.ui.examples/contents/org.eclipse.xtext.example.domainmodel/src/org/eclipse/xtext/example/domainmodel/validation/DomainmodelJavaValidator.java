@@ -54,11 +54,6 @@ public class DomainmodelJavaValidator extends XbaseJavaValidator {
         }
     }
     
-    @Override
-    protected boolean supportsCheckedExceptions() {
-    	return false;
-    }
-    
 	@Override
 	protected List<EPackage> getEPackages() {
 		List<EPackage> ePackages = super.getEPackages();

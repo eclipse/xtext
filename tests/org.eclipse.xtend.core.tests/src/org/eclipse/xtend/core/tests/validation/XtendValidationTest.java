@@ -133,7 +133,7 @@ public class XtendValidationTest extends AbstractXtendTestCase {
 	
 	@Test public void testFieldInitializerType_01() throws Exception {
 		XtendClass clazz = clazz("class Z { String s = 1 }");
-		helper.assertError(clazz, XNUMBER_LITERAL, INCOMPATIBLE_RETURN_TYPE);
+		helper.assertError(clazz, XNUMBER_LITERAL, INCOMPATIBLE_TYPES, "cannot convert from int to String");
 	}
 	
 	@Test public void testFieldInitializerType_02() throws Exception {
@@ -450,12 +450,12 @@ public class XtendValidationTest extends AbstractXtendTestCase {
 	
 	@Test public void testCreateExpressionMayNotReturnVoid_02() throws Exception {
 		XtendFunction function = function("def String create result: while(true){} illegal() { }");
-		helper.assertError(function, XWHILE_EXPRESSION, INCOMPATIBLE_RETURN_TYPE, "implicit", "return", "type", "void", "String");
+		helper.assertError(function, XWHILE_EXPRESSION, INCOMPATIBLE_TYPES, "cannot convert from void to String");
 	}
 
 	@Test public void testCreateExpressionMayNotReturnVoid_03() throws Exception {
 		XtendFunction function = function("override create result: while(true){} toString() { }");
-		helper.assertError(function, XWHILE_EXPRESSION, INCOMPATIBLE_RETURN_TYPE, "implicit", "return", "type", "void", "String");
+		helper.assertError(function, XWHILE_EXPRESSION, INCOMPATIBLE_TYPES, "cannot convert from void to String");
 	}
 	
 	@Test public void testNoReturnInCreateFunctions() throws Exception {
@@ -470,7 +470,8 @@ public class XtendValidationTest extends AbstractXtendTestCase {
 	
 	@Test public void testNoReturnInCreateFunctions_01() throws Exception {
 		XtendFunction function = function("def create result:'foo' foo() { return 'bar' }");
-		helper.assertError(function, XSTRING_LITERAL, INCOMPATIBLE_TYPES);
+		helper.assertError(function, XRETURN_EXPRESSION, INVALID_RETURN, "Void functions cannot return a value.");
+		helper.assertNoError(function, INVALID_EARLY_EXIT);
 	}
 	
 	@Test public void testNoReturnInCreateFunctions_02() throws Exception {
@@ -485,7 +486,8 @@ public class XtendValidationTest extends AbstractXtendTestCase {
 	
 	@Test public void testNoReturnInCreateFunctions_04() throws Exception {
 		XtendFunction function = function("def create result:'foo' foo() { if (true) 'foo'+'bar' else return 'baz' }");
-		helper.assertError(function, XSTRING_LITERAL, INCOMPATIBLE_TYPES);
+		helper.assertError(function, XRETURN_EXPRESSION, INVALID_RETURN, "Void functions cannot return a value.");
+		helper.assertNoError(function, INVALID_EARLY_EXIT);
 	}
 
 	@Test public void testReturnTypeCompatibility_00() throws Exception {
@@ -510,7 +512,7 @@ public class XtendValidationTest extends AbstractXtendTestCase {
 				+ "  return if (false) 42 else new Object()" 
 				+ " }" 
 				+ "}");
-		helper.assertError(function, XIF_EXPRESSION, INCOMPATIBLE_TYPES, "String", "Object");
+		helper.assertError(function, XCONSTRUCTOR_CALL, INCOMPATIBLE_TYPES, "cannot convert from Object to String");
 	}
 
 	@Test public void testReturnTypeCompatibility_04() throws Exception {
@@ -876,13 +878,13 @@ public class XtendValidationTest extends AbstractXtendTestCase {
 		assertNoConformanceError("'''«FOR i: 1..10 BEFORE 'a' SEPARATOR 1 AFTER true»«ENDFOR»'''");
 		assertConformanceError(
 				"'''«FOR i: 1..10 BEFORE while(true) null SEPARATOR 'b' AFTER 'c'»«ENDFOR»'''", 
-				XWHILE_EXPRESSION, "Unexpected type primitive void");
+				XWHILE_EXPRESSION, "Type mismatch: type void is not applicable at this location");
 		assertConformanceError(
 				"'''«FOR i: 1..10 BEFORE 'a' SEPARATOR while(true) null AFTER 'c'»«ENDFOR»'''", 
-				XWHILE_EXPRESSION, "Unexpected type primitive void");
+				XWHILE_EXPRESSION, "Type mismatch: type void is not applicable at this location");
 		assertConformanceError(
 				"'''«FOR i: 1..10 BEFORE 'a' SEPARATOR null AFTER while(true) null»«ENDFOR»'''", 
-				XWHILE_EXPRESSION, "Unexpected type primitive void");
+				XWHILE_EXPRESSION, "Type mismatch: type void is not applicable at this location");
 	}
 	
 	@Test public void testBug343089_01() throws Exception {
@@ -898,7 +900,7 @@ public class XtendValidationTest extends AbstractXtendTestCase {
 				"def <T extends Integer> (T,T)=>T addFunction() {\n" + 
 				"    [T a,T b|a+(b as Integer)]\n" + 
 				"}");
-		helper.assertError(function, XBLOCK_EXPRESSION, INCOMPATIBLE_RETURN_TYPE, "(T, T)=>T", "(T, T)=>int");
+		helper.assertError(function, XCLOSURE, INCOMPATIBLE_TYPES, "cannot convert from (T, T)=>int to (T, T)=>T");
 	}
 	
 	@Test public void testBug343088_02() throws Exception {
@@ -906,7 +908,7 @@ public class XtendValidationTest extends AbstractXtendTestCase {
 				"def <T extends Integer> (T,T)=>T addFunction() {\n" + 
 				"    [T a,T b|a+b]\n" + 
 				"}");
-		helper.assertError(function, XBLOCK_EXPRESSION, INCOMPATIBLE_RETURN_TYPE, "(T, T)=>T", "(T, T)=>int");
+		helper.assertError(function, XCLOSURE, INCOMPATIBLE_TYPES, "cannot convert from (T, T)=>int to (T, T)=>T");
 	}
 	
 	@Test public void testBug343088_03() throws Exception {

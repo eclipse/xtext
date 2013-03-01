@@ -27,6 +27,10 @@ public class IssueCodes {
 	public static final String FIELD_ACCESS_WITH_PARENTHESES = ISSUE_CODE_PREFIX + "field_access_with_parentheses";
 	public static final String ILLEGAL_FORWARD_REFERENCE = ISSUE_CODE_PREFIX + "illegal_forward_reference";
 	public static final String ILLEGAL_CLASS_INSTANTIATION = ISSUE_CODE_PREFIX + "illegal_class_instantiation";
+	/**
+	 * This feature code indicates a type incompatibility of a method return type.
+	 * Those include conflicts between an implementing method and its super declaration or between dispatch methods.
+	 */
 	public static final String INCOMPATIBLE_RETURN_TYPE = ISSUE_CODE_PREFIX + "incomptible_return_type";
 	public static final String INCOMPATIBLE_TYPES = ISSUE_CODE_PREFIX + "incompatible_types";
 	public static final String INSTANCE_ACCESS_TO_STATIC_MEMBER = ISSUE_CODE_PREFIX + "instance_access_to_static_member";

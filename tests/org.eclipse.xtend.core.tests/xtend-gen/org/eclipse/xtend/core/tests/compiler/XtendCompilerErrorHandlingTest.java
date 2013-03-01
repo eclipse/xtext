@@ -443,7 +443,7 @@ public class XtendCompilerErrorHandlingTest extends AbstractXtendTestCase {
     _builder_1.append("throw new Error(\"Unresolved compilation problems:\"");
     _builder_1.newLine();
     _builder_1.append("      ");
-    _builder_1.append("+ \"\\nIncompatible implicit return type. Expected int or Integer but was null\");");
+    _builder_1.append("+ \"\\nType mismatch: cannot convert from null to int\");");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("}");

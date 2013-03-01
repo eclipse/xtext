@@ -13,7 +13,6 @@ import static org.eclipse.xtext.xbase.validation.IssueCodes.*;
 import java.util.List;
 
 import org.eclipse.emf.ecore.EPackage;
-import org.eclipse.emf.ecore.EReference;
 import org.eclipse.xtext.common.types.JvmAnnotationType;
 import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.validation.Check;
@@ -24,22 +23,12 @@ import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotation;
 import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotationsPackage;
 import org.eclipse.xtext.xbase.validation.XbaseJavaValidator;
 
-import com.google.common.collect.ImmutableSet.Builder;
 import com.google.inject.Inject;
  
 public class XbaseWithAnnotationsJavaValidator extends XbaseJavaValidator {
 	
 	@Inject
 	private XAnnotationUtil annotationUtil;
-	
-	@Override
-	protected void initTypeConformanceCheckedReferences(Builder<EReference> acceptor) {
-		super.initTypeConformanceCheckedReferences(acceptor);
-		acceptor.add(XAnnotationsPackage.Literals.XANNOTATION__VALUE, 
-				XAnnotationsPackage.Literals.XANNOTATION_ELEMENT_VALUE_BINARY_OPERATION__LEFT_OPERAND,
-				XAnnotationsPackage.Literals.XANNOTATION_ELEMENT_VALUE_BINARY_OPERATION__RIGHT_OPERAND,
-				XAnnotationsPackage.Literals.XANNOTATION_ELEMENT_VALUE_PAIR__VALUE);
-	}
 	
 	@Override
 	protected List<EPackage> getEPackages() {

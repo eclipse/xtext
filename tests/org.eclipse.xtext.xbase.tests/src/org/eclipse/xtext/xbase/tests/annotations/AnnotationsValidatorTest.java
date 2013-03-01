@@ -37,7 +37,8 @@ public class AnnotationsValidatorTest extends AbstractXbaseWithAnnotationsTest {
 	
 	@Test public void testTypeConformance_05() throws Exception {
 		XAnnotation annotation = annotation("@testdata.Annotation2(true)", false);
-		validator.assertError(annotation, XbasePackage.Literals.XBOOLEAN_LITERAL, IssueCodes.INCOMPATIBLE_TYPES, "expected String | String[] but was boolean");
+		validator.assertError(annotation, XbasePackage.Literals.XBOOLEAN_LITERAL, IssueCodes.INCOMPATIBLE_TYPES, 
+				"cannot convert from boolean to String | String[]");
 	}
 	
 	@Test public void testTypeConformance_06() throws Exception {

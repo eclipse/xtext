@@ -26,10 +26,7 @@ import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.typesystem.computation.IConstructorLinkingCandidate;
 import org.eclipse.xtext.xbase.typesystem.computation.IFeatureLinkingCandidate;
 import org.eclipse.xtext.xbase.typesystem.computation.ILinkingCandidate;
-import org.eclipse.xtext.xbase.typesystem.computation.ITypeExpectation;
 import org.eclipse.xtext.xbase.typesystem.conformance.ConformanceHint;
-import org.eclipse.xtext.xbase.typesystem.conformance.TypeConformanceComputationArgument;
-import org.eclipse.xtext.xbase.typesystem.conformance.TypeConformanceResult;
 import org.eclipse.xtext.xbase.typesystem.references.ITypeReferenceOwner;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightBoundTypeArgument;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
@@ -79,8 +76,23 @@ public class StackedResolvedTypes extends ResolvedTypes {
 		mergeTypesIntoParent(parent);
 		mergeLinkingCandidatesIntoParent(parent);
 		mergeQueuedDiagnostics(parent);
+		mergePropagatedTypes(parent);
 	}
 	
+	protected void mergePropagatedTypes(ResolvedTypes parent) {
+		for(XExpression expression: basicGetPropagatedTypes()) {
+			parent.setPropagatedType(expression);
+		}
+	}
+	
+	@Override
+	protected boolean isPropagatedType(XExpression expression) {
+		if (super.isPropagatedType(expression)) {
+			return true;
+		}
+		return parent.isPropagatedType(expression);
+	}
+
 	protected void mergeQueuedDiagnostics(ResolvedTypes parent) {
 		Collection<AbstractDiagnostic> diagnostics = super.getQueuedDiagnostics();
 		for(AbstractDiagnostic diagnostic: diagnostics) {
@@ -345,30 +357,9 @@ public class StackedResolvedTypes extends ResolvedTypes {
 		if (typeData == null) {
 			return EnumSet.of(ConformanceHint.EXCEPTION);
 		}
-		EnumSet<ConformanceHint> conformanceHints = typeData.getConformanceHints();
-		if (recompute) {
-			conformanceHints.add(ConformanceHint.UNCHECKED);
-			conformanceHints.remove(ConformanceHint.INCOMPATIBLE);
-			conformanceHints.remove(ConformanceHint.SUCCESS);
-		}
-		if (conformanceHints.contains(ConformanceHint.UNCHECKED)) {
-			LightweightTypeReference actualType = typeData.getActualType();
-			ITypeExpectation expectation = typeData.getExpectation();
-			LightweightTypeReference expectedType = expectation.getExpectedType();
-			if (expectedType != null) {
-				TypeConformanceResult conformanceResult = expectedType.getUpperBoundSubstitute().internalIsAssignableFrom(actualType, new TypeConformanceComputationArgument());
-				conformanceHints.addAll(conformanceResult.getConformanceHints());
-				conformanceHints.remove(ConformanceHint.UNCHECKED);
-				conformanceHints.add(ConformanceHint.CHECKED);
-			} else {
-				conformanceHints.remove(ConformanceHint.UNCHECKED);
-				conformanceHints.add(ConformanceHint.CHECKED);
-				conformanceHints.add(ConformanceHint.SUCCESS);
-			}
-		}
-		return conformanceHints;
+		return getConformanceHints(typeData, recompute);
 	}
-	
+
 	@Override
 	protected void appendContent(StringBuilder result, String indentation) {
 		super.appendContent(result, indentation);
@@ -392,4 +383,5 @@ public class StackedResolvedTypes extends ResolvedTypes {
 	protected IssueSeverities getSeverities() {
 		return parent.getSeverities();
 	}
+
 }

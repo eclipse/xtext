@@ -14,8 +14,7 @@ import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.typesystem.references.UnboundTypeReference;
 
 /**
- * @author Sebastian Zarnekow - Initial contribution and API
- * TODO Javadoc
+ * @author Sebastian Zarnekow - Initial contribution and API TODO Javadoc
  */
 @NonNullByDefault
 public class ExpressionAwareStackedResolvedTypes extends StackedResolvedTypes {
@@ -29,11 +28,11 @@ public class ExpressionAwareStackedResolvedTypes extends StackedResolvedTypes {
 
 	@Override
 	protected void prepareMergeIntoParent() {
-		for(UnboundTypeReference unbound: basicGetTypeParameters().values()) {
-			if (unbound.getExpression() == expression) {
-				unbound.tryResolve();
-			}
-		}
+		tryResolveUnboundReferences();
+		mergeLocalTypes();
+	}
+
+	protected void mergeLocalTypes() {
 		Collection<TypeData> result = basicGetExpressionTypes().get(expression);
 		if (result != null && !result.isEmpty()) {
 			TypeData returnTypeData = mergeTypeData(expression, result, true, true);
@@ -45,5 +44,13 @@ public class ExpressionAwareStackedResolvedTypes extends StackedResolvedTypes {
 				result.add(actualTypeData);
 		}
 	}
-	
+
+	protected void tryResolveUnboundReferences() {
+		for (UnboundTypeReference unbound : basicGetTypeParameters().values()) {
+			if (unbound.getExpression() == expression) {
+				unbound.tryResolve();
+			}
+		}
+	}
+
 }

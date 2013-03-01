@@ -45,6 +45,11 @@ public class ReassigningStackedResolvedTypes extends StackedResolvedTypes {
 	protected void acceptType(XExpression expression, TypeData typeData) {
 		getParent().acceptType(expression, typeData);
 	}
+	
+	@Override
+	protected void setPropagatedType(XExpression expression) {
+		getParent().setPropagatedType(expression);
+	}
 
 	@Override
 	public void setType(JvmIdentifiableElement identifiable, LightweightTypeReference reference) {
@@ -95,5 +100,15 @@ public class ReassigningStackedResolvedTypes extends StackedResolvedTypes {
 	@Override
 	protected void prepareMergeIntoParent() {
 		throw new UnsupportedOperationException("Should not be invoked");
+	}
+	
+	@Override
+	protected boolean isTypeValidationSuppressed() {
+		return getParent().isTypeValidationSuppressed();
+	}
+	
+	@Override
+	protected void suppressTypeValidation() {
+		getParent().suppressTypeValidation();
 	}
 }
