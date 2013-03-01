@@ -14,13 +14,18 @@ import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.TypesPackage;
+import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.scoping.IScopeProvider;
 import org.eclipse.xtext.scoping.impl.AbstractDeclarativeScopeProvider;
 import org.eclipse.xtext.scoping.impl.IDelegatingScopeProvider;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
+import org.eclipse.xtext.xbase.imports.IImportsConfiguration;
 import org.eclipse.xtext.xbase.typesystem.IBatchTypeResolver;
+import org.eclipse.xtext.xtype.XImportDeclaration;
+import org.eclipse.xtext.xtype.XImportSection;
 
+import com.google.common.collect.Lists;
 import com.google.inject.Inject;
 import com.google.inject.name.Named;
 
@@ -44,6 +49,9 @@ public class XbaseBatchScopeProvider implements IBatchScopeProvider , IDelegatin
 	
 	@Inject
 	private IBatchTypeResolver typeResolver;
+	
+	@Inject
+	private IImportsConfiguration importsConfig;
 	
 	protected IScope delegateGetScope(EObject context, EReference reference) {
 		return getDelegate().getScope(context, reference);
@@ -74,9 +82,29 @@ public class XbaseBatchScopeProvider implements IBatchScopeProvider , IDelegatin
 	public IFeatureScopeSession newSession(Resource context) {
 		List<JvmType> literalClasses = implicitlyImportedTypes.getStaticImportClasses(context);
 		List<JvmType> extensionClasses = implicitlyImportedTypes.getExtensionClasses(context);
-		return rootSession.addTypesToStaticScope(literalClasses, extensionClasses);
+		IFeatureScopeSession result = rootSession.addTypesToStaticScope(literalClasses, extensionClasses);
+		if (context.getContents().isEmpty() || !(context instanceof XtextResource))
+			return result;
+		XImportSection importSection = importsConfig.getImportSection((XtextResource) context);
+		if(importSection != null) {
+			List<XImportDeclaration> imports = importSection.getImportDeclarations();
+			List<JvmType> staticFeatureProviders = Lists.newArrayListWithCapacity(imports.size() / 2);
+			List<JvmType> staticExtensionFeatureProviders = Lists.newArrayListWithCapacity(imports.size() / 2);
+			for(XImportDeclaration _import: imports) {
+				if (_import.isWildcard() && _import.isStatic()) {
+					staticFeatureProviders.add(_import.getImportedType());
+					if (_import.isExtension()) {
+						staticExtensionFeatureProviders.add(_import.getImportedType());
+					}
+				}
+			}
+			if (!staticFeatureProviders.isEmpty() || !staticExtensionFeatureProviders.isEmpty()) {
+				result = result.addTypesToStaticScope(staticFeatureProviders, staticExtensionFeatureProviders);
+			}
+		}
+		return result;
 	}
-	
+
 	protected boolean isTypeScope(EReference reference) {
 		return TypesPackage.Literals.JVM_TYPE.isSuperTypeOf(reference.getEReferenceType());
 	}
@@ -96,5 +124,5 @@ public class XbaseBatchScopeProvider implements IBatchScopeProvider , IDelegatin
 	public boolean isBatchScopeable(EReference reference) {
 		return isConstructorCallScope(reference) || isFeatureCallScope(reference);
 	}
-
+	
 }
