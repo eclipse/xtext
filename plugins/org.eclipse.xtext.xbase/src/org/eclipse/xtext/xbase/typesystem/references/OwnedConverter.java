@@ -130,7 +130,7 @@ public class OwnedConverter extends AbstractXtypeReferenceVisitor<LightweightTyp
 		}
 		JvmTypeReference equivalent = reference.getEquivalent();
 		if (equivalent == null)
-			return null;
+			return new UnknownTypeReference(owner);
 		return super.doVisitComputedTypeReference(reference);
 	}
 

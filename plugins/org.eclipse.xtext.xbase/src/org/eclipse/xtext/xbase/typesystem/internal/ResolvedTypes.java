@@ -41,6 +41,8 @@ import org.eclipse.xtext.xbase.typesystem.computation.IFeatureLinkingCandidate;
 import org.eclipse.xtext.xbase.typesystem.computation.ILinkingCandidate;
 import org.eclipse.xtext.xbase.typesystem.computation.ITypeExpectation;
 import org.eclipse.xtext.xbase.typesystem.conformance.ConformanceHint;
+import org.eclipse.xtext.xbase.typesystem.conformance.TypeConformanceComputationArgument;
+import org.eclipse.xtext.xbase.typesystem.conformance.TypeConformanceResult;
 import org.eclipse.xtext.xbase.typesystem.references.CompoundTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.ITypeReferenceOwner;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightBoundTypeArgument;
@@ -114,11 +116,21 @@ public abstract class ResolvedTypes implements IResolvedTypes {
 	private Map<Object, UnboundTypeReference> unboundTypeParameters;
 	private Map<Object, List<LightweightBoundTypeArgument>> typeParameterHints;
 	private Set<Object> resolvedTypeParameters;
+	private Set<XExpression> propagatedTypes;
 	private List<JvmTypeParameter> declaredTypeParameters;
+	private boolean typeValidationSuppressed = false;
 	
 	protected ResolvedTypes(DefaultReentrantTypeResolver resolver) {
 		this.resolver = resolver;
 		this.converter = createConverter();
+	}
+	
+	protected boolean isTypeValidationSuppressed() {
+		return typeValidationSuppressed;
+	}
+	
+	protected void suppressTypeValidation() {
+		typeValidationSuppressed = true;
 	}
 	
 	protected void clear() {
@@ -130,6 +142,7 @@ public abstract class ResolvedTypes implements IResolvedTypes {
 		unboundTypeParameters = null;
 		typeParameterHints = null;
 		resolvedTypeParameters = null;
+		propagatedTypes = null;
 		declaredTypeParameters = null;
 	}
 	
@@ -232,6 +245,7 @@ public abstract class ResolvedTypes implements IResolvedTypes {
 		List<LightweightTypeReference> references = Lists.newArrayList();
 		boolean voidSeen = false;
 		ITypeExpectation expectation = null;
+		boolean allNoImplicitReturn = true;
 		EnumSet<ConformanceHint> mergedHints = EnumSet.of(ConformanceHint.MERGED);
 		for (TypeData value : values) {
 			LightweightTypeReference reference = value.getActualType().getUpperBoundSubstitute();
@@ -240,6 +254,7 @@ public abstract class ResolvedTypes implements IResolvedTypes {
 			} else {
 				references.add(reference);
 			}
+			allNoImplicitReturn = allNoImplicitReturn && value.getConformanceHints().contains(ConformanceHint.NO_IMPLICIT_RETURN); 
 			mergedHints.addAll(value.getConformanceHints());
 			if (expectation == null) {
 				expectation = value.getExpectation();
@@ -249,6 +264,9 @@ public abstract class ResolvedTypes implements IResolvedTypes {
 					expectation = knownExpectation;
 				}
 			}
+		}
+		if (!allNoImplicitReturn) {
+			mergedHints.remove(ConformanceHint.NO_IMPLICIT_RETURN);
 		}
 		LightweightTypeReference mergedType = !references.isEmpty() || !voidSeen ? getMergedType(/*mergedHints, */references) : values.get(0).getActualType();
 		// TODO improve - return error type information
@@ -451,6 +469,31 @@ public abstract class ResolvedTypes implements IResolvedTypes {
 		LightweightTypeReference actualType = substitutor.substitute(type).getUpperBoundSubstitute();
 		acceptType(expression, new TypeData(expression, expectation, actualType, EnumSet.copyOf(Arrays.asList(hints)), returnType));
 		return actualType;
+	}
+	
+	protected EnumSet<ConformanceHint> getConformanceHints(TypeData typeData, boolean recompute) {
+		EnumSet<ConformanceHint> conformanceHints = typeData.getConformanceHints();
+		if (recompute) {
+			conformanceHints.add(ConformanceHint.UNCHECKED);
+			conformanceHints.remove(ConformanceHint.INCOMPATIBLE);
+			conformanceHints.remove(ConformanceHint.SUCCESS);
+		}
+		if (conformanceHints.contains(ConformanceHint.UNCHECKED)) {
+			LightweightTypeReference actualType = typeData.getActualType();
+			ITypeExpectation expectation = typeData.getExpectation();
+			LightweightTypeReference expectedType = expectation.getExpectedType();
+			if (expectedType != null) {
+				TypeConformanceResult conformanceResult = expectedType.getUpperBoundSubstitute().internalIsAssignableFrom(actualType, new TypeConformanceComputationArgument());
+				conformanceHints.addAll(conformanceResult.getConformanceHints());
+				conformanceHints.remove(ConformanceHint.UNCHECKED);
+				conformanceHints.add(ConformanceHint.CHECKED);
+			} else {
+				conformanceHints.remove(ConformanceHint.UNCHECKED);
+				conformanceHints.add(ConformanceHint.CHECKED);
+				conformanceHints.add(ConformanceHint.SUCCESS);
+			}
+		}
+		return conformanceHints;
 	}
 	
 	protected void acceptType(XExpression expression, TypeData typeData) {
@@ -658,6 +701,7 @@ public abstract class ResolvedTypes implements IResolvedTypes {
 		appendListMapContent(typeParameterHints, "typeParameterHints", result, indentation);
 		appendContent(declaredTypeParameters, "declaredTypeParameters", result, indentation);
 		appendContent(diagnostics, "diagnostics", result, indentation);
+		appendContent(propagatedTypes, "propagatedTypes", result, indentation);
 	}
 
 	protected void appendContent(@Nullable Map<?, ?> map, String prefix, StringBuilder result, String indentation) {
@@ -823,6 +867,22 @@ public abstract class ResolvedTypes implements IResolvedTypes {
 	public boolean isResolved(Object handle) {
 		return resolvedTypeParameters != null && resolvedTypeParameters.contains(handle);
 	}
+
+	protected boolean isPropagatedType(XExpression expression) {
+		return propagatedTypes != null && propagatedTypes.contains(expression);
+	}
+	
+	protected void setPropagatedType(XExpression expression) {
+		if (propagatedTypes == null) {
+			propagatedTypes = Sets.newHashSet(expression);
+		} else {
+			propagatedTypes.add(expression);
+		}
+	}
+	
+	protected Set<XExpression> basicGetPropagatedTypes() {
+		return propagatedTypes != null ? propagatedTypes : Collections.<XExpression>emptySet();
+	}
 	
 	@Nullable
 	protected List<JvmTypeParameter> basicGetDeclardTypeParameters() {
@@ -914,7 +974,11 @@ public abstract class ResolvedTypes implements IResolvedTypes {
 	}
 	
 	protected ExpressionAwareStackedResolvedTypes pushTypes(XExpression context) {
-		return new ExpressionAwareStackedResolvedTypes(this, context);
+		ExpressionAwareStackedResolvedTypes result = new ExpressionAwareStackedResolvedTypes(this, context);
+		if (isTypeValidationSuppressed()) {
+			result.suppressTypeValidation();
+		}
+		return result;
 	}
 	
 	protected StackedResolvedTypes pushReassigningTypes() {

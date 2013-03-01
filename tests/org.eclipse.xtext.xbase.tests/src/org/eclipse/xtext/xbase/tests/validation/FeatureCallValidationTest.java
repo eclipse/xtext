@@ -229,7 +229,8 @@ public class FeatureCallValidationTest extends AbstractXbaseTestCase {
 	
 	@Test public void testOperationFeatureCall_6() throws Exception {
 		XExpression expression = expression("(null as Comparable<? extends Object>).compareTo(1)");
-		helper.assertError(expression, XNUMBER_LITERAL, INCOMPATIBLE_TYPES, "null", "int");
+		helper.assertError(expression, XNUMBER_LITERAL, INCOMPATIBLE_TYPES, 
+				"Type mismatch: type int is not applicable at this location");
 	}
 	
 	@Test public void testOperationFeatureCall_7() throws Exception {
@@ -244,7 +245,8 @@ public class FeatureCallValidationTest extends AbstractXbaseTestCase {
 	
 	@Test public void testOperationFeatureCall_9() throws Exception {
 		XExpression expression = expression("'a,b'.split(',').flatten");
-		helper.assertError(expression, XMEMBER_FEATURE_CALL, INCOMPATIBLE_TYPES, "Iterable", "String[]", "receiver");
+		helper.assertError(expression, XMEMBER_FEATURE_CALL, INCOMPATIBLE_TYPES, 
+				"Type mismatch: cannot convert from String[] to Iterable<? extends Iterable<?>>");
 	}
 	
 	@Test public void testOperationFeatureCall_10() throws Exception {
@@ -268,19 +270,15 @@ public class FeatureCallValidationTest extends AbstractXbaseTestCase {
 	@Test
 	public void testOperationFeatureCall_13() throws Exception {
 		XExpression expression = expression("{ var Iterable<String> x = <String[]>newArrayList('a,b'.split(',')).flatten }");
-		helper.assertError(expression, XMEMBER_FEATURE_CALL, INCOMPATIBLE_TYPES, "receiver", 
-				"Iterable<? extends Iterable<? extends String>>", 
-				"Iterable<? extends String>[]", 
-				"ArrayList<String[]>");
+		helper.assertError(expression, XFEATURE_CALL, INCOMPATIBLE_TYPES,  
+				"cannot convert from ArrayList<String[]> to Iterable<? extends Iterable<? extends String>>");
 	}
 	
 	@Test
 	public void testOperationFeatureCall_14() throws Exception {
 		XExpression expression = expression("{ var Iterable<String> x = newArrayList('a,b'.split(','), 'a,b'.split(',')).flatten }");
-		helper.assertError(expression, XMEMBER_FEATURE_CALL, INCOMPATIBLE_TYPES, "receiver", 
-				"Iterable<? extends Iterable<? extends String>>", 
-				"Iterable<? extends String>[]", 
-				"ArrayList<String[]>");
+		helper.assertError(expression, XFEATURE_CALL, INCOMPATIBLE_TYPES, 
+				"cannot convert from ArrayList<String[]> to Iterable<? extends Iterable<? extends String>>");
 	}
 	
 	@Test public void testStaticFeatureAccess_0() throws Exception {
@@ -352,7 +350,7 @@ public class FeatureCallValidationTest extends AbstractXbaseTestCase {
 	@Test
 	public void testBug_350934_03() throws Exception {
 		XExpression expression = expression("true>=0"); 
-		helper.assertError(expression, XNUMBER_LITERAL, INCOMPATIBLE_TYPES, "Expected boolean or Boolean but was int");
+		helper.assertError(expression, XNUMBER_LITERAL, INCOMPATIBLE_TYPES, "cannot convert from int to boolean");
 	}
 
 	@Test

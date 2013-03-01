@@ -350,7 +350,7 @@ public class ValidationTests extends AbstractXbaseTestCase {
 	
 	@Test public void testVoidInReturnExpression_04() throws Exception {
 		XExpression expression = expression("return if (true) while(false) 'foo'+'bar' else while(false) 'foo'+'bar'");
-		helper.assertError(expression, XIF_EXPRESSION, INCOMPATIBLE_TYPES);
+		helper.assertError(expression, XWHILE_EXPRESSION, INCOMPATIBLE_TYPES);
 	}
 	
 	@Test public void testVoidInReturnExpression_05() throws Exception {

@@ -68,6 +68,11 @@ public class ExpectedExceptionsStackedResolvedTypes extends StackedResolvedTypes
 	}
 
 	@Override
+	protected void setPropagatedType(XExpression expression) {
+		getParent().setPropagatedType(expression);
+	}
+	
+	@Override
 	public void setType(JvmIdentifiableElement identifiable, LightweightTypeReference reference) {
 		getParent().setType(identifiable, reference);
 	}
@@ -133,4 +138,13 @@ public class ExpectedExceptionsStackedResolvedTypes extends StackedResolvedTypes
 		super.appendContent(result, indentation);
 	}
 
+	@Override
+	protected boolean isTypeValidationSuppressed() {
+		return getParent().isTypeValidationSuppressed();
+	}
+	
+	@Override
+	protected void suppressTypeValidation() {
+		getParent().suppressTypeValidation();
+	}
 }

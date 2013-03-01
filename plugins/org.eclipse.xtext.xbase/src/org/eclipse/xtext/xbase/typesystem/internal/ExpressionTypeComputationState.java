@@ -25,6 +25,24 @@ import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 @NonNullByDefault
 public class ExpressionTypeComputationState extends AbstractStackedTypeComputationState {
 
+	protected class ExpressionAwareTypeCheckpointComputationState extends TypeCheckpointComputationState {
+		protected ExpressionAwareTypeCheckpointComputationState(ResolvedTypes resolvedTypes, IFeatureScopeSession featureScopeSession,
+				AbstractTypeComputationState parent) {
+			super(resolvedTypes, featureScopeSession, parent);
+		}
+
+		@Override
+		protected ExpressionAwareStackedResolvedTypes doComputeTypes(XExpression expression) {
+			markAsPropagated();
+			return super.doComputeTypes(expression);
+		}
+		
+		@Override
+		public TypeCheckpointComputationState withTypeCheckpoint() {
+			return new ExpressionAwareTypeCheckpointComputationState(getResolvedTypes(), getFeatureScopeSession(), this);
+		}
+	}
+
 	protected final XExpression expression;
 
 	protected ExpressionTypeComputationState(StackedResolvedTypes resolvedTypes,
@@ -40,7 +58,17 @@ public class ExpressionTypeComputationState extends AbstractStackedTypeComputati
 		if (expression == this.expression) {
 			throw new IllegalArgumentException("Attempt to compute the type of the currently computed expression: " + expression);
 		}
+		markAsPropagated();
 		return super.doComputeTypes(expression);
+	}
+	
+	protected void markAsPropagated() {
+		getResolvedTypes().setPropagatedType(this.expression);
+	}
+
+	@Override
+	protected ExpressionAwareStackedResolvedTypes pushTypes(XExpression expression) {
+		return getResolvedTypes().pushTypes(expression);
 	}
 
 	@Override
@@ -68,6 +96,11 @@ public class ExpressionTypeComputationState extends AbstractStackedTypeComputati
 	@Override
 	public AbstractTypeComputationState withoutExpectation() {
 		return new ExpressionTypeComputationStateWithExpectation(getResolvedTypes(), getFeatureScopeSession(), this, null);
+	}
+	
+	@Override
+	public TypeCheckpointComputationState withTypeCheckpoint() {
+		return new ExpressionAwareTypeCheckpointComputationState(getResolvedTypes(), getFeatureScopeSession(), this);
 	}
 	
 	@Override

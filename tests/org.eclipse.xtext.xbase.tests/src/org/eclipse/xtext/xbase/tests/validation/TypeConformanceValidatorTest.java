@@ -9,9 +9,12 @@ package org.eclipse.xtext.xbase.tests.validation;
 
 import static org.eclipse.xtext.xbase.validation.IssueCodes.*;
 
+import java.util.List;
+
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.xtext.common.types.TypesPackage;
 import org.eclipse.xtext.junit4.validation.ValidationTestHelper;
+import org.eclipse.xtext.validation.Issue;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XbasePackage;
 import org.eclipse.xtext.xbase.tests.AbstractXbaseTestCase;
@@ -146,6 +149,72 @@ public class TypeConformanceValidatorTest extends AbstractXbaseTestCase {
 		assertConformanceError("{ var java.lang.Boolean s = 'foo' }", XbasePackage.Literals.XSTRING_LITERAL,
 				"Boolean", "String");
 	}
+	
+	@Test
+	public void testVariableDeclarationWithIf() throws Exception {
+		assertConformanceError("{ var boolean b = if (true) 'foo' else true }", XbasePackage.Literals.XSTRING_LITERAL,
+				"boolean", "String");
+	}
+	
+	@Test
+	public void testNullToPrimitive() throws Exception {
+		assertConformanceError("{ var boolean b = null }", XbasePackage.Literals.XNULL_LITERAL, "boolean", "null");
+	}
+	
+	@Test
+	public void testNullToPrimitiveInIf() throws Exception {
+		String expressionAsString = "{ var boolean b = if (true) null b.toString }";
+		XExpression xExpression = expression(expressionAsString, false);
+		List<Issue> issues = helper.validate(xExpression);
+		assertEquals(issues.toString(), 1, issues.size());
+	}
+	
+	@Test
+	public void testNullToPrimitiveInIfWithBlock() throws Exception {
+		String expressionAsString = "{ var boolean b = if (true) { null } b.toString }";
+		XExpression xExpression = expression(expressionAsString, false);
+		List<Issue> issues = helper.validate(xExpression);
+		assertEquals(issues.toString(), 1, issues.size());
+	}
+	
+	@Test
+	public void testNullToPrimitiveInNestedIf() throws Exception {
+		String expressionAsString = "{ var boolean b = if (true) if (true) null else '' b.toString }";
+		XExpression xExpression = expression(expressionAsString, false);
+		List<Issue> issues = helper.validate(xExpression);
+		assertEquals(issues.toString(), 2, issues.size());
+	}
+	
+	@Test
+	public void testNullToPrimitiveInSwitch() throws Exception {
+		String expressionAsString = "{ var boolean b = switch new Object { String : true default: null } b.toString }";
+		XExpression xExpression = expression(expressionAsString, false);
+		List<Issue> issues = helper.validate(xExpression);
+		assertEquals(issues.toString(), 1, issues.size());
+		Issue singleIssue = issues.get(0);
+		assertEquals(expressionAsString.indexOf("null"), singleIssue.getOffset().intValue());
+		assertEquals("null".length(), singleIssue.getLength().intValue());
+	}
+	
+	@Test public void testIncompatibleSwitchCase_01() throws Exception {
+		String expressionAsString = "{ var boolean b = switch o: new Object { String: o } b.toString }";
+		XExpression xExpression = expression(expressionAsString, false);
+		List<Issue> issues = helper.validate(xExpression);
+		assertEquals(issues.toString(), 1, issues.size());
+		Issue singleIssue = issues.get(0);
+		assertEquals(expressionAsString.indexOf(": o") + 2, singleIssue.getOffset().intValue());
+		assertEquals("o".length(), singleIssue.getLength().intValue());
+	}
+	
+	@Test public void testIncompatibleSwitchCase_02() throws Exception {
+		String expressionAsString = "{ var boolean b = switch o: new Object { String: { o } } b.toString }";
+		XExpression xExpression = expression(expressionAsString, false);
+		List<Issue> issues = helper.validate(xExpression);
+		assertEquals(issues.toString(), 1, issues.size());
+		Issue singleIssue = issues.get(0);
+		assertEquals(expressionAsString.indexOf("{ o") + 2, singleIssue.getOffset().intValue());
+		assertEquals("o".length(), singleIssue.getLength().intValue());
+	}
 
 	@Test
 	public void testCatchClause() throws Exception {
@@ -194,16 +263,16 @@ public class TypeConformanceValidatorTest extends AbstractXbaseTestCase {
 	
 	@Test
 	public void testForLoop_06() throws Exception {
-		assertConformanceError("{ val java.util.Set set = newHashSet() for(String s : set) s }", 
-				XbasePackage.Literals.XFEATURE_CALL, 
-				"Iterable<? extends String>", "String[]", "Set");
+		assertConformanceError("{ val java.util.Set set = newHashSet() for(String s : set) s.toString }", 
+				XbasePackage.Literals.XFOR_LOOP_EXPRESSION, 
+				"Type mismatch: cannot convert from element type Object to String");
 	}
 	
 	@Test
 	public void testForLoop_07() throws Exception {
-		assertConformanceError("{ val java.util.Set set = <String>newHashSet() for(String s : set) s }", 
-				XbasePackage.Literals.XFEATURE_CALL, 
-				"Iterable<? extends String>", "String[]", "Set");
+		assertConformanceError("{ val java.util.Set set = <String>newHashSet() for(String s : set) s.toString }", 
+				XbasePackage.Literals.XFOR_LOOP_EXPRESSION,  
+				"Type mismatch: cannot convert from element type Object to String");
 	}
 	
 	@Test public void testForLoop_08() throws Exception {

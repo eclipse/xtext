@@ -144,6 +144,7 @@ public interface ITypeComputationState {
 
 	/**
 	 * Triggers type computation for a child expression of the currently considered expression.
+	 * 
 	 * @throws IllegalArgumentException if the given expression is the currently computed expression.
 	 */
 	ITypeComputationResult computeTypes(@Nullable XExpression expression);

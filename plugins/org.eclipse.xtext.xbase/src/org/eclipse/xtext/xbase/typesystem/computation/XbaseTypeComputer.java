@@ -23,6 +23,8 @@ import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.JvmTypeReference;
+import org.eclipse.xtext.diagnostics.AbstractDiagnostic;
+import org.eclipse.xtext.diagnostics.Severity;
 import org.eclipse.xtext.validation.EObjectDiagnosticImpl;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.XAbstractWhileExpression;
@@ -35,6 +37,7 @@ import org.eclipse.xtext.xbase.XCatchClause;
 import org.eclipse.xtext.xbase.XClosure;
 import org.eclipse.xtext.xbase.XCollectionLiteral;
 import org.eclipse.xtext.xbase.XConstructorCall;
+import org.eclipse.xtext.xbase.XDoWhileExpression;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XFeatureCall;
 import org.eclipse.xtext.xbase.XForLoopExpression;
@@ -102,6 +105,8 @@ public class XbaseTypeComputer implements ITypeComputer {
 			_computeTypes((XAssignment)expression, state);
 		} else if (expression instanceof XAbstractFeatureCall) {
 			_computeTypes((XAbstractFeatureCall)expression, state);
+		} else if (expression instanceof XDoWhileExpression) {
+			_computeTypes((XDoWhileExpression)expression, state);
 		} else if (expression instanceof XAbstractWhileExpression) {
 			_computeTypes((XAbstractWhileExpression)expression, state);
 		} else if (expression instanceof XBlockExpression) {
@@ -555,7 +560,7 @@ public class XbaseTypeComputer implements ITypeComputer {
 		LightweightTypeReference parameterType = getDeclaredParameterType(declaredParam, state);
 		final JvmGenericType iterableType = (JvmGenericType) services.getTypeReferences().findDeclaredType(Iterable.class, object);
 		
-		if (parameterType != null && !parameterType.isPrimitiveVoid()) {
+		if (parameterType != null && !parameterType.isPrimitiveVoid() && !parameterType.isUnknown()) {
 			final CompoundTypeReference withSynonyms = new CompoundTypeReference(state.getReferenceOwner(), true);
 			LightweightTypeReference iterableOrArray = getAndEnhanceIterableOrArrayFromComponent(parameterType, iterableType, withSynonyms);
 			
@@ -572,8 +577,18 @@ public class XbaseTypeComputer implements ITypeComputer {
 					else {
 						ArrayTypeReference array = forExpressionType.tryConvertToArray();
 						if (array != null) {
-							if (parameterType.isAssignableFrom(array.getComponentType())) {
+							LightweightTypeReference arrayComponentType = array.getComponentType();
+							if (parameterType.isAssignableFrom(arrayComponentType)) {
 								iterableState.refineExpectedType(object.getForExpression(), forExpressionType);
+							} else {
+								LightweightTypeReference rawArrayComponentType = arrayComponentType.getRawTypeReference();
+								AbstractDiagnostic diagnostic = new EObjectDiagnosticImpl(
+										Severity.ERROR, 
+										IssueCodes.INCOMPATIBLE_TYPES, 
+										String.format("Type mismatch: cannot convert from element type %s to %s", rawArrayComponentType.getSimpleName(), parameterType.getSimpleName()), 
+										object, 
+										XbasePackage.Literals.XFOR_LOOP_EXPRESSION__FOR_EXPRESSION, -1, null);
+								state.addDiagnostic(diagnostic);
 							}
 						}
 					}
@@ -686,13 +701,31 @@ public class XbaseTypeComputer implements ITypeComputer {
 	}
 
 	protected void _computeTypes(XAbstractWhileExpression object, ITypeComputationState state) {
-		ITypeComputationState conditionExpectation = state.withExpectation(getTypeForName(Boolean.TYPE, state));
-		conditionExpectation.computeTypes(object.getPredicate());
-		// TODO reassign type if instanceof clause is present and cannot be ignored due to binary boolean operations
-		state.withoutExpectation().computeTypes(object.getBody());
+		computeWhileLoopBody(object, state);
 		
 		LightweightTypeReference primitiveVoid = getPrimitiveVoid(state);
 		state.acceptActualType(primitiveVoid);
+	}
+
+	protected ITypeComputationResult computeWhileLoopBody(XAbstractWhileExpression object, ITypeComputationState state) {
+		ITypeComputationState conditionExpectation = state.withExpectation(getTypeForName(Boolean.TYPE, state));
+		conditionExpectation.computeTypes(object.getPredicate());
+		// TODO reassign type if instanceof clause is present and cannot be ignored due to binary boolean operations
+		return state.withoutExpectation().computeTypes(object.getBody());
+	}
+
+	/**
+	 * Since we are sure that the loop body is executed at least once, the early exit information
+	 * of the loop body expression can be used for the outer expression.
+	 */
+	protected void _computeTypes(XDoWhileExpression object, ITypeComputationState state) {
+		ITypeComputationResult loopBodyResult = computeWhileLoopBody(object, state);
+		boolean noImplicitReturn = loopBodyResult.getConformanceHints().contains(ConformanceHint.NO_IMPLICIT_RETURN);
+		LightweightTypeReference primitiveVoid = getPrimitiveVoid(state);
+		if (noImplicitReturn)
+			state.acceptActualType(primitiveVoid, ConformanceHint.NO_IMPLICIT_RETURN, ConformanceHint.UNCHECKED);
+		else
+			state.acceptActualType(primitiveVoid);
 	}
 
 	protected void _computeTypes(XTypeLiteral object, ITypeComputationState state) {
@@ -735,18 +768,20 @@ public class XbaseTypeComputer implements ITypeComputer {
 		ITypeComputationResult types = expressionState.computeTypes(object.getExpression());
 		LightweightTypeReference thrownException = types.getActualExpressionType();
 		state.acceptActualType(getPrimitiveVoid(state), ConformanceHint.NO_IMPLICIT_RETURN);
-
-		if (!state.isIgnored(IssueCodes.UNHANDLED_EXCEPTION) && thrownException.isSubtypeOf(Throwable.class)
-				&& !thrownException.isSubtypeOf(RuntimeException.class)) {
-			boolean declarationFound = false;
-			for (LightweightTypeReference declaredException : state.getExpectedExceptions())
-				if (declaredException.isAssignableFrom(thrownException)) {
-					declarationFound = true;
-					break;
-				}
-			if (!declarationFound)
-				state.addDiagnostic(new EObjectDiagnosticImpl(expressionState.getSeverity(IssueCodes.UNHANDLED_EXCEPTION), IssueCodes.UNHANDLED_EXCEPTION,
-						"Unhandled exception type " + thrownException.getSimpleName(), object, XbasePackage.Literals.XTHROW_EXPRESSION__EXPRESSION, -1, null));
+		
+		if (thrownException != null && !thrownException.isUnknown()) {
+			if (!state.isIgnored(IssueCodes.UNHANDLED_EXCEPTION) && thrownException.isSubtypeOf(Throwable.class)
+					&& !thrownException.isSubtypeOf(RuntimeException.class)) {
+				boolean declarationFound = false;
+				for (LightweightTypeReference declaredException : state.getExpectedExceptions())
+					if (declaredException.isAssignableFrom(thrownException)) {
+						declarationFound = true;
+						break;
+					}
+				if (!declarationFound)
+					state.addDiagnostic(new EObjectDiagnosticImpl(expressionState.getSeverity(IssueCodes.UNHANDLED_EXCEPTION), IssueCodes.UNHANDLED_EXCEPTION,
+							"Unhandled exception type " + thrownException.getSimpleName(), object, XbasePackage.Literals.XTHROW_EXPRESSION__EXPRESSION, -1, null));
+			}
 		}
 	}
 

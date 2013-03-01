@@ -108,7 +108,7 @@ public abstract class AbstractTypeComputationState implements ITypeComputationSt
 	}
 	
 	protected ExpressionAwareStackedResolvedTypes doComputeTypes(XExpression expression) {
-		ExpressionAwareStackedResolvedTypes stackedResolvedTypes = resolvedTypes.pushTypes(expression);
+		ExpressionAwareStackedResolvedTypes stackedResolvedTypes = pushTypes(expression);
 		ExpressionTypeComputationState state = createExpressionComputationState(expression, stackedResolvedTypes);
 		getResolver().getTypeComputer().computeTypes(expression, state);
 		stackedResolvedTypes.prepareMergeIntoParent();
@@ -116,6 +116,10 @@ public abstract class AbstractTypeComputationState implements ITypeComputationSt
 			state.acceptActualType(new AnyTypeReference(stackedResolvedTypes.getReferenceOwner()));
 		}
 		return stackedResolvedTypes;
+	}
+	
+	protected ExpressionAwareStackedResolvedTypes pushTypes(XExpression expression) {
+		return getResolvedTypes().pushTypes(expression);
 	}
 	
 	protected ExpressionTypeComputationState createExpressionComputationState(XExpression expression,
@@ -160,7 +164,7 @@ public abstract class AbstractTypeComputationState implements ITypeComputationSt
 		return new TypeComputationStateWithExpectation(resolvedTypes, featureScopeSession, this, null);
 	}
 	
-	public AbstractTypeComputationState withTypeCheckpoint() {
+	public TypeCheckpointComputationState withTypeCheckpoint() {
 		return new TypeCheckpointComputationState(resolvedTypes, featureScopeSession, this);
 	}
 	
@@ -220,7 +224,7 @@ public abstract class AbstractTypeComputationState implements ITypeComputationSt
 	}
 	
 	public TypeAssigner assignTypes() {
-		TypeCheckpointComputationState state = new TypeCheckpointComputationState(resolvedTypes, featureScopeSession, this);
+		TypeCheckpointComputationState state = withTypeCheckpoint();
 		return createTypeAssigner(state);
 	}
 	

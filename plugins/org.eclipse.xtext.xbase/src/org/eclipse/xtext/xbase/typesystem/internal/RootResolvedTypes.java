@@ -7,6 +7,8 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.typesystem.internal;
 
+import java.util.EnumSet;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -19,14 +21,18 @@ import org.eclipse.xtext.common.types.JvmMember;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.diagnostics.AbstractDiagnostic;
 import org.eclipse.xtext.diagnostics.Severity;
+import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.util.IAcceptor;
 import org.eclipse.xtext.validation.EObjectDiagnosticImpl;
 import org.eclipse.xtext.validation.IssueSeverities;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XbasePackage;
 import org.eclipse.xtext.xbase.typesystem.computation.ILinkingCandidate;
+import org.eclipse.xtext.xbase.typesystem.computation.ITypeExpectation;
+import org.eclipse.xtext.xbase.typesystem.conformance.ConformanceHint;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.UnboundTypeReference;
+import org.eclipse.xtext.xbase.validation.IssueCodes;
 
 import com.google.common.collect.Sets;
 
@@ -93,6 +99,10 @@ public class RootResolvedTypes extends ResolvedTypes {
 	}
 
 	public void addDiagnostics(final Resource resource) {
+		if (resource instanceof XtextResource) {
+			if (((XtextResource) resource).isValidationDisabled())
+				return;
+		}
 		class DiagnosticAcceptor implements IAcceptor<AbstractDiagnostic> {
 
 			public void accept(@Nullable AbstractDiagnostic diagnostic) {
@@ -110,13 +120,81 @@ public class RootResolvedTypes extends ResolvedTypes {
 			
 		}
 		DiagnosticAcceptor acceptor = new DiagnosticAcceptor();
-		for(AbstractDiagnostic diagnostic: getQueuedDiagnostics()) {
-			acceptor.accept(diagnostic);
+		addQueuedDiagnostics(acceptor);
+		addLinkingDiagnostics(acceptor);
+		addTypeDiagnostics(acceptor);
+	}
+
+	protected void addTypeDiagnostics(IAcceptor<? super AbstractDiagnostic> acceptor) {
+		for(Map.Entry<XExpression, List<TypeData>> entry: basicGetExpressionTypes().entrySet()) {
+			XExpression expression = entry.getKey();
+			if (!isPropagatedType(expression))
+				addTypeDiagnostic(expression, mergeTypeData(expression, entry.getValue(), false, false), acceptor);
 		}
-		
+	}
+
+	protected void addTypeDiagnostic(XExpression expression, @Nullable TypeData typeData, IAcceptor<? super AbstractDiagnostic> acceptor) {
+		if (typeData != null) {
+			LightweightTypeReference actualType = typeData.getActualType();
+			ITypeExpectation expectation = typeData.getExpectation();
+			if (!typeData.getConformanceHints().contains(ConformanceHint.NO_IMPLICIT_RETURN)) {
+				LightweightTypeReference expectedType = expectation.getExpectedType();
+				if (expectedType != null) {
+					if (!expectedType.isPrimitiveVoid()) {
+						EnumSet<ConformanceHint> conformanceHints = getConformanceHints(typeData, false);
+						if (!isSuccess(conformanceHints)) {
+							AbstractDiagnostic diagnostic = createTypeDiagnostic(expression, actualType, expectedType);
+							acceptor.accept(diagnostic);
+						}
+					}
+				} else if (!expectation.isVoidTypeAllowed() && actualType.isPrimitiveVoid()) {
+					AbstractDiagnostic diagnostic = new EObjectDiagnosticImpl(Severity.ERROR, IssueCodes.INCOMPATIBLE_TYPES, 
+							"Type mismatch: type void is not applicable at this location", expression, null, -1,
+							null);
+					acceptor.accept(diagnostic);
+				}
+			}
+		}
+	}
+
+	protected AbstractDiagnostic createTypeDiagnostic(XExpression expression, LightweightTypeReference actualType, LightweightTypeReference expectedType) {
+		if (!expectedType.isAny()) {
+			if (expression.eContainingFeature() == XbasePackage.Literals.XABSTRACT_FEATURE_CALL__IMPLICIT_FIRST_ARGUMENT) {
+				return new EObjectDiagnosticImpl(Severity.ERROR, IssueCodes.INCOMPATIBLE_TYPES, String.format(
+						"Type mismatch: cannot convert implicit first argument from %s to %s", actualType.getSimpleName(), expectedType.getSimpleName()),
+						expression, null, -1, null);
+			} else {
+				return new EObjectDiagnosticImpl(Severity.ERROR, IssueCodes.INCOMPATIBLE_TYPES, String.format(
+						"Type mismatch: cannot convert from %s to %s", actualType.getSimpleName(), expectedType.getSimpleName()),
+						expression, null, -1, null);
+			}
+		} else {
+			return new EObjectDiagnosticImpl(Severity.ERROR, IssueCodes.INCOMPATIBLE_TYPES, String.format(
+					"Type mismatch: type %s is not applicable at this location", actualType.getSimpleName()), expression, null, -1,
+					null);
+		}
+	}
+
+	protected boolean isSuccess(EnumSet<ConformanceHint> conformanceHints) {
+		if (!conformanceHints.contains(ConformanceHint.SUCCESS)) {
+			return false;
+		}
+		if (conformanceHints.contains(ConformanceHint.NO_IMPLICIT_RETURN)) {
+			return true;
+		}
+		return true;
+	}
+	
+	protected void addLinkingDiagnostics(IAcceptor<? super AbstractDiagnostic> acceptor) {
 		Map<XExpression, ILinkingCandidate> candidates = basicGetLinkingCandidates();
 		for(ILinkingCandidate candidate: candidates.values()) {
 			candidate.validate(acceptor);
+		}
+	}
+
+	protected void addQueuedDiagnostics(IAcceptor<? super AbstractDiagnostic> acceptor) {
+		for(AbstractDiagnostic diagnostic: getQueuedDiagnostics()) {
+			acceptor.accept(diagnostic);
 		}
 	}
 	
