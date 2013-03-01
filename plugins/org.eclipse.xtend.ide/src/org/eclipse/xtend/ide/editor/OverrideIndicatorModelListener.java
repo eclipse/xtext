@@ -14,15 +14,17 @@ import java.util.Collections;
 import java.util.Map;
 import java.util.Set;
 
+import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.core.runtime.IStatus;
+import org.eclipse.core.runtime.Status;
+import org.eclipse.core.runtime.jobs.ISchedulingRule;
+import org.eclipse.core.runtime.jobs.Job;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jface.text.ISynchronizable;
 import org.eclipse.jface.text.Position;
 import org.eclipse.jface.text.source.Annotation;
 import org.eclipse.jface.text.source.IAnnotationModel;
 import org.eclipse.jface.text.source.IAnnotationModelExtension;
-import org.eclipse.swt.widgets.Display;
-import org.eclipse.swt.widgets.Shell;
-import org.eclipse.ui.IWorkbenchPartSite;
 import org.eclipse.xtend.core.typing.XtendOverridesService;
 import org.eclipse.xtend.core.xtend.XtendFile;
 import org.eclipse.xtend.core.xtend.XtendFunction;
@@ -35,6 +37,7 @@ import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.editor.IXtextEditorCallback.NullImpl;
+import org.eclipse.xtext.ui.editor.SchedulingRuleFactory;
 import org.eclipse.xtext.ui.editor.XtextEditor;
 import org.eclipse.xtext.ui.editor.model.IXtextDocument;
 import org.eclipse.xtext.ui.editor.model.IXtextModelListener;
@@ -50,9 +53,14 @@ import com.google.inject.Inject;
  */
 @SuppressWarnings("deprecation")
 public class OverrideIndicatorModelListener extends NullImpl implements IXtextModelListener {
+	
+	private static ISchedulingRule SCHEDULING_RULE = SchedulingRuleFactory.INSTANCE.newSequence();
+
 	private XtextEditor xtextEditor;
 	private Set<Annotation> overrideIndicatorAnnotations = Sets.newHashSet();
 	private XtendOverridesService xtendOverridesService;
+
+	private Job currentJob;
 
 	@Inject
 	public void setXtendOverridesService(XtendOverridesService xtendOverridesService) {
@@ -83,22 +91,26 @@ public class OverrideIndicatorModelListener extends NullImpl implements IXtextMo
 	}
 
 	private void asyncUpdateAnnotationModel() {
-		Runnable runnable = new Runnable() {
-			public void run() {
-				updateAnnotationModel();
+		if (currentJob != null) {
+			currentJob.cancel();
+		}
+
+		currentJob = new Job("Override Indicator Updater") {
+			@Override
+			public IStatus run(IProgressMonitor monitor) {
+				return updateAnnotationModel(monitor);
 			}
 		};
-		Display display = getDisplay();
-		if (display == null) {
-			return;
-		}
-		display.asyncExec(runnable);
+		currentJob.setRule(SCHEDULING_RULE);
+		currentJob.setPriority(Job.DECORATE);
+		currentJob.setSystem(true);
+		currentJob.schedule();
 	}
 
-	private void updateAnnotationModel() {
+	private IStatus updateAnnotationModel(IProgressMonitor monitor) {
 		if (xtextEditor == null || xtextEditor.getDocument() == null
 				|| xtextEditor.getInternalSourceViewer().getAnnotationModel() == null) {
-			return;
+			return Status.OK_STATUS;
 		}
 		IXtextDocument xtextDocument = xtextEditor.getDocument();
 		IAnnotationModel annotationModel = xtextEditor.getInternalSourceViewer().getAnnotationModel();
@@ -116,11 +128,13 @@ public class OverrideIndicatorModelListener extends NullImpl implements IXtextMo
 			IAnnotationModelExtension annotationModelExtension = (IAnnotationModelExtension) annotationModel;
 			Object lockObject = getLockObject(annotationModel);
 			synchronized (lockObject) {
-				annotationModelExtension.replaceAnnotations(overrideIndicatorAnnotations.toArray(new Annotation[] {}),
+				annotationModelExtension.replaceAnnotations(
+						overrideIndicatorAnnotations.toArray(new Annotation[overrideIndicatorAnnotations.size()]),
 						annotationToPosition);
 			}
 			overrideIndicatorAnnotations = annotationToPosition.keySet();
 		}
+		return Status.OK_STATUS;
 	}
 
 	private Object getLockObject(IAnnotationModel annotationModel) {
@@ -132,27 +146,8 @@ public class OverrideIndicatorModelListener extends NullImpl implements IXtextMo
 		return annotationModel;
 	}
 
-	private Display getDisplay() {
-		if (xtextEditor == null) {
-			return null;
-		}
-		IWorkbenchPartSite site = xtextEditor.getSite();
-		if (site == null) {
-			return null;
-		}
-		Shell shell = site.getShell();
-		if (shell == null || shell.isDisposed()) {
-			return null;
-		}
-		Display display = shell.getDisplay();
-		if (display == null || display.isDisposed()) {
-			return null;
-		}
-		return display;
-	}
-
 	protected Map<Annotation, Position> createOverrideIndicatorAnnotationMap(XtextResource xtextResource) {
-		EObject eObject = xtextResource.getEObject("/"); //$NON-NLS-1$
+		EObject eObject = xtextResource.getContents().get(0);
 		if (!(eObject instanceof XtendFile)) {
 			return Maps.newHashMap();
 		}
@@ -177,8 +172,8 @@ public class OverrideIndicatorModelListener extends NullImpl implements IXtextMo
 	}
 
 	private Iterable<XtendFunction> getXtendFunctions(XtendFile xtendFile) {
-		return concat(transform(xtendFile.getXtendTypes(), new Function<XtendTypeDeclaration, Iterable<XtendFunction>>(){
-			public java.lang.Iterable<XtendFunction> apply(XtendTypeDeclaration input) {
+		return concat(transform(xtendFile.getXtendTypes(), new Function<XtendTypeDeclaration, Iterable<XtendFunction>>() {
+			public Iterable<XtendFunction> apply(XtendTypeDeclaration input) {
 				return filter(input.getMembers(), XtendFunction.class);
 			}
 		}));
