@@ -1454,7 +1454,7 @@ public abstract class AbstractTypeResolverTest<Reference extends Object> extends
   
   @Test
   public void testIfExpression_10() throws Exception {
-    this.resolvesTo("if (true) null as java.util.List<String> else null as String[]", "List<String>");
+    this.resolvesTo("if (true) null as java.util.List<String> else null as String[]", "Object");
   }
   
   @Test
@@ -1550,6 +1550,16 @@ public abstract class AbstractTypeResolverTest<Reference extends Object> extends
   @Test
   public void testIfExpression_29() throws Exception {
     this.resolvesTo("if (true) while(true) \'\'.toString else while(true) \'\'.toString", "void");
+  }
+  
+  @Test
+  public void testIfExpression_30() throws Exception {
+    this.resolvesTo("if (true) null as int[] else null as Integer[]", "Serializable & Cloneable");
+  }
+  
+  @Test
+  public void testIfExpression_31() throws Exception {
+    this.resolvesTo("if (true) null as int[] else null as Iterable<Integer>", "Object");
   }
   
   @Test
@@ -1896,6 +1906,16 @@ public abstract class AbstractTypeResolverTest<Reference extends Object> extends
   @Test
   public void testVarArgs_06() throws Exception {
     this.resolvesTo("java::util::Arrays::asList(1, 3d, \'4\')", "List<Comparable<?> & Serializable>");
+  }
+  
+  @Test
+  public void testVarArgs_07() throws Exception {
+    this.resolvesTo("newArrayList(null as Integer[], null as int[], null as Iterable<Integer>)", "ArrayList<Object>");
+  }
+  
+  @Test
+  public void testVarArgs_08() throws Exception {
+    this.resolvesTo("newArrayList(null as Integer[], null as int[])", "ArrayList<Serializable & Cloneable>");
   }
   
   @Test

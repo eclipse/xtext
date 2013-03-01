@@ -330,10 +330,6 @@ abstract class AbstractBatchReturnTypeTest extends AbstractReturnTypeTest<Lightw
 		assertEquals(IResolvedTypes::NULL, typeResolution)
 	}
 	
-	@Ignore("TODO discuss the preference - list or array?") @Test override testIfExpression_10() throws Exception {
-		super.testIfExpression_10()
-	}
-	
 }
 
 /**

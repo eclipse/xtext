@@ -245,12 +245,6 @@ public abstract class AbstractBatchTypeResolverTest extends AbstractTypeResolver
     Assert.assertEquals(IResolvedTypes.NULL, typeResolution);
   }
   
-  @Ignore("TODO discuss the preference - list or array?")
-  @Test
-  public void testIfExpression_10() throws Exception {
-    super.testIfExpression_10();
-  }
-  
   @Ignore("TODO this should work")
   @Test
   public void testBug_391758() throws Exception {
