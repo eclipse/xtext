@@ -35,7 +35,6 @@ import org.eclipse.xtext.xbase.typesystem.references.FunctionTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.ParameterizedTypeReference;
 import org.junit.Assert;
-import org.junit.Ignore;
 import org.junit.Test;
 
 /**
@@ -231,11 +230,5 @@ public abstract class AbstractBatchReturnTypeTest extends AbstractReturnTypeTest
     final IResolvedTypes typeResolution = _typeResolver.resolveTypes(proxy);
     Assert.assertNotNull(typeResolution);
     Assert.assertEquals(IResolvedTypes.NULL, typeResolution);
-  }
-  
-  @Ignore("TODO discuss the preference - list or array?")
-  @Test
-  public void testIfExpression_10() throws Exception {
-    super.testIfExpression_10();
   }
 }
