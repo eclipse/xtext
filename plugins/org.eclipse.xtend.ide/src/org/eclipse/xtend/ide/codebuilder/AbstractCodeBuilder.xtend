@@ -26,6 +26,7 @@ import org.eclipse.xtext.xbase.compiler.StringBuilderBasedAppendable
 import org.eclipse.xtext.xbase.compiler.TypeReferenceSerializer
 import org.eclipse.jdt.annotation.NonNullByDefault
 import org.eclipse.xtext.common.types.util.jdt.IJavaElementFinder
+import org.eclipse.xtext.common.types.JvmUnknownTypeReference
 
 /** 
  * @author Jan Koehnlein
@@ -86,7 +87,7 @@ abstract class AbstractCodeBuilder implements ICodeBuilder {
 				appendable.appendType(typeRef, "Object")
 				appendable.append(" ")
 				val acceptor = new VariableNameAcceptor(notAllowed)
-				getVariableProposals(typeRef.getIdentifier(), context, 
+				getVariableProposals(typeRef.identifierOrObject, context, 
 					JdtVariableCompletions$VariableType::PARAMETER, notAllowed, acceptor)
 				appendable.append(acceptor.getVariableName())
 			}
@@ -94,6 +95,13 @@ abstract class AbstractCodeBuilder implements ICodeBuilder {
 				appendable.append(", ")
 		}
 		appendable.append(")")
+	}
+	
+	def protected getIdentifierOrObject(JvmTypeReference typeReference) {
+		switch(typeReference) {
+			JvmUnknownTypeReference: "java.lang.Object"
+			default: typeReference.identifier
+		}
 	}
 
 	def protected isInterface(JvmType t) {
