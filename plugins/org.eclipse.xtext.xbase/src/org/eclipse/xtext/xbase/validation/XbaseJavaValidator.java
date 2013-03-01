@@ -285,7 +285,7 @@ public class XbaseJavaValidator extends AbstractXbaseJavaValidator {
 	protected void checkCast(JvmTypeReference concreteSyntax, LightweightTypeReference toType, LightweightTypeReference fromType) {
 		if (toType == null || fromType == null)
 			return;
-		if (fromType.getType() instanceof JvmDeclaredType) {
+		if (fromType.getType() instanceof JvmDeclaredType || fromType.isPrimitive()) {
 			// if one of the types is an interface and the other is a non final class (or interface) there always can be a subtype
 			if ((!isInterface(fromType) || isFinal(toType)) && (!isInterface(toType) || isFinal(fromType))) { 
 				if (!toType.isAssignableFrom(fromType)) {
@@ -958,6 +958,8 @@ public class XbaseJavaValidator extends AbstractXbaseJavaValidator {
 		if (expressionTypeRef.isArray()) {
 			return isFinal(expressionTypeRef.getComponentType());
 		}
+		if (expressionTypeRef.isPrimitive())
+			return true;
 		return expressionTypeRef.getType() instanceof JvmDeclaredType
 				&& ((JvmDeclaredType) expressionTypeRef.getType()).isFinal();
 	}
