@@ -963,11 +963,6 @@ public class XtendValidationTest extends AbstractXtendTestCase {
 		helper.assertError(function, objectType, INCOMPATIBLE_TYPES, messageParts);
 	}
 
-	protected void assertCastError(String body, EClass objectType, String... messageParts) throws Exception {
-		final XtendFunction function = function("def foo() " + body);
-		helper.assertError(function, objectType, INVALID_CAST, messageParts);
-	}
-
 	protected void assertNoConformanceError(String body) throws Exception {
 		final XtendFunction function = function("def foo() " + body);
 		helper.assertNoError(function, INCOMPATIBLE_TYPES);
