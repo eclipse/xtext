@@ -285,6 +285,9 @@ public class XtendJvmModelInferrer implements IJvmModelInferrer {
 	protected void initialize(XtendClass source, JvmGenericType inferredJvmType) {
 		inferredJvmType.setVisibility(JvmVisibility.PUBLIC);
 		inferredJvmType.setAbstract(source.isAbstract());
+		if (!inferredJvmType.isAbstract()) {
+			inferredJvmType.setFinal(source.isFinal());
+		}
 		translateAnnotationsTo(source.getAnnotations(), inferredJvmType);
 		boolean isDataObject = hasAnnotation(source, Data.class);
 		JvmTypeReference extendsClause = source.getExtends();
@@ -572,7 +575,9 @@ public class XtendJvmModelInferrer implements IJvmModelInferrer {
 
 	protected void transform(XtendFunction source, JvmGenericType container, boolean allowDispatch) {
 		JvmOperation operation = typesFactory.createJvmOperation();
-		operation.setAbstract(source.getExpression()==null);
+		operation.setAbstract(source.isAbstract());
+		if (!source.isAbstract())
+			operation.setFinal(source.isFinal());
 		container.getMembers().add(operation);
 		associator.associatePrimary(source, operation);
 		String sourceName = source.getName();

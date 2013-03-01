@@ -509,6 +509,18 @@ public class InferredJvmModelTest extends AbstractXtendTestCase {
 				.getIdentifier());
 	}
 
+	@Test public void testFinalFunction() throws Exception {
+		XtendFile xtendFile = file("final class C { final String s = '' def final void m() {} }");
+		JvmGenericType inferredType = getInferredType(xtendFile);
+		assertTrue(inferredType.isFinal());
+		Iterable<JvmOperation> operations = inferredType.getDeclaredOperations();
+		JvmOperation operation = operations.iterator().next();
+		assertTrue(operation.isFinal());
+		Iterable<JvmField> fields = inferredType.getDeclaredFields();
+		JvmField field = fields.iterator().next();
+		assertTrue(field.isFinal());	
+	}
+	
 	@Test public void testInferredTypeWithSelfReferringTypeParameter() throws Exception {
 		XtendFile xtendFile = file("package foo class Foo <T extends Foo> {}");
 		JvmGenericType inferredType = getInferredType(xtendFile);
