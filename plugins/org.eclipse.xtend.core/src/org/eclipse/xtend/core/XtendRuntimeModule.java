@@ -17,7 +17,6 @@ import org.eclipse.xtend.core.resource.XtendResourceDescriptionStrategy;
 import org.eclipse.xtend.core.scoping.XtendImportedNamespaceScopeProvider;
 import org.eclipse.xtend.core.scoping.XtendScopeProvider;
 import org.eclipse.xtend.core.typesystem.DispatchAndExtensionAwareReentrantTypeResolver;
-import org.eclipse.xtend.core.typesystem.ExtensionAwareScopeProvider;
 import org.eclipse.xtend.core.typesystem.TypeDeclarationAwareBatchTypeResolver;
 import org.eclipse.xtend.core.typesystem.XtendTypeComputer;
 import org.eclipse.xtend.core.typing.XtendExpressionHelper;
@@ -28,7 +27,6 @@ import org.eclipse.xtext.conversion.IValueConverterService;
 import org.eclipse.xtext.generator.IFilePostProcessor;
 import org.eclipse.xtext.generator.IOutputConfigurationProvider;
 import org.eclipse.xtext.linking.ILinkingDiagnosticMessageProvider;
-import org.eclipse.xtext.linking.LinkingScopeProviderBinding;
 import org.eclipse.xtext.naming.IQualifiedNameProvider;
 import org.eclipse.xtext.resource.IDefaultResourceDescriptionStrategy;
 import org.eclipse.xtext.resource.ILocationInFileProvider;
@@ -43,7 +41,6 @@ import org.eclipse.xtext.xbase.formatting.IBasicFormatter;
 import org.eclipse.xtext.xbase.imports.IImportsConfiguration;
 import org.eclipse.xtext.xbase.jvmmodel.IJvmModelInferrer;
 import org.eclipse.xtext.xbase.jvmmodel.JvmModelAssociator;
-import org.eclipse.xtext.xbase.scoping.batch.XbaseBatchScopeProvider;
 import org.eclipse.xtext.xbase.typesystem.computation.ITypeComputer;
 import org.eclipse.xtext.xbase.typesystem.internal.DefaultBatchTypeResolver;
 import org.eclipse.xtext.xbase.typesystem.internal.DefaultReentrantTypeResolver;
@@ -134,17 +131,6 @@ public class XtendRuntimeModule extends org.eclipse.xtend.core.AbstractXtendRunt
 	
 	public XtendFactory bindXtendFactory() {
 		return XtendFactory.eINSTANCE;
-	}
-
-	@Override
-	public void configureLinkingIScopeProvider(Binder binder) {
-		binder.bind(IScopeProvider.class).annotatedWith(LinkingScopeProviderBinding.class)
-				.to(ExtensionAwareScopeProvider.class);
-	}
-	
-	@Override
-	public Class<? extends XbaseBatchScopeProvider> bindXbaseBatchScopeProvider() {
-		return ExtensionAwareScopeProvider.class;
 	}
 
 	@Override
