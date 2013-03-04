@@ -30,6 +30,7 @@ import org.eclipse.xtext.generator.IGenerator;
 import org.eclipse.xtext.generator.LineSeparatorHarmonizer;
 import org.eclipse.xtext.generator.Naming;
 import org.eclipse.xtext.linking.ILinker;
+import org.eclipse.xtext.linking.ILinkingDiagnosticMessageProvider;
 import org.eclipse.xtext.linking.LinkingScopeProviderBinding;
 import org.eclipse.xtext.naming.IQualifiedNameConverter;
 import org.eclipse.xtext.naming.IQualifiedNameProvider;
@@ -193,7 +194,10 @@ public class XbaseGeneratorFragment extends AbstractGeneratorFragment {
 					.addTypeToType(IScopeProvider.class.getCanonicalName(),
 							"org.eclipse.xtext.xbase.annotations.scoping.XbaseWithAnnotationsScopeProvider")
 					.addTypeToType("org.eclipse.xtext.xbase.scoping.batch.XbaseBatchScopeProvider",
-							"org.eclipse.xtext.xbase.annotations.typesystem.XbaseWithAnnotationsBatchScopeProvider");
+							"org.eclipse.xtext.xbase.annotations.typesystem.XbaseWithAnnotationsBatchScopeProvider")
+					.addTypeToType(ILinkingDiagnosticMessageProvider.class.getCanonicalName(),
+							"org.eclipse.xtext.xbase.annotations.validation.UnresolvedAnnotationTypeAwareMessageProducer");
+			
 		} else {
 			config = config.addTypeToType(IScopeProvider.class.getCanonicalName(),
 					"org.eclipse.xtext.xbase.scoping.XbaseScopeProvider");

@@ -7,8 +7,11 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.tests.annotations;
 
+import java.util.List;
+
 import org.eclipse.xtext.diagnostics.Diagnostic;
 import org.eclipse.xtext.junit4.validation.ValidationTestHelper;
+import org.eclipse.xtext.validation.Issue;
 import org.eclipse.xtext.xbase.XbasePackage;
 import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotation;
 import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotationsPackage;
@@ -113,5 +116,15 @@ public class AnnotationsValidatorTest extends AbstractXbaseWithAnnotationsTest {
 		// TODO use better error message like in Java (e.g. Annotation A does not define an attribute b)
 		validator.assertError(annotation, XAnnotationsPackage.Literals.XANNOTATION_ELEMENT_VALUE_PAIR, Diagnostic.LINKING_DIAGNOSTIC);
 		validator.assertError(annotation, XAnnotationsPackage.Literals.XANNOTATION, IssueCodes.ANNOTATIONS_MISSING_ATTRIBUTE_DEFINITION, "attribute 'value'");
+	}
+	
+	@Test public void testReferencedTypeIsNoEnum() throws Exception {
+		XAnnotation annotation = annotation("@java.lang.Object(unknown = #[ new String() ])", false);
+		List<Issue> issues = validator.validate(annotation);
+		assertEquals(issues.toString(), 1, issues.size());
+		Issue singleIssue = issues.get(0);
+		assertEquals(IssueCodes.INCOMPATIBLE_TYPES, singleIssue.getCode());
+		assertEquals(1, singleIssue.getOffset().intValue());
+		assertEquals("java.lang.Object".length(), singleIssue.getLength().intValue());
 	}
 }

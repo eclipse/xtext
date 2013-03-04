@@ -16,6 +16,7 @@ import org.eclipse.xtend.lib.macro.declaration.MutableTypeDeclaration;
 import org.eclipse.xtend.lib.macro.expression.Expression;
 import org.eclipse.xtext.common.types.JvmAnnotationType;
 import org.eclipse.xtext.common.types.JvmOperation;
+import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotation;
 import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotationElementValuePair;
@@ -26,11 +27,24 @@ import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 @SuppressWarnings("all")
 public class XtendAnnotationReferenceImpl extends AbstractDeclarationImpl<XAnnotation> implements AnnotationReference {
   public AnnotationTypeDeclaration getAnnotationTypeDeclaration() {
-    CompilationUnitImpl _compilationUnit = this.getCompilationUnit();
+    AnnotationTypeDeclaration _switchResult = null;
     XAnnotation _delegate = this.getDelegate();
-    JvmAnnotationType _annotationType = _delegate.getAnnotationType();
-    MutableTypeDeclaration _typeDeclaration = _compilationUnit.toTypeDeclaration(_annotationType);
-    return ((AnnotationTypeDeclaration) _typeDeclaration);
+    JvmType _annotationType = _delegate.getAnnotationType();
+    final JvmType type = _annotationType;
+    boolean _matched = false;
+    if (!_matched) {
+      if (type instanceof JvmAnnotationType) {
+        final JvmAnnotationType _jvmAnnotationType = (JvmAnnotationType)type;
+        _matched=true;
+        CompilationUnitImpl _compilationUnit = this.getCompilationUnit();
+        MutableTypeDeclaration _typeDeclaration = _compilationUnit.toTypeDeclaration(_jvmAnnotationType);
+        _switchResult = ((AnnotationTypeDeclaration) _typeDeclaration);
+      }
+    }
+    if (!_matched) {
+      _switchResult = null;
+    }
+    return _switchResult;
   }
   
   public Expression getExpression(final String property) {

@@ -14,6 +14,7 @@ import org.eclipse.emf.ecore.EReference;
 import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.common.types.JvmAnnotationType;
 import org.eclipse.xtext.common.types.JvmOperation;
+import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.EObjectDescription;
 import org.eclipse.xtext.resource.IEObjectDescription;
@@ -34,11 +35,11 @@ public class XbaseWithAnnotationsBatchScopeProvider extends XbaseBatchScopeProvi
 	public IScope getScope(EObject context, EReference reference) {
 		if (reference == XAnnotationsPackage.Literals.XANNOTATION_ELEMENT_VALUE_PAIR__ELEMENT) {
 			XAnnotation annotation = EcoreUtil2.getContainerOfType(context, XAnnotation.class);
-			JvmAnnotationType annotationType = annotation.getAnnotationType();
-			if (annotationType == null || annotationType.eIsProxy()) {
+			JvmType annotationType = annotation.getAnnotationType();
+			if (annotationType == null || annotationType.eIsProxy() || !(annotationType instanceof JvmAnnotationType)) {
 				return IScope.NULLSCOPE;
 			}
-			Iterable<JvmOperation> operations = annotationType.getDeclaredOperations();
+			Iterable<JvmOperation> operations = ((JvmAnnotationType) annotationType).getDeclaredOperations();
 			Iterable<IEObjectDescription> descriptions = transform(operations, new Function<JvmOperation, IEObjectDescription>() {
 				public IEObjectDescription apply(JvmOperation from) {
 					return EObjectDescription.create(QualifiedName.create(from.getSimpleName()), from);

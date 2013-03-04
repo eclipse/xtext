@@ -5,7 +5,7 @@
   <eClassifiers xsi:type="ecore:EClass" name="XAnnotation" eSuperTypes="Xbase.ecore#//XExpression">
     <eStructuralFeatures xsi:type="ecore:EReference" name="elementValuePairs" upperBound="-1"
         eType="#//XAnnotationElementValuePair" containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="annotationType" eType="ecore:EClass platform:/resource/org.eclipse.xtext.common.types/model/JavaVMTypes.ecore#//JvmAnnotationType"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="annotationType" eType="ecore:EClass platform:/resource/org.eclipse.xtext.common.types/model/JavaVMTypes.ecore#//JvmType"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="value" eType="ecore:EClass Xbase.ecore#//XExpression"
         containment="true"/>
   </eClassifiers>

@@ -26,6 +26,7 @@ import org.eclipse.xtend.core.xtend.XtendParameter;
 import org.eclipse.xtext.common.types.JvmAnnotationType;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmOperation;
+import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
@@ -64,8 +65,8 @@ public class XtendHoverDocumentationProvider extends XbaseHoverDocumentationProv
 	protected void addAnnotations(EObject object) {
 		if(object instanceof XtendAnnotationTarget){
 			for(XAnnotation annotation : ((XtendAnnotationTarget) object).getAnnotations()){
-				JvmAnnotationType annotationType = annotation.getAnnotationType();
-				if(annotationType != null) {
+				JvmType annotationType = annotation.getAnnotationType();
+				if(annotationType != null && !annotationType.eIsProxy() && annotationType instanceof JvmAnnotationType) {
 					buffer.append("@");
 					buffer.append(createLinkWithLabel(XtextElementLinks.XTEXTDOC_SCHEME, EcoreUtil.getURI(annotationType), annotation.getAnnotationType().getSimpleName()));
 					EList<XAnnotationElementValuePair> elementValuePairs = annotation.getElementValuePairs();
