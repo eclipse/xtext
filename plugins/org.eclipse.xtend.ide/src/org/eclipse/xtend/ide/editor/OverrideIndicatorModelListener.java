@@ -55,6 +55,7 @@ import com.google.inject.Inject;
 @SuppressWarnings("deprecation")
 public class OverrideIndicatorModelListener extends NullImpl implements IXtextModelListener {
 	
+	public static final String JOB_NAME = "Override Indicator Updater";
 	private static ISchedulingRule SCHEDULING_RULE = SchedulingRuleFactory.INSTANCE.newSequence();
 
 	private XtextEditor xtextEditor;
@@ -96,7 +97,7 @@ public class OverrideIndicatorModelListener extends NullImpl implements IXtextMo
 			currentJob.cancel();
 		}
 
-		currentJob = new Job("Override Indicator Updater") {
+		currentJob = new Job(JOB_NAME) {
 			@Override
 			public IStatus run(IProgressMonitor monitor) {
 				return updateAnnotationModel(monitor);
@@ -125,6 +126,9 @@ public class OverrideIndicatorModelListener extends NullImpl implements IXtextMo
 					}
 
 				});
+
+		if (monitor.isCanceled())
+			return Status.CANCEL_STATUS;
 		if (annotationModel instanceof IAnnotationModelExtension) {
 			IAnnotationModelExtension annotationModelExtension = (IAnnotationModelExtension) annotationModel;
 			Object lockObject = getLockObject(annotationModel);
