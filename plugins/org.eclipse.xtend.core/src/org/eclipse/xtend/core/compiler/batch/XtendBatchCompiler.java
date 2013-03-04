@@ -22,6 +22,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.jdt.core.compiler.batch.BatchCompiler;
 import org.eclipse.xtend.core.jvmmodel.IXtendJvmAssociations;
 import org.eclipse.xtend.core.xtend.XtendAnnotationType;
@@ -292,6 +293,9 @@ public class XtendBatchCompiler {
 		fileSystemAccess.setOutputPath(outputDirectory.toString());
 		for (Resource resource : resourceSet.getResources()) {
 			XtendFile xtendFile = getXtendFile(resource);
+			if (xtendFile == null) {
+				continue;
+			}
 			for (XtendTypeDeclaration xtendType : xtendFile.getXtendTypes()) {
 				if (xtendType == null) {
 					continue;
@@ -456,7 +460,7 @@ public class XtendBatchCompiler {
 		return qualifiedNameProvider.getFullyQualifiedName(xtendType);
 	}
 
-	protected XtendFile getXtendFile(Resource resource) {
+	@Nullable protected XtendFile getXtendFile(Resource resource) {
 		XtextResource xtextResource = (XtextResource) resource;
 		IParseResult parseResult = xtextResource.getParseResult();
 		if (parseResult != null) {
