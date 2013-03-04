@@ -34,7 +34,8 @@ class TestBatchCompiler {
 
     static String OUTPUT_DIRECTORY_WITH_SPACES = "./test result"
     static String OUTPUT_DIRECTORY = "./test-result"
-    static String XTEND_SRC_DIRECTORY = "./test data"
+    static String XTEND_SRC_DIRECTORY = "./batch-compiler-data/test data"
+    static String BUG396747_SRC_DIRECTORY = "./batch-compiler-data/bug396747"
     static String TEMP_DIRECTORY = "./test-temp-dir"
     static String TEMP_DIRECTORY_WITH_SPACES = "./test temp dir"
 
@@ -70,7 +71,7 @@ class TestBatchCompiler {
 		batchCompiler.compile
 		assertEquals(14, new File(OUTPUT_DIRECTORY_WITH_SPACES + "/test").list.size)
 	}
-
+	
 	@Test
 	def void bug387829() {
 		batchCompiler.tempDirectory = TEMP_DIRECTORY_WITH_SPACES
@@ -81,6 +82,12 @@ class TestBatchCompiler {
 		val compilerOutputDir = new File(OUTPUT_DIRECTORY_WITH_SPACES + "/test")
 		assertTrue("Compiler output exists", compilerOutputDir.exists)
 		assertEquals(14, compilerOutputDir.list.size)
+	}
+
+	@Test
+	def void bug396747() {
+		batchCompiler.sourcePath = BUG396747_SRC_DIRECTORY
+		assertTrue("Compiling empty file pass", batchCompiler.compile)
 	}
 
 	@Test

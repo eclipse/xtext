@@ -39,7 +39,9 @@ public class TestBatchCompiler {
   
   private static String OUTPUT_DIRECTORY = "./test-result";
   
-  private static String XTEND_SRC_DIRECTORY = "./test data";
+  private static String XTEND_SRC_DIRECTORY = "./batch-compiler-data/test data";
+  
+  private static String BUG396747_SRC_DIRECTORY = "./batch-compiler-data/bug396747";
   
   private static String TEMP_DIRECTORY = "./test-temp-dir";
   
@@ -117,6 +119,13 @@ public class TestBatchCompiler {
     String[] _list = compilerOutputDir.list();
     int _size = ((List<String>)Conversions.doWrapArray(_list)).size();
     Assert.assertEquals(14, _size);
+  }
+  
+  @Test
+  public void bug396747() {
+    this.batchCompiler.setSourcePath(TestBatchCompiler.BUG396747_SRC_DIRECTORY);
+    boolean _compile = this.batchCompiler.compile();
+    Assert.assertTrue("Compiling empty file pass", _compile);
   }
   
   @Test
