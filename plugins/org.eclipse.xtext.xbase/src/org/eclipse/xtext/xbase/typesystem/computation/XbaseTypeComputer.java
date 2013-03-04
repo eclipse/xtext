@@ -89,7 +89,7 @@ import com.google.inject.Inject;
  * This implementation handles all expression that are defined in Xbase.
  * 
  * @author Sebastian Zarnekow - Initial contribution and API
- * @author Moritz Eysholdt
+ * @author Moritz Eysholdt - Support for checked exceptions
  */
 @NonNullByDefault
 public class XbaseTypeComputer implements ITypeComputer {
@@ -302,7 +302,7 @@ public class XbaseTypeComputer implements ITypeComputer {
 						ITypeComputationState expressionState = state.withoutExpectation();
 						expressionState.computeTypes(expression);
 						if (expression instanceof XVariableDeclaration) {
-							state.addLocalToCurrentScope((XVariableDeclaration)expression);
+							addLocalToCurrentScope((XVariableDeclaration)expression, state);
 						}
 					}
 					XExpression lastExpression = IterableExtensions.last(expressions);
@@ -311,13 +311,17 @@ public class XbaseTypeComputer implements ITypeComputer {
 					// though the variable declaration could be removed automatically to keep only the side effect
 					// of the initializer
 					if (lastExpression instanceof XVariableDeclaration) {
-						state.addLocalToCurrentScope((XVariableDeclaration) lastExpression);
+						addLocalToCurrentScope((XVariableDeclaration)lastExpression, state);
 					}
 				} else {
 					expectation.acceptActualType(new AnyTypeReference(expectation.getReferenceOwner()), ConformanceHint.UNCHECKED);
 				}
 			}
 		}
+	}
+
+	protected void addLocalToCurrentScope(XVariableDeclaration localVariable, ITypeComputationState state) {
+		state.addLocalToCurrentScope(localVariable);
 	}
 
 	protected void _computeTypes(XVariableDeclaration object, ITypeComputationState state) {
@@ -365,6 +369,7 @@ public class XbaseTypeComputer implements ITypeComputer {
 			 * o.substring(1)
 			 */
 			state.assignType(object, lightweightTypeReference != null ? lightweightTypeReference : computedType.getActualExpressionType(), false);
+			state.addExtensionToCurrentScope(object);
 		}
 		LightweightTypeReference primitiveVoid = getPrimitiveVoid(state);
 		state.acceptActualType(primitiveVoid);
@@ -545,12 +550,16 @@ public class XbaseTypeComputer implements ITypeComputer {
 		ITypeComputationState eachState = state.withoutExpectation();
 		if (declaredParam != null) {
 			LightweightTypeReference parameterType = computeForLoopParameterType(object, state);
-			eachState = eachState.assignType(declaredParam, parameterType);
+			eachState = assignType(declaredParam, parameterType, eachState);
 		}
 		eachState.computeTypes(object.getEachExpression());
 		
 		LightweightTypeReference primitiveVoid = getPrimitiveVoid(state);
 		state.acceptActualType(primitiveVoid);
+	}
+
+	protected ITypeComputationState assignType(JvmFormalParameter param, @Nullable LightweightTypeReference type, ITypeComputationState state) {
+		return state.assignType(param, type);
 	}
 
 	@Nullable
@@ -804,7 +813,7 @@ public class XbaseTypeComputer implements ITypeComputer {
 			LightweightTypeReference lightweightReference = parameterType != null 
 					? state.getConverter().toLightweightReference(parameterType)
 					: new AnyTypeReference(state.getReferenceOwner());
-			ITypeComputationState catchClauseState = state.assignType(catchClauseParam, lightweightReference);
+			ITypeComputationState catchClauseState = assignType(catchClauseParam, lightweightReference, state);
 			catchClauseState.computeTypes(catchClause.getExpression());
 		}
 		// TODO validate / handle return / throw in finally block

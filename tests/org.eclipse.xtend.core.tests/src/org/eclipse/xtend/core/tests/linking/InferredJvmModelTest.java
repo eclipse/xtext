@@ -10,6 +10,8 @@ package org.eclipse.xtend.core.tests.linking;
 import static com.google.common.collect.Iterables.*;
 import static org.eclipse.xtext.util.Strings.*;
 
+import java.util.List;
+
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EClass;
@@ -24,6 +26,7 @@ import org.eclipse.xtend.core.xtend.XtendClass;
 import org.eclipse.xtend.core.xtend.XtendFile;
 import org.eclipse.xtend.core.xtend.XtendFunction;
 import org.eclipse.xtend.core.xtend.XtendParameter;
+import org.eclipse.xtext.common.types.JvmAnnotationReference;
 import org.eclipse.xtext.common.types.JvmConstructor;
 import org.eclipse.xtext.common.types.JvmExecutable;
 import org.eclipse.xtext.common.types.JvmField;
@@ -39,6 +42,7 @@ import org.eclipse.xtext.common.types.JvmUpperBound;
 import org.eclipse.xtext.common.types.JvmVisibility;
 import org.eclipse.xtext.resource.XtextResourceSet;
 import org.eclipse.xtext.util.StringInputStream;
+import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.junit.Test;
 
@@ -692,6 +696,27 @@ public class InferredJvmModelTest extends AbstractXtendTestCase {
 		assertEquals(inferredType, jvmOperation.getReturnType().getType());
 		XtendFunction xtendFunction = (XtendFunction) ((XtendClass)xtendFile.getXtendTypes().get(0)).getMembers().get(0);
 		assertEquals(inferredType, xtendFunction.getReturnType().getType());
+	}
+	
+	@Test public void testExtensionToAnnotation_01() throws Exception {
+		XtendFile xtendFile = file("class C { extension String }");
+		JvmGenericType inferredType = getInferredType(xtendFile);
+		JvmField jvmField = (JvmField) inferredType.getMembers().get(1);
+		assertEquals("_string", jvmField.getSimpleName());
+		List<JvmAnnotationReference> annotations = jvmField.getAnnotations();
+		assertEquals(1, annotations.size());
+		assertEquals(Extension.class.getCanonicalName(), annotations.get(0).getAnnotation().getQualifiedName());
+	}
+
+	@Test public void testExtensionToAnnotation_02() throws Exception {
+		XtendFile xtendFile = file("class C { def void m(extension String s) {} }");
+		JvmGenericType inferredType = getInferredType(xtendFile);
+		JvmOperation jvmOperation = (JvmOperation) inferredType.getMembers().get(1);
+		List<JvmFormalParameter> parameters = jvmOperation.getParameters();
+		JvmFormalParameter singleParameter = parameters.get(0);
+		List<JvmAnnotationReference> annotations = singleParameter.getAnnotations();
+		assertEquals(1, annotations.size());
+		assertEquals(Extension.class.getCanonicalName(), annotations.get(0).getAnnotation().getQualifiedName());
 	}
 	
 	@Test public void testNameClashWithAnonymousExtension_00() throws Exception {

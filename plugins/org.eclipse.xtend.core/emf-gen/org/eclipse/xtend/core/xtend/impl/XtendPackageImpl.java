@@ -30,12 +30,14 @@ import org.eclipse.xtend.core.xtend.XtendEnumLiteral;
 import org.eclipse.xtend.core.xtend.XtendFactory;
 import org.eclipse.xtend.core.xtend.XtendField;
 import org.eclipse.xtend.core.xtend.XtendFile;
+import org.eclipse.xtend.core.xtend.XtendFormalParameter;
 import org.eclipse.xtend.core.xtend.XtendFunction;
 import org.eclipse.xtend.core.xtend.XtendInterface;
 import org.eclipse.xtend.core.xtend.XtendMember;
 import org.eclipse.xtend.core.xtend.XtendPackage;
 import org.eclipse.xtend.core.xtend.XtendParameter;
 import org.eclipse.xtend.core.xtend.XtendTypeDeclaration;
+import org.eclipse.xtend.core.xtend.XtendVariableDeclaration;
 
 import org.eclipse.xtext.common.types.TypesPackage;
 
@@ -185,6 +187,20 @@ public class XtendPackageImpl extends EPackageImpl implements XtendPackage
 	 * @generated
 	 */
 	private EClass xtendEnumLiteralEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass xtendVariableDeclarationEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass xtendFormalParameterEClass = null;
 
 	/**
 	 * Creates an instance of the model <b>Package</b>, registered with
@@ -559,6 +575,16 @@ public class XtendPackageImpl extends EPackageImpl implements XtendPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EAttribute getXtendParameter_Extension()
+	{
+		return (EAttribute)xtendParameterEClass.getEStructuralFeatures().get(3);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getRichString()
 	{
 		return richStringEClass;
@@ -879,6 +905,46 @@ public class XtendPackageImpl extends EPackageImpl implements XtendPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EClass getXtendVariableDeclaration()
+	{
+		return xtendVariableDeclarationEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getXtendVariableDeclaration_Extension()
+	{
+		return (EAttribute)xtendVariableDeclarationEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getXtendFormalParameter()
+	{
+		return xtendFormalParameterEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getXtendFormalParameter_Extension()
+	{
+		return (EAttribute)xtendFormalParameterEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public XtendFactory getXtendFactory()
 	{
 		return (XtendFactory)getEFactoryInstance();
@@ -940,6 +1006,7 @@ public class XtendPackageImpl extends EPackageImpl implements XtendPackage
 		createEAttribute(xtendParameterEClass, XTEND_PARAMETER__NAME);
 		createEReference(xtendParameterEClass, XTEND_PARAMETER__PARAMETER_TYPE);
 		createEAttribute(xtendParameterEClass, XTEND_PARAMETER__VAR_ARG);
+		createEAttribute(xtendParameterEClass, XTEND_PARAMETER__EXTENSION);
 
 		richStringEClass = createEClass(RICH_STRING);
 
@@ -984,6 +1051,12 @@ public class XtendPackageImpl extends EPackageImpl implements XtendPackage
 
 		xtendEnumLiteralEClass = createEClass(XTEND_ENUM_LITERAL);
 		createEAttribute(xtendEnumLiteralEClass, XTEND_ENUM_LITERAL__NAME);
+
+		xtendVariableDeclarationEClass = createEClass(XTEND_VARIABLE_DECLARATION);
+		createEAttribute(xtendVariableDeclarationEClass, XTEND_VARIABLE_DECLARATION__EXTENSION);
+
+		xtendFormalParameterEClass = createEClass(XTEND_FORMAL_PARAMETER);
+		createEAttribute(xtendFormalParameterEClass, XTEND_FORMAL_PARAMETER__EXTENSION);
 	}
 
 	/**
@@ -1036,6 +1109,8 @@ public class XtendPackageImpl extends EPackageImpl implements XtendPackage
 		xtendInterfaceEClass.getESuperTypes().add(this.getXtendTypeDeclaration());
 		xtendEnumEClass.getESuperTypes().add(this.getXtendTypeDeclaration());
 		xtendEnumLiteralEClass.getESuperTypes().add(this.getXtendMember());
+		xtendVariableDeclarationEClass.getESuperTypes().add(theXbasePackage.getXVariableDeclaration());
+		xtendFormalParameterEClass.getESuperTypes().add(theTypesPackage.getJvmFormalParameter());
 
 		// Initialize classes and features; add operations and parameters
 		initEClass(xtendFileEClass, XtendFile.class, "XtendFile", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -1092,6 +1167,7 @@ public class XtendPackageImpl extends EPackageImpl implements XtendPackage
 		initEAttribute(getXtendParameter_Name(), ecorePackage.getEString(), "name", null, 0, 1, XtendParameter.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getXtendParameter_ParameterType(), theTypesPackage.getJvmTypeReference(), null, "parameterType", null, 0, 1, XtendParameter.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getXtendParameter_VarArg(), ecorePackage.getEBoolean(), "varArg", null, 0, 1, XtendParameter.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getXtendParameter_Extension(), ecorePackage.getEBoolean(), "extension", null, 0, 1, XtendParameter.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(richStringEClass, RichString.class, "RichString", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
@@ -1136,6 +1212,12 @@ public class XtendPackageImpl extends EPackageImpl implements XtendPackage
 
 		initEClass(xtendEnumLiteralEClass, XtendEnumLiteral.class, "XtendEnumLiteral", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getXtendEnumLiteral_Name(), ecorePackage.getEString(), "name", null, 0, 1, XtendEnumLiteral.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(xtendVariableDeclarationEClass, XtendVariableDeclaration.class, "XtendVariableDeclaration", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getXtendVariableDeclaration_Extension(), ecorePackage.getEBoolean(), "extension", null, 0, 1, XtendVariableDeclaration.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(xtendFormalParameterEClass, XtendFormalParameter.class, "XtendFormalParameter", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getXtendFormalParameter_Extension(), ecorePackage.getEBoolean(), "extension", null, 0, 1, XtendFormalParameter.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Create resource
 		createResource(eNS_URI);

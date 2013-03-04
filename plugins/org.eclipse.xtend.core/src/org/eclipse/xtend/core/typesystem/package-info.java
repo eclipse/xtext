@@ -10,7 +10,7 @@
  * Namely these concern the 
  * <ul>
  *   <li>type computation of {@link org.eclipse.xtend.core.xtend.RichString template expressions},</li>
- *   <li>extension fields, and</li>
+ *   <li>extension fields, parameters and local variables, and</li>
  *   <li>{@link org.eclipse.xtend.core.jvmmodel.DispatchHelper dispatch methods}.</li>
  * </ul> 
  * 

@@ -493,31 +493,7 @@ public class XbaseCompiler extends FeatureCallCompiler {
 			while (iterator.hasNext()) {
 				XCatchClause catchClause = iterator.next();
 				ITreeAppendable catchClauseAppendable = b.trace(catchClause);
-				JvmTypeReference type = catchClause.getDeclaredParam().getParameterType();
-				final String declaredParamName = makeJavaIdentifier(catchClause.getDeclaredParam().getName());
-				final String name = catchClauseAppendable.declareVariable(catchClause.getDeclaredParam(), declaredParamName);
-				catchClauseAppendable.append("if (").append(variable).append(" instanceof ");
-				serialize(type, expr, catchClauseAppendable);
-				catchClauseAppendable.append(") ").append("{");
-				catchClauseAppendable.increaseIndentation();
-				ITreeAppendable withDebugging = catchClauseAppendable.trace(catchClause, true);
-				ITreeAppendable parameterAppendable = withDebugging.trace(catchClause.getDeclaredParam());
-				parameterAppendable.newLine().append("final ");
-				serialize(type, expr, parameterAppendable);
-				parameterAppendable.append(" ");
-				parameterAppendable.trace(catchClause.getDeclaredParam(), TypesPackage.Literals.JVM_FORMAL_PARAMETER__NAME, 0).append(name);
-				withDebugging.append(" = (");
-				serialize(type, expr, withDebugging);
-				withDebugging.append(")").append(variable).append(";");
-				final boolean canBeReferenced = isReferenced && ! isPrimitiveVoid(catchClause.getExpression());
-				internalToJavaStatement(catchClause.getExpression(), withDebugging, canBeReferenced);
-				if (canBeReferenced) {
-					catchClauseAppendable.newLine().append(getVarName(expr, catchClauseAppendable)).append(" = ");
-					internalToConvertedExpression(catchClause.getExpression(), catchClauseAppendable, null);
-					catchClauseAppendable.append(";");
-				}
-				catchClauseAppendable.decreaseIndentation();
-				catchClauseAppendable.newLine().append("}");
+				appendCatchClause(catchClause, isReferenced, variable, catchClauseAppendable);
 				if (iterator.hasNext()) {
 					b.append(" else ");
 				}
@@ -545,6 +521,39 @@ public class XbaseCompiler extends FeatureCallCompiler {
 			internalToJavaStatement(finallyExp, b, false);
 			b.decreaseIndentation().newLine().append("}");
 		}
+	}
+
+	protected void appendCatchClause(XCatchClause catchClause, boolean parentIsReferenced, String parentVariable,
+			ITreeAppendable appendable) {
+		JvmTypeReference type = catchClause.getDeclaredParam().getParameterType();
+		final String declaredParamName = makeJavaIdentifier(catchClause.getDeclaredParam().getName());
+		final String name = appendable.declareVariable(catchClause.getDeclaredParam(), declaredParamName);
+		appendable.append("if (").append(parentVariable).append(" instanceof ");
+		serialize(type, catchClause, appendable);
+		appendable.append(") ").append("{");
+		appendable.increaseIndentation();
+		ITreeAppendable withDebugging = appendable.trace(catchClause, true);
+		ITreeAppendable parameterAppendable = withDebugging.trace(catchClause.getDeclaredParam());
+		appendCatchClauseParameter(catchClause, type, name, parameterAppendable.newLine());
+		withDebugging.append(" = (");
+		serialize(type, catchClause, withDebugging);
+		withDebugging.append(")").append(parentVariable).append(";");
+		final boolean canBeReferenced = parentIsReferenced && ! isPrimitiveVoid(catchClause.getExpression());
+		internalToJavaStatement(catchClause.getExpression(), withDebugging, canBeReferenced);
+		if (canBeReferenced) {
+			appendable.newLine().append(getVarName(catchClause.eContainer(), appendable)).append(" = ");
+			internalToConvertedExpression(catchClause.getExpression(), appendable, null);
+			appendable.append(";");
+		}
+		appendable.decreaseIndentation();
+		appendable.newLine().append("}");
+	}
+
+	protected void appendCatchClauseParameter(XCatchClause catchClause, JvmTypeReference parameterType, final String parameterName, ITreeAppendable appendable) {
+		appendable.append("final ");
+		serialize(parameterType, catchClause, appendable);
+		appendable.append(" ");
+		appendable.trace(catchClause.getDeclaredParam(), TypesPackage.Literals.JVM_FORMAL_PARAMETER__NAME, 0).append(parameterName);
 	}
 
 	protected void _toJavaExpression(XTryCatchFinallyExpression expr, ITreeAppendable b) {
@@ -584,18 +593,7 @@ public class XbaseCompiler extends FeatureCallCompiler {
 			internalToJavaStatement(varDeclaration.getRight(), b, true);
 		}
 		b.newLine();
-		if (!varDeclaration.isWriteable()) {
-			b.append("final ");
-		}
-		JvmTypeReference type = null;
-		if (varDeclaration.getType() != null) {
-			type = varDeclaration.getType();
-		} else {
-			type = getTypeProvider().getType(varDeclaration.getRight());
-		}
-		serialize(type, varDeclaration, b);
-		b.append(" ");
-		b.append(b.declareVariable(varDeclaration, makeJavaIdentifier(varDeclaration.getName())));
+		JvmTypeReference type = appendVariableTypeAndName(varDeclaration, b);
 		b.append(" = ");
 		if (varDeclaration.getRight() != null) {
 			internalToConvertedExpression(varDeclaration.getRight(), b, type);
@@ -603,6 +601,22 @@ public class XbaseCompiler extends FeatureCallCompiler {
 			appendDefaultLiteral(b, type);
 		}
 		b.append(";");
+	}
+
+	protected JvmTypeReference appendVariableTypeAndName(XVariableDeclaration varDeclaration, ITreeAppendable appendable) {
+		if (!varDeclaration.isWriteable()) {
+			appendable.append("final ");
+		}
+		JvmTypeReference type = null;
+		if (varDeclaration.getType() != null) {
+			type = varDeclaration.getType();
+		} else {
+			type = getTypeProvider().getType(varDeclaration.getRight());
+		}
+		serialize(type, varDeclaration, appendable);
+		appendable.append(" ");
+		appendable.append(appendable.declareVariable(varDeclaration, makeJavaIdentifier(varDeclaration.getName())));
+		return type;
 	}
 
 	/**
@@ -659,18 +673,22 @@ public class XbaseCompiler extends FeatureCallCompiler {
 		ITreeAppendable loopAppendable = b.trace(expr);
 		loopAppendable.append("for (");
 		ITreeAppendable parameterAppendable = loopAppendable.trace(expr.getDeclaredParam());
-		parameterAppendable.append("final ");
-		JvmTypeReference paramType = getForLoopParameterType(expr);
-		serialize(paramType, expr, parameterAppendable);
-		parameterAppendable.append(" ");
-		final String name = makeJavaIdentifier(expr.getDeclaredParam().getName());
-		String varName = loopAppendable.declareVariable(expr.getDeclaredParam(), name);
-		parameterAppendable.trace(expr.getDeclaredParam(), TypesPackage.Literals.JVM_FORMAL_PARAMETER__NAME, 0).append(varName);
+		appendForLoopParameter(expr, parameterAppendable);
 		loopAppendable.append(" : ");
 		internalToJavaExpression(expr.getForExpression(), loopAppendable);
 		loopAppendable.append(") {").increaseIndentation();
 		internalToJavaStatement(expr.getEachExpression(), loopAppendable, false);
 		loopAppendable.decreaseIndentation().newLine().append("}");
+	}
+
+	protected void appendForLoopParameter(XForLoopExpression expr, ITreeAppendable appendable) {
+		appendable.append("final ");
+		JvmTypeReference paramType = getForLoopParameterType(expr);
+		serialize(paramType, expr, appendable);
+		appendable.append(" ");
+		final String name = makeJavaIdentifier(expr.getDeclaredParam().getName());
+		String varName = appendable.declareVariable(expr.getDeclaredParam(), name);
+		appendable.trace(expr.getDeclaredParam(), TypesPackage.Literals.JVM_FORMAL_PARAMETER__NAME, 0).append(varName);
 	}
 
 	protected JvmTypeReference getForLoopParameterType(XForLoopExpression expr) {
@@ -1031,12 +1049,7 @@ public class XbaseCompiler extends FeatureCallCompiler {
 				for (int i = 0; i < closureParams.size(); i++) {
 					JvmFormalParameter closureParam = closureParams.get(i);
 					JvmTypeReference parameterType = getClosureOperationParameterType(type, operation, i);
-					b.append("final ");
-					serialize(parameterType, closure, b, false, false, true, true);
-					b.append(" ");
-					final String proposedParamName = makeJavaIdentifier(closureParam.getName());
-					String name = b.declareVariable(closureParam, proposedParamName);
-					b.append(name);
+					appendClosureParameter(closureParam, parameterType, closure, b);
 					if (i != closureParams.size() - 1)
 						b.append(", ");
 				}
@@ -1060,6 +1073,16 @@ public class XbaseCompiler extends FeatureCallCompiler {
 			b.closeScope();
 		}
 		b.decreaseIndentation().newLine().append("};").decreaseIndentation();
+	}
+
+	protected void appendClosureParameter(JvmFormalParameter closureParam, JvmTypeReference parameterType, final XClosure closure,
+			final ITreeAppendable appendable) {
+		appendable.append("final ");
+		serialize(parameterType, closure, appendable, false, false, true, true);
+		appendable.append(" ");
+		final String proposedParamName = makeJavaIdentifier(closureParam.getName());
+		String name = appendable.declareVariable(closureParam, proposedParamName);
+		appendable.append(name);
 	}
 
 	protected void appendOperationVisibility(final ITreeAppendable b, JvmOperation operation) {

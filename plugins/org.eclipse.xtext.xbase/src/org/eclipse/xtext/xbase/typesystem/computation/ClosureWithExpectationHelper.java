@@ -54,7 +54,7 @@ public class ClosureWithExpectationHelper extends AbstractClosureTypeHelper {
 	private FunctionTypeReference expectedClosureType;
 	private FunctionTypeReference resultClosureType;
 	
-	public ClosureWithExpectationHelper(XClosure closure, JvmOperation operation, ITypeExpectation expectation, ITypeComputationState state) {
+	protected ClosureWithExpectationHelper(XClosure closure, JvmOperation operation, ITypeExpectation expectation, ITypeComputationState state) {
 		super(closure, expectation, state);
 		this.operation = operation;
 		if (operation == null || expectation.getExpectedType() == null) {
