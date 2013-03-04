@@ -15,6 +15,7 @@ import java.util.List;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.xtext.common.types.JvmAnnotationType;
 import org.eclipse.xtext.common.types.JvmOperation;
+import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.validation.Check;
 import org.eclipse.xtext.validation.ValidationMessageAcceptor;
 import org.eclipse.xtext.xbase.XExpression;
@@ -39,10 +40,10 @@ public class XbaseWithAnnotationsJavaValidator extends XbaseJavaValidator {
 
 	@Check
 	public void checkAllAttributesConfigured(XAnnotation annotation) {
-		JvmAnnotationType annotationType = annotation.getAnnotationType();
-		if (annotationType == null)
+		JvmType annotationType = annotation.getAnnotationType();
+		if (annotationType == null || annotationType.eIsProxy() || !(annotationType instanceof JvmAnnotationType))
 			return;
-		Iterable<JvmOperation> attributes = annotationType.getDeclaredOperations();
+		Iterable<JvmOperation> attributes = ((JvmAnnotationType) annotationType).getDeclaredOperations();
 		for (JvmOperation jvmOperation : attributes) {
 			XExpression value = annotationUtil.findValue(annotation, jvmOperation);
 			if(value == null) {

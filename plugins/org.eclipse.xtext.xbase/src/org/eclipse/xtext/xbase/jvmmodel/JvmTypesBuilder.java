@@ -1130,9 +1130,15 @@ public class JvmTypesBuilder {
 		if(anno == null)
 			return null;
 		JvmAnnotationReference reference = typesFactory.createJvmAnnotationReference();
-		final JvmAnnotationType annotation = (JvmAnnotationType) anno.eGet(
+		final JvmType annotation = (JvmType) anno.eGet(
 				XAnnotationsPackage.Literals.XANNOTATION__ANNOTATION_TYPE, false);
-		reference.setAnnotation(annotation);
+		if (annotation.eIsProxy()) {
+			JvmAnnotationType copiedProxy = TypesFactory.eINSTANCE.createJvmAnnotationType();
+			((InternalEObject)copiedProxy).eSetProxyURI(EcoreUtil.getURI(annotation));
+			reference.setAnnotation(copiedProxy);
+		} else if (annotation instanceof JvmAnnotationType){
+			reference.setAnnotation((JvmAnnotationType) annotation);
+		}
 		for (XAnnotationElementValuePair val : anno.getElementValuePairs()) {
 			XExpression valueExpression = val.getValue();
 			JvmAnnotationValue annotationValue = toJvmAnnotationValue(valueExpression);

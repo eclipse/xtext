@@ -14,6 +14,7 @@ import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.common.types.JvmAnnotationType;
 import org.eclipse.xtext.common.types.JvmFeature;
 import org.eclipse.xtext.common.types.JvmOperation;
+import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.diagnostics.Severity;
 import org.eclipse.xtext.validation.EObjectDiagnosticImpl;
 import org.eclipse.xtext.xbase.XExpression;
@@ -50,33 +51,44 @@ public class XbaseWithAnnotationsTypeComputer extends XbaseTypeComputer {
 	}
 	
 	protected void _computeTypes(XAnnotation object, ITypeComputationState state) {
-		JvmAnnotationType annotationType = object.getAnnotationType();
+		JvmType annotationType = object.getAnnotationType();
 		if (annotationType != null && !annotationType.eIsProxy()) {
-			XExpression expression = object.getValue();
-			if (expression != null) {
-				Iterable<JvmFeature> iterable = annotationType.findAllFeaturesByName("value");
-				JvmFeature value = Iterables.getOnlyElement(iterable, null);
-				if (value != null) {
-					if (value instanceof JvmOperation) {
-						computeTypes(object, (JvmOperation) value, expression, state);
+			if (annotationType instanceof JvmAnnotationType) {
+				XExpression expression = object.getValue();
+				if (expression != null) {
+					Iterable<JvmFeature> iterable = ((JvmAnnotationType) annotationType).findAllFeaturesByName("value");
+					JvmFeature value = Iterables.getOnlyElement(iterable, null);
+					if (value != null) {
+						if (value instanceof JvmOperation) {
+							computeTypes(object, (JvmOperation) value, expression, state);
+						} else {
+							throw new IllegalStateException("Unexpected feature type " + value);
+						}
 					} else {
-						throw new IllegalStateException("Unexpected feature type " + value);
+						state.addDiagnostic(new EObjectDiagnosticImpl(
+								Severity.ERROR, 
+								IssueCodes.ANNOTATIONS_NO_VALUE_ATTRIBUTE, 
+								"The attribute value is undefined for the annotation type " + annotationType.getSimpleName(), 
+								object, 
+								XAnnotationsPackage.Literals.XANNOTATION__VALUE, 
+								-1, null));
+						state.withNonVoidExpectation().computeTypes(expression);
 					}
 				} else {
-					state.addDiagnostic(new EObjectDiagnosticImpl(
-							Severity.ERROR, 
-							IssueCodes.ANNOTATIONS_NO_VALUE_ATTRIBUTE, 
-							"The attribute value is undefined for the annotation type " + annotationType.getSimpleName(), 
-							object, 
-							XAnnotationsPackage.Literals.XANNOTATION__VALUE, 
-							-1, null));
-					state.withNonVoidExpectation().computeTypes(expression);
+					List<XAnnotationElementValuePair> valuePairs = object.getElementValuePairs();
+					for(XAnnotationElementValuePair pair: valuePairs) {
+						computeTypes(object, pair.getElement(), pair.getValue(), state);
+					}
 				}
 			} else {
-				List<XAnnotationElementValuePair> valuePairs = object.getElementValuePairs();
-				for(XAnnotationElementValuePair pair: valuePairs) {
-					computeTypes(object, pair.getElement(), pair.getValue(), state);
-				}
+				state.addDiagnostic(new EObjectDiagnosticImpl(
+						Severity.ERROR, 
+						IssueCodes.INCOMPATIBLE_TYPES, 
+						String.format("Type mismatch: cannot convert from %s to Annotation", annotationType.getSimpleName()), 
+						object, 
+						XAnnotationsPackage.Literals.XANNOTATION__ANNOTATION_TYPE, 
+						-1, null));
+				computeChildTypesForUnknownAnnotation(object, state);	
 			}
 			state.acceptActualType(new ParameterizedTypeReference(state.getReferenceOwner(), annotationType));
 		} else {
