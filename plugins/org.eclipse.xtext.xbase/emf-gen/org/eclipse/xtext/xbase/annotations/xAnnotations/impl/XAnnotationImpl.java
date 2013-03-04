@@ -22,7 +22,7 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
-import org.eclipse.xtext.common.types.JvmAnnotationType;
+import org.eclipse.xtext.common.types.JvmType;
 
 import org.eclipse.xtext.xbase.XExpression;
 
@@ -67,7 +67,7 @@ public class XAnnotationImpl extends XExpressionImpl implements XAnnotation
 	 * @generated
 	 * @ordered
 	 */
-	protected JvmAnnotationType annotationType;
+	protected JvmType annotationType;
 
 	/**
 	 * The cached value of the '{@link #getValue() <em>Value</em>}' containment reference.
@@ -119,12 +119,12 @@ public class XAnnotationImpl extends XExpressionImpl implements XAnnotation
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public JvmAnnotationType getAnnotationType()
+	public JvmType getAnnotationType()
 	{
 		if (annotationType != null && annotationType.eIsProxy())
 		{
 			InternalEObject oldAnnotationType = (InternalEObject)annotationType;
-			annotationType = (JvmAnnotationType)eResolveProxy(oldAnnotationType);
+			annotationType = (JvmType)eResolveProxy(oldAnnotationType);
 			if (annotationType != oldAnnotationType)
 			{
 				if (eNotificationRequired())
@@ -139,7 +139,7 @@ public class XAnnotationImpl extends XExpressionImpl implements XAnnotation
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public JvmAnnotationType basicGetAnnotationType()
+	public JvmType basicGetAnnotationType()
 	{
 		return annotationType;
 	}
@@ -149,9 +149,9 @@ public class XAnnotationImpl extends XExpressionImpl implements XAnnotation
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setAnnotationType(JvmAnnotationType newAnnotationType)
+	public void setAnnotationType(JvmType newAnnotationType)
 	{
-		JvmAnnotationType oldAnnotationType = annotationType;
+		JvmType oldAnnotationType = annotationType;
 		annotationType = newAnnotationType;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, XAnnotationsPackage.XANNOTATION__ANNOTATION_TYPE, oldAnnotationType, annotationType));
@@ -260,7 +260,7 @@ public class XAnnotationImpl extends XExpressionImpl implements XAnnotation
 				getElementValuePairs().addAll((Collection<? extends XAnnotationElementValuePair>)newValue);
 				return;
 			case XAnnotationsPackage.XANNOTATION__ANNOTATION_TYPE:
-				setAnnotationType((JvmAnnotationType)newValue);
+				setAnnotationType((JvmType)newValue);
 				return;
 			case XAnnotationsPackage.XANNOTATION__VALUE:
 				setValue((XExpression)newValue);
@@ -283,7 +283,7 @@ public class XAnnotationImpl extends XExpressionImpl implements XAnnotation
 				getElementValuePairs().clear();
 				return;
 			case XAnnotationsPackage.XANNOTATION__ANNOTATION_TYPE:
-				setAnnotationType((JvmAnnotationType)null);
+				setAnnotationType((JvmType)null);
 				return;
 			case XAnnotationsPackage.XANNOTATION__VALUE:
 				setValue((XExpression)null);

@@ -17,7 +17,6 @@ import org.eclipse.xtend.lib.macro.declaration.AnnotationReference;
 import org.eclipse.xtend.lib.macro.declaration.AnnotationTarget;
 import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotation;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
-import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ListExtensions;
 
 @SuppressWarnings("all")
@@ -33,8 +32,7 @@ public abstract class XtendAnnotationTargetImpl<T extends XtendAnnotationTarget>
         }
       };
     List<AnnotationReference> _map = ListExtensions.<XAnnotation, AnnotationReference>map(_annotations, _function);
-    List<AnnotationReference> _list = IterableExtensions.<AnnotationReference>toList(_map);
-    ImmutableList<AnnotationReference> _copyOf = ImmutableList.<AnnotationReference>copyOf(_list);
+    ImmutableList<AnnotationReference> _copyOf = ImmutableList.<AnnotationReference>copyOf(_map);
     return _copyOf;
   }
 }

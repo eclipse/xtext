@@ -15,27 +15,23 @@ import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtend.core.validation.IssueCodes;
 import org.eclipse.xtend.core.xtend.XtendTypeDeclaration;
 import org.eclipse.xtext.EcoreUtil2;
-import org.eclipse.xtext.common.types.JvmAnnotationType;
 import org.eclipse.xtext.common.types.TypesPackage;
 import org.eclipse.xtext.diagnostics.Diagnostic;
 import org.eclipse.xtext.diagnostics.DiagnosticMessage;
 import org.eclipse.xtext.diagnostics.Severity;
 import org.eclipse.xtext.linking.impl.IllegalNodeException;
-import org.eclipse.xtext.linking.impl.LinkingDiagnosticMessageProvider;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.XAssignment;
 import org.eclipse.xtext.xbase.XBinaryOperation;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XUnaryOperation;
 import org.eclipse.xtext.xbase.XbasePackage;
-import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotation;
-import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotationElementValuePair;
-import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotationsPackage;
+import org.eclipse.xtext.xbase.annotations.validation.UnresolvedAnnotationTypeAwareMessageProducer;
 
 /**
  * @author Holger Schill - Initial contribution and API
  */
-public class XtendLinkingDiagnosticMessageProvider extends LinkingDiagnosticMessageProvider {
+public class XtendLinkingDiagnosticMessageProvider extends UnresolvedAnnotationTypeAwareMessageProducer {
 
 	@Override
 	public DiagnosticMessage getUnresolvedProxyMessage(ILinkingDiagnosticContext context) {
@@ -66,19 +62,6 @@ public class XtendLinkingDiagnosticMessageProvider extends LinkingDiagnosticMess
 		return new DiagnosticMessage(msg, Severity.ERROR, Diagnostic.LINKING_DIAGNOSTIC);
 	}
 	
-	protected boolean isPropertyOfUnresolvedAnnotation(ILinkingDiagnosticContext context) {
-		EObject object = context.getContext();
-		if (object instanceof XAnnotationElementValuePair && context.getReference() == XAnnotationsPackage.Literals.XANNOTATION_ELEMENT_VALUE_PAIR__ELEMENT) {
-			XAnnotation annotation = EcoreUtil2.getContainerOfType(object, XAnnotation.class);
-			if (annotation != null) {
-				JvmAnnotationType annotationType = annotation.getAnnotationType();
-				if (annotationType == null || annotationType.eIsProxy())
-					return true;
-			}
-		}
-		return false;
-	}
-
 	@Nullable
 	protected String getTypeName(EClass c) {
 		if (c == TypesPackage.Literals.JVM_ENUMERATION_TYPE)

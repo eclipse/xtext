@@ -8,6 +8,9 @@
  
 package org.eclipse.xtend.core.macro.declaration
 
+import com.google.common.collect.ImmutableList
+import org.eclipse.emf.ecore.EObject
+import org.eclipse.xtend.core.xtend.XtendAnnotationTarget
 import org.eclipse.xtend.core.xtend.XtendClass
 import org.eclipse.xtend.core.xtend.XtendConstructor
 import org.eclipse.xtend.core.xtend.XtendField
@@ -16,27 +19,25 @@ import org.eclipse.xtend.core.xtend.XtendFunction
 import org.eclipse.xtend.core.xtend.XtendMember
 import org.eclipse.xtend.core.xtend.XtendParameter
 import org.eclipse.xtend.core.xtend.XtendTypeDeclaration
+import org.eclipse.xtend.lib.macro.declaration.AnnotationReference
+import org.eclipse.xtend.lib.macro.declaration.AnnotationTarget
+import org.eclipse.xtend.lib.macro.declaration.AnnotationTypeDeclaration
 import org.eclipse.xtend.lib.macro.declaration.ClassDeclaration
 import org.eclipse.xtend.lib.macro.declaration.ConstructorDeclaration
+import org.eclipse.xtend.lib.macro.declaration.ExecutableDeclaration
 import org.eclipse.xtend.lib.macro.declaration.FieldDeclaration
 import org.eclipse.xtend.lib.macro.declaration.MemberDeclaration
 import org.eclipse.xtend.lib.macro.declaration.MethodDeclaration
+import org.eclipse.xtend.lib.macro.declaration.NamedElement
 import org.eclipse.xtend.lib.macro.declaration.ParameterDeclaration
 import org.eclipse.xtend.lib.macro.declaration.TypeDeclaration
 import org.eclipse.xtend.lib.macro.declaration.TypeParameterDeclaration
 import org.eclipse.xtend.lib.macro.declaration.TypeParameterDeclarator
 import org.eclipse.xtend.lib.macro.declaration.Visibility
+import org.eclipse.xtext.common.types.JvmAnnotationType
 import org.eclipse.xtext.common.types.JvmTypeParameter
 import org.eclipse.xtext.common.types.JvmUpperBound
-import org.eclipse.xtend.lib.macro.declaration.ExecutableDeclaration
-import org.eclipse.emf.ecore.EObject
-import org.eclipse.xtend.lib.macro.declaration.NamedElement
-import org.eclipse.xtend.core.xtend.XtendAnnotationTarget
-import org.eclipse.xtend.lib.macro.declaration.AnnotationTarget
-import com.google.common.collect.ImmutableList
 import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotation
-import org.eclipse.xtend.lib.macro.declaration.AnnotationReference
-import org.eclipse.xtend.lib.macro.declaration.AnnotationTypeDeclaration
 
 abstract class XtendNamedElementImpl<T extends EObject> extends AbstractNamedElementImpl<T> implements NamedElement {
 }
@@ -44,7 +45,7 @@ abstract class XtendNamedElementImpl<T extends EObject> extends AbstractNamedEle
 abstract class XtendAnnotationTargetImpl<T extends XtendAnnotationTarget> extends XtendNamedElementImpl<T> implements AnnotationTarget {
 	
 	override getAnnotations() {
-		ImmutableList::copyOf( this.delegate.annotations.map[compilationUnit.toAnnotationReference(it)].toList )
+		ImmutableList::copyOf( this.delegate.annotations.map[compilationUnit.toAnnotationReference(it)] )
 	}
 	
 }
@@ -276,7 +277,10 @@ class XtendTypeParameterDeclarationImpl extends AbstractDeclarationImpl<JvmTypeP
 class XtendAnnotationReferenceImpl extends AbstractDeclarationImpl<XAnnotation> implements AnnotationReference {
 	
 	override getAnnotationTypeDeclaration() {
-		compilationUnit.toTypeDeclaration(delegate.annotationType) as AnnotationTypeDeclaration
+		switch type: delegate.annotationType {
+			JvmAnnotationType: compilationUnit.toTypeDeclaration(type) as AnnotationTypeDeclaration
+			default: null
+		}
 	}
 	
 	override getExpression(String property) {

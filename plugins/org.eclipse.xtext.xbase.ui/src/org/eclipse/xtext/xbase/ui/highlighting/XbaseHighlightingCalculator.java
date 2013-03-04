@@ -25,6 +25,7 @@ import org.eclipse.xtext.common.types.JvmAnnotationType;
 import org.eclipse.xtext.common.types.JvmField;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmOperation;
+import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.TypesPackage;
 import org.eclipse.xtext.common.types.util.DeprecationUtil;
 import org.eclipse.xtext.common.types.util.Primitives;
@@ -223,8 +224,8 @@ public class XbaseHighlightingCalculator implements ISemanticHighlightingCalcula
 	}
 	
 	protected void highlightAnnotation(XAnnotation annotation, IHighlightedPositionAcceptor acceptor) {
-		JvmAnnotationType annotationType = annotation.getAnnotationType();
-		if (annotationType != null && !annotationType.eIsProxy()) {
+		JvmType annotationType = annotation.getAnnotationType();
+		if (annotationType != null && !annotationType.eIsProxy() && annotationType instanceof JvmAnnotationType) {
 			ICompositeNode xannotationNode = NodeModelUtils.findActualNodeFor(annotation);
 			if (xannotationNode != null) {
 				ILeafNode firstLeafNode = NodeModelUtils.findLeafNodeAtOffset(xannotationNode, xannotationNode.getOffset() );
