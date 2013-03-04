@@ -44,7 +44,6 @@ import org.eclipse.xtext.validation.EObjectDiagnosticImpl;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XFeatureCall;
 import org.eclipse.xtext.xbase.XMemberFeatureCall;
-import org.eclipse.xtext.xbase.XbaseFactory;
 import org.eclipse.xtext.xbase.XbasePackage;
 import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotation;
 import org.eclipse.xtext.xbase.scoping.batch.IFeatureNames;
@@ -243,9 +242,6 @@ public class DispatchAndExtensionAwareReentrantTypeResolver extends LogicalConta
 	@Inject
 	private IXtendJvmAssociations associations;
 	
-	@Inject
-	private XbaseFactory xbaseFactory;
-	
 	@Override
 	protected void computeTypes(ResolvedTypes resolvedTypes, IFeatureScopeSession session) {
 		EObject root = getRoot();
@@ -443,25 +439,12 @@ public class DispatchAndExtensionAwareReentrantTypeResolver extends LogicalConta
 			super._computeTypes(preparedResolvedTypes, resolvedTypes, featureScopeSession, operation);
 		}
 	}
-	
-	@Override
-	protected void computeMemberTypes(Map<JvmIdentifiableElement, ResolvedTypes> preparedResolvedTypes, ResolvedTypes resolvedTypes, IFeatureScopeSession featureScopeSession,
-			JvmDeclaredType type) {
-		IFeatureScopeSession childSession = addExtensionsToMemberSession(resolvedTypes, featureScopeSession, type);
-		super.computeMemberTypes(preparedResolvedTypes, resolvedTypes, childSession, type);
-	}
 
 	protected void computeXtendAnnotationTypes(ResolvedTypes resolvedTypes, IFeatureScopeSession featureScopeSession, List<XAnnotation> annotations) {
 		for(XAnnotation annotation: annotations) {
 			if (getInferredElements(annotation).isEmpty())
 				computeTypes(resolvedTypes, featureScopeSession, annotation);
 		}
-	}
-	
-	@Override
-	protected void prepareMembers(ResolvedTypes resolvedTypes, IFeatureScopeSession featureScopeSession, JvmDeclaredType type, Map<JvmIdentifiableElement, ResolvedTypes> resolvedTypesByType) {
-		IFeatureScopeSession childSession = addExtensionsToMemberSession(resolvedTypes, featureScopeSession, type);
-		super.prepareMembers(resolvedTypes, childSession, type, resolvedTypesByType);
 	}
 	
 	/**
@@ -493,49 +476,6 @@ public class DispatchAndExtensionAwareReentrantTypeResolver extends LogicalConta
 		return session.addTypesToStaticScope(Collections.singletonList(type), Collections.singletonList(type));
 	}
 
-	protected IFeatureScopeSession addExtensionsToMemberSession(ResolvedTypes resolvedTypes,
-			IFeatureScopeSession featureScopeSession, JvmDeclaredType type) {
-		Iterable<JvmField> fields = type.getDeclaredFields();
-		IEObjectDescription thisDescription = featureScopeSession.getLocalElement(IFeatureNames.THIS);
-		if (thisDescription == null) {
-			throw new IllegalStateException("Cannot find feature 'THIS'");
-		}
-		JvmIdentifiableElement thisFeature = (JvmIdentifiableElement) thisDescription.getEObjectOrProxy();
-		Map<XExpression, LightweightTypeReference> extensionProviders = null;
-		for(JvmField field: fields) {
-			if (isExtensionField(field)) {
-				if (extensionProviders == null)
-					extensionProviders = Maps2.newLinkedHashMapWithExpectedSize(3);
-				XMemberFeatureCall extensionProvider = createExtensionProvider(thisFeature, field);
-				LightweightTypeReference fieldType = resolvedTypes.getActualType(field);
-				extensionProviders.put(extensionProvider, fieldType);
-			}
-		}
-		IFeatureScopeSession childSession = featureScopeSession;
-		if (extensionProviders != null) {
-			childSession = featureScopeSession.addToExtensionScope(extensionProviders);
-		}
-		XFeatureCall thisAccess = xbaseFactory.createXFeatureCall();
-		thisAccess.setFeature(thisFeature);
-		LightweightTypeReference thisType = resolvedTypes.getActualType(thisFeature);
-		childSession = childSession.addToExtensionScope(Collections.<XExpression, LightweightTypeReference>singletonMap(thisAccess, thisType));
-		return childSession;
-	}
-
-	protected XMemberFeatureCall createExtensionProvider(JvmIdentifiableElement thisFeature, JvmField field) {
-		XMemberFeatureCall extensionProvider = xbaseFactory.createXMemberFeatureCall();
-		extensionProvider.setFeature(field);
-		XFeatureCall thisAccess = xbaseFactory.createXFeatureCall();
-		thisAccess.setFeature(thisFeature);
-		extensionProvider.setMemberCallTarget(thisAccess);
-		return extensionProvider;
-	}
-	
-	protected boolean isExtensionField(JvmField field) {
-		XtendField xtendField = associations.getXtendField(field);
-		return xtendField != null && xtendField.isExtension();
-	}
-	
 	@Override
 	protected void _doPrepare(ResolvedTypes resolvedTypes, IFeatureScopeSession featureScopeSession,
 			JvmOperation operation, Map<JvmIdentifiableElement, ResolvedTypes> resolvedTypesByContext) {

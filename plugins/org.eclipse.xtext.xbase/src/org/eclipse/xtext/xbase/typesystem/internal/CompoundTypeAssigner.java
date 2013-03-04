@@ -31,9 +31,9 @@ public class CompoundTypeAssigner implements ITypeAssigner {
 		this.assigners = assigners;
 	}
 
-	public void assignType(JvmIdentifiableElement element, @Nullable LightweightTypeReference expectedType) {
+	public void assignType(JvmIdentifiableElement element, @Nullable LightweightTypeReference actualType) {
 		for(ITypeAssigner assigner: assigners) {
-			assigner.assignType(element, expectedType);
+			assigner.assignType(element, actualType);
 		}
 	}
 

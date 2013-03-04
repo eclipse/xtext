@@ -163,6 +163,18 @@ public class CompoundTypeComputationState implements ITypeComputationState {
 		}
 		return new CompoundTypeComputationState(owner, result);
 	}
+	
+	public void addExtensionToCurrentScope(JvmIdentifiableElement extensionProvider) {
+		for (int i = 0; i < components.length; i++) {
+			components[i].addExtensionToCurrentScope(extensionProvider);
+		}
+	}
+	
+	public void addExtensionsToCurrentScope(List<? extends JvmIdentifiableElement> extensionProviders) {
+		for (int i = 0; i < components.length; i++) {
+			components[i].addExtensionsToCurrentScope(extensionProviders);
+		}
+	}
 
 	public ITypeAssigner assignTypes() {
 		TypeAssigner[] array = new TypeAssigner[components.length];

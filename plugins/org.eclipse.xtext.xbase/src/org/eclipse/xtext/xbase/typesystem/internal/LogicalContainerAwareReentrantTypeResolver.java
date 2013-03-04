@@ -37,12 +37,17 @@ import org.eclipse.xtext.common.types.JvmTypeParameterDeclarator;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.JvmVisibility;
 import org.eclipse.xtext.common.types.TypesFactory;
+import org.eclipse.xtext.common.types.util.AnnotationLookup;
 import org.eclipse.xtext.diagnostics.Severity;
 import org.eclipse.xtext.naming.QualifiedName;
+import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.validation.EObjectDiagnosticImpl;
 import org.eclipse.xtext.xbase.XExpression;
+import org.eclipse.xtext.xbase.XFeatureCall;
+import org.eclipse.xtext.xbase.XMemberFeatureCall;
 import org.eclipse.xtext.xbase.jvmmodel.IJvmModelAssociations;
 import org.eclipse.xtext.xbase.jvmmodel.ILogicalContainerProvider;
+import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.scoping.batch.IFeatureNames;
 import org.eclipse.xtext.xbase.scoping.batch.IFeatureScopeSession;
 import org.eclipse.xtext.xbase.typesystem.InferredTypeIndicator;
@@ -52,13 +57,16 @@ import org.eclipse.xtext.xbase.typesystem.references.AnyTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.ITypeReferenceOwner;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 import org.eclipse.xtext.xbase.typesystem.util.AbstractReentrantTypeReferenceProvider;
+import org.eclipse.xtext.xbase.typesystem.util.Maps2;
 import org.eclipse.xtext.xbase.typing.IJvmTypeReferenceProvider;
 import org.eclipse.xtext.xbase.validation.IssueCodes;
 import org.eclipse.xtext.xtype.XComputedTypeReference;
 import org.eclipse.xtext.xtype.impl.XComputedTypeReferenceImplCustom;
 
 import com.google.common.collect.ImmutableMap;
+import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
+import com.google.common.collect.Sets;
 import com.google.inject.Inject;
 
 /**
@@ -159,6 +167,9 @@ public class LogicalContainerAwareReentrantTypeResolver extends DefaultReentrant
 	@Inject
 	private OverrideHelper overrideHelper;
 	
+	@Inject
+	private AnnotationLookup annotationLookup;
+	
 	protected JvmType getRootJvmType() {
 		EObject result = getRoot();
 		if (result instanceof JvmType)
@@ -213,7 +224,9 @@ public class LogicalContainerAwareReentrantTypeResolver extends DefaultReentrant
 		prepareMembers(resolvedTypes, childSession, type, resolvedTypesByType);
 	}
 
-	protected void prepareMembers(ResolvedTypes resolvedTypes, IFeatureScopeSession childSession, JvmDeclaredType type, Map<JvmIdentifiableElement, ResolvedTypes> resolvedTypesByType) {
+	protected void prepareMembers(ResolvedTypes resolvedTypes, IFeatureScopeSession featureScopeSession, JvmDeclaredType type, Map<JvmIdentifiableElement, ResolvedTypes> resolvedTypesByType) {
+		IFeatureScopeSession childSession = addExtensionsToMemberSession(resolvedTypes, featureScopeSession, type);
+		
 		StackedResolvedTypes childResolvedTypes = declareTypeParameters(resolvedTypes, type, resolvedTypesByType);
 		
 		JvmTypeReference superType = getExtendedClass(type);
@@ -416,6 +429,7 @@ public class LogicalContainerAwareReentrantTypeResolver extends DefaultReentrant
 			preparedResolvedTypes.put(constructor, null);
 		}
 		ConstructorBodyComputationState state = new ConstructorBodyComputationState(childResolvedTypes, featureScopeSession.toInstanceContext(), constructor);
+		addExtensionProviders(state, constructor.getParameters());
 		state.computeTypes();
 		computeAnnotationTypes(childResolvedTypes, featureScopeSession, constructor);
 		for(JvmFormalParameter parameter: constructor.getParameters()) {
@@ -423,6 +437,19 @@ public class LogicalContainerAwareReentrantTypeResolver extends DefaultReentrant
 		}
 		
 		mergeChildTypes(childResolvedTypes);
+	}
+	
+	protected void addExtensionProviders(AbstractLogicalContainerAwareRootComputationState state, List<JvmFormalParameter> parameters) {
+		List<JvmFormalParameter> extensionProviders = null;
+		for(JvmFormalParameter parameter: parameters) {
+			if (isExtensionProvider(parameter)) {
+				if (extensionProviders == null)
+					extensionProviders = Lists.newLinkedList();
+				extensionProviders.add(parameter);
+			}
+		}
+		if (extensionProviders != null)
+			state.addExtensionsToCurrentScope(extensionProviders);
 	}
 	
 	protected void _computeTypes(Map<JvmIdentifiableElement, ResolvedTypes> preparedResolvedTypes, ResolvedTypes resolvedTypes, IFeatureScopeSession featureScopeSession, JvmOperation operation) {
@@ -435,6 +462,7 @@ public class LogicalContainerAwareReentrantTypeResolver extends DefaultReentrant
 			preparedResolvedTypes.put(operation, null);
 		}
 		OperationBodyComputationState state = new OperationBodyComputationState(childResolvedTypes, operation.isStatic() ? featureScopeSession : featureScopeSession.toInstanceContext(), operation);
+		addExtensionProviders(state, operation.getParameters());
 		// no need to unmark the computing state since we replace the equivalent in #resolveTo
 		markComputing(operation.getReturnType());
 		setReturnType(operation, state.computeTypes());
@@ -505,9 +533,10 @@ public class LogicalContainerAwareReentrantTypeResolver extends DefaultReentrant
 
 	protected void computeMemberTypes(Map<JvmIdentifiableElement, ResolvedTypes> preparedResolvedTypes, ResolvedTypes resolvedTypes, IFeatureScopeSession featureScopeSession,
 			JvmDeclaredType type) {
+		IFeatureScopeSession childSession = addExtensionsToMemberSession(resolvedTypes, featureScopeSession, type);
 		List<JvmMember> members = type.getMembers();
 		for(int i = 0; i < members.size(); i++) {
-			computeTypes(preparedResolvedTypes, resolvedTypes, featureScopeSession, members.get(i));
+			computeTypes(preparedResolvedTypes, resolvedTypes, childSession, members.get(i));
 		}
 	}
 	
@@ -542,6 +571,74 @@ public class LogicalContainerAwareReentrantTypeResolver extends DefaultReentrant
 				return candidate;
 		}
 		return null;
+	}
+	
+	protected IFeatureScopeSession addExtensionsToMemberSession(ResolvedTypes resolvedTypes,
+			IFeatureScopeSession featureScopeSession, JvmDeclaredType type) {
+		IEObjectDescription thisDescription = featureScopeSession.getLocalElement(IFeatureNames.THIS);
+		if (thisDescription == null) {
+			throw new IllegalStateException("Cannot find feature 'THIS'");
+		}
+		JvmIdentifiableElement thisFeature = (JvmIdentifiableElement) thisDescription.getEObjectOrProxy();
+		IFeatureScopeSession childSession = addExtensionFieldsToMemberSession(
+				resolvedTypes, featureScopeSession, type, thisFeature, Sets.<String>newHashSetWithExpectedSize(8), Sets.<JvmType>newHashSetWithExpectedSize(4));
+		XFeatureCall thisAccess = getXbaseFactory().createXFeatureCall();
+		thisAccess.setFeature(thisFeature);
+		LightweightTypeReference thisType = resolvedTypes.getActualType(thisFeature);
+		childSession = childSession.addToExtensionScope(Collections.<XExpression, LightweightTypeReference>singletonMap(thisAccess, thisType));
+		return childSession;
+	}
+	
+	protected IFeatureScopeSession addExtensionFieldsToMemberSession(
+				ResolvedTypes resolvedTypes, 
+				IFeatureScopeSession featureScopeSession, 
+				JvmDeclaredType type, 
+				JvmIdentifiableElement thisFeature,
+				Set<String> seenNames,
+				Set<JvmType> seenTypes) {
+		if (seenTypes.add(type)) {
+			Iterable<JvmField> fields = type.getDeclaredFields();
+			// collect local fields first, to populate the set of names
+			Map<XExpression, LightweightTypeReference> extensionProviders = null;
+			for(JvmField field: fields) {
+				if (featureScopeSession.isVisible(field) && seenNames.add(field.getSimpleName()) && isExtensionProvider(field)) {
+					if (extensionProviders == null) {
+						extensionProviders = Maps2.newLinkedHashMapWithExpectedSize(3);
+					}
+					XMemberFeatureCall extensionProvider = createExtensionProvider(thisFeature, field);
+					LightweightTypeReference fieldType = resolvedTypes.getActualType(field);
+					extensionProviders.put(extensionProvider, fieldType);
+				}
+			}
+			// traverse the type hierarchy to create the feature scope sessions
+			JvmTypeReference superType = getExtendedClass(type);
+			IFeatureScopeSession result = featureScopeSession;
+			if (superType != null) {
+				result = addExtensionFieldsToMemberSession(resolvedTypes, featureScopeSession, (JvmDeclaredType) superType.getType(), thisFeature, seenNames, seenTypes);
+			}
+			if (extensionProviders != null) {
+				result = result.addToExtensionScope(extensionProviders);
+			}
+			return result;
+		}
+		return featureScopeSession;
+	}
+	
+	protected XMemberFeatureCall createExtensionProvider(JvmIdentifiableElement thisFeature, JvmField field) {
+		XMemberFeatureCall extensionProvider = getXbaseFactory().createXMemberFeatureCall();
+		extensionProvider.setFeature(field);
+		XFeatureCall thisAccess = getXbaseFactory().createXFeatureCall();
+		thisAccess.setFeature(thisFeature);
+		extensionProvider.setMemberCallTarget(thisAccess);
+		return extensionProvider;
+	}
+	
+	protected boolean isExtensionProvider(JvmAnnotationTarget annotatedElement) {
+		// coding style to simplify debugging
+		if (annotationLookup.findAnnotation(annotatedElement, Extension.class) != null) {
+			return true;
+		}
+		return false;
 	}
 
 	protected void processResult(@SuppressWarnings("unused") ResolvedTypes resolvedTypes) {

@@ -191,6 +191,24 @@ public interface XtendFactory extends EFactory
 	XtendEnumLiteral createXtendEnumLiteral();
 
 	/**
+	 * Returns a new object of class '<em>Variable Declaration</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Variable Declaration</em>'.
+	 * @generated
+	 */
+	XtendVariableDeclaration createXtendVariableDeclaration();
+
+	/**
+	 * Returns a new object of class '<em>Formal Parameter</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Formal Parameter</em>'.
+	 * @generated
+	 */
+	XtendFormalParameter createXtendFormalParameter();
+
+	/**
 	 * Returns the package supported by this factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

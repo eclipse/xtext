@@ -302,7 +302,7 @@ public class XbaseTypeComputer implements ITypeComputer {
 						ITypeComputationState expressionState = state.withoutExpectation();
 						expressionState.computeTypes(expression);
 						if (expression instanceof XVariableDeclaration) {
-							state.addLocalToCurrentScope((XVariableDeclaration)expression);
+							addLocalToCurrentScope((XVariableDeclaration)expression, state);
 						}
 					}
 					XExpression lastExpression = IterableExtensions.last(expressions);
@@ -311,13 +311,17 @@ public class XbaseTypeComputer implements ITypeComputer {
 					// though the variable declaration could be removed automatically to keep only the side effect
 					// of the initializer
 					if (lastExpression instanceof XVariableDeclaration) {
-						state.addLocalToCurrentScope((XVariableDeclaration) lastExpression);
+						addLocalToCurrentScope((XVariableDeclaration)lastExpression, state);
 					}
 				} else {
 					expectation.acceptActualType(new AnyTypeReference(expectation.getReferenceOwner()), ConformanceHint.UNCHECKED);
 				}
 			}
 		}
+	}
+
+	protected void addLocalToCurrentScope(XVariableDeclaration localVariable, ITypeComputationState state) {
+		state.addLocalToCurrentScope(localVariable);
 	}
 
 	protected void _computeTypes(XVariableDeclaration object, ITypeComputationState state) {
@@ -365,6 +369,7 @@ public class XbaseTypeComputer implements ITypeComputer {
 			 * o.substring(1)
 			 */
 			state.assignType(object, lightweightTypeReference != null ? lightweightTypeReference : computedType.getActualExpressionType(), false);
+			state.addExtensionToCurrentScope(object);
 		}
 		LightweightTypeReference primitiveVoid = getPrimitiveVoid(state);
 		state.acceptActualType(primitiveVoid);
