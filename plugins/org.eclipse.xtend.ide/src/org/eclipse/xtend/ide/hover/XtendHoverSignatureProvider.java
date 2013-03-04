@@ -75,7 +75,7 @@ public class XtendHoverSignatureProvider extends XbaseDeclarativeHoverSignatureP
 			return field.getType().getSimpleName();
 		JvmField jvmField = associations.getJvmField(field);
 		if (jvmField != null) {
-			JvmTypeReference type = jvmField.getType();
+			JvmTypeReference type = typeProvider.getTypeForIdentifiable(jvmField);
 			if (type != null) {
 				if (field.getName() == null)
 					return type.getSimpleName();
