@@ -7,6 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.compiler;
 
+import static com.google.common.collect.Lists.*;
 import static java.util.Collections.*;
 
 import java.util.List;
@@ -16,8 +17,20 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.xtext.nodemodel.INode;
+import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
+import org.eclipse.xtext.util.CancelIndicator;
+import org.eclipse.xtext.validation.CheckMode;
+import org.eclipse.xtext.validation.IResourceValidator;
 import org.eclipse.xtext.validation.Issue;
+import org.eclipse.xtext.validation.Issue.IssueImpl;
+import org.eclipse.xtext.xbase.XAbstractFeatureCall;
+import org.eclipse.xtext.xbase.XExpression;
+import org.eclipse.xtext.xbase.XbasePackage;
 import org.eclipse.xtext.xbase.jvmmodel.IJvmModelAssociations;
+import org.eclipse.xtext.xbase.typesystem.IBatchTypeResolver;
+import org.eclipse.xtext.xbase.typesystem.IResolvedTypes;
+import org.eclipse.xtext.xbase.typesystem.computation.ILinkingCandidate;
 
 import com.google.common.collect.ArrayListMultimap;
 import com.google.common.collect.Multimap;
@@ -29,21 +42,14 @@ import com.google.inject.Inject;
 public class ElementIssueProvider implements IElementIssueProvider {
 
 	public static class Data extends AdapterImpl {
-		private Multimap<EObject, Issue> issuesForElement = ArrayListMultimap.create();
-
 		private Multimap<EObject, Issue> issuesIncludingContents = ArrayListMultimap.create();
 
-		public Multimap<EObject, Issue> getIssuesForElement() {
-			return issuesForElement;
-		}
-		
 		public Multimap<EObject, Issue> getIssuesIncludingContents() {
 			return issuesIncludingContents;
 		}
 		
 		protected void addIssue(EObject erroneousElement, Issue issue) {
 			if (erroneousElement != null) {
-				issuesForElement.put(erroneousElement, issue);
 				EObject currentContainer = erroneousElement;
 				do {
 					issuesIncludingContents.put(currentContainer, issue);
@@ -62,7 +68,13 @@ public class ElementIssueProvider implements IElementIssueProvider {
 		
 		@Inject IJvmModelAssociations associations;
 		
-		public void attachData(Resource resource, List<Issue> issues) {
+		@Inject IResourceValidator resourceValidator;
+		
+		@Inject IBatchTypeResolver typeResolver;
+		
+		
+		public void attachData(Resource resource) {
+			List<Issue> issues = collectIssues(resource);
 			Data adapter = new Data();
 			for (Issue issue : issues) {
 				URI uriToProblem = issue.getUriToProblem();
@@ -75,6 +87,33 @@ public class ElementIssueProvider implements IElementIssueProvider {
 				}
 			}
 			resource.eAdapters().add(adapter);
+		}
+
+		protected List<Issue> collectIssues(Resource resource) {
+			List<Issue> issues = newArrayList(resourceValidator.validate(resource, CheckMode.ALL, CancelIndicator.NullImpl));
+			synthesizeIssuesForFollowUpErrors(resource, issues);
+			return issues;
+		}
+
+		protected void synthesizeIssuesForFollowUpErrors(Resource resource, List<Issue> result) {
+			List<EObject> contents = resource.getContents();
+			if (!contents.isEmpty()) {
+				IResolvedTypes resolvedTypes = typeResolver.resolveTypes(contents.get(0));
+				for(ILinkingCandidate linkingCandidate: resolvedTypes.getFollowUpErrors()) {
+					XExpression expression = linkingCandidate.getExpression();
+					IssueImpl issue = new Issue.IssueImpl();
+					issue.setUriToProblem(EcoreUtil.getURI(linkingCandidate.getExpression()));
+					if (expression instanceof XAbstractFeatureCall)
+						issue.setMessage(((XAbstractFeatureCall) expression).getConcreteSyntaxFeatureName() + " cannot be resolved");
+					else {
+						List<INode> nodes = NodeModelUtils.findNodesForFeature(expression, XbasePackage.Literals.XCONSTRUCTOR_CALL__CONSTRUCTOR);
+						if (nodes.size() >= 1) {
+							issue.setMessage(nodes.get(0).getText() + " cannot be resolved");
+						}
+					}
+					result.add(issue);
+				}
+			}
 		}
 		
 		public void detachData(Resource resource) {
@@ -98,12 +137,10 @@ public class ElementIssueProvider implements IElementIssueProvider {
 		this.data = data;
 	}
 
-	public Iterable<Issue> getIssues(EObject element, boolean includeContents) {
+	public Iterable<Issue> getIssues(EObject element) {
 		if(data == null)
 			return emptyList();
 		else
-			return (includeContents) 
-				? data.getIssuesIncludingContents().get(element) 
-				: data.getIssuesForElement().get(element);
+			return data.getIssuesIncludingContents().get(element);
 	}
 }

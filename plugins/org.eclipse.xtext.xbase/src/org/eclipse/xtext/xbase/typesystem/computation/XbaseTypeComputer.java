@@ -495,7 +495,7 @@ public class XbaseTypeComputer implements ITypeComputer {
 			for(XExpression element: literal.getElements()) {
 				ITypeComputationResult elementType = state.withExpectation(elementTypeExpectation).computeTypes(element);
 				LightweightTypeReference actualType = elementType.getActualExpressionType();
-				if(actualType != null && !actualType.isAny() && !actualType.isUnknown()) {
+				if(actualType != null && !actualType.isAny()) {
 					ParameterizedTypeReference collectionTypeCandidate = new ParameterizedTypeReference(state.getReferenceOwner(), collectionType);
 					collectionTypeCandidate.addTypeArgument(actualType.getWrapperTypeIfPrimitive());
 					elementTypes.add(collectionTypeCandidate);
@@ -560,7 +560,7 @@ public class XbaseTypeComputer implements ITypeComputer {
 		LightweightTypeReference parameterType = getDeclaredParameterType(declaredParam, state);
 		final JvmGenericType iterableType = (JvmGenericType) services.getTypeReferences().findDeclaredType(Iterable.class, object);
 		
-		if (parameterType != null && !parameterType.isPrimitiveVoid() && !parameterType.isUnknown()) {
+		if (parameterType != null && !parameterType.isPrimitiveVoid()) {
 			final CompoundTypeReference withSynonyms = new CompoundTypeReference(state.getReferenceOwner(), true);
 			LightweightTypeReference iterableOrArray = getAndEnhanceIterableOrArrayFromComponent(parameterType, iterableType, withSynonyms);
 			

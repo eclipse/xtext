@@ -18,6 +18,7 @@ import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.XConstructorCall;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.typesystem.IResolvedTypes;
+import org.eclipse.xtext.xbase.typesystem.computation.ILinkingCandidate;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 
 import com.google.common.collect.ForwardingObject;
@@ -34,6 +35,10 @@ public abstract class ForwardingResolvedTypes extends ForwardingObject implement
 	@Nullable
 	public LightweightTypeReference getActualType(XExpression expression) {
 		return delegate().getActualType(expression);
+	}
+	
+	public Collection<ILinkingCandidate> getFollowUpErrors() {
+		return delegate().getFollowUpErrors();
 	}
 	
 	@Nullable

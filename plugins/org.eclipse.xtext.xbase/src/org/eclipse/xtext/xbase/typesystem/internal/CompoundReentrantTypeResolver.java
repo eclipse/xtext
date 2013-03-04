@@ -21,6 +21,7 @@ import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.XConstructorCall;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.typesystem.IResolvedTypes;
+import org.eclipse.xtext.xbase.typesystem.computation.ILinkingCandidate;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 
 import com.google.common.collect.Lists;
@@ -86,6 +87,14 @@ public class CompoundReentrantTypeResolver extends AbstractList<IResolvedTypes> 
 		List<AbstractDiagnostic> result = Lists.newArrayList();
 		for(IResolvedTypes delegate: this) {
 			result.addAll(delegate.getQueuedDiagnostics());
+		}
+		return result;
+	}
+	
+	public Collection<ILinkingCandidate> getFollowUpErrors() {
+		List<ILinkingCandidate> result = Lists.newArrayList();
+		for(IResolvedTypes delegate: this) {
+			result.addAll(delegate.getFollowUpErrors());
 		}
 		return result;
 	}

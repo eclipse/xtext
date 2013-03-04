@@ -64,7 +64,9 @@ import org.eclipse.xtext.xbase.typesystem.util.TypeParameterSubstitutor;
 import org.eclipse.xtext.xbase.typesystem.util.VarianceInfo;
 
 import com.google.common.base.Joiner;
+import com.google.common.base.Predicate;
 import com.google.common.base.Joiner.MapJoiner;
+import com.google.common.collect.Collections2;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
@@ -118,19 +120,10 @@ public abstract class ResolvedTypes implements IResolvedTypes {
 	private Set<Object> resolvedTypeParameters;
 	private Set<XExpression> propagatedTypes;
 	private List<JvmTypeParameter> declaredTypeParameters;
-	private boolean typeValidationSuppressed = false;
 	
 	protected ResolvedTypes(DefaultReentrantTypeResolver resolver) {
 		this.resolver = resolver;
 		this.converter = createConverter();
-	}
-	
-	protected boolean isTypeValidationSuppressed() {
-		return typeValidationSuppressed;
-	}
-	
-	protected void suppressTypeValidation() {
-		typeValidationSuppressed = true;
 	}
 	
 	protected void clear() {
@@ -562,6 +555,18 @@ public abstract class ResolvedTypes implements IResolvedTypes {
 		return featureLinking != null ? featureLinking : Collections.<XExpression, ILinkingCandidate>emptyMap();
 	}
 	
+	public Collection<ILinkingCandidate> getFollowUpErrors() {
+		return Collections2.filter(basicGetLinkingCandidates().values(), new Predicate<ILinkingCandidate>() {
+			public boolean apply(@Nullable ILinkingCandidate input) {
+				if (input == null)
+					throw new IllegalArgumentException();
+				if (input instanceof FollowUpError)
+					return true;
+				return false;
+			}
+		});
+	}
+	
 	@Nullable
 	public LightweightTypeReference getActualType(JvmIdentifiableElement identifiable) {
 		LightweightTypeReference result = doGetActualType(identifiable, false);
@@ -975,9 +980,6 @@ public abstract class ResolvedTypes implements IResolvedTypes {
 	
 	protected ExpressionAwareStackedResolvedTypes pushTypes(XExpression context) {
 		ExpressionAwareStackedResolvedTypes result = new ExpressionAwareStackedResolvedTypes(this, context);
-		if (isTypeValidationSuppressed()) {
-			result.suppressTypeValidation();
-		}
 		return result;
 	}
 	

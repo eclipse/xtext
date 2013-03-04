@@ -36,7 +36,9 @@ import org.eclipse.xtext.xbase.typesystem.IResolvedTypes;
 import org.eclipse.xtext.xbase.typesystem.computation.SynonymTypesProvider;
 import org.eclipse.xtext.xbase.typesystem.conformance.ConformanceHint;
 import org.eclipse.xtext.xbase.typesystem.internal.ScopeProviderAccess;
+import org.eclipse.xtext.xbase.typesystem.references.LightweightBoundTypeArgument;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
+import org.eclipse.xtext.xbase.typesystem.references.UnboundTypeReference;
 
 import com.google.inject.Inject;
 
@@ -156,7 +158,7 @@ public class FeatureScopes implements IFeatureNames {
 		if (receiver == null || receiver.eIsProxy())
 			return IScope.NULLSCOPE;
 		LightweightTypeReference receiverType = resolvedTypes.getActualType(receiver);
-		if (receiverType != null && !receiverType.isUnknown()) {
+		if (receiverType != null && !isUnknownReceiverType(receiverType)) {
 			JvmIdentifiableElement linkedReceiver = resolvedTypes.getLinkedFeature(asAbstractFeatureCall(receiver));
 			// check if 'super' was used as receiver which renders extension features and static features invalid
 			if (isValidFeatureCallArgument(receiver, linkedReceiver, session)) {
@@ -180,6 +182,21 @@ public class FeatureScopes implements IFeatureNames {
 		} else {
 			return createFollowUpErrorScope();
 		}
+	}
+	
+	protected boolean isUnknownReceiverType(LightweightTypeReference receiverType) {
+		if (receiverType.isUnknown()) {
+			return true;
+		}
+		if (receiverType instanceof UnboundTypeReference) {
+			List<LightweightBoundTypeArgument> hints = ((UnboundTypeReference) receiverType).getAllHints();
+			for(LightweightBoundTypeArgument hint: hints) {
+				LightweightTypeReference typeReference = hint.getTypeReference();
+				if (typeReference != null && typeReference.isUnknown())
+					return true;
+			}
+		}
+		return false;
 	}
 
 	protected IScope createFollowUpErrorScope() {

@@ -138,13 +138,4 @@ public class ExpectedExceptionsStackedResolvedTypes extends StackedResolvedTypes
 		super.appendContent(result, indentation);
 	}
 
-	@Override
-	protected boolean isTypeValidationSuppressed() {
-		return getParent().isTypeValidationSuppressed();
-	}
-	
-	@Override
-	protected void suppressTypeValidation() {
-		getParent().suppressTypeValidation();
-	}
 }

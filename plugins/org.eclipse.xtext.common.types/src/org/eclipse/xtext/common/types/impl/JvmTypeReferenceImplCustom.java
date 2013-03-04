@@ -66,7 +66,7 @@ public class JvmTypeReferenceImplCustom extends JvmTypeReferenceImpl {
 	}
 	
 	@Override
-	public final String getQualifiedName() {
+	public String getQualifiedName() {
 		return getQualifiedName('$');
 	}
 	

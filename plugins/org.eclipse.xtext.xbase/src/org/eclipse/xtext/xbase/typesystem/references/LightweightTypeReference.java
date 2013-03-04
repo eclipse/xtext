@@ -182,7 +182,7 @@ public abstract class LightweightTypeReference {
 	}
 	
 	public boolean isValidHint() {
-		return !isAny() && !isUnknown() && !isPrimitiveVoid();
+		return !isAny() && !isPrimitiveVoid();
 	}
 	
 	/**
@@ -535,6 +535,7 @@ public abstract class LightweightTypeReference {
 	 * Converts types to references that can be expressed as Java type references
 	 * in source code.
 	 * Any types will be expressed as Object whereas multi types will be expressed as their common super type.
+	 * Unknown types are considered to be ok thus returned as is.
 	 */
 	public LightweightTypeReference toJavaType() {
 		// TODO this needs more refinement, e.g. arrays, parameter types et al

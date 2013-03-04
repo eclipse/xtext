@@ -99,7 +99,7 @@ public class OwnedConverter extends AbstractXtypeReferenceVisitor<LightweightTyp
 		LightweightTypeReference lightweightComponentType = null;
 		if (originalComponentType != null) {
 			lightweightComponentType = visit(originalComponentType);
-			if (lightweightComponentType.isAny() || lightweightComponentType.isUnknown())
+			if (lightweightComponentType.isAny())
 				return lightweightComponentType;
 		} else {
 			lightweightComponentType = getObjectReference();
@@ -147,8 +147,8 @@ public class OwnedConverter extends AbstractXtypeReferenceVisitor<LightweightTyp
 				}
 			}
 			if (nodes.size() == 1) {
-				String name = nodes.get(0).getText();
-				if (name != null) {
+				String name = nodes.get(0).getText().trim();
+				if (name != null && name.length() != 0) {
 					int lastDot = name.lastIndexOf('.');
 					int lastDollar = name.lastIndexOf('$');
 					int lastDotOrDollar = Math.max(lastDot, lastDollar);
@@ -226,6 +226,8 @@ public class OwnedConverter extends AbstractXtypeReferenceVisitor<LightweightTyp
 	
 	@Override
 	public LightweightTypeReference doVisitUnknownTypeReference(JvmUnknownTypeReference reference) {
+		if (reference.eIsSet(TypesPackage.Literals.JVM_UNKNOWN_TYPE_REFERENCE__QUALIFIED_NAME))
+			return new UnknownTypeReference(getOwner(), reference.getQualifiedName());
 		return new UnknownTypeReference(getOwner());
 	}
 	

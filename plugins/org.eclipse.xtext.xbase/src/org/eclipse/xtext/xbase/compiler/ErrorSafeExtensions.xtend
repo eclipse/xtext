@@ -19,6 +19,8 @@ import org.eclipse.xtext.diagnostics.Severity
 import org.eclipse.xtext.validation.Issue
 import org.eclipse.xtext.xbase.compiler.output.ErrorTreeAppendable
 import org.eclipse.xtext.xbase.compiler.output.ITreeAppendable
+import org.eclipse.xtext.common.types.JvmUnknownTypeReference
+import org.eclipse.xtext.common.types.JvmSpecializedTypeReference
 
 /** 
  * @author Jan Koehnlein
@@ -29,14 +31,14 @@ class ErrorSafeExtensions {
 
 	@Inject IElementIssueProvider$Factory issueProviderFactory
 
-	def Iterable<Issue> getErrors(EObject element, boolean includeContents) {
+	def Iterable<Issue> getErrors(EObject element) {
 		val issueProvider = issueProviderFactory.get(element.eResource)
-		issueProvider.getIssues(element, includeContents).filter[severity == Severity::ERROR]
+		issueProvider.getIssues(element).filter[severity == Severity::ERROR]
 	}
 
-	def boolean hasErrors(EObject element, boolean includeContents) {
+	def boolean hasErrors(EObject element) {
 		val issueProvider = issueProviderFactory.get(element.eResource)
-		issueProvider.getIssues(element, includeContents).exists[it.severity == Severity::ERROR]
+		issueProvider.getIssues(element).exists[it.severity == Severity::ERROR]
 	}
 	
 	def <T extends EObject> void forEachSafely(ITreeAppendable appendable, Iterable<T> elements, 
@@ -45,7 +47,7 @@ class ErrorSafeExtensions {
 		if(elements.empty)
 			return
 		val loopParams = new LoopParams => loopInitializer
-		val allElementsBroken = elements.filter[it.hasErrors(true)].size == elements.size
+		val allElementsBroken = elements.filter[it.hasErrors()].size == elements.size
 		var currentAppendable = if(allElementsBroken) 
 				appendable.openErrorAppendable(null, elements.head)
 			else 
@@ -54,7 +56,7 @@ class ErrorSafeExtensions {
 		var isFirst = true
 		var isFirstBroken = true
 		for(element: elements) {
-			if(!element.hasErrors(true)) {
+			if(!element.hasErrors()) {
 				currentAppendable = appendable.closeErrorAppendable(currentAppendable)
 				if(!isFirst)
 					loopParams.appendSeparator(appendable)
@@ -98,9 +100,15 @@ class ErrorSafeExtensions {
 	
 	def void serializeSafely(JvmTypeReference typeRef, String surrogateType, ITreeAppendable appendable) {
 		if(typeRef == null || typeRef.type == null) {
-			val errorChild = appendable.openErrorAppendable(appendable, typeRef)
-			errorChild.append("type is 'null'")
-			appendable.closeErrorAppendable(errorChild)
+			switch(typeRef) {
+				JvmSpecializedTypeReference: typeRef.equivalent.serializeSafely(surrogateType, appendable)
+				JvmUnknownTypeReference: appendable.append(typeRef.qualifiedName)
+				default: {
+					val errorChild = appendable.openErrorAppendable(appendable, typeRef)
+					errorChild.append("type is 'null'")
+					appendable.closeErrorAppendable(errorChild)
+				}
+			}
 		} else {
 			if(typeRef.accept(new BrokenTypeRefDetector)) {
 				val errorChild = appendable.openErrorAppendable(appendable, typeRef.eContainer)

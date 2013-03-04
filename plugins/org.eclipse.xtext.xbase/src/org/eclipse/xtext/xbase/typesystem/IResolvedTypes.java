@@ -20,6 +20,7 @@ import org.eclipse.xtext.diagnostics.AbstractDiagnostic;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.XConstructorCall;
 import org.eclipse.xtext.xbase.XExpression;
+import org.eclipse.xtext.xbase.typesystem.computation.ILinkingCandidate;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 
 /**
@@ -43,6 +44,12 @@ public interface IResolvedTypes {
 	 * TODO do we really need this on the resolved types API? probably not
 	 */
 	Collection<AbstractDiagnostic> getQueuedDiagnostics();
+	
+	/**
+	 * Returns the linking candidates that could not be resolved but are not 
+	 * exposed to the users because they are follow up errors.
+	 */
+	Collection<ILinkingCandidate> getFollowUpErrors();
 	
 	/**
 	 * Returns the actually inferred type for the given expression or <code>null</code> if none.
@@ -122,6 +129,10 @@ public interface IResolvedTypes {
 		}
 		
 		public Collection<AbstractDiagnostic> getQueuedDiagnostics() {
+			return Collections.emptyList();
+		}
+		
+		public Collection<ILinkingCandidate> getFollowUpErrors() {
 			return Collections.emptyList();
 		}
 		

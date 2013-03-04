@@ -102,13 +102,4 @@ public class ReassigningStackedResolvedTypes extends StackedResolvedTypes {
 		throw new UnsupportedOperationException("Should not be invoked");
 	}
 	
-	@Override
-	protected boolean isTypeValidationSuppressed() {
-		return getParent().isTypeValidationSuppressed();
-	}
-	
-	@Override
-	protected void suppressTypeValidation() {
-		getParent().suppressTypeValidation();
-	}
 }

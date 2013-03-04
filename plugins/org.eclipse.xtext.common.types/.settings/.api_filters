@@ -30,6 +30,20 @@
             </message_arguments>
         </filter>
     </resource>
+    <resource path="emf-gen/org/eclipse/xtext/common/types/JvmUnknownTypeReference.java" type="org.eclipse.xtext.common.types.JvmUnknownTypeReference">
+        <filter id="405901410">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.common.types.JvmUnknownTypeReference"/>
+                <message_argument value="getException()"/>
+            </message_arguments>
+        </filter>
+        <filter id="405901410">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.common.types.JvmUnknownTypeReference"/>
+                <message_argument value="setException(Exception)"/>
+            </message_arguments>
+        </filter>
+    </resource>
     <resource path="emf-gen/org/eclipse/xtext/common/types/TypesPackage.java" type="org.eclipse.xtext.common.types.TypesPackage">
         <filter id="388194388">
             <message_arguments>
@@ -62,6 +76,12 @@
         <filter id="405864542">
             <message_arguments>
                 <message_argument value="org.eclipse.xtext.common.types.TypesPackage"/>
+                <message_argument value="EXCEPTION"/>
+            </message_arguments>
+        </filter>
+        <filter id="405864542">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.common.types.TypesPackage"/>
                 <message_argument value="JVM_ANNOTATION_ANNOTATION_VALUE__ANNOTATIONS"/>
             </message_arguments>
         </filter>
@@ -71,10 +91,28 @@
                 <message_argument value="JVM_ANNOTATION_REFERENCE__TARGET"/>
             </message_arguments>
         </filter>
+        <filter id="405864542">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.common.types.TypesPackage"/>
+                <message_argument value="JVM_UNKNOWN_TYPE_REFERENCE__EXCEPTION"/>
+            </message_arguments>
+        </filter>
+        <filter id="405901410">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.common.types.TypesPackage"/>
+                <message_argument value="getException()"/>
+            </message_arguments>
+        </filter>
         <filter id="405901410">
             <message_arguments>
                 <message_argument value="org.eclipse.xtext.common.types.TypesPackage"/>
                 <message_argument value="getJvmAnnotationReference_Target()"/>
+            </message_arguments>
+        </filter>
+        <filter id="405901410">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.common.types.TypesPackage"/>
+                <message_argument value="getJvmUnknownTypeReference_Exception()"/>
             </message_arguments>
         </filter>
     </resource>
@@ -82,7 +120,19 @@
         <filter id="405864542">
             <message_arguments>
                 <message_argument value="org.eclipse.xtext.common.types.TypesPackage.Literals"/>
+                <message_argument value="EXCEPTION"/>
+            </message_arguments>
+        </filter>
+        <filter id="405864542">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.common.types.TypesPackage.Literals"/>
                 <message_argument value="JVM_ANNOTATION_REFERENCE__TARGET"/>
+            </message_arguments>
+        </filter>
+        <filter id="405864542">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.common.types.TypesPackage.Literals"/>
+                <message_argument value="JVM_UNKNOWN_TYPE_REFERENCE__EXCEPTION"/>
             </message_arguments>
         </filter>
     </resource>
