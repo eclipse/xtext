@@ -449,6 +449,18 @@ public class LinkingTest extends AbstractXtendTestCase {
 		assertEquals("Foo.string", ((XMemberFeatureCall)call.getImplicitReceiver()).getFeature().getIdentifier());
 	}
 	
+	@Test public void testLocalVarExtensionMethodCall() throws Exception {
+		XtendClass clazz = clazz("" +
+				"class Foo {" +
+				"  def foo() " +
+				"    { extension var local = '' (1 as int).indexOf() }" +
+				"}");
+		XtendFunction func = (XtendFunction) clazz.getMembers().get(0);
+		final XMemberFeatureCall call = (XMemberFeatureCall)((XBlockExpression)func.getExpression()).getExpressions().get(1);
+		assertEquals("java.lang.String.indexOf(int)", call.getFeature().getIdentifier());
+		assertEquals("local", ((XFeatureCall)call.getImplicitReceiver()).getFeature().getIdentifier());
+	}
+	
 	@Test public void testExtensionMethodCall_Bug351827_01() throws Exception {
 		XtendClass clazz = clazz("" +
 				"class Foo {" +

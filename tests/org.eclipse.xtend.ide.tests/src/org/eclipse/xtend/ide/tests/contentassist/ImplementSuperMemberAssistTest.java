@@ -109,6 +109,22 @@ public class ImplementSuperMemberAssistTest extends AbstractXtendContentAssistBu
 		assertEquals(1, imports.size());
 		assertEquals("import java.util.Collection", imports.get(0).getText().trim());
 	}
+
+	@Test public void testExtensionKeyword_01() throws Exception {
+		newBuilder()
+			.append("import org.eclipse.xtext.xbase.lib.Extension class A { def void x(@Extension String arg) {} } class B extends A { x")
+			.assertText(
+				"\n" + indent + "\n" + indent + "override x(extension String arg) {\n" +
+				indent + indent + "super.x(arg)\n" +
+				indent + "}");
+	}
+	
+	@Test public void testExtensionKeyword_02() throws Exception {
+		newBuilder().append("class A { def void x(extension String arg) {} } class B extends A { x").assertText(
+				"\n" + indent + "\n" + indent + "override x(extension String arg) {\n" +
+						indent + indent + "super.x(arg)\n" +
+						indent + "}");
+	}
 	
 	@Test public void testConstructor() throws Exception {
 		newBuilder().append("class Foo extends java.util.ArrayList<String> { new").assertText(

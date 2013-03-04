@@ -31,6 +31,7 @@ import org.eclipse.xtext.common.types.JvmTypeReference;
  *   <li>{@link org.eclipse.xtend.core.xtend.impl.XtendParameterImpl#getName <em>Name</em>}</li>
  *   <li>{@link org.eclipse.xtend.core.xtend.impl.XtendParameterImpl#getParameterType <em>Parameter Type</em>}</li>
  *   <li>{@link org.eclipse.xtend.core.xtend.impl.XtendParameterImpl#isVarArg <em>Var Arg</em>}</li>
+ *   <li>{@link org.eclipse.xtend.core.xtend.impl.XtendParameterImpl#isExtension <em>Extension</em>}</li>
  * </ul>
  * </p>
  *
@@ -87,6 +88,26 @@ public class XtendParameterImpl extends XtendAnnotationTargetImpl implements Xte
 	 * @ordered
 	 */
 	protected boolean varArg = VAR_ARG_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #isExtension() <em>Extension</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isExtension()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final boolean EXTENSION_EDEFAULT = false;
+
+	/**
+	 * The cached value of the '{@link #isExtension() <em>Extension</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isExtension()
+	 * @generated
+	 * @ordered
+	 */
+	protected boolean extension = EXTENSION_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -208,6 +229,29 @@ public class XtendParameterImpl extends XtendAnnotationTargetImpl implements Xte
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public boolean isExtension()
+	{
+		return extension;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setExtension(boolean newExtension)
+	{
+		boolean oldExtension = extension;
+		extension = newExtension;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, XtendPackage.XTEND_PARAMETER__EXTENSION, oldExtension, extension));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs)
 	{
@@ -235,6 +279,8 @@ public class XtendParameterImpl extends XtendAnnotationTargetImpl implements Xte
 				return getParameterType();
 			case XtendPackage.XTEND_PARAMETER__VAR_ARG:
 				return isVarArg();
+			case XtendPackage.XTEND_PARAMETER__EXTENSION:
+				return isExtension();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -257,6 +303,9 @@ public class XtendParameterImpl extends XtendAnnotationTargetImpl implements Xte
 				return;
 			case XtendPackage.XTEND_PARAMETER__VAR_ARG:
 				setVarArg((Boolean)newValue);
+				return;
+			case XtendPackage.XTEND_PARAMETER__EXTENSION:
+				setExtension((Boolean)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -281,6 +330,9 @@ public class XtendParameterImpl extends XtendAnnotationTargetImpl implements Xte
 			case XtendPackage.XTEND_PARAMETER__VAR_ARG:
 				setVarArg(VAR_ARG_EDEFAULT);
 				return;
+			case XtendPackage.XTEND_PARAMETER__EXTENSION:
+				setExtension(EXTENSION_EDEFAULT);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -301,6 +353,8 @@ public class XtendParameterImpl extends XtendAnnotationTargetImpl implements Xte
 				return parameterType != null;
 			case XtendPackage.XTEND_PARAMETER__VAR_ARG:
 				return varArg != VAR_ARG_EDEFAULT;
+			case XtendPackage.XTEND_PARAMETER__EXTENSION:
+				return extension != EXTENSION_EDEFAULT;
 		}
 		return super.eIsSet(featureID);
 	}
@@ -320,6 +374,8 @@ public class XtendParameterImpl extends XtendAnnotationTargetImpl implements Xte
 		result.append(name);
 		result.append(", varArg: ");
 		result.append(varArg);
+		result.append(", extension: ");
+		result.append(extension);
 		result.append(')');
 		return result.toString();
 	}

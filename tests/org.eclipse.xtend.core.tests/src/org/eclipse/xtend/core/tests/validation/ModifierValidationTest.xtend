@@ -109,7 +109,7 @@ class ModifierValidationTest extends AbstractXtendTestCase {
 		field('''abstract int foo''').assertError(XTEND_FIELD, INVALID_MODIFIER)
 		field('''dispatch int foo''').assertError(XTEND_FIELD, INVALID_MODIFIER)
 		field('''final int foo = 42''').assertNoErrors
-		field('''extension int foo''').assertNoErrors
+		field('''extension Integer foo''').assertNoErrors
 	}
 	
 	@Test def void testFieldInInterfaceAllowedModifiers() {
