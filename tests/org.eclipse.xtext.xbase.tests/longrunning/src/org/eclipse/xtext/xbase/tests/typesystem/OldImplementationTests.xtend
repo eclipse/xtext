@@ -366,6 +366,9 @@ class OldAPITypeResolverTest extends AbstractOldAPITypeResolverTest {
 	@Ignore("fails in old implementation") @Test override testIfExpression_09() throws Exception {
 		fail("fails in old implementation")
 	}
+	@Ignore("fails in old implementation") @Test override testIfExpression_10() throws Exception {
+		fail("fails in old implementation")
+	}
 	@Ignore("fails in old implementation") @Test override testIfExpression_11() throws Exception {
 		fail("fails in old implementation")
 	}
@@ -385,6 +388,13 @@ class OldAPITypeResolverTest extends AbstractOldAPITypeResolverTest {
 		fail("fails in old implementation")
 	}
 	@Ignore("fails in old implementation") @Test override testIfExpression_27() throws Exception {
+		fail("fails in old implementation")
+	}
+	@Ignore("fails in old implementation") @Test override testIfExpression_31() throws Exception {
+		fail("fails in old implementation")
+	}
+	
+	@Ignore("fails in old implementation") @Test override testVarArgs_07() throws Exception {
 		fail("fails in old implementation")
 	}
 	

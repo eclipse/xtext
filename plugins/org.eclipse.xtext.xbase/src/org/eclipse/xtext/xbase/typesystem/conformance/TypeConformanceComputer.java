@@ -112,14 +112,16 @@ public class TypeConformanceComputer {
 			if (superType == null)
 				throw new IllegalStateException("superType may not be null");
 			JvmType type = superType.getType();
-			rawTypeToReference.put(type, superType);
-			if (distances.contains(type)) {
-				int currentCount = distances.count(type);
-				if (currentCount < distance + 1) {
-					distances.setCount(type, distance + 1);
+			if (type != null) {
+				rawTypeToReference.put(type, superType);
+				if (distances.contains(type)) {
+					int currentCount = distances.count(type);
+					if (currentCount < distance + 1) {
+						distances.setCount(type, distance + 1);
+					}
+				} else {
+					distances.add(type, distance + 1);
 				}
-			} else {
-				distances.add(type, distance + 1);
 			}
 			return true;
 		}
