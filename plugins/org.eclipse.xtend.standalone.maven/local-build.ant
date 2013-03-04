@@ -17,7 +17,7 @@
 	<property name="build.root" location="${user.home}/hudsonbuild/xtend-standalone/buildroot" />
 
 	<!-- Buckminster headless 3.7 to use. See http://www.eclipse.org/buckminster/downloads.html -->
-	<property name="buckminster.home" location="${user.home}/Entwicklung/buckminster" />
+	<property name="buckminster.home" location="${user.home}/buckminster" />
 
 	<!-- Local Xtext git repository -->
 	<property name="checkout.location" value="${user.home}/git/org.eclipse.xtext/" />

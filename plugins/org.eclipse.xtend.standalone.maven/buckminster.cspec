@@ -13,6 +13,8 @@
 		<cs:dependency name="org.eclipse.xtext.xbase.lib" componentType="osgi.bundle" />
 		<cs:dependency name="org.eclipse.xtend.core" componentType="osgi.bundle" />
 		<cs:dependency name="org.eclipse.xtend.lib" componentType="osgi.bundle" />
+		<cs:dependency name="org.eclipse.xtext.junit4" componentType="osgi.bundle" />
+		<cs:dependency name="org.eclipse.xtext.xbase.junit" componentType="osgi.bundle" />
 		
 		<!-- EMF -->
 		<cs:dependency name="org.eclipse.emf.ecore" componentType="osgi.bundle" versionDesignator="[2.5.0,2.5.1)"/>
