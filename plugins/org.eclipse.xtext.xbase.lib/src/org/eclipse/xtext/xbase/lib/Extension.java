@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2012 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2013 itemis AG (http://www.itemis.eu) and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -17,22 +17,23 @@ import com.google.common.annotations.Beta;
 import com.google.common.annotations.GwtCompatible;
 
 /**
- * Whether the constructor or method causes any side-effects to
- * non-local state.
+ * Marks a field, parameter or local variable as extension provider.
  * 
- * On {@link Inline}d methods this is means the compiler cannot 
- * use the resulting Java expression as a statement. 
+ * Annotated extension fields are inherited if their visibility is set
+ * accordingly.
  *  
- * @author Sven Efftinge - Initial contribution and API
+ * @author Sebastian Zarnekow - Initial contribution and API
  * 
- * @since 2.3
+ * @since 2.4
  */
 @Retention(RetentionPolicy.RUNTIME)
 @Target({
-    ElementType.CONSTRUCTOR,
-    ElementType.METHOD})
+    ElementType.FIELD,
+    ElementType.PARAMETER,
+    ElementType.LOCAL_VARIABLE
+})
 @Documented
 @Beta
-@GwtCompatible public @interface Pure {
+@GwtCompatible public @interface Extension {
 
 }
