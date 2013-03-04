@@ -10,23 +10,21 @@ package org.eclipse.xtend.ide.tests.refactoring;
 import static com.google.common.collect.Iterables.*;
 
 import java.lang.reflect.InvocationTargetException;
-import java.util.concurrent.TimeUnit;
-
-import javax.inject.Provider;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.NullProgressMonitor;
+import org.eclipse.core.runtime.jobs.Job;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jface.text.source.ISourceViewer;
-import org.eclipse.swt.widgets.Display;
 import org.eclipse.ui.actions.WorkspaceModifyOperation;
 import org.eclipse.xtend.core.jvmmodel.IXtendJvmAssociations;
 import org.eclipse.xtend.core.xtend.XtendClass;
 import org.eclipse.xtend.core.xtend.XtendConstructor;
 import org.eclipse.xtend.core.xtend.XtendFunction;
 import org.eclipse.xtend.ide.editor.OverrideIndicatorAnnotation;
+import org.eclipse.xtend.ide.editor.OverrideIndicatorModelListener;
 import org.eclipse.xtend.ide.tests.AbstractXtendUITestCase;
 import org.eclipse.xtend.ide.tests.WorkbenchTestHelper;
 import org.eclipse.xtext.common.types.JvmConstructor;
@@ -39,11 +37,8 @@ import org.eclipse.xtext.ui.refactoring.IRenameStrategy;
 import org.eclipse.xtext.ui.refactoring.IRenameStrategy.Provider.NoSuchStrategyException;
 import org.eclipse.xtext.ui.refactoring.ui.IRenameContextFactory;
 import org.eclipse.xtext.ui.refactoring.ui.IRenameElementContext;
-import org.junit.Ignore;
 import org.junit.Test;
 
-import com.google.common.base.Predicate;
-import com.google.common.base.Predicates;
 import com.google.common.collect.Iterators;
 import com.google.inject.Inject;
 
@@ -65,23 +60,16 @@ public class RenameStrategyTest extends AbstractXtendUITestCase {
 	@Inject
 	private WorkbenchTestHelper testHelper;
 
-	@Ignore("Temporarily ignored as it fails (due to timing issues) as of change 4f12b7f83dcc487f69e59238ac796485bd7cd679")
 	@Test public void testOverrideIndicatorAnnotationAfterFileRename() throws Exception {
 		testHelper.createFile("test/SuperClass","package test\nclass SuperClass { def foo() {}}");
 		final IFile subClassFile = testHelper.createFile("test/SubClass","package test\nclass SubClass extends SuperClass { override foo () {}}");
 		IResourcesSetupUtil.waitForAutoBuild();
 		XtextEditor openEditor = testHelper.openEditor(subClassFile);
-		final OverrideIndicatorAnnotation[] annotationBeforeFileRename = new OverrideIndicatorAnnotation[]{null};
-		final OverrideIndicatorAnnotation[] annotationAfterFileRename = new OverrideIndicatorAnnotation[]{null};
 		final ISourceViewer sourceViewer = openEditor.getInternalSourceViewer();
-		sleepWhile(Predicates.isNull(), new Provider<Object>() {
 
-			public OverrideIndicatorAnnotation get() {
-				annotationBeforeFileRename[0] = Iterators.getOnlyElement(Iterators.filter(sourceViewer.getAnnotationModel().getAnnotationIterator(), OverrideIndicatorAnnotation.class), null);
-				return annotationBeforeFileRename[0];
-			}
-		},TimeUnit.SECONDS.toMillis(10));
-		assertNotNull(annotationBeforeFileRename[0]);
+		waitForJob(OverrideIndicatorModelListener.JOB_NAME);
+		OverrideIndicatorAnnotation annotationBefore = Iterators.getOnlyElement(Iterators.filter(sourceViewer.getAnnotationModel().getAnnotationIterator(), OverrideIndicatorAnnotation.class));
+
 		new WorkspaceModifyOperation() {
 			@Override
 			protected void execute(IProgressMonitor monitor) throws CoreException, InvocationTargetException,
@@ -89,27 +77,20 @@ public class RenameStrategyTest extends AbstractXtendUITestCase {
 				subClassFile.move(subClassFile.getFullPath().removeLastSegments(1).append("Test.xtend"), true, monitor);
 			}
 		}.run(new NullProgressMonitor());
-		IResourcesSetupUtil.waitForAutoBuild();
-		sleepWhile(Predicates.isNull(), new Provider<Object>() {
 
-			public OverrideIndicatorAnnotation get() {
-				annotationAfterFileRename[0] = Iterators.getOnlyElement(Iterators.filter(sourceViewer.getAnnotationModel().getAnnotationIterator(), OverrideIndicatorAnnotation.class), null);
-				return annotationAfterFileRename[0];
-			}
-		},TimeUnit.SECONDS.toMillis(10));
-		assertNotNull(annotationAfterFileRename[0]);
-		assertNotSame(annotationBeforeFileRename[0], annotationAfterFileRename[0]);
+		IResourcesSetupUtil.waitForAutoBuild();
+		waitForJob(OverrideIndicatorModelListener.JOB_NAME);
+		OverrideIndicatorAnnotation annotationAfter = Iterators.getOnlyElement(Iterators.filter(sourceViewer.getAnnotationModel().getAnnotationIterator(), OverrideIndicatorAnnotation.class));
+
+		assertEquals(annotationBefore.getFunctionURIFragment(), annotationAfter.getFunctionURIFragment());
 	}
 
-	private <T> void sleepWhile(Predicate<T> test, Provider<T> input, long timeOutInMillis) {
-		Display display = Display.getCurrent();
-		long timeToGo = System.currentTimeMillis() + timeOutInMillis;
-		while (System.currentTimeMillis() < timeToGo && test.apply(input.get())) {
-			if (!display.readAndDispatch()) {
-				display.sleep();
+	private void waitForJob(String jobName) throws InterruptedException {
+		for (Job job : Job.getJobManager().find(null)) {
+			if (jobName.equals(job.getName())) {
+				job.join();
 			}
 		}
-		display.update();
 	}
 
 	@Test public void testInferredClassRenamed() throws Exception {
