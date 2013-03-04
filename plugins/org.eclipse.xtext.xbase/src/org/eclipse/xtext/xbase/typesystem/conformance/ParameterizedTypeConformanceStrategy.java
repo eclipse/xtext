@@ -288,7 +288,7 @@ public class ParameterizedTypeConformanceStrategy<TypeReference extends Paramete
 			return TypeConformanceResult.create(param, ConformanceHint.SUCCESS);
 		if (left.isType(Object.class))
 			return TypeConformanceResult.create(param, ConformanceHint.SUCCESS);
-		if (!param.isRawType() && right.canResolveTo(left)) {
+		if (!param.isRawType() && (right.canResolveTo(left) || param.isAsTypeArgument() && !right.hasSignificantHints())) { 
 			return TypeConformanceResult.create(param, ConformanceHint.SUCCESS);
 		}
 		right.tryResolve();

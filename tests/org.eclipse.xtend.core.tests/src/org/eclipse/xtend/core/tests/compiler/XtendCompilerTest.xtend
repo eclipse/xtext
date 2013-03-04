@@ -23,6 +23,57 @@ class XtendCompilerTest extends AbstractXtendTestCase {
 	@Inject IGeneratorConfigProvider generatorConfigProvider
 	
 	@Test
+	def testExpectationFromTypeParameter() {
+		assertCompilesTo('''
+			import java.util.Set
+			import org.eclipse.xtext.common.types.JvmTypeParameter
+			import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference
+			import org.eclipse.xtext.xbase.typesystem.util.TypeParameterSubstitutor
+			import org.eclipse.xtext.xbase.typesystem.references.ITypeReferenceOwner
+			
+			class C extends TypeParameterSubstitutor<Set<JvmTypeParameter>> {
+				
+				new(ITypeReferenceOwner owner) {
+					super(null, owner)
+				}
+				
+				override substitute(LightweightTypeReference original) {
+					original.accept(this, newHashSet)
+				}
+			
+				override protected createVisiting() {
+					return newHashSet
+				}
+			}
+		''', '''
+			import java.util.HashSet;
+			import java.util.Set;
+			import org.eclipse.xtext.common.types.JvmTypeParameter;
+			import org.eclipse.xtext.xbase.lib.CollectionLiterals;
+			import org.eclipse.xtext.xbase.typesystem.references.ITypeReferenceOwner;
+			import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
+			import org.eclipse.xtext.xbase.typesystem.util.TypeParameterSubstitutor;
+			
+			@SuppressWarnings("all")
+			public class C extends TypeParameterSubstitutor<Set<JvmTypeParameter>> {
+			  public C(final ITypeReferenceOwner owner) {
+			    super(null, owner);
+			  }
+			  
+			  public LightweightTypeReference substitute(final LightweightTypeReference original) {
+			    HashSet<JvmTypeParameter> _newHashSet = CollectionLiterals.<JvmTypeParameter>newHashSet();
+			    LightweightTypeReference _accept = original.<Set<JvmTypeParameter>, LightweightTypeReference>accept(this, _newHashSet);
+			    return _accept;
+			  }
+			  
+			  protected Set<JvmTypeParameter> createVisiting() {
+			    return CollectionLiterals.<JvmTypeParameter>newHashSet();
+			  }
+			}
+		''')
+	}
+	
+	@Test
 	def testBugReturnInLoop_01() {
 		assertCompilesTo('''
 			class C {
