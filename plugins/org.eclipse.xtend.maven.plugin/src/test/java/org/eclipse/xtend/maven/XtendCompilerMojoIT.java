@@ -38,6 +38,11 @@ public class XtendCompilerMojoIT {
 	public void aggregation() throws Exception {
 		verifyErrorFreeLog(ROOT + "/aggregation");
 	}
+	
+	@Test
+	public void macro() throws Exception {
+		verifyErrorFreeLog(ROOT + "/macros");
+	}
 
 	@Test
 	public void haltOnXtendValidationErrors() throws Exception {
@@ -73,6 +78,9 @@ public class XtendCompilerMojoIT {
 
 	private Verifier newVerifier(String pathToTestProject) throws IOException, VerificationException {
 		File testDir = ResourceExtractor.simpleExtractResources(getClass(), pathToTestProject);
-		return new Verifier(testDir.getAbsolutePath());
+		Verifier verifier = new Verifier(testDir.getAbsolutePath());
+//		verifier.setDebugJvm(true);
+//		verifier.setForkJvm(false);
+		return verifier;
 	}
 }

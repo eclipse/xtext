@@ -52,10 +52,19 @@ public abstract class AbstractXtendCompilerMojo extends AbstractXtendMojo {
 	 * @parameter default-value="true" expression="${writeTraceFiles}"
 	 */
 	protected boolean writeTraceFiles;
+	
+	/**
+	 * Set this to false to use an isolated class path. Note, that active annotations require this to be set to true.
+	 * 
+	 * @parameter default-value="true" expression="${useCompilerClassPath}"
+	 */
+	protected boolean useCompilerClassPath;
+	
 
 	protected XtendBatchCompiler createXtendBatchCompiler() {
 		Injector injector = new XtendMavenStandaloneSetup().createInjectorAndDoEMFRegistration();
-		return injector.getInstance(XtendBatchCompiler.class);
+		XtendBatchCompiler instance = injector.getInstance(XtendBatchCompiler.class);
+		return instance;
 	}
 
 	protected void compile(XtendBatchCompiler xtend2BatchCompiler, String classPath, List<String> sourceDirectories,
@@ -74,6 +83,8 @@ public abstract class AbstractXtendCompilerMojo extends AbstractXtendMojo {
 		xtend2BatchCompiler.setDeleteTempDirectory(false);
 		getLog().debug("Set classpath: " + classPath);
 		xtend2BatchCompiler.setClassPath(classPath);
+		getLog().debug("Set useCompilerClassPath: " + useCompilerClassPath);
+		xtend2BatchCompiler.setUseCurrentClassLoaderAsParent(useCompilerClassPath);
 		getLog().debug("Set source path: " + concat(File.pathSeparator, newArrayList(filtered)));
 		xtend2BatchCompiler.setSourcePath(concat(File.pathSeparator, newArrayList(filtered)));
 		getLog().debug("Set output path: " + outputPath);
