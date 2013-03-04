@@ -190,6 +190,13 @@ public interface ITypeComputationState {
 	 * @param element the newly added element (e.g. a {@link XVariableDeclaration variable} or {@link JvmFormalParameter parameter}.
 	 */
 	void addLocalToCurrentScope(JvmIdentifiableElement element);
+
+	/**
+	 * Adds the given element as an extension provider to the current scope.
+	 * 
+	 * @param element the identifiable that points to the extension provider
+	 */
+	void addExtensionToCurrentScope(JvmIdentifiableElement element);
 	
 	/**
 	 * Assigns the given actual type to the raw type which shall be reachable with the given name.

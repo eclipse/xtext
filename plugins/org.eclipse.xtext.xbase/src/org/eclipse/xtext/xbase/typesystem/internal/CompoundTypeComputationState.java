@@ -163,6 +163,12 @@ public class CompoundTypeComputationState implements ITypeComputationState {
 		}
 		return new CompoundTypeComputationState(owner, result);
 	}
+	
+	public void addExtensionToCurrentScope(JvmIdentifiableElement element) {
+		for (int i = 0; i < components.length; i++) {
+			components[i].addExtensionToCurrentScope(element);
+		}
+	}
 
 	public ITypeAssigner assignTypes() {
 		TypeAssigner[] array = new TypeAssigner[components.length];

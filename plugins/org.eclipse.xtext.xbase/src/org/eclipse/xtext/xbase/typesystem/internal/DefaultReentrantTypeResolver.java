@@ -21,6 +21,7 @@ import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.util.internal.Stopwatches;
 import org.eclipse.xtext.util.internal.Stopwatches.StoppedTask;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
+import org.eclipse.xtext.xbase.XbaseFactory;
 import org.eclipse.xtext.validation.IssueSeverities;
 import org.eclipse.xtext.validation.IssueSeveritiesProvider;
 import org.eclipse.xtext.xbase.XExpression;
@@ -78,6 +79,9 @@ public class DefaultReentrantTypeResolver extends AbstractRootedReentrantTypeRes
 	
 	@Inject
 	private IssueSeveritiesProvider issueSeveritiesProvider;
+	
+	@Inject
+	private XbaseFactory xbaseFactory;
 	
 	private EObject root;
 	
@@ -247,5 +251,9 @@ public class DefaultReentrantTypeResolver extends AbstractRootedReentrantTypeRes
 
 	protected EObject getSourceElement(EObject element) {
 		return element;
+	}
+	
+	protected XbaseFactory getXbaseFactory() {
+		return xbaseFactory;
 	}
 }

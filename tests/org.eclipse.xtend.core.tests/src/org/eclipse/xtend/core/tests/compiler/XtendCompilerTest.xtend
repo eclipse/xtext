@@ -23,6 +23,57 @@ class XtendCompilerTest extends AbstractXtendTestCase {
 	@Inject IGeneratorConfigProvider generatorConfigProvider
 	
 	@Test
+	def testExtensionAnnotations() {
+		assertCompilesTo('''
+			class C {
+				def void m(extension String s) {
+					extension val Double d = 1.0
+					for(extension j: 1..1) {
+						[ extension Object o | 
+							try {
+							} catch(extension Throwable t) {
+							} 
+						].apply(null)
+					}
+				}
+			}
+		''', '''
+			import org.eclipse.xtext.xbase.lib.Exceptions;
+			import org.eclipse.xtext.xbase.lib.Extension;
+			import org.eclipse.xtext.xbase.lib.Functions.Function1;
+			import org.eclipse.xtext.xbase.lib.IntegerRange;
+			
+			@SuppressWarnings("all")
+			public class C {
+			  public void m(@Extension final String s) {
+			    @Extension
+			    final Double d = Double.valueOf(1.0);
+			    IntegerRange _upTo = new IntegerRange(1, 1);
+			    for (@Extension final Integer j : _upTo) {
+			      final Function1<Object,Object> _function = new Function1<Object,Object>() {
+			          public Object apply(@Extension final Object o) {
+			            Object _xtrycatchfinallyexpression = null;
+			            try {
+			              _xtrycatchfinallyexpression = null;
+			            } catch (final Throwable _t) {
+			              if (_t instanceof Throwable) {
+			                @Extension final Throwable t = (Throwable)_t;
+			                _xtrycatchfinallyexpression = null;
+			              } else {
+			                throw Exceptions.sneakyThrow(_t);
+			              }
+			            }
+			            return _xtrycatchfinallyexpression;
+			          }
+			        };
+			      _function.apply(null);
+			    }
+			  }
+			}
+		''')
+	}
+	
+	@Test
 	def testExpectationFromTypeParameter() {
 		assertCompilesTo('''
 			import java.util.Set
@@ -2087,11 +2138,13 @@ class XtendCompilerTest extends AbstractXtendTestCase {
 			}
 		'''.assertCompilesTo('''
 			import org.eclipse.xtend.lib.Data;
+			import org.eclipse.xtext.xbase.lib.Extension;
 			import org.eclipse.xtext.xbase.lib.util.ToStringHelper;
 			
 			@Data
 			@SuppressWarnings("all")
 			public class UsesExtension {
+			  @Extension
 			  private final String __string;
 			  
 			  public String get_string() {
@@ -4220,8 +4273,11 @@ class XtendCompilerTest extends AbstractXtendTestCase {
 					}
 				}
 			''', '''
+				import org.eclipse.xtext.xbase.lib.Extension;
+				
 				@SuppressWarnings("all")
 				public class NoNPE {
+				  @Extension
 				  private String _string;
 				  
 				  public String useExtension() {

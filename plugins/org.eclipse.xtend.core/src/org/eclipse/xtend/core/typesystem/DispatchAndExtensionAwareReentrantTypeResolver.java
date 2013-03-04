@@ -44,7 +44,6 @@ import org.eclipse.xtext.validation.EObjectDiagnosticImpl;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XFeatureCall;
 import org.eclipse.xtext.xbase.XMemberFeatureCall;
-import org.eclipse.xtext.xbase.XbaseFactory;
 import org.eclipse.xtext.xbase.XbasePackage;
 import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotation;
 import org.eclipse.xtext.xbase.scoping.batch.IFeatureNames;
@@ -242,9 +241,6 @@ public class DispatchAndExtensionAwareReentrantTypeResolver extends LogicalConta
 	
 	@Inject
 	private IXtendJvmAssociations associations;
-	
-	@Inject
-	private XbaseFactory xbaseFactory;
 	
 	@Override
 	protected void computeTypes(ResolvedTypes resolvedTypes, IFeatureScopeSession session) {
@@ -515,7 +511,7 @@ public class DispatchAndExtensionAwareReentrantTypeResolver extends LogicalConta
 		if (extensionProviders != null) {
 			childSession = featureScopeSession.addToExtensionScope(extensionProviders);
 		}
-		XFeatureCall thisAccess = xbaseFactory.createXFeatureCall();
+		XFeatureCall thisAccess = getXbaseFactory().createXFeatureCall();
 		thisAccess.setFeature(thisFeature);
 		LightweightTypeReference thisType = resolvedTypes.getActualType(thisFeature);
 		childSession = childSession.addToExtensionScope(Collections.<XExpression, LightweightTypeReference>singletonMap(thisAccess, thisType));
@@ -523,9 +519,9 @@ public class DispatchAndExtensionAwareReentrantTypeResolver extends LogicalConta
 	}
 
 	protected XMemberFeatureCall createExtensionProvider(JvmIdentifiableElement thisFeature, JvmField field) {
-		XMemberFeatureCall extensionProvider = xbaseFactory.createXMemberFeatureCall();
+		XMemberFeatureCall extensionProvider = getXbaseFactory().createXMemberFeatureCall();
 		extensionProvider.setFeature(field);
-		XFeatureCall thisAccess = xbaseFactory.createXFeatureCall();
+		XFeatureCall thisAccess = getXbaseFactory().createXFeatureCall();
 		thisAccess.setFeature(thisFeature);
 		extensionProvider.setMemberCallTarget(thisAccess);
 		return extensionProvider;

@@ -17,10 +17,15 @@ import org.eclipse.emf.ecore.EObject;
 
 import org.eclipse.xtend.core.xtend.*;
 
+import org.eclipse.xtext.common.types.JvmAnnotationTarget;
+import org.eclipse.xtext.common.types.JvmFormalParameter;
+import org.eclipse.xtext.common.types.JvmIdentifiableElement;
+
 import org.eclipse.xtext.xbase.XBlockExpression;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XForLoopExpression;
 import org.eclipse.xtext.xbase.XStringLiteral;
+import org.eclipse.xtext.xbase.XVariableDeclaration;
 
 /**
  * <!-- begin-user-doc -->
@@ -181,6 +186,16 @@ public class XtendAdapterFactory extends AdapterFactoryImpl
 				return createXtendEnumLiteralAdapter();
 			}
 			@Override
+			public Adapter caseXtendVariableDeclaration(XtendVariableDeclaration object)
+			{
+				return createXtendVariableDeclarationAdapter();
+			}
+			@Override
+			public Adapter caseXtendFormalParameter(XtendFormalParameter object)
+			{
+				return createXtendFormalParameterAdapter();
+			}
+			@Override
 			public Adapter caseXExpression(XExpression object)
 			{
 				return createXExpressionAdapter();
@@ -199,6 +214,26 @@ public class XtendAdapterFactory extends AdapterFactoryImpl
 			public Adapter caseXForLoopExpression(XForLoopExpression object)
 			{
 				return createXForLoopExpressionAdapter();
+			}
+			@Override
+			public Adapter caseJvmIdentifiableElement(JvmIdentifiableElement object)
+			{
+				return createJvmIdentifiableElementAdapter();
+			}
+			@Override
+			public Adapter caseXVariableDeclaration(XVariableDeclaration object)
+			{
+				return createXVariableDeclarationAdapter();
+			}
+			@Override
+			public Adapter caseJvmAnnotationTarget(JvmAnnotationTarget object)
+			{
+				return createJvmAnnotationTargetAdapter();
+			}
+			@Override
+			public Adapter caseJvmFormalParameter(JvmFormalParameter object)
+			{
+				return createJvmFormalParameterAdapter();
 			}
 			@Override
 			public Adapter defaultCase(EObject object)
@@ -508,6 +543,36 @@ public class XtendAdapterFactory extends AdapterFactoryImpl
 	}
 
 	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.xtend.core.xtend.XtendVariableDeclaration <em>Variable Declaration</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.xtend.core.xtend.XtendVariableDeclaration
+	 * @generated
+	 */
+	public Adapter createXtendVariableDeclarationAdapter()
+	{
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.xtend.core.xtend.XtendFormalParameter <em>Formal Parameter</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.xtend.core.xtend.XtendFormalParameter
+	 * @generated
+	 */
+	public Adapter createXtendFormalParameterAdapter()
+	{
+		return null;
+	}
+
+	/**
 	 * Creates a new adapter for an object of class '{@link org.eclipse.xtext.xbase.XExpression <em>XExpression</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
@@ -563,6 +628,66 @@ public class XtendAdapterFactory extends AdapterFactoryImpl
 	 * @generated
 	 */
 	public Adapter createXForLoopExpressionAdapter()
+	{
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.xtext.common.types.JvmIdentifiableElement <em>Jvm Identifiable Element</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.xtext.common.types.JvmIdentifiableElement
+	 * @generated
+	 */
+	public Adapter createJvmIdentifiableElementAdapter()
+	{
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.xtext.xbase.XVariableDeclaration <em>XVariable Declaration</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.xtext.xbase.XVariableDeclaration
+	 * @generated
+	 */
+	public Adapter createXVariableDeclarationAdapter()
+	{
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.xtext.common.types.JvmAnnotationTarget <em>Jvm Annotation Target</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.xtext.common.types.JvmAnnotationTarget
+	 * @generated
+	 */
+	public Adapter createJvmAnnotationTargetAdapter()
+	{
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.xtext.common.types.JvmFormalParameter <em>Jvm Formal Parameter</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.xtext.common.types.JvmFormalParameter
+	 * @generated
+	 */
+	public Adapter createJvmFormalParameterAdapter()
 	{
 		return null;
 	}
