@@ -13,6 +13,7 @@ import java.util.concurrent.CancellationException;
 import java.util.concurrent.atomic.AtomicBoolean;
 import javax.inject.Provider;
 import org.eclipse.xtend.core.macro.ActiveAnnotationContext;
+import org.eclipse.xtend.core.macro.RegisterGlobalsContextImpl;
 import org.eclipse.xtend.core.macro.TransformationContextImpl;
 import org.eclipse.xtend.core.macro.declaration.CompilationUnitImpl;
 import org.eclipse.xtend.core.macro.declaration.XtendMemberDeclarationImpl;
@@ -21,11 +22,11 @@ import org.eclipse.xtend.core.xtend.XtendMember;
 import org.eclipse.xtend.lib.macro.RegisterGlobalsParticipant;
 import org.eclipse.xtend.lib.macro.TransformationParticipant;
 import org.eclipse.xtend.lib.macro.declaration.MutableNamedElement;
-import org.eclipse.xtext.common.types.JvmDeclaredType;
+import org.eclipse.xtend.lib.macro.declaration.NamedElement;
 import org.eclipse.xtext.util.CancelIndicator;
-import org.eclipse.xtext.util.IAcceptor;
 import org.eclipse.xtext.util.internal.Stopwatches;
 import org.eclipse.xtext.util.internal.Stopwatches.StoppedTask;
+import org.eclipse.xtext.xbase.jvmmodel.IJvmDeclaredTypeAcceptor;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.ListExtensions;
@@ -40,10 +41,13 @@ public class AnnotationProcessor {
   @Inject
   private Provider<TransformationContextImpl> modifyContextProvider;
   
+  @Inject
+  private Provider<RegisterGlobalsContextImpl> registerGlobalsContextProvider;
+  
   /**
    * gets called from Xtend compiler, during "model inference", i.e. translation of Xtend AST to Java AST
    */
-  public Object indexingPhase(final ActiveAnnotationContext ctx, final IAcceptor<JvmDeclaredType> acceptor, final CancelIndicator monitor) {
+  public Object indexingPhase(final ActiveAnnotationContext ctx, final IJvmDeclaredTypeAcceptor acceptor, final CancelIndicator monitor) {
     Object _xblockexpression = null;
     {
       final StoppedTask task = Stopwatches.forTask("[macros] indexingPhase (AnnotationProcessor.indexingPhase)");
@@ -56,9 +60,32 @@ public class AnnotationProcessor {
         boolean _matched = false;
         if (!_matched) {
           if (processor instanceof RegisterGlobalsParticipant) {
-            final RegisterGlobalsParticipant<?> _registerGlobalsParticipant = (RegisterGlobalsParticipant<?>)processor;
+            final RegisterGlobalsParticipant<NamedElement> _registerGlobalsParticipant = (RegisterGlobalsParticipant<NamedElement>)processor;
             _matched=true;
-            _switchResult = null;
+            Object _xblockexpression_1 = null;
+            {
+              final RegisterGlobalsContextImpl registerGloablsCtx = this.registerGlobalsContextProvider.get();
+              registerGloablsCtx.setAcceptor(acceptor);
+              CompilationUnitImpl _compilationUnit = ctx.getCompilationUnit();
+              registerGloablsCtx.setCompilationUnit(_compilationUnit);
+              final Runnable _function = new Runnable() {
+                  public void run() {
+                    List<XtendAnnotationTarget> _annotatedSourceElements = ctx.getAnnotatedSourceElements();
+                    final Function1<XtendAnnotationTarget,XtendMemberDeclarationImpl<? extends XtendMember>> _function = new Function1<XtendAnnotationTarget,XtendMemberDeclarationImpl<? extends XtendMember>>() {
+                        public XtendMemberDeclarationImpl<? extends XtendMember> apply(final XtendAnnotationTarget it) {
+                          CompilationUnitImpl _compilationUnit = ctx.getCompilationUnit();
+                          XtendMemberDeclarationImpl<? extends XtendMember> _xtendMemberDeclaration = _compilationUnit.toXtendMemberDeclaration(((XtendMember) it));
+                          return _xtendMemberDeclaration;
+                        }
+                      };
+                    List<XtendMemberDeclarationImpl<? extends XtendMember>> _map = ListExtensions.<XtendAnnotationTarget, XtendMemberDeclarationImpl<? extends XtendMember>>map(_annotatedSourceElements, _function);
+                    _registerGlobalsParticipant.doRegisterGlobals(_map, registerGloablsCtx);
+                  }
+                };
+              Object _runWithCancelIndiciator = this.runWithCancelIndiciator(ctx, monitor, _function);
+              _xblockexpression_1 = (_runWithCancelIndiciator);
+            }
+            _switchResult = _xblockexpression_1;
           }
         }
         _xtrycatchfinallyexpression = _switchResult;

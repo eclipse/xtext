@@ -10,6 +10,7 @@ import org.eclipse.xtend.lib.macro.declaration.MutableMethodDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.MutableParameterDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.MutableTypeParameterDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.Type;
+import org.eclipse.xtend.lib.macro.declaration.TypeDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.TypeReference;
 import org.eclipse.xtend.lib.macro.services.Problem;
 import org.eclipse.xtend.lib.macro.services.ProblemSupport;
@@ -368,6 +369,89 @@ public abstract class AbstractActiveAnnotationsTest {
           Problem _head_3 = IterableExtensions.<Problem>head(_problems_1);
           String _message_1 = _head_3.getMessage();
           Assert.assertEquals("warning", _message_1);
+        }
+      };
+    this.assertProcessing(_mappedTo, _mappedTo_1, _function);
+  }
+  
+  @Test
+  public void testIntroduceNewTypes() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("package myannotation");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("import java.util.List");
+    _builder.newLine();
+    _builder.append("import org.eclipse.xtend.lib.macro.Active");
+    _builder.newLine();
+    _builder.append("import org.eclipse.xtend.lib.macro.RegisterGlobalsContext");
+    _builder.newLine();
+    _builder.append("import org.eclipse.xtend.lib.macro.RegisterGlobalsParticipant");
+    _builder.newLine();
+    _builder.append("import org.eclipse.xtend.lib.macro.declaration.ClassDeclaration");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("@Active(typeof(NewTypesAddingAnnotationProcessor))");
+    _builder.newLine();
+    _builder.append("annotation NewTypesAddingAnnotation { }");
+    _builder.newLine();
+    _builder.append("class NewTypesAddingAnnotationProcessor implements RegisterGlobalsParticipant<ClassDeclaration> {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("override doRegisterGlobals(List<? extends ClassDeclaration> sourceClasses, RegisterGlobalsContext context) {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("for (clazz : sourceClasses) {");
+    _builder.newLine();
+    _builder.append("\t\t\t");
+    _builder.append("context.registerClass(clazz.name+\".InnerClass\")");
+    _builder.newLine();
+    _builder.append("\t\t\t");
+    _builder.append("context.registerInterface(clazz.name+\"Interface\")");
+    _builder.newLine();
+    _builder.append("\t\t\t");
+    _builder.append("context.registerEnum(clazz.name+\"Enum\")");
+    _builder.newLine();
+    _builder.append("\t\t\t");
+    _builder.append("context.registerAnnotation(clazz.name+\"Annotation\")");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    Pair<String,String> _mappedTo = Pair.<String, String>of("myannotation/NewTypesAddingAnnotation.xtend", _builder.toString());
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("package myusercode");
+    _builder_1.newLine();
+    _builder_1.newLine();
+    _builder_1.append("@myannotation.NewTypesAddingAnnotation");
+    _builder_1.newLine();
+    _builder_1.append("class MyClass {");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    Pair<String,String> _mappedTo_1 = Pair.<String, String>of("myusercode/UserCode.xtend", _builder_1.toString());
+    final Procedure1<CompilationUnitImpl> _function = new Procedure1<CompilationUnitImpl>() {
+        public void apply(final CompilationUnitImpl it) {
+          List<? extends TypeDeclaration> _generatedTypeDeclarations = it.getGeneratedTypeDeclarations();
+          int _size = _generatedTypeDeclarations.size();
+          Assert.assertEquals(4, _size);
+          List<? extends TypeDeclaration> _generatedTypeDeclarations_1 = it.getGeneratedTypeDeclarations();
+          TypeDeclaration _head = IterableExtensions.head(_generatedTypeDeclarations_1);
+          List<? extends MemberDeclaration> _members = _head.getMembers();
+          MemberDeclaration _head_1 = IterableExtensions.head(_members);
+          final ClassDeclaration innerClass = ((ClassDeclaration) _head_1);
+          String _simpleName = innerClass.getSimpleName();
+          Assert.assertEquals("InnerClass", _simpleName);
+          TypeDeclaration _declaringType = innerClass.getDeclaringType();
+          String _name = _declaringType.getName();
+          Assert.assertEquals("myusercode.MyClass", _name);
         }
       };
     this.assertProcessing(_mappedTo, _mappedTo_1, _function);

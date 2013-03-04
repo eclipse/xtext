@@ -68,7 +68,6 @@ import org.eclipse.xtext.documentation.IFileHeaderProvider;
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 import org.eclipse.xtext.util.CancelIndicator;
-import org.eclipse.xtext.util.IAcceptor;
 import org.eclipse.xtext.util.Strings;
 import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotation;
 import org.eclipse.xtext.xbase.compiler.DisableCodeGenerationAdapter;
@@ -204,11 +203,7 @@ public class XtendJvmModelInferrer implements IJvmModelInferrer {
 		}
 		for (ActiveAnnotationContext ctx : list) {
 			try {
-				annotationProcessor.indexingPhase(ctx, new IAcceptor<JvmDeclaredType>() {
-					public void accept(JvmDeclaredType t) {
-						acceptor.accept(t);
-					}
-				}, CancelIndicator.NullImpl);
+				annotationProcessor.indexingPhase(ctx, acceptor, CancelIndicator.NullImpl);
 			} catch (Throwable t) {
 				handleProcessingError(xtendFile, ctx, t);
 				list = newArrayList();

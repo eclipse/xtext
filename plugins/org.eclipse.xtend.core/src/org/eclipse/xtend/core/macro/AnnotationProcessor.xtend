@@ -9,17 +9,17 @@
 package org.eclipse.xtend.core.macro
 
 import com.google.inject.Inject
+import java.util.concurrent.CancellationException
 import java.util.concurrent.atomic.AtomicBoolean
 import javax.inject.Provider
 import org.eclipse.xtend.core.xtend.XtendMember
 import org.eclipse.xtend.lib.macro.RegisterGlobalsParticipant
 import org.eclipse.xtend.lib.macro.TransformationParticipant
 import org.eclipse.xtend.lib.macro.declaration.MutableNamedElement
-import org.eclipse.xtext.common.types.JvmDeclaredType
+import org.eclipse.xtend.lib.macro.declaration.NamedElement
 import org.eclipse.xtext.util.CancelIndicator
-import org.eclipse.xtext.util.IAcceptor
 import org.eclipse.xtext.util.internal.Stopwatches
-import java.util.concurrent.CancellationException
+import org.eclipse.xtext.xbase.jvmmodel.IJvmDeclaredTypeAcceptor
 
 /**
  * It checks whether the files contain macro annotations and calls their register and processing functions.
@@ -29,17 +29,24 @@ import java.util.concurrent.CancellationException
 class AnnotationProcessor {
 	
 	@Inject Provider<TransformationContextImpl> modifyContextProvider
+	@Inject Provider<RegisterGlobalsContextImpl> registerGlobalsContextProvider
 
 	/**
 	 * gets called from Xtend compiler, during "model inference", i.e. translation of Xtend AST to Java AST
 	 */
-	def indexingPhase(ActiveAnnotationContext ctx, IAcceptor<JvmDeclaredType> acceptor, CancelIndicator monitor) {
+	def indexingPhase(ActiveAnnotationContext ctx, IJvmDeclaredTypeAcceptor acceptor, CancelIndicator monitor) {
 		val task = Stopwatches::forTask('[macros] indexingPhase (AnnotationProcessor.indexingPhase)')
 		task.start
 		try {
 			switch processor : ctx.processorInstance{
-				RegisterGlobalsParticipant<?>: {
-					//TODO
+				RegisterGlobalsParticipant<NamedElement>: {
+					val registerGloablsCtx = registerGlobalsContextProvider.get
+					registerGloablsCtx.acceptor = acceptor
+					registerGloablsCtx.compilationUnit = ctx.compilationUnit
+					
+					runWithCancelIndiciator(ctx, monitor) [|
+						processor.doRegisterGlobals(ctx.annotatedSourceElements.map[ctx.compilationUnit.toXtendMemberDeclaration(it as XtendMember)], registerGloablsCtx)
+					]
 				}
 			}
 		} finally {

@@ -7,6 +7,8 @@ import org.eclipse.xtext.xbase.lib.Pair
 import org.junit.Test
 
 import static org.junit.Assert.*
+import org.eclipse.xtext.common.types.JvmGenericType
+import org.eclipse.xtend.lib.macro.declaration.ClassDeclaration
 
 abstract class AbstractActiveAnnotationsTest {
 	
@@ -206,6 +208,46 @@ abstract class AbstractActiveAnnotationsTest {
 			val field = generatedClassDeclarations.head.members.filter(typeof(MutableFieldDeclaration)).head
 			assertEquals('field-warning', problemSupport.getProblems(field).head.message)
 			assertEquals('warning', problemSupport.getProblems(method).head.message)
+		]
+	}
+	
+	@Test def void testIntroduceNewTypes() {
+		assertProcessing(
+			'myannotation/NewTypesAddingAnnotation.xtend' -> '''
+				package myannotation
+				
+				import java.util.List
+				import org.eclipse.xtend.lib.macro.Active
+				import org.eclipse.xtend.lib.macro.RegisterGlobalsContext
+				import org.eclipse.xtend.lib.macro.RegisterGlobalsParticipant
+				import org.eclipse.xtend.lib.macro.declaration.ClassDeclaration
+
+				@Active(typeof(NewTypesAddingAnnotationProcessor))
+				annotation NewTypesAddingAnnotation { }
+				class NewTypesAddingAnnotationProcessor implements RegisterGlobalsParticipant<ClassDeclaration> {
+					
+					override doRegisterGlobals(List<? extends ClassDeclaration> sourceClasses, RegisterGlobalsContext context) {
+						for (clazz : sourceClasses) {
+							context.registerClass(clazz.name+".InnerClass")
+							context.registerInterface(clazz.name+"Interface")
+							context.registerEnum(clazz.name+"Enum")
+							context.registerAnnotation(clazz.name+"Annotation")
+						}
+					}
+				}
+			''',
+			'myusercode/UserCode.xtend' -> '''
+				package myusercode
+				
+				@myannotation.NewTypesAddingAnnotation
+				class MyClass {
+				}
+			'''
+		) [
+			assertEquals(4, generatedTypeDeclarations.size)
+			val innerClass = generatedTypeDeclarations.head.members.head as ClassDeclaration
+			assertEquals('InnerClass', innerClass.simpleName)
+			assertEquals('myusercode.MyClass', innerClass.declaringType.name)
 		]
 	}
 	
