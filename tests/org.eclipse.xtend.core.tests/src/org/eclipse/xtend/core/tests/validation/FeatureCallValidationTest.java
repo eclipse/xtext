@@ -11,6 +11,7 @@ import java.util.List;
 
 import org.eclipse.xtend.core.tests.AbstractXtendTestCase;
 import org.eclipse.xtend.core.xtend.XtendClass;
+import org.eclipse.xtext.common.types.TypesPackage;
 import org.eclipse.xtext.diagnostics.Diagnostic;
 import org.eclipse.xtext.junit4.validation.ValidationTestHelper;
 import org.eclipse.xtext.validation.Issue;
@@ -62,6 +63,79 @@ public class FeatureCallValidationTest extends AbstractXtendTestCase {
 		helper.assertNoError(clazz, IssueCodes.INCOMPATIBLE_TYPES);
 		helper.assertError(clazz, XAnnotationsPackage.Literals.XANNOTATION, Diagnostic.LINKING_DIAGNOSTIC, "DoesNotExist cannot be resolved to an annotation type.");
 		helper.assertNoError(clazz, org.eclipse.xtend.core.validation.IssueCodes.FEATURECALL_LINKING_DIAGNOSTIC);
+	}
+	
+	@Test
+	public void testBrokenModel_06() throws Exception {
+		XtendClass clazz = clazz("class C { UnknownType fieldName def void m() { fieldName.unknownOperation }}");
+		helper.assertNoError(clazz, IssueCodes.INCOMPATIBLE_TYPES);
+		helper.assertNoError(clazz, org.eclipse.xtend.core.validation.IssueCodes.FEATURECALL_LINKING_DIAGNOSTIC);
+		helper.assertError(clazz, TypesPackage.Literals.JVM_PARAMETERIZED_TYPE_REFERENCE, Diagnostic.LINKING_DIAGNOSTIC, "UnknownType cannot be resolved to a type.");
+	}
+	
+	@Test
+	public void testBrokenModel_07() throws Exception {
+		XtendClass clazz = clazz("class C { UnknownType fieldName = '' }");
+		helper.assertNoError(clazz, IssueCodes.INCOMPATIBLE_TYPES);
+		helper.assertError(clazz, TypesPackage.Literals.JVM_PARAMETERIZED_TYPE_REFERENCE, Diagnostic.LINKING_DIAGNOSTIC, "UnknownType cannot be resolved to a type.");
+	}
+
+	@Test
+	public void testBrokenModel_08() throws Exception {
+		XtendClass clazz = clazz("class C { def UnknownType m1() {} def void m2() { m1.unknownOperation }}");
+		helper.assertNoError(clazz, IssueCodes.INCOMPATIBLE_TYPES);
+		helper.assertNoError(clazz, org.eclipse.xtend.core.validation.IssueCodes.FEATURECALL_LINKING_DIAGNOSTIC);
+		helper.assertError(clazz, TypesPackage.Literals.JVM_PARAMETERIZED_TYPE_REFERENCE, Diagnostic.LINKING_DIAGNOSTIC, "UnknownType cannot be resolved to a type.");
+	}
+	
+	@Test
+	public void testBrokenModel_09() throws Exception {
+		XtendClass clazz = clazz("class C { def void m2() { <UnknownType>newArrayList.head.unknownOperation }}");
+		helper.assertNoError(clazz, IssueCodes.INCOMPATIBLE_TYPES);
+		helper.assertNoError(clazz, org.eclipse.xtend.core.validation.IssueCodes.FEATURECALL_LINKING_DIAGNOSTIC);
+		helper.assertError(clazz, TypesPackage.Literals.JVM_PARAMETERIZED_TYPE_REFERENCE, Diagnostic.LINKING_DIAGNOSTIC, "UnknownType cannot be resolved to a type.");
+	}
+	
+	@Test
+	public void testBrokenModel_10() throws Exception {
+		XtendClass clazz = clazz("class C { def void m2() { #[ null as UnknownType ].head.unknownOperation }}");
+		helper.assertNoError(clazz, IssueCodes.INCOMPATIBLE_TYPES);
+		helper.assertNoError(clazz, org.eclipse.xtend.core.validation.IssueCodes.FEATURECALL_LINKING_DIAGNOSTIC);
+		helper.assertError(clazz, TypesPackage.Literals.JVM_PARAMETERIZED_TYPE_REFERENCE, Diagnostic.LINKING_DIAGNOSTIC, "UnknownType cannot be resolved to a type.");
+	}
+	
+	@Test
+	public void testBrokenModel_11() throws Exception {
+		XtendClass clazz = clazz("class C { def UnknownType m1() {} def void m2() { newArrayList(m1, m1).map[ it.unknownOperation ] }}");
+		helper.assertNoError(clazz, IssueCodes.INCOMPATIBLE_TYPES);
+		helper.assertNoError(clazz, org.eclipse.xtend.core.validation.IssueCodes.FEATURECALL_LINKING_DIAGNOSTIC);
+		helper.assertError(clazz, TypesPackage.Literals.JVM_PARAMETERIZED_TYPE_REFERENCE, Diagnostic.LINKING_DIAGNOSTIC, "UnknownType cannot be resolved to a type.");
+	}
+	
+	@Test
+	public void testBrokenModel_12() throws Exception {
+		XtendClass clazz = clazz("class C { def void m() { <UnknownType>newArrayList().map[ it.unknownOperation ] }}");
+		helper.assertNoError(clazz, IssueCodes.INCOMPATIBLE_TYPES);
+		helper.assertNoError(clazz, org.eclipse.xtend.core.validation.IssueCodes.FEATURECALL_LINKING_DIAGNOSTIC);
+		helper.assertError(clazz, TypesPackage.Literals.JVM_PARAMETERIZED_TYPE_REFERENCE, Diagnostic.LINKING_DIAGNOSTIC, "UnknownType cannot be resolved to a type.");
+	}
+	
+	// we expect feature linking problems if no explicit receiver was used
+	@Test
+	public void testBrokenModel_13() throws Exception {
+		XtendClass clazz = clazz("class C { def UnknownType m1() {} def void m2() { newArrayList(m1, m1).map[ unknownOperation.doesNotExist ] }}");
+		helper.assertNoError(clazz, IssueCodes.INCOMPATIBLE_TYPES);
+		helper.assertError(clazz, XbasePackage.Literals.XFEATURE_CALL, org.eclipse.xtend.core.validation.IssueCodes.FEATURECALL_LINKING_DIAGNOSTIC, "unknownOperation");
+		helper.assertError(clazz, TypesPackage.Literals.JVM_PARAMETERIZED_TYPE_REFERENCE, Diagnostic.LINKING_DIAGNOSTIC, "UnknownType cannot be resolved to a type.");
+	}
+	
+	// we expect feature linking problems if no explicit receiver was used
+	@Test
+	public void testBrokenModel_14() throws Exception {
+		XtendClass clazz = clazz("class C { def void m() { <UnknownType>newArrayList().map[ unknownOperation.doesNotExist ] }}");
+		helper.assertNoError(clazz, IssueCodes.INCOMPATIBLE_TYPES);
+		helper.assertError(clazz, XbasePackage.Literals.XFEATURE_CALL, org.eclipse.xtend.core.validation.IssueCodes.FEATURECALL_LINKING_DIAGNOSTIC, "unknownOperation");
+		helper.assertError(clazz, TypesPackage.Literals.JVM_PARAMETERIZED_TYPE_REFERENCE, Diagnostic.LINKING_DIAGNOSTIC, "UnknownType cannot be resolved to a type.");
 	}
 	
 	@Test

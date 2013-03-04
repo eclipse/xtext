@@ -12,8 +12,10 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtext.common.types.JvmAnnotationReference;
 import org.eclipse.xtext.common.types.JvmAnnotationType;
+import org.eclipse.xtext.common.types.JvmSpecializedTypeReference;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeReference;
+import org.eclipse.xtext.common.types.JvmUnknownTypeReference;
 import org.eclipse.xtext.diagnostics.Severity;
 import org.eclipse.xtext.validation.Issue;
 import org.eclipse.xtext.xbase.compiler.BrokenTypeRefDetector;
@@ -41,12 +43,12 @@ public class ErrorSafeExtensions {
   @Inject
   private Factory issueProviderFactory;
   
-  public Iterable<Issue> getErrors(final EObject element, final boolean includeContents) {
+  public Iterable<Issue> getErrors(final EObject element) {
     Iterable<Issue> _xblockexpression = null;
     {
       Resource _eResource = element.eResource();
       final IElementIssueProvider issueProvider = this.issueProviderFactory.get(_eResource);
-      Iterable<Issue> _issues = issueProvider.getIssues(element, includeContents);
+      Iterable<Issue> _issues = issueProvider.getIssues(element);
       final Function1<Issue,Boolean> _function = new Function1<Issue,Boolean>() {
           public Boolean apply(final Issue it) {
             Severity _severity = it.getSeverity();
@@ -60,12 +62,12 @@ public class ErrorSafeExtensions {
     return _xblockexpression;
   }
   
-  public boolean hasErrors(final EObject element, final boolean includeContents) {
+  public boolean hasErrors(final EObject element) {
     boolean _xblockexpression = false;
     {
       Resource _eResource = element.eResource();
       final IElementIssueProvider issueProvider = this.issueProviderFactory.get(_eResource);
-      Iterable<Issue> _issues = issueProvider.getIssues(element, includeContents);
+      Iterable<Issue> _issues = issueProvider.getIssues(element);
       final Function1<Issue,Boolean> _function = new Function1<Issue,Boolean>() {
           public Boolean apply(final Issue it) {
             Severity _severity = it.getSeverity();
@@ -88,7 +90,7 @@ public class ErrorSafeExtensions {
     final LoopParams loopParams = ObjectExtensions.<LoopParams>operator_doubleArrow(_loopParams, loopInitializer);
     final Function1<T,Boolean> _function = new Function1<T,Boolean>() {
         public Boolean apply(final T it) {
-          boolean _hasErrors = ErrorSafeExtensions.this.hasErrors(it, true);
+          boolean _hasErrors = ErrorSafeExtensions.this.hasErrors(it);
           return Boolean.valueOf(_hasErrors);
         }
       };
@@ -109,7 +111,7 @@ public class ErrorSafeExtensions {
     boolean isFirst = true;
     boolean isFirstBroken = true;
     for (final T element : elements) {
-      boolean _hasErrors = this.hasErrors(element, true);
+      boolean _hasErrors = this.hasErrors(element);
       boolean _not = (!_hasErrors);
       if (_not) {
         ITreeAppendable _closeErrorAppendable = this.closeErrorAppendable(appendable, currentAppendable);
@@ -207,18 +209,39 @@ public class ErrorSafeExtensions {
       _or = (_equals || _equals_1);
     }
     if (_or) {
-      final ITreeAppendable errorChild = this.openErrorAppendable(appendable, appendable, typeRef);
-      errorChild.append("type is \'null\'");
-      this.closeErrorAppendable(appendable, errorChild);
+      boolean _matched = false;
+      if (!_matched) {
+        if (typeRef instanceof JvmSpecializedTypeReference) {
+          final JvmSpecializedTypeReference _jvmSpecializedTypeReference = (JvmSpecializedTypeReference)typeRef;
+          _matched=true;
+          JvmTypeReference _equivalent = _jvmSpecializedTypeReference.getEquivalent();
+          this.serializeSafely(_equivalent, surrogateType, appendable);
+        }
+      }
+      if (!_matched) {
+        if (typeRef instanceof JvmUnknownTypeReference) {
+          final JvmUnknownTypeReference _jvmUnknownTypeReference = (JvmUnknownTypeReference)typeRef;
+          _matched=true;
+          String _qualifiedName = _jvmUnknownTypeReference.getQualifiedName();
+          appendable.append(_qualifiedName);
+        }
+      }
+      if (!_matched) {
+        {
+          final ITreeAppendable errorChild = this.openErrorAppendable(appendable, appendable, typeRef);
+          errorChild.append("type is \'null\'");
+          this.closeErrorAppendable(appendable, errorChild);
+        }
+      }
     } else {
       BrokenTypeRefDetector _brokenTypeRefDetector = new BrokenTypeRefDetector();
       Boolean _accept = typeRef.<Boolean>accept(_brokenTypeRefDetector);
       if ((_accept).booleanValue()) {
         EObject _eContainer = typeRef.eContainer();
-        final ITreeAppendable errorChild_1 = this.openErrorAppendable(appendable, appendable, _eContainer);
+        final ITreeAppendable errorChild = this.openErrorAppendable(appendable, appendable, _eContainer);
         try {
           EObject _eContainer_1 = typeRef.eContainer();
-          this._typeReferenceSerializer.serialize(typeRef, _eContainer_1, errorChild_1);
+          this._typeReferenceSerializer.serialize(typeRef, _eContainer_1, errorChild);
         } catch (final Throwable _t) {
           if (_t instanceof Exception) {
             final Exception ignoreMe = (Exception)_t;
@@ -226,7 +249,7 @@ public class ErrorSafeExtensions {
             throw Exceptions.sneakyThrow(_t);
           }
         }
-        this.closeErrorAppendable(appendable, errorChild_1);
+        this.closeErrorAppendable(appendable, errorChild);
         boolean _notEquals = ObjectExtensions.operator_notEquals(surrogateType, null);
         if (_notEquals) {
           appendable.append(surrogateType);

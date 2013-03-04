@@ -14,6 +14,7 @@ import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeReference;
+import org.eclipse.xtext.common.types.JvmUnknownTypeReference;
 import org.eclipse.xtext.util.Strings;
 import org.eclipse.xtext.xbase.typesystem.conformance.SuperTypeAcceptor;
 import org.eclipse.xtext.xbase.typesystem.util.TypeParameterSubstitutor;
@@ -33,7 +34,7 @@ public class UnknownTypeReference extends LightweightTypeReference {
 
 	public UnknownTypeReference(ITypeReferenceOwner owner, @Nullable String name) {
 		super(owner);
-		this.name = Strings.isEmpty(name) ? "[Unknown]" : name;
+		this.name = Strings.isEmpty(name) ? "Object" : name;
 	}
 	
 	public UnknownTypeReference(ITypeReferenceOwner owner) {
@@ -47,12 +48,15 @@ public class UnknownTypeReference extends LightweightTypeReference {
 
 	@Override
 	public JvmTypeReference toTypeReference() {
-		return getTypesFactory().createJvmUnknownTypeReference();
+		JvmUnknownTypeReference result = getTypesFactory().createJvmUnknownTypeReference();
+		if (name != null)
+			result.setQualifiedName(name);
+		return result;
 	}
 
 	@Override
 	public JvmTypeReference toJavaCompliantTypeReference() {
-		return getOwner().getServices().getTypeReferences().getTypeForName(Object.class, getOwner().getContextResourceSet());
+		return toTypeReference();
 	}
 
 	@Override
@@ -61,12 +65,6 @@ public class UnknownTypeReference extends LightweightTypeReference {
 		return null;
 	}
 	
-	@Override
-	public LightweightTypeReference toJavaType() {
-		JvmType objectType = getServices().getTypeReferences().findDeclaredType(Object.class, getOwner().getContextResourceSet());
-		return new ParameterizedTypeReference(getOwner(), objectType);
-	}
-
 	@Override
 	protected List<LightweightTypeReference> getSuperTypes(TypeParameterSubstitutor<?> substitutor) {
 		return Collections.emptyList();
@@ -89,7 +87,7 @@ public class UnknownTypeReference extends LightweightTypeReference {
 
 	@Override
 	public String getJavaIdentifier() {
-		return "java.lang.Object";
+		return name;
 	}
 
 	@Override

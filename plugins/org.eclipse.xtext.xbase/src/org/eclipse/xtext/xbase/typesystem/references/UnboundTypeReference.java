@@ -573,13 +573,14 @@ public class UnboundTypeReference extends LightweightTypeReference {
 			throw new IllegalStateException("Cannot add hints to a resolved reference");
 		}
 		if (hint.getSource() == BoundTypeArgumentSource.EXPLICIT) {
-			if (!(hint.getTypeReference() instanceof ParameterizedTypeReference) && !hint.getTypeReference().isArray()) {
+			LightweightTypeReference reference = hint.getTypeReference();
+			if (!(reference instanceof ParameterizedTypeReference) && !reference.isArray() && !reference.isUnknown()) {
 				throw new IllegalArgumentException("cannot set " + hint + " as explicit hint");
 			}
 			if (!getAllHints().isEmpty()) {
 				throw new IllegalStateException("Cannot set explicit hint if other hints are present: " + getAllHints());
 			}
-			this.resolvedTo = hint.getTypeReference();
+			this.resolvedTo = reference;
 			getOwner().acceptHint(getHandle(), new LightweightBoundTypeArgument(resolvedTo, BoundTypeArgumentSource.RESOLVED, this, hint.getDeclaredVariance(), hint.getActualVariance()));
 			return;
 		}

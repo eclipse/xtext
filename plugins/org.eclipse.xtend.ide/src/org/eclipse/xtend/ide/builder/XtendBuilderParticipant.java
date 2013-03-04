@@ -26,7 +26,10 @@ import org.eclipse.core.resources.IStorage;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.OperationCanceledException;
+import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.jdt.core.IPackageFragmentRoot;
 import org.eclipse.jdt.core.JavaCore;
@@ -35,13 +38,22 @@ import org.eclipse.jdt.internal.core.JavaProject;
 import org.eclipse.xtext.builder.BuilderParticipant;
 import org.eclipse.xtext.builder.EclipseResourceFileSystemAccess2;
 import org.eclipse.xtext.generator.OutputConfiguration;
+import org.eclipse.xtext.nodemodel.INode;
+import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 import org.eclipse.xtext.resource.IResourceDescription.Delta;
 import org.eclipse.xtext.ui.resource.IStorage2UriMapper;
 import org.eclipse.xtext.ui.util.IssueUtil;
 import org.eclipse.xtext.util.OnChangeEvictingCache;
 import org.eclipse.xtext.util.Pair;
 import org.eclipse.xtext.validation.Issue;
+import org.eclipse.xtext.validation.Issue.IssueImpl;
+import org.eclipse.xtext.xbase.XAbstractFeatureCall;
+import org.eclipse.xtext.xbase.XExpression;
+import org.eclipse.xtext.xbase.XbasePackage;
 import org.eclipse.xtext.xbase.compiler.ElementIssueProvider;
+import org.eclipse.xtext.xbase.typesystem.IBatchTypeResolver;
+import org.eclipse.xtext.xbase.typesystem.IResolvedTypes;
+import org.eclipse.xtext.xbase.typesystem.computation.ILinkingCandidate;
 
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
@@ -59,6 +71,9 @@ public class XtendBuilderParticipant extends BuilderParticipant {
 
 	@Inject
 	private IssueUtil issueUtil;
+	
+	@Inject
+	private IBatchTypeResolver batchTypeResolver;
 
 	@Inject
 	private OnChangeEvictingCache cache;
@@ -76,12 +91,8 @@ public class XtendBuilderParticipant extends BuilderParticipant {
 		if (file != null) {
 			try {
 				registerCurrentSourceFolder(delta, fileSystemAccess);
-				final List<Issue> issues = newArrayList();
-				for (IMarker marker : file.findMarkers(IMarker.PROBLEM, true, IResource.DEPTH_ZERO)) {
-					issues.add(issueUtil.createIssue(marker));
-				}
 				try {
-					elementIssueProviderFactory.attachData(resource, issues);
+					elementIssueProviderFactory.attachData(resource);
 					getGenerator().doGenerate(resource, fileSystemAccess);
 				} finally {
 					elementIssueProviderFactory.detachData(resource);

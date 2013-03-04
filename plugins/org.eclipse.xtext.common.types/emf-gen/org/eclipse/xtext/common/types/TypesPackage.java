@@ -2570,15 +2570,14 @@ public interface TypesPackage extends EPackage
 	int JVM_UNKNOWN_TYPE_REFERENCE = 48;
 
 	/**
-	 * The feature id for the '<em><b>Exception</b></em>' attribute.
+	 * The feature id for the '<em><b>Qualified Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
-	 * @since 2.1
-	 * @noreference This field is not intended to be referenced by clients.
+	 * @since 2.4
 	 */
-	int JVM_UNKNOWN_TYPE_REFERENCE__EXCEPTION = JVM_TYPE_REFERENCE_FEATURE_COUNT + 0;
+	int JVM_UNKNOWN_TYPE_REFERENCE__QUALIFIED_NAME = JVM_TYPE_REFERENCE_FEATURE_COUNT + 0;
 
 	/**
 	 * The number of structural features of the '<em>Jvm Unknown Type Reference</em>' class.
@@ -2683,18 +2682,6 @@ public interface TypesPackage extends EPackage
 	 * @noreference This field is not intended to be referenced by clients.
 	 */
 	int ITYPE_REFERENCE_VISITOR_WITH_PARAMETER = 54;
-
-	/**
-	 * The meta object id for the '<em>Exception</em>' data type.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see java.lang.Exception
-	 * @see org.eclipse.xtext.common.types.impl.TypesPackageImpl#getException()
-	 * @generated
-	 * @since 2.1
-	 * @noreference This field is not intended to be referenced by clients.
-	 */
-	int EXCEPTION = 55;
 
 
 	/**
@@ -3811,16 +3798,16 @@ public interface TypesPackage extends EPackage
 	EClass getJvmUnknownTypeReference();
 
 	/**
-	 * Returns the meta object for the attribute '{@link org.eclipse.xtext.common.types.JvmUnknownTypeReference#getException <em>Exception</em>}'.
+	 * Returns the meta object for the attribute '{@link org.eclipse.xtext.common.types.JvmUnknownTypeReference#getQualifiedName <em>Qualified Name</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Exception</em>'.
-	 * @see org.eclipse.xtext.common.types.JvmUnknownTypeReference#getException()
+	 * @return the meta object for the attribute '<em>Qualified Name</em>'.
+	 * @see org.eclipse.xtext.common.types.JvmUnknownTypeReference#getQualifiedName()
 	 * @see #getJvmUnknownTypeReference()
 	 * @generated
-	 * @since 2.1
+	 * @since 2.4
 	 */
-	EAttribute getJvmUnknownTypeReference_Exception();
+	EAttribute getJvmUnknownTypeReference_QualifiedName();
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.xtext.common.types.JvmCompoundTypeReference <em>Jvm Compound Type Reference</em>}'.
@@ -3924,18 +3911,6 @@ public interface TypesPackage extends EPackage
 	 * @since 2.1
 	 */
 	EDataType getITypeReferenceVisitorWithParameter();
-
-	/**
-	 * Returns the meta object for data type '{@link java.lang.Exception <em>Exception</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for data type '<em>Exception</em>'.
-	 * @see java.lang.Exception
-	 * @model instanceClass="java.lang.Exception" serializeable="false"
-	 * @generated
-	 * @since 2.1
-	 */
-	EDataType getException();
 
 	/**
 	 * Returns the factory that creates the instances of the model.
@@ -4907,13 +4882,13 @@ public interface TypesPackage extends EPackage
 		EClass JVM_UNKNOWN_TYPE_REFERENCE = eINSTANCE.getJvmUnknownTypeReference();
 
 		/**
-		 * The meta object literal for the '<em><b>Exception</b></em>' attribute feature.
+		 * The meta object literal for the '<em><b>Qualified Name</b></em>' attribute feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
-		 * @since 2.1
+		 * @since 2.4
 		 */
-		EAttribute JVM_UNKNOWN_TYPE_REFERENCE__EXCEPTION = eINSTANCE.getJvmUnknownTypeReference_Exception();
+		EAttribute JVM_UNKNOWN_TYPE_REFERENCE__QUALIFIED_NAME = eINSTANCE.getJvmUnknownTypeReference_QualifiedName();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.xtext.common.types.impl.JvmCompoundTypeReferenceImpl <em>Jvm Compound Type Reference</em>}' class.
@@ -5005,17 +4980,6 @@ public interface TypesPackage extends EPackage
 		 * @since 2.1
 		 */
 		EDataType ITYPE_REFERENCE_VISITOR_WITH_PARAMETER = eINSTANCE.getITypeReferenceVisitorWithParameter();
-
-		/**
-		 * The meta object literal for the '<em>Exception</em>' data type.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see java.lang.Exception
-		 * @see org.eclipse.xtext.common.types.impl.TypesPackageImpl#getException()
-		 * @generated
-		 * @since 2.1
-		 */
-		EDataType EXCEPTION = eINSTANCE.getException();
 
 	}
 

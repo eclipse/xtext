@@ -910,7 +910,6 @@ public class JvmTypesBuilder {
 		if (typeRef instanceof JvmParameterizedTypeReference && !typeRef.eIsProxy()
 				&& !typeRef.eIsSet(TypesPackage.Literals.JVM_PARAMETERIZED_TYPE_REFERENCE__TYPE)) {
 			JvmUnknownTypeReference unknownTypeReference = typesFactory.createJvmUnknownTypeReference();
-			unknownTypeReference.setException(new IllegalArgumentException("typeref#type was null"));
 			return unknownTypeReference;
 		}
 		return cloneAndAssociate(typeRef);

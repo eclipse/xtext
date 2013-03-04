@@ -3,9 +3,6 @@ package org.eclipse.xtend.core.tests.compiler
 import com.google.inject.Inject
 import org.eclipse.xtend.core.tests.AbstractXtendTestCase
 import org.eclipse.xtext.common.types.JvmDeclaredType
-import org.eclipse.xtext.util.CancelIndicator
-import org.eclipse.xtext.validation.CheckMode
-import org.eclipse.xtext.validation.IResourceValidator
 import org.eclipse.xtext.xbase.compiler.ElementIssueProvider
 import org.eclipse.xtext.xbase.compiler.IGeneratorConfigProvider
 import org.eclipse.xtext.xbase.compiler.JvmModelGenerator
@@ -14,8 +11,6 @@ import org.junit.Test
 class XtendCompilerErrorHandlingTest extends AbstractXtendTestCase {
 	
 	@Inject JvmModelGenerator generator
-	
-	@Inject IResourceValidator validator
 	
 	@Inject ElementIssueProvider$Factory issueProviderFactory
 	
@@ -296,9 +291,8 @@ class XtendCompilerErrorHandlingTest extends AbstractXtendTestCase {
 	def assertCompilesTo(CharSequence input, CharSequence expected) {
 		val file = file(input.toString(), false)
 		val resource = file.eResource
-		val issues = validator.validate(resource, CheckMode::ALL, CancelIndicator::NullImpl)
 		try {
-			issueProviderFactory.attachData(resource, issues)
+			issueProviderFactory.attachData(resource)
 			val inferredType = resource.contents.filter(typeof(JvmDeclaredType)).head
 			val javaCode = generator.generateType(inferredType, generatorConfigProvider.get(inferredType));
 			assertEquals(expected.toString, javaCode.toString)

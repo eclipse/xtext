@@ -14,11 +14,13 @@ import org.eclipse.xtext.validation.Issue;
 import com.google.inject.ImplementedBy;
 
 /**
+ * Allows to obtain all issues for a given element including its children.
+ * 
  * @author Jan Koehnlein - Initial contribution and API
  */
 public interface IElementIssueProvider {
 	
-	Iterable<Issue> getIssues(EObject element, boolean includeContents);
+	Iterable<Issue> getIssues(EObject element);
 	
 	@ImplementedBy(ElementIssueProvider.Factory.class)
 	interface Factory {

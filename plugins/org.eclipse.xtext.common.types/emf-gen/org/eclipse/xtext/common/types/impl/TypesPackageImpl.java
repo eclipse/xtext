@@ -473,13 +473,6 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage
 	private EDataType iTypeReferenceVisitorWithParameterEDataType = null;
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EDataType exceptionEDataType = null;
-
-	/**
 	 * Creates an instance of the model <b>Package</b>, registered with
 	 * {@link org.eclipse.emf.ecore.EPackage.Registry EPackage.Registry} by the package
 	 * package URI value.
@@ -1597,7 +1590,7 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getJvmUnknownTypeReference_Exception()
+	public EAttribute getJvmUnknownTypeReference_QualifiedName()
 	{
 		return (EAttribute)jvmUnknownTypeReferenceEClass.getEStructuralFeatures().get(0);
 	}
@@ -1690,16 +1683,6 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage
 	public EDataType getITypeReferenceVisitorWithParameter()
 	{
 		return iTypeReferenceVisitorWithParameterEDataType;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EDataType getException()
-	{
-		return exceptionEDataType;
 	}
 
 	/**
@@ -1885,7 +1868,7 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage
 		jvmSynonymTypeReferenceEClass = createEClass(JVM_SYNONYM_TYPE_REFERENCE);
 
 		jvmUnknownTypeReferenceEClass = createEClass(JVM_UNKNOWN_TYPE_REFERENCE);
-		createEAttribute(jvmUnknownTypeReferenceEClass, JVM_UNKNOWN_TYPE_REFERENCE__EXCEPTION);
+		createEAttribute(jvmUnknownTypeReferenceEClass, JVM_UNKNOWN_TYPE_REFERENCE__QUALIFIED_NAME);
 
 		jvmCompoundTypeReferenceEClass = createEClass(JVM_COMPOUND_TYPE_REFERENCE);
 		createEReference(jvmCompoundTypeReferenceEClass, JVM_COMPOUND_TYPE_REFERENCE__TYPE);
@@ -1901,7 +1884,6 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage
 		iterableEDataType = createEDataType(ITERABLE);
 		iTypeReferenceVisitorEDataType = createEDataType(ITYPE_REFERENCE_VISITOR);
 		iTypeReferenceVisitorWithParameterEDataType = createEDataType(ITYPE_REFERENCE_VISITOR_WITH_PARAMETER);
-		exceptionEDataType = createEDataType(EXCEPTION);
 	}
 
 	/**
@@ -2249,7 +2231,7 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage
 		initEClass(jvmSynonymTypeReferenceEClass, JvmSynonymTypeReference.class, "JvmSynonymTypeReference", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		initEClass(jvmUnknownTypeReferenceEClass, JvmUnknownTypeReference.class, "JvmUnknownTypeReference", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getJvmUnknownTypeReference_Exception(), this.getException(), "exception", null, 0, 1, JvmUnknownTypeReference.class, IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getJvmUnknownTypeReference_QualifiedName(), ecorePackage.getEString(), "qualifiedName", null, 0, 1, JvmUnknownTypeReference.class, IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(jvmCompoundTypeReferenceEClass, JvmCompoundTypeReference.class, "JvmCompoundTypeReference", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getJvmCompoundTypeReference_Type(), this.getJvmType(), null, "type", null, 0, 1, JvmCompoundTypeReference.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -2269,7 +2251,6 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage
 		initEDataType(iterableEDataType, Iterable.class, "Iterable", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
 		initEDataType(iTypeReferenceVisitorEDataType, ITypeReferenceVisitor.class, "ITypeReferenceVisitor", !IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
 		initEDataType(iTypeReferenceVisitorWithParameterEDataType, ITypeReferenceVisitorWithParameter.class, "ITypeReferenceVisitorWithParameter", !IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
-		initEDataType(exceptionEDataType, Exception.class, "Exception", !IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);
 
 		// Create resource
 		createResource(eNS_URI);
@@ -2364,6 +2345,13 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage
 		   new String[] 
 		   {
 			 "documentation", "<p>Represents the value of an annotation member.</p>\n<p>That is, either the default value of an operation as a member of an annotation type, or the \nconcrete value in an annotation reference is returned.</p>"
+		   });		
+		addAnnotation
+		  (getJvmUnknownTypeReference_QualifiedName(), 
+		   source, 
+		   new String[] 
+		   {
+			 "documentation", "<p>Returns the known qualified name of the otherwise unresolveable type. May be <code>null</code>.</p>\n\n@since 2.4"
 		   });
 	}
 

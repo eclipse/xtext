@@ -66,26 +66,27 @@ public class JvmUnknownTypeReferenceItemProvider
 		{
 			super.getPropertyDescriptors(object);
 
-			addExceptionPropertyDescriptor(object);
+			addQualifiedNamePropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
 
 	/**
-	 * This adds a property descriptor for the Exception feature.
+	 * This adds a property descriptor for the Qualified Name feature.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
+	 * @since 2.4
 	 */
-	protected void addExceptionPropertyDescriptor(Object object)
+	protected void addQualifiedNamePropertyDescriptor(Object object)
 	{
 		itemPropertyDescriptors.add
 			(createItemPropertyDescriptor
 				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
 				 getResourceLocator(),
-				 getString("_UI_JvmUnknownTypeReference_exception_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_JvmUnknownTypeReference_exception_feature", "_UI_JvmUnknownTypeReference_type"),
-				 TypesPackage.Literals.JVM_UNKNOWN_TYPE_REFERENCE__EXCEPTION,
+				 getString("_UI_JvmUnknownTypeReference_qualifiedName_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_JvmUnknownTypeReference_qualifiedName_feature", "_UI_JvmUnknownTypeReference_type"),
+				 TypesPackage.Literals.JVM_UNKNOWN_TYPE_REFERENCE__QUALIFIED_NAME,
 				 true,
 				 false,
 				 false,
@@ -115,8 +116,7 @@ public class JvmUnknownTypeReferenceItemProvider
 	@Override
 	public String getText(Object object)
 	{
-		Exception labelValue = ((JvmUnknownTypeReference)object).getException();
-		String label = labelValue == null ? null : labelValue.toString();
+		String label = ((JvmUnknownTypeReference)object).getQualifiedName();
 		return label == null || label.length() == 0 ?
 			getString("_UI_JvmUnknownTypeReference_type") :
 			getString("_UI_JvmUnknownTypeReference_type") + " " + label;
@@ -136,7 +136,7 @@ public class JvmUnknownTypeReferenceItemProvider
 
 		switch (notification.getFeatureID(JvmUnknownTypeReference.class))
 		{
-			case TypesPackage.JVM_UNKNOWN_TYPE_REFERENCE__EXCEPTION:
+			case TypesPackage.JVM_UNKNOWN_TYPE_REFERENCE__QUALIFIED_NAME:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
 		}

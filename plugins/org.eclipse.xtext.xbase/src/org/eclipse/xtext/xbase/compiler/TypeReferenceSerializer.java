@@ -172,7 +172,11 @@ public class TypeReferenceSerializer {
 		} else if (type instanceof JvmSpecializedTypeReference) {
 			serialize(((JvmSpecializedTypeReference) type).getEquivalent(), context, tracedAppendable, withoutConstraints, paramsToWildcard, paramsToObject, allowPrimitives);
 		} else if (type instanceof JvmUnknownTypeReference) {
-			tracedAppendable.append("Object");
+			if (type.eIsSet(TypesPackage.Literals.JVM_UNKNOWN_TYPE_REFERENCE__QUALIFIED_NAME)) {
+				tracedAppendable.append(type.getQualifiedName());
+			} else {
+				tracedAppendable.append("Object");
+			}
 		} else {
 			throw new IllegalArgumentException(String.valueOf(type));
 		}

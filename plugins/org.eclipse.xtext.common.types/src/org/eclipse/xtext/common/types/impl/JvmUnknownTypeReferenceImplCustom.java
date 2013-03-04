@@ -34,7 +34,9 @@ public class JvmUnknownTypeReferenceImplCustom extends JvmUnknownTypeReferenceIm
 	 */
 	@Override
 	public String getIdentifier() {
-		return "[unknown]";
+		if (qualifiedName == null)
+			return "[unknown]";
+		return qualifiedName;
 	}
 	
 	/**
@@ -43,7 +45,15 @@ public class JvmUnknownTypeReferenceImplCustom extends JvmUnknownTypeReferenceIm
 	 */
 	@Override
 	public String getSimpleName() {
-		return "[unknown]";
+		if (qualifiedName == null)
+			return "[unknown]";
+		int idx = qualifiedName.lastIndexOf('.');
+		int dollar = qualifiedName.lastIndexOf('$');
+		int max = Math.max(idx, dollar);
+		if (max != -1 && max < qualifiedName.length() - 1) {
+			return qualifiedName.substring(max + 1);
+		}
+		return qualifiedName;
 	}
 	
 	/**
@@ -52,14 +62,23 @@ public class JvmUnknownTypeReferenceImplCustom extends JvmUnknownTypeReferenceIm
 	 */
 	@Override
 	public String getQualifiedName(char innerClassDelimiter) {
-		return "[unknown]";
+		if (qualifiedName == null)
+			return "[unknown]";
+		return qualifiedName;
+	}
+	
+	@Override
+	public String getQualifiedName() {
+		if (qualifiedName == null)
+			return "[unknown]";
+		return qualifiedName;
 	}
 	
 	@Override
 	public String toString() {
 		String result = eClass().getName();
-		if (exception != null) {
-			result = ": " + exception.getMessage() + " (" + exception.getClass() + ")";
+		if (qualifiedName != null) {
+			result = result + ": " + qualifiedName;
 		}
 		return result;
 	}

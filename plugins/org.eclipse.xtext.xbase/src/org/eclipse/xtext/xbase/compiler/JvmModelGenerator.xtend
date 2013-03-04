@@ -252,7 +252,7 @@ class JvmModelGenerator implements IGenerator {
 		} else {
 			val expression = associatedExpression
 			if (expression != null && config.generateExpressions) {
-				if(expression.hasErrors(true)) {
+				if(expression.hasErrors()) {
 					appendable.append("/* skipped default expression with errors */")
 				} else {
 					appendable.append(" default ")
@@ -324,7 +324,7 @@ class JvmModelGenerator implements IGenerator {
 			val superClazz = withoutObject.filter(typeRef | typeRef.type instanceof JvmGenericType && !(typeRef.type as JvmGenericType).isInterface).head
 			val superInterfaces = withoutObject.filter(typeRef | typeRef != superClazz)
 			if (superClazz != null) {
-				val hasErrors = superClazz.hasErrors(true)
+				val hasErrors = superClazz.hasErrors()
 				if(hasErrors) 
 					appendable.append('/* ')
 				try {
@@ -424,7 +424,7 @@ class JvmModelGenerator implements IGenerator {
 		} else {
 			val expression = associatedExpression
 			if (expression != null && config.generateExpressions) {
-				if(expression.hasErrors(true)) {
+				if(expression.hasErrors()) {
 					appendable.append(" /* Skipped initializer because of errors */")
 				} else {
 					appendable.append(" = ")
@@ -504,7 +504,7 @@ class JvmModelGenerator implements IGenerator {
 
 	def void generateExecutableBody(JvmExecutable op, ITreeAppendable appendable, GeneratorConfig config) {
 		if (op.compilationStrategy != null) {
-			val errors = op.getErrors(true)
+			val errors = op.errors
 			if(errors.empty) {
 				appendable.increaseIndentation.append("{").newLine
 				op.compilationStrategy.apply(appendable)
@@ -515,7 +515,7 @@ class JvmModelGenerator implements IGenerator {
 		} else {
 			val expression = op.getAssociatedExpression
 			if (expression != null && config.generateExpressions) {
-				val errors = expression.getErrors(true)
+				val errors = expression.errors
 				if(errors.empty) {
 					val returnType = switch(op) { 
 						JvmOperation: op.returnType

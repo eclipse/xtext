@@ -471,7 +471,7 @@ public class JvmModelGenerator implements IGenerator {
         _and = (_notEquals_1 && _isGenerateExpressions);
       }
       if (_and) {
-        boolean _hasErrors = this._errorSafeExtensions.hasErrors(expression, true);
+        boolean _hasErrors = this._errorSafeExtensions.hasErrors(expression);
         if (_hasErrors) {
           appendable.append("/* skipped default expression with errors */");
         } else {
@@ -675,7 +675,7 @@ public class JvmModelGenerator implements IGenerator {
       final Iterable<JvmTypeReference> superInterfaces = IterableExtensions.<JvmTypeReference>filter(withoutObject_1, _function_5);
       boolean _notEquals = ObjectExtensions.operator_notEquals(superClazz, null);
       if (_notEquals) {
-        final boolean hasErrors = this._errorSafeExtensions.hasErrors(superClazz, true);
+        final boolean hasErrors = this._errorSafeExtensions.hasErrors(superClazz);
         if (hasErrors) {
           appendable.append("/* ");
         }
@@ -844,7 +844,7 @@ public class JvmModelGenerator implements IGenerator {
         _and = (_notEquals_1 && _isGenerateExpressions);
       }
       if (_and) {
-        boolean _hasErrors = this._errorSafeExtensions.hasErrors(expression, true);
+        boolean _hasErrors = this._errorSafeExtensions.hasErrors(expression);
         if (_hasErrors) {
           appendable.append(" /* Skipped initializer because of errors */");
         } else {
@@ -1011,7 +1011,7 @@ public class JvmModelGenerator implements IGenerator {
     Procedure1<? super ITreeAppendable> _compilationStrategy = this._jvmTypeExtensions.getCompilationStrategy(op);
     boolean _notEquals = ObjectExtensions.operator_notEquals(_compilationStrategy, null);
     if (_notEquals) {
-      final Iterable<Issue> errors = this._errorSafeExtensions.getErrors(op, true);
+      final Iterable<Issue> errors = this._errorSafeExtensions.getErrors(op);
       boolean _isEmpty = IterableExtensions.isEmpty(errors);
       if (_isEmpty) {
         ITreeAppendable _increaseIndentation = appendable.increaseIndentation();
@@ -1036,7 +1036,7 @@ public class JvmModelGenerator implements IGenerator {
         _and = (_notEquals_1 && _isGenerateExpressions);
       }
       if (_and) {
-        final Iterable<Issue> errors_1 = this._errorSafeExtensions.getErrors(expression, true);
+        final Iterable<Issue> errors_1 = this._errorSafeExtensions.getErrors(expression);
         boolean _isEmpty_1 = IterableExtensions.isEmpty(errors_1);
         if (_isEmpty_1) {
           JvmTypeReference _switchResult = null;

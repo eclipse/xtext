@@ -48,7 +48,7 @@ public class ArrayTypes {
 				UnboundTypeParameterPreservingSubstitutor substitutor = new UnboundTypeParameterPreservingSubstitutor(parameterMapping, typeReference.getOwner());
 				ParameterizedTypeReference unboundTypeParameter = new ParameterizedTypeReference(typeReference.getOwner(), typeParameter);
 				LightweightTypeReference componentType = substitutor.substitute(unboundTypeParameter).getUpperBoundSubstitute();
-				if (componentType.isAny() || componentType.isUnknown())
+				if (componentType.isAny())
 					return null;
 				ArrayTypeReference array = new ArrayTypeReference(typeReference.getOwner(), componentType);
 				return array;

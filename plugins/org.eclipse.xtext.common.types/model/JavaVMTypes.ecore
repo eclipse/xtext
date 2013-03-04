@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<ecore:EPackage xmi:version="2.0"
-    xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="types"
-    nsURI="http://www.eclipse.org/xtext/common/JavaVMTypes" nsPrefix="types">
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="types" nsURI="http://www.eclipse.org/xtext/common/JavaVMTypes"
+    nsPrefix="types">
   <eClassifiers xsi:type="ecore:EClass" name="JvmIdentifiableElement" abstract="true">
     <eOperations name="getIdentifier" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
@@ -317,8 +316,12 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="JvmSynonymTypeReference" eSuperTypes="#//JvmCompoundTypeReference"/>
   <eClassifiers xsi:type="ecore:EClass" name="JvmUnknownTypeReference" eSuperTypes="#//JvmTypeReference">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="exception" eType="#//Exception"
-        transient="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="qualifiedName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
+        transient="true">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="&lt;p>Returns the known qualified name of the otherwise unresolveable type. May be &lt;code>null&lt;/code>.&lt;/p>&#xA;&#xA;@since 2.4"/>
+      </eAnnotations>
+    </eStructuralFeatures>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EDataType" name="ITypeReferenceVisitor" instanceClassName="org.eclipse.xtext.common.types.util.ITypeReferenceVisitor"
       serializable="false">
@@ -330,8 +333,6 @@
     <eTypeParameters name="Parameter"/>
     <eTypeParameters name="Result"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EDataType" name="Exception" instanceClassName="java.lang.Exception"
-      serializable="false"/>
   <eClassifiers xsi:type="ecore:EClass" name="JvmCompoundTypeReference" abstract="true"
       eSuperTypes="#//JvmTypeReference">
     <eStructuralFeatures xsi:type="ecore:EReference" name="type" eType="#//JvmType"/>

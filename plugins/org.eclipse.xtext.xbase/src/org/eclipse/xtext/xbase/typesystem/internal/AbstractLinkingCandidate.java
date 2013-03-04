@@ -148,7 +148,7 @@ public abstract class AbstractLinkingCandidate<Expression extends XExpression> i
 				// TODO create error if explicit type argument is wildcard or primitive or does not match the constraints
 				if (explicitTypeArgument != null && explicitTypeArgument.isValidHint()) {
 					LightweightTypeReference substitute = explicitTypeArgument.getInvariantBoundSubstitute();
-					if (!substitute.isAny() && !substitute.isUnknown()) {
+					if (!substitute.isAny()) {
 						typeReference.acceptHint(substitute, BoundTypeArgumentSource.EXPLICIT, expression, VarianceInfo.INVARIANT, VarianceInfo.INVARIANT);
 					}
 				}
@@ -320,7 +320,7 @@ public abstract class AbstractLinkingCandidate<Expression extends XExpression> i
 		ITypeComputationState argumentState = null;
 		LightweightTypeReference substitutedComponentType = substitutor.substitute(componentType);
 		List<XExpression> arguments = slot.getArgumentExpressions();
-		if (!substitutedComponentType.isAny() && !substitutedComponentType.isUnknown()) {
+		if (!substitutedComponentType.isAny()) {
 			if (arguments.size() == 1) {
 				ArgumentTypeComputationState first = createVarArgTypeComputationState(substitutedComponentType);
 				ArrayTypeReference arrayTypeReference = new ArrayTypeReference(substitutedComponentType.getOwner(), substitutedComponentType);
@@ -389,7 +389,7 @@ public abstract class AbstractLinkingCandidate<Expression extends XExpression> i
 	}
 	
 	protected void resolveAgainstActualType(LightweightTypeReference declaredType, LightweightTypeReference actualType, final AbstractTypeComputationState state) {
-		if (!actualType.isAny() && !actualType.isUnknown()) {
+		if (!actualType.isAny()) {
 			// TODO this(..) and super(..) for generic types
 			List<JvmTypeParameter> typeParameters = getDeclaredTypeParameters();
 			if (!typeParameters.isEmpty()) {
