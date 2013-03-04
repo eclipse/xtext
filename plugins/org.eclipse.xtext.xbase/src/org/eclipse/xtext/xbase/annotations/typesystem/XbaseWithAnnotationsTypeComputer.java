@@ -80,8 +80,19 @@ public class XbaseWithAnnotationsTypeComputer extends XbaseTypeComputer {
 			}
 			state.acceptActualType(new ParameterizedTypeReference(state.getReferenceOwner(), annotationType));
 		} else {
-			XExpression expression = object.getValue();
+			computeChildTypesForUnknownAnnotation(object, state);
+		}
+	}
+
+	protected void computeChildTypesForUnknownAnnotation(XAnnotation object, ITypeComputationState state) {
+		XExpression expression = object.getValue();
+		if (expression != null)
 			state.withNonVoidExpectation().computeTypes(expression);
+		else {
+			List<XAnnotationElementValuePair> valuePairs = object.getElementValuePairs();
+			for(XAnnotationElementValuePair pair: valuePairs) {
+				computeTypes(object, pair.getElement(), pair.getValue(), state);
+			}
 		}
 	}
 

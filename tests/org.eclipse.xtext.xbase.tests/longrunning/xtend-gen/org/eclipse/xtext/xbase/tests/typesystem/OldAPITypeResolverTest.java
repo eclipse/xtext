@@ -496,6 +496,12 @@ public class OldAPITypeResolverTest extends AbstractOldAPITypeResolverTest {
   
   @Ignore("fails in old implementation")
   @Test
+  public void testIfExpression_10() throws Exception {
+    Assert.fail("fails in old implementation");
+  }
+  
+  @Ignore("fails in old implementation")
+  @Test
   public void testIfExpression_11() throws Exception {
     Assert.fail("fails in old implementation");
   }
@@ -533,6 +539,18 @@ public class OldAPITypeResolverTest extends AbstractOldAPITypeResolverTest {
   @Ignore("fails in old implementation")
   @Test
   public void testIfExpression_27() throws Exception {
+    Assert.fail("fails in old implementation");
+  }
+  
+  @Ignore("fails in old implementation")
+  @Test
+  public void testIfExpression_31() throws Exception {
+    Assert.fail("fails in old implementation");
+  }
+  
+  @Ignore("fails in old implementation")
+  @Test
+  public void testVarArgs_07() throws Exception {
     Assert.fail("fails in old implementation");
   }
   
