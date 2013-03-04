@@ -1,9 +1,8 @@
 <project>
 	<taskdef name="findbugs" classname="edu.umd.cs.findbugs.anttask.FindBugsTask" />
 
-	<!--	<property name="findbugs.home" value="/home/data/users/dhubner/shared/findbugs-1.3.9/lib" />-->
-	<property name="findbugs.home" value="/Users/dhuebner/Entwicklung/findbugs-2.0.0" />
-	<property name="jarsLocation" value="/Users/dhuebner/Entwicklung/workspace/.metadata/.plugins/org.eclipse.pde.core/.bundle_pool/plugins/" />
+	<property name="findbugs.home" value="${user.home}/Entwicklung/findbugs-2.0.0" />
+	<property name="jarsLocation" value="${user.home}/Entwicklung/workspace/.metadata/.plugins/org.eclipse.pde.core/.bundle_pool/plugins/" />
 	<property name="srcLocation" value="${jarsLocation}" />
 	<property name="auxCpLocation" value="${jarsLocation}" />
 	<property name="effort" value="default" /><!-- min,default,max-->
