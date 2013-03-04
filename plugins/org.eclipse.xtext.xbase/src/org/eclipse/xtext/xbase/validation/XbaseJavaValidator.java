@@ -189,6 +189,10 @@ public class XbaseJavaValidator extends AbstractXbaseJavaValidator {
 	protected LightweightTypeReference getActualType(XExpression expression) {
 		return typeResolver.resolveTypes(expression).getActualType(expression);
 	}
+	
+	protected LightweightTypeReference getActualType(JvmIdentifiableElement identifiable) {
+		return typeResolver.resolveTypes(identifiable).getActualType(identifiable);
+	}
 
 	protected LightweightTypeReference getExpectedType(XExpression expression) {
 		return typeResolver.resolveTypes(expression).getExpectedType(expression);

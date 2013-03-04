@@ -15,10 +15,15 @@ import org.eclipse.emf.ecore.EObject;
 
 import org.eclipse.xtend.core.xtend.*;
 
+import org.eclipse.xtext.common.types.JvmAnnotationTarget;
+import org.eclipse.xtext.common.types.JvmFormalParameter;
+import org.eclipse.xtext.common.types.JvmIdentifiableElement;
+
 import org.eclipse.xtext.xbase.XBlockExpression;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XForLoopExpression;
 import org.eclipse.xtext.xbase.XStringLiteral;
+import org.eclipse.xtext.xbase.XVariableDeclaration;
 
 /**
  * <!-- begin-user-doc -->
@@ -264,6 +269,26 @@ public class XtendSwitch<T>
 				T result = caseXtendEnumLiteral(xtendEnumLiteral);
 				if (result == null) result = caseXtendMember(xtendEnumLiteral);
 				if (result == null) result = caseXtendAnnotationTarget(xtendEnumLiteral);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case XtendPackage.XTEND_VARIABLE_DECLARATION:
+			{
+				XtendVariableDeclaration xtendVariableDeclaration = (XtendVariableDeclaration)theEObject;
+				T result = caseXtendVariableDeclaration(xtendVariableDeclaration);
+				if (result == null) result = caseXVariableDeclaration(xtendVariableDeclaration);
+				if (result == null) result = caseXExpression(xtendVariableDeclaration);
+				if (result == null) result = caseJvmIdentifiableElement(xtendVariableDeclaration);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case XtendPackage.XTEND_FORMAL_PARAMETER:
+			{
+				XtendFormalParameter xtendFormalParameter = (XtendFormalParameter)theEObject;
+				T result = caseXtendFormalParameter(xtendFormalParameter);
+				if (result == null) result = caseJvmFormalParameter(xtendFormalParameter);
+				if (result == null) result = caseJvmAnnotationTarget(xtendFormalParameter);
+				if (result == null) result = caseJvmIdentifiableElement(xtendFormalParameter);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -576,6 +601,38 @@ public class XtendSwitch<T>
 	}
 
 	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Variable Declaration</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Variable Declaration</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseXtendVariableDeclaration(XtendVariableDeclaration object)
+	{
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Formal Parameter</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Formal Parameter</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseXtendFormalParameter(XtendFormalParameter object)
+	{
+		return null;
+	}
+
+	/**
 	 * Returns the result of interpreting the object as an instance of '<em>XExpression</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
@@ -635,6 +692,70 @@ public class XtendSwitch<T>
 	 * @generated
 	 */
 	public T caseXForLoopExpression(XForLoopExpression object)
+	{
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Jvm Identifiable Element</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Jvm Identifiable Element</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseJvmIdentifiableElement(JvmIdentifiableElement object)
+	{
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>XVariable Declaration</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>XVariable Declaration</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseXVariableDeclaration(XVariableDeclaration object)
+	{
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Jvm Annotation Target</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Jvm Annotation Target</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseJvmAnnotationTarget(JvmAnnotationTarget object)
+	{
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Jvm Formal Parameter</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Jvm Formal Parameter</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseJvmFormalParameter(JvmFormalParameter object)
 	{
 		return null;
 	}
