@@ -45,12 +45,14 @@ import org.eclipse.xtend.core.xtend.XtendConstructor;
 import org.eclipse.xtend.core.xtend.XtendEnum;
 import org.eclipse.xtend.core.xtend.XtendField;
 import org.eclipse.xtend.core.xtend.XtendFile;
+import org.eclipse.xtend.core.xtend.XtendFormalParameter;
 import org.eclipse.xtend.core.xtend.XtendFunction;
 import org.eclipse.xtend.core.xtend.XtendInterface;
 import org.eclipse.xtend.core.xtend.XtendMember;
 import org.eclipse.xtend.core.xtend.XtendPackage;
 import org.eclipse.xtend.core.xtend.XtendParameter;
 import org.eclipse.xtend.core.xtend.XtendTypeDeclaration;
+import org.eclipse.xtend.core.xtend.XtendVariableDeclaration;
 import org.eclipse.xtend.lib.Data;
 import org.eclipse.xtend.lib.Property;
 import org.eclipse.xtend2.lib.StringConcatenation;
@@ -86,6 +88,7 @@ import org.eclipse.xtext.validation.ComposedChecks;
 import org.eclipse.xtext.validation.ValidationMessageAcceptor;
 import org.eclipse.xtext.xbase.XAssignment;
 import org.eclipse.xtext.xbase.XBlockExpression;
+import org.eclipse.xtext.xbase.XCatchClause;
 import org.eclipse.xtext.xbase.XClosure;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XFeatureCall;
@@ -212,6 +215,45 @@ public class XtendJavaValidator extends XbaseWithAnnotationsJavaValidator {
  		}
 		return false;
 	}
+	
+	@Check
+	public void checkValidExtension(XtendField field) {
+		if (field.isExtension()) {
+			JvmField jvmField = associations.getJvmField(field);
+			if (jvmField != null) {
+				checkValidExtensionType(jvmField, field, XtendPackage.Literals.XTEND_FIELD__TYPE);
+			}
+		}
+	}
+	
+	@Check
+	public void checkValidExtension(XtendFormalParameter parameter) {
+		// catch clauses validate their types against java.lang.Throwable
+		if (parameter.isExtension() && !(parameter.eContainer() instanceof XCatchClause))
+			checkValidExtensionType(parameter, parameter, TypesPackage.Literals.JVM_FORMAL_PARAMETER__PARAMETER_TYPE);
+	}
+	
+	@Check
+	public void checkValidExtension(XtendVariableDeclaration variableDeclaration) {
+		if (variableDeclaration.isExtension())
+			checkValidExtensionType(variableDeclaration, variableDeclaration, XbasePackage.Literals.XVARIABLE_DECLARATION__NAME);
+	}
+	
+	@Check
+	public void checkValidExtension(XtendParameter parameter) {
+		if (parameter.isExtension()) {
+			JvmFormalParameter jvmParameter = associations.getJvmParameter(parameter);
+			if (jvmParameter != null)
+				checkValidExtensionType(jvmParameter, parameter, XtendPackage.Literals.XTEND_PARAMETER__PARAMETER_TYPE);
+		}
+	}
+	
+	protected void checkValidExtensionType(JvmIdentifiableElement identifiable, EObject source, EStructuralFeature feature) {
+		LightweightTypeReference type = getActualType(identifiable);
+		if (type != null && type.isPrimitive()) {
+			error(String.format("The primitive type %s is not a valid extension", type.getSimpleName()), source, feature, INVALID_EXTENSION_TYPE);
+		}
+	}
 
 	@Check
 	public void checkAnnotationTarget(XAnnotation annotation) {
@@ -313,6 +355,14 @@ public class XtendJavaValidator extends XbaseWithAnnotationsJavaValidator {
 						INVALID_USE_OF_TYPE);
 		}
 	}
+	
+	@Check
+	public void checkVarArgIsNotExtension(XtendParameter param) {
+		if (param.isVarArg() && param.isExtension()) {
+			error("A vararg may not be an extension.", param, XTEND_PARAMETER__EXTENSION, INVALID_USE_OF_VAR_ARG);
+		}
+	}
+	
 	@Check
 	public void checkVarArgComesLast(XtendParameter param) {
 		if (param.isVarArg()) {

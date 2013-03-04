@@ -20,16 +20,24 @@ import org.eclipse.xtend.core.xtend.RichString;
 import org.eclipse.xtend.core.xtend.RichStringForLoop;
 import org.eclipse.xtend.core.xtend.RichStringIf;
 import org.eclipse.xtend.core.xtend.RichStringLiteral;
+import org.eclipse.xtend.core.xtend.XtendFormalParameter;
+import org.eclipse.xtend.core.xtend.XtendVariableDeclaration;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
+import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.generator.trace.LocationData;
 import org.eclipse.xtext.util.ITextRegionWithLineInformation;
 import org.eclipse.xtext.util.Strings;
+import org.eclipse.xtext.xbase.XCatchClause;
+import org.eclipse.xtext.xbase.XClosure;
 import org.eclipse.xtext.xbase.XExpression;
+import org.eclipse.xtext.xbase.XForLoopExpression;
+import org.eclipse.xtext.xbase.XVariableDeclaration;
 import org.eclipse.xtext.xbase.XbasePackage;
 import org.eclipse.xtext.xbase.compiler.XbaseCompiler;
 import org.eclipse.xtext.xbase.compiler.output.ITreeAppendable;
+import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.typing.ITypeProvider;
 
 import com.google.common.collect.Lists;
@@ -41,6 +49,7 @@ import com.google.inject.Provider;
  * @author Jan Koehnlein
  * @author Sebastian Zarnekow
  */
+@SuppressWarnings("deprecation")
 @NonNullByDefault
 public class XtendCompiler extends XbaseCompiler {
 
@@ -335,5 +344,54 @@ public class XtendCompiler extends XbaseCompiler {
 		b.append(getVarName(richString, b));
 		if(getTypeReferences().is(typeProvider.getType(richString), String.class))
 			b.append(".toString()");
+	}
+	
+	@Override
+	protected void appendCatchClauseParameter(XCatchClause catchClause, JvmTypeReference parameterType,
+			String parameterName, ITreeAppendable appendable) {
+		appendExtensionAnnotation(catchClause.getDeclaredParam(), catchClause, appendable, false);
+		super.appendCatchClauseParameter(catchClause, parameterType, parameterName, appendable);
+	}
+
+	protected void appendExtensionAnnotation(JvmFormalParameter parameter, EObject context,
+			ITreeAppendable appendable, boolean newLine) {
+		if (parameter instanceof XtendFormalParameter) {
+			XtendFormalParameter castedParameter = (XtendFormalParameter) parameter;
+			if (castedParameter.isExtension()) {
+				appendExtensionAnnotation(context, appendable, newLine);
+			}
+		}
+	}
+
+	protected void appendExtensionAnnotation(EObject context, ITreeAppendable appendable, boolean newLine) {
+		JvmType extension = getTypeReferences().findDeclaredType(Extension.class, context);
+		if (extension != null) {
+			appendable.append("@");
+			appendable.append(extension);
+			if (!newLine)
+				appendable.append(" ");
+			else
+				appendable.newLine();
+		}
+	}
+	
+	@Override
+	protected JvmTypeReference appendVariableTypeAndName(XVariableDeclaration varDeclaration, ITreeAppendable appendable) {
+		if (varDeclaration instanceof XtendVariableDeclaration && ((XtendVariableDeclaration) varDeclaration).isExtension())
+			appendExtensionAnnotation(varDeclaration, appendable, true);
+		return super.appendVariableTypeAndName(varDeclaration, appendable);
+	}
+	
+	@Override
+	protected void appendForLoopParameter(XForLoopExpression expr, ITreeAppendable appendable) {
+		appendExtensionAnnotation(expr.getDeclaredParam(), expr, appendable, false);
+		super.appendForLoopParameter(expr, appendable);
+	}
+	
+	@Override
+	protected void appendClosureParameter(JvmFormalParameter closureParam, JvmTypeReference parameterType,
+			XClosure closure, ITreeAppendable appendable) {
+		appendExtensionAnnotation(closureParam, closure, appendable, false);
+		super.appendClosureParameter(closureParam, parameterType, closure, appendable);
 	}
 }

@@ -27,12 +27,14 @@ import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.JvmUpperBound;
 import org.eclipse.xtext.common.types.JvmVisibility;
+import org.eclipse.xtext.common.types.util.AnnotationLookup;
 import org.eclipse.xtext.common.types.util.ITypeArgumentContext;
 import org.eclipse.xtext.common.types.util.TypeArgumentContextProvider;
 import org.eclipse.xtext.common.types.util.TypeReferences;
 import org.eclipse.xtext.xbase.compiler.IAppendable;
 import org.eclipse.xtext.xbase.compiler.StringBuilderBasedAppendable;
 import org.eclipse.xtext.xbase.compiler.output.XtypeTypeReferenceSerializer;
+import org.eclipse.xtext.xbase.lib.Extension;
 
 import com.google.inject.Inject;
 
@@ -59,6 +61,9 @@ public class MemberFromSuperImplementor {
 	
 	@Inject
 	private InsertionOffsets insertionOffsets;
+	
+	@Inject
+	private AnnotationLookup annotationLookup;
 	
 
 	public void appendOverrideFunction(final XtendClass overrider, JvmOperation overriddenOperation,
@@ -181,6 +186,9 @@ public class MemberFromSuperImplementor {
 				if (overridden.isVarArgs() && overriddenParameterType instanceof JvmGenericArrayTypeReference) {
 					overriddenParameterType = ((JvmGenericArrayTypeReference) overriddenParameterType).getComponentType();
 					insertDots = true;
+				}
+				if (overridden instanceof JvmOperation && annotationLookup.findAnnotation(param, Extension.class) != null) {
+					appendable.append("extension ");
 				}
 				typeReferenceSerializer.serialize(overriddenParameterType, context, appendable, false, false, false,
 						true);
