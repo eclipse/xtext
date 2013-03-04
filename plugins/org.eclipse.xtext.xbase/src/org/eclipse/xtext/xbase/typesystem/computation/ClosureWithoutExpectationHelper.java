@@ -49,7 +49,7 @@ public class ClosureWithoutExpectationHelper extends AbstractClosureTypeHelper {
 
 	private final FunctionTypes functionTypes;
 	
-	public ClosureWithoutExpectationHelper(XClosure closure, ITypeExpectation expectation, ITypeComputationState state) {
+	protected ClosureWithoutExpectationHelper(XClosure closure, ITypeExpectation expectation, ITypeComputationState state) {
 		super(closure, expectation, state);
 		this.functionTypes = getServices().getFunctionTypes();
 	}

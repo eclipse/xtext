@@ -11,6 +11,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.EnumSet;
 import java.util.List;
+import java.util.Map;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.annotation.NonNullByDefault;
@@ -29,6 +30,7 @@ import org.eclipse.xtext.validation.IssueSeverities;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.XConstructorCall;
 import org.eclipse.xtext.xbase.XExpression;
+import org.eclipse.xtext.xbase.XFeatureCall;
 import org.eclipse.xtext.xbase.XbasePackage;
 import org.eclipse.xtext.xbase.scoping.batch.IFeatureScopeSession;
 import org.eclipse.xtext.xbase.scoping.batch.IIdentifiableElementDescription;
@@ -46,6 +48,7 @@ import org.eclipse.xtext.xbase.typesystem.references.ITypeReferenceOwner;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.OwnedConverter;
 import org.eclipse.xtext.xbase.typesystem.references.UnboundTypeReference;
+import org.eclipse.xtext.xbase.typesystem.util.Maps2;
 import org.eclipse.xtext.xbase.validation.IssueCodes;
 
 import com.google.common.base.Strings;
@@ -188,6 +191,35 @@ public abstract class AbstractTypeComputationState implements ITypeComputationSt
 			return;
 		QualifiedName elementName = QualifiedName.create(simpleName);
 		addLocalToCurrentScope(elementName, element, !getResolver().isShadowingAllowed(elementName));
+	}
+	
+	public void addExtensionToCurrentScope(JvmIdentifiableElement extensionProvider) {
+		LightweightTypeReference knownType = getResolvedTypes().getActualType(extensionProvider);
+		if (knownType != null && !knownType.isAny() && !knownType.isUnknown()) {
+			XFeatureCall prototype = getResolver().getXbaseFactory().createXFeatureCall();
+			prototype.setFeature(extensionProvider);
+			featureScopeSession = featureScopeSession.addToExtensionScope(Collections.<XExpression, LightweightTypeReference>singletonMap(prototype, knownType));
+		}
+	}
+	
+	public void addExtensionsToCurrentScope(List<? extends JvmIdentifiableElement> extensionProviders) {
+		if (extensionProviders.isEmpty())
+			return;
+		if (extensionProviders.size() == 1) {
+			addExtensionToCurrentScope(extensionProviders.get(0));
+			return;
+		}
+		Map<XExpression, LightweightTypeReference> prototypeToType = Maps2.newLinkedHashMapWithExpectedSize(extensionProviders.size());
+		for(JvmIdentifiableElement extensionProvider: extensionProviders) {
+			LightweightTypeReference knownType = getResolvedTypes().getActualType(extensionProvider);
+			if (knownType != null && !knownType.isAny() && !knownType.isUnknown()) {
+				XFeatureCall prototype = getResolver().getXbaseFactory().createXFeatureCall();
+				prototype.setFeature(extensionProvider);
+				prototypeToType.put(prototype, knownType);
+			}
+		}
+		if (!prototypeToType.isEmpty())
+			featureScopeSession = featureScopeSession.addToExtensionScope(prototypeToType);
 	}
 	
 	protected void addLocalToCurrentScope(QualifiedName elementName, JvmIdentifiableElement element, boolean raiseIssueIfShadowing) {

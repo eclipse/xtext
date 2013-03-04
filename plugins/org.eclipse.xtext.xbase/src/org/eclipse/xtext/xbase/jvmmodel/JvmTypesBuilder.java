@@ -50,6 +50,7 @@ import org.eclipse.xtext.common.types.JvmWildcardTypeReference;
 import org.eclipse.xtext.common.types.TypesFactory;
 import org.eclipse.xtext.common.types.TypesPackage;
 import org.eclipse.xtext.common.types.access.impl.ClassURIHelper;
+import org.eclipse.xtext.common.types.util.AnnotationLookup;
 import org.eclipse.xtext.common.types.util.TypeReferences;
 import org.eclipse.xtext.common.types.util.VisibilityService;
 import org.eclipse.xtext.documentation.IEObjectDocumentationProvider;
@@ -66,6 +67,7 @@ import org.eclipse.xtext.xbase.compiler.CompilationStrategyAdapter;
 import org.eclipse.xtext.xbase.compiler.DocumentationAdapter;
 import org.eclipse.xtext.xbase.compiler.FileHeaderAdapter;
 import org.eclipse.xtext.xbase.compiler.output.ITreeAppendable;
+import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.Procedures;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xbase.lib.util.ToStringHelper;
@@ -113,6 +115,9 @@ public class JvmTypesBuilder {
 	
 	@Inject
 	private VisibilityService visibilityService;
+	
+	@Inject
+	private AnnotationLookup annotationLookup;
 	
 	/**
 	 * Overrides  the default <code>operator_add()</code> to ignore <code>null</code> elements.
@@ -482,7 +487,45 @@ public class JvmTypesBuilder {
 		associate(sourceElement, result);
 		return initializeSafely(result, initializer);
 	}
-
+	
+	/**
+	 * Adds or removes the annotation {@link Extension @Extension} from the given field. If the annotation is
+	 * already present, nothing is done if {@code value} is {@code true}. If it is not present and {@code value}
+	 * is {@code false}, this is a no-op, too. 
+	 * 
+	 * @param field the field that will be processed
+	 * @param sourceElement the context that shall be used to lookup the {@link Extension annotation type}.
+	 * @param value <code>true</code> if the parameter shall be marked as extension, <code>false</code> if it should be unmarked.
+	 */
+	public void setExtension(@Nullable JvmField field, EObject sourceElement, boolean value) {
+		if (field == null)
+			return;
+		internalSetExtension(field, sourceElement, value);
+	}
+	
+	/**
+	 * Adds or removes the annotation {@link Extension @Extension} from the given parameter. If the annotation is
+	 * already present, nothing is done if {@code value} is {@code true}. If it is not present and {@code value}
+	 * is {@code false}, this is a no-op, too. 
+	 * 
+	 * @param parameter the parameter that will be processed
+	 * @param sourceElement the context that shall be used to lookup the {@link Extension annotation type}.
+	 * @param value <code>true</code> if the parameter shall be marked as extension, <code>false</code> if it should be unmarked.
+	 */
+	public void setExtension(@Nullable JvmFormalParameter parameter, EObject sourceElement, boolean value) {
+		if (parameter == null)
+			return;
+		internalSetExtension(parameter, sourceElement, value);
+	}
+	
+	protected void internalSetExtension(JvmAnnotationTarget annotationTarget, EObject sourceElement, boolean value) {
+		if (value) {
+			annotationLookup.findOrAddAnnotation(annotationTarget, sourceElement, Extension.class);
+		} else {
+			annotationLookup.removeAnnotation(annotationTarget, Extension.class);
+		}
+	}
+	
 	/**
 	 * Associates a source element with a target element. This association is used for tracing. Navigation, for
 	 * instance, uses this information to find the real declaration of a Jvm element.
