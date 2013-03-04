@@ -67,7 +67,7 @@ public class ClosureTypeComputer {
 			if (operation == null || operation.getParameters().size() != closureParameterSize || type == null) {
 				strategy = getClosureWithoutExpectationHelper();
 			} else {
-				strategy = new ClosureWithExpectationHelper(closure, operation, expectation, state);
+				strategy = createClosureWithExpectationHelper(operation);
 			}
 		}
 		
@@ -75,10 +75,34 @@ public class ClosureTypeComputer {
 
 	protected AbstractClosureTypeHelper getClosureWithoutExpectationHelper() {
 		if (functionTypes.isFunctionAndProcedureAvailable(expectation.getReferenceOwner()))
-			return new ClosureWithoutExpectationHelper(closure, expectation, state);
+			return createClosureWithoutExpectationHelper();
+		return createUnknownClosureTypeHelper();
+	}
+
+	protected ClosureWithExpectationHelper createClosureWithExpectationHelper(JvmOperation operation) {
+		return new ClosureWithExpectationHelper(closure, operation, expectation, state);
+	}
+	
+	protected UnknownClosureTypeHelper createUnknownClosureTypeHelper() {
 		return new UnknownClosureTypeHelper(closure, expectation, state);
 	}
 
+	protected ClosureWithoutExpectationHelper createClosureWithoutExpectationHelper() {
+		return new ClosureWithoutExpectationHelper(closure, expectation, state);
+	}
+
+	protected XClosure getClosure() {
+		return closure;
+	}
+	
+	protected ITypeExpectation getExpectation() {
+		return expectation;
+	}
+	
+	protected ITypeComputationState getState() {
+		return state;
+	}
+	
 	/**
 	 * This method is only public for testing purpose.
 	 * 

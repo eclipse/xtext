@@ -137,8 +137,19 @@ FeatureCallID:
 ;
 
 Parameter returns XtendParameter:
-	annotations+=XAnnotation* 
+	annotations+=XAnnotation* (extension?='extension' annotations+=XAnnotation*)?  
 	parameterType=JvmTypeReference varArg?='...'? name=ValidID;
+	
+XVariableDeclaration returns xbase::XExpression:
+	=>({XtendVariableDeclaration}
+	(((writeable?='var'|'val') extension?='extension'?) | (extension?='extension' (writeable?='var'|'val'))))
+	(=>(type=JvmTypeReference name=ValidID) | name=ValidID) ('=' right=XExpression)?;
+
+JvmFormalParameter returns XtendFormalParameter:
+	extension?='extension'? (parameterType=JvmTypeReference)? name=ValidID;
+	
+FullJvmFormalParameter returns XtendFormalParameter:
+	extension?='extension'? parameterType=JvmTypeReference name=ValidID;
 
 XStringLiteral returns xbase::XExpression:
 	SimpleStringLiteral | RichString

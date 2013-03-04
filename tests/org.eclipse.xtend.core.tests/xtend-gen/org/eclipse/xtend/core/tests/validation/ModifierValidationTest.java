@@ -349,7 +349,7 @@ public class ModifierValidationTest extends AbstractXtendTestCase {
       XtendField _field_7 = this.field(_builder_7.toString());
       this._validationTestHelper.assertNoErrors(_field_7);
       StringConcatenation _builder_8 = new StringConcatenation();
-      _builder_8.append("extension int foo");
+      _builder_8.append("extension Integer foo");
       XtendField _field_8 = this.field(_builder_8.toString());
       this._validationTestHelper.assertNoErrors(_field_8);
     } catch (Throwable _e) {

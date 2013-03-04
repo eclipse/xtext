@@ -69,6 +69,7 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="parameterType" eType="ecore:EClass platform:/resource/org.eclipse.xtext.common.types/model/JavaVMTypes.ecore#//JvmTypeReference"
         containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="varArg" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="extension" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="RichString" eSuperTypes="platform:/resource/org.eclipse.xtext.xbase/model/Xbase.ecore#//XBlockExpression"/>
   <eClassifiers xsi:type="ecore:EClass" name="RichStringLiteral" eSuperTypes="platform:/resource/org.eclipse.xtext.xbase/model/Xbase.ecore#//XStringLiteral"/>
@@ -131,5 +132,11 @@
   <eClassifiers xsi:type="ecore:EClass" name="XtendEnum" eSuperTypes="#//XtendTypeDeclaration"/>
   <eClassifiers xsi:type="ecore:EClass" name="XtendEnumLiteral" eSuperTypes="#//XtendMember">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="XtendVariableDeclaration" eSuperTypes="platform:/resource/org.eclipse.xtext.xbase/model/Xbase.ecore#//XVariableDeclaration">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="extension" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="XtendFormalParameter" eSuperTypes="platform:/resource/org.eclipse.xtext.common.types/model/JavaVMTypes.ecore#//JvmFormalParameter">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="extension" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
   </eClassifiers>
 </ecore:EPackage>
