@@ -77,6 +77,7 @@ import org.eclipse.xtext.xbase.jvmmodel.IJvmModelAssociator;
 import org.eclipse.xtext.xbase.jvmmodel.IJvmModelInferrer;
 import org.eclipse.xtext.xbase.jvmmodel.JvmTypeExtensions;
 import org.eclipse.xtext.xbase.jvmmodel.JvmTypesBuilder;
+import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 
 import com.google.common.base.Predicate;
@@ -666,6 +667,9 @@ public class XtendJvmModelInferrer implements IJvmModelInferrer {
 		}
 		associator.associate(parameter, jvmParam);
 		translateAnnotationsTo(parameter.getAnnotations(), jvmParam);
+		if (parameter.isExtension()) {
+			jvmParam.getAnnotations().add(jvmTypesBuilder.toAnnotation(parameter, Extension.class));
+		}
 		executable.getParameters().add(jvmParam);
 	}
 
@@ -719,6 +723,9 @@ public class XtendJvmModelInferrer implements IJvmModelInferrer {
 					if(annotationReference != null)
 						field.getAnnotations().add(annotationReference);
 				}
+			}
+			if (source.isExtension()) {
+				field.getAnnotations().add(jvmTypesBuilder.toAnnotation(source, Extension.class));
 			}
 			if (isProperty && !field.isStatic()) {
 				field.setSimpleName("_"+computeFieldName);

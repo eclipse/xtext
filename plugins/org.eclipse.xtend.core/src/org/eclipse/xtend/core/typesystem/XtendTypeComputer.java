@@ -15,13 +15,17 @@ import org.eclipse.xtend.core.xtend.RichStringElseIf;
 import org.eclipse.xtend.core.xtend.RichStringForLoop;
 import org.eclipse.xtend.core.xtend.RichStringIf;
 import org.eclipse.xtend.core.xtend.RichStringLiteral;
+import org.eclipse.xtend.core.xtend.XtendVariableDeclaration;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
+import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.xbase.XCastedExpression;
+import org.eclipse.xtext.xbase.XClosure;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XVariableDeclaration;
 import org.eclipse.xtext.xbase.XbasePackage;
 import org.eclipse.xtext.xbase.annotations.typesystem.XbaseWithAnnotationsTypeComputer;
+import org.eclipse.xtext.xbase.typesystem.computation.ITypeComputationResult;
 import org.eclipse.xtext.xbase.typesystem.computation.ITypeComputationState;
 import org.eclipse.xtext.xbase.typesystem.computation.ITypeExpectation;
 import org.eclipse.xtext.xbase.typesystem.conformance.ConformanceHint;
@@ -61,7 +65,7 @@ public class XtendTypeComputer extends XbaseWithAnnotationsTypeComputer {
 				ITypeComputationState expressionState = state.withoutExpectation();
 				expressionState.computeTypes(expression);
 				if (expression instanceof XVariableDeclaration) {
-					state.addLocalToCurrentScope((XVariableDeclaration)expression);
+					addLocalToCurrentScope((XVariableDeclaration)expression, state);
 				}
 			}
 		}
@@ -123,6 +127,45 @@ public class XtendTypeComputer extends XbaseWithAnnotationsTypeComputer {
 	protected void _computeTypes(RichStringLiteral object, ITypeComputationState state) {
 		LightweightTypeReference type = getTypeForName(CharSequence.class, state);
 		state.acceptActualType(type);
+	}
+	
+//	protected void _computeTypes(XtendVariableDeclaration object, ITypeComputationState state) {
+//		if (object.isExtension()) {
+//			// basically the same as in the super implementation but we want to use
+//			// an object expectation
+//			JvmTypeReference declaredType = object.getType();
+//			LightweightTypeReference lightweightTypeReference = declaredType != null ? state.getConverter().toLightweightReference(declaredType) : null;
+//			if (lightweightTypeReference != null) {
+//				// primitives may not be extensions
+//				lightweightTypeReference = lightweightTypeReference.getWrapperTypeIfPrimitive();
+//			}
+//			if (lightweightTypeReference != null && object.getRight() instanceof XClosure) {
+//				ITypeComputationState initializerState = state.assignType(object, lightweightTypeReference).withExpectation(lightweightTypeReference);
+//				initializerState.computeTypes(object.getRight());
+//			} else {
+//				ITypeComputationState initializerState = lightweightTypeReference != null ? state.withExpectation(lightweightTypeReference) : state.withExpectation(getTypeForName(Object.class, state));
+//				ITypeComputationResult computedType = initializerState.computeTypes(object.getRight());
+//				/* 
+//				 * TODO keep information about the actual type, e.g. automatic cast insertion should be possible for
+//				 * 
+//				 * val Object o = ""
+//				 * o.substring(1)
+//				 */
+//				state.assignType(object, lightweightTypeReference != null ? lightweightTypeReference : computedType.getActualExpressionType(), false);
+//			}
+//			LightweightTypeReference primitiveVoid = getPrimitiveVoid(state);
+//			state.acceptActualType(primitiveVoid);
+//		} else {
+//			super._computeTypes(object, state);
+//		}
+//	}
+	
+	@Override
+	protected void addLocalToCurrentScope(XVariableDeclaration localVariable, ITypeComputationState state) {
+		super.addLocalToCurrentScope(localVariable, state);
+		if (localVariable instanceof XtendVariableDeclaration && ((XtendVariableDeclaration) localVariable).isExtension()) {
+			state.addExtensionToCurrentScope(localVariable);
+		}
 	}
 	
 }

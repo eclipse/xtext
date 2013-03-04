@@ -13,6 +13,8 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 
+import org.eclipse.xtext.common.types.TypesPackage;
+
 import org.eclipse.xtext.xbase.XbasePackage;
 
 /**
@@ -613,13 +615,22 @@ public interface XtendPackage extends EPackage
 	int XTEND_PARAMETER__VAR_ARG = XTEND_ANNOTATION_TARGET_FEATURE_COUNT + 2;
 
 	/**
+	 * The feature id for the '<em><b>Extension</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int XTEND_PARAMETER__EXTENSION = XTEND_ANNOTATION_TARGET_FEATURE_COUNT + 3;
+
+	/**
 	 * The number of structural features of the '<em>Parameter</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int XTEND_PARAMETER_FEATURE_COUNT = XTEND_ANNOTATION_TARGET_FEATURE_COUNT + 3;
+	int XTEND_PARAMETER_FEATURE_COUNT = XTEND_ANNOTATION_TARGET_FEATURE_COUNT + 4;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.xtend.core.xtend.impl.RichStringImpl <em>Rich String</em>}' class.
@@ -1271,6 +1282,125 @@ public interface XtendPackage extends EPackage
 	 */
 	int XTEND_ENUM_LITERAL_FEATURE_COUNT = XTEND_MEMBER_FEATURE_COUNT + 1;
 
+	/**
+	 * The meta object id for the '{@link org.eclipse.xtend.core.xtend.impl.XtendVariableDeclarationImpl <em>Variable Declaration</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipse.xtend.core.xtend.impl.XtendVariableDeclarationImpl
+	 * @see org.eclipse.xtend.core.xtend.impl.XtendPackageImpl#getXtendVariableDeclaration()
+	 * @generated
+	 */
+	int XTEND_VARIABLE_DECLARATION = 19;
+
+	/**
+	 * The feature id for the '<em><b>Type</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int XTEND_VARIABLE_DECLARATION__TYPE = XbasePackage.XVARIABLE_DECLARATION__TYPE;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int XTEND_VARIABLE_DECLARATION__NAME = XbasePackage.XVARIABLE_DECLARATION__NAME;
+
+	/**
+	 * The feature id for the '<em><b>Right</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int XTEND_VARIABLE_DECLARATION__RIGHT = XbasePackage.XVARIABLE_DECLARATION__RIGHT;
+
+	/**
+	 * The feature id for the '<em><b>Writeable</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int XTEND_VARIABLE_DECLARATION__WRITEABLE = XbasePackage.XVARIABLE_DECLARATION__WRITEABLE;
+
+	/**
+	 * The feature id for the '<em><b>Extension</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int XTEND_VARIABLE_DECLARATION__EXTENSION = XbasePackage.XVARIABLE_DECLARATION_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of structural features of the '<em>Variable Declaration</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int XTEND_VARIABLE_DECLARATION_FEATURE_COUNT = XbasePackage.XVARIABLE_DECLARATION_FEATURE_COUNT + 1;
+
+	/**
+	 * The meta object id for the '{@link org.eclipse.xtend.core.xtend.impl.XtendFormalParameterImpl <em>Formal Parameter</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipse.xtend.core.xtend.impl.XtendFormalParameterImpl
+	 * @see org.eclipse.xtend.core.xtend.impl.XtendPackageImpl#getXtendFormalParameter()
+	 * @generated
+	 */
+	int XTEND_FORMAL_PARAMETER = 20;
+
+	/**
+	 * The feature id for the '<em><b>Annotations</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int XTEND_FORMAL_PARAMETER__ANNOTATIONS = TypesPackage.JVM_FORMAL_PARAMETER__ANNOTATIONS;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int XTEND_FORMAL_PARAMETER__NAME = TypesPackage.JVM_FORMAL_PARAMETER__NAME;
+
+	/**
+	 * The feature id for the '<em><b>Parameter Type</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int XTEND_FORMAL_PARAMETER__PARAMETER_TYPE = TypesPackage.JVM_FORMAL_PARAMETER__PARAMETER_TYPE;
+
+	/**
+	 * The feature id for the '<em><b>Extension</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int XTEND_FORMAL_PARAMETER__EXTENSION = TypesPackage.JVM_FORMAL_PARAMETER_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of structural features of the '<em>Formal Parameter</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int XTEND_FORMAL_PARAMETER_FEATURE_COUNT = TypesPackage.JVM_FORMAL_PARAMETER_FEATURE_COUNT + 1;
+
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.xtend.core.xtend.XtendFile <em>File</em>}'.
@@ -1594,6 +1724,17 @@ public interface XtendPackage extends EPackage
 	 * @generated
 	 */
 	EAttribute getXtendParameter_VarArg();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.eclipse.xtend.core.xtend.XtendParameter#isExtension <em>Extension</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Extension</em>'.
+	 * @see org.eclipse.xtend.core.xtend.XtendParameter#isExtension()
+	 * @see #getXtendParameter()
+	 * @generated
+	 */
+	EAttribute getXtendParameter_Extension();
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.xtend.core.xtend.RichString <em>Rich String</em>}'.
@@ -1936,6 +2077,48 @@ public interface XtendPackage extends EPackage
 	EAttribute getXtendEnumLiteral_Name();
 
 	/**
+	 * Returns the meta object for class '{@link org.eclipse.xtend.core.xtend.XtendVariableDeclaration <em>Variable Declaration</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Variable Declaration</em>'.
+	 * @see org.eclipse.xtend.core.xtend.XtendVariableDeclaration
+	 * @generated
+	 */
+	EClass getXtendVariableDeclaration();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.eclipse.xtend.core.xtend.XtendVariableDeclaration#isExtension <em>Extension</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Extension</em>'.
+	 * @see org.eclipse.xtend.core.xtend.XtendVariableDeclaration#isExtension()
+	 * @see #getXtendVariableDeclaration()
+	 * @generated
+	 */
+	EAttribute getXtendVariableDeclaration_Extension();
+
+	/**
+	 * Returns the meta object for class '{@link org.eclipse.xtend.core.xtend.XtendFormalParameter <em>Formal Parameter</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Formal Parameter</em>'.
+	 * @see org.eclipse.xtend.core.xtend.XtendFormalParameter
+	 * @generated
+	 */
+	EClass getXtendFormalParameter();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.eclipse.xtend.core.xtend.XtendFormalParameter#isExtension <em>Extension</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Extension</em>'.
+	 * @see org.eclipse.xtend.core.xtend.XtendFormalParameter#isExtension()
+	 * @see #getXtendFormalParameter()
+	 * @generated
+	 */
+	EAttribute getXtendFormalParameter_Extension();
+
+	/**
 	 * Returns the factory that creates the instances of the model.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2211,6 +2394,14 @@ public interface XtendPackage extends EPackage
 		 * @generated
 		 */
 		EAttribute XTEND_PARAMETER__VAR_ARG = eINSTANCE.getXtendParameter_VarArg();
+
+		/**
+		 * The meta object literal for the '<em><b>Extension</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute XTEND_PARAMETER__EXTENSION = eINSTANCE.getXtendParameter_Extension();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.xtend.core.xtend.impl.RichStringImpl <em>Rich String</em>}' class.
@@ -2491,6 +2682,42 @@ public interface XtendPackage extends EPackage
 		 * @generated
 		 */
 		EAttribute XTEND_ENUM_LITERAL__NAME = eINSTANCE.getXtendEnumLiteral_Name();
+
+		/**
+		 * The meta object literal for the '{@link org.eclipse.xtend.core.xtend.impl.XtendVariableDeclarationImpl <em>Variable Declaration</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.eclipse.xtend.core.xtend.impl.XtendVariableDeclarationImpl
+		 * @see org.eclipse.xtend.core.xtend.impl.XtendPackageImpl#getXtendVariableDeclaration()
+		 * @generated
+		 */
+		EClass XTEND_VARIABLE_DECLARATION = eINSTANCE.getXtendVariableDeclaration();
+
+		/**
+		 * The meta object literal for the '<em><b>Extension</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute XTEND_VARIABLE_DECLARATION__EXTENSION = eINSTANCE.getXtendVariableDeclaration_Extension();
+
+		/**
+		 * The meta object literal for the '{@link org.eclipse.xtend.core.xtend.impl.XtendFormalParameterImpl <em>Formal Parameter</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.eclipse.xtend.core.xtend.impl.XtendFormalParameterImpl
+		 * @see org.eclipse.xtend.core.xtend.impl.XtendPackageImpl#getXtendFormalParameter()
+		 * @generated
+		 */
+		EClass XTEND_FORMAL_PARAMETER = eINSTANCE.getXtendFormalParameter();
+
+		/**
+		 * The meta object literal for the '<em><b>Extension</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute XTEND_FORMAL_PARAMETER__EXTENSION = eINSTANCE.getXtendFormalParameter_Extension();
 
 	}
 

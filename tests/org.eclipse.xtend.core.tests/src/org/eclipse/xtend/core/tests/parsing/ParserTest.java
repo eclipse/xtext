@@ -1,5 +1,8 @@
 package org.eclipse.xtend.core.tests.parsing;
 
+import java.util.List;
+
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.xtend.core.jvmmodel.IXtendJvmAssociations;
 import org.eclipse.xtend.core.tests.AbstractXtendTestCase;
 import org.eclipse.xtend.core.xtend.RichString;
@@ -11,7 +14,11 @@ import org.eclipse.xtend.core.xtend.XtendClass;
 import org.eclipse.xtend.core.xtend.XtendConstructor;
 import org.eclipse.xtend.core.xtend.XtendField;
 import org.eclipse.xtend.core.xtend.XtendFile;
+import org.eclipse.xtend.core.xtend.XtendFormalParameter;
 import org.eclipse.xtend.core.xtend.XtendFunction;
+import org.eclipse.xtend.core.xtend.XtendParameter;
+import org.eclipse.xtend.core.xtend.XtendVariableDeclaration;
+import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmLowerBound;
 import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmTypeConstraint;
@@ -22,9 +29,13 @@ import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.XBinaryOperation;
 import org.eclipse.xtext.xbase.XBlockExpression;
 import org.eclipse.xtext.xbase.XBooleanLiteral;
+import org.eclipse.xtext.xbase.XCatchClause;
+import org.eclipse.xtext.xbase.XClosure;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XFeatureCall;
+import org.eclipse.xtext.xbase.XForLoopExpression;
 import org.eclipse.xtext.xbase.XStringLiteral;
+import org.eclipse.xtext.xbase.XTryCatchFinallyExpression;
 import org.eclipse.xtext.xbase.XVariableDeclaration;
 import org.eclipse.xtext.xtype.XFunctionTypeRef;
 import org.eclipse.xtext.xtype.XImportDeclaration;
@@ -35,6 +46,80 @@ import com.google.inject.Inject;
 public class ParserTest extends AbstractXtendTestCase {
 	
 	@Inject private IXtendJvmAssociations associations; 
+	
+	@Test
+	public void testExtensionOnLocalVar_01() throws Exception {
+		XtendClass clazz = clazz("class Foo { def m() { extension var s = '' } }");
+		assertEquals(1, clazz.getMembers().size());
+		XtendFunction m = (XtendFunction) clazz.getMembers().get(0);
+		XBlockExpression body = (XBlockExpression) m.getExpression();
+		assertEquals(1, body.getExpressions().size());
+		XtendVariableDeclaration variableDeclaration = (XtendVariableDeclaration) body.getExpressions().get(0);
+		assertTrue(variableDeclaration.isWriteable());
+		assertTrue(variableDeclaration.isExtension());
+	}
+	
+	@Test
+	public void testExtensionOnLocalVar_02() throws Exception {
+		XtendClass clazz = clazz("class Foo { def m() { val extension Object s = '' } }");
+		assertEquals(1, clazz.getMembers().size());
+		XtendFunction m = (XtendFunction) clazz.getMembers().get(0);
+		XBlockExpression body = (XBlockExpression) m.getExpression();
+		assertEquals(1, body.getExpressions().size());
+		XtendVariableDeclaration variableDeclaration = (XtendVariableDeclaration) body.getExpressions().get(0);
+		assertFalse(variableDeclaration.isWriteable());
+		assertTrue(variableDeclaration.isExtension());
+	}
+
+	@Test
+	public void testExtensionOnMethodParameter_01() throws Exception {
+		XtendClass clazz = clazz("class Foo { def m(extension Object o) {} }");
+		assertEquals(1, clazz.getMembers().size());
+		XtendFunction m = (XtendFunction) clazz.getMembers().get(0);
+		List<XtendParameter> parameters = m.getParameters();
+		assertEquals(1, parameters.size());
+		XtendParameter singleParameter = parameters.get(0);
+		assertTrue(singleParameter.isExtension());
+	}
+	
+	@Test
+	public void testExtensionOnLambdaParameter_01() throws Exception {
+		XtendClass clazz = clazz("class Foo { val x = [ extension String a, String b | 0 ] }");
+		assertEquals(1, clazz.getMembers().size());
+		XtendField f = (XtendField) clazz.getMembers().get(0);
+		XClosure initializer = (XClosure) f.getInitialValue();
+		List<JvmFormalParameter> parameters = initializer.getDeclaredFormalParameters();
+		assertEquals(2, parameters.size());
+		XtendFormalParameter firstParameter = (XtendFormalParameter) parameters.get(0);
+		assertTrue(firstParameter.isExtension());
+		XtendFormalParameter secondParameter = (XtendFormalParameter) parameters.get(1);
+		assertFalse(secondParameter.isExtension());
+	}
+	
+	@Test
+	public void testExtensionOnForLoopParam_01() throws Exception {
+		XtendClass clazz = clazz("class Foo { def void m() { for(extension i: 1..2) {} } }");
+		assertEquals(1, clazz.getMembers().size());
+		XtendFunction m = (XtendFunction) clazz.getMembers().get(0);
+		XBlockExpression body = (XBlockExpression) m.getExpression();
+		assertEquals(1, body.getExpressions().size());
+		XForLoopExpression forLoop = (XForLoopExpression) body.getExpressions().get(0);
+		XtendFormalParameter parameter = (XtendFormalParameter) forLoop.getDeclaredParam();
+		assertTrue(parameter.isExtension());
+	}
+	
+	@Test
+	public void testExtensionOnCatchClause_01() throws Exception {
+		XtendClass clazz = clazz("class Foo { def void m() { try {} catch(extension NullPointerException e) {} } }");
+		assertEquals(1, clazz.getMembers().size());
+		XtendFunction m = (XtendFunction) clazz.getMembers().get(0);
+		XBlockExpression body = (XBlockExpression) m.getExpression();
+		assertEquals(1, body.getExpressions().size());
+		XTryCatchFinallyExpression tryCatch = (XTryCatchFinallyExpression) body.getExpressions().get(0);
+		XCatchClause singleCatchClause = tryCatch.getCatchClauses().get(0);
+		XtendFormalParameter parameter = (XtendFormalParameter) singleCatchClause.getDeclaredParam();
+		assertTrue(parameter.isExtension());
+	}
 	
 	@Test public void testCreateExtension_00() throws Exception {
 		XtendClass clazz = clazz(

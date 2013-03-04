@@ -29,6 +29,7 @@ import org.eclipse.xtext.validation.IssueSeverities;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.XConstructorCall;
 import org.eclipse.xtext.xbase.XExpression;
+import org.eclipse.xtext.xbase.XFeatureCall;
 import org.eclipse.xtext.xbase.XbasePackage;
 import org.eclipse.xtext.xbase.scoping.batch.IFeatureScopeSession;
 import org.eclipse.xtext.xbase.scoping.batch.IIdentifiableElementDescription;
@@ -188,6 +189,15 @@ public abstract class AbstractTypeComputationState implements ITypeComputationSt
 			return;
 		QualifiedName elementName = QualifiedName.create(simpleName);
 		addLocalToCurrentScope(elementName, element, !getResolver().isShadowingAllowed(elementName));
+	}
+	
+	public void addExtensionToCurrentScope(JvmIdentifiableElement element) {
+		LightweightTypeReference knownType = getResolvedTypes().getActualType(element);
+		if (knownType != null && !knownType.isAny() && !knownType.isUnknown()) {
+			XFeatureCall prototype = getResolver().getXbaseFactory().createXFeatureCall();
+			prototype.setFeature(element);
+			featureScopeSession = featureScopeSession.addToExtensionScope(Collections.<XExpression, LightweightTypeReference>singletonMap(prototype, knownType));
+		}
 	}
 	
 	protected void addLocalToCurrentScope(QualifiedName elementName, JvmIdentifiableElement element, boolean raiseIssueIfShadowing) {

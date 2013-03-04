@@ -381,6 +381,16 @@ public class FeatureCallValidationTest extends AbstractXtendTestCase {
 		helper.assertError(clazz, XbasePackage.Literals.XMEMBER_FEATURE_CALL,
 				org.eclipse.xtext.xbase.validation.IssueCodes.STATIC_ACCESS_TO_INSTANCE_MEMBER);
 	}
+	
+	@Test public void testXMemberFeatureCallLocalExtension_01() throws Exception {
+		XtendClass clazz = clazz("class X { def meth() { extension var test.ExtensionMethods e = null 'foo'.instanceExtension } }");
+		helper.assertNoErrors(clazz);
+	}
+
+	@Test public void testXMemberFeatureCallLocalExtension_02() throws Exception {
+		XtendClass clazz = clazz("class X { def static meth() { extension val test.ExtensionMethods e = null 'foo'.instanceExtension } }");
+		helper.assertNoErrors(clazz);
+	}
 
 	@Test
 	@Ignore("static methods from instance extensions are not on the scope")
