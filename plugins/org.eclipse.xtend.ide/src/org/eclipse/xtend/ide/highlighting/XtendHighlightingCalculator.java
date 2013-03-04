@@ -43,6 +43,7 @@ import org.eclipse.xtext.TerminalRule;
 import org.eclipse.xtext.common.types.JvmAnnotationTarget;
 import org.eclipse.xtext.common.types.JvmAnnotationType;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
+import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.util.DeprecationUtil;
 import org.eclipse.xtext.nodemodel.ILeafNode;
 import org.eclipse.xtext.nodemodel.INode;
@@ -100,7 +101,7 @@ public class XtendHighlightingCalculator extends XbaseHighlightingCalculator {
 	protected void doProvideHighlightingFor(XtextResource resource, IHighlightedPositionAcceptor acceptor) {
 		XtendFile file = (XtendFile) resource.getContents().get(0);
 		for (XtendAnnotationTarget xtendType : file.getXtendTypes()) {
-			highlightDeprectedXtendAnnotationTarget(acceptor, xtendType);
+			highlightDeprecatedXtendAnnotationTarget(acceptor, xtendType);
 			highlightRichStringsInAnnotations(acceptor, xtendType);
 			for (XtendMember member : filter(xtendType.eContents(), XtendMember.class)) {
 				if (member.eClass() == XtendPackage.Literals.XTEND_FUNCTION) {
@@ -118,7 +119,7 @@ public class XtendHighlightingCalculator extends XbaseHighlightingCalculator {
 					XExpression initializer = field.getInitialValue();
 					highlightRichStrings(initializer, acceptor);
 				}
-				highlightDeprectedXtendAnnotationTarget(acceptor, member);
+				highlightDeprecatedXtendAnnotationTarget(acceptor, member);
 				highlightRichStringsInAnnotations(acceptor, member);
 			}
 		}
@@ -146,11 +147,11 @@ public class XtendHighlightingCalculator extends XbaseHighlightingCalculator {
 			}
 	}
 	
-	protected void highlightDeprectedXtendAnnotationTarget(IHighlightedPositionAcceptor acceptor, XtendAnnotationTarget target){
+	protected void highlightDeprecatedXtendAnnotationTarget(IHighlightedPositionAcceptor acceptor, XtendAnnotationTarget target){
 		if(target != null)
 			for(XAnnotation annotation : target.getAnnotations()){
-				JvmAnnotationType annotationType = annotation.getAnnotationType();
-				if(annotationType != null && !annotationType.eIsProxy() && DeprecationUtil.isDeprecated(annotationType)){
+				JvmType annotationType = annotation.getAnnotationType();
+				if(annotationType != null && !annotationType.eIsProxy() && annotationType instanceof JvmAnnotationType && DeprecationUtil.isDeprecated((JvmAnnotationType) annotationType)){
 					EStructuralFeature nameFeature = target.eClass().getEStructuralFeature("name");
 					highlightObjectAtFeature(acceptor, target, nameFeature, XbaseHighlightingConfiguration.DEPRECATED_MEMBERS);
 				}
