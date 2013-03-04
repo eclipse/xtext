@@ -11,6 +11,7 @@ import static com.google.common.collect.Iterables.*;
 import static org.eclipse.xtext.nodemodel.util.NodeModelUtils.*;
 
 import java.util.Collections;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -147,7 +148,10 @@ public class OverrideIndicatorModelListener extends NullImpl implements IXtextMo
 	}
 
 	protected Map<Annotation, Position> createOverrideIndicatorAnnotationMap(XtextResource xtextResource) {
-		EObject eObject = xtextResource.getContents().get(0);
+		List<EObject> contents = xtextResource.getContents();
+		if (contents.isEmpty())
+			return Maps.newHashMap();
+		EObject eObject = contents.get(0);
 		if (!(eObject instanceof XtendFile)) {
 			return Maps.newHashMap();
 		}
