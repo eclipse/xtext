@@ -66,6 +66,42 @@ public class XtendValidationTest extends AbstractXtendTestCase {
 		preferences.clear();
 	}
 	
+	@Test public void testExtensionMayNotBePrimitive_01() throws Exception {
+		XtendClass clazz = clazz("class Z { extension int x = 1 }");
+		helper.assertError(clazz, XTEND_FIELD, INVALID_EXTENSION_TYPE);
+	}
+	
+	@Test public void testExtensionMayNotBePrimitive_02() throws Exception {
+		XtendClass clazz = clazz("class Z { extension int = 1 }");
+		helper.assertError(clazz, XTEND_FIELD, INVALID_EXTENSION_TYPE);
+	}
+	
+	@Test public void testExtensionMayNotBePrimitive_03() throws Exception {
+		XtendClass clazz = clazz("class Z { extension x = 1.toString }");
+		helper.assertNoError(clazz, INVALID_EXTENSION_TYPE);
+	}
+	
+	@Test public void testExtensionMayNotBePrimitive_04() throws Exception {
+		XtendClass clazz = clazz("class Z { def void m(extension int i) {} }");
+		helper.assertError(clazz, XTEND_PARAMETER, INVALID_EXTENSION_TYPE);
+	}
+	
+	@Test public void testExtensionMayNotBePrimitive_05() throws Exception {
+		XtendClass clazz = clazz("class Z { def void m(extension Object i) {} }");
+		helper.assertNoError(clazz, INVALID_EXTENSION_TYPE);
+	}
+	
+	@Test public void testExtensionMayNotBePrimitive_06() throws Exception {
+		XtendClass clazz = clazz("class Z { def void m() { try {} catch(extension int i) {} } }");
+		helper.assertNoError(clazz, INVALID_EXTENSION_TYPE);
+		helper.assertError(clazz, XTEND_FORMAL_PARAMETER, INCOMPATIBLE_TYPES);
+	}
+	
+	@Test public void testExtensionMayNotBePrimitive_07() throws Exception {
+		XtendClass clazz = clazz("class Z { def void m() { extension var i = 0 } }");
+		helper.assertError(clazz, XTEND_VARIABLE_DECLARATION, INVALID_EXTENSION_TYPE);
+	}
+	
 	@Test public void testPropertyMustNotBeStatic_01() throws Exception {
 		XtendClass clazz = clazz("class Z { @Property String x  @Property static String y}");
 		helper.assertError(clazz.getMembers().get(1), XTEND_FIELD, STATIC_PROPERTY);
@@ -411,6 +447,11 @@ public class XtendValidationTest extends AbstractXtendTestCase {
 	@Test public void testParameterTypeMayNotBeVoid() throws Exception {
 		XtendFunction function = function("def void foo(void myParam) { }");
 		helper.assertError(function, TypesPackage.Literals.JVM_TYPE_REFERENCE, INVALID_USE_OF_TYPE);
+	}
+	
+	@Test public void testVarArgIsNotExtension() throws Exception {
+		XtendFunction function = function("def void foo(extension String... myParam) { }");
+		helper.assertError(function, XtendPackage.Literals.XTEND_PARAMETER, INVALID_USE_OF_VAR_ARG, "A vararg may not be an extension.");
 	}
 	
 	@Test public void testVarArgMustBeLast_0() throws Exception {

@@ -20,12 +20,14 @@ import org.eclipse.xtend.core.xtend.XtendEnum;
 import org.eclipse.xtend.core.xtend.XtendField;
 import org.eclipse.xtend.core.xtend.XtendFunction;
 import org.eclipse.xtend.core.xtend.XtendInterface;
+import org.eclipse.xtend.core.xtend.XtendParameter;
 import org.eclipse.xtend.core.xtend.XtendTypeDeclaration;
 import org.eclipse.xtext.common.types.JvmAnnotationType;
 import org.eclipse.xtext.common.types.JvmConstructor;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmEnumerationType;
 import org.eclipse.xtext.common.types.JvmField;
+import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.xbase.jvmmodel.IJvmModelAssociations;
@@ -59,6 +61,8 @@ public interface IXtendJvmAssociations extends IJvmModelAssociations {
 	JvmOperation getDispatchOperation(XtendFunction dispatchFunction);
 	
 	JvmField getJvmField(XtendField field);
+	
+	JvmFormalParameter getJvmParameter(XtendParameter parameter);
 	
 	XtendClass getXtendClass(JvmGenericType jvmType);
 	
@@ -167,6 +171,10 @@ public interface IXtendJvmAssociations extends IJvmModelAssociations {
 
 		public JvmField getJvmField(XtendField field) {
 			return getFirstOrNull(getJvmElements(field), JvmField.class);
+		}
+		
+		public JvmFormalParameter getJvmParameter(XtendParameter parameter) {
+			return getFirstOrNull(getJvmElements(parameter), JvmFormalParameter.class);
 		}
 
 		public XtendField getXtendField(JvmField jvmField) {

@@ -88,6 +88,8 @@ public class XtendFactoryImpl extends EFactoryImpl implements XtendFactory
 			case XtendPackage.XTEND_INTERFACE: return createXtendInterface();
 			case XtendPackage.XTEND_ENUM: return createXtendEnum();
 			case XtendPackage.XTEND_ENUM_LITERAL: return createXtendEnumLiteral();
+			case XtendPackage.XTEND_VARIABLE_DECLARATION: return createXtendVariableDeclaration();
+			case XtendPackage.XTEND_FORMAL_PARAMETER: return createXtendFormalParameter();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -289,6 +291,28 @@ public class XtendFactoryImpl extends EFactoryImpl implements XtendFactory
 	{
 		XtendEnumLiteralImplCustom xtendEnumLiteral = new XtendEnumLiteralImplCustom();
 		return xtendEnumLiteral;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public XtendVariableDeclaration createXtendVariableDeclaration()
+	{
+		XtendVariableDeclarationImpl xtendVariableDeclaration = new XtendVariableDeclarationImpl();
+		return xtendVariableDeclaration;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public XtendFormalParameter createXtendFormalParameter()
+	{
+		XtendFormalParameterImpl xtendFormalParameter = new XtendFormalParameterImpl();
+		return xtendFormalParameter;
 	}
 
 	/**

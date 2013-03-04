@@ -47,8 +47,10 @@ import com.google.inject.Injector;
 
 public class ContentAssistTest extends AbstractXbaseContentAssistInBlockTest implements IJavaProjectProvider {
 	
-	private static IProject project;
+	protected static String[] VARIABLE_DECL = {"val", "var", "extension"};
 
+	private static IProject project;
+	
 	@BeforeClass
 	public static void setUpProject() throws Exception {
 		project = createPluginProject(PROJECT_NAME);
@@ -58,6 +60,11 @@ public class ContentAssistTest extends AbstractXbaseContentAssistInBlockTest imp
 	public static void tearDownProject() throws Exception {
 		WorkbenchTestHelper.deleteProject(project);
 		project = null;
+	}
+	
+	@Override
+	protected String[] getVariableDeclarationKeywords() {
+		return VARIABLE_DECL;
 	}
 	
 	@Override
@@ -77,7 +84,7 @@ public class ContentAssistTest extends AbstractXbaseContentAssistInBlockTest imp
 	@Test public void testOnStringLiteral_37() throws Exception {
 		super.testOnStringLiteral_37();
 	}
-
+	
 	// all these test cases declared a local variable 'this' which is not allowed in Xtend
 	@Override
 	@Test public void testForLoop_06() throws Exception {

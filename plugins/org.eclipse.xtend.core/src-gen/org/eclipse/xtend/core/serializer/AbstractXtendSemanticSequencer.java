@@ -17,13 +17,14 @@ import org.eclipse.xtend.core.xtend.XtendEnum;
 import org.eclipse.xtend.core.xtend.XtendEnumLiteral;
 import org.eclipse.xtend.core.xtend.XtendField;
 import org.eclipse.xtend.core.xtend.XtendFile;
+import org.eclipse.xtend.core.xtend.XtendFormalParameter;
 import org.eclipse.xtend.core.xtend.XtendFunction;
 import org.eclipse.xtend.core.xtend.XtendInterface;
 import org.eclipse.xtend.core.xtend.XtendMember;
 import org.eclipse.xtend.core.xtend.XtendPackage;
 import org.eclipse.xtend.core.xtend.XtendParameter;
 import org.eclipse.xtend.core.xtend.XtendTypeDeclaration;
-import org.eclipse.xtext.common.types.JvmFormalParameter;
+import org.eclipse.xtend.core.xtend.XtendVariableDeclaration;
 import org.eclipse.xtext.common.types.JvmGenericArrayTypeReference;
 import org.eclipse.xtext.common.types.JvmLowerBound;
 import org.eclipse.xtext.common.types.JvmParameterizedTypeReference;
@@ -66,7 +67,6 @@ import org.eclipse.xtext.xbase.XThrowExpression;
 import org.eclipse.xtext.xbase.XTryCatchFinallyExpression;
 import org.eclipse.xtext.xbase.XTypeLiteral;
 import org.eclipse.xtext.xbase.XUnaryOperation;
-import org.eclipse.xtext.xbase.XVariableDeclaration;
 import org.eclipse.xtext.xbase.XWhileExpression;
 import org.eclipse.xtext.xbase.XbasePackage;
 import org.eclipse.xtext.xbase.annotations.serializer.XbaseWithAnnotationsSemanticSequencer;
@@ -87,16 +87,6 @@ public abstract class AbstractXtendSemanticSequencer extends XbaseWithAnnotation
 	
 	public void createSequence(EObject context, EObject semanticObject) {
 		if(semanticObject.eClass().getEPackage() == TypesPackage.eINSTANCE) switch(semanticObject.eClass().getClassifierID()) {
-			case TypesPackage.JVM_FORMAL_PARAMETER:
-				if(context == grammarAccess.getFullJvmFormalParameterRule()) {
-					sequence_FullJvmFormalParameter(context, (JvmFormalParameter) semanticObject); 
-					return; 
-				}
-				else if(context == grammarAccess.getJvmFormalParameterRule()) {
-					sequence_JvmFormalParameter(context, (JvmFormalParameter) semanticObject); 
-					return; 
-				}
-				else break;
 			case TypesPackage.JVM_GENERIC_ARRAY_TYPE_REFERENCE:
 				if(context == grammarAccess.getJvmArgumentTypeReferenceRule() ||
 				   context == grammarAccess.getJvmTypeReferenceRule() ||
@@ -1033,14 +1023,6 @@ public abstract class AbstractXtendSemanticSequencer extends XbaseWithAnnotation
 					return; 
 				}
 				else break;
-			case XbasePackage.XVARIABLE_DECLARATION:
-				if(context == grammarAccess.getRichStringPartRule() ||
-				   context == grammarAccess.getXExpressionInsideBlockRule() ||
-				   context == grammarAccess.getXVariableDeclarationRule()) {
-					sequence_XVariableDeclaration(context, (XVariableDeclaration) semanticObject); 
-					return; 
-				}
-				else break;
 			case XbasePackage.XWHILE_EXPRESSION:
 				if(context == grammarAccess.getRichStringPartRule() ||
 				   context == grammarAccess.getXAdditiveExpressionRule() ||
@@ -1210,6 +1192,16 @@ public abstract class AbstractXtendSemanticSequencer extends XbaseWithAnnotation
 					return; 
 				}
 				else break;
+			case XtendPackage.XTEND_FORMAL_PARAMETER:
+				if(context == grammarAccess.getFullJvmFormalParameterRule()) {
+					sequence_FullJvmFormalParameter(context, (XtendFormalParameter) semanticObject); 
+					return; 
+				}
+				else if(context == grammarAccess.getJvmFormalParameterRule()) {
+					sequence_JvmFormalParameter(context, (XtendFormalParameter) semanticObject); 
+					return; 
+				}
+				else break;
 			case XtendPackage.XTEND_FUNCTION:
 				if(context == grammarAccess.getMemberRule()) {
 					sequence_Member(context, (XtendFunction) semanticObject); 
@@ -1242,6 +1234,14 @@ public abstract class AbstractXtendSemanticSequencer extends XbaseWithAnnotation
 				   context == grammarAccess.getTypeAccess().getXtendEnumAnnotationInfoAction_2_2_0() ||
 				   context == grammarAccess.getTypeAccess().getXtendInterfaceAnnotationInfoAction_2_1_0()) {
 					sequence_Type_XtendAnnotationType_2_3_0_XtendClass_2_0_0_XtendEnum_2_2_0_XtendInterface_2_1_0(context, (XtendTypeDeclaration) semanticObject); 
+					return; 
+				}
+				else break;
+			case XtendPackage.XTEND_VARIABLE_DECLARATION:
+				if(context == grammarAccess.getRichStringPartRule() ||
+				   context == grammarAccess.getXExpressionInsideBlockRule() ||
+				   context == grammarAccess.getXVariableDeclarationRule()) {
+					sequence_XVariableDeclaration(context, (XtendVariableDeclaration) semanticObject); 
 					return; 
 				}
 				else break;
@@ -1305,9 +1305,27 @@ public abstract class AbstractXtendSemanticSequencer extends XbaseWithAnnotation
 	
 	/**
 	 * Constraint:
+	 *     (extension?='extension'? parameterType=JvmTypeReference name=ValidID)
+	 */
+	protected void sequence_FullJvmFormalParameter(EObject context, XtendFormalParameter semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Constraint:
 	 *     (expressions+=RichStringLiteralInbetween (expressions+=RichStringPart? expressions+=RichStringLiteralInbetween)*)
 	 */
 	protected void sequence_InternalRichString(EObject context, RichString semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Constraint:
+	 *     (extension?='extension'? parameterType=JvmTypeReference? name=ValidID)
+	 */
+	protected void sequence_JvmFormalParameter(EObject context, XtendFormalParameter semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	
@@ -1424,7 +1442,7 @@ public abstract class AbstractXtendSemanticSequencer extends XbaseWithAnnotation
 	
 	/**
 	 * Constraint:
-	 *     (annotations+=XAnnotation* parameterType=JvmTypeReference varArg?='...'? name=ValidID)
+	 *     (annotations+=XAnnotation* (extension?='extension' annotations+=XAnnotation*)? parameterType=JvmTypeReference varArg?='...'? name=ValidID)
 	 */
 	protected void sequence_Parameter(EObject context, XtendParameter semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -1619,6 +1637,19 @@ public abstract class AbstractXtendSemanticSequencer extends XbaseWithAnnotation
 	 *     )
 	 */
 	protected void sequence_Type(EObject context, XtendInterface semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Constraint:
+	 *     (
+	 *         ((writeable?='var'? extension?='extension'?) | (extension?='extension' writeable?='var'?)) 
+	 *         ((type=JvmTypeReference name=ValidID) | name=ValidID) 
+	 *         right=XExpression?
+	 *     )
+	 */
+	protected void sequence_XVariableDeclaration(EObject context, XtendVariableDeclaration semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	
