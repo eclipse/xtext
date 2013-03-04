@@ -215,10 +215,11 @@ public class XtendJavaValidator extends XbaseWithAnnotationsJavaValidator {
 
 	@Check
 	public void checkAnnotationTarget(XAnnotation annotation) {
-		JvmAnnotationType annotationType = annotation.getAnnotationType();
-		if (annotationType == null)
+		JvmType annotationType = annotation.getAnnotationType();
+		if (annotationType == null || annotationType.eIsProxy() || !(annotationType instanceof JvmAnnotationType)) {
 			return;
-		Set<ElementType> targets = annotationUtil.getAnnotationTargets(annotationType);
+		}
+		Set<ElementType> targets = annotationUtil.getAnnotationTargets((JvmAnnotationType) annotationType);
 		if (targets.isEmpty())
 			return;
 		final EObject eContainer = getContainingAnnotationTarget(annotation);

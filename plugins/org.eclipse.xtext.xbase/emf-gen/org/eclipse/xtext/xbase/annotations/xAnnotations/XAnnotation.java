@@ -9,7 +9,7 @@ package org.eclipse.xtext.xbase.annotations.xAnnotations;
 
 import org.eclipse.emf.common.util.EList;
 
-import org.eclipse.xtext.common.types.JvmAnnotationType;
+import org.eclipse.xtext.common.types.JvmType;
 
 import org.eclipse.xtext.xbase.XExpression;
 
@@ -58,12 +58,12 @@ public interface XAnnotation extends XExpression
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Annotation Type</em>' reference.
-	 * @see #setAnnotationType(JvmAnnotationType)
+	 * @see #setAnnotationType(JvmType)
 	 * @see org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotationsPackage#getXAnnotation_AnnotationType()
 	 * @model
 	 * @generated
 	 */
-	JvmAnnotationType getAnnotationType();
+	JvmType getAnnotationType();
 
 	/**
 	 * Sets the value of the '{@link org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotation#getAnnotationType <em>Annotation Type</em>}' reference.
@@ -73,7 +73,7 @@ public interface XAnnotation extends XExpression
 	 * @see #getAnnotationType()
 	 * @generated
 	 */
-	void setAnnotationType(JvmAnnotationType value);
+	void setAnnotationType(JvmType value);
 
 	/**
 	 * Returns the value of the '<em><b>Value</b></em>' containment reference.

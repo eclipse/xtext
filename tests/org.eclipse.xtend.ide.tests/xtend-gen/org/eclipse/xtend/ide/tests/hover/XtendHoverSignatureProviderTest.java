@@ -18,7 +18,6 @@ import org.eclipse.xtend.ide.hover.XtendHoverSignatureProvider;
 import org.eclipse.xtend.ide.tests.AbstractXtendUITestCase;
 import org.eclipse.xtend.ide.tests.WorkbenchTestHelper;
 import org.eclipse.xtend2.lib.StringConcatenation;
-import org.eclipse.xtext.common.types.JvmAnnotationType;
 import org.eclipse.xtext.common.types.JvmConstructor;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
@@ -752,7 +751,7 @@ public class XtendHoverSignatureProviderTest extends AbstractXtendUITestCase {
       XtendTypeDeclaration _head = IterableExtensions.<XtendTypeDeclaration>head(_xtendTypes);
       EList<XAnnotation> _annotations = ((XtendClass) _head).getAnnotations();
       XAnnotation _head_1 = IterableExtensions.<XAnnotation>head(_annotations);
-      final JvmAnnotationType in = _head_1.getAnnotationType();
+      final JvmType in = _head_1.getAnnotationType();
       String _signature = this.signatureProvider.getSignature(in);
       Assert.assertEquals("Foo", _signature);
     } catch (Throwable _e) {

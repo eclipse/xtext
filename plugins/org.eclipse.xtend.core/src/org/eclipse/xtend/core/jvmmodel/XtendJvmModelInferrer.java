@@ -755,7 +755,8 @@ public class XtendJvmModelInferrer implements IJvmModelInferrer {
 		public boolean apply(@Nullable XAnnotation annotation) {
 			if (annotation == null || annotation.getAnnotationType() == null)
 				return false;
-			if (DisableCodeGenerationAdapter.isDisabled(annotation.getAnnotationType()))
+			JvmType annotationType = annotation.getAnnotationType();
+			if (annotationType instanceof JvmAnnotationType && DisableCodeGenerationAdapter.isDisabled((JvmDeclaredType) annotationType))
 				return false;
 			return true;
 		}

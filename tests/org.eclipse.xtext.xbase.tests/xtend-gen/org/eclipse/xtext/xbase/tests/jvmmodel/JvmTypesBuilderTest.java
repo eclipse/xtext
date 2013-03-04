@@ -78,7 +78,7 @@ public class JvmTypesBuilderTest extends AbstractXbaseTestCase {
       final JvmGenericType type = this.typesFactory.createJvmGenericType();
       ArrayList<XAnnotation> _newArrayList = CollectionLiterals.<XAnnotation>newArrayList(anno);
       this._jvmTypesBuilder.translateAnnotationsTo(_newArrayList, type);
-      JvmAnnotationType _annotationType = anno.getAnnotationType();
+      JvmType _annotationType = anno.getAnnotationType();
       EList<JvmAnnotationReference> _annotations = type.getAnnotations();
       JvmAnnotationReference _head = IterableExtensions.<JvmAnnotationReference>head(_annotations);
       JvmAnnotationType _annotation = _head.getAnnotation();
@@ -100,7 +100,7 @@ public class JvmTypesBuilderTest extends AbstractXbaseTestCase {
       final JvmGenericType type = this.typesFactory.createJvmGenericType();
       ArrayList<XAnnotation> _newArrayList = CollectionLiterals.<XAnnotation>newArrayList(anno);
       this._jvmTypesBuilder.translateAnnotationsTo(_newArrayList, type);
-      JvmAnnotationType _annotationType = anno.getAnnotationType();
+      JvmType _annotationType = anno.getAnnotationType();
       EList<JvmAnnotationReference> _annotations = type.getAnnotations();
       JvmAnnotationReference _head = IterableExtensions.<JvmAnnotationReference>head(_annotations);
       JvmAnnotationType _annotation = _head.getAnnotation();
@@ -129,7 +129,7 @@ public class JvmTypesBuilderTest extends AbstractXbaseTestCase {
       final JvmGenericType type = this.typesFactory.createJvmGenericType();
       ArrayList<XAnnotation> _newArrayList = CollectionLiterals.<XAnnotation>newArrayList(anno);
       this._jvmTypesBuilder.translateAnnotationsTo(_newArrayList, type);
-      JvmAnnotationType _annotationType = anno.getAnnotationType();
+      JvmType _annotationType = anno.getAnnotationType();
       EList<JvmAnnotationReference> _annotations = type.getAnnotations();
       JvmAnnotationReference _head = IterableExtensions.<JvmAnnotationReference>head(_annotations);
       JvmAnnotationType _annotation = _head.getAnnotation();
@@ -166,7 +166,7 @@ public class JvmTypesBuilderTest extends AbstractXbaseTestCase {
       final JvmGenericType type = this.typesFactory.createJvmGenericType();
       ArrayList<XAnnotation> _newArrayList = CollectionLiterals.<XAnnotation>newArrayList(anno);
       this._jvmTypesBuilder.translateAnnotationsTo(_newArrayList, type);
-      JvmAnnotationType _annotationType = anno.getAnnotationType();
+      JvmType _annotationType = anno.getAnnotationType();
       EList<JvmAnnotationReference> _annotations = type.getAnnotations();
       JvmAnnotationReference _head = IterableExtensions.<JvmAnnotationReference>head(_annotations);
       JvmAnnotationType _annotation = _head.getAnnotation();
@@ -201,7 +201,7 @@ public class JvmTypesBuilderTest extends AbstractXbaseTestCase {
       final JvmGenericType type = this.typesFactory.createJvmGenericType();
       ArrayList<XAnnotation> _newArrayList = CollectionLiterals.<XAnnotation>newArrayList(anno);
       this._jvmTypesBuilder.translateAnnotationsTo(_newArrayList, type);
-      JvmAnnotationType _annotationType = anno.getAnnotationType();
+      JvmType _annotationType = anno.getAnnotationType();
       EList<JvmAnnotationReference> _annotations = type.getAnnotations();
       JvmAnnotationReference _head_1 = IterableExtensions.<JvmAnnotationReference>head(_annotations);
       JvmAnnotationType _annotation = _head_1.getAnnotation();
@@ -243,7 +243,7 @@ public class JvmTypesBuilderTest extends AbstractXbaseTestCase {
       final JvmGenericType type = this.typesFactory.createJvmGenericType();
       ArrayList<XAnnotation> _newArrayList = CollectionLiterals.<XAnnotation>newArrayList(anno);
       this._jvmTypesBuilder.translateAnnotationsTo(_newArrayList, type);
-      JvmAnnotationType _annotationType = anno.getAnnotationType();
+      JvmType _annotationType = anno.getAnnotationType();
       EList<JvmAnnotationReference> _annotations = type.getAnnotations();
       JvmAnnotationReference _head = IterableExtensions.<JvmAnnotationReference>head(_annotations);
       JvmAnnotationType _annotation = _head.getAnnotation();
@@ -281,7 +281,7 @@ public class JvmTypesBuilderTest extends AbstractXbaseTestCase {
       final JvmGenericType type = this.typesFactory.createJvmGenericType();
       ArrayList<XAnnotation> _newArrayList = CollectionLiterals.<XAnnotation>newArrayList(anno);
       this._jvmTypesBuilder.translateAnnotationsTo(_newArrayList, type);
-      JvmAnnotationType _annotationType = anno.getAnnotationType();
+      JvmType _annotationType = anno.getAnnotationType();
       EList<JvmAnnotationReference> _annotations = type.getAnnotations();
       JvmAnnotationReference _head = IterableExtensions.<JvmAnnotationReference>head(_annotations);
       JvmAnnotationType _annotation = _head.getAnnotation();
