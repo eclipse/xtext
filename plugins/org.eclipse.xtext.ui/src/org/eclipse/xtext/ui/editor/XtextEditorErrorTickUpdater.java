@@ -42,21 +42,17 @@ public class XtextEditorErrorTickUpdater extends IXtextEditorCallback.NullImpl i
 	@Inject
 	private IssueUtil issueUtil;
 	private Image defaultImage;
-	private Severity previousSeverity = null;
 	private XtextEditor editor;
 	private IAnnotationModel annotationModel;
-	private UpdateEditorImageJob updateEditorImageJob;
 
 	@Override
 	public void beforeDispose(XtextEditor xtextEditor) {
 		unregisterListener();
-		if (updateEditorImageJob != null) {
-			updateEditorImageJob.cancel();
-		}
 		if (this.editor != null) {
 			if (defaultImage != null && !defaultImage.isDisposed())
 				editor.updatedTitleImage(defaultImage); // otherwise we'll leak the defaultImage
 			this.editor = null;
+			this.defaultImage = null;
 		}
 	}
 
@@ -91,18 +87,12 @@ public class XtextEditorErrorTickUpdater extends IXtextEditorCallback.NullImpl i
 
 	protected void updateEditorImage(XtextEditor xtextEditor) {
 		Severity severity = getSeverity(xtextEditor);
-		if (severity == previousSeverity)
-			return;
-		previousSeverity = severity;
 		if (severity != null && severity != Severity.INFO) {
 			ImageDescriptor descriptor = severity == Severity.ERROR ? XtextPluginImages.DESC_OVR_ERROR
 					: XtextPluginImages.DESC_OVR_WARNING;
 			DecorationOverlayIcon decorationOverlayIcon = new DecorationOverlayIcon(defaultImage, descriptor,
 					IDecoration.BOTTOM_LEFT);
-			Image decoratedImage = imageHelper.getImage(decorationOverlayIcon);
-			if (xtextEditor.getTitleImage() != decoratedImage) {
-				scheduleUpdateEditorJob(decoratedImage);
-			}
+			scheduleUpdateEditorJob(decorationOverlayIcon);
 		} else {
 			scheduleUpdateEditorJob(defaultImage);
 		}
@@ -140,12 +130,16 @@ public class XtextEditorErrorTickUpdater extends IXtextEditorCallback.NullImpl i
 		return null;
 	}
 
+	/**
+	 * @since 2.4
+	 */
+	public void scheduleUpdateEditorJob(final ImageDescriptor imageDescriptor) {
+		UpdateEditorImageJob job = createUpdateEditorImageJob();
+		job.scheduleFor(imageDescriptor);
+	}
+	
 	public void scheduleUpdateEditorJob(final Image image) {
-		UpdateEditorImageJob job = updateEditorImageJob;
-		if (job == null) {
-			job = createUpdateEditorImageJob();
-			updateEditorImageJob = job;
-		}
+		UpdateEditorImageJob job = createUpdateEditorImageJob();
 		job.scheduleFor(image);
 	}
 
@@ -160,6 +154,7 @@ public class XtextEditorErrorTickUpdater extends IXtextEditorCallback.NullImpl i
 
 	protected class UpdateEditorImageJob extends UIJob {
 		private volatile Image titleImage;
+		private volatile ImageDescriptor titleImageDescription;
 
 		public UpdateEditorImageJob(ISchedulingRule schedulingRule) {
 			super(Messages.XtextEditorErrorTickUpdater_JobName);
@@ -170,18 +165,34 @@ public class XtextEditorErrorTickUpdater extends IXtextEditorCallback.NullImpl i
 		public IStatus runInUIThread(final IProgressMonitor monitor) {
 			IEditorSite site = null != editor ? editor.getEditorSite() : null;
 			if (site != null) {
-				if (!monitor.isCanceled() && titleImage != null && !titleImage.isDisposed()
-					&& editor != null) {
-					editor.updatedTitleImage(titleImage);
+				if (!monitor.isCanceled() && editor != null) {
+					if (titleImage != null && !titleImage.isDisposed()) {
+						editor.updatedTitleImage(titleImage);
+						titleImage = null;
+					} else if (titleImageDescription != null) {
+						Image image = imageHelper.getImage(titleImageDescription);
+						if (editor.getTitleImage() != image) {
+							editor.updatedTitleImage(image);
+						}
+						titleImageDescription = null;
+					}
 				}
 			}
 			return Status.OK_STATUS;
 		}
 
 		protected void scheduleFor(Image image) {
-			cancel();
 			this.titleImage = image;
 			schedule();
 		}
+
+		/**
+		 * @since 2.4
+		 */
+		protected void scheduleFor(ImageDescriptor imageDescription) {
+			this.titleImageDescription = imageDescription;
+			schedule();
+		}
+
 	}
 }
