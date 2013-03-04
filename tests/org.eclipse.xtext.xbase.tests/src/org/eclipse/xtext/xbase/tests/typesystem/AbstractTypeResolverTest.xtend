@@ -1374,6 +1374,10 @@ abstract class AbstractTypeResolverTest<Reference> extends AbstractXbaseTestCase
 		"if (true) null as int[] else null as Iterable<Integer>".resolvesTo("Object")
 	}
 	
+	@Test def void testIfExpression_32() throws Exception {
+		"if (true) while(false) ''.toString else 'myString'".resolvesTo("String")
+	}
+	
 	@Test def void testSwitchExpression() throws Exception {
 		"switch true { case true : 's' case false : 'foo' default: 'bar'}".resolvesTo("String")
 		"switch true { case true : 's' case false : new Object() default: 'bar'}".resolvesTo("Object")

@@ -23,6 +23,74 @@ class XtendCompilerTest extends AbstractXtendTestCase {
 	@Inject IGeneratorConfigProvider generatorConfigProvider
 	
 	@Test
+	def testBugReturnInLoop_01() {
+		assertCompilesTo('''
+			class C {
+				def String m(String s) {
+					while(true) {
+						try {
+							return "string"
+						} catch(Exception e) {
+							return "string"
+						}
+					}
+			    }
+			}
+		''', '''
+			import org.eclipse.xtext.xbase.lib.Exceptions;
+			
+			@SuppressWarnings("all")
+			public class C {
+			  public String m(final String s) {
+			    boolean _while = true;
+			    while (_while) {
+			      try {
+			        return "string";
+			      } catch (final Throwable _t) {
+			        if (_t instanceof Exception) {
+			          final Exception e = (Exception)_t;
+			          return "string";
+			        } else {
+			          throw Exceptions.sneakyThrow(_t);
+			        }
+			      }
+			      
+			    }
+			    return null;
+			  }
+			}
+		''')
+	}
+	
+	@Test
+	def testBugReturnInLoop_02() {
+		assertCompilesTo('''
+			class C {
+				def String m(String s) {
+					while(true) {
+						if(true)
+							return "string"
+					}
+			    }
+			}
+		''', '''
+			@SuppressWarnings("all")
+			public class C {
+			  public String m(final String s) {
+			    boolean _while = true;
+			    while (_while) {
+			      if (true) {
+			        return "string";
+			      }
+			      _while = true;
+			    }
+			    return null;
+			  }
+			}
+		''')
+	}
+	
+	@Test
 	def testBug386110() {
 		assertCompilesTo('''
 			import com.google.common.util.concurrent.ListenableFuture

@@ -25,7 +25,16 @@ import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.util.IAcceptor;
 import org.eclipse.xtext.validation.EObjectDiagnosticImpl;
 import org.eclipse.xtext.validation.IssueSeverities;
+import org.eclipse.xtext.xbase.XAbstractWhileExpression;
+import org.eclipse.xtext.xbase.XBlockExpression;
+import org.eclipse.xtext.xbase.XCatchClause;
 import org.eclipse.xtext.xbase.XExpression;
+import org.eclipse.xtext.xbase.XForLoopExpression;
+import org.eclipse.xtext.xbase.XIfExpression;
+import org.eclipse.xtext.xbase.XReturnExpression;
+import org.eclipse.xtext.xbase.XThrowExpression;
+import org.eclipse.xtext.xbase.XTryCatchFinallyExpression;
+import org.eclipse.xtext.xbase.XWhileExpression;
 import org.eclipse.xtext.xbase.XbasePackage;
 import org.eclipse.xtext.xbase.typesystem.computation.ILinkingCandidate;
 import org.eclipse.xtext.xbase.typesystem.computation.ITypeExpectation;
@@ -138,6 +147,9 @@ public class RootResolvedTypes extends ResolvedTypes {
 			LightweightTypeReference actualType = typeData.getActualType();
 			ITypeExpectation expectation = typeData.getExpectation();
 			if (!typeData.getConformanceHints().contains(ConformanceHint.NO_IMPLICIT_RETURN)) {
+				if (actualType.isPrimitiveVoid() && isIntendentionalEarlyExit(expression)) {
+					return;
+				}
 				LightweightTypeReference expectedType = expectation.getExpectedType();
 				if (expectedType != null) {
 					if (!expectedType.isPrimitiveVoid()) {
@@ -157,6 +169,49 @@ public class RootResolvedTypes extends ResolvedTypes {
 		}
 	}
 
+	// TODO discuss / improve
+	/**
+	 * Returns <code>true</code> for expressions that seem to be early exit expressions, e.g.
+	 * <pre>
+	 *   while(condition) {
+	 *     if (anotherCondition)
+	 *       return value
+	 *     changeResultOfFirstCondition
+	 *   }
+	 * </pre>
+	 */
+	protected boolean isIntendentionalEarlyExit(@Nullable XExpression expression) {
+		if (expression == null) {
+			return true;
+		}
+		if (expression instanceof XBlockExpression) {
+			XBlockExpression block = (XBlockExpression) expression;
+			List<XExpression> children = block.getExpressions();
+			for(XExpression child: children) {
+				if (isIntendentionalEarlyExit(child)) {
+					return true;
+				}
+			}
+		} else if (expression instanceof XIfExpression) {
+			return isIntendentionalEarlyExit(((XIfExpression) expression).getThen()) && isIntendentionalEarlyExit(((XIfExpression) expression).getElse());
+		} else if (expression instanceof XTryCatchFinallyExpression) {
+			XTryCatchFinallyExpression tryCatchFinally = (XTryCatchFinallyExpression) expression;
+			if (isIntendentionalEarlyExit(tryCatchFinally.getExpression())) {
+				for(XCatchClause catchClause: tryCatchFinally.getCatchClauses()) {
+					if (!isIntendentionalEarlyExit(catchClause.getExpression()))
+						return false;
+				}
+				return true;
+			}
+			return false;
+		} else if (expression instanceof XAbstractWhileExpression) {
+			return isIntendentionalEarlyExit(((XAbstractWhileExpression) expression).getBody());
+		} else if (expression instanceof XForLoopExpression) {
+			return isIntendentionalEarlyExit(((XForLoopExpression) expression).getEachExpression());
+		}
+		return expression instanceof XReturnExpression || expression instanceof XThrowExpression;
+	}
+	
 	protected AbstractDiagnostic createTypeDiagnostic(XExpression expression, LightweightTypeReference actualType, LightweightTypeReference expectedType) {
 		if (!expectedType.isAny()) {
 			if (expression.eContainingFeature() == XbasePackage.Literals.XABSTRACT_FEATURE_CALL__IMPLICIT_FIRST_ARGUMENT) {
