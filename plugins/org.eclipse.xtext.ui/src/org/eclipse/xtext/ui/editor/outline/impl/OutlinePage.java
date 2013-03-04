@@ -101,19 +101,13 @@ public class OutlinePage extends ContentOutlinePage implements ISourceViewerAwar
 		treeViewer.setUseHashlookup(true);
 		// access EMF's image registry now, since it needs a UI-thread.
 		ExtendedImageRegistry.getInstance();
-		new Job("Initializing Outline") {
-			@Override
-			protected IStatus run(IProgressMonitor monitor) {
-				List<IOutlineNode> initiallyExpandedNodes = xtextDocument
-						.readOnly(new IUnitOfWork<List<IOutlineNode>, XtextResource>() {
-							public List<IOutlineNode> exec(XtextResource resource) throws Exception {
-								return getInitiallyExpandedNodes();
-							}
-						});
-				refreshViewer(initiallyExpandedNodes.get(0), initiallyExpandedNodes, Collections.<IOutlineNode> emptySet());
-				return Status.OK_STATUS;
-			}
-		}.schedule();
+		List<IOutlineNode> initiallyExpandedNodes = xtextDocument
+				.readOnly(new IUnitOfWork<List<IOutlineNode>, XtextResource>() {
+					public List<IOutlineNode> exec(XtextResource resource) throws Exception {
+						return getInitiallyExpandedNodes();
+					}
+				});
+		refreshViewer(initiallyExpandedNodes.get(0), initiallyExpandedNodes, Collections.<IOutlineNode> emptySet());
 	}
 
 	protected List<IOutlineNode> getInitiallyExpandedNodes() {
