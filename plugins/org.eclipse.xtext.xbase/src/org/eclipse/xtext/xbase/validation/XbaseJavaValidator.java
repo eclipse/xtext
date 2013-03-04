@@ -164,24 +164,6 @@ public class XbaseJavaValidator extends AbstractXbaseJavaValidator {
 		return services;
 	}
 	
-	protected boolean isDefiniteEarlyExit(XExpression expression) {
-		if (expression == null) {
-			return true;
-		}
-		if (expression instanceof XBlockExpression) {
-			XBlockExpression block = (XBlockExpression) expression;
-			List<XExpression> children = block.getExpressions();
-			for(XExpression child: children) {
-				if (isDefiniteEarlyExit(child)) {
-					return true;
-				}
-			}
-		} else if (expression instanceof XIfExpression) {
-			return isDefiniteEarlyExit(((XIfExpression) expression).getThen()) && isDefiniteEarlyExit(((XIfExpression) expression).getElse());
-		}
-		return expression instanceof XReturnExpression || expression instanceof XThrowExpression;
-	}
-	
 	protected LightweightTypeReference getActualType(EObject context, JvmIdentifiableElement element) {
 		return typeResolver.resolveTypes(context).getActualType(element);
 	}
