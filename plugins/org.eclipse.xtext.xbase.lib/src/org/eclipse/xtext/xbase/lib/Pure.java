@@ -7,6 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.lib;
 
+import java.lang.annotation.Documented;
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
@@ -30,6 +31,7 @@ import com.google.common.annotations.GwtCompatible;
 @Target({
     ElementType.CONSTRUCTOR,
     ElementType.METHOD})
+@Documented
 @Beta
 @GwtCompatible public @interface Pure {
 

@@ -190,7 +190,51 @@ ruleFeatureCallID :
 
 // Rule Parameter
 ruleParameter :
-	ruleXAnnotation* ruleJvmTypeReference '...'? ruleValidID
+	ruleXAnnotation* (
+		'extension' ruleXAnnotation*
+	)? ruleJvmTypeReference '...'? ruleValidID
+;
+
+// Rule XVariableDeclaration
+ruleXVariableDeclaration :
+	( (
+	(
+		'var' |
+		'val'
+	) 'extension'? |
+	'extension' (
+		'var' |
+		'val'
+	)
+	) => (
+		(
+			'var' |
+			'val'
+		) 'extension'? |
+		'extension' (
+			'var' |
+			'val'
+		)
+	) ) (
+		( (
+		ruleJvmTypeReference ruleValidID
+		) => (
+			ruleJvmTypeReference ruleValidID
+		) ) |
+		ruleValidID
+	) (
+		'=' ruleXExpression
+	)?
+;
+
+// Rule JvmFormalParameter
+ruleJvmFormalParameter :
+	'extension'? ruleJvmTypeReference? ruleValidID
+;
+
+// Rule FullJvmFormalParameter
+ruleFullJvmFormalParameter :
+	'extension'? ruleJvmTypeReference ruleValidID
 ;
 
 // Rule XStringLiteral
@@ -696,35 +740,17 @@ ruleXBlockExpression :
 
 // Rule XExpressionInsideBlock
 ruleXExpressionInsideBlock :
-	ruleXVariableDeclaration |
-	ruleXExpression
-;
-
-// Rule XVariableDeclaration
-ruleXVariableDeclaration :
+	( (
 	(
 		'var' |
 		'val'
-	) (
-		( (
-		ruleJvmTypeReference ruleValidID
-		) => (
-			ruleJvmTypeReference ruleValidID
-		) ) |
-		ruleValidID
-	) (
-		'=' ruleXExpression
-	)?
-;
-
-// Rule JvmFormalParameter
-ruleJvmFormalParameter :
-	ruleJvmTypeReference? ruleValidID
-;
-
-// Rule FullJvmFormalParameter
-ruleFullJvmFormalParameter :
-	ruleJvmTypeReference ruleValidID
+	) 'extension'? |
+	'extension' (
+		'var' |
+		'val'
+	)
+	) => ruleXVariableDeclaration ) |
+	ruleXExpression
 ;
 
 // Rule XFeatureCall
