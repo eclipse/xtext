@@ -11,6 +11,7 @@ import java.util.List;
 
 import org.eclipse.xtend.lib.macro.declaration.MutableNamedElement;
 import org.eclipse.xtend.lib.macro.declaration.TypeReference;
+import org.eclipse.xtext.xbase.lib.Extension;
 
 import com.google.common.annotations.Beta;
 
@@ -31,8 +32,8 @@ public interface TransformationParticipant<T extends MutableNamedElement> {
 	/**
 	 * Invoked by the compiler 
 	 * 
-	 * @param annotatedTargetElements - the mutable java representation of the annotated elements
-	 * @param context - a {@link TransformationContext} providing useful services.
+	 * @param annotatedTargetElements the mutable java representation of the annotated elements
+	 * @param context a {@link TransformationContext} providing useful services.
 	 */
-	void doTransform(List<? extends T> annotatedTargetElements, TransformationContext context);
+	void doTransform(List<? extends T> annotatedTargetElements, @Extension TransformationContext context);
 }

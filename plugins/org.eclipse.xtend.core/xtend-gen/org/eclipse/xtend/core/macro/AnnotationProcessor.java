@@ -64,10 +64,10 @@ public class AnnotationProcessor {
             _matched=true;
             Object _xblockexpression_1 = null;
             {
-              final RegisterGlobalsContextImpl registerGloablsCtx = this.registerGlobalsContextProvider.get();
-              registerGloablsCtx.setAcceptor(acceptor);
+              final RegisterGlobalsContextImpl registerGlobalsCtx = this.registerGlobalsContextProvider.get();
+              registerGlobalsCtx.setAcceptor(acceptor);
               CompilationUnitImpl _compilationUnit = ctx.getCompilationUnit();
-              registerGloablsCtx.setCompilationUnit(_compilationUnit);
+              registerGlobalsCtx.setCompilationUnit(_compilationUnit);
               final Runnable _function = new Runnable() {
                   public void run() {
                     List<XtendAnnotationTarget> _annotatedSourceElements = ctx.getAnnotatedSourceElements();
@@ -79,7 +79,7 @@ public class AnnotationProcessor {
                         }
                       };
                     List<XtendMemberDeclarationImpl<? extends XtendMember>> _map = ListExtensions.<XtendAnnotationTarget, XtendMemberDeclarationImpl<? extends XtendMember>>map(_annotatedSourceElements, _function);
-                    _registerGlobalsParticipant.doRegisterGlobals(_map, registerGloablsCtx);
+                    _registerGlobalsParticipant.doRegisterGlobals(_map, registerGlobalsCtx);
                   }
                 };
               Object _runWithCancelIndiciator = this.runWithCancelIndiciator(ctx, monitor, _function);
