@@ -26,7 +26,8 @@ public class ScenarioBug395002 {
 	
 	<A extends SelfBound<?,A>> void foo3(A arg3) {
         SelfBound<?, A> var3 = arg3;
-        SelfBound<? extends SelfBound<?, A>, ?> var4 = var3;
+        @SuppressWarnings("unused")
+		SelfBound<? extends SelfBound<?, A>, ?> var4 = var3;
 //        SelfBound<? extends SelfBound<?, A>, ?> var5 = arg3;
     }
 	

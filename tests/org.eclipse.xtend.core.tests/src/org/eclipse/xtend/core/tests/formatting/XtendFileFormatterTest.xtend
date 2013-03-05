@@ -1,8 +1,8 @@
 package org.eclipse.xtend.core.tests.formatting
 
-import org.eclipse.xtend.core.tests.formatting.AbstractXtendFormatterTest
 import org.junit.Test
-import static org.eclipse.xtend.core.formatting.XtendFormatterPreferenceKeys.*
+
+import static org.eclipse.xtext.xbase.formatting.XbaseFormatterPreferenceKeys.*
 
 class XtendFileFormatter extends AbstractXtendFormatterTest {
 	
