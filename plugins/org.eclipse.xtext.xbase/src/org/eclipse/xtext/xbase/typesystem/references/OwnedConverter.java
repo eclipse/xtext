@@ -99,7 +99,7 @@ public class OwnedConverter extends AbstractXtypeReferenceVisitor<LightweightTyp
 		LightweightTypeReference lightweightComponentType = null;
 		if (originalComponentType != null) {
 			lightweightComponentType = visit(originalComponentType);
-			if (lightweightComponentType.isAny())
+			if (lightweightComponentType.isAny() || lightweightComponentType.isUnknown())
 				return lightweightComponentType;
 		} else {
 			lightweightComponentType = getObjectReference();

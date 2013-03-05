@@ -69,6 +69,11 @@ public class ArrayTypeReference extends LightweightTypeReference {
 	}
 	
 	@Override
+	public boolean isUnknown() {
+		return component.isUnknown();
+	}
+	
+	@Override
 	protected List<LightweightTypeReference> getSuperTypes(TypeParameterSubstitutor<?> substitutor) {
 		List<LightweightTypeReference> componentSuperTypes = component.getSuperTypes(substitutor);
 		if (!componentSuperTypes.isEmpty()) {
