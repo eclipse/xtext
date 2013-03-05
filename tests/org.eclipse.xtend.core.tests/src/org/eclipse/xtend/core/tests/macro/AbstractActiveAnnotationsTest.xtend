@@ -26,10 +26,7 @@ abstract class AbstractActiveAnnotationsTest {
 				annotation Abstract { }
 				class AbstractProcessor implements TransformationParticipant<MutableClassDeclaration> {
 					
-					extension TransformationContext ctx
-					
-					override doTransform(List<? extends MutableClassDeclaration> annotatedSourceClasses, TransformationContext context) {
-						ctx = context
+					override doTransform(List<? extends MutableClassDeclaration> annotatedSourceClasses, extension TransformationContext context) {
 						annotatedSourceClasses.forEach [
 							^abstract = true
 						]
@@ -67,10 +64,7 @@ abstract class AbstractActiveAnnotationsTest {
 				annotation Property2 { }
 				class PropertyProcessor implements TransformationParticipant<MutableFieldDeclaration> {
 					
-					extension TransformationContext ctx
-					
-					override doTransform(List<? extends MutableFieldDeclaration> annotatedSourceFields, TransformationContext context) {
-						ctx = context
+					override doTransform(List<? extends MutableFieldDeclaration> annotatedSourceFields, extension TransformationContext context) {
 						annotatedSourceFields.forEach [ field |
 							val declaringType = field.declaringType as MutableClassDeclaration 
 							declaringType.addMethod(field.getterName) [
@@ -130,10 +124,7 @@ abstract class AbstractActiveAnnotationsTest {
 				annotation ThrowsAndTypeParam { }
 				class ThrowsAndTypeParamProcessor implements TransformationParticipant<MutableMethodDeclaration> {
 					
-					extension TransformationContext ctx
-					
-					override doTransform(List<? extends MutableMethodDeclaration> annotatedMethods, TransformationContext context) {
-						ctx = context
+					override doTransform(List<? extends MutableMethodDeclaration> annotatedMethods, extension TransformationContext context) {
 						annotatedMethods.forEach [
 							val type = addTypeParameter('A')
 							addParameter('myParam', newTypeReference(type))
@@ -177,10 +168,7 @@ abstract class AbstractActiveAnnotationsTest {
 				annotation Validated { }
 				class ValidatedProcessor implements TransformationParticipant<MutableNamedElement> {
 					
-					extension TransformationContext ctx
-					
-					override doTransform(List<? extends MutableNamedElement> annotatedMethods, TransformationContext context) {
-						ctx = context
+					override doTransform(List<? extends MutableNamedElement> annotatedMethods, extension TransformationContext context) {
 						annotatedMethods.forEach [ ele |
 							switch ele {
 								MutableFieldDeclaration : ele.addWarning('field-warning')
