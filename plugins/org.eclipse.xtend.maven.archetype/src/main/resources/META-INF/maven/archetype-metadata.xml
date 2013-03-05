@@ -19,5 +19,11 @@
 		<fileSet packaged="true" encoding="UTF-8">
 			<directory>src/main/generated-sources/xtend</directory>
 		</fileSet>
+		<fileSet encoding="UTF-8">
+			<directory>.settings</directory>
+			<includes>
+				<include>**/*.Xtend.prefs</include>
+			</includes>
+		</fileSet>
 	</fileSets>
 </archetype-descriptor>
