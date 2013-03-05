@@ -13,7 +13,8 @@
               icon="icons/xtend_file.png"
               id="org.eclipse.xtend.core.Xtend"
               matchingStrategy="org.eclipse.xtend.ide.XtendExecutableExtensionFactory:org.eclipse.xtext.xbase.ui.editor.JavaEditorInputMatcher"
-              name="Xtend Editor">
+              name="Xtend Editor"
+              symbolicFontName="org.eclipse.xtend.ui.editors.textfont">
         </editor>
     </extension>
     <extension
