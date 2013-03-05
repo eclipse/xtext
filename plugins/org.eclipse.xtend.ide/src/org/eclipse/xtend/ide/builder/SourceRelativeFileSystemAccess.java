@@ -18,6 +18,7 @@ import org.eclipse.core.runtime.IPath;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.xtext.builder.JDTAwareEclipseResourceFileSystemAccess2;
 import org.eclipse.xtext.generator.OutputConfiguration;
+import org.eclipse.xtext.util.RuntimeIOException;
 
 import com.google.common.collect.Multimap;
 
@@ -26,11 +27,26 @@ import com.google.common.collect.Multimap;
  * @author Holger Schill
  */
 public class SourceRelativeFileSystemAccess extends JDTAwareEclipseResourceFileSystemAccess2 {
-	
+
 	private IFolder currentSource = null;
-	
+
 	public void setCurrentSource(IFolder currentSource) {
 		this.currentSource = currentSource;
+	}
+
+	@Override
+	protected boolean ensureOutputConfigurationDirectoryExists(OutputConfiguration outputConfig) {
+		IContainer container = getContainer(outputConfig);
+		if (container.exists()) {
+			// Add as source folder even if the directory already exists
+			try {
+				createContainer(container);
+				return true;
+			} catch (CoreException e) {
+				throw new RuntimeIOException(e);
+			}
+		}
+		return super.ensureOutputConfigurationDirectoryExists(outputConfig);
 	}
 
 	@Override
@@ -52,7 +68,7 @@ public class SourceRelativeFileSystemAccess extends JDTAwareEclipseResourceFileS
 		Multimap<URI, IPath> sourceTraces = getSourceTraces();
 		if (sourceTraces != null) {
 			Set<URI> keys = sourceTraces.keySet();
-			for(URI uri: keys) {
+			for (URI uri : keys) {
 				if (uri != null && currentSource != null) {
 					Collection<IPath> paths = sourceTraces.get(uri);
 					IFile sourceFile = currentSource.getFile(uri.toFileString());
