@@ -1,16 +1,21 @@
 package org.eclipse.xtend.core.macro
 
+import com.google.inject.Singleton
+import org.apache.log4j.Logger
+import org.eclipse.emf.ecore.EObject
 import org.eclipse.xtext.common.types.JvmType
 import org.eclipse.xtext.resource.XtextResourceSet
-import org.eclipse.emf.ecore.EObject
-import org.apache.log4j.Logger
-import com.google.inject.Inject
 
+@Singleton
 class ProcessorInstanceForJvmTypeProvider {
 	
 	static val logger = Logger::getLogger(typeof(ProcessorInstanceForJvmTypeProvider))
 	
-	@Inject ClassLoader classLoader;
+	private ClassLoader classLoader;
+	
+	def void setClassLoader(ClassLoader classLoader) {
+		this.classLoader = classLoader
+	}
 	
 	/**
 	 * @return an instance of the given JvmType
@@ -26,6 +31,8 @@ class ProcessorInstanceForJvmTypeProvider {
 	}
 	
 	def protected getClassLoader(EObject ctx) {
+		if (classLoader != null)
+			return classLoader
 		val resourceSet = ctx.eResource.resourceSet
 		switch resourceSet {
 			XtextResourceSet : {
@@ -33,13 +40,10 @@ class ProcessorInstanceForJvmTypeProvider {
 				switch classLoaderCtx {
 					ClassLoader : return classLoaderCtx
 					Class<?> : return classLoaderCtx.classLoader
-					default : {
-						logger.info("No classloader attached to the resource set. Using injected classloader.")
-						return classLoader
-					}
 				}
 			}
 		}
+		logger.error("No class loader configured or annotation processing.")
 		return null
 	}
 }
