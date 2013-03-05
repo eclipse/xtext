@@ -12,6 +12,7 @@ import org.apache.maven.artifact.DependencyResolutionRequiredException;
 import org.apache.maven.plugin.MojoExecutionException;
 import org.eclipse.emf.common.util.WrappedException;
 import org.eclipse.xtend.core.compiler.batch.XtendBatchCompiler;
+import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
@@ -42,6 +43,15 @@ public class XtendCompile extends AbstractXtendCompilerMojo {
 
 	@Override
 	protected void internalExecute() throws MojoExecutionException {
+		final String defaultValue = "generated-sources/xtend";
+		determinateOutputDirectory(defaultValue, new Procedure1<String>() {
+			public void apply(String xtendOutputDir) {
+				if (!defaultValue.equals(xtendOutputDir)) {
+					outputDirectory = project.getBasedir() + "/src/main/" + xtendOutputDir;
+					getLog().info("Using Xtend output directory '" + outputDirectory + "'");
+				}
+			}
+		});
 		compileSources(xtendBatchCompilerProvider.get());
 	}
 

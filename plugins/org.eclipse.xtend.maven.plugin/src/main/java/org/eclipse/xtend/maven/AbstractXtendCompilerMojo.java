@@ -12,12 +12,17 @@ import static com.google.common.collect.Lists.newArrayList;
 import static org.eclipse.xtext.util.Strings.concat;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.List;
+import java.util.Properties;
 import java.util.Set;
 
 import org.apache.maven.artifact.Artifact;
 import org.apache.maven.plugin.MojoExecutionException;
 import org.eclipse.xtend.core.compiler.batch.XtendBatchCompiler;
+import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
@@ -52,6 +57,14 @@ public abstract class AbstractXtendCompilerMojo extends AbstractXtendMojo {
 	 * @parameter default-value="true" expression="${writeTraceFiles}"
 	 */
 	protected boolean writeTraceFiles;
+	
+	/**
+	 * Location of the Xtend settings file.
+	 * 
+	 * @parameter default-value="${basedir}/.settings/org.eclipse.xtend.core.Xtend.prefs"
+	 * @readonly
+	 */
+	private String propertiesFileLocation;
 	
 	protected XtendBatchCompiler createXtendBatchCompiler() {
 		Injector injector = new XtendMavenStandaloneSetup().createInjectorAndDoEMFRegistration();
@@ -94,6 +107,27 @@ public abstract class AbstractXtendCompilerMojo extends AbstractXtendMojo {
 	protected void addDependencies(Set<String> classPath, List<Artifact> dependencies) {
 		for (Artifact artifact : dependencies) {
 			classPath.add(artifact.getFile().getAbsolutePath());
+		}
+	}
+
+	protected void determinateOutputDirectory(String defaultValue, Procedure1<String> fieldSetter) {
+		if (propertiesFileLocation != null) {
+			File f = new File(propertiesFileLocation);
+			if (f.canRead()) {
+				Properties xtendSettings = new Properties();
+				try {
+					xtendSettings.load(new FileInputStream(f));
+					// TODO read Xtend setup to compute the properties file loc and property name
+					String xtendOutPutDir = xtendSettings.getProperty("outlet.DEFAULT_OUTPUT.directory", defaultValue);
+					fieldSetter.apply(xtendOutPutDir);
+				} catch (FileNotFoundException e) {
+					getLog().warn(e);
+				} catch (IOException e) {
+					getLog().warn(e);
+				}
+			} else {
+				getLog().debug("Can't load Xtend properties:" + propertiesFileLocation);
+			}
 		}
 	}
 }
