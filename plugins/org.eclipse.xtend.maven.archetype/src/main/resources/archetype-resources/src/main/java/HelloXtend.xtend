@@ -6,5 +6,4 @@ class HelloXtend {
 		println('Hello Xtend!')
 	}
 	
-	
 }
