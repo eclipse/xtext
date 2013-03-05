@@ -1,14 +1,15 @@
 package org.eclipse.xtend.core.tests.formatting
 
 import javax.inject.Inject
+import org.eclipse.xtend.core.tests.RuntimeInjectorProvider
 import org.eclipse.xtext.junit4.InjectWith
 import org.eclipse.xtext.junit4.XtextRunner
-import org.junit.runner.RunWith
-import static org.eclipse.xtext.xbase.formatting.XbaseFormatterPreferenceKeys.*
-import org.eclipse.xtext.xbase.junit.formatter.FormatterTester
-import org.eclipse.xtend.core.tests.RuntimeInjectorProvider
 import org.eclipse.xtext.preferences.MapBasedPreferenceValues
 import org.eclipse.xtext.preferences.PreferenceKey
+import org.eclipse.xtext.xbase.junit.formatter.FormatterTester
+import org.junit.runner.RunWith
+
+import static org.eclipse.xtext.xbase.formatting.BasicFormatterPreferenceKeys.*
 
 @RunWith(typeof(XtextRunner))
 @InjectWith(typeof(RuntimeInjectorProvider))

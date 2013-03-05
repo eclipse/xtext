@@ -52,6 +52,10 @@ abstract class AbstractSmokeTest extends AnnotationsValidatorTest {
 		return null
 	}
 	
+	override testReferencedTypeIsNoEnum() throws Exception {
+		annotation("@java.lang.Object(unknown = #[ new String() ])", false)
+	}
+	
 	def void assertNonSmoking(String input) throws Exception
 
 	def void processExpression(String expression) throws Exception {
