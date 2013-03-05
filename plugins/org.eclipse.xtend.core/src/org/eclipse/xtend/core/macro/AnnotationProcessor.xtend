@@ -38,14 +38,14 @@ class AnnotationProcessor {
 		val task = Stopwatches::forTask('[macros] indexingPhase (AnnotationProcessor.indexingPhase)')
 		task.start
 		try {
-			switch processor : ctx.processorInstance{
+			switch processor : ctx.processorInstance {
 				RegisterGlobalsParticipant<NamedElement>: {
-					val registerGloablsCtx = registerGlobalsContextProvider.get
-					registerGloablsCtx.acceptor = acceptor
-					registerGloablsCtx.compilationUnit = ctx.compilationUnit
+					val registerGlobalsCtx = registerGlobalsContextProvider.get
+					registerGlobalsCtx.acceptor = acceptor
+					registerGlobalsCtx.compilationUnit = ctx.compilationUnit
 					
 					runWithCancelIndiciator(ctx, monitor) [|
-						processor.doRegisterGlobals(ctx.annotatedSourceElements.map[ctx.compilationUnit.toXtendMemberDeclaration(it as XtendMember)], registerGloablsCtx)
+						processor.doRegisterGlobals(ctx.annotatedSourceElements.map[ctx.compilationUnit.toXtendMemberDeclaration(it as XtendMember)], registerGlobalsCtx)
 					]
 				}
 			}
