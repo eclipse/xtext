@@ -1286,7 +1286,7 @@ abstract class AbstractTypeResolverTest<Reference> extends AbstractXbaseTestCase
 		"if (true) [new StringBuilder()] else [new StringBuffer()]".resolvesTo("(Object)=>AbstractStringBuilder & Serializable").isFunctionAndEquivalentTo("Function1<Object, ? extends AbstractStringBuilder & Serializable>")
 	}
 	
-	@Test def final void testIfExpression_10() throws Exception {
+	@Test def void testIfExpression_10() throws Exception {
 		"if (true) null as java.util.List<String> else null as String[]".resolvesTo("Object")
 	}
 	
