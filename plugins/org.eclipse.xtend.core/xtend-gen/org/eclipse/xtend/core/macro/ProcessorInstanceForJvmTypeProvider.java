@@ -1,6 +1,6 @@
 package org.eclipse.xtend.core.macro;
 
-import com.google.inject.Inject;
+import com.google.inject.Singleton;
 import org.apache.log4j.Logger;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
@@ -9,7 +9,9 @@ import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.resource.XtextResourceSet;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Functions.Function0;
+import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 
+@Singleton
 @SuppressWarnings("all")
 public class ProcessorInstanceForJvmTypeProvider {
   private final static Logger logger = new Function0<Logger>() {
@@ -19,8 +21,11 @@ public class ProcessorInstanceForJvmTypeProvider {
     }
   }.apply();
   
-  @Inject
   private ClassLoader classLoader;
+  
+  public void setClassLoader(final ClassLoader classLoader) {
+    this.classLoader = classLoader;
+  }
   
   /**
    * @return an instance of the given JvmType
@@ -48,6 +53,10 @@ public class ProcessorInstanceForJvmTypeProvider {
   }
   
   protected ClassLoader getClassLoader(final EObject ctx) {
+    boolean _notEquals = ObjectExtensions.operator_notEquals(this.classLoader, null);
+    if (_notEquals) {
+      return this.classLoader;
+    }
     Resource _eResource = ctx.eResource();
     final ResourceSet resourceSet = _eResource.getResourceSet();
     boolean _matched = false;
@@ -71,12 +80,9 @@ public class ProcessorInstanceForJvmTypeProvider {
             return _class.getClassLoader();
           }
         }
-        {
-          ProcessorInstanceForJvmTypeProvider.logger.info("No classloader attached to the resource set. Using injected classloader.");
-          return this.classLoader;
-        }
       }
     }
+    ProcessorInstanceForJvmTypeProvider.logger.error("No class loader configured or annotation processing.");
     return null;
   }
 }

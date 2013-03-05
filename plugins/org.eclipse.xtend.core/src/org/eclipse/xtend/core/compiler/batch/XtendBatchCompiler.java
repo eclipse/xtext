@@ -25,6 +25,7 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.jdt.core.compiler.batch.BatchCompiler;
 import org.eclipse.xtend.core.jvmmodel.IXtendJvmAssociations;
+import org.eclipse.xtend.core.macro.ProcessorInstanceForJvmTypeProvider;
 import org.eclipse.xtend.core.xtend.XtendAnnotationType;
 import org.eclipse.xtend.core.xtend.XtendClass;
 import org.eclipse.xtend.core.xtend.XtendEnum;
@@ -106,6 +107,8 @@ public class XtendBatchCompiler {
 	private IndexedJvmTypeAccess indexedJvmTypeAccess;
 	@Inject
 	private IGeneratorConfigProvider generatorConfigprovider;
+	@Inject
+	private ProcessorInstanceForJvmTypeProvider annotationProcessorFactory;
 
 	protected Writer outputWriter;
 	protected Writer errorWriter;
@@ -387,10 +390,13 @@ public class XtendBatchCompiler {
 		if (log.isDebugEnabled()) {
 			log.debug("classpath used for Xtend compilation : " + classPathUrls);
 		}
-		URLClassLoader urlClassLoader = new URLClassLoader(toArray(classPathUrls, URL.class),
-				useCurrentClassLoaderAsParent ? getClass().getClassLoader() : null);
+		URLClassLoader urlClassLoader = new URLClassLoader(toArray(classPathUrls, URL.class), useCurrentClassLoaderAsParent ? getClass().getClassLoader() : null);
 		new ClasspathTypeProvider(urlClassLoader, resourceSet, indexedJvmTypeAccess);
 		((XtextResourceSet) resourceSet).setClasspathURIContext(urlClassLoader);
+		
+		// for annotation processing we need to have the compiler's classpath as a parent.
+		URLClassLoader urlClassLoaderForAnnotationProcessing = new URLClassLoader(toArray(classPathUrls, URL.class), getClass().getClassLoader());
+		annotationProcessorFactory.setClassLoader(urlClassLoaderForAnnotationProcessing);
 	}
 
 	protected void reportIssues(Iterable<Issue> issues) {
