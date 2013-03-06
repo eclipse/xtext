@@ -3257,6 +3257,115 @@ public class XtendCompilerTest extends AbstractXtendTestCase {
   }
   
   @Test
+  public void testRecursiveLambda_01() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("public class Foo  {");
+    _builder.newLine();
+    _builder.append("    ");
+    _builder.append("def void foo((String)=>String func) {");
+    _builder.newLine();
+    _builder.append("    \t");
+    _builder.append("foo[self.apply(it)]");
+    _builder.newLine();
+    _builder.append("    ");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("import org.eclipse.xtext.xbase.lib.Functions.Function1;");
+    _builder_1.newLine();
+    _builder_1.newLine();
+    _builder_1.append("@SuppressWarnings(\"all\")");
+    _builder_1.newLine();
+    _builder_1.append("public class Foo {");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("public void foo(final Function1<? super String,? extends String> func) {");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("final Function1<String,String> _function = new Function1<String,String>() {");
+    _builder_1.newLine();
+    _builder_1.append("        ");
+    _builder_1.append("public String apply(final String it) {");
+    _builder_1.newLine();
+    _builder_1.append("          ");
+    _builder_1.append("String _apply = this.apply(it);");
+    _builder_1.newLine();
+    _builder_1.append("          ");
+    _builder_1.append("return _apply;");
+    _builder_1.newLine();
+    _builder_1.append("        ");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("      ");
+    _builder_1.append("};");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("this.foo(_function);");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    this.assertCompilesTo(_builder, _builder_1);
+  }
+  
+  @Test
+  public void testRecursiveLambda_02() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("public class Foo  {");
+    _builder.newLine();
+    _builder.append("    ");
+    _builder.append("def void foo(()=>void func) {");
+    _builder.newLine();
+    _builder.append("    \t");
+    _builder.append("foo[|self.apply()]");
+    _builder.newLine();
+    _builder.append("    ");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("import org.eclipse.xtext.xbase.lib.Procedures.Procedure0;");
+    _builder_1.newLine();
+    _builder_1.newLine();
+    _builder_1.append("@SuppressWarnings(\"all\")");
+    _builder_1.newLine();
+    _builder_1.append("public class Foo {");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("public void foo(final Procedure0 func) {");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("final Procedure0 _function = new Procedure0() {");
+    _builder_1.newLine();
+    _builder_1.append("        ");
+    _builder_1.append("public void apply() {");
+    _builder_1.newLine();
+    _builder_1.append("          ");
+    _builder_1.append("this.apply();");
+    _builder_1.newLine();
+    _builder_1.append("        ");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("      ");
+    _builder_1.append("};");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("this.foo(_function);");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    this.assertCompilesTo(_builder, _builder_1);
+  }
+  
+  @Test
   public void testAbstractIterator_01() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("import java.util.Iterator");

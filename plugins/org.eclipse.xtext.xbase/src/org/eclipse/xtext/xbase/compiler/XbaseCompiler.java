@@ -1085,7 +1085,7 @@ public class XbaseCompiler extends FeatureCallCompiler {
 	}
 	
 	protected void reassignThisInClosure(final ITreeAppendable b, JvmType rawClosureType) {
-		boolean registerClosureAsThis = rawClosureType instanceof JvmGenericType && !((JvmGenericType) rawClosureType).isInterface();
+		boolean registerClosureAsThis = rawClosureType instanceof JvmGenericType;
 		if (b.hasObject("this")) {
 			Object element = b.getObject("this");
 			if (element instanceof JvmType) {

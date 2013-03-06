@@ -1431,6 +1431,55 @@ class XtendCompilerTest extends AbstractXtendTestCase {
 		''')
 	}
 	
+	@Test def void testRecursiveLambda_01() {
+		assertCompilesTo('''
+			public class Foo  {
+			    def void foo((String)=>String func) {
+			    	foo[self.apply(it)]
+			    }
+			}
+		''', '''
+			import org.eclipse.xtext.xbase.lib.Functions.Function1;
+			
+			@SuppressWarnings("all")
+			public class Foo {
+			  public void foo(final Function1<? super String,? extends String> func) {
+			    final Function1<String,String> _function = new Function1<String,String>() {
+			        public String apply(final String it) {
+			          String _apply = this.apply(it);
+			          return _apply;
+			        }
+			      };
+			    this.foo(_function);
+			  }
+			}
+		''')
+	}
+	
+	@Test def void testRecursiveLambda_02() {
+		assertCompilesTo('''
+			public class Foo  {
+			    def void foo(()=>void func) {
+			    	foo[|self.apply()]
+			    }
+			}
+		''', '''
+			import org.eclipse.xtext.xbase.lib.Procedures.Procedure0;
+
+			@SuppressWarnings("all")
+			public class Foo {
+			  public void foo(final Procedure0 func) {
+			    final Procedure0 _function = new Procedure0() {
+			        public void apply() {
+			          this.apply();
+			        }
+			      };
+			    this.foo(_function);
+			  }
+			}
+		''')
+	}
+	
 	@Test def void testAbstractIterator_01() {
 		assertCompilesTo('''
 			import java.util.Iterator
