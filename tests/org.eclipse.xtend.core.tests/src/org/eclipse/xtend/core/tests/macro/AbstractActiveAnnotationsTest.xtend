@@ -48,6 +48,54 @@ abstract class AbstractActiveAnnotationsTest {
 		]
 	}
 	
+	@Test def void testCreateTypeFromUsage() {
+		assertProcessing(
+			'myannotation/SomeAnnotation.xtend' -> '''
+				package myannotation
+				
+				import java.lang.annotation.Documented
+				import java.lang.annotation.ElementType
+				import java.lang.annotation.Target
+				import java.util.List
+				import org.eclipse.xtend.lib.macro.Active
+				import org.eclipse.xtend.lib.macro.RegisterGlobalsContext
+				import org.eclipse.xtend.lib.macro.RegisterGlobalsParticipant
+				import org.eclipse.xtend.lib.macro.declaration.MethodDeclaration
+				import org.eclipse.xtend.lib.macro.declaration.TypeDeclaration
+				
+				@Active(typeof(SomeProcessor))
+				@Documented
+				@Target(ElementType::TYPE)
+				annotation SomeAnnotation {}
+				class SomeProcessor implements RegisterGlobalsParticipant<TypeDeclaration> {
+					override doRegisterGlobals(List<? extends TypeDeclaration> types, RegisterGlobalsContext context) {
+						types.forEach[
+							allMethods.forEach[
+								context.registerClass(parameterType)
+							]
+						]
+					}
+					private def getAllMethods(TypeDeclaration it) {
+						members.filter(typeof(MethodDeclaration))
+					}
+					private def getParameterType(MethodDeclaration it) {
+						parameters.head.type.type.name
+					}
+				}
+			''',
+			'myusercode/UserCode.xtend' -> '''
+				package myusercode
+				
+				@myannotation.SomeAnnotation
+				class MyClass {
+					def void myMethod(DoesNotExist p) {}
+				}
+			'''
+		) [
+			assertTrue(generatedClassDeclarations.exists [ simpleName == 'DoesNotExist' && name == 'myusercode.DoesNotExist'])
+		]
+	}
+	
 	@Test def void testPropertyAnnotation() {
 		assertProcessing(
 			'myannotation/PropertyAnnotation.xtend' -> "

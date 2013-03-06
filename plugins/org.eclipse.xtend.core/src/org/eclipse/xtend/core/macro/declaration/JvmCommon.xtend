@@ -34,7 +34,10 @@ abstract class AbstractNamedElementImpl<T extends EObject> extends AbstractDecla
 class TypeReferenceImpl extends AbstractDeclarationImpl<LightweightTypeReference> implements TypeReference {
 	
 	override getType() {
-		return compilationUnit.toType(delegate.type)
+		switch it: delegate {
+			case unknown : new UnknownType(compilationUnit, compilationUnit.packageName + '.' + simpleName)
+			default : compilationUnit.toType(type)
+		}
 	}
 	
 	override toString() {
