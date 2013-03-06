@@ -843,6 +843,15 @@ abstract class AbstractTypeResolverTest<Reference> extends AbstractXbaseTestCase
 		"emptyList".resolvesTo("List<Object>")
 	}
 	
+	@Test def void testElvisWithEmptyListInLamdba() throws Exception {
+		"[ String s |
+			val result = <Integer>newArrayList
+			val (String)=>Iterable<Integer> fun = []
+			result += fun.apply(s) ?: emptyList
+			result
+		]".resolvesTo("(String)=>ArrayList<Integer>")
+	}
+	
 	@Test def void testMethodTypeParamInference_00() throws Exception {
 		"new java.util.ArrayList<String>().findFirst(e | true)".resolvesTo("String")
 	}

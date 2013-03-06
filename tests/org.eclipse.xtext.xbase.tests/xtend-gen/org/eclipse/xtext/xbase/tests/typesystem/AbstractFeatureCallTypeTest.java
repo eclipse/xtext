@@ -103,6 +103,32 @@ public abstract class AbstractFeatureCallTypeTest extends AbstractXbaseTestCase 
   }
   
   @Test
+  public void testElvisWithEmptyListInLambda() throws Exception {
+    this.resolvesFeatureCallsTo("[ String s |\n\t\t\tval result = <Integer>newArrayList\n\t\t\tval (String)=>Iterable<Integer> fun = []\n\t\t\tresult += fun.apply(s) ?: emptyList\n\t\t\tresult\n\t\t]", 
+      "ArrayList<Integer>", 
+      "ArrayList<Integer>", 
+      "boolean", 
+      "(String)=>Iterable<Integer>", 
+      "Iterable<Integer>", 
+      "String", 
+      "Iterable<Integer>", 
+      "List<Integer>", 
+      "ArrayList<Integer>");
+  }
+  
+  @Test
+  public void testElvisWithEmptyList() throws Exception {
+    this.resolvesFeatureCallsTo("{ \n\t\t\tval java.util.List<Integer> list = null\n\t\t\tval fun = [| list ]\n\t\t\tlist += fun.apply ?: emptyList\n         }", 
+      "List<Integer>", 
+      "List<Integer>", 
+      "boolean", 
+      "()=>List<Integer>", 
+      "List<Integer>", 
+      "List<Integer>", 
+      "List<Integer>");
+  }
+  
+  @Test
   public void testRawType_01() throws Exception {
     this.resolvesFeatureCallsTo("{ val java.util.Set set = newHashSet() set }", "HashSet", "Set");
   }

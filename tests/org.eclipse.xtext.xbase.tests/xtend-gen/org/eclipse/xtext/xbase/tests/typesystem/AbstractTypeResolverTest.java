@@ -942,6 +942,11 @@ public abstract class AbstractTypeResolverTest<Reference extends Object> extends
   }
   
   @Test
+  public void testElvisWithEmptyListInLamdba() throws Exception {
+    this.resolvesTo("[ String s |\n\t\t\tval result = <Integer>newArrayList\n\t\t\tval (String)=>Iterable<Integer> fun = []\n\t\t\tresult += fun.apply(s) ?: emptyList\n\t\t\tresult\n\t\t]", "(String)=>ArrayList<Integer>");
+  }
+  
+  @Test
   public void testMethodTypeParamInference_00() throws Exception {
     this.resolvesTo("new java.util.ArrayList<String>().findFirst(e | true)", "String");
   }
