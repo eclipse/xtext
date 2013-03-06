@@ -76,6 +76,7 @@ import org.eclipse.xtext.xbase.typesystem.computation.NumberLiterals;
 import org.eclipse.xtext.xtype.XComputedTypeReference;
 import org.eclipse.xtext.xtype.XtypeFactory;
 
+import com.google.common.base.Preconditions;
 import com.google.inject.Inject;
 
 /**
@@ -578,7 +579,7 @@ public class JvmTypesBuilder {
 	 */
 	public JvmTypeReference inferredType() {
 		XComputedTypeReference result = xtypesFactory.createXComputedTypeReference();
-		result.setTypeProvider(new InferredTypeIndicator(true));
+		result.setTypeProvider(new InferredTypeIndicator(null));
 		return result;
 	}
 	
@@ -586,14 +587,16 @@ public class JvmTypesBuilder {
 	 * Produces an inferred type which will be resolved on demand. It should not be attempted to resolve
 	 * this type during the model inference.
 	 * 
+	 * @param expression the expression that will be used resolve the type
 	 * @return an inferred type.
 	 */
-	public JvmTypeReference inferredNonVoidType() {
+	public JvmTypeReference inferredType(XExpression expression) {
+		Preconditions.checkNotNull(expression, "expression");
 		XComputedTypeReference result = xtypesFactory.createXComputedTypeReference();
-		result.setTypeProvider(new InferredTypeIndicator(false));
+		result.setTypeProvider(new InferredTypeIndicator(expression));
 		return result;
 	}
-
+	
 	/**
 	 * shorthand for <code>toGetter(sourceElement, name, name, typeRef)</code>.
 	 */
