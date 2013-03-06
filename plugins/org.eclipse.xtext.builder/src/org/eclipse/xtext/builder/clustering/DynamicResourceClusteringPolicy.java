@@ -23,7 +23,7 @@ public class DynamicResourceClusteringPolicy implements IResourceClusteringPolic
 	public static final String MINIMUM_PERCENT_FREE_MEMORY = "org.eclipse.xtext.builder.clustering.DynamicResourceClusteringPolicy.minimumPercentFreeMemory";
 
 	private static final Logger LOGGER = Logger.getLogger(DynamicResourceClusteringPolicy.class);
-
+	
 	/** We want at least 10MB free memory. */
 	private static final long MINIMUM_FREE_MEMORY = 10 * 1 << 20;
 
@@ -56,7 +56,9 @@ public class DynamicResourceClusteringPolicy implements IResourceClusteringPolic
 
 		return true;
 	}
-
+	
+	private static boolean hasLoggedAboutIncreasingHeap = false;
+	
 	protected void logClusterCapped(ResourceSet resourceSet, int alreadyProcessed, final long freeMemory,
 			final long totalMemory) {
 		if (LOGGER.isDebugEnabled()) {
@@ -64,6 +66,10 @@ public class DynamicResourceClusteringPolicy implements IResourceClusteringPolic
 					+ " processed/loaded resources; " + (freeMemory >> 20) + "/" + (totalMemory >> 20)
 					+ " free/total memory");
 		}
+		if (!hasLoggedAboutIncreasingHeap) {
+			hasLoggedAboutIncreasingHeap = true;
+			LOGGER.error("Your total heap size ("+(totalMemory >> 20)+"m) is too small. Please increase the maximum heap for your running Eclipse! See http://wiki.eclipse.org/FAQ_How_do_I_increase_the_heap_size_available_to_Eclipse%3F");
+		}
 	}
-
+	
 }
