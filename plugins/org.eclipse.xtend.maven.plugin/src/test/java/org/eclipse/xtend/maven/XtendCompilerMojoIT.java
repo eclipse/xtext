@@ -63,6 +63,21 @@ public class XtendCompilerMojoIT {
 		verifier.verifyTextInLog("3: The import 'java.util.Collections' is never used.");
 		verifier.verifyTextInLog("[INFO] BUILD SUCCESS");
 	}
+	
+	@Test
+	public void readXtendPrefs() throws Exception {
+		Verifier verifier = newVerifier(ROOT + "/xtend-prefs");
+		verifier.executeGoal("test");
+		verifier.verifyErrorFreeLog();
+		System.out.println(verifier.getLogFileName());
+		String xtendOutputDirFromPrefs = "generated-sources/xtend-from-pref";
+		String xtendGenDir = verifier.getBasedir() + "/src/main/"+xtendOutputDirFromPrefs;
+		String xtendTestGenDir = verifier.getBasedir() + "/src/test/"+xtendOutputDirFromPrefs;
+		verifier.assertFilePresent(xtendGenDir + "/test/XtendA.java");
+		verifier.assertFilePresent(xtendGenDir + "/test/XtendC.java");
+		verifier.assertFilePresent(xtendTestGenDir + "/tests/XtendA.java");
+		verifier.assertFilePresent(xtendTestGenDir + "/tests/XtendC.java");
+	}
 
 	private void verifyErrorFreeLog(String pathToTestProject) throws IOException, VerificationException {
 		verifyErrorFreeLog(pathToTestProject, "verify");
