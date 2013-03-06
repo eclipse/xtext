@@ -91,7 +91,7 @@ public class InferredTypeIndicator implements IJvmTypeReferenceProvider {
 	
 	@Override
 	public String toString() {
-		return String.format("InferredTypeIndicator[resolved=%s, expression=%s]", resolved, expression);
+		return String.format("InferredTypeIndicator[resolved=%s, expression=%s]", resolved, expression == null ? "null" : expression.eClass().getName());
 	}
 	
 }
