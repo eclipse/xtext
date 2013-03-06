@@ -1107,9 +1107,12 @@ public class XbaseCompiler extends FeatureCallCompiler {
 		return services.getFunctionTypes().findImplementingOperation(lightweightTypeReference);
 	}
 	
+	private final static String REASSIGNED_THIS_IN_LAMBDA = "!reassigned_this_for_lambda!";
+	
 	protected void reassignThisInClosure(final ITreeAppendable b, JvmType rawClosureType) {
 		boolean registerClosureAsThis = rawClosureType instanceof JvmGenericType;
-		if (b.hasObject("this")) {
+		boolean isAlreadyInALambda = b.hasObject(REASSIGNED_THIS_IN_LAMBDA);
+		if (b.hasObject("this") && !isAlreadyInALambda) {
 			Object element = b.getObject("this");
 			if (element instanceof JvmType) {
 				final String proposedName = ((JvmType) element).getSimpleName()+".this";
@@ -1126,8 +1129,13 @@ public class XbaseCompiler extends FeatureCallCompiler {
 				registerClosureAsThis = false;
 			}
 		}
-		if (registerClosureAsThis)
+		if (!isAlreadyInALambda) {
+			// add a synthetic marker so we don't reassign this and super more than once.
+			b.declareSyntheticVariable(REASSIGNED_THIS_IN_LAMBDA, REASSIGNED_THIS_IN_LAMBDA);
+		}
+		if (registerClosureAsThis) {
 			b.declareVariable(rawClosureType, "this");
+		}
 	}
 	
 	protected JvmTypeReference getClosureOperationParameterType(JvmTypeReference closureType, JvmOperation operation, int i) {
