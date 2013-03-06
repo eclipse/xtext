@@ -21,7 +21,9 @@ import org.eclipse.jface.text.source.IAnnotationModelListener;
 import org.eclipse.jface.viewers.DecorationOverlayIcon;
 import org.eclipse.jface.viewers.IDecoration;
 import org.eclipse.swt.graphics.Image;
+import org.eclipse.swt.widgets.Display;
 import org.eclipse.ui.IEditorSite;
+import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.progress.UIJob;
 import org.eclipse.xtext.diagnostics.Severity;
 import org.eclipse.xtext.ui.IImageHelper;
@@ -92,9 +94,9 @@ public class XtextEditorErrorTickUpdater extends IXtextEditorCallback.NullImpl i
 					: XtextPluginImages.DESC_OVR_WARNING;
 			DecorationOverlayIcon decorationOverlayIcon = new DecorationOverlayIcon(defaultImage, descriptor,
 					IDecoration.BOTTOM_LEFT);
-			scheduleUpdateEditorJob(decorationOverlayIcon);
+			scheduleUpdateEditor(decorationOverlayIcon);
 		} else {
-			scheduleUpdateEditorJob(defaultImage);
+			scheduleUpdateEditor(defaultImage);
 		}
 	}
 
@@ -133,25 +135,63 @@ public class XtextEditorErrorTickUpdater extends IXtextEditorCallback.NullImpl i
 	/**
 	 * @since 2.4
 	 */
-	public void scheduleUpdateEditorJob(final ImageDescriptor imageDescriptor) {
-		UpdateEditorImageJob job = createUpdateEditorImageJob();
-		job.scheduleFor(imageDescriptor);
+	public void scheduleUpdateEditor(final ImageDescriptor titleImageDescription) {
+		Display display = PlatformUI.getWorkbench().getDisplay();
+		display.asyncExec(new Runnable() {
+			public void run() {
+				if (editor != null) {
+					Image image = imageHelper.getImage(titleImageDescription);
+					if (editor.getTitleImage() != image) {
+						editor.updatedTitleImage(image);
+					}
+				}
+			}
+		});
+	}
+
+	/**
+	 * @since 2.4
+	 * 
+	 */
+	public void scheduleUpdateEditor(final Image titleImage) {
+		Display display = PlatformUI.getWorkbench().getDisplay();
+		display.asyncExec(new Runnable() {
+			public void run() {
+				if (editor != null) {
+					if (editor.getTitleImage() != titleImage) {
+						editor.updatedTitleImage(titleImage);
+					}
+				}
+			}
+		});
 	}
 	
+	/**
+	 * @deprecated use {@link #scheduleUpdateEditor(ImageDescriptor)} instead
+	 */
+	@Deprecated
 	public void scheduleUpdateEditorJob(final Image image) {
 		UpdateEditorImageJob job = createUpdateEditorImageJob();
 		job.scheduleFor(image);
 	}
 
+	/**
+	 * @deprecated use {@link #scheduleUpdateEditor(ImageDescriptor)} instead
+	 */
+	@Deprecated
 	protected UpdateEditorImageJob createUpdateEditorImageJob() {
 		// reason described here https://bugs.eclipse.org/bugs/show_bug.cgi?id=308963
 		return new UpdateEditorImageJob(SEQUENCE_RULE);
 	}
-	
+
 	public void modelChanged(IAnnotationModel model) {
 		updateEditorImage(editor);
 	}
 
+	/**
+	 * @deprecated use {@link #scheduleUpdateEditor(ImageDescriptor)} instead
+	 */
+	@Deprecated
 	protected class UpdateEditorImageJob extends UIJob {
 		private volatile Image titleImage;
 		private volatile ImageDescriptor titleImageDescription;
