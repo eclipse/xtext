@@ -21,6 +21,7 @@ import org.eclipse.xtext.junit4.util.ParseHelper;
 import org.eclipse.xtext.junit4.validation.ValidationTestHelper;
 import org.eclipse.xtext.xbase.jvmmodel.IJvmModelAssociations;
 import org.eclipse.xtext.xbase.lib.Exceptions;
+import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.junit.Assert;
 import org.junit.Test;
@@ -31,12 +32,15 @@ import org.junit.runner.RunWith;
 @SuppressWarnings("all")
 public class ParserTest {
   @Inject
+  @Extension
   private ParseHelper<DomainModel> _parseHelper;
   
   @Inject
+  @Extension
   private ValidationTestHelper _validationTestHelper;
   
   @Inject
+  @Extension
   private IJvmModelAssociations _iJvmModelAssociations;
   
   @Test

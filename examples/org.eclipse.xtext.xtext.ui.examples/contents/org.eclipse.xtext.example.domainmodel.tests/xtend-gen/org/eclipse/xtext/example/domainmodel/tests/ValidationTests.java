@@ -9,6 +9,7 @@ import org.eclipse.xtext.junit4.XtextRunner;
 import org.eclipse.xtext.junit4.util.ParseHelper;
 import org.eclipse.xtext.junit4.validation.ValidationTestHelper;
 import org.eclipse.xtext.xbase.lib.Exceptions;
+import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.validation.IssueCodes;
 import org.eclipse.xtext.xtype.XtypePackage.Literals;
 import org.junit.Test;
@@ -19,9 +20,11 @@ import org.junit.runner.RunWith;
 @SuppressWarnings("all")
 public class ValidationTests {
   @Inject
+  @Extension
   private ParseHelper<DomainModel> parseHelper;
   
   @Inject
+  @Extension
   private ValidationTestHelper validationTestHelper;
   
   @Test

@@ -13,6 +13,7 @@ import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.util.ReplaceRegion;
 import org.eclipse.xtext.xbase.imports.ImportOrganizer;
 import org.eclipse.xtext.xbase.lib.Exceptions;
+import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ListExtensions;
@@ -30,6 +31,7 @@ import org.junit.runner.RunWith;
 @SuppressWarnings("all")
 public class OrganizeImportsTest {
   @Inject
+  @Extension
   private ParseHelper<DomainModel> _parseHelper;
   
   @Inject
