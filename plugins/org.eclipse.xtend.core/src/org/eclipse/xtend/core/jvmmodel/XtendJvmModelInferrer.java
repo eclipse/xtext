@@ -260,7 +260,7 @@ public class XtendJvmModelInferrer implements IJvmModelInferrer {
 					if (field.getType() != null) {
 						returnType = jvmTypesBuilder.cloneWithProxies(field.getType());
 					} else {
-						returnType = jvmTypesBuilder.inferredNonVoidType();
+						returnType = jvmTypesBuilder.inferredType();
 					}
 					operation.setReturnType(returnType);
 					if (field.getInitialValue() != null)
@@ -508,7 +508,7 @@ public class XtendJvmModelInferrer implements IJvmModelInferrer {
 		for (int i = 0; i < first.getParameters().size(); i++) {
 			JvmFormalParameter parameter = typesFactory.createJvmFormalParameter();
 			result.getParameters().add(parameter);
-			parameter.setParameterType(jvmTypesBuilder.inferredNonVoidType());
+			parameter.setParameterType(jvmTypesBuilder.inferredType());
 			JvmFormalParameter parameter2 = first.getParameters().get(i);
 			parameter.setName(parameter2.getName());
 		}
@@ -613,7 +613,7 @@ public class XtendJvmModelInferrer implements IJvmModelInferrer {
 	protected void transformCreateExtension(XtendFunction source, CreateExtensionInfo createExtensionInfo,
 			JvmGenericType container, JvmOperation operation, @Nullable JvmTypeReference returnType) {
 		JvmField cacheVar = jvmTypesBuilder.toField(
-				source, CREATE_CHACHE_VARIABLE_PREFIX + source.getName(), jvmTypesBuilder.inferredNonVoidType());
+				source, CREATE_CHACHE_VARIABLE_PREFIX + source.getName(), jvmTypesBuilder.inferredType());
 		if (cacheVar != null) {
 			cacheVar.setFinal(true);
 			jvmTypesBuilder.setInitializer(cacheVar, compileStrategies.forCacheVariable(source));
@@ -635,7 +635,7 @@ public class XtendJvmModelInferrer implements IJvmModelInferrer {
 			JvmFormalParameter jvmParam = typesFactory.createJvmFormalParameter();
 			jvmParam.setName(createExtensionInfo.getName());
 			// TODO consider type parameters
-			jvmParam.setParameterType(jvmTypesBuilder.inferredNonVoidType());
+			jvmParam.setParameterType(jvmTypesBuilder.inferredType());
 			
 			initializer.getParameters().add(jvmParam);
 			associator.associate(createExtensionInfo, jvmParam);
@@ -710,7 +710,7 @@ public class XtendJvmModelInferrer implements IJvmModelInferrer {
 			if (source.getType() != null) {
 				field.setType(jvmTypesBuilder.cloneWithProxies(source.getType()));
 			} else if (source.getInitialValue() != null) {
-				field.setType(jvmTypesBuilder.inferredNonVoidType());
+				field.setType(jvmTypesBuilder.inferredType(source.getInitialValue()));
 			}
 			boolean isProperty = isDataObject;
 			for (XAnnotation anno : source.getAnnotations()) {

@@ -154,6 +154,63 @@ class DataCompilerTest extends AbstractXtendCompilerTest {
 		''')
 	}
 	
+	@Test
+	def testDataClasses_03() { 
+		assertCompilesTo('''
+			@Data class Foo {
+				val name = 'foo'
+			}
+		''', '''
+			import org.eclipse.xtend.lib.Data;
+			import org.eclipse.xtext.xbase.lib.util.ToStringHelper;
+			
+			@Data
+			@SuppressWarnings("all")
+			public class Foo {
+			  private final String _name = "foo";
+			  
+			  public String getName() {
+			    return this._name;
+			  }
+			  
+			  public Foo() {
+			    super();
+			  }
+			  
+			  @Override
+			  public int hashCode() {
+			    final int prime = 31;
+			    int result = 1;
+			    result = prime * result + ((_name== null) ? 0 : _name.hashCode());
+			    return result;
+			  }
+			  
+			  @Override
+			  public boolean equals(final Object obj) {
+			    if (this == obj)
+			      return true;
+			    if (obj == null)
+			      return false;
+			    if (getClass() != obj.getClass())
+			      return false;
+			    Foo other = (Foo) obj;
+			    if (_name == null) {
+			      if (other._name != null)
+			        return false;
+			    } else if (!_name.equals(other._name))
+			      return false;
+			    return true;
+			  }
+			  
+			  @Override
+			  public String toString() {
+			    String result = new ToStringHelper().toString(this);
+			    return result;
+			  }
+			}
+		''')
+	}
+	
 	@Test def testThreeDataClassesExtendingEachOther() {
 		'''
 			import java.util.ArrayList
@@ -263,6 +320,106 @@ class PropertyCompilerTest extends AbstractXtendCompilerTest {
 				  
 				  public void setGenerateExpressions(final boolean generateExpressions) {
 				    this._generateExpressions = generateExpressions;
+				  }
+				}
+			''', generatorConfig)
+	}
+	
+	@Test
+	def compileReadonlyPropertyWithoutType() {
+		val generatorConfig = generatorConfigProvider.get(null)
+		assertCompilesTo(
+			'''
+				class C {
+					@Property
+					val string = ''
+				}
+			''',
+			'''
+				@SuppressWarnings("all")
+				public class C {
+				  private final String _string = "";
+				  
+				  public String getString() {
+				    return this._string;
+				  }
+				}
+			''', generatorConfig)
+	}
+	
+	@Test
+	def compilePropertyWithoutType() {
+		val generatorConfig = generatorConfigProvider.get(null)
+		assertCompilesTo(
+			'''
+				class C {
+					@Property
+					var string = ''
+				}
+			''',
+			'''
+				@SuppressWarnings("all")
+				public class C {
+				  private String _string = "";
+				  
+				  public String getString() {
+				    return this._string;
+				  }
+				  
+				  public void setString(final String string) {
+				    this._string = string;
+				  }
+				}
+			''', generatorConfig)
+	}
+	
+	@Test
+	def compilePropertyWithTypeParameter() {
+		val generatorConfig = generatorConfigProvider.get(null)
+		assertCompilesTo(
+			'''
+				class C<T> {
+					@Property
+					var T t
+				}
+			''',
+			'''
+				@SuppressWarnings("all")
+				public class C<T extends Object> {
+				  private T _t;
+				  
+				  public T getT() {
+				    return this._t;
+				  }
+				  
+				  public void setT(final T t) {
+				    this._t = t;
+				  }
+				}
+			''', generatorConfig)
+	}
+	
+	@Test
+	def compilePropertyWithoutTypeButTypeParameter() {
+		val generatorConfig = generatorConfigProvider.get(null)
+		assertCompilesTo(
+			'''
+				class C<T> {
+					@Property
+					var iterable = null as Iterable<T>
+				}
+			''',
+			'''
+				@SuppressWarnings("all")
+				public class C<T extends Object> {
+				  private Iterable<T> _iterable = ((Iterable<T>) null);
+				  
+				  public Iterable<T> getIterable() {
+				    return this._iterable;
+				  }
+				  
+				  public void setIterable(final Iterable<T> iterable) {
+				    this._iterable = iterable;
 				  }
 				}
 			''', generatorConfig)
