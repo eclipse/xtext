@@ -38,7 +38,7 @@ public class XtendCompilerMojoIT {
 	public void aggregation() throws Exception {
 		verifyErrorFreeLog(ROOT + "/aggregation");
 	}
-	
+
 	@Test
 	public void macro() throws Exception {
 		verifyErrorFreeLog(ROOT + "/macros");
@@ -63,18 +63,37 @@ public class XtendCompilerMojoIT {
 		verifier.verifyTextInLog("3: The import 'java.util.Collections' is never used.");
 		verifier.verifyTextInLog("[INFO] BUILD SUCCESS");
 	}
-	
+
 	@Test
 	public void readXtendPrefs() throws Exception {
 		Verifier verifier = newVerifier(ROOT + "/xtend-prefs");
+		verifier.setDebug(true);
 		verifier.executeGoal("test");
 		verifier.verifyErrorFreeLog();
-		System.out.println(verifier.getLogFileName());
 		String xtendOutputDirFromPrefs = "generated-sources/xtend-from-pref";
-		String xtendGenDir = verifier.getBasedir() + "/src/main/"+xtendOutputDirFromPrefs;
-		String xtendTestGenDir = verifier.getBasedir() + "/src/test/"+xtendOutputDirFromPrefs;
+
+		String xtendGenDir = verifier.getBasedir() + "/src/main/" + xtendOutputDirFromPrefs;
 		verifier.assertFilePresent(xtendGenDir + "/test/XtendA.java");
 		verifier.assertFilePresent(xtendGenDir + "/test/XtendC.java");
+
+		String xtendTestGenDir = verifier.getBasedir() + "/src/test/" + xtendOutputDirFromPrefs;
+		verifier.assertFilePresent(xtendTestGenDir + "/tests/XtendA.java");
+		verifier.assertFilePresent(xtendTestGenDir + "/tests/XtendC.java");
+	}
+
+	@Test
+	public void readXtendPrefsUnused() throws Exception {
+		Verifier verifier = newVerifier(ROOT + "/xtend-prefs-unused");
+		verifier.setDebug(true);
+		verifier.executeGoal("test");
+		verifier.verifyErrorFreeLog();
+		String pomsOutputDir = "xtend-dir-from-pom";
+
+		String xtendGenDir = verifier.getBasedir() + "/src/main/" + pomsOutputDir;
+		verifier.assertFilePresent(xtendGenDir + "/test/XtendA.java");
+		verifier.assertFilePresent(xtendGenDir + "/test/XtendC.java");
+
+		String xtendTestGenDir = verifier.getBasedir() + "/src/test/" + pomsOutputDir;
 		verifier.assertFilePresent(xtendTestGenDir + "/tests/XtendA.java");
 		verifier.assertFilePresent(xtendTestGenDir + "/tests/XtendC.java");
 	}
@@ -94,8 +113,8 @@ public class XtendCompilerMojoIT {
 	private Verifier newVerifier(String pathToTestProject) throws IOException, VerificationException {
 		File testDir = ResourceExtractor.simpleExtractResources(getClass(), pathToTestProject);
 		Verifier verifier = new Verifier(testDir.getAbsolutePath());
-//		verifier.setDebugJvm(true);
-//		verifier.setForkJvm(false);
+		//		verifier.setDebugJvm(true);
+		//		verifier.setForkJvm(false);
 		return verifier;
 	}
 }

@@ -57,7 +57,7 @@ public abstract class AbstractXtendCompilerMojo extends AbstractXtendMojo {
 	 * @parameter default-value="true" expression="${writeTraceFiles}"
 	 */
 	protected boolean writeTraceFiles;
-	
+
 	/**
 	 * Location of the Xtend settings file.
 	 * 
@@ -65,7 +65,7 @@ public abstract class AbstractXtendCompilerMojo extends AbstractXtendMojo {
 	 * @readonly
 	 */
 	private String propertiesFileLocation;
-	
+
 	protected XtendBatchCompiler createXtendBatchCompiler() {
 		Injector injector = new XtendMavenStandaloneSetup().createInjectorAndDoEMFRegistration();
 		XtendBatchCompiler instance = injector.getInstance(XtendBatchCompiler.class);
@@ -110,7 +110,7 @@ public abstract class AbstractXtendCompilerMojo extends AbstractXtendMojo {
 		}
 	}
 
-	protected void determinateOutputDirectory(String defaultValue, Procedure1<String> fieldSetter) {
+	protected void determinateOutputDirectory(String sourceDirectory, Procedure1<String> fieldSetter) {
 		if (propertiesFileLocation != null) {
 			File f = new File(propertiesFileLocation);
 			if (f.canRead()) {
@@ -118,15 +118,23 @@ public abstract class AbstractXtendCompilerMojo extends AbstractXtendMojo {
 				try {
 					xtendSettings.load(new FileInputStream(f));
 					// TODO read Xtend setup to compute the properties file loc and property name
-					String xtendOutPutDir = xtendSettings.getProperty("outlet.DEFAULT_OUTPUT.directory", defaultValue);
-					fieldSetter.apply(xtendOutPutDir);
+					String xtendOutputDirProp = xtendSettings.getProperty("outlet.DEFAULT_OUTPUT.directory", null);
+					if (xtendOutputDirProp != null) {
+						File srcDir = new File(sourceDirectory);
+						getLog().debug("Source dir : " + srcDir.getPath() + " exists " + srcDir.exists());
+						if (srcDir.exists() && srcDir.getParent() != null) {
+							String path = new File(srcDir.getParent(), xtendOutputDirProp).getPath();
+							getLog().debug("Applying Xtend property: " + xtendOutputDirProp);
+							fieldSetter.apply(path);
+						}
+					}
 				} catch (FileNotFoundException e) {
 					getLog().warn(e);
 				} catch (IOException e) {
 					getLog().warn(e);
 				}
 			} else {
-				getLog().debug("Can't load Xtend properties:" + propertiesFileLocation);
+				getLog().info("Can't load Xtend properties:" + propertiesFileLocation);
 			}
 		}
 	}

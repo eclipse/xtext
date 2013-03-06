@@ -43,15 +43,17 @@ public class XtendTestCompile extends AbstractXtendCompilerMojo {
 
 	@Override
 	protected void internalExecute() throws MojoExecutionException {
-		final String defaultValue = "generated-sources/xtend";
-		determinateOutputDirectory(defaultValue, new Procedure1<String>() {
-			public void apply(String xtendOutputDir) {
-				if (!defaultValue.equals(xtendOutputDir)) {
-					testOutputDirectory = project.getBasedir() + "/src/test/" + xtendOutputDir;
+		final String defaultValue = project.getBasedir() + "/src/test/generated-sources/xtend";
+		getLog().debug("Output directory '" + testOutputDirectory + "'");
+		getLog().debug("Default directory '" + defaultValue + "'");
+		if (defaultValue.equals(testOutputDirectory)) {
+			determinateOutputDirectory(project.getBuild().getTestSourceDirectory(), new Procedure1<String>() {
+				public void apply(String xtendOutputDir) {
+					testOutputDirectory = xtendOutputDir;
 					getLog().info("Using Xtend output directory '" + testOutputDirectory + "'");
 				}
-			}
-		});
+			});
+		}
 		compileTestSources(xtendBatchCompilerProvider.get());
 	}
 
