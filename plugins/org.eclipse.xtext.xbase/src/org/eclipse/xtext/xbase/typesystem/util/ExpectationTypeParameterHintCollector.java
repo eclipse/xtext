@@ -28,7 +28,7 @@ public class ExpectationTypeParameterHintCollector extends DeferredTypeParameter
 		@Override
 		public void doVisitUnboundTypeReference(UnboundTypeReference reference,
 				ParameterizedTypeReference declaration) {
-			if (!reference.internalIsResolved() && !getOwner().isResolved(reference.getHandle()) && reference.canResolveTo(declaration)) {
+			if (!reference.internalIsResolved() && declaration.isResolved() && !getOwner().isResolved(reference.getHandle()) && reference.canResolveTo(declaration)) {
 				reference.acceptHint(declaration, BoundTypeArgumentSource.RESOLVED, this, VarianceInfo.INVARIANT, VarianceInfo.INVARIANT);
 			} else {
 				reference.tryResolve();

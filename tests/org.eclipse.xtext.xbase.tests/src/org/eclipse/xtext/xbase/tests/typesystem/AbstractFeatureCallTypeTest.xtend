@@ -60,6 +60,39 @@ abstract class AbstractFeatureCallTypeTest extends AbstractXbaseTestCase {
 		"{ val String s = foo::JEP101List::nil.head }".resolvesFeatureCallsTo("JEP101List<String>", "String")
 	}
 	
+	@Test def void testElvisWithEmptyListInLambda() throws Exception {
+		"[ String s |
+			val result = <Integer>newArrayList
+			val (String)=>Iterable<Integer> fun = []
+			result += fun.apply(s) ?: emptyList
+			result
+		]".resolvesFeatureCallsTo(
+			"ArrayList<Integer>", // <Integer>newArrayList
+			"ArrayList<Integer>", // result
+			"boolean", // +=
+			"(String)=>Iterable<Integer>", // fun
+			"Iterable<Integer>", // apply 
+			"String", // s
+			"Iterable<Integer>", // ?: 
+			"List<Integer>", // emptyList
+			"ArrayList<Integer>") // result
+	}
+	
+	@Test def void testElvisWithEmptyList() throws Exception {
+		"{ 
+			val java.util.List<Integer> list = null
+			val fun = [| list ]
+			list += fun.apply ?: emptyList
+         }".resolvesFeatureCallsTo(
+			"List<Integer>", // list in lambda
+			"List<Integer>", // list
+			"boolean", // +=
+			"()=>List<Integer>", // fun
+			"List<Integer>", // apply
+			"List<Integer>", // ?: 
+			"List<Integer>") // emptyList
+	}
+	
 	@Test def void testRawType_01() throws Exception {
 		"{ val java.util.Set set = newHashSet() set }".resolvesFeatureCallsTo("HashSet", "Set")
 	}
