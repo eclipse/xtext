@@ -16,13 +16,14 @@ import org.junit.runners.Suite.SuiteClasses;
  */
 @RunWith(Suite.class)
 @SuiteClasses({
-	SkipCharacterInBetween.class,
-	SkipFirstCharacters.class,
-	SkipLastCharacters.class,
-	SkipNodesInBetween.class,
-	SkipThreeCharactersInBetween.class,
-	SkipTokensInBetween.class,
+	SkipCharacterInBetweenCompilerBugSmokeTest.class,
+	SkipCharacterInBetweenCompilerSmokeTest.class,
+	SkipCharacterInBetweenConfiguredCompilerSmokeTest.class,
+	SkipCharacterInBetweenDataCompilerSmokeTest.class,
+	SkipCharacterInBetweenExtensionsCompilerSmokeTest.class,
+	SkipCharacterInBetweenPropertyCompilerSmokeTest.class,
+	SkipCharacterInBetweenXtendCompilerSmokeTest.class,
 })
-public class SmokeSuite {
+public class SkipCharacterInBetween {
 
 }
