@@ -64,8 +64,6 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 		''')
 	}
 	
-	
-	
 	/**
 	 * Do not throw an exception for inherited dispatch methods.
 	 */
