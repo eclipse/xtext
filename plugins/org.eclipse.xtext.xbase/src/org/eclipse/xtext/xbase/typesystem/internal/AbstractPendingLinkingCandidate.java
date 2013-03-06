@@ -98,8 +98,8 @@ public abstract class AbstractPendingLinkingCandidate<Expression extends XExpres
 			b.append("(");
 			for(int i=0; i<parameters.size(); ++i) {
 				JvmTypeReference parameterType = parameters.get(i).getParameterType();
-				ownedConverter.apply(parameterType);
-				b.append(parameterType.getSimpleName());
+				LightweightTypeReference typeReference = ownedConverter.toLightweightReference(parameterType);
+				b.append(typeReference.getSimpleName());
 				if(i < parameters.size()-1)
 					b.append(",");
 			}
