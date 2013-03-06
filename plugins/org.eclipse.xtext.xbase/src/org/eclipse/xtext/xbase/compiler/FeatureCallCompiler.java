@@ -712,7 +712,11 @@ public class FeatureCallCompiler extends LiteralsCompiler {
 			else
 				name = "super";
 		} else {
-			name = featureNameProvider.getSimpleName(feature);
+			if (b.hasName(feature)) {
+				name = b.getName(feature);
+			} else {
+				name = featureNameProvider.getSimpleName(feature);
+			}
 		}
 		b.trace(call, XbasePackage.Literals.XABSTRACT_FEATURE_CALL__FEATURE, 0).append(name);
 		if (feature instanceof JvmExecutable) {
