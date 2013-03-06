@@ -10,12 +10,14 @@ import org.eclipse.xtext.xbase.compiler.StringBuilderBasedAppendable;
 import org.eclipse.xtext.xbase.compiler.TypeReferenceSerializer;
 import org.eclipse.xtext.xbase.compiler.output.ITreeAppendable;
 import org.eclipse.xtext.xbase.lib.Exceptions;
+import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.Functions.Function0;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.util.ReflectExtensions;
 
 @SuppressWarnings("all")
 public class CompilationContextImpl implements CompilationContext {
+  @Extension
   private ReflectExtensions reflectExtensions = new Function0<ReflectExtensions>() {
     public ReflectExtensions apply() {
       ReflectExtensions _reflectExtensions = new ReflectExtensions();

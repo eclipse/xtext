@@ -13,6 +13,7 @@ import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XbasePackage.Literals;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Exceptions;
+import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.util.ReflectExtensions;
 import org.eclipse.xtext.xbase.tests.jvmmodel.AbstractJvmModelTest;
 import org.eclipse.xtext.xbase.validation.IssueCodes;
@@ -28,6 +29,7 @@ public class JvmModelTest extends AbstractJvmModelTest {
   private Manager manager;
   
   @Inject
+  @Extension
   private ReflectExtensions _reflectExtensions;
   
   @Test

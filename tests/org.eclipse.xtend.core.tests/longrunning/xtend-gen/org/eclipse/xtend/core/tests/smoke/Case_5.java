@@ -4,6 +4,7 @@ import com.google.inject.Inject;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import org.eclipse.xtext.xbase.lib.Extension;
 
 @SuppressWarnings("all")
 public class Case_5 {
@@ -11,6 +12,7 @@ public class Case_5 {
   private ArrayList myList;
   
   @Inject
+  @Extension
   private String s;
   
   public boolean something(final int i) {

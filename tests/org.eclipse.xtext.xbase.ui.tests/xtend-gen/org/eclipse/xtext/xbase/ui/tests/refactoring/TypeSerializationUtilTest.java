@@ -14,6 +14,7 @@ import org.eclipse.xtext.xbase.XVariableDeclaration;
 import org.eclipse.xtext.xbase.compiler.ImportManager;
 import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Exceptions;
+import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IteratorExtensions;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
@@ -33,9 +34,11 @@ public class TypeSerializationUtilTest extends AbstractXbaseTestCase {
   private TypeSerializationUtil util;
   
   @Inject
+  @Extension
   private ParseHelper<XExpression> _parseHelper;
   
   @Inject
+  @Extension
   private ITypeProvider _iTypeProvider;
   
   @Test

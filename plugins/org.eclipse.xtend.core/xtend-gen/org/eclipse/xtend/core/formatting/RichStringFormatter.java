@@ -33,6 +33,7 @@ import org.eclipse.xtext.xbase.formatting.FormattingDataInit;
 import org.eclipse.xtext.xbase.formatting.NewLineData;
 import org.eclipse.xtext.xbase.formatting.NodeModelAccess;
 import org.eclipse.xtext.xbase.formatting.WhitespaceData;
+import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ListExtensions;
@@ -54,9 +55,11 @@ public class RichStringFormatter {
   private RichStringProcessor richStringProcessor;
   
   @Inject
+  @Extension
   private NodeModelAccess _nodeModelAccess;
   
   @Inject
+  @Extension
   private FormattingDataFactory _formattingDataFactory;
   
   public void format(final Procedure2<? super EObject,? super FormattableDocument> formatter, final FormattableDocument doc, final RichString richString) {

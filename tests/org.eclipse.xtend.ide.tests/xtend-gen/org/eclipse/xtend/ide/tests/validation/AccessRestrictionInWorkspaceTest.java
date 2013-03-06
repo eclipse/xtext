@@ -36,6 +36,7 @@ import org.eclipse.xtext.junit4.validation.ValidationTestHelper;
 import org.eclipse.xtext.ui.resource.IResourceSetProvider;
 import org.eclipse.xtext.util.MergeableManifest;
 import org.eclipse.xtext.xbase.lib.Exceptions;
+import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.validation.IssueCodes;
 import org.junit.After;
@@ -48,9 +49,11 @@ import org.junit.Test;
 @SuppressWarnings("all")
 public class AccessRestrictionInWorkspaceTest extends AbstractXtendUITestCase {
   @Inject
+  @Extension
   private ValidationTestHelper _validationTestHelper;
   
   @Inject
+  @Extension
   private IResourceSetProvider _iResourceSetProvider;
   
   @Test

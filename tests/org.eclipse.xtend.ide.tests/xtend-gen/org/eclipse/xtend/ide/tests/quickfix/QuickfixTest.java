@@ -6,6 +6,7 @@ import org.eclipse.xtend.ide.tests.AbstractXtendUITestCase;
 import org.eclipse.xtend.ide.tests.quickfix.QuickfixTestBuilder;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.diagnostics.Diagnostic;
+import org.eclipse.xtext.xbase.lib.Extension;
 import org.junit.After;
 import org.junit.Ignore;
 import org.junit.Test;
@@ -13,6 +14,7 @@ import org.junit.Test;
 @SuppressWarnings("all")
 public class QuickfixTest extends AbstractXtendUITestCase {
   @Inject
+  @Extension
   private QuickfixTestBuilder builder;
   
   private final static String defaultBody = "throw new UnsupportedOperationException(\"TODO: auto-generated method stub\")";

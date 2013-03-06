@@ -22,6 +22,7 @@ import org.eclipse.xtext.util.Strings;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.jvmmodel.JvmTypesBuilder;
 import org.eclipse.xtext.xbase.lib.Exceptions;
+import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xbase.resource.JvmDeclaredTypeSignatureHashProvider;
 import org.eclipse.xtext.xbase.tests.AbstractXbaseTestCase;
@@ -36,12 +37,15 @@ import org.junit.Test;
 @SuppressWarnings("all")
 public class TypeSignatureHashTest extends AbstractXbaseTestCase {
   @Inject
+  @Extension
   private JvmDeclaredTypeSignatureHashProvider _jvmDeclaredTypeSignatureHashProvider;
   
   @Inject
+  @Extension
   private JvmTypesBuilder _jvmTypesBuilder;
   
   @Inject
+  @Extension
   private TypeReferences _typeReferences;
   
   @Test

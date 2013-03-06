@@ -21,6 +21,7 @@ import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XFeatureCall;
 import org.eclipse.xtext.xbase.XVariableDeclaration;
 import org.eclipse.xtext.xbase.lib.Exceptions;
+import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.util.ReflectExtensions;
 import org.eclipse.xtext.xbase.resource.BatchLinkableResource;
@@ -34,9 +35,11 @@ import org.junit.Test;
 @SuppressWarnings("all")
 public class BeforeLinkingTest extends AbstractXbaseTestCase {
   @Inject
+  @Extension
   private ParseHelper<XExpression> _parseHelper;
   
   @Inject
+  @Extension
   private ReflectExtensions _reflectExtensions;
   
   @Test

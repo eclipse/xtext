@@ -44,6 +44,7 @@ import org.eclipse.xtext.xbase.jvmmodel.JvmTypesBuilder;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Exceptions;
+import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.Functions.Function3;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
@@ -62,6 +63,7 @@ public class JvmTypesBuilderTest extends AbstractXbaseTestCase {
   private TypeReferences references;
   
   @Inject
+  @Extension
   private JvmTypesBuilder _jvmTypesBuilder;
   
   @Inject

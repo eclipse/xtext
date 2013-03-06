@@ -14,6 +14,7 @@ import org.eclipse.xtext.junit4.XtextRunner;
 import org.eclipse.xtext.purexbase.test.RuntimeInjectorProvider;
 import org.eclipse.xtext.xbase.compiler.CompilationTestHelper;
 import org.eclipse.xtext.xbase.lib.Exceptions;
+import org.eclipse.xtext.xbase.lib.Extension;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -22,6 +23,7 @@ import org.junit.runner.RunWith;
 @SuppressWarnings("all")
 public class CompilerTest {
   @Inject
+  @Extension
   private CompilationTestHelper _compilationTestHelper;
   
   @Test

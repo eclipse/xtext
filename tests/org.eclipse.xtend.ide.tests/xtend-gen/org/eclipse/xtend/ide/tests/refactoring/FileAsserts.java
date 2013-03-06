@@ -6,11 +6,13 @@ import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.xtend.ide.tests.WorkbenchTestHelper;
 import org.eclipse.xtend2.lib.StringConcatenation;
+import org.eclipse.xtext.xbase.lib.Extension;
 import org.junit.Assert;
 
 @SuppressWarnings("all")
 public class FileAsserts {
   @Inject
+  @Extension
   private WorkbenchTestHelper _workbenchTestHelper;
   
   public IFile assertFileExists(final String fileName) throws Exception {

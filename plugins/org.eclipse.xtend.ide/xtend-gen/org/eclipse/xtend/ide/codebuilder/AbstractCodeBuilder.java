@@ -30,6 +30,7 @@ import org.eclipse.xtext.xbase.compiler.IAppendable;
 import org.eclipse.xtext.xbase.compiler.StringBuilderBasedAppendable;
 import org.eclipse.xtext.xbase.compiler.TypeReferenceSerializer;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
+import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 
 /**
@@ -79,9 +80,11 @@ public abstract class AbstractCodeBuilder implements ICodeBuilder {
   }
   
   @Inject
+  @Extension
   private JdtVariableCompletions _jdtVariableCompletions;
   
   @Inject
+  @Extension
   private IJavaElementFinder _iJavaElementFinder;
   
   public boolean isValid() {

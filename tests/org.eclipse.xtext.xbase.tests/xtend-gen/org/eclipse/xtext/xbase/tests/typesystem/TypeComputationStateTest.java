@@ -21,6 +21,7 @@ import org.eclipse.xtext.xbase.XNullLiteral;
 import org.eclipse.xtext.xbase.junit.typesystem.PublicReentrantTypeResolver;
 import org.eclipse.xtext.xbase.junit.typesystem.PublicResolvedTypes;
 import org.eclipse.xtext.xbase.lib.Exceptions;
+import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.IteratorExtensions;
@@ -52,6 +53,7 @@ public class TypeComputationStateTest extends AbstractXbaseTestCase implements I
   private PublicReentrantTypeResolver resolver;
   
   @Inject
+  @Extension
   private ReflectExtensions _reflectExtensions;
   
   @Test

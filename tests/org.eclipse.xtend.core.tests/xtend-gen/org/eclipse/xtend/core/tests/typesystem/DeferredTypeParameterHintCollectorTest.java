@@ -27,6 +27,7 @@ import org.eclipse.xtext.util.Tuples;
 import org.eclipse.xtext.xbase.junit.typesystem.PublicResolvedTypes;
 import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Exceptions;
+import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.Functions.Function0;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
@@ -52,6 +53,7 @@ import org.junit.Test;
 @SuppressWarnings("all")
 public class DeferredTypeParameterHintCollectorTest extends AbstractTestingTypeReferenceOwner {
   @Inject
+  @Extension
   private IXtendJvmAssociations _iXtendJvmAssociations;
   
   @Inject

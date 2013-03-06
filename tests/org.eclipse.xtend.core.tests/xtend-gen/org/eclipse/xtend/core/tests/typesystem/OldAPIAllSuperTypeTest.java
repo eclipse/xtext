@@ -20,6 +20,7 @@ import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.util.SuperTypeCollector;
 import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Exceptions;
+import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.Pair;
@@ -34,6 +35,7 @@ import org.junit.Test;
 @SuppressWarnings("all")
 public class OldAPIAllSuperTypeTest extends AllSuperTypesTest {
   @Inject
+  @Extension
   private IXtendJvmAssociations _iXtendJvmAssociations;
   
   @Inject

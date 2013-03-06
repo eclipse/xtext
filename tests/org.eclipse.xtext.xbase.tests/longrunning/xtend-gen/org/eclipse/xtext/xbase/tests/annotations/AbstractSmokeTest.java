@@ -17,6 +17,7 @@ import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XSwitchExpression;
 import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotation;
 import org.eclipse.xtext.xbase.lib.Exceptions;
+import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.IteratorExtensions;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.util.ReflectExtensions;
@@ -38,6 +39,7 @@ public abstract class AbstractSmokeTest extends AnnotationsValidatorTest {
   private IBatchTypeResolver typeResolver;
   
   @Inject
+  @Extension
   private ParseHelper<EObject> _parseHelper;
   
   @Before
@@ -123,6 +125,7 @@ public abstract class AbstractSmokeTest extends AnnotationsValidatorTest {
   }
   
   @Inject
+  @Extension
   private ReflectExtensions _reflectExtensions;
   
   public void assertExpressionTypeIsResolved(final XExpression expression, final IResolvedTypes types) {

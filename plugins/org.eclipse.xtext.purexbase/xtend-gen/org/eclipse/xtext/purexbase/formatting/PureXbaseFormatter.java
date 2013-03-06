@@ -14,6 +14,7 @@ import org.eclipse.xtext.formatting.impl.FormattingConfig.NoSpaceLocator;
 import org.eclipse.xtext.purexbase.services.PureXbaseGrammarAccess;
 import org.eclipse.xtext.purexbase.services.PureXbaseGrammarAccess.SpecialBlockExpressionElements;
 import org.eclipse.xtext.xbase.formatting.XbaseFormatter;
+import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.services.XbaseGrammarAccess;
 import org.eclipse.xtext.xbase.services.XtypeGrammarAccess.XImportSectionElements;
 
@@ -26,6 +27,7 @@ import org.eclipse.xtext.xbase.services.XtypeGrammarAccess.XImportSectionElement
 @SuppressWarnings("all")
 public class PureXbaseFormatter extends AbstractDeclarativeFormatter {
   @Inject
+  @Extension
   private PureXbaseGrammarAccess _pureXbaseGrammarAccess;
   
   @Inject

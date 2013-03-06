@@ -14,6 +14,7 @@ import org.eclipse.xtext.util.Files;
 import org.eclipse.xtext.xbase.XbaseStandaloneSetup;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Exceptions;
+import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.Functions.Function0;
 import org.eclipse.xtext.xbase.lib.StringExtensions;
 import org.eclipse.xtext.xbase.scoping.featurecalls.OperatorMapping;
@@ -53,6 +54,7 @@ public class ArithmeticExtensionGenerator {
   }.apply();
   
   @Inject
+  @Extension
   private OperatorMapping _operatorMapping;
   
   public void generate() {

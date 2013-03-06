@@ -11,6 +11,7 @@ import com.google.inject.Inject;
 import org.eclipse.xtend.core.tests.compiler.CompilerTest;
 import org.eclipse.xtext.xbase.junit.typesystem.Oven;
 import org.eclipse.xtext.xbase.lib.Exceptions;
+import org.eclipse.xtext.xbase.lib.Extension;
 import org.junit.Ignore;
 import org.junit.Test;
 
@@ -20,6 +21,7 @@ import org.junit.Test;
 @SuppressWarnings("all")
 public abstract class AbstractCompilerSmokeTest extends CompilerTest {
   @Inject
+  @Extension
   private Oven _oven;
   
   public void testBug_350932_13() throws Exception {

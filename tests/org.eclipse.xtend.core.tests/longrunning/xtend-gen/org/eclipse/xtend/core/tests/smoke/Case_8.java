@@ -12,15 +12,18 @@ import org.eclipse.xtext.junit4.util.ParseHelper;
 import org.eclipse.xtext.naming.IQualifiedNameProvider;
 import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.xbase.lib.Exceptions;
+import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.junit.Assert;
 
 @SuppressWarnings("all")
 public class Case_8 {
   @Inject
+  @Extension
   private ParseHelper<EObject> helper;
   
   @Inject
+  @Extension
   private IQualifiedNameProvider qualifiedNameProvider;
   
   public EList<Diagnostic> getErrors(final EObject obj) {

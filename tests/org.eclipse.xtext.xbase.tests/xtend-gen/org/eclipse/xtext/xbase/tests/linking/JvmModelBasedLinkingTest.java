@@ -26,6 +26,7 @@ import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XFeatureCall;
 import org.eclipse.xtext.xbase.jvmmodel.JvmTypesBuilder;
 import org.eclipse.xtext.xbase.lib.Exceptions;
+import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xbase.tests.AbstractXbaseTestCase;
 import org.eclipse.xtext.xbase.tests.typesystem.XbaseWithLogicalContainerInjectorProvider;
@@ -38,12 +39,14 @@ import org.junit.runner.RunWith;
 @SuppressWarnings("all")
 public class JvmModelBasedLinkingTest extends AbstractXbaseTestCase {
   @Inject
+  @Extension
   private JvmTypesBuilder _jvmTypesBuilder;
   
   @Inject
   private TypeReferences refs;
   
   @Inject
+  @Extension
   private ValidationTestHelper _validationTestHelper;
   
   @Test

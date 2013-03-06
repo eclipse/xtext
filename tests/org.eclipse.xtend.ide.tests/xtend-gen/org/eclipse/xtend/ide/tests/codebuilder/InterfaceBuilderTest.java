@@ -7,6 +7,7 @@ import org.eclipse.xtend.ide.tests.codebuilder.AbstractBuilderTest;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmVisibility;
+import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.junit.Test;
@@ -14,6 +15,7 @@ import org.junit.Test;
 @SuppressWarnings("all")
 public class InterfaceBuilderTest extends AbstractBuilderTest {
   @Inject
+  @Extension
   private CodeBuilderFactory _codeBuilderFactory;
   
   @Test

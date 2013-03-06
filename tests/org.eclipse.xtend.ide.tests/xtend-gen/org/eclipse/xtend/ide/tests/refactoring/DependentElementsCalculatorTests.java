@@ -25,6 +25,7 @@ import org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil;
 import org.eclipse.xtext.ui.refactoring.IDependentElementsCalculator;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Exceptions;
+import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.junit.Assert;
@@ -39,6 +40,7 @@ public class DependentElementsCalculatorTests extends AbstractXtendUITestCase {
   private IDependentElementsCalculator dependentElementsCalculator;
   
   @Inject
+  @Extension
   private IXtendJvmAssociations associations;
   
   @Inject

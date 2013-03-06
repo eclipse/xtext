@@ -27,6 +27,7 @@ import org.eclipse.xtext.xbase.compiler.GeneratorConfig;
 import org.eclipse.xtext.xbase.compiler.IGeneratorConfigProvider;
 import org.eclipse.xtext.xbase.compiler.JvmModelGenerator;
 import org.eclipse.xtext.xbase.lib.Exceptions;
+import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.Functions.Function0;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
@@ -46,6 +47,7 @@ public class CompilerTraceTest extends AbstractXtendTestCase {
   private IGeneratorConfigProvider generatorConfigProvider;
   
   @Inject
+  @Extension
   private IXtendJvmAssociations _iXtendJvmAssociations;
   
   @Test

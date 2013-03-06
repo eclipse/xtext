@@ -20,6 +20,7 @@ import org.eclipse.xtext.util.ReplaceRegion;
 import org.eclipse.xtext.xbase.imports.RewritableImportSection;
 import org.eclipse.xtext.xbase.imports.RewritableImportSection.Factory;
 import org.eclipse.xtext.xbase.lib.Exceptions;
+import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ListExtensions;
@@ -29,9 +30,11 @@ import org.junit.Test;
 @SuppressWarnings("all")
 public abstract class AbstractRewritableImportSectionTest extends AbstractXtendTestCase {
   @Inject
+  @Extension
   private Factory _rewritableImportSection$Factory;
   
   @Inject
+  @Extension
   private TypeReferences _typeReferences;
   
   private XtendFile xtendFile;

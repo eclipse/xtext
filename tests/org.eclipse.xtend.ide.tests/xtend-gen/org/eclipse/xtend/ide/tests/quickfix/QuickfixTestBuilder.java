@@ -23,6 +23,7 @@ import org.eclipse.xtext.validation.Issue;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Exceptions;
+import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ListExtensions;
@@ -33,15 +34,19 @@ import org.junit.Assert;
 @SuppressWarnings("all")
 public class QuickfixTestBuilder {
   @Inject
+  @Extension
   private WorkbenchTestHelper _workbenchTestHelper;
   
   @Inject
+  @Extension
   private IssueResolutionProvider _issueResolutionProvider;
   
   @Inject
+  @Extension
   private IResourceValidator _iResourceValidator;
   
   @Inject
+  @Extension
   private SyncUtil _syncUtil;
   
   private int caretOffset;

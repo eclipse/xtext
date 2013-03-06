@@ -20,6 +20,7 @@ import org.eclipse.xtext.xbase.compiler.output.ITreeAppendable;
 import org.eclipse.xtext.xbase.compiler.output.TreeAppendable;
 import org.eclipse.xtext.xbase.jvmmodel.IJvmModelAssociations;
 import org.eclipse.xtext.xbase.lib.Exceptions;
+import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure2;
 import org.eclipse.xtext.xbase.tests.AbstractXbaseTestCase;
@@ -41,6 +42,7 @@ public class ErrorSafeExtensionsTest extends AbstractXbaseTestCase {
   private ITraceURIConverter converter;
   
   @Inject
+  @Extension
   private ErrorSafeExtensions _errorSafeExtensions;
   
   @Test

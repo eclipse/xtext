@@ -30,6 +30,7 @@ import org.eclipse.xtext.generator.Xtend2ExecutionContext;
 import org.eclipse.xtext.generator.Xtend2GeneratorFragment;
 import org.eclipse.xtext.generator.validation.ValidatorNaming;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
+import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.Functions.Function0;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
@@ -43,6 +44,7 @@ import org.eclipse.xtext.xbase.lib.IterableExtensions;
 @SuppressWarnings("all")
 public class ValidatorFragment extends Xtend2GeneratorFragment implements IInheriting, IStubGenerating {
   @Inject
+  @Extension
   private ValidatorNaming _validatorNaming;
   
   private boolean _inheritImplementation = true;

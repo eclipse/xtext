@@ -29,6 +29,7 @@ import org.eclipse.xtext.junit4.InjectWith;
 import org.eclipse.xtext.junit4.XtextRunner;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Exceptions;
+import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ListExtensions;
@@ -46,15 +47,18 @@ import org.junit.runner.RunWith;
 @SuppressWarnings("all")
 public class OldAPICommonSuperTypeTest extends CommonSuperTypeTest {
   @Inject
+  @Extension
   private IXtendJvmAssociations _iXtendJvmAssociations;
   
   @Inject
   private TypeConformanceComputer typeConformanceComputer;
   
   @Inject
+  @Extension
   private TypeReferences _typeReferences;
   
   @Inject
+  @Extension
   private Primitives _primitives;
   
   public Object isSuperTypeOf(final Pair<String,String> superTypeAndParam, final String... types) {

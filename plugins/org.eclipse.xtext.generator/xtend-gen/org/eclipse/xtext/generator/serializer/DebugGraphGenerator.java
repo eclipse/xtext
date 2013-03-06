@@ -32,20 +32,24 @@ import org.eclipse.xtext.util.formallang.Pda;
 import org.eclipse.xtext.util.formallang.PdaToDot;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Exceptions;
+import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.Pair;
 
 @SuppressWarnings("all")
 public class DebugGraphGenerator {
   @Inject
+  @Extension
   private IContextProvider contextProvider;
   
   @Inject
   private Grammar grammar;
   
   @Inject
+  @Extension
   private Naming naming;
   
   @Inject
+  @Extension
   private Context2NameFunction nameFunction;
   
   @Inject

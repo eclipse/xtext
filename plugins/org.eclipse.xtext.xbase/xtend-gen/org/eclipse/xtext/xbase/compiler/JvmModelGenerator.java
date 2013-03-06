@@ -103,6 +103,7 @@ import org.eclipse.xtext.xbase.jvmmodel.ILogicalContainerProvider;
 import org.eclipse.xtext.xbase.jvmmodel.JvmTypeExtensions;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Exceptions;
+import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IntegerRange;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
@@ -119,21 +120,27 @@ import org.eclipse.xtext.xbase.lib.StringExtensions;
 @SuppressWarnings("all")
 public class JvmModelGenerator implements IGenerator {
   @Inject
+  @Extension
   private ILogicalContainerProvider _iLogicalContainerProvider;
   
   @Inject
+  @Extension
   private TypeReferences _typeReferences;
   
   @Inject
+  @Extension
   private TreeAppendableUtil _treeAppendableUtil;
   
   @Inject
+  @Extension
   private JvmTypeExtensions _jvmTypeExtensions;
   
   @Inject
+  @Extension
   private LoopExtensions _loopExtensions;
   
   @Inject
+  @Extension
   private ErrorSafeExtensions _errorSafeExtensions;
   
   @Inject

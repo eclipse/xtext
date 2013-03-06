@@ -69,6 +69,7 @@ import org.eclipse.xtext.xbase.formatting.HiddenLeafs;
 import org.eclipse.xtext.xbase.formatting.NodeModelAccess;
 import org.eclipse.xtext.xbase.formatting.XbaseFormatter2;
 import org.eclipse.xtext.xbase.formatting.XbaseFormatterPreferenceKeys;
+import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IntegerRange;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
@@ -82,12 +83,15 @@ import org.eclipse.xtext.xtype.XImportSection;
 @SuppressWarnings("all")
 public class XtendFormatter extends XbaseFormatter2 {
   @Inject
+  @Extension
   private NodeModelAccess _nodeModelAccess;
   
   @Inject
+  @Extension
   private HiddenLeafAccess _hiddenLeafAccess;
   
   @Inject
+  @Extension
   private FormattingDataFactory _formattingDataFactory;
   
   @Inject

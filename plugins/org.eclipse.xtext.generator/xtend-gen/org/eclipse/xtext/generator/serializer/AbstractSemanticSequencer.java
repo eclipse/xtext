@@ -50,6 +50,7 @@ import org.eclipse.xtext.serializer.sequencer.ITransientValueService;
 import org.eclipse.xtext.serializer.sequencer.ITransientValueService.ValueTransient;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Conversions;
+import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
@@ -61,15 +62,18 @@ public class AbstractSemanticSequencer extends GeneratedFile {
   private Grammar grammar;
   
   @Inject
+  @Extension
   private GrammarAccess grammarAccess;
   
   @Inject
+  @Extension
   private SemanticSequencerUtil sequencerUtil;
   
   @Inject
   private SerializerGenFileNames names;
   
   @Inject
+  @Extension
   private Context2NameFunction ctx2name;
   
   public <T extends ENamedElement> List<T> sortByName(final Iterable<T> iterable) {

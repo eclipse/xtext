@@ -19,6 +19,7 @@ import org.eclipse.xtext.ui.editor.model.IXtextDocument;
 import org.eclipse.xtext.util.concurrent.IUnitOfWork;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.lib.Exceptions;
+import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xbase.ui.refactoring.ExpressionUtil;
 import org.junit.After;
@@ -31,6 +32,7 @@ import org.junit.Test;
 @SuppressWarnings("all")
 public class ExtractMethodIntegrationTest extends AbstractXtendUITestCase {
   @Inject
+  @Extension
   private WorkbenchTestHelper workbenchTestHelper;
   
   @Inject

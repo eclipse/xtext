@@ -41,6 +41,7 @@ import org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Exceptions;
+import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
@@ -54,15 +55,18 @@ import org.junit.Test;
 @SuppressWarnings("all")
 public class JdtFindReferencesTest extends AbstractXtendUITestCase {
   @Inject
+  @Extension
   private WorkbenchTestHelper _workbenchTestHelper;
   
   @Inject
+  @Extension
   private JdtReferenceFinder _jdtReferenceFinder;
   
   @Inject
   private IWorkbench workbench;
   
   @Inject
+  @Extension
   private JvmModelFindReferenceHandler _jvmModelFindReferenceHandler;
   
   @AfterClass

@@ -13,6 +13,7 @@ import java.util.Map;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.JvmTypeReference;
+import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.Functions.Function0;
 import org.eclipse.xtext.xbase.tests.typesystem.AbstractTypeParameterSubstitutorTest;
 import org.eclipse.xtext.xbase.typesystem.references.ITypeReferenceOwner;
@@ -32,6 +33,7 @@ public class LightweightTypeParameterSubstitutorTest extends AbstractTypeParamet
   @Inject
   private CommonTypeComputationServices services;
   
+  @Extension
   private OwnedConverter _ownedConverter = new Function0<OwnedConverter>() {
     public OwnedConverter apply() {
       OwnedConverter _ownedConverter = new OwnedConverter(LightweightTypeParameterSubstitutorTest.this);

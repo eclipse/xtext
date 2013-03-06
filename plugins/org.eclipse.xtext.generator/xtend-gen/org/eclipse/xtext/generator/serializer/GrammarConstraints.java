@@ -20,6 +20,7 @@ import org.eclipse.xtext.generator.serializer.SerializerGenFileNames.GenFileName
 import org.eclipse.xtext.serializer.analysis.IGrammarConstraintProvider.IConstraint;
 import org.eclipse.xtext.serializer.analysis.IGrammarConstraintProvider.IConstraintContext;
 import org.eclipse.xtext.serializer.analysis.IGrammarConstraintProvider.IConstraintElement;
+import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 
 @SuppressWarnings("all")
@@ -28,6 +29,7 @@ public class GrammarConstraints extends GeneratedFile {
   private Grammar grammar;
   
   @Inject
+  @Extension
   private SemanticSequencerUtil sequencerUtil;
   
   public CharSequence getFileContents(final GenFileName filename) {

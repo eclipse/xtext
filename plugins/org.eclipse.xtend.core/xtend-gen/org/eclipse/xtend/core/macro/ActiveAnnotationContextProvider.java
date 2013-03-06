@@ -38,6 +38,7 @@ import org.eclipse.xtext.util.internal.Stopwatches.StoppedTask;
 import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotation;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Exceptions;
+import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
@@ -53,9 +54,11 @@ public class ActiveAnnotationContextProvider {
   private OnChangeEvictingCache cache;
   
   @Inject
+  @Extension
   private XAnnotationExtensions _xAnnotationExtensions;
   
   @Inject
+  @Extension
   private ProcessorInstanceForJvmTypeProvider _processorInstanceForJvmTypeProvider;
   
   @Inject

@@ -17,18 +17,21 @@ import org.eclipse.xtend.ide.tests.AbstractXtendUITestCase;
 import org.eclipse.xtend.ide.tests.WorkbenchTestHelper;
 import org.eclipse.xtend.ide.tests.refactoring.FileAsserts;
 import org.eclipse.xtext.xbase.lib.Exceptions;
+import org.eclipse.xtext.xbase.lib.Extension;
 import org.junit.Assert;
 import org.junit.Test;
 
 @SuppressWarnings("all")
 public class RenameResourceTest extends AbstractXtendUITestCase {
   @Inject
+  @Extension
   private WorkbenchTestHelper _workbenchTestHelper;
   
   @Inject
   private IWorkspace workspace;
   
   @Inject
+  @Extension
   private FileAsserts _fileAsserts;
   
   @Test

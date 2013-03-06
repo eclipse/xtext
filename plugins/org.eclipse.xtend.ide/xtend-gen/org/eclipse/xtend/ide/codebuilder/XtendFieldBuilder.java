@@ -19,6 +19,7 @@ import org.eclipse.xtext.common.types.JvmVisibility;
 import org.eclipse.xtext.xbase.compiler.IAppendable;
 import org.eclipse.xtext.xbase.compiler.TypeReferenceSerializer;
 import org.eclipse.xtext.xbase.compiler.output.XtypeTypeReferenceSerializer;
+import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 
 @SuppressWarnings("all")
@@ -27,6 +28,7 @@ public class XtendFieldBuilder extends AbstractFieldBuilder implements Xtend {
   private XtypeTypeReferenceSerializer typeRefSerializer;
   
   @Inject
+  @Extension
   private InsertionOffsets _insertionOffsets;
   
   public boolean isValid() {

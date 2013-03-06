@@ -8,6 +8,7 @@ import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmParameterizedTypeReference;
 import org.eclipse.xtext.common.types.JvmVisibility;
 import org.eclipse.xtext.common.types.util.TypeReferences;
+import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.junit.Test;
@@ -15,9 +16,11 @@ import org.junit.Test;
 @SuppressWarnings("all")
 public class FieldBuilderTest extends AbstractBuilderTest {
   @Inject
+  @Extension
   private CodeBuilderFactory _codeBuilderFactory;
   
   @Inject
+  @Extension
   private TypeReferences _typeReferences;
   
   @Test

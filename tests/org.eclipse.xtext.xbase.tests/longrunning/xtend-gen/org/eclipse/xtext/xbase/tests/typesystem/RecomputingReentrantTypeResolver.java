@@ -22,6 +22,7 @@ import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.XConstructorCall;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.lib.Exceptions;
+import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.Functions.Function0;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.ListExtensions;
@@ -49,6 +50,7 @@ import org.junit.Assert;
 @SuppressWarnings("all")
 public class RecomputingReentrantTypeResolver extends DefaultReentrantTypeResolver {
   @Inject
+  @Extension
   private ReflectExtensions _reflectExtensions;
   
   private final MapJoiner mapJoiner = new Function0<MapJoiner>() {

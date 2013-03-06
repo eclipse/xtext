@@ -35,6 +35,7 @@ import org.eclipse.xtend.ide.codebuilder.XtendMethodBuilder;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.common.types.util.jdt.IJavaElementFinder;
+import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 
 /**
@@ -47,9 +48,11 @@ import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 @SuppressWarnings("all")
 public class CodeBuilderFactory {
   @Inject
+  @Extension
   private IXtendJvmAssociations _iXtendJvmAssociations;
   
   @Inject
+  @Extension
   private IJavaElementFinder _iJavaElementFinder;
   
   @Inject

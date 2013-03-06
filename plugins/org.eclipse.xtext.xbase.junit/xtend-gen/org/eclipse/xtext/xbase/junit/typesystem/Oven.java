@@ -21,6 +21,7 @@ import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XSwitchExpression;
 import org.eclipse.xtext.xbase.junit.typesystem.SimpleBloomFilter;
 import org.eclipse.xtext.xbase.lib.Exceptions;
+import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.Functions.Function0;
 import org.eclipse.xtext.xbase.lib.InputOutput;
 import org.eclipse.xtext.xbase.lib.IteratorExtensions;
@@ -55,9 +56,11 @@ public class Oven extends Assert {
   }.apply();
   
   @Inject
+  @Extension
   private ReflectExtensions _reflectExtensions;
   
   @Inject
+  @Extension
   private ParseHelper<EObject> _parseHelper;
   
   public void fireproof(final String input) throws Exception {

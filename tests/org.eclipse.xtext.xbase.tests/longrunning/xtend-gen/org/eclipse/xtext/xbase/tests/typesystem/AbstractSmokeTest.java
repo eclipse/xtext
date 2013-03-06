@@ -10,6 +10,7 @@ package org.eclipse.xtext.xbase.tests.typesystem;
 import com.google.inject.Inject;
 import org.eclipse.xtext.xbase.junit.typesystem.Oven;
 import org.eclipse.xtext.xbase.lib.Exceptions;
+import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.tests.typesystem.AbstractTypeResolverTest;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 import org.junit.Ignore;
@@ -21,6 +22,7 @@ import org.junit.Test;
 @SuppressWarnings("all")
 public abstract class AbstractSmokeTest extends AbstractTypeResolverTest<LightweightTypeReference> {
   @Inject
+  @Extension
   private Oven _oven;
   
   public LightweightTypeReference resolvesTo(final String expression, final String type) {

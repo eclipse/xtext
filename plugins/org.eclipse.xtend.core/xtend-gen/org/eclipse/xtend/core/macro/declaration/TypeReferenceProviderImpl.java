@@ -26,12 +26,14 @@ import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.JvmWildcardTypeReference;
 import org.eclipse.xtext.common.types.util.TypeReferences;
 import org.eclipse.xtext.xbase.lib.Conversions;
+import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.ListExtensions;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 
 @SuppressWarnings("all")
 public class TypeReferenceProviderImpl implements TypeReferenceProvider {
+  @Extension
   private CompilationUnitImpl compilationUnit;
   
   public TypeReferenceProviderImpl(final CompilationUnitImpl compilationUnit) {

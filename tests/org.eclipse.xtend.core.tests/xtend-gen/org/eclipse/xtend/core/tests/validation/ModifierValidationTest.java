@@ -23,6 +23,7 @@ import org.eclipse.xtend.core.xtend.XtendPackage.Literals;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.junit4.validation.ValidationTestHelper;
 import org.eclipse.xtext.xbase.lib.Exceptions;
+import org.eclipse.xtext.xbase.lib.Extension;
 import org.junit.Test;
 
 /**
@@ -31,6 +32,7 @@ import org.junit.Test;
 @SuppressWarnings("all")
 public class ModifierValidationTest extends AbstractXtendTestCase {
   @Inject
+  @Extension
   private ValidationTestHelper _validationTestHelper;
   
   @Test

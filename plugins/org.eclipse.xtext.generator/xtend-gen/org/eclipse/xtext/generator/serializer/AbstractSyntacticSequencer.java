@@ -41,6 +41,7 @@ import org.eclipse.xtext.serializer.analysis.ISyntacticSequencerPDAProvider.ISyn
 import org.eclipse.xtext.util.Pair;
 import org.eclipse.xtext.util.Strings;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
+import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ListExtensions;
@@ -52,9 +53,11 @@ public class AbstractSyntacticSequencer extends GeneratedFile {
   private Grammar grammar;
   
   @Inject
+  @Extension
   private GrammarAccess grammarAccess;
   
   @Inject
+  @Extension
   private SyntacticSequencerUtil util;
   
   public CharSequence getFileContents(final GenFileName filename) {

@@ -26,6 +26,7 @@ import org.eclipse.xtext.xbase.formatting.TextReplacement;
 import org.eclipse.xtext.xbase.junit.formatter.AssertingFormatterData;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Exceptions;
+import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.InputOutput;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
@@ -37,6 +38,7 @@ import org.junit.Assert;
 @SuppressWarnings("all")
 public class FormatterTester {
   @Inject
+  @Extension
   private ParseHelper<EObject> _parseHelper;
   
   @Inject
@@ -267,7 +269,7 @@ public class FormatterTester {
       final Set<Integer> offsets = IterableExtensions.<Integer>toSet(_map);
       final ArrayList<TextReplacement> result = CollectionLiterals.<TextReplacement>newArrayList();
       int lastOffset = 0;
-      Iterable<? extends ILeafNode> _elvis = null;
+      Iterable<ILeafNode> _elvis = null;
       IParseResult _parseResult = res.getParseResult();
       ICompositeNode _rootNode = _parseResult==null?(ICompositeNode)null:_parseResult.getRootNode();
       Iterable<ILeafNode> _leafNodes = _rootNode==null?(Iterable<ILeafNode>)null:_rootNode.getLeafNodes();
@@ -275,7 +277,7 @@ public class FormatterTester {
         _elvis = _leafNodes;
       } else {
         List<ILeafNode> _emptyList = CollectionLiterals.<ILeafNode>emptyList();
-        _elvis = ObjectExtensions.<Iterable<? extends ILeafNode>>operator_elvis(_leafNodes, _emptyList);
+        _elvis = ObjectExtensions.<Iterable<ILeafNode>>operator_elvis(_leafNodes, _emptyList);
       }
       for (final ILeafNode leaf : _elvis) {
         boolean _or = false;

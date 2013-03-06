@@ -18,6 +18,7 @@ import org.eclipse.xtext.common.types.util.TypeReferences;
 import org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil;
 import org.eclipse.xtext.xbase.compiler.StringBuilderBasedAppendable;
 import org.eclipse.xtext.xbase.lib.Exceptions;
+import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.junit.Assert;
@@ -27,12 +28,15 @@ public class AbstractBuilderTest extends AbstractXtendUITestCase {
   protected final static String DEFAULT_BODY = "throw new UnsupportedOperationException(\"TODO: auto-generated method stub\")";
   
   @Inject
+  @Extension
   private WorkbenchTestHelper _workbenchTestHelper;
   
   @Inject
+  @Extension
   private IXtendJvmAssociations _iXtendJvmAssociations;
   
   @Inject
+  @Extension
   private TypeReferences _typeReferences;
   
   private JvmDeclaredType xtendClass;

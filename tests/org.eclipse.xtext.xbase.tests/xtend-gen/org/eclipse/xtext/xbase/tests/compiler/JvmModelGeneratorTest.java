@@ -51,6 +51,7 @@ import org.eclipse.xtext.xbase.jvmmodel.JvmModelCompleter;
 import org.eclipse.xtext.xbase.jvmmodel.JvmTypesBuilder;
 import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Exceptions;
+import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.Functions;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
@@ -68,6 +69,7 @@ import org.junit.runner.RunWith;
 @SuppressWarnings("all")
 public class JvmModelGeneratorTest extends AbstractXbaseTestCase {
   @Inject
+  @Extension
   private JvmTypesBuilder builder;
   
   @Inject

@@ -30,6 +30,7 @@ import org.eclipse.xtext.generator.Xtend2ExecutionContext;
 import org.eclipse.xtext.generator.Xtend2GeneratorFragment;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Conversions;
+import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 
@@ -40,6 +41,7 @@ import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 @SuppressWarnings("all")
 public class ContentAssistFragment extends Xtend2GeneratorFragment implements IInheriting, IStubGenerating {
   @Inject
+  @Extension
   private Naming _naming;
   
   @Inject

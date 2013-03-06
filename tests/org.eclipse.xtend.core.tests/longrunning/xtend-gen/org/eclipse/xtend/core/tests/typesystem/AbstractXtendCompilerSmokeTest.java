@@ -12,6 +12,7 @@ import org.eclipse.xtend.core.tests.compiler.XtendCompilerTest;
 import org.eclipse.xtext.xbase.compiler.GeneratorConfig;
 import org.eclipse.xtext.xbase.junit.typesystem.Oven;
 import org.eclipse.xtext.xbase.lib.Exceptions;
+import org.eclipse.xtext.xbase.lib.Extension;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -19,6 +20,7 @@ import org.eclipse.xtext.xbase.lib.Exceptions;
 @SuppressWarnings("all")
 public abstract class AbstractXtendCompilerSmokeTest extends XtendCompilerTest {
   @Inject
+  @Extension
   private Oven _oven;
   
   public void assertCompilesTo(final CharSequence input, final CharSequence expected, final GeneratorConfig config) {

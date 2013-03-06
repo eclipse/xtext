@@ -21,6 +21,7 @@ import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Exceptions;
+import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.Pair;
@@ -35,6 +36,7 @@ import org.junit.Test;
 @SuppressWarnings("all")
 public abstract class AbstractSuperTypesTest extends AbstractTestingTypeReferenceOwner {
   @Inject
+  @Extension
   private IXtendJvmAssociations _iXtendJvmAssociations;
   
   public void assertSuperTypes(final Class<? extends Object> type, final String... superTypes) {

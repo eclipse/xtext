@@ -15,6 +15,7 @@ import org.eclipse.xtext.xbase.compiler.CompilationStrategyAdapter;
 import org.eclipse.xtext.xbase.compiler.output.ITreeAppendable;
 import org.eclipse.xtext.xbase.jvmmodel.ILogicalContainerProvider;
 import org.eclipse.xtext.xbase.jvmmodel.JvmIdentifiableMetaData;
+import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
@@ -22,6 +23,7 @@ import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 @SuppressWarnings("all")
 public class JvmTypeExtensions {
   @Inject
+  @Extension
   private ILogicalContainerProvider _iLogicalContainerProvider;
   
   public Procedure1<? super ITreeAppendable> getCompilationStrategy(final JvmIdentifiableElement it) {

@@ -1,6 +1,7 @@
 package org.eclipse.xtext.xbase.tests.lib.util;
 
 import org.eclipse.xtext.xbase.lib.Exceptions;
+import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.Functions.Function0;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.util.ReflectExtensions;
@@ -9,6 +10,7 @@ import org.junit.Test;
 
 @SuppressWarnings("all")
 public class ReflectExtensionsTest {
+  @Extension
   public ReflectExtensions ext = new Function0<ReflectExtensions>() {
     public ReflectExtensions apply() {
       ReflectExtensions _reflectExtensions = new ReflectExtensions();
@@ -16,6 +18,7 @@ public class ReflectExtensionsTest {
     }
   }.apply();
   
+  @Extension
   private ReflectExtensions privateExt = new Function0<ReflectExtensions>() {
     public ReflectExtensions apply() {
       ReflectExtensions _reflectExtensions = new ReflectExtensions();

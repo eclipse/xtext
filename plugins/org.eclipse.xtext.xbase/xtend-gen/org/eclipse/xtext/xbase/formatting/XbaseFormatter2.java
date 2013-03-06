@@ -59,6 +59,7 @@ import org.eclipse.xtext.xbase.formatting.HiddenLeafs;
 import org.eclipse.xtext.xbase.formatting.NodeModelAccess;
 import org.eclipse.xtext.xbase.formatting.XbaseFormatterPreferenceKeys;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
+import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ListExtensions;
@@ -72,15 +73,19 @@ import org.eclipse.xtext.xtype.XFunctionTypeRef;
 @SuppressWarnings("all")
 public class XbaseFormatter2 extends AbstractFormatter {
   @Inject
+  @Extension
   private NodeModelAccess _nodeModelAccess;
   
   @Inject
+  @Extension
   private HiddenLeafAccess _hiddenLeafAccess;
   
   @Inject
+  @Extension
   private FormattingDataFactory _formattingDataFactory;
   
   @Inject
+  @Extension
   private XbaseGrammarAccess _xbaseGrammarAccess;
   
   protected void _format(final XCollectionLiteral literal, final FormattableDocument document) {

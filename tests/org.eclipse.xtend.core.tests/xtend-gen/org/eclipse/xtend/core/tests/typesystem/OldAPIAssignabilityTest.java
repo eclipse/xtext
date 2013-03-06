@@ -23,6 +23,7 @@ import org.eclipse.xtext.common.types.util.TypeConformanceComputer;
 import org.eclipse.xtext.junit4.InjectWith;
 import org.eclipse.xtext.junit4.XtextRunner;
 import org.eclipse.xtext.xbase.lib.Exceptions;
+import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.Pair;
@@ -38,6 +39,7 @@ import org.junit.runner.RunWith;
 @SuppressWarnings("all")
 public class OldAPIAssignabilityTest extends AssignabilityTest {
   @Inject
+  @Extension
   private IXtendJvmAssociations _iXtendJvmAssociations;
   
   @Inject

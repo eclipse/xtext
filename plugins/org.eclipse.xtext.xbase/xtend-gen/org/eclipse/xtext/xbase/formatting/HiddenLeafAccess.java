@@ -13,6 +13,7 @@ import org.eclipse.xtext.xbase.formatting.LeafInfo;
 import org.eclipse.xtext.xbase.formatting.NodeModelAccess;
 import org.eclipse.xtext.xbase.formatting.WhitespaceInfo;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
+import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IntegerRange;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
@@ -23,6 +24,7 @@ import org.eclipse.xtext.xbase.lib.StringExtensions;
 @SuppressWarnings("all")
 public class HiddenLeafAccess {
   @Inject
+  @Extension
   private NodeModelAccess _nodeModelAccess;
   
   public HiddenLeafs getHiddenLeafsBefore(final INode node) {
