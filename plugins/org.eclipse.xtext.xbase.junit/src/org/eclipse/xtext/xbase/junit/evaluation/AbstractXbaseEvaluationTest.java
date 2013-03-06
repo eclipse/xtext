@@ -2242,6 +2242,15 @@ public abstract class AbstractXbaseEvaluationTest extends Assert {
 				"{ val (String)=>String fun = [ val (String)=>String nestedFun = [if (it.endsWith('inner')) it else self.apply(it+'inner')] nestedFun.apply(it)] fun.apply('foo') }");
 	}
 	
+	/*
+	 * see https://bugs.eclipse.org/bugs/show_bug.cgi?id=391758 
+	 */
+	@Test public void testClosure_33() throws Exception {
+		assertEvaluatesTo(newArrayList("foo"), 
+				"{ val (java.util.List<String>,String)=>java.util.List<String> functionReturningList = [a, b| a += b return a ] "
+				+ "#['foo'].fold(newArrayList, functionReturningList) }");
+	}
+	
 	@Test public void testExceptionOnClosure() throws Exception {
 		assertEvaluatesWithException(java.beans.PropertyVetoException.class, 
 				"{ val java.beans.VetoableChangeListener x = [ throw new java.beans.PropertyVetoException('', it) ] x.vetoableChange(null) true }");
