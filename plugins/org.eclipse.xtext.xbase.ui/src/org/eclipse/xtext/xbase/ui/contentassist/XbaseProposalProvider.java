@@ -723,9 +723,9 @@ public class XbaseProposalProvider extends AbstractXbaseProposalProvider impleme
 		return new OwnedConverter(new StandardTypeReferenceOwner(services, context)) {
 			@Override
 			public LightweightTypeReference doVisitParameterizedTypeReference(JvmParameterizedTypeReference reference) {
-				ParameterizedTypeReference parameterizedTypeReference = (ParameterizedTypeReference) super.doVisitParameterizedTypeReference(reference);
-				FunctionTypeReference functionTypeReference = services.getFunctionTypes().getAsFunctionTypeReference(parameterizedTypeReference);
-				return functionTypeReference != null ? functionTypeReference : parameterizedTypeReference;
+				LightweightTypeReference result = super.doVisitParameterizedTypeReference(reference);
+				FunctionTypeReference functionTypeReference = result.tryConvertToFunctionTypeReference(false);
+				return functionTypeReference != null ? functionTypeReference : result;
 			}
 		};
 	}
