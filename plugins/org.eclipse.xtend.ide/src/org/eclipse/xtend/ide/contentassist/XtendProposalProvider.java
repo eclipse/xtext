@@ -56,15 +56,6 @@ public class XtendProposalProvider extends AbstractXtendProposalProvider {
 	private ImplementMemberFromSuperAssist overrideAssist;
 
 	@Override
-	public void completeKeyword(Keyword keyword, ContentAssistContext contentAssistContext,
-			ICompletionProposalAcceptor acceptor) {
-		// no keyword completions without prefix
-//		if (Strings.isEmpty(contentAssistContext.getPrefix()))
-//			return;
-		super.completeKeyword(keyword, contentAssistContext, acceptor);
-	}
-	
-	@Override
 	public void completeMember_Name(final EObject model, Assignment assignment, final ContentAssistContext context,
 			final ICompletionProposalAcceptor acceptor) {
 		if (model instanceof XtendField) {

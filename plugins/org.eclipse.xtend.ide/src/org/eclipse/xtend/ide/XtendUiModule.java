@@ -16,6 +16,7 @@ import org.eclipse.xtend.ide.autoedit.TokenTypeToPartitionMapper;
 import org.eclipse.xtend.ide.builder.JavaProjectPreferencesInitializer;
 import org.eclipse.xtend.ide.builder.SourceRelativeFileSystemAccess;
 import org.eclipse.xtend.ide.builder.XtendBuilderParticipant;
+import org.eclipse.xtend.ide.contentassist.EscapeSequenceAwarePrefixMatcher;
 import org.eclipse.xtend.ide.contentassist.TemplateProposalProvider;
 import org.eclipse.xtend.ide.contentassist.XtendContentAssistFactory;
 import org.eclipse.xtend.ide.editor.InitiallyCollapsableAwareFoldingStructureProvider;
@@ -71,6 +72,7 @@ import org.eclipse.xtext.ui.editor.autoedit.AbstractEditStrategyProvider;
 import org.eclipse.xtext.ui.editor.contentassist.IContentAssistantFactory;
 import org.eclipse.xtext.ui.editor.contentassist.IContextInformationProvider;
 import org.eclipse.xtext.ui.editor.contentassist.ITemplateProposalProvider;
+import org.eclipse.xtext.ui.editor.contentassist.PrefixMatcher;
 import org.eclipse.xtext.ui.editor.doubleClicking.DoubleClickStrategyProvider;
 import org.eclipse.xtext.ui.editor.embedded.IEditedResourceProvider;
 import org.eclipse.xtext.ui.editor.folding.IFoldingRegionProvider;
@@ -378,5 +380,9 @@ public class XtendUiModule extends org.eclipse.xtend.ide.AbstractXtendUiModule {
 	
 	public Class<? extends IContextInformationProvider> bindIContextInformationProvider() {
 		return ParameterContextInformationProvider.class;
+	}
+	
+	public Class<? extends PrefixMatcher.CamelCase> bindCamelCasePrefixMatcher() {
+		return EscapeSequenceAwarePrefixMatcher.class;
 	}
 }

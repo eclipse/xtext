@@ -98,32 +98,32 @@ public class ContentAssistProcessorTestBuilder implements Cloneable {
 	}
 
 	public ContentAssistProcessorTestBuilder cursorBack(int times) throws Exception {
-		return clone(model,this.cursorPosition -= times);
+		return clone(model, this.cursorPosition -= times);
 	}
-
-	public ContentAssistProcessorTestBuilder applyText() throws Exception {
-		return applyText(0, true);
+	
+	public ContentAssistProcessorTestBuilder applyProposal() throws Exception {
+		return applyProposal(cursorPosition);
 	}
-
-	public ContentAssistProcessorTestBuilder applyText(boolean appendSpace) throws Exception {
-		return applyText(0, appendSpace);
-	}
-
-	public ContentAssistProcessorTestBuilder applyText(int index, boolean appendSpace) throws Exception {
-		ICompletionProposal proposal = computeCompletionProposals(getModel(), this.cursorPosition)[index];
-		String text = proposal.getDisplayString();
-		if (proposal instanceof ConfigurableCompletionProposal) {
-			text = ((ConfigurableCompletionProposal) proposal).getReplacementString();
-		}
-		ContentAssistProcessorTestBuilder ret = append(text);
-		if (appendSpace) {
-			return ret.append(" ");
-		}
-		return ret;
+	
+	public ContentAssistProcessorTestBuilder applyProposal(String proposal) throws Exception {
+		return applyProposal(cursorPosition, proposal);
 	}
 
 	public ContentAssistProcessorTestBuilder applyProposal(int position) throws Exception {
-		ICompletionProposal proposal = computeCompletionProposals(getModel(), position)[0];
+		return applyProposal(position, null);
+	}
+	
+	public ContentAssistProcessorTestBuilder applyProposal(int position, String proposalString) throws Exception {
+		ICompletionProposal[] proposals = computeCompletionProposals(getModel(), position);
+		ICompletionProposal proposal = proposals[0];
+		if (proposalString != null) {
+			for(ICompletionProposal candidate: proposals) {
+				if (proposalString.equals(getProposedText(candidate))) {
+					proposal = candidate;
+					break;
+				}
+			}
+		}
 		final XtextResource xtextResource = loadHelper.getResourceFor(new StringInputStream(model));
 		IXtextDocument document = getDocument(xtextResource, model);
 		proposal.apply(document);
@@ -131,8 +131,8 @@ public class ContentAssistProcessorTestBuilder implements Cloneable {
 		return reset.append(document.get());
 	}
 
-	public void expectContent(String exprectation){
-		Assert.assertEquals(exprectation, getModel());
+	public void expectContent(String expectation){
+		Assert.assertEquals(expectation, getModel());
 	}
 
 	public ContentAssistProcessorTestBuilder assertCount(int completionProposalCount) throws Exception {
@@ -172,20 +172,25 @@ public class ContentAssistProcessorTestBuilder implements Cloneable {
 		
 		for (int i = 0; i < computeCompletionProposals.length; i++) {
 			ICompletionProposal completionProposal = computeCompletionProposals[i];
-			String proposedText = completionProposal.getDisplayString();
-			if (completionProposal instanceof ConfigurableCompletionProposal) {
-				ConfigurableCompletionProposal configurableProposal = (ConfigurableCompletionProposal) completionProposal;
-				proposedText = configurableProposal.getReplacementString();
-				if (configurableProposal.getTextApplier() instanceof ReplacementTextApplier) {
-					proposedText = ((ReplacementTextApplier) configurableProposal.getTextApplier()).getActualReplacementString(configurableProposal);
-				}
-			}
+			String proposedText = getProposedText(completionProposal);
 			Assert.assertTrue("Missing proposal '" + proposedText + "'. Expect completionProposal text '" + expectation + "', but got " +
 					actual,
 					Arrays.asList(expectedText).contains(proposedText));
 		}
 
 		return this;
+	}
+
+	protected String getProposedText(ICompletionProposal completionProposal) {
+		String proposedText = completionProposal.getDisplayString();
+		if (completionProposal instanceof ConfigurableCompletionProposal) {
+			ConfigurableCompletionProposal configurableProposal = (ConfigurableCompletionProposal) completionProposal;
+			proposedText = configurableProposal.getReplacementString();
+			if (configurableProposal.getTextApplier() instanceof ReplacementTextApplier) {
+				proposedText = ((ReplacementTextApplier) configurableProposal.getTextApplier()).getActualReplacementString(configurableProposal);
+			}
+		}
+		return proposedText;
 	}
 
 	public ContentAssistProcessorTestBuilder assertMatchString(String matchString)
