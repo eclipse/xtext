@@ -7,14 +7,14 @@
  */
 package org.eclipse.xtend.core.tests.typesystem;
 
-import org.eclipse.xtend.core.tests.typesystem.AbstractXtendCompilerSmokeTest;
+import org.eclipse.xtend.core.tests.typesystem.AbstractPropertyCompilerSmokeTest;
 import org.eclipse.xtext.xbase.lib.IntegerRange;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
 @SuppressWarnings("all")
-public class SkipThreeCharactersInBetween extends AbstractXtendCompilerSmokeTest {
+public class SkipThreeCharactersInBetweenPropertyCompilerSmokeTest extends AbstractPropertyCompilerSmokeTest {
   public void assertNonSmoking(final CharSequence input) throws Exception {
     final String string = input.toString();
     int _length = input.length();

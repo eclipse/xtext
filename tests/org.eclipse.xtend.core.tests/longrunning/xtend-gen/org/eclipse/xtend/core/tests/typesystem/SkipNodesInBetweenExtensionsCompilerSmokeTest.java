@@ -11,7 +11,7 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.xtend.core.tests.typesystem.AbstractXtendCompilerSmokeTest;
+import org.eclipse.xtend.core.tests.typesystem.AbstractExtensionsCompilerSmokeTest;
 import org.eclipse.xtend.core.xtend.XtendFile;
 import org.eclipse.xtext.nodemodel.BidiTreeIterable;
 import org.eclipse.xtext.nodemodel.ICompositeNode;
@@ -28,7 +28,7 @@ import org.eclipse.xtext.xbase.lib.ObjectExtensions;
  * @author Sebastian Zarnekow - Initial contribution and API
  */
 @SuppressWarnings("all")
-public class SkipNodesInBetween extends AbstractXtendCompilerSmokeTest {
+public class SkipNodesInBetweenExtensionsCompilerSmokeTest extends AbstractExtensionsCompilerSmokeTest {
   public XtendFile file(final String string, final boolean validate) throws Exception {
     XtextResourceSet _resourceSet = this.getResourceSet();
     URI _createURI = URI.createURI("abcdefg.xtend");

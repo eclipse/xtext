@@ -14,98 +14,28 @@ import org.antlr.runtime.ANTLRStringStream
 import org.antlr.runtime.CommonToken
 import org.antlr.runtime.Token
 import org.eclipse.emf.common.util.URI
-import org.eclipse.xtend.core.tests.compiler.CompilerTest
+import org.eclipse.xtend.core.tests.compiler.ConfiguredCompilerTest
 import org.eclipse.xtend.core.xtend.XtendFile
 import org.eclipse.xtext.parser.antlr.Lexer
 import org.eclipse.xtext.resource.XtextResource
 import org.eclipse.xtext.util.ReplaceRegion
 import org.eclipse.xtext.util.StringInputStream
+import org.eclipse.xtext.xbase.compiler.GeneratorConfig
 import org.eclipse.xtext.xbase.junit.typesystem.Oven
-import org.junit.Ignore
-import org.junit.Test
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-abstract class AbstractCompilerSmokeTest extends CompilerTest {
+abstract class AbstractConfiguredCompilerSmokeTest extends ConfiguredCompilerTest {
 	
 	@Inject extension Oven
 	
-	override testBug_350932_13() throws Exception {
-		val code = 
-				"package x class Z {" +
-				"  def bug(){\n" + 
-				"    val x = if (true) return Boolean::FALSE x\n" + 
-				"  }\n" +
-				"  def invoke() {\n" +
-				"    val boolean b = bug\n" +
-				"  }\n" +
-				"}\n"
-		assertNonSmoking(code)
-	}
-	
-	override testBug_350932_14() throws Exception {
-		val code = 
-				"package x class Z {" +
-				"  def bug(){\n" + 
-				"    val x = if (true) return Boolean::FALSE else null x\n" + 
-				"  }\n" +
-				"  def invoke() {\n" +
-				"    val boolean b = bug\n" +
-				"  }\n" +
-				"}\n"
-		assertNonSmoking(code)
-	}
-	
-	override testBug_352849_02() throws Exception {
-		val code =
-				"package x\n" +
-				"import java.util.Collection\n" + 
-				"import java.util.List\n" +
-				"class Z {" +
-				"  	def generate() {\n" + 
-				"		val List<CharSequence> seq = null\n" + 
-				"		val List<String> strings = null\n" + 
-				"		val result1 = seq.addAll2(strings)\n" +
-				"		val Collection<String> test1 = result1\n" + 
-				"		val result2 = strings.addAll3(seq)\n" +
-				"		val Collection<String> test2 = result2\n" + 
-				"	}\n" + 
-				"	def <T> Collection<T> addAll2(Collection<? super T> collection, Iterable<? extends T> elements){\n" +
-				"	    collection.addAll(elements)\n" + 
-				"	    null\n" + 
-				"	}\n" +
-				"	def <T> Collection<T> addAll3(Iterable<? extends T> elements, Collection<? super T> collection){\n" +
-				"	    collection.addAll(elements)\n" + 
-				"	    null\n" + 
-				"	}\n" +
-				"}"
-		assertNonSmoking(code)
-	}
-	
-	override testBug343096_01() throws Exception {
-		compileJavaCode("x.Y",
-				"package x class Y {" +
-				"def <T> bug343096() {\n" + 
-				"  [T t|switch t {\n" + 
-				"    case t : bug343096\n" + 
-				"  }]" + 
-				"}}")
-	}
-	
-	@Ignore
-	@Test
-	override testData_03() throws Exception {
-		assertNonSmoking("package foo @Data class Bar { val myFlag = true }")
-	}
-	
-	override protected compileToJavaCode(String xtendCode) {
-		assertNonSmoking(xtendCode)
-		return super.compileToJavaCode(xtendCode)
+	override assertCompilesTo(CharSequence input, CharSequence expected, GeneratorConfig config) {
+		assertNonSmoking(input)
 	}
 	
 	protected def void assertNonSmoking(CharSequence input) throws Exception
-	
+
 	protected def void processFile(String input) {
 		input.fireproof
 	}
@@ -115,7 +45,7 @@ abstract class AbstractCompilerSmokeTest extends CompilerTest {
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-class SkipLastCharactersCompilerSmokeTest extends AbstractCompilerSmokeTest {
+class SkipLastCharactersConfiguredCompilerSmokeTest extends AbstractConfiguredCompilerSmokeTest {
 	
 	override void assertNonSmoking(CharSequence input) throws Exception {
 		val string = input.toString
@@ -129,7 +59,7 @@ class SkipLastCharactersCompilerSmokeTest extends AbstractCompilerSmokeTest {
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-class SkipFirstCharactersCompilerSmokeTest extends AbstractCompilerSmokeTest {
+class SkipFirstCharactersConfiguredCompilerSmokeTest extends AbstractConfiguredCompilerSmokeTest {
 	
 	override void assertNonSmoking(CharSequence input) throws Exception {
 		val string = input.toString
@@ -143,7 +73,7 @@ class SkipFirstCharactersCompilerSmokeTest extends AbstractCompilerSmokeTest {
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-class SkipCharacterInBetweenCompilerSmokeTest extends AbstractCompilerSmokeTest {
+class SkipCharacterInBetweenConfiguredCompilerSmokeTest extends AbstractConfiguredCompilerSmokeTest {
 	
 	override void assertNonSmoking(CharSequence input) throws Exception {
 		val string = input.toString
@@ -159,7 +89,7 @@ class SkipCharacterInBetweenCompilerSmokeTest extends AbstractCompilerSmokeTest 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-class SkipThreeCharactersInBetweenCompilerSmokeTest extends AbstractCompilerSmokeTest {
+class SkipThreeCharactersInBetweenConfiguredCompilerSmokeTest extends AbstractConfiguredCompilerSmokeTest {
 	
 	override void assertNonSmoking(CharSequence input) throws Exception {
 		val string = input.toString
@@ -175,7 +105,7 @@ class SkipThreeCharactersInBetweenCompilerSmokeTest extends AbstractCompilerSmok
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-class SkipTokensInBetweenCompilerSmokeTest extends AbstractCompilerSmokeTest {
+class SkipTokensInBetweenConfiguredCompilerSmokeTest extends AbstractConfiguredCompilerSmokeTest {
 	
 	@Inject
 	Provider<Lexer> lexerProvider
@@ -201,10 +131,11 @@ class SkipTokensInBetweenCompilerSmokeTest extends AbstractCompilerSmokeTest {
 	
 }
 
+
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-class SkipNodesInBetweenCompilerSmokeTest extends AbstractCompilerSmokeTest {
+class SkipNodesInBetweenConfiguredCompilerSmokeTest extends AbstractConfiguredCompilerSmokeTest {
 	
 	override file(String string, boolean validate) throws Exception {
 		val resource = resourceSet.createResource(URI::createURI("abcdefg.xtend"))
@@ -226,7 +157,7 @@ class SkipNodesInBetweenCompilerSmokeTest extends AbstractCompilerSmokeTest {
 				if (length != 0) {
 					if (region == null || region.offset != offset || region.length != length) {
 						region = new ReplaceRegion(offset, length, "")
-						val builder = new StringBuilder(input)
+						val builder = new StringBuilder(rootNode.text)
 						region.applyTo(builder)
 						processFile(builder.toString)
 					}
@@ -236,3 +167,4 @@ class SkipNodesInBetweenCompilerSmokeTest extends AbstractCompilerSmokeTest {
 	}
 	
 }
+

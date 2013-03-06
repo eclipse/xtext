@@ -13,7 +13,7 @@ import java.util.List;
 import org.antlr.runtime.ANTLRStringStream;
 import org.antlr.runtime.CommonToken;
 import org.antlr.runtime.Token;
-import org.eclipse.xtend.core.tests.typesystem.AbstractXtendCompilerSmokeTest;
+import org.eclipse.xtend.core.tests.typesystem.AbstractDataCompilerSmokeTest;
 import org.eclipse.xtext.parser.antlr.Lexer;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
@@ -22,7 +22,7 @@ import org.eclipse.xtext.xbase.lib.ObjectExtensions;
  * @author Sebastian Zarnekow - Initial contribution and API
  */
 @SuppressWarnings("all")
-public class SkipTokensInBetween extends AbstractXtendCompilerSmokeTest {
+public class SkipTokensInBetweenDataCompilerSmokeTest extends AbstractDataCompilerSmokeTest {
   @Inject
   private Provider<Lexer> lexerProvider;
   

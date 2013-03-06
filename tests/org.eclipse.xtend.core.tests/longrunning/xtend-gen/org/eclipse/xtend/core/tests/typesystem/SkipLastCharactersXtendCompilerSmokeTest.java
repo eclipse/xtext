@@ -14,7 +14,7 @@ import org.eclipse.xtext.xbase.lib.IntegerRange;
  * @author Sebastian Zarnekow - Initial contribution and API
  */
 @SuppressWarnings("all")
-public class SkipLastCharacters extends AbstractXtendCompilerSmokeTest {
+public class SkipLastCharactersXtendCompilerSmokeTest extends AbstractXtendCompilerSmokeTest {
   public void assertNonSmoking(final CharSequence input) throws Exception {
     final String string = input.toString();
     int _length = input.length();
