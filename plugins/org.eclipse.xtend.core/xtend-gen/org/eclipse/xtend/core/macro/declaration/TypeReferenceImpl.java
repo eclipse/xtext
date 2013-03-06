@@ -10,6 +10,7 @@ package org.eclipse.xtend.core.macro.declaration;
 import java.util.List;
 import org.eclipse.xtend.core.macro.declaration.AbstractDeclarationImpl;
 import org.eclipse.xtend.core.macro.declaration.CompilationUnitImpl;
+import org.eclipse.xtend.core.macro.declaration.UnknownType;
 import org.eclipse.xtend.lib.macro.declaration.Type;
 import org.eclipse.xtend.lib.macro.declaration.TypeReference;
 import org.eclipse.xtext.common.types.JvmType;
@@ -20,10 +21,31 @@ import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 @SuppressWarnings("all")
 public class TypeReferenceImpl extends AbstractDeclarationImpl<LightweightTypeReference> implements TypeReference {
   public Type getType() {
-    CompilationUnitImpl _compilationUnit = this.getCompilationUnit();
+    Type _switchResult = null;
     LightweightTypeReference _delegate = this.getDelegate();
-    JvmType _type = _delegate.getType();
-    return _compilationUnit.toType(_type);
+    final LightweightTypeReference it = _delegate;
+    boolean _matched = false;
+    if (!_matched) {
+      boolean _isUnknown = it.isUnknown();
+      if (_isUnknown) {
+        _matched=true;
+        CompilationUnitImpl _compilationUnit = this.getCompilationUnit();
+        CompilationUnitImpl _compilationUnit_1 = this.getCompilationUnit();
+        String _packageName = _compilationUnit_1.getPackageName();
+        String _plus = (_packageName + ".");
+        String _simpleName = it.getSimpleName();
+        String _plus_1 = (_plus + _simpleName);
+        UnknownType _unknownType = new UnknownType(_compilationUnit, _plus_1);
+        _switchResult = _unknownType;
+      }
+    }
+    if (!_matched) {
+      CompilationUnitImpl _compilationUnit_2 = this.getCompilationUnit();
+      JvmType _type = it.getType();
+      Type _type_1 = _compilationUnit_2.toType(_type);
+      _switchResult = _type_1;
+    }
+    return _switchResult;
   }
   
   public String toString() {

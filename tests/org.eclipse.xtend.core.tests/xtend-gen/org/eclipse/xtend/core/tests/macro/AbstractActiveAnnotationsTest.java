@@ -15,7 +15,9 @@ import org.eclipse.xtend.lib.macro.declaration.TypeReference;
 import org.eclipse.xtend.lib.macro.services.Problem;
 import org.eclipse.xtend.lib.macro.services.ProblemSupport;
 import org.eclipse.xtend2.lib.StringConcatenation;
+import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
+import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.Pair;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.junit.Assert;
@@ -87,6 +89,122 @@ public abstract class AbstractActiveAnnotationsTest {
           final ClassDeclaration clazz = IterableExtensions.head(_generatedClassDeclarations);
           boolean _isAbstract = clazz.isAbstract();
           Assert.assertTrue(_isAbstract);
+        }
+      };
+    this.assertProcessing(_mappedTo, _mappedTo_1, _function);
+  }
+  
+  @Test
+  public void testCreateTypeFromUsage() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("package myannotation");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("import java.lang.annotation.Documented");
+    _builder.newLine();
+    _builder.append("import java.lang.annotation.ElementType");
+    _builder.newLine();
+    _builder.append("import java.lang.annotation.Target");
+    _builder.newLine();
+    _builder.append("import java.util.List");
+    _builder.newLine();
+    _builder.append("import org.eclipse.xtend.lib.macro.Active");
+    _builder.newLine();
+    _builder.append("import org.eclipse.xtend.lib.macro.RegisterGlobalsContext");
+    _builder.newLine();
+    _builder.append("import org.eclipse.xtend.lib.macro.RegisterGlobalsParticipant");
+    _builder.newLine();
+    _builder.append("import org.eclipse.xtend.lib.macro.declaration.MethodDeclaration");
+    _builder.newLine();
+    _builder.append("import org.eclipse.xtend.lib.macro.declaration.TypeDeclaration");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("@Active(typeof(SomeProcessor))");
+    _builder.newLine();
+    _builder.append("@Documented");
+    _builder.newLine();
+    _builder.append("@Target(ElementType::TYPE)");
+    _builder.newLine();
+    _builder.append("annotation SomeAnnotation {}");
+    _builder.newLine();
+    _builder.append("class SomeProcessor implements RegisterGlobalsParticipant<TypeDeclaration> {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("override doRegisterGlobals(List<? extends TypeDeclaration> types, RegisterGlobalsContext context) {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("types.forEach[");
+    _builder.newLine();
+    _builder.append("\t\t\t");
+    _builder.append("allMethods.forEach[");
+    _builder.newLine();
+    _builder.append("\t\t\t\t");
+    _builder.append("context.registerClass(parameterType)");
+    _builder.newLine();
+    _builder.append("\t\t\t");
+    _builder.append("]");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("]");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("private def getAllMethods(TypeDeclaration it) {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("members.filter(typeof(MethodDeclaration))");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("private def getParameterType(MethodDeclaration it) {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("parameters.head.type.type.name");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    Pair<String,String> _mappedTo = Pair.<String, String>of("myannotation/SomeAnnotation.xtend", _builder.toString());
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("package myusercode");
+    _builder_1.newLine();
+    _builder_1.newLine();
+    _builder_1.append("@myannotation.SomeAnnotation");
+    _builder_1.newLine();
+    _builder_1.append("class MyClass {");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("def void myMethod(DoesNotExist p) {}");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    Pair<String,String> _mappedTo_1 = Pair.<String, String>of("myusercode/UserCode.xtend", _builder_1.toString());
+    final Procedure1<CompilationUnitImpl> _function = new Procedure1<CompilationUnitImpl>() {
+        public void apply(final CompilationUnitImpl it) {
+          List<? extends ClassDeclaration> _generatedClassDeclarations = it.getGeneratedClassDeclarations();
+          final Function1<ClassDeclaration,Boolean> _function = new Function1<ClassDeclaration,Boolean>() {
+              public Boolean apply(final ClassDeclaration it) {
+                boolean _and = false;
+                String _simpleName = it.getSimpleName();
+                boolean _equals = ObjectExtensions.operator_equals(_simpleName, "DoesNotExist");
+                if (!_equals) {
+                  _and = false;
+                } else {
+                  String _name = it.getName();
+                  boolean _equals_1 = ObjectExtensions.operator_equals(_name, "myusercode.DoesNotExist");
+                  _and = (_equals && _equals_1);
+                }
+                return Boolean.valueOf(_and);
+              }
+            };
+          boolean _exists = IterableExtensions.exists(_generatedClassDeclarations, _function);
+          Assert.assertTrue(_exists);
         }
       };
     this.assertProcessing(_mappedTo, _mappedTo_1, _function);
