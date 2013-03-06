@@ -285,13 +285,13 @@ public class LogicalContainerAwareReentrantTypeResolver extends DefaultReentrant
 		JvmTypeReference knownType = field.getType();
 		if (InferredTypeIndicator.isInferred(knownType)) {
 			XComputedTypeReference casted = (XComputedTypeReference) knownType;
-			JvmTypeReference reference = createComputedTypeReference(resolvedTypesByContext, childResolvedTypes, featureScopeSession, field, false);
+			JvmTypeReference reference = createComputedTypeReference(resolvedTypesByContext, childResolvedTypes, featureScopeSession, field, (InferredTypeIndicator) casted.getTypeProvider(), false);
 			casted.setEquivalent(reference);
 		} else if (knownType != null) {
 			LightweightTypeReference lightweightReference = childResolvedTypes.getConverter().toLightweightReference(knownType);
 			childResolvedTypes.setType(field, lightweightReference);
 		} else {
-			JvmTypeReference reference = createComputedTypeReference(resolvedTypesByContext, childResolvedTypes, featureScopeSession, field, false);
+			JvmTypeReference reference = createComputedTypeReference(resolvedTypesByContext, childResolvedTypes, featureScopeSession, field, null, false);
 			field.setType(reference);
 		}
 	}
@@ -333,20 +333,30 @@ public class LogicalContainerAwareReentrantTypeResolver extends DefaultReentrant
 		JvmTypeReference knownType = operation.getReturnType();
 		if (InferredTypeIndicator.isInferred(knownType)) {
 			XComputedTypeReference casted = (XComputedTypeReference) knownType;
-			JvmTypeReference reference = createComputedTypeReference(resolvedTypesByContext, childResolvedTypes, featureScopeSession, operation, true);
+			JvmTypeReference reference = createComputedTypeReference(
+					resolvedTypesByContext, childResolvedTypes, featureScopeSession, operation, (InferredTypeIndicator) casted.getTypeProvider(), true);
 			casted.setEquivalent(reference);
 		} else if (knownType != null) {
 			LightweightTypeReference lightweightReference = childResolvedTypes.getConverter().toLightweightReference(knownType);
 			childResolvedTypes.setType(operation, lightweightReference);
 		} else {
-			JvmTypeReference reference = createComputedTypeReference(resolvedTypesByContext, childResolvedTypes, featureScopeSession, operation, true);
+			JvmTypeReference reference = createComputedTypeReference(resolvedTypesByContext, childResolvedTypes, featureScopeSession, operation, null, true);
 			operation.setReturnType(reference);
 		}
 	}
 	
-	protected JvmTypeReference createComputedTypeReference(Map<JvmIdentifiableElement, ResolvedTypes> resolvedTypesByContext, ResolvedTypes resolvedTypes, IFeatureScopeSession featureScopeSession, JvmMember member, boolean returnType) {
+	protected JvmTypeReference createComputedTypeReference(
+			Map<JvmIdentifiableElement, ResolvedTypes> resolvedTypesByContext,
+			ResolvedTypes resolvedTypes,
+			IFeatureScopeSession featureScopeSession,
+			JvmMember member,
+			@Nullable InferredTypeIndicator indicator,
+			boolean returnType) {
 		XComputedTypeReference result = getServices().getXtypeFactory().createXComputedTypeReference();
-		result.setTypeProvider(createTypeProvider(resolvedTypesByContext, resolvedTypes, featureScopeSession, member, returnType));
+		if (indicator == null || indicator.getExpression() == null)
+			result.setTypeProvider(createTypeProvider(resolvedTypesByContext, resolvedTypes, featureScopeSession, member, returnType));
+		else
+			result.setTypeProvider(createTypeProvider(resolvedTypesByContext, resolvedTypes, featureScopeSession, member, indicator.getExpression(), returnType));
 		// TODO do we need a lightweight computed type reference?
 //		resolvedTypes.setType(member, result);
 		return result;
@@ -354,6 +364,16 @@ public class LogicalContainerAwareReentrantTypeResolver extends DefaultReentrant
 	
 	protected AbstractReentrantTypeReferenceProvider createTypeProvider(Map<JvmIdentifiableElement, ResolvedTypes> resolvedTypesByContext, ResolvedTypes resolvedTypes, IFeatureScopeSession featureScopeSession, JvmMember member, boolean returnType) {
 		XExpression expression = logicalContainerProvider.getAssociatedExpression(member);
+		if (expression != null) {
+			resolvedTypes.markToBeInferred(expression);
+			return new DemandTypeReferenceProvider(member, expression, resolvedTypesByContext, resolvedTypes, featureScopeSession, returnType);
+		}
+		return new AnyTypeReferenceProvider(member, resolvedTypes); 
+	}
+	
+	protected AbstractReentrantTypeReferenceProvider createTypeProvider(
+			Map<JvmIdentifiableElement, ResolvedTypes> resolvedTypesByContext, ResolvedTypes resolvedTypes, IFeatureScopeSession featureScopeSession, JvmMember member, 
+			@Nullable XExpression expression, boolean returnType) {
 		if (expression != null) {
 			resolvedTypes.markToBeInferred(expression);
 			return new DemandTypeReferenceProvider(member, expression, resolvedTypesByContext, resolvedTypes, featureScopeSession, returnType);

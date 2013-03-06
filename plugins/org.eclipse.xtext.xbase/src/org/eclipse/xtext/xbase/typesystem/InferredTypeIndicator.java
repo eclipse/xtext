@@ -9,9 +9,12 @@ package org.eclipse.xtext.xbase.typesystem;
 
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.TypesPackage;
 import org.eclipse.xtext.resource.XtextResource;
+import org.eclipse.xtext.xbase.XExpression;
+import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 import org.eclipse.xtext.xbase.typing.IJvmTypeReferenceProvider;
 import org.eclipse.xtext.xtype.XComputedTypeReference;
 import org.eclipse.xtext.xtype.impl.XComputedTypeReferenceImplCustom;
@@ -27,11 +30,15 @@ import org.eclipse.xtext.xtype.impl.XComputedTypeReferenceImplCustom;
  */
 public class InferredTypeIndicator implements IJvmTypeReferenceProvider {
 
-	private boolean voidAllowed;
 	private boolean resolved = false;
+	private final XExpression expression;
 
-	public InferredTypeIndicator(boolean voidAllowed) {
-		this.voidAllowed = voidAllowed;
+	public InferredTypeIndicator(XExpression expression) {
+		this.expression = expression;
+	}
+	
+	public InferredTypeIndicator() {
+		this(null);
 	}
 
 	public static boolean isInferred(JvmTypeReference typeReference) {
@@ -56,26 +63,35 @@ public class InferredTypeIndicator implements IJvmTypeReferenceProvider {
 	
 	public JvmTypeReference getTypeReference(@NonNull XComputedTypeReferenceImplCustom context) {
 		Resource resource = context.eResource();
+		IResolvedTypes resolvedTypes = null;
 		if (resource instanceof XtextResource) {
 			IBatchTypeResolver typeResolver = ((XtextResource) resource).getResourceServiceProvider().get(IBatchTypeResolver.class);
 			if (typeResolver == null) {
 				throw new IllegalStateException("typeResolver may not be null");
 			}
-			typeResolver.resolveTypes(context);
+			resolvedTypes = typeResolver.resolveTypes(context);
 		}
 		if (context.eIsSet(TypesPackage.Literals.JVM_SPECIALIZED_TYPE_REFERENCE__EQUIVALENT)) {
 			return context.getEquivalent();
 		}
+		if (expression != null && resolvedTypes != null) {
+			LightweightTypeReference expressionType = resolvedTypes.getActualType(expression);
+			if (expressionType != null) {
+				JvmTypeReference result = expressionType.toJavaCompliantTypeReference();
+				return result;
+			}
+		}
 		throw new IllegalStateException("equivalent could not be computed");
 	}
 	
-	public boolean isVoidAllowed() {
-		return voidAllowed;
+	@Nullable
+	public XExpression getExpression() {
+		return expression;
 	}
 	
 	@Override
 	public String toString() {
-		return String.format("InferredTypeIndicator[resolved=%s, voidAllowed=%s]", resolved, voidAllowed);
+		return String.format("InferredTypeIndicator[resolved=%s, expression=%s]", resolved, expression);
 	}
 	
 }

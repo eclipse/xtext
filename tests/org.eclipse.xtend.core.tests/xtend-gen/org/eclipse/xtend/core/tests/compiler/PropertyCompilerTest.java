@@ -71,4 +71,189 @@ public class PropertyCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.newLine();
     this.assertCompilesTo(_builder, _builder_1, generatorConfig);
   }
+  
+  @Test
+  public void compileReadonlyPropertyWithoutType() {
+    final GeneratorConfig generatorConfig = this.generatorConfigProvider.get(null);
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("class C {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("@Property");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("val string = \'\'");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("@SuppressWarnings(\"all\")");
+    _builder_1.newLine();
+    _builder_1.append("public class C {");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("private final String _string = \"\";");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("public String getString() {");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("return this._string;");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    this.assertCompilesTo(_builder, _builder_1, generatorConfig);
+  }
+  
+  @Test
+  public void compilePropertyWithoutType() {
+    final GeneratorConfig generatorConfig = this.generatorConfigProvider.get(null);
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("class C {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("@Property");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("var string = \'\'");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("@SuppressWarnings(\"all\")");
+    _builder_1.newLine();
+    _builder_1.append("public class C {");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("private String _string = \"\";");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("public String getString() {");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("return this._string;");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("public void setString(final String string) {");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("this._string = string;");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    this.assertCompilesTo(_builder, _builder_1, generatorConfig);
+  }
+  
+  @Test
+  public void compilePropertyWithTypeParameter() {
+    final GeneratorConfig generatorConfig = this.generatorConfigProvider.get(null);
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("class C<T> {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("@Property");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("var T t");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("@SuppressWarnings(\"all\")");
+    _builder_1.newLine();
+    _builder_1.append("public class C<T extends Object> {");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("private T _t;");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("public T getT() {");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("return this._t;");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("public void setT(final T t) {");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("this._t = t;");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    this.assertCompilesTo(_builder, _builder_1, generatorConfig);
+  }
+  
+  @Test
+  public void compilePropertyWithoutTypeButTypeParameter() {
+    final GeneratorConfig generatorConfig = this.generatorConfigProvider.get(null);
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("class C<T> {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("@Property");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("var iterable = null as Iterable<T>");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("@SuppressWarnings(\"all\")");
+    _builder_1.newLine();
+    _builder_1.append("public class C<T extends Object> {");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("private Iterable<T> _iterable = ((Iterable<T>) null);");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("public Iterable<T> getIterable() {");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("return this._iterable;");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("public void setIterable(final Iterable<T> iterable) {");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("this._iterable = iterable;");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    this.assertCompilesTo(_builder, _builder_1, generatorConfig);
+  }
 }
