@@ -13,9 +13,9 @@ import org.eclipse.ui.IWorkbench;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.xtext.builder.DerivedResourceMarkers;
 import org.eclipse.xtext.builder.builderState.IBuilderState;
-import org.eclipse.xtext.builder.trace.FileBasedTraceInformation;
+import org.eclipse.xtext.builder.trace.TraceForStorageProvider;
 import org.eclipse.xtext.generator.IDerivedResourceMarkers;
-import org.eclipse.xtext.generator.trace.ITraceInformation;
+import org.eclipse.xtext.generator.trace.ITraceForStorageProvider;
 import org.eclipse.xtext.resource.IResourceDescriptions;
 import org.eclipse.xtext.service.AbstractGenericModule;
 import org.eclipse.xtext.ui.editor.IDirtyStateManager;
@@ -71,8 +71,8 @@ public class SharedStateModule extends AbstractGenericModule {
 	/**
 	 * @since 2.3
 	 */
-	public Class<? extends ITraceInformation> bindITraceInformation() {
-		return FileBasedTraceInformation.class;
+	public Class<? extends ITraceForStorageProvider> bindITraceInformation() {
+		return TraceForStorageProvider.class;
 	}
 	
 	/**

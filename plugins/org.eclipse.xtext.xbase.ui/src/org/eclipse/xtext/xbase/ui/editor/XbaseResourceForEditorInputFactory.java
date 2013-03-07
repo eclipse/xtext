@@ -8,15 +8,49 @@
 package org.eclipse.xtext.xbase.ui.editor;
 
 import org.eclipse.core.resources.IFile;
+import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IStorage;
+import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.jdt.core.IClassFile;
 import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.jdt.core.JavaCore;
+import org.eclipse.jdt.internal.ui.javaeditor.IClassFileEditorInput;
+import org.eclipse.ui.IEditorInput;
+import org.eclipse.xtext.builder.trace.ITraceForTypeRootProvider;
+import org.eclipse.xtext.generator.trace.ILocationInResource;
+import org.eclipse.xtext.generator.trace.ITrace;
+import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.editor.model.JavaClassPathResourceForIEditorInputFactory;
+
+import com.google.inject.Inject;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
+ * @author Moritz Eysholdt
  */
-public class XbaseResourceForEditorInputFactory extends JavaClassPathResourceForIEditorInputFactory{
+public class XbaseResourceForEditorInputFactory extends JavaClassPathResourceForIEditorInputFactory {
+
+	@Inject
+	private ITraceForTypeRootProvider typeForTypeRootProvider;
+
+	protected URI getClassFileSourceURI(IClassFile classFile) {
+		ITrace traceToSource = typeForTypeRootProvider.getTraceToSource(classFile);
+		for (ILocationInResource loc : traceToSource.getAllAssociatedLocations())
+			return loc.getResourceURI();
+		return null;
+	}
+
+	@Override
+	public Resource createResource(IEditorInput editorInput) {
+		if (editorInput instanceof IClassFileEditorInput) {
+			Resource resource = createResource(((IClassFileEditorInput) editorInput).getClassFile());
+			if (resource != null)
+				return resource;
+		}
+		return super.createResource(editorInput);
+	}
 
 	@Override
 	protected boolean isValidationDisabled(IStorage storage) {
@@ -28,5 +62,16 @@ public class XbaseResourceForEditorInputFactory extends JavaClassPathResourceFor
 			}
 		}
 		return super.isValidationDisabled(storage);
+	}
+
+	protected Resource createResource(IClassFile classFile) {
+		URI uri = getClassFileSourceURI(classFile);
+		IProject project = classFile.getJavaProject().getProject();
+		ResourceSet resourceSet = getResourceSetProvider().get(project);
+		XtextResource resource = (XtextResource) getResourceFactory().createResource(uri);
+		resourceSet.getResources().add(resource);
+		resource.setValidationDisabled(true);
+		return resource;
+
 	}
 }
