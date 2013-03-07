@@ -8,12 +8,18 @@ import org.junit.Test
 
 import static org.eclipse.xtext.xbase.XbasePackage$Literals.*
 import static org.eclipse.xtext.xbase.validation.IssueCodes.*
+import java.io.IOException
+import org.eclipse.xtext.resource.XtextResourceSet
+import com.google.inject.Provider
+import org.eclipse.emf.common.util.URI
+import org.eclipse.xtext.util.StringInputStream
 
 class JvmModelTest extends AbstractJvmModelTest {
 	
 	@Inject ValidationTestHelper helper
 	@Inject IResourceDescription$Manager manager
 	@Inject extension ReflectExtensions
+	@Inject Provider<XtextResourceSet> resourceSetProvider
 	
 	@Test
 	def void testSimple() {
@@ -31,6 +37,13 @@ class JvmModelTest extends AbstractJvmModelTest {
 		val list = newArrayList(desc.exportedObjects)
 		assertEquals(1, list.size)
 		assertFalse(resource.get("fullyInitialized"))
+	}
+	
+	override protected newResource(CharSequence input) throws IOException {
+		val resourceSet = resourceSetProvider.get
+		val resource = resourceSet.createResource(URI::createURI("Test.___xbase"));
+		resource.load(new StringInputStream(input.toString()), null);
+		return resource;
 	}
 	
 	@Test

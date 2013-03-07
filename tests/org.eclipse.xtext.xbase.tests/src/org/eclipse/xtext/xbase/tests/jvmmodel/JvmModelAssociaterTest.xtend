@@ -12,13 +12,28 @@ import org.eclipse.xtext.xbase.jvmmodel.JvmModelAssociator
 import org.eclipse.xtext.xbase.jvmmodel.JvmModelInferrerRegistry
 import org.eclipse.xtext.xbase.jvmmodel.JvmTypesBuilder
 import org.junit.Test
+import com.google.inject.MembersInjector
+import org.junit.Before
+import org.junit.After
 
 class JvmModelAssociaterTest extends AbstractJvmModelTest {
 	
 	@Inject extension JvmTypesBuilder
-	@Inject JvmModelAssociator assoc
+	@Inject MembersInjector<JvmModelAssociator> associatorInjector
+	JvmModelAssociator assoc
 	@Inject XtextResourceSet resourceSet
 	@Inject DerivedStateAwareResource resource
+	
+	@Before
+	public def void createAssociator() {
+		assoc = new JvmModelAssociator
+		associatorInjector.injectMembers(assoc)
+	}
+	
+	@After
+	public def void discardAssociator() {
+		assoc = null
+	}
 	
 	@Test
 	def void testInference() {
