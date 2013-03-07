@@ -50,6 +50,15 @@ public interface TypeReferenceProvider {
 	TypeReference newTypeReference(Type typeDeclaration, TypeReference... typeArguments);
 	
 	/**
+	 * Creates a new type reference for the given <code>Class</code> and the type arguments.
+	 * 
+	 * @param clazz the clazz to point to
+	 * @param typeArguments the type arguments
+	 * @return a {@link TypeReference} pointing to the given type or <code>null</code> if the type is not on the class path of the compiled project.
+	 */
+	TypeReference newTypeReference(Class<?> clazz, TypeReference... typeArguments);
+	
+	/**
 	 * @return a wildcard type references with upperBound {@link Object}
 	 */
 	TypeReference newWildcardTypeReference();
