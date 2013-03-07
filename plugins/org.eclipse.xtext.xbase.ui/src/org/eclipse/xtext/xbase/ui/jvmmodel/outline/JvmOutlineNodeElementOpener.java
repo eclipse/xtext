@@ -18,7 +18,7 @@ import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.util.jdt.IJavaElementFinder;
 import org.eclipse.xtext.generator.trace.ILocationInResource;
 import org.eclipse.xtext.generator.trace.ITrace;
-import org.eclipse.xtext.generator.trace.ITraceInformation;
+import org.eclipse.xtext.generator.trace.ITraceForStorageProvider;
 import org.eclipse.xtext.ui.editor.GlobalURIEditorOpener;
 import org.eclipse.xtext.ui.editor.outline.impl.OutlineNodeElementOpener;
 import org.eclipse.xtext.util.TextRegion;
@@ -36,7 +36,7 @@ public class JvmOutlineNodeElementOpener extends OutlineNodeElementOpener {
 	private IJavaElementFinder javaElementFinder;
 
 	@Inject
-	private ITraceInformation traceInformation;
+	private ITraceForStorageProvider traceInformation;
 
 	@Inject
 	private GlobalURIEditorOpener globalURIEditorOpener;

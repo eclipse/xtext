@@ -32,7 +32,7 @@ import org.eclipse.core.runtime.OperationCanceledException;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.jdt.annotation.Nullable;
-import org.eclipse.xtext.builder.trace.FileBasedTraceInformation;
+import org.eclipse.xtext.builder.trace.TraceForStorageProvider;
 import org.eclipse.xtext.builder.trace.TraceMarkers;
 import org.eclipse.xtext.generator.AbstractFileSystemAccess2;
 import org.eclipse.xtext.generator.OutputConfiguration;
@@ -82,7 +82,7 @@ public class EclipseResourceFileSystemAccess2 extends AbstractFileSystemAccess2 
 	private TraceMarkers traceMarkers;
 	
 	@Inject
-	private FileBasedTraceInformation fileBasedTraceInformation;
+	private TraceForStorageProvider fileBasedTraceInformation;
 	
 	@Inject
 	private IWorkspace workspace;

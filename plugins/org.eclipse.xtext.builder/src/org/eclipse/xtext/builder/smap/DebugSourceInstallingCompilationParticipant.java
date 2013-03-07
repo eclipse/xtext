@@ -30,7 +30,7 @@ import org.eclipse.xtext.builder.trace.AbstractTrace;
 import org.eclipse.xtext.generator.OutputConfiguration;
 import org.eclipse.xtext.generator.trace.AbstractTraceRegion;
 import org.eclipse.xtext.generator.trace.ITrace;
-import org.eclipse.xtext.generator.trace.ITraceInformation;
+import org.eclipse.xtext.generator.trace.ITraceForStorageProvider;
 import org.eclipse.xtext.generator.trace.ITraceToBytecodeInstaller;
 import org.eclipse.xtext.generator.trace.TraceAsPrimarySourceInstaller;
 import org.eclipse.xtext.generator.trace.TraceAsSmapInstaller;
@@ -65,7 +65,7 @@ public class DebugSourceInstallingCompilationParticipant extends CompilationPart
 	private Provider<TraceAsPrimarySourceInstaller> traceAsPrimarySourceInstallerProvider;
 
 	@Inject
-	private ITraceInformation traceInformation;
+	private ITraceForStorageProvider traceInformation;
 
 	protected OutputConfiguration findOutputConfiguration(URI dslSourceFile, IFile generatedJavaFile) {
 		IResourceServiceProvider serviceProvider = serviceProviderRegistry.getResourceServiceProvider(dslSourceFile);
