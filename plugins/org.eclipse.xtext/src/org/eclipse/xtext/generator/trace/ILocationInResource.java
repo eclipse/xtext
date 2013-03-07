@@ -7,8 +7,11 @@
  *******************************************************************************/
 package org.eclipse.xtext.generator.trace;
 
+import java.io.InputStream;
+
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IStorage;
+import org.eclipse.core.runtime.CoreException;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
@@ -44,9 +47,12 @@ public interface ILocationInResource {
 	@Nullable URI getEObjectURI();
 	
 	/**
-	 * @return the storage handle for this location. Never <code>null</code>.
+	 * @return the storage handle for this location. This can be <code>null</code> if the trace comes from a JAR's
+	 *         source attachment zip file.
 	 */
-	@NonNull IStorage getStorage();
+	@Nullable IStorage getStorage();
+
+	@NonNull InputStream getContents() throws CoreException;
 	
 	/**
 	 * @return the project for this location. Never <code>null</code>.

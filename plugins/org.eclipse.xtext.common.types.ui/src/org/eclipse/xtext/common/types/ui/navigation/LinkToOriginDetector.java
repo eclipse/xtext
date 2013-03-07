@@ -26,7 +26,7 @@ import org.eclipse.ui.IEditorInput;
 import org.eclipse.ui.texteditor.ITextEditor;
 import org.eclipse.xtext.generator.trace.ILocationInResource;
 import org.eclipse.xtext.generator.trace.ITrace;
-import org.eclipse.xtext.generator.trace.ITraceInformation;
+import org.eclipse.xtext.generator.trace.ITraceForStorageProvider;
 import org.eclipse.xtext.resource.IResourceServiceProvider;
 import org.eclipse.xtext.ui.resource.IResourceUIServiceProvider;
 import org.eclipse.xtext.util.TextRegion;
@@ -37,7 +37,7 @@ import com.google.inject.Provider;
 
 /**
  * Navigates to the original source element if the selected Java type was generated
- * from an Xbase language (e.g. {@link ITraceInformation} is available).
+ * from an Xbase language (e.g. {@link ITraceForStorageProvider} is available).
  * 
  * @author Sebastian Zarnekow - Initial contribution and API
  */
@@ -47,7 +47,7 @@ public class LinkToOriginDetector extends AbstractHyperlinkDetector {
 	private Provider<LinkToOrigin> hyperlinkProvider;
 	
 	@Inject
-	private ITraceInformation traceInformation;
+	private ITraceForStorageProvider traceInformation;
 	
 	@Inject
 	private IResourceUIServiceProvider.Registry serviceProviderRegistry;

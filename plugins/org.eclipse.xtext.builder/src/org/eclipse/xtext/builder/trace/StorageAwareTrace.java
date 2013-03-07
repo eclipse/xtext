@@ -7,23 +7,22 @@
  *******************************************************************************/
 package org.eclipse.xtext.builder.trace;
 
+import java.io.InputStream;
+
 import org.apache.log4j.Logger;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IFolder;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.IStorage;
+import org.eclipse.core.runtime.CoreException;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.jdt.annotation.NonNullByDefault;
-import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.jdt.core.IJarEntryResource;
 import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.jdt.core.IPackageFragmentRoot;
 import org.eclipse.jdt.core.JavaCore;
 import org.eclipse.jdt.core.JavaModelException;
-import org.eclipse.xtext.generator.trace.AbstractTraceRegion;
-import org.eclipse.xtext.generator.trace.ITraceRegionProvider;
-import org.eclipse.xtext.generator.trace.TraceNotFoundException;
 import org.eclipse.xtext.ui.resource.IStorage2UriMapper;
 import org.eclipse.xtext.ui.resource.IStorage2UriMapperJdtExtensions;
 import org.eclipse.xtext.util.Pair;
@@ -38,8 +37,6 @@ public class StorageAwareTrace extends AbstractTrace {
 
 	private static final Logger log = Logger.getLogger(StorageAwareTrace.class);
 
-	private ITraceRegionProvider traceRegionProvider;
-
 	private IStorage localStorage;
 
 	private String projectName;
@@ -47,9 +44,14 @@ public class StorageAwareTrace extends AbstractTrace {
 	@Inject
 	private IStorage2UriMapper storage2UriMapper;
 
-	@Override
 	public IStorage getLocalStorage() {
 		return localStorage;
+	}
+	
+	@Override
+	public URI getLocalURI() {
+		IStorage localStorage = getLocalStorage();
+		return getURIForStorage(localStorage);
 	}
 
 	@Override
@@ -116,29 +118,29 @@ public class StorageAwareTrace extends AbstractTrace {
 		return path;
 	}
 
-	@Override
-	@Nullable
-	protected AbstractTraceRegion doGetRootTraceRegion() {
-		try {
-			return traceRegionProvider.getTraceRegion();
-		} catch (TraceNotFoundException noTraceFound) {
-			return null;
-		}
-	}
-
-	protected void setTraceRegionProvider(ITraceRegionProvider traceRegionProvider) {
-		this.traceRegionProvider = traceRegionProvider;
-	}
-
-	protected ITraceRegionProvider getTraceRegionProvider() {
-		return traceRegionProvider;
-	}
-
+	
 	protected void setLocalStorage(IStorage derivedResource) {
 		this.localStorage = derivedResource;
 		if (derivedResource instanceof IResource) {
 			this.projectName = ((IResource) derivedResource).getProject().getName();
 		}
 	}
+	
+	@Override
+	protected IStorage findStorage(URI uri, IProject project) {
+		Iterable<Pair<IStorage, IProject>> allStorages = getStorage2uriMapper().getStorages(uri);
+		for(Pair<IStorage, IProject> storage: allStorages) {
+			if (project.equals(storage.getSecond())) {
+				return storage.getFirst();
+			}
+		}
+		throw new IllegalStateException("No storage found for given path: " + uri);
+	}
+
+	@Override
+	protected InputStream getContents(URI uri, IProject project) throws CoreException {
+		return findStorage(uri, project).getContents();
+	}
+
 
 }

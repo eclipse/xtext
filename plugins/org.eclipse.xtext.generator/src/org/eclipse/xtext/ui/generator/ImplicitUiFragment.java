@@ -33,6 +33,7 @@ public class ImplicitUiFragment extends AbstractGeneratorFragment {
 					"org.eclipse.xtext.ui.shared.Access.getJavaProjectsState()");
 		if (XbaseGeneratorFragment.doesUseXbase(grammar)) {
 			bindFactory = bindFactory.addTypeToType("org.eclipse.xtext.ui.editor.XtextEditor", "org.eclipse.xtext.xbase.ui.editor.XbaseEditor");
+			bindFactory = bindFactory.addTypeToType("org.eclipse.xtext.ui.editor.model.XtextDocumentProvider", "org.eclipse.xtext.xbase.ui.editor.XbaseDocumentProvider");
 		}
 		return bindFactory.getBindings();
 	}

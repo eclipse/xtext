@@ -29,7 +29,7 @@ import org.eclipse.xtext.generator.trace.AbstractStatefulTraceRegion;
 import org.eclipse.xtext.generator.trace.AbstractTraceRegion;
 import org.eclipse.xtext.generator.trace.ILocationData;
 import org.eclipse.xtext.generator.trace.ITrace;
-import org.eclipse.xtext.generator.trace.ITraceInformation;
+import org.eclipse.xtext.generator.trace.ITraceForStorageProvider;
 import org.eclipse.xtext.generator.trace.ITraceRegionProvider;
 import org.eclipse.xtext.generator.trace.ITraceURIConverter;
 import org.eclipse.xtext.generator.trace.TraceFileNameProvider;
@@ -49,13 +49,13 @@ import com.google.inject.Provider;
  * @noinstantiate This class is not intended to be instantiated by clients.
  */
 @NonNullByDefault
-public class FileBasedTraceInformation implements ITraceInformation {
+public class TraceForStorageProvider implements ITraceForStorageProvider {
 
 	// use TraceFileNameProvider.TRACE_FILE_EXTENSION
 	@Deprecated 
 	public static final String TRACE_FILE_EXTENSION = TraceFileNameProvider.TRACE_FILE_EXTENSION;
 
-	private static final Logger log = Logger.getLogger(FileBasedTraceInformation.class);
+	private static final Logger log = Logger.getLogger(TraceForStorageProvider.class);
 	
 	@Inject
 	private TraceRegionSerializer traceRegionSerializer;
