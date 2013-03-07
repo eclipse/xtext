@@ -18,7 +18,7 @@ import org.eclipse.xtend.ide.tests.WorkbenchTestHelper;
 import org.eclipse.xtext.builder.trace.TraceMarkers;
 import org.eclipse.xtext.generator.trace.ILocationInResource;
 import org.eclipse.xtext.generator.trace.ITrace;
-import org.eclipse.xtext.generator.trace.ITraceInformation;
+import org.eclipse.xtext.generator.trace.ITraceForStorageProvider;
 import org.eclipse.xtext.util.TextRegion;
 import org.junit.Test;
 
@@ -36,7 +36,7 @@ public class XtendTraceTests extends AbstractXtendUITestCase {
 	private TraceMarkers traceMarkers;
 
 	@Inject
-	private ITraceInformation traceInformation;
+	private ITraceForStorageProvider traceInformation;
 
 
 	@Test
