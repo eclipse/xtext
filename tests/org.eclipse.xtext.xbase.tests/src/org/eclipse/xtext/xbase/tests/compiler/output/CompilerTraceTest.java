@@ -7,17 +7,19 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.tests.compiler.output;
 
+import java.io.InputStream;
 import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IStorage;
+import org.eclipse.core.runtime.CoreException;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.builder.trace.AbstractTrace;
-import org.eclipse.xtext.builder.trace.OffsetBasedLocationInResource;
+import org.eclipse.xtext.builder.trace.LocationInResource;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.generator.trace.AbstractTraceRegion;
 import org.eclipse.xtext.generator.trace.ILocationData;
@@ -64,12 +66,6 @@ public class CompilerTraceTest extends AbstractXbaseTestCase {
 		}
 		
 		@Override
-		@NonNull
-		public IStorage getLocalStorage() {
-			throw new UnsupportedOperationException();
-		}
-		
-		@Override
 		@Nullable
 		protected ILocationInResource createLocationInResourceFor(@NonNull ILocationData location, @NonNull AbstractTraceRegion traceRegion, @NonNull Map<URI, URI> cache) {
 			URI path = location.getPath();
@@ -77,7 +73,25 @@ public class CompilerTraceTest extends AbstractXbaseTestCase {
 				path = traceRegion.getAssociatedPath();
 			if(path == null)
 				return null;
-			return new OffsetBasedLocationInResource(location.getOffset(), location.getLength(), location.getLineNumber(), location.getEndLineNumber(), path, this);
+			return new LocationInResource(location.getOffset(), location.getLength(), location.getLineNumber(), location.getEndLineNumber(), path, this);
+		}
+
+		@Override
+		@NonNull
+		public URI getLocalURI() {
+			throw new UnsupportedOperationException();
+		}
+
+		@Override
+		@NonNull
+		protected IStorage findStorage(@NonNull URI uri, @NonNull IProject project) {
+			throw new UnsupportedOperationException();
+		}
+
+		@Override
+		@NonNull
+		protected InputStream getContents(@NonNull URI uri, @NonNull IProject project) throws CoreException {
+			throw new UnsupportedOperationException();
 		}
 		
 	}

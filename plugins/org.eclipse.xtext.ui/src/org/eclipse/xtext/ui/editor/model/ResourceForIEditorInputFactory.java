@@ -49,7 +49,7 @@ public class ResourceForIEditorInputFactory implements IResourceForEditorInputFa
 	
 	@Inject(optional = true)
 	private IWorkspace workspace;
-
+	
 	/**
 	 * @throws IllegalArgumentException
 	 *             if no resource can be provided for the given input.
@@ -151,5 +151,11 @@ public class ResourceForIEditorInputFactory implements IResourceForEditorInputFa
 	protected IExternalContentProvider getExternalContentProvider() {
 		return externalContentProvider;
 	}
-
+	
+	/**
+	 * @since 2.4
+	 */
+	protected IResourceFactory getResourceFactory() {
+		return resourceFactory;
+	}
 }
