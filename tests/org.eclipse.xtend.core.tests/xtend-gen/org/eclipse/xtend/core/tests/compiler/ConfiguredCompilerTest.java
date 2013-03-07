@@ -76,6 +76,27 @@ public class ConfiguredCompilerTest extends AbstractXtendCompilerTest {
   }
   
   @Test
+  public void testAnnotationWithValueArray() {
+    final GeneratorConfig generatorConfig = this.generatorConfigProvider.get(null);
+    generatorConfig.setGenerateSyntheticSuppressWarnings(false);
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("@SuppressWarnings(#[ \'abc\', \'efg\' ])");
+    _builder.newLine();
+    _builder.append("class C {");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("@SuppressWarnings({\"abc\", \"efg\"})");
+    _builder_1.newLine();
+    _builder_1.append("public class C {");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    this.assertCompilesTo(_builder, _builder_1, generatorConfig);
+  }
+  
+  @Test
   public void compileWithConfiguration_2() {
     final GeneratorConfig generatorConfig = this.generatorConfigProvider.get(null);
     generatorConfig.setGenerateSyntheticSuppressWarnings(true);

@@ -256,4 +256,87 @@ public class PropertyCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.newLine();
     this.assertCompilesTo(_builder, _builder_1, generatorConfig);
   }
+  
+  @Test
+  public void compilePropertyWithArrayType() {
+    final GeneratorConfig generatorConfig = this.generatorConfigProvider.get(null);
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("class C<T> {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("@Property");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("var String[] array = #[\'a\']");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("@SuppressWarnings(\"all\")");
+    _builder_1.newLine();
+    _builder_1.append("public class C<T extends Object> {");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("private String[] _array = { \"a\" };");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("public String[] getArray() {");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("return this._array;");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("public void setArray(final String[] array) {");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("this._array = array;");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    this.assertCompilesTo(_builder, _builder_1, generatorConfig);
+  }
+  
+  @Test
+  public void compileExplicitProperty() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("class X {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("@Property val String x = \'hello\'");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("@SuppressWarnings(\"all\")");
+    _builder_1.newLine();
+    _builder_1.append("public class X {");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("private final String _x = \"hello\";");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("public String getX() {");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("return this._x;");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    this.assertCompilesTo(_builder, _builder_1);
+  }
 }

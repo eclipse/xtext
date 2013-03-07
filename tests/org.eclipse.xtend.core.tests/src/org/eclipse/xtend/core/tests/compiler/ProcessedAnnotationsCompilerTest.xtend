@@ -424,4 +424,50 @@ class PropertyCompilerTest extends AbstractXtendCompilerTest {
 				}
 			''', generatorConfig)
 	}
+	
+	@Test
+	def compilePropertyWithArrayType() {
+		val generatorConfig = generatorConfigProvider.get(null)
+		assertCompilesTo(
+			'''
+				class C<T> {
+					@Property
+					var String[] array = #['a']
+				}
+			''',
+			'''
+				@SuppressWarnings("all")
+				public class C<T extends Object> {
+				  private String[] _array = { "a" };
+				  
+				  public String[] getArray() {
+				    return this._array;
+				  }
+				  
+				  public void setArray(final String[] array) {
+				    this._array = array;
+				  }
+				}
+			''', generatorConfig)
+	}
+	
+	@Test
+	def compileExplicitProperty() {
+		assertCompilesTo(
+			'''
+				class X {
+					@Property val String x = 'hello'
+				}
+			''', '''
+				@SuppressWarnings("all")
+				public class X {
+				  private final String _x = "hello";
+				  
+				  public String getX() {
+				    return this._x;
+				  }
+				}
+			''')
+	}
+	
 }

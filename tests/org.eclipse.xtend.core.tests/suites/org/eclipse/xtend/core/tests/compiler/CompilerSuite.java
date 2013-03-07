@@ -7,6 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtend.core.tests.compiler;
 
+import org.eclipse.xtend.core.tests.annotations.AnnotationsCompilerTest;
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
@@ -16,6 +17,8 @@ import org.junit.runners.Suite.SuiteClasses;
  */
 @RunWith(Suite.class)
 @SuiteClasses({
+	AnnotationCompilerTest.class,
+	AnnotationsCompilerTest.class,
 	CompilerBugTest.class,
 	CompilerTraceTest.class,
 	ConfiguredCompilerTest.class,
