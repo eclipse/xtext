@@ -7,68 +7,52 @@
  *******************************************************************************/
 package org.eclipse.xtext.builder.trace;
 
-import org.eclipse.core.resources.IProject;
-import org.eclipse.core.resources.IStorage;
 import org.eclipse.emf.common.util.URI;
-import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.xtext.LanguageInfo;
-import org.eclipse.xtext.generator.trace.ILocationInResource;
-import org.eclipse.xtext.resource.IResourceServiceProvider;
-import org.eclipse.xtext.util.ITextRegionWithLineInformation;
-
-import com.google.inject.Inject;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
+ * @author Moritz Eysholdt
  */
-public class LocationInResource implements ILocationInResource {
+public class LocationInResource extends AbstractLocationInResource {
 
-	@Inject
-	private IResourceServiceProvider.Registry resourceServiceRegistry;
-	
-	private URI resourceURI;
-	private IStorage resource;
-	private IProject project;
+	private final URI resourceURI;
+	private final int offset;
+	private final int length;
+	private final int lineNumber;
+	private final int endLineNumber;
 
-	private LanguageInfo language;
-
-	protected void init(URI resourceURI, IStorage resource, IProject project) {
+	public LocationInResource(int offset, int length, int lineNumber, int endLineNumber, URI resourceURI, AbstractTrace trace) {
+		super(trace);
+		this.offset = offset;
+		this.length = length;
+		this.lineNumber = lineNumber;
+		this.endLineNumber = endLineNumber;
 		this.resourceURI = resourceURI;
-		this.resource = resource;
-		this.project = project;
-	}
-	
-	public LanguageInfo getLanguage() {
-		if (language == null) {
-			IResourceServiceProvider serviceProvider = resourceServiceRegistry.getResourceServiceProvider(resourceURI);
-			if (serviceProvider != null) {
-				this.language = serviceProvider.get(LanguageInfo.class);
-			}
-		}
-		return language;
 	}
 
+	@Override
 	public URI getResourceURI() {
 		return resourceURI;
 	}
 
-	public URI getEObjectURI() {
-		// TODO Auto-generated method stub
-		return null;
+	@Override
+	protected int getOffset() {
+		return offset;
 	}
 
-	@NonNull
-	public IStorage getStorage() {
-		return resource;
-	}
-	
-	@NonNull
-	public IProject getProject() {
-		return project;
+	@Override
+	protected int getLength() {
+		return length;
 	}
 
-	public ITextRegionWithLineInformation getTextRegion() {
-		return null;
+	@Override
+	protected int getLineNumber() {
+		return lineNumber;
+	}
+
+	@Override
+	protected int getEndLineNumber() {
+		return endLineNumber;
 	}
 
 }

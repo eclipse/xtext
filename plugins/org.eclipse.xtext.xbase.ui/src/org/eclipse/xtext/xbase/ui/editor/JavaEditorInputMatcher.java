@@ -17,7 +17,7 @@ import org.eclipse.ui.IEditorReference;
 import org.eclipse.ui.ide.ResourceUtil;
 import org.eclipse.xtext.generator.trace.ILocationInResource;
 import org.eclipse.xtext.generator.trace.ITrace;
-import org.eclipse.xtext.generator.trace.ITraceInformation;
+import org.eclipse.xtext.generator.trace.ITraceForStorageProvider;
 import org.eclipse.xtext.ui.editor.XtextEditorInfo;
 import org.eclipse.xtext.xbase.ui.editor.StacktraceBasedEditorDecider.Decision;
 
@@ -33,7 +33,7 @@ public class JavaEditorInputMatcher implements IEditorMatchingStrategy {
 	private static final Logger logger = Logger.getLogger(JavaEditorInputMatcher.class);
 	
 	@Inject
-	private ITraceInformation traceInformation;
+	private ITraceForStorageProvider traceInformation;
 	
 	@Inject
 	private XtextEditorInfo editorInfo;

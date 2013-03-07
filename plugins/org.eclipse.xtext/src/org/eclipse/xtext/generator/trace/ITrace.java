@@ -64,7 +64,7 @@ public interface ITrace {
 	 * Returns the storage that is associated with this trace.
 	 * @return the associated storage. Never <code>null</code>.
 	 */
-	IStorage getLocalStorage();
+//	IStorage getLocalStorage();
 	
 //	/**
 //	 * Returns all available inverse trace information.
