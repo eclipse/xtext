@@ -29,4 +29,5 @@ public interface TypeDeclaration extends Type, MemberDeclaration {
 	String getSimpleName();
 
 	List<? extends MemberDeclaration> getMembers();
+	
 }

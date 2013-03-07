@@ -74,7 +74,7 @@ public interface RegisterGlobalsContext {
 	 * @param qualifiedName
 	 * @throws IllegalArgumentException if the qualifiedName conflicts with any existing types.
 	 */
-	void registerAnnotation(String qualifiedName) throws IllegalArgumentException ;
+	void registerAnnotationType(String qualifiedName) throws IllegalArgumentException ;
 	
 	/**
 	 * Registers and creates an empty Java enumeration type with given qualified name
@@ -93,5 +93,5 @@ public interface RegisterGlobalsContext {
 	 * @param qualifiedName
 	 * @throws IllegalArgumentException if the qualifiedName conflicts with any existing types.
 	 */
-	void registerEnum(String qualifiedName) throws IllegalArgumentException ;
+	void registerEnumerationType(String qualifiedName) throws IllegalArgumentException ;
 }

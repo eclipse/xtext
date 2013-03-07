@@ -7,10 +7,9 @@
  *******************************************************************************/
 package org.eclipse.xtend.lib.macro;
 
-import org.eclipse.xtend.lib.macro.declaration.CompilationUnit;
-import org.eclipse.xtend.lib.macro.declaration.MutableClassDeclaration;
 import org.eclipse.xtend.lib.macro.services.ProblemSupport;
 import org.eclipse.xtend.lib.macro.services.Tracability;
+import org.eclipse.xtend.lib.macro.services.TypeLookup;
 import org.eclipse.xtend.lib.macro.services.TypeReferenceProvider;
 
 import com.google.common.annotations.Beta;
@@ -24,18 +23,6 @@ import com.google.common.annotations.Beta;
  */
 @Beta
 public interface TransformationContext extends Tracability, ProblemSupport,
-		TypeReferenceProvider {
-
-	/**
-	 * Finds a MutableClassDeclaration representing a derived Java class by the
-	 * given name
-	 * 
-	 * @param qualifiedName
-	 *            the fully qualified name of the java class
-	 * @return a {@link MutableClassDeclaration} with the given qualified name
-	 *         or <code>null</code> if such class is contained in the currently
-	 *         processed {@link CompilationUnit}
-	 */
-	MutableClassDeclaration findGeneratedClass(String qualifiedName);
+		TypeReferenceProvider, TypeLookup {
 
 }

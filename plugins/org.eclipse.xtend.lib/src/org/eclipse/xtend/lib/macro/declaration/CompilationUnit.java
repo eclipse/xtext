@@ -7,27 +7,30 @@
  *******************************************************************************/
 package org.eclipse.xtend.lib.macro.declaration;
 
-import java.util.List;
-
 import com.google.common.annotations.Beta;
 
 /**
+ * 
+ * Represents a single Xtend file and the root element of the AST.
+ * 
  * @author Sven Efftinge
  */
 @Beta
 public interface CompilationUnit extends AnnotationTarget {
 
+	/**
+	 * @return the package name of this compilation unit. 
+	 */
 	String getPackageName();
 
 	/**
 	 * @return the JavaDoc comment
 	 */
 	String getDocComment();
-	
-	List<? extends TypeDeclaration> getSourceTypeDeclarations();
-	List<? extends ClassDeclaration> getSourceClassDeclarations();
-	
-	List<? extends TypeDeclaration> getGeneratedTypeDeclarations();
-	List<? extends ClassDeclaration> getGeneratedClassDeclarations();
+
+	/**
+	 * @return the source view of the <code>TypeDeclaration</code>s directly contained in the compilation unit.
+	 */
+	Iterable<? extends TypeDeclaration> getSourceTypeDeclarations();
 	
 }
