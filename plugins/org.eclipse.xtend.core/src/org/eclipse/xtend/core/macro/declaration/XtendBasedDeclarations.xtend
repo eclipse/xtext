@@ -11,29 +11,37 @@ package org.eclipse.xtend.core.macro.declaration
 import com.google.common.collect.ImmutableList
 import org.eclipse.emf.ecore.EObject
 import org.eclipse.xtend.core.xtend.XtendAnnotationTarget
+import org.eclipse.xtend.core.xtend.XtendAnnotationType
 import org.eclipse.xtend.core.xtend.XtendClass
 import org.eclipse.xtend.core.xtend.XtendConstructor
+import org.eclipse.xtend.core.xtend.XtendEnum
+import org.eclipse.xtend.core.xtend.XtendEnumLiteral
 import org.eclipse.xtend.core.xtend.XtendField
 import org.eclipse.xtend.core.xtend.XtendFile
 import org.eclipse.xtend.core.xtend.XtendFunction
+import org.eclipse.xtend.core.xtend.XtendInterface
 import org.eclipse.xtend.core.xtend.XtendMember
 import org.eclipse.xtend.core.xtend.XtendParameter
 import org.eclipse.xtend.core.xtend.XtendTypeDeclaration
 import org.eclipse.xtend.lib.macro.declaration.AnnotationReference
 import org.eclipse.xtend.lib.macro.declaration.AnnotationTarget
 import org.eclipse.xtend.lib.macro.declaration.AnnotationTypeDeclaration
+import org.eclipse.xtend.lib.macro.declaration.AnnotationTypeElementDeclaration
 import org.eclipse.xtend.lib.macro.declaration.ClassDeclaration
 import org.eclipse.xtend.lib.macro.declaration.ConstructorDeclaration
+import org.eclipse.xtend.lib.macro.declaration.EnumerationTypeDeclaration
+import org.eclipse.xtend.lib.macro.declaration.EnumerationValueDeclaration
 import org.eclipse.xtend.lib.macro.declaration.ExecutableDeclaration
 import org.eclipse.xtend.lib.macro.declaration.FieldDeclaration
+import org.eclipse.xtend.lib.macro.declaration.InterfaceDeclaration
 import org.eclipse.xtend.lib.macro.declaration.MemberDeclaration
 import org.eclipse.xtend.lib.macro.declaration.MethodDeclaration
 import org.eclipse.xtend.lib.macro.declaration.NamedElement
 import org.eclipse.xtend.lib.macro.declaration.ParameterDeclaration
+import org.eclipse.xtend.lib.macro.declaration.Type
 import org.eclipse.xtend.lib.macro.declaration.TypeDeclaration
 import org.eclipse.xtend.lib.macro.declaration.TypeParameterDeclaration
 import org.eclipse.xtend.lib.macro.declaration.TypeParameterDeclarator
-import org.eclipse.xtend.lib.macro.declaration.Visibility
 import org.eclipse.xtext.common.types.JvmAnnotationType
 import org.eclipse.xtext.common.types.JvmTypeParameter
 import org.eclipse.xtext.common.types.JvmUpperBound
@@ -63,6 +71,10 @@ abstract class XtendMemberDeclarationImpl<T extends XtendMember> extends XtendAn
 		}
 	}
 	
+	override getVisibility() {
+		compilationUnit.toVisibility(delegate.visibility)
+	}
+	
 }
 
 abstract class XtendTypeDeclarationImpl<T extends XtendTypeDeclaration> extends XtendMemberDeclarationImpl<T> implements TypeDeclaration {
@@ -82,6 +94,22 @@ abstract class XtendTypeDeclarationImpl<T extends XtendTypeDeclaration> extends 
 			simpleName
 	}
 	
+	override getVisibility() {
+		return compilationUnit.toVisibility(delegate.visibility)
+	}
+	
+	override getMembers() {
+		return delegate.members.map[compilationUnit.toXtendMemberDeclaration(it)]
+	}
+	
+	override isAssignableFrom(Type otherType) {
+		if (otherType == null)
+			return false;
+		val thisTypeRef = compilationUnit.typeReferenceProvider.newTypeReference(this)
+		val thatTypeRef = compilationUnit.typeReferenceProvider.newTypeReference(otherType)
+		return thisTypeRef.isAssignableFrom(thatTypeRef);
+	}
+	
 }
 
 class XtendClassDeclarationImpl extends XtendTypeDeclarationImpl<XtendClass> implements ClassDeclaration {
@@ -99,24 +127,36 @@ class XtendClassDeclarationImpl extends XtendTypeDeclarationImpl<XtendClass> imp
 	}
 	
 	override isFinal() {
-		false
+		delegate.final
 	}
 	
 	override isStatic() {
-		false
+		true
 	}
 	
 	override getTypeParameters() {
 		delegate.typeParameters.map[compilationUnit.toXtendTypeParameterDeclaration(it)]
 	}
 
-	override getVisibility() {
-		return Visibility::PUBLIC
+}
+
+class XtendInterfaceDeclarationImpl extends XtendTypeDeclarationImpl<XtendInterface> implements InterfaceDeclaration {
+	
+	override getSuperInterfaces() {
+		delegate.extends.map[compilationUnit.toTypeReference(it)]
 	}
 	
-	override getMembers() {
-		return delegate.members.map[compilationUnit.toXtendMemberDeclaration(it)]
+	override getTypeParameters() {
+		delegate.typeParameters.map[compilationUnit.toXtendTypeParameterDeclaration(it)]
 	}
+
+}
+
+class XtendEnumerationDeclarationImpl extends XtendTypeDeclarationImpl<XtendEnum> implements EnumerationTypeDeclaration {
+	
+}
+
+class XtendAnnotationTypeDeclarationImpl extends XtendTypeDeclarationImpl<XtendAnnotationType> implements AnnotationTypeDeclaration {
 	
 }
 
@@ -127,7 +167,7 @@ class XtendMethodDeclarationImpl extends XtendMemberDeclarationImpl<XtendFunctio
 	}
 	
 	override isFinal() {
-		false
+		delegate.final
 	}
 	
 	//TODO declare in interface
@@ -152,7 +192,7 @@ class XtendMethodDeclarationImpl extends XtendMemberDeclarationImpl<XtendFunctio
 	}
 	
 	override getBody() {
-//		delegate.expression.toExpression
+		throw new UnsupportedOperationException("Auto-generated function stub")
 	}
 	
 	override isVarArgs() {
@@ -232,7 +272,7 @@ class XtendFieldDeclarationImpl extends XtendMemberDeclarationImpl<XtendField> i
 	}
 	
 	override getInitializer() {
-//		delegate.initialValue.toExpression
+		throw new UnsupportedOperationException("Auto-generated function stub")
 	}
 	
 	override isFinal() {
@@ -249,6 +289,33 @@ class XtendFieldDeclarationImpl extends XtendMemberDeclarationImpl<XtendField> i
 	
 	override ClassDeclaration getDeclaringType() {
 		super.getDeclaringType() as ClassDeclaration
+	}
+	
+}
+
+class XtendEnumerationValueDeclarationImpl extends XtendMemberDeclarationImpl<XtendEnumLiteral> implements EnumerationValueDeclaration {
+	
+	override getName() {
+		delegate.name
+	}
+}
+
+class XtendAnnotationTypeElementDeclarationImpl extends XtendMemberDeclarationImpl<XtendField> implements AnnotationTypeElementDeclaration {
+	
+	override getName() {
+		delegate.name
+	}
+	
+	override getDefaultValue() {
+		throw new UnsupportedOperationException("TODO: auto-generated method stub")
+	}
+	
+	override getDefaultValueExpression() {
+		throw new UnsupportedOperationException("TODO: auto-generated method stub")
+	}
+	
+	override getType() {
+		compilationUnit.toTypeReference(delegate.type)
 	}
 	
 }
@@ -270,6 +337,14 @@ class XtendTypeParameterDeclarationImpl extends AbstractDeclarationImpl<JvmTypeP
 	
 	override getAnnotations() {
 		emptyList
+	}
+	
+	override isAssignableFrom(Type otherType) {
+		if (otherType == null)
+			return false;
+		val thisTypeRef = compilationUnit.typeReferenceProvider.newTypeReference(this)
+		val thatTypeRef = compilationUnit.typeReferenceProvider.newTypeReference(otherType)
+		return thisTypeRef.isAssignableFrom(thatTypeRef);
 	}
 	
 }

@@ -1,0 +1,84 @@
+package org.eclipse.xtend.core.tests.macro.declaration
+
+import com.google.inject.Inject
+import com.google.inject.Provider
+import org.eclipse.xtend.core.macro.declaration.CompilationUnitImpl
+import org.eclipse.xtend.core.tests.AbstractXtendTestCase
+import org.eclipse.xtend.core.xtend.XtendFile
+import org.junit.Test
+import org.eclipse.xtend.lib.macro.RegisterGlobalsParticipant
+import org.eclipse.xtend.lib.macro.declaration.TypeDeclaration
+import java.util.List
+import org.eclipse.xtend.lib.macro.RegisterGlobalsContext
+import org.eclipse.xtend.lib.macro.Active
+import org.eclipse.xtend.core.macro.ProcessorInstanceForJvmTypeProvider
+
+class TypeLookupImplTest extends AbstractXtendTestCase {
+	
+	@Test def void testFindClass_01() {
+		validFile('''
+			package foo
+			
+			class MyClass {}
+			enum MyEnum {}
+			interface MyInterface {}
+			annotation MyAnnotation {}
+		''').asCompilationUnit [
+			assertNotNull(typeLookup.findClass('foo.MyClass'))
+			assertNull(typeLookup.findClass('foo.MyClass.Unknown'))
+			assertNull(typeLookup.findClass('foo.MyInterface'))
+			
+			assertNotNull(typeLookup.findEnumerationType('foo.MyEnum'))
+			assertNotNull(typeLookup.findAnnotationType('foo.MyAnnotation'))
+			assertNotNull(typeLookup.findInterface('foo.MyInterface'))
+			
+			assertNull(typeLookup.findClass('java.lang.String'))
+		]
+	}
+	
+	@Test def void testFindClass_02() {
+		validFile('''
+			package foo
+			import org.eclipse.xtend.core.tests.macro.declaration.AddNestedTypes
+			
+			@AddNestedTypes class MyClass {}
+			@AddNestedTypes enum MyEnum {}
+			@AddNestedTypes interface MyInterface {}
+			@AddNestedTypes annotation MyAnnotation {}
+		''').asCompilationUnit [
+			assertNotNull(typeLookup.findClass('foo.MyClass.NestedClass'))
+			assertNotNull(typeLookup.findInterface('foo.MyClass.NestedInterface'))
+			assertNotNull(typeLookup.findEnumerationType('foo.MyClass.NestedEnumerationType'))
+			assertNotNull(typeLookup.findAnnotationType('foo.MyClass.NestedAnnotationType'))
+		]
+	}
+
+	@Inject Provider<CompilationUnitImpl> compilationUnitProvider
+	@Inject ProcessorInstanceForJvmTypeProvider instanceForJvmTypeProvider
+	
+	def validFile(CharSequence code) {
+		instanceForJvmTypeProvider.setClassLoader(class.classLoader)
+		file(code.toString, true)
+	}
+	
+	def asCompilationUnit(XtendFile file, (CompilationUnitImpl)=>void block) {
+		val compilationUnit = compilationUnitProvider.get
+		compilationUnit.xtendFile = file
+		block.apply(compilationUnit)
+	}	
+}
+
+@Active(typeof(AddNestedTypesProcessor))
+annotation AddNestedTypes {}
+class AddNestedTypesProcessor implements RegisterGlobalsParticipant<TypeDeclaration> {
+	
+	override doRegisterGlobals(List<? extends TypeDeclaration> annotatedSourceElements, RegisterGlobalsContext context) {
+		for (type : annotatedSourceElements) {
+			context.registerClass(type.name+'.NestedClass')
+			context.registerInterface(type.name+'.NestedInterface')
+			context.registerAnnotationType(type.name+'.NestedAnnotationType')
+			context.registerEnumerationType(type.name+'.NestedEnumerationType')
+		}
+	}
+	
+}

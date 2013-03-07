@@ -26,6 +26,9 @@ import org.eclipse.xtext.util.OnChangeEvictingCache
 import org.eclipse.xtext.util.internal.Stopwatches
 import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotation
 import org.eclipse.xtext.xbase.lib.Pair
+import org.eclipse.xtext.validation.EObjectDiagnosticImpl
+import org.eclipse.xtext.diagnostics.Severity
+import org.eclipse.xtend.core.validation.IssueCodes
 
 /**
  * @author Sven Efftinge
@@ -60,7 +63,14 @@ class ActiveAnnotationContextProvider {
 						val fa = new ActiveAnnotationContext
 						fa.compilationUnit = compilationUnit
 						val processorType = key.getProcessorType
-						fa.setProcessorInstance(processorType.processorInstance)
+						val processorInstance = processorType.processorInstance
+						if (processorInstance != null) {
+							fa.setProcessorInstance(processorInstance)
+						} else {
+							file.eResource.errors.add(new EObjectDiagnosticImpl(Severity::ERROR, 
+								IssueCodes::PROCESSING_ERROR, "Couldn't instantiate the referenced annotation processor of type '"+processorType.identifier
+								+"'. This is usually the case when the processor resides in the same project as the annotated element.", file, null, -1, null))
+						}
 						annotatedElements.put(key, fa)
 					}
 					annotatedElements.get(key).annotatedSourceElements += value.annotatedTarget

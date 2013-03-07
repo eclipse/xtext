@@ -47,6 +47,7 @@ import org.eclipse.xtext.common.types.JvmOperation
 import org.eclipse.xtext.common.types.JvmVisibility
 import org.eclipse.xtext.common.types.TypesFactory
 import org.eclipse.xtext.xbase.lib.Procedures$Procedure1
+import org.eclipse.xtend.lib.macro.declaration.Type
 
 abstract class JvmNamedElementImpl<T extends JvmIdentifiableElement> extends AbstractDeclarationImpl<T> implements MutableNamedElement {
 	
@@ -138,6 +139,14 @@ abstract class JvmTypeDeclarationImpl<T extends JvmDeclaredType> extends JvmMemb
 			delegate.packageName = name.substring(0, idx-1)
 			delegate.simpleName = name.substring(idx)
 		}
+	}
+	
+	override isAssignableFrom(Type otherType) {
+		if (otherType == null)
+			return false;
+		val thisTypeRef = compilationUnit.typeReferenceProvider.newTypeReference(this)
+		val thatTypeRef = compilationUnit.typeReferenceProvider.newTypeReference(otherType)
+		return thisTypeRef.isAssignableFrom(thatTypeRef);
 	}
 	
 }
@@ -435,6 +444,15 @@ class JvmTypeParameterDeclarationImpl extends TypeParameterDeclarationImpl imple
 		if (delegate.eContainer != null)
 			throw new IllegalStateException("Couldn't remove "+delegate)
 	}
+	
+	override isAssignableFrom(Type otherType) {
+		if (otherType == null)
+			return false;
+		val thisTypeRef = compilationUnit.typeReferenceProvider.newTypeReference(this)
+		val thatTypeRef = compilationUnit.typeReferenceProvider.newTypeReference(otherType)
+		return thisTypeRef.isAssignableFrom(thatTypeRef);
+	}
+	
 }
 
 class JvmAnnotationTypeElementDeclarationImpl extends JvmMemberDeclarationImpl<JvmOperation> implements MutableAnnotationTypeElementDeclaration {

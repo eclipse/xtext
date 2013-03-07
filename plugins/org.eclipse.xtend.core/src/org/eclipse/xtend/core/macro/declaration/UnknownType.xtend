@@ -9,4 +9,8 @@ class UnknownType implements Type {
 	CompilationUnit compilationUnit
 	String name
 	
+	override isAssignableFrom(Type otherType) {
+		return false;
+	}
+	
 }

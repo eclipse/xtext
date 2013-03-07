@@ -5,17 +5,17 @@ import javax.inject.Inject
 import org.eclipse.xtend.core.macro.declaration.CompilationUnitImpl
 import org.eclipse.xtend.core.tests.AbstractXtendTestCase
 import org.eclipse.xtend.core.xtend.XtendFile
+import org.eclipse.xtend.lib.macro.declaration.AnnotationTypeElementDeclaration
 import org.eclipse.xtend.lib.macro.declaration.ClassDeclaration
-import org.eclipse.xtend.lib.macro.declaration.CompilationUnit
 import org.eclipse.xtend.lib.macro.declaration.ConstructorDeclaration
 import org.eclipse.xtend.lib.macro.declaration.FieldDeclaration
+import org.eclipse.xtend.lib.macro.declaration.InterfaceDeclaration
 import org.eclipse.xtend.lib.macro.declaration.MethodDeclaration
 import org.eclipse.xtend.lib.macro.declaration.MutableClassDeclaration
 import org.eclipse.xtend.lib.macro.declaration.MutableMethodDeclaration
 import org.eclipse.xtend.lib.macro.declaration.TypeReference
 import org.eclipse.xtend.lib.macro.declaration.Visibility
 import org.junit.Test
-import org.eclipse.xtend.lib.macro.declaration.AnnotationTypeElementDeclaration
 
 class DeclarationsTest extends AbstractXtendTestCase {
 	
@@ -209,6 +209,43 @@ class DeclarationsTest extends AbstractXtendTestCase {
 		]
 	}
 	
+	@Test def testIsAssignable() {
+		validFile('''
+		package foo
+		
+		class BaseClass implements InterfaceA {
+		}
+		class SubTyoe extends BaseClass implements InterfaceA {
+		}
+		interface InterfaceA {}
+		interface InterfaceB {}
+		''').asCompilationUnit [
+			val baseClass = sourceTypeDeclarations.get(0) as ClassDeclaration
+			val subClass = generatedTypeDeclarations.get(1) as ClassDeclaration
+			val interfaceA = sourceTypeDeclarations.get(2) as InterfaceDeclaration
+			val interfaceB = sourceTypeDeclarations.get(3) as InterfaceDeclaration
+			
+			val object = typeReferenceProvider.object.type
+			
+			assertTrue(object.isAssignableFrom(baseClass))
+			assertTrue(object.isAssignableFrom(subClass))
+			assertTrue(object.isAssignableFrom(interfaceA))
+			assertTrue(object.isAssignableFrom(interfaceB))
+			
+			assertTrue(baseClass.isAssignableFrom(baseClass))
+			assertTrue(baseClass.isAssignableFrom(subClass))
+			assertFalse(baseClass.isAssignableFrom(interfaceB))
+			assertFalse(baseClass.isAssignableFrom(interfaceA))
+			assertFalse(baseClass.isAssignableFrom(object))
+			
+			assertTrue(interfaceA.isAssignableFrom(baseClass))
+			assertTrue(interfaceA.isAssignableFrom(subClass))
+			assertTrue(interfaceA.isAssignableFrom(interfaceA))
+			assertFalse(interfaceA.isAssignableFrom(interfaceB))
+			assertFalse(interfaceA.isAssignableFrom(object))
+		]
+	}
+	
 	def void checkPrimitive(TypeReference primitiveType, String wrapperTypeName) {
 		assertTrue(primitiveType.toString, primitiveType.primitive)
 		assertEquals(wrapperTypeName, primitiveType.wrapperIfPrimitive.type.name)
@@ -218,7 +255,7 @@ class DeclarationsTest extends AbstractXtendTestCase {
 		file(code.toString, true)
 	}
 	
-	def asCompilationUnit(XtendFile file, (CompilationUnit)=>void block) {
+	def asCompilationUnit(XtendFile file, (CompilationUnitImpl)=>void block) {
 		val compilationUnit = compilationUnitProvider.get
 		compilationUnit.xtendFile = file
 		block.apply(compilationUnit)

@@ -26,7 +26,6 @@ import org.eclipse.xtend.core.xtend.XtendTypeDeclaration
 import org.eclipse.xtend.lib.macro.declaration.AnnotationReference
 import org.eclipse.xtend.lib.macro.declaration.CompilationStrategy
 import org.eclipse.xtend.lib.macro.declaration.CompilationUnit
-import org.eclipse.xtend.lib.macro.declaration.MutableClassDeclaration
 import org.eclipse.xtend.lib.macro.declaration.MutableMemberDeclaration
 import org.eclipse.xtend.lib.macro.declaration.MutableNamedElement
 import org.eclipse.xtend.lib.macro.declaration.MutableParameterDeclaration
@@ -79,6 +78,11 @@ import org.eclipse.xtext.xbase.typesystem.legacy.StandardTypeReferenceOwner
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference
 import org.eclipse.xtext.xbase.typesystem.references.OwnedConverter
 import org.eclipse.xtext.xbase.typesystem.util.CommonTypeComputationServices
+import org.eclipse.xtend.core.xtend.XtendInterface
+import org.eclipse.xtend.lib.macro.declaration.MemberDeclaration
+import org.eclipse.xtend.core.xtend.XtendAnnotationType
+import org.eclipse.xtend.core.xtend.XtendEnum
+import org.eclipse.xtend.core.xtend.XtendEnumLiteral
 
 class CompilationUnitImpl implements CompilationUnit {
 	
@@ -106,18 +110,10 @@ class CompilationUnitImpl implements CompilationUnit {
 		xtendFile.xtendTypes.map[toXtendTypeDeclaration(it)]
 	}
 
-	override getSourceClassDeclarations() {
-		sourceTypeDeclarations.filter(typeof(XtendClassDeclarationImpl)).toList
-	}
-
-	override getGeneratedTypeDeclarations() {
+	def getGeneratedTypeDeclarations() {
 		xtendFile.eResource.contents.filter(typeof(JvmDeclaredType)).map[toTypeDeclaration(it)].toList
 	}
 
-	override getGeneratedClassDeclarations() {
-		generatedTypeDeclarations.filter(typeof(MutableClassDeclaration)).toList
-	}
-	
 	boolean canceled = false
 	
 	def setCanceled(boolean canceled) {
@@ -139,6 +135,7 @@ class CompilationUnitImpl implements CompilationUnit {
 	
 	@Property val ProblemSupport problemSupport = new ProblemSupportImpl(this)
 	@Property val TypeReferenceProvider typeReferenceProvider = new TypeReferenceProviderImpl(this)
+	@Property val TypeLookupImpl typeLookup = new TypeLookupImpl(this)
 	
 	Map<EObject, Object> identityCache = newHashMap
 	OwnedConverter typeRefConverter
@@ -314,11 +311,25 @@ class CompilationUnitImpl implements CompilationUnit {
 						it.delegate = delegate
 						it.compilationUnit = this
 					]
-			//TODO XtendAnnotationType 
+				XtendInterface:
+					new XtendInterfaceDeclarationImpl => [
+						it.delegate = delegate
+						it.compilationUnit = this
+					]
+				XtendAnnotationType:
+					new XtendAnnotationTypeDeclarationImpl => [
+						it.delegate = delegate
+						it.compilationUnit = this
+					]
+				XtendEnum:
+					new XtendEnumerationDeclarationImpl => [
+						it.delegate = delegate
+						it.compilationUnit = this
+					]
 			}
 		]}
 
-	def toXtendMemberDeclaration(XtendMember delegate) {
+	def MemberDeclaration toXtendMemberDeclaration(XtendMember delegate) {
 		getOrCreate(delegate) [
 			switch (delegate) {
 				XtendTypeDeclaration:
@@ -333,8 +344,21 @@ class CompilationUnitImpl implements CompilationUnit {
 						it.delegate = delegate
 						it.compilationUnit = this
 					]
-				XtendField:
-					new XtendFieldDeclarationImpl => [
+				XtendField: {
+					if (delegate.eContainer instanceof XtendAnnotationType) {
+						new XtendAnnotationTypeElementDeclarationImpl => [
+							it.delegate = delegate
+							it.compilationUnit = this
+						]
+					} else {	
+						new XtendFieldDeclarationImpl => [
+							it.delegate = delegate
+							it.compilationUnit = this
+						]
+					}
+				}
+				XtendEnumLiteral:
+					new XtendEnumerationValueDeclarationImpl => [
 						it.delegate = delegate
 						it.compilationUnit = this
 					]
