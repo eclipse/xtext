@@ -11,6 +11,7 @@ package org.eclipse.xtend.core.macro.declaration
 import org.eclipse.emf.ecore.EObject
 import org.eclipse.xtend.lib.macro.declaration.NamedElement
 import org.eclipse.xtend.lib.macro.declaration.PrimitiveType
+import org.eclipse.xtend.lib.macro.declaration.Type
 import org.eclipse.xtend.lib.macro.declaration.TypeParameterDeclaration
 import org.eclipse.xtend.lib.macro.declaration.TypeParameterDeclarator
 import org.eclipse.xtend.lib.macro.declaration.TypeReference
@@ -32,6 +33,14 @@ abstract class AbstractNamedElementImpl<T extends EObject> extends AbstractDecla
 }
 
 class TypeReferenceImpl extends AbstractDeclarationImpl<LightweightTypeReference> implements TypeReference {
+
+	override getName() {
+		delegate.javaIdentifier
+	}
+	
+	override getSimpleName() {
+		delegate.simpleName
+	}
 	
 	override getType() {
 		switch it: delegate {
@@ -39,7 +48,6 @@ class TypeReferenceImpl extends AbstractDeclarationImpl<LightweightTypeReference
 			default : compilationUnit.toType(type)
 		}
 	}
-	
 	override toString() {
 		return delegate.toString
 	}
@@ -57,6 +65,8 @@ class TypeReferenceImpl extends AbstractDeclarationImpl<LightweightTypeReference
 	}
 	
 	override getPrimitiveIfWrapper() {
+		if (!wrapper)
+			return this
 		compilationUnit.toTypeReference(delegate.primitiveIfWrapperType)
 	}
 	
@@ -109,6 +119,14 @@ class VoidTypeImpl extends AbstractDeclarationImpl<JvmVoid> implements VoidType 
 	override getName() {
 		'void'
 	}
+	
+	override isAssignableFrom(Type otherType) {
+		if (otherType == null)
+			return false;
+		val thisTypeRef = compilationUnit.typeReferenceProvider.newTypeReference(this)
+		val thatTypeRef = compilationUnit.typeReferenceProvider.newTypeReference(otherType)
+		return thisTypeRef.isAssignableFrom(thatTypeRef);
+	}
 } 
 
 class PrimitiveTypeImpl extends AbstractDeclarationImpl<JvmPrimitiveType> implements PrimitiveType {
@@ -130,6 +148,14 @@ class PrimitiveTypeImpl extends AbstractDeclarationImpl<JvmPrimitiveType> implem
 		delegate.identifier
 	}
 	
+	override isAssignableFrom(Type otherType) {
+		if (otherType == null)
+			return false;
+		val thisTypeRef = compilationUnit.typeReferenceProvider.newTypeReference(this)
+		val thatTypeRef = compilationUnit.typeReferenceProvider.newTypeReference(otherType)
+		return thisTypeRef.isAssignableFrom(thatTypeRef);
+	}
+	
 }
 
 class TypeParameterDeclarationImpl extends AbstractDeclarationImpl<JvmTypeParameter> implements TypeParameterDeclaration {
@@ -148,6 +174,14 @@ class TypeParameterDeclarationImpl extends AbstractDeclarationImpl<JvmTypeParame
 	
 	override getAnnotations() {
 		emptyList
+	}
+	
+	override isAssignableFrom(Type otherType) {
+		if (otherType == null)
+			return false;
+		val thisTypeRef = compilationUnit.typeReferenceProvider.newTypeReference(this)
+		val thatTypeRef = compilationUnit.typeReferenceProvider.newTypeReference(otherType)
+		return thisTypeRef.isAssignableFrom(thatTypeRef);
 	}
 	
 }

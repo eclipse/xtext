@@ -3,11 +3,14 @@ package org.eclipse.xtend.core.tests.macro;
 import com.google.common.collect.Iterables;
 import java.util.List;
 import org.eclipse.xtend.core.macro.declaration.CompilationUnitImpl;
+import org.eclipse.xtend.core.macro.declaration.TypeLookupImpl;
 import org.eclipse.xtend.lib.macro.declaration.ClassDeclaration;
-import org.eclipse.xtend.lib.macro.declaration.MemberDeclaration;
+import org.eclipse.xtend.lib.macro.declaration.MutableClassDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.MutableFieldDeclaration;
+import org.eclipse.xtend.lib.macro.declaration.MutableMemberDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.MutableMethodDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.MutableParameterDeclaration;
+import org.eclipse.xtend.lib.macro.declaration.MutableTypeDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.MutableTypeParameterDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.Type;
 import org.eclipse.xtend.lib.macro.declaration.TypeDeclaration;
@@ -15,7 +18,6 @@ import org.eclipse.xtend.lib.macro.declaration.TypeReference;
 import org.eclipse.xtend.lib.macro.services.Problem;
 import org.eclipse.xtend.lib.macro.services.ProblemSupport;
 import org.eclipse.xtend2.lib.StringConcatenation;
-import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.Pair;
@@ -85,8 +87,9 @@ public abstract class AbstractActiveAnnotationsTest {
     Pair<String,String> _mappedTo_1 = Pair.<String, String>of("myusercode/UserCode.xtend", _builder_1.toString());
     final Procedure1<CompilationUnitImpl> _function = new Procedure1<CompilationUnitImpl>() {
         public void apply(final CompilationUnitImpl it) {
-          List<? extends ClassDeclaration> _generatedClassDeclarations = it.getGeneratedClassDeclarations();
-          final ClassDeclaration clazz = IterableExtensions.head(_generatedClassDeclarations);
+          List<MutableTypeDeclaration> _generatedTypeDeclarations = it.getGeneratedTypeDeclarations();
+          MutableTypeDeclaration _head = IterableExtensions.<MutableTypeDeclaration>head(_generatedTypeDeclarations);
+          final MutableClassDeclaration clazz = ((MutableClassDeclaration) _head);
           boolean _isAbstract = clazz.isAbstract();
           Assert.assertTrue(_isAbstract);
         }
@@ -187,24 +190,11 @@ public abstract class AbstractActiveAnnotationsTest {
     Pair<String,String> _mappedTo_1 = Pair.<String, String>of("myusercode/UserCode.xtend", _builder_1.toString());
     final Procedure1<CompilationUnitImpl> _function = new Procedure1<CompilationUnitImpl>() {
         public void apply(final CompilationUnitImpl it) {
-          List<? extends ClassDeclaration> _generatedClassDeclarations = it.getGeneratedClassDeclarations();
-          final Function1<ClassDeclaration,Boolean> _function = new Function1<ClassDeclaration,Boolean>() {
-              public Boolean apply(final ClassDeclaration it) {
-                boolean _and = false;
-                String _simpleName = it.getSimpleName();
-                boolean _equals = ObjectExtensions.operator_equals(_simpleName, "DoesNotExist");
-                if (!_equals) {
-                  _and = false;
-                } else {
-                  String _name = it.getName();
-                  boolean _equals_1 = ObjectExtensions.operator_equals(_name, "myusercode.DoesNotExist");
-                  _and = (_equals && _equals_1);
-                }
-                return Boolean.valueOf(_and);
-              }
-            };
-          boolean _exists = IterableExtensions.exists(_generatedClassDeclarations, _function);
-          Assert.assertTrue(_exists);
+          TypeLookupImpl _typeLookup = it.getTypeLookup();
+          MutableClassDeclaration _findClass = _typeLookup.findClass("myusercode.DoesNotExist");
+          String _simpleName = _findClass.getSimpleName();
+          boolean _equals = ObjectExtensions.operator_equals(_simpleName, "DoesNotExist");
+          Assert.assertTrue(_equals);
         }
       };
     this.assertProcessing(_mappedTo, _mappedTo_1, _function);
@@ -229,9 +219,10 @@ public abstract class AbstractActiveAnnotationsTest {
     Pair<String,String> _mappedTo_1 = Pair.<String, String>of("myusercode/UserCode.xtend", _builder.toString());
     final Procedure1<CompilationUnitImpl> _function = new Procedure1<CompilationUnitImpl>() {
         public void apply(final CompilationUnitImpl it) {
-          List<? extends ClassDeclaration> _generatedClassDeclarations = it.getGeneratedClassDeclarations();
-          final ClassDeclaration clazz = IterableExtensions.head(_generatedClassDeclarations);
-          List<? extends MemberDeclaration> _members = clazz.getMembers();
+          List<MutableTypeDeclaration> _generatedTypeDeclarations = it.getGeneratedTypeDeclarations();
+          MutableTypeDeclaration _head = IterableExtensions.<MutableTypeDeclaration>head(_generatedTypeDeclarations);
+          final MutableClassDeclaration clazz = ((MutableClassDeclaration) _head);
+          List<? extends MutableMemberDeclaration> _members = clazz.getMembers();
           Iterable<MutableMethodDeclaration> _filter = Iterables.<MutableMethodDeclaration>filter(_members, MutableMethodDeclaration.class);
           final MutableMethodDeclaration getter = IterableExtensions.<MutableMethodDeclaration>head(_filter);
           String _name = getter.getName();
@@ -239,7 +230,7 @@ public abstract class AbstractActiveAnnotationsTest {
           TypeReference _returnType = getter.getReturnType();
           String _string = _returnType.toString();
           Assert.assertEquals("String", _string);
-          List<? extends MemberDeclaration> _members_1 = clazz.getMembers();
+          List<? extends MutableMemberDeclaration> _members_1 = clazz.getMembers();
           Iterable<MutableMethodDeclaration> _filter_1 = Iterables.<MutableMethodDeclaration>filter(_members_1, MutableMethodDeclaration.class);
           Iterable<MutableMethodDeclaration> _drop = IterableExtensions.<MutableMethodDeclaration>drop(_filter_1, 1);
           final MutableMethodDeclaration setter = IterableExtensions.<MutableMethodDeclaration>head(_drop);
@@ -249,12 +240,12 @@ public abstract class AbstractActiveAnnotationsTest {
           String _string_1 = _returnType_1.toString();
           Assert.assertEquals("void", _string_1);
           List<MutableParameterDeclaration> _parameters = setter.getParameters();
-          MutableParameterDeclaration _head = IterableExtensions.<MutableParameterDeclaration>head(_parameters);
-          String _name_2 = _head.getName();
+          MutableParameterDeclaration _head_1 = IterableExtensions.<MutableParameterDeclaration>head(_parameters);
+          String _name_2 = _head_1.getName();
           Assert.assertEquals("myField", _name_2);
           List<MutableParameterDeclaration> _parameters_1 = setter.getParameters();
-          MutableParameterDeclaration _head_1 = IterableExtensions.<MutableParameterDeclaration>head(_parameters_1);
-          TypeReference _type = _head_1.getType();
+          MutableParameterDeclaration _head_2 = IterableExtensions.<MutableParameterDeclaration>head(_parameters_1);
+          TypeReference _type = _head_2.getType();
           String _string_2 = _type.toString();
           Assert.assertEquals("String", _string_2);
         }
@@ -333,9 +324,9 @@ public abstract class AbstractActiveAnnotationsTest {
     Pair<String,String> _mappedTo_1 = Pair.<String, String>of("myusercode/UserCode.xtend", _builder_1.toString());
     final Procedure1<CompilationUnitImpl> _function = new Procedure1<CompilationUnitImpl>() {
         public void apply(final CompilationUnitImpl it) {
-          List<? extends ClassDeclaration> _generatedClassDeclarations = it.getGeneratedClassDeclarations();
-          ClassDeclaration _head = IterableExtensions.head(_generatedClassDeclarations);
-          List<? extends MemberDeclaration> _members = _head.getMembers();
+          List<MutableTypeDeclaration> _generatedTypeDeclarations = it.getGeneratedTypeDeclarations();
+          MutableTypeDeclaration _head = IterableExtensions.<MutableTypeDeclaration>head(_generatedTypeDeclarations);
+          List<? extends MutableMemberDeclaration> _members = ((MutableClassDeclaration) _head).getMembers();
           Iterable<MutableMethodDeclaration> _filter = Iterables.<MutableMethodDeclaration>filter(_members, MutableMethodDeclaration.class);
           final MutableMethodDeclaration method = IterableExtensions.<MutableMethodDeclaration>head(_filter);
           List<MutableTypeParameterDeclaration> _typeParameters = method.getTypeParameters();
@@ -443,14 +434,14 @@ public abstract class AbstractActiveAnnotationsTest {
     Pair<String,String> _mappedTo_1 = Pair.<String, String>of("myusercode/UserCode.xtend", _builder_1.toString());
     final Procedure1<CompilationUnitImpl> _function = new Procedure1<CompilationUnitImpl>() {
         public void apply(final CompilationUnitImpl it) {
-          List<? extends ClassDeclaration> _generatedClassDeclarations = it.getGeneratedClassDeclarations();
-          ClassDeclaration _head = IterableExtensions.head(_generatedClassDeclarations);
-          List<? extends MemberDeclaration> _members = _head.getMembers();
+          List<MutableTypeDeclaration> _generatedTypeDeclarations = it.getGeneratedTypeDeclarations();
+          MutableTypeDeclaration _head = IterableExtensions.<MutableTypeDeclaration>head(_generatedTypeDeclarations);
+          List<? extends MutableMemberDeclaration> _members = ((MutableClassDeclaration) _head).getMembers();
           Iterable<MutableMethodDeclaration> _filter = Iterables.<MutableMethodDeclaration>filter(_members, MutableMethodDeclaration.class);
           final MutableMethodDeclaration method = IterableExtensions.<MutableMethodDeclaration>head(_filter);
-          List<? extends ClassDeclaration> _generatedClassDeclarations_1 = it.getGeneratedClassDeclarations();
-          ClassDeclaration _head_1 = IterableExtensions.head(_generatedClassDeclarations_1);
-          List<? extends MemberDeclaration> _members_1 = _head_1.getMembers();
+          List<MutableTypeDeclaration> _generatedTypeDeclarations_1 = it.getGeneratedTypeDeclarations();
+          MutableTypeDeclaration _head_1 = IterableExtensions.<MutableTypeDeclaration>head(_generatedTypeDeclarations_1);
+          List<? extends MutableMemberDeclaration> _members_1 = ((MutableClassDeclaration) _head_1).getMembers();
           Iterable<MutableFieldDeclaration> _filter_1 = Iterables.<MutableFieldDeclaration>filter(_members_1, MutableFieldDeclaration.class);
           final MutableFieldDeclaration field = IterableExtensions.<MutableFieldDeclaration>head(_filter_1);
           ProblemSupport _problemSupport = it.getProblemSupport();
@@ -506,10 +497,10 @@ public abstract class AbstractActiveAnnotationsTest {
     _builder.append("context.registerInterface(clazz.name+\"Interface\")");
     _builder.newLine();
     _builder.append("\t\t\t");
-    _builder.append("context.registerEnum(clazz.name+\"Enum\")");
+    _builder.append("context.registerEnumerationType(clazz.name+\"Enum\")");
     _builder.newLine();
     _builder.append("\t\t\t");
-    _builder.append("context.registerAnnotation(clazz.name+\"Annotation\")");
+    _builder.append("context.registerAnnotationType(clazz.name+\"Annotation\")");
     _builder.newLine();
     _builder.append("\t\t");
     _builder.append("}");
@@ -533,13 +524,13 @@ public abstract class AbstractActiveAnnotationsTest {
     Pair<String,String> _mappedTo_1 = Pair.<String, String>of("myusercode/UserCode.xtend", _builder_1.toString());
     final Procedure1<CompilationUnitImpl> _function = new Procedure1<CompilationUnitImpl>() {
         public void apply(final CompilationUnitImpl it) {
-          List<? extends TypeDeclaration> _generatedTypeDeclarations = it.getGeneratedTypeDeclarations();
+          List<MutableTypeDeclaration> _generatedTypeDeclarations = it.getGeneratedTypeDeclarations();
           int _size = _generatedTypeDeclarations.size();
           Assert.assertEquals(4, _size);
-          List<? extends TypeDeclaration> _generatedTypeDeclarations_1 = it.getGeneratedTypeDeclarations();
-          TypeDeclaration _head = IterableExtensions.head(_generatedTypeDeclarations_1);
-          List<? extends MemberDeclaration> _members = _head.getMembers();
-          MemberDeclaration _head_1 = IterableExtensions.head(_members);
+          List<MutableTypeDeclaration> _generatedTypeDeclarations_1 = it.getGeneratedTypeDeclarations();
+          MutableTypeDeclaration _head = IterableExtensions.<MutableTypeDeclaration>head(_generatedTypeDeclarations_1);
+          List<? extends MutableMemberDeclaration> _members = _head.getMembers();
+          MutableMemberDeclaration _head_1 = IterableExtensions.head(_members);
           final ClassDeclaration innerClass = ((ClassDeclaration) _head_1);
           String _simpleName = innerClass.getSimpleName();
           Assert.assertEquals("InnerClass", _simpleName);

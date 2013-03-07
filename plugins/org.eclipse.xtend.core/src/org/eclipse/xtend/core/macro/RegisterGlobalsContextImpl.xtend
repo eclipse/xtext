@@ -5,29 +5,36 @@ import org.eclipse.xtext.xbase.jvmmodel.IJvmDeclaredTypeAcceptor
 import org.eclipse.xtext.common.types.JvmDeclaredType
 import org.eclipse.xtext.common.types.TypesFactory
 import org.eclipse.xtend.core.macro.declaration.CompilationUnitImpl
+import org.eclipse.xtext.common.types.JvmVisibility
 
 class RegisterGlobalsContextImpl implements RegisterGlobalsContext {
 	
 	@Property IJvmDeclaredTypeAcceptor acceptor
 	@Property CompilationUnitImpl compilationUnit
 	
-	override registerAnnotation(String qualifiedName) throws IllegalArgumentException {
+	override registerAnnotationType(String qualifiedName) throws IllegalArgumentException {
 		val newType = TypesFactory::eINSTANCE.createJvmAnnotationType
+		newType.setVisibility(JvmVisibility::PUBLIC)
 		setNameAndAccept(newType, qualifiedName)
 	}
 	
 	override registerClass(String qualifiedName) throws IllegalArgumentException {
 		val newType = TypesFactory::eINSTANCE.createJvmGenericType
+		newType.setVisibility(JvmVisibility::PUBLIC)
+		newType.setStatic(true)
 		setNameAndAccept(newType, qualifiedName)
 	}
 	
-	override registerEnum(String qualifiedName) throws IllegalArgumentException {
+	override registerEnumerationType(String qualifiedName) throws IllegalArgumentException {
 		val newType = TypesFactory::eINSTANCE.createJvmEnumerationType
+		newType.setVisibility(JvmVisibility::PUBLIC)
 		setNameAndAccept(newType, qualifiedName)
 	}
 	
 	override registerInterface(String qualifiedName) throws IllegalArgumentException {
 		val newType = TypesFactory::eINSTANCE.createJvmGenericType
+		newType.setVisibility(JvmVisibility::PUBLIC)
+		newType.setStatic(true)
 		newType.interface = true
 		setNameAndAccept(newType, qualifiedName)
 	}

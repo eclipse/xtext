@@ -14,10 +14,14 @@ import org.eclipse.xtend.core.macro.declaration.CompilationUnitImpl;
 import org.eclipse.xtend.core.macro.declaration.JvmMemberDeclarationImpl;
 import org.eclipse.xtend.lib.macro.declaration.MutableMemberDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.MutableTypeDeclaration;
+import org.eclipse.xtend.lib.macro.declaration.Type;
+import org.eclipse.xtend.lib.macro.declaration.TypeReference;
+import org.eclipse.xtend.lib.macro.services.TypeReferenceProvider;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmMember;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.ListExtensions;
+import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 
 @SuppressWarnings("all")
 public abstract class JvmTypeDeclarationImpl<T extends JvmDeclaredType> extends JvmMemberDeclarationImpl<T> implements MutableTypeDeclaration {
@@ -82,5 +86,19 @@ public abstract class JvmTypeDeclarationImpl<T extends JvmDeclaredType> extends 
       String _substring_1 = name.substring(idx);
       _delegate_3.setSimpleName(_substring_1);
     }
+  }
+  
+  public boolean isAssignableFrom(final Type otherType) {
+    boolean _equals = ObjectExtensions.operator_equals(otherType, null);
+    if (_equals) {
+      return false;
+    }
+    CompilationUnitImpl _compilationUnit = this.getCompilationUnit();
+    TypeReferenceProvider _typeReferenceProvider = _compilationUnit.getTypeReferenceProvider();
+    final TypeReference thisTypeRef = _typeReferenceProvider.newTypeReference(this);
+    CompilationUnitImpl _compilationUnit_1 = this.getCompilationUnit();
+    TypeReferenceProvider _typeReferenceProvider_1 = _compilationUnit_1.getTypeReferenceProvider();
+    final TypeReference thatTypeRef = _typeReferenceProvider_1.newTypeReference(otherType);
+    return thisTypeRef.isAssignableFrom(thatTypeRef);
   }
 }

@@ -44,10 +44,6 @@ class TransformationContextImpl implements TransformationContext {
 		return null
 	}
 
-	override findGeneratedClass(String name) {
-		throw new UnsupportedOperationException("Auto-generated function stub")
-	}
-	
 	override addError(Element element, String message) {
 		unit.problemSupport.addError(element, message)
 	}
@@ -134,6 +130,22 @@ class TransformationContextImpl implements TransformationContext {
 	
 	override newWildcardTypeReference(TypeReference upperBound) {
 		unit.typeReferenceProvider.newWildcardTypeReference(upperBound)
+	}
+	
+	override findInterface(String qualifiedName) {
+		unit.typeLookup.findInterface(qualifiedName)
+	}
+	
+	override findClass(String qualifiedName) {
+		unit.typeLookup.findClass(qualifiedName)
+	}
+	
+	override findAnnotationType(String qualifiedName) {
+		unit.typeLookup.findAnnotationType(qualifiedName)
+	}
+	
+	override findEnumerationType(String qualifiedName) {
+		unit.typeLookup.findEnumerationType(qualifiedName)
 	}
 	
 }

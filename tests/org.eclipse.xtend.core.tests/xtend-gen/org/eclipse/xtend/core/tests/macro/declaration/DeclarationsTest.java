@@ -16,11 +16,13 @@ import org.eclipse.xtend.lib.macro.declaration.CompilationStrategy.CompilationCo
 import org.eclipse.xtend.lib.macro.declaration.CompilationUnit;
 import org.eclipse.xtend.lib.macro.declaration.ConstructorDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.FieldDeclaration;
+import org.eclipse.xtend.lib.macro.declaration.InterfaceDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.MemberDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.MethodDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.MutableClassDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.MutableMemberDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.MutableMethodDeclaration;
+import org.eclipse.xtend.lib.macro.declaration.MutableTypeDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.MutableTypeParameterDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.ParameterDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.Type;
@@ -31,6 +33,7 @@ import org.eclipse.xtend.lib.macro.declaration.TypeReference;
 import org.eclipse.xtend.lib.macro.declaration.Visibility;
 import org.eclipse.xtend.lib.macro.services.TypeReferenceProvider;
 import org.eclipse.xtend2.lib.StringConcatenation;
+import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
@@ -58,11 +61,11 @@ public class DeclarationsTest extends AbstractXtendTestCase {
     _builder.newLine();
     _builder.newLine();
     XtendFile _validFile = this.validFile(_builder);
-    final Procedure1<CompilationUnit> _function = new Procedure1<CompilationUnit>() {
-        public void apply(final CompilationUnit it) {
+    final Procedure1<CompilationUnitImpl> _function = new Procedure1<CompilationUnitImpl>() {
+        public void apply(final CompilationUnitImpl it) {
           String _packageName = it.getPackageName();
           Assert.assertNull(_packageName);
-          List<? extends TypeDeclaration> _sourceTypeDeclarations = it.getSourceTypeDeclarations();
+          Iterable<? extends TypeDeclaration> _sourceTypeDeclarations = it.getSourceTypeDeclarations();
           TypeDeclaration _head = IterableExtensions.head(_sourceTypeDeclarations);
           final ClassDeclaration clazz = ((ClassDeclaration) _head);
           String _name = clazz.getName();
@@ -111,11 +114,11 @@ public class DeclarationsTest extends AbstractXtendTestCase {
     _builder.append("}");
     _builder.newLine();
     XtendFile _validFile = this.validFile(_builder);
-    final Procedure1<CompilationUnit> _function = new Procedure1<CompilationUnit>() {
-        public void apply(final CompilationUnit it) {
+    final Procedure1<CompilationUnitImpl> _function = new Procedure1<CompilationUnitImpl>() {
+        public void apply(final CompilationUnitImpl it) {
           String _packageName = it.getPackageName();
           Assert.assertEquals("foo", _packageName);
-          List<? extends TypeDeclaration> _sourceTypeDeclarations = it.getSourceTypeDeclarations();
+          Iterable<? extends TypeDeclaration> _sourceTypeDeclarations = it.getSourceTypeDeclarations();
           TypeDeclaration _head = IterableExtensions.head(_sourceTypeDeclarations);
           final ClassDeclaration clazz = ((ClassDeclaration) _head);
           String _name = clazz.getName();
@@ -132,8 +135,8 @@ public class DeclarationsTest extends AbstractXtendTestCase {
           final FieldDeclaration field = ((FieldDeclaration) _head_2);
           String _name_1 = field.getName();
           Assert.assertEquals("foo", _name_1);
-          List<? extends TypeDeclaration> _generatedTypeDeclarations = it.getGeneratedTypeDeclarations();
-          TypeDeclaration _head_3 = IterableExtensions.head(_generatedTypeDeclarations);
+          List<MutableTypeDeclaration> _generatedTypeDeclarations = it.getGeneratedTypeDeclarations();
+          MutableTypeDeclaration _head_3 = IterableExtensions.<MutableTypeDeclaration>head(_generatedTypeDeclarations);
           TypeReference _type = field.getType();
           Type _type_1 = _type.getType();
           Assert.assertSame(_head_3, _type_1);
@@ -183,15 +186,15 @@ public class DeclarationsTest extends AbstractXtendTestCase {
     _builder.append("}");
     _builder.newLine();
     XtendFile _validFile = this.validFile(_builder);
-    final Procedure1<CompilationUnit> _function = new Procedure1<CompilationUnit>() {
-        public void apply(final CompilationUnit it) {
+    final Procedure1<CompilationUnitImpl> _function = new Procedure1<CompilationUnitImpl>() {
+        public void apply(final CompilationUnitImpl it) {
           String _packageName = it.getPackageName();
           Assert.assertEquals("foo", _packageName);
-          List<? extends TypeDeclaration> _sourceTypeDeclarations = it.getSourceTypeDeclarations();
+          Iterable<? extends TypeDeclaration> _sourceTypeDeclarations = it.getSourceTypeDeclarations();
           TypeDeclaration _head = IterableExtensions.head(_sourceTypeDeclarations);
           final ClassDeclaration clazz = ((ClassDeclaration) _head);
-          List<? extends TypeDeclaration> _generatedTypeDeclarations = it.getGeneratedTypeDeclarations();
-          TypeDeclaration _head_1 = IterableExtensions.head(_generatedTypeDeclarations);
+          List<MutableTypeDeclaration> _generatedTypeDeclarations = it.getGeneratedTypeDeclarations();
+          MutableTypeDeclaration _head_1 = IterableExtensions.<MutableTypeDeclaration>head(_generatedTypeDeclarations);
           final MutableClassDeclaration genClazz = ((MutableClassDeclaration) _head_1);
           String _name = clazz.getName();
           Assert.assertEquals("foo.MyClass", _name);
@@ -358,10 +361,10 @@ public class DeclarationsTest extends AbstractXtendTestCase {
     _builder.append("}");
     _builder.newLine();
     XtendFile _validFile = this.validFile(_builder);
-    final Procedure1<CompilationUnit> _function = new Procedure1<CompilationUnit>() {
-        public void apply(final CompilationUnit it) {
-          List<? extends TypeDeclaration> _generatedTypeDeclarations = it.getGeneratedTypeDeclarations();
-          TypeDeclaration _head = IterableExtensions.head(_generatedTypeDeclarations);
+    final Procedure1<CompilationUnitImpl> _function = new Procedure1<CompilationUnitImpl>() {
+        public void apply(final CompilationUnitImpl it) {
+          List<MutableTypeDeclaration> _generatedTypeDeclarations = it.getGeneratedTypeDeclarations();
+          MutableTypeDeclaration _head = IterableExtensions.<MutableTypeDeclaration>head(_generatedTypeDeclarations);
           final MutableClassDeclaration genClazz = ((MutableClassDeclaration) _head);
           final Procedure1<MutableMethodDeclaration> _function = new Procedure1<MutableMethodDeclaration>() {
               public void apply(final MutableMethodDeclaration it) {
@@ -409,8 +412,8 @@ public class DeclarationsTest extends AbstractXtendTestCase {
     _builder.append("}");
     _builder.newLine();
     XtendFile _validFile = this.validFile(_builder);
-    final Procedure1<CompilationUnit> _function = new Procedure1<CompilationUnit>() {
-        public void apply(final CompilationUnit it) {
+    final Procedure1<CompilationUnitImpl> _function = new Procedure1<CompilationUnitImpl>() {
+        public void apply(final CompilationUnitImpl it) {
           final CompilationUnitImpl typeReferenceProvider = ((CompilationUnitImpl) it);
           TypeReferenceProvider _typeReferenceProvider = typeReferenceProvider.getTypeReferenceProvider();
           final TypeReference anyType = _typeReferenceProvider.getAnyType();
@@ -492,6 +495,75 @@ public class DeclarationsTest extends AbstractXtendTestCase {
     this.asCompilationUnit(_validFile, _function);
   }
   
+  @Test
+  public void testIsAssignable() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("package foo");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("class BaseClass implements InterfaceA {");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("class SubTyoe extends BaseClass implements InterfaceA {");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("interface InterfaceA {}");
+    _builder.newLine();
+    _builder.append("interface InterfaceB {}");
+    _builder.newLine();
+    XtendFile _validFile = this.validFile(_builder);
+    final Procedure1<CompilationUnitImpl> _function = new Procedure1<CompilationUnitImpl>() {
+        public void apply(final CompilationUnitImpl it) {
+          Iterable<? extends TypeDeclaration> _sourceTypeDeclarations = it.getSourceTypeDeclarations();
+          TypeDeclaration _get = ((TypeDeclaration[])Conversions.unwrapArray(_sourceTypeDeclarations, TypeDeclaration.class))[0];
+          final ClassDeclaration baseClass = ((ClassDeclaration) _get);
+          List<MutableTypeDeclaration> _generatedTypeDeclarations = it.getGeneratedTypeDeclarations();
+          MutableTypeDeclaration _get_1 = _generatedTypeDeclarations.get(1);
+          final ClassDeclaration subClass = ((ClassDeclaration) _get_1);
+          Iterable<? extends TypeDeclaration> _sourceTypeDeclarations_1 = it.getSourceTypeDeclarations();
+          TypeDeclaration _get_2 = ((TypeDeclaration[])Conversions.unwrapArray(_sourceTypeDeclarations_1, TypeDeclaration.class))[2];
+          final InterfaceDeclaration interfaceA = ((InterfaceDeclaration) _get_2);
+          Iterable<? extends TypeDeclaration> _sourceTypeDeclarations_2 = it.getSourceTypeDeclarations();
+          TypeDeclaration _get_3 = ((TypeDeclaration[])Conversions.unwrapArray(_sourceTypeDeclarations_2, TypeDeclaration.class))[3];
+          final InterfaceDeclaration interfaceB = ((InterfaceDeclaration) _get_3);
+          TypeReferenceProvider _typeReferenceProvider = it.getTypeReferenceProvider();
+          TypeReference _object = _typeReferenceProvider.getObject();
+          final Type object = _object.getType();
+          boolean _isAssignableFrom = object.isAssignableFrom(baseClass);
+          Assert.assertTrue(_isAssignableFrom);
+          boolean _isAssignableFrom_1 = object.isAssignableFrom(subClass);
+          Assert.assertTrue(_isAssignableFrom_1);
+          boolean _isAssignableFrom_2 = object.isAssignableFrom(interfaceA);
+          Assert.assertTrue(_isAssignableFrom_2);
+          boolean _isAssignableFrom_3 = object.isAssignableFrom(interfaceB);
+          Assert.assertTrue(_isAssignableFrom_3);
+          boolean _isAssignableFrom_4 = baseClass.isAssignableFrom(baseClass);
+          Assert.assertTrue(_isAssignableFrom_4);
+          boolean _isAssignableFrom_5 = baseClass.isAssignableFrom(subClass);
+          Assert.assertTrue(_isAssignableFrom_5);
+          boolean _isAssignableFrom_6 = baseClass.isAssignableFrom(interfaceB);
+          Assert.assertFalse(_isAssignableFrom_6);
+          boolean _isAssignableFrom_7 = baseClass.isAssignableFrom(interfaceA);
+          Assert.assertFalse(_isAssignableFrom_7);
+          boolean _isAssignableFrom_8 = baseClass.isAssignableFrom(object);
+          Assert.assertFalse(_isAssignableFrom_8);
+          boolean _isAssignableFrom_9 = interfaceA.isAssignableFrom(baseClass);
+          Assert.assertTrue(_isAssignableFrom_9);
+          boolean _isAssignableFrom_10 = interfaceA.isAssignableFrom(subClass);
+          Assert.assertTrue(_isAssignableFrom_10);
+          boolean _isAssignableFrom_11 = interfaceA.isAssignableFrom(interfaceA);
+          Assert.assertTrue(_isAssignableFrom_11);
+          boolean _isAssignableFrom_12 = interfaceA.isAssignableFrom(interfaceB);
+          Assert.assertFalse(_isAssignableFrom_12);
+          boolean _isAssignableFrom_13 = interfaceA.isAssignableFrom(object);
+          Assert.assertFalse(_isAssignableFrom_13);
+        }
+      };
+    this.asCompilationUnit(_validFile, _function);
+  }
+  
   public void checkPrimitive(final TypeReference primitiveType, final String wrapperTypeName) {
     String _string = primitiveType.toString();
     boolean _isPrimitive = primitiveType.isPrimitive();
@@ -512,7 +584,7 @@ public class DeclarationsTest extends AbstractXtendTestCase {
     }
   }
   
-  public void asCompilationUnit(final XtendFile file, final Procedure1<? super CompilationUnit> block) {
+  public void asCompilationUnit(final XtendFile file, final Procedure1<? super CompilationUnitImpl> block) {
     final CompilationUnitImpl compilationUnit = this.compilationUnitProvider.get();
     compilationUnit.setXtendFile(file);
     block.apply(compilationUnit);

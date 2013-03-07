@@ -36,7 +36,8 @@ public class XtendFieldDeclarationImpl extends XtendMemberDeclarationImpl<XtendF
   }
   
   public Expression getInitializer() {
-    return null;
+    UnsupportedOperationException _unsupportedOperationException = new UnsupportedOperationException("Auto-generated function stub");
+    throw _unsupportedOperationException;
   }
   
   public boolean isFinal() {

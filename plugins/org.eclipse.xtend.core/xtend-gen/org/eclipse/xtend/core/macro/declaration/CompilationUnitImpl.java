@@ -37,31 +37,40 @@ import org.eclipse.xtend.core.macro.declaration.JvmTypeDeclarationImpl;
 import org.eclipse.xtend.core.macro.declaration.JvmTypeParameterDeclarationImpl;
 import org.eclipse.xtend.core.macro.declaration.PrimitiveTypeImpl;
 import org.eclipse.xtend.core.macro.declaration.ProblemSupportImpl;
+import org.eclipse.xtend.core.macro.declaration.TypeLookupImpl;
 import org.eclipse.xtend.core.macro.declaration.TypeReferenceImpl;
 import org.eclipse.xtend.core.macro.declaration.TypeReferenceProviderImpl;
 import org.eclipse.xtend.core.macro.declaration.VoidTypeImpl;
 import org.eclipse.xtend.core.macro.declaration.XtendAnnotationReferenceImpl;
+import org.eclipse.xtend.core.macro.declaration.XtendAnnotationTypeDeclarationImpl;
+import org.eclipse.xtend.core.macro.declaration.XtendAnnotationTypeElementDeclarationImpl;
 import org.eclipse.xtend.core.macro.declaration.XtendClassDeclarationImpl;
 import org.eclipse.xtend.core.macro.declaration.XtendConstructorDeclarationImpl;
+import org.eclipse.xtend.core.macro.declaration.XtendEnumerationDeclarationImpl;
+import org.eclipse.xtend.core.macro.declaration.XtendEnumerationValueDeclarationImpl;
 import org.eclipse.xtend.core.macro.declaration.XtendFieldDeclarationImpl;
+import org.eclipse.xtend.core.macro.declaration.XtendInterfaceDeclarationImpl;
 import org.eclipse.xtend.core.macro.declaration.XtendMemberDeclarationImpl;
 import org.eclipse.xtend.core.macro.declaration.XtendMethodDeclarationImpl;
 import org.eclipse.xtend.core.macro.declaration.XtendParameterDeclarationImpl;
 import org.eclipse.xtend.core.macro.declaration.XtendTypeDeclarationImpl;
 import org.eclipse.xtend.core.macro.declaration.XtendTypeParameterDeclarationImpl;
+import org.eclipse.xtend.core.xtend.XtendAnnotationType;
 import org.eclipse.xtend.core.xtend.XtendClass;
 import org.eclipse.xtend.core.xtend.XtendConstructor;
+import org.eclipse.xtend.core.xtend.XtendEnum;
+import org.eclipse.xtend.core.xtend.XtendEnumLiteral;
 import org.eclipse.xtend.core.xtend.XtendField;
 import org.eclipse.xtend.core.xtend.XtendFile;
 import org.eclipse.xtend.core.xtend.XtendFunction;
+import org.eclipse.xtend.core.xtend.XtendInterface;
 import org.eclipse.xtend.core.xtend.XtendMember;
 import org.eclipse.xtend.core.xtend.XtendParameter;
 import org.eclipse.xtend.core.xtend.XtendTypeDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.AnnotationReference;
-import org.eclipse.xtend.lib.macro.declaration.ClassDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.CompilationStrategy;
 import org.eclipse.xtend.lib.macro.declaration.CompilationUnit;
-import org.eclipse.xtend.lib.macro.declaration.MutableClassDeclaration;
+import org.eclipse.xtend.lib.macro.declaration.MemberDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.MutableDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.MutableMemberDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.MutableNamedElement;
@@ -158,7 +167,7 @@ public class CompilationUnitImpl implements CompilationUnit {
     return _package;
   }
   
-  public List<? extends TypeDeclaration> getSourceTypeDeclarations() {
+  public Iterable<? extends TypeDeclaration> getSourceTypeDeclarations() {
     XtendFile _xtendFile = this.getXtendFile();
     EList<XtendTypeDeclaration> _xtendTypes = _xtendFile.getXtendTypes();
     final Function1<XtendTypeDeclaration,XtendTypeDeclarationImpl<? extends XtendTypeDeclaration>> _function = new Function1<XtendTypeDeclaration,XtendTypeDeclarationImpl<? extends XtendTypeDeclaration>>() {
@@ -171,14 +180,7 @@ public class CompilationUnitImpl implements CompilationUnit {
     return _map;
   }
   
-  public List<? extends ClassDeclaration> getSourceClassDeclarations() {
-    List<? extends TypeDeclaration> _sourceTypeDeclarations = this.getSourceTypeDeclarations();
-    Iterable<XtendClassDeclarationImpl> _filter = Iterables.<XtendClassDeclarationImpl>filter(_sourceTypeDeclarations, XtendClassDeclarationImpl.class);
-    List<XtendClassDeclarationImpl> _list = IterableExtensions.<XtendClassDeclarationImpl>toList(_filter);
-    return _list;
-  }
-  
-  public List<? extends TypeDeclaration> getGeneratedTypeDeclarations() {
+  public List<MutableTypeDeclaration> getGeneratedTypeDeclarations() {
     XtendFile _xtendFile = this.getXtendFile();
     Resource _eResource = _xtendFile.eResource();
     EList<EObject> _contents = _eResource.getContents();
@@ -191,13 +193,6 @@ public class CompilationUnitImpl implements CompilationUnit {
       };
     Iterable<MutableTypeDeclaration> _map = IterableExtensions.<JvmDeclaredType, MutableTypeDeclaration>map(_filter, _function);
     List<MutableTypeDeclaration> _list = IterableExtensions.<MutableTypeDeclaration>toList(_map);
-    return _list;
-  }
-  
-  public List<? extends ClassDeclaration> getGeneratedClassDeclarations() {
-    List<? extends TypeDeclaration> _generatedTypeDeclarations = this.getGeneratedTypeDeclarations();
-    Iterable<MutableClassDeclaration> _filter = Iterables.<MutableClassDeclaration>filter(_generatedTypeDeclarations, MutableClassDeclaration.class);
-    List<MutableClassDeclaration> _list = IterableExtensions.<MutableClassDeclaration>toList(_filter);
     return _list;
   }
   
@@ -259,6 +254,17 @@ public class CompilationUnitImpl implements CompilationUnit {
   
   public TypeReferenceProvider getTypeReferenceProvider() {
     return this._typeReferenceProvider;
+  }
+  
+  private final TypeLookupImpl _typeLookup = new Function0<TypeLookupImpl>() {
+    public TypeLookupImpl apply() {
+      TypeLookupImpl _typeLookupImpl = new TypeLookupImpl(CompilationUnitImpl.this);
+      return _typeLookupImpl;
+    }
+  }.apply();
+  
+  public TypeLookupImpl getTypeLookup() {
+    return this._typeLookup;
   }
   
   private Map<EObject,Object> identityCache = new Function0<Map<EObject,Object>>() {
@@ -665,9 +671,9 @@ public class CompilationUnitImpl implements CompilationUnit {
   }
   
   public XtendTypeDeclarationImpl<? extends XtendTypeDeclaration> toXtendTypeDeclaration(final XtendTypeDeclaration delegate) {
-    final Function1<XtendTypeDeclaration,XtendClassDeclarationImpl> _function = new Function1<XtendTypeDeclaration,XtendClassDeclarationImpl>() {
-        public XtendClassDeclarationImpl apply(final XtendTypeDeclaration it) {
-          XtendClassDeclarationImpl _switchResult = null;
+    final Function1<XtendTypeDeclaration,XtendTypeDeclarationImpl<? extends XtendTypeDeclaration>> _function = new Function1<XtendTypeDeclaration,XtendTypeDeclarationImpl<? extends XtendTypeDeclaration>>() {
+        public XtendTypeDeclarationImpl<? extends XtendTypeDeclaration> apply(final XtendTypeDeclaration it) {
+          XtendTypeDeclarationImpl<? extends XtendTypeDeclaration> _switchResult = null;
           boolean _matched = false;
           if (!_matched) {
             if (delegate instanceof XtendClass) {
@@ -684,14 +690,59 @@ public class CompilationUnitImpl implements CompilationUnit {
               _switchResult = _doubleArrow;
             }
           }
+          if (!_matched) {
+            if (delegate instanceof XtendInterface) {
+              final XtendInterface _xtendInterface = (XtendInterface)delegate;
+              _matched=true;
+              XtendInterfaceDeclarationImpl _xtendInterfaceDeclarationImpl = new XtendInterfaceDeclarationImpl();
+              final Procedure1<XtendInterfaceDeclarationImpl> _function = new Procedure1<XtendInterfaceDeclarationImpl>() {
+                  public void apply(final XtendInterfaceDeclarationImpl it) {
+                    it.setDelegate(_xtendInterface);
+                    it.setCompilationUnit(CompilationUnitImpl.this);
+                  }
+                };
+              XtendInterfaceDeclarationImpl _doubleArrow = ObjectExtensions.<XtendInterfaceDeclarationImpl>operator_doubleArrow(_xtendInterfaceDeclarationImpl, _function);
+              _switchResult = _doubleArrow;
+            }
+          }
+          if (!_matched) {
+            if (delegate instanceof XtendAnnotationType) {
+              final XtendAnnotationType _xtendAnnotationType = (XtendAnnotationType)delegate;
+              _matched=true;
+              XtendAnnotationTypeDeclarationImpl _xtendAnnotationTypeDeclarationImpl = new XtendAnnotationTypeDeclarationImpl();
+              final Procedure1<XtendAnnotationTypeDeclarationImpl> _function = new Procedure1<XtendAnnotationTypeDeclarationImpl>() {
+                  public void apply(final XtendAnnotationTypeDeclarationImpl it) {
+                    it.setDelegate(_xtendAnnotationType);
+                    it.setCompilationUnit(CompilationUnitImpl.this);
+                  }
+                };
+              XtendAnnotationTypeDeclarationImpl _doubleArrow = ObjectExtensions.<XtendAnnotationTypeDeclarationImpl>operator_doubleArrow(_xtendAnnotationTypeDeclarationImpl, _function);
+              _switchResult = _doubleArrow;
+            }
+          }
+          if (!_matched) {
+            if (delegate instanceof XtendEnum) {
+              final XtendEnum _xtendEnum = (XtendEnum)delegate;
+              _matched=true;
+              XtendEnumerationDeclarationImpl _xtendEnumerationDeclarationImpl = new XtendEnumerationDeclarationImpl();
+              final Procedure1<XtendEnumerationDeclarationImpl> _function = new Procedure1<XtendEnumerationDeclarationImpl>() {
+                  public void apply(final XtendEnumerationDeclarationImpl it) {
+                    it.setDelegate(_xtendEnum);
+                    it.setCompilationUnit(CompilationUnitImpl.this);
+                  }
+                };
+              XtendEnumerationDeclarationImpl _doubleArrow = ObjectExtensions.<XtendEnumerationDeclarationImpl>operator_doubleArrow(_xtendEnumerationDeclarationImpl, _function);
+              _switchResult = _doubleArrow;
+            }
+          }
           return _switchResult;
         }
       };
-    XtendClassDeclarationImpl _orCreate = this.<XtendTypeDeclaration, XtendClassDeclarationImpl>getOrCreate(delegate, _function);
+    XtendTypeDeclarationImpl<? extends XtendTypeDeclaration> _orCreate = this.<XtendTypeDeclaration, XtendTypeDeclarationImpl<? extends XtendTypeDeclaration>>getOrCreate(delegate, _function);
     return _orCreate;
   }
   
-  public XtendMemberDeclarationImpl<? extends XtendMember> toXtendMemberDeclaration(final XtendMember delegate) {
+  public MemberDeclaration toXtendMemberDeclaration(final XtendMember delegate) {
     final Function1<XtendMember,XtendMemberDeclarationImpl<? extends XtendMember>> _function = new Function1<XtendMember,XtendMemberDeclarationImpl<? extends XtendMember>>() {
         public XtendMemberDeclarationImpl<? extends XtendMember> apply(final XtendMember it) {
           XtendMemberDeclarationImpl<? extends XtendMember> _switchResult = null;
@@ -738,14 +789,44 @@ public class CompilationUnitImpl implements CompilationUnit {
             if (delegate instanceof XtendField) {
               final XtendField _xtendField = (XtendField)delegate;
               _matched=true;
-              XtendFieldDeclarationImpl _xtendFieldDeclarationImpl = new XtendFieldDeclarationImpl();
-              final Procedure1<XtendFieldDeclarationImpl> _function = new Procedure1<XtendFieldDeclarationImpl>() {
-                  public void apply(final XtendFieldDeclarationImpl it) {
-                    it.setDelegate(_xtendField);
+              XtendMemberDeclarationImpl<XtendField> _xifexpression = null;
+              EObject _eContainer = _xtendField.eContainer();
+              if ((_eContainer instanceof XtendAnnotationType)) {
+                XtendAnnotationTypeElementDeclarationImpl _xtendAnnotationTypeElementDeclarationImpl = new XtendAnnotationTypeElementDeclarationImpl();
+                final Procedure1<XtendAnnotationTypeElementDeclarationImpl> _function = new Procedure1<XtendAnnotationTypeElementDeclarationImpl>() {
+                    public void apply(final XtendAnnotationTypeElementDeclarationImpl it) {
+                      it.setDelegate(_xtendField);
+                      it.setCompilationUnit(CompilationUnitImpl.this);
+                    }
+                  };
+                XtendAnnotationTypeElementDeclarationImpl _doubleArrow = ObjectExtensions.<XtendAnnotationTypeElementDeclarationImpl>operator_doubleArrow(_xtendAnnotationTypeElementDeclarationImpl, _function);
+                _xifexpression = _doubleArrow;
+              } else {
+                XtendFieldDeclarationImpl _xtendFieldDeclarationImpl = new XtendFieldDeclarationImpl();
+                final Procedure1<XtendFieldDeclarationImpl> _function_1 = new Procedure1<XtendFieldDeclarationImpl>() {
+                    public void apply(final XtendFieldDeclarationImpl it) {
+                      it.setDelegate(_xtendField);
+                      it.setCompilationUnit(CompilationUnitImpl.this);
+                    }
+                  };
+                XtendFieldDeclarationImpl _doubleArrow_1 = ObjectExtensions.<XtendFieldDeclarationImpl>operator_doubleArrow(_xtendFieldDeclarationImpl, _function_1);
+                _xifexpression = _doubleArrow_1;
+              }
+              _switchResult = _xifexpression;
+            }
+          }
+          if (!_matched) {
+            if (delegate instanceof XtendEnumLiteral) {
+              final XtendEnumLiteral _xtendEnumLiteral = (XtendEnumLiteral)delegate;
+              _matched=true;
+              XtendEnumerationValueDeclarationImpl _xtendEnumerationValueDeclarationImpl = new XtendEnumerationValueDeclarationImpl();
+              final Procedure1<XtendEnumerationValueDeclarationImpl> _function = new Procedure1<XtendEnumerationValueDeclarationImpl>() {
+                  public void apply(final XtendEnumerationValueDeclarationImpl it) {
+                    it.setDelegate(_xtendEnumLiteral);
                     it.setCompilationUnit(CompilationUnitImpl.this);
                   }
                 };
-              XtendFieldDeclarationImpl _doubleArrow = ObjectExtensions.<XtendFieldDeclarationImpl>operator_doubleArrow(_xtendFieldDeclarationImpl, _function);
+              XtendEnumerationValueDeclarationImpl _doubleArrow = ObjectExtensions.<XtendEnumerationValueDeclarationImpl>operator_doubleArrow(_xtendEnumerationValueDeclarationImpl, _function);
               _switchResult = _doubleArrow;
             }
           }

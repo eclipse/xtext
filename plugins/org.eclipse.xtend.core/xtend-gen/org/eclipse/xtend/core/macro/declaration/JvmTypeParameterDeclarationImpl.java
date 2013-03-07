@@ -14,6 +14,9 @@ import org.eclipse.xtend.core.macro.declaration.TypeParameterDeclarationImpl;
 import org.eclipse.xtend.lib.macro.declaration.MutableMemberDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.MutableTypeParameterDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.MutableTypeParameterDeclarator;
+import org.eclipse.xtend.lib.macro.declaration.Type;
+import org.eclipse.xtend.lib.macro.declaration.TypeReference;
+import org.eclipse.xtend.lib.macro.services.TypeReferenceProvider;
 import org.eclipse.xtext.common.types.JvmExecutable;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
@@ -54,5 +57,19 @@ public class JvmTypeParameterDeclarationImpl extends TypeParameterDeclarationImp
       IllegalStateException _illegalStateException = new IllegalStateException(_plus);
       throw _illegalStateException;
     }
+  }
+  
+  public boolean isAssignableFrom(final Type otherType) {
+    boolean _equals = ObjectExtensions.operator_equals(otherType, null);
+    if (_equals) {
+      return false;
+    }
+    CompilationUnitImpl _compilationUnit = this.getCompilationUnit();
+    TypeReferenceProvider _typeReferenceProvider = _compilationUnit.getTypeReferenceProvider();
+    final TypeReference thisTypeRef = _typeReferenceProvider.newTypeReference(this);
+    CompilationUnitImpl _compilationUnit_1 = this.getCompilationUnit();
+    TypeReferenceProvider _typeReferenceProvider_1 = _compilationUnit_1.getTypeReferenceProvider();
+    final TypeReference thatTypeRef = _typeReferenceProvider_1.newTypeReference(otherType);
+    return thisTypeRef.isAssignableFrom(thatTypeRef);
   }
 }

@@ -20,6 +20,10 @@ public class UnknownType implements Type {
     return this._name;
   }
   
+  public boolean isAssignableFrom(final Type otherType) {
+    return false;
+  }
+  
   public UnknownType(final CompilationUnit compilationUnit, final String name) {
     super();
     this._compilationUnit = compilationUnit;

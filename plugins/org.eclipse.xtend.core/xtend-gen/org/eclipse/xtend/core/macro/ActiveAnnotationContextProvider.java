@@ -15,10 +15,12 @@ import java.util.Map;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.resource.Resource.Diagnostic;
 import org.eclipse.xtend.core.macro.ActiveAnnotationContext;
 import org.eclipse.xtend.core.macro.ProcessorInstanceForJvmTypeProvider;
 import org.eclipse.xtend.core.macro.XAnnotationExtensions;
 import org.eclipse.xtend.core.macro.declaration.CompilationUnitImpl;
+import org.eclipse.xtend.core.validation.IssueCodes;
 import org.eclipse.xtend.core.xtend.XtendAnnotationTarget;
 import org.eclipse.xtend.core.xtend.XtendClass;
 import org.eclipse.xtend.core.xtend.XtendConstructor;
@@ -31,10 +33,12 @@ import org.eclipse.xtend.core.xtend.XtendParameter;
 import org.eclipse.xtend.core.xtend.XtendTypeDeclaration;
 import org.eclipse.xtext.common.types.JvmAnnotationType;
 import org.eclipse.xtext.common.types.JvmType;
+import org.eclipse.xtext.diagnostics.Severity;
 import org.eclipse.xtext.util.IAcceptor;
 import org.eclipse.xtext.util.OnChangeEvictingCache;
 import org.eclipse.xtext.util.internal.Stopwatches;
 import org.eclipse.xtext.util.internal.Stopwatches.StoppedTask;
+import org.eclipse.xtext.validation.EObjectDiagnosticImpl;
 import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotation;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Exceptions;
@@ -89,8 +93,21 @@ public class ActiveAnnotationContextProvider {
                         fa.setCompilationUnit(compilationUnit);
                         JvmAnnotationType _key_1 = it.getKey();
                         final JvmType processorType = ActiveAnnotationContextProvider.this._xAnnotationExtensions.getProcessorType(_key_1);
-                        Object _processorInstance = ActiveAnnotationContextProvider.this._processorInstanceForJvmTypeProvider.getProcessorInstance(processorType);
-                        fa.setProcessorInstance(_processorInstance);
+                        final Object processorInstance = ActiveAnnotationContextProvider.this._processorInstanceForJvmTypeProvider.getProcessorInstance(processorType);
+                        boolean _notEquals = ObjectExtensions.operator_notEquals(processorInstance, null);
+                        if (_notEquals) {
+                          fa.setProcessorInstance(processorInstance);
+                        } else {
+                          Resource _eResource = file.eResource();
+                          EList<Diagnostic> _errors = _eResource.getErrors();
+                          String _identifier = processorType.getIdentifier();
+                          String _plus = ("Couldn\'t instantiate the referenced annotation processor of type \'" + _identifier);
+                          String _plus_1 = (_plus + "\'. This is usually the case when the processor resides in the same project as the annotated element.");
+                          int _minus = (-1);
+                          EObjectDiagnosticImpl _eObjectDiagnosticImpl = new EObjectDiagnosticImpl(Severity.ERROR, 
+                            IssueCodes.PROCESSING_ERROR, _plus_1, file, null, _minus, null);
+                          _errors.add(_eObjectDiagnosticImpl);
+                        }
                         JvmAnnotationType _key_2 = it.getKey();
                         annotatedElements.put(_key_2, fa);
                       }

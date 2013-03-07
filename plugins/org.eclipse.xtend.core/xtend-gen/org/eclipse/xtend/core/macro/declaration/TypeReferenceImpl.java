@@ -20,6 +20,18 @@ import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 
 @SuppressWarnings("all")
 public class TypeReferenceImpl extends AbstractDeclarationImpl<LightweightTypeReference> implements TypeReference {
+  public String getName() {
+    LightweightTypeReference _delegate = this.getDelegate();
+    String _javaIdentifier = _delegate.getJavaIdentifier();
+    return _javaIdentifier;
+  }
+  
+  public String getSimpleName() {
+    LightweightTypeReference _delegate = this.getDelegate();
+    String _simpleName = _delegate.getSimpleName();
+    return _simpleName;
+  }
+  
   public Type getType() {
     Type _switchResult = null;
     LightweightTypeReference _delegate = this.getDelegate();
@@ -84,11 +96,20 @@ public class TypeReferenceImpl extends AbstractDeclarationImpl<LightweightTypeRe
   }
   
   public TypeReference getPrimitiveIfWrapper() {
-    CompilationUnitImpl _compilationUnit = this.getCompilationUnit();
-    LightweightTypeReference _delegate = this.getDelegate();
-    LightweightTypeReference _primitiveIfWrapperType = _delegate.getPrimitiveIfWrapperType();
-    TypeReference _typeReference = _compilationUnit.toTypeReference(_primitiveIfWrapperType);
-    return _typeReference;
+    TypeReference _xblockexpression = null;
+    {
+      boolean _isWrapper = this.isWrapper();
+      boolean _not = (!_isWrapper);
+      if (_not) {
+        return this;
+      }
+      CompilationUnitImpl _compilationUnit = this.getCompilationUnit();
+      LightweightTypeReference _delegate = this.getDelegate();
+      LightweightTypeReference _primitiveIfWrapperType = _delegate.getPrimitiveIfWrapperType();
+      TypeReference _typeReference = _compilationUnit.toTypeReference(_primitiveIfWrapperType);
+      _xblockexpression = (_typeReference);
+    }
+    return _xblockexpression;
   }
   
   public TypeReference getUpperBound() {

@@ -8,12 +8,31 @@
 package org.eclipse.xtend.core.macro.declaration;
 
 import org.eclipse.xtend.core.macro.declaration.AbstractDeclarationImpl;
+import org.eclipse.xtend.core.macro.declaration.CompilationUnitImpl;
+import org.eclipse.xtend.lib.macro.declaration.Type;
+import org.eclipse.xtend.lib.macro.declaration.TypeReference;
 import org.eclipse.xtend.lib.macro.declaration.VoidType;
+import org.eclipse.xtend.lib.macro.services.TypeReferenceProvider;
 import org.eclipse.xtext.common.types.JvmVoid;
+import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 
 @SuppressWarnings("all")
 public class VoidTypeImpl extends AbstractDeclarationImpl<JvmVoid> implements VoidType {
   public String getName() {
     return "void";
+  }
+  
+  public boolean isAssignableFrom(final Type otherType) {
+    boolean _equals = ObjectExtensions.operator_equals(otherType, null);
+    if (_equals) {
+      return false;
+    }
+    CompilationUnitImpl _compilationUnit = this.getCompilationUnit();
+    TypeReferenceProvider _typeReferenceProvider = _compilationUnit.getTypeReferenceProvider();
+    final TypeReference thisTypeRef = _typeReferenceProvider.newTypeReference(this);
+    CompilationUnitImpl _compilationUnit_1 = this.getCompilationUnit();
+    TypeReferenceProvider _typeReferenceProvider_1 = _compilationUnit_1.getTypeReferenceProvider();
+    final TypeReference thatTypeRef = _typeReferenceProvider_1.newTypeReference(otherType);
+    return thisTypeRef.isAssignableFrom(thatTypeRef);
   }
 }

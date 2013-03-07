@@ -13,12 +13,14 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtend.core.macro.declaration.AbstractDeclarationImpl;
 import org.eclipse.xtend.core.macro.declaration.CompilationUnitImpl;
-import org.eclipse.xtend.core.macro.declaration.XtendMemberDeclarationImpl;
 import org.eclipse.xtend.core.xtend.XtendMember;
 import org.eclipse.xtend.lib.macro.declaration.AnnotationReference;
+import org.eclipse.xtend.lib.macro.declaration.MemberDeclaration;
+import org.eclipse.xtend.lib.macro.declaration.Type;
 import org.eclipse.xtend.lib.macro.declaration.TypeParameterDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.TypeParameterDeclarator;
 import org.eclipse.xtend.lib.macro.declaration.TypeReference;
+import org.eclipse.xtend.lib.macro.services.TypeReferenceProvider;
 import org.eclipse.xtext.common.types.JvmTypeConstraint;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.JvmTypeReference;
@@ -26,6 +28,7 @@ import org.eclipse.xtext.common.types.JvmUpperBound;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
+import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 
 @SuppressWarnings("all")
 public class XtendTypeParameterDeclarationImpl extends AbstractDeclarationImpl<JvmTypeParameter> implements TypeParameterDeclaration {
@@ -58,7 +61,7 @@ public class XtendTypeParameterDeclarationImpl extends AbstractDeclarationImpl<J
       JvmTypeParameter _delegate = this.getDelegate();
       final EObject eContainer = _delegate.eContainer();
       CompilationUnitImpl _compilationUnit = this.getCompilationUnit();
-      XtendMemberDeclarationImpl<? extends XtendMember> _xtendMemberDeclaration = _compilationUnit.toXtendMemberDeclaration(((XtendMember) eContainer));
+      MemberDeclaration _xtendMemberDeclaration = _compilationUnit.toXtendMemberDeclaration(((XtendMember) eContainer));
       _xblockexpression = (((TypeParameterDeclarator) _xtendMemberDeclaration));
     }
     return _xblockexpression;
@@ -67,5 +70,19 @@ public class XtendTypeParameterDeclarationImpl extends AbstractDeclarationImpl<J
   public List<AnnotationReference> getAnnotations() {
     List<AnnotationReference> _emptyList = CollectionLiterals.<AnnotationReference>emptyList();
     return _emptyList;
+  }
+  
+  public boolean isAssignableFrom(final Type otherType) {
+    boolean _equals = ObjectExtensions.operator_equals(otherType, null);
+    if (_equals) {
+      return false;
+    }
+    CompilationUnitImpl _compilationUnit = this.getCompilationUnit();
+    TypeReferenceProvider _typeReferenceProvider = _compilationUnit.getTypeReferenceProvider();
+    final TypeReference thisTypeRef = _typeReferenceProvider.newTypeReference(this);
+    CompilationUnitImpl _compilationUnit_1 = this.getCompilationUnit();
+    TypeReferenceProvider _typeReferenceProvider_1 = _compilationUnit_1.getTypeReferenceProvider();
+    final TypeReference thatTypeRef = _typeReferenceProvider_1.newTypeReference(otherType);
+    return thisTypeRef.isAssignableFrom(thatTypeRef);
   }
 }

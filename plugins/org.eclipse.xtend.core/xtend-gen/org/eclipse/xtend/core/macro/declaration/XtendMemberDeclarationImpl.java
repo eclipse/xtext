@@ -15,6 +15,8 @@ import org.eclipse.xtend.core.xtend.XtendMember;
 import org.eclipse.xtend.core.xtend.XtendTypeDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.MemberDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.TypeDeclaration;
+import org.eclipse.xtend.lib.macro.declaration.Visibility;
+import org.eclipse.xtext.common.types.JvmVisibility;
 
 @SuppressWarnings("all")
 public abstract class XtendMemberDeclarationImpl<T extends XtendMember> extends XtendAnnotationTargetImpl<T> implements MemberDeclaration {
@@ -42,5 +44,13 @@ public abstract class XtendMemberDeclarationImpl<T extends XtendMember> extends 
       _switchResult = null;
     }
     return _switchResult;
+  }
+  
+  public Visibility getVisibility() {
+    CompilationUnitImpl _compilationUnit = this.getCompilationUnit();
+    T _delegate = this.getDelegate();
+    JvmVisibility _visibility = _delegate.getVisibility();
+    Visibility _visibility_1 = _compilationUnit.toVisibility(_visibility);
+    return _visibility_1;
   }
 }

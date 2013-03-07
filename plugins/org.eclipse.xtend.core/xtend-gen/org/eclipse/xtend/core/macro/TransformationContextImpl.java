@@ -9,11 +9,15 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtend.core.jvmmodel.IXtendJvmAssociations;
 import org.eclipse.xtend.core.macro.declaration.CompilationUnitImpl;
 import org.eclipse.xtend.core.macro.declaration.JvmNamedElementImpl;
+import org.eclipse.xtend.core.macro.declaration.TypeLookupImpl;
 import org.eclipse.xtend.core.macro.declaration.XtendNamedElementImpl;
 import org.eclipse.xtend.core.xtend.XtendFile;
 import org.eclipse.xtend.lib.macro.TransformationContext;
 import org.eclipse.xtend.lib.macro.declaration.Element;
+import org.eclipse.xtend.lib.macro.declaration.MutableAnnotationTypeDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.MutableClassDeclaration;
+import org.eclipse.xtend.lib.macro.declaration.MutableEnumerationTypeDeclaration;
+import org.eclipse.xtend.lib.macro.declaration.MutableInterfaceDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.MutableNamedElement;
 import org.eclipse.xtend.lib.macro.declaration.NamedElement;
 import org.eclipse.xtend.lib.macro.declaration.Type;
@@ -93,11 +97,6 @@ public class TransformationContextImpl implements TransformationContext {
       }
     }
     return null;
-  }
-  
-  public MutableClassDeclaration findGeneratedClass(final String name) {
-    UnsupportedOperationException _unsupportedOperationException = new UnsupportedOperationException("Auto-generated function stub");
-    throw _unsupportedOperationException;
   }
   
   public void addError(final Element element, final String message) {
@@ -250,5 +249,33 @@ public class TransformationContextImpl implements TransformationContext {
     TypeReferenceProvider _typeReferenceProvider = _unit.getTypeReferenceProvider();
     TypeReference _newWildcardTypeReference = _typeReferenceProvider.newWildcardTypeReference(upperBound);
     return _newWildcardTypeReference;
+  }
+  
+  public MutableInterfaceDeclaration findInterface(final String qualifiedName) {
+    CompilationUnitImpl _unit = this.getUnit();
+    TypeLookupImpl _typeLookup = _unit.getTypeLookup();
+    MutableInterfaceDeclaration _findInterface = _typeLookup.findInterface(qualifiedName);
+    return _findInterface;
+  }
+  
+  public MutableClassDeclaration findClass(final String qualifiedName) {
+    CompilationUnitImpl _unit = this.getUnit();
+    TypeLookupImpl _typeLookup = _unit.getTypeLookup();
+    MutableClassDeclaration _findClass = _typeLookup.findClass(qualifiedName);
+    return _findClass;
+  }
+  
+  public MutableAnnotationTypeDeclaration findAnnotationType(final String qualifiedName) {
+    CompilationUnitImpl _unit = this.getUnit();
+    TypeLookupImpl _typeLookup = _unit.getTypeLookup();
+    MutableAnnotationTypeDeclaration _findAnnotationType = _typeLookup.findAnnotationType(qualifiedName);
+    return _findAnnotationType;
+  }
+  
+  public MutableEnumerationTypeDeclaration findEnumerationType(final String qualifiedName) {
+    CompilationUnitImpl _unit = this.getUnit();
+    TypeLookupImpl _typeLookup = _unit.getTypeLookup();
+    MutableEnumerationTypeDeclaration _findEnumerationType = _typeLookup.findEnumerationType(qualifiedName);
+    return _findEnumerationType;
   }
 }

@@ -12,6 +12,7 @@ import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmEnumerationType;
 import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.common.types.JvmMember;
+import org.eclipse.xtext.common.types.JvmVisibility;
 import org.eclipse.xtext.common.types.TypesFactory;
 import org.eclipse.xtext.xbase.jvmmodel.IJvmDeclaredTypeAcceptor;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
@@ -39,23 +40,29 @@ public class RegisterGlobalsContextImpl implements RegisterGlobalsContext {
     this._compilationUnit = compilationUnit;
   }
   
-  public void registerAnnotation(final String qualifiedName) throws IllegalArgumentException {
+  public void registerAnnotationType(final String qualifiedName) throws IllegalArgumentException {
     final JvmAnnotationType newType = TypesFactory.eINSTANCE.createJvmAnnotationType();
+    newType.setVisibility(JvmVisibility.PUBLIC);
     this.setNameAndAccept(newType, qualifiedName);
   }
   
   public void registerClass(final String qualifiedName) throws IllegalArgumentException {
     final JvmGenericType newType = TypesFactory.eINSTANCE.createJvmGenericType();
+    newType.setVisibility(JvmVisibility.PUBLIC);
+    newType.setStatic(true);
     this.setNameAndAccept(newType, qualifiedName);
   }
   
-  public void registerEnum(final String qualifiedName) throws IllegalArgumentException {
+  public void registerEnumerationType(final String qualifiedName) throws IllegalArgumentException {
     final JvmEnumerationType newType = TypesFactory.eINSTANCE.createJvmEnumerationType();
+    newType.setVisibility(JvmVisibility.PUBLIC);
     this.setNameAndAccept(newType, qualifiedName);
   }
   
   public void registerInterface(final String qualifiedName) throws IllegalArgumentException {
     final JvmGenericType newType = TypesFactory.eINSTANCE.createJvmGenericType();
+    newType.setVisibility(JvmVisibility.PUBLIC);
+    newType.setStatic(true);
     newType.setInterface(true);
     this.setNameAndAccept(newType, qualifiedName);
   }

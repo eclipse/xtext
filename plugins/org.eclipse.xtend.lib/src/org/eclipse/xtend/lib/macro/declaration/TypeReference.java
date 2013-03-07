@@ -16,6 +16,10 @@ import com.google.common.annotations.Beta;
  */
 @Beta
 public interface TypeReference extends Element {
+	
+	String getSimpleName();
+	
+	String getName();
 
 	Type getType();
 
@@ -38,6 +42,9 @@ public interface TypeReference extends Element {
 	 */
 	boolean isPrimitive();
 
+	/**
+	 * @return the corresponding wrapper <code>TypeReference</code> if this type references is a primitive type. Returns <code>this</code> otherwise.
+	 */
 	TypeReference getWrapperIfPrimitive();
 
 	/**
@@ -47,6 +54,9 @@ public interface TypeReference extends Element {
 	 */
 	boolean isWrapper();
 
+	/**
+	 * @return the corresponding primitive <code>TypeReference</code> if this type references is a wrapper type. Returns <code>this</code> otherwise.
+	 */
 	TypeReference getPrimitiveIfWrapper();
 
 	/**

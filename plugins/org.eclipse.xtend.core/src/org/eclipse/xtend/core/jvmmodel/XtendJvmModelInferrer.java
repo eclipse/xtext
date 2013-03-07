@@ -22,6 +22,7 @@ import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtend.core.macro.ActiveAnnotationContext;
 import org.eclipse.xtend.core.macro.ActiveAnnotationContextProvider;
 import org.eclipse.xtend.core.macro.AnnotationProcessor;
+import org.eclipse.xtend.core.validation.IssueCodes;
 import org.eclipse.xtend.core.xtend.CreateExtensionInfo;
 import org.eclipse.xtend.core.xtend.XtendAnnotationTarget;
 import org.eclipse.xtend.core.xtend.XtendAnnotationType;
@@ -63,12 +64,14 @@ import org.eclipse.xtext.common.types.JvmVisibility;
 import org.eclipse.xtext.common.types.TypesFactory;
 import org.eclipse.xtext.common.types.TypesPackage;
 import org.eclipse.xtext.common.types.util.TypeReferences;
+import org.eclipse.xtext.diagnostics.Severity;
 import org.eclipse.xtext.documentation.IEObjectDocumentationProvider;
 import org.eclipse.xtext.documentation.IFileHeaderProvider;
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 import org.eclipse.xtext.util.CancelIndicator;
 import org.eclipse.xtext.util.Strings;
+import org.eclipse.xtext.validation.EObjectDiagnosticImpl;
 import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotation;
 import org.eclipse.xtext.xbase.compiler.DisableCodeGenerationAdapter;
 import org.eclipse.xtext.xbase.compiler.output.ITreeAppendable;
@@ -229,7 +232,13 @@ public class XtendJvmModelInferrer implements IJvmModelInferrer {
 	protected void handleProcessingError(XtendFile xtendFile, ActiveAnnotationContext ctx, Throwable t) {
 		if (t instanceof VirtualMachineError)
 			throw (VirtualMachineError)t;
-		// TODO tell the user through an issue
+		List<XtendAnnotationTarget> sourceElements = ctx.getAnnotatedSourceElements();
+		for (XtendAnnotationTarget target : sourceElements) {
+			xtendFile.eResource().getErrors().add(new EObjectDiagnosticImpl(Severity.ERROR, 
+					IssueCodes.PROCESSING_ERROR, 
+					"Error during annotation processing :"+t.toString()+" (see error log for details)", 
+					target, null, -1, null));
+		}
 		logger.error("Error processing "+xtendFile.eResource().getURI()+" with processor "+ctx.getProcessorInstance().toString(), t);
 	}
 

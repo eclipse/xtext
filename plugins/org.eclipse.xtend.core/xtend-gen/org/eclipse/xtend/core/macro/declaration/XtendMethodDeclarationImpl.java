@@ -40,7 +40,9 @@ public class XtendMethodDeclarationImpl extends XtendMemberDeclarationImpl<Xtend
   }
   
   public boolean isFinal() {
-    return false;
+    XtendFunction _delegate = this.getDelegate();
+    boolean _isFinal = _delegate.isFinal();
+    return _isFinal;
   }
   
   public boolean isOverride() {
@@ -78,7 +80,8 @@ public class XtendMethodDeclarationImpl extends XtendMemberDeclarationImpl<Xtend
   }
   
   public Expression getBody() {
-    return null;
+    UnsupportedOperationException _unsupportedOperationException = new UnsupportedOperationException("Auto-generated function stub");
+    throw _unsupportedOperationException;
   }
   
   public boolean isVarArgs() {

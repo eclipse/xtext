@@ -16,11 +16,11 @@ import org.eclipse.xtend.core.macro.ActiveAnnotationContext;
 import org.eclipse.xtend.core.macro.RegisterGlobalsContextImpl;
 import org.eclipse.xtend.core.macro.TransformationContextImpl;
 import org.eclipse.xtend.core.macro.declaration.CompilationUnitImpl;
-import org.eclipse.xtend.core.macro.declaration.XtendMemberDeclarationImpl;
 import org.eclipse.xtend.core.xtend.XtendAnnotationTarget;
 import org.eclipse.xtend.core.xtend.XtendMember;
 import org.eclipse.xtend.lib.macro.RegisterGlobalsParticipant;
 import org.eclipse.xtend.lib.macro.TransformationParticipant;
+import org.eclipse.xtend.lib.macro.declaration.MemberDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.MutableNamedElement;
 import org.eclipse.xtend.lib.macro.declaration.NamedElement;
 import org.eclipse.xtext.util.CancelIndicator;
@@ -71,14 +71,14 @@ public class AnnotationProcessor {
               final Runnable _function = new Runnable() {
                   public void run() {
                     List<XtendAnnotationTarget> _annotatedSourceElements = ctx.getAnnotatedSourceElements();
-                    final Function1<XtendAnnotationTarget,XtendMemberDeclarationImpl<? extends XtendMember>> _function = new Function1<XtendAnnotationTarget,XtendMemberDeclarationImpl<? extends XtendMember>>() {
-                        public XtendMemberDeclarationImpl<? extends XtendMember> apply(final XtendAnnotationTarget it) {
+                    final Function1<XtendAnnotationTarget,MemberDeclaration> _function = new Function1<XtendAnnotationTarget,MemberDeclaration>() {
+                        public MemberDeclaration apply(final XtendAnnotationTarget it) {
                           CompilationUnitImpl _compilationUnit = ctx.getCompilationUnit();
-                          XtendMemberDeclarationImpl<? extends XtendMember> _xtendMemberDeclaration = _compilationUnit.toXtendMemberDeclaration(((XtendMember) it));
+                          MemberDeclaration _xtendMemberDeclaration = _compilationUnit.toXtendMemberDeclaration(((XtendMember) it));
                           return _xtendMemberDeclaration;
                         }
                       };
-                    List<XtendMemberDeclarationImpl<? extends XtendMember>> _map = ListExtensions.<XtendAnnotationTarget, XtendMemberDeclarationImpl<? extends XtendMember>>map(_annotatedSourceElements, _function);
+                    List<MemberDeclaration> _map = ListExtensions.<XtendAnnotationTarget, MemberDeclaration>map(_annotatedSourceElements, _function);
                     _registerGlobalsParticipant.doRegisterGlobals(_map, registerGlobalsCtx);
                   }
                 };
@@ -123,7 +123,7 @@ public class AnnotationProcessor {
                     final Function1<XtendAnnotationTarget,MutableNamedElement> _function = new Function1<XtendAnnotationTarget,MutableNamedElement>() {
                         public MutableNamedElement apply(final XtendAnnotationTarget it) {
                           CompilationUnitImpl _compilationUnit = ctx.getCompilationUnit();
-                          final XtendMemberDeclarationImpl<? extends XtendMember> xtendMember = _compilationUnit.toXtendMemberDeclaration(((XtendMember) it));
+                          final MemberDeclaration xtendMember = _compilationUnit.toXtendMemberDeclaration(((XtendMember) it));
                           return modifyCtx.getPrimaryGeneratedJavaElement(xtendMember);
                         }
                       };
