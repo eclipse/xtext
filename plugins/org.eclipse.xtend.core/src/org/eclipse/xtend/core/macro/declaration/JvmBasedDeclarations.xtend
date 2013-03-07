@@ -63,6 +63,9 @@ abstract class JvmNamedElementImpl<T extends JvmIdentifiableElement> extends Abs
 			throw new IllegalStateException("Couldn't remove "+delegate.toString)
 	}
 	
+	override toString() {
+		class.name+"["+name+"]"
+	}
 }
 
 abstract class JvmAnnotationTargetImpl<T extends JvmAnnotationTarget> extends JvmNamedElementImpl<T> implements MutableAnnotationTarget {
@@ -106,12 +109,8 @@ abstract class JvmMemberDeclarationImpl<T extends JvmMember> extends JvmAnnotati
 
 abstract class JvmTypeDeclarationImpl<T extends JvmDeclaredType> extends JvmMemberDeclarationImpl<T> implements MutableTypeDeclaration {
 	
-	override getMembers() {
+	override getDeclaredMembers() {
 		ImmutableList::copyOf(delegate.members.map[compilationUnit.toMemberDeclaration(it)])
-	}
-	
-	override getPackageName() {
-		delegate.packageName
 	}
 	
 	override getSimpleName() {
@@ -120,14 +119,6 @@ abstract class JvmTypeDeclarationImpl<T extends JvmDeclaredType> extends JvmMemb
 	
 	override getName() {
 		delegate.identifier
-	}
-	
-	override setPackageName(String packageName) {
-		delegate.packageName = packageName
-	}
-	
-	override setSimpleName(String simpleName) {
-		delegate.simpleName = simpleName
 	}
 	
 	override setName(String name) {
@@ -147,6 +138,63 @@ abstract class JvmTypeDeclarationImpl<T extends JvmDeclaredType> extends JvmMemb
 		val thisTypeRef = compilationUnit.typeReferenceProvider.newTypeReference(this)
 		val thatTypeRef = compilationUnit.typeReferenceProvider.newTypeReference(otherType)
 		return thisTypeRef.isAssignableFrom(thatTypeRef);
+	}
+	
+	override addConstructor(Procedure1<MutableConstructorDeclaration> initializer) {
+		val newConstructor = TypesFactory::eINSTANCE.createJvmConstructor
+		newConstructor.visibility = JvmVisibility::PUBLIC
+		newConstructor.simpleName = simpleName
+		delegate.members.add(newConstructor)
+		initializer.apply(compilationUnit.toMemberDeclaration(newConstructor) as MutableConstructorDeclaration)
+	}
+	
+	override addField(String name, Procedure1<MutableFieldDeclaration> initializer) {
+		val newField = TypesFactory::eINSTANCE.createJvmField
+		newField.simpleName = name
+		newField.visibility = JvmVisibility::PRIVATE
+		delegate.members.add(newField)
+		initializer.apply(compilationUnit.toMemberDeclaration(newField) as MutableFieldDeclaration)
+	}
+	
+	override addMethod(String name, Procedure1<MutableMethodDeclaration> initializer) {
+		val newMethod = TypesFactory::eINSTANCE.createJvmOperation
+		newMethod.visibility = JvmVisibility::PUBLIC
+		newMethod.simpleName = name
+		newMethod.returnType = compilationUnit.toJvmTypeReference(compilationUnit.typeReferenceProvider.primitiveVoid)
+		delegate.members.add(newMethod)
+		initializer.apply(compilationUnit.toMemberDeclaration(newMethod) as MutableMethodDeclaration)
+	}
+	
+	override findConstructor(TypeReference... parameterTypes) {
+		declaredConstructors.findFirst[constructor | constructor.parameters.map[type].toList == parameterTypes.toList]
+	}
+	
+	override findField(String name) {
+		declaredFields.findFirst[field | field.name == name]
+	}
+	
+	override findMethod(String name, TypeReference... parameterTypes) {
+		declaredMethods.findFirst[method | method.name == name && method.parameters.map[type].toList == parameterTypes.toList]
+	}
+	
+	override getDeclaredMethods() {
+		declaredMembers.filter(typeof(MutableMethodDeclaration))
+	}
+	
+	override getDeclaredFields() {
+		declaredMembers.filter(typeof(MutableFieldDeclaration))
+	}
+	
+	override getDeclaredClasses() {
+		declaredMembers.filter(typeof(MutableClassDeclaration))
+	}
+	
+	override getDeclaredConstructors() {
+		declaredMembers.filter(typeof(MutableConstructorDeclaration))
+	}
+	
+	override getDeclaredInterfaces() {
+		declaredMembers.filter(typeof(MutableInterfaceDeclaration))
 	}
 	
 }
@@ -225,29 +273,15 @@ class JvmClassDeclarationImpl extends JvmTypeDeclarationImpl<JvmGenericType> imp
 		superInterfaces.forEach[delegate.superTypes.add(compilationUnit.toJvmTypeReference(it))]
 	}
 
-	override addField(String name, Procedure1<MutableFieldDeclaration> initializer) {
-		val newField = TypesFactory::eINSTANCE.createJvmField
-		newField.simpleName = name
-		newField.visibility = JvmVisibility::PRIVATE
-		delegate.members.add(newField)
-		initializer.apply(compilationUnit.toMemberDeclaration(newField) as MutableFieldDeclaration)
-	}
-	
-	override addMethod(String name, Procedure1<MutableMethodDeclaration> initializer) {
-		val newMethod = TypesFactory::eINSTANCE.createJvmOperation
-		newMethod.visibility = JvmVisibility::PUBLIC
-		newMethod.simpleName = name
-		newMethod.returnType = compilationUnit.toJvmTypeReference(compilationUnit.typeReferenceProvider.primitiveVoid)
-		delegate.members.add(newMethod)
-		initializer.apply(compilationUnit.toMemberDeclaration(newMethod) as MutableMethodDeclaration)
-	}
-	
 	override findField(String name) {
-		members.filter(typeof(MutableFieldDeclaration)).findFirst[it.name == name]
+		declaredMembers.filter(typeof(MutableFieldDeclaration)).findFirst[it.name == name]
 	}
 	
 	override findMethod(String name, TypeReference[] parameterTypes) {
-		members.filter(typeof(MutableMethodDeclaration)).findFirst[it.name == name && it.parameters.map[type].toList == parameterTypes.toList]
+		declaredMembers.filter(typeof(MutableMethodDeclaration)).findFirst[
+			it.name == name 
+			&& it.parameters.map[type].toList == parameterTypes.toList
+		]
 	}
 
 }
