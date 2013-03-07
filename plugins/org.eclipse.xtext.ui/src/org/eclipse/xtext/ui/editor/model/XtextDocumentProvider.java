@@ -22,7 +22,6 @@ import java.util.Collections;
 import java.util.Map;
 
 import org.eclipse.core.resources.IEncodedStorage;
-import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.IResourceStatus;
 import org.eclipse.core.resources.IStorage;
 import org.eclipse.core.runtime.CoreException;
@@ -33,7 +32,6 @@ import org.eclipse.core.runtime.Status;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.common.util.WrappedException;
 import org.eclipse.emf.ecore.resource.URIConverter;
-import org.eclipse.jdt.core.IJarEntryResource;
 import org.eclipse.jface.text.DocumentEvent;
 import org.eclipse.jface.text.IDocument;
 import org.eclipse.jface.text.IDocumentExtension4;
@@ -70,6 +68,7 @@ import com.ibm.icu.text.MessageFormat;
  * @author Michael Clay
  * @author Heiko Behrens
  * @author Sebastian Zarnekow - Resetting unchanged flag on undo / redo, support for IURIEditorInput
+ * @since 2.4
  */
 public class XtextDocumentProvider extends FileDocumentProvider {
 	
@@ -114,6 +113,13 @@ public class XtextDocumentProvider extends FileDocumentProvider {
 
 	@Inject
 	private IEncodingProvider encodingProvider;
+	
+	/**
+	 * @since 2.4
+	 */
+	protected IStorage2UriMapper getStorage2UriMapper() {
+		return storage2UriMapper;
+	}
 
 	@Override
 	protected XtextDocument createEmptyDocument() {
@@ -187,13 +193,18 @@ public class XtextDocumentProvider extends FileDocumentProvider {
 		} else {
 			result = super.setDocumentContent(document, editorInput, encoding);
 		}
-		if (result) {
-			XtextDocument xtextDocument = (XtextDocument) document;
-			XtextResource xtextResource = (XtextResource) resourceForEditorInputFactory.createResource(editorInput);
-			loadResource(xtextResource, xtextDocument.get(), encoding);
-			xtextDocument.setInput(xtextResource);
-		}
+		if (result) 
+			setDocumentResource((XtextDocument) document, editorInput, encoding);
 		return result;
+	}
+
+	/**
+	 * @since 2.4
+	 */
+	protected void setDocumentResource(XtextDocument xtextDocument, IEditorInput editorInput, String encoding) throws CoreException {
+		XtextResource xtextResource = (XtextResource) resourceForEditorInputFactory.createResource(editorInput);
+		loadResource(xtextResource, xtextDocument.get(), encoding);
+		xtextDocument.setInput(xtextResource);
 	}
 
 	@Override
@@ -240,6 +251,14 @@ public class XtextDocumentProvider extends FileDocumentProvider {
 		} else {
 			info = super.createElementInfo(element);
 		}
+		registerAnnotationInfoProcessor(info);
+		return info;
+	}
+
+	/**
+	 * @since 2.4
+	 */
+	protected void registerAnnotationInfoProcessor(ElementInfo info) {
 		XtextDocument doc = (XtextDocument) info.fDocument;
 		if(info.fModel != null) {
 			AnnotationIssueProcessor annotationIssueProcessor = new AnnotationIssueProcessor(doc, info.fModel,
@@ -247,7 +266,6 @@ public class XtextDocumentProvider extends FileDocumentProvider {
 			ValidationJob job = new ValidationJob(resourceValidator, doc, annotationIssueProcessor, CheckMode.FAST_ONLY);
 			doc.setValidationJob(job);
 		}
-		return info;
 	}
 	
 	private UnchangedElementListener listener;
@@ -307,13 +325,6 @@ public class XtextDocumentProvider extends FileDocumentProvider {
 			return new XtextResourceMarkerAnnotationModel(input.getFile(), issueResolutionProvider, issueUtil);
 		} else if (element instanceof IURIEditorInput) {
 			return new AnnotationModel();
-		} else if (element instanceof IStorageEditorInput) {
-			IStorage storage = ((IStorageEditorInput) element).getStorage();
-			if (storage instanceof IJarEntryResource) {
-				URI uri = storage2UriMapper.getUri(storage);
-				IResource resource = ((IJarEntryResource) storage).getPackageFragmentRoot().getResource();
-				return new JarFileMarkerAnnotationModel(resource, uri);
-			}
 		}
 		return super.createAnnotationModel(element);
 	}

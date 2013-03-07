@@ -22,8 +22,8 @@ import org.eclipse.xtext.builder.impl.ProjectOpenedOrClosedListener;
 import org.eclipse.xtext.builder.impl.XtextBuilder;
 import org.eclipse.xtext.builder.resourceloader.IResourceLoader;
 import org.eclipse.xtext.builder.resourceloader.ResourceLoaderProviders;
-import org.eclipse.xtext.builder.trace.FileBasedTraceInformation;
-import org.eclipse.xtext.generator.trace.ITraceInformation;
+import org.eclipse.xtext.builder.trace.TraceForStorageProvider;
+import org.eclipse.xtext.generator.trace.ITraceForStorageProvider;
 import org.eclipse.xtext.resource.IExternalContentSupport;
 import org.eclipse.xtext.resource.IResourceDescriptions;
 import org.eclipse.xtext.resource.IResourceServiceProvider;
@@ -64,7 +64,7 @@ public class SharedModule extends AbstractModule {
 		bind(IncrementalProjectBuilder.class).to(XtextBuilder.class);
 		bind(IStorage2UriMapper.class).to(Storage2UriMapperImpl.class).in(Scopes.SINGLETON);
 		
-		bind(ITraceInformation.class).to(FileBasedTraceInformation.class);
+		bind(ITraceForStorageProvider.class).to(TraceForStorageProvider.class);
 
 		bind(IWorkbench.class).toProvider(new Provider<IWorkbench>() {
 			public IWorkbench get() {
