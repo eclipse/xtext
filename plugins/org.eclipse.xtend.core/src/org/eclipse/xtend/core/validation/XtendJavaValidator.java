@@ -1261,7 +1261,7 @@ public class XtendJavaValidator extends XbaseWithAnnotationsJavaValidator {
 	@Check
 	public void checkDeclaredExceptions(XtendConstructor constructor){
 		JvmConstructor jvmType = associations.getInferredConstructor(constructor);
-		checkExceptions(constructor,jvmType.getExceptions(), XtendPackage.Literals.XTEND_CONSTRUCTOR__EXCEPTIONS);
+		checkExceptions(constructor, jvmType.getExceptions(), XtendPackage.Literals.XTEND_CONSTRUCTOR__EXCEPTIONS);
 	}
 	
 	@Check
@@ -1302,14 +1302,15 @@ public class XtendJavaValidator extends XbaseWithAnnotationsJavaValidator {
 		}
 		ITypeReferenceOwner owner = new StandardTypeReferenceOwner(getServices(), context);
 		LightweightTypeReference throwableReference = new OwnedConverter(owner).toLightweightReference(throwableType);
-		for(JvmTypeReference exception : exceptions){
+		for(int i = 0; i < exceptions.size(); i++) {
+			JvmTypeReference exception = exceptions.get(i);
 			// throwables may not carry generics thus the raw comparison is sufficient
 			if (exception.getType() != null && !exception.getType().eIsProxy()) {
 				if(!throwableReference.isAssignableFrom(exception.getType()))
-					error("No exception of type " + exception.getSimpleName() + " can be thrown; an exception type must be a subclass of Throwable"
-							, reference, exceptions.indexOf(exception), EXCEPTION_NOT_THROWABLE);
+					error("No exception of type " + exception.getSimpleName() + " can be thrown; an exception type must be a subclass of Throwable",
+							reference, i, EXCEPTION_NOT_THROWABLE);
 				if(!declaredExceptionNames.add(exception.getQualifiedName()))
-					error("Exception " + exception.getSimpleName() + " is declared twice", reference, exceptions.indexOf(exception), EXCEPTION_DECLARED_TWICE);
+					error("Exception " + exception.getSimpleName() + " is declared twice", reference, i, EXCEPTION_DECLARED_TWICE);
 			}
 		}
 	}

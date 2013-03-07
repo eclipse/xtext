@@ -3,15 +3,20 @@ package org.eclipse.xtend.ide.tests.quickfix;
 import com.google.common.collect.Iterables;
 import com.google.inject.Inject;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import org.eclipse.core.resources.IFile;
+import org.eclipse.core.resources.IProject;
 import org.eclipse.core.runtime.NullProgressMonitor;
+import org.eclipse.jface.preference.IPersistentPreferenceStore;
+import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.xtend.ide.tests.WorkbenchTestHelper;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.editor.XtextEditor;
 import org.eclipse.xtext.ui.editor.model.IXtextDocument;
+import org.eclipse.xtext.ui.editor.preferences.IPreferenceStoreAccess;
 import org.eclipse.xtext.ui.editor.quickfix.IssueResolution;
 import org.eclipse.xtext.ui.editor.quickfix.IssueResolutionProvider;
 import org.eclipse.xtext.ui.refactoring.ui.SyncUtil;
@@ -49,6 +54,9 @@ public class QuickfixTestBuilder {
   @Extension
   private SyncUtil _syncUtil;
   
+  @Inject
+  private IPreferenceStoreAccess preferenceStoreAccess;
+  
   private int caretOffset;
   
   private IFile file;
@@ -56,6 +64,25 @@ public class QuickfixTestBuilder {
   private XtextEditor editor;
   
   private List<Issue> issues;
+  
+  private Set<String> modifiedIssueCodes;
+  
+  private IPersistentPreferenceStore getPreferenceStore() {
+    IProject _project = this._workbenchTestHelper.getProject();
+    IPreferenceStore _writablePreferenceStore = this.preferenceStoreAccess.getWritablePreferenceStore(_project);
+    return ((IPersistentPreferenceStore) _writablePreferenceStore);
+  }
+  
+  public void setSeverity(final String issueCode, final String severity) {
+    boolean _equals = ObjectExtensions.operator_equals(this.modifiedIssueCodes, null);
+    if (_equals) {
+      HashSet<String> _newHashSet = CollectionLiterals.<String>newHashSet();
+      this.modifiedIssueCodes = _newHashSet;
+    }
+    this.modifiedIssueCodes.add(issueCode);
+    IPersistentPreferenceStore _preferenceStore = this.getPreferenceStore();
+    _preferenceStore.setValue(issueCode, "error");
+  }
   
   public QuickfixTestBuilder create(final String fileName, final CharSequence model) {
     try {
@@ -331,6 +358,22 @@ public class QuickfixTestBuilder {
       boolean _notEquals_1 = ObjectExtensions.operator_notEquals(this.file, null);
       if (_notEquals_1) {
         this.file.delete(true, null);
+      }
+      boolean _notEquals_2 = ObjectExtensions.operator_notEquals(this.modifiedIssueCodes, null);
+      if (_notEquals_2) {
+        IPersistentPreferenceStore _preferenceStore = this.getPreferenceStore();
+        final Procedure1<IPersistentPreferenceStore> _function = new Procedure1<IPersistentPreferenceStore>() {
+            public void apply(final IPersistentPreferenceStore it) {
+              final Procedure1<String> _function = new Procedure1<String>() {
+                  public void apply(final String code) {
+                    it.setToDefault(code);
+                  }
+                };
+              IterableExtensions.<String>forEach(QuickfixTestBuilder.this.modifiedIssueCodes, _function);
+            }
+          };
+        ObjectExtensions.<IPersistentPreferenceStore>operator_doubleArrow(_preferenceStore, _function);
+        this.modifiedIssueCodes = null;
       }
       this._syncUtil.yieldToQueuedDisplayJobs(null);
     } catch (Throwable _e) {

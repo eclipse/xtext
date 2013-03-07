@@ -60,6 +60,7 @@ import org.eclipse.xtext.xbase.compiler.output.XtypeTypeReferenceSerializer;
 import org.eclipse.xtext.xbase.ui.contentassist.ReplacingAppendable;
 import org.eclipse.xtext.xbase.ui.quickfix.XbaseQuickfixProvider;
 
+import com.google.common.collect.Lists;
 import com.google.inject.Inject;
 /**
  * @author Jan Koehnlein - Quickfixes for inconsistent indentation
@@ -250,12 +251,11 @@ public class XtendQuickfixProvider extends XbaseQuickfixProvider {
 			acceptor.accept(issue, "Add throws declaration", "Add throws declaration", "fix_indent.gif",
 					new ISemanticModification() {
 						public void apply(EObject element, IModificationContext context) throws Exception {
-							URI exceptionURI = URI.createURI(issue.getData()[0]);
+							String[] issueData = issue.getData(); 
 							XtendFunction xtendFunction = EcoreUtil2.getContainerOfType(element, XtendFunction.class);
 							XtextResource xtextResource = (XtextResource) xtendFunction.eResource();
-							EObject exception = xtextResource.getResourceSet().getEObject(exceptionURI, true);
-							if (exception instanceof JvmType) {
-								JvmType exceptionType = (JvmType) exception;
+							List<JvmType> exceptions = getExceptions(issueData, xtextResource);
+							if (exceptions.size() > 0) {
 								int insertPosition;
 								if (xtendFunction.getExpression() == null) {
 									ICompositeNode functionNode = NodeModelUtils.findActualNodeFor(xtendFunction);
@@ -277,8 +277,13 @@ public class XtendQuickfixProvider extends XbaseQuickfixProvider {
 									appendable.append("throws ");
 								else
 									appendable.append(", ");
-								typeRefSerializer.serialize(typeRefs.createTypeRef(exceptionType), xtendFunction,
-										appendable);
+								for(int i = 0; i < exceptions.size(); i++) {
+									typeRefSerializer.serialize(typeRefs.createTypeRef(exceptions.get(i)), 
+											xtendFunction, appendable);
+									if (i != exceptions.size() - 1) {
+										appendable.append(", ");
+									}
+								}
 								if (xtendFunction.getExpression() != null) 
 									appendable.append(" ");
 								appendable.commitChanges();
@@ -287,20 +292,33 @@ public class XtendQuickfixProvider extends XbaseQuickfixProvider {
 					});
 	}
 
+	/**
+	 * @param all but the last element in the issue data is considered to be a URI to an exception type.
+	 */
+	protected List<JvmType> getExceptions(String[] issueData, XtextResource resource) {
+		List<JvmType> exceptions = Lists.newArrayList();
+		for(int i = 0; i < issueData.length - 1; i++) {
+			URI exceptionURI = URI.createURI(issueData[i]);
+			EObject exception = resource.getResourceSet().getEObject(exceptionURI, true);
+			if (exception instanceof JvmType) {
+				exceptions.add((JvmType) exception);
+			}
+		}
+		return exceptions;
+	}
+	
 	@Fix(org.eclipse.xtext.xbase.validation.IssueCodes.UNHANDLED_EXCEPTION)
 	public void surroundWithTryCatch(final Issue issue, IssueResolutionAcceptor acceptor) {
 		if (issue.getData() != null && issue.getData().length > 1)
 			acceptor.accept(issue, "Surround with try/catch block", "Surround with try/catch block", "fix_indent.gif",
 					new ISemanticModification() {
 						public void apply(EObject element, IModificationContext context) throws Exception {
-							URI exceptionURI = URI.createURI(issue.getData()[0]);
-							URI childURI = URI.createURI(issue.getData()[1]);
+							String[] issueData = issue.getData();
+							URI childURI = URI.createURI(issueData[issueData.length - 1]);
 							XtextResource xtextResource = (XtextResource) element.eResource();
-							EObject exception = xtextResource.getResourceSet().getEObject(exceptionURI, true);
-							if (exception instanceof JvmType) {
-								JvmType exceptionType = (JvmType) exception;
-								EObject childThrowingException = xtextResource.getResourceSet().getEObject(childURI,
-										true);
+							List<JvmType> exceptions = getExceptions(issueData, xtextResource);
+							if (exceptions.size() > 0) {
+								EObject childThrowingException = xtextResource.getResourceSet().getEObject(childURI, true);
 								XExpression toBeSurrounded = findContainerExpressionInBlockExpression(childThrowingException);
 								IXtextDocument xtextDocument = context.getXtextDocument();
 								if (toBeSurrounded != null) {
@@ -319,20 +337,22 @@ public class XtendQuickfixProvider extends XbaseQuickfixProvider {
 												.append(xtextDocument.get(toBeSurroundedNode.getOffset(),
 														toBeSurroundedNode.getLength()))
 											.decreaseIndentation()
-											.newLine()
-											.append("} catch (");
-									typeRefSerializer.serialize(typeRefs.createTypeRef(exceptionType),
-											childThrowingException, appendable);
-									appendable.append(" ");
-									String exceptionVar = appendable.declareVariable(exceptionType, "exc");
-									appendable.append(exceptionVar)
-											.append(") {")
-											.increaseIndentation()
-												.newLine()
-												.append("throw new RuntimeException(\"auto-generated try/catch\")")
-											.decreaseIndentation()
-											.newLine()
-											.append("}").closeScope();
+											.newLine();
+									for(JvmType exceptionType: exceptions) {
+										appendable.append("} catch (");
+										typeRefSerializer.serialize(typeRefs.createTypeRef(exceptionType),
+												childThrowingException, appendable);
+										appendable.append(" ").openScope();
+										String exceptionVar = appendable.declareVariable(exceptionType, "exc");
+										appendable.append(exceptionVar)
+												.append(") {")
+												.increaseIndentation()
+													.newLine()
+													.append("throw new RuntimeException(\"auto-generated try/catch\", " + exceptionVar + ")")
+												.decreaseIndentation()
+												.newLine().closeScope();
+									}
+									appendable.append("}").closeScope();
 									appendable.commitChanges();
 								}
 							}

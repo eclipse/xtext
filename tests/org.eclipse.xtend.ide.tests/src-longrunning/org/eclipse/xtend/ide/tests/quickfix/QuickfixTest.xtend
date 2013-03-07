@@ -4,11 +4,11 @@ import com.google.inject.Inject
 import org.eclipse.xtend.ide.tests.AbstractXtendUITestCase
 import org.eclipse.xtext.diagnostics.Diagnostic
 import org.junit.After
-import org.junit.Ignore
 import org.junit.Test
 
 import static org.eclipse.xtend.core.validation.IssueCodes.*
 import static org.eclipse.xtext.xbase.validation.IssueCodes.*
+import org.eclipse.xtext.xbase.validation.IssueCodes
 
 class QuickfixTest extends AbstractXtendUITestCase {
 	
@@ -810,15 +810,13 @@ class QuickfixTest extends AbstractXtendUITestCase {
 		''')
 	}
 	
-	// TODO: reenable when exception validation can be switched on
-	// https://bugs.eclipse.org/bugs/show_bug.cgi?id=398273))
-	@Ignore
 	@Test 
 	def void unhandledCheckedException() {
+		setSeverity(IssueCodes::UNHANDLED_EXCEPTION, "error")
 		create('Foo.xtend', '''
 			class Foo {
-				def void bar|() {
-					throw new Exception()
+				def void bar() {
+					throw new Exception|()
 				}
 			}
 		''')
@@ -836,10 +834,53 @@ class QuickfixTest extends AbstractXtendUITestCase {
 				def void bar() {
 					try {
 						throw new Exception()
-					} catch(Exception exc) {
-						throw new RuntimeException("auto-generated try/catch")
+					} catch (Exception exc) {
+						throw new RuntimeException("auto-generated try/catch", exc)
 					}
 				}
+			}
+		''')
+	}
+	
+	@Test 
+	def void unhandledCheckedExceptions() {
+		setSeverity(IssueCodes::UNHANDLED_EXCEPTION, "warning")
+		create('Foo.xtend', '''
+			class Foo {
+				def void bar() {
+					m|
+				}
+				def void m() throws java.io.IOException, java.net.URISyntaxException {}
+			}
+		''')
+		.assertIssueCodes(UNHANDLED_EXCEPTION)
+		.assertResolutionLabels("Add throws declaration", "Surround with try/catch block")
+		.assertModelAfterQuickfix("Add throws declaration", '''
+			import java.io.IOException
+			import java.net.URISyntaxException
+			
+			class Foo {
+				def void bar() throws IOException, URISyntaxException {
+					m
+				}
+				def void m() throws java.io.IOException, java.net.URISyntaxException {}
+			}
+		''')
+		.assertModelAfterQuickfix("Surround with try/catch block", '''
+			import java.io.IOException
+			import java.net.URISyntaxException
+			
+			class Foo {
+				def void bar() {
+					try {
+						m
+					} catch (IOException exc) {
+						throw new RuntimeException("auto-generated try/catch", exc)
+					} catch (URISyntaxException exc) {
+						throw new RuntimeException("auto-generated try/catch", exc)
+					}
+				}
+				def void m() throws java.io.IOException, java.net.URISyntaxException {}
 			}
 		''')
 	}

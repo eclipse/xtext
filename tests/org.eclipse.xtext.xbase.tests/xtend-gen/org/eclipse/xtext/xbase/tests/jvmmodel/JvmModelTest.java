@@ -1,14 +1,19 @@
 package org.eclipse.xtext.xbase.tests.jvmmodel;
 
 import com.google.inject.Inject;
+import com.google.inject.Provider;
+import java.io.IOException;
 import java.util.ArrayList;
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtext.junit4.validation.ValidationTestHelper;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.resource.IResourceDescription;
 import org.eclipse.xtext.resource.IResourceDescription.Manager;
+import org.eclipse.xtext.resource.XtextResourceSet;
+import org.eclipse.xtext.util.StringInputStream;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XbasePackage.Literals;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
@@ -31,6 +36,9 @@ public class JvmModelTest extends AbstractJvmModelTest {
   @Inject
   @Extension
   private ReflectExtensions _reflectExtensions;
+  
+  @Inject
+  private Provider<XtextResourceSet> resourceSetProvider;
   
   @Test
   public void testSimple() {
@@ -65,6 +73,16 @@ public class JvmModelTest extends AbstractJvmModelTest {
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
+  }
+  
+  protected Resource newResource(final CharSequence input) throws IOException {
+    final XtextResourceSet resourceSet = this.resourceSetProvider.get();
+    URI _createURI = URI.createURI("Test.___xbase");
+    final Resource resource = resourceSet.createResource(_createURI);
+    String _string = input.toString();
+    StringInputStream _stringInputStream = new StringInputStream(_string);
+    resource.load(_stringInputStream, null);
+    return resource;
   }
   
   @Test

@@ -9,7 +9,9 @@ package org.eclipse.xtext.xbase.typesystem.internal;
 
 import java.util.List;
 
+import org.eclipse.emf.ecore.EReference;
 import org.eclipse.jdt.annotation.NonNullByDefault;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.common.types.JvmConstructor;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
@@ -66,11 +68,22 @@ public class ConstructorLinkingCandidate extends AbstractPendingLinkingCandidate
 					IssueCodes.ABSTRACT_CLASS_INSTANTIATION, 
 					message, 
 					getExpression(), 
-					XbasePackage.Literals.XCONSTRUCTOR_CALL__CONSTRUCTOR, -1, null);
+					getDefaultValidationFeature(), -1, null);
 			result.accept(diagnostic);
 			return false;
 		}
 		return super.validate(result);
+	}
+	
+	@Override
+	protected EReference getDefaultValidationFeature() {
+		return XbasePackage.Literals.XCONSTRUCTOR_CALL__CONSTRUCTOR;
+	}
+	
+	@Nullable
+	@Override
+	protected EReference getInvalidArgumentsValidationFeature() {
+		return null;
 	}
 	
 	@Override

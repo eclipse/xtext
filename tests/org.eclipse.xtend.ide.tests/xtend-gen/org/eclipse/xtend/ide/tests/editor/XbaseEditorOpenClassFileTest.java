@@ -21,6 +21,7 @@ import org.eclipse.xtend.ide.tests.WorkbenchTestHelper;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.junit4.ui.util.JavaProjectSetupUtil;
 import org.eclipse.xtext.xbase.lib.Exceptions;
+import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.junit.After;
 import org.junit.Assert;
@@ -29,6 +30,7 @@ import org.junit.Test;
 @SuppressWarnings("all")
 public class XbaseEditorOpenClassFileTest extends AbstractXtendUITestCase {
   @Inject
+  @Extension
   private WorkbenchTestHelper helper;
   
   @After

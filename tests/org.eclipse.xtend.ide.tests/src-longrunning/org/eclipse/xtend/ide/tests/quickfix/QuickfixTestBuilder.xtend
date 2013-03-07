@@ -2,17 +2,21 @@ package org.eclipse.xtend.ide.tests.quickfix
 
 import com.google.inject.Inject
 import java.util.List
+import java.util.Set
 import org.eclipse.core.resources.IFile
+import org.eclipse.core.runtime.NullProgressMonitor
+import org.eclipse.jface.preference.IPersistentPreferenceStore
 import org.eclipse.xtend.ide.tests.WorkbenchTestHelper
 import org.eclipse.xtext.ui.editor.XtextEditor
+import org.eclipse.xtext.ui.editor.preferences.IPreferenceStoreAccess
 import org.eclipse.xtext.ui.editor.quickfix.IssueResolutionProvider
+import org.eclipse.xtext.ui.refactoring.ui.SyncUtil
 import org.eclipse.xtext.util.CancelIndicator
 import org.eclipse.xtext.validation.CheckMode
 import org.eclipse.xtext.validation.IResourceValidator
 import org.eclipse.xtext.validation.Issue
+
 import static org.junit.Assert.*
-import org.eclipse.xtext.ui.refactoring.ui.SyncUtil
-import org.eclipse.core.runtime.NullProgressMonitor
 
 class QuickfixTestBuilder {
 	
@@ -24,6 +28,8 @@ class QuickfixTestBuilder {
 	
 	@Inject extension SyncUtil
 	
+	@Inject IPreferenceStoreAccess preferenceStoreAccess;
+	
 	int caretOffset
 	
 	IFile file
@@ -31,6 +37,19 @@ class QuickfixTestBuilder {
 	XtextEditor editor
 	
 	List<Issue> issues
+	
+	Set<String> modifiedIssueCodes
+	
+	private def getPreferenceStore() {
+		preferenceStoreAccess.getWritablePreferenceStore(project) as IPersistentPreferenceStore;
+	}
+	
+	def setSeverity(String issueCode, String severity) {
+		if (modifiedIssueCodes == null)
+			modifiedIssueCodes = newHashSet
+		modifiedIssueCodes.add(issueCode)
+		preferenceStore.setValue(issueCode, "error")
+	}
 	
 	def create(String fileName, CharSequence model) {
 		val file = createFile(fileName, model.toString.replace("|", ""))
@@ -124,6 +143,14 @@ class QuickfixTestBuilder {
 			closeEditor(editor, false)
 		if(file != null)
 			file.delete(true, null)
+		if (modifiedIssueCodes != null) {
+			preferenceStore => [
+				modifiedIssueCodes.forEach [ code |
+					setToDefault(code)
+				]
+			]
+			modifiedIssueCodes = null;
+		}		
 		yieldToQueuedDisplayJobs(null)
 	}
 	

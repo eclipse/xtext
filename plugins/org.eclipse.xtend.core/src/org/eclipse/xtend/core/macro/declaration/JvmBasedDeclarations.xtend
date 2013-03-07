@@ -326,7 +326,7 @@ abstract class JvmExecutableDeclarationImpl<T extends JvmExecutable> extends Jvm
 		delegate.setVarArgs(isVarArgs)
 	}
 	
-	override addTypeParameter(String name, TypeReference[] upperBounds) {
+	override addTypeParameter(String name, TypeReference... upperBounds) {
 		val param = TypesFactory::eINSTANCE.createJvmTypeParameter
 		param.name = name
 		delegate.typeParameters.add(param)

@@ -2,6 +2,7 @@ package org.eclipse.xtext.xbase.tests.jvmmodel;
 
 import com.google.common.collect.Iterables;
 import com.google.inject.Inject;
+import com.google.inject.MembersInjector;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EClass;
@@ -28,7 +29,9 @@ import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xbase.tests.jvmmodel.AbstractJvmModelTest;
+import org.junit.After;
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
 
 @SuppressWarnings("all")
@@ -38,6 +41,8 @@ public class JvmModelAssociaterTest extends AbstractJvmModelTest {
   private JvmTypesBuilder _jvmTypesBuilder;
   
   @Inject
+  private MembersInjector<JvmModelAssociator> associatorInjector;
+  
   private JvmModelAssociator assoc;
   
   @Inject
@@ -45,6 +50,18 @@ public class JvmModelAssociaterTest extends AbstractJvmModelTest {
   
   @Inject
   private DerivedStateAwareResource resource;
+  
+  @Before
+  public void createAssociator() {
+    JvmModelAssociator _jvmModelAssociator = new JvmModelAssociator();
+    this.assoc = _jvmModelAssociator;
+    this.associatorInjector.injectMembers(this.assoc);
+  }
+  
+  @After
+  public void discardAssociator() {
+    this.assoc = null;
+  }
   
   @Test
   public void testInference() {

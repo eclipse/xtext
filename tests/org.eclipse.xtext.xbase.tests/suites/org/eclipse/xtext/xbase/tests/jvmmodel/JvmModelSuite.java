@@ -5,23 +5,22 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package instanceVsStatic;
+package org.eclipse.xtext.xbase.tests.jvmmodel;
+
+import org.junit.runner.RunWith;
+import org.junit.runners.Suite;
+import org.junit.runners.Suite.SuiteClasses;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public abstract class C {
-
-	public static int OK = 1;
-	
-	public abstract boolean isOK();
-	
-	public static void toString(C c) {}
-	
-	public static void m1(C i, int j) {}
-	public abstract void m1(int k);
-	
-	public static void m2(C i, int j, int k) {}
-	public abstract void m2(int k);
-	
-}
+@RunWith(Suite.class)
+@SuiteClasses({
+	JvmModelAssociaterTest.class,
+	JvmTypesBuilderTest.class,
+	TypeSignatureHashTest.class,
+	JvmModelTest.class,
+	JvmModelInferrerTest.class,
+	CheckExceptionValidationTest.class
+})
+public class JvmModelSuite {}

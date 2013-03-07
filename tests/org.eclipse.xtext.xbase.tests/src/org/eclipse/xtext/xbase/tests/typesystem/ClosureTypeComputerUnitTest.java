@@ -67,6 +67,7 @@ import com.google.inject.Inject;
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
+@SuppressWarnings("null")
 public class ClosureTypeComputerUnitTest extends AbstractXbaseTestCase implements ITypeReferenceOwner {
 	
 	@Inject
@@ -400,7 +401,7 @@ public class ClosureTypeComputerUnitTest extends AbstractXbaseTestCase implement
 	
 	protected String getEquivalentSimpleName(LightweightTypeReference type) {
 		assertTrue("Expected FunctionTypeRef but was: " + type.getSimpleName(), type instanceof FunctionTypeReference);
-		@SuppressWarnings("null") // NPE would be ok here since the test would fail
+		// NPE would be ok here since the test would fail
 		String typeSimpleName = type.getType().getSimpleName();
 		List<LightweightTypeReference> typeArguments = ((ParameterizedTypeReference) type).getTypeArguments();
 		if (typeArguments.isEmpty())
