@@ -30,6 +30,10 @@ abstract class AbstractDeclarationImpl<T> {
 
 abstract class AbstractNamedElementImpl<T extends EObject> extends AbstractDeclarationImpl<T> implements NamedElement {
 	
+	override toString() {
+		class.name+"["+name+"]"
+	}
+	
 }
 
 class TypeReferenceImpl extends AbstractDeclarationImpl<LightweightTypeReference> implements TypeReference {
@@ -108,6 +112,20 @@ class TypeReferenceImpl extends AbstractDeclarationImpl<LightweightTypeReference
 	
 	def LightweightTypeReference getLightWeightTypeReference() {
 		delegate
+	}
+	
+	override equals(Object obj) {
+		if (obj === this)
+			return true
+		if (obj instanceof TypeReference) {
+			val other = obj as TypeReference
+			return other.isAssignableFrom(this) && this.assignableFrom(other)
+		}
+		return false
+	}
+	
+	override hashCode() {
+		delegate.type.qualifiedName.hashCode
 	}
 	
 }
