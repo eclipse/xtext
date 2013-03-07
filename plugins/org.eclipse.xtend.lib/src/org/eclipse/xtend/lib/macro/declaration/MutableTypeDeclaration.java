@@ -7,14 +7,61 @@
  *******************************************************************************/
 package org.eclipse.xtend.lib.macro.declaration;
 
-import java.util.List;
+import org.eclipse.xtext.xbase.lib.Procedures;
 
 import com.google.common.annotations.Beta;
 
+/**
+ * 
+ * @author Sven Efftinge
+ */
 @Beta
 public interface MutableTypeDeclaration extends MutableMemberDeclaration, TypeDeclaration {
-	public List<? extends MutableMemberDeclaration> getMembers();
-	void setSimpleName(String simpleName);
-	void setPackageName(String packageName);
+	
+	Iterable<? extends MutableMemberDeclaration> getDeclaredMembers();
+	
+	Iterable<? extends MutableMethodDeclaration> getDeclaredMethods();
+	
+	Iterable<? extends MutableFieldDeclaration> getDeclaredFields();
+	
+	Iterable<? extends MutableConstructorDeclaration> getDeclaredConstructors();
+	
+	Iterable<? extends MutableClassDeclaration> getDeclaredClasses();
+	
+	Iterable<? extends MutableInterfaceDeclaration> getDeclaredInterfaces();
+	
+	MutableFieldDeclaration findField(String name);
+
+	MutableMethodDeclaration findMethod(String name, TypeReference... parameterTypes);
+
+	MutableConstructorDeclaration findConstructor(TypeReference... parameterTypes);
+	
+	/**
+	 * Adds a new field with the given name. 
+	 * 
+	 * @param name the name of the field to be added
+	 * @param initializer a callback for further initialization of the created field
+	 * 
+	 * @throws UnsupportedOperationException if the underlying type declaration is not capable of containing methods.
+	 */
+	void addField(String name, Procedures.Procedure1<MutableFieldDeclaration> initializer);
+
+	/**
+	 * Adds a new method with the given name to this type declaration.
+	 * 
+	 * @param name the name of the method
+	 * @param initializer a call back for further initialization of the method
+	 * @throws UnsupportedOperationException if the underlying type declaration is not capable of containing methods.
+	 */
+	void addMethod(String name, Procedures.Procedure1<MutableMethodDeclaration> initializer);
+	
+	/**
+	 * Adds a new method with the given name to this type declaration.
+	 * 
+	 * @param name the name of the method
+	 * @param initializer a call back for further initialization of the method
+	 * @throws UnsupportedOperationException if the underlying type declaration is not capable of containing methods.
+	 */
+	void addConstructor(Procedures.Procedure1<MutableConstructorDeclaration> initializer);
 	
 }

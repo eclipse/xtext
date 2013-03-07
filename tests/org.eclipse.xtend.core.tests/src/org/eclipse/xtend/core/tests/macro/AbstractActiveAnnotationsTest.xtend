@@ -1,8 +1,6 @@
 package org.eclipse.xtend.core.tests.macro
 
 import org.eclipse.xtend.core.macro.declaration.CompilationUnitImpl
-import org.eclipse.xtend.lib.macro.declaration.MutableFieldDeclaration
-import org.eclipse.xtend.lib.macro.declaration.MutableMethodDeclaration
 import org.eclipse.xtext.xbase.lib.Pair
 import org.junit.Test
 
@@ -69,13 +67,10 @@ abstract class AbstractActiveAnnotationsTest {
 				class SomeProcessor implements RegisterGlobalsParticipant<TypeDeclaration> {
 					override doRegisterGlobals(List<? extends TypeDeclaration> types, RegisterGlobalsContext context) {
 						types.forEach[
-							allMethods.forEach[
+							declaredMethods.forEach[
 								context.registerClass(parameterType)
 							]
 						]
-					}
-					private def getAllMethods(TypeDeclaration it) {
-						members.filter(typeof(MethodDeclaration))
 					}
 					private def getParameterType(MethodDeclaration it) {
 						parameters.head.type.type.name
@@ -111,9 +106,9 @@ abstract class AbstractActiveAnnotationsTest {
 				annotation Property2 { }
 				class PropertyProcessor implements TransformationParticipant<MutableFieldDeclaration> {
 					
-					override doTransform(List<? extends MutableFieldDeclaration> annotatedSourceFields, extension TransformationContext context) {
-						annotatedSourceFields.forEach [ field |
-							val declaringType = field.declaringType as MutableClassDeclaration 
+					override doTransform(List<? extends MutableFieldDeclaration> annotatedTargetFields, extension TransformationContext context) {
+						annotatedTargetFields.forEach [ field |
+							val declaringType = field.declaringType 
 							declaringType.addMethod(field.getterName) [
 								returnType = field.type
 								body = ['''
@@ -144,11 +139,11 @@ abstract class AbstractActiveAnnotationsTest {
 			'''
 		) [
 			val clazz = typeLookup.findClass('myusercode.MyClass')
-			val getter = clazz.members.filter(typeof(MutableMethodDeclaration)).head
+			val getter = clazz.declaredMethods.head
 			assertEquals('getMyField', getter.name)
 			assertEquals('String', getter.returnType.toString)
 			
-			val setter = clazz.members.filter(typeof(MutableMethodDeclaration)).drop(1).head
+			val setter = clazz.findMethod('setMyField', getter.returnType)
 			assertEquals('setMyField', setter.name)
 			assertEquals('void', setter.returnType.toString)
 			assertEquals('myField', setter.parameters.head.name)
@@ -192,7 +187,7 @@ abstract class AbstractActiveAnnotationsTest {
 			'''
 		) [
 			val type = typeLookup.findClass('myusercode.MyClass')
-			val method = type.members.filter(typeof(MutableMethodDeclaration)).head
+			val method = type.declaredMethods.head
 			assertEquals('A', method.typeParameters.head.name)
 			assertEquals('myParam', method.parameters.head.name)
 			assertSame(method.typeParameters.head, method.parameters.head.type.type)
@@ -240,8 +235,8 @@ abstract class AbstractActiveAnnotationsTest {
 			'''
 		) [
 			val type = typeLookup.findClass('myusercode.MyClass')
-			val method = type.members.filter(typeof(MutableMethodDeclaration)).head
-			val field = type.members.filter(typeof(MutableFieldDeclaration)).head
+			val method = type.declaredMethods.head
+			val field = type.declaredFields.head
 			assertEquals('field-warning', problemSupport.getProblems(field).head.message)
 			assertEquals('warning', problemSupport.getProblems(method).head.message)
 		]

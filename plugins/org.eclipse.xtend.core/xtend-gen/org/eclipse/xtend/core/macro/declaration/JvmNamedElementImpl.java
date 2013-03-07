@@ -45,4 +45,14 @@ public abstract class JvmNamedElementImpl<T extends JvmIdentifiableElement> exte
       throw _illegalStateException;
     }
   }
+  
+  public String toString() {
+    Class<? extends JvmNamedElementImpl> _class = this.getClass();
+    String _name = _class.getName();
+    String _plus = (_name + "[");
+    String _name_1 = this.getName();
+    String _plus_1 = (_plus + _name_1);
+    String _plus_2 = (_plus_1 + "]");
+    return _plus_2;
+  }
 }

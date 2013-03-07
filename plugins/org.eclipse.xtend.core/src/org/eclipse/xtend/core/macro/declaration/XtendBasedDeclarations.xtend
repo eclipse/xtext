@@ -36,18 +36,19 @@ import org.eclipse.xtend.lib.macro.declaration.FieldDeclaration
 import org.eclipse.xtend.lib.macro.declaration.InterfaceDeclaration
 import org.eclipse.xtend.lib.macro.declaration.MemberDeclaration
 import org.eclipse.xtend.lib.macro.declaration.MethodDeclaration
-import org.eclipse.xtend.lib.macro.declaration.NamedElement
 import org.eclipse.xtend.lib.macro.declaration.ParameterDeclaration
 import org.eclipse.xtend.lib.macro.declaration.Type
 import org.eclipse.xtend.lib.macro.declaration.TypeDeclaration
 import org.eclipse.xtend.lib.macro.declaration.TypeParameterDeclaration
 import org.eclipse.xtend.lib.macro.declaration.TypeParameterDeclarator
+import org.eclipse.xtend.lib.macro.declaration.TypeReference
 import org.eclipse.xtext.common.types.JvmAnnotationType
 import org.eclipse.xtext.common.types.JvmTypeParameter
 import org.eclipse.xtext.common.types.JvmUpperBound
 import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotation
 
-abstract class XtendNamedElementImpl<T extends EObject> extends AbstractNamedElementImpl<T> implements NamedElement {
+abstract class XtendNamedElementImpl<T extends EObject> extends AbstractNamedElementImpl<T> {
+	
 }
 
 abstract class XtendAnnotationTargetImpl<T extends XtendAnnotationTarget> extends XtendNamedElementImpl<T> implements AnnotationTarget {
@@ -79,7 +80,7 @@ abstract class XtendMemberDeclarationImpl<T extends XtendMember> extends XtendAn
 
 abstract class XtendTypeDeclarationImpl<T extends XtendTypeDeclaration> extends XtendMemberDeclarationImpl<T> implements TypeDeclaration {
 	
-	override getPackageName() {
+	def getPackageName() {
 		return (delegate.eContainer as XtendFile).getPackage
 	}
 	
@@ -98,7 +99,7 @@ abstract class XtendTypeDeclarationImpl<T extends XtendTypeDeclaration> extends 
 		return compilationUnit.toVisibility(delegate.visibility)
 	}
 	
-	override getMembers() {
+	override getDeclaredMembers() {
 		return delegate.members.map[compilationUnit.toXtendMemberDeclaration(it)]
 	}
 	
@@ -108,6 +109,38 @@ abstract class XtendTypeDeclarationImpl<T extends XtendTypeDeclaration> extends 
 		val thisTypeRef = compilationUnit.typeReferenceProvider.newTypeReference(this)
 		val thatTypeRef = compilationUnit.typeReferenceProvider.newTypeReference(otherType)
 		return thisTypeRef.isAssignableFrom(thatTypeRef);
+	}
+	
+	override findConstructor(TypeReference... parameterTypes) {
+		declaredConstructors.findFirst[constructor | constructor.parameters.map[type].toList == parameterTypes.toList]
+	}
+	
+	override findField(String name) {
+		declaredFields.findFirst[field | field.name == name]
+	}
+	
+	override findMethod(String name, TypeReference... parameterTypes) {
+		declaredMethods.findFirst[method | method.name == name && method.parameters.map[type].toList == parameterTypes.toList]
+	}
+	
+	override getDeclaredMethods() {
+		declaredMembers.filter(typeof(MethodDeclaration))
+	}
+	
+	override getDeclaredFields() {
+		declaredMembers.filter(typeof(FieldDeclaration))
+	}
+	
+	override getDeclaredClasses() {
+		declaredMembers.filter(typeof(ClassDeclaration))
+	}
+	
+	override getDeclaredConstructors() {
+		declaredMembers.filter(typeof(ConstructorDeclaration))
+	}
+	
+	override getDeclaredInterfaces() {
+		declaredMembers.filter(typeof(InterfaceDeclaration))
 	}
 	
 }
