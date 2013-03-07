@@ -16,6 +16,7 @@ import org.junit.runners.Suite.SuiteClasses;
  */
 @RunWith(Suite.class)
 @SuiteClasses({
+	SkipThreeCharactersInBetweenAnnotationCompilerSmokeTest.class,
 	SkipThreeCharactersInBetweenCompilerBugSmokeTest.class,
 	SkipThreeCharactersInBetweenCompilerSmokeTest.class,
 	SkipThreeCharactersInBetweenConfiguredCompilerSmokeTest.class,

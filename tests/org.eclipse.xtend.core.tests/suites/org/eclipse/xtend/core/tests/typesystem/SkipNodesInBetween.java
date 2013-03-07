@@ -16,6 +16,7 @@ import org.junit.runners.Suite.SuiteClasses;
  */
 @RunWith(Suite.class)
 @SuiteClasses({
+	SkipNodesInBetweenAnnotationCompilerSmokeTest.class,
 	SkipNodesInBetweenCompilerBugSmokeTest.class,
 	SkipNodesInBetweenCompilerSmokeTest.class,
 	SkipNodesInBetweenConfiguredCompilerSmokeTest.class,
