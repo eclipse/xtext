@@ -227,7 +227,12 @@ class JvmClassDeclarationImpl extends JvmTypeDeclarationImpl<JvmGenericType> imp
 	}
 	
 	override getSuperclass() {
-		compilationUnit.toTypeReference(delegate.superTypes.findFirst[(it.type as JvmGenericType).interface])
+		compilationUnit.toTypeReference(delegate.superTypes.findFirst[
+			switch it: type {
+				JvmGenericType case !interface : true
+				default : false
+			}
+		])
 	}
 	
 	override isAbstract() {

@@ -124,6 +124,10 @@ class TransformationContextImpl implements TransformationContext {
 		unit.typeReferenceProvider.newTypeReference(typeDeclaration, typeArguments)
 	}
 	
+	override newTypeReference(Class<?> clazz, TypeReference... typeArguments) {
+		unit.typeReferenceProvider.newTypeReference(clazz, typeArguments)
+	}
+	
 	override newWildcardTypeReference() {
 		unit.typeReferenceProvider.newWildcardTypeReference
 	}
