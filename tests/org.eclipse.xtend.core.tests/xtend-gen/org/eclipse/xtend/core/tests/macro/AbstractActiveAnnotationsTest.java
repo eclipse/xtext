@@ -1,6 +1,5 @@
 package org.eclipse.xtend.core.tests.macro;
 
-import com.google.common.collect.Iterables;
 import java.util.List;
 import org.eclipse.xtend.core.macro.declaration.CompilationUnitImpl;
 import org.eclipse.xtend.core.macro.declaration.TypeLookupImpl;
@@ -9,7 +8,6 @@ import org.eclipse.xtend.lib.macro.declaration.MutableClassDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.MutableEnumerationTypeDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.MutableFieldDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.MutableInterfaceDeclaration;
-import org.eclipse.xtend.lib.macro.declaration.MutableMemberDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.MutableMethodDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.MutableParameterDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.MutableTypeParameterDeclaration;
@@ -138,7 +136,7 @@ public abstract class AbstractActiveAnnotationsTest {
     _builder.append("types.forEach[");
     _builder.newLine();
     _builder.append("\t\t\t");
-    _builder.append("allMethods.forEach[");
+    _builder.append("declaredMethods.forEach[");
     _builder.newLine();
     _builder.append("\t\t\t\t");
     _builder.append("context.registerClass(parameterType)");
@@ -148,15 +146,6 @@ public abstract class AbstractActiveAnnotationsTest {
     _builder.newLine();
     _builder.append("\t\t");
     _builder.append("]");
-    _builder.newLine();
-    _builder.append("\t");
-    _builder.append("}");
-    _builder.newLine();
-    _builder.append("\t");
-    _builder.append("private def getAllMethods(TypeDeclaration it) {");
-    _builder.newLine();
-    _builder.append("\t\t");
-    _builder.append("members.filter(typeof(MethodDeclaration))");
     _builder.newLine();
     _builder.append("\t");
     _builder.append("}");
@@ -201,7 +190,7 @@ public abstract class AbstractActiveAnnotationsTest {
   
   @Test
   public void testPropertyAnnotation() {
-    Pair<String,String> _mappedTo = Pair.<String, String>of("myannotation/PropertyAnnotation.xtend", "\n\t\t\t\tpackage myannotation\n\t\t\t\t\n\t\t\t\timport java.util.List\n\t\t\t\timport org.eclipse.xtend.lib.macro.Active\n\t\t\t\timport org.eclipse.xtend.lib.macro.TransformationContext\n\t\t\t\timport org.eclipse.xtend.lib.macro.TransformationParticipant\n\t\t\t\timport org.eclipse.xtend.lib.macro.declaration.MutableFieldDeclaration\n\t\t\t\timport org.eclipse.xtend.lib.macro.declaration.MutableClassDeclaration\n\n\t\t\t\t@Active(typeof(PropertyProcessor))\n\t\t\t\tannotation Property2 { }\n\t\t\t\tclass PropertyProcessor implements TransformationParticipant<MutableFieldDeclaration> {\n\t\t\t\t\t\n\t\t\t\t\toverride doTransform(List<? extends MutableFieldDeclaration> annotatedSourceFields, extension TransformationContext context) {\n\t\t\t\t\t\tannotatedSourceFields.forEach [ field |\n\t\t\t\t\t\t\tval declaringType = field.declaringType as MutableClassDeclaration \n\t\t\t\t\t\t\tdeclaringType.addMethod(field.getterName) [\n\t\t\t\t\t\t\t\treturnType = field.type\n\t\t\t\t\t\t\t\tbody = [\'\'\'\n\t\t\t\t\t\t\t\t\treturn this.\u00ABfield.name\u00BB;\n\t\t\t\t\t\t\t\t\'\'\']\n\t\t\t\t\t\t\t]\n\t\t\t\t\t\t\tdeclaringType.addMethod(\'set\'+field.name.toFirstUpper) [\n\t\t\t\t\t\t\t\taddParameter(field.name, field.type)\n\t\t\t\t\t\t\t\tbody = [\'\'\'\n\t\t\t\t\t\t\t\t\tthis.\u00ABfield.name\u00BB = \u00ABfield.name\u00BB;\n\t\t\t\t\t\t\t\t\'\'\']\n\t\t\t\t\t\t\t]\n\t\t\t\t\t\t]\n\t\t\t\t\t}\n\t\t\t\t\t\n\t\t\t\t\tdef private String getterName(MutableFieldDeclaration field) {\n\t\t\t\t\t\treturn \'get\'+field.name.toFirstUpper\n\t\t\t\t\t}\n\t\t\t\t}\n\t\t\t");
+    Pair<String,String> _mappedTo = Pair.<String, String>of("myannotation/PropertyAnnotation.xtend", "\n\t\t\t\tpackage myannotation\n\t\t\t\t\n\t\t\t\timport java.util.List\n\t\t\t\timport org.eclipse.xtend.lib.macro.Active\n\t\t\t\timport org.eclipse.xtend.lib.macro.TransformationContext\n\t\t\t\timport org.eclipse.xtend.lib.macro.TransformationParticipant\n\t\t\t\timport org.eclipse.xtend.lib.macro.declaration.MutableFieldDeclaration\n\t\t\t\timport org.eclipse.xtend.lib.macro.declaration.MutableClassDeclaration\n\n\t\t\t\t@Active(typeof(PropertyProcessor))\n\t\t\t\tannotation Property2 { }\n\t\t\t\tclass PropertyProcessor implements TransformationParticipant<MutableFieldDeclaration> {\n\t\t\t\t\t\n\t\t\t\t\toverride doTransform(List<? extends MutableFieldDeclaration> annotatedTargetFields, extension TransformationContext context) {\n\t\t\t\t\t\tannotatedTargetFields.forEach [ field |\n\t\t\t\t\t\t\tval declaringType = field.declaringType \n\t\t\t\t\t\t\tdeclaringType.addMethod(field.getterName) [\n\t\t\t\t\t\t\t\treturnType = field.type\n\t\t\t\t\t\t\t\tbody = [\'\'\'\n\t\t\t\t\t\t\t\t\treturn this.\u00ABfield.name\u00BB;\n\t\t\t\t\t\t\t\t\'\'\']\n\t\t\t\t\t\t\t]\n\t\t\t\t\t\t\tdeclaringType.addMethod(\'set\'+field.name.toFirstUpper) [\n\t\t\t\t\t\t\t\taddParameter(field.name, field.type)\n\t\t\t\t\t\t\t\tbody = [\'\'\'\n\t\t\t\t\t\t\t\t\tthis.\u00ABfield.name\u00BB = \u00ABfield.name\u00BB;\n\t\t\t\t\t\t\t\t\'\'\']\n\t\t\t\t\t\t\t]\n\t\t\t\t\t\t]\n\t\t\t\t\t}\n\t\t\t\t\t\n\t\t\t\t\tdef private String getterName(MutableFieldDeclaration field) {\n\t\t\t\t\t\treturn \'get\'+field.name.toFirstUpper\n\t\t\t\t\t}\n\t\t\t\t}\n\t\t\t");
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("package myusercode");
     _builder.newLine();
@@ -220,22 +209,19 @@ public abstract class AbstractActiveAnnotationsTest {
         public void apply(final CompilationUnitImpl it) {
           TypeLookupImpl _typeLookup = it.getTypeLookup();
           final MutableClassDeclaration clazz = _typeLookup.findClass("myusercode.MyClass");
-          List<? extends MutableMemberDeclaration> _members = clazz.getMembers();
-          Iterable<MutableMethodDeclaration> _filter = Iterables.<MutableMethodDeclaration>filter(_members, MutableMethodDeclaration.class);
-          final MutableMethodDeclaration getter = IterableExtensions.<MutableMethodDeclaration>head(_filter);
+          Iterable<? extends MutableMethodDeclaration> _declaredMethods = clazz.getDeclaredMethods();
+          final MutableMethodDeclaration getter = IterableExtensions.head(_declaredMethods);
           String _name = getter.getName();
           Assert.assertEquals("getMyField", _name);
           TypeReference _returnType = getter.getReturnType();
           String _string = _returnType.toString();
           Assert.assertEquals("String", _string);
-          List<? extends MutableMemberDeclaration> _members_1 = clazz.getMembers();
-          Iterable<MutableMethodDeclaration> _filter_1 = Iterables.<MutableMethodDeclaration>filter(_members_1, MutableMethodDeclaration.class);
-          Iterable<MutableMethodDeclaration> _drop = IterableExtensions.<MutableMethodDeclaration>drop(_filter_1, 1);
-          final MutableMethodDeclaration setter = IterableExtensions.<MutableMethodDeclaration>head(_drop);
+          TypeReference _returnType_1 = getter.getReturnType();
+          final MutableMethodDeclaration setter = clazz.findMethod("setMyField", _returnType_1);
           String _name_1 = setter.getName();
           Assert.assertEquals("setMyField", _name_1);
-          TypeReference _returnType_1 = setter.getReturnType();
-          String _string_1 = _returnType_1.toString();
+          TypeReference _returnType_2 = setter.getReturnType();
+          String _string_1 = _returnType_2.toString();
           Assert.assertEquals("void", _string_1);
           List<MutableParameterDeclaration> _parameters = setter.getParameters();
           MutableParameterDeclaration _head = IterableExtensions.<MutableParameterDeclaration>head(_parameters);
@@ -324,9 +310,8 @@ public abstract class AbstractActiveAnnotationsTest {
         public void apply(final CompilationUnitImpl it) {
           TypeLookupImpl _typeLookup = it.getTypeLookup();
           final MutableClassDeclaration type = _typeLookup.findClass("myusercode.MyClass");
-          List<? extends MutableMemberDeclaration> _members = type.getMembers();
-          Iterable<MutableMethodDeclaration> _filter = Iterables.<MutableMethodDeclaration>filter(_members, MutableMethodDeclaration.class);
-          final MutableMethodDeclaration method = IterableExtensions.<MutableMethodDeclaration>head(_filter);
+          Iterable<? extends MutableMethodDeclaration> _declaredMethods = type.getDeclaredMethods();
+          final MutableMethodDeclaration method = IterableExtensions.head(_declaredMethods);
           List<MutableTypeParameterDeclaration> _typeParameters = method.getTypeParameters();
           MutableTypeParameterDeclaration _head = IterableExtensions.<MutableTypeParameterDeclaration>head(_typeParameters);
           String _name = _head.getName();
@@ -434,12 +419,10 @@ public abstract class AbstractActiveAnnotationsTest {
         public void apply(final CompilationUnitImpl it) {
           TypeLookupImpl _typeLookup = it.getTypeLookup();
           final MutableClassDeclaration type = _typeLookup.findClass("myusercode.MyClass");
-          List<? extends MutableMemberDeclaration> _members = type.getMembers();
-          Iterable<MutableMethodDeclaration> _filter = Iterables.<MutableMethodDeclaration>filter(_members, MutableMethodDeclaration.class);
-          final MutableMethodDeclaration method = IterableExtensions.<MutableMethodDeclaration>head(_filter);
-          List<? extends MutableMemberDeclaration> _members_1 = type.getMembers();
-          Iterable<MutableFieldDeclaration> _filter_1 = Iterables.<MutableFieldDeclaration>filter(_members_1, MutableFieldDeclaration.class);
-          final MutableFieldDeclaration field = IterableExtensions.<MutableFieldDeclaration>head(_filter_1);
+          Iterable<? extends MutableMethodDeclaration> _declaredMethods = type.getDeclaredMethods();
+          final MutableMethodDeclaration method = IterableExtensions.head(_declaredMethods);
+          Iterable<? extends MutableFieldDeclaration> _declaredFields = type.getDeclaredFields();
+          final MutableFieldDeclaration field = IterableExtensions.head(_declaredFields);
           ProblemSupport _problemSupport = it.getProblemSupport();
           List<Problem> _problems = _problemSupport.getProblems(field);
           Problem _head = IterableExtensions.<Problem>head(_problems);

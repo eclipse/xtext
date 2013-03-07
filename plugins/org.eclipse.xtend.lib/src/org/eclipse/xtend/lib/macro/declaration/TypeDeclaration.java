@@ -14,8 +14,6 @@
  *******************************************************************************/
 package org.eclipse.xtend.lib.macro.declaration;
 
-import java.util.List;
-
 import com.google.common.annotations.Beta;
 
 /**
@@ -24,10 +22,57 @@ import com.google.common.annotations.Beta;
 @Beta
 public interface TypeDeclaration extends Type, MemberDeclaration {
 
-	String getPackageName();
-
+	/**
+	 * @return the simple name of this type declaration, i.e. the last segment of {@link #getName()}
+	 */
 	String getSimpleName();
 
-	List<? extends MemberDeclaration> getMembers();
+	/**
+	 * @return the members directly declared and contained in the type declaration
+	 */
+	Iterable<? extends MemberDeclaration> getDeclaredMembers();
 	
+	/**
+	 * @return the methods directly declared and contained in the type declaration
+	 */
+	Iterable<? extends MethodDeclaration> getDeclaredMethods();
+	
+	/**
+	 * @return the fields directly declared and contained in the type declaration
+	 */
+	Iterable<? extends FieldDeclaration> getDeclaredFields();
+	
+	/**
+	 * @return the constructors directly declared and contained in the type declaration
+	 */
+	Iterable<? extends ConstructorDeclaration> getDeclaredConstructors();
+	
+	/**
+	 * @return the classes directly declared and contained in the type declaration
+	 */
+	Iterable<? extends ClassDeclaration> getDeclaredClasses();
+	
+	/**
+	 * @return the interfaces directly declared and contained in the type declaration
+	 */
+	Iterable<? extends InterfaceDeclaration> getDeclaredInterfaces();
+	
+	/**
+	 * @param name of the feature
+	 * @return the declared field with the given name or <code>null</code> of no such field exists.
+	 */
+	FieldDeclaration findField(String name);
+	
+	/**
+	 * @param name of the method
+	 * @param parameterTypes - the types of the method
+	 * @return the declared method with the given name and the specified parameter types or <code>null</code> if no such method exists.
+	 */
+	MethodDeclaration findMethod(String name, TypeReference... parameterTypes);
+	
+	/**
+	 * @param parameterTypes - the parameter types of the constructor
+	 * @return the declared constructor with the exact same parameter types or <code>null</code> if no such constructors exists.
+	 */
+	ConstructorDeclaration findConstructor(TypeReference... parameterTypes);
 }

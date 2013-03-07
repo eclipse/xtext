@@ -20,16 +20,10 @@ import org.eclipse.xtend.lib.macro.declaration.MutableParameterDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.MutableTypeParameterDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.TypeParameterDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.TypeReference;
-import org.eclipse.xtend.lib.macro.services.TypeReferenceProvider;
-import org.eclipse.xtext.common.types.JvmField;
 import org.eclipse.xtext.common.types.JvmGenericType;
-import org.eclipse.xtext.common.types.JvmMember;
-import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.JvmTypeReference;
-import org.eclipse.xtext.common.types.JvmVisibility;
-import org.eclipse.xtext.common.types.TypesFactory;
 import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
@@ -173,39 +167,9 @@ public class JvmClassDeclarationImpl extends JvmTypeDeclarationImpl<JvmGenericTy
     IterableExtensions.forEach(superInterfaces, _function);
   }
   
-  public void addField(final String name, final Procedure1<MutableFieldDeclaration> initializer) {
-    final JvmField newField = TypesFactory.eINSTANCE.createJvmField();
-    newField.setSimpleName(name);
-    newField.setVisibility(JvmVisibility.PRIVATE);
-    JvmGenericType _delegate = this.getDelegate();
-    EList<JvmMember> _members = _delegate.getMembers();
-    _members.add(newField);
-    CompilationUnitImpl _compilationUnit = this.getCompilationUnit();
-    MutableMemberDeclaration _memberDeclaration = _compilationUnit.toMemberDeclaration(newField);
-    initializer.apply(((MutableFieldDeclaration) _memberDeclaration));
-  }
-  
-  public void addMethod(final String name, final Procedure1<MutableMethodDeclaration> initializer) {
-    final JvmOperation newMethod = TypesFactory.eINSTANCE.createJvmOperation();
-    newMethod.setVisibility(JvmVisibility.PUBLIC);
-    newMethod.setSimpleName(name);
-    CompilationUnitImpl _compilationUnit = this.getCompilationUnit();
-    CompilationUnitImpl _compilationUnit_1 = this.getCompilationUnit();
-    TypeReferenceProvider _typeReferenceProvider = _compilationUnit_1.getTypeReferenceProvider();
-    TypeReference _primitiveVoid = _typeReferenceProvider.getPrimitiveVoid();
-    JvmTypeReference _jvmTypeReference = _compilationUnit.toJvmTypeReference(_primitiveVoid);
-    newMethod.setReturnType(_jvmTypeReference);
-    JvmGenericType _delegate = this.getDelegate();
-    EList<JvmMember> _members = _delegate.getMembers();
-    _members.add(newMethod);
-    CompilationUnitImpl _compilationUnit_2 = this.getCompilationUnit();
-    MutableMemberDeclaration _memberDeclaration = _compilationUnit_2.toMemberDeclaration(newMethod);
-    initializer.apply(((MutableMethodDeclaration) _memberDeclaration));
-  }
-  
   public MutableFieldDeclaration findField(final String name) {
-    List<? extends MutableMemberDeclaration> _members = this.getMembers();
-    Iterable<MutableFieldDeclaration> _filter = Iterables.<MutableFieldDeclaration>filter(_members, MutableFieldDeclaration.class);
+    Iterable<? extends MutableMemberDeclaration> _declaredMembers = this.getDeclaredMembers();
+    Iterable<MutableFieldDeclaration> _filter = Iterables.<MutableFieldDeclaration>filter(_declaredMembers, MutableFieldDeclaration.class);
     final Function1<MutableFieldDeclaration,Boolean> _function = new Function1<MutableFieldDeclaration,Boolean>() {
         public Boolean apply(final MutableFieldDeclaration it) {
           String _name = it.getName();
@@ -218,8 +182,8 @@ public class JvmClassDeclarationImpl extends JvmTypeDeclarationImpl<JvmGenericTy
   }
   
   public MutableMethodDeclaration findMethod(final String name, final TypeReference[] parameterTypes) {
-    List<? extends MutableMemberDeclaration> _members = this.getMembers();
-    Iterable<MutableMethodDeclaration> _filter = Iterables.<MutableMethodDeclaration>filter(_members, MutableMethodDeclaration.class);
+    Iterable<? extends MutableMemberDeclaration> _declaredMembers = this.getDeclaredMembers();
+    Iterable<MutableMethodDeclaration> _filter = Iterables.<MutableMethodDeclaration>filter(_declaredMembers, MutableMethodDeclaration.class);
     final Function1<MutableMethodDeclaration,Boolean> _function = new Function1<MutableMethodDeclaration,Boolean>() {
         public Boolean apply(final MutableMethodDeclaration it) {
           boolean _and = false;

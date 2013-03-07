@@ -9,31 +9,39 @@ package org.eclipse.xtend.lib.macro.declaration;
 
 import java.util.List;
 
-import org.eclipse.xtext.xbase.lib.Procedures;
-
 import com.google.common.annotations.Beta;
 
+/**
+ * 
+ * @author Sven Efftinge
+ */
 @Beta
 public interface MutableClassDeclaration extends MutableTypeDeclaration, ClassDeclaration {
+	/**
+	 * @param superclass the type reference to the super type.
+	 */
 	public void setSuperclass(TypeReference superclass);
-	public void setImplementedInterfaces(List<? extends TypeReference> superclass);
+	
+	/**
+	 * @param superinterfaces the interfaces this class implements
+	 */
+	public void setImplementedInterfaces(List<? extends TypeReference> superinterfaces);
+	
+	/**
+	 * Sets the <code>abstract</code> property
+	 * 
+	 * @param isAbstract 
+	 */
 	void setAbstract(boolean isAbstract);
+	
+	/**
+	 * @param isFinal 
+	 */
 	void setFinal(boolean isFinal);
+	
+	/**
+	 * @param isStatic
+	 */
 	void setStatic(boolean isStatic);
 	
-	/**
-	 * 
-	 * @param name of the method
-	 * @param parameterTypes - the types of the method
-	 * @return the declared method with the given name and the specified parameter types or <code>null</code> if no such method exists.
-	 */
-	MutableMethodDeclaration findMethod(String name, TypeReference... parameterTypes);
-	void addMethod(String name, Procedures.Procedure1<MutableMethodDeclaration> initializer);
-	
-	/**
-	 * @param name of the feature
-	 * @return the declared field with the given name or <code>null</code> of no such field exists.
-	 */
-	MutableFieldDeclaration findField(String name);
-	void addField(String name, Procedures.Procedure1<MutableFieldDeclaration> initializer);
 }

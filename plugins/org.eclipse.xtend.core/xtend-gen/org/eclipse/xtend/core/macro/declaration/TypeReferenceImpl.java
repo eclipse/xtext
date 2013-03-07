@@ -175,4 +175,32 @@ public class TypeReferenceImpl extends AbstractDeclarationImpl<LightweightTypeRe
     LightweightTypeReference _delegate = this.getDelegate();
     return _delegate;
   }
+  
+  public boolean equals(final Object obj) {
+    boolean _tripleEquals = obj == this;
+    if (_tripleEquals) {
+      return true;
+    }
+    if ((obj instanceof TypeReference)) {
+      final TypeReference other = ((TypeReference) obj);
+      boolean _and = false;
+      boolean _isAssignableFrom = other.isAssignableFrom(this);
+      if (!_isAssignableFrom) {
+        _and = false;
+      } else {
+        boolean _isAssignableFrom_1 = this.isAssignableFrom(other);
+        _and = (_isAssignableFrom && _isAssignableFrom_1);
+      }
+      return _and;
+    }
+    return false;
+  }
+  
+  public int hashCode() {
+    LightweightTypeReference _delegate = this.getDelegate();
+    JvmType _type = _delegate.getType();
+    String _qualifiedName = _type.getQualifiedName();
+    int _hashCode = _qualifiedName.hashCode();
+    return _hashCode;
+  }
 }
