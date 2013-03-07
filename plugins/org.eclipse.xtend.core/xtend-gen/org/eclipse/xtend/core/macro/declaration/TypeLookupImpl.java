@@ -98,6 +98,7 @@ public class TypeLookupImpl implements TypeLookup {
   }
   
   private JvmDeclaredType recursiveFindType(final String qualifiedName, final Iterable<? extends JvmDeclaredType> typeDeclarations) {
+    final char dot = '.';
     for (final JvmDeclaredType type : typeDeclarations) {
       {
         final String name = type.getQualifiedName('.');
@@ -105,8 +106,17 @@ public class TypeLookupImpl implements TypeLookup {
         if (_equals) {
           return type;
         }
+        boolean _and = false;
         boolean _startsWith = qualifiedName.startsWith(name);
-        if (_startsWith) {
+        if (!_startsWith) {
+          _and = false;
+        } else {
+          int _length = name.length();
+          char _charAt = qualifiedName.charAt(_length);
+          boolean _equals_1 = (_charAt == dot);
+          _and = (_startsWith && _equals_1);
+        }
+        if (_and) {
           EList<JvmMember> _members = type.getMembers();
           Iterable<JvmDeclaredType> _filter = Iterables.<JvmDeclaredType>filter(_members, JvmDeclaredType.class);
           return this.recursiveFindType(qualifiedName, _filter);

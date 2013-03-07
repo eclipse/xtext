@@ -1,14 +1,12 @@
 package org.eclipse.xtend.core.tests.macro
 
 import org.eclipse.xtend.core.macro.declaration.CompilationUnitImpl
-import org.eclipse.xtend.lib.macro.declaration.ClassDeclaration
 import org.eclipse.xtend.lib.macro.declaration.MutableFieldDeclaration
 import org.eclipse.xtend.lib.macro.declaration.MutableMethodDeclaration
 import org.eclipse.xtext.xbase.lib.Pair
 import org.junit.Test
 
 import static org.junit.Assert.*
-import org.eclipse.xtend.lib.macro.declaration.MutableClassDeclaration
 
 abstract class AbstractActiveAnnotationsTest {
 	
@@ -44,7 +42,7 @@ abstract class AbstractActiveAnnotationsTest {
 				}
 			'''
 		) [
-			val clazz = generatedTypeDeclarations.head as MutableClassDeclaration
+			val clazz = typeLookup.findClass('myusercode.MyClass')
 			assertTrue(clazz.isAbstract)
 		]
 	}
@@ -145,7 +143,7 @@ abstract class AbstractActiveAnnotationsTest {
 				}
 			'''
 		) [
-			val clazz = generatedTypeDeclarations.head as MutableClassDeclaration
+			val clazz = typeLookup.findClass('myusercode.MyClass')
 			val getter = clazz.members.filter(typeof(MutableMethodDeclaration)).head
 			assertEquals('getMyField', getter.name)
 			assertEquals('String', getter.returnType.toString)
@@ -193,7 +191,8 @@ abstract class AbstractActiveAnnotationsTest {
 				}
 			'''
 		) [
-			val method = (generatedTypeDeclarations.head as MutableClassDeclaration).members.filter(typeof(MutableMethodDeclaration)).head
+			val type = typeLookup.findClass('myusercode.MyClass')
+			val method = type.members.filter(typeof(MutableMethodDeclaration)).head
 			assertEquals('A', method.typeParameters.head.name)
 			assertEquals('myParam', method.parameters.head.name)
 			assertSame(method.typeParameters.head, method.parameters.head.type.type)
@@ -240,8 +239,9 @@ abstract class AbstractActiveAnnotationsTest {
 				}
 			'''
 		) [
-			val method = (generatedTypeDeclarations.head as MutableClassDeclaration).members.filter(typeof(MutableMethodDeclaration)).head
-			val field = (generatedTypeDeclarations.head as MutableClassDeclaration).members.filter(typeof(MutableFieldDeclaration)).head
+			val type = typeLookup.findClass('myusercode.MyClass')
+			val method = type.members.filter(typeof(MutableMethodDeclaration)).head
+			val field = type.members.filter(typeof(MutableFieldDeclaration)).head
 			assertEquals('field-warning', problemSupport.getProblems(field).head.message)
 			assertEquals('warning', problemSupport.getProblems(method).head.message)
 		]
@@ -280,10 +280,11 @@ abstract class AbstractActiveAnnotationsTest {
 				}
 			'''
 		) [
-			assertEquals(4, generatedTypeDeclarations.size)
-			val innerClass = generatedTypeDeclarations.head.members.head as ClassDeclaration
-			assertEquals('InnerClass', innerClass.simpleName)
-			assertEquals('myusercode.MyClass', innerClass.declaringType.name)
+			assertNotNull(typeLookup.findClass('myusercode.MyClass'))
+			assertNotNull(typeLookup.findClass('myusercode.MyClass.InnerClass'))
+			assertNotNull(typeLookup.findInterface('myusercode.MyClassInterface'))
+			assertNotNull(typeLookup.findEnumerationType('myusercode.MyClassEnum'))
+			assertNotNull(typeLookup.findAnnotationType('myusercode.MyClassAnnotation'))
 		]
 	}
 	

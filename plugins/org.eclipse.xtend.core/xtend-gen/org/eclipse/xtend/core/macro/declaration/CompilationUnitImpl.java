@@ -9,7 +9,6 @@ package org.eclipse.xtend.core.macro.declaration;
 
 import com.google.common.base.Objects;
 import com.google.common.collect.ImmutableList;
-import com.google.common.collect.Iterables;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -178,22 +177,6 @@ public class CompilationUnitImpl implements CompilationUnit {
       };
     List<XtendTypeDeclarationImpl<? extends XtendTypeDeclaration>> _map = ListExtensions.<XtendTypeDeclaration, XtendTypeDeclarationImpl<? extends XtendTypeDeclaration>>map(_xtendTypes, _function);
     return _map;
-  }
-  
-  public List<MutableTypeDeclaration> getGeneratedTypeDeclarations() {
-    XtendFile _xtendFile = this.getXtendFile();
-    Resource _eResource = _xtendFile.eResource();
-    EList<EObject> _contents = _eResource.getContents();
-    Iterable<JvmDeclaredType> _filter = Iterables.<JvmDeclaredType>filter(_contents, JvmDeclaredType.class);
-    final Function1<JvmDeclaredType,MutableTypeDeclaration> _function = new Function1<JvmDeclaredType,MutableTypeDeclaration>() {
-        public MutableTypeDeclaration apply(final JvmDeclaredType it) {
-          MutableTypeDeclaration _typeDeclaration = CompilationUnitImpl.this.toTypeDeclaration(it);
-          return _typeDeclaration;
-        }
-      };
-    Iterable<MutableTypeDeclaration> _map = IterableExtensions.<JvmDeclaredType, MutableTypeDeclaration>map(_filter, _function);
-    List<MutableTypeDeclaration> _list = IterableExtensions.<MutableTypeDeclaration>toList(_map);
-    return _list;
   }
   
   private boolean canceled = false;
