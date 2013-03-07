@@ -20,7 +20,7 @@ import org.eclipse.jdt.annotation.Nullable;
  * @since 2.3
  */
 @NonNullByDefault
-public interface ITraceInformation {
+public interface ITraceForStorageProvider { // ITraceForStorageProvider // ITraceFor
 	
 	/**
 	 * Returns the trace information to the sources that were used as input for the given derived resource.
@@ -38,7 +38,7 @@ public interface ITraceInformation {
 	 */
 	@Nullable ITrace getTraceToTarget(IStorage sourceResource);
 
-	class Null implements ITraceInformation {
+	class Null implements ITraceForStorageProvider {
 
 		@Nullable 
 		public ITrace getTraceToSource(IStorage derivedResource) {

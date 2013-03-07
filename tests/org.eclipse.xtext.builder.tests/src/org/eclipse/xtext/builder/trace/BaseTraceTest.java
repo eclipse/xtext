@@ -7,8 +7,12 @@
  *******************************************************************************/
 package org.eclipse.xtext.builder.trace;
 
+import java.io.InputStream;
+
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IStorage;
+import org.eclipse.core.runtime.CoreException;
+import org.eclipse.emf.common.util.URI;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.xtext.generator.trace.TraceRegion;
 import org.junit.Assert;
@@ -39,7 +43,19 @@ public class BaseTraceTest {
 			
 			@Override
 			@NonNull
-			public IStorage getLocalStorage() {
+			public URI getLocalURI() {
+				throw new UnsupportedOperationException();
+			}
+
+			@Override
+			@NonNull
+			protected IStorage findStorage(@NonNull URI uri, @NonNull IProject project) {
+				throw new UnsupportedOperationException();
+			}
+
+			@Override
+			@NonNull
+			protected InputStream getContents(@NonNull URI uri, @NonNull IProject project) throws CoreException {
 				throw new UnsupportedOperationException();
 			}
 		};

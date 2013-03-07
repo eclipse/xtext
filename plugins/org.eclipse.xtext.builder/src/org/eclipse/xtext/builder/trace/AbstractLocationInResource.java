@@ -7,8 +7,11 @@
  *******************************************************************************/
 package org.eclipse.xtext.builder.trace;
 
+import java.io.InputStream;
+
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IStorage;
+import org.eclipse.core.runtime.CoreException;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
@@ -52,6 +55,10 @@ public abstract class AbstractLocationInResource implements ILocationInResource 
 	public ITextRegionWithLineInformation getTextRegion() {
 		ITextRegionWithLineInformation result = new TextRegionWithLineInformation(getOffset(), getLength(), getLineNumber(), getEndLineNumber());
 		return result;
+	}
+	
+	public InputStream getContents() throws CoreException {
+		return trace.getContents(getResourceURI(), getProject());
 	}
 	
 	public @NonNull IProject getProject() {

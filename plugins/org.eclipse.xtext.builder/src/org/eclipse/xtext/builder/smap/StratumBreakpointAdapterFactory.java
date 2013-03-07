@@ -17,6 +17,7 @@ import org.eclipse.core.resources.IResourceChangeListener;
 import org.eclipse.core.resources.IResourceDelta;
 import org.eclipse.core.resources.IStorage;
 import org.eclipse.core.resources.IWorkspace;
+import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IAdapterFactory;
 import org.eclipse.debug.core.DebugPlugin;
@@ -28,9 +29,12 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.jdt.core.IClassFile;
 import org.eclipse.jdt.core.IJarEntryResource;
 import org.eclipse.jdt.debug.core.IJavaStratumLineBreakpoint;
 import org.eclipse.jdt.debug.core.JDIDebugModel;
+import org.eclipse.jdt.internal.debug.ui.BreakpointUtils;
+import org.eclipse.jdt.internal.ui.javaeditor.IClassFileEditorInput;
 import org.eclipse.jface.text.BadLocationException;
 import org.eclipse.jface.text.IRegion;
 import org.eclipse.jface.text.ITextSelection;
@@ -60,7 +64,7 @@ import com.google.inject.Inject;
 public class StratumBreakpointAdapterFactory implements IAdapterFactory, IToggleBreakpointsTargetExtension {
 
 	private final static Logger log = Logger.getLogger(StratumBreakpointAdapterFactory.class);
-	
+
 	private static final String ORG_ECLIPSE_JDT_DEBUG_CORE_SOURCE_NAME = "org.eclipse.jdt.debug.core.sourceName";
 
 	@Inject
@@ -69,7 +73,7 @@ public class StratumBreakpointAdapterFactory implements IAdapterFactory, IToggle
 	@Inject
 	private IStorage2UriMapper uriMapper;
 
-	@SuppressWarnings({ "rawtypes"}) 
+	@SuppressWarnings({ "rawtypes" })
 	public Object getAdapter(Object adaptableObject, Class adapterType) {
 		if (adaptableObject instanceof XtextEditor) {
 			return this;
@@ -80,7 +84,7 @@ public class StratumBreakpointAdapterFactory implements IAdapterFactory, IToggle
 	public Class<?>[] getAdapterList() {
 		return new Class[] { IToggleBreakpointsTargetExtension.class };
 	}
-	
+
 	protected IResource getBreakpointResource(XtextEditor editor) throws CoreException {
 		IEditorInput input = editor.getEditorInput();
 		Object adapter = input.getAdapter(IResource.class);
@@ -92,10 +96,13 @@ public class StratumBreakpointAdapterFactory implements IAdapterFactory, IToggle
 				return (IResource) storage;
 			if (storage instanceof IJarEntryResource)
 				return ((IJarEntryResource) storage).getPackageFragmentRoot().getUnderlyingResource();
+		} else if (input instanceof IClassFileEditorInput) {
+			IClassFile classFile = ((IClassFileEditorInput) input).getClassFile();
+			return BreakpointUtils.getBreakpointResource(classFile.findPrimaryType());
 		}
-		return null;
+		return ResourcesPlugin.getWorkspace().getRoot();
 	}
-	
+
 	protected static class Data {
 		protected URI uri;
 		protected String types;
@@ -125,32 +132,33 @@ public class StratumBreakpointAdapterFactory implements IAdapterFactory, IToggle
 					return result;
 				}
 			});
-			
+
 			IJavaStratumLineBreakpoint existingBreakpoint = findExistingBreakpoint(res, data.uri, line);
-			
+
 			if (existingBreakpoint != null) {
 				existingBreakpoint.delete();
 				return;
 			}
-			
+
 			if (!data.valid || data.types == null)
 				return;
-			
+
 			if (log.isDebugEnabled()) {
-				log.debug("Types the breakpoint listens for : "+data.types);
+				log.debug("Types the breakpoint listens for : " + data.types);
 			}
-			final IRegion information = xtextEditor.getDocument().getLineInformation(line-1);
+			final IRegion information = xtextEditor.getDocument().getLineInformation(line - 1);
 			final int charStart = information.getOffset();
 			final int charEnd = information.getOffset() + information.getLength();
 
 			final String shortName = data.lang.getShortName();
-			
+
 			Map<String, Object> attributes = Maps.newHashMap();
 			attributes.put(JarFileMarkerAnnotationModel.MARKER_URI, data.uri.toString());
 			attributes.put(ORG_ECLIPSE_JDT_DEBUG_CORE_SOURCE_NAME, data.uri.lastSegment());
-			
-			final IJavaStratumLineBreakpoint breakpoint = JDIDebugModel.createStratumBreakpoint(res, shortName, null, null, data.types, line, charStart, charEnd, 0, true, attributes);
-			
+
+			final IJavaStratumLineBreakpoint breakpoint = JDIDebugModel.createStratumBreakpoint(res, shortName, null,
+					null, data.types, line, charStart, charEnd, 0, true, attributes);
+
 			// make sure the class name pattern gets updated on change
 			final IMarker marker = breakpoint.getMarker();
 			final IWorkspace ws = marker.getResource().getWorkspace();
@@ -169,8 +177,8 @@ public class StratumBreakpointAdapterFactory implements IAdapterFactory, IToggle
 						return;
 					if (event.getType() == IResourceChangeEvent.PRE_DELETE) {
 						ws.removeResourceChangeListener(this);
-					} else if (event.getType() == IResourceChangeEvent.POST_CHANGE 
-							&& (findMember.getFlags() & IResourceDelta.CONTENT ) != 0) {
+					} else if (event.getType() == IResourceChangeEvent.POST_CHANGE
+							&& (findMember.getFlags() & IResourceDelta.CONTENT) != 0) {
 						String classNamePattern = getClassNamePattern(event.getResource());
 						try {
 							breakpoint.getMarker().setAttribute("org.eclipse.jdt.debug.pattern", classNamePattern);
@@ -182,11 +190,12 @@ public class StratumBreakpointAdapterFactory implements IAdapterFactory, IToggle
 			};
 			ws.addResourceChangeListener(listener, IResourceChangeEvent.POST_CHANGE | IResourceChangeEvent.PRE_DELETE);
 		} catch (BadLocationException e) {
-			log.info(e.getMessage(),e);
+			log.info(e.getMessage(), e);
 		}
 	}
 
-	protected IJavaStratumLineBreakpoint findExistingBreakpoint(IResource res, URI uri, final int line) throws CoreException {
+	protected IJavaStratumLineBreakpoint findExistingBreakpoint(IResource res, URI uri, final int line)
+			throws CoreException {
 		IBreakpointManager manager = DebugPlugin.getDefault().getBreakpointManager();
 		IBreakpoint[] breakpoints = manager.getBreakpoints();
 		String uriStirng = uri.toString();
@@ -202,7 +211,7 @@ public class StratumBreakpointAdapterFactory implements IAdapterFactory, IToggle
 		}
 		return null;
 	}
-	
+
 	protected String getClassNamePattern(IResource res) {
 		if (!(res instanceof IStorage))
 			return null;
@@ -212,11 +221,11 @@ public class StratumBreakpointAdapterFactory implements IAdapterFactory, IToggle
 		ResourceSet set = resourceSetProvider.get(res.getProject());
 		Resource resource = set.getResource(uri, true);
 		if (resource instanceof XtextResource) {
-			return getClassNamePattern((XtextResource)resource);
+			return getClassNamePattern((XtextResource) resource);
 		}
 		return null;
 	}
-	
+
 	protected String getClassNamePattern(XtextResource state) {
 		TreeIterator<Object> contents = EcoreUtil.getAllContents(state, false);
 		StringBuilder sb = new StringBuilder();
@@ -231,9 +240,9 @@ public class StratumBreakpointAdapterFactory implements IAdapterFactory, IToggle
 		if (sb.length() == 0)
 			return null;
 		else
-			return sb.substring(0, sb.length()-1);
+			return sb.substring(0, sb.length() - 1);
 	}
-	
+
 	public void toggleLineBreakpoints(IWorkbenchPart part, ISelection selection) throws CoreException {
 	}
 
