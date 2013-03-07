@@ -310,4 +310,10 @@ public class TypeReferenceProviderImpl implements TypeReferenceProvider {
     }
     return _xifexpression;
   }
+  
+  public TypeReference newTypeReference(final Class<? extends Object> clazz, final TypeReference... typeArguments) {
+    String _name = clazz.getName();
+    TypeReference _newTypeReference = this.newTypeReference(_name, typeArguments);
+    return _newTypeReference;
+  }
 }

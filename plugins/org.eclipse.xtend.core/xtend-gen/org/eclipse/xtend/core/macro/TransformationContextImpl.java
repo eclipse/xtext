@@ -237,6 +237,13 @@ public class TransformationContextImpl implements TransformationContext {
     return _newTypeReference;
   }
   
+  public TypeReference newTypeReference(final Class<? extends Object> clazz, final TypeReference... typeArguments) {
+    CompilationUnitImpl _unit = this.getUnit();
+    TypeReferenceProvider _typeReferenceProvider = _unit.getTypeReferenceProvider();
+    TypeReference _newTypeReference = _typeReferenceProvider.newTypeReference(clazz, typeArguments);
+    return _newTypeReference;
+  }
+  
   public TypeReference newWildcardTypeReference() {
     CompilationUnitImpl _unit = this.getUnit();
     TypeReferenceProvider _typeReferenceProvider = _unit.getTypeReferenceProvider();

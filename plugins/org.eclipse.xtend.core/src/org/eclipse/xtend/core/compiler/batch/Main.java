@@ -11,7 +11,7 @@ import java.util.Arrays;
 import java.util.Iterator;
 
 import org.apache.log4j.BasicConfigurator;
-import org.eclipse.xtend.core.XtendStandaloneSetup;
+import org.eclipse.xtend.core.XtendInjectorSingleton;
 
 import com.google.inject.Injector;
 
@@ -22,7 +22,7 @@ public class Main {
 
 	public static void main(String[] args) {
 		BasicConfigurator.configure();
-		Injector injector = new XtendStandaloneSetup().createInjectorAndDoEMFRegistration();
+		Injector injector = XtendInjectorSingleton.INJECTOR;
 		XtendBatchCompiler xtendBatchCompiler = injector.getInstance(XtendBatchCompiler.class);
 		if ((args == null) || (args.length == 0)) {
 			printUsage();

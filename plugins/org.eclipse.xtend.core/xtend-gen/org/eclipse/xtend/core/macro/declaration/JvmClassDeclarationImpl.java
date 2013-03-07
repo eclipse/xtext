@@ -66,9 +66,25 @@ public class JvmClassDeclarationImpl extends JvmTypeDeclarationImpl<JvmGenericTy
     EList<JvmTypeReference> _superTypes = _delegate.getSuperTypes();
     final Function1<JvmTypeReference,Boolean> _function = new Function1<JvmTypeReference,Boolean>() {
         public Boolean apply(final JvmTypeReference it) {
+          boolean _switchResult = false;
           JvmType _type = it.getType();
-          boolean _isInterface = ((JvmGenericType) _type).isInterface();
-          return Boolean.valueOf(_isInterface);
+          final JvmType it_1 = _type;
+          boolean _matched = false;
+          if (!_matched) {
+            if (it_1 instanceof JvmGenericType) {
+              final JvmGenericType _jvmGenericType = (JvmGenericType)it_1;
+              boolean _isInterface = _jvmGenericType.isInterface();
+              boolean _not = (!_isInterface);
+              if (_not) {
+                _matched=true;
+                _switchResult = true;
+              }
+            }
+          }
+          if (!_matched) {
+            _switchResult = false;
+          }
+          return Boolean.valueOf(_switchResult);
         }
       };
     JvmTypeReference _findFirst = IterableExtensions.<JvmTypeReference>findFirst(_superTypes, _function);
