@@ -11,6 +11,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtend.core.richstring.AbstractRichStringPartAcceptor;
@@ -21,6 +22,7 @@ import org.eclipse.xtend.core.xtend.RichStringForLoop;
 import org.eclipse.xtend.core.xtend.RichStringIf;
 import org.eclipse.xtend.core.xtend.RichStringLiteral;
 import org.eclipse.xtend.core.xtend.XtendFormalParameter;
+import org.eclipse.xtend.core.xtend.XtendPackage;
 import org.eclipse.xtend.core.xtend.XtendVariableDeclaration;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
@@ -33,6 +35,7 @@ import org.eclipse.xtext.xbase.XCatchClause;
 import org.eclipse.xtext.xbase.XClosure;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XForLoopExpression;
+import org.eclipse.xtext.xbase.XListLiteral;
 import org.eclipse.xtext.xbase.XVariableDeclaration;
 import org.eclipse.xtext.xbase.XbasePackage;
 import org.eclipse.xtext.xbase.compiler.XbaseCompiler;
@@ -393,5 +396,14 @@ public class XtendCompiler extends XbaseCompiler {
 			XClosure closure, ITreeAppendable appendable) {
 		appendExtensionAnnotation(closureParam, closure, appendable, false);
 		super.appendClosureParameter(closureParam, parameterType, closure, appendable);
+	}
+	
+	@Override
+	protected boolean canUseArrayInitializer(XListLiteral literal) {
+		EStructuralFeature feature = literal.eContainingFeature();
+		if (feature == XtendPackage.Literals.XTEND_FIELD__INITIAL_VALUE) {
+			return true;
+		}
+		return super.canUseArrayInitializer(literal);
 	}
 }

@@ -76,7 +76,6 @@ import org.eclipse.xtext.xbase.typesystem.references.ParameterizedTypeReference;
 import org.eclipse.xtext.xbase.typesystem.util.CommonTypeComputationServices;
 import org.eclipse.xtext.xbase.typesystem.util.DeclaratorTypeArgumentCollector;
 import org.eclipse.xtext.xbase.typesystem.util.StandardTypeParameterSubstitutor;
-import org.eclipse.xtext.xbase.typing.Closures;
 
 import com.google.common.base.Objects;
 import com.google.common.base.Predicate;
@@ -102,27 +101,19 @@ public class XbaseCompiler extends FeatureCallCompiler {
 	@Inject
 	private CommonTypeComputationServices services;
 	
+	@SuppressWarnings("deprecation")
+	@Inject
+	private org.eclipse.xtext.xbase.typing.Closures closures;
+	
 	protected void _toJavaStatement(XListLiteral literal, ITreeAppendable b, boolean isReferenced) {
 		for(XExpression element: literal.getElements()) 
 			internalToJavaStatement(element, b, true);
-		if(isReferenced)
-			declareSyntheticVariable(literal, b);
 		LightweightTypeReference literalType = batchTypeResolver.resolveTypes(literal).getActualType(literal);
-		if(literalType.isArray()) {
-			if(isReferenced) 
-				b.newLine().append(getVarName(literal, b)).append(" = ");
-			b.append("new ");
-			getTypeReferenceSerializer().serialize(literalType.toTypeReference(), literal, b);
-			b.append(" { ");
-			boolean isFirst = true;
-			for(XExpression element: literal.getElements())  {
-				if(!isFirst)
-					b.append(", ");
-				isFirst = false;
-				internalToJavaExpression(element, b);
-			}
-			b.append(" };");
+		if(literalType != null && literalType.isArray()) {
+			// skip
 		} else {
+			if(isReferenced)
+				declareSyntheticVariable(literal, b);
 			toCollectionBuilderJavaStatement(literal, ImmutableList.Builder.class, b, isReferenced);
 		}
 	}
@@ -131,7 +122,7 @@ public class XbaseCompiler extends FeatureCallCompiler {
 		if(isReferenced)
 			declareSyntheticVariable(literal, b);
 		LightweightTypeReference literalType = batchTypeResolver.resolveTypes(literal).getActualType(literal);
-		if(literalType.isType(Map.class)) {
+		if(literalType != null && literalType.isType(Map.class)) {
 			for(XExpression element: literal.getElements()) {
 				internalToJavaStatement(((XBinaryOperation) element).getLeftOperand(), b, true);
 				internalToJavaStatement(((XBinaryOperation) element).getRightOperand(), b, true);
@@ -189,8 +180,14 @@ public class XbaseCompiler extends FeatureCallCompiler {
 	
 	protected LightweightTypeReference getCollectionElementType(XCollectionLiteral literal) {
 		LightweightTypeReference type = batchTypeResolver.resolveTypes(literal).getActualType(literal);
-		if(type.isArray()) 
-			return type.getComponentType();
+		if (type == null)
+			throw new IllegalStateException();
+		if(type.isArray()) {
+			LightweightTypeReference result = type.getComponentType();
+			if (result == null)
+				throw new IllegalStateException();
+			return result;
+		}
 		else if(type.isSubtypeOf(Collection.class) && !type.getTypeArguments().isEmpty()) 
 			return type.getTypeArguments().get(0).getInvariantBoundSubstitute();
 		return new ParameterizedTypeReference(type.getOwner(), getTypeReferences().findDeclaredType(Object.class, literal));
@@ -206,6 +203,46 @@ public class XbaseCompiler extends FeatureCallCompiler {
 	
 	protected void _toJavaExpression(XCollectionLiteral expr, ITreeAppendable b) {
 		b.trace(expr, false).append(getVarName(expr, b));
+	}
+	
+	protected void _toJavaExpression(XListLiteral literal, ITreeAppendable b) {
+		LightweightTypeReference literalType = batchTypeResolver.resolveTypes(literal).getActualType(literal);
+		if (literalType != null && literalType.isArray()) {
+			LightweightTypeReference expectedType = batchTypeResolver.resolveTypes(literal).getExpectedType(literal);
+			boolean skipTypeName = false;
+			if (expectedType != null && expectedType.isArray()) {
+				if (canUseArrayInitializer(literal)) {
+					skipTypeName = true;
+				}
+			}
+			if (!skipTypeName) {
+				b.append("new ");
+				getTypeReferenceSerializer().serialize(literalType.toTypeReference(), literal, b);
+				b.append(" ");
+			}
+			if (literal.getElements().isEmpty()) {
+				b.append("{}");
+			} else {
+				b.append("{ ");
+				boolean isFirst = true;
+				for(XExpression element: literal.getElements())  {
+					if(!isFirst)
+						b.append(", ");
+					isFirst = false;
+					internalToJavaExpression(element, b);
+				}
+				b.append(" }");
+			}
+			return;
+		}
+		b.trace(literal, false).append(getVarName(literal, b));
+	}
+
+	protected boolean canUseArrayInitializer(XListLiteral literal) {
+		if (literal.eContainingFeature() == XbasePackage.Literals.XVARIABLE_DECLARATION__RIGHT) {
+			return true;
+		}
+		return false;
 	}
 
 	@Override
@@ -253,6 +290,7 @@ public class XbaseCompiler extends FeatureCallCompiler {
 		return completeFeatureCallAppendable;
 	}
 	
+	@SuppressWarnings("deprecation")
 	@Override
 	protected void convertFunctionType(JvmTypeReference expectedType, final JvmTypeReference functionType,
 			ITreeAppendable appendable, Later expression, XExpression context) {
@@ -603,6 +641,7 @@ public class XbaseCompiler extends FeatureCallCompiler {
 		b.append(";");
 	}
 
+	@SuppressWarnings("deprecation")
 	protected JvmTypeReference appendVariableTypeAndName(XVariableDeclaration varDeclaration, ITreeAppendable appendable) {
 		if (!varDeclaration.isWriteable()) {
 			appendable.append("final ");
@@ -691,6 +730,7 @@ public class XbaseCompiler extends FeatureCallCompiler {
 		appendable.trace(expr.getDeclaredParam(), TypesPackage.Literals.JVM_FORMAL_PARAMETER__NAME, 0).append(varName);
 	}
 
+	@SuppressWarnings("deprecation")
 	protected JvmTypeReference getForLoopParameterType(XForLoopExpression expr) {
 		JvmTypeReference declaredType = expr.getDeclaredParam().getParameterType();
 		if (declaredType != null) {
@@ -709,6 +749,7 @@ public class XbaseCompiler extends FeatureCallCompiler {
 				ILocationData locationWithNewKeyword = getLocationWithNewKeyword(expr);
 				ITreeAppendable appendableWithNewKeyword = locationWithNewKeyword != null ? constructorCallAppendable.trace(locationWithNewKeyword) : constructorCallAppendable;
 				appendableWithNewKeyword.append("new ");
+				@SuppressWarnings("deprecation")
 				JvmTypeReference producedType = getTypeProvider().getType(expr);
 				serialize(producedType, expr, appendableWithNewKeyword.trace(expr, XbasePackage.Literals.XCONSTRUCTOR_CALL__CONSTRUCTOR, 0), false, false, true, false);
 				
@@ -852,6 +893,7 @@ public class XbaseCompiler extends FeatureCallCompiler {
 				// define synthetic name
 				name = "_switchValue";
 			}
+			@SuppressWarnings("deprecation")
 			JvmTypeReference typeReference = getTypeProvider().getType(expr.getSwitch());
 			b.newLine().append("final ");
 			serialize(typeReference, expr, b);
@@ -898,6 +940,7 @@ public class XbaseCompiler extends FeatureCallCompiler {
 				ITreeAppendable conditionAppendable = caseAppendable.trace(casePart.getCase(), true);
 				internalToJavaStatement(casePart.getCase(), conditionAppendable, true);
 				conditionAppendable.newLine().append("if (");
+				@SuppressWarnings("deprecation")
 				JvmTypeReference convertedType = getTypeProvider().getType(casePart.getCase());
 				if (getTypeReferences().is(convertedType, Boolean.TYPE) || getTypeReferences().is(convertedType, Boolean.class)) {
 					internalToJavaExpression(casePart.getCase(), conditionAppendable);
@@ -1019,12 +1062,10 @@ public class XbaseCompiler extends FeatureCallCompiler {
 			throw new IllegalStateException("Switch expression wasn't translated to Java statements before.");
 	}
 
-	@Inject
-	private Closures closures;
-	
 	protected void _toJavaStatement(final XClosure closure, final ITreeAppendable b, boolean isReferenced) {
 		if (!isReferenced)
 			throw new IllegalArgumentException("a closure definition does not cause any side-effects");
+		@SuppressWarnings("deprecation")
 		JvmTypeReference type = getTypeProvider().getType(closure);
 		b.newLine().append("final ");
 		serialize(type, closure, b);
@@ -1173,6 +1214,11 @@ public class XbaseCompiler extends FeatureCallCompiler {
 	
 	@Override
 	protected boolean isVariableDeclarationRequired(XExpression expr, ITreeAppendable b) {
+		if (expr instanceof XListLiteral) {
+			LightweightTypeReference type = batchTypeResolver.resolveTypes(expr).getActualType(expr);
+			if (type != null && type.isArray())
+				return false;
+		}
 		if (expr instanceof XCastedExpression) {
 			return false;
 		}
@@ -1188,7 +1234,8 @@ public class XbaseCompiler extends FeatureCallCompiler {
 		return super.isVariableDeclarationRequired(expr, b);
 	}
 	
-	protected Closures getClosures() {
+	@SuppressWarnings("deprecation")
+	protected org.eclipse.xtext.xbase.typing.Closures getClosures() {
 		return closures;
 	}
 }

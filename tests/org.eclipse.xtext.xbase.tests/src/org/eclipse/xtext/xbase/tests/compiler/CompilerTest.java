@@ -544,9 +544,7 @@ public class CompilerTest extends AbstractOutputComparingCompilerTests {
 
 	@Test public void testListLiteralAsArray() throws Exception {
 		assertCompilesTo(
-				"String[] _xlistliteral = null;\n" + 
-				"_xlistliteral = new String[] { \"foo\" };\n" + 
-				"final String[] x = _xlistliteral;",
+				"final String[] x = { \"foo\" };",
 				"{val String[] x = #['foo']}");
 	}
 
