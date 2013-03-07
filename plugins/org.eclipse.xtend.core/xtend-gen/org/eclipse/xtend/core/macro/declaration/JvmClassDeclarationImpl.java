@@ -217,7 +217,7 @@ public class JvmClassDeclarationImpl extends JvmTypeDeclarationImpl<JvmGenericTy
     return _findFirst;
   }
   
-  public MutableMethodDeclaration findMethod(final String name, final TypeReference[] parameterTypes) {
+  public MutableMethodDeclaration findMethod(final String name, final TypeReference... parameterTypes) {
     List<? extends MutableMemberDeclaration> _members = this.getMembers();
     Iterable<MutableMethodDeclaration> _filter = Iterables.<MutableMethodDeclaration>filter(_members, MutableMethodDeclaration.class);
     final Function1<MutableMethodDeclaration,Boolean> _function = new Function1<MutableMethodDeclaration,Boolean>() {

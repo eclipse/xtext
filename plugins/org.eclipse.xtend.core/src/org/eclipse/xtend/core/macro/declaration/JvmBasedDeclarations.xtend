@@ -246,7 +246,7 @@ class JvmClassDeclarationImpl extends JvmTypeDeclarationImpl<JvmGenericType> imp
 		members.filter(typeof(MutableFieldDeclaration)).findFirst[it.name == name]
 	}
 	
-	override findMethod(String name, TypeReference[] parameterTypes) {
+	override findMethod(String name, TypeReference... parameterTypes) {
 		members.filter(typeof(MutableMethodDeclaration)).findFirst[it.name == name && it.parameters.map[type].toList == parameterTypes.toList]
 	}
 
@@ -292,7 +292,7 @@ abstract class JvmExecutableDeclarationImpl<T extends JvmExecutable> extends Jvm
 		delegate.setVarArgs(isVarArgs)
 	}
 	
-	override addTypeParameter(String name, TypeReference[] upperBounds) {
+	override addTypeParameter(String name, TypeReference... upperBounds) {
 		val param = TypesFactory::eINSTANCE.createJvmTypeParameter
 		param.name = name
 		delegate.typeParameters.add(param)

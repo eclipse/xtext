@@ -8,7 +8,6 @@ import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.diagnostics.Diagnostic;
 import org.eclipse.xtext.xbase.lib.Extension;
 import org.junit.After;
-import org.junit.Ignore;
 import org.junit.Test;
 
 @SuppressWarnings("all")
@@ -1540,17 +1539,17 @@ public class QuickfixTest extends AbstractXtendUITestCase {
     _assertResolutionLabels.assertModelAfterQuickfix(_builder_1);
   }
   
-  @Ignore
   @Test
   public void unhandledCheckedException() {
+    this.builder.setSeverity(org.eclipse.xtext.xbase.validation.IssueCodes.UNHANDLED_EXCEPTION, "error");
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("class Foo {");
     _builder.newLine();
     _builder.append("\t");
-    _builder.append("def void bar|() {");
+    _builder.append("def void bar() {");
     _builder.newLine();
     _builder.append("\t\t");
-    _builder.append("throw new Exception()");
+    _builder.append("throw new Exception|()");
     _builder.newLine();
     _builder.append("\t");
     _builder.append("}");
@@ -1588,16 +1587,105 @@ public class QuickfixTest extends AbstractXtendUITestCase {
     _builder_2.append("throw new Exception()");
     _builder_2.newLine();
     _builder_2.append("\t\t");
-    _builder_2.append("} catch(Exception exc) {");
+    _builder_2.append("} catch (Exception exc) {");
     _builder_2.newLine();
     _builder_2.append("\t\t\t");
-    _builder_2.append("throw new RuntimeException(\"auto-generated try/catch\")");
+    _builder_2.append("throw new RuntimeException(\"auto-generated try/catch\", exc)");
     _builder_2.newLine();
     _builder_2.append("\t\t");
     _builder_2.append("}");
     _builder_2.newLine();
     _builder_2.append("\t");
     _builder_2.append("}");
+    _builder_2.newLine();
+    _builder_2.append("}");
+    _builder_2.newLine();
+    _assertModelAfterQuickfix.assertModelAfterQuickfix("Surround with try/catch block", _builder_2);
+  }
+  
+  @Test
+  public void unhandledCheckedExceptions() {
+    this.builder.setSeverity(org.eclipse.xtext.xbase.validation.IssueCodes.UNHANDLED_EXCEPTION, "warning");
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("class Foo {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def void bar() {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("m|");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def void m() throws java.io.IOException, java.net.URISyntaxException {}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    QuickfixTestBuilder _create = this.builder.create("Foo.xtend", _builder);
+    QuickfixTestBuilder _assertIssueCodes = _create.assertIssueCodes(org.eclipse.xtext.xbase.validation.IssueCodes.UNHANDLED_EXCEPTION);
+    QuickfixTestBuilder _assertResolutionLabels = _assertIssueCodes.assertResolutionLabels("Add throws declaration", "Surround with try/catch block");
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("import java.io.IOException");
+    _builder_1.newLine();
+    _builder_1.append("import java.net.URISyntaxException");
+    _builder_1.newLine();
+    _builder_1.newLine();
+    _builder_1.append("class Foo {");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("def void bar() throws IOException, URISyntaxException {");
+    _builder_1.newLine();
+    _builder_1.append("\t\t");
+    _builder_1.append("m");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("def void m() throws java.io.IOException, java.net.URISyntaxException {}");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    QuickfixTestBuilder _assertModelAfterQuickfix = _assertResolutionLabels.assertModelAfterQuickfix("Add throws declaration", _builder_1);
+    StringConcatenation _builder_2 = new StringConcatenation();
+    _builder_2.append("import java.io.IOException");
+    _builder_2.newLine();
+    _builder_2.append("import java.net.URISyntaxException");
+    _builder_2.newLine();
+    _builder_2.newLine();
+    _builder_2.append("class Foo {");
+    _builder_2.newLine();
+    _builder_2.append("\t");
+    _builder_2.append("def void bar() {");
+    _builder_2.newLine();
+    _builder_2.append("\t\t");
+    _builder_2.append("try {");
+    _builder_2.newLine();
+    _builder_2.append("\t\t\t");
+    _builder_2.append("m");
+    _builder_2.newLine();
+    _builder_2.append("\t\t");
+    _builder_2.append("} catch (IOException exc) {");
+    _builder_2.newLine();
+    _builder_2.append("\t\t\t");
+    _builder_2.append("throw new RuntimeException(\"auto-generated try/catch\", exc)");
+    _builder_2.newLine();
+    _builder_2.append("\t\t");
+    _builder_2.append("} catch (URISyntaxException exc) {");
+    _builder_2.newLine();
+    _builder_2.append("\t\t\t");
+    _builder_2.append("throw new RuntimeException(\"auto-generated try/catch\", exc)");
+    _builder_2.newLine();
+    _builder_2.append("\t\t");
+    _builder_2.append("}");
+    _builder_2.newLine();
+    _builder_2.append("\t");
+    _builder_2.append("}");
+    _builder_2.newLine();
+    _builder_2.append("\t");
+    _builder_2.append("def void m() throws java.io.IOException, java.net.URISyntaxException {}");
     _builder_2.newLine();
     _builder_2.append("}");
     _builder_2.newLine();

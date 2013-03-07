@@ -14,6 +14,7 @@ import java.util.Map;
 import java.util.Set;
 
 import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.common.types.JvmField;
@@ -788,8 +789,17 @@ public class XbaseTypeComputer implements ITypeComputer {
 						break;
 					}
 				if (!declarationFound)
-					state.addDiagnostic(new EObjectDiagnosticImpl(expressionState.getSeverity(IssueCodes.UNHANDLED_EXCEPTION), IssueCodes.UNHANDLED_EXCEPTION,
-							"Unhandled exception type " + thrownException.getSimpleName(), object, XbasePackage.Literals.XTHROW_EXPRESSION__EXPRESSION, -1, null));
+					state.addDiagnostic(new EObjectDiagnosticImpl(
+							expressionState.getSeverity(IssueCodes.UNHANDLED_EXCEPTION),
+							IssueCodes.UNHANDLED_EXCEPTION,
+							"Unhandled exception type " + thrownException.getSimpleName(),
+							object,
+							XbasePackage.Literals.XTHROW_EXPRESSION__EXPRESSION,
+							-1,
+							new String[] { 
+								EcoreUtil.getURI(thrownException.getType()).toString(),
+								EcoreUtil.getURI(object).toString()
+							}));
 			}
 		}
 	}

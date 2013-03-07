@@ -149,8 +149,12 @@ public class StackedResolvedTypes extends ResolvedTypes {
 				if (typeParameters != null && typeParameters.contains(unbound.getTypeParameter())) {
 					unbound.tryResolve();
 					if (!unbound.internalIsResolved()) {
-						unbound.acceptHint(new ParameterizedTypeReference(unbound.getOwner(), unbound.getTypeParameter()), 
-								BoundTypeArgumentSource.RESOLVED, unbound, VarianceInfo.INVARIANT, VarianceInfo.INVARIANT);
+						if (unbound.getExpression() instanceof XConstructorCall) {
+							unbound.resolve(); // resolve against constraints 
+						} else {
+							unbound.acceptHint(new ParameterizedTypeReference(unbound.getOwner(), unbound.getTypeParameter()), 
+									BoundTypeArgumentSource.RESOLVED, unbound, VarianceInfo.INVARIANT, VarianceInfo.INVARIANT);
+						}
 					}
 				} else {
 					LightweightTypeReference reference = unbound.copyInto(parent.getReferenceOwner());

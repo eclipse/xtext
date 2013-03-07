@@ -2,19 +2,39 @@ package org.eclipse.xtext.xbase.tests.jvmmodel;
 
 import com.google.inject.Inject;
 import org.eclipse.xtext.junit4.validation.ValidationTestHelper;
+import org.eclipse.xtext.preferences.IPreferenceValuesProvider.SingletonPreferenceValuesProvider;
+import org.eclipse.xtext.preferences.MapBasedPreferenceValues;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XbasePackage.Literals;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.tests.jvmmodel.AbstractJvmModelTest;
 import org.eclipse.xtext.xbase.validation.IssueCodes;
-import org.junit.Ignore;
+import org.junit.After;
+import org.junit.Before;
 import org.junit.Test;
 
-@Ignore("TODO implement exception validation")
 @SuppressWarnings("all")
 public class CheckExceptionValidationTest extends AbstractJvmModelTest {
   @Inject
   private ValidationTestHelper helper;
+  
+  private MapBasedPreferenceValues preferences;
+  
+  @Inject
+  public void setPreferences(final SingletonPreferenceValuesProvider prefProvider) {
+    MapBasedPreferenceValues _preferenceValues = prefProvider.getPreferenceValues(null);
+    this.preferences = _preferenceValues;
+  }
+  
+  @Before
+  public void setSeverity() {
+    this.preferences.put(IssueCodes.UNHANDLED_EXCEPTION, "error");
+  }
+  
+  @After
+  public void clearPreferences() {
+    this.preferences.clear();
+  }
   
   @Test
   public void testSimple() {

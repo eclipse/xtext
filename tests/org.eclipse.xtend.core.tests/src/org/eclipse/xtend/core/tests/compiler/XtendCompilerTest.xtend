@@ -1805,6 +1805,67 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 	}
 
 	@Test
+	def testConstructor_3() {
+		assertCompilesTo('''
+			class C<X extends java.io.IOException> {
+				new () throws X {
+				}
+				def m() {
+					new C
+				}
+			}
+		''', '''
+			import java.io.IOException;
+			import org.eclipse.xtext.xbase.lib.Exceptions;
+			
+			@SuppressWarnings("all")
+			public class C<X extends IOException> {
+			  public C() throws X {
+			  }
+			  
+			  public C<IOException> m() {
+			    try {
+			      C<IOException> _c = new C<IOException>();
+			      return _c;
+			    } catch (Throwable _e) {
+			      throw Exceptions.sneakyThrow(_e);
+			    }
+			  }
+			}
+		''')
+	}
+
+	@Test
+	def testConstructor_4() {
+		assertCompilesTo('''
+			class C<X extends java.io.IOException> {
+				new () throws X {
+				}
+				def void m() {
+					new C
+				}
+			}
+		''', '''
+			import java.io.IOException;
+			import org.eclipse.xtext.xbase.lib.Exceptions;
+			
+			@SuppressWarnings("all")
+			public class C<X extends IOException> {
+			  public C() throws X {
+			  }
+			  
+			  public void m() {
+			    try {
+			      new C<IOException>();
+			    } catch (Throwable _e) {
+			      throw Exceptions.sneakyThrow(_e);
+			    }
+			  }
+			}
+		''')
+	}
+
+	@Test
 	def testAnnotation() {
 		assertCompilesTo('''
 			package foo

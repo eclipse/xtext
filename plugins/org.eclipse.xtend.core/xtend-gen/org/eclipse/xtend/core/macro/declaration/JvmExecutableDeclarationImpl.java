@@ -109,7 +109,7 @@ public abstract class JvmExecutableDeclarationImpl<T extends JvmExecutable> exte
     _delegate.setVarArgs(isVarArgs);
   }
   
-  public MutableTypeParameterDeclaration addTypeParameter(final String name, final TypeReference[] upperBounds) {
+  public MutableTypeParameterDeclaration addTypeParameter(final String name, final TypeReference... upperBounds) {
     final JvmTypeParameter param = TypesFactory.eINSTANCE.createJvmTypeParameter();
     param.setName(name);
     T _delegate = this.getDelegate();
