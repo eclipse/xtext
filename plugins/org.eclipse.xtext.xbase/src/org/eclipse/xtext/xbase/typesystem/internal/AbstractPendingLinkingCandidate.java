@@ -37,6 +37,7 @@ import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XReturnExpression;
 import org.eclipse.xtext.xbase.XThrowExpression;
 import org.eclipse.xtext.xbase.XbasePackage;
+import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.scoping.batch.IIdentifiableElementDescription;
 import org.eclipse.xtext.xbase.typesystem.computation.ILinkingCandidate;
 import org.eclipse.xtext.xbase.typesystem.conformance.ConformanceHint;
@@ -44,8 +45,11 @@ import org.eclipse.xtext.xbase.typesystem.references.LightweightMergedBoundTypeA
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.OwnedConverter;
 import org.eclipse.xtext.xbase.typesystem.util.TypeParameterByConstraintSubstitutor;
+import org.eclipse.xtext.xbase.typesystem.util.TypeParameterSubstitutor;
 import org.eclipse.xtext.xbase.typesystem.util.VarianceInfo;
 import org.eclipse.xtext.xbase.validation.IssueCodes;
+
+import com.google.common.collect.Lists;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -167,6 +171,25 @@ public abstract class AbstractPendingLinkingCandidate<Expression extends XExpres
 	}
 	
 	public boolean validate(IAcceptor<? super AbstractDiagnostic> result) {
+		if (!validateVisibility(result)) {
+			return false;
+		}
+		if (!validateArity(result)) {
+			return false;
+		}
+		if (!validateTypeArity(result)) {
+			return false;
+		}
+		if (!validateTypeConformance(result)) {
+			return false;
+		}
+		if (!validateUnhandledExceptions(result)) {
+			return false;
+		}
+		return true;
+	}
+
+	protected boolean validateVisibility(IAcceptor<? super AbstractDiagnostic> result) {
 		if (!isVisible()) {
 			String message = String.format("The %1$s %2$s%3$s is not visible", 
 					getFeatureTypeName(),
@@ -180,7 +203,12 @@ public abstract class AbstractPendingLinkingCandidate<Expression extends XExpres
 					XbasePackage.Literals.XABSTRACT_FEATURE_CALL__FEATURE, -1, null);
 			result.accept(diagnostic);
 			return false;
-		} else if (getArityMismatch() != 0) {
+		}
+		return true;
+	}
+	
+	protected boolean validateArity(IAcceptor<? super AbstractDiagnostic> result) {
+		if (getArityMismatch() != 0) {
 			String message = String.format("Invalid number of arguments. The %1$s %2$s%3$s is not applicable for the arguments %4$s" , 
 					getFeatureTypeName(), 
 					getFeature().getSimpleName(), 
@@ -194,7 +222,12 @@ public abstract class AbstractPendingLinkingCandidate<Expression extends XExpres
 					XbasePackage.Literals.XABSTRACT_FEATURE_CALL__FEATURE, -1, null);
 			result.accept(diagnostic);
 			return false;
-		} else if (getTypeArityMismatch() != 0) {
+		}
+		return true;
+	}
+	
+	protected boolean validateTypeArity(IAcceptor<? super AbstractDiagnostic> result) {
+		if (getTypeArityMismatch() != 0) {
 			String message = String.format("Invalid number of type arguments. The %1$s %2$s%3$s is not applicable for the type arguments %4$s",
 					getFeatureTypeName(), 
 					getFeature().getSimpleName(), 
@@ -208,7 +241,12 @@ public abstract class AbstractPendingLinkingCandidate<Expression extends XExpres
 					XbasePackage.Literals.XABSTRACT_FEATURE_CALL__FEATURE, -1, null);
 			result.accept(diagnostic);
 			return false;
-		} else if(getTypeArgumentConformanceFailures(result) == 0) {
+		}
+		return true;
+	}
+	
+	protected boolean validateTypeConformance(IAcceptor<? super AbstractDiagnostic> result) {
+		if (getTypeArgumentConformanceFailures(result) == 0) {
 			// TODO use early exit computation
 			List<XExpression> arguments = getSyntacticArguments();
 			for(int i = 0; i < arguments.size(); i++) {
@@ -230,6 +268,59 @@ public abstract class AbstractPendingLinkingCandidate<Expression extends XExpres
 					return false;
 				}
 			}
+		}
+		return true;
+	}
+	
+	protected boolean validateUnhandledExceptions(IAcceptor<? super AbstractDiagnostic> result) {
+		if (!getState().isIgnored(IssueCodes.UNHANDLED_EXCEPTION) && getFeature() instanceof JvmExecutable) {
+			JvmExecutable executable = (JvmExecutable) getFeature();
+			if (!executable.getExceptions().isEmpty()) {
+				return validateUnhandledExceptions(executable, result);
+			}
+		}
+		return true;
+	}
+
+	protected boolean validateUnhandledExceptions(JvmExecutable executable, IAcceptor<? super AbstractDiagnostic> result) {
+		TypeParameterSubstitutor<?> substitutor = createArgumentTypeSubstitutor();
+		List<LightweightTypeReference> unhandledExceptions = null;
+		List<LightweightTypeReference> expectedExceptions = getState().getExpectedExceptions();
+		outer: for(JvmTypeReference typeReference: executable.getExceptions()) {
+			LightweightTypeReference exception = getState().getConverter().toLightweightReference(typeReference);
+			LightweightTypeReference resolvedException = substitutor.substitute(exception);
+			if (resolvedException.isSubtypeOf(Throwable.class) && !resolvedException.isSubtypeOf(RuntimeException.class)) {
+				for (LightweightTypeReference expectedException : expectedExceptions) {
+					if (expectedException.isAssignableFrom(resolvedException)) {
+						continue outer;
+					}
+				}
+				if (unhandledExceptions == null) {
+					unhandledExceptions = Lists.newArrayList(resolvedException);
+				} else {
+					unhandledExceptions.add(resolvedException);
+				}
+			}
+		}
+		if (unhandledExceptions != null) {
+			String message = null;
+			int count = unhandledExceptions.size();
+			if (count > 1) {
+				message = String.format("Unhandled exception types %s and %s", 
+						IterableExtensions.join(unhandledExceptions.subList(0, count - 1), ", "),
+						unhandledExceptions.get(count - 1));
+			} else {
+				message = String.format("Unhandled exception type %s", unhandledExceptions.get(0).getSimpleName());
+			}
+			AbstractDiagnostic diagnostic = new EObjectDiagnosticImpl(
+					getState().getSeverity(IssueCodes.UNHANDLED_EXCEPTION), 
+					IssueCodes.UNHANDLED_EXCEPTION,
+					message, 
+					getExpression(), 
+					XbasePackage.Literals.XABSTRACT_FEATURE_CALL__FEATURE, 
+					-1, null);	
+			result.accept(diagnostic);
+			return false;
 		}
 		return true;
 	}
