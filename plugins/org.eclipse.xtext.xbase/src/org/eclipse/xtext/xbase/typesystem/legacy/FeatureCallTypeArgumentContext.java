@@ -49,9 +49,11 @@ public class FeatureCallTypeArgumentContext implements ITypeArgumentContext {
 			List<LightweightTypeReference> typeArguments = resolveTypes.getActualTypeArguments(featureCall);
 			JvmTypeParameterDeclarator declarator = (JvmTypeParameterDeclarator) feature;
 			int idx = declarator.getTypeParameters().indexOf(parameter);
-			LightweightTypeReference bound = typeArguments.get(idx);
-			JvmTypeReference result = bound.toTypeReference();
-			return result;
+			if (idx < typeArguments.size()) {
+				LightweightTypeReference bound = typeArguments.get(idx);
+				JvmTypeReference result = bound.toTypeReference();
+				return result;
+			}
 		}
 		if (receiver != null) {
 			Map<JvmTypeParameter, LightweightMergedBoundTypeArgument> mapping = new DeclaratorTypeArgumentCollector().getTypeParameterMapping(receiver);
