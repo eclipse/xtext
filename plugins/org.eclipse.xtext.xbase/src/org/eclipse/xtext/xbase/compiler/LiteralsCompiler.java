@@ -21,7 +21,7 @@ import org.eclipse.xtext.xbase.XNumberLiteral;
 import org.eclipse.xtext.xbase.XStringLiteral;
 import org.eclipse.xtext.xbase.XTypeLiteral;
 import org.eclipse.xtext.xbase.compiler.output.ITreeAppendable;
-import org.eclipse.xtext.xbase.typing.NumberLiterals;
+import org.eclipse.xtext.xbase.typesystem.computation.NumberLiterals;
 
 import com.google.common.base.Joiner;
 import com.google.inject.Inject;
@@ -73,6 +73,7 @@ public class LiteralsCompiler extends TypeConvertingCompiler {
 	}
 	
 	public void _toJavaExpression(XStringLiteral expr, ITreeAppendable b) {
+		@SuppressWarnings("deprecation")
 		JvmTypeReference type = getTypeProvider().getType(expr);
 		if (getTypeReferences().is(type, Character.TYPE)) {
 			String javaString = Strings.convertToJavaString(expr.getValue());
@@ -117,6 +118,7 @@ public class LiteralsCompiler extends TypeConvertingCompiler {
 	}
 
 	public void _toJavaExpression(XNumberLiteral expr, ITreeAppendable b) {
+		@SuppressWarnings("deprecation")
 		JvmTypeReference type = getTypeProvider().getType(expr);
 		if(getTypeReferences().is(type, BigInteger.class)) {
 			BigInteger value = numberLiterals.toBigInteger(expr);
