@@ -15,17 +15,22 @@ import javax.inject.Inject
 import org.eclipse.emf.ecore.EObject
 import org.eclipse.xtend.core.jvmmodel.IXtendJvmAssociations
 import org.eclipse.xtend.core.macro.CompilationContextImpl
+import org.eclipse.xtend.core.xtend.XtendAnnotationType
 import org.eclipse.xtend.core.xtend.XtendClass
 import org.eclipse.xtend.core.xtend.XtendConstructor
+import org.eclipse.xtend.core.xtend.XtendEnum
+import org.eclipse.xtend.core.xtend.XtendEnumLiteral
 import org.eclipse.xtend.core.xtend.XtendField
 import org.eclipse.xtend.core.xtend.XtendFile
 import org.eclipse.xtend.core.xtend.XtendFunction
+import org.eclipse.xtend.core.xtend.XtendInterface
 import org.eclipse.xtend.core.xtend.XtendMember
 import org.eclipse.xtend.core.xtend.XtendParameter
 import org.eclipse.xtend.core.xtend.XtendTypeDeclaration
 import org.eclipse.xtend.lib.macro.declaration.AnnotationReference
 import org.eclipse.xtend.lib.macro.declaration.CompilationStrategy
 import org.eclipse.xtend.lib.macro.declaration.CompilationUnit
+import org.eclipse.xtend.lib.macro.declaration.MemberDeclaration
 import org.eclipse.xtend.lib.macro.declaration.MutableMemberDeclaration
 import org.eclipse.xtend.lib.macro.declaration.MutableNamedElement
 import org.eclipse.xtend.lib.macro.declaration.MutableParameterDeclaration
@@ -34,7 +39,6 @@ import org.eclipse.xtend.lib.macro.declaration.MutableTypeParameterDeclaration
 import org.eclipse.xtend.lib.macro.declaration.Type
 import org.eclipse.xtend.lib.macro.declaration.TypeReference
 import org.eclipse.xtend.lib.macro.declaration.Visibility
-import org.eclipse.xtend.lib.macro.services.Problem
 import org.eclipse.xtend.lib.macro.services.ProblemSupport
 import org.eclipse.xtend.lib.macro.services.TypeReferenceProvider
 import org.eclipse.xtext.common.types.JvmAnnotationAnnotationValue
@@ -78,11 +82,6 @@ import org.eclipse.xtext.xbase.typesystem.legacy.StandardTypeReferenceOwner
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference
 import org.eclipse.xtext.xbase.typesystem.references.OwnedConverter
 import org.eclipse.xtext.xbase.typesystem.util.CommonTypeComputationServices
-import org.eclipse.xtend.core.xtend.XtendInterface
-import org.eclipse.xtend.lib.macro.declaration.MemberDeclaration
-import org.eclipse.xtend.core.xtend.XtendAnnotationType
-import org.eclipse.xtend.core.xtend.XtendEnum
-import org.eclipse.xtend.core.xtend.XtendEnumLiteral
 
 class CompilationUnitImpl implements CompilationUnit {
 	
@@ -108,10 +107,6 @@ class CompilationUnitImpl implements CompilationUnit {
 
 	override getSourceTypeDeclarations() {
 		xtendFile.xtendTypes.map[toXtendTypeDeclaration(it)]
-	}
-
-	def getGeneratedTypeDeclarations() {
-		xtendFile.eResource.contents.filter(typeof(JvmDeclaredType)).map[toTypeDeclaration(it)].toList
 	}
 
 	boolean canceled = false
@@ -140,11 +135,11 @@ class CompilationUnitImpl implements CompilationUnit {
 	Map<EObject, Object> identityCache = newHashMap
 	OwnedConverter typeRefConverter
 	
-	def getJvmAssociations() {
+	def IXtendJvmAssociations getJvmAssociations() {
 		return associations
 	}
 	
-	def getTypeReferences() {
+	def TypeReferences getTypeReferences() {
 		typeReferences
 	}
 	
@@ -413,7 +408,7 @@ class CompilationUnitImpl implements CompilationUnit {
 	}
 	
 	
-	def translateAnnotationValue(JvmAnnotationValue value) {
+	def Object translateAnnotationValue(JvmAnnotationValue value) {
 		val List<?> result = switch value {
 			JvmTypeAnnotationValue : value.values.map[toTypeReference(it)]
 			JvmAnnotationAnnotationValue : value.values.map[toAnnotationReference(it)]
@@ -434,7 +429,7 @@ class CompilationUnitImpl implements CompilationUnit {
 		return result.head
 	}
 	
-	def evaluate(XExpression expression) {
+	def Object evaluate(XExpression expression) {
 		val result = interpreter.evaluate(expression)
 		if (result.exception != null)
 			throw result.exception
@@ -443,30 +438,3 @@ class CompilationUnitImpl implements CompilationUnit {
 	
 }
 
-class ProblemImpl implements Problem {
-	
-	String id
-	String message
-	Problem$Severity severity	
-	
-	new(String id,
-	String message,
-	Problem$Severity severity) {
-		this.id = id
-		this.message = message
-		this.severity = severity
-	}
-
-	override getId() {
-		return id
-	}
-	
-	override getMessage() {
-		return message
-	}
-	
-	override getSeverity() {
-		return severity
-	}
-	
-}

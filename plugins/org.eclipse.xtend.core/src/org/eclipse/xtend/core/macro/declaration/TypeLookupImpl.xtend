@@ -51,12 +51,13 @@ class TypeLookupImpl implements TypeLookup {
 	}
 	
 	private def JvmDeclaredType recursiveFindType(String qualifiedName, Iterable<? extends JvmDeclaredType> typeDeclarations) {
+		val char dot = '.'
 		for (type : typeDeclarations) {
 			val name = type.getQualifiedName('.')
 			if (qualifiedName == name) {
 				return type
 			}
-			if (qualifiedName.startsWith(name)) {
+			if (qualifiedName.startsWith(name) && qualifiedName.charAt(name.length) == dot) {
 				return recursiveFindType(qualifiedName, type.members.filter(typeof(JvmDeclaredType)))
 			}
 		}

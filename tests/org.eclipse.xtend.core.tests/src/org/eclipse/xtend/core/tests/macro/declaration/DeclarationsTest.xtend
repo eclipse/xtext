@@ -65,7 +65,7 @@ class DeclarationsTest extends AbstractXtendTestCase {
 			assertEquals('Serializable', clazz.implementedInterfaces.head.toString)
 			val field = clazz.members.head as FieldDeclaration
 			assertEquals('foo', field.name)
-			assertSame(generatedTypeDeclarations.head, field.type.type)
+			assertSame(typeLookup.findClass('foo.MyClass'), field.type.type)
 		]
 	}
 	
@@ -89,7 +89,7 @@ class DeclarationsTest extends AbstractXtendTestCase {
 		''').asCompilationUnit [
 			assertEquals('foo', packageName)
 			val clazz = sourceTypeDeclarations.head as ClassDeclaration
-			val genClazz = generatedTypeDeclarations.head as MutableClassDeclaration
+			val genClazz = typeLookup.findClass('foo.MyClass')
 			
 			assertEquals('foo.MyClass', clazz.name)
 			assertNull(clazz.superclass)
@@ -152,7 +152,7 @@ class DeclarationsTest extends AbstractXtendTestCase {
 			}
 		}
 		''').asCompilationUnit [
-			val genClazz = generatedTypeDeclarations.head as MutableClassDeclaration
+			val genClazz = typeLookup.findClass('foo.MyClass')
 			
 			genClazz.addMethod('newMethod') [
 				returnType = (genClazz.compilationUnit as CompilationUnitImpl).typeReferenceProvider.string 
@@ -215,13 +215,13 @@ class DeclarationsTest extends AbstractXtendTestCase {
 		
 		class BaseClass implements InterfaceA {
 		}
-		class SubTyoe extends BaseClass implements InterfaceA {
+		class SubType extends BaseClass implements InterfaceA {
 		}
 		interface InterfaceA {}
 		interface InterfaceB {}
 		''').asCompilationUnit [
 			val baseClass = sourceTypeDeclarations.get(0) as ClassDeclaration
-			val subClass = generatedTypeDeclarations.get(1) as ClassDeclaration
+			val subClass = typeLookup.findClass('foo.SubType')
 			val interfaceA = sourceTypeDeclarations.get(2) as InterfaceDeclaration
 			val interfaceB = sourceTypeDeclarations.get(3) as InterfaceDeclaration
 			
