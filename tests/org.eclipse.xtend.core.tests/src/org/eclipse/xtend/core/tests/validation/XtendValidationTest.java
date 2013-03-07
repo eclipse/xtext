@@ -33,14 +33,10 @@ import org.eclipse.xtend.core.xtend.XtendPackage;
 import org.eclipse.xtend.core.xtend.XtendTypeDeclaration;
 import org.eclipse.xtext.common.types.TypesPackage;
 import org.eclipse.xtext.junit4.validation.ValidationTestHelper;
-import org.eclipse.xtext.preferences.IPreferenceValuesProvider.SingletonPreferenceValuesProvider;
-import org.eclipse.xtext.preferences.MapBasedPreferenceValues;
 import org.eclipse.xtext.resource.XtextResourceSet;
 import org.eclipse.xtext.util.StringInputStream;
 import org.eclipse.xtext.xbase.XBlockExpression;
 import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotationsPackage;
-import org.junit.After;
-import org.junit.Before;
 import org.junit.Test;
 
 import com.google.inject.Inject;
@@ -52,19 +48,6 @@ public class XtendValidationTest extends AbstractXtendTestCase {
 
 	@Inject
 	protected ValidationTestHelper helper;
-	
-	protected MapBasedPreferenceValues preferences;
-	
-	@Inject
-	public void setPreferences(SingletonPreferenceValuesProvider prefProvider) {
-		preferences = prefProvider.getPreferenceValues(null);
-	}
-	
-	@Before
-	@After
-	public void clearPreferences() {
-		preferences.clear();
-	}
 	
 	@Test public void testExtensionMayNotBePrimitive_01() throws Exception {
 		XtendClass clazz = clazz("class Z { extension int x = 1 }");
@@ -1226,42 +1209,6 @@ public class XtendValidationTest extends AbstractXtendTestCase {
 		helper.assertNoIssues(clazz);
 	}
 	
-	@Test public void testExceptionInMethod() throws Exception {
-		preferences.put(UNHANDLED_EXCEPTION, "error");
-		XtendFile file = file("class foo { def bar() { throw new Exception() }}");
-		helper.assertError(file, XTHROW_EXPRESSION, UNHANDLED_EXCEPTION);
-	}
-	
-	@Test public void testExceptionInMethod_1() throws Exception {
-		preferences.put(UNHANDLED_EXCEPTION, "error");
-		XtendFile file = file("class foo { def bar() throws Exception { throw new Exception() }}");
-		helper.assertNoError(file, UNHANDLED_EXCEPTION);
-	}
-	
-	@Test public void testExceptionInMethod_2() throws Exception {
-		preferences.put(UNHANDLED_EXCEPTION, "error");
-		XtendFile file = file("class foo { def bar() throws RuntimeException, Exception { throw new Exception() }}");
-		helper.assertNoError(file, UNHANDLED_EXCEPTION);
-	}
-	
-	@Test public void testExceptionInConstructor() throws Exception {
-		preferences.put(UNHANDLED_EXCEPTION, "error");
-		XtendFile file = file("class foo { new() { throw new Exception() }}");
-		helper.assertError(file, XTHROW_EXPRESSION, UNHANDLED_EXCEPTION);
-	}
-	
-	@Test public void testExceptionInConstructor_1() throws Exception {
-		preferences.put(UNHANDLED_EXCEPTION, "error");
-		XtendFile file = file("class foo { new() throws Exception { throw new Exception() }}");
-		helper.assertNoError(file, UNHANDLED_EXCEPTION);
-	}
-	
-	@Test public void testExceptionInConstructor_2() throws Exception {
-		preferences.put(UNHANDLED_EXCEPTION, "error");
-		XtendFile file = file("class foo { new() throws RuntimeException, Exception { throw new Exception() }}");
-		helper.assertNoError(file, UNHANDLED_EXCEPTION);
-	}
-
 	@Test public void testExceptionInMethodIgnored() throws Exception {
 		XtendFile file = file("class foo { def bar() { throw new Exception() }}");
 		helper.assertNoError(file, UNHANDLED_EXCEPTION);

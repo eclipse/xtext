@@ -7,6 +7,8 @@
  *******************************************************************************/
 package org.eclipse.xtend.core.tests.validation;
 
+import static org.eclipse.xtext.xbase.validation.IssueCodes.*;
+
 import java.util.List;
 
 import org.eclipse.xtend.core.tests.AbstractXtendTestCase;
@@ -462,5 +464,19 @@ public class FeatureCallValidationTest extends AbstractXtendTestCase {
 		XtendClass clazz = clazz("class X { def <T extends CharSequence, U extends T> T foo() {} var bar = <CharSequence, String>foo }");
 		helper.assertNoError(clazz, 
 				org.eclipse.xtext.xbase.validation.IssueCodes.TYPE_BOUNDS_MISSMATCH);
+	}
+	
+	@Test
+	@Ignore("TODO improve error message - shouldn't be Could not resolve reference")
+	public void testInvalidReceiverForExtension_01() throws Exception {
+		XtendClass clazz = clazz("class X { def void m() { ''.toList } }");
+		helper.assertError(clazz, XbasePackage.Literals.XMEMBER_FEATURE_CALL, INCOMPATIBLE_TYPES, "Iterable<Object>", "Object[]", "String", "receiver");
+	}
+	
+	@Test
+	@Ignore("TODO improve error message - shouldn't be Could not resolve reference")
+	public void testInvalidReceiverForExtension_02() throws Exception {
+		XtendClass clazz = clazz("class X { def void m() { var it = '' toList } }");
+		helper.assertError(clazz, XbasePackage.Literals.XFEATURE_CALL, INCOMPATIBLE_TYPES, "Iterable<Object>", "Object[]", "String", "first", "argument");
 	}
 }
