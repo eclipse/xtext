@@ -110,24 +110,25 @@ public class RichStringFormatter {
         if (_and_1) {
           _xifexpression = 1;
         } else {
-          int _xifexpression_1 = (int) 0;
-          boolean _and_2 = false;
-          if (!canIndent) {
-            _and_2 = false;
-          } else {
-            Line _last_1 = IterableExtensions.<Line>last(lines);
-            boolean _equals_1 = ObjectExtensions.operator_equals(line, _last_1);
-            _and_2 = (canIndent && _equals_1);
-          }
-          if (_and_2) {
-            int _minus = (-1);
-            _xifexpression_1 = _minus;
-          } else {
-            _xifexpression_1 = 0;
-          }
-          _xifexpression = _xifexpression_1;
+          _xifexpression = 0;
         }
-        final int indentChange = _xifexpression;
+        final int increaseIndentationChange = _xifexpression;
+        int _xifexpression_1 = (int) 0;
+        boolean _and_2 = false;
+        if (!canIndent) {
+          _and_2 = false;
+        } else {
+          Line _last_1 = IterableExtensions.<Line>last(lines);
+          boolean _equals_1 = ObjectExtensions.operator_equals(line, _last_1);
+          _and_2 = (canIndent && _equals_1);
+        }
+        if (_and_2) {
+          int _minus = (-1);
+          _xifexpression_1 = _minus;
+        } else {
+          _xifexpression_1 = 0;
+        }
+        final int decraseIndentationChange = _xifexpression_1;
         int _xifexpression_2 = (int) 0;
         boolean _isLeadingSemanticNewLine = line.isLeadingSemanticNewLine();
         if (_isLeadingSemanticNewLine) {
@@ -162,7 +163,7 @@ public class RichStringFormatter {
             RuntimeException _runtimeException = new RuntimeException();
             _xifexpression_4 = _runtimeException;
           }
-          NewLineData _newLineData = new NewLineData(nloffset, nllength, indentChange, _xifexpression_4, 0);
+          NewLineData _newLineData = new NewLineData(nloffset, nllength, increaseIndentationChange, decraseIndentationChange, _xifexpression_4, 0);
           doc.operator_add(_newLineData);
         } else {
           RuntimeException _xifexpression_5 = null;
@@ -171,7 +172,7 @@ public class RichStringFormatter {
             RuntimeException _runtimeException_1 = new RuntimeException();
             _xifexpression_5 = _runtimeException_1;
           }
-          NewLineData _newLineData_1 = new NewLineData(nloffset, nllength, indentChange, _xifexpression_5, 1);
+          NewLineData _newLineData_1 = new NewLineData(nloffset, nllength, increaseIndentationChange, decraseIndentationChange, _xifexpression_5, 1);
           doc.operator_add(_newLineData_1);
         }
         List<Chunk> _chunks = line.getChunks();
@@ -215,7 +216,7 @@ public class RichStringFormatter {
             RuntimeException _runtimeException_2 = new RuntimeException();
             _xifexpression_6 = _runtimeException_2;
           }
-          WhitespaceData _whitespaceData = new WhitespaceData(offset, length, 0, _xifexpression_6, text);
+          WhitespaceData _whitespaceData = new WhitespaceData(offset, length, 0, 0, _xifexpression_6, text);
           doc.operator_add(_whitespaceData);
         }
       }

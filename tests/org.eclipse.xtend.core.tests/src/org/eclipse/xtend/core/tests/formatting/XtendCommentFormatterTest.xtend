@@ -152,7 +152,7 @@ class XtendCommentFormatterTest extends AbstractXtendFormatterTest {
 	@Test def formatSLCommentBeforeStatement21() {
 		assertFormatted('''
 			class bar {
-			// my comment
+				// my comment
 			}
 		''', '''
 			class bar{
@@ -174,7 +174,7 @@ class XtendCommentFormatterTest extends AbstractXtendFormatterTest {
 	@Test def formatMLCommentBeforeStatement21() {
 		assertFormatted('''
 			class bar {
-			/* my comment */
+				/* my comment */
 			}
 		''', '''
 			class bar{

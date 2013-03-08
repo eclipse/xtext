@@ -131,6 +131,10 @@ class HiddenLeafAccess {
 	def int getNewLinesInComments() {
 		leafs.filter(typeof(CommentInfo)).fold(0, [x, i | x + i.newLines])
 	}
+
+	def containsComment(){
+		leafs.filter(typeof(CommentInfo)).size > 0
+	}
 }
 
 @Data abstract class LeafInfo {

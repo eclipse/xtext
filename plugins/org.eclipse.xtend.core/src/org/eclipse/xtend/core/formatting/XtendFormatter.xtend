@@ -149,7 +149,10 @@ public class XtendFormatter extends XbaseFormatter2 {
 				}
 			}
 		} else {
-			format += clazzOpenBrace.append[newLine]
+			if(clazzOpenBrace.hiddenLeafsAfter.containsComment)
+				format += clazzOpenBrace.append[newLine increaseIndentation decreaseIndentation]
+			else
+				format += clazzOpenBrace.append[newLine]
 		}
 	}
 

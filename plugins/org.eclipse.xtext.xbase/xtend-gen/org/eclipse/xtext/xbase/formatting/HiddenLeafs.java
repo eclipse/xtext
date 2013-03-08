@@ -98,6 +98,14 @@ public class HiddenLeafs {
     return (_fold).intValue();
   }
   
+  public boolean containsComment() {
+    List<LeafInfo> _leafs = this.getLeafs();
+    Iterable<CommentInfo> _filter = Iterables.<CommentInfo>filter(_leafs, CommentInfo.class);
+    int _size = IterableExtensions.size(_filter);
+    boolean _greaterThan = (_size > 0);
+    return _greaterThan;
+  }
+
   public HiddenLeafs(final int offset) {
     super();
     this._offset = offset;

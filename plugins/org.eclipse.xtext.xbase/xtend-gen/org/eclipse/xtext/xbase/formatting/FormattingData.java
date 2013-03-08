@@ -18,10 +18,16 @@ public abstract class FormattingData {
     return this._length;
   }
   
-  private final int _indentationChange;
+  private final int _increaseIndentationChange;
   
-  public int getIndentationChange() {
-    return this._indentationChange;
+  public int getIncreaseIndentationChange() {
+    return this._increaseIndentationChange;
+  }
+
+  private final int _decreaseIndentationChange;
+
+  public int getDecreaseIndentationChange() {
+    return this._decreaseIndentationChange;
   }
   
   private final Throwable _trace;
@@ -32,11 +38,19 @@ public abstract class FormattingData {
   
   public abstract boolean isEmpty();
   
-  public FormattingData(final int offset, final int length, final int indentationChange, final Throwable trace) {
+  public int getIndentationChange() {
+    int _increaseIndentationChange = this.getIncreaseIndentationChange();
+    int _decreaseIndentationChange = this.getDecreaseIndentationChange();
+    int _plus = (_increaseIndentationChange + _decreaseIndentationChange);
+    return _plus;
+  }
+
+  public FormattingData(final int offset, final int length, final int increaseIndentationChange, final int decreaseIndentationChange, final Throwable trace) {
     super();
     this._offset = offset;
     this._length = length;
-    this._indentationChange = indentationChange;
+    this._increaseIndentationChange = increaseIndentationChange;
+    this._decreaseIndentationChange = decreaseIndentationChange;
     this._trace = trace;
   }
   
@@ -46,7 +60,8 @@ public abstract class FormattingData {
     int result = 1;
     result = prime * result + _offset;
     result = prime * result + _length;
-    result = prime * result + _indentationChange;
+    result = prime * result + _increaseIndentationChange;
+    result = prime * result + _decreaseIndentationChange;
     result = prime * result + ((_trace== null) ? 0 : _trace.hashCode());
     return result;
   }
@@ -64,7 +79,9 @@ public abstract class FormattingData {
       return false;
     if (other._length != _length)
       return false;
-    if (other._indentationChange != _indentationChange)
+    if (other._increaseIndentationChange != _increaseIndentationChange)
+      return false;
+    if (other._decreaseIndentationChange != _decreaseIndentationChange)
       return false;
     if (_trace == null) {
       if (other._trace != null)

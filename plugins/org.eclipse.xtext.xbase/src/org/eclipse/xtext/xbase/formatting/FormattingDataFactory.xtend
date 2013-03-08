@@ -24,9 +24,9 @@ class FormattingDataFactory {
 		Void key, FormattingDataInit it) {
 		[ FormattableDocument doc |
 			if (leafs.newLinesInComments == 0 && (newLines == 0 || space == ""))
-				return newWhitespaceData(leafs, space, indentationChange, doc.debugConflicts)
+				return newWhitespaceData(leafs, space, increaseIndentationChange, decreaseIndentationChange, doc.debugConflicts)
 			else
-				return newNewLineData(leafs, newLines, newLines, indentationChange, doc.debugConflicts)
+				return newNewLineData(leafs, newLines, newLines, increaseIndentationChange, decreaseIndentationChange, doc.debugConflicts)
 		]
 	}
 
@@ -40,7 +40,7 @@ class FormattingDataFactory {
 			val preserve = doc.cfg.get(preserveBlankLines)
 			val min = blankline + 1
 			val max = Math::max(preserve + 1, min)
-			newNewLineData(leafs, min, max, indentationChange, doc.debugConflicts)
+			newNewLineData(leafs, min, max, increaseIndentationChange, decreaseIndentationChange, doc.debugConflicts)
 		]
 	}
 
@@ -52,7 +52,7 @@ class FormattingDataFactory {
 		[ FormattableDocument doc |
 			val newLine = doc.cfg.get(key)
 			val preserve = doc.cfg.get(preserveNewLines)
-			newNewLineData(leafs, if (newLine) 1 else 0, if (preserve || newLine) 1 else 0, indentationChange,
+			newNewLineData(leafs, if (newLine) 1 else 0, if (preserve || newLine) 1 else 0, increaseIndentationChange, decreaseIndentationChange,
 				doc.debugConflicts)
 		]
 	}
@@ -65,7 +65,7 @@ class FormattingDataFactory {
 		[ FormattableDocument doc |
 			val newLine = doc.cfg.get(key)
 			val minmax = if (newLine) 1 else 0
-			newNewLineData(leafs, minmax, minmax, indentationChange, doc.debugConflicts)
+			newNewLineData(leafs, minmax, minmax, increaseIndentationChange, decreaseIndentationChange, doc.debugConflicts)
 		]
 	}
 
@@ -81,14 +81,15 @@ class FormattingDataFactory {
 		WhitespaceKey key, FormattingDataInit it) {
 		[ FormattableDocument doc |
 			val space = doc.cfg.get(key)
-			newWhitespaceData(leafs, if (space) " " else "", indentationChange, doc.debugConflicts)
+			newWhitespaceData(leafs, if (space) " " else "", increaseIndentationChange, decreaseIndentationChange, doc.debugConflicts)
 		]
 	}
 
 	def protected Iterable<FormattingData> newWhitespaceData(
 		HiddenLeafs leafs,
 		String space,
-		int indentationChange,
+		int increaseIndentationChange,
+		int decreaseIndentationChange,
 		boolean trace
 	) {
 		val result = <FormattingData>newArrayList
@@ -96,7 +97,7 @@ class FormattingDataFactory {
 		for (leaf : leafs.leafs)
 			switch leaf {
 				WhitespaceInfo: {
-					result += new WhitespaceData(leaf.offset, leaf.length, if(isFirst) indentationChange else 0,
+					result += new WhitespaceData(leaf.offset, leaf.length, if(isFirst) increaseIndentationChange else 0, if(isFirst) decreaseIndentationChange else 0,
 						if (trace) new RuntimeException, space)
 					isFirst = false
 				}
@@ -110,7 +111,8 @@ class FormattingDataFactory {
 		HiddenLeafs leafs,
 		int minNewLines,
 		int maxNewLines,
-		int indentationChange,
+		int increaseIndentationChange,
+		int decreaseIndentationChange,
 		boolean trace
 	) {
 		val result = <FormattingData>newArrayList
@@ -118,9 +120,10 @@ class FormattingDataFactory {
 		for (leaf : leafs.leafs)
 			switch leaf {
 				WhitespaceInfo: {
+					val equalIndentationChange = increaseIndentationChange == decreaseIndentationChange * -1
 					if (leaf.trailingComment?.trailing && !leaf.trailingComment?.multiline) {
 						val space = if (leaf.offset == 0) "" else " "
-						result += new WhitespaceData(leaf.offset, leaf.length, 0, if (trace) new RuntimeException(), space)
+						result += new WhitespaceData(leaf.offset, leaf.length, 0 , 0, if (trace) new RuntimeException(), space)
 					} else if (!applied) {
 						var newLines = Math::min(Math::max(leafs.newLines, minNewLines), maxNewLines)
 						if (newLines < 1 && leaf.offset > 0 &&
@@ -129,16 +132,22 @@ class FormattingDataFactory {
 						if (leaf.leadingComment?.endsWithNewLine)
 							newLines = newLines - 1
 						if (!leaf.leadingComment?.endsWithNewLine && newLines == 0)
-							result += new WhitespaceData(leaf.offset, leaf.length, indentationChange,
+							result += new WhitespaceData(leaf.offset, leaf.length, increaseIndentationChange, decreaseIndentationChange,
 								if (trace) new RuntimeException(), if (leaf.offset == 0) "" else " ")
 						else
-							result += new NewLineData(leaf.offset, leaf.length, indentationChange, if (trace) new RuntimeException(), newLines)
+							if(equalIndentationChange && leafs.leafs.last != leaf)
+								result += new NewLineData(leaf.offset, leaf.length, increaseIndentationChange, decreaseIndentationChange, if (trace) new RuntimeException(), newLines)
+							else
+								result += new NewLineData(leaf.offset, leaf.length, if(equalIndentationChange) 0  else increaseIndentationChange, if(equalIndentationChange) 0 else decreaseIndentationChange, if (trace) new RuntimeException(), newLines)
 						applied = true
 					} else {
 						var newLines = 1
 						if (leaf.leadingComment?.endsWithNewLine)
 							newLines = newLines - 1
-						result += new NewLineData(leaf.offset, leaf.length, 0, if (trace) new RuntimeException(), newLines)
+						if(equalIndentationChange && leafs.leafs.last != leaf)
+							result += new NewLineData(leaf.offset, leaf.length, increaseIndentationChange, decreaseIndentationChange, if (trace) new RuntimeException(), newLines)
+						else
+							result += new NewLineData(leaf.offset, leaf.length, 0, 0, if (trace) new RuntimeException(), newLines)
 					}
 				}
 				CommentInfo: {
@@ -198,7 +207,8 @@ class FormattingDataFactory {
 class FormattingDataInit {
 	public String space = null
 	public int newLines = 0
-	public int indentationChange = 0
+	public int increaseIndentationChange = 0
+	public int decreaseIndentationChange = 0
 	public PreferenceKey key = null
 
 	def void cfg(PreferenceKey key) {
@@ -218,11 +228,11 @@ class FormattingDataInit {
 	}
 
 	def void increaseIndentation() {
-		indentationChange = indentationChange + 1
+		increaseIndentationChange = increaseIndentationChange + 1
 	}
 
 	def void decreaseIndentation() {
-		indentationChange = indentationChange - 1
+		decreaseIndentationChange = decreaseIndentationChange - 1
 	}
 
 	override String toString() {

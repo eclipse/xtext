@@ -472,13 +472,27 @@ public class XtendFormatter extends XbaseFormatter2 {
         }
       }
     } else {
-      final Procedure1<FormattingDataInit> _function_3 = new Procedure1<FormattingDataInit>() {
-          public void apply(final FormattingDataInit it) {
-            it.newLine();
-          }
-        };
-      Function1<? super FormattableDocument,? extends Iterable<FormattingData>> _append_2 = this._formattingDataFactory.append(clazzOpenBrace, _function_3);
-      format.operator_add(_append_2);
+      HiddenLeafs _hiddenLeafsAfter = this._hiddenLeafAccess.getHiddenLeafsAfter(clazzOpenBrace);
+      boolean _containsComment = _hiddenLeafsAfter.containsComment();
+      if (_containsComment) {
+        final Procedure1<FormattingDataInit> _function_3 = new Procedure1<FormattingDataInit>() {
+            public void apply(final FormattingDataInit it) {
+              it.newLine();
+              it.increaseIndentation();
+              it.decreaseIndentation();
+            }
+          };
+        Function1<? super FormattableDocument,? extends Iterable<FormattingData>> _append_2 = this._formattingDataFactory.append(clazzOpenBrace, _function_3);
+        format.operator_add(_append_2);
+      } else {
+        final Procedure1<FormattingDataInit> _function_4 = new Procedure1<FormattingDataInit>() {
+            public void apply(final FormattingDataInit it) {
+              it.newLine();
+            }
+          };
+        Function1<? super FormattableDocument,? extends Iterable<FormattingData>> _append_3 = this._formattingDataFactory.append(clazzOpenBrace, _function_4);
+        format.operator_add(_append_3);
+      }
     }
   }
   

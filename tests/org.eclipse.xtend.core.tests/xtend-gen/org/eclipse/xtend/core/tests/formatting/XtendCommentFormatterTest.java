@@ -237,6 +237,7 @@ public class XtendCommentFormatterTest extends AbstractXtendFormatterTest {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("class bar {");
     _builder.newLine();
+    _builder.append("\t");
     _builder.append("// my comment");
     _builder.newLine();
     _builder.append("}");
@@ -271,6 +272,7 @@ public class XtendCommentFormatterTest extends AbstractXtendFormatterTest {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("class bar {");
     _builder.newLine();
+    _builder.append("\t");
     _builder.append("/* my comment */");
     _builder.newLine();
     _builder.append("}");

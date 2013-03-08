@@ -216,7 +216,6 @@ public class XtendFormatterBugTests extends AbstractXtendFormatterTest {
     this.assertFormatted(_builder);
   }
   
-  @Ignore
   @Test
   public void testBug400025() {
     StringConcatenation _builder = new StringConcatenation();
@@ -230,7 +229,16 @@ public class XtendFormatterBugTests extends AbstractXtendFormatterTest {
     this.assertFormattedExpression(_builder);
   }
   
-  @Ignore
+  @Test
+  public void testBug400025_11() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("{ // foo");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    this.assertFormattedExpression(_builder);
+  }
+
   @Test
   public void testBug400025_1() {
     StringConcatenation _builder = new StringConcatenation();
@@ -250,24 +258,38 @@ public class XtendFormatterBugTests extends AbstractXtendFormatterTest {
     this.assertFormattedExpression(_builder);
   }
   
-  @Ignore
   @Test
   public void testBug400025_2() {
     StringConcatenation _builder = new StringConcatenation();
-    _builder.append("{");
+    _builder.append("class bar {");
     _builder.newLine();
     _builder.append("\t");
     _builder.append("// foo");
     _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    this.assertFormatted(_builder);
+  }
+
+  @Ignore("Conflict")
+  @Test
+  public void testBug400025_3() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("{");
+    _builder.newLine();
     _builder.append("\t");
     _builder.append("val foo = 42");
     _builder.newLine();
+    _builder.append("\t");
+    _builder.append("// foo");
+    _builder.newLine();
     _builder.append("}");
+    _builder.newLine();
+    _builder.append("val bar = 42");
     _builder.newLine();
     this.assertFormattedExpression(_builder);
   }
   
-  @Ignore
   @Test
   public void testBug400024() {
     StringConcatenation _builder = new StringConcatenation();
@@ -300,7 +322,6 @@ public class XtendFormatterBugTests extends AbstractXtendFormatterTest {
     this.assertFormatted(_builder);
   }
   
-  @Ignore
   @Test
   public void testBug400024_1() {
     StringConcatenation _builder = new StringConcatenation();

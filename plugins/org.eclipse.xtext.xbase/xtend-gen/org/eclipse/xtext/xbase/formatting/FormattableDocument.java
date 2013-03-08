@@ -186,6 +186,8 @@ public class FormattableDocument {
     FormattingData _xblockexpression = null;
     {
       FormattingData old = null;
+      int increaseIndentationChange = 0;
+      int decreaseIndentationChange = 0;
       int indentationChange = 0;
       boolean _isEmpty = data2.isEmpty();
       if (_isEmpty) {
@@ -207,44 +209,54 @@ public class FormattableDocument {
       FormattingData _xifexpression = null;
       boolean _notEquals = ObjectExtensions.operator_notEquals(old, null);
       if (_notEquals) {
-        FormattingData _switchResult = null;
-        boolean _matched = false;
-        if (!_matched) {
-          if (old instanceof NewLineData) {
-            final NewLineData _newLineData = (NewLineData)old;
-            _matched=true;
-            int _offset = _newLineData.getOffset();
-            int _length = _newLineData.getLength();
-            Throwable _trace = _newLineData.getTrace();
-            int _newLines = _newLineData.getNewLines();
-            NewLineData _newLineData_1 = new NewLineData(_offset, _length, indentationChange, _trace, _newLines);
-            _switchResult = _newLineData_1;
-          }
-        }
-        if (!_matched) {
-          if (old instanceof WhitespaceData) {
-            final WhitespaceData _whitespaceData = (WhitespaceData)old;
-            _matched=true;
-            int _offset = _whitespaceData.getOffset();
-            int _length = _whitespaceData.getLength();
-            Throwable _trace = _whitespaceData.getTrace();
-            String _space = _whitespaceData.getSpace();
-            WhitespaceData _whitespaceData_1 = new WhitespaceData(_offset, _length, indentationChange, _trace, _space);
-            _switchResult = _whitespaceData_1;
-          }
-        }
-        _xifexpression = _switchResult;
-      } else {
         FormattingData _xblockexpression_1 = null;
+        {
+          boolean _greaterThan = (indentationChange > 0);
+          if (_greaterThan) {
+            increaseIndentationChange = indentationChange;
+          } else {
+            decreaseIndentationChange = indentationChange;
+          }
+          FormattingData _switchResult = null;
+          boolean _matched = false;
+          if (!_matched) {
+            if (old instanceof NewLineData) {
+              final NewLineData _newLineData = (NewLineData)old;
+              _matched=true;
+              int _offset = _newLineData.getOffset();
+              int _length = _newLineData.getLength();
+              Throwable _trace = _newLineData.getTrace();
+              int _newLines = _newLineData.getNewLines();
+              NewLineData _newLineData_1 = new NewLineData(_offset, _length, increaseIndentationChange, decreaseIndentationChange, _trace, _newLines);
+              _switchResult = _newLineData_1;
+            }
+          }
+          if (!_matched) {
+            if (old instanceof WhitespaceData) {
+              final WhitespaceData _whitespaceData = (WhitespaceData)old;
+              _matched=true;
+              int _offset = _whitespaceData.getOffset();
+              int _length = _whitespaceData.getLength();
+              Throwable _trace = _whitespaceData.getTrace();
+              String _space = _whitespaceData.getSpace();
+              WhitespaceData _whitespaceData_1 = new WhitespaceData(_offset, _length, increaseIndentationChange, decreaseIndentationChange, _trace, _space);
+              _switchResult = _whitespaceData_1;
+            }
+          }
+          _xblockexpression_1 = (_switchResult);
+        }
+        _xifexpression = _xblockexpression_1;
+      } else {
+        FormattingData _xblockexpression_2 = null;
         {
           this.setConflictOccurred(true);
           boolean _isDebugConflicts = this.isDebugConflicts();
           if (_isDebugConflicts) {
             this.reportConflict(data1, data2);
           }
-          _xblockexpression_1 = (null);
+          _xblockexpression_2 = (null);
         }
-        _xifexpression = _xblockexpression_1;
+        _xifexpression = _xblockexpression_2;
       }
       _xblockexpression = (_xifexpression);
     }
@@ -459,9 +471,23 @@ public class FormattableDocument {
               if (f instanceof NewLineData) {
                 final NewLineData _newLineData = (NewLineData)f;
                 _matched=true;
+                int _xifexpression = (int) 0;
+                int _increaseIndentationChange = _newLineData.getIncreaseIndentationChange();
+                int _decreaseIndentationChange = _newLineData.getDecreaseIndentationChange();
+                int _minus = (-1);
+                int _multiply = (_decreaseIndentationChange * _minus);
+                boolean _equals = (_increaseIndentationChange == _multiply);
+                if (_equals) {
+                  int _increaseIndentationChange_1 = _newLineData.getIncreaseIndentationChange();
+                  int _plus_3 = (indentation + _increaseIndentationChange_1);
+                  _xifexpression = _plus_3;
+                } else {
+                  _xifexpression = indentation;
+                }
+                final int computedIndentation = _xifexpression;
                 int _newLines = _newLineData.getNewLines();
                 String _wrap = this.getWrap(_newLines);
-                String _indentation = this.getIndentation(indentation);
+                String _indentation = this.getIndentation(computedIndentation);
                 final String replacement = (_wrap + _indentation);
                 int _offset_3 = _newLineData.getOffset();
                 int _length_1 = _newLineData.getLength();

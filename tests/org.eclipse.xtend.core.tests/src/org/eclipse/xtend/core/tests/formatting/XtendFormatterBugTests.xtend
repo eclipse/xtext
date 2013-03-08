@@ -108,7 +108,7 @@ class XtendFormatterBugTests extends AbstractXtendFormatterTest {
 		}
 		''')
 	}
-	@Ignore
+
 	@Test
 	def testBug400025(){
 		assertFormattedExpression('''
@@ -117,7 +117,15 @@ class XtendFormatterBugTests extends AbstractXtendFormatterTest {
 		}
 		''')
 	}
-	@Ignore
+
+	@Test
+	def testBug400025_11(){
+		assertFormattedExpression('''
+		{ // foo
+		}
+		''')
+	}
+
 	@Test
 	def testBug400025_1(){
 		assertFormattedExpression('''
@@ -128,17 +136,28 @@ class XtendFormatterBugTests extends AbstractXtendFormatterTest {
 		}
 		''')
 	}
-	@Ignore
+
 	@Test
 	def testBug400025_2(){
-		assertFormattedExpression('''
-		{
+		assertFormatted('''
+		class bar {
 			// foo
-			val foo = 42
 		}
 		''')
 	}
-	@Ignore
+	@Ignore("Conflict")
+	@Test
+	def testBug400025_3(){
+		assertFormattedExpression('''
+		 {
+			val foo = 42
+			// foo
+		 }
+		 val bar = 42
+		''')
+	}
+
+
 	@Test
 	def testBug400024(){
 		assertFormatted('''
@@ -154,7 +173,7 @@ class XtendFormatterBugTests extends AbstractXtendFormatterTest {
 		}
 		''')
 	}
-	@Ignore
+
 	@Test
 	def testBug400024_1(){
 		assertFormatted('''

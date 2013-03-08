@@ -9,7 +9,9 @@ public class FormattingDataInit {
   
   public int newLines = 0;
   
-  public int indentationChange = 0;
+  public int increaseIndentationChange = 0;
+
+  public int decreaseIndentationChange = 0;
   
   public PreferenceKey key = null;
   
@@ -30,13 +32,13 @@ public class FormattingDataInit {
   }
   
   public void increaseIndentation() {
-    int _plus = (this.indentationChange + 1);
-    this.indentationChange = _plus;
+    int _plus = (this.increaseIndentationChange + 1);
+    this.increaseIndentationChange = _plus;
   }
   
   public void decreaseIndentation() {
-    int _minus = (this.indentationChange - 1);
-    this.indentationChange = _minus;
+    int _minus = (this.decreaseIndentationChange - 1);
+    this.decreaseIndentationChange = _minus;
   }
   
   public String toString() {
