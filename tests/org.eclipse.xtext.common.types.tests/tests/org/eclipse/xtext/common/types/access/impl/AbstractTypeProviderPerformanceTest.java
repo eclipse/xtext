@@ -36,7 +36,7 @@ public abstract class AbstractTypeProviderPerformanceTest {
 
 	protected abstract IJvmTypeProvider getTypeProvider();
 
-	@Rule public static StopwatchRule rule = new StopwatchRule(true);
+	@Rule public StopwatchRule rule = new StopwatchRule(true);
 	
 	public Iterable<String> getClassNamesToLoad() throws Exception {
 		List<String> resource = MockJavaProjectProvider.readResource("/org/eclipse/xtext/common/types/testSetups/files.list");
