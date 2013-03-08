@@ -24,7 +24,7 @@ class RebuildAffectedResourcesTest extends AbstractXtendUITestCase {
 	@Inject 
 	private WorkbenchTestHelper workbenchTestHelper;
 	
-	@Rule public static StopwatchRule rule = new StopwatchRule(true)
+	@Rule public StopwatchRule rule = new StopwatchRule(true)
 	
 	@After override void tearDown() {
 		workbenchTestHelper.project.delete(true, null)

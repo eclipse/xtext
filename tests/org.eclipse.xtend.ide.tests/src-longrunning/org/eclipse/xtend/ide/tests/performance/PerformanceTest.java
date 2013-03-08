@@ -249,7 +249,7 @@ Task 'LightweightTypeReference#collectSuperTypes' took 10ms (305 measurements).
 
 public class PerformanceTest extends AbstractXtendUITestCase {
 	
-	@Rule public static StopwatchRule stopwatch = new StopwatchRule(true);
+	@Rule public StopwatchRule stopwatch = new StopwatchRule(true);
 
 	@Inject 
 	private WorkbenchTestHelper workbenchTestHelper;

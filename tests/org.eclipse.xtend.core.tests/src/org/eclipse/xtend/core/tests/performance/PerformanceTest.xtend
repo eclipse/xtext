@@ -14,7 +14,7 @@ class PerformanceTest extends AbstractXtendTestCase {
 	
 	@Inject XtendFileGenerator fileGenerator
 	
-	@Rule public static val rule = new StopwatchRule(true)
+	@Rule public val rule = new StopwatchRule(true)
 
 	/*
 	Sven 2013-01-24 (old typesystem)
