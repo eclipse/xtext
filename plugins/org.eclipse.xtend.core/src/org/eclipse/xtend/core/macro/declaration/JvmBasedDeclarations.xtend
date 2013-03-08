@@ -72,6 +72,22 @@ abstract class JvmAnnotationTargetImpl<T extends JvmAnnotationTarget> extends Jv
 	override getAnnotations() {
 		ImmutableList::copyOf(delegate.annotations.map[compilationUnit.toAnnotationReference(it)])
 	}	
+	
+	override addAnnotation(Type annotationType) {
+		switch annotationType { 
+			JvmAnnotationTypeDeclarationImpl : {
+				val result = TypesFactory::eINSTANCE.createJvmAnnotationReference
+				result.setAnnotation(annotationType.delegate)
+				this.delegate.annotations.add(result)
+				return compilationUnit.toAnnotationReference(result)
+			}
+			default : throw new IllegalArgumentException(""+annotationType+" is not an annotation type.")
+		}
+	}
+	
+	override findAnnotation(Type annotationType) {
+		annotations.findFirst[annotationTypeDeclaration == annotationType]
+	}
 }
 
 abstract class JvmMemberDeclarationImpl<T extends JvmMember> extends JvmAnnotationTargetImpl<T> implements MutableMemberDeclaration {
@@ -145,7 +161,9 @@ abstract class JvmTypeDeclarationImpl<T extends JvmDeclaredType> extends JvmMemb
 		newConstructor.visibility = JvmVisibility::PUBLIC
 		newConstructor.simpleName = simpleName
 		delegate.members.add(newConstructor)
-		initializer.apply(compilationUnit.toMemberDeclaration(newConstructor) as MutableConstructorDeclaration)
+		val mutableConstructorDeclaration = compilationUnit.toMemberDeclaration(newConstructor) as MutableConstructorDeclaration
+		initializer.apply(mutableConstructorDeclaration)
+		return mutableConstructorDeclaration
 	}
 	
 	override addField(String name, Procedure1<MutableFieldDeclaration> initializer) {
@@ -153,7 +171,9 @@ abstract class JvmTypeDeclarationImpl<T extends JvmDeclaredType> extends JvmMemb
 		newField.simpleName = name
 		newField.visibility = JvmVisibility::PRIVATE
 		delegate.members.add(newField)
-		initializer.apply(compilationUnit.toMemberDeclaration(newField) as MutableFieldDeclaration)
+		val mutableFieldDeclaration = compilationUnit.toMemberDeclaration(newField) as MutableFieldDeclaration
+		initializer.apply(mutableFieldDeclaration)
+		return mutableFieldDeclaration
 	}
 	
 	override addMethod(String name, Procedure1<MutableMethodDeclaration> initializer) {
@@ -162,7 +182,9 @@ abstract class JvmTypeDeclarationImpl<T extends JvmDeclaredType> extends JvmMemb
 		newMethod.simpleName = name
 		newMethod.returnType = compilationUnit.toJvmTypeReference(compilationUnit.typeReferenceProvider.primitiveVoid)
 		delegate.members.add(newMethod)
-		initializer.apply(compilationUnit.toMemberDeclaration(newMethod) as MutableMethodDeclaration)
+		val mutableMethodDeclaration = compilationUnit.toMemberDeclaration(newMethod) as MutableMethodDeclaration
+		initializer.apply(mutableMethodDeclaration)
+		return mutableMethodDeclaration
 	}
 	
 	override findConstructor(TypeReference... parameterTypes) {
@@ -466,7 +488,7 @@ class JvmFieldDeclarationImpl extends JvmMemberDeclarationImpl<JvmField> impleme
 	
 }
 
-class JvmTypeParameterDeclarationImpl extends TypeParameterDeclarationImpl implements MutableTypeParameterDeclaration {
+class JvmTypeParameterDeclarationImpl extends TypeParameterDeclarationImpl implements MutableAnnotationTarget, MutableTypeParameterDeclaration {
 	
 	override MutableTypeParameterDeclarator getTypeParameterDeclarator() {
 		compilationUnit.toMemberDeclaration(delegate.eContainer as JvmExecutable) as MutableTypeParameterDeclarator
@@ -492,6 +514,18 @@ class JvmTypeParameterDeclarationImpl extends TypeParameterDeclarationImpl imple
 		return thisTypeRef.isAssignableFrom(thatTypeRef);
 	}
 	
+	override addAnnotation(Type annotationType) {
+		throw new UnsupportedOperationException("TODO: auto-generated method stub")
+	}
+	
+	override MutableAnnotationReference findAnnotation(Type annotationType) {
+		return null
+	}
+	
+	override Iterable<? extends MutableAnnotationReference> getAnnotations() {
+		return emptyList
+	}
+	
 }
 
 class JvmAnnotationTypeElementDeclarationImpl extends JvmMemberDeclarationImpl<JvmOperation> implements MutableAnnotationTypeElementDeclaration {
@@ -510,7 +544,7 @@ class JvmAnnotationTypeElementDeclarationImpl extends JvmMemberDeclarationImpl<J
 	
 }
 
-class JvmBasedAnnotationReferenceImpl extends AbstractDeclarationImpl<JvmAnnotationReference> implements MutableAnnotationReference {
+class JvmAnnotationReferenceImpl extends AbstractDeclarationImpl<JvmAnnotationReference> implements MutableAnnotationReference {
 	
 	override getAnnotationTypeDeclaration() {
 		compilationUnit.toTypeDeclaration(delegate.annotation) as AnnotationTypeDeclaration
@@ -525,4 +559,39 @@ class JvmBasedAnnotationReferenceImpl extends AbstractDeclarationImpl<JvmAnnotat
 		return compilationUnit.translateAnnotationValue(annotationValue)
 	}
 	
+	override set(String name, String... values) {
+		val newValue = TypesFactory::eINSTANCE.createJvmStringAnnotationValue
+		newValue.setOperation(findOperation(name))
+		newValue.values.addAll(values)
+	}
+	
+	override set(String name, boolean... values) {
+		val newValue = TypesFactory::eINSTANCE.createJvmBooleanAnnotationValue
+		newValue.setOperation(findOperation(name))
+		newValue.values.addAll(values)
+	}
+	
+	override set(String name, int... values) {
+		val newValue = TypesFactory::eINSTANCE.createJvmIntAnnotationValue
+		newValue.setOperation(findOperation(name))
+		newValue.values.addAll(values)
+	}
+	
+	override remove(String name) {
+		val found = delegate.values.findFirst[operation.simpleName==name]
+		if (found != null) {
+			delegate.values.remove(found)
+			return true;
+		}
+		return false;
+	}
+	
+	private def findOperation(String name) {
+		val jvmAnnoType = (annotationTypeDeclaration as JvmAnnotationTypeDeclarationImpl).delegate
+		val jvmOperation = jvmAnnoType.declaredOperations.findFirst[it.simpleName == name]
+		if (jvmOperation == null) {
+			throw new IllegalArgumentException("The annotation property '"+name+"' is not declared on the annotation type '"+jvmAnnoType.identifier+"'.")
+		}
+		return jvmOperation
+	} 
 }

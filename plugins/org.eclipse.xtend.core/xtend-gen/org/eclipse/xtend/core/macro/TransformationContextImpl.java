@@ -285,4 +285,18 @@ public class TransformationContextImpl implements TransformationContext {
     MutableEnumerationTypeDeclaration _findEnumerationType = _typeLookup.findEnumerationType(qualifiedName);
     return _findEnumerationType;
   }
+  
+  public Type findTypeGlobally(final Class<? extends Object> clazz) {
+    CompilationUnitImpl _unit = this.getUnit();
+    TypeLookupImpl _typeLookup = _unit.getTypeLookup();
+    Type _findTypeGlobally = _typeLookup.findTypeGlobally(clazz);
+    return _findTypeGlobally;
+  }
+  
+  public Type findTypeGlobally(final String typeName) {
+    CompilationUnitImpl _unit = this.getUnit();
+    TypeLookupImpl _typeLookup = _unit.getTypeLookup();
+    Type _findTypeGlobally = _typeLookup.findTypeGlobally(typeName);
+    return _findTypeGlobally;
+  }
 }

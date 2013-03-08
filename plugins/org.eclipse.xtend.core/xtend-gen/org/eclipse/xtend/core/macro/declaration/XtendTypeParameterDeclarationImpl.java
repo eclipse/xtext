@@ -67,9 +67,13 @@ public class XtendTypeParameterDeclarationImpl extends AbstractDeclarationImpl<J
     return _xblockexpression;
   }
   
-  public List<AnnotationReference> getAnnotations() {
+  public Iterable<? extends AnnotationReference> getAnnotations() {
     List<AnnotationReference> _emptyList = CollectionLiterals.<AnnotationReference>emptyList();
     return _emptyList;
+  }
+  
+  public AnnotationReference findAnnotation(final Type annotationType) {
+    return null;
   }
   
   public boolean isAssignableFrom(final Type otherType) {

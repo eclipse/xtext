@@ -11,6 +11,8 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtend.core.macro.declaration.CompilationUnitImpl;
 import org.eclipse.xtend.core.macro.declaration.TypeParameterDeclarationImpl;
+import org.eclipse.xtend.lib.macro.declaration.MutableAnnotationReference;
+import org.eclipse.xtend.lib.macro.declaration.MutableAnnotationTarget;
 import org.eclipse.xtend.lib.macro.declaration.MutableMemberDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.MutableTypeParameterDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.MutableTypeParameterDeclarator;
@@ -19,10 +21,11 @@ import org.eclipse.xtend.lib.macro.declaration.TypeReference;
 import org.eclipse.xtend.lib.macro.services.TypeReferenceProvider;
 import org.eclipse.xtext.common.types.JvmExecutable;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
+import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 
 @SuppressWarnings("all")
-public class JvmTypeParameterDeclarationImpl extends TypeParameterDeclarationImpl implements MutableTypeParameterDeclaration {
+public class JvmTypeParameterDeclarationImpl extends TypeParameterDeclarationImpl implements MutableAnnotationTarget, MutableTypeParameterDeclaration {
   public MutableTypeParameterDeclarator getTypeParameterDeclarator() {
     CompilationUnitImpl _compilationUnit = this.getCompilationUnit();
     JvmTypeParameter _delegate = this.getDelegate();
@@ -71,5 +74,18 @@ public class JvmTypeParameterDeclarationImpl extends TypeParameterDeclarationImp
     TypeReferenceProvider _typeReferenceProvider_1 = _compilationUnit_1.getTypeReferenceProvider();
     final TypeReference thatTypeRef = _typeReferenceProvider_1.newTypeReference(otherType);
     return thisTypeRef.isAssignableFrom(thatTypeRef);
+  }
+  
+  public MutableAnnotationReference addAnnotation(final Type annotationType) {
+    UnsupportedOperationException _unsupportedOperationException = new UnsupportedOperationException("TODO: auto-generated method stub");
+    throw _unsupportedOperationException;
+  }
+  
+  public MutableAnnotationReference findAnnotation(final Type annotationType) {
+    return null;
+  }
+  
+  public Iterable<? extends MutableAnnotationReference> getAnnotations() {
+    return CollectionLiterals.<MutableAnnotationReference>emptyList();
   }
 }

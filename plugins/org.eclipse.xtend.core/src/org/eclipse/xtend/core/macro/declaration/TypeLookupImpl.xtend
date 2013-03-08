@@ -64,4 +64,17 @@ class TypeLookupImpl implements TypeLookup {
 		return null
 	}
 	
+	override findTypeGlobally(Class<? extends Object> clazz) {
+		findTypeGlobally(clazz.canonicalName)
+	}
+	
+	override findTypeGlobally(String typeName) {
+		findType(typeName) ?: {
+			val result = compilationUnit.typeReferences.findDeclaredType(typeName, compilationUnit.xtendFile)
+			if (result == null)
+				null
+			else compilationUnit.toType(result)
+		} 
+	}
+	
 }

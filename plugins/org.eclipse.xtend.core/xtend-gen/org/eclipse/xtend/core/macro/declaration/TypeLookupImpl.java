@@ -14,6 +14,8 @@ import org.eclipse.xtend.lib.macro.declaration.Type;
 import org.eclipse.xtend.lib.macro.services.TypeLookup;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmMember;
+import org.eclipse.xtext.common.types.JvmType;
+import org.eclipse.xtext.common.types.util.TypeReferences;
 import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 
@@ -124,5 +126,37 @@ public class TypeLookupImpl implements TypeLookup {
       }
     }
     return null;
+  }
+  
+  public Type findTypeGlobally(final Class<? extends Object> clazz) {
+    String _canonicalName = clazz.getCanonicalName();
+    Type _findTypeGlobally = this.findTypeGlobally(_canonicalName);
+    return _findTypeGlobally;
+  }
+  
+  public Type findTypeGlobally(final String typeName) {
+    Type _elvis = null;
+    Type _findType = this.findType(typeName);
+    if (_findType != null) {
+      _elvis = _findType;
+    } else {
+      Type _xblockexpression = null;
+      {
+        TypeReferences _typeReferences = this.compilationUnit.getTypeReferences();
+        XtendFile _xtendFile = this.compilationUnit.getXtendFile();
+        final JvmType result = _typeReferences.findDeclaredType(typeName, _xtendFile);
+        Type _xifexpression = null;
+        boolean _equals = ObjectExtensions.operator_equals(result, null);
+        if (_equals) {
+          _xifexpression = null;
+        } else {
+          Type _type = this.compilationUnit.toType(result);
+          _xifexpression = _type;
+        }
+        _xblockexpression = (_xifexpression);
+      }
+      _elvis = ObjectExtensions.<Type>operator_elvis(_findType, _xblockexpression);
+    }
+    return _elvis;
   }
 }

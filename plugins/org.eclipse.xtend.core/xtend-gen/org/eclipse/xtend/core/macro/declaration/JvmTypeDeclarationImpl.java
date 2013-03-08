@@ -102,7 +102,7 @@ public abstract class JvmTypeDeclarationImpl<T extends JvmDeclaredType> extends 
     return thisTypeRef.isAssignableFrom(thatTypeRef);
   }
   
-  public void addConstructor(final Procedure1<MutableConstructorDeclaration> initializer) {
+  public MutableConstructorDeclaration addConstructor(final Procedure1<MutableConstructorDeclaration> initializer) {
     final JvmConstructor newConstructor = TypesFactory.eINSTANCE.createJvmConstructor();
     newConstructor.setVisibility(JvmVisibility.PUBLIC);
     String _simpleName = this.getSimpleName();
@@ -112,10 +112,12 @@ public abstract class JvmTypeDeclarationImpl<T extends JvmDeclaredType> extends 
     _members.add(newConstructor);
     CompilationUnitImpl _compilationUnit = this.getCompilationUnit();
     MutableMemberDeclaration _memberDeclaration = _compilationUnit.toMemberDeclaration(newConstructor);
-    initializer.apply(((MutableConstructorDeclaration) _memberDeclaration));
+    final MutableConstructorDeclaration mutableConstructorDeclaration = ((MutableConstructorDeclaration) _memberDeclaration);
+    initializer.apply(mutableConstructorDeclaration);
+    return mutableConstructorDeclaration;
   }
   
-  public void addField(final String name, final Procedure1<MutableFieldDeclaration> initializer) {
+  public MutableFieldDeclaration addField(final String name, final Procedure1<MutableFieldDeclaration> initializer) {
     final JvmField newField = TypesFactory.eINSTANCE.createJvmField();
     newField.setSimpleName(name);
     newField.setVisibility(JvmVisibility.PRIVATE);
@@ -124,10 +126,12 @@ public abstract class JvmTypeDeclarationImpl<T extends JvmDeclaredType> extends 
     _members.add(newField);
     CompilationUnitImpl _compilationUnit = this.getCompilationUnit();
     MutableMemberDeclaration _memberDeclaration = _compilationUnit.toMemberDeclaration(newField);
-    initializer.apply(((MutableFieldDeclaration) _memberDeclaration));
+    final MutableFieldDeclaration mutableFieldDeclaration = ((MutableFieldDeclaration) _memberDeclaration);
+    initializer.apply(mutableFieldDeclaration);
+    return mutableFieldDeclaration;
   }
   
-  public void addMethod(final String name, final Procedure1<MutableMethodDeclaration> initializer) {
+  public MutableMethodDeclaration addMethod(final String name, final Procedure1<MutableMethodDeclaration> initializer) {
     final JvmOperation newMethod = TypesFactory.eINSTANCE.createJvmOperation();
     newMethod.setVisibility(JvmVisibility.PUBLIC);
     newMethod.setSimpleName(name);
@@ -142,7 +146,9 @@ public abstract class JvmTypeDeclarationImpl<T extends JvmDeclaredType> extends 
     _members.add(newMethod);
     CompilationUnitImpl _compilationUnit_2 = this.getCompilationUnit();
     MutableMemberDeclaration _memberDeclaration = _compilationUnit_2.toMemberDeclaration(newMethod);
-    initializer.apply(((MutableMethodDeclaration) _memberDeclaration));
+    final MutableMethodDeclaration mutableMethodDeclaration = ((MutableMethodDeclaration) _memberDeclaration);
+    initializer.apply(mutableMethodDeclaration);
+    return mutableMethodDeclaration;
   }
   
   public MutableConstructorDeclaration findConstructor(final TypeReference... parameterTypes) {
