@@ -23,20 +23,28 @@ import org.eclipse.xtext.xbase.compiler.CompilationTestHelper.Result;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 
 import com.google.inject.Inject;
+import com.google.inject.Provider;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
  */
 public class XtendCompilerTester {
 	
+	public static XtendCompilerTester newXtendCompilerTester(Class<?> ...classesOnClassPath) {
+		XtendCompilerTester instance = XtendInjectorSingleton.INJECTOR.getInstance(XtendCompilerTester.class);
+		instance.setJavaCompilerClassPath(classesOnClassPath);
+		ProcessorInstanceForJvmTypeProvider processorProvider = XtendInjectorSingleton.INJECTOR.getInstance(ProcessorInstanceForJvmTypeProvider.class);
+		processorProvider.setClassLoader(XtendCompilerTester.class.getClassLoader());
+		return instance;
+	}
+	
+	public void setJavaCompilerClassPath(Class<?>[] classesOnClassPath) {
+		compilationTestHelper.setJavaCompilerClassPath(classesOnClassPath);
+	}
+
 	@Inject CompilationTestHelper compilationTestHelper;
 	@Inject ProcessorInstanceForJvmTypeProvider instanceForJvmTypeProvider;
-	
-	public XtendCompilerTester(Class<?> ...classesOnClassPath) {
-		XtendInjectorSingleton.INJECTOR.injectMembers(this);
-		compilationTestHelper.setJavaCompilerClassPath(classesOnClassPath);
-		instanceForJvmTypeProvider.setClassLoader(getClass().getClassLoader());
-	}
+	@Inject Provider<CompilationUnitImpl> compilationUnitProvider;
 	
 	public void assertCompilesTo(CharSequence source, final CharSequence expected) {
 		try {
@@ -78,7 +86,7 @@ public class XtendCompilerTester {
 						
 						CompilationUnitImpl compilationUnitImpl;
 						{
-							compilationUnitImpl = new CompilationUnitImpl();
+							compilationUnitImpl = compilationUnitProvider.get();
 							XtendFile xtendFile = (XtendFile)t.getResourceSet().getResources().get(0).getContents().get(0);
 							compilationUnitImpl.setXtendFile(xtendFile);
 						}

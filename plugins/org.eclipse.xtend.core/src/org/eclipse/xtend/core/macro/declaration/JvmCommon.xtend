@@ -194,6 +194,10 @@ class TypeParameterDeclarationImpl extends AbstractDeclarationImpl<JvmTypeParame
 		emptyList
 	}
 	
+	override findAnnotation(Type annotationType) {
+		null
+	}
+	
 	override isAssignableFrom(Type otherType) {
 		if (otherType == null)
 			return false;

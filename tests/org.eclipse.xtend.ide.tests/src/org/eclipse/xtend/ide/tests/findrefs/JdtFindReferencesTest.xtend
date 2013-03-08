@@ -37,7 +37,7 @@ class JdtFindReferencesTest extends AbstractXtendUITestCase {
 
 	@Inject extension JdtReferenceFinder 
 
-	@Inject IWorkbench workbench 
+	@Inject IWorkbench workbench
 	
 	@Inject extension JvmModelFindReferenceHandler 
 	

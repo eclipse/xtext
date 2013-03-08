@@ -82,11 +82,16 @@ import org.eclipse.xtext.xbase.typesystem.legacy.StandardTypeReferenceOwner
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference
 import org.eclipse.xtext.xbase.typesystem.references.OwnedConverter
 import org.eclipse.xtext.xbase.typesystem.util.CommonTypeComputationServices
+import org.eclipse.xtend.lib.macro.declaration.MutableAnnotationReference
 
 class CompilationUnitImpl implements CompilationUnit {
 	
 	override getAnnotations() {
 		emptyList
+	}
+	
+	override findAnnotation(Type annotationType) {
+		null
 	}
 	
 	override getName() {
@@ -398,9 +403,9 @@ class CompilationUnitImpl implements CompilationUnit {
 		]
 	}
 	
-	def AnnotationReference toAnnotationReference(JvmAnnotationReference delegate) {
+	def MutableAnnotationReference toAnnotationReference(JvmAnnotationReference delegate) {
 		getOrCreate(delegate) [
-			new JvmBasedAnnotationReferenceImpl => [
+			new JvmAnnotationReferenceImpl => [
 				it.delegate = delegate
 				it.compilationUnit = this
 			]

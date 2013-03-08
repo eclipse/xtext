@@ -57,6 +57,10 @@ abstract class XtendAnnotationTargetImpl<T extends XtendAnnotationTarget> extend
 		ImmutableList::copyOf( this.delegate.annotations.map[compilationUnit.toAnnotationReference(it)] )
 	}
 	
+	override findAnnotation(Type annotationType) {
+		annotations.findFirst[it.annotationTypeDeclaration == annotationType]
+	}
+	
 }
 
 abstract class XtendMemberDeclarationImpl<T extends XtendMember> extends XtendAnnotationTargetImpl<T> implements MemberDeclaration {
@@ -370,6 +374,10 @@ class XtendTypeParameterDeclarationImpl extends AbstractDeclarationImpl<JvmTypeP
 	
 	override getAnnotations() {
 		emptyList
+	}
+	
+	override findAnnotation(Type annotationType) {
+		null
 	}
 	
 	override isAssignableFrom(Type otherType) {

@@ -43,7 +43,7 @@ class ProcessorInstanceForJvmTypeProvider {
 				}
 			}
 		}
-		logger.error("No class loader configured or annotation processing.")
-		return null
+		logger.info("No class loader configured. Trying with this class' classloader.")
+		return class.classLoader
 	}
 }
