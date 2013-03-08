@@ -9,7 +9,6 @@ package org.eclipse.xtext.ui.refactoring.ui;
 
 import org.apache.log4j.Logger;
 import org.eclipse.ltk.core.refactoring.participants.ProcessorBasedRefactoring;
-import org.eclipse.ltk.ui.refactoring.RefactoringWizardOpenOperation;
 import org.eclipse.xtext.resource.IGlobalServiceProvider;
 import org.eclipse.xtext.ui.refactoring.IRenameRefactoringProvider;
 import org.eclipse.xtext.ui.refactoring.impl.AbstractRenameProcessor;
@@ -90,7 +89,7 @@ public class DefaultRenameSupport implements IRenameSupport {
 		if (previewOnly) {
 			renameElementWizard.setForcePreviewReview(true);
 		}
-		RefactoringWizardOpenOperation openOperation = new RefactoringWizardOpenOperation(renameElementWizard);
+		RefactoringWizardOpenOperation_NonForking openOperation = new RefactoringWizardOpenOperation_NonForking(renameElementWizard);
 		openOperation.run(renameElementContext.getTriggeringEditor().getSite().getShell(), "Rename Element");
 	}
 
