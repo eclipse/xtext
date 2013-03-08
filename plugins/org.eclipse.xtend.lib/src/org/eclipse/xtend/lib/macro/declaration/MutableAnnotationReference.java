@@ -18,4 +18,32 @@ import com.google.common.annotations.Beta;
 @Beta
 public interface MutableAnnotationReference extends AnnotationReference {
 	
+	/**
+	 * Sets the annotation property of the given name
+	 * 
+	 * @param name
+	 * @param values
+	 */
+	void set(String name, String... values);
+	
+	/**
+	 * Sets the annotation property of the given name
+	 * @param name
+	 * @param values
+	 */
+	void set(String name, boolean... values);
+	
+	/**
+	 * Sets the annotation property of the given name
+	 * @param name
+	 * @param values
+	 */
+	void set(String name, int... values);
+	
+	/**
+	 * Removes the annotation property with the given name (resets to default if existent).
+	 * @param name
+	 * @return whether an annotation with the given name existed and was removed.
+	 */
+	boolean remove(String name);
 }

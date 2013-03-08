@@ -7,20 +7,25 @@
  *******************************************************************************/
 package org.eclipse.xtend.lib.macro.declaration;
 
-import java.util.List;
-
 import com.google.common.annotations.Beta;
 
 /**
- * Something that can be annotated
+ * An element that can be annotated
  * 
  * @author Sven Efftinge
  */
 @Beta
 public interface AnnotationTarget extends NamedElement {
-	
+
 	/**
 	 * @return the annotations this element is annotated with
 	 */
-	List<AnnotationReference> getAnnotations();
+	Iterable<? extends AnnotationReference> getAnnotations();
+
+	/**
+	 * @param annotationType
+	 * @return the annotation reference for the given type, or <code>null</code>
+	 *         if this element is not annotated with the given annotation type
+	 */
+	AnnotationReference findAnnotation(Type annotationType);
 }
