@@ -55,20 +55,21 @@ class RichStringFormatter {
 		val canIndent = !lines.empty && lines.last.content.nullOrEmpty
 		for(line:lines) {
 			if(impl.model.rootIndentLenght > 0) {
-				val indentChange = if(canIndent && line == lines.head) 1 else if(canIndent && line == lines.last) -1 else 0
+				val increaseIndentationChange = if(canIndent && line == lines.head) 1 else 0
+				val decraseIndentationChange = if(canIndent && line == lines.last) -1 else 0
 				val nloffset = if(line.leadingSemanticNewLine) line.offset + line.newLineCharCount else line.offset
 				val i = Math::min(line.indentLength, impl.model.rootIndentLenght)
 				val nllength = if(line.leadingSemanticNewLine) i else line.newLineCharCount + i  
 				if(line.leadingSemanticNewLine) 
-					doc += new NewLineData(nloffset, nllength, indentChange, if(doc.debugConflicts) new RuntimeException, 0)
+					doc += new NewLineData(nloffset, nllength, increaseIndentationChange, decraseIndentationChange, if(doc.debugConflicts) new RuntimeException, 0)
 				else {
-					doc += new NewLineData(nloffset, nllength, indentChange, if(doc.debugConflicts) new RuntimeException, 1)
+					doc += new NewLineData(nloffset, nllength, increaseIndentationChange, decraseIndentationChange, if(doc.debugConflicts) new RuntimeException, 1)
 				}
 				if(!line.chunks.empty) {
 					val offset = nloffset + nllength
 					val length = line.indentLength - impl.model.rootIndentLenght
 					val text = line.chunks.map[chunk | switch chunk { SemanticWhitespace: chunk.text TemplateWhitespace: doc.getIndentation(1) }].join
-					doc += new WhitespaceData(offset, length, 0, if(doc.debugConflicts) new RuntimeException, text)
+					doc += new WhitespaceData(offset, length, 0, 0, if(doc.debugConflicts) new RuntimeException, text)
 				}
 			}
 		}
