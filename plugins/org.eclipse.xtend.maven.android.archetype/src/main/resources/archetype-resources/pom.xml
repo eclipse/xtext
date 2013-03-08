@@ -10,9 +10,9 @@
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<xtend.version>2.4.0-SNAPSHOT</xtend.version>
-		<sdkPath>/opt/local/android-sdk-macosx</sdkPath>
-		<platform.version>4.2.2</platform.version>
-		<avd.name>Android_2.1</avd.name>
+		<sdkPath></sdkPath>
+		<platform.version></platform.version>
+		<avd.name></avd.name>
 	</properties>
 
 	<dependencies>
