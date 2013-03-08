@@ -7,6 +7,8 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.scoping.batch;
 
+import static com.google.common.collect.Iterables.*;
+
 import java.util.Collection;
 import java.util.Collections;
 import java.util.EnumSet;
@@ -17,8 +19,10 @@ import java.util.Set;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmFeature;
+import org.eclipse.xtext.common.types.JvmField;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmMember;
+import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.naming.QualifiedName;
@@ -73,7 +77,8 @@ public class ReceiverFeatureScope extends AbstractSessionBasedScope implements I
 				for(JvmType type: bucket.getTypes()) {
 					if (type instanceof JvmDeclaredType) {
 						Iterable<JvmFeature> features = ((JvmDeclaredType) type).findAllFeaturesByName(simpleName);
-						Iterables.addAll(allFeatures, features);
+						Iterable<? extends JvmFeature> filtered = order==1 ? features : filter(features, JvmOperation.class);
+						Iterables.addAll(allFeatures, filtered);
 					}
 				}
 			}
