@@ -1,0 +1,23 @@
+#set( $symbol_pound = '#' )
+#set( $symbol_dollar = '$' )
+#set( $symbol_escape = '\' )
+${symbol_pound} To enable ProGuard in your project, edit project.properties
+${symbol_pound} to define the proguard.config property as described in that file.
+${symbol_pound}
+${symbol_pound} Add project specific ProGuard rules here.
+${symbol_pound} By default, the flags in this file are appended to flags specified
+${symbol_pound} in ${symbol_dollar}{sdk.dir}/tools/proguard/proguard-android.txt
+${symbol_pound} You can edit the include path and order by changing the ProGuard
+${symbol_pound} include property in project.properties.
+${symbol_pound}
+${symbol_pound} For more details, see
+${symbol_pound}   http://developer.android.com/guide/developing/tools/proguard.html
+
+${symbol_pound} Add any project specific keep options here:
+
+${symbol_pound} If your project uses WebView with JS, uncomment the following
+${symbol_pound} and specify the fully qualified class name to the JavaScript interface
+${symbol_pound} class:
+${symbol_pound}-keepclassmembers class fqcn.of.javascript.interface.for.webview {
+${symbol_pound}   public *;
+${symbol_pound}}
