@@ -232,4 +232,16 @@ class XtendRichStringFormatterTest extends AbstractXtendFormatterTest {
 			```
 		''')
 	}
+	
+	@Ignore('see https://bugs.eclipse.org/bugs/show_bug.cgi?id=402728')
+	@Test def testIrregularIndentation() {
+		assertFormattedRichStringExpression('''
+			val x = ```
+				foo
+				  {
+				      x
+				    }
+			```
+		''')
+	}
 }

@@ -434,4 +434,27 @@ public class XtendRichStringFormatterTest extends AbstractXtendFormatterTest {
     _builder.newLine();
     this.assertFormattedRichStringExpressionWithErrors(_builder);
   }
+  
+  @Ignore("see https://bugs.eclipse.org/bugs/show_bug.cgi?id=402728")
+  @Test
+  public void testIrregularIndentation() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("val x = ```");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("foo");
+    _builder.newLine();
+    _builder.append("\t  ");
+    _builder.append("{");
+    _builder.newLine();
+    _builder.append("\t      ");
+    _builder.append("x");
+    _builder.newLine();
+    _builder.append("\t    ");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("```");
+    _builder.newLine();
+    this.assertFormattedRichStringExpression(_builder);
+  }
 }
