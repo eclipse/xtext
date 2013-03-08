@@ -79,9 +79,15 @@ public class SharedAppendableState {
 	}
 	
 	public void appendType(final JvmType type, IAcceptor<String> content) {
-		StringBuilder builder = new StringBuilder();
-		importManager.appendType(type, builder);
-		content.accept(builder.toString());
+		// don't import if if a local variable with the same name is on the scope
+		//TODO logic should be moved to ImportManager eventually.
+		if (hasObject(type.getSimpleName())) {
+			content.accept(type.getQualifiedName('.'));
+		} else {
+			StringBuilder builder = new StringBuilder();
+			importManager.appendType(type, builder);
+			content.accept(builder.toString());
+		}
 	}
 
 	public List<String> getImports() {
