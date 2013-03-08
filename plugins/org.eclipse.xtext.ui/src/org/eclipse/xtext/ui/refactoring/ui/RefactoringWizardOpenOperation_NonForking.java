@@ -1,25 +1,22 @@
 package org.eclipse.xtext.ui.refactoring.ui;
 
+import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 
-import org.eclipse.swt.custom.BusyIndicator;
-import org.eclipse.swt.widgets.Shell;
+import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.Assert;
 import org.eclipse.core.runtime.OperationCanceledException;
 import org.eclipse.core.runtime.jobs.IJobManager;
 import org.eclipse.core.runtime.jobs.Job;
-import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.jface.dialogs.Dialog;
 import org.eclipse.jface.dialogs.IDialogConstants;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.operation.IRunnableContext;
 import org.eclipse.jface.window.Window;
 import org.eclipse.jface.wizard.IWizardContainer;
-import org.eclipse.ui.PlatformUI;
-import org.eclipse.ui.progress.IProgressService;
 import org.eclipse.ltk.core.refactoring.CheckConditionsOperation;
 import org.eclipse.ltk.core.refactoring.Refactoring;
-import org.eclipse.ltk.core.refactoring.RefactoringContext;
 import org.eclipse.ltk.core.refactoring.RefactoringStatus;
 import org.eclipse.ltk.internal.ui.refactoring.ExceptionHandler;
 import org.eclipse.ltk.internal.ui.refactoring.RefactoringUIMessages;
@@ -29,6 +26,10 @@ import org.eclipse.ltk.internal.ui.refactoring.WorkbenchRunnableAdapter;
 import org.eclipse.ltk.ui.refactoring.RefactoringUI;
 import org.eclipse.ltk.ui.refactoring.RefactoringWizard;
 import org.eclipse.ltk.ui.refactoring.RefactoringWizardOpenOperation;
+import org.eclipse.swt.custom.BusyIndicator;
+import org.eclipse.swt.widgets.Shell;
+import org.eclipse.ui.PlatformUI;
+import org.eclipse.ui.progress.IProgressService;
 
 /**
  * Another class that had to be copied entirely from LTK to apply a simple change. We cannot execute the checking of
@@ -71,7 +72,9 @@ public class RefactoringWizardOpenOperation_NonForking {
 	}
 
 	/**
-	 * @see RefactoringWizardOpenOperation#run(Shell, String, IRunnableContext)
+	 * That one exists since 
+	 * see RefactoringWizardOpenOperation#run(Shell, String, IRunnableContext)
+	 * - not a JavaDoc link since this breaks the build on Galileo :-)
 	 */
 	public int run(final Shell parent, final String dialogTitle, final IRunnableContext context)
 			throws InterruptedException {
@@ -114,16 +117,38 @@ public class RefactoringWizardOpenOperation_NonForking {
 				} finally {
 					manager.endRule(ResourcesPlugin.getWorkspace().getRoot());
 					refactoring.setValidationContext(null);
-					RefactoringContext refactoringContext = fWizard.getRefactoringContext();
-					if (refactoringContext != null)
-						refactoringContext.dispose();
+					disposeRefactoringContext(fWizard);
 				}
 			}
+
 		};
 		BusyIndicator.showWhile(parent != null ? parent.getDisplay() : null, r);
 		if (canceled[0] != null)
 			throw canceled[0];
 		return result[0];
+	}
+
+	/**
+	 * Only applicable for Eclipse >= 3.7, therefore reflective
+	 */
+	private void disposeRefactoringContext(RefactoringWizard wizard) {
+		try {
+			Field refactoringContextField = getPrivateField(wizard.getClass(), "fRefactoringContext");
+			refactoringContextField.setAccessible(true);
+			Object refactoringContext = refactoringContextField.get(wizard);
+			if(refactoringContext != null) {
+				Method disposeMethod = refactoringContext.getClass().getMethod("dispose");
+				disposeMethod.invoke(refactoringContext);
+			}
+		} catch (NoSuchFieldException e) {
+			// ignore
+		} catch (IllegalAccessException e) {
+			// ignore
+		} catch (NoSuchMethodException e) {
+			// ignore
+		} catch (InvocationTargetException e) {
+			// ignore
+		}
 	}
 
 	/**
@@ -154,7 +179,7 @@ public class RefactoringWizardOpenOperation_NonForking {
 	}
 
 	/**
-	 * copied from {@link RefactoringUI} as the original is package private 
+	 * Copied from {@link RefactoringUI} as the original is package private.
 	 */
 	protected Dialog createRefactoringWizardDialog(RefactoringWizard wizard, Shell parent) {
 		Dialog result;
@@ -166,9 +191,33 @@ public class RefactoringWizardOpenOperation_NonForking {
 	}
 
 	/**
-	 * copied from {@link RefactoringWizard} as the original is package private
+	 * Copied from {@link RefactoringWizard} as the original is package private.
+	 * Once again reflection is used because of getWizardFlags() did not exist back in Galileo.
 	 */
 	protected boolean needsWizardBasedUserInterface(RefactoringWizard wizard) {
-		return (wizard.getWizardFlags() & RefactoringWizard.WIZARD_BASED_USER_INTERFACE) != 0;
+		try {
+			Field flagsField = getPrivateField(wizard.getClass(), "fFlags");
+			flagsField.setAccessible(true);
+			return ((Integer) flagsField.get(wizard) & RefactoringWizard.WIZARD_BASED_USER_INTERFACE) != 0;
+		} catch (NoSuchFieldException e) {
+			// ignore
+		} catch (SecurityException e) {
+			// ignore
+		} catch (IllegalArgumentException e) {
+			// ignore
+		} catch (IllegalAccessException e) {
+			// ignore
+		}
+		return true;
+	}
+	
+	protected Field getPrivateField(Class<?> clazz, String name) throws NoSuchFieldException, SecurityException {
+		try {
+			return clazz.getDeclaredField(name);
+		} catch (NoSuchFieldException e) {
+			if(clazz.getSuperclass() != null)
+				return clazz.getSuperclass().getDeclaredField(name);
+		}
+		return null; // dead code
 	}
 }
