@@ -23,7 +23,7 @@ import org.junit.rules.Timeout
 class TimedBatchTypeResolverTest extends AbstractBatchTypeResolverTest {
 	
 	@Rule
-	public static val rule = new StopwatchRule(false)
+	public val rule = new StopwatchRule(false)
 	
 	@Inject
 	TimedBatchTypeResolver typeResolver;
