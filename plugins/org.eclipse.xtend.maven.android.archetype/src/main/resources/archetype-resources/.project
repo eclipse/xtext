@@ -3,7 +3,7 @@
 #set( $symbol_escape = '\' )
 <?xml version="1.0" encoding="UTF-8"?>
 <projectDescription>
-	<name>Android With Xtend</name>
+	<name>${artifactId}</name>
 	<comment></comment>
 	<projects>
 	</projects>
