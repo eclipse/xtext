@@ -1,4 +1,5 @@
 /*******************************************************************************
+
  * Copyright (c) 2009 itemis AG (http://www.itemis.eu) and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
@@ -86,6 +87,9 @@ public class QuickfixProviderFragment extends AbstractStubGeneratorFragment impl
 	 */
 	@Override
 	public String[] getExportedPackagesUi(Grammar grammar) {
-		return new String[] { getNaming().packageName(getQuickfixProviderName(grammar, getNaming())) };
+		if(isGenerateStub()) 
+			return new String[] { getNaming().packageName(getQuickfixProviderName(grammar, getNaming())) };			
+		else 
+			return super.getExportedPackagesUi(grammar);
 	}
 }
