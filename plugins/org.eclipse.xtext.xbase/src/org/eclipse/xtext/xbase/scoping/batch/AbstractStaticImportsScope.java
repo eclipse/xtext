@@ -7,18 +7,22 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.scoping.batch;
 
+import static com.google.common.collect.Iterables.*;
+
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
 import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmFeature;
+import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 
+import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 
 /**
@@ -76,7 +80,8 @@ public abstract class AbstractStaticImportsScope extends AbstractSessionBasedSco
 					for(JvmType type: bucket.getTypes()) {
 						if (type instanceof JvmDeclaredType) {
 							Iterable<JvmFeature> features = ((JvmDeclaredType) type).findAllFeaturesByName(simpleName);
-							for(JvmFeature feature: features) {
+							Iterable<? extends JvmFeature> filtered = order==1 ? features : filter(features, JvmOperation.class);
+							for(JvmFeature feature: filtered) {
 								if (feature.isStatic()) {
 									IIdentifiableElementDescription description = createDescription(name, feature, bucket);
 									if (description != null)

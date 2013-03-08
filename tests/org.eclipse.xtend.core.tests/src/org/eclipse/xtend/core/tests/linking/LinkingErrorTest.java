@@ -19,6 +19,7 @@ import org.eclipse.xtend.core.tests.AbstractXtendTestCase;
 import org.eclipse.xtend.core.xtend.XtendClass;
 import org.eclipse.xtend.core.xtend.XtendFile;
 import org.eclipse.xtend.core.xtend.XtendFunction;
+import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.JvmVoid;
 import org.eclipse.xtext.diagnostics.ExceptionDiagnostic;
@@ -33,6 +34,9 @@ import org.eclipse.xtext.validation.CheckMode;
 import org.eclipse.xtext.validation.IDiagnosticConverter;
 import org.eclipse.xtext.validation.Issue;
 import org.eclipse.xtext.validation.ResourceValidatorImpl;
+import org.eclipse.xtext.xbase.XBlockExpression;
+import org.eclipse.xtext.xbase.XFeatureCall;
+import org.eclipse.xtext.xbase.XMemberFeatureCall;
 import org.junit.Test;
 
 import com.google.inject.Inject;
@@ -48,6 +52,28 @@ public class LinkingErrorTest extends AbstractXtendTestCase {
 	
 	@Inject
 	private Provider<ResourceValidatorImpl> resourceValidatorProvider;
+	
+	@Test public void testFieldsAreNotSugared() throws Exception {
+		XtendClass clazz = clazz("class A {\n"
+				+ " String getFoo\n"
+				+ " def String doStuff() {\n" + 
+				"	    foo\n" + 
+				"	}");
+		XFeatureCall call = (XFeatureCall) ((XBlockExpression)((XtendFunction)clazz.getMembers().get(1)).getExpression()).getExpressions().get(0);
+		JvmIdentifiableElement feature = call.getFeature();
+		assertTrue(feature.eIsProxy());
+	}
+	
+	@Test public void testFieldsAreNotSugared_01() throws Exception {
+		XtendClass clazz = clazz("class A {\n"
+				+ " String getFoo\n"
+				+ " def String doStuff() {\n" + 
+				"	    this.foo\n" + 
+				"	}");
+		XMemberFeatureCall call = (XMemberFeatureCall) ((XBlockExpression)((XtendFunction)clazz.getMembers().get(1)).getExpression()).getExpressions().get(0);
+		JvmIdentifiableElement feature = call.getFeature();
+		assertTrue(feature.eIsProxy());
+	}
 	
 	@Test public void testNoException_01() throws Exception {
 		XtendFunction function = function("def noException() {\n" + 
