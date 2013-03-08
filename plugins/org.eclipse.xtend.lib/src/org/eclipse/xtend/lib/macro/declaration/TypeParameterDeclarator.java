@@ -14,8 +14,6 @@
  *******************************************************************************/
 package org.eclipse.xtend.lib.macro.declaration;
 
-import java.util.List;
-
 import com.google.common.annotations.Beta;
 
 /**
@@ -23,5 +21,8 @@ import com.google.common.annotations.Beta;
  */
 @Beta
 public interface TypeParameterDeclarator extends MemberDeclaration {
-	List<? extends TypeParameterDeclaration> getTypeParameters();
+	/**
+	 * @return the declared type parameters
+	 */
+	Iterable<? extends TypeParameterDeclaration> getTypeParameters();
 }

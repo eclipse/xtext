@@ -16,6 +16,7 @@ import org.eclipse.xtend.lib.macro.declaration.TypeReference;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.ListExtensions;
+import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 
 @SuppressWarnings("all")
@@ -80,11 +81,14 @@ public class TypeReferenceImpl extends AbstractDeclarationImpl<LightweightTypeRe
   }
   
   public TypeReference getArrayComponentType() {
-    CompilationUnitImpl _compilationUnit = this.getCompilationUnit();
     LightweightTypeReference _delegate = this.getDelegate();
-    LightweightTypeReference _componentType = _delegate.getComponentType();
-    TypeReference _typeReference = _compilationUnit.toTypeReference(_componentType);
-    return _typeReference;
+    final LightweightTypeReference componentType = _delegate.getComponentType();
+    boolean _equals = ObjectExtensions.operator_equals(componentType, null);
+    if (_equals) {
+      return null;
+    }
+    CompilationUnitImpl _compilationUnit = this.getCompilationUnit();
+    return _compilationUnit.toTypeReference(componentType);
   }
   
   public TypeReference getLowerBound() {

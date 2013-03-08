@@ -24,7 +24,7 @@ import org.junit.Assert;
 import org.junit.Test;
 
 @SuppressWarnings("all")
-public abstract class AbstractActiveAnnotationsTest {
+public abstract class AbstractReuasableActiveAnnotationTests {
   @Test
   public void testSimpleModification() {
     StringConcatenation _builder = new StringConcatenation();

@@ -17,24 +17,63 @@ import com.google.common.annotations.Beta;
 @Beta
 public interface TypeReference extends Element {
 	
+	/**
+	 * Returns a text representation using the simple names of the involved types.
+	 * 
+	 * I.e. for 
+	 * 
+	 *   'java.util.List<? extends java.math.BigDecimal>' this method returns
+	 *   'List<? extends BigDecimal>'
+	 * 
+	 * @return the simple name of this type reference
+	 */
 	String getSimpleName();
 	
+	/**
+	 * returns the text representation using the qualified names of the involved types.
+	 * 
+	 * @return the qualified name of this type reference
+	 */
 	String getName();
 
+	/**
+	 * @return the referenced type.
+	 */
 	Type getType();
 
+	/**
+	 * @return the type arguments
+	 */
 	List<TypeReference> getActualTypeArguments();
 
+	/**
+	 * @return whether this is a wildcard reference
+	 */
 	boolean isWildCard();
 
+	/**
+	 * @return the upper bounds
+	 */
 	TypeReference getUpperBound();
 
+	/**
+	 * @return the lower bounds
+	 */
 	TypeReference getLowerBound();
 
+	/**
+	 * @return whether this is an array
+	 */
 	boolean isArray();
 
+	/**
+	 * @return the component type if this tye reference is an array type reference, <code>null</code> otherwise.
+	 */
 	TypeReference getArrayComponentType();
 
+	/**
+	 * @return whether this is the any type, The any type is the subtype of every reference type and its only instance is <code>null</code>.
+	 */
 	boolean isAnyType();
 
 	/**

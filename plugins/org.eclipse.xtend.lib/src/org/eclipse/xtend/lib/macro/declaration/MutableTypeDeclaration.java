@@ -12,6 +12,7 @@ import org.eclipse.xtext.xbase.lib.Procedures;
 import com.google.common.annotations.Beta;
 
 /**
+ * A mutable type declaration.
  * 
  * @author Sven Efftinge
  */

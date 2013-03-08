@@ -11,6 +11,7 @@ import java.util.List;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.xtend.core.macro.declaration.CompilationUnitImpl;
 import org.eclipse.xtend.core.macro.declaration.JvmTypeDeclarationImpl;
+import org.eclipse.xtend.core.macro.declaration.TypeReferenceImpl;
 import org.eclipse.xtend.lib.macro.declaration.MutableInterfaceDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.MutableTypeParameterDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.TypeParameterDeclaration;
@@ -22,10 +23,11 @@ import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ListExtensions;
+import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 
 @SuppressWarnings("all")
 public class JvmInterfaceDeclarationImpl extends JvmTypeDeclarationImpl<JvmGenericType> implements MutableInterfaceDeclaration {
-  public List<TypeReference> getSuperInterfaces() {
+  public Iterable<? extends TypeReference> getExtendedInterfaces() {
     List<TypeReference> _xblockexpression = null;
     {
       JvmGenericType _delegate = this.getDelegate();
@@ -52,7 +54,27 @@ public class JvmInterfaceDeclarationImpl extends JvmTypeDeclarationImpl<JvmGener
     return _xblockexpression;
   }
   
-  public List<? extends TypeParameterDeclaration> getTypeParameters() {
+  public void setExtendedInterfaces(final Iterable<? extends TypeReference> superinterfaces) {
+    JvmGenericType _delegate = this.getDelegate();
+    EList<JvmTypeReference> _superTypes = _delegate.getSuperTypes();
+    _superTypes.clear();
+    for (final TypeReference typeRef : superinterfaces) {
+      boolean _matched = false;
+      if (!_matched) {
+        if (typeRef instanceof TypeReferenceImpl) {
+          final TypeReferenceImpl _typeReferenceImpl = (TypeReferenceImpl)typeRef;
+          _matched=true;
+          JvmGenericType _delegate_1 = this.getDelegate();
+          EList<JvmTypeReference> _superTypes_1 = _delegate_1.getSuperTypes();
+          LightweightTypeReference _delegate_2 = _typeReferenceImpl.getDelegate();
+          JvmTypeReference _javaCompliantTypeReference = _delegate_2.toJavaCompliantTypeReference();
+          _superTypes_1.add(_javaCompliantTypeReference);
+        }
+      }
+    }
+  }
+  
+  public Iterable<? extends TypeParameterDeclaration> getTypeParameters() {
     JvmGenericType _delegate = this.getDelegate();
     EList<JvmTypeParameter> _typeParameters = _delegate.getTypeParameters();
     final Function1<JvmTypeParameter,MutableTypeParameterDeclaration> _function = new Function1<JvmTypeParameter,MutableTypeParameterDeclaration>() {

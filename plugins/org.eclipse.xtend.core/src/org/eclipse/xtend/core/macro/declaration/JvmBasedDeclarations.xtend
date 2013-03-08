@@ -223,14 +223,24 @@ abstract class JvmTypeDeclarationImpl<T extends JvmDeclaredType> extends JvmMemb
 
 class JvmInterfaceDeclarationImpl extends JvmTypeDeclarationImpl<JvmGenericType> implements MutableInterfaceDeclaration {
 	
-	override getSuperInterfaces() {
+	override getExtendedInterfaces() {
 		val filtered = delegate.superTypes.filter[(it.type as JvmGenericType).interface]
 		filtered.map[compilationUnit.toTypeReference(it)].toList
+	}
+	
+	override setExtendedInterfaces(Iterable<? extends TypeReference> superinterfaces) {
+		delegate.superTypes.clear
+		for (typeRef : superinterfaces) {
+			switch typeRef { TypeReferenceImpl : {
+				delegate.superTypes += typeRef.delegate.toJavaCompliantTypeReference
+			}}
+		}
 	}
 	
 	override getTypeParameters() {
 		delegate.typeParameters.map[compilationUnit.toTypeParameterDeclaration(it)]
 	}
+	
 }
 
 class JvmAnnotationTypeDeclarationImpl extends JvmTypeDeclarationImpl<JvmAnnotationType> implements MutableAnnotationTypeDeclaration {
@@ -248,7 +258,7 @@ class JvmClassDeclarationImpl extends JvmTypeDeclarationImpl<JvmGenericType> imp
 		filtered.map[compilationUnit.toTypeReference(it)].toList
 	}
 	
-	override getSuperclass() {
+	override getExtendedClass() {
 		compilationUnit.toTypeReference(delegate.superTypes.findFirst[
 			switch it: type {
 				JvmGenericType case !interface : true
@@ -286,15 +296,15 @@ class JvmClassDeclarationImpl extends JvmTypeDeclarationImpl<JvmGenericType> imp
 		delegate.setStatic(isStatic)
 	}
 	
-	override setSuperclass(TypeReference superclass) {
+	override setExtendedClass(TypeReference superclass) {
 		val interfaces = implementedInterfaces
 		delegate.superTypes.clear
 		delegate.superTypes.add(compilationUnit.toJvmTypeReference(superclass))
 		interfaces.forEach[delegate.superTypes.add(compilationUnit.toJvmTypeReference(it))]
 	}
 	
-	override setImplementedInterfaces(List<? extends TypeReference> superInterfaces) {
-		val superClass = getSuperclass
+	override setImplementedInterfaces(Iterable<? extends TypeReference> superInterfaces) {
+		val superClass = getExtendedClass
 		delegate.superTypes.clear
 		delegate.superTypes.add(compilationUnit.toJvmTypeReference(superClass))
 		superInterfaces.forEach[delegate.superTypes.add(compilationUnit.toJvmTypeReference(it))]
@@ -458,6 +468,10 @@ class JvmFieldDeclarationImpl extends JvmMemberDeclarationImpl<JvmField> impleme
 		throw new UnsupportedOperationException("Auto-Jvm function stub")
 	}
 	
+	override setInitializer(CompilationStrategy initializer) {
+		throw new UnsupportedOperationException("Auto-Jvm function stub")
+	}
+	
 	override isFinal() {
 		delegate.isFinal
 	}
@@ -555,7 +569,9 @@ class JvmAnnotationReferenceImpl extends AbstractDeclarationImpl<JvmAnnotationRe
 	}
 	
 	override getValue(String property) {
-		val annotationValue = delegate.values.findFirst[valueName == property]
+		val annotationValue = delegate.values.findFirst[
+			valueName == property || (valueName == null && property == 'value')
+		]
 		return compilationUnit.translateAnnotationValue(annotationValue)
 	}
 	

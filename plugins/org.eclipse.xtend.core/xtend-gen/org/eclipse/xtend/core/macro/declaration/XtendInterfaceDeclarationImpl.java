@@ -23,7 +23,7 @@ import org.eclipse.xtext.xbase.lib.ListExtensions;
 
 @SuppressWarnings("all")
 public class XtendInterfaceDeclarationImpl extends XtendTypeDeclarationImpl<XtendInterface> implements InterfaceDeclaration {
-  public List<TypeReference> getSuperInterfaces() {
+  public Iterable<? extends TypeReference> getExtendedInterfaces() {
     XtendInterface _delegate = this.getDelegate();
     EList<JvmTypeReference> _extends = _delegate.getExtends();
     final Function1<JvmTypeReference,TypeReference> _function = new Function1<JvmTypeReference,TypeReference>() {
@@ -37,7 +37,7 @@ public class XtendInterfaceDeclarationImpl extends XtendTypeDeclarationImpl<Xten
     return _map;
   }
   
-  public List<? extends TypeParameterDeclaration> getTypeParameters() {
+  public Iterable<? extends TypeParameterDeclaration> getTypeParameters() {
     XtendInterface _delegate = this.getDelegate();
     EList<JvmTypeParameter> _typeParameters = _delegate.getTypeParameters();
     final Function1<JvmTypeParameter,XtendTypeParameterDeclarationImpl> _function = new Function1<JvmTypeParameter,XtendTypeParameterDeclarationImpl>() {

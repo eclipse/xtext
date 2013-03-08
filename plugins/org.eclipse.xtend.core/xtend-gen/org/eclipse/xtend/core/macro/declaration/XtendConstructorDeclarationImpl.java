@@ -90,7 +90,7 @@ public class XtendConstructorDeclarationImpl extends XtendMemberDeclarationImpl<
     return _map;
   }
   
-  public List<? extends TypeParameterDeclaration> getTypeParameters() {
+  public Iterable<? extends TypeParameterDeclaration> getTypeParameters() {
     List<TypeParameterDeclaration> _emptyList = CollectionLiterals.<TypeParameterDeclaration>emptyList();
     return _emptyList;
   }

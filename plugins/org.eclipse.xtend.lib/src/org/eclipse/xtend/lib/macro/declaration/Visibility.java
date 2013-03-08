@@ -21,5 +21,23 @@ import com.google.common.annotations.Beta;
  */
 @Beta
 public enum Visibility {
-	DEFAULT, PRIVATE, PROTECTED, PUBLIC
+	/**
+	 * default package-private
+	 */
+	DEFAULT, 
+	
+	/**
+	 * private visibility
+	 */
+	PRIVATE, 
+	
+	/**
+	 * protected visibility
+	 */
+	PROTECTED, 
+	
+	/**
+	 * public visibility
+	 */
+	PUBLIC
 }

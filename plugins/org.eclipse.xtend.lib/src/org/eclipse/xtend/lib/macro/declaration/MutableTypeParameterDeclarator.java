@@ -11,9 +11,19 @@ import java.util.List;
 
 import com.google.common.annotations.Beta;
 
+/**
+ * @author Sven Efftinge
+ */
 @Beta
 public interface MutableTypeParameterDeclarator extends MutableMemberDeclaration, TypeParameterDeclarator {
 	public List<MutableTypeParameterDeclaration> getTypeParameters();
 
+	/**
+	 * Creates and adds a new {@link MutableTypeParameterDeclaration} to this declarator.
+	 *  
+	 * @param name the name of the type parameter
+	 * @param upperBounds the upperbounds
+	 * @return the created and attached {@link MutableTypeParameterDeclaration}
+	 */
 	MutableTypeParameterDeclaration addTypeParameter(String name, TypeReference... upperBounds);
 }

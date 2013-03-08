@@ -17,10 +17,9 @@ import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.Resource.Diagnostic;
 import org.eclipse.xtend.core.jvmmodel.IXtendJvmAssociations;
+import org.eclipse.xtend.core.macro.declaration.AbstractDeclarationImpl;
 import org.eclipse.xtend.core.macro.declaration.CompilationUnitImpl;
-import org.eclipse.xtend.core.macro.declaration.JvmNamedElementImpl;
 import org.eclipse.xtend.core.macro.declaration.ProblemImpl;
-import org.eclipse.xtend.core.macro.declaration.XtendNamedElementImpl;
 import org.eclipse.xtend.core.xtend.XtendField;
 import org.eclipse.xtend.core.xtend.XtendFile;
 import org.eclipse.xtend.core.xtend.XtendFunction;
@@ -30,7 +29,6 @@ import org.eclipse.xtend.lib.macro.declaration.Element;
 import org.eclipse.xtend.lib.macro.services.Problem;
 import org.eclipse.xtend.lib.macro.services.ProblemSupport;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
-import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.TypesPackage;
 import org.eclipse.xtext.diagnostics.Severity;
 import org.eclipse.xtext.validation.EObjectDiagnosticImpl;
@@ -150,27 +148,17 @@ public class ProblemSupportImpl implements ProblemSupport {
     this.checkCanceled();
     boolean _matched = false;
     if (!_matched) {
-      if (element instanceof XtendNamedElementImpl) {
-        final XtendNamedElementImpl<? extends EObject> _xtendNamedElementImpl = (XtendNamedElementImpl<? extends EObject>)element;
+      if (element instanceof AbstractDeclarationImpl) {
+        final AbstractDeclarationImpl<? extends EObject> _abstractDeclarationImpl = (AbstractDeclarationImpl<? extends EObject>)element;
         _matched=true;
-        EObject _delegate = _xtendNamedElementImpl.getDelegate();
-        final Resource resource = _delegate.eResource();
-        final EObject eobject = _xtendNamedElementImpl.getDelegate();
-        return Pair.<Resource, EObject>of(resource, eobject);
-      }
-    }
-    if (!_matched) {
-      if (element instanceof JvmNamedElementImpl) {
-        final JvmNamedElementImpl<JvmIdentifiableElement> _jvmNamedElementImpl = (JvmNamedElementImpl<JvmIdentifiableElement>)element;
-        _matched=true;
-        JvmIdentifiableElement _delegate = _jvmNamedElementImpl.getDelegate();
+        EObject _delegate = ((AbstractDeclarationImpl<EObject>)_abstractDeclarationImpl).getDelegate();
         final Resource resource = _delegate.eResource();
         XtendFile _xtendFile = this.compilationUnit.getXtendFile();
         Resource _eResource = _xtendFile.eResource();
         boolean _equals = ObjectExtensions.operator_equals(resource, _eResource);
         if (_equals) {
           IXtendJvmAssociations _jvmAssociations = this.compilationUnit.getJvmAssociations();
-          JvmIdentifiableElement _delegate_1 = _jvmNamedElementImpl.getDelegate();
+          EObject _delegate_1 = ((AbstractDeclarationImpl<EObject>)_abstractDeclarationImpl).getDelegate();
           final EObject eobject = _jvmAssociations.getPrimarySourceElement(_delegate_1);
           return Pair.<Resource, EObject>of(resource, eobject);
         }

@@ -18,15 +18,29 @@ import com.google.common.annotations.Beta;
 @Beta
 public interface ClassDeclaration extends TypeDeclaration, TypeParameterDeclarator {
 
+	/**
+	 * @return whether this class is marked <code>final</code>
+	 */
 	boolean isFinal();
 
+	/**
+	 * @return whether this class is marked <code>abstract</code>
+	 */
 	boolean isAbstract();
 
+	/**
+	 * @return whether this class is marked <code>static</code>
+	 */
 	boolean isStatic();
 
-	TypeReference getSuperclass();
+	/**
+	 * @return the super class of this class or <code>null</code> if no explicit super class is specified.
+	 */
+	TypeReference getExtendedClass();
 
+	/**
+	 * @return the interfaces directly implemented by the class declaration
+	 */
 	List<TypeReference> getImplementedInterfaces();
 	
-	//TODO initializers
 }

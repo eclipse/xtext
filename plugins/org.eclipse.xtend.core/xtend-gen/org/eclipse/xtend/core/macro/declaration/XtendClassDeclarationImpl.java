@@ -37,7 +37,7 @@ public class XtendClassDeclarationImpl extends XtendTypeDeclarationImpl<XtendCla
     return _map;
   }
   
-  public TypeReference getSuperclass() {
+  public TypeReference getExtendedClass() {
     CompilationUnitImpl _compilationUnit = this.getCompilationUnit();
     XtendClass _delegate = this.getDelegate();
     JvmTypeReference _extends = _delegate.getExtends();
@@ -61,7 +61,7 @@ public class XtendClassDeclarationImpl extends XtendTypeDeclarationImpl<XtendCla
     return true;
   }
   
-  public List<? extends TypeParameterDeclaration> getTypeParameters() {
+  public Iterable<? extends TypeParameterDeclaration> getTypeParameters() {
     XtendClass _delegate = this.getDelegate();
     EList<JvmTypeParameter> _typeParameters = _delegate.getTypeParameters();
     final Function1<JvmTypeParameter,XtendTypeParameterDeclarationImpl> _function = new Function1<JvmTypeParameter,XtendTypeParameterDeclarationImpl>() {

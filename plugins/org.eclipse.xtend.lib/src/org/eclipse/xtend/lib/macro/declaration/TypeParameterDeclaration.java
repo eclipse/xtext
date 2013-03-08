@@ -14,8 +14,6 @@
  *******************************************************************************/
 package org.eclipse.xtend.lib.macro.declaration;
 
-import java.util.List;
-
 import com.google.common.annotations.Beta;
 
 /**
@@ -23,6 +21,14 @@ import com.google.common.annotations.Beta;
  */
 @Beta
 public interface TypeParameterDeclaration extends Type, Declaration {
-	List<TypeReference> getUpperBounds();
+	
+	/**
+	 * @return the upper bounds
+	 */
+	Iterable<? extends TypeReference> getUpperBounds();
+	
+	/**
+	 * @return the {@link TypeParameterDeclarator} declaring the type parameter
+	 */
 	TypeParameterDeclarator getTypeParameterDeclarator();
 }

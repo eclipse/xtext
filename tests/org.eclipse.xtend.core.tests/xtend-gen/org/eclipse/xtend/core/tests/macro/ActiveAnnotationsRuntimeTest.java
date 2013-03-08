@@ -8,9 +8,10 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.xtend.core.macro.ProcessorInstanceForJvmTypeProvider;
 import org.eclipse.xtend.core.macro.declaration.CompilationUnitImpl;
 import org.eclipse.xtend.core.tests.RuntimeInjectorProvider;
-import org.eclipse.xtend.core.tests.macro.AbstractActiveAnnotationsTest;
+import org.eclipse.xtend.core.tests.macro.AbstractReuasableActiveAnnotationTests;
 import org.eclipse.xtend.core.tests.macro.DelegatingClassloader;
 import org.eclipse.xtend.core.xtend.XtendFile;
 import org.eclipse.xtend.lib.macro.declaration.MutableTypeDeclaration;
@@ -32,12 +33,15 @@ import org.junit.runner.RunWith;
 @RunWith(XtextRunner.class)
 @InjectWith(RuntimeInjectorProvider.class)
 @SuppressWarnings("all")
-public class ActiveAnnotationsRuntimeTest extends AbstractActiveAnnotationsTest {
+public class ActiveAnnotationsRuntimeTest extends AbstractReuasableActiveAnnotationTests {
   @Inject
   private CompilationTestHelper compiler;
   
   @Inject
   private Provider<CompilationUnitImpl> compilationUnitProvider;
+  
+  @Inject
+  private ProcessorInstanceForJvmTypeProvider processorProvider;
   
   @Before
   public void setUp() {
@@ -64,7 +68,9 @@ public class ActiveAnnotationsRuntimeTest extends AbstractActiveAnnotationsTest 
                 }
               };
             DelegatingClassloader _delegatingClassloader = new DelegatingClassloader(_classLoader, _function);
-            resourceSet.setClasspathURIContext(_delegatingClassloader);
+            final DelegatingClassloader classLoader = _delegatingClassloader;
+            resourceSet.setClasspathURIContext(classLoader);
+            ActiveAnnotationsRuntimeTest.this.processorProvider.setClassLoader(classLoader);
           }
         };
       this.compiler.compile(macroResourceSet, _function);

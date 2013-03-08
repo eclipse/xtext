@@ -7,8 +7,6 @@
  *******************************************************************************/
 package org.eclipse.xtend.lib.macro.declaration;
 
-import java.util.List;
-
 import com.google.common.annotations.Beta;
 
 /**
@@ -17,15 +15,11 @@ import com.google.common.annotations.Beta;
  */
 @Beta
 public interface MutableClassDeclaration extends MutableTypeDeclaration, ClassDeclaration {
-	/**
-	 * @param superclass the type reference to the super type.
-	 */
-	public void setSuperclass(TypeReference superclass);
 	
 	/**
-	 * @param superinterfaces the interfaces this class implements
+	 * @param isFinal 
 	 */
-	public void setImplementedInterfaces(List<? extends TypeReference> superinterfaces);
+	void setFinal(boolean isFinal);
 	
 	/**
 	 * Sets the <code>abstract</code> property
@@ -35,13 +29,18 @@ public interface MutableClassDeclaration extends MutableTypeDeclaration, ClassDe
 	void setAbstract(boolean isAbstract);
 	
 	/**
-	 * @param isFinal 
-	 */
-	void setFinal(boolean isFinal);
-	
-	/**
 	 * @param isStatic
 	 */
 	void setStatic(boolean isStatic);
+	
+	/**
+	 * @param superclass the type reference to the super type.
+	 */
+	public void setExtendedClass(TypeReference superclass);
+	
+	/**
+	 * @param superinterfaces the interfaces this class implements
+	 */
+	public void setImplementedInterfaces(Iterable<? extends TypeReference> superinterfaces);
 	
 }

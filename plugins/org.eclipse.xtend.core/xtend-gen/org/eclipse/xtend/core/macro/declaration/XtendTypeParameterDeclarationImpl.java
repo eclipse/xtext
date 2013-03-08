@@ -32,7 +32,7 @@ import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 
 @SuppressWarnings("all")
 public class XtendTypeParameterDeclarationImpl extends AbstractDeclarationImpl<JvmTypeParameter> implements TypeParameterDeclaration {
-  public List<TypeReference> getUpperBounds() {
+  public Iterable<? extends TypeReference> getUpperBounds() {
     JvmTypeParameter _delegate = this.getDelegate();
     EList<JvmTypeConstraint> _constraints = _delegate.getConstraints();
     Iterable<JvmUpperBound> _filter = Iterables.<JvmUpperBound>filter(_constraints, JvmUpperBound.class);

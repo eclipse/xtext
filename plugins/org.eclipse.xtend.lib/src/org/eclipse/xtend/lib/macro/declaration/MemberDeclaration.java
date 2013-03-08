@@ -27,7 +27,13 @@ public interface MemberDeclaration extends Declaration {
 	 */
 	String getDocComment();
 
+	/**
+	 * @return the visibility of this member
+	 */
 	Visibility getVisibility();
 	
+	/**
+	 * @return the type declaring this member or <code>null</code> is this is a top level element
+	 */
 	TypeDeclaration getDeclaringType();
 }

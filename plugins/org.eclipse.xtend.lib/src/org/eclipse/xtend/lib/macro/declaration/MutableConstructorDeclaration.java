@@ -9,6 +9,12 @@ package org.eclipse.xtend.lib.macro.declaration;
 
 import com.google.common.annotations.Beta;
 
+/**
+ * 
+ * A mutable constructor declaration
+ * 
+ * @author Sven Efftinge
+ */
 @Beta
 public interface MutableConstructorDeclaration extends MutableExecutableDeclaration, ConstructorDeclaration {
 	

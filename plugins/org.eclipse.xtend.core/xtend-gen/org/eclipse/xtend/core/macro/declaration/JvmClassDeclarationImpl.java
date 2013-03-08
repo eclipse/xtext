@@ -60,7 +60,7 @@ public class JvmClassDeclarationImpl extends JvmTypeDeclarationImpl<JvmGenericTy
     return _xblockexpression;
   }
   
-  public TypeReference getSuperclass() {
+  public TypeReference getExtendedClass() {
     CompilationUnitImpl _compilationUnit = this.getCompilationUnit();
     JvmGenericType _delegate = this.getDelegate();
     EList<JvmTypeReference> _superTypes = _delegate.getSuperTypes();
@@ -110,7 +110,7 @@ public class JvmClassDeclarationImpl extends JvmTypeDeclarationImpl<JvmGenericTy
     return _isStatic;
   }
   
-  public List<? extends TypeParameterDeclaration> getTypeParameters() {
+  public Iterable<? extends TypeParameterDeclaration> getTypeParameters() {
     JvmGenericType _delegate = this.getDelegate();
     EList<JvmTypeParameter> _typeParameters = _delegate.getTypeParameters();
     final Function1<JvmTypeParameter,MutableTypeParameterDeclaration> _function = new Function1<JvmTypeParameter,MutableTypeParameterDeclaration>() {
@@ -139,7 +139,7 @@ public class JvmClassDeclarationImpl extends JvmTypeDeclarationImpl<JvmGenericTy
     _delegate.setStatic(isStatic);
   }
   
-  public void setSuperclass(final TypeReference superclass) {
+  public void setExtendedClass(final TypeReference superclass) {
     final List<TypeReference> interfaces = this.getImplementedInterfaces();
     JvmGenericType _delegate = this.getDelegate();
     EList<JvmTypeReference> _superTypes = _delegate.getSuperTypes();
@@ -161,8 +161,8 @@ public class JvmClassDeclarationImpl extends JvmTypeDeclarationImpl<JvmGenericTy
     IterableExtensions.<TypeReference>forEach(interfaces, _function);
   }
   
-  public void setImplementedInterfaces(final List<? extends TypeReference> superInterfaces) {
-    final TypeReference superClass = this.getSuperclass();
+  public void setImplementedInterfaces(final Iterable<? extends TypeReference> superInterfaces) {
+    final TypeReference superClass = this.getExtendedClass();
     JvmGenericType _delegate = this.getDelegate();
     EList<JvmTypeReference> _superTypes = _delegate.getSuperTypes();
     _superTypes.clear();

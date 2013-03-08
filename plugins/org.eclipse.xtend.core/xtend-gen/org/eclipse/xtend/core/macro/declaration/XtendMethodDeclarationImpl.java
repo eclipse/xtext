@@ -97,7 +97,7 @@ public class XtendMethodDeclarationImpl extends XtendMemberDeclarationImpl<Xtend
     return _exists;
   }
   
-  public List<? extends TypeParameterDeclaration> getTypeParameters() {
+  public Iterable<? extends TypeParameterDeclaration> getTypeParameters() {
     XtendFunction _delegate = this.getDelegate();
     EList<JvmTypeParameter> _typeParameters = _delegate.getTypeParameters();
     final Function1<JvmTypeParameter,XtendTypeParameterDeclarationImpl> _function = new Function1<JvmTypeParameter,XtendTypeParameterDeclarationImpl>() {

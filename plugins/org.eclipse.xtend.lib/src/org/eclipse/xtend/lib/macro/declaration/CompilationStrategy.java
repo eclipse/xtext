@@ -27,10 +27,13 @@ public interface CompilationStrategy {
 	 */
 	CharSequence compile(CompilationContext ctx);
 	
+	/**
+	 * A strategy provided during compilation.
+	 */
 	public interface CompilationContext {
 		
 		/**
-		 * @param a type reference
+		 * @param typeref the type reference to serialize
 		 * @return the serialized form of the type reference, taking imports into account.
 		 */
 		String toJavaCode(TypeReference typeref);

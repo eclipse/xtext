@@ -10,6 +10,7 @@ package org.eclipse.xtend.core.macro.declaration;
 import org.eclipse.xtend.core.macro.declaration.CompilationUnitImpl;
 import org.eclipse.xtend.core.macro.declaration.JvmMemberDeclarationImpl;
 import org.eclipse.xtend.core.macro.declaration.TypeReferenceImpl;
+import org.eclipse.xtend.lib.macro.declaration.CompilationStrategy;
 import org.eclipse.xtend.lib.macro.declaration.MutableClassDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.MutableFieldDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.MutableTypeDeclaration;
@@ -27,6 +28,11 @@ public class JvmFieldDeclarationImpl extends JvmMemberDeclarationImpl<JvmField> 
   }
   
   public void setInitializer(final Expression initializer) {
+    UnsupportedOperationException _unsupportedOperationException = new UnsupportedOperationException("Auto-Jvm function stub");
+    throw _unsupportedOperationException;
+  }
+  
+  public void setInitializer(final CompilationStrategy initializer) {
     UnsupportedOperationException _unsupportedOperationException = new UnsupportedOperationException("Auto-Jvm function stub");
     throw _unsupportedOperationException;
   }

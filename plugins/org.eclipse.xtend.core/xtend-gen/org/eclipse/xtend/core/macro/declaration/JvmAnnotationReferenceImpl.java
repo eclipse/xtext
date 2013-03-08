@@ -49,9 +49,24 @@ public class JvmAnnotationReferenceImpl extends AbstractDeclarationImpl<JvmAnnot
     EList<JvmAnnotationValue> _values = _delegate.getValues();
     final Function1<JvmAnnotationValue,Boolean> _function = new Function1<JvmAnnotationValue,Boolean>() {
         public Boolean apply(final JvmAnnotationValue it) {
+          boolean _or = false;
           String _valueName = it.getValueName();
           boolean _equals = ObjectExtensions.operator_equals(_valueName, property);
-          return Boolean.valueOf(_equals);
+          if (_equals) {
+            _or = true;
+          } else {
+            boolean _and = false;
+            String _valueName_1 = it.getValueName();
+            boolean _equals_1 = ObjectExtensions.operator_equals(_valueName_1, null);
+            if (!_equals_1) {
+              _and = false;
+            } else {
+              boolean _equals_2 = ObjectExtensions.operator_equals(property, "value");
+              _and = (_equals_1 && _equals_2);
+            }
+            _or = (_equals || _and);
+          }
+          return Boolean.valueOf(_or);
         }
       };
     final JvmAnnotationValue annotationValue = IterableExtensions.<JvmAnnotationValue>findFirst(_values, _function);

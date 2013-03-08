@@ -9,6 +9,7 @@ package org.eclipse.xtend.core.macro.declaration;
 
 import com.google.common.base.Objects;
 import com.google.common.collect.ImmutableList;
+import com.google.common.collect.Iterables;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -91,6 +92,7 @@ import org.eclipse.xtext.common.types.JvmBooleanAnnotationValue;
 import org.eclipse.xtext.common.types.JvmByteAnnotationValue;
 import org.eclipse.xtext.common.types.JvmCharAnnotationValue;
 import org.eclipse.xtext.common.types.JvmConstructor;
+import org.eclipse.xtext.common.types.JvmCustomAnnotationValue;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmDoubleAnnotationValue;
 import org.eclipse.xtext.common.types.JvmEnumAnnotationValue;
@@ -919,6 +921,23 @@ public class CompilationUnitImpl implements CompilationUnit {
   public Object translateAnnotationValue(final JvmAnnotationValue value) {
     List<? extends Object> _switchResult = null;
     boolean _matched = false;
+    if (!_matched) {
+      if (value instanceof JvmCustomAnnotationValue) {
+        final JvmCustomAnnotationValue _jvmCustomAnnotationValue = (JvmCustomAnnotationValue)value;
+        _matched=true;
+        EList<Object> _values = _jvmCustomAnnotationValue.getValues();
+        Iterable<XExpression> _filter = Iterables.<XExpression>filter(_values, XExpression.class);
+        final Function1<XExpression,Object> _function = new Function1<XExpression,Object>() {
+            public Object apply(final XExpression it) {
+              Object _evaluate = CompilationUnitImpl.this.evaluate(it);
+              return _evaluate;
+            }
+          };
+        Iterable<Object> _map = IterableExtensions.<XExpression, Object>map(_filter, _function);
+        List<Object> _list = IterableExtensions.<Object>toList(_map);
+        _switchResult = _list;
+      }
+    }
     if (!_matched) {
       if (value instanceof JvmTypeAnnotationValue) {
         final JvmTypeAnnotationValue _jvmTypeAnnotationValue = (JvmTypeAnnotationValue)value;
