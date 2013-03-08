@@ -42,26 +42,26 @@ import com.google.inject.Inject;
 @SuppressWarnings("restriction")
 public class OriginalEditorSelector implements IEditorAssociationOverride {
 
-	private static final Logger logger = Logger. getLogger(OriginalEditorSelector.class);
-	
+	private static final Logger logger = Logger.getLogger(OriginalEditorSelector.class);
+
 	@Inject
 	private IResourceServiceProvider.Registry resourceServiceProviderRegistry;
-	
+
 	@Inject
 	private ITraceForStorageProvider traceInformation;
-	
+
 	@Inject
 	private IWorkbench workbench;
-	
+
 	@Inject
 	private StacktraceBasedEditorDecider decisions;
-	
+
 	@Inject
 	private DebugPluginListener debugPluginListener;
-	
+
 	@Inject
 	private ITraceForTypeRootProvider traceForTypeRootProvider;
-	
+
 	public IEditorDescriptor[] overrideEditors(IEditorInput editorInput, IContentType contentType, IEditorDescriptor[] editorDescriptors) {
 		IEditorDescriptor xbaseEditor = findXbaseEditor(editorInput);
 		if (xbaseEditor != null) {
@@ -93,12 +93,15 @@ public class OriginalEditorSelector implements IEditorAssociationOverride {
 			return result;
 		return editorDescriptor;
 	}
-	
-	private IEditorDescriptor findXbaseEditor(String fileName) {
+
+	// we get invoked when:
+	// - somebody doubleclicks on a .class file in a JAR in the JDT Package Explorer
+	// - somebody clicks on a stack frame hyperlink in the console 
+	protected IEditorDescriptor findXbaseEditor(String fileName) {
 		String file = debugPluginListener.findXtextSourceFileNameForClassFile(fileName);
 		if (file != null)
 			return getXtextEditor(URI.createURI(file));
-		IType type = findJavaTypeForSimpleClassFileName(fileName);
+		IType type = findJavaTypeForSimpleFileName(fileName);
 		if (type != null) {
 			ITrace trace = traceForTypeRootProvider.getTraceToSource(type.getTypeRoot());
 			return getXtextEditor(trace);
@@ -140,14 +143,18 @@ public class OriginalEditorSelector implements IEditorAssociationOverride {
 		return null;
 	}
 
-	protected IType findJavaTypeForSimpleClassFileName(String name) {
-		if (!name.endsWith(".class"))
+	protected IType findJavaTypeForSimpleFileName(String name) {
+		int index = name.lastIndexOf('.');
+		if (index < 0)
+			return null;
+		String typeName = name.substring(0, index);
+		String ext = name.substring(index + 1).toLowerCase();
+		if (!ext.equals("class") && !ext.equals("java"))
 			return null;
 		final IType[] foundType = new IType[1];
 		try {
-			char[] typeName = name.substring(0, name.length() - ".class".length()).toCharArray();
 			new SearchEngine().searchAllTypeNames(null, 0, // match all package names
-					typeName, SearchPattern.R_EXACT_MATCH | SearchPattern.R_CASE_SENSITIVE, // and all type names,
+					typeName.toCharArray(), SearchPattern.R_EXACT_MATCH | SearchPattern.R_CASE_SENSITIVE, // and all type names,
 					IJavaSearchConstants.TYPE, // search for types
 					SearchEngine.createWorkspaceScope(), // in the scope of the current project
 					new TypeNameMatchRequestor() {

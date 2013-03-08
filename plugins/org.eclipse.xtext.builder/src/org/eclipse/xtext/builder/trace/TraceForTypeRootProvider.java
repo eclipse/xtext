@@ -12,11 +12,15 @@ import java.io.InputStream;
 
 import org.apache.log4j.Logger;
 import org.eclipse.core.resources.IProject;
+import org.eclipse.core.resources.IResource;
+import org.eclipse.core.resources.IStorage;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.jdt.core.IClassFile;
+import org.eclipse.jdt.core.ICompilationUnit;
 import org.eclipse.jdt.core.IJavaElement;
 import org.eclipse.jdt.core.IPackageFragmentRoot;
 import org.eclipse.jdt.core.IType;
@@ -26,6 +30,7 @@ import org.eclipse.jdt.internal.core.BinaryType;
 import org.eclipse.jdt.internal.core.JarPackageFragmentRoot;
 import org.eclipse.xtext.generator.trace.AbstractTraceRegion;
 import org.eclipse.xtext.generator.trace.ITrace;
+import org.eclipse.xtext.generator.trace.ITraceForStorageProvider;
 import org.eclipse.xtext.generator.trace.ITraceRegionProvider;
 import org.eclipse.xtext.generator.trace.TraceFileNameProvider;
 import org.eclipse.xtext.generator.trace.TraceRegionSerializer;
@@ -58,6 +63,9 @@ public class TraceForTypeRootProvider implements ITraceForTypeRootProvider {
 
 	@Inject
 	private TraceFileNameProvider traceFileNameProvider;
+
+	@Inject
+	private ITraceForStorageProvider traceForStorageProvider;
 
 	private Pair<ITypeRoot, ITrace> lruCache = null;
 
@@ -118,10 +126,31 @@ public class TraceForTypeRootProvider implements ITraceForTypeRootProvider {
 	public ITrace getTraceToSource(final ITypeRoot derivedJavaType) {
 		if (lruCache != null && lruCache.getFirst().equals(derivedJavaType))
 			return lruCache.getSecond();
-		IPath sourcePath = getSourcePath(derivedJavaType);
+		if (derivedJavaType instanceof IClassFile)
+			return getTraceToSource((IClassFile) derivedJavaType);
+		if (derivedJavaType instanceof ICompilationUnit)
+			return getTraceToSource((ICompilationUnit) derivedJavaType);
+		throw new IllegalStateException("Unknown type " + derivedJavaType);
+	}
+
+	@Nullable
+	public ITrace getTraceToSource(final ICompilationUnit javaFile) {
+		try {
+			IResource resource = javaFile.getUnderlyingResource();
+			if (resource instanceof IStorage)
+				return traceForStorageProvider.getTraceToSource((IStorage) resource);
+		} catch (JavaModelException e) {
+			log.error(e);
+		}
+		return null;
+	}
+
+	@Nullable
+	public ITrace getTraceToSource(final IClassFile classFile) {
+		IPath sourcePath = getSourcePath(classFile);
 		if (sourcePath == null)
 			return null;
-		IProject project = derivedJavaType.getJavaProject().getProject();
+		IProject project = classFile.getJavaProject().getProject();
 		AbstractTrace trace1;
 		if (isZipFile(sourcePath)) {
 			ZipFileAwareTrace zipFileAwareTrace = zipFileAwareTraceProvider.get();
@@ -137,10 +166,10 @@ public class TraceForTypeRootProvider implements ITraceForTypeRootProvider {
 		final AbstractTrace result = trace1;
 		result.setTraceRegionProvider(new ITraceRegionProvider() {
 			public AbstractTraceRegion getTraceRegion() {
-				String traceSimpleFileName = getTraceSimpleFileName(derivedJavaType);
+				String traceSimpleFileName = getTraceSimpleFileName(classFile);
 				if (traceSimpleFileName == null)
 					return null;
-				String pathInFragmentRoot = getPathInFragmentRoot(derivedJavaType);
+				String pathInFragmentRoot = getPathInFragmentRoot(classFile);
 				URI traceURI = URI.createURI(pathInFragmentRoot + traceSimpleFileName);
 				try {
 					InputStream contents = result.getContents(traceURI, result.getLocalProject());
@@ -158,7 +187,7 @@ public class TraceForTypeRootProvider implements ITraceForTypeRootProvider {
 				return null;
 			}
 		});
-		lruCache = Tuples.<ITypeRoot, ITrace> create(derivedJavaType, result);
+		lruCache = Tuples.<ITypeRoot, ITrace> create(classFile, result);
 		return result;
 	}
 }
