@@ -7,6 +7,8 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.scoping.batch;
 
+import static com.google.common.collect.Iterables.*;
+
 import java.util.Collection;
 import java.util.Collections;
 import java.util.EnumSet;
@@ -146,7 +148,8 @@ public class DynamicExtensionsScope extends AbstractSessionBasedScope {
 						for(JvmType type: types) {
 							if (type instanceof JvmDeclaredType) {
 								Iterable<JvmFeature> features = ((JvmDeclaredType) type).findAllFeaturesByName(simpleName);
-								Iterables.addAll(allFeatures, features);
+								Iterable<? extends JvmFeature> filtered = order==1 ? features : filter(features, JvmOperation.class);
+								Iterables.addAll(allFeatures, filtered);
 							}
 						}
 					}
