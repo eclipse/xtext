@@ -676,7 +676,7 @@ public class XtendJvmModelInferrer implements IJvmModelInferrer {
 		}
 		associator.associate(parameter, jvmParam);
 		translateAnnotationsTo(parameter.getAnnotations(), jvmParam);
-		if (parameter.isExtension()) {
+		if (parameter.isExtension() && typeReferences.findDeclaredType(Extension.class, parameter) != null) {
 			jvmParam.getAnnotations().add(jvmTypesBuilder.toAnnotation(parameter, Extension.class));
 		}
 		executable.getParameters().add(jvmParam);

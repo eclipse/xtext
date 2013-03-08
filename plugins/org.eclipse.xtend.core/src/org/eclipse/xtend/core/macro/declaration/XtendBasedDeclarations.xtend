@@ -155,7 +155,7 @@ class XtendClassDeclarationImpl extends XtendTypeDeclarationImpl<XtendClass> imp
 		delegate.getImplements.map[compilationUnit.toTypeReference(it)]
 	}
 	
-	override getSuperclass() {
+	override getExtendedClass() {
 		compilationUnit.toTypeReference(delegate.getExtends)
 	}
 	
@@ -179,7 +179,7 @@ class XtendClassDeclarationImpl extends XtendTypeDeclarationImpl<XtendClass> imp
 
 class XtendInterfaceDeclarationImpl extends XtendTypeDeclarationImpl<XtendInterface> implements InterfaceDeclaration {
 	
-	override getSuperInterfaces() {
+	override getExtendedInterfaces() {
 		delegate.extends.map[compilationUnit.toTypeReference(it)]
 	}
 	

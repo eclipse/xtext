@@ -61,7 +61,10 @@ class TypeReferenceImpl extends AbstractDeclarationImpl<LightweightTypeReference
 	}
 	
 	override getArrayComponentType() {
-		compilationUnit.toTypeReference(delegate.componentType)
+		val componentType = delegate.componentType
+		if (componentType == null)
+			return null
+		return compilationUnit.toTypeReference(componentType)
 	}
 	
 	override getLowerBound() {

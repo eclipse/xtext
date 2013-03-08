@@ -17,10 +17,9 @@ import org.eclipse.xtend.lib.macro.declaration.Element
 import org.eclipse.xtend.lib.macro.services.Problem
 import org.eclipse.xtend.lib.macro.services.ProblemSupport
 import org.eclipse.xtext.common.types.JvmFormalParameter
-import org.eclipse.xtext.common.types.JvmIdentifiableElement
 import org.eclipse.xtext.common.types.TypesPackage
-import org.eclipse.xtext.validation.EObjectDiagnosticImpl
 import org.eclipse.xtext.diagnostics.Severity
+import org.eclipse.xtext.validation.EObjectDiagnosticImpl
 
 class ProblemSupportImpl implements ProblemSupport {
 	
@@ -71,12 +70,7 @@ class ProblemSupportImpl implements ProblemSupport {
 	def private getResourceAndEObject(Element element) {
 		checkCanceled
 		switch element {
-			XtendNamedElementImpl<? extends EObject>: {
-				val resource = element.delegate.eResource
-				val eobject = element.delegate
-				return resource -> eobject
-			}
-			JvmNamedElementImpl<JvmIdentifiableElement> : {
+			AbstractDeclarationImpl<? extends EObject>: {
 				val resource = element.delegate.eResource
 				if (resource == compilationUnit.xtendFile.eResource) {
 					val eobject = compilationUnit.jvmAssociations.getPrimarySourceElement(element.delegate)

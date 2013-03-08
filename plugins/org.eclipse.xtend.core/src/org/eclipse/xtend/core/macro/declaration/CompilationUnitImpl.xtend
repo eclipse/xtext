@@ -83,6 +83,7 @@ import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference
 import org.eclipse.xtext.xbase.typesystem.references.OwnedConverter
 import org.eclipse.xtext.xbase.typesystem.util.CommonTypeComputationServices
 import org.eclipse.xtend.lib.macro.declaration.MutableAnnotationReference
+import org.eclipse.xtext.common.types.JvmCustomAnnotationValue
 
 class CompilationUnitImpl implements CompilationUnit {
 	
@@ -415,6 +416,7 @@ class CompilationUnitImpl implements CompilationUnit {
 	
 	def Object translateAnnotationValue(JvmAnnotationValue value) {
 		val List<?> result = switch value {
+			JvmCustomAnnotationValue : value.values.filter(typeof(XExpression)).map[evaluate(it)].toList
 			JvmTypeAnnotationValue : value.values.map[toTypeReference(it)]
 			JvmAnnotationAnnotationValue : value.values.map[toAnnotationReference(it)]
 			JvmStringAnnotationValue : value.values

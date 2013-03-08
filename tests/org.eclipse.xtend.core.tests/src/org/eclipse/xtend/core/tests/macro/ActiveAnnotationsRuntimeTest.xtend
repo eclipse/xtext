@@ -16,13 +16,15 @@ import org.eclipse.xtext.xbase.lib.Pair
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
+import org.eclipse.xtend.core.macro.ProcessorInstanceForJvmTypeProvider
 
 @RunWith(typeof(XtextRunner))
 @InjectWith(typeof(RuntimeInjectorProvider))
-class ActiveAnnotationsRuntimeTest extends AbstractActiveAnnotationsTest {
+class ActiveAnnotationsRuntimeTest extends AbstractReuasableActiveAnnotationTests {
 	
 	@Inject CompilationTestHelper compiler
 	@Inject Provider<CompilationUnitImpl> compilationUnitProvider
+	@Inject ProcessorInstanceForJvmTypeProvider processorProvider
 	
 	@Before
 	def void setUp() {
@@ -32,11 +34,13 @@ class ActiveAnnotationsRuntimeTest extends AbstractActiveAnnotationsTest {
 	override assertProcessing(Pair<String,String> macroFile, Pair<String,String> clientFile, (CompilationUnitImpl)=>void expectations) {
 		val macroResourceSet = compiler.unLoadedResourceSet(macroFile) as XtextResourceSet
 		macroResourceSet.classpathURIContext = getClass.classLoader
-		
 		val resourceSet = compiler.unLoadedResourceSet(clientFile) as XtextResourceSet
 		compiler.compile(macroResourceSet) [ result |
-			resourceSet.setClasspathURIContext(new DelegatingClassloader(getClass().classLoader) [result.getCompiledClass(it)])
+			val classLoader = new DelegatingClassloader(getClass().classLoader) [result.getCompiledClass(it)]
+			resourceSet.classpathURIContext = classLoader
+			processorProvider.classLoader = classLoader
 		]
+		
 		val singleResource = resourceSet.resources.head
 		compiler.compile(resourceSet) [
 			val unit = compilationUnitProvider.get

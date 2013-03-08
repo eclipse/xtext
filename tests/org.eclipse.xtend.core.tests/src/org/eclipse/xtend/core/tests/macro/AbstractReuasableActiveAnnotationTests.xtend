@@ -6,7 +6,7 @@ import org.junit.Test
 
 import static org.junit.Assert.*
 
-abstract class AbstractActiveAnnotationsTest {
+abstract class AbstractReuasableActiveAnnotationTests {
 	
 	@Test def void testSimpleModification() {
 		assertProcessing(

@@ -57,7 +57,7 @@ class DeclarationsTest extends AbstractXtendTestCase {
 			assertEquals('foo', packageName)
 			val clazz = sourceTypeDeclarations.head as ClassDeclaration
 			assertEquals('foo.MyClass', clazz.name)
-			assertEquals('Object', clazz.superclass.toString)
+			assertEquals('Object', clazz.extendedClass.toString)
 			assertEquals('Serializable', clazz.implementedInterfaces.head.toString)
 			val field = clazz.declaredMembers.head as FieldDeclaration
 			assertEquals('foo', field.name)
@@ -88,7 +88,7 @@ class DeclarationsTest extends AbstractXtendTestCase {
 			val genClazz = typeLookup.findClass('foo.MyClass')
 			
 			assertEquals('foo.MyClass', clazz.name)
-			assertNull(clazz.superclass)
+			assertNull(clazz.extendedClass)
 			assertTrue(clazz.implementedInterfaces.empty)
 			assertEquals(3, clazz.declaredMembers.size)
 			assertEquals('T', clazz.typeParameters.head.name)
