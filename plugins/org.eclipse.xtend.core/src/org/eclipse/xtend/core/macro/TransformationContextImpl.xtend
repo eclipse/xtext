@@ -152,5 +152,13 @@ class TransformationContextImpl implements TransformationContext {
 		unit.typeLookup.findEnumerationType(qualifiedName)
 	}
 	
+	override findTypeGlobally(Class<? extends Object> clazz) {
+		unit.typeLookup.findTypeGlobally(clazz)
+	}
+	
+	override findTypeGlobally(String typeName) {
+		unit.typeLookup.findTypeGlobally(typeName)
+	}
+	
 }
 

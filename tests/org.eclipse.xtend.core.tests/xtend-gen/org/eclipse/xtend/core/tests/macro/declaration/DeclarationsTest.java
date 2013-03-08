@@ -69,15 +69,15 @@ public class DeclarationsTest extends AbstractXtendTestCase {
           final ClassDeclaration clazz = ((ClassDeclaration) _head);
           String _name = clazz.getName();
           Assert.assertEquals("MyClass", _name);
-          List<AnnotationReference> _annotations = clazz.getAnnotations();
-          final AnnotationReference suppressWarning = IterableExtensions.<AnnotationReference>head(_annotations);
+          Iterable<? extends AnnotationReference> _annotations = clazz.getAnnotations();
+          final AnnotationReference suppressWarning = IterableExtensions.head(_annotations);
           final AnnotationTypeDeclaration supressWarningsDeclaration = suppressWarning.getAnnotationTypeDeclaration();
           String _name_1 = supressWarningsDeclaration.getName();
           Assert.assertEquals("java.lang.SuppressWarnings", _name_1);
           Object _value = suppressWarning.getValue("value");
           Assert.assertEquals("unused", _value);
-          List<AnnotationReference> _annotations_1 = supressWarningsDeclaration.getAnnotations();
-          int _size = _annotations_1.size();
+          Iterable<? extends AnnotationReference> _annotations_1 = supressWarningsDeclaration.getAnnotations();
+          int _size = IterableExtensions.size(_annotations_1);
           Assert.assertEquals(2, _size);
           Iterable<? extends MemberDeclaration> _declaredMembers = supressWarningsDeclaration.getDeclaredMembers();
           Iterable<AnnotationTypeElementDeclaration> _filter = Iterables.<AnnotationTypeElementDeclaration>filter(_declaredMembers, AnnotationTypeElementDeclaration.class);
@@ -90,8 +90,8 @@ public class DeclarationsTest extends AbstractXtendTestCase {
           Iterable<? extends MemberDeclaration> _declaredMembers_1 = clazz.getDeclaredMembers();
           MemberDeclaration _head_1 = IterableExtensions.head(_declaredMembers_1);
           final FieldDeclaration field = ((FieldDeclaration) _head_1);
-          List<AnnotationReference> _annotations_2 = field.getAnnotations();
-          final AnnotationReference inject = IterableExtensions.<AnnotationReference>head(_annotations_2);
+          Iterable<? extends AnnotationReference> _annotations_2 = field.getAnnotations();
+          final AnnotationReference inject = IterableExtensions.head(_annotations_2);
           Object _value_1 = inject.getValue("optional");
           Assert.assertTrue((((Boolean) _value_1)).booleanValue());
         }

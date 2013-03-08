@@ -21,9 +21,9 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.xtend.core.jvmmodel.IXtendJvmAssociations;
 import org.eclipse.xtend.core.macro.CompilationContextImpl;
+import org.eclipse.xtend.core.macro.declaration.JvmAnnotationReferenceImpl;
 import org.eclipse.xtend.core.macro.declaration.JvmAnnotationTypeDeclarationImpl;
 import org.eclipse.xtend.core.macro.declaration.JvmAnnotationTypeElementDeclarationImpl;
-import org.eclipse.xtend.core.macro.declaration.JvmBasedAnnotationReferenceImpl;
 import org.eclipse.xtend.core.macro.declaration.JvmClassDeclarationImpl;
 import org.eclipse.xtend.core.macro.declaration.JvmConstructorDeclarationImpl;
 import org.eclipse.xtend.core.macro.declaration.JvmEnumerationTypeDeclarationImpl;
@@ -70,6 +70,7 @@ import org.eclipse.xtend.lib.macro.declaration.AnnotationReference;
 import org.eclipse.xtend.lib.macro.declaration.CompilationStrategy;
 import org.eclipse.xtend.lib.macro.declaration.CompilationUnit;
 import org.eclipse.xtend.lib.macro.declaration.MemberDeclaration;
+import org.eclipse.xtend.lib.macro.declaration.MutableAnnotationReference;
 import org.eclipse.xtend.lib.macro.declaration.MutableDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.MutableMemberDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.MutableNamedElement;
@@ -137,9 +138,13 @@ import org.eclipse.xtext.xbase.typesystem.util.CommonTypeComputationServices;
 
 @SuppressWarnings("all")
 public class CompilationUnitImpl implements CompilationUnit {
-  public List<AnnotationReference> getAnnotations() {
+  public Iterable<? extends AnnotationReference> getAnnotations() {
     List<AnnotationReference> _emptyList = CollectionLiterals.<AnnotationReference>emptyList();
     return _emptyList;
+  }
+  
+  public AnnotationReference findAnnotation(final Type annotationType) {
+    return null;
   }
   
   public String getName() {
@@ -893,21 +898,21 @@ public class CompilationUnitImpl implements CompilationUnit {
     return _orCreate;
   }
   
-  public AnnotationReference toAnnotationReference(final JvmAnnotationReference delegate) {
-    final Function1<JvmAnnotationReference,JvmBasedAnnotationReferenceImpl> _function = new Function1<JvmAnnotationReference,JvmBasedAnnotationReferenceImpl>() {
-        public JvmBasedAnnotationReferenceImpl apply(final JvmAnnotationReference it) {
-          JvmBasedAnnotationReferenceImpl _jvmBasedAnnotationReferenceImpl = new JvmBasedAnnotationReferenceImpl();
-          final Procedure1<JvmBasedAnnotationReferenceImpl> _function = new Procedure1<JvmBasedAnnotationReferenceImpl>() {
-              public void apply(final JvmBasedAnnotationReferenceImpl it) {
+  public MutableAnnotationReference toAnnotationReference(final JvmAnnotationReference delegate) {
+    final Function1<JvmAnnotationReference,JvmAnnotationReferenceImpl> _function = new Function1<JvmAnnotationReference,JvmAnnotationReferenceImpl>() {
+        public JvmAnnotationReferenceImpl apply(final JvmAnnotationReference it) {
+          JvmAnnotationReferenceImpl _jvmAnnotationReferenceImpl = new JvmAnnotationReferenceImpl();
+          final Procedure1<JvmAnnotationReferenceImpl> _function = new Procedure1<JvmAnnotationReferenceImpl>() {
+              public void apply(final JvmAnnotationReferenceImpl it) {
                 it.setDelegate(delegate);
                 it.setCompilationUnit(CompilationUnitImpl.this);
               }
             };
-          JvmBasedAnnotationReferenceImpl _doubleArrow = ObjectExtensions.<JvmBasedAnnotationReferenceImpl>operator_doubleArrow(_jvmBasedAnnotationReferenceImpl, _function);
+          JvmAnnotationReferenceImpl _doubleArrow = ObjectExtensions.<JvmAnnotationReferenceImpl>operator_doubleArrow(_jvmAnnotationReferenceImpl, _function);
           return _doubleArrow;
         }
       };
-    JvmBasedAnnotationReferenceImpl _orCreate = this.<JvmAnnotationReference, JvmBasedAnnotationReferenceImpl>getOrCreate(delegate, _function);
+    JvmAnnotationReferenceImpl _orCreate = this.<JvmAnnotationReference, JvmAnnotationReferenceImpl>getOrCreate(delegate, _function);
     return _orCreate;
   }
   
@@ -934,13 +939,13 @@ public class CompilationUnitImpl implements CompilationUnit {
         final JvmAnnotationAnnotationValue _jvmAnnotationAnnotationValue = (JvmAnnotationAnnotationValue)value;
         _matched=true;
         EList<JvmAnnotationReference> _values = _jvmAnnotationAnnotationValue.getValues();
-        final Function1<JvmAnnotationReference,AnnotationReference> _function = new Function1<JvmAnnotationReference,AnnotationReference>() {
-            public AnnotationReference apply(final JvmAnnotationReference it) {
-              AnnotationReference _annotationReference = CompilationUnitImpl.this.toAnnotationReference(it);
+        final Function1<JvmAnnotationReference,MutableAnnotationReference> _function = new Function1<JvmAnnotationReference,MutableAnnotationReference>() {
+            public MutableAnnotationReference apply(final JvmAnnotationReference it) {
+              MutableAnnotationReference _annotationReference = CompilationUnitImpl.this.toAnnotationReference(it);
               return _annotationReference;
             }
           };
-        List<AnnotationReference> _map = ListExtensions.<JvmAnnotationReference, AnnotationReference>map(_values, _function);
+        List<MutableAnnotationReference> _map = ListExtensions.<JvmAnnotationReference, MutableAnnotationReference>map(_values, _function);
         _switchResult = _map;
       }
     }

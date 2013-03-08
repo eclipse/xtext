@@ -10,6 +10,6 @@ package org.eclipse.xtend.lib.macro.declaration;
 import com.google.common.annotations.Beta;
 
 @Beta
-public interface MutableDeclaration extends MutableNamedElement, Declaration {
+public interface MutableDeclaration extends MutableAnnotationTarget, Declaration {
 	
 }

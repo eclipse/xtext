@@ -82,7 +82,8 @@ public class ProcessorInstanceForJvmTypeProvider {
         }
       }
     }
-    ProcessorInstanceForJvmTypeProvider.logger.error("No class loader configured or annotation processing.");
-    return null;
+    ProcessorInstanceForJvmTypeProvider.logger.info("No class loader configured. Trying with this class\' classloader.");
+    Class<? extends ProcessorInstanceForJvmTypeProvider> _class = this.getClass();
+    return _class.getClassLoader();
   }
 }

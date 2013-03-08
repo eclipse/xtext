@@ -41,27 +41,29 @@ public interface MutableTypeDeclaration extends MutableMemberDeclaration, TypeDe
 	 * 
 	 * @param name the name of the field to be added
 	 * @param initializer a callback for further initialization of the created field
-	 * 
+	 * @return the created field declaration
 	 * @throws UnsupportedOperationException if the underlying type declaration is not capable of containing methods.
 	 */
-	void addField(String name, Procedures.Procedure1<MutableFieldDeclaration> initializer);
+	MutableFieldDeclaration addField(String name, Procedures.Procedure1<MutableFieldDeclaration> initializer);
 
 	/**
 	 * Adds a new method with the given name to this type declaration.
 	 * 
 	 * @param name the name of the method
 	 * @param initializer a call back for further initialization of the method
+	 * @return the created method declaration
 	 * @throws UnsupportedOperationException if the underlying type declaration is not capable of containing methods.
 	 */
-	void addMethod(String name, Procedures.Procedure1<MutableMethodDeclaration> initializer);
+	MutableMethodDeclaration addMethod(String name, Procedures.Procedure1<MutableMethodDeclaration> initializer);
 	
 	/**
 	 * Adds a new method with the given name to this type declaration.
 	 * 
 	 * @param name the name of the method
 	 * @param initializer a call back for further initialization of the method
+	 * @return the created constructor declaration
 	 * @throws UnsupportedOperationException if the underlying type declaration is not capable of containing methods.
 	 */
-	void addConstructor(Procedures.Procedure1<MutableConstructorDeclaration> initializer);
+	MutableConstructorDeclaration addConstructor(Procedures.Procedure1<MutableConstructorDeclaration> initializer);
 	
 }

@@ -15,13 +15,17 @@ import org.eclipse.xtend.core.macro.declaration.XtendNamedElementImpl;
 import org.eclipse.xtend.core.xtend.XtendAnnotationTarget;
 import org.eclipse.xtend.lib.macro.declaration.AnnotationReference;
 import org.eclipse.xtend.lib.macro.declaration.AnnotationTarget;
+import org.eclipse.xtend.lib.macro.declaration.AnnotationTypeDeclaration;
+import org.eclipse.xtend.lib.macro.declaration.Type;
 import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotation;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
+import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ListExtensions;
+import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 
 @SuppressWarnings("all")
 public abstract class XtendAnnotationTargetImpl<T extends XtendAnnotationTarget> extends XtendNamedElementImpl<T> implements AnnotationTarget {
-  public List<AnnotationReference> getAnnotations() {
+  public Iterable<? extends AnnotationReference> getAnnotations() {
     T _delegate = this.getDelegate();
     EList<XAnnotation> _annotations = _delegate.getAnnotations();
     final Function1<XAnnotation,AnnotationReference> _function = new Function1<XAnnotation,AnnotationReference>() {
@@ -34,5 +38,18 @@ public abstract class XtendAnnotationTargetImpl<T extends XtendAnnotationTarget>
     List<AnnotationReference> _map = ListExtensions.<XAnnotation, AnnotationReference>map(_annotations, _function);
     ImmutableList<AnnotationReference> _copyOf = ImmutableList.<AnnotationReference>copyOf(_map);
     return _copyOf;
+  }
+  
+  public AnnotationReference findAnnotation(final Type annotationType) {
+    Iterable<? extends AnnotationReference> _annotations = this.getAnnotations();
+    final Function1<AnnotationReference,Boolean> _function = new Function1<AnnotationReference,Boolean>() {
+        public Boolean apply(final AnnotationReference it) {
+          AnnotationTypeDeclaration _annotationTypeDeclaration = it.getAnnotationTypeDeclaration();
+          boolean _equals = ObjectExtensions.operator_equals(_annotationTypeDeclaration, annotationType);
+          return Boolean.valueOf(_equals);
+        }
+      };
+    AnnotationReference _findFirst = IterableExtensions.findFirst(_annotations, _function);
+    return _findFirst;
   }
 }
