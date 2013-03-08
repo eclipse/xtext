@@ -10,9 +10,9 @@
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<xtend.version>2.4.0-SNAPSHOT</xtend.version>
-		<sdkPath></sdkPath>
-		<platform.version></platform.version>
-		<avd.name></avd.name>
+		<sdkPath>${sdk_path}</sdkPath>
+		<platform.version>${platform_version}</platform.version>
+		<avd.name>${avd_name}</avd.name>
 	</properties>
 
 	<dependencies>
