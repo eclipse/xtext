@@ -14,6 +14,29 @@ import org.junit.Test
 class XtendCompilerTest extends AbstractXtendCompilerTest {
 	
 	@Test
+	def testClassAndLocalVarConflict() {
+		assertCompilesTo('''
+			
+			class A {
+				
+				def java.util.Set<String> doStuff(String Collections) {
+					java::util::Collections::emptySet
+				}
+			
+			}
+		''', '''
+			import java.util.Set;
+			
+			@SuppressWarnings("all")
+			public class A {
+			  public Set<String> doStuff(final String Collections) {
+			    Set<String> _emptySet = java.util.Collections.<String>emptySet();
+			    return _emptySet;
+			  }
+			}
+		''')
+	}
+	@Test
 	def testExpectationFromTypeParameter() {
 		assertCompilesTo('''
 			import java.util.Set

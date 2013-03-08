@@ -24,6 +24,51 @@ import org.junit.Test;
 @SuppressWarnings("all")
 public class XtendCompilerTest extends AbstractXtendCompilerTest {
   @Test
+  public void testClassAndLocalVarConflict() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.newLine();
+    _builder.append("class A {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def java.util.Set<String> doStuff(String Collections) {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("java::util::Collections::emptySet");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("import java.util.Set;");
+    _builder_1.newLine();
+    _builder_1.newLine();
+    _builder_1.append("@SuppressWarnings(\"all\")");
+    _builder_1.newLine();
+    _builder_1.append("public class A {");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("public Set<String> doStuff(final String Collections) {");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("Set<String> _emptySet = java.util.Collections.<String>emptySet();");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("return _emptySet;");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    this.assertCompilesTo(_builder, _builder_1);
+  }
+  
+  @Test
   public void testExpectationFromTypeParameter() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("import java.util.Set");
