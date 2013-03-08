@@ -7,9 +7,9 @@
 		<relativePath>../org.eclipse.xtend.maven</relativePath>
 	</parent>
 	<modelVersion>4.0.0</modelVersion>
-	<artifactId>xtend-archetype</artifactId>
+	<artifactId>xtend-android-archetype</artifactId>
 	<packaging>maven-archetype</packaging>
-	<name>Create a simple Xtend project</name>
+	<name>Create a simple Xtend Android project</name>
 	<url>http://xtend-lang.org</url>
 	<build>
 		<extensions>
