@@ -58,4 +58,14 @@ public class XbaseSerializerWithNodeModelTest extends AbstractXbaseEvaluationTes
 		super.testReturnExpression_08();
 	}
 	
+	@Override
+	@Test @Ignore public void testClosure_32() throws Exception {
+		super.testClosure_32();
+	}
+	
+	@Override
+	@Test @Ignore public void testClosure_31() throws Exception {
+		super.testClosure_31();
+	}
+	
 }
