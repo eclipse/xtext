@@ -733,7 +733,7 @@ public class XtendJvmModelInferrer implements IJvmModelInferrer {
 						field.getAnnotations().add(annotationReference);
 				}
 			}
-			if (source.isExtension()) {
+			if (source.isExtension() && typeReferences.findDeclaredType(Extension.class, source) != null) {
 				field.getAnnotations().add(jvmTypesBuilder.toAnnotation(source, Extension.class));
 			}
 			if (isProperty && !field.isStatic()) {
