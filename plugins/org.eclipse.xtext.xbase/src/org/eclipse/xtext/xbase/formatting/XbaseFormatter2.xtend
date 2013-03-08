@@ -587,9 +587,12 @@ class XbaseFormatter2 extends AbstractFormatter {
 		val close = expr.nodeForKeyword("}")
 		if (open != null && close != null) {
 			if (expr.expressions.empty) {
-				format += open.append[newLine]
+				if(open.hiddenLeafsAfter.containsComment)
+					format += open.append[newLine increaseIndentation decreaseIndentation]
+				else
+					format += open.append[newLine]
 			} else {
-				format += open.append[cfg(blankLinesAroundExpression); increaseIndentation]
+				format += open.append[cfg(blankLinesAroundExpression) increaseIndentation]
 				for (child : expr.expressions) {
 					child.format(format)
 					if (child != expr.expressions.last || close != null) {
@@ -742,7 +745,7 @@ class XbaseFormatter2 extends AbstractFormatter {
 					if (expr.^default != null || c != expr.cases.last)
 						format += cnode.append[newLine; decreaseIndentation]
 					else
-						format += cnode.append[newLine; indentationChange = -2]
+						format += cnode.append[newLine; decreaseIndentationChange = 2]
 				}
 			}
 			if(expr.^default != null) {
@@ -750,7 +753,7 @@ class XbaseFormatter2 extends AbstractFormatter {
 				if (expr.^default instanceof XBlockExpression) {
 					format += expr.^default.nodeForEObject.surround([cfg(bracesInNewLine)], [newLine; decreaseIndentation])
 				} else {
-					format += expr.^default.nodeForEObject.surround([newLine; increaseIndentation], [newLine; indentationChange = -2])
+					format += expr.^default.nodeForEObject.surround([newLine; increaseIndentation], [newLine; decreaseIndentationChange = 2])
 				}
 			}
 		}
@@ -784,7 +787,10 @@ class XbaseFormatter2 extends AbstractFormatter {
 			default: newArrayList(x)
 		}
 		if (expr.declaredFormalParameters.empty && children.empty) {
-			format += expr.nodeForKeyword("[").append[noSpace]
+			if(open.hiddenLeafsAfter.containsComment)
+				format += open.append[newLine increaseIndentation decreaseIndentation]
+			else
+				format += open.append[noSpace]
 		} else if (expr.isMultilineLambda) {
 			formatClosureMultiLine(expr, open, children, close, format)
 		} else {

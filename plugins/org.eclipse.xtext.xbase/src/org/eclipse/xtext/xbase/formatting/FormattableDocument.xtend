@@ -65,6 +65,8 @@ class FormattableDocument {
 	
 	def protected FormattingData merge(FormattingData data1, FormattingData data2) {
 		var FormattingData old = null
+		var increaseIndentationChange = 0
+		var decreaseIndentationChange = 0
 		var indentationChange = 0 
 		if(data2.empty) {
 			indentationChange = data1.indentationChange + data2.indentationChange
@@ -74,9 +76,13 @@ class FormattableDocument {
 			old = data2
 		}
 		if(old != null) {
+			if(indentationChange > 0)
+				increaseIndentationChange = indentationChange
+			else
+				decreaseIndentationChange = indentationChange
 			switch old {
-				NewLineData: new NewLineData(old.offset, old.length, indentationChange, old.trace, old.newLines)
-				WhitespaceData: new WhitespaceData(old.offset, old.length, indentationChange, old.trace, old.space)
+				NewLineData: new NewLineData(old.offset, old.length, increaseIndentationChange, decreaseIndentationChange, old.trace, old.newLines)
+				WhitespaceData: new WhitespaceData(old.offset, old.length, increaseIndentationChange, decreaseIndentationChange, old.trace, old.space)
 			}
 		} else {
 			conflictOccurred = true
@@ -152,7 +158,14 @@ class FormattableDocument {
 						}
 					}
 					NewLineData: {
-						val replacement = getWrap(f.newLines) + getIndentation(indentation)
+						// If the indentation is increased and decreased at the same time this means increase on for this single formatting
+						// Usecase is empty block with comments inside
+						val computedIndentation =
+							if(f.increaseIndentationChange == f.decreaseIndentationChange * -1)
+								indentation + f.increaseIndentationChange
+							else
+								indentation
+						val replacement = getWrap(f.newLines) + getIndentation(computedIndentation)
 						replacements += new TextReplacement(f.offset, f.length, replacement)
 					}
 				}
@@ -281,9 +294,14 @@ class FormattableDocument {
 @Data abstract class FormattingData {
 	int offset
 	int length
-	int indentationChange
+	int increaseIndentationChange
+	int decreaseIndentationChange
 	Throwable trace
 	def boolean isEmpty() 
+
+	def getIndentationChange(){
+		increaseIndentationChange + decreaseIndentationChange
+	}
 }
 
 @Data class WhitespaceData extends FormattingData {
