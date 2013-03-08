@@ -28,7 +28,7 @@ public class PerformanceTest extends AbstractXtendTestCase {
   private XtendFileGenerator fileGenerator;
   
   @Rule
-  public final static StopwatchRule rule = new Function0<StopwatchRule>() {
+  public final StopwatchRule rule = new Function0<StopwatchRule>() {
     public StopwatchRule apply() {
       StopwatchRule _stopwatchRule = new StopwatchRule(true);
       return _stopwatchRule;

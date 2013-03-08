@@ -59,7 +59,7 @@ public class ActiveAnnotationsProcessingInIDETest extends AbstractReuasableActiv
   private Provider<CompilationUnitImpl> compilationUnitProvider;
   
   @Rule
-  public static StopwatchRule stopwatch = new Function0<StopwatchRule>() {
+  public StopwatchRule stopwatch = new Function0<StopwatchRule>() {
     public StopwatchRule apply() {
       StopwatchRule _stopwatchRule = new StopwatchRule(true);
       return _stopwatchRule;

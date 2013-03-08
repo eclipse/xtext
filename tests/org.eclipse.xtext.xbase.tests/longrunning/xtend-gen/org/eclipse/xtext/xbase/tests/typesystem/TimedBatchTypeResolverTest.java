@@ -25,7 +25,7 @@ import org.junit.Test;
 @SuppressWarnings("all")
 public class TimedBatchTypeResolverTest extends AbstractBatchTypeResolverTest {
   @Rule
-  public final static StopwatchRule rule = new Function0<StopwatchRule>() {
+  public final StopwatchRule rule = new Function0<StopwatchRule>() {
     public StopwatchRule apply() {
       StopwatchRule _stopwatchRule = new StopwatchRule(false);
       return _stopwatchRule;

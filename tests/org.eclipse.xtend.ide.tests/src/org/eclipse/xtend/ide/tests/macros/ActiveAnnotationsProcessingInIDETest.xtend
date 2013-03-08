@@ -41,7 +41,7 @@ class ActiveAnnotationsProcessingInIDETest extends AbstractReuasableActiveAnnota
 	@Inject XtextResourceSetProvider resourceSetProvider
 	@Inject Provider<CompilationUnitImpl> compilationUnitProvider 
 
-	@Rule public static StopwatchRule stopwatch = new StopwatchRule(true);
+	@Rule public StopwatchRule stopwatch = new StopwatchRule(true);
 	
 	@After def tearDown() throws Exception {
 		macroProject = null

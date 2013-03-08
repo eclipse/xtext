@@ -41,7 +41,7 @@ public class RebuildAffectedResourcesTest extends AbstractXtendUITestCase {
   private WorkbenchTestHelper workbenchTestHelper;
   
   @Rule
-  public static StopwatchRule rule = new Function0<StopwatchRule>() {
+  public StopwatchRule rule = new Function0<StopwatchRule>() {
     public StopwatchRule apply() {
       StopwatchRule _stopwatchRule = new StopwatchRule(true);
       return _stopwatchRule;
