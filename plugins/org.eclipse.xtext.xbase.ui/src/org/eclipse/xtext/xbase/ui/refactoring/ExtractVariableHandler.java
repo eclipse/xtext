@@ -13,7 +13,6 @@ import org.eclipse.core.commands.ExecutionEvent;
 import org.eclipse.core.commands.ExecutionException;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.text.ITextSelection;
-import org.eclipse.ltk.ui.refactoring.RefactoringWizardOpenOperation;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.xtext.resource.ILocationInFileProvider;
 import org.eclipse.xtext.resource.XtextResource;
@@ -21,6 +20,7 @@ import org.eclipse.xtext.ui.editor.XtextEditor;
 import org.eclipse.xtext.ui.editor.model.IXtextDocument;
 import org.eclipse.xtext.ui.editor.utils.EditorUtils;
 import org.eclipse.xtext.ui.refactoring.ui.DefaultRenameElementHandler;
+import org.eclipse.xtext.ui.refactoring.ui.RefactoringWizardOpenOperation_NonForking;
 import org.eclipse.xtext.ui.refactoring.ui.SyncUtil;
 import org.eclipse.xtext.util.ITextRegion;
 import org.eclipse.xtext.util.concurrent.IUnitOfWork;
@@ -64,7 +64,7 @@ public class ExtractVariableHandler extends AbstractHandler {
 								ITextRegion region = locationInFileProvider.getFullTextRegion(expression);
 								editor.selectAndReveal(region.getOffset(), region.getLength());
 								ExtractVariableWizard wizard = new ExtractVariableWizard(introduceVariableRefactoring);
-								RefactoringWizardOpenOperation openOperation = new RefactoringWizardOpenOperation(
+								RefactoringWizardOpenOperation_NonForking openOperation = new RefactoringWizardOpenOperation_NonForking(
 										wizard);
 								openOperation.run(editor.getSite().getShell(), "Extract Local Variable");
 							}
@@ -79,6 +79,4 @@ public class ExtractVariableHandler extends AbstractHandler {
 		}
 		return null;
 	}
-
-
 }

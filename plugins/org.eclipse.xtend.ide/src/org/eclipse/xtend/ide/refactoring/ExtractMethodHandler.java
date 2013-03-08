@@ -15,7 +15,6 @@ import org.eclipse.core.commands.ExecutionEvent;
 import org.eclipse.core.commands.ExecutionException;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.text.ITextSelection;
-import org.eclipse.ltk.ui.refactoring.RefactoringWizardOpenOperation;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
@@ -24,6 +23,7 @@ import org.eclipse.xtext.ui.editor.XtextEditor;
 import org.eclipse.xtext.ui.editor.model.IXtextDocument;
 import org.eclipse.xtext.ui.editor.utils.EditorUtils;
 import org.eclipse.xtext.ui.refactoring.ui.DefaultRenameElementHandler;
+import org.eclipse.xtext.ui.refactoring.ui.RefactoringWizardOpenOperation_NonForking;
 import org.eclipse.xtext.ui.refactoring.ui.SyncUtil;
 import org.eclipse.xtext.util.concurrent.IUnitOfWork;
 import org.eclipse.xtext.xbase.XExpression;
@@ -68,7 +68,7 @@ public class ExtractMethodHandler extends AbstractHandler {
 							if (extractMethodRefactoring.initialize(document, expressions)) {
 								updateSelection(editor, expressions);
 								ExtractMethodWizard wizard = wizardFactory.create(extractMethodRefactoring);
-								RefactoringWizardOpenOperation openOperation = new RefactoringWizardOpenOperation(
+								RefactoringWizardOpenOperation_NonForking openOperation = new RefactoringWizardOpenOperation_NonForking(
 										wizard);
 								openOperation.run(editor.getSite().getShell(), "Extract Method");
 							}
