@@ -21,11 +21,24 @@ import com.google.common.annotations.Beta;
  */
 @Beta
 public interface MethodDeclaration extends ExecutableDeclaration {
+	
+	/**
+	 * @return whether this method is declared <code>final</code>
+	 */
 	boolean isFinal();
 
+	/**
+	 * @return whether this method is declared <code>abstract</code>
+	 */
 	boolean isAbstract();
 
+	/**
+	 * @return whether this method is declared <code>static</code>
+	 */
 	boolean isStatic();
 	
+	/**
+	 * @return the return type of this method
+	 */
 	TypeReference getReturnType();
 }

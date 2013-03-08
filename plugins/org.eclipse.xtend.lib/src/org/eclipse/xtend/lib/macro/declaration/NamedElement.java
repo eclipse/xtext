@@ -21,6 +21,14 @@ import com.google.common.annotations.Beta;
  */
 @Beta
 public interface NamedElement extends Element {
+	
+	/**
+	 * @return the name of this element
+	 */
 	String getName();
+	
+	/**
+	 * @return the currently processed compilation unit this element is contained in, or <code>null</code> if this element is not contained in the currently processed compilation unit.
+	 */
 	CompilationUnit getCompilationUnit();
 }

@@ -8,8 +8,6 @@
 
 package org.eclipse.xtend.lib.macro.declaration;
 
-import java.util.List;
-
 import com.google.common.annotations.Beta;
 
 /**
@@ -21,5 +19,5 @@ public interface InterfaceDeclaration extends TypeDeclaration, TypeParameterDecl
 	/**
 	 * @return the extended interfaces
 	 */
-	List<TypeReference> getSuperInterfaces();
+	Iterable<? extends TypeReference> getExtendedInterfaces();
 }

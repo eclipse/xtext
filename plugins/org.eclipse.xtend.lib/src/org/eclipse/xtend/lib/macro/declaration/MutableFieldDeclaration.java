@@ -32,11 +32,23 @@ public interface MutableFieldDeclaration extends MutableMemberDeclaration, Field
 	void setStatic(boolean isStatic);
 	
 	/**
-	 * sets the 'initializer' of this field declaration
+	 * sets the 'initializer' expression of this field declaration.
+	 * Automatically detaches any previously assigned initializers from this field declaration.
+	 * 
+	 *  If the given expression is assigned to another {@link MutableExecutableDeclaration} or {@link MutableFieldDeclaration}, it
+	 *  will be detached from there as well.
 	 * 
 	 * @param initializer
 	 */
 	void setInitializer(Expression initializer);
+	
+	/**
+	 * sets the 'initializer' expression of this field declaration.
+	 * Automatically detaches any previously assigned initializers from this field declaration.
+	 * 
+	 * @param initializer
+	 */
+	void setInitializer(CompilationStrategy initializer);
 	
 	/**
 	 * sets the 'type' of this field declaration

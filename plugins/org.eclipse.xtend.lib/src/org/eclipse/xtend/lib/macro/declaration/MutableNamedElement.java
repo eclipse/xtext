@@ -9,8 +9,19 @@ package org.eclipse.xtend.lib.macro.declaration;
 
 import com.google.common.annotations.Beta;
 
+/**
+ * @author Sven Efftinge
+ */
 @Beta
 public interface MutableNamedElement extends NamedElement {
+	
+	/**
+	 * @param name the name of this element
+	 */
 	void setName(String name);
+	
+	/**
+	 * Removes this element from its container and renders it invalid.
+	 */
 	public void remove();
 }

@@ -21,6 +21,14 @@ import com.google.common.annotations.Beta;
  */
 @Beta
 public interface ParameterDeclaration extends Declaration {
+	
+	/**
+	 * @return the type of the parameter
+	 */
 	TypeReference getType();
+	
+	/**
+	 * @return the {@link ExecutableDeclaration} this parameter is contained in
+	 */
 	ExecutableDeclaration getDeclaringExecutable();
 }
