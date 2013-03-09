@@ -8,7 +8,6 @@
 package org.eclipse.xtend.core.macro.declaration
 
 import com.google.common.collect.ImmutableList
-import java.util.List
 import org.eclipse.xtend.lib.macro.declaration.AnnotationTypeDeclaration
 import org.eclipse.xtend.lib.macro.declaration.CompilationStrategy
 import org.eclipse.xtend.lib.macro.declaration.MutableAnnotationReference
@@ -28,6 +27,7 @@ import org.eclipse.xtend.lib.macro.declaration.MutableParameterDeclaration
 import org.eclipse.xtend.lib.macro.declaration.MutableTypeDeclaration
 import org.eclipse.xtend.lib.macro.declaration.MutableTypeParameterDeclaration
 import org.eclipse.xtend.lib.macro.declaration.MutableTypeParameterDeclarator
+import org.eclipse.xtend.lib.macro.declaration.Type
 import org.eclipse.xtend.lib.macro.declaration.TypeReference
 import org.eclipse.xtend.lib.macro.declaration.Visibility
 import org.eclipse.xtend.lib.macro.expression.Expression
@@ -47,7 +47,6 @@ import org.eclipse.xtext.common.types.JvmOperation
 import org.eclipse.xtext.common.types.JvmVisibility
 import org.eclipse.xtext.common.types.TypesFactory
 import org.eclipse.xtext.xbase.lib.Procedures$Procedure1
-import org.eclipse.xtend.lib.macro.declaration.Type
 
 abstract class JvmNamedElementImpl<T extends JvmIdentifiableElement> extends AbstractDeclarationImpl<T> implements MutableNamedElement {
 	
@@ -282,7 +281,6 @@ class JvmClassDeclarationImpl extends JvmTypeDeclarationImpl<JvmGenericType> imp
 	override getTypeParameters() {
 		delegate.typeParameters.map[compilationUnit.toTypeParameterDeclaration(it)]
 	}
-	
 
 	override setAbstract(boolean isAbstract) {
 		delegate.setAbstract(isAbstract)
@@ -353,7 +351,6 @@ abstract class JvmExecutableDeclarationImpl<T extends JvmExecutable> extends Jvm
 		delegate.exceptions.clear
 		for (exceptionType : exceptions) {
 			if (exceptionType != null) {
-				//TODO check whether it is subtype of Throwable
 				delegate.exceptions.add(compilationUnit.toJvmTypeReference(exceptionType))
 			}
 		}
@@ -469,7 +466,7 @@ class JvmFieldDeclarationImpl extends JvmMemberDeclarationImpl<JvmField> impleme
 	}
 	
 	override setInitializer(CompilationStrategy initializer) {
-		throw new UnsupportedOperationException("Auto-Jvm function stub")
+		compilationUnit.setCompilationStrategy(delegate, initializer)
 	}
 	
 	override isFinal() {

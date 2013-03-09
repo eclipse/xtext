@@ -394,6 +394,13 @@ class CompilationUnitImpl implements CompilationUnit {
 			it.append(compilationStrategy.compile(context))
 		]
 	}
+	def void setCompilationStrategy(JvmField field, CompilationStrategy compilationStrategy) {
+		checkCanceled
+		typesBuilder.setInitializer(field) [
+			val context = new CompilationContextImpl(it, this, typeRefSerializer)
+			it.append(compilationStrategy.compile(context))
+		]
+	}
 	
 	def AnnotationReference toAnnotationReference(XAnnotation delegate) {
 		getOrCreate(delegate) [
