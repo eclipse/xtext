@@ -882,6 +882,19 @@ public class CompilationUnitImpl implements CompilationUnit {
     this.typesBuilder.setBody(executable, _function);
   }
   
+  public void setCompilationStrategy(final JvmField field, final CompilationStrategy compilationStrategy) {
+    this.checkCanceled();
+    final Procedure1<ITreeAppendable> _function = new Procedure1<ITreeAppendable>() {
+        public void apply(final ITreeAppendable it) {
+          CompilationContextImpl _compilationContextImpl = new CompilationContextImpl(it, CompilationUnitImpl.this, CompilationUnitImpl.this.typeRefSerializer);
+          final CompilationContextImpl context = _compilationContextImpl;
+          CharSequence _compile = compilationStrategy.compile(context);
+          it.append(_compile);
+        }
+      };
+    this.typesBuilder.setInitializer(field, _function);
+  }
+  
   public AnnotationReference toAnnotationReference(final XAnnotation delegate) {
     final Function1<XAnnotation,XtendAnnotationReferenceImpl> _function = new Function1<XAnnotation,XtendAnnotationReferenceImpl>() {
         public XtendAnnotationReferenceImpl apply(final XAnnotation it) {

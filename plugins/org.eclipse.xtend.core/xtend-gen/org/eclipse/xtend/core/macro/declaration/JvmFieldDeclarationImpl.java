@@ -33,8 +33,9 @@ public class JvmFieldDeclarationImpl extends JvmMemberDeclarationImpl<JvmField> 
   }
   
   public void setInitializer(final CompilationStrategy initializer) {
-    UnsupportedOperationException _unsupportedOperationException = new UnsupportedOperationException("Auto-Jvm function stub");
-    throw _unsupportedOperationException;
+    CompilationUnitImpl _compilationUnit = this.getCompilationUnit();
+    JvmField _delegate = this.getDelegate();
+    _compilationUnit.setCompilationStrategy(_delegate, initializer);
   }
   
   public boolean isFinal() {
