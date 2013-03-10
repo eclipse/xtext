@@ -119,14 +119,12 @@ import org.eclipse.xtext.common.types.JvmVisibility;
 import org.eclipse.xtext.common.types.JvmVoid;
 import org.eclipse.xtext.common.types.util.TypeReferences;
 import org.eclipse.xtext.xbase.XExpression;
+import org.eclipse.xtext.xbase.annotations.interpreter.ConstantExpressionsInterpreter;
 import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotation;
 import org.eclipse.xtext.xbase.compiler.TypeReferenceSerializer;
 import org.eclipse.xtext.xbase.compiler.output.ITreeAppendable;
-import org.eclipse.xtext.xbase.interpreter.IEvaluationResult;
-import org.eclipse.xtext.xbase.interpreter.impl.XbaseInterpreter;
 import org.eclipse.xtext.xbase.jvmmodel.JvmTypesBuilder;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
-import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Functions.Function0;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
@@ -222,7 +220,7 @@ public class CompilationUnitImpl implements CompilationUnit {
   private IXtendJvmAssociations associations;
   
   @Inject
-  private XbaseInterpreter interpreter;
+  private ConstantExpressionsInterpreter interpreter;
   
   private final ProblemSupport _problemSupport = new Function0<ProblemSupport>() {
     public ProblemSupport apply() {
@@ -1075,16 +1073,6 @@ public class CompilationUnitImpl implements CompilationUnit {
   }
   
   public Object evaluate(final XExpression expression) {
-    try {
-      final IEvaluationResult result = this.interpreter.evaluate(expression);
-      Throwable _exception = result.getException();
-      boolean _notEquals = ObjectExtensions.operator_notEquals(_exception, null);
-      if (_notEquals) {
-        throw result.getException();
-      }
-      return result.getResult();
-    } catch (Throwable _e) {
-      throw Exceptions.sneakyThrow(_e);
-    }
+    return this.interpreter.evaluate(expression, null);
   }
 }

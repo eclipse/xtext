@@ -31,6 +31,7 @@ import org.eclipse.xtend.lib.macro.declaration.AnnotationReference
 import org.eclipse.xtend.lib.macro.declaration.CompilationStrategy
 import org.eclipse.xtend.lib.macro.declaration.CompilationUnit
 import org.eclipse.xtend.lib.macro.declaration.MemberDeclaration
+import org.eclipse.xtend.lib.macro.declaration.MutableAnnotationReference
 import org.eclipse.xtend.lib.macro.declaration.MutableMemberDeclaration
 import org.eclipse.xtend.lib.macro.declaration.MutableNamedElement
 import org.eclipse.xtend.lib.macro.declaration.MutableParameterDeclaration
@@ -49,6 +50,7 @@ import org.eclipse.xtext.common.types.JvmBooleanAnnotationValue
 import org.eclipse.xtext.common.types.JvmByteAnnotationValue
 import org.eclipse.xtext.common.types.JvmCharAnnotationValue
 import org.eclipse.xtext.common.types.JvmConstructor
+import org.eclipse.xtext.common.types.JvmCustomAnnotationValue
 import org.eclipse.xtext.common.types.JvmDeclaredType
 import org.eclipse.xtext.common.types.JvmDoubleAnnotationValue
 import org.eclipse.xtext.common.types.JvmEnumAnnotationValue
@@ -74,16 +76,14 @@ import org.eclipse.xtext.common.types.JvmVisibility
 import org.eclipse.xtext.common.types.JvmVoid
 import org.eclipse.xtext.common.types.util.TypeReferences
 import org.eclipse.xtext.xbase.XExpression
+import org.eclipse.xtext.xbase.annotations.interpreter.ConstantExpressionsInterpreter
 import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotation
 import org.eclipse.xtext.xbase.compiler.TypeReferenceSerializer
-import org.eclipse.xtext.xbase.interpreter.impl.XbaseInterpreter
 import org.eclipse.xtext.xbase.jvmmodel.JvmTypesBuilder
 import org.eclipse.xtext.xbase.typesystem.legacy.StandardTypeReferenceOwner
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference
 import org.eclipse.xtext.xbase.typesystem.references.OwnedConverter
 import org.eclipse.xtext.xbase.typesystem.util.CommonTypeComputationServices
-import org.eclipse.xtend.lib.macro.declaration.MutableAnnotationReference
-import org.eclipse.xtext.common.types.JvmCustomAnnotationValue
 
 class CompilationUnitImpl implements CompilationUnit {
 	
@@ -132,7 +132,7 @@ class CompilationUnitImpl implements CompilationUnit {
 	@Inject JvmTypesBuilder typesBuilder
 	@Inject TypeReferenceSerializer typeRefSerializer
 	@Inject IXtendJvmAssociations associations
-	@Inject XbaseInterpreter interpreter
+	@Inject ConstantExpressionsInterpreter interpreter
 	
 	@Property val ProblemSupport problemSupport = new ProblemSupportImpl(this)
 	@Property val TypeReferenceProvider typeReferenceProvider = new TypeReferenceProviderImpl(this)
@@ -444,10 +444,7 @@ class CompilationUnitImpl implements CompilationUnit {
 	}
 	
 	def Object evaluate(XExpression expression) {
-		val result = interpreter.evaluate(expression)
-		if (result.exception != null)
-			throw result.exception
-		return result.result
+		return interpreter.evaluate(expression, null)
 	}
 	
 }
