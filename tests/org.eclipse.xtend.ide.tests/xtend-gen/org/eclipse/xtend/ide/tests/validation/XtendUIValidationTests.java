@@ -80,7 +80,6 @@ public class XtendUIValidationTests extends AbstractXtendUITestCase {
       _builder.newLine();
       _builder.append("}");
       _builder.newLine();
-      _builder.newLine();
       final XtendFile xtendFile = this.testHelper.xtendFile("Clazz.xtend", _builder.toString());
       XImportSection _importSection = xtendFile.getImportSection();
       EList<XImportDeclaration> _importDeclarations = _importSection.getImportDeclarations();
@@ -100,7 +99,6 @@ public class XtendUIValidationTests extends AbstractXtendUITestCase {
       _builder.append("class Foo {");
       _builder.newLine();
       _builder.append("}");
-      _builder.newLine();
       _builder.newLine();
       final XtendFile xtendFile = this.testHelper.xtendFile("Clazz.xtend", _builder.toString());
       XImportSection _importSection = xtendFile.getImportSection();
@@ -122,7 +120,6 @@ public class XtendUIValidationTests extends AbstractXtendUITestCase {
       _builder.newLine();
       _builder.append("}");
       _builder.newLine();
-      _builder.newLine();
       final XtendFile xtendFile = this.testHelper.xtendFile("Clazz.xtend", _builder.toString());
       XImportSection _importSection = xtendFile.getImportSection();
       EList<XImportDeclaration> _importDeclarations = _importSection.getImportDeclarations();
@@ -142,7 +139,6 @@ public class XtendUIValidationTests extends AbstractXtendUITestCase {
       _builder.append("class Foo {");
       _builder.newLine();
       _builder.append("}");
-      _builder.newLine();
       _builder.newLine();
       final XtendFile xtendFile = this.testHelper.xtendFile("Clazz.xtend", _builder.toString());
       XImportSection _importSection = xtendFile.getImportSection();
@@ -167,7 +163,6 @@ public class XtendUIValidationTests extends AbstractXtendUITestCase {
       _builder.newLine();
       _builder.append("}");
       _builder.newLine();
-      _builder.newLine();
       final XtendFile xtendFile = this.testHelper.xtendFile("Clazz.xtend", _builder.toString());
       XImportSection _importSection = xtendFile.getImportSection();
       EList<XImportDeclaration> _importDeclarations = _importSection.getImportDeclarations();
@@ -190,7 +185,6 @@ public class XtendUIValidationTests extends AbstractXtendUITestCase {
       _builder.append("RestrictedClass x = new RestrictedClass");
       _builder.newLine();
       _builder.append("}");
-      _builder.newLine();
       _builder.newLine();
       final XtendFile xtendFile = this.testHelper.xtendFile("Clazz.xtend", _builder.toString());
       XImportSection _importSection = xtendFile.getImportSection();
@@ -225,7 +219,6 @@ public class XtendUIValidationTests extends AbstractXtendUITestCase {
       _builder.newLine();
       _builder.append("}");
       _builder.newLine();
-      _builder.newLine();
       final XtendFile xtendFile = this.testHelper.xtendFile("Clazz.xtend", _builder.toString());
       XImportSection _importSection = xtendFile.getImportSection();
       EList<XImportDeclaration> _importDeclarations = _importSection.getImportDeclarations();
@@ -258,7 +251,6 @@ public class XtendUIValidationTests extends AbstractXtendUITestCase {
       _builder.append("InnerInternalClass x = new InnerInternalClass");
       _builder.newLine();
       _builder.append("}");
-      _builder.newLine();
       _builder.newLine();
       final XtendFile xtendFile = this.testHelper.xtendFile("Clazz.xtend", _builder.toString());
       XImportSection _importSection = xtendFile.getImportSection();
@@ -293,7 +285,6 @@ public class XtendUIValidationTests extends AbstractXtendUITestCase {
       _builder.newLine();
       _builder.append("}");
       _builder.newLine();
-      _builder.newLine();
       final XtendFile xtendFile = this.testHelper.xtendFile("Clazz.xtend", _builder.toString());
       XImportSection _importSection = xtendFile.getImportSection();
       EList<XImportDeclaration> _importDeclarations = _importSection.getImportDeclarations();
@@ -325,7 +316,6 @@ public class XtendUIValidationTests extends AbstractXtendUITestCase {
       _builder.newLine();
       _builder.append("}");
       _builder.newLine();
-      _builder.newLine();
       final XtendFile xtendFile = this.testHelper.xtendFile("Clazz.xtend", _builder.toString());
       EList<XtendTypeDeclaration> _xtendTypes = xtendFile.getXtendTypes();
       Iterable<XtendClass> _filter = Iterables.<XtendClass>filter(_xtendTypes, XtendClass.class);
@@ -351,7 +341,6 @@ public class XtendUIValidationTests extends AbstractXtendUITestCase {
       _builder.append("def bar(org.eclipse.xtend.core.tests.internal.InternalClass$InnerInternalClass x){}");
       _builder.newLine();
       _builder.append("}");
-      _builder.newLine();
       _builder.newLine();
       final XtendFile xtendFile = this.testHelper.xtendFile("Clazz.xtend", _builder.toString());
       EList<XtendTypeDeclaration> _xtendTypes = xtendFile.getXtendTypes();
@@ -379,7 +368,6 @@ public class XtendUIValidationTests extends AbstractXtendUITestCase {
       _builder.newLine();
       _builder.append("}");
       _builder.newLine();
-      _builder.newLine();
       final XtendFile xtendFile = this.testHelper.xtendFile("Clazz.xtend", _builder.toString());
       EList<XtendTypeDeclaration> _xtendTypes = xtendFile.getXtendTypes();
       Iterable<XtendClass> _filter = Iterables.<XtendClass>filter(_xtendTypes, XtendClass.class);
@@ -405,7 +393,6 @@ public class XtendUIValidationTests extends AbstractXtendUITestCase {
       _builder.append("def bar(org.eclipse.xtend.core.tests.restricted.RestrictedClass[] x) {}");
       _builder.newLine();
       _builder.append("}");
-      _builder.newLine();
       _builder.newLine();
       final XtendFile xtendFile = this.testHelper.xtendFile("Clazz.xtend", _builder.toString());
       EList<XtendTypeDeclaration> _xtendTypes = xtendFile.getXtendTypes();
@@ -511,36 +498,39 @@ public class XtendUIValidationTests extends AbstractXtendUITestCase {
       IProject _project = this.testHelper.getProject();
       final IJavaProject javaProject = _javaModel.getJavaProject(_project);
       final String javaSeverity = javaProject.getOption(JavaCore.COMPILER_PB_FORBIDDEN_REFERENCE, true);
-      boolean _notEquals = ObjectExtensions.operator_notEquals(javaSeverity, "error");
-      if (_notEquals) {
-        String _plus = ("Wrong expectation Java compiler option \'" + JavaCore.COMPILER_PB_FORBIDDEN_REFERENCE);
-        String _plus_1 = (_plus + "\' should be \'error\' by default");
-        Assert.fail(_plus_1);
+      try {
+        boolean _notEquals = ObjectExtensions.operator_notEquals(javaSeverity, "error");
+        if (_notEquals) {
+          String _plus = ("Wrong expectation Java compiler option \'" + JavaCore.COMPILER_PB_FORBIDDEN_REFERENCE);
+          String _plus_1 = (_plus + "\' should be \'error\' by default");
+          Assert.fail(_plus_1);
+        }
+        String otherSeverity = "warning";
+        StringConcatenation _builder = new StringConcatenation();
+        _builder.append("class ValidationClazz {");
+        _builder.newLine();
+        _builder.append("\t");
+        _builder.append("def bar(org.eclipse.xtend.core.tests.restricted.RestrictedClass x) {}");
+        _builder.newLine();
+        _builder.append("}");
+        _builder.newLine();
+        final XtendFile xtendFile = this.testHelper.xtendFile("ValidationClazz.xtend", _builder.toString());
+        EList<XtendTypeDeclaration> _xtendTypes = xtendFile.getXtendTypes();
+        Iterable<XtendClass> _filter = Iterables.<XtendClass>filter(_xtendTypes, XtendClass.class);
+        XtendClass _head = IterableExtensions.<XtendClass>head(_filter);
+        EList<XtendMember> _members = _head.getMembers();
+        XtendMember _head_1 = IterableExtensions.<XtendMember>head(_members);
+        final XtendFunction function = ((XtendFunction) _head_1);
+        EList<XtendParameter> _parameters = function.getParameters();
+        XtendParameter _get = _parameters.get(0);
+        this.helper.assertError(_get, org.eclipse.xtext.common.types.TypesPackage.Literals.JVM_TYPE_REFERENCE, org.eclipse.xtext.xbase.validation.IssueCodes.FORBIDDEN_REFERENCE);
+        javaProject.setOption(JavaCore.COMPILER_PB_FORBIDDEN_REFERENCE, otherSeverity);
+        EList<XtendParameter> _parameters_1 = function.getParameters();
+        XtendParameter _get_1 = _parameters_1.get(0);
+        this.helper.assertWarning(_get_1, org.eclipse.xtext.common.types.TypesPackage.Literals.JVM_TYPE_REFERENCE, org.eclipse.xtext.xbase.validation.IssueCodes.FORBIDDEN_REFERENCE);
+      } finally {
+        javaProject.setOption(JavaCore.COMPILER_PB_FORBIDDEN_REFERENCE, javaSeverity);
       }
-      String otherSeverity = "warning";
-      StringConcatenation _builder = new StringConcatenation();
-      _builder.append("class ValidationClazz {");
-      _builder.newLine();
-      _builder.append("\t");
-      _builder.append("def bar(org.eclipse.xtend.core.tests.restricted.RestrictedClass x) {}");
-      _builder.newLine();
-      _builder.append("}");
-      _builder.newLine();
-      _builder.newLine();
-      final XtendFile xtendFile = this.testHelper.xtendFile("ValidationClazz.xtend", _builder.toString());
-      EList<XtendTypeDeclaration> _xtendTypes = xtendFile.getXtendTypes();
-      Iterable<XtendClass> _filter = Iterables.<XtendClass>filter(_xtendTypes, XtendClass.class);
-      XtendClass _head = IterableExtensions.<XtendClass>head(_filter);
-      EList<XtendMember> _members = _head.getMembers();
-      XtendMember _head_1 = IterableExtensions.<XtendMember>head(_members);
-      final XtendFunction function = ((XtendFunction) _head_1);
-      EList<XtendParameter> _parameters = function.getParameters();
-      XtendParameter _get = _parameters.get(0);
-      this.helper.assertError(_get, org.eclipse.xtext.common.types.TypesPackage.Literals.JVM_TYPE_REFERENCE, org.eclipse.xtext.xbase.validation.IssueCodes.FORBIDDEN_REFERENCE);
-      javaProject.setOption(JavaCore.COMPILER_PB_FORBIDDEN_REFERENCE, otherSeverity);
-      EList<XtendParameter> _parameters_1 = function.getParameters();
-      XtendParameter _get_1 = _parameters_1.get(0);
-      this.helper.assertWarning(_get_1, org.eclipse.xtext.common.types.TypesPackage.Literals.JVM_TYPE_REFERENCE, org.eclipse.xtext.xbase.validation.IssueCodes.FORBIDDEN_REFERENCE);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -550,48 +540,52 @@ public class XtendUIValidationTests extends AbstractXtendUITestCase {
   public void testConfigurableIssueCode() {
     try {
       final IPersistentPreferenceStore xtendPrefStore = this.getXtendPreferencesStore();
-      xtendPrefStore.setValue(IssueCodes.UNUSED_PRIVATE_MEMBER, "warning");
-      StringConcatenation _builder = new StringConcatenation();
-      _builder.append("class TestConfigurableIssueCode {");
-      _builder.newLine();
-      _builder.append("\t");
-      _builder.append("private String unusedField = \"unusedField\"");
-      _builder.newLine();
-      _builder.append("}");
-      _builder.newLine();
-      XtendFile _xtendFile = this.testHelper.xtendFile("TestConfigurableIssueCode.xtend", _builder.toString());
-      final Procedure1<XtendFile> _function = new Procedure1<XtendFile>() {
-          public void apply(final XtendFile it) {
-            EList<XtendTypeDeclaration> _xtendTypes = it.getXtendTypes();
-            Iterable<XtendClass> _filter = Iterables.<XtendClass>filter(_xtendTypes, XtendClass.class);
-            XtendClass _head = IterableExtensions.<XtendClass>head(_filter);
-            EList<XtendMember> _members = _head.getMembers();
-            final XtendMember unusedField = IterableExtensions.<XtendMember>head(_members);
-            XtendUIValidationTests.this.helper.assertWarning(unusedField, Literals.XTEND_FIELD, IssueCodes.UNUSED_PRIVATE_MEMBER);
-          }
-        };
-      ObjectExtensions.<XtendFile>operator_doubleArrow(_xtendFile, _function);
-      xtendPrefStore.setValue(IssueCodes.UNUSED_PRIVATE_MEMBER, "error");
-      StringConcatenation _builder_1 = new StringConcatenation();
-      _builder_1.append("class TestConfigurableIssueCode {");
-      _builder_1.newLine();
-      _builder_1.append("\t");
-      _builder_1.append("private String unusedField = \"unusedField\"");
-      _builder_1.newLine();
-      _builder_1.append("}");
-      _builder_1.newLine();
-      XtendFile _xtendFile_1 = this.testHelper.xtendFile("TestConfigurableIssueCode.xtend", _builder_1.toString());
-      final Procedure1<XtendFile> _function_1 = new Procedure1<XtendFile>() {
-          public void apply(final XtendFile it) {
-            EList<XtendTypeDeclaration> _xtendTypes = it.getXtendTypes();
-            Iterable<XtendClass> _filter = Iterables.<XtendClass>filter(_xtendTypes, XtendClass.class);
-            XtendClass _head = IterableExtensions.<XtendClass>head(_filter);
-            EList<XtendMember> _members = _head.getMembers();
-            final XtendMember unusedField = IterableExtensions.<XtendMember>head(_members);
-            XtendUIValidationTests.this.helper.assertError(unusedField, Literals.XTEND_FIELD, IssueCodes.UNUSED_PRIVATE_MEMBER);
-          }
-        };
-      ObjectExtensions.<XtendFile>operator_doubleArrow(_xtendFile_1, _function_1);
+      try {
+        xtendPrefStore.setValue(IssueCodes.UNUSED_PRIVATE_MEMBER, "warning");
+        StringConcatenation _builder = new StringConcatenation();
+        _builder.append("class TestConfigurableIssueCode {");
+        _builder.newLine();
+        _builder.append("\t");
+        _builder.append("private String unusedField = \"unusedField\"");
+        _builder.newLine();
+        _builder.append("}");
+        _builder.newLine();
+        XtendFile _xtendFile = this.testHelper.xtendFile("TestConfigurableIssueCode.xtend", _builder.toString());
+        final Procedure1<XtendFile> _function = new Procedure1<XtendFile>() {
+            public void apply(final XtendFile it) {
+              EList<XtendTypeDeclaration> _xtendTypes = it.getXtendTypes();
+              Iterable<XtendClass> _filter = Iterables.<XtendClass>filter(_xtendTypes, XtendClass.class);
+              XtendClass _head = IterableExtensions.<XtendClass>head(_filter);
+              EList<XtendMember> _members = _head.getMembers();
+              final XtendMember unusedField = IterableExtensions.<XtendMember>head(_members);
+              XtendUIValidationTests.this.helper.assertWarning(unusedField, Literals.XTEND_FIELD, IssueCodes.UNUSED_PRIVATE_MEMBER);
+            }
+          };
+        ObjectExtensions.<XtendFile>operator_doubleArrow(_xtendFile, _function);
+        xtendPrefStore.setValue(IssueCodes.UNUSED_PRIVATE_MEMBER, "error");
+        StringConcatenation _builder_1 = new StringConcatenation();
+        _builder_1.append("class TestConfigurableIssueCode {");
+        _builder_1.newLine();
+        _builder_1.append("\t");
+        _builder_1.append("private String unusedField = \"unusedField\"");
+        _builder_1.newLine();
+        _builder_1.append("}");
+        _builder_1.newLine();
+        XtendFile _xtendFile_1 = this.testHelper.xtendFile("TestConfigurableIssueCode.xtend", _builder_1.toString());
+        final Procedure1<XtendFile> _function_1 = new Procedure1<XtendFile>() {
+            public void apply(final XtendFile it) {
+              EList<XtendTypeDeclaration> _xtendTypes = it.getXtendTypes();
+              Iterable<XtendClass> _filter = Iterables.<XtendClass>filter(_xtendTypes, XtendClass.class);
+              XtendClass _head = IterableExtensions.<XtendClass>head(_filter);
+              EList<XtendMember> _members = _head.getMembers();
+              final XtendMember unusedField = IterableExtensions.<XtendMember>head(_members);
+              XtendUIValidationTests.this.helper.assertError(unusedField, Literals.XTEND_FIELD, IssueCodes.UNUSED_PRIVATE_MEMBER);
+            }
+          };
+        ObjectExtensions.<XtendFile>operator_doubleArrow(_xtendFile_1, _function_1);
+      } finally {
+        xtendPrefStore.setToDefault(IssueCodes.UNUSED_PRIVATE_MEMBER);
+      }
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
@@ -604,38 +598,43 @@ public class XtendUIValidationTests extends AbstractXtendUITestCase {
     IProject _project = this.testHelper.getProject();
     final IJavaProject javaProject = _javaModel.getJavaProject(_project);
     final String javaSeverity = javaProject.getOption(JavaCore.COMPILER_PB_INVALID_JAVADOC, true);
-    boolean _notEquals = ObjectExtensions.operator_notEquals(javaSeverity, "ignore");
-    if (_notEquals) {
-      String _plus = ("Wrong expectation Java compiler option \'" + JavaCore.COMPILER_PB_INVALID_JAVADOC);
-      String _plus_1 = (_plus + "\' should be \'ignore\' by default");
-      Assert.fail(_plus_1);
+    try {
+      boolean _notEquals = ObjectExtensions.operator_notEquals(javaSeverity, "ignore");
+      if (_notEquals) {
+        String _plus = ("Wrong expectation Java compiler option \'" + JavaCore.COMPILER_PB_INVALID_JAVADOC);
+        String _plus_1 = (_plus + "\' should be \'ignore\' by default");
+        Assert.fail(_plus_1);
+      }
+      String otherSeverity = "warning";
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("class Foo {");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("/**");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("* {@link List}");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("*/");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("def doStuff(){}");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      final XtendFile xtendFile = this.testHelper.xtendFile("ValidationClazz.xtend", _builder.toString());
+      EList<XtendTypeDeclaration> _xtendTypes = xtendFile.getXtendTypes();
+      XtendTypeDeclaration _head = IterableExtensions.<XtendTypeDeclaration>head(_xtendTypes);
+      final XtendClass clazz = ((XtendClass) _head);
+      EList<XtendMember> _members = clazz.getMembers();
+      final XtendMember member = IterableExtensions.<XtendMember>head(_members);
+      this.helper.assertNoIssues(member);
+      javaProject.setOption(JavaCore.COMPILER_PB_INVALID_JAVADOC, otherSeverity);
+      this.helper.assertWarning(member, Literals.XTEND_FUNCTION, IssueCodes.JAVA_DOC_LINKING_DIAGNOSTIC, "javaDoc", "List", "cannot be resolved to a type");
+    } finally {
+      javaProject.setOption(JavaCore.COMPILER_PB_INVALID_JAVADOC, javaSeverity);
     }
-    String otherSeverity = "warning";
-    StringConcatenation _builder = new StringConcatenation();
-    _builder.append("class Foo {");
-    _builder.newLine();
-    _builder.append("\t");
-    _builder.append("/**");
-    _builder.newLine();
-    _builder.append("\t");
-    _builder.append("* {@link List}");
-    _builder.newLine();
-    _builder.append("\t");
-    _builder.append("*/");
-    _builder.newLine();
-    _builder.append("\t");
-    _builder.append("def doStuff(){}");
-    _builder.newLine();
-    _builder.append("}");
-    final XtendFile xtendFile = this.testHelper.xtendFile("ValidationClazz.xtend", _builder.toString());
-    EList<XtendTypeDeclaration> _xtendTypes = xtendFile.getXtendTypes();
-    XtendTypeDeclaration _head = IterableExtensions.<XtendTypeDeclaration>head(_xtendTypes);
-    final XtendClass clazz = ((XtendClass) _head);
-    EList<XtendMember> _members = clazz.getMembers();
-    final XtendMember member = IterableExtensions.<XtendMember>head(_members);
-    this.helper.assertNoIssues(member);
-    javaProject.setOption(JavaCore.COMPILER_PB_INVALID_JAVADOC, otherSeverity);
-    this.helper.assertWarning(member, Literals.XTEND_FUNCTION, IssueCodes.JAVA_DOC_LINKING_DIAGNOSTIC, "javaDoc", "List", "cannot be resolved to a type");
   }
   
   public IPersistentPreferenceStore getXtendPreferencesStore() {
