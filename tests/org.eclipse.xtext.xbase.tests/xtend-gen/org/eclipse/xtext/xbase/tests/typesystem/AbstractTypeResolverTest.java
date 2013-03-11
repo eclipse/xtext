@@ -1573,6 +1573,11 @@ public abstract class AbstractTypeResolverTest<Reference extends Object> extends
   }
   
   @Test
+  public void testIfExpression_33() throws Exception {
+    this.resolvesTo("if(true) #{\'f\'} else emptySet", "Set<String>");
+  }
+  
+  @Test
   public void testSwitchExpression() throws Exception {
     this.resolvesTo("switch true { case true : \'s\' case false : \'foo\' default: \'bar\'}", "String");
     this.resolvesTo("switch true { case true : \'s\' case false : new Object() default: \'bar\'}", "Object");

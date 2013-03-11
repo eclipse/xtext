@@ -431,6 +431,16 @@ public abstract class AbstractFeatureCallTypeTest extends AbstractXbaseTestCase 
   }
   
   @Test
+  public void testIfExpression_01() throws Exception {
+    this.resolvesFeatureCallsTo("if(true) #{\'f\'} else emptySet", "Set<String>");
+  }
+  
+  @Test
+  public void testIfExpression_02() throws Exception {
+    this.resolvesFeatureCallsTo("if(true) emptySet else #{\'f\'}", "Set<String>");
+  }
+  
+  @Test
   public void testSwitchExpression_3() throws Exception {
     this.resolvesFeatureCallsTo("{\n\t\t\tval Object c = null\n\t\t\tswitch c {\n\t            CharSequence: 1\n\t    \t}\n\t\t}", "Object");
   }
