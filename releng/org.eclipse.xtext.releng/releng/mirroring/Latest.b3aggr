@@ -19,7 +19,7 @@
       <repositories location="http://download.eclipse.org/modeling/emf/compare/updates/milestones/2.1">
         <features name="org.eclipse.emf.compare.feature.group"/>
       </repositories>
-      <repositories location="http://download.eclipse.org/tools/gef/updates/releases">
+      <repositories location="http://download.eclipse.org/tools/gef/updates/milestones">
         <bundles name="org.eclipse.draw2d.feature.group"/>
       </repositories>
       <repositories location="http://download.eclipse.org/technology/m2e/releases/1.0/1.0.0.20110606-1526/">
