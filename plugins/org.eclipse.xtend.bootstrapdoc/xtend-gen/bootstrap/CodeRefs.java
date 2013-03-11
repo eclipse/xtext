@@ -5,6 +5,7 @@ import java.util.HashSet;
 import org.apache.log4j.Logger;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
+import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.Functions.Function0;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
@@ -23,9 +24,11 @@ public class CodeRefs {
   }.apply();
   
   @Inject
+  @Extension
   private GitExtensions _gitExtensions;
   
   @Inject
+  @Extension
   private JavaDocExtension _javaDocExtension;
   
   private final static HashSet<String> NO_JAVADOC_PACKAGE_PREFIXES = new Function0<HashSet<String>>() {

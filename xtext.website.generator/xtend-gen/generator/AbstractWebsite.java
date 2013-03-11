@@ -1,7 +1,6 @@
 package generator;
 
 import com.google.common.base.Charsets;
-import com.google.common.base.Objects;
 import com.google.common.io.CharStreams;
 import com.google.common.io.Files;
 import com.google.common.io.OutputSupplier;
@@ -14,6 +13,7 @@ import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.InputOutput;
+import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.Pair;
 import org.eclipse.xtext.xbase.lib.StringExtensions;
 import org.eclipse.xtext.xdoc.XdocStandaloneSetup;
@@ -46,7 +46,7 @@ public abstract class AbstractWebsite implements Resource {
       String _plus = ("generated \'" + file);
       String _plus_1 = (_plus + "\'");
       InputOutput.<String>println(_plus_1);
-    } catch (Exception _e) {
+    } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
   }
@@ -376,7 +376,7 @@ public abstract class AbstractWebsite implements Resource {
         {
           String _path = this.path();
           String _key = it.getKey();
-          boolean _equals = Objects.equal(_path, _key);
+          boolean _equals = ObjectExtensions.operator_equals(_path, _key);
           if (_equals) {
             _builder.append("class=\"active\"");
           }

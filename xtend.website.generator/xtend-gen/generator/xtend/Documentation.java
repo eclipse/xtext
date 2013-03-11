@@ -22,6 +22,7 @@ import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 import org.eclipse.xtext.xbase.lib.Exceptions;
+import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.InputOutput;
 import org.eclipse.xtext.xbase.lib.IteratorExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
@@ -73,9 +74,11 @@ public class Documentation extends AbstractXtendWebsite {
   private DocumentLoad docLoader;
   
   @Inject
+  @Extension
   private Body _body;
   
   @Inject
+  @Extension
   private HtmlExtensions _htmlExtensions;
   
   @Inject
@@ -95,7 +98,7 @@ public class Documentation extends AbstractXtendWebsite {
   public void copyImages(final Document doc, final File targetDir) {
     Resource _eResource = doc.eResource();
     ResourceSet _resourceSet = _eResource.getResourceSet();
-    final TreeIterator<?> iter = EcoreUtil.getAllContents(_resourceSet, true);
+    final TreeIterator<Object> iter = EcoreUtil.<Object>getAllContents(_resourceSet, true);
     Iterator<ImageRef> _filter = Iterators.<ImageRef>filter(iter, ImageRef.class);
     final Procedure1<ImageRef> _function = new Procedure1<ImageRef>() {
         public void apply(final ImageRef it) {
@@ -131,7 +134,7 @@ public class Documentation extends AbstractXtendWebsite {
             InputOutput.<String>println(_canonicalPath_1);
             InputSupplier<FileInputStream> _newInputStreamSupplier = Files.newInputStreamSupplier(source);
             Files.copy(_newInputStreamSupplier, target);
-          } catch (Exception _e) {
+          } catch (Throwable _e) {
             throw Exceptions.sneakyThrow(_e);
           }
         }

@@ -4,6 +4,7 @@ import bootstrap.HtmlExtensions;
 import bootstrap.XdocExtensions;
 import com.google.inject.Inject;
 import org.eclipse.xtend2.lib.StringConcatenation;
+import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xdoc.xdoc.AbstractSection;
 import org.eclipse.xtext.xdoc.xdoc.Document;
@@ -12,9 +13,11 @@ import org.eclipse.xtext.xdoc.xdoc.TextOrMarkup;
 @SuppressWarnings("all")
 public class Menu {
   @Inject
+  @Extension
   private XdocExtensions _xdocExtensions;
   
   @Inject
+  @Extension
   private HtmlExtensions _htmlExtensions;
   
   public CharSequence menu(final Document document) {

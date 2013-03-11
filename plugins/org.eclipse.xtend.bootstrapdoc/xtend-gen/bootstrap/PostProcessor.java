@@ -4,11 +4,13 @@ import bootstrap.HtmlExtensions;
 import com.google.inject.Inject;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 
 @SuppressWarnings("all")
 public class PostProcessor {
   @Inject
+  @Extension
   private HtmlExtensions _htmlExtensions;
   
   protected Pattern _codePattern;

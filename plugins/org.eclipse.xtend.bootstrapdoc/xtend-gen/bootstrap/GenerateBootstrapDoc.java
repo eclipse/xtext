@@ -39,6 +39,7 @@ import org.eclipse.xtext.validation.CheckMode;
 import org.eclipse.xtext.validation.IResourceValidator;
 import org.eclipse.xtext.validation.Issue;
 import org.eclipse.xtext.xbase.lib.Exceptions;
+import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.InputOutput;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
@@ -65,23 +66,26 @@ public class GenerateBootstrapDoc {
   private MainSite mainSite;
   
   @Inject
+  @Extension
   private Menu _menu;
   
   @Inject
+  @Extension
   private Body _body;
   
   @Inject
+  @Extension
   private PostProcessor _postProcessor;
   
   @Inject
   private IResourceValidator validator;
   
   @Inject(optional = true)
-  @Named(value = "documentRoot")
+  @Named("documentRoot")
   private String documentRoot = "../org.eclipse.xtend.doc.xdoc/xdoc";
   
   @Inject(optional = true)
-  @Named(value = "targetDirectory")
+  @Named("targetDirectory")
   private String targetDirectory = "../../website/documentation";
   
   public void generate() {
@@ -112,7 +116,7 @@ public class GenerateBootstrapDoc {
   public void copyImages(final Document doc, final File sourceDir, final File targetDir) {
     Resource _eResource = doc.eResource();
     ResourceSet _resourceSet = _eResource.getResourceSet();
-    final TreeIterator<?> iter = EcoreUtil.getAllContents(_resourceSet, true);
+    final TreeIterator<Object> iter = EcoreUtil.<Object>getAllContents(_resourceSet, true);
     Iterator<ImageRef> _filter = Iterators.<ImageRef>filter(iter, ImageRef.class);
     final Procedure1<ImageRef> _function = new Procedure1<ImageRef>() {
         public void apply(final ImageRef it) {
@@ -156,18 +160,14 @@ public class GenerateBootstrapDoc {
     final ResourceSet rs = this.provider.get();
     PathTraverser _pathTraverser = new PathTraverser();
     List<String> _singletonList = Collections.<String>singletonList("../org.eclipse.xtend.doc.xdoc/xdoc");
-    final Function1<URI,Boolean> _function = new Function1<URI,Boolean>() {
-        public Boolean apply(final URI it) {
+    final Predicate<URI> _function = new Predicate<URI>() {
+        public boolean apply(final URI it) {
           String _fileExtension = it.fileExtension();
           boolean _equals = ObjectExtensions.operator_equals(_fileExtension, "xdoc");
           return _equals;
         }
       };
-    Multimap<String,URI> _resolvePathes = _pathTraverser.resolvePathes(_singletonList, new Predicate<URI>() {
-        public boolean apply(URI input) {
-          return _function.apply(input);
-        }
-    });
+    Multimap<String,URI> _resolvePathes = _pathTraverser.resolvePathes(_singletonList, _function);
     final Collection<URI> uris = _resolvePathes.values();
     for (final URI uri : uris) {
       {

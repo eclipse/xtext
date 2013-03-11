@@ -13,6 +13,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
+import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
@@ -23,6 +24,7 @@ import org.eclipse.xtext.xdoc.xdoc.Identifiable;
 @SuppressWarnings("all")
 public class TargetPaths {
   @Inject
+  @Extension
   private XdocExtensions _xdocExtensions;
   
   public boolean splitAt(final Document document, final Function1<? super AbstractSection,? extends Boolean> predicate, final String prefix) {
@@ -41,26 +43,46 @@ public class TargetPaths {
   }
   
   public String getTargetPath(final Identifiable element) {
+    String _elvis = null;
     TargetPathAdapter _targetPathAdapter = this.getTargetPathAdapter(element);
     Map<Identifiable,String> _targetPaths = _targetPathAdapter==null?(Map<Identifiable,String>)null:_targetPathAdapter.targetPaths;
     String _get = _targetPaths==null?(String)null:_targetPaths.get(element);
-    String _elvis = ObjectExtensions.<String>operator_elvis(_get, "");
+    if (_get != null) {
+      _elvis = _get;
+    } else {
+      _elvis = ObjectExtensions.<String>operator_elvis(_get, "");
+    }
     return _elvis;
   }
   
   public boolean isTargetRootElement(final AbstractSection element) {
-    TargetPathAdapter _targetPathAdapter = this.getTargetPathAdapter(element);
-    List<AbstractSection> _targetFileRoots = _targetPathAdapter==null?(List<AbstractSection>)null:_targetPathAdapter.targetFileRoots;
-    boolean _contains = _targetFileRoots==null?false:_targetFileRoots.contains(element);
-    Object _elvis = ObjectExtensions.<Object>operator_elvis(Boolean.valueOf(_contains), element);
-    return (_elvis instanceof Document);
+    boolean _xblockexpression = false;
+    {
+      TargetPathAdapter _targetPathAdapter = this.getTargetPathAdapter(element);
+      final List<AbstractSection> targetFileRoots = _targetPathAdapter==null?(List<AbstractSection>)null:_targetPathAdapter.targetFileRoots;
+      boolean _xifexpression = false;
+      boolean _notEquals = ObjectExtensions.operator_notEquals(targetFileRoots, null);
+      if (_notEquals) {
+        boolean _contains = targetFileRoots.contains(element);
+        _xifexpression = _contains;
+      } else {
+        _xifexpression = (element instanceof Document);
+      }
+      _xblockexpression = (_xifexpression);
+    }
+    return _xblockexpression;
   }
   
   public List<? extends AbstractSection> getTargetRoots(final Document document) {
+    List<? extends AbstractSection> _elvis = null;
     TargetPathAdapter _targetPathAdapter = this.getTargetPathAdapter(document);
     List<AbstractSection> _targetFileRoots = _targetPathAdapter==null?(List<AbstractSection>)null:_targetPathAdapter.targetFileRoots;
-    ArrayList<Document> _newArrayList = CollectionLiterals.<Document>newArrayList(document);
-    List<? extends AbstractSection> _elvis = ObjectExtensions.<List<? extends AbstractSection>>operator_elvis(_targetFileRoots, _newArrayList);
+    if (_targetFileRoots != null) {
+      _elvis = _targetFileRoots;
+    } else {
+      ArrayList<Document> _newArrayList = CollectionLiterals.<Document>newArrayList(document);
+      _elvis = ObjectExtensions.<List<? extends AbstractSection>>operator_elvis(_targetFileRoots, _newArrayList);
+    }
     return _elvis;
   }
   

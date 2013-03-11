@@ -6,6 +6,7 @@ import bootstrap.XdocExtensions;
 import com.google.inject.Inject;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.xtend2.lib.StringConcatenation;
+import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xdoc.xdoc.AbstractSection;
@@ -14,12 +15,15 @@ import org.eclipse.xtext.xdoc.xdoc.TextOrMarkup;
 @SuppressWarnings("all")
 public class Body {
   @Inject
+  @Extension
   private XdocExtensions _xdocExtensions;
   
   @Inject
+  @Extension
   private HtmlExtensions _htmlExtensions;
   
   @Inject
+  @Extension
   private TargetPaths _targetPaths;
   
   public CharSequence body(final AbstractSection rootSection) {
@@ -170,7 +174,7 @@ public class Body {
       Iterable<? extends AbstractSection> _sections = this._xdocExtensions.getSections(section);
       for(final AbstractSection subSection : _sections) {
         int _plus = (hLevel + 1);
-        CharSequence _h3plus = this.h3plus(subSection, _plus);
+        Object _h3plus = this.h3plus(subSection, _plus);
         _builder.append(_h3plus, "");
         _builder.newLineIfNotEmpty();
       }

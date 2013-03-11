@@ -1,6 +1,5 @@
 package generator.xtend;
 
-import generator.Generator;
 import generator.Resource;
 import generator.xtend.Community;
 import generator.xtend.Documentation;
@@ -23,7 +22,7 @@ public class XtendWebsiteGenerator {
     Download _download = new Download();
     Documentation _documentation = new Documentation();
     Community _community = new Community();
-    Generator.generateFiles(out, _index, _news, _download, _documentation, _community);
+    XtendWebsiteGenerator.generateFiles(out, _index, _news, _download, _documentation, _community);
     InputOutput.<String>println("Done.");
   }
   

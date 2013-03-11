@@ -6,15 +6,18 @@ import bootstrap.XdocExtensions;
 import com.google.inject.Inject;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.xtend2.lib.StringConcatenation;
+import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xdoc.xdoc.AbstractSection;
 import org.eclipse.xtext.xdoc.xdoc.TextOrMarkup;
 
 @SuppressWarnings("all")
 public class DocumentationBody extends Body {
   @Inject
+  @Extension
   private XdocExtensions _xdocExtensions;
   
   @Inject
+  @Extension
   private HtmlExtensions _htmlExtensions;
   
   public CharSequence h1(final AbstractSection chapter) {

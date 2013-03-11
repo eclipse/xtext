@@ -1,6 +1,5 @@
 package xdocgen;
 
-import com.google.common.base.Objects;
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Iterators;
@@ -31,6 +30,7 @@ import org.eclipse.xtext.xbase.lib.InputOutput;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.IteratorExtensions;
 import org.eclipse.xtext.xbase.lib.ListExtensions;
+import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xdoc.xdoc.Document;
 
 @SuppressWarnings("all")
@@ -43,18 +43,14 @@ public class DocumentLoad {
   public Document loadDocument(final String... baseDirs) {
     final XtextResourceSet rs = this.provider.get();
     PathTraverser _pathTraverser = new PathTraverser();
-    final Function1<URI,Boolean> _function = new Function1<URI,Boolean>() {
-        public Boolean apply(final URI it) {
+    final Predicate<URI> _function = new Predicate<URI>() {
+        public boolean apply(final URI it) {
           String _fileExtension = it.fileExtension();
-          boolean _equals = Objects.equal(_fileExtension, "xdoc");
+          boolean _equals = ObjectExtensions.operator_equals(_fileExtension, "xdoc");
           return _equals;
         }
       };
-    Multimap<String,URI> _resolvePathes = _pathTraverser.resolvePathes(((List<String>)Conversions.doWrapArray(baseDirs)), new Predicate<URI>() {
-        public boolean apply(URI input) {
-          return _function.apply(input);
-        }
-    });
+    Multimap<String,URI> _resolvePathes = _pathTraverser.resolvePathes(((List<String>)Conversions.doWrapArray(baseDirs)), _function);
     final Collection<URI> uris = _resolvePathes.values();
     Collection<URI> _xtendFiles = this.getXtendFiles();
     Iterable<URI> _plus = Iterables.<URI>concat(uris, _xtendFiles);
@@ -98,7 +94,7 @@ public class DocumentLoad {
       final Function1<Issue,Boolean> _function_2 = new Function1<Issue,Boolean>() {
           public Boolean apply(final Issue i) {
             Severity _severity = i.getSeverity();
-            boolean _equals = Objects.equal(_severity, Severity.ERROR);
+            boolean _equals = ObjectExtensions.operator_equals(_severity, Severity.ERROR);
             return Boolean.valueOf(_equals);
           }
         };
@@ -144,18 +140,14 @@ public class DocumentLoad {
       final String separator = System.getProperty("path.separator");
       final String[] entries = classPath.split(separator);
       PathTraverser _pathTraverser = new PathTraverser();
-      final Function1<URI,Boolean> _function = new Function1<URI,Boolean>() {
-          public Boolean apply(final URI it) {
+      final Predicate<URI> _function = new Predicate<URI>() {
+          public boolean apply(final URI it) {
             String _fileExtension = it.fileExtension();
-            boolean _equals = Objects.equal(_fileExtension, "xtend");
+            boolean _equals = ObjectExtensions.operator_equals(_fileExtension, "xtend");
             return _equals;
           }
         };
-      Multimap<String,URI> _resolvePathes = _pathTraverser.resolvePathes(((List<String>)Conversions.doWrapArray(entries)), new Predicate<URI>() {
-          public boolean apply(URI input) {
-            return _function.apply(input);
-          }
-      });
+      Multimap<String,URI> _resolvePathes = _pathTraverser.resolvePathes(((List<String>)Conversions.doWrapArray(entries)), _function);
       Collection<URI> _values = _resolvePathes.values();
       _xblockexpression = (_values);
     }

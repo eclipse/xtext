@@ -21,6 +21,7 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.common.types.JvmAnnotationType;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
+import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.InputOutput;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
@@ -58,12 +59,15 @@ import org.eclipse.xtext.xdoc.xdoc.XdocPackage.Literals;
 @SuppressWarnings("all")
 public class HtmlExtensions {
   @Inject
+  @Extension
   private CodeRefs _codeRefs;
   
   @Inject
+  @Extension
   private ImageExtensions _imageExtensions;
   
   @Inject
+  @Extension
   private TargetPaths _targetPaths;
   
   public String href(final Identifiable it) {
@@ -144,21 +148,27 @@ public class HtmlExtensions {
     Resource _eResource = id.eResource();
     ResourceSet _resourceSet = _eResource.getResourceSet();
     final EList<Adapter> adapters = _resourceSet.eAdapters();
+    ArtificialIds _elvis = null;
     Iterable<ArtificialIds> _filter = Iterables.<ArtificialIds>filter(adapters, ArtificialIds.class);
     ArtificialIds _head = IterableExtensions.<ArtificialIds>head(_filter);
-    ArtificialIds _artificialIds = new ArtificialIds();
-    final Procedure1<ArtificialIds> _function = new Procedure1<ArtificialIds>() {
-        public void apply(final ArtificialIds it) {
-          adapters.add(it);
-        }
-      };
-    ArtificialIds _doubleArrow = ObjectExtensions.<ArtificialIds>operator_doubleArrow(_artificialIds, _function);
-    final ArtificialIds adapter = ObjectExtensions.<ArtificialIds>operator_elvis(_head, _doubleArrow);
+    if (_head != null) {
+      _elvis = _head;
+    } else {
+      ArtificialIds _artificialIds = new ArtificialIds();
+      final Procedure1<ArtificialIds> _function = new Procedure1<ArtificialIds>() {
+          public void apply(final ArtificialIds it) {
+            adapters.add(it);
+          }
+        };
+      ArtificialIds _doubleArrow = ObjectExtensions.<ArtificialIds>operator_doubleArrow(_artificialIds, _function);
+      _elvis = ObjectExtensions.<ArtificialIds>operator_elvis(_head, _doubleArrow);
+    }
+    final ArtificialIds adapter = _elvis;
     return adapter.artificialHrefs;
   }
   
   protected CharSequence _toHtml(final TextOrMarkup it, final ParagraphState state) {
-    CharSequence _xblockexpression = null;
+    String _xblockexpression = null;
     {
       ParagraphState _xifexpression = null;
       boolean _equals = ObjectExtensions.operator_equals(state, ParagraphState.NONE);
@@ -172,14 +182,14 @@ public class HtmlExtensions {
       CharSequence _html = this.toHtml(_contents, innerState);
       String _string = _html.toString();
       final String contentsToHtml = _string.trim();
-      CharSequence _xifexpression_1 = null;
+      String _xifexpression_1 = null;
       boolean _isNullOrEmpty = StringExtensions.isNullOrEmpty(contentsToHtml);
       boolean _not = (!_isNullOrEmpty);
       if (_not) {
-        CharSequence _xifexpression_2 = null;
+        String _xifexpression_2 = null;
         boolean _equals_1 = ObjectExtensions.operator_equals(state, ParagraphState.NONE);
         if (_equals_1) {
-          CharSequence _xblockexpression_1 = null;
+          String _xblockexpression_1 = null;
           {
             StringConcatenation _builder = new StringConcatenation();
             _builder.append("<p>");
@@ -189,7 +199,7 @@ public class HtmlExtensions {
             _builder.newLineIfNotEmpty();
             _builder.append("</p>");
             _builder.newLine();
-            final CharSequence result = _builder;
+            final String result = _builder.toString();
             _xblockexpression_1 = (result);
           }
           _xifexpression_2 = _xblockexpression_1;
@@ -474,10 +484,15 @@ public class HtmlExtensions {
       if (_or) {
         StringConcatenation _builder = new StringConcatenation();
         _builder.append("<pre class=\"prettyprint lang-");
+        String _elvis = null;
         LangDef _language = it.getLanguage();
         String _name = _language==null?(String)null:_language.getName();
         String _lowerCase = _name==null?(String)null:_name.toLowerCase();
-        String _elvis = ObjectExtensions.<String>operator_elvis(_lowerCase, "xtend");
+        if (_lowerCase != null) {
+          _elvis = _lowerCase;
+        } else {
+          _elvis = ObjectExtensions.<String>operator_elvis(_lowerCase, "xtend");
+        }
         _builder.append(_elvis, "");
         _builder.append(" linenums\">");
         String _markCodeBegin = this.markCodeBegin();
@@ -494,10 +509,15 @@ public class HtmlExtensions {
       } else {
         StringConcatenation _builder_1 = new StringConcatenation();
         _builder_1.append("<code class=\"prettyprint lang-");
+        String _elvis_1 = null;
         LangDef _language_1 = it.getLanguage();
         String _name_1 = _language_1==null?(String)null:_language_1.getName();
         String _lowerCase_1 = _name_1==null?(String)null:_name_1.toLowerCase();
-        String _elvis_1 = ObjectExtensions.<String>operator_elvis(_lowerCase_1, "xtend");
+        if (_lowerCase_1 != null) {
+          _elvis_1 = _lowerCase_1;
+        } else {
+          _elvis_1 = ObjectExtensions.<String>operator_elvis(_lowerCase_1, "xtend");
+        }
         _builder_1.append(_elvis_1, "");
         _builder_1.append("\">");
         String _trimCode_1 = this.trimCode(code);
