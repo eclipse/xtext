@@ -22,4 +22,5 @@ Require-Bundle: org.eclipse.xtext.junit4;bundle-version="2.3.0",
  org.eclipse.xtext.xbase.tests;bundle-version="2.4.0",
  org.eclipse.xtext.ui.shared;bundle-version="2.4.0"
 Import-Package: org.junit;version="4.5.0",
- org.junit.runner;version="4.5.0"
+ org.junit.runner;version="4.5.0",
+ org.junit.runners;version="4.5.0"
