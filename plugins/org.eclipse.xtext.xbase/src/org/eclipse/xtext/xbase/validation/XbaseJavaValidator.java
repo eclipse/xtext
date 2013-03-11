@@ -952,6 +952,10 @@ public class XbaseJavaValidator extends AbstractXbaseJavaValidator {
 			error("Cannot use null safe feature call on primitive receiver", featureCall,
 					Literals.XMEMBER_FEATURE_CALL__NULL_SAFE, NULL_SAFE_FEATURE_CALL_ON_PRIMITIVE);
 		}
+		if (featureCall.isNullSafe() && getActualType(featureCall).isPrimitive()) {
+			error("Cannot use null safe feature call on feature with primitive type", featureCall,
+					Literals.XMEMBER_FEATURE_CALL__NULL_SAFE, NULL_SAFE_FEATURE_CALL_ON_PRIMITIVE);
+		}
 	}
 
 	@Check
