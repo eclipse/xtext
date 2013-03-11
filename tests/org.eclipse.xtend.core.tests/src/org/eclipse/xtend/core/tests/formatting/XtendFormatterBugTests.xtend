@@ -145,15 +145,16 @@ class XtendFormatterBugTests extends AbstractXtendFormatterTest {
 		}
 		''')
 	}
+	
 	@Ignore("Conflict")
 	@Test
 	def testBug400025_3(){
 		assertFormattedExpression('''
-		 {
+		{
 			val foo = 42
 			// foo
-		 }
-		 val bar = 42
+		}
+		val bar = 42
 		''')
 	}
 
