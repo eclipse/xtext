@@ -63,6 +63,16 @@ public class TypeResolutionStateAdapter extends AbstractRootedReentrantTypeResol
 	protected boolean isHandled(XExpression expression) {
 		return context.isHandled(expression);
 	}
+	
+	@Override
+	protected boolean isHandled(EObject context) {
+		return this.context.isHandled(context);
+	}
+	
+	@Override
+	protected IResolvedTypes getResolvedTypesInContextOf(EObject context) {
+		return this.context.getResolvedTypesInContextOf(context);
+	}
 
 	public void initializeFrom(EObject root) {
 		throw new IllegalStateException("Attempt to reinitialize the root resolver");

@@ -79,6 +79,9 @@ import org.eclipse.xtext.xbase.scoping.featurecalls.XAssignmentDescriptionProvid
 import org.eclipse.xtext.xbase.scoping.featurecalls.XAssignmentSugarDescriptionProvider;
 import org.eclipse.xtext.xbase.scoping.featurecalls.XConstructorProvider;
 import org.eclipse.xtext.xbase.scoping.featurecalls.XFeatureCallSugarDescriptionProvider;
+import org.eclipse.xtext.xbase.typesystem.IBatchTypeResolver;
+import org.eclipse.xtext.xbase.typesystem.IResolvedTypes;
+import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 import org.eclipse.xtext.xbase.typing.ITypeProvider;
 import org.eclipse.xtext.xbase.validation.IssueCodes;
 
@@ -139,6 +142,9 @@ public class XbaseScopeProvider extends DelegatingScopeProvider {
 
 	@Inject
 	private ITypeProvider typeProvider;
+	
+	@Inject
+	private IBatchTypeResolver batchTypeResolver;
 
 	@Inject
 	private FeatureCallToJavaMapping featureCallToJavaMapping;
@@ -423,7 +429,14 @@ public class XbaseScopeProvider extends DelegatingScopeProvider {
 		if (implicitVariable != null) {
 			EObject implicitReceiver = implicitVariable.getEObjectOrProxy();
 			if (implicitReceiver instanceof JvmIdentifiableElement) {
-				JvmTypeReference receiverType = typeProvider.getTypeForIdentifiable((JvmIdentifiableElement) implicitReceiver);
+				IResolvedTypes resolvedTypes = batchTypeResolver.getResolvedTypesInContextOf(expression);
+				LightweightTypeReference lightweightReceiverType = resolvedTypes.getActualType((JvmIdentifiableElement) implicitReceiver);
+				JvmTypeReference receiverType = null;
+				if (lightweightReceiverType != null) {
+					receiverType = lightweightReceiverType.toTypeReference();
+				} else {
+					receiverType = typeProvider.getTypeForIdentifiable((JvmIdentifiableElement) implicitReceiver);
+				}
 				receiverType = unkownToObject(receiverType, expression);
 				if (receiverType != null) {
 					XFeatureCall receiver = XbaseFactory.eINSTANCE.createXFeatureCall();

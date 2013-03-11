@@ -21,6 +21,8 @@ import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.util.internal.Stopwatches;
 import org.eclipse.xtext.util.internal.Stopwatches.StoppedTask;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
+import org.eclipse.xtext.xbase.XCasePart;
+import org.eclipse.xtext.xbase.XSwitchExpression;
 import org.eclipse.xtext.xbase.XbaseFactory;
 import org.eclipse.xtext.validation.IssueSeverities;
 import org.eclipse.xtext.validation.IssueSeveritiesProvider;
@@ -29,6 +31,8 @@ import org.eclipse.xtext.xbase.scoping.batch.IBatchScopeProvider;
 import org.eclipse.xtext.xbase.scoping.batch.IFeatureScopeSession;
 import org.eclipse.xtext.xbase.typesystem.IResolvedTypes;
 import org.eclipse.xtext.xbase.typesystem.computation.IFeatureLinkingCandidate;
+import org.eclipse.xtext.xbase.typesystem.computation.ITypeComputationResult;
+import org.eclipse.xtext.xbase.typesystem.computation.ITypeComputationState;
 import org.eclipse.xtext.xbase.typesystem.computation.ITypeComputer;
 import org.eclipse.xtext.xbase.typesystem.util.BoundTypeArgumentMerger;
 import org.eclipse.xtext.xbase.typesystem.util.CommonTypeComputationServices;
@@ -49,12 +53,25 @@ public class DefaultReentrantTypeResolver extends AbstractRootedReentrantTypeRes
 
 		private IScope scope;
 
-		public AbortTypeComputation(IScope scope) {
+		private IResolvedTypes resolvedTypes;
+
+		public AbortTypeComputation(IScope scope, IResolvedTypes resolvedTypes) {
 			this.scope = scope;
+			this.resolvedTypes = resolvedTypes;
 		}
 		
+		public AbortTypeComputation(IResolvedTypes resolvedTypes) {
+			this.scope = null;
+			this.resolvedTypes = resolvedTypes;
+		}
+		
+		@Nullable
 		public IScope getScope() {
 			return scope;
+		}
+		
+		public IResolvedTypes getResolvedTypes() {
+			return resolvedTypes;
 		}
 		
 	}
@@ -98,6 +115,11 @@ public class DefaultReentrantTypeResolver extends AbstractRootedReentrantTypeRes
 	protected final EObject getRoot() {
 		return root;
 	}
+	
+	@Override
+	protected boolean isHandled(EObject context) {
+		return EcoreUtil.getRootContainer(context) == getRoot();
+	}
 
 	@Override
 	protected boolean isHandled(XExpression expression) {
@@ -130,7 +152,7 @@ public class DefaultReentrantTypeResolver extends AbstractRootedReentrantTypeRes
 	}
 	
 	protected IResolvedTypes resolve() {
-		if (root == null || root.eResource() == null || root.eResource().getResourceSet() == null) {
+		if (isInvalidRoot()) {
 			return IResolvedTypes.NULL;
 		}
 		RootResolvedTypes result = createResolvedTypes();
@@ -149,9 +171,32 @@ public class DefaultReentrantTypeResolver extends AbstractRootedReentrantTypeRes
 		try {
 			computeTypes(resolvedTypes, session);
 		} catch(AbortTypeComputation e) {
-			return e.getScope();
+			IScope result = e.getScope();
+			if (result == null) {
+				throw new IllegalStateException();
+			}
+			return result;
 		}
 		return IScope.NULLSCOPE;
+	}
+	
+	@Override
+	protected IResolvedTypes getResolvedTypesInContextOf(EObject context) {
+		if (isInvalidRoot()) {
+			return IResolvedTypes.NULL;
+		}
+		RootResolvedTypes result = createAbortableResolvedTypes(context);
+		IFeatureScopeSession session = batchScopeProvider.newSession(root.eResource());
+		try {
+			computeTypes(result, session);
+		} catch(AbortTypeComputation e) {
+			return e.resolvedTypes;
+		}
+		return result;
+	}
+
+	private boolean isInvalidRoot() {
+		return root == null || root.eResource() == null || root.eResource().getResourceSet() == null;
 	}
 
 	protected RootResolvedTypes createResolvedTypes() {
@@ -161,6 +206,12 @@ public class DefaultReentrantTypeResolver extends AbstractRootedReentrantTypeRes
 	protected final ResolvedTypes createResolvedTypesForScoping(final XAbstractFeatureCall featureCall) {
 		DefaultReentrantTypeResolver clone = clone();
 		clone.scopeProviderAccess = createAbortingScopeProviderAccess(featureCall);
+		return new RootResolvedTypes(clone);
+	}
+	
+	protected final RootResolvedTypes createAbortableResolvedTypes(final EObject abortOn) {
+		DefaultReentrantTypeResolver clone = clone();
+		clone.typeComputer = createAbortingTypeComputer(abortOn);
 		return new RootResolvedTypes(clone);
 	}
 
@@ -189,11 +240,66 @@ public class DefaultReentrantTypeResolver extends AbstractRootedReentrantTypeRes
 					IFeatureScopeSession session, IResolvedTypes types) throws IllegalNodeException {
 				if (expression == abortOn) {
 					IScope scope = session.getScope(expression, reference, types);
-					throw new AbortTypeComputation(scope);
+					throw new AbortTypeComputation(scope, types);
 				}
 				return scopeProviderAccess.getCandidateDescriptions(expression, reference, toBeLinked, session, types);
 			}
 		};
+	}
+	
+	protected ITypeComputer createAbortingTypeComputer(final EObject abortOn) {
+		if (abortOn instanceof XExpression) {
+			return new ITypeComputer() {
+				public void computeTypes(XExpression expression, ITypeComputationState state) {
+					if (doAbort(abortOn, expression)) {
+						throw new AbortTypeComputation(((AbstractTypeComputationState) state).getResolvedTypes());
+					}
+					typeComputer.computeTypes(expression, state);
+				}
+			};
+		} else if (abortOn instanceof XCasePart) {
+			final XCasePart casePart = (XCasePart) abortOn;
+			return new ITypeComputer() {
+				public void computeTypes(XExpression expression, ITypeComputationState state) {
+					if (expression instanceof XSwitchExpression && casePart.eContainer() == expression) {
+						class State extends ForwardingTypeComputationState {
+
+							public State(ITypeComputationState delegate) {
+								super(delegate);
+							}
+
+							@Override
+							protected ForwardingTypeComputationState newForwardingTypeComputationState(ITypeComputationState delegate) {
+								return new State(delegate);
+							}
+							
+							@Override
+							public ITypeComputationState withTypeCheckpoint(@Nullable final EObject context) {
+								if (context != null && doAbort(abortOn, context)) {
+									return new State(getDelegate().withTypeCheckpoint(context)) {
+										@Override
+										public ITypeComputationResult computeTypes(@Nullable XExpression expression) {
+											ITypeComputationState delegate = getDelegate();
+											throw new AbortTypeComputation(((AbstractTypeComputationState) delegate).getResolvedTypes());
+										}
+									};
+								}
+								return super.withTypeCheckpoint(context);
+							}
+							
+						}
+						typeComputer.computeTypes(expression, new State(state));
+					} else {
+						typeComputer.computeTypes(expression, state);
+					}
+				}
+			};
+		}
+		return typeComputer;
+	}
+
+	protected boolean doAbort(final EObject abortOn, EObject context) {
+		return context == abortOn;
 	}
 
 	protected void computeTypes(ResolvedTypes resolvedTypes, IFeatureScopeSession session) {

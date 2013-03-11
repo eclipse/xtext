@@ -29,7 +29,7 @@ import com.google.inject.Provider;
 public abstract class AbstractSessionBasedScope extends AbstractScope {
 
 	protected interface NameAcceptor {
-		// TODO implementations should consider the order indicator in order to shadow properly
+		// TODO implementations may consider the order indicator to implement proper shadowing
 		// TODO define constants for the order indicator
 		void accept(String simpleName, int order);
 	}

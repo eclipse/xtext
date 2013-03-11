@@ -41,13 +41,18 @@ public class DefaultBatchTypeResolver implements IBatchTypeResolver {
 		if (object == null || object.eIsProxy())
 			return IResolvedTypes.NULL;
 		// TODO: remove when we switch to an Xtend scope provider without artificial feature calls  
+		EObject nonArtificialObject = getNonArtificialObject(object);
+		// TODO end
+		IReentrantTypeResolver reentrantResolver = getTypeResolver(nonArtificialObject);
+		return reentrantResolver.reentrantResolve();
+	}
+
+	private EObject getNonArtificialObject(EObject object) {
 		EObject nonArtificialObject = object;
 		if(object.eResource() == null && object instanceof XAbstractFeatureCall) {
 			nonArtificialObject = ((XAbstractFeatureCall) object).getFeature();
 		}
-		// TODO end
-		IReentrantTypeResolver reentrantResolver = getTypeResolver(nonArtificialObject);
-		return reentrantResolver.reentrantResolve();
+		return nonArtificialObject;
 	}
 	
 	public IScope getFeatureScope(@Nullable XAbstractFeatureCall featureCall) {
@@ -62,6 +67,22 @@ public class DefaultBatchTypeResolver implements IBatchTypeResolver {
 			}
 		}
 		return IScope.NULLSCOPE;
+	}
+	
+	public IResolvedTypes getResolvedTypesInContextOf(@Nullable EObject context) {
+		if (context == null || context.eIsProxy())
+			return IResolvedTypes.NULL;
+		// TODO: remove when we switch to an Xtend scope provider without artificial feature calls  
+		EObject nonArtificialObject = getNonArtificialObject(context);
+		// TODO end
+		List<EObject> roots = getEntryPoints(nonArtificialObject);
+		for(EObject root: roots) {
+			AbstractRootedReentrantTypeResolver resolver = getOrCreateResolver(root);
+			if (resolver.isHandled(context)) {
+				return resolver.getResolvedTypesInContextOf(context);
+			}
+		}
+		return IResolvedTypes.NULL;
 	}
 
 	protected IReentrantTypeResolver getTypeResolver(EObject object) {
@@ -123,6 +144,11 @@ public class DefaultBatchTypeResolver implements IBatchTypeResolver {
 				}
 				
 				@Override
+				protected boolean isHandled(EObject context) {
+					return newResolver.isHandled(context);
+				}
+				
+				@Override
 				protected boolean isHandled(XExpression expression) {
 					return newResolver.isHandled(expression);
 				}
@@ -130,6 +156,11 @@ public class DefaultBatchTypeResolver implements IBatchTypeResolver {
 				@Override
 				protected IScope getFeatureScope(XAbstractFeatureCall featureCall) {
 					return newResolver.getFeatureScope(featureCall);
+				}
+				
+				@Override
+				protected IResolvedTypes getResolvedTypesInContextOf(EObject context) {
+					return newResolver.getResolvedTypesInContextOf(context);
 				}
 			};
 			result.initializeFrom(root);
