@@ -48,7 +48,7 @@ public abstract class AbstractLocationInResource implements ILocationInResource 
 	
 	@NonNull
 	public IStorage getStorage() {
-		IStorage result = trace.findStorage(getResourceURI(), getProject());
+		IStorage result = trace.findStorage(trace.resolvePath(getResourceURI()), getProject());
 		return result;
 	}
 
@@ -58,7 +58,7 @@ public abstract class AbstractLocationInResource implements ILocationInResource 
 	}
 	
 	public InputStream getContents() throws CoreException {
-		return trace.getContents(getResourceURI(), getProject());
+		return trace.getContents(trace.resolvePath(getResourceURI()), getProject());
 	}
 	
 	public @NonNull IProject getProject() {
