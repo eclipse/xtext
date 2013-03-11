@@ -745,7 +745,7 @@ class XbaseFormatter2 extends AbstractFormatter {
 					if (expr.^default != null || c != expr.cases.last)
 						format += cnode.append[newLine; decreaseIndentation]
 					else
-						format += cnode.append[newLine; decreaseIndentationChange = 2]
+						format += cnode.append[newLine; decreaseIndentationChange = -2]
 				}
 			}
 			if(expr.^default != null) {
@@ -753,7 +753,7 @@ class XbaseFormatter2 extends AbstractFormatter {
 				if (expr.^default instanceof XBlockExpression) {
 					format += expr.^default.nodeForEObject.surround([cfg(bracesInNewLine)], [newLine; decreaseIndentation])
 				} else {
-					format += expr.^default.nodeForEObject.surround([newLine; increaseIndentation], [newLine; decreaseIndentationChange = 2])
+					format += expr.^default.nodeForEObject.surround([newLine; increaseIndentation], [newLine; decreaseIndentationChange = -2])
 				}
 			}
 		}

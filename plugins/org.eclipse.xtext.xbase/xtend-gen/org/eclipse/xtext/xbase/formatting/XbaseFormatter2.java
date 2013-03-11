@@ -2600,7 +2600,8 @@ public class XbaseFormatter2 extends AbstractFormatter {
                 final Procedure1<FormattingDataInit> _function_20 = new Procedure1<FormattingDataInit>() {
                     public void apply(final FormattingDataInit it) {
                       it.newLine();
-                      it.decreaseIndentationChange = 2;
+                      int _minus = (-2);
+                      it.decreaseIndentationChange = _minus;
                     }
                   };
                 Function1<? super FormattableDocument,? extends Iterable<FormattingData>> _append_8 = this._formattingDataFactory.append(cnode, _function_20);
@@ -2649,7 +2650,8 @@ public class XbaseFormatter2 extends AbstractFormatter {
             final Procedure1<FormattingDataInit> _function_19 = new Procedure1<FormattingDataInit>() {
                 public void apply(final FormattingDataInit it) {
                   it.newLine();
-                  it.decreaseIndentationChange = 2;
+                  int _minus = (-2);
+                  it.decreaseIndentationChange = _minus;
                 }
               };
             Function1<? super FormattableDocument,? extends Iterable<FormattingData>> _surround_3 = this._formattingDataFactory.surround(_nodeForEObject_5, _function_18, _function_19);
