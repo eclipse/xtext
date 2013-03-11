@@ -303,7 +303,7 @@ public class FeatureCallValidationTest extends AbstractXbaseTestCase {
 	
 	@Test public void testNullSafeOnPrimitiveFeature() throws Exception {
 		XExpression expression = expression("#[]?.empty");
-		helper.assertError(expression, XABSTRACT_FEATURE_CALL, NULL_SAFE_FEATURE_CALL_ON_PRIMITIVE);
+		helper.assertWarning(expression, XABSTRACT_FEATURE_CALL, NULL_SAFE_FEATURE_CALL_OF_PRIMITIVE_VALUED_FEATURE);
 	}
 	
 	@Test public void testElvisOnPrimitiveReveiver() throws Exception {

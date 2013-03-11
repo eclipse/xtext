@@ -44,6 +44,9 @@ public class XbaseConfigurableIssueCodes extends ConfigurableIssueCodesProvider 
 	}
 
 	protected void initialize(IAcceptor<PreferenceKey> iAcceptor) {
+		iAcceptor.accept(create(IssueCodes.NULL_SAFE_FEATURE_CALL_OF_PRIMITIVE_VALUED_FEATURE, SeverityConverter.SEVERITY_WARNING));
+		iAcceptor.accept(create(IssueCodes.UNHANDLED_EXCEPTION, SeverityConverter.SEVERITY_IGNORE));
+
 		iAcceptor.accept(createDelegate(IssueCodes.FORBIDDEN_REFERENCE, JavaCore.COMPILER_PB_FORBIDDEN_REFERENCE));
 		iAcceptor.accept(createDelegate(IssueCodes.DISCOURAGED_REFERENCE, JavaCore.COMPILER_PB_DISCOURAGED_REFERENCE));
 		iAcceptor.accept(create(IssueCodes.IMPORT_WILDCARD_DEPRECATED, SeverityConverter.SEVERITY_WARNING));
@@ -53,7 +56,6 @@ public class XbaseConfigurableIssueCodes extends ConfigurableIssueCodesProvider 
 		iAcceptor.accept(createDelegate(IssueCodes.IMPORT_UNUSED, JavaCore.COMPILER_PB_UNUSED_IMPORT));
 		iAcceptor.accept(createDelegate(IssueCodes.UNUSED_LOCAL_VARIABLE, JavaCore.COMPILER_PB_UNUSED_LOCAL));
 		iAcceptor.accept(create(IssueCodes.IMPORT_DUPLICATE, SeverityConverter.SEVERITY_WARNING));
-		iAcceptor.accept(create(IssueCodes.UNHANDLED_EXCEPTION, SeverityConverter.SEVERITY_IGNORE));
 	}
 
 	protected final PreferenceKey create(String id, String defaultValue) {
