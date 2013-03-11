@@ -238,7 +238,7 @@ public class XtendFormatterBugTests extends AbstractXtendFormatterTest {
     _builder.newLine();
     this.assertFormattedExpression(_builder);
   }
-
+  
   @Test
   public void testBug400025_1() {
     StringConcatenation _builder = new StringConcatenation();
@@ -270,7 +270,7 @@ public class XtendFormatterBugTests extends AbstractXtendFormatterTest {
     _builder.newLine();
     this.assertFormatted(_builder);
   }
-
+  
   @Ignore("Conflict")
   @Test
   public void testBug400025_3() {
