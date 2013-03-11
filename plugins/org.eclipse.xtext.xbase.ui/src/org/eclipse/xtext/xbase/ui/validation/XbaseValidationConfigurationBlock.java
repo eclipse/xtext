@@ -50,16 +50,15 @@ public class XbaseValidationConfigurationBlock extends AbstractValidatorConfigur
 	@Override
 	protected void fillSettingsPage(Composite composite, int nColumns, int defaultIndent) {
 
+		Composite programmingProblems = createSection("Potential programming problems", composite, nColumns);
+		fillPotentialProgrammingProblemsSection(new ComboBoxBuilder(this, programmingProblems, defaultIndent));
+
 		Composite restrictedApi = createSection(
 				Messages.XbaseValidationConfigurationBlock_restricted_api_section_title, composite, nColumns);
 		fillRestrictedApiSection(new ComboBoxBuilder(this, restrictedApi, defaultIndent));
 
 		Composite unusedCode = createSection("Unnecessary code", composite, nColumns);
 		fillUnusedCodeSection(new ComboBoxBuilder(this, unusedCode, defaultIndent));
-
-		Composite exceptions = createSection("Exception handling", composite, nColumns);
-		fillExceptionsSection(new ComboBoxBuilder(this, exceptions, defaultIndent));
-
 	}
 
 	protected void fillUnusedCodeSection(ComboBoxBuilder comboBoxBuilder) {
@@ -70,7 +69,8 @@ public class XbaseValidationConfigurationBlock extends AbstractValidatorConfigur
 				.addJavaDelegatingComboBox(IssueCodes.OBSOLETE_CAST, "Unnecessary 'cast' operation:");
 	}
 
-	protected void fillExceptionsSection(ComboBoxBuilder comboBoxBuilder) {
+	protected void fillPotentialProgrammingProblemsSection(ComboBoxBuilder comboBoxBuilder) {
+		comboBoxBuilder.addComboBox(IssueCodes.NULL_SAFE_FEATURE_CALL_OF_PRIMITIVE_VALUED_FEATURE, "Null safe call of primitive valued feature:");
 		comboBoxBuilder.addComboBox(IssueCodes.UNHANDLED_EXCEPTION, "Unhandled checked exceptions:");
 	}
 
