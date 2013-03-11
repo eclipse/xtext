@@ -56,9 +56,20 @@ public class CodeRefs {
       } else {
         final Function1<String,Boolean> _function = new Function1<String,Boolean>() {
             public Boolean apply(final String it) {
-              String _identifier = element==null?(String)null:element.getIdentifier();
-              boolean _startsWith = _identifier==null?false:_identifier.startsWith(it);
-              return Boolean.valueOf(_startsWith);
+              boolean _xblockexpression = false;
+              {
+                final String identifier = element==null?(String)null:element.getIdentifier();
+                boolean _and = false;
+                boolean _notEquals = ObjectExtensions.operator_notEquals(identifier, null);
+                if (!_notEquals) {
+                  _and = false;
+                } else {
+                  boolean _startsWith = identifier.startsWith(it);
+                  _and = (_notEquals && _startsWith);
+                }
+                _xblockexpression = (_and);
+              }
+              return Boolean.valueOf(_xblockexpression);
             }
           };
         boolean _exists = IterableExtensions.<String>exists(CodeRefs.NO_JAVADOC_PACKAGE_PREFIXES, _function);

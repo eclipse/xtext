@@ -19,7 +19,7 @@ class CodeRefs {
 	
 	def getJavaDocURI(JvmIdentifiableElement element) {
 		val uri = genJavaDocLink(element)
-		if(uri.nullOrEmpty && !NO_JAVADOC_PACKAGE_PREFIXES.exists[element?.identifier?.startsWith(it)]) {
+		if(uri.nullOrEmpty && !NO_JAVADOC_PACKAGE_PREFIXES.exists[val identifier = element?.identifier identifier != null && identifier.startsWith(it)]) {
 			LOG.error('Missing JavaDoc link for ' + element.identifier)
 			return null
 		}
