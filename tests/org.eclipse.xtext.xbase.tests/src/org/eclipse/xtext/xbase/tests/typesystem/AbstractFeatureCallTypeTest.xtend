@@ -407,6 +407,14 @@ abstract class AbstractFeatureCallTypeTest extends AbstractXbaseTestCase {
 		"}").resolvesFeatureCallsTo("List<Object>", "List<? super String>", "Object")
 	}
 	
+	@Test def void testIfExpression_01() throws Exception {
+		"if(true) #{'f'} else emptySet".resolvesFeatureCallsTo("Set<String>")
+	}
+	
+	@Test def void testIfExpression_02() throws Exception {
+		"if(true) emptySet else #{'f'}".resolvesFeatureCallsTo("Set<String>")
+	}
+	
 	@Test def void testSwitchExpression_3() throws Exception {
 		"{
 			val Object c = null

@@ -276,7 +276,6 @@ public abstract class ResolvedTypes implements IResolvedTypes {
 	}
 
 	@Nullable
-//	protected LightweightTypeReference getMergedType(EnumSet<ConformanceHint> mergedHints, List<LightweightTypeReference> types) {
 	protected LightweightTypeReference getMergedType(List<LightweightTypeReference> types) {
 		if (types.isEmpty()) {
 			return null;
@@ -285,13 +284,6 @@ public abstract class ResolvedTypes implements IResolvedTypes {
 			LightweightTypeReference result = types.get(0);
 			return result;
 		}
-//		if (mergedHints.contains(ConformanceHint.UNDECIDED)) {
-//			CompoundTypeReference result = new CompoundTypeReference(getReferenceOwner(), false);
-//			for (LightweightTypeReference type: types) {
-//				result.addComponent(type);
-//			}
-//			return result;
-//		}
 		LightweightTypeReference result = getServices().getTypeConformanceComputer().getCommonSuperType(types);
 		if (result != null || types.isEmpty()) {
 			return result;

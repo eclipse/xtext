@@ -25,7 +25,9 @@ import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.ParameterizedTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.UnboundTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.WildcardTypeReference;
+import org.eclipse.xtext.xbase.typesystem.util.BoundTypeArgumentSource;
 import org.eclipse.xtext.xbase.typesystem.util.CommonTypeComputationServices;
+import org.eclipse.xtext.xbase.typesystem.util.VarianceInfo;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -288,7 +290,11 @@ public class ParameterizedTypeConformanceStrategy<TypeReference extends Paramete
 			return TypeConformanceResult.create(param, ConformanceHint.SUCCESS);
 		if (left.isType(Object.class))
 			return TypeConformanceResult.create(param, ConformanceHint.SUCCESS);
-		if (!param.isRawType() && (right.canResolveTo(left) || param.isAsTypeArgument() && !right.hasSignificantHints())) { 
+		boolean doesNotHaveSignificantHints = false;
+		if (!param.isRawType() && (right.canResolveTo(left) || param.isAsTypeArgument() && (doesNotHaveSignificantHints = !right.hasSignificantHints()))) {
+			if (param.unboundComputationAddsHints && doesNotHaveSignificantHints) {
+				right.acceptHint(left, BoundTypeArgumentSource.INFERRED_LATER, left, VarianceInfo.INVARIANT, VarianceInfo.INVARIANT);
+			}
 			return TypeConformanceResult.create(param, ConformanceHint.SUCCESS);
 		}
 		right.tryResolve();
