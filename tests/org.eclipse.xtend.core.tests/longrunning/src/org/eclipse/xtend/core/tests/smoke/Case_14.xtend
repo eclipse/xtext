@@ -12,7 +12,9 @@ import org.eclipse.xtext.resource.XtextResourceSet
 import org.eclipse.xtext.xbase.jvmmodel.JvmModelAssociator
 import org.eclipse.xtext.xbase.jvmmodel.JvmTypesBuilder
 import org.junit.Test
+import org.junit.Ignore
 
+@Ignore
 class Case_14 extends AbstractXtendTestCase {
 
        @Inject extension JvmTypesBuilder
