@@ -22,7 +22,6 @@ import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 
-import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 
 /**

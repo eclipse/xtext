@@ -63,10 +63,12 @@ public abstract class AbstractSessionBasedScope extends AbstractScope {
 			String aliasedSetter = "set" + Strings.toFirstUpper(name.toString());
 			acceptor.accept(aliasedSetter, 2);
 		} else {
-			String aliasedGetter = "get" + Strings.toFirstUpper(name.toString());
-			acceptor.accept(aliasedGetter, 2);
-			String aliasedBooleanGetter = "is" + Strings.toFirstUpper(name.toString());
-			acceptor.accept(aliasedBooleanGetter, 2);
+			if (!getFeatureCall().isExplicitOperationCallOrBuilderSyntax()) {
+				String aliasedGetter = "get" + Strings.toFirstUpper(name.toString());
+				acceptor.accept(aliasedGetter, 2);
+				String aliasedBooleanGetter = "is" + Strings.toFirstUpper(name.toString());
+				acceptor.accept(aliasedBooleanGetter, 2);
+			}
 		}
 	}
 	

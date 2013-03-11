@@ -15,6 +15,30 @@ import org.junit.Test
 class CompilerBugTest extends AbstractXtendCompilerTest {
 	
 	@Test
+	def testWronglyAppliedSugar_01() {
+		assertCompilesTo('''
+			class C {
+				def void getSomething(String s) {
+					s.something()
+					s.something
+			    }
+			    def void something(CharSequence c) {}
+			}
+		''', '''
+			@SuppressWarnings("all")
+			public class C {
+			  public void getSomething(final String s) {
+			    this.something(s);
+			    this.getSomething(s);
+			  }
+			  
+			  public void something(final CharSequence c) {
+			  }
+			}
+		''')
+	}
+	
+	@Test
 	def testBugReturnInLoop_01() {
 		assertCompilesTo('''
 			class C {

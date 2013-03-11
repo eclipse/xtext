@@ -17,6 +17,58 @@ import org.junit.Test;
 @SuppressWarnings("all")
 public class CompilerBugTest extends AbstractXtendCompilerTest {
   @Test
+  public void testWronglyAppliedSugar_01() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("class C {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def void getSomething(String s) {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("s.something()");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("s.something");
+    _builder.newLine();
+    _builder.append("    ");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("    ");
+    _builder.append("def void something(CharSequence c) {}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("@SuppressWarnings(\"all\")");
+    _builder_1.newLine();
+    _builder_1.append("public class C {");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("public void getSomething(final String s) {");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("this.something(s);");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("this.getSomething(s);");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("public void something(final CharSequence c) {");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    this.assertCompilesTo(_builder, _builder_1);
+  }
+  
+  @Test
   public void testBugReturnInLoop_01() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("class C {");
