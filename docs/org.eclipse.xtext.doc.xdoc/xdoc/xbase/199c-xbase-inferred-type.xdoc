@@ -68,6 +68,11 @@ class DomainmodelJvmModelInferrer extends AbstractModelInferrer {
 }
 ]
 
+Out of the inferred model the corresponding Java class gets generated. To ensure that this will work
+make sure that the binding in the rumtime module for codeRef[org.eclipse.xtext.generator.IGenerator]
+is pointing to codeRef[org.eclipse.xtext.xbase.compiler.JvmModelGenerator]. This is the default case, but as we
+dealt with a custom implementation in the last section this may lead to problems.
+
 section2[Linking and Indexing]
 
 As Java elements and your concepts are now represented as JVM model elements, other models can now transparently

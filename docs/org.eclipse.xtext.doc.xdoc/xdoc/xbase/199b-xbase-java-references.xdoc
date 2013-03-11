@@ -28,6 +28,7 @@ grammar org.eclipse.xtext.example.Domainmodel with
 generate domainmodel "http://www.eclipse.org/xtext/example/Domainmodel"
 
 Domainmodel:
+  importSection=XImportSection?
   (elements += AbstractElement)*
 ;
 
@@ -38,17 +39,9 @@ PackageDeclaration:
 ;
 
 AbstractElement:
-  PackageDeclaration | Entity | Import
+  PackageDeclaration | Entity
 ;
 
-Import:
-  'import' importedNamespace = QualifiedNameWithWildcard
-;
-  
-QualifiedNameWithWildcard:
-  QualifiedName '.*'?
-;
-  
 Entity:
   'entity' name = ID 
               ('extends' superType = JvmTypeReference)?
@@ -135,5 +128,16 @@ class DomainmodelGenerator implements IGenerator {
     ref.serialize(ref.eContainer, result);
     result.toString
   }
+}
+]
+
+Please note that when e[org.eclipse.xtext.xbase.Xbase] is used the default binding for codeRef[org.eclipse.xtext.generator.IGenerator]
+is codeRef[org.eclipse.xtext.xbase.compiler.JvmModelGenerator]. To use a custom one we have to bind our
+own implementation in e[org.example.domainmodel.DomainmodelRuntimeModule] like this:
+code[Java][
+public class DomainmodelRuntimeModule extends org.example.domainmodel.AbstractDomainmodelRuntimeModule {
+	public Class<? extends org.eclipse.xtext.generator.IGenerator> bindIGenerator() {
+		return org.example.domainmodel.generator.DomainmodelGenerator.class;
+	}
 }
 ]

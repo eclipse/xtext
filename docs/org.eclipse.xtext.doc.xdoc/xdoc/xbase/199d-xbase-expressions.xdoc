@@ -72,14 +72,13 @@ Xbase ships with the codeRef[org.eclipse.xtext.xbase.interpreter.impl.XbaseInter
 rather easy.
 
 An interpreter is essentially an external visitor, that recursively processes a model based on the model
-element's types. By now you should be aware that polymorphic dispatching is exactly the technology needed
-here. In the codeRef[org.eclipse.xtext.xbase.interpreter.impl.XbaseInterpreter], the dispatch method
-is called e[_evaluate<SomeDescription>] and takes three parameters, e.g. 
+element's types. In the codeRef[org.eclipse.xtext.xbase.interpreter.impl.XbaseInterpreter], the method
+e[doEvaluate(XExpression, IEvaluationContext, CancelIndicator)] delegates to more specialised implementations e.g.
 
 code[Java][
-protected Object _evaluateBlockExpression(XBlockExpression literal, 
-                      IEvaluationContext context, 
-                      CancelIndicator indicator)
+protected Object _doEvaluate(XBlockExpression literal,
+							IEvaluationContext context,
+							CancelIndicator indicator)
 ]
 
 The codeRef[org.eclipse.core.expressions.IEvaluationContext] keeps the state of the running application,
