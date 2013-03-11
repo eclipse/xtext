@@ -49,10 +49,9 @@ class XtendUIValidationTests extends AbstractXtendUITestCase {
 	@Test
 	def void testForbiddenImport() {
 		val xtendFile = testHelper.xtendFile("Clazz.xtend",'''
-		import org.eclipse.xtend.core.tests.restricted.RestrictedClass
-		class Foo {
-		}
-
+			import org.eclipse.xtend.core.tests.restricted.RestrictedClass
+			class Foo {
+			}
 		''')
 		helper.assertError(xtendFile.importSection.importDeclarations.get(0), XIMPORT_DECLARATION, FORBIDDEN_REFERENCE)
 	}
@@ -60,10 +59,9 @@ class XtendUIValidationTests extends AbstractXtendUITestCase {
 	@Test
 	def void testDiscouragedImport() {
 		val xtendFile = testHelper.xtendFile("Clazz.xtend",'''
-		import org.eclipse.xtend.core.tests.internal.InternalClass
-		class Foo {
-		}
-
+			import org.eclipse.xtend.core.tests.internal.InternalClass
+			class Foo {
+			}
 		''')
 		helper.assertWarning(xtendFile.importSection.importDeclarations.get(0), XIMPORT_DECLARATION, DISCOURAGED_REFERENCE)
 	}
@@ -71,10 +69,9 @@ class XtendUIValidationTests extends AbstractXtendUITestCase {
 	@Test
 	def void testForbiddenImportInnerClass() {
 		val xtendFile = testHelper.xtendFile("Clazz.xtend",'''
-		import org.eclipse.xtend.core.tests.restricted.RestrictedClass$InnerRestrictedClass
-		class Foo {
-		}
-
+			import org.eclipse.xtend.core.tests.restricted.RestrictedClass$InnerRestrictedClass
+			class Foo {
+			}
 		''')
 		helper.assertError(xtendFile.importSection.importDeclarations.get(0), XIMPORT_DECLARATION, FORBIDDEN_REFERENCE)
 	}
@@ -82,10 +79,9 @@ class XtendUIValidationTests extends AbstractXtendUITestCase {
 	@Test
 	def void testDiscouragedImportInnerClass() {
 		val xtendFile = testHelper.xtendFile("Clazz.xtend",'''
-		import org.eclipse.xtend.core.tests.internal.InternalClass$InnerInternalClass
-		class Foo {
-		}
-
+			import org.eclipse.xtend.core.tests.internal.InternalClass$InnerInternalClass
+			class Foo {
+			}
 		''')
 		helper.assertWarning(xtendFile.importSection.importDeclarations.get(0), XIMPORT_DECLARATION, DISCOURAGED_REFERENCE)
 	}
@@ -93,11 +89,10 @@ class XtendUIValidationTests extends AbstractXtendUITestCase {
 	@Test
 	def void testValidImport() {
 		val xtendFile = testHelper.xtendFile("Clazz.xtend",'''
-		import java.util.List
-		class Foo {
-			def bar(List<?> l){}
-		}
-
+			import java.util.List
+			class Foo {
+				def bar(List<?> l){}
+			}
 		''')
 		helper.assertNoIssues(xtendFile.importSection.importDeclarations.get(0))
 	}
@@ -105,11 +100,10 @@ class XtendUIValidationTests extends AbstractXtendUITestCase {
 	@Test
 	def void testForbiddenConstructorCall() {
 		val xtendFile = testHelper.xtendFile("Clazz.xtend",'''
-		import org.eclipse.xtend.core.tests.restricted.RestrictedClass
-		class Foo {
-			RestrictedClass x = new RestrictedClass
-		}
-
+			import org.eclipse.xtend.core.tests.restricted.RestrictedClass
+			class Foo {
+				RestrictedClass x = new RestrictedClass
+			}
 		''')
 		helper.assertError(xtendFile.importSection.importDeclarations.get(0), XIMPORT_DECLARATION, FORBIDDEN_REFERENCE)
 		val field = xtendFile.xtendTypes.filter(typeof(XtendClass)).head.members.head as XtendField
@@ -120,11 +114,10 @@ class XtendUIValidationTests extends AbstractXtendUITestCase {
 	@Test
 	def void testDiscouragedConstructorCall() {
 		val xtendFile = testHelper.xtendFile("Clazz.xtend",'''
-		import org.eclipse.xtend.core.tests.internal.InternalClass
-		class Foo {
-			InternalClass x = new InternalClass
-		}
-
+			import org.eclipse.xtend.core.tests.internal.InternalClass
+			class Foo {
+				InternalClass x = new InternalClass
+			}
 		''')
 		helper.assertWarning(xtendFile.importSection.importDeclarations.get(0), XIMPORT_DECLARATION, DISCOURAGED_REFERENCE)
 		val field = xtendFile.xtendTypes.filter(typeof(XtendClass)).head.members.head as XtendField
@@ -136,11 +129,10 @@ class XtendUIValidationTests extends AbstractXtendUITestCase {
 	@Test
 	def void testDiscouragedConstructorCallInnernClass() {
 		val xtendFile = testHelper.xtendFile("Clazz.xtend",'''
-		import org.eclipse.xtend.core.tests.internal.InternalClass$InnerInternalClass
-		class Foo {
-			InnerInternalClass x = new InnerInternalClass
-		}
-
+			import org.eclipse.xtend.core.tests.internal.InternalClass$InnerInternalClass
+			class Foo {
+				InnerInternalClass x = new InnerInternalClass
+			}
 		''')
 		helper.assertWarning(xtendFile.importSection.importDeclarations.get(0), XIMPORT_DECLARATION, DISCOURAGED_REFERENCE)
 		val field = xtendFile.xtendTypes.filter(typeof(XtendClass)).head.members.head as XtendField
@@ -151,11 +143,10 @@ class XtendUIValidationTests extends AbstractXtendUITestCase {
 	@Test
 	def void testForbiddenConstructorCallInnerClass() {
 		val xtendFile = testHelper.xtendFile("Clazz.xtend",'''
-		import org.eclipse.xtend.core.tests.restricted.RestrictedClass$InnerRestrictedClass
-		class Foo {
-			InnerRestrictedClass x = new InnerRestrictedClass
-		}
-
+			import org.eclipse.xtend.core.tests.restricted.RestrictedClass$InnerRestrictedClass
+			class Foo {
+				InnerRestrictedClass x = new InnerRestrictedClass
+			}
 		''')
 		helper.assertError(xtendFile.importSection.importDeclarations.get(0), XIMPORT_DECLARATION, FORBIDDEN_REFERENCE)
 		val field = xtendFile.xtendTypes.filter(typeof(XtendClass)).head.members.head as XtendField
@@ -166,10 +157,9 @@ class XtendUIValidationTests extends AbstractXtendUITestCase {
 	@Test
 	def void testForbiddenTypeUsageInnernClass() {
 		val xtendFile = testHelper.xtendFile("Clazz.xtend",'''
-		class Foo {
-			def bar(org.eclipse.xtend.core.tests.restricted.RestrictedClass$InnerRestrictedClass x) {}
-		}
-
+			class Foo {
+				def bar(org.eclipse.xtend.core.tests.restricted.RestrictedClass$InnerRestrictedClass x) {}
+			}
 		''')
 		val function = xtendFile.xtendTypes.filter(typeof(XtendClass)).head.members.head as XtendFunction
 		helper.assertError(function.parameters.get(0), JVM_TYPE_REFERENCE, FORBIDDEN_REFERENCE)
@@ -178,10 +168,9 @@ class XtendUIValidationTests extends AbstractXtendUITestCase {
 	@Test
 	def void testDiscouragedTypeUsageInnernClass() {
 		val xtendFile = testHelper.xtendFile("Clazz.xtend",'''
-		class Foo {
-			def bar(org.eclipse.xtend.core.tests.internal.InternalClass$InnerInternalClass x){}
-		}
-
+			class Foo {
+				def bar(org.eclipse.xtend.core.tests.internal.InternalClass$InnerInternalClass x){}
+			}
 		''')
 
 		val function = xtendFile.xtendTypes.filter(typeof(XtendClass)).head.members.head as XtendFunction
@@ -191,10 +180,9 @@ class XtendUIValidationTests extends AbstractXtendUITestCase {
 	@Test
 	def void testForbiddenTypeUsage() {
 		val xtendFile = testHelper.xtendFile("Clazz.xtend",'''
-		class Foo {
-			def bar(org.eclipse.xtend.core.tests.restricted.RestrictedClass x) {}
-		}
-
+			class Foo {
+				def bar(org.eclipse.xtend.core.tests.restricted.RestrictedClass x) {}
+			}
 		''')
 		val function = xtendFile.xtendTypes.filter(typeof(XtendClass)).head.members.head as XtendFunction
 		helper.assertError(function.parameters.get(0), JVM_TYPE_REFERENCE, FORBIDDEN_REFERENCE)
@@ -203,10 +191,9 @@ class XtendUIValidationTests extends AbstractXtendUITestCase {
 	@Test
 	def void testForbiddenArrayTypeUsage() {
 		val xtendFile = testHelper.xtendFile("Clazz.xtend",'''
-		class Foo {
-			def bar(org.eclipse.xtend.core.tests.restricted.RestrictedClass[] x) {}
-		}
-
+			class Foo {
+				def bar(org.eclipse.xtend.core.tests.restricted.RestrictedClass[] x) {}
+			}
 		''')
 		val function = xtendFile.xtendTypes.filter(typeof(XtendClass)).head.members.head as XtendFunction
 		helper.assertError(function.parameters.get(0), JVM_TYPE_REFERENCE, FORBIDDEN_REFERENCE)
@@ -215,9 +202,9 @@ class XtendUIValidationTests extends AbstractXtendUITestCase {
 	@Test
 	def void testParameterizedTypeReference() {
 		val xtendFile = testHelper.xtendFile("Clazz.xtend",'''
-		class Foo {
-			def bar(org.eclipse.xtend.core.tests.restricted.RestrictedClass<org.eclipse.xtend.core.tests.internal.InternalClass> x) {}
-		}
+			class Foo {
+				def bar(org.eclipse.xtend.core.tests.restricted.RestrictedClass<org.eclipse.xtend.core.tests.internal.InternalClass> x) {}
+			}
 		''')
 		val function = xtendFile.xtendTypes.filter(typeof(XtendClass)).head.members.head as XtendFunction
 		val parameter = function.parameters.get(0)
@@ -241,16 +228,16 @@ class XtendUIValidationTests extends AbstractXtendUITestCase {
 
 	def void testPerformance() {
 		val xtendFile = testHelper.xtendFile("Clazz.xtend",'''
-		import org.eclipse.xtend.core.tests.restricted.RestrictedClass
-		import org.eclipse.xtend.core.tests.internal.InternalClass
-		
-		class Foo {
-		«FOR i : (0..200)»
-			RestrictedClass x«i» = new RestrictedClass
-			InternalClass y«i» = new InternalClass
-			def bar(InternalClass p1«i», RestrictedClass p2«i»){}
-		«ENDFOR»
-		}
+			import org.eclipse.xtend.core.tests.restricted.RestrictedClass
+			import org.eclipse.xtend.core.tests.internal.InternalClass
+			
+			class Foo {
+			«FOR i : (0..200)»
+				RestrictedClass x«i» = new RestrictedClass
+				InternalClass y«i» = new InternalClass
+				def bar(InternalClass p1«i», RestrictedClass p2«i»){}
+			«ENDFOR»
+			}
 		''')
 		helper.validate(xtendFile)
 	}
@@ -259,70 +246,81 @@ class XtendUIValidationTests extends AbstractXtendUITestCase {
 	def void testIssueCodeDelegation() {
 		val javaProject = JavaModelManager::getJavaModelManager().getJavaModel().getJavaProject(testHelper.project)
 		val javaSeverity = javaProject.getOption(JavaCore::COMPILER_PB_FORBIDDEN_REFERENCE, true)
-		if (javaSeverity != "error") {
-			fail("Wrong expectation Java compiler option '"+JavaCore::COMPILER_PB_FORBIDDEN_REFERENCE+"' should be 'error' by default")
+		try {
+			if (javaSeverity != "error") {
+				fail("Wrong expectation Java compiler option '"+JavaCore::COMPILER_PB_FORBIDDEN_REFERENCE+"' should be 'error' by default")
+			}
+			var otherSeverity = "warning"
+			val xtendFile = testHelper.xtendFile("ValidationClazz.xtend",'''
+				class ValidationClazz {
+					def bar(org.eclipse.xtend.core.tests.restricted.RestrictedClass x) {}
+				}
+			''')
+			val function = xtendFile.xtendTypes.filter(typeof(XtendClass)).head.members.head as XtendFunction
+			helper.assertError(function.parameters.get(0), JVM_TYPE_REFERENCE, FORBIDDEN_REFERENCE)
+			
+			javaProject.setOption(JavaCore::COMPILER_PB_FORBIDDEN_REFERENCE, otherSeverity)
+			helper.assertWarning(function.parameters.get(0), JVM_TYPE_REFERENCE, FORBIDDEN_REFERENCE)
+		} finally {
+			javaProject.setOption(JavaCore::COMPILER_PB_FORBIDDEN_REFERENCE, javaSeverity)
 		}
-		var otherSeverity = "warning"
-		val xtendFile = testHelper.xtendFile("ValidationClazz.xtend",'''
-		class ValidationClazz {
-			def bar(org.eclipse.xtend.core.tests.restricted.RestrictedClass x) {}
-		}
-
-		''')
-		val function = xtendFile.xtendTypes.filter(typeof(XtendClass)).head.members.head as XtendFunction
-		helper.assertError(function.parameters.get(0), JVM_TYPE_REFERENCE, FORBIDDEN_REFERENCE)
-		
-		javaProject.setOption(JavaCore::COMPILER_PB_FORBIDDEN_REFERENCE, otherSeverity)
-		helper.assertWarning(function.parameters.get(0), JVM_TYPE_REFERENCE, FORBIDDEN_REFERENCE)
 	}
 	
 	@Test
 	def void testConfigurableIssueCode() {
 		val xtendPrefStore = xtendPreferencesStore
-		xtendPrefStore.setValue(IssueCodes::UNUSED_PRIVATE_MEMBER, "warning")
-		
-		testHelper.xtendFile("TestConfigurableIssueCode.xtend",'''
-			class TestConfigurableIssueCode {
-				private String unusedField = "unusedField"
-			}
-		''') => [
-			val unusedField = xtendTypes.filter(typeof(XtendClass)).head.members.head 
-			helper.assertWarning(unusedField, XtendPackage$Literals::XTEND_FIELD, UNUSED_PRIVATE_MEMBER)
-		]
-		
-		xtendPrefStore.setValue(IssueCodes::UNUSED_PRIVATE_MEMBER, "error")
-		
-		testHelper.xtendFile("TestConfigurableIssueCode.xtend",'''
-			class TestConfigurableIssueCode {
-				private String unusedField = "unusedField"
-			}
-		''') => [
-			val unusedField = xtendTypes.filter(typeof(XtendClass)).head.members.head 
-			helper.assertError(unusedField, XtendPackage$Literals::XTEND_FIELD, UNUSED_PRIVATE_MEMBER)
-		]
-		
+		try {
+			xtendPrefStore.setValue(IssueCodes::UNUSED_PRIVATE_MEMBER, "warning")
+			
+			testHelper.xtendFile("TestConfigurableIssueCode.xtend",'''
+				class TestConfigurableIssueCode {
+					private String unusedField = "unusedField"
+				}
+			''') => [
+				val unusedField = xtendTypes.filter(typeof(XtendClass)).head.members.head 
+				helper.assertWarning(unusedField, XtendPackage$Literals::XTEND_FIELD, UNUSED_PRIVATE_MEMBER)
+			]
+			
+			xtendPrefStore.setValue(IssueCodes::UNUSED_PRIVATE_MEMBER, "error")
+			
+			testHelper.xtendFile("TestConfigurableIssueCode.xtend",'''
+				class TestConfigurableIssueCode {
+					private String unusedField = "unusedField"
+				}
+			''') => [
+				val unusedField = xtendTypes.filter(typeof(XtendClass)).head.members.head 
+				helper.assertError(unusedField, XtendPackage$Literals::XTEND_FIELD, UNUSED_PRIVATE_MEMBER)
+			]
+		} finally {
+			xtendPrefStore.setToDefault(IssueCodes::UNUSED_PRIVATE_MEMBER)
+		}
 	}
 	
 	@Test
     def testJavaDocRefs_Delegation() throws Exception {
 		val javaProject = JavaModelManager::getJavaModelManager().getJavaModel().getJavaProject(testHelper.project)
-			val javaSeverity = javaProject.getOption(JavaCore::COMPILER_PB_INVALID_JAVADOC, true)
+		val javaSeverity = javaProject.getOption(JavaCore::COMPILER_PB_INVALID_JAVADOC, true)
+		try {
 			if (javaSeverity != "ignore") {
 				fail("Wrong expectation Java compiler option '"+JavaCore::COMPILER_PB_INVALID_JAVADOC+"' should be 'ignore' by default")
 			}
 			var otherSeverity = "warning"
 			val xtendFile = testHelper.xtendFile("ValidationClazz.xtend",'''
-						class Foo {
-							/**
-							* {@link List}
-							*/
-							def doStuff(){}
-						}''')
-		val clazz = xtendFile.getXtendTypes.head as XtendClass
-		val member = clazz.members.head
-		helper.assertNoIssues(member)
-		javaProject.setOption(JavaCore::COMPILER_PB_INVALID_JAVADOC, otherSeverity)
-		helper.assertWarning(member, XTEND_FUNCTION, IssueCodes::JAVA_DOC_LINKING_DIAGNOSTIC, "javaDoc","List","cannot be resolved to a type");
+				class Foo {
+					/**
+					* {@link List}
+					*/
+					def doStuff(){}
+				}
+			''')
+			val clazz = xtendFile.getXtendTypes.head as XtendClass
+			val member = clazz.members.head
+			helper.assertNoIssues(member)
+			javaProject.setOption(JavaCore::COMPILER_PB_INVALID_JAVADOC, otherSeverity)
+			helper.assertWarning(member, XTEND_FUNCTION, IssueCodes::JAVA_DOC_LINKING_DIAGNOSTIC, "javaDoc","List","cannot be resolved to a type");
+		} finally {
+			javaProject.setOption(JavaCore::COMPILER_PB_INVALID_JAVADOC, javaSeverity)
+		}
     }
 
 	def getXtendPreferencesStore() {
