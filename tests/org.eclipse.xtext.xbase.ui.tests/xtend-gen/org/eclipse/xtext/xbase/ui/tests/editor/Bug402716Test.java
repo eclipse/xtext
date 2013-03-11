@@ -10,7 +10,6 @@ package org.eclipse.xtext.xbase.ui.tests.editor;
 import org.eclipse.xtext.junit4.ui.ContentAssistProcessorTestBuilder;
 import org.eclipse.xtext.junit4.ui.ContentAssistProcessorTestBuilder.ProposalTester;
 import org.eclipse.xtext.xbase.ui.tests.editor.AbstractXbaseContentAssistBugTest;
-import org.junit.Ignore;
 import org.junit.Test;
 
 /**
@@ -44,7 +43,6 @@ public class Bug402716Test extends AbstractXbaseContentAssistBugTest {
     _assertProposal.withDisplayString("map((T)=>R transformation) : Iterable<R> - IterableExtensions");
   }
   
-  @Ignore("TODO")
   @Test
   public void testMapListLiteral() throws Exception {
     ContentAssistProcessorTestBuilder _newBuilder = this.newBuilder();
@@ -53,7 +51,6 @@ public class Bug402716Test extends AbstractXbaseContentAssistBugTest {
     _assertProposal.withDisplayString("map((T)=>R transformation) : List<R> - ListExtensions");
   }
   
-  @Ignore("TODO")
   @Test
   public void testMapNewArrayList() throws Exception {
     ContentAssistProcessorTestBuilder _newBuilder = this.newBuilder();

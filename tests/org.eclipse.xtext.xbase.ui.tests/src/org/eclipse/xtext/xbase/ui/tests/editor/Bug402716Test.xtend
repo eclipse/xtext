@@ -38,7 +38,6 @@ class Bug402716Test extends AbstractXbaseContentAssistBugTest {
 			.withDisplayString('map((T)=>R transformation) : Iterable<R> - IterableExtensions')
 	}
 
-	@Ignore("TODO")
 	@Test
 	def void testMapListLiteral() throws Exception {
 		newBuilder.append('#[].map')
@@ -46,7 +45,6 @@ class Bug402716Test extends AbstractXbaseContentAssistBugTest {
 			.withDisplayString('map((T)=>R transformation) : List<R> - ListExtensions')
 	}
 
-	@Ignore("TODO")
 	@Test
 	def void testMapNewArrayList() throws Exception {
 		newBuilder.append('newArrayList.map')

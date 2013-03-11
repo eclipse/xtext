@@ -50,13 +50,13 @@ public class JvmFeatureSignatureProvider {
 			for (int i = 0; i < params.size(); i++) {
 				if (i != 0)
 					builder.append(",");
-				if (i<numberOfIrrelevantArguments)
-					builder.append("implicit ");
-				JvmTypeReference resolvedParameterType = ctx.getLowerBound(params.get(i).getParameterType());
-				if (resolvedParameterType != null)
-					builder.append(resolvedParameterType.getIdentifier());
-				else
-					builder.append("null");
+				if (i>=numberOfIrrelevantArguments) {
+					JvmTypeReference resolvedParameterType = ctx.getLowerBound(params.get(i).getParameterType());
+					if (resolvedParameterType != null)
+						builder.append(resolvedParameterType.getIdentifier());
+					else
+						builder.append("null");
+				}
 			}
 			builder.append(")");
 			return builder.toString();
