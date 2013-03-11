@@ -124,6 +124,10 @@ public class ContentAssistProcessorTestBuilder implements Cloneable {
 				}
 			}
 		}
+		return applyProposal(proposal);
+	}
+
+	protected ContentAssistProcessorTestBuilder applyProposal(ICompletionProposal proposal) throws Exception {
 		final XtextResource xtextResource = loadHelper.getResourceFor(new StringInputStream(model));
 		IXtextDocument document = getDocument(xtextResource, model);
 		proposal.apply(document);
@@ -141,6 +145,23 @@ public class ContentAssistProcessorTestBuilder implements Cloneable {
 
 	public ContentAssistProcessorTestBuilder assertText(String... expectedText) throws Exception {
 		return assertTextAtCursorPosition(this.cursorPosition, expectedText);
+	}
+	
+	public ProposalTester assertProposal(String expectedText) throws Exception {
+		String currentModelToParse = getModel();
+
+		ICompletionProposal[] proposals = computeCompletionProposals(currentModelToParse,
+				cursorPosition);
+
+		if (proposals == null)
+			proposals = new ICompletionProposal[0];
+		for(ICompletionProposal proposal: proposals) {
+			if (expectedText.equals(toString(proposal))) {
+				return new ProposalTester(proposal);
+			}
+		}
+		Assert.fail("No such proposal: " + expectedText + " Found: " + toString(proposals));
+		return null;
 	}
 
 	public ContentAssistProcessorTestBuilder assertTextAtCursorPosition(
@@ -229,17 +250,22 @@ public class ContentAssistProcessorTestBuilder implements Cloneable {
 			return Collections.emptyList();
 		List<String> res = new ArrayList<String>(proposals.length);
 		for (ICompletionProposal proposal : proposals) {
-			String proposedText = proposal.getDisplayString();
-			if (proposal instanceof ConfigurableCompletionProposal) {
-				ConfigurableCompletionProposal configurableProposal = (ConfigurableCompletionProposal) proposal;
-				proposedText = configurableProposal.getReplacementString();
-				if (configurableProposal.getTextApplier() instanceof ReplacementTextApplier)
-					proposedText = ((ReplacementTextApplier) configurableProposal.getTextApplier()).getActualReplacementString(configurableProposal);
-			}
+			String proposedText = toString(proposal);
 			res.add(proposedText);
 		}
 		Collections.sort(res);
 		return res;
+	}
+
+	protected String toString(ICompletionProposal proposal) {
+		String proposedText = proposal.getDisplayString();
+		if (proposal instanceof ConfigurableCompletionProposal) {
+			ConfigurableCompletionProposal configurableProposal = (ConfigurableCompletionProposal) proposal;
+			proposedText = configurableProposal.getReplacementString();
+			if (configurableProposal.getTextApplier() instanceof ReplacementTextApplier)
+				proposedText = ((ReplacementTextApplier) configurableProposal.getTextApplier()).getActualReplacementString(configurableProposal);
+		}
+		return proposedText;
 	}
 
 	public ContentAssistProcessorTestBuilder assertCountAtCursorPosition(int completionProposalCount, int cursorPosition)
@@ -359,5 +385,24 @@ public class ContentAssistProcessorTestBuilder implements Cloneable {
 
 	protected int getCursorPosition() {
 		return cursorPosition;
+	}
+	
+	public class ProposalTester {
+		
+		private ICompletionProposal proposal;
+
+		protected ProposalTester(ICompletionProposal proposal) {
+			this.proposal = proposal;
+		}
+		
+		public ProposalTester withDisplayString(String displayString) {
+			Assert.assertEquals("displayString", displayString, proposal.getDisplayString());
+			return this;
+		}
+		
+		public ContentAssistProcessorTestBuilder apply() throws Exception {
+			return ContentAssistProcessorTestBuilder.this.applyProposal(proposal);
+		}
+		
 	}
 }

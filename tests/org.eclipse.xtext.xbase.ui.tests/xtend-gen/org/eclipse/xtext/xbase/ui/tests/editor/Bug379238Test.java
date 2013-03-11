@@ -1,3 +1,10 @@
+/**
+ * Copyright (c) 2013 itemis AG (http://www.itemis.eu) and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ */
 package org.eclipse.xtext.xbase.ui.tests.editor;
 
 import com.google.inject.Inject;
@@ -10,6 +17,9 @@ import org.eclipse.xtext.xbase.ui.tests.editor.TestingXbaseHoverProvider;
 import org.junit.Assert;
 import org.junit.Test;
 
+/**
+ * @author Holger Schill - Initial contribution and API
+ */
 @SuppressWarnings("all")
 public class Bug379238Test extends AbstractXbaseUITestCase {
   @Inject

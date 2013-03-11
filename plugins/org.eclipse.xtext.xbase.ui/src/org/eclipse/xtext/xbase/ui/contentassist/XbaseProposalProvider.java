@@ -69,7 +69,6 @@ import org.eclipse.xtext.xbase.typesystem.legacy.StandardTypeReferenceOwner;
 import org.eclipse.xtext.xbase.typesystem.references.FunctionTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.OwnedConverter;
-import org.eclipse.xtext.xbase.typesystem.references.ParameterizedTypeReference;
 import org.eclipse.xtext.xbase.typesystem.util.CommonTypeComputationServices;
 import org.eclipse.xtext.xtype.XtypePackage;
 
@@ -82,6 +81,7 @@ import com.google.inject.Inject;
 /**
  * see http://www.eclipse.org/Xtext/documentation/latest/xtext.html#contentAssist on how to customize content assistant
  */
+@SuppressWarnings("deprecation")
 public class XbaseProposalProvider extends AbstractXbaseProposalProvider implements RepeatedContentAssistProcessor.ModeAware {
 	
 	private final static Logger log = Logger.getLogger(XbaseProposalProvider.class);
@@ -724,8 +724,11 @@ public class XbaseProposalProvider extends AbstractXbaseProposalProvider impleme
 			@Override
 			public LightweightTypeReference doVisitParameterizedTypeReference(JvmParameterizedTypeReference reference) {
 				LightweightTypeReference result = super.doVisitParameterizedTypeReference(reference);
-				FunctionTypeReference functionTypeReference = result.tryConvertToFunctionTypeReference(false);
-				return functionTypeReference != null ? functionTypeReference : result;
+				if (result.isFunctionType()) {
+					FunctionTypeReference functionTypeReference = result.tryConvertToFunctionTypeReference(false);
+					return functionTypeReference;
+				}
+				return result;
 			}
 		};
 	}
