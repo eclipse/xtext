@@ -7,7 +7,6 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.ui.tests.editor
 
-import org.junit.Ignore
 import org.junit.Test
 
 /**
