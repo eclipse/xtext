@@ -1239,18 +1239,18 @@ def void parseDomainmodel() {
 							across the inheritance relationship of an <strong>Entity</strong>.
 						</p>
 						<p>
-							Try to locate the class <strong>DomainmodelJavaValidator</strong> in the package <strong>org.eclipse.xtext.example.validation</strong>.
+							Try to locate the class <strong>DomainmodelValidator</strong> in the package <strong>org.eclipse.xtext.example.validation</strong>.
 							It can be found in the language plug-in. Defining the constraint itself is only a matter of a few lines
 							of code:
 						</p>
 						<p>
 							</p>
-							<pre class="prettyprint lang-java linenums">
+							<pre class="prettyprint lang-xtend linenums">
 @Check
-public void checkNameStartsWithCapital(Entity entity) {
-  if (!Character.isUpperCase(entity.getName().charAt(0))) {
+def void checkNameStartsWithCapital(Entity entity) {
+  if (!Character::isUpperCase(entity.getName().charAt(0))) {
     warning("Name should start with a capital", 
-      DomainmodelPackage.Literals.TYPE__NAME);
+      DomainmodelPackage$Literals::TYPE__NAME);
   }
 }</pre>
 							<p>
@@ -1266,20 +1266,19 @@ public void checkNameStartsWithCapital(Entity entity) {
 						</p>
 						<p>
 							</p>
-							<pre class="prettyprint lang-java linenums">
+							<pre class="prettyprint lang-xtend linenums">
 @Check
-public void checkFeatureNameIsUnique(Feature f) {
-  Entity superEntity = ((Entity) f.eContainer()).getSuperType();
-  while(superEntity != null) {
-    for(Feature other: superEntity.getFeatures()) {
-      if (f.getName().equals(other.getName())) {
-        error("Feature names have to be unique",
-            DomainmodelPackage.Literals.FEATURE__NAME);
-        return;
-      }
-    }
-    superEntity = superEntity.getSuperType();
-  }
+def void checkFeatureNameIsUnique(Feature f) {
+	var superEntity = (f.eContainer() as Entity).getSuperType();
+	while (superEntity != null) {
+		for (other : superEntity.getFeatures()) {
+			if (f.getName().equals(other.getName())) {
+				error("Feature names have to be unique", DomainmodelPackage$Literals::FEATURE__NAME);
+				return;
+			}
+		}
+		superEntity = superEntity.getSuperType();
+	}
 }</pre>
 							<p>
 						</p>
@@ -1446,21 +1445,16 @@ grammar org.example.domainmodel.Domainmodel with
 generate domainmodel "http://www.example.org/domainmodel/Domainmodel"
 
 Domainmodel:
+  importSection=XImportSection?
   elements+=AbstractElement*;
 
 AbstractElement:
-  PackageDeclaration | Entity | Import;
+  PackageDeclaration | Entity;
 
 PackageDeclaration:
   'package' name=QualifiedName '{'
     elements+=AbstractElement*
   '}';
-
-Import:
-  'import' importedNamespace=QualifiedNameWithWildCard;
-
-QualifiedNameWithWildCard :
-  QualifiedName  ('.' '*')?;
 
 Entity:
   'entity' name=ValidID 
@@ -1497,23 +1491,25 @@ grammar org.example.domainmodel.Domainmodel with
 								    Xbase allows us to easily reuse and embed modern, statically typed expressions as well as Java type signatures in our language.</li>
 								<li><pre class="prettyprint lang-xtext linenums">
 Domainmodel:
+  importSection=XImportSection?
   elements+=AbstractElement*;</pre>
 								    
 								    The first rule in a grammar is always used as the entry or start rule.  
 								    
-								    It says that a <strong>Domainmodel</strong> contains an arbitrary number (<code class="prettyprint lang-xtext">*</code>) of <strong>AbstractElement</strong>s which will be added (<code class="prettyprint lang-xtext">+=</code>)
-								    to a feature called <code class="prettyprint lang-xtext">elements</code>.</li>
+								    It says that a <strong>Domainmodel</strong> contains an optional import section and an arbitrary number (<code class="prettyprint lang-xtext">*</code>) of <strong>AbstractElement</strong>s which will be added (<code class="prettyprint lang-xtext">+=</code>)
+								    to a feature called <code class="prettyprint lang-xtext">elements</code>. The concept of <strong>XImportSection</strong> is part of <strong>org.eclipse.xtext.xbase.Xbase</strong>
+								    and comes with tool support and syntax like you know it from Java.</li>
 								<li><pre class="prettyprint lang-xtext linenums">
 AbstractElement:
-  PackageDeclaration | Entity | Import;</pre>
-								    The rule <strong>AbstractElement</strong> delegates to either the rule <strong>PackageDeclaration</strong>, the rule <strong>Entity</strong> or the rule <strong>Import</strong>.</li>
+  PackageDeclaration | Entity;</pre>
+								    The rule <strong>AbstractElement</strong> delegates to either the rule <strong>PackageDeclaration</strong> or the rule <strong>Entity</strong>.</li>
 								<li><pre class="prettyprint lang-xtext linenums">
 PackageDeclaration:
   'package' name=QualifiedName '{'
     elements+=AbstractElement*
   '}';</pre>
 								    A <strong>PackageDeclaration</strong> is used to declare a name space which can again contain any number
-								    of <strong>AbstractElement</strong>s.  
+								    of <strong>AbstractElement</strong>s.
 								    
 								    Xtext has built-in support for qualified names and scoping based on the hierarchy
 								    of the produced model. The default
@@ -1521,14 +1517,6 @@ PackageDeclaration:
 								    The qualified name of an <strong>Entity</strong> 'Baz' which is contained in a <strong>PackageDeclaration</strong> 'foo.bar'
 								    will be 'foo.bar.Baz'. In case you do not like the default behavior you will need
 								    to use a different implementation of <a href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/naming/IQualifiedNameProvider.html"><abbr title="org.eclipse.xtext.naming.IQualifiedNameProvider">IQualifiedNameProvider</abbr></a> <a href="https://github.com/eclipse/xtext/blob/v2.3.0/plugins/org.eclipse.xtext/src/org/eclipse/xtext/naming/IQualifiedNameProvider.java">(src)</a>.</li>
-								<li><pre class="prettyprint lang-xtext linenums">
-Import:
-  'import' importedNamespace=QualifiedNameWithWildCard;
-
-QualifiedNameWithWildCard :
-  QualifiedName  ('.' '*')?;</pre>
-								    The rule <strong>Import</strong> makes use of the <a href="#namespaceImports">namespace support</a>, too. It basically allows you to get full-blown
-								    import functionality as you are used to from Java, just by having these two rules in place.</li>
 								<li><pre class="prettyprint lang-xtext linenums">
 Entity:
   'entity' name=ValidID 
@@ -7473,6 +7461,7 @@ grammar org.eclipse.xtext.example.Domainmodel with
 generate domainmodel "http://www.eclipse.org/xtext/example/Domainmodel"
 
 Domainmodel:
+  importSection=XImportSection?
   (elements += AbstractElement)*
 ;
 
@@ -7483,17 +7472,9 @@ PackageDeclaration:
 ;
 
 AbstractElement:
-  PackageDeclaration | Entity | Import
+  PackageDeclaration | Entity
 ;
 
-Import:
-  'import' importedNamespace = QualifiedNameWithWildcard
-;
-  
-QualifiedNameWithWildcard:
-  QualifiedName '.*'?
-;
-  
 Entity:
   'entity' name = ID 
               ('extends' superType = JvmTypeReference)?
@@ -7588,6 +7569,19 @@ class DomainmodelGenerator implements IGenerator {
 }</pre>
 							<p>
 						</p>
+						<p>
+							Please note that when <strong>org.eclipse.xtext.xbase.Xbase</strong> is used the default binding for <a href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/generator/IGenerator.html"><abbr title="org.eclipse.xtext.generator.IGenerator">IGenerator</abbr></a> <a href="https://github.com/eclipse/xtext/blob/v2.3.0/plugins/org.eclipse.xtext.generator/src/org/eclipse/xtext/generator/IGenerator.java">(src)</a>
+							is <a href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/xbase/compiler/JvmModelGenerator.html"><abbr title="org.eclipse.xtext.xbase.compiler.JvmModelGenerator">JvmModelGenerator</abbr></a> <a href="https://github.com/eclipse/xtext/blob/v2.3.0/plugins/org.eclipse.xtext.xbase/src/org/eclipse/xtext/xbase/compiler/JvmModelGenerator.xtend">(src)</a>. To use a custom one we have to bind our
+							own implementation in <strong>org.example.domainmodel.DomainmodelRuntimeModule</strong> like this:
+							</p>
+							<pre class="prettyprint lang-java linenums">
+public class DomainmodelRuntimeModule extends org.example.domainmodel.AbstractDomainmodelRuntimeModule {
+	public Class&lt;? extends org.eclipse.xtext.generator.IGenerator&gt; bindIGenerator() {
+		return org.example.domainmodel.generator.DomainmodelGenerator.class;
+	}
+}</pre>
+							<p>
+						</p>
 						</section>
 						<!--  section -->
 						<section id="xbaseInferredType" style="padding-top: 68px; margin-top: -68px;">
@@ -7667,6 +7661,12 @@ class DomainmodelJvmModelInferrer extends AbstractModelInferrer {
   }
 }</pre>
 							<p>
+						</p>
+						<p>
+							Out of the inferred model the corresponding Java class gets generated. To ensure that this will work
+							make sure that the binding in the rumtime module for <a href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/generator/IGenerator.html"><abbr title="org.eclipse.xtext.generator.IGenerator">IGenerator</abbr></a> <a href="https://github.com/eclipse/xtext/blob/v2.3.0/plugins/org.eclipse.xtext.generator/src/org/eclipse/xtext/generator/IGenerator.java">(src)</a>
+							is pointing to <a href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/xbase/compiler/JvmModelGenerator.html"><abbr title="org.eclipse.xtext.xbase.compiler.JvmModelGenerator">JvmModelGenerator</abbr></a> <a href="https://github.com/eclipse/xtext/blob/v2.3.0/plugins/org.eclipse.xtext.xbase/src/org/eclipse/xtext/xbase/compiler/JvmModelGenerator.xtend">(src)</a>. This is the default case, but as we
+							dealt with a custom implementation in the last section this may lead to problems.
 						</p>
 						<!-- subsection -->
 						<section id="_78" style="padding-top: 68px; margin-top: -68px;">
@@ -7784,16 +7784,15 @@ Property:
 						</p>
 						<p>
 							An interpreter is essentially an external visitor, that recursively processes a model based on the model
-							element's types. By now you should be aware that polymorphic dispatching is exactly the technology needed
-							here. In the <a href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/xbase/interpreter/impl/XbaseInterpreter.html"><abbr title="org.eclipse.xtext.xbase.interpreter.impl.XbaseInterpreter">XbaseInterpreter</abbr></a> <a href="https://github.com/eclipse/xtext/blob/v2.3.0/plugins/org.eclipse.xtext.xbase/src/org/eclipse/xtext/xbase/interpreter/impl/XbaseInterpreter.java">(src)</a>, the dispatch method
-							is called <strong>_evaluate&lt;SomeDescription&gt;</strong> and takes three parameters, e.g.
+							element's types. In the <a href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.3/org/eclipse/xtext/xbase/interpreter/impl/XbaseInterpreter.html"><abbr title="org.eclipse.xtext.xbase.interpreter.impl.XbaseInterpreter">XbaseInterpreter</abbr></a> <a href="https://github.com/eclipse/xtext/blob/v2.3.0/plugins/org.eclipse.xtext.xbase/src/org/eclipse/xtext/xbase/interpreter/impl/XbaseInterpreter.java">(src)</a>, the method
+							<strong>doEvaluate(XExpression, IEvaluationContext, CancelIndicator)</strong> delegates to more specialised implementations e.g.
 						</p>
 						<p>
 							</p>
 							<pre class="prettyprint lang-java linenums">
-protected Object _evaluateBlockExpression(XBlockExpression literal, 
-                      IEvaluationContext context, 
-                      CancelIndicator indicator)</pre>
+protected Object _doEvaluate(XBlockExpression literal,
+							IEvaluationContext context,
+							CancelIndicator indicator)</pre>
 							<p>
 						</p>
 						<p>
