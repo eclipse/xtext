@@ -6,16 +6,16 @@ Xtext provides a dedicated hook for this kind of validation rules. In this lesso
 that the name of an e[Entity] starts with an upper-case letter and that all features have distinct names
 across the inheritance relationship of an e[Entity].
 
-Try to locate the class e[DomainmodelJavaValidator] in the package e[org.eclipse.xtext.example.validation].
+Try to locate the class e[DomainmodelValidator] in the package e[org.eclipse.xtext.example.validation].
 It can be found in the language plug-in. Defining the constraint itself is only a matter of a few lines
 of code:
 
-code[Java][
+code[Xtend][
 @Check
-public void checkNameStartsWithCapital(Entity entity) {
-  if (!Character.isUpperCase(entity.getName().charAt(0))) {
+def void checkNameStartsWithCapital(Entity entity) {
+  if (!Character::isUpperCase(entity.getName().charAt(0))) {
     warning("Name should start with a capital", 
-      DomainmodelPackage.Literals.TYPE__NAME);
+      DomainmodelPackage$Literals::TYPE__NAME);
   }
 }
 ]
@@ -27,20 +27,19 @@ a lower case letter, a warning will be attached to the name of the e[Entity].
 The second validation rule is straight-forward, too. We traverse the inheritance hierarchy of the e[Entity]
 and look for features with equal names.
 
-code[Java][
+code[Xtend][
 @Check
-public void checkFeatureNameIsUnique(Feature f) {
-  Entity superEntity = ((Entity) f.eContainer()).getSuperType();
-  while(superEntity != null) {
-    for(Feature other: superEntity.getFeatures()) {
-      if (f.getName().equals(other.getName())) {
-        error("Feature names have to be unique",
-            DomainmodelPackage.Literals.FEATURE__NAME);
-        return;
-      }
-    }
-    superEntity = superEntity.getSuperType();
-  }
+def void checkFeatureNameIsUnique(Feature f) {
+	var superEntity = (f.eContainer() as Entity).getSuperType();
+	while (superEntity != null) {
+		for (other : superEntity.getFeatures()) {
+			if (f.getName().equals(other.getName())) {
+				error("Feature names have to be unique", DomainmodelPackage$Literals::FEATURE__NAME);
+				return;
+			}
+		}
+		superEntity = superEntity.getSuperType();
+	}
 }
 ]
 

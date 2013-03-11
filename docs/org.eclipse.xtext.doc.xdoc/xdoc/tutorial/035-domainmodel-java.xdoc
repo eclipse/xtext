@@ -104,21 +104,16 @@ grammar org.example.domainmodel.Domainmodel with
 generate domainmodel "http://www.example.org/domainmodel/Domainmodel"
 
 Domainmodel:
+  importSection=XImportSection?
   elements+=AbstractElement*;
 
 AbstractElement:
-  PackageDeclaration | Entity | Import;
+  PackageDeclaration | Entity;
 
 PackageDeclaration:
   'package' name=QualifiedName '{'
     elements+=AbstractElement*
   '}';
-
-Import:
-  'import' importedNamespace=QualifiedNameWithWildCard;
-
-QualifiedNameWithWildCard :
-  QualifiedName  ('.' '*')?;
 
 Entity:
   'entity' name=ValidID 
@@ -160,20 +155,22 @@ ol[
   item[
     code[Xtext][
     Domainmodel:
+      importSection=XImportSection?
       elements+=AbstractElement*;
     ]
     
     The first rule in a grammar is always used as the entry or start rule.  
     
-    It says that a e[Domainmodel] contains an arbitrary number (code[Xtext][*]) of e[AbstractElement]s which will be added (code[Xtext][+=])
-    to a feature called code[Xtext][elements].
+    It says that a e[Domainmodel] contains an optional import section and an arbitrary number (code[Xtext][*]) of e[AbstractElement]s which will be added (code[Xtext][+=])
+    to a feature called code[Xtext][elements]. The concept of e[XImportSection] is part of e[org.eclipse.xtext.xbase.Xbase]
+    and comes with tool support and syntax like you know it from Java.
   ]
   item[
     code[Xtext][
     AbstractElement:
-      PackageDeclaration | Entity | Import;
+      PackageDeclaration | Entity;
     ]
-    The rule e[AbstractElement] delegates to either the rule e[PackageDeclaration], the rule e[Entity] or the rule e[Import].
+    The rule e[AbstractElement] delegates to either the rule e[PackageDeclaration] or the rule e[Entity].
   ]
   item[
     code[Xtext][
@@ -183,7 +180,7 @@ ol[
       '}';
     ]
     A e[PackageDeclaration] is used to declare a name space which can again contain any number
-    of e[AbstractElement]s.  
+    of e[AbstractElement]s.
     
     Xtext has built-in support for qualified names and scoping based on the hierarchy
     of the produced model. The default
@@ -191,17 +188,6 @@ ol[
     The qualified name of an e[Entity] 'Baz' which is contained in a e[PackageDeclaration] 'foo.bar'
     will be 'foo.bar.Baz'. In case you do not like the default behavior you will need
     to use a different implementation of codeRef[org.eclipse.xtext.naming.IQualifiedNameProvider].
-  ]
-  item[
-    code[Xtext][
-    Import:
-      'import' importedNamespace=QualifiedNameWithWildCard;
-    
-    QualifiedNameWithWildCard :
-      QualifiedName  ('.' '*')?;
-    ]
-    The rule e[Import] makes use of the ref:namespaceImports[namespace support], too. It basically allows you to get full-blown
-    import functionality as you are used to from Java, just by having these two rules in place.
   ]
   item[
     code[Xtext][

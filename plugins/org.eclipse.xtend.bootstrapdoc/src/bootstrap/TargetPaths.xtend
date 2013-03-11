@@ -24,8 +24,11 @@ class TargetPaths {
 	}
 
 	def isTargetRootElement(AbstractSection element) {
-		element.targetPathAdapter?.targetFileRoots?.contains(element)
-		?: element instanceof Document
+		val targetFileRoots = element.targetPathAdapter?.targetFileRoots
+		if(targetFileRoots != null)
+			targetFileRoots.contains(element)
+		else
+			element instanceof Document
 	}
 
 	def getTargetRoots(Document document) {
