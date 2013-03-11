@@ -13,6 +13,7 @@ import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.XExpression;
+import org.eclipse.xtext.xbase.typesystem.IResolvedTypes;
 
 import com.google.inject.ImplementedBy;
 
@@ -33,6 +34,10 @@ public abstract class AbstractRootedReentrantTypeResolver implements IReentrantT
 	protected abstract boolean isHandled(XExpression expression);
 	
 	protected abstract boolean isHandled(JvmIdentifiableElement identifiableElement);
+	
+	protected abstract boolean isHandled(EObject context);
+	
+	protected abstract IResolvedTypes getResolvedTypesInContextOf(EObject context);
 	
 	protected abstract IScope getFeatureScope(XAbstractFeatureCall featureCall);
 	

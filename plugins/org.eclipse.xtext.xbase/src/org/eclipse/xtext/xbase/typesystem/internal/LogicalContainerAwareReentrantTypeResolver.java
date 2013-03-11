@@ -198,6 +198,14 @@ public class LogicalContainerAwareReentrantTypeResolver extends DefaultReentrant
 		return isHandled(logicalContainer);
 	}
 	
+	@Override
+	protected boolean isHandled(EObject context) {
+		JvmIdentifiableElement logicalContainer = logicalContainerProvider.getNearestLogicalContainer(context);
+		if (logicalContainer == null)
+			return false;
+		return isHandled(logicalContainer);
+	}
+	
 	/**
 	 * Assign computed type references to the identifiable structural elements in the processed type.
 	 * @return the stacked resolved types that shall be used in the computation.

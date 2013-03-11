@@ -167,7 +167,7 @@ public abstract class AbstractTypeComputationState implements ITypeComputationSt
 		return new TypeComputationStateWithExpectation(resolvedTypes, featureScopeSession, this, null);
 	}
 	
-	public TypeCheckpointComputationState withTypeCheckpoint() {
+	public TypeCheckpointComputationState withTypeCheckpoint(@Nullable EObject context) {
 		return new TypeCheckpointComputationState(resolvedTypes, featureScopeSession, this);
 	}
 	
@@ -256,7 +256,7 @@ public abstract class AbstractTypeComputationState implements ITypeComputationSt
 	}
 	
 	public TypeAssigner assignTypes() {
-		TypeCheckpointComputationState state = withTypeCheckpoint();
+		TypeCheckpointComputationState state = withTypeCheckpoint(null);
 		return createTypeAssigner(state);
 	}
 	

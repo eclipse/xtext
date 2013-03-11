@@ -13,6 +13,7 @@ import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
+import org.eclipse.xtext.xbase.XCasePart;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.typesystem.internal.CachingBatchTypeResolver;
 
@@ -50,7 +51,24 @@ public interface IBatchTypeResolver {
 	IResolvedTypes resolveTypes(@Nullable EObject object);
 	
 	/**
-	 * Returns the currently visible feature in the given context.
+	 * Returns an intermitted instance of resolved types that carries the
+	 * potentially specialized type information in the context of the given
+	 * instance. This may be an instance of resolved types that yields
+	 * the type {@link CharSequence} for the {@link JvmIdentifiableElement identifiable}
+	 * {@code o} at the cursor position {@code |} when queried with the {@link XCasePart}:
+	 * 
+	 * <pre>
+	 * switch o: getObject() {
+	 *   CharSequence: |
+	 * }
+	 * </pre>
+	 * @param context the expression or {@link XCasePart case part} that specified the current context. 
+	 */
+	@NonNull
+	IResolvedTypes getResolvedTypesInContextOf(@Nullable EObject context);
+	
+	/**
+	 * Returns the currently visible features in the given context.
 	 */
 	@NonNull
 	IScope getFeatureScope(@Nullable XAbstractFeatureCall featureCall);

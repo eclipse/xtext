@@ -229,7 +229,7 @@ public class XbaseTypeComputer implements ITypeComputer {
 		// TODO case expressions may influence the expected type of other cases
 		for(XCasePart casePart: getCases(object)) {
 			// assign the type for the switch expression if possible and use that one for the remaining things
-			ITypeComputationState casePartState = allCasePartsState.withTypeCheckpoint();
+			ITypeComputationState casePartState = allCasePartsState.withTypeCheckpoint(casePart);
 			if (casePart.getTypeGuard() != null) {
 				JvmIdentifiableElement refinable = null;
 				if (object.getLocalVarName() != null) {
@@ -873,7 +873,10 @@ public class XbaseTypeComputer implements ITypeComputer {
 	}
 
 	protected boolean isRefinableFeature(@Nullable JvmIdentifiableElement feature) {
-		return feature instanceof XVariableDeclaration || feature instanceof JvmFormalParameter || feature instanceof JvmField;
+		return feature instanceof XVariableDeclaration
+				|| feature instanceof XSwitchExpression
+				|| feature instanceof JvmFormalParameter 
+				|| feature instanceof JvmField;
 	}
 	
 	protected boolean mustDiscardRefinement(JvmIdentifiableElement feature) {

@@ -78,6 +78,20 @@ public class CachingBatchTypeResolver implements IBatchTypeResolver {
 		return IScope.NULLSCOPE;
 	}
 	
+	@NonNull
+	public IResolvedTypes getResolvedTypesInContextOf(@Nullable EObject context) {
+		if (context != null) {
+			Resource resource = context.eResource();
+			if (resource instanceof ISynchronizable<?>) {
+				synchronized(((ISynchronizable<?>) resource).getLock()) {
+					return delegate.getResolvedTypesInContextOf(context);
+				}
+			}
+			return delegate.getResolvedTypesInContextOf(context);
+		}
+		return IResolvedTypes.NULL;
+	}
+	
 	@NonNullByDefault
 	protected static class LazyResolvedTypes extends ForwardingResolvedTypes {
 

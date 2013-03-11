@@ -10,6 +10,7 @@ package org.eclipse.xtext.xbase.typesystem.internal;
 import java.util.EnumSet;
 import java.util.List;
 
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
@@ -120,10 +121,10 @@ public class CompoundTypeComputationState implements ITypeComputationState {
 		return new CompoundTypeComputationState(owner, result);
 	}
 
-	public ITypeComputationState withTypeCheckpoint() {
+	public ITypeComputationState withTypeCheckpoint(@Nullable EObject context) {
 		AbstractTypeComputationState[] result = new AbstractTypeComputationState[components.length];
 		for (int i = 0; i < components.length; i++) {
-			result[i] = components[i].withTypeCheckpoint();
+			result[i] = components[i].withTypeCheckpoint(context);
 		}
 		return new CompoundTypeComputationState(owner, result);
 	}

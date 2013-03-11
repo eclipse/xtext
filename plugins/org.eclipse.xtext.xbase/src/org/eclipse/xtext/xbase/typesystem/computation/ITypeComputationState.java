@@ -9,6 +9,7 @@ package org.eclipse.xtext.xbase.typesystem.computation;
 
 import java.util.List;
 
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
@@ -19,6 +20,7 @@ import org.eclipse.xtext.diagnostics.AbstractDiagnostic;
 import org.eclipse.xtext.diagnostics.Severity;
 import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
+import org.eclipse.xtext.xbase.XCasePart;
 import org.eclipse.xtext.xbase.XConstructorCall;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XVariableDeclaration;
@@ -135,8 +137,10 @@ public interface ITypeComputationState {
 	 * A type checkpoint allows to re-specify the type of an identifiable that was already
 	 * type-computed. The refined type is discarded as soon as the state is left. In that sense,
 	 * the type checkpoint describes the scope of certain type specializations.
+	 * 
+	 * @param context an indicator that describes the context of this type checkpoint, e.g. an {@link XCasePart}.
 	 */
-	ITypeComputationState withTypeCheckpoint();
+	ITypeComputationState withTypeCheckpoint(@Nullable EObject context);
 	
 	ITypeComputationState withExpectedExceptions(List<LightweightTypeReference> declaredExceptionTypes);
 	

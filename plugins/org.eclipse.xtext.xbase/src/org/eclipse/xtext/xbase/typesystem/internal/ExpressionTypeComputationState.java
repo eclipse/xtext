@@ -7,6 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.typesystem.internal;
 
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
@@ -38,7 +39,7 @@ public class ExpressionTypeComputationState extends AbstractStackedTypeComputati
 		}
 		
 		@Override
-		public TypeCheckpointComputationState withTypeCheckpoint() {
+		public TypeCheckpointComputationState withTypeCheckpoint(@Nullable EObject context) {
 			return new ExpressionAwareTypeCheckpointComputationState(getResolvedTypes(), getFeatureScopeSession(), this);
 		}
 	}
@@ -99,7 +100,7 @@ public class ExpressionTypeComputationState extends AbstractStackedTypeComputati
 	}
 	
 	@Override
-	public TypeCheckpointComputationState withTypeCheckpoint() {
+	public TypeCheckpointComputationState withTypeCheckpoint(@Nullable EObject context) {
 		return new ExpressionAwareTypeCheckpointComputationState(getResolvedTypes(), getFeatureScopeSession(), this);
 	}
 	
