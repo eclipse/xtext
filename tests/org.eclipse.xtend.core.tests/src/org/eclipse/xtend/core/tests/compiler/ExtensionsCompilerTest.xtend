@@ -427,6 +427,35 @@ class ExtensionsCompilerTest extends AbstractXtendCompilerTest {
 	}
 	
 	@Test
+	def testExtensionLocal() { 
+		assertCompilesTo(
+			'''
+				class SomeClass {
+					def void testExtension() {
+						extension val ExtensionProvider x = null
+						'foo'.getName
+					}
+				}
+				class ExtensionProvider {
+					def String getName(Object x) {
+						return x.toString
+					}
+				}
+			''', '''
+				import org.eclipse.xtext.xbase.lib.Extension;
+				
+				@SuppressWarnings("all")
+				public class SomeClass {
+				  public void testExtension() {
+				    @Extension
+				    final ExtensionProvider x = null;
+				    x.getName("foo");
+				  }
+				}
+			''')
+	}
+	
+	@Test
 	def testExtensionVarIsLocalInBlock() { 
 		assertCompilesTo(
 			'''

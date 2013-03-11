@@ -891,6 +891,66 @@ public class ExtensionsCompilerTest extends AbstractXtendCompilerTest {
   }
   
   @Test
+  public void testExtensionLocal() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("class SomeClass {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def void testExtension() {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("extension val ExtensionProvider x = null");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("\'foo\'.getName");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("class ExtensionProvider {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def String getName(Object x) {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("return x.toString");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("import org.eclipse.xtext.xbase.lib.Extension;");
+    _builder_1.newLine();
+    _builder_1.newLine();
+    _builder_1.append("@SuppressWarnings(\"all\")");
+    _builder_1.newLine();
+    _builder_1.append("public class SomeClass {");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("public void testExtension() {");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("@Extension");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("final ExtensionProvider x = null;");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("x.getName(\"foo\");");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    this.assertCompilesTo(_builder, _builder_1);
+  }
+  
+  @Test
   public void testExtensionVarIsLocalInBlock() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("class C {");

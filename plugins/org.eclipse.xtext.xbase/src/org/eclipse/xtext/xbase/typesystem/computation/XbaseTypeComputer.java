@@ -291,7 +291,7 @@ public class XbaseTypeComputer implements ITypeComputer {
 						ITypeComputationState expressionState = state.withoutExpectation(); // no expectation
 						expressionState.computeTypes(expression);
 						if (expression instanceof XVariableDeclaration) {
-							state.addLocalToCurrentScope((XVariableDeclaration)expression);
+							addLocalToCurrentScope((XVariableDeclaration)expression, state);
 						}
 					}
 				}
