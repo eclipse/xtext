@@ -128,7 +128,7 @@ public class ContentAssistProcessorTestBuilder implements Cloneable {
 	}
 
 	protected ContentAssistProcessorTestBuilder applyProposal(ICompletionProposal proposal) throws Exception {
-		final XtextResource xtextResource = loadHelper.getResourceFor(new StringInputStream(model));
+		final XtextResource xtextResource = loadHelper.getResourceFor(new StringInputStream(Strings.emptyIfNull(model)));
 		IXtextDocument document = getDocument(xtextResource, model);
 		proposal.apply(document);
 		ContentAssistProcessorTestBuilder reset = reset();
