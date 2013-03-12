@@ -46,6 +46,7 @@ public class XbaseConfigurableIssueCodes extends ConfigurableIssueCodesProvider 
 	protected void initialize(IAcceptor<PreferenceKey> iAcceptor) {
 		iAcceptor.accept(create(IssueCodes.NULL_SAFE_FEATURE_CALL_OF_PRIMITIVE_VALUED_FEATURE, SeverityConverter.SEVERITY_WARNING));
 		iAcceptor.accept(create(IssueCodes.UNHANDLED_EXCEPTION, SeverityConverter.SEVERITY_IGNORE));
+		iAcceptor.accept(create(IssueCodes.EQUALS_WITH_NULL, SeverityConverter.SEVERITY_IGNORE));
 
 		iAcceptor.accept(createDelegate(IssueCodes.FORBIDDEN_REFERENCE, JavaCore.COMPILER_PB_FORBIDDEN_REFERENCE));
 		iAcceptor.accept(createDelegate(IssueCodes.DISCOURAGED_REFERENCE, JavaCore.COMPILER_PB_DISCOURAGED_REFERENCE));

@@ -1155,7 +1155,7 @@ public class XbaseJavaValidator extends AbstractXbaseJavaValidator {
 					if (leftType.isPrimitive()) { 
 						error("The operator '" + operatorSymbol + "' is undefined for the argument types " + leftType.getSimpleName() + " and null", binaryOperation, null, PRIMITIVE_COMPARED_TO_NULL);
 					} else if (equalsComparison) {
-						warning("The operator '" + operatorSymbol + "' should be replaced by '" + operatorSymbol + "=' when null is one of the arguments.", binaryOperation, null, EQUALS_WITH_NULL);
+						addIssue(binaryOperation, EQUALS_WITH_NULL, "The operator '" + operatorSymbol + "' should be replaced by '" + operatorSymbol + "=' when null is one of the arguments.");
 					}
 				}
 			}
@@ -1165,7 +1165,7 @@ public class XbaseJavaValidator extends AbstractXbaseJavaValidator {
 					if (rightType.isPrimitive()) { 
 						error("The operator '" + operatorSymbol + "' is undefined for the argument types null and " + rightType.getSimpleName(), binaryOperation, null, PRIMITIVE_COMPARED_TO_NULL);
 					} else if (equalsComparison && !(right instanceof XNullLiteral)) {
-						warning("The operator '" + operatorSymbol + "' should be replaced by '" + operatorSymbol + "=' when null is one of the arguments.", binaryOperation, null, PRIMITIVE_COMPARED_TO_NULL);
+						addIssue(binaryOperation, EQUALS_WITH_NULL, "The operator '" + operatorSymbol + "' should be replaced by '" + operatorSymbol + "=' when null is one of the arguments.");
 					}
 				}
 			}
