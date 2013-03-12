@@ -3,6 +3,7 @@
  */
 package org.eclipse.xtend.core.scoping;
 
+import java.util.List;
 import java.util.Set;
 
 import org.eclipse.emf.ecore.EObject;
@@ -10,13 +11,22 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtend.core.jvmmodel.IXtendJvmAssociations;
 import org.eclipse.xtend.core.xtend.XtendClass;
 import org.eclipse.xtend.core.xtend.XtendField;
+import org.eclipse.xtend.core.xtend.XtendFormalParameter;
 import org.eclipse.xtend.core.xtend.XtendFunction;
 import org.eclipse.xtend.core.xtend.XtendMember;
+import org.eclipse.xtend.core.xtend.XtendParameter;
+import org.eclipse.xtend.core.xtend.XtendVariableDeclaration;
 import org.eclipse.xtext.EcoreUtil2;
+import org.eclipse.xtext.common.types.JvmAnnotationTarget;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
+import org.eclipse.xtext.common.types.JvmField;
+import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
+import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeReference;
+import org.eclipse.xtext.common.types.JvmVisibility;
+import org.eclipse.xtext.common.types.util.AnnotationLookup;
 import org.eclipse.xtext.common.types.util.TypeReferences;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.scoping.IScope;
@@ -25,11 +35,15 @@ import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XFeatureCall;
 import org.eclipse.xtext.xbase.XMemberFeatureCall;
 import org.eclipse.xtext.xbase.XbaseFactory;
+import org.eclipse.xtext.xbase.XbasePackage;
 import org.eclipse.xtext.xbase.annotations.scoping.XbaseWithAnnotationsScopeProvider;
+import org.eclipse.xtext.xbase.lib.Extension;
+import org.eclipse.xtext.xbase.scoping.LocalVariableScopeContext;
 import org.eclipse.xtext.xbase.scoping.featurecalls.IJvmFeatureDescriptionProvider;
+import org.eclipse.xtext.xbase.scoping.featurecalls.IValidatedEObjectDescription;
 
-import com.google.common.base.Predicate;
-import com.google.common.collect.Iterables;
+import com.google.common.collect.Lists;
+import com.google.common.collect.Sets;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 
@@ -59,6 +73,9 @@ public class XtendScopeProvider extends XbaseWithAnnotationsScopeProvider {
 
 	@Inject
 	private TypeReferences typeReferences;
+	
+	@Inject
+	private AnnotationLookup annotationLookup;
 
 	@Override
 	protected void addStaticFeatureDescriptionProviders(
@@ -110,18 +127,17 @@ public class XtendScopeProvider extends XbaseWithAnnotationsScopeProvider {
 				XFeatureCall callToThis = XbaseFactory.eINSTANCE.createXFeatureCall();
 				callToThis.setFeature(inferredJvmType);
 				// injected extensions
-				Iterable<XtendField> extensionFields = getExtensionDependencies(xtendClass);
+				Iterable<JvmField> extensionFields = getExtensionDependencies(xtendClass);
 				int extensionPriority = priority + DYNAMIC_EXTENSION_PRIORITY_OFFSET;
 				if (isThis && implicitArgument == null)
 					extensionPriority = DEFAULT_EXTENSION_PRIORITY;
-				for (XtendField extensionField : extensionFields) {
-					JvmIdentifiableElement dependencyImplicitReceiver = findImplicitReceiverFor(extensionField);
+				for (JvmField dependencyImplicitReceiver : extensionFields) {
 					XMemberFeatureCall callToDependency = XbaseFactory.eINSTANCE.createXMemberFeatureCall();
 					callToDependency.setMemberCallTarget(EcoreUtil2.clone(callToThis));
 					callToDependency.setFeature(dependencyImplicitReceiver);
 					if (dependencyImplicitReceiver != null) {
 						ExtensionMethodsFeaturesProvider extensionFeatureProvider = extensionMethodsFeaturesProvider.get();
-						extensionFeatureProvider.setContext(extensionField.getType());
+						extensionFeatureProvider.setContext(dependencyImplicitReceiver.getType());
 						extensionFeatureProvider.setExpectNoParameters(isThis);
 						addFeatureDescriptionProvidersForAssignment(contextType, extensionFeatureProvider, callToDependency, implicitArgument, extensionPriority, false, acceptor);
 					}
@@ -132,6 +148,78 @@ public class XtendScopeProvider extends XbaseWithAnnotationsScopeProvider {
 				featureProvider.setExpectNoParameters(isThis);
 				addFeatureDescriptionProvidersForAssignment(contextType, featureProvider, callToThis, implicitArgument, priority + THIS_EXTENSION_PRIORITY_OFFSET, false, acceptor);
 			}
+		}
+	}
+	
+	@Override
+	protected void addFeatureScopes(
+			JvmTypeReference receiverType, 
+			EObject expression, 
+			final JvmDeclaredType contextType,
+			final XExpression implicitReceiver,
+			final XExpression implicitArgument, 
+			final int priority, 
+			final IJvmFeatureScopeAcceptor acceptor) {
+		super.addFeatureScopes(receiverType, expression, contextType, implicitReceiver, implicitArgument, priority, acceptor);
+		final IAcceptor<IJvmFeatureDescriptionProvider> curried = acceptor.curry(receiverType, expression);
+		LocalVariableAcceptor extensionScopeBuilder = new LocalVariableAcceptor() {
+			
+			public void accept(String s, List<? extends IValidatedEObjectDescription> descriptions) {
+				if (descriptions.isEmpty())
+					return;
+				for(IValidatedEObjectDescription description: descriptions) {
+					addLocalExtension(description);
+				}
+			}
+			
+			public void accept(String s, IValidatedEObjectDescription description) {
+				if (description != null) {
+					addLocalExtension(description);
+				}
+			}
+			
+			protected void addLocalExtension(IValidatedEObjectDescription description) {
+				if (isExtensionProvider(description)) {
+					JvmIdentifiableElement receiver = description.getEObjectOrProxy();
+					if (receiver != null) {
+						XFeatureCall localVariableAccessor = XbaseFactory.eINSTANCE.createXFeatureCall();
+						localVariableAccessor.setFeature(receiver);
+						ExtensionMethodsFeaturesProvider extensionFeatureProvider = extensionMethodsFeaturesProvider.get();
+						JvmTypeReference receiverType = getTypeProvider().getTypeForIdentifiable(receiver);
+						extensionFeatureProvider.setContext(receiverType);
+						extensionFeatureProvider.setExpectNoParameters(false);
+						addFeatureDescriptionProviders(
+								contextType, 
+								extensionFeatureProvider, 
+								localVariableAccessor, 
+								implicitArgument, 
+								priority + DYNAMIC_EXTENSION_PRIORITY_OFFSET, 
+								false, 
+								curried);
+					}
+				}
+			}
+			
+			protected boolean isExtensionProvider(IValidatedEObjectDescription description) {
+				JvmIdentifiableElement identifiableElement = description.getEObjectOrProxy();
+				if (identifiableElement instanceof XtendFormalParameter) {
+					return ((XtendFormalParameter) identifiableElement).isExtension();
+				} else if (identifiableElement instanceof XtendVariableDeclaration) {
+					return ((XtendVariableDeclaration) identifiableElement).isExtension();
+				} else if (identifiableElement instanceof JvmFormalParameter) {
+					EObject sourceParameter = xtendjvmAssociations.getPrimarySourceElement(identifiableElement);
+					if (sourceParameter instanceof XtendParameter) {
+						return ((XtendParameter) sourceParameter).isExtension();
+					}
+				}
+				return false;
+			}
+		};
+		LocalVariableScopeContext scopeContext = createLocalVariableScopeContext(expression, XbasePackage.Literals.XABSTRACT_FEATURE_CALL__FEATURE, true, -1);
+		createLocalVarScope(extensionScopeBuilder, scopeContext);
+		if (expression instanceof XtendVariableDeclaration) {
+			IValidatedEObjectDescription localVarDescription = createLocalVarDescription((XtendVariableDeclaration)expression);
+			extensionScopeBuilder.accept("local variable", localVarDescription);
 		}
 	}
 
@@ -175,19 +263,18 @@ public class XtendScopeProvider extends XbaseWithAnnotationsScopeProvider {
 				XFeatureCall callToThis = XbaseFactory.eINSTANCE.createXFeatureCall();
 				callToThis.setFeature(inferredJvmType);
 				// injected extensions
-				Iterable<XtendField> extensionFields = getExtensionDependencies(xtendClass);
+				Iterable<JvmField> extensionFields = getExtensionDependencies(xtendClass);
 				int extensionPriority = priority + DYNAMIC_EXTENSION_PRIORITY_OFFSET;
 				if (isThis && implicitArgument == null)
 					extensionPriority = DEFAULT_EXTENSION_PRIORITY;
 				boolean isStatic = isStaticContext(((SimpleAcceptor)acceptor).getExpression());
-				for (XtendField extensionField : extensionFields) {
-					JvmIdentifiableElement dependencyImplicitReceiver = findImplicitReceiverFor(extensionField);
+				for (JvmField dependencyImplicitReceiver : extensionFields) {
 					XMemberFeatureCall callToDependency = XbaseFactory.eINSTANCE.createXMemberFeatureCall();
 					callToDependency.setMemberCallTarget(EcoreUtil2.clone(callToThis));
 					callToDependency.setFeature(dependencyImplicitReceiver);
 					if (dependencyImplicitReceiver != null) {
 						ExtensionMethodsFeaturesProvider extensionFeatureProvider = extensionMethodsFeaturesProvider.get();
-						extensionFeatureProvider.setContext(extensionField.getType());
+						extensionFeatureProvider.setContext(dependencyImplicitReceiver.getType());
 						extensionFeatureProvider.setExpectNoParameters(isThis);
 						addFeatureDescriptionProviders(contextType, extensionFeatureProvider, callToDependency, implicitArgument, extensionPriority, isStatic, acceptor);
 					}
@@ -210,22 +297,42 @@ public class XtendScopeProvider extends XbaseWithAnnotationsScopeProvider {
 		return false;
 	}
 	
-	protected JvmIdentifiableElement findImplicitReceiverFor(XtendField XtendField) {
-		Set<EObject> elements = xtendjvmAssociations.getJvmElements(XtendField);
-		if (!elements.isEmpty()) {
-			final JvmIdentifiableElement field = (JvmIdentifiableElement) elements.iterator().next();
-			return field;
+	protected Iterable<JvmField> getExtensionDependencies(XtendClass context) {
+		List<JvmField> result = Lists.newLinkedList();
+		JvmGenericType type = xtendjvmAssociations.getInferredType(context);
+		collectExtensionDependencies(type, result, true, Sets.<String>newHashSet(), Sets.<JvmType>newHashSet());
+		return result;
+	}
+	
+	protected void collectExtensionDependencies(JvmDeclaredType type, List<JvmField> result, boolean allowPrivate, Set<String> seenNames, Set<JvmType> seenTypes) {
+		if (seenTypes.add(type)) {
+			Iterable<JvmField> fields = type.getDeclaredFields();
+			for(JvmField field: fields) {
+				if ((allowPrivate || (field.getVisibility() != JvmVisibility.PRIVATE)) && seenNames.add(field.getSimpleName()) && isExtensionProvider(field)) {
+					result.add(field);
+				}
+			}
+			JvmTypeReference superType = getExtendedClass(type);
+			if (superType != null) {
+				collectExtensionDependencies((JvmDeclaredType) superType.getType(), result, false, seenNames, seenTypes);
+			}
+		}
+	}
+	
+	protected boolean isExtensionProvider(JvmAnnotationTarget annotatedElement) {
+		// coding style to simplify debugging
+		if (annotationLookup.findAnnotation(annotatedElement, Extension.class) != null) {
+			return true;
+		}
+		return false;
+	}
+	
+	public JvmTypeReference getExtendedClass(JvmDeclaredType type) {
+		for(JvmTypeReference candidate: type.getSuperTypes()) {
+			if (candidate.getType() instanceof JvmGenericType && !((JvmGenericType) candidate.getType()).isInterface())
+				return candidate;
 		}
 		return null;
-	}
-
-	protected Iterable<XtendField> getExtensionDependencies(XtendClass context) {
-		return Iterables.filter(EcoreUtil2.typeSelect(context.getMembers(), XtendField.class),
-				new Predicate<XtendField>() {
-					public boolean apply(XtendField input) {
-						return input.isExtension();
-					}
-				});
 	}
 
 	@Override
