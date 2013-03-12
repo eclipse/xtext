@@ -278,6 +278,12 @@ public abstract class AbstractClosureTypeTest extends AbstractXbaseTestCase {
   }
   
   @Test
+  public void testIfExpression_25() throws Exception {
+    List<Object> _resolvesClosuresTo = this.resolvesClosuresTo("{ \n\t\t\tval Iterable<Object> branch = \n\t\t\t  if (true) \n\t\t\t    [|<Object>newArrayList().iterator]\n\t\t\t  else\n\t\t\t    newArrayList(\'a\').toArray\n\t\t}", "()=>Iterator<Object>");
+    this.withEquivalents(_resolvesClosuresTo, "Iterable<Object>");
+  }
+  
+  @Test
   public void testSwitchExpression_01() throws Exception {
     List<Object> _resolvesClosuresTo = this.resolvesClosuresTo("switch null {\n            case null : [Object it | it]\n            case null : [Integer it | it]\n        }", "(Object)=>Object", "(Integer)=>Integer");
     this.withEquivalents(_resolvesClosuresTo, "Function1<Object, Object>", "Function1<Integer, Integer>");

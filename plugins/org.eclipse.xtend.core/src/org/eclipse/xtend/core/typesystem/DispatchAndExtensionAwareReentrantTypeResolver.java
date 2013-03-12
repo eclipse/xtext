@@ -286,6 +286,7 @@ public class DispatchAndExtensionAwareReentrantTypeResolver extends LogicalConta
 		}
 	}
 	
+	@SuppressWarnings("null")
 	@Override
 	protected boolean isHandled(XExpression expression) {
 		if (getRoot() instanceof XtendTypeDeclaration) {
@@ -344,7 +345,7 @@ public class DispatchAndExtensionAwareReentrantTypeResolver extends LogicalConta
 				&& (identifiableElement.eContainingFeature() == XbasePackage.Literals.XCLOSURE__IMPLICIT_PARAMETER
 				|| identifiableElement.eContainingFeature() == XbasePackage.Literals.XCLOSURE__DECLARED_FORMAL_PARAMETERS)) {
 			XtendMember member = EcoreUtil2.getContainerOfType(identifiableElement, XtendMember.class);
-			if (getInferredElements(member).isEmpty()) {
+			if (member != null && getInferredElements(member).isEmpty()) {
 				return false;
 			}
 		}

@@ -212,14 +212,18 @@ public abstract class ResolvedTypes implements IResolvedTypes {
 		return result;
 	}
 	
+	private static class MergeData {
+		List<LightweightTypeReference> references = Lists.newArrayList();
+		boolean voidSeen = false;
+		ITypeExpectation expectation = null;
+		boolean allNoImplicitReturn = true;
+		EnumSet<ConformanceHint> mergedHints = EnumSet.of(ConformanceHint.MERGED);
+	}
+	
 	@Nullable
 	protected TypeData mergeTypeData(final XExpression expression, Collection<TypeData> allValues, boolean returnType, boolean nullIfEmpty) {
 		List<TypeData> values = Lists.newArrayListWithCapacity(allValues.size());
-		for(TypeData value: allValues) {
-			if (returnType == value.isReturnType()) {
-				values.add(value);
-			}
-		}
+		collectValues(allValues, returnType, values);
 		if (values.isEmpty()) {
 			if (nullIfEmpty || allValues.isEmpty())
 				return null;
@@ -234,45 +238,71 @@ public abstract class ResolvedTypes implements IResolvedTypes {
 				return new TypeData(expression, typeData.getExpectation(), upperBoundSubstitute, typeData.getConformanceHints(), returnType);
 			return typeData;
 		}
-		
-		List<LightweightTypeReference> references = Lists.newArrayList();
-		boolean voidSeen = false;
-		ITypeExpectation expectation = null;
-		boolean allNoImplicitReturn = true;
-		EnumSet<ConformanceHint> mergedHints = EnumSet.of(ConformanceHint.MERGED);
-		for (TypeData value : values) {
-			LightweightTypeReference reference = value.getActualType().getUpperBoundSubstitute();
-			if (reference.isPrimitiveVoid()) {
-				voidSeen = true;
-			} else {
-				references.add(reference);
-			}
-			allNoImplicitReturn = allNoImplicitReturn && value.getConformanceHints().contains(ConformanceHint.NO_IMPLICIT_RETURN); 
-			mergedHints.addAll(value.getConformanceHints());
-			if (expectation == null) {
-				expectation = value.getExpectation();
-			} else if (expectation.getExpectedType() == null) {
-				ITypeExpectation knownExpectation = value.getExpectation();
-				if (knownExpectation.getExpectedType() != null) {
-					expectation = knownExpectation;
-				}
-			}
-		}
-		if (!allNoImplicitReturn) {
-			mergedHints.remove(ConformanceHint.NO_IMPLICIT_RETURN);
-		}
-		LightweightTypeReference mergedType = !references.isEmpty() || !voidSeen ? getMergedType(/*mergedHints, */references) : values.get(0).getActualType();
+		MergeData mergeData = new MergeData();
+		enhanceMergeData(values, mergeData);
+		LightweightTypeReference mergedType = getMergedType(mergeData, values);
 		// TODO improve - return error type information
 		if (mergedType == null)
 			return null;
-		if (expectation == null) {
+		if (mergeData.expectation == null) {
 			throw new IllegalStateException("Expectation should never be null here");
 		}
-		if (voidSeen && returnType && !references.isEmpty()) {
+		mergedType = refineMergedType(mergeData, mergedType, returnType, nullIfEmpty);
+		TypeData result = new TypeData(expression, mergeData.expectation, mergedType, mergeData.mergedHints , returnType);
+		return result;
+	}
+
+	private LightweightTypeReference refineMergedType(MergeData mergeData, LightweightTypeReference mergedType, boolean returnType, boolean useExpectation) {
+		if (useExpectation && mergeData.expectation != null) {
+			LightweightTypeReference expectedType = mergeData.expectation.getExpectedType();
+			if (expectedType != null && expectedType.isResolved()) {
+				if (!expectedType.isAssignableFrom(mergedType)) {
+					mergedType = expectedType; // branches have already been validated
+				}
+			}
+		}
+		if (mergeData.voidSeen && returnType && !mergeData.references.isEmpty()) {
 			mergedType = mergedType.getWrapperTypeIfPrimitive();
 		}
-		TypeData result = new TypeData(expression, expectation, mergedType, mergedHints , returnType);
-		return result;
+		return mergedType;
+	}
+
+	@Nullable
+	private LightweightTypeReference getMergedType(MergeData mergeData, List<TypeData> values) {
+		LightweightTypeReference mergedType = !mergeData.references.isEmpty() || !mergeData.voidSeen ? getMergedType(/*mergedHints, */mergeData.references) : values.get(0).getActualType();
+		return mergedType;
+	}
+
+	private void enhanceMergeData(List<TypeData> values, MergeData mergeData) {
+		for (TypeData value : values) {
+			LightweightTypeReference reference = value.getActualType().getUpperBoundSubstitute();
+			if (reference.isPrimitiveVoid()) {
+				mergeData.voidSeen = true;
+			} else {
+				mergeData.references.add(reference);
+			}
+			mergeData.allNoImplicitReturn = mergeData.allNoImplicitReturn && value.getConformanceHints().contains(ConformanceHint.NO_IMPLICIT_RETURN); 
+			mergeData.mergedHints.addAll(value.getConformanceHints());
+			if (mergeData.expectation == null) {
+				mergeData.expectation = value.getExpectation();
+			} else if (mergeData.expectation.getExpectedType() == null) {
+				ITypeExpectation knownExpectation = value.getExpectation();
+				if (knownExpectation.getExpectedType() != null) {
+					mergeData.expectation = knownExpectation;
+				}
+			}
+		}
+		if (!mergeData.allNoImplicitReturn) {
+			mergeData.mergedHints.remove(ConformanceHint.NO_IMPLICIT_RETURN);
+		}
+	}
+
+	private void collectValues(Collection<TypeData> allValues, boolean returnType, List<TypeData> result) {
+		for(TypeData value: allValues) {
+			if (returnType == value.isReturnType()) {
+				result.add(value);
+			}
+		}
 	}
 
 	@Nullable

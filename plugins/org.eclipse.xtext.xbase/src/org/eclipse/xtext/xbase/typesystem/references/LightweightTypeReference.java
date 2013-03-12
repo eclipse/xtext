@@ -332,6 +332,10 @@ public abstract class LightweightTypeReference {
 		return isType(Void.TYPE);
 	}
 	
+	/**
+     * Determines if this type reference denotes the same or a supertype of 
+     * the given {@code reference}.
+     */
 	public boolean isAssignableFrom(LightweightTypeReference reference) {
 		TypeConformanceComputationArgument argument = new TypeConformanceComputationArgument();
 		return isAssignableFrom(reference, argument);

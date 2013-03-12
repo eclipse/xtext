@@ -725,6 +725,12 @@ public class OldAPIClosureTypeTest extends AbstractOldAPIClosureTypeTest {
   
   @Ignore("fails in old impl")
   @Test
+  public void testIfExpression_25() throws Exception {
+    Assert.fail("fails in old impl");
+  }
+  
+  @Ignore("fails in old impl")
+  @Test
   public void testDeferredTypeArgumentResolution_15() throws Exception {
     Assert.fail("fails in old impl");
   }

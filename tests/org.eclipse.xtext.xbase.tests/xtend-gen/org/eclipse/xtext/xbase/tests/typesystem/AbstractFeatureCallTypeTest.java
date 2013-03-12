@@ -441,6 +441,11 @@ public abstract class AbstractFeatureCallTypeTest extends AbstractXbaseTestCase 
   }
   
   @Test
+  public void testIfExpression_03() throws Exception {
+    this.resolvesFeatureCallsTo("{ \n\t\t\tval Iterable<Object> branch = \n\t\t\t  if (true) \n\t\t\t    [|<Object>newArrayList().iterator]\n\t\t\t  else\n\t\t\t    newArrayList(\'a\').toArray\n\t\t}", "ArrayList<Object>", "Iterator<Object>", "ArrayList<String>", "Object[]");
+  }
+  
+  @Test
   public void testSwitchExpression_3() throws Exception {
     this.resolvesFeatureCallsTo("{\n\t\t\tval Object c = null\n\t\t\tswitch c {\n\t            CharSequence: 1\n\t    \t}\n\t\t}", "Object");
   }

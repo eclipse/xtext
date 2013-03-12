@@ -208,6 +208,18 @@ abstract class AbstractClosureTypeTest extends AbstractXbaseTestCase {
 			.withEquivalents("FileFilter", "FileFilter")
 	}
 	
+	@Test def void testIfExpression_25() throws Exception {
+		"{ 
+			val Iterable<Object> branch = 
+			  if (true) 
+			    [|<Object>newArrayList().iterator]
+			  else
+			    newArrayList('a').toArray
+		}"
+			.resolvesClosuresTo("()=>Iterator<Object>")
+			.withEquivalents("Iterable<Object>")
+	}
+	
 	@Test def void testSwitchExpression_01() throws Exception {
 		"switch null {
             case null : [Object it | it]
