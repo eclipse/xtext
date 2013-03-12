@@ -477,106 +477,141 @@ public class XbaseScopeProvider extends DelegatingScopeProvider {
 		return getContextType(obj.eContainer());
 	}
 	
-	protected IScope createLocalVarScope(IScope parentScope, LocalVariableScopeContext scopeContext) {
+	/**
+	 * @noextend This interface is not intended to be extended by clients.
+	 * @noimplement This interface is not intended to be implemented by clients.
+	 */
+	public interface LocalVariableAcceptor {
+
+		void accept(String description, IValidatedEObjectDescription object);
+		
+		void accept(String description, List<? extends IValidatedEObjectDescription> objects);
+		
+	}
+	
+	protected IScope createLocalVarScope(final IScope parentScope, LocalVariableScopeContext scopeContext) {
 		if (scopeContext == null || scopeContext.getContext() == null)
 			return parentScope;
+		class ScopeBuilder implements LocalVariableAcceptor {
+			IScope scope = parentScope;
+
+			public void accept(String description, IValidatedEObjectDescription object) {
+				if (object != null)
+					accept(description, Collections.singletonList(object));
+			}
+
+			public void accept(String description, List<? extends IValidatedEObjectDescription> objects) {
+				if (!objects.isEmpty())
+					scope = new JvmFeatureScope(scope, description, objects);
+			}
+		}
+		
+		ScopeBuilder builder = new ScopeBuilder();
+		createLocalVarScope(builder, scopeContext);
+		return builder.scope;
+	}
+	
+	protected void createLocalVarScope(LocalVariableAcceptor acceptor, LocalVariableScopeContext scopeContext) {
+		
 		EObject context = scopeContext.getContext();
 		if (context instanceof JvmOperation) {
 			JvmOperation jvmOperation = (JvmOperation) context;
 			if (jvmOperation.getDeclaringType() != null) {
 				JvmDeclaredType declaredType = jvmOperation.getDeclaringType();
 				if (!jvmOperation.isStatic()) {
-					parentScope = createLocalVarScopeForJvmDeclaredType(declaredType, parentScope);
+					createLocalVarScopeForJvmDeclaredType(declaredType, acceptor);
 				}
 			}
-			return createLocalVarScopeForJvmOperation((JvmOperation)context, parentScope);
+			createLocalVarScopeForJvmOperation((JvmOperation)context, acceptor);
+			return;
 		}
 		if (context instanceof JvmConstructor) {
 			JvmConstructor constructor = (JvmConstructor) context;
 			if (constructor.getDeclaringType() != null) {
 				JvmDeclaredType declaredType = constructor.getDeclaringType();
-				parentScope = createLocalVarScopeForJvmDeclaredType(declaredType, parentScope);
+				createLocalVarScopeForJvmDeclaredType(declaredType, acceptor);
 			}
-			return createLocalVarScopeForJvmConstructor((JvmConstructor)context, parentScope);
+			createLocalVarScopeForJvmConstructor((JvmConstructor)context, acceptor);
+			return;
 		}
 		if (context instanceof JvmField) {
 			JvmField field = (JvmField) context;
 			if (field.getDeclaringType() != null) {
 				JvmDeclaredType declaredType = field.getDeclaringType();
 				if (!field.isStatic()) {
-					parentScope = createLocalVarScopeForJvmDeclaredType(declaredType, parentScope);
+					createLocalVarScopeForJvmDeclaredType(declaredType, acceptor);
 				}
 			}
-			return parentScope;
+			return;
 		}
 		if(context instanceof JvmDeclaredType) {
-			return createLocalVarScopeForJvmDeclaredType((JvmDeclaredType) context, parentScope);
+			createLocalVarScopeForJvmDeclaredType((JvmDeclaredType) context, acceptor);
+			return;
 		}
 		if (scopeContext.canSpawnForContainer())
-			parentScope = createLocalVarScope(parentScope, scopeContext.spawnForContainer());
+			createLocalVarScope(acceptor, scopeContext.spawnForContainer());
 		if (context.eContainer() instanceof XBlockExpression) {
 			XBlockExpression block = (XBlockExpression) context.eContainer();
-			parentScope = createLocalVarScopeForBlock(block, block.getExpressions().indexOf(context), scopeContext.isReferredFromClosure(), parentScope);
+			createLocalVarScopeForBlock(block, block.getExpressions().indexOf(context), scopeContext.isReferredFromClosure(), acceptor);
 		}
 		if (context.eContainer() instanceof XForLoopExpression && context.eContainingFeature() == XbasePackage.Literals.XFOR_LOOP_EXPRESSION__EACH_EXPRESSION) {
 			XForLoopExpression loop = (XForLoopExpression) context.eContainer();
-			parentScope = createLocalScopeForParameter(loop.getDeclaredParam(), parentScope);
+			createLocalScopeForParameter(loop.getDeclaredParam(), acceptor);
 		}
 		if (context.eContainer() instanceof XCatchClause) {
 			XCatchClause catchClause = (XCatchClause) context.eContainer();
-			parentScope = createLocalScopeForParameter(catchClause.getDeclaredParam(), parentScope);
+			createLocalScopeForParameter(catchClause.getDeclaredParam(), acceptor);
 		}
 		if (context instanceof XClosure) {
-			parentScope = createLocalVarScopeForClosure((XClosure) context, parentScope);
+			createLocalVarScopeForClosure((XClosure) context, acceptor);
 		}
 		if (context instanceof XCasePart) {
-			parentScope = createLocalVarScopeForTypeGuardedCase((XCasePart) context, parentScope);
+			createLocalVarScopeForTypeGuardedCase((XCasePart) context, acceptor);
 		}
 		if (context instanceof XSwitchExpression) {
-			parentScope = createLocalVarScopeForSwitchExpression((XSwitchExpression) context, parentScope);
+			createLocalVarScopeForSwitchExpression((XSwitchExpression) context, acceptor);
 		}
 		if (scopeContext.isIncludeCurrentBlock()) {
 			if (context instanceof XBlockExpression) {
 				XBlockExpression block = (XBlockExpression) context;
 				if (!block.getExpressions().isEmpty()) {
-					parentScope = createLocalVarScopeForBlock(block, scopeContext.getIndex(), scopeContext.isReferredFromClosure(), parentScope);
+					createLocalVarScopeForBlock(block, scopeContext.getIndex(), scopeContext.isReferredFromClosure(), acceptor);
 				}
 			}
 			if (context instanceof XForLoopExpression) {
-				parentScope = createLocalScopeForParameter(((XForLoopExpression) context).getDeclaredParam(), parentScope);
+				createLocalScopeForParameter(((XForLoopExpression) context).getDeclaredParam(), acceptor);
 			}
 			if (context instanceof XCatchClause) {
-				parentScope = createLocalScopeForParameter(((XCatchClause) context).getDeclaredParam(), parentScope);
+				createLocalScopeForParameter(((XCatchClause) context).getDeclaredParam(), acceptor);
 			}
 		}
-		return parentScope;
 	}
 
-	protected IScope createLocalVarScopeForJvmOperation(JvmOperation context, IScope parentScope) {
+	protected void createLocalVarScopeForJvmOperation(JvmOperation context, LocalVariableAcceptor acceptor) {
 		List<JvmFormalParameter> parameters = context.getParameters();
 		if (parameters.isEmpty())
-			return parentScope;
+			return;
 		List<LocalVarDescription> descriptions = newArrayList();
 		for (JvmFormalParameter p : parameters) {
 			if (p.getName() != null)
 				descriptions.add(new LocalVarDescription(QualifiedName.create(p.getName()), p));
 		}
-		return new JvmFeatureScope(parentScope, "operation "+context.getSimpleName(), descriptions);
+		acceptor.accept("operation "+context.getSimpleName(), descriptions);
 	}
 	
-	protected IScope createLocalVarScopeForJvmConstructor(JvmConstructor context, IScope parentScope) {
+	protected void createLocalVarScopeForJvmConstructor(JvmConstructor context, LocalVariableAcceptor acceptor) {
 		List<JvmFormalParameter> parameters = context.getParameters();
 		if (parameters.isEmpty())
-			return parentScope;
+			return;
 		List<LocalVarDescription> descriptions = newArrayList();
 		for (JvmFormalParameter p : parameters) {
 			if (p.getName() != null)
 				descriptions.add(new LocalVarDescription(QualifiedName.create(p.getName()), p));
 		}
-		return new JvmFeatureScope(parentScope, "constructor "+context.getSimpleName(), descriptions);
+		acceptor.accept("constructor "+context.getSimpleName(), descriptions);
 	}
 
-	protected IScope createLocalVarScopeForJvmDeclaredType(JvmDeclaredType type, IScope parentScope) {
+	protected void createLocalVarScopeForJvmDeclaredType(JvmDeclaredType type, LocalVariableAcceptor acceptor) {
 		Iterator<JvmTypeReference> classes = filter(type.getSuperTypes(), new Predicate<JvmTypeReference>() {
 			public boolean apply(JvmTypeReference input) {
 				if (input.getType() instanceof JvmGenericType) {
@@ -590,9 +625,9 @@ public class XbaseScopeProvider extends DelegatingScopeProvider {
 			superType = (JvmGenericType) classes.next().getType();
 		}
 		if (superType == null) {
-			return new JvmFeatureScope(parentScope, "this", new LocalVarDescription(THIS, type));
+			acceptor.accept("this", new LocalVarDescription(THIS, type));
 		} else {
-			return new JvmFeatureScope(parentScope, "this & super", newArrayList(
+			acceptor.accept("this & super", newArrayList(
 					new LocalVarDescription(THIS, type), 
 					new LocalVarDescription(SUPER, superType)));
 		}
@@ -605,38 +640,36 @@ public class XbaseScopeProvider extends DelegatingScopeProvider {
 		return false;
 	}
 
-	protected IScope createLocalVarScopeForSwitchExpression(XSwitchExpression context, IScope parentScope) {
+	protected void createLocalVarScopeForSwitchExpression(XSwitchExpression context, LocalVariableAcceptor acceptor) {
 		if (context.getLocalVarName() != null) {
-			return new JvmFeatureScope(parentScope,	"XSwitchExpression",
+			acceptor.accept("XSwitchExpression",
 					new LocalVarDescription(QualifiedName.create(context.getLocalVarName()), context));
 		}
-		return parentScope;
 	}
 
 	/**
 	 * Allows to hook into the case guards to introduce new local variables with a specialized type.
 	 * Implemented as no-op by default.
 	 * @param context the case part.
-	 * @param parentScope the parent scope.
+	 * @param acceptor the acceptor.
 	 */
-	protected IScope createLocalVarScopeForTypeGuardedCase(XCasePart context, IScope parentScope) {
-		return parentScope;
+	protected void createLocalVarScopeForTypeGuardedCase(XCasePart context, LocalVariableAcceptor acceptor) {
 	}
 
 	/**
 	 * Allows to hook into the local variable definition for catch clauses.
 	 * @param catchClause the catch clause.
 	 * @param indexOfContextExpressionInBlock the index of the context expression in its surrounding block.
-	 * @param parentScope the parent scope.
+	 * @param acceptor the the acceptor.
 	 */
-	protected IScope createLocalVarScopeForCatchClause(XCatchClause catchClause, int indexOfContextExpressionInBlock,
-			IScope parentScope) {
-		return createLocalScopeForParameter(catchClause.getDeclaredParam(), parentScope);
+	protected void createLocalVarScopeForCatchClause(XCatchClause catchClause, int indexOfContextExpressionInBlock,
+			LocalVariableAcceptor acceptor) {
+		createLocalScopeForParameter(catchClause.getDeclaredParam(), acceptor);
 	}
 
-	protected IScope createLocalVarScopeForBlock(
+	protected void createLocalVarScopeForBlock(
 			XBlockExpression block, int indexOfContextExpressionInBlock,
-			boolean referredFromClosure, IScope parentScope) {
+			boolean referredFromClosure, LocalVariableAcceptor acceptor) {
 		List<IValidatedEObjectDescription> descriptions = Lists.newArrayList();
 		for (int i = 0; i < indexOfContextExpressionInBlock; i++) {
 			XExpression expression = block.getExpressions().get(i);
@@ -651,11 +684,11 @@ public class XbaseScopeProvider extends DelegatingScopeProvider {
 			}
 		}
 		if (descriptions.isEmpty())
-			return parentScope;
-		return new JvmFeatureScope(parentScope, "XBlockExpression", descriptions);
+			return;
+		acceptor.accept("XBlockExpression", descriptions);
 	}
 
-	protected IScope createLocalVarScopeForClosure(XClosure closure, IScope parentScope) {
+	protected void createLocalVarScopeForClosure(XClosure closure, LocalVariableAcceptor acceptor) {
 		List<IValidatedEObjectDescription> descriptions = Lists.newArrayList();
 		EList<JvmFormalParameter> params = closure.getFormalParameters();
 		for (JvmFormalParameter p : params) {
@@ -664,7 +697,7 @@ public class XbaseScopeProvider extends DelegatingScopeProvider {
 				descriptions.add(desc);
 			}
 		}
-		return new JvmFeatureScope(parentScope, "XClosure", descriptions);
+		acceptor.accept("XClosure", descriptions);
 	}
 
 	public interface IJvmFeatureScopeAcceptor {
@@ -934,8 +967,9 @@ public class XbaseScopeProvider extends DelegatingScopeProvider {
 		acceptor.accept(sugarProvider);
 	}
 
-	protected IScope createLocalScopeForParameter(JvmFormalParameter p, IScope parentScope) {
-		return (p.getName() != null) ? new JvmFeatureScope(parentScope, "JvmFormalParameter", createLocalVarDescription(p)) : parentScope;
+	protected void createLocalScopeForParameter(JvmFormalParameter p, LocalVariableAcceptor acceptor) {
+		if (p.getName() != null)
+			acceptor.accept("JvmFormalParameter", createLocalVarDescription(p));
 	}
 
 	protected IValidatedEObjectDescription createLocalVarDescription(JvmFormalParameter p) {
