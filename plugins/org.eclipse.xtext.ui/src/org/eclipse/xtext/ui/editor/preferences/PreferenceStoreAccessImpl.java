@@ -31,17 +31,28 @@ public class PreferenceStoreAccessImpl implements IPreferenceStoreAccess {
 
 	public IPreferenceStore getPreferenceStore() {
 		lazyInitialize();
+		Activator activator = Activator.getDefault();
+		if (activator != null)
+			return new ChainedPreferenceStore(new IPreferenceStore[] {
+					getWritablePreferenceStore(),
+					activator.getPreferenceStore(), 
+					EditorsUI.getPreferenceStore() });
 		return new ChainedPreferenceStore(new IPreferenceStore[] {
 				getWritablePreferenceStore(),
-				Activator.getDefault().getPreferenceStore(), 
 				EditorsUI.getPreferenceStore() });
 	}
 
 	public IPreferenceStore getContextPreferenceStore(Object context) {
 		lazyInitialize();
+		// may be null on shutdown
+		Activator activator = Activator.getDefault();
+		if (activator != null)
+			return new ChainedPreferenceStore(new IPreferenceStore[] { 
+					getWritablePreferenceStore(context),
+					activator.getPreferenceStore(),
+					EditorsUI.getPreferenceStore()});
 		return new ChainedPreferenceStore(new IPreferenceStore[] { 
 				getWritablePreferenceStore(context),
-				Activator.getDefault().getPreferenceStore(),
 				EditorsUI.getPreferenceStore()});
 	}
 
