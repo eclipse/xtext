@@ -44,6 +44,8 @@ import org.eclipse.emf.ecore.resource.URIConverter;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.util.InternalEList;
+import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.linking.lazy.LazyLinkingResource;
 import org.eclipse.xtext.resource.ClassloaderClasspathUriResolver;
 import org.eclipse.xtext.util.CancelIndicator;
@@ -100,11 +102,11 @@ public class EcoreUtil2 extends EcoreUtil {
 	 * an instance of the requested type, then the object itself will be returned. If no container object is of the
 	 * requested type, then {@code null} will be returned.
 	 */
-	@SuppressWarnings("unchecked")
-	public static <T extends EObject> T getContainerOfType(EObject ele, Class<T> type) {
+	@Nullable
+	public static <T extends EObject> T getContainerOfType(@Nullable EObject ele, @NonNull Class<T> type) {
 		for (EObject e = ele; e != null; e = e.eContainer())
 			if (type.isInstance(e))
-				return (T) e;
+				return type.cast(e);
 
 		return null;
 	}
