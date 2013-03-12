@@ -24,7 +24,8 @@ public class CachingClasspathTypeProvider extends ClasspathTypeProvider {
 	
 	@Override
 	protected DeclaredTypeFactory createDeclaredTypeFactory() {
-		return reusedFactory;
+		// we don't have the reusedFactory at hand at this point thus null is sufficient
+		return null;
 	}
 	
 	@Override
