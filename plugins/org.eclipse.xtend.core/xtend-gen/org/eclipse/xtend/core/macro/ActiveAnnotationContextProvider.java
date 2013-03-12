@@ -79,7 +79,7 @@ public class ActiveAnnotationContextProvider {
           Resource _eResource = file.eResource();
           final Provider<List<ActiveAnnotationContext>> _function = new Provider<List<ActiveAnnotationContext>>() {
               public List<ActiveAnnotationContext> get() {
-                final Map<JvmAnnotationType,ActiveAnnotationContext> annotatedElements = CollectionLiterals.<JvmAnnotationType, ActiveAnnotationContext>newHashMap();
+                final Map<JvmAnnotationType,ActiveAnnotationContext> annotatedElements = CollectionLiterals.<JvmAnnotationType, ActiveAnnotationContext>newLinkedHashMap();
                 final CompilationUnitImpl compilationUnit = ActiveAnnotationContextProvider.this.compilationUnitProvider.get();
                 compilationUnit.setXtendFile(file);
                 final IAcceptor<Pair<JvmAnnotationType,XAnnotation>> _function = new IAcceptor<Pair<JvmAnnotationType,XAnnotation>>() {

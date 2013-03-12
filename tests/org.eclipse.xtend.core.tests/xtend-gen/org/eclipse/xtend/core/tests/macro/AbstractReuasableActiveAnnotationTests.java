@@ -16,6 +16,8 @@ import org.eclipse.xtend.lib.macro.declaration.TypeReference;
 import org.eclipse.xtend.lib.macro.services.Problem;
 import org.eclipse.xtend.lib.macro.services.ProblemSupport;
 import org.eclipse.xtend2.lib.StringConcatenation;
+import org.eclipse.xtext.xbase.lib.Conversions;
+import org.eclipse.xtext.xbase.lib.Functions.Function0;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.Pair;
@@ -521,6 +523,140 @@ public abstract class AbstractReuasableActiveAnnotationTests {
         }
       };
     this.assertProcessing(_mappedTo, _mappedTo_1, _function);
+  }
+  
+  private final Pair<String,String> THREE_ANNOTATIONS = new Function0<Pair<String,String>>() {
+    public Pair<String,String> apply() {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("import java.util.List");
+      _builder.newLine();
+      _builder.append("import org.eclipse.xtend.lib.macro.Active");
+      _builder.newLine();
+      _builder.append("import org.eclipse.xtend.lib.macro.TransformationContext");
+      _builder.newLine();
+      _builder.append("import org.eclipse.xtend.lib.macro.TransformationParticipant");
+      _builder.newLine();
+      _builder.append("import org.eclipse.xtend.lib.macro.declaration.MutableNamedElement");
+      _builder.newLine();
+      _builder.newLine();
+      _builder.append("@Active(typeof(Aprocessor))");
+      _builder.newLine();
+      _builder.append("annotation _A {}");
+      _builder.newLine();
+      _builder.append("class Aprocessor implements TransformationParticipant<MutableNamedElement> {");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("override doTransform(List<? extends MutableNamedElement> annotatedTargetElements, extension TransformationContext context) {");
+      _builder.newLine();
+      _builder.append("\t\t");
+      _builder.append("annotatedTargetElements.forEach[");
+      _builder.newLine();
+      _builder.append("\t\t\t");
+      _builder.append("name = name + num()");
+      _builder.newLine();
+      _builder.append("\t\t");
+      _builder.append("]");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("}");
+      _builder.newLine();
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("def num() {");
+      _builder.newLine();
+      _builder.append("\t\t");
+      _builder.append("\'_A\'");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("}");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      _builder.append("@Active(typeof(Bprocessor))");
+      _builder.newLine();
+      _builder.append("annotation _B {}");
+      _builder.newLine();
+      _builder.append("class Bprocessor extends Aprocessor {");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("override num() { \'_B\' }");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      _builder.newLine();
+      _builder.append("@Active(typeof(Cprocessor))");
+      _builder.newLine();
+      _builder.append("annotation _C {}");
+      _builder.newLine();
+      _builder.append("class Cprocessor extends Aprocessor {");
+      _builder.newLine();
+      _builder.append("\t");
+      _builder.append("override num() { \'_C\' }");
+      _builder.newLine();
+      _builder.append("}");
+      _builder.newLine();
+      Pair<String,String> _mappedTo = Pair.<String, String>of("three.xtend", _builder.toString());
+      return _mappedTo;
+    }
+  }.apply();
+  
+  @Test
+  public void testDeterministicExecutionOrder_01() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("class MyClass {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("@_A @_B @_C String field");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    Pair<String,String> _mappedTo = Pair.<String, String>of("MyClass.xtend", _builder.toString());
+    final Procedure1<CompilationUnitImpl> _function = new Procedure1<CompilationUnitImpl>() {
+        public void apply(final CompilationUnitImpl it) {
+          TypeLookupImpl _typeLookup = it.getTypeLookup();
+          final MutableClassDeclaration myClass = _typeLookup.findClass("MyClass");
+          Iterable<? extends MutableFieldDeclaration> _declaredFields = myClass.getDeclaredFields();
+          MutableFieldDeclaration _head = IterableExtensions.head(_declaredFields);
+          String _name = _head.getName();
+          Assert.assertEquals("field_A_B_C", _name);
+        }
+      };
+    this.assertProcessing(this.THREE_ANNOTATIONS, _mappedTo, _function);
+  }
+  
+  @Test
+  public void testDeterministicExecutionOrder_02() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("class MyClass {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("@_A @_B @_C String field1");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("@_C @_B @_A String field2");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    Pair<String,String> _mappedTo = Pair.<String, String>of("MyClass.xtend", _builder.toString());
+    final Procedure1<CompilationUnitImpl> _function = new Procedure1<CompilationUnitImpl>() {
+        public void apply(final CompilationUnitImpl it) {
+          TypeLookupImpl _typeLookup = it.getTypeLookup();
+          final MutableClassDeclaration myClass = _typeLookup.findClass("MyClass");
+          Iterable<? extends MutableFieldDeclaration> _declaredFields = myClass.getDeclaredFields();
+          MutableFieldDeclaration _head = IterableExtensions.head(_declaredFields);
+          String _name = _head.getName();
+          Assert.assertEquals("field1_A_B_C", _name);
+          Iterable<? extends MutableFieldDeclaration> _declaredFields_1 = myClass.getDeclaredFields();
+          MutableFieldDeclaration _get = ((MutableFieldDeclaration[])Conversions.unwrapArray(_declaredFields_1, MutableFieldDeclaration.class))[1];
+          String _name_1 = _get.getName();
+          Assert.assertEquals("field2_A_B_C", _name_1);
+        }
+      };
+    this.assertProcessing(this.THREE_ANNOTATIONS, _mappedTo, _function);
   }
   
   public abstract void assertProcessing(final Pair<String,String> macroFile, final Pair<String,String> clientFile, final Procedure1<? super CompilationUnitImpl> expectations);

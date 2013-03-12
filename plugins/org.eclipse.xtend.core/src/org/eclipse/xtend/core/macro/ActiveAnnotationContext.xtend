@@ -55,7 +55,7 @@ class ActiveAnnotationContextProvider {
 		task.start
 		try {
 			cache.get('annotation context', file.eResource) [|
-				val Map<JvmAnnotationType, ActiveAnnotationContext> annotatedElements = newHashMap
+				val Map<JvmAnnotationType, ActiveAnnotationContext> annotatedElements = newLinkedHashMap
 				val compilationUnit = compilationUnitProvider.get
 				compilationUnit.xtendFile = file
 				searchAnnotatedElements(file) [

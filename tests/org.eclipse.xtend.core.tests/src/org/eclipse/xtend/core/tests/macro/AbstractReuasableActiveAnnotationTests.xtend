@@ -283,5 +283,69 @@ abstract class AbstractReuasableActiveAnnotationTests {
 		]
 	}
 	
+	val THREE_ANNOTATIONS = 'three.xtend' -> '''
+		import java.util.List
+		import org.eclipse.xtend.lib.macro.Active
+		import org.eclipse.xtend.lib.macro.TransformationContext
+		import org.eclipse.xtend.lib.macro.TransformationParticipant
+		import org.eclipse.xtend.lib.macro.declaration.MutableNamedElement
+
+		@Active(typeof(Aprocessor))
+		annotation _A {}
+		class Aprocessor implements TransformationParticipant<MutableNamedElement> {
+			
+			override doTransform(List<? extends MutableNamedElement> annotatedTargetElements, extension TransformationContext context) {
+				annotatedTargetElements.forEach[
+					name = name + num()
+				]
+			}
+		
+			def num() {
+				'_A'
+			}
+			
+		}
+		@Active(typeof(Bprocessor))
+		annotation _B {}
+		class Bprocessor extends Aprocessor {
+			override num() { '_B' }
+		}
+		
+		@Active(typeof(Cprocessor))
+		annotation _C {}
+		class Cprocessor extends Aprocessor {
+			override num() { '_C' }
+		}
+	'''
+	
+	@Test def void testDeterministicExecutionOrder_01() {
+		assertProcessing(THREE_ANNOTATIONS,
+			'MyClass.xtend' -> '''
+				class MyClass {
+					@_A @_B @_C String field
+				}
+			'''
+		) [
+			val myClass = typeLookup.findClass('MyClass')
+			assertEquals('field_A_B_C',myClass.declaredFields.head.name)
+		]
+	}
+	
+	@Test def void testDeterministicExecutionOrder_02() {
+		// annotation processors are called in the order their annotations first occur in the file
+		assertProcessing(THREE_ANNOTATIONS,
+			'MyClass.xtend' -> '''
+				class MyClass {
+					@_A @_B @_C String field1
+					@_C @_B @_A String field2
+				}
+			'''
+		) [
+			val myClass = typeLookup.findClass('MyClass')
+			assertEquals('field1_A_B_C',myClass.declaredFields.head.name)
+			assertEquals('field2_A_B_C',myClass.declaredFields.get(1).name)
+		]
+	}
+	
 	def void assertProcessing(Pair<String,String> macroFile, Pair<String,String> clientFile, (CompilationUnitImpl)=>void expectations)
 }
