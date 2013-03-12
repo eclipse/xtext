@@ -1,5 +1,6 @@
 package org.eclipse.xtend.core.tests.macro;
 
+import com.google.common.base.Objects;
 import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.ImmutableSet.Builder;
 import java.util.List;
@@ -108,7 +109,7 @@ public class ImmutableProcessor implements TransformationParticipant<MutableClas
                         {
                           TypeReference _type = f.getType();
                           TypeReference _primitiveBoolean = context.getPrimitiveBoolean();
-                          boolean _equals = ObjectExtensions.operator_equals(_type, _primitiveBoolean);
+                          boolean _equals = Objects.equal(_type, _primitiveBoolean);
                           if (_equals) {
                             _builder.append("result = prime * result + (");
                             String _name = f.getName();
@@ -138,7 +139,7 @@ public class ImmutableProcessor implements TransformationParticipant<MutableClas
                             } else {
                               TypeReference _primitiveLong = context.getPrimitiveLong();
                               TypeReference _type_2 = f.getType();
-                              boolean _equals_1 = ObjectExtensions.operator_equals(_primitiveLong, _type_2);
+                              boolean _equals_1 = Objects.equal(_primitiveLong, _type_2);
                               if (_equals_1) {
                                 _builder.append("result = prime * result + (int) (");
                                 String _name_2 = f.getName();
@@ -151,7 +152,7 @@ public class ImmutableProcessor implements TransformationParticipant<MutableClas
                               } else {
                                 TypeReference _primitiveFloat = context.getPrimitiveFloat();
                                 TypeReference _type_3 = f.getType();
-                                boolean _equals_2 = ObjectExtensions.operator_equals(_primitiveFloat, _type_3);
+                                boolean _equals_2 = Objects.equal(_primitiveFloat, _type_3);
                                 if (_equals_2) {
                                   _builder.append("result = prime * result + Float.floatToIntBits(");
                                   String _name_4 = f.getName();
@@ -161,7 +162,7 @@ public class ImmutableProcessor implements TransformationParticipant<MutableClas
                                 } else {
                                   TypeReference _primitiveDouble = context.getPrimitiveDouble();
                                   TypeReference _type_4 = f.getType();
-                                  boolean _equals_3 = ObjectExtensions.operator_equals(_primitiveDouble, _type_4);
+                                  boolean _equals_3 = Objects.equal(_primitiveDouble, _type_4);
                                   if (_equals_3) {
                                     _builder.append("result = prime * result + (int) (Double.doubleToLongBits(");
                                     String _name_5 = f.getName();

@@ -17,7 +17,6 @@ import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
-import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xtext.ui.wizard.ecore2xtext.EPackageInfo;
 import org.eclipse.xtext.xtext.ui.wizard.ecore2xtext.Ecore2XtextProjectInfo;
@@ -40,7 +39,7 @@ public class Ecore2XtextExtensions {
   public static Iterable<EClassifier> allConcreteRuleClassifiers(final Ecore2XtextProjectInfo it) {
     Iterable<EClassifier> _xifexpression = null;
     EClass _rootElementClass = it.getRootElementClass();
-    boolean _equals = ObjectExtensions.operator_equals(_rootElementClass, null);
+    boolean _equals = Objects.equal(_rootElementClass, null);
     if (_equals) {
       Collection<EPackageInfo> _ePackageInfos = it.getEPackageInfos();
       final Function1<EPackageInfo,Set<EClassifier>> _function = new Function1<EPackageInfo,Set<EClassifier>>() {
@@ -93,7 +92,7 @@ public class Ecore2XtextExtensions {
   public static Collection<EClass> allDispatcherRuleClasses(final Ecore2XtextProjectInfo it) {
     Set<EClass> _xifexpression = null;
     EClass _rootElementClass = it.getRootElementClass();
-    boolean _equals = ObjectExtensions.operator_equals(_rootElementClass, null);
+    boolean _equals = Objects.equal(_rootElementClass, null);
     if (_equals) {
       Collection<EPackageInfo> _ePackageInfos = it.getEPackageInfos();
       final Function1<EPackageInfo,Set<EClassifier>> _function = new Function1<EPackageInfo,Set<EClassifier>>() {
@@ -278,7 +277,7 @@ public class Ecore2XtextExtensions {
     String _xifexpression = null;
     EPackage _ePackage = it.getEPackage();
     String _uniqueName = UniqueNameUtil.uniqueName(_ePackage);
-    boolean _equals = ObjectExtensions.operator_equals(_uniqueName, null);
+    boolean _equals = Objects.equal(_uniqueName, null);
     if (_equals) {
       String _name = it.getName();
       String _quoteIfNeccesary = Ecore2XtextExtensions.quoteIfNeccesary(_name);
@@ -591,7 +590,7 @@ public class Ecore2XtextExtensions {
     {
       final EAttribute idAttr = Ecore2XtextExtensions.idAttributeInternal(it);
       EAttribute _xifexpression = null;
-      boolean _notEquals = ObjectExtensions.operator_notEquals(idAttr, null);
+      boolean _notEquals = (!Objects.equal(idAttr, null));
       if (_notEquals) {
         _xifexpression = idAttr;
       } else {
@@ -606,7 +605,7 @@ public class Ecore2XtextExtensions {
                 _and_2 = false;
               } else {
                 String _name = a.getName();
-                boolean _equals = ObjectExtensions.operator_equals(_name, "name");
+                boolean _equals = Objects.equal(_name, "name");
                 _and_2 = (_needsAssignment && _equals);
               }
               if (!_and_2) {
@@ -614,7 +613,7 @@ public class Ecore2XtextExtensions {
               } else {
                 EClassifier _eType = a.getEType();
                 String _name_1 = _eType.getName();
-                boolean _equals_1 = ObjectExtensions.operator_equals(_name_1, "EString");
+                boolean _equals_1 = Objects.equal(_name_1, "EString");
                 _and_1 = (_and_2 && _equals_1);
               }
               if (!_and_1) {
@@ -690,7 +689,7 @@ public class Ecore2XtextExtensions {
       _and = false;
     } else {
       String _defaultValueLiteral = it.getDefaultValueLiteral();
-      boolean _notEquals = ObjectExtensions.operator_notEquals(_defaultValueLiteral, "true");
+      boolean _notEquals = (!Objects.equal(_defaultValueLiteral, "true"));
       _and = (_and_1 && _notEquals);
     }
     return _and;
@@ -703,7 +702,7 @@ public class Ecore2XtextExtensions {
       _and_1 = false;
     } else {
       String _name = it.getName();
-      boolean _equals = ObjectExtensions.operator_equals(_name, "EString");
+      boolean _equals = Objects.equal(_name, "EString");
       _and_1 = ((it instanceof EDataType) && _equals);
     }
     if (!_and_1) {
@@ -718,7 +717,7 @@ public class Ecore2XtextExtensions {
   public static boolean isEcoreType(final EClassifier it) {
     EPackage _ePackage = it.getEPackage();
     String _nsURI = _ePackage.getNsURI();
-    boolean _equals = ObjectExtensions.operator_equals(_nsURI, "http://www.eclipse.org/emf/2002/Ecore");
+    boolean _equals = Objects.equal(_nsURI, "http://www.eclipse.org/emf/2002/Ecore");
     return _equals;
   }
   

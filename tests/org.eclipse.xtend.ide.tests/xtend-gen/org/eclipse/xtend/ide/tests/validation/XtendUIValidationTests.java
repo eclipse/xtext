@@ -1,5 +1,6 @@
 package org.eclipse.xtend.ide.tests.validation;
 
+import com.google.common.base.Objects;
 import com.google.common.collect.Iterables;
 import com.google.inject.Inject;
 import org.eclipse.core.resources.IProject;
@@ -499,7 +500,7 @@ public class XtendUIValidationTests extends AbstractXtendUITestCase {
       final IJavaProject javaProject = _javaModel.getJavaProject(_project);
       final String javaSeverity = javaProject.getOption(JavaCore.COMPILER_PB_FORBIDDEN_REFERENCE, true);
       try {
-        boolean _notEquals = ObjectExtensions.operator_notEquals(javaSeverity, "error");
+        boolean _notEquals = (!Objects.equal(javaSeverity, "error"));
         if (_notEquals) {
           String _plus = ("Wrong expectation Java compiler option \'" + JavaCore.COMPILER_PB_FORBIDDEN_REFERENCE);
           String _plus_1 = (_plus + "\' should be \'error\' by default");
@@ -599,7 +600,7 @@ public class XtendUIValidationTests extends AbstractXtendUITestCase {
     final IJavaProject javaProject = _javaModel.getJavaProject(_project);
     final String javaSeverity = javaProject.getOption(JavaCore.COMPILER_PB_INVALID_JAVADOC, true);
     try {
-      boolean _notEquals = ObjectExtensions.operator_notEquals(javaSeverity, "ignore");
+      boolean _notEquals = (!Objects.equal(javaSeverity, "ignore"));
       if (_notEquals) {
         String _plus = ("Wrong expectation Java compiler option \'" + JavaCore.COMPILER_PB_INVALID_JAVADOC);
         String _plus_1 = (_plus + "\' should be \'ignore\' by default");

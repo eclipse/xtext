@@ -1,5 +1,6 @@
 package org.eclipse.xtend.ide.hyperlinking;
 
+import com.google.common.base.Objects;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.debug.core.ILaunch;
 import org.eclipse.debug.core.model.IProcess;
@@ -17,7 +18,6 @@ import org.eclipse.ui.ide.IDE;
 import org.eclipse.xtext.ui.editor.XtextEditor;
 import org.eclipse.xtext.ui.editor.model.IXtextDocument;
 import org.eclipse.xtext.xbase.lib.Exceptions;
-import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 
 @SuppressWarnings("all")
 public class XtendFileHyperlink implements IHyperlink {
@@ -105,7 +105,7 @@ public class XtendFileHyperlink implements IHyperlink {
   private ILaunch getLaunch() {
     Object _attribute = this.console.getAttribute(IDebugUIConstants.ATTR_CONSOLE_PROCESS);
     final IProcess process = ((IProcess) _attribute);
-    boolean _notEquals = ObjectExtensions.operator_notEquals(process, null);
+    boolean _notEquals = (!Objects.equal(process, null));
     if (_notEquals) {
       return process.getLaunch();
     }

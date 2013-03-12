@@ -1,5 +1,6 @@
 package org.eclipse.xtend.ide.codebuilder;
 
+import com.google.common.base.Objects;
 import com.google.inject.Inject;
 import org.eclipse.jdt.core.IType;
 import org.eclipse.xtend.ide.codebuilder.AbstractAnnotationBuilder;
@@ -7,7 +8,6 @@ import org.eclipse.xtend.ide.codebuilder.ICodeBuilder.Java;
 import org.eclipse.xtext.common.types.JvmVisibility;
 import org.eclipse.xtext.xbase.compiler.IAppendable;
 import org.eclipse.xtext.xbase.compiler.TypeReferenceSerializer;
-import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 
 @SuppressWarnings("all")
 public class JavaAnnotationBuilder extends AbstractAnnotationBuilder implements Java {
@@ -21,7 +21,7 @@ public class JavaAnnotationBuilder extends AbstractAnnotationBuilder implements 
       _and = false;
     } else {
       String _annotationName = this.getAnnotationName();
-      boolean _notEquals = ObjectExtensions.operator_notEquals(_annotationName, null);
+      boolean _notEquals = (!Objects.equal(_annotationName, null));
       _and = (_isValid && _notEquals);
     }
     return _and;

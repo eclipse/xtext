@@ -34,7 +34,6 @@ import org.eclipse.xtext.diagnostics.Severity;
 import org.eclipse.xtext.validation.EObjectDiagnosticImpl;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
-import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.Pair;
 
 @SuppressWarnings("all")
@@ -87,7 +86,7 @@ public class ProblemSupportImpl implements ProblemSupport {
         public Boolean apply(final EObjectDiagnosticImpl diag) {
           EObject _problematicObject = diag.getProblematicObject();
           EObject _value = resAndObj.getValue();
-          boolean _equals = ObjectExtensions.operator_equals(_problematicObject, _value);
+          boolean _equals = Objects.equal(_problematicObject, _value);
           return Boolean.valueOf(_equals);
         }
       };
@@ -155,7 +154,7 @@ public class ProblemSupportImpl implements ProblemSupport {
         final Resource resource = _delegate.eResource();
         XtendFile _xtendFile = this.compilationUnit.getXtendFile();
         Resource _eResource = _xtendFile.eResource();
-        boolean _equals = ObjectExtensions.operator_equals(resource, _eResource);
+        boolean _equals = Objects.equal(resource, _eResource);
         if (_equals) {
           IXtendJvmAssociations _jvmAssociations = this.compilationUnit.getJvmAssociations();
           EObject _delegate_1 = ((AbstractDeclarationImpl<EObject>)_abstractDeclarationImpl).getDelegate();

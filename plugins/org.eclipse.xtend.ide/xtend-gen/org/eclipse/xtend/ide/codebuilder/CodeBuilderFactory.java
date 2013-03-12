@@ -7,6 +7,7 @@
  */
 package org.eclipse.xtend.ide.codebuilder;
 
+import com.google.common.base.Objects;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 import org.eclipse.jdt.annotation.NonNullByDefault;
@@ -36,7 +37,6 @@ import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.common.types.util.jdt.IJavaElementFinder;
 import org.eclipse.xtext.xbase.lib.Extension;
-import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 
 /**
  * Creates {@link ICodeBuilder}s to insert Java or Xtend code snippets into an {@link IAppendable}.
@@ -216,7 +216,7 @@ public class CodeBuilderFactory {
     {
       if ((element instanceof JvmGenericType)) {
         final XtendClass xtendClass = this._iXtendJvmAssociations.getXtendClass(((JvmGenericType) element));
-        boolean _notEquals = ObjectExtensions.operator_notEquals(xtendClass, null);
+        boolean _notEquals = (!Objects.equal(xtendClass, null));
         if (_notEquals) {
           return xtendClass;
         }

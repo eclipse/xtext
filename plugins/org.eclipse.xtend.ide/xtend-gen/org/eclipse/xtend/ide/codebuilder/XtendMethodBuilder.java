@@ -7,6 +7,7 @@
  */
 package org.eclipse.xtend.ide.codebuilder;
 
+import com.google.common.base.Objects;
 import com.google.inject.Inject;
 import java.util.List;
 import org.eclipse.emf.ecore.EObject;
@@ -21,7 +22,6 @@ import org.eclipse.xtext.xbase.compiler.IAppendable;
 import org.eclipse.xtext.xbase.compiler.TypeReferenceSerializer;
 import org.eclipse.xtext.xbase.compiler.output.XtypeTypeReferenceSerializer;
 import org.eclipse.xtext.xbase.lib.Extension;
-import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 
 @SuppressWarnings("all")
 public class XtendMethodBuilder extends AbstractMethodBuilder implements Xtend {
@@ -39,7 +39,7 @@ public class XtendMethodBuilder extends AbstractMethodBuilder implements Xtend {
       _and = false;
     } else {
       String _methodName = this.getMethodName();
-      boolean _notEquals = ObjectExtensions.operator_notEquals(_methodName, null);
+      boolean _notEquals = (!Objects.equal(_methodName, null));
       _and = (_isValid && _notEquals);
     }
     return _and;

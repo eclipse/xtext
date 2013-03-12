@@ -7,6 +7,7 @@
  */
 package org.eclipse.xtend.core.tests.imports;
 
+import com.google.common.base.Objects;
 import java.util.List;
 import javax.inject.Inject;
 import org.eclipse.emf.ecore.resource.Resource;
@@ -20,7 +21,6 @@ import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ListExtensions;
-import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -55,7 +55,7 @@ public class ImportOrganizerTest extends AbstractXtendTestCase {
       for (final ReplaceRegion it : sortedChanges) {
         {
           boolean _and = false;
-          boolean _notEquals = ObjectExtensions.operator_notEquals(lastChange, null);
+          boolean _notEquals = (!Objects.equal(lastChange, null));
           if (!_notEquals) {
             _and = false;
           } else {

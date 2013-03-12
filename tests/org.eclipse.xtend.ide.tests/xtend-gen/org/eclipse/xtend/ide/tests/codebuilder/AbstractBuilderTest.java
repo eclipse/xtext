@@ -1,5 +1,6 @@
 package org.eclipse.xtend.ide.tests.codebuilder;
 
+import com.google.common.base.Objects;
 import com.google.inject.Inject;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.xtend.core.jvmmodel.IXtendJvmAssociations;
@@ -20,7 +21,6 @@ import org.eclipse.xtext.xbase.compiler.StringBuilderBasedAppendable;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
-import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.junit.Assert;
 
 @SuppressWarnings("all")
@@ -47,7 +47,7 @@ public class AbstractBuilderTest extends AbstractXtendUITestCase {
     try {
       JvmDeclaredType _xblockexpression = null;
       {
-        boolean _equals = ObjectExtensions.operator_equals(this.xtendClass, null);
+        boolean _equals = Objects.equal(this.xtendClass, null);
         if (_equals) {
           StringConcatenation _builder = new StringConcatenation();
           _builder.append("class Foo {");
@@ -72,7 +72,7 @@ public class AbstractBuilderTest extends AbstractXtendUITestCase {
     try {
       JvmDeclaredType _xblockexpression = null;
       {
-        boolean _equals = ObjectExtensions.operator_equals(this.javaClass, null);
+        boolean _equals = Objects.equal(this.javaClass, null);
         if (_equals) {
           StringConcatenation _builder = new StringConcatenation();
           _builder.append("public class Bar {");

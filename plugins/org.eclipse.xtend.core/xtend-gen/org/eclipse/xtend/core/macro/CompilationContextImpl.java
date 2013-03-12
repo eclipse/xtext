@@ -1,5 +1,6 @@
 package org.eclipse.xtend.core.macro;
 
+import com.google.common.base.Objects;
 import org.eclipse.xtend.core.macro.declaration.CompilationUnitImpl;
 import org.eclipse.xtend.core.xtend.XtendFile;
 import org.eclipse.xtend.lib.macro.declaration.CompilationStrategy.CompilationContext;
@@ -12,7 +13,6 @@ import org.eclipse.xtext.xbase.compiler.output.ITreeAppendable;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.Functions.Function0;
-import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.util.ReflectExtensions;
 
 @SuppressWarnings("all")
@@ -52,7 +52,7 @@ public class CompilationContextImpl implements CompilationContext {
   
   public String toJavaCode(final TypeReference typeref) {
     StringBuilderBasedAppendable _xifexpression = null;
-    boolean _notEquals = ObjectExtensions.operator_notEquals(this.importManager, null);
+    boolean _notEquals = (!Objects.equal(this.importManager, null));
     if (_notEquals) {
       StringBuilderBasedAppendable _stringBuilderBasedAppendable = new StringBuilderBasedAppendable(this.importManager);
       _xifexpression = _stringBuilderBasedAppendable;

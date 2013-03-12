@@ -7,6 +7,7 @@
  */
 package org.eclipse.xtend.ide.codebuilder;
 
+import com.google.common.base.Objects;
 import javax.inject.Inject;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtend.core.xtend.XtendClass;
@@ -20,7 +21,6 @@ import org.eclipse.xtext.xbase.compiler.IAppendable;
 import org.eclipse.xtext.xbase.compiler.TypeReferenceSerializer;
 import org.eclipse.xtext.xbase.compiler.output.XtypeTypeReferenceSerializer;
 import org.eclipse.xtext.xbase.lib.Extension;
-import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 
 @SuppressWarnings("all")
 public class XtendFieldBuilder extends AbstractFieldBuilder implements Xtend {
@@ -38,7 +38,7 @@ public class XtendFieldBuilder extends AbstractFieldBuilder implements Xtend {
       _and = false;
     } else {
       String _fieldName = this.getFieldName();
-      boolean _notEquals = ObjectExtensions.operator_notEquals(_fieldName, null);
+      boolean _notEquals = (!Objects.equal(_fieldName, null));
       _and = (_isValid && _notEquals);
     }
     return _and;

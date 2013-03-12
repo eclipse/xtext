@@ -7,12 +7,12 @@
  */
 package org.eclipse.xtext.xbase.tests.typesystem;
 
+import com.google.common.base.Objects;
 import java.util.Collection;
 import java.util.List;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
-import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xbase.tests.typesystem.ValidatingExpressionAwareResolvedTypes;
 import org.eclipse.xtext.xbase.tests.typesystem.ValidatingReassigningResolvedTypes;
@@ -66,7 +66,7 @@ public class ValidatingRootResolvedTypes extends RootResolvedTypes {
   
   public void reassignType(final JvmIdentifiableElement identifiable, final LightweightTypeReference reference) {
     boolean _and = false;
-    boolean _notEquals = ObjectExtensions.operator_notEquals(reference, null);
+    boolean _notEquals = (!Objects.equal(reference, null));
     if (!_notEquals) {
       _and = false;
     } else {
@@ -85,7 +85,7 @@ public class ValidatingRootResolvedTypes extends RootResolvedTypes {
   public void acceptHint(final Object handle, final LightweightBoundTypeArgument boundTypeArgument) {
     boolean _and = false;
     LightweightTypeReference _typeReference = boundTypeArgument.getTypeReference();
-    boolean _notEquals = ObjectExtensions.operator_notEquals(_typeReference, null);
+    boolean _notEquals = (!Objects.equal(_typeReference, null));
     if (!_notEquals) {
       _and = false;
     } else {
@@ -131,7 +131,7 @@ public class ValidatingRootResolvedTypes extends RootResolvedTypes {
         public void apply(final LightweightBoundTypeArgument it) {
           boolean _and = false;
           LightweightTypeReference _typeReference = it.getTypeReference();
-          boolean _notEquals = ObjectExtensions.operator_notEquals(_typeReference, null);
+          boolean _notEquals = (!Objects.equal(_typeReference, null));
           if (!_notEquals) {
             _and = false;
           } else {
@@ -178,7 +178,7 @@ public class ValidatingRootResolvedTypes extends RootResolvedTypes {
   public LightweightTypeReference getActualType(final XExpression expression) {
     final LightweightTypeReference result = super.getActualType(expression);
     boolean _and = false;
-    boolean _notEquals = ObjectExtensions.operator_notEquals(result, null);
+    boolean _notEquals = (!Objects.equal(result, null));
     if (!_notEquals) {
       _and = false;
     } else {
@@ -197,7 +197,7 @@ public class ValidatingRootResolvedTypes extends RootResolvedTypes {
   public LightweightTypeReference getExpectedType(final XExpression expression) {
     final LightweightTypeReference result = super.getExpectedType(expression);
     boolean _and = false;
-    boolean _notEquals = ObjectExtensions.operator_notEquals(result, null);
+    boolean _notEquals = (!Objects.equal(result, null));
     if (!_notEquals) {
       _and = false;
     } else {
@@ -216,7 +216,7 @@ public class ValidatingRootResolvedTypes extends RootResolvedTypes {
   public LightweightTypeReference getDeclaredType(final JvmIdentifiableElement identifiable) {
     final LightweightTypeReference result = super.getDeclaredType(identifiable);
     boolean _and = false;
-    boolean _notEquals = ObjectExtensions.operator_notEquals(result, null);
+    boolean _notEquals = (!Objects.equal(result, null));
     if (!_notEquals) {
       _and = false;
     } else {

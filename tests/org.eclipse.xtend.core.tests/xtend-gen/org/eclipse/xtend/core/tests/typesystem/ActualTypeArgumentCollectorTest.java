@@ -7,6 +7,7 @@
  */
 package org.eclipse.xtend.core.tests.typesystem;
 
+import com.google.common.base.Objects;
 import com.google.inject.Inject;
 import java.util.List;
 import java.util.Map;
@@ -30,7 +31,6 @@ import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IntegerRange;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ListExtensions;
-import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.Pair;
 import org.eclipse.xtext.xbase.lib.StringExtensions;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightBoundTypeArgument;
@@ -78,7 +78,7 @@ public class ActualTypeArgumentCollectorTest extends AbstractTestingTypeReferenc
     final Set<JvmTypeParameter> allKeys = mapping.keySet();
     for (final JvmTypeParameter key : allKeys) {
       String _simpleName = key.getSimpleName();
-      boolean _equals = ObjectExtensions.operator_equals(_simpleName, typeParamName);
+      boolean _equals = Objects.equal(_simpleName, typeParamName);
       if (_equals) {
         Assert.assertNotNull(mappedTypes);
         final List<LightweightBoundTypeArgument> mappingData = mapping.get(key);
@@ -119,7 +119,7 @@ public class ActualTypeArgumentCollectorTest extends AbstractTestingTypeReferenc
         return mapping;
       }
     }
-    boolean _notEquals = ObjectExtensions.operator_notEquals(mappedTypes, null);
+    boolean _notEquals = (!Objects.equal(mappedTypes, null));
     if (_notEquals) {
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("No mapping for ");
@@ -144,7 +144,7 @@ public class ActualTypeArgumentCollectorTest extends AbstractTestingTypeReferenc
     final Set<JvmTypeParameter> allKeys = mapping.keySet();
     for (final JvmTypeParameter key : allKeys) {
       String _simpleName = key.getSimpleName();
-      boolean _equals = ObjectExtensions.operator_equals(_simpleName, typeParamName);
+      boolean _equals = Objects.equal(_simpleName, typeParamName);
       if (_equals) {
         final List<LightweightBoundTypeArgument> mappingData = mapping.get(key);
         final Function1<LightweightBoundTypeArgument,Object> _function = new Function1<LightweightBoundTypeArgument,Object>() {

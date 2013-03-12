@@ -7,30 +7,30 @@
  */
 package org.eclipse.xtext.xbase.compiler;
 
+import com.google.common.base.Objects;
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.impl.AdapterImpl;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
-import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 
 @SuppressWarnings("all")
 public class DisableCodeGenerationAdapter extends AdapterImpl {
   public boolean isAdapterForType(final Object type) {
     Class<? extends DisableCodeGenerationAdapter> _class = this.getClass();
-    boolean _equals = ObjectExtensions.operator_equals(_class, type);
+    boolean _equals = Objects.equal(_class, type);
     return _equals;
   }
   
   public static boolean isDisabled(final JvmDeclaredType type) {
     Adapter _adapter = DisableCodeGenerationAdapter.getAdapter(type);
-    boolean _notEquals = ObjectExtensions.operator_notEquals(_adapter, null);
+    boolean _notEquals = (!Objects.equal(_adapter, null));
     return _notEquals;
   }
   
   public static void disableCodeGeneration(final JvmDeclaredType declaredType) {
     Adapter _adapter = DisableCodeGenerationAdapter.getAdapter(declaredType);
-    boolean _equals = ObjectExtensions.operator_equals(_adapter, null);
+    boolean _equals = Objects.equal(_adapter, null);
     if (_equals) {
       EList<Adapter> _eAdapters = declaredType.eAdapters();
       DisableCodeGenerationAdapter _disableCodeGenerationAdapter = new DisableCodeGenerationAdapter();
@@ -40,7 +40,7 @@ public class DisableCodeGenerationAdapter extends AdapterImpl {
   
   public static void enableCodeGeneration(final JvmDeclaredType declaredType) {
     final Adapter adapter = DisableCodeGenerationAdapter.getAdapter(declaredType);
-    boolean _notEquals = ObjectExtensions.operator_notEquals(adapter, null);
+    boolean _notEquals = (!Objects.equal(adapter, null));
     if (_notEquals) {
       EList<Adapter> _eAdapters = declaredType.eAdapters();
       _eAdapters.remove(adapter);

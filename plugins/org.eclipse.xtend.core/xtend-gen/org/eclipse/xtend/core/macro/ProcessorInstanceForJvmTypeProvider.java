@@ -1,5 +1,6 @@
 package org.eclipse.xtend.core.macro;
 
+import com.google.common.base.Objects;
 import com.google.inject.Singleton;
 import org.apache.log4j.Logger;
 import org.eclipse.emf.ecore.EObject;
@@ -9,7 +10,6 @@ import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.resource.XtextResourceSet;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Functions.Function0;
-import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 
 @Singleton
 @SuppressWarnings("all")
@@ -53,7 +53,7 @@ public class ProcessorInstanceForJvmTypeProvider {
   }
   
   protected ClassLoader getClassLoader(final EObject ctx) {
-    boolean _notEquals = ObjectExtensions.operator_notEquals(this.classLoader, null);
+    boolean _notEquals = (!Objects.equal(this.classLoader, null));
     if (_notEquals) {
       return this.classLoader;
     }

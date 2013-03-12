@@ -7,6 +7,7 @@
  */
 package org.eclipse.xtend.core.macro.declaration;
 
+import com.google.common.base.Objects;
 import java.util.List;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.xtend.core.macro.declaration.CompilationUnitImpl;
@@ -28,14 +29,13 @@ import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ListExtensions;
-import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 
 @SuppressWarnings("all")
 public class XtendMethodDeclarationImpl extends XtendMemberDeclarationImpl<XtendFunction> implements MethodDeclaration {
   public boolean isAbstract() {
     XtendFunction _delegate = this.getDelegate();
     XExpression _expression = _delegate.getExpression();
-    boolean _equals = ObjectExtensions.operator_equals(_expression, null);
+    boolean _equals = Objects.equal(_expression, null);
     return _equals;
   }
   

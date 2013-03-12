@@ -1,5 +1,6 @@
 package org.eclipse.xtend.core.formatting;
 
+import com.google.common.base.Objects;
 import com.google.inject.Inject;
 import java.util.Arrays;
 import java.util.List;
@@ -37,7 +38,6 @@ import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ListExtensions;
-import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure2;
 import org.eclipse.xtext.xbase.lib.StringExtensions;
@@ -65,7 +65,7 @@ public class RichStringFormatter {
   public void format(final Procedure2<? super EObject,? super FormattableDocument> formatter, final FormattableDocument doc, final RichString richString) {
     EObject _eContainer = richString.eContainer();
     RichString _containerOfType = EcoreUtil2.<RichString>getContainerOfType(_eContainer, RichString.class);
-    boolean _notEquals = ObjectExtensions.operator_notEquals(_containerOfType, null);
+    boolean _notEquals = (!Objects.equal(_containerOfType, null));
     if (_notEquals) {
       return;
     }
@@ -104,7 +104,7 @@ public class RichStringFormatter {
           _and_1 = false;
         } else {
           Line _head = IterableExtensions.<Line>head(lines);
-          boolean _equals = ObjectExtensions.operator_equals(line, _head);
+          boolean _equals = Objects.equal(line, _head);
           _and_1 = (canIndent && _equals);
         }
         if (_and_1) {
@@ -119,7 +119,7 @@ public class RichStringFormatter {
           _and_2 = false;
         } else {
           Line _last_1 = IterableExtensions.<Line>last(lines);
-          boolean _equals_1 = ObjectExtensions.operator_equals(line, _last_1);
+          boolean _equals_1 = Objects.equal(line, _last_1);
           _and_2 = (canIndent && _equals_1);
         }
         if (_and_2) {
@@ -228,12 +228,12 @@ public class RichStringFormatter {
     {
       final INode node = this._nodeModelAccess.nodeForEObject(obj);
       boolean _or = false;
-      boolean _equals = ObjectExtensions.operator_equals(node, null);
+      boolean _equals = Objects.equal(node, null);
       if (_equals) {
         _or = true;
       } else {
         SyntaxErrorMessage _syntaxErrorMessage = node.getSyntaxErrorMessage();
-        boolean _notEquals = ObjectExtensions.operator_notEquals(_syntaxErrorMessage, null);
+        boolean _notEquals = (!Objects.equal(_syntaxErrorMessage, null));
         _or = (_equals || _notEquals);
       }
       if (_or) {
@@ -243,7 +243,7 @@ public class RichStringFormatter {
       final Function1<INode,Boolean> _function = new Function1<INode,Boolean>() {
           public Boolean apply(final INode it) {
             SyntaxErrorMessage _syntaxErrorMessage = it.getSyntaxErrorMessage();
-            boolean _notEquals = ObjectExtensions.operator_notEquals(_syntaxErrorMessage, null);
+            boolean _notEquals = (!Objects.equal(_syntaxErrorMessage, null));
             return Boolean.valueOf(_notEquals);
           }
         };

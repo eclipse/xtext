@@ -7,6 +7,7 @@
  */
 package org.eclipse.xtext.xbase.tests.annotations;
 
+import com.google.common.base.Objects;
 import com.google.inject.Inject;
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EObject;
@@ -19,7 +20,6 @@ import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotation;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.IteratorExtensions;
-import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.util.ReflectExtensions;
 import org.eclipse.xtext.xbase.tests.annotations.AnnotationsValidatorTest;
 import org.eclipse.xtext.xbase.tests.annotations.NullValidationTestHelper;
@@ -64,7 +64,7 @@ public abstract class AbstractSmokeTest extends AnnotationsValidatorTest {
       final EObject xExpression = this._parseHelper.parse(expression);
       final IResolvedTypes resolvedTypes = this.typeResolver.resolveTypes(xExpression);
       Assert.assertNotNull(resolvedTypes);
-      boolean _notEquals = ObjectExtensions.operator_notEquals(xExpression, null);
+      boolean _notEquals = (!Objects.equal(xExpression, null));
       if (_notEquals) {
         TreeIterator<EObject> _eAllContents = xExpression.eAllContents();
         Iterable<EObject> _iterable = IteratorExtensions.<EObject>toIterable(_eAllContents);
@@ -76,7 +76,7 @@ public abstract class AbstractSmokeTest extends AnnotationsValidatorTest {
               _matched=true;
               this.assertExpressionTypeIsResolved(_xSwitchExpression, resolvedTypes);
               String _localVarName = _xSwitchExpression.getLocalVarName();
-              boolean _notEquals_1 = ObjectExtensions.operator_notEquals(_localVarName, null);
+              boolean _notEquals_1 = (!Objects.equal(_localVarName, null));
               if (_notEquals_1) {
                 this.assertIdentifiableTypeIsResolved(_xSwitchExpression, resolvedTypes);
               }
@@ -88,7 +88,7 @@ public abstract class AbstractSmokeTest extends AnnotationsValidatorTest {
               _matched=true;
               this.assertExpressionTypeIsResolved(_xAbstractFeatureCall, resolvedTypes);
               XExpression _implicitReceiver = _xAbstractFeatureCall.getImplicitReceiver();
-              boolean _notEquals_1 = ObjectExtensions.operator_notEquals(_implicitReceiver, null);
+              boolean _notEquals_1 = (!Objects.equal(_implicitReceiver, null));
               if (_notEquals_1) {
                 XExpression _implicitReceiver_1 = _xAbstractFeatureCall.getImplicitReceiver();
                 this.assertExpressionTypeIsResolved(_implicitReceiver_1, resolvedTypes);

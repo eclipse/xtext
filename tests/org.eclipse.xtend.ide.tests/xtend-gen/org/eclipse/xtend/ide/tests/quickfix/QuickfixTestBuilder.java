@@ -1,5 +1,6 @@
 package org.eclipse.xtend.ide.tests.quickfix;
 
+import com.google.common.base.Objects;
 import com.google.common.collect.Iterables;
 import com.google.inject.Inject;
 import java.util.ArrayList;
@@ -74,7 +75,7 @@ public class QuickfixTestBuilder {
   }
   
   public void setSeverity(final String issueCode, final String severity) {
-    boolean _equals = ObjectExtensions.operator_equals(this.modifiedIssueCodes, null);
+    boolean _equals = Objects.equal(this.modifiedIssueCodes, null);
     if (_equals) {
       HashSet<String> _newHashSet = CollectionLiterals.<String>newHashSet();
       this.modifiedIssueCodes = _newHashSet;
@@ -249,7 +250,7 @@ public class QuickfixTestBuilder {
       final Function1<IssueResolution,Boolean> _function_1 = new Function1<IssueResolution,Boolean>() {
           public Boolean apply(final IssueResolution it) {
             String _label = it.getLabel();
-            boolean _equals = ObjectExtensions.operator_equals(_label, label);
+            boolean _equals = Objects.equal(_label, label);
             return Boolean.valueOf(_equals);
           }
         };
@@ -351,15 +352,15 @@ public class QuickfixTestBuilder {
   
   public void tearDown() {
     try {
-      boolean _notEquals = ObjectExtensions.operator_notEquals(this.editor, null);
+      boolean _notEquals = (!Objects.equal(this.editor, null));
       if (_notEquals) {
         this._workbenchTestHelper.closeEditor(this.editor, false);
       }
-      boolean _notEquals_1 = ObjectExtensions.operator_notEquals(this.file, null);
+      boolean _notEquals_1 = (!Objects.equal(this.file, null));
       if (_notEquals_1) {
         this.file.delete(true, null);
       }
-      boolean _notEquals_2 = ObjectExtensions.operator_notEquals(this.modifiedIssueCodes, null);
+      boolean _notEquals_2 = (!Objects.equal(this.modifiedIssueCodes, null));
       if (_notEquals_2) {
         IPersistentPreferenceStore _preferenceStore = this.getPreferenceStore();
         final Procedure1<IPersistentPreferenceStore> _function = new Procedure1<IPersistentPreferenceStore>() {

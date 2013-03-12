@@ -1,5 +1,6 @@
 package org.eclipse.xtend.core.tests.compiler;
 
+import com.google.common.base.Objects;
 import com.google.inject.Inject;
 import java.util.List;
 import java.util.regex.Matcher;
@@ -30,7 +31,6 @@ import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.Functions.Function0;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
-import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.junit.Assert;
 import org.junit.Ignore;
 import org.junit.Test;
@@ -1601,7 +1601,7 @@ public class CompilerTraceTest extends AbstractXtendTestCase {
       Assert.assertFalse(_isEmpty);
       for (final ILocationInResource location : locations) {
         ITextRegionWithLineInformation _textRegion_2 = location.getTextRegion();
-        boolean _equals = ObjectExtensions.operator_equals(_textRegion_2, expectedRegion);
+        boolean _equals = Objects.equal(_textRegion_2, expectedRegion);
         if (_equals) {
           return;
         }
@@ -1634,7 +1634,7 @@ public class CompilerTraceTest extends AbstractXtendTestCase {
           ITextRegionWithLineInformation _merge = rootLocation.merge(_textRegionWithLineInformation);
           rootLocation = _merge;
           ILocationData childAssociation = child.getMergedAssociatedLocation();
-          boolean _notEquals = ObjectExtensions.operator_notEquals(childAssociation, null);
+          boolean _notEquals = (!Objects.equal(childAssociation, null));
           if (_notEquals) {
             ITextRegionWithLineInformation _merge_1 = associated.merge(childAssociation);
             associated = _merge_1;

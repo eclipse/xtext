@@ -7,6 +7,7 @@
  */
 package org.eclipse.xtend.core.macro.declaration;
 
+import com.google.common.base.Objects;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Iterables;
 import java.util.List;
@@ -36,7 +37,6 @@ import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ListExtensions;
-import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 
 @SuppressWarnings("all")
@@ -89,7 +89,7 @@ public abstract class JvmTypeDeclarationImpl<T extends JvmDeclaredType> extends 
   }
   
   public boolean isAssignableFrom(final Type otherType) {
-    boolean _equals = ObjectExtensions.operator_equals(otherType, null);
+    boolean _equals = Objects.equal(otherType, null);
     if (_equals) {
       return false;
     }
@@ -165,7 +165,7 @@ public abstract class JvmTypeDeclarationImpl<T extends JvmDeclaredType> extends 
           List<TypeReference> _map = ListExtensions.<MutableParameterDeclaration, TypeReference>map(_parameters, _function);
           List<TypeReference> _list = IterableExtensions.<TypeReference>toList(_map);
           List<TypeReference> _list_1 = IterableExtensions.<TypeReference>toList(((Iterable<TypeReference>)Conversions.doWrapArray(parameterTypes)));
-          boolean _equals = ObjectExtensions.operator_equals(_list, _list_1);
+          boolean _equals = Objects.equal(_list, _list_1);
           return Boolean.valueOf(_equals);
         }
       };
@@ -178,7 +178,7 @@ public abstract class JvmTypeDeclarationImpl<T extends JvmDeclaredType> extends 
     final Function1<MutableFieldDeclaration,Boolean> _function = new Function1<MutableFieldDeclaration,Boolean>() {
         public Boolean apply(final MutableFieldDeclaration field) {
           String _name = field.getName();
-          boolean _equals = ObjectExtensions.operator_equals(_name, name);
+          boolean _equals = Objects.equal(_name, name);
           return Boolean.valueOf(_equals);
         }
       };
@@ -192,7 +192,7 @@ public abstract class JvmTypeDeclarationImpl<T extends JvmDeclaredType> extends 
         public Boolean apply(final MutableMethodDeclaration method) {
           boolean _and = false;
           String _name = method.getName();
-          boolean _equals = ObjectExtensions.operator_equals(_name, name);
+          boolean _equals = Objects.equal(_name, name);
           if (!_equals) {
             _and = false;
           } else {
@@ -206,7 +206,7 @@ public abstract class JvmTypeDeclarationImpl<T extends JvmDeclaredType> extends 
             List<TypeReference> _map = ListExtensions.<MutableParameterDeclaration, TypeReference>map(_parameters, _function);
             List<TypeReference> _list = IterableExtensions.<TypeReference>toList(_map);
             List<TypeReference> _list_1 = IterableExtensions.<TypeReference>toList(((Iterable<TypeReference>)Conversions.doWrapArray(parameterTypes)));
-            boolean _equals_1 = ObjectExtensions.operator_equals(_list, _list_1);
+            boolean _equals_1 = Objects.equal(_list, _list_1);
             _and = (_equals && _equals_1);
           }
           return Boolean.valueOf(_and);

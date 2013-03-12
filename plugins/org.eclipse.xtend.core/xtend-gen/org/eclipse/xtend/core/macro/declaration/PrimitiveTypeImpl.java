@@ -16,7 +16,6 @@ import org.eclipse.xtend.lib.macro.declaration.Type;
 import org.eclipse.xtend.lib.macro.declaration.TypeReference;
 import org.eclipse.xtend.lib.macro.services.TypeReferenceProvider;
 import org.eclipse.xtext.common.types.JvmPrimitiveType;
-import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 
 @SuppressWarnings("all")
 public class PrimitiveTypeImpl extends AbstractDeclarationImpl<JvmPrimitiveType> implements PrimitiveType {
@@ -83,7 +82,7 @@ public class PrimitiveTypeImpl extends AbstractDeclarationImpl<JvmPrimitiveType>
   }
   
   public boolean isAssignableFrom(final Type otherType) {
-    boolean _equals = ObjectExtensions.operator_equals(otherType, null);
+    boolean _equals = Objects.equal(otherType, null);
     if (_equals) {
       return false;
     }

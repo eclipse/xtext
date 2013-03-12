@@ -1,5 +1,6 @@
 package org.eclipse.xtext.xbase.annotations.interpreter;
 
+import com.google.common.base.Objects;
 import java.util.Arrays;
 import java.util.List;
 import org.eclipse.emf.common.util.EList;
@@ -15,7 +16,6 @@ import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotation;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ListExtensions;
-import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 
 @SuppressWarnings("all")
@@ -39,7 +39,7 @@ public class ConstantExpressionsInterpreter {
         String _xblockexpression = null;
         {
           String _simpleName = expectedType==null?(String)null:expectedType.getSimpleName();
-          boolean _equals = ObjectExtensions.operator_equals(_simpleName, "char");
+          boolean _equals = Objects.equal(_simpleName, "char");
           if (_equals) {
             String _value = _xStringLiteral.getValue();
             _value.charAt(0);
@@ -66,7 +66,7 @@ public class ConstantExpressionsInterpreter {
         boolean _matched_1 = false;
         if (!_matched_1) {
           String _simpleName = expectedType==null?(String)null:expectedType.getSimpleName();
-          boolean _equals = ObjectExtensions.operator_equals(_simpleName, "long");
+          boolean _equals = Objects.equal(_simpleName, "long");
           if (_equals) {
             _matched_1=true;
             String _value = _xNumberLiteral.getValue();
@@ -76,7 +76,7 @@ public class ConstantExpressionsInterpreter {
         }
         if (!_matched_1) {
           String _simpleName_1 = expectedType==null?(String)null:expectedType.getSimpleName();
-          boolean _equals_1 = ObjectExtensions.operator_equals(_simpleName_1, "short");
+          boolean _equals_1 = Objects.equal(_simpleName_1, "short");
           if (_equals_1) {
             _matched_1=true;
             String _value_1 = _xNumberLiteral.getValue();
@@ -86,7 +86,7 @@ public class ConstantExpressionsInterpreter {
         }
         if (!_matched_1) {
           String _simpleName_2 = expectedType==null?(String)null:expectedType.getSimpleName();
-          boolean _equals_2 = ObjectExtensions.operator_equals(_simpleName_2, "byte");
+          boolean _equals_2 = Objects.equal(_simpleName_2, "byte");
           if (_equals_2) {
             _matched_1=true;
             String _value_2 = _xNumberLiteral.getValue();
@@ -96,7 +96,7 @@ public class ConstantExpressionsInterpreter {
         }
         if (!_matched_1) {
           String _simpleName_3 = expectedType==null?(String)null:expectedType.getSimpleName();
-          boolean _equals_3 = ObjectExtensions.operator_equals(_simpleName_3, "float");
+          boolean _equals_3 = Objects.equal(_simpleName_3, "float");
           if (_equals_3) {
             _matched_1=true;
             String _value_3 = _xNumberLiteral.getValue();
@@ -106,7 +106,7 @@ public class ConstantExpressionsInterpreter {
         }
         if (!_matched_1) {
           String _simpleName_4 = expectedType==null?(String)null:expectedType.getSimpleName();
-          boolean _equals_4 = ObjectExtensions.operator_equals(_simpleName_4, "double");
+          boolean _equals_4 = Objects.equal(_simpleName_4, "double");
           if (_equals_4) {
             _matched_1=true;
             String _value_4 = _xNumberLiteral.getValue();

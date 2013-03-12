@@ -7,6 +7,7 @@
  */
 package org.eclipse.xtext.xbase.tests.typesystem;
 
+import com.google.common.base.Objects;
 import java.util.List;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtend.lib.Data;
@@ -17,7 +18,6 @@ import org.eclipse.xtext.common.types.JvmTypeParameterDeclarator;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.jvmmodel.ILogicalContainerProvider;
-import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.util.ToStringHelper;
 import org.eclipse.xtext.xbase.typing.XbaseTypeArgumentContextProvider.AbstractFeatureCallRequest;
 
@@ -67,11 +67,11 @@ public class FeatureCallRequest extends AbstractFeatureCallRequest {
     EObject context = this.getCall();
     JvmTypeParameterDeclarator result = null;
     boolean _and = false;
-    boolean _notEquals = ObjectExtensions.operator_notEquals(context, null);
+    boolean _notEquals = (!Objects.equal(context, null));
     if (!_notEquals) {
       _and = false;
     } else {
-      boolean _equals = ObjectExtensions.operator_equals(result, null);
+      boolean _equals = Objects.equal(result, null);
       _and = (_notEquals && _equals);
     }
     boolean _while = _and;
@@ -81,7 +81,7 @@ public class FeatureCallRequest extends AbstractFeatureCallRequest {
       } else {
         ILogicalContainerProvider _contextProvider = this.getContextProvider();
         final JvmIdentifiableElement logicalContainer = _contextProvider.getLogicalContainer(context);
-        boolean _notEquals_1 = ObjectExtensions.operator_notEquals(logicalContainer, null);
+        boolean _notEquals_1 = (!Objects.equal(logicalContainer, null));
         if (_notEquals_1) {
           context = logicalContainer;
         } else {
@@ -90,11 +90,11 @@ public class FeatureCallRequest extends AbstractFeatureCallRequest {
         }
       }
       boolean _and_1 = false;
-      boolean _notEquals_2 = ObjectExtensions.operator_notEquals(context, null);
+      boolean _notEquals_2 = (!Objects.equal(context, null));
       if (!_notEquals_2) {
         _and_1 = false;
       } else {
-        boolean _equals_1 = ObjectExtensions.operator_equals(result, null);
+        boolean _equals_1 = Objects.equal(result, null);
         _and_1 = (_notEquals_2 && _equals_1);
       }
       _while = _and_1;

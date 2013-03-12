@@ -7,6 +7,7 @@
  */
 package org.eclipse.xtext.xbase.tests.typesystem;
 
+import com.google.common.base.Objects;
 import com.google.inject.Inject;
 import java.util.ArrayList;
 import java.util.List;
@@ -27,7 +28,6 @@ import org.eclipse.xtext.xbase.jvmmodel.ILogicalContainerProvider;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
-import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure2;
 import org.eclipse.xtext.xbase.tests.typesystem.AbstractTypeArgumentTest;
@@ -80,7 +80,7 @@ public abstract class AbstractOldAPITypeArgumentTest extends AbstractTypeArgumen
     Assert.assertEquals(_size, _size_1);
     final XExpression receiver = this.featureCallToJavaMapping.getActualReceiver(call);
     JvmTypeReference _xifexpression = null;
-    boolean _notEquals = ObjectExtensions.operator_notEquals(receiver, null);
+    boolean _notEquals = (!Objects.equal(receiver, null));
     if (_notEquals) {
       ITypeProvider _typeProvider = this.getTypeProvider();
       JvmTypeReference _type = _typeProvider.getType(receiver);

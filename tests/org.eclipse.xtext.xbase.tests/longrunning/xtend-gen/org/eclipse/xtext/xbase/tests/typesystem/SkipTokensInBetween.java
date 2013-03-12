@@ -7,6 +7,7 @@
  */
 package org.eclipse.xtext.xbase.tests.typesystem;
 
+import com.google.common.base.Objects;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 import java.util.List;
@@ -15,7 +16,6 @@ import org.antlr.runtime.CommonToken;
 import org.antlr.runtime.Token;
 import org.eclipse.xtext.parser.antlr.Lexer;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
-import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.tests.typesystem.AbstractSmokeTest;
 import org.junit.Ignore;
 import org.junit.Test;
@@ -35,7 +35,7 @@ public class SkipTokensInBetween extends AbstractSmokeTest {
       ANTLRStringStream _aNTLRStringStream = new ANTLRStringStream(input);
       lexer.setCharStream(_aNTLRStringStream);
       Token token = lexer.nextToken();
-      boolean _notEquals = ObjectExtensions.operator_notEquals(token, Token.EOF_TOKEN);
+      boolean _notEquals = (!Objects.equal(token, Token.EOF_TOKEN));
       boolean _while = _notEquals;
       while (_while) {
         {
@@ -43,7 +43,7 @@ public class SkipTokensInBetween extends AbstractSmokeTest {
           Token _nextToken = lexer.nextToken();
           token = _nextToken;
         }
-        boolean _notEquals_1 = ObjectExtensions.operator_notEquals(token, Token.EOF_TOKEN);
+        boolean _notEquals_1 = (!Objects.equal(token, Token.EOF_TOKEN));
         _while = _notEquals_1;
       }
     }

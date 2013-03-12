@@ -1,5 +1,6 @@
 package org.eclipse.xtend.core.tests.formatting;
 
+import com.google.common.base.Objects;
 import javax.inject.Inject;
 import org.eclipse.xtend.core.tests.RuntimeInjectorProvider;
 import org.eclipse.xtend2.lib.StringConcatenation;
@@ -10,7 +11,6 @@ import org.eclipse.xtext.preferences.PreferenceKey;
 import org.eclipse.xtext.xbase.formatting.BasicFormatterPreferenceKeys;
 import org.eclipse.xtext.xbase.junit.formatter.AssertingFormatterData;
 import org.eclipse.xtext.xbase.junit.formatter.FormatterTester;
-import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.junit.runner.RunWith;
 
@@ -115,7 +115,7 @@ public abstract class AbstractXtendFormatterTest {
         public void apply(final AssertingFormatterData it) {
           MapBasedPreferenceValues _config = it.getConfig();
           AbstractXtendFormatterTest.this.put(_config, BasicFormatterPreferenceKeys.maxLineWidth, Integer.valueOf(80));
-          boolean _notEquals = ObjectExtensions.operator_notEquals(cfg, null);
+          boolean _notEquals = (!Objects.equal(cfg, null));
           if (_notEquals) {
             MapBasedPreferenceValues _config_1 = it.getConfig();
             cfg.apply(_config_1);

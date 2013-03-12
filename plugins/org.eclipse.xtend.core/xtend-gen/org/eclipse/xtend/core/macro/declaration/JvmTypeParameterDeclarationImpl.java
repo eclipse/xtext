@@ -7,6 +7,7 @@
  */
 package org.eclipse.xtend.core.macro.declaration;
 
+import com.google.common.base.Objects;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtend.core.macro.declaration.CompilationUnitImpl;
@@ -22,7 +23,6 @@ import org.eclipse.xtend.lib.macro.services.TypeReferenceProvider;
 import org.eclipse.xtext.common.types.JvmExecutable;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
-import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 
 @SuppressWarnings("all")
 public class JvmTypeParameterDeclarationImpl extends TypeParameterDeclarationImpl implements MutableAnnotationTarget, MutableTypeParameterDeclaration {
@@ -42,7 +42,7 @@ public class JvmTypeParameterDeclarationImpl extends TypeParameterDeclarationImp
   public void remove() {
     JvmTypeParameter _delegate = this.getDelegate();
     EObject _eContainer = _delegate.eContainer();
-    boolean _equals = ObjectExtensions.operator_equals(_eContainer, null);
+    boolean _equals = Objects.equal(_eContainer, null);
     if (_equals) {
       return;
     }
@@ -53,7 +53,7 @@ public class JvmTypeParameterDeclarationImpl extends TypeParameterDeclarationImp
     _eContents.remove(_delegate_2);
     JvmTypeParameter _delegate_3 = this.getDelegate();
     EObject _eContainer_2 = _delegate_3.eContainer();
-    boolean _notEquals = ObjectExtensions.operator_notEquals(_eContainer_2, null);
+    boolean _notEquals = (!Objects.equal(_eContainer_2, null));
     if (_notEquals) {
       JvmTypeParameter _delegate_4 = this.getDelegate();
       String _plus = ("Couldn\'t remove " + _delegate_4);
@@ -63,7 +63,7 @@ public class JvmTypeParameterDeclarationImpl extends TypeParameterDeclarationImp
   }
   
   public boolean isAssignableFrom(final Type otherType) {
-    boolean _equals = ObjectExtensions.operator_equals(otherType, null);
+    boolean _equals = Objects.equal(otherType, null);
     if (_equals) {
       return false;
     }

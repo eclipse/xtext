@@ -7,6 +7,7 @@
  */
 package org.eclipse.xtend.core.macro;
 
+import com.google.common.base.Objects;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 import java.util.Collection;
@@ -45,7 +46,6 @@ import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
-import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.Pair;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 
@@ -94,7 +94,7 @@ public class ActiveAnnotationContextProvider {
                         JvmAnnotationType _key_1 = it.getKey();
                         final JvmType processorType = ActiveAnnotationContextProvider.this._xAnnotationExtensions.getProcessorType(_key_1);
                         final Object processorInstance = ActiveAnnotationContextProvider.this._processorInstanceForJvmTypeProvider.getProcessorInstance(processorType);
-                        boolean _notEquals = ObjectExtensions.operator_notEquals(processorInstance, null);
+                        boolean _notEquals = (!Objects.equal(processorInstance, null));
                         if (_notEquals) {
                           fa.setProcessorInstance(processorInstance);
                         } else {
@@ -261,7 +261,7 @@ public class ActiveAnnotationContextProvider {
     for (final XAnnotation annotation : _filter) {
       {
         final JvmAnnotationType activeAnnotationDeclaration = this._xAnnotationExtensions.tryFindAnnotationType(annotation);
-        boolean _notEquals = ObjectExtensions.operator_notEquals(activeAnnotationDeclaration, null);
+        boolean _notEquals = (!Objects.equal(activeAnnotationDeclaration, null));
         if (_notEquals) {
           boolean _isValid = this.isValid(annotation, activeAnnotationDeclaration);
           if (_isValid) {
@@ -274,6 +274,6 @@ public class ActiveAnnotationContextProvider {
   }
   
   private boolean isValid(final XAnnotation annotation, final JvmAnnotationType activeAnnotationDeclaration) {
-    return ObjectExtensions.operator_notEquals(annotation, null);
+    return (!Objects.equal(annotation, null));
   }
 }

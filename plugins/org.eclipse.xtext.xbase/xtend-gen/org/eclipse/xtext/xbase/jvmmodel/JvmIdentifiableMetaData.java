@@ -1,7 +1,7 @@
 package org.eclipse.xtext.xbase.jvmmodel;
 
+import com.google.common.base.Objects;
 import org.eclipse.emf.common.notify.impl.AdapterImpl;
-import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 
 @SuppressWarnings("all")
 public class JvmIdentifiableMetaData extends AdapterImpl {
@@ -16,8 +16,7 @@ public class JvmIdentifiableMetaData extends AdapterImpl {
   }
   
   public boolean isAdapterForType(final Object type) {
-    boolean _equals = ObjectExtensions.operator_equals(
-      JvmIdentifiableMetaData.class, type);
+    boolean _equals = Objects.equal(JvmIdentifiableMetaData.class, type);
     return _equals;
   }
 }
