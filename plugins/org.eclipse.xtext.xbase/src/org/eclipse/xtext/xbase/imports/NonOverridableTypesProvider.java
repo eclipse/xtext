@@ -43,7 +43,14 @@ public class NonOverridableTypesProvider {
 
 	private Map<JvmMember, Map<String, JvmIdentifiableElement>> visibleElements = newHashMap();
 
+	/**
+	 * Returns a type with the given name that is reachable in the context.
+	 * If the context is <code>null</code>, it is assumed that no type is visible.
+	 * @return the visible type or <code>null</code>
+	 */
 	public JvmIdentifiableElement getVisibleType(JvmMember context, String name) {
+		if (context == null)
+			return null;
 		Map<String, JvmIdentifiableElement> map = visibleElements.get(context);
 		if (map == null) {
 			map = create(context);
