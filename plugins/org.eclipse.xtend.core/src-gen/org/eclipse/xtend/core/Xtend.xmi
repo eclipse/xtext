@@ -1452,6 +1452,7 @@
         <elements xsi:type="xtext:Keyword" value="=="/>
         <elements xsi:type="xtext:Keyword" value="!="/>
         <elements xsi:type="xtext:Keyword" value="==="/>
+        <elements xsi:type="xtext:Keyword" value="!=="/>
       </alternatives>
     </rules>
     <rules xsi:type="xtext:ParserRule" name="XRelationalExpression">

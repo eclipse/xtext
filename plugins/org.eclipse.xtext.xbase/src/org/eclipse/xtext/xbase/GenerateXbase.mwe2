@@ -20,7 +20,9 @@ var backtrack = false
 var memoize = false
 
 Workflow {
-	bean = StandaloneSetup { 
+	bean = StandaloneSetup {
+		// the maven archetype contains a template file called .project
+		ignoreBrokenProjectFiles = true 
 		platformUri = "${runtimeProject}/../.."
 		scanClassPath = true
 	}
