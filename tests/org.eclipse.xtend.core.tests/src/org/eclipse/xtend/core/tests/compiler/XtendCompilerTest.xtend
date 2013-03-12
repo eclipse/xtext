@@ -444,9 +444,9 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 			    }
 			}
 		''', '''
+			import com.google.common.base.Objects;
 			import com.google.common.collect.AbstractIterator;
 			import java.util.Iterator;
-			import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 			
 			@SuppressWarnings("all")
 			public class Foo {
@@ -459,7 +459,7 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 			          while (_while) {
 			            {
 			              final T elem = iter.next();
-			              boolean _notEquals = ObjectExtensions.operator_notEquals(elem, null);
+			              boolean _notEquals = (!Objects.equal(elem, null));
 			              if (_notEquals) {
 			                return elem;
 			              }
@@ -523,7 +523,7 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 			public class Foo  {
 				def <T> Iterator<T> skipNulls(Iterator<T> iter) {
 					val AbstractIterator<T> result = [|
-						iter.findFirst [ it != null ] ?: self.endOfData
+						iter.findFirst [ it !== null ] ?: self.endOfData
 					]
 					return result
 				}
@@ -544,8 +544,8 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 			          T _elvis = null;
 			          final Function1<T,Boolean> _function = new Function1<T,Boolean>() {
 			              public Boolean apply(final T it) {
-			                boolean _notEquals = ObjectExtensions.operator_notEquals(it, null);
-			                return Boolean.valueOf(_notEquals);
+			                boolean _tripleNotEquals = (it != null);
+			                return Boolean.valueOf(_tripleNotEquals);
 			              }
 			            };
 			          T _findFirst = IteratorExtensions.<T>findFirst(iter, _function);
@@ -581,6 +581,7 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 					}
 				}
 			''', '''
+				import com.google.common.base.Objects;
 				import com.google.common.collect.AbstractIterator;
 				import java.util.Iterator;
 				import org.eclipse.xtext.xbase.lib.Functions.Function1;
@@ -596,7 +597,7 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 				          T _elvis = null;
 				          final Function1<T,Boolean> _function = new Function1<T,Boolean>() {
 				              public Boolean apply(final T it) {
-				                boolean _notEquals = ObjectExtensions.operator_notEquals(it, null);
+				                boolean _notEquals = (!Objects.equal(it, null));
 				                return Boolean.valueOf(_notEquals);
 				              }
 				            };
@@ -1877,13 +1878,13 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 		''', '''
 			package x;
 
-			import org.eclipse.xtext.xbase.lib.ObjectExtensions;
+			import com.google.common.base.Objects;
 
 			@SuppressWarnings("all")
 			public class Y {
 			  public boolean equals(final Object p) {
 			    boolean _xifexpression = false;
-			    boolean _equals = ObjectExtensions.operator_equals("foo", p);
+			    boolean _equals = Objects.equal("foo", p);
 			    if (_equals) {
 			      return true;
 			    } else {
@@ -2588,21 +2589,20 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 			'''
 				class FindFirstOnIt {
 					def <T> useExtension(Iterable<T> it) {
-						findFirst [ it != null ]
+						findFirst [ it !== null ]
 					}
 				}
 			''', '''
 				import org.eclipse.xtext.xbase.lib.Functions.Function1;
 				import org.eclipse.xtext.xbase.lib.IterableExtensions;
-				import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 				
 				@SuppressWarnings("all")
 				public class FindFirstOnIt {
 				  public <T extends Object> T useExtension(final Iterable<T> it) {
 				    final Function1<T,Boolean> _function = new Function1<T,Boolean>() {
 				        public Boolean apply(final T it) {
-				          boolean _notEquals = ObjectExtensions.operator_notEquals(it, null);
-				          return Boolean.valueOf(_notEquals);
+				          boolean _tripleNotEquals = (it != null);
+				          return Boolean.valueOf(_tripleNotEquals);
 				        }
 				      };
 				    T _findFirst = IterableExtensions.<T>findFirst(it, _function);
