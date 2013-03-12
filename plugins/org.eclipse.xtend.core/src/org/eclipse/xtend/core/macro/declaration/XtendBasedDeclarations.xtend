@@ -66,7 +66,7 @@ abstract class XtendAnnotationTargetImpl<T extends XtendAnnotationTarget> extend
 abstract class XtendMemberDeclarationImpl<T extends XtendMember> extends XtendAnnotationTargetImpl<T> implements MemberDeclaration {
 	
 	override getDocComment() {
-		throw new UnsupportedOperationException("Auto-generated function stub")
+		compilationUnit.documentationProvider.getDocumentation(delegate)
 	}
 	
 	override getDeclaringType() {

@@ -47,6 +47,8 @@ import org.eclipse.xtext.common.types.JvmOperation
 import org.eclipse.xtext.common.types.JvmVisibility
 import org.eclipse.xtext.common.types.TypesFactory
 import org.eclipse.xtext.xbase.lib.Procedures$Procedure1
+import org.eclipse.emf.ecore.util.EcoreUtil
+import org.eclipse.xtext.xbase.compiler.DocumentationAdapter
 
 abstract class JvmNamedElementImpl<T extends JvmIdentifiableElement> extends AbstractDeclarationImpl<T> implements MutableNamedElement {
 	
@@ -92,11 +94,17 @@ abstract class JvmAnnotationTargetImpl<T extends JvmAnnotationTarget> extends Jv
 abstract class JvmMemberDeclarationImpl<T extends JvmMember> extends JvmAnnotationTargetImpl<T> implements MutableMemberDeclaration {
 	
 	override getDocComment() {
-		throw new UnsupportedOperationException("Auto-Jvm function stub")
+		val adapter = EcoreUtil::getAdapter(delegate.eAdapters(), typeof(DocumentationAdapter)) as DocumentationAdapter;
+		return adapter?.getDocumentation();
 	}
 	
 	override setDocComment(String docComment) {
-		throw new UnsupportedOperationException("Auto-Jvm function stub")
+		var adapter = EcoreUtil::getAdapter(delegate.eAdapters(), typeof(DocumentationAdapter)) as DocumentationAdapter;
+		if (adapter == null) {
+			adapter = new DocumentationAdapter
+			delegate.eAdapters += adapter
+		}
+		adapter.setDocumentation(docComment)
 	}
 	
 	override getVisibility() {
