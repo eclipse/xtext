@@ -5,7 +5,7 @@ Bundle-Version: 2.4.0.qualifier
 Bundle-Localization: plugin
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Require-Bundle: org.eclipse.xtext.xbase.lib;bundle-version="2.0.0";visibility:=reexport,
- com.google.guava;resolution:=optional;visibility:=reexport,
+ com.google.guava;bundle-version="1.0.0";visibility:=reexport,
  com.google.inject;bundle-version="2.0.0";visibility:=reexport,
  org.eclipse.core.resources;bundle-version="3.5.0";resolution:=optional;visibility:=reexport;x-installation:=greedy,
  org.eclipse.emf.ecore;bundle-version="2.5.0";resolution:=optional;visibility:=reexport;x-installation:=greedy,
@@ -27,9 +27,5 @@ Export-Package: org.eclipse.xtext.xbase.compiler;x-internal:=true,
  testdata.ordersensitivity
 Bundle-Name: %pluginName
 Bundle-Vendor: %providerName
-Import-Package: com.google.common.annotations,
- com.google.common.base,
- com.google.common.collect,
- com.google.common.primitives,
- org.apache.log4j;version="1.2.15",
+Import-Package: org.apache.log4j;version="1.2.15",
  org.junit;version="[4.0.0,5.0.0)"

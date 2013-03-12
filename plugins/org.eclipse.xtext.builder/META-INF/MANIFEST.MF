@@ -25,6 +25,7 @@ Export-Package: org.eclipse.xtext.builder,
 Require-Bundle: org.eclipse.xtext;bundle-version="2.0.0",
  org.eclipse.xtext.util;bundle-version="2.0.0",
  org.eclipse.emf.ecore;bundle-version="2.5.0";visibility:=reexport,
+ com.google.guava;bundle-version="1.0.0",
  com.google.inject;bundle-version="2.0.0",
  org.eclipse.core.resources;bundle-version="3.5.0";resolution:=optional;x-installation:=greedy,
  org.eclipse.jdt.core;bundle-version="3.5.0";resolution:=optional;x-installation:=greedy,
@@ -45,8 +46,5 @@ Require-Bundle: org.eclipse.xtext;bundle-version="2.0.0",
  org.eclipse.jdt.debug;bundle-version="3.5.0";resolution:=optional;x-installation:=greedy,
  org.eclipse.jdt.debug.ui;bundle-version="3.5.0";resolution:=optional
 Bundle-ActivationPolicy: lazy
-Import-Package: com.google.common.base,
- com.google.common.collect,
- com.google.common.io,
- org.apache.log4j;version="1.2.15"
+Import-Package: org.apache.log4j;version="1.2.15"
 Bundle-Activator: org.eclipse.xtext.builder.internal.Activator
