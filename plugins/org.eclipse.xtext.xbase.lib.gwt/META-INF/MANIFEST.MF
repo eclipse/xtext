@@ -6,6 +6,5 @@ Bundle-Version: 2.4.0.qualifier
 Export-Package: org.eclipse.xtend2.lib,
  org.eclipse.xtext.xbase.lib
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
-Import-Package: com.google.common.annotations,
- com.google.common.base,
- com.google.common.collect
+Require-Bundle: com.google.guava;bundle-version="10.0.1"
+
