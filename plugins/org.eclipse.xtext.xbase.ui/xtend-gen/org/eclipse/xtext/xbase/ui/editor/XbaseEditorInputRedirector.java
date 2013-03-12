@@ -1,5 +1,6 @@
 package org.eclipse.xtext.xbase.ui.editor;
 
+import com.google.common.base.Objects;
 import com.google.inject.Inject;
 import java.util.Arrays;
 import java.util.Iterator;
@@ -25,7 +26,6 @@ import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
-import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 
 @SuppressWarnings("all")
 public class XbaseEditorInputRedirector {
@@ -41,7 +41,7 @@ public class XbaseEditorInputRedirector {
   public IEditorInput findOriginalSource(final IEditorInput input) {
     try {
       final IFile resource = ResourceUtil.getFile(input);
-      boolean _notEquals = ObjectExtensions.operator_notEquals(resource, null);
+      boolean _notEquals = (!Objects.equal(resource, null));
       if (_notEquals) {
         IPath _fullPath = resource.getFullPath();
         String _fileExtension = _fullPath.getFileExtension();
@@ -91,7 +91,7 @@ public class XbaseEditorInputRedirector {
           return input;
         }
         final ITrace trace = this.traceInformation.getTraceToSource(resource);
-        boolean _equals = ObjectExtensions.operator_equals(trace, null);
+        boolean _equals = Objects.equal(trace, null);
         if (_equals) {
           return input;
         }
@@ -103,7 +103,7 @@ public class XbaseEditorInputRedirector {
         if (!_hasNext) {
           _and = false;
         } else {
-          boolean _equals_1 = ObjectExtensions.operator_equals(sourceInformation, null);
+          boolean _equals_1 = Objects.equal(sourceInformation, null);
           _and = (_hasNext && _equals_1);
         }
         boolean _while = _and;
@@ -121,12 +121,12 @@ public class XbaseEditorInputRedirector {
           if (!_hasNext_1) {
             _and_1 = false;
           } else {
-            boolean _equals_2 = ObjectExtensions.operator_equals(sourceInformation, null);
+            boolean _equals_2 = Objects.equal(sourceInformation, null);
             _and_1 = (_hasNext_1 && _equals_2);
           }
           _while = _and_1;
         }
-        boolean _equals_2 = ObjectExtensions.operator_equals(sourceInformation, null);
+        boolean _equals_2 = Objects.equal(sourceInformation, null);
         if (_equals_2) {
           return input;
         }

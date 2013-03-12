@@ -25,7 +25,6 @@ import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Functions.Function0;
-import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 
 @SuppressWarnings("all")
 public class JdtBasedProcessorProvider extends ProcessorInstanceForJvmTypeProvider {
@@ -118,7 +117,7 @@ public class JdtBasedProcessorProvider extends ProcessorInstanceForJvmTypeProvid
               url = _uRL;
             }
           }
-          boolean _notEquals = ObjectExtensions.operator_notEquals(url, null);
+          boolean _notEquals = (!Objects.equal(url, null));
           if (_notEquals) {
             urls.add(url);
           }
@@ -154,7 +153,7 @@ public class JdtBasedProcessorProvider extends ProcessorInstanceForJvmTypeProvid
             _matched=true;
             IPath _outputLocation_1 = entry.getOutputLocation();
             path = _outputLocation_1;
-            boolean _notEquals = ObjectExtensions.operator_notEquals(path, null);
+            boolean _notEquals = (!Objects.equal(path, null));
             if (_notEquals) {
               IPath _addTrailingSeparator = path.addTrailingSeparator();
               String _string_2 = _addTrailingSeparator.toString();

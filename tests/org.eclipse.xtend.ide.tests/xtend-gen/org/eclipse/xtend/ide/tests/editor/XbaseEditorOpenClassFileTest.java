@@ -1,5 +1,6 @@
 package org.eclipse.xtend.ide.tests.editor;
 
+import com.google.common.base.Objects;
 import com.google.inject.Inject;
 import java.io.InputStream;
 import org.eclipse.core.resources.IFile;
@@ -22,7 +23,6 @@ import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.junit4.ui.util.JavaProjectSetupUtil;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Extension;
-import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Test;
@@ -128,7 +128,7 @@ public class XbaseEditorOpenClassFileTest extends AbstractXtendUITestCase {
       InputStream _resourceAsStream = _class.getResourceAsStream(fileName);
       jarFile.create(_resourceAsStream, true, null);
       IFile _xifexpression = null;
-      boolean _notEquals = ObjectExtensions.operator_notEquals(fileNameOfSource, null);
+      boolean _notEquals = (!Objects.equal(fileNameOfSource, null));
       if (_notEquals) {
         IFile _xblockexpression = null;
         {
@@ -170,7 +170,7 @@ public class XbaseEditorOpenClassFileTest extends AbstractXtendUITestCase {
     boolean _xtrycatchfinallyexpression = false;
     try {
       Class<? extends Object> _forName = Class.forName("org.eclipse.ui.ide.IEditorAssociationOverride");
-      boolean _notEquals = ObjectExtensions.operator_notEquals(_forName, null);
+      boolean _notEquals = (!Objects.equal(_forName, null));
       _xtrycatchfinallyexpression = _notEquals;
     } catch (final Throwable _t) {
       if (_t instanceof ClassNotFoundException) {

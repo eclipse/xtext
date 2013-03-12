@@ -7,6 +7,7 @@
  */
 package org.eclipse.xtext.xbase.tests.compiler;
 
+import com.google.common.base.Objects;
 import com.google.common.base.Supplier;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
@@ -55,7 +56,6 @@ import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.Functions;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
-import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xbase.tests.AbstractXbaseTestCase;
 import org.eclipse.xtext.xbase.tests.typesystem.XbaseWithLogicalContainerInjectorProvider;
@@ -276,7 +276,7 @@ public class JvmModelGeneratorTest extends AbstractXbaseTestCase {
       final Function1<Method,Boolean> _function_1 = new Function1<Method,Boolean>() {
           public Boolean apply(final Method it) {
             String _name = it.getName();
-            boolean _equals = ObjectExtensions.operator_equals(_name, "value");
+            boolean _equals = Objects.equal(_name, "value");
             return Boolean.valueOf(_equals);
           }
         };
@@ -287,7 +287,7 @@ public class JvmModelGeneratorTest extends AbstractXbaseTestCase {
       final Function1<Method,Boolean> _function_2 = new Function1<Method,Boolean>() {
           public Boolean apply(final Method it) {
             String _name = it.getName();
-            boolean _equals = ObjectExtensions.operator_equals(_name, "otherValue");
+            boolean _equals = Objects.equal(_name, "otherValue");
             return Boolean.valueOf(_equals);
           }
         };

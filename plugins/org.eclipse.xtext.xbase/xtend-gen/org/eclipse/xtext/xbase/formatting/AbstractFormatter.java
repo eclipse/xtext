@@ -1,5 +1,6 @@
 package org.eclipse.xtext.xbase.formatting;
 
+import com.google.common.base.Objects;
 import java.util.Arrays;
 import java.util.List;
 import org.eclipse.emf.common.util.EList;
@@ -13,7 +14,6 @@ import org.eclipse.xtext.xbase.formatting.IBasicFormatter;
 import org.eclipse.xtext.xbase.formatting.TextReplacement;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
-import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 
 @SuppressWarnings("all")
 public abstract class AbstractFormatter implements IBasicFormatter {
@@ -83,7 +83,7 @@ public abstract class AbstractFormatter implements IBasicFormatter {
               int _plus = (_offset_1 + _length);
               String _substring = doc.substring(_offset, _plus);
               String _text = it.getText();
-              boolean _notEquals = ObjectExtensions.operator_notEquals(_substring, _text);
+              boolean _notEquals = (!Objects.equal(_substring, _text));
               return Boolean.valueOf(_notEquals);
             }
           };

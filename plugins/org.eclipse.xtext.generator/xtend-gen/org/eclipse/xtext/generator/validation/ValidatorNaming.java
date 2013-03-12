@@ -7,6 +7,7 @@
  */
 package org.eclipse.xtext.generator.validation;
 
+import com.google.common.base.Objects;
 import com.google.inject.Inject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.xtend2.lib.StringConcatenation;
@@ -14,7 +15,6 @@ import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.generator.IInheriting.Util;
 import org.eclipse.xtext.generator.Naming;
-import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.StringExtensions;
 
 /**
@@ -59,7 +59,7 @@ public class ValidatorNaming extends Naming {
       if (!isInheritImplementation) {
         _and = false;
       } else {
-        boolean _notEquals = ObjectExtensions.operator_notEquals(superGrammar, null);
+        boolean _notEquals = (!Objects.equal(superGrammar, null));
         _and = (isInheritImplementation && _notEquals);
       }
       if (_and) {

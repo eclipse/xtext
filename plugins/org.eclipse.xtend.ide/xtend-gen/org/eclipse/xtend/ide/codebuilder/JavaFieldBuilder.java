@@ -7,6 +7,7 @@
  */
 package org.eclipse.xtend.ide.codebuilder;
 
+import com.google.common.base.Objects;
 import javax.inject.Inject;
 import org.eclipse.jdt.core.IType;
 import org.eclipse.xtend.ide.codebuilder.AbstractFieldBuilder;
@@ -15,7 +16,6 @@ import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.JvmVisibility;
 import org.eclipse.xtext.xbase.compiler.IAppendable;
 import org.eclipse.xtext.xbase.compiler.TypeReferenceSerializer;
-import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 
 @SuppressWarnings("all")
 public class JavaFieldBuilder extends AbstractFieldBuilder implements Java {
@@ -30,14 +30,14 @@ public class JavaFieldBuilder extends AbstractFieldBuilder implements Java {
       _and_1 = false;
     } else {
       String _fieldName = this.getFieldName();
-      boolean _notEquals = ObjectExtensions.operator_notEquals(_fieldName, null);
+      boolean _notEquals = (!Objects.equal(_fieldName, null));
       _and_1 = (_isValid && _notEquals);
     }
     if (!_and_1) {
       _and = false;
     } else {
       JvmTypeReference _fieldType = this.getFieldType();
-      boolean _notEquals_1 = ObjectExtensions.operator_notEquals(_fieldType, null);
+      boolean _notEquals_1 = (!Objects.equal(_fieldType, null));
       _and = (_and_1 && _notEquals_1);
     }
     return _and;

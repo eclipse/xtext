@@ -7,6 +7,7 @@
  */
 package org.eclipse.xtend.core.macro.declaration;
 
+import com.google.common.base.Objects;
 import com.google.common.collect.Iterables;
 import java.util.List;
 import org.eclipse.emf.common.util.EList;
@@ -33,7 +34,6 @@ import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ListExtensions;
-import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 
 @SuppressWarnings("all")
 public abstract class XtendTypeDeclarationImpl<T extends XtendTypeDeclaration> extends XtendMemberDeclarationImpl<T> implements TypeDeclaration {
@@ -52,7 +52,7 @@ public abstract class XtendTypeDeclarationImpl<T extends XtendTypeDeclaration> e
   public String getName() {
     String _xifexpression = null;
     String _packageName = this.getPackageName();
-    boolean _notEquals = ObjectExtensions.operator_notEquals(_packageName, null);
+    boolean _notEquals = (!Objects.equal(_packageName, null));
     if (_notEquals) {
       String _packageName_1 = this.getPackageName();
       String _plus = (_packageName_1 + ".");
@@ -87,7 +87,7 @@ public abstract class XtendTypeDeclarationImpl<T extends XtendTypeDeclaration> e
   }
   
   public boolean isAssignableFrom(final Type otherType) {
-    boolean _equals = ObjectExtensions.operator_equals(otherType, null);
+    boolean _equals = Objects.equal(otherType, null);
     if (_equals) {
       return false;
     }
@@ -114,7 +114,7 @@ public abstract class XtendTypeDeclarationImpl<T extends XtendTypeDeclaration> e
           List<TypeReference> _map = ListExtensions.map(_parameters, _function);
           List<TypeReference> _list = IterableExtensions.<TypeReference>toList(_map);
           List<TypeReference> _list_1 = IterableExtensions.<TypeReference>toList(((Iterable<TypeReference>)Conversions.doWrapArray(parameterTypes)));
-          boolean _equals = ObjectExtensions.operator_equals(_list, _list_1);
+          boolean _equals = Objects.equal(_list, _list_1);
           return Boolean.valueOf(_equals);
         }
       };
@@ -127,7 +127,7 @@ public abstract class XtendTypeDeclarationImpl<T extends XtendTypeDeclaration> e
     final Function1<FieldDeclaration,Boolean> _function = new Function1<FieldDeclaration,Boolean>() {
         public Boolean apply(final FieldDeclaration field) {
           String _name = field.getName();
-          boolean _equals = ObjectExtensions.operator_equals(_name, name);
+          boolean _equals = Objects.equal(_name, name);
           return Boolean.valueOf(_equals);
         }
       };
@@ -141,7 +141,7 @@ public abstract class XtendTypeDeclarationImpl<T extends XtendTypeDeclaration> e
         public Boolean apply(final MethodDeclaration method) {
           boolean _and = false;
           String _name = method.getName();
-          boolean _equals = ObjectExtensions.operator_equals(_name, name);
+          boolean _equals = Objects.equal(_name, name);
           if (!_equals) {
             _and = false;
           } else {
@@ -155,7 +155,7 @@ public abstract class XtendTypeDeclarationImpl<T extends XtendTypeDeclaration> e
             List<TypeReference> _map = ListExtensions.map(_parameters, _function);
             List<TypeReference> _list = IterableExtensions.<TypeReference>toList(_map);
             List<TypeReference> _list_1 = IterableExtensions.<TypeReference>toList(((Iterable<TypeReference>)Conversions.doWrapArray(parameterTypes)));
-            boolean _equals_1 = ObjectExtensions.operator_equals(_list, _list_1);
+            boolean _equals_1 = Objects.equal(_list, _list_1);
             _and = (_equals && _equals_1);
           }
           return Boolean.valueOf(_and);

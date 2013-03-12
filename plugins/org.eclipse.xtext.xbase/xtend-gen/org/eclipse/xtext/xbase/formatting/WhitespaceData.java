@@ -1,8 +1,8 @@
 package org.eclipse.xtext.xbase.formatting;
 
+import com.google.common.base.Objects;
 import org.eclipse.xtend.lib.Data;
 import org.eclipse.xtext.xbase.formatting.FormattingData;
-import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.util.ToStringHelper;
 
 @Data
@@ -16,7 +16,7 @@ public class WhitespaceData extends FormattingData {
   
   public boolean isEmpty() {
     String _space = this.getSpace();
-    boolean _equals = ObjectExtensions.operator_equals(_space, null);
+    boolean _equals = Objects.equal(_space, null);
     return _equals;
   }
   

@@ -996,11 +996,11 @@ public class XtendCompilerTest extends AbstractXtendCompilerTest {
     _builder.append("}");
     _builder.newLine();
     StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("import com.google.common.base.Objects;");
+    _builder_1.newLine();
     _builder_1.append("import com.google.common.collect.AbstractIterator;");
     _builder_1.newLine();
     _builder_1.append("import java.util.Iterator;");
-    _builder_1.newLine();
-    _builder_1.append("import org.eclipse.xtext.xbase.lib.ObjectExtensions;");
     _builder_1.newLine();
     _builder_1.newLine();
     _builder_1.append("@SuppressWarnings(\"all\")");
@@ -1035,7 +1035,7 @@ public class XtendCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("final T elem = iter.next();");
     _builder_1.newLine();
     _builder_1.append("              ");
-    _builder_1.append("boolean _notEquals = ObjectExtensions.operator_notEquals(elem, null);");
+    _builder_1.append("boolean _notEquals = (!Objects.equal(elem, null));");
     _builder_1.newLine();
     _builder_1.append("              ");
     _builder_1.append("if (_notEquals) {");
@@ -1194,7 +1194,7 @@ public class XtendCompilerTest extends AbstractXtendCompilerTest {
     _builder.append("val AbstractIterator<T> result = [|");
     _builder.newLine();
     _builder.append("\t\t\t");
-    _builder.append("iter.findFirst [ it != null ] ?: self.endOfData");
+    _builder.append("iter.findFirst [ it !== null ] ?: self.endOfData");
     _builder.newLine();
     _builder.append("\t\t");
     _builder.append("]");
@@ -1245,10 +1245,10 @@ public class XtendCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("public Boolean apply(final T it) {");
     _builder_1.newLine();
     _builder_1.append("                ");
-    _builder_1.append("boolean _notEquals = ObjectExtensions.operator_notEquals(it, null);");
+    _builder_1.append("boolean _tripleNotEquals = (it != null);");
     _builder_1.newLine();
     _builder_1.append("                ");
-    _builder_1.append("return Boolean.valueOf(_notEquals);");
+    _builder_1.append("return Boolean.valueOf(_tripleNotEquals);");
     _builder_1.newLine();
     _builder_1.append("              ");
     _builder_1.append("}");
@@ -1331,6 +1331,8 @@ public class XtendCompilerTest extends AbstractXtendCompilerTest {
     _builder.append("}");
     _builder.newLine();
     StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("import com.google.common.base.Objects;");
+    _builder_1.newLine();
     _builder_1.append("import com.google.common.collect.AbstractIterator;");
     _builder_1.newLine();
     _builder_1.append("import java.util.Iterator;");
@@ -1368,7 +1370,7 @@ public class XtendCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("public Boolean apply(final T it) {");
     _builder_1.newLine();
     _builder_1.append("                ");
-    _builder_1.append("boolean _notEquals = ObjectExtensions.operator_notEquals(it, null);");
+    _builder_1.append("boolean _notEquals = (!Objects.equal(it, null));");
     _builder_1.newLine();
     _builder_1.append("                ");
     _builder_1.append("return Boolean.valueOf(_notEquals);");
@@ -4177,7 +4179,7 @@ public class XtendCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("package x;");
     _builder_1.newLine();
     _builder_1.newLine();
-    _builder_1.append("import org.eclipse.xtext.xbase.lib.ObjectExtensions;");
+    _builder_1.append("import com.google.common.base.Objects;");
     _builder_1.newLine();
     _builder_1.newLine();
     _builder_1.append("@SuppressWarnings(\"all\")");
@@ -4191,7 +4193,7 @@ public class XtendCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("boolean _xifexpression = false;");
     _builder_1.newLine();
     _builder_1.append("    ");
-    _builder_1.append("boolean _equals = ObjectExtensions.operator_equals(\"foo\", p);");
+    _builder_1.append("boolean _equals = Objects.equal(\"foo\", p);");
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("if (_equals) {");
@@ -5728,7 +5730,7 @@ public class XtendCompilerTest extends AbstractXtendCompilerTest {
     _builder.append("def <T> useExtension(Iterable<T> it) {");
     _builder.newLine();
     _builder.append("\t\t");
-    _builder.append("findFirst [ it != null ]");
+    _builder.append("findFirst [ it !== null ]");
     _builder.newLine();
     _builder.append("\t");
     _builder.append("}");
@@ -5739,8 +5741,6 @@ public class XtendCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("import org.eclipse.xtext.xbase.lib.Functions.Function1;");
     _builder_1.newLine();
     _builder_1.append("import org.eclipse.xtext.xbase.lib.IterableExtensions;");
-    _builder_1.newLine();
-    _builder_1.append("import org.eclipse.xtext.xbase.lib.ObjectExtensions;");
     _builder_1.newLine();
     _builder_1.newLine();
     _builder_1.append("@SuppressWarnings(\"all\")");
@@ -5757,10 +5757,10 @@ public class XtendCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("public Boolean apply(final T it) {");
     _builder_1.newLine();
     _builder_1.append("          ");
-    _builder_1.append("boolean _notEquals = ObjectExtensions.operator_notEquals(it, null);");
+    _builder_1.append("boolean _tripleNotEquals = (it != null);");
     _builder_1.newLine();
     _builder_1.append("          ");
-    _builder_1.append("return Boolean.valueOf(_notEquals);");
+    _builder_1.append("return Boolean.valueOf(_tripleNotEquals);");
     _builder_1.newLine();
     _builder_1.append("        ");
     _builder_1.append("}");

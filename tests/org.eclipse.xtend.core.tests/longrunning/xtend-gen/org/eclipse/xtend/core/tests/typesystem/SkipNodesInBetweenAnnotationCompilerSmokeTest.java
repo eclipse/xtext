@@ -7,6 +7,7 @@
  */
 package org.eclipse.xtend.core.tests.typesystem;
 
+import com.google.common.base.Objects;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
@@ -22,7 +23,6 @@ import org.eclipse.xtext.resource.XtextResourceSet;
 import org.eclipse.xtext.util.ReplaceRegion;
 import org.eclipse.xtext.util.StringInputStream;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
-import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -44,7 +44,7 @@ public class SkipNodesInBetweenAnnotationCompilerSmokeTest extends AbstractAnnot
   public void assertNonSmoking(final CharSequence input) throws Exception {
     final String string = input.toString();
     final XtendFile file = this.file(string, false);
-    boolean _notEquals = ObjectExtensions.operator_notEquals(file, null);
+    boolean _notEquals = (!Objects.equal(file, null));
     if (_notEquals) {
       Resource _eResource = file.eResource();
       final XtextResource resource = ((XtextResource) _eResource);
@@ -60,7 +60,7 @@ public class SkipNodesInBetweenAnnotationCompilerSmokeTest extends AbstractAnnot
           if (_notEquals_1) {
             boolean _or = false;
             boolean _or_1 = false;
-            boolean _equals = ObjectExtensions.operator_equals(region, null);
+            boolean _equals = Objects.equal(region, null);
             if (_equals) {
               _or_1 = true;
             } else {

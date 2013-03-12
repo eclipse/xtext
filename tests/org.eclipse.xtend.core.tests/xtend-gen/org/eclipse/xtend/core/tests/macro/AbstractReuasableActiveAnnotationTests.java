@@ -1,5 +1,6 @@
 package org.eclipse.xtend.core.tests.macro;
 
+import com.google.common.base.Objects;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableList.Builder;
 import java.util.List;
@@ -23,7 +24,6 @@ import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Functions.Function0;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
-import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.Pair;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.junit.Assert;
@@ -331,7 +331,7 @@ public abstract class AbstractReuasableActiveAnnotationTests {
           TypeLookupImpl _typeLookup = it.getTypeLookup();
           MutableClassDeclaration _findClass = _typeLookup.findClass("myusercode.DoesNotExist");
           String _simpleName = _findClass.getSimpleName();
-          boolean _equals = ObjectExtensions.operator_equals(_simpleName, "DoesNotExist");
+          boolean _equals = Objects.equal(_simpleName, "DoesNotExist");
           Assert.assertTrue(_equals);
         }
       };

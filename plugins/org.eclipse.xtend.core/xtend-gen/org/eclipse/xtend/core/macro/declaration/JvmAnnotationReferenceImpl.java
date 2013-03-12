@@ -7,6 +7,7 @@
  */
 package org.eclipse.xtend.core.macro.declaration;
 
+import com.google.common.base.Objects;
 import java.util.Collection;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.xtend.core.macro.declaration.AbstractDeclarationImpl;
@@ -28,7 +29,6 @@ import org.eclipse.xtext.xbase.lib.CollectionExtensions;
 import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
-import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 
 @SuppressWarnings("all")
 public class JvmAnnotationReferenceImpl extends AbstractDeclarationImpl<JvmAnnotationReference> implements MutableAnnotationReference {
@@ -51,17 +51,17 @@ public class JvmAnnotationReferenceImpl extends AbstractDeclarationImpl<JvmAnnot
         public Boolean apply(final JvmAnnotationValue it) {
           boolean _or = false;
           String _valueName = it.getValueName();
-          boolean _equals = ObjectExtensions.operator_equals(_valueName, property);
+          boolean _equals = Objects.equal(_valueName, property);
           if (_equals) {
             _or = true;
           } else {
             boolean _and = false;
             String _valueName_1 = it.getValueName();
-            boolean _equals_1 = ObjectExtensions.operator_equals(_valueName_1, null);
+            boolean _equals_1 = Objects.equal(_valueName_1, null);
             if (!_equals_1) {
               _and = false;
             } else {
-              boolean _equals_2 = ObjectExtensions.operator_equals(property, "value");
+              boolean _equals_2 = Objects.equal(property, "value");
               _and = (_equals_1 && _equals_2);
             }
             _or = (_equals || _and);
@@ -76,7 +76,7 @@ public class JvmAnnotationReferenceImpl extends AbstractDeclarationImpl<JvmAnnot
   
   public void set(final String name, final String... values) {
     final JvmStringAnnotationValue newValue = TypesFactory.eINSTANCE.createJvmStringAnnotationValue();
-    boolean _notEquals = ObjectExtensions.operator_notEquals(name, null);
+    boolean _notEquals = (!Objects.equal(name, null));
     if (_notEquals) {
       JvmOperation _findOperation = this.findOperation(name);
       newValue.setOperation(_findOperation);
@@ -90,7 +90,7 @@ public class JvmAnnotationReferenceImpl extends AbstractDeclarationImpl<JvmAnnot
   
   public void set(final String name, final boolean... values) {
     final JvmBooleanAnnotationValue newValue = TypesFactory.eINSTANCE.createJvmBooleanAnnotationValue();
-    boolean _notEquals = ObjectExtensions.operator_notEquals(name, null);
+    boolean _notEquals = (!Objects.equal(name, null));
     if (_notEquals) {
       JvmOperation _findOperation = this.findOperation(name);
       newValue.setOperation(_findOperation);
@@ -104,7 +104,7 @@ public class JvmAnnotationReferenceImpl extends AbstractDeclarationImpl<JvmAnnot
   
   public void set(final String name, final int... values) {
     final JvmIntAnnotationValue newValue = TypesFactory.eINSTANCE.createJvmIntAnnotationValue();
-    boolean _notEquals = ObjectExtensions.operator_notEquals(name, null);
+    boolean _notEquals = (!Objects.equal(name, null));
     if (_notEquals) {
       JvmOperation _findOperation = this.findOperation(name);
       newValue.setOperation(_findOperation);
@@ -123,12 +123,12 @@ public class JvmAnnotationReferenceImpl extends AbstractDeclarationImpl<JvmAnnot
         public Boolean apply(final JvmAnnotationValue it) {
           JvmOperation _operation = it.getOperation();
           String _simpleName = _operation.getSimpleName();
-          boolean _equals = ObjectExtensions.operator_equals(_simpleName, name);
+          boolean _equals = Objects.equal(_simpleName, name);
           return Boolean.valueOf(_equals);
         }
       };
     final JvmAnnotationValue found = IterableExtensions.<JvmAnnotationValue>findFirst(_values, _function);
-    boolean _notEquals = ObjectExtensions.operator_notEquals(found, null);
+    boolean _notEquals = (!Objects.equal(found, null));
     if (_notEquals) {
       JvmAnnotationReference _delegate_1 = this.getDelegate();
       EList<JvmAnnotationValue> _values_1 = _delegate_1.getValues();
@@ -145,12 +145,12 @@ public class JvmAnnotationReferenceImpl extends AbstractDeclarationImpl<JvmAnnot
     final Function1<JvmOperation,Boolean> _function = new Function1<JvmOperation,Boolean>() {
         public Boolean apply(final JvmOperation it) {
           String _simpleName = it.getSimpleName();
-          boolean _equals = ObjectExtensions.operator_equals(_simpleName, name);
+          boolean _equals = Objects.equal(_simpleName, name);
           return Boolean.valueOf(_equals);
         }
       };
     final JvmOperation jvmOperation = IterableExtensions.<JvmOperation>findFirst(_declaredOperations, _function);
-    boolean _equals = ObjectExtensions.operator_equals(jvmOperation, null);
+    boolean _equals = Objects.equal(jvmOperation, null);
     if (_equals) {
       String _plus = ("The annotation property \'" + name);
       String _plus_1 = (_plus + "\' is not declared on the annotation type \'");

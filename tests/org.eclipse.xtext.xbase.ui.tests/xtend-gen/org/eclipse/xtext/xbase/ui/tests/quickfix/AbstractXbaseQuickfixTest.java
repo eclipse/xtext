@@ -1,5 +1,6 @@
 package org.eclipse.xtext.xbase.ui.tests.quickfix;
 
+import com.google.common.base.Objects;
 import com.google.inject.Guice;
 import com.google.inject.Injector;
 import com.google.inject.Module;
@@ -19,7 +20,6 @@ import org.eclipse.xtext.util.Modules2;
 import org.eclipse.xtext.xbase.XbaseRuntimeModule;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Functions.Function0;
-import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.ui.internal.XtypeActivator;
 import org.eclipse.xtext.xbase.ui.tests.AbstractXbaseUITestCase;
 import org.eclipse.xtext.xbase.ui.tests.quickfix.TestQuickfixXbaseUIModule;
@@ -42,7 +42,7 @@ public abstract class AbstractXbaseQuickfixTest extends AbstractXbaseUITestCase 
   }.apply();
   
   public void tearDown() throws Exception {
-    boolean _notEquals = ObjectExtensions.operator_notEquals(this.demandCreateProject, null);
+    boolean _notEquals = (!Objects.equal(this.demandCreateProject, null));
     if (_notEquals) {
       JavaProjectSetupUtil.deleteProject(this.demandCreateProject);
     }
@@ -53,7 +53,7 @@ public abstract class AbstractXbaseQuickfixTest extends AbstractXbaseUITestCase 
     final String projectName = this.getProjectName();
     IJavaProject javaProject = JavaProjectSetupUtil.findJavaProject(projectName);
     boolean _or = false;
-    boolean _equals = ObjectExtensions.operator_equals(javaProject, null);
+    boolean _equals = Objects.equal(javaProject, null);
     if (_equals) {
       _or = true;
     } else {

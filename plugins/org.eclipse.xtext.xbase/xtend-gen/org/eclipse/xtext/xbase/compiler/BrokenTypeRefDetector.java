@@ -7,6 +7,7 @@
  */
 package org.eclipse.xtext.xbase.compiler;
 
+import com.google.common.base.Objects;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.xtext.common.types.JvmCompoundTypeReference;
 import org.eclipse.xtext.common.types.JvmParameterizedTypeReference;
@@ -17,14 +18,13 @@ import org.eclipse.xtext.common.types.JvmWildcardTypeReference;
 import org.eclipse.xtext.common.types.util.AbstractTypeReferenceVisitor.InheritanceAware;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
-import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 
 @SuppressWarnings("all")
 public class BrokenTypeRefDetector extends InheritanceAware<Boolean> {
   public Boolean doVisitTypeReference(final JvmTypeReference it) {
     boolean _or = false;
     JvmType _type = it.getType();
-    boolean _equals = ObjectExtensions.operator_equals(_type, null);
+    boolean _equals = Objects.equal(_type, null);
     if (_equals) {
       _or = true;
     } else {

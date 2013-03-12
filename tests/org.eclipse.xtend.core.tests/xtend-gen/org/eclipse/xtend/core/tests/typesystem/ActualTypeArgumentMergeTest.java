@@ -7,6 +7,7 @@
  */
 package org.eclipse.xtend.core.tests.typesystem;
 
+import com.google.common.base.Objects;
 import com.google.inject.Inject;
 import java.util.List;
 import java.util.Map;
@@ -27,7 +28,6 @@ import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IntegerRange;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
-import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.Pair;
 import org.eclipse.xtext.xbase.lib.StringExtensions;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightBoundTypeArgument;
@@ -107,7 +107,7 @@ public class ActualTypeArgumentMergeTest extends AbstractTestingTypeReferenceOwn
     final Set<JvmTypeParameter> allKeys = mapping.keySet();
     for (final JvmTypeParameter key : allKeys) {
       String _simpleName = key.getSimpleName();
-      boolean _equals = ObjectExtensions.operator_equals(_simpleName, typeParamName);
+      boolean _equals = Objects.equal(_simpleName, typeParamName);
       if (_equals) {
         final List<LightweightBoundTypeArgument> mappingData = mapping.get(key);
         LightweightMergedBoundTypeArgument _merge = this.merger.merge(mappingData, this);
@@ -135,7 +135,7 @@ public class ActualTypeArgumentMergeTest extends AbstractTestingTypeReferenceOwn
   public Map<JvmTypeParameter,List<LightweightBoundTypeArgument>> to(final Pair<Map<JvmTypeParameter,List<LightweightBoundTypeArgument>>,LightweightMergedBoundTypeArgument> merged, final String type, final VarianceInfo variance) {
     Map<JvmTypeParameter,List<LightweightBoundTypeArgument>> _xblockexpression = null;
     {
-      boolean _equals = ObjectExtensions.operator_equals(type, null);
+      boolean _equals = Objects.equal(type, null);
       if (_equals) {
         LightweightMergedBoundTypeArgument _value = merged.getValue();
         Assert.assertNull(_value);

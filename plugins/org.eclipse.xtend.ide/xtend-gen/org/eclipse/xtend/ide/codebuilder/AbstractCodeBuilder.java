@@ -31,7 +31,6 @@ import org.eclipse.xtext.xbase.compiler.StringBuilderBasedAppendable;
 import org.eclipse.xtext.xbase.compiler.TypeReferenceSerializer;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Extension;
-import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 
 /**
  * @author Jan Koehnlein
@@ -94,7 +93,7 @@ public abstract class AbstractCodeBuilder implements ICodeBuilder {
     boolean _and_1 = false;
     boolean _and_2 = false;
     boolean _or = false;
-    boolean _equals = ObjectExtensions.operator_equals(javaElement, null);
+    boolean _equals = Objects.equal(javaElement, null);
     if (_equals) {
       _or = true;
     } else {
@@ -106,21 +105,21 @@ public abstract class AbstractCodeBuilder implements ICodeBuilder {
       _and_2 = false;
     } else {
       Object _ownerSource = this.getOwnerSource();
-      boolean _notEquals = ObjectExtensions.operator_notEquals(_ownerSource, null);
+      boolean _notEquals = (!Objects.equal(_ownerSource, null));
       _and_2 = (_or && _notEquals);
     }
     if (!_and_2) {
       _and_1 = false;
     } else {
       JvmDeclaredType _owner_1 = this.getOwner();
-      boolean _notEquals_1 = ObjectExtensions.operator_notEquals(_owner_1, null);
+      boolean _notEquals_1 = (!Objects.equal(_owner_1, null));
       _and_1 = (_and_2 && _notEquals_1);
     }
     if (!_and_1) {
       _and = false;
     } else {
       EObject _context = this.getContext();
-      boolean _notEquals_2 = ObjectExtensions.operator_notEquals(_context, null);
+      boolean _notEquals_2 = (!Objects.equal(_context, null));
       _and = (_and_1 && _notEquals_2);
     }
     return _and;
@@ -179,7 +178,7 @@ public abstract class AbstractCodeBuilder implements ICodeBuilder {
   protected IAppendable appendType(final IAppendable appendable, final JvmTypeReference typeRef, final String surrogate) {
     IAppendable _xblockexpression = null;
     {
-      boolean _equals = ObjectExtensions.operator_equals(typeRef, null);
+      boolean _equals = Objects.equal(typeRef, null);
       if (_equals) {
         appendable.append(surrogate);
       } else {
@@ -205,7 +204,7 @@ public abstract class AbstractCodeBuilder implements ICodeBuilder {
       while (_while) {
         {
           final JvmTypeReference typeRef = iterator.next();
-          boolean _notEquals = ObjectExtensions.operator_notEquals(typeRef, null);
+          boolean _notEquals = (!Objects.equal(typeRef, null));
           if (_notEquals) {
             this.appendType(appendable, typeRef, "Object");
             appendable.append(" ");

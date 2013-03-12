@@ -7,6 +7,7 @@
  */
 package org.eclipse.xtext.xbase.compiler;
 
+import com.google.common.base.Objects;
 import javax.inject.Inject;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
@@ -54,7 +55,7 @@ public class ErrorSafeExtensions {
       final Function1<Issue,Boolean> _function = new Function1<Issue,Boolean>() {
           public Boolean apply(final Issue it) {
             Severity _severity = it.getSeverity();
-            boolean _equals = ObjectExtensions.operator_equals(_severity, Severity.ERROR);
+            boolean _equals = Objects.equal(_severity, Severity.ERROR);
             return Boolean.valueOf(_equals);
           }
         };
@@ -73,7 +74,7 @@ public class ErrorSafeExtensions {
       final Function1<Issue,Boolean> _function = new Function1<Issue,Boolean>() {
           public Boolean apply(final Issue it) {
             Severity _severity = it.getSeverity();
-            boolean _equals = ObjectExtensions.operator_equals(_severity, Severity.ERROR);
+            boolean _equals = Objects.equal(_severity, Severity.ERROR);
             return Boolean.valueOf(_equals);
           }
         };
@@ -185,7 +186,7 @@ public class ErrorSafeExtensions {
       if (!(child instanceof ErrorTreeAppendable)) {
         _and = false;
       } else {
-        boolean _notEquals = ObjectExtensions.operator_notEquals(child, parent);
+        boolean _notEquals = (!Objects.equal(child, parent));
         _and = ((child instanceof ErrorTreeAppendable) && _notEquals);
       }
       if (_and) {
@@ -202,12 +203,12 @@ public class ErrorSafeExtensions {
   
   public void serializeSafely(final JvmTypeReference typeRef, final String surrogateType, final ITreeAppendable appendable) {
     boolean _or = false;
-    boolean _equals = ObjectExtensions.operator_equals(typeRef, null);
+    boolean _equals = Objects.equal(typeRef, null);
     if (_equals) {
       _or = true;
     } else {
       JvmType _type = typeRef.getType();
-      boolean _equals_1 = ObjectExtensions.operator_equals(_type, null);
+      boolean _equals_1 = Objects.equal(_type, null);
       _or = (_equals || _equals_1);
     }
     if (_or) {
@@ -252,7 +253,7 @@ public class ErrorSafeExtensions {
           }
         }
         this.closeErrorAppendable(appendable, errorChild);
-        boolean _notEquals = ObjectExtensions.operator_notEquals(surrogateType, null);
+        boolean _notEquals = (!Objects.equal(surrogateType, null));
         if (_notEquals) {
           appendable.append(surrogateType);
         }
@@ -265,12 +266,12 @@ public class ErrorSafeExtensions {
   
   public void serializeSafely(final JvmAnnotationReference annotationRef, final ITreeAppendable appendable, final Procedure1<? super ITreeAppendable> onSuccess) {
     boolean _or = false;
-    boolean _equals = ObjectExtensions.operator_equals(annotationRef, null);
+    boolean _equals = Objects.equal(annotationRef, null);
     if (_equals) {
       _or = true;
     } else {
       JvmAnnotationType _annotation = annotationRef.getAnnotation();
-      boolean _equals_1 = ObjectExtensions.operator_equals(_annotation, null);
+      boolean _equals_1 = Objects.equal(_annotation, null);
       _or = (_equals || _equals_1);
     }
     if (_or) {

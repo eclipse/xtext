@@ -1,5 +1,6 @@
 package org.eclipse.xtext.example.domainmodel.tests;
 
+import com.google.common.base.Objects;
 import com.google.inject.Inject;
 import java.util.List;
 import org.eclipse.emf.ecore.resource.Resource;
@@ -17,7 +18,6 @@ import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ListExtensions;
-import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.junit.Assert;
 import org.junit.Ignore;
 import org.junit.Test;
@@ -56,7 +56,7 @@ public class OrganizeImportsTest {
       for (final ReplaceRegion it : sortedChanges) {
         {
           boolean _and = false;
-          boolean _notEquals = ObjectExtensions.operator_notEquals(lastChange, null);
+          boolean _notEquals = (!Objects.equal(lastChange, null));
           if (!_notEquals) {
             _and = false;
           } else {

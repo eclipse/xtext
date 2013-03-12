@@ -1,7 +1,7 @@
 package org.eclipse.xtend.core.tests.macro;
 
+import com.google.common.base.Objects;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
-import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 
 @SuppressWarnings("all")
 public class DelegatingClassloader extends ClassLoader {
@@ -16,7 +16,7 @@ public class DelegatingClassloader extends ClassLoader {
     Class<? extends Object> _xblockexpression = null;
     {
       final Class<? extends Object> result = this.classFinder.apply(name);
-      boolean _notEquals = ObjectExtensions.operator_notEquals(result, null);
+      boolean _notEquals = (!Objects.equal(result, null));
       if (_notEquals) {
         return result;
       }

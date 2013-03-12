@@ -3,6 +3,7 @@
  */
 package org.eclipse.xtext.example.arithmetics.validation;
 
+import com.google.common.base.Objects;
 import com.google.inject.Inject;
 import java.math.BigDecimal;
 import org.eclipse.emf.common.util.TreeIterator;
@@ -18,7 +19,6 @@ import org.eclipse.xtext.example.arithmetics.interpreter.Calculator;
 import org.eclipse.xtext.example.arithmetics.validation.AbstractArithmeticsValidator;
 import org.eclipse.xtext.validation.Check;
 import org.eclipse.xtext.validation.ValidationMessageAcceptor;
-import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 
 /**
  * Custom validation rules.
@@ -55,7 +55,7 @@ public class ArithmeticsValidator extends AbstractArithmeticsValidator {
       return;
     }
     Evaluation _containerOfType = EcoreUtil2.<Evaluation>getContainerOfType(expr, Evaluation.class);
-    boolean _notEquals = ObjectExtensions.operator_notEquals(_containerOfType, null);
+    boolean _notEquals = (!Objects.equal(_containerOfType, null));
     if (_notEquals) {
       return;
     }

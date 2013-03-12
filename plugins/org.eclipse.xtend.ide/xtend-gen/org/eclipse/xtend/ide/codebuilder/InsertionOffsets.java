@@ -7,6 +7,7 @@
  */
 package org.eclipse.xtend.ide.codebuilder;
 
+import com.google.common.base.Objects;
 import com.google.common.collect.Iterables;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
@@ -22,7 +23,6 @@ import org.eclipse.xtext.nodemodel.ILeafNode;
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
-import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 
 /**
  * Calculates where to insert new members into exisitng Xtend code.
@@ -46,7 +46,7 @@ public class InsertionOffsets {
     EList<XtendMember> _members_1 = ownerType.getMembers();
     Iterable<XtendField> _filter = Iterables.<XtendField>filter(_members_1, XtendField.class);
     final XtendField lastDefinedField = IterableExtensions.<XtendField>last(_filter);
-    boolean _equals = ObjectExtensions.operator_equals(lastDefinedField, null);
+    boolean _equals = Objects.equal(lastDefinedField, null);
     if (_equals) {
       EList<XtendMember> _members_2 = ownerType.getMembers();
       XtendMember _head = IterableExtensions.<XtendMember>head(_members_2);
@@ -59,7 +59,7 @@ public class InsertionOffsets {
   public int getNewMethodInsertOffset(@Nullable final EObject call, final XtendTypeDeclaration ownerType) {
     final XtendMember callingMember = EcoreUtil2.<XtendMember>getContainerOfType(call, XtendMember.class);
     boolean _and = false;
-    boolean _notEquals = ObjectExtensions.operator_notEquals(callingMember, null);
+    boolean _notEquals = (!Objects.equal(callingMember, null));
     if (!_notEquals) {
       _and = false;
     } else {
@@ -86,7 +86,7 @@ public class InsertionOffsets {
     EList<XtendMember> _members = ownerType.getMembers();
     Iterable<XtendConstructor> _filter = Iterables.<XtendConstructor>filter(_members, XtendConstructor.class);
     final XtendConstructor lastDefinedConstructor = IterableExtensions.<XtendConstructor>last(_filter);
-    boolean _equals = ObjectExtensions.operator_equals(lastDefinedConstructor, null);
+    boolean _equals = Objects.equal(lastDefinedConstructor, null);
     if (_equals) {
       return this.getNewFieldInsertOffset(call, ownerType);
     } else {
@@ -120,13 +120,13 @@ public class InsertionOffsets {
       final Function1<ILeafNode,Boolean> _function = new Function1<ILeafNode,Boolean>() {
           public Boolean apply(final ILeafNode it) {
             String _text = it.getText();
-            boolean _equals = ObjectExtensions.operator_equals(_text, "{");
+            boolean _equals = Objects.equal(_text, "{");
             return Boolean.valueOf(_equals);
           }
         };
       final ILeafNode openingBraceNode = IterableExtensions.<ILeafNode>findFirst(_leafNodes, _function);
       int _xifexpression = (int) 0;
-      boolean _notEquals = ObjectExtensions.operator_notEquals(openingBraceNode, null);
+      boolean _notEquals = (!Objects.equal(openingBraceNode, null));
       if (_notEquals) {
         int _offset = openingBraceNode.getOffset();
         int _plus = (_offset + 1);

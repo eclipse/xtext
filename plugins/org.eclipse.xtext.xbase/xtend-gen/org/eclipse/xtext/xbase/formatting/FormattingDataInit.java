@@ -10,7 +10,7 @@ public class FormattingDataInit {
   public int newLines = 0;
   
   public int increaseIndentationChange = 0;
-
+  
   public int decreaseIndentationChange = 0;
   
   public PreferenceKey key = null;

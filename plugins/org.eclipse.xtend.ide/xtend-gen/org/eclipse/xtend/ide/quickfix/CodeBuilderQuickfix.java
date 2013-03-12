@@ -206,7 +206,7 @@ public class CodeBuilderQuickfix {
             _switchResult = null;
           }
           final Object element = _switchResult;
-          boolean _notEquals = ObjectExtensions.operator_notEquals(((IAnnotatable)element), null);
+          boolean _notEquals = (!Objects.equal(((IAnnotatable)element), null));
           if (_notEquals) {
             JdtHyperlink _jdtHyperlink = new JdtHyperlink();
             final Procedure1<JdtHyperlink> _function_1 = new Procedure1<JdtHyperlink>() {

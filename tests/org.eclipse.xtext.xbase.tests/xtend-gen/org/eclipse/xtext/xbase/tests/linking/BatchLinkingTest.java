@@ -7,6 +7,7 @@
  */
 package org.eclipse.xtext.xbase.tests.linking;
 
+import com.google.common.base.Objects;
 import com.google.inject.Inject;
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EObject;
@@ -18,7 +19,6 @@ import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XSwitchExpression;
 import org.eclipse.xtext.xbase.XbasePackage.Literals;
 import org.eclipse.xtext.xbase.lib.IteratorExtensions;
-import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.tests.linking.AbstractXbaseLinkingTest;
 import org.eclipse.xtext.xbase.typesystem.IBatchTypeResolver;
 import org.eclipse.xtext.xbase.typesystem.IResolvedTypes;
@@ -56,7 +56,7 @@ public class BatchLinkingTest extends AbstractXbaseLinkingTest {
           _matched=true;
           this.assertExpressionTypeIsResolved(_xSwitchExpression, resolvedTypes);
           String _localVarName = _xSwitchExpression.getLocalVarName();
-          boolean _notEquals = ObjectExtensions.operator_notEquals(_localVarName, null);
+          boolean _notEquals = (!Objects.equal(_localVarName, null));
           if (_notEquals) {
             this.assertIdentifiableTypeIsResolved(_xSwitchExpression, resolvedTypes);
           }
@@ -68,7 +68,7 @@ public class BatchLinkingTest extends AbstractXbaseLinkingTest {
           _matched=true;
           this.assertExpressionTypeIsResolved(_xAbstractFeatureCall, resolvedTypes);
           XExpression _implicitReceiver = _xAbstractFeatureCall.getImplicitReceiver();
-          boolean _notEquals = ObjectExtensions.operator_notEquals(_implicitReceiver, null);
+          boolean _notEquals = (!Objects.equal(_implicitReceiver, null));
           if (_notEquals) {
             XExpression _implicitReceiver_1 = _xAbstractFeatureCall.getImplicitReceiver();
             this.assertExpressionTypeIsResolved(_implicitReceiver_1, resolvedTypes);

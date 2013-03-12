@@ -1,5 +1,6 @@
 package org.eclipse.xtend.core.formatting;
 
+import com.google.common.base.Objects;
 import com.google.common.collect.Iterables;
 import java.util.List;
 import java.util.Stack;
@@ -21,7 +22,6 @@ import org.eclipse.xtext.xbase.lib.Functions.Function0;
 import org.eclipse.xtext.xbase.lib.Functions.Function2;
 import org.eclipse.xtext.xbase.lib.IntegerRange;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
-import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 
 @SuppressWarnings("all")
 public class RichStringToLineModel extends ForLoopOnce {
@@ -181,7 +181,7 @@ public class RichStringToLineModel extends ForLoopOnce {
       this.contentStartOffset = this.lastLiteralEndOffset;
     }
     final INode node = this.nodeModelAccess.nodeForFeature(object, Literals.XSTRING_LITERAL__VALUE);
-    boolean _notEquals = ObjectExtensions.operator_notEquals(node, null);
+    boolean _notEquals = (!Objects.equal(node, null));
     if (_notEquals) {
       int _offset = node.getOffset();
       int _literalPrefixLenght = this.literalPrefixLenght(node);

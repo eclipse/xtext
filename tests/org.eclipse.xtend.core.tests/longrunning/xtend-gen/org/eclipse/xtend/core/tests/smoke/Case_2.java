@@ -1,6 +1,6 @@
 package org.eclipse.xtend.core.tests.smoke;
 
-import org.eclipse.xtext.xbase.lib.ObjectExtensions;
+import com.google.common.base.Objects;
 import org.eclipse.xtext.xbase.lib.StringExtensions;
 
 @SuppressWarnings("all")
@@ -17,7 +17,7 @@ public class Case_2 {
   }
   
   public String returnInIf() {
-    boolean _notEquals = ObjectExtensions.operator_notEquals("x", "x");
+    boolean _notEquals = (!Objects.equal("x", "x"));
     if (_notEquals) {
       return "xx";
     } else {

@@ -283,7 +283,7 @@ public class CompilationUnitImpl implements CompilationUnit {
   
   private <IN extends EObject, OUT extends Object> OUT getOrCreate(final IN in, final Function1<? super IN,? extends OUT> provider) {
     this.checkCanceled();
-    boolean _equals = ObjectExtensions.operator_equals(in, null);
+    boolean _equals = Objects.equal(in, null);
     if (_equals) {
       return null;
     }
@@ -620,7 +620,7 @@ public class CompilationUnitImpl implements CompilationUnit {
   public TypeReference toTypeReference(final JvmTypeReference delegate) {
     TypeReference _xblockexpression = null;
     {
-      boolean _equals = ObjectExtensions.operator_equals(delegate, null);
+      boolean _equals = Objects.equal(delegate, null);
       if (_equals) {
         return null;
       }
@@ -641,7 +641,7 @@ public class CompilationUnitImpl implements CompilationUnit {
     TypeReferenceImpl _xblockexpression = null;
     {
       this.checkCanceled();
-      boolean _equals = ObjectExtensions.operator_equals(delegate, null);
+      boolean _equals = Objects.equal(delegate, null);
       if (_equals) {
         return null;
       }

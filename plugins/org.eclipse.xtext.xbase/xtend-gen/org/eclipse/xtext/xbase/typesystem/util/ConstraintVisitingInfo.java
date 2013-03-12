@@ -7,12 +7,12 @@
  */
 package org.eclipse.xtext.xbase.typesystem.util;
 
+import com.google.common.base.Objects;
 import java.util.HashSet;
 import java.util.Set;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.JvmTypeParameterDeclarator;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
-import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -50,7 +50,7 @@ public class ConstraintVisitingInfo {
   }
   
   public void pushInfo(final JvmTypeParameterDeclarator declarator, final int idx) {
-    boolean _equals = ObjectExtensions.operator_equals(declarator, null);
+    boolean _equals = Objects.equal(declarator, null);
     if (_equals) {
       NullPointerException _nullPointerException = new NullPointerException("declarator may not be null");
       throw _nullPointerException;

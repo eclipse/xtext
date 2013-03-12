@@ -1,5 +1,6 @@
 package org.eclipse.xtend.ide.codebuilder;
 
+import com.google.common.base.Objects;
 import com.google.inject.Inject;
 import org.eclipse.jdt.core.IType;
 import org.eclipse.xtend.ide.codebuilder.AbstractInterfaceBuilder;
@@ -7,7 +8,6 @@ import org.eclipse.xtend.ide.codebuilder.ICodeBuilder.Java;
 import org.eclipse.xtext.common.types.JvmVisibility;
 import org.eclipse.xtext.xbase.compiler.IAppendable;
 import org.eclipse.xtext.xbase.compiler.TypeReferenceSerializer;
-import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 
 @SuppressWarnings("all")
 public class JavaInterfaceBuilder extends AbstractInterfaceBuilder implements Java {
@@ -21,7 +21,7 @@ public class JavaInterfaceBuilder extends AbstractInterfaceBuilder implements Ja
       _and = false;
     } else {
       String _interfaceName = this.getInterfaceName();
-      boolean _notEquals = ObjectExtensions.operator_notEquals(_interfaceName, null);
+      boolean _notEquals = (!Objects.equal(_interfaceName, null));
       _and = (_isValid && _notEquals);
     }
     return _and;

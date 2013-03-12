@@ -105,7 +105,7 @@ public class HiddenLeafs {
     boolean _greaterThan = (_size > 0);
     return _greaterThan;
   }
-
+  
   public HiddenLeafs(final int offset) {
     super();
     this._offset = offset;

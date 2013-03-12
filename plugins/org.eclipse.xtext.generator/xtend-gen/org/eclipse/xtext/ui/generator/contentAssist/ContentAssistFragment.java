@@ -7,6 +7,7 @@
  */
 package org.eclipse.xtext.ui.generator.contentAssist;
 
+import com.google.common.base.Objects;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -32,7 +33,6 @@ import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
-import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 
 /**
  * @author Jan Koehnlein - Initial contribution and API
@@ -142,7 +142,7 @@ public class ContentAssistFragment extends Xtend2GeneratorFragment implements II
       if (!_isInheritImplementation) {
         _and = false;
       } else {
-        boolean _notEquals = ObjectExtensions.operator_notEquals(superGrammar, null);
+        boolean _notEquals = (!Objects.equal(superGrammar, null));
         _and = (_isInheritImplementation && _notEquals);
       }
       if (_and) {
