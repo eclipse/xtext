@@ -882,6 +882,42 @@ public abstract class AbstractXbaseEvaluationTest extends Assert {
 		assertEvaluatesTo(null, "if (false) return 'fail'");
 	}
 	
+	@Test public void testBug342021_01() throws Exception {
+		assertEvaluatesTo(Boolean.FALSE, 
+				"{\n" +
+				"  val Iterable<Object> branch = \n" + 
+				"  if (true) \n" + 
+				"    [|<Object>newArrayList().iterator]\n" + 
+				"  else\n" + 
+				"    newArrayList('a').toArray\n" +
+				"  branch.iterator.hasNext\n" +
+				"}");
+	}
+	
+	@Test public void testBug342021_02() throws Exception {
+		assertEvaluatesTo(Boolean.FALSE, 
+				"{\n" +
+				"  val Iterable<Object> branch = \n" + 
+				"  if (true) \n" + 
+				"    { [|<Object>newArrayList().iterator] }\n" + 
+				"  else\n" + 
+				"    { ''.toString { newArrayList('a').toArray } }\n" +
+				"  branch.iterator.hasNext\n" +
+				"}");
+	}
+	
+	@Test public void testBug342021_03() throws Exception {
+		assertEvaluatesTo(Boolean.TRUE, 
+				"{\n" +
+				"  val Iterable<Object> branch = \n" + 
+				"  switch '' as Object {\n" + 
+				"    Boolean: [|<Object>newArrayList().iterator]\n" + 
+				"    String: newArrayList('a').toArray\n" +
+				"  }\n" +
+				"  branch.iterator.hasNext\n" +
+				"}");
+	}
+	
 	@Test public void testIfExpression_withThrowExpression_00() throws Exception {
 		assertEvaluatesWithException(NullPointerException.class, "if (false) throw new NullPointerException() else throw new NullPointerException()");
 	}
