@@ -333,22 +333,22 @@ public class FeatureCallValidationTest extends AbstractXbaseTestCase {
 	
 	@Test public void testObjectEqualsNull_01() throws Exception {
 		XExpression expression = expression("{ val Object x = null x==null");
-		helper.assertWarning(expression, XBINARY_OPERATION, EQUALS_WITH_NULL, "'=='", "'==='");
+		helper.assertNoIssue(expression, XBINARY_OPERATION, EQUALS_WITH_NULL);
 	}
 	
 	@Test public void testObjectEqualsNull_02() throws Exception {
 		XExpression expression = expression("{ val Object x = null x!=null");
-		helper.assertWarning(expression, XBINARY_OPERATION, EQUALS_WITH_NULL, "'!='", "'!=='");
+		helper.assertNoIssue(expression, XBINARY_OPERATION, EQUALS_WITH_NULL);
 	}
 	
 	@Test public void testObjectEqualsNull_03() throws Exception {
 		XExpression expression = expression("{ val Object x = null x==null");
-		helper.assertWarning(expression, XBINARY_OPERATION, EQUALS_WITH_NULL, "'=='", "'==='");
+		helper.assertNoIssue(expression, XBINARY_OPERATION, EQUALS_WITH_NULL);
 	}
 	
 	@Test public void testObjectEqualsNull_04() throws Exception {
 		XExpression expression = expression("{ val Object x = null x!=null");
-		helper.assertWarning(expression, XBINARY_OPERATION, EQUALS_WITH_NULL, "'!='", "'!=='");
+		helper.assertNoIssue(expression, XBINARY_OPERATION, EQUALS_WITH_NULL);
 	}
 	
 	/**

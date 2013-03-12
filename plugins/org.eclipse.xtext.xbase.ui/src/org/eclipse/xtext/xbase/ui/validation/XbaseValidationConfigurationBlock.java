@@ -71,6 +71,7 @@ public class XbaseValidationConfigurationBlock extends AbstractValidatorConfigur
 
 	protected void fillPotentialProgrammingProblemsSection(ComboBoxBuilder comboBoxBuilder) {
 		comboBoxBuilder.addComboBox(IssueCodes.NULL_SAFE_FEATURE_CALL_OF_PRIMITIVE_VALUED_FEATURE, "Null safe call of primitive valued feature:");
+		comboBoxBuilder.addComboBox(IssueCodes.EQUALS_WITH_NULL, "Equals comparison with 'null':");
 		comboBoxBuilder.addComboBox(IssueCodes.UNHANDLED_EXCEPTION, "Unhandled checked exceptions:");
 	}
 
