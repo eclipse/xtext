@@ -1144,17 +1144,30 @@ public class XbaseJavaValidator extends AbstractXbaseJavaValidator {
 		String operatorSymbol = binaryOperation.getConcreteSyntaxFeatureName();
 		XExpression left = binaryOperation.getLeftOperand();
 		XExpression right = binaryOperation.getRightOperand();
-		if(expressionHelper.isOperatorFromExtension(binaryOperation, OperatorMapping.EQUALS, ObjectExtensions.class) 
+		boolean equalsComparison = expressionHelper.isOperatorFromExtension(binaryOperation, OperatorMapping.EQUALS, ObjectExtensions.class)
+				|| expressionHelper.isOperatorFromExtension(binaryOperation, OperatorMapping.NOT_EQUALS, ObjectExtensions.class);
+		if(equalsComparison
+				|| expressionHelper.isOperatorFromExtension(binaryOperation, OperatorMapping.TRIPLE_NOT_EQUALS, ObjectExtensions.class)
 				|| expressionHelper.isOperatorFromExtension(binaryOperation, OperatorMapping.TRIPLE_EQUALS, ObjectExtensions.class)) {
 			if(right instanceof XNullLiteral) {
 				LightweightTypeReference leftType = typeResolver.resolveTypes(left).getActualType(left);
-				if(leftType != null && leftType.isPrimitive()) 
-					error("The operator '" + operatorSymbol + "' is undefined for the argument types " + leftType.getSimpleName() + " and null", binaryOperation, null, PRIMITIVE_COMPARED_TO_NULL);
+				if(leftType != null) {
+					if (leftType.isPrimitive()) { 
+						error("The operator '" + operatorSymbol + "' is undefined for the argument types " + leftType.getSimpleName() + " and null", binaryOperation, null, PRIMITIVE_COMPARED_TO_NULL);
+					} else if (equalsComparison) {
+						warning("The operator '" + operatorSymbol + "' should be replaced by '" + operatorSymbol + "=' when null is one of the arguments.", binaryOperation, null, EQUALS_WITH_NULL);
+					}
+				}
 			}
 			if(left instanceof XNullLiteral) {
 				LightweightTypeReference rightType = typeResolver.resolveTypes(right).getActualType(right);
-				if(rightType != null && rightType.isPrimitive()) 
-					error("The operator '" + operatorSymbol + "' is undefined for the argument types null and " + rightType.getSimpleName(), binaryOperation, null, PRIMITIVE_COMPARED_TO_NULL);
+				if(rightType != null) {
+					if (rightType.isPrimitive()) { 
+						error("The operator '" + operatorSymbol + "' is undefined for the argument types null and " + rightType.getSimpleName(), binaryOperation, null, PRIMITIVE_COMPARED_TO_NULL);
+					} else if (equalsComparison && !(right instanceof XNullLiteral)) {
+						warning("The operator '" + operatorSymbol + "' should be replaced by '" + operatorSymbol + "=' when null is one of the arguments.", binaryOperation, null, PRIMITIVE_COMPARED_TO_NULL);
+					}
+				}
 			}
 		} else if(expressionHelper.isOperatorFromExtension(binaryOperation, OperatorMapping.ELVIS, ObjectExtensions.class)) {
 			LightweightTypeReference leftType = getActualType(left);
