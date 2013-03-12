@@ -1,5 +1,6 @@
 package org.eclipse.xtend.core.macro.declaration;
 
+import com.google.common.base.Objects;
 import com.google.common.collect.Iterables;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
@@ -91,7 +92,7 @@ public class TypeLookupImpl implements TypeLookup {
     Iterable<JvmDeclaredType> _filter = Iterables.<JvmDeclaredType>filter(_contents, JvmDeclaredType.class);
     final JvmDeclaredType result = this.recursiveFindType(qualifiedName, _filter);
     Type _xifexpression = null;
-    boolean _notEquals = ObjectExtensions.operator_notEquals(result, null);
+    boolean _notEquals = (!Objects.equal(result, null));
     if (_notEquals) {
       Type _type = this.compilationUnit.toType(result);
       _xifexpression = _type;
@@ -104,7 +105,7 @@ public class TypeLookupImpl implements TypeLookup {
     for (final JvmDeclaredType type : typeDeclarations) {
       {
         final String name = type.getQualifiedName('.');
-        boolean _equals = ObjectExtensions.operator_equals(qualifiedName, name);
+        boolean _equals = Objects.equal(qualifiedName, name);
         if (_equals) {
           return type;
         }
@@ -146,7 +147,7 @@ public class TypeLookupImpl implements TypeLookup {
         XtendFile _xtendFile = this.compilationUnit.getXtendFile();
         final JvmType result = _typeReferences.findDeclaredType(typeName, _xtendFile);
         Type _xifexpression = null;
-        boolean _equals = ObjectExtensions.operator_equals(result, null);
+        boolean _equals = Objects.equal(result, null);
         if (_equals) {
           _xifexpression = null;
         } else {

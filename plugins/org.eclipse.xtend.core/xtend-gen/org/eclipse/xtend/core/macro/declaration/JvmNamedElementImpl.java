@@ -7,12 +7,12 @@
  */
 package org.eclipse.xtend.core.macro.declaration;
 
+import com.google.common.base.Objects;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtend.core.macro.declaration.AbstractDeclarationImpl;
 import org.eclipse.xtend.lib.macro.declaration.MutableNamedElement;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
-import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 
 @SuppressWarnings("all")
 public abstract class JvmNamedElementImpl<T extends JvmIdentifiableElement> extends AbstractDeclarationImpl<T> implements MutableNamedElement {
@@ -25,7 +25,7 @@ public abstract class JvmNamedElementImpl<T extends JvmIdentifiableElement> exte
   public void remove() {
     T _delegate = this.getDelegate();
     EObject _eContainer = _delegate.eContainer();
-    boolean _equals = ObjectExtensions.operator_equals(_eContainer, null);
+    boolean _equals = Objects.equal(_eContainer, null);
     if (_equals) {
       return;
     }
@@ -36,7 +36,7 @@ public abstract class JvmNamedElementImpl<T extends JvmIdentifiableElement> exte
     _eContents.remove(_delegate_2);
     T _delegate_3 = this.getDelegate();
     EObject _eContainer_2 = _delegate_3.eContainer();
-    boolean _notEquals = ObjectExtensions.operator_notEquals(_eContainer_2, null);
+    boolean _notEquals = (!Objects.equal(_eContainer_2, null));
     if (_notEquals) {
       T _delegate_4 = this.getDelegate();
       String _string = _delegate_4.toString();

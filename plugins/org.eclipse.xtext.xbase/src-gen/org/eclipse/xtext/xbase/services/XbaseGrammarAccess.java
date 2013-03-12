@@ -352,12 +352,13 @@ public class XbaseGrammarAccess extends AbstractGrammarElementFinder {
 		private final Keyword cEqualsSignEqualsSignKeyword_0 = (Keyword)cAlternatives.eContents().get(0);
 		private final Keyword cExclamationMarkEqualsSignKeyword_1 = (Keyword)cAlternatives.eContents().get(1);
 		private final Keyword cEqualsSignEqualsSignEqualsSignKeyword_2 = (Keyword)cAlternatives.eContents().get(2);
+		private final Keyword cExclamationMarkEqualsSignEqualsSignKeyword_3 = (Keyword)cAlternatives.eContents().get(3);
 		
 		//OpEquality:
-		//	"==" | "!=" | "===";
+		//	"==" | "!=" | "===" | "!==";
 		public ParserRule getRule() { return rule; }
 
-		//"==" | "!=" | "==="
+		//"==" | "!=" | "===" | "!=="
 		public Alternatives getAlternatives() { return cAlternatives; }
 
 		//"=="
@@ -368,6 +369,9 @@ public class XbaseGrammarAccess extends AbstractGrammarElementFinder {
 
 		//"==="
 		public Keyword getEqualsSignEqualsSignEqualsSignKeyword_2() { return cEqualsSignEqualsSignEqualsSignKeyword_2; }
+
+		//"!=="
+		public Keyword getExclamationMarkEqualsSignEqualsSignKeyword_3() { return cExclamationMarkEqualsSignEqualsSignKeyword_3; }
 	}
 
 	public class XRelationalExpressionElements extends AbstractParserRuleElementFinder {
@@ -3170,7 +3174,7 @@ public class XbaseGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//OpEquality:
-	//	"==" | "!=" | "===";
+	//	"==" | "!=" | "===" | "!==";
 	public OpEqualityElements getOpEqualityAccess() {
 		return (pOpEquality != null) ? pOpEquality : (pOpEquality = new OpEqualityElements());
 	}

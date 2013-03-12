@@ -7,6 +7,7 @@
  */
 package org.eclipse.xtend.core.macro.declaration;
 
+import com.google.common.base.Objects;
 import com.google.common.collect.Iterables;
 import java.util.List;
 import org.eclipse.emf.common.util.EList;
@@ -28,7 +29,6 @@ import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ListExtensions;
-import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 
 @SuppressWarnings("all")
@@ -189,7 +189,7 @@ public class JvmClassDeclarationImpl extends JvmTypeDeclarationImpl<JvmGenericTy
     final Function1<MutableFieldDeclaration,Boolean> _function = new Function1<MutableFieldDeclaration,Boolean>() {
         public Boolean apply(final MutableFieldDeclaration it) {
           String _name = it.getName();
-          boolean _equals = ObjectExtensions.operator_equals(_name, name);
+          boolean _equals = Objects.equal(_name, name);
           return Boolean.valueOf(_equals);
         }
       };
@@ -204,7 +204,7 @@ public class JvmClassDeclarationImpl extends JvmTypeDeclarationImpl<JvmGenericTy
         public Boolean apply(final MutableMethodDeclaration it) {
           boolean _and = false;
           String _name = it.getName();
-          boolean _equals = ObjectExtensions.operator_equals(_name, name);
+          boolean _equals = Objects.equal(_name, name);
           if (!_equals) {
             _and = false;
           } else {
@@ -218,7 +218,7 @@ public class JvmClassDeclarationImpl extends JvmTypeDeclarationImpl<JvmGenericTy
             List<TypeReference> _map = ListExtensions.<MutableParameterDeclaration, TypeReference>map(_parameters, _function);
             List<TypeReference> _list = IterableExtensions.<TypeReference>toList(_map);
             List<TypeReference> _list_1 = IterableExtensions.<TypeReference>toList(((Iterable<TypeReference>)Conversions.doWrapArray(parameterTypes)));
-            boolean _equals_1 = ObjectExtensions.operator_equals(_list, _list_1);
+            boolean _equals_1 = Objects.equal(_list, _list_1);
             _and = (_equals && _equals_1);
           }
           return Boolean.valueOf(_and);

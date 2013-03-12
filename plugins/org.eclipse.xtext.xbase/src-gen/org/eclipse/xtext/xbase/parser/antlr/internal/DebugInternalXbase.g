@@ -70,7 +70,8 @@ ruleXEqualityExpression :
 ruleOpEquality :
 	'==' |
 	'!=' |
-	'==='
+	'===' |
+	'!=='
 ;
 
 // Rule XRelationalExpression

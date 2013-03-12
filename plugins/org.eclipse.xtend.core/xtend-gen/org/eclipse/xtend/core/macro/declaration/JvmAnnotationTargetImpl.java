@@ -7,6 +7,7 @@
  */
 package org.eclipse.xtend.core.macro.declaration;
 
+import com.google.common.base.Objects;
 import com.google.common.collect.ImmutableList;
 import java.util.List;
 import org.eclipse.emf.common.util.EList;
@@ -24,7 +25,6 @@ import org.eclipse.xtext.common.types.TypesFactory;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ListExtensions;
-import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 
 @SuppressWarnings("all")
 public abstract class JvmAnnotationTargetImpl<T extends JvmAnnotationTarget> extends JvmNamedElementImpl<T> implements MutableAnnotationTarget {
@@ -70,7 +70,7 @@ public abstract class JvmAnnotationTargetImpl<T extends JvmAnnotationTarget> ext
     final Function1<MutableAnnotationReference,Boolean> _function = new Function1<MutableAnnotationReference,Boolean>() {
         public Boolean apply(final MutableAnnotationReference it) {
           AnnotationTypeDeclaration _annotationTypeDeclaration = it.getAnnotationTypeDeclaration();
-          boolean _equals = ObjectExtensions.operator_equals(_annotationTypeDeclaration, annotationType);
+          boolean _equals = Objects.equal(_annotationTypeDeclaration, annotationType);
           return Boolean.valueOf(_equals);
         }
       };

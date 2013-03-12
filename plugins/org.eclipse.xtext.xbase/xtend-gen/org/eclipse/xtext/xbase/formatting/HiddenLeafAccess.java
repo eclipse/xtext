@@ -1,5 +1,6 @@
 package org.eclipse.xtext.xbase.formatting;
 
+import com.google.common.base.Objects;
 import com.google.inject.Inject;
 import java.util.ArrayList;
 import java.util.List;
@@ -18,7 +19,6 @@ import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IntegerRange;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ListExtensions;
-import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.StringExtensions;
 
 @SuppressWarnings("all")
@@ -40,7 +40,7 @@ public class HiddenLeafAccess {
       final ILeafNode start = this._nodeModelAccess.findNextLeaf(node, _function);
       final List<ILeafNode> nodes = this.findPreviousHiddenLeafs(start);
       HiddenLeafs _xifexpression = null;
-      boolean _notEquals = ObjectExtensions.operator_notEquals(start, null);
+      boolean _notEquals = (!Objects.equal(start, null));
       if (_notEquals) {
         int _xifexpression_1 = (int) 0;
         boolean _isEmpty = nodes.isEmpty();
@@ -87,7 +87,7 @@ public class HiddenLeafAccess {
                 String _text_2 = node.getText();
                 final char c = _text_2.charAt((i).intValue());
                 String _string = Character.valueOf(c).toString();
-                boolean _equals = ObjectExtensions.operator_equals(_string, "\n");
+                boolean _equals = Objects.equal(_string, "\n");
                 if (_equals) {
                   int _plus = (newLines + 1);
                   newLines = _plus;
@@ -168,7 +168,7 @@ public class HiddenLeafAccess {
         };
       final ILeafNode start = this.findPreviousLeaf(node, _function);
       HiddenLeafs _xifexpression = null;
-      boolean _notEquals = ObjectExtensions.operator_notEquals(start, null);
+      boolean _notEquals = (!Objects.equal(start, null));
       if (_notEquals) {
         int _offset = start.getOffset();
         int _length = start.getLength();
@@ -232,7 +232,7 @@ public class HiddenLeafAccess {
     if (_and) {
       return ((ILeafNode) current);
     }
-    boolean _notEquals = ObjectExtensions.operator_notEquals(current, null);
+    boolean _notEquals = (!Objects.equal(current, null));
     if (_notEquals) {
       NodeIterator _nodeIterator = new NodeIterator(current);
       final NodeIterator ni = _nodeIterator;
@@ -270,7 +270,7 @@ public class HiddenLeafAccess {
         _while = (current instanceof ICompositeNode);
       }
       final ArrayList<ILeafNode> result = CollectionLiterals.<ILeafNode>newArrayList();
-      boolean _notEquals = ObjectExtensions.operator_notEquals(current, null);
+      boolean _notEquals = (!Objects.equal(current, null));
       if (_notEquals) {
         NodeIterator _nodeIterator = new NodeIterator(current);
         final NodeIterator ni = _nodeIterator;
@@ -280,7 +280,7 @@ public class HiddenLeafAccess {
           {
             final INode previous = ni.previous();
             boolean _and = false;
-            boolean _notEquals_1 = ObjectExtensions.operator_notEquals(previous, current);
+            boolean _notEquals_1 = (!Objects.equal(previous, current));
             if (!_notEquals_1) {
               _and = false;
             } else {

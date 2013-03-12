@@ -7,6 +7,7 @@
  */
 package org.eclipse.xtend.core.macro;
 
+import com.google.common.base.Objects;
 import com.google.inject.Inject;
 import java.util.List;
 import org.eclipse.emf.common.util.EList;
@@ -43,7 +44,6 @@ import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotation;
 import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotationsPackage.Literals;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
-import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 
 @SuppressWarnings("all")
 public class XAnnotationExtensions {
@@ -197,7 +197,7 @@ public class XAnnotationExtensions {
           JvmAnnotationType _annotation = it.getAnnotation();
           String _identifier = _annotation==null?(String)null:_annotation.getIdentifier();
           String _name = Active.class.getName();
-          boolean _equals = ObjectExtensions.operator_equals(_identifier, _name);
+          boolean _equals = Objects.equal(_identifier, _name);
           return Boolean.valueOf(_equals);
         }
       };
@@ -207,13 +207,13 @@ public class XAnnotationExtensions {
         public Boolean apply(final JvmAnnotationValue it) {
           boolean _or = false;
           JvmOperation _operation = it.getOperation();
-          boolean _equals = ObjectExtensions.operator_equals(_operation, null);
+          boolean _equals = Objects.equal(_operation, null);
           if (_equals) {
             _or = true;
           } else {
             JvmOperation _operation_1 = it.getOperation();
             String _simpleName = _operation_1.getSimpleName();
-            boolean _equals_1 = ObjectExtensions.operator_equals(_simpleName, "value");
+            boolean _equals_1 = Objects.equal(_simpleName, "value");
             _or = (_equals || _equals_1);
           }
           return Boolean.valueOf(_or);
@@ -297,7 +297,7 @@ public class XAnnotationExtensions {
       JvmAnnotationType _annotation = anno.getAnnotation();
       String _identifier = _annotation.getIdentifier();
       String _name = Active.class.getName();
-      boolean _equals = ObjectExtensions.operator_equals(_identifier, _name);
+      boolean _equals = Objects.equal(_identifier, _name);
       if (_equals) {
         return true;
       }

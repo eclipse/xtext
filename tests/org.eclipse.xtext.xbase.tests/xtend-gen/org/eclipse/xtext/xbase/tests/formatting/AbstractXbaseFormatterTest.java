@@ -1,5 +1,6 @@
 package org.eclipse.xtext.xbase.tests.formatting;
 
+import com.google.common.base.Objects;
 import javax.inject.Inject;
 import org.eclipse.xtext.junit4.InjectWith;
 import org.eclipse.xtext.junit4.XtextRunner;
@@ -7,7 +8,6 @@ import org.eclipse.xtext.preferences.MapBasedPreferenceValues;
 import org.eclipse.xtext.xbase.formatting.BasicFormatterPreferenceKeys;
 import org.eclipse.xtext.xbase.junit.formatter.AssertingFormatterData;
 import org.eclipse.xtext.xbase.junit.formatter.FormatterTester;
-import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xbase.tests.formatting.XbaseFormatterTestInjectorProvider;
 import org.junit.runner.RunWith;
@@ -82,7 +82,7 @@ public abstract class AbstractXbaseFormatterTest {
     String _id = BasicFormatterPreferenceKeys.maxLineWidth.getId();
     String _string = Integer.valueOf(80).toString();
     target.put(_id, _string);
-    boolean _notEquals = ObjectExtensions.operator_notEquals(cfg, null);
+    boolean _notEquals = (!Objects.equal(cfg, null));
     if (_notEquals) {
       cfg.apply(target);
     }

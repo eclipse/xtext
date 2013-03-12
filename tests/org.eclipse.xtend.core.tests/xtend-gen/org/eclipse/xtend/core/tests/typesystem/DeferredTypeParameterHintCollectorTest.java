@@ -7,6 +7,7 @@
  */
 package org.eclipse.xtend.core.tests.typesystem;
 
+import com.google.common.base.Objects;
 import com.google.common.collect.ListMultimap;
 import com.google.inject.Inject;
 import java.util.List;
@@ -32,7 +33,6 @@ import org.eclipse.xtext.xbase.lib.Functions.Function0;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ListExtensions;
-import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.Pair;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xbase.typesystem.internal.DefaultReentrantTypeResolver;
@@ -110,7 +110,7 @@ public class DeferredTypeParameterHintCollectorTest extends AbstractTestingTypeR
     final Set<JvmTypeParameter> allKeys = mapping.keySet();
     for (final JvmTypeParameter key : allKeys) {
       String _simpleName = key.getSimpleName();
-      boolean _equals = ObjectExtensions.operator_equals(_simpleName, typeParamName);
+      boolean _equals = Objects.equal(_simpleName, typeParamName);
       if (_equals) {
         LightweightMergedBoundTypeArgument _get = mapping.get(key);
         LightweightTypeReference _typeReference = _get.getTypeReference();
@@ -148,7 +148,7 @@ public class DeferredTypeParameterHintCollectorTest extends AbstractTestingTypeR
     final Set<JvmTypeParameter> allKeys = mapping.keySet();
     for (final JvmTypeParameter key : allKeys) {
       String _simpleName = key.getSimpleName();
-      boolean _equals = ObjectExtensions.operator_equals(_simpleName, typeParamName);
+      boolean _equals = Objects.equal(_simpleName, typeParamName);
       if (_equals) {
         LightweightMergedBoundTypeArgument _get = mapping.get(key);
         LightweightTypeReference _typeReference = _get.getTypeReference();

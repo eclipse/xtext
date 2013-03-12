@@ -425,7 +425,8 @@ ruleXEqualityExpression :
 ruleOpEquality :
 	'==' |
 	'!=' |
-	'==='
+	'===' |
+	'!=='
 ;
 
 // Rule XRelationalExpression

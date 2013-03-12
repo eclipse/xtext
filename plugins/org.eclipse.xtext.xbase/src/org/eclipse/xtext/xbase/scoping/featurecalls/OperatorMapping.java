@@ -9,6 +9,9 @@ package org.eclipse.xtext.xbase.scoping.featurecalls;
 
 import static org.eclipse.xtext.naming.QualifiedName.*;
 
+import java.lang.reflect.Field;
+import java.lang.reflect.Modifier;
+
 import org.eclipse.xtext.naming.QualifiedName;
 
 import com.google.common.collect.BiMap;
@@ -16,6 +19,46 @@ import com.google.common.collect.HashBiMap;
 import com.google.inject.Singleton;
 
 /**
+ * The mapping of operators to their respective method names.
+ * 
+ * By default, the following mapping is applied.
+ * <table>
+ *   <tr><th>Operator</th><th>Method Name</th></tr>
+ *   <tr><td>+</td><td>operator_plus</td></tr>
+ *   <tr><td>-</td><td>operator_minus</td></tr>
+ *   <tr><td>**</td><td>operator_power</td></tr>
+ *   <tr><td>*</td><td>operator_multiply</td></tr>
+ *   <tr><td>/</td><td>operator_divide</td></tr>
+ *   <tr><td>%</td><td>operator_modulo</td></tr>
+ *   <tr><td>&lt;&lt;</td><td>operator_doubleLessThan</td></tr>
+ *   <tr><td>&gt;&gt;</td><td>operator_doubleGreaterThan</td></tr>
+ *   <tr><td>&lt;&lt;&lt;</td><td>operator_tripleLessThan</td></tr>
+ *   <tr><td>&gt;&gt;&gt;</td><td>operator_tripleGreaterThan</td></tr>
+ *   <tr><td>?:</td><td>operator_elvis</td></tr>
+ *   <tr><td>&lt;&gt;</td><td>operator_diamond</td></tr>
+ *   <tr><td>&lt;=&gt;</td><td>operator_spaceship</td></tr>
+ *   <tr><td>||</td><td>operator_or</td></tr>
+ *   <tr><td>&&</td><td>operator_and</td></tr>
+ *   <tr><td>+=</td><td>operator_add</td></tr>
+ *   <tr><td>-=</td><td>operator_remove</td></tr>
+ *   <tr><td>==</td><td>operator_equals</td></tr>
+ *   <tr><td>===</td><td>operator_tripleEquals</td></tr>
+ *   <tr><td>!==</td><td>operator_tripleNotEquals</td></tr>
+ *   <tr><td>!=</td><td>operator_notEquals</td></tr>
+ *   <tr><td>&lt;</td><td>operator_lessThan</td></tr>
+ *   <tr><td>&lt;=</td><td>operator_lessEqualsThan</td></tr>
+ *   <tr><td>&gt;</td><td>operator_greaterThan</td></tr>
+ *   <tr><td>&gt;=</td><td>operator_greaterEqualsThan</td></tr>
+ *   <tr><td>-&gt;</td><td>operator_mappedTo</td></tr>
+ *   <tr><td>..</td><td>operator_upTo</td></tr>
+ *   <tr><td>..&lt;</td><td>operator_doubleDotLessThan</td></tr>
+ *   <tr><td>&gt;..</td><td>operator_greaterThanDoubleDot</td></tr>
+ *   <tr><td>!</td><td>operator_not</td></tr>
+ *   <tr><td>=&gt;</td><td>operator_doubleArrow</td></tr>
+ * </table>
+ * 
+ * Clients may want to override {@link #initializeMapping()} to add other operators.
+ * 
  * @author Sven Efftinge
  */
 @Singleton
@@ -40,6 +83,7 @@ public class OperatorMapping {
 	public static final QualifiedName REMOVE = create("-=");
 	public static final QualifiedName EQUALS = create("==");
 	public static final QualifiedName TRIPLE_EQUALS = create("===");
+	public static final QualifiedName TRIPLE_NOT_EQUALS = create("!==");
 	public static final QualifiedName NOT_EQUALS = create("!=");
 	public static final QualifiedName LESS_THAN = create("<");
 	public static final QualifiedName LESS_EQUALS_THAN = create("<=");
@@ -80,6 +124,7 @@ public class OperatorMapping {
 		map.put(REMOVE, create(OP_PREFIX+"remove"));
 		map.put(EQUALS, create(OP_PREFIX+"equals"));
 		map.put(TRIPLE_EQUALS, create(OP_PREFIX+"tripleEquals"));
+		map.put(TRIPLE_NOT_EQUALS, create(OP_PREFIX+"tripleNotEquals"));
 		map.put(NOT_EQUALS, create(OP_PREFIX+"notEquals"));
 		map.put(LESS_THAN, create(OP_PREFIX+"lessThan"));
 		map.put(LESS_EQUALS_THAN, create(OP_PREFIX+"lessEqualsThan"));
@@ -99,5 +144,32 @@ public class OperatorMapping {
 	
 	public QualifiedName getOperator(QualifiedName methodName) {
 		return map.inverse().get(methodName);
+	}
+	
+	/**
+	 * Small utility to keep the JavaDoc in sync.
+	 */
+	@SuppressWarnings("unused")
+	private static class JavaDocGenerator { 
+		public static void main(String[] args) throws Exception {
+			System.out.println(" * <table>");
+			System.out.println(" *   <tr><th>Operator</th><th>Method Name</th></tr>");
+			Field[] fields = OperatorMapping.class.getFields();
+			BiMap<QualifiedName, QualifiedName> map = new OperatorMapping().map;
+			for(Field field: fields) {
+				if (Modifier.isStatic(field.getModifiers()) && field.getType().equals(QualifiedName.class) ) {
+					Object operator = field.get(null);
+					QualifiedName methodName = map.get(operator);
+					System.out.println(" *   <tr><td>"+ toHtml(operator) + "</td><td>" + toHtml(methodName) + "</td></tr>");
+				}
+			}
+			System.out.println(" * </table>");
+		}
+		
+		private static String toHtml(Object object) {
+			String result = String.valueOf(object);
+			result = result.replace("<", "&lt;").replace(">", "&gt;");
+			return result;
+		}
 	}
 }	

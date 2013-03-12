@@ -7,6 +7,7 @@
  */
 package org.eclipse.xtext.xbase.tests.typesystem;
 
+import com.google.common.base.Objects;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtext.nodemodel.BidiTreeIterable;
 import org.eclipse.xtext.nodemodel.ICompositeNode;
@@ -15,7 +16,6 @@ import org.eclipse.xtext.parser.IParseResult;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.util.ReplaceRegion;
 import org.eclipse.xtext.xbase.XExpression;
-import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.tests.typesystem.AbstractSmokeTest;
 import org.junit.Ignore;
 import org.junit.Test;
@@ -27,7 +27,7 @@ import org.junit.Test;
 public class SkipNodesInBetween extends AbstractSmokeTest {
   public void assertNonSmoking(final String input) throws Exception {
     final XExpression expression = this.expression(input);
-    boolean _notEquals = ObjectExtensions.operator_notEquals(expression, null);
+    boolean _notEquals = (!Objects.equal(expression, null));
     if (_notEquals) {
       Resource _eResource = expression.eResource();
       final XtextResource resource = ((XtextResource) _eResource);
@@ -43,7 +43,7 @@ public class SkipNodesInBetween extends AbstractSmokeTest {
           if (_notEquals_1) {
             boolean _or = false;
             boolean _or_1 = false;
-            boolean _equals = ObjectExtensions.operator_equals(region, null);
+            boolean _equals = Objects.equal(region, null);
             if (_equals) {
               _or_1 = true;
             } else {

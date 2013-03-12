@@ -1,5 +1,6 @@
 package org.eclipse.xtend.core.macro;
 
+import com.google.common.base.Objects;
 import com.google.common.collect.Iterables;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
@@ -15,7 +16,6 @@ import org.eclipse.xtext.common.types.JvmMember;
 import org.eclipse.xtext.common.types.JvmVisibility;
 import org.eclipse.xtext.common.types.TypesFactory;
 import org.eclipse.xtext.xbase.jvmmodel.IJvmDeclaredTypeAcceptor;
-import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.Pair;
 
 @SuppressWarnings("all")
@@ -72,11 +72,11 @@ public class RegisterGlobalsContextImpl implements RegisterGlobalsContext {
     _compilationUnit.checkCanceled();
     final Pair<String,String> namespaceAndName = this.getNameParts(qualifiedName);
     String _key = namespaceAndName.getKey();
-    boolean _notEquals = ObjectExtensions.operator_notEquals(_key, null);
+    boolean _notEquals = (!Objects.equal(_key, null));
     if (_notEquals) {
       String _key_1 = namespaceAndName.getKey();
       final JvmDeclaredType parentType = this.findType(_key_1);
-      boolean _notEquals_1 = ObjectExtensions.operator_notEquals(parentType, null);
+      boolean _notEquals_1 = (!Objects.equal(parentType, null));
       if (_notEquals_1) {
         EList<JvmMember> _members = parentType.getMembers();
         _members.add(newType);
@@ -106,14 +106,14 @@ public class RegisterGlobalsContextImpl implements RegisterGlobalsContext {
       boolean _startsWith = string.startsWith(_identifier);
       if (_startsWith) {
         String _identifier_1 = type.getIdentifier();
-        boolean _equals = ObjectExtensions.operator_equals(string, _identifier_1);
+        boolean _equals = Objects.equal(string, _identifier_1);
         if (_equals) {
           return type;
         }
         EList<JvmMember> _members = type.getMembers();
         Iterable<JvmDeclaredType> _filter = Iterables.<JvmDeclaredType>filter(_members, JvmDeclaredType.class);
         final JvmDeclaredType result = this.findRecursively(string, _filter);
-        boolean _notEquals = ObjectExtensions.operator_notEquals(result, null);
+        boolean _notEquals = (!Objects.equal(result, null));
         if (_notEquals) {
           return result;
         }

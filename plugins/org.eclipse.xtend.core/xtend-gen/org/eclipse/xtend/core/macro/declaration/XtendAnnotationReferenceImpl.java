@@ -7,6 +7,7 @@
  */
 package org.eclipse.xtend.core.macro.declaration;
 
+import com.google.common.base.Objects;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.xtend.core.macro.declaration.AbstractDeclarationImpl;
 import org.eclipse.xtend.core.macro.declaration.CompilationUnitImpl;
@@ -22,7 +23,6 @@ import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotation;
 import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotationElementValuePair;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
-import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 
 @SuppressWarnings("all")
 public class XtendAnnotationReferenceImpl extends AbstractDeclarationImpl<XAnnotation> implements AnnotationReference {
@@ -54,13 +54,13 @@ public class XtendAnnotationReferenceImpl extends AbstractDeclarationImpl<XAnnot
   
   public Object getValue(final String property) {
     boolean _and = false;
-    boolean _equals = ObjectExtensions.operator_equals(property, "value");
+    boolean _equals = Objects.equal(property, "value");
     if (!_equals) {
       _and = false;
     } else {
       XAnnotation _delegate = this.getDelegate();
       XExpression _value = _delegate.getValue();
-      boolean _notEquals = ObjectExtensions.operator_notEquals(_value, null);
+      boolean _notEquals = (!Objects.equal(_value, null));
       _and = (_equals && _notEquals);
     }
     if (_and) {
@@ -75,13 +75,13 @@ public class XtendAnnotationReferenceImpl extends AbstractDeclarationImpl<XAnnot
         public Boolean apply(final XAnnotationElementValuePair it) {
           JvmOperation _element = it.getElement();
           String _simpleName = _element.getSimpleName();
-          boolean _equals = ObjectExtensions.operator_equals(_simpleName, property);
+          boolean _equals = Objects.equal(_simpleName, property);
           return Boolean.valueOf(_equals);
         }
       };
     XAnnotationElementValuePair _findFirst = IterableExtensions.<XAnnotationElementValuePair>findFirst(_elementValuePairs, _function);
     final XExpression expression = _findFirst==null?(XExpression)null:_findFirst.getValue();
-    boolean _notEquals_1 = ObjectExtensions.operator_notEquals(expression, null);
+    boolean _notEquals_1 = (!Objects.equal(expression, null));
     if (_notEquals_1) {
       CompilationUnitImpl _compilationUnit_1 = this.getCompilationUnit();
       return _compilationUnit_1.evaluate(expression);

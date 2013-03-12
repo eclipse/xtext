@@ -7,6 +7,7 @@
  */
 package org.eclipse.xtend.core.macro.declaration;
 
+import com.google.common.base.Objects;
 import java.util.List;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.xtend.core.macro.declaration.CompilationUnitImpl;
@@ -26,7 +27,6 @@ import org.eclipse.xtext.common.types.JvmUpperBound;
 import org.eclipse.xtext.common.types.TypesFactory;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.ListExtensions;
-import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 
 @SuppressWarnings("all")
 public abstract class JvmExecutableDeclarationImpl<T extends JvmExecutable> extends JvmMemberDeclarationImpl<T> implements MutableExecutableDeclaration {
@@ -93,7 +93,7 @@ public abstract class JvmExecutableDeclarationImpl<T extends JvmExecutable> exte
     EList<JvmTypeReference> _exceptions = _delegate.getExceptions();
     _exceptions.clear();
     for (final TypeReference exceptionType : exceptions) {
-      boolean _notEquals = ObjectExtensions.operator_notEquals(exceptionType, null);
+      boolean _notEquals = (!Objects.equal(exceptionType, null));
       if (_notEquals) {
         T _delegate_1 = this.getDelegate();
         EList<JvmTypeReference> _exceptions_1 = _delegate_1.getExceptions();

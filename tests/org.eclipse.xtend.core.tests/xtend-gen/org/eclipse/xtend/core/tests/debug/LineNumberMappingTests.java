@@ -1,5 +1,6 @@
 package org.eclipse.xtend.core.tests.debug;
 
+import com.google.common.base.Objects;
 import com.google.inject.Inject;
 import java.util.List;
 import org.eclipse.emf.ecore.resource.Resource;
@@ -15,7 +16,6 @@ import org.eclipse.xtext.generator.trace.LineMappingProvider.LineMapping;
 import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.IntegerRange;
-import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -291,7 +291,7 @@ public class LineNumberMappingTests extends AbstractXtendTestCase {
       {
         final LineMapping mapping = this.findMapping(normalizedMappings, lineNumber);
         final String line = lines[(lineNumber).intValue()];
-        boolean _notEquals = ObjectExtensions.operator_notEquals(mapping, null);
+        boolean _notEquals = (!Objects.equal(mapping, null));
         if (_notEquals) {
           int _indexOf = line.indexOf("//");
           int _minus_1 = (-1);

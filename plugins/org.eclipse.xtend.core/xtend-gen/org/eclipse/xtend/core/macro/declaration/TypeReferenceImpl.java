@@ -7,6 +7,7 @@
  */
 package org.eclipse.xtend.core.macro.declaration;
 
+import com.google.common.base.Objects;
 import java.util.List;
 import org.eclipse.xtend.core.macro.declaration.AbstractDeclarationImpl;
 import org.eclipse.xtend.core.macro.declaration.CompilationUnitImpl;
@@ -16,7 +17,6 @@ import org.eclipse.xtend.lib.macro.declaration.TypeReference;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.ListExtensions;
-import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 
 @SuppressWarnings("all")
@@ -83,7 +83,7 @@ public class TypeReferenceImpl extends AbstractDeclarationImpl<LightweightTypeRe
   public TypeReference getArrayComponentType() {
     LightweightTypeReference _delegate = this.getDelegate();
     final LightweightTypeReference componentType = _delegate.getComponentType();
-    boolean _equals = ObjectExtensions.operator_equals(componentType, null);
+    boolean _equals = Objects.equal(componentType, null);
     if (_equals) {
       return null;
     }
@@ -181,7 +181,7 @@ public class TypeReferenceImpl extends AbstractDeclarationImpl<LightweightTypeRe
   }
   
   public boolean equals(final Object obj) {
-    boolean _tripleEquals = obj == this;
+    boolean _tripleEquals = (obj == this);
     if (_tripleEquals) {
       return true;
     }

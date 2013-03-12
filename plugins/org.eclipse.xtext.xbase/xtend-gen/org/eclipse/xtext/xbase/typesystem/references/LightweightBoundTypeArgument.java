@@ -7,8 +7,8 @@
  */
 package org.eclipse.xtext.xbase.typesystem.references;
 
+import com.google.common.base.Objects;
 import org.eclipse.xtend.lib.Data;
-import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.util.ToStringHelper;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 import org.eclipse.xtext.xbase.typesystem.util.BoundTypeArgumentSource;
@@ -55,7 +55,7 @@ public class LightweightBoundTypeArgument {
     VarianceInfo _declaredVariance = this.getDeclaredVariance();
     VarianceInfo _actualVariance = this.getActualVariance();
     VarianceInfo _mergeDeclaredWithActual = _declaredVariance.mergeDeclaredWithActual(_actualVariance);
-    boolean _notEquals = ObjectExtensions.operator_notEquals(_mergeDeclaredWithActual, null);
+    boolean _notEquals = (!Objects.equal(_mergeDeclaredWithActual, null));
     return _notEquals;
   }
   

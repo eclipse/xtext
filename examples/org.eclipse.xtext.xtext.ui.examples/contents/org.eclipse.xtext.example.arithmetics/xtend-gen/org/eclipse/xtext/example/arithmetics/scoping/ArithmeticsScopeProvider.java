@@ -3,6 +3,7 @@
  */
 package org.eclipse.xtext.example.arithmetics.scoping;
 
+import com.google.common.base.Objects;
 import com.google.common.base.Predicate;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
@@ -11,7 +12,6 @@ import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.scoping.impl.AbstractDeclarativeScopeProvider;
 import org.eclipse.xtext.scoping.impl.FilteringScope;
-import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 
 /**
  * This class contains custom scoping description.
@@ -32,12 +32,12 @@ public class ArithmeticsScopeProvider extends AbstractDeclarativeScopeProvider {
           public boolean apply(final IEObjectDescription it) {
             boolean _and = false;
             boolean _and_1 = false;
-            boolean _notEquals = ObjectExtensions.operator_notEquals(it, null);
+            boolean _notEquals = (!Objects.equal(it, null));
             if (!_notEquals) {
               _and_1 = false;
             } else {
               QualifiedName _name = it.getName();
-              boolean _notEquals_1 = ObjectExtensions.operator_notEquals(_name, null);
+              boolean _notEquals_1 = (!Objects.equal(_name, null));
               _and_1 = (_notEquals && _notEquals_1);
             }
             if (!_and_1) {

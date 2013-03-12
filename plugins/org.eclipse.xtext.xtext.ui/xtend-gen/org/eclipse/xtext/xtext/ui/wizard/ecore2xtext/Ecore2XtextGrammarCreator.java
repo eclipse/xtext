@@ -1,5 +1,6 @@
 package org.eclipse.xtext.xtext.ui.wizard.ecore2xtext;
 
+import com.google.common.base.Objects;
 import com.google.common.collect.Iterables;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -19,7 +20,6 @@ import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ListExtensions;
-import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xtext.ui.wizard.ecore2xtext.EPackageInfo;
 import org.eclipse.xtext.xtext.ui.wizard.ecore2xtext.Ecore2XtextExtensions;
 import org.eclipse.xtext.xtext.ui.wizard.ecore2xtext.Ecore2XtextProjectInfo;
@@ -57,12 +57,12 @@ public class Ecore2XtextGrammarCreator {
           {
             boolean _and = false;
             String _uniqueName = UniqueNameUtil.uniqueName(it_1);
-            boolean _notEquals = ObjectExtensions.operator_notEquals(_uniqueName, null);
+            boolean _notEquals = (!Objects.equal(_uniqueName, null));
             if (!_notEquals) {
               _and = false;
             } else {
               String _uniqueName_1 = UniqueNameUtil.uniqueName(it_1);
-              boolean _notEquals_1 = ObjectExtensions.operator_notEquals(_uniqueName_1, "");
+              boolean _notEquals_1 = (!Objects.equal(_uniqueName_1, ""));
               _and = (_notEquals && _notEquals_1);
             }
             if (_and) {
@@ -166,7 +166,7 @@ public class Ecore2XtextGrammarCreator {
     {
       final EAttribute idAttr = Ecore2XtextExtensions.idAttribute(it);
       CharSequence _xifexpression = null;
-      boolean _notEquals = ObjectExtensions.operator_notEquals(idAttr, null);
+      boolean _notEquals = (!Objects.equal(idAttr, null));
       if (_notEquals) {
         StringConcatenation _builder = new StringConcatenation();
         String _name = idAttr.getName();
@@ -314,7 +314,7 @@ public class Ecore2XtextGrammarCreator {
   public CharSequence rules(final EClassifier it) {
     CharSequence _xifexpression = null;
     boolean _and = false;
-    boolean _notEquals = ObjectExtensions.operator_notEquals(it, null);
+    boolean _notEquals = (!Objects.equal(it, null));
     if (!_notEquals) {
       _and = false;
     } else {

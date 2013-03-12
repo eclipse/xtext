@@ -1,5 +1,6 @@
 package org.eclipse.xtend.ide.codebuilder;
 
+import com.google.common.base.Objects;
 import com.google.inject.Inject;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtend.core.xtend.XtendClass;
@@ -12,7 +13,6 @@ import org.eclipse.xtext.xbase.compiler.IAppendable;
 import org.eclipse.xtext.xbase.compiler.TypeReferenceSerializer;
 import org.eclipse.xtext.xbase.compiler.output.XtypeTypeReferenceSerializer;
 import org.eclipse.xtext.xbase.lib.Extension;
-import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 
 @SuppressWarnings("all")
 public class XtendAnnotationBuilder extends AbstractAnnotationBuilder implements Xtend {
@@ -31,14 +31,14 @@ public class XtendAnnotationBuilder extends AbstractAnnotationBuilder implements
       _and_1 = false;
     } else {
       String _annotationName = this.getAnnotationName();
-      boolean _notEquals = ObjectExtensions.operator_notEquals(_annotationName, null);
+      boolean _notEquals = (!Objects.equal(_annotationName, null));
       _and_1 = (_isValid && _notEquals);
     }
     if (!_and_1) {
       _and = false;
     } else {
       JvmVisibility _visibility = this.getVisibility();
-      boolean _equals = ObjectExtensions.operator_equals(_visibility, JvmVisibility.PUBLIC);
+      boolean _equals = Objects.equal(_visibility, JvmVisibility.PUBLIC);
       _and = (_and_1 && _equals);
     }
     return _and;

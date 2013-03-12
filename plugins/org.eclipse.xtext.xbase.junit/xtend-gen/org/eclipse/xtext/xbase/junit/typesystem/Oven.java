@@ -8,6 +8,7 @@
 package org.eclipse.xtext.xbase.junit.typesystem;
 
 import com.google.common.annotations.Beta;
+import com.google.common.base.Objects;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import org.eclipse.emf.common.util.TreeIterator;
@@ -25,7 +26,6 @@ import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.Functions.Function0;
 import org.eclipse.xtext.xbase.lib.InputOutput;
 import org.eclipse.xtext.xbase.lib.IteratorExtensions;
-import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.util.ReflectExtensions;
 import org.eclipse.xtext.xbase.typesystem.IBatchTypeResolver;
 import org.eclipse.xtext.xbase.typesystem.IResolvedTypes;
@@ -73,7 +73,7 @@ public class Oven extends Assert {
       final EObject file = this._parseHelper.parse(input);
       final IResolvedTypes resolvedTypes = this.typeResolver.resolveTypes(file);
       Assert.assertNotNull(resolvedTypes);
-      boolean _notEquals = ObjectExtensions.operator_notEquals(file, null);
+      boolean _notEquals = (!Objects.equal(file, null));
       if (_notEquals) {
         TreeIterator<EObject> _eAllContents = file.eAllContents();
         Iterable<EObject> _iterable = IteratorExtensions.<EObject>toIterable(_eAllContents);
@@ -85,7 +85,7 @@ public class Oven extends Assert {
               _matched=true;
               this.assertExpressionTypeIsResolved(_xSwitchExpression, resolvedTypes);
               String _localVarName = _xSwitchExpression.getLocalVarName();
-              boolean _notEquals_1 = ObjectExtensions.operator_notEquals(_localVarName, null);
+              boolean _notEquals_1 = (!Objects.equal(_localVarName, null));
               if (_notEquals_1) {
                 this.assertIdentifiableTypeIsResolved(_xSwitchExpression, resolvedTypes);
               }
@@ -97,13 +97,13 @@ public class Oven extends Assert {
               _matched=true;
               this.assertExpressionTypeIsResolved(_xAbstractFeatureCall, resolvedTypes);
               XExpression _implicitReceiver = _xAbstractFeatureCall.getImplicitReceiver();
-              boolean _notEquals_1 = ObjectExtensions.operator_notEquals(_implicitReceiver, null);
+              boolean _notEquals_1 = (!Objects.equal(_implicitReceiver, null));
               if (_notEquals_1) {
                 XExpression _implicitReceiver_1 = _xAbstractFeatureCall.getImplicitReceiver();
                 this.assertExpressionTypeIsResolved(_implicitReceiver_1, resolvedTypes);
               }
               XExpression _implicitFirstArgument = _xAbstractFeatureCall.getImplicitFirstArgument();
-              boolean _notEquals_2 = ObjectExtensions.operator_notEquals(_implicitFirstArgument, null);
+              boolean _notEquals_2 = (!Objects.equal(_implicitFirstArgument, null));
               if (_notEquals_2) {
                 XExpression _implicitFirstArgument_1 = _xAbstractFeatureCall.getImplicitFirstArgument();
                 this.assertExpressionTypeIsResolved(_implicitFirstArgument_1, resolvedTypes);
@@ -116,7 +116,7 @@ public class Oven extends Assert {
               _matched=true;
               this.assertExpressionTypeIsResolved(_xClosure, resolvedTypes);
               JvmFormalParameter _implicitParameter = _xClosure.getImplicitParameter();
-              boolean _notEquals_1 = ObjectExtensions.operator_notEquals(_implicitParameter, null);
+              boolean _notEquals_1 = (!Objects.equal(_implicitParameter, null));
               if (_notEquals_1) {
                 JvmFormalParameter _implicitParameter_1 = _xClosure.getImplicitParameter();
                 this.assertIdentifiableTypeIsResolved(_implicitParameter_1, resolvedTypes);
@@ -191,7 +191,7 @@ public class Oven extends Assert {
   
   public void assertIdentifiableTypeIsResolved(final JvmIdentifiableElement identifiable, final IResolvedTypes types) {
     String _simpleName = identifiable.getSimpleName();
-    boolean _equals = ObjectExtensions.operator_equals(_simpleName, null);
+    boolean _equals = Objects.equal(_simpleName, null);
     if (_equals) {
       return;
     }

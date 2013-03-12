@@ -1,5 +1,6 @@
 package org.eclipse.xtend.ide.tests.compiler;
 
+import com.google.common.base.Objects;
 import com.google.inject.Inject;
 import java.util.List;
 import java.util.Map;
@@ -28,7 +29,6 @@ import org.eclipse.xtext.xbase.lib.Functions.Function0;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ListExtensions;
-import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Ignore;
@@ -303,13 +303,13 @@ public class RebuildAffectedResourcesTest extends AbstractXtendUITestCase {
     final Function1<Entry<String,NumbersForTask>,Boolean> _function = new Function1<Entry<String,NumbersForTask>,Boolean>() {
         public Boolean apply(final Entry<String,NumbersForTask> it) {
           String _key = it.getKey();
-          boolean _equals = ObjectExtensions.operator_equals(_key, "XtextBuilder.build");
+          boolean _equals = Objects.equal(_key, "XtextBuilder.build");
           return Boolean.valueOf(_equals);
         }
       };
     Iterable<Entry<String,NumbersForTask>> _filter = IterableExtensions.<Entry<String,NumbersForTask>>filter(_entrySet, _function);
     final Entry<String,NumbersForTask> builderEntry = IterableExtensions.<Entry<String,NumbersForTask>>head(_filter);
-    boolean _equals = ObjectExtensions.operator_equals(builderEntry, null);
+    boolean _equals = Objects.equal(builderEntry, null);
     if (_equals) {
       Assert.assertEquals(numberOfBuild, 0);
     } else {

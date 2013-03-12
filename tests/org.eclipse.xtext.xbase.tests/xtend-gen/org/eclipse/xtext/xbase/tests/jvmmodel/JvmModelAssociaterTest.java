@@ -1,5 +1,6 @@
 package org.eclipse.xtext.xbase.tests.jvmmodel;
 
+import com.google.common.base.Objects;
 import com.google.common.collect.Iterables;
 import com.google.inject.Inject;
 import com.google.inject.MembersInjector;
@@ -178,7 +179,7 @@ public class JvmModelAssociaterTest extends AbstractJvmModelTest {
                 final Function1<JvmGenericType,Boolean> _function = new Function1<JvmGenericType,Boolean>() {
                     public Boolean apply(final JvmGenericType it) {
                       String _identifier = it.getIdentifier();
-                      boolean _equals = ObjectExtensions.operator_equals(_identifier, "foo.Bar");
+                      boolean _equals = Objects.equal(_identifier, "foo.Bar");
                       return Boolean.valueOf(_equals);
                     }
                   };

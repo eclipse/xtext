@@ -12,6 +12,7 @@ var generateXtendStub = true
 
 Workflow {
     bean = StandaloneSetup {
+    	ignoreBrokenProjectFiles = true
 	    scanClassPath = true
 		platformUri = "${runtimeProject}/.."
 		registerGeneratedEPackage = "org.eclipse.xtext.xbase.XbasePackage"

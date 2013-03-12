@@ -7,6 +7,7 @@
  */
 package org.eclipse.xtext.xbase.tests.typesystem;
 
+import com.google.common.base.Objects;
 import com.google.common.collect.Iterables;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -28,7 +29,6 @@ import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.IteratorExtensions;
-import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.tests.AbstractXbaseTestCase;
 import org.junit.AfterClass;
 import org.junit.Assert;
@@ -83,7 +83,7 @@ public abstract class AbstractIdentifiableTypeTest extends AbstractXbaseTestCase
       final Function1<EObject,Boolean> _function_1 = new Function1<EObject,Boolean>() {
           public Boolean apply(final EObject it) {
             boolean _and = false;
-            boolean _notEquals = ObjectExtensions.operator_notEquals(it, null);
+            boolean _notEquals = (!Objects.equal(it, null));
             if (!_notEquals) {
               _and = false;
             } else {
@@ -107,7 +107,7 @@ public abstract class AbstractIdentifiableTypeTest extends AbstractXbaseTestCase
                 if (it instanceof XSwitchExpression) {
                   final XSwitchExpression _xSwitchExpression = (XSwitchExpression)it;
                   String _localVarName = _xSwitchExpression.getLocalVarName();
-                  boolean _notEquals_1 = ObjectExtensions.operator_notEquals(_localVarName, null);
+                  boolean _notEquals_1 = (!Objects.equal(_localVarName, null));
                   if (_notEquals_1) {
                     _matched=true;
                     _switchResult = true;
@@ -131,7 +131,7 @@ public abstract class AbstractIdentifiableTypeTest extends AbstractXbaseTestCase
             {
               final ICompositeNode node = NodeModelUtils.findActualNodeFor(it);
               int _xifexpression = (int) 0;
-              boolean _notEquals = ObjectExtensions.operator_notEquals(node, null);
+              boolean _notEquals = (!Objects.equal(node, null));
               if (_notEquals) {
                 int _offset = node.getOffset();
                 _xifexpression = _offset;

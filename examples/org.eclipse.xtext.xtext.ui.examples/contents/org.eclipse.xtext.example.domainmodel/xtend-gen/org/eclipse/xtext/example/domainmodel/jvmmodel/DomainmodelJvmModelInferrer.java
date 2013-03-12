@@ -1,5 +1,6 @@
 package org.eclipse.xtext.example.domainmodel.jvmmodel;
 
+import com.google.common.base.Objects;
 import com.google.inject.Inject;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -49,7 +50,7 @@ public class DomainmodelJvmModelInferrer extends AbstractModelInferrer {
           String _documentation = DomainmodelJvmModelInferrer.this._jvmTypesBuilder.getDocumentation(entity);
           DomainmodelJvmModelInferrer.this._jvmTypesBuilder.setDocumentation(it, _documentation);
           JvmParameterizedTypeReference _superType = entity.getSuperType();
-          boolean _notEquals = ObjectExtensions.operator_notEquals(_superType, null);
+          boolean _notEquals = (!Objects.equal(_superType, null));
           if (_notEquals) {
             EList<JvmTypeReference> _superTypes = it.getSuperTypes();
             JvmParameterizedTypeReference _superType_1 = entity.getSuperType();

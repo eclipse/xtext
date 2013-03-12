@@ -1,5 +1,6 @@
 package org.eclipse.xtext.xbase.formatting;
 
+import com.google.common.base.Objects;
 import com.google.common.collect.Iterables;
 import com.google.inject.Inject;
 import java.util.ArrayList;
@@ -62,7 +63,7 @@ public class FormattingDataFactory {
             if (_equals_1) {
               _or = true;
             } else {
-              boolean _equals_2 = ObjectExtensions.operator_equals(it.space, "");
+              boolean _equals_2 = Objects.equal(it.space, "");
               _or = (_equals_1 || _equals_2);
             }
             _and = (_equals && _or);
@@ -360,7 +361,7 @@ public class FormattingDataFactory {
                   } else {
                     List<LeafInfo> _leafs_1 = leafs.getLeafs();
                     LeafInfo _last = IterableExtensions.<LeafInfo>last(_leafs_1);
-                    boolean _notEquals = ObjectExtensions.operator_notEquals(_last, _whitespaceInfo);
+                    boolean _notEquals = (!Objects.equal(_last, _whitespaceInfo));
                     _and_4 = (equalIndentationChange && _notEquals);
                   }
                   if (_and_4) {
@@ -412,7 +413,7 @@ public class FormattingDataFactory {
                 } else {
                   List<LeafInfo> _leafs_2 = leafs.getLeafs();
                   LeafInfo _last_1 = IterableExtensions.<LeafInfo>last(_leafs_2);
-                  boolean _notEquals_1 = ObjectExtensions.operator_notEquals(_last_1, _whitespaceInfo);
+                  boolean _notEquals_1 = (!Objects.equal(_last_1, _whitespaceInfo));
                   _and_5 = (equalIndentationChange && _notEquals_1);
                 }
                 if (_and_5) {
@@ -454,7 +455,7 @@ public class FormattingDataFactory {
   
   public Function1<? super FormattableDocument,? extends Iterable<FormattingData>> append(final INode node, final Procedure1<? super FormattingDataInit> init) {
     Function1<? super FormattableDocument,? extends Iterable<FormattingData>> _xifexpression = null;
-    boolean _notEquals = ObjectExtensions.operator_notEquals(node, null);
+    boolean _notEquals = (!Objects.equal(node, null));
     if (_notEquals) {
       HiddenLeafs _hiddenLeafsAfter = this._hiddenLeafAccess.getHiddenLeafsAfter(node);
       Function1<? super FormattableDocument,? extends Iterable<FormattingData>> _newFormattingData = this.newFormattingData(_hiddenLeafsAfter, init);
@@ -465,7 +466,7 @@ public class FormattingDataFactory {
   
   public Function1<? super FormattableDocument,? extends Iterable<FormattingData>> prepend(final INode node, final Procedure1<? super FormattingDataInit> init) {
     Function1<? super FormattableDocument,? extends Iterable<FormattingData>> _xifexpression = null;
-    boolean _notEquals = ObjectExtensions.operator_notEquals(node, null);
+    boolean _notEquals = (!Objects.equal(node, null));
     if (_notEquals) {
       HiddenLeafs _hiddenLeafsBefore = this._hiddenLeafAccess.getHiddenLeafsBefore(node);
       Function1<? super FormattableDocument,? extends Iterable<FormattingData>> _newFormattingData = this.newFormattingData(_hiddenLeafsBefore, init);
@@ -480,7 +481,7 @@ public class FormattingDataFactory {
           ArrayList<FormattingData> _xblockexpression = null;
           {
             final ArrayList<FormattingData> result = CollectionLiterals.<FormattingData>newArrayList();
-            boolean _notEquals = ObjectExtensions.operator_notEquals(node, null);
+            boolean _notEquals = (!Objects.equal(node, null));
             if (_notEquals) {
               Iterable<FormattingData> _elvis = null;
               HiddenLeafs _hiddenLeafsBefore = FormattingDataFactory.this._hiddenLeafAccess.getHiddenLeafsBefore(node);
@@ -519,7 +520,7 @@ public class FormattingDataFactory {
           ArrayList<FormattingData> _xblockexpression = null;
           {
             final ArrayList<FormattingData> result = CollectionLiterals.<FormattingData>newArrayList();
-            boolean _notEquals = ObjectExtensions.operator_notEquals(node, null);
+            boolean _notEquals = (!Objects.equal(node, null));
             if (_notEquals) {
               Iterable<FormattingData> _elvis = null;
               HiddenLeafs _hiddenLeafsBefore = FormattingDataFactory.this._hiddenLeafAccess.getHiddenLeafsBefore(node);

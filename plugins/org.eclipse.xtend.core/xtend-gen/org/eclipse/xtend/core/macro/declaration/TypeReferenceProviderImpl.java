@@ -29,7 +29,6 @@ import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.ListExtensions;
-import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 
 @SuppressWarnings("all")
 public class TypeReferenceProviderImpl implements TypeReferenceProvider {
@@ -138,7 +137,7 @@ public class TypeReferenceProviderImpl implements TypeReferenceProvider {
       TypeReferences _typeReferences = this.compilationUnit.getTypeReferences();
       XtendFile _xtendFile = this.compilationUnit.getXtendFile();
       final JvmType type = _typeReferences.findDeclaredType(typeName, _xtendFile);
-      boolean _equals = ObjectExtensions.operator_equals(type, null);
+      boolean _equals = Objects.equal(type, null);
       if (_equals) {
         return null;
       }
@@ -269,7 +268,7 @@ public class TypeReferenceProviderImpl implements TypeReferenceProvider {
         throw _illegalArgumentException;
       }
       final JvmComponentType type = _switchResult;
-      boolean _equals = ObjectExtensions.operator_equals(type, null);
+      boolean _equals = Objects.equal(type, null);
       if (_equals) {
         return null;
       }
@@ -295,7 +294,7 @@ public class TypeReferenceProviderImpl implements TypeReferenceProvider {
   
   public TypeReference newWildcardTypeReference(final TypeReference upperBound) {
     TypeReference _xifexpression = null;
-    boolean _equals = ObjectExtensions.operator_equals(upperBound, null);
+    boolean _equals = Objects.equal(upperBound, null);
     if (_equals) {
       TypeReferences _typeReferences = this.compilationUnit.getTypeReferences();
       JvmWildcardTypeReference _wildCard = _typeReferences.wildCard();

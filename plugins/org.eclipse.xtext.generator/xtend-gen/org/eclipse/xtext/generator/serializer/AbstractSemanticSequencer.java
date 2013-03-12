@@ -7,6 +7,7 @@
  */
 package org.eclipse.xtext.generator.serializer;
 
+import com.google.common.base.Objects;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 import java.util.ArrayList;
@@ -53,7 +54,6 @@ import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
-import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.Pair;
 
 @SuppressWarnings("all")
@@ -94,7 +94,7 @@ public class AbstractSemanticSequencer extends GeneratedFile {
     final Function1<IConstraint,Boolean> _function = new Function1<IConstraint,Boolean>() {
         public Boolean apply(final IConstraint e) {
           EClass _type = e.getType();
-          boolean _notEquals = ObjectExtensions.operator_notEquals(_type, null);
+          boolean _notEquals = (!Objects.equal(_type, null));
           return Boolean.valueOf(_notEquals);
         }
       };
@@ -124,12 +124,12 @@ public class AbstractSemanticSequencer extends GeneratedFile {
     final Function1<EClass,Boolean> _function_1 = new Function1<EClass,Boolean>() {
         public Boolean apply(final EClass e) {
           boolean _and = false;
-          boolean _notEquals = ObjectExtensions.operator_notEquals(e, null);
+          boolean _notEquals = (!Objects.equal(e, null));
           if (!_notEquals) {
             _and = false;
           } else {
             EPackage _ePackage = e.getEPackage();
-            boolean _equals = ObjectExtensions.operator_equals(_ePackage, pkg);
+            boolean _equals = Objects.equal(_ePackage, pkg);
             _and = (_notEquals && _equals);
           }
           return Boolean.valueOf(_and);
@@ -230,7 +230,7 @@ public class AbstractSemanticSequencer extends GeneratedFile {
           public Boolean apply(final IConstraint e) {
             boolean _and = false;
             EClass _type = e.getType();
-            boolean _notEquals = ObjectExtensions.operator_notEquals(_type, null);
+            boolean _notEquals = (!Objects.equal(_type, null));
             if (!_notEquals) {
               _and = false;
             } else {
@@ -386,7 +386,7 @@ public class AbstractSemanticSequencer extends GeneratedFile {
                 _builder.append("\t");
                 _builder.append("\t");
                 IConstraint _xifexpression = null;
-                boolean _equals = ObjectExtensions.operator_equals(superConstraint, null);
+                boolean _equals = Objects.equal(superConstraint, null);
                 if (_equals) {
                   IConstraint _key_1 = ctx.getKey();
                   _xifexpression = _key_1;
@@ -452,7 +452,7 @@ public class AbstractSemanticSequencer extends GeneratedFile {
     _builder.append("*     ");
     String _xifexpression = null;
     IConstraintElement _body = c.getBody();
-    boolean _equals = ObjectExtensions.operator_equals(_body, null);
+    boolean _equals = Objects.equal(_body, null);
     if (_equals) {
       EClass _type = c.getType();
       String _name = _type.getName();
@@ -493,7 +493,7 @@ public class AbstractSemanticSequencer extends GeneratedFile {
           IFeatureInfo[] _features = c.getFeatures();
           final Function1<IFeatureInfo,Boolean> _function = new Function1<IFeatureInfo,Boolean>() {
               public Boolean apply(final IFeatureInfo e) {
-                boolean _notEquals = ObjectExtensions.operator_notEquals(e, null);
+                boolean _notEquals = (!Objects.equal(e, null));
                 return Boolean.valueOf(_notEquals);
               }
             };
@@ -546,7 +546,7 @@ public class AbstractSemanticSequencer extends GeneratedFile {
           Iterable<IFeatureInfo> _xifexpression_1 = null;
           IConstraintElement _body_2 = c.getBody();
           IFeatureInfo _featureInfo = _body_2.getFeatureInfo();
-          boolean _notEquals = ObjectExtensions.operator_notEquals(_featureInfo, null);
+          boolean _notEquals = (!Objects.equal(_featureInfo, null));
           if (_notEquals) {
             IConstraintElement _body_3 = c.getBody();
             IFeatureInfo _featureInfo_1 = _body_3.getFeatureInfo();
@@ -558,7 +558,7 @@ public class AbstractSemanticSequencer extends GeneratedFile {
             final Function1<IConstraintElement,Boolean> _function_1 = new Function1<IConstraintElement,Boolean>() {
                 public Boolean apply(final IConstraintElement e) {
                   IFeatureInfo _featureInfo = e.getFeatureInfo();
-                  boolean _notEquals = ObjectExtensions.operator_notEquals(_featureInfo, null);
+                  boolean _notEquals = (!Objects.equal(_featureInfo, null));
                   return Boolean.valueOf(_notEquals);
                 }
               };

@@ -1,5 +1,6 @@
 package org.eclipse.xtend.core.macro;
 
+import com.google.common.base.Objects;
 import com.google.common.collect.Iterables;
 import com.google.inject.Inject;
 import java.util.List;
@@ -27,7 +28,6 @@ import org.eclipse.xtend.lib.macro.services.ProblemSupport;
 import org.eclipse.xtend.lib.macro.services.TypeReferenceProvider;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
-import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 
 @SuppressWarnings("all")
 public class TransformationContextImpl implements TransformationContext {
@@ -70,7 +70,7 @@ public class TransformationContextImpl implements TransformationContext {
         CompilationUnitImpl _unit = this.getUnit();
         XtendFile _xtendFile = _unit.getXtendFile();
         Resource _eResource_1 = _xtendFile.eResource();
-        return ObjectExtensions.operator_equals(_eResource, _eResource_1);
+        return Objects.equal(_eResource, _eResource_1);
       }
     }
     if (!_matched) {
@@ -90,7 +90,7 @@ public class TransformationContextImpl implements TransformationContext {
       Set<EObject> _jvmElements = this.associations.getJvmElements(_delegate);
       Iterable<JvmIdentifiableElement> _filter = Iterables.<JvmIdentifiableElement>filter(_jvmElements, JvmIdentifiableElement.class);
       final JvmIdentifiableElement derivedElement = IterableExtensions.<JvmIdentifiableElement>head(_filter);
-      boolean _notEquals = ObjectExtensions.operator_notEquals(derivedElement, null);
+      boolean _notEquals = (!Objects.equal(derivedElement, null));
       if (_notEquals) {
         CompilationUnitImpl _unit = this.getUnit();
         return _unit.toNamedElement(derivedElement);

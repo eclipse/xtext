@@ -7,6 +7,7 @@
  */
 package org.eclipse.xtext.xbase.tests.typesystem;
 
+import com.google.common.base.Objects;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EObject;
@@ -19,7 +20,6 @@ import org.eclipse.xtext.xbase.XSwitchExpression;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.IteratorExtensions;
-import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.tests.typesystem.AbstractTypeResolverTest;
 import org.eclipse.xtext.xbase.typing.ITypeProvider;
 import org.eclipse.xtext.xtype.XFunctionTypeRef;
@@ -55,7 +55,7 @@ public abstract class AbstractOldAPITypeResolverTest extends AbstractTypeResolve
             _matched=true;
             this.assertExpressionTypeIsResolved(_xSwitchExpression);
             String _localVarName = _xSwitchExpression.getLocalVarName();
-            boolean _notEquals = ObjectExtensions.operator_notEquals(_localVarName, null);
+            boolean _notEquals = (!Objects.equal(_localVarName, null));
             if (_notEquals) {
               this.assertIdentifiableTypeIsResolved(_xSwitchExpression);
             }

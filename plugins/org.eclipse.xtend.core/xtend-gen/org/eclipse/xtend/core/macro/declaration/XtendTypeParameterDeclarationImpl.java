@@ -7,6 +7,7 @@
  */
 package org.eclipse.xtend.core.macro.declaration;
 
+import com.google.common.base.Objects;
 import com.google.common.collect.Iterables;
 import java.util.List;
 import org.eclipse.emf.common.util.EList;
@@ -28,7 +29,6 @@ import org.eclipse.xtext.common.types.JvmUpperBound;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
-import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 
 @SuppressWarnings("all")
 public class XtendTypeParameterDeclarationImpl extends AbstractDeclarationImpl<JvmTypeParameter> implements TypeParameterDeclaration {
@@ -77,7 +77,7 @@ public class XtendTypeParameterDeclarationImpl extends AbstractDeclarationImpl<J
   }
   
   public boolean isAssignableFrom(final Type otherType) {
-    boolean _equals = ObjectExtensions.operator_equals(otherType, null);
+    boolean _equals = Objects.equal(otherType, null);
     if (_equals) {
       return false;
     }

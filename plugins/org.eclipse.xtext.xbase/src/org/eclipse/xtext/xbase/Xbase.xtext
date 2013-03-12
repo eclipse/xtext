@@ -44,7 +44,7 @@ XEqualityExpression returns XExpression:
 	rightOperand=XRelationalExpression)*;
 
 OpEquality:
-	'==' | '!=' | '===';
+	'==' | '!=' | '===' | '!==';
 
 XRelationalExpression returns XExpression:
 	XOtherOperatorExpression

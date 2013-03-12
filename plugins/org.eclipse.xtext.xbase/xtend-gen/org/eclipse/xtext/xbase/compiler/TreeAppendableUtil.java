@@ -1,5 +1,6 @@
 package org.eclipse.xtext.xbase.compiler;
 
+import com.google.common.base.Objects;
 import com.google.inject.Inject;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.generator.trace.LocationData;
@@ -10,7 +11,6 @@ import org.eclipse.xtext.util.ITextRegion;
 import org.eclipse.xtext.util.ITextRegionWithLineInformation;
 import org.eclipse.xtext.xbase.compiler.output.ITreeAppendable;
 import org.eclipse.xtext.xbase.compiler.output.TreeAppendable;
-import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 
 @SuppressWarnings("all")
 public class TreeAppendableUtil {
@@ -33,7 +33,7 @@ public class TreeAppendableUtil {
         ITextRegion _significantTextRegion = this.locationProvider.getSignificantTextRegion(source);
         final ITextRegionWithLineInformation it = ((ITextRegionWithLineInformation) _significantTextRegion);
         ITreeAppendable _xifexpression_1 = null;
-        boolean _notEquals = ObjectExtensions.operator_notEquals(it, null);
+        boolean _notEquals = (!Objects.equal(it, null));
         if (_notEquals) {
           int _offset = it.getOffset();
           int _length = it.getLength();
@@ -77,7 +77,7 @@ public class TreeAppendableUtil {
         }
         final ITextRegionWithLineInformation it = ((ITextRegionWithLineInformation) _switchResult);
         ITreeAppendable _xifexpression_1 = null;
-        boolean _notEquals = ObjectExtensions.operator_notEquals(it, null);
+        boolean _notEquals = (!Objects.equal(it, null));
         if (_notEquals) {
           int _offset = it.getOffset();
           int _length = it.getLength();

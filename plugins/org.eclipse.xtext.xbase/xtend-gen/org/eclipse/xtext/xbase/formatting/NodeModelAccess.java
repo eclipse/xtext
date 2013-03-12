@@ -1,5 +1,6 @@
 package org.eclipse.xtext.xbase.formatting;
 
+import com.google.common.base.Objects;
 import com.google.common.collect.Iterables;
 import java.util.List;
 import org.eclipse.emf.ecore.EObject;
@@ -13,7 +14,6 @@ import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 import org.eclipse.xtext.parsetree.reconstr.impl.NodeIterator;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
-import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 
 @SuppressWarnings("all")
 public class NodeModelAccess {
@@ -32,7 +32,7 @@ public class NodeModelAccess {
             boolean _and = false;
             boolean _and_1 = false;
             EObject _semanticElement = it.getSemanticElement();
-            boolean _equals = ObjectExtensions.operator_equals(_semanticElement, obj);
+            boolean _equals = Objects.equal(_semanticElement, obj);
             if (!_equals) {
               _and_1 = false;
             } else {
@@ -43,7 +43,7 @@ public class NodeModelAccess {
               _and = false;
             } else {
               String _text = it.getText();
-              boolean _equals_1 = ObjectExtensions.operator_equals(_text, kw);
+              boolean _equals_1 = Objects.equal(_text, kw);
               _and = (_and_1 && _equals_1);
             }
             return Boolean.valueOf(_and);
@@ -66,7 +66,7 @@ public class NodeModelAccess {
             boolean _and = false;
             boolean _and_1 = false;
             EObject _semanticElement = it.getSemanticElement();
-            boolean _equals = ObjectExtensions.operator_equals(_semanticElement, obj);
+            boolean _equals = Objects.equal(_semanticElement, obj);
             if (!_equals) {
               _and_1 = false;
             } else {
@@ -77,7 +77,7 @@ public class NodeModelAccess {
               _and = false;
             } else {
               String _text = it.getText();
-              boolean _equals_1 = ObjectExtensions.operator_equals(_text, kw);
+              boolean _equals_1 = Objects.equal(_text, kw);
               _and = (_and_1 && _equals_1);
             }
             return Boolean.valueOf(_and);
@@ -120,7 +120,7 @@ public class NodeModelAccess {
       final Function1<ILeafNode,Boolean> _function = new Function1<ILeafNode,Boolean>() {
           public Boolean apply(final ILeafNode it) {
             boolean _and = false;
-            boolean _notEquals = ObjectExtensions.operator_notEquals(current1, it);
+            boolean _notEquals = (!Objects.equal(current1, it));
             if (!_notEquals) {
               _and = false;
             } else {
@@ -133,12 +133,12 @@ public class NodeModelAccess {
       final ILeafNode result = this.findNextLeaf(current1, _function);
       ILeafNode _xifexpression = null;
       boolean _and = false;
-      boolean _notEquals = ObjectExtensions.operator_notEquals(result, null);
+      boolean _notEquals = (!Objects.equal(result, null));
       if (!_notEquals) {
         _and = false;
       } else {
         String _text = result.getText();
-        boolean _equals = ObjectExtensions.operator_equals(_text, kw);
+        boolean _equals = Objects.equal(_text, kw);
         _and = (_notEquals && _equals);
       }
       if (_and) {
@@ -151,7 +151,7 @@ public class NodeModelAccess {
   
   public ILeafNode findNextLeaf(final INode node, final Function1<? super ILeafNode,? extends Boolean> matches) {
     ILeafNode _xifexpression = null;
-    boolean _notEquals = ObjectExtensions.operator_notEquals(node, null);
+    boolean _notEquals = (!Objects.equal(node, null));
     if (_notEquals) {
       boolean _and = false;
       if (!(node instanceof ILeafNode)) {
