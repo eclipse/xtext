@@ -64,6 +64,7 @@ public class IssueCodes {
 	public static final String NULL_SAFE_FEATURE_CALL_ON_PRIMITIVE = ISSUE_CODE_PREFIX + "null_safe_feature_call_on_primitive";
 	public static final String NULL_SAFE_FEATURE_CALL_OF_PRIMITIVE_VALUED_FEATURE = ISSUE_CODE_PREFIX + "null_safe_feature_call_on_primitive_valued_feature";
 	public static final String PRIMITIVE_COMPARED_TO_NULL = ISSUE_CODE_PREFIX	+ "primitive_compared_to_null";
+	public static final String EQUALS_WITH_NULL = ISSUE_CODE_PREFIX	+ "equals_with_null";
 	public static final String NOT_INSTANTIABLE = ISSUE_CODE_PREFIX + "not_instantiable";
 	public static final String UNUSED_LOCAL_VARIABLE = ISSUE_CODE_PREFIX + "unused_local_variable";
 	public static final String INVALID_IDENTIFIER = ISSUE_CODE_PREFIX + "invalid_identifier";
