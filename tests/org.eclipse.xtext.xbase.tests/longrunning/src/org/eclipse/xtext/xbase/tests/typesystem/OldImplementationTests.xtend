@@ -2480,6 +2480,12 @@ class OldAPIClosureTypeTest extends AbstractOldAPIClosureTypeTest {
 	override testIfExpression_24() throws Exception {
 		fail("fails in old impl")
 	}
+	
+	@Ignore("fails in old impl")
+	@Test
+	override testIfExpression_25() throws Exception {
+		fail("fails in old impl")
+	}
 
 	@Ignore("fails in old impl")
 	@Test

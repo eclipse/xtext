@@ -11,6 +11,7 @@ import static com.google.common.collect.Sets.*;
 
 import java.util.Collection;
 import java.util.Collections;
+import java.util.List;
 import java.util.Set;
 
 import org.eclipse.emf.common.util.EList;
@@ -271,7 +272,7 @@ public abstract class AbstractXbaseCompiler {
 				internalToJavaStatement(ex, b.trace(ex, true), isImplicitReturn);
 				if (isImplicitReturn) {
 					b.newLine().append("return (");
-					internalToConvertedExpression(ex, b, null);
+					internalToJavaExpression(ex, b);
 					b.append(");");
 				}
 			}
@@ -442,6 +443,11 @@ public abstract class AbstractXbaseCompiler {
 	}
 
 	protected JvmTypeReference getTypeForVariableDeclaration(XExpression expr) {
+		if (expr instanceof XBlockExpression) {
+			JvmTypeReference expectedType = getTypeProvider().getExpectedType(expr);
+			if (expectedType != null)
+				return expectedType;
+		}
 		JvmTypeReference type = getTypeProvider().getType(expr);
 		//TODO we need to replace any occurrence of JvmAnyTypeReference with a better match from the expected type
 		if (type instanceof JvmAnyTypeReference) {

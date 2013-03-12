@@ -415,6 +415,17 @@ abstract class AbstractFeatureCallTypeTest extends AbstractXbaseTestCase {
 		"if(true) emptySet else #{'f'}".resolvesFeatureCallsTo("Set<String>")
 	}
 	
+	@Test def void testIfExpression_03() throws Exception {
+		"{ 
+			val Iterable<Object> branch = 
+			  if (true) 
+			    [|<Object>newArrayList().iterator]
+			  else
+			    newArrayList('a').toArray
+		}"
+			.resolvesFeatureCallsTo("ArrayList<Object>", "Iterator<Object>", "ArrayList<String>", "Object[]")
+	}
+	
 	@Test def void testSwitchExpression_3() throws Exception {
 		"{
 			val Object c = null
