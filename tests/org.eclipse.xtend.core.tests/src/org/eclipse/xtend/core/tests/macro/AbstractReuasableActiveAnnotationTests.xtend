@@ -45,6 +45,64 @@ abstract class AbstractReuasableActiveAnnotationTests {
 		]
 	}
 	
+	@Test def void testAddAnnotationValue() {
+		assertProcessing(
+			'myannotation/AbstractAnnotation.xtend' -> '''
+				package myannotation
+				
+				import java.util.List
+				import org.eclipse.xtend.lib.macro.Active
+				import org.eclipse.xtend.lib.macro.TransformationContext
+				import org.eclipse.xtend.lib.macro.TransformationParticipant
+				import org.eclipse.xtend.lib.macro.declaration.MutableAnnotationTarget
+
+				@Active(typeof(AddAnnotationProcessor))
+				annotation AddAnnotation { }
+				class AddAnnotationProcessor implements TransformationParticipant<MutableAnnotationTarget> {
+					
+					override doTransform(List<? extends MutableAnnotationTarget> annotationTargets, extension TransformationContext context) {
+						annotationTargets.forEach [
+							addAnnotation(typeof(MyAnnotation).findTypeGlobally) => [
+								set(null, 'foo','bar','baz')
+								set('singleValue', 'foo')
+								set('booleans', true, false, true)
+								set('singleBoolean', true)
+								set('numbers', 1,2,3)
+								set('singleNumber', 1)
+							]
+						]
+					}
+					
+				}
+				annotation MyAnnotation {
+					String[] value
+					String singleValue
+					boolean[] booleans
+					boolean singleBoolean
+					int[] numbers
+					int singleNumber
+				}
+			''',
+			'myusercode/UserCode.xtend' -> '''
+				package myusercode
+				
+				@myannotation.AddAnnotation
+				class MyClass {
+					
+				}
+			'''
+		) [
+			val clazz = typeLookup.findClass('myusercode.MyClass')
+			val annotation = clazz.findAnnotation(typeReferenceProvider.newTypeReference('myannotation.MyAnnotation').type)
+			assertEquals(#['foo','bar','baz'],annotation.getValue('value'))
+			assertEquals('foo',annotation.getValue('singleValue'))
+			assertEquals(#[true,false,true],annotation.getValue('booleans'))
+			assertEquals(true,annotation.getValue('singleBoolean'))
+			assertEquals(#[1,2,3],annotation.getValue('numbers'))
+			assertEquals(1,annotation.getValue('singleNumber'))
+		]
+	}
+	
 	@Test def void testCreateTypeFromUsage() {
 		assertProcessing(
 			'myannotation/SomeAnnotation.xtend' -> '''
