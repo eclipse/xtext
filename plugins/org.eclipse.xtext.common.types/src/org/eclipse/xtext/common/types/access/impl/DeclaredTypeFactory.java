@@ -304,7 +304,7 @@ public class DeclaredTypeFactory implements ITypeFactory<Class<?>> {
 		JvmAnnotationType result = TypesFactory.eINSTANCE.createJvmAnnotationType();
 		result.internalSetIdentifier(clazz.getName());
 		result.setSimpleName(clazz.getSimpleName());
-		if (clazz.getDeclaringClass() == null)
+		if (clazz.getDeclaringClass() == null && clazz.getPackage() != null)
 			result.setPackageName(clazz.getPackage().getName());
 		setVisibility(clazz, result);
 		setTypeModifiers(clazz, result);
@@ -395,7 +395,7 @@ public class DeclaredTypeFactory implements ITypeFactory<Class<?>> {
 		JvmEnumerationType result = TypesFactory.eINSTANCE.createJvmEnumerationType();
 		result.internalSetIdentifier(clazz.getName());
 		result.setSimpleName(clazz.getSimpleName());
-		if (clazz.getDeclaringClass() == null)
+		if (clazz.getDeclaringClass() == null && clazz.getPackage() != null)
 			result.setPackageName(clazz.getPackage().getName());
 		setVisibility(clazz, result);
 		setTypeModifiers(clazz, result);
