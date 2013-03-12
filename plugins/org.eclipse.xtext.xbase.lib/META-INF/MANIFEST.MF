@@ -8,9 +8,5 @@ Export-Package: org.eclipse.xtend2.lib,
  org.eclipse.xtext.xbase.lib,
  org.eclipse.xtext.xbase.lib.internal;x-internal:=true,
  org.eclipse.xtext.xbase.lib.util
-Require-Bundle: com.google.guava;resolution:=optional;visibility:=reexport
+Require-Bundle: com.google.guava;visibility:=reexport;bundle-version="10.0.1"
 Bundle-Vendor: Eclipse Modeling Project
-Import-Package: com.google.common.annotations,
- com.google.common.base,
- com.google.common.collect,
- com.google.common.primitives
