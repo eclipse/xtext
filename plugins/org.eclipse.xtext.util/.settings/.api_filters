@@ -7,11 +7,5 @@
                 <message_argument value="2.2.1"/>
             </message_arguments>
         </filter>
-        <filter id="927989779">
-            <message_arguments>
-                <message_argument value="2.4.0"/>
-                <message_argument value="com.google.guava"/>
-            </message_arguments>
-        </filter>
     </resource>
 </component>
