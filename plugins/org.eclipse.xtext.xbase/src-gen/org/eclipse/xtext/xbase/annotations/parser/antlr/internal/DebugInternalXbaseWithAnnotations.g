@@ -113,7 +113,8 @@ ruleXEqualityExpression :
 ruleOpEquality :
 	'==' |
 	'!=' |
-	'==='
+	'===' |
+	'!=='
 ;
 
 // Rule XRelationalExpression
