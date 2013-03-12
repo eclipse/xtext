@@ -273,6 +273,7 @@ public abstract class AbstractTypeProviderTest extends Assert {
 	@Test public void testFindTypeByName_javaLangNumber_01() {
 		String typeName = Number.class.getName();
 		JvmGenericType type = (JvmGenericType) getTypeProvider().findTypeByName(typeName);
+		assertFalse("toplevel type is not static", type.isStatic());
 		assertEquals(type.getSuperTypes().toString(), 2, type.getSuperTypes().size());
 		JvmType objectType = type.getSuperTypes().get(0).getType();
 		assertFalse("isProxy: " + objectType, objectType.eIsProxy());

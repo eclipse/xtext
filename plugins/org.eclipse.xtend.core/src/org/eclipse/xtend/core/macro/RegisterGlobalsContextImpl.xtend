@@ -1,11 +1,12 @@
 package org.eclipse.xtend.core.macro
 
-import org.eclipse.xtend.lib.macro.RegisterGlobalsContext
-import org.eclipse.xtext.xbase.jvmmodel.IJvmDeclaredTypeAcceptor
-import org.eclipse.xtext.common.types.JvmDeclaredType
-import org.eclipse.xtext.common.types.TypesFactory
 import org.eclipse.xtend.core.macro.declaration.CompilationUnitImpl
+import org.eclipse.xtend.lib.macro.RegisterGlobalsContext
+import org.eclipse.xtext.common.types.JvmDeclaredType
 import org.eclipse.xtext.common.types.JvmVisibility
+import org.eclipse.xtext.common.types.TypesFactory
+import org.eclipse.xtext.xbase.jvmmodel.IJvmDeclaredTypeAcceptor
+import org.eclipse.xtext.xbase.lib.Pair
 
 class RegisterGlobalsContextImpl implements RegisterGlobalsContext {
 	
@@ -21,7 +22,6 @@ class RegisterGlobalsContextImpl implements RegisterGlobalsContext {
 	override registerClass(String qualifiedName) throws IllegalArgumentException {
 		val newType = TypesFactory::eINSTANCE.createJvmGenericType
 		newType.setVisibility(JvmVisibility::PUBLIC)
-		newType.setStatic(true)
 		setNameAndAccept(newType, qualifiedName)
 	}
 	
@@ -34,7 +34,6 @@ class RegisterGlobalsContextImpl implements RegisterGlobalsContext {
 	override registerInterface(String qualifiedName) throws IllegalArgumentException {
 		val newType = TypesFactory::eINSTANCE.createJvmGenericType
 		newType.setVisibility(JvmVisibility::PUBLIC)
-		newType.setStatic(true)
 		newType.interface = true
 		setNameAndAccept(newType, qualifiedName)
 	}
@@ -46,6 +45,7 @@ class RegisterGlobalsContextImpl implements RegisterGlobalsContext {
 			val parentType = findType(namespaceAndName.key)
 			if (parentType != null) {
 				parentType.members += newType
+				newType.static = true
 			} else {
 				newType.packageName = namespaceAndName.key
 				acceptor.accept(newType) 

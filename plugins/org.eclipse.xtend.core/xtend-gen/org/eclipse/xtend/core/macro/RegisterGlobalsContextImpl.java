@@ -49,7 +49,6 @@ public class RegisterGlobalsContextImpl implements RegisterGlobalsContext {
   public void registerClass(final String qualifiedName) throws IllegalArgumentException {
     final JvmGenericType newType = TypesFactory.eINSTANCE.createJvmGenericType();
     newType.setVisibility(JvmVisibility.PUBLIC);
-    newType.setStatic(true);
     this.setNameAndAccept(newType, qualifiedName);
   }
   
@@ -62,7 +61,6 @@ public class RegisterGlobalsContextImpl implements RegisterGlobalsContext {
   public void registerInterface(final String qualifiedName) throws IllegalArgumentException {
     final JvmGenericType newType = TypesFactory.eINSTANCE.createJvmGenericType();
     newType.setVisibility(JvmVisibility.PUBLIC);
-    newType.setStatic(true);
     newType.setInterface(true);
     this.setNameAndAccept(newType, qualifiedName);
   }
@@ -80,6 +78,7 @@ public class RegisterGlobalsContextImpl implements RegisterGlobalsContext {
       if (_notEquals_1) {
         EList<JvmMember> _members = parentType.getMembers();
         _members.add(newType);
+        newType.setStatic(true);
       } else {
         String _key_2 = namespaceAndName.getKey();
         newType.setPackageName(_key_2);
