@@ -45,7 +45,9 @@ public class XtextSerializerTest extends AbstractXtextTests {
 	@Override
 	public void setUp() throws Exception {
 		super.setUp();
-		new StandaloneSetup().setPlatformUri("../..");
+		StandaloneSetup standaloneSetup = new StandaloneSetup();
+		standaloneSetup.setIgnoreBrokenProjectFiles(true);
+		standaloneSetup.setPlatformUri("../..");
 		with(new XtextStandaloneSetup() {
 			@Override
 			public Injector createInjector() {
