@@ -45,6 +45,46 @@ abstract class AbstractReuasableActiveAnnotationTests {
 		]
 	}
 	
+	@Test def void testSetDocumentation() {
+		assertProcessing(
+			'myannotation/AbstractAnnotation.xtend' -> '''
+				package myannotation
+				
+				import java.util.List
+				import org.eclipse.xtend.lib.macro.Active
+				import org.eclipse.xtend.lib.macro.TransformationContext
+				import org.eclipse.xtend.lib.macro.TransformationParticipant
+				import org.eclipse.xtend.lib.macro.declaration.MutableClassDeclaration
+
+				@Active(typeof(AbstractProcessor))
+				annotation Abstract { }
+				class AbstractProcessor implements TransformationParticipant<MutableClassDeclaration> {
+					
+					override doTransform(List<? extends MutableClassDeclaration> annotatedSourceClasses, extension TransformationContext context) {
+						annotatedSourceClasses.forEach [
+							docComment = docComment.toCharArray.reverse.join
+						]
+					}
+					
+				}
+			''',
+			'myusercode/UserCode.xtend' -> '''
+				package myusercode
+				
+				/**
+				 * dlroW olleH
+				 */
+				@myannotation.Abstract
+				class MyClass {
+					
+				}
+			'''
+		) [
+			val clazz = typeLookup.findClass('myusercode.MyClass')
+			assertEquals('Hello World',clazz.docComment)
+		]
+	}
+	
 	@Test def void testAddAnnotationValue() {
 		assertProcessing(
 			'myannotation/AbstractAnnotation.xtend' -> '''

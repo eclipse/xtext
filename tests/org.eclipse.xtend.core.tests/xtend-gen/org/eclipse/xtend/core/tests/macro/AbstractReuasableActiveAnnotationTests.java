@@ -101,6 +101,83 @@ public abstract class AbstractReuasableActiveAnnotationTests {
   }
   
   @Test
+  public void testSetDocumentation() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("package myannotation");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("import java.util.List");
+    _builder.newLine();
+    _builder.append("import org.eclipse.xtend.lib.macro.Active");
+    _builder.newLine();
+    _builder.append("import org.eclipse.xtend.lib.macro.TransformationContext");
+    _builder.newLine();
+    _builder.append("import org.eclipse.xtend.lib.macro.TransformationParticipant");
+    _builder.newLine();
+    _builder.append("import org.eclipse.xtend.lib.macro.declaration.MutableClassDeclaration");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("@Active(typeof(AbstractProcessor))");
+    _builder.newLine();
+    _builder.append("annotation Abstract { }");
+    _builder.newLine();
+    _builder.append("class AbstractProcessor implements TransformationParticipant<MutableClassDeclaration> {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("override doTransform(List<? extends MutableClassDeclaration> annotatedSourceClasses, extension TransformationContext context) {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("annotatedSourceClasses.forEach [");
+    _builder.newLine();
+    _builder.append("\t\t\t");
+    _builder.append("docComment = docComment.toCharArray.reverse.join");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("]");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    Pair<String,String> _mappedTo = Pair.<String, String>of("myannotation/AbstractAnnotation.xtend", _builder.toString());
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("package myusercode");
+    _builder_1.newLine();
+    _builder_1.newLine();
+    _builder_1.append("/**");
+    _builder_1.newLine();
+    _builder_1.append(" ");
+    _builder_1.append("* dlroW olleH");
+    _builder_1.newLine();
+    _builder_1.append(" ");
+    _builder_1.append("*/");
+    _builder_1.newLine();
+    _builder_1.append("@myannotation.Abstract");
+    _builder_1.newLine();
+    _builder_1.append("class MyClass {");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    Pair<String,String> _mappedTo_1 = Pair.<String, String>of("myusercode/UserCode.xtend", _builder_1.toString());
+    final Procedure1<CompilationUnitImpl> _function = new Procedure1<CompilationUnitImpl>() {
+        public void apply(final CompilationUnitImpl it) {
+          TypeLookupImpl _typeLookup = it.getTypeLookup();
+          final MutableClassDeclaration clazz = _typeLookup.findClass("myusercode.MyClass");
+          String _docComment = clazz.getDocComment();
+          Assert.assertEquals("Hello World", _docComment);
+        }
+      };
+    this.assertProcessing(_mappedTo, _mappedTo_1, _function);
+  }
+  
+  @Test
   public void testAddAnnotationValue() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("package myannotation");

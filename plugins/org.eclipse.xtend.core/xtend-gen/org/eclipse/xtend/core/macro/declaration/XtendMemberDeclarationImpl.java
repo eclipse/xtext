@@ -17,12 +17,16 @@ import org.eclipse.xtend.lib.macro.declaration.MemberDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.TypeDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.Visibility;
 import org.eclipse.xtext.common.types.JvmVisibility;
+import org.eclipse.xtext.documentation.IEObjectDocumentationProvider;
 
 @SuppressWarnings("all")
 public abstract class XtendMemberDeclarationImpl<T extends XtendMember> extends XtendAnnotationTargetImpl<T> implements MemberDeclaration {
   public String getDocComment() {
-    UnsupportedOperationException _unsupportedOperationException = new UnsupportedOperationException("Auto-generated function stub");
-    throw _unsupportedOperationException;
+    CompilationUnitImpl _compilationUnit = this.getCompilationUnit();
+    IEObjectDocumentationProvider _documentationProvider = _compilationUnit.getDocumentationProvider();
+    T _delegate = this.getDelegate();
+    String _documentation = _documentationProvider.getDocumentation(_delegate);
+    return _documentation;
   }
   
   public TypeDeclaration getDeclaringType() {
