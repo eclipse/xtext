@@ -574,20 +574,26 @@ class JvmAnnotationReferenceImpl extends AbstractDeclarationImpl<JvmAnnotationRe
 	
 	override set(String name, String... values) {
 		val newValue = TypesFactory::eINSTANCE.createJvmStringAnnotationValue
-		newValue.setOperation(findOperation(name))
+		if (name != null)
+			newValue.setOperation(findOperation(name))
 		newValue.values.addAll(values)
+		delegate.getValues.add(newValue)
 	}
 	
 	override set(String name, boolean... values) {
 		val newValue = TypesFactory::eINSTANCE.createJvmBooleanAnnotationValue
-		newValue.setOperation(findOperation(name))
+		if (name != null)
+			newValue.setOperation(findOperation(name))
 		newValue.values.addAll(values)
+		delegate.getValues.add(newValue)
 	}
 	
 	override set(String name, int... values) {
 		val newValue = TypesFactory::eINSTANCE.createJvmIntAnnotationValue
-		newValue.setOperation(findOperation(name))
+		if (name != null)
+			newValue.setOperation(findOperation(name))
 		newValue.values.addAll(values)
+		delegate.getValues.add(newValue)
 	}
 	
 	override remove(String name) {

@@ -76,26 +76,44 @@ public class JvmAnnotationReferenceImpl extends AbstractDeclarationImpl<JvmAnnot
   
   public void set(final String name, final String... values) {
     final JvmStringAnnotationValue newValue = TypesFactory.eINSTANCE.createJvmStringAnnotationValue();
-    JvmOperation _findOperation = this.findOperation(name);
-    newValue.setOperation(_findOperation);
+    boolean _notEquals = ObjectExtensions.operator_notEquals(name, null);
+    if (_notEquals) {
+      JvmOperation _findOperation = this.findOperation(name);
+      newValue.setOperation(_findOperation);
+    }
     EList<String> _values = newValue.getValues();
     CollectionExtensions.<String>addAll(_values, values);
+    JvmAnnotationReference _delegate = this.getDelegate();
+    EList<JvmAnnotationValue> _values_1 = _delegate.getValues();
+    _values_1.add(newValue);
   }
   
   public void set(final String name, final boolean... values) {
     final JvmBooleanAnnotationValue newValue = TypesFactory.eINSTANCE.createJvmBooleanAnnotationValue();
-    JvmOperation _findOperation = this.findOperation(name);
-    newValue.setOperation(_findOperation);
+    boolean _notEquals = ObjectExtensions.operator_notEquals(name, null);
+    if (_notEquals) {
+      JvmOperation _findOperation = this.findOperation(name);
+      newValue.setOperation(_findOperation);
+    }
     EList<Boolean> _values = newValue.getValues();
     _values.addAll(((Collection<? extends Boolean>)Conversions.doWrapArray(values)));
+    JvmAnnotationReference _delegate = this.getDelegate();
+    EList<JvmAnnotationValue> _values_1 = _delegate.getValues();
+    _values_1.add(newValue);
   }
   
   public void set(final String name, final int... values) {
     final JvmIntAnnotationValue newValue = TypesFactory.eINSTANCE.createJvmIntAnnotationValue();
-    JvmOperation _findOperation = this.findOperation(name);
-    newValue.setOperation(_findOperation);
+    boolean _notEquals = ObjectExtensions.operator_notEquals(name, null);
+    if (_notEquals) {
+      JvmOperation _findOperation = this.findOperation(name);
+      newValue.setOperation(_findOperation);
+    }
     EList<Integer> _values = newValue.getValues();
     _values.addAll(((Collection<? extends Integer>)Conversions.doWrapArray(values)));
+    JvmAnnotationReference _delegate = this.getDelegate();
+    EList<JvmAnnotationValue> _values_1 = _delegate.getValues();
+    _values_1.add(newValue);
   }
   
   public boolean remove(final String name) {
