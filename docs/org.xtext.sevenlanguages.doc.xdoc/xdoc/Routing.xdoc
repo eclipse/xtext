@@ -14,7 +14,7 @@ annotations to match incoming URLs and other frameworks have their own external 
 
 The HTTP routing language explained in this section uses an approach very similar to the one from the
 link[http://playframework.org][Play framework]. You basically declare a list of URL patterns and explain
-what to do for each case. In contrast to play! which heavily relies on static methods, you can also declare
+what to do for each case. In contrast to Play! which heavily relies on static methods, you can also declare
 so called dependencies which are translated to fields annotated with code[@Inject]. So this DSL plays
 nicely with dependency injection and especially with the ref:guice[Guice modules DSL].
 
@@ -43,12 +43,12 @@ GET /guess/:theGuess
 section:routing_running[Running the Example]
 
 The example project's name is e[org.xtext.httprouting.examples] and includes a simple but runnable number
-guessing game. Just start the server (an embedded Jetty) by running codeRef[framework.StartServer] as a
+guessing game. Just start the server (an embedded Jetty) by running code[framework.StartServer] as a
 Java Application. Then point your browser to the URL link[http://localhost:8080/guess][http://localhost:8080/guess].
 
 section:routing_grammar[Grammar]
 
-The Routing DSL extends org.eclipse.xtext.xbase.annotations.XbaseWithAnnotations to make use of expressions
+The Routing DSL extends e[org.eclipse.xtext.xbase.annotations.XbaseWithAnnotations] to make use of expressions
 predefined by link[http://www.eclipse.org/Xtext/#xbase][Xbase] plus support for Annotations.
 code[Xtext][
 grammar org.xtext.httprouting.Route 
@@ -59,46 +59,39 @@ import "http://www.eclipse.org/xtext/common/JavaVMTypes" as types
 import "http://www.eclipse.org/xtext/xbase/Xbase" as xbase
 
 Model :
-  imports+=Import*
-  declarations+=AbstractDeclaration*;
-
-Import :
-  'import' importedType=\[ types::JvmType | QualifiedName\];
+	importSection=XImportSection?
+	declarations+=AbstractDeclaration*;
 
 AbstractDeclaration :
-  Dependency | Route;
+	Dependency | Route;
 
 Dependency :
-  'inject' annotations+=XAnnotation? type=JvmTypeReference name=ID;
+	'inject' annotations+=XAnnotation? type=JvmTypeReference name=ID;
 
 Route :
-  requestType=RequestType url=URL 
-  ('when' condition=XExpression)? 
-  'do' call=XExpression;
+	requestType=RequestType url=URL 
+	('when' condition=XExpression)? 
+	'do' call=XExpression;
 
 enum RequestType :
-  GET | POST | PUT | DELETE | HEAD;
+	GET | POST | PUT | DELETE | HEAD;
 
 /**
  * matches URLs like 
- *   '/foo/bar.html' or 
- *   '/customer/:customerID/save'
+ * 	'/foo/bar.html' or 
+ * 	'/customer/:customerID/save'
  */
 URL :
-  {URL} 
-  ( '/' | ('/' (QualifiedName | variables+=Variable))* 
-  ('/' variables+=Variable wildcard?='*')?);
+	{URL} 
+	( '/' | ('/' (QualifiedName | variables+=Variable))* 
+	('/' variables+=Variable wildcard?='*')?);
 
 Variable :
-  ':' name=ID;
+	':' name=ID;
 ]
 
-The routing DSL defines imports by using cross references. This makes it possible to use content assist and
-get an error marker if the type does not exist. It is planned for an upcoming version of Xtext to provide
-an even better abstraction for importing Java types, including automatic support for IDE features like organizing imports.
-
-Other than that there should not be any surprises if you know the grammar language: A e[Model] consists of
-any number of e[Imports] followed by any number of e[Dependencies] and e[Routes]. A e[Route] starts with a e[RequestType],
+There should not be any surprises if you know the grammar language: A e[Model] consists of
+an e[XImportSection] followed by any number of e[Dependencies] and e[Routes]. A e[Route] starts with a e[RequestType],
 i.e. HTTP method, followed by a e[URL] pattern. Then an optional when-clause can be specified followed by
 a mandatory do-clause.
 
@@ -109,7 +102,7 @@ extending the class codeRef[javax.servlet.http.HttpServlet] is derived.
 First the e[Dependencies] are translated to Java fields. This is almost a one-to-one mapping.
 
 code[Xtend][
-// translate the dependencies to fields annotated with @Inejct
+// translate the dependencies to fields annotated with @Inject
 for (field : model.declarations.filter(typeof(Dependency))) {
   members += field.toField(field.name, field.type) \[
     annotations += field.toAnnotation(typeof(Inject))
@@ -208,44 +201,3 @@ Just because of that code you can now refer to the local variables code[request]
 code[theGuess]. Also it defines that the expected type is code[Xtend][void] so you are not allowed to
 write thing like code[return 42]. 
 
-section:routing_improts[Validated Imports]
-
-Unlike in the other examples, where we used Xtext's default imports approach, in the routing DSL we use real cross-references
-to Java types in imports. Although it is not as convenient to implement, it has the advantage having imports validated 
-and getting proper content assist in your imports section. For future releases it is planned to significantly
-improve support for import sections for JVM languages including nice IDE features like organize imports.
-
-To get a bit of this goodness you first use a slightly different e[Import] rule in the grammar. Instead of using the
-magic 'importedNamespace' feature name we simply use a cross reference to codeRef[org.eclipse.xtext.common.types.JvmType]:
-
-code[Xtext][
-Import :
-  'import' importedType=\[ types::JvmType | QualifiedName\];
-]
-
-In addition to that you need to explain how the import of a type contributes to the namespace resolution.
-For that you subclass the scope provider as done in codeRef[org.xtext.httprouting.scoping.RouteImportedNamespaceScopeProvider]
-and override the method code[internalGetImportedNamespaceResolvers] like in the following:
-
-code[Xtend][
-  override internalGetImportedNamespaceResolvers(EObject context, 
-      boolean ignoreCase) {
-    val model = context.getContainerOfType(typeof(Model))
-    return model.imports.map \[
-        createImportedNamespaceResolver(importedType.qualifiedName, 
-           ignoreCase)
-      \].filterNull.toList
-  }
-]
-
-To register your customized class you go into the runtime module codeRef[org.xtext.httprouting.RouteRuntimeModule]
-and override the corresponding binding:
-
-code[Java][
-  @Override
-  public void configureIScopeProviderDelegate(Binder binder) {
-    binder.bind(IScopeProvider.class).annotatedWith(
-        Names.named(AbstractDeclarativeScopeProvider.NAMED_DELEGATE))
-    .to(RouteImportedNamespaceScopeProvider.class);
-  }
-]

@@ -36,56 +36,53 @@ This is the grammar of the templates DSL:
  
 code[Xtext][
 grammar org.xtext.template.Template 
-    with org.eclipse.xtext.xbase.annotations.XbaseWithAnnotations
+   with org.eclipse.xtext.xbase.annotations.XbaseWithAnnotations
 
 generate template "http://www.xtext.org/template/Template"
 import 'http://www.eclipse.org/xtext/xbase/Xbase' as xbase
 
 TemplateFile:
-  '<!--''«' 
-    ('package' package=QualifiedName)? 
-    imports+=Import* 
-    params+=Parameter* 
-    body=RichString;
-
-Import:
-  'import' importedNamespace=QualifiedName;
+	'<!--''«' 
+		('package' package=QualifiedName)? 
+		importSection=XImportSection? 
+		params+=Parameter* 
+		body=RichString;
 
 Parameter:
-  annotations+=XAnnotation* 
-  'param' type=JvmTypeReference? name=ID ('=' defaultexp=XExpression)?;
+	annotations+=XAnnotation* 
+	'param' type=JvmTypeReference? name=ID ('=' defaultexp=XExpression)?;
 
 RichString returns xbase::XBlockExpression:
-  {RichString}  
-  expressions+=RichStringLiteral 
-  (expressions+=RichStringPart expressions+=RichStringLiteral)*;
+	{RichString}  
+	expressions+=RichStringLiteral 
+	(expressions+=RichStringPart expressions+=RichStringLiteral)*;
 
 RichStringLiteral returns xbase::XStringLiteral:
-  {RichStringLiteral} value=TEXT;
+	{RichStringLiteral} value=TEXT;
 
 RichStringPart returns xbase::XExpression:
-  XExpressionInsideBlock |
-  RichStringForLoop |
-  RichStringIf;
+	XExpressionInsideBlock |
+	RichStringForLoop |
+	RichStringIf;
 
 RichStringForLoop returns xbase::XForLoopExpression:
-  {RichStringForLoop}
-  "FOR" declaredParam=JvmFormalParameter ':' forExpression=XExpression
-    eachExpression=RichString
-  "ENDFOR";
+	{RichStringForLoop}
+	"FOR" declaredParam=JvmFormalParameter ':' forExpression=XExpression
+		eachExpression=RichString
+	"ENDFOR";
 
 RichStringIf returns xbase::XIfExpression:
-  {RichStringIf}
-  "IF" if=XExpression
-    then=RichString
-  (else=RichStringElseIf | "ELSE" else=RichString)?
-  "ENDIF";
-  
+	{RichStringIf}
+	"IF" if=XExpression
+		then=RichString
+	(else=RichStringElseIf | "ELSE" else=RichString)?
+	"ENDIF";
+	
 RichStringElseIf returns xbase::XIfExpression:
-  {RichStringIf}
-  "ELSEIF" if=XExpression
-    then=RichString
-  (else=RichStringElseIf | "ELSE" else=RichString)?;
+	{RichStringIf}
+	"ELSEIF"if=XExpression
+		then=RichString
+	(else=RichStringElseIf | "ELSE" else=RichString)?;
 
 terminal TEXT : '»' (!'«')* (EOF|'«');
 ]
@@ -189,15 +186,12 @@ public String getTitle() {
 ]
 
 In the inferrer, note that we derive the property's type in three steps: Take the declared one, if there is none, 
-derive it from the initializer using the injected codeRef[org.eclipse.xtext.xbase.typing.ITypeProvider]
-and if even that fails, use codeRef[java.lang.String] as default. 
+derive it from the initializer and if even that fails, use codeRef[java.lang.String] as default. 
 
 code[Xtend][
-@Inject extension ITypeProvider
-...
 for (param : element.params) {
   val type = param.type 
-    ?: param.defaultexp?.type 
+    ?: param.defaultexp?.inferredType 
     ?: element.newTypeRef(typeof(String))
   members += param.toField(param.name, type) \[
     if (param.defaultexp != null)
@@ -330,41 +324,37 @@ As usual, we have to bind our codeRef[org.xtext.template.jvmmodel.TemplateCompil
 codeRef[org.xtext.template.TemplateRuntimeModule] in order to be picked up as the 
 codeRef[org.eclipse.xtext.xbase.compiler.XbaseCompiler] in the context of our language.
 
-section:templates_typeProvider[TypeProvider]
+section:templates_typeProvider[Type Computation]
 
-The type system has to know what types our new expressions have. This is the job of the 
-codeRef[org.xtext.template.jvmmodel.TemplateTypeProvider]: e[RichString] becomes a 
+The type system has to know how to determine the types of our new expressions. This is the job of the 
+codeRef[org.xtext.template.typesystem.TemplateTypeComputer]: e[RichString] becomes a 
 codeRef[java.lang.StringBuilder]. As opposed to its super type 
 codeRef[org.eclipse.xtext.xbase.XForLoopExpression] a e[RichStringForLoop] is of type
 codeRef[java.lang.StringBuilder] as well. The for-loop's body is expected to have a type, as the results
 must be concatenatable, which is different from Xbase's for-loop.
 
 code[Xtend][
-@Singleton
-class TemplateTypeProvider extends XbaseTypeProvider {
-  
-  @Inject TypeReferences typeReferences
-  
-  def dispatch type(RichString string, 
-                    JvmTypeReference typeRef, 
-                    boolean isRawTypes) {
-    typeReferences.getTypeForName(typeof(StringBuilder), string)
-  }
-  
-  def dispatch type(RichStringForLoop string, 
-                    JvmTypeReference typeRef, 
-                    boolean isRawTypes) {
-    typeReferences.getTypeForName(typeof(StringBuilder), string)
-  }
-  
-  def dispatch expectedType(RichStringForLoop container, 
-                            EReference reference, 
-                            int index, boolean rawType) {
-    if (reference == XFOR_LOOP_EXPRESSION__EACH_EXPRESSION)
-      typeReferences.getTypeForName(typeof(Object), container)
-    else
-      super._expectedType(container,reference,index, rawType)
-  }
+class TemplateTypeComputer extends XbaseWithAnnotationsTypeComputer {
+	
+	override computeTypes(XExpression expression, ITypeComputationState state) {
+		if(expression instanceof RichString) {
+			_computeTypes(expression as RichString, state);
+		} else if(expression instanceof RichStringForLoop) {
+			_computeTypes(expression as RichStringForLoop, state);
+		} else {
+			super.computeTypes(expression, state)
+		}
+	}
+	
+	protected def _computeTypes(RichString expression, ITypeComputationState state) {
+		super._computeTypes(expression as XBlockExpression, state)
+		state.acceptActualType(getTypeForName(typeof(StringBuilder), state))
+	}
+	 
+	protected def _computeTypes(RichStringForLoop expression, ITypeComputationState state) {
+		super._computeTypes(expression as XForLoopExpression, state)
+		state.acceptActualType(getTypeForName(typeof(StringBuilder), state))
+	}
 }
 ]
 
@@ -399,7 +389,7 @@ public class TemplateProposalProvider
 
 section:templates_highlighting[Syntax Highlighting]
 
-Sometimes it is hard to see whether you are in text or expression mode. To give the user better feedback,
+Sometimes it is hard to see whether you are in text mode or in expression mode. To give the user better feedback,
 we have changed the way the text is highlighted. This customization consists of two parts: Add new highlighting
 styles in the codeRef[org.xtext.template.ui.highlighting.TemplateHighlightingConfiguration] and apply
 them to the text in the codeRef[org.xtext.template.ui.highlighting.TemplateHighlightingCalculator]. As

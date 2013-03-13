@@ -102,7 +102,7 @@ Program :
   subPrograms+=SubProgram*;
   
 SubProgram:
-  'sub' name=ValidID
+  'sub' name=ValidID (':' returnType=JvmTypeReference)?
   (parameters += FullJvmFormalParameter)*
   body=Body;
 
@@ -141,10 +141,9 @@ class TortoiseShellJvmModelInferrer extends AbstractModelInferrer {
         \]
       for(subProgram: program.subPrograms)
         members += subProgram.toMethod(subProgram.name, 
-            program.newTypeRef(Void::TYPE)) \[
-          for(functionParameter: subProgram.parameters)
-            parameters += functionParameter.toParameter(
-                functionParameter.name, functionParameter.parameterType)
+            subProgram.returnType ?: inferredType(subProgram.body)) \[
+          for(subParameter: subProgram.parameters)
+              parameters += subParameter.toParameter(subParameter.name, subParameter.parameterType)
           body = subProgram.body
         \]
     \]
@@ -165,9 +164,7 @@ The first thing we have to cope with is the mixture of existing Java methods (fr
 codeRef[org.xtext.tortoiseshell.lib.Tortoise]) and inferred ones. While the former are evaluated
 via Java reflection, we need special treatment for the latter. The idea is to bind an instance of 
 codeRef[org.xtext.tortoiseshell.lib.Tortoise] to code[Xtend][this] and intercept calls to the inferred 
-methods to execute them directly. This is accomplished by overriding the method 
-
-code[invokeOperation]:
+methods to execute them directly. This is accomplished by overriding the method code[invokeOperation]:
 
 code[Xtend][
   @Inject extension IJvmModelAssociations
@@ -176,17 +173,20 @@ code[Xtend][
                                      Object receiver, 
                                      List<Object> argumentValues) {
     val executable = operation.sourceElements.head
-    if(executable instanceof Executable) {
+    if (executable instanceof Executable) {
       val context = createContext
       context.newValue(XbaseScopeProvider::THIS, tortoise)
       var index = 0
-      for(param: operation.parameters) {
+      for (param : operation.parameters) {
         context.newValue(QualifiedName::create(param.name), 
-                         argumentValues.get(index))
+            argumentValues.get(index))
         index = index + 1  
       }
-      evaluate((executable as Executable).body, context, 
-               CancelIndicator::NullImpl)
+      val result = evaluate((executable as Executable).body, 
+          context, CancelIndicator::NullImpl)
+      if(result.exception != null)
+        throw result.exception
+      result.result
     } else {
       super.invokeOperation(operation, receiver, argumentValues)
     }
@@ -237,17 +237,14 @@ code[Xtend][
 section:tortoise_additons[Literal Classes]
 
 To make the static methods and fields of codeRef[java.lang.Math] and codeRef[org.eclipse.draw2d.ColorConstants]
-callable directly, we provided the codeRef[org.xtext.tortoiseshell.scoping.TortoiseShellExtensionClassNameProvider]:
+callable directly, we provided the codeRef[org.xtext.tortoiseshell.scoping.TortoiseShellImplicitlyImportedTypes]:
 
 code[Xtend][
-class TortoiseShellExtensionClassNameProvider extends 
-  StaticImplicitMethodsFeatureForTypeProvider$ExtensionClassNameProvider {
-
-  override protected computeLiteralClassNames() {
-    super.computeLiteralClassNames => \[
-      it += "java.lang.Math"
-      it += "org.eclipse.draw2d.ColorConstants" 
-    \]  
+class TortoiseShellImplicitlyImportedTypes extends ImplicitlyImportedTypes {
+  override protected getStaticImportClasses() {
+    (super.getStaticImportClasses() + #\[typeof(Math), typeof(ColorConstants)\])
+      .toList
+	}
   }
 }
 ]
