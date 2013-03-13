@@ -47,6 +47,20 @@ public class ConstantExpressionsInterpreterTest extends AbstractXtendTestCase {
   }
   
   @Test
+  public void testStringAdditionLiteral() {
+    try {
+      final XtendFunction function = this.function("@Foo((\"foo\" + \"bar\")) def void testFoo() {}");
+      EList<XAnnotation> _annotations = function.getAnnotations();
+      XAnnotation _head = IterableExtensions.<XAnnotation>head(_annotations);
+      XExpression _value = _head.getValue();
+      Object _evaluate = this.interpreter.evaluate(_value, null);
+      Assert.assertEquals("foobar", _evaluate);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
   public void testStringArrayLiteral() {
     try {
       final XtendFunction function = this.function("@Foo(#[\"foo\",\"bar\"]) def void testFoo() {}");

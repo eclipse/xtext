@@ -20,6 +20,11 @@ class ConstantExpressionsInterpreterTest extends AbstractXtendTestCase {
 		assertEquals('foo', interpreter.evaluate(function.annotations.head.value, null))
 	}
 	
+	@Test def void testStringAdditionLiteral() {
+		val function = function('@Foo(("foo" + "bar")) def void testFoo() {}')
+		assertEquals('foobar', interpreter.evaluate(function.annotations.head.value, null))
+	}
+	
 	@Test def void testStringArrayLiteral() {
 		val function = function('@Foo(#["foo","bar"]) def void testFoo() {}')
 		assertEquals('bar', (interpreter.evaluate(function.annotations.head.value, null) as String[]).get(1))
