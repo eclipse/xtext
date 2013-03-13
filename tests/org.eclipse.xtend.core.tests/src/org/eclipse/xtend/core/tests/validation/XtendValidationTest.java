@@ -348,6 +348,31 @@ public class XtendValidationTest extends AbstractXtendTestCase {
 		helper.assertError(clazz, XRETURN_EXPRESSION, INVALID_RETURN);
 	}
 	
+	@Test public void testReturnStatement2() throws Exception {
+		XtendClass clazz = clazz("class Z { def Object foo() { val Object x = if (false) return }}");
+		helper.assertError(clazz, XRETURN_EXPRESSION, INVALID_RETURN);
+	}
+	
+	@Test public void testReturnStatement3() throws Exception {
+		XtendClass clazz = clazz("class Z { def Object foo() { val Object x = if (false) return '' }}");
+		helper.assertNoError(clazz, INVALID_RETURN);
+	}
+	
+	@Test public void testReturnStatement4() throws Exception {
+		XtendClass clazz = clazz("class Z { def void foo() { val Object x = if (false) return; x.toString }}");
+		helper.assertNoError(clazz, INVALID_RETURN);
+	}
+	
+	@Test public void testReturnStatement5() throws Exception {
+		XtendClass clazz = clazz("class Z { def foo() { val Object x = if (false) return; x }}");
+		helper.assertError(clazz, XRETURN_EXPRESSION, INVALID_RETURN);
+	}
+
+	@Test public void testReturnStatement6() throws Exception {
+		XtendClass clazz = clazz("class Z { def foo() { val Object x = if (false) return ''; x }}");
+		helper.assertNoError(clazz, INVALID_RETURN);
+	}
+	
 	@Test public void testBug_357230() throws Exception {
 		XtendClass clazz = clazz(
 				"package x class Z {" +
