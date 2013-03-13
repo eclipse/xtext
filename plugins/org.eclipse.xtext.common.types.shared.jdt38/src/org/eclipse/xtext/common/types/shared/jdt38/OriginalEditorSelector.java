@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.apache.log4j.Logger;
 import org.eclipse.core.resources.IFile;
+import org.eclipse.core.resources.IResource;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.core.runtime.content.IContentType;
@@ -63,7 +64,7 @@ public class OriginalEditorSelector implements IEditorAssociationOverride {
 	private ITraceForTypeRootProvider traceForTypeRootProvider;
 
 	public IEditorDescriptor[] overrideEditors(IEditorInput editorInput, IContentType contentType, IEditorDescriptor[] editorDescriptors) {
-		IEditorDescriptor xbaseEditor = findXbaseEditor(editorInput);
+		IEditorDescriptor xbaseEditor = findXbaseEditor(editorInput, true);
 		if (xbaseEditor != null) {
 			List<IEditorDescriptor> result = Lists.asList(xbaseEditor, editorDescriptors);
 			return (IEditorDescriptor[]) result.toArray(new IEditorDescriptor[result.size()]);
@@ -72,7 +73,7 @@ public class OriginalEditorSelector implements IEditorAssociationOverride {
 	}
 
 	public IEditorDescriptor[] overrideEditors(String fileName, IContentType contentType, IEditorDescriptor[] editorDescriptors) {
-		IEditorDescriptor xbaseEditor = findXbaseEditor(fileName);
+		IEditorDescriptor xbaseEditor = findXbaseEditor(fileName, true);
 		if (xbaseEditor != null) {
 			List<IEditorDescriptor> result = Lists.asList(xbaseEditor, editorDescriptors);
 			return (IEditorDescriptor[]) result.toArray(new IEditorDescriptor[result.size()]);
@@ -81,14 +82,14 @@ public class OriginalEditorSelector implements IEditorAssociationOverride {
 	}
 
 	public IEditorDescriptor overrideDefaultEditor(IEditorInput editorInput, IContentType contentType, IEditorDescriptor editorDescriptor) {
-		IEditorDescriptor result = findXbaseEditor(editorInput);
+		IEditorDescriptor result = findXbaseEditor(editorInput, false);
 		if (result != null)
 			return result;
 		return editorDescriptor;
 	}
 
 	public IEditorDescriptor overrideDefaultEditor(String fileName, IContentType contentType, IEditorDescriptor editorDescriptor) {
-		IEditorDescriptor result = findXbaseEditor(fileName);
+		IEditorDescriptor result = findXbaseEditor(fileName, false);
 		if (result != null)
 			return result;
 		return editorDescriptor;
@@ -97,31 +98,49 @@ public class OriginalEditorSelector implements IEditorAssociationOverride {
 	// we get invoked when:
 	// - somebody doubleclicks on a .class file in a JAR in the JDT Package Explorer
 	// - somebody clicks on a stack frame hyperlink in the console 
-	protected IEditorDescriptor findXbaseEditor(String fileName) {
+	protected IEditorDescriptor findXbaseEditor(String fileName, boolean ignorePreference) {
 		if (decisions.isJDI()) {
 			String file = debugPluginListener.findXtextSourceFileNameForClassFile(fileName);
 			if (file != null)
 				return getXtextEditor(URI.createURI(file));
-		} else {
-			IType type = findJavaTypeForSimpleFileName(fileName);
-			if (type != null) {
-				ITrace trace = traceForTypeRootProvider.getTraceToSource(type.getTypeRoot());
-				return getXtextEditor(trace);
+		}
+		if (decisions.decideAccordingToCallerForSimpleFileName() == Decision.FORCE_JAVA) {
+			return null;
+		}
+		IType type = findJavaTypeForSimpleFileName(fileName);
+		if (type != null) {
+			if (!ignorePreference) {
+				IResource resource = type.getResource();
+				if (resource != null) {
+					try {
+						// the user has chosen to always use a particular editor, e.g. by means of
+						// Open With in the package explorer
+						String favoriteEditor = resource.getPersistentProperty(IDE.EDITOR_KEY);
+						if (favoriteEditor != null)
+							return null;
+					} catch (CoreException e) {
+						logger.debug(e.getMessage(), e);
+					}
+				}
 			}
+			ITrace trace = traceForTypeRootProvider.getTraceToSource(type.getTypeRoot());
+			return getXtextEditor(trace);
 		}
 		return null;
 	}
 
-	public IEditorDescriptor findXbaseEditor(IEditorInput editorInput) {
+	public IEditorDescriptor findXbaseEditor(IEditorInput editorInput, boolean ignorePreference) {
 		IFile file = ResourceUtil.getFile(editorInput);
 		if (file == null)
 			return null;
-		try {
-			String favoriteEditor = file.getPersistentProperty(IDE.EDITOR_KEY);
-			if (favoriteEditor != null)
-				return null;
-		} catch (CoreException e) {
-			logger.debug(e.getMessage(), e);
+		if (!ignorePreference) {
+			try {
+				String favoriteEditor = file.getPersistentProperty(IDE.EDITOR_KEY);
+				if (favoriteEditor != null)
+					return null;
+			} catch (CoreException e) {
+				logger.debug(e.getMessage(), e);
+			}
 		}
 		// TODO stay in same editor if local navigation
 		Decision decision = decisions.decideAccordingToCaller();
