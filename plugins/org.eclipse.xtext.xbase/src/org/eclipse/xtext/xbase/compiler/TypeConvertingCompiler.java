@@ -68,7 +68,7 @@ public class TypeConvertingCompiler extends AbstractXbaseCompiler {
 	protected final void internalToConvertedExpression(final XExpression obj, ITreeAppendable appendable,
 			@Nullable JvmTypeReference toBeConvertedTo) {
 		if (toBeConvertedTo != null) {
-			JvmTypeReference actualType = getTypeProvider().getType(obj);
+			JvmTypeReference actualType = getType(obj);
 			if (!EcoreUtil.equals(toBeConvertedTo, actualType)) {
 				doConversion(toBeConvertedTo, actualType, appendable, obj, new Later() {
 					public void exec(ITreeAppendable appendable) {

@@ -23,6 +23,7 @@ Import-Package: javax.inject;version="1.0.0",
  org.junit.runners;version="4.5.0"
 Bundle-ClassPath: .
 Export-Package: .;x-internal:=true,
+ bug380058;x-internal:=true,
  org.eclipse.xtend.core.tests;x-internal:=true,
  org.eclipse.xtend.core.tests.annotations;x-internal:=true,
  org.eclipse.xtend.core.tests.compiler;x-internal:=true,
