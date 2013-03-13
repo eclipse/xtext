@@ -892,6 +892,23 @@ public class JavaRefactoringIntegrationTest extends AbstractXtendUITestCase {
 	}
 
 	@Test
+	// @see https://bugs.eclipse.org/bugs/show_bug.cgi?id=402916
+	public void testRenameRefToXtendDefinedConstructorSameFile() throws Exception {
+		try {
+			String xtendModel = "class XtendClass { new() {} def foo() { new XtendClass } }";
+			IFile xtendRef = testHelper.createFile("XtendClass.xtend", xtendModel);
+			final XtextEditor editor = openEditorSafely(xtendRef);
+			renameXtendElement(editor, xtendModel.lastIndexOf("XtendClass"), "NewXtendClass");
+			assertDocumentContains(editor, xtendModel.replace("XtendClass", "NewXtendClass"));
+			IFile newXtendClass = fileAsserts.assertFileExists("src/NewXtendClass.xtend");
+			fileAsserts.assertFileContains(newXtendClass, "class NewXtendClass {");
+		} finally {
+			testHelper.getProject().getFile("src/NewXtendClass.xtend").delete(true, new NullProgressMonitor());
+			waitForAutoBuild();
+		}
+	}
+
+	@Test
 	public void testRenameXtendInterface() throws Exception {
 		try {
 			String xtendModel = "interface XtendInterface { }";
