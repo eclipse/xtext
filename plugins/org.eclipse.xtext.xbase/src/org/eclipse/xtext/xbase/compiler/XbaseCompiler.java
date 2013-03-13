@@ -466,7 +466,7 @@ public class XbaseCompiler extends FeatureCallCompiler {
 				internalToJavaStatement(ex, b, isReferenced);
 				if (isReferenced) {
 					b.newLine().append(getVarName(expr, b)).append(" = (");
-					internalToJavaExpression(ex, b);
+					internalToConvertedExpression(ex, b, getTypeProvider().getType(expr));
 					b.append(");");
 				}
 			}
@@ -839,7 +839,7 @@ public class XbaseCompiler extends FeatureCallCompiler {
 			b.newLine();
 			b.append(getVarName(expr, b));
 			b.append(" = ");
-			internalToJavaExpression(expr.getThen(), b);
+			internalToConvertedExpression(expr.getThen(), b, getTypeProvider().getType(expr));
 			b.append(";");
 		}
 		b.decreaseIndentation().newLine().append("}");
@@ -851,7 +851,7 @@ public class XbaseCompiler extends FeatureCallCompiler {
 				b.newLine();
 				b.append(getVarName(expr, b));
 				b.append(" = ");
-				internalToJavaExpression(expr.getElse(), b);
+				internalToConvertedExpression(expr.getElse(), b, getTypeProvider().getType(expr));
 				b.append(";");
 			}
 			b.decreaseIndentation().newLine().append("}");

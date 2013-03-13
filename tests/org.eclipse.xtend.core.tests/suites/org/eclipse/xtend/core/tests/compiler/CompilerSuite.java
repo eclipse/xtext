@@ -19,6 +19,7 @@ import org.junit.runners.Suite.SuiteClasses;
 @SuiteClasses({
 	AnnotationCompilerTest.class,
 	AnnotationsCompilerTest.class,
+	CompilerTest.class,
 	CompilerBugTest.class,
 	CompilerTraceTest.class,
 	ConfiguredCompilerTest.class,
@@ -26,7 +27,8 @@ import org.junit.runners.Suite.SuiteClasses;
 	DataCompilerTest.class,
 	PropertyCompilerTest.class,
 	XtendCompilerTest.class,
-	XtendCompilerErrorHandlingTest.class
+	XtendCompilerErrorHandlingTest.class,
+	XbaseIntegrationTest.class
 })
 public class CompilerSuite {
 }
