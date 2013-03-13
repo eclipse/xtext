@@ -16,6 +16,11 @@ import com.google.common.annotations.Beta;
 public interface Type extends NamedElement {
 	
 	/**
+	 * @return the qualified name of this type declaration.
+	 */
+	String getQualifiedName();
+	
+	/**
      * Determines if the type represented by this
      * <code>Type</code> object is either the same as, or is a supertype of, 
      * the type represented by the specified <code>Type</code> parameter. 
