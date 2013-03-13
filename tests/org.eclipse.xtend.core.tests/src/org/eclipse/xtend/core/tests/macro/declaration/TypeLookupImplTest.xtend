@@ -74,10 +74,10 @@ class AddNestedTypesProcessor implements RegisterGlobalsParticipant<TypeDeclarat
 	
 	override doRegisterGlobals(List<? extends TypeDeclaration> annotatedSourceElements, RegisterGlobalsContext context) {
 		for (type : annotatedSourceElements) {
-			context.registerClass(type.name+'.NestedClass')
-			context.registerInterface(type.name+'.NestedInterface')
-			context.registerAnnotationType(type.name+'.NestedAnnotationType')
-			context.registerEnumerationType(type.name+'.NestedEnumerationType')
+			context.registerClass(type.qualifiedName+'.NestedClass')
+			context.registerInterface(type.qualifiedName+'.NestedInterface')
+			context.registerAnnotationType(type.qualifiedName+'.NestedAnnotationType')
+			context.registerEnumerationType(type.qualifiedName+'.NestedEnumerationType')
 		}
 	}
 	

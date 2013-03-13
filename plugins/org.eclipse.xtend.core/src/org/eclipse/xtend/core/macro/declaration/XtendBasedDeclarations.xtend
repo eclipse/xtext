@@ -92,7 +92,7 @@ abstract class XtendTypeDeclarationImpl<T extends XtendTypeDeclaration> extends 
 		delegate.name
 	}
 	
-	override getName() {
+	override getQualifiedName() {
 		if (packageName != null)
 			packageName+'.'+simpleName
 		else 
@@ -120,11 +120,11 @@ abstract class XtendTypeDeclarationImpl<T extends XtendTypeDeclaration> extends 
 	}
 	
 	override findField(String name) {
-		declaredFields.findFirst[field | field.name == name]
+		declaredFields.findFirst[field | field.simpleName == name]
 	}
 	
 	override findMethod(String name, TypeReference... parameterTypes) {
-		declaredMethods.findFirst[method | method.name == name && method.parameters.map[type].toList == parameterTypes.toList]
+		declaredMethods.findFirst[method | method.simpleName == name && method.parameters.map[type].toList == parameterTypes.toList]
 	}
 	
 	override getDeclaredMethods() {
@@ -224,7 +224,7 @@ class XtendMethodDeclarationImpl extends XtendMemberDeclarationImpl<XtendFunctio
 		compilationUnit.toVisibility(delegate.visibility)
 	}
 	
-	override getName() {
+	override getSimpleName() {
 		delegate.name
 	}
 	
@@ -260,7 +260,7 @@ class XtendConstructorDeclarationImpl extends XtendMemberDeclarationImpl<XtendCo
 		compilationUnit.toVisibility(delegate.visibility)
 	}
 	
-	override getName() {
+	override getSimpleName() {
 		declaringType.simpleName
 	}
 	
@@ -288,7 +288,7 @@ class XtendParameterDeclarationImpl extends XtendAnnotationTargetImpl<XtendParam
 		compilationUnit.toTypeReference(delegate.parameterType)
 	}
 	
-	override getName() {
+	override getSimpleName() {
 		delegate.name
 	}
 
@@ -304,7 +304,7 @@ class XtendFieldDeclarationImpl extends XtendMemberDeclarationImpl<XtendField> i
 		compilationUnit.toVisibility(delegate.visibility)
 	}
 	
-	override getName() {
+	override getSimpleName() {
 		delegate.name
 	}
 	
@@ -332,14 +332,14 @@ class XtendFieldDeclarationImpl extends XtendMemberDeclarationImpl<XtendField> i
 
 class XtendEnumerationValueDeclarationImpl extends XtendMemberDeclarationImpl<XtendEnumLiteral> implements EnumerationValueDeclaration {
 	
-	override getName() {
+	override getSimpleName() {
 		delegate.name
 	}
 }
 
 class XtendAnnotationTypeElementDeclarationImpl extends XtendMemberDeclarationImpl<XtendField> implements AnnotationTypeElementDeclaration {
 	
-	override getName() {
+	override getSimpleName() {
 		delegate.name
 	}
 	
@@ -363,8 +363,12 @@ class XtendTypeParameterDeclarationImpl extends AbstractDeclarationImpl<JvmTypeP
 		delegate.constraints.filter(typeof(JvmUpperBound)).map[compilationUnit.toTypeReference(typeReference)].toList
 	}
 	
-	override getName() {
+	override getSimpleName() {
 		delegate.name
+	}
+	
+	override getQualifiedName() {
+		simpleName
 	}
 	
 	override getTypeParameterDeclarator() {

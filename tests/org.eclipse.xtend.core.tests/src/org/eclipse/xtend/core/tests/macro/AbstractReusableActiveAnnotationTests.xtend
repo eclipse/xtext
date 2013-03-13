@@ -171,7 +171,7 @@ abstract class AbstractReusableActiveAnnotationTests {
 						]
 					}
 					private def getParameterType(MethodDeclaration it) {
-						parameters.head.type.type.name
+						parameters.head.type.type.qualifiedName
 					}
 				}
 			''',
@@ -210,20 +210,20 @@ abstract class AbstractReusableActiveAnnotationTests {
 							declaringType.addMethod(field.getterName) [
 								returnType = field.type
 								body = ['''
-									return this.«field.name»;
+									return this.«field.simpleName»;
 								''']
 							]
-							declaringType.addMethod('set'+field.name.toFirstUpper) [
-								addParameter(field.name, field.type)
+							declaringType.addMethod('set'+field.simpleName.toFirstUpper) [
+								addParameter(field.simpleName, field.type)
 								body = ['''
-									this.«field.name» = «field.name»;
+									this.«field.simpleName» = «field.simpleName»;
 								''']
 							]
 						]
 					}
 					
 					def private String getterName(MutableFieldDeclaration field) {
-						return 'get'+field.name.toFirstUpper
+						return 'get'+field.simpleName.toFirstUpper
 					}
 				}
 			",
@@ -238,13 +238,13 @@ abstract class AbstractReusableActiveAnnotationTests {
 		) [
 			val clazz = typeLookup.findClass('myusercode.MyClass')
 			val getter = clazz.declaredMethods.head
-			assertEquals('getMyField', getter.name)
+			assertEquals('getMyField', getter.simpleName)
 			assertEquals('String', getter.returnType.toString)
 			
 			val setter = clazz.findMethod('setMyField', getter.returnType)
-			assertEquals('setMyField', setter.name)
+			assertEquals('setMyField', setter.simpleName)
 			assertEquals('void', setter.returnType.toString)
-			assertEquals('myField', setter.parameters.head.name)
+			assertEquals('myField', setter.parameters.head.simpleName)
 			assertEquals('String', setter.parameters.head.type.toString)
 		]
 	}
@@ -286,8 +286,8 @@ abstract class AbstractReusableActiveAnnotationTests {
 		) [
 			val type = typeLookup.findClass('myusercode.MyClass')
 			val method = type.declaredMethods.head
-			assertEquals('A', method.typeParameters.head.name)
-			assertEquals('myParam', method.parameters.head.name)
+			assertEquals('A', method.typeParameters.head.simpleName)
+			assertEquals('myParam', method.parameters.head.simpleName)
 			assertSame(method.typeParameters.head, method.parameters.head.type.type)
 			assertEquals(1, method.exceptions.size)
 		]
@@ -357,10 +357,10 @@ abstract class AbstractReusableActiveAnnotationTests {
 					
 					override doRegisterGlobals(List<? extends ClassDeclaration> sourceClasses, RegisterGlobalsContext context) {
 						for (clazz : sourceClasses) {
-							context.registerClass(clazz.name+".InnerClass")
-							context.registerInterface(clazz.name+"Interface")
-							context.registerEnumerationType(clazz.name+"Enum")
-							context.registerAnnotationType(clazz.name+"Annotation")
+							context.registerClass(clazz.qualifiedName+".InnerClass")
+							context.registerInterface(clazz.qualifiedName+"Interface")
+							context.registerEnumerationType(clazz.qualifiedName+"Enum")
+							context.registerAnnotationType(clazz.qualifiedName+"Annotation")
 						}
 					}
 				}
@@ -394,7 +394,7 @@ abstract class AbstractReusableActiveAnnotationTests {
 			
 			override doTransform(List<? extends MutableNamedElement> annotatedTargetElements, extension TransformationContext context) {
 				annotatedTargetElements.forEach[
-					name = name + num()
+					simpleName = simpleName + num()
 				]
 			}
 		
@@ -425,7 +425,7 @@ abstract class AbstractReusableActiveAnnotationTests {
 			'''
 		) [
 			val myClass = typeLookup.findClass('MyClass')
-			assertEquals('field_A_B_C',myClass.declaredFields.head.name)
+			assertEquals('field_A_B_C',myClass.declaredFields.head.simpleName)
 		]
 	}
 	
@@ -440,8 +440,8 @@ abstract class AbstractReusableActiveAnnotationTests {
 			'''
 		) [
 			val myClass = typeLookup.findClass('MyClass')
-			assertEquals('field1_A_B_C',myClass.declaredFields.head.name)
-			assertEquals('field2_A_B_C',myClass.declaredFields.get(1).name)
+			assertEquals('field1_A_B_C',myClass.declaredFields.head.simpleName)
+			assertEquals('field2_A_B_C',myClass.declaredFields.get(1).simpleName)
 		]
 	}
 	

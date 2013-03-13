@@ -31,7 +31,7 @@ abstract class AbstractDeclarationImpl<T> {
 abstract class AbstractNamedElementImpl<T extends EObject> extends AbstractDeclarationImpl<T> implements NamedElement {
 	
 	override toString() {
-		class.name+"["+name+"]"
+		class.name+"["+simpleName+"]"
 	}
 	
 }
@@ -137,7 +137,7 @@ class TypeReferenceImpl extends AbstractDeclarationImpl<LightweightTypeReference
 
 class VoidTypeImpl extends AbstractDeclarationImpl<JvmVoid> implements VoidType {
 	
-	override getName() {
+	override getSimpleName() {
 		'void'
 	}
 	
@@ -148,12 +148,17 @@ class VoidTypeImpl extends AbstractDeclarationImpl<JvmVoid> implements VoidType 
 		val thatTypeRef = compilationUnit.typeReferenceProvider.newTypeReference(otherType)
 		return thisTypeRef.isAssignableFrom(thatTypeRef);
 	}
+	
+	override getQualifiedName() {
+		simpleName
+	}
+	
 } 
 
 class PrimitiveTypeImpl extends AbstractDeclarationImpl<JvmPrimitiveType> implements PrimitiveType {
 
 	override getKind() {
-		switch name {
+		switch simpleName {
 			case 'boolean' : PrimitiveType$Kind::BOOLEAN
 			case 'int' : PrimitiveType$Kind::INT
 			case 'char' : PrimitiveType$Kind::CHAR
@@ -165,7 +170,7 @@ class PrimitiveTypeImpl extends AbstractDeclarationImpl<JvmPrimitiveType> implem
 		}
 	}
 	
-	override getName() {
+	override getSimpleName() {
 		delegate.identifier
 	}
 	
@@ -177,6 +182,10 @@ class PrimitiveTypeImpl extends AbstractDeclarationImpl<JvmPrimitiveType> implem
 		return thisTypeRef.isAssignableFrom(thatTypeRef);
 	}
 	
+	override getQualifiedName() {
+		simpleName
+	}
+	
 }
 
 class TypeParameterDeclarationImpl extends AbstractDeclarationImpl<JvmTypeParameter> implements TypeParameterDeclaration {
@@ -185,8 +194,12 @@ class TypeParameterDeclarationImpl extends AbstractDeclarationImpl<JvmTypeParame
 		delegate.constraints.filter(typeof(JvmUpperBound)).map[compilationUnit.toTypeReference(typeReference)].toList
 	}
 	
-	override getName() {
+	override getSimpleName() {
 		delegate.name
+	}
+	
+	override getQualifiedName() {
+		delegate.identifier
 	}
 	
 	override getTypeParameterDeclarator() {

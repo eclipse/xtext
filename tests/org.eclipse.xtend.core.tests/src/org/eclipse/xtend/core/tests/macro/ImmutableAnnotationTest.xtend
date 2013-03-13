@@ -40,11 +40,11 @@ class ImmutableProcessor implements TransformationParticipant<MutableClassDeclar
 			val fields = clazz.declaredFields
 			clazz.addConstructor[
 				for (f : fields) {
-					addParameter(f.name, f.type)
+					addParameter(f.simpleName, f.type)
 				}
 				body = ['''
 					«FOR f : fields»
-						this.«f.name» = «f.name»;
+						this.«f.simpleName» = «f.simpleName»;
 					«ENDFOR»
 				''']
 			]
@@ -52,12 +52,12 @@ class ImmutableProcessor implements TransformationParticipant<MutableClassDeclar
 				// make everything final
 				f.final = true
 				
-				val getterName = 'get'+f.name.toFirstUpper
+				val getterName = 'get'+f.simpleName.toFirstUpper
 				
 				clazz.tryAddMethod(getterName) [
 					returnType = f.type
 					body = ['''
-						return «f.name»;
+						return «f.simpleName»;
 					''']
 				]
 			}
@@ -74,17 +74,17 @@ class ImmutableProcessor implements TransformationParticipant<MutableClassDeclar
 					«ENDIF»
 					«FOR f : fields»
 						«IF f.type == primitiveBoolean»
-							result = prime * result + («f.name» ? 1231 : 1237);
+							result = prime * result + («f.simpleName» ? 1231 : 1237);
 						«ELSEIF #{primitiveInt, primitiveChar, primitiveByte, primitiveShort}.contains(f.type)»
-							result = prime * result + «f.name»;
+							result = prime * result + «f.simpleName»;
 						«ELSEIF primitiveLong == f.type»
-							result = prime * result + (int) («f.name» ^ («f.name» >>> 32));
+							result = prime * result + (int) («f.simpleName» ^ («f.simpleName» >>> 32));
 						«ELSEIF primitiveFloat == f.type»
-							result = prime * result + Float.floatToIntBits(«f.name»);
+							result = prime * result + Float.floatToIntBits(«f.simpleName»);
 						«ELSEIF primitiveDouble == f.type»
-							result = prime * result + (int) (Double.doubleToLongBits(«f.name») ^ (Double.doubleToLongBits(«f.name») >>> 32));
+							result = prime * result + (int) (Double.doubleToLongBits(«f.simpleName») ^ (Double.doubleToLongBits(«f.simpleName») >>> 32));
 						«ELSE»
-							result = prime * result + ((«f.name»== null) ? 0 : «f.name».hashCode());
+							result = prime * result + ((«f.simpleName»== null) ? 0 : «f.simpleName».hashCode());
 						«ENDIF»
 					«ENDFOR»
 					return result;
