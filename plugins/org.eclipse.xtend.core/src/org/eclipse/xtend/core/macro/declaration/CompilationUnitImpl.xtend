@@ -85,6 +85,7 @@ import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference
 import org.eclipse.xtext.xbase.typesystem.references.OwnedConverter
 import org.eclipse.xtext.xbase.typesystem.util.CommonTypeComputationServices
 import org.eclipse.xtext.documentation.IEObjectDocumentationProvider
+import org.eclipse.xtext.documentation.IFileHeaderProvider
 
 class CompilationUnitImpl implements CompilationUnit {
 	
@@ -135,6 +136,7 @@ class CompilationUnitImpl implements CompilationUnit {
 	@Inject IXtendJvmAssociations associations
 	@Inject ConstantExpressionsInterpreter interpreter
 	@Inject IEObjectDocumentationProvider documentationProvider
+	@Inject IFileHeaderProvider fileHeaderProvider
 	
 	@Property val ProblemSupport problemSupport = new ProblemSupportImpl(this)
 	@Property val TypeReferenceProvider typeReferenceProvider = new TypeReferenceProviderImpl(this)
@@ -153,6 +155,14 @@ class CompilationUnitImpl implements CompilationUnit {
 	
 	def IEObjectDocumentationProvider getDocumentationProvider() {
 		documentationProvider
+	}
+	
+	def getFileHeaderProvider() {
+		fileHeaderProvider
+	}
+	
+	def getJvmTypesBuilder() {
+		typesBuilder
 	}
 	
 	def void setXtendFile(XtendFile xtendFile) {

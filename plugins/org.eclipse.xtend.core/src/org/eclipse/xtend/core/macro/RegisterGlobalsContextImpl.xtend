@@ -22,6 +22,7 @@ class RegisterGlobalsContextImpl implements RegisterGlobalsContext {
 	override registerClass(String qualifiedName) throws IllegalArgumentException {
 		val newType = TypesFactory::eINSTANCE.createJvmGenericType
 		newType.setVisibility(JvmVisibility::PUBLIC)
+		newType.superTypes += compilationUnit.typeReferences.getTypeForName(typeof(Object), compilationUnit.xtendFile)
 		setNameAndAccept(newType, qualifiedName)
 	}
 	
@@ -41,6 +42,8 @@ class RegisterGlobalsContextImpl implements RegisterGlobalsContext {
 	private def void setNameAndAccept(JvmDeclaredType newType, String qualifiedName) {
 		compilationUnit.checkCanceled
 		val namespaceAndName = getNameParts(qualifiedName)
+		val headerText = compilationUnit.fileHeaderProvider.getFileHeader(compilationUnit.xtendFile.eResource)
+		compilationUnit.jvmTypesBuilder.setFileHeader(newType, headerText)
 		if (namespaceAndName.key != null) {
 			val parentType = findType(namespaceAndName.key)
 			if (parentType != null) {
