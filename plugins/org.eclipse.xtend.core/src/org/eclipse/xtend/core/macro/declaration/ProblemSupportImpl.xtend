@@ -70,7 +70,7 @@ class ProblemSupportImpl implements ProblemSupport {
 	def private getResourceAndEObject(Element element) {
 		checkCanceled
 		switch element {
-			AbstractDeclarationImpl<? extends EObject>: {
+			AbstractElementImpl<? extends EObject>: {
 				val resource = element.delegate.eResource
 				if (resource == compilationUnit.xtendFile.eResource) {
 					val eobject = compilationUnit.jvmAssociations.getPrimarySourceElement(element.delegate)

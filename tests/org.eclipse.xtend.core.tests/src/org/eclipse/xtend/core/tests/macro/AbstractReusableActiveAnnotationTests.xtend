@@ -8,6 +8,82 @@ import static org.junit.Assert.*
 
 abstract class AbstractReusableActiveAnnotationTests {
 	
+	@Test def void testSwapExpressions() {
+		assertProcessing(
+			'myannotation/SwapAnnotation.xtend' -> '''
+				package myannotation
+				
+				import java.util.List
+				import org.eclipse.xtend.lib.macro.Active
+				import org.eclipse.xtend.lib.macro.TransformationContext
+				import org.eclipse.xtend.lib.macro.TransformationParticipant
+				import org.eclipse.xtend.lib.macro.declaration.MutableMethodDeclaration
+
+				@Active(typeof(SwapProcessor))
+				annotation Swap{ }
+				class SwapProcessor implements TransformationParticipant<MutableMethodDeclaration> {
+					
+					override doTransform(List<? extends MutableMethodDeclaration> methods, extension TransformationContext context) {
+						val b1 = methods.get(0).body
+						val b2 = methods.get(1).body
+						methods.get(0).body = b2
+						methods.get(1).body = b1
+					}
+					
+				}
+			''',
+			'myusercode/UserCode.xtend' -> '''
+				package myusercode
+				
+				class MyClass {
+					@myannotation.Swap def foo(String a) {
+						return b
+					}
+					@myannotation.Swap def bar(String b) {
+						return a
+					}
+				}
+			'''
+		) [
+			// no compile errors
+		]
+	}
+	@Test def void testSwapExpressions_01() {
+		assertProcessing(
+			'myannotation/SwapAnnotation.xtend' -> '''
+				package myannotation
+				
+				import java.util.List
+				import org.eclipse.xtend.lib.macro.Active
+				import org.eclipse.xtend.lib.macro.TransformationContext
+				import org.eclipse.xtend.lib.macro.TransformationParticipant
+				import org.eclipse.xtend.lib.macro.declaration.MutableFieldDeclaration
+
+				@Active(typeof(SwapProcessor))
+				annotation Swap{ }
+				class SwapProcessor implements TransformationParticipant<MutableFieldDeclaration> {
+					
+					override doTransform(List<? extends MutableFieldDeclaration> fields, extension TransformationContext context) {
+						val b1 = fields.get(0).initializer
+						val b2 = fields.get(1).initializer
+						fields.get(0).initializer = b2
+						fields.get(1).initializer = b1
+					}
+					
+				}
+			''',
+			'myusercode/UserCode.xtend' -> '''
+				package myusercode
+				
+				class MyClass {
+					@myannotation.Swap String a = 42
+					@myannotation.Swap int b = 'foo'
+				}
+			'''
+		) [
+			// no compile errors
+		]
+	}
 	@Test def void testSimpleModification() {
 		assertProcessing(
 			'myannotation/AbstractAnnotation.xtend' -> '''

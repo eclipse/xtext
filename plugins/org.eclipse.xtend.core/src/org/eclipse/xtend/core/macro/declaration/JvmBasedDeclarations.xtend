@@ -51,7 +51,7 @@ import org.eclipse.emf.ecore.util.EcoreUtil
 import org.eclipse.xtext.xbase.compiler.DocumentationAdapter
 import org.eclipse.xtext.common.types.impl.JvmMemberImplCustom
 
-abstract class JvmNamedElementImpl<T extends JvmIdentifiableElement> extends AbstractDeclarationImpl<T> implements MutableNamedElement {
+abstract class JvmNamedElementImpl<T extends JvmIdentifiableElement> extends AbstractElementImpl<T> implements MutableNamedElement {
 	
 	override getSimpleName() {
 		delegate.simpleName
@@ -345,11 +345,16 @@ abstract class JvmExecutableDeclarationImpl<T extends JvmExecutable> extends Jvm
 	}
 	
 	override getBody() {
-		throw new UnsupportedOperationException("Auto-Jvm function stub")
+		val expression = compilationUnit.jvmTypesBuilder.getExpression(delegate)
+		compilationUnit.toExpression(expression)
 	}
 	
 	override setBody(Expression body) {
-		throw new UnsupportedOperationException("Auto-Jvm function stub")
+		if (body == null) {
+			compilationUnit.jvmTypesBuilder.removeExistingBody(delegate)
+		} else {
+			compilationUnit.jvmTypesBuilder.setBody(delegate, (body as ExpressionImpl).delegate)
+		}
 	}
 	
 	override setExceptions(TypeReference... exceptions) {
@@ -463,11 +468,15 @@ class JvmConstructorDeclarationImpl extends JvmExecutableDeclarationImpl<JvmCons
 class JvmFieldDeclarationImpl extends JvmMemberDeclarationImpl<JvmField> implements MutableFieldDeclaration {
 	
 	override getInitializer() {
-		throw new UnsupportedOperationException("Auto-Jvm function stub")
+		compilationUnit.toExpression(compilationUnit.jvmTypesBuilder.getExpression(delegate))
 	}
 	
 	override setInitializer(Expression initializer) {
-		throw new UnsupportedOperationException("Auto-Jvm function stub")
+		if (initializer == null) {
+			compilationUnit.jvmTypesBuilder.removeExistingBody(delegate)
+		} else {
+			compilationUnit.jvmTypesBuilder.setInitializer(delegate, (initializer as ExpressionImpl).delegate)
+		}
 	}
 	
 	override setInitializer(CompilationStrategy initializer) {
@@ -564,7 +573,7 @@ class JvmAnnotationTypeElementDeclarationImpl extends JvmMemberDeclarationImpl<J
 	
 }
 
-class JvmAnnotationReferenceImpl extends AbstractDeclarationImpl<JvmAnnotationReference> implements MutableAnnotationReference {
+class JvmAnnotationReferenceImpl extends AbstractElementImpl<JvmAnnotationReference> implements MutableAnnotationReference {
 	
 	override getAnnotationTypeDeclaration() {
 		compilationUnit.toTypeDeclaration(delegate.annotation) as AnnotationTypeDeclaration
