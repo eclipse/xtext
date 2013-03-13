@@ -7,6 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.common.types.impl;
 
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
 
 /**
@@ -21,6 +22,15 @@ public abstract class JvmMemberImplCustom extends JvmMemberImpl {
 		String identifier = computeIdentifier();
 		this.identifier = identifier;
 		return identifier;
+	}
+	
+	public void clearIdentifierCache() {
+		identifier = null;
+		for (EObject child : eContents()) {
+			if (child instanceof JvmMemberImplCustom) {
+				((JvmMemberImplCustom) child).clearIdentifierCache();
+			}
+		}
 	}
 	
 	@Override
