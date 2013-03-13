@@ -128,6 +128,12 @@ public class TraceForTypeRootProvider implements ITraceForTypeRootProvider {
 	public ITrace getTraceToSource(final ITypeRoot derivedJavaType) {
 		if (lruCache != null && lruCache.getFirst().equals(derivedJavaType))
 			return lruCache.getSecond();
+		ITrace trace = createTraceToSource(derivedJavaType);
+		lruCache = Tuples.<ITypeRoot, ITrace> create(derivedJavaType, trace);
+		return trace;
+	}
+
+	private ITrace createTraceToSource(final ITypeRoot derivedJavaType) {
 		if (derivedJavaType instanceof IClassFile)
 			return getTraceToSource((IClassFile) derivedJavaType);
 		if (derivedJavaType instanceof ICompilationUnit)
@@ -189,7 +195,6 @@ public class TraceForTypeRootProvider implements ITraceForTypeRootProvider {
 				return null;
 			}
 		});
-		lruCache = Tuples.<ITypeRoot, ITrace> create(classFile, result);
 		return result;
 	}
 }
