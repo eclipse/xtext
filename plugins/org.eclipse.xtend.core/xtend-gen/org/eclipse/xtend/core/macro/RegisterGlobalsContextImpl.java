@@ -13,9 +13,13 @@ import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmEnumerationType;
 import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.common.types.JvmMember;
+import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.JvmVisibility;
 import org.eclipse.xtext.common.types.TypesFactory;
+import org.eclipse.xtext.common.types.util.TypeReferences;
+import org.eclipse.xtext.documentation.IFileHeaderProvider;
 import org.eclipse.xtext.xbase.jvmmodel.IJvmDeclaredTypeAcceptor;
+import org.eclipse.xtext.xbase.jvmmodel.JvmTypesBuilder;
 import org.eclipse.xtext.xbase.lib.Pair;
 
 @SuppressWarnings("all")
@@ -49,6 +53,13 @@ public class RegisterGlobalsContextImpl implements RegisterGlobalsContext {
   public void registerClass(final String qualifiedName) throws IllegalArgumentException {
     final JvmGenericType newType = TypesFactory.eINSTANCE.createJvmGenericType();
     newType.setVisibility(JvmVisibility.PUBLIC);
+    EList<JvmTypeReference> _superTypes = newType.getSuperTypes();
+    CompilationUnitImpl _compilationUnit = this.getCompilationUnit();
+    TypeReferences _typeReferences = _compilationUnit.getTypeReferences();
+    CompilationUnitImpl _compilationUnit_1 = this.getCompilationUnit();
+    XtendFile _xtendFile = _compilationUnit_1.getXtendFile();
+    JvmTypeReference _typeForName = _typeReferences.getTypeForName(Object.class, _xtendFile);
+    _superTypes.add(_typeForName);
     this.setNameAndAccept(newType, qualifiedName);
   }
   
@@ -69,6 +80,15 @@ public class RegisterGlobalsContextImpl implements RegisterGlobalsContext {
     CompilationUnitImpl _compilationUnit = this.getCompilationUnit();
     _compilationUnit.checkCanceled();
     final Pair<String,String> namespaceAndName = this.getNameParts(qualifiedName);
+    CompilationUnitImpl _compilationUnit_1 = this.getCompilationUnit();
+    IFileHeaderProvider _fileHeaderProvider = _compilationUnit_1.getFileHeaderProvider();
+    CompilationUnitImpl _compilationUnit_2 = this.getCompilationUnit();
+    XtendFile _xtendFile = _compilationUnit_2.getXtendFile();
+    Resource _eResource = _xtendFile.eResource();
+    final String headerText = _fileHeaderProvider.getFileHeader(_eResource);
+    CompilationUnitImpl _compilationUnit_3 = this.getCompilationUnit();
+    JvmTypesBuilder _jvmTypesBuilder = _compilationUnit_3.getJvmTypesBuilder();
+    _jvmTypesBuilder.setFileHeader(newType, headerText);
     String _key = namespaceAndName.getKey();
     boolean _notEquals = (!Objects.equal(_key, null));
     if (_notEquals) {

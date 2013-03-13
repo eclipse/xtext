@@ -1,7 +1,10 @@
 package org.eclipse.xtend.core.tests.macro.declaration;
 
+import com.google.common.collect.ImmutableList;
+import com.google.common.collect.ImmutableList.Builder;
 import com.google.common.collect.Iterables;
 import com.google.inject.Provider;
+import java.lang.reflect.AccessibleObject;
 import java.util.List;
 import javax.inject.Inject;
 import org.eclipse.xtend.core.macro.declaration.CompilationUnitImpl;
@@ -21,6 +24,7 @@ import org.eclipse.xtend.lib.macro.declaration.InterfaceDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.MemberDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.MethodDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.MutableClassDeclaration;
+import org.eclipse.xtend.lib.macro.declaration.MutableInterfaceDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.MutableMethodDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.MutableTypeParameterDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.ParameterDeclaration;
@@ -550,6 +554,65 @@ public class DeclarationsTest extends AbstractXtendTestCase {
           Assert.assertFalse(_isAssignableFrom_12);
           boolean _isAssignableFrom_13 = interfaceA.isAssignableFrom(object);
           Assert.assertFalse(_isAssignableFrom_13);
+        }
+      };
+    this.asCompilationUnit(_validFile, _function);
+  }
+  
+  @Test
+  public void testSetImplementedInterfaces() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("class BaseClass {}");
+    _builder.newLine();
+    _builder.append("interface Interface {}");
+    _builder.newLine();
+    XtendFile _validFile = this.validFile(_builder);
+    final Procedure1<CompilationUnitImpl> _function = new Procedure1<CompilationUnitImpl>() {
+        public void apply(final CompilationUnitImpl it) {
+          TypeLookupImpl _typeLookup = it.getTypeLookup();
+          final MutableClassDeclaration baseClass = _typeLookup.findClass("BaseClass");
+          TypeLookupImpl _typeLookup_1 = it.getTypeLookup();
+          final MutableInterfaceDeclaration interf = _typeLookup_1.findInterface("Interface");
+          final TypeReference objectType = baseClass.getExtendedClass();
+          String _simpleName = objectType.getSimpleName();
+          Assert.assertEquals("Object", _simpleName);
+          List<TypeReference> _implementedInterfaces = baseClass.getImplementedInterfaces();
+          boolean _isEmpty = _implementedInterfaces.isEmpty();
+          Assert.assertTrue(_isEmpty);
+          TypeReferenceProvider _typeReferenceProvider = it.getTypeReferenceProvider();
+          final TypeReference superType = _typeReferenceProvider.newTypeReference(AccessibleObject.class);
+          baseClass.setExtendedClass(superType);
+          TypeReference _extendedClass = baseClass.getExtendedClass();
+          String _simpleName_1 = _extendedClass.getSimpleName();
+          Assert.assertEquals("AccessibleObject", _simpleName_1);
+          List<TypeReference> _implementedInterfaces_1 = baseClass.getImplementedInterfaces();
+          boolean _isEmpty_1 = _implementedInterfaces_1.isEmpty();
+          Assert.assertTrue(_isEmpty_1);
+          baseClass.setExtendedClass(null);
+          TypeReference _extendedClass_1 = baseClass.getExtendedClass();
+          String _simpleName_2 = _extendedClass_1.getSimpleName();
+          Assert.assertEquals("Object", _simpleName_2);
+          List<TypeReference> _implementedInterfaces_2 = baseClass.getImplementedInterfaces();
+          boolean _isEmpty_2 = _implementedInterfaces_2.isEmpty();
+          Assert.assertTrue(_isEmpty_2);
+          TypeReferenceProvider _typeReferenceProvider_1 = it.getTypeReferenceProvider();
+          TypeReference _newTypeReference = _typeReferenceProvider_1.newTypeReference(interf);
+          List<TypeReference> _xlistliteral = null;
+          Builder<TypeReference> _builder = ImmutableList.builder();
+          _builder.add(_newTypeReference);
+          _xlistliteral = _builder.build();
+          baseClass.setImplementedInterfaces(_xlistliteral);
+          List<TypeReference> _implementedInterfaces_3 = baseClass.getImplementedInterfaces();
+          TypeReference _head = IterableExtensions.<TypeReference>head(_implementedInterfaces_3);
+          String _simpleName_3 = _head.getSimpleName();
+          Assert.assertEquals("Interface", _simpleName_3);
+          List<TypeReference> _xlistliteral_1 = null;
+          Builder<TypeReference> _builder_1 = ImmutableList.builder();
+          _xlistliteral_1 = _builder_1.build();
+          baseClass.setImplementedInterfaces(_xlistliteral_1);
+          List<TypeReference> _implementedInterfaces_4 = baseClass.getImplementedInterfaces();
+          boolean _isEmpty_3 = _implementedInterfaces_4.isEmpty();
+          Assert.assertTrue(_isEmpty_3);
         }
       };
     this.asCompilationUnit(_validFile, _function);

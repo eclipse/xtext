@@ -296,17 +296,21 @@ class JvmClassDeclarationImpl extends JvmTypeDeclarationImpl<JvmGenericType> imp
 	}
 	
 	override setExtendedClass(TypeReference superclass) {
-		val interfaces = implementedInterfaces
-		delegate.superTypes.clear
-		delegate.superTypes.add(compilationUnit.toJvmTypeReference(superclass))
-		interfaces.forEach[delegate.superTypes.add(compilationUnit.toJvmTypeReference(it))]
+		val newTypeRef = 
+			switch superclass {
+				TypeReferenceImpl : superclass.delegate.toJavaCompliantTypeReference
+				case null : compilationUnit.typeReferences.getTypeForName(typeof(Object), compilationUnit.xtendFile)
+			}
+		val oldType = delegate.superTypes.findFirst[it.type instanceof JvmGenericType && !(type as JvmGenericType).isInterface]
+		if (oldType != null)
+			delegate.superTypes.remove(oldType)
+		delegate.superTypes.add(newTypeRef)
 	}
 	
 	override setImplementedInterfaces(Iterable<? extends TypeReference> superInterfaces) {
-		val superClass = getExtendedClass
-		delegate.superTypes.clear
-		delegate.superTypes.add(compilationUnit.toJvmTypeReference(superClass))
-		superInterfaces.forEach[delegate.superTypes.add(compilationUnit.toJvmTypeReference(it))]
+		val oldInterfaces = delegate.superTypes.filter[it.type instanceof JvmGenericType && (type as JvmGenericType).isInterface]
+		delegate.superTypes.removeAll(oldInterfaces)
+		delegate.superTypes.addAll(superInterfaces.filter(typeof(TypeReferenceImpl)).map[delegate.toJavaCompliantTypeReference])
 	}
 
 	override findField(String name) {
