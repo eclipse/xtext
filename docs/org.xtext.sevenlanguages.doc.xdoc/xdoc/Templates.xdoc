@@ -389,7 +389,7 @@ public class TemplateProposalProvider
 
 section:templates_highlighting[Syntax Highlighting]
 
-Sometimes it is hard to see whether you are in text or expression mode. To give the user better feedback,
+Sometimes it is hard to see whether you are in text mode or in expression mode. To give the user better feedback,
 we have changed the way the text is highlighted. This customization consists of two parts: Add new highlighting
 styles in the codeRef[org.xtext.template.ui.highlighting.TemplateHighlightingConfiguration] and apply
 them to the text in the codeRef[org.xtext.template.ui.highlighting.TemplateHighlightingCalculator]. As

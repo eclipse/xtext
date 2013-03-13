@@ -74,7 +74,7 @@ com.acme.TestModule mixin RuntimeModule {
 }
 ]
 
-You can see the two modules in action by running codeRef[com.acme.Main] from the context menu as a 
+You can see the two modules in action by running code[com.acme.Main] from the context menu as a 
 e[Java application] or as a e[JUnit test].  
 
 section:guice_grammar[Grammar]
@@ -272,7 +272,7 @@ section:guice_validation[Validation]
 One of the sweet spots for a Guice modules DSL is the ability to do a lot of the validation usually done
 at runtime during compile time. Since this is just an example it just scratches the surface. There is
 just a single compiler check validating whether any used annotation is itself annotated with 
-codeRef[com.google.inject.BindingAnnotation].
+code[BindingAnnotation].
 
 This is the relevant code from codeRef[org.xtext.guicemodules.validation.GuiceModulesValidator]:
 

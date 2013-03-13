@@ -43,7 +43,7 @@ GET /guess/:theGuess
 section:routing_running[Running the Example]
 
 The example project's name is e[org.xtext.httprouting.examples] and includes a simple but runnable number
-guessing game. Just start the server (an embedded Jetty) by running codeRef[framework.StartServer] as a
+guessing game. Just start the server (an embedded Jetty) by running code[framework.StartServer] as a
 Java Application. Then point your browser to the URL link[http://localhost:8080/guess][http://localhost:8080/guess].
 
 section:routing_grammar[Grammar]
