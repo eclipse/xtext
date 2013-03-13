@@ -22,13 +22,19 @@ or add new concepts, as it seems fit.
 section[Map to Java]
 
 Having the grammar defined, you now need to tell Xtext what your language concepts mean in terms of Java constructs. 
-For that purpose you use a so-called model inferrer, a special API that allows you to create any number of Java classes, interfaces 
+For that purpose you use a so-called e[model inferrer], a special API that allows you to create any number of Java classes, interfaces 
 or members from your DSL. This hook not only defines how your language is translated to Java, but also defines 
 the scope of the embedded expressions. The expressions from your language 'live' in the context you give them.
 If you want an expression to have access to certain local variables, just put it into a method with appropriate 
 parameters or use instance fields if they work better.
 
-This hook also reveals your DSL constructs to other JVM languages. The Java type system is used as a common hub to 
+While in plain Xtext you would usually customize a bunch of further services to fit your needs, Xbase already has 
+JVM model aware implementations almost all of them. For example, a generic code generator generates the Java code
+directly from the inferred model. The same way, Xbase already integrates your language with JDT to an
+extend that customizations beyond the JVM model inferrer will only be necessary for very special cases.
+You can naturally mix Java and DSL code in the same application without any barriers. 
+
+The inferred model also reveals your DSL constructs to other JVM languages. The Java type system is used as a common hub to 
 integrate arbitrary languages with each other. You can for instance call ref:template[templates] directly from a ref:scripting[script]
 and vice versa. You do not even need to generate the equivalent Java code; everything is based on the Java types you
 create in the model inferrer.
@@ -49,7 +55,7 @@ Each language is very simple and focuses on the value a DSL can add to the respe
 viewpoint. It is meant to give you an idea of what is possible without being a complete practical solution.
 Yet the languages are flexible and come with powerful core abstractions.
 We also covered different technical aspects of customizing to the language infrastructure. Some languages
-have special import logic, others implement special syntax coloring, outline views or content assist.
+have special syntax coloring, others provide customized outline views or content assist.
 The new API for JVM languages does not mean that anything is hidden away and not customizable.
 
 section:provisional_API[CAUTION: This is Provisional API]
@@ -62,7 +68,7 @@ chapter:common_requirements[Common Requirements]
 
 To run any of the examples, you will need link[http://www.eclipse.org/downloads][Eclipse 3.5 or better]
 for your platform. In addition, you have to install link[http://www.eclipse.org/xtend/download.html][Xtend]
-and of course link[http://www.eclipse.org/Xtext/download.html][Xtext 2.3].
+and of course link[http://www.eclipse.org/Xtext/download.html][Xtext 2.4].
 
 If you prefer a simple all-inclusive installation, consider downloading the latest
 link[http://www.eclipse.org/Xtext/download.html][Xtext distribution].
@@ -100,7 +106,7 @@ the most important language features that were used in our examples. For a full 
 please refer to the link[http://www.xtend-lang.org/documentation][Xtend documentation]. 
 
 Just like a Java file, an Xtend file starts with a code[Xtend][package] declaration and an code[Xtend][import]
-section followed by one or more class declarations. Semicolons are optional and classes are code[Xtend][public] by default.
+section followed by one or more class declarations. Semicolons are optional. All types are code[Xtend][public] by default.
 Xtend classes can extend other classes and implement interfaces just like in Java. It does not make any difference 
 whether they were originally declared in Xtend or in Java.
 
@@ -112,7 +118,7 @@ println(foo.bar)      // instead of println(foo.getBar())
 foo.bar = baz         // instead of foo.setBar(baz)
 foo.fooBars += foobar // instead of foo.getFooBars().add(foobar)
 ]
-Empty parentheses on method calls can be skipped.
+Empty parentheses on method or constructor calls can be skipped.
 
 a[xtend_methods] 
 
@@ -182,7 +188,7 @@ item[If you skip the declaration of the only parameter, it will be implicitly ca
 code[Xtend][
 new Thread \[ println("Hello concurrent world") \] 
   // lambda will be coerced to a java.lang.Runnable
-val list = newArrayList('fooooo', 'fo', 'foo')
+val list = #\['fooooo', 'fo', 'foo'\]  // #\[\] delimits a list literal
 list.sortBy\[ length \]   
   // lambda is coerced to a function (String)=>Comparable
   // equivalent to list.sortBy\[String it | it.length\]

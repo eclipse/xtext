@@ -7,7 +7,7 @@ img[images/scripting_screenshot.png][][][]
 
 section:scripting_solution[Overview]
 
-As you can see the language is straightforward: All you can do is write expressions and imports in any order.
+As you can see the language is straightforward: All you can do is write expressions.
 The expressions you see are the same as in Xtend and they are defined in its own grammar (called Xbase).
 They are syntactically very close to Java, but feature advanced concepts like lambda expressions
 and operator overloading. They support local type inference so you do not have to write types everywhere
@@ -27,13 +27,13 @@ code[Java][
 package my.first;
 
 public class Application {
-  public static void main(String\[\] args) {
+  public static void main(String... args) {
     System.out.println("Hello World!");
   }
 }
 ] 
 
-Note that the core language infrastructure such as the parser, linker and compiler is not Eclipse-dependent,
+Note that the core language infrastructure such as the parser, linker and compiler does not depend on Eclipse,
 but the compilation is integrated with Eclipse for convenience reasons. All 7 languages can be parsed, compiled and executed
 without Eclipse. We could also make use of the interpreter, which might make more sense for a scripting language.
 How to use and integrate the interpreter is explained in the section describing the ref:tortoise language.
@@ -64,25 +64,14 @@ generate scripting "http://www.xtext.org/scripting/Scripting"
 import "http://www.eclipse.org/xtext/xbase/Xbase"
 
 Script returns XBlockExpression:
-  {Script} 
-  // return an object of type Script which is a subtype of XBlockExpression
-  ((expressions+=XExpressionInsideBlock | imports+=Import) ';'?)*;
-
-Import:
-  'import' importedNamespace=QualifiedNameWithWildcard;
-
-QualifiedNameWithWildcard:
-  QualifiedName '.*'?;
+	{Script}
+	(expressions+=XExpressionInsideBlock ';'?)*;
 ]
 
 The main rule e[Script] is defined to produce an object of type code[Script], which is a subtype of code[XBlockExpression]. 
 A block expression simply contains any number of expressions. The rule code[XExpressionInsideBlock] is defined in the
 Xbase grammar. Usually block expressions are surrounded by curly braces, but of course we do not
 want to force anybody to write curly braces at the beginning and the end of a simple script.
-
-In addition to expressions you can have any number of imports. Xtext has a very simple way to let you
-define imports, all you need to do is name a feature code[importedNamespace] and it will be interpreted
-as a namespace import.
 
 section:scripting_inferrer[Translation to Java]
 
@@ -102,22 +91,23 @@ The JVM model inferrer code for the scripting language looks like this:
 
 code[Xtend][
 class ScriptingJvmModelInferrer extends AbstractModelInferrer {
-  
+
   @Inject extension JvmTypesBuilder
 
   def dispatch void infer(Script script, 
                           IJvmDeclaredTypeAcceptor acceptor, 
                           boolean isPreIndexingPhase) {
     val className = script.eResource.URI.trimFileExtension.lastSegment
-    acceptor.accept(script.toClass(className)).initializeLater \[
+   	acceptor.accept(script.toClass(className)).initializeLater \[
       // the class gets one main method
-      members += script.toMethod('main', script.newTypeRef('void')) \[
-        parameters += script.toParameter('args', 
-            script.newTypeRef('java.lang.String')).addArrayTypeDimension)
-        setStatic(true)
+      members += script.toMethod('main', script.newTypeRef(Void::TYPE)) \[
+   	    parameters += script.toParameter("args", 
+   	        script.newTypeRef(typeof(String)).addArrayTypeDimension)
+   	    static = true
+        varArgs = true
         // Associate the script as the body of the main method
         body = script
-      \]
+      \]	
     \]
   }
 }

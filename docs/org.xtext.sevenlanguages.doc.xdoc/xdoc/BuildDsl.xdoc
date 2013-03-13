@@ -6,13 +6,12 @@ the dependencies of the defined tasks.
 
 img[images/builddsl_screenshot.png][][][]
 
-This build language is a fully-statically typed language which combines the declarative approach of defining tasks
-and dependencies with the full power of a modern expression language. It is a bit similar to Gradle but statically typed 
-and with very good IDE support.  
+This build language combines the declarative approach of defining tasks and dependencies with the full power of a 
+modern expression language. It is a bit similar to Gradle but statically typed and with very good IDE support.
 
 section:builddsl_solution[Overview]
 
-The above screenshot shows an examplary build script. A script has a couple of parameters. The 
+The above screenshot shows an exemplary build script. A script has a couple of parameters. The 
 tasks define dependencies to other tasks. What happens if the task is executed is defined in a block
 within curly braces.   
 
@@ -40,29 +39,26 @@ grammar org.xtext.builddsl.BuildDSL with org.eclipse.xtext.xbase.Xbase
 generate build "http://www.xtext.org/builddsl"
 
 BuildFile:
-  ("package" name=QualifiedName)?
-  imports+=ImportDeclaration*
-  declarations+=Declaration*;
-
-ImportDeclaration:
-  'import' importedNamespace=QualifiedNameWithWildCard;
-
-QualifiedNameWithWildCard:
-  QualifiedName '.*'?;
+	("package" name=QualifiedName)?
+	importSection=XImportSection?
+	declarations+=Declaration*;
 
 Declaration:
-  Task | Parameter;
+	Task | Parameter;
 
 Parameter:
-  'param' type=JvmTypeReference? name=ValidID ('=' init=XExpression)?;
+	'param' type=JvmTypeReference? name=ValidID ('=' init=XExpression)?;
 
 Task:
-  'task' name=ValidID 
-  ('depends' depends+=\[Task|ValidID\] (',' depends+=\[Task|ValidID\])*)?
-  action=XBlockExpression;
+	'task' name=ValidID 
+	('depends' depends+=\[Task|ValidID\] (',' depends+=\[Task|ValidID\])*)?
+	action=XBlockExpression;
 ]
 
-First there is the usual package delaration and e[Import] stuff. It is followed by the e[Declarations].
+A e[BuildFile] starts with a e[package] declaration. The generated Java class will be located in this
+namespace. The next part is an e[importSection]. Since version 2.4, Xbase includes extensive tooling
+to validate and organize import statements. To make this available in your language, you just have to include
+an e[XImportSection] as in this example. The imports are followed by the e[Declarations].
 A e[Declaration] can be a e[Task] or a e[Parameter]. A e[Parameter] can declare a type and an initialization
 expression. e[Tasks] define dependencies on other tasks by means of an Xtext cross-reference. They also
 contain an action, which is a codeRef[org.eclipse.xtext.xbase.XBlockExpression] from Xbase, thus everthing 
@@ -85,7 +81,7 @@ package sample;
 ...
 public class SimpleBuild extends BuildScript {
 ...
-  public static void main(final String\[\] args) {
+  public static void main(final String... args) {
     SimpleBuild script = new SimpleBuild();
     if (script.showHelp(args)) {
       System.exit(HELP);
@@ -115,7 +111,8 @@ class BuildDSLJvmModelInferrer extends AbstractModelInferrer {
           file.newTypeRef(typeof(String)).addArrayTypeDimension
       members += file.toMethod("main", file.newTypeRef(Void::TYPE)) \[
         parameters += toParameter("args", stringArray)
-        setStatic(true)
+        varArgs = true
+        static = true
         body = \[ append('''
           «scriptName» script = new «scriptName»();
           if (script.showHelp(args)) {
@@ -173,17 +170,17 @@ public String name = "World";
 ]]]
 ]
 
-The type can be skipped. If there is an initialization expression, the parameter's type is inferred using
-the codeRef[org.eclipse.xtext.xbase.typing.ITypeProvider]. If nothing is specified, codeRef[java.lang.String] 
-is assumed. The Elvis-operator comes handy for this use case. The different sources are tried to find the
+The type can be skipped. If there is an initialization expression, the parameter's type is inferred from the 
+initialization expression. If that one is missing, too, codeRef[java.lang.String] 
+is assumed. The Elvis-operator e[?:] comes handy for this use case. The different sources are tried to find the
 best type for the field. In the inferrer, this looks like:
 
 code[Xtend][
 @Inject ITypeProvider typeProvider
 ...
 val type = declaredParameter.type 
-  ?: typeProvider.getType(declaredParameter.init)
-  ?: file.newTypeRef(typeof(String))
+	?: declaredParameter?.init?.inferredType
+	?: file.newTypeRef(typeof(String))
 ]
 
 section:builddsl_validation[Validation]
@@ -209,72 +206,41 @@ class BuildDSLValidator extends XbaseJavaValidator {
   }
 ...]  
 
-section:builddsl_imports[Static Imports]
+section:builddsl_imports[Imports]
 
-It is very likely that users want to add their own functionality, e.g. to format a file. To facilitate
-that, all imports in the build DSL are automatically treated like Xtend's code[Xtend][static extension] 
-imports, too. That means, the static
-methods of an imported type are callable in ref:xtend_extension[extension syntax]. This is accomplished
-by binding our own codeRef[org.eclipse.xtext.xbase.scoping.featurecalls.StaticImplicitMethodsFeatureForTypeProvider]:
+By using the e[XImportSection] form Xbase, the language automatically supports the notion of e[plain imports],
+e[static imports] and e[static extension imports]. While the first two work as in Java, a static extension
+import puts the static methods of the specified calls on the extension scope, such that it can be called
+as if it were a method on the first argument. See the ref:xtend_extension[Xtend primer] for a more detailed
+description.
+
+We ship some predefined extension classes to enhance the Java classes codeRef[java.io.File]
+and codeRef[java.lang.Class]. These are always put onto the extension scope by a customized 
+codeRef[org.xtext.builddsl.scoping.BuildDSLImplicitlyImportedTypes]:
 
 code[Xtend][
-class AllImportsAreStaticFeatureProvider 
-    extends StaticImplicitMethodsFeatureForTypeProvider {
-
-  override getVisibleTypesContainingStaticMethods(
-      Iterable<JvmTypeReference> hierarchy) {
-    val buildFile = context.contents.get(0) as BuildFile
-    val importedTypes = <String>newArrayList
-    for (importDeclaration : buildFile.imports) {
-      val importedTypeOrPackage = importDeclaration.importedNamespace
-      if (!importedTypeOrPackage.endsWith(".*")) {
-        importedTypes += importedTypeOrPackage
-      }
-    }
-    val result = Maps::newLinkedHashMap(
-      super.getVisibleTypesContainingStaticMethods(hierarchy))
-    for (entry : result.entrySet) {
-      val copy = Sets::newLinkedHashSet(entry.getValue)
-      copy += importedTypes
-      entry.value = copy
-    }
-    return result
-  }
+class BuildDSLImplicitlyImportedTypes extends ImplicitlyImportedTypes {
+	/**
+	 * Add methods from {@link FileExtensions} and {@link ClassExtensions} to the extension scope.
+	 */
+	override protected getExtensionClasses() {
+		(super.getExtensionClasses() + #\[typeof(FileExtensions), typeof(ClassExtensions)\])
+			.toList
+	}
 }
 ]
 
-We also ship some predefined extension classes to enhance the Java classes codeRef[java.io.File], codeRef[java.lang.String]
-and codeRef[java.lang.Class]. These are bound in a customized 
-codeRef[org.xtext.builddsl.scoping.BuildDSLExtensionClassNameProvider]:
-
-code[Xtend][
-class BuildDSLExtensionClassNameProvider extends ExtensionClassNameProvider {
-  override simpleComputeExtensionClasses() {
-    super.simpleComputeExtensionClasses => \[
-      put(typeof(File), typeof(FileExtensions))
-      put(typeof(String), typeof(FileExtensions))
-      put(typeof(Class), typeof(ClassExtensions))
-    \]
-  }
-}
-]
-
-As always, the new implementations have to be bound in the codeRef[org.xtext.builddsl.BuildDSLRuntimeModule]:
+As always, such an implementation has to be bound in the codeRef[org.xtext.builddsl.BuildDSLRuntimeModule]:
 
 code[Java][
 public class BuildDSLRuntimeModule 
     extends org.xtext.builddsl.AbstractBuildDSLRuntimeModule {
 ...
-  public Class<? extends ExtensionClassNameProvider> 
-      bindExtensionClassNameProvider() {
-    return BuildDSLExtensionClassNameProvider.class;
+  public Class<? extends ImplicitlyImportedTypes> 
+      bindImplicitlyImportedTypes() {
+    return BuildDSLImplicitlyImportedTypes.class;
   }
-  
-  public Class<? extends StaticImplicitMethodsFeatureForTypeProvider> 
-      bindStaticImplicitMethodsFeatureForTypeProvider() {
-    return AllImportsAreStaticFeatureProvider.class;
-  }
-...
+}
 ] 
 
 section:builddsl_library[Operator Overloading]

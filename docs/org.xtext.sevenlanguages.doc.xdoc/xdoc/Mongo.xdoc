@@ -71,7 +71,7 @@ public class Artist implements IMongoBean {
 }
 ]
 
-By using the generating Java code, the rest of the application can use a type-safe and 
+By using the generated Java code, the rest of the application can use a type-safe and 
 JavaBeans conformant API to access the data model. In addition, e[MongoBeans] can define e[MongoOperations], 
 which are translated to Java methods. We can use e[MongoProperties] as well as Java types inside the 
 operations' bodies. 
@@ -114,45 +114,41 @@ grammar org.xtext.mongobeans.MongoBeans with org.eclipse.xtext.xbase.Xbase
 generate mongoBeans "http://www.eclipse.org/xtext/mongobeans/MongoBeans"
 
 MongoFile:
-  elements+=AbstractElement*;
-
-Import:
-  'import' importedNamespace=QualifiedNameWithWildcard;
+	importSection=XImportSection?
+	elements+=AbstractElement*;
 
 AbstractElement:
-  Import | PackageDeclaration | MongoBean;
+	PackageDeclaration | MongoBean;
 
 PackageDeclaration:
-  'package' name=QualifiedName '{'
-    elements+=AbstractElement*
-  '}';
+	'package' name=QualifiedName '{'
+		elements+=AbstractElement*
+	'}';
 
 MongoBean:
-  name=ValidID '{'
-    features+=AbstractFeature*
-  '}';
+	name=ValidID '{'
+		features+=AbstractFeature*
+	'}';
 
 AbstractFeature:
-  MongoOperation | MongoProperty;
+	MongoOperation | MongoProperty;
 
 MongoProperty:
-  (type=JvmTypeReference | inlineType=MongoBean) (many?='*')? name=ValidID;
+	(type=JvmTypeReference | inlineType=MongoBean) (many?='*')? name=ValidID;
 
 MongoOperation:
-  =>(returnType=JvmTypeReference name=ValidID '(') 
-    (parameters+=FullJvmFormalParameter 
-    	(',' parameters+=FullJvmFormalParameter)*)? 
-  ')' 
-  body=XBlockExpression;
-
-QualifiedNameWithWildcard:
-  QualifiedName (".*")?;
+	=>(returnType=JvmTypeReference name=ValidID '(') 
+		(parameters+=FullJvmFormalParameter 
+			(',' parameters+=FullJvmFormalParameter)*
+		)? 
+	')' 
+	body=XBlockExpression;
 ]
 
 The language inherits from the code[Xbase] grammar in order to allow Xbase expressions and references to Java 
-elements. A e[MongoFile] contains any number of e[AbstractElements], which can be e[PackageDeclarations],
-e[Imports] or e[MongoBeans]. e[Imports] use Xtext's naming convention code[importedNamespace] to automatically 
-shorten qualified names of matching elements. Note that as opposed to Java, e[PackageDeclarations] can be nested.     
+elements. A e[MongoFile] starts with an import section (see ref:builddsl_imports[Build DSL] for details). 
+The import section is followed by any number of e[AbstractElements], which can be 
+e[PackageDeclarations] or e[MongoBeans]. Note that as opposed to Java, e[PackageDeclarations] can be nested.     
 e[MongoBeans] define statically typed e[MongoProperties], which can be single-valued or multi-valued denoted by an 
 code[*] following the type name. The type of a e[MongoProperty] can also be defined inline. e[MongoBeans] can 
 also define e[MongoOperations]. The body of such an operation is an e[XBlockExpression] from Xbase. 
@@ -333,21 +329,21 @@ multi-valued properties:
 code[Xtend][
 def protected addListAccessor(JvmDeclaredType inferredType,
                               MongoProperty property) {
-  if(isMongoPrimitiveType(property.jvmType)) {
+  val propertyType = property.jvmType.asWrapperTypeIfPrimitive
+  if(propertyType.isMongoPrimitiveType) {
     inferredType.members += property.toMethod(
       'get' + property.name.toFirstUpper, 
-       newTypeRef(property, 'java.util.List', 
-         property.jvmType.asWrapperTypeIfPrimitive)
+       newTypeRef(property, 'java.util.List', propertyType)
     ) \[
 ...
     \]    
   } else {
     inferredType.members += property.toField(
       '_' + property.name, newTypeRef(property,
-        'org.xtext.mongobeans.MongoBeanList', property.jvmType))
+        'org.xtext.mongobeans.MongoBeanList', propertyType))
     inferredType.members += property.toMethod(
       'get' + property.name.toFirstUpper,
-      newTypeRef(property, 'java.util.List', property.jvmType)
+      newTypeRef(property, 'java.util.List', propertyType)
     ) \[
  ...
 ]

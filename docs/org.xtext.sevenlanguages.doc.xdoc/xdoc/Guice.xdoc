@@ -1,7 +1,6 @@
 chapter:guice[DSL for Guice]
 
-The Guice DSL is a little language that lets you define Guice modules 
-in a readable and declarative way. 
+The Guice DSL is a little language that lets you define Guice modules in a readable and declarative way. 
 
 img[images/guicemodules_screenshot.png][][][]
 
@@ -75,6 +74,9 @@ com.acme.TestModule mixin RuntimeModule {
 }
 ]
 
+You can see the two modules in action by running codeRef[com.acme.Main] from the context menu as a 
+e[Java application] or as a e[JUnit test].  
+
 section:guice_grammar[Grammar]
 
 The grammar is less than 30 lines long. It allows declaring any number of imports using the import mechanism
@@ -93,35 +95,30 @@ node types to avoid confusion when working with a library where concepts are nam
 
 code[Xtext][
 grammar org.xtext.guicemodules.GuiceModules 
-  with org.eclipse.xtext.xbase.annotations.XbaseWithAnnotations
+   with org.eclipse.xtext.xbase.annotations.XbaseWithAnnotations
  
 import "http://www.eclipse.org/xtext/common/JavaVMTypes" as types
 generate guiceModules "http://www.xtext.org/guicemodules/GuiceModules"
   
 ModulesAST :
-  imports+=ImportAST*
-  modules+=ModuleAST*;
+	importSection=XImportSection?
+	modules+=ModuleAST*;
 
 ModuleAST :
-  name=QualifiedName 
-  ('mixin' mixins+=\[ModuleAST|QualifiedName\] 
-    (',' mixins+=\[ModuleAST|QualifiedName\])*)? 
-  '{'
-    bindings+=BindingAST*
-  '}';
+	name=QualifiedName ('mixin' mixins+=\[ModuleAST|QualifiedName\] 
+	  (',' mixins+=\[ModuleAST|QualifiedName\])*)? 
+	'{'
+		bindings+=BindingAST*
+	'}'
+;
 
 BindingAST:
-  'bind' from=KeyAST 
-  ('to' to=KeyAST | 'to-instance' toInstance=XExpression)?;
+	'bind' from=KeyAST 
+	('to' to=KeyAST | 'to-instance' toInstance=XExpression)?;
 
 KeyAST:
-  annotation=XAnnotation? type=JvmTypeReference;
+	annotation=XAnnotation? type=JvmTypeReference;
 
-ImportAST:
-  'import' importedNamespace=QualifiedNameWithWildCard;
-
-QualifiedNameWithWildCard:
-  QualifiedName '.*'?;
 ]
 
 section:guice_inferrer[Translation to Java]
@@ -281,10 +278,14 @@ This is the relevant code from codeRef[org.xtext.guicemodules.validation.GuiceMo
 
 code[Xtend][
   @Check def checkAnnotationIsBindingAnnotation(XAnnotation it) {
-    if (!annotationType.annotations.exists \[ 
-    	annotation.is(typeof(BindingAnnotation)) \])
-      error("The annotation is not annotated with @BindingAnnotation", 
-          XANNOTATION__ANNOTATION_TYPE)
+    switch type : annotationType {
+      JvmAnnotationType: 
+        if(!type.annotations.exists\[ 
+            annotation.is(typeof(BindingAnnotation)) 
+           \])
+		  error("The annotation is not annotated with @BindingAnnotation", 
+		  XANNOTATION__ANNOTATION_TYPE)
+    }
   }
 ]
 
