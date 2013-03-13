@@ -84,6 +84,7 @@ import org.eclipse.xtext.xbase.typesystem.legacy.StandardTypeReferenceOwner
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference
 import org.eclipse.xtext.xbase.typesystem.references.OwnedConverter
 import org.eclipse.xtext.xbase.typesystem.util.CommonTypeComputationServices
+import org.eclipse.xtext.documentation.IEObjectDocumentationProvider
 
 class CompilationUnitImpl implements CompilationUnit {
 	
@@ -133,6 +134,7 @@ class CompilationUnitImpl implements CompilationUnit {
 	@Inject TypeReferenceSerializer typeRefSerializer
 	@Inject IXtendJvmAssociations associations
 	@Inject ConstantExpressionsInterpreter interpreter
+	@Inject IEObjectDocumentationProvider documentationProvider
 	
 	@Property val ProblemSupport problemSupport = new ProblemSupportImpl(this)
 	@Property val TypeReferenceProvider typeReferenceProvider = new TypeReferenceProviderImpl(this)
@@ -147,6 +149,10 @@ class CompilationUnitImpl implements CompilationUnit {
 	
 	def TypeReferences getTypeReferences() {
 		typeReferences
+	}
+	
+	def IEObjectDocumentationProvider getDocumentationProvider() {
+		documentationProvider
 	}
 	
 	def void setXtendFile(XtendFile xtendFile) {
