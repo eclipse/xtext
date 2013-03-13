@@ -1,0 +1,9 @@
+Change-Id: Ie541fb78e8fac031f2327cb36a6a81d6252aad50
+Code-Review+2: Dennis Huebner <dennis.huebner@itemis.de>
+IP-Clean+1: Dennis Huebner <dennis.huebner@itemis.de>
+Verified+1: Dennis Huebner <dennis.huebner@itemis.de>
+Submitted-by: Dennis Huebner <dennis.huebner@itemis.de>
+Submitted-at: Wed, 13 Mar 2013 12:46:08 -0400
+Reviewed-on: https://git.eclipse.org/r/11116
+Project: tmf/org.eclipse.xtext
+Branch: refs/heads/master
