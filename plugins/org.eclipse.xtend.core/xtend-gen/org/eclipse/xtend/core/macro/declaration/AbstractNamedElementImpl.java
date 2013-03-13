@@ -17,8 +17,8 @@ public abstract class AbstractNamedElementImpl<T extends EObject> extends Abstra
     Class<? extends AbstractNamedElementImpl> _class = this.getClass();
     String _name = _class.getName();
     String _plus = (_name + "[");
-    String _name_1 = this.getName();
-    String _plus_1 = (_plus + _name_1);
+    String _simpleName = this.getSimpleName();
+    String _plus_1 = (_plus + _simpleName);
     String _plus_2 = (_plus_1 + "]");
     return _plus_2;
   }

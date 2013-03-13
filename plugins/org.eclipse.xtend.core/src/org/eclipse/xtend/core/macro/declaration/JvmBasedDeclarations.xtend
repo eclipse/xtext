@@ -53,7 +53,7 @@ import org.eclipse.xtext.common.types.impl.JvmMemberImplCustom
 
 abstract class JvmNamedElementImpl<T extends JvmIdentifiableElement> extends AbstractDeclarationImpl<T> implements MutableNamedElement {
 	
-	override getName() {
+	override getSimpleName() {
 		delegate.simpleName
 	}
 	
@@ -66,7 +66,7 @@ abstract class JvmNamedElementImpl<T extends JvmIdentifiableElement> extends Abs
 	}
 	
 	override toString() {
-		class.name+"["+name+"]"
+		class.name+"["+simpleName+"]"
 	}
 }
 
@@ -125,7 +125,7 @@ abstract class JvmMemberDeclarationImpl<T extends JvmMember> extends JvmAnnotati
 		compilationUnit.toTypeDeclaration(delegate.declaringType)
 	}
 	
-	override setName(String name) {
+	override setSimpleName(String name) {
 		switch (it: delegate) {
 			JvmMemberImplCustom : clearIdentifierCache
 		}
@@ -144,22 +144,8 @@ abstract class JvmTypeDeclarationImpl<T extends JvmDeclaredType> extends JvmMemb
 		delegate.simpleName
 	}
 	
-	override getName() {
+	override getQualifiedName() {
 		delegate.identifier
-	}
-	
-	override setName(String name) {
-		switch (it: delegate) {
-			JvmMemberImplCustom : clearIdentifierCache
-		}
-		val idx = name.lastIndexOf('.')
-		if (idx == -1) {
-			delegate.packageName = null
-			delegate.simpleName = name
-		} else {
-			delegate.packageName = name.substring(0, idx-1)
-			delegate.simpleName = name.substring(idx)
-		}
 	}
 	
 	override isAssignableFrom(Type otherType) {
@@ -206,11 +192,11 @@ abstract class JvmTypeDeclarationImpl<T extends JvmDeclaredType> extends JvmMemb
 	}
 	
 	override findField(String name) {
-		declaredFields.findFirst[field | field.name == name]
+		declaredFields.findFirst[field | field.simpleName == name]
 	}
 	
 	override findMethod(String name, TypeReference... parameterTypes) {
-		declaredMethods.findFirst[method | method.name == name && method.parameters.map[type].toList == parameterTypes.toList]
+		declaredMethods.findFirst[method | method.simpleName == name && method.parameters.map[type].toList == parameterTypes.toList]
 	}
 	
 	override getDeclaredMethods() {
@@ -324,12 +310,12 @@ class JvmClassDeclarationImpl extends JvmTypeDeclarationImpl<JvmGenericType> imp
 	}
 
 	override findField(String name) {
-		declaredMembers.filter(typeof(MutableFieldDeclaration)).findFirst[it.name == name]
+		declaredMembers.filter(typeof(MutableFieldDeclaration)).findFirst[it.simpleName == name]
 	}
 	
 	override findMethod(String name, TypeReference[] parameterTypes) {
 		declaredMembers.filter(typeof(MutableMethodDeclaration)).findFirst[
-			it.name == name 
+			it.simpleName == name 
 			&& it.parameters.map[type].toList == parameterTypes.toList
 		]
 	}
@@ -412,7 +398,7 @@ class JvmParameterDeclarationImpl extends JvmAnnotationTargetImpl<JvmFormalParam
 		compilationUnit.toMemberDeclaration(delegate.eContainer as JvmMember) as MutableExecutableDeclaration
 	}
 	
-	override setName(String name) {
+	override setSimpleName(String name) {
 		delegate.name = name
 	}
 	
@@ -464,7 +450,7 @@ class JvmMethodDeclarationImpl extends JvmExecutableDeclarationImpl<JvmOperation
 
 class JvmConstructorDeclarationImpl extends JvmExecutableDeclarationImpl<JvmConstructor> implements MutableConstructorDeclaration {
 	
-	override getName() {
+	override getSimpleName() {
 		declaringType.simpleName
 	}
 	
@@ -520,7 +506,7 @@ class JvmTypeParameterDeclarationImpl extends TypeParameterDeclarationImpl imple
 		compilationUnit.toMemberDeclaration(delegate.eContainer as JvmExecutable) as MutableTypeParameterDeclarator
 	}
 	
-	override setName(String name) {
+	override setSimpleName(String name) {
 		delegate.name = name
 	}
 	
@@ -550,6 +536,10 @@ class JvmTypeParameterDeclarationImpl extends TypeParameterDeclarationImpl imple
 	
 	override Iterable<? extends MutableAnnotationReference> getAnnotations() {
 		return emptyList
+	}
+	
+	override getQualifiedName() {
+		delegate.identifier
 	}
 	
 }

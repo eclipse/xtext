@@ -28,7 +28,7 @@ public class XtendParameterDeclarationImpl extends XtendAnnotationTargetImpl<Xte
     return _typeReference;
   }
   
-  public String getName() {
+  public String getSimpleName() {
     XtendParameter _delegate = this.getDelegate();
     String _name = _delegate.getName();
     return _name;

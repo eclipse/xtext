@@ -28,17 +28,17 @@ class DeclarationsTest extends AbstractXtendTestCase {
 		''').asCompilationUnit [
 			assertNull(packageName)
 			val clazz = sourceTypeDeclarations.head as ClassDeclaration
-			assertEquals('MyClass', clazz.name)
+			assertEquals('MyClass', clazz.qualifiedName)
 			val suppressWarning = clazz.annotations.head
 			val supressWarningsDeclaration = suppressWarning.annotationTypeDeclaration
-			assertEquals('java.lang.SuppressWarnings', supressWarningsDeclaration.name)
+			assertEquals('java.lang.SuppressWarnings', supressWarningsDeclaration.qualifiedName)
 			assertEquals('unused', suppressWarning.getValue('value'))
 			
 			assertEquals(2, supressWarningsDeclaration.annotations.size)
 			
 			val valueProperty = supressWarningsDeclaration.declaredMembers.filter(typeof(AnnotationTypeElementDeclaration)).head
 			assertEquals("String[]", valueProperty.type.toString)
-			assertEquals("value", valueProperty.name)
+			assertEquals("value", valueProperty.simpleName)
 			
 			val field = clazz.declaredMembers.head as FieldDeclaration
 			val inject = field.annotations.head
@@ -56,11 +56,11 @@ class DeclarationsTest extends AbstractXtendTestCase {
 		''').asCompilationUnit [
 			assertEquals('foo', packageName)
 			val clazz = sourceTypeDeclarations.head as ClassDeclaration
-			assertEquals('foo.MyClass', clazz.name)
+			assertEquals('foo.MyClass', clazz.qualifiedName)
 			assertEquals('Object', clazz.extendedClass.toString)
 			assertEquals('Serializable', clazz.implementedInterfaces.head.toString)
 			val field = clazz.declaredMembers.head as FieldDeclaration
-			assertEquals('foo', field.name)
+			assertEquals('foo', field.simpleName)
 			assertSame(typeLookup.findClass('foo.MyClass'), field.type.type)
 		]
 	}
@@ -87,39 +87,39 @@ class DeclarationsTest extends AbstractXtendTestCase {
 			val clazz = sourceTypeDeclarations.head as ClassDeclaration
 			val genClazz = typeLookup.findClass('foo.MyClass')
 			
-			assertEquals('foo.MyClass', clazz.name)
+			assertEquals('foo.MyClass', clazz.qualifiedName)
 			assertNull(clazz.extendedClass)
 			assertTrue(clazz.implementedInterfaces.empty)
 			assertEquals(3, clazz.declaredMembers.size)
-			assertEquals('T', clazz.typeParameters.head.name)
+			assertEquals('T', clazz.typeParameters.head.simpleName)
 			assertEquals('CharSequence', clazz.typeParameters.head.upperBounds.head.toString)
 			assertSame(clazz, clazz.typeParameters.head.typeParameterDeclarator)
 			
 			val field = clazz.declaredFields.head
 			assertSame(clazz, field.declaringType)
-			assertEquals('myField', field.name)
+			assertEquals('myField', field.simpleName)
 			assertEquals("String", field.type.toString)
 			assertFalse(field.isFinal)
 			
 			val constructor = clazz.declaredConstructors.head
 			
 			assertSame(clazz, constructor.declaringType)
-			assertEquals('MyClass', constructor.name)
-			assertEquals('initial', constructor.parameters.head.name)
+			assertEquals('MyClass', constructor.simpleName)
+			assertEquals('initial', constructor.parameters.head.simpleName)
 			assertEquals('String', constructor.parameters.head.type.toString)
 			
 			val method = clazz.declaredMethods.head
 			val genMethod = genClazz.declaredMethods.head
 			
 			assertSame(clazz, method.declaringType)
-			assertEquals('a', method.parameters.head.name)
+			assertEquals('a', method.parameters.head.simpleName)
 			assertEquals('T2', method.parameters.head.type.toString)
 			assertSame(genMethod.typeParameters.head, method.parameters.head.type.type)
 			assertEquals('T', method.parameters.get(1).type.toString)
 			assertSame(genClazz.typeParameters.head, method.parameters.get(1).type.type)
 			assertSame(genClazz, method.returnType.type)
 			
-			assertEquals('T2', method.typeParameters.head.name)
+			assertEquals('T2', method.typeParameters.head.simpleName)
 			assertEquals('CharSequence', method.typeParameters.head.upperBounds.head.toString)
 			assertSame(method.typeParameters.head, method.typeParameters.head)
 			assertSame(method, method.typeParameters.head.typeParameterDeclarator)
@@ -243,7 +243,7 @@ class DeclarationsTest extends AbstractXtendTestCase {
 	
 	def void checkPrimitive(TypeReference primitiveType, String wrapperTypeName) {
 		assertTrue(primitiveType.toString, primitiveType.primitive)
-		assertEquals(wrapperTypeName, primitiveType.wrapperIfPrimitive.type.name)
+		assertEquals(wrapperTypeName, primitiveType.wrapperIfPrimitive.type.qualifiedName)
 	}
 	
 	def validFile(CharSequence code) {

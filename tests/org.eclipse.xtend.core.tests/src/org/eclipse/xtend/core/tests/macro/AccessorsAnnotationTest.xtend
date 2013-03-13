@@ -58,23 +58,23 @@ class AccessorsProcessor implements TransformationParticipant<MutableFieldDeclar
 
 	override doTransform(List<? extends MutableFieldDeclaration> javaFields, extension TransformationContext context) {
 		for (f : javaFields) {
-			val getterName = 'get' + f.name.toFirstUpper
-			val setterName = 'set' + f.name.toFirstUpper
+			val getterName = 'get' + f.simpleName.toFirstUpper
+			val setterName = 'set' + f.simpleName.toFirstUpper
 
 			f.declaringType.tryAddMethod(getterName) [
 				returnType = f.type
 				body = [
 					'''
-						return «f.name»;
+						return «f.simpleName»;
 					''']
 			]
 			if (!f.final) {
 				f.declaringType.tryAddMethod(setterName) [
 					returnType = primitiveVoid
-					addParameter(f.name, f.type)
+					addParameter(f.simpleName, f.type)
 					body = [
 						'''
-							this.«f.name» = «f.name»;
+							this.«f.simpleName» = «f.simpleName»;
 						''']
 				]
 			}

@@ -95,7 +95,7 @@ public abstract class JvmMemberDeclarationImpl<T extends JvmMember> extends JvmA
     return _typeDeclaration;
   }
   
-  public void setName(final String name) {
+  public void setSimpleName(final String name) {
     T _delegate = this.getDelegate();
     final T it = _delegate;
     boolean _matched = false;

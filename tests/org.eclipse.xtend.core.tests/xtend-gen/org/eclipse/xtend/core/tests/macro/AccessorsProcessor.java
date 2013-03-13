@@ -20,11 +20,11 @@ public class AccessorsProcessor implements TransformationParticipant<MutableFiel
   public void doTransform(final List<? extends MutableFieldDeclaration> javaFields, @Extension final TransformationContext context) {
     for (final MutableFieldDeclaration f : javaFields) {
       {
-        String _name = f.getName();
-        String _firstUpper = StringExtensions.toFirstUpper(_name);
+        String _simpleName = f.getSimpleName();
+        String _firstUpper = StringExtensions.toFirstUpper(_simpleName);
         final String getterName = ("get" + _firstUpper);
-        String _name_1 = f.getName();
-        String _firstUpper_1 = StringExtensions.toFirstUpper(_name_1);
+        String _simpleName_1 = f.getSimpleName();
+        String _firstUpper_1 = StringExtensions.toFirstUpper(_simpleName_1);
         final String setterName = ("set" + _firstUpper_1);
         MutableTypeDeclaration _declaringType = f.getDeclaringType();
         final Procedure1<MutableMethodDeclaration> _function = new Procedure1<MutableMethodDeclaration>() {
@@ -35,8 +35,8 @@ public class AccessorsProcessor implements TransformationParticipant<MutableFiel
                   public CharSequence compile(final CompilationContext it) {
                     StringConcatenation _builder = new StringConcatenation();
                     _builder.append("return ");
-                    String _name = f.getName();
-                    _builder.append(_name, "");
+                    String _simpleName = f.getSimpleName();
+                    _builder.append(_simpleName, "");
                     _builder.append(";");
                     _builder.newLineIfNotEmpty();
                     return _builder;
@@ -54,18 +54,18 @@ public class AccessorsProcessor implements TransformationParticipant<MutableFiel
               public void apply(final MutableMethodDeclaration it) {
                 TypeReference _primitiveVoid = context.getPrimitiveVoid();
                 it.setReturnType(_primitiveVoid);
-                String _name = f.getName();
+                String _simpleName = f.getSimpleName();
                 TypeReference _type = f.getType();
-                it.addParameter(_name, _type);
+                it.addParameter(_simpleName, _type);
                 final CompilationStrategy _function = new CompilationStrategy() {
                     public CharSequence compile(final CompilationContext it) {
                       StringConcatenation _builder = new StringConcatenation();
                       _builder.append("this.");
-                      String _name = f.getName();
-                      _builder.append(_name, "");
+                      String _simpleName = f.getSimpleName();
+                      _builder.append(_simpleName, "");
                       _builder.append(" = ");
-                      String _name_1 = f.getName();
-                      _builder.append(_name_1, "");
+                      String _simpleName_1 = f.getSimpleName();
+                      _builder.append(_simpleName_1, "");
                       _builder.append(";");
                       _builder.newLineIfNotEmpty();
                       return _builder;

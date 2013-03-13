@@ -49,7 +49,7 @@ public abstract class XtendTypeDeclarationImpl<T extends XtendTypeDeclaration> e
     return _name;
   }
   
-  public String getName() {
+  public String getQualifiedName() {
     String _xifexpression = null;
     String _packageName = this.getPackageName();
     boolean _notEquals = (!Objects.equal(_packageName, null));
@@ -126,8 +126,8 @@ public abstract class XtendTypeDeclarationImpl<T extends XtendTypeDeclaration> e
     Iterable<? extends FieldDeclaration> _declaredFields = this.getDeclaredFields();
     final Function1<FieldDeclaration,Boolean> _function = new Function1<FieldDeclaration,Boolean>() {
         public Boolean apply(final FieldDeclaration field) {
-          String _name = field.getName();
-          boolean _equals = Objects.equal(_name, name);
+          String _simpleName = field.getSimpleName();
+          boolean _equals = Objects.equal(_simpleName, name);
           return Boolean.valueOf(_equals);
         }
       };
@@ -140,8 +140,8 @@ public abstract class XtendTypeDeclarationImpl<T extends XtendTypeDeclaration> e
     final Function1<MethodDeclaration,Boolean> _function = new Function1<MethodDeclaration,Boolean>() {
         public Boolean apply(final MethodDeclaration method) {
           boolean _and = false;
-          String _name = method.getName();
-          boolean _equals = Objects.equal(_name, name);
+          String _simpleName = method.getSimpleName();
+          boolean _equals = Objects.equal(_simpleName, name);
           if (!_equals) {
             _and = false;
           } else {

@@ -16,9 +16,9 @@ import com.google.common.annotations.Beta;
 public interface MutableNamedElement extends NamedElement {
 	
 	/**
-	 * @param name the name of this element
+	 * @param simpleName the simple name of this element
 	 */
-	void setName(String name);
+	void setSimpleName(String simpleName);
 	
 	/**
 	 * Removes this element from its container and renders it invalid.

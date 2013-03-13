@@ -67,13 +67,13 @@ public class DeclarationsTest extends AbstractXtendTestCase {
           Iterable<? extends TypeDeclaration> _sourceTypeDeclarations = it.getSourceTypeDeclarations();
           TypeDeclaration _head = IterableExtensions.head(_sourceTypeDeclarations);
           final ClassDeclaration clazz = ((ClassDeclaration) _head);
-          String _name = clazz.getName();
-          Assert.assertEquals("MyClass", _name);
+          String _qualifiedName = clazz.getQualifiedName();
+          Assert.assertEquals("MyClass", _qualifiedName);
           Iterable<? extends AnnotationReference> _annotations = clazz.getAnnotations();
           final AnnotationReference suppressWarning = IterableExtensions.head(_annotations);
           final AnnotationTypeDeclaration supressWarningsDeclaration = suppressWarning.getAnnotationTypeDeclaration();
-          String _name_1 = supressWarningsDeclaration.getName();
-          Assert.assertEquals("java.lang.SuppressWarnings", _name_1);
+          String _qualifiedName_1 = supressWarningsDeclaration.getQualifiedName();
+          Assert.assertEquals("java.lang.SuppressWarnings", _qualifiedName_1);
           Object _value = suppressWarning.getValue("value");
           Assert.assertEquals("unused", _value);
           Iterable<? extends AnnotationReference> _annotations_1 = supressWarningsDeclaration.getAnnotations();
@@ -85,8 +85,8 @@ public class DeclarationsTest extends AbstractXtendTestCase {
           TypeReference _type = valueProperty.getType();
           String _string = _type.toString();
           Assert.assertEquals("String[]", _string);
-          String _name_2 = valueProperty.getName();
-          Assert.assertEquals("value", _name_2);
+          String _simpleName = valueProperty.getSimpleName();
+          Assert.assertEquals("value", _simpleName);
           Iterable<? extends MemberDeclaration> _declaredMembers_1 = clazz.getDeclaredMembers();
           MemberDeclaration _head_1 = IterableExtensions.head(_declaredMembers_1);
           final FieldDeclaration field = ((FieldDeclaration) _head_1);
@@ -120,8 +120,8 @@ public class DeclarationsTest extends AbstractXtendTestCase {
           Iterable<? extends TypeDeclaration> _sourceTypeDeclarations = it.getSourceTypeDeclarations();
           TypeDeclaration _head = IterableExtensions.head(_sourceTypeDeclarations);
           final ClassDeclaration clazz = ((ClassDeclaration) _head);
-          String _name = clazz.getName();
-          Assert.assertEquals("foo.MyClass", _name);
+          String _qualifiedName = clazz.getQualifiedName();
+          Assert.assertEquals("foo.MyClass", _qualifiedName);
           TypeReference _extendedClass = clazz.getExtendedClass();
           String _string = _extendedClass.toString();
           Assert.assertEquals("Object", _string);
@@ -132,8 +132,8 @@ public class DeclarationsTest extends AbstractXtendTestCase {
           Iterable<? extends MemberDeclaration> _declaredMembers = clazz.getDeclaredMembers();
           MemberDeclaration _head_2 = IterableExtensions.head(_declaredMembers);
           final FieldDeclaration field = ((FieldDeclaration) _head_2);
-          String _name_1 = field.getName();
-          Assert.assertEquals("foo", _name_1);
+          String _simpleName = field.getSimpleName();
+          Assert.assertEquals("foo", _simpleName);
           TypeLookupImpl _typeLookup = it.getTypeLookup();
           MutableClassDeclaration _findClass = _typeLookup.findClass("foo.MyClass");
           TypeReference _type = field.getType();
@@ -194,8 +194,8 @@ public class DeclarationsTest extends AbstractXtendTestCase {
           final ClassDeclaration clazz = ((ClassDeclaration) _head);
           TypeLookupImpl _typeLookup = it.getTypeLookup();
           final MutableClassDeclaration genClazz = _typeLookup.findClass("foo.MyClass");
-          String _name = clazz.getName();
-          Assert.assertEquals("foo.MyClass", _name);
+          String _qualifiedName = clazz.getQualifiedName();
+          Assert.assertEquals("foo.MyClass", _qualifiedName);
           TypeReference _extendedClass = clazz.getExtendedClass();
           Assert.assertNull(_extendedClass);
           List<TypeReference> _implementedInterfaces = clazz.getImplementedInterfaces();
@@ -206,8 +206,8 @@ public class DeclarationsTest extends AbstractXtendTestCase {
           Assert.assertEquals(3, _size);
           Iterable<? extends TypeParameterDeclaration> _typeParameters = clazz.getTypeParameters();
           TypeParameterDeclaration _head_1 = IterableExtensions.head(_typeParameters);
-          String _name_1 = _head_1.getName();
-          Assert.assertEquals("T", _name_1);
+          String _simpleName = _head_1.getSimpleName();
+          Assert.assertEquals("T", _simpleName);
           Iterable<? extends TypeParameterDeclaration> _typeParameters_1 = clazz.getTypeParameters();
           TypeParameterDeclaration _head_2 = IterableExtensions.head(_typeParameters_1);
           Iterable<? extends TypeReference> _upperBounds = _head_2.getUpperBounds();
@@ -222,8 +222,8 @@ public class DeclarationsTest extends AbstractXtendTestCase {
           final FieldDeclaration field = IterableExtensions.head(_declaredFields);
           TypeDeclaration _declaringType = field.getDeclaringType();
           Assert.assertSame(clazz, _declaringType);
-          String _name_2 = field.getName();
-          Assert.assertEquals("myField", _name_2);
+          String _simpleName_1 = field.getSimpleName();
+          Assert.assertEquals("myField", _simpleName_1);
           TypeReference _type = field.getType();
           String _string_1 = _type.toString();
           Assert.assertEquals("String", _string_1);
@@ -233,12 +233,12 @@ public class DeclarationsTest extends AbstractXtendTestCase {
           final ConstructorDeclaration constructor = IterableExtensions.head(_declaredConstructors);
           TypeDeclaration _declaringType_1 = constructor.getDeclaringType();
           Assert.assertSame(clazz, _declaringType_1);
-          String _name_3 = constructor.getName();
-          Assert.assertEquals("MyClass", _name_3);
+          String _simpleName_2 = constructor.getSimpleName();
+          Assert.assertEquals("MyClass", _simpleName_2);
           List<? extends ParameterDeclaration> _parameters = constructor.getParameters();
           ParameterDeclaration _head_5 = IterableExtensions.head(_parameters);
-          String _name_4 = _head_5.getName();
-          Assert.assertEquals("initial", _name_4);
+          String _simpleName_3 = _head_5.getSimpleName();
+          Assert.assertEquals("initial", _simpleName_3);
           List<? extends ParameterDeclaration> _parameters_1 = constructor.getParameters();
           ParameterDeclaration _head_6 = IterableExtensions.head(_parameters_1);
           TypeReference _type_1 = _head_6.getType();
@@ -252,8 +252,8 @@ public class DeclarationsTest extends AbstractXtendTestCase {
           Assert.assertSame(clazz, _declaringType_2);
           List<? extends ParameterDeclaration> _parameters_2 = method.getParameters();
           ParameterDeclaration _head_7 = IterableExtensions.head(_parameters_2);
-          String _name_5 = _head_7.getName();
-          Assert.assertEquals("a", _name_5);
+          String _simpleName_4 = _head_7.getSimpleName();
+          Assert.assertEquals("a", _simpleName_4);
           List<? extends ParameterDeclaration> _parameters_3 = method.getParameters();
           ParameterDeclaration _head_8 = IterableExtensions.head(_parameters_3);
           TypeReference _type_2 = _head_8.getType();
@@ -283,8 +283,8 @@ public class DeclarationsTest extends AbstractXtendTestCase {
           Assert.assertSame(genClazz, _type_8);
           Iterable<? extends TypeParameterDeclaration> _typeParameters_5 = method.getTypeParameters();
           TypeParameterDeclaration _head_12 = IterableExtensions.head(_typeParameters_5);
-          String _name_6 = _head_12.getName();
-          Assert.assertEquals("T2", _name_6);
+          String _simpleName_5 = _head_12.getSimpleName();
+          Assert.assertEquals("T2", _simpleName_5);
           Iterable<? extends TypeParameterDeclaration> _typeParameters_6 = method.getTypeParameters();
           TypeParameterDeclaration _head_13 = IterableExtensions.head(_typeParameters_6);
           Iterable<? extends TypeReference> _upperBounds_1 = _head_13.getUpperBounds();
@@ -561,8 +561,8 @@ public class DeclarationsTest extends AbstractXtendTestCase {
     Assert.assertTrue(_string, _isPrimitive);
     TypeReference _wrapperIfPrimitive = primitiveType.getWrapperIfPrimitive();
     Type _type = _wrapperIfPrimitive.getType();
-    String _name = _type.getName();
-    Assert.assertEquals(wrapperTypeName, _name);
+    String _qualifiedName = _type.getQualifiedName();
+    Assert.assertEquals(wrapperTypeName, _qualifiedName);
   }
   
   public XtendFile validFile(final CharSequence code) {

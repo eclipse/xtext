@@ -21,53 +21,53 @@ import org.eclipse.xtext.common.types.JvmPrimitiveType;
 public class PrimitiveTypeImpl extends AbstractDeclarationImpl<JvmPrimitiveType> implements PrimitiveType {
   public Kind getKind() {
     Kind _switchResult = null;
-    String _name = this.getName();
-    final String getName = _name;
+    String _simpleName = this.getSimpleName();
+    final String getSimpleName = _simpleName;
     boolean _matched = false;
     if (!_matched) {
-      if (Objects.equal(getName,"boolean")) {
+      if (Objects.equal(getSimpleName,"boolean")) {
         _matched=true;
         _switchResult = Kind.BOOLEAN;
       }
     }
     if (!_matched) {
-      if (Objects.equal(getName,"int")) {
+      if (Objects.equal(getSimpleName,"int")) {
         _matched=true;
         _switchResult = Kind.INT;
       }
     }
     if (!_matched) {
-      if (Objects.equal(getName,"char")) {
+      if (Objects.equal(getSimpleName,"char")) {
         _matched=true;
         _switchResult = Kind.CHAR;
       }
     }
     if (!_matched) {
-      if (Objects.equal(getName,"double")) {
+      if (Objects.equal(getSimpleName,"double")) {
         _matched=true;
         _switchResult = Kind.DOUBLE;
       }
     }
     if (!_matched) {
-      if (Objects.equal(getName,"long")) {
+      if (Objects.equal(getSimpleName,"long")) {
         _matched=true;
         _switchResult = Kind.LONG;
       }
     }
     if (!_matched) {
-      if (Objects.equal(getName,"short")) {
+      if (Objects.equal(getSimpleName,"short")) {
         _matched=true;
         _switchResult = Kind.SHORT;
       }
     }
     if (!_matched) {
-      if (Objects.equal(getName,"float")) {
+      if (Objects.equal(getSimpleName,"float")) {
         _matched=true;
         _switchResult = Kind.FLOAT;
       }
     }
     if (!_matched) {
-      if (Objects.equal(getName,"byte")) {
+      if (Objects.equal(getSimpleName,"byte")) {
         _matched=true;
         _switchResult = Kind.BYTE;
       }
@@ -75,7 +75,7 @@ public class PrimitiveTypeImpl extends AbstractDeclarationImpl<JvmPrimitiveType>
     return _switchResult;
   }
   
-  public String getName() {
+  public String getSimpleName() {
     JvmPrimitiveType _delegate = this.getDelegate();
     String _identifier = _delegate.getIdentifier();
     return _identifier;
@@ -93,5 +93,10 @@ public class PrimitiveTypeImpl extends AbstractDeclarationImpl<JvmPrimitiveType>
     TypeReferenceProvider _typeReferenceProvider_1 = _compilationUnit_1.getTypeReferenceProvider();
     final TypeReference thatTypeRef = _typeReferenceProvider_1.newTypeReference(otherType);
     return thisTypeRef.isAssignableFrom(thatTypeRef);
+  }
+  
+  public String getQualifiedName() {
+    String _simpleName = this.getSimpleName();
+    return _simpleName;
   }
 }

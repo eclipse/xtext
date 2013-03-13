@@ -148,7 +148,7 @@ public class CompilationUnitImpl implements CompilationUnit {
     return null;
   }
   
-  public String getName() {
+  public String getSimpleName() {
     XtendFile _xtendFile = this.getXtendFile();
     Resource _eResource = _xtendFile.eResource();
     URI _uRI = _eResource.getURI();

@@ -73,7 +73,7 @@ public class XtendMethodDeclarationImpl extends XtendMemberDeclarationImpl<Xtend
     return _visibility_1;
   }
   
-  public String getName() {
+  public String getSimpleName() {
     XtendFunction _delegate = this.getDelegate();
     String _name = _delegate.getName();
     return _name;

@@ -33,7 +33,6 @@ import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.JvmVisibility;
 import org.eclipse.xtext.common.types.TypesFactory;
-import org.eclipse.xtext.common.types.impl.JvmMemberImplCustom;
 import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
@@ -63,40 +62,10 @@ public abstract class JvmTypeDeclarationImpl<T extends JvmDeclaredType> extends 
     return _simpleName;
   }
   
-  public String getName() {
+  public String getQualifiedName() {
     T _delegate = this.getDelegate();
     String _identifier = _delegate.getIdentifier();
     return _identifier;
-  }
-  
-  public void setName(final String name) {
-    T _delegate = this.getDelegate();
-    final T it = _delegate;
-    boolean _matched = false;
-    if (!_matched) {
-      if (it instanceof JvmMemberImplCustom) {
-        final JvmMemberImplCustom _jvmMemberImplCustom = (JvmMemberImplCustom)it;
-        _matched=true;
-        ((JvmMemberImplCustom)_jvmMemberImplCustom).clearIdentifierCache();
-      }
-    }
-    final int idx = name.lastIndexOf(".");
-    int _minus = (-1);
-    boolean _equals = (idx == _minus);
-    if (_equals) {
-      T _delegate_1 = this.getDelegate();
-      _delegate_1.setPackageName(null);
-      T _delegate_2 = this.getDelegate();
-      _delegate_2.setSimpleName(name);
-    } else {
-      T _delegate_3 = this.getDelegate();
-      int _minus_1 = (idx - 1);
-      String _substring = name.substring(0, _minus_1);
-      _delegate_3.setPackageName(_substring);
-      T _delegate_4 = this.getDelegate();
-      String _substring_1 = name.substring(idx);
-      _delegate_4.setSimpleName(_substring_1);
-    }
   }
   
   public boolean isAssignableFrom(final Type otherType) {
@@ -188,8 +157,8 @@ public abstract class JvmTypeDeclarationImpl<T extends JvmDeclaredType> extends 
     Iterable<? extends MutableFieldDeclaration> _declaredFields = this.getDeclaredFields();
     final Function1<MutableFieldDeclaration,Boolean> _function = new Function1<MutableFieldDeclaration,Boolean>() {
         public Boolean apply(final MutableFieldDeclaration field) {
-          String _name = field.getName();
-          boolean _equals = Objects.equal(_name, name);
+          String _simpleName = field.getSimpleName();
+          boolean _equals = Objects.equal(_simpleName, name);
           return Boolean.valueOf(_equals);
         }
       };
@@ -202,8 +171,8 @@ public abstract class JvmTypeDeclarationImpl<T extends JvmDeclaredType> extends 
     final Function1<MutableMethodDeclaration,Boolean> _function = new Function1<MutableMethodDeclaration,Boolean>() {
         public Boolean apply(final MutableMethodDeclaration method) {
           boolean _and = false;
-          String _name = method.getName();
-          boolean _equals = Objects.equal(_name, name);
+          String _simpleName = method.getSimpleName();
+          boolean _equals = Objects.equal(_simpleName, name);
           if (!_equals) {
             _and = false;
           } else {

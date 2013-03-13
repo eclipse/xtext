@@ -13,7 +13,7 @@ import org.eclipse.xtend.lib.macro.declaration.EnumerationValueDeclaration;
 
 @SuppressWarnings("all")
 public class XtendEnumerationValueDeclarationImpl extends XtendMemberDeclarationImpl<XtendEnumLiteral> implements EnumerationValueDeclaration {
-  public String getName() {
+  public String getSimpleName() {
     XtendEnumLiteral _delegate = this.getDelegate();
     String _name = _delegate.getName();
     return _name;

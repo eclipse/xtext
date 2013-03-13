@@ -43,7 +43,7 @@ public class XtendConstructorDeclarationImpl extends XtendMemberDeclarationImpl<
     return _visibility_1;
   }
   
-  public String getName() {
+  public String getSimpleName() {
     TypeDeclaration _declaringType = this.getDeclaringType();
     String _simpleName = _declaringType.getSimpleName();
     return _simpleName;

@@ -30,9 +30,9 @@ public class ImmutableProcessor implements TransformationParticipant<MutableClas
         final Procedure1<MutableConstructorDeclaration> _function = new Procedure1<MutableConstructorDeclaration>() {
             public void apply(final MutableConstructorDeclaration it) {
               for (final MutableFieldDeclaration f : fields) {
-                String _name = f.getName();
+                String _simpleName = f.getSimpleName();
                 TypeReference _type = f.getType();
-                it.addParameter(_name, _type);
+                it.addParameter(_simpleName, _type);
               }
               final CompilationStrategy _function = new CompilationStrategy() {
                   public CharSequence compile(final CompilationContext it) {
@@ -40,11 +40,11 @@ public class ImmutableProcessor implements TransformationParticipant<MutableClas
                     {
                       for(final MutableFieldDeclaration f : fields) {
                         _builder.append("this.");
-                        String _name = f.getName();
-                        _builder.append(_name, "");
+                        String _simpleName = f.getSimpleName();
+                        _builder.append(_simpleName, "");
                         _builder.append(" = ");
-                        String _name_1 = f.getName();
-                        _builder.append(_name_1, "");
+                        String _simpleName_1 = f.getSimpleName();
+                        _builder.append(_simpleName_1, "");
                         _builder.append(";");
                         _builder.newLineIfNotEmpty();
                       }
@@ -59,8 +59,8 @@ public class ImmutableProcessor implements TransformationParticipant<MutableClas
         for (final MutableFieldDeclaration f : fields) {
           {
             f.setFinal(true);
-            String _name = f.getName();
-            String _firstUpper = StringExtensions.toFirstUpper(_name);
+            String _simpleName = f.getSimpleName();
+            String _firstUpper = StringExtensions.toFirstUpper(_simpleName);
             final String getterName = ("get" + _firstUpper);
             final Procedure1<MutableMethodDeclaration> _function_1 = new Procedure1<MutableMethodDeclaration>() {
                 public void apply(final MutableMethodDeclaration it) {
@@ -70,8 +70,8 @@ public class ImmutableProcessor implements TransformationParticipant<MutableClas
                       public CharSequence compile(final CompilationContext it) {
                         StringConcatenation _builder = new StringConcatenation();
                         _builder.append("return ");
-                        String _name = f.getName();
-                        _builder.append(_name, "");
+                        String _simpleName = f.getSimpleName();
+                        _builder.append(_simpleName, "");
                         _builder.append(";");
                         _builder.newLineIfNotEmpty();
                         return _builder;
@@ -112,8 +112,8 @@ public class ImmutableProcessor implements TransformationParticipant<MutableClas
                           boolean _equals = Objects.equal(_type, _primitiveBoolean);
                           if (_equals) {
                             _builder.append("result = prime * result + (");
-                            String _name = f.getName();
-                            _builder.append(_name, "");
+                            String _simpleName = f.getSimpleName();
+                            _builder.append(_simpleName, "");
                             _builder.append(" ? 1231 : 1237);");
                             _builder.newLineIfNotEmpty();
                           } else {
@@ -132,8 +132,8 @@ public class ImmutableProcessor implements TransformationParticipant<MutableClas
                             boolean _contains = _xsetliteral.contains(_type_1);
                             if (_contains) {
                               _builder.append("result = prime * result + ");
-                              String _name_1 = f.getName();
-                              _builder.append(_name_1, "");
+                              String _simpleName_1 = f.getSimpleName();
+                              _builder.append(_simpleName_1, "");
                               _builder.append(";");
                               _builder.newLineIfNotEmpty();
                             } else {
@@ -142,11 +142,11 @@ public class ImmutableProcessor implements TransformationParticipant<MutableClas
                               boolean _equals_1 = Objects.equal(_primitiveLong, _type_2);
                               if (_equals_1) {
                                 _builder.append("result = prime * result + (int) (");
-                                String _name_2 = f.getName();
-                                _builder.append(_name_2, "");
+                                String _simpleName_2 = f.getSimpleName();
+                                _builder.append(_simpleName_2, "");
                                 _builder.append(" ^ (");
-                                String _name_3 = f.getName();
-                                _builder.append(_name_3, "");
+                                String _simpleName_3 = f.getSimpleName();
+                                _builder.append(_simpleName_3, "");
                                 _builder.append(" >>> 32));");
                                 _builder.newLineIfNotEmpty();
                               } else {
@@ -155,8 +155,8 @@ public class ImmutableProcessor implements TransformationParticipant<MutableClas
                                 boolean _equals_2 = Objects.equal(_primitiveFloat, _type_3);
                                 if (_equals_2) {
                                   _builder.append("result = prime * result + Float.floatToIntBits(");
-                                  String _name_4 = f.getName();
-                                  _builder.append(_name_4, "");
+                                  String _simpleName_4 = f.getSimpleName();
+                                  _builder.append(_simpleName_4, "");
                                   _builder.append(");");
                                   _builder.newLineIfNotEmpty();
                                 } else {
@@ -165,20 +165,20 @@ public class ImmutableProcessor implements TransformationParticipant<MutableClas
                                   boolean _equals_3 = Objects.equal(_primitiveDouble, _type_4);
                                   if (_equals_3) {
                                     _builder.append("result = prime * result + (int) (Double.doubleToLongBits(");
-                                    String _name_5 = f.getName();
-                                    _builder.append(_name_5, "");
+                                    String _simpleName_5 = f.getSimpleName();
+                                    _builder.append(_simpleName_5, "");
                                     _builder.append(") ^ (Double.doubleToLongBits(");
-                                    String _name_6 = f.getName();
-                                    _builder.append(_name_6, "");
+                                    String _simpleName_6 = f.getSimpleName();
+                                    _builder.append(_simpleName_6, "");
                                     _builder.append(") >>> 32));");
                                     _builder.newLineIfNotEmpty();
                                   } else {
                                     _builder.append("result = prime * result + ((");
-                                    String _name_7 = f.getName();
-                                    _builder.append(_name_7, "");
+                                    String _simpleName_7 = f.getSimpleName();
+                                    _builder.append(_simpleName_7, "");
                                     _builder.append("== null) ? 0 : ");
-                                    String _name_8 = f.getName();
-                                    _builder.append(_name_8, "");
+                                    String _simpleName_8 = f.getSimpleName();
+                                    _builder.append(_simpleName_8, "");
                                     _builder.append(".hashCode());");
                                     _builder.newLineIfNotEmpty();
                                   }

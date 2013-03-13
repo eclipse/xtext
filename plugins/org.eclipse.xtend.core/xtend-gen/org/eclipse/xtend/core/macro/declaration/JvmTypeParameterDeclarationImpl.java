@@ -34,7 +34,7 @@ public class JvmTypeParameterDeclarationImpl extends TypeParameterDeclarationImp
     return ((MutableTypeParameterDeclarator) _memberDeclaration);
   }
   
-  public void setName(final String name) {
+  public void setSimpleName(final String name) {
     JvmTypeParameter _delegate = this.getDelegate();
     _delegate.setName(name);
   }
@@ -87,5 +87,11 @@ public class JvmTypeParameterDeclarationImpl extends TypeParameterDeclarationImp
   
   public Iterable<? extends MutableAnnotationReference> getAnnotations() {
     return CollectionLiterals.<MutableAnnotationReference>emptyList();
+  }
+  
+  public String getQualifiedName() {
+    JvmTypeParameter _delegate = this.getDelegate();
+    String _identifier = _delegate.getIdentifier();
+    return _identifier;
   }
 }

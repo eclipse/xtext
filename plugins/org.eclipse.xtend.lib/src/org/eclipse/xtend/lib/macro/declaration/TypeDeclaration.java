@@ -23,11 +23,6 @@ import com.google.common.annotations.Beta;
 public interface TypeDeclaration extends Type, MemberDeclaration {
 
 	/**
-	 * @return the simple name of this type declaration, i.e. the last segment of {@link #getName()}
-	 */
-	String getSimpleName();
-
-	/**
 	 * @return the members directly declared and contained in the type declaration
 	 */
 	Iterable<? extends MemberDeclaration> getDeclaredMembers();

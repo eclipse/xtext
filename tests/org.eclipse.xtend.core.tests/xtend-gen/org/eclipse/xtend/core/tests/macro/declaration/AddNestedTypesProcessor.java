@@ -10,17 +10,17 @@ public class AddNestedTypesProcessor implements RegisterGlobalsParticipant<TypeD
   public void doRegisterGlobals(final List<? extends TypeDeclaration> annotatedSourceElements, final RegisterGlobalsContext context) {
     for (final TypeDeclaration type : annotatedSourceElements) {
       {
-        String _name = type.getName();
-        String _plus = (_name + ".NestedClass");
+        String _qualifiedName = type.getQualifiedName();
+        String _plus = (_qualifiedName + ".NestedClass");
         context.registerClass(_plus);
-        String _name_1 = type.getName();
-        String _plus_1 = (_name_1 + ".NestedInterface");
+        String _qualifiedName_1 = type.getQualifiedName();
+        String _plus_1 = (_qualifiedName_1 + ".NestedInterface");
         context.registerInterface(_plus_1);
-        String _name_2 = type.getName();
-        String _plus_2 = (_name_2 + ".NestedAnnotationType");
+        String _qualifiedName_2 = type.getQualifiedName();
+        String _plus_2 = (_qualifiedName_2 + ".NestedAnnotationType");
         context.registerAnnotationType(_plus_2);
-        String _name_3 = type.getName();
-        String _plus_3 = (_name_3 + ".NestedEnumerationType");
+        String _qualifiedName_3 = type.getQualifiedName();
+        String _plus_3 = (_qualifiedName_3 + ".NestedEnumerationType");
         context.registerEnumerationType(_plus_3);
       }
     }

@@ -17,7 +17,7 @@ import org.eclipse.xtext.common.types.JvmTypeReference;
 
 @SuppressWarnings("all")
 public class XtendAnnotationTypeElementDeclarationImpl extends XtendMemberDeclarationImpl<XtendField> implements AnnotationTypeElementDeclaration {
-  public String getName() {
+  public String getSimpleName() {
     XtendField _delegate = this.getDelegate();
     String _name = _delegate.getName();
     return _name;

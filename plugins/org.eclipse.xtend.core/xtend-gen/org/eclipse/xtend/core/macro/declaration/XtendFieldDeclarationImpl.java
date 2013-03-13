@@ -29,7 +29,7 @@ public class XtendFieldDeclarationImpl extends XtendMemberDeclarationImpl<XtendF
     return _visibility_1;
   }
   
-  public String getName() {
+  public String getSimpleName() {
     XtendField _delegate = this.getDelegate();
     String _name = _delegate.getName();
     return _name;

@@ -36,7 +36,7 @@ public class JvmParameterDeclarationImpl extends JvmAnnotationTargetImpl<JvmForm
     return ((MutableExecutableDeclaration) _memberDeclaration);
   }
   
-  public void setName(final String name) {
+  public void setSimpleName(final String name) {
     JvmFormalParameter _delegate = this.getDelegate();
     _delegate.setName(name);
   }

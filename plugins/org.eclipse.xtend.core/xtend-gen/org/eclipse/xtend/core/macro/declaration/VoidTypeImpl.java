@@ -18,7 +18,7 @@ import org.eclipse.xtext.common.types.JvmVoid;
 
 @SuppressWarnings("all")
 public class VoidTypeImpl extends AbstractDeclarationImpl<JvmVoid> implements VoidType {
-  public String getName() {
+  public String getSimpleName() {
     return "void";
   }
   
@@ -34,5 +34,10 @@ public class VoidTypeImpl extends AbstractDeclarationImpl<JvmVoid> implements Vo
     TypeReferenceProvider _typeReferenceProvider_1 = _compilationUnit_1.getTypeReferenceProvider();
     final TypeReference thatTypeRef = _typeReferenceProvider_1.newTypeReference(otherType);
     return thisTypeRef.isAssignableFrom(thatTypeRef);
+  }
+  
+  public String getQualifiedName() {
+    String _simpleName = this.getSimpleName();
+    return _simpleName;
   }
 }

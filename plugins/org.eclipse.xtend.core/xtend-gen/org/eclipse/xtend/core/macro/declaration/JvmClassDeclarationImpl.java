@@ -188,8 +188,8 @@ public class JvmClassDeclarationImpl extends JvmTypeDeclarationImpl<JvmGenericTy
     Iterable<MutableFieldDeclaration> _filter = Iterables.<MutableFieldDeclaration>filter(_declaredMembers, MutableFieldDeclaration.class);
     final Function1<MutableFieldDeclaration,Boolean> _function = new Function1<MutableFieldDeclaration,Boolean>() {
         public Boolean apply(final MutableFieldDeclaration it) {
-          String _name = it.getName();
-          boolean _equals = Objects.equal(_name, name);
+          String _simpleName = it.getSimpleName();
+          boolean _equals = Objects.equal(_simpleName, name);
           return Boolean.valueOf(_equals);
         }
       };
@@ -203,8 +203,8 @@ public class JvmClassDeclarationImpl extends JvmTypeDeclarationImpl<JvmGenericTy
     final Function1<MutableMethodDeclaration,Boolean> _function = new Function1<MutableMethodDeclaration,Boolean>() {
         public Boolean apply(final MutableMethodDeclaration it) {
           boolean _and = false;
-          String _name = it.getName();
-          boolean _equals = Objects.equal(_name, name);
+          String _simpleName = it.getSimpleName();
+          boolean _equals = Objects.equal(_simpleName, name);
           if (!_equals) {
             _and = false;
           } else {

@@ -96,7 +96,7 @@ class CompilationUnitImpl implements CompilationUnit {
 		null
 	}
 	
-	override getName() {
+	override getSimpleName() {
 		xtendFile.eResource.URI.lastSegment.toString
 	}
 	

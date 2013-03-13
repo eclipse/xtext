@@ -49,10 +49,15 @@ public class XtendTypeParameterDeclarationImpl extends AbstractDeclarationImpl<J
     return _list;
   }
   
-  public String getName() {
+  public String getSimpleName() {
     JvmTypeParameter _delegate = this.getDelegate();
     String _name = _delegate.getName();
     return _name;
+  }
+  
+  public String getQualifiedName() {
+    String _simpleName = this.getSimpleName();
+    return _simpleName;
   }
   
   public TypeParameterDeclarator getTypeParameterDeclarator() {

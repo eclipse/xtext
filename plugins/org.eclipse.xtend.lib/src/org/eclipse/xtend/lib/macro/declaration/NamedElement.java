@@ -25,7 +25,7 @@ public interface NamedElement extends Element {
 	/**
 	 * @return the name of this element
 	 */
-	String getName();
+	String getSimpleName();
 	
 	/**
 	 * @return the currently processed compilation unit this element is contained in, or <code>null</code> if this element is not contained in the currently processed compilation unit.

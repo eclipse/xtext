@@ -381,7 +381,7 @@ public abstract class AbstractReusableActiveAnnotationTests {
     _builder.append("private def getParameterType(MethodDeclaration it) {");
     _builder.newLine();
     _builder.append("\t\t");
-    _builder.append("parameters.head.type.type.name");
+    _builder.append("parameters.head.type.type.qualifiedName");
     _builder.newLine();
     _builder.append("\t");
     _builder.append("}");
@@ -417,7 +417,7 @@ public abstract class AbstractReusableActiveAnnotationTests {
   
   @Test
   public void testPropertyAnnotation() {
-    Pair<String,String> _mappedTo = Pair.<String, String>of("myannotation/PropertyAnnotation.xtend", "\n\t\t\t\tpackage myannotation\n\t\t\t\t\n\t\t\t\timport java.util.List\n\t\t\t\timport org.eclipse.xtend.lib.macro.Active\n\t\t\t\timport org.eclipse.xtend.lib.macro.TransformationContext\n\t\t\t\timport org.eclipse.xtend.lib.macro.TransformationParticipant\n\t\t\t\timport org.eclipse.xtend.lib.macro.declaration.MutableFieldDeclaration\n\t\t\t\timport org.eclipse.xtend.lib.macro.declaration.MutableClassDeclaration\n\n\t\t\t\t@Active(typeof(PropertyProcessor))\n\t\t\t\tannotation Property2 { }\n\t\t\t\tclass PropertyProcessor implements TransformationParticipant<MutableFieldDeclaration> {\n\t\t\t\t\t\n\t\t\t\t\toverride doTransform(List<? extends MutableFieldDeclaration> annotatedTargetFields, extension TransformationContext context) {\n\t\t\t\t\t\tannotatedTargetFields.forEach [ field |\n\t\t\t\t\t\t\tval declaringType = field.declaringType \n\t\t\t\t\t\t\tdeclaringType.addMethod(field.getterName) [\n\t\t\t\t\t\t\t\treturnType = field.type\n\t\t\t\t\t\t\t\tbody = [\'\'\'\n\t\t\t\t\t\t\t\t\treturn this.\u00ABfield.name\u00BB;\n\t\t\t\t\t\t\t\t\'\'\']\n\t\t\t\t\t\t\t]\n\t\t\t\t\t\t\tdeclaringType.addMethod(\'set\'+field.name.toFirstUpper) [\n\t\t\t\t\t\t\t\taddParameter(field.name, field.type)\n\t\t\t\t\t\t\t\tbody = [\'\'\'\n\t\t\t\t\t\t\t\t\tthis.\u00ABfield.name\u00BB = \u00ABfield.name\u00BB;\n\t\t\t\t\t\t\t\t\'\'\']\n\t\t\t\t\t\t\t]\n\t\t\t\t\t\t]\n\t\t\t\t\t}\n\t\t\t\t\t\n\t\t\t\t\tdef private String getterName(MutableFieldDeclaration field) {\n\t\t\t\t\t\treturn \'get\'+field.name.toFirstUpper\n\t\t\t\t\t}\n\t\t\t\t}\n\t\t\t");
+    Pair<String,String> _mappedTo = Pair.<String, String>of("myannotation/PropertyAnnotation.xtend", "\n\t\t\t\tpackage myannotation\n\t\t\t\t\n\t\t\t\timport java.util.List\n\t\t\t\timport org.eclipse.xtend.lib.macro.Active\n\t\t\t\timport org.eclipse.xtend.lib.macro.TransformationContext\n\t\t\t\timport org.eclipse.xtend.lib.macro.TransformationParticipant\n\t\t\t\timport org.eclipse.xtend.lib.macro.declaration.MutableFieldDeclaration\n\t\t\t\timport org.eclipse.xtend.lib.macro.declaration.MutableClassDeclaration\n\n\t\t\t\t@Active(typeof(PropertyProcessor))\n\t\t\t\tannotation Property2 { }\n\t\t\t\tclass PropertyProcessor implements TransformationParticipant<MutableFieldDeclaration> {\n\t\t\t\t\t\n\t\t\t\t\toverride doTransform(List<? extends MutableFieldDeclaration> annotatedTargetFields, extension TransformationContext context) {\n\t\t\t\t\t\tannotatedTargetFields.forEach [ field |\n\t\t\t\t\t\t\tval declaringType = field.declaringType \n\t\t\t\t\t\t\tdeclaringType.addMethod(field.getterName) [\n\t\t\t\t\t\t\t\treturnType = field.type\n\t\t\t\t\t\t\t\tbody = [\'\'\'\n\t\t\t\t\t\t\t\t\treturn this.\u00ABfield.simpleName\u00BB;\n\t\t\t\t\t\t\t\t\'\'\']\n\t\t\t\t\t\t\t]\n\t\t\t\t\t\t\tdeclaringType.addMethod(\'set\'+field.simpleName.toFirstUpper) [\n\t\t\t\t\t\t\t\taddParameter(field.simpleName, field.type)\n\t\t\t\t\t\t\t\tbody = [\'\'\'\n\t\t\t\t\t\t\t\t\tthis.\u00ABfield.simpleName\u00BB = \u00ABfield.simpleName\u00BB;\n\t\t\t\t\t\t\t\t\'\'\']\n\t\t\t\t\t\t\t]\n\t\t\t\t\t\t]\n\t\t\t\t\t}\n\t\t\t\t\t\n\t\t\t\t\tdef private String getterName(MutableFieldDeclaration field) {\n\t\t\t\t\t\treturn \'get\'+field.simpleName.toFirstUpper\n\t\t\t\t\t}\n\t\t\t\t}\n\t\t\t");
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("package myusercode");
     _builder.newLine();
@@ -438,22 +438,22 @@ public abstract class AbstractReusableActiveAnnotationTests {
           final MutableClassDeclaration clazz = _typeLookup.findClass("myusercode.MyClass");
           Iterable<? extends MutableMethodDeclaration> _declaredMethods = clazz.getDeclaredMethods();
           final MutableMethodDeclaration getter = IterableExtensions.head(_declaredMethods);
-          String _name = getter.getName();
-          Assert.assertEquals("getMyField", _name);
+          String _simpleName = getter.getSimpleName();
+          Assert.assertEquals("getMyField", _simpleName);
           TypeReference _returnType = getter.getReturnType();
           String _string = _returnType.toString();
           Assert.assertEquals("String", _string);
           TypeReference _returnType_1 = getter.getReturnType();
           final MutableMethodDeclaration setter = clazz.findMethod("setMyField", _returnType_1);
-          String _name_1 = setter.getName();
-          Assert.assertEquals("setMyField", _name_1);
+          String _simpleName_1 = setter.getSimpleName();
+          Assert.assertEquals("setMyField", _simpleName_1);
           TypeReference _returnType_2 = setter.getReturnType();
           String _string_1 = _returnType_2.toString();
           Assert.assertEquals("void", _string_1);
           List<MutableParameterDeclaration> _parameters = setter.getParameters();
           MutableParameterDeclaration _head = IterableExtensions.<MutableParameterDeclaration>head(_parameters);
-          String _name_2 = _head.getName();
-          Assert.assertEquals("myField", _name_2);
+          String _simpleName_2 = _head.getSimpleName();
+          Assert.assertEquals("myField", _simpleName_2);
           List<MutableParameterDeclaration> _parameters_1 = setter.getParameters();
           MutableParameterDeclaration _head_1 = IterableExtensions.<MutableParameterDeclaration>head(_parameters_1);
           TypeReference _type = _head_1.getType();
@@ -541,12 +541,12 @@ public abstract class AbstractReusableActiveAnnotationTests {
           final MutableMethodDeclaration method = IterableExtensions.head(_declaredMethods);
           List<MutableTypeParameterDeclaration> _typeParameters = method.getTypeParameters();
           MutableTypeParameterDeclaration _head = IterableExtensions.<MutableTypeParameterDeclaration>head(_typeParameters);
-          String _name = _head.getName();
-          Assert.assertEquals("A", _name);
+          String _simpleName = _head.getSimpleName();
+          Assert.assertEquals("A", _simpleName);
           List<MutableParameterDeclaration> _parameters = method.getParameters();
           MutableParameterDeclaration _head_1 = IterableExtensions.<MutableParameterDeclaration>head(_parameters);
-          String _name_1 = _head_1.getName();
-          Assert.assertEquals("myParam", _name_1);
+          String _simpleName_1 = _head_1.getSimpleName();
+          Assert.assertEquals("myParam", _simpleName_1);
           List<MutableTypeParameterDeclaration> _typeParameters_1 = method.getTypeParameters();
           MutableTypeParameterDeclaration _head_2 = IterableExtensions.<MutableTypeParameterDeclaration>head(_typeParameters_1);
           List<MutableParameterDeclaration> _parameters_1 = method.getParameters();
@@ -697,16 +697,16 @@ public abstract class AbstractReusableActiveAnnotationTests {
     _builder.append("for (clazz : sourceClasses) {");
     _builder.newLine();
     _builder.append("\t\t\t");
-    _builder.append("context.registerClass(clazz.name+\".InnerClass\")");
+    _builder.append("context.registerClass(clazz.qualifiedName+\".InnerClass\")");
     _builder.newLine();
     _builder.append("\t\t\t");
-    _builder.append("context.registerInterface(clazz.name+\"Interface\")");
+    _builder.append("context.registerInterface(clazz.qualifiedName+\"Interface\")");
     _builder.newLine();
     _builder.append("\t\t\t");
-    _builder.append("context.registerEnumerationType(clazz.name+\"Enum\")");
+    _builder.append("context.registerEnumerationType(clazz.qualifiedName+\"Enum\")");
     _builder.newLine();
     _builder.append("\t\t\t");
-    _builder.append("context.registerAnnotationType(clazz.name+\"Annotation\")");
+    _builder.append("context.registerAnnotationType(clazz.qualifiedName+\"Annotation\")");
     _builder.newLine();
     _builder.append("\t\t");
     _builder.append("}");
@@ -779,7 +779,7 @@ public abstract class AbstractReusableActiveAnnotationTests {
       _builder.append("annotatedTargetElements.forEach[");
       _builder.newLine();
       _builder.append("\t\t\t");
-      _builder.append("name = name + num()");
+      _builder.append("simpleName = simpleName + num()");
       _builder.newLine();
       _builder.append("\t\t");
       _builder.append("]");
@@ -846,8 +846,8 @@ public abstract class AbstractReusableActiveAnnotationTests {
           final MutableClassDeclaration myClass = _typeLookup.findClass("MyClass");
           Iterable<? extends MutableFieldDeclaration> _declaredFields = myClass.getDeclaredFields();
           MutableFieldDeclaration _head = IterableExtensions.head(_declaredFields);
-          String _name = _head.getName();
-          Assert.assertEquals("field_A_B_C", _name);
+          String _simpleName = _head.getSimpleName();
+          Assert.assertEquals("field_A_B_C", _simpleName);
         }
       };
     this.assertProcessing(this.THREE_ANNOTATIONS, _mappedTo, _function);
@@ -873,12 +873,12 @@ public abstract class AbstractReusableActiveAnnotationTests {
           final MutableClassDeclaration myClass = _typeLookup.findClass("MyClass");
           Iterable<? extends MutableFieldDeclaration> _declaredFields = myClass.getDeclaredFields();
           MutableFieldDeclaration _head = IterableExtensions.head(_declaredFields);
-          String _name = _head.getName();
-          Assert.assertEquals("field1_A_B_C", _name);
+          String _simpleName = _head.getSimpleName();
+          Assert.assertEquals("field1_A_B_C", _simpleName);
           Iterable<? extends MutableFieldDeclaration> _declaredFields_1 = myClass.getDeclaredFields();
           MutableFieldDeclaration _get = ((MutableFieldDeclaration[])Conversions.unwrapArray(_declaredFields_1, MutableFieldDeclaration.class))[1];
-          String _name_1 = _get.getName();
-          Assert.assertEquals("field2_A_B_C", _name_1);
+          String _simpleName_1 = _get.getSimpleName();
+          Assert.assertEquals("field2_A_B_C", _simpleName_1);
         }
       };
     this.assertProcessing(this.THREE_ANNOTATIONS, _mappedTo, _function);
