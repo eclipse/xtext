@@ -33,6 +33,7 @@ import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.JvmVisibility;
 import org.eclipse.xtext.common.types.TypesFactory;
+import org.eclipse.xtext.common.types.impl.JvmMemberImplCustom;
 import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
@@ -69,22 +70,32 @@ public abstract class JvmTypeDeclarationImpl<T extends JvmDeclaredType> extends 
   }
   
   public void setName(final String name) {
+    T _delegate = this.getDelegate();
+    final T it = _delegate;
+    boolean _matched = false;
+    if (!_matched) {
+      if (it instanceof JvmMemberImplCustom) {
+        final JvmMemberImplCustom _jvmMemberImplCustom = (JvmMemberImplCustom)it;
+        _matched=true;
+        ((JvmMemberImplCustom)_jvmMemberImplCustom).clearIdentifierCache();
+      }
+    }
     final int idx = name.lastIndexOf(".");
     int _minus = (-1);
     boolean _equals = (idx == _minus);
     if (_equals) {
-      T _delegate = this.getDelegate();
-      _delegate.setPackageName(null);
       T _delegate_1 = this.getDelegate();
-      _delegate_1.setSimpleName(name);
-    } else {
+      _delegate_1.setPackageName(null);
       T _delegate_2 = this.getDelegate();
+      _delegate_2.setSimpleName(name);
+    } else {
+      T _delegate_3 = this.getDelegate();
       int _minus_1 = (idx - 1);
       String _substring = name.substring(0, _minus_1);
-      _delegate_2.setPackageName(_substring);
-      T _delegate_3 = this.getDelegate();
+      _delegate_3.setPackageName(_substring);
+      T _delegate_4 = this.getDelegate();
       String _substring_1 = name.substring(idx);
-      _delegate_3.setSimpleName(_substring_1);
+      _delegate_4.setSimpleName(_substring_1);
     }
   }
   

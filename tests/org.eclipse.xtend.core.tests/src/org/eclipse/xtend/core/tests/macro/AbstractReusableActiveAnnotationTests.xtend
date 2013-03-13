@@ -6,7 +6,7 @@ import org.junit.Test
 
 import static org.junit.Assert.*
 
-abstract class AbstractReuasableActiveAnnotationTests {
+abstract class AbstractReusableActiveAnnotationTests {
 	
 	@Test def void testSimpleModification() {
 		assertProcessing(
@@ -442,6 +442,19 @@ abstract class AbstractReuasableActiveAnnotationTests {
 			val myClass = typeLookup.findClass('MyClass')
 			assertEquals('field1_A_B_C',myClass.declaredFields.head.name)
 			assertEquals('field2_A_B_C',myClass.declaredFields.get(1).name)
+		]
+	}
+	
+	@Test def void testDeterministicExecutionOrder_03() {
+		// annotation processors are called in the order their annotations first occur in the file
+		assertProcessing(THREE_ANNOTATIONS,
+			'MyClass.xtend' -> '''
+				@_A @_B @_C class MyClass {
+				}
+			'''
+		) [
+			val myClass = typeLookup.findClass('MyClass_A_B_C')
+			assertNotNull(myClass)
 		]
 	}
 	

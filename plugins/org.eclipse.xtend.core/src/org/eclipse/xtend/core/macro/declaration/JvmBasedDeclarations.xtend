@@ -49,6 +49,7 @@ import org.eclipse.xtext.common.types.TypesFactory
 import org.eclipse.xtext.xbase.lib.Procedures$Procedure1
 import org.eclipse.emf.ecore.util.EcoreUtil
 import org.eclipse.xtext.xbase.compiler.DocumentationAdapter
+import org.eclipse.xtext.common.types.impl.JvmMemberImplCustom
 
 abstract class JvmNamedElementImpl<T extends JvmIdentifiableElement> extends AbstractDeclarationImpl<T> implements MutableNamedElement {
 	
@@ -125,6 +126,9 @@ abstract class JvmMemberDeclarationImpl<T extends JvmMember> extends JvmAnnotati
 	}
 	
 	override setName(String name) {
+		switch (it: delegate) {
+			JvmMemberImplCustom : clearIdentifierCache
+		}
 		delegate.simpleName = name
 	}
 	
@@ -145,6 +149,9 @@ abstract class JvmTypeDeclarationImpl<T extends JvmDeclaredType> extends JvmMemb
 	}
 	
 	override setName(String name) {
+		switch (it: delegate) {
+			JvmMemberImplCustom : clearIdentifierCache
+		}
 		val idx = name.lastIndexOf('.')
 		if (idx == -1) {
 			delegate.packageName = null

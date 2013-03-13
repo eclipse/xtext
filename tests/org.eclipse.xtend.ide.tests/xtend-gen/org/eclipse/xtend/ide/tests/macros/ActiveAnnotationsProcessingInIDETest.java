@@ -22,7 +22,7 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.jdt.core.JavaCore;
 import org.eclipse.xtend.core.macro.declaration.CompilationUnitImpl;
-import org.eclipse.xtend.core.tests.macro.AbstractReuasableActiveAnnotationTests;
+import org.eclipse.xtend.core.tests.macro.AbstractReusableActiveAnnotationTests;
 import org.eclipse.xtend.core.xtend.XtendFile;
 import org.eclipse.xtend.ide.tests.WorkbenchTestHelper;
 import org.eclipse.xtend.ide.tests.XtendIDEInjectorProvider;
@@ -46,7 +46,7 @@ import org.junit.runner.RunWith;
 @RunWith(XtextRunner.class)
 @InjectWith(XtendIDEInjectorProvider.class)
 @SuppressWarnings("all")
-public class ActiveAnnotationsProcessingInIDETest extends AbstractReuasableActiveAnnotationTests {
+public class ActiveAnnotationsProcessingInIDETest extends AbstractReusableActiveAnnotationTests {
   @Test
   public void testSimpleModification() {
     super.testSimpleModification();
