@@ -7,6 +7,7 @@
  */
 package org.eclipse.xtend.core.macro.declaration;
 
+import com.google.common.base.Objects;
 import org.eclipse.xtend.core.macro.declaration.CompilationUnitImpl;
 import org.eclipse.xtend.core.macro.declaration.XtendMemberDeclarationImpl;
 import org.eclipse.xtend.core.xtend.XtendField;
@@ -18,6 +19,7 @@ import org.eclipse.xtend.lib.macro.declaration.Visibility;
 import org.eclipse.xtend.lib.macro.expression.Expression;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.JvmVisibility;
+import org.eclipse.xtext.xbase.XExpression;
 
 @SuppressWarnings("all")
 public class XtendFieldDeclarationImpl extends XtendMemberDeclarationImpl<XtendField> implements FieldDeclaration {
@@ -36,8 +38,16 @@ public class XtendFieldDeclarationImpl extends XtendMemberDeclarationImpl<XtendF
   }
   
   public Expression getInitializer() {
-    UnsupportedOperationException _unsupportedOperationException = new UnsupportedOperationException("Auto-generated function stub");
-    throw _unsupportedOperationException;
+    XtendField _delegate = this.getDelegate();
+    XExpression _initialValue = _delegate.getInitialValue();
+    boolean _equals = Objects.equal(_initialValue, null);
+    if (_equals) {
+      return null;
+    }
+    CompilationUnitImpl _compilationUnit = this.getCompilationUnit();
+    XtendField _delegate_1 = this.getDelegate();
+    XExpression _initialValue_1 = _delegate_1.getInitialValue();
+    return _compilationUnit.toExpression(_initialValue_1);
   }
   
   public boolean isFinal() {

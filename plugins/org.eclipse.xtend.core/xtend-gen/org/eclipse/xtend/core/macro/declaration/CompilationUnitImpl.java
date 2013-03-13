@@ -22,6 +22,7 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.xtend.core.jvmmodel.IXtendJvmAssociations;
 import org.eclipse.xtend.core.macro.CompilationContextImpl;
+import org.eclipse.xtend.core.macro.declaration.ExpressionImpl;
 import org.eclipse.xtend.core.macro.declaration.JvmAnnotationReferenceImpl;
 import org.eclipse.xtend.core.macro.declaration.JvmAnnotationTypeDeclarationImpl;
 import org.eclipse.xtend.core.macro.declaration.JvmAnnotationTypeElementDeclarationImpl;
@@ -82,6 +83,7 @@ import org.eclipse.xtend.lib.macro.declaration.Type;
 import org.eclipse.xtend.lib.macro.declaration.TypeDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.TypeReference;
 import org.eclipse.xtend.lib.macro.declaration.Visibility;
+import org.eclipse.xtend.lib.macro.expression.Expression;
 import org.eclipse.xtend.lib.macro.services.ProblemSupport;
 import org.eclipse.xtend.lib.macro.services.TypeReferenceProvider;
 import org.eclipse.xtext.common.types.JvmAnnotationAnnotationValue;
@@ -885,6 +887,24 @@ public class CompilationUnitImpl implements CompilationUnit {
     this.checkCanceled();
     LightweightTypeReference _lightWeightTypeReference = ((TypeReferenceImpl) typeRef).getLightWeightTypeReference();
     return _lightWeightTypeReference.toJavaCompliantTypeReference();
+  }
+  
+  public Expression toExpression(final XExpression delegate) {
+    final Function1<XExpression,ExpressionImpl> _function = new Function1<XExpression,ExpressionImpl>() {
+        public ExpressionImpl apply(final XExpression it) {
+          ExpressionImpl _expressionImpl = new ExpressionImpl();
+          final Procedure1<ExpressionImpl> _function = new Procedure1<ExpressionImpl>() {
+              public void apply(final ExpressionImpl it) {
+                it.setDelegate(delegate);
+                it.setCompilationUnit(CompilationUnitImpl.this);
+              }
+            };
+          ExpressionImpl _doubleArrow = ObjectExtensions.<ExpressionImpl>operator_doubleArrow(_expressionImpl, _function);
+          return _doubleArrow;
+        }
+      };
+    ExpressionImpl _orCreate = this.<XExpression, ExpressionImpl>getOrCreate(delegate, _function);
+    return _orCreate;
   }
   
   public void setCompilationStrategy(final JvmExecutable executable, final CompilationStrategy compilationStrategy) {

@@ -95,6 +95,9 @@ public class JvmTypesBuilder {
 	
 	@Inject
 	private IJvmModelAssociator associator;
+	
+	@Inject
+	private ILogicalContainerProvider logicalContainerProvider;
 
 	@Inject
 	private TypeReferences references;
@@ -160,7 +163,7 @@ public class JvmTypesBuilder {
 		associator.associateLogicalContainer(expr, logicalContainer);
 	}
 	
-	protected void removeExistingBody(@Nullable JvmMember member) {
+	public void removeExistingBody(@Nullable JvmMember member) {
 		if(member != null) {
 			// remove old adapters
 			Iterator<Adapter> iterator = member.eAdapters().iterator();
@@ -171,6 +174,20 @@ public class JvmTypesBuilder {
 			}
 			associator.removeLogicalChildAssociation(member);
 		}
+	}
+	
+	public XExpression getExpression(@Nullable JvmMember member) {
+		if(member != null) {
+			return logicalContainerProvider.getAssociatedExpression(member);
+		}
+		return null;
+	}
+	
+	public XExpression getInitializer(@Nullable JvmMember member) {
+		if(member != null) {
+			return logicalContainerProvider.getAssociatedExpression(member);
+		}
+		return null;
 	}
 	
 	@Nullable

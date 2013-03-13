@@ -80,8 +80,16 @@ public class XtendMethodDeclarationImpl extends XtendMemberDeclarationImpl<Xtend
   }
   
   public Expression getBody() {
-    UnsupportedOperationException _unsupportedOperationException = new UnsupportedOperationException("Auto-generated function stub");
-    throw _unsupportedOperationException;
+    XtendFunction _delegate = this.getDelegate();
+    XExpression _expression = _delegate.getExpression();
+    boolean _equals = Objects.equal(_expression, null);
+    if (_equals) {
+      return null;
+    }
+    CompilationUnitImpl _compilationUnit = this.getCompilationUnit();
+    XtendFunction _delegate_1 = this.getDelegate();
+    XExpression _expression_1 = _delegate_1.getExpression();
+    return _compilationUnit.toExpression(_expression_1);
   }
   
   public boolean isVarArgs() {

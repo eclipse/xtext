@@ -17,7 +17,7 @@ import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.Resource.Diagnostic;
 import org.eclipse.xtend.core.jvmmodel.IXtendJvmAssociations;
-import org.eclipse.xtend.core.macro.declaration.AbstractDeclarationImpl;
+import org.eclipse.xtend.core.macro.declaration.AbstractElementImpl;
 import org.eclipse.xtend.core.macro.declaration.CompilationUnitImpl;
 import org.eclipse.xtend.core.macro.declaration.ProblemImpl;
 import org.eclipse.xtend.core.xtend.XtendField;
@@ -147,17 +147,17 @@ public class ProblemSupportImpl implements ProblemSupport {
     this.checkCanceled();
     boolean _matched = false;
     if (!_matched) {
-      if (element instanceof AbstractDeclarationImpl) {
-        final AbstractDeclarationImpl<? extends EObject> _abstractDeclarationImpl = (AbstractDeclarationImpl<? extends EObject>)element;
+      if (element instanceof AbstractElementImpl) {
+        final AbstractElementImpl<? extends EObject> _abstractElementImpl = (AbstractElementImpl<? extends EObject>)element;
         _matched=true;
-        EObject _delegate = ((AbstractDeclarationImpl<EObject>)_abstractDeclarationImpl).getDelegate();
+        EObject _delegate = ((AbstractElementImpl<EObject>)_abstractElementImpl).getDelegate();
         final Resource resource = _delegate.eResource();
         XtendFile _xtendFile = this.compilationUnit.getXtendFile();
         Resource _eResource = _xtendFile.eResource();
         boolean _equals = Objects.equal(resource, _eResource);
         if (_equals) {
           IXtendJvmAssociations _jvmAssociations = this.compilationUnit.getJvmAssociations();
-          EObject _delegate_1 = ((AbstractDeclarationImpl<EObject>)_abstractDeclarationImpl).getDelegate();
+          EObject _delegate_1 = ((AbstractElementImpl<EObject>)_abstractElementImpl).getDelegate();
           final EObject eobject = _jvmAssociations.getPrimarySourceElement(_delegate_1);
           return Pair.<Resource, EObject>of(resource, eobject);
         }

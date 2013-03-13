@@ -7,6 +7,7 @@
  */
 package org.eclipse.xtend.core.macro.declaration;
 
+import com.google.common.base.Objects;
 import java.util.List;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.xtend.core.macro.declaration.CompilationUnitImpl;
@@ -23,6 +24,7 @@ import org.eclipse.xtend.lib.macro.declaration.Visibility;
 import org.eclipse.xtend.lib.macro.expression.Expression;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.JvmVisibility;
+import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
@@ -31,8 +33,16 @@ import org.eclipse.xtext.xbase.lib.ListExtensions;
 @SuppressWarnings("all")
 public class XtendConstructorDeclarationImpl extends XtendMemberDeclarationImpl<XtendConstructor> implements ConstructorDeclaration {
   public Expression getBody() {
-    UnsupportedOperationException _unsupportedOperationException = new UnsupportedOperationException("Auto-generated function stub");
-    throw _unsupportedOperationException;
+    XtendConstructor _delegate = this.getDelegate();
+    XExpression _expression = _delegate.getExpression();
+    boolean _equals = Objects.equal(_expression, null);
+    if (_equals) {
+      return null;
+    }
+    CompilationUnitImpl _compilationUnit = this.getCompilationUnit();
+    XtendConstructor _delegate_1 = this.getDelegate();
+    XExpression _expression_1 = _delegate_1.getExpression();
+    return _compilationUnit.toExpression(_expression_1);
   }
   
   public Visibility getVisibility() {

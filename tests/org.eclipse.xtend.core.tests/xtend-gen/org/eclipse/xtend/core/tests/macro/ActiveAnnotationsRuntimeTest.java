@@ -7,6 +7,7 @@ import com.google.inject.Provider;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.resource.Resource.Diagnostic;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.xtend.core.macro.ProcessorInstanceForJvmTypeProvider;
 import org.eclipse.xtend.core.macro.declaration.CompilationUnitImpl;
@@ -17,6 +18,7 @@ import org.eclipse.xtend.core.xtend.XtendFile;
 import org.eclipse.xtend.lib.macro.declaration.MutableTypeDeclaration;
 import org.eclipse.xtext.junit4.InjectWith;
 import org.eclipse.xtext.junit4.XtextRunner;
+import org.eclipse.xtext.junit4.validation.ValidationTestHelper;
 import org.eclipse.xtext.resource.XtextResourceSet;
 import org.eclipse.xtext.util.IAcceptor;
 import org.eclipse.xtext.xbase.compiler.CompilationTestHelper;
@@ -26,6 +28,7 @@ import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.Pair;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -42,6 +45,9 @@ public class ActiveAnnotationsRuntimeTest extends AbstractReusableActiveAnnotati
   
   @Inject
   private ProcessorInstanceForJvmTypeProvider processorProvider;
+  
+  @Inject
+  private ValidationTestHelper validationTestHelper;
   
   @Before
   public void setUp() {
@@ -81,9 +87,13 @@ public class ActiveAnnotationsRuntimeTest extends AbstractReusableActiveAnnotati
             final CompilationUnitImpl unit = ActiveAnnotationsRuntimeTest.this.compilationUnitProvider.get();
             EList<EObject> _contents = singleResource.getContents();
             Iterable<XtendFile> _filter = Iterables.<XtendFile>filter(_contents, XtendFile.class);
-            XtendFile _head = IterableExtensions.<XtendFile>head(_filter);
-            unit.setXtendFile(_head);
+            final XtendFile xtendFile = IterableExtensions.<XtendFile>head(_filter);
+            ActiveAnnotationsRuntimeTest.this.validationTestHelper.assertNoErrors(xtendFile);
+            unit.setXtendFile(xtendFile);
             expectations.apply(unit);
+            EList<Diagnostic> _errors = singleResource.getErrors();
+            boolean _isEmpty = _errors.isEmpty();
+            Assert.assertTrue(_isEmpty);
           }
         };
       this.compiler.compile(resourceSet, _function_1);

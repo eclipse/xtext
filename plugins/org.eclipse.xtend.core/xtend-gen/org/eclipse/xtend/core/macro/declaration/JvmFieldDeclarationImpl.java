@@ -7,7 +7,9 @@
  */
 package org.eclipse.xtend.core.macro.declaration;
 
+import com.google.common.base.Objects;
 import org.eclipse.xtend.core.macro.declaration.CompilationUnitImpl;
+import org.eclipse.xtend.core.macro.declaration.ExpressionImpl;
 import org.eclipse.xtend.core.macro.declaration.JvmMemberDeclarationImpl;
 import org.eclipse.xtend.core.macro.declaration.TypeReferenceImpl;
 import org.eclipse.xtend.lib.macro.declaration.CompilationStrategy;
@@ -18,18 +20,36 @@ import org.eclipse.xtend.lib.macro.declaration.TypeReference;
 import org.eclipse.xtend.lib.macro.expression.Expression;
 import org.eclipse.xtext.common.types.JvmField;
 import org.eclipse.xtext.common.types.JvmTypeReference;
+import org.eclipse.xtext.xbase.XExpression;
+import org.eclipse.xtext.xbase.jvmmodel.JvmTypesBuilder;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 
 @SuppressWarnings("all")
 public class JvmFieldDeclarationImpl extends JvmMemberDeclarationImpl<JvmField> implements MutableFieldDeclaration {
   public Expression getInitializer() {
-    UnsupportedOperationException _unsupportedOperationException = new UnsupportedOperationException("Auto-Jvm function stub");
-    throw _unsupportedOperationException;
+    CompilationUnitImpl _compilationUnit = this.getCompilationUnit();
+    CompilationUnitImpl _compilationUnit_1 = this.getCompilationUnit();
+    JvmTypesBuilder _jvmTypesBuilder = _compilationUnit_1.getJvmTypesBuilder();
+    JvmField _delegate = this.getDelegate();
+    XExpression _expression = _jvmTypesBuilder.getExpression(_delegate);
+    Expression _expression_1 = _compilationUnit.toExpression(_expression);
+    return _expression_1;
   }
   
   public void setInitializer(final Expression initializer) {
-    UnsupportedOperationException _unsupportedOperationException = new UnsupportedOperationException("Auto-Jvm function stub");
-    throw _unsupportedOperationException;
+    boolean _equals = Objects.equal(initializer, null);
+    if (_equals) {
+      CompilationUnitImpl _compilationUnit = this.getCompilationUnit();
+      JvmTypesBuilder _jvmTypesBuilder = _compilationUnit.getJvmTypesBuilder();
+      JvmField _delegate = this.getDelegate();
+      _jvmTypesBuilder.removeExistingBody(_delegate);
+    } else {
+      CompilationUnitImpl _compilationUnit_1 = this.getCompilationUnit();
+      JvmTypesBuilder _jvmTypesBuilder_1 = _compilationUnit_1.getJvmTypesBuilder();
+      JvmField _delegate_1 = this.getDelegate();
+      XExpression _delegate_2 = ((ExpressionImpl) initializer).getDelegate();
+      _jvmTypesBuilder_1.setInitializer(_delegate_1, _delegate_2);
+    }
   }
   
   public void setInitializer(final CompilationStrategy initializer) {

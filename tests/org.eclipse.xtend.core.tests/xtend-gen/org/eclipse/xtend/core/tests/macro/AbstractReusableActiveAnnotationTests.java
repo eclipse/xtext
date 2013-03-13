@@ -32,6 +32,158 @@ import org.junit.Test;
 @SuppressWarnings("all")
 public abstract class AbstractReusableActiveAnnotationTests {
   @Test
+  public void testSwapExpressions() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("package myannotation");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("import java.util.List");
+    _builder.newLine();
+    _builder.append("import org.eclipse.xtend.lib.macro.Active");
+    _builder.newLine();
+    _builder.append("import org.eclipse.xtend.lib.macro.TransformationContext");
+    _builder.newLine();
+    _builder.append("import org.eclipse.xtend.lib.macro.TransformationParticipant");
+    _builder.newLine();
+    _builder.append("import org.eclipse.xtend.lib.macro.declaration.MutableMethodDeclaration");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("@Active(typeof(SwapProcessor))");
+    _builder.newLine();
+    _builder.append("annotation Swap{ }");
+    _builder.newLine();
+    _builder.append("class SwapProcessor implements TransformationParticipant<MutableMethodDeclaration> {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("override doTransform(List<? extends MutableMethodDeclaration> methods, extension TransformationContext context) {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("val b1 = methods.get(0).body");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("val b2 = methods.get(1).body");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("methods.get(0).body = b2");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("methods.get(1).body = b1");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    Pair<String,String> _mappedTo = Pair.<String, String>of("myannotation/SwapAnnotation.xtend", _builder.toString());
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("package myusercode");
+    _builder_1.newLine();
+    _builder_1.newLine();
+    _builder_1.append("class MyClass {");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("@myannotation.Swap def foo(String a) {");
+    _builder_1.newLine();
+    _builder_1.append("\t\t");
+    _builder_1.append("return b");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("@myannotation.Swap def bar(String b) {");
+    _builder_1.newLine();
+    _builder_1.append("\t\t");
+    _builder_1.append("return a");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    Pair<String,String> _mappedTo_1 = Pair.<String, String>of("myusercode/UserCode.xtend", _builder_1.toString());
+    final Procedure1<CompilationUnitImpl> _function = new Procedure1<CompilationUnitImpl>() {
+        public void apply(final CompilationUnitImpl it) {
+        }
+      };
+    this.assertProcessing(_mappedTo, _mappedTo_1, _function);
+  }
+  
+  @Test
+  public void testSwapExpressions_01() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("package myannotation");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("import java.util.List");
+    _builder.newLine();
+    _builder.append("import org.eclipse.xtend.lib.macro.Active");
+    _builder.newLine();
+    _builder.append("import org.eclipse.xtend.lib.macro.TransformationContext");
+    _builder.newLine();
+    _builder.append("import org.eclipse.xtend.lib.macro.TransformationParticipant");
+    _builder.newLine();
+    _builder.append("import org.eclipse.xtend.lib.macro.declaration.MutableFieldDeclaration");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("@Active(typeof(SwapProcessor))");
+    _builder.newLine();
+    _builder.append("annotation Swap{ }");
+    _builder.newLine();
+    _builder.append("class SwapProcessor implements TransformationParticipant<MutableFieldDeclaration> {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("override doTransform(List<? extends MutableFieldDeclaration> fields, extension TransformationContext context) {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("val b1 = fields.get(0).initializer");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("val b2 = fields.get(1).initializer");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("fields.get(0).initializer = b2");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("fields.get(1).initializer = b1");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    Pair<String,String> _mappedTo = Pair.<String, String>of("myannotation/SwapAnnotation.xtend", _builder.toString());
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("package myusercode");
+    _builder_1.newLine();
+    _builder_1.newLine();
+    _builder_1.append("class MyClass {");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("@myannotation.Swap String a = 42");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("@myannotation.Swap int b = \'foo\'");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    Pair<String,String> _mappedTo_1 = Pair.<String, String>of("myusercode/UserCode.xtend", _builder_1.toString());
+    final Procedure1<CompilationUnitImpl> _function = new Procedure1<CompilationUnitImpl>() {
+        public void apply(final CompilationUnitImpl it) {
+        }
+      };
+    this.assertProcessing(_mappedTo, _mappedTo_1, _function);
+  }
+  
+  @Test
   public void testSimpleModification() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("package myannotation");

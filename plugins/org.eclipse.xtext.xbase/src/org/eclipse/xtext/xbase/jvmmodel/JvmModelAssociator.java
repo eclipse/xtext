@@ -146,9 +146,6 @@ public class JvmModelAssociator implements IJvmModelAssociations, IJvmModelAssoc
 		if (logicalChild == null)
 			return;
 		final Map<EObject, JvmIdentifiableElement> mapping = getLogicalContainerMapping(logicalChild.eResource());
-		if (mapping.containsKey(logicalChild)) {
-			throw new IllegalStateException("There is already a logical container for "+logicalChild);
-		}
 		mapping.put(logicalChild, element);
 	}
 	

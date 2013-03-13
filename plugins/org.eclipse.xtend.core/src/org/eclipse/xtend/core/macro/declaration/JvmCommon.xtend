@@ -23,12 +23,12 @@ import org.eclipse.xtext.common.types.JvmUpperBound
 import org.eclipse.xtext.common.types.JvmVoid
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference
 
-abstract class AbstractDeclarationImpl<T> {
+abstract class AbstractElementImpl<T> {
 	@Property T delegate
 	@Property CompilationUnitImpl compilationUnit
 }
 
-abstract class AbstractNamedElementImpl<T extends EObject> extends AbstractDeclarationImpl<T> implements NamedElement {
+abstract class AbstractNamedElementImpl<T extends EObject> extends AbstractElementImpl<T> implements NamedElement {
 	
 	override toString() {
 		class.name+"["+simpleName+"]"
@@ -36,7 +36,7 @@ abstract class AbstractNamedElementImpl<T extends EObject> extends AbstractDecla
 	
 }
 
-class TypeReferenceImpl extends AbstractDeclarationImpl<LightweightTypeReference> implements TypeReference {
+class TypeReferenceImpl extends AbstractElementImpl<LightweightTypeReference> implements TypeReference {
 
 	override getName() {
 		delegate.javaIdentifier
@@ -135,7 +135,7 @@ class TypeReferenceImpl extends AbstractDeclarationImpl<LightweightTypeReference
 
 // types
 
-class VoidTypeImpl extends AbstractDeclarationImpl<JvmVoid> implements VoidType {
+class VoidTypeImpl extends AbstractElementImpl<JvmVoid> implements VoidType {
 	
 	override getSimpleName() {
 		'void'
@@ -155,7 +155,7 @@ class VoidTypeImpl extends AbstractDeclarationImpl<JvmVoid> implements VoidType 
 	
 } 
 
-class PrimitiveTypeImpl extends AbstractDeclarationImpl<JvmPrimitiveType> implements PrimitiveType {
+class PrimitiveTypeImpl extends AbstractElementImpl<JvmPrimitiveType> implements PrimitiveType {
 
 	override getKind() {
 		switch simpleName {
@@ -188,7 +188,7 @@ class PrimitiveTypeImpl extends AbstractDeclarationImpl<JvmPrimitiveType> implem
 	
 }
 
-class TypeParameterDeclarationImpl extends AbstractDeclarationImpl<JvmTypeParameter> implements TypeParameterDeclaration {
+class TypeParameterDeclarationImpl extends AbstractElementImpl<JvmTypeParameter> implements TypeParameterDeclaration {
 	
 	override getUpperBounds() {
 		delegate.constraints.filter(typeof(JvmUpperBound)).map[compilationUnit.toTypeReference(typeReference)].toList

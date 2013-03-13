@@ -10,7 +10,7 @@ package org.eclipse.xtend.core.macro.declaration;
 import com.google.common.base.Objects;
 import java.util.Collection;
 import org.eclipse.emf.common.util.EList;
-import org.eclipse.xtend.core.macro.declaration.AbstractDeclarationImpl;
+import org.eclipse.xtend.core.macro.declaration.AbstractElementImpl;
 import org.eclipse.xtend.core.macro.declaration.CompilationUnitImpl;
 import org.eclipse.xtend.core.macro.declaration.JvmAnnotationTypeDeclarationImpl;
 import org.eclipse.xtend.lib.macro.declaration.AnnotationTypeDeclaration;
@@ -31,7 +31,7 @@ import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 
 @SuppressWarnings("all")
-public class JvmAnnotationReferenceImpl extends AbstractDeclarationImpl<JvmAnnotationReference> implements MutableAnnotationReference {
+public class JvmAnnotationReferenceImpl extends AbstractElementImpl<JvmAnnotationReference> implements MutableAnnotationReference {
   public AnnotationTypeDeclaration getAnnotationTypeDeclaration() {
     CompilationUnitImpl _compilationUnit = this.getCompilationUnit();
     JvmAnnotationReference _delegate = this.getDelegate();

@@ -8,7 +8,7 @@
 package org.eclipse.xtend.core.macro.declaration;
 
 import com.google.common.base.Objects;
-import org.eclipse.xtend.core.macro.declaration.AbstractDeclarationImpl;
+import org.eclipse.xtend.core.macro.declaration.AbstractElementImpl;
 import org.eclipse.xtend.core.macro.declaration.CompilationUnitImpl;
 import org.eclipse.xtend.lib.macro.declaration.Type;
 import org.eclipse.xtend.lib.macro.declaration.TypeReference;
@@ -17,7 +17,7 @@ import org.eclipse.xtend.lib.macro.services.TypeReferenceProvider;
 import org.eclipse.xtext.common.types.JvmVoid;
 
 @SuppressWarnings("all")
-public class VoidTypeImpl extends AbstractDeclarationImpl<JvmVoid> implements VoidType {
+public class VoidTypeImpl extends AbstractElementImpl<JvmVoid> implements VoidType {
   public String getSimpleName() {
     return "void";
   }
