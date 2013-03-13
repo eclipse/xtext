@@ -12,6 +12,7 @@ import org.eclipse.xtend.lib.macro.declaration.InterfaceDeclaration
 import org.eclipse.xtend.lib.macro.declaration.TypeReference
 import org.eclipse.xtend.lib.macro.declaration.Visibility
 import org.junit.Test
+import java.lang.reflect.AccessibleObject
 
 class DeclarationsTest extends AbstractXtendTestCase {
 	
@@ -238,6 +239,35 @@ class DeclarationsTest extends AbstractXtendTestCase {
 			assertTrue(interfaceA.isAssignableFrom(interfaceA))
 			assertFalse(interfaceA.isAssignableFrom(interfaceB))
 			assertFalse(interfaceA.isAssignableFrom(object))
+		]
+	}
+	
+	@Test def testSetImplementedInterfaces() {
+		validFile('''
+		class BaseClass {}
+		interface Interface {}
+		''').asCompilationUnit [
+			val baseClass = typeLookup.findClass('BaseClass')
+			val interf = typeLookup.findInterface('Interface')
+			
+			val objectType = baseClass.extendedClass
+			assertEquals("Object", objectType.simpleName)
+			assertTrue(baseClass.implementedInterfaces.isEmpty)
+			
+			val superType = typeReferenceProvider.newTypeReference(typeof(AccessibleObject))
+			baseClass.setExtendedClass(superType)
+			assertEquals("AccessibleObject", baseClass.extendedClass.simpleName)
+			assertTrue(baseClass.implementedInterfaces.isEmpty)
+			
+			baseClass.setExtendedClass(null)
+			assertEquals("Object", baseClass.extendedClass.simpleName)
+			assertTrue(baseClass.implementedInterfaces.isEmpty)
+			
+			baseClass.implementedInterfaces = #[typeReferenceProvider.newTypeReference(interf)]
+			assertEquals('Interface', baseClass.implementedInterfaces.head.simpleName)
+			
+			baseClass.implementedInterfaces = #[]
+			assertTrue(baseClass.implementedInterfaces.empty)
 		]
 	}
 	

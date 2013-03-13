@@ -16,7 +16,8 @@ import com.google.common.annotations.Beta;
  * @author Sven Efftinge
  */
 @Beta
-public interface ClassDeclaration extends TypeDeclaration, TypeParameterDeclarator {
+public interface ClassDeclaration extends TypeDeclaration,
+		TypeParameterDeclarator {
 
 	/**
 	 * @return whether this class is marked <code>final</code>
@@ -34,7 +35,9 @@ public interface ClassDeclaration extends TypeDeclaration, TypeParameterDeclarat
 	boolean isStatic();
 
 	/**
-	 * @return the super class of this class or <code>null</code> if no explicit super class is specified.
+	 * @return the super class of this class. If this class declaration
+	 *         represents the source AST this method returns <code>null</code>
+	 *         if no explicit super class is specified.
 	 */
 	TypeReference getExtendedClass();
 
@@ -42,5 +45,5 @@ public interface ClassDeclaration extends TypeDeclaration, TypeParameterDeclarat
 	 * @return the interfaces directly implemented by the class declaration
 	 */
 	List<TypeReference> getImplementedInterfaces();
-	
+
 }

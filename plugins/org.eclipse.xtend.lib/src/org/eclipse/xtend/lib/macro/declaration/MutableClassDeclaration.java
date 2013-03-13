@@ -34,7 +34,7 @@ public interface MutableClassDeclaration extends MutableTypeDeclaration, ClassDe
 	void setStatic(boolean isStatic);
 	
 	/**
-	 * @param superclass the type reference to the super type.
+	 * @param superclass the type reference to the super type. <code>null</code> resets the extended class to java.lang.Object (the default).
 	 */
 	public void setExtendedClass(TypeReference superclass);
 	

@@ -119,6 +119,7 @@ import org.eclipse.xtext.common.types.JvmVisibility;
 import org.eclipse.xtext.common.types.JvmVoid;
 import org.eclipse.xtext.common.types.util.TypeReferences;
 import org.eclipse.xtext.documentation.IEObjectDocumentationProvider;
+import org.eclipse.xtext.documentation.IFileHeaderProvider;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.annotations.interpreter.ConstantExpressionsInterpreter;
 import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotation;
@@ -226,6 +227,9 @@ public class CompilationUnitImpl implements CompilationUnit {
   @Inject
   private IEObjectDocumentationProvider documentationProvider;
   
+  @Inject
+  private IFileHeaderProvider fileHeaderProvider;
+  
   private final ProblemSupport _problemSupport = new Function0<ProblemSupport>() {
     public ProblemSupport apply() {
       ProblemSupportImpl _problemSupportImpl = new ProblemSupportImpl(CompilationUnitImpl.this);
@@ -278,6 +282,14 @@ public class CompilationUnitImpl implements CompilationUnit {
   
   public IEObjectDocumentationProvider getDocumentationProvider() {
     return this.documentationProvider;
+  }
+  
+  public IFileHeaderProvider getFileHeaderProvider() {
+    return this.fileHeaderProvider;
+  }
+  
+  public JvmTypesBuilder getJvmTypesBuilder() {
+    return this.typesBuilder;
   }
   
   public void setXtendFile(final XtendFile xtendFile) {
