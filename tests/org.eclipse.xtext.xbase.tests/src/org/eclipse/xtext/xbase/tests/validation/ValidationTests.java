@@ -210,8 +210,10 @@ public class ValidationTests extends AbstractXbaseTestCase {
 	}
 	
 	@Test public void testLocalVarOfTypeVoid_01() throws Exception {
-		XBlockExpression block = (XBlockExpression) expression("{ var illegalAssignmentOfVoid = while(true) {} }");
-		helper.assertError(block, XVARIABLE_DECLARATION, INVALID_USE_OF_TYPE, "void");
+		XBlockExpression block = (XBlockExpression) expression("{ var illegalAssignmentOfVoid = while(true) {} illegalAssignmentOfVoid.doesNotExist }");
+		helper.assertError(block, XWHILE_EXPRESSION, INCOMPATIBLE_TYPES, "void");
+		helper.assertNoError(block, INVALID_USE_OF_TYPE);
+		helper.assertNoError(block, Diagnostic.LINKING_DIAGNOSTIC);
 	}
 	
 	@Test public void testLocalVarOfTypeVoid_02() throws Exception {
@@ -220,8 +222,9 @@ public class ValidationTests extends AbstractXbaseTestCase {
 	}
 	
 	@Test public void testLocalVarOfTypeVoid_03() throws Exception {
-		XBlockExpression block = (XBlockExpression) expression("{ var void illegalVoid; }");
+		XBlockExpression block = (XBlockExpression) expression("{ var void illegalVoid; illegalVoid.doesNotExist }");
 		helper.assertError(block, TypesPackage.Literals.JVM_PARAMETERIZED_TYPE_REFERENCE, INVALID_USE_OF_TYPE, "void");
+		helper.assertNoError(block, Diagnostic.LINKING_DIAGNOSTIC);
 	}
 	
 	@Test public void testVariableShadowing_00() throws Exception {
