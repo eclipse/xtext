@@ -20,7 +20,7 @@ import org.eclipse.xtend.core.macro.ProcessorInstanceForJvmTypeProvider
 
 @RunWith(typeof(XtextRunner))
 @InjectWith(typeof(RuntimeInjectorProvider))
-class ActiveAnnotationsRuntimeTest extends AbstractReuasableActiveAnnotationTests {
+class ActiveAnnotationsRuntimeTest extends AbstractReusableActiveAnnotationTests {
 	
 	@Inject CompilationTestHelper compiler
 	@Inject Provider<CompilationUnitImpl> compilationUnitProvider

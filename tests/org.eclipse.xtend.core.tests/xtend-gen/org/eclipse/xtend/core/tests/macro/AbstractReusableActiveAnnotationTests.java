@@ -30,7 +30,7 @@ import org.junit.Assert;
 import org.junit.Test;
 
 @SuppressWarnings("all")
-public abstract class AbstractReuasableActiveAnnotationTests {
+public abstract class AbstractReusableActiveAnnotationTests {
   @Test
   public void testSimpleModification() {
     StringConcatenation _builder = new StringConcatenation();
@@ -879,6 +879,24 @@ public abstract class AbstractReuasableActiveAnnotationTests {
           MutableFieldDeclaration _get = ((MutableFieldDeclaration[])Conversions.unwrapArray(_declaredFields_1, MutableFieldDeclaration.class))[1];
           String _name_1 = _get.getName();
           Assert.assertEquals("field2_A_B_C", _name_1);
+        }
+      };
+    this.assertProcessing(this.THREE_ANNOTATIONS, _mappedTo, _function);
+  }
+  
+  @Test
+  public void testDeterministicExecutionOrder_03() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("@_A @_B @_C class MyClass {");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    Pair<String,String> _mappedTo = Pair.<String, String>of("MyClass.xtend", _builder.toString());
+    final Procedure1<CompilationUnitImpl> _function = new Procedure1<CompilationUnitImpl>() {
+        public void apply(final CompilationUnitImpl it) {
+          TypeLookupImpl _typeLookup = it.getTypeLookup();
+          final MutableClassDeclaration myClass = _typeLookup.findClass("MyClass_A_B_C");
+          Assert.assertNotNull(myClass);
         }
       };
     this.assertProcessing(this.THREE_ANNOTATIONS, _mappedTo, _function);

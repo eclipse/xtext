@@ -19,8 +19,8 @@ import org.eclipse.xtend.lib.macro.declaration.Visibility;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmMember;
 import org.eclipse.xtext.common.types.JvmVisibility;
+import org.eclipse.xtext.common.types.impl.JvmMemberImplCustom;
 import org.eclipse.xtext.xbase.compiler.DocumentationAdapter;
-import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 
 @SuppressWarnings("all")
 public abstract class JvmMemberDeclarationImpl<T extends JvmMember> extends JvmAnnotationTargetImpl<T> implements MutableMemberDeclaration {
@@ -37,7 +37,7 @@ public abstract class JvmMemberDeclarationImpl<T extends JvmMember> extends JvmA
     EList<Adapter> _eAdapters = _delegate.eAdapters();
     Adapter _adapter = EcoreUtil.getAdapter(_eAdapters, DocumentationAdapter.class);
     DocumentationAdapter adapter = ((DocumentationAdapter) _adapter);
-    boolean _equals = ObjectExtensions.operator_equals(adapter, null);
+    boolean _equals = Objects.equal(adapter, null);
     if (_equals) {
       DocumentationAdapter _documentationAdapter = new DocumentationAdapter();
       adapter = _documentationAdapter;
@@ -97,6 +97,16 @@ public abstract class JvmMemberDeclarationImpl<T extends JvmMember> extends JvmA
   
   public void setName(final String name) {
     T _delegate = this.getDelegate();
-    _delegate.setSimpleName(name);
+    final T it = _delegate;
+    boolean _matched = false;
+    if (!_matched) {
+      if (it instanceof JvmMemberImplCustom) {
+        final JvmMemberImplCustom _jvmMemberImplCustom = (JvmMemberImplCustom)it;
+        _matched=true;
+        ((JvmMemberImplCustom)_jvmMemberImplCustom).clearIdentifierCache();
+      }
+    }
+    T _delegate_1 = this.getDelegate();
+    _delegate_1.setSimpleName(name);
   }
 }

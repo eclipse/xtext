@@ -11,7 +11,7 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.xtend.core.macro.ProcessorInstanceForJvmTypeProvider;
 import org.eclipse.xtend.core.macro.declaration.CompilationUnitImpl;
 import org.eclipse.xtend.core.tests.RuntimeInjectorProvider;
-import org.eclipse.xtend.core.tests.macro.AbstractReuasableActiveAnnotationTests;
+import org.eclipse.xtend.core.tests.macro.AbstractReusableActiveAnnotationTests;
 import org.eclipse.xtend.core.tests.macro.DelegatingClassloader;
 import org.eclipse.xtend.core.xtend.XtendFile;
 import org.eclipse.xtend.lib.macro.declaration.MutableTypeDeclaration;
@@ -33,7 +33,7 @@ import org.junit.runner.RunWith;
 @RunWith(XtextRunner.class)
 @InjectWith(RuntimeInjectorProvider.class)
 @SuppressWarnings("all")
-public class ActiveAnnotationsRuntimeTest extends AbstractReuasableActiveAnnotationTests {
+public class ActiveAnnotationsRuntimeTest extends AbstractReusableActiveAnnotationTests {
   @Inject
   private CompilationTestHelper compiler;
   

@@ -27,11 +27,11 @@ import org.junit.runner.RunWith
 
 import static org.eclipse.xtend.ide.tests.WorkbenchTestHelper.*
 import static org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil.*
-import org.eclipse.xtend.core.tests.macro.AbstractReuasableActiveAnnotationTests
+import org.eclipse.xtend.core.tests.macro.AbstractReusableActiveAnnotationTests
 
 @RunWith(typeof(XtextRunner))
 @InjectWith(typeof(XtendIDEInjectorProvider))
-class ActiveAnnotationsProcessingInIDETest extends AbstractReuasableActiveAnnotationTests {
+class ActiveAnnotationsProcessingInIDETest extends AbstractReusableActiveAnnotationTests {
 	
 	// dummy override, to make launch config available
 	@Test override testSimpleModification() {
