@@ -90,16 +90,18 @@ public class OverrideIndicatorRulerAction extends ResourceAction implements IAct
 		IVerticalRuler verticalRuler = getVerticalRuler();
 		int lineOfLastMouseButtonActivity = verticalRuler.getLineOfLastMouseButtonActivity();
 		IAnnotationModelExtension2 annotationModel = (IAnnotationModelExtension2) verticalRuler.getModel();
-		Iterator<?> iterator = Iterators.emptyIterator();
-		try {
-			IRegion line = document.getLineInformation(lineOfLastMouseButtonActivity);
-			iterator = annotationModel.getAnnotationIterator(line.getOffset(), line.getLength() + 1, true, true);
-		} catch (BadLocationException e) {
-		}
-		while (iterator.hasNext()) {
-			Annotation annotation = (Annotation) iterator.next();
-			if (annotation instanceof OverrideIndicatorAnnotation) {
-				return (OverrideIndicatorAnnotation) annotation;
+		if (annotationModel != null) {
+			Iterator<?> iterator = Iterators.emptyIterator();
+			try {
+				IRegion line = document.getLineInformation(lineOfLastMouseButtonActivity);
+				iterator = annotationModel.getAnnotationIterator(line.getOffset(), line.getLength() + 1, true, true);
+			} catch (BadLocationException e) {
+			}
+			while (iterator.hasNext()) {
+				Annotation annotation = (Annotation) iterator.next();
+				if (annotation instanceof OverrideIndicatorAnnotation) {
+					return (OverrideIndicatorAnnotation) annotation;
+				}
 			}
 		}
 		return null;
