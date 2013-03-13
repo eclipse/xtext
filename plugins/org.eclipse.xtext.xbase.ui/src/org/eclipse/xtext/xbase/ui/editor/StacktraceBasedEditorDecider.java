@@ -96,6 +96,20 @@ public class StacktraceBasedEditorDecider {
 		return false;
 	}
 	
+	public boolean isJDI() {
+		StackTraceElement[] trace = new Exception().getStackTrace();
+		for (StackTraceElement element : trace) {
+			if (isJDIModelPresentationGetEditorID(element))
+				return true;
+		}
+		return false;
+	}
+
+	public boolean isJDIModelPresentationGetEditorID(StackTraceElement element) {
+		return "org.eclipse.jdt.internal.debug.ui.JDIModelPresentation".equals(element.getClassName())
+				&& "getEditorId".equals(element.getMethodName());
+	}
+
 	/**
 	 * @noreference This method is not intended to be referenced by clients.
 	 * @nooverride This method is not intended to be re-implemented or extended by clients.
