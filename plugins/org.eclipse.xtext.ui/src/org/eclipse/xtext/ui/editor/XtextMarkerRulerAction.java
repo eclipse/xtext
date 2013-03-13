@@ -82,7 +82,7 @@ public final class XtextMarkerRulerAction extends SelectMarkerRulerAction {
 						return true;
 				} else if (element instanceof MarkerAnnotation) {
 					MarkerAnnotation annotation = (MarkerAnnotation) element;
-					if (annotation.isQuickFixable())
+					if (annotation.isQuickFixableStateSet() && annotation.isQuickFixable())
 						return true;
 				}
 			}

@@ -11,13 +11,19 @@ import java.io.IOException;
 import java.io.InputStream;
 
 import org.eclipse.core.resources.IResource;
+import org.eclipse.core.resources.IStorage;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IStatus;
+import org.eclipse.emf.common.util.URI;
 import org.eclipse.jdt.core.IClassFile;
+import org.eclipse.jdt.core.IJarEntryResource;
+import org.eclipse.jdt.core.IPackageFragmentRoot;
 import org.eclipse.jdt.internal.ui.javaeditor.IClassFileEditorInput;
 import org.eclipse.jface.text.IDocument;
 import org.eclipse.jface.text.source.IAnnotationModel;
 import org.eclipse.ui.IEditorInput;
+import org.eclipse.ui.IFileEditorInput;
+import org.eclipse.ui.IStorageEditorInput;
 import org.eclipse.xtext.builder.smap.XbaseBreakpointUtil;
 import org.eclipse.xtext.builder.trace.ITraceForTypeRootProvider;
 import org.eclipse.xtext.generator.trace.ILocationInResource;
@@ -100,6 +106,19 @@ public class XbaseDocumentProvider extends XtextDocumentProvider {
 			IResource breakpointResource = breakpointUtil.getBreakpointResource(classFile.findPrimaryType());
 			ILocationInResource source = getClassFileSourceStorage(classFile);
 			return new JarFileMarkerAnnotationModel(breakpointResource, source.getResourceURI());
+		} else if (!(element instanceof IFileEditorInput) && (element instanceof IStorageEditorInput)) {
+			IStorageEditorInput input = (IStorageEditorInput) element;
+			IStorage storage = input.getStorage();
+			if (storage instanceof IJarEntryResource) {
+				IPackageFragmentRoot packageFragmentRoot = ((IJarEntryResource) storage).getPackageFragmentRoot();
+				IResource resource = packageFragmentRoot.getResource();
+				if (resource != null) {
+					URI uri = getStorage2UriMapper().getUri(storage);
+					if (uri != null) {
+						return new JarFileMarkerAnnotationModel(resource, uri);
+					}
+				}
+			}
 		}
 		return super.createAnnotationModel(element);
 	}
