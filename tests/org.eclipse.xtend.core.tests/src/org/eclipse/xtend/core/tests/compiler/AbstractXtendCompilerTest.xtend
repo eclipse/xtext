@@ -14,6 +14,8 @@ import org.eclipse.xtext.xbase.compiler.DisableCodeGenerationAdapter
 import org.eclipse.xtext.xbase.compiler.GeneratorConfig
 import org.eclipse.xtext.xbase.compiler.IGeneratorConfigProvider
 import org.eclipse.xtext.xbase.compiler.JvmModelGenerator
+import org.eclipse.xtext.xbase.compiler.OnTheFlyJavaCompiler
+import org.junit.Before
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -22,17 +24,40 @@ abstract class AbstractXtendCompilerTest extends AbstractXtendTestCase {
 	
 	@Inject protected JvmModelGenerator generator
 	@Inject protected IGeneratorConfigProvider generatorConfigProvider
+	@Inject protected OnTheFlyJavaCompiler compiler
+	
+	@Before
+	public def setupCompiler() {
+		compiler.parentClassLoader = class.classLoader
+	}
 	
 	def assertCompilesTo(CharSequence input, CharSequence expected){
 		assertCompilesTo(input, expected, generatorConfigProvider.get(null))
 	}
 
-	def assertCompilesTo(CharSequence input, CharSequence expected, GeneratorConfig config) {
+	def void assertCompilesTo(CharSequence input, CharSequence expected, GeneratorConfig config) {
+		doAssertCompilesTo(input, expected, config)
+	}
+	
+	protected def doUseJavaCompiler() {
+		return true
+	}
+	
+	protected def doAssertCompilesTo(CharSequence input, CharSequence expected, GeneratorConfig config) {
 		val file = file(input.toString(), true)
 		val inferredType = file.eResource.contents.filter(typeof(JvmDeclaredType)).head
 		assertFalse(DisableCodeGenerationAdapter::isDisabled(inferredType))
 		val javaCode = generator.generateType(inferredType, config);
 		XtendCompilerTest::assertEquals(expected.toString, javaCode.toString);
+		if (doUseJavaCompiler && file.xtendTypes.size == 1) {
+			val typeName = if (file.package != null) {
+				file.package + '.' + file.xtendTypes.head.name
+			} else {
+				file.xtendTypes.head.name
+			}
+			compiler.compileToClass(typeName, expected.toString)
+		}
+		return file
 	}
 	
 }

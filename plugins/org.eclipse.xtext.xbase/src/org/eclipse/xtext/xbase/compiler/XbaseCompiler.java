@@ -466,7 +466,7 @@ public class XbaseCompiler extends FeatureCallCompiler {
 				internalToJavaStatement(ex, b, isReferenced);
 				if (isReferenced) {
 					b.newLine().append(getVarName(expr, b)).append(" = (");
-					internalToJavaExpression(ex, b);
+					internalToConvertedExpression(ex, b, getType(expr));
 					b.append(");");
 				}
 			}
@@ -514,7 +514,7 @@ public class XbaseCompiler extends FeatureCallCompiler {
 		internalToJavaStatement(expr.getExpression(), b, canBeReferenced);
 		if (canBeReferenced) {
 			b.newLine().append(getVarName(expr, b)).append(" = ");
-			internalToJavaExpression(expr.getExpression(), b);
+			internalToConvertedExpression(expr.getExpression(), b, getType(expr));
 			b.append(";");
 		}
 		b.decreaseIndentation().newLine().append("}");
@@ -581,7 +581,7 @@ public class XbaseCompiler extends FeatureCallCompiler {
 		internalToJavaStatement(catchClause.getExpression(), withDebugging, canBeReferenced);
 		if (canBeReferenced) {
 			appendable.newLine().append(getVarName(catchClause.eContainer(), appendable)).append(" = ");
-			internalToJavaExpression(catchClause.getExpression(), appendable);
+			internalToConvertedExpression(catchClause.getExpression(), appendable, getType((XExpression) catchClause.eContainer()));
 			appendable.append(";");
 		}
 		appendable.decreaseIndentation();
@@ -642,7 +642,6 @@ public class XbaseCompiler extends FeatureCallCompiler {
 		b.append(";");
 	}
 
-	@SuppressWarnings("deprecation")
 	protected JvmTypeReference appendVariableTypeAndName(XVariableDeclaration varDeclaration, ITreeAppendable appendable) {
 		if (!varDeclaration.isWriteable()) {
 			appendable.append("final ");
@@ -651,7 +650,7 @@ public class XbaseCompiler extends FeatureCallCompiler {
 		if (varDeclaration.getType() != null) {
 			type = varDeclaration.getType();
 		} else {
-			type = getTypeProvider().getType(varDeclaration.getRight());
+			type = getType(varDeclaration.getRight());
 		}
 		serialize(type, varDeclaration, appendable);
 		appendable.append(" ");
@@ -750,8 +749,7 @@ public class XbaseCompiler extends FeatureCallCompiler {
 				ILocationData locationWithNewKeyword = getLocationWithNewKeyword(expr);
 				ITreeAppendable appendableWithNewKeyword = locationWithNewKeyword != null ? constructorCallAppendable.trace(locationWithNewKeyword) : constructorCallAppendable;
 				appendableWithNewKeyword.append("new ");
-				@SuppressWarnings("deprecation")
-				JvmTypeReference producedType = getTypeProvider().getType(expr);
+				JvmTypeReference producedType = getType(expr);
 				serialize(producedType, expr, appendableWithNewKeyword.trace(expr, XbasePackage.Literals.XCONSTRUCTOR_CALL__CONSTRUCTOR, 0), false, false, true, false);
 				
 				constructorCallAppendable.append("(");
@@ -810,7 +808,12 @@ public class XbaseCompiler extends FeatureCallCompiler {
 				generateCheckedExceptionHandling(expr, b);
 			}
 		} else {
-			b.newLine().append("return;");
+			@SuppressWarnings("deprecation")
+			JvmTypeReference expectedReturnType = getTypeProvider().getExpectedReturnType(expr, false);
+			if (expectedReturnType == null || getTypeReferences().is(expectedReturnType, Void.TYPE))
+				b.newLine().append("return;");
+			else
+				b.newLine().append("return null;");
 		}
 	}
 	
@@ -839,7 +842,7 @@ public class XbaseCompiler extends FeatureCallCompiler {
 			b.newLine();
 			b.append(getVarName(expr, b));
 			b.append(" = ");
-			internalToJavaExpression(expr.getThen(), b);
+			internalToConvertedExpression(expr.getThen(), b, getType(expr));
 			b.append(";");
 		}
 		b.decreaseIndentation().newLine().append("}");
@@ -851,7 +854,7 @@ public class XbaseCompiler extends FeatureCallCompiler {
 				b.newLine();
 				b.append(getVarName(expr, b));
 				b.append(" = ");
-				internalToJavaExpression(expr.getElse(), b);
+				internalToConvertedExpression(expr.getElse(), b, getType(expr));
 				b.append(";");
 			}
 			b.decreaseIndentation().newLine().append("}");
@@ -894,8 +897,7 @@ public class XbaseCompiler extends FeatureCallCompiler {
 				// define synthetic name
 				name = "_switchValue";
 			}
-			@SuppressWarnings("deprecation")
-			JvmTypeReference typeReference = getTypeProvider().getType(expr.getSwitch());
+			JvmTypeReference typeReference = getType(expr.getSwitch());
 			b.newLine().append("final ");
 			serialize(typeReference, expr, b);
 			b.append(" ");
@@ -941,8 +943,7 @@ public class XbaseCompiler extends FeatureCallCompiler {
 				ITreeAppendable conditionAppendable = caseAppendable.trace(casePart.getCase(), true);
 				internalToJavaStatement(casePart.getCase(), conditionAppendable, true);
 				conditionAppendable.newLine().append("if (");
-				@SuppressWarnings("deprecation")
-				JvmTypeReference convertedType = getTypeProvider().getType(casePart.getCase());
+				JvmTypeReference convertedType = getType(casePart.getCase());
 				if (getTypeReferences().is(convertedType, Boolean.TYPE) || getTypeReferences().is(convertedType, Boolean.class)) {
 					internalToJavaExpression(casePart.getCase(), conditionAppendable);
 				} else {
@@ -964,7 +965,7 @@ public class XbaseCompiler extends FeatureCallCompiler {
 			internalToJavaStatement(casePart.getThen(), caseAppendable, canBeReferenced);
 			if (canBeReferenced) {
 				caseAppendable.newLine().append(switchResultName).append(" = ");
-				internalToJavaExpression(casePart.getThen(), caseAppendable);
+				internalToConvertedExpression(casePart.getThen(), caseAppendable, getType(expr));
 				caseAppendable.append(";");
 			}
 
@@ -991,7 +992,7 @@ public class XbaseCompiler extends FeatureCallCompiler {
 			internalToJavaStatement(expr.getDefault(), defaultAppendable, canBeReferenced);
 			if (canBeReferenced) {
 				defaultAppendable.newLine().append(switchResultName).append(" = ");
-				internalToJavaExpression(expr.getDefault(), defaultAppendable);
+				internalToConvertedExpression(expr.getDefault(), defaultAppendable, getType(expr));
 				defaultAppendable.append(";");
 			}
 			if(needsMatcherIf) {
@@ -1066,8 +1067,7 @@ public class XbaseCompiler extends FeatureCallCompiler {
 	protected void _toJavaStatement(final XClosure closure, final ITreeAppendable b, boolean isReferenced) {
 		if (!isReferenced)
 			throw new IllegalArgumentException("a closure definition does not cause any side-effects");
-		@SuppressWarnings("deprecation")
-		JvmTypeReference type = getTypeProvider().getType(closure);
+		JvmTypeReference type = getType(closure);
 		b.newLine().append("final ");
 		serialize(type, closure, b);
 		b.append(" ");
