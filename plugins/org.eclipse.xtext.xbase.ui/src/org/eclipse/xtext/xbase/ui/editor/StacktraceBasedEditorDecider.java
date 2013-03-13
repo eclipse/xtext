@@ -28,7 +28,11 @@ public class StacktraceBasedEditorDecider {
 	 * @nooverride This method is not intended to be re-implemented or extended by clients.
 	 */
 	public Decision decideAccordingToCaller() {
-		StackTraceElement[] trace = new Exception().getStackTrace();
+		return doDecideAccordingToCaller(true);
+	}
+
+	protected Decision doDecideAccordingToCaller(boolean respectPackageExplorer) {
+		StackTraceElement[] trace = Thread.currentThread().getStackTrace();
 		for(StackTraceElement element: trace) {
 //			if (isOpenTypeAction(element))
 //				return Decision.FORCE_XBASE;
@@ -36,7 +40,7 @@ public class StacktraceBasedEditorDecider {
 				return Decision.FORCE_JAVA;
 			if (isNavigationHistory(element))
 				return Decision.FORCE_JAVA;
-			if (isPackageExplorerOrNavigator(element))
+			if (respectPackageExplorer && isPackageExplorerOrNavigator(element))
 				return Decision.FORCE_JAVA;
 			if (isOpenResource(element))
 				return Decision.FORCE_JAVA;
@@ -44,6 +48,14 @@ public class StacktraceBasedEditorDecider {
 				return Decision.FORCE_JAVA;
 		}
 		return Decision.FAVOR_XBASE;
+	}
+	
+	/**
+	 * @noreference This method is not intended to be referenced by clients.
+	 * @nooverride This method is not intended to be re-implemented or extended by clients.
+	 */
+	public Decision decideAccordingToCallerForSimpleFileName() {
+		return doDecideAccordingToCaller(false);
 	}
 	
 	protected boolean isNavigationHistory(StackTraceElement element) {
