@@ -98,13 +98,16 @@ public class OriginalEditorSelector implements IEditorAssociationOverride {
 	// - somebody doubleclicks on a .class file in a JAR in the JDT Package Explorer
 	// - somebody clicks on a stack frame hyperlink in the console 
 	protected IEditorDescriptor findXbaseEditor(String fileName) {
-		String file = debugPluginListener.findXtextSourceFileNameForClassFile(fileName);
-		if (file != null)
-			return getXtextEditor(URI.createURI(file));
-		IType type = findJavaTypeForSimpleFileName(fileName);
-		if (type != null) {
-			ITrace trace = traceForTypeRootProvider.getTraceToSource(type.getTypeRoot());
-			return getXtextEditor(trace);
+		if (decisions.isJDI()) {
+			String file = debugPluginListener.findXtextSourceFileNameForClassFile(fileName);
+			if (file != null)
+				return getXtextEditor(URI.createURI(file));
+		} else {
+			IType type = findJavaTypeForSimpleFileName(fileName);
+			if (type != null) {
+				ITrace trace = traceForTypeRootProvider.getTraceToSource(type.getTypeRoot());
+				return getXtextEditor(trace);
+			}
 		}
 		return null;
 	}
