@@ -14,6 +14,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.common.types.JvmConstructor;
@@ -407,19 +408,11 @@ public abstract class AbstractTypeComputationState implements ITypeComputationSt
 	}
 	
 	public List<IConstructorLinkingCandidate> getLinkingCandidates(XConstructorCall constructorCall) {
-		IConstructorLinkingCandidate result = resolvedTypes.getConstructor(constructorCall);
-		if (result != null) {
+		IConstructorLinkingCandidate result = reentrantTypeResolver.getScopeProviderAccess().getKnownConstructor(constructorCall, this, resolvedTypes);
+		if(result != null) {
 			return Collections.singletonList(result);
 		}
 		EObject proxyOrResolved = (EObject) constructorCall.eGet(XbasePackage.Literals.XCONSTRUCTOR_CALL__CONSTRUCTOR, false);
-		if (proxyOrResolved == null) {
-			result = new NullConstructorLinkingCandidate(constructorCall, this);
-			return Collections.singletonList(result);
-		}
-		if (!proxyOrResolved.eIsProxy()) {
-			result = createResolvedLink(constructorCall, (JvmConstructor) proxyOrResolved);
-			return Collections.singletonList(result);
-		}
 		Iterable<IEObjectDescription> descriptions = reentrantTypeResolver.getScopeProviderAccess().getCandidateDescriptions(
 				constructorCall, XbasePackage.Literals.XCONSTRUCTOR_CALL__CONSTRUCTOR, proxyOrResolved, featureScopeSession, resolvedTypes);
 		List<IConstructorLinkingCandidate> resultList = Lists.newArrayList();
