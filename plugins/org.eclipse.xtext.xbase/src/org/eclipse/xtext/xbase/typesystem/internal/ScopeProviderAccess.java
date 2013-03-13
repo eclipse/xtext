@@ -20,6 +20,7 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.jdt.annotation.Nullable;
+import org.eclipse.xtext.common.types.JvmConstructor;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.linking.impl.IllegalNodeException;
@@ -33,11 +34,13 @@ import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.util.Strings;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
+import org.eclipse.xtext.xbase.XConstructorCall;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XbasePackage;
 import org.eclipse.xtext.xbase.scoping.batch.IFeatureScopeSession;
 import org.eclipse.xtext.xbase.scoping.batch.IIdentifiableElementDescription;
 import org.eclipse.xtext.xbase.typesystem.IResolvedTypes;
+import org.eclipse.xtext.xbase.typesystem.computation.IConstructorLinkingCandidate;
 import org.eclipse.xtext.xbase.typesystem.computation.IFeatureLinkingCandidate;
 import org.eclipse.xtext.xbase.typesystem.conformance.ConformanceHint;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightMergedBoundTypeArgument;
@@ -84,6 +87,32 @@ public class ScopeProviderAccess {
 		return null;
 	}
 	
+	@NonNullByDefault
+	@Nullable
+	protected IConstructorLinkingCandidate getKnownConstructor(XConstructorCall constructorCall, AbstractTypeComputationState state,
+			ResolvedTypes resolvedTypes) {
+		IConstructorLinkingCandidate result = resolvedTypes.getConstructor(constructorCall);
+		if (result != null) {
+			return result;
+		}
+		EObject proxyOrResolved = (EObject) constructorCall.eGet(XbasePackage.Literals.XCONSTRUCTOR_CALL__CONSTRUCTOR, false);
+		if (proxyOrResolved == null) {
+			result = new NullConstructorLinkingCandidate(constructorCall, state);
+			return result;
+		}
+		if (!proxyOrResolved.eIsProxy()) {
+			result = state.createResolvedLink(constructorCall, (JvmConstructor) proxyOrResolved);
+			return result;
+		}
+		if (!encoder.isCrossLinkFragment(constructorCall.eResource(), EcoreUtil.getURI(proxyOrResolved).fragment())) {
+			JvmConstructor constructor = constructorCall.getConstructor();
+			if (!constructor.eIsProxy()) {
+				return state.createResolvedLink(constructorCall, constructor);
+			}
+		}
+		return null;
+	}
+
 	/**
 	 * Returns a bunch of descriptions most of which are actually {@link IIdentifiableElementDescription describing identifiables}. 
 	 * The provided iterable is never empty but it may contain a single {@link ErrorDescription error description}.
