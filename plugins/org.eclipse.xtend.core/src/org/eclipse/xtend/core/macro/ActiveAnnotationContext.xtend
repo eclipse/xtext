@@ -80,6 +80,7 @@ class ActiveAnnotationContextProvider {
 		} catch (Throwable e) {
 			switch e {
 				VirtualMachineError : throw e
+				LinkageError: throw e // e.g. java.lang.UnsupportedClassVersionError: activetest/Processor : Unsupported major.minor version 51.0
 			}
 			return newArrayList
 		} finally {
