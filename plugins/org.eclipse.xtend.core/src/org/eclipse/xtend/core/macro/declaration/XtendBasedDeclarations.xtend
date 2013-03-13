@@ -229,7 +229,9 @@ class XtendMethodDeclarationImpl extends XtendMemberDeclarationImpl<XtendFunctio
 	}
 	
 	override getBody() {
-		throw new UnsupportedOperationException("Auto-generated function stub")
+		if (delegate.expression == null)
+			return null
+		return compilationUnit.toExpression(delegate.expression)
 	}
 	
 	override isVarArgs() {
@@ -253,7 +255,9 @@ class XtendMethodDeclarationImpl extends XtendMemberDeclarationImpl<XtendFunctio
 class XtendConstructorDeclarationImpl extends XtendMemberDeclarationImpl<XtendConstructor> implements ConstructorDeclaration {
 	
 	override getBody() {
-		throw new UnsupportedOperationException("Auto-generated function stub")
+		if (delegate.expression == null)
+			return null
+		return compilationUnit.toExpression(delegate.expression)
 	}
 
 	override getVisibility() {
@@ -309,7 +313,9 @@ class XtendFieldDeclarationImpl extends XtendMemberDeclarationImpl<XtendField> i
 	}
 	
 	override getInitializer() {
-		throw new UnsupportedOperationException("Auto-generated function stub")
+		if (delegate.initialValue == null)
+			return null
+		return compilationUnit.toExpression(delegate.initialValue)
 	}
 	
 	override isFinal() {
@@ -344,11 +350,15 @@ class XtendAnnotationTypeElementDeclarationImpl extends XtendMemberDeclarationIm
 	}
 	
 	override getDefaultValue() {
-		throw new UnsupportedOperationException("TODO: auto-generated method stub")
+		if (delegate.initialValue == null)
+			return null
+		compilationUnit.evaluate(delegate.initialValue)
 	}
 	
 	override getDefaultValueExpression() {
-		throw new UnsupportedOperationException("TODO: auto-generated method stub")
+		if (delegate.initialValue == null)
+			return null
+		compilationUnit.toExpression(delegate.initialValue) 
 	}
 	
 	override getType() {
@@ -357,7 +367,7 @@ class XtendAnnotationTypeElementDeclarationImpl extends XtendMemberDeclarationIm
 	
 }
 
-class XtendTypeParameterDeclarationImpl extends AbstractDeclarationImpl<JvmTypeParameter> implements TypeParameterDeclaration {
+class XtendTypeParameterDeclarationImpl extends AbstractElementImpl<JvmTypeParameter> implements TypeParameterDeclaration {
 	
 	override getUpperBounds() {
 		delegate.constraints.filter(typeof(JvmUpperBound)).map[compilationUnit.toTypeReference(typeReference)].toList
@@ -394,7 +404,7 @@ class XtendTypeParameterDeclarationImpl extends AbstractDeclarationImpl<JvmTypeP
 	
 }
 
-class XtendAnnotationReferenceImpl extends AbstractDeclarationImpl<XAnnotation> implements AnnotationReference {
+class XtendAnnotationReferenceImpl extends AbstractElementImpl<XAnnotation> implements AnnotationReference {
 	
 	override getAnnotationTypeDeclaration() {
 		switch type: delegate.annotationType {
@@ -404,7 +414,13 @@ class XtendAnnotationReferenceImpl extends AbstractDeclarationImpl<XAnnotation> 
 	}
 	
 	override getExpression(String property) {
-		throw new UnsupportedOperationException("TODO: auto-generated method stub")
+		if (property == 'value' && delegate.value != null) {
+			return compilationUnit.toExpression(delegate.value)
+		}
+		val expression = delegate.elementValuePairs.findFirst[element.simpleName == property]?.value
+		if (expression != null)
+			return compilationUnit.toExpression(expression)
+		return null
 	}
 	
 	override getValue(String property) {

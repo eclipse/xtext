@@ -18,6 +18,9 @@ import org.junit.Test
 import org.junit.runner.RunWith
 import org.eclipse.xtend.core.macro.ProcessorInstanceForJvmTypeProvider
 
+import static org.junit.Assert.*
+import org.eclipse.xtext.junit4.validation.ValidationTestHelper
+
 @RunWith(typeof(XtextRunner))
 @InjectWith(typeof(RuntimeInjectorProvider))
 class ActiveAnnotationsRuntimeTest extends AbstractReusableActiveAnnotationTests {
@@ -25,6 +28,7 @@ class ActiveAnnotationsRuntimeTest extends AbstractReusableActiveAnnotationTests
 	@Inject CompilationTestHelper compiler
 	@Inject Provider<CompilationUnitImpl> compilationUnitProvider
 	@Inject ProcessorInstanceForJvmTypeProvider processorProvider
+	@Inject ValidationTestHelper validationTestHelper
 	
 	@Before
 	def void setUp() {
@@ -44,8 +48,11 @@ class ActiveAnnotationsRuntimeTest extends AbstractReusableActiveAnnotationTests
 		val singleResource = resourceSet.resources.head
 		compiler.compile(resourceSet) [
 			val unit = compilationUnitProvider.get
-			unit.setXtendFile(singleResource.contents.filter(typeof(XtendFile)).head)
+			val xtendFile = singleResource.contents.filter(typeof(XtendFile)).head
+			validationTestHelper.assertNoErrors(xtendFile)
+			unit.setXtendFile(xtendFile)
 			expectations.apply(unit)
+			assertTrue(singleResource.errors.isEmpty)
 		]
 	}
 	

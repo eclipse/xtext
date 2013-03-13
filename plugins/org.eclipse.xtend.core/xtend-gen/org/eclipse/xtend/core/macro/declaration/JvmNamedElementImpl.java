@@ -10,12 +10,12 @@ package org.eclipse.xtend.core.macro.declaration;
 import com.google.common.base.Objects;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.xtend.core.macro.declaration.AbstractDeclarationImpl;
+import org.eclipse.xtend.core.macro.declaration.AbstractElementImpl;
 import org.eclipse.xtend.lib.macro.declaration.MutableNamedElement;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 
 @SuppressWarnings("all")
-public abstract class JvmNamedElementImpl<T extends JvmIdentifiableElement> extends AbstractDeclarationImpl<T> implements MutableNamedElement {
+public abstract class JvmNamedElementImpl<T extends JvmIdentifiableElement> extends AbstractElementImpl<T> implements MutableNamedElement {
   public String getSimpleName() {
     T _delegate = this.getDelegate();
     String _simpleName = _delegate.getSimpleName();

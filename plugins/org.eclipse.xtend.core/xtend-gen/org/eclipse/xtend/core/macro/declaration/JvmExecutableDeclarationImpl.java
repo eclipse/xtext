@@ -11,6 +11,7 @@ import com.google.common.base.Objects;
 import java.util.List;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.xtend.core.macro.declaration.CompilationUnitImpl;
+import org.eclipse.xtend.core.macro.declaration.ExpressionImpl;
 import org.eclipse.xtend.core.macro.declaration.JvmMemberDeclarationImpl;
 import org.eclipse.xtend.lib.macro.declaration.CompilationStrategy;
 import org.eclipse.xtend.lib.macro.declaration.MutableExecutableDeclaration;
@@ -25,6 +26,8 @@ import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.JvmUpperBound;
 import org.eclipse.xtext.common.types.TypesFactory;
+import org.eclipse.xtext.xbase.XExpression;
+import org.eclipse.xtext.xbase.jvmmodel.JvmTypesBuilder;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.ListExtensions;
 
@@ -79,13 +82,33 @@ public abstract class JvmExecutableDeclarationImpl<T extends JvmExecutable> exte
   }
   
   public Expression getBody() {
-    UnsupportedOperationException _unsupportedOperationException = new UnsupportedOperationException("Auto-Jvm function stub");
-    throw _unsupportedOperationException;
+    Expression _xblockexpression = null;
+    {
+      CompilationUnitImpl _compilationUnit = this.getCompilationUnit();
+      JvmTypesBuilder _jvmTypesBuilder = _compilationUnit.getJvmTypesBuilder();
+      T _delegate = this.getDelegate();
+      final XExpression expression = _jvmTypesBuilder.getExpression(_delegate);
+      CompilationUnitImpl _compilationUnit_1 = this.getCompilationUnit();
+      Expression _expression = _compilationUnit_1.toExpression(expression);
+      _xblockexpression = (_expression);
+    }
+    return _xblockexpression;
   }
   
   public void setBody(final Expression body) {
-    UnsupportedOperationException _unsupportedOperationException = new UnsupportedOperationException("Auto-Jvm function stub");
-    throw _unsupportedOperationException;
+    boolean _equals = Objects.equal(body, null);
+    if (_equals) {
+      CompilationUnitImpl _compilationUnit = this.getCompilationUnit();
+      JvmTypesBuilder _jvmTypesBuilder = _compilationUnit.getJvmTypesBuilder();
+      T _delegate = this.getDelegate();
+      _jvmTypesBuilder.removeExistingBody(_delegate);
+    } else {
+      CompilationUnitImpl _compilationUnit_1 = this.getCompilationUnit();
+      JvmTypesBuilder _jvmTypesBuilder_1 = _compilationUnit_1.getJvmTypesBuilder();
+      T _delegate_1 = this.getDelegate();
+      XExpression _delegate_2 = ((ExpressionImpl) body).getDelegate();
+      _jvmTypesBuilder_1.setBody(_delegate_1, _delegate_2);
+    }
   }
   
   public void setExceptions(final TypeReference... exceptions) {

@@ -86,6 +86,7 @@ import org.eclipse.xtext.xbase.typesystem.references.OwnedConverter
 import org.eclipse.xtext.xbase.typesystem.util.CommonTypeComputationServices
 import org.eclipse.xtext.documentation.IEObjectDocumentationProvider
 import org.eclipse.xtext.documentation.IFileHeaderProvider
+import org.eclipse.xtend.lib.macro.expression.Expression
 
 class CompilationUnitImpl implements CompilationUnit {
 	
@@ -401,6 +402,15 @@ class CompilationUnitImpl implements CompilationUnit {
 	def JvmTypeReference toJvmTypeReference(TypeReference typeRef) {
 		checkCanceled
 		return (typeRef as TypeReferenceImpl).lightWeightTypeReference.toJavaCompliantTypeReference
+	}
+	
+	def Expression toExpression(XExpression delegate) {
+		getOrCreate(delegate) [
+			new ExpressionImpl => [
+				it.delegate = delegate
+				it.compilationUnit = this
+			]
+		]
 	}
 	
 	def void setCompilationStrategy(JvmExecutable executable, CompilationStrategy compilationStrategy) {

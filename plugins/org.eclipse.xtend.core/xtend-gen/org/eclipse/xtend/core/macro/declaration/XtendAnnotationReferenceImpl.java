@@ -9,7 +9,7 @@ package org.eclipse.xtend.core.macro.declaration;
 
 import com.google.common.base.Objects;
 import org.eclipse.emf.common.util.EList;
-import org.eclipse.xtend.core.macro.declaration.AbstractDeclarationImpl;
+import org.eclipse.xtend.core.macro.declaration.AbstractElementImpl;
 import org.eclipse.xtend.core.macro.declaration.CompilationUnitImpl;
 import org.eclipse.xtend.lib.macro.declaration.AnnotationReference;
 import org.eclipse.xtend.lib.macro.declaration.AnnotationTypeDeclaration;
@@ -25,7 +25,7 @@ import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 
 @SuppressWarnings("all")
-public class XtendAnnotationReferenceImpl extends AbstractDeclarationImpl<XAnnotation> implements AnnotationReference {
+public class XtendAnnotationReferenceImpl extends AbstractElementImpl<XAnnotation> implements AnnotationReference {
   public AnnotationTypeDeclaration getAnnotationTypeDeclaration() {
     AnnotationTypeDeclaration _switchResult = null;
     XAnnotation _delegate = this.getDelegate();
@@ -48,8 +48,40 @@ public class XtendAnnotationReferenceImpl extends AbstractDeclarationImpl<XAnnot
   }
   
   public Expression getExpression(final String property) {
-    UnsupportedOperationException _unsupportedOperationException = new UnsupportedOperationException("TODO: auto-generated method stub");
-    throw _unsupportedOperationException;
+    boolean _and = false;
+    boolean _equals = Objects.equal(property, "value");
+    if (!_equals) {
+      _and = false;
+    } else {
+      XAnnotation _delegate = this.getDelegate();
+      XExpression _value = _delegate.getValue();
+      boolean _notEquals = (!Objects.equal(_value, null));
+      _and = (_equals && _notEquals);
+    }
+    if (_and) {
+      CompilationUnitImpl _compilationUnit = this.getCompilationUnit();
+      XAnnotation _delegate_1 = this.getDelegate();
+      XExpression _value_1 = _delegate_1.getValue();
+      return _compilationUnit.toExpression(_value_1);
+    }
+    XAnnotation _delegate_2 = this.getDelegate();
+    EList<XAnnotationElementValuePair> _elementValuePairs = _delegate_2.getElementValuePairs();
+    final Function1<XAnnotationElementValuePair,Boolean> _function = new Function1<XAnnotationElementValuePair,Boolean>() {
+        public Boolean apply(final XAnnotationElementValuePair it) {
+          JvmOperation _element = it.getElement();
+          String _simpleName = _element.getSimpleName();
+          boolean _equals = Objects.equal(_simpleName, property);
+          return Boolean.valueOf(_equals);
+        }
+      };
+    XAnnotationElementValuePair _findFirst = IterableExtensions.<XAnnotationElementValuePair>findFirst(_elementValuePairs, _function);
+    final XExpression expression = _findFirst==null?(XExpression)null:_findFirst.getValue();
+    boolean _notEquals_1 = (!Objects.equal(expression, null));
+    if (_notEquals_1) {
+      CompilationUnitImpl _compilationUnit_1 = this.getCompilationUnit();
+      return _compilationUnit_1.toExpression(expression);
+    }
+    return null;
   }
   
   public Object getValue(final String property) {

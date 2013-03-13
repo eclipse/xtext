@@ -8,7 +8,7 @@
 package org.eclipse.xtend.core.macro.declaration;
 
 import com.google.common.base.Objects;
-import org.eclipse.xtend.core.macro.declaration.AbstractDeclarationImpl;
+import org.eclipse.xtend.core.macro.declaration.AbstractElementImpl;
 import org.eclipse.xtend.core.macro.declaration.CompilationUnitImpl;
 import org.eclipse.xtend.lib.macro.declaration.PrimitiveType;
 import org.eclipse.xtend.lib.macro.declaration.PrimitiveType.Kind;
@@ -18,7 +18,7 @@ import org.eclipse.xtend.lib.macro.services.TypeReferenceProvider;
 import org.eclipse.xtext.common.types.JvmPrimitiveType;
 
 @SuppressWarnings("all")
-public class PrimitiveTypeImpl extends AbstractDeclarationImpl<JvmPrimitiveType> implements PrimitiveType {
+public class PrimitiveTypeImpl extends AbstractElementImpl<JvmPrimitiveType> implements PrimitiveType {
   public Kind getKind() {
     Kind _switchResult = null;
     String _simpleName = this.getSimpleName();

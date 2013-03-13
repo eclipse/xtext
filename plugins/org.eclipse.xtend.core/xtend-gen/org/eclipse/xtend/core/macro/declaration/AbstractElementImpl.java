@@ -10,7 +10,7 @@ package org.eclipse.xtend.core.macro.declaration;
 import org.eclipse.xtend.core.macro.declaration.CompilationUnitImpl;
 
 @SuppressWarnings("all")
-public abstract class AbstractDeclarationImpl<T extends Object> {
+public abstract class AbstractElementImpl<T extends Object> {
   private T _delegate;
   
   public T getDelegate() {
