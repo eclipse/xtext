@@ -32,7 +32,6 @@ import org.eclipse.xtext.common.types.util.TypeReferences;
 import org.eclipse.xtext.documentation.IEObjectDocumentationProvider;
 import org.eclipse.xtext.documentation.IEObjectDocumentationProviderExtension;
 import org.eclipse.xtext.documentation.IJavaDocTypeReferenceProvider;
-import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 import org.eclipse.xtext.parser.IParseResult;
@@ -151,11 +150,14 @@ public class TypeUsageCollector {
 				Set<EObject> elements = associations.getJvmElements(next);
 				if (!elements.isEmpty()) {
 					EObject firstJvmElement = elements.iterator().next();
-					if (firstJvmElement instanceof JvmDeclaredType) {
-						currentThisType = (JvmDeclaredType) firstJvmElement;
-						knownTypesForStaticImports = null;
-					} 
-					if (firstJvmElement instanceof JvmMember) { 
+					if (firstJvmElement instanceof JvmMember) {
+						JvmDeclaredType declaringType = (firstJvmElement instanceof JvmDeclaredType) 
+								? (JvmDeclaredType) firstJvmElement
+								: ((JvmMember) firstJvmElement).getDeclaringType();
+						if(currentThisType != declaringType) {
+							currentThisType = declaringType;
+							knownTypesForStaticImports = null;
+						}
 						currentContext = (JvmMember) firstJvmElement;
 					}
 				} 
@@ -294,7 +296,7 @@ public class TypeUsageCollector {
 			reference.setType(currentThisType);
 			knownTypesForStaticImports = superTypeCollector.collectSuperTypesAsRawTypes(reference);
 		}
-		if (knownTypesForStaticImports.contains(declarator))
+		if (knownTypesForStaticImports != null && knownTypesForStaticImports.contains(declarator))
 			return;
 		typeUsages.addStaticImport(declarator);
 	}
