@@ -17,6 +17,7 @@ import java.util.Set;
 import org.apache.log4j.Logger;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.resource.Resource.Diagnostic;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtend.core.macro.ActiveAnnotationContext;
@@ -231,15 +232,19 @@ public class XtendJvmModelInferrer implements IJvmModelInferrer {
 	
 	protected void handleProcessingError(XtendFile xtendFile, ActiveAnnotationContext ctx, Throwable t) {
 		if (t instanceof VirtualMachineError)
-			throw (VirtualMachineError)t;
-		List<XtendAnnotationTarget> sourceElements = ctx.getAnnotatedSourceElements();
-		for (XtendAnnotationTarget target : sourceElements) {
-			xtendFile.eResource().getErrors().add(new EObjectDiagnosticImpl(Severity.ERROR, 
-					IssueCodes.PROCESSING_ERROR, 
-					"Error during annotation processing :"+t.toString()+" (see error log for details)", 
-					target, null, -1, null));
+			throw (VirtualMachineError) t;
+		EList<Diagnostic> errors = xtendFile.eResource().getErrors();
+		String msg = "Error during annotation processing :" + t.toString() + " (see error log for details)";
+		if (ctx != null) {
+			List<? extends EObject> sourceElements = ctx.getAnnotatedSourceElements();
+			for (EObject target : sourceElements) {
+				errors.add(new EObjectDiagnosticImpl(Severity.ERROR, IssueCodes.PROCESSING_ERROR, msg, target, null, -1, null));
+			}
+			logger.error("Error processing " + xtendFile.eResource().getURI() + " with processor " + ctx.getProcessorInstance().toString(), t);
+		} else {
+			errors.add(new EObjectDiagnosticImpl(Severity.ERROR, IssueCodes.PROCESSING_ERROR, msg, xtendFile, null, -1, null));
+			logger.error("Error processing " + xtendFile.eResource().getURI(), t);
 		}
-		logger.error("Error processing "+xtendFile.eResource().getURI()+" with processor "+ctx.getProcessorInstance().toString(), t);
 	}
 
 	protected void setNameAndAssociate(XtendFile file, XtendTypeDeclaration xtendType, JvmDeclaredType javaType) {
