@@ -40,27 +40,6 @@
 	
 	<!-- Xtend generated: guava Objects.equal(x,null) should be a valid construct -->
 	<Match>
-		<Class name="org.eclipse.xtext.xbase.jvmmodel.JvmTypeExtensions" />
-		<Bug pattern="EC_NULL_ARG" />
-	</Match>
-	<Match>
-		<Package name="org.eclipse.xtext.generator.serializer" />
-		<Bug pattern="EC_NULL_ARG" />
-	</Match>
-	<Match>
-		<Package name="org.eclipse.xtext.xbase.compiler" />
-		<Bug pattern="EC_NULL_ARG" />
-	</Match>
-	<Match>
-		<Package name="org.eclipse.xtext.xtext.ui.wizard.ecore2xtext" />
-		<Bug pattern="EC_NULL_ARG" />
-	</Match>
-	<Match>
-		<Package name="org.eclipse.xtext.xbase.typesystem.references.LightweightBoundTypeArgument" />
-		<Bug pattern="EC_NULL_ARG" />
-	</Match>
-	<Match>
-		<Class name="org.eclipse.xtext.xbase.formatting.XbaseFormatter2" />
 		<Bug pattern="EC_NULL_ARG" />
 	</Match>
 	
