@@ -55,7 +55,6 @@ import org.eclipse.xtend.core.xtend.XtendTypeDeclaration;
 import org.eclipse.xtend.core.xtend.XtendVariableDeclaration;
 import org.eclipse.xtend.lib.Data;
 import org.eclipse.xtend.lib.Property;
-import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.common.types.JvmAnnotationType;
 import org.eclipse.xtext.common.types.JvmConstructor;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
@@ -101,7 +100,7 @@ import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotation;
 import org.eclipse.xtext.xbase.compiler.JavaKeywords;
 import org.eclipse.xtext.xbase.jvmmodel.ILogicalContainerProvider;
 import org.eclipse.xtext.xbase.jvmmodel.JvmTypeExtensions;
-import org.eclipse.xtext.xbase.lib.Exceptions;
+import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.scoping.batch.IFeatureNames;
 import org.eclipse.xtext.xbase.typesystem.legacy.StandardTypeReferenceOwner;
 import org.eclipse.xtext.xbase.typesystem.override.IOverrideCheckResult.OverrideCheckDetails;
@@ -381,9 +380,8 @@ public class XtendJavaValidator extends XbaseWithAnnotationsJavaValidator {
 		if (listType == null || listType.getTypeParameters().isEmpty()) {
 			error("Couldn't find a JDK 1.5 or higher on the project's classpath.", xtendFile, XTEND_FILE__PACKAGE,
 					IssueCodes.JDK_NOT_ON_CLASSPATH);
-		} else if (typeReferences.findDeclaredType(StringConcatenation.class, xtendFile) == null
-				|| typeReferences.findDeclaredType(Exceptions.class, xtendFile) == null) {
-			error("Couldn't find the mandatory library 'org.eclipse.xtext.xbase.lib' 2.3.0 or higher on the project's classpath.",
+		} else if (typeReferences.findDeclaredType(Extension.class, xtendFile) == null) {
+			error("Couldn't find the mandatory library 'org.eclipse.xtext.xbase.lib' 2.4.0 or higher on the project's classpath.",
 					xtendFile, XTEND_FILE__PACKAGE, IssueCodes.XBASE_LIB_NOT_ON_CLASSPATH);
 		}
 	}
