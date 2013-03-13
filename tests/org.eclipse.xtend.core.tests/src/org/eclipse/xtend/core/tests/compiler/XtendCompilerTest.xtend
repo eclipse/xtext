@@ -289,12 +289,12 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 		''')
 	}
 	
-	@Test def void testIfWithVoidButNonVoidExpectation() {
+	@Test def void testIfWithVoidButNonVoidExpectation_01() {
 		assertCompilesTo('''
 			public class C  {
-			    def m() {
-			    	val x = if (false) return;
-			    	x
+				def m() {
+					val x = if (false) return '';
+					x
 				}
 			}
 		''', '''
@@ -305,12 +305,62 @@ class XtendCompilerTest extends AbstractXtendCompilerTest {
 			    {
 			      Object _xifexpression = null;
 			      if (false) {
-			        return;
+			        return "";
 			      }
 			      final Object x = _xifexpression;
 			      _xblockexpression = (x);
 			    }
 			    return _xblockexpression;
+			  }
+			}
+		''')
+	}
+	
+	@Test def void testIfWithVoidButNonVoidExpectation_02() {
+		assertCompilesTo('''
+			public class C  {
+				def void m() {
+					val Object x = if (false) return;
+					x.toString
+				}
+			}
+		''', '''
+			@SuppressWarnings("all")
+			public class C {
+			  public void m() {
+			    Object _xifexpression = null;
+			    if (false) {
+			      return;
+			    }
+			    final Object x = _xifexpression;
+			    x.toString();
+			  }
+			}
+		''')
+	}
+	
+	@Test def void testIfWithVoidButNonVoidExpectation_03() {
+		assertCompilesTo('''
+			public class C  {
+				def m() {
+					val x = if (false) return;
+					voidFunction(x)
+				}
+				def void voidFunction(Object o) {}
+			}
+		''', '''
+			@SuppressWarnings("all")
+			public class C {
+			  public void m() {
+			    Object _xifexpression = null;
+			    if (false) {
+			      return;
+			    }
+			    final Object x = _xifexpression;
+			    this.voidFunction(x);
+			  }
+			  
+			  public void voidFunction(final Object o) {
 			  }
 			}
 		''')

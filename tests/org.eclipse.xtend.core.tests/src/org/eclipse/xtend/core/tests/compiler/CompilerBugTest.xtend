@@ -15,94 +15,6 @@ import org.junit.Test
 class CompilerBugTest extends AbstractXtendCompilerTest {
 	
 	@Test
-	def testBug342021() {
-		assertCompilesTo('''
-			class C {
-				def Iterable<Object> m1(String s) {
-				  if (true) 
-				    [|<Object>newArrayList().iterator]
-				  else
-				    newArrayList(s).toArray
-			    }
-			    def Iterable<Object> m2() {
-				  return if (true) 
-				    [|<Object>newArrayList().iterator]
-				  else
-				    newArrayList('').toArray
-			    }
-			    def Iterable<Object> m3() {
-				  if (true) 
-				    return [|<Object>newArrayList().iterator]
-				  else
-				    return newArrayList('').toArray
-			    }
-			}
-		''', '''
-			import java.util.ArrayList;
-			import java.util.Iterator;
-			import org.eclipse.xtext.xbase.lib.CollectionLiterals;
-			import org.eclipse.xtext.xbase.lib.Conversions;
-			
-			@SuppressWarnings("all")
-			public class C {
-			  public Iterable<Object> m1(final String s) {
-			    Iterable<Object> _xifexpression = null;
-			    if (true) {
-			      final Iterable<Object> _function = new Iterable<Object>() {
-			          public Iterator<Object> iterator() {
-			            ArrayList<Object> _newArrayList = CollectionLiterals.<Object>newArrayList();
-			            Iterator<Object> _iterator = _newArrayList.iterator();
-			            return _iterator;
-			          }
-			        };
-			      _xifexpression = _function;
-			    } else {
-			      ArrayList<String> _newArrayList = CollectionLiterals.<String>newArrayList(s);
-			      Object[] _array = _newArrayList.toArray();
-			      _xifexpression = ((Iterable<Object>)Conversions.doWrapArray(_array));
-			    }
-			    return _xifexpression;
-			  }
-			  
-			  public Iterable<Object> m2() {
-			    Iterable<Object> _xifexpression = null;
-			    if (true) {
-			      final Iterable<Object> _function = new Iterable<Object>() {
-			          public Iterator<Object> iterator() {
-			            ArrayList<Object> _newArrayList = CollectionLiterals.<Object>newArrayList();
-			            Iterator<Object> _iterator = _newArrayList.iterator();
-			            return _iterator;
-			          }
-			        };
-			      _xifexpression = _function;
-			    } else {
-			      ArrayList<String> _newArrayList = CollectionLiterals.<String>newArrayList("");
-			      Object[] _array = _newArrayList.toArray();
-			      _xifexpression = ((Iterable<Object>)Conversions.doWrapArray(_array));
-			    }
-			    return _xifexpression;
-			  }
-			  
-			  public Iterable<Object> m3() {
-			    if (true) {
-			      final Iterable<Object> _function = new Iterable<Object>() {
-			          public Iterator<Object> iterator() {
-			            ArrayList<Object> _newArrayList = CollectionLiterals.<Object>newArrayList();
-			            Iterator<Object> _iterator = _newArrayList.iterator();
-			            return _iterator;
-			          }
-			        };
-			      return _function;
-			    } else {
-			      ArrayList<String> _newArrayList = CollectionLiterals.<String>newArrayList("");
-			      return ((Iterable<Object>)Conversions.doWrapArray(_newArrayList.toArray()));
-			    }
-			  }
-			}
-		''')
-	}
-	
-	@Test
 	def testWronglyAppliedSugar_01() {
 		assertCompilesTo('''
 			class C {
@@ -523,6 +435,7 @@ class CompilerBugTest extends AbstractXtendCompilerTest {
 	}
 	
 	@Test def void testBug380058_01() {
+		useJavaCompiler = false
 		'''
 			import bug380058.Amount
 			
@@ -654,7 +567,7 @@ class CompilerBugTest extends AbstractXtendCompilerTest {
 			@Data
 			@SuppressWarnings("all")
 			public class Foo {
-			  private final static String staticField;
+			  private static String staticField;
 			  
 			  public Foo() {
 			    super();
@@ -701,7 +614,7 @@ class CompilerBugTest extends AbstractXtendCompilerTest {
 			@Data
 			@SuppressWarnings("all")
 			public class Foo {
-			  private final static String staticField;
+			  private static String staticField;
 			  
 			  private final String _nonStaticField;
 			  
@@ -1337,5 +1250,6 @@ class CompilerBugTest extends AbstractXtendCompilerTest {
 			  }
 			}
 		''')
-	}		 
+	}
+
 }

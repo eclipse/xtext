@@ -400,12 +400,20 @@ public abstract class ResolvedTypes implements IResolvedTypes {
 			return typeData.getExpectation().isVoidTypeAllowed();
 		return true;
 	}
+	
+	public boolean isVoidReturnTypeAllowed(XExpression expression) {
+		TypeData typeData = getTypeData(expression, true);
+		if (typeData != null && typeData.isReturnType())
+			return typeData.getExpectation().isVoidTypeAllowed();
+		return true;
+	}
 
 	@Nullable
 	protected LightweightTypeReference doGetExpectedType(XExpression expression, boolean returnType) {
 		TypeData typeData = getTypeData(expression, returnType);
-		if (typeData != null)
+		if (typeData != null) {
 			return typeData.getExpectation().getExpectedType();
+		}
 		return null;
 	}
 	

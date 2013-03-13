@@ -74,7 +74,7 @@ public class LiteralsCompiler extends TypeConvertingCompiler {
 	
 	public void _toJavaExpression(XStringLiteral expr, ITreeAppendable b) {
 		@SuppressWarnings("deprecation")
-		JvmTypeReference type = getTypeProvider().getType(expr);
+		JvmTypeReference type = getType(expr);
 		if (getTypeReferences().is(type, Character.TYPE)) {
 			String javaString = Strings.convertToJavaString(expr.getValue());
 			b.append("'").append(javaString).append("'");
@@ -119,7 +119,7 @@ public class LiteralsCompiler extends TypeConvertingCompiler {
 
 	public void _toJavaExpression(XNumberLiteral expr, ITreeAppendable b) {
 		@SuppressWarnings("deprecation")
-		JvmTypeReference type = getTypeProvider().getType(expr);
+		JvmTypeReference type = getType(expr);
 		if(getTypeReferences().is(type, BigInteger.class)) {
 			BigInteger value = numberLiterals.toBigInteger(expr);
 			if (BigInteger.ZERO.equals(value)) {

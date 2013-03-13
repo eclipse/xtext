@@ -1597,6 +1597,10 @@ abstract class AbstractTypeResolverTest<Reference> extends AbstractXbaseTestCase
             test3.head.value.value.apply(null, null).last
         }".resolvesTo("Double")
     }
+    
+    @Test def void testBlockExpression_09() throws Exception {
+		"{val Object x = if (false) return; x }".resolvesTo("Object")
+	}
 	
 	@Test def void testEMap_01() throws Exception {
 		"{ 

@@ -240,6 +240,11 @@ public abstract class AbstractReturnTypeTest<Reference extends Object> extends A
     this.resolvesTo("{\n\t\t\twhile(true) if (true) return 1 else \'\'\n\t\t\tthrow new RuntimeException()\n\t\t}", "int");
   }
   
+  @Test
+  public void testBlockExpression_09() throws Exception {
+    this.resolvesTo("{val Object x = if (false) return; x }", "Object");
+  }
+  
   @Ignore("TODO this should work")
   @Test
   public void testBug_391758() throws Exception {
