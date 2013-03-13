@@ -146,7 +146,7 @@ public class RootResolvedTypes extends ResolvedTypes {
 			LightweightTypeReference actualType = typeData.getActualType();
 			ITypeExpectation expectation = typeData.getExpectation();
 			if (!typeData.getConformanceHints().contains(ConformanceHint.NO_IMPLICIT_RETURN)) {
-				if (actualType.isPrimitiveVoid() && isIntendentionalEarlyExit(expression)) {
+				if (actualType.isPrimitiveVoid() && isIntentionalEarlyExit(expression)) {
 					return;
 				}
 				LightweightTypeReference expectedType = expectation.getExpectedType();
@@ -179,7 +179,7 @@ public class RootResolvedTypes extends ResolvedTypes {
 	 *   }
 	 * </pre>
 	 */
-	protected boolean isIntendentionalEarlyExit(@Nullable XExpression expression) {
+	protected boolean isIntentionalEarlyExit(@Nullable XExpression expression) {
 		if (expression == null) {
 			return true;
 		}
@@ -187,26 +187,26 @@ public class RootResolvedTypes extends ResolvedTypes {
 			XBlockExpression block = (XBlockExpression) expression;
 			List<XExpression> children = block.getExpressions();
 			for(XExpression child: children) {
-				if (isIntendentionalEarlyExit(child)) {
+				if (isIntentionalEarlyExit(child)) {
 					return true;
 				}
 			}
 		} else if (expression instanceof XIfExpression) {
-			return isIntendentionalEarlyExit(((XIfExpression) expression).getThen()) && isIntendentionalEarlyExit(((XIfExpression) expression).getElse());
+			return isIntentionalEarlyExit(((XIfExpression) expression).getThen()) && isIntentionalEarlyExit(((XIfExpression) expression).getElse());
 		} else if (expression instanceof XTryCatchFinallyExpression) {
 			XTryCatchFinallyExpression tryCatchFinally = (XTryCatchFinallyExpression) expression;
-			if (isIntendentionalEarlyExit(tryCatchFinally.getExpression())) {
+			if (isIntentionalEarlyExit(tryCatchFinally.getExpression())) {
 				for(XCatchClause catchClause: tryCatchFinally.getCatchClauses()) {
-					if (!isIntendentionalEarlyExit(catchClause.getExpression()))
+					if (!isIntentionalEarlyExit(catchClause.getExpression()))
 						return false;
 				}
 				return true;
 			}
 			return false;
 		} else if (expression instanceof XAbstractWhileExpression) {
-			return isIntendentionalEarlyExit(((XAbstractWhileExpression) expression).getBody());
+			return isIntentionalEarlyExit(((XAbstractWhileExpression) expression).getBody());
 		} else if (expression instanceof XForLoopExpression) {
-			return isIntendentionalEarlyExit(((XForLoopExpression) expression).getEachExpression());
+			return isIntentionalEarlyExit(((XForLoopExpression) expression).getEachExpression());
 		}
 		return expression instanceof XReturnExpression || expression instanceof XThrowExpression;
 	}

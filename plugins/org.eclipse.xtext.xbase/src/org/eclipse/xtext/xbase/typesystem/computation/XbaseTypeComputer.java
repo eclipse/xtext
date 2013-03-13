@@ -369,7 +369,11 @@ public class XbaseTypeComputer implements ITypeComputer {
 			 * val Object o = ""
 			 * o.substring(1)
 			 */
-			state.assignType(object, lightweightTypeReference != null ? lightweightTypeReference : computedType.getActualExpressionType(), false);
+			LightweightTypeReference variableType = lightweightTypeReference != null ? lightweightTypeReference : computedType.getActualExpressionType();
+			if (variableType != null && variableType.isPrimitiveVoid()) {
+				variableType = new UnknownTypeReference(variableType.getOwner());
+			}
+			state.assignType(object, variableType, false);
 			state.addExtensionToCurrentScope(object);
 		}
 		LightweightTypeReference primitiveVoid = getPrimitiveVoid(state);
@@ -805,8 +809,18 @@ public class XbaseTypeComputer implements ITypeComputer {
 	}
 
 	protected void _computeTypes(XReturnExpression object, ITypeComputationState state) {
+		XExpression returnValue = object.getExpression();
 		ITypeComputationState expressionState = state.withReturnExpectation();
-		expressionState.computeTypes(object.getExpression());
+		if (returnValue != null)
+			expressionState.computeTypes(returnValue);
+		else {
+			for(ITypeExpectation expectation: expressionState.getExpectations()) {
+				if (expectation.isNoTypeExpectation() || expectation.isVoidTypeAllowed()) {
+					expressionState.acceptActualType(getPrimitiveVoid(state));
+					break;
+				}
+			}
+		}
 		state.acceptActualType(getPrimitiveVoid(state), ConformanceHint.NO_IMPLICIT_RETURN);
 	}
 	

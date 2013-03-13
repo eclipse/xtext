@@ -11,7 +11,6 @@ import static com.google.common.collect.Sets.*;
 
 import java.util.Collection;
 import java.util.Collections;
-import java.util.List;
 import java.util.Set;
 
 import org.eclipse.emf.common.util.EList;
@@ -56,6 +55,7 @@ import com.google.inject.Inject;
 /**
  * @author Sven Efftinge - Initial contribution and API
  */
+@SuppressWarnings("deprecation")
 @NonNullByDefault
 public abstract class AbstractXbaseCompiler {
 
@@ -272,19 +272,23 @@ public abstract class AbstractXbaseCompiler {
 				internalToJavaStatement(ex, b.trace(ex, true), isImplicitReturn);
 				if (isImplicitReturn) {
 					b.newLine().append("return (");
-					internalToJavaExpression(ex, b);
+					internalToConvertedExpression(ex, b, getType(expr));
 					b.append(");");
 				}
 			}
 		}
 		return b;
 	}
+
+	protected JvmTypeReference getType(XExpression expr) {
+		return getTypeProvider().getType(expr);
+	}
 	
 	protected abstract void internalToConvertedExpression(final XExpression obj, final ITreeAppendable appendable,
 			@Nullable JvmTypeReference toBeConvertedTo);
 	
 	protected boolean isPrimitiveVoid(XExpression xExpression) {
-		JvmTypeReference type = getTypeProvider().getType(xExpression);
+		JvmTypeReference type = getType(xExpression);
 		return typeReferences.is(type, Void.TYPE);
 	}
 
@@ -420,7 +424,7 @@ public abstract class AbstractXbaseCompiler {
 	}
 
 	protected String getDefaultValueLiteral(XExpression expr) {
-		JvmTypeReference type = getTypeProvider().getType(expr);
+		JvmTypeReference type = getType(expr);
 		if (primitives.isPrimitive(type)) {
 			if (primitives.primitiveKind((JvmPrimitiveType) type.getType()) == Primitive.Boolean) {
 				return "false";
@@ -443,12 +447,7 @@ public abstract class AbstractXbaseCompiler {
 	}
 
 	protected JvmTypeReference getTypeForVariableDeclaration(XExpression expr) {
-		if (expr instanceof XBlockExpression) {
-			JvmTypeReference expectedType = getTypeProvider().getExpectedType(expr);
-			if (expectedType != null)
-				return expectedType;
-		}
-		JvmTypeReference type = getTypeProvider().getType(expr);
+		JvmTypeReference type = getType(expr);
 		//TODO we need to replace any occurrence of JvmAnyTypeReference with a better match from the expected type
 		if (type instanceof JvmAnyTypeReference) {
 			JvmTypeReference expectedType = getTypeProvider().getExpectedType(expr);
@@ -458,7 +457,7 @@ public abstract class AbstractXbaseCompiler {
 					expectedType = getTypeProvider().getCommonReturnType(expr, true);
 				}
 			}
-			if (expectedType!=null && !(expectedType.getType() instanceof JvmTypeParameter))
+			if (expectedType!=null && !(expectedType.getType() instanceof JvmTypeParameter) && !typeReferences.is(expectedType, Void.TYPE))
 				type = expectedType;
 		}
 		return type;

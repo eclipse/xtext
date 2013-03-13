@@ -93,6 +93,7 @@ import org.eclipse.xtext.xbase.jvmmodel.ILogicalContainerProvider;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.scoping.featurecalls.OperatorMapping;
 import org.eclipse.xtext.xbase.typesystem.IBatchTypeResolver;
+import org.eclipse.xtext.xbase.typesystem.IResolvedTypes;
 import org.eclipse.xtext.xbase.typesystem.computation.NumberLiterals;
 import org.eclipse.xtext.xbase.typesystem.computation.SynonymTypesProvider;
 import org.eclipse.xtext.xbase.typesystem.conformance.ConformanceHint;
@@ -338,10 +339,11 @@ public class XbaseJavaValidator extends AbstractXbaseJavaValidator {
 			}
 		}
 	}
-
+	
 	@Check
 	public void checkReturn(XReturnExpression expr) {
-		LightweightTypeReference expectedReturnType = typeResolver.resolveTypes(expr).getExpectedReturnType(expr);
+		IResolvedTypes resolvedTypes = typeResolver.resolveTypes(expr);
+		LightweightTypeReference expectedReturnType = resolvedTypes.getExpectedReturnType(expr);
 		if (expectedReturnType == null) {
 			return;
 		}

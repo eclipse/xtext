@@ -240,6 +240,10 @@ abstract class AbstractReturnTypeTest<Reference> extends AbstractTypeResolverTes
 		}".resolvesTo("int")
 	}
 	
+	@Test override void testBlockExpression_09() throws Exception {
+		"{val Object x = if (false) return; x }".resolvesTo("Object")
+	}
+	
 	@Ignore("TODO this should work")
 	@Test
 	override testBug_391758() throws Exception {

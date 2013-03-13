@@ -247,7 +247,7 @@ public class FeatureCallCompiler extends LiteralsCompiler {
 				return;
 			}
 			JvmTypeReference expectedType = getTypeProvider().getExpectedType(arg);
-			JvmTypeReference type = getTypeProvider().getType(arg);
+			JvmTypeReference type = getType(arg);
 			if (expectedType != null && !jvmConformance.isConformant(expectedType, type)) {
 				String varName = getVarName(((XAbstractFeatureCall) arg).getFeature(), b);
 				String finalVariable = b.declareSyntheticVariable(arg, "_converted_" + varName);
@@ -331,7 +331,7 @@ public class FeatureCallCompiler extends LiteralsCompiler {
 			final JvmExecutable executable = (JvmExecutable) call.getFeature();
 			if (!executable.getTypeParameters().isEmpty()) {
 				XExpression receiver = getActualReceiver(call);
-				final JvmTypeReference receiverType = receiver != null ? getTypeProvider().getType(receiver) : null;
+				final JvmTypeReference receiverType = receiver != null ? getType(receiver) : null;
 				final JvmTypeReference expectedType = getTypeProvider().getExpectedType(call);
 				final List<JvmTypeReference> argumentTypes = Lists.newArrayList();
 				for (XExpression argument : getActualArguments(call)) {
@@ -580,7 +580,7 @@ public class FeatureCallCompiler extends LiteralsCompiler {
 				if (isExpressionContext) {
 					internalToJavaExpression(expr.getMemberCallTarget(), b);
 					b.append("==null?");
-					JvmTypeReference type = getTypeProvider().getType(call);
+					JvmTypeReference type = getType(call);
 					appendNullValue(type, call, b);
 					b.append(":");
 				} else {
