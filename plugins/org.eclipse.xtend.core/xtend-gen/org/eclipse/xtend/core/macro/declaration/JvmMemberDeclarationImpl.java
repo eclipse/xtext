@@ -8,6 +8,9 @@
 package org.eclipse.xtend.core.macro.declaration;
 
 import com.google.common.base.Objects;
+import org.eclipse.emf.common.notify.Adapter;
+import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtend.core.macro.declaration.CompilationUnitImpl;
 import org.eclipse.xtend.core.macro.declaration.JvmAnnotationTargetImpl;
 import org.eclipse.xtend.lib.macro.declaration.MutableMemberDeclaration;
@@ -16,17 +19,33 @@ import org.eclipse.xtend.lib.macro.declaration.Visibility;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmMember;
 import org.eclipse.xtext.common.types.JvmVisibility;
+import org.eclipse.xtext.xbase.compiler.DocumentationAdapter;
+import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 
 @SuppressWarnings("all")
 public abstract class JvmMemberDeclarationImpl<T extends JvmMember> extends JvmAnnotationTargetImpl<T> implements MutableMemberDeclaration {
   public String getDocComment() {
-    UnsupportedOperationException _unsupportedOperationException = new UnsupportedOperationException("Auto-Jvm function stub");
-    throw _unsupportedOperationException;
+    T _delegate = this.getDelegate();
+    EList<Adapter> _eAdapters = _delegate.eAdapters();
+    Adapter _adapter = EcoreUtil.getAdapter(_eAdapters, DocumentationAdapter.class);
+    final DocumentationAdapter adapter = ((DocumentationAdapter) _adapter);
+    return adapter==null?(String)null:adapter.getDocumentation();
   }
   
   public void setDocComment(final String docComment) {
-    UnsupportedOperationException _unsupportedOperationException = new UnsupportedOperationException("Auto-Jvm function stub");
-    throw _unsupportedOperationException;
+    T _delegate = this.getDelegate();
+    EList<Adapter> _eAdapters = _delegate.eAdapters();
+    Adapter _adapter = EcoreUtil.getAdapter(_eAdapters, DocumentationAdapter.class);
+    DocumentationAdapter adapter = ((DocumentationAdapter) _adapter);
+    boolean _equals = ObjectExtensions.operator_equals(adapter, null);
+    if (_equals) {
+      DocumentationAdapter _documentationAdapter = new DocumentationAdapter();
+      adapter = _documentationAdapter;
+      T _delegate_1 = this.getDelegate();
+      EList<Adapter> _eAdapters_1 = _delegate_1.eAdapters();
+      _eAdapters_1.add(adapter);
+    }
+    adapter.setDocumentation(docComment);
   }
   
   public Visibility getVisibility() {

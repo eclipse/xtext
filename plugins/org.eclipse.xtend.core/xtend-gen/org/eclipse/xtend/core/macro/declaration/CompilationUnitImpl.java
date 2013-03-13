@@ -118,6 +118,7 @@ import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.JvmVisibility;
 import org.eclipse.xtext.common.types.JvmVoid;
 import org.eclipse.xtext.common.types.util.TypeReferences;
+import org.eclipse.xtext.documentation.IEObjectDocumentationProvider;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.annotations.interpreter.ConstantExpressionsInterpreter;
 import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotation;
@@ -222,6 +223,9 @@ public class CompilationUnitImpl implements CompilationUnit {
   @Inject
   private ConstantExpressionsInterpreter interpreter;
   
+  @Inject
+  private IEObjectDocumentationProvider documentationProvider;
+  
   private final ProblemSupport _problemSupport = new Function0<ProblemSupport>() {
     public ProblemSupport apply() {
       ProblemSupportImpl _problemSupportImpl = new ProblemSupportImpl(CompilationUnitImpl.this);
@@ -270,6 +274,10 @@ public class CompilationUnitImpl implements CompilationUnit {
   
   public TypeReferences getTypeReferences() {
     return this.typeReferences;
+  }
+  
+  public IEObjectDocumentationProvider getDocumentationProvider() {
+    return this.documentationProvider;
   }
   
   public void setXtendFile(final XtendFile xtendFile) {
