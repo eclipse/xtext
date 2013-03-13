@@ -712,7 +712,8 @@ public class XtendJvmModelInferrer implements IJvmModelInferrer {
 			field.setStatic(source.isStatic());
 			final boolean isDataObject = hasAnnotation((XtendAnnotationTarget) source.eContainer(), Data.class);
 			if (isDataObject) {
-				field.setFinal(true);
+				if (!field.isStatic())
+					field.setFinal(true);
 			} else {
 				field.setFinal(source.isFinal());
 			}

@@ -633,17 +633,17 @@ public class XtendCompilerTest extends AbstractXtendCompilerTest {
   }
   
   @Test
-  public void testIfWithVoidButNonVoidExpectation() {
+  public void testIfWithVoidButNonVoidExpectation_01() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("public class C  {");
     _builder.newLine();
-    _builder.append("    ");
+    _builder.append("\t");
     _builder.append("def m() {");
     _builder.newLine();
-    _builder.append("    \t");
+    _builder.append("\t\t");
     _builder.append("val x = if (false) return;");
     _builder.newLine();
-    _builder.append("    \t");
+    _builder.append("\t\t");
     _builder.append("x");
     _builder.newLine();
     _builder.append("\t");
@@ -672,7 +672,7 @@ public class XtendCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("if (false) {");
     _builder_1.newLine();
     _builder_1.append("        ");
-    _builder_1.append("return;");
+    _builder_1.append("return null;");
     _builder_1.newLine();
     _builder_1.append("      ");
     _builder_1.append("}");
@@ -688,6 +688,59 @@ public class XtendCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("return _xblockexpression;");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    this.assertCompilesTo(_builder, _builder_1);
+  }
+  
+  @Test
+  public void testIfWithVoidButNonVoidExpectation_02() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("public class C  {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def void m() {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("val Object x = if (false) return;");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("x.toString");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("@SuppressWarnings(\"all\")");
+    _builder_1.newLine();
+    _builder_1.append("public class C {");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("public void m() {");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("Object _xifexpression = null;");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("if (false) {");
+    _builder_1.newLine();
+    _builder_1.append("      ");
+    _builder_1.append("return;");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("final Object x = _xifexpression;");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("x.toString();");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("}");
