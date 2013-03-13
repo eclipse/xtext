@@ -137,6 +137,13 @@ public class ActiveAnnotationContextProvider {
                 throw _virtualMachineError;
               }
             }
+            if (!_matched) {
+              if (e instanceof LinkageError) {
+                final LinkageError _linkageError = (LinkageError)e;
+                _matched=true;
+                throw _linkageError;
+              }
+            }
             return CollectionLiterals.<ActiveAnnotationContext>newArrayList();
           } else {
             throw Exceptions.sneakyThrow(_t);
