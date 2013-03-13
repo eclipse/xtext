@@ -13,6 +13,7 @@ import org.eclipse.xtext.xbase.XNumberLiteral;
 import org.eclipse.xtext.xbase.XStringLiteral;
 import org.eclipse.xtext.xbase.XTypeLiteral;
 import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotation;
+import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotationElementValueBinaryOperation;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ListExtensions;
@@ -211,6 +212,27 @@ public class ConstantExpressionsInterpreter {
         XExpression _rightOperand = _xBinaryOperation.getRightOperand();
         final Object rightVal = this.evaluate(_rightOperand, null);
         return this.plus(leftVal, rightVal);
+      }
+    }
+    if (!_matched) {
+      if (expression instanceof XAnnotationElementValueBinaryOperation) {
+        final XAnnotationElementValueBinaryOperation _xAnnotationElementValueBinaryOperation = (XAnnotationElementValueBinaryOperation)expression;
+        _matched=true;
+        Object _switchResult_1 = null;
+        String _operator = _xAnnotationElementValueBinaryOperation.getOperator();
+        final String _switchValue = _operator;
+        boolean _matched_1 = false;
+        if (!_matched_1) {
+          if (Objects.equal(_switchValue,"+")) {
+            _matched_1=true;
+            XExpression _leftOperand = _xAnnotationElementValueBinaryOperation.getLeftOperand();
+            final Object leftVal = this.evaluate(_leftOperand, null);
+            XExpression _rightOperand = _xAnnotationElementValueBinaryOperation.getRightOperand();
+            final Object rightVal = this.evaluate(_rightOperand, null);
+            return this.plus(leftVal, rightVal);
+          }
+        }
+        _switchResult = _switchResult_1;
       }
     }
     if (!_matched) {
