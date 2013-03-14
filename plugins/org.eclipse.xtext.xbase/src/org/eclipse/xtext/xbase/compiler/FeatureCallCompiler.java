@@ -58,6 +58,7 @@ import org.eclipse.xtext.xbase.XFeatureCall;
 import org.eclipse.xtext.xbase.XMemberFeatureCall;
 import org.eclipse.xtext.xbase.XVariableDeclaration;
 import org.eclipse.xtext.xbase.XbasePackage;
+import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotationElementValueBinaryOperation;
 import org.eclipse.xtext.xbase.compiler.output.ITreeAppendable;
 import org.eclipse.xtext.xbase.featurecalls.IdentifiableSimpleNameProvider;
 import org.eclipse.xtext.xbase.impl.FeatureCallToJavaMapping;
@@ -104,6 +105,8 @@ public class FeatureCallCompiler extends LiteralsCompiler {
 	protected void internalToConvertedExpression(XExpression obj, ITreeAppendable appendable) {
 		if (obj instanceof XAbstractFeatureCall) {
 			_toJavaExpression((XAbstractFeatureCall) obj, appendable);
+		} else if (obj instanceof XAnnotationElementValueBinaryOperation) {
+			_toJavaExpression((XAnnotationElementValueBinaryOperation) obj, appendable);
 		} else {
 			super.internalToConvertedExpression(obj, appendable);
 		}
@@ -115,11 +118,16 @@ public class FeatureCallCompiler extends LiteralsCompiler {
 			_toJavaStatement((XFeatureCall) obj, appendable, isReferenced);
 		} else if (obj instanceof XAbstractFeatureCall) {
 			_toJavaStatement((XAbstractFeatureCall) obj, appendable, isReferenced);
+		} else if (obj instanceof XAnnotationElementValueBinaryOperation) {
+			_toJavaStatement((XAnnotationElementValueBinaryOperation) obj, appendable, isReferenced);
 		} else {
 			super.doInternalToJavaStatement(obj, appendable, isReferenced);
 		}
 	}
 
+	protected void _toJavaStatement(final XAnnotationElementValueBinaryOperation expr, ITreeAppendable b, final boolean isReferenced) {
+	}
+	
 	protected void _toJavaStatement(final XAbstractFeatureCall expr, ITreeAppendable b, final boolean isReferenced) {
 		if (expressionHelper.isShortCircuitOperation(expr)) {
 			generateShortCircuitInvocation(expr, b);
@@ -216,6 +224,8 @@ public class FeatureCallCompiler extends LiteralsCompiler {
 	protected boolean isVariableDeclarationRequired(XExpression expr, ITreeAppendable b) {
 		if (expr instanceof XAssignment)
 			return true;
+		if(expr instanceof XAnnotationElementValueBinaryOperation)
+			return false;
 		if (expr instanceof XAbstractFeatureCall) {
 			JvmIdentifiableElement feature = ((XAbstractFeatureCall) expr).getFeature();
 			if (feature instanceof JvmField || feature instanceof JvmFormalParameter) {
@@ -277,6 +287,12 @@ public class FeatureCallCompiler extends LiteralsCompiler {
 				featureCalltoJavaExpression(call, b, true);
 			}
 		}
+	}
+
+	protected void _toJavaExpression(XAnnotationElementValueBinaryOperation call, ITreeAppendable b) {
+		internalToJavaExpression(call.getLeftOperand(), b);
+		b.append(" + ");
+		internalToJavaExpression(call.getRightOperand(), b);
 	}
 
 	protected void featureCalltoJavaExpression(final XAbstractFeatureCall call, ITreeAppendable b, boolean isExpressionContext) {

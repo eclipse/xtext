@@ -880,9 +880,9 @@ ruleAnnotationField returns [EObject current=null]
 (
 (
 		{ 
-	        newCompositeNode(grammarAccess.getAnnotationFieldAccess().getInitialValueXExpressionParserRuleCall_3_1_0()); 
+	        newCompositeNode(grammarAccess.getAnnotationFieldAccess().getInitialValueXAnnotationElementValueParserRuleCall_3_1_0()); 
 	    }
-		lv_initialValue_9_0=ruleXExpression		{
+		lv_initialValue_9_0=ruleXAnnotationElementValue		{
 	        if ($current==null) {
 	            $current = createModelElementForParent(grammarAccess.getAnnotationFieldRule());
 	        }
@@ -890,7 +890,7 @@ ruleAnnotationField returns [EObject current=null]
        			$current, 
        			"initialValue",
         		lv_initialValue_9_0, 
-        		"XExpression");
+        		"XAnnotationElementValue");
 	        afterParserOrEnumRuleCall();
 	    }
 

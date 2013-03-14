@@ -55,7 +55,7 @@ class ConfiguredCompilerTest extends AbstractXtendCompilerTest {
 			class C {
 			}
 		''', '''
-			@SuppressWarnings({"abc", "efg"})
+			@SuppressWarnings({ "abc", "efg" })
 			public class C {
 			}
 		''', generatorConfig)

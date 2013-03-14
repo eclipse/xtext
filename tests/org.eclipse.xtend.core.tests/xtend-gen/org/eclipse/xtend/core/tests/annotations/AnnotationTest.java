@@ -82,7 +82,7 @@ public class AnnotationTest extends AbstractXtendTestCase {
     _builder.append("}");
     _builder.newLine();
     CharSequence _compileToJavaCode = this.compileToJavaCode(_builder);
-    this.assertContains(_compileToJavaCode, "@Click({2, 3})");
+    this.assertContains(_compileToJavaCode, "@Click({ 2, 3 })");
   }
   
   @Test
@@ -142,7 +142,7 @@ public class AnnotationTest extends AbstractXtendTestCase {
     _builder.append("}");
     _builder.newLine();
     CharSequence _compileToJavaCode = this.compileToJavaCode(_builder);
-    this.assertContains(_compileToJavaCode, "@Click(value = {2, 3})");
+    this.assertContains(_compileToJavaCode, "@Click(value = { 2, 3 })");
   }
   
   protected void assertContains(final CharSequence code, final String text) {
