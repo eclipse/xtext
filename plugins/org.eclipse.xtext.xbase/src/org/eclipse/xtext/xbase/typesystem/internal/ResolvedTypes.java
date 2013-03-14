@@ -257,7 +257,15 @@ public abstract class ResolvedTypes implements IResolvedTypes {
 			LightweightTypeReference expectedType = mergeData.expectation.getExpectedType();
 			if (expectedType != null && expectedType.isResolved()) {
 				if (!expectedType.isAssignableFrom(mergedType)) {
-					mergedType = expectedType; // branches have already been validated
+					boolean valid = true;
+					for (LightweightTypeReference mergedReference: mergeData.references) {
+						if (!expectedType.isAssignableFrom(mergedReference)) {
+							valid = false;
+							break;
+						}
+					}
+					if (valid)
+						mergedType = expectedType; // branches have already been validated
 				}
 			}
 		}
