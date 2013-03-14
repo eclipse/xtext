@@ -20,6 +20,7 @@ import org.eclipse.xtext.common.types.JvmTypeParameter
 import org.eclipse.xtext.xbase.XExpression
 import com.google.common.base.Objects
 import bug380058.Amount
+import org.eclipse.xtext.generator.trace.ITraceRegionProvider
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -34,15 +35,16 @@ abstract class AbstractXtendCompilerTest extends AbstractXtendTestCase {
 	
 	@Before
 	public def setupCompiler() {
-		useJavaCompiler = false
 		compiler.addClassPathOfClass(class)
 		compiler.addClassPathOfClass(typeof(Amount))
 		compiler.addClassPathOfClass(typeof(Data))
 		compiler.addClassPathOfClass(typeof(Inject))
 		compiler.addClassPathOfClass(typeof(CollectionLiterals))
 		compiler.addClassPathOfClass(typeof(JvmTypeParameter))
+		compiler.addClassPathOfClass(typeof(ITraceRegionProvider))
 		compiler.addClassPathOfClass(typeof(XExpression))
 		compiler.addClassPathOfClass(typeof(Objects))
+		compiler.setParentClassLoader(class.classLoader)
 	}
 	
 	def assertCompilesTo(CharSequence input, CharSequence expected){
