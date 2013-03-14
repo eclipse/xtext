@@ -16,20 +16,19 @@ import org.eclipse.jdt.core.JavaCore
 import org.eclipse.jdt.internal.ui.search.SearchUtil
 import org.eclipse.search.ui.ISearchQuery
 import org.eclipse.search.ui.SearchResultEvent
+import org.eclipse.search.ui.text.AbstractTextSearchResult
 import org.eclipse.search.ui.text.MatchEvent
 import org.eclipse.search.ui.text.RemoveAllEvent
 import org.eclipse.ui.IWorkbench
+import org.eclipse.xtend.core.xtend.XtendClass
 import org.eclipse.xtend.ide.tests.AbstractXtendUITestCase
 import org.eclipse.xtend.ide.tests.WorkbenchTestHelper
 import org.eclipse.xtext.xbase.ui.jvmmodel.findrefs.JdtReferenceFinder
 import org.eclipse.xtext.xbase.ui.jvmmodel.findrefs.JvmModelFindReferenceHandler
+import org.junit.AfterClass
 import org.junit.Test
 
 import static org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil.*
-import static org.junit.Assert.*
-import org.junit.AfterClass
-import org.eclipse.search.ui.text.AbstractTextSearchResult
-import org.eclipse.xtend.core.xtend.XtendClass
 
 class JdtFindReferencesTest extends AbstractXtendUITestCase {
 	
