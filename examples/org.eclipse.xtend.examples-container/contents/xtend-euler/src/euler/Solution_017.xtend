@@ -33,7 +33,7 @@ class Solution_017 {
 	}
 
 	def solve() {
-		(1..upper).map[ word.replace(" ","").length ].reduce[ int i1, int i2| i1 + i2 ]
+		(1..upper).map[ word.replace(" ","").length ].reduce[ i1, i2| i1 + i2 ]
 	}
 
 	def String word(int number) {

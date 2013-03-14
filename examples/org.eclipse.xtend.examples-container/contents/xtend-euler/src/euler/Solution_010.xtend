@@ -23,7 +23,7 @@ class Solution_010 {
 		for(i: 2..1_999_999) {
 			var primeIter = primes.iterator
 			var isPrime = true
-			var long knownPrime = 0
+			var knownPrime = 0L
 			while(isPrime && knownPrime * knownPrime < i && primeIter.hasNext) {
 				knownPrime = primeIter.next
 				if (i % knownPrime == 0) {
