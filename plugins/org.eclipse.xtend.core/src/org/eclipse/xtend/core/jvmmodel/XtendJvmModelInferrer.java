@@ -44,6 +44,7 @@ import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.common.types.JvmAnnotationReference;
 import org.eclipse.xtext.common.types.JvmAnnotationTarget;
 import org.eclipse.xtext.common.types.JvmAnnotationType;
+import org.eclipse.xtext.common.types.JvmAnnotationValue;
 import org.eclipse.xtext.common.types.JvmConstructor;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmEnumerationLiteral;
@@ -274,11 +275,14 @@ public class XtendJvmModelInferrer implements IJvmModelInferrer {
 					if (field.getType() != null) {
 						returnType = jvmTypesBuilder.cloneWithProxies(field.getType());
 					} else {
-						returnType = jvmTypesBuilder.inferredType();
+						returnType = jvmTypesBuilder.inferredType(field.getInitialValue());
 					}
 					operation.setReturnType(returnType);
-					if (field.getInitialValue() != null)
+					if (field.getInitialValue() != null) {
+						JvmAnnotationValue jvmAnnotationValue = jvmTypesBuilder.toJvmAnnotationValue(field.getInitialValue(), true);
+						operation.setDefaultValue(jvmAnnotationValue);
 						jvmTypesBuilder.setBody(operation, field.getInitialValue());
+					}
 					operation.setVisibility(JvmVisibility.PUBLIC);
 					translateAnnotationsTo(member.getAnnotations(), operation);
 					jvmTypesBuilder.setDocumentation(operation, jvmTypesBuilder.getDocumentation(member));

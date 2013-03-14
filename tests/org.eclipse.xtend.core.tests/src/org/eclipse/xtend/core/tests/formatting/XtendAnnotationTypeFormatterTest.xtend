@@ -3,6 +3,7 @@ package org.eclipse.xtend.core.tests.formatting
 import org.junit.Test
 
 import static org.eclipse.xtext.xbase.formatting.XbaseFormatterPreferenceKeys.*
+import org.junit.Ignore
 
 class XtendAnnotationTypeFormatterTest extends AbstractXtendFormatterTest {
 	@Test def formatPublic() {
@@ -48,6 +49,7 @@ class XtendAnnotationTypeFormatterTest extends AbstractXtendFormatterTest {
 		''')	
 	}
 	
+	@Ignore
 	@Test def formatFieldInit01() {
 		assertFormatted([
 		],'''
@@ -57,6 +59,7 @@ class XtendAnnotationTypeFormatterTest extends AbstractXtendFormatterTest {
 		''')	
 	}
 	
+	@Ignore
 	@Test def formatFieldInit02() {
 		assertFormatted([
 		],'''
@@ -67,6 +70,7 @@ class XtendAnnotationTypeFormatterTest extends AbstractXtendFormatterTest {
 		''')	
 	}
 	
+	@Ignore
 	@Test def formatFieldInit03() {
 		assertFormatted([
 		],'''
@@ -76,6 +80,7 @@ class XtendAnnotationTypeFormatterTest extends AbstractXtendFormatterTest {
 		''')	
 	}
 	
+	@Ignore
 	@Test def formatFieldInit04() {
 		assertFormatted([
 		],'''
