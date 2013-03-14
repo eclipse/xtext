@@ -176,6 +176,7 @@ public class JvmTypesBuilder {
 		}
 	}
 	
+	@Nullable
 	public XExpression getExpression(@Nullable JvmMember member) {
 		if(member != null) {
 			return logicalContainerProvider.getAssociatedExpression(member);
@@ -183,6 +184,7 @@ public class JvmTypesBuilder {
 		return null;
 	}
 	
+	@Nullable
 	public XExpression getInitializer(@Nullable JvmMember member) {
 		if(member != null) {
 			return logicalContainerProvider.getAssociatedExpression(member);

@@ -8,8 +8,8 @@
 package org.eclipse.xtend.core.macro.declaration;
 
 import com.google.common.base.Objects;
-import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtend.core.macro.declaration.AbstractElementImpl;
 import org.eclipse.xtend.lib.macro.declaration.MutableNamedElement;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
@@ -30,16 +30,13 @@ public abstract class JvmNamedElementImpl<T extends JvmIdentifiableElement> exte
       return;
     }
     T _delegate_1 = this.getDelegate();
-    EObject _eContainer_1 = _delegate_1.eContainer();
-    EList<EObject> _eContents = _eContainer_1.eContents();
+    EcoreUtil.remove(_delegate_1);
     T _delegate_2 = this.getDelegate();
-    _eContents.remove(_delegate_2);
-    T _delegate_3 = this.getDelegate();
-    EObject _eContainer_2 = _delegate_3.eContainer();
-    boolean _notEquals = (!Objects.equal(_eContainer_2, null));
+    EObject _eContainer_1 = _delegate_2.eContainer();
+    boolean _notEquals = (!Objects.equal(_eContainer_1, null));
     if (_notEquals) {
-      T _delegate_4 = this.getDelegate();
-      String _string = _delegate_4.toString();
+      T _delegate_3 = this.getDelegate();
+      String _string = _delegate_3.toString();
       String _plus = ("Couldn\'t remove " + _string);
       IllegalStateException _illegalStateException = new IllegalStateException(_plus);
       throw _illegalStateException;

@@ -25,6 +25,7 @@ import org.eclipse.xtend.lib.macro.declaration.MemberDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.MethodDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.MutableClassDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.MutableInterfaceDeclaration;
+import org.eclipse.xtend.lib.macro.declaration.MutableMemberDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.MutableMethodDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.MutableTypeParameterDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.ParameterDeclaration;
@@ -54,8 +55,6 @@ public class DeclarationsTest extends AbstractXtendTestCase {
     _builder.append("@SuppressWarnings(\"unused\")");
     _builder.newLine();
     _builder.append("class MyClass {");
-    _builder.newLine();
-    _builder.append("\t");
     _builder.newLine();
     _builder.append("\t");
     _builder.append("@com.google.inject.Inject(optional=true) MyClass foo");
@@ -143,6 +142,40 @@ public class DeclarationsTest extends AbstractXtendTestCase {
           TypeReference _type = field.getType();
           Type _type_1 = _type.getType();
           Assert.assertSame(_findClass, _type_1);
+        }
+      };
+    this.asCompilationUnit(_validFile, _function);
+  }
+  
+  @Test
+  public void testRemove() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("class C {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def void m() {}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    XtendFile _validFile = this.validFile(_builder);
+    final Procedure1<CompilationUnitImpl> _function = new Procedure1<CompilationUnitImpl>() {
+        public void apply(final CompilationUnitImpl it) {
+          Iterable<? extends TypeDeclaration> _sourceTypeDeclarations = it.getSourceTypeDeclarations();
+          TypeDeclaration _head = IterableExtensions.head(_sourceTypeDeclarations);
+          final ClassDeclaration c = ((ClassDeclaration) _head);
+          TypeLookupImpl _typeLookup = it.getTypeLookup();
+          String _qualifiedName = c.getQualifiedName();
+          final MutableClassDeclaration mutable = _typeLookup.findClass(_qualifiedName);
+          Iterable<? extends MutableMemberDeclaration> _declaredMembers = mutable.getDeclaredMembers();
+          final Procedure1<MutableMemberDeclaration> _function = new Procedure1<MutableMemberDeclaration>() {
+              public void apply(final MutableMemberDeclaration it) {
+                it.remove();
+              }
+            };
+          IterableExtensions.forEach(_declaredMembers, _function);
+          Iterable<? extends MutableMemberDeclaration> _declaredMembers_1 = mutable.getDeclaredMembers();
+          boolean _isEmpty = IterableExtensions.isEmpty(_declaredMembers_1);
+          Assert.assertTrue(_isEmpty);
         }
       };
     this.asCompilationUnit(_validFile, _function);
