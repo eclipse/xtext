@@ -425,6 +425,16 @@ public abstract class AbstractTypeResolverTest<Reference extends Object> extends
   }
   
   @Test
+  public void testListLiteral_13() throws Exception {
+    this.resolvesTo("#[#[\'foo\'], #{}]", "List<? extends Collection<String>>");
+  }
+  
+  @Test
+  public void testListLiteral_14() throws Exception {
+    this.resolvesTo("newArrayList(#[\'foo\'], #{})", "ArrayList<Collection<String>>");
+  }
+  
+  @Test
   public void testSetLiteral_00() {
     this.resolvesTo("#{}", "Set<Object>");
   }

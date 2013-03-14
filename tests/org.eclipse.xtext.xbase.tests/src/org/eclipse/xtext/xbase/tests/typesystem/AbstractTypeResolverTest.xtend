@@ -346,6 +346,16 @@ abstract class AbstractTypeResolverTest<Reference> extends AbstractXbaseTestCase
 		"{ val x = #[null] val java.util.Set<String> y = x x }".resolvesTo("List<String>")
 	}
 
+	@Test def void testListLiteral_13() throws Exception {
+		// produces immutable list thus ? extends is ok
+		"#[#['foo'], #{}]".resolvesTo("List<? extends Collection<String>>")
+	}
+	
+	@Test def void testListLiteral_14() throws Exception {
+		// produces mutable list thus ? extends would be not too helpful
+		"newArrayList(#['foo'], #{})".resolvesTo("ArrayList<Collection<String>>")
+	}
+
 	@Test def void testSetLiteral_00() {
 		"#{}".resolvesTo("Set<Object>")
 	}
