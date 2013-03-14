@@ -399,11 +399,11 @@ public class XtendCompiler extends XbaseCompiler {
 	}
 	
 	@Override
-	protected boolean canUseArrayInitializer(XListLiteral literal) {
+	protected boolean canUseArrayInitializer(XListLiteral literal, ITreeAppendable appendable) {
 		EStructuralFeature feature = literal.eContainingFeature();
 		if (feature == XtendPackage.Literals.XTEND_FIELD__INITIAL_VALUE) {
-			return true;
+			return canUseArrayInitializerImpl(literal, appendable);
 		}
-		return super.canUseArrayInitializer(literal);
+		return super.canUseArrayInitializer(literal, appendable);
 	}
 }

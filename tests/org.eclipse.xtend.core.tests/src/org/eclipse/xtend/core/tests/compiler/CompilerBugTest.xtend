@@ -15,6 +15,65 @@ import org.junit.Test
 class CompilerBugTest extends AbstractXtendCompilerTest {
 	
 	@Test
+	def testListLiteral() {
+		assertCompilesTo('''
+			class C {
+				val String[] f = #["a", "b", 1.toString ] 
+			}
+		''', '''
+			import org.eclipse.xtext.xbase.lib.Functions.Function0;
+			
+			@SuppressWarnings("all")
+			public class C {
+			  private final String[] f = new Function0<String[]>() {
+			    public String[] apply() {
+			      String _string = Integer.valueOf(1).toString();
+			      return new String[] { "a", "b", _string };
+			    }
+			  }.apply();
+			}
+		''')
+	}
+	
+	@Test
+	def testNestedListLiteral() {
+		assertCompilesTo('''
+			class C {
+				val f = #[#["a"], #{} ] 
+			}
+		''', '''
+			import com.google.common.collect.ImmutableList;
+			import com.google.common.collect.ImmutableList.Builder;
+			import com.google.common.collect.ImmutableSet;
+			import java.util.Collection;
+			import java.util.List;
+			import java.util.Set;
+			import org.eclipse.xtext.xbase.lib.Functions.Function0;
+			
+			@SuppressWarnings("all")
+			public class C {
+			  private final List<? extends Collection<String>> f = new Function0<List<? extends Collection<String>>>() {
+			    public List<? extends Collection<String>> apply() {
+			      List<String> _xlistliteral = null;
+			      Builder<String> _builder = ImmutableList.builder();
+			      _builder.add("a");
+			      _xlistliteral = _builder.build();
+			      Set<String> _xsetliteral = null;
+			      com.google.common.collect.ImmutableSet.Builder<String> _builder_1 = ImmutableSet.builder();
+			      _xsetliteral = _builder_1.build();
+			      List<? extends Collection<String>> _xlistliteral_1 = null;
+			      Builder<Collection<String>> _builder_2 = ImmutableList.builder();
+			      _builder_2.add(_xlistliteral);
+			      _builder_2.add(_xsetliteral);
+			      _xlistliteral_1 = _builder_2.build();
+			      return _xlistliteral_1;
+			    }
+			  }.apply();
+			}
+		''')
+	}
+	
+	@Test
 	def testEarlyExitInBranch_01() {
 		assertCompilesTo('''
 			class C {
