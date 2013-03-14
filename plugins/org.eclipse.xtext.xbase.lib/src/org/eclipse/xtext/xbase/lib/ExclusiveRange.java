@@ -128,7 +128,7 @@ public class ExclusiveRange implements Iterable<Integer> {
 	 * @return the number of elements in this ExclusiveRange.
 	 */
 	@Pure
-	public int getSize() {
+	public int size() {
 		return (isEmpty()) ? 0 : Math.abs(last - first) + 1;
 	}
 
