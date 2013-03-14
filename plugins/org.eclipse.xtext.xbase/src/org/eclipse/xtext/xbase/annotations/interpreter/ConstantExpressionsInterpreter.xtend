@@ -24,7 +24,6 @@ class ConstantExpressionsInterpreter {
 	 * @param expectedType the expected type, or <code>null</code> if no type expectation exists.
 	 */
 	def Object evaluate(XExpression expression, LightweightTypeReference expectedType) {
-		
 		switch expression {
 			XStringLiteral : {
 				if (expectedType?.simpleName=='char')
@@ -34,14 +33,15 @@ class ConstantExpressionsInterpreter {
 			XBooleanLiteral : expression.isTrue
 			XNumberLiteral : {
 				switch expectedType {
-					case expectedType?.simpleName == 'long' : Long::parseLong(expression.value) 
-					case expectedType?.simpleName == 'short' : Short::parseShort(expression.value) 
-					case expectedType?.simpleName == 'byte' : Byte::parseByte(expression.value) 
-					case expectedType?.simpleName == 'float' : Long::parseLong(expression.value) 
-					case expectedType?.simpleName == 'double' : Double::parseDouble(expression.value) 
-					default: Integer::parseInt(expression.value) 
+					case expectedType?.simpleName == 'long' : Long::valueOf(expression.value) 
+					case expectedType?.simpleName == 'short' : Short::valueOf(expression.value) 
+					case expectedType?.simpleName == 'byte' : Byte::valueOf(expression.value) 
+					case expectedType?.simpleName == 'float' : Float::valueOf(expression.value) 
+					case expectedType?.simpleName == 'double' : Double::valueOf(expression.value) 
+					default: Integer::valueOf(expression.value) 
 				}
 			}
+			// arrays?
 			XTypeLiteral : expression.type
 			XAnnotation : expression
 			XListLiteral : {

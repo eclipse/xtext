@@ -253,7 +253,7 @@ public abstract class ResolvedTypes implements IResolvedTypes {
 	}
 
 	private LightweightTypeReference refineMergedType(MergeData mergeData, LightweightTypeReference mergedType, boolean returnType, boolean useExpectation) {
-		if (useExpectation && mergeData.expectation != null) {
+		if (useExpectation && mergeData.expectation != null && (returnType || !mergeData.allNoImplicitReturn)) {
 			LightweightTypeReference expectedType = mergeData.expectation.getExpectedType();
 			if (expectedType != null && expectedType.isResolved()) {
 				if (!expectedType.isAssignableFrom(mergedType)) {
