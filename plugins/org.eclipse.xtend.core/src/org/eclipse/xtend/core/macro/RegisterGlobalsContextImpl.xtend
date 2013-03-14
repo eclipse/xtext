@@ -53,6 +53,8 @@ class RegisterGlobalsContextImpl implements RegisterGlobalsContext {
 				newType.packageName = namespaceAndName.key
 				acceptor.accept(newType) 
 			}
+		} else {
+			acceptor.accept(newType) 
 		}
 		newType.simpleName = namespaceAndName.value
 	}
