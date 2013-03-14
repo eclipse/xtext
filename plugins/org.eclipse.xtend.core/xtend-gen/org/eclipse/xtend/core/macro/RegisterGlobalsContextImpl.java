@@ -105,6 +105,9 @@ public class RegisterGlobalsContextImpl implements RegisterGlobalsContext {
         IJvmDeclaredTypeAcceptor _acceptor = this.getAcceptor();
         _acceptor.<JvmDeclaredType>accept(newType);
       }
+    } else {
+      IJvmDeclaredTypeAcceptor _acceptor_1 = this.getAcceptor();
+      _acceptor_1.<JvmDeclaredType>accept(newType);
     }
     String _value = namespaceAndName.getValue();
     newType.setSimpleName(_value);
