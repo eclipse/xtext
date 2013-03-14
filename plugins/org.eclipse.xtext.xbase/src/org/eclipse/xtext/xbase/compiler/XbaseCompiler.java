@@ -211,7 +211,7 @@ public class XbaseCompiler extends FeatureCallCompiler {
 			LightweightTypeReference expectedType = batchTypeResolver.resolveTypes(literal).getExpectedType(literal);
 			boolean skipTypeName = false;
 			if (expectedType != null && expectedType.isArray()) {
-				if (canUseArrayInitializer(literal)) {
+				if (canUseArrayInitializer(literal, b)) {
 					skipTypeName = true;
 				}
 			}
@@ -238,11 +238,19 @@ public class XbaseCompiler extends FeatureCallCompiler {
 		b.trace(literal, false).append(getVarName(literal, b));
 	}
 
-	protected boolean canUseArrayInitializer(XListLiteral literal) {
+	protected boolean canUseArrayInitializer(XListLiteral literal, ITreeAppendable appendable) {
 		if (literal.eContainingFeature() == XbasePackage.Literals.XVARIABLE_DECLARATION__RIGHT) {
-			return true;
+			return canUseArrayInitializerImpl(literal, appendable);
 		}
 		return false;
+	}
+	
+	protected boolean canUseArrayInitializerImpl(XListLiteral literal, ITreeAppendable appendable) {
+		for(XExpression element: literal.getElements()) {
+			if (isVariableDeclarationRequired(element, appendable))
+				return false;
+		}
+		return true;
 	}
 
 	@Override
