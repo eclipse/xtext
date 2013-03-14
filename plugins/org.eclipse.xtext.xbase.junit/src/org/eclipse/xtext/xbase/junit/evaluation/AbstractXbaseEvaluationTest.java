@@ -1827,6 +1827,11 @@ public abstract class AbstractXbaseEvaluationTest extends Assert {
 				"}");
 	}
 	
+	@Test public void testSwitchExpression_25() throws Exception {
+		assertEvaluatesTo(0, 
+				"{ val Object o = '' switch x : o { String : x.length }}");
+	}
+	
 	@Test public void testCastedExpression_01() throws Exception {
 		assertEvaluatesTo("literal", "'literal' as String");
 	}
