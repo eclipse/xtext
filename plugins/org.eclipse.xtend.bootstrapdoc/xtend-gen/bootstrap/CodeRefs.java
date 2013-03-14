@@ -1,5 +1,6 @@
 package bootstrap;
 
+import com.google.common.base.Objects;
 import com.google.inject.Inject;
 import java.util.HashSet;
 import org.apache.log4j.Logger;
@@ -9,7 +10,6 @@ import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.Functions.Function0;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
-import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.StringExtensions;
 import org.eclipse.xtext.xdoc.generator.util.GitExtensions;
 import org.eclipse.xtext.xdoc.generator.util.JavaDocExtension;
@@ -60,7 +60,7 @@ public class CodeRefs {
               {
                 final String identifier = element==null?(String)null:element.getIdentifier();
                 boolean _and = false;
-                boolean _notEquals = ObjectExtensions.operator_notEquals(identifier, null);
+                boolean _notEquals = (!Objects.equal(identifier, null));
                 if (!_notEquals) {
                   _and = false;
                 } else {
@@ -94,7 +94,7 @@ public class CodeRefs {
       boolean _and = false;
       boolean _and_1 = false;
       boolean _or = false;
-      boolean _equals = ObjectExtensions.operator_equals(uri, null);
+      boolean _equals = Objects.equal(uri, null);
       if (_equals) {
         _or = true;
       } else {
@@ -105,7 +105,7 @@ public class CodeRefs {
         _and_1 = false;
       } else {
         String _identifier = element.getIdentifier();
-        boolean _notEquals = ObjectExtensions.operator_notEquals(_identifier, null);
+        boolean _notEquals = (!Objects.equal(_identifier, null));
         _and_1 = (_or && _notEquals);
       }
       if (!_and_1) {

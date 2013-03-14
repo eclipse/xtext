@@ -6,14 +6,15 @@ Syntactically and semantically Xtend has its roots in the Java programming langu
 ul[
   item[e[ref:extensionMethods[Extension methods]] - enhance closed types with new functionality]
   item[e[ref:lambdas[Lambda Expressions]] - concise syntax for anonymous function literals]
+  item[e[ref:activeAnnotations[ActiveAnnotations]] - annotation processing on steroids]
   item[e[ref:operators[Operator overloading]] - make your libraries even more expressive]
   item[e[ref:switchExpression[Powerful switch expressions]] - type based switching with implicit casts]
   item[e[ref:polymorphicDispatch[Multiple dispatch]] - a.k.a. polymorphic method invocation]
   item[e[ref:templates[Template expressions]] - with intelligent white space handling]
   item[e[ref:Xtend_Expressions[No statements]] - everything is an expression]
   item[e[ref:propertyAccess[Properties]] - shorthands for accessing and defining getters and setter]
-  item[e[Local type inference] - you rarely need to write down type signatures anymore]
-  item[e[Full support for Java Generics] - including all conformance and conversion rules]
+  item[e[Type inference] - you rarely need to write down type signatures anymore]
+  item[e[Full support for Java generics] - including all conformance and conversion rules]
   item[e[Translates to Java] not bytecode - understand what is going on and use your code for platforms 
     such as Android or GWT]
 ] 

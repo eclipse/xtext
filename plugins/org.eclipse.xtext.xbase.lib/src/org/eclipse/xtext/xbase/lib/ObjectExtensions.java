@@ -160,6 +160,9 @@ import com.google.common.base.Objects;
 	 * The elvis operator <code>?:</code> is a short hand notation for
 	 * providing default value in case an expression evaluates to <code>null</code>.
 	 * 
+	 * Not that the Xtend compiler will inline calls to this not call this method with a short-circuit semantic.
+	 * That is the second argument is only evaluated if the first one evaluates to <code>null</code>.
+	 * 
 	 * Example:
 	 * <code>person.name?:'Hans'</code>
 	 * 

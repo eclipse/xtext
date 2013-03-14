@@ -5,6 +5,7 @@ import bootstrap.Config;
 import bootstrap.MainSite;
 import bootstrap.Menu;
 import bootstrap.PostProcessor;
+import com.google.common.base.Objects;
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Iterators;
@@ -45,7 +46,6 @@ import org.eclipse.xtext.xbase.lib.InputOutput;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.IteratorExtensions;
 import org.eclipse.xtext.xbase.lib.ListExtensions;
-import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 import org.eclipse.xtext.xdoc.xdoc.Document;
 import org.eclipse.xtext.xdoc.xdoc.ImageRef;
@@ -163,7 +163,7 @@ public class GenerateBootstrapDoc {
     final Predicate<URI> _function = new Predicate<URI>() {
         public boolean apply(final URI it) {
           String _fileExtension = it.fileExtension();
-          boolean _equals = ObjectExtensions.operator_equals(_fileExtension, "xdoc");
+          boolean _equals = Objects.equal(_fileExtension, "xdoc");
           return _equals;
         }
       };
@@ -189,7 +189,7 @@ public class GenerateBootstrapDoc {
     final Function1<Issue,Boolean> _function_2 = new Function1<Issue,Boolean>() {
         public Boolean apply(final Issue i) {
           Severity _severity = i.getSeverity();
-          boolean _equals = ObjectExtensions.operator_equals(_severity, Severity.ERROR);
+          boolean _equals = Objects.equal(_severity, Severity.ERROR);
           return Boolean.valueOf(_equals);
         }
       };

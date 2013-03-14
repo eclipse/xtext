@@ -1,9 +1,9 @@
 package generator;
 
+import com.google.common.base.Objects;
 import generator.AbstractWebsite;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.xtend2.lib.StringConcatenation;
-import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xdoc.xdoc.Document;
 import org.eclipse.xtext.xdoc.xdoc.LangDef;
 
@@ -31,7 +31,7 @@ public abstract class AbstractXdocBaseWebsite extends AbstractWebsite {
     _builder.append("<script type=\"text/javascript\" src=\"google-code-prettify/lang-common.js\"></script>");
     String result = _builder.toString();
     Document _document = this.getDocument();
-    boolean _notEquals = ObjectExtensions.operator_notEquals(_document, null);
+    boolean _notEquals = (!Objects.equal(_document, null));
     if (_notEquals) {
       Document _document_1 = this.getDocument();
       final EList<LangDef> languages = _document_1.getLangDefs();

@@ -6,6 +6,7 @@ import bootstrap.ImageDimension;
 import bootstrap.ImageExtensions;
 import bootstrap.ParagraphState;
 import bootstrap.TargetPaths;
+import com.google.common.base.Objects;
 import com.google.common.collect.Iterables;
 import com.google.inject.Inject;
 import java.util.Arrays;
@@ -113,7 +114,7 @@ public class HtmlExtensions {
       final Identifiable it = _switchResult;
       String _xifexpression = null;
       String _name = it.getName();
-      boolean _notEquals = ObjectExtensions.operator_notEquals(_name, null);
+      boolean _notEquals = (!Objects.equal(_name, null));
       if (_notEquals) {
         String _name_1 = it.getName();
         _xifexpression = _name_1;
@@ -171,7 +172,7 @@ public class HtmlExtensions {
     String _xblockexpression = null;
     {
       ParagraphState _xifexpression = null;
-      boolean _equals = ObjectExtensions.operator_equals(state, ParagraphState.NONE);
+      boolean _equals = Objects.equal(state, ParagraphState.NONE);
       if (_equals) {
         _xifexpression = ParagraphState.IN_PARAGRAPH;
       } else {
@@ -187,7 +188,7 @@ public class HtmlExtensions {
       boolean _not = (!_isNullOrEmpty);
       if (_not) {
         String _xifexpression_2 = null;
-        boolean _equals_1 = ObjectExtensions.operator_equals(state, ParagraphState.NONE);
+        boolean _equals_1 = Objects.equal(state, ParagraphState.NONE);
         if (_equals_1) {
           String _xblockexpression_1 = null;
           {
@@ -346,7 +347,7 @@ public class HtmlExtensions {
       _builder.append(caption, "	");
       _builder.append("\" ");
       {
-        boolean _notEquals = ObjectExtensions.operator_notEquals(dimension, null);
+        boolean _notEquals = (!Objects.equal(dimension, null));
         if (_notEquals) {
           _builder.append("width=\"");
           int _width = dimension.getWidth();
@@ -383,7 +384,7 @@ public class HtmlExtensions {
       final String javaDocURI = _element_1==null?(String)null:this._codeRefs.getJavaDocURI(_element_1);
       StringConcatenation _builder = new StringConcatenation();
       {
-        boolean _notEquals = ObjectExtensions.operator_notEquals(javaDocURI, null);
+        boolean _notEquals = (!Objects.equal(javaDocURI, null));
         if (_notEquals) {
           _builder.append("<a href=\"");
           _builder.append(javaDocURI, "");
@@ -392,7 +393,7 @@ public class HtmlExtensions {
       }
       {
         TextOrMarkup _altText = it.getAltText();
-        boolean _notEquals_1 = ObjectExtensions.operator_notEquals(_altText, null);
+        boolean _notEquals_1 = (!Objects.equal(_altText, null));
         if (_notEquals_1) {
           TextOrMarkup _altText_1 = it.getAltText();
           CharSequence _html = this.toHtml(_altText_1, state);
@@ -417,13 +418,13 @@ public class HtmlExtensions {
         }
       }
       {
-        boolean _notEquals_2 = ObjectExtensions.operator_notEquals(javaDocURI, null);
+        boolean _notEquals_2 = (!Objects.equal(javaDocURI, null));
         if (_notEquals_2) {
           _builder.append("</a>");
         }
       }
       {
-        boolean _notEquals_3 = ObjectExtensions.operator_notEquals(sourceCodeURI, null);
+        boolean _notEquals_3 = (!Objects.equal(sourceCodeURI, null));
         if (_notEquals_3) {
           _builder.append(" <a href=\"");
           _builder.append(sourceCodeURI, "");
@@ -456,7 +457,7 @@ public class HtmlExtensions {
         boolean _and = false;
         EObject _eContainer = it.eContainer();
         EStructuralFeature _eContainingFeature = _eContainer==null?(EStructuralFeature)null:_eContainer.eContainingFeature();
-        boolean _equals = ObjectExtensions.operator_equals(_eContainingFeature, Literals.ABSTRACT_SECTION__CONTENTS);
+        boolean _equals = Objects.equal(_eContainingFeature, Literals.ABSTRACT_SECTION__CONTENTS);
         if (!_equals) {
           _and = false;
         } else {
@@ -604,7 +605,7 @@ public class HtmlExtensions {
   
   protected CharSequence insert(final CharSequence content, final ParagraphState state) {
     CharSequence _xifexpression = null;
-    boolean _equals = ObjectExtensions.operator_equals(state, ParagraphState.IN_PARAGRAPH);
+    boolean _equals = Objects.equal(state, ParagraphState.IN_PARAGRAPH);
     if (_equals) {
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("</p>");
@@ -638,13 +639,13 @@ public class HtmlExtensions {
         boolean _or = false;
         int _plus = (start + 1);
         String _substring = it.substring(start, _plus);
-        boolean _equals = ObjectExtensions.operator_equals(_substring, " ");
+        boolean _equals = Objects.equal(_substring, " ");
         if (_equals) {
           _or = true;
         } else {
           int _plus_1 = (start + 1);
           String _substring_1 = it.substring(start, _plus_1);
-          boolean _equals_1 = ObjectExtensions.operator_equals(_substring_1, "\t");
+          boolean _equals_1 = Objects.equal(_substring_1, "\t");
           _or = (_equals || _equals_1);
         }
         _and = (_lessThan && _or);
@@ -663,13 +664,13 @@ public class HtmlExtensions {
           boolean _or_1 = false;
           int _plus_3 = (start + 1);
           String _substring_2 = it.substring(start, _plus_3);
-          boolean _equals_2 = ObjectExtensions.operator_equals(_substring_2, " ");
+          boolean _equals_2 = Objects.equal(_substring_2, " ");
           if (_equals_2) {
             _or_1 = true;
           } else {
             int _plus_4 = (start + 1);
             String _substring_3 = it.substring(start, _plus_4);
-            boolean _equals_3 = ObjectExtensions.operator_equals(_substring_3, "\t");
+            boolean _equals_3 = Objects.equal(_substring_3, "\t");
             _or_1 = (_equals_2 || _equals_3);
           }
           _and_1 = (_lessThan_1 && _or_1);
@@ -678,7 +679,7 @@ public class HtmlExtensions {
       }
       int _plus_2 = (start + 1);
       String _substring_2 = it.substring(start, _plus_2);
-      boolean _equals_2 = ObjectExtensions.operator_equals(_substring_2, "\n");
+      boolean _equals_2 = Objects.equal(_substring_2, "\n");
       if (_equals_2) {
         int _plus_3 = (start + 1);
         start = _plus_3;

@@ -1,11 +1,11 @@
 package bootstrap;
 
 import bootstrap.HtmlExtensions;
+import com.google.common.base.Objects;
 import com.google.inject.Inject;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import org.eclipse.xtext.xbase.lib.Extension;
-import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 
 @SuppressWarnings("all")
 public class PostProcessor {
@@ -18,7 +18,7 @@ public class PostProcessor {
   protected Pattern getCodePattern() {
     Pattern _xblockexpression = null;
     {
-      boolean _equals = ObjectExtensions.operator_equals(this._codePattern, null);
+      boolean _equals = Objects.equal(this._codePattern, null);
       if (_equals) {
         String _markCodeBegin = this._htmlExtensions.markCodeBegin();
         String _quote = Pattern.quote(_markCodeBegin);

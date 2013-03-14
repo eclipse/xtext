@@ -43,6 +43,71 @@ code[Xtend][
     World !"
 ]
 
+section2:collectionLiterals[Collection Literals]
+
+The methods in codeRef[org.eclipse.xtext.xbase.lib.CollectionLiterals] are automatically imported so
+it's very easy and convenient to create instances of the various collection types the JDK offers.
+
+code[Xtend][
+  val myList = newArrayList('Hello','World')
+  val myMap = newLinkedHashMap('a' -> 1 ,'b' -> 2) 
+]
+
+In addition xtend supports collection literal to create immutable collections and arrays, depending on
+the target type. An immutable list can be created like this:
+
+code[Xtend][
+  val myList = #\['Hello','World'\]
+]
+
+If the target type is an array like in the following example an array is created instead (without any
+extra conversion):
+
+code[Xtend][
+  val String\[\] myArray = #\['Hello','World'\]
+]
+
+An immutable set can be created using curly braces instead of the squared ones:
+
+code[Xtend][
+  val mySet = #{'Hello','World'}
+]
+
+And an immutable map is created like this:
+ 
+code[Xtend][
+  val myMap = #{'a' -> 1 ,'b' ->2}
+]
+
+section2:arrays[Arrays]
+
+Java arrays can be either created using a ref:collectionLiterals[literal] as described in the previous
+section, or if it should be an epmty one with a fixed size through one of the automatically available
+methods from codeRef[org.eclipse.xtext.xbase.lib.ArrayLiterals]. The generic code[newArrayOfSize(int)]
+method works for all reference types, while there is a specific factory method for each primitive.
+
+Example:
+code[Xtend][
+  val String\[\] myArray = newArrayOfSize(400)
+  val String\[\] intArray = newIntArrayOfSize(400)
+]
+
+Retrieving and setting values of arrays is done through the extension methods code[get(int)] and 
+code[set(int, T)] which are specifically overloaded for arrays and are translated directly to the
+equivalent Java code code[myArray\[int\]] without any indirection or conversion.
+
+Also code[length] is available as an extension method and is directly translated to Java's equivalent
+code[myArray.length].
+
+Furthermore arrays are automatically converted to lists (code[java.util.List]) when needed. This works similar to how boxing and unboxing between
+primitives and their respective wrapper types work.
+
+Example:
+code[Xtend][
+  val int\[\] myArray = #\[1,2,3\]
+  val List<Integer> myList = myArray
+]
+
 section2:numberLiterals[Number Literals]
 
 Xtend supports roughly the same number literals as Java with a few differences.   
@@ -140,6 +205,8 @@ table[
   
   tr[td[code[e1 == e2]]       td[code[e1.operator_equals(e2)]]]
   tr[td[code[e1 != e2]]       td[code[e1.operator_notEquals(e2)]]]
+  tr[td[code[e1 === e2]]       td[code[e1.operator_tripleEquals(e2)]]]
+  tr[td[code[e1 !== e2]]       td[code[e1.operator_tripleNotEquals(e2)]]]
   tr[td[]td[]]
 
   tr[td[code[e1 < e2]]        td[code[e1.operator_lessThan(e2)]]]
@@ -149,6 +216,8 @@ table[
   tr[td[]td[]]
   
   tr[td[code[e1 -> e2]]       td[code[e1.operator_mappedTo(e2)]]]
+  tr[td[code[e1 ..< e2]]       td[code[e1.operator_doubleDotLessThan(e2)]]]
+  tr[td[code[e1 >.. e2]]       td[code[e1.operator_greaterThanDoubleDot(e2)]]]
   tr[td[code[e1 .. e2]]       td[code[e1.operator_upTo(e2)]]]
   tr[td[code[e1 => e2]]       td[code[e1.operator_doubleArrow(e2)]]]
   tr[td[code[e1 << e2]]       td[code[e1.operator_doubleLessThan(e2)]]]
@@ -172,6 +241,7 @@ table[
   
   tr[td[code[! e1]]           td[code[e1.operator_not()]]]
   tr[td[code[- e1]]           td[code[e1.operator_minus()]]]
+  tr[td[code[+ e1]]           td[code[e1.operator_plus()]]]
 ]
     
 The table above also defines the operator precedence in ascending order. The blank lines separate 
@@ -182,31 +252,134 @@ precedence and associativity.
 
 section2[Short-Circuit Boolean Operators]
 
-If the operators code[||] and code[&&] are bound to the library methods 
-codeRef[org.eclipse.xtext.xbase.lib.BooleanExtensions][code[BooleanExtensions.operator_and(boolean l, boolean r)]] resp. 
-codeRef[org.eclipse.xtext.xbase.lib.BooleanExtensions][code[BooleanExtensions.operator_or(boolean l, boolean r)]] the operation is evaluated in short circuit mode.
+If the operators code[||], code[&&], and code[?:] are bound to the library methods 
+codeRef[org.eclipse.xtext.xbase.lib.BooleanExtensions][code[BooleanExtensions.operator_and(boolean l, boolean r)]], 
+codeRef[org.eclipse.xtext.xbase.lib.BooleanExtensions][code[BooleanExtensions.operator_or(boolean l, boolean r)]]  resp.
+codeRef[org.eclipse.xtext.xbase.lib.ObjectExtensions][code[<T> T operator_elvis(T first, T second)]] the operation is inlined and evaluated in short circuit mode.
 That means that the right hand operand might not be evaluated at all in the following cases: 
 ol[
   item[in the case of code[||] the operand on the right hand side is not evaluated if the left 
     operand evaluates to code[Xtend][true].]
   item[in the case of code[&&] the operand on the right hand side is not evaluated if the left 
     operand evaluates to code[Xtend][false].]
+  item[in the case of code[?:] the operand on the right hand side is not evaluated if the left 
+    operand evaluates to code[Xtend][null].]
 ]
 
 Still you can overload these operators for your types or even override it for booleans, in which case
 both operands are always evaluated and the defined method is invoked, i.e. no short-circuit execution is happening.
 
-section2[Examples]
+section2[Defined Operators in The Library]
+
+Xtend projects operators for common types from the JDK.
+
+section3[Equality Operators]
+
+In Xtend the usual equals operators (code[==],code[!=]) are bound to code[Object.equals]. So you can write:
 
 code[Xtend][
-my.property = 23
-myList += 23
-x > 23 && y < 23
-x && y || z
-1 + 3 * 5 * (- 23)
-!(x)
+  if (name == 'Homer')
+  	println('Hi Homer')
 ]
 
+Java's identity equals semantic is mapped to the tripple-equals operators code[===] and code[!==] in Xtend.
+
+code[Xtend][
+  if (someObject === anotherObject)
+  	println('same objects')
+]
+
+section3[Comparism Operators]
+
+In Xtend the usual comparism operators (code[>],code[<],code[>=], and code[<=]) work as expected on the primitive numbers:
+
+code[Xtend][
+  if (42 > myNumber) {
+  	...
+  }
+]
+
+In addition these operators are overloaded for all instances of code[java.lang.Comparable]. So you can
+also write
+
+code[Xtend][
+  if (startTime < arrivalTime)
+  	println("You are too late!")
+]
+
+section3[Arithmetic Operators]
+
+The arithmetics operators (code[+],code[-],code[*],code[/],code[%], and code[**]) are not available for
+the primitive types, but also for types yuch as code[BigDecimal] and code[BigInteger].
+
+code[Xtend][
+  val x = 2.71BD
+  val y = 3.14BD
+  val sum = x + y    // calls BigDecimalExtension.operator_plus(x,y)
+]
+
+section3[Elvis Operator]
+
+In addition to ref:nullSafeFeatureCalls[null-safe feature calls] Xtend supports the elvis operator known
+from Groovy.
+
+code[Xtend][
+  val salutation = person.firstName ?: 'Sir/Madam' 
+]
+
+section3[With Operator]
+
+This with operator comes in very handy when you want to initialize objects. It simply passes the left hand side
+argument to the lambda on the right hand and returns the left hand after that.
+
+Here's an example:
+
+code[Xtend][
+  val person = new Person => \[
+  	firstName = 'Homer'
+  	lastName = 'Simpson'
+  	address = new Address => \[
+  		street = '742 Evergreen Terrace'
+  		city = 'SpringField'
+  	\]
+  \]
+]
+
+section3[Range Operators]
+
+There are three different range operators. The most useful ones are code[..<] and code[>..] which create exclusive ranges.
+
+code[Xtend][
+  // iterate the list forwards
+  for (i : 0 ..< list.size) {
+  	val element = list.get(i)
+  	...
+  }
+]
+
+code[Xtend][
+  // or backwards
+  for (i : list.size >.. 0) {
+  	val element = list.get(i)
+  	...
+  }
+]
+
+In addition there is the inclusive range, which is nice if you know both ends well. In the movies example
+the range is used to check whether a movie was made in a certain decade:
+
+code[Xtend][
+  movies.filter\[1980..1989.contains(year)\]
+]
+
+section3[Pair Operator]
+
+Sometimes you want to pass around two elements without introducing a new structure. In Xtend you can
+use the code[->]-operator which returns an instance of code[Pair<A,B>]:
+
+code[Xtend] [
+	val nameAndAge = 'Homer' -> 42
+]
 
 section2:assignments[Assignments]
 
@@ -300,6 +473,9 @@ ref:implicitVariables[implicit variable] code[Xtend][it].
 Variables declared outside a lambda expression using the code[Xtend][var] keyword are not accessible from within a
 lambda expressions.
 
+A local variable can be flagged with the code[extension] keyword to make its methods available as extensions (ref:Extension_Values[see
+extension values]). 
+
 section2[Typing]
 
 The type of the variable itself can either be explicitly declared or be inferred from the right hand side
@@ -369,7 +545,7 @@ code[Xtend][
    MyClass::myMethod('foo')
 ]
 
-Alternatively you could import the method using a ref:imports[static import].
+Alternatively you could import the method using a ref:imports[static import] like in Java.
 
 section2:nullSafeFeatureCalls[Null-Safe Feature Call]
 
@@ -388,7 +564,6 @@ code[Xtend][
 ]
 
 
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 section:constructorCall[Constructor Call]
 
@@ -404,7 +579,7 @@ code[Xtend][
 section:lambdas[Lambda Expressions]
 
 A lambda expression is basically a piece of code, which is wrapped in an object to pass it around. As
-a Java developer it is best to think of a lambda expression as an anonymous class, i.e. 
+a Java developer it is best to think of a lambda expression as an anonymous class with one method, i.e. 
 like in the following Java code :
 
 code[Java][
@@ -489,11 +664,24 @@ code[Xtend][
 A lambda expression also captures the current scope, so that any final variables and parameters visible at construction time can be referred to. 
 That is exactly what we did with the variable code[textField] above.
 
+The variable code[this] refers to the outer class and if you need to refer to the lambda instance itself
+you have to use code[self].
+
+code[Xtend][
+	val lineReader = new LineReader(r);
+	val AbstractIterator<String> lineIterator = \[|
+		val result = lineReader.readLine 
+		if (result==null)
+			self.endOfData
+		return result
+	\]
+]
+
 section2:closureTypes[Typing]
 
 Lambdas are expressions which produce e[Function] objects. The type of a lambda expression generally depends on the target
-type, as seen in the previous examples. That is, the lambda expression can coerce to any interface which has declared only 
-one method (in addition to the ones inherited from codeRef[java.lang.Object]). This allows for using lambda expressions in many existing Java
+type, as seen in the previous examples. That is, the lambda expression can coerce to any interface or abstract class which has declared only 
+one abstract method (in addition to the ones inherited from codeRef[java.lang.Object]). This allows for using lambda expressions in many existing Java
 APIs directly.
 
 However, if you write a lambda expression without having any target type expectation, like in the following

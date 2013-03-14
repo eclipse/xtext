@@ -451,9 +451,8 @@ code[Xtend][
   }
 ]
 
-Certain annotations defined in the library have a special effect on how the code is translated to Java.
-These annotations are explained in ref:processedAnnotations[section].
-
+In addition ref:activeAnnotations[Active Annotations] allow users to change and participate in how
+Xtend code gets translated to Java source code.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 section:extensionMethods[Extension Methods]
@@ -461,9 +460,9 @@ section:extensionMethods[Extension Methods]
 Extension methods allow to add new methods to existing types without modifying them. 
 This feature is actually where Xtend got its name from. They are based on a simple syntactic trick: 
 Instead of passing the first argument of an extension method inside the parentheses of a call, the 
-method is called on the argument parameter as if it was one of its members.
+method can be called on the argument parameter as if it was one of its members.
 code[Xtend][
-  "hello".toFirstUpper() // calls toFirstUper("hello")
+  "hello".toFirstUpper() // calls StringExtensions.toFirstUpper("hello")
 ]   
 
 Method calls in extension syntax often result in more readable code, as they are chained rather than nested. 
@@ -543,9 +542,10 @@ code[Xtend][
     // calls Collections.singletonList(new MyClass())
 ]
 
-section2:Extension_Fields[Extension Fields]
+section2:Extension_Values[Extension Values]
 
-By adding the code[Xtend][extension] keyword to a field declaration, its instance methods become extension methods.
+By adding the code[Xtend][extension] keyword to a field, a local variable or a parameter
+declaration, its instance methods become extension methods.
 
 Imagine you want to have some layer specific functionality on a class code[Person]. Let us say you are in a servlet-like class
 and want to persist a code[Person] using some persistence mechanism. Let us assume code[Person] implements
@@ -579,8 +579,48 @@ code[Xtend][
   person.delete  // calls ep.delete(person)
 ]
 
-Using the code[Xtend][extension] modifier on fields has a significant advantage over 
+Using the code[Xtend][extension] modifier on values has a significant advantage over 
 static ref:extensionImports[extension imports]: Your code is not bound to the actual implementation of the extension method.
 You can simply exchange the component that provides the referenced extension with another implementation from outside,
-by providing a different instance. No matter whether you do so via a factory, a dependency injection
-container or simply using a setter.
+by providing a different instance.
+
+section:interfaces[Interface Declaration]
+
+An interface declaration is very similar to the one in Java. An interface can declare fields, which are
+by default final static as in Java and therefore must have an initial value. And of course methods can
+be declared. They are public by default. Interfaces can extend any number of other interfaces and can
+declare type parameter just like in Java.
+
+Here's an example:
+code[Xtend][
+  interface MyInterface<T> extends OtherInterface {
+  	val CONSTANT = 42
+    def T doStuff(String ... varArg) throws SomeException
+  }
+]
+
+section:annotationTypeDeclaration[Annotation Type Declaration]
+
+Annotation types can also be declared. Instead of resembling the code[interface] keyword and shoehorning annotation properties into methods
+with a code[default] keyword like Java does, you can declare annotation types like this:
+
+code[Xtend][
+  annotation MyAnnotation {
+  	String\[\] value
+  	boolean isTricky = false
+  }
+]
+
+section:enumTypeDeclaration[Enum Type Declaration]
+
+Enumeration types are declared like this:
+
+code[Xtend][
+  enum MyColor {
+  	GREEN,
+  	BLUE,
+  	RED
+  }
+]
+
+
