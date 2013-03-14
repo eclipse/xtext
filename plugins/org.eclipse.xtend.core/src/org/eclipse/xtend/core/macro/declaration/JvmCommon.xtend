@@ -122,7 +122,7 @@ class TypeReferenceImpl extends AbstractElementImpl<LightweightTypeReference> im
 			return true
 		if (obj instanceof TypeReference) {
 			val other = obj as TypeReference
-			return other.isAssignableFrom(this) && this.assignableFrom(other)
+			return other.isAssignableFrom(this) && this.isAssignableFrom(other)
 		}
 		return false
 	}
