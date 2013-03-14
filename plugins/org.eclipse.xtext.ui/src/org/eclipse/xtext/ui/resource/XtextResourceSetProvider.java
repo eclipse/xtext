@@ -68,7 +68,7 @@ public class XtextResourceSetProvider implements IResourceSetProvider {
 				try {
 					Pair<URI,URI> mapping = storage2UriMapper.getURIMapping(root);
 					if (mapping != null) {
-						hashMap.put(mapping.getFirst(), mapping.getSecond());
+						hashMap.put(URI.createURI(mapping.getFirst().toString() + "/"), URI.createURI("archive:" + mapping.getSecond().toString() + "!/"));
 					}
 				} catch (JavaModelException e) {
 					LOG.error(e.getMessage(), e);
