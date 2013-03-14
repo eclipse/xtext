@@ -23,7 +23,7 @@ class Solution_016 {
 	def static void main(String[] args) {
 		println(2bi.pow(1000).toString.toCharArray.map[
 			charValue.getNumericValue
-		].reduce[ int i1, int i2 |
+		].reduce[ i1, i2 |
 			i1 + i2
 		])
 	}

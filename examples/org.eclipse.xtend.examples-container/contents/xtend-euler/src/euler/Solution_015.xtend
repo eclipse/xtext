@@ -40,7 +40,7 @@ class Solution_015 {
 		0.solve
 	}
 
-	def solve(int position) {
+	def Long solve(int position) {
 		if (position.valid) {
 			return if (position.done) solutions.get(position) else {
 				var result = position.moveRight.solve
@@ -48,7 +48,6 @@ class Solution_015 {
 				solutions.set(position, result)
 				result
 			}
-
 		}
 		return 0L
 	}

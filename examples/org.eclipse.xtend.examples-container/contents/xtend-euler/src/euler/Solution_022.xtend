@@ -15,6 +15,8 @@ import java.io.InputStreamReader
 import java.util.concurrent.atomic.AtomicLong
 import java.util.regex.Pattern
 
+import static extension java.lang.Character.*
+
 /**
  * Using names.txt (right click and 'Save Link/Target As...'), a 46K text file containing over five-thousand first names,
  * begin by sorting it into alphabetical order.
@@ -41,8 +43,8 @@ class Solution_022 {
 			val result = new AtomicLong
 			names.sort.forEach [ name, i |
 				result.addAndGet(name.toCharArray.map [
-					Character::getNumericValue(it) - 9
-				].reduce[ int i1, int i2 |
+					numericValue - 9
+				].reduce[ i1, i2 |
 					i1 + i2
 				] * (i + 1))
 			]

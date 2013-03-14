@@ -35,8 +35,8 @@
 class Solution_012 {
 
 	def static void main(String[] args) {
-		var long triangle = 0
-		var long i = 1
+		var triangle = 0L
+		var i = 1L
 		while(true) {
 			triangle = triangle + i
 			i = i + 1
@@ -49,8 +49,8 @@ class Solution_012 {
 
 	def static numberOfDivisors(long triangle) {
 		var max = Math::sqrt(triangle).longValue
-		var long result = 0
-		var long i = 1
+		var result = 0L
+		var i = 1L
 		while(i < max) {
 			if (triangle % i == 0) {
 				result = result + 2

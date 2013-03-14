@@ -84,7 +84,7 @@ public class ArrayLiterals {
 	 */
 	@Pure
 	@Inline("new long[$1]")
-	public static long[] newlongArrayOfSize(int size) {
+	public static long[] newLongArrayOfSize(int size) {
 		return new long[size];
 	}
 

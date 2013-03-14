@@ -31,7 +31,7 @@ class Solution_002 extends AbstractIterator<Long> {
 	long l0 = 0
 	long l1 = 1
 
-	override protected Long computeNext() {
+	override protected computeNext() {
 		if (l1 > 4000000)
 			endOfData
 		var result = l0 + l1
