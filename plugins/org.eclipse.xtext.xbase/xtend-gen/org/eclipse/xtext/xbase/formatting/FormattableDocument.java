@@ -309,7 +309,7 @@ public class FormattableDocument {
       if (_greaterEqualsThan) {
         _xifexpression = back;
       } else {
-        _xifexpression = 0;
+        _xifexpression = Integer.valueOf(0);
       }
       final Integer fiveLinesBackOffset = _xifexpression;
       Integer _xifexpression_1 = null;
@@ -319,7 +319,7 @@ public class FormattableDocument {
       } else {
         String _document = this.getDocument();
         int _length = _document.length();
-        _xifexpression_1 = _length;
+        _xifexpression_1 = Integer.valueOf(_length);
       }
       final Integer fiveLinesForwardOffset = _xifexpression_1;
       String _document_1 = this.getDocument();

@@ -56,14 +56,14 @@ public class ConstantExpressionsInterpreter {
         final XBooleanLiteral _xBooleanLiteral = (XBooleanLiteral)expression;
         _matched=true;
         boolean _isIsTrue = _xBooleanLiteral.isIsTrue();
-        _switchResult = _isIsTrue;
+        _switchResult = Boolean.valueOf(_isIsTrue);
       }
     }
     if (!_matched) {
       if (expression instanceof XNumberLiteral) {
         final XNumberLiteral _xNumberLiteral = (XNumberLiteral)expression;
         _matched=true;
-        double _switchResult_1 = (double) 0;
+        Object _switchResult_1 = null;
         boolean _matched_1 = false;
         if (!_matched_1) {
           String _simpleName = expectedType==null?(String)null:expectedType.getSimpleName();
@@ -71,8 +71,8 @@ public class ConstantExpressionsInterpreter {
           if (_equals) {
             _matched_1=true;
             String _value = _xNumberLiteral.getValue();
-            long _parseLong = Long.parseLong(_value);
-            _switchResult_1 = _parseLong;
+            Long _valueOf = Long.valueOf(_value);
+            _switchResult_1 = _valueOf;
           }
         }
         if (!_matched_1) {
@@ -81,8 +81,8 @@ public class ConstantExpressionsInterpreter {
           if (_equals_1) {
             _matched_1=true;
             String _value_1 = _xNumberLiteral.getValue();
-            short _parseShort = Short.parseShort(_value_1);
-            _switchResult_1 = _parseShort;
+            Short _valueOf_1 = Short.valueOf(_value_1);
+            _switchResult_1 = _valueOf_1;
           }
         }
         if (!_matched_1) {
@@ -91,8 +91,8 @@ public class ConstantExpressionsInterpreter {
           if (_equals_2) {
             _matched_1=true;
             String _value_2 = _xNumberLiteral.getValue();
-            byte _parseByte = Byte.parseByte(_value_2);
-            _switchResult_1 = _parseByte;
+            Byte _valueOf_2 = Byte.valueOf(_value_2);
+            _switchResult_1 = _valueOf_2;
           }
         }
         if (!_matched_1) {
@@ -101,8 +101,8 @@ public class ConstantExpressionsInterpreter {
           if (_equals_3) {
             _matched_1=true;
             String _value_3 = _xNumberLiteral.getValue();
-            long _parseLong_1 = Long.parseLong(_value_3);
-            _switchResult_1 = _parseLong_1;
+            Float _valueOf_3 = Float.valueOf(_value_3);
+            _switchResult_1 = _valueOf_3;
           }
         }
         if (!_matched_1) {
@@ -111,16 +111,16 @@ public class ConstantExpressionsInterpreter {
           if (_equals_4) {
             _matched_1=true;
             String _value_4 = _xNumberLiteral.getValue();
-            double _parseDouble = Double.parseDouble(_value_4);
-            _switchResult_1 = _parseDouble;
+            Double _valueOf_4 = Double.valueOf(_value_4);
+            _switchResult_1 = _valueOf_4;
           }
         }
         if (!_matched_1) {
           String _value_5 = _xNumberLiteral.getValue();
-          int _parseInt = Integer.parseInt(_value_5);
-          _switchResult_1 = _parseInt;
+          Integer _valueOf_5 = Integer.valueOf(_value_5);
+          _switchResult_1 = _valueOf_5;
         }
-        _switchResult = _switchResult_1;
+        _switchResult = ((Number)_switchResult_1);
       }
     }
     if (!_matched) {

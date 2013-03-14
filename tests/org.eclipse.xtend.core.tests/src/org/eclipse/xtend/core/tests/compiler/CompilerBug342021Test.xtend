@@ -951,4 +951,65 @@ class CompilerBug342021Test extends AbstractXtendCompilerTest {
 			}
 		''')
 	}
+	
+	@Test
+	def testNestedIfInSwitchExpression_01() {
+		assertCompilesTo('''
+			class C {
+			    def Iterable<Object> m(Object o, boolean b) {
+				  switch o {
+				    Boolean: [|<Object>newArrayList().iterator]
+				  	default: {
+				  		if (b)
+				  			return newArrayList('').toArray
+				  		else
+				  			return #{}
+				  	}
+				  }
+			    }
+			}
+		''', '''
+			import com.google.common.collect.ImmutableSet;
+			import com.google.common.collect.ImmutableSet.Builder;
+			import java.util.ArrayList;
+			import java.util.Iterator;
+			import java.util.Set;
+			import org.eclipse.xtext.xbase.lib.CollectionLiterals;
+			import org.eclipse.xtext.xbase.lib.Conversions;
+			
+			@SuppressWarnings("all")
+			public class C {
+			  public Iterable<Object> m(final Object o, final boolean b) {
+			    Iterable<Object> _switchResult = null;
+			    boolean _matched = false;
+			    if (!_matched) {
+			      if (o instanceof Boolean) {
+			        final Boolean _boolean = (Boolean)o;
+			        _matched=true;
+			        final Iterable<Object> _function = new Iterable<Object>() {
+			            public Iterator<Object> iterator() {
+			              ArrayList<Object> _newArrayList = CollectionLiterals.<Object>newArrayList();
+			              Iterator<Object> _iterator = _newArrayList.iterator();
+			              return _iterator;
+			            }
+			          };
+			        _switchResult = _function;
+			      }
+			    }
+			    if (!_matched) {
+			      if (b) {
+			        ArrayList<String> _newArrayList = CollectionLiterals.<String>newArrayList("");
+			        return ((Iterable<Object>)Conversions.doWrapArray(_newArrayList.toArray()));
+			      } else {
+			        Set<Object> _xsetliteral = null;
+			        Builder<Object> _builder = ImmutableSet.builder();
+			        _xsetliteral = _builder.build();
+			        return _xsetliteral;
+			      }
+			    }
+			    return _switchResult;
+			  }
+			}
+		''')
+	}
 }

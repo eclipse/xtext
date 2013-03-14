@@ -45,32 +45,32 @@ public class ExclusiveRangeTest {
   @Test
   public void testSize() {
     ExclusiveRange _exclusiveRange = new ExclusiveRange(1, 5, true);
-    int _size = _exclusiveRange.getSize();
+    int _size = _exclusiveRange.size();
     Assert.assertEquals(4, _size);
     ExclusiveRange _exclusiveRange_1 = new ExclusiveRange(0, 0, true);
-    int _size_1 = _exclusiveRange_1.getSize();
+    int _size_1 = _exclusiveRange_1.size();
     Assert.assertEquals(0, _size_1);
     int _minus = (-1);
     ExclusiveRange _exclusiveRange_2 = new ExclusiveRange(0, _minus, true);
-    int _size_2 = _exclusiveRange_2.getSize();
+    int _size_2 = _exclusiveRange_2.size();
     Assert.assertEquals(0, _size_2);
     int _minus_1 = (-1);
     ExclusiveRange _exclusiveRange_3 = new ExclusiveRange(_minus_1, 0, true);
-    int _size_3 = _exclusiveRange_3.getSize();
+    int _size_3 = _exclusiveRange_3.size();
     Assert.assertEquals(1, _size_3);
     ExclusiveRange _exclusiveRange_4 = new ExclusiveRange(5, 1, false);
-    int _size_4 = _exclusiveRange_4.getSize();
+    int _size_4 = _exclusiveRange_4.size();
     Assert.assertEquals(4, _size_4);
     ExclusiveRange _exclusiveRange_5 = new ExclusiveRange(0, 0, false);
-    int _size_5 = _exclusiveRange_5.getSize();
+    int _size_5 = _exclusiveRange_5.size();
     Assert.assertEquals(0, _size_5);
     int _minus_2 = (-1);
     ExclusiveRange _exclusiveRange_6 = new ExclusiveRange(_minus_2, 0, false);
-    int _size_6 = _exclusiveRange_6.getSize();
+    int _size_6 = _exclusiveRange_6.size();
     Assert.assertEquals(0, _size_6);
     int _minus_3 = (-1);
     ExclusiveRange _exclusiveRange_7 = new ExclusiveRange(0, _minus_3, false);
-    int _size_7 = _exclusiveRange_7.getSize();
+    int _size_7 = _exclusiveRange_7.size();
     Assert.assertEquals(1, _size_7);
   }
   

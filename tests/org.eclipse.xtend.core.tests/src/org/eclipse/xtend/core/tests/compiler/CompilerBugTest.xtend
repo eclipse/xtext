@@ -15,6 +15,101 @@ import org.junit.Test
 class CompilerBugTest extends AbstractXtendCompilerTest {
 	
 	@Test
+	def testEarlyExitInBranch_01() {
+		assertCompilesTo('''
+			class C {
+				def m() {
+					switch 'a' {
+						case 'b': 'a'
+						case 'c': {
+							if (1==2)
+								return 'b'
+							else
+								return 'c'
+						}
+					}
+			    }
+			}
+		''', '''
+			import com.google.common.base.Objects;
+			
+			@SuppressWarnings("all")
+			public class C {
+			  public String m() {
+			    String _switchResult = null;
+			    final String _switchValue = "a";
+			    boolean _matched = false;
+			    if (!_matched) {
+			      if (Objects.equal(_switchValue,"b")) {
+			        _matched=true;
+			        _switchResult = "a";
+			      }
+			    }
+			    if (!_matched) {
+			      if (Objects.equal(_switchValue,"c")) {
+			        _matched=true;
+			        boolean _equals = (1 == 2);
+			        if (_equals) {
+			          return "b";
+			        } else {
+			          return "c";
+			        }
+			      }
+			    }
+			    return _switchResult;
+			  }
+			}
+		''')
+	}
+	
+	@Test
+	def testEarlyExitInBranch_02() {
+		assertCompilesTo('''
+			class C {
+				def String m(boolean b) {
+					switch 'a' {
+						case 'b': 'a'
+						case 'c': {
+							if (b)
+								return 'b'
+							else
+								return 'c'
+						}
+					}
+			    }
+			}
+		''', '''
+			import com.google.common.base.Objects;
+			
+			@SuppressWarnings("all")
+			public class C {
+			  public String m(final boolean b) {
+			    String _switchResult = null;
+			    final String _switchValue = "a";
+			    boolean _matched = false;
+			    if (!_matched) {
+			      if (Objects.equal(_switchValue,"b")) {
+			        _matched=true;
+			        _switchResult = "a";
+			      }
+			    }
+			    if (!_matched) {
+			      if (Objects.equal(_switchValue,"c")) {
+			        _matched=true;
+			        if (b) {
+			          return "b";
+			        } else {
+			          return "c";
+			        }
+			      }
+			    }
+			    return _switchResult;
+			  }
+			}
+		''')
+	}
+	
+	@Test
 	def testOverloadWithSwitchExpression_01() {
 		assertCompilesTo('''
 			import org.eclipse.xtext.xbase.compiler.output.ITreeAppendable
