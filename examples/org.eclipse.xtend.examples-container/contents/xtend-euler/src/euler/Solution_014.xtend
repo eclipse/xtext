@@ -56,7 +56,7 @@ class Solution_014 extends AbstractIterator<Long> {
 		val result = current
 		current = switch(current) {
 			case 0L: return endOfData
-			case 1L: 0
+			case 1L: 0L
 			case current % 2 == 0: current / 2
 			default : 3 * current + 1
 		}

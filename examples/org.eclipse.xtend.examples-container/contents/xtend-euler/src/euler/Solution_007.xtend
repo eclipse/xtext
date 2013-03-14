@@ -44,7 +44,7 @@ class Solution_007 {
 		}
 	}
 
-	def static void markAsNotPrime(int prime, List<Integer> numbers) {
+	def static markAsNotPrime(int prime, List<Integer> numbers) {
 		var iter = numbers.iterator
 		while(iter.hasNext) {
 			if (iter.next % prime == 0) {

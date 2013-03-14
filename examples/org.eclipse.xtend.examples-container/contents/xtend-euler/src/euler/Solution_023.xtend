@@ -30,8 +30,8 @@ import java.util.Set
 class Solution_023 {
 
 	def static void main(String[] args) {
-		val allAbundantNumbers = (28123..1).filter[isAbundant(it)].toSet
-		println((28123..1).filter[ !isSumOfAbundantNumbers(it, allAbundantNumbers) ].reduce[ i1, i2 | i1 + i2])
+		val allAbundantNumbers = (28123..1).filter[abundant].toSet
+		println((28123..1).filter[ !isSumOfAbundantNumbers(allAbundantNumbers) ].reduce[ i1, i2 | i1 + i2])
 	}
 
 	def static isSumOfAbundantNumbers(int input, Set<Integer> allAmbundantNumbers) {
@@ -44,7 +44,7 @@ class Solution_023 {
 
 	def static isAbundant(int input) {
 		val sqrt = Math::sqrt(input).floor.intValue;
-		val sumOfDivisors = (2..sqrt).filter [ int div |
+		val sumOfDivisors = (2..sqrt).filter [ div |
 			div != input && input % div == 0
 		].fold(1) [ i1, i2 |
 			val other = input / i2
