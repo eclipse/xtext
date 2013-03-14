@@ -15,6 +15,52 @@ import org.junit.Test
 class CompilerBugTest extends AbstractXtendCompilerTest {
 	
 	@Test
+	def testOverloadWithSwitchExpression_01() {
+		assertCompilesTo('''
+			import org.eclipse.xtext.xbase.compiler.output.ITreeAppendable
+			class C {
+				def void m(ITreeAppendable appendable, Double it) {
+					appendable.append(switch it {
+						case Double::isNaN(it): 'Double.NaN'
+						case Double::POSITIVE_INFINITY: 'Double.POSITIVE_INFINITY'
+						default: toString + 'd'
+					})
+			    }
+			}
+		''', '''
+			import com.google.common.base.Objects;
+			import org.eclipse.xtext.xbase.compiler.output.ITreeAppendable;
+			
+			@SuppressWarnings("all")
+			public class C {
+			  public void m(final ITreeAppendable appendable, final Double it) {
+			    String _switchResult = null;
+			    boolean _matched = false;
+			    if (!_matched) {
+			      boolean _isNaN = Double.isNaN((it).doubleValue());
+			      if (_isNaN) {
+			        _matched=true;
+			        _switchResult = "Double.NaN";
+			      }
+			    }
+			    if (!_matched) {
+			      if (Objects.equal(it,Double.POSITIVE_INFINITY)) {
+			        _matched=true;
+			        _switchResult = "Double.POSITIVE_INFINITY";
+			      }
+			    }
+			    if (!_matched) {
+			      String _string = it.toString();
+			      String _plus = (_string + "d");
+			      _switchResult = _plus;
+			    }
+			    appendable.append(_switchResult);
+			  }
+			}
+		''')
+	}
+	
+	@Test
 	def testWronglyAppliedSugar_01() {
 		assertCompilesTo('''
 			class C {
