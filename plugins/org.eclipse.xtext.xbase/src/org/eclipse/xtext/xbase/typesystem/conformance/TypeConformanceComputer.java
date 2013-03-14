@@ -455,7 +455,7 @@ public class TypeConformanceComputer {
 			}
 		}
 		WildcardTypeReference result = new WildcardTypeReference(owner);
-		result.addUpperBound(superType);
+		result.addUpperBound(superType.copyInto(owner));
 		return result;
 	}
 
