@@ -37,8 +37,8 @@ import com.google.common.annotations.GwtCompatible;
 	/**
 	 * The <code>..&lt;</code> operator yields an {@link ExclusiveRange}.
 	 * 
-	 * @param a the start of the range (probably inclusive).
-	 * @param b the end of the range (never inclusive).
+	 * @param a the start of the range.
+	 * @param b the end of the range (exclusive).
 	 * @return an {@link ExclusiveRange}. Never <code>null</code>.
 	 * @since 2.4
 	 */
@@ -51,8 +51,8 @@ import com.google.common.annotations.GwtCompatible;
 	/**
 	 * The <code>&gt;..</code> operator yields an {@link ExclusiveRange}.
 	 * 
-	 * @param a the start of the range (never inclusive).
-	 * @param b the end of the range (probably inclusive).
+	 * @param a the start of the range (exclusive).
+	 * @param b the end of the range.
 	 * @return an {@link ExclusiveRange}. Never <code>null</code>.
 	 * @since 2.4
 	 */

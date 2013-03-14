@@ -102,12 +102,11 @@ public class ExclusiveRange implements Iterable<Integer> {
 	/**
 	 * Constructs a new ExclusiveRange object.
 	 * 
-	 * @param start
-	 *            the start value (always exclusive iff step == -1)
-	 * @param end
-	 *            the end value (always exclusive iff step == 1)
+	 * @param start the start value
+	 * @param end the end value
 	 * @param increment
-	 *            if true, add 1 else remove 1 to calculate the next element
+	 *            if true, the range goes from start up to end (exclusive)
+	 *            if false, the range goes from end down to start (exclusive)
 	 */
 	@Pure
 	public ExclusiveRange(int start, int end, boolean increment) {
