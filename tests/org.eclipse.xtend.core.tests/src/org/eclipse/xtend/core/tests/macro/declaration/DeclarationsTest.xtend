@@ -22,7 +22,6 @@ class DeclarationsTest extends AbstractXtendTestCase {
 		validFile('''
 		@SuppressWarnings("unused")
 		class MyClass {
-			
 			@com.google.inject.Inject(optional=true) MyClass foo
 		}
 		
@@ -63,6 +62,19 @@ class DeclarationsTest extends AbstractXtendTestCase {
 			val field = clazz.declaredMembers.head as FieldDeclaration
 			assertEquals('foo', field.simpleName)
 			assertSame(typeLookup.findClass('foo.MyClass'), field.type.type)
+		]
+	}
+	
+	@Test def testRemove() {
+		validFile('''
+			class C {
+				def void m() {}
+			}
+		''').asCompilationUnit [ 
+			val c = sourceTypeDeclarations.head as ClassDeclaration
+			val mutable = typeLookup.findClass(c.qualifiedName)
+			mutable.declaredMembers.forEach[ remove ]
+			assertTrue(mutable.declaredMembers.empty)
 		]
 	}
 	

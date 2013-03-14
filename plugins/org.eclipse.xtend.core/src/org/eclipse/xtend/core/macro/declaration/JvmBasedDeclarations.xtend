@@ -60,7 +60,7 @@ abstract class JvmNamedElementImpl<T extends JvmIdentifiableElement> extends Abs
 	override remove() {
 		if (delegate.eContainer == null)
 			return;
-		delegate.eContainer.eContents.remove(delegate)
+		EcoreUtil::remove(delegate)
 		if (delegate.eContainer != null)
 			throw new IllegalStateException("Couldn't remove "+delegate.toString)
 	}
