@@ -78,8 +78,7 @@ public class EMFBasedPersister implements PersistedStateProvider {
 				}
 			}
 		} catch (Exception e) {
-			log.error("Error while loading persistable builder state.", e);
-			log.error("Triggering a full build.");
+			log.error("Error while loading persistable builder state. Triggering a full build.", e);
 			scheduleRecoveryBuild();
 			throw new WrappedException(e);
 		} finally {
