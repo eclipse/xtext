@@ -21,6 +21,7 @@ import org.eclipse.xtend.core.xtend.XtendTypeDeclaration;
 import org.eclipse.xtend.lib.Data;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
+import org.eclipse.xtext.generator.trace.ITraceRegionProvider;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.compiler.DisableCodeGenerationAdapter;
 import org.eclipse.xtext.xbase.compiler.GeneratorConfig;
@@ -51,7 +52,6 @@ public abstract class AbstractXtendCompilerTest extends AbstractXtendTestCase {
   
   @Before
   public void setupCompiler() {
-    this.useJavaCompiler = false;
     Class<? extends AbstractXtendCompilerTest> _class = this.getClass();
     this.compiler.addClassPathOfClass(_class);
     this.compiler.addClassPathOfClass(Amount.class);
@@ -59,8 +59,12 @@ public abstract class AbstractXtendCompilerTest extends AbstractXtendTestCase {
     this.compiler.addClassPathOfClass(Inject.class);
     this.compiler.addClassPathOfClass(CollectionLiterals.class);
     this.compiler.addClassPathOfClass(JvmTypeParameter.class);
+    this.compiler.addClassPathOfClass(ITraceRegionProvider.class);
     this.compiler.addClassPathOfClass(XExpression.class);
     this.compiler.addClassPathOfClass(Objects.class);
+    Class<? extends AbstractXtendCompilerTest> _class_1 = this.getClass();
+    ClassLoader _classLoader = _class_1.getClassLoader();
+    this.compiler.setParentClassLoader(_classLoader);
   }
   
   public void assertCompilesTo(final CharSequence input, final CharSequence expected) {

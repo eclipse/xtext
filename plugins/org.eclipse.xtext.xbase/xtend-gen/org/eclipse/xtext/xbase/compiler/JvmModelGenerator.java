@@ -467,23 +467,33 @@ public class JvmModelGenerator implements IGenerator {
       _compilationStrategy_1.apply(appendable);
       appendable.decreaseIndentation();
     } else {
-      final XExpression expression = this._iLogicalContainerProvider.getAssociatedExpression(it);
-      boolean _and = false;
-      boolean _notEquals_1 = (!Objects.equal(expression, null));
-      if (!_notEquals_1) {
-        _and = false;
-      } else {
-        boolean _isGenerateExpressions = config.isGenerateExpressions();
-        _and = (_notEquals_1 && _isGenerateExpressions);
-      }
-      if (_and) {
-        boolean _hasErrors = this._errorSafeExtensions.hasErrors(expression);
-        if (_hasErrors) {
-          appendable.append("/* skipped default expression with errors */");
+      boolean _isGenerateExpressions = config.isGenerateExpressions();
+      if (_isGenerateExpressions) {
+        final XExpression body = this._iLogicalContainerProvider.getAssociatedExpression(it);
+        boolean _notEquals_1 = (!Objects.equal(body, null));
+        if (_notEquals_1) {
+          boolean _hasErrors = this._errorSafeExtensions.hasErrors(body);
+          if (_hasErrors) {
+            appendable.append("/* skipped default expression with errors */");
+          } else {
+            appendable.append(" default ");
+            JvmTypeReference _returnType = it.getReturnType();
+            this.compiler.compileAsJavaExpression(body, appendable, _returnType);
+          }
         } else {
-          appendable.append(" default ");
-          JvmTypeReference _returnType = it.getReturnType();
-          this.compiler.compileAsJavaExpression(expression, appendable, _returnType);
+          JvmAnnotationValue _defaultValue = it.getDefaultValue();
+          boolean _notEquals_2 = (!Objects.equal(_defaultValue, null));
+          if (_notEquals_2) {
+            JvmAnnotationValue _defaultValue_1 = it.getDefaultValue();
+            boolean _hasErrors_1 = this._errorSafeExtensions.hasErrors(_defaultValue_1);
+            if (_hasErrors_1) {
+              appendable.append("/* skipped default expression with errors */");
+            } else {
+              appendable.append(" default ");
+              JvmAnnotationValue _defaultValue_2 = it.getDefaultValue();
+              this.toJavaLiteral(_defaultValue_2, appendable, config);
+            }
+          }
         }
       }
     }
@@ -1631,13 +1641,19 @@ public class JvmModelGenerator implements IGenerator {
   
   protected void _toJavaLiteral(final JvmCustomAnnotationValue it, final ITreeAppendable appendable, final GeneratorConfig config) {
     EList<Object> _values = it.getValues();
-    Iterable<XExpression> _filter = Iterables.<XExpression>filter(_values, XExpression.class);
-    final Procedure1<XExpression> _function = new Procedure1<XExpression>() {
-        public void apply(final XExpression it) {
-          JvmModelGenerator.this.compiler.toJavaExpression(it, appendable);
-        }
-      };
-    this._loopExtensions.<XExpression>forEachWithShortcut(appendable, _filter, _function);
+    boolean _isEmpty = _values.isEmpty();
+    if (_isEmpty) {
+      appendable.append("{}");
+    } else {
+      EList<Object> _values_1 = it.getValues();
+      Iterable<XExpression> _filter = Iterables.<XExpression>filter(_values_1, XExpression.class);
+      final Procedure1<XExpression> _function = new Procedure1<XExpression>() {
+          public void apply(final XExpression it) {
+            JvmModelGenerator.this.compiler.toJavaExpression(it, appendable);
+          }
+        };
+      this._loopExtensions.<XExpression>forEachWithShortcut(appendable, _filter, _function);
+    }
   }
   
   public TreeAppendable createAppendable(final EObject context, final ImportManager importManager, final GeneratorConfig config) {

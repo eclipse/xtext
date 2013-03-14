@@ -9,6 +9,7 @@ package org.eclipse.xtend.core.tests.compiler;
 
 import org.eclipse.xtend.core.tests.compiler.AbstractXtendCompilerTest;
 import org.eclipse.xtend2.lib.StringConcatenation;
+import org.junit.Ignore;
 import org.junit.Test;
 
 /**
@@ -86,6 +87,72 @@ public class AnnotationCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public String[] value() default { \"abc\", \"efg\" };");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    this.assertCompilesTo(_builder, _builder_1);
+  }
+  
+  @Test
+  @Ignore
+  public void testAnnotationWithDefaultIntArray() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("annotation DependsOn {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("val value = #[ 1, 2 ]");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("public @interface DependsOn {");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("public int[] value() default { 1, 2 };");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    this.assertCompilesTo(_builder, _builder_1);
+  }
+  
+  @Test
+  @Ignore
+  public void testAnnotationWithDefaultBooleanArray() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("annotation DependsOn {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("val value = #[ true, true ]");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("public @interface DependsOn {");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("public boolean[] value() default { true, true };");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    this.assertCompilesTo(_builder, _builder_1);
+  }
+  
+  @Test
+  @Ignore
+  public void testAnnotationWithDefaultLongArray() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("annotation DependsOn {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("val value = #[ 1l, 2l ]");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("public @interface DependsOn {");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("public long[] value() default { 1l, 2l };");
     _builder_1.newLine();
     _builder_1.append("}");
     _builder_1.newLine();
@@ -360,7 +427,7 @@ public class AnnotationCompilerTest extends AbstractXtendCompilerTest {
     _builder_1.append("  ");
     _builder_1.newLine();
     _builder_1.append("  ");
-    _builder_1.append("@Click({TestXtend.a, TestXtend.a})");
+    _builder_1.append("@Click({ TestXtend.a, TestXtend.a })");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("public Object meth() {");

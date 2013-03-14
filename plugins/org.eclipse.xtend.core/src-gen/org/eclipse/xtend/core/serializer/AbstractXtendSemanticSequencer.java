@@ -1277,7 +1277,7 @@ public abstract class AbstractXtendSemanticSequencer extends XbaseWithAnnotation
 	 *         annotations+=XAnnotation* 
 	 *         modifiers+=CommonModifier* 
 	 *         ((modifiers+=FieldModifier modifiers+=CommonModifier* type=JvmTypeReference? name=ValidID) | (type=JvmTypeReference name=ValidID)) 
-	 *         initialValue=XExpression?
+	 *         initialValue=XAnnotationElementValue?
 	 *     )
 	 */
 	protected void sequence_AnnotationField(EObject context, XtendField semanticObject) {

@@ -507,16 +507,18 @@ public class XtendGrammarAccess extends AbstractGrammarElementFinder {
 		private final Group cGroup_3 = (Group)cGroup.eContents().get(3);
 		private final Keyword cEqualsSignKeyword_3_0 = (Keyword)cGroup_3.eContents().get(0);
 		private final Assignment cInitialValueAssignment_3_1 = (Assignment)cGroup_3.eContents().get(1);
-		private final RuleCall cInitialValueXExpressionParserRuleCall_3_1_0 = (RuleCall)cInitialValueAssignment_3_1.eContents().get(0);
+		private final RuleCall cInitialValueXAnnotationElementValueParserRuleCall_3_1_0 = (RuleCall)cInitialValueAssignment_3_1.eContents().get(0);
 		private final Keyword cSemicolonKeyword_4 = (Keyword)cGroup.eContents().get(4);
 		
 		//AnnotationField returns XtendField:
 		//	annotations+=XAnnotation* modifiers+=CommonModifier* (modifiers+=FieldModifier modifiers+=CommonModifier*
-		//	type=JvmTypeReference? name=ValidID | type=JvmTypeReference name=ValidID) ("=" initialValue=XExpression)? ";"?;
+		//	type=JvmTypeReference? name=ValidID | type=JvmTypeReference name=ValidID) ("=" initialValue=XAnnotationElementValue)?
+		//	";"?;
 		public ParserRule getRule() { return rule; }
 
 		//annotations+=XAnnotation* modifiers+=CommonModifier* (modifiers+=FieldModifier modifiers+=CommonModifier*
-		//type=JvmTypeReference? name=ValidID | type=JvmTypeReference name=ValidID) ("=" initialValue=XExpression)? ";"?
+		//type=JvmTypeReference? name=ValidID | type=JvmTypeReference name=ValidID) ("=" initialValue=XAnnotationElementValue)?
+		//";"?
 		public Group getGroup() { return cGroup; }
 
 		//annotations+=XAnnotation*
@@ -577,17 +579,17 @@ public class XtendGrammarAccess extends AbstractGrammarElementFinder {
 		//ValidID
 		public RuleCall getNameValidIDParserRuleCall_2_1_1_0() { return cNameValidIDParserRuleCall_2_1_1_0; }
 
-		//("=" initialValue=XExpression)?
+		//("=" initialValue=XAnnotationElementValue)?
 		public Group getGroup_3() { return cGroup_3; }
 
 		//"="
 		public Keyword getEqualsSignKeyword_3_0() { return cEqualsSignKeyword_3_0; }
 
-		//initialValue=XExpression
+		//initialValue=XAnnotationElementValue
 		public Assignment getInitialValueAssignment_3_1() { return cInitialValueAssignment_3_1; }
 
-		//XExpression
-		public RuleCall getInitialValueXExpressionParserRuleCall_3_1_0() { return cInitialValueXExpressionParserRuleCall_3_1_0; }
+		//XAnnotationElementValue
+		public RuleCall getInitialValueXAnnotationElementValueParserRuleCall_3_1_0() { return cInitialValueXAnnotationElementValueParserRuleCall_3_1_0; }
 
 		//";"?
 		public Keyword getSemicolonKeyword_4() { return cSemicolonKeyword_4; }
@@ -2451,7 +2453,8 @@ public class XtendGrammarAccess extends AbstractGrammarElementFinder {
 
 	//AnnotationField returns XtendField:
 	//	annotations+=XAnnotation* modifiers+=CommonModifier* (modifiers+=FieldModifier modifiers+=CommonModifier*
-	//	type=JvmTypeReference? name=ValidID | type=JvmTypeReference name=ValidID) ("=" initialValue=XExpression)? ";"?;
+	//	type=JvmTypeReference? name=ValidID | type=JvmTypeReference name=ValidID) ("=" initialValue=XAnnotationElementValue)?
+	//	";"?;
 	public AnnotationFieldElements getAnnotationFieldAccess() {
 		return (pAnnotationField != null) ? pAnnotationField : (pAnnotationField = new AnnotationFieldElements());
 	}
