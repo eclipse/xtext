@@ -82,7 +82,7 @@ public class StratumBreakpointAdapterFactory implements IAdapterFactory, IToggle
 	}
 
 	protected static class Data {
-		protected URI uri;
+		protected String name;
 		protected String types;
 		protected boolean valid;
 		protected LanguageInfo lang;
@@ -95,6 +95,7 @@ public class StratumBreakpointAdapterFactory implements IAdapterFactory, IToggle
 		try {
 			final XtextEditor xtextEditor = (XtextEditor) part;
 			final IResource res = breakpointUtil.getBreakpointResource(xtextEditor.getEditorInput());
+			final URI uri = breakpointUtil.getBreakointURI(xtextEditor.getEditorInput());
 			final int offset = ((TextSelection) selection).getOffset();
 			final int line = xtextEditor.getDocument().getLineOfOffset(offset) + 1;
 
@@ -103,7 +104,7 @@ public class StratumBreakpointAdapterFactory implements IAdapterFactory, IToggle
 					IResourceServiceProvider provider = state.getResourceServiceProvider();
 					IStratumBreakpointSupport breakpointSupport = provider.get(IStratumBreakpointSupport.class);
 					Data result = new Data();
-					result.uri = state.getURI();
+					result.name = state.getURI().lastSegment();
 					result.valid = breakpointSupport != null && breakpointSupport.isValidLineForBreakPoint(state, line);
 					result.types = getClassNamePattern(state);
 					result.lang = provider.get(LanguageInfo.class);
@@ -111,7 +112,7 @@ public class StratumBreakpointAdapterFactory implements IAdapterFactory, IToggle
 				}
 			});
 
-			IJavaStratumLineBreakpoint existingBreakpoint = findExistingBreakpoint(res, data.uri, line);
+			IJavaStratumLineBreakpoint existingBreakpoint = findExistingBreakpoint(res, uri, line);
 
 			if (existingBreakpoint != null) {
 				existingBreakpoint.delete();
@@ -131,8 +132,9 @@ public class StratumBreakpointAdapterFactory implements IAdapterFactory, IToggle
 			final String shortName = data.lang.getShortName();
 
 			Map<String, Object> attributes = Maps.newHashMap();
-			attributes.put(JarFileMarkerAnnotationModel.MARKER_URI, data.uri.toString());
-			attributes.put(ORG_ECLIPSE_JDT_DEBUG_CORE_SOURCE_NAME, data.uri.lastSegment());
+			if (uri != null)
+				attributes.put(JarFileMarkerAnnotationModel.MARKER_URI, uri.toString());
+			attributes.put(ORG_ECLIPSE_JDT_DEBUG_CORE_SOURCE_NAME, data.name);
 
 			final IJavaStratumLineBreakpoint breakpoint = JDIDebugModel.createStratumBreakpoint(res, shortName, null,
 					null, data.types, line, charStart, charEnd, 0, true, attributes);
@@ -176,14 +178,26 @@ public class StratumBreakpointAdapterFactory implements IAdapterFactory, IToggle
 			throws CoreException {
 		IBreakpointManager manager = DebugPlugin.getDefault().getBreakpointManager();
 		IBreakpoint[] breakpoints = manager.getBreakpoints();
-		String uriStirng = uri.toString();
-		for (IBreakpoint breakpoint : breakpoints) {
-			IMarker marker = breakpoint.getMarker();
-			if (breakpoint instanceof IJavaStratumLineBreakpoint && marker.getResource().equals(res)
-					&& uriStirng.equals(marker.getAttribute(JarFileMarkerAnnotationModel.MARKER_URI))) {
-				final IJavaStratumLineBreakpoint stratumBreakpoint = (IJavaStratumLineBreakpoint) breakpoint;
-				if (stratumBreakpoint.getLineNumber() == line) {
-					return stratumBreakpoint;
+		if (uri == null) {
+			for (IBreakpoint breakpoint : breakpoints) {
+				IMarker marker = breakpoint.getMarker();
+				if (breakpoint instanceof IJavaStratumLineBreakpoint && marker.getResource().equals(res)) {
+					final IJavaStratumLineBreakpoint stratumBreakpoint = (IJavaStratumLineBreakpoint) breakpoint;
+					if (stratumBreakpoint.getLineNumber() == line) {
+						return stratumBreakpoint;
+					}
+				}
+			}
+		} else {
+			String uriStirng = uri.toString();
+			for (IBreakpoint breakpoint : breakpoints) {
+				IMarker marker = breakpoint.getMarker();
+				if (breakpoint instanceof IJavaStratumLineBreakpoint && marker.getResource().equals(res)
+						&& uriStirng.equals(marker.getAttribute(JarFileMarkerAnnotationModel.MARKER_URI))) {
+					final IJavaStratumLineBreakpoint stratumBreakpoint = (IJavaStratumLineBreakpoint) breakpoint;
+					if (stratumBreakpoint.getLineNumber() == line) {
+						return stratumBreakpoint;
+					}
 				}
 			}
 		}

@@ -38,7 +38,7 @@ public class XbaseResourceForEditorInputFactory extends JavaClassPathResourceFor
 	protected URI getClassFileSourceURI(IClassFile classFile) {
 		ITrace traceToSource = typeForTypeRootProvider.getTraceToSource(classFile);
 		for (ILocationInResource loc : traceToSource.getAllAssociatedLocations())
-			return loc.getResourceURI();
+			return loc.getAbsoluteResourceURI();
 		return null;
 	}
 

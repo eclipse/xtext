@@ -7,25 +7,39 @@
  *******************************************************************************/
 package org.eclipse.xtext.builder.smap;
 
+import org.apache.log4j.Logger;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.IStorage;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
+import org.eclipse.emf.common.util.URI;
 import org.eclipse.jdt.core.IClassFile;
 import org.eclipse.jdt.core.ICompilationUnit;
 import org.eclipse.jdt.core.IJarEntryResource;
 import org.eclipse.jdt.core.IMember;
+import org.eclipse.jdt.core.IPackageFragment;
+import org.eclipse.jdt.core.IPackageFragmentRoot;
 import org.eclipse.jdt.internal.ui.javaeditor.IClassFileEditorInput;
 import org.eclipse.ui.IEditorInput;
 import org.eclipse.ui.IStorageEditorInput;
+import org.eclipse.xtext.builder.trace.ITraceForTypeRootProvider;
+import org.eclipse.xtext.generator.trace.ILocationInResource;
+import org.eclipse.xtext.generator.trace.ITrace;
+
+import com.google.inject.Inject;
 
 /**
  * @author Moritz Eysholdt - Initial contribution and API
  */
 public class XbaseBreakpointUtil {
 
+	private static final Logger logger = Logger.getLogger(XbaseBreakpointUtil.class);
+
+	@Inject
+	private ITraceForTypeRootProvider traceForTypeRootProvider;
+
 	// copied from org.eclipse.jdt.internal.debug.ui.BreakpointUtils.getBreakpointResource(IMember)
-	public IResource getBreakpointResource(IMember member) {
+	protected IResource getBreakpointResource(IMember member) {
 		ICompilationUnit cu = member.getCompilationUnit();
 		if (cu != null && cu.isWorkingCopy()) {
 			member = (IMember) member.getPrimaryElement();
@@ -54,6 +68,40 @@ public class XbaseBreakpointUtil {
 			return getBreakpointResource(classFile.findPrimaryType());
 		}
 		return ResourcesPlugin.getWorkspace().getRoot();
+	}
+
+	// this URI is only used for breakpoints on JARed files
+	public URI getBreakointURI(IEditorInput input) {
+		Object adapter = input.getAdapter(IResource.class);
+		if (adapter != null)
+			return null;
+		if (input instanceof IStorageEditorInput) {
+			IStorage storage;
+			try {
+				storage = ((IStorageEditorInput) input).getStorage();
+				if (storage instanceof IResource)
+					return null;
+				if (storage instanceof IJarEntryResource) {
+					Object parent = ((IJarEntryResource) storage).getParent();
+					if (parent instanceof IPackageFragment) {
+						String path = ((IPackageFragment) parent).getElementName().replace('.', '/');
+						return URI.createURI(path + "/" + storage.getName());
+					} else if (parent instanceof IPackageFragmentRoot) {
+						return URI.createURI(storage.getName());
+					}
+				}
+			} catch (CoreException e) {
+				logger.error(e);
+				return null;
+			}
+		} else if (input instanceof IClassFileEditorInput) {
+			IClassFile classFile = ((IClassFileEditorInput) input).getClassFile();
+			ITrace traceToSource = traceForTypeRootProvider.getTraceToSource(classFile);
+			for (ILocationInResource loc : traceToSource.getAllAssociatedLocations())
+				return loc.getSrcRelativeResourceURI();
+			return null;
+		}
+		return null;
 	}
 
 }

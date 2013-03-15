@@ -11,19 +11,14 @@ import java.io.IOException;
 import java.io.InputStream;
 
 import org.eclipse.core.resources.IResource;
-import org.eclipse.core.resources.IStorage;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.jdt.core.IClassFile;
-import org.eclipse.jdt.core.IJarEntryResource;
-import org.eclipse.jdt.core.IPackageFragmentRoot;
 import org.eclipse.jdt.internal.ui.javaeditor.IClassFileEditorInput;
 import org.eclipse.jface.text.IDocument;
 import org.eclipse.jface.text.source.IAnnotationModel;
 import org.eclipse.ui.IEditorInput;
-import org.eclipse.ui.IFileEditorInput;
-import org.eclipse.ui.IStorageEditorInput;
 import org.eclipse.xtext.builder.smap.XbaseBreakpointUtil;
 import org.eclipse.xtext.builder.trace.ITraceForTypeRootProvider;
 import org.eclipse.xtext.generator.trace.ILocationInResource;
@@ -46,13 +41,13 @@ public class XbaseDocumentProvider extends XtextDocumentProvider {
 	}
 
 	@Inject
-	private ITraceForTypeRootProvider typeForTypeRootProvider;
+	private ITraceForTypeRootProvider traceForTypeRootProvider;
 
 	@Inject
 	private XbaseBreakpointUtil breakpointUtil;
 
 	protected ILocationInResource getClassFileSourceStorage(IClassFile classFile) {
-		ITrace traceToSource = typeForTypeRootProvider.getTraceToSource(classFile);
+		ITrace traceToSource = traceForTypeRootProvider.getTraceToSource(classFile);
 		for (ILocationInResource loc : traceToSource.getAllAssociatedLocations())
 			return loc;
 		return null;
@@ -66,7 +61,8 @@ public class XbaseDocumentProvider extends XtextDocumentProvider {
 			InputStream contents = null;
 			try {
 				contents = source.getContents();
-				setDocumentContent(document, contents, encoding);
+				if (contents != null)
+					setDocumentContent(document, contents, encoding);
 			} finally {
 				try {
 					if (contents != null)
@@ -101,23 +97,12 @@ public class XbaseDocumentProvider extends XtextDocumentProvider {
 
 	@Override
 	protected IAnnotationModel createAnnotationModel(Object element) throws CoreException {
-		if (element instanceof IClassFileEditorInput) {
-			IClassFile classFile = ((IClassFileEditorInput) element).getClassFile();
-			IResource breakpointResource = breakpointUtil.getBreakpointResource(classFile.findPrimaryType());
-			ILocationInResource source = getClassFileSourceStorage(classFile);
-			return new JarFileMarkerAnnotationModel(breakpointResource, source.getResourceURI());
-		} else if (!(element instanceof IFileEditorInput) && (element instanceof IStorageEditorInput)) {
-			IStorageEditorInput input = (IStorageEditorInput) element;
-			IStorage storage = input.getStorage();
-			if (storage instanceof IJarEntryResource) {
-				IPackageFragmentRoot packageFragmentRoot = ((IJarEntryResource) storage).getPackageFragmentRoot();
-				IResource resource = packageFragmentRoot.getResource();
-				if (resource != null) {
-					URI uri = getStorage2UriMapper().getUri(storage);
-					if (uri != null) {
-						return new JarFileMarkerAnnotationModel(resource, uri);
-					}
-				}
+		if (element instanceof IEditorInput) {
+			IEditorInput editorInput = (IEditorInput) element;
+			URI breakpointURI = breakpointUtil.getBreakointURI(editorInput);
+			if (breakpointURI != null) { // we only get a URI here if the EditorInput points into a JAR
+				IResource breakpointResource = breakpointUtil.getBreakpointResource(editorInput);
+				return new JarFileMarkerAnnotationModel(breakpointResource, breakpointURI);
 			}
 		}
 		return super.createAnnotationModel(element);

@@ -9,10 +9,8 @@ package org.eclipse.xtext.builder.trace;
 
 import java.io.InputStream;
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
 
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IStorage;
@@ -202,7 +200,7 @@ public abstract class AbstractTrace implements ITrace, ITrace.Internal {
 	protected ILocationInResource getMergedLocationInResource(AbstractTraceRegion region) {
 		ILocationData locationData = region.getMergedAssociatedLocation();
 		if (locationData != null)
-			return createLocationInResourceFor(locationData, region, new HashMap<URI, URI>());
+			return createLocationInResourceFor(locationData, region);
 		return null;
 	}
 
@@ -212,18 +210,14 @@ public abstract class AbstractTrace implements ITrace, ITrace.Internal {
 	 * @return the location in resource, <code>null</code> detecting a path fails.
 	 */
 	@Nullable
-	protected ILocationInResource createLocationInResourceFor(ILocationData location, AbstractTraceRegion traceRegion,
-			Map<URI, URI> resolveCache) {
+	protected ILocationInResource createLocationInResourceFor(ILocationData location, AbstractTraceRegion traceRegion) {
 		URI path = location.getPath();
 		if (path == null)
 			path = traceRegion.getAssociatedPath();
 		if (path == null)
 			return null;
-		URI resolved = resolveCache.get(path);
-		if (resolved == null)
-			resolveCache.put(path, resolved = resolvePath(path));
 		return new LocationInResource(location.getOffset(), location.getLength(), location.getLineNumber(),
-				location.getEndLineNumber(), resolved, this);
+				location.getEndLineNumber(), path, this);
 	}
 	
 	protected URI resolvePath(URI path) {
@@ -360,11 +354,10 @@ public abstract class AbstractTrace implements ITrace, ITrace.Internal {
 	
 	protected Iterable<ILocationInResource> toLocations(Iterable<AbstractTraceRegion> allTraceRegions) {
 		List<ILocationInResource> result = Lists.newArrayList();
-		HashMap<URI, URI> resolveCache = new HashMap<URI, URI>();
-		for(AbstractTraceRegion region: allTraceRegions) {
-			for(ILocationData locationData: region.getAssociatedLocations()) {
-				ILocationInResource locationInResource = createLocationInResourceFor(locationData, region, resolveCache);
-				if(locationInResource != null)
+		for (AbstractTraceRegion region : allTraceRegions) {
+			for (ILocationData locationData : region.getAssociatedLocations()) {
+				ILocationInResource locationInResource = createLocationInResourceFor(locationData, region);
+				if (locationInResource != null)
 					result.add(locationInResource);
 			}
 		}
@@ -459,6 +452,10 @@ public abstract class AbstractTrace implements ITrace, ITrace.Internal {
 	protected IProject findProject(String projectName) {
 		IProject result = workspace.getRoot().getProject(projectName);
 		return result;
+	}
+	
+	protected IWorkspace getWorkspace() {
+		return workspace;
 	}
 	
 	@Nullable

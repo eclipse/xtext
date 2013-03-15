@@ -8,6 +8,7 @@
 package org.eclipse.xtext.builder.trace;
 
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.jdt.annotation.Nullable;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -15,24 +16,25 @@ import org.eclipse.emf.common.util.URI;
  */
 public class LocationInResource extends AbstractLocationInResource {
 
-	private final URI resourceURI;
+	private final URI srcRelativeResourceURI;
 	private final int offset;
 	private final int length;
 	private final int lineNumber;
 	private final int endLineNumber;
 
-	public LocationInResource(int offset, int length, int lineNumber, int endLineNumber, URI resourceURI, AbstractTrace trace) {
+	public LocationInResource(int offset, int length, int lineNumber, int endLineNumber, URI srcRelativeResourceURI, AbstractTrace trace) {
 		super(trace);
 		this.offset = offset;
 		this.length = length;
 		this.lineNumber = lineNumber;
 		this.endLineNumber = endLineNumber;
-		this.resourceURI = resourceURI;
+		this.srcRelativeResourceURI = srcRelativeResourceURI;
 	}
-
+	
 	@Override
-	public URI getResourceURI() {
-		return resourceURI;
+	@Nullable
+	public URI getSrcRelativeResourceURI() {
+		return srcRelativeResourceURI;
 	}
 
 	@Override
