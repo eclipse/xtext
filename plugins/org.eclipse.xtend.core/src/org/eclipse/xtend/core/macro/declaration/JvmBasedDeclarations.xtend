@@ -587,7 +587,14 @@ class JvmAnnotationReferenceImpl extends AbstractElementImpl<JvmAnnotationRefere
 		val annotationValue = delegate.values.findFirst[
 			valueName == property || (valueName == null && property == 'value')
 		]
-		return compilationUnit.translateAnnotationValue(annotationValue)
+		if (annotationValue != null)
+			return compilationUnit.translateAnnotationValue(annotationValue)
+		
+		val op = delegate.annotation.declaredOperations.findFirst[simpleName == property]
+		if (op != null && op.defaultValue != null) {
+			return compilationUnit.translateAnnotationValue(op.defaultValue)
+		}
+		return null
 	}
 	
 	override set(String name, String... values) {
