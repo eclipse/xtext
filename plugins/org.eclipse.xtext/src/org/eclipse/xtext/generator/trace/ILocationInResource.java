@@ -37,7 +37,9 @@ public interface ILocationInResource {
 	 * @return the EMF resource URI for this location. May be <code>null</code> if the 
 	 * resource is not an EMF resource.
 	 */
-	@Nullable URI getResourceURI();
+	@Nullable URI getAbsoluteResourceURI();
+	
+	@Nullable URI getSrcRelativeResourceURI();
 	
 	/**
 	 * @return the more specific {@link org.eclipse.emf.ecore.EObject object} {@link URI}
