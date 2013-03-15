@@ -46,6 +46,25 @@ class DeclarationsTest extends AbstractXtendTestCase {
 		]
 	}
 	
+	@Test def testAnnotation2() {
+		validFile('''
+		class MyClass {
+			@com.google.inject.Inject() MyClass foo
+		}
+		
+		''').asCompilationUnit [
+			val sourceClazz = sourceTypeDeclarations.head as ClassDeclaration
+			val javaClass = typeLookup.findClass("MyClass")
+			assertEquals(javaClass.qualifiedName, sourceClazz.qualifiedName)
+			
+			val field = sourceClazz.declaredFields.head
+			assertNull(field.annotations.head.getValue('optional'))
+			
+			val javaField = javaClass.declaredFields.head
+			assertFalse(javaField.annotations.head.getValue('optional') as Boolean)
+		]
+	}
+	
 	@Test def testSimpleClassWithField() {
 		validFile('''
 		package foo

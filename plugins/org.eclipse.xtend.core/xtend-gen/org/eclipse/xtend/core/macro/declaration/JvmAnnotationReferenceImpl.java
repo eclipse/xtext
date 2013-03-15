@@ -70,8 +70,37 @@ public class JvmAnnotationReferenceImpl extends AbstractElementImpl<JvmAnnotatio
         }
       };
     final JvmAnnotationValue annotationValue = IterableExtensions.<JvmAnnotationValue>findFirst(_values, _function);
-    CompilationUnitImpl _compilationUnit = this.getCompilationUnit();
-    return _compilationUnit.translateAnnotationValue(annotationValue);
+    boolean _notEquals = (!Objects.equal(annotationValue, null));
+    if (_notEquals) {
+      CompilationUnitImpl _compilationUnit = this.getCompilationUnit();
+      return _compilationUnit.translateAnnotationValue(annotationValue);
+    }
+    JvmAnnotationReference _delegate_1 = this.getDelegate();
+    JvmAnnotationType _annotation = _delegate_1.getAnnotation();
+    Iterable<JvmOperation> _declaredOperations = _annotation.getDeclaredOperations();
+    final Function1<JvmOperation,Boolean> _function_1 = new Function1<JvmOperation,Boolean>() {
+        public Boolean apply(final JvmOperation it) {
+          String _simpleName = it.getSimpleName();
+          boolean _equals = Objects.equal(_simpleName, property);
+          return Boolean.valueOf(_equals);
+        }
+      };
+    final JvmOperation op = IterableExtensions.<JvmOperation>findFirst(_declaredOperations, _function_1);
+    boolean _and = false;
+    boolean _notEquals_1 = (!Objects.equal(op, null));
+    if (!_notEquals_1) {
+      _and = false;
+    } else {
+      JvmAnnotationValue _defaultValue = op.getDefaultValue();
+      boolean _notEquals_2 = (!Objects.equal(_defaultValue, null));
+      _and = (_notEquals_1 && _notEquals_2);
+    }
+    if (_and) {
+      CompilationUnitImpl _compilationUnit_1 = this.getCompilationUnit();
+      JvmAnnotationValue _defaultValue_1 = op.getDefaultValue();
+      return _compilationUnit_1.translateAnnotationValue(_defaultValue_1);
+    }
+    return null;
   }
   
   public void set(final String name, final String... values) {

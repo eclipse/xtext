@@ -23,7 +23,9 @@ import org.eclipse.xtend.lib.macro.declaration.FieldDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.InterfaceDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.MemberDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.MethodDeclaration;
+import org.eclipse.xtend.lib.macro.declaration.MutableAnnotationReference;
 import org.eclipse.xtend.lib.macro.declaration.MutableClassDeclaration;
+import org.eclipse.xtend.lib.macro.declaration.MutableFieldDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.MutableInterfaceDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.MutableMemberDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.MutableMethodDeclaration;
@@ -97,6 +99,45 @@ public class DeclarationsTest extends AbstractXtendTestCase {
           final AnnotationReference inject = IterableExtensions.head(_annotations_2);
           Object _value_1 = inject.getValue("optional");
           Assert.assertTrue((((Boolean) _value_1)).booleanValue());
+        }
+      };
+    this.asCompilationUnit(_validFile, _function);
+  }
+  
+  @Test
+  public void testAnnotation2() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("class MyClass {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("@com.google.inject.Inject() MyClass foo");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    _builder.newLine();
+    XtendFile _validFile = this.validFile(_builder);
+    final Procedure1<CompilationUnitImpl> _function = new Procedure1<CompilationUnitImpl>() {
+        public void apply(final CompilationUnitImpl it) {
+          Iterable<? extends TypeDeclaration> _sourceTypeDeclarations = it.getSourceTypeDeclarations();
+          TypeDeclaration _head = IterableExtensions.head(_sourceTypeDeclarations);
+          final ClassDeclaration sourceClazz = ((ClassDeclaration) _head);
+          TypeLookupImpl _typeLookup = it.getTypeLookup();
+          final MutableClassDeclaration javaClass = _typeLookup.findClass("MyClass");
+          String _qualifiedName = javaClass.getQualifiedName();
+          String _qualifiedName_1 = sourceClazz.getQualifiedName();
+          Assert.assertEquals(_qualifiedName, _qualifiedName_1);
+          Iterable<? extends FieldDeclaration> _declaredFields = sourceClazz.getDeclaredFields();
+          final FieldDeclaration field = IterableExtensions.head(_declaredFields);
+          Iterable<? extends AnnotationReference> _annotations = field.getAnnotations();
+          AnnotationReference _head_1 = IterableExtensions.head(_annotations);
+          Object _value = _head_1.getValue("optional");
+          Assert.assertNull(_value);
+          Iterable<? extends MutableFieldDeclaration> _declaredFields_1 = javaClass.getDeclaredFields();
+          final MutableFieldDeclaration javaField = IterableExtensions.head(_declaredFields_1);
+          Iterable<? extends MutableAnnotationReference> _annotations_1 = javaField.getAnnotations();
+          MutableAnnotationReference _head_2 = IterableExtensions.head(_annotations_1);
+          Object _value_1 = _head_2.getValue("optional");
+          Assert.assertFalse((((Boolean) _value_1)).booleanValue());
         }
       };
     this.asCompilationUnit(_validFile, _function);
