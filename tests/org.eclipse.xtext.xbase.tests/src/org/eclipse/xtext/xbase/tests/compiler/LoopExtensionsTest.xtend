@@ -62,7 +62,7 @@ class LoopExtensionsTest extends AbstractXbaseTestCase {
 	
 	@Test
 	def testForEachWithShortcut() {
-		newArrayList('jan', 'hein', 'class', 'pit').assertForEachWithShortcut("{jan, hein, class, pit}")
+		newArrayList('jan', 'hein', 'class', 'pit').assertForEachWithShortcut("{ jan, hein, class, pit }")
 		newArrayList('foo').assertForEachWithShortcut("foo")
 		newArrayList().assertForEachWithShortcut("")
 	}

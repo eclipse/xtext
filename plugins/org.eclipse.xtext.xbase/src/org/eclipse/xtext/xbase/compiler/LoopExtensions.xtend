@@ -40,7 +40,7 @@ class LoopExtensions {
 			elements.head => procedure
 		else 
 			forEach(appendable, elements, [
-				prefix= '{' separator = ', ' suffix = '}'
+				prefix= '{ ' separator = ', ' suffix = ' }'
 			], procedure)
 	}
 }

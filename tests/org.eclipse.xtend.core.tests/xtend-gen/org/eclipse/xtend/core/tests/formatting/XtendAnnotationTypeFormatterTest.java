@@ -5,6 +5,7 @@ import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.preferences.MapBasedPreferenceValues;
 import org.eclipse.xtext.xbase.formatting.XbaseFormatterPreferenceKeys;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
+import org.junit.Ignore;
 import org.junit.Test;
 
 @SuppressWarnings("all")
@@ -88,6 +89,7 @@ public class XtendAnnotationTypeFormatterTest extends AbstractXtendFormatterTest
     this.assertFormatted(_function, _builder);
   }
   
+  @Ignore
   @Test
   public void formatFieldInit01() {
     final Procedure1<MapBasedPreferenceValues> _function = new Procedure1<MapBasedPreferenceValues>() {
@@ -105,6 +107,7 @@ public class XtendAnnotationTypeFormatterTest extends AbstractXtendFormatterTest
     this.assertFormatted(_function, _builder);
   }
   
+  @Ignore
   @Test
   public void formatFieldInit02() {
     final Procedure1<MapBasedPreferenceValues> _function = new Procedure1<MapBasedPreferenceValues>() {
@@ -125,6 +128,7 @@ public class XtendAnnotationTypeFormatterTest extends AbstractXtendFormatterTest
     this.assertFormatted(_function, _builder);
   }
   
+  @Ignore
   @Test
   public void formatFieldInit03() {
     final Procedure1<MapBasedPreferenceValues> _function = new Procedure1<MapBasedPreferenceValues>() {
@@ -142,6 +146,7 @@ public class XtendAnnotationTypeFormatterTest extends AbstractXtendFormatterTest
     this.assertFormatted(_function, _builder);
   }
   
+  @Ignore
   @Test
   public void formatFieldInit04() {
     final Procedure1<MapBasedPreferenceValues> _function = new Procedure1<MapBasedPreferenceValues>() {

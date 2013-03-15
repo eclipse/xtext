@@ -87,7 +87,7 @@ public class ConfiguredCompilerTest extends AbstractXtendCompilerTest {
     _builder.append("}");
     _builder.newLine();
     StringConcatenation _builder_1 = new StringConcatenation();
-    _builder_1.append("@SuppressWarnings({\"abc\", \"efg\"})");
+    _builder_1.append("@SuppressWarnings({ \"abc\", \"efg\" })");
     _builder_1.newLine();
     _builder_1.append("public class C {");
     _builder_1.newLine();

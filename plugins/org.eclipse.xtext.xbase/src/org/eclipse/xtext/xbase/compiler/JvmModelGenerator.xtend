@@ -249,14 +249,21 @@ class JvmModelGenerator implements IGenerator {
 			appendable.increaseIndentation
 			compilationStrategy.apply(appendable)
 			appendable.decreaseIndentation
-		} else {
-			val expression = associatedExpression
-			if (expression != null && config.generateExpressions) {
-				if(expression.hasErrors()) {
+		} else if (config.generateExpressions) {
+			val body = associatedExpression
+			if(body != null) {
+				if(body.hasErrors()) {
 					appendable.append("/* skipped default expression with errors */")
 				} else {
 					appendable.append(" default ")
-					compiler.compileAsJavaExpression(expression, appendable, returnType)
+					compiler.compileAsJavaExpression(body, appendable, returnType)
+				}
+			} else if (defaultValue != null) {
+				if(defaultValue.hasErrors()) {
+					appendable.append("/* skipped default expression with errors */")
+				} else {
+					appendable.append(" default ")
+					defaultValue.toJavaLiteral(appendable, config)
 				}
 			}
 		}
@@ -755,9 +762,12 @@ class JvmModelGenerator implements IGenerator {
 	} 
 	
 	def dispatch void toJavaLiteral(JvmCustomAnnotationValue it, ITreeAppendable appendable, GeneratorConfig config) {
-		appendable.forEachWithShortcut(values.filter(typeof(XExpression)), [
-			compiler.toJavaExpression(it, appendable)
-		])
+		if(values.isEmpty)
+			appendable.append('{}')
+		else 
+			appendable.forEachWithShortcut(values.filter(typeof(XExpression)), [
+				compiler.toJavaExpression(it, appendable)
+			])
 	}
 		
 	def TreeAppendable createAppendable(EObject context, ImportManager importManager, GeneratorConfig config) {

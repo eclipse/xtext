@@ -8,6 +8,7 @@
 package org.eclipse.xtend.core.tests.compiler
 
 import org.junit.Test
+import org.junit.Ignore
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -55,6 +56,48 @@ class AnnotationCompilerTest extends AbstractXtendCompilerTest {
 		''', '''
 			public @interface DependsOn {
 			  public String[] value() default { "abc", "efg" };
+			}
+		''')
+	}
+	
+	@Test
+	@Ignore
+	def testAnnotationWithDefaultIntArray() {
+		assertCompilesTo('''
+			annotation DependsOn {
+				val value = #[ 1, 2 ]
+			}
+		''', '''
+			public @interface DependsOn {
+			  public int[] value() default { 1, 2 };
+			}
+		''')
+	}
+	
+	@Test
+	@Ignore
+	def testAnnotationWithDefaultBooleanArray() {
+		assertCompilesTo('''
+			annotation DependsOn {
+				val value = #[ true, true ]
+			}
+		''', '''
+			public @interface DependsOn {
+			  public boolean[] value() default { true, true };
+			}
+		''')
+	}
+	
+	@Test
+	@Ignore
+	def testAnnotationWithDefaultLongArray() {
+		assertCompilesTo('''
+			annotation DependsOn {
+				val value = #[ 1l, 2l ]
+			}
+		''', '''
+			public @interface DependsOn {
+			  public long[] value() default { 1l, 2l };
 			}
 		''')
 	}
@@ -200,7 +243,7 @@ class AnnotationCompilerTest extends AbstractXtendCompilerTest {
 			public class TestXtend {
 			  private final static int a = 4;
 			  
-			  @Click({TestXtend.a, TestXtend.a})
+			  @Click({ TestXtend.a, TestXtend.a })
 			  public Object meth() {
 			    return null;
 			  }

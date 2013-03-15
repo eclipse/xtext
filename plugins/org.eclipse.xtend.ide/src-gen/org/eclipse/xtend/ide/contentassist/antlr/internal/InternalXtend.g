@@ -25394,8 +25394,8 @@ rule__AnnotationField__InitialValueAssignment_3_1
     }
 :
 (
-{ before(grammarAccess.getAnnotationFieldAccess().getInitialValueXExpressionParserRuleCall_3_1_0()); }
-	ruleXExpression{ after(grammarAccess.getAnnotationFieldAccess().getInitialValueXExpressionParserRuleCall_3_1_0()); }
+{ before(grammarAccess.getAnnotationFieldAccess().getInitialValueXAnnotationElementValueParserRuleCall_3_1_0()); }
+	ruleXAnnotationElementValue{ after(grammarAccess.getAnnotationFieldAccess().getInitialValueXAnnotationElementValueParserRuleCall_3_1_0()); }
 )
 
 ;

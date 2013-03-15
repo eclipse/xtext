@@ -59,7 +59,7 @@ AnnotationField returns XtendField :
 		|
 			type=JvmTypeReference name=ValidID
 	)
-	('=' initialValue=XExpression)? ';'?
+	('=' initialValue=XAnnotationElementValue)? ';'?
 ;
 	
 Member returns XtendMember:

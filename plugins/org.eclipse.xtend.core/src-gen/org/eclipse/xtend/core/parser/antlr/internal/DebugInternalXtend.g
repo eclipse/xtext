@@ -48,7 +48,7 @@ ruleAnnotationField :
 		ruleFieldModifier ruleCommonModifier* ruleJvmTypeReference? ruleValidID |
 		ruleJvmTypeReference ruleValidID
 	) (
-		'=' ruleXExpression
+		'=' ruleXAnnotationElementValue
 	)? ';'?
 ;
 
