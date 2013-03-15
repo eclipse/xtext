@@ -82,7 +82,10 @@ public class XbaseBreakpointUtil {
 				if (storage instanceof IResource)
 					return null;
 				if (storage instanceof IJarEntryResource) {
-					Object parent = ((IJarEntryResource) storage).getParent();
+					IJarEntryResource jarEntryResource = (IJarEntryResource) storage;
+					if (!jarEntryResource.getPackageFragmentRoot().isArchive())
+						return null;
+					Object parent = jarEntryResource.getParent();
 					if (parent instanceof IPackageFragment) {
 						String path = ((IPackageFragment) parent).getElementName().replace('.', '/');
 						return URI.createURI(path + "/" + storage.getName());
