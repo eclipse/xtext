@@ -128,7 +128,7 @@ public class StorageAwareTrace extends AbstractTrace {
 	
 	@Override
 	protected IStorage findStorage(URI uri, IProject project) {
-		Iterable<Pair<IStorage, IProject>> allStorages = getStorage2uriMapper().getStorages(uri);
+		Iterable<Pair<IStorage, IProject>> allStorages = getStorage2uriMapper().getStorages(resolvePath(uri));
 		for(Pair<IStorage, IProject> storage: allStorages) {
 			if (project.equals(storage.getSecond())) {
 				return storage.getFirst();

@@ -14,6 +14,7 @@ import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
 
 import org.eclipse.core.resources.IProject;
+import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.IStorage;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IPath;
@@ -58,6 +59,14 @@ public class ZipFileAwareTrace extends AbstractTrace {
 
 	protected void setZipFilePath(IPath zipFilePath) {
 		this.zipFilePath = zipFilePath;
+	}
+	
+	@Override
+	protected URI resolvePath(URI path) {
+		IResource member = getWorkspace().getRoot().findMember(zipFilePath);
+		if (member != null)
+			return URI.createURI("archive:platform:/resource" + member.getFullPath().toString() + "!/" + path);
+		return URI.createURI("archive:file:" + zipFilePath.toString() + "!/" + path);
 	}
 
 	@Override
