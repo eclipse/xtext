@@ -8,7 +8,6 @@
 package org.eclipse.xtext.xbase.tests.compiler.output;
 
 import java.io.InputStream;
-import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -67,7 +66,7 @@ public class CompilerTraceTest extends AbstractXbaseTestCase {
 		
 		@Override
 		@Nullable
-		protected ILocationInResource createLocationInResourceFor(@NonNull ILocationData location, @NonNull AbstractTraceRegion traceRegion, @NonNull Map<URI, URI> cache) {
+		protected ILocationInResource createLocationInResourceFor(@NonNull ILocationData location, @NonNull AbstractTraceRegion traceRegion) {
 			URI path = location.getPath();
 			if (path == null)
 				path = traceRegion.getAssociatedPath();

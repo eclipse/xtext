@@ -35,12 +35,13 @@ public abstract class AbstractLocationInResource implements ILocationInResource 
 	private final AbstractTrace trace;
 	private URI eObjectURI;
 	private boolean triedToComputeURI;
+	private URI absoluteURI;
 
 	protected AbstractLocationInResource(AbstractTrace trace) {
 		this.trace = trace;
 	}
 
-	public abstract URI getResourceURI();
+	public abstract URI getSrcRelativeResourceURI();
 	protected abstract int getOffset();
 	protected abstract int getLength();
 	protected abstract int getLineNumber();
@@ -48,7 +49,7 @@ public abstract class AbstractLocationInResource implements ILocationInResource 
 	
 	@NonNull
 	public IStorage getStorage() {
-		IStorage result = trace.findStorage(trace.resolvePath(getResourceURI()), getProject());
+		IStorage result = trace.findStorage(getSrcRelativeResourceURI(), getProject());
 		return result;
 	}
 
@@ -57,8 +58,15 @@ public abstract class AbstractLocationInResource implements ILocationInResource 
 		return result;
 	}
 	
+	public URI getAbsoluteResourceURI() {
+		if (absoluteURI == null) {
+			absoluteURI = trace.resolvePath(getSrcRelativeResourceURI());
+		}
+		return absoluteURI;
+	}
+	
 	public InputStream getContents() throws CoreException {
-		return trace.getContents(trace.resolvePath(getResourceURI()), getProject());
+		return trace.getContents(getSrcRelativeResourceURI(), getProject());
 	}
 	
 	public @NonNull IProject getProject() {
@@ -66,13 +74,13 @@ public abstract class AbstractLocationInResource implements ILocationInResource 
 	}
 	
 	public LanguageInfo getLanguage() {
-		LanguageInfo result = trace.findLanguage(getResourceURI());
+		LanguageInfo result = trace.findLanguage(getAbsoluteResourceURI());
 		return result;
 	}
 
 	public URI getEObjectURI() {
 		if (eObjectURI == null && !triedToComputeURI) {
-			Resource resource = trace.getResource(getResourceURI(), getProject());
+			Resource resource = trace.getResource(getAbsoluteResourceURI(), getProject());
 			if (resource instanceof XtextResource) {
 				IParseResult parseResult = ((XtextResource) resource).getParseResult();
 				if (parseResult != null) {
