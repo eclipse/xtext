@@ -54,7 +54,7 @@ public class JvmOutlineNodeElementOpener extends OutlineNodeElementOpener {
 							ISourceRange sourceRange = ((IMember) javaElement).getSourceRange();
 							ILocationInResource sourceInformation = traceToSource.getBestAssociatedLocation(new TextRegion(sourceRange.getOffset(), sourceRange.getLength()));
 							if (sourceInformation != null) {
-								globalURIEditorOpener.open(sourceInformation.getResourceURI(), javaElement, true);
+								globalURIEditorOpener.open(sourceInformation.getAbsoluteResourceURI(), javaElement, true);
 								return;
 							}
 						}
