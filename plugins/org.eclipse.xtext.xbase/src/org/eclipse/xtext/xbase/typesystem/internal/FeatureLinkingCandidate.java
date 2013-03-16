@@ -200,6 +200,9 @@ public class FeatureLinkingCandidate extends AbstractPendingLinkingCandidate<XAb
 		if (feature instanceof JvmConstructor) {
 			return "constructor";
 		}
+		if (feature instanceof JvmType) {
+			return "type";
+		}
 		throw new IllegalStateException();
 	}
 

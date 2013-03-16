@@ -519,6 +519,9 @@ public abstract class ResolvedTypes implements IResolvedTypes {
 			ITypeExpectation expectation = typeData.getExpectation();
 			LightweightTypeReference expectedType = expectation.getExpectedType();
 			if (expectedType != null) {
+				if (actualType.isRawType()) {
+					expectedType = expectedType.getRawTypeReference();
+				}
 				TypeConformanceResult conformanceResult = expectedType.getUpperBoundSubstitute().internalIsAssignableFrom(actualType, new TypeConformanceComputationArgument());
 				conformanceHints.addAll(conformanceResult.getConformanceHints());
 				conformanceHints.remove(ConformanceHint.UNCHECKED);

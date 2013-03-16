@@ -10,6 +10,7 @@ package org.eclipse.xtext.xbase.typesystem.references;
 import java.util.Collections;
 import java.util.EnumSet;
 import java.util.List;
+import java.util.Set;
 
 import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.jdt.annotation.Nullable;
@@ -163,9 +164,9 @@ public class UnboundTypeReference extends LightweightTypeReference {
 	}
 	
 	@Override
-	public boolean isRawType() {
+	protected boolean isRawType(Set<JvmType> seenTypes) {
 		if (internalGetResolvedTo() != null)
-			return resolvedTo.isRawType();
+			return resolvedTo.isRawType(seenTypes);
 		return false;
 	}
 	
