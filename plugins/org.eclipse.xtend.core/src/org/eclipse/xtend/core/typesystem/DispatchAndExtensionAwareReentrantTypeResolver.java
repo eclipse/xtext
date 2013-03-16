@@ -102,7 +102,7 @@ public class DispatchAndExtensionAwareReentrantTypeResolver extends LogicalConta
 			TypeConformanceComputer conformanceComputer = getServices().getTypeConformanceComputer();
 			if (types.isEmpty())
 				return null;
-			LightweightTypeReference result = conformanceComputer.getCommonSuperType(types);
+			LightweightTypeReference result = conformanceComputer.getCommonSuperType(types, resolvedTypes.getReferenceOwner());
 			if (result == null) {
 				Iterator<LightweightTypeReference> iterator = types.iterator();
 				while(iterator.hasNext()) {
@@ -110,7 +110,7 @@ public class DispatchAndExtensionAwareReentrantTypeResolver extends LogicalConta
 						iterator.remove();
 					}
 				}
-				result = conformanceComputer.getCommonSuperType(types);
+				result = conformanceComputer.getCommonSuperType(types, resolvedTypes.getReferenceOwner());
 				if (result == null) {
 					throw new UnsupportedOperationException("Cannot determine common super type of: " + types);
 				}
@@ -164,7 +164,7 @@ public class DispatchAndExtensionAwareReentrantTypeResolver extends LogicalConta
 			if (parameterTypes.isEmpty()) {
 				return getServices().getTypeReferences().getTypeForName(Object.class, operation);
 			}
-			LightweightTypeReference parameterType = conformanceComputer.getCommonSuperType(parameterTypes);
+			LightweightTypeReference parameterType = conformanceComputer.getCommonSuperType(parameterTypes, resolvedTypes.getReferenceOwner());
 			if (parameterType == null) {
 				throw new IllegalStateException("TODO: handle broken models properly");
 			}
@@ -421,7 +421,10 @@ public class DispatchAndExtensionAwareReentrantTypeResolver extends LogicalConta
 				}
 			}
 			if (hasInferredCase) {
-				LightweightTypeReference commonDispatchType = declaredDispatcherType != null ? declaredDispatcherType : getServices().getTypeConformanceComputer().getCommonSuperType(dispatchCaseResults);
+				LightweightTypeReference commonDispatchType = 
+						declaredDispatcherType != null 
+							? declaredDispatcherType 
+							: getServices().getTypeConformanceComputer().getCommonSuperType(dispatchCaseResults, childResolvedTypes.getReferenceOwner());
 				if (commonDispatchType != null) {
 					for(JvmOperation dispatchCase: dispatchCases) {
 						JvmTypeReference returnType = dispatchCase.getReturnType();

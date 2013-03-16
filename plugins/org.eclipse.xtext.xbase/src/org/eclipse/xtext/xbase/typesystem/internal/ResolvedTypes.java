@@ -104,6 +104,11 @@ public abstract class ResolvedTypes implements IResolvedTypes {
 			return ResolvedTypes.this.getDeclaredTypeParameters();
 		}
 		
+		@Override
+		public String toString() {
+			return String.format("Owner: %s", ResolvedTypes.this);
+		}
+		
 	}
 	
 	private final OwnedConverter converter;
@@ -322,7 +327,7 @@ public abstract class ResolvedTypes implements IResolvedTypes {
 			LightweightTypeReference result = types.get(0);
 			return result;
 		}
-		LightweightTypeReference result = getServices().getTypeConformanceComputer().getCommonSuperType(types);
+		LightweightTypeReference result = getServices().getTypeConformanceComputer().getCommonSuperType(types, getReferenceOwner());
 		if (result != null || types.isEmpty()) {
 			return result;
 		}

@@ -102,6 +102,32 @@ public class ValidatingRootResolvedTypes extends RootResolvedTypes {
     super.acceptHint(handle, boundTypeArgument);
   }
   
+  protected List<LightweightBoundTypeArgument> getHints(final Object handle) {
+    final List<LightweightBoundTypeArgument> result = super.getHints(handle);
+    final Procedure1<LightweightBoundTypeArgument> _function = new Procedure1<LightweightBoundTypeArgument>() {
+        public void apply(final LightweightBoundTypeArgument it) {
+          boolean _and = false;
+          LightweightTypeReference _typeReference = it.getTypeReference();
+          boolean _notEquals = (!Objects.equal(_typeReference, null));
+          if (!_notEquals) {
+            _and = false;
+          } else {
+            LightweightTypeReference _typeReference_1 = it.getTypeReference();
+            ITypeReferenceOwner _referenceOwner = ValidatingRootResolvedTypes.this.getReferenceOwner();
+            boolean _isOwnedBy = _typeReference_1.isOwnedBy(_referenceOwner);
+            boolean _not = (!_isOwnedBy);
+            _and = (_notEquals && _not);
+          }
+          if (_and) {
+            IllegalArgumentException _illegalArgumentException = new IllegalArgumentException("reference is not owned by this resolved types");
+            throw _illegalArgumentException;
+          }
+        }
+      };
+    IterableExtensions.<LightweightBoundTypeArgument>forEach(result, _function);
+    return result;
+  }
+  
   public LightweightTypeReference acceptType(final XExpression expression, final AbstractTypeExpectation expectation, final LightweightTypeReference type, final boolean returnType, final ConformanceHint... hints) {
     LightweightTypeReference _xblockexpression = null;
     {

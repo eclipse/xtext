@@ -46,20 +46,20 @@ class CommonSuperTypeTest extends AbstractTestingTypeReferenceOwner {
 		val operation = function.directlyInferredOperation
 		val typeReferences = new ArrayList(operation.parameters.map [ parameterType.toLightweightReference ])
 		val conformanceComputer = services.typeConformanceComputer 
-		var computedSuperType = conformanceComputer.getCommonSuperType(typeReferences)
+		var computedSuperType = conformanceComputer.getCommonSuperType(typeReferences, this)
 		assertEquals(superTypeAndParam.key, computedSuperType?.simpleName)
-		computedSuperType = services.typeConformanceComputer.getCommonSuperType((typeReferences + typeReferences).toList)
+		computedSuperType = services.typeConformanceComputer.getCommonSuperType((typeReferences + typeReferences).toList, this)
 		assertEquals(superTypeAndParam.key, computedSuperType?.simpleName)
-		computedSuperType = services.typeConformanceComputer.getCommonSuperType(typeReferences.reverseView)
+		computedSuperType = services.typeConformanceComputer.getCommonSuperType(typeReferences.reverseView, this)
 		assertEquals(superTypeAndParam.key, computedSuperType?.simpleName)
 		if (!(computedSuperType?.primitiveVoid || computedSuperType?.primitive)) {
-			computedSuperType = services.typeConformanceComputer.getCommonSuperType((typeReferences + newImmutableList(new AnyTypeReference(this), new AnyTypeReference(this))).toList)
+			computedSuperType = services.typeConformanceComputer.getCommonSuperType((typeReferences + newImmutableList(new AnyTypeReference(this), new AnyTypeReference(this))).toList, this)
 			assertEquals(superTypeAndParam.key, computedSuperType?.simpleName)
 		}
 		if (computedSuperType != null) {
 			computedSuperType => [ superType |
 				typeReferences.forEach [
-					assertEquals(superTypeAndParam.key, conformanceComputer.getCommonSuperType(#[it, superType])?.simpleName)
+					assertEquals(superTypeAndParam.key, conformanceComputer.getCommonSuperType(#[it, superType], superType.owner)?.simpleName)
 				]
 			]
 		}
@@ -203,7 +203,7 @@ class CommonSuperTypeTest extends AbstractTestingTypeReferenceOwner {
 	@Test
 	def void testCommonSuperType_23() {
 		val types = <LightweightTypeReference>newImmutableList(new AnyTypeReference(this), new AnyTypeReference(this))
-		val superType = services.typeConformanceComputer.getCommonSuperType(types)
+		val superType = services.typeConformanceComputer.getCommonSuperType(types, this)
 		assertEquals("null", superType.simpleName)
 	}
 	

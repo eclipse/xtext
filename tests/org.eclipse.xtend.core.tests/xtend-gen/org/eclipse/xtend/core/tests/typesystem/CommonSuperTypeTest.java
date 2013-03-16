@@ -36,6 +36,7 @@ import org.eclipse.xtext.xbase.lib.StringExtensions;
 import org.eclipse.xtext.xbase.typesystem.conformance.TypeConformanceComputer;
 import org.eclipse.xtext.xbase.typesystem.references.AnyTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.FunctionTypeReference;
+import org.eclipse.xtext.xbase.typesystem.references.ITypeReferenceOwner;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.ParameterizedTypeReference;
 import org.eclipse.xtext.xbase.typesystem.util.CommonTypeComputationServices;
@@ -104,7 +105,7 @@ public class CommonSuperTypeTest extends AbstractTestingTypeReferenceOwner {
       final ArrayList<LightweightTypeReference> typeReferences = _arrayList;
       CommonTypeComputationServices _services = this.getServices();
       final TypeConformanceComputer conformanceComputer = _services.getTypeConformanceComputer();
-      LightweightTypeReference computedSuperType = conformanceComputer.getCommonSuperType(typeReferences);
+      LightweightTypeReference computedSuperType = conformanceComputer.getCommonSuperType(typeReferences, this);
       String _key = superTypeAndParam.getKey();
       String _simpleName = computedSuperType==null?(String)null:computedSuperType.getSimpleName();
       Assert.assertEquals(_key, _simpleName);
@@ -112,7 +113,7 @@ public class CommonSuperTypeTest extends AbstractTestingTypeReferenceOwner {
       TypeConformanceComputer _typeConformanceComputer = _services_1.getTypeConformanceComputer();
       Iterable<LightweightTypeReference> _plus = Iterables.<LightweightTypeReference>concat(typeReferences, typeReferences);
       List<LightweightTypeReference> _list = IterableExtensions.<LightweightTypeReference>toList(_plus);
-      LightweightTypeReference _commonSuperType = _typeConformanceComputer.getCommonSuperType(_list);
+      LightweightTypeReference _commonSuperType = _typeConformanceComputer.getCommonSuperType(_list, this);
       computedSuperType = _commonSuperType;
       String _key_1 = superTypeAndParam.getKey();
       String _simpleName_1 = computedSuperType==null?(String)null:computedSuperType.getSimpleName();
@@ -120,7 +121,7 @@ public class CommonSuperTypeTest extends AbstractTestingTypeReferenceOwner {
       CommonTypeComputationServices _services_2 = this.getServices();
       TypeConformanceComputer _typeConformanceComputer_1 = _services_2.getTypeConformanceComputer();
       List<LightweightTypeReference> _reverseView = ListExtensions.<LightweightTypeReference>reverseView(typeReferences);
-      LightweightTypeReference _commonSuperType_1 = _typeConformanceComputer_1.getCommonSuperType(_reverseView);
+      LightweightTypeReference _commonSuperType_1 = _typeConformanceComputer_1.getCommonSuperType(_reverseView, this);
       computedSuperType = _commonSuperType_1;
       String _key_2 = superTypeAndParam.getKey();
       String _simpleName_2 = computedSuperType==null?(String)null:computedSuperType.getSimpleName();
@@ -142,7 +143,7 @@ public class CommonSuperTypeTest extends AbstractTestingTypeReferenceOwner {
         List<LightweightTypeReference> _newImmutableList = CollectionLiterals.<LightweightTypeReference>newImmutableList(_anyTypeReference, _anyTypeReference_1);
         Iterable<LightweightTypeReference> _plus_1 = Iterables.<LightweightTypeReference>concat(typeReferences, _newImmutableList);
         List<LightweightTypeReference> _list_1 = IterableExtensions.<LightweightTypeReference>toList(_plus_1);
-        LightweightTypeReference _commonSuperType_2 = _typeConformanceComputer_2.getCommonSuperType(_list_1);
+        LightweightTypeReference _commonSuperType_2 = _typeConformanceComputer_2.getCommonSuperType(_list_1, this);
         computedSuperType = _commonSuperType_2;
         String _key_3 = superTypeAndParam.getKey();
         String _simpleName_3 = computedSuperType==null?(String)null:computedSuperType.getSimpleName();
@@ -160,7 +161,8 @@ public class CommonSuperTypeTest extends AbstractTestingTypeReferenceOwner {
                     _builder.add(it);
                     _builder.add(superType);
                     _xlistliteral = _builder.build();
-                    LightweightTypeReference _commonSuperType = conformanceComputer.getCommonSuperType(_xlistliteral);
+                    ITypeReferenceOwner _owner = superType.getOwner();
+                    LightweightTypeReference _commonSuperType = conformanceComputer.getCommonSuperType(_xlistliteral, _owner);
                     String _simpleName = _commonSuperType==null?(String)null:_commonSuperType.getSimpleName();
                     Assert.assertEquals(_key, _simpleName);
                   }
@@ -354,7 +356,7 @@ public class CommonSuperTypeTest extends AbstractTestingTypeReferenceOwner {
     final List<LightweightTypeReference> types = CollectionLiterals.<LightweightTypeReference>newImmutableList(_anyTypeReference, _anyTypeReference_1);
     CommonTypeComputationServices _services = this.getServices();
     TypeConformanceComputer _typeConformanceComputer = _services.getTypeConformanceComputer();
-    final LightweightTypeReference superType = _typeConformanceComputer.getCommonSuperType(types);
+    final LightweightTypeReference superType = _typeConformanceComputer.getCommonSuperType(types, this);
     String _simpleName = superType.getSimpleName();
     Assert.assertEquals("null", _simpleName);
   }

@@ -51,7 +51,7 @@ public class CompoundTypeReference extends LightweightTypeReference {
 	
 	@Override
 	public JvmTypeReference toJavaCompliantTypeReference() {
-		LightweightTypeReference type = getServices().getTypeConformanceComputer().getCommonSuperType(components);
+		LightweightTypeReference type = getServices().getTypeConformanceComputer().getCommonSuperType(components, getOwner());
 		if (type == null) {
 			return getOwner().getServices().getTypeReferences().getTypeForName(Object.class, getOwner().getContextResourceSet());
 		}
@@ -252,7 +252,7 @@ public class CompoundTypeReference extends LightweightTypeReference {
 	
 	@Override
 	public LightweightTypeReference toJavaType() {
-		LightweightTypeReference result = getServices().getTypeConformanceComputer().getCommonSuperType(getMultiTypeComponents());
+		LightweightTypeReference result = getServices().getTypeConformanceComputer().getCommonSuperType(getMultiTypeComponents(), getOwner());
 		if (result == null) {
 			throw new IllegalStateException("Cannot expression " + this + " as Java type reference");
 		}

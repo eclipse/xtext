@@ -449,7 +449,7 @@ public class XbaseTypeComputer implements ITypeComputer {
 			}
 			List<LightweightTypeReference> listTypeCandidates = computeCollectionTypeCandidates(literal, listType, elementTypeExpectation, state);
 			if(!listTypeCandidates.isEmpty()) {
-				LightweightTypeReference commonListType = services.getTypeConformanceComputer().getCommonSuperType(listTypeCandidates);
+				LightweightTypeReference commonListType = services.getTypeConformanceComputer().getCommonSuperType(listTypeCandidates, state.getReferenceOwner());
 				expectation.acceptActualType(commonListType, ConformanceHint.UNCHECKED);
 			} else {
 				ParameterizedTypeReference unboundCollectionType = new ParameterizedTypeReference(state.getReferenceOwner(), listType);
@@ -471,7 +471,7 @@ public class XbaseTypeComputer implements ITypeComputer {
 			}
 			List<LightweightTypeReference> setTypeCandidates = computeCollectionTypeCandidates(literal, setType, elementTypeExpectation, state);
 			if(!setTypeCandidates.isEmpty()) {
-				LightweightTypeReference commonSetType = services.getTypeConformanceComputer().getCommonSuperType(setTypeCandidates);
+				LightweightTypeReference commonSetType = services.getTypeConformanceComputer().getCommonSuperType(setTypeCandidates, state.getReferenceOwner());
 				LightweightTypeReference commonElementType = commonSetType.getTypeArguments().get(0).getInvariantBoundSubstitute();
 				JvmGenericType pairType = (JvmGenericType) services.getTypeReferences().findDeclaredType(Pair.class, literal);
 				if(!(expectedType != null && expectedType.isType(Set.class)) && commonElementType.getType() == pairType) {
