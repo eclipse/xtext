@@ -9,6 +9,7 @@ package org.eclipse.xtext.xbase.typesystem.references;
 
 import java.io.Serializable;
 import java.util.List;
+import java.util.Set;
 
 import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.jdt.annotation.Nullable;
@@ -115,8 +116,8 @@ public class ArrayTypeReference extends LightweightTypeReference {
 	}
 	
 	@Override
-	public boolean isRawType() {
-		return component.isRawType();
+	protected boolean isRawType(Set<JvmType> seenTypes) {
+		return component.isRawType(seenTypes);
 	}
 	
 	@Override

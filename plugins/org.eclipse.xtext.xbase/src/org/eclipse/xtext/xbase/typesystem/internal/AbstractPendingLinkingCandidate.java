@@ -450,13 +450,16 @@ public abstract class AbstractPendingLinkingCandidate<Expression extends XExpres
 		List<JvmTypeParameter> typeParameters = getDeclaredTypeParameters();
 		int max = Math.min(typeArguments.size(), typeParameters.size());
 		int failures = 0;
-		TypeParameterByConstraintSubstitutor substitutor = new TypeParameterByConstraintSubstitutor(getDeclaratorParameterMapping(), getState().getReferenceOwner());
+		TypeParameterByConstraintSubstitutor substitutor = new TypeParameterByConstraintSubstitutor(
+				getDeclaratorParameterMapping(), getState().getReferenceOwner());
 		for(int i = 0; i < max; i++) {
 			LightweightTypeReference argument = typeArguments.get(i);
 			JvmTypeParameter declaration = typeParameters.get(i);
-			LightweightTypeReference substitute = substitutor.substitute(declaration);
-			if (!substitute.isAssignableFrom(argument)) {
-				failures++;
+			if (argument.getType() != declaration) {
+				LightweightTypeReference substitute = substitutor.substitute(declaration);
+				if (!substitute.isAssignableFrom(argument)) {
+					failures++;
+				}
 			}
 			substitutor.enhanceMapping(singletonMap(declaration, new LightweightMergedBoundTypeArgument(argument, VarianceInfo.INVARIANT)));
 		}

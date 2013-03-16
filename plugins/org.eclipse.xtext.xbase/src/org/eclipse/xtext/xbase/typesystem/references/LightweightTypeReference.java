@@ -165,7 +165,20 @@ public abstract class LightweightTypeReference {
 		return this;
 	}
 	
-	public boolean isRawType() {
+	/**
+	 * Returns <code>true</code> is this type points to a raw type. 
+	 * That is, it points to a parameterized type but does not define type arguments or
+	 * it points to an external type parameter that has a raw type constraint.
+	 * Type parameters that are declared by the current owner are not considered to be raw types.
+	 */
+	public final boolean isRawType() {
+		return isRawType(Sets.<JvmType>newHashSetWithExpectedSize(1));
+	}
+	
+	/**
+	 * @param seenTypes an aggregating set of traversed types to guard against infinite recursion
+	 */
+	protected boolean isRawType(Set<JvmType> seenTypes) {
 		return false;
 	}
 	
@@ -358,6 +371,10 @@ public abstract class LightweightTypeReference {
 		}
 	}
 	
+	/**
+     * Determines if this type reference denotes the same type or a supertype of 
+     * the given {@code clazz}.
+     */
 	public boolean isAssignableFrom(Class<?> clazz) {
 		if (isType(clazz)) {
 			return true;
@@ -369,6 +386,10 @@ public abstract class LightweightTypeReference {
 		return isAssignableFrom(type);
 	}
 
+	/**
+     * Determines if this type reference denotes the same type or a supertype of 
+     * the given {@code type}.
+     */
 	public boolean isAssignableFrom(JvmType type) {
 		if (type == null) {
 			throw new IllegalArgumentException("type may not be null");
@@ -378,6 +399,10 @@ public abstract class LightweightTypeReference {
 		return result;
 	}
 	
+	/**
+     * Determines if this type reference denotes the same type or a subtype of 
+     * the given {@code clazz}.
+     */
 	public boolean isSubtypeOf(Class<?> clazz) {
 		if (isType(clazz)) {
 			return true;
@@ -389,6 +414,10 @@ public abstract class LightweightTypeReference {
 		return isSubtypeOf(type);
 	}
 	
+	/**
+     * Determines if this type reference denotes the same type or a subtype of 
+     * the given {@code type}.
+     */
 	public boolean isSubtypeOf(JvmType type) {
 		if (type == null) {
 			throw new IllegalArgumentException("type may not be null");

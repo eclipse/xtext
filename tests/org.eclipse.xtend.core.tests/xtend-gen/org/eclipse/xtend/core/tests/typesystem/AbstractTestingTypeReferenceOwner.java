@@ -15,6 +15,7 @@ import org.eclipse.xtend.core.tests.AbstractXtendTestCase;
 import org.eclipse.xtend.core.xtend.XtendFunction;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.JvmTypeReference;
+import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Functions.Function0;
 import org.eclipse.xtext.xbase.typesystem.references.ITypeReferenceOwner;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightBoundTypeArgument;
@@ -68,8 +69,7 @@ public abstract class AbstractTestingTypeReferenceOwner extends AbstractXtendTes
   }
   
   public List<JvmTypeParameter> getDeclaredTypeParameters() {
-    UnsupportedOperationException _unsupportedOperationException = new UnsupportedOperationException("Auto-generated function stub");
-    throw _unsupportedOperationException;
+    return CollectionLiterals.<JvmTypeParameter>emptyList();
   }
   
   public ResourceSet getContextResourceSet() {
