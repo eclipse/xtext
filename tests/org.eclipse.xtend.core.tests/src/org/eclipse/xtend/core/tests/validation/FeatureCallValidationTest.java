@@ -466,6 +466,30 @@ public class FeatureCallValidationTest extends AbstractXtendTestCase {
 				org.eclipse.xtext.xbase.validation.IssueCodes.TYPE_BOUNDS_MISSMATCH);
 	}
 	
+	@Test public void testFeatureCallTypeBounds_4() throws Exception {
+		XtendClass clazz = clazz(
+				"@Data class Weight<T extends Comparable<T>> implements Comparable<Weight> {\n" + 
+				"	T weight\n" + 
+				"	override int compareTo(Weight w) {\n" + 
+				"		weight.compareTo(w.weight)\n" + 
+				"	}\n" + 
+				"}");
+		helper.assertError(clazz, XbasePackage.Literals.XMEMBER_FEATURE_CALL,
+				org.eclipse.xtext.xbase.validation.IssueCodes.INCOMPATIBLE_TYPES, "Type mismatch: cannot convert from Comparable to T");
+	}
+	
+	@Test public void testFeatureCallTypeBounds_5() throws Exception {
+		XtendClass clazz = clazz(
+				"@Data class Weight<T extends Comparable<T>> implements Comparable<Weight<T>> {\n" + 
+						"	T weight\n" + 
+						"	override int compareTo(Weight w) {\n" + 
+						"		weight.compareTo(w.weight)\n" + 
+						"	}\n" + 
+				"}");
+		helper.assertError(clazz, XbasePackage.Literals.XMEMBER_FEATURE_CALL,
+				org.eclipse.xtext.xbase.validation.IssueCodes.INCOMPATIBLE_TYPES, "Type mismatch: cannot convert from Comparable to T");
+	}
+	
 	@Test
 	@Ignore("TODO improve error message - shouldn't be Could not resolve reference")
 	public void testInvalidReceiverForExtension_01() throws Exception {

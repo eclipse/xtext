@@ -221,9 +221,10 @@ public class RawTypeHelper implements IRawTypeHelper {
 		
 		@Override
 		public LightweightTypeReference doVisitParameterizedTypeReference(ParameterizedTypeReference reference, ResourceSet resourceSet) {
-			if (reference.isRawType())
-				return reference;
 			JvmType type = reference.getType();
+			if (reference.isRawType() && !(type instanceof JvmTypeParameter)) {
+				return reference;
+			}
 			if (type instanceof JvmTypeParameter) {
 				return getRawTypeFromConstraints(reference.getOwner(), (JvmTypeParameter) type, resourceSet);
 			} 

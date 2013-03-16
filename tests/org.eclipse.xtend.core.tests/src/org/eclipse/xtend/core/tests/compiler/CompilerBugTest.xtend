@@ -222,6 +222,75 @@ class CompilerBugTest extends AbstractXtendCompilerTest {
 	}
 	
 	@Test
+	def testWeightComparable_04() {
+		assertCompilesTo('''
+			@Data class Weight<T extends Comparable> implements Comparable<Weight> {
+				T weight
+				
+				override int compareTo(Weight w) {
+					this.weight.compareTo(w.weight)
+				}
+			}
+		''', '''
+			import org.eclipse.xtend.lib.Data;
+			import org.eclipse.xtext.xbase.lib.util.ToStringHelper;
+			
+			@Data
+			@SuppressWarnings("all")
+			public class Weight<T extends Comparable> implements Comparable<Weight> {
+			  private final T _weight;
+			  
+			  public T getWeight() {
+			    return this._weight;
+			  }
+			  
+			  public int compareTo(final Weight w) {
+			    T _weight = this.getWeight();
+			    Comparable _weight_1 = w.getWeight();
+			    int _compareTo = _weight.compareTo(_weight_1);
+			    return _compareTo;
+			  }
+			  
+			  public Weight(final T weight) {
+			    super();
+			    this._weight = weight;
+			  }
+			  
+			  @Override
+			  public int hashCode() {
+			    final int prime = 31;
+			    int result = 1;
+			    result = prime * result + ((_weight== null) ? 0 : _weight.hashCode());
+			    return result;
+			  }
+			  
+			  @Override
+			  public boolean equals(final Object obj) {
+			    if (this == obj)
+			      return true;
+			    if (obj == null)
+			      return false;
+			    if (getClass() != obj.getClass())
+			      return false;
+			    Weight other = (Weight) obj;
+			    if (_weight == null) {
+			      if (other._weight != null)
+			        return false;
+			    } else if (!_weight.equals(other._weight))
+			      return false;
+			    return true;
+			  }
+			  
+			  @Override
+			  public String toString() {
+			    String result = new ToStringHelper().toString(this);
+			    return result;
+			  }
+			}
+		''')
+	}
+	
+	@Test
 	def testListLiteral() {
 		assertCompilesTo('''
 			class C {

@@ -92,7 +92,7 @@ public class ParameterizedTypeReference extends LightweightTypeReference {
 			if (!((JvmGenericType) type).getTypeParameters().isEmpty() && expose(typeArguments).isEmpty())
 				return true;
 		} 
-		else if (type instanceof JvmTypeParameter && !getOwner().getDeclaredTypeParameters().contains(type) && seenTypes.add(type)) {
+		else if (type instanceof JvmTypeParameter && seenTypes.add(type)) {
 			JvmTypeParameter typeParameter = (JvmTypeParameter) type;
 			List<JvmTypeConstraint> constraints = typeParameter.getConstraints();
 			for(JvmTypeConstraint constraint: constraints) {
