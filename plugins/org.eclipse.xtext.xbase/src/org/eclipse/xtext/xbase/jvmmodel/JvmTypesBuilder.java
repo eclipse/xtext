@@ -620,10 +620,11 @@ public class JvmTypesBuilder {
 	 * Produces an inferred type which will be resolved on demand. It should not be attempted to resolve
 	 * this type during the model inference.
 	 * 
-	 * @param expression the expression that will be used resolve the type
+	 * @param expression the expression that will be used resolve the type. May not be <code>null</code>.
 	 * @return an inferred type.
 	 */
 	public JvmTypeReference inferredType(XExpression expression) {
+		Preconditions.checkNotNull(expression);
 		XComputedTypeReference result = xtypesFactory.createXComputedTypeReference();
 		result.setTypeProvider(new InferredTypeIndicator(expression));
 		return result;
@@ -1252,8 +1253,12 @@ public class JvmTypesBuilder {
 					if(translator == null) 
 						translator = translator(expr, evaluate);
 					if(translator != null) {
-						if(result == null) 
+						if(result == null) { 
 							result = translator.createValue(expr);
+							if (result == null) {
+								return null;
+							}
+						}
 						translator.appendValue(result, expr);
 					}
 				}
@@ -1261,6 +1266,9 @@ public class JvmTypesBuilder {
 				translator = translator(value, evaluate);
 				if(translator != null) {
 					result = translator.createValue(value);
+					if (result == null) {
+						return result;
+					}
 					translator.appendValue(result, value);
 				}
 			}
@@ -1292,6 +1300,7 @@ public class JvmTypesBuilder {
 				
 				LightweightTypeReference expectedType = null;
 				
+				@Nullable
 				public JvmAnnotationValue createValue(XExpression expr) {
 					Object value;
 					try {
@@ -1335,7 +1344,6 @@ public class JvmTypesBuilder {
 					this.expectedType = ownedConverter.apply(newTypeRef(expr, expectedJavaType));
 				}
 
-				@SuppressWarnings("unchecked")
 				public void appendValue(JvmAnnotationValue annotationValue, XExpression expr) {
 					Object value;
 					try {
@@ -1347,6 +1355,7 @@ public class JvmTypesBuilder {
 					EStructuralFeature valueAttribute = annotationValue.eClass().getEStructuralFeature("values");
 					Class<?> instanceClass = ((EDataType) valueAttribute.getEType()).getInstanceClass();
 					if(instanceClass.isAssignableFrom(value.getClass())) {
+						@SuppressWarnings("unchecked")
 						List<Object> values = (List<Object>) annotationValue.eGet(valueAttribute);
 						values.add(value);
 					}
@@ -1358,7 +1367,6 @@ public class JvmTypesBuilder {
 					return typesFactory.createJvmCustomAnnotationValue();
 				}
 				
-				@SuppressWarnings("unchecked")
 				public void appendValue(JvmAnnotationValue annotationValue, XExpression expr) {
 					((JvmCustomAnnotationValue)annotationValue).getValues().add(expr);
 				}
@@ -1366,7 +1374,8 @@ public class JvmTypesBuilder {
 		}
 	}
 
-	public interface AnnotationValueTranslator {
+	protected interface AnnotationValueTranslator {
+		@Nullable
 		JvmAnnotationValue createValue(XExpression expr);
 
 		void appendValue(JvmAnnotationValue value, XExpression expr);
