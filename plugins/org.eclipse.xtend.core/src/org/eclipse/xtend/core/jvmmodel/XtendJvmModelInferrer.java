@@ -274,13 +274,14 @@ public class XtendJvmModelInferrer implements IJvmModelInferrer {
 					JvmTypeReference returnType = null;
 					if (field.getType() != null) {
 						returnType = jvmTypesBuilder.cloneWithProxies(field.getType());
-					} else {
+					} else if (field.getInitialValue() != null) {
 						returnType = jvmTypesBuilder.inferredType(field.getInitialValue());
 					}
 					operation.setReturnType(returnType);
 					if (field.getInitialValue() != null) {
 						JvmAnnotationValue jvmAnnotationValue = jvmTypesBuilder.toJvmAnnotationValue(field.getInitialValue(), true);
-						operation.setDefaultValue(jvmAnnotationValue);
+						if (jvmAnnotationValue != null)
+							operation.setDefaultValue(jvmAnnotationValue);
 						jvmTypesBuilder.setBody(operation, field.getInitialValue());
 					}
 					operation.setVisibility(JvmVisibility.PUBLIC);
