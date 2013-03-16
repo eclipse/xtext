@@ -89,7 +89,7 @@ public class BoundTypeArgumentMerger {
 			variance = VarianceInfo.INVARIANT.mergeDeclaredWithActuals(invariantVariances);
 			if (variance == null && invariantVariances.contains(VarianceInfo.IN) && invariantTypes.size() > 1) {
 				TypeConformanceComputer conformanceComputer = owner.getServices().getTypeConformanceComputer();
-				type = conformanceComputer.getCommonSuperType(invariantTypes);
+				type = conformanceComputer.getCommonSuperType(invariantTypes, owner);
 			}
 			if (!outVariances.isEmpty()) {
 				VarianceInfo outVariance = VarianceInfo.OUT.mergeDeclaredWithActuals(outVariances);
@@ -100,7 +100,7 @@ public class BoundTypeArgumentMerger {
 			}
 		} else if (!outTypes.isEmpty()) {
 			TypeConformanceComputer conformanceComputer = owner.getServices().getTypeConformanceComputer();
-			type = conformanceComputer.getCommonSuperType(outTypes);
+			type = conformanceComputer.getCommonSuperType(outTypes, owner);
 			if (type == null)
 				throw new IllegalStateException("common super type may not be null");
 			variance = VarianceInfo.OUT.mergeDeclaredWithActuals(outVariances);

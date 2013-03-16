@@ -52,7 +52,7 @@ public class LegacyTypeConformanceComputer extends XbaseTypeConformanceComputer 
 		for(JvmTypeReference type: types) {
 			lightweightTypes.add(converter.toLightweightReference(type));
 		}
-		LightweightTypeReference result = services.getTypeConformanceComputer().getCommonSuperType(lightweightTypes);
+		LightweightTypeReference result = services.getTypeConformanceComputer().getCommonSuperType(lightweightTypes, owner);
 		if (result == null) {
 			return null;
 		}

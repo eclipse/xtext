@@ -135,7 +135,7 @@ public class TypeConformanceComputer {
 	 * of them are.
 	 */
 	@Nullable
-	public LightweightTypeReference getCommonSuperType(final @NonNull List<LightweightTypeReference> types) {
+	public LightweightTypeReference getCommonSuperType(final @NonNull List<LightweightTypeReference> types, ITypeReferenceOwner owner) {
 		if (types==null || types.isEmpty())
 			throw new IllegalArgumentException("Types can't be null or empty "+types);
 		if (types.size()==1)
@@ -166,7 +166,7 @@ public class TypeConformanceComputer {
 			List<LightweightTypeReference> withoutPrimitives = replacePrimitivesAndRemoveAnyReferences(types);
 			if (withoutPrimitives.equals(types))
 				return null;
-			return getCommonSuperType(withoutPrimitives);
+			return getCommonSuperType(withoutPrimitives, owner);
 		}
 		LightweightTypeReference firstType = types.get(0);
 		final List<LightweightTypeReference> tail = types.subList(1, types.size());
@@ -198,7 +198,7 @@ public class TypeConformanceComputer {
 				if (wasDistance != rawTypeCandidate.getCount()) {
 					if (classSeen)
 						break;
-					result = getTypeParametersForSupertype(all, rawType, firstType.getOwner(), types);
+					result = getTypeParametersForSupertype(all, rawType, owner, types);
 					for(LightweightTypeReference alreadyCollected: referencesWithSameDistance) {
 						if (isConformant(result, alreadyCollected, true)) {
 							classSeen = classSeen || isClass(rawType);
@@ -209,7 +209,7 @@ public class TypeConformanceComputer {
 				}
 			}
 			if (result == null)
-				result = getTypeParametersForSupertype(all, rawType, firstType.getOwner(), types);
+				result = getTypeParametersForSupertype(all, rawType, owner, types);
 			if (result != null) {
 				boolean isClass = isClass(rawType);
 				classSeen = classSeen || isClass;
@@ -222,7 +222,7 @@ public class TypeConformanceComputer {
 		if (referencesWithSameDistance.size() == 1) {
 			return referencesWithSameDistance.get(0);
 		} else if (referencesWithSameDistance.size() > 1) {
-			CompoundTypeReference result = new CompoundTypeReference(referencesWithSameDistance.get(0).getOwner(), false);
+			CompoundTypeReference result = new CompoundTypeReference(owner, false);
 			for(LightweightTypeReference reference: referencesWithSameDistance) {
 				result.addComponent(reference);
 			}
@@ -305,7 +305,7 @@ public class TypeConformanceComputer {
 			
 			ParameterizedTypeReference result = new ParameterizedTypeReference(owner, rawType);
 			for(LightweightTypeReference parameterSuperType: parameterSuperTypes) {
-				result.addTypeArgument(parameterSuperType.copyInto(result.getOwner()));
+				result.addTypeArgument(parameterSuperType.copyInto(owner));
 			}
 			FunctionTypeReference resultAsFunctionType = result.getAsFunctionTypeReference();
 			if (resultAsFunctionType != null)
@@ -441,7 +441,7 @@ public class TypeConformanceComputer {
 				return createObjectWildcardReference(owner);
 			}
 		}
-		LightweightTypeReference superType = getCommonSuperType(types);
+		LightweightTypeReference superType = getCommonSuperType(types, owner);
 		if (superType instanceof WildcardTypeReference)
 			return superType;
 		if (superType == null) {

@@ -91,6 +91,15 @@ class ValidatingRootResolvedTypes extends RootResolvedTypes {
 		super.acceptHint(handle, boundTypeArgument)
 	}
 	
+	override protected getHints(Object handle) {
+		val result = super.getHints(handle)
+		result.forEach[ 
+			if (typeReference != null && !typeReference.isOwnedBy(referenceOwner))
+				throw new IllegalArgumentException("reference is not owned by this resolved types")
+		]
+		return result
+	}
+	
 	override acceptType(XExpression expression, AbstractTypeExpectation expectation, LightweightTypeReference type, boolean returnType, ConformanceHint... hints) {
 		if (!expectation.isOwnedBy(getReferenceOwner()))
 			throw new IllegalArgumentException("expectation is not owned by this resolved types")
@@ -226,6 +235,15 @@ class ValidatingExpressionAwareResolvedTypes extends ExpressionAwareStackedResol
 		super.acceptHint(handle, boundTypeArgument)
 	}
 	
+	override protected getHints(Object handle) {
+		val result = super.getHints(handle)
+		result.forEach[ 
+			if (typeReference != null && !typeReference.isOwnedBy(referenceOwner))
+				throw new IllegalArgumentException("reference is not owned by this resolved types")
+		]
+		return result
+	}
+	
 	override acceptType(XExpression expression, AbstractTypeExpectation expectation, LightweightTypeReference type, boolean returnType, ConformanceHint... hints) {
 		if (!expectation.isOwnedBy(getReferenceOwner()))
 			throw new IllegalArgumentException("expectation is not owned by this resolved types")
@@ -338,6 +356,15 @@ class ValidatingStackedResolvedTypes extends StackedResolvedTypes {
 		super.acceptHint(handle, boundTypeArgument)
 	}
 	
+	override protected getHints(Object handle) {
+		val result = super.getHints(handle)
+		result.forEach[ 
+			if (typeReference != null && !typeReference.isOwnedBy(referenceOwner))
+				throw new IllegalArgumentException("reference is not owned by this resolved types")
+		]
+		return result
+	}
+	
 	override acceptType(XExpression expression, AbstractTypeExpectation expectation, LightweightTypeReference type, boolean returnType, ConformanceHint... hints) {
 		if (!expectation.isOwnedBy(getReferenceOwner()))
 			throw new IllegalArgumentException("expectation is not owned by this resolved types")
@@ -447,6 +474,15 @@ class ValidatingReassigningResolvedTypes extends ReassigningStackedResolvedTypes
 		if (boundTypeArgument.typeReference != null && !boundTypeArgument.typeReference.isOwnedBy(getReferenceOwner()))
 			throw new IllegalArgumentException("reference is not owned by this resolved types")
 		super.acceptHint(handle, boundTypeArgument)
+	}
+	
+	override protected getHints(Object handle) {
+		val result = super.getHints(handle)
+		result.forEach[ 
+			if (typeReference != null && !typeReference.isOwnedBy(referenceOwner))
+				throw new IllegalArgumentException("reference is not owned by this resolved types")
+		]
+		return result
 	}
 	
 	override acceptType(XExpression expression, AbstractTypeExpectation expectation, LightweightTypeReference type, boolean returnType, ConformanceHint... hints) {
