@@ -181,7 +181,7 @@ public abstract class AbstractPendingLinkingCandidate<Expression extends XExpres
 		if (!validateTypeArity(result)) {
 			return false;
 		}
-		if (!validateTypeConformance(result)) {
+		if (!validateTypeArgumentConformance(result)) {
 			return false;
 		}
 		if (!validateUnhandledExceptions(result)) {
@@ -255,7 +255,7 @@ public abstract class AbstractPendingLinkingCandidate<Expression extends XExpres
 		return true;
 	}
 	
-	protected boolean validateTypeConformance(IAcceptor<? super AbstractDiagnostic> result) {
+	protected boolean validateTypeArgumentConformance(IAcceptor<? super AbstractDiagnostic> result) {
 		if (getTypeArgumentConformanceFailures(result) == 0) {
 			// TODO use early exit computation
 			List<XExpression> arguments = getSyntacticArguments();
@@ -449,6 +449,9 @@ public abstract class AbstractPendingLinkingCandidate<Expression extends XExpres
 		List<LightweightTypeReference> typeArguments = getTypeArguments();
 		List<JvmTypeParameter> typeParameters = getDeclaredTypeParameters();
 		int max = Math.min(typeArguments.size(), typeParameters.size());
+		if (max == 0) {
+			return 0;
+		}
 		int failures = 0;
 		TypeParameterByConstraintSubstitutor substitutor = new TypeParameterByConstraintSubstitutor(
 				getDeclaratorParameterMapping(), getState().getReferenceOwner());
