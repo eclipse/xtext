@@ -9,6 +9,7 @@ package org.eclipse.xtext.xbase.typesystem.references;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.Set;
 
 import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.jdt.annotation.Nullable;
@@ -67,9 +68,9 @@ public class CompoundTypeReference extends LightweightTypeReference {
 	}
 	
 	@Override
-	public boolean isRawType() {
+	protected boolean isRawType(Set<JvmType> seenTypes) {
 		for(LightweightTypeReference component: expose(components)) {
-			if (component.isRawType())
+			if (component.isRawType(seenTypes))
 				return true;
 		}
 		return false;

@@ -12,6 +12,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Set;
 
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.common.types.JvmArrayType;
@@ -86,10 +87,21 @@ public class ParameterizedTypeReference extends LightweightTypeReference {
 	}
 	
 	@Override
-	public boolean isRawType() {
+	protected boolean isRawType(Set<JvmType> seenTypes) {
 		if (type instanceof JvmGenericType) {
 			if (!((JvmGenericType) type).getTypeParameters().isEmpty() && expose(typeArguments).isEmpty())
 				return true;
+		} 
+		else if (type instanceof JvmTypeParameter && !getOwner().getDeclaredTypeParameters().contains(type) && seenTypes.add(type)) {
+			JvmTypeParameter typeParameter = (JvmTypeParameter) type;
+			List<JvmTypeConstraint> constraints = typeParameter.getConstraints();
+			for(JvmTypeConstraint constraint: constraints) {
+				JvmTypeReference typeReference = constraint.getTypeReference();
+				LightweightTypeReference lightweightConstraint = new OwnedConverter(getOwner()).toLightweightReference(typeReference);
+				if (lightweightConstraint.isRawType(seenTypes)) {
+					return true;
+				}
+			}
 		}
 		return false;
 	}
