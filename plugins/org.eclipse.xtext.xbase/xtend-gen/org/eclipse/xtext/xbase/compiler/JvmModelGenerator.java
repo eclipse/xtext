@@ -1466,7 +1466,8 @@ public class JvmModelGenerator implements IGenerator {
     EList<Short> _values = it.getValues();
     final Procedure1<Short> _function = new Procedure1<Short>() {
         public void apply(final Short it) {
-          it.toString();
+          String _string = it.toString();
+          appendable.append(_string);
         }
       };
     this._loopExtensions.<Short>forEachWithShortcut(appendable, _values, _function);
@@ -1476,7 +1477,8 @@ public class JvmModelGenerator implements IGenerator {
     EList<Integer> _values = it.getValues();
     final Procedure1<Integer> _function = new Procedure1<Integer>() {
         public void apply(final Integer it) {
-          it.toString();
+          String _string = it.toString();
+          appendable.append(_string);
         }
       };
     this._loopExtensions.<Integer>forEachWithShortcut(appendable, _values, _function);
@@ -1486,7 +1488,8 @@ public class JvmModelGenerator implements IGenerator {
     EList<Long> _values = it.getValues();
     final Procedure1<Long> _function = new Procedure1<Long>() {
         public void apply(final Long it) {
-          it.toString();
+          String _string = it.toString();
+          appendable.append(_string);
         }
       };
     this._loopExtensions.<Long>forEachWithShortcut(appendable, _values, _function);
@@ -1496,7 +1499,8 @@ public class JvmModelGenerator implements IGenerator {
     EList<Byte> _values = it.getValues();
     final Procedure1<Byte> _function = new Procedure1<Byte>() {
         public void apply(final Byte it) {
-          it.toString();
+          String _string = it.toString();
+          appendable.append(_string);
         }
       };
     this._loopExtensions.<Byte>forEachWithShortcut(appendable, _values, _function);
