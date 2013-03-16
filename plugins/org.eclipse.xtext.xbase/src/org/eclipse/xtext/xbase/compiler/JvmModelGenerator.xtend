@@ -690,19 +690,19 @@ class JvmModelGenerator implements IGenerator {
 	}
 		
 	def dispatch void toJavaLiteral(JvmShortAnnotationValue it, ITreeAppendable appendable, GeneratorConfig config) {
-		appendable.forEachWithShortcut(values, [toString])
+		appendable.forEachWithShortcut(values, [appendable.append(toString)])
 	}
 	
 	def dispatch void toJavaLiteral(JvmIntAnnotationValue it, ITreeAppendable appendable, GeneratorConfig config) {
-		appendable.forEachWithShortcut(values, [toString])
+		appendable.forEachWithShortcut(values, [appendable.append(toString)])
 	}
 	
 	def dispatch void toJavaLiteral(JvmLongAnnotationValue it, ITreeAppendable appendable, GeneratorConfig config) {
-		appendable.forEachWithShortcut(values, [toString])
+		appendable.forEachWithShortcut(values, [appendable.append(toString)])
 	}
 	
 	def dispatch void toJavaLiteral(JvmByteAnnotationValue it, ITreeAppendable appendable, GeneratorConfig config) {
-		appendable.forEachWithShortcut(values, [toString])
+		appendable.forEachWithShortcut(values, [appendable.append(toString)])
 	}
 	
 	def dispatch void toJavaLiteral(JvmDoubleAnnotationValue it, ITreeAppendable appendable, GeneratorConfig config) {
