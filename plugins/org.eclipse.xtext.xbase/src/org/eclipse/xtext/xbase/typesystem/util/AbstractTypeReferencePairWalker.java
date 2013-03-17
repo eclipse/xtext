@@ -224,8 +224,13 @@ public abstract class AbstractTypeReferencePairWalker extends TypeReferenceVisit
 							declaredTypeReference = declaredSubstitutor.substitute(declaredTypeReference);
 						}
 						LightweightTypeReference actual = actualSubstitutor.substitute(actualMapping.get(actualBoundParameter).getTypeReference());
-						if (!actual.isResolved() || !declaredTypeReference.isResolved() || !Strings.equal(actual.getIdentifier(), declaredTypeReference.getIdentifier()))
-							outerVisit(declaredTypeReference, actual, declaration, VarianceInfo.INVARIANT, VarianceInfo.INVARIANT);
+						if (!actual.isResolved() || !declaredTypeReference.isResolved() || !Strings.equal(actual.getIdentifier(), declaredTypeReference.getIdentifier())) {
+							if (reference.getType() != actual.getType() 
+									|| declaredTypeReference.getType() != declaration.getType() 
+									|| !reference.getIdentifier().equals(actual.getIdentifier())
+									|| !declaredTypeReference.getIdentifier().equals(declaration.getIdentifier()))
+								outerVisit(declaredTypeReference, actual, declaration, VarianceInfo.INVARIANT, VarianceInfo.INVARIANT);
+						}
 					}
 				}
 			}
