@@ -1352,12 +1352,14 @@ public class JvmTypesBuilder {
 						// ignore
 						return;
 					}
-					EStructuralFeature valueAttribute = annotationValue.eClass().getEStructuralFeature("values");
-					Class<?> instanceClass = ((EDataType) valueAttribute.getEType()).getInstanceClass();
-					if(instanceClass.isAssignableFrom(value.getClass())) {
-						@SuppressWarnings("unchecked")
-						List<Object> values = (List<Object>) annotationValue.eGet(valueAttribute);
-						values.add(value);
+					if (value != null) {
+						EStructuralFeature valueAttribute = annotationValue.eClass().getEStructuralFeature("values");
+						Class<?> instanceClass = ((EDataType) valueAttribute.getEType()).getInstanceClass();
+						if(instanceClass.isAssignableFrom(value.getClass())) {
+							@SuppressWarnings("unchecked")
+							List<Object> values = (List<Object>) annotationValue.eGet(valueAttribute);
+							values.add(value);
+						}
 					}
 				}
 			};
