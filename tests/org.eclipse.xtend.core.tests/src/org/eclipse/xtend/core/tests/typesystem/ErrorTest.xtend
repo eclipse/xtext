@@ -707,6 +707,39 @@ class ErrorTest extends AbstractXtendTestCase {
 			}
 		'''.processWithoutException
 	}
+	
+	@Test
+	def void testErrorModel_45() throws Exception {
+		'''
+			@Data class Weight<T extends Comparable<T>> implements Comparable<Weight<T>> {
+				T weight
+				
+				override int compareTo(Weight<T> w) {
+					this..compareTo(w.weight)
+				}
+			}
+		'''.processWithoutException
+	}
+	
+	@Test
+	def void testErrorModel_46() throws Exception {
+		'''
+			annotation DependsOn {
+				Class<?>[] value = #[ typeof(), typeof(CharSequence) ]
+			}
+		'''.processWithoutException
+	}
+	
+	@Test
+	def void testErrorModel_47() throws Exception {
+		'''
+			@Data class Weight<T extends Comparable<T>> implements Comparable<Weight<T>> {
+				T weight
+				
+				override int compareTo(Weight<T> w) {
+					this.weight.compareTo
+		'''.processWithoutException
+	}
 		
 	def processWithoutException(CharSequence input) throws Exception {
 		val resource = resourceSet.createResource(URI::createURI("abcdefg.xtend"))
