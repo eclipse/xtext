@@ -43,7 +43,12 @@ public enum ConformanceHint {
 	 * E.g. the type of a return expression is 'void' but this is not the implicit return type of the 
 	 * return expression itself. The return type was computed properly from the children of the return expression.
 	 */
-	NO_IMPLICIT_RETURN;  
+	NO_IMPLICIT_RETURN,
+	
+	/**
+	 * Indicates that the type of this expression is derived from a child which can provide better conformance information.
+	 */
+	PROPAGATED_TYPE;  
 	
 	private static ConformanceHint[] shallowCheckedHints = { ConformanceHint.SYNONYM, ConformanceHint.VAR_ARG };
 	

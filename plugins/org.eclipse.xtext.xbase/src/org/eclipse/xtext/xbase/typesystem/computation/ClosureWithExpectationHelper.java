@@ -12,6 +12,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.eclipse.jdt.annotation.NonNullByDefault;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.common.types.JvmOperation;
@@ -88,12 +89,24 @@ public class ClosureWithExpectationHelper extends AbstractClosureTypeHelper {
 		ITypeComputationState closureBodyTypeComputationState = getClosureBodyTypeComputationState(typeAssigner);
 		ITypeComputationResult expressionResult = closureBodyTypeComputationState.computeTypes(getClosure().getExpression());
 		
-		processExpressionType(expressionResult);
+		boolean incompatible = processExpressionType(expressionResult);
 		
 		if (resultClosureType.getReturnType() == null)
 			throw new IllegalStateException("Closure has no return type assigned");
 		// TODO the hint is probably wrong - if we expect a native function type, demand conversion is not true
-		getExpectation().acceptActualType(resultClosureType, ConformanceHint.DEMAND_CONVERSION, ConformanceHint.UNCHECKED); 
+		if (expectedClosureType.isFunctionType()) {
+			if (incompatible) {
+				getExpectation().acceptActualType(resultClosureType, ConformanceHint.CHECKED, ConformanceHint.INCOMPATIBLE, ConformanceHint.PROPAGATED_TYPE);
+			} else {
+				getExpectation().acceptActualType(resultClosureType, ConformanceHint.UNCHECKED);
+			}
+		} else {
+			if (incompatible) {
+				getExpectation().acceptActualType(resultClosureType, ConformanceHint.DEMAND_CONVERSION, ConformanceHint.CHECKED, ConformanceHint.INCOMPATIBLE, ConformanceHint.PROPAGATED_TYPE);
+			} else {
+				getExpectation().acceptActualType(resultClosureType, ConformanceHint.DEMAND_CONVERSION, ConformanceHint.UNCHECKED);
+			}
+		}
 	}
 	
 	/**
@@ -211,7 +224,10 @@ public class ClosureWithExpectationHelper extends AbstractClosureTypeHelper {
 		return result.withExpectedExceptions(expectedExceptions);
 	}
 
-	protected void processExpressionType(ITypeComputationResult expressionResult) {
+	/**
+	 * Returns <code>true</code> if the expression result is definitely incompatible to the expected type.
+	 */
+	protected boolean processExpressionType(ITypeComputationResult expressionResult) {
 		LightweightTypeReference expressionResultType = expressionResult.getReturnType();
 		if (expressionResultType == null || expressionResultType instanceof AnyTypeReference) {
 			LightweightTypeReference returnType = expectedClosureType.getReturnType();
@@ -228,7 +244,9 @@ public class ClosureWithExpectationHelper extends AbstractClosureTypeHelper {
 				resultClosureType.setReturnType(expressionResultType);
 			} else {
 				resultClosureType.setReturnType(expectedReturnType);
+				return true;
 			}
 		}
+		return false;
 	}
 }

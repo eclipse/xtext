@@ -145,7 +145,7 @@ public class RootResolvedTypes extends ResolvedTypes {
 		if (typeData != null) {
 			LightweightTypeReference actualType = typeData.getActualType();
 			ITypeExpectation expectation = typeData.getExpectation();
-			if (!typeData.getConformanceHints().contains(ConformanceHint.NO_IMPLICIT_RETURN)) {
+			if (!typeData.getConformanceHints().contains(ConformanceHint.NO_IMPLICIT_RETURN) && !typeData.getConformanceHints().contains(ConformanceHint.PROPAGATED_TYPE)) {
 				if (actualType.isPrimitiveVoid() && isIntentionalEarlyExit(expression)) {
 					return;
 				}
