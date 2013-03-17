@@ -88,6 +88,108 @@ public class LinkingTest extends AbstractXtendTestCase {
 	@Inject
 	private ITypeProvider typeProvider;
 	
+	@Test public void testBug403580_01() throws Exception {
+		XtendFile file = file(
+				"abstract class C {\n" +
+				"	def void m() {\n" +
+				"		overloaded [ String s | s ]\n" +
+				"	}\n" +
+				"	def void overloaded(Object o)" +
+				"   def <T> void overloaded(Comparable<T> c)" + 
+				"}\n"); 
+		XtendClass c = (XtendClass) file.getXtendTypes().get(0);
+		XtendFunction m = (XtendFunction) c.getMembers().get(0);
+		XBlockExpression body = (XBlockExpression) m.getExpression();
+		XFeatureCall featureCall = (XFeatureCall) body.getExpressions().get(0);
+		JvmIdentifiableElement method = featureCall.getFeature();
+		assertEquals("C.overloaded(java.lang.Object)", method.getIdentifier());
+	}
+	
+	@Test public void testBug403580_02() throws Exception {
+		XtendFile file = file(
+				"abstract class C {\n" +
+				"	def void m() {\n" +
+				"		overloaded [ String s | s.length ]\n" +
+				"	}\n" +
+				"	def void overloaded(Object o)" +
+				"   def <T> void overloaded(Comparable<T> c)" + 
+				"}\n"); 
+		XtendClass c = (XtendClass) file.getXtendTypes().get(0);
+		XtendFunction m = (XtendFunction) c.getMembers().get(0);
+		XBlockExpression body = (XBlockExpression) m.getExpression();
+		XFeatureCall featureCall = (XFeatureCall) body.getExpressions().get(0);
+		JvmIdentifiableElement method = featureCall.getFeature();
+		assertEquals("C.overloaded(java.lang.Comparable)", method.getIdentifier());
+	}
+	
+	@Test public void testBug403580_03() throws Exception {
+		XtendFile file = file(
+				"abstract class C {\n" +
+				"	def void m() {\n" +
+				"		overloaded [ String s | s ]\n" +
+				"	}\n" +
+				"	def void overloaded((String)=>String s)" +
+				"   def <T> void overloaded(Comparable<T> c)" + 
+				"}\n"); 
+		XtendClass c = (XtendClass) file.getXtendTypes().get(0);
+		XtendFunction m = (XtendFunction) c.getMembers().get(0);
+		XBlockExpression body = (XBlockExpression) m.getExpression();
+		XFeatureCall featureCall = (XFeatureCall) body.getExpressions().get(0);
+		JvmIdentifiableElement method = featureCall.getFeature();
+		assertEquals("C.overloaded(org.eclipse.xtext.xbase.lib.Functions$Function1)", method.getIdentifier());
+	}
+	
+	@Test public void testBug403580_04() throws Exception {
+		XtendFile file = file(
+				"abstract class C {\n" +
+				"	def void m() {\n" +
+				"		overloaded [ String s | s.length ]\n" +
+				"	}\n" +
+				"	def void overloaded((String)=>String s)" +
+				"   def <T> void overloaded(Comparable<T> c)" + 
+				"}\n"); 
+		XtendClass c = (XtendClass) file.getXtendTypes().get(0);
+		XtendFunction m = (XtendFunction) c.getMembers().get(0);
+		XBlockExpression body = (XBlockExpression) m.getExpression();
+		XFeatureCall featureCall = (XFeatureCall) body.getExpressions().get(0);
+		JvmIdentifiableElement method = featureCall.getFeature();
+		assertEquals("C.overloaded(java.lang.Comparable)", method.getIdentifier());
+	}
+	
+	@Test public void testBug403580_05() throws Exception {
+		XtendFile file = file(
+				"abstract class C {\n" +
+				"	def void m() {\n" +
+				"		overloaded [ String s | s ]\n" +
+				"	}\n" +
+				"	def void overloaded((String)=>String s)" +
+				"	def void overloaded(Object o)" +
+				"}\n"); 
+		XtendClass c = (XtendClass) file.getXtendTypes().get(0);
+		XtendFunction m = (XtendFunction) c.getMembers().get(0);
+		XBlockExpression body = (XBlockExpression) m.getExpression();
+		XFeatureCall featureCall = (XFeatureCall) body.getExpressions().get(0);
+		JvmIdentifiableElement method = featureCall.getFeature();
+		assertEquals("C.overloaded(org.eclipse.xtext.xbase.lib.Functions$Function1)", method.getIdentifier());
+	}
+	
+	@Test public void testBug403580_06() throws Exception {
+		XtendFile file = file(
+				"abstract class C {\n" +
+				"	def void m() {\n" +
+				"		overloaded [ String s | s.length ]\n" +
+				"	}\n" +
+				"	def void overloaded((String)=>String s)" +
+				"	def void overloaded(Object o)" +
+				"}\n"); 
+		XtendClass c = (XtendClass) file.getXtendTypes().get(0);
+		XtendFunction m = (XtendFunction) c.getMembers().get(0);
+		XBlockExpression body = (XBlockExpression) m.getExpression();
+		XFeatureCall featureCall = (XFeatureCall) body.getExpressions().get(0);
+		JvmIdentifiableElement method = featureCall.getFeature();
+		assertEquals("C.overloaded(java.lang.Object)", method.getIdentifier());
+	}
+	
 	@Test public void testBug400807() throws Exception {
 		XtendFile file = file(
 				"package testPackage\n" +
