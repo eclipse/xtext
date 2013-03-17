@@ -503,4 +503,12 @@ public class FeatureCallValidationTest extends AbstractXtendTestCase {
 		XtendClass clazz = clazz("class X { def void m() { var it = '' toList } }");
 		helper.assertError(clazz, XbasePackage.Literals.XFEATURE_CALL, INCOMPATIBLE_TYPES, "Iterable<Object>", "Object[]", "String", "first", "argument");
 	}
+	
+	@Test
+	public void testInvalidSugarBug403564() throws Exception {
+		XtendClass clazz = clazz("class C { def String getSomething() { return Something }}");
+		helper.assertError(clazz, XbasePackage.Literals.XFEATURE_CALL, org.eclipse.xtend.core.validation.IssueCodes.FEATURECALL_LINKING_DIAGNOSTIC, 
+				"The method or field Something is undefined for the type C");
+		helper.assertNoError(clazz, INCOMPATIBLE_TYPES);
+	}
 }

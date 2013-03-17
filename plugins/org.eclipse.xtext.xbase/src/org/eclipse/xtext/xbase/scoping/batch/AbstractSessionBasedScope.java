@@ -59,15 +59,19 @@ public abstract class AbstractSessionBasedScope extends AbstractScope {
 	}
 	
 	protected void processAsPropertyNames(QualifiedName name, NameAcceptor acceptor) {
-		if (getFeatureCall() instanceof XAssignment) {
-			String aliasedSetter = "set" + Strings.toFirstUpper(name.toString());
-			acceptor.accept(aliasedSetter, 2);
-		} else {
-			if (!getFeatureCall().isExplicitOperationCallOrBuilderSyntax()) {
-				String aliasedGetter = "get" + Strings.toFirstUpper(name.toString());
-				acceptor.accept(aliasedGetter, 2);
-				String aliasedBooleanGetter = "is" + Strings.toFirstUpper(name.toString());
-				acceptor.accept(aliasedBooleanGetter, 2);
+		String nameAsString = name.toString();
+		String nameWithFirstUpper = Strings.toFirstUpper(nameAsString);
+		if (!nameWithFirstUpper.equals(nameAsString)) {
+			if (getFeatureCall() instanceof XAssignment) {
+				String aliasedSetter = "set" + nameWithFirstUpper;
+				acceptor.accept(aliasedSetter, 2);
+			} else {
+				if (!getFeatureCall().isExplicitOperationCallOrBuilderSyntax()) {
+					String aliasedGetter = "get" + nameWithFirstUpper;
+					acceptor.accept(aliasedGetter, 2);
+					String aliasedBooleanGetter = "is" + nameWithFirstUpper;
+					acceptor.accept(aliasedBooleanGetter, 2);
+				}
 			}
 		}
 	}
