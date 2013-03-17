@@ -83,7 +83,7 @@ public class Strings {
 	}
 
 	public static String toFirstUpper(String s) {
-		if (s == null || s.length() == 0)
+		if (s == null || s.length() == 0 || Character.isUpperCase(s.charAt(0)))
 			return s;
 		if (s.length() == 1)
 			return s.toUpperCase();
@@ -99,7 +99,7 @@ public class Strings {
 	}
 
 	public static String toFirstLower(String s) {
-		if (s == null || s.length() == 0)
+		if (s == null || s.length() == 0 || Character.isLowerCase(s.charAt(0)))
 			return s;
 		if (s.length() == 1)
 			return s.toLowerCase();
