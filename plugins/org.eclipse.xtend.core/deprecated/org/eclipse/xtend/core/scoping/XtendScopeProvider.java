@@ -187,7 +187,11 @@ public class XtendScopeProvider extends XbaseWithAnnotationsScopeProvider {
 						ExtensionMethodsFeaturesProvider extensionFeatureProvider = extensionMethodsFeaturesProvider.get();
 						JvmTypeReference receiverType = getTypeProvider().getTypeForIdentifiable(receiver);
 						extensionFeatureProvider.setContext(receiverType);
-						extensionFeatureProvider.setExpectNoParameters(false);
+						boolean isThis = false;
+						if (implicitReceiver instanceof XFeatureCall) {
+							isThis = ((XFeatureCall) implicitReceiver).getFeature() instanceof JvmType;
+						}
+						extensionFeatureProvider.setExpectNoParameters(isThis);
 						addFeatureDescriptionProviders(
 								contextType, 
 								extensionFeatureProvider, 

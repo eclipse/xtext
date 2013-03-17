@@ -14,6 +14,16 @@ import org.junit.Test
  */
 class Bug402876Test extends AbstractXtendContentAssistBugTest {
 	
+	@Test def void testExtensionParameterNoArguments_01() throws Exception {
+		newBuilder.append('''
+			class C {
+				def void m(extension String s) {
+					
+		''')
+			.assertProposal('subSequence()')
+			.withDisplayString('subSequence(int beginIndex, int endIndex) : CharSequence - String')
+	}
+	
 	@Test def void testExtensionParameter_01() throws Exception {
 		newBuilder.append('''
 			class C {
