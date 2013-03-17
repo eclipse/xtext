@@ -1,0 +1,10 @@
+Verified+1: Hudson CI
+Code-Review-1: Sebastian Zarnekow <Sebastian.Zarnekow@itemis.de>
+Code-Review+2: Dennis Huebner <dennis.huebner@itemis.de>
+IP-Clean+1: Dennis Huebner <dennis.huebner@itemis.de>
+Verified+1: Dennis Huebner <dennis.huebner@itemis.de>
+Submitted-by: Dennis Huebner <dennis.huebner@itemis.de>
+Submitted-at: Sun, 17 Mar 2013 16:29:13 -0400
+Reviewed-on: https://git.eclipse.org/r/11256
+Project: tmf/org.eclipse.xtext
+Branch: refs/heads/master
