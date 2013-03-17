@@ -19,6 +19,22 @@ import org.junit.Test;
 @SuppressWarnings("all")
 public class Bug402876Test extends AbstractXtendContentAssistBugTest {
   @Test
+  public void testExtensionParameterNoArguments_01() throws Exception {
+    ContentAssistProcessorTestBuilder _newBuilder = this.newBuilder();
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("class C {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def void m(extension String s) {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.newLine();
+    ContentAssistProcessorTestBuilder _append = _newBuilder.append(_builder.toString());
+    ProposalTester _assertProposal = _append.assertProposal("subSequence()");
+    _assertProposal.withDisplayString("subSequence(int beginIndex, int endIndex) : CharSequence - String");
+  }
+  
+  @Test
   public void testExtensionParameter_01() throws Exception {
     ContentAssistProcessorTestBuilder _newBuilder = this.newBuilder();
     StringConcatenation _builder = new StringConcatenation();
