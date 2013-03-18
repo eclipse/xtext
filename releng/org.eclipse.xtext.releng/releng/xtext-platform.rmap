@@ -23,7 +23,6 @@
   <rm:locator pattern="^org\.antlr\.runtime(?:\..+)?$" searchPathRef="orbit"/>
   <rm:locator pattern="^org\.objectweb\.asm(?:\..+)?$" searchPathRef="orbit"/>
   <rm:locator pattern="^org\.eclipse\.draw2d$" searchPathRef="gef"/>
-  <rm:locator pattern="^org\.junit4$" searchPathRef="jdt.annotation"/>
   <rm:locator pattern="^org\.junit$" searchPathRef="orbit"/>
   <rm:locator pattern="^org\.eclipse\.m2e(?:\..+)?$" searchPathRef="maven"/>
   <rm:locator pattern="^org\.jboss\.netty$" searchPathRef="maven"/>

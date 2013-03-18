@@ -7,7 +7,6 @@
         <bundles name="org.eclipse.pde.core"/>
         <bundles name="org.eclipse.pde.ui"/>
         <bundles name="org.eclipse.ui.cheatsheets"/>
-        <bundles name="org.junit4"/>
         <bundles name="org.junit"/>
         <bundles name="org.eclipse.jdt.annotation"/>
         <features name="org.eclipse.jdt.feature.group"/>

@@ -26,5 +26,6 @@
     <bundles name="org.objectweb.asm.source"/>
     <bundles name="org.apache.commons.lang"/>
     <bundles name="org.apache.commons.lang.source"/>
+    <bundles name="org.junit" versionRange="[3.8.2.v3_8_2_v20100427-1100]"/>
   </repositories>
 </aggregator:Contribution>
