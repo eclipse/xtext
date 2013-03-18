@@ -36,6 +36,11 @@ public class ExtractVariableWizard extends RefactoringWizard {
 		addPage(new UserInputPage((ExtractVariableRefactoring) getRefactoring()));
 	}
 	
+	@Override
+	public String getWindowTitle() {
+		return "Extract Local Variable";
+	}
+	
 	protected static class UserInputPage extends UserInputWizardPage {
 
 		private final ExtractVariableRefactoring refactoring;
