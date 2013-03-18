@@ -239,7 +239,12 @@ public class XtendJvmModelInferrer implements IJvmModelInferrer {
 		if (ctx != null) {
 			List<? extends EObject> sourceElements = ctx.getAnnotatedSourceElements();
 			for (EObject target : sourceElements) {
-				errors.add(new EObjectDiagnosticImpl(Severity.ERROR, IssueCodes.PROCESSING_ERROR, msg, target, null, -1, null));
+				if (target instanceof XtendAnnotationTarget) {
+					EList<XAnnotation> annotations = ((XtendAnnotationTarget) target).getAnnotations();
+					errors.add(new EObjectDiagnosticImpl(Severity.ERROR, IssueCodes.PROCESSING_ERROR, msg, annotations.isEmpty() ? target : annotations.get(0), null, -1, null));
+				} else {
+					errors.add(new EObjectDiagnosticImpl(Severity.ERROR, IssueCodes.PROCESSING_ERROR, msg, target, null, -1, null));
+				}
 			}
 			logger.error("Error processing " + xtendFile.eResource().getURI() + " with processor " + ctx.getProcessorInstance().toString(), t);
 		} else {
