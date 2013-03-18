@@ -26,6 +26,7 @@ import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotationsPackage;
 import org.eclipse.xtext.xbase.typesystem.computation.ITypeComputationResult;
 import org.eclipse.xtext.xbase.typesystem.computation.ITypeComputationState;
 import org.eclipse.xtext.xbase.typesystem.computation.XbaseTypeComputer;
+import org.eclipse.xtext.xbase.typesystem.references.ArrayTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.CompoundTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.ParameterizedTypeReference;
@@ -139,14 +140,18 @@ public class XbaseWithAnnotationsTypeComputer extends XbaseTypeComputer {
 			LightweightTypeReference valueResultType = valueResult.getActualExpressionType();
 			if (valueResultType != null && !expectation.isAssignableFrom(valueResultType)) {
 				if (value instanceof XListLiteral) {
-					String simpleName = valueResultType.getSimpleName();
-					state.addDiagnostic(new EObjectDiagnosticImpl(
-							Severity.ERROR, 
-							IssueCodes.INCOMPATIBLE_TYPES, 
-							"Type mismatch: cannot convert from " + simpleName + "[] to " + simpleName, 
-							annotation, 
-							XAnnotationsPackage.Literals.XANNOTATION__VALUE, 
-							-1, null));
+					ArrayTypeReference array = valueResultType.tryConvertToArray();
+					if (array != null) {
+						LightweightTypeReference primitiveComponentType = array.getComponentType().getPrimitiveIfWrapperType();
+						state.addDiagnostic(new EObjectDiagnosticImpl(
+								Severity.ERROR, 
+								IssueCodes.INCOMPATIBLE_TYPES, 
+								"Type mismatch: cannot convert from " + primitiveComponentType + "[] to " + expectation.getSimpleName(), 
+								value, 
+								null, 
+								-1, null));
+						state.refineExpectedType(value, new ArrayTypeReference(array.getOwner(), primitiveComponentType));
+					}
 				}
 			}
 		}

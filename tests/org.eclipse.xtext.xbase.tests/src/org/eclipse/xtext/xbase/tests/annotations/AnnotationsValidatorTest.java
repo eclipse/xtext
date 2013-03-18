@@ -112,6 +112,16 @@ public class AnnotationsValidatorTest extends AbstractXbaseWithAnnotationsTest {
 		validator.assertNoErrors(annotation);
 	}
 	
+	@Test public void testBooleanArrayInsteadOfPrimitive_01() throws Exception {
+		XAnnotation annotation = annotation("@com.google.inject.Inject(optional=#[true])", false);
+		validator.assertError(annotation, XbasePackage.Literals.XLIST_LITERAL, IssueCodes.INCOMPATIBLE_TYPES, "Type mismatch: cannot convert from boolean[] to boolean");
+	}
+	
+	@Test public void testIntArrayInsteadOfPrimitiveBoolean_01() throws Exception {
+		XAnnotation annotation = annotation("@com.google.inject.Inject(optional=#[1])", false);
+		validator.assertError(annotation, XbasePackage.Literals.XLIST_LITERAL, IssueCodes.INCOMPATIBLE_TYPES, "Type mismatch: cannot convert from int[] to boolean");
+	}
+	
 	@Test public void testNoOperationFound() throws Exception {
 		XAnnotation annotation = annotation("@testdata.Annotation2(toString = true)", false);
 		validator.assertNoError(annotation, IssueCodes.INCOMPATIBLE_TYPES);
