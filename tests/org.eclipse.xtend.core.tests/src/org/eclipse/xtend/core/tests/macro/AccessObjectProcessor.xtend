@@ -13,7 +13,14 @@ import org.eclipse.xtend.lib.macro.declaration.MutableClassDeclaration
 import org.junit.Test
 
 class AccessObjectProcessorTest extends AbstractActiveAnnotationTest {
-	@Test def void testProperty() {
+	@Test def void testWithoutPackage() {
+		{{
+			
+		'foo' => [
+						
+		]
+		}}
+		
 		'''
 			import org.eclipse.xtend.core.tests.macro.Accessors
 			
@@ -28,6 +35,25 @@ class AccessObjectProcessorTest extends AbstractActiveAnnotationTest {
 			val classPA = ctx.findClass('PA')
 			assertNotNull(classPA.implementedInterfaces.findFirst[type == ctx.newTypeReference(typeof(Serializable)).type])
 			val classGA = ctx.findClass('GA')
+			assertNotNull(classGA.implementedInterfaces.findFirst[type == ctx.newTypeReference(typeof(Serializable)).type])
+		]
+	}
+	@Test def void testWithPackage() {
+		'''
+			package my.pack
+			import org.eclipse.xtend.core.tests.macro.Accessors
+			
+			@org.eclipse.xtend.core.tests.macro.AccessObjectAnn
+			class A {
+				String field
+			}
+		'''.compile [
+			val ctx = transformationContext
+			val classA = ctx.findClass('my.pack.A')
+			assertNotNull(classA.findMethod('getField'))
+			val classPA = ctx.findClass('my.pack.PA')
+			assertNotNull(classPA.implementedInterfaces.findFirst[type == ctx.newTypeReference(typeof(Serializable)).type])
+			val classGA = ctx.findClass('my.pack.GA')
 			assertNotNull(classGA.implementedInterfaces.findFirst[type == ctx.newTypeReference(typeof(Serializable)).type])
 		]
 	}
