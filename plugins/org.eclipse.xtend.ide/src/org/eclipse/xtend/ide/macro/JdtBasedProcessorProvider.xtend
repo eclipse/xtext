@@ -2,7 +2,6 @@ package org.eclipse.xtend.ide.macro
 
 import java.net.URL
 import java.net.URLClassLoader
-import java.util.ArrayList
 import java.util.List
 import org.apache.log4j.Logger
 import org.eclipse.core.resources.IResource
@@ -22,14 +21,7 @@ class JdtBasedProcessorProvider extends ProcessorInstanceForJvmTypeProvider {
 	override getProcessorInstance(JvmType type) {
 		try {
 			val project = (type.eResource.resourceSet as XtextResourceSet).classpathURIContext as IJavaProject
-			val entries =  project.getResolvedClasspath(true)
-			val urls = new ArrayList<URL>
-			for (entry : entries) {
-				if (entry.entryKind == IClasspathEntry::CPE_PROJECT) {
-				}
-				urls += entry.path.toFile.toURL
-			}
-			val classLoader = createClassLoader(project)
+			val classLoader = createClassLoader(type.identifier, project)
 			val result = classLoader.loadClass(type.identifier)
 			return result.newInstance
 		} catch (Exception e) {
@@ -38,17 +30,21 @@ class JdtBasedProcessorProvider extends ProcessorInstanceForJvmTypeProvider {
 		}
 	}
 	
-	def protected ClassLoader createClassLoader(IJavaProject javaProject) {
-		val resolvedClasspath = javaProject.getResolvedClasspath(true)
+	def protected ClassLoader createClassLoader(String typeName, IJavaProject javaProject) {
+		val type = javaProject.findType(typeName)
+		if (type == null)
+			return getClass.classLoader
+		val projectToUse = type.javaProject
+		val resolvedClasspath = projectToUse.getResolvedClasspath(true)
 		val List<URL> urls = newArrayList()
-		urls.addAll(getOutputFolders(javaProject));
+		urls.addAll(getOutputFolders(projectToUse));
 		for (entry : resolvedClasspath) {
 			var IPath path = null
 			var URL url = null
 			switch entry.entryKind {
 				case IClasspathEntry::CPE_SOURCE: {/* do nothing */}
 				case IClasspathEntry::CPE_PROJECT: {
-					val IResource project = javaProject.project.workspace.root.findMember(entry.getPath())
+					val IResource project = projectToUse.project.workspace.root.findMember(entry.getPath())
 					urls.addAll(getOutputFolders(JavaCore::create(project.getProject())))
 				}
 				default: {
