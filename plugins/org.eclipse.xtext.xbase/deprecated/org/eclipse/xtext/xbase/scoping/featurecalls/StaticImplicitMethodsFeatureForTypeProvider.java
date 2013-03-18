@@ -20,6 +20,8 @@ import java.util.Map;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.util.Primitives;
 import org.eclipse.xtext.util.ReflectionUtil;
+import org.eclipse.xtext.xbase.lib.ArrayExtensions;
+import org.eclipse.xtext.xbase.lib.ArrayLiterals;
 import org.eclipse.xtext.xbase.lib.BigDecimalExtensions;
 import org.eclipse.xtext.xbase.lib.BigIntegerExtensions;
 import org.eclipse.xtext.xbase.lib.BooleanExtensions;
@@ -105,6 +107,7 @@ public class StaticImplicitMethodsFeatureForTypeProvider extends AbstractStaticM
 		
 		protected Collection<String> computeLiteralClassNames() {
 			return Lists.newArrayList(
+					ArrayLiterals.class.getName(),
 					CollectionLiterals.class.getName(),
 					InputOutput.class.getName()
 			);
@@ -121,6 +124,14 @@ public class StaticImplicitMethodsFeatureForTypeProvider extends AbstractStaticM
 			result.put(Short.TYPE, ShortExtensions.class);
 			result.put(Byte.TYPE, ByteExtensions.class);
 			result.put(Boolean.TYPE, BooleanExtensions.class);
+			result.put(double[].class, ArrayExtensions.class);
+			result.put(float[].class, ArrayExtensions.class);
+			result.put(long[].class, ArrayExtensions.class);
+			result.put(int[].class, ArrayExtensions.class);
+			result.put(char[].class, ArrayExtensions.class);
+			result.put(short[].class, ArrayExtensions.class);
+			result.put(byte[].class, ArrayExtensions.class);
+			result.put(boolean[].class, ArrayExtensions.class);
 			result.put(BigInteger.class, BigIntegerExtensions.class);
 			result.put(BigDecimal.class, BigDecimalExtensions.class);
 			result.put(Comparable.class, ComparableExtensions.class);
