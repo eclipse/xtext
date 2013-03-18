@@ -80,7 +80,7 @@ class Community extends AbstractXtendWebsite {
 						blog= 'JavaFX & Xtend - An Ongoing Love'
 						href= 'http://tomsondev.bestsolution.at/2012/05/29/javafx-xtend-an-ongoing-love/'
 					],[
-						Blog= 'Xtend, JavaFX-Properties and Operator Overloading'
+						blog= 'Xtend, JavaFX-Properties and Operator Overloading'
 						href= 'http://tomsondev.bestsolution.at/2012/06/19/xtend-javafx-properties-and-operator-overloading/'
 					],[
 						blog= 'Building SWT User Interfaces with Xtend'
