@@ -7,6 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.tests.validation;
 
+import org.eclipse.xtext.xbase.tests.annotations.AnnotationsValidatorTest;
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
@@ -16,6 +17,7 @@ import org.junit.runners.Suite.SuiteClasses;
  */
 @RunWith(Suite.class)
 @SuiteClasses({
+	AnnotationsValidatorTest.class,
 	AssignmentTests.class,
 	FeatureCallValidationTest.class,
 	JvmTypeReferencesValidatorTest.class,
