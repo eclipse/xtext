@@ -978,8 +978,8 @@ public class XtendJavaValidator extends XbaseWithAnnotationsJavaValidator {
 					if (dispatchOperations.size() == 1) {
 						JvmOperation singleOp = dispatchOperations.iterator().next();
 						XtendFunction function = associations.getXtendFunction(singleOp);
-						addIssue(function, SINGLE_DISPATCH_FUNCTION, "Single dispatch method.",
-								XTEND_MEMBER__MODIFIERS, function.getModifiers().indexOf("dispatch"));
+						addIssue("Single dispatch method.", function, XTEND_MEMBER__MODIFIERS,
+								function.getModifiers().indexOf("dispatch"), SINGLE_DISPATCH_FUNCTION);
 					} else {
 						Multimap<List<JvmType>, JvmOperation> signatures = HashMultimap.create();
 						boolean isFirstLocalOperation = true;
@@ -1070,13 +1070,13 @@ public class XtendJavaValidator extends XbaseWithAnnotationsJavaValidator {
 		for (DispatchHelper.DispatchSignature dispatchSignature : dispatchMethods.keySet()) {
 			if (nonDispatchMethods.containsKey(dispatchSignature)) {
 				for (XtendFunction function : nonDispatchMethods.get(dispatchSignature))
-					addIssue(function, DISPATCH_PLAIN_FUNCTION_NAME_CLASH,
-							"Non-dispatch method has same name and number of parameters as dispatch method",
-							XTEND_FUNCTION__NAME);
+					addIssue("Non-dispatch method has same name and number of parameters as dispatch method", function,
+							XTEND_FUNCTION__NAME,
+							DISPATCH_PLAIN_FUNCTION_NAME_CLASH);
 				for (JvmOperation operation : dispatchMethods.get(dispatchSignature))
-					addIssue(associations.getXtendFunction(operation), DISPATCH_PLAIN_FUNCTION_NAME_CLASH,
-							"Dispatch method has same name and number of parameters as non-dispatch method",
-							XTEND_FUNCTION__NAME);
+					addIssue("Dispatch method has same name and number of parameters as non-dispatch method", associations.getXtendFunction(operation),
+							XTEND_FUNCTION__NAME,
+							DISPATCH_PLAIN_FUNCTION_NAME_CLASH);
 			}
 		}
 	}

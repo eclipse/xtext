@@ -311,10 +311,6 @@ public abstract class AbstractDeclarativeValidator extends AbstractInjectableVal
 		info(message, state.get().currentObject, feature, index, code, issueData);
 	}
 
-	protected void info(String message, EObject source, EStructuralFeature feature, int index) {
-		info(message, source, feature, index, null);
-	}
-
 	/**
 	 * @since 2.0
 	 */
@@ -322,10 +318,32 @@ public abstract class AbstractDeclarativeValidator extends AbstractInjectableVal
 		info(message, state.get().currentObject, feature, ValidationMessageAcceptor.INSIGNIFICANT_INDEX, code,
 				issueData);
 	}
+	
+	/**
+	 * @since 2.4
+	 */
+	protected void info(String message, EObject source, EStructuralFeature feature) {
+		info(message, source, feature, ValidationMessageAcceptor.INSIGNIFICANT_INDEX, null);
+	}
 
+	protected void info(String message, EObject source, EStructuralFeature feature, int index) {
+		info(message, source, feature, index, null);
+	}
+	
+	/**
+	 * @since 2.4
+	 */
 	protected void info(String message, EObject source, EStructuralFeature feature, int index, String code,
 			String... issueData) {
 		getMessageAcceptor().acceptInfo(message, source, feature, index, code, issueData);
+	}
+
+	/**
+	 * @since 2.4
+	 */
+	protected void info(String message, EObject source, EStructuralFeature feature, String code,
+			String... issueData) {
+		getMessageAcceptor().acceptInfo(message, source, feature, ValidationMessageAcceptor.INSIGNIFICANT_INDEX, code, issueData);
 	}
 
 	protected void warning(String message, EStructuralFeature feature) {
@@ -407,28 +425,28 @@ public abstract class AbstractDeclarativeValidator extends AbstractInjectableVal
 	 * @since 2.4
 	 */
 	protected void addIssueToState(String issueCode, String message, EStructuralFeature feature) {
-		addIssue(state.get().currentObject, issueCode, message, feature, (String[]) null);
+		addIssue(message, state.get().currentObject, feature, issueCode, (String[]) null);
 	}
 	
 	/**
 	 * @since 2.4
 	 */
-	protected void addIssue(EObject source, String issueCode, String message) {
-		addIssue(source, issueCode, message, null, (String[]) null);
+	protected void addIssue(String message, EObject source, String issueCode) {
+		addIssue(message, source, null, issueCode, (String[]) null);
 	}
 
 	/**
 	 * @since 2.4
 	 */
-	protected void addIssue(EObject source, String issueCode, String message, EStructuralFeature feature,
+	protected void addIssue(String message, EObject source, EStructuralFeature feature, String issueCode,
 			String... issueData) {
-		addIssue(source, issueCode, message, feature, INSIGNIFICANT_INDEX, issueData);
+		addIssue(message, source, feature, INSIGNIFICANT_INDEX, issueCode, issueData);
 	}
 
 	/**
 	 * @since 2.4
 	 */
-	protected void addIssue(EObject source, String issueCode, String message, EStructuralFeature feature, int index,
+	protected void addIssue(String message, EObject source, EStructuralFeature feature, int index, String issueCode,
 			String... issueData) {
 		Severity severity = getIssueSeverities(getContext(), getCurrentObject()).getSeverity(issueCode);
 		if (severity != null) {
@@ -450,14 +468,14 @@ public abstract class AbstractDeclarativeValidator extends AbstractInjectableVal
 	/**
 	 * @since 2.4
 	 */
-	protected void addIssue(EObject source, String issueCode, String message,  int offset, int length){
-		addIssue(source, issueCode, message, offset, length, (String[])null);
+	protected void addIssue(String message, EObject source, int offset,  int length, String issueCode){
+		addIssue(message, source, offset, length, issueCode, (String[])null);
 	}
 	
 	/**
 	 * @since 2.4
 	 */
-	protected void addIssue(EObject source, String issueCode, String message,  int offset, int length, String... issueData) {
+	protected void addIssue(String message, EObject source, int offset,  int length, String issueCode, String... issueData) {
 		Severity severity = getIssueSeverities(getContext(), getCurrentObject()).getSeverity(issueCode);
 		if (severity != null) {
 			switch (severity) {
