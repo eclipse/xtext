@@ -134,18 +134,18 @@ public class XbaseUIValidator extends AbstractDeclarativeValidator {
 			if (javaProject == null) 
 				javaProject = projectProvider.getJavaProject(context.eResource().getResourceSet());
 			
-			addIssue(context, IssueCodes.FORBIDDEN_REFERENCE,
-					"Access restriction: The type " + typeToCheck.getSimpleName()
-							+ " is not accessible due to restriction on required project "
-							+ javaProject.getElementName(), feature);
+			addIssue("Access restriction: The type " + typeToCheck.getSimpleName()
+					+ " is not accessible due to restriction on required project "
+					+ javaProject.getElementName(), context,
+					feature, IssueCodes.FORBIDDEN_REFERENCE);
 		} else if (restriction == RestrictionKind.DISCOURAGED) {
 			if (javaProject == null) 
 				javaProject = projectProvider.getJavaProject(context.eResource().getResourceSet());
-			addIssue(context,
-					IssueCodes.DISCOURAGED_REFERENCE,
-					"Discouraged access: The type " + typeToCheck.getSimpleName()
-							+ " is not accessible due to restriction on required project "
-							+ javaProject.getElementName(), feature);
+			addIssue("Discouraged access: The type " + typeToCheck.getSimpleName()
+					+ " is not accessible due to restriction on required project "
+					+ javaProject.getElementName(),
+					context,
+					feature, IssueCodes.DISCOURAGED_REFERENCE);
 		}
 	}
 

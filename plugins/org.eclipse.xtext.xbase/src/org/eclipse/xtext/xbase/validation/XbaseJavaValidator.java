@@ -211,7 +211,7 @@ public class XbaseJavaValidator extends AbstractXbaseJavaValidator {
 //			List list = Collections.emptyList();
 //			if (((List)list).isEmpty()) {}
 		if (toType.getIdentifier().equals(fromType.getIdentifier())) {
-			addIssue(concreteSyntax, IssueCodes.OBSOLETE_CAST, "Unnecessary cast from " + fromType.getSimpleName() + " to " + toType.getSimpleName());
+			addIssue("Unnecessary cast from " + fromType.getSimpleName() + " to " + toType.getSimpleName(), concreteSyntax, IssueCodes.OBSOLETE_CAST);
 		}
 	}
 	
@@ -955,8 +955,8 @@ public class XbaseJavaValidator extends AbstractXbaseJavaValidator {
 					Literals.XMEMBER_FEATURE_CALL__NULL_SAFE, NULL_SAFE_FEATURE_CALL_ON_PRIMITIVE);
 		}
 		if (featureCall.isNullSafe() && getActualType(featureCall).isPrimitive()) {
-			addIssue(featureCall, NULL_SAFE_FEATURE_CALL_OF_PRIMITIVE_VALUED_FEATURE, 
-					"Null-safe feature call of feature with primitive type");
+			addIssue("Null-safe feature call of feature with primitive type", featureCall, 
+					NULL_SAFE_FEATURE_CALL_OF_PRIMITIVE_VALUED_FEATURE);
 		}
 	}
 
@@ -1005,7 +1005,7 @@ public class XbaseJavaValidator extends AbstractXbaseJavaValidator {
 		
 			Iterable<XImportDeclaration> obsoleteImports = concat(imports.values(), staticImports.values(), extensionImports.values());
 			for (XImportDeclaration imp : obsoleteImports) {
-				addIssue(imp, IMPORT_UNUSED, "The import '" + imp.getImportedTypeName() + "' is never used.");
+				addIssue("The import '" + imp.getImportedTypeName() + "' is never used.", imp, IMPORT_UNUSED);
 			}
 		}
 	}
@@ -1098,7 +1098,7 @@ public class XbaseJavaValidator extends AbstractXbaseJavaValidator {
 			final Map<String, JvmType> importedNames) {
 		for (XImportDeclaration imp : importSection.getImportDeclarations()) {
 			if (imp.getImportedNamespace() != null) { 
-				addIssue(imp, IMPORT_WILDCARD_DEPRECATED, "The use of wildcard imports is deprecated.");
+				addIssue("The use of wildcard imports is deprecated.", imp, IMPORT_WILDCARD_DEPRECATED);
 			} else {
 				JvmType importedType = imp.getImportedType();
 				if (importedType != null && !importedType.eIsProxy()) {
@@ -1109,14 +1109,14 @@ public class XbaseJavaValidator extends AbstractXbaseJavaValidator {
 						if(imp.isExtension()) {
 							XImportDeclaration staticImport = staticImports.get(importedType);
 							if(staticImport != null) {
-								addIssue(staticImport, IssueCodes.IMPORT_DUPLICATE, "Obsolete static import of '" + importedType.getSimpleName() + "'.");
+								addIssue("Obsolete static import of '" + importedType.getSimpleName() + "'.", staticImport, IssueCodes.IMPORT_DUPLICATE);
 							}
 						} else if(extensionImports.containsKey(importedType)) {
-							addIssue(imp, IssueCodes.IMPORT_DUPLICATE, "Obsolete static import of '" + importedType.getSimpleName() + "'.");
+							addIssue("Obsolete static import of '" + importedType.getSimpleName() + "'.", imp, IssueCodes.IMPORT_DUPLICATE);
 						}
 					}
 					if (map.containsKey(importedType)) {
-						addIssue(imp, IssueCodes.IMPORT_DUPLICATE, "Duplicate import of '" + importedType.getSimpleName() + "'.");
+						addIssue("Duplicate import of '" + importedType.getSimpleName() + "'.", imp, IssueCodes.IMPORT_DUPLICATE);
 					} else {
 						map.put(importedType, imp);
 						if (!imp.isStatic()) {
@@ -1157,7 +1157,7 @@ public class XbaseJavaValidator extends AbstractXbaseJavaValidator {
 					if (leftType.isPrimitive()) { 
 						error("The operator '" + operatorSymbol + "' is undefined for the argument types " + leftType.getSimpleName() + " and null", binaryOperation, null, PRIMITIVE_COMPARED_TO_NULL);
 					} else if (equalsComparison) {
-						addIssue(binaryOperation, EQUALS_WITH_NULL, "The operator '" + operatorSymbol + "' should be replaced by '" + operatorSymbol + "=' when null is one of the arguments.");
+						addIssue("The operator '" + operatorSymbol + "' should be replaced by '" + operatorSymbol + "=' when null is one of the arguments.", binaryOperation, EQUALS_WITH_NULL);
 					}
 				}
 			}
@@ -1167,7 +1167,7 @@ public class XbaseJavaValidator extends AbstractXbaseJavaValidator {
 					if (rightType.isPrimitive()) { 
 						error("The operator '" + operatorSymbol + "' is undefined for the argument types null and " + rightType.getSimpleName(), binaryOperation, null, PRIMITIVE_COMPARED_TO_NULL);
 					} else if (equalsComparison && !(right instanceof XNullLiteral)) {
-						addIssue(binaryOperation, EQUALS_WITH_NULL, "The operator '" + operatorSymbol + "' should be replaced by '" + operatorSymbol + "=' when null is one of the arguments.");
+						addIssue("The operator '" + operatorSymbol + "' should be replaced by '" + operatorSymbol + "=' when null is one of the arguments.", binaryOperation, EQUALS_WITH_NULL);
 					}
 				}
 			}
