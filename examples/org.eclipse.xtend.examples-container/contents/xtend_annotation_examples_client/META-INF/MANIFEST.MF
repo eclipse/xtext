@@ -1,0 +1,11 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Xtend_annotation_examples_client
+Bundle-SymbolicName: xtend_annotation_examples_client
+Bundle-Version: 2.4.0.qualifier
+Bundle-RequiredExecutionEnvironment: J2SE-1.5
+Require-Bundle: org.eclipse.xtend.lib,
+ com.google.guava,
+ org.eclipse.xtext.xbase.lib,
+ xtend_annotation_examples;bundle-version="2.4.0"
+
