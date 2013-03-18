@@ -503,6 +503,11 @@ public class XtendValidationTest extends AbstractXtendTestCase {
 	}
 
 	@Test public void testCreateExpressionMayNotReturnVoid_03() throws Exception {
+		XtendClass clazz = clazz("class C { String s = '' def create s m(int i) {} }");
+		helper.assertNoError(clazz, org.eclipse.xtext.xbase.validation.IssueCodes.STATIC_ACCESS_TO_INSTANCE_MEMBER);
+	}
+	
+	@Test public void testCreateExpressionMayAccessFields() throws Exception {
 		XtendFunction function = function("override create result: while(true){} toString() { }");
 		helper.assertError(function, XWHILE_EXPRESSION, INCOMPATIBLE_TYPES, "cannot convert from void to String");
 	}

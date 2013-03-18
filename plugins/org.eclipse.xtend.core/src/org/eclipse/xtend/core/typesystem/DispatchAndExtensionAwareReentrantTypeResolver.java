@@ -193,7 +193,8 @@ public class DispatchAndExtensionAwareReentrantTypeResolver extends LogicalConta
 			LightweightTypeReference actualType = resolvedTypes.getReturnType(expression);
 			if (actualType == null) {
 				JvmOperation operation = associations.getDirectlyInferredOperation(createFunction);
-				computeTypes(resolvedTypesByContext, resolvedTypes, featureScopeSession, operation);
+				IFeatureScopeSession session = operation.isStatic() ? featureScopeSession : featureScopeSession.toInstanceContext();
+				computeTypes(resolvedTypesByContext, resolvedTypes, session, operation);
 				actualType = resolvedTypes.getReturnType(expression);
 			}
 			if (actualType == null)
@@ -257,29 +258,30 @@ public class DispatchAndExtensionAwareReentrantTypeResolver extends LogicalConta
 			}
 		} else if (element instanceof XtendMember) {
 			XtendMember member = (XtendMember) element;
-				XExpression expression = null;
-				if (member instanceof XtendFunction) {
-					XtendFunction function = (XtendFunction) member;
-					expression = function.getExpression();
-					CreateExtensionInfo createInfo = function.getCreateExtensionInfo();
-					if (createInfo != null) {
-						computeTypes(resolvedTypes, featureScopeSession, createInfo.getCreateExpression());
-					}
-					for(XtendParameter parameter: function.getParameters()) {
-						computeXtendAnnotationTypes(resolvedTypes, featureScopeSession, parameter.getAnnotations());
-					}
-				} else if (member instanceof XtendConstructor) {
-					XtendConstructor constructor = (XtendConstructor) member;
-					expression = constructor.getExpression();
-					for(XtendParameter parameter: constructor.getParameters()) {
-						computeXtendAnnotationTypes(resolvedTypes, featureScopeSession, parameter.getAnnotations());
-					}
-				} else if (member instanceof XtendField) {
-					expression = ((XtendField) member).getInitialValue();
+			XExpression expression = null;
+			if (member instanceof XtendFunction) {
+				XtendFunction function = (XtendFunction) member;
+				expression = function.getExpression();
+				CreateExtensionInfo createInfo = function.getCreateExtensionInfo();
+				if (createInfo != null) {
+					IFeatureScopeSession session = function.isStatic() ? featureScopeSession : featureScopeSession.toInstanceContext();
+					computeTypes(resolvedTypes, session, createInfo.getCreateExpression());
 				}
-				if (expression != null && getInferredElements(member).isEmpty()) {
-					computeTypes(resolvedTypes, featureScopeSession, expression);
+				for(XtendParameter parameter: function.getParameters()) {
+					computeXtendAnnotationTypes(resolvedTypes, featureScopeSession, parameter.getAnnotations());
 				}
+			} else if (member instanceof XtendConstructor) {
+				XtendConstructor constructor = (XtendConstructor) member;
+				expression = constructor.getExpression();
+				for(XtendParameter parameter: constructor.getParameters()) {
+					computeXtendAnnotationTypes(resolvedTypes, featureScopeSession, parameter.getAnnotations());
+				}
+			} else if (member instanceof XtendField) {
+				expression = ((XtendField) member).getInitialValue();
+			}
+			if (expression != null && getInferredElements(member).isEmpty()) {
+				computeTypes(resolvedTypes, featureScopeSession, expression);
+			}
 			computeXtendAnnotationTypes(resolvedTypes, featureScopeSession, member.getAnnotations());
 		} else {
 			super.computeTypes(resolvedTypes, featureScopeSession, element);
