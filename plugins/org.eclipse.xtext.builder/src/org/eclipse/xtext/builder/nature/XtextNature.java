@@ -34,10 +34,10 @@ public class XtextNature implements IProjectNature {
 		}
 
 		ICommand[] newCommands = new ICommand[commands.length + 1];
-		System.arraycopy(commands, 0, newCommands, 0, commands.length);
+		System.arraycopy(commands, 0, newCommands, 1, commands.length);
 		ICommand command = desc.newCommand();
 		command.setBuilderName(XtextBuilder.BUILDER_ID);
-		newCommands[newCommands.length - 1] = command;
+		newCommands[0] = command;
 		desc.setBuildSpec(newCommands);
 		project.setDescription(desc, null);
 	}
