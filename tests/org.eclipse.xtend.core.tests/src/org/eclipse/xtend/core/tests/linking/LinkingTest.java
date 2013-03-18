@@ -50,6 +50,7 @@ import org.eclipse.xtext.xbase.typing.ITypeProvider;
 import org.eclipse.xtext.xtype.XFunctionTypeRef;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import testdata.OverloadedMethods;
@@ -95,7 +96,7 @@ public class LinkingTest extends AbstractXtendTestCase {
 				"		overloaded [ String s | s ]\n" +
 				"	}\n" +
 				"	def void overloaded(Object o)" +
-				"   def <T> void overloaded(Comparable<T> c)" + 
+				"	def <T> void overloaded(Comparable<T> c)" + 
 				"}\n"); 
 		XtendClass c = (XtendClass) file.getXtendTypes().get(0);
 		XtendFunction m = (XtendFunction) c.getMembers().get(0);
@@ -112,7 +113,7 @@ public class LinkingTest extends AbstractXtendTestCase {
 				"		overloaded [ String s | s.length ]\n" +
 				"	}\n" +
 				"	def void overloaded(Object o)" +
-				"   def <T> void overloaded(Comparable<T> c)" + 
+				"	def <T> void overloaded(Comparable<T> c)" + 
 				"}\n"); 
 		XtendClass c = (XtendClass) file.getXtendTypes().get(0);
 		XtendFunction m = (XtendFunction) c.getMembers().get(0);
@@ -129,7 +130,7 @@ public class LinkingTest extends AbstractXtendTestCase {
 				"		overloaded [ String s | s ]\n" +
 				"	}\n" +
 				"	def void overloaded((String)=>String s)" +
-				"   def <T> void overloaded(Comparable<T> c)" + 
+				"	def <T> void overloaded(Comparable<T> c)" + 
 				"}\n"); 
 		XtendClass c = (XtendClass) file.getXtendTypes().get(0);
 		XtendFunction m = (XtendFunction) c.getMembers().get(0);
@@ -146,7 +147,7 @@ public class LinkingTest extends AbstractXtendTestCase {
 				"		overloaded [ String s | s.length ]\n" +
 				"	}\n" +
 				"	def void overloaded((String)=>String s)" +
-				"   def <T> void overloaded(Comparable<T> c)" + 
+				"	def <T> void overloaded(Comparable<T> c)" + 
 				"}\n"); 
 		XtendClass c = (XtendClass) file.getXtendTypes().get(0);
 		XtendFunction m = (XtendFunction) c.getMembers().get(0);
@@ -188,6 +189,40 @@ public class LinkingTest extends AbstractXtendTestCase {
 		XFeatureCall featureCall = (XFeatureCall) body.getExpressions().get(0);
 		JvmIdentifiableElement method = featureCall.getFeature();
 		assertEquals("C.overloaded(java.lang.Object)", method.getIdentifier());
+	}
+	
+	@Ignore("Depends on the order of the overloaded methods")
+	@Test public void testBug403580_07() throws Exception {
+		XtendFile file = file(
+				"abstract class C {\n" +
+				"	def void m() {\n" +
+				"		overloaded [ String s | s.length ]\n" +
+				"	}\n" +
+				"	def <T> void overloaded(Comparable<T> c)" + 
+				"	def void overloaded((String)=>int s)" +
+				"}\n"); 
+		XtendClass c = (XtendClass) file.getXtendTypes().get(0);
+		XtendFunction m = (XtendFunction) c.getMembers().get(0);
+		XBlockExpression body = (XBlockExpression) m.getExpression();
+		XFeatureCall featureCall = (XFeatureCall) body.getExpressions().get(0);
+		JvmIdentifiableElement method = featureCall.getFeature();
+		assertEquals("C.overloaded(java.lang.Comparable)", method.getIdentifier());
+	}
+	
+	@Test public void testOverloadedWithLambdaArgument_01() throws Exception {
+		XtendFile file = file(
+				"import static extension com.google.common.collect.Iterables.*" +
+				"abstract class C {\n" +
+				"	def void m(Iterable<String> iter) {\n" +
+				"		iter.filter [ it != null ]\n" +
+				"	}\n" +
+				"}\n"); 
+		XtendClass c = (XtendClass) file.getXtendTypes().get(0);
+		XtendFunction m = (XtendFunction) c.getMembers().get(0);
+		XBlockExpression body = (XBlockExpression) m.getExpression();
+		XMemberFeatureCall featureCall = (XMemberFeatureCall) body.getExpressions().get(0);
+		JvmIdentifiableElement method = featureCall.getFeature();
+		assertEquals("com.google.common.collect.Iterables.filter(java.lang.Iterable,com.google.common.base.Predicate)", method.getIdentifier());
 	}
 	
 	@Test public void testBug400807() throws Exception {
