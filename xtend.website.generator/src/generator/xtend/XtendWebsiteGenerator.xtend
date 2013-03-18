@@ -2,9 +2,6 @@ package generator.xtend
 
 import generator.Resource
 import java.io.File
-
-import static extension generator.Generator.*
-
 import org.eclipse.xtend.core.XtendStandaloneSetup
 
 class XtendWebsiteGenerator {
@@ -19,6 +16,7 @@ class XtendWebsiteGenerator {
 			new News,
 			new Download, 
 			new Documentation, 
+			new ReleaseNotes24,
 			new Community 
 		)
 		println("Done.")

@@ -8,7 +8,8 @@ URL : http://uexel.com
 */
 
 a {
-	color: #005580;
+	color: inherit;
+	text-decoration:underline;
 }
 
 body { 
@@ -40,6 +41,11 @@ h2 {
 h2 small {
 	font-size: 10px;
 	color: #717576;
+}
+
+h3 {
+	padding-top: 68px; 
+	margin-top: -68px;
 }
 
 img {

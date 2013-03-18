@@ -139,7 +139,7 @@ class Community extends AbstractXtendWebsite {
 		    <div class="row">
 			  <div class="span4 ">
 			    <img src="images/«img.trim»" alt="image" class="image_left">
-			    <h3>«title.trim»</h3>
+			    <h3 style="padding-top: 0px; margin-top: 0px;">«title.trim»</h3>
 			 	</div>
 				<div class="span5 ">
 					«description»

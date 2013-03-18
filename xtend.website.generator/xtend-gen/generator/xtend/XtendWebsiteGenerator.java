@@ -6,6 +6,7 @@ import generator.xtend.Documentation;
 import generator.xtend.Download;
 import generator.xtend.Index;
 import generator.xtend.News;
+import generator.xtend.ReleaseNotes24;
 import java.io.File;
 import org.eclipse.xtend.core.XtendStandaloneSetup;
 import org.eclipse.xtext.xbase.lib.InputOutput;
@@ -21,8 +22,9 @@ public class XtendWebsiteGenerator {
     News _news = new News();
     Download _download = new Download();
     Documentation _documentation = new Documentation();
+    ReleaseNotes24 _releaseNotes24 = new ReleaseNotes24();
     Community _community = new Community();
-    XtendWebsiteGenerator.generateFiles(out, _index, _news, _download, _documentation, _community);
+    XtendWebsiteGenerator.generateFiles(out, _index, _news, _download, _documentation, _releaseNotes24, _community);
     InputOutput.<String>println("Done.");
   }
   

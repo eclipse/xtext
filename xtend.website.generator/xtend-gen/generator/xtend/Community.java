@@ -325,7 +325,7 @@ public class Community extends AbstractXtendWebsite {
     _builder.append("\" alt=\"image\" class=\"image_left\">");
     _builder.newLineIfNotEmpty();
     _builder.append("\t    ");
-    _builder.append("<h3>");
+    _builder.append("<h3 style=\"padding-top: 0px; margin-top: 0px;\">");
     String _trim_2 = title.trim();
     _builder.append(_trim_2, "	    ");
     _builder.append("</h3>");

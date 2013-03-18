@@ -23,7 +23,7 @@ class Index extends AbstractXtendWebsite {
 			<div class="flexslider image-slider">
 				<div class="span5 slide">
 				<h2>
-					It's just Java
+					The Better Java
 				</h2>
 				<br />
 					<p>Xtend is a little language that compiles 
@@ -49,27 +49,23 @@ class Index extends AbstractXtendWebsite {
 	
 	<div id="intro">
 		<div class="container">
-			<h1>What is Xtend?</h1>
-			<p>Xtend is a statically-typed programming language which <strong>compiles to comprehensible Java source code</strong>.</p>
-			<p>It is designed to work great with existing Java APIs and idioms, yet introduces new features to modernize Java applications.
-			It's <strong>faster than Groovy</strong>, <strong>simpler than Scala</strong> and incorporates all <strong>benefits of Java</strong> such as <strong>great tool support</strong>.</p>
-			<p>Xtend is implemented on top of <a href="http://xtext.org" style=" color : white; ">Xtext</a></p>
+			<h1>Get the new release!</h1>
+			<p style="font-family: 'Lato', sans-serif; font-size: 16px; font-weight: 300; color: #fff;word-spacing: 3px;">
+			Get the new release and learn to how to write <a href="releasenotes_2_4.html#android_development">Android applications</a> with mich less boiler-plate code 
+			<br/>and learn to leverage the full power of Xtend by enhancing the compiler with an <a href="documentation.html#activeAnnotations">active annotation</a>. 
+				<br/>Enjoy the many new IDE and language features and the much improved type inference algorithm. Read the <a href="releasenotes_2_4.html">full release notes</a>.</p>
 		</div>
 	</div>
 
 	<div id="features">
 		<div class="container">
 			<div class="row">
-				<div class="span12">
-					<br /> <br />
-					<h1>6 Good Reasons to use Xtend</h1>
-					<br />
-				</div>
+				<br/>
+				<br />
 				«entry('Less Noise','''
 					<p>
 						Xtend removes all the unnecessary syntactical noise: No semicolons, 
-						no empty parentheses, good default visibility.<br/><br/>
-						<strong>Whitespace can be so beautiful!</strong>
+						no empty parentheses, good default visibility, unmatched type inference.
 					</p>
 					''',
 					'images/icon-noise.png',
@@ -78,8 +74,7 @@ class Index extends AbstractXtendWebsite {
 				«entry('More Power','''
 					<p>
 						Learn how to enhance existing Java APIs through <a href="documentation.html#extensionMethods">extension methods</a> and <a href="documentation.html#lambdas">lambda expressions</a>.
-						Make use of <a href="documentation.html#operators">operators</a> where you always wanted and <a href="documentation.html#switchExpression">get rid of lengthy instanceof / casting orgies</a> in
-						your existing code.
+						Make use of <a href="documentation.html#operators">operators</a> where you always wanted and eleminate redundant patterns with <a href="documentation.html#active_annotations">active annotations</a>.
 					</p>
 					''',
 					'images/icon-expressive.png',

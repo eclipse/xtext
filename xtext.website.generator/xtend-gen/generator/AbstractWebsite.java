@@ -447,7 +447,7 @@ public abstract class AbstractWebsite implements Resource {
     _builder.append("<div class=\"span6\">");
     _builder.newLine();
     _builder.append("\t\t\t\t\t");
-    _builder.append("<h3>Quick Links</h3>");
+    _builder.append("<h3 style=\"padding-top: 0px; margin-top: 0px;\">Quick Links</h3>");
     _builder.newLine();
     _builder.append("\t\t\t\t\t");
     _builder.append("<ul class=\"footer-links clearfix\">");
@@ -492,7 +492,7 @@ public abstract class AbstractWebsite implements Resource {
     _builder.append("<div class=\"span6\">");
     _builder.newLine();
     _builder.append("\t\t\t\t\t");
-    _builder.append("<h3><a href=\"https://twitter.com/#!/");
+    _builder.append("<h3 style=\"padding-top: 0px; margin-top: 0px;\"><a href=\"https://twitter.com/#!/");
     String _twitterID = this.twitterID();
     _builder.append(_twitterID, "					");
     _builder.append("\" style=\"color: white;\">");
