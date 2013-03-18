@@ -504,20 +504,78 @@ public class FeatureCallValidationTest extends AbstractXtendTestCase {
 		helper.assertError(clazz, XbasePackage.Literals.XFEATURE_CALL, INCOMPATIBLE_TYPES, "Iterable<Object>", "Object[]", "String", "first", "argument");
 	}
 
-	// behavior should be symmetric to the java.beans.Introspector thus we expose properties with their upper case names, too
+	// common case - first letter after prefix is upper case, second lowercase
 	@Test
-	public void testInvalidSugarBug403564_01() throws Exception {
+	public void testInvalidPropertySugarBug403564_01() throws Exception {
+		XtendClass clazz = clazz("class C { def String getSomething() { return something }}");
+		helper.assertNoError(clazz, org.eclipse.xtend.core.validation.IssueCodes.FEATURECALL_LINKING_DIAGNOSTIC);
+	}
+	@Test
+	public void testInvalidPropertySugarBug403564_02() throws Exception {
+		XtendClass clazz = clazz("class C { def String isSomething() { return something }}");
+		helper.assertNoError(clazz, org.eclipse.xtend.core.validation.IssueCodes.FEATURECALL_LINKING_DIAGNOSTIC);
+	}
+	@Test
+	public void testInvalidPropertySugarBug403564_03() throws Exception {
+		XtendClass clazz = clazz("class C { def void setSomething(String s) { something = '' }}");
+		helper.assertNoError(clazz, org.eclipse.xtend.core.validation.IssueCodes.FEATURECALL_LINKING_DIAGNOSTIC);
+	}
+	@Test
+	public void testInvalidPropertySugarBug403564_04() throws Exception {
 		XtendClass clazz = clazz("class C { def String getSomething() { return Something }}");
+		helper.assertError(clazz, XbasePackage.Literals.XFEATURE_CALL, org.eclipse.xtend.core.validation.IssueCodes.FEATURECALL_LINKING_DIAGNOSTIC, 
+				"The method or field Something is undefined for the type C");
+	}
+	
+	// second case - first two letters after prefix are upper case
+	@Test
+	public void testInvalidPropertySugarBug403564_05() throws Exception {
+		XtendClass clazz = clazz("class C { def String getURI() { return URI }}");
 		helper.assertNoError(clazz, org.eclipse.xtend.core.validation.IssueCodes.FEATURECALL_LINKING_DIAGNOSTIC);
 	}
 	@Test
-	public void testInvalidSugarBug403564_02() throws Exception {
-		XtendClass clazz = clazz("class C { def String isSomething() { return Something }}");
+	public void testInvalidPropertySugarBug403564_06() throws Exception {
+		XtendClass clazz = clazz("class C { def boolean isURI() { return URI }}");
 		helper.assertNoError(clazz, org.eclipse.xtend.core.validation.IssueCodes.FEATURECALL_LINKING_DIAGNOSTIC);
 	}
 	@Test
-	public void testInvalidSugarBug403564_03() throws Exception {
-		XtendClass clazz = clazz("class C { def void setSomething(String s) { Something = '' }}");
+	public void testInvalidPropertySugarBug403564_07() throws Exception {
+		XtendClass clazz = clazz("class C { def void setURI(String s) { URI = '' }}");
 		helper.assertNoError(clazz, org.eclipse.xtend.core.validation.IssueCodes.FEATURECALL_LINKING_DIAGNOSTIC);
+	}
+	@Test
+	public void testInvalidPropertySugarBug403564_08() throws Exception {
+		XtendClass clazz = clazz("class C { def String getURI() { return uri }}");
+		helper.assertError(clazz, XbasePackage.Literals.XFEATURE_CALL, org.eclipse.xtend.core.validation.IssueCodes.FEATURECALL_LINKING_DIAGNOSTIC, 
+				"The method or field uri is undefined for the type C");
+	}
+	@Test
+	public void testInvalidPropertySugarBug403564_09() throws Exception {
+		XtendClass clazz = clazz("class C { def String getURI() { return uRI }}");
+		helper.assertError(clazz, XbasePackage.Literals.XFEATURE_CALL, org.eclipse.xtend.core.validation.IssueCodes.FEATURECALL_LINKING_DIAGNOSTIC,
+				"The method or field uRI is undefined for the type C");
+	}
+	
+	// third case - single letter property
+	@Test
+	public void testInvalidPropertySugarBug403564_10() throws Exception {
+		XtendClass clazz = clazz("class C { def String getX() { return x }}");
+		helper.assertNoError(clazz, org.eclipse.xtend.core.validation.IssueCodes.FEATURECALL_LINKING_DIAGNOSTIC);
+	}
+	@Test
+	public void testInvalidPropertySugarBug403564_11() throws Exception {
+		XtendClass clazz = clazz("class C { def boolean isX() { return x }}");
+		helper.assertNoError(clazz, org.eclipse.xtend.core.validation.IssueCodes.FEATURECALL_LINKING_DIAGNOSTIC);
+	}
+	@Test
+	public void testInvalidPropertySugarBug403564_12() throws Exception {
+		XtendClass clazz = clazz("class C { def void setX(String s) { x = '' }}");
+		helper.assertNoError(clazz, org.eclipse.xtend.core.validation.IssueCodes.FEATURECALL_LINKING_DIAGNOSTIC);
+	}
+	@Test
+	public void testInvalidPropertySugarBug403564_13() throws Exception {
+		XtendClass clazz = clazz("class C { def void getX() { return X }}");
+		helper.assertError(clazz, XbasePackage.Literals.XFEATURE_CALL, org.eclipse.xtend.core.validation.IssueCodes.FEATURECALL_LINKING_DIAGNOSTIC,
+				"The method or field X is undefined for the type C");
 	}
 }

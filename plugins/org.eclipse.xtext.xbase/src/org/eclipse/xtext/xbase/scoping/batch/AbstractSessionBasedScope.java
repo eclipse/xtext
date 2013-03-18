@@ -8,14 +8,15 @@
 package org.eclipse.xtext.xbase.scoping.batch;
 
 import java.util.Collection;
+import java.util.Locale;
 
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.scoping.impl.AbstractScope;
-import org.eclipse.xtext.util.Strings;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.XAssignment;
 
@@ -59,18 +60,57 @@ public abstract class AbstractSessionBasedScope extends AbstractScope {
 	}
 	
 	protected void processAsPropertyNames(QualifiedName name, NameAcceptor acceptor) {
-		String nameWithFirstUpper = Strings.toFirstUpper(name.toString());
-		if (getFeatureCall() instanceof XAssignment) {
-			String aliasedSetter = "set" + nameWithFirstUpper;
-			acceptor.accept(aliasedSetter, 2);
-		} else {
-			if (!getFeatureCall().isExplicitOperationCallOrBuilderSyntax()) {
-				String aliasedGetter = "get" + nameWithFirstUpper;
-				acceptor.accept(aliasedGetter, 2);
-				String aliasedBooleanGetter = "is" + nameWithFirstUpper;
-				acceptor.accept(aliasedBooleanGetter, 2);
+		String nameAsPropertyName = tryGetAsPropertyName(name.toString());
+		if (nameAsPropertyName != null) {
+			if (getFeatureCall() instanceof XAssignment) {
+				String aliasedSetter = "set" + nameAsPropertyName;
+				acceptor.accept(aliasedSetter, 2);
+			} else {
+				if (!getFeatureCall().isExplicitOperationCallOrBuilderSyntax()) {
+					String aliasedGetter = "get" + nameAsPropertyName;
+					acceptor.accept(aliasedGetter, 2);
+					String aliasedBooleanGetter = "is" + nameAsPropertyName;
+					acceptor.accept(aliasedBooleanGetter, 2);
+				}
 			}
 		}
+	}
+	
+	/**
+	 * Returns the name as a property name, e.g. a prefix {@code get}, {@code is} or {@code set} 
+	 * can be used with the result of this method.
+	 * If the given name is invalid, the result is <code>null</code>.
+	 */
+	@Nullable
+	protected String tryGetAsPropertyName(String name) {
+		if (name.length() == 1) { // e.g. Point.getX()
+			if (Character.isUpperCase(name.charAt(0))) {
+				// X is not a valid sugar for getX()
+				return null;
+			}
+			// x is a valid sugar for getX
+			return name.toUpperCase(Locale.ENGLISH);
+		} else if (name.length() > 1) {
+			if (Character.isUpperCase(name.charAt(1))) { // e.g. Resource.getURI
+				// if second char is uppercase, the name itself is the sugar variant
+				// URI is the property name for getURI
+				if (Character.isUpperCase(name.charAt(0))) {
+					return name;
+				}
+				// if the first character is not upper case, it's not a valid sugar variant
+				// e.g. uRI is no sugar access for getURI
+				return null;
+			} else if (Character.isUpperCase(name.charAt(0))) {
+				// the first character is upper case, it is not valid property sugar, e.g.
+				// Class.CanonicalName does not map to Class.getName
+				return null;
+			} else {
+				// code from java.beans.NameGenerator.capitalize()
+				return name.substring(0, 1).toUpperCase(Locale.ENGLISH) + name.substring(1);
+			}
+		}
+		// length 0 is invalid
+		return null;
 	}
 	
 	@Override
