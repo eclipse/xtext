@@ -206,7 +206,7 @@ public class WorkbenchTestHelper extends Assert {
 
 	public static IProject createPluginProject(String name) throws CoreException {
 		return createPluginProject(name, "com.google.inject", "org.eclipse.xtend.lib", "org.eclipse.xtext.xbase.lib",
-				"org.eclipse.xtend.ide.tests.data", "org.junit4");
+				"org.eclipse.xtend.ide.tests.data", "org.junit");
 	}
 
 	public static IProject createPluginProject(String name, String... requiredBundles) throws CoreException {
