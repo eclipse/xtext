@@ -214,10 +214,10 @@ public class WorkbenchTestHelper extends Assert {
 		PluginProjectFactory projectFactory = injector.getInstance(PluginProjectFactory.class);
 		projectFactory.setProjectName(name);
 		projectFactory.addFolders(Collections.singletonList("src"));
-		projectFactory.addBuilderIds(JavaCore.BUILDER_ID, "org.eclipse.pde.ManifestBuilder",
-				"org.eclipse.pde.SchemaBuilder", XtextProjectHelper.BUILDER_ID);
-		projectFactory.addProjectNatures(JavaCore.NATURE_ID, "org.eclipse.pde.PluginNature",
-				XtextProjectHelper.NATURE_ID);
+		projectFactory.addBuilderIds(XtextProjectHelper.BUILDER_ID, JavaCore.BUILDER_ID, "org.eclipse.pde.ManifestBuilder",
+				"org.eclipse.pde.SchemaBuilder");
+		projectFactory.addProjectNatures(
+				XtextProjectHelper.NATURE_ID, JavaCore.NATURE_ID, "org.eclipse.pde.PluginNature");
 		projectFactory.addRequiredBundles(newArrayList(requiredBundles));
 		IProject result = projectFactory.createProject(new NullProgressMonitor(), null);
 		IJavaProject javaProject = JavaCore.create(result);
