@@ -62,11 +62,7 @@ public class ClosureWithoutExpectationHelper extends AbstractClosureTypeHelper {
 		ITypeComputationResult expressionResult = closureBodyTypeComputationState.computeTypes(getClosure().getExpression());
 		
 		FunctionTypeReference resultClosureType = processExpressionType(incompleteClosureType, expressionResult);
-		if (getExpectation().getExpectedType() != null) { // can't be a function type thus it's always DEMAND_CONVERSION
-			getExpectation().acceptActualType(resultClosureType, ConformanceHint.DEMAND_CONVERSION, ConformanceHint.UNCHECKED);
-		} else {
-			getExpectation().acceptActualType(resultClosureType, ConformanceHint.UNCHECKED);
-		}
+		getExpectation().acceptActualType(resultClosureType, ConformanceHint.UNCHECKED);
 	}
 	
 	@Override

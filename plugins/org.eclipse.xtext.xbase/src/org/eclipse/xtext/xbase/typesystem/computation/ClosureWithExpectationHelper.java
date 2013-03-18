@@ -102,9 +102,9 @@ public class ClosureWithExpectationHelper extends AbstractClosureTypeHelper {
 			}
 		} else {
 			if (incompatible) {
-				getExpectation().acceptActualType(resultClosureType, ConformanceHint.DEMAND_CONVERSION, ConformanceHint.CHECKED, ConformanceHint.INCOMPATIBLE, ConformanceHint.PROPAGATED_TYPE);
+				getExpectation().acceptActualType(resultClosureType, ConformanceHint.CHECKED, ConformanceHint.INCOMPATIBLE, ConformanceHint.PROPAGATED_TYPE);
 			} else {
-				getExpectation().acceptActualType(resultClosureType, ConformanceHint.DEMAND_CONVERSION, ConformanceHint.UNCHECKED);
+				getExpectation().acceptActualType(resultClosureType, ConformanceHint.UNCHECKED);
 			}
 		}
 	}
