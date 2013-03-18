@@ -385,46 +385,67 @@ val AbstractIterator&lt;Double&gt; infiniteRandomNumbers = [| Math::random]
 			<h3>Organize Imports</h3>
 			<p>
 			With the new release we have overhauled the <em>Organize imports</em> action. It now works 
-			exactly as you are used to from Java’s development tools, or even a bit better.
+			exactly as you are used to from Java’s development tools, or even a bit better. It 
+			processes all kinds of imports, asks to resolve conflicts, and shortens qualified names
+			automatically.
 			</p>
+			<img class="image_between_p" src="images/releasenotes/organize_imports.png"/>
 
 			<h3>Extract Method and Extract Local Variable</h3>
 			<p>
-			New refactorings have been aped to extract some code into a local variable or a method. 
+			New refactorings have been added. You can now extract code into a new local variable
 			</p>
+			<img class="image_between_p" src="images/releasenotes/extract_local_variable.png"/>
+			<p>
+			or into a new method.
+			</p>
+			<img class="image_between_p" src="images/releasenotes/extract_method_refactoring.png"/>
 
 			<h3>Better Error Handling</h3>
 			<p>
 			Follow-up error markers are now suppressed and markers are in general much more local, 
-			so it is very easy spot the problem immediately. In apition, the compiler generates 
+			so it is very easy spot the problem immediately. In addition, the compiler generates 
 			as much valid Java code as possible in order not to break dependent resources on changes.
 			</p>
 
 			<h3>Optional Errors and Warnings</h3>
-			<p>The severity of optional compiler errors can be configured. </p>
+			<p>The severity of optional compiler errors can be configured, globally as well as 
+			for a single project only. </p>
+			<img class="image_between_p" src="images/releasenotes/issue_severities.png"/>
 
+			<h3>More Quickfixes</h3>
+			<p>
+			Xtend now offers to create missing elements. Fields, methods, extension methods and types 
+			can be added with a quickfix, be it in Xtend or in Java classes.
+			</p>
+			<img class="image_between_p" src="images/releasenotes/quickfixes.png"/> 
+		
 			<h3>Improved Content Assist</h3>
 			<p>
 			The content assist has become much smarter. It now proposes lambda brackets if the argument 
 			takes a single function and it gives you hints on the possible parameter types when you 
 			are working in an overloaded method.
 			</p>
+			<img class="image_between_p" src="images/releasenotes/content_assist.png"/>
 		
 			<h3>Formatter</h3>
 			<p>
 			Furthermore a formatter which pretty prints and indents code idiomatically. With Xtend’s 
 			flexible syntax this is even more important than in Java.
 			</p>
+			<img class="image_between_p" src="images/releasenotes/formatter.png"/>
 			
 			<h3>JavaDoc</h3>
 			<p>
 			An Xtend editor now has validation and content assist within JavaDoc comments.
 			</p>
+			<img class="image_between_p" src="images/releasenotes/javadoc_content_assist.png"/>
 			
 			<h3>Copy Qualified Name</h3>
 			<p>
 			There is now a <em>Copy qualifed name</em> action in the editor and the outline view.
 			</p>
+			<img class="image_between_p" src="images/releasenotes/copy_qualified_name.png"/>
 		</dl>
 		</section>
 
