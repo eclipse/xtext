@@ -39,5 +39,9 @@ public class ExtractMethodWizard extends RefactoringWizard {
 		userInputPage.setRefactoring((ExtractMethodRefactoring) getRefactoring());
 		addPage(userInputPage);
 	}
-
+	
+	@Override
+	public String getWindowTitle() {
+		return "Extract Method";
+	}
 }
