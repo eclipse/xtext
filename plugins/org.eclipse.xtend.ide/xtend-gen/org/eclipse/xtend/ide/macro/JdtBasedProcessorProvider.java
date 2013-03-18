@@ -5,7 +5,6 @@ import java.io.File;
 import java.net.URI;
 import java.net.URL;
 import java.net.URLClassLoader;
-import java.util.ArrayList;
 import java.util.List;
 import org.apache.log4j.Logger;
 import org.eclipse.core.resources.IProject;
@@ -17,6 +16,7 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.jdt.core.IClasspathEntry;
 import org.eclipse.jdt.core.IJavaProject;
+import org.eclipse.jdt.core.IType;
 import org.eclipse.jdt.core.JavaCore;
 import org.eclipse.xtend.core.macro.ProcessorInstanceForJvmTypeProvider;
 import org.eclipse.xtext.common.types.JvmType;
@@ -41,24 +41,10 @@ public class JdtBasedProcessorProvider extends ProcessorInstanceForJvmTypeProvid
       ResourceSet _resourceSet = _eResource.getResourceSet();
       Object _classpathURIContext = ((XtextResourceSet) _resourceSet).getClasspathURIContext();
       final IJavaProject project = ((IJavaProject) _classpathURIContext);
-      final IClasspathEntry[] entries = project.getResolvedClasspath(true);
-      ArrayList<URL> _arrayList = new ArrayList<URL>();
-      final ArrayList<URL> urls = _arrayList;
-      for (final IClasspathEntry entry : entries) {
-        {
-          int _entryKind = entry.getEntryKind();
-          boolean _equals = (_entryKind == IClasspathEntry.CPE_PROJECT);
-          if (_equals) {
-          }
-          IPath _path = entry.getPath();
-          File _file = _path.toFile();
-          URL _uRL = _file.toURL();
-          urls.add(_uRL);
-        }
-      }
-      final ClassLoader classLoader = this.createClassLoader(project);
       String _identifier = type.getIdentifier();
-      final Class<? extends Object> result = classLoader.loadClass(_identifier);
+      final ClassLoader classLoader = this.createClassLoader(_identifier, project);
+      String _identifier_1 = type.getIdentifier();
+      final Class<? extends Object> result = classLoader.loadClass(_identifier_1);
       try {
         return result.newInstance();
       } catch (Throwable _e) {
@@ -75,11 +61,18 @@ public class JdtBasedProcessorProvider extends ProcessorInstanceForJvmTypeProvid
     }
   }
   
-  protected ClassLoader createClassLoader(final IJavaProject javaProject) {
+  protected ClassLoader createClassLoader(final String typeName, final IJavaProject javaProject) {
     try {
-      final IClasspathEntry[] resolvedClasspath = javaProject.getResolvedClasspath(true);
+      final IType type = javaProject.findType(typeName);
+      boolean _equals = Objects.equal(type, null);
+      if (_equals) {
+        Class<? extends JdtBasedProcessorProvider> _class = this.getClass();
+        return _class.getClassLoader();
+      }
+      final IJavaProject projectToUse = type.getJavaProject();
+      final IClasspathEntry[] resolvedClasspath = projectToUse.getResolvedClasspath(true);
       final List<URL> urls = CollectionLiterals.<URL>newArrayList();
-      List<URL> _outputFolders = this.getOutputFolders(javaProject);
+      List<URL> _outputFolders = this.getOutputFolders(projectToUse);
       urls.addAll(_outputFolders);
       for (final IClasspathEntry entry : resolvedClasspath) {
         {
@@ -96,7 +89,7 @@ public class JdtBasedProcessorProvider extends ProcessorInstanceForJvmTypeProvid
           if (!_matched) {
             if (Objects.equal(_switchValue,IClasspathEntry.CPE_PROJECT)) {
               _matched=true;
-              IProject _project = javaProject.getProject();
+              IProject _project = projectToUse.getProject();
               IWorkspace _workspace = _project.getWorkspace();
               IWorkspaceRoot _root = _workspace.getRoot();
               IPath _path = entry.getPath();
@@ -123,8 +116,8 @@ public class JdtBasedProcessorProvider extends ProcessorInstanceForJvmTypeProvid
           }
         }
       }
-      Class<? extends JdtBasedProcessorProvider> _class = this.getClass();
-      ClassLoader _classLoader = _class.getClassLoader();
+      Class<? extends JdtBasedProcessorProvider> _class_1 = this.getClass();
+      ClassLoader _classLoader = _class_1.getClassLoader();
       URLClassLoader _uRLClassLoader = new URLClassLoader(((URL[])Conversions.unwrapArray(urls, URL.class)), _classLoader);
       return _uRLClassLoader;
     } catch (Throwable _e) {
