@@ -10,13 +10,13 @@ code[Xtend][
   }
 ]
 
-You see that Xtend looks a lot like Java. At a first glance the main difference seems to be the code[Xtend][def]
+You see that Xtend looks quite similar to Java. At a first glance the main difference seems to be the code[Xtend][def]
 keyword to declare a method. Also like in Java it is mandatory to define a class and a main method as the entry point for an application. 
-Admittedly 'hello world' programs are not a particular strength of Xtend. The real expressiveness is unleashed when you do real stuff
+Admittedly 'Hello World' programs are not a particular strength of Xtend. The real expressiveness is unleashed when you do real things
 as you will learn in a second.
 
-An Xtend class resides in a plain Java project. As soon as the SDK is installed, Eclipse will automatically 
-translate it to Java code. By default you will find it in a source folder e[xtend-gen], which is of course configurable.
+An Xtend class resides in a plain Eclipse Java project. As soon as the SDK is installed, Eclipse will automatically 
+translate all the classes to Java source code. By default you will find it in a source folder e[xtend-gen].
 The hello world example is translated to the following Java code:
 code[Java][
   // Generated Java Source Code
@@ -30,29 +30,29 @@ code[Java][
 ]
 
 The only surprising fact in the generated Java code may be the referenced library class codeRef[org.eclipse.xtext.xbase.lib.InputOutput]. 
-It is provided by the runtime library and only one nice utility that is handy when using
-expressions.
+It is part of the runtime library and a nice utility that is quite handy when used in expressions.
 
-You can put an Xtend class into a source folder of any Java project within Eclipse (or any Maven project). Eclipse will complain
-about the missing library if it is not on the class path and provide a quick fix to add it.
+You can put an Xtend class into a source folder of any Java project within Eclipse or any Maven project. If the project is not
+yet configured properly, Eclipse will complain about the missing library. The xtend.lib has to be on the class path. 
+The IDE will provide a quick fix to add it.
 
 The next thing you might want to do is materializing one of the example projects into your workspace.
-To do so right click anywhere in the e[Navigator] view in Eclipse and select e[New -> Example...].
+Right click anywhere in the e[Navigator] view in Eclipse and select e[New -> Example...].
 
 In the upcoming dialog you will find two examples for Xtend:
 
 ul[
   item[e[Xtend Introductory Examples] contains a couple of example code snippets illustrating certain
   aspects and strengths of Xtend. 
-  It for instance shows how to build an API which allows for writing code like this:
+  For instance it shows how to build an API which allows to write code like this:
   code[Xtend][
     assertEquals(42.km/h, (40_000.m + 2.km) / 60.min)
   ]
-  Also the ref:moviesExample[the movies example] explained in detail in ref:moviesExample[the next section]
+  Also the ref:moviesExample[movies example] explained in detail in ref:moviesExample[the next section]
   is included there.]
-  item[e[Xtend Solutions For Euler] contains solutions to a lot of the problems you will find at link[http://projecteuler.net/][Project Euler's website].
+  item[e[Xtend Solutions For Euler] contains solutions to some of the problems you will find at link[http://projecteuler.net/][Project Euler].
    These examples are leveraging the whole expressive power of Xtend. For instance link[http://projecteuler.net/problem=1][Euler Problem 1] can be solved
-   with the following expression :
+   with this expression :
    code[Xtend][
      (1..999).filter\[ i | i % 3 == 0 || i % 5 == 0 \].reduce\[ i1, i2 | i1 + i2 \]
    ]

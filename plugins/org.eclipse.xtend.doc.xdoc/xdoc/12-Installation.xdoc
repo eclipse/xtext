@@ -1,19 +1,20 @@
 chapter:Installation[Installation]
 
-Xtend requires Eclipse 3.5 or higher and a Java SDK 5 or higher. The easiest way to install the
+Xtend requires Eclipse 3.5 or higher and a Java SDK 5 or higher. The recommended Eclipse version
+is 3.8 or better to benefit even more from the IDE integration. The easiest way to install the
 SDK is via link[http://marketplace.eclipse.org/content/eclipse-xtend][Eclipse Marketplace]. 
 But there is also a complete Eclipse distribution link[http://www.eclipse.org/xtend/index.html#download][available for download
 at http://xtend-lang.org].
 
-If you do not want to use the recommended Eclipse plug-in, you can compile Xtend code using the 
+If you do not want to use the Eclipse plug-in, you can compile Xtend code using the 
 Maven plug-in.
 
 section:MavenSupport[Maven Support]
 
 The runtime library as well as a plug-in to run the compiler in a Maven build can be be obtained from
-the following Maven repository: link[http://build.eclipse.org/common/xtend/maven/][http://build.eclipse.org/common/xtend/maven/].
+the Maven repository at Eclipse.org: link[http://build.eclipse.org/common/xtend/maven/][http://build.eclipse.org/common/xtend/maven/].
 
-Here is the XML for the repository:
+Here is the XML for the repository location:
 code[
 <repositories>
   <repository>
@@ -29,7 +30,7 @@ code[
 </pluginRepositories>
 ]
 
-Here is the XML for the dependency to the library:
+Here is the pom.xml snippet for the dependency to the library:
 
 code[
 <dependency>
@@ -39,7 +40,7 @@ code[
 </dependency>
 ]
 
-And this is the XML for the plug-in:
+Last but not least, this is the pom for the Xtend compiler plug-in:
 
 code[
 <plugin>
@@ -63,9 +64,11 @@ code[
 </plugin>
 ]
 
-As you see the e[outputDirectory] can be specified to match the default of the Eclipse plug-in (e[xtend-gen]). Of course you can also change the configuration
-in Eclipse to match the Maven default (e[generated-sources]). To do so right-click on the project and select e[Properties] or if you prefer a global setting choose e[Eclipse->Preferences].
-In the category e[Xtend/Compiler] enter the directory name (see screenshot). It is interpreted as a relative path to the parent of the source folder, which includes the to-be-compiled Xtend file.
+As you see the e[outputDirectory] can be specified to match the default of the Eclipse plug-in (e[xtend-gen]).
+Of course you can also change the configuration in Eclipse to match the Maven default (e[generated-sources]).
+To do so right-click on the project and select e[Properties] or if you prefer a global setting choose e[Eclipse->Preferences].
+In the category e[Xtend/Compiler] enter the directory name (see screenshot). It is interpreted as a
+relative path to the parent of the source folder, which includes the to-be-compiled Xtend file.
 
 img[images/configure-compiler-in-eclipse.png][Configuring the compiler in Eclipse][][]
 
@@ -73,9 +76,9 @@ section:library[The Runtime Library]
 
 The compiler requires a small runtime library e[org.eclipse.xtend.lib] on the class path, which provides useful extensions
 to existing classes and interfaces from the JDK. Many 
-features of Xtend are not built into the language itself but provided via this library. 
+features of Xtend are not baked into the language itself but provided via this library. 
 It is available from a ref:MavenSupport[Maven repository] and via p2
-update site (in case you do Eclipse plug-in development).
+update site if you do Eclipse plug-in development.
  
 The library provides means to create collections in a readable way:
 
@@ -92,7 +95,7 @@ code[Xtend][
   val listOfNames = listOfPersons.map\[ name \]
 ]
 
-Many operators to concat collections or to do arithmetics with types like codeRef[java.math.BigDecimal] are also available.
+Operators to concatenate collections or to do arithmetics with types like codeRef[java.math.BigDecimal] are also available.
 
-You might want to have a look at the link[http://xtend-lang.org/api/2.3.0/index.html][JavaDoc API] to see what is
-available.
+You might want to have a look at the link[http://xtend-lang.org/api/2.4.0/index.html][JavaDoc] to learn about the
+other useful APIs that are part of the library.

@@ -1,11 +1,11 @@
 chapter:Xtend_Classes_Members[Classes and Members]
 
 At a first glance an Xtend file pretty much looks like a Java file. It starts with a package 
-declaration followed by an import section and a class definition.
-The class in fact is directly translated to a Java class in the corresponding Java package.
-A class can have constructors, fields and methods. 
+declaration followed by an import section and class definitions.
+The classes in fact are directly translated to Java classes in the corresponding Java package.
+A class can have constructors, fields, methods and annotations. 
 
-Here is an example:
+Here is an examplary Xtend file:
 code[Xtend][
   package com.acme
   
@@ -47,8 +47,9 @@ section:imports[Imports]
 The ordinary imports of type names are equivalent to the imports known from Java. 
 Again one can escape any names conflicting with keywords using a code[^]. In contrast to Java, the 
 terminating semicolon is optional. Xtend also features static imports but 
-allows only a wildcard code[*] at the end, i.e. you currently cannot import single members using a static 
-import. Non-static wildcard imports are deprecated for the benefit of better tooling. 
+allows only a wildcard code[*] at the end, i.e. you cannot import single members using a static 
+import. Non-static wildcard imports are deprecated for the benefit of better usability and well
+defined dependencies. 
 
 As in Java all classes from the code[java.lang] package are implicitly imported.
 code[Xtend][
@@ -56,20 +57,17 @@ code[Xtend][
   import static java.util.Collections.*
 ]
 
-Static methods of helper classes can also be imported as code[Xtend][extension]s. See the section on 
+Static methods can also be imported as code[Xtend][extension]s. See the section on 
 ref:extensionMethods[extension methods] for details.
-
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 section:Xtend_ClassDeclaration[Class Declaration]
 
 The class declaration reuses a lot of Java's syntax but still is a bit different in some aspects:
-Java's default "package private" visibility does not exist in Xtend. As an Xtend class is compiled to
-a top-level Java class and Java does not allow code[Java][private] or code[Java][protected] top-level
-classes any Xtend class is code[Xtend][public]. It is possible to write code[Xtend][public] explicitly. 
-
-Since version 2.3, multiple class declaration per file are supported. Each of these classes
+All Xtend types are code[public] by default since that's the common case. Java's "package private" 
+default visibility is declared by the more explicit keyword code[package] in Xtend. In contrast to Java,
+Xtend supports multiple public top level class declarations per file. Each Xtend class
 is compiled to a separate top-level Java class.
 
 Abstract classes are defined using the code[Xtend][abstract] modifier as in Java. See also ref:abstractMethods 
@@ -77,7 +75,8 @@ on abstract methods.
 
 Xtend's approach to inheritance is conceptual the same as in Java. Single inheritance of 
 classes as well as implementing multiple interfaces is supported. 
-Xtend classes can of course extend other Xtend classes, and even Java classes can inherit from Xtend classes. 
+Xtend classes can extend other Xtend classes, and even Java classes can inherit from Xtend classes.
+If no super type is specified, codeRef[java.lang.Object] is used. 
 
 The most simple class looks like this:
 code[Xtend][
@@ -99,8 +98,8 @@ code[Xtend][
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 section:constructors[Constructors]
 
-An Xtend class can define one or more constructors. Unlike Java you do not have to repeat the name of the class over and over again,
-but use keyword code[Xtend][new] to declare a constructor.
+An Xtend class can define any number of constructors. Unlike Java you do not have to repeat the name of the class over and over again,
+but use the keyword code[Xtend][new] to declare a constructor.
 Constructors can also delegate to other constructors using code[Xtend][this(args...)] in their first
 line. 
 code[Xtend][
@@ -119,15 +118,16 @@ The same rules with regard to inheritance apply as in Java, i.e. if the super cl
 no-argument constructor, you have to explicitly call one using code[Xtend][super(args...)] as the first 
 expression in the body of the constructor.
 
-The default visibility of constructors is code[Xtend][public] but you can also specify code[Xtend][protected]
-or code[Xtend][private].
+The default visibility of constructors is code[Xtend][public] but you can also specify an explicit visiblity 
+code[Xtend][public], code[Xtend][protected], code[Xtend][package] or code[Xtend][private].
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 section:fields[Fields]
 
 A field can have an initializer. Final fields are declared using code[Xtend][val], while 
 code[Xtend][var] introduces a non-final field and can be omitted. Yet, if an initializer expression
-is present, the type of a field can be skipped after code[Xtend][val] and code[Xtend][var].
+is present, the type of a field can be inferred if code[Xtend][val] or code[Xtend][var] was
+used to introduce the field. The keyword code[final] is synonym to code[val].
 Fields marked as code[Xtend][static] will be compiled to static Java fields.  
 
 code[Xtend][
@@ -140,8 +140,8 @@ code[Xtend][
   }
 ]
 
-The default visibility is code[Xtend][private]. You can also declare it explicitly as 
-being code[Xtend][public], code[Xtend][protected], or code[Xtend][private]. 
+The default visibility for fields is code[Xtend][private]. You can also declare it explicitly as 
+being code[Xtend][public], code[Xtend][protected], code[Xtend][package] or code[Xtend][private]. 
 
 A specialty of Xtend are fields that provide e[extension methods] which are covered in 
 ref:extensionMethods[their own section].
@@ -151,15 +151,17 @@ section:methods[Methods]
 
 Xtend methods are declared within a class and are translated to a corresponding Java method with 
 exactly the same signature. The only exceptions are dispatch methods, which are explained 
-ref:polymorphicDispatch[later]. 
+ref:polymorphicDispatch[later].
+
 code[Xtend][
   def String first(List<String> elements) {
     elements.get(0)
   }
 ]
 
+Method declarations start with the keyword code[def].
 The default visibility of a plain method is code[Xtend][public]. You can explicitly declare it as
-being code[Xtend][public], code[Xtend][protected], or code[Xtend][private].
+being code[Xtend][public], code[Xtend][protected], code[Xtend][package] or code[Xtend][private].
 
 Xtend supports the code[Xtend][static] modifier for methods:
 code[Xtend][
@@ -168,18 +170,20 @@ code[Xtend][
   }
 ] 
 
-As in Java 5, Xtend allows vararg parameters:
+As in Java, vararg parameters are allowed:
 code[Xtend][
   def printAll(String... strings) {
     strings.forEach\[ s | println(s) \]
   }
-] 
+]
 
+It is possible to infer the return type of a method from its body. Recursive methods and abstract
+methods have to declare an explicit return type.
 
 section2:abstractMethods[Abstract Methods]
 
-An abstract method in Xtend just does not define a body and must be declared within an code[Xtend][abstract]
-class. Also specifying the return type is mandatory since it cannot be inferred. 
+An abstract method in Xtend does not define a body and must be declared within an code[Xtend][abstract]
+class or an interface. Also specifying the return type is mandatory since it cannot be inferred. 
 
 code[Xtend][
   abstract class MyAbstractClass() {
@@ -191,8 +195,9 @@ section2[Overriding Methods]
 
 Methods can override other methods from the super class or implement interface methods using the
 keyword code[Xtend][override]. If a method overrides a method from a super type, the 
-code[Xtend][override] keyword is mandatory and replaces the keyword code[Xtend][def]. As in Java 
-code[Java][final] methods cannot be overridden by subclasses.
+code[Xtend][override] keyword is mandatory and replaces the keyword code[Xtend][def]. The override semantics
+are the same as in Java, e.g. it is impossible to override code[Java][final] methods or invisible methods.
+Overriding methods inherit their return type from the super declaration.
 
 Example:
 code[Xtend][
@@ -203,8 +208,8 @@ code[Xtend][
 
 section2:declaredExceptions[Declared Exceptions]
 
-Xtend does not force you to catch or redeclare checked exceptions. Nevertheless, you can still declare 
-the exceptions thrown in a method's body using the same code[Xtend][throws] clause as in Java.
+Xtend does not force you to catch or declare checked exceptions. Nevertheless, you can still declare 
+the exceptions thrown in a method's body using the code[Xtend][throws] clause as in Java.
 
 If you do not declare checked exceptions in your method but they are possibly thrown in your code, the
 compiler will throw the checked exception silently (using the sneaky-throw technique introduced by 
@@ -226,6 +231,8 @@ code[Xtend][
   }
 ]
 
+Optional validation of checked exception is supported, too, and can be configured on the respective Eclipse
+preference page for the Xtend Errors and Warnings.
 
 section2:inferredReturnTypes[Inferred Return Types]
 
@@ -245,13 +252,12 @@ code[Xtend][
   }
 ]
 
-This does not work for abstract method declarations as well as if the return type of a method 
-depends on a recursive call of the same method.
+The return type is mandatory for abstract method declarations as well as for recursive implementations.
 
 section2:genericMethods[Generic Methods]
 
-You can specify type parameters just like in Java. To generalize the method from the previous section,
-you would declare it like this:
+You can specify type parameters on methods. A parameterized variant of the method from the previous section,
+could look like this:
 
 code[Xtend][
   def <T> second(List<T> elements) {
@@ -259,16 +265,16 @@ code[Xtend][
   }
 ]
 
-Also bounds and the like are supported and share the same syntax as defined in the 
+Type parameter bounds and constraints are supported and share the same syntax and semantics as defined in the 
 link[http://docs.oracle.com/javase/specs/jls/se5.0/html/classes.html#8.4.4][the Java Language Specification]
 
 section2:polymorphicDispatch[Dispatch Methods]
 
-Generally, method binding works just like method binding in Java. Method calls are bound 
+Generally, method resolution and binding is done statically at compile time as in Java. Method calls are bound 
 based on the static types of arguments. Sometimes this is not what you want. Especially in the 
 context of ref:extensionMethods[extension methods] you would like to have polymorphic behavior.
 
-A dispatch method is marked using the keyword code[Xtend][dispatch].
+A dispatch method is declared using the keyword code[Xtend][dispatch].
 code[Xtend][
   def dispatch printType(Number x) { 
     "it's a number" 
@@ -279,10 +285,11 @@ code[Xtend][
   }
 ] 
 
-For a set of visible dispatch methods in the current type hierarchy sharing the same name and the same
-number of arguments, the compiler infers a synthetic method (the dispatcher) using the common super type of all declared arguments.
-The actual dispatch methods are reduced in visibility and renamed (prepending an underscore) so that client code always binds to
-the dispatcher method.
+For a set of visible dispatch methods in the current type hierarchy with the same name and the same
+number of arguments, the compiler infers a synthetic dispatcher method. This dispatcher uses the common super type
+of all declared arguments. The method name of the actual dispatch cases is prepended with an underscore
+and the visibility of these methods is reduced to protected if they have been defined as public methods.
+Client code always binds to the synthesized dispatcher method.
 
 For the two dispatch methods in the example above the following Java code would be generated:
 code[Java][
@@ -306,13 +313,13 @@ code[Java][
   }
  ]
 
-Note that the code[Java][instanceof] cascade is ordered such that more specific types come first.
+Note that the code[Java][instanceof] cascade is ordered such that more specific types are handled first.
 
-The default visibility of the underscore methods is code[Xtend][protected]. If all dispatch methods
+The default visibility of the dispatch cases is code[Xtend][protected]. If all dispatch methods
 explicitly declare the same visibility, this will be the visibility of the inferred dispatcher, too.
 Otherwise it is code[Xtend][public].
  
-The comparison of the type parameters goes from left to right. That is in the following example, the second
+The comparison of the parameter types is performed from left to right. That is in the following example, the second
 method declaration is considered more specific since its first parameter type is the most specific:
 
 code[Xtend][
@@ -341,8 +348,8 @@ code[Java][
   }
 ]
 
-As you can see a code[Xtend][null] reference is never a match. If you want to fetch code[Xtend][null] 
-you can declare a dispatch case using the type codeRef[java.lang.Void].
+The code is compiled in a way that a code[Xtend][null] reference is never a match. code[Xtend][null] values 
+can be handled by dispatch cases that use the parameter type codeRef[java.lang.Void].
 code[Xtend][
   def dispatch printType(Number x) { 
     "it's some number" 
@@ -375,9 +382,9 @@ code[Java][
 
 section3[Dispatch Methods and Inheritance]
 
-Any visible Java methods from super types conforming to the compiled form of a dispatch method are
-also included in the dispatch. Conforming means they have the right number of arguments and have 
-the same name (starting with an underscore).
+All visible Java methods from all super types that are conformant to the compiled representation of 
+a dispatch method are also included in the dispatcher. Conforming means they have the expected number of arguments 
+and have the same compiled name with the prepended underscore.
 
 For example, consider the following Java class :
 code[Java][
@@ -426,51 +433,58 @@ code[Java][
 
 section3[Static Dispatch Methods]
 
-Also static dispatch methods are supported. But you cannot mix static and non-static
-dispatch methods.
+Also static dispatch methods are supported. A mixture of static and non-static
+dispatch methods is prohibited.
 
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 section:Annotations[Annotations]
 
-The syntax and semantics for annotations is exactly like defined in the 
+Annotations are available on classes, fields, methods and parameters. They are prefixed
+with the code[@] character and accept a number of key-value pairs or a single default value
+for the annotation property named code[value]. Annotation
+values that expect arrays can handle single values, too. Value arrays are enclosed in array 
+literals code[Xtend][#\['first', 'second'\]]
+The semantics for annotations are exactly like defined in the 
 link[http://java.sun.com/docs/books/jls/third_edition/html/j3TOC.html][Java Language Specification]. 
-Annotations are available on classes, fields, methods and parameters. Here is an example:
+Here is an example:
 
 code[Xtend][
   @TypeAnnotation("some value")
   class MyClass {
-    @FieldAnnotation(children = {@MyAnno(true), @MyAnno(false)})
+    @FieldAnnotation(children = #\[ @MyAnno(true), @MyAnno(false) \])
     String myField
     
-    @MethodAnnotation(children = {@MyAnno(true), @MyAnno})
+    @MethodAnnotation(children = #\[ @MyAnno(true), @MyAnno \])
     def String myMethod(@ParameterAnnotation String param) {
       //...
     }
   }
 ]
 
-In addition ref:activeAnnotations[Active Annotations] allow users to change and participate in how
-Xtend code gets translated to Java source code.
+In addition ref:activeAnnotations[Active Annotations] allow users to participate in compilation of
+Xtend code to Java source code.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 section:extensionMethods[Extension Methods]
 
 Extension methods allow to add new methods to existing types without modifying them. 
 This feature is actually where Xtend got its name from. They are based on a simple syntactic trick: 
-Instead of passing the first argument of an extension method inside the parentheses of a call, the 
-method can be called on the argument parameter as if it was one of its members.
+Instead of passing the first argument of an extension method inside the parentheses of a method invocation, the 
+method can be called with the first argument as its receiver - it can be called as if the method was one of the argument type's members.
 code[Xtend][
   "hello".toFirstUpper() // calls StringExtensions.toFirstUpper("hello")
 ]   
 
 Method calls in extension syntax often result in more readable code, as they are chained rather than nested. 
 Another benefit of extensions is that you can add methods which are specific to a certain context
-or layer of your application. You might for instance not want to put UI-specific methods and dependencies to your
-domain model classes. Therefore such functionality is often defined in static methods or methods in
-some "service class". That works, but the code is less readable and less object-oriented if you call methods
-like this. In Java for instance you often see code like this:
+or layer of your application.
+
+For instance, you might not want to put UI-specific methods and dependencies into your
+domain model classes. Therefore this functionality is often defined in static methods or methods in
+utility classes or service layers. That works, but the code is less readable and less object-oriented if you call methods
+like this. In Java you often see code like this:
 
 code[Java][
   persistenceManager.save(myObject);
@@ -484,9 +498,9 @@ code[Xtend][
 
 There are different ways to make methods available as extensions, which are described in the following.
 
-section2:libraryExtensions[Extensions From The Library]
+section2:libraryExtensions[Extensions from the Library]
 
-The library puts a lot of very useful extension methods on existing types from the Java
+The Xtend library puts a lot of very useful extension methods on existing types from the Java
 SDK without any further ado.
 
 code[Xtend][
@@ -494,7 +508,7 @@ code[Xtend][
   listOfStrings.map\[ toUpperCase \] // calls ListExtensions.<T, R>map(List<T> list, Function<? super T, ? extends R> mapFunction)
 ]
 
-Have a look at the JavaDoc to see what is there:
+Have a look at the JavaDoc to learn about the available functionality:
 
 ul[
   item[codeRef[org.eclipse.xtext.xbase.lib.ObjectExtensions]]
@@ -587,9 +601,9 @@ by providing a different instance.
 section:interfaces[Interface Declaration]
 
 An interface declaration is very similar to the one in Java. An interface can declare fields, which are
-by default final static as in Java and therefore must have an initial value. And of course methods can
+by default final static therefore must have an initial value. And of course methods can
 be declared. They are public by default. Interfaces can extend any number of other interfaces and can
-declare type parameter just like in Java.
+declare type parameters.
 
 Here's an example:
 code[Xtend][
@@ -601,13 +615,14 @@ code[Xtend][
 
 section:annotationTypeDeclaration[Annotation Type Declaration]
 
-Annotation types can also be declared. Instead of resembling the code[interface] keyword and shoehorning annotation properties into methods
-with a code[default] keyword like Java does, you can declare annotation types like this:
+Annotation types can also be declared. The are introduced by the keyword code[annotation] and declare their values
+with a concise syntax:
 
 code[Xtend][
   annotation MyAnnotation {
   	String\[\] value
   	boolean isTricky = false
+  	int\[\] lotteryNumbers = #\[ 42, 137 \]
   }
 ]
 

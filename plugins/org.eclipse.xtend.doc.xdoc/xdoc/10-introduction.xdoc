@@ -25,6 +25,6 @@ readable and expressive. Xtend's small library is just a thin layer that provide
 utilities and extensions on top of the Java Development Kit (JDK). 
 
 Of course, you can call Xtend methods from Java, too, in a completely transparent way. Furthermore, Xtend provides a modern 
-Eclipse-based IDE closely integrated with Eclipse's Java Development Tools (JDT), including features like call-hierarchies, rename refactoring, 
+Eclipse-based IDE closely integrated with the Eclipse Java Development Tools (JDT), including features like call-hierarchies, rename refactoring,
 debugging and many more.
 
