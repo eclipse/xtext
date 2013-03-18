@@ -19,7 +19,6 @@ import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IntegerRange;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ListExtensions;
-import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.Pair;
 import org.junit.Assert;
 import org.junit.Test;
@@ -37,7 +36,7 @@ public class BasicExpressions {
     Assert.assertEquals(new BigDecimal("42.00"), _plus_2);
     boolean _not = (!false);
     Assert.assertEquals(Boolean.valueOf(true), Boolean.valueOf(_not));
-    Class<? extends Object> _class = this.getClass();
+    Class<? extends BasicExpressions> _class = this.getClass();
     Assert.assertEquals(_class, BasicExpressions.class);
   }
   
@@ -77,7 +76,7 @@ public class BasicExpressions {
     boolean _equals = (_length == 4);
     if (_equals) {
       int _xifexpression = (int) 0;
-      boolean _notEquals = ObjectExtensions.operator_notEquals("foo", "bar");
+      boolean _notEquals = (!Objects.equal("foo", "bar"));
       if (_notEquals) {
         _xifexpression = 42;
       } else {

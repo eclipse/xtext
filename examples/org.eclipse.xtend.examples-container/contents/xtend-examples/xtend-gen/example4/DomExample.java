@@ -1,3 +1,10 @@
+/**
+ * Copyright (c) 2012 itemis AG (http://www.itemis.eu) and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ */
 package example4;
 
 import example4.A;
@@ -10,6 +17,7 @@ import example4.Head;
 import example4.Html;
 import example4.P;
 import example4.Title;
+import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.Functions.Function0;
 import org.eclipse.xtext.xbase.lib.InputOutput;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
@@ -20,10 +28,11 @@ import org.junit.Test;
  * This examples shows
  *  - the usage and declaration of a builder API.
  *  - usage of @Data annotation
- *  - non-static extenions methods
+ *  - non-static extension methods
  */
 @SuppressWarnings("all")
 public class DomExample {
+  @Extension
   private DomBuilder db = new Function0<DomBuilder>() {
     public DomBuilder apply() {
       DomBuilder _domBuilder = new DomBuilder();
@@ -31,6 +40,7 @@ public class DomExample {
     }
   }.apply();
   
+  @Extension
   private DomSerializer ds = new Function0<DomSerializer>() {
     public DomSerializer apply() {
       DomSerializer _domSerializer = new DomSerializer();

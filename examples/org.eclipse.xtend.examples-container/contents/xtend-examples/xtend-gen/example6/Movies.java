@@ -126,7 +126,7 @@ public class Movies {
           };
         List<Movie> _map = ListExtensions.<String, Movie>map(_readLines, _function);
         return _map;
-      } catch (Exception _e) {
+      } catch (Throwable _e) {
         throw Exceptions.sneakyThrow(_e);
       }
     }

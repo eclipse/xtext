@@ -16,7 +16,7 @@ import org.eclipse.xtext.xbase.lib.StringExtensions;
 @SuppressWarnings("all")
 public class BottleSupport {
   public static String bottles(final int i) {
-    CharSequence _switchResult = null;
+    String _switchResult = null;
     boolean _matched = false;
     if (!_matched) {
       if (Objects.equal(i,0)) {
@@ -34,7 +34,7 @@ public class BottleSupport {
       StringConcatenation _builder = new StringConcatenation();
       _builder.append(i, "");
       _builder.append(" bottles");
-      _switchResult = _builder;
+      _switchResult = _builder.toString();
     }
     String _string = _switchResult.toString();
     return _string;

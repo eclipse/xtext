@@ -26,8 +26,8 @@
 		<!-- run task "generate_self" to compose this list -->
 		<zip_example name="xtend-examples"/>
 		<zip_example name="xtend-euler"/>
-		<zip_example name="xtend_annotation_examples"/>
-		<zip_example name="xtend_annotation_examples_client"/>
+		<zip_example name="xtend-annotation-examples"/>
+		<zip_example name="xtend-annotation-examples-client"/>
 	</target>
 
 	<target name="generate_self">

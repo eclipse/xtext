@@ -89,8 +89,8 @@
 	</extension>
 	<extension point="org.eclipse.emf.common.ui.examples">
 	  <example wizardID="org.eclipse.xtend.examples.NewXtendAnnotation" pageImage="icons/genproject.gif">
-		 <projectDescriptor name="xtend_annotation_examples" contentURI="contents/xtend_annotation_examples.zip" description="%XtendAnnotation_description"/>
-		 <projectDescriptor name="xtend_annotation_examples_client" contentURI="contents/xtend_annotation_examples_client.zip" description="%XtendAnnotation_description"/>
+		 <projectDescriptor name="xtend-annotation-examples" contentURI="contents/xtend-annotation-examples.zip" description="%XtendAnnotation_description"/>
+		 <projectDescriptor name="xtend-annotation-examples-client" contentURI="contents/xtend-annotation-examples-client.zip" description="%XtendAnnotation_description"/>
 	  </example>
    </extension>
 </plugin>

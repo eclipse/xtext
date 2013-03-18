@@ -1,3 +1,10 @@
+/**
+ * Copyright (c) 2012 itemis AG (http://www.itemis.eu) and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ */
 package example4;
 
 import java.util.ArrayList;
@@ -21,7 +28,7 @@ public class Node {
   }
   
   public String tagName() {
-    Class<? extends Object> _class = this.getClass();
+    Class<? extends Node> _class = this.getClass();
     String _simpleName = _class.getSimpleName();
     String _lowerCase = _simpleName.toLowerCase();
     return _lowerCase;
