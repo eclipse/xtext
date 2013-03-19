@@ -22,9 +22,9 @@ import org.junit.runners.Suite.SuiteClasses;
 	SkipThreeCharactersInBetweenConfiguredCompilerSmokeTest.class,
 	SkipThreeCharactersInBetweenDataCompilerSmokeTest.class,
 	SkipThreeCharactersInBetweenExtensionsCompilerSmokeTest.class,
+	SkipThreeCharactersInBetweenParameterizedTypeCompilerSmokeTest.class,
 	SkipThreeCharactersInBetweenPropertyCompilerSmokeTest.class,
 	SkipThreeCharactersInBetweenXtendCompilerSmokeTest.class,
 })
 public class SkipThreeCharactersInBetween {
-
 }
