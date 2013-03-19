@@ -22,6 +22,7 @@ import org.junit.runners.Suite.SuiteClasses;
 	SkipNodesInBetweenConfiguredCompilerSmokeTest.class,
 	SkipNodesInBetweenDataCompilerSmokeTest.class,
 	SkipNodesInBetweenExtensionsCompilerSmokeTest.class,
+	SkipNodesInBetweenParameterizedTypeCompilerSmokeTest.class,
 	SkipNodesInBetweenPropertyCompilerSmokeTest.class,
 	SkipNodesInBetweenXtendCompilerSmokeTest.class,
 })
