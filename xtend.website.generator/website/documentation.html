@@ -164,7 +164,7 @@
 <ul>	<li><a href="#active_annotations_processor">Annotation Processor</a></li>
 	<li><a href="#active_annotations_expression">On Expressions and Statements</a></li>
 	<li><a href="#active_annotations_validation">Custom Compiler Checks</a></li>
-	<li><a href="#active_annotation_classpath">Classpath Setup and Testing</a></li>
+	<li><a href="#active_annotation_classpath">Class Path Setup and Testing</a></li>
 	<li><a href="#_3">Existing Active Annotations</a></li>
 	<li><a href="#propertyAnnotation">@Property</a></li>
 	<li><a href="#dataAnnotation">@Data</a></li>
@@ -3072,7 +3072,7 @@ node Parent{
 						<p>
 							The IDE plugin comes with an example project, which you can easily materialize into your workspace. To
 							do so use the new project wizard and in the category <strong>Xtend Examples</strong> choose the active annotation example.
-							the projects contain three different examples which we will use for further explanation in this chapter.
+							The examples contain three different annotations which we will use for further explanation.
 						</p>
 						<p>
 							For instance, <code class="prettyprint lang-xtend">@Extract</code> is an annotation which extracts an interface for a class.
@@ -3089,8 +3089,8 @@ annotation Extract {}</pre>
 						<section id="active_annotations_processor" style="padding-top: 68px; margin-top: -68px;">
 						<h2 style="padding-top: 15px;">Annotation Processor</h2>
 						<p>
-							A processor class must implement one or both of the lifecycle call back interfaces provided by the compiler.
-							There are some base classes for the most common usecase, which implement both interfaces:
+							A processor class must implement one or both of the lifecycle call-back interfaces provided by the compiler.
+							There are some base classes for the most common usecases. These implement both interfaces:
 							</p>
 							<ul>
 								<li><a href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.4/org/eclipse/xtend/lib/macro/AbstractClassProcessor.html"><abbr title="org.eclipse.xtend.lib.macro.AbstractClassProcessor">AbstractClassProcessor</abbr></a> <a href="https://github.com/eclipse/xtext/blob/v2.4.0/plugins/org.eclipse.xtend.lib/src/org/eclipse/xtend/lib/macro/AbstractClassProcessor.java">(src)</a> is a base class for class annotations</li>
@@ -3101,18 +3101,18 @@ annotation Extract {}</pre>
 						</p>
 						<p>
 							If you want to annotate other elements such as interfaces, parameters or constructors, you should have
-							a look at the bases classes and mimic their implmenentation accordingly.
+							a look at the bases classes and adapt their implementation accordingly.
 						</p>
 						<!-- subsection -->
 						<section id="active_annotations_register_globals" style="padding-top: 68px; margin-top: -68px;">
 						<h3>Phase 1: Register Globals (<a href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.4/org/eclipse/xtend/lib/macro/RegisterGlobalsParticipant.html"><abbr title="org.eclipse.xtend.lib.macro.RegisterGlobalsParticipant">RegisterGlobalsParticipant</abbr></a> <a href="https://github.com/eclipse/xtext/blob/v2.4.0/plugins/org.eclipse.xtend.lib/src/org/eclipse/xtend/lib/macro/RegisterGlobalsParticipant.java">(src)</a>)</h3>
 						<p>
-							During the first phase global symbols (the types) are indexed. By implementing <a href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.4/org/eclipse/xtend/lib/macro/RegisterGlobalsParticipant.html"><abbr title="org.eclipse.xtend.lib.macro.RegisterGlobalsParticipant">RegisterGlobalsParticipant</abbr></a> <a href="https://github.com/eclipse/xtext/blob/v2.4.0/plugins/org.eclipse.xtend.lib/src/org/eclipse/xtend/lib/macro/RegisterGlobalsParticipant.java">(src)</a>
+							The first phase in the lifecycle of the compiler is about indexing the types as globally available symbols. By implementing a <a href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.4/org/eclipse/xtend/lib/macro/RegisterGlobalsParticipant.html"><abbr title="org.eclipse.xtend.lib.macro.RegisterGlobalsParticipant">RegisterGlobalsParticipant</abbr></a> <a href="https://github.com/eclipse/xtext/blob/v2.4.0/plugins/org.eclipse.xtend.lib/src/org/eclipse/xtend/lib/macro/RegisterGlobalsParticipant.java">(src)</a>
 							you have the chance to create and register new Java types during this phase. It's important
-							to do this in a first phase so later phases can refer to the types.
+							to do this in a first phase so later on the compiler can find and access these types.
 						</p>
 						<p>
-							For example the ExtractProcessor from the example adds one interface per annotated class:
+							For example the ExtractProcessor adds one interface per annotated class:
 						</p>
 						<p>
 							</p>
@@ -3132,29 +3132,32 @@ class ExtractProcessor extends AbstractClassProcessor {
 							<p>
 						</p>
 						<p>
-							The <a href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.4/org/eclipse/xtend/lib/macro/RegisterGlobalsContext.html"><abbr title="org.eclipse.xtend.lib.macro.RegisterGlobalsContext">RegisterGlobalsContext</abbr></a> <a href="https://github.com/eclipse/xtext/blob/v2.4.0/plugins/org.eclipse.xtend.lib/src/org/eclipse/xtend/lib/macro/RegisterGlobalsContext.java">(src)</a> provides all services available in this phase. 
-							Additionally a read-only view on the Xtend model is passed in.
-							In the example above you'll get a call for all classes annotated with the <strong>active annotation</strong>.
+							The <a href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.4/org/eclipse/xtend/lib/macro/RegisterGlobalsContext.html"><abbr title="org.eclipse.xtend.lib.macro.RegisterGlobalsContext">RegisterGlobalsContext</abbr></a> <a href="https://github.com/eclipse/xtext/blob/v2.4.0/plugins/org.eclipse.xtend.lib/src/org/eclipse/xtend/lib/macro/RegisterGlobalsContext.java">(src)</a> provides all the services that are available during 
+							this compilation step. It is passed into the method <code class="prettyprint lang-xtend">doRegisterGlobals()</code> along with a read-only representation of the annotated
+							Xtend elements.
+							The AbstractClassProcessor in this example is invoked for all classes that are annotated with <code class="prettyprint lang-xtend">@Extract</code>.
 						</p>
 						<p>
-							The compiler calls <a href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.4/org/eclipse/xtend/lib/macro/RegisterGlobalsParticipant.html"><abbr title="org.eclipse.xtend.lib.macro.RegisterGlobalsParticipant">RegisterGlobalsParticipant</abbr></a> <a href="https://github.com/eclipse/xtext/blob/v2.4.0/plugins/org.eclipse.xtend.lib/src/org/eclipse/xtend/lib/macro/RegisterGlobalsParticipant.java">(src)</a> once per file (aka
-							compilation unit) and passes all elements in which are annotated with the <strong>active annotation</strong> this processor
-							is registered for.
+							The compiler calls <a href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.4/org/eclipse/xtend/lib/macro/RegisterGlobalsParticipant.html"><abbr title="org.eclipse.xtend.lib.macro.RegisterGlobalsParticipant">RegisterGlobalsParticipant</abbr></a> <a href="https://github.com/eclipse/xtext/blob/v2.4.0/plugins/org.eclipse.xtend.lib/src/org/eclipse/xtend/lib/macro/RegisterGlobalsParticipant.java">(src)</a> once per compilation unit
+							and provides access to all elements which are annotated with the <strong>active annotation</strong> this processor
+							is registered for. Therefore the <code class="prettyprint lang-xtend">ExtractProcessor</code> is invoked with a list of all classes that are defined in the same Xtend file for
+							all the files that are being compiled.
 						</p>
 						</section>
 						<!-- subsection -->
 						<section id="active_annotations_transformation_phase" style="padding-top: 68px; margin-top: -68px;">
 						<h3>Phase 2: Transformation (<a href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.4/org/eclipse/xtend/lib/macro/TransformationParticipant.html"><abbr title="org.eclipse.xtend.lib.macro.TransformationParticipant">TransformationParticipant</abbr></a> <a href="https://github.com/eclipse/xtext/blob/v2.4.0/plugins/org.eclipse.xtend.lib/src/org/eclipse/xtend/lib/macro/TransformationParticipant.java">(src)</a>)</h3>
 						<p>
-							In the second phase developers can modify the derived Java code. To do so developers need to implement
-							<a href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.4/org/eclipse/xtend/lib/macro/TransformationParticipant.html"><abbr title="org.eclipse.xtend.lib.macro.TransformationParticipant">TransformationParticipant</abbr></a> <a href="https://github.com/eclipse/xtext/blob/v2.4.0/plugins/org.eclipse.xtend.lib/src/org/eclipse/xtend/lib/macro/TransformationParticipant.java">(src)</a> in their processor. Similar to the 
-							<a href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.4/org/eclipse/xtend/lib/macro/RegisterGlobalsParticipant.html"><abbr title="org.eclipse.xtend.lib.macro.RegisterGlobalsParticipant">RegisterGlobalsParticipant</abbr></a> <a href="https://github.com/eclipse/xtext/blob/v2.4.0/plugins/org.eclipse.xtend.lib/src/org/eclipse/xtend/lib/macro/RegisterGlobalsParticipant.java">(src)</a> interface the compiler passes in two
-							parameters: The list of annotated elements and a context providing useful services specific for that
-							phase.
+							In the second phase developers can modify the compiled Java classes and Java code. Annotation processors that implement
+							<a href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.4/org/eclipse/xtend/lib/macro/TransformationParticipant.html"><abbr title="org.eclipse.xtend.lib.macro.TransformationParticipant">TransformationParticipant</abbr></a> <a href="https://github.com/eclipse/xtext/blob/v2.4.0/plugins/org.eclipse.xtend.lib/src/org/eclipse/xtend/lib/macro/TransformationParticipant.java">(src)</a> participate in this compile step. Similar to the 
+							<a href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.4/org/eclipse/xtend/lib/macro/RegisterGlobalsParticipant.html"><abbr title="org.eclipse.xtend.lib.macro.RegisterGlobalsParticipant">RegisterGlobalsParticipant</abbr></a> <a href="https://github.com/eclipse/xtext/blob/v2.4.0/plugins/org.eclipse.xtend.lib/src/org/eclipse/xtend/lib/macro/RegisterGlobalsParticipant.java">(src)</a> interface the compiler provides two
+							arguments: The list of annotated elements and a <a href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.4/org/eclipse/xtend/lib/macro/TransformationContext.html"><abbr title="org.eclipse.xtend.lib.macro.TransformationContext">TransformationContext</abbr></a> <a href="https://github.com/eclipse/xtext/blob/v2.4.0/plugins/org.eclipse.xtend.lib/src/org/eclipse/xtend/lib/macro/TransformationContext.java">(src)</a>. The context provides services
+							that are specific for this second step.
 						</p>
 						<p>
-							This time however you get mutable elements, which are represent the to-be generated code. They are usually
-							very similar to the source elements, but can be modified and new elements can be added.
+							A transformation participant can access and modify mutable Java elements. These are an in-memory representation of the generated Java code. They are usually
+							very similar to the source elements, but can be modified and new methods, fields or constructors can be added. It is not possible to
+							create new types during the transformation step.
 						</p>
 						<p>
 							The <code class="prettyprint lang-xtend">ExtractProcessor</code> implements the method <code class="prettyprint lang-xtend">doTransform</code> like this:
@@ -3196,18 +3199,12 @@ class ExtractProcessor extends AbstractClassProcessor {
 							<p>
 						</p>
 						<p>
-							In the first line we retrieve the interface which was registered and created in the first phase:
-							</p>
-							<pre class="prettyprint lang-xtend linenums">
-val interfaceType = findInterface(annotatedClass.interfaceName)</pre>
-							<p>
+							In the first line, <code class="prettyprint lang-xtend">findInterface</code> retrieves the interface which was registered during the registration of global symbols in the first phase:
+							The method is defined in <a href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.4/org/eclipse/xtend/lib/macro/TransformationContext.html"><abbr title="org.eclipse.xtend.lib.macro.TransformationContext">TransformationContext</abbr></a> <a href="https://github.com/eclipse/xtext/blob/v2.4.0/plugins/org.eclipse.xtend.lib/src/org/eclipse/xtend/lib/macro/TransformationContext.java">(src)</a>
+							which is used as an <a href="#Extension_Values">extension value</a>.
 						</p>
 						<p>
-							The method <code class="prettyprint lang-xtend">findInterface</code> comes from <a href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.4/org/eclipse/xtend/lib/macro/TransformationContext.html"><abbr title="org.eclipse.xtend.lib.macro.TransformationContext">TransformationContext</abbr></a> <a href="https://github.com/eclipse/xtext/blob/v2.4.0/plugins/org.eclipse.xtend.lib/src/org/eclipse/xtend/lib/macro/TransformationContext.java">(src)</a>
-							which is made an <a href="#Extension_Values">extension value</a>.
-						</p>
-						<p>
-							Next up the interface is added to the existing list of implemented interfaces.
+							Next up the newly created interface is added to the existing list of implemented interfaces.
 						</p>
 						<p>
 							</p>
@@ -3223,8 +3220,7 @@ annotatedClass.implementedInterfaces = annotatedClass.implementedInterfaces + #[
 						<p>
 							A <a href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.4/org/eclipse/xtend/lib/macro/declaration/TypeReference.html"><abbr title="org.eclipse.xtend.lib.macro.declaration.TypeReference">TypeReference</abbr></a> <a href="https://github.com/eclipse/xtext/blob/v2.4.0/plugins/org.eclipse.xtend.lib/src/org/eclipse/xtend/lib/macro/declaration/TypeReference.java">(src)</a> can be created using one of the various
 							methods from <a href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.4/org/eclipse/xtend/lib/macro/services/TypeReferenceProvider.html"><abbr title="org.eclipse.xtend.lib.macro.services.TypeReferenceProvider">TypeReferenceProvider</abbr></a> <a href="https://github.com/eclipse/xtext/blob/v2.4.0/plugins/org.eclipse.xtend.lib/src/org/eclipse/xtend/lib/macro/services/TypeReferenceProvider.java">(src)</a> which is a super type
-							of <a href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.4/org/eclipse/xtend/lib/macro/TransformationContext.html"><abbr title="org.eclipse.xtend.lib.macro.TransformationContext">TransformationContext</abbr></a> <a href="https://github.com/eclipse/xtext/blob/v2.4.0/plugins/org.eclipse.xtend.lib/src/org/eclipse/xtend/lib/macro/TransformationContext.java">(src)</a>. So these methods are available as extensions
-							as well.
+							of <a href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.4/org/eclipse/xtend/lib/macro/TransformationContext.html"><abbr title="org.eclipse.xtend.lib.macro.TransformationContext">TransformationContext</abbr></a> <a href="https://github.com/eclipse/xtext/blob/v2.4.0/plugins/org.eclipse.xtend.lib/src/org/eclipse/xtend/lib/macro/TransformationContext.java">(src)</a>. These utilities are available as extensions, too.
 						</p>
 						</section>
 						</section>
@@ -3232,20 +3228,21 @@ annotatedClass.implementedInterfaces = annotatedClass.implementedInterfaces + #[
 						<section id="active_annotations_expression" style="padding-top: 68px; margin-top: -68px;">
 						<h2 style="padding-top: 15px;">On Expressions and Statements</h2>
 						<p>
-							Most of the generated Java code is represented in the form of in-memory elements (all subtypes of <a href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.4/org/eclipse/xtend/lib/macro/declaration/Element.html"><abbr title="org.eclipse.xtend.lib.macro.declaration.Element">Element</abbr></a> <a href="https://github.com/eclipse/xtext/blob/v2.4.0/plugins/org.eclipse.xtend.lib/src/org/eclipse/xtend/lib/macro/declaration/Element.java">(src)</a>).
+							Most of the generated Java code is represented in the form of in-memory elements. Basically all the structural elements
+							are represented as a dedicated <a href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.4/org/eclipse/xtend/lib/macro/declaration/Element.html"><abbr title="org.eclipse.xtend.lib.macro.declaration.Element">Element</abbr></a> <a href="https://github.com/eclipse/xtext/blob/v2.4.0/plugins/org.eclipse.xtend.lib/src/org/eclipse/xtend/lib/macro/declaration/Element.java">(src)</a>.
 							If you want to generate the body of a method or the initializer of a field, you have two options.
 						</p>
 						<!-- subsection -->
 						<section id="active_annotations_compilation_strategies" style="padding-top: 68px; margin-top: -68px;">
 						<h3>Generating Blackbox Java Code</h3>
 						<p>
-							The first option is to assign a so called compilation strategy to the respective property. As example
-							we add the body of an observable setter method in the following code snippet:
+							The first option is to assign a compilation strategy and take care of the Java code by yourself. As an example
+							the body of a setter method of an observable instance is implemented by the following code snippet:
 						</p>
 						<p>
 							</p>
 							<pre class="prettyprint lang-xtend linenums">
-clazz.addMethod('set' + fieldName.toFirstUpper) [
+observableType.addMethod('set' + fieldName.toFirstUpper) [
   addParameter(fieldName, fieldType)
   body = ['''
     &laquo;fieldType&raquo; _oldValue = this.&laquo;fieldName&raquo;;
@@ -3256,18 +3253,19 @@ clazz.addMethod('set' + fieldName.toFirstUpper) [
 							<p>
 						</p>
 						<p>
-							We assign a lambda to the body which is later called when actual code is generated. The single parameter
-							passed into that lambda is a <a href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.4/org/eclipse/xtend/lib/macro/declaration/CompilationStrategy.CompilationContext.html"><abbr title="org.eclipse.xtend.lib.macro.declaration.CompilationStrategy$CompilationContext">CompilationContext</abbr></a> <a href="https://github.com/eclipse/xtext/blob/v2.4.0/plugins/org.eclipse.xtend.lib/src/org/eclipse/xtend/lib/macro/declaration/CompilationStrategy.java">(src)</a>,
-							which provides a convenient way to turn any <a href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.4/org/eclipse/xtend/lib/macro/declaration/TypeReference.html"><abbr title="org.eclipse.xtend.lib.macro.declaration.TypeReference">TypeReference</abbr></a> <a href="https://github.com/eclipse/xtext/blob/v2.4.0/plugins/org.eclipse.xtend.lib/src/org/eclipse/xtend/lib/macro/declaration/TypeReference.java">(src)</a>
-							into its Java representation taking imports into account. It even adds new imports if possible.
+							A lambda expression is used to implement the body. This function is invoked later when the actual code is generated.
+							It accepts a single parameter which is a <a href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.4/org/eclipse/xtend/lib/macro/declaration/CompilationStrategy.CompilationContext.html"><abbr title="org.eclipse.xtend.lib.macro.declaration.CompilationStrategy$CompilationContext">CompilationContext</abbr></a> <a href="https://github.com/eclipse/xtext/blob/v2.4.0/plugins/org.eclipse.xtend.lib/src/org/eclipse/xtend/lib/macro/declaration/CompilationStrategy.java">(src)</a>.
+							The compilation context provides a convenient way write a <a href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.4/org/eclipse/xtend/lib/macro/declaration/TypeReference.html"><abbr title="org.eclipse.xtend.lib.macro.declaration.TypeReference">TypeReference</abbr></a> <a href="https://github.com/eclipse/xtext/blob/v2.4.0/plugins/org.eclipse.xtend.lib/src/org/eclipse/xtend/lib/macro/declaration/TypeReference.java">(src)</a>
+							into a Java source file. It takes existing imports into account and adds new imports on the fly if necessary.
 						</p>
 						</section>
 						<!-- subsection -->
 						<section id="active_annotations_assigning_expressions" style="padding-top: 68px; margin-top: -68px;">
 						<h3>Assigning Expressions</h3>
 						<p>
-							As a second alternative you can reassign expressions written in Xtend. Imagine you
-							want to have lazy initialization of fields and want to write it like int the following example:
+							A second alternative is to put expressions from the Xtend source into the context of a generated Java element.
+							This allows to directly use the code that was written in the source file. An 
+							annotation <code class="prettyprint lang-xtend">@Lazy</code> which turns fields into lazily initialized properties, may be used like this:
 						</p>
 						<p>
 							</p>
@@ -3278,10 +3276,10 @@ class MyClass {
 							<p>
 						</p>
 						<p>
-							You could implement it by inferring a synthetic initializer method
-							and adding a getter-method, which calls the initilizer method if the field is <code class="prettyprint lang-xtend">null</code>. 
-							To do so you could move the field's initializer expression to a synthetic initializer method.
-							The following code would do the trick:
+							The processor for this <strong>active annotation</strong> could infer a synthetic initializer method
+							and add a getter-method, which calls the initializer if the field is still <code class="prettyprint lang-xtend">null</code>. 
+							Therefore, the initialization expression of the field has to become the method body of the synthesized initializer method.
+							The following code performs this transformation:
 						</p>
 						<p>
 							</p>
@@ -3315,15 +3313,16 @@ override doTransform(MutableFieldDeclaration field, extension TransformationCont
 						<section id="active_annotations_validation" style="padding-top: 68px; margin-top: -68px;">
 						<h2 style="padding-top: 15px;">Custom Compiler Checks</h2>
 						<p>
-							The previous example requires each annotated field to have an initializer. Otherwise it wouldn't
-							make sense to initialize lazily. Also as we simply check for <code class="prettyprint lang-xtend">null</code> reference we might explicitly state
-							that primitive types are not supported. So in order to guide the user we should raise compilation errors if these constrains are violated.
+							The previous example requires each annotated field to have an initializer. Otherwise it would not be
+							possible to use lazy initialization to assign its value. Also a simple check for a <code class="prettyprint lang-xtend">null</code> reference could
+							cause trouble with primitive values. A validation for that case would be sensible, too. In order to guide the user dedicated compilation errors should be raised if these constrains are violated.
 						</p>
 						<p>
-							The <a href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.4/org/eclipse/xtend/lib/macro/TransformationContext.html"><abbr title="org.eclipse.xtend.lib.macro.TransformationContext">TransformationContext</abbr></a> <a href="https://github.com/eclipse/xtext/blob/v2.4.0/plugins/org.eclipse.xtend.lib/src/org/eclipse/xtend/lib/macro/TransformationContext.java">(src)</a> inherits some useful methods for this from <a href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.4/org/eclipse/xtend/lib/macro/services/ProblemSupport.html"><abbr title="org.eclipse.xtend.lib.macro.services.ProblemSupport">ProblemSupport</abbr></a> <a href="https://github.com/eclipse/xtext/blob/v2.4.0/plugins/org.eclipse.xtend.lib/src/org/eclipse/xtend/lib/macro/services/ProblemSupport.java">(src)</a>.
+							The <a href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.4/org/eclipse/xtend/lib/macro/TransformationContext.html"><abbr title="org.eclipse.xtend.lib.macro.TransformationContext">TransformationContext</abbr></a> <a href="https://github.com/eclipse/xtext/blob/v2.4.0/plugins/org.eclipse.xtend.lib/src/org/eclipse/xtend/lib/macro/TransformationContext.java">(src)</a> inherits methods for exactly that purpose from the <a href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.4/org/eclipse/xtend/lib/macro/services/ProblemSupport.html"><abbr title="org.eclipse.xtend.lib.macro.services.ProblemSupport">ProblemSupport</abbr></a> <a href="https://github.com/eclipse/xtext/blob/v2.4.0/plugins/org.eclipse.xtend.lib/src/org/eclipse/xtend/lib/macro/services/ProblemSupport.java">(src)</a> service.
 						</p>
 						<p>
-							Again since the <code class="prettyprint lang-xtend">context</code> is declared as an <a href="#Extension_Values">extension value</a>, we can use those methods as extensions and simply write:
+							Since the <code class="prettyprint lang-xtend">context</code> is declared as an <a href="#Extension_Values">extension value</a>, those methods can be used as extensions and it allows to implement
+							the constraint check accordingly:
 						</p>
 						<p>
 							</p>
@@ -3339,24 +3338,24 @@ override doTransform(MutableFieldDeclaration field, extension TransformationCont
 							<p>
 						</p>
 						<p>
-							This will make sure the user is notified about invalid usage of <code class="prettyprint lang-xtend">@Lazy</code>.
+							This ensures that the user is notified about invalid applications of the <strong>active annotation</strong> <code class="prettyprint lang-xtend">@Lazy</code>.
 						</p>
 						</section>
 						<!--  section -->
 						<section id="active_annotation_classpath" style="padding-top: 68px; margin-top: -68px;">
-						<h2 style="padding-top: 15px;">Classpath Setup and Testing</h2>
+						<h2 style="padding-top: 15px;">Class Path Setup and Testing</h2>
 						<p>
-							An <strong>active annotation</strong> can not be used in the project it is declared in, but has to reside on
-							an upstream project or be readily compiled in a jar. The annotation and the processer itself only rely
-							on the interfaces defined in <code class="prettyprint lang-xtend">org.eclipse.xtend.lib</code> which is Xtend's thin standard lib.
+							An <strong>active annotation</strong> can not be used in the same project it is declared in, but has to reside on
+							an upstream project. Alternatively it can be compiled and deployed in a jar. The annotation and the processor itself only rely
+							on the interfaces defined in <code class="prettyprint lang-xtend">org.eclipse.xtend.lib.macro</code> which is part of Xtend's small standard library.
 						</p>
 						<p>
-							When used in an IDE the compiled annotation processor is loaded and executed on the fly (i.e. within the IDE process).
+							When used in an IDE the compiled annotation processor is loaded and executed on the fly within the IDE process.
 						</p>
 						<p>
-							If you want to test and debug a processor you should write a unit test. Such a test needs the whole Xtend
-							compiler on the classpath, which you can get either via PDE (OSGi) or via Maven. The maven dependency
-							is
+							Therefore, careful testing and debugging of the processor is essential. It is best done in a unit test.
+							Such a test needs the whole Xtend compiler on the class path, which you can obtain by means of an OSGi bundle dependency or via Maven.
+							The maven dependency is
 						</p>
 						<p>
 							</p>
@@ -3370,19 +3369,19 @@ override doTransform(MutableFieldDeclaration field, extension TransformationCont
 							<p>
 						</p>
 						<p>
-							and the OSGI bundle is called <code class="prettyprint lang-xtend">org.eclipse.xtend.standalone</code>.
+							and the equivalent OSGI bundle is <code class="prettyprint lang-xtend">org.eclipse.xtend.standalone</code>.
 						</p>
 						<!-- subsection -->
 						<section id="active_annotation_CompilerTester" style="padding-top: 68px; margin-top: -68px;">
 						<h3>Testing</h3>
 						<p>
-							There is a convenient helper class for testing compilation called <code class="prettyprint lang-xtend">XtendCompilerTester</code>. It allows
-							to test active annotation processors by either comparing the generated Java source using a String comprison
-							or by inspecting the resulting AST. In addition you can even compile the generated Java source to a java
+							The <code class="prettyprint lang-xtend">XtendCompilerTester</code> is a convenient helper class for testing the processing and the compilation. It allows
+							to test active annotation processors by either comparing the generated Java source using a String comparison
+							or by inspecting the produced Java elements. In addition you can even compile the generated Java source to a Java
 							class and create and test instances of it reflectively.
 						</p>
 						<p>
-							Let's have a look at one of the test cases from the example project:
+							The example project contains a couple of test cases:
 						</p>
 						<p>
 							</p>
@@ -3423,9 +3422,9 @@ class LazyTest {
 							<p>
 						</p>
 						<p>
-							This is a basic string comparison. It's a good way to start development of a new annotation processor.
-							Later if you want to add more not so fragile tests you should do assertios against the result syntax
-							tree (AST). We use this technique in the <code class="prettyprint lang-xtend">@Extract</code>-example:
+							This is a basic string comparison. It is a good way to start the development of a new annotation processor.
+							Later on assertions against the produced elements and syntax tree (AST) may be a better choice since these are
+							not so fragile against changes in the formatting. The <code class="prettyprint lang-xtend">@Extract</code>-example uses this technique:
 						</p>
 						<p>
 							</p>
@@ -3439,7 +3438,7 @@ class LazyTest {
       }
     }
   '''.compile [
-    // declare the transformationcontext as a local extensions
+    // declare the transformation context as a local extensions
     val extension ctx = transformationContext
     
     // look up the interface and the class
@@ -3448,7 +3447,7 @@ class LazyTest {
     
     
     // do assertions
-    assertEquals(clazz.implementedInterfaces.head.type, interf)
+    assertEquals(interf, clazz.implementedInterfaces.head.type)
     
     interf.declaredMethods.head =&gt; [
       assertEquals('doStuff', simpleName)
@@ -3464,7 +3463,12 @@ class LazyTest {
 						<section id="_22" style="padding-top: 68px; margin-top: -68px;">
 						<h3>Wrap Up</h3>
 						<p>
-							<strong>Active Annotations</strong> are a powerful new concept which lets you solve a large class of problems that previously had to be solved in cumbersome ways, e.g. by IDE wizards, with code generation or simply by manually writing boilerplate code. It basically <strong>is</strong> a means of code generation, but its simple integration with your existing project structure and the fast development turnarounds diminish the typical downsides of code generation. <strong>Note, that in version 2.4 the Active Annotation-API is provisional, and might be changed in later releases.</strong>
+							<strong>Active Annotations</strong> are a powerful and unique concept that allows to solve a large class of problems that previously had to be solved in cumbersome ways.
+							IDE wizards, many code generators or manually writing boilerplate code are no longer state of the art. Active annotations basically <strong>is</strong> a means of code generation,
+							but its simple integration with existing projects and the fast development turn-arounds diminish the typical downsides of code generation.
+						</p>
+						<p>
+							<strong>Important note: The Active Annotation-API as of version 2.4 is provisional, and might be changed and improved in later releases.</strong>
 						</p>
 						</section>
 						</section>
@@ -3482,7 +3486,7 @@ class LazyTest {
 						<p>
 							For fields that are annotated as <a href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.4/org/eclipse/xtend/lib/Property.html"><code class="prettyprint lang-xtend">@Property</code></a> <a href="https://github.com/eclipse/xtext/blob/v2.4.0/plugins/org.eclipse.xtend.lib/src/org/eclipse/xtend/lib/Property.java">(src)</a>, the Xtend compiler will generate a Java field, a
 							getter and, if the field is non-final, a setter method. The name of the Java field will be prefixed with 
-							an <code class="prettyprint lang-xtend">_</code> and have the visibility of the Xtend field. The accessors methods are always <code class="prettyprint lang-xtend">public</code>. 
+							an <code class="prettyprint lang-xtend">_</code> and have the visibility of the Xtend field. The accessor methods are always <code class="prettyprint lang-xtend">public</code>. 
 							Thus, an Xtend field
 						</p>
 						<p>
@@ -3514,16 +3518,16 @@ public void setName(final String name) {
 						<h2 style="padding-top: 15px;">@Data</h2>
 						<p>
 							The annotation <a href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.4/org/eclipse/xtend/lib/Data.html"><code class="prettyprint lang-xtend">@Data</code></a> <a href="https://github.com/eclipse/xtext/blob/v2.4.0/plugins/org.eclipse.xtend.lib/src/org/eclipse/xtend/lib/Data.java">(src)</a>, will turn an annotated class into a value object class. A class annotated with <code class="prettyprint lang-xtend">@Data</code> 
-							has the following effect:
+							is processed according to the following rules:
 						</p>
 						<p>
 							</p>
 							<ul>
-								<li>all fields are flagged final,</li>
-								<li>getter methods will be generated (if not existent),</li>
-								<li>a constructor taking parameters for all non-initialized fields will be generated (if not existent),</li>
-								<li>equals(Object) / hashCode() methods will be generated (if not existent),</li>
-								<li>a toString() method will be generated (if not existent).</li>
+								<li>all fields are final,</li>
+								<li>getter methods will be generated (if they do not yet exist),</li>
+								<li>a constructor with parameters for all non-initialized fields will be generated (if it does not exist),</li>
+								<li>equals(Object) / hashCode() methods will be generated (if they do not exist),</li>
+								<li>a toString() method will be generated (if it does not exist).</li>
 							</ul>
 							<p>
 						</p>
@@ -3536,6 +3540,11 @@ public void setName(final String name) {
 @Data class Person {
   String firstName
   String lastName
+  
+  def static void main(String[] args) {
+    val p = new Person(args.get(0), args.get(1))
+    println(p.getFirstName() + ' ' + p.lastName)
+  }
 }</pre>
 							<p>
 						</p>
