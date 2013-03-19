@@ -1,0 +1,320 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" >
+<title>Active Annotations</title>
+
+<link href="book.css" rel="stylesheet" type="text/css">
+<link href="code.css" rel="stylesheet" type="text/css">
+<link rel="home" href="xtext.html" title="">
+</head>
+<body>
+<a name="activeAnnotations"></a>
+<h1>Active Annotations</h1>
+<p>
+<em>Active Annotations</em> allow developers to participate in the translation process of Xtend source code to Java code. That&apos;s useful in cases where Java requires you to 
+write a lot of boilerplate manually. For instance, many of the good old design patterns fall into this category. With <em>Active Annotations</em> you no longer need to remember how the 
+<a href="http://en.wikipedia.org/wiki/Visitor_pattern">Visitor</a> or the <a href="http://en.wikipedia.org/wiki/">Observer</a> pattern should be implemented. In Xtend you can implement the expansion 
+of such patterns in a library and let the compiler do the heavy lifting for you. To give you an example, lets have a look at the <em>@Data</em> annotation:&gt;
+</p>
+<p>
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+@Data&nbsp;<span class="keyword">class</span>&nbsp;Address&nbsp;{<br/>
+&nbsp;&nbsp;String&nbsp;street<br/>
+&nbsp;&nbsp;String&nbsp;zip<br/>
+&nbsp;&nbsp;String&nbsp;city<br/>
+}<br/>
+</p>
+</div>
+</div>
+</p>
+<p>
+The <span class="inlinecode">@Data</span> annotation is part of Xtend and will implement best practices for immutability for the annotated class. In particular it will
+</p>
+<p>
+<ul>
+	<li>
+		mark all fields as final,
+	</li>
+	<li>
+		create a single constructor,
+	</li>
+	<li>
+		implement <span class="inlinecode">hashCode()</span> and <span class="inlinecode">equals()</span> using the fields, and
+	</li>
+	<li>
+		create a readable <span class="inlinecode">toString()</span> implementation.
+	</li>
+</ul>
+</p>
+<p>
+Though these idioms are often very useful, they may not always be exactly what you want. With <em>Active Annotations</em> you are no longer tight to the provided defaults but 
+can roll your own implementation out which better suits your needs. <em>Active Annotations</em> are just library so they integrate easily with your existing development environment.
+</p>
+<p>
+In this article we want to give you an overview of how <em>Active Annotations</em> work. As always this is best shown by example, so in the following we will develop our own 
+little properties annotations, which generates getter and setter methods for annotated fields.
+</p>
+<a name="activeAnnotations_7"></a>
+<h2>Creating The Project</h2>
+<p>
+An <em>Active Annotation</em> is declared in its own project which will be processed by the compiler before the clients of the annotations are translated. This allows to use the 
+annotation right within your development environment and implement it side by side with the client code. This clear separation allows to avoid any dependencies of the 
+downstream project to the APIs for the annotation processor and solves a chicken-and-egg problem between the processor and the annotated elements. The annotation is usable without any further ado.
+</p>
+<p>
+You can use any kind of Java project to get started. We use the maven archetype here:
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+mvn&nbsp;archetype:generate&nbsp;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;-DarchetypeGroupId=org.eclipse.xtend&nbsp;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;-DarchetypeArtifactId=xtend-archetype&nbsp;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;-DarchetypeCatalog=http:<span class="comment">//build.eclipse.org/common/xtend/maven/<br/>
+</span>
+</p>
+</div>
+</div>
+</p>
+<p>
+This command will create a fully configured maven project which runs the Xtend and Java compiler during the build. Eclipse would not be needed to compile, test and jar the project, but is recommended because of the good IDE support. 
+Also if you have the Eclipse Maven plugin m2e installed you can use the archetype wizard within Eclipse to create the project instead of the command line.
+</p>
+<a name="activeAnnotations_8"></a>
+<h2>Test First</h2>
+<p>
+<em>Active Annotations</em> are executed in your IDE, whenever an annotated Xtend element is compiled. This is impressive, since whenever you change an annotation all clients get recompiled on the 
+fly and you get instant feedback.
+</p>
+<p>
+However, it doesn&apos;t allow you to debug your processor implementation nor to test it. In order to do so you should write a test case.
+</p>
+<p>
+The test will make use of the compiler, so we need to add a dependency to it:
+</p>
+<p>
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+&lt;dependency&gt;<br/>
+&nbsp;&nbsp;&lt;groupId&gt;org.eclipse.xtend&lt;/groupId&gt;<br/>
+&nbsp;&nbsp;&lt;artifactId&gt;org.eclipse.xtend.standalone&lt;/artifactId&gt;<br/>
+&nbsp;&nbsp;&lt;version&gt;2.4.0&lt;/version&gt;<br/>
+&nbsp;&nbsp;&lt;scope&gt;test&lt;/scope&gt;<br/>
+&lt;/dependency&gt;<br/>
+</p>
+</div>
+</div>
+</p>
+<p>
+Note that we only need this dependency for testing, which is why we set the scope element to &apos;test&apos;. Further more we need some test framework, we&apos;ll use Junit in this example since that is already configured for the project.
+</p>
+<p>
+Let&apos;s start with a simple test case:
+</p>
+<p>
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+<span class="keyword">class</span>&nbsp;MyPropertyTests&nbsp;{<br/>
+<br/>
+&nbsp;&nbsp;<span class="keyword">extension</span>&nbsp;XtendCompilerTester&nbsp;compilerTester&nbsp;=&nbsp;XtendCompilerTester::newXtendCompilerTester(<span class="keyword">typeof</span>(MyPropertyTests))&nbsp;<br/>
+&nbsp;&nbsp;<br/>
+&nbsp;&nbsp;@Test&nbsp;<span class="keyword">def</span>&nbsp;<span class="keyword">void</span>&nbsp;testMyProperty()&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="string">&apos;&apos;&apos;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;class&nbsp;MyClass&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;@MyProperty&nbsp;String&nbsp;myField<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&apos;&apos;&apos;</span>.assertCompilesTo(<span class="string">&apos;&apos;&apos;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;@SupressWarnings("all")<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;public&nbsp;class&nbsp;MyClass&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;@MyProperty<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;private&nbsp;String&nbsp;myField<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;public&nbsp;String&nbsp;getMyField()&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;this.myField;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;public&nbsp;void&nbsp;setMyField(String&nbsp;myField)&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;this.myField&nbsp;=&nbsp;myField;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&apos;&apos;&apos;</span>)<br/>
+&nbsp;&nbsp;}<br/>
+}<br/>
+</p>
+</div>
+</div>
+</p>
+<p>
+We use the <span class="inlinecode">XtendCompilerTester</span> to validate the code which is emitted by the active annotation and the Xtend compiler. Since it is declared as an extension field it is possible to call its method <span class="inlinecode">assertCompilesTo()</span> as if they were defined on instances of <span class="inlinecode">java.lang.String</span>. This idiom makes the test case easy to read and write. Later-on you may want to explore the other methods that are provided by the compiler tester in order to directly execute the code that is produced from a given Xtend snippet.
+</p>
+<a name="activeAnnotations_9"></a>
+<h2>Implementing The Active Annotation</h2>
+<p>
+Next up we want to fix the failing test. For that matter a new Xtend file called &apos;src/main/java/org/eclipse/example/activeannotations/MyProperty.xtend&apos; should be created where we declare two elements: the annotation and its processor:
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+@Active(<span class="keyword">typeof</span>(MyPropertyProcessor))<br/>
+annotation&nbsp;MyProperty&nbsp;{&nbsp;}<br/>
+<br/>
+<span class="keyword">class</span>&nbsp;MyPropertyProcessor&nbsp;<span class="keyword">implements</span>&nbsp;TransformationParticipant&lt;MutableFieldDeclaration&gt;&nbsp;{<br/>
+&nbsp;&nbsp;<br/>
+&nbsp;&nbsp;<span class="keyword">override</span>&nbsp;doTransform(List&lt;?&nbsp;<span class="keyword">extends</span>&nbsp;MutableFieldDeclaration&gt;&nbsp;fields,&nbsp;<span class="keyword">extension</span>&nbsp;TransformationContext&nbsp;context)&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//TODO&nbsp;add&nbsp;getters&nbsp;and&nbsp;setters<br/>
+</span>&nbsp;&nbsp;}<br/>
+&nbsp;&nbsp;<br/>
+}<br/>
+</p>
+</div>
+</div>
+
+Active annotations are annotated with <span class="inlinecode">@Active</span>. Therein a single class implementing <span class="inlinecode">TransformationParticipant</span> must be referenced. We put that class right after the annotation and can now start implementing the method <span class="inlinecode">doTransform()</span> which gets called by the compiler during the translation to Java.
+</p>
+<p>
+All the annotated fields are passed into the processor as the first argument <span class="inlinecode">fields</span> of the method <span class="inlinecode">doTransform()</span>. Within the processor, we want to generate a getter and a setter method for each field.
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+fields.forEach&nbsp;[&nbsp;field&nbsp;|<br/>
+&nbsp;&nbsp;<span class="comment">//&nbsp;add&nbsp;the&nbsp;getter&nbsp;method<br/>
+</span>&nbsp;&nbsp;field.declaringType.addMethod(<span class="string">&apos;get&apos;</span>+field.name.toFirstUpper)&nbsp;[<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;returnType&nbsp;=&nbsp;field.type<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;body&nbsp;=&nbsp;[<span class="string">&apos;&apos;&apos;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;&amp;#xab;field.name&amp;#xbb;;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&apos;&apos;&apos;</span>]<br/>
+&nbsp;&nbsp;]<br/>
+&nbsp;&nbsp;<span class="comment">//TODO&nbsp;add&nbsp;the&nbsp;setter&nbsp;method<br/>
+</span>]<br/>
+</p>
+</div>
+</div>
+
+To add a getter method we iterate the annotated fields and add a method to each field&apos;s <span class="inlinecode">declaringType</span>. The <span class="inlinecode">addMethod()</span> operation takes two arguments, the method&apos;s name and an initializer block where we can set further properties like the return type, parameters, modifiers, etc. The method body is set with another block that is executed later when the actual Java code is generated. Here, we can generate Java code directly.
+</p>
+<p>
+As you can see, the translation is two-fold, the coarse grained constructs such as type declarations and its members are created and modified on an structural basis. It is very similar to a mutable variation of the <span class="inlinecode">java.lang.reflect</span>. API. On top of that, the finer grained elements such as statements and expressions are generated using Java&apos;s concrete syntax in plain text. Xtend&apos;s template expression helps to produce beautiful code.
+</p>
+<p>
+The setter method is created in a similar way. We only want a setter if the field is not final, so we add a guard for that:
+</p>
+<p>
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+fields.forEach&nbsp;[&nbsp;field&nbsp;|<br/>
+&nbsp;&nbsp;<span class="comment">//&nbsp;add&nbsp;the&nbsp;getter&nbsp;method<br/>
+</span>&nbsp;&nbsp;...<br/>
+&nbsp;&nbsp;<span class="comment">//&nbsp;add&nbsp;the&nbsp;setter&nbsp;method&nbsp;if&nbsp;field&nbsp;is&nbsp;not&nbsp;final<br/>
+</span>&nbsp;&nbsp;<span class="keyword">if</span>&nbsp;(!field.isFinal)&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;field.declaringType.addMethod(<span class="string">&apos;set&apos;</span>+field.name.toFirstUpper)&nbsp;[<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;returnType&nbsp;=&nbsp;primitiveVoid<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;addParameter(field.name,&nbsp;field.type)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;body&nbsp;=&nbsp;[<span class="string">&apos;&apos;&apos;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;this.&amp;#xab;field.name&amp;#xbb;&nbsp;=&nbsp;&amp;#xab;field.name&amp;#xbb;;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&apos;&apos;&apos;</span>]<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;]<br/>
+&nbsp;&nbsp;}<br/>
+]<br/>
+</p>
+</div>
+</div>
+</p>
+<p>
+Many of the needed properties and methods are declared on the AST types itself, such as <span class="inlinecode">MutableMethodDeclaration</span> and the like. However some are added through extensions coming from <span class="inlinecode">TransformationContext</span>, which is the second argument to <span class="inlinecode">doTransform()</span>. The context exposes a handy API, for instance it allows to add error or warning messages and get a some support for tracing as well as useful factories for creating type references. All these blend naturally into the interfaces that are provided on the AST level and allow to implement very advanced processors that validate project specific constraints or implement specific idioms.
+</p>
+<p>
+As an excercise you might want to add support for observing changes to the properties or check if a getter or setter method has been explicitly implemented already. Users should be able to change the getter or setter semantic by explicitly implementing one or the other.
+</p>
+<a name="activeAnnotations_10"></a>
+<h2>Wrap Up</h2>
+<p>
+<em>Active Annotations</em> are a powerful new concept which lets you solve a large class of problems that previously had to be solved in cumbersome ways, e.g. by IDE wizards, with code generation or simply by manually writing boilerplate code. It basically <em>is</em> a means of code generation, but its simple integration with your existing project structure and the fast development turnarounds diminish the typical downsides of code generation. <em>Note, that in version 2.4 the Active Annotation-API is provisional, and might be changed in later releases.</em>
+</p>
+<a name="activeAnnotations_11"></a>
+<h2>Existing Active Annotations</h2>
+<p>
+Xtend comes with ready-to-use active annotations for common code patterns. 
+They reside in the <span class="inlinecode">org.eclipse.xtend.lib</span> plug-in/jar which must be on the class path of the project containing the Xtend files.
+</p>
+<a name="propertyAnnotation"></a>
+<h2>@Property</h2>
+<p>
+For fields that are annotated as <a class="jdoc" href="http://download.eclipse.org/xtend/javadoc/2.3/org/eclipse/xtend/lib/Property.html" title="View JavaDoc"><abbr title="org.eclipse.xtend.lib.Property" ><span class="inlinecode">@Property</span></abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.3.0/plugins/org.eclipse.xtext.lib/src/org/eclipse/xtend/lib/Property.java" title="View Source Code" >(src)</a>, the Xtend compiler will generate a Java field, a
+getter and, if the field is non-final, a setter method. The name of the Java field will be prefixed with 
+an <span class="inlinecode">_</span> and have the visibility of the Xtend field. The accessors methods are always <span class="inlinecode"><span class="keyword">public</span></span>. 
+Thus, an Xtend field
+</p>
+<p>
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+@Property&nbsp;String&nbsp;name<br/>
+</p>
+</div>
+</div>
+</p>
+<p>
+will compile to the Java code
+</p>
+<p>
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+<span class="keyword">private</span>&nbsp;String&nbsp;_name;<br/>
+<br/>
+<span class="keyword">public</span>&nbsp;String&nbsp;getName()&nbsp;{<br/>
+&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;<span class="keyword">this</span>._name;<br/>
+}<br/>
+<br/>
+<span class="keyword">public</span>&nbsp;<span class="keyword">void</span>&nbsp;setName(<span class="keyword">final</span>&nbsp;String&nbsp;name)&nbsp;{<br/>
+&nbsp;&nbsp;<span class="keyword">this</span>._name&nbsp;=&nbsp;name;<br/>
+}<br/>
+</p>
+</div>
+</div>
+</p>
+<a name="dataAnnotation"></a>
+<h2>@Data</h2>
+<p>
+The annotation <a class="jdoc" href="http://download.eclipse.org/xtend/javadoc/2.3/org/eclipse/xtend/lib/Data.html" title="View JavaDoc"><abbr title="org.eclipse.xtend.lib.Data" ><span class="inlinecode">@Data</span></abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.3.0/plugins/org.eclipse.xtext.lib/src/org/eclipse/xtend/lib/Data.java" title="View Source Code" >(src)</a>, will turn an annotated class into a value object class. A class annotated with <span class="inlinecode">@Data</span> 
+has the following effect:
+</p>
+<p>
+<ul>
+	<li>
+		all fields are flagged final,
+	</li>
+	<li>
+		getter methods will be generated (if not existent),
+	</li>
+	<li>
+		a constructor taking parameters for all non-initialized fields will be generated (if not existent),
+	</li>
+	<li>
+		equals(Object) / hashCode() methods will be generated (if not existent),
+	</li>
+	<li>
+		a toString() method will be generated (if not existent).
+	</li>
+</ul>
+</p>
+<p>
+Example:
+</p>
+<p>
+<div class="literallayout">
+<div class="incode">
+<p class="code">
+@Data&nbsp;<span class="keyword">class</span>&nbsp;Person&nbsp;{<br/>
+&nbsp;&nbsp;String&nbsp;firstName<br/>
+&nbsp;&nbsp;String&nbsp;lastName<br/>
+}<br/>
+</p>
+</div>
+</div>
+</p>
+</body>
+</html>
