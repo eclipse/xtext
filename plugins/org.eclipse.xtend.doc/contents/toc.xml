@@ -173,20 +173,32 @@
 				</topic>
 			</topic>
 		</topic>
-		<topic href="contents/40-anntotations.html#activeAnnotations" label="Active Annotations" >
-			<topic href="contents/40-anntotations.html#activeAnnotations_7" label="Creating The Project" >
+		<topic href="contents/40-annotations.html#activeAnnotations" label="Active Annotations" >
+			<topic href="contents/40-annotations.html#active_annotations_processor" label="Annotation Processor" >
+				<topic href="contents/40-annotations.html#active_annotations_register_globals" label="Phase 1: Register Globals (org.eclipse.xtend.lib.macro.RegisterGlobalsParticipant)" >
+				</topic>
+				<topic href="contents/40-annotations.html#active_annotations_transformation_phase" label="Phase 2: Transformation (org.eclipse.xtend.lib.macro.TransformationParticipant)" >
+				</topic>
 			</topic>
-			<topic href="contents/40-anntotations.html#activeAnnotations_8" label="Test First" >
+			<topic href="contents/40-annotations.html#active_annotations_expression" label="On Expressions and Statements" >
+				<topic href="contents/40-annotations.html#active_annotations_compilation_strategies" label="Generating Blackbox Java Code" >
+				</topic>
+				<topic href="contents/40-annotations.html#active_annotations_assigning_expressions" label="Assigning Expressions" >
+				</topic>
 			</topic>
-			<topic href="contents/40-anntotations.html#activeAnnotations_9" label="Implementing The Active Annotation" >
+			<topic href="contents/40-annotations.html#active_annotations_validation" label="Custom Compiler Checks" >
 			</topic>
-			<topic href="contents/40-anntotations.html#activeAnnotations_10" label="Wrap Up" >
+			<topic href="contents/40-annotations.html#active_annotation_classpath" label="Classpath Setup and Testing" >
+				<topic href="contents/40-annotations.html#active_annotation_CompilerTester" label="Testing" >
+				</topic>
+				<topic href="contents/40-annotations.html#active_annotation_classpath_7" label="Wrap Up" >
+				</topic>
 			</topic>
-			<topic href="contents/40-anntotations.html#activeAnnotations_11" label="Existing Active Annotations" >
+			<topic href="contents/40-annotations.html#activeAnnotations_10" label="Existing Active Annotations" >
 			</topic>
-			<topic href="contents/40-anntotations.html#propertyAnnotation" label="@Property" >
+			<topic href="contents/40-annotations.html#propertyAnnotation" label="@Property" >
 			</topic>
-			<topic href="contents/40-anntotations.html#dataAnnotation" label="@Data" >
+			<topic href="contents/40-annotations.html#dataAnnotation" label="@Data" >
 			</topic>
 		</topic>
 	</topic>
