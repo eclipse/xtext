@@ -106,9 +106,21 @@ public class FeatureScopes implements IFeatureNames {
 		IScope staticExtensions = createStaticExtensionsScope(null, null, context, staticMembers, session, resolvedTypes);
 		IScope dynamicExtensions = createDynamicExtensionsScope(null, null, context, staticExtensions, session, resolvedTypes);
 		IScope implicitReceivers = createImplicitFeatureCallScope(context, dynamicExtensions, session, resolvedTypes);
-		IScope constructors = new ConstructorDelegateScope(implicitReceivers, session, asAbstractFeatureCall(context));
+		IScope constructors = createConstructorDelegates(context, implicitReceivers, session, resolvedTypes);
 		IScope localVariables = new LocalVariableScope(constructors, session, asAbstractFeatureCall(context));
 		return localVariables;
+	}
+
+	protected IScope createConstructorDelegates(EObject context, IScope parent, IFeatureScopeSession session, IResolvedTypes resolvedTypes) {
+		IEObjectDescription thisDescription = session.getLocalElement(THIS);
+		if (thisDescription != null) {
+			JvmIdentifiableElement thisElement = (JvmIdentifiableElement) thisDescription.getEObjectOrProxy();
+			LightweightTypeReference type = resolvedTypes.getActualType(thisElement);
+			if (type != null && !type.isUnknown()) {
+				return new ConstructorDelegateScope(parent, type, session, asAbstractFeatureCall(context));
+			}
+		}
+		return parent;
 	}
 
 	protected XAbstractFeatureCall asAbstractFeatureCall(EObject context) {
