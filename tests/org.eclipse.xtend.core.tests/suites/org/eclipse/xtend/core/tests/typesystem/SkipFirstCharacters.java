@@ -22,6 +22,7 @@ import org.junit.runners.Suite.SuiteClasses;
 	SkipFirstCharactersConfiguredCompilerSmokeTest.class,
 	SkipFirstCharactersDataCompilerSmokeTest.class,
 	SkipFirstCharactersExtensionsCompilerSmokeTest.class,
+	SkipFirstCharactersParameterizedTypeCompilerSmokeTest.class,
 	SkipFirstCharactersPropertyCompilerSmokeTest.class,
 	SkipFirstCharactersXtendCompilerSmokeTest.class,
 })

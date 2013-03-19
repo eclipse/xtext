@@ -26,6 +26,7 @@ import org.junit.runners.Suite.SuiteClasses;
 	ConfiguredCompilerTest.class,
 	ExtensionsCompilerTest.class,
 	DataCompilerTest.class,
+	ParameterizedTypeCompilerTest.class,
 	PropertyCompilerTest.class,
 	XtendCompilerTest.class,
 	XtendCompilerErrorHandlingTest.class,
