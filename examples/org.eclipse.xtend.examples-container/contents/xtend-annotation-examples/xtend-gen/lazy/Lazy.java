@@ -5,12 +5,17 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  */
-package extract;
+package lazy;
 
-@SuppressWarnings("all")
-public interface ExtractExampleInterface {
-  /**
-   * This method is extracted to an interface
-   */
-  public void myPublicMethod();
+import java.lang.annotation.ElementType;
+import java.lang.annotation.Target;
+import lazy.LazyProcessor;
+import org.eclipse.xtend.lib.macro.Active;
+
+/**
+ * Adds a lazy getter and an initializer method.
+ */
+@Target(ElementType.FIELD)
+@Active(LazyProcessor.class)
+public @interface Lazy {
 }

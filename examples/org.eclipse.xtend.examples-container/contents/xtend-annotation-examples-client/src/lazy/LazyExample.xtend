@@ -5,21 +5,9 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package extract
+package lazy
 
-@Extract
-class ExtractExample {
-	
-	/**
-	 * This method is extracted to an interface
-	 */
-	override void myPublicMethod() {
-	}
-	
-	/**
-	 * This method is not extracted
-	 */
-	private def void myPrivateMethod() {
-		
-	}
+class LazyExample {
+	@Lazy String foo = 'holla'
+	@Lazy Integer another = 42 * getFoo.length
 }
