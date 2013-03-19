@@ -39,7 +39,7 @@ class ReleaseNotes24 extends AbstractXtendWebsite {
 	            <li><a href="#new_operators">New Operators</a>
 	            </ul>
 	          </li>
-	          <li><a href="#android_development">New Editor Features</a>
+	          <li><a href="#new_ide_features">New Editor Features</a>
 	            <ul>
 	            <li><a href="#organize_imports">Organize Imports</a>
 	            <li><a href="#extract_method">Extract Method and Extract Local Variable</a>
@@ -48,8 +48,8 @@ class ReleaseNotes24 extends AbstractXtendWebsite {
 	            <li><a href="#quickfixes">New Quickfixes</a>
 	            <li><a href="#content_assist">Improved Content Assist</a>
 	            <li><a href="#formatter">Code Formatter</a>
-	            <li><a href="javadoc">JavaDoc</a>
-	            <li><a href="copy_qualifiedname">Copy Qualified Name</a>
+	            <li><a href="#javadoc">JavaDoc</a>
+	            <li><a href="#copy_qualifiedname">Copy Qualified Name</a>
 	            </ul>
 	          </li>
 	        </ul>
@@ -57,7 +57,7 @@ class ReleaseNotes24 extends AbstractXtendWebsite {
 	          <h2>Android Support</h2>
 	          <p>As Xtend compiles to Java and does not have its own standard library but relies on the JDK, it is a 
 	          great choice for Android application development. With version 2.4 the Android support has been 
-	          further improved. 
+	          further improved.
 	          </p>
 	          <h3 id="android_debugging">Debugging</h3>
 	            <p>
@@ -68,10 +68,11 @@ class ReleaseNotes24 extends AbstractXtendWebsite {
 	            debugging simply works.
 	            </p>
 	          <h3 id="android_maven">Maven Archetype</h3>
-	            <p>There is also a Maven archetype to set up a working Android project easily. If you 
+	            <p>
+	            There is also a Maven archetype to set up a working Android project easily. If you 
 	            have installed Maven and the Android SDK the you only need the following command to 
 	            get started:
-	          </p>
+	            </p>
 	<pre class="prettyprint linenums">
 	mvn archetype:generate -DarchetypeGroupId=org.eclipse.xtend \
 	  -DarchetypeArtifactId=xtend-android-archetype \
@@ -87,33 +88,35 @@ class ReleaseNotes24 extends AbstractXtendWebsite {
 	        The following new features have been added to the Xtend language.
 	        </p>
 	        <h3 id="active_annotations" >Active Annotations (Provisional API)</h3>
+«««	      <p>
+«««	      Java developers are often forced to write repetitive code, because the language 
+«««	      itself is not flexible enough. For instance, design patterns are not much more 
+«««	      than the documentation of a single concept and how you model that concept with 
+«««	      classes, interfaces and their members.
+«««	      </p>
+«««	      <p>
+«««	      To mitigate the effort of writing and maintainig redundant boiler plate code, 
+«««	      developers often reach out to extreme techniques such as byte code manipulation 
+«««	      (Spring Roo and Play! framework) or Java compiler hacking (Lombok). These 
+«««	      workarounds are not only complex but often cause other problems during development, 
+«««	      such as bad IDE integration and debugging issues. Other solutions to this kind 
+«««	      of problem include code generators and IDE wizards.
+«««	      </p>
 	      <p>
-	      Java developers are often forced to write repetitive code, because the language 
-	      itself is not flexible enough. For instance, design patterns are not much more 
-	      than the documentation of a single concept and how you model that concept with 
-	      classes, interfaces and their members.
-	      </p>
-	      <p>
-	      To mitigate the effort of writing and maintainig redundant boiler plate code, 
-	      developers often reach out to extreme techniques such as byte code manipulation 
-	      (Spring Roo and Play! framework) or Java compiler hacking (Lombok). These 
-	      workarounds are not only complex but often cause other problems during development, 
-	      such as bad IDE integration and debugging issues. Other solutions to this kind 
-	      of problem include code generators and IDE wizards.
-	      </p>
-	      <p>
-	      Xtend's <em>Active Annotations</em> allow developers to simply write and use an annotation to tell 
-	      that a certain pattern should be expanded. A simple example would be a JavaBeans 
-	      property supporting the Observer pattern. Here you not only need a getter and a 
-	      setter method for each field but also have to maintain the observer list and notify 
-	      them on changes. In many software systems you have hundreds of such properties. 
-	      Active Annotation allow to define and control such patterns at a single point and 
-	      let the compiler expand it on the fly, so your API users do not have to type nor 
-	      read the boiler plate code anymore.
+	      Xtend's <em>Active Annotations</em> allow developers to use a simple annotation to tell 
+	      that a certain pattern should be expanded to a specific piece of Java code. A simple example would be a JavaBeans 
+	      property supporting the Observer pattern. Here you need a getter and a 
+	      setter method for each field and also an observer list and the proper code to notify 
+	      them about changes. In many software systems you have hundreds of these properties. 
+	      Active Annotation allow you to define and automate the implementation of such patterns 
+	      and idioms at a single point and 
+	      let the compiler expand it on the fly. And all this based on lightweight, custom libraries. 
+	      You do no longer have to write nor 
+	      read the boiler plate code anymore. <a href="documentation.html#activeAnnotations">Read more...</a>
 	      </p>
 	      
 	      <p>
-	      Example: To compile the given Xtend code on the left to the Java code on the right
+	      Example: To compile the Xtend code on the left to the Java code on the right
 	      </p>
 	      <table class="table table-bordered table-condensed">
 	      <tr>
@@ -157,7 +160,7 @@ class ReleaseNotes24 extends AbstractXtendWebsite {
 	      </tr>
 	      </table>
 	      <p>
-	      you have to implement the active annotation <code class="prettyprint lang-xtend">@Observable</code> as
+	      you have to implement a simple active annotation <code class="prettyprint lang-xtend">@Observable</code> as
 	      </p>
 	          
 	<pre class="prettyprint lang-xtend linenums">
@@ -165,46 +168,42 @@ class ReleaseNotes24 extends AbstractXtendWebsite {
 	annotation Observable {
 	}
 	
-	class ObservableCompilationParticipant implements TransformationParticipant&lt;MutableClassDeclaration&gt; {
+	class ObservableCompilationParticipant extends AbstractClassProcessor {
 	
-	  override doTransform(List&lt;? extends MutableClassDeclaration&gt; classes, extension TransformationContext context) {
-	    for (clazz : classes) {
-	      
-	      for (f : clazz.declaredFields) {
-	        val fieldName = f.simpleName
-	        val fieldType = f.type
+	  override doTransform(MutableClassDeclaration clazz, extension TransformationContext context) {
+	    for (f : clazz.declaredFields) {
+	      val fieldName = f.simpleName
+	      val fieldType = f.type
 	
-	        clazz.addMethod('get' + fieldName.toFirstUpper) [
-	          returnType = fieldType
-	          body = ['«»''return this.&laquo;fieldName&raquo;;''«»']
-	        ]
-	
-	        clazz.addMethod('set' + fieldName.toFirstUpper) [
-	          addParameter(fieldName, fieldType)
-	          body = ['«»''
-	            &laquo;fieldType&raquo; _oldValue = this.&laquo;fieldName&raquo;;
-	            this.&laquo;fieldName&raquo; = &laquo;fieldName&raquo;;
-	            _propertyChangeSupport.firePropertyChange("&laquo;fieldName&raquo;", _oldValue, 
-	              &laquo;fieldName&raquo;);
-	          ''«»']
-	        ]
-	      }
-	      
-	      val changeSupportType = typeof(PropertyChangeSupport).newTypeReference
-	      clazz.addField('_propertyChangeSupport') [
-	        type = changeSupportType
-	        initializer = [''«»'new &laquo;toJavaCode(changeSupportType)&raquo;(this)''«»']
+	      clazz.addMethod('get' + fieldName.toFirstUpper) [
+	        returnType = fieldType
+	        body = ['«»''return this.&laquo;fieldName&raquo;;''«»']
 	      ]
-	      // add method addPropertyChangeListener
-	      // add method removePropertyChangeListener
+	
+	      clazz.addMethod('set' + fieldName.toFirstUpper) [
+	        addParameter(fieldName, fieldType)
+	        body = ['«»''
+	          &laquo;fieldType&raquo; _oldValue = this.&laquo;fieldName&raquo;;
+	          this.&laquo;fieldName&raquo; = &laquo;fieldName&raquo;;
+	          _propertyChangeSupport.firePropertyChange("&laquo;fieldName&raquo;", _oldValue, 
+	            &laquo;fieldName&raquo;);
+	        ''«»']
+	      ]
 	    }
+	    
+	    val changeSupportType = typeof(PropertyChangeSupport).newTypeReference
+	    clazz.addField('_propertyChangeSupport') [
+	      type = changeSupportType
+	      initializer = [''«»'new &laquo;toJavaCode(changeSupportType)&raquo;(this)''«»']
+	    ]
+	    // add method addPropertyChangeListener
+	    // add method removePropertyChangeListener
 	  }
 	}
 	</pre>
-	        <h3 id="collection_literals">Collection Literals And Arrays</h3>
+	        <h3 id="collection_literals">Collection Literals and Arrays</h3>
 	        <p>
-	        Xtend now has a readable short syntax for collection literals. This is what the syntax 
-	        looks like
+	        Xtend now has literals for unmodifiable collections.
 	        </p>
 	<pre class="prettyprint lang-xtend linenums">
 	val listOfWords = #["Hello", "Xtend"]
@@ -212,33 +211,38 @@ class ReleaseNotes24 extends AbstractXtendWebsite {
 	val mapOfWords  = #{1->"Hello", 2->"Xtend"}
 	</pre> 
 	      <p>
-	      Collections created with a literal are immutable. The list literal also works for arrays 
-	      depending on the target type (the expected type).
+	      Collections created with a literal are immutable. The list literal can be used to natively create arrays, too. 
+	      If the target type is an array, it will compile to an array initializer.
 	      </p>
 	<pre class="prettyprint lang-xtend linenums">
 	val String[] arrayOfWords = #["Hello", "Xtend"]
 	</pre> 
 	      <p>
 	      In addition to literals for arrays you can now also easily access and modify arrays 
-	      as well as create empty arrays of any size as in Java.
-	      </p>
-	      <h3 id="interfaces_enums_annotations">Interfaces, Enums And Annotations</h3>
-	      <p>
-	      Interfaces, enumerations and annotation types can now be declared in Xtend directly. 
+	      as well as create empty arrays of any size.
 	      </p>
 	<pre class="prettyprint lang-xtend linenums">
-	interface MyInterface {
-	  def void someMethod(Object o)
+	val String[] arrayOfWords = newArrayOfSize(2)
+	arrayOfWords.set(0, 'Hello')
+	arrayOfWords.set(1, 'Xtend')
+	</pre> 
+	      <h3 id="interfaces_enums_annotations">Interfaces, Enums and Annotations</h3>
+	      <p>
+	      Interfaces, enumerations and annotation types can now be declared directly in Xtend. 
+	      </p>
+	<pre class="prettyprint lang-xtend linenums">
+	interface Container<T> {
+	  def T findChild((T)=>boolean matcher)
 	}
 	
 	enum Color {
-	  BLUE, RED, GREEN
+	  RED, GREEN, BLUE
 	}
 	
 	@Retention(RetentionPolicy::RUNTIME)
 	@Target(ElementType::TYPE)
 	annotation DependsOn {
-	  Class&lt;?&gt; value
+	  Class&lt;? extends Target&gt; value
 	  val version = "2.4.0" // type 'String' inferred 
 	}
 	</pre>
@@ -246,54 +250,60 @@ class ReleaseNotes24 extends AbstractXtendWebsite {
 	      <h3 id="extension_values">Extension Values</h3>
 	      <p>
 	      Extension methods allow to add new methods to existing types without modifying them. 
-	      Extension values solve the
-	      <a href="http://en.wikipedia.org/wiki/Expression_problem">Expression Problem</a>.
-	      Consider you want to add a new method to <code class="prettyprint lang-java">java.lang.String</code> 
-	      which loads a class with the specified name. So instead of writing
+	      Consider the omnipresent class <code class="prettyprint lang-java">java.lang.String</code>.
+	      If you have to parse a string to a number, you could always write
 	      </p>
 	<pre class="prettyprint lang-java linenums">
-	Class.forName("my.company.MyClass");
+	Integer::parseInt('42')
 	</pre>
-	      <p>you want to be able to write</p>
+	      <p>but what you actually think of is</p>
 	<pre class="prettyprint lang-xtend linenums">
-	'my.company.MyClass'.loadClass
+	'42'.parseInt
 	</pre>
-	      <p>To do so you can define a static method <code class="prettyprint lang-xtend">loadClass(String)</code> 
-	      and import it as:</p>
+	      <p>To make that possible, you simply import the class <code class="prettyprint lang-java">Integer</code> as a static extension:</p>
 	<pre class="prettyprint lang-xtend linenums">
-	import static extension my.company.lib.MyStringExtensions.*
+	import static extension java.lang.Integer.*
 	</pre>
-	      <p>
-	      This is possible in C# as well. But Xtend can do better: In Xtend, fields, 
-	      parameters and local variables can provide extension methods, too. E.g. if you 
-	      want to use a specific classloader, you declare it to be an extension. Its methods will 
-	      thereby become extension methods in the current context, i.e. callable on their first 
-	      argument:
+	      <p>This enables to pass the base of the number as an argument, too:</p>
+	<pre class="prettyprint lang-xtend linenums">
+	'2A'.parseInt(16)
+	</pre>
+	      Extension methods are available in C# as well, but Xtend can do better. In Xtend, fields, 
+	      parameters and local variables can provide extensions, too. In fact, not all
+	      the useful functionality is available statically: if you now want to format the
+	      parsed number to present it in the UI according to a localized pattern
+	      from a <code class="prettyprint lang-java">ResourceBundle</code>,
+	      you can simply use a <code class="prettyprint lang-java">Formatter</code> and 
+	      write readable code that's easy to grasp:
 	      </p>
 	<pre class="prettyprint lang-xtend linenums">
-	def getClass(extension ClassLoader classloader) {
-	  'my.company.MyClass'.loadClass
+	def getFormattedNumber(String number, extension ResourceBundle bundle) {
+	  val localized = 'number_pattern'.getString
+	  extension val formatter = new Formatter
+	  localized.format(number.parseInt)
 	}
 	</pre>
-	      <p>The above is equivalent to the a bit more bulky:</p>
+	      <p>The above is equivalent to the slightly more bulky:</p>
 	<pre class="prettyprint lang-xtend linenums">
-	def getClass(ClassLoader classloader) {
-	  classloader.loadClass('my.company.MyClass')
+	def getFormattedNumber(String number, ResourceBundle bundle) {
+	  val localized = bundle.getString('number_pattern')
+	  val formatter = new Formatter
+	  formatter.format(localized, Integer::valueOf(number))
 	}
 	</pre>
 	      <p>
-	      A typical situation in which this comes in handy is when you need layer specific 
-	      extensions for domain model objects. For instance, you can project UI specific 
-	      methods on your domain models via extensions just where they are needed, 
-	      whithout forcing a dependency in all other cases, too.
+	      Extensions are a handy mechanism to add layer specific 
+	      functionality to classes: You could add UI related 
+	      methods to your domain models via extensions just where they are needed, 
+	      without introducing a UI dependency for other clients. <a href="documentation.html#extensionMethods">Read more...</a>
 	      </p>
 	
-	      <h3 id="sam_types">SAM Tpe Conversion</h3>
+	      <h3 id="sam_types">SAM Type Conversion</h3>
 	      <p>
 	      Lambda expressions now work with abstract classes with a single abstract method 
-	      (SAM types) as well. For example, the <code class="prettyprint lang-java">AbstractIterator</code> 
+	      (SAM types). For example, the <code class="prettyprint lang-java">AbstractIterator</code> 
 	      from the Guava library has a single abstract method 
-	      <code class="prettyprint lang-java">computeNext()</code>. A lambda can therefore take its place:
+	      <code class="prettyprint lang-java">computeNext()</code>. A lambda can be used to implement that:
 	      </p>
 	<pre class="prettyprint lang-xtend linenums">
 	val AbstractIterator&lt;Double&gt; infiniteRandomNumbers = [| Math::random]
@@ -302,8 +312,8 @@ class ReleaseNotes24 extends AbstractXtendWebsite {
 	      <h3 id="new_operators">New Operators</h3>
 	      <p>
 	      Some new operators have been added. In addition to the usual <code>==</code> and <code>!=</code>
-	      operators which map to <code>Object.equals(Object)</code>, the operators <code>===</code> respectively
-	      <code>!==</code> can be used to test for identity equality.
+	      operators which map to <code>Object.equals(Object)</code>, the operators <code>===</code> and
+	      <code>!==</code> respectively can be used to test for identity equality.
 	<pre class="prettyprint lang-xtend linenums">
 	if (myObject === otherObject) {
 	  println("same objects")
@@ -318,7 +328,7 @@ class ReleaseNotes24 extends AbstractXtendWebsite {
 	}
 	</pre>
 	      <p>
-	        Or in case you need to do this backwards :</p>
+	        Or if you want to iterate backwards :</p>
 	<pre class="prettyprint lang-xtend linenums">
 	for (idx : list.size &gt;.. 0) {
 	  println("("+idx+") "+list.get(idx))
@@ -327,9 +337,9 @@ class ReleaseNotes24 extends AbstractXtendWebsite {
 	        </section>
 	        <section id="new_ide_features" style="padding-top: 68px; margin-top: -68px;">
 	        <h2>New IDE Features</h2>
-			<p>Being an Eclipse project the Xtend has always been designed with the tooling in 
+			<p>Being an Eclipse project Xtend has always been designed with IDE integration in 
 			mind. We are proud to announce that the editing support is now almost on par with 
-			Javaâ€™s and in some cases already even better. A user recently wrote in the newsgroup:
+			Java's and in some cases already even better. A user recently wrote in the newsgroup:
 			</p>
 			<blockquote>
 	   		Tooling for Xtend is unlike any other language for the JVM after Java. The IDE support 
@@ -341,8 +351,7 @@ class ReleaseNotes24 extends AbstractXtendWebsite {
 			<dl>
 				<h3 id="organize_imports">Organize Imports</h3>
 				<p>
-				With the new release we have overhauled the <em>Organize imports</em> action. It now works 
-				exactly as you are used to from Javaâ€™s development tools, or even a bit better. It 
+				With the new release we have overhauled the <em>Organize imports</em> action. It 
 				processes all kinds of imports, asks to resolve conflicts, and shortens qualified names
 				automatically.
 				</p>
@@ -360,14 +369,15 @@ class ReleaseNotes24 extends AbstractXtendWebsite {
 	
 				<h3 id="suppression_followup">Supression of Follow-Up Errors</h3>
 				<p>
-				Follow-up error markers are now suppressed and markers are in general much more local, 
+				Follow-up error markers are now suppressed and errors in general are much more local, 
 				so it is very easy spot the problem immediately. In addition, the compiler generates 
 				as much valid Java code as possible in order not to break dependent resources on changes.
 				</p>
+				<img class="image_between_p" src="images/releasenotes/follow_up_errors.png"/>
 	
 				<h3 id="optional_errors">Optional Errors and Warnings</h3>
-				<p>The severity of optional compiler errors can be configured, globally as well as 
-				for a single project only. </p>
+				<p>The severity of optional compiler errors can be configured globally as well as 
+				individually for a single project.</p>
 				<img class="image_between_p" src="images/releasenotes/issue_severities.png"/>
 	
 				<h3 id="quickfixes">More Quickfixes</h3>
@@ -381,16 +391,16 @@ class ReleaseNotes24 extends AbstractXtendWebsite {
 				<p>
 				The content assist has become much smarter. It now proposes lambda brackets if the argument 
 				takes a single function and it gives you hints on the possible parameter types when you 
-				are working in an overloaded method.
+				are working with overloaded methods.
 				</p>
 				<img class="image_between_p" src="images/releasenotes/content_assist.png"/>
 			
 				<h3 id="formatter">Formatter</h3>
 				<p>
-				Furthermore a formatter which pretty prints and indents code idiomatically. With Xtendâ€™s 
-				flexible syntax this is even more important than in Java.
+				A configurable formatter which pretty prints and indents code idiomatically is now available.
 				</p>
 				<img class="image_between_p" src="images/releasenotes/formatter.png"/>
+				<img class="image_between_p" src="images/releasenotes/formatter_preferences.png"/>
 				
 				<h3 id="javadoc">JavaDoc</h3>
 				<p>
@@ -400,7 +410,8 @@ class ReleaseNotes24 extends AbstractXtendWebsite {
 				
 				<h3 id="copy_qualifiedname">Copy Qualified Name</h3>
 				<p>
-				There is now a <em>Copy qualifed name</em> action in the editor and the outline view.
+				You can use <em>Copy qualifed name</em> in the editor and the outline view to copy the name
+				of types, fields and methods into the clipboard.
 				</p>
 				<img class="image_between_p" src="images/releasenotes/copy_qualified_name.png"/>
 			</dl>
