@@ -35,7 +35,7 @@ module that does nothing but print a message to standard out. The
 second module is assembled of three components that read an Ecore 
 file, transform the contained classifier-names to upper-case and 
 serialize the resource back to a new file. The last example uses 
-the life-cycle methods of the <a class="jdoc" href="http://download.eclipse.org/modeling/emft/mwe/javadoc/2.3/org/eclipse/emf/mwe2/runtime/workflow/IWorkflowComponent.html" title="View JavaDoc"><abbr title="org.eclipse.emf.mwe2.runtime.workflow.IWorkflowComponent" >IWorkflowComponent</abbr></a> <a class="srcLink" href="https://github.com/eclipse/mwe/blob/v2.3.0/plugins/org.eclipse.emf.mwe2.runtime/src/org/eclipse/emf/mwe2/runtime/workflow/IWorkflowComponent.java" title="View Source Code" >(src)</a> 
+the life-cycle methods of the <a class="jdoc" href="http://download.eclipse.org/modeling/emft/mwe/javadoc/2.4/org/eclipse/emf/mwe2/runtime/workflow/IWorkflowComponent.html" title="View JavaDoc"><abbr title="org.eclipse.emf.mwe2.runtime.workflow.IWorkflowComponent" >IWorkflowComponent</abbr></a> <a class="srcLink" href="https://github.com/eclipse/mwe/blob/v2.3.0/plugins/org.eclipse.emf.mwe2.runtime/src/org/eclipse/emf/mwe2/runtime/workflow/IWorkflowComponent.java" title="View Source Code" >(src)</a> 
 to print the execution time of the workflow.
 </p>
 <a name="MWE2HelloWorld"></a>
@@ -52,7 +52,7 @@ snippet:
 <br/>
 SayHello&nbsp;{<br/>
 &nbsp;&nbsp;message&nbsp;=&nbsp;<span class="string">"Hello&nbsp;World!"</span><br/>
-}<br/>
+}
 </p>
 </div>
 </div>
@@ -95,7 +95,7 @@ of the class <span class="inlinecode">SayHello</span> looks straight forward:
 <br/>
 &nbsp;&nbsp;<span class="keyword">public</span>&nbsp;<span class="keyword">void</span>&nbsp;postInvoke()&nbsp;{}<br/>
 &nbsp;&nbsp;<span class="keyword">public</span>&nbsp;<span class="keyword">void</span>&nbsp;preInvoke()&nbsp;{}<br/>
-}<br/>
+}
 </p>
 </div>
 </div>
@@ -104,7 +104,7 @@ of the class <span class="inlinecode">SayHello</span> looks straight forward:
 It looks like a simple POJO and that&apos;s the philosophy behind MWE2. 
 It is easily possible to assemble completely independent objects in 
 a declarative manner. To make the workflow executable with the 
-<a class="jdoc" href="http://download.eclipse.org/modeling/emft/mwe/javadoc/2.3/org/eclipse/emf/mwe2/launch/runtime/Mwe2Runner.html" title="View JavaDoc"><abbr title="org.eclipse.emf.mwe2.launch.runtime.Mwe2Runner" >Mwe2Runner</abbr></a> <a class="srcLink" href="https://github.com/eclipse/mwe/blob/v2.3.0/plugins/org.eclipse.emf.mwe2.launch/src/org/eclipse/emf/mwe2/launch/runtime/Mwe2Runner.java" title="View Source Code" >(src)</a>, the component 
+<a class="jdoc" href="http://download.eclipse.org/modeling/emft/mwe/javadoc/2.4/org/eclipse/emf/mwe2/launch/runtime/Mwe2Runner.html" title="View JavaDoc"><abbr title="org.eclipse.emf.mwe2.launch.runtime.Mwe2Runner" >Mwe2Runner</abbr></a> <a class="srcLink" href="https://github.com/eclipse/mwe/blob/v2.3.0/plugins/org.eclipse.emf.mwe2.launch/src/org/eclipse/emf/mwe2/launch/runtime/Mwe2Runner.java" title="View Source Code" >(src)</a>, the component 
 <span class="inlinecode">SayHello</span> must be nested in a root 
 workflow:
 </p>
@@ -118,13 +118,13 @@ Workflow&nbsp;{<br/>
 &nbsp;&nbsp;component&nbsp;=&nbsp;SayHello&nbsp;{<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;message&nbsp;=&nbsp;<span class="string">"Hello&nbsp;World!"</span><br/>
 &nbsp;&nbsp;}<br/>
-}<br/>
+}
 </p>
 </div>
 </div>
 </p>
 <p>
-The package <span class="inlinecode">org.eclipse.emf.mwe2.runtime.workflow</span> of the class <a class="jdoc" href="http://download.eclipse.org/modeling/emft/mwe/javadoc/2.3/org/eclipse/emf/mwe2/runtime/workflow/Workflow.html" title="View JavaDoc"><abbr title="org.eclipse.emf.mwe2.runtime.workflow.Workflow" >Workflow</abbr></a> <a class="srcLink" href="https://github.com/eclipse/mwe/blob/v2.3.0/plugins/org.eclipse.emf.mwe2.runtime/src/org/eclipse/emf/mwe2/runtime/workflow/Workflow.java" title="View Source Code" >(src)</a> 
+The package <span class="inlinecode">org.eclipse.emf.mwe2.runtime.workflow</span> of the class <a class="jdoc" href="http://download.eclipse.org/modeling/emft/mwe/javadoc/2.4/org/eclipse/emf/mwe2/runtime/workflow/Workflow.html" title="View JavaDoc"><abbr title="org.eclipse.emf.mwe2.runtime.workflow.Workflow" >Workflow</abbr></a> <a class="srcLink" href="https://github.com/eclipse/mwe/blob/v2.3.0/plugins/org.eclipse.emf.mwe2.runtime/src/org/eclipse/emf/mwe2/runtime/workflow/Workflow.java" title="View Source Code" >(src)</a> 
 is implicitly imported in MWE2 modules to make the the modules more 
 concise. The execution result of this workflow will be revealed 
 after a quick <em>Run As .. -&gt; MWE2 Workflow</em> in the console as 
@@ -185,7 +185,7 @@ The <span class="inlinecode">ResourceReader</span> simply reads the file with th
 &nbsp;&nbsp;<span class="keyword">public</span>&nbsp;String&nbsp;getUri()&nbsp;{<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;uri;<br/>
 &nbsp;&nbsp;}<br/>
-}<br/>
+}
 </p>
 </div>
 </div>
@@ -220,7 +220,7 @@ of the resource, identifies each <a class="jdoc" href="http://download.eclipse.o
 &nbsp;&nbsp;<span class="keyword">public</span>&nbsp;<span class="keyword">boolean</span>&nbsp;isToLowerCase()&nbsp;{<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;toLowerCase;<br/>
 &nbsp;&nbsp;}<br/>
-}<br/>
+}
 </p>
 </div>
 </div>
@@ -254,7 +254,7 @@ the configured <a class="jdoc" href="http://download.eclipse.org/modeling/emf/em
 &nbsp;&nbsp;<span class="keyword">public</span>&nbsp;String&nbsp;getUri()&nbsp;{<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span>&nbsp;uri;<br/>
 &nbsp;&nbsp;}<br/>
-}<br/>
+}
 </p>
 </div>
 </div>
@@ -278,7 +278,7 @@ Last but not least, the common super type for those components looks like this:
 &nbsp;&nbsp;<br/>
 &nbsp;&nbsp;<span class="keyword">public</span>&nbsp;<span class="keyword">void</span>&nbsp;postInvoke()&nbsp;{}<br/>
 &nbsp;&nbsp;<span class="keyword">public</span>&nbsp;<span class="keyword">void</span>&nbsp;preInvoke()&nbsp;{}<br/>
-}<br/>
+}
 </p>
 </div>
 </div>
@@ -338,7 +338,7 @@ Workflow&nbsp;{<br/>
 &nbsp;&nbsp;component&nbsp;=&nbsp;StopWatch:&nbsp;stopWatch&nbsp;{}<br/>
 &nbsp;&nbsp;component&nbsp;=&nbsp;@OtherWorkflow&nbsp;{}<br/>
 &nbsp;&nbsp;component&nbsp;=&nbsp;stopWatch<br/>
-}<br/>
+}
 </p>
 </div>
 </div>
@@ -380,7 +380,7 @@ SampleClass&nbsp;{<br/>
 &nbsp;&nbsp;singleValue&nbsp;=&nbsp;<span class="string">&apos;a&nbsp;string&apos;</span><br/>
 &nbsp;&nbsp;multiValue&nbsp;=&nbsp;ArrayList&nbsp;{}<br/>
 &nbsp;&nbsp;child&nbsp;=&nbsp;{}<br/>
-}&nbsp;<br/>
+}
 </p>
 </div>
 </div>
@@ -397,7 +397,7 @@ SampleClass&nbsp;{<br/>
 &nbsp;&nbsp;<span class="keyword">public</span>&nbsp;<span class="keyword">void</span>&nbsp;setSingleValue(String&nbsp;value)&nbsp;{..}<br/>
 &nbsp;&nbsp;<span class="keyword">public</span>&nbsp;<span class="keyword">void</span>&nbsp;addMultiValue(List&lt;?&gt;&nbsp;value)&nbsp;{..}<br/>
 &nbsp;&nbsp;<span class="keyword">public</span>&nbsp;<span class="keyword">void</span>&nbsp;addChild(SampleClass&nbsp;value)&nbsp;{..}<br/>
-}<br/>
+}
 </p>
 </div>
 </div>
@@ -458,7 +458,7 @@ Let&apos;s create a second module <span class="inlinecode">com.mycompany.Second<
 <br/>
 SampleClass&nbsp;{<br/>
 &nbsp;&nbsp;child&nbsp;=&nbsp;@Example&nbsp;{}<br/>
-}&nbsp;
+}
 </p>
 </div>
 </div>
@@ -519,7 +519,7 @@ second built in type is boolean via the familiar literals <span class="inlinecod
 <br/>
 SampleClass&nbsp;{<br/>
 &nbsp;&nbsp;child&nbsp;=&nbsp;childInstance<br/>
-}<br/>
+}
 </p>
 </div>
 </div>
@@ -588,7 +588,7 @@ if we reuse <span class="inlinecode">org.mycompany.Example</span> in another mod
 @Example&nbsp;{<br/>
 &nbsp;&nbsp;mandatory&nbsp;=&nbsp;<span class="string">"mandatoryValue"</span><br/>
 &nbsp;&nbsp;optional&nbsp;=&nbsp;newMandatory<br/>
-}&nbsp;
+}
 </p>
 </div>
 </div>
@@ -603,8 +603,8 @@ without a default value.
 <p>
 It is not only possible to define mandatory properties for MWE2 
 modules but for classes as well. Therefore MWE2 ships with the 
-<a class="jdoc" href="http://download.eclipse.org/modeling/emft/mwe/javadoc/2.3/org/eclipse/emf/mwe2/runtime/Mandatory.html" title="View JavaDoc"><abbr title="org.eclipse.emf.mwe2.runtime.Mandatory" >@Mandatory</abbr></a> <a class="srcLink" href="https://github.com/eclipse/mwe/blob/v2.3.0/plugins/org.eclipse.emf.mwe2.runtime/src/org/eclipse/emf/mwe2/runtime/Mandatory.java" title="View Source Code" >(src)</a> annotation. If a <span class="inlinecode">set</span>- or <span class="inlinecode">add</span>-method is marked as
-<a class="jdoc" href="http://download.eclipse.org/modeling/emft/mwe/javadoc/2.3/org/eclipse/emf/mwe2/runtime/Mandatory.html" title="View JavaDoc"><abbr title="org.eclipse.emf.mwe2.runtime.Mandatory" >@Mandatory</abbr></a> <a class="srcLink" href="https://github.com/eclipse/mwe/blob/v2.3.0/plugins/org.eclipse.emf.mwe2.runtime/src/org/eclipse/emf/mwe2/runtime/Mandatory.java" title="View Source Code" >(src)</a>, the module validation will fail if no value was assigned
+<a class="jdoc" href="http://download.eclipse.org/modeling/emft/mwe/javadoc/2.4/org/eclipse/emf/mwe2/runtime/Mandatory.html" title="View JavaDoc"><abbr title="org.eclipse.emf.mwe2.runtime.Mandatory" >@Mandatory</abbr></a> <a class="srcLink" href="https://github.com/eclipse/mwe/blob/v2.3.0/plugins/org.eclipse.emf.mwe2.runtime/src/org/eclipse/emf/mwe2/runtime/Mandatory.java" title="View Source Code" >(src)</a> annotation. If a <span class="inlinecode">set</span>- or <span class="inlinecode">add</span>-method is marked as
+<a class="jdoc" href="http://download.eclipse.org/modeling/emft/mwe/javadoc/2.4/org/eclipse/emf/mwe2/runtime/Mandatory.html" title="View JavaDoc"><abbr title="org.eclipse.emf.mwe2.runtime.Mandatory" >@Mandatory</abbr></a> <a class="srcLink" href="https://github.com/eclipse/mwe/blob/v2.3.0/plugins/org.eclipse.emf.mwe2.runtime/src/org/eclipse/emf/mwe2/runtime/Mandatory.java" title="View Source Code" >(src)</a>, the module validation will fail if no value was assigned
 to that feature.
 </p>
 <a name="MWE2NamedComponents"></a>
@@ -712,7 +712,7 @@ by a &apos;.&apos; dot.
 <div class="incode">
 <p class="code">
 Name:&nbsp;ID&nbsp;(<span class="string">&apos;.&apos;</span>&nbsp;ID)*;<br/>
-ID:&nbsp;(<span class="string">&apos;a&apos;</span>..<span class="string">&apos;z&apos;</span>|<span class="string">&apos;A&apos;</span>..<span class="string">&apos;Z&apos;</span>|<span class="string">&apos;_&apos;</span>)&nbsp;(<span class="string">&apos;a&apos;</span>..<span class="string">&apos;z&apos;</span>|<span class="string">&apos;A&apos;</span>..<span class="string">&apos;Z&apos;</span>|<span class="string">&apos;_&apos;</span>|<span class="string">&apos;0&apos;</span>..<span class="string">&apos;9&apos;</span>)*;&nbsp;
+ID:&nbsp;(<span class="string">&apos;a&apos;</span>..<span class="string">&apos;z&apos;</span>|<span class="string">&apos;A&apos;</span>..<span class="string">&apos;Z&apos;</span>|<span class="string">&apos;_&apos;</span>)&nbsp;(<span class="string">&apos;a&apos;</span>..<span class="string">&apos;z&apos;</span>|<span class="string">&apos;A&apos;</span>..<span class="string">&apos;Z&apos;</span>|<span class="string">&apos;_&apos;</span>|<span class="string">&apos;0&apos;</span>..<span class="string">&apos;9&apos;</span>)*;
 </p>
 </div>
 </div>
@@ -745,13 +745,7 @@ or module. MWE2 can handle relative imports in case one uses the
 wildcard notation:
 </p>
 <p>
-<div class="literallayout">
-<div class="incode">
-<p class="code">
-<span class="string">&apos;import&apos;</span>&nbsp;name&nbsp;<span class="string">&apos;.*&apos;</span>?&nbsp;&nbsp;&nbsp;<br/>
-</p>
-</div>
-</div>
+<span class="inlinecode"><span class="string">&apos;import&apos;</span>&nbsp;name&nbsp;<span class="string">&apos;.*&apos;</span>?</span>
 </p>
 <a name="MWE2PropertySyntax"></a>
 <h3>Property</h3>
@@ -848,7 +842,7 @@ several parts.
 <p class="code">
 <span class="keyword">var</span>&nbsp;aString&nbsp;=&nbsp;<span class="string">&apos;a&nbsp;value&apos;</span><br/>
 <span class="keyword">var</span>&nbsp;anotherString&nbsp;=&nbsp;<span class="string">&apos;It&nbsp;is&nbsp;possible&nbsp;to&nbsp;embed&nbsp;${aString}&nbsp;into<br/>
-&nbsp;a&nbsp;multi-line&nbsp;string&apos;</span><br/>
+&nbsp;a&nbsp;multi-line&nbsp;string&apos;</span>
 </p>
 </div>
 </div>

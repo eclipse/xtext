@@ -188,7 +188,7 @@
 			</topic>
 			<topic href="contents/40-annotations.html#active_annotations_validation" label="Custom Compiler Checks" >
 			</topic>
-			<topic href="contents/40-annotations.html#active_annotation_classpath" label="Classpath Setup and Testing" >
+			<topic href="contents/40-annotations.html#active_annotation_classpath" label="Class Path Setup and Testing" >
 				<topic href="contents/40-annotations.html#active_annotation_CompilerTester" label="Testing" >
 				</topic>
 				<topic href="contents/40-annotations.html#active_annotation_classpath_7" label="Wrap Up" >
