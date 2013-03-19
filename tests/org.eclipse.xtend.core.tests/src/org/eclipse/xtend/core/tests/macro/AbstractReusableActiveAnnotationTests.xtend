@@ -8,6 +8,78 @@ import static org.junit.Assert.*
 
 abstract class AbstractReusableActiveAnnotationTests {
 	
+	@Test def void testAddConstructor() {
+		assertProcessing(
+			'myannotation/AddConstructorAnnotation.xtend' -> '''
+				package myannotation
+				
+				import java.util.List
+				import org.eclipse.xtend.lib.macro.Active
+				import org.eclipse.xtend.lib.macro.TransformationContext
+				import org.eclipse.xtend.lib.macro.AbstractClassProcessor
+				import org.eclipse.xtend.lib.macro.declaration.MutableClassDeclaration
+
+				@Active(typeof(AddConstructorProcessor))
+				annotation AddConstructor{ }
+				class AddConstructorProcessor extends AbstractClassProcessor {
+					
+					override doTransform(MutableClassDeclaration clazz, extension TransformationContext context) {
+						clazz.addConstructor [
+							addParameter("foo", string)
+						]
+					}
+					
+				}
+			''',
+			'myusercode/UserCode.xtend' -> '''
+				package myusercode
+				
+				@myannotation.AddConstructor class MyClass {
+				}
+			'''
+		) [
+			val clazz = typeLookup.findClass('myusercode.MyClass')
+			assertEquals(1, clazz.declaredConstructors.size)
+			assertEquals('foo', clazz.declaredConstructors.head.parameters.head.simpleName)
+		]
+	}
+
+	@Test def void testAddDefaultConstructor() {
+		assertProcessing(
+			'myannotation/AddConstructorAnnotation.xtend' -> '''
+				package myannotation
+				
+				import java.util.List
+				import org.eclipse.xtend.lib.macro.Active
+				import org.eclipse.xtend.lib.macro.TransformationContext
+				import org.eclipse.xtend.lib.macro.AbstractClassProcessor
+				import org.eclipse.xtend.lib.macro.declaration.MutableClassDeclaration
+
+				@Active(typeof(AddConstructorProcessor))
+				annotation AddConstructor{ }
+				class AddConstructorProcessor extends AbstractClassProcessor {
+					
+					override doTransform(MutableClassDeclaration clazz, extension TransformationContext context) {
+						clazz.addConstructor [
+							body=['System.out.println("Hello World");']
+						]
+					}
+					
+				}
+			''',
+			'myusercode/UserCode.xtend' -> '''
+				package myusercode
+				
+				@myannotation.AddConstructor class MyClass {
+				}
+			'''
+		) [
+			val clazz = typeLookup.findClass('myusercode.MyClass')
+			assertEquals(1, clazz.declaredConstructors.size)
+			assertTrue(clazz.declaredConstructors.head.parameters.isEmpty)
+		]
+	}
+	
 	@Test def void testSwapExpressions() {
 		assertProcessing(
 			'myannotation/SwapAnnotation.xtend' -> '''
