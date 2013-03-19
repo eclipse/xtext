@@ -13,6 +13,8 @@ import static java.util.Collections.emptyMap;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -37,6 +39,7 @@ import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.Pair;
 import org.junit.Assert;
 
+import com.google.common.base.Joiner;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 
@@ -52,6 +55,8 @@ public class CompilationTestHelper {
 	@Inject private Provider<XtextResourceSet> resourceSetProvider;
 	
 	@Inject private FileExtensionProvider extensionProvider;
+
+	@Inject private Provider<InMemoryFileSystemAccess> fileSystemAccessProvider;
 	
 	public void setJavaCompilerClassPath(Class<?> ...classes) {
 		javaCompiler.clearClassPath();
@@ -147,7 +152,7 @@ public class CompilationTestHelper {
 				throw new IllegalStateException("One or more resources contained errors. Check the logs.");
 			}
 			
-			final InMemoryFileSystemAccess access = new InMemoryFileSystemAccess();
+			final InMemoryFileSystemAccess access = fileSystemAccessProvider.get();
 			for (Resource resource : resourcesToCheck) {
 				if (resource instanceof XtextResource) {
 					XtextResource xtextResource = (XtextResource) resource;
@@ -184,9 +189,26 @@ public class CompilationTestHelper {
 				}
 				
 				public String getSingleGeneratedCode() {
-					if (access.getFiles().size() == 1)
-						return access.getFiles().values().iterator().next().toString();
-					return null;
+					if (access.getTextFiles().size() == 1)
+						return access.getTextFiles().values().iterator().next().toString();
+					String separator = System.getProperty("line.separator");
+					if (separator == null)
+						separator = "\n";
+					List<Entry<String,CharSequence>> files = newArrayList(access.getTextFiles().entrySet());
+					Collections.sort(files, new Comparator<Entry<String,CharSequence>>() {
+						public int compare(Entry<String, CharSequence> o1,
+								Entry<String, CharSequence> o2) {
+							return o1.getKey().compareTo(o2.getKey());
+						}
+					});
+					StringBuilder result = new StringBuilder("MULTIPLE FILES WERE GENERATED"+separator+separator);
+					int i = 1;
+					for (Entry<String,CharSequence> entry: files) {
+						result.append("File "+i+" : "+entry.getKey().replace("DEFAULT_OUTPUT", "")+separator+separator);
+						result.append(entry.getValue()).append(separator);
+						i++;
+					}
+					return result.toString();
 				}
 
 				public ResourceSet getResourceSet() {

@@ -9,6 +9,7 @@ import org.eclipse.xtend.core.macro.declaration.TypeLookupImpl;
 import org.eclipse.xtend.lib.macro.declaration.MutableAnnotationReference;
 import org.eclipse.xtend.lib.macro.declaration.MutableAnnotationTypeDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.MutableClassDeclaration;
+import org.eclipse.xtend.lib.macro.declaration.MutableConstructorDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.MutableEnumerationTypeDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.MutableFieldDeclaration;
 import org.eclipse.xtend.lib.macro.declaration.MutableInterfaceDeclaration;
@@ -31,6 +32,149 @@ import org.junit.Test;
 
 @SuppressWarnings("all")
 public abstract class AbstractReusableActiveAnnotationTests {
+  @Test
+  public void testAddConstructor() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("package myannotation");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("import java.util.List");
+    _builder.newLine();
+    _builder.append("import org.eclipse.xtend.lib.macro.Active");
+    _builder.newLine();
+    _builder.append("import org.eclipse.xtend.lib.macro.TransformationContext");
+    _builder.newLine();
+    _builder.append("import org.eclipse.xtend.lib.macro.AbstractClassProcessor");
+    _builder.newLine();
+    _builder.append("import org.eclipse.xtend.lib.macro.declaration.MutableClassDeclaration");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("@Active(typeof(AddConstructorProcessor))");
+    _builder.newLine();
+    _builder.append("annotation AddConstructor{ }");
+    _builder.newLine();
+    _builder.append("class AddConstructorProcessor extends AbstractClassProcessor {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("override doTransform(MutableClassDeclaration clazz, extension TransformationContext context) {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("clazz.addConstructor [");
+    _builder.newLine();
+    _builder.append("\t\t\t");
+    _builder.append("addParameter(\"foo\", string)");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("]");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    Pair<String,String> _mappedTo = Pair.<String, String>of("myannotation/AddConstructorAnnotation.xtend", _builder.toString());
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("package myusercode");
+    _builder_1.newLine();
+    _builder_1.newLine();
+    _builder_1.append("@myannotation.AddConstructor class MyClass {");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    Pair<String,String> _mappedTo_1 = Pair.<String, String>of("myusercode/UserCode.xtend", _builder_1.toString());
+    final Procedure1<CompilationUnitImpl> _function = new Procedure1<CompilationUnitImpl>() {
+        public void apply(final CompilationUnitImpl it) {
+          TypeLookupImpl _typeLookup = it.getTypeLookup();
+          final MutableClassDeclaration clazz = _typeLookup.findClass("myusercode.MyClass");
+          Iterable<? extends MutableConstructorDeclaration> _declaredConstructors = clazz.getDeclaredConstructors();
+          int _size = IterableExtensions.size(_declaredConstructors);
+          Assert.assertEquals(1, _size);
+          Iterable<? extends MutableConstructorDeclaration> _declaredConstructors_1 = clazz.getDeclaredConstructors();
+          MutableConstructorDeclaration _head = IterableExtensions.head(_declaredConstructors_1);
+          List<MutableParameterDeclaration> _parameters = _head.getParameters();
+          MutableParameterDeclaration _head_1 = IterableExtensions.<MutableParameterDeclaration>head(_parameters);
+          String _simpleName = _head_1.getSimpleName();
+          Assert.assertEquals("foo", _simpleName);
+        }
+      };
+    this.assertProcessing(_mappedTo, _mappedTo_1, _function);
+  }
+  
+  @Test
+  public void testAddDefaultConstructor() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("package myannotation");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("import java.util.List");
+    _builder.newLine();
+    _builder.append("import org.eclipse.xtend.lib.macro.Active");
+    _builder.newLine();
+    _builder.append("import org.eclipse.xtend.lib.macro.TransformationContext");
+    _builder.newLine();
+    _builder.append("import org.eclipse.xtend.lib.macro.AbstractClassProcessor");
+    _builder.newLine();
+    _builder.append("import org.eclipse.xtend.lib.macro.declaration.MutableClassDeclaration");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("@Active(typeof(AddConstructorProcessor))");
+    _builder.newLine();
+    _builder.append("annotation AddConstructor{ }");
+    _builder.newLine();
+    _builder.append("class AddConstructorProcessor extends AbstractClassProcessor {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("override doTransform(MutableClassDeclaration clazz, extension TransformationContext context) {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("clazz.addConstructor [");
+    _builder.newLine();
+    _builder.append("\t\t\t");
+    _builder.append("body=[\'System.out.println(\"Hello World\");\']");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("]");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    Pair<String,String> _mappedTo = Pair.<String, String>of("myannotation/AddConstructorAnnotation.xtend", _builder.toString());
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("package myusercode");
+    _builder_1.newLine();
+    _builder_1.newLine();
+    _builder_1.append("@myannotation.AddConstructor class MyClass {");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    Pair<String,String> _mappedTo_1 = Pair.<String, String>of("myusercode/UserCode.xtend", _builder_1.toString());
+    final Procedure1<CompilationUnitImpl> _function = new Procedure1<CompilationUnitImpl>() {
+        public void apply(final CompilationUnitImpl it) {
+          TypeLookupImpl _typeLookup = it.getTypeLookup();
+          final MutableClassDeclaration clazz = _typeLookup.findClass("myusercode.MyClass");
+          Iterable<? extends MutableConstructorDeclaration> _declaredConstructors = clazz.getDeclaredConstructors();
+          int _size = IterableExtensions.size(_declaredConstructors);
+          Assert.assertEquals(1, _size);
+          Iterable<? extends MutableConstructorDeclaration> _declaredConstructors_1 = clazz.getDeclaredConstructors();
+          MutableConstructorDeclaration _head = IterableExtensions.head(_declaredConstructors_1);
+          List<MutableParameterDeclaration> _parameters = _head.getParameters();
+          boolean _isEmpty = _parameters.isEmpty();
+          Assert.assertTrue(_isEmpty);
+        }
+      };
+    this.assertProcessing(_mappedTo, _mappedTo_1, _function);
+  }
+  
   @Test
   public void testSwapExpressions() {
     StringConcatenation _builder = new StringConcatenation();

@@ -87,6 +87,7 @@ import org.eclipse.xtext.xbase.typesystem.util.CommonTypeComputationServices
 import org.eclipse.xtext.documentation.IEObjectDocumentationProvider
 import org.eclipse.xtext.documentation.IFileHeaderProvider
 import org.eclipse.xtend.lib.macro.expression.Expression
+import org.eclipse.xtext.xbase.jvmmodel.JvmTypeExtensions
 
 class CompilationUnitImpl implements CompilationUnit {
 	
@@ -138,6 +139,7 @@ class CompilationUnitImpl implements CompilationUnit {
 	@Inject ConstantExpressionsInterpreter interpreter
 	@Inject IEObjectDocumentationProvider documentationProvider
 	@Inject IFileHeaderProvider fileHeaderProvider
+	@Inject JvmTypeExtensions typeExtensions;
 	
 	@Property val ProblemSupport problemSupport = new ProblemSupportImpl(this)
 	@Property val TypeReferenceProvider typeReferenceProvider = new TypeReferenceProviderImpl(this)
@@ -164,6 +166,10 @@ class CompilationUnitImpl implements CompilationUnit {
 	
 	def getJvmTypesBuilder() {
 		typesBuilder
+	}
+	
+	def getTypeExtensions() {
+		typeExtensions
 	}
 	
 	def void setXtendFile(XtendFile xtendFile) {

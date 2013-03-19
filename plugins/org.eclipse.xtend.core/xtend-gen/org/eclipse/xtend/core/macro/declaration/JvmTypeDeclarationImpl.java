@@ -12,6 +12,7 @@ import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Iterables;
 import java.util.List;
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtend.core.macro.declaration.CompilationUnitImpl;
 import org.eclipse.xtend.core.macro.declaration.JvmMemberDeclarationImpl;
 import org.eclipse.xtend.lib.macro.declaration.MutableClassDeclaration;
@@ -33,6 +34,7 @@ import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.JvmVisibility;
 import org.eclipse.xtext.common.types.TypesFactory;
+import org.eclipse.xtext.xbase.jvmmodel.JvmTypeExtensions;
 import org.eclipse.xtext.xbase.lib.Conversions;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
@@ -83,13 +85,29 @@ public abstract class JvmTypeDeclarationImpl<T extends JvmDeclaredType> extends 
   }
   
   public MutableConstructorDeclaration addConstructor(final Procedure1<MutableConstructorDeclaration> initializer) {
+    T _delegate = this.getDelegate();
+    EList<JvmMember> _members = _delegate.getMembers();
+    Iterable<JvmConstructor> _filter = Iterables.<JvmConstructor>filter(_members, JvmConstructor.class);
+    final Function1<JvmConstructor,Boolean> _function = new Function1<JvmConstructor,Boolean>() {
+        public Boolean apply(final JvmConstructor it) {
+          CompilationUnitImpl _compilationUnit = JvmTypeDeclarationImpl.this.getCompilationUnit();
+          JvmTypeExtensions _typeExtensions = _compilationUnit.getTypeExtensions();
+          boolean _isSingleSyntheticDefaultConstructor = _typeExtensions.isSingleSyntheticDefaultConstructor(it);
+          return Boolean.valueOf(_isSingleSyntheticDefaultConstructor);
+        }
+      };
+    final JvmConstructor constructor = IterableExtensions.<JvmConstructor>findFirst(_filter, _function);
+    boolean _notEquals = (!Objects.equal(constructor, null));
+    if (_notEquals) {
+      EcoreUtil.remove(constructor);
+    }
     final JvmConstructor newConstructor = TypesFactory.eINSTANCE.createJvmConstructor();
     newConstructor.setVisibility(JvmVisibility.PUBLIC);
     String _simpleName = this.getSimpleName();
     newConstructor.setSimpleName(_simpleName);
-    T _delegate = this.getDelegate();
-    EList<JvmMember> _members = _delegate.getMembers();
-    _members.add(newConstructor);
+    T _delegate_1 = this.getDelegate();
+    EList<JvmMember> _members_1 = _delegate_1.getMembers();
+    _members_1.add(newConstructor);
     CompilationUnitImpl _compilationUnit = this.getCompilationUnit();
     MutableMemberDeclaration _memberDeclaration = _compilationUnit.toMemberDeclaration(newConstructor);
     final MutableConstructorDeclaration mutableConstructorDeclaration = ((MutableConstructorDeclaration) _memberDeclaration);

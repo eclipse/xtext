@@ -127,6 +127,7 @@ import org.eclipse.xtext.xbase.annotations.interpreter.ConstantExpressionsInterp
 import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotation;
 import org.eclipse.xtext.xbase.compiler.TypeReferenceSerializer;
 import org.eclipse.xtext.xbase.compiler.output.ITreeAppendable;
+import org.eclipse.xtext.xbase.jvmmodel.JvmTypeExtensions;
 import org.eclipse.xtext.xbase.jvmmodel.JvmTypesBuilder;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Functions.Function0;
@@ -232,6 +233,9 @@ public class CompilationUnitImpl implements CompilationUnit {
   @Inject
   private IFileHeaderProvider fileHeaderProvider;
   
+  @Inject
+  private JvmTypeExtensions typeExtensions;
+  
   private final ProblemSupport _problemSupport = new Function0<ProblemSupport>() {
     public ProblemSupport apply() {
       ProblemSupportImpl _problemSupportImpl = new ProblemSupportImpl(CompilationUnitImpl.this);
@@ -292,6 +296,10 @@ public class CompilationUnitImpl implements CompilationUnit {
   
   public JvmTypesBuilder getJvmTypesBuilder() {
     return this.typesBuilder;
+  }
+  
+  public JvmTypeExtensions getTypeExtensions() {
+    return this.typeExtensions;
   }
   
   public void setXtendFile(final XtendFile xtendFile) {

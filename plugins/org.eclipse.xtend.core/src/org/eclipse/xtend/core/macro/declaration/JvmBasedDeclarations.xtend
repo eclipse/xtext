@@ -157,6 +157,11 @@ abstract class JvmTypeDeclarationImpl<T extends JvmDeclaredType> extends JvmMemb
 	}
 	
 	override addConstructor(Procedure1<MutableConstructorDeclaration> initializer) {
+		// remove default constructor
+		val constructor = delegate.members.filter(typeof(JvmConstructor)).findFirst[compilationUnit.typeExtensions.isSingleSyntheticDefaultConstructor(it)]
+		if (constructor != null) {
+			EcoreUtil::remove(constructor)
+		}
 		val newConstructor = TypesFactory::eINSTANCE.createJvmConstructor
 		newConstructor.visibility = JvmVisibility::PUBLIC
 		newConstructor.simpleName = simpleName
