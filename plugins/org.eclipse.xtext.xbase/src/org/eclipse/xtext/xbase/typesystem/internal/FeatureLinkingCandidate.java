@@ -471,8 +471,11 @@ public class FeatureLinkingCandidate extends AbstractPendingLinkingCandidate<XAb
 	
 	@Override
 	protected Map<JvmTypeParameter, LightweightMergedBoundTypeArgument> getDeclaratorParameterMapping() {
-		if (isStatic())
+		if (isStatic()) {
+			if (getFeature() instanceof JvmConstructor) // this() or super()
+				return description.getImplicitReceiverTypeParameterMapping();
 			return super.getDeclaratorParameterMapping();
+		}
 		if (getImplicitReceiver() != null)
 			return description.getImplicitReceiverTypeParameterMapping();
 		return description.getSyntacticReceiverTypeParameterMapping();
