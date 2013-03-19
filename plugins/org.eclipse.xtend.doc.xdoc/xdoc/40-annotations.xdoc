@@ -1,0 +1,384 @@
+chapter:activeAnnotations[Active Annotations]
+
+e[Active Annotations] allow developers to participate in the translation process of Xtend source code to Java code via library. That's useful in cases where Java requires you to 
+write a lot of boilerplate manually. For instance, many of the good old design patterns fall into this category. With e[Active Annotations] you no longer need to remember how the 
+link[http://en.wikipedia.org/wiki/Visitor_pattern][Visitor] or the link[http://en.wikipedia.org/wiki/][Observer] pattern should be implemented. In Xtend you can implement the expansion 
+of such patterns in a library and let the compiler do the heavy lifting for you.
+
+An e[Active Annotation] is just an annotation declared either in Java or Xtend, which is itself annotated with codeRef[org.eclipse.xtend.lib.macro.Active].
+code[@Active] takes a type literal as a parameter pointing to the processor.
+
+The IDE plugin comes with an example project, which you can easily materialize into your workspace. To
+do so use the new project wizard and in the category e[Xtend Examples] choose the active annotation example.
+the projects contain three different examples which we will use for further explanation in this chapter.
+
+For instance, code[@Extract] is an annotation which extracts an interface for a class.
+The annotation declaration looks like this:
+
+code[Xtend][
+@Active(typeof(ExtractProcessor))
+annotation Extract {}
+]
+
+section:active_annotations_processor[Annotation Processor]
+
+A processor class must implement one or both of the lifecycle call back interfaces provided by the compiler.
+There are some base classes for the most common usecase, which implement both interfaces:
+ul[
+  item[codeRef[org.eclipse.xtend.lib.macro.AbstractClassProcessor] is a base class for class annotations]
+  item[codeRef[org.eclipse.xtend.lib.macro.AbstractMethodProcessor] is a base class for method annotations]
+  item[codeRef[org.eclipse.xtend.lib.macro.AbstractFieldProcessor] is a base class for field annotations]
+]
+
+If you want to annotate other elements such as interfaces, parameters or constructors, you should have
+a look at the bases classes and mimic their implmenentation accordingly. 
+
+section2:active_annotations_register_globals[Phase 1: Register Globals (codeRef[org.eclipse.xtend.lib.macro.RegisterGlobalsParticipant])]
+
+During the first phase global symbols (the types) are indexed. By implementing codeRef[org.eclipse.xtend.lib.macro.RegisterGlobalsParticipant]
+you have the chance to create and register new Java types during this phase. It's important
+to do this in a first phase so later phases can refer to the types.
+
+For example the ExtractProcessor from the example adds one interface per annotated class:
+
+code[Xtend][
+class ExtractProcessor extends AbstractClassProcessor {
+  
+  override doRegisterGlobals(ClassDeclaration annotatedClass, RegisterGlobalsContext context) {
+    context.registerInterface(annotatedClass.interfaceName)
+  }
+
+  def getInterfaceName(ClassDeclaration annotatedClass) {
+    annotatedClass.qualifiedName+"Interface"
+  }
+  
+  ...
+}
+]
+
+The codeRef[org.eclipse.xtend.lib.macro.RegisterGlobalsContext] provides all services available in this phase. 
+Additionally a read-only view on the Xtend model is passed in.
+In the example above you'll get a call for all classes annotated with the e[active annotation].
+
+The compiler calls codeRef[org.eclipse.xtend.lib.macro.RegisterGlobalsParticipant] once per file (aka
+compilation unit) and passes all elements in which are annotated with the e[active annotation] this processor
+is registered for.
+
+section2:active_annotations_transformation_phase[Phase 2: Transformation (codeRef[org.eclipse.xtend.lib.macro.TransformationParticipant])]
+
+In the second phase developers can modify the derived Java code. To do so developers need to implement
+codeRef[org.eclipse.xtend.lib.macro.TransformationParticipant] in their processor. Similar to the 
+codeRef[org.eclipse.xtend.lib.macro.RegisterGlobalsParticipant] interface the compiler passes in two
+parameters: The list of annotated elements and a context providing useful services specific for that
+phase.
+
+This time however you get mutable elements, which are represent the to-be generated code. They are usually
+very similar to the source elements, but can be modified and new elements can be added.
+
+The code[ExtractProcessor] implements the method code[doTransform] like this:
+
+code[Xtend][
+class ExtractProcessor extends AbstractClassProcessor {
+  
+  override doRegisterGlobals(ClassDeclaration annotatedClass, RegisterGlobalsContext context) {
+    context.registerInterface(annotatedClass.interfaceName)
+  }
+
+  def getInterfaceName(ClassDeclaration annotatedClass) {
+    annotatedClass.qualifiedName+"Interface"
+  }
+  
+  override doTransform(MutableClassDeclaration annotatedClass, extension TransformationContext context) {
+    val interfaceType = findInterface(annotatedClass.interfaceName)
+    
+    // add the interface to the list of implemented interfaces
+    annotatedClass.implementedInterfaces = annotatedClass.implementedInterfaces + #\[interfaceType.newTypeReference\]
+    
+    // add the public methods to the interface
+    for (method : annotatedClass.declaredMethods) {
+      if (method.visibility == Visibility::PUBLIC) {
+        interfaceType.addMethod(method.simpleName) \[
+          docComment = method.docComment
+          returnType = method.returnType
+          for (p : method.parameters) {
+            addParameter(p.simpleName, p.type)
+          }
+          exceptions = method.exceptions
+        \]
+      }
+    }
+  }
+}
+]
+
+In the first line we retrieve the interface which was registered and created in the first phase:
+code[Xtend][
+val interfaceType = findInterface(annotatedClass.interfaceName)
+]
+
+The method code[findInterface] comes from codeRef[org.eclipse.xtend.lib.macro.TransformationContext]
+which is made an ref:Extension_Values[extension value].
+
+Next up the interface is added to the existing list of implemented interfaces. 
+
+code[Xtend][
+annotatedClass.implementedInterfaces = annotatedClass.implementedInterfaces + #\[interfaceType.newTypeReference\]
+]
+
+The code calls code[setImplementedInterfaces(Iterable<TypeReference>)] on the annotated class. The right
+hand side of the assignment is a concatenation of the existing implemented interfaces and a type reference
+pointing to the freshly created interface.
+
+A codeRef[org.eclipse.xtend.lib.macro.declaration.TypeReference] can be created using one of the various
+methods from codeRef[org.eclipse.xtend.lib.macro.services.TypeReferenceProvider] which is a super type
+of codeRef[org.eclipse.xtend.lib.macro.TransformationContext]. So these methods are available as extensions
+as well.
+
+section:active_annotations_expression[On Expressions and Statements]
+
+Most of the generated Java code is represented in the form of in-memory elements (all subtypes of codeRef[org.eclipse.xtend.lib.macro.declaration.Element]).
+If you want to generate the body of a method or the initializer of a field, you have two options.
+
+section2:active_annotations_compilation_strategies[Generating Blackbox Java Code]
+
+The first option is to assign a so called compilation strategy to the respective property. As example
+we add the body of an observable setter method in the following code snippet:
+
+code[Xtend][
+clazz.addMethod('set' + fieldName.toFirstUpper) \[
+  addParameter(fieldName, fieldType)
+  body = \['''
+    «fieldType» _oldValue = this.«fieldName»;
+    this.«fieldName» = «fieldName»;
+    _propertyChangeSupport.firePropertyChange("«fieldName»", _oldValue, «fieldName»);
+  '''\]
+\]
+]
+
+We assign a lambda to the body which is later called when actual code is generated. The single parameter
+passed into that lambda is a codeRef[org.eclipse.xtend.lib.macro.declaration.CompilationStrategy$CompilationContext],
+which provides a convenient way to turn any codeRef[org.eclipse.xtend.lib.macro.declaration.TypeReference]
+into its Java representation taking imports into account. It even adds new imports if possible.
+
+section2:active_annotations_assigning_expressions[Assigning Expressions]
+
+As a second alternative you can reassign expressions written in Xtend. Imagine you
+want to have lazy initialization of fields and want to write it like int the following example: 
+
+code[Xtend] [
+  class MyClass {
+    @Lazy String myField = expensiveComputation()
+  }
+]
+
+You could implement it by inferring a synthetic initializer method
+and adding a getter-method, which calls the initilizer method if the field is code[null]. 
+To do so you could move the field's initializer expression to a synthetic initializer method.
+The following code would do the trick:
+
+code[Xtend][
+override doTransform(MutableFieldDeclaration field, extension TransformationContext context) {
+
+  // add synthetic init-method
+  field.declaringType.addMethod('_init' + field.simpleName) \[
+    visibility = Visibility::PRIVATE
+    returnType = field.type
+    // reassign the initializer expression to be the init method's body
+    // this automatically removes the expression as the field's initializer
+    body = field.initializer
+  \]
+
+  // add a getter method which lazily initializes the field
+  field.declaringType.addMethod('get' + field.simpleName.toFirstUpper) \[
+    returnType = field.type
+    body = \['''
+      if («field.simpleName»==null)
+        «field.simpleName» = _init«field.simpleName»();
+      return «field.simpleName»;
+    '''\]
+  \]
+}
+]
+
+section:active_annotations_validation[Custom Compiler Checks]
+
+The previous example requires each annotated field to have an initializer. Otherwise it wouldn't
+make sense to initialize lazily. Also as we simply check for code[null] reference we might explicitly state
+that primitive types are not supported. So in order to guide the user we should raise compilation errors if these constrains are violated.
+
+The codeRef[org.eclipse.xtend.lib.macro.TransformationContext] inherits some useful methods for this from codeRef[org.eclipse.xtend.lib.macro.services.ProblemSupport].
+
+Again since the code[context] is declared as an ref:Extension_Values[extension value], we can use those methods as extensions and simply write:
+
+code[Xtend][
+override doTransform(MutableFieldDeclaration field, extension TransformationContext context) {
+  if (field.type.primitive)
+    field.addError("Fields with primitives are not supported by @Lazy")
+    
+  if (field.initializer == null)
+    field.addError("A lazy field must have an initializer.")
+  ...
+}
+] 
+
+This will make sure the user is notified about invalid usage of code[@Lazy].
+
+section:active_annotation_classpath[Classpath Setup and Testing]
+
+An e[active annotation] can not be used in the project it is declared in, but has to reside on
+an upstream project or be readily compiled in a jar. The annotation and the processer itself only rely
+on the interfaces defined in code[org.eclipse.xtend.lib] which is Xtend's thin standard lib.
+
+When used in an IDE the compiled annotation processor is loaded and executed on the fly (i.e. within the IDE process).
+
+If you want to test and debug a processor you should write a unit test. Such a test needs the whole Xtend
+compiler on the classpath, which you can get either via PDE (OSGi) or via Maven. The maven dependency
+is
+
+code[
+<dependency>
+  <groupId>org.eclipse.xtend</groupId>
+  <artifactId>org.eclipse.xtend.standalone</artifactId>
+  <version>2.4.0</version>
+  <scope>test</scope>
+</dependency>
+]
+
+and the OSGI bundle is called code[org.eclipse.xtend.standalone].
+
+section2:active_annotation_CompilerTester[Testing]
+
+There is a convenient helper class for testing compilation called code[XtendCompilerTester]. It allows
+to test active annotation processors by either comparing the generated Java source using a String comprison
+or by inspecting the resulting AST. In addition you can even compile the generated Java source to a java
+class and create and test instances of it reflectively.
+
+Let's have a look at one of the test cases from the example project:
+
+code[Xtend][
+class LazyTest {
+  extension XtendCompilerTester compilerTester = XtendCompilerTester::newXtendCompilerTester(typeof(Lazy))
+
+  @Test def void testLazy() {
+    '''
+      import lazy.Lazy
+      
+      class Person {
+        @Lazy String name = 'foo'
+      }
+    '''.assertCompilesTo(
+    '''
+      import lazy.Lazy;
+
+      @SuppressWarnings("all")
+      public class Person {
+        @Lazy
+        private String name;
+        
+        private String _initname() {
+          return "foo";
+        }
+        
+        public String getName() {
+          if (name==null)
+            name = _initname();
+          return name;
+          
+        }
+      }
+    ''')
+  }
+}
+]
+
+This is a basic string comparison. It's a good way to start development of a new annotation processor.
+Later if you want to add more not so fragile tests you should do assertios against the result syntax
+tree (AST). We use this technique in the code[@Extract]-example: 
+
+code[Xtend][
+@Test def void testExtractAnnotation() {
+  '''
+    @extract.Extract
+    class MyClass {
+      override String doStuff(String myParam) throws IllegalArgumentException {
+        return myParam
+      }
+    }
+  '''.compile \[
+    // declare the transformationcontext as a local extensions
+    val extension ctx = transformationContext
+    
+    // look up the interface and the class
+    val interf = findInterface('MyClassInterface')
+    val clazz = findClass('MyClass')
+    
+    
+    // do assertions
+    assertEquals(clazz.implementedInterfaces.head.type, interf)
+    
+    interf.declaredMethods.head => \[
+      assertEquals('doStuff', simpleName)
+      assertEquals(string, returnType)
+      assertEquals(typeof(IllegalArgumentException).newTypeReference, exceptions.head)
+    \]
+  \]
+}
+]
+
+section2[Wrap Up]
+
+e[Active Annotations] are a powerful new concept which lets you solve a large class of problems that previously had to be solved in cumbersome ways, e.g. by IDE wizards, with code generation or simply by manually writing boilerplate code. It basically e[is] a means of code generation, but its simple integration with your existing project structure and the fast development turnarounds diminish the typical downsides of code generation. e[Note, that in version 2.4 the Active Annotation-API is provisional, and might be changed in later releases.]
+
+section[Existing Active Annotations]
+
+Xtend comes with ready-to-use active annotations for common code patterns. 
+They reside in the code[org.eclipse.xtend.lib] plug-in/jar which must be on the class path of the project containing the Xtend files.
+
+section:propertyAnnotation[@Property]
+
+For fields that are annotated as codeRef[org.eclipse.xtend.lib.Property][code[Xtend][@Property]], the Xtend compiler will generate a Java field, a
+getter and, if the field is non-final, a setter method. The name of the Java field will be prefixed with 
+an code[_] and have the visibility of the Xtend field. The accessors methods are always code[Xtend][public]. 
+Thus, an Xtend field
+
+code[Xtend][
+  @Property String name
+]
+
+will compile to the Java code
+
+code[Java][
+  private String _name;
+  
+  public String getName() {
+    return this._name;
+  }
+  
+  public void setName(final String name) {
+    this._name = name;
+  }
+]
+
+section:dataAnnotation[@Data]
+
+The annotation codeRef[org.eclipse.xtend.lib.Data][code[Xtend][@Data]], will turn an annotated class into a value object class. A class annotated with code[Xtend][@Data] 
+has the following effect:
+
+ul[
+  item[all fields are flagged final,]
+  item[getter methods will be generated (if not existent),]
+  item[a constructor taking parameters for all non-initialized fields will be generated (if not existent),]
+  item[equals(Object) / hashCode() methods will be generated (if not existent),]
+  item[a toString() method will be generated (if not existent).]
+]
+
+Example:
+
+code[Xtend][
+@Data class Person {
+  String firstName
+  String lastName
+}
+]
+
+
