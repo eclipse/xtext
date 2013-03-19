@@ -123,10 +123,10 @@ public class Index extends AbstractXtendWebsite {
     _builder.append("<p style=\"font-family: \'Lato\', sans-serif; font-size: 16px; font-weight: 300; color: #fff;word-spacing: 3px;\">");
     _builder.newLine();
     _builder.append("\t\t");
-    _builder.append("Get the new release and learn to how to write <a href=\"releasenotes_2_4.html#android_development\">Android applications</a> with mich less boiler-plate code ");
+    _builder.append("Get the new release and learn how to write efficient <a href=\"releasenotes_2_4.html#android_development\">Android applications</a> without the tedious boile-plate code.");
     _builder.newLine();
     _builder.append("\t\t");
-    _builder.append("<br/>and learn to leverage the full power of Xtend by enhancing the compiler with an <a href=\"documentation.html#activeAnnotations\">active annotation</a>. ");
+    _builder.append("<br/>Leverage the full power of Xtend by enhancing the compiler with <a href=\"documentation.html#activeAnnotations\">active annotations</a> a unique macro system for Java. ");
     _builder.newLine();
     _builder.append("\t\t\t");
     _builder.append("<br/>Enjoy the many new IDE and language features and the much improved type inference algorithm. Read the <a href=\"releasenotes_2_4.html\">full release notes</a>.</p>");

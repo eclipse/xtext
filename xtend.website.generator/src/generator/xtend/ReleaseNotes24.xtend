@@ -20,7 +20,8 @@ class ReleaseNotes24 extends AbstractXtendWebsite {
 	    <div class="span1">&nbsp;</div>
 	      <div class="span9">
 	        <p>
-	          This release includes almost <a href="https://bugs.eclipse.org/bugs/buglist.cgi?o5=anywordssubstr&f1=OP&f0=OP&resolution=FIXED&classification=Modeling&classification=Tools&f4=CP&v5=kepler&query_format=advanced&j1=OR&f3=CP&bug_status=RESOLVED&bug_status=VERIFIED&f5=flagtypes.name&component=Backlog&component=Common&component=Core&component=Releng&component=Website&component=Xtext&component=Xtext%20Backlog&product=TMF&product=Xtend&list_id=4768360">300 bug fixes and new features</a>.
+	          The team is proud to present a release with 
+	          more than <a href="https://bugs.eclipse.org/bugs/buglist.cgi?o5=anywordssubstr&f1=OP&f0=OP&resolution=FIXED&classification=Modeling&classification=Tools&f4=CP&v5=kepler&query_format=advanced&j1=OR&f3=CP&bug_status=RESOLVED&bug_status=VERIFIED&f5=flagtypes.name&component=Backlog&component=Common&component=Core&component=Releng&component=Website&component=Xtext&component=Xtext%20Backlog&product=TMF&product=Xtend&list_id=4768360">300 bug fixes</a> and some ground breaking features.
 	        </p>
 	        <h2>Table of contents</h2>
 	        <ul>
@@ -55,22 +56,19 @@ class ReleaseNotes24 extends AbstractXtendWebsite {
 	        </ul>
 	        <section id="android_development" style="padding-top: 68px; margin-top: -68px;">
 	          <h2>Android Support</h2>
-	          <p>As Xtend compiles to Java and does not have its own standard library but relies on the JDK, it is a 
-	          great choice for Android application development. With version 2.4 the Android support has been 
+	          <p>Xtend is a great choice for Android application development because it compiles to Java source code 
+	          and doesn't require a fat runtime library. With version 2.4 the Android support has been 
 	          further improved.
 	          </p>
 	          <h3 id="android_debugging">Debugging</h3>
 	            <p>
-	            Previously Xtend supported debugging through JSR-45 only, which works great in standard 
-	            JVMs as it allows you to switch between Xtend and generated Java source during a debug 
-	            session. The Dalvik VM unfortunately does not support JSR-45. Now you can configure 
-	            the compiler to use either JSR-45 or install the debug information such that Android 
-	            debugging simply works.
+	            Debugging Android applications works now. Previously Xtend supported debugging through JSR-45 only, which is not supported by the 
+	            Dalvik VM. Now you can configure the compiler to install the debug information in a Dalvik-compatible manner.
 	            </p>
 	          <h3 id="android_maven">Maven Archetype</h3>
 	            <p>
 	            There is also a Maven archetype to set up a working Android project easily. If you 
-	            have installed Maven and the Android SDK the you only need the following command to 
+	            have installed Maven and the Android SDK you only need the following command to 
 	            get started:
 	            </p>
 	<pre class="prettyprint linenums">
@@ -78,9 +76,6 @@ class ReleaseNotes24 extends AbstractXtendWebsite {
 	  -DarchetypeArtifactId=xtend-android-archetype \
 	  -DarchetypeCatalog=http://build.eclipse.org/common/xtend/maven/
 	</pre>
-	        <p>
-	        This will provide you with a fully configured Android/Xtend project.
-	        </p>
 	        </section>
 	        <section id="new_language_features" style="padding-top: 68px; margin-top: -68px;">
 	        <h2>New Language Features</h2>
@@ -88,23 +83,13 @@ class ReleaseNotes24 extends AbstractXtendWebsite {
 	        The following new features have been added to the Xtend language.
 	        </p>
 	        <h3 id="active_annotations" >Active Annotations (Provisional API)</h3>
-ллл	      <p>
-ллл	      Java developers are often forced to write repetitive code, because the language 
-ллл	      itself is not flexible enough. For instance, design patterns are not much more 
-ллл	      than the documentation of a single concept and how you model that concept with 
-ллл	      classes, interfaces and their members.
-ллл	      </p>
-ллл	      <p>
-ллл	      To mitigate the effort of writing and maintainig redundant boiler plate code, 
-ллл	      developers often reach out to extreme techniques such as byte code manipulation 
-ллл	      (Spring Roo and Play! framework) or Java compiler hacking (Lombok). These 
-ллл	      workarounds are not only complex but often cause other problems during development, 
-ллл	      such as bad IDE integration and debugging issues. Other solutions to this kind 
-ллл	      of problem include code generators and IDE wizards.
-ллл	      </p>
 	      <p>
-	      Xtend's <em>Active Annotations</em> allow developers to use a simple annotation to tell 
-	      that a certain pattern should be expanded to a specific piece of Java code. A simple example would be a JavaBeans 
+	      <em>Active Annotations</em> let developers particpate in the translation process
+	      from Xtend code to Java source code. The developer declares an annotation and a call back for the compiler where 
+	      the generate Java code can be customized arbitrarily. This doesn't break static typing 
+	      or the IDE! Any changes made in an active annotation are totally reflected by the environment
+
+		  A simple example would be a JavaBeans 
 	      property supporting the Observer pattern. Here you need a getter and a 
 	      setter method for each field and also an observer list and the proper code to notify 
 	      them about changes. In many software systems you have hundreds of these properties. 
@@ -114,93 +99,6 @@ class ReleaseNotes24 extends AbstractXtendWebsite {
 	      You do no longer have to write nor 
 	      read the boiler plate code anymore. <a href="documentation.html#activeAnnotations">Read more...</a>
 	      </p>
-	      
-	      <p>
-	      Example: To compile the Xtend code on the left to the Java code on the right
-	      </p>
-	      <table class="table table-bordered table-condensed">
-	      <tr>
-	         <th>Xtend</th>
-	         <th>Java</th>
-	      </tr>
-	      <tr>
-	        <td>
-	<pre class="prettyprint lang-xtend linenums">
-	@Observable
-	class Person {
-	   String name
-	} 
-	</pre>
-	    </td>
-	        <td>
-	<pre class="prettyprint lang-java linenums">
-	public class Person {
-	  private String name;
-	  
-	  public String getName() {
-	    return this.name;
-	  }
-	  
-	  public void setName(final String name) {
-	    String _oldValue = this.name;
-	    this.name = name;
-	    _propertyChangeSupport.firePropertyChange(
-	      "name", _oldValue, name);
-	    
-	  }
-	  
-	  private PropertyChangeSupport _propertyChangeSupport 
-	      = new PropertyChangeSupport(this);
-	  
-	  // method addPropertyChangeListener
-	  // method removePropertyChangeListener
-	}
-	</pre>
-	        </td>
-	      </tr>
-	      </table>
-	      <p>
-	      you have to implement a simple active annotation <code class="prettyprint lang-xtend">@Observable</code> as
-	      </p>
-	          
-	<pre class="prettyprint lang-xtend linenums">
-	@Active(typeof(ObservableCompilationParticipant))
-	annotation Observable {
-	}
-	
-	class ObservableCompilationParticipant extends AbstractClassProcessor {
-	
-	  override doTransform(MutableClassDeclaration clazz, extension TransformationContext context) {
-	    for (f : clazz.declaredFields) {
-	      val fieldName = f.simpleName
-	      val fieldType = f.type
-	
-	      clazz.addMethod('get' + fieldName.toFirstUpper) [
-	        returnType = fieldType
-	        body = ['л╗''return this.&laquo;fieldName&raquo;;''л╗']
-	      ]
-	
-	      clazz.addMethod('set' + fieldName.toFirstUpper) [
-	        addParameter(fieldName, fieldType)
-	        body = ['л╗''
-	          &laquo;fieldType&raquo; _oldValue = this.&laquo;fieldName&raquo;;
-	          this.&laquo;fieldName&raquo; = &laquo;fieldName&raquo;;
-	          _propertyChangeSupport.firePropertyChange("&laquo;fieldName&raquo;", _oldValue, 
-	            &laquo;fieldName&raquo;);
-	        ''л╗']
-	      ]
-	    }
-	    
-	    val changeSupportType = typeof(PropertyChangeSupport).newTypeReference
-	    clazz.addField('_propertyChangeSupport') [
-	      type = changeSupportType
-	      initializer = [''л╗'new &laquo;toJavaCode(changeSupportType)&raquo;(this)''л╗']
-	    ]
-	    // add method addPropertyChangeListener
-	    // add method removePropertyChangeListener
-	  }
-	}
-	</pre>
 	        <h3 id="collection_literals">Collection Literals and Arrays</h3>
 	        <p>
 	        Xtend now has literals for unmodifiable collections.
@@ -247,7 +145,7 @@ class ReleaseNotes24 extends AbstractXtendWebsite {
 	}
 	</pre>
 	
-	      <h3 id="extension_values">Extension Values</h3>
+	      <h3 id="extension_provider">Extension Provider</h3>
 	      <p>
 	      Extension methods allow to add new methods to existing types without modifying them. 
 	      Consider the omnipresent class <code class="prettyprint lang-java">java.lang.String</code>.
@@ -268,36 +166,10 @@ class ReleaseNotes24 extends AbstractXtendWebsite {
 	<pre class="prettyprint lang-xtend linenums">
 	'2A'.parseInt(16)
 	</pre>
-	      Extension methods are available in C# as well, but Xtend can do better. In Xtend, fields, 
-	      parameters and local variables can provide extensions, too. In fact, not all
-	      the useful functionality is available statically: if you now want to format the
-	      parsed number to present it in the UI according to a localized pattern
-	      from a <code class="prettyprint lang-java">ResourceBundle</code>,
-	      you can simply use a <code class="prettyprint lang-java">Formatter</code> and 
-	      write readable code that's easy to grasp:
-	      </p>
-	<pre class="prettyprint lang-xtend linenums">
-	def getFormattedNumber(String number, extension ResourceBundle bundle) {
-	  val localized = 'number_pattern'.getString
-	  extension val formatter = new Formatter
-	  localized.format(number.parseInt)
-	}
-	</pre>
-	      <p>The above is equivalent to the slightly more bulky:</p>
-	<pre class="prettyprint lang-xtend linenums">
-	def getFormattedNumber(String number, ResourceBundle bundle) {
-	  val localized = bundle.getString('number_pattern')
-	  val formatter = new Formatter
-	  formatter.format(localized, Integer::valueOf(number))
-	}
-	</pre>
-	      <p>
-	      Extensions are a handy mechanism to add layer specific 
-	      functionality to classes: You could add UI related 
-	      methods to your domain models via extensions just where they are needed, 
-	      without introducing a UI dependency for other clients. <a href="documentation.html#extensionMethods">Read more...</a>
-	      </p>
-	
+	      Extension methods is available in other language such as C# as well.
+	      The new 'extensions providers' removes an important limitiation: In Xtend 2.4, fields, 
+	      parameters and local variables can provide extensions, too. <a href="documentation.html#Extension_Provider">Read more...</a>
+	<br><br>
 	      <h3 id="sam_types">SAM Type Conversion</h3>
 	      <p>
 	      Lambda expressions now work with abstract classes with a single abstract method 
@@ -338,8 +210,8 @@ class ReleaseNotes24 extends AbstractXtendWebsite {
 	        <section id="new_ide_features" style="padding-top: 68px; margin-top: -68px;">
 	        <h2>New IDE Features</h2>
 			<p>Being an Eclipse project Xtend has always been designed with IDE integration in 
-			mind. We are proud to announce that the editing support is now almost on par with 
-			Java's and in some cases already even better. A user recently wrote in the newsgroup:
+			mind. The team is proud to announce that the editing support is now almost on par with 
+			Java's and in some aspects already even better. A user recently wrote in the newsgroup:
 			</p>
 			<blockquote>
 	   		Tooling for Xtend is unlike any other language for the JVM after Java. The IDE support 
@@ -370,20 +242,19 @@ class ReleaseNotes24 extends AbstractXtendWebsite {
 				<h3 id="suppression_followup">Supression of Follow-Up Errors</h3>
 				<p>
 				Follow-up error markers are now suppressed and errors in general are much more local, 
-				so it is very easy spot the problem immediately. In addition, the compiler generates 
-				as much valid Java code as possible in order not to break dependent resources on changes.
+				so it is very easy to spot the problem immediately.
 				</p>
 				<img class="image_between_p" src="images/releasenotes/follow_up_errors.png"/>
 	
 				<h3 id="optional_errors">Optional Errors and Warnings</h3>
 				<p>The severity of optional compiler errors can be configured globally as well as 
-				individually for a single project.</p>
+				individually for a single project. They can either be set explicitly or delegate to what is
+				configured for the Java compiler.</p>
 				<img class="image_between_p" src="images/releasenotes/issue_severities.png"/>
 	
 				<h3 id="quickfixes">More Quickfixes</h3>
 				<p>
-				Xtend now offers to create missing elements. Fields, methods, extension methods and types 
-				can be added with a quickfix, be it in Xtend or in Java classes.
+				Xtend now offers to create missing fields, methods, and types through quick fix proposals.
 				</p>
 				<img class="image_between_p" src="images/releasenotes/quickfixes.png"/> 
 			

@@ -116,7 +116,7 @@ class ExtractProcessor extends AbstractClassProcessor {
 
 In the first line, code[findInterface] retrieves the interface which was registered during the registration of global symbols in the first phase:
 The method is defined in codeRef[org.eclipse.xtend.lib.macro.TransformationContext]
-which is used as an ref:Extension_Values[extension value].
+which is used as an ref:Extension_Provider[extension provider].
 
 Next up the newly created interface is added to the existing list of implemented interfaces. 
 
@@ -208,7 +208,7 @@ cause trouble with primitive values. A validation for that case would be sensibl
 
 The codeRef[org.eclipse.xtend.lib.macro.TransformationContext] inherits methods for exactly that purpose from the codeRef[org.eclipse.xtend.lib.macro.services.ProblemSupport] service.
 
-Since the code[context] is declared as an ref:Extension_Values[extension value], those methods can be used as extensions and it allows to implement
+Since the code[context] is declared as an ref:Extension_Provider[extension provider], those methods can be used as extensions and it allows to implement
 the constraint check accordingly:
 
 code[Xtend][

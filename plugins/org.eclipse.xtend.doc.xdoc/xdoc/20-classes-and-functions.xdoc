@@ -556,7 +556,7 @@ code[Xtend][
     // calls Collections.singletonList(new MyClass())
 ]
 
-section2:Extension_Values[Extension Values]
+section2:Extension_Provider[Extension Provider]
 
 By adding the code[Xtend][extension] keyword to a field, a local variable or a parameter
 declaration, its instance methods become extension methods.

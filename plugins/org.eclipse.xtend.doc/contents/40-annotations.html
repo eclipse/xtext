@@ -161,7 +161,7 @@ The <span class="inlinecode">ExtractProcessor</span> implements the method <span
 <p>
 In the first line, <span class="inlinecode">findInterface</span> retrieves the interface which was registered during the registration of global symbols in the first phase:
 The method is defined in <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.4/org/eclipse/xtend/lib/macro/TransformationContext.html" title="View JavaDoc"><abbr title="org.eclipse.xtend.lib.macro.TransformationContext" >TransformationContext</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.4.0/plugins/org.eclipse.xtend.lib/src/org/eclipse/xtend/lib/macro/TransformationContext.java" title="View Source Code" >(src)</a>
-which is used as an <a href="20-classes-and-functions.html#Extension_Values" title="Go to &quot;Extension Values&quot;">extension value</a>.
+which is used as an <a href="20-classes-and-functions.html#Extension_Provider" title="Go to &quot;Extension Provider&quot;">extension provider</a>.
 </p>
 <p>
 Next up the newly created interface is added to the existing list of implemented interfaces. 
@@ -284,7 +284,7 @@ cause trouble with primitive values. A validation for that case would be sensibl
 The <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.4/org/eclipse/xtend/lib/macro/TransformationContext.html" title="View JavaDoc"><abbr title="org.eclipse.xtend.lib.macro.TransformationContext" >TransformationContext</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.4.0/plugins/org.eclipse.xtend.lib/src/org/eclipse/xtend/lib/macro/TransformationContext.java" title="View Source Code" >(src)</a> inherits methods for exactly that purpose from the <a class="jdoc" href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.4/org/eclipse/xtend/lib/macro/services/ProblemSupport.html" title="View JavaDoc"><abbr title="org.eclipse.xtend.lib.macro.services.ProblemSupport" >ProblemSupport</abbr></a> <a class="srcLink" href="https://github.com/eclipse/xtext/blob/v2.4.0/plugins/org.eclipse.xtend.lib/src/org/eclipse/xtend/lib/macro/services/ProblemSupport.java" title="View Source Code" >(src)</a> service.
 </p>
 <p>
-Since the <span class="inlinecode">context</span> is declared as an <a href="20-classes-and-functions.html#Extension_Values" title="Go to &quot;Extension Values&quot;">extension value</a>, those methods can be used as extensions and it allows to implement
+Since the <span class="inlinecode">context</span> is declared as an <a href="20-classes-and-functions.html#Extension_Provider" title="Go to &quot;Extension Provider&quot;">extension provider</a>, those methods can be used as extensions and it allows to implement
 the constraint check accordingly:
 </p>
 <p>

@@ -509,8 +509,8 @@ ref:implicitVariables[implicit variable] code[Xtend][it].
 Variables declared outside of a lambda expression using the code[Xtend][var] keyword are not accessible from within the
 lambda expressions.
 
-A local variable can be marked with the code[extension] keyword to make its methods available as extensions (ref:Extension_Values[see
-extension values]). 
+A local variable can be marked with the code[extension] keyword to make its methods available as extensions (ref:Extension_Provider[see
+extension provider]). 
 
 section2[Typing]
 
