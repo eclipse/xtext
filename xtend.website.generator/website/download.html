@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>Xtend - Modernized Java</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="description"
+		content="Xtend is a statically typed programming language sitting on top of Java.">
+	<meta name="author" content="Sven Efftinge">
+	<!--  styles -->
+	<!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
+	<!--[if lt IE 9]>
+	  <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+	<![endif]-->
+	
+	<!-- Le fav and touch icons -->
+	
+	<link rel="shortcut icon" href="images/favicon.png">
+	
+	<link href="css/bootstrap.css" rel="stylesheet" type='text/css'>
+	<link href="css/bootstrap-responsive.css" rel="stylesheet" type='text/css'>
+	<link href="css/style.css" rel="stylesheet" type='text/css'>
+	<link href="css/shield-responsive.css" rel="stylesheet" type='text/css'>
+	<link href='css/fonts.css' rel='stylesheet' type='text/css'>
+	<link href="css/prettyPhoto.css" rel="stylesheet" media="screen" type='text/css'>
+	<link href="google-code-prettify/prettify.css" type="text/css" rel="stylesheet"/>
+	<!--[if lt IE 9]>
+	<link href="css/iebugs.css" rel="stylesheet" type='text/css'>
+	<![endif]-->
+	<script src="js/twitter.js" type="text/javascript"></script>
+	<script src="js/jquery-1.7.1.min.js"></script>
+	<script src="js/jquery.prettyPhoto.js" type="text/javascript"></script>
+		<script type="text/javascript">
+	     $(document).ready(function() {
+			prettyPrint();
+			$('a[data-rel]').each(function() {
+				$(this).attr('rel', $(this).data('rel'));
+			});
+			
+			$("a[rel^='prettyPhoto']").prettyPhoto({
+				animation_speed: 'fast',
+				slideshow: 5000,
+				autoplay_slideshow: false,
+				opacity: 0.80,
+				show_title: true,
+				theme: 'ligh_square',
+				overlay_gallery: false,
+				social_tools: false
+			});
+			$('#nav-outline > li > a').live('click', function() {        
+				$(this).parent().find('ul').slideToggle();      
+			});
+			$('.has-popover').popover();
+			getTwitters('tweet', { 
+				id: 'xtendlang', 
+				count: 5,
+				includeRT: true,
+				enableLinks: true, 
+				clearContents: true,
+				template : '"%text%" - %time% by <a href="http://twitter.com/%user_screen_name%/statuses/%id_str%/">@%user_screen_name%</a><br/><br/>'
+			});
+			var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+			po.src = 'https://apis.google.com/js/plusone.js';
+			var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+	     });
+		</script>
+	<script type="text/javascript">
+		var _gaq = _gaq || [];	
+	  	_gaq.push([ '_setAccount', 'UA-2429174-4' ]);
+		_gaq.push([ '_trackPageview' ]);
+		(function() {
+			var ga = document.createElement('script');
+			ga.type = 'text/javascript';
+			ga.async = true;
+			ga.src = ('https:' == document.location.protocol ? 'https://ssl'
+					: 'http://www')
+					+ '.google-analytics.com/ga.js';
+			var s = document.getElementsByTagName('script')[0];
+			s.parentNode.insertBefore(ga, s);
+		})();
+	</script>
+</head>
+<body>
+	<!-- Navbar -->
+	<div class="navbar navbar-fixed-top"
+		style="border-bottom: 1px solid #000;">
+		<div class="navbar-inner">
+			<div class="container">
+				<a class="btn btn-navbar" data-toggle="collapse"
+					data-target=".nav-collapse"> <span class="icon-bar"></span> <span
+					class="icon-bar"></span> <span class="icon-bar"></span>
+				</a> <a class="brand" href="index.html"></a>
+				<div class="nav-collapse collapse" style="height: 0px;">
+					<ul class="nav">
+						<li ><a href="news.html">News</a></li>
+						<li class="active"><a href="download.html">Download</a></li>
+						<li ><a href="documentation.html">Documentation</a></li>
+						<li ><a href="community.html">Community</a></li>
+						<li ><a href="http://xtext.org">Xtext</a></li>
+						<li ><a href="http://www.eclipse.org">Eclipse.org</a></li>
+					</ul>
+				</div>
+				<!--/.nav-collapse -->
+		        <div class="btn-group pull-right">
+		          <g:plusone href="http://www.xtend-lang.org"></g:plusone>
+		        </div>
+	
+			</div>
+		</div>
+	</div>
+	<!-- Navbar End -->
+		<div id="page">
+			<div class="inner">
+				<div class="container clearfix">
+					<h2>Download Options</h2>
+					<hr>
+					<!--table one starts-->
+					<div class="span1">&nbsp;</div>
+				    <div class="span4">
+						<div class="pricing">
+						    <table>
+								<tfoot>
+								    <tr>
+										<td></td>
+								    </tr>
+								</tfoot>
+								<tbody>
+							    <tr>
+									<td class="focus">Update Sites <span>Use Update Manager in Eclipse</span></td>
+							    </tr>
+							    <tr>
+							    	<td style="text-align: center;">
+							    	<a  
+							    	rel="popover" 
+							    	data-content="This is an Eclipse update site URL, which you need to paste into the update manager within Eclipse!" 
+							    	data-original-title="Right-click and 'Copy Link'"
+							    	href="http://download.eclipse.org/modeling/tmf/xtext/updates/composite/releases/" 
+							    	class="has-popover btn btn-primary btn-large"
+							    	style="width: 70%;">Latest Release</a></td>
+							    </tr>
+							    <tr>
+									<td style="text-align: center;">
+									<a
+									  rel="popover" 
+							    	data-content="This is an Eclipse update site URL, which you need to paste into the update manager within Eclipse!" 
+							    	data-original-title="Right-click and 'Copy Link'" 
+									  href="http://download.eclipse.org/modeling/tmf/xtext/updates/composite/milestones/" 
+							    	class="has-popover btn btn-primary btn-large"
+							    	style="width: 70%;">Latest Milestone</a></td>
+							    </tr>
+							    <tr>
+									<td style="text-align: center;">
+									<a
+										rel="popover" 
+							    	data-content="This is an Eclipse update site URL, which you need to paste into the update manager within Eclipse!" 
+							    	data-original-title="Right-click and 'Copy Link'" 
+										href="http://download.eclipse.org/modeling/tmf/xtext/updates/composite/latest/" 
+							    	class="has-popover btn btn-primary btn-large"
+							    	style="width: 70%;">Bleeding Edge!</a></td>
+							    </tr>
+							</tbody>
+						    </table>
+						</div>
+				    </div>
+				    <div class="span1">&nbsp;</div>
+				    <div class="span4">
+						<div class="pricing">
+						    <table>
+								<tfoot>
+								    <tr>
+										<td></td>
+								    </tr>
+								</tfoot>
+								<tbody>
+								    <tr>
+										<td class="focus">Full Eclipse <span>Just Download and Unzip</span></td>
+								    </tr>
+								    <tr>
+								    	<td style="text-align: center; white-space: nowrap;">
+								    	<a href="http://www.eclipse.org/modeling/download.php?file=/modeling/tmf/xtext/downloads/distros/eclipse-SDK-4.2-Xtext-2.3.1-macosx-cocoa-x86_64.tar.gz&r=1" 
+								    	class="btn btn-primary btn-large" style="width: 45%;">OS X 64 Bit</a>&nbsp;
+								    	<a href="http://www.eclipse.org/modeling/download.php?file=/modeling/tmf/xtext/downloads/distros/eclipse-SDK-4.2-Xtext-2.3.1-macosx-cocoa.tar.gz&r=1" 
+								    	class="btn btn-primary btn-large"
+								    	style="width:20%;">32 Bit</a></td>
+								    </tr>
+								    <tr>
+								    	<td style="text-align: center; white-space: nowrap;">
+								    	<a href="http://www.eclipse.org/modeling/download.php?file=/modeling/tmf/xtext/downloads/distros/eclipse-SDK-4.2-Xtext-2.3.1-linux-gtk-x86_64.tar.gz&r=1" 
+								    	class="btn btn-primary btn-large"
+								    	style="width: 45%;">Linux 64 Bit</a>&nbsp;
+								    	<a href="http://www.eclipse.org/modeling/download.php?file=/modeling/tmf/xtext/downloads/distros/eclipse-SDK-4.2-Xtext-2.3.1-linux-gtk.tar.gz&r=1" 
+								    	class="btn btn-primary btn-large"
+								    	style="width:20%;">32 Bit</a></td>
+								    </tr>
+								    <tr>
+								    	<td style="text-align: center; white-space: nowrap;">
+								    	<a href="http://www.eclipse.org/modeling/download.php?file=/modeling/tmf/xtext/downloads/distros/eclipse-SDK-4.2-Xtext-2.3.1-win32-x86_64.zip&r=1"
+								    	class="btn btn-primary btn-large"
+								    	style="width: 45%;">Windows 64 Bit</a>&nbsp;
+								    	<a href="http://www.eclipse.org/modeling/download.php?file=/modeling/tmf/xtext/downloads/distros/eclipse-SDK-4.2-Xtext-2.3.1-win32.zip&r=1" 
+								    	class="btn btn-primary btn-large"
+								    	style="width:20%;">32 Bit</a></td>
+								    </tr>
+								</tbody>
+						    </table>
+						</div>
+				    </div>
+					<div class="span1">&nbsp;</div>
+				</div>
+				    <div class="container">
+								<div class="container">
+				<h2>Installation Instructions</h2>
+				<hr>
+				<div class="span1">&nbsp;</div>
+				  <div class="span9">
+				    <p>
+				      Xtend requires Eclipse 3.5 or higher and a Java SDK 5 or higher. Use one of the udpate sites from above to install the full SDK
+				      into your running Eclipse. If you do not yet have an Eclipse on your machine, you can download one of the pre-packaged distributions on the right.
+				    </p>
+				    <p>
+				      Standalone compilation is supported as well, the simplest way to do that is using the Maven plug-in.
+				    </p>
+				    <!--  section -->
+				    <section id="Update Site" style="padding-top: 68px; margin-top: -68px;">
+							<h2 style="padding-top: 15px;">Install From Update Site</h2>
+							<p>
+								If you already have an Eclipse running you should install the <i>"Xtend SDK"</i>-Feature from one of the update sites listed above. To do so
+								within Eclipse choose <i>Help -&gt; Install New Software...</i>. In the upcoming dialog you should paste one of the update site URLS into the 
+								field named <i>Work with</i>. Now search for the feature <e>Xtend SDK</e>, select it and click <i>Next</i> and on the next page <i>Finish</i>.
+							</p>
+							<img src="images/screenshot-installation.png" class="image_between_p"/>
+							<p>
+								Now the features are being downloaded and installed. Eclipse will ask you for a restart when downloading and installation is done.
+							</p>
+					</section>
+					<section id="Hello World" style="padding-top: 68px; margin-top: -68px;">
+							<h2 style="padding-top: 15px;">Getting Started</h2>
+							<p>
+								<img src="images/java-perspective.png" style="float : right; margin-left:10px;"/>
+								When you've started Eclipse for the first time, you should see an empty workspace. Switch to the 'Java perspective'
+								if you are not already in it. Xtend integrates with Java, so you need to create a Java project to get started. In the menu choose 
+								<i>File -> New -> Java Project</i>. In the upcoming dialog choose any project name you want (e.g. <i>my.project</i>).
+								After clicking <i>Finish</i> Eclipse will create a fresh project with an empty source folder named <i>'/src'</i>. 
+							</p>
+							<h3>A first class</h3>
+							<img src="images/menu new xtend class.png" class="image_between_p"/>
+							<p>
+								To create your first Xtend class select the source folder and press the right mouse button. You should find the entry 
+								<i>Xtend class</i> in the category <i>New &gt;</i>. If you don't see it you might not be in the Java perspective or you need to reset the perspective. To do so right click
+								on the perspective icon on the top right and choose <i>reset</i>.
+							</p>
+							<img src="images/new class wizard.png" class="image_between_p"/>
+							<p>
+								In the dialog you should give the class a name, for instance <i>HelloWorld</i>, and put it into some package (we chose <i>my.namespace</i>). Click <i>Finish</i> and
+								an empty class will be created for you.
+							</p>
+							<h3>The missing lib</h3>
+							<img src="images/xtend lib missing error.png"  class="image_between_p"/>
+							<p>
+								The newly created class will have an error marker, saying that you need to put the library on the classpath. There is a "quickfix" which does that for you.
+								Put the cursor on the marked location and press <i>CTRL+1</i> (or CMD+1 on a Mac) and select the option "Add Xtend libs to the classpath".
+							</p>
+							<p>
+								The library is also available from maven (see below) or as an OSGi bundle from the p2 update site above.
+							</p>
+							<h3>Have fun!</h3>
+							<p>
+								Now you are ready to code. Within the class body (between the curly braces) type <i>main<i> and press <i>CTRL+space</i>. An empty main method will be generated for you.
+							</p>
+							<p>
+								Now type in <code class="prettyprint lang-xtend">println('Hello World')</code>, save and run the application. To do so use the green arrow and choose <i>Run As -&gt; Java Application</i>.
+							</p>
+							<img src="images/run as java application.png" class="image_between_p"/>
+							<p>
+								<a href="documentation.html#GettingStarted">Click here for the next steps and more examples.</a> 
+							</p>
+					</section>
+				    <section id="MavenSupport" style="padding-top: 68px; margin-top: -68px;">
+							<h2 style="padding-top: 15px;">Maven Plug-In</h2>
+							<p>
+								The <a href="#library">runtime library</a> as well as a plug-in to run the compiler in a Maven build can be be obtained from
+								the following Maven repository: <a href="http://build.eclipse.org/common/xtend/maven/">http://build.eclipse.org/common/xtend/maven/</a>.
+							</p>
+							<p>
+								Here is the XML for the repository:
+								</p>
+								<pre class="prettyprint lang-xml linenums">
+&lt;repositories&gt;
+  &lt;repository&gt;
+    &lt;id&gt;xtend&lt;/id&gt;
+    &lt;url&gt;http://build.eclipse.org/common/xtend/maven/&lt;/url&gt;
+  &lt;/repository&gt;
+&lt;/repositories&gt;
+&lt;pluginRepositories&gt;
+  &lt;pluginRepository&gt;
+    &lt;id&gt;xtend&lt;/id&gt;
+    &lt;url&gt;http://build.eclipse.org/common/xtend/maven/&lt;/url&gt;
+  &lt;/pluginRepository&gt;
+&lt;/pluginRepositories&gt;</pre>
+								<p>
+							</p>
+							<p>
+								And this is the XML for the plug-in:
+							</p>
+							<p>
+								</p>
+								<pre class="prettyprint lang-xml linenums">
+&lt;plugin&gt;
+  &lt;groupId&gt;org.eclipse.xtend&lt;/groupId&gt;
+  &lt;artifactId&gt;xtend-maven-plugin&lt;/artifactId&gt;
+  &lt;version&gt;2.3.0&lt;/version&gt;
+  &lt;executions&gt;
+    &lt;execution&gt;
+      &lt;goals&gt;
+        &lt;goal&gt;compile&lt;/goal&gt;
+        &lt;!-- &lt;goal&gt;testCompile&lt;/goal&gt; --&gt;
+      &lt;/goals&gt;
+      &lt;!-- optionally you can configure a different target folder --&gt;
+      &lt;!--
+      &lt;configuration&gt;
+        &lt;outputDirectory&gt;xtend-gen&lt;/outputDirectory&gt;
+      &lt;/configuration&gt;
+      --&gt;
+    &lt;/execution&gt;
+  &lt;/executions&gt;
+&lt;/plugin&gt;</pre>
+								<p>
+							</p>
+							<p>
+								As you see the <strong>outputDirectory</strong> can be specified to match the default of the Eclipse plug-in (<strong>xtend-gen</strong>). Of course you can also change the configuration
+								in Eclipse to match the Maven default (<strong>generated-sources</strong>). To do so right-click on the project and select <strong>Properties</strong> or if you prefer a global setting choose <strong>Eclipse-&gt;Preferences</strong>.
+								In the category <strong>Xtend/Compiler</strong> enter the directory name (see screenshot). It is interpreted as a relative path to the parent of the source folder, which includes the to-be-compiled Xtend file.
+							</p>
+							<p>
+								<div class="thumbnail">
+									<img src="images/configure-compiler-in-eclipse.png" alt="Configuring the compiler in Eclipse" width="680" height="330">
+								</div>
+							</p>
+							</section>
+							<section>
+							<h2 style="padding-top: 15px;">Getting the runtime library via Maven</h2>
+							<p>
+								The <a href="api/2.3.0/index.html">runtime library</a> is contained in the same Maven repository as the plug-in : <a href="http://build.eclipse.org/common/xtend/maven/">http://build.eclipse.org/common/xtend/maven/</a>.
+							</p>
+							The XML for the dependency is :
+							</p>
+							<p>
+								</p>
+								<pre class="prettyprint lang-xml linenums">
+&lt;dependency&gt;
+  &lt;groupId&gt;org.eclipse.xtend&lt;/groupId&gt;
+  &lt;artifactId&gt;org.eclipse.xtend.lib&lt;/artifactId&gt;
+  &lt;version&gt;2.3.0&lt;/version&gt;
+&lt;/dependency&gt;</pre>
+								<p>
+							</p>
+							<p>
+							</section>
+				  </div>
+				<div class="span1">&nbsp;</div>
+				</div>
+			</div>
+		</div>
+	<div id="extra">
+		<div class="inner">
+			<div class="container">
+				<div class="row">
+					<div class="span6">
+						<h3 style="padding-top: 0px; margin-top: 0px;">Quick Links</h3>
+						<ul class="footer-links clearfix">
+							<li><a href="http://www.eclipse.org/legal/privacy.php">Privacy Policy</a></li>
+							<li><a href="http://www.eclipse.org/legal/termsofuse.php">Terms of Use</a></li>
+							<li><a href="http://www.eclipse.org/legal/copyright.php">Copyright Agent</a></li>
+							<li><a href="http://www.eclipse.org/legal/">Legal</a></li>
+						</ul>
+						<ul class="footer-links clearfix">
+	      			<li><a href="http://www.eclipse.org">Eclipse Home</a></li>
+							<li><a href="http://marketplace.eclipse.org/">Market Place</a></li>
+							<li><a href="http://live.eclipse.org/">Eclipse Live</a></li>
+							<li><a href="http://www.planeteclipse.org/">Eclipse Planet</a></li>
+						</ul>
+					</div>
+					<div class="span6">
+						<h3 style="padding-top: 0px; margin-top: 0px;"><a href="https://twitter.com/#!/xtendlang" style="color: white;">Xtendlang</a> on Twitter</h3>
+						<br />
+						<div id="tweet">
+							<p>Please wait while my tweets load</p>
+							<p>
+								<a href="http://twitter.com/rem">If you can't wait - check
+									out what I've been twittering</a>
+							</p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- Le javascript
+	    ================================================== -->
+	<!-- Placed at the end of the document so the pages load faster -->
+	
+	<script src="js/bootstrap-transition.js"></script>
+	<script src="js/bootstrap-alert.js"></script>
+	<script src="js/bootstrap-modal.js"></script>
+	<script src="js/bootstrap-dropdown.js"></script>
+	<script src="js/bootstrap-scrollspy.js"></script>
+	<script src="js/bootstrap-tab.js"></script>
+	<script src="js/bootstrap-tooltip.js"></script>
+	<script src="js/bootstrap-popover.js"></script>
+	<script src="js/bootstrap-button.js"></script>
+	<script src="js/bootstrap-collapse.js"></script>
+	<script src="js/bootstrap-carousel.js"></script>
+	<script src="js/bootstrap-typeahead.js"></script>
+	
+	<!-- include pretty-print files -->
+	<script type="text/javascript" src="google-code-prettify/prettify.js"></script>
+	<script type="text/javascript" src="google-code-prettify/lang-xtend.js"></script>
+	
+	<!-- Include the plug-in -->
+	<script src="js/jquery.easing.1.3.js" type="text/javascript"></script>
+	<script src="js/custom.js" type="text/javascript"></script>
+</body>
+</html>

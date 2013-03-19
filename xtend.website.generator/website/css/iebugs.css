@@ -1,0 +1,11 @@
+/* Fixes for some bugs in IE < 9 */
+
+.nav-collapse,
+.nav-collapse.collapse {
+	overflow: visible !important;
+	position: static !important;
+}
+
+.navbar-inner {
+	filter: 
+}

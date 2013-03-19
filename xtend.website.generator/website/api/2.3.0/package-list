@@ -1,0 +1,4 @@
+org.eclipse.xtend2.lib
+org.eclipse.xtext.xbase.lib
+org.eclipse.xtext.xbase.lib.internal
+org.eclipse.xtext.xbase.lib.util
