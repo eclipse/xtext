@@ -14,6 +14,7 @@ import org.eclipse.xtext.common.types.JvmExecutable;
 import org.eclipse.xtext.common.types.JvmMember;
 import org.eclipse.xtext.generator.InMemoryFileSystemAccess;
 import org.eclipse.xtext.resource.XtextResource;
+import org.eclipse.xtext.xbase.compiler.GeneratorConfig;
 import org.eclipse.xtext.xbase.compiler.JvmModelGenerator;
 import org.eclipse.xtext.xbase.compiler.output.ITreeAppendable;
 import org.junit.runner.RunWith;
@@ -41,21 +42,21 @@ public class JvmModelInferrerTest {
 
 	public static class SignatureGenerator extends JvmModelGenerator {
 		@Override
-		public void generateExecutableBody(JvmExecutable op, ITreeAppendable appendable) {
+		public void generateExecutableBody(JvmExecutable op, ITreeAppendable appendable, final GeneratorConfig config) {
 			appendable.append("{...}");
 		}
 
 		@Override
-		public boolean generateMember(JvmMember it, ITreeAppendable appendable, boolean first) {
+		public ITreeAppendable generateMember(final JvmMember it, final ITreeAppendable appendable, final GeneratorConfig config) {
 			switch (it.getVisibility()) {
 			case PROTECTED:
 			case PUBLIC:
-				return super.generateMember(it, appendable, first);
+				return super.generateMember(it, appendable, config);
 			case DEFAULT:
 			case PRIVATE:
 			default:
 			}
-			return first;
+			return appendable;
 		}
 	}
 

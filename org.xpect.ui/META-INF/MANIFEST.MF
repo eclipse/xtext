@@ -28,4 +28,5 @@ Bundle-Activator: org.xpect.ui.XpectPluginActivator
 Export-Package: org.xpect.ui.internal,
  org.xpect.ui.services,
  org.xpect.ui.util,
- org.xpect.ui.contentassist
+ org.xpect.ui.contentassist,
+ org.xpect.ui.quickfix

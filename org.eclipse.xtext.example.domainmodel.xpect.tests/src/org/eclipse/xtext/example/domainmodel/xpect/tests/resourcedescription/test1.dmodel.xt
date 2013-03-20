@@ -24,6 +24,13 @@ XPECT exportedObjects ---
 /*
 these names have been imported from other files 
 XPECT importedNames ---
+int
+java.lang.int
+java.lang.string
+org.eclipse.xtext.xbase.lib.int
+org.eclipse.xtext.xbase.lib.string
+pkg1.int
+pkg1.string
 --- */
 
 /*

@@ -1,7 +1,5 @@
 /* XPECT_SETUP org.eclipse.xtext.example.domainmodel.xpect.tests.testsuite.DMXtextTests END_SETUP */
 
-import pkg2.MyEntity2
-
 package pkg1 {
 	entity MyEntity1 {
 		
