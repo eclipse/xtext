@@ -408,9 +408,10 @@ class Util {
 	ILexerStatesProvider$ILexerState target
 	
 	override toString() {
-		switch(token) {
-			String: token
-			TerminalRule: token.name
+		val t = token
+		switch t {
+			String: t
+			TerminalRule: t.name
 		}
 	}
 
