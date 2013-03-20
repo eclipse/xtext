@@ -113,7 +113,7 @@ class TypeReferenceProviderImpl implements TypeReferenceProvider {
 				return primitiveVoid
 			}
 			default : {
-				throw new IllegalArgumentException("couln't construct type refernce for type "+typeDeclaration)
+				throw new IllegalArgumentException("couldn't construct type reference for type "+typeDeclaration)
 			}
 		}
 		

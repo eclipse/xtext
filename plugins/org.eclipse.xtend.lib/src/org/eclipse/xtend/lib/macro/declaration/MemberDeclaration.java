@@ -33,7 +33,7 @@ public interface MemberDeclaration extends Declaration {
 	Visibility getVisibility();
 	
 	/**
-	 * @return the type declaring this member or <code>null</code> is this is a top level element
+	 * @return the type declaring this member or <code>null</code> if this is a top level element
 	 */
 	TypeDeclaration getDeclaringType();
 }
