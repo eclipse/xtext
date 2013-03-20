@@ -242,7 +242,7 @@ public class ReleaseNotes24 extends AbstractXtendWebsite {
     _builder.append("the generated Java code can be customized arbitrarily. This doesn\'t break static typing ");
     _builder.newLine();
     _builder.append("      ");
-    _builder.append("or the IDE! Any changes made in an active annotation are completely reflected by the environment");
+    _builder.append("or the IDE! Any changes made in an active annotation are completely reflected by the environment.");
     _builder.newLine();
     _builder.newLine();
     _builder.append("\t  ");
