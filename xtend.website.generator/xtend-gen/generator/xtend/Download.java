@@ -224,13 +224,13 @@ public class Download extends AbstractXtendWebsite {
     _builder.append("<td style=\"text-align: center; white-space: nowrap;\">");
     _builder.newLine();
     _builder.append("\t\t\t\t\t\t\t\t    \t");
-    _builder.append("<a href=\"http://www.eclipse.org/modeling/download.php?file=/modeling/tmf/xtext/downloads/distros/eclipse-SDK-4.2-Xtext-2.3.1-macosx-cocoa-x86_64.tar.gz&r=1\" ");
+    _builder.append("<a href=\"http://www.eclipse.org/modeling/download.php?file=/modeling/tmf/xtext/downloads/distros/eclipse-SDK-4.2.2-Xtext-2.4.0-macosx-cocoa-x86_64.tar.gz&r=1\" ");
     _builder.newLine();
     _builder.append("\t\t\t\t\t\t\t\t    \t");
     _builder.append("class=\"btn btn-primary btn-large\" style=\"width: 45%;\">OS X 64 Bit</a>&nbsp;");
     _builder.newLine();
     _builder.append("\t\t\t\t\t\t\t\t    \t");
-    _builder.append("<a href=\"http://www.eclipse.org/modeling/download.php?file=/modeling/tmf/xtext/downloads/distros/eclipse-SDK-4.2-Xtext-2.3.1-macosx-cocoa.tar.gz&r=1\" ");
+    _builder.append("<a href=\"http://www.eclipse.org/modeling/download.php?file=/modeling/tmf/xtext/downloads/distros/eclipse-SDK-4.2.2-Xtext-2.4.0-macosx-cocoa.tar.gz&r=1\" ");
     _builder.newLine();
     _builder.append("\t\t\t\t\t\t\t\t    \t");
     _builder.append("class=\"btn btn-primary btn-large\"");
@@ -248,7 +248,7 @@ public class Download extends AbstractXtendWebsite {
     _builder.append("<td style=\"text-align: center; white-space: nowrap;\">");
     _builder.newLine();
     _builder.append("\t\t\t\t\t\t\t\t    \t");
-    _builder.append("<a href=\"http://www.eclipse.org/modeling/download.php?file=/modeling/tmf/xtext/downloads/distros/eclipse-SDK-4.2-Xtext-2.3.1-linux-gtk-x86_64.tar.gz&r=1\" ");
+    _builder.append("<a href=\"http://www.eclipse.org/modeling/download.php?file=/modeling/tmf/xtext/downloads/distros/eclipse-SDK-4.2.2-Xtext-2.4.0-linux-gtk-x86_64.tar.gz&r=1\" ");
     _builder.newLine();
     _builder.append("\t\t\t\t\t\t\t\t    \t");
     _builder.append("class=\"btn btn-primary btn-large\"");
@@ -257,7 +257,7 @@ public class Download extends AbstractXtendWebsite {
     _builder.append("style=\"width: 45%;\">Linux 64 Bit</a>&nbsp;");
     _builder.newLine();
     _builder.append("\t\t\t\t\t\t\t\t    \t");
-    _builder.append("<a href=\"http://www.eclipse.org/modeling/download.php?file=/modeling/tmf/xtext/downloads/distros/eclipse-SDK-4.2-Xtext-2.3.1-linux-gtk.tar.gz&r=1\" ");
+    _builder.append("<a href=\"http://www.eclipse.org/modeling/download.php?file=/modeling/tmf/xtext/downloads/distros/eclipse-SDK-4.2.2-Xtext-2.4.0-linux-gtk.tar.gz&r=1\" ");
     _builder.newLine();
     _builder.append("\t\t\t\t\t\t\t\t    \t");
     _builder.append("class=\"btn btn-primary btn-large\"");
@@ -275,7 +275,7 @@ public class Download extends AbstractXtendWebsite {
     _builder.append("<td style=\"text-align: center; white-space: nowrap;\">");
     _builder.newLine();
     _builder.append("\t\t\t\t\t\t\t\t    \t");
-    _builder.append("<a href=\"http://www.eclipse.org/modeling/download.php?file=/modeling/tmf/xtext/downloads/distros/eclipse-SDK-4.2-Xtext-2.3.1-win32-x86_64.zip&r=1\"");
+    _builder.append("<a href=\"http://www.eclipse.org/modeling/download.php?file=/modeling/tmf/xtext/downloads/distros/eclipse-SDK-4.2.2-Xtext-2.4.0-win32-x86_64.zip&r=1\"");
     _builder.newLine();
     _builder.append("\t\t\t\t\t\t\t\t    \t");
     _builder.append("class=\"btn btn-primary btn-large\"");
@@ -284,7 +284,7 @@ public class Download extends AbstractXtendWebsite {
     _builder.append("style=\"width: 45%;\">Windows 64 Bit</a>&nbsp;");
     _builder.newLine();
     _builder.append("\t\t\t\t\t\t\t\t    \t");
-    _builder.append("<a href=\"http://www.eclipse.org/modeling/download.php?file=/modeling/tmf/xtext/downloads/distros/eclipse-SDK-4.2-Xtext-2.3.1-win32.zip&r=1\" ");
+    _builder.append("<a href=\"http://www.eclipse.org/modeling/download.php?file=/modeling/tmf/xtext/downloads/distros/eclipse-SDK-4.2.2-Xtext-2.4.0-win32.zip&r=1\" ");
     _builder.newLine();
     _builder.append("\t\t\t\t\t\t\t\t    \t");
     _builder.append("class=\"btn btn-primary btn-large\"");

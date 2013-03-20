@@ -80,27 +80,27 @@ class Download extends AbstractXtendWebsite {
 								    </tr>
 								    <tr>
 								    	<td style="text-align: center; white-space: nowrap;">
-								    	<a href="http://www.eclipse.org/modeling/download.php?file=/modeling/tmf/xtext/downloads/distros/eclipse-SDK-4.2-Xtext-2.3.1-macosx-cocoa-x86_64.tar.gz&r=1" 
+								    	<a href="http://www.eclipse.org/modeling/download.php?file=/modeling/tmf/xtext/downloads/distros/eclipse-SDK-4.2.2-Xtext-2.4.0-macosx-cocoa-x86_64.tar.gz&r=1" 
 								    	class="btn btn-primary btn-large" style="width: 45%;">OS X 64 Bit</a>&nbsp;
-								    	<a href="http://www.eclipse.org/modeling/download.php?file=/modeling/tmf/xtext/downloads/distros/eclipse-SDK-4.2-Xtext-2.3.1-macosx-cocoa.tar.gz&r=1" 
+								    	<a href="http://www.eclipse.org/modeling/download.php?file=/modeling/tmf/xtext/downloads/distros/eclipse-SDK-4.2.2-Xtext-2.4.0-macosx-cocoa.tar.gz&r=1" 
 								    	class="btn btn-primary btn-large"
 								    	style="width:20%;">32 Bit</a></td>
 								    </tr>
 								    <tr>
 								    	<td style="text-align: center; white-space: nowrap;">
-								    	<a href="http://www.eclipse.org/modeling/download.php?file=/modeling/tmf/xtext/downloads/distros/eclipse-SDK-4.2-Xtext-2.3.1-linux-gtk-x86_64.tar.gz&r=1" 
+								    	<a href="http://www.eclipse.org/modeling/download.php?file=/modeling/tmf/xtext/downloads/distros/eclipse-SDK-4.2.2-Xtext-2.4.0-linux-gtk-x86_64.tar.gz&r=1" 
 								    	class="btn btn-primary btn-large"
 								    	style="width: 45%;">Linux 64 Bit</a>&nbsp;
-								    	<a href="http://www.eclipse.org/modeling/download.php?file=/modeling/tmf/xtext/downloads/distros/eclipse-SDK-4.2-Xtext-2.3.1-linux-gtk.tar.gz&r=1" 
+								    	<a href="http://www.eclipse.org/modeling/download.php?file=/modeling/tmf/xtext/downloads/distros/eclipse-SDK-4.2.2-Xtext-2.4.0-linux-gtk.tar.gz&r=1" 
 								    	class="btn btn-primary btn-large"
 								    	style="width:20%;">32 Bit</a></td>
 								    </tr>
 								    <tr>
 								    	<td style="text-align: center; white-space: nowrap;">
-								    	<a href="http://www.eclipse.org/modeling/download.php?file=/modeling/tmf/xtext/downloads/distros/eclipse-SDK-4.2-Xtext-2.3.1-win32-x86_64.zip&r=1"
+								    	<a href="http://www.eclipse.org/modeling/download.php?file=/modeling/tmf/xtext/downloads/distros/eclipse-SDK-4.2.2-Xtext-2.4.0-win32-x86_64.zip&r=1"
 								    	class="btn btn-primary btn-large"
 								    	style="width: 45%;">Windows 64 Bit</a>&nbsp;
-								    	<a href="http://www.eclipse.org/modeling/download.php?file=/modeling/tmf/xtext/downloads/distros/eclipse-SDK-4.2-Xtext-2.3.1-win32.zip&r=1" 
+								    	<a href="http://www.eclipse.org/modeling/download.php?file=/modeling/tmf/xtext/downloads/distros/eclipse-SDK-4.2.2-Xtext-2.4.0-win32.zip&r=1" 
 								    	class="btn btn-primary btn-large"
 								    	style="width:20%;">32 Bit</a></td>
 								    </tr>
