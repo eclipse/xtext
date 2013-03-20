@@ -9,12 +9,10 @@ package org.eclipse.xtext.builder;
 
 import org.eclipse.core.resources.IContainer;
 import org.eclipse.core.resources.IFolder;
-import org.eclipse.core.resources.IResource;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.jdt.core.IClasspathEntry;
 import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.jdt.core.JavaCore;
-import org.eclipse.xtext.builder.EclipseResourceFileSystemAccess2;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
