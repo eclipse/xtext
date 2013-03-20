@@ -29,7 +29,7 @@ public class Download extends AbstractXtendWebsite {
     _builder.append("<div class=\"container clearfix\">");
     _builder.newLine();
     _builder.append("\t\t\t\t\t");
-    _builder.append("<h2>Download Options</h2>");
+    _builder.append("<h2>Download Options (Current Version is <a href=\"releasenotes_2_4.html\">2.4</a>)</h2>");
     _builder.newLine();
     _builder.append("\t\t\t\t\t");
     _builder.append("<hr>");
