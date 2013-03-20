@@ -23,14 +23,6 @@ public class PreviewCode {
     _builder.newLine();
     _builder.append("class XtendClass {");
     _builder.newLine();
-    _builder.newLine();
-    _builder.append("\t");
-    _builder.append("def testy() {");
-    _builder.newLine();
-    _builder.append("\t");
-    _builder.append("}");
-    _builder.newLine();
-    _builder.newLine();
     _builder.append("\t");
     _builder.append("def readMovies() {");
     _builder.newLine();
@@ -116,7 +108,7 @@ public class PreviewCode {
     _builder.append("\t");
     _builder.append("@Property String vorname");
     _builder.newLine();
-    _builder.append("}\t");
+    _builder.append("}");
     _builder.newLine();
     return _builder.toString();
   }

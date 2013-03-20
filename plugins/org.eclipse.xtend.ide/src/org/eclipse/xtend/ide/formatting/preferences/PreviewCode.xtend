@@ -17,10 +17,6 @@ class PreviewCode {
 			import java.util.List
 			
 			class XtendClass {
-			
-				def testy() {
-				}
-			
 				def readMovies() {
 					val movies = new FileReader('data.csv').readLines.map[
 						line |line.toFirstUpper.toFirstLower.toFirstLower.toFirstUpper]
@@ -63,7 +59,7 @@ class PreviewCode {
 		@Data class PersonClass {
 			@Property String name
 			@Property String vorname
-		}	
+		}
 	'''
 	}
 	
