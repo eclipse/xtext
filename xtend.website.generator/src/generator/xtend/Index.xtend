@@ -49,11 +49,11 @@ class Index extends AbstractXtendWebsite {
 	
 	<div id="intro">
 		<div class="container">
-			<h1>Get the new release!</h1>
+			<h1>Get the New Release!</h1>
 			<p style="font-family: 'Lato', sans-serif; font-size: 16px; font-weight: 300; color: #fff;word-spacing: 3px;">
-			Get the new release and learn how to write efficient <a href="releasenotes_2_4.html#android_development">Android applications</a> without the tedious boile-plate code.
-			<br/>Leverage the full power of Xtend by enhancing the compiler with <a href="documentation.html#activeAnnotations">active annotations</a> a unique macro system for Java. 
-				<br/>Enjoy the many new IDE and language features and the much improved type inference algorithm. Read the <a href="releasenotes_2_4.html">full release notes</a>.</p>
+			Get the new release and learn how to write efficient <a href="releasenotes_2_4.html#android_development">Android applications</a> without the tedious boiler-plate code.<br/>
+			Leverage the full power of Xtend by enhancing the compiler with <a href="documentation.html#activeAnnotations">Active Annotations</a> a unique macro system for Java.<br/>
+			Enjoy the many new IDE and language features and the much improved type inference algorithm. Read the <a href="releasenotes_2_4.html">full release notes</a>.</p>
 		</div>
 	</div>
 
@@ -69,7 +69,7 @@ class Index extends AbstractXtendWebsite {
 					</p>
 					''',
 					'images/icon-noise.png',
-					'http://vimeo.com/12824833'
+					''
 				)»
 				«entry('More Power','''
 					<p>
@@ -78,27 +78,27 @@ class Index extends AbstractXtendWebsite {
 					</p>
 					''',
 					'images/icon-expressive.png',
-					'http://vimeo.com/12824833'
+					''
 				)»
 				«entry('100% Java Compatible','''
 					<p>
 						Unlike <strong>all</strong> other JVM-languages, Xtend resembles Java's type system without any compromises
-						or cheap short-cuts. This guarantees that <strong>you won't run into any interoperability caveats</strong>. Integration with Java
+						or cheap short-cuts. This guarantees that <strong>you won't run into any interoperability pitfalls</strong>. Integration with Java
 						works as expected in both directions and the generated code runs as fast as or faster than hand-written Java.
 					</p>
 					''',
 					'images/icon_interop.png',
-					'http://vimeo.com/12824833'
+					''
 				)»
 				«entry('Better Tooling','''
 					<p>
 						Static typing is not only important for early error detection but even more so for top-notch IDE support.
 						To ensure a great and holistic user experience, the IDE and the language have been designed side by side. And of course
-						the tools integrate tightly with Eclipse's existing Java IDE.
+						the tools integrate tightly with the Eclipse Java IDE.
 					</p>
 					''',
 					'images/icon-tools.png',
-					'http://vimeo.com/12824833'
+					''
 				)»
 				«entry('Easy to Learn','''
 					<p>
@@ -109,17 +109,17 @@ class Index extends AbstractXtendWebsite {
 					</p>
 					''',
 					'images/icon_simple.png',
-					'http://vimeo.com/12824833'
+					''
 				)»
-				«entry('Still Java','''
+				«entry('It\'s Still Java','''
 					<p>
 						Xtend not only resembles the type system to ensure 100% interoperability, it also generates comprehensible Java source code.
-						This not only allows to run the code on platforms such as GWT, which doesn't understand bytecode, but also lets you see how certain language
-						constructs are translated to idiomatic Java source code.
+						This allows to run the code on other platforms that are based on Java source code, such as GWT, and you can see how certain language
+						constructs are translated to idiomatic Java.
 					</p>
 					''',
 					'images/icon-java.png',
-					'http://vimeo.com/12824833'
+					''
 				)»
 			</div>
 		</div>

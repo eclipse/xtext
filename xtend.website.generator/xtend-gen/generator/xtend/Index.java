@@ -117,19 +117,19 @@ public class Index extends AbstractXtendWebsite {
     _builder.append("<div class=\"container\">");
     _builder.newLine();
     _builder.append("\t\t");
-    _builder.append("<h1>Get the new release!</h1>");
+    _builder.append("<h1>Get the New Release!</h1>");
     _builder.newLine();
     _builder.append("\t\t");
     _builder.append("<p style=\"font-family: \'Lato\', sans-serif; font-size: 16px; font-weight: 300; color: #fff;word-spacing: 3px;\">");
     _builder.newLine();
     _builder.append("\t\t");
-    _builder.append("Get the new release and learn how to write efficient <a href=\"releasenotes_2_4.html#android_development\">Android applications</a> without the tedious boile-plate code.");
+    _builder.append("Get the new release and learn how to write efficient <a href=\"releasenotes_2_4.html#android_development\">Android applications</a> without the tedious boiler-plate code.<br/>");
     _builder.newLine();
     _builder.append("\t\t");
-    _builder.append("<br/>Leverage the full power of Xtend by enhancing the compiler with <a href=\"documentation.html#activeAnnotations\">active annotations</a> a unique macro system for Java. ");
+    _builder.append("Leverage the full power of Xtend by enhancing the compiler with <a href=\"documentation.html#activeAnnotations\">Active Annotations</a> a unique macro system for Java.<br/>");
     _builder.newLine();
-    _builder.append("\t\t\t");
-    _builder.append("<br/>Enjoy the many new IDE and language features and the much improved type inference algorithm. Read the <a href=\"releasenotes_2_4.html\">full release notes</a>.</p>");
+    _builder.append("\t\t");
+    _builder.append("Enjoy the many new IDE and language features and the much improved type inference algorithm. Read the <a href=\"releasenotes_2_4.html\">full release notes</a>.</p>");
     _builder.newLine();
     _builder.append("\t");
     _builder.append("</div>");
@@ -165,7 +165,7 @@ public class Index extends AbstractXtendWebsite {
     _builder_1.newLine();
     CharSequence _entry = this.entry("Less Noise", _builder_1.toString(), 
       "images/icon-noise.png", 
-      "http://vimeo.com/12824833");
+      "");
     _builder.append(_entry, "			");
     _builder.newLineIfNotEmpty();
     _builder.append("\t\t\t");
@@ -182,7 +182,7 @@ public class Index extends AbstractXtendWebsite {
     _builder_2.newLine();
     CharSequence _entry_1 = this.entry("More Power", _builder_2.toString(), 
       "images/icon-expressive.png", 
-      "http://vimeo.com/12824833");
+      "");
     _builder.append(_entry_1, "			");
     _builder.newLineIfNotEmpty();
     _builder.append("\t\t\t");
@@ -193,7 +193,7 @@ public class Index extends AbstractXtendWebsite {
     _builder_3.append("Unlike <strong>all</strong> other JVM-languages, Xtend resembles Java\'s type system without any compromises");
     _builder_3.newLine();
     _builder_3.append("\t");
-    _builder_3.append("or cheap short-cuts. This guarantees that <strong>you won\'t run into any interoperability caveats</strong>. Integration with Java");
+    _builder_3.append("or cheap short-cuts. This guarantees that <strong>you won\'t run into any interoperability pitfalls</strong>. Integration with Java");
     _builder_3.newLine();
     _builder_3.append("\t");
     _builder_3.append("works as expected in both directions and the generated code runs as fast as or faster than hand-written Java.");
@@ -202,7 +202,7 @@ public class Index extends AbstractXtendWebsite {
     _builder_3.newLine();
     CharSequence _entry_2 = this.entry("100% Java Compatible", _builder_3.toString(), 
       "images/icon_interop.png", 
-      "http://vimeo.com/12824833");
+      "");
     _builder.append(_entry_2, "			");
     _builder.newLineIfNotEmpty();
     _builder.append("\t\t\t");
@@ -216,13 +216,13 @@ public class Index extends AbstractXtendWebsite {
     _builder_4.append("To ensure a great and holistic user experience, the IDE and the language have been designed side by side. And of course");
     _builder_4.newLine();
     _builder_4.append("\t");
-    _builder_4.append("the tools integrate tightly with Eclipse\'s existing Java IDE.");
+    _builder_4.append("the tools integrate tightly with the Eclipse Java IDE.");
     _builder_4.newLine();
     _builder_4.append("</p>");
     _builder_4.newLine();
     CharSequence _entry_3 = this.entry("Better Tooling", _builder_4.toString(), 
       "images/icon-tools.png", 
-      "http://vimeo.com/12824833");
+      "");
     _builder.append(_entry_3, "			");
     _builder.newLineIfNotEmpty();
     _builder.append("\t\t\t");
@@ -245,7 +245,7 @@ public class Index extends AbstractXtendWebsite {
     _builder_5.newLine();
     CharSequence _entry_4 = this.entry("Easy to Learn", _builder_5.toString(), 
       "images/icon_simple.png", 
-      "http://vimeo.com/12824833");
+      "");
     _builder.append(_entry_4, "			");
     _builder.newLineIfNotEmpty();
     _builder.append("\t\t\t");
@@ -256,16 +256,16 @@ public class Index extends AbstractXtendWebsite {
     _builder_6.append("Xtend not only resembles the type system to ensure 100% interoperability, it also generates comprehensible Java source code.");
     _builder_6.newLine();
     _builder_6.append("\t");
-    _builder_6.append("This not only allows to run the code on platforms such as GWT, which doesn\'t understand bytecode, but also lets you see how certain language");
+    _builder_6.append("This allows to run the code on other platforms that are based on Java source code, such as GWT, and you can see how certain language");
     _builder_6.newLine();
     _builder_6.append("\t");
-    _builder_6.append("constructs are translated to idiomatic Java source code.");
+    _builder_6.append("constructs are translated to idiomatic Java.");
     _builder_6.newLine();
     _builder_6.append("</p>");
     _builder_6.newLine();
-    CharSequence _entry_5 = this.entry("Still Java", _builder_6.toString(), 
+    CharSequence _entry_5 = this.entry("It\'s Still Java", _builder_6.toString(), 
       "images/icon-java.png", 
-      "http://vimeo.com/12824833");
+      "");
     _builder.append(_entry_5, "			");
     _builder.newLineIfNotEmpty();
     _builder.append("\t\t");

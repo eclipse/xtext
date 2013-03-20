@@ -86,8 +86,8 @@ class ReleaseNotes24 extends AbstractXtendWebsite {
 	      <p>
 	      <em>Active Annotations</em> let developers particpate in the translation process
 	      from Xtend code to Java source code. The developer declares an annotation and a call back for the compiler where 
-	      the generate Java code can be customized arbitrarily. This doesn't break static typing 
-	      or the IDE! Any changes made in an active annotation are totally reflected by the environment
+	      the generated Java code can be customized arbitrarily. This doesn't break static typing 
+	      or the IDE! Any changes made in an active annotation are completely reflected by the environment
 
 		  A simple example would be a JavaBeans 
 	      property supporting the Observer pattern. Here you need a getter and a 
@@ -166,13 +166,13 @@ class ReleaseNotes24 extends AbstractXtendWebsite {
 	<pre class="prettyprint lang-xtend linenums">
 	'2A'.parseInt(16)
 	</pre>
-	      Extension methods is available in other language such as C# as well.
-	      The new 'extensions providers' removes an important limitiation: In Xtend 2.4, fields, 
+	      Extension methods are available in other language such as C# as well, but Xtend can do better.
+	      The new <em>Extensions Providers</em> render a former limitiation obsolete: In Xtend 2.4, fields, 
 	      parameters and local variables can provide extensions, too. <a href="documentation.html#Extension_Provider">Read more...</a>
 	<br><br>
 	      <h3 id="sam_types">SAM Type Conversion</h3>
 	      <p>
-	      Lambda expressions now work with abstract classes with a single abstract method 
+	      Lambda expressions now work with interfaces and classes with a single abstract method 
 	      (SAM types). For example, the <code class="prettyprint lang-java">AbstractIterator</code> 
 	      from the Guava library has a single abstract method 
 	      <code class="prettyprint lang-java">computeNext()</code>. A lambda can be used to implement that:
@@ -248,8 +248,8 @@ class ReleaseNotes24 extends AbstractXtendWebsite {
 	
 				<h3 id="optional_errors">Optional Errors and Warnings</h3>
 				<p>The severity of optional compiler errors can be configured globally as well as 
-				individually for a single project. They can either be set explicitly or delegate to what is
-				configured for the Java compiler.</p>
+				individually for a single project. They can either be set explicitly or delegate to the equivalent
+				setting of the Java compiler.</p>
 				<img class="image_between_p" src="images/releasenotes/issue_severities.png"/>
 	
 				<h3 id="quickfixes">More Quickfixes</h3>
@@ -260,8 +260,8 @@ class ReleaseNotes24 extends AbstractXtendWebsite {
 			
 				<h3 id="content_assist">Improved Content Assist</h3>
 				<p>
-				The content assist has become much smarter. It now proposes lambda brackets if the argument 
-				takes a single function and it gives you hints on the possible parameter types when you 
+				The content assist has become much smarter. It now proposes lambda brackets if the method 
+				accepts a single function and it offers hints on the parameter types when you 
 				are working with overloaded methods.
 				</p>
 				<img class="image_between_p" src="images/releasenotes/content_assist.png"/>
@@ -281,7 +281,7 @@ class ReleaseNotes24 extends AbstractXtendWebsite {
 				
 				<h3 id="copy_qualifiedname">Copy Qualified Name</h3>
 				<p>
-				You can use <em>Copy qualifed name</em> in the editor and the outline view to copy the name
+				You can use <em>Copy Qualified Name</em> in the editor and the outline view to copy the name
 				of types, fields and methods into the clipboard.
 				</p>
 				<img class="image_between_p" src="images/releasenotes/copy_qualified_name.png"/>

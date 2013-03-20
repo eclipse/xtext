@@ -2208,7 +2208,7 @@ myObj.myProperty = 'foo' // calls myObj.setMyProperty("foo")</pre>
 						</p>
 						<p>
 							A local variable can be marked with the <code class="prettyprint lang-xtend">extension</code> keyword to make its methods available as extensions (<a href="#Extension_Provider">see
-							extension values</a>).
+							extension provider</a>).
 						</p>
 						<!-- subsection -->
 						<section id="_20" style="padding-top: 68px; margin-top: -68px;">
@@ -3201,7 +3201,7 @@ class ExtractProcessor extends AbstractClassProcessor {
 						<p>
 							In the first line, <code class="prettyprint lang-xtend">findInterface</code> retrieves the interface which was registered during the registration of global symbols in the first phase:
 							The method is defined in <a href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.4/org/eclipse/xtend/lib/macro/TransformationContext.html"><abbr title="org.eclipse.xtend.lib.macro.TransformationContext">TransformationContext</abbr></a> <a href="https://github.com/eclipse/xtext/blob/v2.4.0/plugins/org.eclipse.xtend.lib/src/org/eclipse/xtend/lib/macro/TransformationContext.java">(src)</a>
-							which is used as an <a href="#Extension_Provider">extension value</a>.
+							which is used as an <a href="#Extension_Provider">extension provider</a>.
 						</p>
 						<p>
 							Next up the newly created interface is added to the existing list of implemented interfaces.
@@ -3321,7 +3321,7 @@ override doTransform(MutableFieldDeclaration field, extension TransformationCont
 							The <a href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.4/org/eclipse/xtend/lib/macro/TransformationContext.html"><abbr title="org.eclipse.xtend.lib.macro.TransformationContext">TransformationContext</abbr></a> <a href="https://github.com/eclipse/xtext/blob/v2.4.0/plugins/org.eclipse.xtend.lib/src/org/eclipse/xtend/lib/macro/TransformationContext.java">(src)</a> inherits methods for exactly that purpose from the <a href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.4/org/eclipse/xtend/lib/macro/services/ProblemSupport.html"><abbr title="org.eclipse.xtend.lib.macro.services.ProblemSupport">ProblemSupport</abbr></a> <a href="https://github.com/eclipse/xtext/blob/v2.4.0/plugins/org.eclipse.xtend.lib/src/org/eclipse/xtend/lib/macro/services/ProblemSupport.java">(src)</a> service.
 						</p>
 						<p>
-							Since the <code class="prettyprint lang-xtend">context</code> is declared as an <a href="#Extension_Provider">extension value</a>, those methods can be used as extensions and it allows to implement
+							Since the <code class="prettyprint lang-xtend">context</code> is declared as an <a href="#Extension_Provider">extension provider</a>, those methods can be used as extensions and it allows to implement
 							the constraint check accordingly:
 						</p>
 						<p>
