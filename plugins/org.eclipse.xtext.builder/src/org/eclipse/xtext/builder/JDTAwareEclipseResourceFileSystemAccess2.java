@@ -9,6 +9,7 @@ package org.eclipse.xtext.builder;
 
 import org.eclipse.core.resources.IContainer;
 import org.eclipse.core.resources.IFolder;
+import org.eclipse.core.resources.IResource;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.jdt.core.IClasspathEntry;
 import org.eclipse.jdt.core.IJavaProject;
@@ -38,16 +39,10 @@ public class JDTAwareEclipseResourceFileSystemAccess2 extends EclipseResourceFil
 		super.createContainer(container);
 		// make it a source folder
 		IJavaProject jp = JavaCore.create(container.getProject());
-		if (jp.exists()) {
+		if (jp.exists() && !jp.isOnClasspath(container)) {
 			IClasspathEntry srcFolderClasspathEntry = JavaCore.newSourceEntry(container.getFullPath());
-			IClasspathEntry[] newClassPath;
 			IClasspathEntry[] classPath = jp.getRawClasspath();
-			for (IClasspathEntry classPathEntry : classPath) {
-				if (classPathEntry.equals(srcFolderClasspathEntry)) {
-					return;
-				}
-			}
-			newClassPath = new IClasspathEntry[classPath.length + 1];
+			IClasspathEntry[] newClassPath = new IClasspathEntry[classPath.length + 1];
 			System.arraycopy(classPath, 0, newClassPath, 1, classPath.length);
 			newClassPath[0] = srcFolderClasspathEntry;
 			jp.setRawClasspath(newClassPath, getMonitor());
