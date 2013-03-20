@@ -16,7 +16,7 @@ import org.apache.log4j.Logger;
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
-import org.eclipse.emf.ecore.EDataType;
+import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.InternalEObject;
@@ -1354,8 +1354,8 @@ public class JvmTypesBuilder {
 					}
 					if (value != null) {
 						EStructuralFeature valueAttribute = annotationValue.eClass().getEStructuralFeature("values");
-						Class<?> instanceClass = ((EDataType) valueAttribute.getEType()).getInstanceClass();
-						if(instanceClass.isAssignableFrom(value.getClass())) {
+						EClassifier valueAttributeType = valueAttribute.getEType();
+						if(valueAttributeType.isInstance(value)) {
 							@SuppressWarnings("unchecked")
 							List<Object> values = (List<Object>) annotationValue.eGet(valueAttribute);
 							values.add(value);

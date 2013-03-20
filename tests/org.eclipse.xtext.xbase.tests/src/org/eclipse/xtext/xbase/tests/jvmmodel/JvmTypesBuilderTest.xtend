@@ -28,6 +28,7 @@ import org.eclipse.xtext.xbase.tests.AbstractXbaseTestCase
 import org.junit.Test
 
 import static extension org.junit.Assert.*
+import org.eclipse.xtext.common.types.JvmBooleanAnnotationValue
 
 class JvmTypesBuilderTest extends AbstractXbaseTestCase {
 	
@@ -81,6 +82,14 @@ class JvmTypesBuilderTest extends AbstractXbaseTestCase {
 		assertEquals(anno.annotationType, type.annotations.head.annotation)
 		assertTrue((type.annotations.head.values.head as JvmCustomAnnotationValue).values.head instanceof XStringLiteral)
 		assertNull(type.annotations.head.values.head.operation)
+	}
+	
+	@Test
+	def void testPrimitiveAnnotationDefaultValue() {
+		val e = expression("true");
+		val annotationValue = toJvmAnnotationValue(e, true) as JvmBooleanAnnotationValue
+		assertFalse(annotationValue.values.empty)
+		assertEquals(Boolean::TRUE, annotationValue.values.head)
 	}
 	
 	@Test

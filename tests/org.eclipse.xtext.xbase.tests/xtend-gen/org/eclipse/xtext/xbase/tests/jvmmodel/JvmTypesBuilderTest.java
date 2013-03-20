@@ -13,6 +13,7 @@ import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.common.types.JvmAnnotationReference;
 import org.eclipse.xtext.common.types.JvmAnnotationType;
 import org.eclipse.xtext.common.types.JvmAnnotationValue;
+import org.eclipse.xtext.common.types.JvmBooleanAnnotationValue;
 import org.eclipse.xtext.common.types.JvmConstructor;
 import org.eclipse.xtext.common.types.JvmCustomAnnotationValue;
 import org.eclipse.xtext.common.types.JvmEnumerationLiteral;
@@ -149,6 +150,23 @@ public class JvmTypesBuilderTest extends AbstractXbaseTestCase {
       JvmAnnotationValue _head_5 = IterableExtensions.<JvmAnnotationValue>head(_values_2);
       JvmOperation _operation = _head_5.getOperation();
       Assert.assertNull(_operation);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
+  public void testPrimitiveAnnotationDefaultValue() {
+    try {
+      final XExpression e = this.expression("true");
+      JvmAnnotationValue _jvmAnnotationValue = this._jvmTypesBuilder.toJvmAnnotationValue(e, true);
+      final JvmBooleanAnnotationValue annotationValue = ((JvmBooleanAnnotationValue) _jvmAnnotationValue);
+      EList<Boolean> _values = annotationValue.getValues();
+      boolean _isEmpty = _values.isEmpty();
+      Assert.assertFalse(_isEmpty);
+      EList<Boolean> _values_1 = annotationValue.getValues();
+      Boolean _head = IterableExtensions.<Boolean>head(_values_1);
+      Assert.assertEquals(Boolean.TRUE, _head);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
