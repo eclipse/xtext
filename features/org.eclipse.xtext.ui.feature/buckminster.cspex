@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <cspecExtension xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xmlns:bc="http://www.eclipse.org/buckminster/Common-1.0" xmlns="http://www.eclipse.org/buckminster/CSpec-1.0">
+	<!-- work around a buckminster fragment bug -->
 	<groups>
 		<public name="source.bundle.only.jars" filter="(!(cbi.include.source=false))">
 			<attribute name="source.bundle.jar" component="org.eclipse.xtext.ui" />

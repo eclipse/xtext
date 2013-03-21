@@ -6,6 +6,7 @@
 	<locator pattern="^org\.eclipse\.xtext\.releng(?:\..+)?$" searchPathRef="releng" />
 	<locator pattern="^org\.eclipse\.xtext\.example(?:\..*)?$" searchPathRef="xtext.examples" />
 	<locator pattern="^org\.eclipse\.xtext\.gmf\.glue$" searchPathRef="xtext.examples" />
+	<locator pattern="^org\.eclipse\.xtext\.xtext\.ui\.examples\-container$" searchPathRef="bucky.examples.container" />
 	<locator pattern="^org\.eclipse\.xtext\.xtext\.ui\.examples$" searchPathRef="xtext.examples.container" />
 	<locator pattern="^org\.eclipse\.xtext(?:\..*)?$" searchPathRef="xtext" />
 	
@@ -46,6 +47,13 @@
 			<uri format="{0}/examples/org.eclipse.xtext.xtext.ui.examples/{1}">
 				<bc:propertyRef key="checkout.location" />
 				<bc:propertyRef key="buckminster.component" />
+			</uri>
+		</provider>
+	</searchPath>
+	<searchPath name="bucky.examples.container">
+		<provider componentTypes="buckminster" readerType="local" mutable="false">
+			<uri format="{0}/examples/org.eclipse.xtext.xtext.ui.examples">
+				<bc:propertyRef key="checkout.location" />
 			</uri>
 		</provider>
 	</searchPath>

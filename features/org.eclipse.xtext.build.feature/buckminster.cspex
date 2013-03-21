@@ -3,6 +3,8 @@
 
 	<cs:dependencies>
 		<cs:dependency name="org.eclipse.xtext.compatibility.galileo" componentType="osgi.bundle" />
+		<cs:dependency name="org.eclipse.xtend.examples-container" componentType="buckminster" />
+		<cs:dependency name="org.eclipse.xtext.xtext.ui.examples-container" componentType="buckminster" />
 	</cs:dependencies>
 
 
@@ -38,6 +40,8 @@
 				<cs:property key="package.name" value="tmf-xtext-Update" />
 			</cs:properties>
 			<cs:prerequisites>
+				<cs:attribute component="org.eclipse.xtext.xtext.ui.examples-container" name="zip.examples.content" alias="zip-examples" />
+				<cs:attribute component="org.eclipse.xtend.examples-container" name="zip.examples.content" alias="zip-examples" />
 				<cs:attribute name="site.p2" alias="repository" />
 			</cs:prerequisites>
 			<cs:products alias="output" base="${buckminster.output}/zips/" />
@@ -60,24 +64,6 @@
 			</cs:prerequisites>
 			<cs:products alias="output" base="${buckminster.output}/zips/" />
 		</cs:public>
-
-		<!--<cs:public name="package.tmf-xtext-examples" actor="ant">
-			<cs:actorProperties>
-				<cs:property key="buildFile" value="packaging.ant" />
-				<cs:property key="targets" value="package.ius" />
-			</cs:actorProperties>
-			<cs:properties>
-				<cs:property key="content.ius"
-					value="org.eclipse.xtext.examples.feature.group,org.eclipse.xtext.examples.source.feature.group" />
-				<cs:property key="prerequisite.ius" value="org.eclipse.xtext.runtime.feature.group,org.eclipse.xtext.ui.feature.group" />
-				<cs:property key="package.name" value="tmf-xtext-examples" />
-			</cs:properties>
-			<cs:prerequisites>
-				<cs:attribute name="site.p2" alias="repository" />
-				<cs:attribute name="site.tp" alias="target.platform.repository" />
-			</cs:prerequisites>
-			<cs:products alias="output" base="${buckminster.output}/zips/" />
-		</cs:public>-->
 
 		<cs:public name="package.tmf-xtext-runtime" actor="ant">
 			<cs:actorProperties>
@@ -169,7 +155,6 @@
 		<cs:public name="build">
 			<cs:attribute name="package.tmf-xtext-Update" />
 			<cs:attribute name="package.tmf-xtext-SDK" />
-			<!--<cs:attribute name="package.tmf-xtext-examples" />-->
 			<cs:attribute name="package.tmf-xtext-runtime" />
 			<cs:attribute name="package.tmf-xtext-sourcedoc" />
 			<cs:attribute name="package.tmf-xtext-gwt" />
