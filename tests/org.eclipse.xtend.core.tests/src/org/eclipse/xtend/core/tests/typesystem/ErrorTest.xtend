@@ -753,6 +753,17 @@ class ErrorTest extends AbstractXtendTestCase {
 			}
 		'''.processWithoutException
 	}
+	
+	@Test
+	def void testErrorModel_49() throws Exception {
+		'''
+			class C {
+				def m(Class<?> type) {
+					type.enumConstants.findFirst[ it != null]
+				}
+			}
+		'''.processWithoutException
+	}
 		
 	def processWithoutException(CharSequence input) throws Exception {
 		val resource = resourceSet.createResource(URI::createURI("abcdefg.xtend"))
