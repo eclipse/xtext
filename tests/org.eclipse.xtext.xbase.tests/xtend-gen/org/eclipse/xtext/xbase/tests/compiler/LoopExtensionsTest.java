@@ -1,10 +1,10 @@
 package org.eclipse.xtext.xbase.tests.compiler;
 
 import com.google.common.base.Objects;
+import com.google.inject.Inject;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import javax.inject.Inject;
 import org.eclipse.xtext.xbase.compiler.LoopExtensions;
 import org.eclipse.xtext.xbase.compiler.LoopParams;
 import org.eclipse.xtext.xbase.compiler.output.FakeTreeAppendable;

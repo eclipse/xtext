@@ -1,6 +1,6 @@
 package org.eclipse.xtend.ide.tests.refactoring;
 
-import javax.inject.Inject;
+import com.google.inject.Inject;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IResource;

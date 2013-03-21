@@ -1,11 +1,11 @@
 package org.eclipse.xtend.ide.tests.imports
 
-import javax.inject.Inject
-import org.junit.Test
-import org.eclipse.xtext.xbase.imports.ImportOrganizer
+import com.google.inject.Inject
 import org.eclipse.xtend.ide.tests.AbstractXtendUITestCase
 import org.eclipse.xtend.ide.tests.WorkbenchTestHelper
 import org.eclipse.xtext.resource.XtextResource
+import org.eclipse.xtext.xbase.imports.ImportOrganizer
+import org.junit.Test
 
 class OrganizeImportsTest extends AbstractXtendUITestCase {
 	

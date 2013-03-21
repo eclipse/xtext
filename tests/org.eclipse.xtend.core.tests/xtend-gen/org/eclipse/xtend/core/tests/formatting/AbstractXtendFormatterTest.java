@@ -1,7 +1,7 @@
 package org.eclipse.xtend.core.tests.formatting;
 
 import com.google.common.base.Objects;
-import javax.inject.Inject;
+import com.google.inject.Inject;
 import org.eclipse.xtend.core.tests.RuntimeInjectorProvider;
 import org.eclipse.xtend2.lib.StringConcatenation;
 import org.eclipse.xtext.junit4.InjectWith;

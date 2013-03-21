@@ -7,15 +7,15 @@
  *******************************************************************************/
 package org.eclipse.xtend.ide.codebuilder
 
-import javax.inject.Inject
+import com.google.inject.Inject
 import org.eclipse.jdt.core.IType
 import org.eclipse.xtend.core.xtend.XtendClass
 import org.eclipse.xtext.common.types.JvmTypeReference
 import org.eclipse.xtext.xbase.compiler.IAppendable
 import org.eclipse.xtext.xbase.compiler.TypeReferenceSerializer
+import org.eclipse.xtext.xbase.compiler.output.XtypeTypeReferenceSerializer
 
 import static org.eclipse.xtext.common.types.JvmVisibility.*
-import org.eclipse.xtext.xbase.compiler.output.XtypeTypeReferenceSerializer
 
 /**
  * @author Jan Koehnlein

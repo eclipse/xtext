@@ -8,13 +8,13 @@
 package org.eclipse.xtext.ui.generator.contentAssist;
 
 import com.google.common.base.Objects;
+import com.google.inject.Inject;
+import com.google.inject.name.Named;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 import java.util.Set;
-import javax.inject.Inject;
-import javax.inject.Named;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.xpand2.XpandExecutionContext;
 import org.eclipse.xpand2.XpandFacade;

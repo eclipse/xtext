@@ -8,7 +8,7 @@
 package org.eclipse.xtend.ide.codebuilder;
 
 import com.google.common.base.Objects;
-import javax.inject.Inject;
+import com.google.inject.Inject;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtend.core.xtend.XtendClass;
 import org.eclipse.xtend.core.xtend.XtendTypeDeclaration;

@@ -8,10 +8,10 @@
 package org.eclipse.xtend.core.macro.declaration
 
 import com.google.common.collect.ImmutableList
+import com.google.inject.Inject
 import java.util.List
 import java.util.Map
 import java.util.concurrent.CancellationException
-import javax.inject.Inject
 import org.eclipse.emf.ecore.EObject
 import org.eclipse.xtend.core.jvmmodel.IXtendJvmAssociations
 import org.eclipse.xtend.core.macro.CompilationContextImpl
@@ -40,6 +40,7 @@ import org.eclipse.xtend.lib.macro.declaration.MutableTypeParameterDeclaration
 import org.eclipse.xtend.lib.macro.declaration.Type
 import org.eclipse.xtend.lib.macro.declaration.TypeReference
 import org.eclipse.xtend.lib.macro.declaration.Visibility
+import org.eclipse.xtend.lib.macro.expression.Expression
 import org.eclipse.xtend.lib.macro.services.ProblemSupport
 import org.eclipse.xtend.lib.macro.services.TypeReferenceProvider
 import org.eclipse.xtext.common.types.JvmAnnotationAnnotationValue
@@ -75,19 +76,18 @@ import org.eclipse.xtext.common.types.JvmTypeReference
 import org.eclipse.xtext.common.types.JvmVisibility
 import org.eclipse.xtext.common.types.JvmVoid
 import org.eclipse.xtext.common.types.util.TypeReferences
+import org.eclipse.xtext.documentation.IEObjectDocumentationProvider
+import org.eclipse.xtext.documentation.IFileHeaderProvider
 import org.eclipse.xtext.xbase.XExpression
 import org.eclipse.xtext.xbase.annotations.interpreter.ConstantExpressionsInterpreter
 import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotation
 import org.eclipse.xtext.xbase.compiler.TypeReferenceSerializer
+import org.eclipse.xtext.xbase.jvmmodel.JvmTypeExtensions
 import org.eclipse.xtext.xbase.jvmmodel.JvmTypesBuilder
 import org.eclipse.xtext.xbase.typesystem.legacy.StandardTypeReferenceOwner
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference
 import org.eclipse.xtext.xbase.typesystem.references.OwnedConverter
 import org.eclipse.xtext.xbase.typesystem.util.CommonTypeComputationServices
-import org.eclipse.xtext.documentation.IEObjectDocumentationProvider
-import org.eclipse.xtext.documentation.IFileHeaderProvider
-import org.eclipse.xtend.lib.macro.expression.Expression
-import org.eclipse.xtext.xbase.jvmmodel.JvmTypeExtensions
 
 class CompilationUnitImpl implements CompilationUnit {
 	

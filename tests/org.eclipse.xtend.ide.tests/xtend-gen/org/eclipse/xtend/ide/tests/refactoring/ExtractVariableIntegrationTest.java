@@ -1,7 +1,7 @@
 package org.eclipse.xtend.ide.tests.refactoring;
 
+import com.google.inject.Inject;
 import com.google.inject.Provider;
-import javax.inject.Inject;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.jface.text.TextSelection;

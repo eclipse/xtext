@@ -8,7 +8,7 @@
 package org.eclipse.xtend.ide.codebuilder;
 
 import com.google.common.base.Objects;
-import javax.inject.Inject;
+import com.google.inject.Inject;
 import org.eclipse.jdt.core.IType;
 import org.eclipse.xtend.ide.codebuilder.AbstractFieldBuilder;
 import org.eclipse.xtend.ide.codebuilder.ICodeBuilder.Java;

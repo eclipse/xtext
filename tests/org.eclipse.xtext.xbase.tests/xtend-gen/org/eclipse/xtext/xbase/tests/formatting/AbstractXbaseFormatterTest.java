@@ -1,7 +1,7 @@
 package org.eclipse.xtext.xbase.tests.formatting;
 
 import com.google.common.base.Objects;
-import javax.inject.Inject;
+import com.google.inject.Inject;
 import org.eclipse.xtext.junit4.InjectWith;
 import org.eclipse.xtext.junit4.XtextRunner;
 import org.eclipse.xtext.preferences.MapBasedPreferenceValues;

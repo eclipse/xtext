@@ -1,6 +1,6 @@
 package org.eclipse.xtend.core.tests.annotations;
 
-import javax.inject.Inject;
+import com.google.inject.Inject;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.xtend.core.jvmmodel.IXtendJvmAssociations;
 import org.eclipse.xtend.core.tests.AbstractXtendTestCase;

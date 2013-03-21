@@ -1,6 +1,6 @@
 package org.eclipse.xtend.core.tests.formatting
 
-import javax.inject.Inject
+import com.google.inject.Inject
 import org.eclipse.xtend.core.tests.RuntimeInjectorProvider
 import org.eclipse.xtext.junit4.InjectWith
 import org.eclipse.xtext.junit4.XtextRunner

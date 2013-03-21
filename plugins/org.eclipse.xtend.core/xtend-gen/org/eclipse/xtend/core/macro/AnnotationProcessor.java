@@ -8,10 +8,10 @@
 package org.eclipse.xtend.core.macro;
 
 import com.google.inject.Inject;
+import com.google.inject.Provider;
 import java.util.List;
 import java.util.concurrent.CancellationException;
 import java.util.concurrent.atomic.AtomicBoolean;
-import javax.inject.Provider;
 import org.eclipse.xtend.core.macro.ActiveAnnotationContext;
 import org.eclipse.xtend.core.macro.RegisterGlobalsContextImpl;
 import org.eclipse.xtend.core.macro.TransformationContextImpl;
