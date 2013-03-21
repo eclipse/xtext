@@ -17,6 +17,44 @@ import org.junit.Test;
 @SuppressWarnings("all")
 public class CompilerBugTest extends AbstractXtendCompilerTest {
   @Test
+  public void testBug403990() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("class C {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def m(Class<?> type) {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("type.enumConstants");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("@SuppressWarnings(\"all\")");
+    _builder_1.newLine();
+    _builder_1.append("public class C {");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("public Object[] m(final Class<? extends Object> type) {");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("Object[] _enumConstants = type.getEnumConstants();");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("return _enumConstants;");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    this.assertCompilesTo(_builder, _builder_1);
+  }
+  
+  @Test
   public void testWeightComparable_01() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("@Data class Weight<T extends Comparable> implements Comparable<Weight<T>> {");

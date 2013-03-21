@@ -15,6 +15,25 @@ import org.junit.Test
 class CompilerBugTest extends AbstractXtendCompilerTest {
 	
 	@Test
+	def testBug403990() {
+		assertCompilesTo('''
+			class C {
+				def m(Class<?> type) {
+					type.enumConstants
+				}
+			}
+		''', '''
+			@SuppressWarnings("all")
+			public class C {
+			  public Object[] m(final Class<? extends Object> type) {
+			    Object[] _enumConstants = type.getEnumConstants();
+			    return _enumConstants;
+			  }
+			}
+		''')
+	}
+	
+	@Test
 	def testWeightComparable_01() {
 		assertCompilesTo('''
 			@Data class Weight<T extends Comparable> implements Comparable<Weight<T>> {
