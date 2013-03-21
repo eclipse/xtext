@@ -1,8 +1,8 @@
 package org.eclipse.xtext.xbase.ui.tests.refactoring;
 
 import com.google.common.base.Objects;
+import com.google.inject.Inject;
 import java.util.List;
-import javax.inject.Inject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.jface.text.TextSelection;
 import org.eclipse.xtext.junit4.util.ParseHelper;

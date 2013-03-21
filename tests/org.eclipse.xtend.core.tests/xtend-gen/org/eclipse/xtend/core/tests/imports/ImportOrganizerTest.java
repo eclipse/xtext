@@ -8,8 +8,8 @@
 package org.eclipse.xtend.core.tests.imports;
 
 import com.google.common.base.Objects;
+import com.google.inject.Inject;
 import java.util.List;
-import javax.inject.Inject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtend.core.tests.AbstractXtendTestCase;
 import org.eclipse.xtend.core.xtend.XtendFile;

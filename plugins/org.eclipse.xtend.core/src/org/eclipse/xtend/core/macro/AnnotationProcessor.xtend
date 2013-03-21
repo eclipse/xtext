@@ -9,9 +9,9 @@
 package org.eclipse.xtend.core.macro
 
 import com.google.inject.Inject
+import com.google.inject.Provider
 import java.util.concurrent.CancellationException
 import java.util.concurrent.atomic.AtomicBoolean
-import javax.inject.Provider
 import org.eclipse.xtend.core.xtend.XtendMember
 import org.eclipse.xtend.lib.macro.RegisterGlobalsParticipant
 import org.eclipse.xtend.lib.macro.TransformationParticipant

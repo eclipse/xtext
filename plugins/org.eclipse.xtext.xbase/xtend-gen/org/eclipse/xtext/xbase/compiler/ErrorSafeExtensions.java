@@ -8,7 +8,7 @@
 package org.eclipse.xtext.xbase.compiler;
 
 import com.google.common.base.Objects;
-import javax.inject.Inject;
+import com.google.inject.Inject;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtext.common.types.JvmAnnotationReference;

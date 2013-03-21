@@ -8,21 +8,20 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.generator.contentAssist
 
-import javax.inject.Inject
-import javax.inject.Named
+import com.google.inject.Inject
+import com.google.inject.name.Named
 import org.eclipse.xpand2.XpandFacade
 import org.eclipse.xtext.Grammar
 import org.eclipse.xtext.generator.BindFactory
 import org.eclipse.xtext.generator.Generator
 import org.eclipse.xtext.generator.IInheriting
+import org.eclipse.xtext.generator.IStubGenerating
 import org.eclipse.xtext.generator.Naming
 import org.eclipse.xtext.generator.Xtend2ExecutionContext
 import org.eclipse.xtext.generator.Xtend2GeneratorFragment
 
 import static java.util.Collections.*
 import static org.eclipse.xtext.GrammarUtil.*
-import static extension org.eclipse.xtext.generator.IInheriting$Util.*
-import org.eclipse.xtext.generator.IStubGenerating
 
 /**
  * @author Jan Koehnlein - Initial contribution and API
@@ -38,7 +37,7 @@ class ContentAssistFragment extends Xtend2GeneratorFragment implements IInheriti
 
 	@Property boolean generateStub = true;
 	
-	@Inject@Named("fileHeader") String fileHeader
+	@Inject @Named("fileHeader") String fileHeader
 	
 	def String getProposalProviderName(Grammar grammar) {
 		return grammar.basePackageUi + ".contentassist." + getName(grammar) + "ProposalProvider"

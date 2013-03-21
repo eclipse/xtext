@@ -1,7 +1,7 @@
 package org.eclipse.xtext.xbase.ui.tests.refactoring
 
+import com.google.inject.Inject
 import com.google.inject.Provider
-import javax.inject.Inject
 import org.eclipse.jface.text.TextSelection
 import org.eclipse.ltk.core.refactoring.RefactoringStatus
 import org.eclipse.xtext.junit4.util.ParseHelper

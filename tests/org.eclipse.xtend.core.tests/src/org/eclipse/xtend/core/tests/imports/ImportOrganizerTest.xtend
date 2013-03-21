@@ -7,12 +7,12 @@
  *******************************************************************************/
 package org.eclipse.xtend.core.tests.imports
 
-import javax.inject.Inject
+import com.google.inject.Inject
 import org.eclipse.xtend.core.tests.AbstractXtendTestCase
 import org.eclipse.xtext.resource.XtextResource
+import org.eclipse.xtext.util.ReplaceRegion
 import org.eclipse.xtext.xbase.imports.ImportOrganizer
 import org.junit.Test
-import org.eclipse.xtext.util.ReplaceRegion
 
 /**
  * @author Jan Koehnlein - Initial conribution and API
