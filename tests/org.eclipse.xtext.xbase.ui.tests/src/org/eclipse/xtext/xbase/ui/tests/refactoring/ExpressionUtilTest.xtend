@@ -1,6 +1,6 @@
 package org.eclipse.xtext.xbase.ui.tests.refactoring
 
-import javax.inject.Inject
+import com.google.inject.Inject
 import org.eclipse.jface.text.TextSelection
 import org.eclipse.xtext.junit4.util.ParseHelper
 import org.eclipse.xtext.junit4.validation.ValidationTestHelper
