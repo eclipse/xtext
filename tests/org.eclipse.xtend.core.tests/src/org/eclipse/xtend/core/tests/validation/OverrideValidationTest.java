@@ -227,7 +227,22 @@ public class OverrideValidationTest extends AbstractXtendTestCase {
 		XtendClass xtendClass = clazz("class Foo extends test.SuperClass { override privateMethod() {true}}");
 		helper.assertError(xtendClass.getMembers().get(0), XTEND_FUNCTION, OBSOLETE_OVERRIDE);
 	}
-
+	
+	@Test public void testObsoleteOverride_3() throws Exception {
+		XtendClass xtendClass = clazz("class Foo { def void ok() {} override bar() {true} }");
+		helper.assertError(xtendClass.getMembers().get(0), XTEND_FUNCTION, OBSOLETE_OVERRIDE);
+	}
+	
+	@Test public void testObsoleteOverride_4() throws Exception {
+		XtendClass xtendClass = clazz("class Foo extends test.SuperClass { def void ok() {} override bar() {true} }");
+		helper.assertError(xtendClass.getMembers().get(0), XTEND_FUNCTION, OBSOLETE_OVERRIDE);
+	}
+	
+	@Test public void testObsoleteOverride_5() throws Exception {
+		XtendClass xtendClass = clazz("class Foo extends test.SuperClass { def void ok() {} override privateMethod() {true}}");
+		helper.assertError(xtendClass.getMembers().get(0), XTEND_FUNCTION, OBSOLETE_OVERRIDE);
+	}
+	
 	@Test public void testMissingOverride_0() throws Exception {
 		XtendClass xtendClass = clazz("class Foo extends test.SuperClass { def string() {null} }");
 		helper.assertError(xtendClass.getMembers().get(0), XTEND_FUNCTION, MISSING_OVERRIDE);

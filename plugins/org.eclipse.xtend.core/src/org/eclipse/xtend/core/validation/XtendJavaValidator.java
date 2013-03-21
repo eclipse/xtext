@@ -663,46 +663,55 @@ public class XtendJavaValidator extends XbaseWithAnnotationsJavaValidator {
 	
 	protected void doCheckFunctionOverrides(ResolvedOperations resolvedOperations, Set<EObject> flaggedOperations) {
 		for(IResolvedOperation operation: resolvedOperations.getDeclaredOperations()) {
-			XtendFunction function = findXtendFunction(operation);
-			if (function != null && flaggedOperations.add(function)) {
-				List<IResolvedOperation> allInherited = operation.getOverriddenAndImplementedMethods();
-				if (allInherited.isEmpty()) {
-					if (function.isOverride()) {
-						error("The method "+ operation.getSimpleSignature() +" of type "+operation.getDeclaration().getDeclaringType().getSimpleName()+" must override a superclass method.", 
-								function, XTEND_MEMBER__MODIFIERS, function.getModifiers().indexOf("override"), OBSOLETE_OVERRIDE);
-					}
-					return;	
+			doCheckFunctionOverrides(operation, flaggedOperations);
+		}
+	}
+
+	protected void doCheckFunctionOverrides(IResolvedOperation operation, Set<EObject> flaggedOperations) {
+		XtendFunction function = findXtendFunction(operation);
+		if (function != null && flaggedOperations.add(function)) {
+			List<IResolvedOperation> allInherited = operation.getOverriddenAndImplementedMethods();
+			if (allInherited.isEmpty()) {
+				if (function.isOverride()) {
+					error("The method "+ operation.getSimpleSignature() +" of type "+operation.getDeclaration().getDeclaringType().getSimpleName()+" must override a superclass method.", 
+							function, XTEND_MEMBER__MODIFIERS, function.getModifiers().indexOf("override"), OBSOLETE_OVERRIDE);
 				}
-				boolean overrideProblems = false;
-				List<IResolvedOperation> exceptionMismatch = null;
-				for(IResolvedOperation inherited: allInherited) {
-					if (inherited.getOverrideCheckResult().hasProblems()) {
-						overrideProblems = true;
-						EnumSet<OverrideCheckDetails> details = inherited.getOverrideCheckResult().getDetails();
-						if (details.contains(OverrideCheckDetails.IS_FINAL)) {
-							error("Attempt to override final method " + inherited.getSimpleSignature(), function,
-									XTEND_FUNCTION__NAME, OVERRIDDEN_FINAL);
-						} else if (details.contains(OverrideCheckDetails.REDUCED_VISIBILITY)) {
-							error("Cannot reduce the visibility of the overridden method " + inherited.getSimpleSignature(),
-									function, XTEND_FUNCTION__NAME, OVERRIDE_REDUCES_VISIBILITY);
-						} else if (details.contains(OverrideCheckDetails.EXCEPTION_MISMATCH)) {
-							if (exceptionMismatch == null)
-								exceptionMismatch = Lists.newArrayListWithCapacity(allInherited.size());
-							exceptionMismatch.add(inherited);
-						} else if (details.contains(OverrideCheckDetails.RETURN_MISMATCH)) {
-							error("The return type is incompatible with " + inherited.getSimpleSignature(), function,
-									XTEND_FUNCTION__RETURN_TYPE, INCOMPATIBLE_RETURN_TYPE);
-						}
-					}
-				}
-				if (exceptionMismatch != null) {
-					createExceptionMismatchError(operation, function, exceptionMismatch);
-				}
-				if (!overrideProblems && !function.isOverride())
-					error("The method " + operation.getSimpleSignature() +" of type "+operation.getDeclaration().getDeclaringType().getSimpleName()+" must use override keyword since it actually overrides a supertype method.", function,
-							XTEND_FUNCTION__NAME, MISSING_OVERRIDE);
+			} else {
+				doCheckFunctionOverrides(function, operation, allInherited);
 			}
 		}
+	}
+
+	protected void doCheckFunctionOverrides(XtendFunction function, IResolvedOperation resolved,
+			List<IResolvedOperation> allInherited) {
+		boolean overrideProblems = false;
+		List<IResolvedOperation> exceptionMismatch = null;
+		for(IResolvedOperation inherited: allInherited) {
+			if (inherited.getOverrideCheckResult().hasProblems()) {
+				overrideProblems = true;
+				EnumSet<OverrideCheckDetails> details = inherited.getOverrideCheckResult().getDetails();
+				if (details.contains(OverrideCheckDetails.IS_FINAL)) {
+					error("Attempt to override final method " + inherited.getSimpleSignature(), function,
+							XTEND_FUNCTION__NAME, OVERRIDDEN_FINAL);
+				} else if (details.contains(OverrideCheckDetails.REDUCED_VISIBILITY)) {
+					error("Cannot reduce the visibility of the overridden method " + inherited.getSimpleSignature(),
+							function, XTEND_FUNCTION__NAME, OVERRIDE_REDUCES_VISIBILITY);
+				} else if (details.contains(OverrideCheckDetails.EXCEPTION_MISMATCH)) {
+					if (exceptionMismatch == null)
+						exceptionMismatch = Lists.newArrayListWithCapacity(allInherited.size());
+					exceptionMismatch.add(inherited);
+				} else if (details.contains(OverrideCheckDetails.RETURN_MISMATCH)) {
+					error("The return type is incompatible with " + inherited.getSimpleSignature(), function,
+							XTEND_FUNCTION__RETURN_TYPE, INCOMPATIBLE_RETURN_TYPE);
+				}
+			}
+		}
+		if (exceptionMismatch != null) {
+			createExceptionMismatchError(resolved, function, exceptionMismatch);
+		}
+		if (!overrideProblems && !function.isOverride())
+			error("The method " + resolved.getSimpleSignature() +" of type "+resolved.getDeclaration().getDeclaringType().getSimpleName()+" must use override keyword since it actually overrides a supertype method.", function,
+					XTEND_FUNCTION__NAME, MISSING_OVERRIDE);
 	}
 	
 	protected void createExceptionMismatchError(IResolvedOperation operation, XtendFunction function,
