@@ -39,7 +39,10 @@ public class ArrayTypeReference extends LightweightTypeReference {
 //			throw new IllegalArgumentException("Cannot create array reference from non-component type " + component.getIdentifier());
 //		}
 		if (component.isAny()) {
-			throw new IllegalArgumentException("component is invalid");
+			throw new IllegalArgumentException("component is invalid: type <any> is not allowed");
+		}
+		if (component.isWildcard()) {
+			throw new IllegalArgumentException("component is invalid: " + component);
 		}
 		if (!component.isOwnedBy(owner)) {
 			throw new IllegalArgumentException("component is not valid in current context");

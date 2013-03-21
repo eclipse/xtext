@@ -156,6 +156,7 @@ public abstract class TypeParameterSubstitutor<Visiting> extends TypeReferenceVi
 		if (reference.isResolved() && reference.isOwnedBy(getOwner()))
 			return reference;
 		LightweightTypeReference component = visitTypeArgument(reference.getComponentType(), visiting);
+		component = component.getUpperBoundSubstitute();
 		return new ArrayTypeReference(getOwner(), component);
 	}
 	
