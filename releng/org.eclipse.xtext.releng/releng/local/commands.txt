@@ -14,7 +14,9 @@ build
 
 #junit --launch "org.eclipse.xtext.purexbase.tests/org.eclipse.xtext.purexbase.tests.launch" --flatXML --output "${WORKSPACE}/xtext.test.results/org.eclipse.xtext.purexbase.tests.xml"
 #junit --launch "org.eclipse.xtend.ide.tests/xtend.ide.tests.fast.launch" --flatXML --output "${build.root}/xtend.test.results/xtend.ide.tests.fast.xml"
-perform --properties "${releng.project.location}/releng/xtext-build.properties" "org.eclipse.xtext.build#package.tmf-xtext-examples"
+
+#perform --properties "${releng.project.location}/releng/xtext-build.properties" "org.eclipse.xtend.examples-container#zip.examples.content"
+perform --properties "${releng.project.location}/releng/xtext-build.properties" "org.eclipse.xtext.build#package.tmf-xtext-Update"
 
 #importtargetdefinition  -DuseMirror=true -A "${releng.project.location}/releng/tests/tests-Galileo.target
 

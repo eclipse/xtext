@@ -34,7 +34,7 @@
 	</rm:searchPath>
 	
 	<rm:searchPath name="xtend.examples">
-		<rm:provider componentTypes="osgi.bundle" readerType="local" mutable="false">
+		<rm:provider componentTypes="osgi.bundle,buckminster" readerType="local" mutable="false">
 			<rm:uri format="{0}/examples/{1}">
 				<bc:propertyRef key="xtend.checkout.location" />
 				<bc:propertyRef key="buckminster.component" />
