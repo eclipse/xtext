@@ -1,10 +1,11 @@
 package org.eclipse.xtend.ide.tests.refactoring
 
-import org.eclipse.xtend.ide.tests.WorkbenchTestHelper
-import javax.inject.Inject
-import static org.junit.Assert.*
+import com.google.inject.Inject
 import org.eclipse.core.resources.IFile
 import org.eclipse.core.resources.IResource
+import org.eclipse.xtend.ide.tests.WorkbenchTestHelper
+
+import static org.junit.Assert.*
 
 class FileAsserts {
 	

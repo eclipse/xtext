@@ -1,18 +1,18 @@
 package org.eclipse.xtend.ide.tests.refactoring
 
-import javax.inject.Inject
+import com.google.inject.Inject
 import org.eclipse.xtend.core.jvmmodel.IXtendJvmAssociations
 import org.eclipse.xtend.core.xtend.XtendClass
 import org.eclipse.xtend.core.xtend.XtendFunction
 import org.eclipse.xtend.ide.tests.AbstractXtendUITestCase
 import org.eclipse.xtend.ide.tests.WorkbenchTestHelper
+import org.eclipse.xtext.common.types.JvmConstructor
+import org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil
 import org.eclipse.xtext.ui.refactoring.IDependentElementsCalculator
 import org.junit.Test
 
 import static extension com.google.common.collect.Iterables.*
 import static extension org.eclipse.emf.ecore.util.EcoreUtil.*
-import org.eclipse.xtext.common.types.JvmConstructor
-import org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil
 
 /**
  * @author Jan Koehnlein - Initial contribution and API
