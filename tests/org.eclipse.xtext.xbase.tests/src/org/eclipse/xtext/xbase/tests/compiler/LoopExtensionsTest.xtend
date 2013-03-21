@@ -2,12 +2,12 @@ package org.eclipse.xtext.xbase.tests.compiler
 
 import org.eclipse.xtext.xbase.tests.AbstractXbaseTestCase
 import org.eclipse.xtext.xbase.compiler.LoopExtensions
-import javax.inject.Inject
 import org.junit.Test
 import org.eclipse.xtext.xbase.compiler.output.FakeTreeAppendable
 import org.eclipse.xtext.xbase.compiler.LoopParams
 
 import static java.util.Collections.*
+import com.google.inject.Inject
 
 class LoopExtensionsTest extends AbstractXbaseTestCase {
 	

@@ -9,8 +9,8 @@
 package org.eclipse.xtext.generator.validation
 
 import com.google.inject.Inject
+import com.google.inject.name.Named
 import java.util.Set
-import javax.inject.Named
 import org.eclipse.xtext.GeneratedMetamodel
 import org.eclipse.xtext.Grammar
 import org.eclipse.xtext.generator.BindFactory
@@ -39,7 +39,7 @@ class ValidatorFragment extends Xtend2GeneratorFragment implements IInheriting, 
 
 	@Inject Grammar grammar
 	
-	@Inject@Named("fileHeader") String fileHeader
+	@Inject @Named("fileHeader") String fileHeader
 	
 	val composedChecks = <String>newArrayList
 	

@@ -7,20 +7,20 @@
  *******************************************************************************/
  package org.eclipse.xtext.xbase.compiler
 
-import javax.inject.Inject
+import com.google.inject.Inject
 import org.eclipse.emf.ecore.EObject
 import org.eclipse.xtext.common.types.JvmAnnotationReference
 import org.eclipse.xtext.common.types.JvmCompoundTypeReference
 import org.eclipse.xtext.common.types.JvmParameterizedTypeReference
+import org.eclipse.xtext.common.types.JvmSpecializedTypeReference
 import org.eclipse.xtext.common.types.JvmTypeReference
+import org.eclipse.xtext.common.types.JvmUnknownTypeReference
 import org.eclipse.xtext.common.types.JvmWildcardTypeReference
 import org.eclipse.xtext.common.types.util.AbstractTypeReferenceVisitor
 import org.eclipse.xtext.diagnostics.Severity
 import org.eclipse.xtext.validation.Issue
 import org.eclipse.xtext.xbase.compiler.output.ErrorTreeAppendable
 import org.eclipse.xtext.xbase.compiler.output.ITreeAppendable
-import org.eclipse.xtext.common.types.JvmUnknownTypeReference
-import org.eclipse.xtext.common.types.JvmSpecializedTypeReference
 
 /** 
  * @author Jan Koehnlein
