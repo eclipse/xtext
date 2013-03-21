@@ -6,10 +6,10 @@
 <booleanAttribute key="M2_OFFLINE" value="false"/>
 <stringAttribute key="M2_PROFILES" value=""/>
 <listAttribute key="M2_PROPERTIES">
-<listEntry value="file=output/org.eclipse.xtend.standalone-2.4.0-SNAPSHOT.jar"/>
+<listEntry value="file=output/org.eclipse.xtend.standalone-2.4.1-SNAPSHOT.jar"/>
 <listEntry value="url=file:////shared/common/xtend/maven"/>
-<listEntry value="pomFile=output/org.eclipse.xtend.standalone-2.4.0-SNAPSHOT.pom"/>
-<listEntry value="sources=output/org.eclipse.xtend.standalone-2.4.0-SNAPSHOT-sources.jar"/>
+<listEntry value="pomFile=output/org.eclipse.xtend.standalone-2.4.1-SNAPSHOT.pom"/>
+<listEntry value="sources=output/org.eclipse.xtend.standalone-2.4.1-SNAPSHOT-sources.jar"/>
 <listEntry value="deployment.url=file:////shared/common/xtend/maven"/>
 </listAttribute>
 <stringAttribute key="M2_RUNTIME" value="EMBEDDED"/>

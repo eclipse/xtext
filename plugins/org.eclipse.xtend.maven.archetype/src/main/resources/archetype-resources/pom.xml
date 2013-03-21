@@ -22,7 +22,7 @@
 
 	<properties>
         <project.build.sourceEncoding>${sourceEncoding}</project.build.sourceEncoding>
-        <xtend.version>2.4.0</xtend.version>
+        <xtend.version>2.4.1-SNAPSHOT</xtend.version>
 	</properties>
 
 	<build>
