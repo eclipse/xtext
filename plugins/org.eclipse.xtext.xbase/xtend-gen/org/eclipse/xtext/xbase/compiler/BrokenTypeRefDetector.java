@@ -21,6 +21,10 @@ import org.eclipse.xtext.xbase.lib.IterableExtensions;
 
 @SuppressWarnings("all")
 public class BrokenTypeRefDetector extends InheritanceAware<Boolean> {
+  protected Boolean handleNullReference() {
+    return Boolean.valueOf(true);
+  }
+  
   public Boolean doVisitTypeReference(final JvmTypeReference it) {
     boolean _or = false;
     JvmType _type = it.getType();
