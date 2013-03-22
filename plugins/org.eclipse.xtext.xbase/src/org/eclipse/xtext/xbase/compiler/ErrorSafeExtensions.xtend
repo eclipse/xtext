@@ -146,6 +146,10 @@ class ErrorSafeExtensions {
 
 class BrokenTypeRefDetector extends AbstractTypeReferenceVisitor$InheritanceAware<Boolean> {
 	
+	override protected handleNullReference() {
+		true
+	}
+	
 	override doVisitTypeReference(JvmTypeReference it) {
 		type==null || type.eIsProxy
 	}
