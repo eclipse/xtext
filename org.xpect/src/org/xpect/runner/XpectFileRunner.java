@@ -60,11 +60,14 @@ public class XpectFileRunner {
 
 	protected Description createDescription() {
 		String title = runner.getUriProvider().getTitle(getUri());
-		Description result = Description.createSuiteDescription(title);
-		if (error == null)
+		if (error == null) {
+			Description result = Description.createSuiteDescription(title);
 			for (AbstractTestRunner child : getChildren())
 				result.addChild(child.getDescription());
-		return result;
+			return result;
+		} else {
+			return Description.createTestDescription(runner.getTestClass().getJavaClass(), title);
+		}
 	}
 
 	protected AbstractTestRunner createTestRunner(XpectInvocation invocation) {
