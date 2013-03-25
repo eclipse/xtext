@@ -19,7 +19,7 @@ import org.xpect.runner.XpectTestFiles;
 import com.google.common.collect.Lists;
 
 @RunWith(XpectRunner.class)
-@XpectTestFiles(fileExtensions = "textile")
+@XpectTestFiles(fileExtensions = "xt")
 public class SimpleTest {
 
 	@Xpect

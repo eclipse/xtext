@@ -13,6 +13,7 @@ import org.eclipse.xtext.resource.IResourceServiceProvider;
 import org.eclipse.xtext.ui.resource.DefaultResourceUIServiceProvider;
 import org.eclipse.xtext.ui.resource.IResourceUIServiceProvider;
 import org.xpect.ui.builder.IResourceServiceProviderProvider;
+import org.xpect.ui.internal.XpectActivator;
 import org.xpect.ui.util.XtInjectorSetupUtil;
 import org.xpect.util.URIDelegationHandler;
 
@@ -34,7 +35,7 @@ public class XtResourceUIServiceProviderProvider extends DefaultResourceUIServic
 			if (injector != null)
 				return injector.getInstance(IResourceUIServiceProvider.class);
 		}
-		return this;
+		return XpectActivator.getInstance().getInjector(XpectActivator.ORG_XPECT_XPECT).getInstance(IResourceUIServiceProvider.class);
 	}
 
 	@Override
