@@ -105,9 +105,9 @@ public class TestSessionLabelProviderCustom extends LabelProvider implements ISt
 			}
 		}
 		if (element instanceof ITestCaseElement) {
-			return "foo" + BasicElementLabels.getJavaElementName(((ITestCaseElement) element).getTestMethodName());
+			return BasicElementLabels.getJavaElementName(((ITestCaseElement) element).getTestMethodName());
 		} else if (element instanceof ITestSuiteElement) {
-			return "foo" + BasicElementLabels.getJavaElementName(((ITestSuiteElement) element).getSuiteTypeName());
+			return BasicElementLabels.getJavaElementName(((ITestSuiteElement) element).getSuiteTypeName());
 		}
 		return null;
 	}
