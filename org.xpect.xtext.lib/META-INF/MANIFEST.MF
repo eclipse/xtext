@@ -4,8 +4,8 @@ Bundle-Name: Lib
 Bundle-SymbolicName: org.xpect.xtext.lib
 Bundle-Version: 0.1.0.qualifier
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
-Require-Bundle: org.xpect;bundle-version="0.1.0",
- org.xpect.ui;bundle-version="0.1.0",
+Require-Bundle: org.xpect;bundle-version="0.1.0";visibility:=reexport,
+ org.xpect.ui;bundle-version="0.1.0";visibility:=reexport,
  org.eclipse.xtext.xbase;bundle-version="2.4.0"
 Export-Package: org.xpect.xtext.lib.setup,
  org.xpect.xtext.lib.tests,
