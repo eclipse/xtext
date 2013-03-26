@@ -8,18 +8,18 @@ Bundle-ActivationPolicy: lazy
 Require-Bundle: org.apache.log4j;bundle-version="1.2.0";visibility:=reexport,
  org.junit;bundle-version="4.0.0";visibility:=reexport,
  org.antlr.runtime;bundle-version="3.2.0",
- org.eclipse.xtext;bundle-version="2.3.1";visibility:=reexport,
- org.eclipse.xtext.util;bundle-version="2.3.1";visibility:=reexport,
+ org.eclipse.xtext;bundle-version="2.4.0";visibility:=reexport,
+ org.eclipse.xtext.util;bundle-version="2.4.0";visibility:=reexport,
  org.eclipse.emf.ecore;bundle-version="2.7.0";visibility:=reexport,
  org.eclipse.emf.common;bundle-version="2.7.0";visibility:=reexport,
- org.eclipse.xtext.common.types;bundle-version="2.3.1";visibility:=reexport,
+ org.eclipse.xtext.common.types;bundle-version="2.4.0";visibility:=reexport,
  org.eclipse.xtext.generator;resolution:=optional,
  org.apache.commons.logging;bundle-version="1.0.4";resolution:=optional,
  org.eclipse.emf.codegen.ecore;resolution:=optional,
  org.eclipse.emf.mwe.utils;resolution:=optional,
  org.eclipse.emf.mwe2.launch;resolution:=optional,
  de.itemis.statefullexer;bundle-version="1.0.0";resolution:=optional,
- org.eclipse.xtext.ecore;bundle-version="2.3.0";resolution:=optional
+ org.eclipse.xtext.ecore;bundle-version="2.4.0";resolution:=optional
 Import-Package: org.apache.log4j
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Export-Package: org.xpect,
