@@ -8,5 +8,6 @@ Require-Bundle: org.xpect;bundle-version="0.1.0",
  org.xpect.ui;bundle-version="0.1.0",
  org.eclipse.xtext.xbase;bundle-version="2.3.1"
 Export-Package: org.xpect.xtext.lib.setup,
- org.xpect.xtext.lib.tests
+ org.xpect.xtext.lib.tests,
+ org.xpect.xtext.lib.util
 Bundle-Vendor: itemis AG

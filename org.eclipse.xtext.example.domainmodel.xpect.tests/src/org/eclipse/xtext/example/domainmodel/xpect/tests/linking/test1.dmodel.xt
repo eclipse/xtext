@@ -8,12 +8,12 @@ END_SETUP
 */
 
 
-import pkg2.MyEntity2
+import pkg2.MyEntity3
 
 package pkg1 {
 	// MyEntity2 should be from the other file
-	// XPECT linkedName at MyEntity2 --> pkg2.MyEntity2
-	entity MyEntity1 extends pkg2.MyEntity2 {
+	// XPECT linkedName at MyEntity2 --> pkg2.MyEntity3
+	entity MyEntity1 extends MyEntity3 {
 		
 		// int should be the java primitive
 		// XPECT linkedName at id --> int
@@ -26,7 +26,7 @@ package pkg1 {
 	
 	// same test using fragments, because not all elements have qualified names
 	// XPECT linkedFragment at MyEntity2 --> test2.dmodel#/1
-	entity MyEntity2 extends pkg2.MyEntity2 {
+	entity MyEntity2 extends MyEntity3 {
 		
 		// XPECT linkedFragment at id --> java:/Primitives#int
 		id:int

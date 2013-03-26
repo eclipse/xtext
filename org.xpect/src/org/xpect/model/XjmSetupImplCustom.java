@@ -1,6 +1,9 @@
 package org.xpect.model;
 
 import org.apache.log4j.Logger;
+import org.eclipse.xtext.common.types.JvmDeclaredType;
+import org.eclipse.xtext.common.types.JvmParameterizedTypeReference;
+import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.xpect.setup.IXpectSetup;
 
 public class XjmSetupImplCustom extends XjmSetupImpl {
@@ -8,14 +11,19 @@ public class XjmSetupImplCustom extends XjmSetupImpl {
 	private static Logger logger = Logger.getLogger(XjmSetupImplCustom.class);
 
 	@Override
-	public String toString() {
-		return "setup " + getJvmClass().getQualifiedName();
-	}
-
-	@Override
-	public void setJavaClass(Class<?> newJavaClass) {
-		super.setInstance(null);
-		super.setJavaClass(newJavaClass);
+	public JvmDeclaredType getInitializer() {
+		JvmDeclaredType setupClass = getJvmClass();
+		if (setupClass == null || setupClass.eIsProxy())
+			return null;
+		if (setupClass.getSuperTypes().size() == 0 || !(setupClass.getSuperTypes().get(0) instanceof JvmParameterizedTypeReference))
+			return null;
+		JvmParameterizedTypeReference superClass = (JvmParameterizedTypeReference) setupClass.getSuperTypes().get(0);
+		if (superClass.getArguments().size() != 4)
+			return null;
+		JvmTypeReference typeReference = superClass.getArguments().get(3);
+		if (typeReference != null && typeReference.getType() != null && !typeReference.getType().eIsProxy())
+			return (JvmDeclaredType) typeReference.getType();
+		return null;
 	}
 
 	@Override
@@ -35,5 +43,16 @@ public class XjmSetupImplCustom extends XjmSetupImpl {
 			logger.error(e);
 		}
 		return result;
+	}
+
+	@Override
+	public void setJavaClass(Class<?> newJavaClass) {
+		super.setInstance(null);
+		super.setJavaClass(newJavaClass);
+	}
+
+	@Override
+	public String toString() {
+		return "setup " + getJvmClass().getQualifiedName();
 	}
 }

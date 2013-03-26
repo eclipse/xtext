@@ -25,7 +25,6 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="text" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="AbstractComponent" abstract="true">
-    <eOperations name="getComponentClass" eType="ecore:EClass ../../org.eclipse.xtext.common.types/model/JavaVMTypes.ecore#//JvmDeclaredType"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="parameters" upperBound="-1"
         eType="#//Literal" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="assignments" upperBound="-1"
@@ -33,7 +32,6 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Assignment">
     <eOperations name="getInstance" eType="#//AbstractComponent"/>
-    <eOperations name="getTarget" eType="ecore:EClass ../../org.eclipse.xtext.common.types/model/JavaVMTypes.ecore#//JvmOperation"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="declaredTarget" eType="ecore:EClass ../../org.eclipse.xtext.common.types/model/JavaVMTypes.ecore#//JvmOperation"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="value" eType="#//Value"
         containment="true"/>

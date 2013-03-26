@@ -33,6 +33,7 @@ import org.xpect.AbstractComponent;
 import org.xpect.Component;
 import org.xpect.XjmMethod;
 import org.xpect.XjmPackage;
+import org.xpect.XjmSetup;
 import org.xpect.XjmTest;
 import org.xpect.XpectFile;
 import org.xpect.XpectJavaModel;
@@ -88,16 +89,23 @@ public class XpectScopeProvider extends AbstractScopeProvider {
 	}
 
 	private IScope getScopeForAssignmentTarget(AbstractComponent owner) {
-		JvmDeclaredType componentClass = owner.getComponentClass();
-		if (componentClass == null || componentClass.eIsProxy())
-			return IScope.NULLSCOPE;
-		JvmDeclaredType type = componentClass;
-		List<IEObjectDescription> descs = Lists.newArrayList();
-		for (JvmFeature feature : type.getAllFeatures()) {
-			String name = getAssignmentTargetFeatureName(feature);
-			if (name != null)
-				descs.add(EObjectDescription.create(QualifiedName.create(name), feature));
+		List<JvmDeclaredType> types = Lists.newArrayList();
+		if (owner instanceof Component)
+			types.add(((Component) owner).getComponentClass());
+		else if (owner instanceof XpectTest) {
+			XpectJavaModel model = ((XpectTest) owner).getTestClassOrSuite();
+			if (model != null && !model.eIsProxy())
+				for (XjmSetup setup : model.getSetups())
+					types.add(setup.getInitializer());
 		}
+		List<IEObjectDescription> descs = Lists.newArrayList();
+		for (JvmDeclaredType type : types)
+			if (type != null && !type.eIsProxy())
+				for (JvmFeature feature : type.getAllFeatures()) {
+					String name = getAssignmentTargetFeatureName(feature);
+					if (name != null)
+						descs.add(EObjectDescription.create(QualifiedName.create(name), feature));
+				}
 		return new SimpleScope(descs);
 	}
 
@@ -110,15 +118,18 @@ public class XpectScopeProvider extends AbstractScopeProvider {
 			AbstractComponent current = ((Component) instance).getAssignment().getInstance();
 			while (true) {
 				if (current instanceof Component) {
-					JvmDeclaredType componentClass = current.getComponentClass();
+					JvmDeclaredType componentClass = ((Component) current).getComponentClass();
 					if (componentClass != null && !componentClass.eIsProxy())
 						packages.add(componentClass.getPackageName());
 					current = ((Component) current).getAssignment().getInstance();
 				} else if (current instanceof XpectTest) {
-					// JvmDeclaredType setup = ((XpectTest)
-					// current).getSetupClass();
-					// if (setup != null)
-					// packages.add(setup.getPackageName());
+					XpectJavaModel model = ((XpectTest) current).getTestClassOrSuite();
+					if (model != null && !model.eIsProxy())
+						for (XjmSetup setup : model.getSetups()) {
+							JvmDeclaredType jvmClass = setup.getJvmClass();
+							if (jvmClass != null && !jvmClass.eIsProxy())
+								packages.add(jvmClass.getPackageName());
+						}
 					break;
 				} else
 					break;

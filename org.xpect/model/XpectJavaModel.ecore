@@ -39,6 +39,7 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="XjmSetup" eSuperTypes="#//XjmClass">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="instance" eType="#//XpectSetup"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="initializer" eType="ecore:EClass ../../org.eclipse.xtext.common.types/model/JavaVMTypes.ecore#//JvmDeclaredType"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="XjmMethod" abstract="true">
     <eOperations name="getName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>

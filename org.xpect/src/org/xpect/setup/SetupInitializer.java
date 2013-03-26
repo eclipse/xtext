@@ -11,6 +11,7 @@ import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
+import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.util.JavaReflectAccess;
 import org.xpect.AbstractComponent;
@@ -30,6 +31,7 @@ import com.google.common.base.Joiner;
 @SuppressWarnings("restriction")
 public class SetupInitializer<T> implements ISetupInitializer<T> {
 
+	private JavaReflectAccess jra = new JavaReflectAccess();
 	private final AbstractComponent rootInstance;
 
 	public SetupInitializer(AbstractComponent rootInstance) {
@@ -42,17 +44,6 @@ public class SetupInitializer<T> implements ISetupInitializer<T> {
 
 	protected Object create(ClassLiteral val) {
 		return new JavaReflectAccess().getRawType(val.getType());
-	}
-
-	protected Constructor<?> findConstructor(Class<?> clazz, Object[] params) {
-		START: for (Constructor<?> c : clazz.getConstructors())
-			if (c.getParameterTypes().length == params.length) {
-				for (int i = 0; i < params.length; i++)
-					if (!c.getParameterTypes()[i].isInstance(params[i]))
-						continue START;
-				return c;
-			}
-		throw new RuntimeException("Type " + clazz + " has no constructor suitable for params " + Joiner.on(", ").join(params));
 	}
 
 	protected Object create(Component val) {
@@ -98,16 +89,49 @@ public class SetupInitializer<T> implements ISetupInitializer<T> {
 		return null;
 	}
 
+	protected Constructor<?> findConstructor(Class<?> clazz, Object[] params) {
+		START: for (Constructor<?> c : clazz.getConstructors())
+			if (c.getParameterTypes().length == params.length) {
+				for (int i = 0; i < params.length; i++)
+					if (!c.getParameterTypes()[i].isInstance(params[i]))
+						continue START;
+				return c;
+			}
+		throw new RuntimeException("Type " + clazz + " has no constructor suitable for params " + Joiner.on(", ").join(params));
+	}
+
+	protected Method findMethod(Object target, Assignment assignment) {
+		JvmOperation result = assignment.getDeclaredTarget();
+		if (result != null) {
+			if (result.eIsProxy())
+				throw new RuntimeException("unresolved proxy:" + result);
+			return jra.getMethod(result);
+		}
+		Value val = assignment.getValue();
+		if (val instanceof Component) {
+			JvmDeclaredType toBeAssigned = ((Component) val).getComponentClass();
+			if (toBeAssigned != null && !toBeAssigned.eIsProxy()) {
+				Class<?> toBeAssignedJava = jra.getRawType(toBeAssigned);
+				if (toBeAssignedJava != null)
+					for (Method candidate : target.getClass().getMethods())
+						if ("add".equals(candidate.getName()) && candidate.getParameterTypes().length == 1) {
+							Class<?> parameterType = candidate.getParameterTypes()[0];
+							if (parameterType.isAssignableFrom(toBeAssignedJava))
+								return candidate;
+						}
+			}
+		}
+		return null;
+	}
+
 	public AbstractComponent getRootInstance() {
 		return rootInstance;
 	}
 
 	protected void initialize(Object obj, AbstractComponent init) {
-		JavaReflectAccess jra = new JavaReflectAccess();
 		for (Assignment a : init.getAssignments()) {
-			JvmOperation target = a.getTarget();
-			if (target != null) {
-				Method m = jra.getMethod(target);
+			Method m = findMethod(obj, a);
+			if (m != null) {
 				Object object = create(a.getValue());
 				try {
 					m.invoke(obj, object);
@@ -122,4 +146,5 @@ public class SetupInitializer<T> implements ISetupInitializer<T> {
 		if (rootInstance != null)
 			initialize(object, rootInstance);
 	}
+
 }
