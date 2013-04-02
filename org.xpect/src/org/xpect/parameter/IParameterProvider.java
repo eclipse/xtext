@@ -5,15 +5,13 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.xpect.parameters;
+package org.xpect.parameter;
 
 /**
  * @author Moritz Eysholdt - Initial contribution and API
  */
-public interface ILinesExpectation {
-	void assertEquals(Iterable<?> string);
+public interface IParameterProvider {
+	<T> T get(Class<T> expectedType);
 
-	void assertEquals(String message, Iterable<?> string);
-
-	void fail(String message, Iterable<?> string);
+	boolean canProvide(Class<?> expectedType);
 }

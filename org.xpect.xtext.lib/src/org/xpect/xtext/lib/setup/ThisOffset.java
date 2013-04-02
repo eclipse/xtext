@@ -18,7 +18,7 @@ import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 import org.eclipse.xtext.parsetree.reconstr.impl.NodeIterator;
 import org.eclipse.xtext.resource.XtextResource;
 import org.xpect.XpectInvocation;
-import org.xpect.parameters.AbstractOffsetProvider;
+import org.xpect.parameter.AbstractOffsetProvider;
 
 /**
  * @author Moritz Eysholdt - Initial contribution and API

@@ -23,8 +23,9 @@ Require-Bundle: org.apache.log4j;bundle-version="1.2.0";visibility:=reexport,
 Import-Package: org.apache.log4j
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Export-Package: org.xpect,
+ org.xpect.expectation,
  org.xpect.formatting,
- org.xpect.parameters,
+ org.xpect.parameter,
  org.xpect.parser.antlr,
  org.xpect.parser.antlr.internal,
  org.xpect.parser.antlr.lexer,

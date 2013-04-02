@@ -5,17 +5,16 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.xpect.parameters;
-
-import com.google.common.base.Predicate;
+package org.xpect.parameter;
 
 /**
  * @author Moritz Eysholdt - Initial contribution and API
  */
-public interface ICommaSeparatedValuesExpectation {
-	void assertEquals(Iterable<?> string);
+public abstract class AbstractOffsetProvider extends AbstractIntegerProvider {
+	@Override
+	protected String getValue() {
+		return String.valueOf(getOffset());
+	}
 
-	void assertEquals(Iterable<?> string, Predicate<String> predicate);
-
-	void assertEquals(Predicate<String> predicate);
+	public abstract int getOffset();
 }

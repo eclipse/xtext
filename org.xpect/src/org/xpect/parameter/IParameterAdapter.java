@@ -5,30 +5,13 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.xpect.parameters;
-
+package org.xpect.parameter;
 
 /**
  * @author Moritz Eysholdt - Initial contribution and API
  */
-public class ParameterProvider implements IParameterProvider {
+public interface IParameterAdapter {
+	IParameterProvider adapt(IParameterProvider provider, Class<?> expectedType);
 
-	private Object value;
-
-	public ParameterProvider(Object value) {
-		super();
-		this.value = value;
-	}
-
-	@SuppressWarnings("unchecked")
-	public <T> T get(Class<T> expectedType) {
-		if (expectedType.isInstance(value))
-			return (T) value;
-		return null;
-	}
-
-	public boolean canProvide(Class<?> expectedType) {
-		return expectedType.isInstance(value);
-	}
-
+	boolean canAdapt(IParameterProvider provider, Class<?> expectedType);
 }

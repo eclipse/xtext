@@ -2,9 +2,9 @@ package org.eclipse.xtext.example.domainmodel.xpect.tests.parser;
 
 import org.eclipse.emf.ecore.EObject;
 import org.junit.runner.RunWith;
-import org.xpect.parameters.IStringExpectation;
-import org.xpect.parameters.ParameterParser;
-import org.xpect.parameters.StringExpectation;
+import org.xpect.expectation.IStringExpectation;
+import org.xpect.expectation.StringExpectation;
+import org.xpect.parameter.ParameterParser;
 import org.xpect.runner.Xpect;
 import org.xpect.runner.XpectRunner;
 import org.xpect.runner.XpectTestFiles;

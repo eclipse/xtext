@@ -5,9 +5,10 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.xpect.parameters;
+package org.xpect.expectation;
 
 import org.eclipse.xtext.util.Strings;
+import org.xpect.parameter.IParameterProvider;
 
 import com.google.common.base.Joiner;
 import com.google.common.base.Preconditions;

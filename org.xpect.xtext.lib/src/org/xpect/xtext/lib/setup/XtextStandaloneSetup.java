@@ -17,7 +17,7 @@ import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.resource.XtextResourceSet;
 import org.eclipse.xtext.xbase.jvmmodel.JvmModelInferrerRegistry;
 import org.xpect.Environment;
-import org.xpect.parameters.ParameterProvider;
+import org.xpect.parameter.ParameterProvider;
 import org.xpect.setup.AbstractXpectSetup;
 import org.xpect.setup.ISetupInitializer;
 import org.xpect.xtext.lib.setup.ThisOffset.ThisOffsetProvider;

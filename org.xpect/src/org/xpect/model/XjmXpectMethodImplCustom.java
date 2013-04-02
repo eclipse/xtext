@@ -6,10 +6,10 @@ import java.util.List;
 
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.xtext.common.types.JvmOperation;
-import org.xpect.parameters.IParameterParser.IMultiParameterParser;
-import org.xpect.parameters.IParameterParser.ISingleParameterParser;
-import org.xpect.parameters.IParameterParser.MultiParameterParser;
-import org.xpect.parameters.IParameterParser.SingleParameterParser;
+import org.xpect.parameter.IParameterParser.IMultiParameterParser;
+import org.xpect.parameter.IParameterParser.ISingleParameterParser;
+import org.xpect.parameter.IParameterParser.MultiParameterParser;
+import org.xpect.parameter.IParameterParser.SingleParameterParser;
 import org.xpect.util.AnnotationUtil;
 
 public class XjmXpectMethodImplCustom extends XjmXpectMethodImpl {

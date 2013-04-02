@@ -15,12 +15,12 @@ import java.util.Map;
 
 import org.xpect.XjmXpectMethod;
 import org.xpect.XpectInvocation;
-import org.xpect.parameters.IParameterAdapter;
-import org.xpect.parameters.IParameterParser;
-import org.xpect.parameters.IParameterProvider;
-import org.xpect.parameters.IParameterParser.IClaimedRegion;
-import org.xpect.parameters.IParameterParser.IMultiParameterParser;
-import org.xpect.parameters.IParameterParser.ISingleParameterParser;
+import org.xpect.parameter.IParameterAdapter;
+import org.xpect.parameter.IParameterParser;
+import org.xpect.parameter.IParameterProvider;
+import org.xpect.parameter.IParameterParser.IClaimedRegion;
+import org.xpect.parameter.IParameterParser.IMultiParameterParser;
+import org.xpect.parameter.IParameterParser.ISingleParameterParser;
 import org.xpect.setup.IXpectRunnerSetup;
 import org.xpect.setup.SetupContext;
 import org.xpect.util.IRegion;

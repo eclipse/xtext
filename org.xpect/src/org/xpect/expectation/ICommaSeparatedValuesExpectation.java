@@ -5,13 +5,17 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.xpect.parameters;
+package org.xpect.expectation;
+
+import com.google.common.base.Predicate;
 
 /**
  * @author Moritz Eysholdt - Initial contribution and API
  */
-public interface IParameterProvider {
-	<T> T get(Class<T> expectedType);
+public interface ICommaSeparatedValuesExpectation {
+	void assertEquals(Iterable<?> string);
 
-	boolean canProvide(Class<?> expectedType);
+	void assertEquals(Iterable<?> string, Predicate<String> predicate);
+
+	void assertEquals(Predicate<String> predicate);
 }

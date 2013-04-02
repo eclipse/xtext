@@ -5,13 +5,11 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.xpect.parameters;
+package org.xpect.expectation;
 
 /**
  * @author Moritz Eysholdt - Initial contribution and API
  */
-public interface IParameterAdapter {
-	IParameterProvider adapt(IParameterProvider provider, Class<?> expectedType);
-
-	boolean canAdapt(IParameterProvider provider, Class<?> expectedType);
+public interface IStringExpectation {
+	void assertEquals(Object string);
 }

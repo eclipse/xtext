@@ -5,7 +5,7 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.xpect.parameters;
+package org.xpect.parameter;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
@@ -31,9 +31,9 @@ import org.eclipse.xtext.util.formallang.StringProduction;
 import org.eclipse.xtext.util.formallang.StringProduction.ProdElement;
 import org.xpect.XjmXpectMethod;
 import org.xpect.XpectInvocation;
-import org.xpect.parameters.IParameterParser.IMultiParameterParser;
-import org.xpect.parameters.IParameterParser.MultiParameterParser;
-import org.xpect.parameters.ParameterParser.ParameterParserImpl;
+import org.xpect.parameter.IParameterParser.IMultiParameterParser;
+import org.xpect.parameter.IParameterParser.MultiParameterParser;
+import org.xpect.parameter.ParameterParser.ParameterParserImpl;
 import org.xpect.util.IRegion;
 import org.xpect.util.Region;
 

@@ -5,7 +5,7 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.xpect.parameters;
+package org.xpect.expectation;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
@@ -18,12 +18,15 @@ import org.eclipse.xtext.util.Pair;
 import org.junit.Assert;
 import org.junit.ComparisonFailure;
 import org.xpect.XpectInvocation;
-import org.xpect.parameters.ActualCollection.ActualItem;
-import org.xpect.parameters.ActualCollection.ToString;
-import org.xpect.parameters.ExpectationCollection.ExpectationItem;
-import org.xpect.parameters.IParameterParser.ISingleParameterParser;
-import org.xpect.parameters.IParameterParser.SingleParameterParser;
-import org.xpect.parameters.LinesExpectation.LinesExpectationParser;
+import org.xpect.expectation.ActualCollection.ActualItem;
+import org.xpect.expectation.ActualCollection.ToString;
+import org.xpect.expectation.ExpectationCollection.ExpectationItem;
+import org.xpect.expectation.LinesExpectation.LinesExpectationParser;
+import org.xpect.parameter.IParameterParser;
+import org.xpect.parameter.IParameterProvider;
+import org.xpect.parameter.IParameterParser.IClaimedRegion;
+import org.xpect.parameter.IParameterParser.ISingleParameterParser;
+import org.xpect.parameter.IParameterParser.SingleParameterParser;
 import org.xpect.util.IRegion;
 
 import com.google.common.base.Function;

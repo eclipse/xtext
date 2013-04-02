@@ -16,8 +16,8 @@ import org.xpect.XjmMethod;
 import org.xpect.XpectFile;
 import org.xpect.XpectInvocation;
 import org.xpect.XpectJavaModel;
-import org.xpect.parameters.IParameterAdapter;
-import org.xpect.parameters.IParameterProvider;
+import org.xpect.parameter.IParameterAdapter;
+import org.xpect.parameter.IParameterProvider;
 import org.xpect.runner.IXpectURIProvider;
 
 import com.google.inject.Injector;
