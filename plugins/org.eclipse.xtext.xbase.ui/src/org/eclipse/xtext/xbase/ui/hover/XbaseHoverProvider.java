@@ -186,8 +186,12 @@ public class XbaseHoverProvider extends DefaultEObjectHoverProvider {
 		if (call != null && (call instanceof XAbstractFeatureCall || call instanceof XConstructorCall))
 			signature = hoverGenericsResolver.replaceGenerics((XExpression) call,
 					hoverSignatureProvider.getSignature(o));
-		if (imageTag != null && signature != null) {
-			return "<div style='position: absolute; left: 0; top: 0;'>" + imageTag + "</div>" + LEADING_PADDING +"<b>"+ HTMLPrinter.convertToHTMLContent(signature) + "</b>" + TRAILING_PADDING;
+		if(signature != null) {
+			if (imageTag != null) {
+				return "<div style='position: absolute; left: 0; top: 0;'>" + imageTag + "</div>" + LEADING_PADDING +"<b>"+ HTMLPrinter.convertToHTMLContent(signature) + "</b>" + TRAILING_PADDING;
+			} else {
+				return "<b>"+ HTMLPrinter.convertToHTMLContent(signature) + "</b>" + TRAILING_PADDING;
+			}
 		}
 		return "";
 	}

@@ -299,7 +299,8 @@ public class XbaseGeneratorFragment extends AbstractGeneratorFragment {
 						"\t\t\tbinder.bind(org.eclipse.xtext.common.types.ui.navigation.IDerivedMemberAwareEditorOpener.class).to(org.eclipse.xtext.xbase.ui.jvmmodel.navigation.DerivedMemberAwareEditorOpener.class); \n"+
 						"\t\t}")
 				.addTypeToType("org.eclipse.xtext.common.types.xtext.ui.ITypesProposalProvider", 
-						"org.eclipse.xtext.xbase.ui.contentassist.ImportingTypesProposalProvider");
+						"org.eclipse.xtext.xbase.ui.contentassist.ImportingTypesProposalProvider")
+				.addTypeToType("org.eclipse.jface.viewers.ILabelProvider", "org.eclipse.xtext.xbase.ui.labeling.XbaseLabelProvider");
 
 		} else {
 			bindFactory =  bindFactory.addTypeToType("org.eclipse.xtext.ui.refactoring.IRenameStrategy", 
