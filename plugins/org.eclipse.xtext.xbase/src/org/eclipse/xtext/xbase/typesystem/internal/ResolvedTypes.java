@@ -985,10 +985,7 @@ public abstract class ResolvedTypes implements IResolvedTypes {
 		for(LightweightBoundTypeArgument hint: hints) {
 			LightweightTypeReference reference = hint.getTypeReference();
 			if (reference instanceof UnboundTypeReference) {
-				Object otherHandle = ((UnboundTypeReference) reference).getHandle();
-				if (seenHandles.add(otherHandle)) {
-					addNonRecursiveHints(hint, getHints(otherHandle), seenHandles, result);
-				}
+				addNonRecursiveHints(hint, (UnboundTypeReference)reference, seenHandles, result);
 			} else {
 				if (!result.contains(hint))
 					result.add(hint);
@@ -1001,19 +998,30 @@ public abstract class ResolvedTypes implements IResolvedTypes {
 		for(LightweightBoundTypeArgument hint: hints) {
 			LightweightTypeReference reference = hint.getTypeReference();
 			if (reference instanceof UnboundTypeReference) {
-				Object otherHandle = ((UnboundTypeReference) reference).getHandle();
-				if (seenHandles.add(otherHandle)) {
-					addNonRecursiveHints(original, getHints(otherHandle), seenHandles, result);
-				}
+				addNonRecursiveHints(original, (UnboundTypeReference)reference, seenHandles, result);
 			} else {
 				if (original.getDeclaredVariance() == VarianceInfo.IN && hint.getTypeReference() instanceof WildcardTypeReference) {
-					LightweightBoundTypeArgument delegateHint = new LightweightBoundTypeArgument(
-							hint.getTypeReference().getUpperBoundSubstitute(), original.getSource(), hint.getOrigin(), hint.getDeclaredVariance(), original.getActualVariance());
-					result.add(delegateHint);
+					LightweightTypeReference upperBound = hint.getTypeReference().getUpperBoundSubstitute();
+					if (upperBound instanceof UnboundTypeReference) {
+						addNonRecursiveHints(original, (UnboundTypeReference)upperBound, seenHandles, result);
+					} else {
+						LightweightBoundTypeArgument delegateHint = new LightweightBoundTypeArgument(
+								upperBound, original.getSource(), hint.getOrigin(), hint.getDeclaredVariance(), original.getActualVariance());
+						result.add(delegateHint);
+					}
 				} else {
-					result.add(hint);
+					if (!result.contains(hint))
+						result.add(hint);
 				}
 			}
+		}
+	}
+
+	protected void addNonRecursiveHints(LightweightBoundTypeArgument original, UnboundTypeReference reference, Set<Object> seenHandles,
+			List<LightweightBoundTypeArgument> result) {
+		Object otherHandle = reference.getHandle();
+		if (seenHandles.add(otherHandle)) {
+			addNonRecursiveHints(original, getHints(otherHandle), seenHandles, result);
 		}
 	}
 	
