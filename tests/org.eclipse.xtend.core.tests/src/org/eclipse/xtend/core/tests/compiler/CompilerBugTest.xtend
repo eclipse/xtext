@@ -8,11 +8,110 @@
 package org.eclipse.xtend.core.tests.compiler
 
 import org.junit.Test
+import org.junit.Ignore
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
 class CompilerBugTest extends AbstractXtendCompilerTest {
+	
+	@Test
+	@Ignore("Type inference fails currently for flatMap [ null ] - it should become (String)=>Object")
+	def testBug404051_01() {
+		assertCompilesTo('''
+			class C {
+				def void m(Iterable<String> iterable) {
+					iterable.flatMap[ null ].sortBy [ hashCode ]
+				}
+				def <A,B> Iterable<? extends B> flatMap(Iterable<? extends A> iterable, (A)=>B map) {
+					return null
+				}
+			}
+		''', '''
+			TODO
+		''')
+	}
+	
+	@Test
+	def testBug404051_02() {
+		assertCompilesTo('''
+			class C {
+				def void m(Iterable<String> iterable) {
+					iterable.flatMap[ it ].sortBy [ hashCode ]
+				}
+				def <A,B> Iterable<? extends B> flatMap(Iterable<? extends A> iterable, (A)=>B map) {
+					return null
+				}
+			}
+		''', '''
+			import org.eclipse.xtext.xbase.lib.Functions.Function1;
+			import org.eclipse.xtext.xbase.lib.IterableExtensions;
+			
+			@SuppressWarnings("all")
+			public class C {
+			  public void m(final Iterable<String> iterable) {
+			    final Function1<String,String> _function = new Function1<String,String>() {
+			        public String apply(final String it) {
+			          return it;
+			        }
+			      };
+			    Iterable<? extends String> _flatMap = this.<String, String>flatMap(iterable, _function);
+			    final Function1<String,Integer> _function_1 = new Function1<String,Integer>() {
+			        public Integer apply(final String it) {
+			          int _hashCode = it.hashCode();
+			          return Integer.valueOf(_hashCode);
+			        }
+			      };
+			    IterableExtensions.sortBy(_flatMap, _function_1);
+			  }
+			  
+			  public <A extends Object, B extends Object> Iterable<? extends B> flatMap(final Iterable<? extends A> iterable, final Function1<? super A,? extends B> map) {
+			    return null;
+			  }
+			}
+		''')
+	}
+	
+	@Test
+	def testBug404051_03() {
+		assertCompilesTo('''
+			class C {
+				def void m(Iterable<String> iterable) {
+					iterable.flatMap[ toUpperCase ].sortBy [ length ]
+				}
+				def <A,B> Iterable<? extends B> flatMap(Iterable<? extends A> iterable, (A)=>B map) {
+					return null
+				}
+			}
+		''', '''
+			import org.eclipse.xtext.xbase.lib.Functions.Function1;
+			import org.eclipse.xtext.xbase.lib.IterableExtensions;
+			
+			@SuppressWarnings("all")
+			public class C {
+			  public void m(final Iterable<String> iterable) {
+			    final Function1<String,String> _function = new Function1<String,String>() {
+			        public String apply(final String it) {
+			          String _upperCase = it.toUpperCase();
+			          return _upperCase;
+			        }
+			      };
+			    Iterable<? extends String> _flatMap = this.<String, String>flatMap(iterable, _function);
+			    final Function1<String,Integer> _function_1 = new Function1<String,Integer>() {
+			        public Integer apply(final String it) {
+			          int _length = it.length();
+			          return Integer.valueOf(_length);
+			        }
+			      };
+			    IterableExtensions.sortBy(_flatMap, _function_1);
+			  }
+			  
+			  public <A extends Object, B extends Object> Iterable<? extends B> flatMap(final Iterable<? extends A> iterable, final Function1<? super A,? extends B> map) {
+			    return null;
+			  }
+			}
+		''')
+	}
 	
 	@Test
 	def testBug384313() {

@@ -764,6 +764,38 @@ class ErrorTest extends AbstractXtendTestCase {
 			}
 		'''.processWithoutException
 	}
+	
+	@Test
+	def void testErrorModel_50() throws Exception {
+		'''
+			class C {
+				@Test def void m() {
+					#[ '' ].flatMap[].sortBy [length]
+				}
+				def <A,B> Iterable<? extends B> flatMap(Iterable<? extends A> iterable, (A)=>B map) {
+					return null
+				}
+			}
+		'''.processWithoutException
+	}
+	
+	@Test
+	def void testErrorModel_51() throws Exception {
+		'''
+			class C {
+				
+				val list = #[ '' ]
+				
+				@Test def void m() {
+					#[ '' ].flatMap[].sortBy [length]
+				}
+				
+				def <A,B> Iterable<B> flatMap(Iterable<? extends A> iterable, (A)=>B map) {
+					return null
+				}
+			}
+		'''.processWithoutException
+	}
 		
 	def processWithoutException(CharSequence input) throws Exception {
 		val resource = resourceSet.createResource(URI::createURI("abcdefg.xtend"))
