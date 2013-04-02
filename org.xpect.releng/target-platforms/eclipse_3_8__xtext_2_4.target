@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<?pde version="3.8"?><target name="Xpect Target Definition (Eclipse 3.8 - Juno)" sequenceNumber="19">
+<locations>
+<location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="true" type="InstallableUnit">
+<unit id="org.eclipse.emf.sdk.feature.group" version="2.8.3.v20130125-0826"/>
+<repository location="http://download.eclipse.org/releases/juno"/>
+</location>
+<location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="true" type="InstallableUnit">
+<unit id="org.eclipse.sdk.ide" version="3.8.2.M20130131-0800"/>
+<repository location="http://download.eclipse.org/eclipse/updates/3.8"/>
+</location>
+<location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="true" type="InstallableUnit">
+<unit id="org.eclipse.xtext.sdk.feature.group" version="2.4.0.v201303201134"/>
+<repository location="http://download.eclipse.org/modeling/tmf/xtext/updates/composite/releases"/>
+</location>
+</locations>
+<environment>
+<nl>en_EN</nl>
+</environment>
+<launcherArgs>
+<vmArgs>-Xms128m -Xmx768m -Xss4m -XX:MaxPermSize=256m</vmArgs>
+<programArgs>--launcher.XXMaxPermSize 256m</programArgs>
+</launcherArgs>
+</target>
