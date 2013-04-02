@@ -195,7 +195,8 @@ public @interface ParameterParser {
 			String document = invocation.getFile().getDocument();
 			final String text = document.substring(claim.getOffset(), claim.getOffset() + claim.getLength());
 			Nfa<ProdElement> nfa = getParameterNfa(paramSyntax);
-			List<BacktrackItem> trace = new NfaUtil().backtrack(nfa, new BacktrackItem(0),
+			Matcher ws = WS.matcher(text);
+			List<BacktrackItem> trace = new NfaUtil().backtrack(nfa, new BacktrackItem(ws.find() ? ws.end() : 0),
 					new BacktrackHandler<ProdElement, BacktrackItem>() {
 						public BacktrackItem handle(ProdElement state, BacktrackItem previous) {
 							if (Strings.isEmpty(state.getValue()))
@@ -281,6 +282,13 @@ public @interface ParameterParser {
 				add = 0;
 			INode node = NodeModelUtils.getNode(invocation);
 			int offset = node.getOffset() + node.getLength();
+			for (IParameterProvider param : invocation.getParameters())
+				if (param instanceof IParsedParameterProvider) {
+					IRegion claimedRegion = ((IParsedParameterProvider) param).getClaimedRegion();
+					int regionEnd = claimedRegion.getOffset() + claimedRegion.getLength();
+					if (regionEnd > offset)
+						offset = regionEnd;
+				}
 			String text = invocation.getFile().getDocument();
 			int result = text.indexOf(val, offset);
 			if (result >= 0) {

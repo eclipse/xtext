@@ -250,13 +250,17 @@ public class XtextOffsetAdapter implements IParameterAdapter {
 				INode next = ni == null ? leaf : ni.next();
 				if (ni == null)
 					ni = new NodeIterator(leaf);
-				Assignment ass = GrammarUtil.containingAssignment(next.getGrammarElement());
-				if (ass != null) {
-					EObject object = NodeModelUtils.findActualSemanticObjectFor(next);
-					EStructuralFeature feat = object.eClass().getEStructuralFeature(ass.getFeature());
-					if (feat != null && matches(object, feat))
-						return create(object, feat);
-				}
+				EObject object = NodeModelUtils.findActualSemanticObjectFor(next);
+				INode current = next;
+				do {
+					Assignment ass = GrammarUtil.containingAssignment(current.getGrammarElement());
+					if (ass != null) {
+						EStructuralFeature feat = object.eClass().getEStructuralFeature(ass.getFeature());
+						if (feat != null && matches(object, feat))
+							return create(object, feat);
+					}
+					current = current.getParent();
+				} while (current != null && object == NodeModelUtils.findActualSemanticObjectFor(current));
 			}
 			throw new RuntimeException("No EStructuralFeature found at offset " + offset);
 		}
