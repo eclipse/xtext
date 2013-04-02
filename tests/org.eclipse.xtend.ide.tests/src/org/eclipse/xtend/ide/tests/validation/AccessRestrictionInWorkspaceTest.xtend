@@ -113,7 +113,7 @@ class AccessRestrictionInWorkspaceTest extends AbstractXtendUITestCase {
 		return resource.contents.head as XtendFile
 	}
 	
-	@Before def setUp() throws Exception {
+	@Before override setUp() throws Exception {
 		super.setUp()
 		JavaCore::create(createPluginProject("firstProject")).configureExportedPackages
 		'firstProject/src/restricted/A.java'.createFile('''package restricted; public class A {}''')
@@ -133,7 +133,7 @@ class AccessRestrictionInWorkspaceTest extends AbstractXtendUITestCase {
 		waitForAutoBuild
 	}
 	
-	@After def tearDown() throws Exception {
+	@After override tearDown() throws Exception {
 		cleanWorkspace();
 	}
 	
