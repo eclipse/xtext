@@ -5,20 +5,13 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.xpect.runner;
-
-import java.lang.annotation.ElementType;
-import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
-import java.lang.annotation.Target;
-
-import org.xpect.runner.IParameterParser.ISingleParameterParser;
+package org.xpect.util;
 
 /**
  * @author Moritz Eysholdt - Initial contribution and API
  */
-@Retention(RetentionPolicy.RUNTIME)
-@Target({ ElementType.ANNOTATION_TYPE })
-public @interface XpectSingleParameterProvider {
-	Class<? extends ISingleParameterParser> value();
+public interface IParameterAdapter {
+	IParameterProvider adapt(IParameterProvider provider, Class<?> expectedType);
+
+	boolean canAdapt(IParameterProvider provider, Class<?> expectedType);
 }

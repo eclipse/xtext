@@ -12,7 +12,7 @@ import java.math.BigInteger;
 /**
  * @author Moritz Eysholdt - Initial contribution and API
  */
-public abstract class AbstractIntegerProvider implements ITypedProvider {
+public abstract class AbstractIntegerProvider implements IParameterProvider {
 
 	public boolean canProvide(Class<?> expectedType) {
 		return expectedType == Byte.class || //

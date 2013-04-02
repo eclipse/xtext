@@ -8,7 +8,7 @@
 package org.xpect.parameters;
 
 import org.eclipse.xtext.util.Strings;
-import org.xpect.util.ITypedProvider;
+import org.xpect.util.IParameterProvider;
 
 import com.google.common.base.Joiner;
 import com.google.common.base.Preconditions;
@@ -16,7 +16,7 @@ import com.google.common.base.Preconditions;
 /**
  * @author Moritz Eysholdt - Initial contribution and API
  */
-public class AbstractExpectation implements ITypedProvider {
+public class AbstractExpectation implements IParameterProvider {
 	private final String document;
 	private final int length;
 	private final int offset;

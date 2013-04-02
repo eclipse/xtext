@@ -23,16 +23,16 @@ import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.util.Pair;
 import org.eclipse.xtext.util.Tuples;
 import org.xpect.util.AbstractOffsetProvider;
-import org.xpect.util.ITypedAdapter;
-import org.xpect.util.ITypedProvider;
-import org.xpect.util.TypedProvider;
+import org.xpect.util.IParameterAdapter;
+import org.xpect.util.IParameterProvider;
+import org.xpect.util.ParameterProvider;
 
 import com.google.common.collect.Sets;
 
 /**
  * @author Moritz Eysholdt - Initial contribution and API
  */
-public class XtextOffsetAdapter implements ITypedAdapter {
+public class XtextOffsetAdapter implements IParameterAdapter {
 
 	protected static class CrossEReferenceAndEObject extends EStructuralFeatureAndEObject implements ICrossEReferenceAndEObject {
 
@@ -66,7 +66,7 @@ public class XtextOffsetAdapter implements ITypedAdapter {
 		}
 	}
 
-	protected static class EObjectProvider implements ITypedProvider {
+	protected static class EObjectProvider implements IParameterProvider {
 
 		private final EObject object;
 
@@ -192,7 +192,7 @@ public class XtextOffsetAdapter implements ITypedAdapter {
 		EStructuralFeature getEStructuralFeature();
 	}
 
-	protected static class NodeProvider extends TypedProvider {
+	protected static class NodeProvider extends ParameterProvider {
 
 		public NodeProvider(XtextResource res, int offset) {
 			super(NodeModelUtils.findLeafNodeAtOffset(res.getParseResult().getRootNode(), offset));
@@ -206,17 +206,17 @@ public class XtextOffsetAdapter implements ITypedAdapter {
 		this.resource = resource;
 	}
 
-	public ITypedProvider adapt(ITypedProvider provider, Class<?> expectedType) {
+	public IParameterProvider adapt(IParameterProvider provider, Class<?> expectedType) {
 		if (provider instanceof AbstractOffsetProvider) {
 			int offset = provider.get(Integer.TYPE);
 			if (expectedType == IEStructuralFeatureAndEObject.class)
-				return new TypedProvider(new EAttributeAndEObject(resource, offset));
+				return new ParameterProvider(new EAttributeAndEObject(resource, offset));
 			if (expectedType == IEAttributeAndEObject.class)
-				return new TypedProvider(new EAttributeAndEObject(resource, offset));
+				return new ParameterProvider(new EAttributeAndEObject(resource, offset));
 			if (expectedType == IEReferenceAndEObject.class)
-				return new TypedProvider(new EReferenceAndEObject(resource, offset));
+				return new ParameterProvider(new EReferenceAndEObject(resource, offset));
 			if (expectedType == ICrossEReferenceAndEObject.class)
-				return new TypedProvider(new CrossEReferenceAndEObject(resource, offset));
+				return new ParameterProvider(new CrossEReferenceAndEObject(resource, offset));
 			if (expectedType == INode.class || expectedType == ILeafNode.class)
 				return new NodeProvider(resource, offset);
 			if (EObject.class.isAssignableFrom(expectedType))
@@ -236,7 +236,7 @@ public class XtextOffsetAdapter implements ITypedAdapter {
 
 	}
 
-	public boolean canAdapt(ITypedProvider provider, Class<?> expectedType) {
+	public boolean canAdapt(IParameterProvider provider, Class<?> expectedType) {
 		return provider instanceof AbstractOffsetProvider && canAdapt(expectedType);
 	}
 

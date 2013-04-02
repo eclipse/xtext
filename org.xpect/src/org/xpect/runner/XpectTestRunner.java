@@ -15,14 +15,15 @@ import java.util.Map;
 
 import org.xpect.XjmXpectMethod;
 import org.xpect.XpectInvocation;
-import org.xpect.runner.IParameterParser.IClaimedRegion;
-import org.xpect.runner.IParameterParser.IMultiParameterParser;
-import org.xpect.runner.IParameterParser.ISingleParameterParser;
+import org.xpect.parameters.IParameterParser;
+import org.xpect.parameters.IParameterParser.IClaimedRegion;
+import org.xpect.parameters.IParameterParser.IMultiParameterParser;
+import org.xpect.parameters.IParameterParser.ISingleParameterParser;
 import org.xpect.setup.IXpectRunnerSetup;
 import org.xpect.setup.SetupContext;
+import org.xpect.util.IParameterAdapter;
+import org.xpect.util.IParameterProvider;
 import org.xpect.util.IRegion;
-import org.xpect.util.ITypedAdapter;
-import org.xpect.util.ITypedProvider;
 
 import com.google.common.collect.Lists;
 
@@ -61,16 +62,16 @@ public class XpectTestRunner extends AbstractTestRunner {
 		this.method = method;
 	}
 
-	protected List<List<ITypedProvider>> collectAllParameters() throws Exception {
+	protected List<List<IParameterProvider>> collectAllParameters() throws Exception {
 		List<IClaimedRegion> claimedRegions = collectClaimedRegions();
-		List<List<ITypedProvider>> result = Lists.newArrayList();
-		List<ITypedProvider> first = null;
+		List<List<IParameterProvider>> result = Lists.newArrayList();
+		List<IParameterProvider> first = null;
 		for (int i = 0; i < method.getParameterCount(); i++) {
 			ISingleParameterParser claimer = method.getSingleParameterProviders().get(i);
 			if (claimer != null) {
 				if (first == null)
-					first = Arrays.asList(new ITypedProvider[method.getParameterCount()]);
-				ITypedProvider value = claimer.parseRegion(this, i, claimedRegions);
+					first = Arrays.asList(new IParameterProvider[method.getParameterCount()]);
+				IParameterProvider value = claimer.parseRegion(this, i, claimedRegions);
 				first.set(i, value);
 			}
 		}
@@ -99,28 +100,28 @@ public class XpectTestRunner extends AbstractTestRunner {
 		return result;
 	}
 
-	protected ITypedProvider collectProposedParameter(int paramIndex, List<ITypedProvider> candidates, List<ITypedAdapter> adapter) {
+	protected IParameterProvider collectProposedParameter(int paramIndex, List<IParameterProvider> candidates, List<IParameterAdapter> adapter) {
 		Class<?> expectedType = method.getJavaMethod().getParameterTypes()[paramIndex];
-		for (ITypedProvider tp : candidates)
+		for (IParameterProvider tp : candidates)
 			if (tp.canProvide(expectedType))
 				return tp;
-		for (ITypedProvider tp : candidates)
-			for (ITypedAdapter ta : adapter)
+		for (IParameterProvider tp : candidates)
+			for (IParameterAdapter ta : adapter)
 				if (ta.canAdapt(tp, expectedType))
 					return ta.adapt(tp, expectedType);
 		return null;
 	}
 
-	protected List<ITypedProvider> collectProposedParameters(List<List<ITypedProvider>> allParams,
-			Map<Class<? extends Annotation>, ITypedProvider> setupValues, List<ITypedAdapter> adapter) {
-		List<ITypedProvider> result = Arrays.asList(new ITypedProvider[method.getParameterCount()]);
+	protected List<IParameterProvider> collectProposedParameters(List<List<IParameterProvider>> allParams,
+			Map<Class<? extends Annotation>, IParameterProvider> setupValues, List<IParameterAdapter> adapter) {
+		List<IParameterProvider> result = Arrays.asList(new IParameterProvider[method.getParameterCount()]);
 		for (int i = 0; i < method.getParameterCount(); i++) {
-			List<ITypedProvider> candidates = Lists.newArrayList();
-			for (List<ITypedProvider> col : allParams)
+			List<IParameterProvider> candidates = Lists.newArrayList();
+			for (List<IParameterProvider> col : allParams)
 				if (col.get(i) != null)
 					candidates.add(col.get(i));
 			for (Annotation ann : method.getJavaMethod().getParameterAnnotations()[i]) {
-				ITypedProvider provider = setupValues.get(ann.annotationType());
+				IParameterProvider provider = setupValues.get(ann.annotationType());
 				if (provider != null)
 					candidates.add(provider);
 			}
@@ -129,7 +130,7 @@ public class XpectTestRunner extends AbstractTestRunner {
 		return result;
 	}
 
-	protected Object[] createParameterValues(List<ITypedProvider> proposedParameters) {
+	protected Object[] createParameterValues(List<IParameterProvider> proposedParameters) {
 		Object[] params = new Object[method.getParameterCount()];
 		for (int i = 0; i < method.getParameterCount(); i++) {
 			Class<?>[] expectedTypes = method.getJavaMethod().getParameterTypes();
@@ -145,7 +146,7 @@ public class XpectTestRunner extends AbstractTestRunner {
 
 	@Override
 	protected void runInternal(IXpectRunnerSetup<Object, Object, Object, Object> setup, SetupContext ctx) throws Throwable {
-		List<List<ITypedProvider>> allParameters = collectAllParameters();
+		List<List<IParameterProvider>> allParameters = collectAllParameters();
 		Object test = getInvocation().getMethod().getTest().getJavaClass().newInstance();
 		// ctx.setAllParameters(allParameters);
 		ctx.setXpectInvocation(getInvocation());
@@ -154,7 +155,7 @@ public class XpectTestRunner extends AbstractTestRunner {
 		try {
 			if (setup != null)
 				ctx.setUserTestCtx(setup.beforeTest(ctx, ctx.getUserFileCtx()));
-			List<ITypedProvider> proposedParameters = collectProposedParameters(allParameters, ctx.getParamValues(), ctx.getParamAdapters());
+			List<IParameterProvider> proposedParameters = collectProposedParameters(allParameters, ctx.getParamValues(), ctx.getParamAdapters());
 			// ctx.setProposedParameters(proposedParameters);
 			Object[] params = createParameterValues(proposedParameters);
 			method.getJavaMethod().invoke(test, params);

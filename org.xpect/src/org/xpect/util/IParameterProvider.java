@@ -10,24 +10,8 @@ package org.xpect.util;
 /**
  * @author Moritz Eysholdt - Initial contribution and API
  */
-public class TypedProvider implements ITypedProvider {
+public interface IParameterProvider {
+	<T> T get(Class<T> expectedType);
 
-	private Object value;
-
-	public TypedProvider(Object value) {
-		super();
-		this.value = value;
-	}
-
-	@SuppressWarnings("unchecked")
-	public <T> T get(Class<T> expectedType) {
-		if (expectedType.isInstance(value))
-			return (T) value;
-		return null;
-	}
-
-	public boolean canProvide(Class<?> expectedType) {
-		return expectedType.isInstance(value);
-	}
-
+	boolean canProvide(Class<?> expectedType);
 }

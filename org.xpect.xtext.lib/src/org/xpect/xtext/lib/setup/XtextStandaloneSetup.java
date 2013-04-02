@@ -19,7 +19,7 @@ import org.eclipse.xtext.xbase.jvmmodel.JvmModelInferrerRegistry;
 import org.xpect.Environment;
 import org.xpect.setup.AbstractXpectSetup;
 import org.xpect.setup.ISetupInitializer;
-import org.xpect.util.TypedProvider;
+import org.xpect.util.ParameterProvider;
 import org.xpect.xtext.lib.setup.ThisOffset.ThisOffsetProvider;
 import org.xpect.xtext.lib.setup.XtextStandaloneSetup.ClassCtx;
 import org.xpect.xtext.lib.setup.XtextStandaloneSetup.TestCtx;
@@ -62,10 +62,10 @@ public class XtextStandaloneSetup extends AbstractXpectSetup<ClassCtx, FileCtx, 
 		injector.injectMembers(frameworkCtx.getTestInstance());
 		XtextResource res = loadThisResource(injector, frameworkCtx, userCtx);
 		frameworkCtx.installParameterAdapter(new XtextOffsetAdapter(res));
-		frameworkCtx.installParameterValue(ThisResource.class, new TypedProvider(res));
+		frameworkCtx.installParameterValue(ThisResource.class, new ParameterProvider(res));
 		frameworkCtx.installParameterValue(ThisOffset.class, new ThisOffsetProvider(frameworkCtx.getXpectInvocation(), res));
 		if (!res.getContents().isEmpty())
-			frameworkCtx.installParameterValue(ThisModel.class, new TypedProvider(res.getContents().get(0)));
+			frameworkCtx.installParameterValue(ThisModel.class, new ParameterProvider(res.getContents().get(0)));
 		return null;
 	}
 

@@ -20,11 +20,11 @@ import org.xpect.parameters.ActualCollection.ActualItem;
 import org.xpect.parameters.ActualCollection.ToString;
 import org.xpect.parameters.CommaSeparatedValuesExpectation.CommaSeparatedValuesExpectationParser;
 import org.xpect.parameters.ExpectationCollection.ExpectationItem;
-import org.xpect.runner.IParameterParser.ISingleParameterParser;
-import org.xpect.runner.XpectSingleParameterProvider;
+import org.xpect.parameters.IParameterParser.ISingleParameterParser;
+import org.xpect.parameters.IParameterParser.SingleParameterParser;
 import org.xpect.runner.XpectTestRunner;
+import org.xpect.util.IParameterProvider;
 import org.xpect.util.IRegion;
-import org.xpect.util.ITypedProvider;
 
 import com.google.common.base.Function;
 import com.google.common.base.Predicate;
@@ -34,7 +34,7 @@ import com.google.common.base.Predicate;
  */
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.PARAMETER)
-@XpectSingleParameterProvider(CommaSeparatedValuesExpectationParser.class)
+@SingleParameterParser(CommaSeparatedValuesExpectationParser.class)
 public @interface CommaSeparatedValuesExpectation {
 
 	public class CommaSeparatedValuesExpectationImpl extends AbstractExpectation implements ICommaSeparatedValuesExpectation {
@@ -165,7 +165,7 @@ public @interface CommaSeparatedValuesExpectation {
 			return annotation;
 		}
 
-		public ITypedProvider parseRegion(XpectTestRunner invocation, int paramIndex, List<IClaimedRegion> claims) {
+		public IParameterProvider parseRegion(XpectTestRunner invocation, int paramIndex, List<IClaimedRegion> claims) {
 			IRegion region = claimRegion(invocation, paramIndex);
 			if (region != null)
 				return new CommaSeparatedValuesExpectationImpl(annotation, invocation.getDocument(), region.getOffset(), region.getLength());

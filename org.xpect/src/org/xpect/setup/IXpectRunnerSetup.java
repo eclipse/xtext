@@ -17,8 +17,8 @@ import org.xpect.XpectFile;
 import org.xpect.XpectInvocation;
 import org.xpect.XpectJavaModel;
 import org.xpect.runner.IXpectURIProvider;
-import org.xpect.util.ITypedAdapter;
-import org.xpect.util.ITypedProvider;
+import org.xpect.util.IParameterAdapter;
+import org.xpect.util.IParameterProvider;
 
 import com.google.inject.Injector;
 
@@ -37,9 +37,9 @@ public interface IXpectRunnerSetup<T, K, V, X> extends IXpectSetup {
 
 		Environment getEnvironment();
 
-		void installParameterAdapter(ITypedAdapter adapter);
+		void installParameterAdapter(IParameterAdapter adapter);
 
-		void installParameterValue(Class<? extends Annotation> key, ITypedProvider provider);
+		void installParameterValue(Class<? extends Annotation> key, IParameterProvider provider);
 
 		Injector getInjector(URI uri);
 

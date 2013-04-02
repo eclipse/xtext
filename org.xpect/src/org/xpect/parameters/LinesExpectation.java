@@ -20,12 +20,12 @@ import org.junit.ComparisonFailure;
 import org.xpect.parameters.ActualCollection.ActualItem;
 import org.xpect.parameters.ActualCollection.ToString;
 import org.xpect.parameters.ExpectationCollection.ExpectationItem;
+import org.xpect.parameters.IParameterParser.ISingleParameterParser;
+import org.xpect.parameters.IParameterParser.SingleParameterParser;
 import org.xpect.parameters.LinesExpectation.LinesExpectationParser;
-import org.xpect.runner.IParameterParser.ISingleParameterParser;
-import org.xpect.runner.XpectSingleParameterProvider;
 import org.xpect.runner.XpectTestRunner;
+import org.xpect.util.IParameterProvider;
 import org.xpect.util.IRegion;
-import org.xpect.util.ITypedProvider;
 
 import com.google.common.base.Function;
 import com.google.common.base.Joiner;
@@ -36,7 +36,7 @@ import com.google.common.collect.Lists;
  */
 @Target(ElementType.PARAMETER)
 @Retention(RetentionPolicy.RUNTIME)
-@XpectSingleParameterProvider(LinesExpectationParser.class)
+@SingleParameterParser(LinesExpectationParser.class)
 public @interface LinesExpectation {
 
 	public class LinesExpectationImpl extends AbstractExpectation implements ILinesExpectation {
@@ -117,7 +117,7 @@ public @interface LinesExpectation {
 			return annotation;
 		}
 
-		public ITypedProvider parseRegion(XpectTestRunner invocation, int paramIndex, List<IClaimedRegion> claims) {
+		public IParameterProvider parseRegion(XpectTestRunner invocation, int paramIndex, List<IClaimedRegion> claims) {
 			IRegion region = claimRegion(invocation, paramIndex);
 			if (region != null)
 				return new LinesExpectationImpl(annotation, invocation.getDocument(), region.getOffset(), region.getLength());

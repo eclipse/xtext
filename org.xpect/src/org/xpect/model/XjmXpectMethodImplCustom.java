@@ -6,10 +6,10 @@ import java.util.List;
 
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.xtext.common.types.JvmOperation;
-import org.xpect.runner.IParameterParser.IMultiParameterParser;
-import org.xpect.runner.IParameterParser.ISingleParameterParser;
-import org.xpect.runner.XpectMultiParameterProvider;
-import org.xpect.runner.XpectSingleParameterProvider;
+import org.xpect.parameters.IParameterParser.IMultiParameterParser;
+import org.xpect.parameters.IParameterParser.ISingleParameterParser;
+import org.xpect.parameters.IParameterParser.MultiParameterParser;
+import org.xpect.parameters.IParameterParser.SingleParameterParser;
 import org.xpect.util.AnnotationUtil;
 
 public class XjmXpectMethodImplCustom extends XjmXpectMethodImpl {
@@ -43,20 +43,20 @@ public class XjmXpectMethodImplCustom extends XjmXpectMethodImpl {
 	protected List<IMultiParameterParser> findMultiParameterProvider(Method method) {
 		if (method == null)
 			return Collections.emptyList();
-		return AnnotationUtil.newInstancesViaMetaAnnotation(method, XpectMultiParameterProvider.class, IMultiParameterParser.class);
+		return AnnotationUtil.newInstancesViaMetaAnnotation(method, MultiParameterParser.class, IMultiParameterParser.class);
 	}
 
 	protected ISingleParameterParser findSingleParameterProvider(Method method, int paramIndex) {
 		if (method == null)
 			return null;
 		List<ISingleParameterParser> handler = AnnotationUtil.newInstancesViaMetaAnnotation(method, paramIndex,
-				XpectSingleParameterProvider.class, ISingleParameterParser.class);
+				SingleParameterParser.class, ISingleParameterParser.class);
 		if (handler.isEmpty())
 			return null;
 		if (handler.size() == 1)
 			return handler.get(0);
 		throw new RuntimeException("Method " + method + " has more than one annotation that is annotated with "
-				+ XpectSingleParameterProvider.class);
+				+ SingleParameterParser.class);
 	}
 
 	@Override

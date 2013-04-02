@@ -19,7 +19,7 @@ import com.google.inject.TypeLiteral;
 /**
  * @author Moritz Eysholdt - Initial contribution and API
  */
-public class InjectorBasedTypedProvider implements ITypedProvider {
+public class InjectorBasedTypedProvider implements IParameterProvider {
 	final private Injector injector;
 	final private Method method;
 	final private int paramIndex;

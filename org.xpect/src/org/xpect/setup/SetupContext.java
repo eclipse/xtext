@@ -23,8 +23,8 @@ import org.xpect.XpectJavaModel;
 import org.xpect.registry.ILanguageInfo;
 import org.xpect.runner.IXpectURIProvider;
 import org.xpect.setup.IXpectRunnerSetup.ITestSetupContext;
-import org.xpect.util.ITypedAdapter;
-import org.xpect.util.ITypedProvider;
+import org.xpect.util.IParameterAdapter;
+import org.xpect.util.IParameterProvider;
 import org.xpect.util.URIDelegationHandler;
 
 import com.google.common.collect.Lists;
@@ -43,9 +43,9 @@ public class SetupContext implements ITestSetupContext {
 
 	private XjmMethod method;
 
-	private List<ITypedAdapter> paramAdapters;
+	private List<IParameterAdapter> paramAdapters;
 
-	private Map<Class<? extends Annotation>, ITypedProvider> paramValues;
+	private Map<Class<? extends Annotation>, IParameterProvider> paramValues;
 
 	// private List<ITypedProvider> proposedParameters;
 
@@ -83,13 +83,13 @@ public class SetupContext implements ITestSetupContext {
 		return method;
 	}
 
-	public List<ITypedAdapter> getParamAdapters() {
+	public List<IParameterAdapter> getParamAdapters() {
 		if (paramAdapters == null)
 			return Collections.emptyList();
 		return paramAdapters;
 	}
 
-	public Map<Class<? extends Annotation>, ITypedProvider> getParamValues() {
+	public Map<Class<? extends Annotation>, IParameterProvider> getParamValues() {
 		if (paramValues == null)
 			return Collections.emptyMap();
 		return paramValues;
@@ -136,13 +136,13 @@ public class SetupContext implements ITestSetupContext {
 		return xpectInvocation;
 	}
 
-	public void installParameterAdapter(ITypedAdapter adapter) {
+	public void installParameterAdapter(IParameterAdapter adapter) {
 		if (paramAdapters == null)
 			paramAdapters = Lists.newArrayList();
 		paramAdapters.add(adapter);
 	}
 
-	public void installParameterValue(Class<? extends Annotation> key, ITypedProvider provider) {
+	public void installParameterValue(Class<? extends Annotation> key, IParameterProvider provider) {
 		if (paramValues == null)
 			paramValues = Maps.newLinkedHashMap();
 		paramValues.put(key, provider);

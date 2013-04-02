@@ -30,16 +30,16 @@ import org.eclipse.xtext.util.formallang.NfaUtil.BacktrackHandler;
 import org.eclipse.xtext.util.formallang.StringProduction;
 import org.eclipse.xtext.util.formallang.StringProduction.ProdElement;
 import org.xpect.XjmXpectMethod;
+import org.xpect.parameters.IParameterParser.IMultiParameterParser;
+import org.xpect.parameters.IParameterParser.MultiParameterParser;
 import org.xpect.parameters.ParameterParser.ParameterParserImpl;
-import org.xpect.runner.IParameterParser.IMultiParameterParser;
-import org.xpect.runner.XpectMultiParameterProvider;
 import org.xpect.runner.XpectTestRunner;
 import org.xpect.util.AbstractOffsetProvider;
+import org.xpect.util.IParameterProvider;
 import org.xpect.util.IRegion;
-import org.xpect.util.ITypedProvider;
 import org.xpect.util.IntegerProvider;
+import org.xpect.util.ParameterProvider;
 import org.xpect.util.Region;
-import org.xpect.util.TypedProvider;
 
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
@@ -50,7 +50,7 @@ import com.google.common.collect.Maps;
 @SuppressWarnings("restriction")
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.METHOD)
-@XpectMultiParameterProvider(ParameterParserImpl.class)
+@MultiParameterParser(ParameterParserImpl.class)
 public @interface ParameterParser {
 	public static class AssignedProduction extends StringProduction {
 
@@ -132,9 +132,9 @@ public @interface ParameterParser {
 			this.annotation = annotation;
 		}
 
-		protected List<ITypedProvider> associateParameterValues(XpectTestRunner invocation, Map<String, ITypedProvider> parsedParams) {
+		protected List<IParameterProvider> associateParameterValues(XpectTestRunner invocation, Map<String, IParameterProvider> parsedParams) {
 			XjmXpectMethod method = invocation.getMethod();
-			ITypedProvider[] result = new ITypedProvider[method.getParameterCount()];
+			IParameterProvider[] result = new IParameterProvider[method.getParameterCount()];
 			for (int i = 0; i < result.length; i++)
 				result[i] = parsedParams.get("arg" + i);
 			return Arrays.asList(result);
@@ -149,7 +149,7 @@ public @interface ParameterParser {
 			return new Region(start, end - start);
 		}
 
-		protected ITypedProvider convertValue(XpectTestRunner invocation, Token token, String value) {
+		protected IParameterProvider convertValue(XpectTestRunner invocation, Token token, String value) {
 			switch (token) {
 			case OFFSET:
 				return new MatchingOffsetProvider(invocation, value);
@@ -158,7 +158,7 @@ public @interface ParameterParser {
 			case ID:
 			case STRING:
 			case TEXT:
-				return new TypedProvider(new String(value));
+				return new ParameterProvider(new String(value));
 			}
 			throw new RuntimeException();
 		}
@@ -191,7 +191,7 @@ public @interface ParameterParser {
 			return result;
 		}
 
-		protected Map<String, ITypedProvider> parseParams(String paramSyntax, XpectTestRunner invocation, final String text) {
+		protected Map<String, IParameterProvider> parseParams(String paramSyntax, XpectTestRunner invocation, final String text) {
 			if (Strings.isEmpty(paramSyntax))
 				return Collections.emptyMap();
 			Nfa<ProdElement> nfa = getParameterNfa(paramSyntax);
@@ -229,7 +229,7 @@ public @interface ParameterParser {
 							return followers;
 						}
 					});
-			Map<String, ITypedProvider> result = Maps.newHashMap();
+			Map<String, IParameterProvider> result = Maps.newHashMap();
 			if (trace != null && !trace.isEmpty()) {
 				for (BacktrackItem item : trace)
 					if (item.token != null && item.token.getName() != null) {
@@ -241,9 +241,9 @@ public @interface ParameterParser {
 			throw new RuntimeException("could not parse '" + text + "' with grammar '" + paramSyntax + "'");
 		}
 
-		public List<ITypedProvider> parseRegion(XpectTestRunner invocation, List<IClaimedRegion> claims) {
+		public List<IParameterProvider> parseRegion(XpectTestRunner invocation, List<IClaimedRegion> claims) {
 			String paramString = findParameterString(invocation, claims);
-			Map<String, ITypedProvider> parsedParams = parseParams(annotation.syntax(), invocation, paramString);
+			Map<String, IParameterProvider> parsedParams = parseParams(annotation.syntax(), invocation, paramString);
 			return associateParameterValues(invocation, parsedParams);
 		}
 	}
