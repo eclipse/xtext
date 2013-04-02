@@ -7,8 +7,13 @@
  *******************************************************************************/
 package org.xpect.expectation;
 
+import java.util.Collections;
+import java.util.List;
+
 import org.eclipse.xtext.util.Strings;
-import org.xpect.parameter.IParameterProvider;
+import org.xpect.parameter.IParameterParser.IParsedParameterProvider;
+import org.xpect.util.IRegion;
+import org.xpect.util.Region;
 
 import com.google.common.base.Joiner;
 import com.google.common.base.Preconditions;
@@ -16,7 +21,7 @@ import com.google.common.base.Preconditions;
 /**
  * @author Moritz Eysholdt - Initial contribution and API
  */
-public class AbstractExpectation implements IParameterProvider {
+public class AbstractExpectation implements IParsedParameterProvider {
 	private final String document;
 	private final int length;
 	private final int offset;
@@ -85,5 +90,13 @@ public class AbstractExpectation implements IParameterProvider {
 		String before = document.substring(0, offset);
 		String after = document.substring(offset + length, document.length());
 		return before + indented + after;
+	}
+
+	public IRegion getClaimedRegion() {
+		return new Region(offset, length);
+	}
+
+	public List<IRegion> getSemanticRegions() {
+		return Collections.<IRegion> singletonList(new Region(offset, length));
 	}
 }

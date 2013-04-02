@@ -22,9 +22,6 @@ import org.xpect.expectation.ActualCollection.ActualItem;
 import org.xpect.expectation.ActualCollection.ToString;
 import org.xpect.expectation.ExpectationCollection.ExpectationItem;
 import org.xpect.expectation.LinesExpectation.LinesExpectationParser;
-import org.xpect.parameter.IParameterParser;
-import org.xpect.parameter.IParameterProvider;
-import org.xpect.parameter.IParameterParser.IClaimedRegion;
 import org.xpect.parameter.IParameterParser.ISingleParameterParser;
 import org.xpect.parameter.IParameterParser.SingleParameterParser;
 import org.xpect.util.IRegion;
@@ -119,7 +116,7 @@ public @interface LinesExpectation {
 			return annotation;
 		}
 
-		public IParameterProvider parseRegion(XpectInvocation invocation, int paramIndex, List<IClaimedRegion> claims) {
+		public IParsedParameterProvider parseRegion(XpectInvocation invocation, int paramIndex, List<IClaimedRegion> claims) {
 			IRegion region = claimRegion(invocation, paramIndex);
 			if (region != null) {
 				String document = invocation.getFile().getDocument();

@@ -62,9 +62,9 @@ public class XpectTestRunner extends AbstractTestRunner {
 		this.method = method;
 	}
 
-	protected List<List<IParameterProvider>> collectAllParameters() throws Exception {
+	protected List<List<? extends IParameterProvider>> collectAllParameters() throws Exception {
 		List<IClaimedRegion> claimedRegions = collectClaimedRegions();
-		List<List<IParameterProvider>> result = Lists.newArrayList();
+		List<List<? extends IParameterProvider>> result = Lists.newArrayList();
 		List<IParameterProvider> first = null;
 		for (int i = 0; i < method.getParameterCount(); i++) {
 			ISingleParameterParser claimer = method.getSingleParameterProviders().get(i);
@@ -113,12 +113,12 @@ public class XpectTestRunner extends AbstractTestRunner {
 		return null;
 	}
 
-	protected List<IParameterProvider> collectProposedParameters(List<List<IParameterProvider>> allParams,
+	protected List<IParameterProvider> collectProposedParameters(List<List<? extends IParameterProvider>> allParams,
 			Map<Class<? extends Annotation>, IParameterProvider> setupValues, List<IParameterAdapter> adapter) {
 		List<IParameterProvider> result = Arrays.asList(new IParameterProvider[method.getParameterCount()]);
 		for (int i = 0; i < method.getParameterCount(); i++) {
 			List<IParameterProvider> candidates = Lists.newArrayList();
-			for (List<IParameterProvider> col : allParams)
+			for (List<? extends IParameterProvider> col : allParams)
 				if (col.get(i) != null)
 					candidates.add(col.get(i));
 			for (Annotation ann : method.getJavaMethod().getParameterAnnotations()[i]) {
@@ -147,7 +147,7 @@ public class XpectTestRunner extends AbstractTestRunner {
 
 	@Override
 	protected void runInternal(IXpectRunnerSetup<Object, Object, Object, Object> setup, SetupContext ctx) throws Throwable {
-		List<List<IParameterProvider>> allParameters = collectAllParameters();
+		List<List<? extends IParameterProvider>> allParameters = collectAllParameters();
 		Object test = getInvocation().getMethod().getTest().getJavaClass().newInstance();
 		// ctx.setAllParameters(allParameters);
 		ctx.setXpectInvocation(getInvocation());

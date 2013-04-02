@@ -17,9 +17,6 @@ import org.eclipse.xtext.util.internal.FormattingMigrator;
 import org.junit.ComparisonFailure;
 import org.xpect.XpectInvocation;
 import org.xpect.expectation.StringExpectation.StringExpectationParser;
-import org.xpect.parameter.IParameterParser;
-import org.xpect.parameter.IParameterProvider;
-import org.xpect.parameter.IParameterParser.IClaimedRegion;
 import org.xpect.parameter.IParameterParser.ISingleParameterParser;
 import org.xpect.parameter.IParameterParser.SingleParameterParser;
 import org.xpect.util.IRegion;
@@ -82,7 +79,7 @@ public @interface StringExpectation {
 			return annotation;
 		}
 
-		public IParameterProvider parseRegion(XpectInvocation invocation, int paramIndex, List<IClaimedRegion> claims) {
+		public IParsedParameterProvider parseRegion(XpectInvocation invocation, int paramIndex, List<IClaimedRegion> claims) {
 			IRegion region = claimRegion(invocation, paramIndex);
 			if (region != null) {
 				String document = invocation.getFile().getDocument();

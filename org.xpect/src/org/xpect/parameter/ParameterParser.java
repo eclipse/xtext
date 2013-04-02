@@ -32,6 +32,7 @@ import org.eclipse.xtext.util.formallang.StringProduction.ProdElement;
 import org.xpect.XjmXpectMethod;
 import org.xpect.XpectInvocation;
 import org.xpect.parameter.IParameterParser.IMultiParameterParser;
+import org.xpect.parameter.IParameterParser.IParsedParameterProvider;
 import org.xpect.parameter.IParameterParser.MultiParameterParser;
 import org.xpect.parameter.ParameterParser.ParameterParserImpl;
 import org.xpect.util.IRegion;
@@ -128,11 +129,11 @@ public @interface ParameterParser {
 			this.annotation = annotation;
 		}
 
-		protected List<IParameterProvider> associateParameterValues(XpectInvocation invocation, Map<String, IParameterProvider> parsedParams) {
+		protected List<IParsedParameterProvider> mapNameToIndex(XpectInvocation invocation, Map<String, IParsedParameterProvider> params) {
 			XjmXpectMethod method = (XjmXpectMethod) invocation.getMethod();
-			IParameterProvider[] result = new IParameterProvider[method.getParameterCount()];
+			IParsedParameterProvider[] result = new IParsedParameterProvider[method.getParameterCount()];
 			for (int i = 0; i < result.length; i++)
-				result[i] = parsedParams.get("arg" + i);
+				result[i] = params.get("arg" + i);
 			return Arrays.asList(result);
 		}
 
@@ -145,21 +146,22 @@ public @interface ParameterParser {
 			return new Region(start, end - start);
 		}
 
-		protected IParameterProvider convertValue(XpectInvocation invocation, Token token, String value) {
+		protected IParsedParameterProvider convertValue(XpectInvocation invocation, Token token, String value, IRegion claim, int offset) {
+			Region semantic = new Region(offset, value.length());
 			switch (token) {
 			case OFFSET:
-				return new MatchingOffsetProvider(invocation, value);
+				return new MatchingOffsetProvider(invocation, value, claim, semantic);
 			case INT:
-				return new IntegerProvider(value);
+				return new ParsedIntegerProvider(value, claim, semantic);
 			case ID:
 			case STRING:
 			case TEXT:
-				return new ParameterProvider(new String(value));
+				return new ParsedParameterProvider(new String(value), claim, semantic);
 			}
 			throw new RuntimeException();
 		}
 
-		protected String findParameterString(XpectInvocation invocation, List<IClaimedRegion> claims) {
+		protected IRegion findParameterRegion(XpectInvocation invocation, List<IClaimedRegion> claims) {
 			int start = 0, end = 0;
 			List<IClaimedRegion> otherClaims = Lists.newArrayList();
 			for (IClaimedRegion claim : claims)
@@ -171,7 +173,7 @@ public @interface ParameterParser {
 			for (IClaimedRegion claim : otherClaims)
 				if (end > claim.getOffset())
 					end = claim.getOffset();
-			return invocation.getFile().getDocument().substring(start, end).trim();
+			return new Region(start, end - start);
 		}
 
 		public ParameterParser getAnnotation() {
@@ -187,9 +189,11 @@ public @interface ParameterParser {
 			return result;
 		}
 
-		protected Map<String, IParameterProvider> parseParams(String paramSyntax, XpectInvocation invocation, final String text) {
+		protected Map<String, IParsedParameterProvider> parseParams(String paramSyntax, XpectInvocation invocation, IRegion claim) {
 			if (Strings.isEmpty(paramSyntax))
 				return Collections.emptyMap();
+			String document = invocation.getFile().getDocument();
+			final String text = document.substring(claim.getOffset(), claim.getOffset() + claim.getLength());
 			Nfa<ProdElement> nfa = getParameterNfa(paramSyntax);
 			List<BacktrackItem> trace = new NfaUtil().backtrack(nfa, new BacktrackItem(0),
 					new BacktrackHandler<ProdElement, BacktrackItem>() {
@@ -225,33 +229,38 @@ public @interface ParameterParser {
 							return followers;
 						}
 					});
-			Map<String, IParameterProvider> result = Maps.newHashMap();
+			Map<String, IParsedParameterProvider> result = Maps.newHashMap();
 			if (trace != null && !trace.isEmpty()) {
 				for (BacktrackItem item : trace)
 					if (item.token != null && item.token.getName() != null) {
 						String key = item.token.getName();
-						result.put(key, convertValue(invocation, Token.valueOf(item.token.getValue()), item.value));
+						Token token = Token.valueOf(item.token.getValue());
+						result.put(key, convertValue(invocation, token, item.value, claim, claim.getOffset() + item.offset));
 					}
 				return result;
 			}
 			throw new RuntimeException("could not parse '" + text + "' with grammar '" + paramSyntax + "'");
 		}
 
-		public List<IParameterProvider> parseRegion(XpectInvocation invocation, List<IClaimedRegion> claims) {
-			String paramString = findParameterString(invocation, claims);
-			Map<String, IParameterProvider> parsedParams = parseParams(annotation.syntax(), invocation, paramString);
-			return associateParameterValues(invocation, parsedParams);
+		public List<IParsedParameterProvider> parseRegion(XpectInvocation invocation, List<IClaimedRegion> claims) {
+			IRegion claim = findParameterRegion(invocation, claims);
+			Map<String, IParsedParameterProvider> parsedParams = parseParams(annotation.syntax(), invocation, claim);
+			return mapNameToIndex(invocation, parsedParams);
 		}
 	}
 
-	public static class MatchingOffsetProvider extends AbstractOffsetProvider {
+	public static class MatchingOffsetProvider extends AbstractOffsetProvider implements IParsedParameterProvider {
 		protected final XpectInvocation invocation;
 		protected final String value;
+		protected final IRegion claim;
+		protected final IRegion semantic;
 
-		public MatchingOffsetProvider(XpectInvocation invocation, String value) {
+		public MatchingOffsetProvider(XpectInvocation invocation, String value, IRegion claim, IRegion semantic) {
 			super();
 			this.invocation = invocation;
 			this.value = value;
+			this.claim = claim;
+			this.semantic = semantic;
 		}
 
 		public XpectInvocation getInvocation() {
@@ -279,6 +288,14 @@ public @interface ParameterParser {
 				return off;
 			} else
 				throw new RuntimeException("OFFSET '" + val + "' not found");
+		}
+
+		public IRegion getClaimedRegion() {
+			return claim;
+		}
+
+		public List<IRegion> getSemanticRegions() {
+			return Collections.singletonList(semantic);
 		}
 
 	}

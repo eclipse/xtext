@@ -28,13 +28,19 @@ public interface IParameterParser {
 	public interface IMultiParameterParser extends IParameterParser {
 		IRegion claimRegion(XpectInvocation invocation);
 
-		List<IParameterProvider> parseRegion(XpectInvocation invocation, List<IClaimedRegion> claims);
+		List<IParsedParameterProvider> parseRegion(XpectInvocation invocation, List<IClaimedRegion> claims);
+	}
+
+	public interface IParsedParameterProvider extends IParameterProvider {
+		IRegion getClaimedRegion();
+
+		List<IRegion> getSemanticRegions();
 	}
 
 	public interface ISingleParameterParser extends IParameterParser {
 		IRegion claimRegion(XpectInvocation invocation, int paramIndex);
 
-		IParameterProvider parseRegion(XpectInvocation invocation, int paramIndex, List<IClaimedRegion> claims);
+		IParsedParameterProvider parseRegion(XpectInvocation invocation, int paramIndex, List<IClaimedRegion> claims);
 	}
 
 	@Retention(RetentionPolicy.RUNTIME)
