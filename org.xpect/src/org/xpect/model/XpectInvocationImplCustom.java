@@ -4,9 +4,12 @@ import java.util.Arrays;
 import java.util.List;
 
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.xtext.common.types.JvmOperation;
+import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.xpect.XjmSetup;
 import org.xpect.XjmTest;
 import org.xpect.XjmXpectMethod;
+import org.xpect.XpectConstants;
 import org.xpect.parameter.IParameterAdapter;
 import org.xpect.parameter.IParameterParser;
 import org.xpect.parameter.IParameterParser.IClaimedRegion;
@@ -14,9 +17,12 @@ import org.xpect.parameter.IParameterParser.IMultiParameterParser;
 import org.xpect.parameter.IParameterParser.IParsedParameterProvider;
 import org.xpect.parameter.IParameterParser.ISingleParameterParser;
 import org.xpect.parameter.IParameterProvider;
+import org.xpect.registry.ILanguageInfo;
+import org.xpect.util.IJavaReflectAccess;
 import org.xpect.util.IRegion;
 
 import com.google.common.collect.Lists;
+import com.google.inject.Injector;
 
 public class XpectInvocationImplCustom extends XpectInvocationImpl {
 	public static class ClaimedRegion implements IClaimedRegion {
@@ -63,15 +69,16 @@ public class XpectInvocationImplCustom extends XpectInvocationImpl {
 
 	protected List<IClaimedRegion> collectClaimedRegions() {
 		List<IClaimedRegion> result = Lists.newArrayList();
-		for (int i = 0; i < method.getParameterCount(); i++) {
-			ISingleParameterParser claimer = method.getSingleParameterProviders().get(i);
+		XjmXpectMethod xpectMethod = getMethod();
+		for (int i = 0; i < xpectMethod.getParameterCount(); i++) {
+			ISingleParameterParser claimer = xpectMethod.getSingleParameterProviders().get(i);
 			if (claimer != null) {
 				IRegion claim = claimer.claimRegion(this, i);
 				if (claim != null)
 					result.add(new ClaimedRegion(claimer, claim));
 			}
 		}
-		for (IMultiParameterParser claimer : method.getMultiParameterProviders()) {
+		for (IMultiParameterParser claimer : xpectMethod.getMultiParameterProviders()) {
 			IRegion claim = claimer.claimRegion(this);
 			if (claim != null)
 				result.add(new ClaimedRegion(claimer, claim));
@@ -80,26 +87,27 @@ public class XpectInvocationImplCustom extends XpectInvocationImpl {
 	}
 
 	protected List<List<IParsedParameterProvider>> collectParsedParameters(List<IClaimedRegion> claimedRegions) {
+		XjmXpectMethod xpectMethod = getMethod();
 		List<List<IParsedParameterProvider>> result = Lists.newArrayList();
 		List<IParsedParameterProvider> first = null;
-		for (int i = 0; i < method.getParameterCount(); i++) {
-			ISingleParameterParser claimer = method.getSingleParameterProviders().get(i);
+		for (int i = 0; i < xpectMethod.getParameterCount(); i++) {
+			ISingleParameterParser claimer = xpectMethod.getSingleParameterProviders().get(i);
 			if (claimer != null) {
 				if (first == null)
-					first = Arrays.asList(new IParsedParameterProvider[method.getParameterCount()]);
+					first = Arrays.asList(new IParsedParameterProvider[xpectMethod.getParameterCount()]);
 				IParsedParameterProvider value = claimer.parseRegion(this, i, claimedRegions);
 				first.set(i, value);
 			}
 		}
 		if (first != null)
 			result.add(first);
-		for (IMultiParameterParser claimer : method.getMultiParameterProviders())
+		for (IMultiParameterParser claimer : xpectMethod.getMultiParameterProviders())
 			result.add(claimer.parseRegion(this, claimedRegions));
 		return result;
 	}
 
 	protected IParameterProvider collectProposedParameter(int paramIndex, List<IParameterProvider> candidates) {
-		Class<?> expectedType = method.getJavaMethod().getParameterTypes()[paramIndex];
+		Class<?> expectedType = getParameterType(paramIndex);
 		for (IParameterProvider tp : candidates)
 			if (tp.canProvide(expectedType))
 				return tp;
@@ -111,9 +119,23 @@ public class XpectInvocationImplCustom extends XpectInvocationImpl {
 		return null;
 	}
 
+	protected Class<?> getParameterType(int paramIndex) {
+		Injector injector = ILanguageInfo.Registry.INSTANCE.getLanguageByFileExtension(XpectConstants.XPECT_FILE_EXT).getInjector();
+		IJavaReflectAccess reflectAccess = injector.getInstance(IJavaReflectAccess.class);
+		JvmOperation jvmMethod = getMethod().getJvmMethod();
+		if (jvmMethod == null || jvmMethod.eIsProxy())
+			return null;
+		JvmTypeReference parameterType = jvmMethod.getParameters().get(paramIndex).getParameterType();
+		if (parameterType == null || parameterType.eIsProxy() || parameterType.getType() == null)
+			return null;
+		Class<?> expectedType = reflectAccess.getRawType(parameterType.getType());
+		return expectedType;
+	}
+
 	protected List<IParameterProvider> collectProposedParameters(List<List<IParsedParameterProvider>> allParams) {
-		List<IParameterProvider> result = Arrays.asList(new IParameterProvider[method.getParameterCount()]);
-		for (int i = 0; i < method.getParameterCount(); i++) {
+		int count = getMethod().getParameterCount();
+		List<IParameterProvider> result = Arrays.asList(new IParameterProvider[count]);
+		for (int i = 0; i < count; i++) {
 			List<IParameterProvider> candidates = Lists.newArrayList();
 			for (List<? extends IParameterProvider> col : allParams)
 				if (col.get(i) != null)

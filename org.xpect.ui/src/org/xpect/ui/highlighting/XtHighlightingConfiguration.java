@@ -49,7 +49,7 @@ public class XtHighlightingConfiguration implements IHighlightingConfiguration {
 
 	public TextStyle defaultTextStyle() {
 		TextStyle textStyle = new TextStyle();
-		textStyle.setBackgroundColor(new RGB(183, 247, 215));
+		textStyle.setBackgroundColor(new RGB(195, 250, 223));
 		textStyle.setColor(new RGB(0, 0, 0));
 		return textStyle;
 	}

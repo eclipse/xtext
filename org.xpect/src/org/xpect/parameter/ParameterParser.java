@@ -200,7 +200,7 @@ public @interface ParameterParser {
 					new BacktrackHandler<ProdElement, BacktrackItem>() {
 						public BacktrackItem handle(ProdElement state, BacktrackItem previous) {
 							if (Strings.isEmpty(state.getValue()))
-								return previous;
+								return new BacktrackItem(previous.offset, state, state.getValue());
 							if (Strings.isEmpty(state.getName())) {
 								if (text.regionMatches(previous.offset, state.getValue(), 0, state.getValue().length())) {
 									int newOffset = previous.offset + state.getValue().length();
@@ -231,13 +231,16 @@ public @interface ParameterParser {
 						}
 					});
 			Map<String, IParsedParameterProvider> result = Maps.newHashMap();
+			int offset = 0;
 			if (trace != null && !trace.isEmpty()) {
-				for (BacktrackItem item : trace)
+				for (BacktrackItem item : trace) {
 					if (item.token != null && item.token.getName() != null) {
 						String key = item.token.getName();
 						Token token = Token.valueOf(item.token.getValue());
-						result.put(key, convertValue(invocation, token, item.value, claim, claim.getOffset() + item.offset));
+						result.put(key, convertValue(invocation, token, item.value, claim, claim.getOffset() + offset));
 					}
+					offset = item.offset;
+				}
 				return result;
 			}
 			throw new RuntimeException("could not parse '" + text + "' with grammar '" + paramSyntax + "'");

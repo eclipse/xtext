@@ -63,7 +63,13 @@ public class UIJavaReflectAccess implements IJavaReflectAccess {
 	}
 
 	private String getBundleNameFromJar(Manifest manifest) {
-		return manifest.getMainAttributes().getValue(BUNDLE_SYMBOLIC_NAME);
+		String name = manifest.getMainAttributes().getValue(BUNDLE_SYMBOLIC_NAME);
+		if (name != null) {
+			int i = name.indexOf(';');
+			if (i >= 0)
+				name = name.substring(0, i);
+		}
+		return name;
 	}
 
 	private String getBundleNameFromJar(File file) {

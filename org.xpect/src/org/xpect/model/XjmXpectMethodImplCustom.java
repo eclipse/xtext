@@ -38,7 +38,10 @@ public class XjmXpectMethodImplCustom extends XjmXpectMethodImpl {
 
 	@Override
 	public int getParameterCount() {
-		return getJavaMethod().getParameterTypes().length;
+		JvmOperation method = getJvmMethod();
+		if (method != null && !method.eIsProxy())
+			return method.getParameters().size();
+		return 0;
 	}
 
 	@Override
