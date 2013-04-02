@@ -8,10 +8,10 @@
 package org.xpect.examples.textile;
 
 import org.junit.runner.RunWith;
-import org.xpect.parameters.CommaSeparatedValuesExpectation;
-import org.xpect.parameters.ICommaSeparatedValuesExpectation;
-import org.xpect.parameters.IStringExpectation;
-import org.xpect.parameters.StringExpectation;
+import org.xpect.expectation.CommaSeparatedValuesExpectation;
+import org.xpect.expectation.ICommaSeparatedValuesExpectation;
+import org.xpect.expectation.IStringExpectation;
+import org.xpect.expectation.StringExpectation;
 import org.xpect.runner.Xpect;
 import org.xpect.runner.XpectRunner;
 import org.xpect.runner.XpectTestFiles;
