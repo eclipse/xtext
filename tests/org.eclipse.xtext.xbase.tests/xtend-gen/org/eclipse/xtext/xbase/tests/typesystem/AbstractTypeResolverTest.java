@@ -1740,6 +1740,21 @@ public abstract class AbstractTypeResolverTest<Reference extends Object> extends
   }
   
   @Test
+  public void testEntrySet_01() throws Exception {
+    this.resolvesTo("(null as java.util.Map<? extends String,? extends String>).entrySet", "Set<? extends Entry<? extends String, ? extends String>>");
+  }
+  
+  @Test
+  public void testEntrySet_02() throws Exception {
+    this.resolvesTo("(null as java.util.Map<String, String>).entrySet", "Set<Entry<String, String>>");
+  }
+  
+  @Test
+  public void testEntrySet_03() throws Exception {
+    this.resolvesTo("(null as java.util.Map<Iterable<? extends String>, Iterable<? extends String>>).entrySet", "Set<Entry<Iterable<? extends String>, Iterable<? extends String>>>");
+  }
+  
+  @Test
   public void testEMap_01() throws Exception {
     this.resolvesTo("{ \n          val eMap = new org.eclipse.emf.common.util.BasicEMap<Integer, String>()\n\t\t  eMap.map[ getKey ].head\n         }", "Integer");
   }

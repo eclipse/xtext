@@ -275,8 +275,63 @@ public class TypeConformanceValidatorTest extends AbstractXbaseTestCase {
 				"Type mismatch: cannot convert from element type Object to String");
 	}
 	
-	@Test public void testForLoop_08() throws Exception {
+	@Test 
+	public void testForLoop_08() throws Exception {
 		assertNoConformanceError("{ val java.util.Set set = newHashSet() for(Object o : set) o }");
+	}
+	
+	@Test 
+	@Ignore("https://bugs.eclipse.org/bugs/show_bug.cgi?id=404706")
+	public void testEntrySetAddAll_01() throws Exception {
+		assertConformanceError("{ val java.util.Map<? extends String, ? extends String> it = null entrySet.addAll(entrySet) }",
+				XbasePackage.Literals.XFEATURE_CALL, "TODO");
+	}
+	
+	@Test 
+	public void testEntrySetAddAll_02() throws Exception {
+		assertConformanceError(
+				"{" +
+				"  val java.util.Map<? extends String, ? extends String> it = null" +
+				"  val java.util.Set<java.util.Map$Entry<? extends String, ? extends String>> set = entrySet" +
+				"}",
+				XbasePackage.Literals.XFEATURE_CALL, 
+				"Type mismatch: cannot convert from Set<? extends Entry<? extends String, ? extends String>> to Set<Entry<? extends String, ? extends String>>");
+	}
+	
+	@Test
+	@Ignore("https://bugs.eclipse.org/bugs/show_bug.cgi?id=404706")
+	public void testEntrySetAddAll_03() throws Exception {
+		assertConformanceError(
+				"{" +
+				"  val java.util.Map<? extends String, ? extends String> it = null" +
+				"  val set = entrySet" +
+				"  set.addAll(set)" +
+				"}",
+				XbasePackage.Literals.XFEATURE_CALL, 
+				"TODO");
+	}
+	
+	@Test 
+	@Ignore("https://bugs.eclipse.org/bugs/show_bug.cgi?id=404706")
+	public void testEntrySetAddAll_04() throws Exception {
+		assertConformanceError(
+				"{" +
+				"  val java.util.Set<? extends java.util.Map$Entry<? extends String, ? extends String>> set = null" +
+				"  set.addAll(set)" +
+				"}",
+				XbasePackage.Literals.XFEATURE_CALL, 
+				"Type mismatch: cannot convert from Set<? extends Entry<? extends String, ? extends String>> to Set<Entry<? extends String, ? extends String>>");
+	}
+	
+	@Test 
+	public void testEntrySetAdd_01() throws Exception {
+		assertConformanceError(
+				"{" +
+				"  val java.util.Set<? extends java.util.Map$Entry<? extends String, ? extends String>> set = null" +
+				"  set.add(set.head)" +
+				"}",
+				XbasePackage.Literals.XMEMBER_FEATURE_CALL, 
+				"Type mismatch: type Entry<? extends String, ? extends String> is not applicable at this location");
 	}
 	
 	@Test public void testReturn_01() throws Exception {

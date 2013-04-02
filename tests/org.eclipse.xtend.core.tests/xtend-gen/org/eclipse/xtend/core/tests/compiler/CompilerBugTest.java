@@ -17,6 +17,84 @@ import org.junit.Test;
 @SuppressWarnings("all")
 public class CompilerBugTest extends AbstractXtendCompilerTest {
   @Test
+  public void testBug384313() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("class MyMap<K, V> extends java.util.HashMap<K, V> {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("override putAll(java.util.Map<? extends K,? extends V> t) {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("t.entrySet.forEach [");
+    _builder.newLine();
+    _builder.append("\t\t\t");
+    _builder.append("this.put(it.key, it.value)");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("]");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("import java.util.HashMap;");
+    _builder_1.newLine();
+    _builder_1.append("import java.util.Map;");
+    _builder_1.newLine();
+    _builder_1.append("import java.util.Map.Entry;");
+    _builder_1.newLine();
+    _builder_1.append("import java.util.Set;");
+    _builder_1.newLine();
+    _builder_1.append("import org.eclipse.xtext.xbase.lib.IterableExtensions;");
+    _builder_1.newLine();
+    _builder_1.append("import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;");
+    _builder_1.newLine();
+    _builder_1.newLine();
+    _builder_1.append("@SuppressWarnings(\"all\")");
+    _builder_1.newLine();
+    _builder_1.append("public class MyMap<K extends Object, V extends Object> extends HashMap<K,V> {");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("public void putAll(final Map<? extends K,? extends V> t) {");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("Set<? extends Entry<? extends K,? extends V>> _entrySet = t.entrySet();");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("final Procedure1<Entry<? extends K,? extends V>> _function = new Procedure1<Entry<? extends K,? extends V>>() {");
+    _builder_1.newLine();
+    _builder_1.append("        ");
+    _builder_1.append("public void apply(final Entry<? extends K,? extends V> it) {");
+    _builder_1.newLine();
+    _builder_1.append("          ");
+    _builder_1.append("K _key = it.getKey();");
+    _builder_1.newLine();
+    _builder_1.append("          ");
+    _builder_1.append("V _value = it.getValue();");
+    _builder_1.newLine();
+    _builder_1.append("          ");
+    _builder_1.append("MyMap.this.put(_key, _value);");
+    _builder_1.newLine();
+    _builder_1.append("        ");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("      ");
+    _builder_1.append("};");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("IterableExtensions.forEach(_entrySet, _function);");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    this.assertCompilesTo(_builder, _builder_1);
+  }
+  
+  @Test
   public void testBug403990() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("class C {");

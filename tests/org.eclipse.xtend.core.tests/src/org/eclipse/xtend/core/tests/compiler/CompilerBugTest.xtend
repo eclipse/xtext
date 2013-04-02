@@ -15,6 +15,41 @@ import org.junit.Test
 class CompilerBugTest extends AbstractXtendCompilerTest {
 	
 	@Test
+	def testBug384313() {
+		assertCompilesTo('''
+			class MyMap<K, V> extends java.util.HashMap<K, V> {
+				override putAll(java.util.Map<? extends K,? extends V> t) {
+					t.entrySet.forEach [
+						this.put(it.key, it.value)
+					]
+				}
+			}
+		''', '''
+			import java.util.HashMap;
+			import java.util.Map;
+			import java.util.Map.Entry;
+			import java.util.Set;
+			import org.eclipse.xtext.xbase.lib.IterableExtensions;
+			import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
+			
+			@SuppressWarnings("all")
+			public class MyMap<K extends Object, V extends Object> extends HashMap<K,V> {
+			  public void putAll(final Map<? extends K,? extends V> t) {
+			    Set<? extends Entry<? extends K,? extends V>> _entrySet = t.entrySet();
+			    final Procedure1<Entry<? extends K,? extends V>> _function = new Procedure1<Entry<? extends K,? extends V>>() {
+			        public void apply(final Entry<? extends K,? extends V> it) {
+			          K _key = it.getKey();
+			          V _value = it.getValue();
+			          MyMap.this.put(_key, _value);
+			        }
+			      };
+			    IterableExtensions.forEach(_entrySet, _function);
+			  }
+			}
+		''')
+	}
+	
+	@Test
 	def testBug403990() {
 		assertCompilesTo('''
 			class C {
