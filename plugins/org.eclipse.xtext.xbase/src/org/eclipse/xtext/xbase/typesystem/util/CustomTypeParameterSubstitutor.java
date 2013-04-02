@@ -91,6 +91,11 @@ public abstract class CustomTypeParameterSubstitutor extends TypeParameterSubsti
 				}
 			}
 		}
+		return doVisitParameterizedTypeReference(reference, type, visiting);
+	}
+
+	@Override
+	protected LightweightTypeReference doVisitParameterizedTypeReference(ParameterizedTypeReference reference, JvmType type, ConstraintVisitingInfo visiting) {
 		ParameterizedTypeReference result = new ParameterizedTypeReference(getOwner(), type);
 		for(int i = 0; i < reference.getTypeArguments().size(); i++) {
 			LightweightTypeReference argument = reference.getTypeArguments().get(i);

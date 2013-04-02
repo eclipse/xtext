@@ -1611,6 +1611,19 @@ abstract class AbstractTypeResolverTest<Reference> extends AbstractXbaseTestCase
     @Test def void testBlockExpression_09() throws Exception {
 		"{val Object x = if (false) return; x }".resolvesTo("Object")
 	}
+    
+    @Test def void testEntrySet_01() throws Exception {
+		"(null as java.util.Map<? extends String,? extends String>).entrySet".resolvesTo("Set<? extends Entry<? extends String, ? extends String>>")
+	}
+	
+    @Test def void testEntrySet_02() throws Exception {
+		"(null as java.util.Map<String, String>).entrySet".resolvesTo("Set<Entry<String, String>>")
+	}
+	
+    @Test def void testEntrySet_03() throws Exception {
+		"(null as java.util.Map<Iterable<? extends String>, Iterable<? extends String>>).entrySet"
+			.resolvesTo("Set<Entry<Iterable<? extends String>, Iterable<? extends String>>>")
+	}
 	
 	@Test def void testEMap_01() throws Exception {
 		"{ 

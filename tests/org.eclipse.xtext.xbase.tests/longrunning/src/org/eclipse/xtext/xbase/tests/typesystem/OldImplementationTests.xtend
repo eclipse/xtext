@@ -42,7 +42,7 @@ class OldAPITypeResolverTest extends AbstractOldAPITypeResolverTest {
             test3
         }".resolvesTo("List<Pair<Integer, Pair<Procedure3<? super Integer, ? super Double, ? super Boolean>, Function2<? super byte[], ? super Object, ? extends double[]>>>>")
     }
-	
+    
 	@Ignore("not a timeout but too slow")
 	@Test
 	override testFeatureCall_15_b() throws Exception {
@@ -197,6 +197,10 @@ class OldAPITypeResolverTest extends AbstractOldAPITypeResolverTest {
 	@Test
 	override testFeatureCall_25_d() throws Exception {
 		fail("not a timeout but too slow")
+	}
+	
+	@Ignore("fails in old implementation") @Test override testEntrySet_01() throws Exception {
+		fail("fails in old implementation")
 	}
 	
 	@Ignore("fails in old implementation") @Test override testAssignment_05() throws Exception {

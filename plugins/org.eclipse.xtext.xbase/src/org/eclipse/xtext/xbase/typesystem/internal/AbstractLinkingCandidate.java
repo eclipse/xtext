@@ -35,6 +35,7 @@ import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.OwnedConverter;
 import org.eclipse.xtext.xbase.typesystem.references.ParameterizedTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.UnboundTypeReference;
+import org.eclipse.xtext.xbase.typesystem.references.WildcardTypeReference;
 import org.eclipse.xtext.xbase.typesystem.util.BoundTypeArgumentSource;
 import org.eclipse.xtext.xbase.typesystem.util.ConstraintVisitingInfo;
 import org.eclipse.xtext.xbase.typesystem.util.ExpectationTypeParameterHintCollector;
@@ -213,9 +214,11 @@ public abstract class AbstractLinkingCandidate<Expression extends XExpression> i
 			
 			TypeParameterSubstitutor<?> substitutor = null;
 			if (!isRawTypeContext()) {
-				Map<JvmTypeParameter, LightweightMergedBoundTypeArgument> declaratorParameterMapping = getDeclaratorParameterMapping();
+				final Map<JvmTypeParameter, LightweightMergedBoundTypeArgument> declaratorParameterMapping = getDeclaratorParameterMapping();
 				substitutor = new TypeParameterByUnboundSubstitutor(declaratorParameterMapping, expectation.getReferenceOwner()) {
 	
+					private boolean wasCapturedWildcard = false;
+					
 					@Override
 					protected UnboundTypeReference createUnboundTypeReference(JvmTypeParameter type) {
 						UnboundTypeReference result = state.getResolvedTypes().createUnboundTypeReference(expression, type);
@@ -237,18 +240,46 @@ public abstract class AbstractLinkingCandidate<Expression extends XExpression> i
 					protected LightweightMergedBoundTypeArgument getBoundTypeArgument(JvmTypeParameter typeParameter,
 							ConstraintVisitingInfo info) {
 						LightweightMergedBoundTypeArgument result = super.getBoundTypeArgument(typeParameter, info);
-						if (result != null && result.getVariance() == VarianceInfo.INVARIANT) {
+						if (result != null) {
 							LightweightTypeReference typeReference = result.getTypeReference();
-							if (typeReference.isWildcard() && typeReference.getLowerBoundSubstitute().isAny() && typeReference.getUpperBoundSubstitute().isType(Object.class)) {
-								// assume unbound wildcard - use the constraints of the respective type parameter
-								if (!typeParameter.getConstraints().isEmpty()) {
-									JvmTypeConstraint constraint = typeParameter.getConstraints().get(0);
-									if (constraint instanceof JvmUpperBound) {
-										LightweightTypeReference reference = new OwnedConverter(getOwner()).toLightweightReference(constraint.getTypeReference());
-										return new LightweightMergedBoundTypeArgument(reference, VarianceInfo.OUT);
+							if (result.getVariance() == VarianceInfo.INVARIANT) {
+								if (typeReference.isWildcard() && typeReference.getLowerBoundSubstitute().isAny() && typeReference.getUpperBoundSubstitute().isType(Object.class)) {
+									// assume unbound wildcard - use the constraints of the respective type parameter
+									if (!typeParameter.getConstraints().isEmpty()) {
+										JvmTypeConstraint constraint = typeParameter.getConstraints().get(0);
+										if (constraint instanceof JvmUpperBound) {
+											LightweightTypeReference reference = new OwnedConverter(getOwner()).toLightweightReference(constraint.getTypeReference());
+											return new LightweightMergedBoundTypeArgument(reference, VarianceInfo.OUT);
+										}
 									}
 								}
 							}
+							if (declaratorParameterMapping.containsKey(typeParameter) && typeReference.isWildcard()) {
+								wasCapturedWildcard = true;
+							}
+						}
+						return result;
+					}
+					
+					@Override
+					protected LightweightTypeReference doVisitParameterizedTypeReference(ParameterizedTypeReference reference, JvmType type,
+							ConstraintVisitingInfo visiting) {
+						boolean convertToWildcard = false;
+						ParameterizedTypeReference result = new ParameterizedTypeReference(getOwner(), type);
+						for(int i = 0; i < reference.getTypeArguments().size(); i++) {
+							wasCapturedWildcard = false;
+							LightweightTypeReference argument = reference.getTypeArguments().get(i);
+							visiting.pushInfo(type instanceof JvmTypeParameterDeclarator ? (JvmTypeParameterDeclarator) type : null, i);
+							LightweightTypeReference visitedArgument = argument.accept(this, visiting);
+							if (wasCapturedWildcard)
+								convertToWildcard = true;
+							wasCapturedWildcard = false;
+							result.addTypeArgument(visitedArgument);
+						}
+						if (convertToWildcard) {
+							WildcardTypeReference wildcard = new WildcardTypeReference(result.getOwner());
+							wildcard.addUpperBound(result);
+							return wildcard;
 						}
 						return result;
 					}

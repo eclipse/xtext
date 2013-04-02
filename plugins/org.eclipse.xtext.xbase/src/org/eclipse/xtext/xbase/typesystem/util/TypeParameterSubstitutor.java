@@ -13,6 +13,7 @@ import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
+import org.eclipse.xtext.common.types.JvmTypeParameterDeclarator;
 import org.eclipse.xtext.xbase.typesystem.references.AnyTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.ArrayTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.CompoundTypeReference;
@@ -99,7 +100,11 @@ public abstract class TypeParameterSubstitutor<Visiting> extends TypeReferenceVi
 			if (boundTypeArgument != null)
 				return boundTypeArgument;
 		}
-		ParameterizedTypeReference result = new ParameterizedTypeReference(getOwner(), reference.getType());
+		return doVisitParameterizedTypeReference(reference, type, visiting);
+	}
+	
+	protected LightweightTypeReference doVisitParameterizedTypeReference(ParameterizedTypeReference reference, JvmType type, Visiting visiting) {
+		ParameterizedTypeReference result = new ParameterizedTypeReference(getOwner(), type);
 		for(LightweightTypeReference argument: reference.getTypeArguments()) {
 			result.addTypeArgument(visitTypeArgument(argument, visiting));
 		}
