@@ -171,7 +171,7 @@
 											maven-compiler-plugin
 										</artifactId>
 										<versionRange>
-											[2.3.2,)
+											[3.0,)
 										</versionRange>
 										<goals>
 											<goal>compile</goal>
