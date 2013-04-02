@@ -17,6 +17,12 @@ package pkg1 {
 			x = 2
 			return x
 		}
+		
+		/* XPECT warnings ---
+			"Name should start with a lowercase" at "Prop1"
+			"Name should start with a lowercase" at "Prop2"
+		--- */
+		Prop1:String Prop2:int
 	}
 }
 
