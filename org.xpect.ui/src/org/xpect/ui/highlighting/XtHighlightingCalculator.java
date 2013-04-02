@@ -22,8 +22,13 @@ import org.eclipse.xtext.nodemodel.ILeafNode;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.editor.syntaxcoloring.IHighlightedPositionAcceptor;
 import org.eclipse.xtext.ui.editor.syntaxcoloring.ISemanticHighlightingCalculator;
+import org.xpect.XpectFile;
+import org.xpect.XpectInvocation;
+import org.xpect.parameter.IParameterParser.IParsedParameterProvider;
+import org.xpect.parameter.IParameterProvider;
 import org.xpect.registry.DefaultBinding;
 import org.xpect.ui.util.XpectFileAccess;
+import org.xpect.util.IRegion;
 
 import com.google.common.collect.Maps;
 import com.google.inject.Inject;
@@ -77,7 +82,8 @@ public class XtHighlightingCalculator implements ISemanticHighlightingCalculator
 	}
 
 	protected void provideHighlightingForXpect(XtextResource resource, IHighlightedPositionAcceptor acceptor) {
-		ICompositeNode rootNode = XpectFileAccess.getXpectResource(resource).getParseResult().getRootNode();
+		XtextResource xpectResource = XpectFileAccess.getXpectResource(resource);
+		ICompositeNode rootNode = xpectResource.getParseResult().getRootNode();
 		for (ILeafNode node : rootNode.getLeafNodes()) {
 			EObject ele = node.getGrammarElement();
 			if (node.isHidden())
@@ -99,5 +105,12 @@ public class XtHighlightingCalculator implements ISemanticHighlightingCalculator
 				}
 			}
 		}
+		for (EObject obj : xpectResource.getContents())
+			if (obj instanceof XpectFile)
+				for (XpectInvocation inv : ((XpectFile) obj).getInvocations())
+					for (IParameterProvider prov : inv.getParameters())
+						if (prov instanceof IParsedParameterProvider)
+							for (IRegion region : ((IParsedParameterProvider) prov).getSemanticRegions())
+								acceptor.addPosition(region.getOffset(), region.getLength(), XtHighlightingConfiguration.DEFAULT_ID);
 	}
 }

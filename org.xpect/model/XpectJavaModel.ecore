@@ -46,18 +46,20 @@
   <eClassifiers xsi:type="ecore:EClass" name="XjmMethod" abstract="true">
     <eOperations name="getName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="test" eType="#//XjmTest"
-        resolveProxies="false" eOpposite="#//XjmTest/methods"/>
+        changeable="false" resolveProxies="false" eOpposite="#//XjmTest/methods"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="jvmMethod" eType="ecore:EClass ../../org.eclipse.xtext.common.types/model/JavaVMTypes.ecore#//JvmOperation"
         resolveProxies="false"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="javaMethod" eType="#//JavaMethod"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="javaMethod" eType="#//JavaMethod"
+        changeable="false"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="XjmTestMethod" eSuperTypes="#//XjmMethod"/>
   <eClassifiers xsi:type="ecore:EClass" name="XjmXpectMethod" eSuperTypes="#//XjmMethod">
     <eOperations name="getParameterCount" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="singleParameterProviders"
-        unique="false" upperBound="-1" eType="#//SingleParameterProvider" derived="true"/>
+        unique="false" upperBound="-1" eType="#//SingleParameterProvider" changeable="false"
+        derived="true"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="multiParameterProviders"
-        upperBound="-1" eType="#//MultiParameterProvider" derived="true"/>
+        upperBound="-1" eType="#//MultiParameterProvider" changeable="false" derived="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="NameToMethodEntry" instanceClassName="java.util.Map$Entry">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="key" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>

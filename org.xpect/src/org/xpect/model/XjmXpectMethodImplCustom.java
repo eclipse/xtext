@@ -1,67 +1,38 @@
 package org.xpect.model;
 
-import java.lang.reflect.Method;
-import java.util.Collections;
+import static org.xpect.util.JvmAnnotationUtil.newInstancesViaMetaAnnotation;
+
 import java.util.List;
 
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmOperation;
 import org.xpect.parameter.IParameterParser.IMultiParameterParser;
 import org.xpect.parameter.IParameterParser.ISingleParameterParser;
 import org.xpect.parameter.IParameterParser.MultiParameterParser;
 import org.xpect.parameter.IParameterParser.SingleParameterParser;
-import org.xpect.util.AnnotationUtil;
 
 public class XjmXpectMethodImplCustom extends XjmXpectMethodImpl {
 
-	@Override
-	public String toString() {
-		return "@Xpect public void " + getJvmMethod().getSimpleName() + "();";
+	protected List<IMultiParameterParser> findMultiParameterProvider(JvmOperation method) {
+		return newInstancesViaMetaAnnotation(method, IMultiParameterParser.class, MultiParameterParser.class);
 	}
 
-	@Override
-	public void setJvmMethod(JvmOperation newJvmMethod) {
-		super.getMultiParameterProviders().clear();
-		super.getSingleParameterProviders().clear();
-		super.setJvmMethod(newJvmMethod);
-	}
-
-	@Override
-	public void setJavaMethod(Method newJavaMethod) {
-		super.setJavaMethod(newJavaMethod);
-		EList<IMultiParameterParser> multiParameter = super.getMultiParameterProviders();
-		EList<ISingleParameterParser> singleParameter = super.getSingleParameterProviders();
-		multiParameter.clear();
-		singleParameter.clear();
-		if (newJavaMethod != null && newJavaMethod.getParameterTypes().length > 0) {
-			multiParameter.addAll(findMultiParameterProvider(newJavaMethod));
-			for (int i = 0; i < newJavaMethod.getParameterTypes().length; i++)
-				singleParameter.add(findSingleParameterProvider(newJavaMethod, i));
-		}
-	}
-
-	protected List<IMultiParameterParser> findMultiParameterProvider(Method method) {
-		if (method == null)
-			return Collections.emptyList();
-		return AnnotationUtil.newInstancesViaMetaAnnotation(method, MultiParameterParser.class, IMultiParameterParser.class);
-	}
-
-	protected ISingleParameterParser findSingleParameterProvider(Method method, int paramIndex) {
-		if (method == null)
-			return null;
-		List<ISingleParameterParser> handler = AnnotationUtil.newInstancesViaMetaAnnotation(method, paramIndex,
-				SingleParameterParser.class, ISingleParameterParser.class);
+	protected ISingleParameterParser findSingleParameterProvider(JvmFormalParameter parameter) {
+		List<ISingleParameterParser> handler = newInstancesViaMetaAnnotation(parameter, ISingleParameterParser.class,
+				SingleParameterParser.class);
 		if (handler.isEmpty())
 			return null;
 		if (handler.size() == 1)
 			return handler.get(0);
-		throw new RuntimeException("Method " + method + " has more than one annotation that is annotated with "
+		throw new RuntimeException("Method " + parameter + " has more than one annotation that is annotated with "
 				+ SingleParameterParser.class);
 	}
 
 	@Override
 	public EList<IMultiParameterParser> getMultiParameterProviders() {
-		getJavaMethod();
+		if (super.multiParameterProviders == null)
+			super.getMultiParameterProviders().addAll(findMultiParameterProvider(getJvmMethod()));
 		return super.getMultiParameterProviders();
 	}
 
@@ -72,8 +43,24 @@ public class XjmXpectMethodImplCustom extends XjmXpectMethodImpl {
 
 	@Override
 	public EList<ISingleParameterParser> getSingleParameterProviders() {
-		getJavaMethod();
+		if (super.singleParameterProviders == null) {
+			EList<ISingleParameterParser> providers = super.getSingleParameterProviders();
+			for (JvmFormalParameter param : getJvmMethod().getParameters())
+				providers.add(findSingleParameterProvider(param));
+		}
 		return super.getSingleParameterProviders();
+	}
+
+	@Override
+	public void setJvmMethod(JvmOperation newJvmMethod) {
+		super.multiParameterProviders = null;
+		super.singleParameterProviders = null;
+		super.setJvmMethod(newJvmMethod);
+	}
+
+	@Override
+	public String toString() {
+		return "@Xpect public void " + getJvmMethod().getSimpleName() + "();";
 	}
 
 }

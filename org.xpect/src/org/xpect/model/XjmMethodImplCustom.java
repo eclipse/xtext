@@ -15,7 +15,7 @@ public class XjmMethodImplCustom extends XjmMethodImpl {
 
 	@Override
 	public void setJvmMethod(JvmOperation newJvmMethod) {
-		setJavaMethod(null);
+		super.javaMethod = null;
 		super.setJvmMethod(newJvmMethod);
 	}
 
@@ -31,7 +31,7 @@ public class XjmMethodImplCustom extends XjmMethodImpl {
 		JavaReflectAccess jra = new JavaReflectAccess();
 		jra.setClassLoader(context);
 		result = jra.getMethod(jvmOperation);
-		setJavaMethod(result);
+		super.javaMethod = result;
 		return result;
 	}
 
