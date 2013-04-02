@@ -20,7 +20,6 @@ import org.xpect.XjmMethod;
 import org.xpect.XpectFile;
 import org.xpect.XpectInvocation;
 import org.xpect.XpectJavaModel;
-import org.xpect.parameter.IParameterAdapter;
 import org.xpect.parameter.IParameterProvider;
 import org.xpect.registry.ILanguageInfo;
 import org.xpect.runner.IXpectURIProvider;
@@ -42,8 +41,6 @@ public class SetupContext implements ITestSetupContext {
 	// private List<List<ITypedProvider>> allParameters;
 
 	private XjmMethod method;
-
-	private List<IParameterAdapter> paramAdapters;
 
 	private Map<Class<? extends Annotation>, IParameterProvider> paramValues;
 
@@ -81,12 +78,6 @@ public class SetupContext implements ITestSetupContext {
 
 	public XjmMethod getMethod() {
 		return method;
-	}
-
-	public List<IParameterAdapter> getParamAdapters() {
-		if (paramAdapters == null)
-			return Collections.emptyList();
-		return paramAdapters;
 	}
 
 	public Map<Class<? extends Annotation>, IParameterProvider> getParamValues() {
@@ -134,12 +125,6 @@ public class SetupContext implements ITestSetupContext {
 
 	public XpectInvocation getXpectInvocation() {
 		return xpectInvocation;
-	}
-
-	public void installParameterAdapter(IParameterAdapter adapter) {
-		if (paramAdapters == null)
-			paramAdapters = Lists.newArrayList();
-		paramAdapters.add(adapter);
 	}
 
 	public void installParameterValue(Class<? extends Annotation> key, IParameterProvider provider) {

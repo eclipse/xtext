@@ -18,6 +18,7 @@ import org.eclipse.xtext.resource.XtextResourceSet;
 import org.eclipse.xtext.xbase.jvmmodel.JvmModelInferrerRegistry;
 import org.xpect.Environment;
 import org.xpect.parameter.ParameterProvider;
+import org.xpect.parameter.XpectParameterAdapter;
 import org.xpect.setup.AbstractXpectSetup;
 import org.xpect.setup.ISetupInitializer;
 import org.xpect.xtext.lib.setup.ThisOffset.ThisOffsetProvider;
@@ -29,6 +30,7 @@ import com.google.inject.Injector;
 /**
  * @author Moritz Eysholdt - Initial contribution and API
  */
+@XpectParameterAdapter(XtextOffsetAdapter.class)
 public class XtextStandaloneSetup extends AbstractXpectSetup<ClassCtx, FileCtx, TestCtx, FileCtx> {
 
 	protected static class ClassCtx {
@@ -61,7 +63,6 @@ public class XtextStandaloneSetup extends AbstractXpectSetup<ClassCtx, FileCtx, 
 		Injector injector = frameworkCtx.getInjector();
 		injector.injectMembers(frameworkCtx.getTestInstance());
 		XtextResource res = loadThisResource(injector, frameworkCtx, userCtx);
-		frameworkCtx.installParameterAdapter(new XtextOffsetAdapter(res));
 		frameworkCtx.installParameterValue(ThisResource.class, new ParameterProvider(res));
 		frameworkCtx.installParameterValue(ThisOffset.class, new ThisOffsetProvider(frameworkCtx.getXpectInvocation(), res));
 		if (!res.getContents().isEmpty())

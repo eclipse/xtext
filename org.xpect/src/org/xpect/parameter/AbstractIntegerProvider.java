@@ -7,8 +7,9 @@
  *******************************************************************************/
 package org.xpect.parameter;
 
+import java.lang.annotation.Annotation;
 import java.math.BigInteger;
-
+import java.util.Map;
 
 /**
  * @author Moritz Eysholdt - Initial contribution and API
@@ -29,7 +30,7 @@ public abstract class AbstractIntegerProvider implements IParameterProvider {
 	}
 
 	@SuppressWarnings("unchecked")
-	public <T> T get(Class<T> expectedType) {
+	public <T> T get(Class<T> expectedType, Map<Class<? extends Annotation>, IParameterProvider> context) {
 		if (expectedType == Byte.class || expectedType == Byte.TYPE)
 			return (T) new Byte(getValue());
 		if (expectedType == Short.class || expectedType == Short.TYPE)

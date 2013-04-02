@@ -7,10 +7,13 @@
  *******************************************************************************/
 package org.xpect.expectation;
 
+import java.lang.annotation.Annotation;
 import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 
 import org.eclipse.xtext.util.Strings;
+import org.xpect.parameter.IParameterProvider;
 import org.xpect.parameter.IParameterParser.IParsedParameterProvider;
 import org.xpect.util.IRegion;
 import org.xpect.util.Region;
@@ -40,7 +43,7 @@ public class AbstractExpectation implements IParsedParameterProvider {
 	}
 
 	@SuppressWarnings("unchecked")
-	public <T> T get(Class<T> expectedType) {
+	public <T> T get(Class<T> expectedType, Map<Class<? extends Annotation>, IParameterProvider> context) {
 		if (expectedType.isInstance(this))
 			return (T) this;
 		return null;

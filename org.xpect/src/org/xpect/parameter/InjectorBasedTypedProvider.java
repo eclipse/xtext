@@ -9,9 +9,9 @@ package org.xpect.parameter;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;
+import java.util.Map;
 
 import javax.inject.Inject;
-
 
 import com.google.inject.Injector;
 import com.google.inject.Key;
@@ -33,7 +33,7 @@ public class InjectorBasedTypedProvider implements IParameterProvider {
 	}
 
 	public boolean canProvide(Class<?> expectedType) {
-		return get(expectedType) != null;
+		return get(expectedType, null) != null;
 	}
 
 	protected Annotation findAnnotation() {
@@ -44,7 +44,7 @@ public class InjectorBasedTypedProvider implements IParameterProvider {
 	}
 
 	@SuppressWarnings("unchecked")
-	public <T> T get(Class<T> expectedType) {
+	public <T> T get(Class<T> expectedType, Map<Class<? extends Annotation>, IParameterProvider> context) {
 		TypeLiteral<?> classType = TypeLiteral.get(method.getDeclaringClass());
 		TypeLiteral<?> paramType = classType.getParameterTypes(method).get(paramIndex);
 		Annotation annotation = findAnnotation();

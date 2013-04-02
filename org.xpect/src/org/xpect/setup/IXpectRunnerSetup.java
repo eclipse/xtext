@@ -16,7 +16,6 @@ import org.xpect.XjmMethod;
 import org.xpect.XpectFile;
 import org.xpect.XpectInvocation;
 import org.xpect.XpectJavaModel;
-import org.xpect.parameter.IParameterAdapter;
 import org.xpect.parameter.IParameterProvider;
 import org.xpect.runner.IXpectURIProvider;
 
@@ -36,8 +35,6 @@ public interface IXpectRunnerSetup<T, K, V, X> extends IXpectSetup {
 		XpectJavaModel getXpectJavaModel();
 
 		Environment getEnvironment();
-
-		void installParameterAdapter(IParameterAdapter adapter);
 
 		void installParameterValue(Class<? extends Annotation> key, IParameterProvider provider);
 

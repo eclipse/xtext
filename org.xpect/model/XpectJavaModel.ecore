@@ -30,6 +30,8 @@
         <eTypeArguments/>
       </eGenericType>
     </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="parameterAdapters" upperBound="-1"
+        eType="#//ParameterAdapter" changeable="false" transient="true" derived="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="XjmTest" eSuperTypes="#//XjmClass">
     <eStructuralFeatures xsi:type="ecore:EReference" name="setups" upperBound="-1"
@@ -62,9 +64,10 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="value" eType="#//XjmMethod"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EDataType" name="JavaMethod" instanceClassName="java.lang.reflect.Method"/>
-  <eClassifiers xsi:type="ecore:EDataType" name="SingleParameterProvider" instanceClassName="org.xpect.parameters.IParameterParser$ISingleParameterParser"/>
-  <eClassifiers xsi:type="ecore:EDataType" name="MultiParameterProvider" instanceClassName="org.xpect.parameters.IParameterParser$IMultiParameterParser"/>
+  <eClassifiers xsi:type="ecore:EDataType" name="SingleParameterProvider" instanceClassName="org.xpect.parameter.IParameterParser$ISingleParameterParser"/>
+  <eClassifiers xsi:type="ecore:EDataType" name="MultiParameterProvider" instanceClassName="org.xpect.parameter.IParameterParser$IMultiParameterParser"/>
   <eClassifiers xsi:type="ecore:EDataType" name="XpectSetup" instanceClassName="org.xpect.setup.IXpectSetup"/>
+  <eClassifiers xsi:type="ecore:EDataType" name="ParameterAdapter" instanceClassName="org.xpect.parameter.IParameterAdapter"/>
   <eClassifiers xsi:type="ecore:EEnum" name="Environment">
     <eLiterals name="STANDALONE_TEST"/>
     <eLiterals name="PLUGIN_TEST" value="1"/>
