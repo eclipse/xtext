@@ -8,7 +8,6 @@
 package org.xpect.parameters;
 
 import org.eclipse.xtext.util.Strings;
-import org.xpect.util.IParameterProvider;
 
 import com.google.common.base.Joiner;
 import com.google.common.base.Preconditions;

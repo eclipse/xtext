@@ -23,7 +23,6 @@ import org.xpect.parameters.CommaSeparatedValuesExpectation.CommaSeparatedValues
 import org.xpect.parameters.ExpectationCollection.ExpectationItem;
 import org.xpect.parameters.IParameterParser.ISingleParameterParser;
 import org.xpect.parameters.IParameterParser.SingleParameterParser;
-import org.xpect.util.IParameterProvider;
 import org.xpect.util.IRegion;
 
 import com.google.common.base.Function;

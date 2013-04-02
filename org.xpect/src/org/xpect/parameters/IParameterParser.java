@@ -14,7 +14,6 @@ import java.lang.annotation.Target;
 import java.util.List;
 
 import org.xpect.XpectInvocation;
-import org.xpect.util.IParameterProvider;
 import org.xpect.util.IRegion;
 
 /**

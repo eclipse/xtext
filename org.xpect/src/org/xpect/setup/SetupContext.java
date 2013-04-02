@@ -20,11 +20,11 @@ import org.xpect.XjmMethod;
 import org.xpect.XpectFile;
 import org.xpect.XpectInvocation;
 import org.xpect.XpectJavaModel;
+import org.xpect.parameters.IParameterAdapter;
+import org.xpect.parameters.IParameterProvider;
 import org.xpect.registry.ILanguageInfo;
 import org.xpect.runner.IXpectURIProvider;
 import org.xpect.setup.IXpectRunnerSetup.ITestSetupContext;
-import org.xpect.util.IParameterAdapter;
-import org.xpect.util.IParameterProvider;
 import org.xpect.util.URIDelegationHandler;
 
 import com.google.common.collect.Lists;

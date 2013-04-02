@@ -34,11 +34,7 @@ import org.xpect.XpectInvocation;
 import org.xpect.parameters.IParameterParser.IMultiParameterParser;
 import org.xpect.parameters.IParameterParser.MultiParameterParser;
 import org.xpect.parameters.ParameterParser.ParameterParserImpl;
-import org.xpect.util.AbstractOffsetProvider;
-import org.xpect.util.IParameterProvider;
 import org.xpect.util.IRegion;
-import org.xpect.util.IntegerProvider;
-import org.xpect.util.ParameterProvider;
 import org.xpect.util.Region;
 
 import com.google.common.collect.Lists;

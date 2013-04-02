@@ -19,7 +19,6 @@ import org.xpect.XpectInvocation;
 import org.xpect.parameters.IParameterParser.ISingleParameterParser;
 import org.xpect.parameters.IParameterParser.SingleParameterParser;
 import org.xpect.parameters.StringExpectation.StringExpectationParser;
-import org.xpect.util.IParameterProvider;
 import org.xpect.util.IRegion;
 
 /**

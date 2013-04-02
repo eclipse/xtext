@@ -5,13 +5,23 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.xpect.util;
+package org.xpect.parameters;
+
 
 /**
  * @author Moritz Eysholdt - Initial contribution and API
  */
-public interface IParameterAdapter {
-	IParameterProvider adapt(IParameterProvider provider, Class<?> expectedType);
+public class IntegerProvider extends AbstractIntegerProvider {
 
-	boolean canAdapt(IParameterProvider provider, Class<?> expectedType);
+	private String value;
+
+	public IntegerProvider(String value) {
+		this.value = value;
+	}
+
+	@Override
+	public String getValue() {
+		return value;
+	}
+
 }

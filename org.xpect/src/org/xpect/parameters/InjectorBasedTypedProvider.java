@@ -5,12 +5,13 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.xpect.util;
+package org.xpect.parameters;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;
 
 import javax.inject.Inject;
+
 
 import com.google.inject.Injector;
 import com.google.inject.Key;

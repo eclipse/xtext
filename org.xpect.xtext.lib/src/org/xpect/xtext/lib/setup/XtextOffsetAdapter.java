@@ -22,10 +22,10 @@ import org.eclipse.xtext.parsetree.reconstr.impl.NodeIterator;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.util.Pair;
 import org.eclipse.xtext.util.Tuples;
-import org.xpect.util.AbstractOffsetProvider;
-import org.xpect.util.IParameterAdapter;
-import org.xpect.util.IParameterProvider;
-import org.xpect.util.ParameterProvider;
+import org.xpect.parameters.AbstractOffsetProvider;
+import org.xpect.parameters.IParameterAdapter;
+import org.xpect.parameters.IParameterProvider;
+import org.xpect.parameters.ParameterProvider;
 
 import com.google.common.collect.Sets;
 

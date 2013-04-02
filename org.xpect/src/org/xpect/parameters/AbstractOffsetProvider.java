@@ -5,29 +5,16 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.xpect.util;
+package org.xpect.parameters;
 
 /**
  * @author Moritz Eysholdt - Initial contribution and API
  */
-public class ParameterProvider implements IParameterProvider {
-
-	private Object value;
-
-	public ParameterProvider(Object value) {
-		super();
-		this.value = value;
+public abstract class AbstractOffsetProvider extends AbstractIntegerProvider {
+	@Override
+	protected String getValue() {
+		return String.valueOf(getOffset());
 	}
 
-	@SuppressWarnings("unchecked")
-	public <T> T get(Class<T> expectedType) {
-		if (expectedType.isInstance(value))
-			return (T) value;
-		return null;
-	}
-
-	public boolean canProvide(Class<?> expectedType) {
-		return expectedType.isInstance(value);
-	}
-
+	public abstract int getOffset();
 }
