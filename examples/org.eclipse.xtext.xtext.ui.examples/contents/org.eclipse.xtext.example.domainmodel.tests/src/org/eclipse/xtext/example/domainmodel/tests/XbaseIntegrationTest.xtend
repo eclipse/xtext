@@ -50,7 +50,7 @@ public class XbaseIntegrationTest extends AbstractXbaseEvaluationTest {
 		javaCompiler.addClassPathOfClass(typeof(javax.inject.Inject))  // javax inject
 	}
 
-	protected def invokeXbaseExpression(String expression) {
+	protected override invokeXbaseExpression(String expression) {
 		val parse = parseHelper.parse("entity Foo { op doStuff() : Object { "+expression+" } } ")
 		validationHelper.assertNoErrors(parse)
 		val fsa = new InMemoryFileSystemAccess()
