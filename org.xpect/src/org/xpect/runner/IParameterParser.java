@@ -15,19 +15,19 @@ import org.xpect.util.ITypedProvider;
 /**
  * @author Moritz Eysholdt - Initial contribution and API
  */
-public interface IXpectParameterProvider {
+public interface IParameterParser {
 
 	public interface IClaimedRegion extends IRegion {
-		IXpectParameterProvider getClaminer();
+		IParameterParser getClaminer();
 	}
 
-	public interface IXpectSingleParameterProvider extends IXpectParameterProvider {
+	public interface ISingleParameterParser extends IParameterParser {
 		IRegion claimRegion(XpectTestRunner invocation, int paramIndex);
 
 		ITypedProvider parseRegion(XpectTestRunner invocation, int paramIndex, List<IClaimedRegion> claims);
 	}
 
-	public interface IXpectMultiParameterProvider extends IXpectParameterProvider {
+	public interface IMultiParameterParser extends IParameterParser {
 		IRegion claimRegion(XpectTestRunner invocation);
 
 		List<ITypedProvider> parseRegion(XpectTestRunner invocation, List<IClaimedRegion> claims);

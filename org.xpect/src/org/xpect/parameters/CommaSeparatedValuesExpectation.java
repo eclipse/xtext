@@ -20,7 +20,7 @@ import org.xpect.parameters.ActualCollection.ActualItem;
 import org.xpect.parameters.ActualCollection.ToString;
 import org.xpect.parameters.CommaSeparatedValuesExpectation.CommaSeparatedValuesExpectationParser;
 import org.xpect.parameters.ExpectationCollection.ExpectationItem;
-import org.xpect.runner.IXpectParameterProvider.IXpectSingleParameterProvider;
+import org.xpect.runner.IParameterParser.ISingleParameterParser;
 import org.xpect.runner.XpectSingleParameterProvider;
 import org.xpect.runner.XpectTestRunner;
 import org.xpect.util.IRegion;
@@ -152,7 +152,7 @@ public @interface CommaSeparatedValuesExpectation {
 
 	}
 
-	public class CommaSeparatedValuesExpectationParser extends AbstractExpectationParser implements IXpectSingleParameterProvider {
+	public class CommaSeparatedValuesExpectationParser extends AbstractExpectationParser implements ISingleParameterParser {
 
 		private final CommaSeparatedValuesExpectation annotation;
 

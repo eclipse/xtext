@@ -15,9 +15,9 @@ import java.util.Map;
 
 import org.xpect.XjmXpectMethod;
 import org.xpect.XpectInvocation;
-import org.xpect.runner.IXpectParameterProvider.IClaimedRegion;
-import org.xpect.runner.IXpectParameterProvider.IXpectMultiParameterProvider;
-import org.xpect.runner.IXpectParameterProvider.IXpectSingleParameterProvider;
+import org.xpect.runner.IParameterParser.IClaimedRegion;
+import org.xpect.runner.IParameterParser.IMultiParameterParser;
+import org.xpect.runner.IParameterParser.ISingleParameterParser;
 import org.xpect.setup.IXpectRunnerSetup;
 import org.xpect.setup.SetupContext;
 import org.xpect.util.IRegion;
@@ -32,16 +32,16 @@ import com.google.common.collect.Lists;
 public class XpectTestRunner extends AbstractTestRunner {
 
 	public static class ClaimedRegion implements IClaimedRegion {
-		private final IXpectParameterProvider claimer;
+		private final IParameterParser claimer;
 		private final IRegion delegate;
 
-		public ClaimedRegion(IXpectParameterProvider claimer, IRegion delegate) {
+		public ClaimedRegion(IParameterParser claimer, IRegion delegate) {
 			super();
 			this.claimer = claimer;
 			this.delegate = delegate;
 		}
 
-		public IXpectParameterProvider getClaminer() {
+		public IParameterParser getClaminer() {
 			return claimer;
 		}
 
@@ -66,7 +66,7 @@ public class XpectTestRunner extends AbstractTestRunner {
 		List<List<ITypedProvider>> result = Lists.newArrayList();
 		List<ITypedProvider> first = null;
 		for (int i = 0; i < method.getParameterCount(); i++) {
-			IXpectSingleParameterProvider claimer = method.getSingleParameterProviders().get(i);
+			ISingleParameterParser claimer = method.getSingleParameterProviders().get(i);
 			if (claimer != null) {
 				if (first == null)
 					first = Arrays.asList(new ITypedProvider[method.getParameterCount()]);
@@ -76,7 +76,7 @@ public class XpectTestRunner extends AbstractTestRunner {
 		}
 		if (first != null)
 			result.add(first);
-		for (IXpectMultiParameterProvider claimer : method.getMultiParameterProviders())
+		for (IMultiParameterParser claimer : method.getMultiParameterProviders())
 			result.add(claimer.parseRegion(this, claimedRegions));
 		return result;
 	}
@@ -84,14 +84,14 @@ public class XpectTestRunner extends AbstractTestRunner {
 	protected List<IClaimedRegion> collectClaimedRegions() {
 		List<IClaimedRegion> result = Lists.newArrayList();
 		for (int i = 0; i < method.getParameterCount(); i++) {
-			IXpectSingleParameterProvider claimer = method.getSingleParameterProviders().get(i);
+			ISingleParameterParser claimer = method.getSingleParameterProviders().get(i);
 			if (claimer != null) {
 				IRegion claim = claimer.claimRegion(this, i);
 				if (claim != null)
 					result.add(new ClaimedRegion(claimer, claim));
 			}
 		}
-		for (IXpectMultiParameterProvider claimer : method.getMultiParameterProviders()) {
+		for (IMultiParameterParser claimer : method.getMultiParameterProviders()) {
 			IRegion claim = claimer.claimRegion(this);
 			if (claim != null)
 				result.add(new ClaimedRegion(claimer, claim));

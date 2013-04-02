@@ -31,7 +31,7 @@ import org.eclipse.xtext.util.formallang.StringProduction;
 import org.eclipse.xtext.util.formallang.StringProduction.ProdElement;
 import org.xpect.XjmXpectMethod;
 import org.xpect.parameters.ParameterParser.ParameterParserImpl;
-import org.xpect.runner.IXpectParameterProvider.IXpectMultiParameterProvider;
+import org.xpect.runner.IParameterParser.IMultiParameterParser;
 import org.xpect.runner.XpectMultiParameterProvider;
 import org.xpect.runner.XpectTestRunner;
 import org.xpect.util.AbstractOffsetProvider;
@@ -99,7 +99,7 @@ public @interface ParameterParser {
 		}
 	}
 
-	public static class ParameterParserImpl implements IXpectMultiParameterProvider {
+	public static class ParameterParserImpl implements IMultiParameterParser {
 
 		protected static class BacktrackItem {
 			protected int offset;

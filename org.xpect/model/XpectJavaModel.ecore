@@ -62,8 +62,8 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="value" eType="#//XjmMethod"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EDataType" name="JavaMethod" instanceClassName="java.lang.reflect.Method"/>
-  <eClassifiers xsi:type="ecore:EDataType" name="SingleParameterProvider" instanceClassName="org.xpect.runner.IXpectParameterProvider$IXpectSingleParameterProvider"/>
-  <eClassifiers xsi:type="ecore:EDataType" name="MultiParameterProvider" instanceClassName="org.xpect.runner.IXpectParameterProvider$IXpectMultiParameterProvider"/>
+  <eClassifiers xsi:type="ecore:EDataType" name="SingleParameterProvider" instanceClassName="org.xpect.runner.IParameterParser$ISingleParameterParser"/>
+  <eClassifiers xsi:type="ecore:EDataType" name="MultiParameterProvider" instanceClassName="org.xpect.runner.IParameterParser$IMultiParameterParser"/>
   <eClassifiers xsi:type="ecore:EDataType" name="XpectSetup" instanceClassName="org.xpect.setup.IXpectSetup"/>
   <eClassifiers xsi:type="ecore:EEnum" name="Environment">
     <eLiterals name="STANDALONE_TEST"/>

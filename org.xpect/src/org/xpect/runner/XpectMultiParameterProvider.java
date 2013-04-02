@@ -12,7 +12,7 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
-import org.xpect.runner.IXpectParameterProvider.IXpectMultiParameterProvider;
+import org.xpect.runner.IParameterParser.IMultiParameterParser;
 
 /**
  * @author Moritz Eysholdt - Initial contribution and API
@@ -20,5 +20,5 @@ import org.xpect.runner.IXpectParameterProvider.IXpectMultiParameterProvider;
 @Retention(RetentionPolicy.RUNTIME)
 @Target({ ElementType.ANNOTATION_TYPE })
 public @interface XpectMultiParameterProvider {
-	Class<? extends IXpectMultiParameterProvider> value();
+	Class<? extends IMultiParameterParser> value();
 }

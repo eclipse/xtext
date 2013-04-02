@@ -6,8 +6,8 @@ import java.util.List;
 
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.xtext.common.types.JvmOperation;
-import org.xpect.runner.IXpectParameterProvider.IXpectMultiParameterProvider;
-import org.xpect.runner.IXpectParameterProvider.IXpectSingleParameterProvider;
+import org.xpect.runner.IParameterParser.IMultiParameterParser;
+import org.xpect.runner.IParameterParser.ISingleParameterParser;
 import org.xpect.runner.XpectMultiParameterProvider;
 import org.xpect.runner.XpectSingleParameterProvider;
 import org.xpect.util.AnnotationUtil;
@@ -29,8 +29,8 @@ public class XjmXpectMethodImplCustom extends XjmXpectMethodImpl {
 	@Override
 	public void setJavaMethod(Method newJavaMethod) {
 		super.setJavaMethod(newJavaMethod);
-		EList<IXpectMultiParameterProvider> multiParameter = super.getMultiParameterProviders();
-		EList<IXpectSingleParameterProvider> singleParameter = super.getSingleParameterProviders();
+		EList<IMultiParameterParser> multiParameter = super.getMultiParameterProviders();
+		EList<ISingleParameterParser> singleParameter = super.getSingleParameterProviders();
 		multiParameter.clear();
 		singleParameter.clear();
 		if (newJavaMethod != null && newJavaMethod.getParameterTypes().length > 0) {
@@ -40,17 +40,17 @@ public class XjmXpectMethodImplCustom extends XjmXpectMethodImpl {
 		}
 	}
 
-	protected List<IXpectMultiParameterProvider> findMultiParameterProvider(Method method) {
+	protected List<IMultiParameterParser> findMultiParameterProvider(Method method) {
 		if (method == null)
 			return Collections.emptyList();
-		return AnnotationUtil.newInstancesViaMetaAnnotation(method, XpectMultiParameterProvider.class, IXpectMultiParameterProvider.class);
+		return AnnotationUtil.newInstancesViaMetaAnnotation(method, XpectMultiParameterProvider.class, IMultiParameterParser.class);
 	}
 
-	protected IXpectSingleParameterProvider findSingleParameterProvider(Method method, int paramIndex) {
+	protected ISingleParameterParser findSingleParameterProvider(Method method, int paramIndex) {
 		if (method == null)
 			return null;
-		List<IXpectSingleParameterProvider> handler = AnnotationUtil.newInstancesViaMetaAnnotation(method, paramIndex,
-				XpectSingleParameterProvider.class, IXpectSingleParameterProvider.class);
+		List<ISingleParameterParser> handler = AnnotationUtil.newInstancesViaMetaAnnotation(method, paramIndex,
+				XpectSingleParameterProvider.class, ISingleParameterParser.class);
 		if (handler.isEmpty())
 			return null;
 		if (handler.size() == 1)
@@ -60,7 +60,7 @@ public class XjmXpectMethodImplCustom extends XjmXpectMethodImpl {
 	}
 
 	@Override
-	public EList<IXpectMultiParameterProvider> getMultiParameterProviders() {
+	public EList<IMultiParameterParser> getMultiParameterProviders() {
 		getJavaMethod();
 		return super.getMultiParameterProviders();
 	}
@@ -71,7 +71,7 @@ public class XjmXpectMethodImplCustom extends XjmXpectMethodImpl {
 	}
 
 	@Override
-	public EList<IXpectSingleParameterProvider> getSingleParameterProviders() {
+	public EList<ISingleParameterParser> getSingleParameterProviders() {
 		getJavaMethod();
 		return super.getSingleParameterProviders();
 	}

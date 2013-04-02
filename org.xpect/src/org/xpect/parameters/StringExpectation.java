@@ -16,7 +16,7 @@ import java.util.List;
 import org.eclipse.xtext.util.internal.FormattingMigrator;
 import org.junit.ComparisonFailure;
 import org.xpect.parameters.StringExpectation.StringExpectationParser;
-import org.xpect.runner.IXpectParameterProvider.IXpectSingleParameterProvider;
+import org.xpect.runner.IParameterParser.ISingleParameterParser;
 import org.xpect.runner.XpectSingleParameterProvider;
 import org.xpect.runner.XpectTestRunner;
 import org.xpect.util.IRegion;
@@ -67,7 +67,7 @@ public @interface StringExpectation {
 
 	}
 
-	public class StringExpectationParser extends AbstractExpectationParser implements IXpectSingleParameterProvider {
+	public class StringExpectationParser extends AbstractExpectationParser implements ISingleParameterParser {
 
 		private final StringExpectation annotation;
 

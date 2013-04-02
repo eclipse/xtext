@@ -12,7 +12,7 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
-import org.xpect.runner.IXpectParameterProvider.IXpectSingleParameterProvider;
+import org.xpect.runner.IParameterParser.ISingleParameterParser;
 
 /**
  * @author Moritz Eysholdt - Initial contribution and API
@@ -20,5 +20,5 @@ import org.xpect.runner.IXpectParameterProvider.IXpectSingleParameterProvider;
 @Retention(RetentionPolicy.RUNTIME)
 @Target({ ElementType.ANNOTATION_TYPE })
 public @interface XpectSingleParameterProvider {
-	Class<? extends IXpectSingleParameterProvider> value();
+	Class<? extends ISingleParameterParser> value();
 }
