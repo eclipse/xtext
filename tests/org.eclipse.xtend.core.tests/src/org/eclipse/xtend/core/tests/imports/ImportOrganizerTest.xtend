@@ -628,8 +628,6 @@ class ImportOrganizerTest extends AbstractXtendTestCase {
 
 	@Test def testStaticLocalOperator() {
 		'''
-			import static extension Foo.*
-
 			class Foo {
 				def foo() {
 					'' * ''
@@ -639,8 +637,6 @@ class ImportOrganizerTest extends AbstractXtendTestCase {
 				}
 			}
 		'''.assertIsOrganizedTo('''
-			import static extension Foo.*
-
 			class Foo {
 				def foo() {
 					'' * ''
@@ -687,6 +683,28 @@ class ImportOrganizerTest extends AbstractXtendTestCase {
 			  def void test() {
 			    typeof(Collections).singleton
 			  }
+			}
+		''')
+	}
+
+	@Test def testStaticExtensionSameClass() {
+		'''
+			class Foo {
+			  static def void test() {
+			    "".foo
+			  }
+			  
+			  static def void getFoo(String x) {
+			  } 
+			}
+		'''.assertIsOrganizedTo('''
+			class Foo {
+			  static def void test() {
+			    "".foo
+			  }
+			  
+			  static def void getFoo(String x) {
+			  } 
 			}
 		''')
 	}
@@ -1268,8 +1286,6 @@ class ImportOrganizerTest extends AbstractXtendTestCase {
 				}
 			}
 		'''.assertIsOrganizedTo('''
-			import static extension Foo.*
-			
 			class Foo {
 				def foo() {
 					''.bar
@@ -1296,8 +1312,6 @@ class ImportOrganizerTest extends AbstractXtendTestCase {
 		'''.assertIsOrganizedTo('''
 			import java.util.Collections
 			
-			import static extension java.util.Collections.*
-
 			class Foo extends Collections {
 				def foo() {
 					''.singleton

@@ -1207,9 +1207,6 @@ public class ImportOrganizerTest extends AbstractXtendTestCase {
   @Test
   public void testStaticLocalOperator() {
     StringConcatenation _builder = new StringConcatenation();
-    _builder.append("import static extension Foo.*");
-    _builder.newLine();
-    _builder.newLine();
     _builder.append("class Foo {");
     _builder.newLine();
     _builder.append("\t");
@@ -1232,9 +1229,6 @@ public class ImportOrganizerTest extends AbstractXtendTestCase {
     _builder.append("}");
     _builder.newLine();
     StringConcatenation _builder_1 = new StringConcatenation();
-    _builder_1.append("import static extension Foo.*");
-    _builder_1.newLine();
-    _builder_1.newLine();
     _builder_1.append("class Foo {");
     _builder_1.newLine();
     _builder_1.append("\t");
@@ -1330,6 +1324,55 @@ public class ImportOrganizerTest extends AbstractXtendTestCase {
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    this.assertIsOrganizedTo(_builder, _builder_1);
+  }
+  
+  @Test
+  public void testStaticExtensionSameClass() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("class Foo {");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append("static def void test() {");
+    _builder.newLine();
+    _builder.append("    ");
+    _builder.append("\"\".foo");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append("static def void getFoo(String x) {");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append("} ");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("class Foo {");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("static def void test() {");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("\"\".foo");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("static def void getFoo(String x) {");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("} ");
     _builder_1.newLine();
     _builder_1.append("}");
     _builder_1.newLine();
@@ -2422,9 +2465,6 @@ public class ImportOrganizerTest extends AbstractXtendTestCase {
     _builder.append("}");
     _builder.newLine();
     StringConcatenation _builder_1 = new StringConcatenation();
-    _builder_1.append("import static extension Foo.*");
-    _builder_1.newLine();
-    _builder_1.newLine();
     _builder_1.append("class Foo {");
     _builder_1.newLine();
     _builder_1.append("\t");
@@ -2473,9 +2513,6 @@ public class ImportOrganizerTest extends AbstractXtendTestCase {
     _builder.newLine();
     StringConcatenation _builder_1 = new StringConcatenation();
     _builder_1.append("import java.util.Collections");
-    _builder_1.newLine();
-    _builder_1.newLine();
-    _builder_1.append("import static extension java.util.Collections.*");
     _builder_1.newLine();
     _builder_1.newLine();
     _builder_1.append("class Foo extends Collections {");

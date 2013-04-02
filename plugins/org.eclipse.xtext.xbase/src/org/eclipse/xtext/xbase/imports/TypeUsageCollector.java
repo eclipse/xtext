@@ -289,22 +289,30 @@ public class TypeUsageCollector {
 	
 	protected void acceptStaticImport(JvmMember member) {
 		JvmDeclaredType declarator = member.getDeclaringType();
-		if (currentThisType == declarator || implicitStaticImports.contains(declarator))
-			return;
-		if (knownTypesForStaticImports == null && currentThisType != null) {
-			JvmParameterizedTypeReference reference = TypesFactory.eINSTANCE.createJvmParameterizedTypeReference();
-			reference.setType(currentThisType);
-			knownTypesForStaticImports = superTypeCollector.collectSuperTypesAsRawTypes(reference);
-		}
-		if (knownTypesForStaticImports != null && knownTypesForStaticImports.contains(declarator))
+		if (!needsStaticImport(declarator) || implicitStaticImports.contains(declarator))
 			return;
 		typeUsages.addStaticImport(declarator);
 	}
 
 	protected void acceptStaticExtensionImport(JvmMember member) {
 		JvmDeclaredType declarator = member.getDeclaringType();
-		if (implicitExtensionImports.contains(declarator))
+		if (!needsStaticImport(declarator) || implicitExtensionImports.contains(declarator))
 			return;
 		typeUsages.addExtensionImport(declarator);
 	}
+
+	protected boolean needsStaticImport(JvmDeclaredType declarator) {
+		if(currentThisType == declarator)
+			return false;
+		if (knownTypesForStaticImports == null && currentThisType != null) {
+			JvmParameterizedTypeReference reference = TypesFactory.eINSTANCE.createJvmParameterizedTypeReference();
+			reference.setType(currentThisType);
+			knownTypesForStaticImports = superTypeCollector.collectSuperTypesAsRawTypes(reference);
+		}
+		if (knownTypesForStaticImports != null && knownTypesForStaticImports.contains(declarator))
+			return false;
+		else
+			return true;
+	}
+	
 }
