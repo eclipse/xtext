@@ -7,6 +7,7 @@
  *******************************************************************************/
 package org.xpect.model;
 
+import org.eclipse.xtext.resource.XtextResource;
 import org.xpect.XpectIgnore;
 import org.xpect.XpectInvocation;
 import org.xpect.XpectTest;
@@ -17,6 +18,10 @@ import com.google.common.collect.Iterables;
  * @author Moritz Eysholdt - Initial contribution and API
  */
 public class XpectFileImplCustom extends XpectFileImpl {
+
+	public String getDocument() {
+		return ((XtextResource) eResource()).getParseResult().getRootNode().getText();
+	}
 
 	@Override
 	public Iterable<XpectInvocation> getInvocations() {

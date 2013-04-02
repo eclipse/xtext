@@ -71,14 +71,14 @@ public class XpectTestRunner extends AbstractTestRunner {
 			if (claimer != null) {
 				if (first == null)
 					first = Arrays.asList(new IParameterProvider[method.getParameterCount()]);
-				IParameterProvider value = claimer.parseRegion(this, i, claimedRegions);
+				IParameterProvider value = claimer.parseRegion(getInvocation(), i, claimedRegions);
 				first.set(i, value);
 			}
 		}
 		if (first != null)
 			result.add(first);
 		for (IMultiParameterParser claimer : method.getMultiParameterProviders())
-			result.add(claimer.parseRegion(this, claimedRegions));
+			result.add(claimer.parseRegion(getInvocation(), claimedRegions));
 		return result;
 	}
 
@@ -87,20 +87,21 @@ public class XpectTestRunner extends AbstractTestRunner {
 		for (int i = 0; i < method.getParameterCount(); i++) {
 			ISingleParameterParser claimer = method.getSingleParameterProviders().get(i);
 			if (claimer != null) {
-				IRegion claim = claimer.claimRegion(this, i);
+				IRegion claim = claimer.claimRegion(getInvocation(), i);
 				if (claim != null)
 					result.add(new ClaimedRegion(claimer, claim));
 			}
 		}
 		for (IMultiParameterParser claimer : method.getMultiParameterProviders()) {
-			IRegion claim = claimer.claimRegion(this);
+			IRegion claim = claimer.claimRegion(getInvocation());
 			if (claim != null)
 				result.add(new ClaimedRegion(claimer, claim));
 		}
 		return result;
 	}
 
-	protected IParameterProvider collectProposedParameter(int paramIndex, List<IParameterProvider> candidates, List<IParameterAdapter> adapter) {
+	protected IParameterProvider collectProposedParameter(int paramIndex, List<IParameterProvider> candidates,
+			List<IParameterAdapter> adapter) {
 		Class<?> expectedType = method.getJavaMethod().getParameterTypes()[paramIndex];
 		for (IParameterProvider tp : candidates)
 			if (tp.canProvide(expectedType))
@@ -155,7 +156,8 @@ public class XpectTestRunner extends AbstractTestRunner {
 		try {
 			if (setup != null)
 				ctx.setUserTestCtx(setup.beforeTest(ctx, ctx.getUserFileCtx()));
-			List<IParameterProvider> proposedParameters = collectProposedParameters(allParameters, ctx.getParamValues(), ctx.getParamAdapters());
+			List<IParameterProvider> proposedParameters = collectProposedParameters(allParameters, ctx.getParamValues(),
+					ctx.getParamAdapters());
 			// ctx.setProposedParameters(proposedParameters);
 			Object[] params = createParameterValues(proposedParameters);
 			method.getJavaMethod().invoke(test, params);

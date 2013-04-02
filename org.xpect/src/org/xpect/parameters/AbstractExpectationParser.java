@@ -12,7 +12,7 @@ import java.util.regex.Pattern;
 
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
-import org.xpect.runner.XpectTestRunner;
+import org.xpect.XpectInvocation;
 import org.xpect.util.IRegion;
 import org.xpect.util.Region;
 
@@ -22,8 +22,8 @@ import org.xpect.util.Region;
 public class AbstractExpectationParser {
 	private Pattern pattern = Pattern.compile("((---)|(-->)|(\n))");
 
-	public IRegion claimRegion(XpectTestRunner invocation, int paramIndex) {
-		INode node = NodeModelUtils.getNode(invocation.getInvocation());
+	public IRegion claimRegion(XpectInvocation invocation, int paramIndex) {
+		INode node = NodeModelUtils.getNode(invocation);
 		String document = node.getRootNode().getText();
 		Matcher matcher = pattern.matcher(document);
 		if (matcher.find(node.getOffset() + node.getLength())) {

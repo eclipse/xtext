@@ -17,13 +17,13 @@ import java.util.List;
 import org.eclipse.xtext.util.Pair;
 import org.junit.Assert;
 import org.junit.ComparisonFailure;
+import org.xpect.XpectInvocation;
 import org.xpect.parameters.ActualCollection.ActualItem;
 import org.xpect.parameters.ActualCollection.ToString;
 import org.xpect.parameters.ExpectationCollection.ExpectationItem;
 import org.xpect.parameters.IParameterParser.ISingleParameterParser;
 import org.xpect.parameters.IParameterParser.SingleParameterParser;
 import org.xpect.parameters.LinesExpectation.LinesExpectationParser;
-import org.xpect.runner.XpectTestRunner;
 import org.xpect.util.IParameterProvider;
 import org.xpect.util.IRegion;
 
@@ -117,10 +117,12 @@ public @interface LinesExpectation {
 			return annotation;
 		}
 
-		public IParameterProvider parseRegion(XpectTestRunner invocation, int paramIndex, List<IClaimedRegion> claims) {
+		public IParameterProvider parseRegion(XpectInvocation invocation, int paramIndex, List<IClaimedRegion> claims) {
 			IRegion region = claimRegion(invocation, paramIndex);
-			if (region != null)
-				return new LinesExpectationImpl(annotation, invocation.getDocument(), region.getOffset(), region.getLength());
+			if (region != null) {
+				String document = invocation.getFile().getDocument();
+				return new LinesExpectationImpl(annotation, document, region.getOffset(), region.getLength());
+			}
 			return null;
 		}
 

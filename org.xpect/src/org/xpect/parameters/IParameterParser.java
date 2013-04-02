@@ -13,7 +13,7 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 import java.util.List;
 
-import org.xpect.runner.XpectTestRunner;
+import org.xpect.XpectInvocation;
 import org.xpect.util.IParameterProvider;
 import org.xpect.util.IRegion;
 
@@ -27,15 +27,15 @@ public interface IParameterParser {
 	}
 
 	public interface IMultiParameterParser extends IParameterParser {
-		IRegion claimRegion(XpectTestRunner invocation);
+		IRegion claimRegion(XpectInvocation invocation);
 
-		List<IParameterProvider> parseRegion(XpectTestRunner invocation, List<IClaimedRegion> claims);
+		List<IParameterProvider> parseRegion(XpectInvocation invocation, List<IClaimedRegion> claims);
 	}
 
 	public interface ISingleParameterParser extends IParameterParser {
-		IRegion claimRegion(XpectTestRunner invocation, int paramIndex);
+		IRegion claimRegion(XpectInvocation invocation, int paramIndex);
 
-		IParameterProvider parseRegion(XpectTestRunner invocation, int paramIndex, List<IClaimedRegion> claims);
+		IParameterProvider parseRegion(XpectInvocation invocation, int paramIndex, List<IClaimedRegion> claims);
 	}
 
 	@Retention(RetentionPolicy.RUNTIME)

@@ -30,10 +30,10 @@ import org.eclipse.xtext.util.formallang.NfaUtil.BacktrackHandler;
 import org.eclipse.xtext.util.formallang.StringProduction;
 import org.eclipse.xtext.util.formallang.StringProduction.ProdElement;
 import org.xpect.XjmXpectMethod;
+import org.xpect.XpectInvocation;
 import org.xpect.parameters.IParameterParser.IMultiParameterParser;
 import org.xpect.parameters.IParameterParser.MultiParameterParser;
 import org.xpect.parameters.ParameterParser.ParameterParserImpl;
-import org.xpect.runner.XpectTestRunner;
 import org.xpect.util.AbstractOffsetProvider;
 import org.xpect.util.IParameterProvider;
 import org.xpect.util.IRegion;
@@ -132,24 +132,24 @@ public @interface ParameterParser {
 			this.annotation = annotation;
 		}
 
-		protected List<IParameterProvider> associateParameterValues(XpectTestRunner invocation, Map<String, IParameterProvider> parsedParams) {
-			XjmXpectMethod method = invocation.getMethod();
+		protected List<IParameterProvider> associateParameterValues(XpectInvocation invocation, Map<String, IParameterProvider> parsedParams) {
+			XjmXpectMethod method = (XjmXpectMethod) invocation.getMethod();
 			IParameterProvider[] result = new IParameterProvider[method.getParameterCount()];
 			for (int i = 0; i < result.length; i++)
 				result[i] = parsedParams.get("arg" + i);
 			return Arrays.asList(result);
 		}
 
-		public IRegion claimRegion(XpectTestRunner invocation) {
-			INode node = NodeModelUtils.getNode(invocation.getInvocation());
+		public IRegion claimRegion(XpectInvocation invocation) {
+			INode node = NodeModelUtils.getNode(invocation);
 			int start = node.getOffset() + node.getLength();
-			int end = invocation.getDocument().indexOf(annotation.endToken(), start);
+			int end = invocation.getFile().getDocument().indexOf(annotation.endToken(), start);
 			if (end < 0)
-				end = invocation.getDocument().length();
+				end = invocation.getFile().getDocument().length();
 			return new Region(start, end - start);
 		}
 
-		protected IParameterProvider convertValue(XpectTestRunner invocation, Token token, String value) {
+		protected IParameterProvider convertValue(XpectInvocation invocation, Token token, String value) {
 			switch (token) {
 			case OFFSET:
 				return new MatchingOffsetProvider(invocation, value);
@@ -163,7 +163,7 @@ public @interface ParameterParser {
 			throw new RuntimeException();
 		}
 
-		protected String findParameterString(XpectTestRunner invocation, List<IClaimedRegion> claims) {
+		protected String findParameterString(XpectInvocation invocation, List<IClaimedRegion> claims) {
 			int start = 0, end = 0;
 			List<IClaimedRegion> otherClaims = Lists.newArrayList();
 			for (IClaimedRegion claim : claims)
@@ -175,7 +175,7 @@ public @interface ParameterParser {
 			for (IClaimedRegion claim : otherClaims)
 				if (end > claim.getOffset())
 					end = claim.getOffset();
-			return invocation.getDocument().substring(start, end).trim();
+			return invocation.getFile().getDocument().substring(start, end).trim();
 		}
 
 		public ParameterParser getAnnotation() {
@@ -191,7 +191,7 @@ public @interface ParameterParser {
 			return result;
 		}
 
-		protected Map<String, IParameterProvider> parseParams(String paramSyntax, XpectTestRunner invocation, final String text) {
+		protected Map<String, IParameterProvider> parseParams(String paramSyntax, XpectInvocation invocation, final String text) {
 			if (Strings.isEmpty(paramSyntax))
 				return Collections.emptyMap();
 			Nfa<ProdElement> nfa = getParameterNfa(paramSyntax);
@@ -241,7 +241,7 @@ public @interface ParameterParser {
 			throw new RuntimeException("could not parse '" + text + "' with grammar '" + paramSyntax + "'");
 		}
 
-		public List<IParameterProvider> parseRegion(XpectTestRunner invocation, List<IClaimedRegion> claims) {
+		public List<IParameterProvider> parseRegion(XpectInvocation invocation, List<IClaimedRegion> claims) {
 			String paramString = findParameterString(invocation, claims);
 			Map<String, IParameterProvider> parsedParams = parseParams(annotation.syntax(), invocation, paramString);
 			return associateParameterValues(invocation, parsedParams);
@@ -249,16 +249,16 @@ public @interface ParameterParser {
 	}
 
 	public static class MatchingOffsetProvider extends AbstractOffsetProvider {
-		protected final XpectTestRunner invocation;
+		protected final XpectInvocation invocation;
 		protected final String value;
 
-		public MatchingOffsetProvider(XpectTestRunner invocation, String value) {
+		public MatchingOffsetProvider(XpectInvocation invocation, String value) {
 			super();
 			this.invocation = invocation;
 			this.value = value;
 		}
 
-		public XpectTestRunner getInvocation() {
+		public XpectInvocation getInvocation() {
 			return invocation;
 		}
 
@@ -274,9 +274,9 @@ public @interface ParameterParser {
 				val = val.substring(0, add) + val.substring(add + 1);
 			else
 				add = 0;
-			INode node = NodeModelUtils.getNode(invocation.getInvocation());
+			INode node = NodeModelUtils.getNode(invocation);
 			int offset = node.getOffset() + node.getLength();
-			String text = invocation.getDocument();
+			String text = invocation.getFile().getDocument();
 			int result = text.indexOf(val, offset);
 			if (result >= 0) {
 				int off = result + add;

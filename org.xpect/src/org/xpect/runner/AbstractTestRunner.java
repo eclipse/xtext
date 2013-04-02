@@ -10,7 +10,6 @@ package org.xpect.runner;
 import java.util.Map;
 
 import org.eclipse.emf.ecore.util.EcoreUtil;
-import org.eclipse.xtext.resource.XtextResource;
 import org.junit.runner.Description;
 import org.junit.runner.notification.Failure;
 import org.junit.runner.notification.RunNotifier;
@@ -47,10 +46,6 @@ public abstract class AbstractTestRunner {
 		if (this.description == null)
 			this.description = createDescription();
 		return description;
-	}
-
-	public String getDocument() {
-		return ((XtextResource) invocation.eResource()).getParseResult().getRootNode().getText();
 	}
 
 	protected String getFullName() {

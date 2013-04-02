@@ -9,8 +9,9 @@
         <eTypeArguments eClassifier="#//XpectInvocation"/>
       </eGenericType>
     </eOperations>
+    <eOperations name="getDocument" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="members" upperBound="-1"
-        eType="#//Member" containment="true"/>
+        eType="#//Member" containment="true" eOpposite="#//Member/file"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="XpectTest" eSuperTypes="#//Member #//AbstractComponent">
     <eStructuralFeatures xsi:type="ecore:EReference" name="testClassOrSuite" eType="ecore:EClass XpectJavaModel.ecore#//XpectJavaModel"/>
@@ -18,9 +19,12 @@
   <eClassifiers xsi:type="ecore:EClass" name="XpectIgnore" eSuperTypes="#//Member"/>
   <eClassifiers xsi:type="ecore:EClass" name="XpectInvocation" eSuperTypes="#//Member">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="ignore" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="method" eType="ecore:EClass XpectJavaModel.ecore#//XjmMethod"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="method" eType="ecore:EClass XpectJavaModel.ecore#//XjmXpectMethod"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Member"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Member">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="file" eType="#//XpectFile"
+        eOpposite="#//XpectFile/members"/>
+  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Text" eSuperTypes="#//Member">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="text" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
