@@ -1020,7 +1020,7 @@ public class XbaseJavaValidator extends AbstractXbaseJavaValidator {
 			if(feature.getDeclaringType() != null) {
 				JvmIdentifiableElement logicalContainer = logicalContainerProvider.getNearestLogicalContainer(featureCall);
 				JvmDeclaredType featureCallOwner = EcoreUtil2.getContainerOfType(logicalContainer, JvmDeclaredType.class);
-				if(featureCallOwner != feature.getDeclaringType()) {
+				if(!contains(featureCallOwner.getAllFeatures(), feature)) {
 					if(featureCall.isExtension() || staticImports.remove(feature.getDeclaringType()) == null) {
 						extensionImports.remove(feature.getDeclaringType());
 					}
