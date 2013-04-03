@@ -22,8 +22,8 @@ import org.eclipse.xtext.ui.editor.utils.EditorUtils;
  */
 public abstract class InsertStringHandler extends AbstractHandler {
 
-	public static char LEFT_GUILLEMET = '\u00ab';
-	public static char RIGHT_GUILLEMET = '\u00bb';
+	public static final char LEFT_GUILLEMET = '\u00ab';
+	public static final char RIGHT_GUILLEMET = '\u00bb';
 
 	public static class LeftGuillemet extends InsertStringHandler {
 		public LeftGuillemet() {
