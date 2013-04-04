@@ -11,6 +11,7 @@
 package org.eclipse.xtend.ide.formatting.preferences;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -97,7 +98,7 @@ public abstract class AbstractProfileManager extends org.eclipse.jdt.internal.ui
 		super(profiles, context, preferencesAccess, profileVersioner, keySets, profileKey, profileVersionKey);
 		fPreferencesAccess = preferencesAccess;
 		fProfileVersioner = profileVersioner;
-		fKeySets = keySets;
+		fKeySets = Arrays.copyOf(keySets, keySets.length);
 		fProfileKey = profileKey;
 		fProfileVersionKey = profileVersionKey;
 

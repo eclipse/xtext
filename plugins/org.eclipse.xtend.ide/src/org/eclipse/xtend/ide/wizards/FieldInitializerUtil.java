@@ -32,8 +32,7 @@ public class FieldInitializerUtil {
 		IJavaElement elem = null;
 		if(selection != null && !selection.isEmpty()){
 			Object o = selection.getFirstElement();
-			if(o == null ) {
-			} else if(o instanceof IAdaptable) {
+			if(o instanceof IAdaptable) {
 				IAdaptable adaptable = (IAdaptable)o;
 				elem = (IJavaElement)adaptable.getAdapter(IJavaElement.class);
 				if(elem == null){
