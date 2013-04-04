@@ -11,18 +11,16 @@
         <bundles name="org.junit"/>
         <features name="org.eclipse.jdt.feature.group" versionRange="[3.5.2,3.5.3)"/>
       </repositories>
-      <repositories location="http://download.eclipse.org/modeling/emf/updates">
-        <features name="org.eclipse.emf.feature.group" versionRange="[2.5.0,2.6.0)"/>
-        <features name="org.eclipse.emf.source.feature.group" versionRange="[2.5.0,2.6.0)"/>
+      <repositories location="http://download.eclipse.org/releases/galileo">
+        <features name="org.eclipse.emf.feature.group"/>
+        <features name="org.eclipse.emf.source.feature.group"/>
         <features name="org.eclipse.emf.compare.feature.group"/>
+        <bundles name="org.eclipse.draw2d.feature.group"/>
       </repositories>
       <repositories location="http://download.eclipse.org/eclipse/updates/3.8">
         <bundles name="org.eclipse.jdt.annotation"/>
         <bundles name="org.junit4" versionRange="[4.8.1,4.8.2)"/>
         <bundles name="org.junit" versionRange="[3.8.2.v3_8_2_v20100427-1100]"/>
-      </repositories>
-      <repositories location="http://download.eclipse.org/tools/gef/updates/releases">
-        <bundles name="org.eclipse.draw2d.feature.group"/>
       </repositories>
       <repositories location="http://download.eclipse.org/technology/m2e/releases/1.0/1.0.0.20110606-1526/">
         <bundles name="org.eclipse.m2e.core"/>

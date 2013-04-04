@@ -1,5 +1,0 @@
-setpref targetPlatformPath="${build.root}/target.platform"
-
-import -Declipse.download="http://download.eclipse.org" "${checkout.location}/releng/org.eclipse.xtext.releng/releng/tests/xtext-test.mspec"
-
-junit --launch "org.eclipse.xtext.xtext.ui.graph.tests/org.eclipse.xtext.xtext.ui.graph.tests.launch" --flatXML --output "${build.root}/xtext.test.results/org.eclipse.xtext.xtext.ui.graph.tests.xml"
