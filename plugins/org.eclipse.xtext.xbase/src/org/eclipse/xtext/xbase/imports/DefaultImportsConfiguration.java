@@ -174,7 +174,7 @@ public class DefaultImportsConfiguration implements IImportsConfiguration {
 		EList<AbstractRule> rules = grammarAccess.getGrammar().getRules();
 		if(!rules.isEmpty() && rules.get(0) instanceof ParserRule) {
 			LinkedList<EObject> pathToImportSection = newLinkedList();
-			if(internalFindPathToImportSection(pathToImportSection, new HashSet<EObject>(), rules.get(0))) {
+			if(internalFindPathToImportSection(pathToImportSection, new HashSet<ParserRule>(), rules.get(0))) {
  				return pathToImportSection;
  			}
 		}
@@ -182,16 +182,17 @@ public class DefaultImportsConfiguration implements IImportsConfiguration {
 	}
 	
 	protected boolean internalFindPathToImportSection(LinkedList<EObject> pathToImportSection, 
-			Set<EObject> seenRulesOrRuleCalls, EObject ruleOrRuleCall) {
-		if(seenRulesOrRuleCalls.contains(ruleOrRuleCall))
-			return false;
-		pathToImportSection.addLast(ruleOrRuleCall);
+			Set<ParserRule> seenRules, EObject ruleOrRuleCall) {
 		ParserRule rule = null;
 		EClassifier returnType = null;
 		if(ruleOrRuleCall instanceof ParserRule) 
 			rule = (ParserRule) ruleOrRuleCall;
 		else 
 			rule = (ParserRule) ((RuleCall) ruleOrRuleCall).getRule();
+		if(seenRules.contains(rule))
+			return false;
+		seenRules.add(rule);
+		pathToImportSection.addLast(ruleOrRuleCall);
 		returnType = rule.getType().getClassifier();
 		if(returnType instanceof EClass 
 				&& XtypePackage.Literals.XIMPORT_SECTION.isSuperTypeOf((EClass) returnType)) {
@@ -199,7 +200,7 @@ public class DefaultImportsConfiguration implements IImportsConfiguration {
 		}
 		for(RuleCall containedRuleCall: GrammarUtil.containedRuleCalls(rule)) {
 			if(containedRuleCall.getRule() instanceof ParserRule) 
-				if(internalFindPathToImportSection(pathToImportSection, seenRulesOrRuleCalls, containedRuleCall)) {
+				if(internalFindPathToImportSection(pathToImportSection, seenRules, containedRuleCall)) {
 					return true;
 				}
 		}
