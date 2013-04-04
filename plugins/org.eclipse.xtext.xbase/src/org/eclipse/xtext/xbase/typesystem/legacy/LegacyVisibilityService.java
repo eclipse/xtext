@@ -34,7 +34,9 @@ public class LegacyVisibilityService extends VisibilityService {
 	
 	@Override
 	public boolean isVisible(JvmMember member, JvmDeclaredType contextType) {
-		if (contextType == null) {
+		if(member.eIsProxy())
+			return true;
+		if (contextType == null || member.eResource() == null || member.eResource().getResourceSet() == null) {
 			return helper.isVisible(member);
 		}
 		StandardTypeReferenceOwner owner = new StandardTypeReferenceOwner(services, member.eResource().getResourceSet());
