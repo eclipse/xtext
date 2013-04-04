@@ -11,6 +11,9 @@
         <bundles name="org.eclipse.jdt.annotation"/>
         <features name="org.eclipse.jdt.feature.group"/>
       </repositories>
+       <repositories location="http://download.eclipse.org/eclipse/updates/4.2/">
+        <bundles name="org.junit4"/>
+      </repositories>
       <repositories location="http://download.eclipse.org/modeling/emf/emf/updates/nightly">
         <features name="org.eclipse.emf.feature.group"/>
         <features name="org.eclipse.emf.source.feature.group"/>
