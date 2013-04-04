@@ -1,16 +1,14 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<?pde version="3.8"?><target name="tests-kiel1-Galileo" sequenceNumber="2">
+<?pde version="3.8"?><target name="tests-buildserver" sequenceNumber="1">
 <locations>
 <location includeAllPlatforms="false" includeConfigurePhase="false" includeMode="planner" includeSource="false" type="InstallableUnit">
-<unit id="org.eclipse.jdt.feature.group" version="3.5.2.r352_v20100108-7r88FEwFI0WTuoBl0iaG0tyhfZH6"/>
+<unit id="org.eclipse.jdt.feature.group" version="0.0.0"/>
 <unit id="org.eclipse.pde.core" version="0.0.0"/>
 <unit id="org.eclipse.pde.ui" version="0.0.0"/>
 <unit id="org.eclipse.ui.cheatsheets" version="0.0.0"/>
-<unit id="org.junit4" version="4.8.1.v20120523-1257"/>
-<unit id="org.junit" version="4.10.0.v4_10_0_v20120426-0900"/>
-<unit id="org.junit" version="3.8.2.v3_8_2_v20100427-1100"/>
 <unit id="org.eclipse.jdt.annotation" version="0.0.0"/>
-<unit id="org.eclipse.emf.feature.group" version="2.5.0.v200906151043"/>
+<unit id="org.junit" version="0.0.0"/>
+<unit id="org.eclipse.emf.feature.group" version="0.0.0"/>
 <unit id="org.eclipse.emf.compare.feature.group" version="0.0.0"/>
 <unit id="com.google.guava" version="0.0.0"/>
 <unit id="com.google.inject" version="0.0.0"/>
