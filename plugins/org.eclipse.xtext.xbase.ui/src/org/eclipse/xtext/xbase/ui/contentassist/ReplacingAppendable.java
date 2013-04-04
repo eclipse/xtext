@@ -27,7 +27,6 @@ import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.editor.model.IXtextDocument;
 import org.eclipse.xtext.util.ReplaceRegion;
 import org.eclipse.xtext.xbase.compiler.AbstractStringBuilderBasedAppendable;
-import org.eclipse.xtext.xbase.imports.IImportsConfiguration;
 import org.eclipse.xtext.xbase.imports.RewritableImportSection;
 import org.eclipse.xtext.xbase.jvmmodel.IJvmModelAssociations;
 import org.eclipse.xtext.xbase.ui.imports.ReplaceConverter;
@@ -61,9 +60,6 @@ public class ReplacingAppendable extends AbstractStringBuilderBasedAppendable {
 
 		@Inject
 		private RewritableImportSection.Factory rewritableImportSectionFactory;
-		
-		@Inject
-		private IImportsConfiguration importsConfiguration;
 		
 		@Inject
 		private ReplaceConverter replaceConverter;
