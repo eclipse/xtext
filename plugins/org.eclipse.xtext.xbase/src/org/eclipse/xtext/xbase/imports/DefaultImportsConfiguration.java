@@ -30,8 +30,6 @@ import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmMember;
-import org.eclipse.xtext.naming.IQualifiedNameConverter;
-import org.eclipse.xtext.naming.IQualifiedNameProvider;
 import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.resource.XtextResource;
@@ -54,12 +52,6 @@ public class DefaultImportsConfiguration implements IImportsConfiguration {
 	@Inject
 	private IJvmModelAssociations associations;
 
-	@Inject
-	private IQualifiedNameProvider qualifiedNameProvider;
-
-	@Inject
-	private IQualifiedNameConverter qualifiedNameConverter;
-	
 	@Inject
 	private IGrammarAccess grammarAccess;
 	

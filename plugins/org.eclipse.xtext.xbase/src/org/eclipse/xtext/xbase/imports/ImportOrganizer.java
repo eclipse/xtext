@@ -14,10 +14,8 @@ import java.util.List;
 import java.util.Map;
 
 import org.eclipse.xtext.common.types.JvmDeclaredType;
-import org.eclipse.xtext.formatting.IWhitespaceInformationProvider;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.util.ReplaceRegion;
-import org.eclipse.xtext.xbase.jvmmodel.IJvmModelAssociations;
 
 import com.google.inject.Inject;
 import com.google.inject.Provider;
@@ -28,16 +26,7 @@ import com.google.inject.Provider;
 public class ImportOrganizer {
 
 	@Inject
-	private IImportsConfiguration config;
-	
-	@Inject
 	private RewritableImportSection.Factory importSectionFactory;
-	
-	@Inject
-	private IWhitespaceInformationProvider whitespaceInformationProvider;
-	
-	@Inject
-	private IJvmModelAssociations associations;
 	
 	@Inject
 	private Provider<TypeUsageCollector> typeUsageCollectorProvider;
