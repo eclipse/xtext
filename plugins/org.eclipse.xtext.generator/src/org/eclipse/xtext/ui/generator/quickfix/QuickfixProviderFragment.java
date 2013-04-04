@@ -50,12 +50,15 @@ public class QuickfixProviderFragment extends AbstractStubGeneratorFragment impl
 	
 	@Override
 	public Set<Binding> getGuiceBindingsUi(Grammar grammar) {
-		if(isGenerateStub())
-			return new BindFactory()
-				.addTypeToType("org.eclipse.xtext.ui.editor.quickfix.IssueResolutionProvider", getQuickfixProviderName(grammar, getNaming()))
-				.getBindings();
-		else
-			return emptySet();
+		BindFactory bindFactory = new BindFactory();
+		if(isGenerateStub()) {
+			 bindFactory
+				.addTypeToType("org.eclipse.xtext.ui.editor.quickfix.IssueResolutionProvider", getQuickfixProviderName(grammar, getNaming()));
+		} else {
+			 bindFactory
+				.addTypeToType("org.eclipse.xtext.ui.editor.quickfix.IssueResolutionProvider", getQuickfixProviderSuperClassName(grammar));
+		}
+		return bindFactory.getBindings();
 	}
 
 	/**
