@@ -25,6 +25,7 @@ import org.eclipse.core.runtime.preferences.DefaultScope;
 import org.eclipse.core.runtime.preferences.IEclipsePreferences;
 import org.eclipse.core.runtime.preferences.IScopeContext;
 import org.eclipse.core.runtime.preferences.InstanceScope;
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.internal.ui.preferences.PreferencesAccess;
 import org.eclipse.jdt.internal.ui.preferences.formatter.IProfileVersioner;
 import org.eclipse.osgi.util.NLS;
@@ -93,12 +94,12 @@ public abstract class AbstractProfileManager extends org.eclipse.jdt.internal.ui
 	 */
 	public AbstractProfileManager(List profiles, IScopeContext context, PreferencesAccess preferencesAccess,
 			IProfileVersioner profileVersioner,
-			org.eclipse.jdt.internal.ui.preferences.formatter.ProfileManager.KeySet[] keySets, String profileKey,
+			@NonNull org.eclipse.jdt.internal.ui.preferences.formatter.ProfileManager.KeySet[] keySets, String profileKey,
 			String profileVersionKey) {
 		super(profiles, context, preferencesAccess, profileVersioner, keySets, profileKey, profileVersionKey);
 		fPreferencesAccess = preferencesAccess;
 		fProfileVersioner = profileVersioner;
-		fKeySets = Arrays.copyOf(keySets, keySets.length);
+		fKeySets = keySets.clone();
 		fProfileKey = profileKey;
 		fProfileVersionKey = profileVersionKey;
 
