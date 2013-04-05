@@ -1,13 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <component id="org.eclipse.xtext.util" version="2">
     <resource path="META-INF/MANIFEST.MF">
-        <filter comment="Guice changed" id="923795461">
-            <message_arguments>
-                <message_argument value="2.3.0"/>
-                <message_argument value="2.2.1"/>
-            </message_arguments>
-        </filter>
-        <filter comment="gauva upgrade" id="923795461">
+        <filter comment="guava upgrade" id="923795461">
             <message_arguments>
                 <message_argument value="2.4.1"/>
                 <message_argument value="2.4.0"/>
@@ -15,7 +9,7 @@
         </filter>
     </resource>
     <resource path="META-INF/MANIFEST.MF" type="com.google.common.collect.EvictionListeners">
-        <filter comment="gauva upgrade" id="305422471">
+        <filter comment="guava upgrade" id="305422471">
             <message_arguments>
                 <message_argument value="com.google.common.collect.EvictionListeners"/>
                 <message_argument value="org.eclipse.xtext.util_2.4.0"/>
@@ -23,7 +17,7 @@
         </filter>
     </resource>
     <resource path="META-INF/MANIFEST.MF" type="com.google.common.collect.MapEvictionListener">
-        <filter comment="gauva upgrade" id="305422471">
+        <filter comment="guava upgrade" id="305422471">
             <message_arguments>
                 <message_argument value="com.google.common.collect.MapEvictionListener"/>
                 <message_argument value="org.eclipse.xtext.util_2.4.0"/>
@@ -31,7 +25,7 @@
         </filter>
     </resource>
     <resource path="META-INF/MANIFEST.MF" type="com.google.common.util.concurrent.AbstractListenableFuture">
-        <filter comment="gauva upgrade" id="305422471">
+        <filter comment="guava upgrade" id="305422471">
             <message_arguments>
                 <message_argument value="com.google.common.util.concurrent.AbstractListenableFuture"/>
                 <message_argument value="org.eclipse.xtext.util_2.4.0"/>
@@ -39,7 +33,7 @@
         </filter>
     </resource>
     <resource path="META-INF/MANIFEST.MF" type="com.google.common.util.concurrent.UninterruptibleFuture">
-        <filter comment="gauva upgrade" id="305422471">
+        <filter comment="guava upgrade" id="305422471">
             <message_arguments>
                 <message_argument value="com.google.common.util.concurrent.UninterruptibleFuture"/>
                 <message_argument value="org.eclipse.xtext.util_2.4.0"/>
