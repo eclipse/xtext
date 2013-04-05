@@ -62,8 +62,8 @@ public class DerivedStateAwareResourceDescriptionManager extends DefaultResource
 			return description;
 		} finally {
 			if (!isInitialized) {
-				if (log.isInfoEnabled())
-					log.info("Discarding inferred state for "+resource.getURI());
+				if (log.isDebugEnabled())
+					log.debug("Discarding inferred state for "+resource.getURI());
 				res.discardDerivedState();
 				res.eSetDeliver(true);
 			}
