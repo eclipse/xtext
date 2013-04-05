@@ -7,7 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.preferences;
 
-import java.util.concurrent.ExecutionException;
+import java.util.Map;
 
 import org.apache.log4j.Logger;
 import org.eclipse.core.resources.IProject;
@@ -22,9 +22,7 @@ import org.eclipse.xtext.preferences.PreferenceKey;
 import org.eclipse.xtext.ui.editor.preferences.IPreferenceStoreAccess;
 
 import com.google.common.base.Function;
-import com.google.common.cache.Cache;
-import com.google.common.cache.CacheBuilder;
-import com.google.common.cache.CacheLoader;
+import com.google.common.collect.MapMaker;
 import com.google.inject.Inject;
 
 /**
@@ -41,19 +39,20 @@ public class EclipsePreferencesProvider implements IPreferenceValuesProvider {
 			access.getContextPreferenceStore(project) :
 			access.getPreferenceStore();
 		
-		final Cache<String, String> computingMap = CacheBuilder.newBuilder().build(CacheLoader.from(
+		@SuppressWarnings("deprecation")
+		final Map<String, String> computingMap = new MapMaker().makeComputingMap(
 				new Function<String, String>() {
 					public String apply(String input) {
 						return store.getString(input);
 					}
-				}));
+				});
 		
 		return new IPreferenceValues() {
 			public String getPreference(PreferenceKey key) {
 				try {
 					final String string = computingMap.get(key.getId());
 					return org.eclipse.jface.preference.IPreferenceStore.STRING_DEFAULT_DEFAULT.equals(string) ? key.getDefaultValue() : string;
-				} catch (ExecutionException e) {
+				} catch (Exception e) {
 					log.error("Error getting preference for key '"+key.getId()+"'.", e);
 					return key.getDefaultValue();
 				}
