@@ -12,7 +12,7 @@
 <unit id="org.eclipse.jdt.annotation" version="0.0.0"/>
 <unit id="org.eclipse.emf.feature.group" version="0.0.0"/>
 <unit id="org.eclipse.emf.compare.feature.group" version="0.0.0"/>
-<unit id="com.google.guava" version="10.0.1.v201203051515"/>
+<unit id="com.google.guava" version="0.0.0"/>
 <unit id="com.google.inject" version="0.0.0"/>
 <unit id="org.apache.log4j" version="0.0.0"/>
 <unit id="org.aopalliance" version="0.0.0"/>

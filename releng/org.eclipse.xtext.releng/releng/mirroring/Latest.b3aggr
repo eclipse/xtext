@@ -18,7 +18,7 @@
         <features name="org.eclipse.emf.feature.group"/>
         <features name="org.eclipse.emf.source.feature.group"/>
       </repositories>
-      <repositories location="http://download.eclipse.org/modeling/emf/compare/updates/milestones/2.1/S201302050831">
+      <repositories location="http://download.eclipse.org/modeling/emf/compare/updates/milestones/2.1/">
         <features name="org.eclipse.emf.compare.feature.group"/>
       </repositories>
       <repositories location="http://download.eclipse.org/tools/gef/updates/milestones">
