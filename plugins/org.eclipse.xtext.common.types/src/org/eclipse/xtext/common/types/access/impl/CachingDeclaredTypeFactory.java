@@ -7,18 +7,15 @@
  *******************************************************************************/
 package org.eclipse.xtext.common.types.access.impl;
 
-import java.util.concurrent.ExecutionException;
+import java.util.Map;
 
 import org.apache.log4j.Logger;
 import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmType;
 
-import com.google.common.cache.Cache;
-import com.google.common.cache.CacheBuilder;
-import com.google.common.cache.CacheLoader;
-import com.google.common.cache.RemovalListener;
-import com.google.common.cache.RemovalNotification;
+import com.google.common.base.Function;
+import com.google.common.collect.MapMaker;
 
 /**
  * It caches the {@link JvmDeclaredType} per {@link Class}.
@@ -41,32 +38,25 @@ import com.google.common.cache.RemovalNotification;
 public class CachingDeclaredTypeFactory extends DeclaredTypeFactory {
 
 	private static final Logger log = Logger.getLogger(CachingDeclaredTypeFactory.class);
-	
+
 	private final DeclaredTypeFactory delegate;
-	private final Cache<Class<?>, JvmDeclaredType> typeCache = CacheBuilder.newBuilder()
-			.maximumSize(500)
+	@SuppressWarnings("deprecation")
+	private final Map<Class<?>, JvmDeclaredType> typeCache = new MapMaker()
 			.softValues()
 			.weakKeys()
-			.removalListener(new RemovalListener<Class<?>, JvmDeclaredType>() {
-				public void onRemoval(RemovalNotification<Class<?>, JvmDeclaredType> notification) {
-					if (log.isDebugEnabled())
-						log.debug("Removal: " + notification.getKey().getCanonicalName());
-				}
-			})
-			.build(new CacheLoader<Class<?>, JvmDeclaredType>() {
-				@Override
-				public JvmDeclaredType load(Class<?> key) throws Exception {
+			.makeComputingMap(new Function<Class<?>, JvmDeclaredType>() {
+				public JvmDeclaredType apply(Class<?> key) {
 					if (log.isDebugEnabled())
 						log.debug("Hit:" + key.getCanonicalName());
 					return delegate.createType(key);
 				}
-	});
+			});
 
 	public CachingDeclaredTypeFactory(DeclaredTypeFactory delegate) {
 		super(delegate.getUriHelper());
 		this.delegate = delegate;
 	}
-	
+
 	@Override
 	public JvmDeclaredType createType(Class<?> clazz) {
 		try {
@@ -77,7 +67,7 @@ public class CachingDeclaredTypeFactory extends DeclaredTypeFactory {
 			// into a resource and perform proxy resolution afterwards
 			// in the context of a single resource set.
 			return EcoreUtil2.cloneWithProxies(cachedResult);
-		} catch (ExecutionException e) {
+		} catch (Exception e) {
 			if (log.isDebugEnabled()) {
 				log.debug(e.getMessage(), e);
 			}
