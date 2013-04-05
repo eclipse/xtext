@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <cs:cspec xmlns:cs="http://www.eclipse.org/buckminster/CSpec-1.0" name="org.eclipse.xtext.releng" componentType="buckminster" version="1.0.0.qualifier">
     <cs:dependencies>
-        <cs:dependency name="com.google.guava" componentType="osgi.bundle" versionDesignator="[10.0.0,12.0.0)"/>
-        <cs:dependency name="com.google.guava.source" componentType="osgi.bundle" versionDesignator="[10.0.0,12.0.0)"/>
+        <cs:dependency name="com.google.guava" componentType="osgi.bundle" versionDesignator="10.0.0"/>
+        <cs:dependency name="com.google.guava.source" componentType="osgi.bundle" versionDesignator="10.0.0"/>
         <cs:dependency name="com.google.inject" componentType="osgi.bundle" versionDesignator="3.0.0"/>
         <cs:dependency name="com.google.inject.source" componentType="osgi.bundle" versionDesignator="3.0.0"/>
         <cs:dependency name="org.objectweb.asm" componentType="osgi.bundle" versionDesignator="3.2.0"/>
