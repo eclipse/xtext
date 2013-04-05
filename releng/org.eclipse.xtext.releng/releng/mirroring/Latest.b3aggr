@@ -7,7 +7,7 @@
         <bundles name="org.eclipse.pde.core"/>
         <bundles name="org.eclipse.pde.ui"/>
         <bundles name="org.eclipse.ui.cheatsheets"/>
-        <bundles name="org.junit"/>
+        <bundles name="org.junit" versionRange="[4.10.0.v4_10_0_v20120426-0900]"/>
         <bundles name="org.eclipse.jdt.annotation"/>
         <features name="org.eclipse.jdt.feature.group"/>
       </repositories>
@@ -28,7 +28,7 @@
         <bundles name="org.eclipse.m2e.core"/>
       </repositories>
       <repositories location="http://download.eclipse.org/modeling/tmf/xtext/updates/orbit">
-        <bundles name="org.junit" versionRange="[3.8.2,3.9.0)"/>
+        <bundles name="org.junit" versionRange="[3.8.2.v3_8_2_v20100427-1100]"/>
   	  </repositories>
     </contributions>
   </validationSets>
