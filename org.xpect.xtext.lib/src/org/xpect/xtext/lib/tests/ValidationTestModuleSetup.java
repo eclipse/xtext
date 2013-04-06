@@ -60,9 +60,10 @@ public class ValidationTestModuleSetup implements IXpectGuiceModuleSetup {
 		public List<Issue> validate(Resource resource, CheckMode mode, CancelIndicator indicator) {
 			if (resource instanceof XtextResource && ((XtextResource) resource).getParseResult() != null) {
 				XtextResource xresource = (XtextResource) resource;
-				Set<Issue> issues = Sets.newLinkedHashSet(validateDelegate(resource, mode, indicator));
-				if (issues.isEmpty())
+				List<Issue> issuesFromDelegate = validateDelegate(resource, mode, indicator);
+				if (issuesFromDelegate == null || issuesFromDelegate.isEmpty())
 					return Collections.emptyList();
+				Set<Issue> issues = Sets.newLinkedHashSet(issuesFromDelegate);
 				XpectFile xpectFile = XpectFileAccess.getXpectFile(resource);
 				Set<Issue> matched = Sets.newHashSet();
 				for (XpectInvocation inv : xpectFile.getInvocations())
