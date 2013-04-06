@@ -171,6 +171,10 @@ class XtendClassDeclarationImpl extends XtendTypeDeclarationImpl<XtendClass> imp
 		true
 	}
 	
+	override isStrictFloatingPoint() {
+		false	
+	}
+	
 	override getTypeParameters() {
 		delegate.typeParameters.map[compilationUnit.toXtendTypeParameterDeclaration(it)]
 	}
@@ -185,6 +189,10 @@ class XtendInterfaceDeclarationImpl extends XtendTypeDeclarationImpl<XtendInterf
 	
 	override getTypeParameters() {
 		delegate.typeParameters.map[compilationUnit.toXtendTypeParameterDeclaration(it)]
+	}
+
+	override isStrictFloatingPoint() {
+		false	
 	}
 
 }
@@ -214,6 +222,22 @@ class XtendMethodDeclarationImpl extends XtendMemberDeclarationImpl<XtendFunctio
 	
 	override isStatic() {
 		delegate.isStatic
+	}
+	
+	override isSynchronized() {
+		false
+	}
+
+	override isDefault() {
+		false
+	}
+	
+	override isStrictFloatingPoint() {
+		false	
+	}
+	
+	override isNative() {
+		false	
 	}
 	
 	override getReturnType() {
@@ -324,6 +348,14 @@ class XtendFieldDeclarationImpl extends XtendMemberDeclarationImpl<XtendField> i
 	
 	override isStatic() {
 		delegate.isStatic
+	}
+	
+	override isTransient() {
+		return false;
+	}
+
+	override isVolatile() {
+		return false;
 	}
 	
 	override getType() {

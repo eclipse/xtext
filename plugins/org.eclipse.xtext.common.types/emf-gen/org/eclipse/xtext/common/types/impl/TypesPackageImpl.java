@@ -880,6 +880,16 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EAttribute getJvmGenericType_StrictFloatingPoint()
+	{
+		return (EAttribute)jvmGenericTypeEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getJvmTypeReference()
 	{
 		return jvmTypeReferenceEClass;
@@ -1080,6 +1090,26 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EAttribute getJvmField_Volatile()
+	{
+		return (EAttribute)jvmFieldEClass.getEStructuralFeatures().get(3);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getJvmField_Transient()
+	{
+		return (EAttribute)jvmFieldEClass.getEStructuralFeatures().get(4);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getJvmExecutable()
 	{
 		return jvmExecutableEClass;
@@ -1183,6 +1213,46 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage
 	public EReference getJvmOperation_DefaultValue()
 	{
 		return (EReference)jvmOperationEClass.getEStructuralFeatures().get(4);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getJvmOperation_Synchronized()
+	{
+		return (EAttribute)jvmOperationEClass.getEStructuralFeatures().get(5);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getJvmOperation_Default()
+	{
+		return (EAttribute)jvmOperationEClass.getEStructuralFeatures().get(6);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getJvmOperation_Native()
+	{
+		return (EAttribute)jvmOperationEClass.getEStructuralFeatures().get(7);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getJvmOperation_StrictFloatingPoint()
+	{
+		return (EAttribute)jvmOperationEClass.getEStructuralFeatures().get(8);
 	}
 
 	/**
@@ -1765,6 +1835,7 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage
 
 		jvmGenericTypeEClass = createEClass(JVM_GENERIC_TYPE);
 		createEAttribute(jvmGenericTypeEClass, JVM_GENERIC_TYPE__INTERFACE);
+		createEAttribute(jvmGenericTypeEClass, JVM_GENERIC_TYPE__STRICT_FLOATING_POINT);
 
 		jvmTypeReferenceEClass = createEClass(JVM_TYPE_REFERENCE);
 
@@ -1794,6 +1865,8 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage
 		createEAttribute(jvmFieldEClass, JVM_FIELD__STATIC);
 		createEAttribute(jvmFieldEClass, JVM_FIELD__FINAL);
 		createEReference(jvmFieldEClass, JVM_FIELD__TYPE);
+		createEAttribute(jvmFieldEClass, JVM_FIELD__VOLATILE);
+		createEAttribute(jvmFieldEClass, JVM_FIELD__TRANSIENT);
 
 		jvmExecutableEClass = createEClass(JVM_EXECUTABLE);
 		createEReference(jvmExecutableEClass, JVM_EXECUTABLE__PARAMETERS);
@@ -1808,6 +1881,10 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage
 		createEAttribute(jvmOperationEClass, JVM_OPERATION__ABSTRACT);
 		createEReference(jvmOperationEClass, JVM_OPERATION__RETURN_TYPE);
 		createEReference(jvmOperationEClass, JVM_OPERATION__DEFAULT_VALUE);
+		createEAttribute(jvmOperationEClass, JVM_OPERATION__SYNCHRONIZED);
+		createEAttribute(jvmOperationEClass, JVM_OPERATION__DEFAULT);
+		createEAttribute(jvmOperationEClass, JVM_OPERATION__NATIVE);
+		createEAttribute(jvmOperationEClass, JVM_OPERATION__STRICT_FLOATING_POINT);
 
 		jvmFormalParameterEClass = createEClass(JVM_FORMAL_PARAMETER);
 		createEAttribute(jvmFormalParameterEClass, JVM_FORMAL_PARAMETER__NAME);
@@ -2067,6 +2144,7 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage
 
 		initEClass(jvmGenericTypeEClass, JvmGenericType.class, "JvmGenericType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getJvmGenericType_Interface(), ecorePackage.getEBoolean(), "interface", null, 0, 1, JvmGenericType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getJvmGenericType_StrictFloatingPoint(), ecorePackage.getEBoolean(), "strictFloatingPoint", null, 0, 1, JvmGenericType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		op = addEOperation(jvmGenericTypeEClass, null, "getExtendedInterfaces", 0, 1, IS_UNIQUE, IS_ORDERED);
 		g1 = createEGenericType(this.getIterable());
@@ -2155,6 +2233,8 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage
 		initEAttribute(getJvmField_Static(), ecorePackage.getEBoolean(), "static", null, 0, 1, JvmField.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getJvmField_Final(), ecorePackage.getEBoolean(), "final", null, 0, 1, JvmField.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getJvmField_Type(), this.getJvmTypeReference(), null, "type", null, 0, 1, JvmField.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getJvmField_Volatile(), ecorePackage.getEBoolean(), "volatile", null, 0, 1, JvmField.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getJvmField_Transient(), ecorePackage.getEBoolean(), "transient", null, 0, 1, JvmField.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(jvmExecutableEClass, JvmExecutable.class, "JvmExecutable", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getJvmExecutable_Parameters(), this.getJvmFormalParameter(), null, "parameters", null, 0, -1, JvmExecutable.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -2169,6 +2249,10 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage
 		initEAttribute(getJvmOperation_Abstract(), ecorePackage.getEBoolean(), "abstract", null, 0, 1, JvmOperation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getJvmOperation_ReturnType(), this.getJvmTypeReference(), null, "returnType", null, 0, 1, JvmOperation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getJvmOperation_DefaultValue(), this.getJvmAnnotationValue(), null, "defaultValue", null, 0, 1, JvmOperation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getJvmOperation_Synchronized(), ecorePackage.getEBoolean(), "synchronized", null, 0, 1, JvmOperation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getJvmOperation_Default(), ecorePackage.getEBoolean(), "default", null, 0, 1, JvmOperation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getJvmOperation_Native(), ecorePackage.getEBoolean(), "native", null, 0, 1, JvmOperation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getJvmOperation_StrictFloatingPoint(), ecorePackage.getEBoolean(), "strictFloatingPoint", null, 0, 1, JvmOperation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(jvmFormalParameterEClass, JvmFormalParameter.class, "JvmFormalParameter", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getJvmFormalParameter_Name(), ecorePackage.getEString(), "name", null, 0, 1, JvmFormalParameter.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

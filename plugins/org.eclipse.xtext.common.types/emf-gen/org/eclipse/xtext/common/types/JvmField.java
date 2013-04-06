@@ -19,6 +19,8 @@ package org.eclipse.xtext.common.types;
  *   <li>{@link org.eclipse.xtext.common.types.JvmField#isStatic <em>Static</em>}</li>
  *   <li>{@link org.eclipse.xtext.common.types.JvmField#isFinal <em>Final</em>}</li>
  *   <li>{@link org.eclipse.xtext.common.types.JvmField#getType <em>Type</em>}</li>
+ *   <li>{@link org.eclipse.xtext.common.types.JvmField#isVolatile <em>Volatile</em>}</li>
+ *   <li>{@link org.eclipse.xtext.common.types.JvmField#isTransient <em>Transient</em>}</li>
  * </ul>
  * </p>
  *
@@ -105,5 +107,61 @@ public interface JvmField extends JvmFeature
 	 * @generated
 	 */
 	void setType(JvmTypeReference value);
+
+	/**
+	 * Returns the value of the '<em><b>Volatile</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Volatile</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Volatile</em>' attribute.
+	 * @see #setVolatile(boolean)
+	 * @see org.eclipse.xtext.common.types.TypesPackage#getJvmField_Volatile()
+	 * @model
+	 * @generated
+	 * @since 2.4
+	 */
+	boolean isVolatile();
+
+	/**
+	 * Sets the value of the '{@link org.eclipse.xtext.common.types.JvmField#isVolatile <em>Volatile</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Volatile</em>' attribute.
+	 * @see #isVolatile()
+	 * @generated
+	 * @since 2.4
+	 */
+	void setVolatile(boolean value);
+
+	/**
+	 * Returns the value of the '<em><b>Transient</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Transient</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Transient</em>' attribute.
+	 * @see #setTransient(boolean)
+	 * @see org.eclipse.xtext.common.types.TypesPackage#getJvmField_Transient()
+	 * @model
+	 * @generated
+	 * @since 2.4
+	 */
+	boolean isTransient();
+
+	/**
+	 * Sets the value of the '{@link org.eclipse.xtext.common.types.JvmField#isTransient <em>Transient</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Transient</em>' attribute.
+	 * @see #isTransient()
+	 * @generated
+	 * @since 2.4
+	 */
+	void setTransient(boolean value);
 
 } // JvmField

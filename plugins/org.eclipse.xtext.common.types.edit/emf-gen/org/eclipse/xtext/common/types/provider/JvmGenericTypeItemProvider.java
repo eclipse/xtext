@@ -70,6 +70,7 @@ public class JvmGenericTypeItemProvider
 			super.getPropertyDescriptors(object);
 
 			addInterfacePropertyDescriptor(object);
+			addStrictFloatingPointPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
@@ -89,6 +90,30 @@ public class JvmGenericTypeItemProvider
 				 getString("_UI_JvmGenericType_interface_feature"),
 				 getString("_UI_PropertyDescriptor_description", "_UI_JvmGenericType_interface_feature", "_UI_JvmGenericType_type"),
 				 TypesPackage.Literals.JVM_GENERIC_TYPE__INTERFACE,
+				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.BOOLEAN_VALUE_IMAGE,
+				 null,
+				 null));
+	}
+
+	/**
+	 * This adds a property descriptor for the Strict Floating Point feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @since 2.4
+	 */
+	protected void addStrictFloatingPointPropertyDescriptor(Object object)
+	{
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_JvmGenericType_strictFloatingPoint_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_JvmGenericType_strictFloatingPoint_feature", "_UI_JvmGenericType_type"),
+				 TypesPackage.Literals.JVM_GENERIC_TYPE__STRICT_FLOATING_POINT,
 				 true,
 				 false,
 				 false,
@@ -172,6 +197,7 @@ public class JvmGenericTypeItemProvider
 		switch (notification.getFeatureID(JvmGenericType.class))
 		{
 			case TypesPackage.JVM_GENERIC_TYPE__INTERFACE:
+			case TypesPackage.JVM_GENERIC_TYPE__STRICT_FLOATING_POINT:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
 			case TypesPackage.JVM_GENERIC_TYPE__TYPE_PARAMETERS:

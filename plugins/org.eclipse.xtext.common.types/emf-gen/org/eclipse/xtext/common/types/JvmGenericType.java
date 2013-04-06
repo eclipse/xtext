@@ -18,6 +18,7 @@ import java.lang.Iterable;
  * The following features are supported:
  * <ul>
  *   <li>{@link org.eclipse.xtext.common.types.JvmGenericType#isInterface <em>Interface</em>}</li>
+ *   <li>{@link org.eclipse.xtext.common.types.JvmGenericType#isStrictFloatingPoint <em>Strict Floating Point</em>}</li>
  * </ul>
  * </p>
  *
@@ -52,6 +53,34 @@ public interface JvmGenericType extends JvmDeclaredType, JvmTypeParameterDeclara
 	 * @generated
 	 */
 	void setInterface(boolean value);
+
+	/**
+	 * Returns the value of the '<em><b>Strict Floating Point</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Strict Floating Point</em>' attribute isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Strict Floating Point</em>' attribute.
+	 * @see #setStrictFloatingPoint(boolean)
+	 * @see org.eclipse.xtext.common.types.TypesPackage#getJvmGenericType_StrictFloatingPoint()
+	 * @model
+	 * @generated
+	 * @since 2.4
+	 */
+	boolean isStrictFloatingPoint();
+
+	/**
+	 * Sets the value of the '{@link org.eclipse.xtext.common.types.JvmGenericType#isStrictFloatingPoint <em>Strict Floating Point</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Strict Floating Point</em>' attribute.
+	 * @see #isStrictFloatingPoint()
+	 * @generated
+	 * @since 2.4
+	 */
+	void setStrictFloatingPoint(boolean value);
 
 	/**
 	 * <!-- begin-user-doc -->

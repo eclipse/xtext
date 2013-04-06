@@ -31,7 +31,28 @@ public interface MutableMethodDeclaration extends MutableExecutableDeclaration, 
 	void setFinal(boolean isFinal);
 	
 	/**
+	 * @param isStrictFloatingPoint whether this method declaration is <code>strictfp</code>
+	 */
+	void setStrictFloatingPoint(boolean isStrictFloatingPoint);
+
+	/**
+	 * @param isNative whether this method declaration is <code>native</code>
+	 */
+	void setNative(boolean isNative);
+
+	/**
 	 * @param isAbstract whether this method declaration is <code>abstract</code>
 	 */
 	void setAbstract(boolean isAbstract);
+	
+	/**
+	 * @param isSynchronized whether this method declaration is <code>synchronized</code>
+	 */
+	void setSynchronized(boolean isSynchronized);
+
+	/**
+	 * @param isDefault whether this method declaration is <code>default</code>
+	 */
+	void setDefault(boolean isDefault);
+
 }

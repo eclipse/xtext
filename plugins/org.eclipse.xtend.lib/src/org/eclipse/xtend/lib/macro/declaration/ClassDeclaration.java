@@ -35,6 +35,11 @@ public interface ClassDeclaration extends TypeDeclaration,
 	boolean isStatic();
 
 	/**
+	 * @return whether this class is marked <code>strictfp</code>
+	 */
+	boolean isStrictFloatingPoint();
+
+	/**
 	 * @return the super class of this class. If this class declaration
 	 *         represents the source AST this method returns <code>null</code>
 	 *         if no explicit super class is specified.

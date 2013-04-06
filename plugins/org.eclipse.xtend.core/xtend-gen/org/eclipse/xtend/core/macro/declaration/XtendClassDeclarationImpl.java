@@ -61,6 +61,10 @@ public class XtendClassDeclarationImpl extends XtendTypeDeclarationImpl<XtendCla
     return true;
   }
   
+  public boolean isStrictFloatingPoint() {
+    return false;
+  }
+  
   public Iterable<? extends TypeParameterDeclaration> getTypeParameters() {
     XtendClass _delegate = this.getDelegate();
     EList<JvmTypeParameter> _typeParameters = _delegate.getTypeParameters();

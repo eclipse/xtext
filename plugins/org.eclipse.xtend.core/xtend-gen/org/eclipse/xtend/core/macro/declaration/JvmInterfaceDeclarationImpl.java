@@ -87,4 +87,15 @@ public class JvmInterfaceDeclarationImpl extends JvmTypeDeclarationImpl<JvmGener
     List<MutableTypeParameterDeclaration> _map = ListExtensions.<JvmTypeParameter, MutableTypeParameterDeclaration>map(_typeParameters, _function);
     return _map;
   }
+  
+  public void setStrictFloatingPoint(final boolean isStrictFloatingPoint) {
+    JvmGenericType _delegate = this.getDelegate();
+    _delegate.setStrictFloatingPoint(isStrictFloatingPoint);
+  }
+  
+  public boolean isStrictFloatingPoint() {
+    JvmGenericType _delegate = this.getDelegate();
+    boolean _isStrictFloatingPoint = _delegate.isStrictFloatingPoint();
+    return _isStrictFloatingPoint;
+  }
 }

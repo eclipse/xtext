@@ -50,4 +50,8 @@ public class XtendInterfaceDeclarationImpl extends XtendTypeDeclarationImpl<Xten
     List<XtendTypeParameterDeclarationImpl> _map = ListExtensions.<JvmTypeParameter, XtendTypeParameterDeclarationImpl>map(_typeParameters, _function);
     return _map;
   }
+  
+  public boolean isStrictFloatingPoint() {
+    return false;
+  }
 }

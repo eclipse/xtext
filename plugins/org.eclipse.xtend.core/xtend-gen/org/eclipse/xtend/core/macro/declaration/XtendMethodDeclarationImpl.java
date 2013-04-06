@@ -57,6 +57,22 @@ public class XtendMethodDeclarationImpl extends XtendMemberDeclarationImpl<Xtend
     return _isStatic;
   }
   
+  public boolean isSynchronized() {
+    return false;
+  }
+  
+  public boolean isDefault() {
+    return false;
+  }
+  
+  public boolean isStrictFloatingPoint() {
+    return false;
+  }
+  
+  public boolean isNative() {
+    return false;
+  }
+  
   public TypeReference getReturnType() {
     CompilationUnitImpl _compilationUnit = this.getCompilationUnit();
     XtendFunction _delegate = this.getDelegate();

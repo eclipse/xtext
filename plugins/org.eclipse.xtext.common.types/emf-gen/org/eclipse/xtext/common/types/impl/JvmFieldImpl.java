@@ -29,6 +29,8 @@ import org.eclipse.xtext.common.types.TypesPackage;
  *   <li>{@link org.eclipse.xtext.common.types.impl.JvmFieldImpl#isStatic <em>Static</em>}</li>
  *   <li>{@link org.eclipse.xtext.common.types.impl.JvmFieldImpl#isFinal <em>Final</em>}</li>
  *   <li>{@link org.eclipse.xtext.common.types.impl.JvmFieldImpl#getType <em>Type</em>}</li>
+ *   <li>{@link org.eclipse.xtext.common.types.impl.JvmFieldImpl#isVolatile <em>Volatile</em>}</li>
+ *   <li>{@link org.eclipse.xtext.common.types.impl.JvmFieldImpl#isTransient <em>Transient</em>}</li>
  * </ul>
  * </p>
  *
@@ -87,6 +89,46 @@ public class JvmFieldImpl extends JvmFeatureImpl implements JvmField
 	protected JvmTypeReference type;
 
 	/**
+	 * The default value of the '{@link #isVolatile() <em>Volatile</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isVolatile()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final boolean VOLATILE_EDEFAULT = false;
+
+	/**
+	 * The cached value of the '{@link #isVolatile() <em>Volatile</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isVolatile()
+	 * @generated
+	 * @ordered
+	 */
+	protected boolean volatile_ = VOLATILE_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #isTransient() <em>Transient</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isTransient()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final boolean TRANSIENT_EDEFAULT = false;
+
+	/**
+	 * The cached value of the '{@link #isTransient() <em>Transient</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #isTransient()
+	 * @generated
+	 * @ordered
+	 */
+	protected boolean transient_ = TRANSIENT_EDEFAULT;
+
+	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -112,7 +154,6 @@ public class JvmFieldImpl extends JvmFeatureImpl implements JvmField
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
 	public boolean isStatic()
 	{
 		return static_;
@@ -207,6 +248,52 @@ public class JvmFieldImpl extends JvmFeatureImpl implements JvmField
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public boolean isVolatile()
+	{
+		return volatile_;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setVolatile(boolean newVolatile)
+	{
+		boolean oldVolatile = volatile_;
+		volatile_ = newVolatile;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, TypesPackage.JVM_FIELD__VOLATILE, oldVolatile, volatile_));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public boolean isTransient()
+	{
+		return transient_;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setTransient(boolean newTransient)
+	{
+		boolean oldTransient = transient_;
+		transient_ = newTransient;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, TypesPackage.JVM_FIELD__TRANSIENT, oldTransient, transient_));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs)
 	{
@@ -234,6 +321,10 @@ public class JvmFieldImpl extends JvmFeatureImpl implements JvmField
 				return isFinal();
 			case TypesPackage.JVM_FIELD__TYPE:
 				return getType();
+			case TypesPackage.JVM_FIELD__VOLATILE:
+				return isVolatile();
+			case TypesPackage.JVM_FIELD__TRANSIENT:
+				return isTransient();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -256,6 +347,12 @@ public class JvmFieldImpl extends JvmFeatureImpl implements JvmField
 				return;
 			case TypesPackage.JVM_FIELD__TYPE:
 				setType((JvmTypeReference)newValue);
+				return;
+			case TypesPackage.JVM_FIELD__VOLATILE:
+				setVolatile((Boolean)newValue);
+				return;
+			case TypesPackage.JVM_FIELD__TRANSIENT:
+				setTransient((Boolean)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -280,6 +377,12 @@ public class JvmFieldImpl extends JvmFeatureImpl implements JvmField
 			case TypesPackage.JVM_FIELD__TYPE:
 				setType((JvmTypeReference)null);
 				return;
+			case TypesPackage.JVM_FIELD__VOLATILE:
+				setVolatile(VOLATILE_EDEFAULT);
+				return;
+			case TypesPackage.JVM_FIELD__TRANSIENT:
+				setTransient(TRANSIENT_EDEFAULT);
+				return;
 		}
 		super.eUnset(featureID);
 	}
@@ -300,6 +403,10 @@ public class JvmFieldImpl extends JvmFeatureImpl implements JvmField
 				return final_ != FINAL_EDEFAULT;
 			case TypesPackage.JVM_FIELD__TYPE:
 				return type != null;
+			case TypesPackage.JVM_FIELD__VOLATILE:
+				return volatile_ != VOLATILE_EDEFAULT;
+			case TypesPackage.JVM_FIELD__TRANSIENT:
+				return transient_ != TRANSIENT_EDEFAULT;
 		}
 		return super.eIsSet(featureID);
 	}
@@ -319,6 +426,10 @@ public class JvmFieldImpl extends JvmFeatureImpl implements JvmField
 		result.append(static_);
 		result.append(", final: ");
 		result.append(final_);
+		result.append(", volatile: ");
+		result.append(volatile_);
+		result.append(", transient: ");
+		result.append(transient_);
 		result.append(')');
 		return result.toString();
 	}

@@ -70,6 +70,18 @@ public class JvmFieldDeclarationImpl extends JvmMemberDeclarationImpl<JvmField> 
     return _isStatic;
   }
   
+  public boolean isTransient() {
+    JvmField _delegate = this.getDelegate();
+    boolean _isTransient = _delegate.isTransient();
+    return _isTransient;
+  }
+  
+  public boolean isVolatile() {
+    JvmField _delegate = this.getDelegate();
+    boolean _isVolatile = _delegate.isVolatile();
+    return _isVolatile;
+  }
+  
   public TypeReference getType() {
     CompilationUnitImpl _compilationUnit = this.getCompilationUnit();
     JvmField _delegate = this.getDelegate();
@@ -91,6 +103,16 @@ public class JvmFieldDeclarationImpl extends JvmMemberDeclarationImpl<JvmField> 
   public void setStatic(final boolean isStatic) {
     JvmField _delegate = this.getDelegate();
     _delegate.setStatic(isStatic);
+  }
+  
+  public void setTransient(final boolean isTransient) {
+    JvmField _delegate = this.getDelegate();
+    _delegate.setTransient(isTransient);
+  }
+  
+  public void setVolatile(final boolean isVolatile) {
+    JvmField _delegate = this.getDelegate();
+    _delegate.setVolatile(isVolatile);
   }
   
   public void setType(final TypeReference type) {

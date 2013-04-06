@@ -269,16 +269,20 @@ class JvmModelGenerator implements IGenerator {
 		}
 	}
 	
+	def dispatch generateModifier(JvmGenericType it, ITreeAppendable appendable, GeneratorConfig config) {
+		appendable.append(visibility.javaName)
+		if (isAbstract)
+			appendable.append("abstract ")
+		if (isStatic)
+			appendable.append("static ")
+		if (isFinal)
+			appendable.append("final ")
+		if (isStrictFloatingPoint)
+			appendable.append("strictfp ")
+	}
+	
 	def dispatch generateModifier(JvmDeclaredType it, ITreeAppendable appendable, GeneratorConfig config) {
 		appendable.append(visibility.javaName)
-		if (!(it instanceof JvmEnumerationType)) {
-			if (isAbstract)
-				appendable.append("abstract ")
-			if (isStatic)
-				appendable.append("static ")
-			if (isFinal)
-				appendable.append("final ")
-		}
 	}
 	
 	def dispatch generateModifier(JvmField it, ITreeAppendable appendable, GeneratorConfig config) {
@@ -287,6 +291,10 @@ class JvmModelGenerator implements IGenerator {
 			appendable.append("final ")
 		if (isStatic)
 			appendable.append("static ")
+		if (isTransient)
+			appendable.append("transient ")
+		if (isVolatile)
+			appendable.append("volatile ")
 	}
 		
 	def dispatch generateModifier(JvmOperation it, ITreeAppendable appendable, GeneratorConfig config) {
@@ -297,6 +305,12 @@ class JvmModelGenerator implements IGenerator {
 			appendable.append("static ")
 		if (isFinal)
 			appendable.append("final ")
+		if (isSynchronized)
+			appendable.append("synchronized ")
+		if (isStrictFloatingPoint)
+			appendable.append("strictfp ")
+		if (isNative)
+			appendable.append("native ")
 	}
 	
 	def dispatch generateModifier(JvmConstructor it, ITreeAppendable appendable, GeneratorConfig config) {

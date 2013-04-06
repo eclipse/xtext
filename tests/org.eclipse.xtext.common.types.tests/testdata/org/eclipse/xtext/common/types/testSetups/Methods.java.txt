@@ -5,21 +5,19 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtend.lib.macro.declaration;
+package org.eclipse.xtext.common.types.testSetups;
 
 /**
- * 
- * @author Sven Efftinge
+ * @author koehnlein - Initial contribution and API
  */
-public interface MutableInterfaceDeclaration extends MutableTypeDeclaration, InterfaceDeclaration {
-
-	/**
-	 * @param isStrictFloatingPoint
-	 */
-	void setStrictFloatingPoint(boolean isStrictFloatingPoint);
-
-	/**
-	 * @param superinterfaces the interfaces this class implements
-	 */
-	public void setExtendedInterfaces(Iterable<? extends TypeReference> superinterfaces);
+public abstract class Methods {
+	
+	public abstract void publicAbstractMethod();
+	protected final void protectedFinalMethod() {}
+	static void defaultStaticMethod() {}
+	private synchronized void privateSynchronizedMethod() {}
+	public strictfp void publicStrictFpMethod() {}
+	public native void publicNativeMethod();
+	
+	public strictfp class StrictFpClass {}
 }

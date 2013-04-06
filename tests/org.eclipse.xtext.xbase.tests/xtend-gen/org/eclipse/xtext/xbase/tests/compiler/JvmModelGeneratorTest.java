@@ -16,6 +16,7 @@ import foo.TestAnnotation2;
 import foo.TestAnnotations;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
+import java.lang.reflect.Modifier;
 import java.util.AbstractList;
 import java.util.List;
 import java.util.Map;
@@ -36,6 +37,7 @@ import org.eclipse.xtext.common.types.JvmMember;
 import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmParameterizedTypeReference;
 import org.eclipse.xtext.common.types.JvmTypeReference;
+import org.eclipse.xtext.common.types.JvmVisibility;
 import org.eclipse.xtext.common.types.JvmWildcardTypeReference;
 import org.eclipse.xtext.common.types.TypesFactory;
 import org.eclipse.xtext.common.types.util.TypeReferences;
@@ -47,6 +49,7 @@ import org.eclipse.xtext.junit4.validation.ValidationTestHelper;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.compiler.JvmModelGenerator;
 import org.eclipse.xtext.xbase.compiler.OnTheFlyJavaCompiler.EclipseRuntimeDependentJavaCompiler;
+import org.eclipse.xtext.xbase.compiler.output.ITreeAppendable;
 import org.eclipse.xtext.xbase.junit.evaluation.AbstractXbaseEvaluationTest;
 import org.eclipse.xtext.xbase.jvmmodel.JvmModelCompleter;
 import org.eclipse.xtext.xbase.jvmmodel.JvmTypesBuilder;
@@ -609,6 +612,285 @@ public class JvmModelGeneratorTest extends AbstractXbaseTestCase {
       Assert.assertNotNull(_field_2);
       Method _method = compiled.getMethod("doStuff");
       Assert.assertNotNull(_method);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
+  public void testClassModifiers() {
+    try {
+      final XExpression expression = this.expression("null");
+      final Procedure1<JvmGenericType> _function = new Procedure1<JvmGenericType>() {
+          public void apply(final JvmGenericType it) {
+            EList<JvmMember> _members = it.getMembers();
+            final Procedure1<JvmGenericType> _function = new Procedure1<JvmGenericType>() {
+                public void apply(final JvmGenericType it) {
+                  it.setAbstract(true);
+                }
+              };
+            JvmGenericType _class = JvmModelGeneratorTest.this.builder.toClass(expression, "AbstractClass", _function);
+            JvmModelGeneratorTest.this.builder.<JvmMember>operator_add(_members, _class);
+            EList<JvmMember> _members_1 = it.getMembers();
+            final Procedure1<JvmGenericType> _function_1 = new Procedure1<JvmGenericType>() {
+                public void apply(final JvmGenericType it) {
+                  it.setStatic(true);
+                }
+              };
+            JvmGenericType _class_1 = JvmModelGeneratorTest.this.builder.toClass(expression, "StaticClass", _function_1);
+            JvmModelGeneratorTest.this.builder.<JvmMember>operator_add(_members_1, _class_1);
+            EList<JvmMember> _members_2 = it.getMembers();
+            final Procedure1<JvmGenericType> _function_2 = new Procedure1<JvmGenericType>() {
+                public void apply(final JvmGenericType it) {
+                  it.setFinal(true);
+                }
+              };
+            JvmGenericType _class_2 = JvmModelGeneratorTest.this.builder.toClass(expression, "FinalClass", _function_2);
+            JvmModelGeneratorTest.this.builder.<JvmMember>operator_add(_members_2, _class_2);
+            EList<JvmMember> _members_3 = it.getMembers();
+            final Procedure1<JvmGenericType> _function_3 = new Procedure1<JvmGenericType>() {
+                public void apply(final JvmGenericType it) {
+                  it.setStrictFloatingPoint(true);
+                }
+              };
+            JvmGenericType _class_3 = JvmModelGeneratorTest.this.builder.toClass(expression, "StrictFpClass", _function_3);
+            JvmModelGeneratorTest.this.builder.<JvmMember>operator_add(_members_3, _class_3);
+          }
+        };
+      final JvmGenericType clazz = this.builder.toClass(expression, "my.test.Foo", _function);
+      Resource _eResource = expression.eResource();
+      final Class<? extends Object> compiled = this.compile(_eResource, clazz);
+      final Class<? extends Object>[] classes = compiled.getClasses();
+      final Function1<Class<? extends Object>,Boolean> _function_1 = new Function1<Class<? extends Object>,Boolean>() {
+          public Boolean apply(final Class<? extends Object> it) {
+            String _name = it.getName();
+            boolean _endsWith = _name.endsWith("AbstractClass");
+            return Boolean.valueOf(_endsWith);
+          }
+        };
+      Class<? extends Object> _findFirst = IterableExtensions.<Class<? extends Object>>findFirst(((Iterable<Class<? extends Object>>)Conversions.doWrapArray(classes)), _function_1);
+      int _modifiers = _findFirst.getModifiers();
+      boolean _isAbstract = Modifier.isAbstract(_modifiers);
+      Assert.assertTrue(_isAbstract);
+      final Function1<Class<? extends Object>,Boolean> _function_2 = new Function1<Class<? extends Object>,Boolean>() {
+          public Boolean apply(final Class<? extends Object> it) {
+            String _name = it.getName();
+            boolean _endsWith = _name.endsWith("StaticClass");
+            return Boolean.valueOf(_endsWith);
+          }
+        };
+      Class<? extends Object> _findFirst_1 = IterableExtensions.<Class<? extends Object>>findFirst(((Iterable<Class<? extends Object>>)Conversions.doWrapArray(classes)), _function_2);
+      int _modifiers_1 = _findFirst_1.getModifiers();
+      boolean _isStatic = Modifier.isStatic(_modifiers_1);
+      Assert.assertTrue(_isStatic);
+      final Function1<Class<? extends Object>,Boolean> _function_3 = new Function1<Class<? extends Object>,Boolean>() {
+          public Boolean apply(final Class<? extends Object> it) {
+            String _name = it.getName();
+            boolean _endsWith = _name.endsWith("FinalClass");
+            return Boolean.valueOf(_endsWith);
+          }
+        };
+      Class<? extends Object> _findFirst_2 = IterableExtensions.<Class<? extends Object>>findFirst(((Iterable<Class<? extends Object>>)Conversions.doWrapArray(classes)), _function_3);
+      int _modifiers_2 = _findFirst_2.getModifiers();
+      boolean _isFinal = Modifier.isFinal(_modifiers_2);
+      Assert.assertTrue(_isFinal);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
+  public void testFieldModifiers() {
+    try {
+      final XExpression expression = this.expression("null");
+      final Procedure1<JvmGenericType> _function = new Procedure1<JvmGenericType>() {
+          public void apply(final JvmGenericType it) {
+            EList<JvmMember> _members = it.getMembers();
+            JvmTypeReference _typeRef = JvmModelGeneratorTest.this.typeRef(expression, Integer.TYPE);
+            final Procedure1<JvmField> _function = new Procedure1<JvmField>() {
+                public void apply(final JvmField it) {
+                  it.setStatic(true);
+                  it.setVisibility(JvmVisibility.PUBLIC);
+                }
+              };
+            JvmField _field = JvmModelGeneratorTest.this.builder.toField(expression, "staticField", _typeRef, _function);
+            JvmModelGeneratorTest.this.builder.<JvmMember>operator_add(_members, _field);
+            EList<JvmMember> _members_1 = it.getMembers();
+            JvmTypeReference _typeRef_1 = JvmModelGeneratorTest.this.typeRef(expression, Integer.TYPE);
+            final Procedure1<JvmField> _function_1 = new Procedure1<JvmField>() {
+                public void apply(final JvmField it) {
+                  it.setFinal(true);
+                  final Procedure1<ITreeAppendable> _function = new Procedure1<ITreeAppendable>() {
+                      public void apply(final ITreeAppendable it) {
+                        it.append("0");
+                      }
+                    };
+                  JvmModelGeneratorTest.this.builder.setInitializer(it, _function);
+                  it.setVisibility(JvmVisibility.PUBLIC);
+                }
+              };
+            JvmField _field_1 = JvmModelGeneratorTest.this.builder.toField(expression, "finalField", _typeRef_1, _function_1);
+            JvmModelGeneratorTest.this.builder.<JvmMember>operator_add(_members_1, _field_1);
+            EList<JvmMember> _members_2 = it.getMembers();
+            JvmTypeReference _typeRef_2 = JvmModelGeneratorTest.this.typeRef(expression, Integer.TYPE);
+            final Procedure1<JvmField> _function_2 = new Procedure1<JvmField>() {
+                public void apply(final JvmField it) {
+                  it.setVolatile(true);
+                  it.setVisibility(JvmVisibility.PUBLIC);
+                }
+              };
+            JvmField _field_2 = JvmModelGeneratorTest.this.builder.toField(expression, "volatileField", _typeRef_2, _function_2);
+            JvmModelGeneratorTest.this.builder.<JvmMember>operator_add(_members_2, _field_2);
+            EList<JvmMember> _members_3 = it.getMembers();
+            JvmTypeReference _typeRef_3 = JvmModelGeneratorTest.this.typeRef(expression, Integer.TYPE);
+            final Procedure1<JvmField> _function_3 = new Procedure1<JvmField>() {
+                public void apply(final JvmField it) {
+                  it.setTransient(true);
+                  it.setVisibility(JvmVisibility.PUBLIC);
+                }
+              };
+            JvmField _field_3 = JvmModelGeneratorTest.this.builder.toField(expression, "transientField", _typeRef_3, _function_3);
+            JvmModelGeneratorTest.this.builder.<JvmMember>operator_add(_members_3, _field_3);
+          }
+        };
+      final JvmGenericType clazz = this.builder.toClass(expression, "my.test.Foo", _function);
+      Resource _eResource = expression.eResource();
+      final Class<? extends Object> compiled = this.compile(_eResource, clazz);
+      Field _field = compiled.getField("staticField");
+      int _modifiers = _field.getModifiers();
+      boolean _isStatic = Modifier.isStatic(_modifiers);
+      Assert.assertTrue(_isStatic);
+      Field _field_1 = compiled.getField("finalField");
+      int _modifiers_1 = _field_1.getModifiers();
+      boolean _isFinal = Modifier.isFinal(_modifiers_1);
+      Assert.assertTrue(_isFinal);
+      Field _field_2 = compiled.getField("volatileField");
+      int _modifiers_2 = _field_2.getModifiers();
+      boolean _isVolatile = Modifier.isVolatile(_modifiers_2);
+      Assert.assertTrue(_isVolatile);
+      Field _field_3 = compiled.getField("transientField");
+      int _modifiers_3 = _field_3.getModifiers();
+      boolean _isTransient = Modifier.isTransient(_modifiers_3);
+      Assert.assertTrue(_isTransient);
+    } catch (Throwable _e) {
+      throw Exceptions.sneakyThrow(_e);
+    }
+  }
+  
+  @Test
+  public void testMethodModifiers() {
+    try {
+      final XExpression expression = this.expression("null");
+      final Procedure1<JvmGenericType> _function = new Procedure1<JvmGenericType>() {
+          public void apply(final JvmGenericType it) {
+            EList<JvmMember> _members = it.getMembers();
+            JvmTypeReference _typeRef = JvmModelGeneratorTest.this.typeRef(expression, Void.TYPE);
+            final Procedure1<JvmOperation> _function = new Procedure1<JvmOperation>() {
+                public void apply(final JvmOperation it) {
+                  it.setStatic(true);
+                  final Procedure1<ITreeAppendable> _function = new Procedure1<ITreeAppendable>() {
+                      public void apply(final ITreeAppendable it) {
+                        it.append("");
+                      }
+                    };
+                  JvmModelGeneratorTest.this.builder.setBody(it, _function);
+                }
+              };
+            JvmOperation _method = JvmModelGeneratorTest.this.builder.toMethod(expression, "staticMethod", _typeRef, _function);
+            JvmModelGeneratorTest.this.builder.<JvmMember>operator_add(_members, _method);
+            EList<JvmMember> _members_1 = it.getMembers();
+            JvmTypeReference _typeRef_1 = JvmModelGeneratorTest.this.typeRef(expression, Void.TYPE);
+            final Procedure1<JvmOperation> _function_1 = new Procedure1<JvmOperation>() {
+                public void apply(final JvmOperation it) {
+                  it.setFinal(true);
+                  final Procedure1<ITreeAppendable> _function = new Procedure1<ITreeAppendable>() {
+                      public void apply(final ITreeAppendable it) {
+                        it.append("");
+                      }
+                    };
+                  JvmModelGeneratorTest.this.builder.setBody(it, _function);
+                }
+              };
+            JvmOperation _method_1 = JvmModelGeneratorTest.this.builder.toMethod(expression, "finalMethod", _typeRef_1, _function_1);
+            JvmModelGeneratorTest.this.builder.<JvmMember>operator_add(_members_1, _method_1);
+            EList<JvmMember> _members_2 = it.getMembers();
+            JvmTypeReference _typeRef_2 = JvmModelGeneratorTest.this.typeRef(expression, Void.TYPE);
+            final Procedure1<JvmOperation> _function_2 = new Procedure1<JvmOperation>() {
+                public void apply(final JvmOperation it) {
+                  it.setAbstract(true);
+                }
+              };
+            JvmOperation _method_2 = JvmModelGeneratorTest.this.builder.toMethod(expression, "abstractMethod", _typeRef_2, _function_2);
+            JvmModelGeneratorTest.this.builder.<JvmMember>operator_add(_members_2, _method_2);
+            EList<JvmMember> _members_3 = it.getMembers();
+            JvmTypeReference _typeRef_3 = JvmModelGeneratorTest.this.typeRef(expression, Void.TYPE);
+            final Procedure1<JvmOperation> _function_3 = new Procedure1<JvmOperation>() {
+                public void apply(final JvmOperation it) {
+                  it.setSynchronized(true);
+                  final Procedure1<ITreeAppendable> _function = new Procedure1<ITreeAppendable>() {
+                      public void apply(final ITreeAppendable it) {
+                        it.append("");
+                      }
+                    };
+                  JvmModelGeneratorTest.this.builder.setBody(it, _function);
+                }
+              };
+            JvmOperation _method_3 = JvmModelGeneratorTest.this.builder.toMethod(expression, "synchronizedMethod", _typeRef_3, _function_3);
+            JvmModelGeneratorTest.this.builder.<JvmMember>operator_add(_members_3, _method_3);
+            EList<JvmMember> _members_4 = it.getMembers();
+            JvmTypeReference _typeRef_4 = JvmModelGeneratorTest.this.typeRef(expression, Void.TYPE);
+            final Procedure1<JvmOperation> _function_4 = new Procedure1<JvmOperation>() {
+                public void apply(final JvmOperation it) {
+                  it.setStrictFloatingPoint(true);
+                  final Procedure1<ITreeAppendable> _function = new Procedure1<ITreeAppendable>() {
+                      public void apply(final ITreeAppendable it) {
+                        it.append("");
+                      }
+                    };
+                  JvmModelGeneratorTest.this.builder.setBody(it, _function);
+                }
+              };
+            JvmOperation _method_4 = JvmModelGeneratorTest.this.builder.toMethod(expression, "strictFpMethod", _typeRef_4, _function_4);
+            JvmModelGeneratorTest.this.builder.<JvmMember>operator_add(_members_4, _method_4);
+            EList<JvmMember> _members_5 = it.getMembers();
+            JvmTypeReference _typeRef_5 = JvmModelGeneratorTest.this.typeRef(expression, Void.TYPE);
+            final Procedure1<JvmOperation> _function_5 = new Procedure1<JvmOperation>() {
+                public void apply(final JvmOperation it) {
+                  it.setNative(true);
+                }
+              };
+            JvmOperation _method_5 = JvmModelGeneratorTest.this.builder.toMethod(expression, "nativeMethod", _typeRef_5, _function_5);
+            JvmModelGeneratorTest.this.builder.<JvmMember>operator_add(_members_5, _method_5);
+            it.setAbstract(true);
+          }
+        };
+      final JvmGenericType clazz = this.builder.toClass(expression, "my.test.Foo", _function);
+      Resource _eResource = expression.eResource();
+      final Class<? extends Object> compiled = this.compile(_eResource, clazz);
+      Method _method = compiled.getMethod("staticMethod");
+      int _modifiers = _method.getModifiers();
+      boolean _isStatic = Modifier.isStatic(_modifiers);
+      Assert.assertTrue(_isStatic);
+      Method _method_1 = compiled.getMethod("finalMethod");
+      int _modifiers_1 = _method_1.getModifiers();
+      boolean _isFinal = Modifier.isFinal(_modifiers_1);
+      Assert.assertTrue(_isFinal);
+      Method _method_2 = compiled.getMethod("abstractMethod");
+      int _modifiers_2 = _method_2.getModifiers();
+      boolean _isAbstract = Modifier.isAbstract(_modifiers_2);
+      Assert.assertTrue(_isAbstract);
+      Method _method_3 = compiled.getMethod("synchronizedMethod");
+      int _modifiers_3 = _method_3.getModifiers();
+      boolean _isSynchronized = Modifier.isSynchronized(_modifiers_3);
+      Assert.assertTrue(_isSynchronized);
+      Method _method_4 = compiled.getMethod("strictFpMethod");
+      int _modifiers_4 = _method_4.getModifiers();
+      boolean _isStrict = Modifier.isStrict(_modifiers_4);
+      Assert.assertTrue(_isStrict);
+      Method _method_5 = compiled.getMethod("nativeMethod");
+      int _modifiers_5 = _method_5.getModifiers();
+      boolean _isNative = Modifier.isNative(_modifiers_5);
+      Assert.assertTrue(_isNative);
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }

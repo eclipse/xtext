@@ -71,6 +71,8 @@ public class JvmFieldItemProvider
 
 			addStaticPropertyDescriptor(object);
 			addFinalPropertyDescriptor(object);
+			addVolatilePropertyDescriptor(object);
+			addTransientPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
@@ -113,6 +115,54 @@ public class JvmFieldItemProvider
 				 getString("_UI_JvmField_final_feature"),
 				 getString("_UI_PropertyDescriptor_description", "_UI_JvmField_final_feature", "_UI_JvmField_type"),
 				 TypesPackage.Literals.JVM_FIELD__FINAL,
+				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.BOOLEAN_VALUE_IMAGE,
+				 null,
+				 null));
+	}
+
+	/**
+	 * This adds a property descriptor for the Volatile feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @since 2.4
+	 */
+	protected void addVolatilePropertyDescriptor(Object object)
+	{
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_JvmField_volatile_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_JvmField_volatile_feature", "_UI_JvmField_type"),
+				 TypesPackage.Literals.JVM_FIELD__VOLATILE,
+				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.BOOLEAN_VALUE_IMAGE,
+				 null,
+				 null));
+	}
+
+	/**
+	 * This adds a property descriptor for the Transient feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @since 2.4
+	 */
+	protected void addTransientPropertyDescriptor(Object object)
+	{
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_JvmField_transient_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_JvmField_transient_feature", "_UI_JvmField_type"),
+				 TypesPackage.Literals.JVM_FIELD__TRANSIENT,
 				 true,
 				 false,
 				 false,
@@ -197,6 +247,8 @@ public class JvmFieldItemProvider
 		{
 			case TypesPackage.JVM_FIELD__STATIC:
 			case TypesPackage.JVM_FIELD__FINAL:
+			case TypesPackage.JVM_FIELD__VOLATILE:
+			case TypesPackage.JVM_FIELD__TRANSIENT:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
 			case TypesPackage.JVM_FIELD__TYPE:

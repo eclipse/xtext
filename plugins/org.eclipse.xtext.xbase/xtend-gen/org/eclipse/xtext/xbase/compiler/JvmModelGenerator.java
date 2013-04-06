@@ -499,38 +499,40 @@ public class JvmModelGenerator implements IGenerator {
     }
   }
   
-  protected ITreeAppendable _generateModifier(final JvmDeclaredType it, final ITreeAppendable appendable, final GeneratorConfig config) {
+  protected ITreeAppendable _generateModifier(final JvmGenericType it, final ITreeAppendable appendable, final GeneratorConfig config) {
     ITreeAppendable _xblockexpression = null;
     {
       JvmVisibility _visibility = it.getVisibility();
       String _javaName = this.javaName(_visibility);
       appendable.append(_javaName);
+      boolean _isAbstract = it.isAbstract();
+      if (_isAbstract) {
+        appendable.append("abstract ");
+      }
+      boolean _isStatic = it.isStatic();
+      if (_isStatic) {
+        appendable.append("static ");
+      }
+      boolean _isFinal = it.isFinal();
+      if (_isFinal) {
+        appendable.append("final ");
+      }
       ITreeAppendable _xifexpression = null;
-      boolean _not = (!(it instanceof JvmEnumerationType));
-      if (_not) {
-        ITreeAppendable _xblockexpression_1 = null;
-        {
-          boolean _isAbstract = it.isAbstract();
-          if (_isAbstract) {
-            appendable.append("abstract ");
-          }
-          boolean _isStatic = it.isStatic();
-          if (_isStatic) {
-            appendable.append("static ");
-          }
-          ITreeAppendable _xifexpression_1 = null;
-          boolean _isFinal = it.isFinal();
-          if (_isFinal) {
-            ITreeAppendable _append = appendable.append("final ");
-            _xifexpression_1 = _append;
-          }
-          _xblockexpression_1 = (_xifexpression_1);
-        }
-        _xifexpression = _xblockexpression_1;
+      boolean _isStrictFloatingPoint = it.isStrictFloatingPoint();
+      if (_isStrictFloatingPoint) {
+        ITreeAppendable _append = appendable.append("strictfp ");
+        _xifexpression = _append;
       }
       _xblockexpression = (_xifexpression);
     }
     return _xblockexpression;
+  }
+  
+  protected ITreeAppendable _generateModifier(final JvmDeclaredType it, final ITreeAppendable appendable, final GeneratorConfig config) {
+    JvmVisibility _visibility = it.getVisibility();
+    String _javaName = this.javaName(_visibility);
+    ITreeAppendable _append = appendable.append(_javaName);
+    return _append;
   }
   
   protected ITreeAppendable _generateModifier(final JvmField it, final ITreeAppendable appendable, final GeneratorConfig config) {
@@ -543,10 +545,18 @@ public class JvmModelGenerator implements IGenerator {
       if (_isFinal) {
         appendable.append("final ");
       }
-      ITreeAppendable _xifexpression = null;
       boolean _isStatic = it.isStatic();
       if (_isStatic) {
-        ITreeAppendable _append = appendable.append("static ");
+        appendable.append("static ");
+      }
+      boolean _isTransient = it.isTransient();
+      if (_isTransient) {
+        appendable.append("transient ");
+      }
+      ITreeAppendable _xifexpression = null;
+      boolean _isVolatile = it.isVolatile();
+      if (_isVolatile) {
+        ITreeAppendable _append = appendable.append("volatile ");
         _xifexpression = _append;
       }
       _xblockexpression = (_xifexpression);
@@ -568,10 +578,22 @@ public class JvmModelGenerator implements IGenerator {
       if (_isStatic) {
         appendable.append("static ");
       }
-      ITreeAppendable _xifexpression = null;
       boolean _isFinal = it.isFinal();
       if (_isFinal) {
-        ITreeAppendable _append = appendable.append("final ");
+        appendable.append("final ");
+      }
+      boolean _isSynchronized = it.isSynchronized();
+      if (_isSynchronized) {
+        appendable.append("synchronized ");
+      }
+      boolean _isStrictFloatingPoint = it.isStrictFloatingPoint();
+      if (_isStrictFloatingPoint) {
+        appendable.append("strictfp ");
+      }
+      ITreeAppendable _xifexpression = null;
+      boolean _isNative = it.isNative();
+      if (_isNative) {
+        ITreeAppendable _append = appendable.append("native ");
         _xifexpression = _append;
       }
       _xblockexpression = (_xifexpression);
@@ -1762,6 +1784,8 @@ public class JvmModelGenerator implements IGenerator {
       return _generateModifier((JvmOperation)it, appendable, config);
     } else if (it instanceof JvmField) {
       return _generateModifier((JvmField)it, appendable, config);
+    } else if (it instanceof JvmGenericType) {
+      return _generateModifier((JvmGenericType)it, appendable, config);
     } else if (it instanceof JvmDeclaredType) {
       return _generateModifier((JvmDeclaredType)it, appendable, config);
     } else {

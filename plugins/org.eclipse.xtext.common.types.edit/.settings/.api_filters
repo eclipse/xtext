@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <component id="org.eclipse.xtext.common.types.edit" version="2">
-    <resource path="emf-gen/org/eclipse/xtext/common/types/provider/JvmUnknownTypeReferenceItemProvider.java" type="org.eclipse.xtext.common.types.provider.JvmUnknownTypeReferenceItemProvider">
-        <filter id="338792546">
+    <resource path="META-INF/MANIFEST.MF">
+        <filter comment="Hands off, hackers!" id="924844039">
             <message_arguments>
-                <message_argument value="org.eclipse.xtext.common.types.provider.JvmUnknownTypeReferenceItemProvider"/>
-                <message_argument value="addExceptionPropertyDescriptor(Object)"/>
+                <message_argument value="2.4.1"/>
+                <message_argument value="2.4.0"/>
             </message_arguments>
         </filter>
     </resource>

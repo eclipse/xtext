@@ -72,6 +72,10 @@ public class JvmOperationItemProvider
 			addStaticPropertyDescriptor(object);
 			addFinalPropertyDescriptor(object);
 			addAbstractPropertyDescriptor(object);
+			addSynchronizedPropertyDescriptor(object);
+			addDefaultPropertyDescriptor(object);
+			addNativePropertyDescriptor(object);
+			addStrictFloatingPointPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
@@ -137,6 +141,102 @@ public class JvmOperationItemProvider
 				 getString("_UI_JvmOperation_abstract_feature"),
 				 getString("_UI_PropertyDescriptor_description", "_UI_JvmOperation_abstract_feature", "_UI_JvmOperation_type"),
 				 TypesPackage.Literals.JVM_OPERATION__ABSTRACT,
+				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.BOOLEAN_VALUE_IMAGE,
+				 null,
+				 null));
+	}
+
+	/**
+	 * This adds a property descriptor for the Synchronized feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @since 2.4
+	 */
+	protected void addSynchronizedPropertyDescriptor(Object object)
+	{
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_JvmOperation_synchronized_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_JvmOperation_synchronized_feature", "_UI_JvmOperation_type"),
+				 TypesPackage.Literals.JVM_OPERATION__SYNCHRONIZED,
+				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.BOOLEAN_VALUE_IMAGE,
+				 null,
+				 null));
+	}
+
+	/**
+	 * This adds a property descriptor for the Default feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @since 2.4
+	 * @generated
+	 */
+	protected void addDefaultPropertyDescriptor(Object object)
+	{
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_JvmOperation_default_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_JvmOperation_default_feature", "_UI_JvmOperation_type"),
+				 TypesPackage.Literals.JVM_OPERATION__DEFAULT,
+				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.BOOLEAN_VALUE_IMAGE,
+				 null,
+				 null));
+	}
+
+	/**
+	 * This adds a property descriptor for the Native feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @since 2.4
+	 */
+	protected void addNativePropertyDescriptor(Object object)
+	{
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_JvmOperation_native_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_JvmOperation_native_feature", "_UI_JvmOperation_type"),
+				 TypesPackage.Literals.JVM_OPERATION__NATIVE,
+				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.BOOLEAN_VALUE_IMAGE,
+				 null,
+				 null));
+	}
+
+	/**
+	 * This adds a property descriptor for the Strict Floating Point feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @since 2.4
+	 */
+	protected void addStrictFloatingPointPropertyDescriptor(Object object)
+	{
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_JvmOperation_strictFloatingPoint_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_JvmOperation_strictFloatingPoint_feature", "_UI_JvmOperation_type"),
+				 TypesPackage.Literals.JVM_OPERATION__STRICT_FLOATING_POINT,
 				 true,
 				 false,
 				 false,
@@ -223,6 +323,10 @@ public class JvmOperationItemProvider
 			case TypesPackage.JVM_OPERATION__STATIC:
 			case TypesPackage.JVM_OPERATION__FINAL:
 			case TypesPackage.JVM_OPERATION__ABSTRACT:
+			case TypesPackage.JVM_OPERATION__SYNCHRONIZED:
+			case TypesPackage.JVM_OPERATION__DEFAULT:
+			case TypesPackage.JVM_OPERATION__NATIVE:
+			case TypesPackage.JVM_OPERATION__STRICT_FLOATING_POINT:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
 			case TypesPackage.JVM_OPERATION__RETURN_TYPE:

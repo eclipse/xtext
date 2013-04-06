@@ -13,6 +13,7 @@ import com.google.inject.Provider
 import foo.TestAnnotation
 import foo.TestAnnotation2
 import foo.TestAnnotations
+import java.lang.reflect.Modifier
 import java.util.AbstractList
 import org.eclipse.emf.ecore.EObject
 import org.eclipse.emf.ecore.resource.Resource
@@ -28,6 +29,7 @@ import org.eclipse.xtext.junit4.validation.ValidationTestHelper
 import org.eclipse.xtext.xbase.compiler.JvmModelGenerator
 import org.eclipse.xtext.xbase.compiler.OnTheFlyJavaCompiler$EclipseRuntimeDependentJavaCompiler
 import org.eclipse.xtext.xbase.junit.evaluation.AbstractXbaseEvaluationTest
+import org.eclipse.xtext.xbase.jvmmodel.JvmModelCompleter
 import org.eclipse.xtext.xbase.jvmmodel.JvmTypesBuilder
 import org.eclipse.xtext.xbase.lib.Functions
 import org.eclipse.xtext.xbase.tests.AbstractXbaseTestCase
@@ -35,7 +37,7 @@ import org.eclipse.xtext.xbase.tests.typesystem.XbaseWithLogicalContainerInjecto
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
-import org.eclipse.xtext.xbase.jvmmodel.JvmModelCompleter
+import org.eclipse.xtext.common.types.JvmVisibility
 
 @RunWith(typeof(XtextRunner))
 @InjectWith(typeof(XbaseWithLogicalContainerInjectorProvider))
@@ -276,6 +278,95 @@ class JvmModelGeneratorTest extends AbstractXbaseTestCase {
         assertNotNull(compiled.getField("DEBUG"))
         assertNotNull(compiled.getMethod("doStuff"))
     }
+
+	@Test def void testClassModifiers() {
+		val expression = expression("null")
+		val clazz = expression.toClass("my.test.Foo") [
+	        members += expression.toClass("AbstractClass") [
+    	    	abstract = true
+       		]
+	        members += expression.toClass("StaticClass") [
+    	    	static = true
+       		]
+	        members += expression.toClass("FinalClass") [
+    	    	final = true
+       		]
+	        members += expression.toClass("StrictFpClass") [
+    	    	strictFloatingPoint = true
+       		]
+		]
+        val compiled = compile(expression.eResource, clazz)
+		val classes = compiled.classes
+		assertTrue(Modifier::isAbstract(classes.findFirst[name.endsWith("AbstractClass")].modifiers))
+		assertTrue(Modifier::isStatic(classes.findFirst[name.endsWith("StaticClass")].modifiers))
+		assertTrue(Modifier::isFinal(classes.findFirst[name.endsWith("FinalClass")].modifiers))
+		// according to the JavaDocs and empirical tests, Class.getModifiers() does not reflect strictfp
+		//assertTrue(Modifier::isStrict(classes.findFirst[name.endsWith("StrictFpClass")].modifiers))
+	}
+
+	@Test def void testFieldModifiers() {
+		val expression = expression("null")
+        val clazz = expression.toClass("my.test.Foo") [
+        	members += expression.toField("staticField", expression.typeRef(Integer::TYPE)) [
+        		static = true
+        		visibility = JvmVisibility::PUBLIC
+        	]
+        	members += expression.toField("finalField", expression.typeRef(Integer::TYPE)) [
+        		final = true
+        		initializer = [append("0")]
+        		visibility = JvmVisibility::PUBLIC
+        	]
+        	members += expression.toField("volatileField", expression.typeRef(Integer::TYPE)) [
+        		volatile = true
+        		visibility = JvmVisibility::PUBLIC
+        	]
+        	members += expression.toField("transientField", expression.typeRef(Integer::TYPE)) [
+        		transient = true
+        		visibility = JvmVisibility::PUBLIC
+        	]
+        ]
+        val compiled = compile(expression.eResource, clazz)
+		assertTrue(Modifier::isStatic(compiled.getField("staticField").modifiers))
+		assertTrue(Modifier::isFinal(compiled.getField("finalField").modifiers))
+		assertTrue(Modifier::isVolatile(compiled.getField("volatileField").modifiers))
+		assertTrue(Modifier::isTransient(compiled.getField("transientField").modifiers))
+	}
+
+	@Test def void testMethodModifiers() {
+		val expression = expression("null")
+        val clazz = expression.toClass("my.test.Foo") [
+        	members += expression.toMethod("staticMethod", expression.typeRef(Void::TYPE)) [
+        		static = true
+        		body = [ append("") ]
+        	]
+        	members += expression.toMethod("finalMethod", expression.typeRef(Void::TYPE)) [
+        		final = true
+        		body = [ append("") ]
+        	]
+        	members += expression.toMethod("abstractMethod", expression.typeRef(Void::TYPE)) [
+        		abstract = true
+        	]
+        	members += expression.toMethod("synchronizedMethod", expression.typeRef(Void::TYPE)) [
+        		synchronized = true
+        		body = [ append("") ]
+        	]
+        	members += expression.toMethod("strictFpMethod", expression.typeRef(Void::TYPE)) [
+        		strictFloatingPoint = true
+        		body = [ append("") ]
+        	]
+        	members += expression.toMethod("nativeMethod", expression.typeRef(Void::TYPE)) [
+        		native = true
+        	]
+        	abstract = true
+        ]
+        val compiled = compile(expression.eResource, clazz)
+		assertTrue(Modifier::isStatic(compiled.getMethod("staticMethod").modifiers))
+		assertTrue(Modifier::isFinal(compiled.getMethod("finalMethod").modifiers))
+		assertTrue(Modifier::isAbstract(compiled.getMethod("abstractMethod").modifiers))
+		assertTrue(Modifier::isSynchronized(compiled.getMethod("synchronizedMethod").modifiers))
+		assertTrue(Modifier::isStrict(compiled.getMethod("strictFpMethod").modifiers))
+		assertTrue(Modifier::isNative(compiled.getMethod("nativeMethod").modifiers))
+	}
 
 	def JvmTypeReference typeRef(EObject ctx, Class<?> clazz) {
 		return references.getTypeForName(clazz, ctx)

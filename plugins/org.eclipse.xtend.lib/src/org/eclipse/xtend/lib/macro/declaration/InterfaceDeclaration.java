@@ -17,7 +17,13 @@ import com.google.common.annotations.Beta;
 public interface InterfaceDeclaration extends TypeDeclaration, TypeParameterDeclarator {
 	
 	/**
+	 * @return whether this class is marked <code>strictfp</code>
+	 */
+	boolean isStrictFloatingPoint();
+	
+	/**
 	 * @return the extended interfaces
 	 */
 	Iterable<? extends TypeReference> getExtendedInterfaces();
+	
 }

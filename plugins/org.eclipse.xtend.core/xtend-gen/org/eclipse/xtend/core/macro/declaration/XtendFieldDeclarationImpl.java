@@ -62,6 +62,14 @@ public class XtendFieldDeclarationImpl extends XtendMemberDeclarationImpl<XtendF
     return _isStatic;
   }
   
+  public boolean isTransient() {
+    return false;
+  }
+  
+  public boolean isVolatile() {
+    return false;
+  }
+  
   public TypeReference getType() {
     CompilationUnitImpl _compilationUnit = this.getCompilationUnit();
     XtendField _delegate = this.getDelegate();

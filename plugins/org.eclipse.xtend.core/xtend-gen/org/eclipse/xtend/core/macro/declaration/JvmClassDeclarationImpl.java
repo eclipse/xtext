@@ -114,6 +114,17 @@ public class JvmClassDeclarationImpl extends JvmTypeDeclarationImpl<JvmGenericTy
     return _isStatic;
   }
   
+  public boolean isStrictFloatingPoint() {
+    JvmGenericType _delegate = this.getDelegate();
+    boolean _isStrictFloatingPoint = _delegate.isStrictFloatingPoint();
+    return _isStrictFloatingPoint;
+  }
+  
+  public void setStrictFloatingPoint(final boolean isStrictFloatingPoint) {
+    JvmGenericType _delegate = this.getDelegate();
+    _delegate.setStrictFloatingPoint(isStrictFloatingPoint);
+  }
+  
   public Iterable<? extends TypeParameterDeclaration> getTypeParameters() {
     JvmGenericType _delegate = this.getDelegate();
     EList<JvmTypeParameter> _typeParameters = _delegate.getTypeParameters();

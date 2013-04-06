@@ -144,6 +144,7 @@ public class JdtBasedTypeFactory implements ITypeFactory<IType> {
 
 		JvmGenericType result = TypesFactory.eINSTANCE.createJvmGenericType();
 		result.setInterface(typeBinding.isInterface());
+		result.setStrictFloatingPoint(Modifier.isStrictfp(typeBinding.getDeclaredModifiers()));
 		setTypeModifiers(typeBinding, result);
 		setVisibility(result, typeBinding.getModifiers());
 		result.internalSetIdentifier(getQualifiedName(typeBinding));
@@ -572,6 +573,8 @@ public class JdtBasedTypeFactory implements ITypeFactory<IType> {
 		result.setSimpleName(field.getName());
 		result.setFinal(Modifier.isFinal(field.getModifiers()));
 		result.setStatic(Modifier.isStatic(field.getModifiers()));
+		result.setTransient(Modifier.isTransient(field.getModifiers()));
+		result.setVolatile(Modifier.isVolatile(field.getModifiers()));
 		setVisibility(result, field.getModifiers());
 		result.setType(createTypeReference(field.getType()));
 		createAnnotationValues(field, result);
@@ -706,6 +709,9 @@ public class JdtBasedTypeFactory implements ITypeFactory<IType> {
 		result.setAbstract(Modifier.isAbstract(method.getModifiers()));
 		result.setFinal(Modifier.isFinal(method.getModifiers()));
 		result.setStatic(Modifier.isStatic(method.getModifiers()));
+		result.setSynchronized(Modifier.isSynchronized(method.getModifiers()));
+		result.setStrictFloatingPoint(Modifier.isStrictfp(method.getModifiers()));
+		result.setNative(Modifier.isNative(method.getModifiers()));
 		result.setReturnType(createTypeReference(method.getReturnType()));
 		createAnnotationValues(method, result);
 		return result;

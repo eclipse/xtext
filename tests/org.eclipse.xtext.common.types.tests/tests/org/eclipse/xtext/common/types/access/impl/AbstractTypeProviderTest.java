@@ -82,6 +82,7 @@ import org.eclipse.xtext.common.types.testSetups.EmptyAbstractClass;
 import org.eclipse.xtext.common.types.testSetups.Fields;
 import org.eclipse.xtext.common.types.testSetups.InitializerWithConstructor;
 import org.eclipse.xtext.common.types.testSetups.InitializerWithoutConstructor;
+import org.eclipse.xtext.common.types.testSetups.Methods;
 import org.eclipse.xtext.common.types.testSetups.NestedTypes;
 import org.eclipse.xtext.common.types.testSetups.ParameterizedMethods;
 import org.eclipse.xtext.common.types.testSetups.ParameterizedTypes;
@@ -553,7 +554,7 @@ public abstract class AbstractTypeProviderTest extends Assert {
 		int constructorCount = Fields.class.getDeclaredConstructors().length;
 		assertEquals(1, constructorCount); // default constructor
 		int fieldCount = Fields.class.getDeclaredFields().length;
-		assertEquals(5, fieldCount);
+		assertEquals(7, fieldCount);
 		int nestedCount = Fields.class.getDeclaredClasses().length;
 		assertEquals(1, nestedCount);
 		assertEquals(nestedCount + constructorCount + fieldCount, type.getMembers().size());
@@ -1448,6 +1449,30 @@ public abstract class AbstractTypeProviderTest extends Assert {
 		assertEquals("java.lang.String", fieldType.getIdentifier());
 	}
 
+	@Test public void testFields_volatileInt_01() {
+		String typeName = Fields.class.getName();
+		JvmGenericType type = (JvmGenericType) getTypeProvider().findTypeByName(typeName);
+		JvmField field = getFieldFromType(type, Fields.class, "volatileInt");
+		assertSame(type, field.getDeclaringType());
+		assertTrue(field.isVolatile());
+		assertFalse(field.isTransient());
+		assertEquals(JvmVisibility.DEFAULT, field.getVisibility());
+		JvmType fieldType = field.getType().getType();
+		assertEquals("int", fieldType.getIdentifier());
+	}
+
+	@Test public void testFields_transientInt_01() {
+		String typeName = Fields.class.getName();
+		JvmGenericType type = (JvmGenericType) getTypeProvider().findTypeByName(typeName);
+		JvmField field = getFieldFromType(type, Fields.class, "transientInt");
+		assertSame(type, field.getDeclaringType());
+		assertTrue(field.isTransient());
+		assertFalse(field.isVolatile());
+		assertEquals(JvmVisibility.DEFAULT, field.getVisibility());
+		JvmType fieldType = field.getType().getType();
+		assertEquals("int", fieldType.getIdentifier());
+	}
+
 	@Test public void testFields_publicInt_01() {
 		String typeName = Fields.class.getName();
 		JvmGenericType type = (JvmGenericType) getTypeProvider().findTypeByName(typeName);
@@ -1472,6 +1497,109 @@ public abstract class AbstractTypeProviderTest extends Assert {
 		assertTrue(field.getType() instanceof JvmParameterizedTypeReference);
 		JvmParameterizedTypeReference parameterizedFieldType = (JvmParameterizedTypeReference) fieldType;
 		assertSame(type, parameterizedFieldType.getType());
+	}
+	
+	@Test public void testMethods_publicAbstractMethod_01() {
+		String typeName = Methods.class.getName();
+		JvmGenericType type = (JvmGenericType) getTypeProvider().findTypeByName(typeName);
+		JvmOperation method = getMethodFromType(type, Methods.class, "publicAbstractMethod()");
+		assertSame(type, method.getDeclaringType());
+		assertTrue(method.isAbstract());
+		assertFalse(method.isFinal());
+		assertFalse(method.isStatic());
+		assertFalse(method.isSynchronized());
+		assertFalse(method.isStrictFloatingPoint());
+		assertFalse(method.isNative());
+		assertEquals(JvmVisibility.PUBLIC, method.getVisibility());
+		JvmType methodType = method.getReturnType().getType();
+		assertEquals("void", methodType.getIdentifier());
+	}
+
+	@Test public void testMethods_protectedFinalMethod_01() {
+		String typeName = Methods.class.getName();
+		JvmGenericType type = (JvmGenericType) getTypeProvider().findTypeByName(typeName);
+		JvmOperation method = getMethodFromType(type, Methods.class, "protectedFinalMethod()");
+		assertSame(type, method.getDeclaringType());
+		assertFalse(method.isAbstract());
+		assertTrue(method.isFinal());
+		assertFalse(method.isStatic());
+		assertFalse(method.isSynchronized());
+		assertFalse(method.isStrictFloatingPoint());
+		assertFalse(method.isNative());
+		assertEquals(JvmVisibility.PROTECTED, method.getVisibility());
+		JvmType methodType = method.getReturnType().getType();
+		assertEquals("void", methodType.getIdentifier());
+	}
+
+	@Test public void testMethods_defaultStaticMethod_01() {
+		String typeName = Methods.class.getName();
+		JvmGenericType type = (JvmGenericType) getTypeProvider().findTypeByName(typeName);
+		JvmOperation method = getMethodFromType(type, Methods.class, "defaultStaticMethod()");
+		assertSame(type, method.getDeclaringType());
+		assertFalse(method.isAbstract());
+		assertFalse(method.isFinal());
+		assertTrue(method.isStatic());
+		assertFalse(method.isSynchronized());
+		assertFalse(method.isStrictFloatingPoint());
+		assertFalse(method.isNative());
+		assertEquals(JvmVisibility.DEFAULT, method.getVisibility());
+		JvmType methodType = method.getReturnType().getType();
+		assertEquals("void", methodType.getIdentifier());
+	}
+
+	@Test public void testMethods_privateSynchronizedMethod_01() {
+		String typeName = Methods.class.getName();
+		JvmGenericType type = (JvmGenericType) getTypeProvider().findTypeByName(typeName);
+		JvmOperation method = getMethodFromType(type, Methods.class, "privateSynchronizedMethod()");
+		assertSame(type, method.getDeclaringType());
+		assertFalse(method.isAbstract());
+		assertFalse(method.isFinal());
+		assertFalse(method.isStatic());
+		assertTrue(method.isSynchronized());
+		assertFalse(method.isStrictFloatingPoint());
+		assertFalse(method.isNative());
+		assertEquals(JvmVisibility.PRIVATE, method.getVisibility());
+		JvmType methodType = method.getReturnType().getType();
+		assertEquals("void", methodType.getIdentifier());
+	}
+
+	@Test public void testStrictFpType() {
+		String typeName = Methods.class.getName();
+		JvmGenericType type = (JvmGenericType) getTypeProvider().findTypeByName(typeName);
+		assertFalse(type.isStrictFloatingPoint());
+		// strictfp on class declarations is not reflected 
+	}
+
+	@Test public void testMethods_publicStrictFpMethod_01() {
+		String typeName = Methods.class.getName();
+		JvmGenericType type = (JvmGenericType) getTypeProvider().findTypeByName(typeName);
+		JvmOperation method = getMethodFromType(type, Methods.class, "publicStrictFpMethod()");
+		assertSame(type, method.getDeclaringType());
+		assertFalse(method.isAbstract());
+		assertFalse(method.isFinal());
+		assertFalse(method.isStatic());
+		assertFalse(method.isSynchronized());
+		assertTrue(method.isStrictFloatingPoint());
+		assertFalse(method.isNative());
+		assertEquals(JvmVisibility.PUBLIC, method.getVisibility());
+		JvmType methodType = method.getReturnType().getType();
+		assertEquals("void", methodType.getIdentifier());
+	}
+
+	@Test public void publicNativeMethod() {
+		String typeName = Methods.class.getName();
+		JvmGenericType type = (JvmGenericType) getTypeProvider().findTypeByName(typeName);
+		JvmOperation method = getMethodFromType(type, Methods.class, "publicStrictFpMethod()");
+		assertSame(type, method.getDeclaringType());
+		assertFalse(method.isAbstract());
+		assertFalse(method.isFinal());
+		assertFalse(method.isStatic());
+		assertFalse(method.isSynchronized());
+		assertTrue(method.isStrictFloatingPoint());
+		assertFalse(method.isNative());
+		assertEquals(JvmVisibility.PUBLIC, method.getVisibility());
+		JvmType methodType = method.getReturnType().getType();
+		assertEquals("void", methodType.getIdentifier());
 	}
 
 	@Test public void testHashMap_01() {

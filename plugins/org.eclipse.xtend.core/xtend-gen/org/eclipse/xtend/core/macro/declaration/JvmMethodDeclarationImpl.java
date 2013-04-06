@@ -36,6 +36,40 @@ public class JvmMethodDeclarationImpl extends JvmExecutableDeclarationImpl<JvmOp
     return _isStatic;
   }
   
+  public boolean isSynchronized() {
+    JvmOperation _delegate = this.getDelegate();
+    boolean _isSynchronized = _delegate.isSynchronized();
+    return _isSynchronized;
+  }
+  
+  public boolean isDefault() {
+    JvmOperation _delegate = this.getDelegate();
+    boolean _isDefault = _delegate.isDefault();
+    return _isDefault;
+  }
+  
+  public boolean isStrictFloatingPoint() {
+    JvmOperation _delegate = this.getDelegate();
+    boolean _isStrictFloatingPoint = _delegate.isStrictFloatingPoint();
+    return _isStrictFloatingPoint;
+  }
+  
+  public void setStrictFloatingPoint(final boolean isStrictFloatingPoint) {
+    JvmOperation _delegate = this.getDelegate();
+    _delegate.setStrictFloatingPoint(isStrictFloatingPoint);
+  }
+  
+  public boolean isNative() {
+    JvmOperation _delegate = this.getDelegate();
+    boolean _isNative = _delegate.isNative();
+    return _isNative;
+  }
+  
+  public void setNative(final boolean isNative) {
+    JvmOperation _delegate = this.getDelegate();
+    _delegate.setNative(isNative);
+  }
+  
   public TypeReference getReturnType() {
     CompilationUnitImpl _compilationUnit = this.getCompilationUnit();
     JvmOperation _delegate = this.getDelegate();
@@ -64,5 +98,15 @@ public class JvmMethodDeclarationImpl extends JvmExecutableDeclarationImpl<JvmOp
   public void setStatic(final boolean isStatic) {
     JvmOperation _delegate = this.getDelegate();
     _delegate.setStatic(isStatic);
+  }
+  
+  public void setSynchronized(final boolean isSynchronized) {
+    JvmOperation _delegate = this.getDelegate();
+    _delegate.setSynchronized(isSynchronized);
+  }
+  
+  public void setDefault(final boolean isDefault) {
+    JvmOperation _delegate = this.getDelegate();
+    _delegate.setDefault(isDefault);
   }
 }

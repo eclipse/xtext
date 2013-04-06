@@ -104,6 +104,7 @@ public class DeclaredTypeFactory implements ITypeFactory<Class<?>> {
 	
 			final JvmGenericType result = TypesFactory.eINSTANCE.createJvmGenericType();
 			result.setInterface(clazz.isInterface());
+			result.setStrictFloatingPoint(Modifier.isStrict(clazz.getModifiers()));
 			setTypeModifiers(clazz, result);
 			setVisibility(clazz, result);
 			result.internalSetIdentifier(clazz.getName());
@@ -512,6 +513,8 @@ public class DeclaredTypeFactory implements ITypeFactory<Class<?>> {
 		result.setSimpleName(field.getName());
 		result.setFinal(Modifier.isFinal(field.getModifiers()));
 		result.setStatic(Modifier.isStatic(field.getModifiers()));
+		result.setTransient(Modifier.isTransient(field.getModifiers()));
+		result.setVolatile(Modifier.isVolatile(field.getModifiers()));
 		setVisibility(result, field.getModifiers());
 		Type fieldType = null;
 		try {
@@ -647,6 +650,9 @@ public class DeclaredTypeFactory implements ITypeFactory<Class<?>> {
 		result.setAbstract(Modifier.isAbstract(method.getModifiers()));
 		result.setFinal(Modifier.isFinal(method.getModifiers()));
 		result.setStatic(Modifier.isStatic(method.getModifiers()));
+		result.setSynchronized(Modifier.isSynchronized(method.getModifiers()));
+		result.setStrictFloatingPoint(Modifier.isStrict(method.getModifiers()));
+		result.setNative(Modifier.isNative(method.getModifiers()));
 		Type returnType = null;
 		try {
 			returnType = method.getGenericReturnType();
