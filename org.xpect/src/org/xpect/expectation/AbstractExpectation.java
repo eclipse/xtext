@@ -30,8 +30,8 @@ public class AbstractExpectation implements IParsedParameterProvider {
 
 	public AbstractExpectation(String document, IExpectationRegion region) {
 		super();
-		Preconditions.checkElementIndex(region.getOffset(), document.length());
-		Preconditions.checkElementIndex(region.getOffset() + region.getLength(), document.length());
+		Preconditions.checkPositionIndex(region.getOffset(), document.length());
+		Preconditions.checkPositionIndex(region.getOffset() + region.getLength(), document.length());
 		this.document = document;
 		this.region = region;
 	}
