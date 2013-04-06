@@ -14,6 +14,11 @@ package org.eclipse.xtend.lib.macro.declaration;
 public interface MutableInterfaceDeclaration extends MutableTypeDeclaration, InterfaceDeclaration {
 
 	/**
+	 * @param isStrictFloatingPoint
+	 */
+	void setStrictFloatingPoint(boolean isStrictFloatingPoint);
+
+	/**
 	 * @param superinterfaces the interfaces this class implements
 	 */
 	public void setExtendedInterfaces(Iterable<? extends TypeReference> superinterfaces);

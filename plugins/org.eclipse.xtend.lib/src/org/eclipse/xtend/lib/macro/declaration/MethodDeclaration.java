@@ -38,6 +38,27 @@ public interface MethodDeclaration extends ExecutableDeclaration {
 	boolean isStatic();
 	
 	/**
+	 * @return whether this method is declared <code>synchronized</code>
+	 */
+	boolean isSynchronized();
+	
+	/**
+	 * @return whether this method is declared <code>default</code>
+	 */
+	boolean isDefault();
+	
+	/**
+	 * @return whether this method is declared <code>strictfp</code>
+	 */
+	boolean isStrictFloatingPoint();
+
+	/**
+	 * @return whether this method is declared <code>native</code>
+	 */
+	boolean isNative();
+
+	
+	/**
 	 * @return the return type of this method
 	 */
 	TypeReference getReturnType();

@@ -28,6 +28,16 @@ public interface FieldDeclaration extends MemberDeclaration {
 	boolean isStatic();
 	
 	/**
+	 * @return whether this field is declared 'transient'
+	 */
+	boolean isTransient();
+	
+	/**
+	 * @return whether this field is declared 'volatile'
+	 */
+	boolean isVolatile();
+	
+	/**
 	 * @return the initializer. <code>null</code> if no initializer is present or this is an external element.
 	 */
 	Expression getInitializer();

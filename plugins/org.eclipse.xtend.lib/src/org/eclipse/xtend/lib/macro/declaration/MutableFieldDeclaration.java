@@ -32,6 +32,20 @@ public interface MutableFieldDeclaration extends MutableMemberDeclaration, Field
 	void setStatic(boolean isStatic);
 	
 	/**
+	 * sets the 'transient' property
+	 * 
+	 * @param isTransient
+	 */
+	void setTransient(boolean isTransient);
+	
+	/**
+	 * sets the 'volatile' property
+	 * 
+	 * @param isVolatile
+	 */
+	void setVolatile(boolean isVolatile);
+	
+	/**
 	 * sets the 'initializer' expression of this field declaration.
 	 * Automatically detaches any previously assigned initializers from this field declaration.
 	 * 
