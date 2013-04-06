@@ -19,6 +19,8 @@ import org.eclipse.core.runtime.CoreException;
  */
 public class ContentTypeUtil {
 
+	private static final String XPECT_SETUP = "XPECT_SETUP";
+
 	public enum XpectContentType {
 		BINARY, TEXT, XPECT
 	}
@@ -37,8 +39,11 @@ public class ContentTypeUtil {
 					return XpectContentType.BINARY;
 			}
 			String stringBuf = new String(buf);
-			if (stringBuf.contains("XPECT"))
-				return XpectContentType.XPECT;
+			int index = stringBuf.indexOf(XPECT_SETUP);
+			if (index >= 0 && index < stringBuf.length() + XPECT_SETUP.length()) {
+				if (Character.isWhitespace(stringBuf.charAt(index + XPECT_SETUP.length())))
+					return XpectContentType.XPECT;
+			}
 			return XpectContentType.TEXT;
 		} catch (CoreException e) {
 			throw new RuntimeException(e);
