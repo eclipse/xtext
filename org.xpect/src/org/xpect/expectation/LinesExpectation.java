@@ -24,7 +24,6 @@ import org.xpect.expectation.ExpectationCollection.ExpectationItem;
 import org.xpect.expectation.LinesExpectation.LinesExpectationParser;
 import org.xpect.parameter.IParameterParser.ISingleParameterParser;
 import org.xpect.parameter.IParameterParser.SingleParameterParser;
-import org.xpect.util.IRegion;
 
 import com.google.common.base.Function;
 import com.google.common.base.Joiner;
@@ -42,8 +41,8 @@ public @interface LinesExpectation {
 
 		private final LinesExpectation annotation;
 
-		public LinesExpectationImpl(LinesExpectation annotation, String document, int offset, int lenght) {
-			super(document, offset, lenght);
+		public LinesExpectationImpl(LinesExpectation annotation, String document, IExpectationRegion region) {
+			super(document, region);
 			this.annotation = annotation;
 		}
 
@@ -57,7 +56,6 @@ public @interface LinesExpectation {
 
 		protected void assertEquals(String message, Iterable<?> actual, boolean forceFail) {
 			Assert.assertNotNull(actual);
-			String indentation = getIndentation();
 
 			ExpectationCollection exp = new ExpectationCollection();
 			exp.setCaseSensitive(annotation.caseSensitive());
@@ -65,7 +63,7 @@ public @interface LinesExpectation {
 			exp.setQuoted(annotation.quoted());
 			exp.setSeparator('\n');
 			exp.setWhitespaceSensitive(annotation.whitespaceSensitive());
-			exp.init(getExpectation(indentation));
+			exp.init(getExpectation());
 
 			ActualCollection act = new ActualCollection();
 			act.setCaseSensitive(annotation.caseSensitive());
@@ -88,8 +86,8 @@ public @interface LinesExpectation {
 					if (pair.getSecond() != null)
 						actString.add(pair.getSecond().getEscaped());
 				}
-				String expDoc = replaceInDocument(indentation, Joiner.on('\n').join(expString));
-				String actDoc = replaceInDocument(indentation, Joiner.on('\n').join(actString));
+				String expDoc = replaceInDocument(Joiner.on('\n').join(expString));
+				String actDoc = replaceInDocument(Joiner.on('\n').join(actString));
 				throw new ComparisonFailure(message, expDoc, actDoc);
 			}
 		}
@@ -117,10 +115,10 @@ public @interface LinesExpectation {
 		}
 
 		public IParsedParameterProvider parseRegion(XpectInvocation invocation, int paramIndex, List<IClaimedRegion> claims) {
-			IRegion region = claimRegion(invocation, paramIndex);
+			IExpectationRegion region = claimRegion(invocation, paramIndex);
 			if (region != null) {
 				String document = invocation.getFile().getDocument();
-				return new LinesExpectationImpl(annotation, document, region.getOffset(), region.getLength());
+				return new LinesExpectationImpl(annotation, document, region);
 			}
 			return null;
 		}

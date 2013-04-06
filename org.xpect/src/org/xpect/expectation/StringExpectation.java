@@ -19,7 +19,6 @@ import org.xpect.XpectInvocation;
 import org.xpect.expectation.StringExpectation.StringExpectationParser;
 import org.xpect.parameter.IParameterParser.ISingleParameterParser;
 import org.xpect.parameter.IParameterParser.SingleParameterParser;
-import org.xpect.util.IRegion;
 
 /**
  * @author Moritz Eysholdt - Initial contribution and API
@@ -34,8 +33,8 @@ public @interface StringExpectation {
 
 		private final StringExpectation annotation;
 
-		public StringExpectationImpl(StringExpectation annotation, String document, int offset, int lenght) {
-			super(document, offset, lenght);
+		public StringExpectationImpl(StringExpectation annotation, String document, IExpectationRegion region) {
+			super(document, region);
 			this.annotation = annotation;
 		}
 
@@ -43,8 +42,7 @@ public @interface StringExpectation {
 			if (string == null)
 				throw new NullPointerException("Object is null");
 			String actual = string.toString();
-			String indentation = getIndentation();
-			String originalExpectation = getExpectation(indentation);
+			String originalExpectation = getExpectation();
 			String migratedExpectation;
 			if (!annotation.whitespaceSensitive()) {
 				FormattingMigrator migrator = new FormattingMigrator();
@@ -53,8 +51,8 @@ public @interface StringExpectation {
 				migratedExpectation = originalExpectation;
 			if ((annotation.caseSensitive() && !migratedExpectation.equals(actual))
 					|| (!annotation.caseSensitive() && !migratedExpectation.equalsIgnoreCase(actual))) {
-				String expDoc = replaceInDocument(indentation, migratedExpectation);
-				String actDoc = replaceInDocument(indentation, actual);
+				String expDoc = replaceInDocument(migratedExpectation);
+				String actDoc = replaceInDocument(actual);
 				throw new ComparisonFailure("", expDoc, actDoc);
 			}
 
@@ -80,10 +78,10 @@ public @interface StringExpectation {
 		}
 
 		public IParsedParameterProvider parseRegion(XpectInvocation invocation, int paramIndex, List<IClaimedRegion> claims) {
-			IRegion region = claimRegion(invocation, paramIndex);
+			IExpectationRegion region = claimRegion(invocation, paramIndex);
 			if (region != null) {
 				String document = invocation.getFile().getDocument();
-				return new StringExpectationImpl(annotation, document, region.getOffset(), region.getLength());
+				return new StringExpectationImpl(annotation, document, region);
 			}
 			return null;
 		}

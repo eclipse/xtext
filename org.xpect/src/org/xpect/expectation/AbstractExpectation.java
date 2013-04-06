@@ -13,8 +13,8 @@ import java.util.List;
 import java.util.Map;
 
 import org.eclipse.xtext.util.Strings;
-import org.xpect.parameter.IParameterProvider;
 import org.xpect.parameter.IParameterParser.IParsedParameterProvider;
+import org.xpect.parameter.IParameterProvider;
 import org.xpect.util.IRegion;
 import org.xpect.util.Region;
 
@@ -26,16 +26,14 @@ import com.google.common.base.Preconditions;
  */
 public class AbstractExpectation implements IParsedParameterProvider {
 	private final String document;
-	private final int length;
-	private final int offset;
+	private final IExpectationRegion region;
 
-	public AbstractExpectation(String document, int offset, int length) {
+	public AbstractExpectation(String document, IExpectationRegion region) {
 		super();
-		Preconditions.checkElementIndex(offset, document.length());
-		Preconditions.checkElementIndex(offset + length, document.length());
+		Preconditions.checkElementIndex(region.getOffset(), document.length());
+		Preconditions.checkElementIndex(region.getOffset() + region.getLength(), document.length());
 		this.document = document;
-		this.offset = offset;
-		this.length = length;
+		this.region = region;
 	}
 
 	public boolean canProvide(Class<?> expectedType) {
@@ -49,13 +47,17 @@ public class AbstractExpectation implements IParsedParameterProvider {
 		return null;
 	}
 
-	protected String getExpectation(String indentation) {
-		if (length < 0)
+	public IExpectationRegion getClaimedRegion() {
+		return region;
+	}
+
+	protected String getExpectation() {
+		if (getLength() < 0)
 			return "";
-		String[] lines = document.substring(offset, offset + length).split("\\n");
-		if (lines.length == 1)
-			return lines[0];
-		else {
+		String substring = document.substring(getOffset(), getOffset() + getLength());
+		String indentation = region.getIndentation();
+		if (indentation != null) {
+			String[] lines = substring.split("\\n");
 			String newLines[] = new String[lines.length];
 			for (int i = 0; i < lines.length; i++)
 				if (lines[i].startsWith(indentation))
@@ -63,43 +65,32 @@ public class AbstractExpectation implements IParsedParameterProvider {
 				else
 					newLines[i] = lines[i];
 			return Joiner.on("\n").join(newLines);
+		} else {
+			return substring;
 		}
 	}
 
-	protected String getIndentation() {
-		int nl = document.lastIndexOf("\n", offset);
-		if (nl < 0)
-			nl = 0;
-		StringBuilder result = new StringBuilder();
-		for (int i = nl + 1; i < document.length() && Character.isWhitespace(document.charAt(i)) && document.charAt(i) != '\n'; i++)
-			result.append(document.charAt(i));
-		return result.toString();
-	}
-
 	public int getLength() {
-		return length;
+		return region.getLength();
 	}
 
 	public int getOffset() {
-		return offset;
+		return region.getOffset();
 	}
 
-	protected String replaceInDocument(String indentation, String value) {
+	public List<IRegion> getSemanticRegions() {
+		return Collections.<IRegion> singletonList(new Region(getOffset(), getLength()));
+	}
+
+	protected String replaceInDocument(String value) {
 		String indented;
+		String indentation = region.getIndentation();
 		if (!Strings.isEmpty(indentation))
 			indented = indentation + value.replace("\n", "\n" + indentation);
 		else
 			indented = value;
-		String before = document.substring(0, offset);
-		String after = document.substring(offset + length, document.length());
+		String before = document.substring(0, getOffset());
+		String after = document.substring(getOffset() + getLength(), document.length());
 		return before + indented + after;
-	}
-
-	public IRegion getClaimedRegion() {
-		return new Region(offset, length);
-	}
-
-	public List<IRegion> getSemanticRegions() {
-		return Collections.<IRegion> singletonList(new Region(offset, length));
 	}
 }

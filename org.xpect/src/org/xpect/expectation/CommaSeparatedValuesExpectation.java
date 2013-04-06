@@ -23,7 +23,6 @@ import org.xpect.expectation.CommaSeparatedValuesExpectation.CommaSeparatedValue
 import org.xpect.expectation.ExpectationCollection.ExpectationItem;
 import org.xpect.parameter.IParameterParser.ISingleParameterParser;
 import org.xpect.parameter.IParameterParser.SingleParameterParser;
-import org.xpect.util.IRegion;
 
 import com.google.common.base.Function;
 import com.google.common.base.Predicate;
@@ -39,8 +38,8 @@ public @interface CommaSeparatedValuesExpectation {
 	public class CommaSeparatedValuesExpectationImpl extends AbstractExpectation implements ICommaSeparatedValuesExpectation {
 		private final CommaSeparatedValuesExpectation annotation;
 
-		public CommaSeparatedValuesExpectationImpl(CommaSeparatedValuesExpectation annotation, String document, int offset, int lenght) {
-			super(document, offset, lenght);
+		public CommaSeparatedValuesExpectationImpl(CommaSeparatedValuesExpectation annotation, String document, IExpectationRegion region) {
+			super(document, region);
 			this.annotation = annotation;
 		}
 
@@ -49,15 +48,13 @@ public @interface CommaSeparatedValuesExpectation {
 		}
 
 		public void assertEquals(Iterable<?> actual, Predicate<String> predicate) {
-			String indentation = getIndentation();
-
 			ExpectationCollection exp = new ExpectationCollection();
 			exp.setCaseSensitive(annotation.caseSensitive());
 			exp.setOrdered(annotation.ordered());
 			exp.setQuoted(annotation.quoted());
 			exp.setSeparator(',');
 			exp.setWhitespaceSensitive(annotation.whitespaceSensitive());
-			exp.init(getExpectation(indentation));
+			exp.init(getExpectation());
 
 			ActualCollection act = new ActualCollection();
 			act.setCaseSensitive(annotation.caseSensitive());
@@ -128,8 +125,8 @@ public @interface CommaSeparatedValuesExpectation {
 					if (actItem != null)
 						actString.append(actItem);
 				}
-				String expDoc = replaceInDocument(indentation, expString.toString());
-				String actDoc = replaceInDocument(indentation, actString.toString());
+				String expDoc = replaceInDocument(expString.toString());
+				String actDoc = replaceInDocument(actString.toString());
 				throw new ComparisonFailure("", expDoc, actDoc);
 			}
 		}
@@ -165,10 +162,10 @@ public @interface CommaSeparatedValuesExpectation {
 		}
 
 		public IParsedParameterProvider parseRegion(XpectInvocation invocation, int paramIndex, List<IClaimedRegion> claims) {
-			IRegion region = claimRegion(invocation, paramIndex);
+			IExpectationRegion region = claimRegion(invocation, paramIndex);
 			if (region != null) {
 				String document = invocation.getFile().getDocument();
-				return new CommaSeparatedValuesExpectationImpl(annotation, document, region.getOffset(), region.getLength());
+				return new CommaSeparatedValuesExpectationImpl(annotation, document, region);
 			}
 			return null;
 		}
