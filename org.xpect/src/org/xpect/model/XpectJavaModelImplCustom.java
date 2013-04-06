@@ -126,7 +126,9 @@ public class XpectJavaModelImplCustom extends XpectJavaModelImpl {
 		if (testsInitalized)
 			return;
 		Map<String, XjmTest> name2test = Maps.newLinkedHashMap();
-		collectTestClasses(getTestOrSuite().getJvmClass(), name2test);
+		XjmTest test = getTestOrSuite();
+		if (test != null)
+			collectTestClasses(test.getJvmClass(), name2test);
 		super.getTests().addAll(name2test.values());
 
 		testsInitalized = true;
