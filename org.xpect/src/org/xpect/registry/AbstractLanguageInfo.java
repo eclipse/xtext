@@ -76,12 +76,18 @@ public abstract class AbstractLanguageInfo implements ILanguageInfo {
 		return rtLangName;
 	}
 
+	@SuppressWarnings("unchecked")
+	public Class<? extends Module> getRuntimeModuleClass() {
+		String className = rtLangName + "RuntimeModule";
+		return (Class<? extends Module>) loadClass(className);
+	}
+
 	protected Module getRuntimeModule() {
 		if (runtimeModule == null) {
-			String className = rtLangName + "RuntimeModule";
+
 			try {
-				Class<?> clazz = loadClass(className);
-				runtimeModule = (Module) clazz.newInstance();
+				Class<? extends Module> clazz = getRuntimeModuleClass();
+				runtimeModule = clazz.newInstance();
 			} catch (InstantiationException e) {
 				throw new RuntimeException(e);
 			} catch (IllegalAccessException e) {
@@ -95,9 +101,10 @@ public abstract class AbstractLanguageInfo implements ILanguageInfo {
 		return uiLangName;
 	}
 
-	protected Class<?> getUIModuleClass() {
+	@SuppressWarnings("unchecked")
+	public Class<? extends Module> getUIModuleClass() {
 		String className = uiLangName + "UiModule";
-		return loadClass(className);
+		return (Class<? extends Module>) loadClass(className);
 	}
 
 	@Override
