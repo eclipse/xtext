@@ -18,6 +18,7 @@ import org.eclipse.xtext.common.types.JvmAnnotationType;
 import org.eclipse.xtext.common.types.JvmAnnotationValue;
 import org.eclipse.xtext.common.types.JvmBooleanAnnotationValue;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
+import org.eclipse.xtext.common.types.JvmIntAnnotationValue;
 import org.eclipse.xtext.common.types.JvmStringAnnotationValue;
 import org.eclipse.xtext.common.types.JvmTypeAnnotationValue;
 import org.eclipse.xtext.common.types.JvmTypeReference;
@@ -201,6 +202,8 @@ public class JvmAnnotationUtil {
 					return ((JvmStringAnnotationValue) value).getValues().get(0);
 				if (value instanceof JvmBooleanAnnotationValue)
 					return ((JvmBooleanAnnotationValue) value).getValues().get(0);
+				if (value instanceof JvmIntAnnotationValue)
+					return ((JvmIntAnnotationValue) value).getValues().get(0);
 				if (value instanceof JvmTypeAnnotationValue)
 					return reflectAccess.getRawType(((JvmTypeAnnotationValue) value).getValues().get(0).getType());
 
