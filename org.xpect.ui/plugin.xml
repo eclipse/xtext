@@ -362,12 +362,6 @@
     </provider>
   </extension>
   <extension
-        point="org.eclipse.xtext.ui.shared.overridingGuiceModule">
-     <module
-           class="org.xpect.ui.builder.XpectOverridingGuiceModule">
-     </module>
-  </extension>
-  <extension
         point="org.eclipse.jdt.junit.runners.junitRunnerUI">
      <junitRunnerUIHandler
            handlerClass="org.xpect.ui.XpectExecutableExtensionFactory:org.xpect.ui.junit.XpectRunnerUIHandler"
