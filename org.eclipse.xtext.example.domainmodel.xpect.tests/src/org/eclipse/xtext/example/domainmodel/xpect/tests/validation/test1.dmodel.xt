@@ -1,9 +1,5 @@
 /* XPECT_SETUP org.eclipse.xtext.example.domainmodel.xpect.tests.validation.DMValidationTest END_SETUP */
 
-
-
-
-
 package pkg1 {
 	entity MyEntity {
 		
@@ -25,5 +21,6 @@ package pkg1 {
 	}
 }
 
-
+// XPECT errors --> "extraneous input 'foobar' expecting EOF" at "foobar"
+foobar
 
