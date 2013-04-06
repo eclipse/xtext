@@ -400,7 +400,6 @@
             class="org.xpect.ui.editor.XtEditorExecutableExtensionFactory:org.eclipse.xtext.ui.editor.XtextEditor"
             contributorClass="org.eclipse.ui.editors.text.TextEditorActionContributor"
             default="true"
-            extensions="xt"
             id="org.xpect.Xt"
             name="Xpect+Xtext Editor">
         </editor>
