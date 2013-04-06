@@ -10,10 +10,10 @@ package org.xpect.examples.xtend;
 import org.junit.runner.RunWith;
 import org.xpect.runner.XpectRunner;
 import org.xpect.runner.XpectTestFiles;
-import org.xpect.xtext.lib.tests.ValidationTest;
+import org.xpect.xtext.lib.tests.XtextTests;
 
 @RunWith(XpectRunner.class)
 @XpectTestFiles(fileExtensions = "xt")
-public class XtendValidationTest extends ValidationTest {
+public class XtendTest extends XtextTests {
 
 }

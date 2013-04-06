@@ -1,7 +1,7 @@
 package org.xpect.examples.xtend
 
 
-/* XPECT_SETUP org.xpect.examples.xtend.XtendValidationTest END_SETUP */
+/* XPECT_SETUP org.xpect.examples.xtend.XtendTest END_SETUP */
 
 class MyXtendClass {
 
@@ -9,5 +9,8 @@ class MyXtendClass {
 	val x = true
 	
 	// XPECT errors --> "This expression is not allowed in this context, since it doesn't cause any side effects." at "1"
-	def void foo() { 1 }	
+	def void foo() { 1 }
+	
+	// XPECT scope at int --> String, java.lang.String, ...
+	def int bar() { 1 }	
 }
