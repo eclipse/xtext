@@ -8,11 +8,16 @@
 package org.xpect.runner;
 
 import java.lang.reflect.InvocationTargetException;
+import java.util.Map;
 
+import org.xpect.XjmMethod;
 import org.xpect.XjmTestMethod;
-import org.xpect.XpectInvocation;
 import org.xpect.setup.IXpectRunnerSetup;
 import org.xpect.setup.SetupContext;
+import org.xpect.util.TestDataUtil;
+
+import com.google.common.base.Preconditions;
+import com.google.common.collect.Maps;
 
 /**
  * @author Moritz Eysholdt - Initial contribution and API
@@ -21,9 +26,19 @@ public class TestRunner extends AbstractTestRunner {
 
 	private XjmTestMethod method;
 
-	public TestRunner(XpectFileRunner uriRunner, XpectInvocation invocation, XjmTestMethod method) {
-		super(uriRunner, invocation);
+	public TestRunner(XpectFileRunner uriRunner, XjmTestMethod method) {
+		super(uriRunner);
+		Preconditions.checkNotNull(method);
 		this.method = method;
+	}
+
+	protected String getFullName() {
+		Map<String, String> result = Maps.newLinkedHashMap();
+		result.put("title", getUriRunner().getRunner().getUniqueName(getTitle()));
+		XjmMethod method = getMethod();
+		if (method != null && !method.eIsProxy())
+			result.put("method", method.getName());
+		return TestDataUtil.encode(result);
 	}
 
 	public XjmTestMethod getMethod() {
@@ -31,9 +46,13 @@ public class TestRunner extends AbstractTestRunner {
 	}
 
 	@Override
+	protected String getTitle() {
+		return method.getName();
+	}
+
+	@Override
 	protected void runInternal(IXpectRunnerSetup<Object, Object, Object, Object> setup, SetupContext ctx) throws Throwable {
-		Object test = getUriRunner().getRunner().getTestClass().getJavaClass().newInstance();
-		ctx.setXpectInvocation(getInvocation());
+		Object test = method.getTest().getJavaClass().newInstance();
 		ctx.setMethod(method);
 		ctx.setTestInstance(test);
 		try {

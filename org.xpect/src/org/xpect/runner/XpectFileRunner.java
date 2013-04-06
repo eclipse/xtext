@@ -24,9 +24,9 @@ import org.junit.runner.notification.Failure;
 import org.junit.runner.notification.RunNotifier;
 import org.xpect.XjmMethod;
 import org.xpect.XjmTestMethod;
-import org.xpect.XjmXpectMethod;
 import org.xpect.XpectFile;
 import org.xpect.XpectInvocation;
+import org.xpect.XpectJavaModel;
 import org.xpect.setup.ISetupInitializer;
 import org.xpect.setup.IXpectRunnerSetup;
 import org.xpect.setup.SetupContext;
@@ -58,6 +58,17 @@ public class XpectFileRunner {
 		this.xpectFile = file;
 	}
 
+	private List<AbstractTestRunner> createChildren() {
+		List<AbstractTestRunner> children = Lists.newArrayList();
+		XpectJavaModel xjm = xpectFile.getTest().getTestClassOrSuite();
+		for (XjmMethod method : xjm.getMethods().values())
+			if (method instanceof XjmTestMethod)
+				children.add(createTestRunner(method));
+		for (XpectInvocation inv : xpectFile.getInvocations())
+			children.add(createTestRunner(inv));
+		return children;
+	}
+
 	protected Description createDescription() {
 		String title = runner.getUriProvider().getTitle(getUri());
 		if (error == null) {
@@ -70,21 +81,21 @@ public class XpectFileRunner {
 		}
 	}
 
-	protected AbstractTestRunner createTestRunner(XpectInvocation invocation) {
-		XjmMethod method = invocation.getMethod();
-		if (method instanceof XjmXpectMethod)
-			return new XpectTestRunner(this, invocation, (XjmXpectMethod) method);
-		if (method instanceof XjmTestMethod)
-			return new TestRunner(this, invocation, (XjmTestMethod) method);
-		throw new RuntimeException();
+	protected ISetupInitializer<Object> createSetupInitializer() {
+		return new SetupInitializer<Object>(xpectFile.getTest());
 	}
 
-	public List<AbstractTestRunner> getChildren() {
-		if (children == null) {
-			children = Lists.newArrayList();
-			for (XpectInvocation inv : xpectFile.getInvocations())
-				children.add(createTestRunner(inv));
-		}
+	protected TestRunner createTestRunner(XjmMethod method) {
+		return new TestRunner(this, (XjmTestMethod) method);
+	}
+
+	protected AbstractTestRunner createTestRunner(XpectInvocation invocation) {
+		return new XpectTestRunner(this, invocation);
+	}
+
+	protected List<AbstractTestRunner> getChildren() {
+		if (children == null)
+			children = createChildren();
 		return children;
 	}
 
@@ -132,10 +143,6 @@ public class XpectFileRunner {
 		runner.getXpectJavaModel().eResource().getResourceSet().getResources().add(resource);
 		resource.load(null);
 		return resource;
-	}
-
-	protected ISetupInitializer<Object> createSetupInitializer() {
-		return new SetupInitializer<Object>(xpectFile.getTest());
 	}
 
 	public void run(RunNotifier notifier, IXpectRunnerSetup<Object, Object, Object, Object> setup, SetupContext ctx) {

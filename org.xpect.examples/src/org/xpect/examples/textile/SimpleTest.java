@@ -7,6 +7,7 @@
  *******************************************************************************/
 package org.xpect.examples.textile;
 
+import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.xpect.expectation.CommaSeparatedValuesExpectation;
 import org.xpect.expectation.ICommaSeparatedValuesExpectation;
@@ -38,6 +39,11 @@ public class SimpleTest {
 			@CommaSeparatedValuesExpectation ICommaSeparatedValuesExpectation expectation) {
 		System.out.println("simpleString");
 		expectation.assertEquals(Lists.newArrayList("aa", "bb", "cc"));
+	}
+
+	@Test
+	public void testPlainJUnitTest() {
+		System.out.println("plain junit");
 	}
 
 }

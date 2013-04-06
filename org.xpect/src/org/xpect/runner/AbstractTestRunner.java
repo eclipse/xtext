@@ -7,19 +7,13 @@
  *******************************************************************************/
 package org.xpect.runner;
 
-import java.util.Map;
-
-import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.junit.Ignore;
 import org.junit.runner.Description;
 import org.junit.runner.notification.Failure;
 import org.junit.runner.notification.RunNotifier;
 import org.xpect.XjmMethod;
-import org.xpect.XpectInvocation;
 import org.xpect.setup.IXpectRunnerSetup;
 import org.xpect.setup.SetupContext;
-import org.xpect.util.TestDataUtil;
-
-import com.google.common.collect.Maps;
 
 /**
  * @author Moritz Eysholdt - Initial contribution and API
@@ -27,18 +21,15 @@ import com.google.common.collect.Maps;
 public abstract class AbstractTestRunner {
 
 	private Description description;
-	private final XpectInvocation invocation;
 	private final XpectFileRunner uriRunner;
 
-	public AbstractTestRunner(XpectFileRunner uriRunner, XpectInvocation invocation) {
+	public AbstractTestRunner(XpectFileRunner uriRunner) {
 		super();
 		this.uriRunner = uriRunner;
-		this.invocation = invocation;
 	}
 
 	public Description createDescription() {
-		XpectRunner runner = uriRunner.getRunner();
-		Class<?> javaClass = runner.getTestClass().getJavaClass();
+		Class<?> javaClass = getMethod().getTest().getJavaClass();
 		return Description.createTestDescription(javaClass, getFullName());
 	}
 
@@ -48,33 +39,25 @@ public abstract class AbstractTestRunner {
 		return description;
 	}
 
-	protected String getFullName() {
-		Map<String, String> result = Maps.newLinkedHashMap();
-		result.put("title", uriRunner.getRunner().getUniqueName(getTitle()));
-		if (invocation.getMethod() != null && !invocation.getMethod().eIsProxy())
-			result.put("method", invocation.getMethod().getJvmMethod().getSimpleName());
-		result.put("file", EcoreUtil.getURI(invocation).toString());
-		return TestDataUtil.encode(result);
-	}
-
-	public XpectInvocation getInvocation() {
-		return invocation;
-	}
+	protected abstract String getFullName();
 
 	public abstract XjmMethod getMethod();
 
-	protected String getTitle() {
-		return new XpectTestTitleProvider().getTitle(invocation);
-	}
+	protected abstract String getTitle();
 
 	public XpectFileRunner getUriRunner() {
 		return uriRunner;
 	}
 
+	protected boolean isIgnore() {
+		Ignore annotation = getMethod().getJavaMethod().getAnnotation(Ignore.class);
+		return annotation != null;
+	}
+
 	public void run(RunNotifier notifier, IXpectRunnerSetup<Object, Object, Object, Object> setup, SetupContext ctx) {
 		notifier.fireTestStarted(getDescription());
 		try {
-			if (invocation.isIgnore())
+			if (isIgnore())
 				notifier.fireTestIgnored(getDescription());
 			else {
 				runInternal(setup, ctx);
