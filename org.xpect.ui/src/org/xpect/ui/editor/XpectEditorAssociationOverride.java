@@ -11,12 +11,14 @@ import java.util.Collections;
 import java.util.Set;
 
 import org.eclipse.core.resources.IFile;
+import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.content.IContentType;
 import org.eclipse.ui.IEditorDescriptor;
 import org.eclipse.ui.IEditorInput;
 import org.eclipse.ui.IEditorRegistry;
 import org.eclipse.ui.IFileEditorInput;
 import org.eclipse.ui.PlatformUI;
+import org.eclipse.ui.ide.IDE;
 import org.eclipse.ui.ide.IEditorAssociationOverride;
 import org.xpect.registry.ILanguageInfo;
 import org.xpect.ui.XpectPluginActivator;
@@ -53,8 +55,21 @@ public class XpectEditorAssociationOverride implements IEditorAssociationOverrid
 		return extension != null && ILanguageInfo.Registry.INSTANCE.getLanguageByFileExtension(extension) != null;
 	}
 
+	protected boolean hasFavoriteEditor(IFile file) {
+		try {
+			String favoriteEditor = file.getPersistentProperty(IDE.EDITOR_KEY);
+			if (favoriteEditor != null)
+				return true;
+		} catch (CoreException e) {
+			e.printStackTrace();
+		}
+		return false;
+	}
+
 	public IEditorDescriptor overrideDefaultEditor(IEditorInput editorInput, IContentType contentType, IEditorDescriptor editorDescriptor) {
 		IFile file = getFile(editorInput);
+		if (hasFavoriteEditor(file))
+			return editorDescriptor;
 		XpectContentType type = contentTypeHelper.getContentType(file);
 		switch (type) {
 		case XPECT:
