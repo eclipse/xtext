@@ -67,7 +67,6 @@ import org.eclipse.xtext.common.types.TypesFactory;
 import org.eclipse.xtext.common.types.TypesPackage;
 import org.eclipse.xtext.common.types.util.TypeReferences;
 import org.eclipse.xtext.diagnostics.Severity;
-import org.eclipse.xtext.documentation.IEObjectDocumentationProvider;
 import org.eclipse.xtext.documentation.IFileHeaderProvider;
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
@@ -132,9 +131,6 @@ public class XtendJvmModelInferrer implements IJvmModelInferrer {
 	@Inject
 	private JvmTypeExtensions typeExtensions;
 	
-	@Inject
-	private IEObjectDocumentationProvider documentationProvider;
-
 	@Inject
 	private IFileHeaderProvider fileHeaderProvider;
 	

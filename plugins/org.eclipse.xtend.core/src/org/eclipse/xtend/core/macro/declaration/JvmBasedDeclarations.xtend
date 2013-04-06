@@ -246,6 +246,14 @@ class JvmInterfaceDeclarationImpl extends JvmTypeDeclarationImpl<JvmGenericType>
 		delegate.typeParameters.map[compilationUnit.toTypeParameterDeclaration(it)]
 	}
 	
+	override setStrictFloatingPoint(boolean isStrictFloatingPoint) {
+		delegate.setStrictFloatingPoint(isStrictFloatingPoint)
+	}
+	
+	override isStrictFloatingPoint() {
+		delegate.isStrictFloatingPoint	
+	}
+
 }
 
 class JvmAnnotationTypeDeclarationImpl extends JvmTypeDeclarationImpl<JvmAnnotationType> implements MutableAnnotationTypeDeclaration {
@@ -284,6 +292,14 @@ class JvmClassDeclarationImpl extends JvmTypeDeclarationImpl<JvmGenericType> imp
 		delegate.isStatic
 	}
 	
+	override isStrictFloatingPoint() {
+		delegate.isStrictFloatingPoint	
+	}
+	
+	override setStrictFloatingPoint(boolean isStrictFloatingPoint) {
+		delegate.setStrictFloatingPoint(isStrictFloatingPoint)
+	}
+
 	override getTypeParameters() {
 		delegate.typeParameters.map[compilationUnit.toTypeParameterDeclaration(it)]
 	}
@@ -328,7 +344,7 @@ class JvmClassDeclarationImpl extends JvmTypeDeclarationImpl<JvmGenericType> imp
 			&& it.parameters.map[type].toList == parameterTypes.toList
 		]
 	}
-
+	
 }
 
 abstract class JvmExecutableDeclarationImpl<T extends JvmExecutable> extends JvmMemberDeclarationImpl<T> implements MutableExecutableDeclaration {
@@ -436,6 +452,30 @@ class JvmMethodDeclarationImpl extends JvmExecutableDeclarationImpl<JvmOperation
 		delegate.isStatic
 	}
 	
+	override isSynchronized() {
+		delegate.isSynchronized
+	}
+	
+	override isDefault() {
+		delegate.isDefault
+	}
+	
+	override isStrictFloatingPoint() {
+		delegate.isStrictFloatingPoint	
+	}
+	
+	override setStrictFloatingPoint(boolean isStrictFloatingPoint) {
+		delegate.setStrictFloatingPoint(isStrictFloatingPoint)
+	}
+	
+	override isNative() {
+		delegate.isNative	
+	}
+
+	override setNative(boolean isNative) {
+		delegate.setNative(isNative)
+	}
+	
 	override getReturnType() {
 		compilationUnit.toTypeReference(delegate.returnType)
 	}
@@ -458,6 +498,14 @@ class JvmMethodDeclarationImpl extends JvmExecutableDeclarationImpl<JvmOperation
 	
 	override setStatic(boolean isStatic) {
 		delegate.setStatic(isStatic)
+	}
+	
+	override setSynchronized(boolean isSynchronized) {
+		delegate.setSynchronized(isSynchronized)
+	}
+	
+	override setDefault(boolean isDefault) {
+		delegate.setDefault(isDefault)
 	}
 	
 }
@@ -496,6 +544,14 @@ class JvmFieldDeclarationImpl extends JvmMemberDeclarationImpl<JvmField> impleme
 		delegate.isStatic
 	}
 	
+	override isTransient() {
+		delegate.isTransient
+	}
+	
+	override isVolatile() {
+		delegate.isVolatile
+	}
+	
 	override getType() {
 		compilationUnit.toTypeReference(delegate.type)
 	}
@@ -510,6 +566,14 @@ class JvmFieldDeclarationImpl extends JvmMemberDeclarationImpl<JvmField> impleme
 	
 	override setStatic(boolean isStatic) {
 		delegate.setStatic(isStatic)
+	}
+	
+	override setTransient(boolean isTransient) {
+		delegate.setTransient(isTransient)
+	}
+	
+	override setVolatile(boolean isVolatile) {
+		delegate.setVolatile(isVolatile)
 	}
 	
 	override setType(TypeReference type) {
