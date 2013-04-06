@@ -1,4 +1,3 @@
-
 /* XPECT_SETUP org.eclipse.xtext.example.domainmodel.xpect.tests.validation.DMValidationTest END_SETUP */
 
 
@@ -7,14 +6,14 @@
 
 package pkg1 {
 	entity MyEntity {
-		// XPECT errors --> "Couldn't resolve reference to JvmType 'integer'." at "integer"
-		id:integer
 		
-		op calc():int {
+		op calc():String {
 			val x = 1
 			
 			// XPECT errors --> "Assignment to final variable" at "x = 2"
 			x = 2
+			
+			// XPECT errors --> "Type mismatch: cannot convert from int to String" at "x"
 			return x
 		}
 		
