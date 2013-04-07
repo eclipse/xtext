@@ -13,6 +13,7 @@ import java.io.Reader;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.runtime.CoreException;
+import org.xpect.XpectConstants;
 
 /**
  * @author Moritz Eysholdt - Initial contribution and API
@@ -28,6 +29,8 @@ public class ContentTypeUtil {
 	public XpectContentType getContentType(IFile file) {
 		if (file == null || !file.exists())
 			return XpectContentType.BINARY;
+		if (XpectConstants.XT_FILE_EXT.equals(file.getFileExtension()))
+			return XpectContentType.XPECT;
 		Reader contents = null;
 		try {
 			contents = new InputStreamReader(file.getContents(), file.getCharset());
