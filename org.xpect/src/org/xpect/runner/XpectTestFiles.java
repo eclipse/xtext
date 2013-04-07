@@ -33,6 +33,15 @@ import com.google.common.collect.Lists;
 @Target({ ElementType.TYPE })
 @XpectURIProvider(XpectTestFileCollector.class)
 public @interface XpectTestFiles {
+
+	@XpectTestFiles(fileExtensions = "xt")
+	public static class Default {
+		public static XpectTestFileCollector create(Class<?> owner) {
+			XpectTestFiles annotation = Default.class.getAnnotation(XpectTestFiles.class);
+			return new XpectTestFileCollector(owner, annotation);
+		}
+	}
+
 	public static enum FileRoot {
 		CLASS, PROJECT
 	}

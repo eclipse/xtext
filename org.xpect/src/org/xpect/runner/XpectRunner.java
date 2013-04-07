@@ -107,8 +107,7 @@ public class XpectRunner extends ParentRunner<XpectFileRunner> {
 	protected IXpectURIProvider findUriProvider(Class<?> clazz) throws InitializationError {
 		IXpectURIProvider provider = AnnotationUtil.newInstanceViaMetaAnnotation(clazz, XpectURIProvider.class, IXpectURIProvider.class);
 		if (provider == null)
-			throw new InitializationError("No " + IXpectURIProvider.class + " found for " + getTestClass().getJavaClass()
-					+ ". This can be any annotation that is annotated with @" + XpectURIProvider.class);
+			provider = XpectTestFiles.Default.create(clazz);
 		return provider;
 	}
 
