@@ -9,6 +9,10 @@
       <import feature="org.eclipse.xtext.xbase" version="2.3.1.v201208210947"/>
       <import plugin="org.eclipse.jdt.junit.runners" version="0.1.0"/>
    </requires>
+   
+   <includes
+         id="org.xpect.sdk.source"
+         version="0.0.0"/>
 
    <plugin
          id="org.xpect"
