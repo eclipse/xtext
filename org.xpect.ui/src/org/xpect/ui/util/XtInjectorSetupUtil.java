@@ -36,16 +36,18 @@ public class XtInjectorSetupUtil {
 	public static Injector getWorkbenchInjector(ILanguageInfo lang, IFile file) {
 		Injector injector = lang.getInjector();
 		XpectFile xpectFile = XpectUtil.load(file);
-		XpectTest xpectTest = xpectFile.getTest();
 		List<Module> modules = Lists.newArrayList();
 		modules.add(injector.getInstance(XtRuntimeModule.class));
 		modules.add(injector.getInstance(XtUIModule.class));
-		if (xpectTest != null && !xpectTest.eIsProxy()) {
-			XpectJavaModel javaModel = xpectTest.getTestClassOrSuite();
-			if (javaModel != null && !javaModel.eIsProxy()) {
-				EList<IXpectGuiceModuleSetup> moduleSetups = javaModel.getSetups(IXpectGuiceModuleSetup.class, Environment.WORKBENCH);
-				for (IXpectGuiceModuleSetup moduleSetup : moduleSetups)
-					modules.add(injector.getInstance(moduleSetup.getModule()));
+		if (xpectFile != null) {
+			XpectTest xpectTest = xpectFile.getTest();
+			if (xpectTest != null && !xpectTest.eIsProxy()) {
+				XpectJavaModel javaModel = xpectTest.getTestClassOrSuite();
+				if (javaModel != null && !javaModel.eIsProxy()) {
+					EList<IXpectGuiceModuleSetup> moduleSetups = javaModel.getSetups(IXpectGuiceModuleSetup.class, Environment.WORKBENCH);
+					for (IXpectGuiceModuleSetup moduleSetup : moduleSetups)
+						modules.add(injector.getInstance(moduleSetup.getModule()));
+				}
 			}
 		}
 		return lang.getInjector(modules.toArray(new Module[modules.size()]));
