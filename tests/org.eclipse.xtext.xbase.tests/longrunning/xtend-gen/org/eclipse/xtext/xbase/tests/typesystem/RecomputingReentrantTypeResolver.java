@@ -21,6 +21,7 @@ import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.XConstructorCall;
 import org.eclipse.xtext.xbase.XExpression;
+import org.eclipse.xtext.xbase.junit.typesystem.PublicReentrantTypeResolver;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.Functions.Function0;
@@ -34,7 +35,6 @@ import org.eclipse.xtext.xbase.typesystem.IResolvedTypes;
 import org.eclipse.xtext.xbase.typesystem.computation.IConstructorLinkingCandidate;
 import org.eclipse.xtext.xbase.typesystem.computation.IFeatureLinkingCandidate;
 import org.eclipse.xtext.xbase.typesystem.computation.ILinkingCandidate;
-import org.eclipse.xtext.xbase.typesystem.internal.DefaultReentrantTypeResolver;
 import org.eclipse.xtext.xbase.typesystem.internal.ImplicitFirstArgument;
 import org.eclipse.xtext.xbase.typesystem.internal.ImplicitReceiver;
 import org.eclipse.xtext.xbase.typesystem.internal.RootResolvedTypes;
@@ -48,7 +48,7 @@ import org.junit.Assert;
  * @author Sebastian Zarnekow
  */
 @SuppressWarnings("all")
-public class RecomputingReentrantTypeResolver extends DefaultReentrantTypeResolver {
+public class RecomputingReentrantTypeResolver extends PublicReentrantTypeResolver {
   @Inject
   @Extension
   private ReflectExtensions _reflectExtensions;

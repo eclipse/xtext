@@ -508,6 +508,10 @@ public abstract class AbstractXbaseEvaluationTest extends Assert {
 		assertEvaluatesTo("123","return 123.toString");
 	}
 	
+	@Test public void testPrimitiveConversion_04() throws Exception {
+		assertEvaluatesTo("123","123L.intValue.toString");
+	}
+	
 	@Test public void testReturnExpression_01() throws Exception {
 		assertEvaluatesTo(Boolean.TRUE, "return true");
 	}

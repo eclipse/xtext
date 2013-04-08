@@ -27,6 +27,7 @@ import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference
 import org.junit.Assert
 import org.eclipse.xtext.xbase.typesystem.internal.ImplicitFirstArgument
 import org.eclipse.xtext.xbase.typesystem.internal.TypeInsteadOfConstructorLinkingCandidate
+import org.eclipse.xtext.xbase.junit.typesystem.PublicReentrantTypeResolver
 
 /**
  * @author Sebastian Zarnekow
@@ -45,7 +46,7 @@ class RecomputingBatchTypeResolver extends DefaultBatchTypeResolver {
 /**
  * @author Sebastian Zarnekow
  */
-class RecomputingReentrantTypeResolver extends DefaultReentrantTypeResolver {
+class RecomputingReentrantTypeResolver extends PublicReentrantTypeResolver {
 
 	@Inject
 	extension ReflectExtensions	

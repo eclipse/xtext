@@ -72,12 +72,44 @@ public class ResolvedFeature extends AbstractResolvedReference<XAbstractFeatureC
 		XExpression receiver = getImplicitReceiver();
 		if (receiver != null) {
 			ResolvedTypes resolvedTypes = getState().getResolvedTypes();
-			TypeExpectation expectation = new TypeExpectation(null, getState(), false);
 			LightweightTypeReference receiverType = getImplicitReceiverType();
 			if (receiverType == null) {
 				throw new IllegalStateException("Cannot determine type of receiver "+ receiver);
 			}
+			TypeExpectation expectation = new TypeExpectation(null, getState(), false);
 			resolvedTypes.acceptType(receiver, expectation, receiverType.copyInto(resolvedTypes.getReferenceOwner()), false, ConformanceHint.UNCHECKED);
+		} 
+		XExpression actualReceiver = getReceiver();
+		if (actualReceiver != null) {
+			LightweightTypeReference receiverType = getReceiverType();
+			if (receiverType == null) {
+				throw new IllegalStateException("Cannot determine receiver's type");
+			}
+			JvmIdentifiableElement feature = getFeature();
+			if (feature instanceof JvmFeature) {
+				JvmDeclaredType declaringType = ((JvmFeature) feature).getDeclaringType();
+				final ParameterizedTypeReference declaringTypeReference = new ParameterizedTypeReference(receiverType.getOwner(), declaringType);
+				final TypeConformanceComputationArgument rawConformanceCheck = new TypeConformanceComputationArgument(true, false, false, false, false, false);
+				if (!declaringTypeReference.isAssignableFrom(receiverType, rawConformanceCheck)) {
+					final Wrapper<LightweightTypeReference> expectedReceiverTypeWrapper = Wrapper.wrap(null); 
+					CommonTypeComputationServices services = receiverType.getOwner().getServices();
+					SynonymTypesProvider synonymProvider = services.getSynonymTypesProvider();
+					synonymProvider.collectSynonymTypes(receiverType, new SynonymTypesProvider.Acceptor() {
+						@Override
+						protected boolean accept(LightweightTypeReference synonym, EnumSet<ConformanceHint> hints) {
+							if (declaringTypeReference.isAssignableFrom(synonym, rawConformanceCheck)) {
+								expectedReceiverTypeWrapper.set(synonym);
+								return false;
+							}
+							return true;
+						}
+					});
+					LightweightTypeReference expectedReceiverType = expectedReceiverTypeWrapper.get();
+					if (expectedReceiverType != null) {
+						getState().refineExpectedType(actualReceiver, expectedReceiverType);
+					}
+				}
+			}
 		}
 		super.applyToComputationState();
 	}

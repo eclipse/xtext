@@ -11,19 +11,22 @@ import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XNullLiteral;
 import org.eclipse.xtext.xbase.lib.Functions.Function0;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
-import org.eclipse.xtext.xbase.tests.typesystem.ExpectationTest;
+import org.eclipse.xtext.xbase.tests.typesystem.AbstractExpectationTest;
 import org.eclipse.xtext.xbase.typesystem.computation.ITypeComputationState;
 import org.eclipse.xtext.xbase.typesystem.computation.XbaseTypeComputer;
 
+/**
+ * @author Sebastian Zarnekow - Initial contribution and API
+ */
 @SuppressWarnings("all")
 public class ExpectationTestingTypeComputer extends XbaseTypeComputer {
-  private ExpectationTest _test;
+  private AbstractExpectationTest _test;
   
-  public ExpectationTest getTest() {
+  public AbstractExpectationTest getTest() {
     return this._test;
   }
   
-  public void setTest(final ExpectationTest test) {
+  public void setTest(final AbstractExpectationTest test) {
     this._test = test;
   }
   
@@ -50,8 +53,8 @@ public class ExpectationTestingTypeComputer extends XbaseTypeComputer {
     Function1<? super XExpression,? extends Boolean> _predicate = this.getPredicate();
     Boolean _apply = _predicate.apply(expression);
     if ((_apply).booleanValue()) {
-      ExpectationTest _test = this.getTest();
-      _test.recordExpectation(state);
+      AbstractExpectationTest _test = this.getTest();
+      _test.recordExpectation(expression, state);
     }
     super.computeTypes(expression, state);
   }

@@ -349,25 +349,25 @@ public abstract class AbstractTypeComputationState implements ITypeComputationSt
 	}
 	
 	protected IFeatureLinkingCandidate createResolvedLink(XAbstractFeatureCall featureCall, JvmIdentifiableElement resolvedTo) {
-		// TODO inject the helper ?
+		ExpressionAwareStackedResolvedTypes resolvedTypes = this.resolvedTypes.pushTypes(featureCall);
+		ExpressionTypeComputationState state = createExpressionComputationState(featureCall, resolvedTypes);
+		
 		FeatureLinkHelper helper = new FeatureLinkHelper();
 		XExpression syntacticReceiver = helper.getSyntacticReceiver(featureCall);
 		if (syntacticReceiver != null) {
-			AbstractTypeComputationState child = withNonVoidExpectation();
+			AbstractTypeComputationState child = state.withNonVoidExpectation();
 			child.computeTypes(syntacticReceiver);
 		}
 		XExpression implicitReceiver = featureCall.getImplicitReceiver();
 		if (implicitReceiver != null) {
-			AbstractTypeComputationState child = withNonVoidExpectation();
+			AbstractTypeComputationState child = state.withNonVoidExpectation();
 			child.computeTypes(implicitReceiver);
 		}
 		XExpression implicitFirstArgument = featureCall.getImplicitFirstArgument();
 		if (implicitFirstArgument != null) {
-			AbstractTypeComputationState child = withNonVoidExpectation();
+			AbstractTypeComputationState child = state.withNonVoidExpectation();
 			child.computeTypes(implicitFirstArgument);
 		}
-		ExpressionAwareStackedResolvedTypes resolvedTypes = this.resolvedTypes.pushTypes(featureCall);
-		ExpressionTypeComputationState state = createExpressionComputationState(featureCall, resolvedTypes);
 		return new ResolvedFeature(featureCall, resolvedTo, helper, state);
 	}
 	

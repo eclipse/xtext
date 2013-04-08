@@ -18,6 +18,53 @@ import org.junit.Test;
 @SuppressWarnings("all")
 public class CompilerBugTest extends AbstractXtendCompilerTest {
   @Test
+  public void testMethodInvocationOnPrimitiveLong() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("class C {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def m(int i, long k, Object o) {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("i + k.intValue + o.hashCode");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("@SuppressWarnings(\"all\")");
+    _builder_1.newLine();
+    _builder_1.append("public class C {");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("public int m(final int i, final long k, final Object o) {");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("int _intValue = Long.valueOf(k).intValue();");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("int _plus = (i + _intValue);");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("int _hashCode = o.hashCode();");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("int _plus_1 = (_plus + _hashCode);");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("return _plus_1;");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    this.assertCompilesTo(_builder, _builder_1);
+  }
+  
+  @Test
   @Ignore("Type inference fails currently for flatMap [ null ] - it should become (String)=>Object")
   public void testBug404051_01() {
     StringConcatenation _builder = new StringConcatenation();

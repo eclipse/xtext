@@ -16,6 +16,28 @@ import org.junit.Ignore
 class CompilerBugTest extends AbstractXtendCompilerTest {
 	
 	@Test
+	def testMethodInvocationOnPrimitiveLong() {
+		assertCompilesTo('''
+			class C {
+				def m(int i, long k, Object o) {
+					i + k.intValue + o.hashCode
+				}
+			}
+		''', '''
+			@SuppressWarnings("all")
+			public class C {
+			  public int m(final int i, final long k, final Object o) {
+			    int _intValue = Long.valueOf(k).intValue();
+			    int _plus = (i + _intValue);
+			    int _hashCode = o.hashCode();
+			    int _plus_1 = (_plus + _hashCode);
+			    return _plus_1;
+			  }
+			}
+		''')
+	}
+	
+	@Test
 	@Ignore("Type inference fails currently for flatMap [ null ] - it should become (String)=>Object")
 	def testBug404051_01() {
 		assertCompilesTo('''

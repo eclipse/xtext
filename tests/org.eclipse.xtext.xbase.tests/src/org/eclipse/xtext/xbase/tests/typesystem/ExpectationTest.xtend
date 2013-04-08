@@ -9,11 +9,15 @@ package org.eclipse.xtext.xbase.tests.typesystem
 
 import com.google.inject.Inject
 import java.util.List
+import org.eclipse.xtext.xbase.XCastedExpression
 import org.eclipse.xtext.xbase.XExpression
+import org.eclipse.xtext.xbase.XFeatureCall
 import org.eclipse.xtext.xbase.XNullLiteral
+import org.eclipse.xtext.xbase.XNumberLiteral
 import org.eclipse.xtext.xbase.XReturnExpression
 import org.eclipse.xtext.xbase.junit.typesystem.PublicReentrantTypeResolver
 import org.eclipse.xtext.xbase.tests.AbstractXbaseTestCase
+import org.eclipse.xtext.xbase.typesystem.IResolvedTypes
 import org.eclipse.xtext.xbase.typesystem.computation.ITypeComputationState
 import org.eclipse.xtext.xbase.typesystem.computation.ITypeExpectation
 import org.eclipse.xtext.xbase.typesystem.computation.XbaseTypeComputer
@@ -25,37 +29,55 @@ import org.junit.Test
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-class ExpectationTest extends AbstractXbaseTestCase {
-	
-	@Inject PublicReentrantTypeResolver resolver
-	
-	@Inject ExpectationTestingTypeComputer typeComputer
+abstract class AbstractExpectationTest extends AbstractXbaseTestCase {
 	
 	List<String> expectations
 	List<ITypeExpectation> finalExpectations
+	List<XExpression> expressions
+	
+	IResolvedTypes resolvedTypes
+	XExpression rootExpression
 	
 	boolean pendingAssert = false;
 	
+	def ExpectationTestingTypeComputer getTypeComputer()
+	def PublicReentrantTypeResolver getResolver()
+	
 	def expects(String input) {
-		val expression = expression(input, false)
-		resolver.initializeFrom(expression)
-		resolver.reentrantResolve
+		rootExpression = expression(input, false)
+		resolver.initializeFrom(rootExpression)
+		resolvedTypes = resolver.reentrantResolve
 		pendingAssert = true
 		return this
+	}
+	
+	def void clearData() {
+		resolvedTypes = null
+		expectations = newArrayList
+		finalExpectations = newArrayList
+		expressions = newArrayList
 	}
 	
 	def types(String... names) {
 		assertTrue(pendingAssert)
 		pendingAssert = false
 		assertEquals(expectations.toString, names.size, expectations.size)
-		assertEquals(names.toSet as Object, expectations.toSet)
+		assertEquals(names.toSet, expectations.toSet)
 		return this
 	}
 	
 	def finalizedAs(String... names) {
 		assertFalse(pendingAssert)
 		assertEquals(finalExpectations.map[ expectedType?.simpleName ].toString, names.size, expectations.size)
-		assertEquals(names.toSet as Object, finalExpectations.map[ expectedType?.simpleName ].toSet)
+		assertEquals(names.toSet, finalExpectations.map[ expectedType?.simpleName ].toSet)
+		return this
+	}
+	
+	def queriedAs(String... names) {
+		pendingAssert = false
+		val expectedTypes = expressions.map[ resolvedTypes.getExpectedType(it) ]
+		assertEquals(expectedTypes.map[ simpleName ].toString, names.size, expectedTypes.size)
+		assertEquals(names.toSet, expectedTypes.map[ simpleName ].toSet)
 		return this
 	}
 	
@@ -86,8 +108,7 @@ class ExpectationTest extends AbstractXbaseTestCase {
 		typeComputer.test = this
 		pendingAssert = false
 		resolver.typeComputer = typeComputer
-		expectations = newArrayList
-		finalExpectations = newArrayList
+		clearData
 	}
 	
 	@After
@@ -96,13 +117,17 @@ class ExpectationTest extends AbstractXbaseTestCase {
 		pendingAssert = false
 		expectations = null
 		finalExpectations = null
+		expressions = null
+		resolvedTypes = null
+		rootExpression = null
 		typeComputer.test = null
 		resolver.typeComputer = null
 	}
 	
-	def void recordExpectation(ITypeComputationState state) {
+	def void recordExpectation(XExpression expression, ITypeComputationState state) {
 		finalExpectations += state.expectations
-		expectations += state.expectations.map [ expectedType?.simpleName ]	
+		expectations += state.expectations.map [ expectedType?.simpleName ]
+		expressions += expression	
 	}
 
 	@Test
@@ -259,18 +284,75 @@ class ExpectationTest extends AbstractXbaseTestCase {
 		"('' as Comparable).compareTo(null)".expects.types('Object')
 	}
 	
+	@Test
+	def void testInvocationOnPrimitive() {
+		typeComputer.predicate = [ it instanceof XNumberLiteral ]
+		"1L.intValue".expects
+			.types(null as String)
+			.finalizedAs(null as String)
+			.queriedAs('Long')
+	}
+	
+	@Test
+	def void testImplicitReceiver() {
+		typeComputer.predicate = [ false ]
+		"{val it = 1L intValue}".expects
+		val intValue = rootExpression.eAllContents.filter(typeof(XFeatureCall)).head
+		expressions += intValue.implicitReceiver
+		queriedAs('Long')
+	}
+	
+	@Test
+	def void testExtension() {
+		typeComputer.predicate = [ it instanceof XCastedExpression ]
+		"(null as String[]).size".expects
+			.types(null as String)
+			.finalizedAs(null as String)
+			.queriedAs('List<String>')
+	}
+	
+	@Test
+	def void testImplicitFirstArgument() {
+		typeComputer.predicate = [ false ]
+		"{val it = null as String[] head}".expects
+		val size = rootExpression.eAllContents.filter(typeof(XFeatureCall)).head
+		expressions += size.implicitFirstArgument
+		queriedAs('Iterable<String>')
+	}
+	
 }
 
+/**
+ * @author Sebastian Zarnekow - Initial contribution and API
+ */
+class ExpectationTest extends AbstractExpectationTest {
+	@Inject ExpectationTestingTypeComputer typeComputer
+	
+	@Inject PublicReentrantTypeResolver resolver
+	
+	override getTypeComputer() {
+		typeComputer
+	}
+	
+	override getResolver() {
+		resolver
+	}
+	
+}
+
+/**
+ * @author Sebastian Zarnekow - Initial contribution and API
+ */
 class ExpectationTestingTypeComputer extends XbaseTypeComputer {
 	
 	@Property
-	ExpectationTest test
+	AbstractExpectationTest test
 	
 	@Property() (XExpression)=>boolean predicate = [ it instanceof XNullLiteral ]
 	
 	override computeTypes(XExpression expression, ITypeComputationState state) {
 		if (predicate.apply(expression)) {
-			test.recordExpectation(state)
+			test.recordExpectation(expression, state)
 		}
 		super.computeTypes(expression, state)
 	}
