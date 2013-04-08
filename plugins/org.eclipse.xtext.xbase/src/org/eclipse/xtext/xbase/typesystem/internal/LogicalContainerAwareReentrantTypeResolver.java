@@ -372,11 +372,7 @@ public class LogicalContainerAwareReentrantTypeResolver extends DefaultReentrant
 	
 	protected AbstractReentrantTypeReferenceProvider createTypeProvider(Map<JvmIdentifiableElement, ResolvedTypes> resolvedTypesByContext, ResolvedTypes resolvedTypes, IFeatureScopeSession featureScopeSession, JvmMember member, boolean returnType) {
 		XExpression expression = logicalContainerProvider.getAssociatedExpression(member);
-		if (expression != null) {
-			resolvedTypes.markToBeInferred(expression);
-			return new DemandTypeReferenceProvider(member, expression, resolvedTypesByContext, resolvedTypes, featureScopeSession, returnType);
-		}
-		return new AnyTypeReferenceProvider(member, resolvedTypes); 
+		return createTypeProvider(resolvedTypesByContext, resolvedTypes, featureScopeSession, member, expression, returnType);
 	}
 	
 	protected AbstractReentrantTypeReferenceProvider createTypeProvider(
