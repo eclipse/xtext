@@ -205,36 +205,42 @@ public class BuilderParticipantTest extends AbstractBuilderTest {
 				return result;
 			}
 		};
-		BuilderPreferenceAccess.Initializer initializer = new BuilderPreferenceAccess.Initializer();
-		initializer.setOutputConfigurationProvider(outputConfigurationProvider);
-		initializer.initialize(preferenceStoreAccess);
-		
-		IJavaProject project = createJavaProject("foo");
-		addNature(project.getProject(), XtextProjectHelper.NATURE_ID);
-		IFolder folder = project.getProject().getFolder("src");
-		IFile file = folder.getFile("Foo" + F_EXT);
-		file.create(new StringInputStream("object Foo"), true, monitor());
-		waitForAutoBuild();
-		IFile generatedFile = project.getProject().getFile("./src-gen/Foo.txt");
-		assertTrue(generatedFile.exists());
-		assertFalse(generatedFile.isDerived());
-		assertTrue(generatedFile.findMarkers(DerivedResourceMarkers.MARKER_ID, false, IResource.DEPTH_ZERO).length == 1);
-		assertEquals("object Foo", getContents(generatedFile).trim());
-		
-		file.setContents(new StringInputStream("object Bar"), true, true, monitor());
-		waitForAutoBuild();
-		assertTrue(generatedFile.exists());
-		generatedFile = project.getProject().getFile("./src-gen/Bar.txt");
-		assertTrue(generatedFile.exists());
-		assertFalse(generatedFile.isDerived());
-		assertTrue(generatedFile.findMarkers(DerivedResourceMarkers.MARKER_ID, false, IResource.DEPTH_ZERO).length == 1);
-		assertEquals("object Bar", getContents(generatedFile).trim());
-		
-		file.delete(true, monitor());
-		waitForAutoBuild();
-		assertTrue(generatedFile.exists());
-		cleanBuild();
-		assertTrue(generatedFile.exists());
+		try {
+			BuilderPreferenceAccess.Initializer initializer = new BuilderPreferenceAccess.Initializer();
+			initializer.setOutputConfigurationProvider(outputConfigurationProvider);
+			initializer.initialize(preferenceStoreAccess);
+			
+			IJavaProject project = createJavaProject("foo");
+			addNature(project.getProject(), XtextProjectHelper.NATURE_ID);
+			IFolder folder = project.getProject().getFolder("src");
+			IFile file = folder.getFile("Foo" + F_EXT);
+			file.create(new StringInputStream("object Foo"), true, monitor());
+			waitForAutoBuild();
+			IFile generatedFile = project.getProject().getFile("./src-gen/Foo.txt");
+			assertTrue(generatedFile.exists());
+			assertFalse(generatedFile.isDerived());
+			assertTrue(generatedFile.findMarkers(DerivedResourceMarkers.MARKER_ID, false, IResource.DEPTH_ZERO).length == 1);
+			assertEquals("object Foo", getContents(generatedFile).trim());
+			
+			file.setContents(new StringInputStream("object Bar"), true, true, monitor());
+			waitForAutoBuild();
+			assertTrue(generatedFile.exists());
+			generatedFile = project.getProject().getFile("./src-gen/Bar.txt");
+			assertTrue(generatedFile.exists());
+			assertFalse(generatedFile.isDerived());
+			assertTrue(generatedFile.findMarkers(DerivedResourceMarkers.MARKER_ID, false, IResource.DEPTH_ZERO).length == 1);
+			assertEquals("object Bar", getContents(generatedFile).trim());
+			
+			file.delete(true, monitor());
+			waitForAutoBuild();
+			assertTrue(generatedFile.exists());
+			cleanBuild();
+			assertTrue(generatedFile.exists());
+		} finally {
+			BuilderPreferenceAccess.Initializer initializer = new BuilderPreferenceAccess.Initializer();
+			initializer.setOutputConfigurationProvider(new OutputConfigurationProvider());
+			initializer.initialize(preferenceStoreAccess);
+		}
 	}
 	
 	@Test public void testDisabled() throws Exception {
