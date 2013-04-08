@@ -83,6 +83,8 @@ public class PreferenceStoreAccessTest extends Assert implements IPreferenceStor
 	
 	@SuppressWarnings("deprecation")
 	@Test public void testScopeWithAnotherInstance() {
+		// ensure initialization
+		getWritable();
 		ScopedPreferenceStore scopedPreferenceStore = new ScopedPreferenceStore(new ConfigurationScope(), LANGUAGE_ID);
 		assertTrue(scopedPreferenceStore.getBoolean("someBoolean"));
 	}
