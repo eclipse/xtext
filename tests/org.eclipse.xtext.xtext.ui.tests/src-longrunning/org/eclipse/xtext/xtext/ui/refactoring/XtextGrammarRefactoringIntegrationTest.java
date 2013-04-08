@@ -12,7 +12,6 @@ import static org.eclipse.xtext.junit4.ui.util.JavaProjectSetupUtil.*;
 
 import java.io.IOException;
 
-import org.apache.log4j.Logger;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.emf.common.util.URI;
@@ -63,7 +62,6 @@ import com.google.inject.Provider;
 public class XtextGrammarRefactoringIntegrationTest extends AbstractLinkedEditingIntegrationTest {
 
 	private static final String REFACTOREDCLASSIFIERNAME = "Greeting123";
-	private static final Logger LOG = Logger.getLogger(XtextGrammarRefactoringIntegrationTest.class);
 	@Inject
 	private RenameRefactoringController renameRefactoringController;
 
@@ -180,16 +178,14 @@ public class XtextGrammarRefactoringIntegrationTest extends AbstractLinkedEditin
 		assertEquals(REFACTOREDCLASSIFIERNAME, eType.getName());
 	}
 
-	
-	/**
-	 * FIXME (dennis) Re-activate this test!
-	 */
 	@Test public void testRefactorXtextGrammarWithGeneratedClassifierAndModelWithRefToClassifier() throws Exception {
 		ResourceSet rs = resourceSetProvider.get();
 		EcoreFactory eInstance = EcoreFactory.eINSTANCE;
 		Resource ecoreModelResource = createEcoreModel(rs, ecoreURI, initialModelRoot);
 		EClass greetingClass = getGreetingClass(ecoreModelResource);
+		EReference greetingRefLocal = getReferenceoGreeting(ecoreModelResource, greetingClass);
 		String greetingClassFragment = EcoreUtil.getURI(greetingClass).fragment();
+		String greetingRefFragment = EcoreUtil.getURI(greetingRefLocal).fragment();
 
 		EPackage refPackage = eInstance.createEPackage();
 		refPackage.setName("myDsl2");
@@ -215,23 +211,18 @@ public class XtextGrammarRefactoringIntegrationTest extends AbstractLinkedEditin
 		waitForAutoBuild();
 		checkConsistenceOfGrammar(editor);
 		ecoreModelResource.load(null);
-		EObject fromEObject = ecoreModelResource.getEObject(greetingClassFragment.replaceFirst(CLASSIFIERNAME,
-				REFACTOREDCLASSIFIERNAME));
-		LOG.info("Get name from:" + fromEObject);
-		LOG.warn("Activate this Test!");
-//		String greetingName = SimpleAttributeResolver.NAME_RESOLVER.apply(fromEObject);
-//		LOG.info("Got:" + greetingName);
-//		assertEquals(REFACTOREDCLASSIFIERNAME, greetingName);
-//		EReference greetingReference = (EReference) ecoreModelResource.getEObject(greetingRefFragment);
-//		EClassifier eType = greetingReference.getEType();
-//		assertFalse(eType.eIsProxy());
-//		assertEquals(REFACTOREDCLASSIFIERNAME, eType.getName());
-//
-//		refToGreetingResource.load(null);
-//		EReference externalReferenceToGreeting = getReferenceoGreeting(refToGreetingResource, eType);
-//		assertFalse(externalReferenceToGreeting.getEType().eIsProxy());
-//		assertEquals(REFACTOREDCLASSIFIERNAME, externalReferenceToGreeting.getEType().getName());
-
+		assertEquals(REFACTOREDCLASSIFIERNAME, SimpleAttributeResolver.NAME_RESOLVER.apply(ecoreModelResource
+				.getEObject(greetingClassFragment.replaceFirst(CLASSIFIERNAME, REFACTOREDCLASSIFIERNAME))));
+		EReference greetingReference = (EReference) ecoreModelResource.getEObject(greetingRefFragment);
+		EClassifier eType = greetingReference.getEType();
+		assertFalse(eType.eIsProxy());
+		assertEquals(REFACTOREDCLASSIFIERNAME, eType.getName());
+		
+		refToGreetingResource.load(null);
+		EReference externalReferenceToGreeting = getReferenceoGreeting(refToGreetingResource, eType);
+		assertFalse(externalReferenceToGreeting.getEType().eIsProxy());
+		assertEquals(REFACTOREDCLASSIFIERNAME, externalReferenceToGreeting.getEType().getName());
+		
 	}
 
 	private EReference getReferenceoGreeting(Resource ecoreResource, final EClassifier classifier) {
