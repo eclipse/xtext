@@ -26,6 +26,7 @@ import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.typesystem.computation.IConstructorLinkingCandidate;
 import org.eclipse.xtext.xbase.typesystem.computation.IFeatureLinkingCandidate;
 import org.eclipse.xtext.xbase.typesystem.computation.ILinkingCandidate;
+import org.eclipse.xtext.xbase.typesystem.computation.ITypeExpectation;
 import org.eclipse.xtext.xbase.typesystem.conformance.ConformanceHint;
 import org.eclipse.xtext.xbase.typesystem.references.ITypeReferenceOwner;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightBoundTypeArgument;
@@ -318,6 +319,16 @@ public class StackedResolvedTypes extends ResolvedTypes {
 			return (UnboundTypeReference) result.copyInto(getReferenceOwner());
 		}
 		return result;
+	}
+	
+	@Override
+	protected void refineExpectedType(XExpression receiver, ITypeExpectation refinedExpectation) {
+		Collection<TypeData> typeData = basicGetExpressionTypes().get(receiver);
+		if (typeData == null) {
+			getParent().refineExpectedType(receiver, refinedExpectation);
+		} else {
+			super.refineExpectedType(receiver, refinedExpectation);
+		}
 	}
 	
 	@Override
