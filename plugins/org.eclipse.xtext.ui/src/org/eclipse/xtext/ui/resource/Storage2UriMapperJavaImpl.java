@@ -12,6 +12,7 @@ import static com.google.common.collect.Lists.*;
 import static com.google.common.collect.Maps.*;
 import static java.util.Collections.*;
 
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -151,11 +152,13 @@ public class Storage2UriMapperJavaImpl extends Storage2UriMapperImpl implements 
 	
 	private Object computeModificationStamp(IPackageFragmentRoot root) {
 		try {
-			IResource resource = root.getUnderlyingResource();
-			if (resource != null) {
-				return resource.getLocation().toFile().lastModified();
+			if (root.exists()) {
+				IResource resource = root.getUnderlyingResource();
+				if (resource != null) {
+					return resource.getLocation().toFile().lastModified();
+				}
+				return root.getPath().toFile().lastModified();
 			}
-			return root.getPath().toFile().lastModified();
 		} catch (JavaModelException e) {
 			log.error(e.getMessage(), e);
 		}
@@ -213,12 +216,18 @@ public class Storage2UriMapperJavaImpl extends Storage2UriMapperImpl implements 
 		if (!isEmpty(storages))
 			return storages;
 		List<Pair<IStorage, IProject>> result = newArrayListWithCapacity(1);
-		for (PackageFragmentRootData data : cachedPackageFragmentRootData.values()) {
+		Iterator<PackageFragmentRootData> iterator = cachedPackageFragmentRootData.values().iterator();
+		while(iterator.hasNext()) {
+			PackageFragmentRootData data = iterator.next();
 			// TODO better isPrefix
 			if (data.uriPrefix == null || uri.toString().startsWith(data.uriPrefix.toString())) {
-				IStorage storage = data.uri2Storage.get(uri);
-				if (storage != null) {
-					result.add(Tuples.create(storage, data.root.getJavaProject().getProject()));
+				if (!isUpToDate(data, data.root)) {
+					iterator.remove();
+				} else {
+					IStorage storage = data.uri2Storage.get(uri);
+					if (storage != null) {
+						result.add(Tuples.create(storage, data.root.getJavaProject().getProject()));
+					}	
 				}
 			}
 		}
