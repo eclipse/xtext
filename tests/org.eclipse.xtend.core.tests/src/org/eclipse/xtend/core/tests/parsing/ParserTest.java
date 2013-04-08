@@ -2,7 +2,6 @@ package org.eclipse.xtend.core.tests.parsing;
 
 import java.util.List;
 
-import org.eclipse.emf.common.util.EList;
 import org.eclipse.xtend.core.jvmmodel.IXtendJvmAssociations;
 import org.eclipse.xtend.core.tests.AbstractXtendTestCase;
 import org.eclipse.xtend.core.xtend.RichString;
