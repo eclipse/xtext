@@ -11,6 +11,14 @@
 	
   </extension>
 
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated Xpect -->
+      <package
+            uri="http://www.eclipse.org/xpect/XpectJavaModel"
+            class="org.xpect.XjmPackage"
+            genModel="model/Xpect.genmodel"/>
+   </extension>
+
 
 
 

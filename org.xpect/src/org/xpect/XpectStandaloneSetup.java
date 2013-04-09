@@ -21,9 +21,16 @@ public class XpectStandaloneSetup extends XpectStandaloneSetupGenerated {
 	}
 
 	@Override
-	public void register(Injector injector) {
+	public Injector createInjectorAndDoEMFRegistration() {
+		if (!EPackage.Registry.INSTANCE.containsKey(XjmPackage.eNS_URI))
+			EPackage.Registry.INSTANCE.put(XjmPackage.eNS_URI, XjmPackage.eINSTANCE);
 		if (!EPackage.Registry.INSTANCE.containsKey(XpectPackage.eNS_URI))
 			EPackage.Registry.INSTANCE.put(XpectPackage.eNS_URI, XpectPackage.eINSTANCE);
+		return super.createInjectorAndDoEMFRegistration();
+	}
+
+	@Override
+	public void register(Injector injector) {
 		super.register(injector);
 	}
 }
