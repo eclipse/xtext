@@ -8,6 +8,7 @@
 package org.xpect;
 
 import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.xtext.common.types.TypesPackage;
 
 import com.google.inject.Injector;
 
@@ -22,6 +23,8 @@ public class XpectStandaloneSetup extends XpectStandaloneSetupGenerated {
 
 	@Override
 	public Injector createInjectorAndDoEMFRegistration() {
+		if (!EPackage.Registry.INSTANCE.containsKey(TypesPackage.eNS_URI))
+			EPackage.Registry.INSTANCE.put(TypesPackage.eNS_URI, TypesPackage.eINSTANCE);
 		if (!EPackage.Registry.INSTANCE.containsKey(XjmPackage.eNS_URI))
 			EPackage.Registry.INSTANCE.put(XjmPackage.eNS_URI, XjmPackage.eINSTANCE);
 		if (!EPackage.Registry.INSTANCE.containsKey(XpectPackage.eNS_URI))
