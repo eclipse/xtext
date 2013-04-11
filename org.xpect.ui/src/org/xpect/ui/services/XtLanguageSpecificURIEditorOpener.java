@@ -110,7 +110,7 @@ public class XtLanguageSpecificURIEditorOpener implements IURIEditorOpener {
 			try {
 				EObject result = resource.getEObject(uri.fragment());
 				return result;
-			} catch (WrappedException e) {
+			} catch (Exception e) {
 			}
 			try {
 				XtextResource xpectResource = XpectFileAccess.getXpectResource(resource);
