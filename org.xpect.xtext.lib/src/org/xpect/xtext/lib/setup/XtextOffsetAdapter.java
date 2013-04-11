@@ -140,13 +140,15 @@ public class XtextOffsetAdapter implements IParameterAdapter {
 
 		protected EObject find(Class<?> expectedType, INode node, Set<EObject> visited) {
 			EObject current = node.getSemanticElement();
-			while (current != null) {
+			int startoffset = node.getOffset();
+			EObject result = null;
+			while (current != null && NodeModelUtils.getNode(current).getOffset() >= startoffset) {
 				if (expectedType.isInstance(current))
-					return current;
+					result = current;
 				visited.add(current);
 				current = current.eContainer();
 			}
-			return null;
+			return result;
 		}
 
 		protected EObject find(XtextResource res, int offset, Class<?> expectedType) {
