@@ -11,13 +11,13 @@ import java.util.EnumSet;
 
 import org.xpect.Environment;
 import org.xpect.setup.AbstractXpectSetup;
-import org.xpect.xtext.lib.setup.WorkspaceSetup.ClassCtx;
-import org.xpect.xtext.lib.setup.WorkspaceSetup.TestCtx;
+import org.xpect.xtext.lib.setup.XtextWorkspaceSetup.ClassCtx;
+import org.xpect.xtext.lib.setup.XtextWorkspaceSetup.TestCtx;
 
 /**
  * @author Moritz Eysholdt - Initial contribution and API
  */
-public class WorkspaceSetup extends AbstractXpectSetup<ClassCtx, FileCtx, TestCtx, Object> {
+public class XtextWorkspaceSetup extends AbstractXpectSetup<ClassCtx, FileCtx, TestCtx, Object> {
 	protected static class ClassCtx {
 	}
 
