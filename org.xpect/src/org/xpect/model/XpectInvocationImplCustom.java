@@ -1,6 +1,7 @@
 package org.xpect.model;
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 import org.eclipse.emf.common.util.EList;
@@ -70,18 +71,20 @@ public class XpectInvocationImplCustom extends XpectInvocationImpl {
 	protected List<IClaimedRegion> collectClaimedRegions() {
 		List<IClaimedRegion> result = Lists.newArrayList();
 		XjmXpectMethod xpectMethod = getMethod();
-		for (int i = 0; i < xpectMethod.getParameterCount(); i++) {
-			ISingleParameterParser claimer = xpectMethod.getSingleParameterProviders().get(i);
-			if (claimer != null) {
-				IRegion claim = claimer.claimRegion(this, i);
+		if (xpectMethod != null) {
+			for (int i = 0; i < xpectMethod.getParameterCount(); i++) {
+				ISingleParameterParser claimer = xpectMethod.getSingleParameterProviders().get(i);
+				if (claimer != null) {
+					IRegion claim = claimer.claimRegion(this, i);
+					if (claim != null)
+						result.add(new ClaimedRegion(claimer, claim));
+				}
+			}
+			for (IMultiParameterParser claimer : xpectMethod.getMultiParameterProviders()) {
+				IRegion claim = claimer.claimRegion(this);
 				if (claim != null)
 					result.add(new ClaimedRegion(claimer, claim));
 			}
-		}
-		for (IMultiParameterParser claimer : xpectMethod.getMultiParameterProviders()) {
-			IRegion claim = claimer.claimRegion(this);
-			if (claim != null)
-				result.add(new ClaimedRegion(claimer, claim));
 		}
 		return result;
 	}
@@ -89,20 +92,22 @@ public class XpectInvocationImplCustom extends XpectInvocationImpl {
 	protected List<List<IParsedParameterProvider>> collectParsedParameters(List<IClaimedRegion> claimedRegions) {
 		XjmXpectMethod xpectMethod = getMethod();
 		List<List<IParsedParameterProvider>> result = Lists.newArrayList();
-		List<IParsedParameterProvider> first = null;
-		for (int i = 0; i < xpectMethod.getParameterCount(); i++) {
-			ISingleParameterParser claimer = xpectMethod.getSingleParameterProviders().get(i);
-			if (claimer != null) {
-				if (first == null)
-					first = Arrays.asList(new IParsedParameterProvider[xpectMethod.getParameterCount()]);
-				IParsedParameterProvider value = claimer.parseRegion(this, i, claimedRegions);
-				first.set(i, value);
+		if (xpectMethod != null) {
+			List<IParsedParameterProvider> first = null;
+			for (int i = 0; i < xpectMethod.getParameterCount(); i++) {
+				ISingleParameterParser claimer = xpectMethod.getSingleParameterProviders().get(i);
+				if (claimer != null) {
+					if (first == null)
+						first = Arrays.asList(new IParsedParameterProvider[xpectMethod.getParameterCount()]);
+					IParsedParameterProvider value = claimer.parseRegion(this, i, claimedRegions);
+					first.set(i, value);
+				}
 			}
+			if (first != null)
+				result.add(first);
+			for (IMultiParameterParser claimer : xpectMethod.getMultiParameterProviders())
+				result.add(claimer.parseRegion(this, claimedRegions));
 		}
-		if (first != null)
-			result.add(first);
-		for (IMultiParameterParser claimer : xpectMethod.getMultiParameterProviders())
-			result.add(claimer.parseRegion(this, claimedRegions));
 		return result;
 	}
 
@@ -122,7 +127,10 @@ public class XpectInvocationImplCustom extends XpectInvocationImpl {
 	protected Class<?> getParameterType(int paramIndex) {
 		Injector injector = ILanguageInfo.Registry.INSTANCE.getLanguageByFileExtension(XpectConstants.XPECT_FILE_EXT).getInjector();
 		IJavaReflectAccess reflectAccess = injector.getInstance(IJavaReflectAccess.class);
-		JvmOperation jvmMethod = getMethod().getJvmMethod();
+		XjmXpectMethod xpectMethod = getMethod();
+		if (xpectMethod == null)
+			return null;
+		JvmOperation jvmMethod = xpectMethod.getJvmMethod();
 		if (jvmMethod == null || jvmMethod.eIsProxy())
 			return null;
 		JvmTypeReference parameterType = jvmMethod.getParameters().get(paramIndex).getParameterType();
@@ -133,7 +141,10 @@ public class XpectInvocationImplCustom extends XpectInvocationImpl {
 	}
 
 	protected List<IParameterProvider> collectProposedParameters(List<List<IParsedParameterProvider>> allParams) {
-		int count = getMethod().getParameterCount();
+		XjmXpectMethod xpectMethod = getMethod();
+		if (xpectMethod == null)
+			return Collections.emptyList();
+		int count = xpectMethod.getParameterCount();
 		List<IParameterProvider> result = Arrays.asList(new IParameterProvider[count]);
 		for (int i = 0; i < count; i++) {
 			List<IParameterProvider> candidates = Lists.newArrayList();
