@@ -16,7 +16,7 @@ import java.lang.annotation.Target;
  * @author Moritz Eysholdt - Initial contribution and API
  */
 @Retention(RetentionPolicy.RUNTIME)
-@Target(ElementType.PARAMETER)
+@Target({ ElementType.PARAMETER, ElementType.FIELD })
 public @interface ThisResource {
 
 }
