@@ -87,7 +87,6 @@ public class MockJavaProjectProvider implements IJavaProjectProvider {
 		IFolder sourceFolder = JavaProjectSetupUtil.addSourceFolder(javaProjectWithSources, "src");
 		
 		List<String> filesToCopy = readResource(path + "/files.list");
-		
 		IFolder srcFolder = sourceFolder.getFolder(new Path(path));
 		createFolderRecursively(srcFolder);
 		for(String fileToCopy: filesToCopy) {
@@ -95,6 +94,7 @@ public class MockJavaProjectProvider implements IJavaProjectProvider {
 			String contentAsString = Strings.concat("\n", content);
 			createFile(fileToCopy.substring(0, fileToCopy.length() - ".txt".length()), srcFolder, contentAsString);
 		}
+		createFile("ClassWithDefaultPackage.java", sourceFolder, "public class ClassWithDefaultPackage {}");
 		waitForAutoBuild();
 	}
 
