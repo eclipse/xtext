@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2009 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2009-2013 itemis AG (http://www.itemis.eu) and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -35,6 +35,8 @@ import org.eclipse.xtext.util.Strings;
  * @noinstantiate This class is not intended to be instantiated by clients.
  */
 public class JdtTypeProvider extends AbstractJvmTypeProvider implements IJdtTypeProvider {
+	
+	private static final String PRIMITIVES = URIHelperConstants.PRIMITIVES_URI.segment(0);
 	
 	private final IJavaProject javaProject;
 
@@ -84,8 +86,7 @@ public class JdtTypeProvider extends AbstractJvmTypeProvider implements IJdtType
 		if (signature == null)
 			return null;
 		URI resourceURI = typeUriHelper.createResourceURI(signature);
-		String resourcePath = resourceURI.path();
-		if (resourcePath.startsWith(URIHelperConstants.PRIMITIVES)) {
+		if (resourceURI.segment(0) == PRIMITIVES) {
 			return findPrimitiveType(signature, resourceURI);
 		} else {
 			return findObjectType(signature, resourceURI);
