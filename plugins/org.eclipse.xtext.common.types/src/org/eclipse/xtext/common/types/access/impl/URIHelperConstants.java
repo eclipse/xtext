@@ -7,10 +7,15 @@
  *******************************************************************************/
 package org.eclipse.xtext.common.types.access.impl;
 
+import org.eclipse.emf.common.util.URI;
+
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
 public interface URIHelperConstants {
+
+	URI PRIMITIVES_URI = URI.createURI("java:/Primitives");
+	URI OBJECTS_URI = URI.createURI("java:/Objects");
 
 	String PRIMITIVES = "/Primitives"; //$NON-NLS-1$
 	String OBJECTS = "/Objects/"; //$NON-NLS-1$

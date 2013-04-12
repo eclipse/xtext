@@ -7,20 +7,35 @@
  *******************************************************************************/
 package org.eclipse.xtext.common.types.access.jdt;
 
+import java.util.List;
 import java.util.Map;
 
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.InternalEObject;
+import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.jdt.core.IJavaElement;
+import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.jdt.core.IMethod;
+import org.eclipse.jdt.core.IType;
+import org.eclipse.jdt.core.JavaModelException;
+import org.eclipse.jdt.core.dom.AST;
+import org.eclipse.jdt.core.dom.ASTParser;
+import org.eclipse.jdt.core.dom.IBinding;
+import org.eclipse.jdt.core.dom.IMethodBinding;
+import org.eclipse.jdt.core.dom.ITypeBinding;
 import org.eclipse.xtext.common.types.JvmConstructor;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
+import org.eclipse.xtext.common.types.JvmEnumerationType;
+import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmGenericType;
+import org.eclipse.xtext.common.types.JvmMember;
 import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmParameterizedTypeReference;
+import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmVoid;
 import org.eclipse.xtext.common.types.TypesFactory;
 import org.eclipse.xtext.common.types.access.IJvmTypeProvider;
@@ -29,8 +44,10 @@ import org.eclipse.xtext.common.types.access.TypeResource;
 import org.eclipse.xtext.common.types.access.impl.AbstractTypeProviderTest;
 import org.eclipse.xtext.common.types.access.impl.PrimitiveMirror;
 import org.eclipse.xtext.common.types.access.impl.URIHelperConstants;
+import org.eclipse.xtext.common.types.testSetups.TestEnum;
 import org.eclipse.xtext.common.types.util.jdt.JavaElementFinder;
 import org.junit.After;
+import org.junit.Assume;
 import org.junit.Ignore;
 import org.junit.Test;
 
@@ -254,5 +271,66 @@ public class JdtTypeProviderTest extends AbstractTypeProviderTest {
 		String typeName = "org.eclipse.xtext.common.types.testSetups.$StartsWithDollar";
 		JvmGenericType type = (JvmGenericType) getTypeProvider().findTypeByName(typeName);
 		assertNull(type);
+	}
+	
+	@Test public void testEnum_05() throws Exception {
+		Assume.assumeTrue(isParameterNamesAvailable());
+		
+		String typeName = TestEnum.class.getName();
+		JvmEnumerationType type = (JvmEnumerationType) getTypeProvider().findTypeByName(typeName);
+		boolean constructorSeen = false;
+		for(JvmMember member: type.getMembers()) {
+			if (member instanceof JvmConstructor) {
+				constructorSeen = true;
+				List<JvmFormalParameter> parameters = ((JvmConstructor) member).getParameters();
+				assertEquals(1, parameters.size());
+				JvmFormalParameter singleParam = parameters.get(0);
+				assertEquals("string", singleParam.getName());
+			}
+		}
+		assertTrue("constructorSeen", constructorSeen);
+	}
+	
+	@Test public void testEnum_06() throws Exception {
+		Assume.assumeTrue(!isParameterNamesAvailable());
+		
+		String typeName = TestEnum.class.getName();
+		JvmEnumerationType type = (JvmEnumerationType) getTypeProvider().findTypeByName(typeName);
+		boolean constructorSeen = false;
+		for(JvmMember member: type.getMembers()) {
+			if (member instanceof JvmConstructor) {
+				constructorSeen = true;
+				List<JvmFormalParameter> parameters = ((JvmConstructor) member).getParameters();
+				assertEquals(1, parameters.size());
+				JvmFormalParameter singleParam = parameters.get(0);
+				assertEquals("arg2", singleParam.getName());
+			}
+		}
+		assertTrue("constructorSeen", constructorSeen);
+	}
+
+	private boolean isParameterNamesAvailable() throws Exception {
+		ASTParser parser = ASTParser.newParser(AST.JLS3);
+		parser.setIgnoreMethodBodies(true);
+		IJavaProject javaProject = projectProvider.getJavaProject(resourceSet);
+		parser.setProject(javaProject);
+		IType type = javaProject.findType("org.eclipse.xtext.common.types.testSetups.TestEnum");
+		IBinding[] bindings = parser.createBindings(new IJavaElement[] { type }, null);
+		ITypeBinding typeBinding = (ITypeBinding) bindings[0];
+		IMethodBinding[] methods = typeBinding.getDeclaredMethods();
+		for(IMethodBinding method: methods) {
+			if (method.isConstructor()) {
+				IMethod element = (IMethod) method.getJavaElement();
+				if (element.exists()) {
+					String[] parameterNames = element.getParameterNames();
+					if (parameterNames.length == 1 && parameterNames[0].equals("string")) {
+						return true;
+					}
+				} else {
+					return false;
+				}
+			}
+		}
+		return false;
 	}
 }
