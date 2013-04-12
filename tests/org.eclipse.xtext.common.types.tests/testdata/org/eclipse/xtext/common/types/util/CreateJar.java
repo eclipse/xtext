@@ -11,6 +11,7 @@ import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.jar.JarOutputStream;
@@ -48,29 +49,39 @@ public class CreateJar implements IWorkflowComponent {
 				zipFile.createNewFile();
 			JarOutputStream outputStream = new JarOutputStream(new BufferedOutputStream(new FileOutputStream(zipFile)));
 			try {
+				String packagePathInJar = packagePath + "/";
 				for(File classFile: binDirectory.listFiles()) {
 					if (classFile.isFile() && classFile.getName().endsWith(".class")) {
-						BufferedInputStream inputStream = new BufferedInputStream(new FileInputStream(classFile));
-						try {
-							ZipEntry entry = new ZipEntry(packagePath + "/" + classFile.getName());
-							outputStream.putNextEntry(entry);
-							byte[] bytes = new byte[4096];
-							int readBytes = -1;
-							while((readBytes = inputStream.read(bytes)) != -1) {
-								outputStream.write(bytes, 0, readBytes);
-							}
-						} finally {
-							outputStream.closeEntry();
-							inputStream.close();
-						}
-						
+						addToJar(packagePathInJar, classFile, outputStream);
 					}
+				}
+				File rootBindDirectoy = new File(binPath);
+				File classFileWithoutPackage = new File(rootBindDirectoy, "ClassWithDefaultPackage.class");
+				if (classFileWithoutPackage.isFile()) {
+					addToJar("", classFileWithoutPackage, outputStream);
 				}
 			} finally {
 				outputStream.close();
 			}
 		} catch(IOException ioe) {
 			throw new RuntimeException(ioe);
+		}
+	}
+
+	private void addToJar(String packagePathInJar, File classFile, JarOutputStream jar) throws FileNotFoundException,
+			IOException {
+		BufferedInputStream inputStream = new BufferedInputStream(new FileInputStream(classFile));
+		try {
+			ZipEntry entry = new ZipEntry(packagePathInJar + classFile.getName());
+			jar.putNextEntry(entry);
+			byte[] bytes = new byte[4096];
+			int readBytes = -1;
+			while((readBytes = inputStream.read(bytes)) != -1) {
+				jar.write(bytes, 0, readBytes);
+			}
+		} finally {
+			jar.closeEntry();
+			inputStream.close();
 		}
 	}
 
