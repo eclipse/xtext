@@ -1,6 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <component id="org.eclipse.xtext.common.types.ui" version="2">
     <resource path="META-INF/MANIFEST.MF">
+        <filter comment="Performance improvements" id="924844039">
+            <message_arguments>
+                <message_argument value="2.4.2"/>
+                <message_argument value="2.4.0"/>
+            </message_arguments>
+        </filter>
         <filter id="929038356">
             <message_arguments>
                 <message_argument value="2.4.2"/>
@@ -181,6 +187,14 @@
             <message_arguments>
                 <message_argument value="ITypeFactory&lt;Arg&gt;"/>
                 <message_argument value="JdtBasedTypeFactory"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="src/org/eclipse/xtext/common/types/access/jdt/JdtBasedTypeFactory.java" type="org.eclipse.xtext.common.types.access.jdt.JdtBasedTypeFactory$ParameterNameInitializer">
+        <filter id="338722907">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.common.types.access.jdt.JdtBasedTypeFactory.ParameterNameInitializer"/>
+                <message_argument value="ParameterNameInitializer(JvmExecutable, String)"/>
             </message_arguments>
         </filter>
     </resource>

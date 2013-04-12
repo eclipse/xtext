@@ -2714,6 +2714,20 @@ public abstract class AbstractTypeProviderTest extends Assert {
 	}
 	
 	@Test
+	public void testFindTypeByName_ClassWithDefaultPackage() {
+		String typeName = "ClassWithDefaultPackage";
+		JvmGenericType type = (JvmGenericType) getTypeProvider().findTypeByName(typeName);
+		assertEquals(typeName, type.getSimpleName());
+		assertEquals(typeName, type.getQualifiedName());
+		assertEquals(typeName, type.getIdentifier());
+		assertNotNull(type);
+		diagnose(type);
+		Resource resource = type.eResource();
+		getAndResolveAllFragments(resource);
+		recomputeAndCheckIdentifiers(resource);
+	}
+	
+	@Test
 	public void testTypeParamEndsWithDollar_01() {
 		String typeName = "org.eclipse.xtext.common.types.testSetups.TypeParamEndsWithDollar";
 		JvmGenericType type = (JvmGenericType) getTypeProvider().findTypeByName(typeName);
