@@ -18,6 +18,7 @@ import org.eclipse.xtext.common.types.JvmComponentType;
 import org.eclipse.xtext.common.types.JvmGenericArrayTypeReference;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeReference;
+import org.eclipse.xtext.xbase.typesystem.util.IVisibilityHelper;
 import org.eclipse.xtext.xbase.typesystem.util.TypeParameterSubstitutor;
 
 import com.google.common.base.Preconditions;
@@ -57,9 +58,14 @@ public class ArrayTypeReference extends LightweightTypeReference {
 	}
 	
 	@Override
-	public JvmTypeReference toJavaCompliantTypeReference() {
+	public boolean isVisible(IVisibilityHelper visibilityHelper) {
+		return component.isVisible(visibilityHelper);
+	}
+	
+	@Override
+	public JvmTypeReference toJavaCompliantTypeReference(IVisibilityHelper visibilityHelper) {
 		JvmGenericArrayTypeReference result = getTypesFactory().createJvmGenericArrayTypeReference();
-		result.setComponentType(component.toJavaCompliantTypeReference());
+		result.setComponentType(component.toJavaCompliantTypeReference(visibilityHelper));
 		return result;
 	}
 	

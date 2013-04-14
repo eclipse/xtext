@@ -16,6 +16,7 @@ import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.common.types.JvmCompoundTypeReference;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeReference;
+import org.eclipse.xtext.xbase.typesystem.util.IVisibilityHelper;
 import org.eclipse.xtext.xbase.typesystem.util.TypeParameterSubstitutor;
 
 import com.google.common.base.Function;
@@ -51,14 +52,36 @@ public class CompoundTypeReference extends LightweightTypeReference {
 	}
 	
 	@Override
-	public JvmTypeReference toJavaCompliantTypeReference() {
-		LightweightTypeReference type = getServices().getTypeConformanceComputer().getCommonSuperType(components, getOwner());
-		if (type == null) {
-			return getOwner().getServices().getTypeReferences().getTypeForName(Object.class, getOwner().getContextResourceSet());
+	public boolean isVisible(IVisibilityHelper visibilityHelper) {
+		if (components != null && !components.isEmpty()) {
+			for(LightweightTypeReference component: components) {
+				if (!component.isVisible(visibilityHelper)) {
+					return false;
+				}
+			}
 		}
-		return type.toJavaCompliantTypeReference();
+		return true;
 	}
 	
+	/**
+	 * {@inheritDoc}
+	 * 
+	 * If this is a multi-type rather than a {@link #isSynonym() synonym}, the Java compliant
+	 * type reference is determined from the common super type of all participating, non-interface types.
+	 * If there is no such type or this is a synonym, all the component types are used to compute
+	 * the common super type and use that one as the type.
+	 */
+	@Override
+	public JvmTypeReference toJavaCompliantTypeReference(IVisibilityHelper visibilityHelper) {
+		if (!isSynonym()) {
+			List<LightweightTypeReference> nonInterfaceTypes = getNonInterfaceTypes(components);
+			if (nonInterfaceTypes != null) {
+				return toJavaCompliantTypeReference(nonInterfaceTypes, visibilityHelper);
+			}
+		}
+		return toJavaCompliantTypeReference(components, visibilityHelper);
+	}
+
 	@Override
 	public List<LightweightTypeReference> getTypeArguments() {
 		if (components != null && components.size() == 1)

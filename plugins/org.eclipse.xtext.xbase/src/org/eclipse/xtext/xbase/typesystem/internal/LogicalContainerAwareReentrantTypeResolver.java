@@ -106,7 +106,7 @@ public class LogicalContainerAwareReentrantTypeResolver extends DefaultReentrant
 			}
 			if (actualType == null)
 				return null;
-			return actualType.toJavaCompliantTypeReference();
+			return toJavaCompliantTypeReference(actualType, session);
 		}
 		
 		@Override
@@ -122,7 +122,7 @@ public class LogicalContainerAwareReentrantTypeResolver extends DefaultReentrant
 					-1, 
 					null));
 			AnyTypeReference result = new AnyTypeReference(resolvedTypes.getReferenceOwner());
-			return result.toJavaCompliantTypeReference();
+			return toJavaCompliantTypeReference(result, session);
 		}
 
 		/*
@@ -437,7 +437,7 @@ public class LogicalContainerAwareReentrantTypeResolver extends DefaultReentrant
 		if (InferredTypeIndicator.isInferred(field.getType())) {
 			LightweightTypeReference fieldType = result.getActualExpressionType();
 			if (fieldType != null)
-				InferredTypeIndicator.resolveTo(field.getType(), fieldType.toJavaCompliantTypeReference());
+				InferredTypeIndicator.resolveTo(field.getType(), toJavaCompliantTypeReference(fieldType, featureScopeSession));
 		}
 		computeAnnotationTypes(childResolvedTypes, featureScopeSession, field);
 		
@@ -490,7 +490,7 @@ public class LogicalContainerAwareReentrantTypeResolver extends DefaultReentrant
 		addExtensionProviders(state, operation.getParameters());
 		// no need to unmark the computing state since we replace the equivalent in #resolveTo
 		markComputing(operation.getReturnType());
-		setReturnType(operation, state.computeTypes());
+		setReturnType(operation, state.computeTypes(), featureScopeSession);
 		computeAnnotationTypes(childResolvedTypes, featureScopeSession, operation);
 		
 		mergeChildTypes(childResolvedTypes);
@@ -508,11 +508,11 @@ public class LogicalContainerAwareReentrantTypeResolver extends DefaultReentrant
 			((StackedResolvedTypes) childResolvedTypes).mergeIntoParent();
 	}
 
-	protected void setReturnType(JvmOperation operation, ITypeComputationResult computedType) {
+	protected void setReturnType(JvmOperation operation, ITypeComputationResult computedType, IFeatureScopeSession session) {
 		if (InferredTypeIndicator.isInferred(operation.getReturnType())) {
 			LightweightTypeReference returnType = computedType.getReturnType();
 			if (returnType != null) {
-				InferredTypeIndicator.resolveTo(operation.getReturnType(), returnType.toJavaCompliantTypeReference());
+				InferredTypeIndicator.resolveTo(operation.getReturnType(), toJavaCompliantTypeReference(returnType, session));
 			}
 		}
 	}
@@ -703,5 +703,9 @@ public class LogicalContainerAwareReentrantTypeResolver extends DefaultReentrant
 	
 	protected Set<EObject> getInferredElements(EObject element) {
 		return associations.getJvmElements(element);
+	}
+	
+	protected JvmTypeReference toJavaCompliantTypeReference(LightweightTypeReference result, IFeatureScopeSession session) {
+		return result.toJavaCompliantTypeReference(session);
 	}
 }
