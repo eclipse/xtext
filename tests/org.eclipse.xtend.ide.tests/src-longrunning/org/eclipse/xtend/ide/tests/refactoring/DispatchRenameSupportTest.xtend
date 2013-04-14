@@ -104,7 +104,8 @@ class DispatchRenameSupportTest extends AbstractXtendUITestCase {
 		''')
 		checkDispatchOperations(subFile, 
 			'Super._foo(Double)',
-			'Sub._foo(Integer)', 'Sub.foo(Object)')
+			'Sub._foo(Integer)',
+			'Sub.foo(Number)')
 	}
 	
 	@Test
@@ -162,7 +163,7 @@ class DispatchRenameSupportTest extends AbstractXtendUITestCase {
 		''')
 		checkDispatchOperations(subSubFile, 
 			'Super.foo(Double)', 'Super._foo(Double)',
-			'Sub._foo(Integer)', 'Sub.foo(Object)',
+			'Sub._foo(Integer)', 'Sub.foo(Number)',
 			'SubSub._foo(String)', 'SubSub.foo(Object)')
 	}
 	
@@ -185,7 +186,7 @@ class DispatchRenameSupportTest extends AbstractXtendUITestCase {
 		''')
 		checkDispatchOperations(subFile, 
 			'Super.foo(Double)', 'Super._foo(Double)',
-			'Sub._foo(Integer)', 'Sub.foo(Object)',
+			'Sub._foo(Integer)', 'Sub.foo(Number)',
 			'SubSub._foo(String)', 'SubSub.foo(Object)')
 	}
 	
@@ -208,7 +209,7 @@ class DispatchRenameSupportTest extends AbstractXtendUITestCase {
 		''')
 		checkDispatchOperations(superFile, 
 			'Super.foo(Double)', 'Super._foo(Double)',
-			'Sub._foo(Integer)', 'Sub.foo(Object)',
+			'Sub._foo(Integer)', 'Sub.foo(Number)',
 			'SubSub._foo(String)', 'SubSub.foo(Object)')
 	}
 	
@@ -277,7 +278,7 @@ class DispatchRenameSupportTest extends AbstractXtendUITestCase {
 		''')
 		checkDispatchOperations(superFile, 
 			'Super.foo(Double)', 'Super._foo(Double)',
-			'Sub0._foo(Integer)', 'Sub0.foo(Object)',
+			'Sub0._foo(Integer)', 'Sub0.foo(Number)',
 			'Sub1._foo(String)', 'Sub1.foo(Object)')
 	}
 
@@ -300,7 +301,7 @@ class DispatchRenameSupportTest extends AbstractXtendUITestCase {
 		''')
 		checkDispatchOperations(sub0File, 
 			'Super.foo(Double)', 'Super._foo(Double)',
-			'Sub0._foo(Integer)', 'Sub0.foo(Object)',
+			'Sub0._foo(Integer)', 'Sub0.foo(Number)',
 			'Sub1._foo(String)', 'Sub1.foo(Object)')
 	}
 
@@ -323,7 +324,7 @@ class DispatchRenameSupportTest extends AbstractXtendUITestCase {
 		''')
 		checkDispatchOperations(sub0File, 
 			'Super._foo(Double)',
-			'Sub0._foo(Integer)', 'Sub0.foo(Object)',
+			'Sub0._foo(Integer)', 'Sub0.foo(Number)',
 			'Sub1._foo(String)', 'Sub1.foo(Object)')
 	}
 
