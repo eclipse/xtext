@@ -13,10 +13,15 @@ import java.util.List;
 
 import org.eclipse.xtend.core.tests.AbstractXtendTestCase;
 import org.eclipse.xtend.core.xtend.XtendClass;
+import org.eclipse.xtend.core.xtend.XtendFile;
+import org.eclipse.xtend.core.xtend.XtendFunction;
+import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.TypesPackage;
 import org.eclipse.xtext.diagnostics.Diagnostic;
 import org.eclipse.xtext.junit4.validation.ValidationTestHelper;
 import org.eclipse.xtext.validation.Issue;
+import org.eclipse.xtext.xbase.XBlockExpression;
+import org.eclipse.xtext.xbase.XMemberFeatureCall;
 import org.eclipse.xtext.xbase.XbasePackage;
 import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotationsPackage;
 import org.eclipse.xtext.xbase.validation.IssueCodes;
@@ -488,6 +493,17 @@ public class FeatureCallValidationTest extends AbstractXtendTestCase {
 				"}");
 		helper.assertError(clazz, XbasePackage.Literals.XMEMBER_FEATURE_CALL,
 				org.eclipse.xtext.xbase.validation.IssueCodes.INCOMPATIBLE_TYPES, "Type mismatch: cannot convert from Comparable to T");
+	}
+	
+	@Test public void testFeatureCallTypeBounds_6() throws Exception {
+		XtendFile file = file(
+				"import com.google.inject.Injector\n" +
+				"class C {\n" +
+				"	def m(Class<? extends CharSequence> c, Injector i) {\n" +
+				"		i.getInstance(c)\n" +
+				"	}\n" +
+				"}\n");
+		helper.assertNoErrors(file);
 	}
 	
 	@Test

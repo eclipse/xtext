@@ -32,35 +32,39 @@ public class RuntimeTestSetup extends XtendStandaloneSetup {
 
 	@Override
 	public Injector createInjector() {
-		return Guice.createInjector(new XtendRuntimeModule() {
-			@Override
-			public ClassLoader bindClassLoaderToInstance() {
-				return RuntimeTestSetup.class.getClassLoader();
-			}
-
-			@SuppressWarnings("unused")
-			public XtendFactory bindFactory() {
-				return XtendFactory.eINSTANCE;
-			}
-			
-			@SuppressWarnings("unused")
-			public Class<? extends ClasspathTypeProviderFactory> bindClasspathTypeProviderFactory() {
-				return CachingClasspathTypeProviderFactory.class;
-			}
-			
-			@SuppressWarnings("unused")
-			public Class<? extends IPreferenceValuesProvider> bindIPreferenceValuesProvider() {
-				return SingletonPreferenceValuesProvider.class;
-			}
-			
-			@Override
-			public Class<? extends IScopeProvider> bindIScopeProvider() {
-				return DisabledXtendScopeProvider.class;
-			}
-			
-		});
+		return Guice.createInjector(new XtendRuntimeTestModule());
 	}
 	
+	/**
+	 * @author Sebastian Zarnekow - Initial contribution and API
+	 */
+	public static class XtendRuntimeTestModule extends XtendRuntimeModule {
+		@Override
+		public ClassLoader bindClassLoaderToInstance() {
+			return RuntimeTestSetup.class.getClassLoader();
+		}
+
+		@SuppressWarnings("unused")
+		public XtendFactory bindFactory() {
+			return XtendFactory.eINSTANCE;
+		}
+
+		@SuppressWarnings("unused")
+		public Class<? extends ClasspathTypeProviderFactory> bindClasspathTypeProviderFactory() {
+			return CachingClasspathTypeProviderFactory.class;
+		}
+
+		@SuppressWarnings("unused")
+		public Class<? extends IPreferenceValuesProvider> bindIPreferenceValuesProvider() {
+			return SingletonPreferenceValuesProvider.class;
+		}
+
+		@Override
+		public Class<? extends IScopeProvider> bindIScopeProvider() {
+			return DisabledXtendScopeProvider.class;
+		}
+	}
+
 	public static class DisabledXtendScopeProvider extends XtendScopeProvider {
 		@Deprecated
 		@Override

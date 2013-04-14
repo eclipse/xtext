@@ -23,7 +23,13 @@ import org.junit.runners.Suite.SuiteClasses;
 	LinkingShadowingTest.class,
 	InferredJvmModelShadowingJavaLinkingTests.class,
 	InheritedStaticMethodTest.class,
-	InheritedInstanceMethodTest.class
+	InheritedInstanceMethodTest.class,
+	LinkingWithReversedCandidatesTest.class,
+	AssignmentLinkingWithReversedCandidatesTest.class,
+	LinkingShadowingWithReversedCandidatesTest.class,
+	InferredJvmModelShadowingJavaLinkingWithReversedCandidatesTest.class,
+	InheritedStaticMethodWithReversedCandidatesTest.class,
+	InheritedInstanceMethodWithReversedCandidatesTest.class
 })
 public class LinkingSuite {
 }

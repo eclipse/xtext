@@ -51,6 +51,46 @@ class UnboundConformanceStrategy extends TypeConformanceStrategy<UnboundTypeRefe
 	@Nullable
 	protected TypeConformanceResult tryResolveAndCheckConformance(UnboundTypeReference left, LightweightTypeReference right,
 			TypeConformanceComputationArgument.Internal<UnboundTypeReference> param) {
+		class Helper {
+			final List<LightweightBoundTypeArgument> hintsToProcess;
+			final List<LightweightBoundTypeArgument> inferredHintsToProcess;
+			int laterCount = 0;
+			boolean inferredAsWildcard = false;
+			Helper(List<LightweightBoundTypeArgument> hints) {
+				hintsToProcess = Lists.newArrayListWithCapacity(hints.size());
+				inferredHintsToProcess = Lists.newArrayListWithCapacity(hints.size());
+				for(LightweightBoundTypeArgument hint: hints) {
+					if (hint.getDeclaredVariance() != null) {
+						hintsToProcess.add(hint);
+						if (hint.getSource() == BoundTypeArgumentSource.INFERRED) {
+							if (hint.getTypeReference() instanceof WildcardTypeReference) {
+								inferredAsWildcard = true;
+							}
+							inferredHintsToProcess.add(hint);
+						} else if (hint.getSource() == BoundTypeArgumentSource.INFERRED_LATER) {
+							laterCount++;
+						}
+					}
+				}
+			}
+			
+			private List<LightweightBoundTypeArgument> getHintsToMerge() {
+				return inferredHintsToProcess.isEmpty() || (laterCount > 1 && inferredAsWildcard) ? hintsToProcess : inferredHintsToProcess;
+			}
+			
+			@Nullable
+			LightweightMergedBoundTypeArgument getMergeResult(UnboundTypeReference left) {
+				BoundTypeArgumentMerger merger = left.getOwner().getServices().getBoundTypeArgumentMerger();
+				if (inferredHintsToProcess.size() == 1) {
+					LightweightBoundTypeArgument singleBoundArgument = inferredHintsToProcess.get(0);
+					VarianceInfo varianceInfo = singleBoundArgument.getDeclaredVariance().mergeDeclaredWithActual(singleBoundArgument.getActualVariance());
+					if (varianceInfo != null)
+						return new LightweightMergedBoundTypeArgument(singleBoundArgument.getTypeReference(), varianceInfo);
+				} 
+				return merger.merge(getHintsToMerge(), left.getOwner());
+			}
+		}
+		
 		List<LightweightBoundTypeArgument> hints = left.getAllHints();
 		if (hints.isEmpty() && !param.unboundComputationAddsHints) {
 			return TypeConformanceResult.create(param, ConformanceHint.INCOMPATIBLE); 
@@ -58,57 +98,50 @@ class UnboundConformanceStrategy extends TypeConformanceStrategy<UnboundTypeRefe
 		if (!left.isConformantToConstraints(right)) {
 			return TypeConformanceResult.create(param, ConformanceHint.INCOMPATIBLE);
 		}
-		List<LightweightBoundTypeArgument> hintsToProcess = Lists.newArrayListWithCapacity(hints.size());
-		List<LightweightBoundTypeArgument> inferredHintsToProcess = Lists.newArrayListWithCapacity(hints.size());
-		int laterCount = 0;
-		boolean inferredAsWildcard = false;
-		for(LightweightBoundTypeArgument hint: hints) {
-			if (hint.getDeclaredVariance() != null) {
-				hintsToProcess.add(hint);
-				if (hint.getSource() == BoundTypeArgumentSource.INFERRED) {
-					if (hint.getTypeReference() instanceof WildcardTypeReference) {
-						inferredAsWildcard = true;
-					}
-					inferredHintsToProcess.add(hint);
-				} else if (hint.getSource() == BoundTypeArgumentSource.INFERRED_LATER) {
-					laterCount++;
-				}
-			}
-		}
-		if (hintsToProcess.isEmpty() && param.unboundComputationAddsHints) {
-			if (right instanceof WildcardTypeReference) {
-				List<LightweightTypeReference> bounds = ((WildcardTypeReference) right).getUpperBounds();
-				for(LightweightTypeReference upperBound: bounds)
-					left.acceptHint(upperBound, BoundTypeArgumentSource.INFERRED, this, VarianceInfo.OUT, VarianceInfo.OUT);
-			} else {
-				left.acceptHint(right, BoundTypeArgumentSource.INFERRED, this, VarianceInfo.OUT, VarianceInfo.OUT);
-			}
-			return TypeConformanceResult.create(param, ConformanceHint.SUCCESS);
+		Helper state = new Helper(hints);
+		if (state.hintsToProcess.isEmpty() && param.unboundComputationAddsHints) {
+			return addHintAndAnnounceSuccess(left, right, param);
 		} else {
-			BoundTypeArgumentMerger merger = left.getOwner().getServices().getBoundTypeArgumentMerger();
-			LightweightMergedBoundTypeArgument mergeResult = merger.merge(inferredHintsToProcess.isEmpty() || (laterCount > 1 && inferredAsWildcard) ? hintsToProcess : inferredHintsToProcess, left.getOwner());
+			LightweightMergedBoundTypeArgument mergeResult = state.getMergeResult(left);
 			if (mergeResult != null && mergeResult.getVariance() != null) {
-				TypeConformanceComputationArgument newParam = param;
-				LightweightTypeReference mergeResultReference = mergeResult.getTypeReference();
-				if (right.isWildcard() && mergeResultReference.isWildcard()) {
-					if (right.getLowerBoundSubstitute().isAny()) {
-						LightweightTypeReference lowerBoundMergeResult = mergeResultReference.getLowerBoundSubstitute();
-						if (!lowerBoundMergeResult.isAny()) {
-							mergeResultReference = lowerBoundMergeResult;
-						}
-					} else {
-						newParam = TypeConformanceComputationArgument.Internal.create(param.reference, param.rawType, param.asTypeArgument || mergeResult.getTypeReference().isWildcard(), 
-								param.allowPrimitiveConversion, param.allowPrimitiveWidening, param.unboundComputationAddsHints, param.allowSynonyms);
-					}
-				} else if (mergeResultReference.isWildcard()) {
-					newParam = TypeConformanceComputationArgument.Internal.create(param.reference, param.rawType, param.asTypeArgument || mergeResult.getTypeReference().isWildcard(), 
-							param.allowPrimitiveConversion, param.allowPrimitiveWidening, param.unboundComputationAddsHints, param.allowSynonyms);
-				}
-				TypeConformanceResult result = conformanceComputer.isConformant(mergeResultReference, right, newParam);
-				return result;
+				return isConformantMergeResult(mergeResult, right, param);
 			}
 		}
 		return TypeConformanceResult.create(param, ConformanceHint.INCOMPATIBLE);
+	}
+
+	protected TypeConformanceResult addHintAndAnnounceSuccess(UnboundTypeReference left, LightweightTypeReference hint,
+			TypeConformanceComputationArgument.Internal<UnboundTypeReference> param) {
+		if (hint instanceof WildcardTypeReference) {
+			List<LightweightTypeReference> bounds = ((WildcardTypeReference) hint).getUpperBounds();
+			for(LightweightTypeReference upperBound: bounds)
+				left.acceptHint(upperBound, BoundTypeArgumentSource.INFERRED, this, VarianceInfo.OUT, VarianceInfo.OUT);
+		} else {
+			left.acceptHint(hint, BoundTypeArgumentSource.INFERRED, this, VarianceInfo.OUT, VarianceInfo.OUT);
+		}
+		return TypeConformanceResult.create(param, ConformanceHint.SUCCESS);
+	}
+
+	protected TypeConformanceResult isConformantMergeResult(LightweightMergedBoundTypeArgument mergeResult, LightweightTypeReference right,
+			TypeConformanceComputationArgument.Internal<UnboundTypeReference> param) {
+		TypeConformanceComputationArgument newParam = param;
+		LightweightTypeReference mergeResultReference = mergeResult.getTypeReference();
+		if (right.isWildcard() && mergeResultReference.isWildcard()) {
+			if (right.getLowerBoundSubstitute().isAny()) {
+				LightweightTypeReference lowerBoundMergeResult = mergeResultReference.getLowerBoundSubstitute();
+				if (!lowerBoundMergeResult.isAny()) {
+					mergeResultReference = lowerBoundMergeResult;
+				}
+			} else {
+				newParam = TypeConformanceComputationArgument.Internal.create(param.reference, param.rawType, param.asTypeArgument || mergeResult.getTypeReference().isWildcard(), 
+						param.allowPrimitiveConversion, param.allowPrimitiveWidening, param.unboundComputationAddsHints, param.allowSynonyms);
+			}
+		} else if (mergeResultReference.isWildcard()) {
+			newParam = TypeConformanceComputationArgument.Internal.create(param.reference, param.rawType, param.asTypeArgument || mergeResult.getTypeReference().isWildcard(), 
+					param.allowPrimitiveConversion, param.allowPrimitiveWidening, param.unboundComputationAddsHints, param.allowSynonyms);
+		}
+		TypeConformanceResult result = conformanceComputer.isConformant(mergeResultReference, right, newParam);
+		return result;
 	}
 	
 	@Override
