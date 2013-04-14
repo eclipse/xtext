@@ -19,6 +19,7 @@ import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.JvmUpperBound;
 import org.eclipse.xtext.common.types.JvmWildcardTypeReference;
 import org.eclipse.xtext.common.types.TypesFactory;
+import org.eclipse.xtext.xbase.typesystem.util.IVisibilityHelper;
 import org.eclipse.xtext.xbase.typesystem.util.TypeParameterSubstitutor;
 
 import com.google.common.base.Function;
@@ -200,15 +201,15 @@ public class WildcardTypeReference extends LightweightTypeReference {
 	}
 	
 	@Override
-	public JvmTypeReference toJavaCompliantTypeReference() {
+	public JvmTypeReference toJavaCompliantTypeReference(IVisibilityHelper helper) {
 		TypesFactory typesFactory = getTypesFactory();
 		JvmWildcardTypeReference result = typesFactory.createJvmWildcardTypeReference();
 		if (upperBounds != null && !upperBounds.isEmpty()) {
-			for(LightweightTypeReference typeArgument: upperBounds) {
-				JvmUpperBound constraint = typesFactory.createJvmUpperBound();
-				constraint.setTypeReference(typeArgument.toJavaCompliantTypeReference());
-				result.getConstraints().add(constraint);
-			}
+			List<LightweightTypeReference> nonInterfaceTypes = getNonInterfaceTypes(upperBounds);
+			JvmTypeReference upperBound = toJavaCompliantTypeReference(nonInterfaceTypes != null ? nonInterfaceTypes: upperBounds, helper);
+			JvmUpperBound constraint = typesFactory.createJvmUpperBound();
+			constraint.setTypeReference(upperBound);
+			result.getConstraints().add(constraint);
 		}
 		if (lowerBound != null) {
 			JvmLowerBound constraint = typesFactory.createJvmLowerBound();
@@ -216,6 +217,21 @@ public class WildcardTypeReference extends LightweightTypeReference {
 			result.getConstraints().add(constraint);
 		}
 		return result;
+	}
+	
+	@Override
+	public boolean isVisible(IVisibilityHelper visibilityHelper) {
+		if (upperBounds != null && !upperBounds.isEmpty()) {
+			for(LightweightTypeReference upperBound: upperBounds) {
+				if (!upperBound.isVisible(visibilityHelper)) {
+					return false;
+				}
+			}
+		}
+		if (lowerBound != null && !lowerBound.isVisible(visibilityHelper)) {
+			return false;
+		}
+		return true;
 	}
 	
 	public void addUpperBound(LightweightTypeReference upperBound) {

@@ -90,7 +90,7 @@ public class DispatchAndExtensionAwareReentrantTypeResolver extends LogicalConta
 		protected JvmTypeReference doGetTypeReference(XComputedTypeReferenceImplCustom context) {
 			LightweightTypeReference expectedType = getReturnTypeOfOverriddenOperation(operation, resolvedTypes, session);
 			if (expectedType != null) {
-				return expectedType.toJavaCompliantTypeReference();
+				return toJavaCompliantTypeReference(expectedType, session);
 			}
 			
 			List<JvmOperation> cases = dispatchHelper.getAllDispatchCases(operation);
@@ -115,7 +115,7 @@ public class DispatchAndExtensionAwareReentrantTypeResolver extends LogicalConta
 					throw new UnsupportedOperationException("Cannot determine common super type of: " + types);
 				}
 			}
-			return result.toJavaCompliantTypeReference();
+			return toJavaCompliantTypeReference(result, session);
 		}
 		
 		@Override
@@ -129,7 +129,7 @@ public class DispatchAndExtensionAwareReentrantTypeResolver extends LogicalConta
 					-1, 
 					null));
 			AnyTypeReference result = new AnyTypeReference(resolvedTypes.getReferenceOwner());
-			return result.toJavaCompliantTypeReference();
+			return toJavaCompliantTypeReference(result, session);
 		}
 	}
 	
@@ -137,11 +137,13 @@ public class DispatchAndExtensionAwareReentrantTypeResolver extends LogicalConta
 		private final JvmOperation operation;
 		private final ResolvedTypes resolvedTypes;
 		private final int idx;
+		private final IFeatureScopeSession session;
 
-		public DispatchParameterTypeReferenceProvider(JvmOperation operation, int idx, ResolvedTypes resolvedTypes) {
+		public DispatchParameterTypeReferenceProvider(JvmOperation operation, int idx, ResolvedTypes resolvedTypes, IFeatureScopeSession session) {
 			this.idx = idx;
 			this.operation = operation;
 			this.resolvedTypes = resolvedTypes;
+			this.session = session;
 		}
 
 		@Override
@@ -168,7 +170,7 @@ public class DispatchAndExtensionAwareReentrantTypeResolver extends LogicalConta
 			if (parameterType == null) {
 				throw new IllegalStateException("TODO: handle broken models properly");
 			}
-			return parameterType.toJavaCompliantTypeReference();
+			return toJavaCompliantTypeReference(parameterType, session);
 		}
 	}
 	
@@ -199,17 +201,19 @@ public class DispatchAndExtensionAwareReentrantTypeResolver extends LogicalConta
 			}
 			if (actualType == null)
 				return null;
-			return actualType.toJavaCompliantTypeReference();
+			return toJavaCompliantTypeReference(actualType, featureScopeSession);
 		}
 	}
 	
 	public class CreateCacheFieldTypeReferenceProvider extends AbstractReentrantTypeReferenceProvider {
 		private final JvmOperation createOperation;
 		private final ResolvedTypes resolvedTypes;
+		private final IFeatureScopeSession session;
 
-		public CreateCacheFieldTypeReferenceProvider(JvmOperation createOperation, ResolvedTypes resolvedTypes) {
+		public CreateCacheFieldTypeReferenceProvider(JvmOperation createOperation, ResolvedTypes resolvedTypes, IFeatureScopeSession session) {
 			this.createOperation = createOperation;
 			this.resolvedTypes = resolvedTypes;
+			this.session = session;
 		}
 
 		@Override
@@ -228,7 +232,7 @@ public class DispatchAndExtensionAwareReentrantTypeResolver extends LogicalConta
 			ParameterizedTypeReference hashMapReference = new ParameterizedTypeReference(owner, hashMap);
 			hashMapReference.addTypeArgument(arrayListReference);
 			hashMapReference.addTypeArgument(new OwnedConverter(owner).toLightweightReference(declaredReturnType));
-			return hashMapReference.toJavaCompliantTypeReference();
+			return toJavaCompliantTypeReference(hashMapReference, session);
 		}
 	}
 	
@@ -431,7 +435,7 @@ public class DispatchAndExtensionAwareReentrantTypeResolver extends LogicalConta
 					for(JvmOperation dispatchCase: dispatchCases) {
 						JvmTypeReference returnType = dispatchCase.getReturnType();
 						if (InferredTypeIndicator.isInferred(returnType)) {
-							InferredTypeIndicator.resolveTo(returnType, commonDispatchType.toJavaCompliantTypeReference());
+							InferredTypeIndicator.resolveTo(returnType, toJavaCompliantTypeReference(commonDispatchType, featureScopeSession));
 						}
 					}
 				}
@@ -463,7 +467,7 @@ public class DispatchAndExtensionAwareReentrantTypeResolver extends LogicalConta
 					JvmOperation operation = associations.getDirectlyInferredOperation(function);
 					declareTypeParameters(resolvedTypes, field, resolvedTypesByContext);
 					XComputedTypeReference fieldType = getServices().getXtypeFactory().createXComputedTypeReference();
-					fieldType.setTypeProvider(new CreateCacheFieldTypeReferenceProvider(operation, resolvedTypes));
+					fieldType.setTypeProvider(new CreateCacheFieldTypeReferenceProvider(operation, resolvedTypes, featureScopeSession));
 					castedKnownType.setEquivalent(fieldType);
 					return;
 				}
@@ -490,11 +494,11 @@ public class DispatchAndExtensionAwareReentrantTypeResolver extends LogicalConta
 				if (InferredTypeIndicator.isInferred(parameterType)) {
 					XComputedTypeReference casted = (XComputedTypeReference) parameterType;
 					XComputedTypeReference computedParameterType = getServices().getXtypeFactory().createXComputedTypeReference();
-					computedParameterType.setTypeProvider(new DispatchParameterTypeReferenceProvider(operation, i, resolvedTypes));
+					computedParameterType.setTypeProvider(new DispatchParameterTypeReferenceProvider(operation, i, resolvedTypes, featureScopeSession));
 					casted.setEquivalent(computedParameterType);
 				} else if (parameterType == null) {
 					XComputedTypeReference computedParameterType = getServices().getXtypeFactory().createXComputedTypeReference();
-					computedParameterType.setTypeProvider(new DispatchParameterTypeReferenceProvider(operation, i, resolvedTypes));
+					computedParameterType.setTypeProvider(new DispatchParameterTypeReferenceProvider(operation, i, resolvedTypes, featureScopeSession));
 					parameter.setParameterType(computedParameterType);
 				}
 			}
