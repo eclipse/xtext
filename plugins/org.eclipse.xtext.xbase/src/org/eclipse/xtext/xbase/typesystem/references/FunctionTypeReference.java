@@ -13,6 +13,7 @@ import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeReference;
+import org.eclipse.xtext.xbase.typesystem.util.IVisibilityHelper;
 import org.eclipse.xtext.xtype.XFunctionTypeRef;
 
 import com.google.common.base.Function;
@@ -55,6 +56,24 @@ public class FunctionTypeReference extends ParameterizedTypeReference {
 	@Nullable
 	public LightweightTypeReference getReturnType() {
 		return returnType;
+	}
+	
+	@Override
+	public boolean isVisible(IVisibilityHelper visibilityHelper) {
+		if (super.isVisible(visibilityHelper)) {
+			if (returnType != null && !returnType.isVisible(visibilityHelper)) {
+				return false;
+			}
+			if (parameterTypes != null) {
+				for(LightweightTypeReference parameterType: parameterTypes) {
+					if (!parameterType.isVisible(visibilityHelper)) {
+						return false;
+					}
+				}
+			}
+			return true;
+		}
+		return false;
 	}
 	
 	@Override

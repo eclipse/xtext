@@ -17,6 +17,7 @@ import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.JvmUnknownTypeReference;
 import org.eclipse.xtext.util.Strings;
 import org.eclipse.xtext.xbase.typesystem.conformance.SuperTypeAcceptor;
+import org.eclipse.xtext.xbase.typesystem.util.IVisibilityHelper;
 import org.eclipse.xtext.xbase.typesystem.util.TypeParameterSubstitutor;
 
 /**
@@ -55,7 +56,7 @@ public class UnknownTypeReference extends LightweightTypeReference {
 	}
 
 	@Override
-	public JvmTypeReference toJavaCompliantTypeReference() {
+	public JvmTypeReference toJavaCompliantTypeReference(IVisibilityHelper visibilityHelper) {
 		return toTypeReference();
 	}
 
