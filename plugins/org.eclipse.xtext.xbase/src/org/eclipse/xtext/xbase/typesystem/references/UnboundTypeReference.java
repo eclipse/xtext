@@ -21,6 +21,7 @@ import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.typesystem.computation.ITypeExpectation;
 import org.eclipse.xtext.xbase.typesystem.conformance.TypeConformanceComputationArgument;
 import org.eclipse.xtext.xbase.typesystem.util.BoundTypeArgumentSource;
+import org.eclipse.xtext.xbase.typesystem.util.IVisibilityHelper;
 import org.eclipse.xtext.xbase.typesystem.util.TypeParameterByConstraintSubstitutor;
 import org.eclipse.xtext.xbase.typesystem.util.TypeParameterSubstitutor;
 import org.eclipse.xtext.xbase.typesystem.util.VarianceInfo;
@@ -159,8 +160,8 @@ public class UnboundTypeReference extends LightweightTypeReference {
 	}
 	
 	@Override
-	public JvmTypeReference toJavaCompliantTypeReference() {
-		return resolve().toJavaCompliantTypeReference();
+	public JvmTypeReference toJavaCompliantTypeReference(IVisibilityHelper visibilityHelper) {
+		return resolve().toJavaCompliantTypeReference(visibilityHelper);
 	}
 	
 	@Override
@@ -363,6 +364,14 @@ public class UnboundTypeReference extends LightweightTypeReference {
 	}
 	
 	@Override
+	public boolean isVisible(IVisibilityHelper visibilityHelper) {
+		if (internalIsResolved()) {
+			return resolvedTo.isVisible(visibilityHelper);
+		}
+		return true;
+	}
+	
+	@Override
 	public boolean isAny() {
 		if (internalIsResolved()) {
 			return resolvedTo.isAny();
@@ -426,6 +435,14 @@ public class UnboundTypeReference extends LightweightTypeReference {
 	public boolean isWrapper() {
 		if (internalIsResolved()) {
 			return resolvedTo.isWrapper();
+		}
+		return false;
+	}
+	
+	@Override
+	protected boolean isInterfaceType() {
+		if (internalIsResolved()) {
+			return resolvedTo.isInterfaceType();
 		}
 		return false;
 	}
