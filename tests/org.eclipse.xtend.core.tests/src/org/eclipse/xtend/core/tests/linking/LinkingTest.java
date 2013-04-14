@@ -89,6 +89,22 @@ public class LinkingTest extends AbstractXtendTestCase {
 	@Inject
 	private ITypeProvider typeProvider;
 	
+	@Test public void testBug405144_01() throws Exception {
+		XtendFile file = file(
+				"import com.google.inject.Injector\n" +
+				"class C {\n" +
+				"	def m(Injector i, Class<? extends CharSequence> c) {\n" +
+				"		i.getInstance(c)\n" +
+				"	}\n" +
+				"}\n"); 
+		XtendClass c = (XtendClass) file.getXtendTypes().get(0);
+		XtendFunction m = (XtendFunction) c.getMembers().get(0);
+		XBlockExpression body = (XBlockExpression) m.getExpression();
+		XMemberFeatureCall featureCall = (XMemberFeatureCall) body.getExpressions().get(0);
+		JvmIdentifiableElement method = featureCall.getFeature();
+		assertEquals("com.google.inject.Injector.getInstance(java.lang.Class)", method.getIdentifier());
+	}
+	
 	@Test public void testBug403580_01() throws Exception {
 		XtendFile file = file(
 				"abstract class C {\n" +
