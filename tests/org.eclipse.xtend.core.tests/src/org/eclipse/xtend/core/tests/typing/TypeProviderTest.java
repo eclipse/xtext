@@ -7,6 +7,9 @@
  *******************************************************************************/
 package org.eclipse.xtend.core.tests.typing;
 
+import java.util.Set;
+
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtend.core.tests.AbstractXtendTestCase;
 import org.eclipse.xtend.core.xtend.XtendClass;
 import org.eclipse.xtend.core.xtend.XtendConstructor;
@@ -14,6 +17,7 @@ import org.eclipse.xtend.core.xtend.XtendFile;
 import org.eclipse.xtend.core.xtend.XtendFunction;
 import org.eclipse.xtend.core.xtend.XtendParameter;
 import org.eclipse.xtend2.lib.StringConcatenation;
+import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
 import org.eclipse.xtext.xbase.XBlockExpression;
@@ -21,6 +25,7 @@ import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XFeatureCall;
 import org.eclipse.xtext.xbase.XMemberFeatureCall;
 import org.eclipse.xtext.xbase.XReturnExpression;
+import org.eclipse.xtext.xbase.jvmmodel.IJvmModelAssociations;
 import org.eclipse.xtext.xbase.typing.ITypeProvider;
 import org.junit.Ignore;
 import org.junit.Test;
@@ -38,6 +43,9 @@ public class TypeProviderTest extends AbstractXtendTestCase {
 	
 	@Inject
 	private MockedXtendTypeProvider mockedTypeProvider;
+	
+	@Inject
+	private IJvmModelAssociations jvmModelAssociations;
 
 	@Override
 	protected XtendFile file(String string) throws Exception {
@@ -52,6 +60,40 @@ public class TypeProviderTest extends AbstractXtendTestCase {
 		String clazzString = "class Foo { " + string + "}";
 		XtendClass clazz = (XtendClass) file(clazzString, validate).getXtendTypes().get(0);
 		return (XtendConstructor) clazz.getMembers().get(0);
+	}
+	
+	@Test public void testResolvedMultiType_01() throws Exception {
+		XtendFile file = file(
+				"package testPackage\n" +
+				"import java.util.ArrayList\n" +
+				"import java.util.LinkedList\n" +
+				"class C {\n" +
+				"	def m() {\n" + 
+				"		if (true) new ArrayList<String> else new LinkedList<String>\n" + 
+				"	}\n" + 
+				"}\n"); 
+		XtendClass c = (XtendClass) file.getXtendTypes().get(0);
+		XtendFunction function = (XtendFunction) c.getMembers().get(0);
+		Set<EObject> jvmElements = jvmModelAssociations.getJvmElements(function);
+		JvmIdentifiableElement operation = (JvmIdentifiableElement) jvmElements.iterator().next();
+		assertEquals("AbstractList<String>", typeProvider.getTypeForIdentifiable(operation).getSimpleName());
+	}
+	
+	@Test public void testResolvedMultiType_02() throws Exception {
+		XtendFile file = file(
+				"package testPackage\n" +
+				"import java.util.ArrayList\n" +
+				"import java.util.LinkedList\n" +
+				"class C {\n" +
+				"	def m() {\n" + 
+				"		#[ if (true) new ArrayList<String> else new LinkedList<String> ]\n" + 
+				"	}\n" + 
+				"}\n"); 
+		XtendClass c = (XtendClass) file.getXtendTypes().get(0);
+		XtendFunction function = (XtendFunction) c.getMembers().get(0);
+		Set<EObject> jvmElements = jvmModelAssociations.getJvmElements(function);
+		JvmIdentifiableElement operation = (JvmIdentifiableElement) jvmElements.iterator().next();
+		assertEquals("List<AbstractList<String>>", typeProvider.getTypeForIdentifiable(operation).getSimpleName());
 	}
 	
 	@Test public void testClosureType_01() throws Exception {

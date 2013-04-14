@@ -29,6 +29,7 @@ import org.eclipse.xtext.xbase.typesystem.conformance.TypeConformanceComputer;
 import org.eclipse.xtext.xbase.typesystem.conformance.TypeConformanceResult;
 import org.eclipse.xtext.xbase.typesystem.util.CommonTypeComputationServices;
 import org.eclipse.xtext.xbase.typesystem.util.DeclaratorTypeArgumentCollector;
+import org.eclipse.xtext.xbase.typesystem.util.IVisibilityHelper;
 import org.eclipse.xtext.xbase.typesystem.util.TypeParameterSubstitutor;
 import org.eclipse.xtext.xbase.typesystem.util.UnboundTypeParameterPreservingSubstitutor;
 
@@ -132,7 +133,53 @@ public abstract class LightweightTypeReference {
 	
 	public abstract JvmTypeReference toTypeReference();
 	
-	public abstract JvmTypeReference toJavaCompliantTypeReference();
+	/**
+	 * Converts this type reference to a {@link JvmTypeReference} that can
+	 * be used in Java source code.
+	 */
+	public final JvmTypeReference toJavaCompliantTypeReference() {
+		return toJavaCompliantTypeReference(IVisibilityHelper.ALL);
+	}
+	
+	/**
+	 * Returns <code>true</code> if this type is fully visible according to the given {@code visibilityHelper}. 
+	 * All components and bounds are taken into account, e.g.
+	 * {@link ArrayTypeReference arrays} use their {@link ArrayTypeReference#getComponentType() component type}
+	 * and {@link ParameterizedTypeReference generified types} check their type arguments, too.
+	 */
+	public abstract boolean isVisible(IVisibilityHelper visibilityHelper);
+	
+	/**
+	 * Converts this type reference to a {@link JvmTypeReference} that can
+	 * be used in Java source code.
+	 */
+	public abstract JvmTypeReference toJavaCompliantTypeReference(IVisibilityHelper visibilityHelper);
+	
+	protected JvmTypeReference toJavaCompliantTypeReference(List<LightweightTypeReference> types, IVisibilityHelper visibilityHelper) {
+		LightweightTypeReference type = getServices().getTypeConformanceComputer().getCommonSuperType(types, getOwner());
+		if (type == null) {
+			return getOwner().getServices().getTypeReferences().getTypeForName(Object.class, getOwner().getContextResourceSet());
+		}
+		return type.toJavaCompliantTypeReference(visibilityHelper);
+	}
+	
+	@Nullable
+	protected List<LightweightTypeReference> getNonInterfaceTypes(List<LightweightTypeReference> components) {
+		List<LightweightTypeReference> nonInterfaceTypes = null;
+		for(LightweightTypeReference component: components) {
+			if (!component.isInterfaceType()) {
+				if (nonInterfaceTypes == null) {
+					nonInterfaceTypes = Collections.singletonList(component);
+				} else if (nonInterfaceTypes.size() == 1) {
+					nonInterfaceTypes = Lists.newArrayList(nonInterfaceTypes);
+					nonInterfaceTypes.add(component);
+				} else {
+					nonInterfaceTypes.add(component);
+				}
+			}
+		}
+		return nonInterfaceTypes;
+	}
 	
 	@Nullable
 	public abstract JvmType getType();
@@ -513,6 +560,10 @@ public abstract class LightweightTypeReference {
 
 	public boolean isFunctionType() {
 		return getFunctionTypeKind() != FunctionTypeKind.NONE;
+	}
+	
+	protected boolean isInterfaceType() {
+		return false;
 	}
 	
 	public FunctionTypeKind getFunctionTypeKind() {

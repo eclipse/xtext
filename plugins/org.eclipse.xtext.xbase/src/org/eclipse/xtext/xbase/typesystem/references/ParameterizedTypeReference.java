@@ -12,7 +12,6 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Set;
 
-import org.eclipse.emf.common.util.EList;
 import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.common.types.JvmArrayType;
@@ -26,6 +25,7 @@ import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.JvmUpperBound;
 import org.eclipse.xtext.common.types.util.Primitives;
+import org.eclipse.xtext.xbase.typesystem.util.IVisibilityHelper;
 import org.eclipse.xtext.xbase.typesystem.util.TypeParameterSubstitutor;
 
 import com.google.common.base.Function;
@@ -69,16 +69,40 @@ public class ParameterizedTypeReference extends LightweightTypeReference {
 		return result;
 	}
 	
+	protected boolean isTypeVisible(IVisibilityHelper visibilityHelper) {
+		return !(type instanceof JvmDeclaredType) || visibilityHelper.isVisible((JvmDeclaredType)type);
+	}
+	
 	@Override
-	public JvmTypeReference toJavaCompliantTypeReference() {
-		JvmParameterizedTypeReference result = getTypesFactory().createJvmParameterizedTypeReference();
-		result.setType(type);
-		if (typeArguments != null) {
-			for(LightweightTypeReference typeArgument: typeArguments) {
-				result.getArguments().add(typeArgument.toJavaCompliantTypeReference());
+	public boolean isVisible(IVisibilityHelper visibilityHelper) {
+		if (isTypeVisible(visibilityHelper)) {
+			if (typeArguments != null) {
+				for(LightweightTypeReference typeArgument: typeArguments) {
+					if (!typeArgument.isVisible(visibilityHelper)) {
+						return false;
+					}
+				}
 			}
+			return true;
+		} else {
+			return false;
 		}
-		return result;
+	}
+	
+	@Override
+	public JvmTypeReference toJavaCompliantTypeReference(IVisibilityHelper visibilityHelper) {
+		if (isTypeVisible(visibilityHelper)) {
+			JvmParameterizedTypeReference result = getTypesFactory().createJvmParameterizedTypeReference();
+			result.setType(type);
+			if (typeArguments != null) {
+				for(LightweightTypeReference typeArgument: typeArguments) {
+					result.getArguments().add(typeArgument.toJavaCompliantTypeReference());
+				}
+			}
+			return result;
+		} else {
+			return toJavaCompliantTypeReference(getSuperTypes(), visibilityHelper);
+		}
 	}
 	
 	@Override
@@ -143,6 +167,14 @@ public class ParameterizedTypeReference extends LightweightTypeReference {
 	@Override
 	public boolean isPrimitive() {
 		return type instanceof JvmPrimitiveType;
+	}
+	
+	@Override
+	protected boolean isInterfaceType() {
+		if (type instanceof JvmGenericType) {
+			return ((JvmGenericType) type).isInterface();
+		}
+		return false;
 	}
 	
 	@Override
