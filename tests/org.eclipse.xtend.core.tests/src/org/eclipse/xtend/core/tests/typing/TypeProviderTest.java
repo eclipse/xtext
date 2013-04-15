@@ -62,6 +62,49 @@ public class TypeProviderTest extends AbstractXtendTestCase {
 		return (XtendConstructor) clazz.getMembers().get(0);
 	}
 	
+	@Test public void testBug403357_01() throws Exception {
+		doTestBug403357("#[]", "List<String>");
+	}
+	@Test public void testBug403357_02() throws Exception {
+		doTestBug403357("#['']", "List<String>");
+	}
+	@Test public void testBug403357_03() throws Exception {
+		doTestBug403357("newArrayList", "ArrayList<String>");
+	}
+	@Test public void testBug403357_04() throws Exception {
+		doTestBug403357("newArrayList('')", "ArrayList<String>");
+	}
+	
+	protected void doTestBug403357(String expression, String expectation) throws Exception {
+		XtendFile file = file(
+				"import java.util.List\n" +
+				"class C {\n" +
+				"	def static m() {\n" + 
+				"		printMe(" + expression +")\n" +
+				"		" + expression +".printMe\n" +
+				"		val list = " + expression + "\n" +
+				"		printMe(list)\n" +
+				"		list.printMe\n" + 
+				"	}\n" +
+				"	static def void printMe(List<String> listOfStrings) {}" + 
+				"}\n"); 
+		XtendClass c = (XtendClass) file.getXtendTypes().get(0);
+		XtendFunction function = (XtendFunction) c.getMembers().get(0);
+		XBlockExpression body = (XBlockExpression) function.getExpression();
+		XFeatureCall featureCall = (XFeatureCall) body.getExpressions().get(0);
+		XExpression firstArgument = featureCall.getFeatureCallArguments().get(0);
+		assertEquals(expectation, typeProvider.getType(firstArgument).getSimpleName());
+		XMemberFeatureCall memberFeatureCall = (XMemberFeatureCall) body.getExpressions().get(1);
+		XExpression target = memberFeatureCall.getMemberCallTarget();
+		assertEquals(expectation, typeProvider.getType(target).getSimpleName());
+		XFeatureCall deferredFeatureCall = (XFeatureCall) body.getExpressions().get(3);
+		XExpression deferredFirstArgument = deferredFeatureCall.getFeatureCallArguments().get(0);
+		assertEquals(expectation, typeProvider.getType(deferredFirstArgument).getSimpleName());
+		XMemberFeatureCall deferredMemberFeatureCall = (XMemberFeatureCall) body.getExpressions().get(4);
+		XExpression deferredTarget = deferredMemberFeatureCall.getMemberCallTarget();
+		assertEquals(expectation, typeProvider.getType(deferredTarget).getSimpleName());
+	}
+	
 	@Test public void testResolvedMultiType_01() throws Exception {
 		XtendFile file = file(
 				"package testPackage\n" +
