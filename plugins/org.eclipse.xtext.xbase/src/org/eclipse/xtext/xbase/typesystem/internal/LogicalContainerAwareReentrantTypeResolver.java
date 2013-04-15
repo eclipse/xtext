@@ -77,52 +77,65 @@ import com.google.inject.Inject;
 @NonNullByDefault
 public class LogicalContainerAwareReentrantTypeResolver extends DefaultReentrantTypeResolver {
 
-	public class DemandTypeReferenceProvider extends AbstractReentrantTypeReferenceProvider {
+	public static class DemandTypeReferenceProvider extends AbstractReentrantTypeReferenceProvider {
 		private final JvmMember member;
 		private final ResolvedTypes resolvedTypes;
 		private final boolean returnType;
 		private final IFeatureScopeSession session;
 		private final XExpression expression;
 		private final Map<JvmIdentifiableElement, ResolvedTypes> resolvedTypesByContext;
+		private final LogicalContainerAwareReentrantTypeResolver typeResolver;
 
-		public DemandTypeReferenceProvider(JvmMember member, XExpression expression, Map<JvmIdentifiableElement, ResolvedTypes> resolvedTypesByContext, ResolvedTypes resolvedTypes, IFeatureScopeSession session, boolean returnType) {
+		public DemandTypeReferenceProvider(
+				JvmMember member, 
+				XExpression expression, 
+				Map<JvmIdentifiableElement, ResolvedTypes> resolvedTypesByContext, 
+				ResolvedTypes resolvedTypes, 
+				IFeatureScopeSession session, 
+				boolean returnType,
+				LogicalContainerAwareReentrantTypeResolver typeResolver) {
 			this.member = member;
 			this.expression = expression;
 			this.resolvedTypesByContext = resolvedTypesByContext;
 			this.resolvedTypes = resolvedTypes;
 			this.session = session;
 			this.returnType = returnType;
+			this.typeResolver = typeResolver;
 		}
 
 		@Override
 		@Nullable
 		protected JvmTypeReference doGetTypeReference(XComputedTypeReferenceImplCustom context) {
-			LightweightTypeReference actualType = returnType ? resolvedTypes.getReturnType(expression) : resolvedTypes.getActualType(expression);
-			if (actualType == null) {
-				computeTypes(resolvedTypesByContext, resolvedTypes, session, member);
-				actualType = returnType ? resolvedTypes.getExpectedReturnType(expression) : resolvedTypes.getExpectedType(expression);
+			try {
+				LightweightTypeReference actualType = returnType ? resolvedTypes.getReturnType(expression) : resolvedTypes.getActualType(expression);
+				if (actualType == null) {
+					typeResolver.computeTypes(resolvedTypesByContext, resolvedTypes, session, member);
+					actualType = returnType ? resolvedTypes.getExpectedReturnType(expression) : resolvedTypes.getExpectedType(expression);
+					if (actualType == null)
+						actualType = returnType ? resolvedTypes.getReturnType(expression) : resolvedTypes.getActualType(expression);
+				}
 				if (actualType == null)
-					actualType = returnType ? resolvedTypes.getReturnType(expression) : resolvedTypes.getActualType(expression);
+					return null;
+				return typeResolver.toJavaCompliantTypeReference(actualType, session);
+			} finally {
+				context.setTypeProvider(null);
 			}
-			if (actualType == null)
-				return null;
-			return toJavaCompliantTypeReference(actualType, session);
 		}
 		
 		@Override
 		protected JvmTypeReference handleReentrantInvocation(XComputedTypeReferenceImplCustom context) {
-			EObject sourceElement = getSourceElement(member);
+			EObject sourceElement = typeResolver.getSourceElement(member);
 			EStructuralFeature feature = sourceElement.eClass().getEStructuralFeature("name");
 			resolvedTypes.addDiagnostic(new EObjectDiagnosticImpl(
 					Severity.WARNING, 
 					IssueCodes.TOO_LITTLE_TYPE_INFORMATION, 
 					"Cannot infer type from recursive usage. Type 'Object' is used.",
-					getSourceElement(member), 
+					sourceElement, 
 					feature, 
 					-1, 
 					null));
 			AnyTypeReference result = new AnyTypeReference(resolvedTypes.getReferenceOwner());
-			return toJavaCompliantTypeReference(result, session);
+			return typeResolver.toJavaCompliantTypeReference(result, session);
 		}
 
 		/*
@@ -135,27 +148,33 @@ public class LogicalContainerAwareReentrantTypeResolver extends DefaultReentrant
 		
 	}
 	
-	public class AnyTypeReferenceProvider extends AbstractReentrantTypeReferenceProvider {
+	public static class AnyTypeReferenceProvider extends AbstractReentrantTypeReferenceProvider {
 		private final JvmMember member;
 		private final ResolvedTypes resolvedTypes;
+		private final LogicalContainerAwareReentrantTypeResolver typeResolver;
 
-		public AnyTypeReferenceProvider(JvmMember member, ResolvedTypes resolvedTypes) {
+		public AnyTypeReferenceProvider(JvmMember member, ResolvedTypes resolvedTypes, LogicalContainerAwareReentrantTypeResolver typeResolver) {
 			this.member = member;
 			this.resolvedTypes = resolvedTypes;
+			this.typeResolver = typeResolver;
 		}
 
 		@Override
 		@Nullable
 		protected JvmTypeReference doGetTypeReference(XComputedTypeReferenceImplCustom context) {
-			resolvedTypes.addDiagnostic(new EObjectDiagnosticImpl(
-					Severity.ERROR, 
-					IssueCodes.TOO_LITTLE_TYPE_INFORMATION, 
-					"Cannot infer type",
-					getSourceElement(member), 
-					null, 
-					-1, 
-					null));
-			return TypesFactory.eINSTANCE.createJvmAnyTypeReference();
+			try {
+				resolvedTypes.addDiagnostic(new EObjectDiagnosticImpl(
+						Severity.ERROR, 
+						IssueCodes.TOO_LITTLE_TYPE_INFORMATION, 
+						"Cannot infer type",
+						typeResolver.getSourceElement(member), 
+						null, 
+						-1, 
+						null));
+				return TypesFactory.eINSTANCE.createJvmAnyTypeReference();
+			} finally {
+				context.setTypeProvider(null);
+			}
 		}
 	}
 
@@ -380,16 +399,15 @@ public class LogicalContainerAwareReentrantTypeResolver extends DefaultReentrant
 			@Nullable XExpression expression, boolean returnType) {
 		if (expression != null) {
 			resolvedTypes.markToBeInferred(expression);
-			return new DemandTypeReferenceProvider(member, expression, resolvedTypesByContext, resolvedTypes, featureScopeSession, returnType);
+			return new DemandTypeReferenceProvider(member, expression, resolvedTypesByContext, resolvedTypes, featureScopeSession, returnType, this);
 		}
-		return new AnyTypeReferenceProvider(member, resolvedTypes); 
+		return new AnyTypeReferenceProvider(member, resolvedTypes, this); 
 	}
 	
 	@Override
 	protected void computeTypes(ResolvedTypes resolvedTypes, IFeatureScopeSession session) {
 		Map<JvmIdentifiableElement, ResolvedTypes> preparedResolvedTypes = prepare(resolvedTypes, session);
 		computeTypes(preparedResolvedTypes, resolvedTypes, session, getRoot());
-		processResult(resolvedTypes);
 	}
 	
 	protected void computeTypes(Map<JvmIdentifiableElement, ResolvedTypes> preparedResolvedTypes, ResolvedTypes resolvedTypes, IFeatureScopeSession featureScopeSession, EObject element) {
@@ -666,10 +684,6 @@ public class LogicalContainerAwareReentrantTypeResolver extends DefaultReentrant
 		return false;
 	}
 
-	protected void processResult(@SuppressWarnings("unused") ResolvedTypes resolvedTypes) {
-		// TODO keep the result available for subsequent linking requests et al
-	}
-	
 	protected ILogicalContainerProvider getLogicalContainerProvider() {
 		return logicalContainerProvider;
 	}
