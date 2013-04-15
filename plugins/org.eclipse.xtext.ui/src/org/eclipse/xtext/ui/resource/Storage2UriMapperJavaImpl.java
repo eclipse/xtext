@@ -28,7 +28,6 @@ import org.eclipse.jdt.core.ElementChangedEvent;
 import org.eclipse.jdt.core.IJarEntryResource;
 import org.eclipse.jdt.core.IPackageFragmentRoot;
 import org.eclipse.jdt.core.JavaModelException;
-import org.eclipse.jdt.internal.core.JarPackageFragmentRoot;
 import org.eclipse.xtext.ui.util.IJdtHelper;
 import org.eclipse.xtext.util.Pair;
 import org.eclipse.xtext.util.Tuples;
@@ -123,7 +122,7 @@ public class Storage2UriMapperJavaImpl extends Storage2UriMapperImpl implements 
 	
 	private PackageFragmentRootData getData(IPackageFragmentRoot root) {
 		final String id = root.getHandleIdentifier();
-		final boolean isCachable = root instanceof JarPackageFragmentRoot;
+		final boolean isCachable = root.isArchive() || root.isExternal();
 		if (isCachable) {
 			synchronized (cachedPackageFragmentRootData) {
 				if (cachedPackageFragmentRootData.containsKey(id)) {
