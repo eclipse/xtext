@@ -7,12 +7,11 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.resource;
 
-import static com.google.common.collect.Iterables.*;
-import static com.google.common.collect.Lists.*;
-import static com.google.common.collect.Maps.*;
-import static java.util.Collections.*;
+import static com.google.common.collect.Iterables.isEmpty;
+import static com.google.common.collect.Lists.newArrayListWithCapacity;
+import static com.google.common.collect.Maps.newLinkedHashMap;
+import static java.util.Collections.emptyMap;
 
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -23,6 +22,7 @@ import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.IStorage;
 import org.eclipse.core.runtime.IPath;
+import org.eclipse.core.runtime.Path;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.jdt.core.ElementChangedEvent;
 import org.eclipse.jdt.core.IJarEntryResource;
@@ -211,23 +211,35 @@ public class Storage2UriMapperJavaImpl extends Storage2UriMapperImpl implements 
 	
 	@Override
 	public Iterable<Pair<IStorage, IProject>> getStorages(URI uri) {
-		
 		Iterable<Pair<IStorage, IProject>> storages = super.getStorages(uri);
 		if (!isEmpty(storages))
 			return storages;
+		
 		List<Pair<IStorage, IProject>> result = newArrayListWithCapacity(1);
-		Iterator<PackageFragmentRootData> iterator = cachedPackageFragmentRootData.values().iterator();
-		while(iterator.hasNext()) {
-			PackageFragmentRootData data = iterator.next();
+		for (PackageFragmentRootData data : cachedPackageFragmentRootData.values()) {
 			// TODO better isPrefix
 			if (data.uriPrefix == null || uri.toString().startsWith(data.uriPrefix.toString())) {
-				if (!isUpToDate(data, data.root)) {
-					iterator.remove();
-				} else {
-					IStorage storage = data.uri2Storage.get(uri);
-					if (storage != null) {
-						result.add(Tuples.create(storage, data.root.getJavaProject().getProject()));
-					}	
+				IStorage storage = data.uri2Storage.get(uri);
+				if (storage != null) {
+					result.add(Tuples.create(storage, data.root.getJavaProject().getProject()));
+				}
+			}
+		}
+		if (result.isEmpty() && uri.isArchive()) {
+			String authority = uri.authority();
+			authority = authority.substring(0, authority.length() - 1);
+			URI archiveURI = URI.createURI(authority);
+			if (archiveURI.isFile()) {
+				IPath archivePath = new Path(archiveURI.toFileString());
+				for (PackageFragmentRootData data : cachedPackageFragmentRootData.values()) {
+					// TODO better isPrefix
+					if (data.uriPrefix != null && archivePath.equals(data.root.getPath())) {
+						URI expectedURI = data.uriPrefix.appendSegments(uri.segments());
+						IStorage storage = data.uri2Storage.get(expectedURI);
+						if (storage != null) {
+							result.add(Tuples.create(storage, data.root.getJavaProject().getProject()));
+						}
+					}
 				}
 			}
 		}
@@ -253,16 +265,8 @@ public class Storage2UriMapperJavaImpl extends Storage2UriMapperImpl implements 
 		return null;
 	}
 	
-	protected URI getPathToArchive(URI archiveURI) {
-		if (!archiveURI.isArchive())
-			throw new IllegalArgumentException("not an archive URI : " + archiveURI);
-		String string = archiveURI.toString();
-		return URI.createURI(string.substring(archiveURI.scheme().length() + 1, string.indexOf('!')));
-	}
-	
 	@Deprecated public void elementChanged(ElementChangedEvent changeEvent) {
 		log.warn("Storage2UriMapperJavaImpl.elementChanged(ElementChangedEvent) is deperecated and does nothing.");
 	}
-
 
 }
