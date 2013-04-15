@@ -74,48 +74,58 @@ import com.google.inject.Inject;
 @NonNullByDefault
 public class DispatchAndExtensionAwareReentrantTypeResolver extends LogicalContainerAwareReentrantTypeResolver {
 
-	public class DispatchReturnTypeReferenceProvider extends AbstractReentrantTypeReferenceProvider {
+	public static class DispatchReturnTypeReferenceProvider extends AbstractReentrantTypeReferenceProvider {
 		private final JvmOperation operation;
 		private final ResolvedTypes resolvedTypes;
 		private final IFeatureScopeSession session;
+		private final DispatchAndExtensionAwareReentrantTypeResolver typeResolver;
 
-		public DispatchReturnTypeReferenceProvider(JvmOperation operation, ResolvedTypes resolvedTypes, IFeatureScopeSession session) {
+		public DispatchReturnTypeReferenceProvider(
+				JvmOperation operation,
+				ResolvedTypes resolvedTypes,
+				IFeatureScopeSession session,
+				DispatchAndExtensionAwareReentrantTypeResolver typeResolver) {
 			this.operation = operation;
 			this.resolvedTypes = resolvedTypes;
 			this.session = session;
+			this.typeResolver = typeResolver;
 		}
 
 		@Override
 		@Nullable
 		protected JvmTypeReference doGetTypeReference(XComputedTypeReferenceImplCustom context) {
-			LightweightTypeReference expectedType = getReturnTypeOfOverriddenOperation(operation, resolvedTypes, session);
-			if (expectedType != null) {
-				return toJavaCompliantTypeReference(expectedType, session);
-			}
-			
-			List<JvmOperation> cases = dispatchHelper.getAllDispatchCases(operation);
-			List<LightweightTypeReference> types = Lists.newArrayListWithCapacity(cases.size());
-			for(JvmOperation operation: cases) {
-				LightweightTypeReference caseType = resolvedTypes.getActualType(operation);
-				types.add(caseType);
-			}
-			TypeConformanceComputer conformanceComputer = getServices().getTypeConformanceComputer();
-			if (types.isEmpty())
-				return null;
-			LightweightTypeReference result = conformanceComputer.getCommonSuperType(types, resolvedTypes.getReferenceOwner());
-			if (result == null) {
-				Iterator<LightweightTypeReference> iterator = types.iterator();
-				while(iterator.hasNext()) {
-					if (iterator.next().isPrimitiveVoid()) {
-						iterator.remove();
+			try {
+				LightweightTypeReference expectedType = typeResolver.getReturnTypeOfOverriddenOperation(operation, resolvedTypes, session);
+				if (expectedType != null) {
+					return typeResolver.toJavaCompliantTypeReference(expectedType, session);
+				}
+				
+				List<JvmOperation> cases = typeResolver.dispatchHelper.getAllDispatchCases(operation);
+				List<LightweightTypeReference> types = Lists.newArrayListWithCapacity(cases.size());
+				for(JvmOperation operation: cases) {
+					LightweightTypeReference caseType = resolvedTypes.getActualType(operation);
+					types.add(caseType);
+				}
+				TypeConformanceComputer conformanceComputer = typeResolver.getServices().getTypeConformanceComputer();
+				if (types.isEmpty())
+					return null;
+				LightweightTypeReference result = conformanceComputer.getCommonSuperType(types, resolvedTypes.getReferenceOwner());
+				if (result == null) {
+					Iterator<LightweightTypeReference> iterator = types.iterator();
+					while(iterator.hasNext()) {
+						if (iterator.next().isPrimitiveVoid()) {
+							iterator.remove();
+						}
+					}
+					result = conformanceComputer.getCommonSuperType(types, resolvedTypes.getReferenceOwner());
+					if (result == null) {
+						throw new UnsupportedOperationException("Cannot determine common super type of: " + types);
 					}
 				}
-				result = conformanceComputer.getCommonSuperType(types, resolvedTypes.getReferenceOwner());
-				if (result == null) {
-					throw new UnsupportedOperationException("Cannot determine common super type of: " + types);
-				}
+				return typeResolver.toJavaCompliantTypeReference(result, session);
+			} finally {
+				context.setTypeProvider(null);
 			}
-			return toJavaCompliantTypeReference(result, session);
 		}
 		
 		@Override
@@ -124,84 +134,106 @@ public class DispatchAndExtensionAwareReentrantTypeResolver extends LogicalConta
 					Severity.WARNING, 
 					IssueCodes.TOO_LITTLE_TYPE_INFORMATION, 
 					"Cannot infer type from recursive usage. Type 'Object' is used.",
-					getSourceElement(operation), 
+					typeResolver.getSourceElement(operation), 
 					null, 
 					-1, 
 					null));
 			AnyTypeReference result = new AnyTypeReference(resolvedTypes.getReferenceOwner());
-			return toJavaCompliantTypeReference(result, session);
+			return typeResolver.toJavaCompliantTypeReference(result, session);
 		}
 	}
 	
-	public class DispatchParameterTypeReferenceProvider extends AbstractReentrantTypeReferenceProvider {
+	public static class DispatchParameterTypeReferenceProvider extends AbstractReentrantTypeReferenceProvider {
 		private final JvmOperation operation;
 		private final ResolvedTypes resolvedTypes;
 		private final int idx;
 		private final IFeatureScopeSession session;
+		private final DispatchAndExtensionAwareReentrantTypeResolver typeResolver;
 
-		public DispatchParameterTypeReferenceProvider(JvmOperation operation, int idx, ResolvedTypes resolvedTypes, IFeatureScopeSession session) {
+		public DispatchParameterTypeReferenceProvider(
+				JvmOperation operation, 
+				int idx, 
+				ResolvedTypes resolvedTypes,
+				IFeatureScopeSession session,
+				DispatchAndExtensionAwareReentrantTypeResolver typeResolver) {
 			this.idx = idx;
 			this.operation = operation;
 			this.resolvedTypes = resolvedTypes;
 			this.session = session;
+			this.typeResolver = typeResolver;
 		}
 
 		@Override
 		@Nullable
 		protected JvmTypeReference doGetTypeReference(XComputedTypeReferenceImplCustom context) {
-			// TODO type parameters on dispatch operations
-			List<JvmOperation> cases = dispatchHelper.getAllDispatchCases(operation);
-			TypeConformanceComputer conformanceComputer = getServices().getTypeConformanceComputer();
-			List<LightweightTypeReference> parameterTypes = Lists.newArrayListWithCapacity(cases.size());
-			for(JvmOperation caseOperation: cases) {
-				JvmFormalParameter parameter = caseOperation.getParameters().get(idx);
-				LightweightTypeReference parameterType = resolvedTypes.getActualType(parameter);
-				if (parameterType != null && !parameterType.isType(Void.class)) {
-					parameterTypes.add(parameterType);
+			try {
+				// TODO type parameters on dispatch operations
+				List<JvmOperation> cases = typeResolver.dispatchHelper.getAllDispatchCases(operation);
+				TypeConformanceComputer conformanceComputer = typeResolver.getServices().getTypeConformanceComputer();
+				List<LightweightTypeReference> parameterTypes = Lists.newArrayListWithCapacity(cases.size());
+				for(JvmOperation caseOperation: cases) {
+					JvmFormalParameter parameter = caseOperation.getParameters().get(idx);
+					LightweightTypeReference parameterType = resolvedTypes.getActualType(parameter);
+					if (parameterType != null && !parameterType.isType(Void.class)) {
+						parameterTypes.add(parameterType);
+					}
 				}
+				// every parameter type is java.lang.Void so we use Object
+				// otherwise it would only be possible to pass the null literal but not a null value, e.g. of type String
+				// to the dispatcher
+				if (parameterTypes.isEmpty()) {
+					return typeResolver.getServices().getTypeReferences().getTypeForName(Object.class, operation);
+				}
+				LightweightTypeReference parameterType = conformanceComputer.getCommonSuperType(parameterTypes, resolvedTypes.getReferenceOwner());
+				if (parameterType == null) {
+					throw new IllegalStateException("TODO: handle broken models properly");
+				}
+				return typeResolver.toJavaCompliantTypeReference(parameterType, session);
+			} finally {
+				context.setTypeProvider(null);
 			}
-			// every parameter type is java.lang.Void so we use Object
-			// otherwise it would only be possible to pass the null literal but not a null value, e.g. of type String
-			// to the dispatcher
-			if (parameterTypes.isEmpty()) {
-				return getServices().getTypeReferences().getTypeForName(Object.class, operation);
-			}
-			LightweightTypeReference parameterType = conformanceComputer.getCommonSuperType(parameterTypes, resolvedTypes.getReferenceOwner());
-			if (parameterType == null) {
-				throw new IllegalStateException("TODO: handle broken models properly");
-			}
-			return toJavaCompliantTypeReference(parameterType, session);
 		}
 	}
 	
-	public class InitializerParameterTypeReferenceProvider extends AbstractReentrantTypeReferenceProvider {
+	public static class InitializerParameterTypeReferenceProvider extends AbstractReentrantTypeReferenceProvider {
 		private final ResolvedTypes resolvedTypes;
 		private final XtendFunction createFunction;
 		private final IFeatureScopeSession featureScopeSession;
 		private final Map<JvmIdentifiableElement, ResolvedTypes> resolvedTypesByContext;
+		private final DispatchAndExtensionAwareReentrantTypeResolver typeResolver;
 
-		public InitializerParameterTypeReferenceProvider(XtendFunction createFunction, Map<JvmIdentifiableElement, ResolvedTypes> resolvedTypesByContext, ResolvedTypes resolvedTypes, IFeatureScopeSession featureScopeSession) {
+		public InitializerParameterTypeReferenceProvider(
+				XtendFunction createFunction, 
+				Map<JvmIdentifiableElement, ResolvedTypes> resolvedTypesByContext,
+				ResolvedTypes resolvedTypes,
+				IFeatureScopeSession featureScopeSession,
+				DispatchAndExtensionAwareReentrantTypeResolver typeResolver) {
 			this.createFunction = createFunction;
 			this.resolvedTypesByContext = resolvedTypesByContext;
 			this.resolvedTypes = resolvedTypes;
 			this.featureScopeSession = featureScopeSession;
+			this.typeResolver = typeResolver;
 		}
 
 		@Override
 		@Nullable
 		protected JvmTypeReference doGetTypeReference(XComputedTypeReferenceImplCustom context) {
-			CreateExtensionInfo createExtensionInfo = createFunction.getCreateExtensionInfo();
-			XExpression expression = createExtensionInfo.getCreateExpression();
-			LightweightTypeReference actualType = resolvedTypes.getReturnType(expression);
-			if (actualType == null) {
-				JvmOperation operation = associations.getDirectlyInferredOperation(createFunction);
-				IFeatureScopeSession session = operation.isStatic() ? featureScopeSession : featureScopeSession.toInstanceContext();
-				computeTypes(resolvedTypesByContext, resolvedTypes, session, operation);
-				actualType = resolvedTypes.getReturnType(expression);
+			try {
+				CreateExtensionInfo createExtensionInfo = createFunction.getCreateExtensionInfo();
+				XExpression expression = createExtensionInfo.getCreateExpression();
+				LightweightTypeReference actualType = resolvedTypes.getReturnType(expression);
+				if (actualType == null) {
+					JvmOperation operation = typeResolver.associations.getDirectlyInferredOperation(createFunction);
+					IFeatureScopeSession session = operation.isStatic() ? featureScopeSession : featureScopeSession.toInstanceContext();
+					typeResolver.computeTypes(resolvedTypesByContext, resolvedTypes, session, operation);
+					actualType = resolvedTypes.getReturnType(expression);
+				}
+				if (actualType == null)
+					return null;
+				return typeResolver.toJavaCompliantTypeReference(actualType, featureScopeSession);
+			} finally {
+				context.setTypeProvider(null);
 			}
-			if (actualType == null)
-				return null;
-			return toJavaCompliantTypeReference(actualType, featureScopeSession);
 		}
 	}
 	
@@ -494,11 +526,11 @@ public class DispatchAndExtensionAwareReentrantTypeResolver extends LogicalConta
 				if (InferredTypeIndicator.isInferred(parameterType)) {
 					XComputedTypeReference casted = (XComputedTypeReference) parameterType;
 					XComputedTypeReference computedParameterType = getServices().getXtypeFactory().createXComputedTypeReference();
-					computedParameterType.setTypeProvider(new DispatchParameterTypeReferenceProvider(operation, i, resolvedTypes, featureScopeSession));
+					computedParameterType.setTypeProvider(new DispatchParameterTypeReferenceProvider(operation, i, resolvedTypes, featureScopeSession, this));
 					casted.setEquivalent(computedParameterType);
 				} else if (parameterType == null) {
 					XComputedTypeReference computedParameterType = getServices().getXtypeFactory().createXComputedTypeReference();
-					computedParameterType.setTypeProvider(new DispatchParameterTypeReferenceProvider(operation, i, resolvedTypes, featureScopeSession));
+					computedParameterType.setTypeProvider(new DispatchParameterTypeReferenceProvider(operation, i, resolvedTypes, featureScopeSession, this));
 					parameter.setParameterType(computedParameterType);
 				}
 			}
@@ -512,7 +544,7 @@ public class DispatchAndExtensionAwareReentrantTypeResolver extends LogicalConta
 					if (InferredTypeIndicator.isInferred(parameterType)) {
 						XComputedTypeReference casted = (XComputedTypeReference) parameterType;
 						XComputedTypeReference computedParameterType = getServices().getXtypeFactory().createXComputedTypeReference();
-						computedParameterType.setTypeProvider(new InitializerParameterTypeReferenceProvider(function, resolvedTypesByContext, resolvedTypes, featureScopeSession));
+						computedParameterType.setTypeProvider(new InitializerParameterTypeReferenceProvider(function, resolvedTypesByContext, resolvedTypes, featureScopeSession, this));
 						casted.setEquivalent(computedParameterType);
 					}
 				}
@@ -526,7 +558,7 @@ public class DispatchAndExtensionAwareReentrantTypeResolver extends LogicalConta
 		if (member instanceof JvmOperation) {
 			JvmOperation operation = (JvmOperation) member;
 			if (dispatchHelper.isDispatcherFunction(operation)) {
-				return new DispatchReturnTypeReferenceProvider(operation, resolvedTypes, featureScopeSession);
+				return new DispatchReturnTypeReferenceProvider(operation, resolvedTypes, featureScopeSession, this);
 			}
 		}
 		return super.createTypeProvider(resolvedTypesByContext, resolvedTypes, featureScopeSession, member, returnType);
