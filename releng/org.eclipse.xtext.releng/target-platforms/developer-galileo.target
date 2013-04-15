@@ -8,16 +8,19 @@
 <unit id="org.eclipse.jdt.source.feature.group" version="3.5.2.r352_v20100108-7r88FEwFI0WTuoBl0iaG0tyhfZH6"/>
 <unit id="org.eclipse.pde.source.feature.group" version="0.0.0"/>
 <unit id="org.eclipse.pde.feature.group" version="0.0.0"/>
-<unit id="org.junit4" version="0.0.0"/>
 <unit id="org.junit" version="0.0.0"/>
 <repository location="http://download.eclipse.org/eclipse/updates/3.5"/>
 </location>
 <location includeAllPlatforms="false" includeMode="planner" includeSource="true" type="InstallableUnit">
 <unit id="org.eclipse.jdt.annotation"  version="0.0.0"/>
-<unit id="org.junit4" version="0.0.0"/>
 <unit id="org.junit" version="0.0.0"/>
 <repository location="http://download.eclipse.org/eclipse/updates/4.3milestones"/>
 </location>
+<location includeAllPlatforms="false" includeMode="planner" includeSource="true" type="InstallableUnit">
+<unit id="org.junit4" version="0.0.0"/>
+<repository location="http://download.eclipse.org/eclipse/updates/3.8"/>
+</location>
+
 <location includeAllPlatforms="false" includeMode="planner" includeSource="true" type="InstallableUnit">
 <unit id="org.eclipse.xpand.feature.group" version="0.0.0"/>
 <unit id="org.eclipse.emf.mwe2.language.sdk.feature.group" version="0.0.0"/>
@@ -29,7 +32,7 @@
 <repository location="http://download.eclipse.org/modeling/emf/updates"/>
 </location>
 <location includeAllPlatforms="false" includeMode="planner" includeSource="true" type="InstallableUnit">
-<unit id="com.google.guava" version="0.0.0"/>
+<unit id="com.google.guava" version="12.0.0.v201212092141"/>
 <unit id="com.google.inject" version="0.0.0"/>
 <unit id="org.apache.log4j" version="0.0.0"/>
 <unit id="org.aopalliance" version="0.0.0"/>
