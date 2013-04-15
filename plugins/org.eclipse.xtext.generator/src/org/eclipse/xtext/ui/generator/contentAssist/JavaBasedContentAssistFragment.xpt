@@ -90,7 +90,7 @@ public class «getGenProposalProvider().toSimpleName()» extends «superClassName» 
 package «getProposalProvider().toJavaPackage()»;
 
 /**
- * see http://www.eclipse.org/Xtext/documentation/latest/xtext.html#contentAssist on how to customize content assistant
+ * see http://www.eclipse.org/Xtext/documentation.html#contentAssist on how to customize content assistant
  */
 public class «getProposalProvider().toSimpleName()» extends «getGenProposalProvider()» {
 
