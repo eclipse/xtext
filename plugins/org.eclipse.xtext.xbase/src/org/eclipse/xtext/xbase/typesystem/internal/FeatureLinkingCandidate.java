@@ -409,7 +409,7 @@ public class FeatureLinkingCandidate extends AbstractPendingLinkingCandidate<XAb
 	@Override
 	protected void resolveAgainstActualType(LightweightTypeReference declaredType, LightweightTypeReference actualType, final AbstractTypeComputationState state) {
 		super.resolveAgainstActualType(declaredType, actualType, state);
-		if (!isStatic()) {
+		if (!isStatic() || !state.getFeatureScopeSession().isInstanceContext()) {
 			DeferredTypeParameterHintCollector collector = new DeferredTypeParameterHintCollector(state.getReferenceOwner());
 			collector.processPairedReferences(declaredType, actualType);
 		}
