@@ -11,7 +11,11 @@ import org.eclipse.xtext.builder.impl.ToBeBuiltComputer;
 import org.eclipse.xtext.builder.impl.javasupport.JavaChangeQueueFiller;
 import org.eclipse.xtext.builder.impl.javasupport.ProjectClasspathChangeListener;
 import org.eclipse.xtext.builder.impl.javasupport.JdtToBeBuiltComputer;
+import org.eclipse.xtext.builder.trace.JarEntryAwareTrace;
+import org.eclipse.xtext.builder.trace.StorageAwareTrace;
 import org.eclipse.xtext.common.types.ui.notification.TypeResourceUnloader;
+import org.eclipse.xtext.generator.trace.DefaultTraceURIConverter;
+import org.eclipse.xtext.ui.generator.trace.DefaultUITraceURIConverter;
 import org.eclipse.xtext.ui.resource.IResourceSetProvider;
 import org.eclipse.xtext.ui.resource.IStorage2UriMapper;
 import org.eclipse.xtext.ui.resource.IStorage2UriMapperJdtExtensions;
@@ -34,6 +38,8 @@ public class SharedModuleWithJdt extends AbstractModule {
 		bind(IResourceSetProvider.class).to(XtextResourceSetProvider.class);
 		bind(TypeResourceUnloader.class).asEagerSingleton();
 		bind(JavaChangeQueueFiller.class).asEagerSingleton();
+		bind(StorageAwareTrace.class).to(JarEntryAwareTrace.class);
+		bind(DefaultTraceURIConverter.class).to(DefaultUITraceURIConverter.class);
 	}
 
 }
