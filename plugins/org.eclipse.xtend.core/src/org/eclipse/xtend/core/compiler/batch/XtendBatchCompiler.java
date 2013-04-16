@@ -42,6 +42,7 @@ import org.eclipse.xtext.mwe.NameBasedFilter;
 import org.eclipse.xtext.mwe.PathTraverser;
 import org.eclipse.xtext.naming.IQualifiedNameProvider;
 import org.eclipse.xtext.naming.QualifiedName;
+import org.eclipse.xtext.parser.IEncodingProvider;
 import org.eclipse.xtext.parser.IParseResult;
 import org.eclipse.xtext.resource.FileExtensionProvider;
 import org.eclipse.xtext.resource.IEObjectDescription;
@@ -109,6 +110,8 @@ public class XtendBatchCompiler {
 	private IGeneratorConfigProvider generatorConfigprovider;
 	@Inject
 	private ProcessorInstanceForJvmTypeProvider annotationProcessorFactory;
+	@Inject
+	private IEncodingProvider.Runtime encodingProvider;
 
 	protected Writer outputWriter;
 	protected Writer errorWriter;
@@ -271,7 +274,7 @@ public class XtendBatchCompiler {
 
 	protected ResourceSet loadXtendFiles() {
 		final ResourceSet resourceSet = resourceSetProvider.get();
-		resourceSet.getLoadOptions().put(XtextResource.OPTION_ENCODING, getFileEncoding());
+		encodingProvider.setDefaultEncoding(getFileEncoding());
 		final NameBasedFilter nameBasedFilter = new NameBasedFilter();
 		nameBasedFilter.setExtension(fileExtensionProvider.getPrimaryFileExtension());
 		PathTraverser pathTraverser = new PathTraverser();

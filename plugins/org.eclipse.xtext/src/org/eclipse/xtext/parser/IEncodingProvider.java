@@ -25,10 +25,28 @@ public interface IEncodingProvider {
 	@Singleton
 	class Runtime implements IEncodingProvider {
 
+		private String defaultEncoding = null;
+
 		public String getEncoding(URI uri) {
+			if (defaultEncoding != null)
+				return defaultEncoding;
 			return Charset.defaultCharset().name();
 		}
 
+		/**
+		 * @since 2.4
+		 */
+		public String getDefaultEncoding() {
+			return defaultEncoding;
+		}
+
+		/**
+		 * @since 2.4
+		 */
+		public void setDefaultEncoding(String defaultEncoding) {
+			this.defaultEncoding = defaultEncoding;
+		}
+
 	}
-	
+
 }
