@@ -34,9 +34,10 @@ public class ArrayExtensions {
 	 *            the index the value should be set at
 	 * @param value
 	 *            the value to set at the given index
+	 * @since 2.4
 	 */
 	@Inline("$1[$2] = $3")
-	public static <T> void set(T[] array, int index, T value) {
+	public static <T, E extends T> void set(T[] array, int index, E value) {
 		array[index] = value;
 	}
 
