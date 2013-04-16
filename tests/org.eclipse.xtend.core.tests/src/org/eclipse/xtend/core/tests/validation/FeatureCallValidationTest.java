@@ -486,10 +486,10 @@ public class FeatureCallValidationTest extends AbstractXtendTestCase {
 	@Test public void testFeatureCallTypeBounds_5() throws Exception {
 		XtendClass clazz = clazz(
 				"@Data class Weight<T extends Comparable<T>> implements Comparable<Weight<T>> {\n" + 
-						"	T weight\n" + 
-						"	override int compareTo(Weight w) {\n" + 
-						"		weight.compareTo(w.weight)\n" + 
-						"	}\n" + 
+				"	T weight\n" + 
+				"	override int compareTo(Weight w) {\n" + 
+				"		weight.compareTo(w.weight)\n" + 
+				"	}\n" + 
 				"}");
 		helper.assertError(clazz, XbasePackage.Literals.XMEMBER_FEATURE_CALL,
 				org.eclipse.xtext.xbase.validation.IssueCodes.INCOMPATIBLE_TYPES, "Type mismatch: cannot convert from Comparable to T");
@@ -504,6 +504,40 @@ public class FeatureCallValidationTest extends AbstractXtendTestCase {
 				"	}\n" +
 				"}\n");
 		helper.assertNoErrors(file);
+	}
+	
+	@Test public void testFeatureCallTypeBounds_7() throws Exception {
+		XtendFile file = file(
+				"class C {\n" +
+				"	def m(CharSequence[] array, String value) {\n" +
+				"		array.set(1, value)\n" +
+				"	}\n" +
+				"}\n");
+		helper.assertNoErrors(file);
+	}
+	
+	@Test public void testFeatureCallTypeBounds_8() throws Exception {
+		XtendFile file = file(
+				"class C {\n" +
+				"	def m(String[] array, CharSequence value) {\n" +
+				"		array.set(1, value)\n" +
+				"	}\n" +
+				"}\n");
+		helper.assertError(file, XbasePackage.Literals.XMEMBER_FEATURE_CALL,
+				org.eclipse.xtext.xbase.validation.IssueCodes.TYPE_BOUNDS_MISSMATCH, 
+				"Bounds mismatch: The type arguments <String,CharSequence> are not a valid substitute for the bounded type parameters <T,E extends T> of the method set<T,E>");
+	}
+	
+	@Test public void testFeatureCallTypeBounds_9() throws Exception {
+		XtendFile file = file(
+				"class C {\n" +
+				"	def m(String[] it, int value) {\n" +
+				"		set(1, value)\n" +
+				"	}\n" +
+				"}\n");
+		helper.assertError(file, XbasePackage.Literals.XFEATURE_CALL,
+				org.eclipse.xtext.xbase.validation.IssueCodes.TYPE_BOUNDS_MISSMATCH, 
+				"Bounds mismatch: The type arguments <String,Integer> are not a valid substitute for the bounded type parameters <T,E extends T> of the method set<T,E>");
 	}
 	
 	@Test
