@@ -31,6 +31,7 @@ import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.eclipse.ui.views.contentoutline.IContentOutlinePage;
 import org.eclipse.xtext.formatting.IIndentationInformation;
 import org.eclipse.xtext.formatting.IWhitespaceInformationProvider;
+import org.eclipse.xtext.generator.trace.DefaultTraceURIConverter;
 import org.eclipse.xtext.generator.trace.ITraceURIConverter;
 import org.eclipse.xtext.parser.IEncodingProvider;
 import org.eclipse.xtext.preferences.IPreferenceValuesProvider;
@@ -377,7 +378,7 @@ public class DefaultUiModule extends AbstractGenericModule {
 	 * @since 2.4
 	 */
 	public Class<? extends ITraceURIConverter> bindITraceURIConverter() {
-		return DefaultUITraceURIConverter.class;
+		return DefaultTraceURIConverter.class;
 	}
 }
 
