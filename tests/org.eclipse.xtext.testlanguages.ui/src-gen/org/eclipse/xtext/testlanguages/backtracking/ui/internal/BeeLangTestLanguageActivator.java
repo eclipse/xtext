@@ -26,6 +26,7 @@ public class BeeLangTestLanguageActivator extends AbstractUIPlugin {
 	public static final String ORG_ECLIPSE_XTEXT_TESTLANGUAGES_BACKTRACKING_BEELANGTESTLANGUAGE = "org.eclipse.xtext.testlanguages.backtracking.BeeLangTestLanguage";
 	public static final String ORG_ECLIPSE_XTEXT_TESTLANGUAGES_BACKTRACKING_SIMPLEBEELANGTESTLANGUAGE = "org.eclipse.xtext.testlanguages.backtracking.SimpleBeeLangTestLanguage";
 	public static final String ORG_ECLIPSE_XTEXT_TESTLANGUAGES_BACKTRACKING_EXBEELANGTESTLANGUAGE = "org.eclipse.xtext.testlanguages.backtracking.ExBeeLangTestLanguage";
+	public static final String ORG_ECLIPSE_XTEXT_TESTLANGUAGES_NOJDT_NOJDTTESTLANGUAGE = "org.eclipse.xtext.testlanguages.noJdt.NoJdtTestLanguage";
 	
 	private static final Logger logger = Logger.getLogger(BeeLangTestLanguageActivator.class);
 	
@@ -84,6 +85,9 @@ public class BeeLangTestLanguageActivator extends AbstractUIPlugin {
 		if (ORG_ECLIPSE_XTEXT_TESTLANGUAGES_BACKTRACKING_EXBEELANGTESTLANGUAGE.equals(grammar)) {
 			return new org.eclipse.xtext.testlanguages.backtracking.ExBeeLangTestLanguageRuntimeModule();
 		}
+		if (ORG_ECLIPSE_XTEXT_TESTLANGUAGES_NOJDT_NOJDTTESTLANGUAGE.equals(grammar)) {
+			return new org.eclipse.xtext.testlanguages.noJdt.NoJdtTestLanguageRuntimeModule();
+		}
 		
 		throw new IllegalArgumentException(grammar);
 	}
@@ -97,6 +101,9 @@ public class BeeLangTestLanguageActivator extends AbstractUIPlugin {
 		}
 		if (ORG_ECLIPSE_XTEXT_TESTLANGUAGES_BACKTRACKING_EXBEELANGTESTLANGUAGE.equals(grammar)) {
 			return new org.eclipse.xtext.testlanguages.backtracking.ui.ExBeeLangTestLanguageUiModule(this);
+		}
+		if (ORG_ECLIPSE_XTEXT_TESTLANGUAGES_NOJDT_NOJDTTESTLANGUAGE.equals(grammar)) {
+			return new org.eclipse.xtext.testlanguages.noJdt.ui.NoJdtTestLanguageUiModule(this);
 		}
 		
 		throw new IllegalArgumentException(grammar);

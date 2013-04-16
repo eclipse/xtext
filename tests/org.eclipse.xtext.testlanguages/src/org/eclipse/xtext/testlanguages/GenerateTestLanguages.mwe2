@@ -27,5 +27,6 @@ Workflow {
 		language = @backtracking.BeeLangTestLanguage {}
 		language = @backtracking.SimpleBeeLangTestLanguage {}
 		language = @backtracking.ExBeeLangTestLanguage {}
+		language = @noJdt.NoJdtTestLanguage {}
 	}
 }
