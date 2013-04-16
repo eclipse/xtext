@@ -16,6 +16,24 @@ import org.junit.Ignore
 class CompilerBugTest extends AbstractXtendCompilerTest {
 	
 	@Test
+	def testArraySetBug405763() {
+		assertCompilesTo('''
+			class C {
+				def m(CharSequence[] array, String value) {
+					array.set(1, value)
+				}
+			}
+		''', '''
+			@SuppressWarnings("all")
+			public class C {
+			  public void m(final CharSequence[] array, final String value) {
+			    array[1] = value;
+			  }
+			}
+		''')
+	}
+	
+	@Test
 	def testMethodInvocationOnPrimitiveLong() {
 		assertCompilesTo('''
 			class C {
