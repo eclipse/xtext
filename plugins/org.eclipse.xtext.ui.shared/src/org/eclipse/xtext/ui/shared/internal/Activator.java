@@ -16,6 +16,8 @@ import org.eclipse.core.runtime.IExtensionPoint;
 import org.eclipse.core.runtime.Platform;
 import org.eclipse.core.runtime.Plugin;
 import org.eclipse.jdt.core.JavaCore;
+import org.eclipse.jdt.ui.JavaUI;
+import org.eclipse.xtext.common.types.ui.notification.TypeResourceUnloader;
 import org.osgi.framework.BundleContext;
 
 import com.google.inject.Guice;
@@ -82,6 +84,8 @@ public class Activator extends Plugin {
 	public static boolean isJavaEnabled() {
 		try {
 			JavaCore.class.getName();
+			JavaUI.class.getName();
+			TypeResourceUnloader.class.getName();
 			return true;
 		} catch (Throwable e) {
 			log.warn("Disabling JDT use. : "+e.getMessage());
