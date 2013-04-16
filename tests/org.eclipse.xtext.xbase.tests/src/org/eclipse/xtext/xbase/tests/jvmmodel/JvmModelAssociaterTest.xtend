@@ -97,28 +97,35 @@ class JvmModelAssociaterTest extends AbstractJvmModelTest {
 			]
 			assertEquals(4, obj.eResource.contents.size)
 		]
-		resource.setDerivedStateComputer(null)
-		resource.URI = URI::createURI('foo.txt')
-		resourceSet.classpathURIContext = getClass()
-		resourceSet.resources += resource
-		resource.contents += EcoreFactory::eINSTANCE.createEClass
-		assoc.installDerivedState(resource,true)
-		assertFalse((resource.contents.get(1) as JvmDeclaredType).^abstract)
-		assertFalse((resource.contents.get(3) as JvmDeclaredType).^abstract)
-		
-		resource.contents.clear
-		resource.contents += EcoreFactory::eINSTANCE.createEClass
-		assoc.installDerivedState(resource,false)
-		val type = (resource.contents.get(1) as JvmGenericType)
-		val anotherType = (resource.contents.get(3) as JvmGenericType)
-		assertTrue(type.^abstract)
-		assertTrue(anotherType.^abstract)
-		assertEquals('foo.AnotherOne', anotherType.identifier)
-		
-		// test extends object and default constructor
-		assertEquals(1, type.members.filter(typeof(JvmConstructor)).size)
-		assertEquals(1, type.superTypes.size)
-		assertSame(type.superTypes.head.type, anotherType)
+		try {
+			resource.setDerivedStateComputer(null)
+			resource.URI = URI::createURI('foo.txt')
+			resourceSet.classpathURIContext = getClass()
+			resourceSet.resources += resource
+			resource.contents += EcoreFactory::eINSTANCE.createEClass
+			assoc.installDerivedState(resource,true)
+			assertFalse((resource.contents.get(1) as JvmDeclaredType).^abstract)
+			assertFalse((resource.contents.get(3) as JvmDeclaredType).^abstract)
+			
+			resource.contents.clear
+			resource.contents += EcoreFactory::eINSTANCE.createEClass
+			assoc.installDerivedState(resource,false)
+			val type = (resource.contents.get(1) as JvmGenericType)
+			val anotherType = (resource.contents.get(3) as JvmGenericType)
+			assertTrue(type.^abstract)
+			assertTrue(anotherType.^abstract)
+			assertEquals('foo.AnotherOne', anotherType.identifier)
+			
+			// test extends object and default constructor
+			assertEquals(1, type.members.filter(typeof(JvmConstructor)).size)
+			assertEquals(1, type.superTypes.size)
+			assertSame(type.superTypes.head.type, anotherType)
+		} finally {
+			val allInferrers = JvmModelInferrerRegistry::INSTANCE.getModelInferrer('txt').toSet
+			allInferrers.forEach[
+				JvmModelInferrerRegistry::INSTANCE.deregister('txt', it)
+			]
+		}
 	}
 	
 }
