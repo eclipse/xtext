@@ -91,12 +91,12 @@ public class Storage2UriMapperJdtImplTest extends Assert {
 		
 		IPackageFragmentRoot root = project.getPackageFragmentRoot(externalFolder);
 		Map<URI, IStorage> rootData = impl.getAllEntries(root);
-		assertEquals(1, rootData.size());
+		assertEquals(rootData.toString(), 1, rootData.size());
 		assertEquals("platform:/resource/.org.eclipse.jdt.core.external.folders/externalFolder/a.indexed", rootData.keySet().iterator().next().toString());
 		IFile file3 = externalFolder.getFile("c.indexed");
 		file3.create(new StringInputStream("content"), true, monitor());
 		rootData = impl.getAllEntries(root);
-		assertEquals(2, rootData.size());
+		assertEquals(rootData.toString(), 2, rootData.size());
 	}
 	
 	protected Storage2UriMapperJavaImpl getStorage2UriMapper() {
