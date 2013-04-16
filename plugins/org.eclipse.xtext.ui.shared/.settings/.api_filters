@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<component id="org.eclipse.xtext.ui.shared" version="2">
+    <resource path="META-INF/MANIFEST.MF">
+        <filter comment="Fix for bug https://bugs.eclipse.org/bugs/show_bug.cgi?id=404322" id="924844039">
+            <message_arguments>
+                <message_argument value="2.4.1"/>
+                <message_argument value="2.4.0"/>
+            </message_arguments>
+        </filter>
+    </resource>
+</component>

@@ -13,8 +13,10 @@ import org.eclipse.ui.IWorkbench;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.xtext.builder.DerivedResourceMarkers;
 import org.eclipse.xtext.builder.builderState.IBuilderState;
+import org.eclipse.xtext.builder.trace.StorageAwareTrace;
 import org.eclipse.xtext.builder.trace.TraceForStorageProvider;
 import org.eclipse.xtext.generator.IDerivedResourceMarkers;
+import org.eclipse.xtext.generator.trace.DefaultTraceURIConverter;
 import org.eclipse.xtext.generator.trace.ITraceForStorageProvider;
 import org.eclipse.xtext.resource.IResourceDescriptions;
 import org.eclipse.xtext.service.AbstractGenericModule;
@@ -43,6 +45,20 @@ public class SharedStateModule extends AbstractGenericModule {
 	 */
 	public Provider<IStorage2UriMapperJdtExtensions> provideIStorage2UriMapperJdtExtensions() {
 		return Access.getIStorage2UriMapperJdtExtensions();
+	}
+	
+	/**
+	 * @since 2.4
+	 */
+	public Provider<StorageAwareTrace> provideStorageAwareTrace() {
+		return Access.provider(StorageAwareTrace.class);
+	}
+	
+	/**
+	 * @since 2.4
+	 */
+	public Provider<DefaultTraceURIConverter> provideDefaultTraceURIConverter() {
+		return Access.provider(DefaultTraceURIConverter.class);
 	}
 
 	public Provider<IStateChangeEventBroker> provideIStateChangeEventBroker() {
