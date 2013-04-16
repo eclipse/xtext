@@ -1,5 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <component id="org.eclipse.xtext" version="2">
+    <resource path="META-INF/MANIFEST.MF">
+        <filter comment="Added new API that is required to fix a bug. See Bug 405541 - XtendMavenPlugin/BatchCompiler Output Encoding Issue" id="924844039">
+            <message_arguments>
+                <message_argument value="2.4.1"/>
+                <message_argument value="2.4.0"/>
+            </message_arguments>
+        </filter>
+    </resource>
     <resource path="src-gen/org/eclipse/xtext/AbstractXtextRuntimeModule.java" type="org.eclipse.xtext.AbstractXtextRuntimeModule">
         <filter comment="Cannot @since to generated classes" id="1143996420">
             <message_arguments>
