@@ -17,18 +17,18 @@ public class LazyExample {
   @Lazy
   private Integer another;
   
-  public String initfoo() {
+  private String _initfoo() {
     return "holla";
   }
   
   public String getFoo() {
     if (foo==null)
-      foo = initfoo();
+      foo = _initfoo();
     return foo;
     
   }
   
-  public Integer initanother() {
+  private Integer _initanother() {
     String _foo = this.getFoo();
     int _length = _foo.length();
     int _multiply = (42 * _length);
@@ -37,7 +37,7 @@ public class LazyExample {
   
   public Integer getAnother() {
     if (another==null)
-      another = initanother();
+      another = _initanother();
     return another;
     
   }
