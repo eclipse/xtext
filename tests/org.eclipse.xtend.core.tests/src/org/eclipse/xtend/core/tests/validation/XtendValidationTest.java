@@ -33,10 +33,14 @@ import org.eclipse.xtend.core.xtend.XtendPackage;
 import org.eclipse.xtend.core.xtend.XtendTypeDeclaration;
 import org.eclipse.xtext.common.types.TypesPackage;
 import org.eclipse.xtext.junit4.validation.ValidationTestHelper;
+import org.eclipse.xtext.preferences.MapBasedPreferenceValues;
+import org.eclipse.xtext.preferences.IPreferenceValuesProvider.SingletonPreferenceValuesProvider;
 import org.eclipse.xtext.resource.XtextResourceSet;
 import org.eclipse.xtext.util.StringInputStream;
 import org.eclipse.xtext.xbase.XBlockExpression;
 import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotationsPackage;
+import org.junit.After;
+import org.junit.Before;
 import org.junit.Test;
 
 import com.google.inject.Inject;
@@ -48,6 +52,23 @@ public class XtendValidationTest extends AbstractXtendTestCase {
 
 	@Inject
 	protected ValidationTestHelper helper;
+	
+	private MapBasedPreferenceValues preferences;
+	
+	@Inject
+	public void setPreferences(SingletonPreferenceValuesProvider prefProvider) {
+		preferences = prefProvider.getPreferenceValues(null);
+	}
+	
+	@Before
+	public void setSeverity() {
+		preferences.put(IssueCodes.JAVA_DOC_LINKING_DIAGNOSTIC, "error");
+	}
+	
+	@After
+	public void clearPreferences() {
+		preferences.clear();
+	}
 	
 	@Test public void testExtensionMayNotBePrimitive_01() throws Exception {
 		XtendClass clazz = clazz("class Z { extension int x = 1 }");
