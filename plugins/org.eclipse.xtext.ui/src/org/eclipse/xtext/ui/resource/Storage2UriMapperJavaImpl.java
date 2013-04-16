@@ -7,11 +7,12 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.resource;
 
-import static com.google.common.collect.Iterables.isEmpty;
-import static com.google.common.collect.Lists.newArrayListWithCapacity;
-import static com.google.common.collect.Maps.newLinkedHashMap;
-import static java.util.Collections.emptyMap;
+import static com.google.common.collect.Iterables.*;
+import static com.google.common.collect.Lists.*;
+import static com.google.common.collect.Maps.*;
+import static java.util.Collections.*;
 
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -54,6 +55,11 @@ public class Storage2UriMapperJavaImpl extends Storage2UriMapperImpl implements 
 			this.root = root;
 		}
 		public Map<URI, IStorage> uri2Storage = newLinkedHashMap();
+		
+		@Override
+		public String toString() {
+			return root.toString() + " / " + uriPrefix;
+		}
 	}
 	
 	
@@ -213,22 +219,27 @@ public class Storage2UriMapperJavaImpl extends Storage2UriMapperImpl implements 
 		Iterable<Pair<IStorage, IProject>> storages = super.getStorages(uri);
 		if (!isEmpty(storages))
 			return storages;
-		
+
 		List<Pair<IStorage, IProject>> result = newArrayListWithCapacity(1);
-		for (PackageFragmentRootData data : cachedPackageFragmentRootData.values()) {
-			// TODO better isPrefix
-			if (data.uriPrefix == null || uri.toString().startsWith(data.uriPrefix.toString())) {
-				IStorage storage = data.uri2Storage.get(uri);
-				if (storage != null) {
-					result.add(Tuples.create(storage, data.root.getJavaProject().getProject()));
+		Iterator<PackageFragmentRootData> iterator = cachedPackageFragmentRootData.values().iterator();
+		while (iterator.hasNext()) {
+			PackageFragmentRootData data = iterator.next();
+			if (data.root.exists()) {
+				if (data.uriPrefix == null || uri.toString().startsWith(data.uriPrefix.toString())) {
+					IStorage storage = data.uri2Storage.get(uri);
+					if (storage != null) {
+						result.add(Tuples.create(storage, data.root.getJavaProject().getProject()));
+					}
 				}
+			} else {
+				iterator.remove();
 			}
 		}
 		if (result.isEmpty() && uri.isArchive()) {
 			String authority = uri.authority();
 			authority = authority.substring(0, authority.length() - 1);
 			URI archiveURI = URI.createURI(authority);
-			if (archiveURI.isFile()) {
+			if (archiveURI.isFile()) { // platform uris have already been handled
 				IPath archivePath = new Path(archiveURI.toFileString());
 				for (PackageFragmentRootData data : cachedPackageFragmentRootData.values()) {
 					// TODO better isPrefix
