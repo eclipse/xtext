@@ -267,14 +267,20 @@ public class EcoreUtil2Test extends AbstractXtextTests {
 		String externalForm = uri.toString();
 		EReference foundReference = EcoreUtil2.getEReferenceFromExternalForm(EPackage.Registry.INSTANCE, externalForm);
 		assertSame(reference, foundReference);
-		String brokenExternalFrom = Strings.toFirstUpper(externalForm);
+		String brokenExternalFrom = makeInvalid(externalForm);
 		assertNull(EcoreUtil2.getEReferenceFromExternalForm(EPackage.Registry.INSTANCE, brokenExternalFrom));
 		String shortExternalForm = EcoreUtil2.toExternalForm(reference);
 		foundReference = EcoreUtil2.getEReferenceFromExternalForm(EPackage.Registry.INSTANCE, shortExternalForm);
 		assertSame(reference, foundReference);
-		String brokenShortExternalFrom = Strings.toFirstUpper(shortExternalForm);
+		String brokenShortExternalFrom = makeInvalid(shortExternalForm);
 		assertNull(EcoreUtil2.getEReferenceFromExternalForm(EPackage.Registry.INSTANCE, brokenShortExternalFrom));
 		brokenShortExternalFrom = shortExternalForm.replace('A', 'a');
 		assertNull(EcoreUtil2.getEReferenceFromExternalForm(EPackage.Registry.INSTANCE, brokenShortExternalFrom));
+	}
+
+	protected String makeInvalid(String externalForm) {
+		// this used to be Strings.toFirstUpper but the spec does not impose case sensitivity constraints on the scheme
+		// so Ed decided to change that. In that sense, we now use another scheme instead of http:// which is xhttp://
+		return 'x' + externalForm;
 	}
 }
