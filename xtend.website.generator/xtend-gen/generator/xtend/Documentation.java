@@ -274,10 +274,10 @@ public class Documentation extends AbstractXtendWebsite {
     _builder.append("<li style=\"color : #333;\">Additional Resources</li>");
     _builder.newLine();
     _builder.append("\t");
-    _builder.append("<li><a href=\"documentation/2.3.0/Documentation.pdf\">Documentation <img src=\"images/pdf_icon.gif\"></a>");
+    _builder.append("<li><a href=\"documentation/2.4.0/Documentation.pdf\">Documentation <img src=\"images/pdf_icon.gif\"></a>");
     _builder.newLine();
     _builder.append("\t");
-    _builder.append("<li><a href=\"api/2.3.0/index.html\">Runtime Library API</a>");
+    _builder.append("<li><a href=\"api/2.4.0/index.html\">Runtime Library API</a>");
     _builder.newLine();
     _builder.append("</ul>");
     _builder.newLine();
