@@ -151,18 +151,15 @@ public abstract class AbstractNode implements INode, BidiTreeIterable<INode> {
 	}
 	
 	public int getOffset() {
-		Iterator<AbstractNode> leafIter = basicIterator();
+		Iterator<ILeafNode> leafIter = Iterators.filter(basicIterator(), ILeafNode.class);
 		int firstLeafOffset = -1;
 		while(leafIter.hasNext()) {
-			AbstractNode node = leafIter.next();
-			if (node instanceof ILeafNode) {
-				ILeafNode leaf = (ILeafNode) node;
-				if (firstLeafOffset == -1) {
-					firstLeafOffset = leaf.getTotalOffset();
-				}
-				if (!leaf.isHidden())
-					return leaf.getTotalOffset();
+			ILeafNode leaf = leafIter.next();
+			if (firstLeafOffset == -1) {
+				firstLeafOffset = leaf.getTotalOffset();
 			}
+			if (!leaf.isHidden())
+				return leaf.getTotalOffset();
 		}
 		if (firstLeafOffset != -1)
 			return firstLeafOffset;
