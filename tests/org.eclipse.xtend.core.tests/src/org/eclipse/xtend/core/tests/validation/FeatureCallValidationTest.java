@@ -14,14 +14,10 @@ import java.util.List;
 import org.eclipse.xtend.core.tests.AbstractXtendTestCase;
 import org.eclipse.xtend.core.xtend.XtendClass;
 import org.eclipse.xtend.core.xtend.XtendFile;
-import org.eclipse.xtend.core.xtend.XtendFunction;
-import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.TypesPackage;
 import org.eclipse.xtext.diagnostics.Diagnostic;
 import org.eclipse.xtext.junit4.validation.ValidationTestHelper;
 import org.eclipse.xtext.validation.Issue;
-import org.eclipse.xtext.xbase.XBlockExpression;
-import org.eclipse.xtext.xbase.XMemberFeatureCall;
 import org.eclipse.xtext.xbase.XbasePackage;
 import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotationsPackage;
 import org.eclipse.xtext.xbase.validation.IssueCodes;
@@ -525,7 +521,8 @@ public class FeatureCallValidationTest extends AbstractXtendTestCase {
 				"}\n");
 		helper.assertError(file, XbasePackage.Literals.XMEMBER_FEATURE_CALL,
 				org.eclipse.xtext.xbase.validation.IssueCodes.TYPE_BOUNDS_MISSMATCH, 
-				"Bounds mismatch: The type arguments <String,CharSequence> are not a valid substitute for the bounded type parameters <T,E extends T> of the method set<T,E>");
+				"Bounds mismatch: The type arguments <String,CharSequence> are not a valid substitute " +
+				"for the bounded type parameters <T, E extends T> of the method set(T[], int, E)");
 	}
 	
 	@Test public void testFeatureCallTypeBounds_9() throws Exception {
@@ -537,9 +534,105 @@ public class FeatureCallValidationTest extends AbstractXtendTestCase {
 				"}\n");
 		helper.assertError(file, XbasePackage.Literals.XFEATURE_CALL,
 				org.eclipse.xtext.xbase.validation.IssueCodes.TYPE_BOUNDS_MISSMATCH, 
-				"Bounds mismatch: The type arguments <String,Integer> are not a valid substitute for the bounded type parameters <T,E extends T> of the method set<T,E>");
+				"Bounds mismatch: The type arguments <String,Integer> are not a valid substitute " +
+				"for the bounded type parameters <T, E extends T> of the method set(T[], int, E)");
 	}
 	
+	@Test public void testFeatureCallTypeBounds_10() throws Exception {
+		XtendFile file = file(
+				"class C {" +
+				"	def void m1() {\n" +
+				"		m2(1)" +
+				"	}\n" +
+				"	def <T extends Comparable<T>> m2(T t) {\n" +
+				"	}\n" +
+				"}\n");
+		helper.assertNoErrors(file);
+	}
+
+	@Test public void testFeatureCallTypeBounds_11() throws Exception {
+		XtendFile file = file(
+				"class C {" +
+				"	def void m1() {\n" +
+				"		m2(new Object)" +
+				"	}\n" +
+				"	def <T extends Comparable<T>> m2(T t) {\n" +
+				"	}\n" +
+				"}\n");
+		helper.assertError(file, XbasePackage.Literals.XFEATURE_CALL,
+				org.eclipse.xtext.xbase.validation.IssueCodes.TYPE_BOUNDS_MISSMATCH, 
+				"Bounds mismatch: The type argument <Object> is not a valid substitute " +
+				"for the bounded type parameter <T extends Comparable<T>> of the method m2(T)");
+	}
+
+	@Test public void testFeatureCallTypeBounds_12() throws Exception {
+		XtendFile file = file(
+				"class C {" +
+				"	def void m1() {\n" +
+				"		m2(null as Comparable<Integer>)" +
+				"	}\n" +
+				"	def <T extends Comparable<T>> m2(T t) {\n" +
+				"	}\n" +
+				"}\n");
+		helper.assertError(file, XbasePackage.Literals.XFEATURE_CALL,
+				org.eclipse.xtext.xbase.validation.IssueCodes.TYPE_BOUNDS_MISSMATCH, 
+				"Bounds mismatch: The type argument <Comparable<Integer>> is not a valid substitute " +
+				"for the bounded type parameter <T extends Comparable<T>> of the method m2(T)");
+	}
+	
+	@Test public void testConstructorCallTypeBounds_01() throws Exception {
+		XtendFile file = file(
+				"class C<T extends Comparable<T>> {" +
+				"	def static m() {\n" +
+				"		new C(1)" +
+				"	}\n" +
+				"	new(T t) {\n" +
+				"	}\n" +
+				"}\n");
+		helper.assertNoErrors(file);
+	}
+
+	@Test public void testConstructorCallTypeBounds_02() throws Exception {
+		XtendFile file = file(
+				"class C<T extends Comparable<T>> {" +
+				"	def static m() {\n" +
+				"		new C(null as Object)" +
+				"	}\n" +
+				"	new(T t) {\n" +
+				"	}\n" +
+				"}\n");
+		helper.assertError(file, XbasePackage.Literals.XCONSTRUCTOR_CALL,
+				org.eclipse.xtext.xbase.validation.IssueCodes.TYPE_BOUNDS_MISSMATCH, 
+				"Bounds mismatch: The type argument <Object> is not a valid substitute " +
+				"for the bounded type parameter <T extends Comparable<T>> of the constructor C(T)");
+	}
+
+	@Test public void testConstructorCallTypeBounds_03() throws Exception {
+		XtendFile file = file(
+				"class C<T extends Comparable<T>> {" +
+				"	def void m() {\n" +
+				"		new C(1)" +
+				"	}\n" +
+				"	new(T t) {\n" +
+				"	}\n" +
+				"}\n");
+		helper.assertNoErrors(file);
+	}
+
+	@Test public void testConstructorCallTypeBounds_04() throws Exception {
+		XtendFile file = file(
+				"class C<T extends Comparable<T>> {" +
+				"	def void m() {\n" +
+				"		new C(null as Object)" +
+				"	}\n" +
+				"	new(T t) {\n" +
+				"	}\n" +
+				"}\n");
+		helper.assertError(file, XbasePackage.Literals.XCONSTRUCTOR_CALL,
+				org.eclipse.xtext.xbase.validation.IssueCodes.TYPE_BOUNDS_MISSMATCH, 
+				"Bounds mismatch: The type argument <Object> is not a valid substitute " +
+				"for the bounded type parameter <T extends Comparable<T>> of the constructor C(T)");
+	}
 	@Test
 	@Ignore("TODO improve error message - shouldn't be Could not resolve reference")
 	public void testInvalidReceiverForExtension_01() throws Exception {
