@@ -7,9 +7,12 @@
         <bundles name="org.eclipse.pde.core"/>
         <bundles name="org.eclipse.pde.ui"/>
         <bundles name="org.eclipse.ui.cheatsheets"/>
-        <bundles name="org.junit4"/>
         <bundles name="org.junit"/>
         <features name="org.eclipse.jdt.feature.group"/>
+      </repositories>
+      <repositories location="http://download.eclipse.org/eclipse/updates/4.2/">
+        <bundles name="org.junit4"/>
+        <bundles name="org.eclipse.jdt.annotation"/>
       </repositories>
       <repositories location="http://download.eclipse.org/releases/indigo/">
         <features name="org.eclipse.emf.feature.group"/>
