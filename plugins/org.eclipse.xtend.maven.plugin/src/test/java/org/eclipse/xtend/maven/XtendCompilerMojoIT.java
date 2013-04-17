@@ -8,6 +8,7 @@ import junit.framework.Assert;
 import org.apache.maven.it.VerificationException;
 import org.apache.maven.it.Verifier;
 import org.apache.maven.it.util.ResourceExtractor;
+import org.apache.maven.shared.utils.io.FileUtils;
 import org.junit.Test;
 
 public class XtendCompilerMojoIT {
@@ -22,6 +23,23 @@ public class XtendCompilerMojoIT {
 	@Test
 	public void simpleProject() throws Exception {
 		verifyErrorFreeLog(ROOT + "/simple");
+	}
+
+	@Test
+	public void encoding() throws Exception {
+		Verifier verifier = newVerifier(ROOT + "/encoding");
+		
+		String xtendDir = verifier.getBasedir() + "/src/main/java";
+		assertFileContainsUTF16(verifier, xtendDir + "/test/XtendA.xtend", "Mühlheim-Kärlicher Bürger");
+		
+		verifier.setDebug(true);
+		verifier.executeGoal("test");
+		verifier.verifyErrorFreeLog();
+
+		String gen = verifier.getBasedir() + "/src/main/generated-sources/xtend/test/XtendA.java";
+		assertFileContainsUTF16(verifier, gen, "Mühlheim-Kärlicher Bürger");
+		assertFileContainsUTF16(verifier, gen, "_builder.append(\"m\\u00F6chte meine \");");
+		assertFileContainsUTF16(verifier, gen, "_builder.append(\"t\\u00FCr \\u00F6len\", \"\");");
 	}
 
 	@Test
@@ -116,5 +134,17 @@ public class XtendCompilerMojoIT {
 		//		verifier.setDebugJvm(true);
 		//		verifier.setForkJvm(false);
 		return verifier;
+	}
+
+	public void assertFileContainsUTF16(Verifier verifier, String file, String contained) {
+		verifier.assertFilePresent(file);
+		try {
+			String content = FileUtils.fileRead(new File(file), "UTF-16");
+			if (!content.contains(contained)) {
+				Assert.fail("Content of " + file + " does not contain " + contained);
+			}
+		} catch (IOException e) {
+			Assert.fail(e.getMessage());
+		}
 	}
 }
