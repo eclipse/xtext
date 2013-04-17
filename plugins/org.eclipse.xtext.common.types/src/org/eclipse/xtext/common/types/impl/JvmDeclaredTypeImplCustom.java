@@ -199,10 +199,10 @@ public abstract class JvmDeclaredTypeImplCustom extends JvmDeclaredTypeImpl {
 	}
 
 	protected <T> T doSynchronized(final Provider<? extends T> provider) {
-		if (eResource() instanceof ISynchronizable<?>) {
-			ISynchronizable<?> eResource = (ISynchronizable<?>) eResource();
+		Resource eResource = eResource();
+		if (eResource instanceof ISynchronizable<?>) {
 			try {
-				T result = eResource.execute(new IUnitOfWork<T, Object>() {
+				T result = ((ISynchronizable<?>) eResource).execute(new IUnitOfWork<T, Object>() {
 					public T exec(Object state) throws Exception {
 						T result = provider.get();
 						return result;
@@ -221,12 +221,12 @@ public abstract class JvmDeclaredTypeImplCustom extends JvmDeclaredTypeImpl {
 	}
 
 	protected Map<String, Set<JvmFeature>> getAllFeaturesMap() {
-		Set<JvmDeclaredType> processedSuperTypes = Sets.newHashSet();
-		return internalGetAllFeaturesMap(processedSuperTypes);
+		return internalGetAllFeaturesMap(null);
 	}
 
-	protected Map<String, Set<JvmFeature>> internalGetAllFeaturesMap(final Set<JvmDeclaredType> processedSuperTypes) {
+	protected Map<String, Set<JvmFeature>> internalGetAllFeaturesMap(final Set<JvmDeclaredType> processedtypes) {
 		if (allFeaturesByName == null) {
+			final Set<JvmDeclaredType> processedSuperTypes = processedtypes == null ? Sets.<JvmDeclaredType>newHashSet() : processedtypes;
 			allFeaturesByName = doSynchronized(new Provider<Map<String, Set<JvmFeature>>>() {
 				public Map<String, Set<JvmFeature>> get() {
 					if (allFeaturesByName != null)

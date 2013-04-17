@@ -66,6 +66,8 @@ public abstract class AbstractTypeComputationState implements ITypeComputationSt
 	private IFeatureScopeSession featureScopeSession;
 	private final DefaultReentrantTypeResolver reentrantTypeResolver;
 	private List<AbstractTypeExpectation> expectations;
+	
+	// is this field actually used?
 	private List<AbstractTypeExpectation> returnExpectations;
 	
 	protected AbstractTypeComputationState(ResolvedTypes resolvedTypes,
@@ -274,6 +276,7 @@ public abstract class AbstractTypeComputationState implements ITypeComputationSt
 		return expectations;
 	}
 	
+	//TODO not referenced
 	protected final List<? extends ITypeExpectation> getReturnExpectations() {
 		if (returnExpectations == null)
 			returnExpectations = getReturnExpectations(this, false);
