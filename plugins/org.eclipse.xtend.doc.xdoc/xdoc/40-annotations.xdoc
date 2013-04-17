@@ -33,7 +33,7 @@ ul[
 If you want to annotate other elements such as interfaces, parameters or constructors, you should have
 a look at the bases classes and adapt their implementation accordingly. 
 
-section2:active_annotations_register_globals[Phase 1: Register Globals (codeRef[org.eclipse.xtend.lib.macro.RegisterGlobalsParticipant])]
+section2:active_annotations_register_globals[Phase 1: Register Globals]
 
 The first phase in the lifecycle of the compiler is about indexing the types as globally available symbols. By implementing a codeRef[org.eclipse.xtend.lib.macro.RegisterGlobalsParticipant]
 you have the chance to create and register new Java types during this phase. It's important
@@ -66,7 +66,7 @@ and provides access to all elements which are annotated with the e[active annota
 is registered for. Therefore the code[ExtractProcessor] is invoked with a list of all classes that are defined in the same Xtend file for
 all the files that are being compiled.
 
-section2:active_annotations_transformation_phase[Phase 2: Transformation (codeRef[org.eclipse.xtend.lib.macro.TransformationParticipant])]
+section2:active_annotations_transformation_phase[Phase 2: Transformation]
 
 In the second phase developers can modify the compiled Java classes and Java code. Annotation processors that implement
 codeRef[org.eclipse.xtend.lib.macro.TransformationParticipant] participate in this compile step. Similar to the 
