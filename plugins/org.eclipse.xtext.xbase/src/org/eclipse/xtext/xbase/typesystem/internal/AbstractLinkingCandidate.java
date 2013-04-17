@@ -167,6 +167,17 @@ public abstract class AbstractLinkingCandidate<Expression extends XExpression> i
 		// TODO add declaration hint?
 		UnboundTypeReference typeReference = state.getResolvedTypes().createUnboundTypeReference(expression, typeParameter);
 		result.put(typeParameter, new LightweightMergedBoundTypeArgument(typeReference, VarianceInfo.INVARIANT));
+		List<JvmTypeConstraint> constraints = typeParameter.getConstraints();
+		for(JvmTypeConstraint constraint: constraints) {
+			JvmType type = constraint.getTypeReference().getType();
+			if (type != null) {
+				LightweightMergedBoundTypeArgument boundTypeArgument = result.get(type);
+				if (boundTypeArgument != null) {
+					LightweightTypeReference constraintReference = boundTypeArgument.getTypeReference();
+					typeReference.acceptHint(constraintReference, BoundTypeArgumentSource.CONSTRAINT, typeParameter, VarianceInfo.OUT, VarianceInfo.OUT);
+				}
+			}
+		}
 	}
 	
 	protected void accept(ObservableTypeExpectation expectation, LightweightTypeReference actual) {
@@ -382,7 +393,7 @@ public abstract class AbstractLinkingCandidate<Expression extends XExpression> i
 				@Override
 				@Nullable
 				protected LightweightTypeReference getBoundTypeArgument(ParameterizedTypeReference reference, JvmTypeParameter type, Set<JvmTypeParameter> visiting) {
-					if ((type.getDeclarator() instanceof JvmType) && getOwner().getDeclaredTypeParameters().contains(type)) {
+					if (isBoundTypeArgumentSkipped(type, getOwner())) {
 						return null;
 					}
 					return super.getBoundTypeArgument(reference, type, visiting);
@@ -391,6 +402,10 @@ public abstract class AbstractLinkingCandidate<Expression extends XExpression> i
 			substitutor.enhanceMapping(getTypeParameterMapping());
 			return substitutor;
 		}
+	}
+	
+	protected boolean isBoundTypeArgumentSkipped(JvmTypeParameter type, ITypeReferenceOwner owner) {
+		return (type.getDeclarator() instanceof JvmType) && owner.getDeclaredTypeParameters().contains(type);
 	}
 	
 	protected boolean isRawTypeContext() {

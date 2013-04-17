@@ -793,7 +793,7 @@ public abstract class ResolvedTypes implements IResolvedTypes {
 			}
 		} else {
 			if (!isResolved(handle)) {
-				if (boundTypeArgument.getTypeReference() instanceof UnboundTypeReference) {
+				if (boundTypeArgument.getTypeReference() instanceof UnboundTypeReference && boundTypeArgument.getSource() != BoundTypeArgumentSource.CONSTRAINT) {
 					UnboundTypeReference other = (UnboundTypeReference) boundTypeArgument.getTypeReference();
 					Object otherHandle = other.getHandle();
 					if (ensureTypeParameterHintsMapExists().containsKey(handle)) {
@@ -905,6 +905,14 @@ public abstract class ResolvedTypes implements IResolvedTypes {
 						if (!existingTypeArgument.getTypeReference().isResolved()) {
 							ExpectationTypeParameterHintCollector collector = new ExpectationTypeParameterHintCollector(getReferenceOwner());
 							collector.processPairedReferences(boundTypeArgument.getTypeReference(), existingTypeArgument.getTypeReference());
+						}
+					}
+				} else if (existingTypeArgument.getSource() == BoundTypeArgumentSource.CONSTRAINT) {
+					if (existingTypeArgument.getTypeReference() instanceof UnboundTypeReference) {
+						UnboundTypeReference existingReference = (UnboundTypeReference) existingTypeArgument.getTypeReference();
+						if (!existingReference.internalIsResolved()) {
+							existingReference.acceptHint(boundTypeArgument.getTypeReference(), 
+								BoundTypeArgumentSource.INFERRED, boundTypeArgument, VarianceInfo.OUT, VarianceInfo.OUT);
 						}
 					}
 				}

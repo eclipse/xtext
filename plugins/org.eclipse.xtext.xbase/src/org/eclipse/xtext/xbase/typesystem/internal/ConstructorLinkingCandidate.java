@@ -24,6 +24,7 @@ import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.XbasePackage;
 import org.eclipse.xtext.xbase.scoping.batch.IIdentifiableElementDescription;
 import org.eclipse.xtext.xbase.typesystem.computation.IConstructorLinkingCandidate;
+import org.eclipse.xtext.xbase.typesystem.references.ITypeReferenceOwner;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 import org.eclipse.xtext.xbase.validation.IssueCodes;
 
@@ -73,6 +74,16 @@ public class ConstructorLinkingCandidate extends AbstractPendingLinkingCandidate
 			return false;
 		}
 		return super.validate(result);
+	}
+	
+	@Override
+	protected boolean isBoundTypeArgumentSkipped(JvmTypeParameter type, ITypeReferenceOwner owner) {
+		if (super.isBoundTypeArgumentSkipped(type, owner)) {
+			if (getConstructor().getDeclaringType() != type.getDeclarator()) {
+				return true;
+			}
+		}
+		return false;
 	}
 	
 	@Override
