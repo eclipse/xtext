@@ -62,9 +62,9 @@ public class DefaultRenameElementHandler extends AbstractHandler implements IRen
 
 	public Object execute(ExecutionEvent event) throws ExecutionException {
 		try {
-			syncUtil.totalSync(false);
 			final XtextEditor editor = EditorUtils.getActiveXtextEditor(event);
 			if (editor != null) {
+				syncUtil.totalSync(false);
 				final ITextSelection selection = (ITextSelection) editor.getSelectionProvider().getSelection();
 				IRenameElementContext renameElementContext = editor.getDocument().readOnly(
 						new IUnitOfWork<IRenameElementContext, XtextResource>() {
