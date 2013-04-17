@@ -39,16 +39,28 @@ class JdtBasedProcessorProvider extends ProcessorInstanceForJvmTypeProvider {
 		val List<URL> urls = newArrayList()
 		urls.addAll(getOutputFolders(projectToUse));
 		for (entry : resolvedClasspath) {
-			var IPath path = null
 			var URL url = null
 			switch entry.entryKind {
 				case IClasspathEntry::CPE_SOURCE: {/* do nothing */}
 				case IClasspathEntry::CPE_PROJECT: {
-					val IResource project = projectToUse.project.workspace.root.findMember(entry.getPath())
+					var IPath path = entry.getPath()
+					val IResource project = projectToUse.workspaceRoot.findMember(path)
 					urls.addAll(getOutputFolders(JavaCore::create(project.getProject())))
 				}
+				case IClasspathEntry::CPE_LIBRARY: {
+					var IPath path = entry.getPath()
+					// if the library is in the workspace, the entry path is relative to the workspace root
+					// thus we load it as a resource and take the raw path to find the location in the file system
+					val IResource library = projectToUse.workspaceRoot.findMember(path)
+					url = if (library != null) {
+						library.rawLocationURI.toURL
+					} else {
+						// otherwise we use the path itself
+						path.toFile().toURI().toURL() 
+					}
+				}
 				default: {
-					path = entry.getPath();
+					var IPath path = entry.getPath();
 					url = path.toFile().toURI().toURL();
 				}
 			}
@@ -57,6 +69,10 @@ class JdtBasedProcessorProvider extends ProcessorInstanceForJvmTypeProvider {
 			}
 		}
 		return new URLClassLoader(urls, getClass().getClassLoader());
+	}
+	
+	def private getWorkspaceRoot(IJavaProject javaProject) {
+		javaProject.project.workspace.root
 	}
 
 	def private List<URL> getOutputFolders(IJavaProject javaProject) {

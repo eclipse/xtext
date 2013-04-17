@@ -76,7 +76,6 @@ public class JdtBasedProcessorProvider extends ProcessorInstanceForJvmTypeProvid
       urls.addAll(_outputFolders);
       for (final IClasspathEntry entry : resolvedClasspath) {
         {
-          IPath path = null;
           URL url = null;
           int _entryKind = entry.getEntryKind();
           final int _switchValue = _entryKind;
@@ -89,29 +88,47 @@ public class JdtBasedProcessorProvider extends ProcessorInstanceForJvmTypeProvid
           if (!_matched) {
             if (Objects.equal(_switchValue,IClasspathEntry.CPE_PROJECT)) {
               _matched=true;
-              IProject _project = projectToUse.getProject();
-              IWorkspace _workspace = _project.getWorkspace();
-              IWorkspaceRoot _root = _workspace.getRoot();
-              IPath _path = entry.getPath();
-              final IResource project = _root.findMember(_path);
-              IProject _project_1 = project.getProject();
-              IJavaProject _create = JavaCore.create(_project_1);
+              IPath path = entry.getPath();
+              IWorkspaceRoot _workspaceRoot = this.getWorkspaceRoot(projectToUse);
+              final IResource project = _workspaceRoot.findMember(path);
+              IProject _project = project.getProject();
+              IJavaProject _create = JavaCore.create(_project);
               List<URL> _outputFolders_1 = this.getOutputFolders(_create);
               urls.addAll(_outputFolders_1);
             }
           }
           if (!_matched) {
-            {
-              IPath _path_1 = entry.getPath();
-              path = _path_1;
-              File _file = path.toFile();
-              URI _uRI = _file.toURI();
-              URL _uRL = _uRI.toURL();
-              url = _uRL;
+            if (Objects.equal(_switchValue,IClasspathEntry.CPE_LIBRARY)) {
+              _matched=true;
+              IPath path_1 = entry.getPath();
+              IWorkspaceRoot _workspaceRoot_1 = this.getWorkspaceRoot(projectToUse);
+              final IResource library = _workspaceRoot_1.findMember(path_1);
+              URL _xifexpression = null;
+              boolean _notEquals = (!Objects.equal(library, null));
+              if (_notEquals) {
+                URI _rawLocationURI = library.getRawLocationURI();
+                URL _uRL = _rawLocationURI.toURL();
+                _xifexpression = _uRL;
+              } else {
+                File _file = path_1.toFile();
+                URI _uRI = _file.toURI();
+                URL _uRL_1 = _uRI.toURL();
+                _xifexpression = _uRL_1;
+              }
+              url = _xifexpression;
             }
           }
-          boolean _notEquals = (!Objects.equal(url, null));
-          if (_notEquals) {
+          if (!_matched) {
+            {
+              IPath path_2 = entry.getPath();
+              File _file_1 = path_2.toFile();
+              URI _uRI_1 = _file_1.toURI();
+              URL _uRL_2 = _uRI_1.toURL();
+              url = _uRL_2;
+            }
+          }
+          boolean _notEquals_1 = (!Objects.equal(url, null));
+          if (_notEquals_1) {
             urls.add(url);
           }
         }
@@ -123,6 +140,13 @@ public class JdtBasedProcessorProvider extends ProcessorInstanceForJvmTypeProvid
     } catch (Throwable _e) {
       throw Exceptions.sneakyThrow(_e);
     }
+  }
+  
+  private IWorkspaceRoot getWorkspaceRoot(final IJavaProject javaProject) {
+    IProject _project = javaProject.getProject();
+    IWorkspace _workspace = _project.getWorkspace();
+    IWorkspaceRoot _root = _workspace.getRoot();
+    return _root;
   }
   
   private List<URL> getOutputFolders(final IJavaProject javaProject) {
