@@ -26,7 +26,6 @@ import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmIdentifiableElement;
 import org.eclipse.xtext.common.types.JvmTypeConstraint;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
-import org.eclipse.xtext.common.types.JvmTypeParameterDeclarator;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.JvmUpperBound;
 import org.eclipse.xtext.diagnostics.AbstractDiagnostic;
@@ -45,6 +44,7 @@ import org.eclipse.xtext.xbase.typesystem.conformance.ConformanceHint;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightMergedBoundTypeArgument;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.OwnedConverter;
+import org.eclipse.xtext.xbase.typesystem.references.ParameterizedTypeReference;
 import org.eclipse.xtext.xbase.typesystem.util.TypeParameterByConstraintSubstitutor;
 import org.eclipse.xtext.xbase.typesystem.util.TypeParameterSubstitutor;
 import org.eclipse.xtext.xbase.typesystem.util.VarianceInfo;
@@ -106,7 +106,7 @@ public abstract class AbstractPendingLinkingCandidate<Expression extends XExpres
 				LightweightTypeReference typeReference = ownedConverter.toLightweightReference(parameterType);
 				b.append(typeReference.getSimpleName());
 				if(i < parameters.size()-1)
-					b.append(",");
+					b.append(", ");
 			}
 			b.append(")");
 			return b.toString();
@@ -114,24 +114,22 @@ public abstract class AbstractPendingLinkingCandidate<Expression extends XExpres
 		return "";
 	}
 	
-	protected String getFeatureTypeParamtersAsString(boolean showBounds) {
-		if(getFeature() instanceof JvmTypeParameterDeclarator) {
-			List<JvmTypeParameter> typeParameters = ((JvmTypeParameterDeclarator)getFeature()).getTypeParameters();
-			if(!typeParameters.isEmpty()) {
-				StringBuilder b = new StringBuilder();
-				b.append("<");
-				for(int i=0; i<typeParameters.size(); ++i) {
-					JvmTypeParameter typeParameter = typeParameters.get(i);
-					if(showBounds)
-						b.append(getTypeParameterAsString(typeParameter));
-					else 
-						b.append(typeParameter.getSimpleName());
-					if(i < typeParameters.size()-1)
-						b.append(",");
-				}
-				b.append(">");
-				return b.toString();
+	protected String getFeatureTypeParametersAsString(boolean showBounds) {
+		List<JvmTypeParameter> typeParameters = getDeclaredTypeParameters();
+		if(!typeParameters.isEmpty()) {
+			StringBuilder b = new StringBuilder();
+			b.append("<");
+			for(int i=0; i<typeParameters.size(); ++i) {
+				JvmTypeParameter typeParameter = typeParameters.get(i);
+				if(showBounds)
+					b.append(getTypeParameterAsString(typeParameter));
+				else 
+					b.append(typeParameter.getSimpleName());
+				if(i < typeParameters.size()-1)
+					b.append(", ");
 			}
+			b.append(">");
+			return b.toString();
 		}
 		return "";
 	}
@@ -241,7 +239,7 @@ public abstract class AbstractPendingLinkingCandidate<Expression extends XExpres
 			String message = String.format("Invalid number of type arguments. The %1$s %2$s%3$s is not applicable for the type arguments %4$s",
 					getFeatureTypeName(), 
 					getFeature().getSimpleName(), 
-					getFeatureTypeParamtersAsString(true),
+					getFeatureTypeParametersAsString(true),
 					getTypeArgumentsAsString(getSyntacticTypeArguments()));
 			AbstractDiagnostic diagnostic = new EObjectDiagnosticImpl(
 					Severity.ERROR, 
@@ -458,13 +456,20 @@ public abstract class AbstractPendingLinkingCandidate<Expression extends XExpres
 		for(int i = 0; i < max; i++) {
 			LightweightTypeReference argument = typeArguments.get(i);
 			JvmTypeParameter declaration = typeParameters.get(i);
+			substitutor.enhanceMapping(singletonMap(declaration, new LightweightMergedBoundTypeArgument(argument, VarianceInfo.INVARIANT)));
+		}
+		for(int i = 0; i < max; i++) {
+			LightweightTypeReference argument = typeArguments.get(i);
+			JvmTypeParameter declaration = typeParameters.get(i);
 			if (argument.getType() != declaration) {
-				LightweightTypeReference substitute = substitutor.substitute(declaration);
-				if (!substitute.isAssignableFrom(argument)) {
-					failures++;
+				LightweightTypeReference reference = new ParameterizedTypeReference(argument.getOwner(), declaration);
+				for(LightweightTypeReference superType: reference.getSuperTypes()) {
+					LightweightTypeReference substitutedSuperType = substitutor.substitute(superType);
+					if (!substitutedSuperType.isAssignableFrom(argument)) {
+						failures++;
+					}
 				}
 			}
-			substitutor.enhanceMapping(singletonMap(declaration, new LightweightMergedBoundTypeArgument(argument, VarianceInfo.INVARIANT)));
 		}
 		if(failures != 0 && acceptor != null) {
 			String format = (max > 1)
@@ -472,10 +477,10 @@ public abstract class AbstractPendingLinkingCandidate<Expression extends XExpres
 					: "Bounds mismatch: The type argument %1$s is not a valid substitute for the bounded type parameter %2$s of the %3$s %4$s%5$s";
 			String message = String.format(format,
 					getTypeArgumentsAsString(typeArguments),
-					getFeatureTypeParamtersAsString(true),
+					getFeatureTypeParametersAsString(true),
 					getFeatureTypeName(),
 					getFeature().getSimpleName(),
-					getFeatureTypeParamtersAsString(false));
+					getFeatureParameterTypesAsString());
 			AbstractDiagnostic diagnostic = new EObjectDiagnosticImpl(
 					Severity.ERROR, 
 					IssueCodes.TYPE_BOUNDS_MISSMATCH, 
