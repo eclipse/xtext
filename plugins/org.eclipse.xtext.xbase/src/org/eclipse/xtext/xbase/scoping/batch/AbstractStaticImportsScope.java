@@ -79,15 +79,13 @@ public abstract class AbstractStaticImportsScope extends AbstractSessionBasedSco
 					for(JvmType type: bucket.getTypes()) {
 						if (type instanceof JvmDeclaredType) {
 							Iterable<JvmFeature> features = ((JvmDeclaredType) type).findAllFeaturesByName(simpleName);
-							Iterable<? extends JvmFeature> filtered = order==1 ? features : filter(features, JvmOperation.class);
-							for(JvmFeature feature: filtered) {
-								if (feature.isStatic()) {
+							for(JvmFeature feature: features) {
+								if (feature.isStatic() && (order == 1 || feature instanceof JvmOperation)) {
 									IIdentifiableElementDescription description = createDescription(name, feature, bucket);
 									if (description != null)
 										result.add(description);
 								}
 							}
-							
 						}
 					}
 				}
