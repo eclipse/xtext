@@ -7,6 +7,8 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.lib;
 
+import com.google.common.annotations.GwtCompatible;
+
 /**
  * An extension library for arrays, to be used with Xtend. It allows to use an array without converting it to a list
  * first.
@@ -14,6 +16,7 @@ package org.eclipse.xtext.xbase.lib;
  * @author Sven Efftinge - Initial contribution and API
  * @since 2.4
  */
+@GwtCompatible
 public class ArrayExtensions {
 
 	/**
