@@ -3105,7 +3105,7 @@ annotation Extract {}</pre>
 						</p>
 						<!-- subsection -->
 						<section id="active_annotations_register_globals" style="padding-top: 68px; margin-top: -68px;">
-						<h3>Phase 1: Register Globals (<a href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.4/org/eclipse/xtend/lib/macro/RegisterGlobalsParticipant.html"><abbr title="org.eclipse.xtend.lib.macro.RegisterGlobalsParticipant">RegisterGlobalsParticipant</abbr></a> <a href="https://github.com/eclipse/xtext/blob/v2.4.0/plugins/org.eclipse.xtend.lib/src/org/eclipse/xtend/lib/macro/RegisterGlobalsParticipant.java">(src)</a>)</h3>
+						<h3>Phase 1: Register Globals</h3>
 						<p>
 							The first phase in the lifecycle of the compiler is about indexing the types as globally available symbols. By implementing a <a href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.4/org/eclipse/xtend/lib/macro/RegisterGlobalsParticipant.html"><abbr title="org.eclipse.xtend.lib.macro.RegisterGlobalsParticipant">RegisterGlobalsParticipant</abbr></a> <a href="https://github.com/eclipse/xtext/blob/v2.4.0/plugins/org.eclipse.xtend.lib/src/org/eclipse/xtend/lib/macro/RegisterGlobalsParticipant.java">(src)</a>
 							you have the chance to create and register new Java types during this phase. It's important
@@ -3146,7 +3146,7 @@ class ExtractProcessor extends AbstractClassProcessor {
 						</section>
 						<!-- subsection -->
 						<section id="active_annotations_transformation_phase" style="padding-top: 68px; margin-top: -68px;">
-						<h3>Phase 2: Transformation (<a href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.4/org/eclipse/xtend/lib/macro/TransformationParticipant.html"><abbr title="org.eclipse.xtend.lib.macro.TransformationParticipant">TransformationParticipant</abbr></a> <a href="https://github.com/eclipse/xtext/blob/v2.4.0/plugins/org.eclipse.xtend.lib/src/org/eclipse/xtend/lib/macro/TransformationParticipant.java">(src)</a>)</h3>
+						<h3>Phase 2: Transformation</h3>
 						<p>
 							In the second phase developers can modify the compiled Java classes and Java code. Annotation processors that implement
 							<a href="http://download.eclipse.org/modeling/tmf/xtext/javadoc/2.4/org/eclipse/xtend/lib/macro/TransformationParticipant.html"><abbr title="org.eclipse.xtend.lib.macro.TransformationParticipant">TransformationParticipant</abbr></a> <a href="https://github.com/eclipse/xtext/blob/v2.4.0/plugins/org.eclipse.xtend.lib/src/org/eclipse/xtend/lib/macro/TransformationParticipant.java">(src)</a> participate in this compile step. Similar to the 
