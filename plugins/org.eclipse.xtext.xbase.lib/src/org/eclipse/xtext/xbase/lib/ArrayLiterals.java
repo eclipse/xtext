@@ -7,12 +7,15 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.lib;
 
+import com.google.common.annotations.GwtCompatible;
+
 /**
  * Factory methods for arrays.
  * 
  * @author Sven Efftinge - Initial contribution and API
  * @since 2.4
  */
+@GwtCompatible
 public class ArrayLiterals {
 
 	/**
