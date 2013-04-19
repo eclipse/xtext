@@ -304,6 +304,25 @@ ruleModel returns [EObject current=null]
 	    }
 
 )
+)
+    |(
+(
+		{ 
+	        newCompositeNode(grammarAccess.getModelAccess().getX13LongAlternativeParserRuleCall_12_0()); 
+	    }
+		lv_x13_12_0=ruleLongAlternative		{
+	        if ($current==null) {
+	            $current = createModelElementForParent(grammarAccess.getModelRule());
+	        }
+       		set(
+       			$current, 
+       			"x13",
+        		lv_x13_12_0, 
+        		"LongAlternative");
+	        afterParserOrEnumRuleCall();
+	    }
+
+)
 ))
 ;
 
@@ -1565,6 +1584,236 @@ ruleBooleanValues returns [EObject current=null]
 
 )
 )?)
+;
+
+
+
+
+
+// Entry rule entryRuleLongAlternative
+entryRuleLongAlternative returns [EObject current=null] 
+	:
+	{ newCompositeNode(grammarAccess.getLongAlternativeRule()); }
+	 iv_ruleLongAlternative=ruleLongAlternative 
+	 { $current=$iv_ruleLongAlternative.current; } 
+	 EOF 
+;
+
+// Rule LongAlternative
+ruleLongAlternative returns [EObject current=null] 
+    @init { enterRule(); 
+    }
+    @after { leaveRule(); }:
+(	otherlv_0='#13' 
+    {
+    	newLeafNode(otherlv_0, grammarAccess.getLongAlternativeAccess().getNumberSignDigitOneDigitThreeKeyword_0());
+    }
+(
+(
+		lv_foo_1_0=RULE_ID
+		{
+			newLeafNode(lv_foo_1_0, grammarAccess.getLongAlternativeAccess().getFooIDTerminalRuleCall_1_0()); 
+		}
+		{
+	        if ($current==null) {
+	            $current = createModelElement(grammarAccess.getLongAlternativeRule());
+	        }
+       		setWithLastConsumed(
+       			$current, 
+       			"foo",
+        		lv_foo_1_0, 
+        		"ID");
+	    }
+
+)
+)((	otherlv_2='kw1' 
+    {
+    	newLeafNode(otherlv_2, grammarAccess.getLongAlternativeAccess().getKw1Keyword_2_0_0());
+    }
+(
+(
+		lv_val1_3_0=RULE_ID
+		{
+			newLeafNode(lv_val1_3_0, grammarAccess.getLongAlternativeAccess().getVal1IDTerminalRuleCall_2_0_1_0()); 
+		}
+		{
+	        if ($current==null) {
+	            $current = createModelElement(grammarAccess.getLongAlternativeRule());
+	        }
+       		addWithLastConsumed(
+       			$current, 
+       			"val1",
+        		lv_val1_3_0, 
+        		"ID");
+	    }
+
+)
+)?)
+    |(	otherlv_4='kw2' 
+    {
+    	newLeafNode(otherlv_4, grammarAccess.getLongAlternativeAccess().getKw2Keyword_2_1_0());
+    }
+(
+(
+		lv_val2_5_0=RULE_ID
+		{
+			newLeafNode(lv_val2_5_0, grammarAccess.getLongAlternativeAccess().getVal2IDTerminalRuleCall_2_1_1_0()); 
+		}
+		{
+	        if ($current==null) {
+	            $current = createModelElement(grammarAccess.getLongAlternativeRule());
+	        }
+       		addWithLastConsumed(
+       			$current, 
+       			"val2",
+        		lv_val2_5_0, 
+        		"ID");
+	    }
+
+)
+)?)
+    |(	otherlv_6='kw3' 
+    {
+    	newLeafNode(otherlv_6, grammarAccess.getLongAlternativeAccess().getKw3Keyword_2_2_0());
+    }
+(
+(
+		lv_val3_7_0=RULE_ID
+		{
+			newLeafNode(lv_val3_7_0, grammarAccess.getLongAlternativeAccess().getVal3IDTerminalRuleCall_2_2_1_0()); 
+		}
+		{
+	        if ($current==null) {
+	            $current = createModelElement(grammarAccess.getLongAlternativeRule());
+	        }
+       		addWithLastConsumed(
+       			$current, 
+       			"val3",
+        		lv_val3_7_0, 
+        		"ID");
+	    }
+
+)
+)?)
+    |(	otherlv_8='kw4' 
+    {
+    	newLeafNode(otherlv_8, grammarAccess.getLongAlternativeAccess().getKw4Keyword_2_3_0());
+    }
+(
+(
+		lv_val4_9_0=RULE_ID
+		{
+			newLeafNode(lv_val4_9_0, grammarAccess.getLongAlternativeAccess().getVal4IDTerminalRuleCall_2_3_1_0()); 
+		}
+		{
+	        if ($current==null) {
+	            $current = createModelElement(grammarAccess.getLongAlternativeRule());
+	        }
+       		addWithLastConsumed(
+       			$current, 
+       			"val4",
+        		lv_val4_9_0, 
+        		"ID");
+	    }
+
+)
+)?)
+    |(	otherlv_10='kw5' 
+    {
+    	newLeafNode(otherlv_10, grammarAccess.getLongAlternativeAccess().getKw5Keyword_2_4_0());
+    }
+(
+(
+		lv_val5_11_0=RULE_ID
+		{
+			newLeafNode(lv_val5_11_0, grammarAccess.getLongAlternativeAccess().getVal5IDTerminalRuleCall_2_4_1_0()); 
+		}
+		{
+	        if ($current==null) {
+	            $current = createModelElement(grammarAccess.getLongAlternativeRule());
+	        }
+       		addWithLastConsumed(
+       			$current, 
+       			"val5",
+        		lv_val5_11_0, 
+        		"ID");
+	    }
+
+)
+)?)
+    |(	otherlv_12='kw6' 
+    {
+    	newLeafNode(otherlv_12, grammarAccess.getLongAlternativeAccess().getKw6Keyword_2_5_0());
+    }
+(
+(
+		lv_val6_13_0=RULE_ID
+		{
+			newLeafNode(lv_val6_13_0, grammarAccess.getLongAlternativeAccess().getVal6IDTerminalRuleCall_2_5_1_0()); 
+		}
+		{
+	        if ($current==null) {
+	            $current = createModelElement(grammarAccess.getLongAlternativeRule());
+	        }
+       		addWithLastConsumed(
+       			$current, 
+       			"val6",
+        		lv_val6_13_0, 
+        		"ID");
+	    }
+
+)
+)?)
+    |(	otherlv_14='kw7' 
+    {
+    	newLeafNode(otherlv_14, grammarAccess.getLongAlternativeAccess().getKw7Keyword_2_6_0());
+    }
+(
+(
+		lv_val7_15_0=RULE_ID
+		{
+			newLeafNode(lv_val7_15_0, grammarAccess.getLongAlternativeAccess().getVal7IDTerminalRuleCall_2_6_1_0()); 
+		}
+		{
+	        if ($current==null) {
+	            $current = createModelElement(grammarAccess.getLongAlternativeRule());
+	        }
+       		addWithLastConsumed(
+       			$current, 
+       			"val7",
+        		lv_val7_15_0, 
+        		"ID");
+	    }
+
+)
+)?)
+    |(	otherlv_16='kw8' 
+    {
+    	newLeafNode(otherlv_16, grammarAccess.getLongAlternativeAccess().getKw8Keyword_2_7_0());
+    }
+(
+(
+		lv_val8_17_0=RULE_ID
+		{
+			newLeafNode(lv_val8_17_0, grammarAccess.getLongAlternativeAccess().getVal8IDTerminalRuleCall_2_7_1_0()); 
+		}
+		{
+	        if ($current==null) {
+	            $current = createModelElement(grammarAccess.getLongAlternativeRule());
+	        }
+       		addWithLastConsumed(
+       			$current, 
+       			"val8",
+        		lv_val8_17_0, 
+        		"ID");
+	    }
+
+)
+)?))*	otherlv_18='!' 
+    {
+    	newLeafNode(otherlv_18, grammarAccess.getLongAlternativeAccess().getExclamationMarkKeyword_3());
+    }
+)
 ;
 
 

@@ -193,6 +193,13 @@ public class SyntacticsequencertestSwitch<T>
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
+      case SyntacticsequencertestPackage.LONG_ALTERNATIVE:
+      {
+        LongAlternative longAlternative = (LongAlternative)theEObject;
+        T result = caseLongAlternative(longAlternative);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
       case SyntacticsequencertestPackage.ADD0:
       {
         Add0 add0 = (Add0)theEObject;
@@ -473,6 +480,22 @@ public class SyntacticsequencertestSwitch<T>
    * @generated
    */
   public T caseBooleanValues(BooleanValues object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Long Alternative</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Long Alternative</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseLongAlternative(LongAlternative object)
   {
     return null;
   }

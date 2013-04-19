@@ -152,6 +152,15 @@ public interface SyntacticsequencertestFactory extends EFactory
   BooleanValues createBooleanValues();
 
   /**
+   * Returns a new object of class '<em>Long Alternative</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Long Alternative</em>'.
+   * @generated
+   */
+  LongAlternative createLongAlternative();
+
+  /**
    * Returns a new object of class '<em>Add0</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->

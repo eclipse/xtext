@@ -23,6 +23,7 @@ import org.eclipse.xtext.serializer.syntacticsequencertest.BooleanValues;
 import org.eclipse.xtext.serializer.syntacticsequencertest.Exp0;
 import org.eclipse.xtext.serializer.syntacticsequencertest.Exp1;
 import org.eclipse.xtext.serializer.syntacticsequencertest.Exp2;
+import org.eclipse.xtext.serializer.syntacticsequencertest.LongAlternative;
 import org.eclipse.xtext.serializer.syntacticsequencertest.MandatoryKeywords;
 import org.eclipse.xtext.serializer.syntacticsequencertest.MandatoryManyTransition;
 import org.eclipse.xtext.serializer.syntacticsequencertest.Model;
@@ -142,6 +143,13 @@ public class SyntacticsequencertestPackageImpl extends EPackageImpl implements S
    * @generated
    */
   private EClass booleanValuesEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass longAlternativeEClass = null;
 
   /**
    * <!-- begin-user-doc -->
@@ -386,6 +394,16 @@ public class SyntacticsequencertestPackageImpl extends EPackageImpl implements S
   public EReference getModel_X12()
   {
     return (EReference)modelEClass.getEStructuralFeatures().get(11);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getModel_X13()
+  {
+    return (EReference)modelEClass.getEStructuralFeatures().get(12);
   }
 
   /**
@@ -703,6 +721,106 @@ public class SyntacticsequencertestPackageImpl extends EPackageImpl implements S
    * <!-- end-user-doc -->
    * @generated
    */
+  public EClass getLongAlternative()
+  {
+    return longAlternativeEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getLongAlternative_Foo()
+  {
+    return (EAttribute)longAlternativeEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getLongAlternative_Val1()
+  {
+    return (EAttribute)longAlternativeEClass.getEStructuralFeatures().get(1);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getLongAlternative_Val2()
+  {
+    return (EAttribute)longAlternativeEClass.getEStructuralFeatures().get(2);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getLongAlternative_Val3()
+  {
+    return (EAttribute)longAlternativeEClass.getEStructuralFeatures().get(3);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getLongAlternative_Val4()
+  {
+    return (EAttribute)longAlternativeEClass.getEStructuralFeatures().get(4);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getLongAlternative_Val5()
+  {
+    return (EAttribute)longAlternativeEClass.getEStructuralFeatures().get(5);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getLongAlternative_Val6()
+  {
+    return (EAttribute)longAlternativeEClass.getEStructuralFeatures().get(6);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getLongAlternative_Val7()
+  {
+    return (EAttribute)longAlternativeEClass.getEStructuralFeatures().get(7);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getLongAlternative_Val8()
+  {
+    return (EAttribute)longAlternativeEClass.getEStructuralFeatures().get(8);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   public EClass getAdd0()
   {
     return add0EClass;
@@ -921,6 +1039,7 @@ public class SyntacticsequencertestPackageImpl extends EPackageImpl implements S
     createEReference(modelEClass, MODEL__X10);
     createEReference(modelEClass, MODEL__X11);
     createEReference(modelEClass, MODEL__X12);
+    createEReference(modelEClass, MODEL__X13);
 
     mandatoryKeywordsEClass = createEClass(MANDATORY_KEYWORDS);
     createEAttribute(mandatoryKeywordsEClass, MANDATORY_KEYWORDS__VAL1);
@@ -965,6 +1084,17 @@ public class SyntacticsequencertestPackageImpl extends EPackageImpl implements S
     createEAttribute(booleanValuesEClass, BOOLEAN_VALUES__VAL1);
     createEAttribute(booleanValuesEClass, BOOLEAN_VALUES__VAL2);
     createEAttribute(booleanValuesEClass, BOOLEAN_VALUES__VAL3);
+
+    longAlternativeEClass = createEClass(LONG_ALTERNATIVE);
+    createEAttribute(longAlternativeEClass, LONG_ALTERNATIVE__FOO);
+    createEAttribute(longAlternativeEClass, LONG_ALTERNATIVE__VAL1);
+    createEAttribute(longAlternativeEClass, LONG_ALTERNATIVE__VAL2);
+    createEAttribute(longAlternativeEClass, LONG_ALTERNATIVE__VAL3);
+    createEAttribute(longAlternativeEClass, LONG_ALTERNATIVE__VAL4);
+    createEAttribute(longAlternativeEClass, LONG_ALTERNATIVE__VAL5);
+    createEAttribute(longAlternativeEClass, LONG_ALTERNATIVE__VAL6);
+    createEAttribute(longAlternativeEClass, LONG_ALTERNATIVE__VAL7);
+    createEAttribute(longAlternativeEClass, LONG_ALTERNATIVE__VAL8);
 
     add0EClass = createEClass(ADD0);
     createEReference(add0EClass, ADD0__LEFT);
@@ -1046,6 +1176,7 @@ public class SyntacticsequencertestPackageImpl extends EPackageImpl implements S
     initEReference(getModel_X10(), this.getMandatoryManyTransition(), null, "x10", null, 0, 1, Model.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getModel_X11(), this.getAlternativeTransition(), null, "x11", null, 0, 1, Model.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getModel_X12(), this.getBooleanValues(), null, "x12", null, 0, 1, Model.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getModel_X13(), this.getLongAlternative(), null, "x13", null, 0, 1, Model.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(mandatoryKeywordsEClass, MandatoryKeywords.class, "MandatoryKeywords", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getMandatoryKeywords_Val1(), theEcorePackage.getEString(), "val1", null, 0, 1, MandatoryKeywords.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -1090,6 +1221,17 @@ public class SyntacticsequencertestPackageImpl extends EPackageImpl implements S
     initEAttribute(getBooleanValues_Val1(), theEcorePackage.getEBoolean(), "val1", null, 0, 1, BooleanValues.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEAttribute(getBooleanValues_Val2(), theEcorePackage.getEBoolean(), "val2", null, 0, 1, BooleanValues.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEAttribute(getBooleanValues_Val3(), theEcorePackage.getEBoolean(), "val3", null, 0, 1, BooleanValues.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(longAlternativeEClass, LongAlternative.class, "LongAlternative", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getLongAlternative_Foo(), theEcorePackage.getEString(), "foo", null, 0, 1, LongAlternative.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getLongAlternative_Val1(), theEcorePackage.getEString(), "val1", null, 0, -1, LongAlternative.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getLongAlternative_Val2(), theEcorePackage.getEString(), "val2", null, 0, -1, LongAlternative.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getLongAlternative_Val3(), theEcorePackage.getEString(), "val3", null, 0, -1, LongAlternative.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getLongAlternative_Val4(), theEcorePackage.getEString(), "val4", null, 0, -1, LongAlternative.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getLongAlternative_Val5(), theEcorePackage.getEString(), "val5", null, 0, -1, LongAlternative.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getLongAlternative_Val6(), theEcorePackage.getEString(), "val6", null, 0, -1, LongAlternative.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getLongAlternative_Val7(), theEcorePackage.getEString(), "val7", null, 0, -1, LongAlternative.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getLongAlternative_Val8(), theEcorePackage.getEString(), "val8", null, 0, -1, LongAlternative.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(add0EClass, Add0.class, "Add0", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getAdd0_Left(), this.getExp0(), null, "left", null, 0, 1, Add0.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

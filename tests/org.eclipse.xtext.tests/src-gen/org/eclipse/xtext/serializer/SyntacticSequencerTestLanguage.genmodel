@@ -22,6 +22,7 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference SyntacticSequencerTestLanguage.ecore#//Model/x10"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference SyntacticSequencerTestLanguage.ecore#//Model/x11"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference SyntacticSequencerTestLanguage.ecore#//Model/x12"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference SyntacticSequencerTestLanguage.ecore#//Model/x13"/>
     </genClasses>
     <genClasses ecoreClass="SyntacticSequencerTestLanguage.ecore#//MandatoryKeywords">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute SyntacticSequencerTestLanguage.ecore#//MandatoryKeywords/val1"/>
@@ -63,6 +64,17 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute SyntacticSequencerTestLanguage.ecore#//BooleanValues/val1"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute SyntacticSequencerTestLanguage.ecore#//BooleanValues/val2"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute SyntacticSequencerTestLanguage.ecore#//BooleanValues/val3"/>
+    </genClasses>
+    <genClasses ecoreClass="SyntacticSequencerTestLanguage.ecore#//LongAlternative">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute SyntacticSequencerTestLanguage.ecore#//LongAlternative/foo"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute SyntacticSequencerTestLanguage.ecore#//LongAlternative/val1"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute SyntacticSequencerTestLanguage.ecore#//LongAlternative/val2"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute SyntacticSequencerTestLanguage.ecore#//LongAlternative/val3"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute SyntacticSequencerTestLanguage.ecore#//LongAlternative/val4"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute SyntacticSequencerTestLanguage.ecore#//LongAlternative/val5"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute SyntacticSequencerTestLanguage.ecore#//LongAlternative/val6"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute SyntacticSequencerTestLanguage.ecore#//LongAlternative/val7"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute SyntacticSequencerTestLanguage.ecore#//LongAlternative/val8"/>
     </genClasses>
     <genClasses ecoreClass="SyntacticSequencerTestLanguage.ecore#//Add0">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference SyntacticSequencerTestLanguage.ecore#//Add0/left"/>
