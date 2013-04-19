@@ -16,6 +16,7 @@ var runtimeProject = "../${projectName}"
 
 Workflow {
 	bean = StandaloneSetup {
+		ignoreBrokenProjectFiles = true
 		platformUri = "${runtimeProject}/../.."
 		scanClassPath = true
 		uriMap = {
