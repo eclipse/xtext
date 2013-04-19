@@ -7,6 +7,12 @@
                 <message_argument value="2.4.0"/>
             </message_arguments>
         </filter>
+        <filter id="924844039">
+            <message_arguments>
+                <message_argument value="2.4.2"/>
+                <message_argument value="2.4.0"/>
+            </message_arguments>
+        </filter>
     </resource>
     <resource path="emf-gen/org/eclipse/xtext/common/types/JvmField.java" type="org.eclipse.xtext.common.types.JvmField">
         <filter comment="interface should ot be implemented by cleints other than Xtext" id="403804204">
@@ -33,9 +39,6 @@
                 <message_argument value="setVolatile(boolean)"/>
             </message_arguments>
         </filter>
-    </resource>
-    <resource path="emf-gen/org/eclipse/xtext/common/types/JvmGenericType.java">
-        <filter id="0"/>
     </resource>
     <resource path="emf-gen/org/eclipse/xtext/common/types/JvmGenericType.java" type="org.eclipse.xtext.common.types.JvmGenericType">
         <filter id="403804204">
