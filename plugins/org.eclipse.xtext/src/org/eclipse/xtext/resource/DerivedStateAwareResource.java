@@ -15,6 +15,7 @@ import org.eclipse.xtext.util.IResourceScopeCache;
 import org.eclipse.xtext.util.OnChangeEvictingCache;
 
 import com.google.inject.Inject;
+import com.google.inject.name.Named;
 
 /**
  * Adds a hook for late initialization to be used to create derived state.
@@ -26,6 +27,15 @@ public class DerivedStateAwareResource extends LazyLinkingResource {
 
 	@Inject(optional=true)
 	private IDerivedStateComputer derivedStateComputer;
+	
+	/**
+	 * @since 2.4
+	 */
+	public static final String CLEAR_CACHE_AFTER_INSTALL_DERIVED_STATE = "org.eclipse.xtext.resource.DerivedStateAwareResource.clearCacheAfterInstallDerivedState";
+	
+	@Inject(optional=true)
+	@Named("org.eclipse.xtext.resource.DerivedStateAwareResource.clearCacheAfterInstallDerivedState")
+	private boolean clearCacheAfterInstallDerivedState = true;
 	
 	public void setDerivedStateComputer(IDerivedStateComputer lateInitialization) {
 		this.derivedStateComputer = lateInitialization;
@@ -135,18 +145,20 @@ public class DerivedStateAwareResource extends LazyLinkingResource {
 		}
 	}
 
-	public void installDerivedState(boolean preIndexingPhase) {
+	public void installDerivedState(final boolean preIndexingPhase) {
 		if (!isLoaded)
 			throw new IllegalStateException("The resource must be loaded, before installDerivedState can be called.");
 		if (!fullyInitialized && !isInitializing) {
 			try {
 				isInitializing = true;
-				if (derivedStateComputer != null)
+				if (derivedStateComputer != null) {
 					derivedStateComputer.installDerivedState(this, preIndexingPhase);
+				}
 				fullyInitialized = true;
 			} finally {
 				isInitializing = false;
-				getCache().clear(this);
+				if (clearCacheAfterInstallDerivedState)
+					getCache().clear(this);
 			}
 		}
 	}

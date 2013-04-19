@@ -28,6 +28,7 @@ import org.eclipse.xtext.generator.IFilePostProcessor;
 import org.eclipse.xtext.generator.IOutputConfigurationProvider;
 import org.eclipse.xtext.linking.ILinkingDiagnosticMessageProvider;
 import org.eclipse.xtext.naming.IQualifiedNameProvider;
+import org.eclipse.xtext.resource.DerivedStateAwareResource;
 import org.eclipse.xtext.resource.IDefaultResourceDescriptionStrategy;
 import org.eclipse.xtext.resource.ILocationInFileProvider;
 import org.eclipse.xtext.scoping.IScopeProvider;
@@ -74,6 +75,10 @@ public class XtendRuntimeModule extends org.eclipse.xtend.core.AbstractXtendRunt
 			.to(XtendImportedNamespaceScopeProvider.class);
 	}
 
+	public void configureResourceCacheClear(Binder binder) {
+		binder.bindConstant().annotatedWith(Names.named(DerivedStateAwareResource.CLEAR_CACHE_AFTER_INSTALL_DERIVED_STATE)).to(false);
+	}
+	
 	@Override
 	public Class<? extends IQualifiedNameProvider> bindIQualifiedNameProvider() {
 		return XtendQualifiedNameProvider.class;
