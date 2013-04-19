@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <rm:rmap xmlns:bc="http://www.eclipse.org/buckminster/Common-1.0" xmlns:rm="http://www.eclipse.org/buckminster/RMap-1.0">
-	<rm:property key="xtext.p2.repository" value="${eclipse.download}/modeling/tmf/xtext/updates/composite/milestones" />
+	<rm:property key="xtext.p2.repository" value="${eclipse.download}/modeling/tmf/xtext/updates/composite/releases" />
 	
 	<rm:locator pattern="org.eclipse.xtend.standalone.maven" searchPathRef="local" />
 	<rm:locator pattern="^org\.eclipse\.(?:xtext|xtend|xpand|emf\.mwe|emf\.mwe2)(?:\..+)?$" searchPathRef="tmf" />

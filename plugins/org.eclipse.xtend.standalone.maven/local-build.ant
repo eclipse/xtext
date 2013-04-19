@@ -94,7 +94,7 @@
 	          -Dhudson.eventspy.port=51621
 	          -Dmaven.repo.local=/opt/users/hudsonbuild/workspace/Xtext-Maven-Deploy/.maven/repo
 	          -f org.eclipse.xtend/plugins/org.eclipse.xtend.standalone.maven/pom.xml -U                  
-	         - - - - - - - - - - - - - - - - - -->
+	         - - - - - - - - - - - - - - - - - 
 	<target name="run.maven.deploy">
 		<exec executable="mvn">
 			<arg value="deploy:deploy-file" />
@@ -106,11 +106,11 @@
 			<arg value="-Dfile=${file}" />
 			<arg line="-data ${build.root}/buckminster.workspace" />
 			<arg line="-configuration ${build.root}/configuration" />
-			<arg line="--displaystacktrace" />
-			<arg line="--loglevel INFO" />
+			<arg line="-/-displaystacktrace" />
+			<arg line="-/-loglevel INFO" />
 			<arg line="-S '${commands.file}'" />
 			<arg line="-vmargs -Xmx1g" />
 		</exec>
-	</target>
+	</target>-->
 
 </project>
