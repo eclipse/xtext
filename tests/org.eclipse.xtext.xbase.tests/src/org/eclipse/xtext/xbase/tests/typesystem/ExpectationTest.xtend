@@ -320,6 +320,23 @@ abstract class AbstractExpectationTest extends AbstractXbaseTestCase {
 		queriedAs('Iterable<String>')
 	}
 	
+	@Test
+	def void testBug379531_01() {
+		typeComputer.predicate = [ it instanceof XCastedExpression ]
+		"newArrayList('', '', null as String)".expects.types('Unbound[T]').finalizedAs('String')
+	}
+	
+	@Test
+	def void testBug379531_02() {
+		typeComputer.predicate = [ it instanceof XCastedExpression ]
+		"newArrayList('', '', null as CharSequence)".expects.types('Unbound[T]').finalizedAs('CharSequence')
+	}
+	
+	@Test
+	def void testBug379531_03() {
+		"newArrayList('', '', null)".expects.types('Unbound[T]').finalizedAs('String')
+	}
+	
 }
 
 /**
