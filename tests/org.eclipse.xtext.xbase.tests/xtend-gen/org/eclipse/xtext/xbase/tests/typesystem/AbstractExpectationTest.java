@@ -482,4 +482,39 @@ public abstract class AbstractExpectationTest extends AbstractXbaseTestCase {
     this.expressions.add(_implicitFirstArgument);
     this.queriedAs("Iterable<String>");
   }
+  
+  @Test
+  public void testBug379531_01() {
+    ExpectationTestingTypeComputer _typeComputer = this.getTypeComputer();
+    final Function1<XExpression,Boolean> _function = new Function1<XExpression,Boolean>() {
+        public Boolean apply(final XExpression it) {
+          return Boolean.valueOf((it instanceof XCastedExpression));
+        }
+      };
+    _typeComputer.setPredicate(_function);
+    AbstractExpectationTest _expects = this.expects("newArrayList(\'\', \'\', null as String)");
+    AbstractExpectationTest _types = _expects.types("Unbound[T]");
+    _types.finalizedAs("String");
+  }
+  
+  @Test
+  public void testBug379531_02() {
+    ExpectationTestingTypeComputer _typeComputer = this.getTypeComputer();
+    final Function1<XExpression,Boolean> _function = new Function1<XExpression,Boolean>() {
+        public Boolean apply(final XExpression it) {
+          return Boolean.valueOf((it instanceof XCastedExpression));
+        }
+      };
+    _typeComputer.setPredicate(_function);
+    AbstractExpectationTest _expects = this.expects("newArrayList(\'\', \'\', null as CharSequence)");
+    AbstractExpectationTest _types = _expects.types("Unbound[T]");
+    _types.finalizedAs("CharSequence");
+  }
+  
+  @Test
+  public void testBug379531_03() {
+    AbstractExpectationTest _expects = this.expects("newArrayList(\'\', \'\', null)");
+    AbstractExpectationTest _types = _expects.types("Unbound[T]");
+    _types.finalizedAs("String");
+  }
 }

@@ -1,14 +1,12 @@
 package org.eclipse.xtext.ui.util
 
+import java.util.ArrayList
+import java.util.List
 import org.eclipse.core.resources.IProject
 import org.eclipse.core.runtime.CoreException
+import org.eclipse.core.runtime.IProgressMonitor
 import org.eclipse.core.runtime.SubMonitor
 import org.eclipse.swt.widgets.Shell
-
-import static org.eclipse.xtext.ui.util.FeatureProjectFactory.*
-import java.util.List
-import java.util.ArrayList
-import org.eclipse.core.runtime.IProgressMonitor
 
 /**
  * Creates a simple feature project.<br>

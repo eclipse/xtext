@@ -63,7 +63,7 @@ public class ConstantExpressionsInterpreter {
       if (expression instanceof XNumberLiteral) {
         final XNumberLiteral _xNumberLiteral = (XNumberLiteral)expression;
         _matched=true;
-        Object _switchResult_1 = null;
+        Number _switchResult_1 = null;
         boolean _matched_1 = false;
         if (!_matched_1) {
           String _simpleName = expectedType==null?(String)null:expectedType.getSimpleName();
