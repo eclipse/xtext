@@ -7,6 +7,12 @@
                 <message_argument value="2.4.0"/>
             </message_arguments>
         </filter>
+        <filter id="923795461">
+            <message_arguments>
+                <message_argument value="2.4.2"/>
+                <message_argument value="2.4.0"/>
+            </message_arguments>
+        </filter>
         <filter comment="Inner dependency - ignore because self managed" id="927989779">
             <message_arguments>
                 <message_argument value="2.4.0"/>
@@ -19,12 +25,24 @@
                 <message_argument value="org.eclipse.xtext"/>
             </message_arguments>
         </filter>
+        <filter id="927989779">
+            <message_arguments>
+                <message_argument value="2.4.2"/>
+                <message_argument value="org.eclipse.xtext"/>
+            </message_arguments>
+        </filter>
     </resource>
     <resource path="META-INF/MANIFEST.MF" type="org.eclipse.xtext.ui.editor.preferences.ProjectAwarePreferenceStoreAccess">
         <filter id="305324134">
             <message_arguments>
                 <message_argument value="org.eclipse.xtext.ui.editor.preferences.ProjectAwarePreferenceStoreAccess"/>
                 <message_argument value="org.eclipse.xtext.ui_2.4.1"/>
+            </message_arguments>
+        </filter>
+        <filter id="305324134">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.ui.editor.preferences.ProjectAwarePreferenceStoreAccess"/>
+                <message_argument value="org.eclipse.xtext.ui_2.4.2"/>
             </message_arguments>
         </filter>
     </resource>
@@ -39,6 +57,12 @@
             <message_arguments>
                 <message_argument value="org.eclipse.xtext.ui.editor.preferences.ProjectAwareScopedPreferenceStore"/>
                 <message_argument value="org.eclipse.xtext.ui_2.4.1"/>
+            </message_arguments>
+        </filter>
+        <filter id="305324134">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.ui.editor.preferences.ProjectAwareScopedPreferenceStore"/>
+                <message_argument value="org.eclipse.xtext.ui_2.4.2"/>
             </message_arguments>
         </filter>
     </resource>

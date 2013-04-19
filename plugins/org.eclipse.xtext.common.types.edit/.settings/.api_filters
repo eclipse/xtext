@@ -7,6 +7,12 @@
                 <message_argument value="2.4.0"/>
             </message_arguments>
         </filter>
+        <filter id="924844039">
+            <message_arguments>
+                <message_argument value="2.4.2"/>
+                <message_argument value="2.4.0"/>
+            </message_arguments>
+        </filter>
     </resource>
     <resource path="emf-gen/org/eclipse/xtext/common/types/provider/TypesItemProviderAdapterFactory.java" type="org.eclipse.xtext.common.types.provider.TypesItemProviderAdapterFactory">
         <filter id="576720909">
