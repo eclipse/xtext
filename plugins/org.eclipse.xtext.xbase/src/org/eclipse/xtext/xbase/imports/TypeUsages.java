@@ -31,13 +31,13 @@ public class TypeUsages {
 	
 	private List<TypeUsage> unresolvedTypes = newArrayList();
 	
-	public void addTypeUsage(JvmDeclaredType type, String text, ITextRegion textRegion, JvmMember context) {
+	public void addTypeUsage(JvmDeclaredType type, String text, ITextRegion textRegion, JvmMember context, boolean staticAccess, boolean noDelimiter) {
 		simpleName2types.put(type.getSimpleName(), type);
-		types2usages.put(type, new TypeUsage(text, textRegion, context));
+		types2usages.put(type, new TypeUsage(text, textRegion, context, staticAccess, noDelimiter));
 	}
 	
-	public void addUnresolved(String text, ITextRegion textRegion, JvmMember context) {
-		unresolvedTypes.add(new TypeUsage(text, textRegion, context));
+	public void addUnresolved(String text, ITextRegion textRegion, JvmMember context, boolean staticAccess, boolean noDelimiter) {
+		unresolvedTypes.add(new TypeUsage(text, textRegion, context, staticAccess, noDelimiter));
 	}
 	
 	public Multimap<String, JvmDeclaredType> getSimpleName2Types() {

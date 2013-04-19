@@ -33,4 +33,8 @@ public class StaticQualifierValueConverter extends XbaseQualifiedNameValueConver
 	public String toString(String value) {
 		return super.toString(value) + getStringNamespaceDelimiter();
 	}
+	
+	public String toStringWithoutNamespaceDelimiter(String value) {
+		return super.toString(value);
+	}
 }

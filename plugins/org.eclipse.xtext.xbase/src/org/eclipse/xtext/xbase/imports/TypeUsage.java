@@ -21,10 +21,24 @@ public class TypeUsage {
 	
 	private JvmMember context;
 
-	public TypeUsage(String text, ITextRegion textRegion, JvmMember context) {
+	private boolean staticAccess;
+
+	private boolean noDelimiter;
+
+	public TypeUsage(String text, ITextRegion textRegion, JvmMember context, boolean staticAccess, boolean noDelimiter) {
 		this.text = text;
 		this.textRegion = textRegion;
 		this.context = context;
+		this.staticAccess = staticAccess;
+		this.noDelimiter = noDelimiter;
+	}
+	
+	public boolean isStaticAccess() {
+		return staticAccess;
+	}
+	
+	public boolean isTrailingDelimiterSuppressed() {
+		return noDelimiter;
 	}
 	
 	public String getText() {
