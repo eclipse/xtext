@@ -9,7 +9,6 @@ import org.eclipse.xtext.resource.IClasspathUriResolver;
 import org.eclipse.xtext.ui.tests.Activator;
 import org.eclipse.xtext.ui.util.JdtClasspathUriResolver;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 
 public class JdtClasspathUriResolverTest extends AbstractClasspathUriResolverTest {
@@ -76,10 +75,10 @@ public class JdtClasspathUriResolverTest extends AbstractClasspathUriResolverTes
 		assertResourceLoadable(classpathUri, normalizedUri, expectedUri);
 	}
 	
-	@Ignore("See bug 327491") @Test public void testClasspathUriForFileInRootInJarInWorkspaceWithFragment() throws Exception {
+	@Test public void testClasspathUriForFileInRootInJarInWorkspaceWithFragment() throws Exception {
 		_javaProject = JavaProjectSetupUtil.createJavaProject(TEST_PROJECT_NAME);
 		_project = _javaProject.getProject();
-		IFile jarFile = PluginUtil.copyFileToWorkspace(Activator.getInstance(), "/testfiles/" + JAR_FILE, _project, "/"
+		IFile jarFile = PluginUtil.copyFileToWorkspace(Activator.getInstance(), "/testfiles/" + JAR_FILE2, _project, "/"
 				+ JAR_FILE2);
 		JavaProjectSetupUtil.addJarToClasspath(_javaProject, jarFile);
 		URI classpathUri = URI.createURI("classpath:/" + MODEL_FILE + "#/");

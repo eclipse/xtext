@@ -21,6 +21,7 @@ import org.eclipse.jdt.core.IJavaElement;
 import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.jdt.core.IPackageFragment;
 import org.eclipse.jdt.core.IPackageFragmentRoot;
+import org.eclipse.jdt.core.JavaModelException;
 import org.eclipse.jdt.internal.core.ExternalPackageFragmentRoot;
 import org.eclipse.xtext.resource.ClasspathUriResolutionException;
 import org.eclipse.xtext.resource.ClasspathUriUtil;
@@ -68,7 +69,7 @@ public class JdtClasspathUriResolver implements IClasspathUriResolver {
                     }
                     else { // jar file or external class folder
 						if (packageFragmentRoot.isArchive()) { // jar file
-							Object[] nonJavaResources = packageFragment.getNonJavaResources();
+							Object[] nonJavaResources = getNonJavaResources(packageFragmentRoot, packageFragment);
 							for (Object nonJavaResource : nonJavaResources) {
 								IJarEntryResource jarEntryResource = (IJarEntryResource) nonJavaResource;
 								if (fullPath.equals(jarEntryResource.getFullPath().toString())) {
@@ -87,7 +88,7 @@ public class JdtClasspathUriResolver implements IClasspathUriResolver {
 								}
 							}
 						} else if (packageFragmentRoot.isExternal()) { // external class folder
-                            Object[] nonJavaResources = packageFragment.getNonJavaResources();
+							Object[] nonJavaResources = getNonJavaResources(packageFragmentRoot, packageFragment);
                             for (Object nonJavaResource : nonJavaResources) {
 								IJarEntryResource jarEntryResource = (IJarEntryResource) nonJavaResource;
 								if (fileName.equals(jarEntryResource.getName())) {
@@ -103,6 +104,17 @@ public class JdtClasspathUriResolver implements IClasspathUriResolver {
 			}
 		}
 		return classpathUri;
+	}
+
+	private Object[] getNonJavaResources(IPackageFragmentRoot packageFragmentRoot, IPackageFragment packageFragment)
+			throws JavaModelException {
+		Object[] nonJavaResources = null;
+		if (packageFragment.isDefaultPackage()) {
+			nonJavaResources = packageFragmentRoot.getNonJavaResources();
+		} else {
+			nonJavaResources = packageFragment.getNonJavaResources();
+		}
+		return nonJavaResources;
 	}
 
 	protected URI createArchiveURI(URI baseURI, String entryPath) {
