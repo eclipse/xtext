@@ -353,6 +353,22 @@ class ImportOrganizerTest extends AbstractXtendTestCase {
 			}
 		''')
 	}
+	
+	@Test def testInnerClasses_06() {
+		'''
+			class Resource {
+			  def test() {
+			    val x = org::eclipse::emf::ecore::resource::Resource$Factory$Registry::INSTANCE
+			  }
+			}
+		'''.assertIsOrganizedTo('''
+			class Resource {
+			  def test() {
+			    val x = org::eclipse::emf::ecore::resource::Resource$Factory$Registry::INSTANCE
+			  }
+			}
+		''', false)
+	}
 
 	@Test def testNameClashSameFileWins_1() {
 		'''
@@ -1379,6 +1395,49 @@ class ImportOrganizerTest extends AbstractXtendTestCase {
 			
 			class Foo {
 				var List<? extends File> x
+			}
+		''')
+	}
+	
+	// see https://bugs.eclipse.org/bugs/show_bug.cgi?id=406086
+	@Test def testEscapedKeyword_01() {
+		'''
+			package pack
+
+			class Bug406086 extends bug406086.^def.Bug406086 {}
+		'''.assertIsOrganizedTo('''
+			package pack
+
+			class Bug406086 extends bug406086.^def.Bug406086 {}
+		''')
+	}
+	
+	@Test def testEscapedKeyword_02() {
+		'''
+			package pack
+
+			class Bug extends bug406086.^def.Bug406086 {}
+		'''.assertIsOrganizedTo('''
+			package pack
+
+			import bug406086.^def.Bug406086
+			
+			class Bug extends Bug406086 {}
+		''')
+	}
+	
+	@Test def testEscapedKeyword_03() {
+		'''
+			package pack
+
+			class Bug406086 {
+				val x = bug406086::^def::Bug406086::FIELD
+			}
+		'''.assertIsOrganizedTo('''
+			package pack
+
+			class Bug406086 {
+				val x = bug406086::^def::Bug406086::FIELD
 			}
 		''')
 	}
