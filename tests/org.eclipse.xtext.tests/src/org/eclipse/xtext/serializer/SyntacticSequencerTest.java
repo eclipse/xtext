@@ -324,4 +324,34 @@ public class SyntacticSequencerTest extends AbstractXtextTests {
 	public void testBooleanDatatype() throws Exception {
 		testSequence("#12 foo", "#12 foomatched");
 	}
+	
+	@Test
+	public void testLongAlternative1() throws Exception {
+		testSequence("#13 x0 kw1 x1a kw1 x1b!");
+	}
+	
+	@Test
+	public void testLongAlternative2() throws Exception {
+		testSequence("#13 x0 kw8 x8a kw8 x8b!");
+	}
+	
+	@Test
+	public void testLongAlternative3() throws Exception {
+		testSequence("#13 x0 kw1 x1 kw2 x2 kw3 x3 kw4 x4 kw5 x5 kw6 x6 kw7 x7 kw8 x8!");
+	}
+	
+	@Test
+	public void testLongAlternative4() throws Exception {
+		testSequence("#13 x0 kw8 x8 kw7 x7 kw6 x6 kw5 x5 kw4 x4 kw3 x3 kw2 x2 kw1 x1!");
+	}
+	
+	@Test
+	public void testLongAlternative5() throws Exception {
+		testSequence("#13 x0 kw1 kw2 kw3 kw4 kw5 kw6 kw7 kw8!");
+	}
+	
+	@Test
+	public void testLongAlternative6() throws Exception {
+		testSequence("#13 x0 kw8 kw7 kw6 kw5 kw4 kw3 kw2 kw1!");
+	}
 }

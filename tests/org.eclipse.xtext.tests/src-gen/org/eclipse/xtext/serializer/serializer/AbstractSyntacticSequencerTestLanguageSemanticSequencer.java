@@ -21,6 +21,7 @@ import org.eclipse.xtext.serializer.syntacticsequencertest.AlternativeTransition
 import org.eclipse.xtext.serializer.syntacticsequencertest.BooleanAlternative;
 import org.eclipse.xtext.serializer.syntacticsequencertest.BooleanAlternativeLiteral;
 import org.eclipse.xtext.serializer.syntacticsequencertest.BooleanValues;
+import org.eclipse.xtext.serializer.syntacticsequencertest.LongAlternative;
 import org.eclipse.xtext.serializer.syntacticsequencertest.MandatoryKeywords;
 import org.eclipse.xtext.serializer.syntacticsequencertest.MandatoryManyTransition;
 import org.eclipse.xtext.serializer.syntacticsequencertest.Model;
@@ -91,6 +92,12 @@ public abstract class AbstractSyntacticSequencerTestLanguageSemanticSequencer ex
 			case SyntacticsequencertestPackage.BOOLEAN_VALUES:
 				if(context == grammarAccess.getBooleanValuesRule()) {
 					sequence_BooleanValues(context, (BooleanValues) semanticObject); 
+					return; 
+				}
+				else break;
+			case SyntacticsequencertestPackage.LONG_ALTERNATIVE:
+				if(context == grammarAccess.getLongAlternativeRule()) {
+					sequence_LongAlternative(context, (LongAlternative) semanticObject); 
 					return; 
 				}
 				else break;
@@ -289,6 +296,27 @@ public abstract class AbstractSyntacticSequencerTestLanguageSemanticSequencer ex
 	
 	/**
 	 * Constraint:
+	 *     (
+	 *         foo=ID 
+	 *         (
+	 *             val1+=ID? | 
+	 *             val2+=ID? | 
+	 *             val3+=ID? | 
+	 *             val4+=ID? | 
+	 *             val5+=ID? | 
+	 *             val6+=ID? | 
+	 *             val7+=ID? | 
+	 *             val8+=ID?
+	 *         )*
+	 *     )
+	 */
+	protected void sequence_LongAlternative(EObject context, LongAlternative semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Constraint:
 	 *     (val1=ID val2=ID val3=ID)
 	 */
 	protected void sequence_MandatoryKeywords(EObject context, MandatoryKeywords semanticObject) {
@@ -339,7 +367,8 @@ public abstract class AbstractSyntacticSequencerTestLanguageSemanticSequencer ex
 	 *         x9=OptionalManyTransition | 
 	 *         x10=MandatoryManyTransition | 
 	 *         x11=AlternativeTransition | 
-	 *         x12=BooleanValues
+	 *         x12=BooleanValues | 
+	 *         x13=LongAlternative
 	 *     )
 	 */
 	protected void sequence_Model(EObject context, Model semanticObject) {

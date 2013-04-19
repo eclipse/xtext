@@ -6,14 +6,13 @@ package org.eclipse.xtext.serializer.parseTreeConstruction;
 import org.eclipse.emf.ecore.*;
 import org.eclipse.xtext.*;
 import org.eclipse.xtext.parsetree.reconstr.IEObjectConsumer;
-import org.eclipse.xtext.parsetree.reconstr.impl.AbstractParseTreeConstructor;
 
 import org.eclipse.xtext.serializer.services.AssignmentFinderTestLanguageGrammarAccess;
 
 import com.google.inject.Inject;
 
 @SuppressWarnings("all")
-public class AssignmentFinderTestLanguageParsetreeConstructor extends AbstractParseTreeConstructor {
+public class AssignmentFinderTestLanguageParsetreeConstructor extends org.eclipse.xtext.parsetree.reconstr.impl.AbstractParseTreeConstructor {
 		
 	@Inject
 	private AssignmentFinderTestLanguageGrammarAccess grammarAccess;
