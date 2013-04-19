@@ -7,6 +7,12 @@
                 <message_argument value="2.4.0"/>
             </message_arguments>
         </filter>
+        <filter id="924844039">
+            <message_arguments>
+                <message_argument value="2.4.2"/>
+                <message_argument value="2.4.0"/>
+            </message_arguments>
+        </filter>
     </resource>
     <resource path="src-gen/org/eclipse/xtext/AbstractXtextRuntimeModule.java" type="org.eclipse.xtext.AbstractXtextRuntimeModule">
         <filter comment="Cannot @since to generated classes" id="1143996420">
