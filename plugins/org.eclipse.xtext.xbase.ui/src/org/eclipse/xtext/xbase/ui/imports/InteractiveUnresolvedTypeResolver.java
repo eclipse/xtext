@@ -34,6 +34,8 @@ import org.eclipse.xtext.common.types.util.TypeReferences;
 import org.eclipse.xtext.common.types.util.VisibilityService;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.util.IAcceptor;
+import org.eclipse.xtext.xbase.conversion.StaticQualifierValueConverter;
+import org.eclipse.xtext.xbase.conversion.XbaseQualifiedNameValueConverter;
 import org.eclipse.xtext.xbase.imports.IUnresolvedTypeResolver;
 import org.eclipse.xtext.xbase.imports.TypeUsage;
 import org.eclipse.xtext.xbase.imports.TypeUsages;
@@ -61,20 +63,38 @@ public class InteractiveUnresolvedTypeResolver implements IUnresolvedTypeResolve
 
 	@Inject
 	private TypeChooser typeChooser;
+	
+	@Inject
+	private XbaseQualifiedNameValueConverter nameValueConverter;
+	
+	@Inject
+	private StaticQualifierValueConverter staticQualifierConverter;
 
 	public void resolve(TypeUsages typeUsages, XtextResource resource) {
 		if(typeUsages.getUnresolvedTypeUsages().isEmpty() || resource == null)
 			return;
 		Multimap<String, TypeUsage> name2usage = LinkedHashMultimap.create();
 		for (TypeUsage unresolved : typeUsages.getUnresolvedTypeUsages()) {
-			name2usage.put(unresolved.getText(), unresolved);
+			String text = unresolved.getText();
+			if (unresolved.isStaticAccess()) {
+				text = staticQualifierConverter.toValue(text, null);
+			} else {
+				text = nameValueConverter.toValue(text, null);
+			}
+			name2usage.put(text, unresolved);
 		}
 		for (String name : name2usage.keySet()) {
 			Iterable<TypeUsage> usages = name2usage.get(name);
 			JvmDeclaredType resolvedType = resolve(name, usages, resource);
 			if (resolvedType != null) {
 				for (TypeUsage usage : usages)
-					typeUsages.addTypeUsage(resolvedType, usage.getText(), usage.getTextRegion(), usage.getContext());
+					typeUsages.addTypeUsage(
+							resolvedType,
+							name,
+							usage.getTextRegion(),
+							usage.getContext(),
+							usage.isStaticAccess(),
+							usage.isTrailingDelimiterSuppressed());
 			}
 		}
 	}
