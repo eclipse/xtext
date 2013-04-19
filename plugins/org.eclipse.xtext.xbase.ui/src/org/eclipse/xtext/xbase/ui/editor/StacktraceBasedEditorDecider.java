@@ -46,6 +46,8 @@ public class StacktraceBasedEditorDecider {
 				return Decision.FORCE_JAVA;
 			if (isFileSearch(element))
 				return Decision.FORCE_JAVA;
+			if (isOpenCompareEditor(element))
+				return Decision.FORCE_JAVA;
 		}
 		return Decision.FAVOR_XBASE;
 	}
@@ -194,5 +196,14 @@ public class StacktraceBasedEditorDecider {
 	protected boolean isFileSearch(StackTraceElement element) {
 		return "org.eclipse.search.internal.ui.text.FileSearchPage".equals(element.getClassName()) && "showMatch".equals(element.getMethodName());
 	}
+
+	/**
+	 * @noreference This method is not intended to be referenced by clients.
+	 * @nooverride This method is not intended to be re-implemented or extended by clients.
+	 */
+	protected boolean isOpenCompareEditor(StackTraceElement element) {
+		return "org.eclipse.compare.CompareUI".equals(element.getClassName()) && "openCompareEditor".equals(element.getMethodName());
+	}
+
 
 }
