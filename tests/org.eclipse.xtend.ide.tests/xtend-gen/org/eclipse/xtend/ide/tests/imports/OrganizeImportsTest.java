@@ -78,6 +78,60 @@ public class OrganizeImportsTest extends AbstractXtendUITestCase {
   }
   
   @Test
+  public void testUnresolvedNestedType_01() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("class Foo implements Map$Entry {");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("import java.util.Map");
+    _builder_1.newLine();
+    _builder_1.newLine();
+    _builder_1.append("class Foo implements Map$Entry {");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    this.assertIsOrganizedTo(_builder, _builder_1);
+  }
+  
+  @Test
+  public void testUnresolvedNestedType_02() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("class Foo {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def m() {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("Map$Entry::DoesNotMatter");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("import java.util.Map");
+    _builder_1.newLine();
+    _builder_1.newLine();
+    _builder_1.append("class Foo {");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("def m() {");
+    _builder_1.newLine();
+    _builder_1.append("\t\t");
+    _builder_1.append("Map$Entry::DoesNotMatter");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    this.assertIsOrganizedTo(_builder, _builder_1);
+  }
+  
+  @Test
   public void testUnresolvedConstructorCall() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("class Foo {");

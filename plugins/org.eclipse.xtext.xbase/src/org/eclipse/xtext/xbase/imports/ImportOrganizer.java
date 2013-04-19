@@ -16,6 +16,8 @@ import java.util.Map;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.util.ReplaceRegion;
+import org.eclipse.xtext.xbase.conversion.StaticQualifierValueConverter;
+import org.eclipse.xtext.xbase.conversion.XbaseQualifiedNameValueConverter;
 
 import com.google.inject.Inject;
 import com.google.inject.Provider;
@@ -39,6 +41,12 @@ public class ImportOrganizer {
 	
 	@Inject(optional=true)
 	private IUnresolvedTypeResolver unresolvedTypeResolver;
+	
+	@Inject
+	private StaticQualifierValueConverter staticQualifierConverter;
+	
+	@Inject
+	private XbaseQualifiedNameValueConverter nameValueConverter;
 	
 	public List<ReplaceRegion> getOrganizedImportChanges(XtextResource resource) {
 		TypeUsageCollector typeUsageCollector = typeUsageCollectorProvider.get();
@@ -69,8 +77,18 @@ public class ImportOrganizer {
 					if(importedType == null)
 						text = packageLocalName;
 				}
-				if(!equal(usage.getText(), text)) 
+				if (usage.isStaticAccess()) {
+					if (usage.isTrailingDelimiterSuppressed()) {
+						text = staticQualifierConverter.toStringWithoutNamespaceDelimiter(text);
+					} else {
+						text = staticQualifierConverter.toString(text);
+					}
+				} else {
+					text = nameValueConverter.toString(text);
+				}
+				if(!equal(usage.getText(), text)) {
 					replaceRegions.add(new ReplaceRegion(usage.getTextRegion(), text));
+				}
 			}
 		}
 		for(JvmDeclaredType staticImport: typeUsages.getStaticImports()) 

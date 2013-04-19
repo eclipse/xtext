@@ -40,6 +40,7 @@ import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.util.ITextRegion;
 import org.eclipse.xtext.util.Pair;
 import org.eclipse.xtext.util.ReplaceRegion;
+import org.eclipse.xtext.util.Strings;
 import org.eclipse.xtext.util.TextRegion;
 import org.eclipse.xtext.util.Tuples;
 import org.eclipse.xtext.xbase.XAbstractFeatureCall;
@@ -181,12 +182,14 @@ public class TypeUsageCollector {
 		if(element != null && documentationProvider != null && currentThisType != null) {
 			for(INode documentationNode: documentationProvider.getDocumentationNodes(element)) {
 				for(ReplaceRegion docTypeReference: javaDocTypeReferenceProvider.computeTypeRefRegions(documentationNode)) {
-					JvmTypeReference typeRef = typeReferences.getTypeForName(docTypeReference.getText(), currentThisType);
+					String docTypeText = docTypeReference.getText();
+					JvmTypeReference typeRef = typeReferences.getTypeForName(docTypeText, currentThisType);
 					ITextRegion textRegion = new TextRegion(docTypeReference.getOffset(), docTypeReference.getLength());
-					if(typeRef == null || !(typeRef.getType() instanceof JvmDeclaredType)) 
-						typeUsages.addUnresolved(docTypeReference.getText(), textRegion, currentThisType);
+					JvmType referencedType = typeRef != null ? typeRef.getType() : null;
+					if(referencedType instanceof JvmDeclaredType && !referencedType.eIsProxy()) 
+						typeUsages.addTypeUsage((JvmDeclaredType) referencedType, docTypeText, textRegion, currentThisType, false, false);
 					else
-						typeUsages.addTypeUsage((JvmDeclaredType) typeRef.getType(), docTypeReference.getText(), textRegion, currentThisType);
+						typeUsages.addUnresolved(docTypeText, textRegion, currentThisType, false, false);
 				}
 			}
 		}
@@ -207,7 +210,7 @@ public class TypeUsageCollector {
 		if (ref instanceof JvmParameterizedTypeReference) {
 			acceptPreferredType(ref, JVM_PARAMETERIZED_TYPE_REFERENCE__TYPE);
 		} else {
-			acceptType(ref.getType(), ref.getIdentifier(), locationInFileProvider.getSignificantTextRegion(ref));
+			acceptType(ref.getType(), ref.getIdentifier(), locationInFileProvider.getFullTextRegion(ref), false, false);
 		}
 	}
 	
@@ -238,22 +241,47 @@ public class TypeUsageCollector {
 		} else if (referencedThing instanceof JvmMember) {
 			referencedType = ((JvmMember) referencedThing).getDeclaringType();
 		} else if(referencedThing instanceof JvmType) {
+			if (referencedThing.eIsProxy()) {
+				List<INode> nodes = NodeModelUtils.findNodesForFeature(owner, reference);
+				if (nodes.size() == 1) {
+					String text = NodeModelUtils.getTokenText(nodes.get(0));
+					int dollar = text.indexOf('$');
+					if (dollar > 0) {
+						String preferredTypeText = text.substring(0, dollar);
+						return Tuples.create((JvmType) referencedThing, preferredTypeText);
+					}
+				}
+			}
 			return Tuples.create((JvmType)referencedThing, null);
 		}
+		return findPreferredType(owner, reference, referencedType);
+	}
+
+	private Pair<? extends JvmType, String> findPreferredType(EObject owner, EReference reference, JvmDeclaredType referencedType) {
 		if (referencedType != null) {
 			List<INode> nodes = NodeModelUtils.findNodesForFeature(owner, reference);
 			if (nodes.size() == 1) {
 				String text = NodeModelUtils.getTokenText(nodes.get(0));
-				int dollar = text.lastIndexOf('$');
-				String preferredTypeText = text; 
-				if (dollar >= 0) {
-					JvmDeclaredType declaredType = referencedType;
-					while(declaredType.getDeclaringType() != null && dollar >= 0) {
-						declaredType = declaredType.getDeclaringType();
-						preferredTypeText = text.substring(0, dollar);
-						dollar = text.lastIndexOf('$', dollar-1);
+				if (!referencedType.eIsProxy()) {
+					int dollar = text.lastIndexOf('$');
+					String preferredTypeText = text; 
+					if (dollar >= 0) {
+						JvmDeclaredType declaredType = referencedType;
+						while(declaredType.getDeclaringType() != null && dollar >= 0) {
+							declaredType = declaredType.getDeclaringType();
+							preferredTypeText = text.substring(0, dollar);
+							dollar = text.lastIndexOf('$', dollar-1);
+						}
+						return Tuples.create(declaredType, preferredTypeText);
 					}
-					return Tuples.create(declaredType, preferredTypeText);
+				} else {
+					int dollar = text.indexOf('$');
+					if (dollar > 0) {
+						String preferredTypeText = text.substring(0, dollar);
+						return Tuples.create(referencedType, preferredTypeText);
+					} else {
+						return Tuples.create(referencedType, text);
+					}
 				}
 			}
 		}
@@ -261,28 +289,33 @@ public class TypeUsageCollector {
 	}
 	
 	protected void acceptPreferredType(EObject owner, EReference referenceToTypeOrMember) {
-		ITextRegion refRegion = locationInFileProvider.getSignificantTextRegion(owner, referenceToTypeOrMember, 0);
+		ITextRegion refRegion = locationInFileProvider.getFullTextRegion(owner, referenceToTypeOrMember, 0);
 		IParseResult parseResult = resource.getParseResult();
 		if(parseResult != null) {
 			String refText = parseResult.getRootNode().getText().substring(
 					refRegion.getOffset(), refRegion.getOffset() + refRegion.getLength());
 			Pair<? extends JvmType, String> preferredType = findPreferredType(owner, referenceToTypeOrMember);
+			boolean noDelimiter = false;
+			boolean staticAccess = referenceToTypeOrMember == XbasePackage.Literals.XFEATURE_CALL__DECLARING_TYPE;
 			if (preferredType.getFirst() != null) {
 				if (preferredType.getSecond() != null) {
 					refRegion = new TextRegion(refRegion.getOffset(), refRegion.getLength() - refText.length() + preferredType.getSecond().length());
+					if (staticAccess && !Strings.equal(preferredType.getSecond(), refText)) {
+						noDelimiter = true;
+					}
 					refText = preferredType.getSecond();
 				}
 			}
-			acceptType(preferredType.getFirst(), refText, refRegion);
+			acceptType(preferredType.getFirst(), refText, refRegion, staticAccess, noDelimiter);
 		}
 	}
 	
-	protected void acceptType(JvmType type, String refText, ITextRegion refRegion) {
+	protected void acceptType(JvmType type, String refText, ITextRegion refRegion, boolean staticAccess, boolean noDelimiter) {
 		if(currentContext != null) {
 			if (type == null || type.eIsProxy()) {
-				typeUsages.addUnresolved(refText, refRegion, currentContext);
+				typeUsages.addUnresolved(refText, refRegion, currentContext, staticAccess, noDelimiter);
 			} else if (type instanceof JvmDeclaredType) {
-				typeUsages.addTypeUsage((JvmDeclaredType) type, refText, refRegion, currentContext);
+				typeUsages.addTypeUsage((JvmDeclaredType) type, refText, refRegion, currentContext, staticAccess, noDelimiter);
 			}
 		}
 	}

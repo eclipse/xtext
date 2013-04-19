@@ -33,6 +33,36 @@ class OrganizeImportsTest extends AbstractXtendUITestCase {
 			}
 		''')
 	}
+	
+	@Test def testUnresolvedNestedType_01() {
+		'''
+			class Foo implements Map$Entry {
+			}
+		'''.assertIsOrganizedTo('''
+			import java.util.Map
+			
+			class Foo implements Map$Entry {
+			}
+		''')
+	}
+	
+	@Test def testUnresolvedNestedType_02() {
+		'''
+			class Foo {
+				def m() {
+					Map$Entry::DoesNotMatter
+				}
+			}
+		'''.assertIsOrganizedTo('''
+			import java.util.Map
+			
+			class Foo {
+				def m() {
+					Map$Entry::DoesNotMatter
+				}
+			}
+		''')
+	}
 
 	@Test def testUnresolvedConstructorCall() {
 		'''

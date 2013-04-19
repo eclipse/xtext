@@ -682,6 +682,39 @@ public class ImportOrganizerTest extends AbstractXtendTestCase {
   }
   
   @Test
+  public void testInnerClasses_06() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("class Resource {");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append("def test() {");
+    _builder.newLine();
+    _builder.append("    ");
+    _builder.append("val x = org::eclipse::emf::ecore::resource::Resource$Factory$Registry::INSTANCE");
+    _builder.newLine();
+    _builder.append("  ");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("class Resource {");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("def test() {");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("val x = org::eclipse::emf::ecore::resource::Resource$Factory$Registry::INSTANCE");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    this.assertIsOrganizedTo(_builder, _builder_1, false);
+  }
+  
+  @Test
   public void testNameClashSameFileWins_1() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("package foo");
@@ -2644,6 +2677,70 @@ public class ImportOrganizerTest extends AbstractXtendTestCase {
     _builder_1.newLine();
     _builder_1.append("\t");
     _builder_1.append("var List<? extends File> x");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    this.assertIsOrganizedTo(_builder, _builder_1);
+  }
+  
+  @Test
+  public void testEscapedKeyword_01() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("package pack");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("class Bug406086 extends bug406086.^def.Bug406086 {}");
+    _builder.newLine();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("package pack");
+    _builder_1.newLine();
+    _builder_1.newLine();
+    _builder_1.append("class Bug406086 extends bug406086.^def.Bug406086 {}");
+    _builder_1.newLine();
+    this.assertIsOrganizedTo(_builder, _builder_1);
+  }
+  
+  @Test
+  public void testEscapedKeyword_02() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("package pack");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("class Bug extends bug406086.^def.Bug406086 {}");
+    _builder.newLine();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("package pack");
+    _builder_1.newLine();
+    _builder_1.newLine();
+    _builder_1.append("import bug406086.^def.Bug406086");
+    _builder_1.newLine();
+    _builder_1.newLine();
+    _builder_1.append("class Bug extends Bug406086 {}");
+    _builder_1.newLine();
+    this.assertIsOrganizedTo(_builder, _builder_1);
+  }
+  
+  @Test
+  public void testEscapedKeyword_03() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("package pack");
+    _builder.newLine();
+    _builder.newLine();
+    _builder.append("class Bug406086 {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("val x = bug406086::^def::Bug406086::FIELD");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("package pack");
+    _builder_1.newLine();
+    _builder_1.newLine();
+    _builder_1.append("class Bug406086 {");
+    _builder_1.newLine();
+    _builder_1.append("\t");
+    _builder_1.append("val x = bug406086::^def::Bug406086::FIELD");
     _builder_1.newLine();
     _builder_1.append("}");
     _builder_1.newLine();
