@@ -3,15 +3,6 @@
   <validationSets description="Juno Itemis Disro" label="Juno">
     <contributions href="../aggregator/xtext.b3aggrcon#/"/>
     <contributions href="../aggregator/common.b3aggrcon#/"/>
-    <contributions label="Juno dependent">
-      <repositories location="http://download.eclipse.org/tools/buckminster/updates-4.2/">
-        <features name="org.eclipse.buckminster.core.feature.feature.group"/>
-        <features name="org.eclipse.buckminster.cvs.feature.feature.group"/>
-        <features name="org.eclipse.buckminster.git.feature.feature.group"/>
-        <features name="org.eclipse.buckminster.maven.feature.feature.group"/>
-        <features name="org.eclipse.buckminster.pde.feature.feature.group"/>
-      </repositories>
-    </contributions>
     <validationRepositories location="http://download.eclipse.org/eclipse/updates/4.2/"/>
     <validationRepositories location="http://download.eclipse.org/releases/juno"/>
   </validationSets>
