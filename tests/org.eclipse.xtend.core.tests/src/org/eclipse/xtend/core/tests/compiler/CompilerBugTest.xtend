@@ -16,6 +16,60 @@ import org.junit.Ignore
 class CompilerBugTest extends AbstractXtendCompilerTest {
 	
 	@Test
+	def testOverloadBug405952_01() {
+		assertCompilesTo('''
+			import com.google.inject.Injector
+			class C {
+				def void m(Injector i) {
+				}
+				def <T extends Comparable<T>> void m(T t) {
+					m('')
+				}
+			}
+		''', '''
+			import com.google.inject.Injector;
+			
+			@SuppressWarnings("all")
+			public class C {
+			  public void m(final Injector i) {
+			  }
+			  
+			  public <T extends Comparable<T>> void m(final T t) {
+			    this.<String>m("");
+			  }
+			}
+		''')
+	}
+	
+	@Test
+	def testOverloadBug405952_02() {
+		assertCompilesTo('''
+			import com.google.inject.Injector
+			class C {
+				def <T extends Comparable<T>, X extends T> void m(T t, X x) {
+					m('', '')
+				}
+				def void m(Injector i, Class<? extends CharSequence> c) {
+					''.m('')
+				}
+			}
+		''', '''
+			import com.google.inject.Injector;
+			
+			@SuppressWarnings("all")
+			public class C {
+			  public <T extends Comparable<T>, X extends T> void m(final T t, final X x) {
+			    this.<String, String>m("", "");
+			  }
+			  
+			  public void m(final Injector i, final Class<? extends CharSequence> c) {
+			    this.<String, String>m("", "");
+			  }
+			}
+		''')
+	}
+	
+	@Test
 	def testTypeArgumentBug406197_01() {
 		assertCompilesTo('''
 			import java.util.Collection
