@@ -16,6 +16,147 @@ import org.junit.Ignore
 class CompilerBugTest extends AbstractXtendCompilerTest {
 	
 	@Test
+	def testBug405155_01() {
+		assertCompilesTo('''
+			class Test {
+				def <T, F extends Factory<T>> T build(Factory<T> f) {
+					return null;
+				}
+				def test() {
+					build(new StringFactory)
+				}
+			}
+			class Factory<T> {}
+			class StringFactory extends Factory<String>{}
+		''', '''
+			@SuppressWarnings("all")
+			public class Test {
+			  public <T extends Object, F extends Factory<T>> T build(final Factory<T> f) {
+			    return null;
+			  }
+			  
+			  public String test() {
+			    StringFactory _stringFactory = new StringFactory();
+			    String _build = this.<String, Factory<String>>build(_stringFactory);
+			    return _build;
+			  }
+			}
+		''')
+	}
+	
+	@Test
+	def testBug405155_02() {
+		assertCompilesTo('''
+			class Test {
+				def <T> T build(Factory<? extends T> factory) {
+				}
+				def test() {
+					build(new StringFactory)
+				}
+			}
+			class Factory<T> {}
+			class StringFactory extends Factory<String>{}
+		''', '''
+			@SuppressWarnings("all")
+			public class Test {
+			  public <T extends Object> T build(final Factory<? extends T> factory) {
+			    return null;
+			  }
+			  
+			  public String test() {
+			    StringFactory _stringFactory = new StringFactory();
+			    String _build = this.<String>build(_stringFactory);
+			    return _build;
+			  }
+			}
+		''')
+	}
+	
+	@Test
+	def testBug405155_03() {
+		assertCompilesTo('''
+			class Test {
+				def <T, F extends Factory<T>> T build(F xfactory) {
+				}
+				def test() {
+					build(new StringFactory)
+				}
+			}
+			class Factory<T> {}
+			class StringFactory extends Factory<String>{}
+		''', '''
+			@SuppressWarnings("all")
+			public class Test {
+			  public <T extends Object, F extends Factory<T>> T build(final F xfactory) {
+			    return null;
+			  }
+			  
+			  public String test() {
+			    StringFactory _stringFactory = new StringFactory();
+			    String _build = this.<String, StringFactory>build(_stringFactory);
+			    return _build;
+			  }
+			}
+		''')
+	}
+	
+	@Test
+	def testBug405155_04() {
+		assertCompilesTo('''
+			class Test {
+				def <T> T build(Factory<T> xfactory) {
+				}
+				def test() {
+					build(new StringFactory)
+				}
+			}
+			class Factory<T> {}
+			class StringFactory extends Factory<String>{}
+		''', '''
+			@SuppressWarnings("all")
+			public class Test {
+			  public <T extends Object> T build(final Factory<T> xfactory) {
+			    return null;
+			  }
+			  
+			  public String test() {
+			    StringFactory _stringFactory = new StringFactory();
+			    String _build = this.<String>build(_stringFactory);
+			    return _build;
+			  }
+			}
+		''')
+	}
+	
+	@Test
+	def testBug405155_05() {
+		assertCompilesTo('''
+			class Test {
+				def <T, F extends Factory<T>> T build(F xfactory) {
+				}
+				def test() {
+					<String, StringFactory>build(new StringFactory)
+				}
+			}
+			class Factory<T> {}
+			class StringFactory extends Factory<String>{}
+		''', '''
+			@SuppressWarnings("all")
+			public class Test {
+			  public <T extends Object, F extends Factory<T>> T build(final F xfactory) {
+			    return null;
+			  }
+			  
+			  public String test() {
+			    StringFactory _stringFactory = new StringFactory();
+			    String _build = this.<String, StringFactory>build(_stringFactory);
+			    return _build;
+			  }
+			}
+		''')
+	}
+	
+	@Test
 	def testOverloadBug405952_01() {
 		assertCompilesTo('''
 			import com.google.inject.Injector
