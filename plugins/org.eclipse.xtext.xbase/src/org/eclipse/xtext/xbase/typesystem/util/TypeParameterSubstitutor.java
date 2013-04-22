@@ -13,6 +13,7 @@ import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
+import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.AnyTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.ArrayTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.CompoundTypeReference;
@@ -20,6 +21,7 @@ import org.eclipse.xtext.xbase.typesystem.references.FunctionTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.ITypeReferenceOwner;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightMergedBoundTypeArgument;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
+import org.eclipse.xtext.xbase.typesystem.references.OwnedConverter;
 import org.eclipse.xtext.xbase.typesystem.references.ParameterizedTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.TypeReferenceVisitorWithParameterAndNonNullResult;
 import org.eclipse.xtext.xbase.typesystem.references.UnknownTypeReference;
@@ -189,6 +191,11 @@ public abstract class TypeParameterSubstitutor<Visiting> extends TypeReferenceVi
 		if (typeParameterMapping.isEmpty())
 			return original;
 		return original.accept(this, createVisiting());
+	}
+	
+	public LightweightTypeReference substitute(JvmTypeReference original) {
+		LightweightTypeReference lightweightReference = new OwnedConverter(getOwner()).toLightweightReference(original);
+		return substitute(lightweightReference);
 	}
 	
 	protected abstract Visiting createVisiting();
