@@ -27,6 +27,23 @@ import org.eclipse.xtext.xbase.typesystem.references.UnboundTypeReference;
 @NonNullByDefault
 public class DeferredTypeParameterHintCollector extends AbstractTypeReferencePairWalker {
 	
+	protected class UnboundTypeParameterHintCollector extends UnboundTypeReferenceTraverser {
+		@Override
+		protected void doVisitTypeReference(LightweightTypeReference reference, UnboundTypeReference declaration) {
+			if (declaration.internalIsResolved() || getOwner().isResolved(declaration.getHandle())) {
+				declaration.tryResolve();
+				outerVisit(declaration, reference, declaration, getExpectedVariance(), getActualVariance());
+			} else if (reference.isValidHint()) {
+				addHint(declaration, reference);
+			}
+		}
+
+		@Override
+		protected void doVisitCompoundTypeReference(CompoundTypeReference reference, UnboundTypeReference param) {
+			doVisitTypeReference(reference, param);
+		}
+	}
+
 	public DeferredTypeParameterHintCollector(ITypeReferenceOwner owner) {
 		super(owner);
 	}
@@ -42,21 +59,7 @@ public class DeferredTypeParameterHintCollector extends AbstractTypeReferencePai
 	
 	@Override
 	protected UnboundTypeReferenceTraverser createUnboundTypeReferenceTraverser() {
-		return new UnboundTypeReferenceTraverser() {
-			@Override
-			protected void doVisitTypeReference(LightweightTypeReference reference, UnboundTypeReference declaration) {
-				if (declaration.internalIsResolved() || getOwner().isResolved(declaration.getHandle())) {
-					declaration.tryResolve();
-					outerVisit(declaration, reference, declaration, getExpectedVariance(), getActualVariance());
-				} else if (reference.isValidHint()) {
-					addHint(declaration, reference);
-				}
-			}
-			@Override
-			protected void doVisitCompoundTypeReference(CompoundTypeReference reference, UnboundTypeReference param) {
-				doVisitTypeReference(reference, param);
-			}
-		};
+		return new UnboundTypeParameterHintCollector();
 	}
 	
 	@Override
