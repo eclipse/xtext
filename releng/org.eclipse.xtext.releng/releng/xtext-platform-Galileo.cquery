@@ -4,6 +4,6 @@
     <cq:property key="target.arch" value="*"/>
     <cq:property key="target.os" value="*"/>
     <cq:property key="target.ws" value="*"/>
-    <cq:advisorNode namePattern="org.eclipse.emf.ecore.editor" componentType="osgi.bundle" useTargetPlatform="false" versionOverride="[2.5.0,2.6.0)"/>
+    <cq:advisorNode namePattern="org.eclipse.emf.ecore.editor" componentType="osgi.bundle" useTargetPlatform="false" versionOverride="[2.9.0,3.0.0)"/>
     <cq:advisorNode namePattern="^" useTargetPlatform="false"/>
 </cq:componentQuery>

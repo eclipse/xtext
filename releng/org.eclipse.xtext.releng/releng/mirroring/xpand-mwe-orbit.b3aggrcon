@@ -26,4 +26,11 @@
     <bundles name="org.apache.commons.lang"/>
     <bundles name="org.apache.commons.lang.source"/>
   </repositories>
+   <repositories location="http://download.eclipse.org/modeling/emf/emf/updates/nightly">
+        <features name="org.eclipse.emf.feature.group"/>
+        <features name="org.eclipse.emf.source.feature.group"/>
+      </repositories>
+      <repositories location="http://download.eclipse.org/modeling/emf/compare/updates/milestones/2.1/">
+        <features name="org.eclipse.emf.compare.feature.group"/>
+      </repositories>
 </aggregator:Contribution>
