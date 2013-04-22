@@ -66,7 +66,8 @@ public class UriValidator {
 			return true;
 		if (!registry.getContentTypeToFactoryMap().isEmpty())
 			return true;
-		return registry.getExtensionToFactoryMap().containsKey(fullPath.getFileExtension());
+		String fileExtension = URI.encodeSegment(fullPath.getFileExtension(), true);
+		return registry.getExtensionToFactoryMap().containsKey(fileExtension);
 	}
 
 }
