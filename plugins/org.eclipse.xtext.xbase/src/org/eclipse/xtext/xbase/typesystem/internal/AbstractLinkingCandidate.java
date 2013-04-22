@@ -30,7 +30,9 @@ import org.eclipse.xtext.xbase.typesystem.computation.ITypeExpectation;
 import org.eclipse.xtext.xbase.typesystem.conformance.ConformanceHint;
 import org.eclipse.xtext.xbase.typesystem.references.AnyTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.ArrayTypeReference;
+import org.eclipse.xtext.xbase.typesystem.references.CompoundTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.ITypeReferenceOwner;
+import org.eclipse.xtext.xbase.typesystem.references.LightweightBoundTypeArgument;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightMergedBoundTypeArgument;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.OwnedConverter;
@@ -49,6 +51,7 @@ import org.eclipse.xtext.xbase.typesystem.util.UnboundTypeParameterPreservingSub
 import org.eclipse.xtext.xbase.typesystem.util.VarianceInfo;
 
 import com.google.common.collect.Lists;
+import com.google.common.collect.Sets;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -329,7 +332,40 @@ public abstract class AbstractLinkingCandidate<Expression extends XExpression> i
 	protected void deferredBindTypeArgument(ITypeExpectation expectation, LightweightTypeReference type) {
 		LightweightTypeReference expectedType = expectation.getExpectedType();
 		if (expectedType != null) { 
-			ExpectationTypeParameterHintCollector collector = new ExpectationTypeParameterHintCollector(state.getReferenceOwner());
+			ExpectationTypeParameterHintCollector collector = new ExpectationTypeParameterHintCollector(state.getReferenceOwner()) {
+				@Override
+				protected UnboundTypeReferenceTraverser createUnboundTypeReferenceTraverser() {
+					return new UnboundTypeReferenceTraverser() {
+						Set<Object> seenParameters = Sets.newHashSetWithExpectedSize(3);
+						@Override
+						protected void doVisitTypeReference(LightweightTypeReference reference, UnboundTypeReference declaration) {
+							if (declaration.internalIsResolved() || getOwner().isResolved(declaration.getHandle())) {
+								declaration.tryResolve();
+								outerVisit(declaration, reference, declaration, getExpectedVariance(), getActualVariance());
+							} else if (reference.isValidHint()) {
+								addHint(declaration, reference);
+								if (seenParameters.add(declaration.getHandle())) {
+									/*
+									 * If we add hints like CharIterable extends Iterable<Character> 
+									 * for a type parameter V in <T, V extends Iterable<T>>, we want to
+									 * add a hint for the type parameter T, too.
+									 */
+									List<LightweightBoundTypeArgument> hints = getState().getResolvedTypes().getHints(declaration.getHandle());
+									for(LightweightBoundTypeArgument hint: hints) {
+										if (hint.getSource() == BoundTypeArgumentSource.CONSTRAINT) {
+											outerVisit(hint.getTypeReference(), reference);
+										}
+									}
+								}
+							}
+						}
+						@Override
+						protected void doVisitCompoundTypeReference(CompoundTypeReference reference, UnboundTypeReference param) {
+							doVisitTypeReference(reference, param);
+						}
+					};
+				}
+			};
 			collector.processPairedReferences(expectedType, type);
 		}
 	}
