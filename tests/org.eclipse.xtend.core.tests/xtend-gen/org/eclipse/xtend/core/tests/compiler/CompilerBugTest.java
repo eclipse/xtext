@@ -18,6 +18,120 @@ import org.junit.Test;
 @SuppressWarnings("all")
 public class CompilerBugTest extends AbstractXtendCompilerTest {
   @Test
+  public void testOverloadBug405952_01() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("import com.google.inject.Injector");
+    _builder.newLine();
+    _builder.append("class C {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def void m(Injector i) {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def <T extends Comparable<T>> void m(T t) {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("m(\'\')");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("import com.google.inject.Injector;");
+    _builder_1.newLine();
+    _builder_1.newLine();
+    _builder_1.append("@SuppressWarnings(\"all\")");
+    _builder_1.newLine();
+    _builder_1.append("public class C {");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("public void m(final Injector i) {");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("public <T extends Comparable<T>> void m(final T t) {");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("this.<String>m(\"\");");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    this.assertCompilesTo(_builder, _builder_1);
+  }
+  
+  @Test
+  public void testOverloadBug405952_02() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("import com.google.inject.Injector");
+    _builder.newLine();
+    _builder.append("class C {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def <T extends Comparable<T>, X extends T> void m(T t, X x) {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("m(\'\', \'\')");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def void m(Injector i, Class<? extends CharSequence> c) {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("\'\'.m(\'\')");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("import com.google.inject.Injector;");
+    _builder_1.newLine();
+    _builder_1.newLine();
+    _builder_1.append("@SuppressWarnings(\"all\")");
+    _builder_1.newLine();
+    _builder_1.append("public class C {");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("public <T extends Comparable<T>, X extends T> void m(final T t, final X x) {");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("this.<String, String>m(\"\", \"\");");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("public void m(final Injector i, final Class<? extends CharSequence> c) {");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("this.<String, String>m(\"\", \"\");");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    this.assertCompilesTo(_builder, _builder_1);
+  }
+  
+  @Test
   public void testTypeArgumentBug406197_01() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("import java.util.Collection");

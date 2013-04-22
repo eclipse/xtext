@@ -15,6 +15,7 @@ import java.util.Set;
 import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.common.types.JvmType;
+import org.eclipse.xtext.common.types.JvmTypeConstraint;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.xbase.XExpression;
@@ -245,9 +246,16 @@ public class UnboundTypeReference extends LightweightTypeReference {
 	
 	public boolean isConformantToConstraints(LightweightTypeReference typeReference) {
 		TypeParameterByConstraintSubstitutor unboundSubstitutor = new TypeParameterByConstraintSubstitutor(
-				Collections.<JvmTypeParameter, LightweightMergedBoundTypeArgument>emptyMap(), getOwner(), true);
-		LightweightTypeReference substitute = unboundSubstitutor.substitute(new ParameterizedTypeReference(getOwner(), typeParameter));
-		return substitute.isAssignableFrom(typeReference);
+			Collections.singletonMap(typeParameter, new LightweightMergedBoundTypeArgument(typeReference, VarianceInfo.INVARIANT)), getOwner(), true);
+		for(JvmTypeConstraint constraint: typeParameter.getConstraints()) {
+			if (constraint.getTypeReference() != null) {
+				LightweightTypeReference substitutedUpperBound = unboundSubstitutor.substitute(constraint.getTypeReference());
+				if (!substitutedUpperBound.isAssignableFrom(typeReference)) {
+					return false;
+				}
+			}
+		}
+		return true;
 	}
 	
 	protected boolean canResolveTo(LightweightTypeReference reference, List<LightweightBoundTypeArgument> allHints) {
