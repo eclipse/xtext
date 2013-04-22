@@ -56,7 +56,7 @@ public abstract class CustomTypeParameterSubstitutor extends TypeParameterSubsti
 							return candidate.getTypeReference();
 						LightweightTypeReference mappedReference = getDeclaredUpperBound(typeParameter, visiting);
 						if (mappedReference == null) {
-							mappedReference = getObjectReference(typeParameter);
+							mappedReference = getObjectReference();
 						}
 						getTypeParameterMapping().put((JvmTypeParameter)type, new LightweightMergedBoundTypeArgument(mappedReference, VarianceInfo.INVARIANT));
 						return mappedReference;
@@ -122,18 +122,18 @@ public abstract class CustomTypeParameterSubstitutor extends TypeParameterSubsti
 	@Nullable
 	protected abstract LightweightTypeReference getUnmappedSubstitute(ParameterizedTypeReference reference, JvmTypeParameter type, ConstraintVisitingInfo visiting);
 	
-	protected LightweightTypeReference getDeclaredUpperBound(JvmTypeParameterDeclarator type, int parameterIndex, ConstraintVisitingInfo visiting) {
-		if (type.getTypeParameters().size() > parameterIndex) {
+	protected LightweightTypeReference getDeclaredUpperBound(@Nullable JvmTypeParameterDeclarator type, int parameterIndex, ConstraintVisitingInfo visiting) {
+		if (type != null && type.getTypeParameters().size() > parameterIndex) {
 			JvmTypeParameter typeParameter = type.getTypeParameters().get(parameterIndex);
 			LightweightTypeReference result = getDeclaredUpperBound(typeParameter, visiting);
 			if (result != null)
 				return result;
 		}
-		return getObjectReference(type);
+		return getObjectReference();
 	}
 
-	protected LightweightTypeReference getObjectReference(EObject context) {
-		JvmType objectType = getOwner().getServices().getTypeReferences().findDeclaredType(Object.class, context);
+	protected LightweightTypeReference getObjectReference() {
+		JvmType objectType = getOwner().getServices().getTypeReferences().findDeclaredType(Object.class, getOwner().getContextResourceSet());
 		return new ParameterizedTypeReference(getOwner(), objectType);
 	}
 
@@ -147,7 +147,7 @@ public abstract class CustomTypeParameterSubstitutor extends TypeParameterSubsti
 					return reference.accept(this, visiting);
 				}
 				WildcardTypeReference result = new WildcardTypeReference(getOwner());
-				result.addUpperBound(getObjectReference(typeParameter));
+				result.addUpperBound(getObjectReference());
 				return result;
 			}
 		}

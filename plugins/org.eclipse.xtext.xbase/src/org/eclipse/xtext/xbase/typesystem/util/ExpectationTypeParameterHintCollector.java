@@ -7,12 +7,14 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.typesystem.util;
 
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
 import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.xbase.typesystem.references.ITypeReferenceOwner;
+import org.eclipse.xtext.xbase.typesystem.references.LightweightBoundTypeArgument;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightMergedBoundTypeArgument;
 import org.eclipse.xtext.xbase.typesystem.references.ParameterizedTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.UnboundTypeReference;
@@ -28,7 +30,28 @@ public class ExpectationTypeParameterHintCollector extends DeferredTypeParameter
 		@Override
 		public void doVisitUnboundTypeReference(UnboundTypeReference reference,
 				ParameterizedTypeReference declaration) {
-			if (!reference.internalIsResolved() && declaration.isResolved() && !getOwner().isResolved(reference.getHandle()) && reference.canResolveTo(declaration)) {
+			boolean constraintSeen = false;
+			boolean constraintsMatch = true;
+			if (reference.getTypeParameter() != declaration.getType()) {
+				List<LightweightBoundTypeArgument> hints = reference.getAllHints();
+				for(LightweightBoundTypeArgument hint: hints) {
+					if (hint.getSource() == BoundTypeArgumentSource.CONSTRAINT) {
+						constraintSeen = true;
+						outerVisit(hint.getTypeReference(), declaration, hint.getSource(), hint.getDeclaredVariance(), hint.getActualVariance());
+						if (constraintsMatch && !hint.getTypeReference().isAssignableFrom(declaration)) {
+							constraintsMatch = false;
+						}
+					}
+				}
+			} else {
+				if (getOwner().getDeclaredTypeParameters().contains(reference.getTypeParameter())) {
+					reference.acceptHint(declaration, BoundTypeArgumentSource.RESOLVED, this, VarianceInfo.INVARIANT, VarianceInfo.INVARIANT);
+					return;
+				}
+			}
+			if (constraintSeen && constraintsMatch) {
+				reference.acceptHint(declaration, BoundTypeArgumentSource.RESOLVED, this, VarianceInfo.INVARIANT, VarianceInfo.INVARIANT);
+			} else if (!constraintSeen && !reference.internalIsResolved() && declaration.isResolved() && !getOwner().isResolved(reference.getHandle()) && reference.canResolveTo(declaration)) {
 				reference.acceptHint(declaration, BoundTypeArgumentSource.RESOLVED, this, VarianceInfo.INVARIANT, VarianceInfo.INVARIANT);
 			} else {
 				reference.tryResolve();
