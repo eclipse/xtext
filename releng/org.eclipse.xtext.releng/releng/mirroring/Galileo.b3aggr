@@ -12,9 +12,6 @@
       </repositories>
       <repositories location="http://download.eclipse.org/releases/galileo">
         <bundles name="org.eclipse.draw2d.feature.group"/>
-        <features name="org.eclipse.emf.feature.group"/>
-        <features name="org.eclipse.emf.source.feature.group"/>
-        <features name="org.eclipse.emf.compare.feature.group"/>
       </repositories>
       <repositories location="http://download.eclipse.org/eclipse/updates/3.8">
         <bundles name="org.eclipse.jdt.annotation"/>
