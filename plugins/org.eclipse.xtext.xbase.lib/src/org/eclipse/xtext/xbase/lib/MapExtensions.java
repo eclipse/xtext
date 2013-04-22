@@ -103,8 +103,9 @@ import com.google.common.collect.Maps;
 	 * @param transformation
 	 *            the transformation. May not be <code>null</code>.
 	 * @return a map with equal keys but transformed values. Never <code>null</code>.
+	 * @since 2.4
 	 */
-	public static <K, V1, V2> Map<K, V2> mapValues(Map<K, V1> original, Function1<? super V1, V2> transformation) {
+	public static <K, V1, V2> Map<K, V2> mapValues(Map<K, V1> original, Function1<? super V1, ? extends V2> transformation) {
 		return Maps.transformValues(original, new FunctionDelegate<V1, V2>(transformation));
 	}
 	
