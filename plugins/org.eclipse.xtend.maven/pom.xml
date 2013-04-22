@@ -1,12 +1,17 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>org.sonatype.oss</groupId>
+		<artifactId>oss-parent</artifactId>
+		<version>7</version>
+	</parent>
 	<groupId>org.eclipse.xtend</groupId>
 	<artifactId>org.eclipse.xtend.maven</artifactId>
 	<packaging>pom</packaging>
 	<version>2.4.1</version>
 	<modules>
-		<module>../org.eclipse.xtext.xbase.lib.maven</module>
+		<!-- <module>../org.eclipse.xtend.standalone.maven/output/org.eclipse.xtend.standalone-${project.version}.pom--></module>
 		<module>../org.eclipse.xtext.xbase.lib.gwt</module>
 		<module>../org.eclipse.xtend.lib.maven</module>
 		<module>../org.eclipse.xtend.lib.gwt</module>
@@ -15,23 +20,7 @@
 		<module>../org.eclipse.xtend.maven.android.archetype</module>
 	</modules>
 	<name>Xtend Parent/Container</name>
-    <repositories>
-        <repository>
-            <id>build-eclipse-org-xtend</id>
-            <name>${xtend.repo.name}</name>
-            <url>http://build.eclipse.org/common/xtend/maven/</url>
-        </repository>
-    </repositories>
-	<distributionManagement>
-		<repository>
-			<id>local-repository</id>
-			<url>${deployment.url}</url>
-		</repository>
-		<snapshotRepository>
-			<id>local-repository</id>
-			<url>${deployment.url}</url>
-		</snapshotRepository>
-	</distributionManagement>
+
 	<properties>
 		<deployment.folder>/shared/common/xtend/maven/</deployment.folder>
 		<deployment.url>file://${deployment.folder}</deployment.url>
@@ -40,39 +29,41 @@
 		<project.reporting.outputEncoding>ISO-8859-1</project.reporting.outputEncoding>
 	</properties>
 	<build>
-	<plugins>
-		<plugin>
-			<groupId>org.apache.maven.plugins</groupId>
-			<artifactId>maven-compiler-plugin</artifactId>
-			<version>3.0</version>
-			<configuration>
-				<compilerId>eclipse</compilerId>
-				<source>1.5</source>
-				<target>1.5</target>
-				<optimize>true</optimize>
-			</configuration>
-			<dependencies>
-				<dependency>
-					<groupId>org.codehaus.plexus</groupId>
-					<artifactId>plexus-compiler-eclipse</artifactId>
-					<version>2.2</version>
-				</dependency>
-			</dependencies>
-		</plugin>
-		<plugin>
-			<groupId>org.apache.maven.plugins</groupId>
-			<artifactId>maven-deploy-plugin</artifactId>
-			<version>2.6</version>
-		</plugin>
-		<plugin>
-			<groupId>org.codehaus.mojo</groupId>
-			<artifactId>exec-maven-plugin</artifactId>
-			<version>1.1.1</version>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.0</version>
+				<configuration>
+					<compilerId>eclipse</compilerId>
+					<source>1.5</source>
+					<target>1.5</target>
+					<optimize>true</optimize>
+				</configuration>
+				<dependencies>
+					<dependency>
+						<groupId>org.codehaus.plexus</groupId>
+						<artifactId>plexus-compiler-eclipse</artifactId>
+						<version>2.2</version>
+					</dependency>
+				</dependencies>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-deploy-plugin</artifactId>
+				<version>2.6</version>
+			</plugin>
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>exec-maven-plugin</artifactId>
+				<version>1.1.1</version>
 				<executions>
 					<execution>
 						<id>Reindex nexus</id>
 						<phase>deploy</phase>
-						<goals><goal>exec</goal></goals>
+						<goals>
+							<goal>exec</goal>
+						</goals>
 					</execution>
 				</executions>
 				<configuration>
@@ -94,30 +85,36 @@
 					</arguments>
 				</configuration>
 			</plugin>
-        <plugin>
-			<groupId>org.apache.maven.plugins</groupId>
-			<artifactId>maven-source-plugin</artifactId>
-			<executions>
-				<execution>
-					<id>attach-sources</id>
-					<goals>
-						<goal>jar</goal>
-					</goals>
-				</execution>
-			</executions>
-		</plugin>
-		<plugin>
-			<groupId>org.apache.maven.plugins</groupId>
-			<artifactId>maven-javadoc-plugin</artifactId>
-			<executions>
-				<execution>
-					<id>attach-javadocs</id>
-					<goals>
-						<goal>jar</goal>
-					</goals>
-				</execution>
-			</executions>
-        </plugin>
-    </plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-source-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>attach-sources</id>
+						<goals>
+							<goal>jar</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-javadoc-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>attach-javadocs</id>
+						<goals>
+							<goal>jar</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
 	</build>
+	<scm>
+		<connection>scm:git:git://git.eclipse.org/gitroot/tmf/org.eclipse.xtext.git</connection>
+		<developerConnection>scm:git:ssh://git.eclipse.org:29418/tmf/org.eclipse.xtext.git</developerConnection>
+		<url>http://git.eclipse.org/c/tmf/org.eclipse.xtext.git</url>
+		<tag>v2.4.1</tag>
+	</scm>
 </project>

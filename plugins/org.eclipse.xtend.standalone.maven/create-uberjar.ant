@@ -46,7 +46,7 @@
           target: clean                      
          - - - - - - - - - - - - - - - - - -->
 	<target name="clean">
-		<delete failonerror="false">
+		<delete failonerror="false" includeemptydirs="true">
 			<fileset dir="${output.folder}">
 				<include name="**" />
 			</fileset>
