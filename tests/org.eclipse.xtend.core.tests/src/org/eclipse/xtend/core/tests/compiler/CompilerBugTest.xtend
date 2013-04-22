@@ -16,6 +16,50 @@ import org.junit.Ignore
 class CompilerBugTest extends AbstractXtendCompilerTest {
 	
 	@Test
+	def testBug405900_01() {
+		assertCompilesTo('''
+			import java.util.List
+			class C {
+				def List<CharSequence> getChildren() {}
+				def m() {
+					val result = (null as StringBuilder) => [
+						children += it
+						it.append('')
+					]
+					result
+				}
+			}
+		''', '''
+			import java.util.List;
+			import org.eclipse.xtext.xbase.lib.ObjectExtensions;
+			import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
+			
+			@SuppressWarnings("all")
+			public class C {
+			  public List<CharSequence> getChildren() {
+			    return null;
+			  }
+			  
+			  public StringBuilder m() {
+			    StringBuilder _xblockexpression = null;
+			    {
+			      final Procedure1<StringBuilder> _function = new Procedure1<StringBuilder>() {
+			          public void apply(final StringBuilder it) {
+			            List<CharSequence> _children = C.this.getChildren();
+			            _children.add(it);
+			            it.append("");
+			          }
+			        };
+			      final StringBuilder result = ObjectExtensions.<StringBuilder>operator_doubleArrow(((StringBuilder) null), _function);
+			      _xblockexpression = (result);
+			    }
+			    return _xblockexpression;
+			  }
+			}
+		''')
+	}
+	
+	@Test
 	def testBug405155_01() {
 		assertCompilesTo('''
 			class Test {
