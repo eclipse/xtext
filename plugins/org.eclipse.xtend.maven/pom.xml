@@ -4,7 +4,7 @@
 	<groupId>org.eclipse.xtend</groupId>
 	<artifactId>org.eclipse.xtend.maven</artifactId>
 	<packaging>pom</packaging>
-	<version>2.4.1-SNAPSHOT</version>
+	<version>2.4.1</version>
 	<modules>
 		<module>../org.eclipse.xtext.xbase.lib.maven</module>
 		<module>../org.eclipse.xtext.xbase.lib.gwt</module>
