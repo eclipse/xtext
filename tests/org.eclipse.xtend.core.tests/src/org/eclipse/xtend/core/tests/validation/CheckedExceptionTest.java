@@ -174,8 +174,8 @@ public class CheckedExceptionTest extends AbstractXtendTestCase {
 	@Test public void testGenericFeatureCall_09() throws Exception {
 		XtendFile file = file(
 				"class C { " +
-						"  def <E extends Exception> E m() throws E {}" +
-						"  def java.io.FileNotFoundException n() { return m } " +
+				"  def <E extends Exception> E m() throws E {}" +
+				"  def java.io.FileNotFoundException n() { return m } " +
 				"}");
 		helper.assertError(file, XbasePackage.Literals.XFEATURE_CALL, UNHANDLED_EXCEPTION, "Unhandled exception type FileNotFoundException");
 	}
@@ -183,8 +183,8 @@ public class CheckedExceptionTest extends AbstractXtendTestCase {
 	@Test public void testGenericFeatureCall_10() throws Exception {
 		XtendFile file = file(
 				"class C { " +
-						"  def <E extends Exception> E m() throws E {}" +
-						"  def java.io.FileNotFoundException n() { m } " +
+				"  def <E extends Exception> E m() throws E {}" +
+				"  def java.io.FileNotFoundException n() { m } " +
 				"}");
 		helper.assertError(file, XbasePackage.Literals.XFEATURE_CALL, UNHANDLED_EXCEPTION, "Unhandled exception type FileNotFoundException");
 	}

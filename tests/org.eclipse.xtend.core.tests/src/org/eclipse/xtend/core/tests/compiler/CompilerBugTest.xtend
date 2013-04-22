@@ -16,6 +16,270 @@ import org.junit.Ignore
 class CompilerBugTest extends AbstractXtendCompilerTest {
 	
 	@Test
+	def testTypeArgumentBug406197_01() {
+		assertCompilesTo('''
+			import java.util.Collection
+			class C {
+				def m() {
+					val Object o = nullAsCollection(typeof(String))
+					o.toString
+				}
+				def <Type, CollectionType extends Collection<Type>> CollectionType nullAsCollection(Class<Type> clazz) { null }
+			}
+		''', '''
+			import java.util.Collection;
+			
+			@SuppressWarnings("all")
+			public class C {
+			  public String m() {
+			    String _xblockexpression = null;
+			    {
+			      final Object o = this.<String, Collection<String>>nullAsCollection(String.class);
+			      String _string = o.toString();
+			      _xblockexpression = (_string);
+			    }
+			    return _xblockexpression;
+			  }
+			  
+			  public <Type extends Object, CollectionType extends Collection<Type>> CollectionType nullAsCollection(final Class<Type> clazz) {
+			    return null;
+			  }
+			}
+		''')
+	}
+	
+	@Test
+	def testTypeArgumentBug406197_02() {
+		assertCompilesTo('''
+			import java.util.Collection
+			class C {
+				def m() {
+					val Iterable<String> i = nullAsCollection(typeof(String))
+					i.toString
+				}
+				def <Type, CollectionType extends Collection<Type>> CollectionType nullAsCollection(Class<Type> clazz) { null }
+			}
+		''', '''
+			import java.util.Collection;
+			
+			@SuppressWarnings("all")
+			public class C {
+			  public String m() {
+			    String _xblockexpression = null;
+			    {
+			      final Iterable<String> i = this.<String, Collection<String>>nullAsCollection(String.class);
+			      String _string = i.toString();
+			      _xblockexpression = (_string);
+			    }
+			    return _xblockexpression;
+			  }
+			  
+			  public <Type extends Object, CollectionType extends Collection<Type>> CollectionType nullAsCollection(final Class<Type> clazz) {
+			    return null;
+			  }
+			}
+		''')
+	}
+	
+	@Test
+	def testTypeArgumentBug406197_03() {
+		assertCompilesTo('''
+			import java.util.Collection
+			class C {
+				def m() {
+					val Collection<? extends String> c = nullAsCollection(typeof(String))
+					c.toString
+				}
+				def <Type, CollectionType extends Collection<Type>> CollectionType nullAsCollection(Class<Type> clazz) { null }
+			}
+		''', '''
+			import java.util.Collection;
+			
+			@SuppressWarnings("all")
+			public class C {
+			  public String m() {
+			    String _xblockexpression = null;
+			    {
+			      final Collection<? extends String> c = this.<String, Collection<String>>nullAsCollection(String.class);
+			      String _string = c.toString();
+			      _xblockexpression = (_string);
+			    }
+			    return _xblockexpression;
+			  }
+			  
+			  public <Type extends Object, CollectionType extends Collection<Type>> CollectionType nullAsCollection(final Class<Type> clazz) {
+			    return null;
+			  }
+			}
+		''')
+	}
+	
+	@Test
+	def testTypeArgumentBug406197_04() {
+		assertCompilesTo('''
+			import java.util.Collection
+			class C {
+				def m() {
+					val Collection<? super String> c = nullAsCollection(typeof(String))
+					c.toString
+				}
+				def <Type, CollectionType extends Collection<Type>> CollectionType nullAsCollection(Class<Type> clazz) { null }
+			}
+		''', '''
+			import java.util.Collection;
+			
+			@SuppressWarnings("all")
+			public class C {
+			  public String m() {
+			    String _xblockexpression = null;
+			    {
+			      final Collection<? super String> c = this.<String, Collection<String>>nullAsCollection(String.class);
+			      String _string = c.toString();
+			      _xblockexpression = (_string);
+			    }
+			    return _xblockexpression;
+			  }
+			  
+			  public <Type extends Object, CollectionType extends Collection<Type>> CollectionType nullAsCollection(final Class<Type> clazz) {
+			    return null;
+			  }
+			}
+		''')
+	}
+	
+	@Test
+	def testTypeArgumentBug406197_05() {
+		assertCompilesTo('''
+			import java.util.Collection
+			class C {
+				def <T> m(Class<T> c) {
+					val Object o = nullAsCollection(c)
+					o.toString
+				}
+				def <Type, CollectionType extends Collection<Type>> CollectionType nullAsCollection(Class<Type> clazz) { null }
+			}
+		''', '''
+			import java.util.Collection;
+			
+			@SuppressWarnings("all")
+			public class C {
+			  public <T extends Object> String m(final Class<T> c) {
+			    String _xblockexpression = null;
+			    {
+			      final Object o = this.<T, Collection<T>>nullAsCollection(c);
+			      String _string = o.toString();
+			      _xblockexpression = (_string);
+			    }
+			    return _xblockexpression;
+			  }
+			  
+			  public <Type extends Object, CollectionType extends Collection<Type>> CollectionType nullAsCollection(final Class<Type> clazz) {
+			    return null;
+			  }
+			}
+		''')
+	}
+	
+	@Test
+	def testTypeArgumentBug406197_06() {
+		assertCompilesTo('''
+			import java.util.Collection
+			class C {
+				def <T> m(Class<T> c) {
+					val Iterable<T> i = nullAsCollection(c)
+					i.toString
+				}
+				def <Type, CollectionType extends Collection<Type>> CollectionType nullAsCollection(Class<Type> clazz) { null }
+			}
+		''', '''
+			import java.util.Collection;
+			
+			@SuppressWarnings("all")
+			public class C {
+			  public <T extends Object> String m(final Class<T> c) {
+			    String _xblockexpression = null;
+			    {
+			      final Iterable<T> i = this.<T, Collection<T>>nullAsCollection(c);
+			      String _string = i.toString();
+			      _xblockexpression = (_string);
+			    }
+			    return _xblockexpression;
+			  }
+			  
+			  public <Type extends Object, CollectionType extends Collection<Type>> CollectionType nullAsCollection(final Class<Type> clazz) {
+			    return null;
+			  }
+			}
+		''')
+	}
+	
+	@Test
+	def testTypeArgumentBug406197_07() {
+		assertCompilesTo('''
+			import java.util.Collection
+			class C {
+				def <T> m(Class<T> c) {
+					val Iterable<? extends T> i = nullAsCollection(c)
+					i.toString
+				}
+				def <Type, CollectionType extends Collection<Type>> CollectionType nullAsCollection(Class<Type> clazz) { null }
+			}
+		''', '''
+			import java.util.Collection;
+			
+			@SuppressWarnings("all")
+			public class C {
+			  public <T extends Object> String m(final Class<T> c) {
+			    String _xblockexpression = null;
+			    {
+			      final Iterable<? extends T> i = this.<T, Collection<T>>nullAsCollection(c);
+			      String _string = i.toString();
+			      _xblockexpression = (_string);
+			    }
+			    return _xblockexpression;
+			  }
+			  
+			  public <Type extends Object, CollectionType extends Collection<Type>> CollectionType nullAsCollection(final Class<Type> clazz) {
+			    return null;
+			  }
+			}
+		''')
+	}
+	
+	@Test
+	def testTypeArgumentBug406197_08() {
+		assertCompilesTo('''
+			import java.util.Collection
+			class C {
+				def <T> m(Class<T> c) {
+					val Iterable<? super T> i = nullAsCollection(c)
+					i.toString
+				}
+				def <Type, CollectionType extends Collection<Type>> CollectionType nullAsCollection(Class<Type> clazz) { null }
+			}
+		''', '''
+			import java.util.Collection;
+			
+			@SuppressWarnings("all")
+			public class C {
+			  public <T extends Object> String m(final Class<T> c) {
+			    String _xblockexpression = null;
+			    {
+			      final Iterable<? super T> i = this.<T, Collection<T>>nullAsCollection(c);
+			      String _string = i.toString();
+			      _xblockexpression = (_string);
+			    }
+			    return _xblockexpression;
+			  }
+			  
+			  public <Type extends Object, CollectionType extends Collection<Type>> CollectionType nullAsCollection(final Class<Type> clazz) {
+			    return null;
+			  }
+			}
+		''')
+	}
+	
+	@Test
 	def testArraySetBug405763() {
 		assertCompilesTo('''
 			class C {

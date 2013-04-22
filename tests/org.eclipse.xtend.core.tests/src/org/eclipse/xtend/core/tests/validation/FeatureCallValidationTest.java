@@ -580,6 +580,48 @@ public class FeatureCallValidationTest extends AbstractXtendTestCase {
 				"for the bounded type parameter <T extends Comparable<T>> of the method m2(T)");
 	}
 	
+	@Test public void testFeatureCallTypeBounds_13() throws Exception {
+		XtendFile file = file(
+				"class C {" +
+				"	def <T extends Number> void a(Iterable<T> iter) {\n" + 
+				"		iter.b\n" + 
+				"	}\n" + 
+				"	def <T extends CharSequence> void b(Iterable<T> iter) {\n" + 
+				"	}\n" +
+				"}\n");
+		helper.assertError(file, XbasePackage.Literals.XMEMBER_FEATURE_CALL,
+				org.eclipse.xtext.xbase.validation.IssueCodes.TYPE_BOUNDS_MISSMATCH, 
+				"Bounds mismatch: The type argument <T> is not a valid substitute " +
+				"for the bounded type parameter <T extends CharSequence> of the method b(Iterable<T>)");
+	}
+	
+	@Test public void testFeatureCallTypeBounds_14() throws Exception {
+		XtendFile file = file(
+				"class C {" +
+				"	def <T extends Number> void a(Iterable<T> iter) {\n" + 
+				"	}\n" + 
+				"	def <T extends CharSequence> void b(Iterable<T> iter) {\n" + 
+				"		iter.a\n" + 
+				"	}\n" +
+				"}\n");
+		helper.assertError(file, XbasePackage.Literals.XMEMBER_FEATURE_CALL,
+				org.eclipse.xtext.xbase.validation.IssueCodes.TYPE_BOUNDS_MISSMATCH, 
+				"Bounds mismatch: The type argument <T> is not a valid substitute " +
+				"for the bounded type parameter <T extends Number> of the method a(Iterable<T>)");
+	}
+	
+	@Test public void testFeatureCallTypeBounds_15() throws Exception {
+		XtendFile file = file(
+				"class C {" +
+				"	def <T extends Number> void a(Iterable<T> iter) {\n" + 
+				"	}\n" + 
+				"	def <T extends Integer> void b(Iterable<T> iter) {\n" + 
+				"		iter.a\n" + 
+				"	}\n" +
+				"}\n");
+		helper.assertNoErrors(file);
+	}
+	
 	@Test public void testConstructorCallTypeBounds_01() throws Exception {
 		XtendFile file = file(
 				"class C<T extends Comparable<T>> {" +
