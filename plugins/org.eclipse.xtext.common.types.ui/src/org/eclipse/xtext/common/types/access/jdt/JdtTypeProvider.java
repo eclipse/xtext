@@ -76,6 +76,17 @@ public class JdtTypeProvider extends AbstractJvmTypeProvider implements IJdtType
 	
 	@Override
 	public JvmType findTypeByName(String name) {
+		String signature = getSignature(name);
+		URI resourceURI = typeUriHelper.createResourceURI(signature);
+		String resourcePath = resourceURI.path();
+		if (resourcePath.startsWith(URIHelperConstants.PRIMITIVES)) {
+			return findPrimitiveType(signature, resourceURI);
+		} else {
+			return findObjectType(signature, resourceURI);
+		}
+	}
+	
+	private String getSignature(String name) {
 		if (Strings.isEmpty(name))
 			throw new IllegalArgumentException("null");
 		String signature = null;
@@ -84,55 +95,107 @@ public class JdtTypeProvider extends AbstractJvmTypeProvider implements IJdtType
 		} catch (IllegalArgumentException e) {
 			return null;
 		}
-		URI resourceURI = typeUriHelper.createResourceURI(signature);
-		String resourcePath = resourceURI.path();
-		if (resourcePath.startsWith(URIHelperConstants.PRIMITIVES)) {
-			TypeResource resource = (TypeResource) getResourceForJavaURI(resourceURI, true);
-			JvmType result = findTypeBySignature(signature, resource);
+		return signature;
+	}
+	
+	private JvmType findObjectType(String signature, URI resourceURI) {
+		JvmType result = findLoadedOrDerivedObjectType(signature, resourceURI);
+		if (result != null) {
 			return result;
-		} else {
-			TypeResource resource = (TypeResource) getResourceForJavaURI(resourceURI, false);
-			if (resource != null) {
-				JvmType result = findTypeBySignature(signature, resource);
-				return result;
-			}
-			IndexedJvmTypeAccess indexedJvmTypeAccess = getIndexedJvmTypeAccess();
-			if (indexedJvmTypeAccess != null) {
-				URI proxyURI = resourceURI.appendFragment(typeUriHelper.getFragment(signature));
-				EObject candidate = indexedJvmTypeAccess.getIndexedJvmType(proxyURI, getResourceSet());
-				if (candidate instanceof JvmType) {
-					return (JvmType) candidate;
-				}
-			}
-			String topLevelType = resourceURI.segment(resourceURI.segmentCount() - 1);
+		}
+		try {
+			return findObjectTypeInJavaProject(signature, resourceURI);
+		} catch (JavaModelException e) {
+			return null;
+		} catch (NullPointerException e) { // JDT throws NPEs see https://bugs.eclipse.org/bugs/show_bug.cgi?id=369391
+			return null;
+		}
+	}
+
+	private JvmType findLoadedOrDerivedObjectType(String signature, URI resourceURI) {
+		JvmType result = findObjectTypeInResourceSet(signature, resourceURI);
+		if (result != null) {
+			return result;
+		}
+		result = findObjectTypeInIndex(signature, resourceURI);
+		if (result != null) {
+			return result;
+		}
+		return null;
+	}
+
+	private JvmType findObjectTypeInJavaProject(String signature, URI resourceURI) throws JavaModelException {
+		IType type = findObjectTypeInJavaProject(resourceURI);
+		if (type != null) {
 			try {
-				int lastDot = topLevelType.lastIndexOf('.');
-				String packageName = null;
-				String typeName = topLevelType;
-				if (lastDot != -1) {
-					typeName = typeName.substring(lastDot + 1);
-					packageName = topLevelType.substring(0, lastDot);
-				}
-				if (javaProject.findType(packageName, typeName) != null) {
-					try {
-						resource = (TypeResource) getResourceForJavaURI(resourceURI, true);
-						JvmType result = findTypeBySignature(signature, resource);
-						return result;
-					} catch(WrappedException wrapped) {
-						if (wrapped.getCause() instanceof IOException) {
-							return null;
-						}
-						throw wrapped;
-					}
-				} else {
+				return createResourceAndFindType(resourceURI, type, signature);
+			} catch(IOException ioe) {
+				return null;
+			} catch(WrappedException wrapped) {
+				if (wrapped.getCause() instanceof IOException) {
 					return null;
 				}
-			} catch (JavaModelException e) {
-				return null;
-			} catch (NullPointerException e) { // JDT throws NPEs see https://bugs.eclipse.org/bugs/show_bug.cgi?id=369391
-				return null;
+				throw wrapped;
+			}
+		} 
+		return null;
+	}
+
+	private JvmType createResourceAndFindType(URI resourceURI, IType type, String signature) throws IOException {
+		TypeResource resource = createResource(resourceURI, type);
+		resource.load(null);
+		return findTypeBySignature(signature, resource);
+	}
+
+	private TypeResource createResource(URI resourceURI, IType type) {
+		TypeResource resource = new TypeResource(resourceURI);
+		resource.setIndexedJvmTypeAccess(getIndexedJvmTypeAccess());
+		getResourceSet().getResources().add(resource);
+		if (type.exists()) {
+			IMirror mirror = createMirror(type);
+			resource.setMirror(mirror);
+		}
+		return resource;
+	}
+	
+	private IType findObjectTypeInJavaProject(URI resourceURI) throws JavaModelException {
+		String topLevelType = resourceURI.segment(resourceURI.segmentCount() - 1);
+		int lastDot = topLevelType.lastIndexOf('.');
+		String packageName = null;
+		String typeName = topLevelType;
+		if (lastDot != -1) {
+			typeName = typeName.substring(lastDot + 1);
+			packageName = topLevelType.substring(0, lastDot);
+		}
+		IType type = javaProject.findType(packageName, typeName /*, workingCopyOwner */);
+		return type;
+	}
+
+	private JvmType findObjectTypeInIndex(String signature, URI resourceURI) {
+		IndexedJvmTypeAccess indexedJvmTypeAccess = getIndexedJvmTypeAccess();
+		if (indexedJvmTypeAccess != null) {
+			URI proxyURI = resourceURI.appendFragment(typeUriHelper.getFragment(signature));
+			EObject candidate = indexedJvmTypeAccess.getIndexedJvmType(proxyURI, getResourceSet());
+			if (candidate instanceof JvmType) {
+				return (JvmType) candidate;
 			}
 		}
+		return null;
+	}
+
+	private JvmType findObjectTypeInResourceSet(String signature, URI resourceURI) {
+		TypeResource resource = (TypeResource) getResourceForJavaURI(resourceURI, false);
+		if (resource != null) {
+			JvmType result = findTypeBySignature(signature, resource);
+			return result;
+		}
+		return null;
+	}
+
+	private JvmType findPrimitiveType(String signature, URI resourceURI) {
+		TypeResource resource = (TypeResource) getResourceForJavaURI(resourceURI, true);
+		JvmType result = findTypeBySignature(signature, resource);
+		return result;
 	}
 
 	/**
@@ -159,21 +222,25 @@ public class JdtTypeProvider extends AbstractJvmTypeProvider implements IJdtType
 	@Override
 	protected IMirror createMirrorForFQN(String name) {
 		try {
-			IType type = javaProject.findType(name);
+			IType type = javaProject.findType(name /*, workingCopyOwner */);
 			if (type == null || !type.exists())
 				return null;
-			String elementName = type.getElementName();
-			if (!elementName.equals(type.getTypeQualifiedName())) {
-				// workaround for bug in jdt with binary type names that start with a $ dollar sign
-				// e.g. $ImmutableList
-				// it manifests itself in a way that allows to retrieve ITypes but one cannot obtain bindings for that type
-				return null;
-			}
-			return new JdtTypeMirror(type, typeFactory);
+			return createMirror(type);
 		}
 		catch (JavaModelException e) {
 			return null;
 		}
+	}
+
+	private IMirror createMirror(IType type) {
+		String elementName = type.getElementName();
+		if (!elementName.equals(type.getTypeQualifiedName())) {
+			// workaround for bug in jdt with binary type names that start with a $ dollar sign
+			// e.g. $ImmutableList
+			// it manifests itself in a way that allows to retrieve ITypes but one cannot obtain bindings for that type
+			return null;
+		}
+		return new JdtTypeMirror(type, typeFactory);
 	}
 	
 	public IJavaProject getJavaProject() {
