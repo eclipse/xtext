@@ -113,8 +113,10 @@ public class BoundTypeArgumentMerger {
 				} else {
 					boolean reverseConformant = inType.isAssignableFrom(type, new TypeConformanceComputationArgument(false, false, false, false, true, false));
 					if (reverseConformant && variance == VarianceInfo.INVARIANT && VarianceInfo.IN.mergeDeclaredWithActuals(inVariances) == VarianceInfo.INVARIANT) {
-						type = inType;
-						variance = VarianceInfo.OUT;
+						if (VarianceInfo.IN.mergeDeclaredWithActuals(outVariances) != null) {
+							type = inType;
+							variance = VarianceInfo.OUT;
+						}
 					} else {
 						VarianceInfo inVariance = VarianceInfo.IN.mergeDeclaredWithActuals(inVariances);
 						variance = VarianceInfo.IN.mergeWithOut(variance, inVariance, conformant);

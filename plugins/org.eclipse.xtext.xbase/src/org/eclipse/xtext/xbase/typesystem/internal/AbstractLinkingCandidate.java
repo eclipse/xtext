@@ -30,7 +30,6 @@ import org.eclipse.xtext.xbase.typesystem.computation.ITypeExpectation;
 import org.eclipse.xtext.xbase.typesystem.conformance.ConformanceHint;
 import org.eclipse.xtext.xbase.typesystem.references.AnyTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.ArrayTypeReference;
-import org.eclipse.xtext.xbase.typesystem.references.CompoundTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.ITypeReferenceOwner;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightBoundTypeArgument;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightMergedBoundTypeArgument;
@@ -335,7 +334,7 @@ public abstract class AbstractLinkingCandidate<Expression extends XExpression> i
 			ExpectationTypeParameterHintCollector collector = new ExpectationTypeParameterHintCollector(state.getReferenceOwner()) {
 				@Override
 				protected UnboundTypeReferenceTraverser createUnboundTypeReferenceTraverser() {
-					return new UnboundTypeReferenceTraverser() {
+					return new UnboundTypeParameterHintCollector() {
 						Set<Object> seenParameters = Sets.newHashSetWithExpectedSize(3);
 						@Override
 						protected void doVisitTypeReference(LightweightTypeReference reference, UnboundTypeReference declaration) {
@@ -360,8 +359,8 @@ public abstract class AbstractLinkingCandidate<Expression extends XExpression> i
 							}
 						}
 						@Override
-						protected void doVisitCompoundTypeReference(CompoundTypeReference reference, UnboundTypeReference param) {
-							doVisitTypeReference(reference, param);
+						protected void doVisitUnboundTypeReference(UnboundTypeReference reference, UnboundTypeReference declaration) {
+							super.doVisitTypeReference(reference, declaration);
 						}
 					};
 				}
