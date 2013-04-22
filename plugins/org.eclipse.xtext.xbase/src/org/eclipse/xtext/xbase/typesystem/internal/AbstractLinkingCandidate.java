@@ -40,6 +40,7 @@ import org.eclipse.xtext.xbase.typesystem.references.WildcardTypeReference;
 import org.eclipse.xtext.xbase.typesystem.util.BoundTypeArgumentSource;
 import org.eclipse.xtext.xbase.typesystem.util.ConstraintVisitingInfo;
 import org.eclipse.xtext.xbase.typesystem.util.ExpectationTypeParameterHintCollector;
+import org.eclipse.xtext.xbase.typesystem.util.Maps2;
 import org.eclipse.xtext.xbase.typesystem.util.RawTypeSubstitutor;
 import org.eclipse.xtext.xbase.typesystem.util.TypeArgumentFromComputedTypeCollector;
 import org.eclipse.xtext.xbase.typesystem.util.TypeParameterByUnboundSubstitutor;
@@ -48,7 +49,6 @@ import org.eclipse.xtext.xbase.typesystem.util.UnboundTypeParameterPreservingSub
 import org.eclipse.xtext.xbase.typesystem.util.VarianceInfo;
 
 import com.google.common.collect.Lists;
-import com.google.common.collect.Maps;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -140,44 +140,55 @@ public abstract class AbstractLinkingCandidate<Expression extends XExpression> i
 		if (declaredTypeParameters.isEmpty()) {
 			typeParameterMapping = Collections.emptyMap();
 		} else {
-			typeParameterMapping = Maps.newLinkedHashMap();
-			List<LightweightTypeReference> explicitTypeArguments = getSyntacticTypeArguments();
-			int size = Math.min(declaredTypeParameters.size(), explicitTypeArguments.size());
-			for(int i = 0; i < size; i++) {
-				JvmTypeParameter declaredTypeParameter = declaredTypeParameters.get(i);
-				LightweightTypeReference explicitTypeArgument = explicitTypeArguments.get(i);
-				UnboundTypeReference typeReference = state.getResolvedTypes().createUnboundTypeReference(expression, declaredTypeParameter);
-				// TODO create error if explicit type argument is wildcard or primitive or does not match the constraints
-				if (explicitTypeArgument != null && explicitTypeArgument.isValidHint()) {
-					LightweightTypeReference substitute = explicitTypeArgument.getInvariantBoundSubstitute();
-					if (!substitute.isAny()) {
-						typeReference.acceptHint(substitute, BoundTypeArgumentSource.EXPLICIT, expression, VarianceInfo.INVARIANT, VarianceInfo.INVARIANT);
-					}
-				}
-				typeParameterMapping.put(declaredTypeParameter, new LightweightMergedBoundTypeArgument(typeReference, VarianceInfo.INVARIANT));
+			typeParameterMapping = initializeTypeParameterMapping(declaredTypeParameters);
+		}
+		return typeParameterMapping;
+	}
+
+	protected Map<JvmTypeParameter, LightweightMergedBoundTypeArgument> initializeTypeParameterMapping(List<JvmTypeParameter> declaredTypeParameters) {
+		Map<JvmTypeParameter, LightweightMergedBoundTypeArgument> typeParameterMapping;
+		List<LightweightTypeReference> explicitTypeArguments = getSyntacticTypeArguments();
+		int size = Math.min(declaredTypeParameters.size(), explicitTypeArguments.size());
+		typeParameterMapping = Maps2.newLinkedHashMapWithExpectedSize(size);
+		for(int i = 0; i < size; i++) {
+			JvmTypeParameter declaredTypeParameter = declaredTypeParameters.get(i);
+			LightweightTypeReference explicitTypeArgument = explicitTypeArguments.get(i);
+			UnboundTypeReference typeReference = state.getResolvedTypes().createUnboundTypeReference(expression, declaredTypeParameter);
+			if (explicitTypeArgument != null && explicitTypeArgument.isValidHint()) {
+				LightweightTypeReference substitute = explicitTypeArgument.getInvariantBoundSubstitute();
+				typeReference.acceptHint(substitute, BoundTypeArgumentSource.EXPLICIT, expression, VarianceInfo.INVARIANT, VarianceInfo.INVARIANT);
 			}
-			for(int i = size; i < declaredTypeParameters.size(); i++) {
-				JvmTypeParameter declaredTypeParameter = declaredTypeParameters.get(i);
-				initializeMapping(declaredTypeParameter, typeParameterMapping);
+			typeParameterMapping.put(declaredTypeParameter, new LightweightMergedBoundTypeArgument(typeReference, VarianceInfo.INVARIANT));
+		}
+		for(int i = size; i < declaredTypeParameters.size(); i++) {
+			JvmTypeParameter declaredTypeParameter = declaredTypeParameters.get(i);
+			initializeMapping(declaredTypeParameter, typeParameterMapping);
+		}
+		UnboundTypeParameterPreservingSubstitutor substitutor = new UnboundTypeParameterPreservingSubstitutor(typeParameterMapping, getState().getReferenceOwner());
+		for(int i = size; i < declaredTypeParameters.size(); i++) {
+			JvmTypeParameter declaredTypeParameter = declaredTypeParameters.get(i);
+			LightweightMergedBoundTypeArgument boundTypeArgument = typeParameterMapping.get(declaredTypeParameter);
+			LightweightTypeReference boundReference = boundTypeArgument.getTypeReference();
+			if (boundReference instanceof UnboundTypeReference) {
+				initializeConstraintMapping(declaredTypeParameter, substitutor, (UnboundTypeReference) boundReference);
 			}
 		}
 		return typeParameterMapping;
 	}
 
 	protected void initializeMapping(JvmTypeParameter typeParameter, Map<JvmTypeParameter, LightweightMergedBoundTypeArgument> result) {
-		// TODO add declaration hint?
 		UnboundTypeReference typeReference = state.getResolvedTypes().createUnboundTypeReference(expression, typeParameter);
 		result.put(typeParameter, new LightweightMergedBoundTypeArgument(typeReference, VarianceInfo.INVARIANT));
+	}
+	
+	protected void initializeConstraintMapping(JvmTypeParameter typeParameter, UnboundTypeParameterPreservingSubstitutor substitutor, UnboundTypeReference typeReference) {
 		List<JvmTypeConstraint> constraints = typeParameter.getConstraints();
 		for(JvmTypeConstraint constraint: constraints) {
 			JvmTypeReference constraintReference = constraint.getTypeReference();
 			if (constraintReference != null) {
-				JvmType type = constraintReference.getType();
-				if (type != null) {
-					LightweightMergedBoundTypeArgument boundTypeArgument = result.get(type);
-					if (boundTypeArgument != null) {
-						typeReference.acceptHint(boundTypeArgument.getTypeReference(), BoundTypeArgumentSource.CONSTRAINT, typeParameter, VarianceInfo.OUT, VarianceInfo.OUT);
-					}
+				LightweightTypeReference substitute = substitutor.substitute(constraintReference);
+				if (!substitute.isType(Object.class)) {
+					typeReference.acceptHint(substitute, BoundTypeArgumentSource.CONSTRAINT, constraint, VarianceInfo.OUT, VarianceInfo.OUT);
 				}
 			}
 		}

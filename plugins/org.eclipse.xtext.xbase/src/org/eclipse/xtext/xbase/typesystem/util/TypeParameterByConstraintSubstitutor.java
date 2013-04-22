@@ -56,7 +56,7 @@ public class TypeParameterByConstraintSubstitutor extends CustomTypeParameterSub
 			getTypeParameterMapping().put(typeParameter, new LightweightMergedBoundTypeArgument(mappedReference, VarianceInfo.INVARIANT));
 			if (mappedReference != null)
 				return mappedReference;
-			return getObjectReference(typeParameter);
+			return getObjectReference();
 		}
 		try {
 			LightweightMergedBoundTypeArgument boundTypeArgument = getTypeParameterMapping().get(typeParameter);
@@ -69,7 +69,7 @@ public class TypeParameterByConstraintSubstitutor extends CustomTypeParameterSub
 						? getDeclaredUpperBound(currentDeclarator, visiting.getCurrentIndex(), visiting)
 						: getDeclaredUpperBound(typeParameter, visiting);
 				if (mappedReference == null)
-					mappedReference = getObjectReference(typeParameter);
+					mappedReference = getObjectReference();
 				getTypeParameterMapping().put(typeParameter, new LightweightMergedBoundTypeArgument(mappedReference, VarianceInfo.INVARIANT));
 				return mappedReference;
 			}
@@ -113,7 +113,7 @@ public class TypeParameterByConstraintSubstitutor extends CustomTypeParameterSub
 						return reference.accept(this, visiting);
 					}
 					WildcardTypeReference result = new WildcardTypeReference(getOwner());
-					result.addUpperBound(getObjectReference(typeParameter));
+					result.addUpperBound(getObjectReference());
 					return result;
 				}
 			} finally {
