@@ -35,13 +35,6 @@ import com.google.common.collect.Sets;
  * 
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-/*
- * To Be Discussed:
- * #emptySortedSet
- * #emptySortedMap
- * #immutableSortedMap
- * #immutableSortedSet
- */
 @GwtCompatible public class CollectionLiterals {
 
 	/**
@@ -113,8 +106,8 @@ import com.google.common.collect.Sets;
 	 * {@link IllegalArgumentException}.
 	 * 
 	 * @param entries
-	 *            the entries that should be contained in the map. May not be <code>null</code> or contain any
-	 *            <code>null</code> keys or value.
+	 *            the entries that should be contained in the map. May not be <code>null</code> and may
+	 *            not contain any <code>null</code> keys or values.
 	 * @return an immutable map containing the given entries.
 	 * @throws NullPointerException
 	 *             if {@code entries} or any key or value in {@code entries} is <code>null</code>
@@ -122,11 +115,11 @@ import com.google.common.collect.Sets;
 	 *             if duplicate keys are contained in {@code entries}.
 	 */
 	@Pure
-	public static <K, V> Map<K, V> newImmutableMap(Pair<K, V>... entries) {
+	public static <K, V> Map<K, V> newImmutableMap(Pair<? extends K, ? extends V>... entries) {
 		if (entries.length == 0)
 			return emptyMap();
 		ImmutableMap.Builder<K, V> builder = ImmutableMap.builder();
-		for (Pair<K, V> entry : entries) {
+		for (Pair<? extends K, ? extends V> entry : entries) {
 			builder.put(entry.getKey(), entry.getValue());
 		}
 		return builder.build();
@@ -219,7 +212,7 @@ import com.google.common.collect.Sets;
 	 *             if duplicate keys are contained the {@code initial} entries.
 	 */
 	@Pure
-	public static <K, V> HashMap<K, V> newHashMap(Pair<K, V>... initial) {
+	public static <K, V> HashMap<K, V> newHashMap(Pair<? extends K, ? extends V>... initial) {
 		HashMap<K, V> result = Maps.newHashMapWithExpectedSize(initial.length);
 		putAll(result, initial);
 		return result;
@@ -237,7 +230,7 @@ import com.google.common.collect.Sets;
 	 *             if duplicate keys are contained the {@code initial} entries.
 	 */
 	@Pure
-	public static <K, V> LinkedHashMap<K, V> newLinkedHashMap(Pair<K, V>... initial) {
+	public static <K, V> LinkedHashMap<K, V> newLinkedHashMap(Pair<? extends K, ? extends V>... initial) {
 		LinkedHashMap<K, V> result = new LinkedHashMap<K, V>(initial.length);
 		putAll(result, initial);
 		return result;
@@ -258,13 +251,13 @@ import com.google.common.collect.Sets;
 	 *             if duplicate keys are contained the {@code initial} entries.
 	 */
 	@Pure
-	public static <K, V> TreeMap<K, V> newTreeMap(Comparator<? super K> comparator, Pair<K, V>... initial) {
+	public static <K, V> TreeMap<K, V> newTreeMap(Comparator<? super K> comparator, Pair<? extends K, ? extends V>... initial) {
 		TreeMap<K, V> result = Maps.newTreeMap(comparator);
 		putAll(result, initial);
 		return result;
 	}
 
-	private static <K, V> void putAll(Map<K, V> result, Pair<K, V>... entries) {
+	private static <K, V> void putAll(Map<K, V> result, Pair<? extends K, ? extends V>... entries) {
 		for (Pair<? extends K, ? extends V> entry : entries) {
 			if (result.containsKey(entry.getKey()))
 				throw new IllegalArgumentException("duplicate key: " + entry.getKey());
