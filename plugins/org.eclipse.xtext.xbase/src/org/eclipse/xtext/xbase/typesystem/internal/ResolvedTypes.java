@@ -141,7 +141,6 @@ public abstract class ResolvedTypes implements IResolvedTypes {
 		typeParameterHints = null;
 		resolvedTypeParameters = null;
 		propagatedTypes = null;
-		declaredTypeParameters = null;
 	}
 	
 	protected abstract IssueSeverities getSeverities();
@@ -844,7 +843,7 @@ public abstract class ResolvedTypes implements IResolvedTypes {
 					getTypeParameterMapping().put(typeParameter, new LightweightMergedBoundTypeArgument(mappedReference, VarianceInfo.INVARIANT));
 					if (mappedReference != null)
 						return mappedReference;
-					return getObjectReference(typeParameter);
+					return getObjectReference();
 				}
 				try {
 					LightweightMergedBoundTypeArgument boundTypeArgument = getTypeParameterMapping().get(typeParameter);
