@@ -13,7 +13,7 @@ Require-Bundle: org.eclipse.xtend.core,
  org.eclipse.xtext.xbase.ui,
  org.hamcrest.core;bundle-version="1.1.0",
  org.eclipse.emf.codegen.ecore;bundle-version="2.9.0",
- org.eclipse.xtext.builder;bundle-version="2.3.0",
+ org.eclipse.xtext.builder,
  org.eclipse.jdt.annotation;bundle-version="1.0.0",
  org.eclipse.xtend.lib;bundle-version="2.3.0"
 Import-Package: javax.inject;version="1.0.0",
