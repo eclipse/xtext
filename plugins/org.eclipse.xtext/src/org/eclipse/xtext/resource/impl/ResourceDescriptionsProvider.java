@@ -11,6 +11,7 @@ import java.util.Map;
 
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.xtext.resource.IResourceDescriptions;
 
 import com.google.inject.Inject;
@@ -43,16 +44,42 @@ public class ResourceDescriptionsProvider {
 	}
 	
 	/**
+	 * Provides the proper resource descriptions according to the context in which the
+	 * resource set is used.
+	 * 
+	 * The context is indicated by the {@link ResourceSet#getLoadOptions() load options} of 
+	 * the resource set. Supported options are:
+	 * 
+	 * <ol>
+	 * 	<li>{@link #NAMED_BUILDER_SCOPE} if the resource set is used in the builder.
+	 *  <li>{@link #LIVE_SCOPE} if the resource set contains resources that are going to be 
+	 *  	modified locally and should definitely shadow the context of the persisted 
+	 *  	resource descriptions.</li>
+	 *  <li>If no such option is present the dirty editors are taken into account to contribute
+	 *  	their contents to the index</li>
+	 * </ol>
+	 * 
+	 * 
+	 * The result is never <code>null</code>.
+	 * 
+	 * @param resourceSet the resource set that is currently used.
+	 * @return the {@link IResourceDescriptions} according to the usage context.
+	 * 
 	 * @since 2.1
 	 */
-	public IResourceDescriptions getResourceDescriptions(ResourceSet resourceSet) {
+	@NonNull
+	public IResourceDescriptions getResourceDescriptions(@NonNull ResourceSet resourceSet) {
 		Map<Object, Object> loadOptions = resourceSet.getLoadOptions();
-		IResourceDescriptions result = createResourceDescriptions();
+		final IResourceDescriptions result;
 		if (loadOptions.containsKey(NAMED_BUILDER_SCOPE)) {
 			result = createBuilderScopeResourceDescriptions();
-		}
-		if (loadOptions.containsKey(LIVE_SCOPE)) {
+			if (loadOptions.containsKey(LIVE_SCOPE)) {
+				throw new IllegalStateException("Ambiguous scope for the resource set: " + loadOptions);
+			}
+		} else if (loadOptions.containsKey(LIVE_SCOPE)) {
 			result = createLiveScopeResourceDescriptions();
+		} else {
+			result = createResourceDescriptions();
 		}
 		if (result instanceof IResourceDescriptions.IContextAware) {
 			((IResourceDescriptions.IContextAware) result).setContext(resourceSet);
