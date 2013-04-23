@@ -34,7 +34,8 @@ public class ExpectationTypeParameterHintCollector extends DeferredTypeParameter
 			boolean constraintsMatch = true;
 			if (reference.getTypeParameter() != declaration.getType()) {
 				List<LightweightBoundTypeArgument> hints = reference.getAllHints();
-				for(LightweightBoundTypeArgument hint: hints) {
+				for(int i = 0; i < hints.size(); i++) {
+					LightweightBoundTypeArgument hint = hints.get(i);
 					if (hint.getSource() == BoundTypeArgumentSource.CONSTRAINT) {
 						constraintSeen = true;
 						outerVisit(hint.getTypeReference(), declaration, hint.getSource(), hint.getDeclaredVariance(), hint.getActualVariance());
