@@ -350,7 +350,8 @@ public abstract class AbstractLinkingCandidate<Expression extends XExpression> i
 									 * add a hint for the type parameter T, too.
 									 */
 									List<LightweightBoundTypeArgument> hints = getState().getResolvedTypes().getHints(declaration.getHandle());
-									for(LightweightBoundTypeArgument hint: hints) {
+									for(int i = 0; i < hints.size(); i++) {
+										LightweightBoundTypeArgument hint = hints.get(i);
 										if (hint.getSource() == BoundTypeArgumentSource.CONSTRAINT) {
 											outerVisit(hint.getTypeReference(), reference);
 										}
