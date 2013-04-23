@@ -1017,8 +1017,17 @@ public abstract class ResolvedTypes implements IResolvedTypes {
 						result.add(delegateHint);
 					}
 				} else {
-					if (!result.contains(hint))
+					if (!result.isEmpty()) {
+						if (original.getDeclaredVariance() == VarianceInfo.OUT && original.getActualVariance() == VarianceInfo.INVARIANT) {
+							if (hint.getDeclaredVariance() == VarianceInfo.OUT && hint.getActualVariance() == VarianceInfo.INVARIANT) {
+								continue;
+							}
+						}
+						if (!result.contains(hint))
+							result.add(hint);
+					} else {
 						result.add(hint);
+					}
 				}
 			}
 		}

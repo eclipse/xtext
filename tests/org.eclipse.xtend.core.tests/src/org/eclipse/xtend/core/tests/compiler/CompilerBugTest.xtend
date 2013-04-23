@@ -16,6 +16,31 @@ import org.junit.Ignore
 class CompilerBugTest extends AbstractXtendCompilerTest {
 	
 	@Test
+	def testBug406051() {
+		assertCompilesTo('''
+			class C {
+			    def m() {
+					newHashMap("string" -> 5, 5 -> "string")
+			    }
+			}
+		''', '''
+			import java.util.HashMap;
+			import org.eclipse.xtext.xbase.lib.CollectionLiterals;
+			import org.eclipse.xtext.xbase.lib.Pair;
+			
+			@SuppressWarnings("all")
+			public class C {
+			  public HashMap<Object,Object> m() {
+			    Pair<String,Integer> _mappedTo = Pair.<String, Integer>of("string", Integer.valueOf(5));
+			    Pair<Integer,String> _mappedTo_1 = Pair.<Integer, String>of(Integer.valueOf(5), "string");
+			    HashMap<Object,Object> _newHashMap = CollectionLiterals.<Object, Object>newHashMap(_mappedTo, _mappedTo_1);
+			    return _newHashMap;
+			  }
+			}
+		''')
+	}
+	
+	@Test
 	def testBug406267_01() {
 		assertCompilesTo('''
 			import java.util.List

@@ -1183,6 +1183,14 @@ public abstract class AbstractFeatureCallTypeTest extends AbstractXbaseTestCase 
   }
   
   @Test
+  public void testFeatureCallWithOperatorOverloading_6() throws Exception {
+    this.resolvesFeatureCallsTo("newHashMap( 5 -> \'\', \'\' -> 5 )", 
+      "HashMap<Comparable<?> & Serializable, Comparable<?> & Serializable>", 
+      "Pair<Integer, String>", 
+      "Pair<String, Integer>");
+  }
+  
+  @Test
   public void testFeatureCallOnIt() throws Exception {
     this.resolvesFeatureCallsTo("{ val it = \'foo\'; length == 3;}", "int", "boolean");
   }
