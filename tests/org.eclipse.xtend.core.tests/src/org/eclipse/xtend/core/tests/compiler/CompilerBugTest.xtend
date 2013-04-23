@@ -16,6 +16,58 @@ import org.junit.Ignore
 class CompilerBugTest extends AbstractXtendCompilerTest {
 	
 	@Test
+	def testBug406356_01() {
+		assertCompilesTo('''
+			class C {
+				def <T> T build() {
+					println()
+					null
+				}
+			}
+		''', '''
+			import org.eclipse.xtext.xbase.lib.InputOutput;
+
+			@SuppressWarnings("all")
+			public class C {
+			  public <T extends Object> T build() {
+			    T _xblockexpression = null;
+			    {
+			      InputOutput.println();
+			      _xblockexpression = (null);
+			    }
+			    return _xblockexpression;
+			  }
+			}
+		''')
+	}
+	
+	@Test
+	def testBug406356_02() {
+		assertCompilesTo('''
+			class C<T> {
+				def T build() {
+					println()
+					null
+				}
+			}
+		''', '''
+			import org.eclipse.xtext.xbase.lib.InputOutput;
+
+			@SuppressWarnings("all")
+			public class C<T extends Object> {
+			  public T build() {
+			    T _xblockexpression = null;
+			    {
+			      InputOutput.println();
+			      _xblockexpression = (null);
+			    }
+			    return _xblockexpression;
+			  }
+			}
+		''')
+	}
+	
+	@Test
 	def testBug406051() {
 		assertCompilesTo('''
 			class C {

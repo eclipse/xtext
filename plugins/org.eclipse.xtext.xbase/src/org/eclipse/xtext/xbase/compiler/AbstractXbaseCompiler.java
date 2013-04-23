@@ -457,7 +457,7 @@ public abstract class AbstractXbaseCompiler {
 					expectedType = getTypeProvider().getCommonReturnType(expr, true);
 				}
 			}
-			if (expectedType!=null && !(expectedType.getType() instanceof JvmTypeParameter) && !typeReferences.is(expectedType, Void.TYPE))
+			if (expectedType!=null && !typeReferences.is(expectedType, Void.TYPE))
 				type = expectedType;
 		}
 		return type;

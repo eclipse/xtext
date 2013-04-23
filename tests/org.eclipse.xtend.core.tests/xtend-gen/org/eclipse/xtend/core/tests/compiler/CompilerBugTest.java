@@ -18,6 +18,118 @@ import org.junit.Test;
 @SuppressWarnings("all")
 public class CompilerBugTest extends AbstractXtendCompilerTest {
   @Test
+  public void testBug406356_01() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("class C {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def <T> T build() {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("println()");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("null");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("import org.eclipse.xtext.xbase.lib.InputOutput;");
+    _builder_1.newLine();
+    _builder_1.newLine();
+    _builder_1.append("@SuppressWarnings(\"all\")");
+    _builder_1.newLine();
+    _builder_1.append("public class C {");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("public <T extends Object> T build() {");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("T _xblockexpression = null;");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("{");
+    _builder_1.newLine();
+    _builder_1.append("      ");
+    _builder_1.append("InputOutput.println();");
+    _builder_1.newLine();
+    _builder_1.append("      ");
+    _builder_1.append("_xblockexpression = (null);");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("return _xblockexpression;");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    this.assertCompilesTo(_builder, _builder_1);
+  }
+  
+  @Test
+  public void testBug406356_02() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("class C<T> {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def T build() {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("println()");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("null");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("import org.eclipse.xtext.xbase.lib.InputOutput;");
+    _builder_1.newLine();
+    _builder_1.newLine();
+    _builder_1.append("@SuppressWarnings(\"all\")");
+    _builder_1.newLine();
+    _builder_1.append("public class C<T extends Object> {");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("public T build() {");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("T _xblockexpression = null;");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("{");
+    _builder_1.newLine();
+    _builder_1.append("      ");
+    _builder_1.append("InputOutput.println();");
+    _builder_1.newLine();
+    _builder_1.append("      ");
+    _builder_1.append("_xblockexpression = (null);");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("return _xblockexpression;");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    this.assertCompilesTo(_builder, _builder_1);
+  }
+  
+  @Test
   public void testBug406051() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("class C {");
