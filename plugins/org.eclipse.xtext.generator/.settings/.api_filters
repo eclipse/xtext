@@ -7,6 +7,12 @@
                 <message_argument value="org.eclipse.emf.codegen.ecore"/>
             </message_arguments>
         </filter>
+        <filter id="929038356">
+            <message_arguments>
+                <message_argument value="2.4.2"/>
+                <message_argument value="org.eclipse.xtext.xbase.lib"/>
+            </message_arguments>
+        </filter>
     </resource>
     <resource path="src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/AbstractSimpleExpressionsRuntimeModule.java" type="org.eclipse.xtext.generator.parser.antlr.splitting.AbstractSimpleExpressionsRuntimeModule">
         <filter id="1143996420">
