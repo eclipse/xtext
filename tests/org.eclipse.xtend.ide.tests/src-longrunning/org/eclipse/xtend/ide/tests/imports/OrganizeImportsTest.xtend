@@ -163,4 +163,29 @@ class OrganizeImportsTest extends AbstractXtendUITestCase {
 			}
 		''')
 	}
+	
+	// see https://bugs.eclipse.org/bugs/show_bug.cgi?id=406301
+	@Test def testStaticTypeUsedTwice() {
+		'''
+			import java.util.Collections
+			import java.util.List
+			class Foo {
+				def m() {
+					println(Collections::singleton)
+					println(Collections::singleton)
+					println(Collections::singleton)
+				}
+			}
+		'''.assertIsOrganizedTo('''
+			import java.util.Collections
+			
+			class Foo {
+				def m() {
+					println(Collections::singleton)
+					println(Collections::singleton)
+					println(Collections::singleton)
+				}
+			}
+		''')
+	}
 }

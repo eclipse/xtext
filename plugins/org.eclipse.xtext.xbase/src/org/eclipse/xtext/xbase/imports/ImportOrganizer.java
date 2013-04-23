@@ -13,6 +13,7 @@ import static org.eclipse.xtext.util.Strings.*;
 import java.util.List;
 import java.util.Map;
 
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.util.ReplaceRegion;
@@ -54,49 +55,79 @@ public class ImportOrganizer {
 		if(unresolvedTypeResolver != null) 
 			unresolvedTypeResolver.resolve(typeUsages, resource);
 		Map<String, JvmDeclaredType> name2type = conflictResolver.resolveConflicts(typeUsages, nonOverridableTypesProvider, resource);
+		return getOrganizedImportChanges(resource, name2type, typeUsages); 
+	}
+
+	private List<ReplaceRegion> getOrganizedImportChanges(XtextResource resource, Map<String, JvmDeclaredType> resolvedConflicts, TypeUsages typeUsages) {
 		RewritableImportSection newImportSection = importSectionFactory.createNewEmpty(resource);
-		List<ReplaceRegion> replaceRegions = newArrayList();
-		for(Map.Entry<String, JvmDeclaredType> entry: name2type.entrySet()) {
-			String text = entry.getKey();
-			JvmDeclaredType type = entry.getValue();
-			Iterable<TypeUsage> usages = typeUsages.getUsages(type);
-			if(needsImport(type, text, nonOverridableTypesProvider, usages)) {
-				newImportSection.addImport(type);
-			}
-		}
-		for(Map.Entry<String, JvmDeclaredType> entry: name2type.entrySet()) {
-			String text = entry.getKey();
-			JvmDeclaredType type = entry.getValue();
-			String packageLocalName = getPackageLocalName(type);
-			Iterable<TypeUsage> usages = typeUsages.getUsages(type);
-			for(TypeUsage usage: usages) {
-				// if the resource contains two types with the same simple name, we don't add any import
-				// but we can still use the package local name within the same package.
-				if(equal(usage.getContextPackageName(), type.getPackageName())) {
-					JvmDeclaredType importedType = newImportSection.getImportedType(packageLocalName);
-					if(importedType == null)
-						text = packageLocalName;
-				}
-				if (usage.isStaticAccess()) {
-					if (usage.isTrailingDelimiterSuppressed()) {
-						text = staticQualifierConverter.toStringWithoutNamespaceDelimiter(text);
-					} else {
-						text = staticQualifierConverter.toString(text);
-					}
-				} else {
-					text = nameValueConverter.toString(text);
-				}
-				if(!equal(usage.getText(), text)) {
-					replaceRegions.add(new ReplaceRegion(usage.getTextRegion(), text));
-				}
-			}
-		}
+		addImports(resolvedConflicts, typeUsages, newImportSection);
+		List<ReplaceRegion> replaceRegions = getReplacedUsageSites(resolvedConflicts, typeUsages, newImportSection);
 		for(JvmDeclaredType staticImport: typeUsages.getStaticImports()) 
 			newImportSection.addStaticImport(staticImport);
 		for(JvmDeclaredType extensionImport: typeUsages.getExtensionImports()) 
 			newImportSection.addStaticExtensionImport(extensionImport);
 		replaceRegions.addAll(newImportSection.rewrite());
-		return replaceRegions; 
+		return replaceRegions;
+	}
+
+	private List<ReplaceRegion> getReplacedUsageSites(Map<String, JvmDeclaredType> resolvedConflicts, TypeUsages typeUsages,
+			RewritableImportSection newImportSection) {
+		List<ReplaceRegion> result = newArrayList();
+		for(Map.Entry<String, JvmDeclaredType> textToType: resolvedConflicts.entrySet()) {
+			getReplacedUsagesOf(textToType, typeUsages, newImportSection, result);
+		}
+		return result;
+	}
+
+	private void getReplacedUsagesOf(Map.Entry<String, JvmDeclaredType> nameToType, TypeUsages typeUsages, RewritableImportSection importSection,
+			List<ReplaceRegion> result) {
+		String nameToUse = nameToType.getKey();
+		JvmDeclaredType type = nameToType.getValue();
+		String packageLocalName = getPackageLocalName(type);
+		for(TypeUsage typeUsage: typeUsages.getUsages(type)) {
+			ReplaceRegion replaceRegion = getReplaceRegion(nameToUse, packageLocalName, type, typeUsage, importSection);
+			if (replaceRegion != null) {
+				result.add(replaceRegion);
+			}
+		}
+	}
+
+	@Nullable
+	private ReplaceRegion getReplaceRegion(String nameToUse, String packageLocalName, JvmDeclaredType type,
+			TypeUsage usage, RewritableImportSection importSection) {
+		// if the resource contains two types with the same simple name, we don't add any import
+		// but we can still use the package local name within the same package.
+		if(equal(usage.getContextPackageName(), type.getPackageName())) {
+			if(importSection.getImportedType(packageLocalName) == null) {
+				nameToUse = packageLocalName;
+			}
+		}
+		String textToUse = getConcreteSyntax(nameToUse, usage);
+		if(!equal(usage.getText(), textToUse)) {
+			return new ReplaceRegion(usage.getTextRegion(), textToUse);
+		}
+		return null;
+	}
+
+	private String getConcreteSyntax(String name, TypeUsage usage) {
+		if (usage.isStaticAccess()) {
+			if (usage.isTrailingDelimiterSuppressed()) {
+				return staticQualifierConverter.toStringWithoutNamespaceDelimiter(name);
+			}
+			return staticQualifierConverter.toString(name);
+		}
+		return nameValueConverter.toString(name);
+	}
+	
+	private void addImports(Map<String, JvmDeclaredType> resolvedConflicts, TypeUsages typeUsages, RewritableImportSection target) {
+		for(Map.Entry<String, JvmDeclaredType> entry: resolvedConflicts.entrySet()) {
+			String text = entry.getKey();
+			JvmDeclaredType type = entry.getValue();
+			Iterable<TypeUsage> usages = typeUsages.getUsages(type);
+			if(needsImport(type, text, nonOverridableTypesProvider, usages)) {
+				target.addImport(type);
+			}
+		}
 	}
 
 	protected String getPackageLocalName(JvmDeclaredType type) {
