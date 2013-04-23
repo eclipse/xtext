@@ -16,6 +16,47 @@ import org.junit.Ignore
 class CompilerBugTest extends AbstractXtendCompilerTest {
 	
 	@Test
+	def testBug406267_01() {
+		assertCompilesTo('''
+			import java.util.List
+			import java.util.Map
+			
+			class Bug {
+			    List<String> list = newArrayList
+			    
+			    def doSomething(Map<String, String> mapping) {
+			        list = mapping.values.sort // Specifically this line
+			    }
+			}
+		''', '''
+			import java.util.ArrayList;
+			import java.util.Collection;
+			import java.util.List;
+			import java.util.Map;
+			import org.eclipse.xtext.xbase.lib.CollectionLiterals;
+			import org.eclipse.xtext.xbase.lib.Functions.Function0;
+			import org.eclipse.xtext.xbase.lib.IterableExtensions;
+			
+			@SuppressWarnings("all")
+			public class Bug {
+			  private List<String> list = new Function0<List<String>>() {
+			    public List<String> apply() {
+			      ArrayList<String> _newArrayList = CollectionLiterals.<String>newArrayList();
+			      return _newArrayList;
+			    }
+			  }.apply();
+			  
+			  public List<String> doSomething(final Map<String,String> mapping) {
+			    Collection<String> _values = mapping.values();
+			    List<String> _sort = IterableExtensions.<String>sort(_values);
+			    List<String> _list = this.list = _sort;
+			    return _list;
+			  }
+			}
+		''')
+	}
+	
+	@Test
 	def testBug405900_01() {
 		assertCompilesTo('''
 			import java.util.List
