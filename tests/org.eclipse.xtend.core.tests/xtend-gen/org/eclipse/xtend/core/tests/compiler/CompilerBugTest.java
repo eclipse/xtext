@@ -18,6 +18,57 @@ import org.junit.Test;
 @SuppressWarnings("all")
 public class CompilerBugTest extends AbstractXtendCompilerTest {
   @Test
+  public void testBug406051() {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("class C {");
+    _builder.newLine();
+    _builder.append("    ");
+    _builder.append("def m() {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("newHashMap(\"string\" -> 5, 5 -> \"string\")");
+    _builder.newLine();
+    _builder.append("    ");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    StringConcatenation _builder_1 = new StringConcatenation();
+    _builder_1.append("import java.util.HashMap;");
+    _builder_1.newLine();
+    _builder_1.append("import org.eclipse.xtext.xbase.lib.CollectionLiterals;");
+    _builder_1.newLine();
+    _builder_1.append("import org.eclipse.xtext.xbase.lib.Pair;");
+    _builder_1.newLine();
+    _builder_1.newLine();
+    _builder_1.append("@SuppressWarnings(\"all\")");
+    _builder_1.newLine();
+    _builder_1.append("public class C {");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("public HashMap<Object,Object> m() {");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("Pair<String,Integer> _mappedTo = Pair.<String, Integer>of(\"string\", Integer.valueOf(5));");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("Pair<Integer,String> _mappedTo_1 = Pair.<Integer, String>of(Integer.valueOf(5), \"string\");");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("HashMap<Object,Object> _newHashMap = CollectionLiterals.<Object, Object>newHashMap(_mappedTo, _mappedTo_1);");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("return _newHashMap;");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("}");
+    _builder_1.newLine();
+    this.assertCompilesTo(_builder, _builder_1);
+  }
+  
+  @Test
   public void testBug406267_01() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("import java.util.List");
