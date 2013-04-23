@@ -14,6 +14,8 @@ import org.eclipse.emf.common.util.WrappedException;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.jdt.annotation.NonNull;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.jdt.core.IType;
 import org.eclipse.jdt.core.JavaModelException;
@@ -29,6 +31,8 @@ import org.eclipse.xtext.util.Strings;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
+ * @noextend This class is not intended to be subclassed by clients.
+ * @noinstantiate This class is not intended to be instantiated by clients.
  */
 public class JdtTypeProvider extends AbstractJvmTypeProvider implements IJdtTypeProvider {
 	
@@ -77,6 +81,8 @@ public class JdtTypeProvider extends AbstractJvmTypeProvider implements IJdtType
 	@Override
 	public JvmType findTypeByName(String name) {
 		String signature = getSignature(name);
+		if (signature == null)
+			return null;
 		URI resourceURI = typeUriHelper.createResourceURI(signature);
 		String resourcePath = resourceURI.path();
 		if (resourcePath.startsWith(URIHelperConstants.PRIMITIVES)) {
@@ -86,6 +92,7 @@ public class JdtTypeProvider extends AbstractJvmTypeProvider implements IJdtType
 		}
 	}
 	
+	@Nullable
 	private String getSignature(String name) {
 		if (Strings.isEmpty(name))
 			throw new IllegalArgumentException("null");
@@ -98,7 +105,8 @@ public class JdtTypeProvider extends AbstractJvmTypeProvider implements IJdtType
 		return signature;
 	}
 	
-	private JvmType findObjectType(String signature, URI resourceURI) {
+	@Nullable
+	private JvmType findObjectType(@NonNull String signature, @NonNull URI resourceURI) {
 		JvmType result = findLoadedOrDerivedObjectType(signature, resourceURI);
 		if (result != null) {
 			return result;
@@ -112,7 +120,8 @@ public class JdtTypeProvider extends AbstractJvmTypeProvider implements IJdtType
 		}
 	}
 
-	private JvmType findLoadedOrDerivedObjectType(String signature, URI resourceURI) {
+	@Nullable
+	private JvmType findLoadedOrDerivedObjectType(@NonNull String signature, @NonNull URI resourceURI) {
 		JvmType result = findObjectTypeInResourceSet(signature, resourceURI);
 		if (result != null) {
 			return result;
@@ -124,7 +133,8 @@ public class JdtTypeProvider extends AbstractJvmTypeProvider implements IJdtType
 		return null;
 	}
 
-	private JvmType findObjectTypeInJavaProject(String signature, URI resourceURI) throws JavaModelException {
+	@Nullable
+	private JvmType findObjectTypeInJavaProject(@NonNull String signature, @NonNull URI resourceURI) throws JavaModelException {
 		IType type = findObjectTypeInJavaProject(resourceURI);
 		if (type != null) {
 			try {
@@ -141,7 +151,8 @@ public class JdtTypeProvider extends AbstractJvmTypeProvider implements IJdtType
 		return null;
 	}
 
-	private JvmType createResourceAndFindType(URI resourceURI, IType type, String signature) throws IOException {
+	@Nullable
+	private JvmType createResourceAndFindType(@NonNull URI resourceURI, @NonNull IType type, @NonNull String signature) throws IOException {
 		TypeResource resource = createResource(resourceURI, type);
 		resource.load(null);
 		return findTypeBySignature(signature, resource);
@@ -158,7 +169,7 @@ public class JdtTypeProvider extends AbstractJvmTypeProvider implements IJdtType
 		return resource;
 	}
 	
-	private IType findObjectTypeInJavaProject(URI resourceURI) throws JavaModelException {
+	private IType findObjectTypeInJavaProject(@NonNull URI resourceURI) throws JavaModelException {
 		String topLevelType = resourceURI.segment(resourceURI.segmentCount() - 1);
 		int lastDot = topLevelType.lastIndexOf('.');
 		String packageName = null;
@@ -171,7 +182,7 @@ public class JdtTypeProvider extends AbstractJvmTypeProvider implements IJdtType
 		return type;
 	}
 
-	private JvmType findObjectTypeInIndex(String signature, URI resourceURI) {
+	private JvmType findObjectTypeInIndex(@NonNull String signature, @NonNull URI resourceURI) {
 		IndexedJvmTypeAccess indexedJvmTypeAccess = getIndexedJvmTypeAccess();
 		if (indexedJvmTypeAccess != null) {
 			URI proxyURI = resourceURI.appendFragment(typeUriHelper.getFragment(signature));
@@ -183,7 +194,7 @@ public class JdtTypeProvider extends AbstractJvmTypeProvider implements IJdtType
 		return null;
 	}
 
-	private JvmType findObjectTypeInResourceSet(String signature, URI resourceURI) {
+	private JvmType findObjectTypeInResourceSet(@NonNull String signature, @NonNull URI resourceURI) {
 		TypeResource resource = (TypeResource) getResourceForJavaURI(resourceURI, false);
 		if (resource != null) {
 			JvmType result = findTypeBySignature(signature, resource);
@@ -192,7 +203,7 @@ public class JdtTypeProvider extends AbstractJvmTypeProvider implements IJdtType
 		return null;
 	}
 
-	private JvmType findPrimitiveType(String signature, URI resourceURI) {
+	private JvmType findPrimitiveType(@NonNull String signature, @NonNull URI resourceURI) {
 		TypeResource resource = (TypeResource) getResourceForJavaURI(resourceURI, true);
 		JvmType result = findTypeBySignature(signature, resource);
 		return result;
@@ -201,7 +212,7 @@ public class JdtTypeProvider extends AbstractJvmTypeProvider implements IJdtType
 	/**
 	 * @since 2.3
 	 */
-	protected Resource getResourceForJavaURI(URI resourceURI, boolean loadOnDemand) {
+	protected Resource getResourceForJavaURI(@NonNull URI resourceURI, boolean loadOnDemand) {
 		return getResourceSet().getResource(resourceURI, loadOnDemand);
 	}
 	
@@ -232,7 +243,8 @@ public class JdtTypeProvider extends AbstractJvmTypeProvider implements IJdtType
 		}
 	}
 
-	private IMirror createMirror(IType type) {
+	@Nullable
+	private IMirror createMirror(@NonNull IType type) {
 		String elementName = type.getElementName();
 		if (!elementName.equals(type.getTypeQualifiedName())) {
 			// workaround for bug in jdt with binary type names that start with a $ dollar sign
