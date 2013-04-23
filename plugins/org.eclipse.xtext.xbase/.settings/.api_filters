@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<component id="org.eclipse.xtext.xbase" version="2">
+    <resource path="META-INF/MANIFEST.MF">
+        <filter id="929038356">
+            <message_arguments>
+                <message_argument value="2.4.2"/>
+                <message_argument value="org.eclipse.xtend.lib"/>
+            </message_arguments>
+        </filter>
+        <filter id="929038356">
+            <message_arguments>
+                <message_argument value="2.4.2"/>
+                <message_argument value="org.eclipse.xtext.common.types"/>
+            </message_arguments>
+        </filter>
+    </resource>
+</component>
