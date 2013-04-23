@@ -17,10 +17,25 @@ public interface IStubGenerating {
 
 	void setGenerateStub(boolean isGenerateStub);
 	
+	/**
+	 * A {@link IStubGenerating} that can optionally generate Xtend.
+	 * 
+	 * @author koehnlein - Initial contribution and API
+	 */
 	interface XtendOption {
 		
+		/**
+		 * @return true, if the fragment is configured to generate stub classes in Xtend instead of Java. 
+		 *    This only has an effect if the generation of stubs is enabled in general 
+		 *    {@link IStubGenerating#isGenerateStub()}. 
+		 */
 		boolean isGenerateXtendStub();
 
+		/**
+		 * @param isGenerateXtendStub decide if the fragment should generate stub classes in Xtend instead of Java.  
+		 *    This only has an effect if the generation of stubs is enabled in general 
+		 *    {@link IStubGenerating#setGenerateStub(boolean)}. 
+		 */
 		void setGenerateXtendStub(boolean isGenerateXtendStub);
 	}
 }
