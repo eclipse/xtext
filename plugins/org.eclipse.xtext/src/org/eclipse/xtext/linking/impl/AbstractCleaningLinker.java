@@ -84,10 +84,12 @@ public abstract class AbstractCleaningLinker extends AbstractLinker {
 	 */
 	protected boolean shouldCheckParentNode(INode node) {
 		if (node.getGrammarElement() instanceof AbstractElement) {
-			AbstractElement grammarElement = (AbstractElement) node.getGrammarElement();
-			Assignment assignment = GrammarUtil.containingAssignment(grammarElement);
-			if (assignment == null && node.getParent() != null && !node.getParent().hasDirectSemanticElement()) {
-				return true;
+			if (node.getParent() != null && !node.getParent().hasDirectSemanticElement()) {
+				AbstractElement grammarElement = (AbstractElement) node.getGrammarElement();
+				Assignment assignment = GrammarUtil.containingAssignment(grammarElement);
+				if (assignment == null) {
+					return true;
+				}
 			}
 		}
 		return false;
