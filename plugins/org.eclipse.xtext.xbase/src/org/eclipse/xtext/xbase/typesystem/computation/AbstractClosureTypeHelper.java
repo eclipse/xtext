@@ -101,6 +101,9 @@ public abstract class AbstractClosureTypeHelper {
 				@Override
 				protected void addHint(UnboundTypeReference typeParameter, LightweightTypeReference reference) {
 					LightweightTypeReference wrapped = reference.getWrapperTypeIfPrimitive();
+					if (source == BoundTypeArgumentSource.INFERRED_CONSTRAINT) {
+						wrapped = getStricterConstraint(typeParameter, wrapped);
+					}
 					typeParameter.acceptHint(wrapped, source, getOrigin(), getExpectedVariance(), getActualVariance());
 				}
 				
