@@ -8,15 +8,19 @@
 package org.eclipse.xtext.xbase.typesystem.util;
 
 import java.util.Collection;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
 import org.eclipse.jdt.annotation.NonNullByDefault;
+import org.eclipse.xtext.common.types.JvmTypeConstraint;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
+import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.CompoundTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.ITypeReferenceOwner;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightMergedBoundTypeArgument;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
+import org.eclipse.xtext.xbase.typesystem.references.OwnedConverter;
 import org.eclipse.xtext.xbase.typesystem.references.ParameterizedTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.UnboundTypeReference;
 
@@ -103,8 +107,24 @@ public class DeferredTypeParameterHintCollector extends AbstractTypeReferencePai
 	}
 
 	protected void addHint(UnboundTypeReference typeParameter, LightweightTypeReference reference) {
-		LightweightTypeReference wrapped = reference.getWrapperTypeIfPrimitive();
+		LightweightTypeReference wrapped = getStricterConstraint(typeParameter, reference.getWrapperTypeIfPrimitive());
 		typeParameter.acceptHint(wrapped, BoundTypeArgumentSource.INFERRED_LATER, getOrigin(), getExpectedVariance(), getActualVariance());
+	}
+	
+
+	protected LightweightTypeReference getStricterConstraint(UnboundTypeReference typeParameter, LightweightTypeReference hint) {
+		JvmTypeParameter parameter = typeParameter.getTypeParameter();
+		List<JvmTypeConstraint> constraints = parameter.getConstraints();
+		for(JvmTypeConstraint constraint: constraints) {
+			JvmTypeReference constraintReference = constraint.getTypeReference();
+			if (constraintReference != null) {
+				LightweightTypeReference lightweightReference = new OwnedConverter(hint.getOwner()).toLightweightReference(constraintReference);
+				if (hint.isAssignableFrom(lightweightReference)) {
+					hint = lightweightReference;
+				}
+			}
+		}
+		return hint;
 	}
 
 }
