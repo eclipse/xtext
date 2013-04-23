@@ -5,5 +5,5 @@ Bundle-Name: %pluginName
 Bundle-SymbolicName: org.eclipse.xtend2.lib
 Bundle-Version: 2.4.2.qualifier
 Bundle-Vendor: %providerName
-Require-Bundle: org.eclipse.xtext.xbase.lib;bundle-version="2.3.0";visibility:=reexport,
- org.eclipse.xtend.lib;bundle-version="2.3.0";visibility:=reexport
+Require-Bundle: org.eclipse.xtext.xbase.lib;bundle-version="2.4.2";visibility:=reexport,
+ org.eclipse.xtend.lib;bundle-version="2.4.2";visibility:=reexport

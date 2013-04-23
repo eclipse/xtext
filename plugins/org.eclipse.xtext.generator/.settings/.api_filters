@@ -1,5 +1,19 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <component id="org.eclipse.xtext.generator" version="2">
+    <resource path="META-INF/MANIFEST.MF">
+        <filter id="929038356">
+            <message_arguments>
+                <message_argument value="2.4.2"/>
+                <message_argument value="org.eclipse.emf.codegen.ecore"/>
+            </message_arguments>
+        </filter>
+        <filter id="929038356">
+            <message_arguments>
+                <message_argument value="2.4.2"/>
+                <message_argument value="org.eclipse.xtext.xbase.lib"/>
+            </message_arguments>
+        </filter>
+    </resource>
     <resource path="src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/AbstractSimpleExpressionsRuntimeModule.java" type="org.eclipse.xtext.generator.parser.antlr.splitting.AbstractSimpleExpressionsRuntimeModule">
         <filter id="1143996420">
             <message_arguments>
