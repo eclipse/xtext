@@ -1292,6 +1292,13 @@ abstract class AbstractFeatureCallTypeTest extends AbstractXbaseTestCase {
 		"new java.util.ArrayList<Byte>() += 'x'.getBytes()".resolvesFeatureCallsTo("boolean", "byte[]")
 	}
 	
+	@Test def void testFeatureCallWithOperatorOverloading_6() throws Exception {
+		"newHashMap( 5 -> '', '' -> 5 )".resolvesFeatureCallsTo(
+			"HashMap<Comparable<?> & Serializable, Comparable<?> & Serializable>", 
+			"Pair<Integer, String>", 
+			"Pair<String, Integer>")
+	}
+	
 	@Test def void testFeatureCallOnIt() throws Exception {
 		"{ val it = 'foo'; length == 3;}".resolvesFeatureCallsTo("int", "boolean")
 	}
