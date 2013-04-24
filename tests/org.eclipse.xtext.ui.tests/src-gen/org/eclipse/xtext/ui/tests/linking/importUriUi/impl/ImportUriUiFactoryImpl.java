@@ -1,7 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
  */
 package org.eclipse.xtext.ui.tests.linking.importUriUi.impl;
 
@@ -33,7 +30,7 @@ public class ImportUriUiFactoryImpl extends EFactoryImpl implements ImportUriUiF
   {
     try
     {
-      ImportUriUiFactory theImportUriUiFactory = (ImportUriUiFactory)EPackage.Registry.INSTANCE.getEFactory("http://eclipse.org/xtext/importUriUiTestLanguage"); 
+      ImportUriUiFactory theImportUriUiFactory = (ImportUriUiFactory)EPackage.Registry.INSTANCE.getEFactory(ImportUriUiPackage.eNS_URI);
       if (theImportUriUiFactory != null)
       {
         return theImportUriUiFactory;

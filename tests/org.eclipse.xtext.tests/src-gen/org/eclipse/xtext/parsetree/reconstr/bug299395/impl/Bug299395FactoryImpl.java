@@ -1,7 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
  */
 package org.eclipse.xtext.parsetree.reconstr.bug299395.impl;
 
@@ -33,7 +30,7 @@ public class Bug299395FactoryImpl extends EFactoryImpl implements Bug299395Facto
   {
     try
     {
-      Bug299395Factory theBug299395Factory = (Bug299395Factory)EPackage.Registry.INSTANCE.getEFactory("http://www.eclipse.org/2010/tmf/xtext/Bug299395"); 
+      Bug299395Factory theBug299395Factory = (Bug299395Factory)EPackage.Registry.INSTANCE.getEFactory(Bug299395Package.eNS_URI);
       if (theBug299395Factory != null)
       {
         return theBug299395Factory;

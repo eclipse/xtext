@@ -1,7 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
  */
 package org.eclipse.xtext.serializer.contextFinderTest.impl;
 
@@ -34,7 +31,7 @@ public class ContextFinderTestFactoryImpl extends EFactoryImpl implements Contex
   {
     try
     {
-      ContextFinderTestFactory theContextFinderTestFactory = (ContextFinderTestFactory)EPackage.Registry.INSTANCE.getEFactory("http://www.eclipse.org/2009/tmf/xtext/contextfindertestlanguage"); 
+      ContextFinderTestFactory theContextFinderTestFactory = (ContextFinderTestFactory)EPackage.Registry.INSTANCE.getEFactory(ContextFinderTestPackage.eNS_URI);
       if (theContextFinderTestFactory != null)
       {
         return theContextFinderTestFactory;

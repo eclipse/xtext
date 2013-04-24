@@ -1,7 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
  */
 package org.eclipse.xtext.linking.importedURI.impl;
 
@@ -33,7 +30,7 @@ public class ImportedURIFactoryImpl extends EFactoryImpl implements ImportedURIF
   {
     try
     {
-      ImportedURIFactory theImportedURIFactory = (ImportedURIFactory)EPackage.Registry.INSTANCE.getEFactory("http://eclipse.org/xtext/importUriTestLanguage"); 
+      ImportedURIFactory theImportedURIFactory = (ImportedURIFactory)EPackage.Registry.INSTANCE.getEFactory(ImportedURIPackage.eNS_URI);
       if (theImportedURIFactory != null)
       {
         return theImportedURIFactory;

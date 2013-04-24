@@ -4,7 +4,6 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- *
  */
 package org.eclipse.xtend.core.richstring.impl;
 
@@ -99,7 +98,7 @@ public class LineImpl extends MinimalEObjectImpl.Container implements Line
 	public ProcessedRichString getRichString()
 	{
 		if (eContainerFeatureID() != ProcessedRichStringPackage.LINE__RICH_STRING) return null;
-		return (ProcessedRichString)eContainer();
+		return (ProcessedRichString)eInternalContainer();
 	}
 
 	/**

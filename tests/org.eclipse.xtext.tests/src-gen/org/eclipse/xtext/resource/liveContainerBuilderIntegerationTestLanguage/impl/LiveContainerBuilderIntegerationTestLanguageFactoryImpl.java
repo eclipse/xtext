@@ -1,7 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
  */
 package org.eclipse.xtext.resource.liveContainerBuilderIntegerationTestLanguage.impl;
 
@@ -33,7 +30,7 @@ public class LiveContainerBuilderIntegerationTestLanguageFactoryImpl extends EFa
   {
     try
     {
-      LiveContainerBuilderIntegerationTestLanguageFactory theLiveContainerBuilderIntegerationTestLanguageFactory = (LiveContainerBuilderIntegerationTestLanguageFactory)EPackage.Registry.INSTANCE.getEFactory("http://www.xtext.org/LiveContainerBuilderIntegerationTestLanguage.xtext"); 
+      LiveContainerBuilderIntegerationTestLanguageFactory theLiveContainerBuilderIntegerationTestLanguageFactory = (LiveContainerBuilderIntegerationTestLanguageFactory)EPackage.Registry.INSTANCE.getEFactory(LiveContainerBuilderIntegerationTestLanguagePackage.eNS_URI);
       if (theLiveContainerBuilderIntegerationTestLanguageFactory != null)
       {
         return theLiveContainerBuilderIntegerationTestLanguageFactory;

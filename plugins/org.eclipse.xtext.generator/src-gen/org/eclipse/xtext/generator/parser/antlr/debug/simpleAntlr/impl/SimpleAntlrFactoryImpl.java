@@ -1,7 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
  */
 package org.eclipse.xtext.generator.parser.antlr.debug.simpleAntlr.impl;
 
@@ -33,7 +30,7 @@ public class SimpleAntlrFactoryImpl extends EFactoryImpl implements SimpleAntlrF
   {
     try
     {
-      SimpleAntlrFactory theSimpleAntlrFactory = (SimpleAntlrFactory)EPackage.Registry.INSTANCE.getEFactory("http://www.eclipse.org/xtext/generator/parser/antlr/simpleAntlr"); 
+      SimpleAntlrFactory theSimpleAntlrFactory = (SimpleAntlrFactory)EPackage.Registry.INSTANCE.getEFactory(SimpleAntlrPackage.eNS_URI);
       if (theSimpleAntlrFactory != null)
       {
         return theSimpleAntlrFactory;

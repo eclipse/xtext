@@ -6,14 +6,13 @@ package org.eclipse.xtext.ui.tests.linking.parseTreeConstruction;
 import org.eclipse.emf.ecore.*;
 import org.eclipse.xtext.*;
 import org.eclipse.xtext.parsetree.reconstr.IEObjectConsumer;
-import org.eclipse.xtext.parsetree.reconstr.impl.AbstractParseTreeConstructor;
 
 import org.eclipse.xtext.ui.tests.linking.services.ImportUriUiTestLanguageGrammarAccess;
 
 import com.google.inject.Inject;
 
 @SuppressWarnings("all")
-public class ImportUriUiTestLanguageParsetreeConstructor extends AbstractParseTreeConstructor {
+public class ImportUriUiTestLanguageParsetreeConstructor extends org.eclipse.xtext.parsetree.reconstr.impl.AbstractParseTreeConstructor {
 		
 	@Inject
 	private ImportUriUiTestLanguageGrammarAccess grammarAccess;

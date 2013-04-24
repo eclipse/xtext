@@ -22,4 +22,5 @@ Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Bundle-Activator: org.eclipse.xtext.example.arithmetics.ui.internal.ArithmeticsActivator
 Export-Package: org.eclipse.xtext.example.arithmetics.ui.contentassist.antlr,
  org.eclipse.xtext.example.arithmetics.ui.contentassist,
- org.eclipse.xtext.example.arithmetics.ui.internal
+ org.eclipse.xtext.example.arithmetics.ui.internal,
+ org.eclipse.xtext.example.arithmetics.ui.quickfix

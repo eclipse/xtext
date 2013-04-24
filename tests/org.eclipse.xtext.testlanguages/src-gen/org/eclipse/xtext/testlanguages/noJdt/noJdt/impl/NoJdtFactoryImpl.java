@@ -1,7 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
  */
 package org.eclipse.xtext.testlanguages.noJdt.noJdt.impl;
 
@@ -33,7 +30,7 @@ public class NoJdtFactoryImpl extends EFactoryImpl implements NoJdtFactory
   {
     try
     {
-      NoJdtFactory theNoJdtFactory = (NoJdtFactory)EPackage.Registry.INSTANCE.getEFactory("http://www.eclipse.org/2013/tmf/xtext/NoJdtTestLanguage"); 
+      NoJdtFactory theNoJdtFactory = (NoJdtFactory)EPackage.Registry.INSTANCE.getEFactory(NoJdtPackage.eNS_URI);
       if (theNoJdtFactory != null)
       {
         return theNoJdtFactory;

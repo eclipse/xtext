@@ -28,7 +28,7 @@ LanguageConfig {
 
 	// generates Java API for the generated EPackages 
 	fragment = ecore.EcoreGeneratorFragment {
-		emfRuntimeVersion = "2.5"
+		emfRuntimeVersion = "2.9"
 	}
 
 	// the serialization component

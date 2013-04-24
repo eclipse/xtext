@@ -4,7 +4,6 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- *
  */
 package org.eclipse.xtext.xbase.impl;
 
@@ -36,7 +35,7 @@ public class XbaseFactoryImpl extends EFactoryImpl implements XbaseFactory
 	{
 		try
 		{
-			XbaseFactory theXbaseFactory = (XbaseFactory)EPackage.Registry.INSTANCE.getEFactory("http://www.eclipse.org/xtext/xbase/Xbase"); 
+			XbaseFactory theXbaseFactory = (XbaseFactory)EPackage.Registry.INSTANCE.getEFactory(XbasePackage.eNS_URI);
 			if (theXbaseFactory != null)
 			{
 				return theXbaseFactory;
@@ -424,6 +423,7 @@ public class XbaseFactoryImpl extends EFactoryImpl implements XbaseFactory
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @deprecated
 	 * @generated
 	 */
 	@Deprecated

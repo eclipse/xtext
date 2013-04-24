@@ -65,7 +65,7 @@ public class JvmArrayTypeImpl extends JvmComponentTypeImplCustom implements JvmA
 	public JvmComponentType getComponentType()
 	{
 		if (eContainerFeatureID() != TypesPackage.JVM_ARRAY_TYPE__COMPONENT_TYPE) return null;
-		return (JvmComponentType)eContainer();
+		return (JvmComponentType)eInternalContainer();
 	}
 
 	/**

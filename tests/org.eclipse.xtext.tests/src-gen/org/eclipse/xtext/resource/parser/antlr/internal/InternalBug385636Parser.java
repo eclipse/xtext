@@ -1,4 +1,4 @@
-package org.eclipse.xtext.resource.parser.antlr.internal;
+package org.eclipse.xtext.resource.parser.antlr.internal; 
 
 import org.eclipse.xtext.*;
 import org.eclipse.xtext.parser.*;
@@ -53,32 +53,32 @@ public class InternalBug385636Parser extends AbstractInternalAntlrParser {
         }
         public InternalBug385636Parser(TokenStream input, RecognizerSharedState state) {
             super(input, state);
-
+             
         }
-
+        
 
     public String[] getTokenNames() { return InternalBug385636Parser.tokenNames; }
     public String getGrammarFileName() { return "../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/resource/parser/antlr/internal/InternalBug385636.g"; }
 
 
 
-	private Bug385636GrammarAccess grammarAccess;
-
+     	private Bug385636GrammarAccess grammarAccess;
+     	
         public InternalBug385636Parser(TokenStream input, Bug385636GrammarAccess grammarAccess) {
             this(input);
             this.grammarAccess = grammarAccess;
             registerRules(grammarAccess.getGrammar());
         }
-
+        
         @Override
         protected String getFirstRuleName() {
-		return "Program";
-	}
-
-	@Override
-	protected Bug385636GrammarAccess getGrammarAccess() {
-		return grammarAccess;
-	}
+        	return "Program";	
+       	}
+       	
+       	@Override
+       	protected Bug385636GrammarAccess getGrammarAccess() {
+       		return grammarAccess;
+       	}
 
 
 
@@ -94,23 +94,23 @@ public class InternalBug385636Parser extends AbstractInternalAntlrParser {
             // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/resource/parser/antlr/internal/InternalBug385636.g:68:2: (iv_ruleProgram= ruleProgram EOF )
             // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/resource/parser/antlr/internal/InternalBug385636.g:69:2: iv_ruleProgram= ruleProgram EOF
             {
-             newCompositeNode(grammarAccess.getProgramRule());
+             newCompositeNode(grammarAccess.getProgramRule()); 
             pushFollow(FollowSets000.FOLLOW_ruleProgram_in_entryRuleProgram75);
             iv_ruleProgram=ruleProgram();
 
             state._fsp--;
 
-             current =iv_ruleProgram;
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleProgram85);
+             current =iv_ruleProgram; 
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleProgram85); 
 
             }
 
         }
-
-            catch (RecognitionException re) {
-                recover(input,re);
+         
+            catch (RecognitionException re) { 
+                recover(input,re); 
                 appendSkippedTokens();
-            }
+            } 
         finally {
         }
         return current;
@@ -129,8 +129,8 @@ public class InternalBug385636Parser extends AbstractInternalAntlrParser {
         EObject lv_statements_1_0 = null;
 
 
-         enterRule();
-
+         enterRule(); 
+            
         try {
             // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/resource/parser/antlr/internal/InternalBug385636.g:79:28: ( ( ( (lv_define_0_0= ruleDefineVariables ) ) ( (lv_statements_1_0= ruleStatement ) )* otherlv_2= 'END' ) )
             // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/resource/parser/antlr/internal/InternalBug385636.g:80:1: ( ( (lv_define_0_0= ruleDefineVariables ) ) ( (lv_statements_1_0= ruleStatement ) )* otherlv_2= 'END' )
@@ -144,25 +144,25 @@ public class InternalBug385636Parser extends AbstractInternalAntlrParser {
             // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/resource/parser/antlr/internal/InternalBug385636.g:81:1: (lv_define_0_0= ruleDefineVariables )
             // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/resource/parser/antlr/internal/InternalBug385636.g:82:3: lv_define_0_0= ruleDefineVariables
             {
-
-		        newCompositeNode(grammarAccess.getProgramAccess().getDefineDefineVariablesParserRuleCall_0_0());
-
+             
+            	        newCompositeNode(grammarAccess.getProgramAccess().getDefineDefineVariablesParserRuleCall_0_0()); 
+            	    
             pushFollow(FollowSets000.FOLLOW_ruleDefineVariables_in_ruleProgram131);
             lv_define_0_0=ruleDefineVariables();
 
             state._fsp--;
 
 
-		        if (current==null) {
-		            current = createModelElementForParent(grammarAccess.getProgramRule());
-		        }
-				set(
-					current,
-					"define",
-				lv_define_0_0,
-				"DefineVariables");
-		        afterParserOrEnumRuleCall();
-
+            	        if (current==null) {
+            	            current = createModelElementForParent(grammarAccess.getProgramRule());
+            	        }
+                   		set(
+                   			current, 
+                   			"define",
+                    		lv_define_0_0, 
+                    		"DefineVariables");
+            	        afterParserOrEnumRuleCall();
+            	    
 
             }
 
@@ -181,60 +181,60 @@ public class InternalBug385636Parser extends AbstractInternalAntlrParser {
 
 
                 switch (alt1) {
-		case 1 :
-		    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/resource/parser/antlr/internal/InternalBug385636.g:99:1: (lv_statements_1_0= ruleStatement )
-		    {
-		    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/resource/parser/antlr/internal/InternalBug385636.g:99:1: (lv_statements_1_0= ruleStatement )
-		    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/resource/parser/antlr/internal/InternalBug385636.g:100:3: lv_statements_1_0= ruleStatement
-		    {
+            	case 1 :
+            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/resource/parser/antlr/internal/InternalBug385636.g:99:1: (lv_statements_1_0= ruleStatement )
+            	    {
+            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/resource/parser/antlr/internal/InternalBug385636.g:99:1: (lv_statements_1_0= ruleStatement )
+            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/resource/parser/antlr/internal/InternalBug385636.g:100:3: lv_statements_1_0= ruleStatement
+            	    {
+            	     
+            	    	        newCompositeNode(grammarAccess.getProgramAccess().getStatementsStatementParserRuleCall_1_0()); 
+            	    	    
+            	    pushFollow(FollowSets000.FOLLOW_ruleStatement_in_ruleProgram152);
+            	    lv_statements_1_0=ruleStatement();
 
-			        newCompositeNode(grammarAccess.getProgramAccess().getStatementsStatementParserRuleCall_1_0());
-
-		    pushFollow(FollowSets000.FOLLOW_ruleStatement_in_ruleProgram152);
-		    lv_statements_1_0=ruleStatement();
-
-		    state._fsp--;
-
-
-			        if (current==null) {
-			            current = createModelElementForParent(grammarAccess.getProgramRule());
-			        }
-					add(
-						current,
-						"statements",
-					lv_statements_1_0,
-					"Statement");
-			        afterParserOrEnumRuleCall();
+            	    state._fsp--;
 
 
-		    }
+            	    	        if (current==null) {
+            	    	            current = createModelElementForParent(grammarAccess.getProgramRule());
+            	    	        }
+            	           		add(
+            	           			current, 
+            	           			"statements",
+            	            		lv_statements_1_0, 
+            	            		"Statement");
+            	    	        afterParserOrEnumRuleCall();
+            	    	    
+
+            	    }
 
 
-		    }
-		    break;
+            	    }
+            	    break;
 
-		default :
-		    break loop1;
+            	default :
+            	    break loop1;
                 }
             } while (true);
 
-            otherlv_2=(Token)match(input,11,FollowSets000.FOLLOW_11_in_ruleProgram165);
+            otherlv_2=(Token)match(input,11,FollowSets000.FOLLOW_11_in_ruleProgram165); 
 
-			newLeafNode(otherlv_2, grammarAccess.getProgramAccess().getENDKeyword_2());
+                	newLeafNode(otherlv_2, grammarAccess.getProgramAccess().getENDKeyword_2());
+                
+
+            }
 
 
             }
 
-
-            }
-
-             leaveRule();
+             leaveRule(); 
         }
-
-            catch (RecognitionException re) {
-                recover(input,re);
+         
+            catch (RecognitionException re) { 
+                recover(input,re); 
                 appendSkippedTokens();
-            }
+            } 
         finally {
         }
         return current;
@@ -254,23 +254,23 @@ public class InternalBug385636Parser extends AbstractInternalAntlrParser {
             // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/resource/parser/antlr/internal/InternalBug385636.g:129:2: (iv_ruleDefineVariables= ruleDefineVariables EOF )
             // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/resource/parser/antlr/internal/InternalBug385636.g:130:2: iv_ruleDefineVariables= ruleDefineVariables EOF
             {
-             newCompositeNode(grammarAccess.getDefineVariablesRule());
+             newCompositeNode(grammarAccess.getDefineVariablesRule()); 
             pushFollow(FollowSets000.FOLLOW_ruleDefineVariables_in_entryRuleDefineVariables201);
             iv_ruleDefineVariables=ruleDefineVariables();
 
             state._fsp--;
 
-             current =iv_ruleDefineVariables;
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleDefineVariables211);
+             current =iv_ruleDefineVariables; 
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleDefineVariables211); 
 
             }
 
         }
-
-            catch (RecognitionException re) {
-                recover(input,re);
+         
+            catch (RecognitionException re) { 
+                recover(input,re); 
                 appendSkippedTokens();
-            }
+            } 
         finally {
         }
         return current;
@@ -288,8 +288,8 @@ public class InternalBug385636Parser extends AbstractInternalAntlrParser {
         EObject lv_variables_1_0 = null;
 
 
-         enterRule();
-
+         enterRule(); 
+            
         try {
             // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/resource/parser/antlr/internal/InternalBug385636.g:140:28: ( (otherlv_0= 'VARIABLES' ( (lv_variables_1_0= ruleDefineVariable ) )+ otherlv_2= 'ENDVARIABLES' ) )
             // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/resource/parser/antlr/internal/InternalBug385636.g:141:1: (otherlv_0= 'VARIABLES' ( (lv_variables_1_0= ruleDefineVariable ) )+ otherlv_2= 'ENDVARIABLES' )
@@ -297,10 +297,10 @@ public class InternalBug385636Parser extends AbstractInternalAntlrParser {
             // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/resource/parser/antlr/internal/InternalBug385636.g:141:1: (otherlv_0= 'VARIABLES' ( (lv_variables_1_0= ruleDefineVariable ) )+ otherlv_2= 'ENDVARIABLES' )
             // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/resource/parser/antlr/internal/InternalBug385636.g:141:3: otherlv_0= 'VARIABLES' ( (lv_variables_1_0= ruleDefineVariable ) )+ otherlv_2= 'ENDVARIABLES'
             {
-            otherlv_0=(Token)match(input,12,FollowSets000.FOLLOW_12_in_ruleDefineVariables248);
+            otherlv_0=(Token)match(input,12,FollowSets000.FOLLOW_12_in_ruleDefineVariables248); 
 
-			newLeafNode(otherlv_0, grammarAccess.getDefineVariablesAccess().getVARIABLESKeyword_0());
-
+                	newLeafNode(otherlv_0, grammarAccess.getDefineVariablesAccess().getVARIABLESKeyword_0());
+                
             // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/resource/parser/antlr/internal/InternalBug385636.g:145:1: ( (lv_variables_1_0= ruleDefineVariable ) )+
             int cnt2=0;
             loop2:
@@ -314,40 +314,40 @@ public class InternalBug385636Parser extends AbstractInternalAntlrParser {
 
 
                 switch (alt2) {
-		case 1 :
-		    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/resource/parser/antlr/internal/InternalBug385636.g:146:1: (lv_variables_1_0= ruleDefineVariable )
-		    {
-		    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/resource/parser/antlr/internal/InternalBug385636.g:146:1: (lv_variables_1_0= ruleDefineVariable )
-		    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/resource/parser/antlr/internal/InternalBug385636.g:147:3: lv_variables_1_0= ruleDefineVariable
-		    {
+            	case 1 :
+            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/resource/parser/antlr/internal/InternalBug385636.g:146:1: (lv_variables_1_0= ruleDefineVariable )
+            	    {
+            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/resource/parser/antlr/internal/InternalBug385636.g:146:1: (lv_variables_1_0= ruleDefineVariable )
+            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/resource/parser/antlr/internal/InternalBug385636.g:147:3: lv_variables_1_0= ruleDefineVariable
+            	    {
+            	     
+            	    	        newCompositeNode(grammarAccess.getDefineVariablesAccess().getVariablesDefineVariableParserRuleCall_1_0()); 
+            	    	    
+            	    pushFollow(FollowSets000.FOLLOW_ruleDefineVariable_in_ruleDefineVariables269);
+            	    lv_variables_1_0=ruleDefineVariable();
 
-			        newCompositeNode(grammarAccess.getDefineVariablesAccess().getVariablesDefineVariableParserRuleCall_1_0());
-
-		    pushFollow(FollowSets000.FOLLOW_ruleDefineVariable_in_ruleDefineVariables269);
-		    lv_variables_1_0=ruleDefineVariable();
-
-		    state._fsp--;
-
-
-			        if (current==null) {
-			            current = createModelElementForParent(grammarAccess.getDefineVariablesRule());
-			        }
-					add(
-						current,
-						"variables",
-					lv_variables_1_0,
-					"DefineVariable");
-			        afterParserOrEnumRuleCall();
+            	    state._fsp--;
 
 
-		    }
+            	    	        if (current==null) {
+            	    	            current = createModelElementForParent(grammarAccess.getDefineVariablesRule());
+            	    	        }
+            	           		add(
+            	           			current, 
+            	           			"variables",
+            	            		lv_variables_1_0, 
+            	            		"DefineVariable");
+            	    	        afterParserOrEnumRuleCall();
+            	    	    
+
+            	    }
 
 
-		    }
-		    break;
+            	    }
+            	    break;
 
-		default :
-		    if ( cnt2 >= 1 ) break loop2;
+            	default :
+            	    if ( cnt2 >= 1 ) break loop2;
                         EarlyExitException eee =
                             new EarlyExitException(2, input);
                         throw eee;
@@ -355,23 +355,23 @@ public class InternalBug385636Parser extends AbstractInternalAntlrParser {
                 cnt2++;
             } while (true);
 
-            otherlv_2=(Token)match(input,13,FollowSets000.FOLLOW_13_in_ruleDefineVariables282);
+            otherlv_2=(Token)match(input,13,FollowSets000.FOLLOW_13_in_ruleDefineVariables282); 
 
-			newLeafNode(otherlv_2, grammarAccess.getDefineVariablesAccess().getENDVARIABLESKeyword_2());
+                	newLeafNode(otherlv_2, grammarAccess.getDefineVariablesAccess().getENDVARIABLESKeyword_2());
+                
+
+            }
 
 
             }
 
-
-            }
-
-             leaveRule();
+             leaveRule(); 
         }
-
-            catch (RecognitionException re) {
-                recover(input,re);
+         
+            catch (RecognitionException re) { 
+                recover(input,re); 
                 appendSkippedTokens();
-            }
+            } 
         finally {
         }
         return current;
@@ -391,23 +391,23 @@ public class InternalBug385636Parser extends AbstractInternalAntlrParser {
             // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/resource/parser/antlr/internal/InternalBug385636.g:176:2: (iv_ruleDefineVariable= ruleDefineVariable EOF )
             // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/resource/parser/antlr/internal/InternalBug385636.g:177:2: iv_ruleDefineVariable= ruleDefineVariable EOF
             {
-             newCompositeNode(grammarAccess.getDefineVariableRule());
+             newCompositeNode(grammarAccess.getDefineVariableRule()); 
             pushFollow(FollowSets000.FOLLOW_ruleDefineVariable_in_entryRuleDefineVariable318);
             iv_ruleDefineVariable=ruleDefineVariable();
 
             state._fsp--;
 
-             current =iv_ruleDefineVariable;
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleDefineVariable328);
+             current =iv_ruleDefineVariable; 
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleDefineVariable328); 
 
             }
 
         }
-
-            catch (RecognitionException re) {
-                recover(input,re);
+         
+            catch (RecognitionException re) { 
+                recover(input,re); 
                 appendSkippedTokens();
-            }
+            } 
         finally {
         }
         return current;
@@ -423,8 +423,8 @@ public class InternalBug385636Parser extends AbstractInternalAntlrParser {
         Token otherlv_0=null;
         Token lv_name_1_0=null;
 
-         enterRule();
-
+         enterRule(); 
+            
         try {
             // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/resource/parser/antlr/internal/InternalBug385636.g:187:28: ( (otherlv_0= 'NAME' ( (lv_name_1_0= RULE_ID ) ) ) )
             // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/resource/parser/antlr/internal/InternalBug385636.g:188:1: (otherlv_0= 'NAME' ( (lv_name_1_0= RULE_ID ) ) )
@@ -432,33 +432,30 @@ public class InternalBug385636Parser extends AbstractInternalAntlrParser {
             // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/resource/parser/antlr/internal/InternalBug385636.g:188:1: (otherlv_0= 'NAME' ( (lv_name_1_0= RULE_ID ) ) )
             // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/resource/parser/antlr/internal/InternalBug385636.g:188:3: otherlv_0= 'NAME' ( (lv_name_1_0= RULE_ID ) )
             {
-            otherlv_0=(Token)match(input,14,FollowSets000.FOLLOW_14_in_ruleDefineVariable365);
+            otherlv_0=(Token)match(input,14,FollowSets000.FOLLOW_14_in_ruleDefineVariable365); 
 
-			newLeafNode(otherlv_0, grammarAccess.getDefineVariableAccess().getNAMEKeyword_0());
-
+                	newLeafNode(otherlv_0, grammarAccess.getDefineVariableAccess().getNAMEKeyword_0());
+                
             // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/resource/parser/antlr/internal/InternalBug385636.g:192:1: ( (lv_name_1_0= RULE_ID ) )
             // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/resource/parser/antlr/internal/InternalBug385636.g:193:1: (lv_name_1_0= RULE_ID )
             {
             // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/resource/parser/antlr/internal/InternalBug385636.g:193:1: (lv_name_1_0= RULE_ID )
             // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/resource/parser/antlr/internal/InternalBug385636.g:194:3: lv_name_1_0= RULE_ID
             {
-            lv_name_1_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleDefineVariable382);
+            lv_name_1_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleDefineVariable382); 
 
-				newLeafNode(lv_name_1_0, grammarAccess.getDefineVariableAccess().getNameIDTerminalRuleCall_1_0());
+            			newLeafNode(lv_name_1_0, grammarAccess.getDefineVariableAccess().getNameIDTerminalRuleCall_1_0()); 
+            		
 
-
-		        if (current==null) {
-		            current = createModelElement(grammarAccess.getDefineVariableRule());
-		        }
-				setWithLastConsumed(
-					current,
-					"name",
-				lv_name_1_0,
-				"ID");
-
-
-            }
-
+            	        if (current==null) {
+            	            current = createModelElement(grammarAccess.getDefineVariableRule());
+            	        }
+                   		setWithLastConsumed(
+                   			current, 
+                   			"name",
+                    		lv_name_1_0, 
+                    		"ID");
+            	    
 
             }
 
@@ -468,13 +465,16 @@ public class InternalBug385636Parser extends AbstractInternalAntlrParser {
 
             }
 
-             leaveRule();
+
+            }
+
+             leaveRule(); 
         }
-
-            catch (RecognitionException re) {
-                recover(input,re);
+         
+            catch (RecognitionException re) { 
+                recover(input,re); 
                 appendSkippedTokens();
-            }
+            } 
         finally {
         }
         return current;
@@ -494,23 +494,23 @@ public class InternalBug385636Parser extends AbstractInternalAntlrParser {
             // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/resource/parser/antlr/internal/InternalBug385636.g:219:2: (iv_ruleNVariableAccess= ruleNVariableAccess EOF )
             // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/resource/parser/antlr/internal/InternalBug385636.g:220:2: iv_ruleNVariableAccess= ruleNVariableAccess EOF
             {
-             newCompositeNode(grammarAccess.getNVariableAccessRule());
+             newCompositeNode(grammarAccess.getNVariableAccessRule()); 
             pushFollow(FollowSets000.FOLLOW_ruleNVariableAccess_in_entryRuleNVariableAccess423);
             iv_ruleNVariableAccess=ruleNVariableAccess();
 
             state._fsp--;
 
-             current =iv_ruleNVariableAccess;
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleNVariableAccess433);
+             current =iv_ruleNVariableAccess; 
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleNVariableAccess433); 
 
             }
 
         }
-
-            catch (RecognitionException re) {
-                recover(input,re);
+         
+            catch (RecognitionException re) { 
+                recover(input,re); 
                 appendSkippedTokens();
-            }
+            } 
         finally {
         }
         return current;
@@ -525,8 +525,8 @@ public class InternalBug385636Parser extends AbstractInternalAntlrParser {
 
         Token otherlv_0=null;
 
-         enterRule();
-
+         enterRule(); 
+            
         try {
             // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/resource/parser/antlr/internal/InternalBug385636.g:230:28: ( ( (otherlv_0= RULE_ID ) ) )
             // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/resource/parser/antlr/internal/InternalBug385636.g:231:1: ( (otherlv_0= RULE_ID ) )
@@ -538,30 +538,30 @@ public class InternalBug385636Parser extends AbstractInternalAntlrParser {
             // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/resource/parser/antlr/internal/InternalBug385636.g:233:3: otherlv_0= RULE_ID
             {
 
-				if (current==null) {
-		            current = createModelElement(grammarAccess.getNVariableAccessRule());
-		        }
+            			if (current==null) {
+            	            current = createModelElement(grammarAccess.getNVariableAccessRule());
+            	        }
+                    
+            otherlv_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleNVariableAccess477); 
 
-            otherlv_0=(Token)match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleNVariableAccess477);
-
-			newLeafNode(otherlv_0, grammarAccess.getNVariableAccessAccess().getVariableDefineVariableCrossReference_0());
-
-
-            }
-
+            		newLeafNode(otherlv_0, grammarAccess.getNVariableAccessAccess().getVariableDefineVariableCrossReference_0()); 
+            	
 
             }
 
 
             }
 
-             leaveRule();
+
+            }
+
+             leaveRule(); 
         }
-
-            catch (RecognitionException re) {
-                recover(input,re);
+         
+            catch (RecognitionException re) { 
+                recover(input,re); 
                 appendSkippedTokens();
-            }
+            } 
         finally {
         }
         return current;
@@ -581,23 +581,23 @@ public class InternalBug385636Parser extends AbstractInternalAntlrParser {
             // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/resource/parser/antlr/internal/InternalBug385636.g:253:2: (iv_ruleStatement= ruleStatement EOF )
             // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/resource/parser/antlr/internal/InternalBug385636.g:254:2: iv_ruleStatement= ruleStatement EOF
             {
-             newCompositeNode(grammarAccess.getStatementRule());
+             newCompositeNode(grammarAccess.getStatementRule()); 
             pushFollow(FollowSets000.FOLLOW_ruleStatement_in_entryRuleStatement512);
             iv_ruleStatement=ruleStatement();
 
             state._fsp--;
 
-             current =iv_ruleStatement;
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleStatement522);
+             current =iv_ruleStatement; 
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleStatement522); 
 
             }
 
         }
-
-            catch (RecognitionException re) {
-                recover(input,re);
+         
+            catch (RecognitionException re) { 
+                recover(input,re); 
                 appendSkippedTokens();
-            }
+            } 
         finally {
         }
         return current;
@@ -636,8 +636,8 @@ public class InternalBug385636Parser extends AbstractInternalAntlrParser {
         EObject lv_right_23_0 = null;
 
 
-         enterRule();
-
+         enterRule(); 
+            
         try {
             // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/resource/parser/antlr/internal/InternalBug385636.g:264:28: ( (this_Expression_VariableName_0= ruleExpression_VariableName ( (otherlv_1= 'C1' () ( (lv_right_3_0= ruleExpression_VariableName ) ) ) | (otherlv_4= 'C2' () ( (lv_right_6_0= ruleExpression_VariableName ) ) ) | (otherlv_7= 'C3' () ( (lv_right_9_0= ruleExpression_VariableName ) ) ) | (otherlv_10= 'C4' () ( (lv_right_12_0= ruleExpression_VariableName ) ) ) | (otherlv_13= 'C5' () ( (lv_right_15_0= ruleExpression_VariableName ) ) ) | ( (otherlv_16= 'C6' otherlv_17= 'C7' ) () ( (lv_right_19_0= ruleExpression_VariableName ) ) ) | ( (otherlv_20= 'C6' otherlv_21= 'C8' ) () ( (lv_right_23_0= ruleExpression_VariableName ) ) ) )* ) )
             // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/resource/parser/antlr/internal/InternalBug385636.g:265:1: (this_Expression_VariableName_0= ruleExpression_VariableName ( (otherlv_1= 'C1' () ( (lv_right_3_0= ruleExpression_VariableName ) ) ) | (otherlv_4= 'C2' () ( (lv_right_6_0= ruleExpression_VariableName ) ) ) | (otherlv_7= 'C3' () ( (lv_right_9_0= ruleExpression_VariableName ) ) ) | (otherlv_10= 'C4' () ( (lv_right_12_0= ruleExpression_VariableName ) ) ) | (otherlv_13= 'C5' () ( (lv_right_15_0= ruleExpression_VariableName ) ) ) | ( (otherlv_16= 'C6' otherlv_17= 'C7' ) () ( (lv_right_19_0= ruleExpression_VariableName ) ) ) | ( (otherlv_20= 'C6' otherlv_21= 'C8' ) () ( (lv_right_23_0= ruleExpression_VariableName ) ) ) )* )
@@ -645,453 +645,453 @@ public class InternalBug385636Parser extends AbstractInternalAntlrParser {
             // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/resource/parser/antlr/internal/InternalBug385636.g:265:1: (this_Expression_VariableName_0= ruleExpression_VariableName ( (otherlv_1= 'C1' () ( (lv_right_3_0= ruleExpression_VariableName ) ) ) | (otherlv_4= 'C2' () ( (lv_right_6_0= ruleExpression_VariableName ) ) ) | (otherlv_7= 'C3' () ( (lv_right_9_0= ruleExpression_VariableName ) ) ) | (otherlv_10= 'C4' () ( (lv_right_12_0= ruleExpression_VariableName ) ) ) | (otherlv_13= 'C5' () ( (lv_right_15_0= ruleExpression_VariableName ) ) ) | ( (otherlv_16= 'C6' otherlv_17= 'C7' ) () ( (lv_right_19_0= ruleExpression_VariableName ) ) ) | ( (otherlv_20= 'C6' otherlv_21= 'C8' ) () ( (lv_right_23_0= ruleExpression_VariableName ) ) ) )* )
             // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/resource/parser/antlr/internal/InternalBug385636.g:266:5: this_Expression_VariableName_0= ruleExpression_VariableName ( (otherlv_1= 'C1' () ( (lv_right_3_0= ruleExpression_VariableName ) ) ) | (otherlv_4= 'C2' () ( (lv_right_6_0= ruleExpression_VariableName ) ) ) | (otherlv_7= 'C3' () ( (lv_right_9_0= ruleExpression_VariableName ) ) ) | (otherlv_10= 'C4' () ( (lv_right_12_0= ruleExpression_VariableName ) ) ) | (otherlv_13= 'C5' () ( (lv_right_15_0= ruleExpression_VariableName ) ) ) | ( (otherlv_16= 'C6' otherlv_17= 'C7' ) () ( (lv_right_19_0= ruleExpression_VariableName ) ) ) | ( (otherlv_20= 'C6' otherlv_21= 'C8' ) () ( (lv_right_23_0= ruleExpression_VariableName ) ) ) )*
             {
-
-                    newCompositeNode(grammarAccess.getStatementAccess().getExpression_VariableNameParserRuleCall_0());
-
+             
+                    newCompositeNode(grammarAccess.getStatementAccess().getExpression_VariableNameParserRuleCall_0()); 
+                
             pushFollow(FollowSets000.FOLLOW_ruleExpression_VariableName_in_ruleStatement569);
             this_Expression_VariableName_0=ruleExpression_VariableName();
 
             state._fsp--;
 
-
-                    current = this_Expression_VariableName_0;
+             
+                    current = this_Expression_VariableName_0; 
                     afterParserOrEnumRuleCall();
-
+                
             // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/resource/parser/antlr/internal/InternalBug385636.g:274:1: ( (otherlv_1= 'C1' () ( (lv_right_3_0= ruleExpression_VariableName ) ) ) | (otherlv_4= 'C2' () ( (lv_right_6_0= ruleExpression_VariableName ) ) ) | (otherlv_7= 'C3' () ( (lv_right_9_0= ruleExpression_VariableName ) ) ) | (otherlv_10= 'C4' () ( (lv_right_12_0= ruleExpression_VariableName ) ) ) | (otherlv_13= 'C5' () ( (lv_right_15_0= ruleExpression_VariableName ) ) ) | ( (otherlv_16= 'C6' otherlv_17= 'C7' ) () ( (lv_right_19_0= ruleExpression_VariableName ) ) ) | ( (otherlv_20= 'C6' otherlv_21= 'C8' ) () ( (lv_right_23_0= ruleExpression_VariableName ) ) ) )*
             loop3:
             do {
                 int alt3=8;
                 alt3 = dfa3.predict(input);
                 switch (alt3) {
-		case 1 :
-		    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/resource/parser/antlr/internal/InternalBug385636.g:274:2: (otherlv_1= 'C1' () ( (lv_right_3_0= ruleExpression_VariableName ) ) )
-		    {
-		    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/resource/parser/antlr/internal/InternalBug385636.g:274:2: (otherlv_1= 'C1' () ( (lv_right_3_0= ruleExpression_VariableName ) ) )
-		    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/resource/parser/antlr/internal/InternalBug385636.g:274:4: otherlv_1= 'C1' () ( (lv_right_3_0= ruleExpression_VariableName ) )
-		    {
-		    otherlv_1=(Token)match(input,15,FollowSets000.FOLLOW_15_in_ruleStatement582);
+            	case 1 :
+            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/resource/parser/antlr/internal/InternalBug385636.g:274:2: (otherlv_1= 'C1' () ( (lv_right_3_0= ruleExpression_VariableName ) ) )
+            	    {
+            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/resource/parser/antlr/internal/InternalBug385636.g:274:2: (otherlv_1= 'C1' () ( (lv_right_3_0= ruleExpression_VariableName ) ) )
+            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/resource/parser/antlr/internal/InternalBug385636.g:274:4: otherlv_1= 'C1' () ( (lv_right_3_0= ruleExpression_VariableName ) )
+            	    {
+            	    otherlv_1=(Token)match(input,15,FollowSets000.FOLLOW_15_in_ruleStatement582); 
+
+            	        	newLeafNode(otherlv_1, grammarAccess.getStatementAccess().getC1Keyword_1_0_0());
+            	        
+            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/resource/parser/antlr/internal/InternalBug385636.g:278:1: ()
+            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/resource/parser/antlr/internal/InternalBug385636.g:279:5: 
+            	    {
+
+            	            current = forceCreateModelElementAndSet(
+            	                grammarAccess.getStatementAccess().getExpression_Larger_EqualLeftAction_1_0_1(),
+            	                current);
+            	        
+
+            	    }
+
+            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/resource/parser/antlr/internal/InternalBug385636.g:284:2: ( (lv_right_3_0= ruleExpression_VariableName ) )
+            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/resource/parser/antlr/internal/InternalBug385636.g:285:1: (lv_right_3_0= ruleExpression_VariableName )
+            	    {
+            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/resource/parser/antlr/internal/InternalBug385636.g:285:1: (lv_right_3_0= ruleExpression_VariableName )
+            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/resource/parser/antlr/internal/InternalBug385636.g:286:3: lv_right_3_0= ruleExpression_VariableName
+            	    {
+            	     
+            	    	        newCompositeNode(grammarAccess.getStatementAccess().getRightExpression_VariableNameParserRuleCall_1_0_2_0()); 
+            	    	    
+            	    pushFollow(FollowSets000.FOLLOW_ruleExpression_VariableName_in_ruleStatement612);
+            	    lv_right_3_0=ruleExpression_VariableName();
+
+            	    state._fsp--;
+
+
+            	    	        if (current==null) {
+            	    	            current = createModelElementForParent(grammarAccess.getStatementRule());
+            	    	        }
+            	           		set(
+            	           			current, 
+            	           			"right",
+            	            		lv_right_3_0, 
+            	            		"Expression_VariableName");
+            	    	        afterParserOrEnumRuleCall();
+            	    	    
+
+            	    }
+
+
+            	    }
+
+
+            	    }
+
+
+            	    }
+            	    break;
+            	case 2 :
+            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/resource/parser/antlr/internal/InternalBug385636.g:303:6: (otherlv_4= 'C2' () ( (lv_right_6_0= ruleExpression_VariableName ) ) )
+            	    {
+            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/resource/parser/antlr/internal/InternalBug385636.g:303:6: (otherlv_4= 'C2' () ( (lv_right_6_0= ruleExpression_VariableName ) ) )
+            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/resource/parser/antlr/internal/InternalBug385636.g:303:8: otherlv_4= 'C2' () ( (lv_right_6_0= ruleExpression_VariableName ) )
+            	    {
+            	    otherlv_4=(Token)match(input,16,FollowSets000.FOLLOW_16_in_ruleStatement632); 
+
+            	        	newLeafNode(otherlv_4, grammarAccess.getStatementAccess().getC2Keyword_1_1_0());
+            	        
+            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/resource/parser/antlr/internal/InternalBug385636.g:307:1: ()
+            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/resource/parser/antlr/internal/InternalBug385636.g:308:5: 
+            	    {
+
+            	            current = forceCreateModelElementAndSet(
+            	                grammarAccess.getStatementAccess().getExpression_SmallerLeftAction_1_1_1(),
+            	                current);
+            	        
+
+            	    }
+
+            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/resource/parser/antlr/internal/InternalBug385636.g:313:2: ( (lv_right_6_0= ruleExpression_VariableName ) )
+            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/resource/parser/antlr/internal/InternalBug385636.g:314:1: (lv_right_6_0= ruleExpression_VariableName )
+            	    {
+            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/resource/parser/antlr/internal/InternalBug385636.g:314:1: (lv_right_6_0= ruleExpression_VariableName )
+            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/resource/parser/antlr/internal/InternalBug385636.g:315:3: lv_right_6_0= ruleExpression_VariableName
+            	    {
+            	     
+            	    	        newCompositeNode(grammarAccess.getStatementAccess().getRightExpression_VariableNameParserRuleCall_1_1_2_0()); 
+            	    	    
+            	    pushFollow(FollowSets000.FOLLOW_ruleExpression_VariableName_in_ruleStatement662);
+            	    lv_right_6_0=ruleExpression_VariableName();
+
+            	    state._fsp--;
+
+
+            	    	        if (current==null) {
+            	    	            current = createModelElementForParent(grammarAccess.getStatementRule());
+            	    	        }
+            	           		set(
+            	           			current, 
+            	           			"right",
+            	            		lv_right_6_0, 
+            	            		"Expression_VariableName");
+            	    	        afterParserOrEnumRuleCall();
+            	    	    
+
+            	    }
+
+
+            	    }
+
 
-				newLeafNode(otherlv_1, grammarAccess.getStatementAccess().getC1Keyword_1_0_0());
+            	    }
 
-		    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/resource/parser/antlr/internal/InternalBug385636.g:278:1: ()
-		    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/resource/parser/antlr/internal/InternalBug385636.g:279:5:
-		    {
+
+            	    }
+            	    break;
+            	case 3 :
+            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/resource/parser/antlr/internal/InternalBug385636.g:332:6: (otherlv_7= 'C3' () ( (lv_right_9_0= ruleExpression_VariableName ) ) )
+            	    {
+            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/resource/parser/antlr/internal/InternalBug385636.g:332:6: (otherlv_7= 'C3' () ( (lv_right_9_0= ruleExpression_VariableName ) ) )
+            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/resource/parser/antlr/internal/InternalBug385636.g:332:8: otherlv_7= 'C3' () ( (lv_right_9_0= ruleExpression_VariableName ) )
+            	    {
+            	    otherlv_7=(Token)match(input,17,FollowSets000.FOLLOW_17_in_ruleStatement682); 
+
+            	        	newLeafNode(otherlv_7, grammarAccess.getStatementAccess().getC3Keyword_1_2_0());
+            	        
+            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/resource/parser/antlr/internal/InternalBug385636.g:336:1: ()
+            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/resource/parser/antlr/internal/InternalBug385636.g:337:5: 
+            	    {
 
-		            current = forceCreateModelElementAndSet(
-		                grammarAccess.getStatementAccess().getExpression_Larger_EqualLeftAction_1_0_1(),
-		                current);
+            	            current = forceCreateModelElementAndSet(
+            	                grammarAccess.getStatementAccess().getExpression_Smaller_EqualLeftAction_1_2_1(),
+            	                current);
+            	        
 
+            	    }
 
-		    }
+            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/resource/parser/antlr/internal/InternalBug385636.g:342:2: ( (lv_right_9_0= ruleExpression_VariableName ) )
+            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/resource/parser/antlr/internal/InternalBug385636.g:343:1: (lv_right_9_0= ruleExpression_VariableName )
+            	    {
+            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/resource/parser/antlr/internal/InternalBug385636.g:343:1: (lv_right_9_0= ruleExpression_VariableName )
+            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/resource/parser/antlr/internal/InternalBug385636.g:344:3: lv_right_9_0= ruleExpression_VariableName
+            	    {
+            	     
+            	    	        newCompositeNode(grammarAccess.getStatementAccess().getRightExpression_VariableNameParserRuleCall_1_2_2_0()); 
+            	    	    
+            	    pushFollow(FollowSets000.FOLLOW_ruleExpression_VariableName_in_ruleStatement712);
+            	    lv_right_9_0=ruleExpression_VariableName();
 
-		    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/resource/parser/antlr/internal/InternalBug385636.g:284:2: ( (lv_right_3_0= ruleExpression_VariableName ) )
-		    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/resource/parser/antlr/internal/InternalBug385636.g:285:1: (lv_right_3_0= ruleExpression_VariableName )
-		    {
-		    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/resource/parser/antlr/internal/InternalBug385636.g:285:1: (lv_right_3_0= ruleExpression_VariableName )
-		    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/resource/parser/antlr/internal/InternalBug385636.g:286:3: lv_right_3_0= ruleExpression_VariableName
-		    {
+            	    state._fsp--;
+
 
-			        newCompositeNode(grammarAccess.getStatementAccess().getRightExpression_VariableNameParserRuleCall_1_0_2_0());
+            	    	        if (current==null) {
+            	    	            current = createModelElementForParent(grammarAccess.getStatementRule());
+            	    	        }
+            	           		set(
+            	           			current, 
+            	           			"right",
+            	            		lv_right_9_0, 
+            	            		"Expression_VariableName");
+            	    	        afterParserOrEnumRuleCall();
+            	    	    
+
+            	    }
+
+
+            	    }
+
 
-		    pushFollow(FollowSets000.FOLLOW_ruleExpression_VariableName_in_ruleStatement612);
-		    lv_right_3_0=ruleExpression_VariableName();
+            	    }
+
+
+            	    }
+            	    break;
+            	case 4 :
+            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/resource/parser/antlr/internal/InternalBug385636.g:361:6: (otherlv_10= 'C4' () ( (lv_right_12_0= ruleExpression_VariableName ) ) )
+            	    {
+            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/resource/parser/antlr/internal/InternalBug385636.g:361:6: (otherlv_10= 'C4' () ( (lv_right_12_0= ruleExpression_VariableName ) ) )
+            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/resource/parser/antlr/internal/InternalBug385636.g:361:8: otherlv_10= 'C4' () ( (lv_right_12_0= ruleExpression_VariableName ) )
+            	    {
+            	    otherlv_10=(Token)match(input,18,FollowSets000.FOLLOW_18_in_ruleStatement732); 
+
+            	        	newLeafNode(otherlv_10, grammarAccess.getStatementAccess().getC4Keyword_1_3_0());
+            	        
+            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/resource/parser/antlr/internal/InternalBug385636.g:365:1: ()
+            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/resource/parser/antlr/internal/InternalBug385636.g:366:5: 
+            	    {
 
-		    state._fsp--;
+            	            current = forceCreateModelElementAndSet(
+            	                grammarAccess.getStatementAccess().getExpression_EqualLeftAction_1_3_1(),
+            	                current);
+            	        
 
+            	    }
 
-			        if (current==null) {
-			            current = createModelElementForParent(grammarAccess.getStatementRule());
-			        }
-					set(
-						current,
-						"right",
-					lv_right_3_0,
-					"Expression_VariableName");
-			        afterParserOrEnumRuleCall();
+            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/resource/parser/antlr/internal/InternalBug385636.g:371:2: ( (lv_right_12_0= ruleExpression_VariableName ) )
+            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/resource/parser/antlr/internal/InternalBug385636.g:372:1: (lv_right_12_0= ruleExpression_VariableName )
+            	    {
+            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/resource/parser/antlr/internal/InternalBug385636.g:372:1: (lv_right_12_0= ruleExpression_VariableName )
+            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/resource/parser/antlr/internal/InternalBug385636.g:373:3: lv_right_12_0= ruleExpression_VariableName
+            	    {
+            	     
+            	    	        newCompositeNode(grammarAccess.getStatementAccess().getRightExpression_VariableNameParserRuleCall_1_3_2_0()); 
+            	    	    
+            	    pushFollow(FollowSets000.FOLLOW_ruleExpression_VariableName_in_ruleStatement762);
+            	    lv_right_12_0=ruleExpression_VariableName();
+
+            	    state._fsp--;
 
+
+            	    	        if (current==null) {
+            	    	            current = createModelElementForParent(grammarAccess.getStatementRule());
+            	    	        }
+            	           		set(
+            	           			current, 
+            	           			"right",
+            	            		lv_right_12_0, 
+            	            		"Expression_VariableName");
+            	    	        afterParserOrEnumRuleCall();
+            	    	    
 
-		    }
+            	    }
 
 
-		    }
+            	    }
+
+
+            	    }
+
+
+            	    }
+            	    break;
+            	case 5 :
+            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/resource/parser/antlr/internal/InternalBug385636.g:390:6: (otherlv_13= 'C5' () ( (lv_right_15_0= ruleExpression_VariableName ) ) )
+            	    {
+            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/resource/parser/antlr/internal/InternalBug385636.g:390:6: (otherlv_13= 'C5' () ( (lv_right_15_0= ruleExpression_VariableName ) ) )
+            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/resource/parser/antlr/internal/InternalBug385636.g:390:8: otherlv_13= 'C5' () ( (lv_right_15_0= ruleExpression_VariableName ) )
+            	    {
+            	    otherlv_13=(Token)match(input,19,FollowSets000.FOLLOW_19_in_ruleStatement782); 
+
+            	        	newLeafNode(otherlv_13, grammarAccess.getStatementAccess().getC5Keyword_1_4_0());
+            	        
+            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/resource/parser/antlr/internal/InternalBug385636.g:394:1: ()
+            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/resource/parser/antlr/internal/InternalBug385636.g:395:5: 
+            	    {
+
+            	            current = forceCreateModelElementAndSet(
+            	                grammarAccess.getStatementAccess().getExpression_Not_EqualLeftAction_1_4_1(),
+            	                current);
+            	        
+
+            	    }
 
+            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/resource/parser/antlr/internal/InternalBug385636.g:400:2: ( (lv_right_15_0= ruleExpression_VariableName ) )
+            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/resource/parser/antlr/internal/InternalBug385636.g:401:1: (lv_right_15_0= ruleExpression_VariableName )
+            	    {
+            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/resource/parser/antlr/internal/InternalBug385636.g:401:1: (lv_right_15_0= ruleExpression_VariableName )
+            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/resource/parser/antlr/internal/InternalBug385636.g:402:3: lv_right_15_0= ruleExpression_VariableName
+            	    {
+            	     
+            	    	        newCompositeNode(grammarAccess.getStatementAccess().getRightExpression_VariableNameParserRuleCall_1_4_2_0()); 
+            	    	    
+            	    pushFollow(FollowSets000.FOLLOW_ruleExpression_VariableName_in_ruleStatement812);
+            	    lv_right_15_0=ruleExpression_VariableName();
 
-		    }
+            	    state._fsp--;
+
+
+            	    	        if (current==null) {
+            	    	            current = createModelElementForParent(grammarAccess.getStatementRule());
+            	    	        }
+            	           		set(
+            	           			current, 
+            	           			"right",
+            	            		lv_right_15_0, 
+            	            		"Expression_VariableName");
+            	    	        afterParserOrEnumRuleCall();
+            	    	    
 
+            	    }
 
-		    }
-		    break;
-		case 2 :
-		    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/resource/parser/antlr/internal/InternalBug385636.g:303:6: (otherlv_4= 'C2' () ( (lv_right_6_0= ruleExpression_VariableName ) ) )
-		    {
-		    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/resource/parser/antlr/internal/InternalBug385636.g:303:6: (otherlv_4= 'C2' () ( (lv_right_6_0= ruleExpression_VariableName ) ) )
-		    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/resource/parser/antlr/internal/InternalBug385636.g:303:8: otherlv_4= 'C2' () ( (lv_right_6_0= ruleExpression_VariableName ) )
-		    {
-		    otherlv_4=(Token)match(input,16,FollowSets000.FOLLOW_16_in_ruleStatement632);
+
+            	    }
 
-				newLeafNode(otherlv_4, grammarAccess.getStatementAccess().getC2Keyword_1_1_0());
 
-		    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/resource/parser/antlr/internal/InternalBug385636.g:307:1: ()
-		    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/resource/parser/antlr/internal/InternalBug385636.g:308:5:
-		    {
+            	    }
+
 
-		            current = forceCreateModelElementAndSet(
-		                grammarAccess.getStatementAccess().getExpression_SmallerLeftAction_1_1_1(),
-		                current);
+            	    }
+            	    break;
+            	case 6 :
+            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/resource/parser/antlr/internal/InternalBug385636.g:419:6: ( (otherlv_16= 'C6' otherlv_17= 'C7' ) () ( (lv_right_19_0= ruleExpression_VariableName ) ) )
+            	    {
+            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/resource/parser/antlr/internal/InternalBug385636.g:419:6: ( (otherlv_16= 'C6' otherlv_17= 'C7' ) () ( (lv_right_19_0= ruleExpression_VariableName ) ) )
+            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/resource/parser/antlr/internal/InternalBug385636.g:419:7: (otherlv_16= 'C6' otherlv_17= 'C7' ) () ( (lv_right_19_0= ruleExpression_VariableName ) )
+            	    {
+            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/resource/parser/antlr/internal/InternalBug385636.g:419:7: (otherlv_16= 'C6' otherlv_17= 'C7' )
+            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/resource/parser/antlr/internal/InternalBug385636.g:419:9: otherlv_16= 'C6' otherlv_17= 'C7'
+            	    {
+            	    otherlv_16=(Token)match(input,20,FollowSets000.FOLLOW_20_in_ruleStatement833); 
+
+            	        	newLeafNode(otherlv_16, grammarAccess.getStatementAccess().getC6Keyword_1_5_0_0());
+            	        
+            	    otherlv_17=(Token)match(input,21,FollowSets000.FOLLOW_21_in_ruleStatement845); 
 
+            	        	newLeafNode(otherlv_17, grammarAccess.getStatementAccess().getC7Keyword_1_5_0_1());
+            	        
+
+            	    }
+
+            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/resource/parser/antlr/internal/InternalBug385636.g:427:2: ()
+            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/resource/parser/antlr/internal/InternalBug385636.g:428:5: 
+            	    {
+
+            	            current = forceCreateModelElementAndSet(
+            	                grammarAccess.getStatementAccess().getExpression_Not_LessLeftAction_1_5_1(),
+            	                current);
+            	        
+
+            	    }
 
-		    }
+            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/resource/parser/antlr/internal/InternalBug385636.g:433:2: ( (lv_right_19_0= ruleExpression_VariableName ) )
+            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/resource/parser/antlr/internal/InternalBug385636.g:434:1: (lv_right_19_0= ruleExpression_VariableName )
+            	    {
+            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/resource/parser/antlr/internal/InternalBug385636.g:434:1: (lv_right_19_0= ruleExpression_VariableName )
+            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/resource/parser/antlr/internal/InternalBug385636.g:435:3: lv_right_19_0= ruleExpression_VariableName
+            	    {
+            	     
+            	    	        newCompositeNode(grammarAccess.getStatementAccess().getRightExpression_VariableNameParserRuleCall_1_5_2_0()); 
+            	    	    
+            	    pushFollow(FollowSets000.FOLLOW_ruleExpression_VariableName_in_ruleStatement876);
+            	    lv_right_19_0=ruleExpression_VariableName();
 
-		    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/resource/parser/antlr/internal/InternalBug385636.g:313:2: ( (lv_right_6_0= ruleExpression_VariableName ) )
-		    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/resource/parser/antlr/internal/InternalBug385636.g:314:1: (lv_right_6_0= ruleExpression_VariableName )
-		    {
-		    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/resource/parser/antlr/internal/InternalBug385636.g:314:1: (lv_right_6_0= ruleExpression_VariableName )
-		    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/resource/parser/antlr/internal/InternalBug385636.g:315:3: lv_right_6_0= ruleExpression_VariableName
-		    {
+            	    state._fsp--;
 
-			        newCompositeNode(grammarAccess.getStatementAccess().getRightExpression_VariableNameParserRuleCall_1_1_2_0());
 
-		    pushFollow(FollowSets000.FOLLOW_ruleExpression_VariableName_in_ruleStatement662);
-		    lv_right_6_0=ruleExpression_VariableName();
+            	    	        if (current==null) {
+            	    	            current = createModelElementForParent(grammarAccess.getStatementRule());
+            	    	        }
+            	           		set(
+            	           			current, 
+            	           			"right",
+            	            		lv_right_19_0, 
+            	            		"Expression_VariableName");
+            	    	        afterParserOrEnumRuleCall();
+            	    	    
 
-		    state._fsp--;
+            	    }
 
 
-			        if (current==null) {
-			            current = createModelElementForParent(grammarAccess.getStatementRule());
-			        }
-					set(
-						current,
-						"right",
-					lv_right_6_0,
-					"Expression_VariableName");
-			        afterParserOrEnumRuleCall();
+            	    }
 
 
-		    }
+            	    }
 
 
-		    }
+            	    }
+            	    break;
+            	case 7 :
+            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/resource/parser/antlr/internal/InternalBug385636.g:452:6: ( (otherlv_20= 'C6' otherlv_21= 'C8' ) () ( (lv_right_23_0= ruleExpression_VariableName ) ) )
+            	    {
+            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/resource/parser/antlr/internal/InternalBug385636.g:452:6: ( (otherlv_20= 'C6' otherlv_21= 'C8' ) () ( (lv_right_23_0= ruleExpression_VariableName ) ) )
+            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/resource/parser/antlr/internal/InternalBug385636.g:452:7: (otherlv_20= 'C6' otherlv_21= 'C8' ) () ( (lv_right_23_0= ruleExpression_VariableName ) )
+            	    {
+            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/resource/parser/antlr/internal/InternalBug385636.g:452:7: (otherlv_20= 'C6' otherlv_21= 'C8' )
+            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/resource/parser/antlr/internal/InternalBug385636.g:452:9: otherlv_20= 'C6' otherlv_21= 'C8'
+            	    {
+            	    otherlv_20=(Token)match(input,20,FollowSets000.FOLLOW_20_in_ruleStatement897); 
 
+            	        	newLeafNode(otherlv_20, grammarAccess.getStatementAccess().getC6Keyword_1_6_0_0());
+            	        
+            	    otherlv_21=(Token)match(input,22,FollowSets000.FOLLOW_22_in_ruleStatement909); 
 
-		    }
+            	        	newLeafNode(otherlv_21, grammarAccess.getStatementAccess().getC8Keyword_1_6_0_1());
+            	        
 
+            	    }
 
-		    }
-		    break;
-		case 3 :
-		    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/resource/parser/antlr/internal/InternalBug385636.g:332:6: (otherlv_7= 'C3' () ( (lv_right_9_0= ruleExpression_VariableName ) ) )
-		    {
-		    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/resource/parser/antlr/internal/InternalBug385636.g:332:6: (otherlv_7= 'C3' () ( (lv_right_9_0= ruleExpression_VariableName ) ) )
-		    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/resource/parser/antlr/internal/InternalBug385636.g:332:8: otherlv_7= 'C3' () ( (lv_right_9_0= ruleExpression_VariableName ) )
-		    {
-		    otherlv_7=(Token)match(input,17,FollowSets000.FOLLOW_17_in_ruleStatement682);
+            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/resource/parser/antlr/internal/InternalBug385636.g:460:2: ()
+            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/resource/parser/antlr/internal/InternalBug385636.g:461:5: 
+            	    {
 
-				newLeafNode(otherlv_7, grammarAccess.getStatementAccess().getC3Keyword_1_2_0());
+            	            current = forceCreateModelElementAndSet(
+            	                grammarAccess.getStatementAccess().getExpression_Not_GreaterLeftAction_1_6_1(),
+            	                current);
+            	        
 
-		    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/resource/parser/antlr/internal/InternalBug385636.g:336:1: ()
-		    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/resource/parser/antlr/internal/InternalBug385636.g:337:5:
-		    {
+            	    }
 
-		            current = forceCreateModelElementAndSet(
-		                grammarAccess.getStatementAccess().getExpression_Smaller_EqualLeftAction_1_2_1(),
-		                current);
+            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/resource/parser/antlr/internal/InternalBug385636.g:466:2: ( (lv_right_23_0= ruleExpression_VariableName ) )
+            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/resource/parser/antlr/internal/InternalBug385636.g:467:1: (lv_right_23_0= ruleExpression_VariableName )
+            	    {
+            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/resource/parser/antlr/internal/InternalBug385636.g:467:1: (lv_right_23_0= ruleExpression_VariableName )
+            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/resource/parser/antlr/internal/InternalBug385636.g:468:3: lv_right_23_0= ruleExpression_VariableName
+            	    {
+            	     
+            	    	        newCompositeNode(grammarAccess.getStatementAccess().getRightExpression_VariableNameParserRuleCall_1_6_2_0()); 
+            	    	    
+            	    pushFollow(FollowSets000.FOLLOW_ruleExpression_VariableName_in_ruleStatement940);
+            	    lv_right_23_0=ruleExpression_VariableName();
 
+            	    state._fsp--;
 
-		    }
 
-		    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/resource/parser/antlr/internal/InternalBug385636.g:342:2: ( (lv_right_9_0= ruleExpression_VariableName ) )
-		    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/resource/parser/antlr/internal/InternalBug385636.g:343:1: (lv_right_9_0= ruleExpression_VariableName )
-		    {
-		    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/resource/parser/antlr/internal/InternalBug385636.g:343:1: (lv_right_9_0= ruleExpression_VariableName )
-		    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/resource/parser/antlr/internal/InternalBug385636.g:344:3: lv_right_9_0= ruleExpression_VariableName
-		    {
+            	    	        if (current==null) {
+            	    	            current = createModelElementForParent(grammarAccess.getStatementRule());
+            	    	        }
+            	           		set(
+            	           			current, 
+            	           			"right",
+            	            		lv_right_23_0, 
+            	            		"Expression_VariableName");
+            	    	        afterParserOrEnumRuleCall();
+            	    	    
 
-			        newCompositeNode(grammarAccess.getStatementAccess().getRightExpression_VariableNameParserRuleCall_1_2_2_0());
+            	    }
 
-		    pushFollow(FollowSets000.FOLLOW_ruleExpression_VariableName_in_ruleStatement712);
-		    lv_right_9_0=ruleExpression_VariableName();
 
-		    state._fsp--;
+            	    }
 
 
-			        if (current==null) {
-			            current = createModelElementForParent(grammarAccess.getStatementRule());
-			        }
-					set(
-						current,
-						"right",
-					lv_right_9_0,
-					"Expression_VariableName");
-			        afterParserOrEnumRuleCall();
+            	    }
 
 
-		    }
+            	    }
+            	    break;
 
-
-		    }
-
-
-		    }
-
-
-		    }
-		    break;
-		case 4 :
-		    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/resource/parser/antlr/internal/InternalBug385636.g:361:6: (otherlv_10= 'C4' () ( (lv_right_12_0= ruleExpression_VariableName ) ) )
-		    {
-		    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/resource/parser/antlr/internal/InternalBug385636.g:361:6: (otherlv_10= 'C4' () ( (lv_right_12_0= ruleExpression_VariableName ) ) )
-		    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/resource/parser/antlr/internal/InternalBug385636.g:361:8: otherlv_10= 'C4' () ( (lv_right_12_0= ruleExpression_VariableName ) )
-		    {
-		    otherlv_10=(Token)match(input,18,FollowSets000.FOLLOW_18_in_ruleStatement732);
-
-				newLeafNode(otherlv_10, grammarAccess.getStatementAccess().getC4Keyword_1_3_0());
-
-		    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/resource/parser/antlr/internal/InternalBug385636.g:365:1: ()
-		    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/resource/parser/antlr/internal/InternalBug385636.g:366:5:
-		    {
-
-		            current = forceCreateModelElementAndSet(
-		                grammarAccess.getStatementAccess().getExpression_EqualLeftAction_1_3_1(),
-		                current);
-
-
-		    }
-
-		    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/resource/parser/antlr/internal/InternalBug385636.g:371:2: ( (lv_right_12_0= ruleExpression_VariableName ) )
-		    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/resource/parser/antlr/internal/InternalBug385636.g:372:1: (lv_right_12_0= ruleExpression_VariableName )
-		    {
-		    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/resource/parser/antlr/internal/InternalBug385636.g:372:1: (lv_right_12_0= ruleExpression_VariableName )
-		    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/resource/parser/antlr/internal/InternalBug385636.g:373:3: lv_right_12_0= ruleExpression_VariableName
-		    {
-
-			        newCompositeNode(grammarAccess.getStatementAccess().getRightExpression_VariableNameParserRuleCall_1_3_2_0());
-
-		    pushFollow(FollowSets000.FOLLOW_ruleExpression_VariableName_in_ruleStatement762);
-		    lv_right_12_0=ruleExpression_VariableName();
-
-		    state._fsp--;
-
-
-			        if (current==null) {
-			            current = createModelElementForParent(grammarAccess.getStatementRule());
-			        }
-					set(
-						current,
-						"right",
-					lv_right_12_0,
-					"Expression_VariableName");
-			        afterParserOrEnumRuleCall();
-
-
-		    }
-
-
-		    }
-
-
-		    }
-
-
-		    }
-		    break;
-		case 5 :
-		    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/resource/parser/antlr/internal/InternalBug385636.g:390:6: (otherlv_13= 'C5' () ( (lv_right_15_0= ruleExpression_VariableName ) ) )
-		    {
-		    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/resource/parser/antlr/internal/InternalBug385636.g:390:6: (otherlv_13= 'C5' () ( (lv_right_15_0= ruleExpression_VariableName ) ) )
-		    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/resource/parser/antlr/internal/InternalBug385636.g:390:8: otherlv_13= 'C5' () ( (lv_right_15_0= ruleExpression_VariableName ) )
-		    {
-		    otherlv_13=(Token)match(input,19,FollowSets000.FOLLOW_19_in_ruleStatement782);
-
-				newLeafNode(otherlv_13, grammarAccess.getStatementAccess().getC5Keyword_1_4_0());
-
-		    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/resource/parser/antlr/internal/InternalBug385636.g:394:1: ()
-		    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/resource/parser/antlr/internal/InternalBug385636.g:395:5:
-		    {
-
-		            current = forceCreateModelElementAndSet(
-		                grammarAccess.getStatementAccess().getExpression_Not_EqualLeftAction_1_4_1(),
-		                current);
-
-
-		    }
-
-		    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/resource/parser/antlr/internal/InternalBug385636.g:400:2: ( (lv_right_15_0= ruleExpression_VariableName ) )
-		    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/resource/parser/antlr/internal/InternalBug385636.g:401:1: (lv_right_15_0= ruleExpression_VariableName )
-		    {
-		    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/resource/parser/antlr/internal/InternalBug385636.g:401:1: (lv_right_15_0= ruleExpression_VariableName )
-		    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/resource/parser/antlr/internal/InternalBug385636.g:402:3: lv_right_15_0= ruleExpression_VariableName
-		    {
-
-			        newCompositeNode(grammarAccess.getStatementAccess().getRightExpression_VariableNameParserRuleCall_1_4_2_0());
-
-		    pushFollow(FollowSets000.FOLLOW_ruleExpression_VariableName_in_ruleStatement812);
-		    lv_right_15_0=ruleExpression_VariableName();
-
-		    state._fsp--;
-
-
-			        if (current==null) {
-			            current = createModelElementForParent(grammarAccess.getStatementRule());
-			        }
-					set(
-						current,
-						"right",
-					lv_right_15_0,
-					"Expression_VariableName");
-			        afterParserOrEnumRuleCall();
-
-
-		    }
-
-
-		    }
-
-
-		    }
-
-
-		    }
-		    break;
-		case 6 :
-		    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/resource/parser/antlr/internal/InternalBug385636.g:419:6: ( (otherlv_16= 'C6' otherlv_17= 'C7' ) () ( (lv_right_19_0= ruleExpression_VariableName ) ) )
-		    {
-		    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/resource/parser/antlr/internal/InternalBug385636.g:419:6: ( (otherlv_16= 'C6' otherlv_17= 'C7' ) () ( (lv_right_19_0= ruleExpression_VariableName ) ) )
-		    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/resource/parser/antlr/internal/InternalBug385636.g:419:7: (otherlv_16= 'C6' otherlv_17= 'C7' ) () ( (lv_right_19_0= ruleExpression_VariableName ) )
-		    {
-		    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/resource/parser/antlr/internal/InternalBug385636.g:419:7: (otherlv_16= 'C6' otherlv_17= 'C7' )
-		    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/resource/parser/antlr/internal/InternalBug385636.g:419:9: otherlv_16= 'C6' otherlv_17= 'C7'
-		    {
-		    otherlv_16=(Token)match(input,20,FollowSets000.FOLLOW_20_in_ruleStatement833);
-
-				newLeafNode(otherlv_16, grammarAccess.getStatementAccess().getC6Keyword_1_5_0_0());
-
-		    otherlv_17=(Token)match(input,21,FollowSets000.FOLLOW_21_in_ruleStatement845);
-
-				newLeafNode(otherlv_17, grammarAccess.getStatementAccess().getC7Keyword_1_5_0_1());
-
-
-		    }
-
-		    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/resource/parser/antlr/internal/InternalBug385636.g:427:2: ()
-		    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/resource/parser/antlr/internal/InternalBug385636.g:428:5:
-		    {
-
-		            current = forceCreateModelElementAndSet(
-		                grammarAccess.getStatementAccess().getExpression_Not_LessLeftAction_1_5_1(),
-		                current);
-
-
-		    }
-
-		    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/resource/parser/antlr/internal/InternalBug385636.g:433:2: ( (lv_right_19_0= ruleExpression_VariableName ) )
-		    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/resource/parser/antlr/internal/InternalBug385636.g:434:1: (lv_right_19_0= ruleExpression_VariableName )
-		    {
-		    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/resource/parser/antlr/internal/InternalBug385636.g:434:1: (lv_right_19_0= ruleExpression_VariableName )
-		    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/resource/parser/antlr/internal/InternalBug385636.g:435:3: lv_right_19_0= ruleExpression_VariableName
-		    {
-
-			        newCompositeNode(grammarAccess.getStatementAccess().getRightExpression_VariableNameParserRuleCall_1_5_2_0());
-
-		    pushFollow(FollowSets000.FOLLOW_ruleExpression_VariableName_in_ruleStatement876);
-		    lv_right_19_0=ruleExpression_VariableName();
-
-		    state._fsp--;
-
-
-			        if (current==null) {
-			            current = createModelElementForParent(grammarAccess.getStatementRule());
-			        }
-					set(
-						current,
-						"right",
-					lv_right_19_0,
-					"Expression_VariableName");
-			        afterParserOrEnumRuleCall();
-
-
-		    }
-
-
-		    }
-
-
-		    }
-
-
-		    }
-		    break;
-		case 7 :
-		    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/resource/parser/antlr/internal/InternalBug385636.g:452:6: ( (otherlv_20= 'C6' otherlv_21= 'C8' ) () ( (lv_right_23_0= ruleExpression_VariableName ) ) )
-		    {
-		    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/resource/parser/antlr/internal/InternalBug385636.g:452:6: ( (otherlv_20= 'C6' otherlv_21= 'C8' ) () ( (lv_right_23_0= ruleExpression_VariableName ) ) )
-		    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/resource/parser/antlr/internal/InternalBug385636.g:452:7: (otherlv_20= 'C6' otherlv_21= 'C8' ) () ( (lv_right_23_0= ruleExpression_VariableName ) )
-		    {
-		    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/resource/parser/antlr/internal/InternalBug385636.g:452:7: (otherlv_20= 'C6' otherlv_21= 'C8' )
-		    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/resource/parser/antlr/internal/InternalBug385636.g:452:9: otherlv_20= 'C6' otherlv_21= 'C8'
-		    {
-		    otherlv_20=(Token)match(input,20,FollowSets000.FOLLOW_20_in_ruleStatement897);
-
-				newLeafNode(otherlv_20, grammarAccess.getStatementAccess().getC6Keyword_1_6_0_0());
-
-		    otherlv_21=(Token)match(input,22,FollowSets000.FOLLOW_22_in_ruleStatement909);
-
-				newLeafNode(otherlv_21, grammarAccess.getStatementAccess().getC8Keyword_1_6_0_1());
-
-
-		    }
-
-		    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/resource/parser/antlr/internal/InternalBug385636.g:460:2: ()
-		    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/resource/parser/antlr/internal/InternalBug385636.g:461:5:
-		    {
-
-		            current = forceCreateModelElementAndSet(
-		                grammarAccess.getStatementAccess().getExpression_Not_GreaterLeftAction_1_6_1(),
-		                current);
-
-
-		    }
-
-		    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/resource/parser/antlr/internal/InternalBug385636.g:466:2: ( (lv_right_23_0= ruleExpression_VariableName ) )
-		    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/resource/parser/antlr/internal/InternalBug385636.g:467:1: (lv_right_23_0= ruleExpression_VariableName )
-		    {
-		    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/resource/parser/antlr/internal/InternalBug385636.g:467:1: (lv_right_23_0= ruleExpression_VariableName )
-		    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/resource/parser/antlr/internal/InternalBug385636.g:468:3: lv_right_23_0= ruleExpression_VariableName
-		    {
-
-			        newCompositeNode(grammarAccess.getStatementAccess().getRightExpression_VariableNameParserRuleCall_1_6_2_0());
-
-		    pushFollow(FollowSets000.FOLLOW_ruleExpression_VariableName_in_ruleStatement940);
-		    lv_right_23_0=ruleExpression_VariableName();
-
-		    state._fsp--;
-
-
-			        if (current==null) {
-			            current = createModelElementForParent(grammarAccess.getStatementRule());
-			        }
-					set(
-						current,
-						"right",
-					lv_right_23_0,
-					"Expression_VariableName");
-			        afterParserOrEnumRuleCall();
-
-
-		    }
-
-
-		    }
-
-
-		    }
-
-
-		    }
-		    break;
-
-		default :
-		    break loop3;
+            	default :
+            	    break loop3;
                 }
             } while (true);
 
@@ -1101,13 +1101,13 @@ public class InternalBug385636Parser extends AbstractInternalAntlrParser {
 
             }
 
-             leaveRule();
+             leaveRule(); 
         }
-
-            catch (RecognitionException re) {
-                recover(input,re);
+         
+            catch (RecognitionException re) { 
+                recover(input,re); 
                 appendSkippedTokens();
-            }
+            } 
         finally {
         }
         return current;
@@ -1127,23 +1127,23 @@ public class InternalBug385636Parser extends AbstractInternalAntlrParser {
             // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/resource/parser/antlr/internal/InternalBug385636.g:493:2: (iv_ruleExpression_VariableName= ruleExpression_VariableName EOF )
             // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/resource/parser/antlr/internal/InternalBug385636.g:494:2: iv_ruleExpression_VariableName= ruleExpression_VariableName EOF
             {
-             newCompositeNode(grammarAccess.getExpression_VariableNameRule());
+             newCompositeNode(grammarAccess.getExpression_VariableNameRule()); 
             pushFollow(FollowSets000.FOLLOW_ruleExpression_VariableName_in_entryRuleExpression_VariableName979);
             iv_ruleExpression_VariableName=ruleExpression_VariableName();
 
             state._fsp--;
 
-             current =iv_ruleExpression_VariableName;
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleExpression_VariableName989);
+             current =iv_ruleExpression_VariableName; 
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleExpression_VariableName989); 
 
             }
 
         }
-
-            catch (RecognitionException re) {
-                recover(input,re);
+         
+            catch (RecognitionException re) { 
+                recover(input,re); 
                 appendSkippedTokens();
-            }
+            } 
         finally {
         }
         return current;
@@ -1159,8 +1159,8 @@ public class InternalBug385636Parser extends AbstractInternalAntlrParser {
         EObject lv_variable_0_0 = null;
 
 
-         enterRule();
-
+         enterRule(); 
+            
         try {
             // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/resource/parser/antlr/internal/InternalBug385636.g:504:28: ( ( (lv_variable_0_0= ruleNVariableAccess ) ) )
             // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/resource/parser/antlr/internal/InternalBug385636.g:505:1: ( (lv_variable_0_0= ruleNVariableAccess ) )
@@ -1171,41 +1171,41 @@ public class InternalBug385636Parser extends AbstractInternalAntlrParser {
             // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/resource/parser/antlr/internal/InternalBug385636.g:506:1: (lv_variable_0_0= ruleNVariableAccess )
             // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/resource/parser/antlr/internal/InternalBug385636.g:507:3: lv_variable_0_0= ruleNVariableAccess
             {
-
-		        newCompositeNode(grammarAccess.getExpression_VariableNameAccess().getVariableNVariableAccessParserRuleCall_0());
-
+             
+            	        newCompositeNode(grammarAccess.getExpression_VariableNameAccess().getVariableNVariableAccessParserRuleCall_0()); 
+            	    
             pushFollow(FollowSets000.FOLLOW_ruleNVariableAccess_in_ruleExpression_VariableName1034);
             lv_variable_0_0=ruleNVariableAccess();
 
             state._fsp--;
 
 
-		        if (current==null) {
-		            current = createModelElementForParent(grammarAccess.getExpression_VariableNameRule());
-		        }
-				set(
-					current,
-					"variable",
-				lv_variable_0_0,
-				"NVariableAccess");
-		        afterParserOrEnumRuleCall();
-
-
-            }
-
+            	        if (current==null) {
+            	            current = createModelElementForParent(grammarAccess.getExpression_VariableNameRule());
+            	        }
+                   		set(
+                   			current, 
+                   			"variable",
+                    		lv_variable_0_0, 
+                    		"NVariableAccess");
+            	        afterParserOrEnumRuleCall();
+            	    
 
             }
 
 
             }
 
-             leaveRule();
+
+            }
+
+             leaveRule(); 
         }
-
-            catch (RecognitionException re) {
-                recover(input,re);
+         
+            catch (RecognitionException re) { 
+                recover(input,re); 
                 appendSkippedTokens();
-            }
+            } 
         finally {
         }
         return current;
@@ -1274,9 +1274,9 @@ public class InternalBug385636Parser extends AbstractInternalAntlrParser {
             return "()* loopback of 274:1: ( (otherlv_1= 'C1' () ( (lv_right_3_0= ruleExpression_VariableName ) ) ) | (otherlv_4= 'C2' () ( (lv_right_6_0= ruleExpression_VariableName ) ) ) | (otherlv_7= 'C3' () ( (lv_right_9_0= ruleExpression_VariableName ) ) ) | (otherlv_10= 'C4' () ( (lv_right_12_0= ruleExpression_VariableName ) ) ) | (otherlv_13= 'C5' () ( (lv_right_15_0= ruleExpression_VariableName ) ) ) | ( (otherlv_16= 'C6' otherlv_17= 'C7' ) () ( (lv_right_19_0= ruleExpression_VariableName ) ) ) | ( (otherlv_20= 'C6' otherlv_21= 'C8' ) () ( (lv_right_23_0= ruleExpression_VariableName ) ) ) )*";
         }
     }
+ 
 
-
-
+    
     private static class FollowSets000 {
         public static final BitSet FOLLOW_ruleProgram_in_entryRuleProgram75 = new BitSet(new long[]{0x0000000000000000L});
         public static final BitSet FOLLOW_EOF_in_entryRuleProgram85 = new BitSet(new long[]{0x0000000000000002L});

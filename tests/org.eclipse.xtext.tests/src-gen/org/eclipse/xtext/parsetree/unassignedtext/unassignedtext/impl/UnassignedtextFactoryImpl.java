@@ -1,7 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
  */
 package org.eclipse.xtext.parsetree.unassignedtext.unassignedtext.impl;
 
@@ -33,7 +30,7 @@ public class UnassignedtextFactoryImpl extends EFactoryImpl implements Unassigne
   {
     try
     {
-      UnassignedtextFactory theUnassignedtextFactory = (UnassignedtextFactory)EPackage.Registry.INSTANCE.getEFactory("http://simple/unassignedtext"); 
+      UnassignedtextFactory theUnassignedtextFactory = (UnassignedtextFactory)EPackage.Registry.INSTANCE.getEFactory(UnassignedtextPackage.eNS_URI);
       if (theUnassignedtextFactory != null)
       {
         return theUnassignedtextFactory;

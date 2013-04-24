@@ -1,7 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
  */
 package org.eclipse.xtext.parser.terminalrules.hiddenTerminalsTestLanguage.impl;
 
@@ -33,7 +30,7 @@ public class HiddenTerminalsTestLanguageFactoryImpl extends EFactoryImpl impleme
   {
     try
     {
-      HiddenTerminalsTestLanguageFactory theHiddenTerminalsTestLanguageFactory = (HiddenTerminalsTestLanguageFactory)EPackage.Registry.INSTANCE.getEFactory("http://www.eclipse.org/2008/tmf/xtext/HiddenTerminalsTest"); 
+      HiddenTerminalsTestLanguageFactory theHiddenTerminalsTestLanguageFactory = (HiddenTerminalsTestLanguageFactory)EPackage.Registry.INSTANCE.getEFactory(HiddenTerminalsTestLanguagePackage.eNS_URI);
       if (theHiddenTerminalsTestLanguageFactory != null)
       {
         return theHiddenTerminalsTestLanguageFactory;

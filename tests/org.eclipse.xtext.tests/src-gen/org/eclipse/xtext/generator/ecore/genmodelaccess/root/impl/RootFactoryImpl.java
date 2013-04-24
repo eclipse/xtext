@@ -1,7 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
  */
 package org.eclipse.xtext.generator.ecore.genmodelaccess.root.impl;
 
@@ -34,7 +31,7 @@ public class RootFactoryImpl extends EFactoryImpl implements RootFactory
 	{
 		try
 		{
-			RootFactory theRootFactory = (RootFactory)EPackage.Registry.INSTANCE.getEFactory("http://xtext.org/genmodeltest-v1.0"); 
+			RootFactory theRootFactory = (RootFactory)EPackage.Registry.INSTANCE.getEFactory(RootPackage.eNS_URI);
 			if (theRootFactory != null)
 			{
 				return theRootFactory;

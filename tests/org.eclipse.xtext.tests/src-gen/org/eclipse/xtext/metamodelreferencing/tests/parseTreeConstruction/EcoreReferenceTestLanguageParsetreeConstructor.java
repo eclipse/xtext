@@ -6,14 +6,13 @@ package org.eclipse.xtext.metamodelreferencing.tests.parseTreeConstruction;
 import org.eclipse.emf.ecore.*;
 import org.eclipse.xtext.*;
 import org.eclipse.xtext.parsetree.reconstr.IEObjectConsumer;
-import org.eclipse.xtext.parsetree.reconstr.impl.AbstractParseTreeConstructor;
 
 import org.eclipse.xtext.metamodelreferencing.tests.services.EcoreReferenceTestLanguageGrammarAccess;
 
 import com.google.inject.Inject;
 
 @SuppressWarnings("all")
-public class EcoreReferenceTestLanguageParsetreeConstructor extends AbstractParseTreeConstructor {
+public class EcoreReferenceTestLanguageParsetreeConstructor extends org.eclipse.xtext.parsetree.reconstr.impl.AbstractParseTreeConstructor {
 		
 	@Inject
 	private EcoreReferenceTestLanguageGrammarAccess grammarAccess;

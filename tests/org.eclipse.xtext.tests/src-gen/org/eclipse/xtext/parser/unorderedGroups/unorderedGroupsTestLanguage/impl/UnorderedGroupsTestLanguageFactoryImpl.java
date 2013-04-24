@@ -1,7 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
  */
 package org.eclipse.xtext.parser.unorderedGroups.unorderedGroupsTestLanguage.impl;
 
@@ -33,7 +30,7 @@ public class UnorderedGroupsTestLanguageFactoryImpl extends EFactoryImpl impleme
   {
     try
     {
-      UnorderedGroupsTestLanguageFactory theUnorderedGroupsTestLanguageFactory = (UnorderedGroupsTestLanguageFactory)EPackage.Registry.INSTANCE.getEFactory("http://www.eclipse.org/2010/tmf/xtext/UnorderedGroupsTestLanguage"); 
+      UnorderedGroupsTestLanguageFactory theUnorderedGroupsTestLanguageFactory = (UnorderedGroupsTestLanguageFactory)EPackage.Registry.INSTANCE.getEFactory(UnorderedGroupsTestLanguagePackage.eNS_URI);
       if (theUnorderedGroupsTestLanguageFactory != null)
       {
         return theUnorderedGroupsTestLanguageFactory;

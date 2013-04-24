@@ -1,7 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
  */
 package org.eclipse.xtext.parser.datatyperules.datatypeRulesTestLanguage.impl;
 
@@ -33,7 +30,7 @@ public class DatatypeRulesTestLanguageFactoryImpl extends EFactoryImpl implement
   {
     try
     {
-      DatatypeRulesTestLanguageFactory theDatatypeRulesTestLanguageFactory = (DatatypeRulesTestLanguageFactory)EPackage.Registry.INSTANCE.getEFactory("http://www.eclipse.org/2008/tmf/xtext/DatatypeRulesTest"); 
+      DatatypeRulesTestLanguageFactory theDatatypeRulesTestLanguageFactory = (DatatypeRulesTestLanguageFactory)EPackage.Registry.INSTANCE.getEFactory(DatatypeRulesTestLanguagePackage.eNS_URI);
       if (theDatatypeRulesTestLanguageFactory != null)
       {
         return theDatatypeRulesTestLanguageFactory;

@@ -6,14 +6,13 @@ package org.eclipse.xtext.common.parseTreeConstruction;
 import org.eclipse.emf.ecore.*;
 import org.eclipse.xtext.*;
 import org.eclipse.xtext.parsetree.reconstr.IEObjectConsumer;
-import org.eclipse.xtext.parsetree.reconstr.impl.AbstractParseTreeConstructor;
 
 import org.eclipse.xtext.common.services.TerminalsGrammarAccess;
 
 import com.google.inject.Inject;
 
 @SuppressWarnings("all")
-public class TerminalsParsetreeConstructor extends AbstractParseTreeConstructor {
+public class TerminalsParsetreeConstructor extends org.eclipse.xtext.parsetree.reconstr.impl.AbstractParseTreeConstructor {
 		
 	@Inject
 	private TerminalsGrammarAccess grammarAccess;

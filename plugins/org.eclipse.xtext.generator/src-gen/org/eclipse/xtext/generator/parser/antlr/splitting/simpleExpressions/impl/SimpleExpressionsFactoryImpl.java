@@ -1,7 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
  */
 package org.eclipse.xtext.generator.parser.antlr.splitting.simpleExpressions.impl;
 
@@ -33,7 +30,7 @@ public class SimpleExpressionsFactoryImpl extends EFactoryImpl implements Simple
   {
     try
     {
-      SimpleExpressionsFactory theSimpleExpressionsFactory = (SimpleExpressionsFactory)EPackage.Registry.INSTANCE.getEFactory("http://www.eclipse.org/xtext/generator/parser/antlr/simpleExpressions"); 
+      SimpleExpressionsFactory theSimpleExpressionsFactory = (SimpleExpressionsFactory)EPackage.Registry.INSTANCE.getEFactory(SimpleExpressionsPackage.eNS_URI);
       if (theSimpleExpressionsFactory != null)
       {
         return theSimpleExpressionsFactory;

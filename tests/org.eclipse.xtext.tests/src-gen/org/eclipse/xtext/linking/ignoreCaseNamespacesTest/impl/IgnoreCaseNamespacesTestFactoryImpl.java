@@ -1,7 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
  */
 package org.eclipse.xtext.linking.ignoreCaseNamespacesTest.impl;
 
@@ -33,7 +30,7 @@ public class IgnoreCaseNamespacesTestFactoryImpl extends EFactoryImpl implements
   {
     try
     {
-      IgnoreCaseNamespacesTestFactory theIgnoreCaseNamespacesTestFactory = (IgnoreCaseNamespacesTestFactory)EPackage.Registry.INSTANCE.getEFactory("http://eclipse.org/xtext/ignoreCaseNamespacesTestLanguage"); 
+      IgnoreCaseNamespacesTestFactory theIgnoreCaseNamespacesTestFactory = (IgnoreCaseNamespacesTestFactory)EPackage.Registry.INSTANCE.getEFactory(IgnoreCaseNamespacesTestPackage.eNS_URI);
       if (theIgnoreCaseNamespacesTestFactory != null)
       {
         return theIgnoreCaseNamespacesTestFactory;

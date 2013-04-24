@@ -1,7 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
  */
 package org.eclipse.xtext.testlanguages.testLang.impl;
 
@@ -33,7 +30,7 @@ public class TestLangFactoryImpl extends EFactoryImpl implements TestLangFactory
   {
     try
     {
-      TestLangFactory theTestLangFactory = (TestLangFactory)EPackage.Registry.INSTANCE.getEFactory("http://www.eclipse.org/2008/xtext/TestLang"); 
+      TestLangFactory theTestLangFactory = (TestLangFactory)EPackage.Registry.INSTANCE.getEFactory(TestLangPackage.eNS_URI);
       if (theTestLangFactory != null)
       {
         return theTestLangFactory;

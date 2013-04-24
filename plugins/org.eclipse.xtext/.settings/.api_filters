@@ -14,6 +14,20 @@
             </message_arguments>
         </filter>
     </resource>
+    <resource path="emf-gen/org/eclipse/xtext/util/XtextSwitch.java" type="org.eclipse.xtext.util.XtextSwitch">
+        <filter comment="Methods are defined in the super type" id="338792546">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.util.XtextSwitch"/>
+                <message_argument value="doSwitch(EClass, EObject)"/>
+            </message_arguments>
+        </filter>
+        <filter comment="Methods are defined in the super type" id="338792546">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.util.XtextSwitch"/>
+                <message_argument value="doSwitch(EObject)"/>
+            </message_arguments>
+        </filter>
+    </resource>
     <resource path="src-gen/org/eclipse/xtext/AbstractXtextRuntimeModule.java" type="org.eclipse.xtext.AbstractXtextRuntimeModule">
         <filter comment="Cannot @since to generated classes" id="1143996420">
             <message_arguments>

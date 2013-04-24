@@ -6,11 +6,11 @@
  */
 package org.eclipse.xtext.builder.builderState.util;
 
-import java.util.List;
 import java.util.Map;
 
-import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.emf.ecore.util.Switch;
 import org.eclipse.xtext.builder.builderState.BuilderStatePackage;
 import org.eclipse.xtext.builder.builderState.EObjectDescription;
 import org.eclipse.xtext.builder.builderState.ReferenceDescription;
@@ -31,7 +31,7 @@ import org.eclipse.xtext.resource.IResourceDescription;
  * @see org.eclipse.xtext.builder.builderState.BuilderStatePackage
  * @generated
  */
-public class BuilderStateSwitch<T> {
+public class BuilderStateSwitch<T> extends Switch<T> {
 	/**
 	 * The cached model package
 	 * <!-- begin-user-doc -->
@@ -53,14 +53,16 @@ public class BuilderStateSwitch<T> {
 	}
 
 	/**
-	 * Calls <code>caseXXX</code> for each class of the model until one returns a non null result; it yields that result.
+	 * Checks whether this is a switch for the given package.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the first non-null result returned by a <code>caseXXX</code> call.
+	 * @parameter ePackage the package in question.
+	 * @return whether this is a switch for the given package.
 	 * @generated
 	 */
-	public T doSwitch(EObject theEObject) {
-		return doSwitch(theEObject.eClass(), theEObject);
+	@Override
+	protected boolean isSwitchFor(EPackage ePackage) {
+		return ePackage == modelPackage;
 	}
 
 	/**
@@ -70,28 +72,15 @@ public class BuilderStateSwitch<T> {
 	 * @return the first non-null result returned by a <code>caseXXX</code> call.
 	 * @generated
 	 */
-	protected T doSwitch(EClass theEClass, EObject theEObject) {
-		if (theEClass.eContainer() == modelPackage) {
-			return doSwitch(theEClass.getClassifierID(), theEObject);
-		}
-		else {
-			List<EClass> eSuperTypes = theEClass.getESuperTypes();
-			return
-				eSuperTypes.isEmpty() ?
-					defaultCase(theEObject) :
-					doSwitch(eSuperTypes.get(0), theEObject);
-		}
-	}
-
-	/**
-	 * Calls <code>caseXXX</code> for each class of the model until one returns a non null result; it yields that result.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the first non-null result returned by a <code>caseXXX</code> call.
-	 * @generated
-	 */
+	@Override
 	protected T doSwitch(int classifierID, EObject theEObject) {
 		switch (classifierID) {
+			case BuilderStatePackage.RESOURCE_DESCRIPTION: {
+				IResourceDescription resourceDescription = (IResourceDescription)theEObject;
+				T result = caseResourceDescription(resourceDescription);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
 			case BuilderStatePackage.EOBJECT_DESCRIPTION: {
 				EObjectDescription eObjectDescription = (EObjectDescription)theEObject;
 				T result = caseEObjectDescription(eObjectDescription);
@@ -109,6 +98,18 @@ public class BuilderStateSwitch<T> {
 				ReferenceDescription referenceDescription = (ReferenceDescription)theEObject;
 				T result = caseReferenceDescription(referenceDescription);
 				if (result == null) result = caseIReferenceDescription(referenceDescription);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case BuilderStatePackage.IE_OBJECT_DESCRIPTION: {
+				IEObjectDescription ieObjectDescription = (IEObjectDescription)theEObject;
+				T result = caseIEObjectDescription(ieObjectDescription);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case BuilderStatePackage.IREFERENCE_DESCRIPTION: {
+				IReferenceDescription iReferenceDescription = (IReferenceDescription)theEObject;
+				T result = caseIReferenceDescription(iReferenceDescription);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -217,6 +218,7 @@ public class BuilderStateSwitch<T> {
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject)
 	 * @generated
 	 */
+	@Override
 	public T defaultCase(EObject object) {
 		return null;
 	}

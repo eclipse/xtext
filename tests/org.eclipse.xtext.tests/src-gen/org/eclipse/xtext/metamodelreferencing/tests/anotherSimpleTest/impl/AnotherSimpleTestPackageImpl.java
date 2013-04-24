@@ -1,7 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
  */
 package org.eclipse.xtext.metamodelreferencing.tests.anotherSimpleTest.impl;
 
@@ -83,7 +80,6 @@ public class AnotherSimpleTestPackageImpl extends EPackageImpl implements Anothe
     isInited = true;
 
     // Initialize simple dependencies
-    EcorePackage.eINSTANCE.eClass();
     XtextPackage.eINSTANCE.eClass();
 
     // Create package meta-data objects

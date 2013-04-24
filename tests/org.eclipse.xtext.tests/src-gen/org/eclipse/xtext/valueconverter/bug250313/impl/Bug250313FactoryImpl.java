@@ -1,7 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
  */
 package org.eclipse.xtext.valueconverter.bug250313.impl;
 
@@ -33,7 +30,7 @@ public class Bug250313FactoryImpl extends EFactoryImpl implements Bug250313Facto
   {
     try
     {
-      Bug250313Factory theBug250313Factory = (Bug250313Factory)EPackage.Registry.INSTANCE.getEFactory("http://org.eclipse.xtext.valueconverter.Bug250313"); 
+      Bug250313Factory theBug250313Factory = (Bug250313Factory)EPackage.Registry.INSTANCE.getEFactory(Bug250313Package.eNS_URI);
       if (theBug250313Factory != null)
       {
         return theBug250313Factory;

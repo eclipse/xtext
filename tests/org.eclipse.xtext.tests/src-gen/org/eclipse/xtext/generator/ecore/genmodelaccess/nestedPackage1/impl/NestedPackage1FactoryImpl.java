@@ -1,7 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
  */
 package org.eclipse.xtext.generator.ecore.genmodelaccess.nestedPackage1.impl;
 
@@ -33,7 +30,7 @@ public class NestedPackage1FactoryImpl extends EFactoryImpl implements NestedPac
 	{
 		try
 		{
-			NestedPackage1Factory theNestedPackage1Factory = (NestedPackage1Factory)EPackage.Registry.INSTANCE.getEFactory("http://xtext.org/genmodeltest-nested-v1.0"); 
+			NestedPackage1Factory theNestedPackage1Factory = (NestedPackage1Factory)EPackage.Registry.INSTANCE.getEFactory(NestedPackage1Package.eNS_URI);
 			if (theNestedPackage1Factory != null)
 			{
 				return theNestedPackage1Factory;

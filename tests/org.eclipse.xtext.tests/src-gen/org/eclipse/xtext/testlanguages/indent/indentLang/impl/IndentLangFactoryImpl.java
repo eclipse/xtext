@@ -1,7 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
  */
 package org.eclipse.xtext.testlanguages.indent.indentLang.impl;
 
@@ -33,7 +30,7 @@ public class IndentLangFactoryImpl extends EFactoryImpl implements IndentLangFac
   {
     try
     {
-      IndentLangFactory theIndentLangFactory = (IndentLangFactory)EPackage.Registry.INSTANCE.getEFactory("http://example.xtext.org/IndentationAwareTestLanguage"); 
+      IndentLangFactory theIndentLangFactory = (IndentLangFactory)EPackage.Registry.INSTANCE.getEFactory(IndentLangPackage.eNS_URI);
       if (theIndentLangFactory != null)
       {
         return theIndentLangFactory;

@@ -33,19 +33,19 @@ public class Bug385636SemanticSequencer extends AbstractDelegatingSemanticSequen
 
 	@Inject
 	private Bug385636GrammarAccess grammarAccess;
-
+	
 	public void createSequence(EObject context, EObject semanticObject) {
 		if(semanticObject.eClass().getEPackage() == Bug385636Package.eINSTANCE) switch(semanticObject.eClass().getClassifierID()) {
 			case Bug385636Package.DEFINE_VARIABLE:
 				if(context == grammarAccess.getDefineVariableRule()) {
-					sequence_DefineVariable(context, (DefineVariable) semanticObject);
-					return;
+					sequence_DefineVariable(context, (DefineVariable) semanticObject); 
+					return; 
 				}
 				else break;
 			case Bug385636Package.DEFINE_VARIABLES:
 				if(context == grammarAccess.getDefineVariablesRule()) {
-					sequence_DefineVariables(context, (DefineVariables) semanticObject);
-					return;
+					sequence_DefineVariables(context, (DefineVariables) semanticObject); 
+					return; 
 				}
 				else break;
 			case Bug385636Package.EXPRESSION_EQUAL:
@@ -57,8 +57,8 @@ public class Bug385636SemanticSequencer extends AbstractDelegatingSemanticSequen
 				   context == grammarAccess.getStatementAccess().getExpression_Not_LessLeftAction_1_5_1() ||
 				   context == grammarAccess.getStatementAccess().getExpression_SmallerLeftAction_1_1_1() ||
 				   context == grammarAccess.getStatementAccess().getExpression_Smaller_EqualLeftAction_1_2_1()) {
-					sequence_Statement(context, (Expression_Equal) semanticObject);
-					return;
+					sequence_Statement(context, (Expression_Equal) semanticObject); 
+					return; 
 				}
 				else break;
 			case Bug385636Package.EXPRESSION_LARGER_EQUAL:
@@ -70,8 +70,8 @@ public class Bug385636SemanticSequencer extends AbstractDelegatingSemanticSequen
 				   context == grammarAccess.getStatementAccess().getExpression_Not_LessLeftAction_1_5_1() ||
 				   context == grammarAccess.getStatementAccess().getExpression_SmallerLeftAction_1_1_1() ||
 				   context == grammarAccess.getStatementAccess().getExpression_Smaller_EqualLeftAction_1_2_1()) {
-					sequence_Statement(context, (Expression_Larger_Equal) semanticObject);
-					return;
+					sequence_Statement(context, (Expression_Larger_Equal) semanticObject); 
+					return; 
 				}
 				else break;
 			case Bug385636Package.EXPRESSION_NOT_EQUAL:
@@ -83,8 +83,8 @@ public class Bug385636SemanticSequencer extends AbstractDelegatingSemanticSequen
 				   context == grammarAccess.getStatementAccess().getExpression_Not_LessLeftAction_1_5_1() ||
 				   context == grammarAccess.getStatementAccess().getExpression_SmallerLeftAction_1_1_1() ||
 				   context == grammarAccess.getStatementAccess().getExpression_Smaller_EqualLeftAction_1_2_1()) {
-					sequence_Statement(context, (Expression_Not_Equal) semanticObject);
-					return;
+					sequence_Statement(context, (Expression_Not_Equal) semanticObject); 
+					return; 
 				}
 				else break;
 			case Bug385636Package.EXPRESSION_NOT_GREATER:
@@ -96,8 +96,8 @@ public class Bug385636SemanticSequencer extends AbstractDelegatingSemanticSequen
 				   context == grammarAccess.getStatementAccess().getExpression_Not_LessLeftAction_1_5_1() ||
 				   context == grammarAccess.getStatementAccess().getExpression_SmallerLeftAction_1_1_1() ||
 				   context == grammarAccess.getStatementAccess().getExpression_Smaller_EqualLeftAction_1_2_1()) {
-					sequence_Statement(context, (Expression_Not_Greater) semanticObject);
-					return;
+					sequence_Statement(context, (Expression_Not_Greater) semanticObject); 
+					return; 
 				}
 				else break;
 			case Bug385636Package.EXPRESSION_NOT_LESS:
@@ -109,8 +109,8 @@ public class Bug385636SemanticSequencer extends AbstractDelegatingSemanticSequen
 				   context == grammarAccess.getStatementAccess().getExpression_Not_LessLeftAction_1_5_1() ||
 				   context == grammarAccess.getStatementAccess().getExpression_SmallerLeftAction_1_1_1() ||
 				   context == grammarAccess.getStatementAccess().getExpression_Smaller_EqualLeftAction_1_2_1()) {
-					sequence_Statement(context, (Expression_Not_Less) semanticObject);
-					return;
+					sequence_Statement(context, (Expression_Not_Less) semanticObject); 
+					return; 
 				}
 				else break;
 			case Bug385636Package.EXPRESSION_SMALLER:
@@ -122,8 +122,8 @@ public class Bug385636SemanticSequencer extends AbstractDelegatingSemanticSequen
 				   context == grammarAccess.getStatementAccess().getExpression_Not_LessLeftAction_1_5_1() ||
 				   context == grammarAccess.getStatementAccess().getExpression_SmallerLeftAction_1_1_1() ||
 				   context == grammarAccess.getStatementAccess().getExpression_Smaller_EqualLeftAction_1_2_1()) {
-					sequence_Statement(context, (Expression_Smaller) semanticObject);
-					return;
+					sequence_Statement(context, (Expression_Smaller) semanticObject); 
+					return; 
 				}
 				else break;
 			case Bug385636Package.EXPRESSION_SMALLER_EQUAL:
@@ -135,8 +135,8 @@ public class Bug385636SemanticSequencer extends AbstractDelegatingSemanticSequen
 				   context == grammarAccess.getStatementAccess().getExpression_Not_LessLeftAction_1_5_1() ||
 				   context == grammarAccess.getStatementAccess().getExpression_SmallerLeftAction_1_1_1() ||
 				   context == grammarAccess.getStatementAccess().getExpression_Smaller_EqualLeftAction_1_2_1()) {
-					sequence_Statement(context, (Expression_Smaller_Equal) semanticObject);
-					return;
+					sequence_Statement(context, (Expression_Smaller_Equal) semanticObject); 
+					return; 
 				}
 				else break;
 			case Bug385636Package.EXPRESSION_VARIABLE_NAME:
@@ -149,26 +149,26 @@ public class Bug385636SemanticSequencer extends AbstractDelegatingSemanticSequen
 				   context == grammarAccess.getStatementAccess().getExpression_Not_LessLeftAction_1_5_1() ||
 				   context == grammarAccess.getStatementAccess().getExpression_SmallerLeftAction_1_1_1() ||
 				   context == grammarAccess.getStatementAccess().getExpression_Smaller_EqualLeftAction_1_2_1()) {
-					sequence_Expression_VariableName(context, (Expression_VariableName) semanticObject);
-					return;
+					sequence_Expression_VariableName(context, (Expression_VariableName) semanticObject); 
+					return; 
 				}
 				else break;
 			case Bug385636Package.NVARIABLE_ACCESS:
 				if(context == grammarAccess.getNVariableAccessRule()) {
-					sequence_NVariableAccess(context, (NVariableAccess) semanticObject);
-					return;
+					sequence_NVariableAccess(context, (NVariableAccess) semanticObject); 
+					return; 
 				}
 				else break;
 			case Bug385636Package.PROGRAM:
 				if(context == grammarAccess.getProgramRule()) {
-					sequence_Program(context, (Program) semanticObject);
-					return;
+					sequence_Program(context, (Program) semanticObject); 
+					return; 
 				}
 				else break;
 			}
 		if (errorAcceptor != null) errorAcceptor.accept(diagnosticProvider.createInvalidContextOrTypeDiagnostic(semanticObject, context));
 	}
-
+	
 	/**
 	 * Constraint:
 	 *     name=ID
@@ -183,8 +183,8 @@ public class Bug385636SemanticSequencer extends AbstractDelegatingSemanticSequen
 		feeder.accept(grammarAccess.getDefineVariableAccess().getNameIDTerminalRuleCall_1_0(), semanticObject.getName());
 		feeder.finish();
 	}
-
-
+	
+	
 	/**
 	 * Constraint:
 	 *     variables+=DefineVariable+
@@ -192,8 +192,8 @@ public class Bug385636SemanticSequencer extends AbstractDelegatingSemanticSequen
 	protected void sequence_DefineVariables(EObject context, DefineVariables semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
-
-
+	
+	
 	/**
 	 * Constraint:
 	 *     variable=NVariableAccess
@@ -208,8 +208,8 @@ public class Bug385636SemanticSequencer extends AbstractDelegatingSemanticSequen
 		feeder.accept(grammarAccess.getExpression_VariableNameAccess().getVariableNVariableAccessParserRuleCall_0(), semanticObject.getVariable());
 		feeder.finish();
 	}
-
-
+	
+	
 	/**
 	 * Constraint:
 	 *     variable=[DefineVariable|ID]
@@ -224,8 +224,8 @@ public class Bug385636SemanticSequencer extends AbstractDelegatingSemanticSequen
 		feeder.accept(grammarAccess.getNVariableAccessAccess().getVariableDefineVariableIDTerminalRuleCall_0_1(), semanticObject.getVariable());
 		feeder.finish();
 	}
-
-
+	
+	
 	/**
 	 * Constraint:
 	 *     (define=DefineVariables statements+=Statement*)
@@ -233,8 +233,8 @@ public class Bug385636SemanticSequencer extends AbstractDelegatingSemanticSequen
 	protected void sequence_Program(EObject context, Program semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
-
-
+	
+	
 	/**
 	 * Constraint:
 	 *     (left=Statement_Expression_Equal_1_3_1 right=Expression_VariableName)
@@ -252,8 +252,8 @@ public class Bug385636SemanticSequencer extends AbstractDelegatingSemanticSequen
 		feeder.accept(grammarAccess.getStatementAccess().getRightExpression_VariableNameParserRuleCall_1_3_2_0(), semanticObject.getRight());
 		feeder.finish();
 	}
-
-
+	
+	
 	/**
 	 * Constraint:
 	 *     (left=Statement_Expression_Larger_Equal_1_0_1 right=Expression_VariableName)
@@ -271,8 +271,8 @@ public class Bug385636SemanticSequencer extends AbstractDelegatingSemanticSequen
 		feeder.accept(grammarAccess.getStatementAccess().getRightExpression_VariableNameParserRuleCall_1_0_2_0(), semanticObject.getRight());
 		feeder.finish();
 	}
-
-
+	
+	
 	/**
 	 * Constraint:
 	 *     (left=Statement_Expression_Not_Equal_1_4_1 right=Expression_VariableName)
@@ -290,8 +290,8 @@ public class Bug385636SemanticSequencer extends AbstractDelegatingSemanticSequen
 		feeder.accept(grammarAccess.getStatementAccess().getRightExpression_VariableNameParserRuleCall_1_4_2_0(), semanticObject.getRight());
 		feeder.finish();
 	}
-
-
+	
+	
 	/**
 	 * Constraint:
 	 *     (left=Statement_Expression_Not_Greater_1_6_1 right=Expression_VariableName)
@@ -309,8 +309,8 @@ public class Bug385636SemanticSequencer extends AbstractDelegatingSemanticSequen
 		feeder.accept(grammarAccess.getStatementAccess().getRightExpression_VariableNameParserRuleCall_1_6_2_0(), semanticObject.getRight());
 		feeder.finish();
 	}
-
-
+	
+	
 	/**
 	 * Constraint:
 	 *     (left=Statement_Expression_Not_Less_1_5_1 right=Expression_VariableName)
@@ -328,8 +328,8 @@ public class Bug385636SemanticSequencer extends AbstractDelegatingSemanticSequen
 		feeder.accept(grammarAccess.getStatementAccess().getRightExpression_VariableNameParserRuleCall_1_5_2_0(), semanticObject.getRight());
 		feeder.finish();
 	}
-
-
+	
+	
 	/**
 	 * Constraint:
 	 *     (left=Statement_Expression_Smaller_1_1_1 right=Expression_VariableName)
@@ -347,8 +347,8 @@ public class Bug385636SemanticSequencer extends AbstractDelegatingSemanticSequen
 		feeder.accept(grammarAccess.getStatementAccess().getRightExpression_VariableNameParserRuleCall_1_1_2_0(), semanticObject.getRight());
 		feeder.finish();
 	}
-
-
+	
+	
 	/**
 	 * Constraint:
 	 *     (left=Statement_Expression_Smaller_Equal_1_2_1 right=Expression_VariableName)

@@ -1,7 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
  */
 package org.eclipse.xtext.linking.lazy.lazyLinking.impl;
 
@@ -33,7 +30,7 @@ public class LazyLinkingFactoryImpl extends EFactoryImpl implements LazyLinkingF
   {
     try
     {
-      LazyLinkingFactory theLazyLinkingFactory = (LazyLinkingFactory)EPackage.Registry.INSTANCE.getEFactory("http://eclipse.org/xtext/lazyLinkingTestLanguage"); 
+      LazyLinkingFactory theLazyLinkingFactory = (LazyLinkingFactory)EPackage.Registry.INSTANCE.getEFactory(LazyLinkingPackage.eNS_URI);
       if (theLazyLinkingFactory != null)
       {
         return theLazyLinkingFactory;

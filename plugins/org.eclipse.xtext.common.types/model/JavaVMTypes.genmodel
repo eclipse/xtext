@@ -7,7 +7,7 @@
     rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container" rootImplementsInterface=""
     importerID="org.eclipse.emf.importer.ecore" complianceLevel="5.0" suppressGenModelAnnotations="false"
     copyrightFields="false" editPluginID="org.eclipse.xtext.common.types.edit" editorPluginID="org.eclipse.xtext.types.editor"
-    runtimeVersion="2.5" interfaceNamePattern="" classNamePattern="">
+    runtimeVersion="2.9" interfaceNamePattern="" classNamePattern="">
   <foreignModel>JavaVMTypes.ecore</foreignModel>
   <genPackages prefix="Types" basePackage="org.eclipse.xtext.common" disposableProviderFactory="true"
       ecorePackage="JavaVMTypes.ecore#/">
@@ -27,7 +27,6 @@
       <genTypeParameters ecoreTypeParameter="JavaVMTypes.ecore#//ITypeReferenceVisitorWithParameter/Parameter"/>
       <genTypeParameters ecoreTypeParameter="JavaVMTypes.ecore#//ITypeReferenceVisitorWithParameter/Result"/>
     </genDataTypes>
-    <genDataTypes ecoreDataType="JavaVMTypes.ecore#//Exception"/>
     <genClasses image="false" ecoreClass="JavaVMTypes.ecore#//JvmIdentifiableElement">
       <genOperations ecoreOperation="JavaVMTypes.ecore#//JvmIdentifiableElement/getIdentifier"/>
       <genOperations ecoreOperation="JavaVMTypes.ecore#//JvmIdentifiableElement/getSimpleName"/>
@@ -93,6 +92,7 @@
     </genClasses>
     <genClasses ecoreClass="JavaVMTypes.ecore#//JvmGenericType">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute JavaVMTypes.ecore#//JvmGenericType/interface"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute JavaVMTypes.ecore#//JvmGenericType/strictFloatingPoint"/>
       <genOperations ecoreOperation="JavaVMTypes.ecore#//JvmGenericType/getExtendedInterfaces"/>
       <genOperations ecoreOperation="JavaVMTypes.ecore#//JvmGenericType/getExtendedClass"/>
       <genOperations ecoreOperation="JavaVMTypes.ecore#//JvmGenericType/isInstantiateable"/>
@@ -147,6 +147,8 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute JavaVMTypes.ecore#//JvmField/static"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute JavaVMTypes.ecore#//JvmField/final"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference JavaVMTypes.ecore#//JvmField/type"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute JavaVMTypes.ecore#//JvmField/volatile"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute JavaVMTypes.ecore#//JvmField/transient"/>
     </genClasses>
     <genClasses image="false" ecoreClass="JavaVMTypes.ecore#//JvmExecutable">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference JavaVMTypes.ecore#//JvmExecutable/parameters"/>
@@ -160,6 +162,10 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute JavaVMTypes.ecore#//JvmOperation/abstract"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference JavaVMTypes.ecore#//JvmOperation/returnType"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference JavaVMTypes.ecore#//JvmOperation/defaultValue"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute JavaVMTypes.ecore#//JvmOperation/synchronized"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute JavaVMTypes.ecore#//JvmOperation/default"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute JavaVMTypes.ecore#//JvmOperation/native"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute JavaVMTypes.ecore#//JvmOperation/strictFloatingPoint"/>
     </genClasses>
     <genClasses ecoreClass="JavaVMTypes.ecore#//JvmFormalParameter">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute JavaVMTypes.ecore#//JvmFormalParameter/name"/>
@@ -220,7 +226,7 @@
     </genClasses>
     <genClasses ecoreClass="JavaVMTypes.ecore#//JvmSynonymTypeReference"/>
     <genClasses ecoreClass="JavaVMTypes.ecore#//JvmUnknownTypeReference">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute JavaVMTypes.ecore#//JvmUnknownTypeReference/exception"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute JavaVMTypes.ecore#//JvmUnknownTypeReference/qualifiedName"/>
     </genClasses>
     <genClasses image="false" ecoreClass="JavaVMTypes.ecore#//JvmCompoundTypeReference">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference JavaVMTypes.ecore#//JvmCompoundTypeReference/type"/>

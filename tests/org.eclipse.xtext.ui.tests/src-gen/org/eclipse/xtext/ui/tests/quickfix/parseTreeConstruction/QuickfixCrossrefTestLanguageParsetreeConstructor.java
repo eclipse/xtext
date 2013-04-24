@@ -6,14 +6,13 @@ package org.eclipse.xtext.ui.tests.quickfix.parseTreeConstruction;
 import org.eclipse.emf.ecore.*;
 import org.eclipse.xtext.*;
 import org.eclipse.xtext.parsetree.reconstr.IEObjectConsumer;
-import org.eclipse.xtext.parsetree.reconstr.impl.AbstractParseTreeConstructor;
 
 import org.eclipse.xtext.ui.tests.quickfix.services.QuickfixCrossrefTestLanguageGrammarAccess;
 
 import com.google.inject.Inject;
 
 @SuppressWarnings("all")
-public class QuickfixCrossrefTestLanguageParsetreeConstructor extends AbstractParseTreeConstructor {
+public class QuickfixCrossrefTestLanguageParsetreeConstructor extends org.eclipse.xtext.parsetree.reconstr.impl.AbstractParseTreeConstructor {
 		
 	@Inject
 	private QuickfixCrossrefTestLanguageGrammarAccess grammarAccess;

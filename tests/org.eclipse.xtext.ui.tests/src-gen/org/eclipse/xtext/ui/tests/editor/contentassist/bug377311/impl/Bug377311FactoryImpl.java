@@ -1,7 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
  */
 package org.eclipse.xtext.ui.tests.editor.contentassist.bug377311.impl;
 
@@ -33,7 +30,7 @@ public class Bug377311FactoryImpl extends EFactoryImpl implements Bug377311Facto
   {
     try
     {
-      Bug377311Factory theBug377311Factory = (Bug377311Factory)EPackage.Registry.INSTANCE.getEFactory("http://www.eclipse.org/xtext/ui/common/tests/2009/bug377311TestLanguage"); 
+      Bug377311Factory theBug377311Factory = (Bug377311Factory)EPackage.Registry.INSTANCE.getEFactory(Bug377311Package.eNS_URI);
       if (theBug377311Factory != null)
       {
         return theBug377311Factory;

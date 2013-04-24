@@ -1,7 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
  */
 package org.eclipse.xtext.generator.ecore.subPackage.impl;
 
@@ -33,7 +30,7 @@ public class SubPackageFactoryImpl extends EFactoryImpl implements SubPackageFac
   {
     try
     {
-      SubPackageFactory theSubPackageFactory = (SubPackageFactory)EPackage.Registry.INSTANCE.getEFactory("http://www.eclipse.org/2009/tmf/xtext/SubTestLanguage"); 
+      SubPackageFactory theSubPackageFactory = (SubPackageFactory)EPackage.Registry.INSTANCE.getEFactory(SubPackagePackage.eNS_URI);
       if (theSubPackageFactory != null)
       {
         return theSubPackageFactory;
