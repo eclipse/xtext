@@ -140,7 +140,7 @@ public class CommonSuperTypeTest extends AbstractTestingTypeReferenceOwner {
         TypeConformanceComputer _typeConformanceComputer_2 = _services_3.getTypeConformanceComputer();
         AnyTypeReference _anyTypeReference = new AnyTypeReference(this);
         AnyTypeReference _anyTypeReference_1 = new AnyTypeReference(this);
-        List<LightweightTypeReference> _newImmutableList = CollectionLiterals.<LightweightTypeReference>newImmutableList(_anyTypeReference, _anyTypeReference_1);
+        List<AnyTypeReference> _newImmutableList = CollectionLiterals.<AnyTypeReference>newImmutableList(_anyTypeReference, _anyTypeReference_1);
         Iterable<LightweightTypeReference> _plus_1 = Iterables.<LightweightTypeReference>concat(typeReferences, _newImmutableList);
         List<LightweightTypeReference> _list_1 = IterableExtensions.<LightweightTypeReference>toList(_plus_1);
         LightweightTypeReference _commonSuperType_2 = _typeConformanceComputer_2.getCommonSuperType(_list_1, this);

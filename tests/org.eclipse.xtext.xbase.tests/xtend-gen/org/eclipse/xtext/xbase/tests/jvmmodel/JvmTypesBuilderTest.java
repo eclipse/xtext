@@ -372,10 +372,10 @@ public class JvmTypesBuilderTest extends AbstractXbaseTestCase {
             JvmTypesBuilderTest.this._jvmTypesBuilder.setDocumentation(it, "Foo");
             EList<JvmMember> _members = it.getMembers();
             JvmEnumerationLiteral _enumerationLiteral = JvmTypesBuilderTest.this._jvmTypesBuilder.toEnumerationLiteral(e, "LITERAL0");
-            JvmTypesBuilderTest.this._jvmTypesBuilder.<JvmMember>operator_add(_members, _enumerationLiteral);
+            JvmTypesBuilderTest.this._jvmTypesBuilder.<JvmEnumerationLiteral>operator_add(_members, _enumerationLiteral);
             EList<JvmMember> _members_1 = it.getMembers();
             JvmEnumerationLiteral _enumerationLiteral_1 = JvmTypesBuilderTest.this._jvmTypesBuilder.toEnumerationLiteral(e, "LITERAL1");
-            JvmTypesBuilderTest.this._jvmTypesBuilder.<JvmMember>operator_add(_members_1, _enumerationLiteral_1);
+            JvmTypesBuilderTest.this._jvmTypesBuilder.<JvmEnumerationLiteral>operator_add(_members_1, _enumerationLiteral_1);
           }
         };
       final JvmEnumerationType myEnum = this._jvmTypesBuilder.toEnumerationType(e, "MyEnum", _function);
@@ -432,9 +432,9 @@ public class JvmTypesBuilderTest extends AbstractXbaseTestCase {
     res.setLanguageName("org.eclipse.xtext.xbase.Xbase");
     final JvmOperation op = this.typesFactory.createJvmOperation();
     EList<EObject> _contents = res.getContents();
-    this._jvmTypesBuilder.<EObject>operator_add(_contents, op);
+    this._jvmTypesBuilder.<JvmOperation>operator_add(_contents, op);
     EList<EObject> _contents_1 = res.getContents();
-    this._jvmTypesBuilder.<EObject>operator_add(_contents_1, expr);
+    this._jvmTypesBuilder.<XNullLiteral>operator_add(_contents_1, expr);
     final Procedure1<ITreeAppendable> _function = new Procedure1<ITreeAppendable>() {
         public void apply(final ITreeAppendable it) {
           StringConcatenation _builder = new StringConcatenation();
