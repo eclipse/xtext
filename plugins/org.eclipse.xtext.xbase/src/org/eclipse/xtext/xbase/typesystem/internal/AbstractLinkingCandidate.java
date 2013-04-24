@@ -189,7 +189,7 @@ public abstract class AbstractLinkingCandidate<Expression extends XExpression> i
 			JvmTypeReference constraintReference = constraint.getTypeReference();
 			if (constraintReference != null) {
 				LightweightTypeReference substitute = substitutor.substitute(constraintReference);
-				if (!substitute.isType(Object.class)) {
+				if (!substitute.isType(Object.class) && !substitute.isPrimitiveVoid()) {
 					typeReference.acceptHint(substitute, BoundTypeArgumentSource.CONSTRAINT, constraint, VarianceInfo.OUT, VarianceInfo.OUT);
 				}
 			}

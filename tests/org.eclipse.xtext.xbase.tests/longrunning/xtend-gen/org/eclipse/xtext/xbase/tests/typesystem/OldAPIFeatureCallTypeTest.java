@@ -167,6 +167,12 @@ public class OldAPIFeatureCallTypeTest extends AbstractOldAPIFeatureCallTypeTest
   
   @Ignore("fails in old implementation")
   @Test
+  public void testFeatureCallWithOperatorOverloading_6() throws Exception {
+    Assert.fail("fails in old implementation");
+  }
+  
+  @Ignore("fails in old implementation")
+  @Test
   public void testToList_04() throws Exception {
     Assert.fail("fails in old implementation");
   }

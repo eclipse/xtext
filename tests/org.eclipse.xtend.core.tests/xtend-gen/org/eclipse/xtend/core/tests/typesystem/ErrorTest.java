@@ -1487,6 +1487,36 @@ public class ErrorTest extends AbstractXtendTestCase {
     this.processWithoutException(_builder);
   }
   
+  @Test
+  public void testErrorModel_52() throws Exception {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("import com.google.inject.Injector");
+    _builder.newLine();
+    _builder.append("class C {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def <T extends Comparable<T>, X extends void m(T t, X x) {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("m(\'\', \'\')");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def void m(Injector i, Class<? extends CharSequence> c) {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("\'\'.m(\'\')");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("}");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    this.processWithoutException(_builder);
+  }
+  
   public XtendFile processWithoutException(final CharSequence input) throws Exception {
     XtextResourceSet _resourceSet = this.getResourceSet();
     URI _createURI = URI.createURI("abcdefg.xtend");

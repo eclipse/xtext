@@ -16,6 +16,43 @@ import org.junit.Ignore
 class CompilerBugTest extends AbstractXtendCompilerTest {
 	
 	@Test
+	def testBug4063370() {
+		assertCompilesTo('''
+			class C {
+			    new() {
+			        #[1,2,3].map [ toString ].toString
+			    }
+			}
+		''', '''
+			import com.google.common.collect.ImmutableList;
+			import com.google.common.collect.ImmutableList.Builder;
+			import java.util.List;
+			import org.eclipse.xtext.xbase.lib.Functions.Function1;
+			import org.eclipse.xtext.xbase.lib.ListExtensions;
+			
+			@SuppressWarnings("all")
+			public class C {
+			  public C() {
+			    List<Integer> _xlistliteral = null;
+			    Builder<Integer> _builder = ImmutableList.builder();
+			    _builder.add(1);
+			    _builder.add(2);
+			    _builder.add(3);
+			    _xlistliteral = _builder.build();
+			    final Function1<Integer,String> _function = new Function1<Integer,String>() {
+			        public String apply(final Integer it) {
+			          String _string = it.toString();
+			          return _string;
+			        }
+			      };
+			    List<String> _map = ListExtensions.<Integer, String>map(_xlistliteral, _function);
+			    _map.toString();
+			  }
+			}
+		''')
+	}
+	
+	@Test
 	def testBug4063360() {
 		assertCompilesTo('''
 			import org.eclipse.xtext.common.types.JvmTypeReference
