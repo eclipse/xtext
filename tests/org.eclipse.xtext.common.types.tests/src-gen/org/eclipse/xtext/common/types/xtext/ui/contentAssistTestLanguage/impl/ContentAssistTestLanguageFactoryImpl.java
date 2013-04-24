@@ -1,7 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
  */
 package org.eclipse.xtext.common.types.xtext.ui.contentAssistTestLanguage.impl;
 
@@ -33,7 +30,7 @@ public class ContentAssistTestLanguageFactoryImpl extends EFactoryImpl implement
   {
     try
     {
-      ContentAssistTestLanguageFactory theContentAssistTestLanguageFactory = (ContentAssistTestLanguageFactory)EPackage.Registry.INSTANCE.getEFactory("http://www.eclipse.org/2010/xtext/ui/common/types/tests/ContentAssist"); 
+      ContentAssistTestLanguageFactory theContentAssistTestLanguageFactory = (ContentAssistTestLanguageFactory)EPackage.Registry.INSTANCE.getEFactory(ContentAssistTestLanguagePackage.eNS_URI);
       if (theContentAssistTestLanguageFactory != null)
       {
         return theContentAssistTestLanguageFactory;

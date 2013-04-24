@@ -1,7 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
  */
 package org.eclipse.xtext.parser.terminalrules.ecoreTerminalsTestLanguage.impl;
 
@@ -33,7 +30,7 @@ public class EcoreTerminalsTestLanguageFactoryImpl extends EFactoryImpl implemen
   {
     try
     {
-      EcoreTerminalsTestLanguageFactory theEcoreTerminalsTestLanguageFactory = (EcoreTerminalsTestLanguageFactory)EPackage.Registry.INSTANCE.getEFactory("http://www.eclipse.org/2008/tmf/xtext/ECoreTerminalsTest"); 
+      EcoreTerminalsTestLanguageFactory theEcoreTerminalsTestLanguageFactory = (EcoreTerminalsTestLanguageFactory)EPackage.Registry.INSTANCE.getEFactory(EcoreTerminalsTestLanguagePackage.eNS_URI);
       if (theEcoreTerminalsTestLanguageFactory != null)
       {
         return theEcoreTerminalsTestLanguageFactory;

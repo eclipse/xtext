@@ -48,7 +48,7 @@ Workflow {
     
     		// generates Java API for the generated EPackages
     		fragment = ecore.EcoreGeneratorFragment auto-inject {
-    			emfRuntimeVersion = "2.6"
+    			emfRuntimeVersion = "2.9"
     		}
     
     		// the old serialization component

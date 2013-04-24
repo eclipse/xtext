@@ -6,14 +6,13 @@ package org.eclipse.xtext.parser.assignments.parseTreeConstruction;
 import org.eclipse.emf.ecore.*;
 import org.eclipse.xtext.*;
 import org.eclipse.xtext.parsetree.reconstr.IEObjectConsumer;
-import org.eclipse.xtext.parsetree.reconstr.impl.AbstractParseTreeConstructor;
 
 import org.eclipse.xtext.parser.assignments.services.Bug288432TestLanguageGrammarAccess;
 
 import com.google.inject.Inject;
 
 @SuppressWarnings("all")
-public class Bug288432TestLanguageParsetreeConstructor extends AbstractParseTreeConstructor {
+public class Bug288432TestLanguageParsetreeConstructor extends org.eclipse.xtext.parsetree.reconstr.impl.AbstractParseTreeConstructor {
 		
 	@Inject
 	private Bug288432TestLanguageGrammarAccess grammarAccess;

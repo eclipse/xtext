@@ -1,7 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
  */
 package org.eclipse.xtext.valueconverter.qualifiedName.impl;
 
@@ -33,7 +30,7 @@ public class QualifiedNameFactoryImpl extends EFactoryImpl implements QualifiedN
   {
     try
     {
-      QualifiedNameFactory theQualifiedNameFactory = (QualifiedNameFactory)EPackage.Registry.INSTANCE.getEFactory("http://www.xtext.org/tests/QualifiedNameTestLanguage"); 
+      QualifiedNameFactory theQualifiedNameFactory = (QualifiedNameFactory)EPackage.Registry.INSTANCE.getEFactory(QualifiedNamePackage.eNS_URI);
       if (theQualifiedNameFactory != null)
       {
         return theQualifiedNameFactory;

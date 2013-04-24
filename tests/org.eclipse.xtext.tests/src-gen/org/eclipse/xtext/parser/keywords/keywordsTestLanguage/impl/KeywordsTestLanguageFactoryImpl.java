@@ -1,7 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
  */
 package org.eclipse.xtext.parser.keywords.keywordsTestLanguage.impl;
 
@@ -33,7 +30,7 @@ public class KeywordsTestLanguageFactoryImpl extends EFactoryImpl implements Key
   {
     try
     {
-      KeywordsTestLanguageFactory theKeywordsTestLanguageFactory = (KeywordsTestLanguageFactory)EPackage.Registry.INSTANCE.getEFactory("http://www.eclipse.org/2009/tmf/xtext/KeywordsTestLanguage"); 
+      KeywordsTestLanguageFactory theKeywordsTestLanguageFactory = (KeywordsTestLanguageFactory)EPackage.Registry.INSTANCE.getEFactory(KeywordsTestLanguagePackage.eNS_URI);
       if (theKeywordsTestLanguageFactory != null)
       {
         return theKeywordsTestLanguageFactory;

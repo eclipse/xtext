@@ -1,7 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
  */
 package org.eclipse.xtext.metamodelreferencing.tests.ecoreReference.impl;
 
@@ -33,7 +30,7 @@ public class EcoreReferenceFactoryImpl extends EFactoryImpl implements EcoreRefe
   {
     try
     {
-      EcoreReferenceFactory theEcoreReferenceFactory = (EcoreReferenceFactory)EPackage.Registry.INSTANCE.getEFactory("http://www.eclipse.org/2011/tmf/xtext/ecoreReference"); 
+      EcoreReferenceFactory theEcoreReferenceFactory = (EcoreReferenceFactory)EPackage.Registry.INSTANCE.getEFactory(EcoreReferencePackage.eNS_URI);
       if (theEcoreReferenceFactory != null)
       {
         return theEcoreReferenceFactory;

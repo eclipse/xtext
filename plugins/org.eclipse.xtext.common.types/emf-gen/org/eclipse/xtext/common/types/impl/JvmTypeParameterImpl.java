@@ -142,7 +142,7 @@ public class JvmTypeParameterImpl extends JvmComponentTypeImplCustom implements 
 	public JvmTypeParameterDeclarator getDeclarator()
 	{
 		if (eContainerFeatureID() != TypesPackage.JVM_TYPE_PARAMETER__DECLARATOR) return null;
-		return (JvmTypeParameterDeclarator)eContainer();
+		return (JvmTypeParameterDeclarator)eInternalContainer();
 	}
 
 	/**

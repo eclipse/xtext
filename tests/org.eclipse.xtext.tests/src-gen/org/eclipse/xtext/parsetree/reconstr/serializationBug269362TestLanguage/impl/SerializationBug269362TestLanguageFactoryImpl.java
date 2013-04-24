@@ -1,7 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
  */
 package org.eclipse.xtext.parsetree.reconstr.serializationBug269362TestLanguage.impl;
 
@@ -33,7 +30,7 @@ public class SerializationBug269362TestLanguageFactoryImpl extends EFactoryImpl 
   {
     try
     {
-      SerializationBug269362TestLanguageFactory theSerializationBug269362TestLanguageFactory = (SerializationBug269362TestLanguageFactory)EPackage.Registry.INSTANCE.getEFactory("http://www.eclipse.org/2009/tmf/xtext/SerializationBugTest/269362"); 
+      SerializationBug269362TestLanguageFactory theSerializationBug269362TestLanguageFactory = (SerializationBug269362TestLanguageFactory)EPackage.Registry.INSTANCE.getEFactory(SerializationBug269362TestLanguagePackage.eNS_URI);
       if (theSerializationBug269362TestLanguageFactory != null)
       {
         return theSerializationBug269362TestLanguageFactory;

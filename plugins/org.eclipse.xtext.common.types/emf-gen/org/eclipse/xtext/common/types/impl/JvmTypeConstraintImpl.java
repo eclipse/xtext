@@ -126,7 +126,7 @@ public abstract class JvmTypeConstraintImpl extends MinimalEObjectImpl.Container
 	public JvmConstraintOwner getOwner()
 	{
 		if (eContainerFeatureID() != TypesPackage.JVM_TYPE_CONSTRAINT__OWNER) return null;
-		return (JvmConstraintOwner)eContainer();
+		return (JvmConstraintOwner)eInternalContainer();
 	}
 
 	/**

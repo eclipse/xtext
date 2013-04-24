@@ -38,7 +38,7 @@ public class TypesFactoryImpl extends EFactoryImpl implements TypesFactory
 	{
 		try
 		{
-			TypesFactory theTypesFactory = (TypesFactory)EPackage.Registry.INSTANCE.getEFactory("http://www.eclipse.org/xtext/common/JavaVMTypes"); 
+			TypesFactory theTypesFactory = (TypesFactory)EPackage.Registry.INSTANCE.getEFactory(TypesPackage.eNS_URI);
 			if (theTypesFactory != null)
 			{
 				return theTypesFactory;

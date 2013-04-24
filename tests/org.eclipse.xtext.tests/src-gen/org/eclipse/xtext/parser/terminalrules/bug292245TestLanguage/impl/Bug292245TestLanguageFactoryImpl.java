@@ -1,7 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
  */
 package org.eclipse.xtext.parser.terminalrules.bug292245TestLanguage.impl;
 
@@ -33,7 +30,7 @@ public class Bug292245TestLanguageFactoryImpl extends EFactoryImpl implements Bu
   {
     try
     {
-      Bug292245TestLanguageFactory theBug292245TestLanguageFactory = (Bug292245TestLanguageFactory)EPackage.Registry.INSTANCE.getEFactory("http://www.eclipse.org/2008/tmf/xtext/Bug292245TestLanguage"); 
+      Bug292245TestLanguageFactory theBug292245TestLanguageFactory = (Bug292245TestLanguageFactory)EPackage.Registry.INSTANCE.getEFactory(Bug292245TestLanguagePackage.eNS_URI);
       if (theBug292245TestLanguageFactory != null)
       {
         return theBug292245TestLanguageFactory;

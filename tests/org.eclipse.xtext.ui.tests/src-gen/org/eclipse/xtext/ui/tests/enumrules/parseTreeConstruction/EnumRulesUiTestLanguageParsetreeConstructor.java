@@ -6,14 +6,13 @@ package org.eclipse.xtext.ui.tests.enumrules.parseTreeConstruction;
 import org.eclipse.emf.ecore.*;
 import org.eclipse.xtext.*;
 import org.eclipse.xtext.parsetree.reconstr.IEObjectConsumer;
-import org.eclipse.xtext.parsetree.reconstr.impl.AbstractParseTreeConstructor;
 
 import org.eclipse.xtext.ui.tests.enumrules.services.EnumRulesUiTestLanguageGrammarAccess;
 
 import com.google.inject.Inject;
 
 @SuppressWarnings("all")
-public class EnumRulesUiTestLanguageParsetreeConstructor extends AbstractParseTreeConstructor {
+public class EnumRulesUiTestLanguageParsetreeConstructor extends org.eclipse.xtext.parsetree.reconstr.impl.AbstractParseTreeConstructor {
 		
 	@Inject
 	private EnumRulesUiTestLanguageGrammarAccess grammarAccess;

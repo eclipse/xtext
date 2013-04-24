@@ -1,7 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
  */
 package org.eclipse.xtext.resource.liveContainerTestLanguage.impl;
 
@@ -33,7 +30,7 @@ public class LiveContainerTestLanguageFactoryImpl extends EFactoryImpl implement
   {
     try
     {
-      LiveContainerTestLanguageFactory theLiveContainerTestLanguageFactory = (LiveContainerTestLanguageFactory)EPackage.Registry.INSTANCE.getEFactory("http://www.xtext.org/LiveContainerTestLanguage"); 
+      LiveContainerTestLanguageFactory theLiveContainerTestLanguageFactory = (LiveContainerTestLanguageFactory)EPackage.Registry.INSTANCE.getEFactory(LiveContainerTestLanguagePackage.eNS_URI);
       if (theLiveContainerTestLanguageFactory != null)
       {
         return theLiveContainerTestLanguageFactory;

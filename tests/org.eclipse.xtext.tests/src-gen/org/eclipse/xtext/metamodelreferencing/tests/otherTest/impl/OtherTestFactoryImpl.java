@@ -1,7 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
  */
 package org.eclipse.xtext.metamodelreferencing.tests.otherTest.impl;
 
@@ -33,7 +30,7 @@ public class OtherTestFactoryImpl extends EFactoryImpl implements OtherTestFacto
   {
     try
     {
-      OtherTestFactory theOtherTestFactory = (OtherTestFactory)EPackage.Registry.INSTANCE.getEFactory("http://eclipse.org/xtext/tests/OtherTest"); 
+      OtherTestFactory theOtherTestFactory = (OtherTestFactory)EPackage.Registry.INSTANCE.getEFactory(OtherTestPackage.eNS_URI);
       if (theOtherTestFactory != null)
       {
         return theOtherTestFactory;

@@ -38,7 +38,7 @@ public class BuilderStateFactoryImpl extends EFactoryImpl implements BuilderStat
 	 */
 	public static BuilderStateFactory init() {
 		try {
-			BuilderStateFactory theBuilderStateFactory = (BuilderStateFactory)EPackage.Registry.INSTANCE.getEFactory("http://www.eclipse.org/xtext/builderstate/1.0"); 
+			BuilderStateFactory theBuilderStateFactory = (BuilderStateFactory)EPackage.Registry.INSTANCE.getEFactory(BuilderStatePackage.eNS_URI);
 			if (theBuilderStateFactory != null) {
 				return theBuilderStateFactory;
 			}

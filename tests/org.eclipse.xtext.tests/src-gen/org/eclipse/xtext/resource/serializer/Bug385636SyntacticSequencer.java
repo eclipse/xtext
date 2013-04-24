@@ -15,18 +15,18 @@ import org.eclipse.xtext.serializer.sequencer.AbstractSyntacticSequencer;
 public class Bug385636SyntacticSequencer extends AbstractSyntacticSequencer {
 
 	protected Bug385636GrammarAccess grammarAccess;
-
+	
 	@Inject
 	protected void init(IGrammarAccess access) {
 		grammarAccess = (Bug385636GrammarAccess) access;
 	}
-
+	
 	@Override
 	protected String getUnassignedRuleCallToken(EObject semanticObject, RuleCall ruleCall, INode node) {
 		return "";
 	}
-
-
+	
+	
 	@Override
 	protected void emitUnassignedTokens(EObject semanticObject, ISynTransition transition, INode fromNode, INode toNode) {
 		if (transition.getAmbiguousSyntaxes().isEmpty()) return;

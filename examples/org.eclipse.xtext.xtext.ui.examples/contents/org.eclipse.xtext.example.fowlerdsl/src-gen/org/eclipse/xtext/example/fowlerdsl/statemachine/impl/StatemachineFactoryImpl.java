@@ -1,7 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
  */
 package org.eclipse.xtext.example.fowlerdsl.statemachine.impl;
 
@@ -33,7 +30,7 @@ public class StatemachineFactoryImpl extends EFactoryImpl implements Statemachin
   {
     try
     {
-      StatemachineFactory theStatemachineFactory = (StatemachineFactory)EPackage.Registry.INSTANCE.getEFactory("http://www.eclipse.org/xtext/example/fowlerdsl/Statemachine"); 
+      StatemachineFactory theStatemachineFactory = (StatemachineFactory)EPackage.Registry.INSTANCE.getEFactory(StatemachinePackage.eNS_URI);
       if (theStatemachineFactory != null)
       {
         return theStatemachineFactory;

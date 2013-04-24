@@ -1,7 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
  */
 package org.eclipse.xtext.serializer.assignmentFinderTest.impl;
 
@@ -34,7 +31,7 @@ public class AssignmentFinderTestFactoryImpl extends EFactoryImpl implements Ass
   {
     try
     {
-      AssignmentFinderTestFactory theAssignmentFinderTestFactory = (AssignmentFinderTestFactory)EPackage.Registry.INSTANCE.getEFactory("http://www.eclipse.org/2009/tmf/xtext/assignmentfindertestlanguage"); 
+      AssignmentFinderTestFactory theAssignmentFinderTestFactory = (AssignmentFinderTestFactory)EPackage.Registry.INSTANCE.getEFactory(AssignmentFinderTestPackage.eNS_URI);
       if (theAssignmentFinderTestFactory != null)
       {
         return theAssignmentFinderTestFactory;

@@ -1,7 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
  */
 package org.eclipse.xtext.serializer.sequencertest.impl;
 
@@ -73,7 +70,7 @@ public class SequencertestFactoryImpl extends EFactoryImpl implements Sequencert
   {
     try
     {
-      SequencertestFactory theSequencertestFactory = (SequencertestFactory)EPackage.Registry.INSTANCE.getEFactory("http://www.eclipse.org/2009/tmf/xtext/sequencertestlanguage"); 
+      SequencertestFactory theSequencertestFactory = (SequencertestFactory)EPackage.Registry.INSTANCE.getEFactory(SequencertestPackage.eNS_URI);
       if (theSequencertestFactory != null)
       {
         return theSequencertestFactory;

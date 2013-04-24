@@ -1,7 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
  */
 package org.eclipse.xtext.grammarinheritance.foo.impl;
 
@@ -33,7 +30,7 @@ public class FooFactoryImpl extends EFactoryImpl implements FooFactory
   {
     try
     {
-      FooFactory theFooFactory = (FooFactory)EPackage.Registry.INSTANCE.getEFactory("http://holla"); 
+      FooFactory theFooFactory = (FooFactory)EPackage.Registry.INSTANCE.getEFactory(FooPackage.eNS_URI);
       if (theFooFactory != null)
       {
         return theFooFactory;

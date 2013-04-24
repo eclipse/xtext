@@ -20,6 +20,7 @@ var classSplitting = true
 Workflow {
 	
 	bean = StandaloneSetup {
+		ignoreBrokenProjectFiles = true
 		platformUri = "${runtimeProject}/../.."
 	}
 	
@@ -35,7 +36,7 @@ Workflow {
 		
 		language = auto-inject {
 			fragment = ecore.EcoreGeneratorFragment {
-				emfRuntimeVersion = "2.5"
+				emfRuntimeVersion = "2.9"
 			}
 			fragment = grammarAccess.GrammarAccessFragment {}
 			fragment = parseTreeConstructor.ParseTreeConstructorFragment {}

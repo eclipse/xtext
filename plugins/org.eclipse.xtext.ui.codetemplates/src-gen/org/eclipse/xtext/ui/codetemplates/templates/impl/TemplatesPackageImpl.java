@@ -1,7 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
  */
 package org.eclipse.xtext.ui.codetemplates.templates.impl;
 
@@ -131,7 +128,6 @@ public class TemplatesPackageImpl extends EPackageImpl implements TemplatesPacka
     isInited = true;
 
     // Initialize simple dependencies
-    EcorePackage.eINSTANCE.eClass();
     XtextPackage.eINSTANCE.eClass();
 
     // Create package meta-data objects

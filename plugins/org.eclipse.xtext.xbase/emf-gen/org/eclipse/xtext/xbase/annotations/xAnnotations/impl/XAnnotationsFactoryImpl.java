@@ -4,7 +4,6 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- *
  */
 package org.eclipse.xtext.xbase.annotations.xAnnotations.impl;
 
@@ -36,7 +35,7 @@ public class XAnnotationsFactoryImpl extends EFactoryImpl implements XAnnotation
 	{
 		try
 		{
-			XAnnotationsFactory theXAnnotationsFactory = (XAnnotationsFactory)EPackage.Registry.INSTANCE.getEFactory("http://www.eclipse.org/Xtext/Xbase/XAnnotations"); 
+			XAnnotationsFactory theXAnnotationsFactory = (XAnnotationsFactory)EPackage.Registry.INSTANCE.getEFactory(XAnnotationsPackage.eNS_URI);
 			if (theXAnnotationsFactory != null)
 			{
 				return theXAnnotationsFactory;
@@ -124,6 +123,7 @@ public class XAnnotationsFactoryImpl extends EFactoryImpl implements XAnnotation
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @deprecated
 	 * @generated
 	 */
 	@Deprecated

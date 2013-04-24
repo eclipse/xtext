@@ -1,7 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
  */
 package org.eclipse.xtext.xtext.ecoreInference.multiValueFeatureTestLanguage.impl;
 
@@ -33,7 +30,7 @@ public class MultiValueFeatureTestLanguageFactoryImpl extends EFactoryImpl imple
   {
     try
     {
-      MultiValueFeatureTestLanguageFactory theMultiValueFeatureTestLanguageFactory = (MultiValueFeatureTestLanguageFactory)EPackage.Registry.INSTANCE.getEFactory("http://www.eclipse.org/2008/xtext/MultiValueFeatureTestLanguage"); 
+      MultiValueFeatureTestLanguageFactory theMultiValueFeatureTestLanguageFactory = (MultiValueFeatureTestLanguageFactory)EPackage.Registry.INSTANCE.getEFactory(MultiValueFeatureTestLanguagePackage.eNS_URI);
       if (theMultiValueFeatureTestLanguageFactory != null)
       {
         return theMultiValueFeatureTestLanguageFactory;

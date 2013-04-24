@@ -1,7 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
  */
 package org.eclipse.xtext.ui.tests.editor.bracketmatching.bracketmatching.impl;
 
@@ -33,7 +30,7 @@ public class BracketmatchingFactoryImpl extends EFactoryImpl implements Bracketm
   {
     try
     {
-      BracketmatchingFactory theBracketmatchingFactory = (BracketmatchingFactory)EPackage.Registry.INSTANCE.getEFactory("http://xtext.org/ui/integartion/tests/bracketmatching"); 
+      BracketmatchingFactory theBracketmatchingFactory = (BracketmatchingFactory)EPackage.Registry.INSTANCE.getEFactory(BracketmatchingPackage.eNS_URI);
       if (theBracketmatchingFactory != null)
       {
         return theBracketmatchingFactory;

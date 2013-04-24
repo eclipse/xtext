@@ -36,7 +36,7 @@ public class XtypeFactoryImpl extends EFactoryImpl implements XtypeFactory
 	{
 		try
 		{
-			XtypeFactory theXtypeFactory = (XtypeFactory)EPackage.Registry.INSTANCE.getEFactory("http://www.eclipse.org/xtext/xbase/Xtype"); 
+			XtypeFactory theXtypeFactory = (XtypeFactory)EPackage.Registry.INSTANCE.getEFactory(XtypePackage.eNS_URI);
 			if (theXtypeFactory != null)
 			{
 				return theXtypeFactory;
@@ -166,6 +166,7 @@ public class XtypeFactoryImpl extends EFactoryImpl implements XtypeFactory
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @deprecated
 	 * @generated
 	 */
 	@Deprecated

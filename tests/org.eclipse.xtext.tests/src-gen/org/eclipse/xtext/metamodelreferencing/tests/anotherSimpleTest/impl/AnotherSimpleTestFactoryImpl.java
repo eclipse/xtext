@@ -1,7 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
  */
 package org.eclipse.xtext.metamodelreferencing.tests.anotherSimpleTest.impl;
 
@@ -33,7 +30,7 @@ public class AnotherSimpleTestFactoryImpl extends EFactoryImpl implements Anothe
   {
     try
     {
-      AnotherSimpleTestFactory theAnotherSimpleTestFactory = (AnotherSimpleTestFactory)EPackage.Registry.INSTANCE.getEFactory("http://eclipse.org/xtext/tests/AnotherSimpleTest"); 
+      AnotherSimpleTestFactory theAnotherSimpleTestFactory = (AnotherSimpleTestFactory)EPackage.Registry.INSTANCE.getEFactory(AnotherSimpleTestPackage.eNS_URI);
       if (theAnotherSimpleTestFactory != null)
       {
         return theAnotherSimpleTestFactory;

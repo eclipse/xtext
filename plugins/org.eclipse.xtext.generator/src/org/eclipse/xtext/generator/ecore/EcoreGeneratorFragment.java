@@ -135,6 +135,11 @@ public class EcoreGeneratorFragment extends AbstractGeneratorFragment {
 			ResourceSet rs) {
 		URI ecoreFileUri = getEcoreFileUri(grammar, ctx);
 		ecoreFileUri = toPlatformResourceURI(ecoreFileUri);
+		Resource existing = rs.getResource(ecoreFileUri, false);
+		if (existing != null) {
+			existing.unload();
+			rs.getResources().remove(existing);
+		}
 		Resource ecoreFile = rs.createResource(ecoreFileUri, ContentHandler.UNSPECIFIED_CONTENT_TYPE);
 		ecoreFile.getContents().addAll(packs);
 		return ecoreFile;
@@ -570,6 +575,11 @@ public class EcoreGeneratorFragment extends AbstractGeneratorFragment {
 	protected GenModel getGenModel(ResourceSet rs, Grammar grammar, XpandExecutionContext ctx, List<EPackage> packs) {
 		URI genModelUri = getGenModelUri(grammar, ctx);
 		genModelUri = toPlatformResourceURI(genModelUri);
+		Resource resource = rs.getResource(genModelUri, false);
+		if (resource != null) {
+			resource.unload();
+			rs.getResources().remove(resource);
+		}
 		Resource genModelFile = rs.createResource(genModelUri, ContentHandler.UNSPECIFIED_CONTENT_TYPE);
 		GenModel genModel;
 		if (rs.getURIConverter().exists(genModelUri, null)) {

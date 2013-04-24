@@ -6,14 +6,13 @@ package org.eclipse.xtext.ui.codetemplates.parseTreeConstruction;
 import org.eclipse.emf.ecore.*;
 import org.eclipse.xtext.*;
 import org.eclipse.xtext.parsetree.reconstr.IEObjectConsumer;
-import org.eclipse.xtext.parsetree.reconstr.impl.AbstractParseTreeConstructor;
 
 import org.eclipse.xtext.ui.codetemplates.services.SingleCodetemplateGrammarAccess;
 
 import com.google.inject.Inject;
 
 @SuppressWarnings("all")
-public class SingleCodetemplateParsetreeConstructor extends AbstractParseTreeConstructor {
+public class SingleCodetemplateParsetreeConstructor extends org.eclipse.xtext.parsetree.reconstr.impl.AbstractParseTreeConstructor {
 		
 	@Inject
 	private SingleCodetemplateGrammarAccess grammarAccess;

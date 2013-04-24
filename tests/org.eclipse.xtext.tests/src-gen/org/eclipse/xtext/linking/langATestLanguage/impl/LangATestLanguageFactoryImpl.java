@@ -1,7 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
  */
 package org.eclipse.xtext.linking.langATestLanguage.impl;
 
@@ -33,7 +30,7 @@ public class LangATestLanguageFactoryImpl extends EFactoryImpl implements LangAT
   {
     try
     {
-      LangATestLanguageFactory theLangATestLanguageFactory = (LangATestLanguageFactory)EPackage.Registry.INSTANCE.getEFactory("http://eclipse.org/xtext/langATestLanguage"); 
+      LangATestLanguageFactory theLangATestLanguageFactory = (LangATestLanguageFactory)EPackage.Registry.INSTANCE.getEFactory(LangATestLanguagePackage.eNS_URI);
       if (theLangATestLanguageFactory != null)
       {
         return theLangATestLanguageFactory;

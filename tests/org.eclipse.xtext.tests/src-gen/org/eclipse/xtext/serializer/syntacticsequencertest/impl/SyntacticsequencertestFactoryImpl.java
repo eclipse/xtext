@@ -1,7 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
  */
 package org.eclipse.xtext.serializer.syntacticsequencertest.impl;
 
@@ -33,7 +30,7 @@ public class SyntacticsequencertestFactoryImpl extends EFactoryImpl implements S
   {
     try
     {
-      SyntacticsequencertestFactory theSyntacticsequencertestFactory = (SyntacticsequencertestFactory)EPackage.Registry.INSTANCE.getEFactory("http://www.eclipse.org/2009/tmf/xtext/syntacticsequencertestlanguage"); 
+      SyntacticsequencertestFactory theSyntacticsequencertestFactory = (SyntacticsequencertestFactory)EPackage.Registry.INSTANCE.getEFactory(SyntacticsequencertestPackage.eNS_URI);
       if (theSyntacticsequencertestFactory != null)
       {
         return theSyntacticsequencertestFactory;

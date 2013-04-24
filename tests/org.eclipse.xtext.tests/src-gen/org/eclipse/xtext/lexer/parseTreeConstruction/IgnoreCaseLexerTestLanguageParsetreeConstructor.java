@@ -6,14 +6,13 @@ package org.eclipse.xtext.lexer.parseTreeConstruction;
 import org.eclipse.emf.ecore.*;
 import org.eclipse.xtext.*;
 import org.eclipse.xtext.parsetree.reconstr.IEObjectConsumer;
-import org.eclipse.xtext.parsetree.reconstr.impl.AbstractParseTreeConstructor;
 
 import org.eclipse.xtext.lexer.services.IgnoreCaseLexerTestLanguageGrammarAccess;
 
 import com.google.inject.Inject;
 
 @SuppressWarnings("all")
-public class IgnoreCaseLexerTestLanguageParsetreeConstructor extends AbstractParseTreeConstructor {
+public class IgnoreCaseLexerTestLanguageParsetreeConstructor extends org.eclipse.xtext.parsetree.reconstr.impl.AbstractParseTreeConstructor {
 		
 	@Inject
 	private IgnoreCaseLexerTestLanguageGrammarAccess grammarAccess;

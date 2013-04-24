@@ -4,7 +4,6 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- *
  */
 package org.eclipse.xtend.core.xtend.impl;
 
@@ -36,7 +35,7 @@ public class XtendFactoryImpl extends EFactoryImpl implements XtendFactory
 	{
 		try
 		{
-			XtendFactory theXtendFactory = (XtendFactory)EPackage.Registry.INSTANCE.getEFactory("http://www.eclipse.org/xtend"); 
+			XtendFactory theXtendFactory = (XtendFactory)EPackage.Registry.INSTANCE.getEFactory(XtendPackage.eNS_URI);
 			if (theXtendFactory != null)
 			{
 				return theXtendFactory;

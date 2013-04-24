@@ -4,10 +4,10 @@
     modelDirectory="/org.eclipse.xtend.core/emf-gen" modelPluginID="org.eclipse.xtend.core"
     modelName="RichStrings" rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container"
     importerID="org.eclipse.emf.importer.ecore" complianceLevel="5.0" copyrightFields="false"
-    runtimeVersion="2.5" usedGenPackages="platform:/resource/org.eclipse.xtext.common.types/model/JavaVMTypes.genmodel#//types platform:/resource/org.eclipse.xtext.xbase/model/Xbase.genmodel#//xAnnotations platform:/resource/org.eclipse.xtext.xbase/model/Xbase.genmodel#//xbase Xtend.genmodel#//xtend">
+    runtimeVersion="2.9" usedGenPackages="../../org.eclipse.xtext.common.types/model/JavaVMTypes.genmodel#//types ../../org.eclipse.xtext.xbase/model/Xbase.genmodel#//xAnnotations ../../org.eclipse.xtext.xbase/model/Xbase.genmodel#//xbase Xtend.genmodel#//xtend ../../org.eclipse.xtext.xbase/model/Xbase.genmodel#//xtype">
   <foreignModel>RichStrings.ecore</foreignModel>
-  <genPackages prefix="ProcessedRichString" basePackage="org.eclipse.xtend.core"
-      disposableProviderFactory="true" fileExtensions="__richstrings" ecorePackage="RichStrings.ecore#/">
+  <genPackages prefix="ProcessedRichString" basePackage="org.eclipse.xtend.core" disposableProviderFactory="true"
+      fileExtensions="__richstrings" ecorePackage="RichStrings.ecore#/">
     <genClasses ecoreClass="RichStrings.ecore#//ProcessedRichString">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference RichStrings.ecore#//ProcessedRichString/richString"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference RichStrings.ecore#//ProcessedRichString/lines"/>

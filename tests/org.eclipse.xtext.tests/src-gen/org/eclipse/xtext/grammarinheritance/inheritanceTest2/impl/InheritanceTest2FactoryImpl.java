@@ -1,7 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
  */
 package org.eclipse.xtext.grammarinheritance.inheritanceTest2.impl;
 
@@ -33,7 +30,7 @@ public class InheritanceTest2FactoryImpl extends EFactoryImpl implements Inherit
   {
     try
     {
-      InheritanceTest2Factory theInheritanceTest2Factory = (InheritanceTest2Factory)EPackage.Registry.INSTANCE.getEFactory("http://www.eclipse.org/2009/tmf/xtext/InheritanceTest2Language"); 
+      InheritanceTest2Factory theInheritanceTest2Factory = (InheritanceTest2Factory)EPackage.Registry.INSTANCE.getEFactory(InheritanceTest2Package.eNS_URI);
       if (theInheritanceTest2Factory != null)
       {
         return theInheritanceTest2Factory;

@@ -1,7 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
  */
 package org.eclipse.xtext.ui.tests.refactoring.referring.impl;
 
@@ -33,7 +30,7 @@ public class ReferringFactoryImpl extends EFactoryImpl implements ReferringFacto
   {
     try
     {
-      ReferringFactory theReferringFactory = (ReferringFactory)EPackage.Registry.INSTANCE.getEFactory("http://www.eclipse.org/xtext/referringTestLanguage"); 
+      ReferringFactory theReferringFactory = (ReferringFactory)EPackage.Registry.INSTANCE.getEFactory(ReferringPackage.eNS_URI);
       if (theReferringFactory != null)
       {
         return theReferringFactory;

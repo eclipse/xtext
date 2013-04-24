@@ -1,7 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
  */
 package org.eclipse.xtext.common.types.xtext.ui.refactoringTestLanguage.impl;
 
@@ -33,7 +30,7 @@ public class RefactoringTestLanguageFactoryImpl extends EFactoryImpl implements 
   {
     try
     {
-      RefactoringTestLanguageFactory theRefactoringTestLanguageFactory = (RefactoringTestLanguageFactory)EPackage.Registry.INSTANCE.getEFactory("http://www.eclipse.org/2011/xtext/ui/common/types/xtext/ui/Refactoring"); 
+      RefactoringTestLanguageFactory theRefactoringTestLanguageFactory = (RefactoringTestLanguageFactory)EPackage.Registry.INSTANCE.getEFactory(RefactoringTestLanguagePackage.eNS_URI);
       if (theRefactoringTestLanguageFactory != null)
       {
         return theRefactoringTestLanguageFactory;

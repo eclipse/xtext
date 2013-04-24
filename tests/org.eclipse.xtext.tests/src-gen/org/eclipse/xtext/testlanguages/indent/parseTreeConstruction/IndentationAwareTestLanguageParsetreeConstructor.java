@@ -6,14 +6,13 @@ package org.eclipse.xtext.testlanguages.indent.parseTreeConstruction;
 import org.eclipse.emf.ecore.*;
 import org.eclipse.xtext.*;
 import org.eclipse.xtext.parsetree.reconstr.IEObjectConsumer;
-import org.eclipse.xtext.parsetree.reconstr.impl.AbstractParseTreeConstructor;
 
 import org.eclipse.xtext.testlanguages.indent.services.IndentationAwareTestLanguageGrammarAccess;
 
 import com.google.inject.Inject;
 
 @SuppressWarnings("all")
-public class IndentationAwareTestLanguageParsetreeConstructor extends AbstractParseTreeConstructor {
+public class IndentationAwareTestLanguageParsetreeConstructor extends org.eclipse.xtext.parsetree.reconstr.impl.AbstractParseTreeConstructor {
 		
 	@Inject
 	private IndentationAwareTestLanguageGrammarAccess grammarAccess;

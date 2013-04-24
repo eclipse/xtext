@@ -6,14 +6,13 @@ package org.eclipse.xtext.linking.parseTreeConstruction;
 import org.eclipse.emf.ecore.*;
 import org.eclipse.xtext.*;
 import org.eclipse.xtext.parsetree.reconstr.IEObjectConsumer;
-import org.eclipse.xtext.parsetree.reconstr.impl.AbstractParseTreeConstructor;
 
 import org.eclipse.xtext.linking.services.AbstractIgnoreCaseLinkingTestLanguageGrammarAccess;
 
 import com.google.inject.Inject;
 
 @SuppressWarnings("all")
-public class AbstractIgnoreCaseLinkingTestLanguageParsetreeConstructor extends AbstractParseTreeConstructor {
+public class AbstractIgnoreCaseLinkingTestLanguageParsetreeConstructor extends org.eclipse.xtext.parsetree.reconstr.impl.AbstractParseTreeConstructor {
 		
 	@Inject
 	private AbstractIgnoreCaseLinkingTestLanguageGrammarAccess grammarAccess;

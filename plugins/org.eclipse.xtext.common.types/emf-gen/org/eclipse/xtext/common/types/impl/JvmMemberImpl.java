@@ -129,7 +129,7 @@ public abstract class JvmMemberImpl extends JvmAnnotationTargetImplCustom implem
 	public JvmDeclaredType getDeclaringType()
 	{
 		if (eContainerFeatureID() != TypesPackage.JVM_MEMBER__DECLARING_TYPE) return null;
-		return (JvmDeclaredType)eContainer();
+		return (JvmDeclaredType)eInternalContainer();
 	}
 
 	/**

@@ -1,7 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
  */
 package org.eclipse.xtext.testlanguages.backtracking.beeLangTestLanguage.impl;
 
@@ -33,7 +30,7 @@ public class BeeLangTestLanguageFactoryImpl extends EFactoryImpl implements BeeL
   {
     try
     {
-      BeeLangTestLanguageFactory theBeeLangTestLanguageFactory = (BeeLangTestLanguageFactory)EPackage.Registry.INSTANCE.getEFactory("http://www.eclipse.org/2010/tmf/xtext/beeLangTestLanguage"); 
+      BeeLangTestLanguageFactory theBeeLangTestLanguageFactory = (BeeLangTestLanguageFactory)EPackage.Registry.INSTANCE.getEFactory(BeeLangTestLanguagePackage.eNS_URI);
       if (theBeeLangTestLanguageFactory != null)
       {
         return theBeeLangTestLanguageFactory;

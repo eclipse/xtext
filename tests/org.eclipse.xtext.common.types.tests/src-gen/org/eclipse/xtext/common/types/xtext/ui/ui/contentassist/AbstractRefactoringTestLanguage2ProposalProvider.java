@@ -5,7 +5,6 @@ package org.eclipse.xtext.common.types.xtext.ui.ui.contentassist;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.*;
-import org.eclipse.xtext.common.types.xtext.ui.ui.contentassist.RefactoringTestLanguageProposalProvider;
 import org.eclipse.xtext.ui.editor.contentassist.ICompletionProposalAcceptor;
 import org.eclipse.xtext.ui.editor.contentassist.ContentAssistContext;
 
@@ -15,7 +14,7 @@ import org.eclipse.xtext.ui.editor.contentassist.ContentAssistContext;
  * with a more concrete subtype. 
  */
 @SuppressWarnings("all")
-public class AbstractRefactoringTestLanguage2ProposalProvider extends RefactoringTestLanguageProposalProvider {
+public class AbstractRefactoringTestLanguage2ProposalProvider extends org.eclipse.xtext.common.types.xtext.ui.ui.contentassist.RefactoringTestLanguageProposalProvider {
 		
     
 	public void complete_Entry(EObject model, RuleCall ruleCall, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {

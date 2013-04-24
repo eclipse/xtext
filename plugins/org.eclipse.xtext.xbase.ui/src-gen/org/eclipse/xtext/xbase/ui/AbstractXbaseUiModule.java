@@ -153,6 +153,11 @@ public abstract class AbstractXbaseUiModule extends DefaultUiModule {
 		return org.eclipse.xtext.xbase.ui.refactoring.XbaseRenameStrategy.class;
 	}
 
+	// contributed by org.eclipse.xtext.generator.xbase.XbaseGeneratorFragment
+	public Class<? extends org.eclipse.xtext.xbase.ui.quickfix.JavaTypeQuickfixes> bindJavaTypeQuickfixes() {
+		return org.eclipse.xtext.xbase.ui.quickfix.JavaTypeQuickfixesNoImportSection.class;
+	}
+
 	// contributed by org.eclipse.xtext.generator.builder.BuilderIntegrationFragment
 	public void configureIResourceDescriptionsBuilderScope(com.google.inject.Binder binder) {
 		binder.bind(org.eclipse.xtext.resource.IResourceDescriptions.class).annotatedWith(com.google.inject.name.Names.named(org.eclipse.xtext.resource.impl.ResourceDescriptionsProvider.NAMED_BUILDER_SCOPE)).to(org.eclipse.xtext.builder.clustering.CurrentDescriptions.ResourceSetAware.class);

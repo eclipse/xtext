@@ -1,6 +1,6 @@
 package org.eclipse.xtext.resource.parser.antlr.internal;
 
-// Hack: Use our own Lexer superclass by means of import.
+// Hack: Use our own Lexer superclass by means of import. 
 // Currently there is no other way to specify the superclass for the lexer.
 import org.eclipse.xtext.parser.antlr.Lexer;
 
@@ -36,7 +36,7 @@ public class InternalBug385636Lexer extends Lexer {
     // delegates
     // delegators
 
-    public InternalBug385636Lexer() {;}
+    public InternalBug385636Lexer() {;} 
     public InternalBug385636Lexer(CharStream input) {
         this(input, new RecognizerSharedState());
     }
@@ -54,7 +54,7 @@ public class InternalBug385636Lexer extends Lexer {
             // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/resource/parser/antlr/internal/InternalBug385636.g:11:7: ( 'END' )
             // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/resource/parser/antlr/internal/InternalBug385636.g:11:9: 'END'
             {
-            match("END");
+            match("END"); 
 
 
             }
@@ -75,7 +75,7 @@ public class InternalBug385636Lexer extends Lexer {
             // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/resource/parser/antlr/internal/InternalBug385636.g:12:7: ( 'VARIABLES' )
             // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/resource/parser/antlr/internal/InternalBug385636.g:12:9: 'VARIABLES'
             {
-            match("VARIABLES");
+            match("VARIABLES"); 
 
 
             }
@@ -96,7 +96,7 @@ public class InternalBug385636Lexer extends Lexer {
             // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/resource/parser/antlr/internal/InternalBug385636.g:13:7: ( 'ENDVARIABLES' )
             // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/resource/parser/antlr/internal/InternalBug385636.g:13:9: 'ENDVARIABLES'
             {
-            match("ENDVARIABLES");
+            match("ENDVARIABLES"); 
 
 
             }
@@ -117,7 +117,7 @@ public class InternalBug385636Lexer extends Lexer {
             // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/resource/parser/antlr/internal/InternalBug385636.g:14:7: ( 'NAME' )
             // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/resource/parser/antlr/internal/InternalBug385636.g:14:9: 'NAME'
             {
-            match("NAME");
+            match("NAME"); 
 
 
             }
@@ -138,7 +138,7 @@ public class InternalBug385636Lexer extends Lexer {
             // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/resource/parser/antlr/internal/InternalBug385636.g:15:7: ( 'C1' )
             // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/resource/parser/antlr/internal/InternalBug385636.g:15:9: 'C1'
             {
-            match("C1");
+            match("C1"); 
 
 
             }
@@ -159,7 +159,7 @@ public class InternalBug385636Lexer extends Lexer {
             // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/resource/parser/antlr/internal/InternalBug385636.g:16:7: ( 'C2' )
             // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/resource/parser/antlr/internal/InternalBug385636.g:16:9: 'C2'
             {
-            match("C2");
+            match("C2"); 
 
 
             }
@@ -180,7 +180,7 @@ public class InternalBug385636Lexer extends Lexer {
             // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/resource/parser/antlr/internal/InternalBug385636.g:17:7: ( 'C3' )
             // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/resource/parser/antlr/internal/InternalBug385636.g:17:9: 'C3'
             {
-            match("C3");
+            match("C3"); 
 
 
             }
@@ -201,7 +201,7 @@ public class InternalBug385636Lexer extends Lexer {
             // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/resource/parser/antlr/internal/InternalBug385636.g:18:7: ( 'C4' )
             // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/resource/parser/antlr/internal/InternalBug385636.g:18:9: 'C4'
             {
-            match("C4");
+            match("C4"); 
 
 
             }
@@ -222,7 +222,7 @@ public class InternalBug385636Lexer extends Lexer {
             // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/resource/parser/antlr/internal/InternalBug385636.g:19:7: ( 'C5' )
             // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/resource/parser/antlr/internal/InternalBug385636.g:19:9: 'C5'
             {
-            match("C5");
+            match("C5"); 
 
 
             }
@@ -243,7 +243,7 @@ public class InternalBug385636Lexer extends Lexer {
             // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/resource/parser/antlr/internal/InternalBug385636.g:20:7: ( 'C6' )
             // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/resource/parser/antlr/internal/InternalBug385636.g:20:9: 'C6'
             {
-            match("C6");
+            match("C6"); 
 
 
             }
@@ -264,7 +264,7 @@ public class InternalBug385636Lexer extends Lexer {
             // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/resource/parser/antlr/internal/InternalBug385636.g:21:7: ( 'C7' )
             // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/resource/parser/antlr/internal/InternalBug385636.g:21:9: 'C7'
             {
-            match("C7");
+            match("C7"); 
 
 
             }
@@ -285,7 +285,7 @@ public class InternalBug385636Lexer extends Lexer {
             // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/resource/parser/antlr/internal/InternalBug385636.g:22:7: ( 'C8' )
             // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/resource/parser/antlr/internal/InternalBug385636.g:22:9: 'C8'
             {
-            match("C8");
+            match("C8"); 
 
 
             }
@@ -317,7 +317,7 @@ public class InternalBug385636Lexer extends Lexer {
                 case 1 :
                     // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/resource/parser/antlr/internal/InternalBug385636.g:530:11: '^'
                     {
-                    match('^');
+                    match('^'); 
 
                     }
                     break;
@@ -345,24 +345,24 @@ public class InternalBug385636Lexer extends Lexer {
 
 
                 switch (alt2) {
-		case 1 :
-		    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/resource/parser/antlr/internal/InternalBug385636.g:
-		    {
-		    if ( (input.LA(1)>='0' && input.LA(1)<='9')||(input.LA(1)>='A' && input.LA(1)<='Z')||input.LA(1)=='_'||(input.LA(1)>='a' && input.LA(1)<='z') ) {
-		        input.consume();
+            	case 1 :
+            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/resource/parser/antlr/internal/InternalBug385636.g:
+            	    {
+            	    if ( (input.LA(1)>='0' && input.LA(1)<='9')||(input.LA(1)>='A' && input.LA(1)<='Z')||input.LA(1)=='_'||(input.LA(1)>='a' && input.LA(1)<='z') ) {
+            	        input.consume();
 
-		    }
-		    else {
-		        MismatchedSetException mse = new MismatchedSetException(null,input);
-		        recover(mse);
-		        throw mse;}
+            	    }
+            	    else {
+            	        MismatchedSetException mse = new MismatchedSetException(null,input);
+            	        recover(mse);
+            	        throw mse;}
 
 
-		    }
-		    break;
+            	    }
+            	    break;
 
-		default :
-		    break loop2;
+            	default :
+            	    break loop2;
                 }
             } while (true);
 
@@ -398,16 +398,16 @@ public class InternalBug385636Lexer extends Lexer {
 
 
                 switch (alt3) {
-		case 1 :
-		    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/resource/parser/antlr/internal/InternalBug385636.g:532:13: '0' .. '9'
-		    {
-		    matchRange('0','9');
+            	case 1 :
+            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/resource/parser/antlr/internal/InternalBug385636.g:532:13: '0' .. '9'
+            	    {
+            	    matchRange('0','9'); 
 
-		    }
-		    break;
+            	    }
+            	    break;
 
-		default :
-		    if ( cnt3 >= 1 ) break loop3;
+            	default :
+            	    if ( cnt3 >= 1 ) break loop3;
                         EarlyExitException eee =
                             new EarlyExitException(3, input);
                         throw eee;
@@ -454,7 +454,7 @@ public class InternalBug385636Lexer extends Lexer {
                 case 1 :
                     // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/resource/parser/antlr/internal/InternalBug385636.g:534:16: '\"' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\"' ) ) )* '\"'
                     {
-                    match('\"');
+                    match('\"'); 
                     // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/resource/parser/antlr/internal/InternalBug385636.g:534:20: ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\"' ) ) )*
                     loop4:
                     do {
@@ -470,51 +470,51 @@ public class InternalBug385636Lexer extends Lexer {
 
 
                         switch (alt4) {
-			case 1 :
-			    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/resource/parser/antlr/internal/InternalBug385636.g:534:21: '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' )
-			    {
-			    match('\\');
-			    if ( input.LA(1)=='\"'||input.LA(1)=='\''||input.LA(1)=='\\'||input.LA(1)=='b'||input.LA(1)=='f'||input.LA(1)=='n'||input.LA(1)=='r'||(input.LA(1)>='t' && input.LA(1)<='u') ) {
-			        input.consume();
+                    	case 1 :
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/resource/parser/antlr/internal/InternalBug385636.g:534:21: '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' )
+                    	    {
+                    	    match('\\'); 
+                    	    if ( input.LA(1)=='\"'||input.LA(1)=='\''||input.LA(1)=='\\'||input.LA(1)=='b'||input.LA(1)=='f'||input.LA(1)=='n'||input.LA(1)=='r'||(input.LA(1)>='t' && input.LA(1)<='u') ) {
+                    	        input.consume();
 
-			    }
-			    else {
-			        MismatchedSetException mse = new MismatchedSetException(null,input);
-			        recover(mse);
-			        throw mse;}
-
-
-			    }
-			    break;
-			case 2 :
-			    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/resource/parser/antlr/internal/InternalBug385636.g:534:66: ~ ( ( '\\\\' | '\"' ) )
-			    {
-			    if ( (input.LA(1)>='\u0000' && input.LA(1)<='!')||(input.LA(1)>='#' && input.LA(1)<='[')||(input.LA(1)>=']' && input.LA(1)<='\uFFFF') ) {
-			        input.consume();
-
-			    }
-			    else {
-			        MismatchedSetException mse = new MismatchedSetException(null,input);
-			        recover(mse);
-			        throw mse;}
+                    	    }
+                    	    else {
+                    	        MismatchedSetException mse = new MismatchedSetException(null,input);
+                    	        recover(mse);
+                    	        throw mse;}
 
 
-			    }
-			    break;
+                    	    }
+                    	    break;
+                    	case 2 :
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/resource/parser/antlr/internal/InternalBug385636.g:534:66: ~ ( ( '\\\\' | '\"' ) )
+                    	    {
+                    	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='!')||(input.LA(1)>='#' && input.LA(1)<='[')||(input.LA(1)>=']' && input.LA(1)<='\uFFFF') ) {
+                    	        input.consume();
 
-			default :
-			    break loop4;
+                    	    }
+                    	    else {
+                    	        MismatchedSetException mse = new MismatchedSetException(null,input);
+                    	        recover(mse);
+                    	        throw mse;}
+
+
+                    	    }
+                    	    break;
+
+                    	default :
+                    	    break loop4;
                         }
                     } while (true);
 
-                    match('\"');
+                    match('\"'); 
 
                     }
                     break;
                 case 2 :
                     // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/resource/parser/antlr/internal/InternalBug385636.g:534:86: '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )* '\\''
                     {
-                    match('\'');
+                    match('\''); 
                     // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/resource/parser/antlr/internal/InternalBug385636.g:534:91: ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )*
                     loop5:
                     do {
@@ -530,44 +530,44 @@ public class InternalBug385636Lexer extends Lexer {
 
 
                         switch (alt5) {
-			case 1 :
-			    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/resource/parser/antlr/internal/InternalBug385636.g:534:92: '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' )
-			    {
-			    match('\\');
-			    if ( input.LA(1)=='\"'||input.LA(1)=='\''||input.LA(1)=='\\'||input.LA(1)=='b'||input.LA(1)=='f'||input.LA(1)=='n'||input.LA(1)=='r'||(input.LA(1)>='t' && input.LA(1)<='u') ) {
-			        input.consume();
+                    	case 1 :
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/resource/parser/antlr/internal/InternalBug385636.g:534:92: '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | 'u' | '\"' | '\\'' | '\\\\' )
+                    	    {
+                    	    match('\\'); 
+                    	    if ( input.LA(1)=='\"'||input.LA(1)=='\''||input.LA(1)=='\\'||input.LA(1)=='b'||input.LA(1)=='f'||input.LA(1)=='n'||input.LA(1)=='r'||(input.LA(1)>='t' && input.LA(1)<='u') ) {
+                    	        input.consume();
 
-			    }
-			    else {
-			        MismatchedSetException mse = new MismatchedSetException(null,input);
-			        recover(mse);
-			        throw mse;}
-
-
-			    }
-			    break;
-			case 2 :
-			    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/resource/parser/antlr/internal/InternalBug385636.g:534:137: ~ ( ( '\\\\' | '\\'' ) )
-			    {
-			    if ( (input.LA(1)>='\u0000' && input.LA(1)<='&')||(input.LA(1)>='(' && input.LA(1)<='[')||(input.LA(1)>=']' && input.LA(1)<='\uFFFF') ) {
-			        input.consume();
-
-			    }
-			    else {
-			        MismatchedSetException mse = new MismatchedSetException(null,input);
-			        recover(mse);
-			        throw mse;}
+                    	    }
+                    	    else {
+                    	        MismatchedSetException mse = new MismatchedSetException(null,input);
+                    	        recover(mse);
+                    	        throw mse;}
 
 
-			    }
-			    break;
+                    	    }
+                    	    break;
+                    	case 2 :
+                    	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/resource/parser/antlr/internal/InternalBug385636.g:534:137: ~ ( ( '\\\\' | '\\'' ) )
+                    	    {
+                    	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='&')||(input.LA(1)>='(' && input.LA(1)<='[')||(input.LA(1)>=']' && input.LA(1)<='\uFFFF') ) {
+                    	        input.consume();
 
-			default :
-			    break loop5;
+                    	    }
+                    	    else {
+                    	        MismatchedSetException mse = new MismatchedSetException(null,input);
+                    	        recover(mse);
+                    	        throw mse;}
+
+
+                    	    }
+                    	    break;
+
+                    	default :
+                    	    break loop5;
                         }
                     } while (true);
 
-                    match('\'');
+                    match('\''); 
 
                     }
                     break;
@@ -593,7 +593,7 @@ public class InternalBug385636Lexer extends Lexer {
             // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/resource/parser/antlr/internal/InternalBug385636.g:536:17: ( '/*' ( options {greedy=false; } : . )* '*/' )
             // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/resource/parser/antlr/internal/InternalBug385636.g:536:19: '/*' ( options {greedy=false; } : . )* '*/'
             {
-            match("/*");
+            match("/*"); 
 
             // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/resource/parser/antlr/internal/InternalBug385636.g:536:24: ( options {greedy=false; } : . )*
             loop7:
@@ -619,20 +619,20 @@ public class InternalBug385636Lexer extends Lexer {
 
 
                 switch (alt7) {
-		case 1 :
-		    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/resource/parser/antlr/internal/InternalBug385636.g:536:52: .
-		    {
-		    matchAny();
+            	case 1 :
+            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/resource/parser/antlr/internal/InternalBug385636.g:536:52: .
+            	    {
+            	    matchAny(); 
 
-		    }
-		    break;
+            	    }
+            	    break;
 
-		default :
-		    break loop7;
+            	default :
+            	    break loop7;
                 }
             } while (true);
 
-            match("*/");
+            match("*/"); 
 
 
             }
@@ -653,7 +653,7 @@ public class InternalBug385636Lexer extends Lexer {
             // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/resource/parser/antlr/internal/InternalBug385636.g:538:17: ( '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )? )
             // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/resource/parser/antlr/internal/InternalBug385636.g:538:19: '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )?
             {
-            match("//");
+            match("//"); 
 
             // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/resource/parser/antlr/internal/InternalBug385636.g:538:24: (~ ( ( '\\n' | '\\r' ) ) )*
             loop8:
@@ -667,24 +667,24 @@ public class InternalBug385636Lexer extends Lexer {
 
 
                 switch (alt8) {
-		case 1 :
-		    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/resource/parser/antlr/internal/InternalBug385636.g:538:24: ~ ( ( '\\n' | '\\r' ) )
-		    {
-		    if ( (input.LA(1)>='\u0000' && input.LA(1)<='\t')||(input.LA(1)>='\u000B' && input.LA(1)<='\f')||(input.LA(1)>='\u000E' && input.LA(1)<='\uFFFF') ) {
-		        input.consume();
+            	case 1 :
+            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/resource/parser/antlr/internal/InternalBug385636.g:538:24: ~ ( ( '\\n' | '\\r' ) )
+            	    {
+            	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='\t')||(input.LA(1)>='\u000B' && input.LA(1)<='\f')||(input.LA(1)>='\u000E' && input.LA(1)<='\uFFFF') ) {
+            	        input.consume();
 
-		    }
-		    else {
-		        MismatchedSetException mse = new MismatchedSetException(null,input);
-		        recover(mse);
-		        throw mse;}
+            	    }
+            	    else {
+            	        MismatchedSetException mse = new MismatchedSetException(null,input);
+            	        recover(mse);
+            	        throw mse;}
 
 
-		    }
-		    break;
+            	    }
+            	    break;
 
-		default :
-		    break loop8;
+            	default :
+            	    break loop8;
                 }
             } while (true);
 
@@ -710,14 +710,14 @@ public class InternalBug385636Lexer extends Lexer {
                         case 1 :
                             // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/resource/parser/antlr/internal/InternalBug385636.g:538:41: '\\r'
                             {
-                            match('\r');
+                            match('\r'); 
 
                             }
                             break;
 
                     }
 
-                    match('\n');
+                    match('\n'); 
 
                     }
                     break;
@@ -756,24 +756,24 @@ public class InternalBug385636Lexer extends Lexer {
 
 
                 switch (alt11) {
-		case 1 :
-		    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/resource/parser/antlr/internal/InternalBug385636.g:
-		    {
-		    if ( (input.LA(1)>='\t' && input.LA(1)<='\n')||input.LA(1)=='\r'||input.LA(1)==' ' ) {
-		        input.consume();
+            	case 1 :
+            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/resource/parser/antlr/internal/InternalBug385636.g:
+            	    {
+            	    if ( (input.LA(1)>='\t' && input.LA(1)<='\n')||input.LA(1)=='\r'||input.LA(1)==' ' ) {
+            	        input.consume();
 
-		    }
-		    else {
-		        MismatchedSetException mse = new MismatchedSetException(null,input);
-		        recover(mse);
-		        throw mse;}
+            	    }
+            	    else {
+            	        MismatchedSetException mse = new MismatchedSetException(null,input);
+            	        recover(mse);
+            	        throw mse;}
 
 
-		    }
-		    break;
+            	    }
+            	    break;
 
-		default :
-		    if ( cnt11 >= 1 ) break loop11;
+            	default :
+            	    if ( cnt11 >= 1 ) break loop11;
                         EarlyExitException eee =
                             new EarlyExitException(11, input);
                         throw eee;
@@ -800,7 +800,7 @@ public class InternalBug385636Lexer extends Lexer {
             // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/resource/parser/antlr/internal/InternalBug385636.g:542:16: ( . )
             // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/resource/parser/antlr/internal/InternalBug385636.g:542:18: .
             {
-            matchAny();
+            matchAny(); 
 
             }
 
@@ -820,133 +820,133 @@ public class InternalBug385636Lexer extends Lexer {
             case 1 :
                 // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/resource/parser/antlr/internal/InternalBug385636.g:1:10: T__11
                 {
-                mT__11();
+                mT__11(); 
 
                 }
                 break;
             case 2 :
                 // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/resource/parser/antlr/internal/InternalBug385636.g:1:16: T__12
                 {
-                mT__12();
+                mT__12(); 
 
                 }
                 break;
             case 3 :
                 // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/resource/parser/antlr/internal/InternalBug385636.g:1:22: T__13
                 {
-                mT__13();
+                mT__13(); 
 
                 }
                 break;
             case 4 :
                 // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/resource/parser/antlr/internal/InternalBug385636.g:1:28: T__14
                 {
-                mT__14();
+                mT__14(); 
 
                 }
                 break;
             case 5 :
                 // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/resource/parser/antlr/internal/InternalBug385636.g:1:34: T__15
                 {
-                mT__15();
+                mT__15(); 
 
                 }
                 break;
             case 6 :
                 // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/resource/parser/antlr/internal/InternalBug385636.g:1:40: T__16
                 {
-                mT__16();
+                mT__16(); 
 
                 }
                 break;
             case 7 :
                 // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/resource/parser/antlr/internal/InternalBug385636.g:1:46: T__17
                 {
-                mT__17();
+                mT__17(); 
 
                 }
                 break;
             case 8 :
                 // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/resource/parser/antlr/internal/InternalBug385636.g:1:52: T__18
                 {
-                mT__18();
+                mT__18(); 
 
                 }
                 break;
             case 9 :
                 // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/resource/parser/antlr/internal/InternalBug385636.g:1:58: T__19
                 {
-                mT__19();
+                mT__19(); 
 
                 }
                 break;
             case 10 :
                 // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/resource/parser/antlr/internal/InternalBug385636.g:1:64: T__20
                 {
-                mT__20();
+                mT__20(); 
 
                 }
                 break;
             case 11 :
                 // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/resource/parser/antlr/internal/InternalBug385636.g:1:70: T__21
                 {
-                mT__21();
+                mT__21(); 
 
                 }
                 break;
             case 12 :
                 // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/resource/parser/antlr/internal/InternalBug385636.g:1:76: T__22
                 {
-                mT__22();
+                mT__22(); 
 
                 }
                 break;
             case 13 :
                 // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/resource/parser/antlr/internal/InternalBug385636.g:1:82: RULE_ID
                 {
-                mRULE_ID();
+                mRULE_ID(); 
 
                 }
                 break;
             case 14 :
                 // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/resource/parser/antlr/internal/InternalBug385636.g:1:90: RULE_INT
                 {
-                mRULE_INT();
+                mRULE_INT(); 
 
                 }
                 break;
             case 15 :
                 // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/resource/parser/antlr/internal/InternalBug385636.g:1:99: RULE_STRING
                 {
-                mRULE_STRING();
+                mRULE_STRING(); 
 
                 }
                 break;
             case 16 :
                 // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/resource/parser/antlr/internal/InternalBug385636.g:1:111: RULE_ML_COMMENT
                 {
-                mRULE_ML_COMMENT();
+                mRULE_ML_COMMENT(); 
 
                 }
                 break;
             case 17 :
                 // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/resource/parser/antlr/internal/InternalBug385636.g:1:127: RULE_SL_COMMENT
                 {
-                mRULE_SL_COMMENT();
+                mRULE_SL_COMMENT(); 
 
                 }
                 break;
             case 18 :
                 // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/resource/parser/antlr/internal/InternalBug385636.g:1:143: RULE_WS
                 {
-                mRULE_WS();
+                mRULE_WS(); 
 
                 }
                 break;
             case 19 :
                 // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/resource/parser/antlr/internal/InternalBug385636.g:1:151: RULE_ANY_OTHER
                 {
-                mRULE_ANY_OTHER();
+                mRULE_ANY_OTHER(); 
 
                 }
                 break;
@@ -1080,9 +1080,9 @@ public class InternalBug385636Lexer extends Lexer {
         }
         public int specialStateTransition(int s, IntStream _input) throws NoViableAltException {
             IntStream input = _input;
-		int _s = s;
+        	int _s = s;
             switch ( s ) {
-                    case 0 :
+                    case 0 : 
                         int LA12_0 = input.LA(1);
 
                         s = -1;
@@ -1112,7 +1112,7 @@ public class InternalBug385636Lexer extends Lexer {
 
                         if ( s>=0 ) return s;
                         break;
-                    case 1 :
+                    case 1 : 
                         int LA12_8 = input.LA(1);
 
                         s = -1;
@@ -1122,7 +1122,7 @@ public class InternalBug385636Lexer extends Lexer {
 
                         if ( s>=0 ) return s;
                         break;
-                    case 2 :
+                    case 2 : 
                         int LA12_9 = input.LA(1);
 
                         s = -1;
@@ -1139,6 +1139,6 @@ public class InternalBug385636Lexer extends Lexer {
             throw nvae;
         }
     }
-
+ 
 
 }

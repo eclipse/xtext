@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<ecore:EPackage xmi:version="2.0"
-    xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="templates"
-    nsURI="http://www.eclipse.org/xtext/codetemplate/Codetemplates" nsPrefix="templates">
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="templates" nsURI="http://www.eclipse.org/xtext/codetemplate/Codetemplates"
+    nsPrefix="templates">
   <eClassifiers xsi:type="ecore:EClass" name="Codetemplates">
     <eStructuralFeatures xsi:type="ecore:EReference" name="language" eType="ecore:EClass ../../../../../../../org.eclipse.xtext/src/org/eclipse/xtext/Xtext.ecore#//Grammar"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="templates" upperBound="-1"

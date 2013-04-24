@@ -1,7 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
  */
 package org.eclipse.xtext.resource.bug385636.impl;
 
@@ -33,7 +30,7 @@ public class Bug385636FactoryImpl extends EFactoryImpl implements Bug385636Facto
   {
     try
     {
-      Bug385636Factory theBug385636Factory = (Bug385636Factory)EPackage.Registry.INSTANCE.getEFactory("http://www.xtext.org/Bug385636");
+      Bug385636Factory theBug385636Factory = (Bug385636Factory)EPackage.Registry.INSTANCE.getEFactory(Bug385636Package.eNS_URI);
       if (theBug385636Factory != null)
       {
         return theBug385636Factory;

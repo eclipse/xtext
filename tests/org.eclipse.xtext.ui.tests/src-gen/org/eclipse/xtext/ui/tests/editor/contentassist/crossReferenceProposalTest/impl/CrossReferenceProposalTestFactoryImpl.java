@@ -1,7 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
  */
 package org.eclipse.xtext.ui.tests.editor.contentassist.crossReferenceProposalTest.impl;
 
@@ -35,7 +32,7 @@ public class CrossReferenceProposalTestFactoryImpl extends EFactoryImpl implemen
   {
     try
     {
-      CrossReferenceProposalTestFactory theCrossReferenceProposalTestFactory = (CrossReferenceProposalTestFactory)EPackage.Registry.INSTANCE.getEFactory("http://www.eclipse.org/xtext/ui/common/tests/2009/crossReferenceProposalTest"); 
+      CrossReferenceProposalTestFactory theCrossReferenceProposalTestFactory = (CrossReferenceProposalTestFactory)EPackage.Registry.INSTANCE.getEFactory(CrossReferenceProposalTestPackage.eNS_URI);
       if (theCrossReferenceProposalTestFactory != null)
       {
         return theCrossReferenceProposalTestFactory;

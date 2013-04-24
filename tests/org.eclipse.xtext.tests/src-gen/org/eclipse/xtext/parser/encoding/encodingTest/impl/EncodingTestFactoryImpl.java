@@ -1,7 +1,4 @@
 /**
- * <copyright>
- * </copyright>
- *
  */
 package org.eclipse.xtext.parser.encoding.encodingTest.impl;
 
@@ -33,7 +30,7 @@ public class EncodingTestFactoryImpl extends EFactoryImpl implements EncodingTes
   {
     try
     {
-      EncodingTestFactory theEncodingTestFactory = (EncodingTestFactory)EPackage.Registry.INSTANCE.getEFactory("http://www.eclipse.org/2010/tmf/xtext/parser/EncodingTest"); 
+      EncodingTestFactory theEncodingTestFactory = (EncodingTestFactory)EPackage.Registry.INSTANCE.getEFactory(EncodingTestPackage.eNS_URI);
       if (theEncodingTestFactory != null)
       {
         return theEncodingTestFactory;
