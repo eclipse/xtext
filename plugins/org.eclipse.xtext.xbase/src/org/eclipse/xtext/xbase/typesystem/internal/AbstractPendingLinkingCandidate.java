@@ -520,12 +520,33 @@ public abstract class AbstractPendingLinkingCandidate<Expression extends XExpres
 		return compareByArgumentTypes(right, leftBoxing, rightBoxing, leftDemand, rightDemand);
 	}
 
-	protected int compareByArgumentTypes(AbstractPendingLinkingCandidate<?> right, int argumentIndex, EnumSet<ConformanceHint> leftConformance, EnumSet<ConformanceHint> rightConformance) {
+	/**
+	 * Compare this linking candidate with the given {@code other} candidate at {@code argumentIndex}
+	 * 
+	 * A {@code result < 0} indicates that this candidate is a better match. {@code result > 0} and the other candidate is better.
+	 * 
+	 * @param other the other candidate
+	 * @param argumentIndex the semantic argument index
+	 * @param leftConformance the computed conformance in this linking candidate
+	 * @param rightConformance the computed conformance if the other candidate was chosen  
+	 */
+	protected int compareByArgumentTypes(AbstractPendingLinkingCandidate<?> other, int argumentIndex, EnumSet<ConformanceHint> leftConformance, EnumSet<ConformanceHint> rightConformance) {
 		int hintCompareResult = ConformanceHint.compareHints(leftConformance, rightConformance);
 		return hintCompareResult;
 	}
 
-	protected int compareByArgumentTypes(AbstractPendingLinkingCandidate<?> right, int leftBoxing, int rightBoxing, int leftDemand, int rightDemand) {
+	/**
+	 * Compare this linking candidate with the given {@code other} candidate at {@code argumentIndex}
+	 * 
+	 * A {@code result < 0} indicates that this candidate is a better match. {@code result > 0} and the other candidate is better.
+	 * 
+	 * @param other the other candidate (the rhs of the comparison)
+	 * @param leftBoxing the number of required boxing conversions if this candidate was chosen
+	 * @param rightBoxing the number of required boxing conversions if the other candidate was chosen
+	 * @param leftDemand the number of required demand conversions if this candidate was chosen  
+	 * @param rightDemand the number of required demand conversions if the other candidate was chosen  
+	 */
+	protected int compareByArgumentTypes(AbstractPendingLinkingCandidate<?> other, int leftBoxing, int rightBoxing, int leftDemand, int rightDemand) {
 		if (leftDemand != rightDemand) {
 			if (leftDemand < rightDemand)
 				return -1;
