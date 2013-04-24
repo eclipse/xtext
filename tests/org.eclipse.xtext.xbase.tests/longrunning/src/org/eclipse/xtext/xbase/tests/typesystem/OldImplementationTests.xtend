@@ -2915,6 +2915,10 @@ class OldAPIFeatureCallTypeTest extends AbstractOldAPIFeatureCallTypeTest {
 		fail("fails in old implementation")
 	}
 	
+	@Ignore("fails in old implementation") @Test override testFeatureCallWithOperatorOverloading_6() throws Exception {
+		fail("fails in old implementation")
+	}
+	
 	@Ignore("fails in old implementation") @Test override testToList_04() throws Exception {
 		fail("fails in old implementation")
 	}
