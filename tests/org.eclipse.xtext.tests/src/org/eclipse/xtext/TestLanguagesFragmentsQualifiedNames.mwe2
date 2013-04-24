@@ -17,7 +17,7 @@ var classSplitting = true
 var skipGenerate = false
 var backtrack = false
 var srcGenOnly=true
-var emfRuntimeVersion = "2.5"
+var emfRuntimeVersion = "2.9"
 
 CompositeGeneratorFragment {
 	fragment = parser.antlr.XtextAntlrGeneratorFragment {

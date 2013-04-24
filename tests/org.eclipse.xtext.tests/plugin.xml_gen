@@ -324,6 +324,15 @@
   </extension>
 
 
+  <extension point="org.eclipse.emf.ecore.generated_package">
+    <package 
+       uri = "http://eclipse.org/xtext/Bug378967TestLanguage" 
+       class = "org.eclipse.xtext.parser.antlr.bug378967Test.Bug378967TestPackage"
+       genModel = "org/eclipse/xtext/parser/antlr/Bug378967TestLanguage.genmodel" /> 
+	
+  </extension>
+
+
 
   <extension point="org.eclipse.emf.ecore.generated_package">
     <package 
@@ -793,6 +802,15 @@
        uri = "http://www.xtext.org/LiveContainerBuilderIntegerationTestLanguage.xtext" 
        class = "org.eclipse.xtext.resource.liveContainerBuilderIntegerationTestLanguage.LiveContainerBuilderIntegerationTestLanguagePackage"
        genModel = "org/eclipse/xtext/resource/LiveContainerBuilderIntegerationTestLanguage.genmodel" /> 
+	
+  </extension>
+
+
+  <extension point="org.eclipse.emf.ecore.generated_package">
+    <package 
+       uri = "http://www.xtext.org/Bug385636" 
+       class = "org.eclipse.xtext.resource.bug385636.Bug385636Package"
+       genModel = "org/eclipse/xtext/resource/Bug385636.genmodel" /> 
 	
   </extension>
 
