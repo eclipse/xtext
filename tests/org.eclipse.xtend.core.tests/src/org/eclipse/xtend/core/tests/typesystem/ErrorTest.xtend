@@ -796,6 +796,21 @@ class ErrorTest extends AbstractXtendTestCase {
 			}
 		'''.processWithoutException
 	}
+	
+	@Test
+	def void testErrorModel_52() throws Exception {
+		'''
+			import com.google.inject.Injector
+			class C {
+				def <T extends Comparable<T>, X extends void m(T t, X x) {
+					m('', '')
+				}
+				def void m(Injector i, Class<? extends CharSequence> c) {
+					''.m('')
+				}
+			}
+		'''.processWithoutException
+	}
 		
 	def processWithoutException(CharSequence input) throws Exception {
 		val resource = resourceSet.createResource(URI::createURI("abcdefg.xtend"))
