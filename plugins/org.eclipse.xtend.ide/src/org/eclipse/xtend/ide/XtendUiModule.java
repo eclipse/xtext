@@ -7,6 +7,7 @@ import org.eclipse.jface.text.rules.ITokenScanner;
 import org.eclipse.jface.text.source.DefaultCharacterPairMatcher;
 import org.eclipse.jface.text.source.IAnnotationHover;
 import org.eclipse.jface.text.source.ICharacterPairMatcher;
+import org.eclipse.jface.viewers.ILabelProvider;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.eclipse.ui.views.contentoutline.IContentOutlinePage;
 import org.eclipse.xtend.core.formatting.FormatterPreferenceValuesProvider;
@@ -43,6 +44,7 @@ import org.eclipse.xtend.ide.hover.XtendHoverDocumentationProvider;
 import org.eclipse.xtend.ide.hover.XtendHoverProvider;
 import org.eclipse.xtend.ide.hover.XtendHoverSignatureProvider;
 import org.eclipse.xtend.ide.hyperlinking.XtendHyperlinkHelper;
+import org.eclipse.xtend.ide.labeling.XtendLabelProvider;
 import org.eclipse.xtend.ide.macro.JdtBasedProcessorProvider;
 import org.eclipse.xtend.ide.outline.ShowSyntheticMembersContribution;
 import org.eclipse.xtend.ide.outline.XtendOutlineNodeComparator;
@@ -384,5 +386,10 @@ public class XtendUiModule extends org.eclipse.xtend.ide.AbstractXtendUiModule {
 	
 	public Class<? extends PrefixMatcher.CamelCase> bindCamelCasePrefixMatcher() {
 		return EscapeSequenceAwarePrefixMatcher.class;
+	}
+	
+	@Override
+	public Class<? extends ILabelProvider> bindILabelProvider() {
+		return XtendLabelProvider.class;
 	}
 }
