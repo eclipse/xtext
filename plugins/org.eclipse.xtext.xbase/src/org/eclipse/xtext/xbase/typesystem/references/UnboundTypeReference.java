@@ -15,7 +15,6 @@ import java.util.Set;
 import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.xtext.common.types.JvmType;
-import org.eclipse.xtext.common.types.JvmTypeConstraint;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.xbase.XExpression;
@@ -25,6 +24,7 @@ import org.eclipse.xtext.xbase.typesystem.util.BoundTypeArgumentSource;
 import org.eclipse.xtext.xbase.typesystem.util.IVisibilityHelper;
 import org.eclipse.xtext.xbase.typesystem.util.TypeParameterByConstraintSubstitutor;
 import org.eclipse.xtext.xbase.typesystem.util.TypeParameterSubstitutor;
+import org.eclipse.xtext.xbase.typesystem.util.UnboundTypeParameterPreservingSubstitutor;
 import org.eclipse.xtext.xbase.typesystem.util.VarianceInfo;
 import org.eclipse.xtext.xtype.XComputedTypeReference;
 
@@ -244,13 +244,22 @@ public class UnboundTypeReference extends LightweightTypeReference {
 		resolvedTo = substitute;
 	}
 	
-	public boolean isConformantToConstraints(LightweightTypeReference typeReference) {
-		TypeParameterByConstraintSubstitutor unboundSubstitutor = new TypeParameterByConstraintSubstitutor(
-			Collections.singletonMap(typeParameter, new LightweightMergedBoundTypeArgument(typeReference, VarianceInfo.INVARIANT)), getOwner(), true);
-		for(JvmTypeConstraint constraint: typeParameter.getConstraints()) {
-			if (constraint.getTypeReference() != null) {
-				LightweightTypeReference substitutedUpperBound = unboundSubstitutor.substitute(constraint.getTypeReference());
-				if (!substitutedUpperBound.isAssignableFrom(typeReference)) {
+	public boolean isConformantToConstraints(final LightweightTypeReference typeReference) {
+		List<LightweightBoundTypeArgument> hints = getAllHints();
+		UnboundTypeParameterPreservingSubstitutor unboundSubstitutor = new UnboundTypeParameterPreservingSubstitutor(
+				Collections.singletonMap(typeParameter, new LightweightMergedBoundTypeArgument(typeReference, VarianceInfo.INVARIANT)), getOwner()) {
+			@Override
+			public LightweightTypeReference doVisitUnboundTypeReference(UnboundTypeReference reference, Set<JvmTypeParameter> visiting) {
+				if (reference.getHandle() == getHandle()) {
+					return typeReference;
+				}
+				return super.doVisitUnboundTypeReference(reference, visiting);
+			}
+		};
+		for(LightweightBoundTypeArgument hint: hints) {
+			if (hint.getSource() == BoundTypeArgumentSource.CONSTRAINT) {
+				LightweightTypeReference constraintReference = unboundSubstitutor.substitute(hint.getTypeReference());
+				if (!constraintReference.isAssignableFrom(typeReference)) {
 					return false;
 				}
 			}

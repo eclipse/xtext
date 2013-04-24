@@ -16,7 +16,77 @@ import org.junit.Ignore
 class CompilerBugTest extends AbstractXtendCompilerTest {
 	
 	@Test
-	def testBug4063370() {
+	def testBug406416_01() {
+		assertCompilesTo('''
+			class Factory<T> {
+				def <T1, F extends Factory<T1>> T1 buildChild(F fa, (F)=>void configurator) {}
+				def <T1, F extends Factory<T1>> T1 buildChild(F fa) {}
+				def build(Factory<String> f, T it) {
+					buildChild(f)
+				}
+			}
+		''', '''
+			import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
+			
+			@SuppressWarnings("all")
+			public class Factory<T extends Object> {
+			  public <T1 extends Object, F extends Factory<T1>> T1 buildChild(final F fa, final Procedure1<? super F> configurator) {
+			    return null;
+			  }
+			  
+			  public <T1 extends Object, F extends Factory<T1>> T1 buildChild(final F fa) {
+			    return null;
+			  }
+			  
+			  public String build(final Factory<String> f, final T it) {
+			    String _buildChild = this.<String, Factory<String>>buildChild(f);
+			    return _buildChild;
+			  }
+			}
+		''')
+	}
+	
+	@Test
+	def testBug406416_02() {
+		assertCompilesTo('''
+			class Factory<T> {
+				def void fill((T)=>void configurator) {}
+				def <T1, F extends Factory<T1>> T1 buildChild(F fa, (F)=>void configurator) {}
+				def <T1, F extends Factory<T1>> T1 buildChild(F fa) {}
+				def build(Factory<String> f) {
+					fill [ buildChild(f) ]
+				}
+			}
+		''', '''
+			import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
+			
+			@SuppressWarnings("all")
+			public class Factory<T extends Object> {
+			  public void fill(final Procedure1<? super T> configurator) {
+			  }
+			  
+			  public <T1 extends Object, F extends Factory<T1>> T1 buildChild(final F fa, final Procedure1<? super F> configurator) {
+			    return null;
+			  }
+			  
+			  public <T1 extends Object, F extends Factory<T1>> T1 buildChild(final F fa) {
+			    return null;
+			  }
+			  
+			  public void build(final Factory<String> f) {
+			    final Procedure1<T> _function = new Procedure1<T>() {
+			        public void apply(final T it) {
+			          Factory.this.<String, Factory<String>>buildChild(f);
+			        }
+			      };
+			    this.fill(_function);
+			  }
+			}
+		''')
+	}
+	
+	@Test
+	def testBug406370() {
 		assertCompilesTo('''
 			class C {
 			    new() {

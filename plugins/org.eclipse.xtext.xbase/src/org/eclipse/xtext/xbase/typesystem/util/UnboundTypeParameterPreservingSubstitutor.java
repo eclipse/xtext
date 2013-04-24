@@ -35,7 +35,7 @@ public class UnboundTypeParameterPreservingSubstitutor extends TypeParameterSubs
 	}
 
 	@Override
-	public LightweightTypeReference doVisitUnboundTypeReference(UnboundTypeReference reference,
+	protected LightweightTypeReference doVisitUnboundTypeReference(UnboundTypeReference reference,
 			Set<JvmTypeParameter> visiting) {
 		return reference.copyInto(getOwner());
 	}
