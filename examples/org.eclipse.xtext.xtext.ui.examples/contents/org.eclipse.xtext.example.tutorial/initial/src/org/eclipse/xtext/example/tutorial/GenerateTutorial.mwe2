@@ -40,7 +40,7 @@ Workflow {
 
             // generates Java API for the generated EPackages
             fragment = ecore.EcoreGeneratorFragment {
-            	emfRuntimeVersion = "2.5"
+            	emfRuntimeVersion = "2.9"
             // referencedGenModels = "
             //  platform:/resource/org.eclipse.xtext.xbase/model/Xbase.genmodel,
             //  platform:/resource/org.eclipse.xtext.common.types/model/JavaVMTypes.genmodel

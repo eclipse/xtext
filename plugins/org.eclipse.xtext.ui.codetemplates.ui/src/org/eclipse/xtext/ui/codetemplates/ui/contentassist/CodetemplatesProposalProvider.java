@@ -330,19 +330,21 @@ public class CodetemplatesProposalProvider extends AbstractCodetemplatesProposal
 		Codetemplate template = EcoreUtil2.getContainerOfType(model, Codetemplate.class);
 		if (template != null) {
 			Codetemplates templates = EcoreUtil2.getContainerOfType(template, Codetemplates.class);
-			Grammar language = templates.getLanguage();
-			if (language != null && !language.eIsProxy()) {
-				Set<String> keywords = GrammarUtil.getAllKeywords(language);
-				for(String keyword: keywords) {
-					String proposalText = keyword;
-					proposalText = getValueConverter().toString(proposalText, ((RuleCall)assignment.getTerminal()).getRule().getName());
-					StyledString displayText = new StyledString(proposalText).append(" - Keyword", StyledString.QUALIFIER_STYLER);
-					ICompletionProposal proposal = createCompletionProposal(proposalText, displayText, null, context);
-					getPriorityHelper().adjustCrossReferencePriority(proposal, context.getPrefix());
-					if (proposal instanceof ConfigurableCompletionProposal) {
-						((ConfigurableCompletionProposal) proposal).setPriority(((ConfigurableCompletionProposal) proposal).getPriority() - 1);
+			if (templates != null) {
+				Grammar language = templates.getLanguage();
+				if (language != null && !language.eIsProxy()) {
+					Set<String> keywords = GrammarUtil.getAllKeywords(language);
+					for(String keyword: keywords) {
+						String proposalText = keyword;
+						proposalText = getValueConverter().toString(proposalText, ((RuleCall)assignment.getTerminal()).getRule().getName());
+						StyledString displayText = new StyledString(proposalText).append(" - Keyword", StyledString.QUALIFIER_STYLER);
+						ICompletionProposal proposal = createCompletionProposal(proposalText, displayText, null, context);
+						getPriorityHelper().adjustCrossReferencePriority(proposal, context.getPrefix());
+						if (proposal instanceof ConfigurableCompletionProposal) {
+							((ConfigurableCompletionProposal) proposal).setPriority(((ConfigurableCompletionProposal) proposal).getPriority() - 1);
+						}
+						acceptor.accept(proposal);
 					}
-					acceptor.accept(proposal);
 				}
 			}
 		}

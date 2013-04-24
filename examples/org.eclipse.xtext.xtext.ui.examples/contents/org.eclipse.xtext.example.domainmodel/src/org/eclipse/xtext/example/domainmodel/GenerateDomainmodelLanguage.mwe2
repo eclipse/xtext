@@ -53,7 +53,7 @@ Workflow {
 
 			// Generate java classes for Ecore models
 			fragment = ecore.EcoreGeneratorFragment {
-				emfRuntimeVersion = "2.5"
+				emfRuntimeVersion = "2.9"
 			}
 
 			// the serialization component
