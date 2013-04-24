@@ -16,6 +16,54 @@ import org.junit.Ignore
 class CompilerBugTest extends AbstractXtendCompilerTest {
 	
 	@Test
+	def testBug4063360() {
+		assertCompilesTo('''
+			import org.eclipse.xtext.common.types.JvmTypeReference
+			import org.eclipse.xtext.xbase.compiler.output.ITreeAppendable
+			import org.eclipse.xtext.xbase.compiler.ErrorSafeExtensions
+			
+			class C {
+				extension ErrorSafeExtensions
+				def void m(Iterable<JvmTypeReference> refs, ITreeAppendable it) {
+					forEachSafely(refs, []) [
+						it, app |  app.trace(it).append(it.type)
+					]
+				}
+			}
+		''', '''
+			import org.eclipse.xtext.common.types.JvmType;
+			import org.eclipse.xtext.common.types.JvmTypeReference;
+			import org.eclipse.xtext.xbase.compiler.ErrorSafeExtensions;
+			import org.eclipse.xtext.xbase.compiler.LoopParams;
+			import org.eclipse.xtext.xbase.compiler.output.ITreeAppendable;
+			import org.eclipse.xtext.xbase.lib.Extension;
+			import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
+			import org.eclipse.xtext.xbase.lib.Procedures.Procedure2;
+			
+			@SuppressWarnings("all")
+			public class C {
+			  @Extension
+			  private ErrorSafeExtensions _errorSafeExtensions;
+			  
+			  public void m(final Iterable<JvmTypeReference> refs, final ITreeAppendable it) {
+			    final Procedure1<LoopParams> _function = new Procedure1<LoopParams>() {
+			        public void apply(final LoopParams it) {
+			        }
+			      };
+			    final Procedure2<JvmTypeReference,ITreeAppendable> _function_1 = new Procedure2<JvmTypeReference,ITreeAppendable>() {
+			        public void apply(final JvmTypeReference it, final ITreeAppendable app) {
+			          ITreeAppendable _trace = app.trace(it);
+			          JvmType _type = it.getType();
+			          _trace.append(_type);
+			        }
+			      };
+			    this._errorSafeExtensions.<JvmTypeReference>forEachSafely(it, refs, _function, _function_1);
+			  }
+			}
+		''')
+	}
+	
+	@Test
 	def testBug406356_01() {
 		assertCompilesTo('''
 			class C {
