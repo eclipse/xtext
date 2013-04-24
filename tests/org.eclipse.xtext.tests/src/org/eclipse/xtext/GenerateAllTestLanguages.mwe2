@@ -29,6 +29,7 @@ Workflow {
 		}
 		registerGenModelFile = "platform:/resource/${projectName}/src/org/eclipse/xtext/grammarinheritance/ametamodel.genmodel"
 		registerGenModelFile = "platform:/resource/${projectName}/src/org/eclipse/xtext/generator/ecore/GenModelAccessTest.genmodel" 
+		registerGenModelFile = "platform:/resource/${projectName}/src/org/eclipse/xtext/generator/ecore/Genmodel.genmodel"
 		registerGenModelFile = "platform:/resource/${projectName}/src/org/eclipse/xtext/generator/grammarAccess/ametamodel.genmodel"
 		registerGenModelFile = "platform:/resource/${projectName}/src/org/eclipse/xtext/enumrules/enums.genmodel"
 		registerGenModelFile = "platform:/resource/${projectName}/src/org/eclipse/xtext/metamodelreferencing/tests/EcoreReferences.genmodel"
@@ -500,6 +501,10 @@ Workflow {
 			uri = "classpath:/org/eclipse/xtext/resource/LiveContainerBuilderIntegerationTestLanguage.xtext"
 			fragment = @TestLanguagesFragments {}
 			fragment = generator.builder.BuilderIntegrationFragment {}
+		}
+		language = {
+			uri = "classpath:/org/eclipse/xtext/resource/Bug385636TestLanguage.xtext"
+			fragment = @TestLanguagesFragments {}
 		}
 		language = { 
 			uri = "classpath:/org/eclipse/xtext/parser/encoding/EncodingTestLanguage.xtext"

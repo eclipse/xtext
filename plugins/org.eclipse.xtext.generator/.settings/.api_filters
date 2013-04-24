@@ -1,6 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <component id="org.eclipse.xtext.generator" version="2">
     <resource path="META-INF/MANIFEST.MF">
+        <filter comment="EMF 2.9" id="924844039">
+            <message_arguments>
+                <message_argument value="2.4.2"/>
+                <message_argument value="2.4.0"/>
+            </message_arguments>
+        </filter>
         <filter id="929038356">
             <message_arguments>
                 <message_argument value="2.4.2"/>
@@ -11,6 +17,39 @@
             <message_arguments>
                 <message_argument value="2.4.2"/>
                 <message_argument value="org.eclipse.xtext.xbase.lib"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="src-gen/org/eclipse/xtext/generator/parser/antlr/debug/AbstractSimpleAntlrRuntimeModule.java" type="org.eclipse.xtext.generator.parser.antlr.debug.AbstractSimpleAntlrRuntimeModule">
+        <filter comment="EMF 2.9" id="1143996420">
+            <message_arguments>
+                <message_argument value="bindClassLoaderToInstance()"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="src-gen/org/eclipse/xtext/generator/parser/antlr/debug/services/SimpleAntlrGrammarAccess.java" type="org.eclipse.xtext.generator.parser.antlr.debug.services.SimpleAntlrGrammarAccess">
+        <filter comment="Generated with Xtext 2.4.2" id="1143996420">
+            <message_arguments>
+                <message_argument value="internalFindGrammar(GrammarProvider)"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="src-gen/org/eclipse/xtext/generator/parser/antlr/debug/simpleAntlr/util/SimpleAntlrSwitch.java" type="org.eclipse.xtext.generator.parser.antlr.debug.simpleAntlr.util.SimpleAntlrSwitch">
+        <filter comment="EMF 2.9" id="338792546">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.generator.parser.antlr.debug.simpleAntlr.util.SimpleAntlrSwitch"/>
+                <message_argument value="doSwitch(EClass, EObject)"/>
+            </message_arguments>
+        </filter>
+        <filter comment="EMF 2.9" id="338792546">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.generator.parser.antlr.debug.simpleAntlr.util.SimpleAntlrSwitch"/>
+                <message_argument value="doSwitch(EObject)"/>
+            </message_arguments>
+        </filter>
+        <filter comment="EMF 2.9" id="1143996420">
+            <message_arguments>
+                <message_argument value="isSwitchFor(EPackage)"/>
             </message_arguments>
         </filter>
     </resource>
@@ -25,6 +64,25 @@
         <filter comment="Cannot use @since in generated code" id="1143996420">
             <message_arguments>
                 <message_argument value="internalFindGrammar(GrammarProvider)"/>
+            </message_arguments>
+        </filter>
+    </resource>
+    <resource path="src-gen/org/eclipse/xtext/generator/parser/antlr/splitting/simpleExpressions/util/SimpleExpressionsSwitch.java" type="org.eclipse.xtext.generator.parser.antlr.splitting.simpleExpressions.util.SimpleExpressionsSwitch">
+        <filter comment="EMF 2.9" id="338792546">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.generator.parser.antlr.splitting.simpleExpressions.util.SimpleExpressionsSwitch"/>
+                <message_argument value="doSwitch(EClass, EObject)"/>
+            </message_arguments>
+        </filter>
+        <filter comment="EMF 2.9" id="338792546">
+            <message_arguments>
+                <message_argument value="org.eclipse.xtext.generator.parser.antlr.splitting.simpleExpressions.util.SimpleExpressionsSwitch"/>
+                <message_argument value="doSwitch(EObject)"/>
+            </message_arguments>
+        </filter>
+        <filter comment="EMF 2.9" id="1143996420">
+            <message_arguments>
+                <message_argument value="isSwitchFor(EPackage)"/>
             </message_arguments>
         </filter>
     </resource>

@@ -6,7 +6,7 @@
     updateClasspath="false" rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container"
     importerID="org.eclipse.emf.importer.ecore" complianceLevel="5.0" copyrightFields="false"
     editPluginID="org.eclipse.xtext.xbase.edit" editorPluginID="org.eclipse.xtext.xbase.edit"
-    runtimeVersion="2.5" usedGenPackages="platform:/resource/org.eclipse.xtext.common.types/model/JavaVMTypes.genmodel#//types">
+    runtimeVersion="2.9" usedGenPackages="../../org.eclipse.xtext.common.types/model/JavaVMTypes.genmodel#//types">
   <foreignModel>XAnnotations.ecore</foreignModel>
   <foreignModel>Xtype.ecore</foreignModel>
   <foreignModel>Xbase.ecore</foreignModel>
@@ -25,9 +25,6 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference XAnnotations.ecore#//XAnnotationElementValueBinaryOperation/leftOperand"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference XAnnotations.ecore#//XAnnotationElementValueBinaryOperation/rightOperand"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute XAnnotations.ecore#//XAnnotationElementValueBinaryOperation/operator"/>
-    </genClasses>
-    <genClasses ecoreClass="XAnnotations.ecore#//XAnnotationValueArray">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference XAnnotations.ecore#//XAnnotationValueArray/values"/>
     </genClasses>
   </genPackages>
   <genPackages prefix="Xtype" basePackage="org.eclipse.xtext" ecorePackage="Xtype.ecore#/">
@@ -48,6 +45,7 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Xtype.ecore#//XImportDeclaration/extension"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Xtype.ecore#//XImportDeclaration/static"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Xtype.ecore#//XImportDeclaration/importedType"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Xtype.ecore#//XImportDeclaration/importedNamespace"/>
       <genOperations ecoreOperation="Xtype.ecore#//XImportDeclaration/isWildcard"/>
       <genOperations ecoreOperation="Xtype.ecore#//XImportDeclaration/getImportedTypeName"/>
     </genClasses>
@@ -123,6 +121,11 @@
     <genClasses ecoreClass="Xbase.ecore#//XStringLiteral">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Xbase.ecore#//XStringLiteral/value"/>
     </genClasses>
+    <genClasses image="false" ecoreClass="Xbase.ecore#//XCollectionLiteral">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Xbase.ecore#//XCollectionLiteral/elements"/>
+    </genClasses>
+    <genClasses ecoreClass="Xbase.ecore#//XListLiteral"/>
+    <genClasses ecoreClass="Xbase.ecore#//XSetLiteral"/>
     <genClasses ecoreClass="Xbase.ecore#//XClosure">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Xbase.ecore#//XClosure/declaredFormalParameters"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Xbase.ecore#//XClosure/expression"/>
