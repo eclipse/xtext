@@ -134,7 +134,7 @@ public class OldAPICommonSuperTypeTest extends CommonSuperTypeTest {
       if (_not_1) {
         JvmAnyTypeReference _createJvmAnyTypeReference = TypesFactory.eINSTANCE.createJvmAnyTypeReference();
         JvmAnyTypeReference _createJvmAnyTypeReference_1 = TypesFactory.eINSTANCE.createJvmAnyTypeReference();
-        List<JvmTypeReference> _newImmutableList = CollectionLiterals.<JvmTypeReference>newImmutableList(_createJvmAnyTypeReference, _createJvmAnyTypeReference_1);
+        List<JvmAnyTypeReference> _newImmutableList = CollectionLiterals.<JvmAnyTypeReference>newImmutableList(_createJvmAnyTypeReference, _createJvmAnyTypeReference_1);
         Iterable<JvmTypeReference> _plus_1 = Iterables.<JvmTypeReference>concat(typeReferences, _newImmutableList);
         List<JvmTypeReference> _list_1 = IterableExtensions.<JvmTypeReference>toList(_plus_1);
         JvmTypeReference _commonSuperType_2 = this.typeConformanceComputer.getCommonSuperType(_list_1);

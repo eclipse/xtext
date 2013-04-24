@@ -81,10 +81,10 @@ public class Case_14 extends AbstractXtendTestCase {
     Class<? extends Case_14> _class = this.getClass();
     this.resourceSet.setClasspathURIContext(_class);
     EList<Resource> _resources = this.resourceSet.getResources();
-    this._jvmTypesBuilder.<Resource>operator_add(_resources, this.resource);
+    this._jvmTypesBuilder.<DerivedStateAwareResource>operator_add(_resources, this.resource);
     EList<EObject> _contents = this.resource.getContents();
     EClass _createEClass = EcoreFactory.eINSTANCE.createEClass();
-    this._jvmTypesBuilder.<EObject>operator_add(_contents, _createEClass);
+    this._jvmTypesBuilder.<EClass>operator_add(_contents, _createEClass);
     this.assoc.installDerivedState(this.resource, true);
     EList<EObject> _contents_1 = this.resource.getContents();
     EObject _get = _contents_1.get(1);
@@ -94,7 +94,7 @@ public class Case_14 extends AbstractXtendTestCase {
     _contents_2.clear();
     EList<EObject> _contents_3 = this.resource.getContents();
     EClass _createEClass_1 = EcoreFactory.eINSTANCE.createEClass();
-    this._jvmTypesBuilder.<EObject>operator_add(_contents_3, _createEClass_1);
+    this._jvmTypesBuilder.<EClass>operator_add(_contents_3, _createEClass_1);
     this.assoc.installDerivedState(this.resource, false);
     EList<EObject> _contents_4 = this.resource.getContents();
     EObject _get_1 = _contents_4.get(1);

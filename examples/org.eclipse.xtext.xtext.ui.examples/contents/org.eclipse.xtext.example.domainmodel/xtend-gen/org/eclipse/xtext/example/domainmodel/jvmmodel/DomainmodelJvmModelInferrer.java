@@ -65,7 +65,7 @@ public class DomainmodelJvmModelInferrer extends AbstractModelInferrer {
               }
             };
           JvmConstructor _constructor = DomainmodelJvmModelInferrer.this._jvmTypesBuilder.toConstructor(entity, _function);
-          DomainmodelJvmModelInferrer.this._jvmTypesBuilder.<JvmMember>operator_add(_members, _constructor);
+          DomainmodelJvmModelInferrer.this._jvmTypesBuilder.<JvmConstructor>operator_add(_members, _constructor);
           EList<JvmMember> _members_1 = it.getMembers();
           final Procedure1<JvmConstructor> _function_1 = new Procedure1<JvmConstructor>() {
               public void apply(final JvmConstructor it) {
@@ -81,7 +81,7 @@ public class DomainmodelJvmModelInferrer extends AbstractModelInferrer {
               }
             };
           JvmConstructor _constructor_1 = DomainmodelJvmModelInferrer.this._jvmTypesBuilder.toConstructor(entity, _function_1);
-          DomainmodelJvmModelInferrer.this._jvmTypesBuilder.<JvmMember>operator_add(_members_1, _constructor_1);
+          DomainmodelJvmModelInferrer.this._jvmTypesBuilder.<JvmConstructor>operator_add(_members_1, _constructor_1);
           final ArrayList<JvmField> fields = CollectionLiterals.<JvmField>newArrayList();
           EList<Feature> _features = entity.getFeatures();
           for (final Feature f : _features) {
@@ -95,17 +95,17 @@ public class DomainmodelJvmModelInferrer extends AbstractModelInferrer {
                 final JvmField field = DomainmodelJvmModelInferrer.this._jvmTypesBuilder.toField(_property, _name, _type);
                 fields.add(field);
                 EList<JvmMember> _members_2 = it.getMembers();
-                DomainmodelJvmModelInferrer.this._jvmTypesBuilder.<JvmMember>operator_add(_members_2, field);
+                DomainmodelJvmModelInferrer.this._jvmTypesBuilder.<JvmField>operator_add(_members_2, field);
                 EList<JvmMember> _members_3 = it.getMembers();
                 String _name_1 = _property.getName();
                 JvmTypeReference _type_1 = _property.getType();
                 JvmOperation _getter = DomainmodelJvmModelInferrer.this._jvmTypesBuilder.toGetter(_property, _name_1, _type_1);
-                DomainmodelJvmModelInferrer.this._jvmTypesBuilder.<JvmMember>operator_add(_members_3, _getter);
+                DomainmodelJvmModelInferrer.this._jvmTypesBuilder.<JvmOperation>operator_add(_members_3, _getter);
                 EList<JvmMember> _members_4 = it.getMembers();
                 String _name_2 = _property.getName();
                 JvmTypeReference _type_2 = _property.getType();
                 JvmOperation _setter = DomainmodelJvmModelInferrer.this._jvmTypesBuilder.toSetter(_property, _name_2, _type_2);
-                DomainmodelJvmModelInferrer.this._jvmTypesBuilder.<JvmMember>operator_add(_members_4, _setter);
+                DomainmodelJvmModelInferrer.this._jvmTypesBuilder.<JvmOperation>operator_add(_members_4, _setter);
               }
             }
             if (!_matched) {
@@ -139,13 +139,13 @@ public class DomainmodelJvmModelInferrer extends AbstractModelInferrer {
                     }
                   };
                 JvmOperation _method = DomainmodelJvmModelInferrer.this._jvmTypesBuilder.toMethod(_operation, _name, _elvis, _function_2);
-                DomainmodelJvmModelInferrer.this._jvmTypesBuilder.<JvmMember>operator_add(_members_2, _method);
+                DomainmodelJvmModelInferrer.this._jvmTypesBuilder.<JvmOperation>operator_add(_members_2, _method);
               }
             }
           }
           EList<JvmMember> _members_2 = it.getMembers();
           JvmOperation _toStringMethod = DomainmodelJvmModelInferrer.this._jvmTypesBuilder.toToStringMethod(entity, it);
-          DomainmodelJvmModelInferrer.this._jvmTypesBuilder.<JvmMember>operator_add(_members_2, _toStringMethod);
+          DomainmodelJvmModelInferrer.this._jvmTypesBuilder.<JvmOperation>operator_add(_members_2, _toStringMethod);
         }
       };
     _accept.initializeLater(_function);
