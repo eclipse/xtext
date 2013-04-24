@@ -285,7 +285,7 @@ public abstract class JvmDeclaredTypeImplCustom extends JvmDeclaredTypeImpl {
 
 	protected void processMembers(Map<String, Set<JvmFeature>> result, Collection<? extends JvmMember> members) {
 		for (JvmMember member : members) {
-			if (member instanceof JvmOperation) {
+			if (member instanceof JvmOperation || member instanceof JvmField) {
 				Set<JvmFeature> knownMembers = result.get(member.getSimpleName());
 				if (knownMembers == null) {
 					// Sets.newLinkedHashSet(capacity) does not exist
@@ -293,15 +293,7 @@ public abstract class JvmDeclaredTypeImplCustom extends JvmDeclaredTypeImpl {
 					result.put(member.getSimpleName(), knownMembers);
 				}
 				knownMembers.add((JvmFeature) member);
-			} else if (member instanceof JvmField) {
-				Set<JvmFeature> knownMembers = result.get(member.getSimpleName());
-				if (knownMembers == null) {
-					// Sets.newLinkedHashSet(capacity) does not exist
-					knownMembers = new LinkedHashSet<JvmFeature>(2);
-					result.put(member.getSimpleName(), knownMembers);
-				}
-				knownMembers.add((JvmFeature) member);
-			}
+			} 
 		}
 	}
 
