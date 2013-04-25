@@ -8,6 +8,7 @@
 package org.eclipse.xtext.xbase.typesystem.internal;
 
 import java.util.List;
+import java.util.Map;
 
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.jdt.annotation.NonNullByDefault;
@@ -25,6 +26,7 @@ import org.eclipse.xtext.xbase.XbasePackage;
 import org.eclipse.xtext.xbase.scoping.batch.IIdentifiableElementDescription;
 import org.eclipse.xtext.xbase.typesystem.computation.IConstructorLinkingCandidate;
 import org.eclipse.xtext.xbase.typesystem.references.ITypeReferenceOwner;
+import org.eclipse.xtext.xbase.typesystem.references.LightweightMergedBoundTypeArgument;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 import org.eclipse.xtext.xbase.validation.IssueCodes;
 
@@ -77,8 +79,9 @@ public class ConstructorLinkingCandidate extends AbstractPendingLinkingCandidate
 	}
 	
 	@Override
-	protected boolean isBoundTypeArgumentSkipped(JvmTypeParameter type, ITypeReferenceOwner owner) {
-		if (super.isBoundTypeArgumentSkipped(type, owner)) {
+	protected boolean isBoundTypeArgumentSkipped(JvmTypeParameter type, Map<JvmTypeParameter, LightweightMergedBoundTypeArgument> mapping,
+			ITypeReferenceOwner owner) {
+		if (super.isBoundTypeArgumentSkipped(type, mapping, owner)) {
 			if (getConstructor().getDeclaringType() != type.getDeclarator()) {
 				return true;
 			}
