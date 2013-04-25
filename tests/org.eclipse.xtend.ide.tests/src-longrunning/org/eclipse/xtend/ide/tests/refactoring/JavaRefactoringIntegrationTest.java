@@ -841,6 +841,34 @@ public class JavaRefactoringIntegrationTest extends AbstractXtendUITestCase {
 	}
 
 	@Test
+	public void testRenameXtendClassWithDelegateConstructorCall_1() throws Exception {
+		try {
+			String xtendModel = "class XtendClass { new() { this(1) } new(int foo) {} }";
+			IFile xtendClass = testHelper.createFile("XtendClass.xtend", xtendModel);
+			final XtextEditor editor = openEditorSafely(xtendClass);
+			renameXtendElement(editor, xtendModel.indexOf("XtendClass"), "NewXtendClass");
+			fileAsserts.assertFileExists("src/NewXtendClass.xtend");
+		} finally {
+			testHelper.getProject().getFile("src/NewXtendClass.xtend").delete(true, new NullProgressMonitor());
+			waitForAutoBuild();
+		}
+	}
+
+	@Test
+	public void testRenameXtendClassWithDelegateConstructorCall_2() throws Exception {
+		try {
+			String xtendModel = "class XtendClass { } class SubClass { new() { super() } }";
+			IFile xtendClass = testHelper.createFile("XtendClass.xtend", xtendModel);
+			final XtextEditor editor = openEditorSafely(xtendClass);
+			renameXtendElement(editor, xtendModel.indexOf("XtendClass"), "NewXtendClass");
+			fileAsserts.assertFileExists("src/NewXtendClass.xtend");
+		} finally {
+			testHelper.getProject().getFile("src/NewXtendClass.xtend").delete(true, new NullProgressMonitor());
+			waitForAutoBuild();
+		}
+	}
+
+	@Test
 	public void testRenameRefToXtendClass() throws Exception {
 		try {
 			testHelper.createFile("XtendClass.xtend", "class XtendClass {}");
