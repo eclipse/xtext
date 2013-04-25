@@ -217,7 +217,7 @@ public class ClosureWithExpectationHelper extends AbstractClosureTypeHelper {
 					}
 				}.substitute(operationParameterType);
 				typeAssigner.assignType(closureParameter, partiallyResolved);
-				resultClosureType.addParameterType(operationParameterType);
+				resultClosureType.addParameterType(partiallyResolved);
 			}
 		}
 		for(int i = paramCount; i < closureParameters.size(); i++) {

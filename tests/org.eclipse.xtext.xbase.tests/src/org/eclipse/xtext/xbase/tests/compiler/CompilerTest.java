@@ -74,15 +74,44 @@ public class CompilerTest extends AbstractOutputComparingCompilerTests {
 				"((null as Iterable<StringBuilder>) + (null as Iterable<StringBuffer>) + (null as Iterable<String>)).forEach[ length ]");
 	}
 	
-	@Test public void testImplicitReferenceToSynonym() throws Exception {
+	@Test public void testReferenceToSynonym_01() throws Exception {
+		assertCompilesTo(
+				"int _size = ((java.util.List<String>)org.eclipse.xtext.xbase.lib.Conversions.doWrapArray(((String[]) null))).size();\n" + 
+				"return _size;", 
+				"(null as String[]).size");
+	}
+	
+	@Test public void testImplicitReferenceToSynonym_01() throws Exception {
 		assertCompilesTo(
 				"final org.eclipse.xtext.xbase.lib.Procedures.Procedure1<String[]> _function = new org.eclipse.xtext.xbase.lib.Procedures.Procedure1<String[]>() {\n" + 
 				"    public void apply(final String[] it) {\n" + 
-				"      org.eclipse.xtext.xbase.lib.IterableExtensions.size(((Iterable<? extends Object>)org.eclipse.xtext.xbase.lib.Conversions.doWrapArray(it)));\n" + 
+				"      ((java.util.List<String>)org.eclipse.xtext.xbase.lib.Conversions.doWrapArray(it)).subList(1, 1);\n" +
 				"    }\n" + 
 				"  };\n" + 
 				"org.eclipse.xtext.xbase.lib.IterableExtensions.<String[]>forEach(((Iterable<String[]>) null), _function);", 
-				"(null as Iterable<String[]>).forEach[ size ]");
+				"(null as Iterable<String[]>).forEach[ subList(1,1) ]");
+	}
+	
+	@Test public void testImplicitReferenceToSynonym_02() throws Exception {
+		assertCompilesTo(
+				"final org.eclipse.xtext.xbase.lib.Procedures.Procedure1<String[]> _function = new org.eclipse.xtext.xbase.lib.Procedures.Procedure1<String[]>() {\n" + 
+				"    public void apply(final String[] it) {\n" + 
+				"      ((java.util.List<String>)org.eclipse.xtext.xbase.lib.Conversions.doWrapArray(it)).size();\n" +
+				"    }\n" + 
+				"  };\n" + 
+				"org.eclipse.xtext.xbase.lib.IterableExtensions.<String[]>forEach(((Iterable<String[]>) null), _function);", 
+				"(null as Iterable<String[]>).forEach[ size() ]");
+	}
+	
+	@Test public void testImplicitReferenceToSynonymWithPrimitives() throws Exception {
+		assertCompilesTo(
+				"final org.eclipse.xtext.xbase.lib.Procedures.Procedure1<int[]> _function = new org.eclipse.xtext.xbase.lib.Procedures.Procedure1<int[]>() {\n" + 
+				"    public void apply(final int[] it) {\n" + 
+				"      ((java.util.List<Integer>)org.eclipse.xtext.xbase.lib.Conversions.doWrapArray(it)).subList(1, 1);\n" +
+				"    }\n" + 
+				"  };\n" + 
+				"org.eclipse.xtext.xbase.lib.IterableExtensions.<int[]>forEach(((Iterable<int[]>) null), _function);", 
+				"(null as Iterable<int[]>).forEach[ subList(1,1) ]");
 	}
 	
 	@Test public void testImplicitReferenceToArray() throws Exception {
@@ -95,6 +124,51 @@ public class CompilerTest extends AbstractOutputComparingCompilerTests {
 				"  };\n" + 
 				"org.eclipse.xtext.xbase.lib.IterableExtensions.<String[]>forEach(((Iterable<String[]>) null), _function);", 
 				"(null as Iterable<String[]>).forEach[ println(length) ]");
+	}
+	
+	@Test public void testExplicitReferenceToSynonym_01() throws Exception {
+		assertCompilesTo(
+				"final org.eclipse.xtext.xbase.lib.Procedures.Procedure1<String[]> _function = new org.eclipse.xtext.xbase.lib.Procedures.Procedure1<String[]>() {\n" + 
+				"    public void apply(final String[] it) {\n" + 
+				"      ((java.util.List<String>)org.eclipse.xtext.xbase.lib.Conversions.doWrapArray(it)).subList(1, 1);\n" +
+				"    }\n" + 
+				"  };\n" + 
+				"org.eclipse.xtext.xbase.lib.IterableExtensions.<String[]>forEach(((Iterable<String[]>) null), _function);", 
+				"(null as Iterable<String[]>).forEach[ it.subList(1,1) ]");
+	}
+	
+	@Test public void testExplicitReferenceToSynonym_02() throws Exception {
+		assertCompilesTo(
+				"final org.eclipse.xtext.xbase.lib.Procedures.Procedure1<String[]> _function = new org.eclipse.xtext.xbase.lib.Procedures.Procedure1<String[]>() {\n" + 
+				"    public void apply(final String[] it) {\n" + 
+				"      ((java.util.List<String>)org.eclipse.xtext.xbase.lib.Conversions.doWrapArray(it)).size();\n" +
+				"    }\n" + 
+				"  };\n" + 
+				"org.eclipse.xtext.xbase.lib.IterableExtensions.<String[]>forEach(((Iterable<String[]>) null), _function);", 
+				"(null as Iterable<String[]>).forEach[ it.size ]");
+	}
+	
+	@Test public void testExplicitReferenceToSynonymWithPrimitives() throws Exception {
+		assertCompilesTo(
+				"final org.eclipse.xtext.xbase.lib.Procedures.Procedure1<int[]> _function = new org.eclipse.xtext.xbase.lib.Procedures.Procedure1<int[]>() {\n" + 
+				"    public void apply(final int[] it) {\n" + 
+				"      ((java.util.List<Integer>)org.eclipse.xtext.xbase.lib.Conversions.doWrapArray(it)).subList(1, 1);\n" +
+				"    }\n" + 
+				"  };\n" + 
+				"org.eclipse.xtext.xbase.lib.IterableExtensions.<int[]>forEach(((Iterable<int[]>) null), _function);", 
+				"(null as Iterable<int[]>).forEach[ it.subList(1,1) ]");
+	}
+	
+	@Test public void testExplicitReferenceToArray() throws Exception {
+		assertCompilesTo(
+				"final org.eclipse.xtext.xbase.lib.Procedures.Procedure1<String[]> _function = new org.eclipse.xtext.xbase.lib.Procedures.Procedure1<String[]>() {\n" + 
+				"    public void apply(final String[] it) {\n" + 
+				"      int _length = it.length;\n" +
+				"      org.eclipse.xtext.xbase.lib.InputOutput.<Integer>println(Integer.valueOf(_length));\n" + 
+				"    }\n" + 
+				"  };\n" + 
+				"org.eclipse.xtext.xbase.lib.IterableExtensions.<String[]>forEach(((Iterable<String[]>) null), _function);", 
+				"(null as Iterable<String[]>).forEach[ println(it.length) ]");
 	}
 	
 	@Test public void testFieldAccessDontGetAVariableDeclaration() throws Exception {
