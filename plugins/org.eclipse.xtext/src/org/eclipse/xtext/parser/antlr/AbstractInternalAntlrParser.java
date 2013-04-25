@@ -683,15 +683,16 @@ public abstract class AbstractInternalAntlrParser extends Parser {
 	}
 	
 	protected void newLeafNode(Token token, EObject grammarElement) {
-		if (token != null && token.getTokenIndex() > lastConsumedIndex) {
-			int indexOfTokenBefore = lastConsumedIndex;
-			if (indexOfTokenBefore + 1 < token.getTokenIndex()) {
-				for (int x = indexOfTokenBefore + 1; x < token.getTokenIndex(); x++) {
-					Token hidden = input.get(x);
-					createLeafNode(hidden, null);
-				}
+		if (token == null)
+			return;
+
+		final int tokenIndex = token.getTokenIndex();
+		if (tokenIndex > lastConsumedIndex) {
+			for (int x = lastConsumedIndex + 1; x < tokenIndex; x++) {
+				Token hidden = input.get(x);
+				createLeafNode(hidden, null);
 			}
-			lastConsumedIndex = token.getTokenIndex();
+			lastConsumedIndex = tokenIndex;
 			lastConsumedNode = createLeafNode(token, grammarElement);
 		}
 	}
