@@ -1,5 +1,10 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<parent>
+		<groupId>org.sonatype.oss</groupId>
+		<artifactId>oss-parent</artifactId>
+		<version>7</version>
+	</parent>
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.eclipse.xtend</groupId>
 	<artifactId>org.eclipse.xtend.standalone</artifactId>
@@ -40,4 +45,64 @@
 			</exclusions>
 		</dependency>
 	</dependencies>
+	<scm>
+		<connection>scm:git:git://git.eclipse.org/gitroot/tmf/org.eclipse.xtext.git</connection>
+		<url>http://git.eclipse.org/c/tmf/org.eclipse.xtext.git</url>
+		<tag>v2.4.1</tag>
+	</scm>
+	<url>http://www.eclipse.org/xtend/</url>
+	<description>Xtend is a little language that compiles into idiomatic Java source code. You can use any existing Java library seamlessly from Xtend (and vice-versa). The compiled output is readable and pretty-printed, and tends to run as fast or faster than the equivalent handwritten Java code. It's the CoffeeScript for Java.</description>
+	<developers>
+		<developer>
+			<id>dennis.huebner</id>
+			<name>Dennis</name>
+			<email>dennis.huebner@itemis.de</email>
+			<organization>itemis AG</organization>
+		</developer>
+		<developer>
+			<id>holger.schill</id>
+			<name>Holger</name>
+			<email>Holger.Schill@itemis.de</email>
+			<organization>itemis AG</organization>
+		</developer>
+		<developer>
+			<id>jan.koehnlein</id>
+			<name>Jan</name>
+			<email>jan.koehnlein@itemis.de</email>
+			<organization>itemis AG</organization>
+		</developer>
+		<developer>
+			<id>knut.wannheden</id>
+			<name>Knut</name>
+			<email>knut.wannheden@paranor.ch</email>
+			<organization>Paranor</organization>
+		</developer>
+		<developer>
+			<id>michael.clay</id>
+			<name>Michael</name>
+			<email>michael.clay@codeworkz.at</email>
+			<organization>Codeworkz</organization>
+		</developer>
+		<developer>
+			<id>moritz.eysholdt</id>
+			<name>Moritz</name>
+			<email>moritz.eysholdt@itemis.de</email>
+			<organization>itemis AG</organization>
+		</developer>
+		<developer>
+			<id>sebastian.zarnekow</id>
+			<name>Sebastian</name>
+			<email>sebastian.Zarnekow@itemis.de</email>
+			<organization>itemis AG</organization>
+		</developer>
+		<developer>
+			<id>sven.efftinge</id>
+			<name>Sven</name>
+			<email>sven.efftinge@itemis.de</email>
+			<organization>itemis AG</organization>
+			<roles>
+				<role>project lead</role>
+			</roles>
+		</developer>
+	</developers>
 </project>

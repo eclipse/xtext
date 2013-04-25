@@ -2,27 +2,31 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>${groupId}</groupId>
-	<artifactId>${artifactId}</artifactId>
-	<version>${version}</version>
+	<groupId>\${groupId}</groupId>
+	<artifactId>\${artifactId}</artifactId>
+	<version>\${version}</version>
 	<name>xtend-quickstart</name>
 
 	<repositories>
 		<repository>
-			<id>xtend</id>
-			<url>http://build.eclipse.org/common/xtend/maven/</url>
+			<id>OSS Sonatype</id>
+			<url>https://oss.sonatype.org/content/groups/public/</url>
 		</repository>
 	</repositories>
 	<pluginRepositories>
 		<pluginRepository>
-			<id>xtend</id>
-			<url>http://build.eclipse.org/common/xtend/maven/</url>
+			<id>OSS Sonatype</id>
+			<url>https://oss.sonatype.org/content/groups/public/</url>
 		</pluginRepository>
 	</pluginRepositories>
 
 	<properties>
         <project.build.sourceEncoding>${sourceEncoding}</project.build.sourceEncoding>
+<<<<<<< HEAD
         <xtend.version>2.4.2-SNAPSHOT</xtend.version>
+=======
+        <xtend.version>${project.version}</xtend.version>
+>>>>>>> maven-deployment
 	</properties>
 
 	<build>
