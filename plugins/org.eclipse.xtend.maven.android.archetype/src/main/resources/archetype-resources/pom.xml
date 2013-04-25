@@ -2,18 +2,18 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>${groupId}</groupId>
-	<artifactId>${artifactId}</artifactId>
-	<version>${version}</version>
+	<groupId>\${groupId}</groupId>
+	<artifactId>\${artifactId}</artifactId>
+	<version>\${version}</version>
 	<packaging>apk</packaging>
-	<name>${artifactId} App With Xtend</name>
+	<name>\${artifactId} App With Xtend</name>
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<xtend.version>2.4.1-SNAPSHOT</xtend.version>
-		<sdkPath>${sdk_path}</sdkPath>
-		<platform.version>${platform_version}</platform.version>
-		<avd.name>${avd_name}</avd.name>
+		<xtend.version>${project.version}</xtend.version>
+		<sdkPath>\${sdk_path}</sdkPath>
+		<platform.version>\${platform_version}</platform.version>
+		<avd.name>\${avd_name}</avd.name>
 	</properties>
 
 	<dependencies>
@@ -31,7 +31,7 @@
 	</dependencies>
 
 	<build>
-		<finalName>${project.artifactId}</finalName>
+		<finalName>\${project.artifactId}</finalName>
 		<sourceDirectory>src</sourceDirectory>
 		<plugins>
 			<plugin>
@@ -79,7 +79,7 @@
 						</goals>
 						<configuration>
 							<excludeScope>provided</excludeScope>
-							<outputDirectory>${basedir}/libs</outputDirectory>
+							<outputDirectory>\${basedir}/libs</outputDirectory>
 						</configuration>
 					</execution>
 				</executions>
@@ -151,15 +151,15 @@
 
 	<repositories>
 		<repository>
-			<id>xtend</id>
-			<url>http://build.eclipse.org/common/xtend/maven/</url>
+			<id>OSS Sonatype</id>
+			<url>https://oss.sonatype.org/content/groups/public/</url>
 		</repository>
 	</repositories>
-
 	<pluginRepositories>
 		<pluginRepository>
-			<id>xtend</id>
-			<url>http://build.eclipse.org/common/xtend/maven/</url>
+			<id>OSS Sonatype</id>
+			<url>https://oss.sonatype.org/content/groups/public/</url>
 		</pluginRepository>
 	</pluginRepositories>
+
 </project>

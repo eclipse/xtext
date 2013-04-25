@@ -54,38 +54,6 @@
 				<version>2.6</version>
 			</plugin>
 			<plugin>
-				<groupId>org.codehaus.mojo</groupId>
-				<artifactId>exec-maven-plugin</artifactId>
-				<version>1.1.1</version>
-				<executions>
-					<execution>
-						<id>Reindex nexus</id>
-						<phase>deploy</phase>
-						<goals>
-							<goal>exec</goal>
-						</goals>
-					</execution>
-				</executions>
-				<configuration>
-					<executable>java</executable>
-					<workingDirectory>${deployment.folder}/</workingDirectory>
-					<arguments>
-						<argument>-jar</argument>
-						<argument>${deployment.folder}/nexus-indexer-3.0.4-cli.jar</argument>
-						<argument>-t</argument>
-						<argument>min</argument>
-						<argument>-i</argument>
-						<argument>maven-index</argument>
-						<argument>-r</argument>
-						<argument>./</argument>
-						<argument>-n</argument>
-						<argument>${xtend.repo.name}</argument>
-						<argument>-d</argument>
-						<argument>.index</argument>
-					</arguments>
-				</configuration>
-			</plugin>
-			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-source-plugin</artifactId>
 				<executions>
@@ -171,6 +139,45 @@
 					<url>http://repo.maven.apache.org/maven2</url>
 				</pluginRepository>
 			</pluginRepositories>
+		</profile>
+		<profile>
+			<id>eclipse-hudson-deployment</id>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.codehaus.mojo</groupId>
+						<artifactId>exec-maven-plugin</artifactId>
+						<version>1.1.1</version>
+						<executions>
+							<execution>
+								<id>Reindex nexus</id>
+								<phase>deploy</phase>
+								<goals>
+									<goal>exec</goal>
+								</goals>
+							</execution>
+						</executions>
+						<configuration>
+							<executable>java</executable>
+							<workingDirectory>${deployment.folder}/</workingDirectory>
+							<arguments>
+								<argument>-jar</argument>
+								<argument>${deployment.folder}/nexus-indexer-3.0.4-cli.jar</argument>
+								<argument>-t</argument>
+								<argument>min</argument>
+								<argument>-i</argument>
+								<argument>maven-index</argument>
+								<argument>-r</argument>
+								<argument>./</argument>
+								<argument>-n</argument>
+								<argument>${xtend.repo.name}</argument>
+								<argument>-d</argument>
+								<argument>.index</argument>
+							</arguments>
+						</configuration>
+					</plugin>
+				</plugins>
+			</build>
 		</profile>
 	</profiles>
 </project>

@@ -45,4 +45,10 @@
 			</exclusions>
 		</dependency>
 	</dependencies>
+	<scm>
+		<connection>scm:git:git://git.eclipse.org/gitroot/tmf/org.eclipse.xtext.git</connection>
+		<developerConnection>scm:git:ssh://git.eclipse.org:29418/tmf/org.eclipse.xtext.git</developerConnection>
+		<url>http://git.eclipse.org/c/tmf/org.eclipse.xtext.git</url>
+		<tag>v2.4.1</tag>
+	</scm>
 </project>
