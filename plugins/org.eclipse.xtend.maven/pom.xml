@@ -9,7 +9,7 @@
 	<groupId>org.eclipse.xtend</groupId>
 	<artifactId>org.eclipse.xtend.maven</artifactId>
 	<packaging>pom</packaging>
-	<version>2.4.1-SNAPSHOT</version>
+	<version>2.4.1</version>
 	<modules>
 		<module>../org.eclipse.xtend.lib.maven</module>
 		<module>../org.eclipse.xtext.xbase.lib.maven</module>
@@ -28,8 +28,30 @@
 		<project.build.sourceEncoding>ISO-8859-1</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>ISO-8859-1</project.reporting.outputEncoding>
 	</properties>
+	<licenses>
+		<license>
+			<name>Eclipse Public License - v 1.0</name>
+			<url>http://www.eclipse.org/legal/epl-v10.html</url>
+		</license>
+	</licenses>
 	<build>
 		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-gpg-plugin</artifactId>
+				<configuration>
+					<executable>/usr/local/bin/gpg</executable>
+				</configuration>
+				<executions>
+					<execution>
+						<id>sign-artifacts</id>
+						<phase>verify</phase>
+						<goals>
+							<goal>sign</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
@@ -180,4 +202,59 @@
 			</build>
 		</profile>
 	</profiles>
+	<url>http://www.eclipse.org/xtend/</url>
+	<description>Xtend is a little language that compiles into idiomatic Java source code. You can use any existing Java library seamlessly from Xtend (and vice-versa). The compiled output is readable and pretty-printed, and tends to run as fast or faster than the equivalent handwritten Java code. It's the CoffeeScript for Java.</description>
+	<developers>
+		<developer>
+			<id>dennis.huebner</id>
+			<name>Dennis</name>
+			<email>dennis.huebner@itemis.de</email>
+			<organization>itemis AG</organization>
+		</developer>
+		<developer>
+			<id>holger.schill</id>
+			<name>Holger</name>
+			<email>Holger.Schill@itemis.de</email>
+			<organization>itemis AG</organization>
+		</developer>
+		<developer>
+			<id>jan.koehnlein</id>
+			<name>Jan</name>
+			<email>jan.koehnlein@itemis.de</email>
+			<organization>itemis AG</organization>
+		</developer>
+		<developer>
+			<id>knut.wannheden</id>
+			<name>Knut</name>
+			<email>knut.wannheden@paranor.ch</email>
+			<organization>Paranor</organization>
+		</developer>
+		<developer>
+			<id>michael.clay</id>
+			<name>Michael</name>
+			<email>michael.clay@codeworkz.at</email>
+			<organization>Codeworkz</organization>
+		</developer>
+		<developer>
+			<id>moritz.eysholdt</id>
+			<name>Moritz</name>
+			<email>moritz.eysholdt@itemis.de</email>
+			<organization>itemis AG</organization>
+		</developer>
+		<developer>
+			<id>sebastian.zarnekow</id>
+			<name>Sebastian</name>
+			<email>sebastian.Zarnekow@itemis.de</email>
+			<organization>itemis AG</organization>
+		</developer>
+		<developer>
+			<id>sven.efftinge</id>
+			<name>Sven</name>
+			<email>sven.efftinge@itemis.de</email>
+			<organization>itemis AG</organization>
+			<roles>
+				<role>project lead</role>
+			</roles>
+		</developer>
+	</developers>
 </project>

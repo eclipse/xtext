@@ -5,7 +5,7 @@
 	 3. Where to put output = output.folder
 	-->
 	<property name="bundles.folder" value="./dependencies/plugins/" />
-	<property name="maven.version" value="2.4.1-SNAPSHOT" />
+	<property name="maven.version" value="2.4.1" />
 	<property name="output.folder" value="output" />
 
 	<property name="binJarTemp" value="binJarTemp" />
