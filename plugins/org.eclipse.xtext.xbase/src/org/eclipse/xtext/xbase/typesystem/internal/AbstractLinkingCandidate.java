@@ -443,7 +443,7 @@ public abstract class AbstractLinkingCandidate<Expression extends XExpression> i
 				@Override
 				@Nullable
 				protected LightweightTypeReference getBoundTypeArgument(ParameterizedTypeReference reference, JvmTypeParameter type, Set<JvmTypeParameter> visiting) {
-					if (isBoundTypeArgumentSkipped(type, getOwner())) {
+					if (isBoundTypeArgumentSkipped(type, getTypeParameterMapping(), getOwner())) {
 						return null;
 					}
 					return super.getBoundTypeArgument(reference, type, visiting);
@@ -454,8 +454,8 @@ public abstract class AbstractLinkingCandidate<Expression extends XExpression> i
 		}
 	}
 	
-	protected boolean isBoundTypeArgumentSkipped(JvmTypeParameter type, ITypeReferenceOwner owner) {
-		return (type.getDeclarator() instanceof JvmType) && owner.getDeclaredTypeParameters().contains(type);
+	protected boolean isBoundTypeArgumentSkipped(JvmTypeParameter type, Map<JvmTypeParameter, LightweightMergedBoundTypeArgument> mapping, ITypeReferenceOwner owner) {
+		return (type.getDeclarator() instanceof JvmType) && owner.getDeclaredTypeParameters().contains(type) && !mapping.containsKey(type);
 	}
 	
 	protected boolean isRawTypeContext() {

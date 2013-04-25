@@ -85,7 +85,7 @@ public class ResolvedOperations {
 	}
 	
 	protected ListMultimap<String, IResolvedOperation> computeIndex() {
-		// produces an imutable index which is what we want to have
+		// produces an immutable index which is what we want to have
 		return Multimaps.index(getAllOperations(), new Function<IResolvedOperation, String>() {
 			public String apply(IResolvedOperation input) {
 				return input.getResolvedErasureSignature();
