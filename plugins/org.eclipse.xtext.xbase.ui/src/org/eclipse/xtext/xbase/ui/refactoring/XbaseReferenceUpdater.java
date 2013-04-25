@@ -75,6 +75,15 @@ public class XbaseReferenceUpdater extends JvmModelReferenceUpdater {
 	private ReplaceConverter replaceConverter;
 	
 	@Override
+	protected void createReferenceUpdate(EObject referringElement, URI referringResourceURI, EReference reference,
+			int indexInList, EObject newTargetElement, IRefactoringUpdateAcceptor updateAcceptor) {
+		// skip constructor calls like this() or super()  
+		if (!(referringElement instanceof XFeatureCall && newTargetElement instanceof JvmConstructor))
+			super.createReferenceUpdate(referringElement, referringResourceURI, reference, indexInList,
+					newTargetElement, updateAcceptor);
+	}
+
+	@Override
 	protected void processReferringResource(Resource referringResource,
 			Iterable<IReferenceDescription> referenceDescriptions, ElementRenameArguments elementRenameArguments,
 			IRefactoringUpdateAcceptor updateAcceptor) {
