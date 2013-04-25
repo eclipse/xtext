@@ -785,6 +785,12 @@ abstract class AbstractFeatureCallTypeTest extends AbstractXbaseTestCase {
 		}".resolvesFeatureCallsTo("ArrayList<Object>", "ArrayList<Object>", "List<String>", "ArrayList<String>")
 	}
 	
+	@Test def void testBug_406425_01() throws Exception {
+		"(null as StringBuilder) => [
+            newArrayList(it, new Long(0))
+        ]".resolvesFeatureCallsTo("StringBuilder", "ArrayList<Serializable>", "StringBuilder")
+	}
+	
 	@Test def void testBounds_01() throws Exception {
 		"{ var java.util.List<Integer> list = null list.get(0) }".resolvesFeatureCallsTo("List<Integer>", "Integer")
 	}

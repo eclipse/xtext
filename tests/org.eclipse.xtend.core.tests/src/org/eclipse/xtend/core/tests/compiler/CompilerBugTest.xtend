@@ -123,7 +123,7 @@ class CompilerBugTest extends AbstractXtendCompilerTest {
 	}
 	
 	@Test
-	def testBug4063360() {
+	def testBug406360() {
 		assertCompilesTo('''
 			import org.eclipse.xtext.common.types.JvmTypeReference
 			import org.eclipse.xtext.xbase.compiler.output.ITreeAppendable
@@ -257,7 +257,7 @@ class CompilerBugTest extends AbstractXtendCompilerTest {
 			    List<String> list = newArrayList
 			    
 			    def doSomething(Map<String, String> mapping) {
-			        list = mapping.values.sort // Specifically this line
+			        list = mapping.values.sort
 			    }
 			}
 		''', '''

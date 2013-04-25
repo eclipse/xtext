@@ -26,6 +26,7 @@ import org.eclipse.xtext.xbase.typesystem.conformance.ConformanceHint;
 import org.eclipse.xtext.xbase.typesystem.references.AnyTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.FunctionTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.ITypeReferenceOwner;
+import org.eclipse.xtext.xbase.typesystem.references.LightweightBoundTypeArgument;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightMergedBoundTypeArgument;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.OwnedConverter;
@@ -35,6 +36,7 @@ import org.eclipse.xtext.xbase.typesystem.util.BoundTypeArgumentSource;
 import org.eclipse.xtext.xbase.typesystem.util.DeclaratorTypeArgumentCollector;
 import org.eclipse.xtext.xbase.typesystem.util.DeferredTypeParameterHintCollector;
 import org.eclipse.xtext.xbase.typesystem.util.TypeParameterByUnboundSubstitutor;
+import org.eclipse.xtext.xbase.typesystem.util.TypeParameterSubstitutor;
 
 import com.google.common.collect.Lists;
 
@@ -187,7 +189,34 @@ public class ClosureWithExpectationHelper extends AbstractClosureTypeHelper {
 				typeAssigner.assignType(closureParameter, closureParameterType);
 				resultClosureType.addParameterType(closureParameterType);
 			} else {
-				typeAssigner.assignType(closureParameter, operationParameterType);
+				LightweightTypeReference partiallyResolved = new TypeParameterSubstitutor<Object>(Collections.<JvmTypeParameter, LightweightMergedBoundTypeArgument>emptyMap(), typeAssigner.getReferenceOwner()) {
+					@Override
+					protected Object createVisiting() {
+						return new Object();
+					}
+					@Override
+					protected LightweightTypeReference doVisitUnboundTypeReference(UnboundTypeReference reference, Object param) {
+						if (reference.internalIsResolved()) {
+							return super.doVisitUnboundTypeReference(reference, param);
+						} else {
+							List<LightweightBoundTypeArgument> hints = reference.getAllHints();
+							for(LightweightBoundTypeArgument hint: hints) {
+								if (hint.getSource() == BoundTypeArgumentSource.INFERRED) {
+									reference.tryResolve();
+									if (reference.internalIsResolved()) {
+										return reference.accept(this, param);
+									}
+								}
+							}
+						}
+						return reference;
+					}
+					@Override
+					public LightweightTypeReference substitute(LightweightTypeReference original) {
+						return original.accept(this, createVisiting());
+					}
+				}.substitute(operationParameterType);
+				typeAssigner.assignType(closureParameter, partiallyResolved);
 				resultClosureType.addParameterType(operationParameterType);
 			}
 		}

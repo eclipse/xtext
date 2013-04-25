@@ -778,6 +778,11 @@ public abstract class AbstractFeatureCallTypeTest extends AbstractXbaseTestCase 
   }
   
   @Test
+  public void testBug_406425_01() throws Exception {
+    this.resolvesFeatureCallsTo("(null as StringBuilder) => [\n            newArrayList(it, new Long(0))\n        ]", "StringBuilder", "ArrayList<Serializable>", "StringBuilder");
+  }
+  
+  @Test
   public void testBounds_01() throws Exception {
     this.resolvesFeatureCallsTo("{ var java.util.List<Integer> list = null list.get(0) }", "List<Integer>", "Integer");
   }

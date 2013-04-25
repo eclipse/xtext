@@ -264,7 +264,7 @@ public class CompilerBugTest extends AbstractXtendCompilerTest {
   }
   
   @Test
-  public void testBug4063360() {
+  public void testBug406360() {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("import org.eclipse.xtext.common.types.JvmTypeReference");
     _builder.newLine();
@@ -554,7 +554,7 @@ public class CompilerBugTest extends AbstractXtendCompilerTest {
     _builder.append("def doSomething(Map<String, String> mapping) {");
     _builder.newLine();
     _builder.append("        ");
-    _builder.append("list = mapping.values.sort // Specifically this line");
+    _builder.append("list = mapping.values.sort");
     _builder.newLine();
     _builder.append("    ");
     _builder.append("}");
