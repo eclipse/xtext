@@ -117,12 +117,10 @@ public class LazyLinker extends AbstractCleaningLinker {
 
 	private void installProxies(EObject obj, IDiagnosticProducer producer,
 			Multimap<EStructuralFeature.Setting, INode> settingsToLink, ICompositeNode parentNode) {
-		EClass eClass = obj.eClass();
-		int crossReferenceCount = eClass.getEAllReferences().size() - eClass.getEAllContainments().size();
-		if (crossReferenceCount == 0)
+		final EClass eClass = obj.eClass();
+		if (eClass.getEAllReferences().size() - eClass.getEAllContainments().size() == 0)
 			return;
 
-		Set<Object> linkedCrossReferences = Sets.newHashSetWithExpectedSize(crossReferenceCount);
 		for (Iterator<INode> iterator = parentNode.getChildren().iterator(); iterator.hasNext(); ) {
 			INode node = iterator.next();
 			if (node.getGrammarElement() instanceof CrossReference && !Iterables.isEmpty(node.getLeafNodes())) {
@@ -138,10 +136,9 @@ public class LazyLinker extends AbstractCleaningLinker {
 				} else {
 					createAndSetProxy(obj, node, eRef);
 				}
-				linkedCrossReferences.add(eRef);
 			}
 		}
-		if (linkedCrossReferences.size() < crossReferenceCount && shouldCheckParentNode(parentNode)) {
+		if (shouldCheckParentNode(parentNode)) {
 			installProxies(obj, producer, settingsToLink, parentNode.getParent());
 		}
 	}
