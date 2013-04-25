@@ -112,6 +112,9 @@ public class FeatureLinkHelper {
 					}
 				}
 			}
+		} else if (receiverType.isSynonym() && linkedFeature instanceof JvmMember) {
+			List<LightweightTypeReference> components = receiverType.getMultiTypeComponents();
+			return components.get(components.size() - 1);
 		}
 		return receiverType;
 	}

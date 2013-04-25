@@ -395,6 +395,9 @@ public class FeatureLinkingCandidate extends AbstractPendingLinkingCandidate<XAb
 				LightweightTypeReference expectedReceiverType = new FeatureLinkHelper().getExpectedReceiverType(getFeature(), receiverType);
 				if (expectedReceiverType != null)
 					expectedReceiverType = expectedReceiverType.copyInto(resolvedTypes.getReferenceOwner());
+				if (receiverType.isSynonym()) {
+					receiverType = receiverType.getMultiTypeComponents().get(0);
+				}
 				TypeExpectation expectation = new TypeExpectation(expectedReceiverType, getState(), false);
 				resolvedTypes.acceptType(implicitReceiver, expectation, receiverType.copyInto(resolvedTypes.getReferenceOwner()), false, ConformanceHint.UNCHECKED);
 				if (implicitReceiver instanceof XAbstractFeatureCall) {

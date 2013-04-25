@@ -36,6 +36,7 @@ import org.eclipse.xtext.xbase.typesystem.IResolvedTypes;
 import org.eclipse.xtext.xbase.typesystem.computation.SynonymTypesProvider;
 import org.eclipse.xtext.xbase.typesystem.conformance.ConformanceHint;
 import org.eclipse.xtext.xbase.typesystem.internal.ScopeProviderAccess;
+import org.eclipse.xtext.xbase.typesystem.references.CompoundTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightBoundTypeArgument;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
 import org.eclipse.xtext.xbase.typesystem.references.UnboundTypeReference;
@@ -145,7 +146,10 @@ public class FeatureScopes implements IFeatureNames {
 			protected boolean accept(LightweightTypeReference synonymType, EnumSet<ConformanceHint> hints) {
 				List<JvmType> rawTypes = synonymType.getRawTypes();
 				SynonymTypeBucket bucket = new SynonymTypeBucket(id++, rawTypes, hints);
-				wrapper.set(new ReceiverFeatureScope(wrapper.get(), session, receiver, synonymType, implicit, asAbstractFeatureCall(featureCall), bucket, receiverFeature, operatorMapping));
+				CompoundTypeReference compoundTypeReference = new CompoundTypeReference(synonymType.getOwner(), true);
+				compoundTypeReference.addComponent(featureDeclarator);
+				compoundTypeReference.addComponent(synonymType);
+				wrapper.set(new ReceiverFeatureScope(wrapper.get(), session, receiver, compoundTypeReference, implicit, asAbstractFeatureCall(featureCall), bucket, receiverFeature, operatorMapping));
 				return true;
 			}
 			

@@ -615,6 +615,10 @@ public abstract class LightweightTypeReference {
 		return false;
 	}
 	
+	public boolean isSynonym() {
+		return false;
+	}
+	
 	/**
 	 * Converts types to references that can be expressed as Java type references
 	 * in source code.

@@ -653,6 +653,13 @@ public class UnboundTypeReference extends LightweightTypeReference {
 	}
 	
 	@Override
+	public boolean isSynonym() {
+		if (resolvedTo != null)
+			return resolvedTo.isSynonym();
+		return super.isSynonym();
+	}
+	
+	@Override
 	public LightweightTypeReference toJavaType() {
 		if (resolvedTo != null)
 			return resolvedTo.toJavaType();
