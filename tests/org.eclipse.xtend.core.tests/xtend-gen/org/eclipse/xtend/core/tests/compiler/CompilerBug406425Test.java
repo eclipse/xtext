@@ -21,9 +21,9 @@ public class CompilerBug406425Test extends AbstractXtendCompilerTest {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("import static org.hamcrest.core.Is.*");
     _builder.newLine();
-    _builder.append("import static org.hamcrest.CoreMatchers.*");
-    _builder.newLine();
     _builder.append("import static org.junit.Assert.*");
+    _builder.newLine();
+    _builder.append("import org.hamcrest.Matcher");
     _builder.newLine();
     _builder.append("class Test {");
     _builder.newLine();
@@ -45,6 +45,9 @@ public class CompilerBug406425Test extends AbstractXtendCompilerTest {
     _builder.append("   ");
     _builder.append("}");
     _builder.newLine();
+    _builder.append("   ");
+    _builder.append("def static <T> Matcher<T> nullValue() {}");
+    _builder.newLine();
     _builder.append("}");
     _builder.newLine();
     _builder.append("class MyEntity {");
@@ -58,8 +61,6 @@ public class CompilerBug406425Test extends AbstractXtendCompilerTest {
     _builder_1.append("import org.eclipse.xtext.xbase.lib.ObjectExtensions;");
     _builder_1.newLine();
     _builder_1.append("import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;");
-    _builder_1.newLine();
-    _builder_1.append("import org.hamcrest.CoreMatchers;");
     _builder_1.newLine();
     _builder_1.append("import org.hamcrest.Matcher;");
     _builder_1.newLine();
@@ -85,7 +86,7 @@ public class CompilerBug406425Test extends AbstractXtendCompilerTest {
     _builder_1.append("public void apply(final MyEntity it) {");
     _builder_1.newLine();
     _builder_1.append("          ");
-    _builder_1.append("Matcher<MyEntity> _nullValue = CoreMatchers.<MyEntity>nullValue();");
+    _builder_1.append("Matcher<MyEntity> _nullValue = Test.<MyEntity>nullValue();");
     _builder_1.newLine();
     _builder_1.append("          ");
     _builder_1.append("Assert.<MyEntity>assertThat(it, _nullValue);");
@@ -110,6 +111,17 @@ public class CompilerBug406425Test extends AbstractXtendCompilerTest {
     _builder_1.newLine();
     _builder_1.append("    ");
     _builder_1.append("return _doubleArrow;");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("}");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.newLine();
+    _builder_1.append("  ");
+    _builder_1.append("public static <T extends Object> Matcher<T> nullValue() {");
+    _builder_1.newLine();
+    _builder_1.append("    ");
+    _builder_1.append("return null;");
     _builder_1.newLine();
     _builder_1.append("  ");
     _builder_1.append("}");

@@ -18,8 +18,8 @@ class CompilerBug406425Test extends AbstractXtendCompilerTest {
 	def testBug406425_01() {
 		assertCompilesTo('''
 			import static org.hamcrest.core.Is.*
-			import static org.hamcrest.CoreMatchers.*
 			import static org.junit.Assert.*
+			import org.hamcrest.Matcher
 			class Test {
 			   def test() {
 			       new MyEntity => [
@@ -27,6 +27,7 @@ class CompilerBug406425Test extends AbstractXtendCompilerTest {
 			           assertThat(it.name, is(""))
 			       ]
 			   }
+			   def static <T> Matcher<T> nullValue() {}
 			}
 			class MyEntity {
 			   @Property String name
@@ -34,7 +35,6 @@ class CompilerBug406425Test extends AbstractXtendCompilerTest {
 		''', '''
 			import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 			import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
-			import org.hamcrest.CoreMatchers;
 			import org.hamcrest.Matcher;
 			import org.hamcrest.core.Is;
 			import org.junit.Assert;
@@ -45,7 +45,7 @@ class CompilerBug406425Test extends AbstractXtendCompilerTest {
 			    MyEntity _myEntity = new MyEntity();
 			    final Procedure1<MyEntity> _function = new Procedure1<MyEntity>() {
 			        public void apply(final MyEntity it) {
-			          Matcher<MyEntity> _nullValue = CoreMatchers.<MyEntity>nullValue();
+			          Matcher<MyEntity> _nullValue = Test.<MyEntity>nullValue();
 			          Assert.<MyEntity>assertThat(it, _nullValue);
 			          String _name = it.getName();
 			          Matcher<String> _is = Is.<String>is("");
@@ -54,6 +54,10 @@ class CompilerBug406425Test extends AbstractXtendCompilerTest {
 			      };
 			    MyEntity _doubleArrow = ObjectExtensions.<MyEntity>operator_doubleArrow(_myEntity, _function);
 			    return _doubleArrow;
+			  }
+			  
+			  public static <T extends Object> Matcher<T> nullValue() {
+			    return null;
 			  }
 			}
 		''')
