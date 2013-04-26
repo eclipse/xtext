@@ -45,6 +45,7 @@ import org.eclipse.xtext.ui.editor.contentassist.IProposalConflictHelper;
 import org.eclipse.xtext.ui.editor.contentassist.PrefixMatcher;
 import org.eclipse.xtext.xbase.ui.contentassist.ImportOrganizingProposal;
 import org.eclipse.xtext.xbase.ui.contentassist.ReplacingAppendable;
+import org.eclipse.xtext.xbase.ui.labeling.XbaseImageAdornments;
 import org.eclipse.xtext.xbase.validation.UIStrings;
 
 import com.google.common.base.Function;
@@ -76,6 +77,8 @@ public class ImplementMemberFromSuperAssist {
 
 	@Inject
 	private XtendImages images;
+	
+	@Inject XbaseImageAdornments adornments;
 
 	@Inject
 	private MemberFromSuperImplementor implementor;
@@ -156,7 +159,7 @@ public class ImplementMemberFromSuperAssist {
 		if (!isValidProposal(code.trim(), context, conflictHelper) && !isValidProposal(simpleName, context, conflictHelper))
 			return null;
 		ImportOrganizingProposal completionProposal = createCompletionProposal(appendable, context.getReplaceRegion(),
-				getLabel(overridden), images.forOperation(overridden.getVisibility(), false));
+				getLabel(overridden), images.forOperation(overridden.getVisibility(), adornments.getOverrideAdornment(overridden)));
 		Matcher matcher = bodyExpressionPattern.matcher(code);
 		if (matcher.find()) {
 			int bodyExpressionLength = matcher.end(1) - matcher.start(1);

@@ -7,7 +7,6 @@ import org.eclipse.emf.edit.ui.provider.AdapterFactoryLabelProvider;
 import org.eclipse.jface.viewers.StyledString;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.xtext.common.types.JvmAnnotationType;
-import org.eclipse.xtext.common.types.JvmAnyTypeReference;
 import org.eclipse.xtext.common.types.JvmConstructor;
 import org.eclipse.xtext.common.types.JvmEnumerationType;
 import org.eclipse.xtext.common.types.JvmField;
@@ -25,7 +24,6 @@ import org.eclipse.xtext.xbase.XVariableDeclaration;
 import org.eclipse.xtext.xbase.typesystem.IBatchTypeResolver;
 import org.eclipse.xtext.xbase.typesystem.IResolvedTypes;
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference;
-import org.eclipse.xtext.xbase.typing.ITypeProvider;
 import org.eclipse.xtext.xbase.validation.UIStrings;
 import org.eclipse.xtext.xtype.XImportDeclaration;
 import org.eclipse.xtext.xtype.XImportSection;
@@ -38,13 +36,16 @@ import com.google.inject.Inject;
 public class XbaseLabelProvider extends DefaultEObjectLabelProvider {
 	
 	@Inject
-	private XbaseImages images;
+	private XbaseImages2 images;
 	
 	@Inject
 	private UIStrings uiStrings;
 	
 	@Inject
 	private IBatchTypeResolver typeResolver;
+	
+	@Inject
+	private XbaseImageAdornments adornments;
 	
 	@Inject
 	public XbaseLabelProvider(AdapterFactoryLabelProvider delegate) {
@@ -61,49 +62,49 @@ public class XbaseLabelProvider extends DefaultEObjectLabelProvider {
 	
 	public Image image(JvmGenericType genericType){
 		if(genericType.isInterface())
-			return images.forInterface(genericType.getVisibility());
+			return images.forInterface(genericType.getVisibility(), adornments.get(genericType));
 		else 
-			return images.forClass(genericType.getVisibility());
+			return images.forClass(genericType.getVisibility(), adornments.get(genericType));
 	}
 	
-	public Image image(JvmEnumerationType genericType){
-		return images.forEnum(genericType.getVisibility());
+	public Image image(JvmEnumerationType enumerationType){
+		return images.forEnum(enumerationType.getVisibility(), adornments.get(enumerationType));
 	}
 	
-	public Image image(JvmAnnotationType genericType){
-		return images.forAnnotation(genericType.getVisibility());
+	public Image image(JvmAnnotationType annotationType){
+		return images.forAnnotation(annotationType.getVisibility(), adornments.get(annotationType));
 	}
 	
-	public String test(JvmGenericType genericType){
+	public String text(JvmGenericType genericType){
 		return genericType.getSimpleName();
 	}
 	
-	public Image image(JvmOperation element) {
-		return images.forOperation(element.getVisibility(), element.isAbstract(), element.isStatic(), element.isFinal());
+	public Image image(JvmOperation operation) {
+		return images.forOperation(operation.getVisibility(), adornments.get(operation));
 	}
 	
 	public Object text(JvmOperation element) {
 		return signature(element.getSimpleName(), element);
 	}
 
-	public Image image(JvmConstructor element) {
-		return images.forConstructor(element.getVisibility());
+	public Image image(JvmConstructor constructor) {
+		return images.forConstructor(constructor.getVisibility(), adornments.get(constructor));
 	}
 	
-	public String text(JvmConstructor element) {
-		return "new" + uiStrings.parameters(element);
+	public String text(JvmConstructor constructor) {
+		return "new" + uiStrings.parameters(constructor);
 	}
 	
-	public Image image(JvmField element) {
-		return images.forField(element.getVisibility(), element.isStatic(), element.isFinal(), false);
+	public Image image(JvmField field) {
+		return images.forField(field.getVisibility(), adornments.get(field));
 	}
 	
-	public String text(JvmField element) {
-		return element.getSimpleName() +" : " + element.getType().getSimpleName();
+	public String text(JvmField field) {
+		return field.getSimpleName() +" : " + field.getType().getSimpleName();
 	}
 	
-	public Image image(JvmFormalParameter parameter){
-		return images.forLacalVariable();
+	public Image image(JvmFormalParameter parameter) {
+		return images.forLocalVariable(adornments.get(parameter));
 	}
 	
 	public String text(JvmFormalParameter parameter){
@@ -115,13 +116,9 @@ public class XbaseLabelProvider extends DefaultEObjectLabelProvider {
 	}
 	
 	public Image image(XVariableDeclaration variableDeclaration){
-		return images.forLacalVariable();
+		return images.forLocalVariable(adornments.get(variableDeclaration));
 	}
 	
-	public Image image(JvmTypeParameter parameter){
-		return images.forTypeParameter();
-	}
-
 	public String text(XVariableDeclaration variableDeclaration){
 		IResolvedTypes resolvedTypes = typeResolver.resolveTypes(variableDeclaration);
 		LightweightTypeReference type = resolvedTypes.getActualType((JvmIdentifiableElement)variableDeclaration);
@@ -131,6 +128,10 @@ public class XbaseLabelProvider extends DefaultEObjectLabelProvider {
 		return result;
 	}
 	
+	public Image image(JvmTypeParameter parameter){
+		return images.forTypeParameter(adornments.get(parameter));
+	}
+
 	public String text(XCasePart casePart){
 		if (casePart.eContainer() instanceof XSwitchExpression) {
 			XSwitchExpression switchExpression = (XSwitchExpression) casePart.eContainer();

@@ -23,6 +23,8 @@ public class XtendFeatureNode extends EObjectNode {
 	
 	private boolean isSynthetic;
 	
+	private int inheritanceDepth; 
+	
 	public XtendFeatureNode(EObject eObject, IOutlineNode parent, Image image, Object text, boolean isLeaf) {
 		super(eObject, parent, image, text, isLeaf);
 	}
@@ -49,5 +51,13 @@ public class XtendFeatureNode extends EObjectNode {
 	
 	public boolean isSynthetic() {
 		return isSynthetic;
+	}
+
+	public int getInheritanceDepth() {
+		return inheritanceDepth;
+	}
+
+	public void setInheritanceDepth(int inheritanceDepth) {
+		this.inheritanceDepth = inheritanceDepth;
 	}
 }

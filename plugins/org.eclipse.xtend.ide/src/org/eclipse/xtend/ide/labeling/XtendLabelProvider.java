@@ -8,6 +8,7 @@ import java.util.Iterator;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jface.viewers.StyledString;
 import org.eclipse.swt.graphics.Image;
+import org.eclipse.xtend.core.jvmmodel.DispatchHelper;
 import org.eclipse.xtend.core.jvmmodel.IXtendJvmAssociations;
 import org.eclipse.xtend.core.xtend.XtendAnnotationType;
 import org.eclipse.xtend.core.xtend.XtendClass;
@@ -21,6 +22,7 @@ import org.eclipse.xtend.core.xtend.XtendInterface;
 import org.eclipse.xtext.common.types.JvmField;
 import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmTypeReference;
+import org.eclipse.xtext.xbase.ui.labeling.XbaseImageAdornments;
 import org.eclipse.xtext.xbase.ui.labeling.XbaseLabelProvider;
 import org.eclipse.xtext.xbase.validation.UIStrings;
 import org.eclipse.xtext.xtype.XImportDeclaration;
@@ -42,6 +44,12 @@ public class XtendLabelProvider extends XbaseLabelProvider {
 
 	@Inject
 	private IXtendJvmAssociations associations;
+	
+	@Inject
+	private XbaseImageAdornments adornments;
+	
+	@Inject 
+	private DispatchHelper dispatchHelper;
 
 	public XtendLabelProvider() {
 		super(null);
@@ -57,37 +65,45 @@ public class XtendLabelProvider extends XbaseLabelProvider {
 	}
 
 	public Image image(XtendClass element) {
-		return images.forClass(element.getVisibility());
+		return images.forClass(element.getVisibility(), adornments.get(associations.getInferredType(element)));
 	}
 
 	public Image image(XtendInterface element) {
-		return images.forInterface(element.getVisibility());
+		return images.forInterface(element.getVisibility(), adornments.get(associations.getInferredType(element)));
 	}
 
 	public Image image(XtendEnum element) {
-		return images.forEnum(element.getVisibility());
+		return images.forEnum(element.getVisibility(), adornments.get(associations.getInferredType(element)));
 	}
 
 	public Image image(XtendAnnotationType element) {
-		return images.forAnnotation(element.getVisibility());
+		return images.forAnnotation(element.getVisibility(), adornments.get(associations.getInferredType(element)));
 	}
 
 	public Image image(XtendFunction element) {
-		return images.forOperation(element.getVisibility(), element.isAbstract(), element.isStatic(), element.isFinal());
+		return images.forOperation(element.getVisibility(), adornments.get(associations.getDirectlyInferredOperation(element)));
+	}
+
+	@Override
+	public Image image(JvmOperation operation) {
+		if(dispatchHelper.isDispatcherFunction(operation)) 
+			return images.forDispatcherFunction(operation.getVisibility(), adornments.get(operation));
+		else 
+			return images.forOperation(operation.getVisibility(), adornments.get(operation));
 	}
 	
 	public Image image(XtendConstructor element) {
-		return images.forConstructor(element.getVisibility());
+		return images.forConstructor(element.getVisibility(), adornments.get(associations.getInferredConstructor(element)));
 	}
 
 	public Image image(XtendField element) {
-		return images.forField(element.getVisibility(), element.isStatic(), element.isFinal(), element.isExtension());
+		return images.forField(element.getVisibility(), adornments.get(associations.getJvmField(element)));
 	}
 	
 	public Image image(XtendEnumLiteral element) {
-		return images.forField(element.getVisibility(), element.isStatic(), element.isFinal(), false);
+		return images.forField(element.getVisibility(), adornments.get(associations.getJvmField(element)));
 	}
-
+	
 	public String text(XtendFile element) {
 		return element.eResource().getURI().trimFileExtension().lastSegment();
 	}

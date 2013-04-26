@@ -18,6 +18,7 @@ import org.eclipse.xtext.ui.editor.outline.impl.OutlineFilterAndSorter;
 import org.eclipse.xtend.ide.outline.XtendOutlineTreeProvider;
 import org.junit.Test;
 
+import com.google.common.base.Joiner;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 
@@ -159,7 +160,8 @@ public abstract class AbstractOutlineTests extends AbstractXtendUITestCase {
 		}
 
 		AssertBuilder numChildren(int num) {
-			assertEquals("Wrong number of children", num, getSorter().filterAndSort(node.getChildren()).length);
+			IOutlineNode[] filteredAndSortedChildren = getSorter().filterAndSort(node.getChildren());
+			assertEquals("Wrong number of children\n" + Joiner.on("\n").join(filteredAndSortedChildren), num, filteredAndSortedChildren.length);
 			return this;
 		}
 		

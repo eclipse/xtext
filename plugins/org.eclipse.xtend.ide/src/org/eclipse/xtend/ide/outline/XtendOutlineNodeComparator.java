@@ -15,6 +15,13 @@ import org.eclipse.xtext.ui.editor.outline.impl.EStructuralFeatureNode;
 public class XtendOutlineNodeComparator extends SortOutlineContribution.DefaultComparator {
 	@Override
 	public int getCategory(IOutlineNode node) {
+		if(node instanceof XtendFeatureNode) 
+			return internalGetCategory(node) + 100 * ((XtendFeatureNode)node).getInheritanceDepth();
+		else
+			return internalGetCategory(node);
+	}
+	
+	protected int internalGetCategory(IOutlineNode node) {
 		if (node instanceof EStructuralFeatureNode) {
 			EStructuralFeature feature = ((EStructuralFeatureNode) node).getEStructuralFeature();
 			if (feature == XtendPackage.Literals.XTEND_FILE__PACKAGE)
