@@ -18,7 +18,9 @@ import org.eclipse.xtext.common.types.JvmVisibility;
 
 /**
  * @author Holger Schill - Initial contribution and API
+ * @deprecation use {@link XbaseImages2} instead for better handling of adornments
  */
+@Deprecated
 public class XbaseImages {
 	
 	public Image forImportContainer() {
