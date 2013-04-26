@@ -31,8 +31,6 @@ import org.eclipse.xtend.core.xtend.XtendFile;
 import org.eclipse.xtend.core.xtend.XtendFunction;
 import org.eclipse.xtend.core.xtend.XtendPackage;
 import org.eclipse.xtend.core.xtend.XtendTypeDeclaration;
-import org.eclipse.xtext.common.types.JvmDeclaredType;
-import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
@@ -188,14 +186,7 @@ public class OverrideIndicatorModelListener extends NullImpl implements IXtextMo
 	}
 
 	protected boolean isOverwriteIndicator(JvmOperation jvmOperation) {
-		JvmDeclaredType jvmDeclaredType = jvmOperation.getDeclaringType();
-		if (jvmDeclaredType instanceof JvmGenericType) {
-			JvmGenericType jvmGenericType = (JvmGenericType) jvmDeclaredType;
-			if (jvmGenericType.isInterface()) {
-				return false;
-			}
-		}
-		return true;
+		return !jvmOperation.isAbstract();
 	}
 	
 	private void installModelListener(XtextEditor xtextEditor) {

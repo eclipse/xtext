@@ -6,14 +6,17 @@ package org.eclipse.xtend.ide.outline;
 import static com.google.common.collect.Iterables.*;
 import static com.google.common.collect.Lists.*;
 import static com.google.common.collect.Sets.*;
+import static java.util.Collections.*;
 
+import java.util.Comparator;
 import java.util.List;
 import java.util.Set;
 
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.jdt.ui.JavaElementImageDescriptor;
 import org.eclipse.jface.viewers.StyledString;
 import org.eclipse.swt.graphics.Image;
-import org.eclipse.xtend.core.dispatch.DispatchingSupport;
+import org.eclipse.xtend.core.jvmmodel.DispatchHelper;
 import org.eclipse.xtend.core.jvmmodel.IXtendJvmAssociations;
 import org.eclipse.xtend.core.xtend.XtendClass;
 import org.eclipse.xtend.core.xtend.XtendField;
@@ -26,14 +29,9 @@ import org.eclipse.xtend.ide.labeling.XtendImages;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmFeature;
 import org.eclipse.xtext.common.types.JvmField;
-import org.eclipse.xtext.common.types.JvmMember;
+import org.eclipse.xtext.common.types.JvmGenericType;
 import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmTypeReference;
-import org.eclipse.xtext.common.types.JvmVisibility;
-import org.eclipse.xtext.common.types.util.FeatureOverridesService;
-import org.eclipse.xtext.common.types.util.SuperTypeCollector;
-import org.eclipse.xtext.common.types.util.TypeReferences;
-import org.eclipse.xtext.common.types.util.VisibilityService;
 import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
 import org.eclipse.xtext.ui.editor.outline.IOutlineNode;
@@ -43,10 +41,10 @@ import org.eclipse.xtext.ui.editor.outline.impl.ModeAwareOutlineTreeProvider;
 import org.eclipse.xtext.ui.editor.outline.impl.OutlineMode;
 import org.eclipse.xtext.util.TextRegion;
 import org.eclipse.xtext.xbase.jvmmodel.JvmTypeExtensions;
+import org.eclipse.xtext.xbase.ui.labeling.XbaseImageAdornments;
 import org.eclipse.xtext.xtype.XImportDeclaration;
 import org.eclipse.xtext.xtype.XtypePackage;
 
-import com.google.common.collect.Multimap;
 import com.google.inject.Inject;
 
 /**
@@ -54,12 +52,11 @@ import com.google.inject.Inject;
  * 
  * @author Jan Koehnlein
  */
-@SuppressWarnings("deprecation")
 public class XtendOutlineTreeProvider extends ModeAwareOutlineTreeProvider {
 
-	private static final OutlineMode SHOW_INHERITED_MODE = new OutlineMode("show", "show inherited members");
-
 	private static final OutlineMode HIDE_INHERITED_MODE = new OutlineMode("hide", "hide inherited members");
+
+	private static final OutlineMode SHOW_INHERITED_MODE = new OutlineMode("show", "show inherited members");
 
 	private static final List<OutlineMode> MODES = newArrayList(HIDE_INHERITED_MODE, SHOW_INHERITED_MODE);
 
@@ -67,33 +64,25 @@ public class XtendOutlineTreeProvider extends ModeAwareOutlineTreeProvider {
 	private XtendImages images;
 
 	@Inject
+	private XbaseImageAdornments adornments;
+
+	@Inject
 	private IXtendJvmAssociations associations;
 
 	@Inject
-	private DispatchingSupport dispatchingSupport;
+	private DispatchHelper dispatchHelper;
 
-	@Inject
-	private FeatureOverridesService featureOverridesService;
-
-	@Inject
-	private TypeReferences typeReferences;
-
-	@Inject
-	private VisibilityService visibilityService;
-	
 	@Inject
 	private JvmTypeExtensions typeExtensions;
-	
-	@Inject
-	private SuperTypeCollector superTypeCollector;
 
 	protected void _createChildren(DocumentRootNode parentNode, XtendFile xtendFile) {
 		if (xtendFile.getPackage() != null)
 			createEStructuralFeatureNode(parentNode, xtendFile, XtendPackage.Literals.XTEND_FILE__PACKAGE,
 					images.forPackage(), xtendFile.getPackage(), true);
 		if (xtendFile.getImportSection() != null && !xtendFile.getImportSection().getImportDeclarations().isEmpty())
-			createEStructuralFeatureNode(parentNode, xtendFile.getImportSection(), XtypePackage.Literals.XIMPORT_SECTION__IMPORT_DECLARATIONS,
-					images.forImportContainer(), "import declarations", false);
+			createEStructuralFeatureNode(parentNode, xtendFile.getImportSection(),
+					XtypePackage.Literals.XIMPORT_SECTION__IMPORT_DECLARATIONS, images.forImportContainer(),
+					"import declarations", false);
 		for (XtendTypeDeclaration xtendType : xtendFile.getXtendTypes()) {
 			EObjectNode classNode = createEObjectNode(parentNode, xtendType);
 			createFeatureNodes(classNode, xtendType);
@@ -104,53 +93,88 @@ public class XtendOutlineTreeProvider extends ModeAwareOutlineTreeProvider {
 		final JvmDeclaredType inferredType = associations.getInferredType(xtendType);
 		if (inferredType != null) {
 			Set<JvmFeature> processedFeatures = newHashSet();
-			if(xtendType instanceof XtendClass) {
-				Multimap<JvmOperation, JvmOperation> dispatcher2dispatched = dispatchingSupport.getDispatcher2dispatched(
-						(XtendClass) xtendType, getCurrentMode() == HIDE_INHERITED_MODE);
-				for (JvmOperation dispatcher : dispatcher2dispatched.keySet()) {
-					XtendFeatureNode dispatcherNode = createNodeForFeature(parentNode, inferredType, dispatcher, dispatcher);
-					if (dispatcherNode != null) {
-						dispatcherNode.setDispatch(true);
-						processedFeatures.add(dispatcher);
-						for (JvmOperation dispatchCase : dispatcher2dispatched.get(dispatcher)) {
-							XtendFunction xtendFunction = associations.getXtendFunction(dispatchCase);
-							if (xtendFunction == null) {
-								createNodeForFeature(dispatcherNode, inferredType, dispatchCase, dispatchCase);
-							} else {
-								createNodeForFeature(dispatcherNode, inferredType, dispatchCase, xtendFunction);
-							}
-							processedFeatures.add(dispatchCase);
-						}
-					}
-				}
-			}
-			List<JvmMember> remainingFeatures = newArrayList();
-			remainingFeatures.addAll(inferredType.getMembers());
-			if (getCurrentMode() == SHOW_INHERITED_MODE) {
-				Set<JvmTypeReference> superTypes = superTypeCollector.collectSuperTypes(inferredType);
-				for (JvmTypeReference superType : superTypes) {
-					JvmDeclaredType type = (JvmDeclaredType) superType.getType();
-					for (JvmMember member : type.getMembers()) {
-						if (member.getVisibility() != JvmVisibility.PRIVATE)
-							remainingFeatures.add(member);
-					}
-				}
-			} 
-			for (JvmFeature feature : filter(remainingFeatures, JvmFeature.class)) {
-				if (!processedFeatures.contains(feature)) {
-					EObject primarySourceElement = associations.getPrimarySourceElement(feature);
-					createNodeForFeature(parentNode, inferredType, feature, 
-							primarySourceElement != null ? primarySourceElement : feature);
-				}
-			}
+			createFeatureNodesForType(parentNode, xtendType, inferredType, inferredType, processedFeatures, 0);
 		} else {
 			for (XtendMember member : xtendType.getMembers())
 				createEObjectNode(parentNode, member);
 		}
 	}
 
+	protected void createFeatureNodesForType(IOutlineNode parentNode, XtendTypeDeclaration xtendType,
+			JvmDeclaredType inferredType, final JvmDeclaredType baseType, Set<JvmFeature> processedFeatures, int inheritanceDepth) {
+		if (xtendType instanceof XtendClass) {
+			for(JvmOperation operation: inferredType.getDeclaredOperations()) {
+				if(dispatchHelper.isDispatcherFunction(operation)) {
+					JvmOperation dispatcher = operation;
+					XtendFeatureNode dispatcherNode = createNodeForFeature(parentNode, baseType, dispatcher,
+							dispatcher, inheritanceDepth);
+					if (dispatcherNode != null) {
+						dispatcherNode.setDispatch(true);
+						processedFeatures.add(dispatcher);
+						boolean inheritsDispatchCases = false;
+						Iterable<JvmOperation> dispatchCases;
+						if (getCurrentMode() == SHOW_INHERITED_MODE)
+							dispatchCases = dispatchHelper.getAllDispatchCases(dispatcher);
+						else {
+							dispatchCases = newArrayList(dispatchHelper.getLocalDispatchCases(dispatcher));
+							sort((List<JvmOperation>) dispatchCases, new Comparator<JvmOperation>() {
+								public int compare(JvmOperation o1, JvmOperation o2) {
+									return baseType.getMembers().indexOf(o1) - baseType.getMembers().indexOf(o2);
+								}
+							});
+						}
+						for (JvmOperation dispatchCase : dispatchCases) {
+							inheritsDispatchCases |= dispatchCase.getDeclaringType() != baseType;
+							XtendFunction xtendFunction = associations.getXtendFunction(dispatchCase);
+							if (xtendFunction == null) {
+								createNodeForFeature(dispatcherNode, baseType, dispatchCase, dispatchCase,
+										inheritanceDepth);
+							} else {
+								createNodeForFeature(dispatcherNode, baseType, dispatchCase, xtendFunction,
+										inheritanceDepth);
+							}
+							processedFeatures.add(dispatchCase);
+						}
+						if(inheritsDispatchCases) 
+							dispatcherNode.setImage(images.forDispatcherFunction(dispatcher.getVisibility(), 
+									adornments.get(dispatcher) | JavaElementImageDescriptor.OVERRIDES));
+					}
+				}
+			}
+		}
+		for (JvmFeature feature : filter(inferredType.getMembers(), JvmFeature.class)) {
+			if (!processedFeatures.contains(feature)) {
+				EObject primarySourceElement = associations.getPrimarySourceElement(feature);
+				createNodeForFeature(parentNode, baseType, feature,
+						primarySourceElement != null ? primarySourceElement : feature, inheritanceDepth);
+			}
+		}
+		if (getCurrentMode() == SHOW_INHERITED_MODE) {
+			if (inferredType instanceof JvmGenericType) {
+				JvmTypeReference extendedClass = ((JvmGenericType) inferredType).getExtendedClass();
+				if (extendedClass != null) 
+					createInheritedFeatureNodes(parentNode, baseType, processedFeatures, inheritanceDepth,
+							extendedClass);
+				for(JvmTypeReference extendedInterface: ((JvmGenericType) inferredType).getExtendedInterfaces()) {
+					createInheritedFeatureNodes(parentNode, baseType, processedFeatures, inheritanceDepth,
+							extendedInterface);
+				}
+			}
+		}
+	}
+
+	protected void createInheritedFeatureNodes(IOutlineNode parentNode, JvmDeclaredType baseType,
+			Set<JvmFeature> processedFeatures, int inheritanceDepth, JvmTypeReference superType) {
+		if(superType.getType() instanceof JvmDeclaredType) {
+			JvmDeclaredType superClass = ((JvmGenericType) superType.getType());
+			EObject xtendSuperClass = associations.getPrimarySourceElement(superType.getType());
+			createFeatureNodesForType(parentNode, (XtendTypeDeclaration) xtendSuperClass,
+					superClass, baseType, processedFeatures, inheritanceDepth + 1);
+		}
+	}
+
 	protected XtendFeatureNode createNodeForFeature(IOutlineNode parentNode, final JvmDeclaredType inferredType,
-			JvmFeature jvmFeature, EObject semanticFeature) {
+			JvmFeature jvmFeature, EObject semanticFeature, int inheritanceDepth) {
 		Object text = textDispatcher.invoke(semanticFeature);
 		Image image = imageDispatcher.invoke(semanticFeature);
 		final boolean synthetic = typeExtensions.isSynthetic(jvmFeature);
@@ -164,47 +188,49 @@ public class XtendOutlineTreeProvider extends ModeAwareOutlineTreeProvider {
 						text.toString());
 				label.append(new StyledString(" - " + jvmFeature.getDeclaringType().getIdentifier(),
 						StyledString.COUNTER_STYLER));
-				return createXtendFeatureNode(parentNode, jvmFeature, image, label, true, synthetic);
+				return createXtendFeatureNode(parentNode, jvmFeature, image, label, true, synthetic, inheritanceDepth);
 			}
 			return null;
 		} else {
-			return createXtendFeatureNode(parentNode, semanticFeature, image, text, true, synthetic);
+			return createXtendFeatureNode(parentNode, semanticFeature, image, text, true, synthetic, inheritanceDepth);
 		}
 	}
-	
-	protected XtendFeatureNode createXtendFeatureNode(IOutlineNode parentNode, EObject modelElement, Image image, Object text,
-			boolean isLeaf, boolean synthetic) {
+
+	protected XtendFeatureNode createXtendFeatureNode(IOutlineNode parentNode, EObject modelElement, Image image,
+			Object text, boolean isLeaf, boolean synthetic, int inheritanceDepth) {
 		XtendFeatureNode featureNode = new XtendFeatureNode(modelElement, parentNode, image, text, isLeaf);
 		ICompositeNode parserNode = NodeModelUtils.getNode(modelElement);
 		if (parserNode != null)
 			featureNode.setTextRegion(new TextRegion(parserNode.getOffset(), parserNode.getLength()));
-		if(isLocalElement(parentNode, modelElement))
+		if (isLocalElement(parentNode, modelElement))
 			featureNode.setShortTextRegion(locationInFileProvider.getSignificantTextRegion(modelElement));
 		featureNode.setStatic(isStatic(modelElement));
 		featureNode.setSynthetic(synthetic);
+		featureNode.setInheritanceDepth(inheritanceDepth);
 		return featureNode;
 	}
 
 	protected boolean isStatic(EObject element) {
-		if (element instanceof JvmField) 
-			return  ((JvmField) element).isStatic();
-		else if(element instanceof JvmOperation) 
-			return  ((JvmOperation) element).isStatic();
-		else if(element instanceof XtendField) 
-			return  ((XtendField) element).isStatic();
-		else if(element instanceof XtendFunction) 
-			return  ((XtendFunction) element).isStatic();
-		else return false;
+		if (element instanceof JvmField)
+			return ((JvmField) element).isStatic();
+		else if (element instanceof JvmOperation)
+			return ((JvmOperation) element).isStatic();
+		else if (element instanceof XtendField)
+			return ((XtendField) element).isStatic();
+		else if (element instanceof XtendFunction)
+			return ((XtendFunction) element).isStatic();
+		else
+			return false;
 	}
-	
+
 	@Override
 	protected boolean _isLeaf(EObject element) {
 		return true;
 	}
 
 	protected Object _text(XImportDeclaration importDeclaration) {
-		return (importDeclaration.getImportedNamespace() != null) ? importDeclaration.getImportedNamespace() : importDeclaration
-				.getImportedTypeName();
+		return (importDeclaration.getImportedNamespace() != null) ? importDeclaration.getImportedNamespace()
+				: importDeclaration.getImportedTypeName();
 	}
 
 	@Override
