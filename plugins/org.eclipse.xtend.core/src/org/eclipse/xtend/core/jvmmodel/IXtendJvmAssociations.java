@@ -17,6 +17,7 @@ import org.eclipse.xtend.core.xtend.XtendAnnotationType;
 import org.eclipse.xtend.core.xtend.XtendClass;
 import org.eclipse.xtend.core.xtend.XtendConstructor;
 import org.eclipse.xtend.core.xtend.XtendEnum;
+import org.eclipse.xtend.core.xtend.XtendEnumLiteral;
 import org.eclipse.xtend.core.xtend.XtendField;
 import org.eclipse.xtend.core.xtend.XtendFunction;
 import org.eclipse.xtend.core.xtend.XtendInterface;
@@ -61,6 +62,8 @@ public interface IXtendJvmAssociations extends IJvmModelAssociations {
 	JvmOperation getDispatchOperation(XtendFunction dispatchFunction);
 	
 	JvmField getJvmField(XtendField field);
+	
+	JvmField getJvmField(XtendEnumLiteral field);
 	
 	JvmFormalParameter getJvmParameter(XtendParameter parameter);
 	
@@ -170,6 +173,10 @@ public interface IXtendJvmAssociations extends IJvmModelAssociations {
 		}
 
 		public JvmField getJvmField(XtendField field) {
+			return getFirstOrNull(getJvmElements(field), JvmField.class);
+		}
+		
+		public JvmField getJvmField(XtendEnumLiteral field) {
 			return getFirstOrNull(getJvmElements(field), JvmField.class);
 		}
 		
