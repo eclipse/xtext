@@ -881,7 +881,6 @@ public abstract class AbstractXbaseEvaluationTest extends Assert {
 		assertEvaluatesTo("else", "if (false) 'then' else 'else'");
 	}
 	
-	@Ignore("TODO compiler needs to be fixed - either the if expression has to be casted to match the expected return type String, or the local var has to have the type String")
 	@Test public void testIfExpression_05() throws Exception {
 		assertEvaluatesTo(null, "if (false) return 'fail'");
 	}
