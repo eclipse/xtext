@@ -1,3 +1,0 @@
-setpref targetPlatformPath="${releng.project.location}/dependencies"
-import -Dbuckminster.download.source=true -Declipse.download="http://download.eclipse.org" "${releng.project.location}/standalone-content.cquery"
-perform "org.eclipse.xtend.standalone.maven#createUberJar"
