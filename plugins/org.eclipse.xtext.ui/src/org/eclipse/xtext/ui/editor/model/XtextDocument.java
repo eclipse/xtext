@@ -177,7 +177,8 @@ public class XtextDocument extends Document implements IXtextDocument {
 		@Override
 		protected void afterModify(XtextResource res, Object result, IUnitOfWork<?, XtextResource> work) {
 			ensureThatStateIsNotReturned(result, work);
-			notifyModelListeners(resource);
+			if(!(work instanceof ReconcilingUnitOfWork))
+				notifyModelListeners(resource);
 		}
 
 		@Override
