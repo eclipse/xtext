@@ -23,8 +23,6 @@ import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.scoping.IScopeProvider;
 import org.eclipse.xtext.scoping.impl.AbstractGlobalScopeDelegatingScopeProvider;
 import org.eclipse.xtext.scoping.impl.IDelegatingScopeProvider;
-import org.eclipse.xtext.util.internal.Stopwatches;
-import org.eclipse.xtext.util.internal.Stopwatches.StoppedTask;
 
 import com.google.inject.Inject;
 import com.google.inject.Provider;
@@ -117,20 +115,14 @@ public class DefaultLinkingService extends AbstractLinkingService {
 			if (logger.isDebugEnabled()) {
 				logger.debug("before getLinkedObjects: node: '" + crossRefString + "'");
 			}
-			StoppedTask task = Stopwatches.forTask("Crosslink resolution (DefaultLinkingService.getLinkedObjects)");
-			try {
-				task.start();
-				final IScope scope = getScope(context, ref);
-				QualifiedName qualifiedLinkName =  qualifiedNameConverter.toQualifiedName(crossRefString);
-				IEObjectDescription eObjectDescription = scope.getSingleElement(qualifiedLinkName);
-				if (logger.isDebugEnabled()) {
-					logger.debug("after getLinkedObjects: node: '" + crossRefString + "' result: " + eObjectDescription);
-				}
-				if (eObjectDescription != null) 
-					return Collections.singletonList(eObjectDescription.getEObjectOrProxy());
-			} finally {
-				task.stop();
+			final IScope scope = getScope(context, ref);
+			QualifiedName qualifiedLinkName =  qualifiedNameConverter.toQualifiedName(crossRefString);
+			IEObjectDescription eObjectDescription = scope.getSingleElement(qualifiedLinkName);
+			if (logger.isDebugEnabled()) {
+				logger.debug("after getLinkedObjects: node: '" + crossRefString + "' result: " + eObjectDescription);
 			}
+			if (eObjectDescription != null) 
+				return Collections.singletonList(eObjectDescription.getEObjectOrProxy());
 		}
 		return Collections.emptyList();
 	}

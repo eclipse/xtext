@@ -66,9 +66,9 @@ import com.google.inject.Inject;
 /**
  * Internal implementation that allows to convert Java top-level classes to {@link JvmType types}.
  * 
- * Clients are not supposed to use this class directly but the {@link IJvmTypeProvider}
- * or {@link TypeReferences} instead. Those will take care of types that are requested more than
- * once and therefore should return the very same {@link JvmType type} on subsequent queries.
+ * Clients are not supposed to use this class directly but the {@link IJvmTypeProvider} or {@link TypeReferences}
+ * instead. Those will take care of types that are requested more than once and therefore should return the very same
+ * {@link JvmType type} on subsequent queries.
  * 
  * @noextend This class is not intended to be subclassed by clients.
  * @noinstantiate This class is not intended to be instantiated by clients.
@@ -79,10 +79,9 @@ public class DeclaredTypeFactory implements ITypeFactory<Class<?>> {
 
 	private final static Logger log = Logger.getLogger(DeclaredTypeFactory.class);
 	private final ClassURIHelper uriHelper;
-	
+
 	private final StoppedTask createTypeTask = Stopwatches.forTask("DeclaredTypeFactory.createType");
-	private final StoppedTask annotationTask = Stopwatches.forTask("DeclaredTypeFactory.createAnnotationValues");
-	
+
 	@Inject
 	public DeclaredTypeFactory(ClassURIHelper uriHelper) {
 		this.uriHelper = uriHelper;
@@ -90,6 +89,7 @@ public class DeclaredTypeFactory implements ITypeFactory<Class<?>> {
 
 	/**
 	 * Creates a new {@link JvmDeclaredType type} from the given class.
+	 * 
 	 * @noreference This method is not intended to be referenced by clients.
 	 */
 	public JvmDeclaredType createType(final Class<?> clazz) {
@@ -101,7 +101,7 @@ public class DeclaredTypeFactory implements ITypeFactory<Class<?>> {
 				return createAnnotationType(clazz);
 			if (clazz.isEnum())
 				return createEnumerationType(clazz);
-	
+
 			final JvmGenericType result = TypesFactory.eINSTANCE.createJvmGenericType();
 			result.setInterface(clazz.isInterface());
 			result.setStrictFloatingPoint(Modifier.isStrict(clazz.getModifiers()));
@@ -111,20 +111,20 @@ public class DeclaredTypeFactory implements ITypeFactory<Class<?>> {
 			result.setSimpleName(clazz.getSimpleName());
 			if (clazz.getDeclaringClass() == null && clazz.getPackage() != null)
 				result.setPackageName(clazz.getPackage().getName());
-			
+
 			createNestedTypes(clazz, result);
 			createMethods(clazz, result);
 			createConstructors(clazz, result);
 			createFields(clazz, result);
-			
+
 			setSuperTypes(clazz, result);
 			try {
 				for (TypeVariable<?> variable : clazz.getTypeParameters()) {
 					result.getTypeParameters().add(createTypeParameter(variable, result));
 				}
-			} catch(GenericSignatureFormatError error) {
+			} catch (GenericSignatureFormatError error) {
 				logSignatureFormatError(clazz);
-			} catch(MalformedParameterizedTypeException error) {
+			} catch (MalformedParameterizedTypeException error) {
 				logSignatureFormatError(clazz);
 			}
 			createAnnotationValues(clazz, result);
@@ -138,17 +138,12 @@ public class DeclaredTypeFactory implements ITypeFactory<Class<?>> {
 		if (log.isDebugEnabled())
 			log.debug("Invalid class file for: " + clazz.getCanonicalName());
 	}
-	
+
 	private static final Object[] EMPTY_ARRAY = new Object[0];
 
 	protected void createAnnotationValues(final AnnotatedElement annotated, final JvmAnnotationTarget result) {
-		try {
-			annotationTask.start();
-			for (Annotation annotation : annotated.getDeclaredAnnotations()) {
-				result.getAnnotations().add(createAnnotationReference(annotation));
-			}
-		} finally {
-			annotationTask.stop();
+		for (Annotation annotation : annotated.getDeclaredAnnotations()) {
+			result.getAnnotations().add(createAnnotationReference(annotation));
 		}
 	}
 
@@ -209,7 +204,8 @@ public class DeclaredTypeFactory implements ITypeFactory<Class<?>> {
 			} else if (componentType.isAnnotation()) {
 				for (int i = 0; i < length; i++) {
 					Annotation nestedAnnotation = (Annotation) Array.get(value, i);
-					((JvmAnnotationAnnotationValue)result).getValues().add(createAnnotationReference(nestedAnnotation));
+					((JvmAnnotationAnnotationValue) result).getValues()
+							.add(createAnnotationReference(nestedAnnotation));
 				}
 			} else if (componentType.isEnum()) {
 				for (int i = 0; i < length; i++) {
@@ -234,7 +230,7 @@ public class DeclaredTypeFactory implements ITypeFactory<Class<?>> {
 			result.eSet(result.eClass().getEStructuralFeature("values"), Collections.singleton(reference));
 		} else if (type.isAnnotation()) {
 			Annotation nestedAnnotation = (Annotation) value;
-			((JvmAnnotationAnnotationValue)result).getValues().add(createAnnotationReference(nestedAnnotation));
+			((JvmAnnotationAnnotationValue) result).getValues().add(createAnnotationReference(nestedAnnotation));
 		} else if (type.isEnum()) {
 			Enum<?> e = (Enum<?>) value;
 			JvmEnumerationLiteral proxy = createEnumLiteralProxy(e);
@@ -321,12 +317,12 @@ public class DeclaredTypeFactory implements ITypeFactory<Class<?>> {
 			if (clazz.getGenericSuperclass() != null) {
 				result.getSuperTypes().add(createTypeReference(clazz.getGenericSuperclass()));
 			}
-		} catch(GenericSignatureFormatError error) {
+		} catch (GenericSignatureFormatError error) {
 			logSignatureFormatError(clazz);
 			if (clazz.getSuperclass() != null) {
 				result.getSuperTypes().add(createTypeReference(clazz.getSuperclass()));
 			}
-		} catch(MalformedParameterizedTypeException error) {
+		} catch (MalformedParameterizedTypeException error) {
 			logSignatureFormatError(clazz);
 			if (clazz.getSuperclass() != null) {
 				result.getSuperTypes().add(createTypeReference(clazz.getSuperclass()));
@@ -335,14 +331,14 @@ public class DeclaredTypeFactory implements ITypeFactory<Class<?>> {
 		Type[] interfaces = null;
 		try {
 			interfaces = clazz.getGenericInterfaces();
-		} catch(GenericSignatureFormatError error) {
+		} catch (GenericSignatureFormatError error) {
 			logSignatureFormatError(clazz);
 			interfaces = clazz.getInterfaces();
-		} catch(MalformedParameterizedTypeException error) {
+		} catch (MalformedParameterizedTypeException error) {
 			logSignatureFormatError(clazz);
 			interfaces = clazz.getInterfaces();
 		}
-		
+
 		for (Type type : interfaces) {
 			result.getSuperTypes().add(createTypeReference(type));
 		}
@@ -447,7 +443,7 @@ public class DeclaredTypeFactory implements ITypeFactory<Class<?>> {
 				result.getArguments().add(argument);
 			}
 			return result;
-		} else if (type instanceof Class<?> && ((Class<?>) type).isArray()){
+		} else if (type instanceof Class<?> && ((Class<?>) type).isArray()) {
 			Class<?> arrayType = (Class<?>) type;
 			Type componentType = arrayType.getComponentType();
 			return createArrayTypeReference(componentType);
@@ -543,7 +539,7 @@ public class DeclaredTypeFactory implements ITypeFactory<Class<?>> {
 		Type[] genericParameterTypes = null;
 		try {
 			genericParameterTypes = constructor.getGenericParameterTypes();
-		} catch(GenericSignatureFormatError error) {
+		} catch (GenericSignatureFormatError error) {
 			logSignatureFormatError(constructor.getDeclaringClass());
 			genericParameterTypes = constructor.getParameterTypes();
 		} catch (MalformedParameterizedTypeException error) {
@@ -573,16 +569,16 @@ public class DeclaredTypeFactory implements ITypeFactory<Class<?>> {
 			}
 		}
 		enhanceGenericDeclaration(result, constructor);
-		enhanceExecutable(result, constructor, constructor.getDeclaringClass().getSimpleName(),
-				genericParameterTypes, constructor.getParameterAnnotations(), offset);
+		enhanceExecutable(result, constructor, constructor.getDeclaringClass().getSimpleName(), genericParameterTypes,
+				constructor.getParameterAnnotations(), offset);
 		result.setVarArgs(constructor.isVarArgs());
 		Type[] exceptionTypes;
 		try {
 			exceptionTypes = constructor.getGenericExceptionTypes();
-		} catch(GenericSignatureFormatError error) {
+		} catch (GenericSignatureFormatError error) {
 			logSignatureFormatError(constructor.getDeclaringClass());
 			exceptionTypes = constructor.getExceptionTypes();
-		} catch(MalformedParameterizedTypeException error) {
+		} catch (MalformedParameterizedTypeException error) {
 			logSignatureFormatError(constructor.getDeclaringClass());
 			exceptionTypes = constructor.getExceptionTypes();
 		}
@@ -604,21 +600,21 @@ public class DeclaredTypeFactory implements ITypeFactory<Class<?>> {
 			result.setVisibility(JvmVisibility.DEFAULT);
 	}
 
-	protected <T extends Member & GenericDeclaration> void enhanceExecutable(JvmExecutable result, T member, String simpleName, Type[] parameterTypes,
-			Annotation[][] annotations, int offset) {
+	protected <T extends Member & GenericDeclaration> void enhanceExecutable(JvmExecutable result, T member,
+			String simpleName, Type[] parameterTypes, Annotation[][] annotations, int offset) {
 		StringBuilder fqName = new StringBuilder(48);
 		fqName.append(member.getDeclaringClass().getName());
 		fqName.append('.');
 		fqName.append(simpleName);
 		fqName.append('(');
-		for (int typeIdx = offset, annotationIdx = annotations.length - parameterTypes.length + offset; 
-				typeIdx < parameterTypes.length; 
-				typeIdx++, annotationIdx++) {
+		for (int typeIdx = offset, annotationIdx = annotations.length - parameterTypes.length + offset; typeIdx < parameterTypes.length; typeIdx++, annotationIdx++) {
 			if (typeIdx != offset)
 				fqName.append(',');
 			Type parameterType = parameterTypes[typeIdx];
 			uriHelper.computeTypeName(parameterType, fqName);
-			result.getParameters().add(createFormalParameter(parameterType, "arg" + (typeIdx - offset), result, member, annotations[annotationIdx]));
+			result.getParameters().add(
+					createFormalParameter(parameterType, "arg" + (typeIdx - offset), result, member,
+							annotations[annotationIdx]));
 		}
 		fqName.append(')');
 		result.internalSetIdentifier(fqName.toString());
@@ -637,10 +633,10 @@ public class DeclaredTypeFactory implements ITypeFactory<Class<?>> {
 		Type[] genericParameterTypes = null;
 		try {
 			genericParameterTypes = method.getGenericParameterTypes();
-		} catch(GenericSignatureFormatError error) {
+		} catch (GenericSignatureFormatError error) {
 			logSignatureFormatError(method.getDeclaringClass());
 			genericParameterTypes = method.getParameterTypes();
-		} catch(MalformedParameterizedTypeException error) {
+		} catch (MalformedParameterizedTypeException error) {
 			logSignatureFormatError(method.getDeclaringClass());
 			genericParameterTypes = method.getParameterTypes();
 		}
@@ -656,10 +652,10 @@ public class DeclaredTypeFactory implements ITypeFactory<Class<?>> {
 		Type returnType = null;
 		try {
 			returnType = method.getGenericReturnType();
-		} catch(GenericSignatureFormatError error) {
+		} catch (GenericSignatureFormatError error) {
 			logSignatureFormatError(method.getDeclaringClass());
 			returnType = method.getReturnType();
-		} catch(MalformedParameterizedTypeException error) {
+		} catch (MalformedParameterizedTypeException error) {
 			logSignatureFormatError(method.getDeclaringClass());
 			returnType = method.getReturnType();
 		}
@@ -667,10 +663,10 @@ public class DeclaredTypeFactory implements ITypeFactory<Class<?>> {
 		Type[] exceptionTypes;
 		try {
 			exceptionTypes = method.getGenericExceptionTypes();
-		} catch(GenericSignatureFormatError error) {
+		} catch (GenericSignatureFormatError error) {
 			logSignatureFormatError(method.getDeclaringClass());
 			exceptionTypes = method.getExceptionTypes();
-		} catch(MalformedParameterizedTypeException error) {
+		} catch (MalformedParameterizedTypeException error) {
 			logSignatureFormatError(method.getDeclaringClass());
 			exceptionTypes = method.getExceptionTypes();
 		}
@@ -682,12 +678,12 @@ public class DeclaredTypeFactory implements ITypeFactory<Class<?>> {
 	}
 
 	protected JvmFormalParameter createFormalParameter(Type parameterType, String paramName,
-			org.eclipse.xtext.common.types.JvmMember container,
-			GenericDeclaration member, Annotation[] annotations) {
+			org.eclipse.xtext.common.types.JvmMember container, GenericDeclaration member, Annotation[] annotations) {
 		JvmFormalParameter result = TypesFactory.eINSTANCE.createJvmFormalParameter();
 		result.setName(paramName);
 		if (isLocal(parameterType, member)) {
-			result.setParameterType(createLocalTypeReference(parameterType, (JvmTypeParameterDeclarator) container, member));
+			result.setParameterType(createLocalTypeReference(parameterType, (JvmTypeParameterDeclarator) container,
+					member));
 		} else {
 			result.setParameterType(createTypeReference(parameterType));
 		}
@@ -696,8 +692,9 @@ public class DeclaredTypeFactory implements ITypeFactory<Class<?>> {
 		}
 		return result;
 	}
-	
-	protected JvmTypeReference createLocalTypeReference(Type type, JvmTypeParameterDeclarator container, GenericDeclaration member) {
+
+	protected JvmTypeReference createLocalTypeReference(Type type, JvmTypeParameterDeclarator container,
+			GenericDeclaration member) {
 		if (type instanceof GenericArrayType) {
 			GenericArrayType arrayType = (GenericArrayType) type;
 			Type componentType = arrayType.getGenericComponentType();
@@ -711,8 +708,9 @@ public class DeclaredTypeFactory implements ITypeFactory<Class<?>> {
 		}
 		throw new IllegalArgumentException(type.toString());
 	}
-	
-	protected JvmTypeReference createLocalArrayTypeReference(Type componentType, JvmTypeParameterDeclarator container, GenericDeclaration member) {
+
+	protected JvmTypeReference createLocalArrayTypeReference(Type componentType, JvmTypeParameterDeclarator container,
+			GenericDeclaration member) {
 		JvmTypeReference componentTypeReference = createLocalTypeReference(componentType, container, member);
 		if (componentTypeReference != null) {
 			JvmGenericArrayTypeReference result = TypesFactory.eINSTANCE.createJvmGenericArrayTypeReference();
