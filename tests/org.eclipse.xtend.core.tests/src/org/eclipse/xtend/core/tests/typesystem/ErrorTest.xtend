@@ -811,6 +811,63 @@ class ErrorTest extends AbstractXtendTestCase {
 			}
 		'''.processWithoutException
 	}
+	
+	@Test
+	def void testErrorModel_53() throws Exception {
+		'''
+			class C extends D {
+				def m(int it) {
+					substring
+					it.substring
+				
+			class D {
+				protected extension String
+			}
+		'''.processWithoutException
+	}
+	
+	@Test
+	def void testErrorModel_54() throws Exception {
+		'''
+			import org.eclipse.xtext.xbase.lib.Extension
+			class C extends D {
+				def m(int it) {
+					substring
+					it.substring
+				
+			class D {
+				@Extension protected String string
+			}
+		'''.processWithoutException
+	}
+	
+	@Test
+	def void testErrorModel_55() throws Exception {
+		'''
+			class C extends D {
+				protected extension String local
+				def m(int it) {
+					substring
+				
+			class D {
+				protected extension String inherited
+			}
+		'''.processWithoutException
+	}
+	
+	@Test
+	def void testErrorModel_56() throws Exception {
+		'''
+			class C extends D {
+				protected extension CharSequence local
+				def m(int it) {
+					charAt
+				
+			class D {
+				protected extension String inherited
+			}
+		'''.processWithoutException
+	}
 		
 	def processWithoutException(CharSequence input) throws Exception {
 		val resource = resourceSet.createResource(URI::createURI("abcdefg.xtend"))
