@@ -8,6 +8,8 @@
 package org.eclipse.xtext.xbase.interpreter.impl;
 
 import static com.google.common.collect.Lists.*;
+import static com.google.common.collect.Maps.*;
+import static com.google.common.collect.Sets.*;
 import static org.eclipse.xtext.util.Strings.*;
 
 import java.lang.reflect.Array;
@@ -20,9 +22,11 @@ import java.lang.reflect.Modifier;
 import java.lang.reflect.Proxy;
 import java.lang.reflect.UndeclaredThrowableException;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import org.eclipse.xtext.common.types.JvmConstructor;
 import org.eclipse.xtext.common.types.JvmExecutable;
@@ -89,9 +93,6 @@ import org.eclipse.xtext.xbase.util.XExpressionHelper;
 
 import com.google.common.base.Function;
 import com.google.common.base.Joiner;
-import com.google.common.collect.ImmutableList;
-import com.google.common.collect.ImmutableMap;
-import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.inject.Inject;
@@ -333,37 +334,37 @@ public class XbaseInterpreter implements IExpressionInterpreter {
 
 	protected Object _doEvaluate(XListLiteral literal, IEvaluationContext context, CancelIndicator indicator) {
 		LightweightTypeReference type = typeResolver.resolveTypes(literal).getActualType(literal);
-		ImmutableList.Builder<Object> builder = ImmutableList.builder();
+		List<Object> list = newArrayList();
 		for(XExpression element: literal.getElements()) {
 			if (indicator.isCanceled())
 				throw new InterpreterCanceledException();
-			builder.add(internalEvaluate(element, context, indicator));
+			list.add(internalEvaluate(element, context, indicator));
 		}
 		if(type.isArray())
-			return Iterables.toArray(builder.build(), Object.class);
+			return Iterables.toArray(list, Object.class);
 		else
-			return builder.build();
+			return Collections.unmodifiableList(list);
 	}
 
 	protected Object _doEvaluate(XSetLiteral literal, IEvaluationContext context, CancelIndicator indicator) {
 		LightweightTypeReference type = typeResolver.resolveTypes(literal).getActualType(literal);
 		if(type.isType(Map.class)) {
-			ImmutableMap.Builder<Object, Object> builder = ImmutableMap.builder();
+			Map<Object, Object> map = newHashMap();
 			for(XExpression element: literal.getElements()) {
 				if (indicator.isCanceled())
 					throw new InterpreterCanceledException();
-				builder.put(internalEvaluate(((XBinaryOperation)element).getLeftOperand(), context, indicator),
+				map.put(internalEvaluate(((XBinaryOperation)element).getLeftOperand(), context, indicator),
 					internalEvaluate(((XBinaryOperation)element).getRightOperand(), context, indicator));
 			}
-			return builder.build();
+			return Collections.unmodifiableMap(map);
 		} else {
-			ImmutableSet.Builder<Object> builder = ImmutableSet.builder();
+			Set<Object> set = newHashSet();
 			for(XExpression element: literal.getElements()) {
 				if (indicator.isCanceled())
 					throw new InterpreterCanceledException();
-				builder.add(internalEvaluate(element, context, indicator));
+				set.add(internalEvaluate(element, context, indicator));
 			}
-			return builder.build();
+			return Collections.unmodifiableSet(set);
 		}
 	}
 

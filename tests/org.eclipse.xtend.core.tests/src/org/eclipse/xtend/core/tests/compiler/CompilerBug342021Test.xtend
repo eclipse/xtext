@@ -969,11 +969,10 @@ class CompilerBug342021Test extends AbstractXtendCompilerTest {
 			    }
 			}
 		''', '''
-			import com.google.common.collect.ImmutableSet;
-			import com.google.common.collect.ImmutableSet.Builder;
+			import com.google.common.collect.Sets;
 			import java.util.ArrayList;
+			import java.util.Collections;
 			import java.util.Iterator;
-			import java.util.Set;
 			import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 			import org.eclipse.xtext.xbase.lib.Conversions;
 			
@@ -1001,10 +1000,7 @@ class CompilerBug342021Test extends AbstractXtendCompilerTest {
 			        ArrayList<String> _newArrayList = CollectionLiterals.<String>newArrayList("");
 			        return ((Iterable<Object>)Conversions.doWrapArray(_newArrayList.toArray()));
 			      } else {
-			        Set<Object> _xsetliteral = null;
-			        Builder<Object> _builder = ImmutableSet.builder();
-			        _xsetliteral = _builder.build();
-			        return _xsetliteral;
+			        return Collections.<Object>unmodifiableSet(Sets.<Object>newHashSet());
 			      }
 			    }
 			    return _switchResult;

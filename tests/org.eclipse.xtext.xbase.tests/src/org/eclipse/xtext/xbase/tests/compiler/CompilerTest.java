@@ -609,11 +609,7 @@ public class CompilerTest extends AbstractOutputComparingCompilerTests {
 	
 	@Test public void testListLiteralAsList() throws Exception {
 		assertCompilesTo(
-				"java.util.List<String> _xlistliteral = null;\n" + 
-				"com.google.common.collect.ImmutableList.Builder<String> _builder = com.google.common.collect.ImmutableList.builder();\n" + 
-				"_builder.add(\"foo\");\n" + 
-				"_xlistliteral = _builder.build();\n" + 
-				"return _xlistliteral;",
+				"return java.util.Collections.<String>unmodifiableList(com.google.common.collect.Lists.<String>newArrayList(\"foo\"));\n",
 				"#['foo']");
 	}
 
