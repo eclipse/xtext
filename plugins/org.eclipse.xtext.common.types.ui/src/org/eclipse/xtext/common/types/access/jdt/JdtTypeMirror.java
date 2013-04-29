@@ -14,6 +14,7 @@ import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.Notifier;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.jdt.core.IType;
+import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.access.TypeResource;
 import org.eclipse.xtext.common.types.access.impl.AbstractClassMirror;
 import org.eclipse.xtext.common.types.access.impl.ITypeFactory;
@@ -33,7 +34,15 @@ public class JdtTypeMirror extends AbstractClassMirror implements Adapter {
 	}
 	
 	public void initialize(TypeResource typeResource) {
-		typeResource.getContents().add(typeFactory.createType(mirroredType));
+		JvmType type = typeFactory.createType(mirroredType);
+		initialize(typeResource, type);
+	}
+
+	/**
+	 * @since 2.4
+	 */
+	public void initialize(TypeResource typeResource, JvmType type) {
+		typeResource.getContents().add(type);
 		this.typeResource = typeResource;
 		typeResource.getResourceSet().eAdapters().add(this);
 	}

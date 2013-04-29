@@ -19,6 +19,7 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.jdt.core.BindingKey;
 import org.eclipse.jdt.core.IJavaElement;
+import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.jdt.core.IMethod;
 import org.eclipse.jdt.core.IType;
 import org.eclipse.jdt.core.JavaCore;
@@ -275,39 +276,78 @@ public class JdtBasedTypeFactory implements ITypeFactory<IType> {
 		IBinding binding = bindings[0];
 		if (binding instanceof ITypeBinding) {
 			createType.start();
-
 			ITypeBinding typeBinding = (ITypeBinding) binding;
 			
-			// Maintain a string builder we pass along during recursion 
-			// that contains the prefix for the fully qualified name of binding instance being traversed.
-			//
-			StringBuilder fqn = new StringBuilder(100);
-			IPackageBinding packageBinding = typeBinding.getPackage();
-			String packageName = null;
-			if (packageBinding != null && !packageBinding.isUnnamed()) {
-				packageName = packageBinding.getName();
-				fqn.append(packageBinding.getName());
-				fqn.append('.');
-			}
-
-			JvmDeclaredType result = createType(typeBinding, jdtType.getHandleIdentifier(), Lists.<String>newArrayList(), fqn);
-			result.setPackageName(packageName);
+			JvmDeclaredType result = createType(jdtType, typeBinding);
 
 			// Clear the cached information.
 			//
-			typeProxies.clear();
-			operationProxies.clear();
-			annotationProxies.clear();
-			qualifiedNames.clear();
-			enumerationLiteralProxies.clear();
-			stringTypeBinding = null;
-			classTypeBinding = null;
-
+			clearCache();
 			createType.stop();
 			return result;
 		} else
 			throw new IllegalStateException("Expected ITypeBinding for '" + jdtType.getFullyQualifiedName()
 					+ "', but got '" + binding.toString() + "'.");
+	}
+
+	private void clearCache() {
+		typeProxies.clear();
+		operationProxies.clear();
+		annotationProxies.clear();
+		qualifiedNames.clear();
+		enumerationLiteralProxies.clear();
+		stringTypeBinding = null;
+		classTypeBinding = null;
+	}
+
+	private JvmDeclaredType createType(IType type, ITypeBinding binding) {
+		// Maintain a string builder we pass along during recursion 
+		// that contains the prefix for the fully qualified name of binding instance being traversed.
+		//
+		StringBuilder fqn = new StringBuilder(100);
+		IPackageBinding packageBinding = binding.getPackage();
+		String packageName = null;
+		if (packageBinding != null) {
+			packageName = packageBinding.getName();
+			fqn.append(packageBinding.getName());
+			fqn.append('.');
+		}
+
+		JvmDeclaredType result = createType(binding, type.getHandleIdentifier(), Lists.<String>newArrayList(), fqn);
+		result.setPackageName(packageName);
+		return result;
+	}
+
+	/**
+	 * @since 2.4
+	 */
+	public List<JvmDeclaredType> createTypes(List<IType> jdtTypes, IJavaProject project) {
+//		if (jdtType.getDeclaringType() != null)
+//			throw new IllegalArgumentException("Cannot create type from non-toplevel-type: '"
+//					+ jdtType.getFullyQualifiedName() + "'.");
+		resolveBinding.start();
+
+		parser.setWorkingCopyOwner(workingCopyOwner);
+		parser.setProject(project);
+		parser.setIgnoreMethodBodies(true);
+
+		IBinding[] bindings = parser.createBindings(jdtTypes.toArray(new IJavaElement[jdtTypes.size()]), null);
+		resolveBinding.stop();
+		//		if (bindings[0] == null)
+		//			throw new IllegalStateException("Could not create binding for '" + jdtType.getFullyQualifiedName() + "'.");
+		List<JvmDeclaredType> result = Lists.newArrayList();
+		createType.start();
+		for(int i = 0; i < bindings.length; i++) {
+			IBinding binding = bindings[i];
+			if (binding instanceof ITypeBinding) {
+				result.add(createType(jdtTypes.get(i), (ITypeBinding) binding));
+			} else {
+				result.add(null);
+			}
+		}
+		clearCache();
+		createType.stop();
+		return result;
 	}
 
 	/**

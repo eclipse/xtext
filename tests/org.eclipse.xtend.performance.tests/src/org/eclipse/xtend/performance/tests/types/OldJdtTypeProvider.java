@@ -1,11 +1,11 @@
 /*******************************************************************************
- * Copyright (c) 2009-2013 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2009 itemis AG (http://www.itemis.eu) and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.common.types.access.jdt;
+package org.eclipse.xtend.performance.tests.types;
 
 import java.io.IOException;
 import java.util.List;
@@ -16,8 +16,6 @@ import org.eclipse.emf.common.util.WrappedException;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
-import org.eclipse.jdt.annotation.NonNull;
-import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.jdt.core.IType;
 import org.eclipse.jdt.core.JavaModelException;
@@ -30,6 +28,9 @@ import org.eclipse.xtext.common.types.access.TypeResource;
 import org.eclipse.xtext.common.types.access.impl.AbstractJvmTypeProvider;
 import org.eclipse.xtext.common.types.access.impl.IndexedJvmTypeAccess;
 import org.eclipse.xtext.common.types.access.impl.URIHelperConstants;
+import org.eclipse.xtext.common.types.access.jdt.IJdtTypeProvider;
+import org.eclipse.xtext.common.types.access.jdt.JdtTypeMirror;
+import org.eclipse.xtext.common.types.access.jdt.TypeURIHelper;
 import org.eclipse.xtext.util.Strings;
 
 import com.google.common.collect.Lists;
@@ -37,22 +38,18 @@ import com.google.common.collect.Maps;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
- * @noextend This class is not intended to be subclassed by clients.
- * @noinstantiate This class is not intended to be instantiated by clients.
  */
-public class JdtTypeProvider extends AbstractJvmTypeProvider implements IJdtTypeProvider {
-	
-	private static final String PRIMITIVES = URIHelperConstants.PRIMITIVES_URI.segment(0);
+public class OldJdtTypeProvider extends AbstractJvmTypeProvider implements IJdtTypeProvider {
 	
 	private final IJavaProject javaProject;
 
 	private final TypeURIHelper typeUriHelper;
 
-	private final JdtBasedTypeFactory typeFactory;
+	private final OldJdtBasedTypeFactory typeFactory;
 
 	private final WorkingCopyOwner workingCopyOwner;
 	
-	public JdtTypeProvider(IJavaProject javaProject, ResourceSet resourceSet) {
+	public OldJdtTypeProvider(IJavaProject javaProject, ResourceSet resourceSet) {
 		this(javaProject, resourceSet, null);
 	}
 	
@@ -60,7 +57,7 @@ public class JdtTypeProvider extends AbstractJvmTypeProvider implements IJdtType
 	 * @since 2.1
 	 * @noreference This constructor is not intended to be referenced by clients.
 	 */
-	public JdtTypeProvider(IJavaProject javaProject, ResourceSet resourceSet, IndexedJvmTypeAccess indexedJvmTypeAccess) {
+	public OldJdtTypeProvider(IJavaProject javaProject, ResourceSet resourceSet, IndexedJvmTypeAccess indexedJvmTypeAccess) {
 		this(javaProject, resourceSet, indexedJvmTypeAccess, null);
 	}
 	
@@ -68,7 +65,7 @@ public class JdtTypeProvider extends AbstractJvmTypeProvider implements IJdtType
 	 * @since 2.4
 	 * @noreference This constructor is not intended to be referenced by clients.
 	 */
-	public JdtTypeProvider(IJavaProject javaProject, ResourceSet resourceSet, IndexedJvmTypeAccess indexedJvmTypeAccess, WorkingCopyOwner workingCopyOwner) {
+	public OldJdtTypeProvider(IJavaProject javaProject, ResourceSet resourceSet, IndexedJvmTypeAccess indexedJvmTypeAccess, WorkingCopyOwner workingCopyOwner) {
 		super(resourceSet, indexedJvmTypeAccess);
 		if (javaProject == null)
 			throw new IllegalArgumentException("javaProject may not be null");
@@ -78,8 +75,8 @@ public class JdtTypeProvider extends AbstractJvmTypeProvider implements IJdtType
 		this.typeFactory = createTypeFactory();
 	}
 	
-	protected JdtBasedTypeFactory createTypeFactory() {
-		return new JdtBasedTypeFactory(typeUriHelper, workingCopyOwner);
+	protected OldJdtBasedTypeFactory createTypeFactory() {
+		return new OldJdtBasedTypeFactory(typeUriHelper, workingCopyOwner);
 	}
 
 	protected TypeURIHelper createTypeURIHelper() {
@@ -89,17 +86,15 @@ public class JdtTypeProvider extends AbstractJvmTypeProvider implements IJdtType
 	@Override
 	public JvmType findTypeByName(String name) {
 		String signature = getSignature(name);
-		if (signature == null)
-			return null;
 		URI resourceURI = typeUriHelper.createResourceURI(signature);
-		if (resourceURI.segment(0) == PRIMITIVES) {
+		String resourcePath = resourceURI.path();
+		if (resourcePath.startsWith(URIHelperConstants.PRIMITIVES)) {
 			return findPrimitiveType(signature, resourceURI);
 		} else {
 			return findObjectType(signature, resourceURI);
 		}
 	}
 	
-	@Nullable
 	private String getSignature(String name) {
 		if (Strings.isEmpty(name))
 			throw new IllegalArgumentException("null");
@@ -111,7 +106,7 @@ public class JdtTypeProvider extends AbstractJvmTypeProvider implements IJdtType
 		}
 		return signature;
 	}
-
+	
 	/**
 	 * @since 2.4
 	 */
@@ -127,28 +122,26 @@ public class JdtTypeProvider extends AbstractJvmTypeProvider implements IJdtType
 	private void findTypesByName(List<String> names, Map<String, JvmType> result) {
 		List<TypeResource> toBeLoadedResources = Lists.newArrayList();
 		List<String> signaturesAndNames = Lists.newArrayList();
-		for (String name : names) {
+		for(String name: names) {
 			String signature = getSignature(name);
-			if (signature != null) {
-				URI resourceURI = typeUriHelper.createResourceURI(signature);
-				String resourcePath = resourceURI.path();
-				if (resourcePath.startsWith(URIHelperConstants.PRIMITIVES)) {
-					result.put(name, findPrimitiveType(signature, resourceURI));
+			URI resourceURI = typeUriHelper.createResourceURI(signature);
+			String resourcePath = resourceURI.path();
+			if (resourcePath.startsWith(URIHelperConstants.PRIMITIVES)) {
+				result.put(name, findPrimitiveType(signature, resourceURI));
+			} else {
+				JvmType type = findLoadedOrDerivedObjectType(signature, resourceURI);
+				if (type != null) {
+					result.put(name, type);
 				} else {
-					JvmType type = findLoadedOrDerivedObjectType(signature, resourceURI);
-					if (type != null) {
-						result.put(name, type);
-					} else {
-						if (scheduleLoadObjectType(resourceURI, toBeLoadedResources)) {
-							signaturesAndNames.add(signature);
-							signaturesAndNames.add(name);
-						}
+					if (scheduleLoadObjectType(resourceURI, toBeLoadedResources)) {
+						signaturesAndNames.add(signature);
+						signaturesAndNames.add(name);
 					}
 				}
 			}
 		}
 		loadResources(toBeLoadedResources);
-		for (int i = 0; i < signaturesAndNames.size(); i += 2) {
+		for(int i = 0; i < signaturesAndNames.size(); i+=2) {
 			String signature = signaturesAndNames.get(i);
 			String name = signaturesAndNames.get(i + 1);
 			TypeResource resource = toBeLoadedResources.get(i / 2);
@@ -156,15 +149,15 @@ public class JdtTypeProvider extends AbstractJvmTypeProvider implements IJdtType
 			result.put(name, type);
 		}
 	}
-
+	
 	private void loadResources(List<TypeResource> resources) {
 		List<IType> types = Lists.newArrayList();
-		for (TypeResource resource : resources) {
+		for(TypeResource resource: resources) {
 			JdtTypeMirror mirror = (JdtTypeMirror) resource.getMirror();
 			types.add(mirror.getMirroredType());
 		}
 		List<JvmDeclaredType> producedTypes = typeFactory.createTypes(types, javaProject);
-		for (int i = 0; i < types.size(); i++) {
+		for(int i = 0; i < types.size(); i++) {
 			TypeResource resource = resources.get(i);
 			JvmDeclaredType producedType = producedTypes.get(i);
 			JdtTypeMirror mirror = (JdtTypeMirror) resource.getMirror();
@@ -172,8 +165,8 @@ public class JdtTypeProvider extends AbstractJvmTypeProvider implements IJdtType
 			resource.setLoaded(true);
 		}
 	}
-
-	private boolean scheduleLoadObjectType(@NonNull URI resourceURI, List<TypeResource> result) {
+	
+	private boolean scheduleLoadObjectType(URI resourceURI, List<TypeResource> result) {
 		try {
 			IType jdtType = findObjectTypeInJavaProject(resourceURI);
 			if (jdtType != null) {
@@ -183,14 +176,13 @@ public class JdtTypeProvider extends AbstractJvmTypeProvider implements IJdtType
 					return true;
 				}
 			}
-		} catch (JavaModelException e) {
+		} catch(JavaModelException e) {
 			// ignore
 		}
 		return false;
 	}
 
-	@Nullable
-	private JvmType findObjectType(@NonNull String signature, @NonNull URI resourceURI) {
+	private JvmType findObjectType(String signature, URI resourceURI) {
 		JvmType result = findLoadedOrDerivedObjectType(signature, resourceURI);
 		if (result != null) {
 			return result;
@@ -204,8 +196,7 @@ public class JdtTypeProvider extends AbstractJvmTypeProvider implements IJdtType
 		}
 	}
 
-	@Nullable
-	private JvmType findLoadedOrDerivedObjectType(@NonNull String signature, @NonNull URI resourceURI) {
+	private JvmType findLoadedOrDerivedObjectType(String signature, URI resourceURI) {
 		JvmType result = findObjectTypeInResourceSet(signature, resourceURI);
 		if (result != null) {
 			return result;
@@ -217,8 +208,7 @@ public class JdtTypeProvider extends AbstractJvmTypeProvider implements IJdtType
 		return null;
 	}
 
-	@Nullable
-	private JvmType findObjectTypeInJavaProject(@NonNull String signature, @NonNull URI resourceURI) throws JavaModelException {
+	private JvmType findObjectTypeInJavaProject(String signature, URI resourceURI) throws JavaModelException {
 		IType type = findObjectTypeInJavaProject(resourceURI);
 		if (type != null) {
 			try {
@@ -235,8 +225,7 @@ public class JdtTypeProvider extends AbstractJvmTypeProvider implements IJdtType
 		return null;
 	}
 
-	@Nullable
-	private JvmType createResourceAndFindType(@NonNull URI resourceURI, @NonNull IType type, @NonNull String signature) throws IOException {
+	private JvmType createResourceAndFindType(URI resourceURI, IType type, String signature) throws IOException {
 		TypeResource resource = createResource(resourceURI, type);
 		resource.load(null);
 		return findTypeBySignature(signature, resource);
@@ -253,7 +242,7 @@ public class JdtTypeProvider extends AbstractJvmTypeProvider implements IJdtType
 		return resource;
 	}
 	
-	private IType findObjectTypeInJavaProject(@NonNull URI resourceURI) throws JavaModelException {
+	private IType findObjectTypeInJavaProject(URI resourceURI) throws JavaModelException {
 		String topLevelType = resourceURI.segment(resourceURI.segmentCount() - 1);
 		int lastDot = topLevelType.lastIndexOf('.');
 		String packageName = null;
@@ -266,7 +255,7 @@ public class JdtTypeProvider extends AbstractJvmTypeProvider implements IJdtType
 		return type;
 	}
 
-	private JvmType findObjectTypeInIndex(@NonNull String signature, @NonNull URI resourceURI) {
+	private JvmType findObjectTypeInIndex(String signature, URI resourceURI) {
 		IndexedJvmTypeAccess indexedJvmTypeAccess = getIndexedJvmTypeAccess();
 		if (indexedJvmTypeAccess != null) {
 			URI proxyURI = resourceURI.appendFragment(typeUriHelper.getFragment(signature));
@@ -278,7 +267,7 @@ public class JdtTypeProvider extends AbstractJvmTypeProvider implements IJdtType
 		return null;
 	}
 
-	private JvmType findObjectTypeInResourceSet(@NonNull String signature, @NonNull URI resourceURI) {
+	private JvmType findObjectTypeInResourceSet(String signature, URI resourceURI) {
 		TypeResource resource = (TypeResource) getResourceForJavaURI(resourceURI, false);
 		if (resource != null) {
 			JvmType result = findTypeBySignature(signature, resource);
@@ -287,7 +276,7 @@ public class JdtTypeProvider extends AbstractJvmTypeProvider implements IJdtType
 		return null;
 	}
 
-	private JvmType findPrimitiveType(@NonNull String signature, @NonNull URI resourceURI) {
+	private JvmType findPrimitiveType(String signature, URI resourceURI) {
 		TypeResource resource = (TypeResource) getResourceForJavaURI(resourceURI, true);
 		JvmType result = findTypeBySignature(signature, resource);
 		return result;
@@ -296,7 +285,7 @@ public class JdtTypeProvider extends AbstractJvmTypeProvider implements IJdtType
 	/**
 	 * @since 2.3
 	 */
-	protected Resource getResourceForJavaURI(@NonNull URI resourceURI, boolean loadOnDemand) {
+	protected Resource getResourceForJavaURI(URI resourceURI, boolean loadOnDemand) {
 		return getResourceSet().getResource(resourceURI, loadOnDemand);
 	}
 	
@@ -327,8 +316,7 @@ public class JdtTypeProvider extends AbstractJvmTypeProvider implements IJdtType
 		}
 	}
 
-	@Nullable
-	private IMirror createMirror(@NonNull IType type) {
+	private IMirror createMirror(IType type) {
 		String elementName = type.getElementName();
 		if (!elementName.equals(type.getTypeQualifiedName())) {
 			// workaround for bug in jdt with binary type names that start with a $ dollar sign
@@ -347,7 +335,7 @@ public class JdtTypeProvider extends AbstractJvmTypeProvider implements IJdtType
 		return typeUriHelper;
 	}
 	
-	public JdtBasedTypeFactory getJdtBasedTypeFactory() {
+	public OldJdtBasedTypeFactory getJdtBasedTypeFactory() {
 		return typeFactory;
 	}
 
