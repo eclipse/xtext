@@ -46,12 +46,14 @@ import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
+import com.google.inject.Singleton;
 
 /**
  * @author Sven Efftinge
  * @author Sebastian Zarnekow - Implicit first argument
  */
 @Deprecated
+@Singleton
 public class XtendScopeProvider extends XbaseWithAnnotationsScopeProvider {
 
 	private static final int IMPORTED_STATIC_FEATURE_PRIORITY = 50;
