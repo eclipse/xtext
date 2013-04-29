@@ -7,10 +7,13 @@
  *******************************************************************************/
 package org.eclipse.xtext.naming;
 
+import java.io.IOException;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
+import org.eclipse.emf.ecore.resource.impl.BinaryResourceImpl.EObjectInputStream;
+import org.eclipse.emf.ecore.resource.impl.BinaryResourceImpl.EObjectOutputStream;
 import org.eclipse.xtext.util.Strings;
 
 import com.google.common.base.Function;
@@ -54,6 +57,32 @@ public class QualifiedName implements Comparable<QualifiedName> {
 			}
 		}
 		return new QualifiedName(segments.clone());
+	}
+	
+	/**
+	 * Internal low level factory method.
+	 * @noreference This method is not intended to be referenced by clients.
+	 * @since 2.4
+	 */
+	public static QualifiedName createFromStream(EObjectInputStream eObjectInputStream) throws IOException{
+		int segmentCount = eObjectInputStream.readCompressedInt();
+		String[] segments = new String[segmentCount];
+		for (int i = 0; i < segmentCount; ++i) {
+			segments[i] = eObjectInputStream.readSegmentedString();
+		}
+		return new QualifiedName(segments);
+	}
+	
+	/**
+	 * Internal low level serialization of QualifiedNames.
+	 * @since 2.4
+	 */
+	public void writeToStream(EObjectOutputStream eObjectOutputStream) throws IOException {
+		int segmentCount = getSegmentCount();
+		eObjectOutputStream.writeCompressedInt(segmentCount);
+		for (int i = 0; i < segmentCount; ++i) {
+			eObjectOutputStream.writeSegmentedString(getSegment(i));
+		}
 	}
 
 	/**

@@ -89,10 +89,18 @@ public class BuilderParticipant implements IXtextBuilderParticipant {
 		return generatorIdProvider;
 	}
 
+	/**
+	 * @nooverride This method is not intended to be re-implemented or extended by clients.
+	 * @noreference This method is not intended to be referenced by clients.
+	 */
 	public BuilderPreferenceAccess getBuilderPreferenceAccess() {
 		return builderPreferenceAccess;
 	}
 
+	/**
+	 * @nooverride This method is not intended to be re-implemented or extended by clients.
+	 * @noreference This method is not intended to be referenced by clients.
+	 */
 	@Inject
 	public void setBuilderPreferenceAccess(BuilderPreferenceAccess builderPreferenceAccess) {
 		this.builderPreferenceAccess = builderPreferenceAccess;
