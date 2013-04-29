@@ -8,6 +8,7 @@
 package org.eclipse.xtext.builder.builderState;
 
 import org.eclipse.emf.ecore.EDataType;
+import org.eclipse.xtext.builder.builderState.impl.BuilderStateFactoryImpl;
 import org.eclipse.xtext.naming.QualifiedName;
 import org.junit.Assert;
 import org.junit.Before;
@@ -41,6 +42,15 @@ public class BuilderStateFactoryTest extends Assert {
 	@Test public void testNullToQualifiedName() {
 		QualifiedName qn = (QualifiedName) factory.createFromString(dataType, null);
 		assertEquals(QualifiedName.EMPTY, qn);
+	}
+	
+	@Test public void testValueConversionURI() {
+		BuilderStateFactoryImpl implementation = (BuilderStateFactoryImpl) factory;
+		assertNotNull(implementation.create(BuilderStatePackage.Literals.EURI));
+	}
+	@Test public void testValueConversionQualifiedName() {
+		BuilderStateFactoryImpl implementation = (BuilderStateFactoryImpl) factory;
+		assertNotNull(implementation.create(BuilderStatePackage.Literals.QUALIFIED_NAME));
 	}
 	
 }
