@@ -1,6 +1,7 @@
 package org.eclipse.xtend.ide.tests.hover
 
 import com.google.inject.Inject
+import org.eclipse.xtend.core.xtend.XtendClass
 import org.eclipse.xtend.core.xtend.XtendFile
 import org.eclipse.xtend.core.xtend.XtendFunction
 import org.eclipse.xtend.ide.tests.AbstractXtendUITestCase
@@ -12,9 +13,6 @@ import org.eclipse.xtext.xbase.XAbstractFeatureCall
 import org.eclipse.xtext.xbase.XBlockExpression
 import org.junit.After
 import org.junit.Test
-
-import static org.junit.Assert.*
-import org.eclipse.xtend.core.xtend.XtendClass
 
 class XtendHoverDocumentationProviderTest extends AbstractXtendUITestCase {
 	

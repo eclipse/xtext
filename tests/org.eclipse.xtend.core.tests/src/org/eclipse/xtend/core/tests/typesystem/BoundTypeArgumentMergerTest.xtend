@@ -19,7 +19,6 @@ import org.eclipse.xtext.xbase.typesystem.util.VarianceInfo
 import org.junit.Test
 
 import static org.eclipse.xtext.xbase.typesystem.util.VarianceInfo.*
-import static org.junit.Assert.*
 
 /**
  * @author Sebastian Zarnekow

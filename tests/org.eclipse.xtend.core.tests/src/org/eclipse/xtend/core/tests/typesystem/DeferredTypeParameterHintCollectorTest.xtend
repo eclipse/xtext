@@ -19,6 +19,7 @@ import org.eclipse.xtext.util.Tuples
 import org.eclipse.xtext.xbase.junit.typesystem.PublicResolvedTypes
 import org.eclipse.xtext.xbase.lib.Pair
 import org.eclipse.xtext.xbase.typesystem.internal.DefaultReentrantTypeResolver
+import org.eclipse.xtext.xbase.typesystem.references.ITypeReferenceOwner
 import org.eclipse.xtext.xbase.typesystem.references.LightweightBoundTypeArgument
 import org.eclipse.xtext.xbase.typesystem.references.LightweightMergedBoundTypeArgument
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference
@@ -30,10 +31,8 @@ import org.eclipse.xtext.xbase.typesystem.util.Multimaps2
 import org.eclipse.xtext.xbase.typesystem.util.TypeParameterSubstitutor
 import org.eclipse.xtext.xbase.typesystem.util.VarianceInfo
 import org.junit.Test
-import org.eclipse.xtext.xbase.typesystem.references.ITypeReferenceOwner
 
 import static org.eclipse.xtext.xbase.typesystem.util.VarianceInfo.*
-import static org.junit.Assert.*
 
 /**
  * @author Sebastian Zarnekow

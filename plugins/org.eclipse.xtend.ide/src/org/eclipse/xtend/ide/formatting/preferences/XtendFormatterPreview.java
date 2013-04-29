@@ -37,7 +37,6 @@ import org.eclipse.xtext.ui.editor.model.XtextDocument;
 import org.eclipse.xtext.ui.editor.preferences.IPreferenceStoreAccess;
 import org.eclipse.xtext.ui.editor.utils.EditorUtils;
 import org.eclipse.xtext.xbase.formatting.IBasicFormatter;
-import org.eclipse.xtext.xbase.formatting.IFormattingPreferenceValuesProvider;
 
 import com.google.inject.Inject;
 
@@ -51,9 +50,6 @@ public class XtendFormatterPreview implements Observer {
 	@Inject
 	private IBasicFormatter formatter;
 	
-	@Inject
-	private IFormattingPreferenceValuesProvider preferenceValues;
-
 	private EmbeddedEditor editorHandle;
 	private String previewContent;
 	private EmbeddedEditorModelAccess modelAccess;
