@@ -7,13 +7,12 @@
  */
 package org.eclipse.xtend.ide.tests.validation;
 
-import com.google.common.collect.ImmutableSet;
-import com.google.common.collect.ImmutableSet.Builder;
+import com.google.common.collect.Sets;
 import com.google.inject.Inject;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
-import java.util.Set;
+import java.util.Collections;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.runtime.IPath;
@@ -249,12 +248,7 @@ public class AccessRestrictionInWorkspaceTest extends AbstractXtendUITestCase {
       InputStream _contents = manifestFile.getContents();
       MergeableManifest _mergeableManifest = new MergeableManifest(_contents);
       final MergeableManifest manifest = _mergeableManifest;
-      Set<String> _xsetliteral = null;
-      Builder<String> _builder = ImmutableSet.builder();
-      _builder.add("allowed");
-      _builder.add("discouraged;x-internal:=true");
-      _xsetliteral = _builder.build();
-      manifest.addExportedPackages(_xsetliteral);
+      manifest.addExportedPackages(Collections.<String>unmodifiableSet(Sets.<String>newHashSet("allowed", "discouraged;x-internal:=true")));
       ByteArrayOutputStream _byteArrayOutputStream = new ByteArrayOutputStream();
       final ByteArrayOutputStream out = _byteArrayOutputStream;
       manifest.write(out);

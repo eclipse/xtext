@@ -8,12 +8,11 @@
 package org.eclipse.xtend.core.tests.typesystem;
 
 import com.google.common.base.Objects;
-import com.google.common.collect.ImmutableList;
-import com.google.common.collect.ImmutableList.Builder;
+import com.google.common.collect.Lists;
 import com.google.inject.Inject;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Iterator;
-import java.util.List;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.xtend.core.jvmmodel.IXtendJvmAssociations;
 import org.eclipse.xtend.core.tests.typesystem.AbstractTestingTypeReferenceOwner;
@@ -140,12 +139,7 @@ public class BoundTypeArgumentMergerTest extends AbstractTestingTypeReferenceOwn
       final Iterator<LightweightBoundTypeArgument> iterator = mergable.iterator();
       LightweightBoundTypeArgument first = iterator.next();
       LightweightBoundTypeArgument second = iterator.next();
-      List<LightweightBoundTypeArgument> _xlistliteral = null;
-      Builder<LightweightBoundTypeArgument> _builder_1 = ImmutableList.builder();
-      _builder_1.add(first);
-      _builder_1.add(second);
-      _xlistliteral = _builder_1.build();
-      LightweightMergedBoundTypeArgument merged = this.merger.merge(_xlistliteral, this);
+      LightweightMergedBoundTypeArgument merged = this.merger.merge(Collections.<LightweightBoundTypeArgument>unmodifiableList(Lists.<LightweightBoundTypeArgument>newArrayList(first, second)), this);
       boolean _hasNext = iterator.hasNext();
       boolean _while = _hasNext;
       while (_while) {
@@ -158,12 +152,7 @@ public class BoundTypeArgumentMergerTest extends AbstractTestingTypeReferenceOwn
           first = _lightweightBoundTypeArgument;
           LightweightBoundTypeArgument _next = iterator.next();
           second = _next;
-          List<LightweightBoundTypeArgument> _xlistliteral_1 = null;
-          Builder<LightweightBoundTypeArgument> _builder_2 = ImmutableList.builder();
-          _builder_2.add(first);
-          _builder_2.add(second);
-          _xlistliteral_1 = _builder_2.build();
-          LightweightMergedBoundTypeArgument _merge = this.merger.merge(_xlistliteral_1, this);
+          LightweightMergedBoundTypeArgument _merge = this.merger.merge(Collections.<LightweightBoundTypeArgument>unmodifiableList(Lists.<LightweightBoundTypeArgument>newArrayList(first, second)), this);
           merged = _merge;
         }
         boolean _hasNext_1 = iterator.hasNext();

@@ -8,11 +8,11 @@
 package org.eclipse.xtend.core.tests.typesystem;
 
 import com.google.common.base.Objects;
-import com.google.common.collect.ImmutableList;
-import com.google.common.collect.ImmutableList.Builder;
 import com.google.common.collect.Iterables;
+import com.google.common.collect.Lists;
 import com.google.inject.Inject;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.xtend.core.jvmmodel.IXtendJvmAssociations;
@@ -156,13 +156,8 @@ public class CommonSuperTypeTest extends AbstractTestingTypeReferenceOwner {
               final Procedure1<LightweightTypeReference> _function = new Procedure1<LightweightTypeReference>() {
                   public void apply(final LightweightTypeReference it) {
                     String _key = superTypeAndParam.getKey();
-                    List<LightweightTypeReference> _xlistliteral = null;
-                    Builder<LightweightTypeReference> _builder = ImmutableList.builder();
-                    _builder.add(it);
-                    _builder.add(superType);
-                    _xlistliteral = _builder.build();
                     ITypeReferenceOwner _owner = superType.getOwner();
-                    LightweightTypeReference _commonSuperType = conformanceComputer.getCommonSuperType(_xlistliteral, _owner);
+                    LightweightTypeReference _commonSuperType = conformanceComputer.getCommonSuperType(Collections.<LightweightTypeReference>unmodifiableList(Lists.<LightweightTypeReference>newArrayList(it, superType)), _owner);
                     String _simpleName = _commonSuperType==null?(String)null:_commonSuperType.getSimpleName();
                     Assert.assertEquals(_key, _simpleName);
                   }

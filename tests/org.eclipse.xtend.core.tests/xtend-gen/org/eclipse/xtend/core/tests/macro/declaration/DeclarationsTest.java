@@ -1,11 +1,11 @@
 package org.eclipse.xtend.core.tests.macro.declaration;
 
-import com.google.common.collect.ImmutableList;
-import com.google.common.collect.ImmutableList.Builder;
 import com.google.common.collect.Iterables;
+import com.google.common.collect.Lists;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 import java.lang.reflect.AccessibleObject;
+import java.util.Collections;
 import java.util.List;
 import org.eclipse.xtend.core.macro.declaration.CompilationUnitImpl;
 import org.eclipse.xtend.core.macro.declaration.TypeLookupImpl;
@@ -671,19 +671,12 @@ public class DeclarationsTest extends AbstractXtendTestCase {
           Assert.assertTrue(_isEmpty_2);
           TypeReferenceProvider _typeReferenceProvider_1 = it.getTypeReferenceProvider();
           TypeReference _newTypeReference = _typeReferenceProvider_1.newTypeReference(interf);
-          List<TypeReference> _xlistliteral = null;
-          Builder<TypeReference> _builder = ImmutableList.builder();
-          _builder.add(_newTypeReference);
-          _xlistliteral = _builder.build();
-          baseClass.setImplementedInterfaces(_xlistliteral);
+          baseClass.setImplementedInterfaces(Collections.<TypeReference>unmodifiableList(Lists.<TypeReference>newArrayList(_newTypeReference)));
           List<TypeReference> _implementedInterfaces_3 = baseClass.getImplementedInterfaces();
           TypeReference _head = IterableExtensions.<TypeReference>head(_implementedInterfaces_3);
           String _simpleName_3 = _head.getSimpleName();
           Assert.assertEquals("Interface", _simpleName_3);
-          List<TypeReference> _xlistliteral_1 = null;
-          Builder<TypeReference> _builder_1 = ImmutableList.builder();
-          _xlistliteral_1 = _builder_1.build();
-          baseClass.setImplementedInterfaces(_xlistliteral_1);
+          baseClass.setImplementedInterfaces(Collections.<TypeReference>unmodifiableList(Lists.<TypeReference>newArrayList()));
           List<TypeReference> _implementedInterfaces_4 = baseClass.getImplementedInterfaces();
           boolean _isEmpty_3 = _implementedInterfaces_4.isEmpty();
           Assert.assertTrue(_isEmpty_3);

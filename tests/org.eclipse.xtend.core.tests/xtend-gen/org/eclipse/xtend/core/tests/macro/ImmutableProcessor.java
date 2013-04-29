@@ -1,10 +1,9 @@
 package org.eclipse.xtend.core.tests.macro;
 
 import com.google.common.base.Objects;
-import com.google.common.collect.ImmutableSet;
-import com.google.common.collect.ImmutableSet.Builder;
+import com.google.common.collect.Sets;
+import java.util.Collections;
 import java.util.List;
-import java.util.Set;
 import org.eclipse.xtend.lib.macro.TransformationContext;
 import org.eclipse.xtend.lib.macro.TransformationParticipant;
 import org.eclipse.xtend.lib.macro.declaration.CompilationStrategy;
@@ -117,19 +116,12 @@ public class ImmutableProcessor implements TransformationParticipant<MutableClas
                             _builder.append(" ? 1231 : 1237);");
                             _builder.newLineIfNotEmpty();
                           } else {
-                            Set<TypeReference> _xsetliteral = null;
                             TypeReference _primitiveInt = context.getPrimitiveInt();
                             TypeReference _primitiveChar = context.getPrimitiveChar();
                             TypeReference _primitiveByte = context.getPrimitiveByte();
                             TypeReference _primitiveShort = context.getPrimitiveShort();
-                            Builder<TypeReference> _builder_1 = ImmutableSet.builder();
-                            _builder_1.add(_primitiveInt);
-                            _builder_1.add(_primitiveChar);
-                            _builder_1.add(_primitiveByte);
-                            _builder_1.add(_primitiveShort);
-                            _xsetliteral = _builder_1.build();
                             TypeReference _type_1 = f.getType();
-                            boolean _contains = _xsetliteral.contains(_type_1);
+                            boolean _contains = Collections.<TypeReference>unmodifiableSet(Sets.<TypeReference>newHashSet(_primitiveInt, _primitiveChar, _primitiveByte, _primitiveShort)).contains(_type_1);
                             if (_contains) {
                               _builder.append("result = prime * result + ");
                               String _simpleName_1 = f.getSimpleName();
