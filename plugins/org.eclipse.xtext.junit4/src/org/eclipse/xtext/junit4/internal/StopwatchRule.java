@@ -61,7 +61,7 @@ public class StopwatchRule implements TestRule {
 				out.println("Test '" + description.getDisplayName() + "' :");
 				out.println(getStopwatchDataAsReadableString(data));
 			} else {
-				out.println("{");
+				out.println(",{");
 				out.println("  \"name\" : \""+description.getDisplayName()+"\",");
 				out.println("  \"date\" : \""+DATE+"\",");
 				out.println("  \"time\" : \""+timeSpend+"\",");
