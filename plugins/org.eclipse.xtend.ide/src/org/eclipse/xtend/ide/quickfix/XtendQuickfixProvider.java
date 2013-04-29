@@ -62,11 +62,13 @@ import org.eclipse.xtext.xbase.ui.quickfix.XbaseQuickfixProvider;
 
 import com.google.common.collect.Lists;
 import com.google.inject.Inject;
+import com.google.inject.Singleton;
 /**
  * @author Jan Koehnlein - Quickfixes for inconsistent indentation
  * @author Sebastian Zarnekow - Quickfixes for misspelled types and constructors
  * @author Holger Schill - Quickfixes for missing methods / fields / localVars
  */
+@Singleton
 public class XtendQuickfixProvider extends XbaseQuickfixProvider {
 
 	private static final Logger logger = Logger.getLogger(XtendQuickfixProvider.class);
