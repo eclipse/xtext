@@ -13,11 +13,13 @@ import org.eclipse.jdt.internal.core.DefaultWorkingCopyOwner;
 import org.eclipse.xtext.common.types.access.AbstractTypeProviderFactory;
 
 import com.google.inject.Inject;
+import com.google.inject.Singleton;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  * @author Sven Efftinge
  */
+@Singleton
 public class JdtTypeProviderFactory extends AbstractTypeProviderFactory {
 
 	@Inject
