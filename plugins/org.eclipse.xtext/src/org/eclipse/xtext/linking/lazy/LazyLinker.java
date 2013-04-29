@@ -44,8 +44,6 @@ import org.eclipse.xtext.util.EcoreGenericsUtil;
 import org.eclipse.xtext.util.OnChangeEvictingCache;
 import org.eclipse.xtext.util.SimpleCache;
 import org.eclipse.xtext.util.concurrent.IUnitOfWork;
-import org.eclipse.xtext.util.internal.Stopwatches;
-import org.eclipse.xtext.util.internal.Stopwatches.StoppedTask;
 
 import com.google.common.base.Function;
 import com.google.common.collect.ArrayListMultimap;
@@ -85,8 +83,6 @@ public class LazyLinker extends AbstractCleaningLinker {
 	@Inject
 	private OnChangeEvictingCache cache;
 
-	private final StoppedTask installProxiesTask = Stopwatches.forTask("LazyLinker.installProxies");
-
 	@Override
 	protected void doLinkModel(final EObject model, IDiagnosticConsumer consumer) {
 		final Multimap<EStructuralFeature.Setting, INode> settingsToLink = ArrayListMultimap.create();
@@ -107,12 +103,10 @@ public class LazyLinker extends AbstractCleaningLinker {
 
 	protected void installProxies(EObject obj, IDiagnosticProducer producer,
 			Multimap<EStructuralFeature.Setting, INode> settingsToLink) {
-		installProxiesTask.start();
 		ICompositeNode node = NodeModelUtils.getNode(obj);
 		if (node == null)
 			return;
 		installProxies(obj, producer, settingsToLink, node);
-		installProxiesTask.stop();
 	}
 
 	private void installProxies(EObject obj, IDiagnosticProducer producer,
