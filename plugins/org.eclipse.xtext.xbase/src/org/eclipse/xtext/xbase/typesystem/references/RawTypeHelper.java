@@ -71,6 +71,14 @@ public class RawTypeHelper implements IRawTypeHelper {
 				throw new IllegalStateException("Components may not be empty");
 			return collectRawTypes(components, resourceSet);
 		}
+		
+		@Override
+		protected List<JvmType> doVisitSynonymTypeReference(CompoundTypeReference reference, ResourceSet resourceSet) {
+			List<LightweightTypeReference> components = reference.getMultiTypeComponents();
+			if (components.isEmpty())
+				throw new IllegalStateException("Components may not be empty");
+			return components.get(components.size() - 1).accept(this, resourceSet);
+		}
 
 		protected List<JvmType> collectRawTypes(List<LightweightTypeReference> references, ResourceSet resourceSet) {
 			List<JvmType> result = Lists.newArrayList();
@@ -187,17 +195,25 @@ public class RawTypeHelper implements IRawTypeHelper {
 		}
 		
 		@Override
-		public LightweightTypeReference doVisitTypeReference(LightweightTypeReference reference, ResourceSet resourceSet) {
+		protected LightweightTypeReference doVisitTypeReference(LightweightTypeReference reference, ResourceSet resourceSet) {
 			return reference;
 		}
 		
 		@Override
-		public LightweightTypeReference doVisitCompoundTypeReference(CompoundTypeReference reference, ResourceSet resourceSet) {
+		protected LightweightTypeReference doVisitCompoundTypeReference(CompoundTypeReference reference, ResourceSet resourceSet) {
 			if (reference.isRawType())
 				return reference;
 			CompoundTypeReference result = new CompoundTypeReference(reference.getOwner(), reference.isSynonym());
 			enhanceCompoundReference(reference.getMultiTypeComponents(), result, resourceSet);
 			return result;
+		}
+		
+		@Override
+		protected LightweightTypeReference doVisitSynonymTypeReference(CompoundTypeReference reference, ResourceSet resourceSet) {
+			if (reference.isRawType())
+				return reference;
+			List<LightweightTypeReference> components = reference.getMultiTypeComponents();
+			return components.get(components.size() - 1).accept(this, resourceSet);
 		}
 
 		protected void enhanceCompoundReference(List<LightweightTypeReference> references,
@@ -211,7 +227,7 @@ public class RawTypeHelper implements IRawTypeHelper {
 		}
 		
 		@Override
-		public ArrayTypeReference doVisitArrayTypeReference(ArrayTypeReference reference, ResourceSet resourceSet) {
+		protected ArrayTypeReference doVisitArrayTypeReference(ArrayTypeReference reference, ResourceSet resourceSet) {
 			if (reference.isRawType())
 				return reference;
 			LightweightTypeReference componentType = reference.getComponentType();
@@ -220,7 +236,7 @@ public class RawTypeHelper implements IRawTypeHelper {
 		}
 		
 		@Override
-		public LightweightTypeReference doVisitParameterizedTypeReference(ParameterizedTypeReference reference, ResourceSet resourceSet) {
+		protected LightweightTypeReference doVisitParameterizedTypeReference(ParameterizedTypeReference reference, ResourceSet resourceSet) {
 			JvmType type = reference.getType();
 			if (reference.isRawType() && !(type instanceof JvmTypeParameter)) {
 				return reference;
@@ -232,7 +248,7 @@ public class RawTypeHelper implements IRawTypeHelper {
 		}
 		
 		@Override
-		public LightweightTypeReference doVisitWildcardTypeReference(WildcardTypeReference reference, ResourceSet resourceSet) {
+		protected LightweightTypeReference doVisitWildcardTypeReference(WildcardTypeReference reference, ResourceSet resourceSet) {
 			if (reference.isUnbounded()) {
 				return reference.getUpperBoundSubstitute();
 			}

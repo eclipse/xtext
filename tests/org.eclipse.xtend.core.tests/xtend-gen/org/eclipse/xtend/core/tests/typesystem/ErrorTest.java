@@ -1517,6 +1517,112 @@ public class ErrorTest extends AbstractXtendTestCase {
     this.processWithoutException(_builder);
   }
   
+  @Test
+  public void testErrorModel_53() throws Exception {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("class C extends D {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def m(int it) {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("substring");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("it.substring");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.newLine();
+    _builder.append("class D {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("protected extension String");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    this.processWithoutException(_builder);
+  }
+  
+  @Test
+  public void testErrorModel_54() throws Exception {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("import org.eclipse.xtext.xbase.lib.Extension");
+    _builder.newLine();
+    _builder.append("class C extends D {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def m(int it) {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("substring");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("it.substring");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.newLine();
+    _builder.append("class D {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("@Extension protected String string");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    this.processWithoutException(_builder);
+  }
+  
+  @Test
+  public void testErrorModel_55() throws Exception {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("class C extends D {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("protected extension String local");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def m(int it) {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("substring");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.newLine();
+    _builder.append("class D {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("protected extension String inherited");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    this.processWithoutException(_builder);
+  }
+  
+  @Test
+  public void testErrorModel_56() throws Exception {
+    StringConcatenation _builder = new StringConcatenation();
+    _builder.append("class C extends D {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("protected extension CharSequence local");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("def m(int it) {");
+    _builder.newLine();
+    _builder.append("\t\t");
+    _builder.append("charAt");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.newLine();
+    _builder.append("class D {");
+    _builder.newLine();
+    _builder.append("\t");
+    _builder.append("protected extension String inherited");
+    _builder.newLine();
+    _builder.append("}");
+    _builder.newLine();
+    this.processWithoutException(_builder);
+  }
+  
   public XtendFile processWithoutException(final CharSequence input) throws Exception {
     XtextResourceSet _resourceSet = this.getResourceSet();
     URI _createURI = URI.createURI("abcdefg.xtend");
