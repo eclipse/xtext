@@ -10,6 +10,7 @@ package org.eclipse.xtext.xbase.junit.evaluation;
 import static com.google.common.collect.Lists.newArrayList;
 import static com.google.common.collect.Sets.newHashSet;
 import static com.google.common.collect.Sets.newTreeSet;
+import static com.google.common.collect.Maps.newHashMap;
 import static java.util.Collections.emptyList;
 
 import java.io.IOException;
@@ -18,6 +19,7 @@ import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.math.MathContext;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.Stack;
 
 import org.eclipse.xtext.xbase.lib.Pair;
@@ -25,10 +27,10 @@ import org.junit.Assert;
 import org.junit.Ignore;
 import org.junit.Test;
 
-import com.google.common.collect.ImmutableMap;
-
 import testdata.ExceptionSubclass;
 import testdata.OuterClass;
+
+import com.google.common.collect.ImmutableMap;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -3200,6 +3202,18 @@ public abstract class AbstractXbaseEvaluationTest extends Assert {
 	}
 		
 	@Test 
+	// @see https://bugs.eclipse.org/bugs/show_bug.cgi?id=403357
+	public void testListLiteral_4() throws Exception {
+		assertEvaluatesTo(newArrayList((Object)null), "#[null]");
+	}
+		
+	@Test 
+	// @see https://bugs.eclipse.org/bugs/show_bug.cgi?id=403357
+	public void testListLiteral_5() throws Exception {
+		assertEvaluatesTo(newArrayList(null, ""), "#[null, '']");
+	}
+		
+	@Test 
 	public void testSetLiteral_0() throws Exception {
 		assertEvaluatesTo(newHashSet(), "#{}");
 	}
@@ -3219,9 +3233,21 @@ public abstract class AbstractXbaseEvaluationTest extends Assert {
 		assertEvaluatesToArray(new String[] {"Foo"}, "{ val String[] x = #{'Foo'}  x}");
 	}
 	
+	@Test 
+	// @see https://bugs.eclipse.org/bugs/show_bug.cgi?id=403357
+	public void testSetLiteral_4() throws Exception {
+		assertEvaluatesTo(newHashSet((Object) null), "#{null}");
+	}
+		
+	@Test 
+	// @see https://bugs.eclipse.org/bugs/show_bug.cgi?id=403357
+	public void testSetLiteral_5() throws Exception {
+		assertEvaluatesTo(newHashSet(null, ""), "#{null, ''}");
+	}
+		
 	@SuppressWarnings("unchecked")
 	@Test 
-	public void testSetLiteral_4() throws Exception {
+	public void testSetLiteral_6() throws Exception {
 		assertEvaluatesTo(newHashSet(Pair.of("foo", "bar")), "{ val java.util.Set x = #{'foo' -> 'bar'} x }");
 	}
 	
@@ -3238,6 +3264,30 @@ public abstract class AbstractXbaseEvaluationTest extends Assert {
 	@Test 
 	public void testMapLiteral_2() throws Exception {
 		assertEvaluatesTo(ImmutableMap.builder().put("foo", 1).put("bar", true).build(), "#{'foo'->1, 'bar'->true}");
+	}
+	
+	@Test 
+	// @see https://bugs.eclipse.org/bugs/show_bug.cgi?id=403357
+	public void testMapLiteral_3() throws Exception {
+		HashMap<String, Object> map = newHashMap();
+		map.put("foo", null);
+		assertEvaluatesTo(map, "#{'foo'->null}");
+	}
+	
+	@Test 
+	// @see https://bugs.eclipse.org/bugs/show_bug.cgi?id=403357
+	public void testMapLiteral_4() throws Exception {
+		HashMap<Object, String> map = newHashMap();
+		map.put(null, "foo");
+		assertEvaluatesTo(map, "#{null->'foo'}");
+	}
+	
+	@Test 
+	// @see https://bugs.eclipse.org/bugs/show_bug.cgi?id=403357
+	public void testMapLiteral_5() throws Exception {
+		HashMap<Object, Object> map = newHashMap();
+		map.put(null, null);
+		assertEvaluatesTo(map, "#{null->null}");
 	}
 	
 	protected void assertEvaluatesTo(Object object, String string) throws Exception {

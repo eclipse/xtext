@@ -10,6 +10,7 @@ package org.eclipse.xtext.xbase.compiler;
 import static com.google.common.collect.Sets.*;
 
 import java.util.Collection;
+import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -53,6 +54,7 @@ import org.eclipse.xtext.xbase.XForLoopExpression;
 import org.eclipse.xtext.xbase.XIfExpression;
 import org.eclipse.xtext.xbase.XInstanceOfExpression;
 import org.eclipse.xtext.xbase.XListLiteral;
+import org.eclipse.xtext.xbase.XNullLiteral;
 import org.eclipse.xtext.xbase.XReturnExpression;
 import org.eclipse.xtext.xbase.XSetLiteral;
 import org.eclipse.xtext.xbase.XSwitchExpression;
@@ -79,11 +81,10 @@ import org.eclipse.xtext.xbase.typesystem.util.StandardTypeParameterSubstitutor;
 
 import com.google.common.base.Objects;
 import com.google.common.base.Predicate;
-import com.google.common.collect.ImmutableList;
-import com.google.common.collect.ImmutableMap;
-import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
+import com.google.common.collect.Sets;
 import com.google.inject.Inject;
 
 /**
@@ -105,42 +106,39 @@ public class XbaseCompiler extends FeatureCallCompiler {
 	@Inject
 	private org.eclipse.xtext.xbase.typing.Closures closures;
 	
+	/**
+	 * @param isReferenced unused in this context but necessary for dispatch signature 
+	 */
 	protected void _toJavaStatement(XListLiteral literal, ITreeAppendable b, boolean isReferenced) {
 		for(XExpression element: literal.getElements()) 
 			internalToJavaStatement(element, b, true);
-		LightweightTypeReference literalType = batchTypeResolver.resolveTypes(literal).getActualType(literal);
-		if(literalType != null && literalType.isArray()) {
-			// skip
-		} else {
-			if(isReferenced)
-				declareSyntheticVariable(literal, b);
-			toCollectionBuilderJavaStatement(literal, ImmutableList.Builder.class, b, isReferenced);
-		}
 	}
 
-	protected void _toJavaStatement(XSetLiteral literal, ITreeAppendable b, boolean isReferenced) {
-		if(isReferenced)
-			declareSyntheticVariable(literal, b);
+	protected void _toJavaStatement(final XSetLiteral literal, ITreeAppendable b, boolean isReferenced) {
 		LightweightTypeReference literalType = batchTypeResolver.resolveTypes(literal).getActualType(literal);
 		if(literalType != null && literalType.isType(Map.class)) {
+			if(isReferenced)
+				declareSyntheticVariable(literal, b);
 			for(XExpression element: literal.getElements()) {
 				internalToJavaStatement(((XBinaryOperation) element).getLeftOperand(), b, true);
 				internalToJavaStatement(((XBinaryOperation) element).getRightOperand(), b, true);
 			}
-			String builderVar = b.declareSyntheticVariable(getCollectionLiteralBuilderKey(literal), "_builder");
 			LightweightTypeReference keyType = literalType.getTypeArguments().get(0);
 			LightweightTypeReference valueType = literalType.getTypeArguments().get(1);
-			JvmType builderRawType = getTypeReferences().findDeclaredType(ImmutableMap.Builder.class, literal);
-			ParameterizedTypeReference builderType = new ParameterizedTypeReference(keyType.getOwner(), builderRawType);
-			builderType.addTypeArgument(keyType);
-			builderType.addTypeArgument(valueType);
+			JvmType mapsClass = getTypeReferences().findDeclaredType(Maps.class, literal);
+			
+			final String tempMapName = b.declareSyntheticVariable(Tuples.create(literal,  "_tempMap"), "_tempMap");
 			b.newLine();
-			getTypeReferenceSerializer().serialize(builderType.toTypeReference(), literal, b);
-			b.append(" ").append(builderVar).append(" = ");
-			JvmDeclaredType collectionType = ((JvmDeclaredType) builderType.getType()).getDeclaringType();
-			b.append(collectionType).append(".builder();").newLine();
+			serialize(literalType.toTypeReference(), literal, b);
+			b.append(" ").append(tempMapName).append(" = ");
+			b.append(mapsClass).append(".<");
+			getTypeReferenceSerializer().serialize(keyType.toTypeReference(), literal, b);
+			b.append(", ");
+			getTypeReferenceSerializer().serialize(valueType.toTypeReference(), literal, b);
+			b.append(">newHashMap()").append(";").newLine();
+
 			for(XExpression element: literal.getElements())  {
-				b.append(builderVar).append(".put(");
+				b.append(tempMapName).append(".put(");
 				internalToJavaExpression(((XBinaryOperation) element).getLeftOperand(), b);
 				b.append(", ");
 				internalToJavaExpression(((XBinaryOperation) element).getRightOperand(), b);
@@ -148,34 +146,16 @@ public class XbaseCompiler extends FeatureCallCompiler {
 			}
 			if(isReferenced) 
 				b.append(getVarName(literal, b)).append(" = ");
-			b.append(builderVar).append(".build();");
+			JvmType collectionsClass = getTypeReferences().findDeclaredType(Collections.class, literal);
+			b.append(collectionsClass).append(".<");
+			getTypeReferenceSerializer().serialize(keyType.toTypeReference(), literal, b);
+			b.append(", ");
+			getTypeReferenceSerializer().serialize(valueType.toTypeReference(), literal, b);
+			b.append(">unmodifiableMap(").append(tempMapName).append(");");
 		} else {
 			for(XExpression element: literal.getElements()) 
 				internalToJavaStatement(element, b, true);
-			toCollectionBuilderJavaStatement(literal, ImmutableSet.Builder.class, b, isReferenced);
 		}
-	}
-
-	protected void toCollectionBuilderJavaStatement(XCollectionLiteral literal, Class<?> builderClass, ITreeAppendable b,
-			boolean isReferenced) {
-		LightweightTypeReference elementType = getCollectionElementType(literal);
-		String builderVar = b.declareSyntheticVariable(getCollectionLiteralBuilderKey(literal), "_builder");
-		JvmType builderRawType = getTypeReferences().findDeclaredType(builderClass, literal);
-		ParameterizedTypeReference builderType = new ParameterizedTypeReference(elementType.getOwner(), builderRawType);
-		builderType.addTypeArgument(elementType);
-		b.newLine();
-		getTypeReferenceSerializer().serialize(builderType.toTypeReference(), literal, b);
-		b.append(" ").append(builderVar).append(" = ");
-		JvmDeclaredType collectionType = ((JvmDeclaredType) builderType.getType()).getDeclaringType();
-		b.append(collectionType).append(".builder();").newLine();
-		for(XExpression element: literal.getElements())  {
-			b.append(builderVar).append(".add(");
-			internalToJavaExpression(element, b);
-			b.append(");").newLine();
-		}
-		if(isReferenced) 
-			b.append(getVarName(literal, b)).append(" = ");
-		b.append(builderVar).append(".build();");
 	}
 	
 	protected LightweightTypeReference getCollectionElementType(XCollectionLiteral literal) {
@@ -193,18 +173,6 @@ public class XbaseCompiler extends FeatureCallCompiler {
 		return new ParameterizedTypeReference(type.getOwner(), getTypeReferences().findDeclaredType(Object.class, literal));
 	}
 
-	protected Object getCollectionLiteralBuilderKey(XCollectionLiteral literal) {
-		return Tuples.create(literal, "_builder");
-	}
-	
-	protected Object getCollectionLiteralLoopKey(XCollectionLiteral literal) {
-		return Tuples.create(literal, "_element");
-	}
-	
-	protected void _toJavaExpression(XCollectionLiteral expr, ITreeAppendable b) {
-		b.trace(expr, false).append(getVarName(expr, b));
-	}
-	
 	protected void _toJavaExpression(XListLiteral literal, ITreeAppendable b) {
 		LightweightTypeReference literalType = batchTypeResolver.resolveTypes(literal).getActualType(literal);
 		if (literalType != null && literalType.isArray()) {
@@ -234,10 +202,48 @@ public class XbaseCompiler extends FeatureCallCompiler {
 				b.append(" }");
 			}
 			return;
+		} else {
+			appendImmutableCollectionExpression(literal, b, "unmodifiableList", Lists.class, "newArrayList");
+		}
+	}
+
+	protected void _toJavaExpression(XSetLiteral literal, ITreeAppendable b) {
+		LightweightTypeReference literalType = batchTypeResolver.resolveTypes(literal).getActualType(literal);
+		if(literalType != null && !literalType.isType(Map.class)) 
+			appendImmutableCollectionExpression(literal, b, "unmodifiableSet", Sets.class, "newHashSet");
+		else
+			b.trace(literal, false).append(getVarName(literal, b));
+	}
+	
+	protected void appendImmutableCollectionExpression(XCollectionLiteral literal,
+			ITreeAppendable b, String collectionsMethod, Class<?> guavaHelper, String guavaHelperMethod) {
+		LightweightTypeReference collectionElementType = getCollectionElementType(literal);
+		if(collectionElementType != null) {
+			JvmType collectionsClass = getTypeReferences().findDeclaredType(Collections.class, literal);
+			JvmType guavaClass = getTypeReferences().findDeclaredType(guavaHelper, literal);
+			b.append(collectionsClass).append(".<");
+			getTypeReferenceSerializer().serialize(collectionElementType.toTypeReference(), literal, b);
+			b.append(">").append(collectionsMethod).append("(").append(guavaClass).append(".<");
+			getTypeReferenceSerializer().serialize(collectionElementType.toTypeReference(), literal, b);
+			b.append(">").append(guavaHelperMethod).append("(");
+			boolean isFirst = true;
+			for(XExpression element: literal.getElements())  {
+				if(!isFirst)
+					b.append(", ");
+				isFirst = false;
+				if(element instanceof XNullLiteral) {
+					b.append("(");
+					getTypeReferenceSerializer().serialize(collectionElementType.toTypeReference(), literal, b);
+					b.append(")");
+				}
+				internalToJavaExpression(element, b);
+			}
+			b.append("))");
+			return;
 		}
 		b.trace(literal, false).append(getVarName(literal, b));
 	}
-
+	
 	protected boolean canUseArrayInitializer(XListLiteral literal, ITreeAppendable appendable) {
 		if (literal.eContainingFeature() == XbasePackage.Literals.XVARIABLE_DECLARATION__RIGHT) {
 			return canUseArrayInitializerImpl(literal, appendable);
@@ -1219,9 +1225,11 @@ public class XbaseCompiler extends FeatureCallCompiler {
 	@Override
 	protected boolean isVariableDeclarationRequired(XExpression expr, ITreeAppendable b) {
 		if (expr instanceof XListLiteral) {
-			LightweightTypeReference type = batchTypeResolver.resolveTypes(expr).getActualType(expr);
-			if (type != null && type.isArray())
-				return false;
+			return false;
+		}
+		if (expr instanceof XSetLiteral) {
+			LightweightTypeReference literalType = batchTypeResolver.resolveTypes(expr).getActualType(expr);
+			return literalType != null && literalType.isType(Map.class);
 		}
 		if (expr instanceof XCastedExpression) {
 			return false;
