@@ -25,10 +25,12 @@ import org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotationsPackage;
 import org.eclipse.xtext.xbase.scoping.batch.XbaseBatchScopeProvider;
 
 import com.google.common.base.Function;
+import com.google.inject.Singleton;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
+@Singleton
 public class XbaseWithAnnotationsBatchScopeProvider extends XbaseBatchScopeProvider {
 
 	@Override
