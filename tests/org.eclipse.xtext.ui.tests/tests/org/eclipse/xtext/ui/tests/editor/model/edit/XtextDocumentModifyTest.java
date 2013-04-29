@@ -82,6 +82,59 @@ public class XtextDocumentModifyTest extends AbstractXtextTests {
 		assertEquals(grammar.replace("bars", "foobars"), document.get());
 	}
 	
+	// see https://bugs.eclipse.org/bugs/show_bug.cgi?id=406811
+	@Test public void testSemanticModification() throws Exception {
+		String grammar = "grammar foo.Foo\n" 
+				+ "generate foo \"http://foo.net/foo\"\n"
+				+ "Foo: 'foo';"; 
+		IXtextDocument document = createDocument(grammar);
+		document.modify(new IUnitOfWork.Void<XtextResource>() {
+			@Override
+			public void process(XtextResource state) throws Exception {
+				Grammar grammar = (Grammar) state.getContents().get(0);
+				grammar.setName("foo.Bar");
+			}
+		});
+		assertEquals(grammar.replace("foo.Foo", "foo.Bar"), document.get());
+	}
+	
+	// see https://bugs.eclipse.org/bugs/show_bug.cgi?id=406811
+	@Test public void testTextualModification() throws Exception {
+		final String grammar = "grammar foo.Foo\n" 
+				+ "generate foo \"http://foo.net/foo\"\n"
+				+ "Foo: 'foo';"; 
+		final IXtextDocument document = createDocument(grammar);
+		document.modify(new IUnitOfWork.Void<XtextResource>() {
+			@Override
+			public void process(XtextResource state) throws Exception {
+				document.replace(grammar.indexOf("Foo"), 3, "Bar");
+			}
+		});
+		assertEquals(grammar.replace("foo.Foo", "foo.Bar"), document.get());
+	}
+	
+	// see https://bugs.eclipse.org/bugs/show_bug.cgi?id=406811
+	@Test public void testSemanticAndTextualModification() throws Exception {
+		final String grammar = "grammar foo.Foo\n" 
+				+ "generate foo \"http://foo.net/foo\"\n"
+				+ "Foo: 'foo';"; 
+		final IXtextDocument document = createDocument(grammar);
+		try {
+			document.modify(new IUnitOfWork.Void<XtextResource>() {
+				@Override
+				public void process(XtextResource state) throws Exception {
+					document.replace(grammar.indexOf("Foo"), 3, "Bar");
+					Grammar grammar = (Grammar) state.getContents().get(0);
+					grammar.getRules().get(0).setName("Bar");
+				}
+			});
+			fail("Expected exception");
+		} catch(RuntimeException e) {
+			assertTrue(e.getMessage().contains("Cannot modify document textually and semantically"));
+			assertEquals(grammar, document.get());
+		}
+	}
+	
 	private IXtextDocument createDocument(String model) throws Exception {
 		resource = getResource(new StringInputStream(model));
 		DocumentTokenSource tokenSource = new DocumentTokenSource();

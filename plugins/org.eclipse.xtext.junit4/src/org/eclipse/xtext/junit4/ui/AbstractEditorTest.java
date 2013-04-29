@@ -23,7 +23,6 @@ import org.eclipse.xtext.ui.editor.utils.EditorUtils;
 /**
  * @author Peter Friese - Initial contribution and API
  */
-@SuppressWarnings("restriction")
 public abstract class AbstractEditorTest extends AbstractWorkbenchTest {
 
 	static final long STEP_DELAY = 0;
