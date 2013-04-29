@@ -94,8 +94,8 @@ class CompilerBugTest extends AbstractXtendCompilerTest {
 			    }
 			}
 		''', '''
-			import com.google.common.collect.ImmutableList;
-			import com.google.common.collect.ImmutableList.Builder;
+			import com.google.common.collect.Lists;
+			import java.util.Collections;
 			import java.util.List;
 			import org.eclipse.xtext.xbase.lib.Functions.Function1;
 			import org.eclipse.xtext.xbase.lib.ListExtensions;
@@ -103,19 +103,13 @@ class CompilerBugTest extends AbstractXtendCompilerTest {
 			@SuppressWarnings("all")
 			public class C {
 			  public C() {
-			    List<Integer> _xlistliteral = null;
-			    Builder<Integer> _builder = ImmutableList.builder();
-			    _builder.add(1);
-			    _builder.add(2);
-			    _builder.add(3);
-			    _xlistliteral = _builder.build();
 			    final Function1<Integer,String> _function = new Function1<Integer,String>() {
 			        public String apply(final Integer it) {
 			          String _string = it.toString();
 			          return _string;
 			        }
 			      };
-			    List<String> _map = ListExtensions.<Integer, String>map(_xlistliteral, _function);
+			    List<String> _map = ListExtensions.<Integer, String>map(Collections.<Integer>unmodifiableList(Lists.<Integer>newArrayList(1, 2, 3)), _function);
 			    _map.toString();
 			  }
 			}
@@ -1287,33 +1281,15 @@ class CompilerBugTest extends AbstractXtendCompilerTest {
 				val f = #[#["a"], #{} ] 
 			}
 		''', '''
-			import com.google.common.collect.ImmutableList;
-			import com.google.common.collect.ImmutableList.Builder;
-			import com.google.common.collect.ImmutableSet;
+			import com.google.common.collect.Lists;
+			import com.google.common.collect.Sets;
 			import java.util.Collection;
+			import java.util.Collections;
 			import java.util.List;
-			import java.util.Set;
-			import org.eclipse.xtext.xbase.lib.Functions.Function0;
 			
 			@SuppressWarnings("all")
 			public class C {
-			  private final List<? extends Collection<String>> f = new Function0<List<? extends Collection<String>>>() {
-			    public List<? extends Collection<String>> apply() {
-			      List<String> _xlistliteral = null;
-			      Builder<String> _builder = ImmutableList.builder();
-			      _builder.add("a");
-			      _xlistliteral = _builder.build();
-			      Set<String> _xsetliteral = null;
-			      com.google.common.collect.ImmutableSet.Builder<String> _builder_1 = ImmutableSet.builder();
-			      _xsetliteral = _builder_1.build();
-			      List<? extends Collection<String>> _xlistliteral_1 = null;
-			      Builder<Collection<String>> _builder_2 = ImmutableList.builder();
-			      _builder_2.add(_xlistliteral);
-			      _builder_2.add(_xsetliteral);
-			      _xlistliteral_1 = _builder_2.build();
-			      return _xlistliteral_1;
-			    }
-			  }.apply();
+			  private final List<? extends Collection<String>> f = Collections.<Collection<String>>unmodifiableList(Lists.<Collection<String>>newArrayList(Collections.<String>unmodifiableList(Lists.<String>newArrayList("a")), Collections.<String>unmodifiableSet(Sets.<String>newHashSet())));
 			}
 		''')
 	}
