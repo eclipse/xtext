@@ -17,10 +17,13 @@ import org.eclipse.xtext.scoping.impl.ImportNormalizer;
 import org.eclipse.xtext.util.Strings;
 import org.eclipse.xtext.xbase.scoping.XImportSectionNamespaceScopeProvider;
 
+import com.google.inject.Singleton;
+
 /**
  * @author Jan Koehnlein - Initial contribution and API
  * @author Sebastian Zarnekow - Improved support for nested types in connection with imports
  */
+@Singleton
 public class XtendImportedNamespaceScopeProvider extends XImportSectionNamespaceScopeProvider {
 
 	public static final QualifiedName XTEND_LIB = QualifiedName.create("org","eclipse","xtend","lib");
