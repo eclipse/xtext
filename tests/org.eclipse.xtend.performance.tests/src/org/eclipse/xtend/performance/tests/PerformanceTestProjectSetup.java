@@ -49,6 +49,10 @@ public class PerformanceTestProjectSetup {
 	public static IJavaProject testProject;
 	
 	public static void setUp() throws Exception {
+		setUp(true);
+	}
+	
+	public static void setUp(boolean copyFiles) throws Exception {
 		testProject = createJavaProject("performance.test.project",
 				new String[] {
 						JavaCore.NATURE_ID,
@@ -58,20 +62,21 @@ public class PerformanceTestProjectSetup {
 		new ToggleXtextNatureAction().toggleNature(testProject.getProject());
 		IFolder sourceFolder = JavaProjectSetupUtil.addSourceFolder(testProject, "src");
 		JavaProjectSetupUtil.addSourceFolder(testProject, "xtend-gen");
-
-		List<String> filesToCopy = readResource("/files.list");
-		
-		for(String fileToCopy: filesToCopy) {
-			IPath filePath = new Path(fileToCopy);
-			IFolder packageFolder = sourceFolder.getFolder(filePath.removeLastSegments(1));
-			if (!packageFolder.exists())
-				createFolderRecursively(packageFolder);
-			List<String> content = readResource(fileToCopy);
-			String contentAsString = Strings.concat("\n", content);
-			String fileName = filePath.lastSegment();
-			createFile(fileName.substring(0, fileName.length() - ".txt".length()), packageFolder, contentAsString);
+		if (copyFiles) {
+			List<String> filesToCopy = readResource("/files.list");
+			
+			for(String fileToCopy: filesToCopy) {
+				IPath filePath = new Path(fileToCopy);
+				IFolder packageFolder = sourceFolder.getFolder(filePath.removeLastSegments(1));
+				if (!packageFolder.exists())
+					createFolderRecursively(packageFolder);
+				List<String> content = readResource(fileToCopy);
+				String contentAsString = Strings.concat("\n", content);
+				String fileName = filePath.lastSegment();
+				createFile(fileName.substring(0, fileName.length() - ".txt".length()), packageFolder, contentAsString);
+			}
+			waitForAutoBuild();
 		}
-		waitForAutoBuild();
 	}
 
 	protected static void createFolderRecursively(IFolder folder) throws CoreException {
@@ -230,7 +235,9 @@ public class PerformanceTestProjectSetup {
 		mainContent.append("  org.apache.log4j,\n");
 		mainContent.append("  org.eclipse.xtend.lib,\n");
 		mainContent.append("  org.eclipse.xtext,\n");
-		mainContent.append("  org.eclipse.xtext.xbase\n");
+		mainContent.append("  org.eclipse.xtext.xbase,\n");
+		mainContent.append("  org.eclipse.xtext.xbase.lib,\n");
+		mainContent.append("  org.eclipse.xtend.performance.tests\n");
 
 		final IFolder metaInf = project.getFolder("META-INF");
 		metaInf.create(false, true, null);

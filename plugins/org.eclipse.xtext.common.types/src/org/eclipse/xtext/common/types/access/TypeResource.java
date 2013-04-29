@@ -11,6 +11,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Map;
 
+import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.InternalEObject;
@@ -84,6 +85,11 @@ public class TypeResource extends ResourceImpl implements ISynchronizable<TypeRe
 		if (!isLoaded) {
 			load(null, options);
 		}
+	}
+	
+	@Override
+	public Notification setLoaded(boolean isLoaded) {
+		return super.setLoaded(isLoaded);
 	}
 	
 	@Override
