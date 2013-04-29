@@ -1,8 +1,8 @@
 package org.eclipse.xtend.core.tests.macro;
 
 import com.google.common.base.Objects;
-import com.google.common.collect.ImmutableList;
-import com.google.common.collect.ImmutableList.Builder;
+import com.google.common.collect.Lists;
+import java.util.Collections;
 import java.util.List;
 import org.eclipse.xtend.core.macro.declaration.CompilationUnitImpl;
 import org.eclipse.xtend.core.macro.declaration.TypeLookupImpl;
@@ -582,34 +582,16 @@ public abstract class AbstractReusableActiveAnnotationTests {
           TypeReference _newTypeReference = _typeReferenceProvider.newTypeReference("myannotation.MyAnnotation");
           Type _type = _newTypeReference.getType();
           final MutableAnnotationReference annotation = clazz.findAnnotation(_type);
-          List<String> _xlistliteral = null;
-          Builder<String> _builder = ImmutableList.builder();
-          _builder.add("foo");
-          _builder.add("bar");
-          _builder.add("baz");
-          _xlistliteral = _builder.build();
           Object _value = annotation.getValue("value");
-          Assert.assertEquals(_xlistliteral, _value);
+          Assert.assertEquals(Collections.<String>unmodifiableList(Lists.<String>newArrayList("foo", "bar", "baz")), _value);
           Object _value_1 = annotation.getValue("singleValue");
           Assert.assertEquals("foo", _value_1);
-          List<Boolean> _xlistliteral_1 = null;
-          Builder<Boolean> _builder_1 = ImmutableList.builder();
-          _builder_1.add(Boolean.valueOf(true));
-          _builder_1.add(Boolean.valueOf(false));
-          _builder_1.add(Boolean.valueOf(true));
-          _xlistliteral_1 = _builder_1.build();
           Object _value_2 = annotation.getValue("booleans");
-          Assert.assertEquals(_xlistliteral_1, _value_2);
+          Assert.assertEquals(Collections.<Boolean>unmodifiableList(Lists.<Boolean>newArrayList(Boolean.valueOf(true), Boolean.valueOf(false), Boolean.valueOf(true))), _value_2);
           Object _value_3 = annotation.getValue("singleBoolean");
           Assert.assertEquals(Boolean.valueOf(true), _value_3);
-          List<Integer> _xlistliteral_2 = null;
-          Builder<Integer> _builder_2 = ImmutableList.builder();
-          _builder_2.add(Integer.valueOf(1));
-          _builder_2.add(Integer.valueOf(2));
-          _builder_2.add(Integer.valueOf(3));
-          _xlistliteral_2 = _builder_2.build();
           Object _value_4 = annotation.getValue("numbers");
-          Assert.assertEquals(_xlistliteral_2, _value_4);
+          Assert.assertEquals(Collections.<Integer>unmodifiableList(Lists.<Integer>newArrayList(Integer.valueOf(1), Integer.valueOf(2), Integer.valueOf(3))), _value_4);
           Object _value_5 = annotation.getValue("singleNumber");
           Assert.assertEquals(Integer.valueOf(1), _value_5);
         }
