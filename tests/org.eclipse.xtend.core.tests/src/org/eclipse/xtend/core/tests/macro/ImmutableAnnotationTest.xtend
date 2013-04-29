@@ -6,10 +6,8 @@ import org.eclipse.xtend.lib.macro.TransformationContext
 import org.eclipse.xtend.lib.macro.TransformationParticipant
 import org.eclipse.xtend.lib.macro.declaration.MutableClassDeclaration
 import org.eclipse.xtend.lib.macro.declaration.MutableMethodDeclaration
-import org.junit.Test
-
-import static org.junit.Assert.*
 import org.junit.Ignore
+import org.junit.Test
 
 class ImmutableAnnotationTest extends AbstractActiveAnnotationTest {
 	

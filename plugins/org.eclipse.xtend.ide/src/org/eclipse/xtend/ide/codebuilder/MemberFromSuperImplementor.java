@@ -60,9 +60,6 @@ public class MemberFromSuperImplementor {
 	private IXtendJvmAssociations associations;
 	
 	@Inject
-	private InsertionOffsets insertionOffsets;
-	
-	@Inject
 	private AnnotationLookup annotationLookup;
 	
 

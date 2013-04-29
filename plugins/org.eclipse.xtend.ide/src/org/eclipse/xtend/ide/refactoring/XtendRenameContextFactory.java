@@ -18,7 +18,6 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.jdt.core.IJavaElement;
 import org.eclipse.jface.text.ITextSelection;
-import org.eclipse.xtend.core.jvmmodel.IXtendJvmAssociations;
 import org.eclipse.xtend.core.xtend.XtendConstructor;
 import org.eclipse.xtend.core.xtend.XtendFunction;
 import org.eclipse.xtext.EcoreUtil2;
@@ -36,9 +35,6 @@ import com.google.inject.Inject;
  * @author Jan Koehnlein - Initial contribution and API
  */
 public class XtendRenameContextFactory extends CombinedJvmJdtRenameContextFactory {
-
-	@Inject
-	private IXtendJvmAssociations associations;
 
 	@Inject
 	private DispatchRenameSupport dispatchRenameSupport;

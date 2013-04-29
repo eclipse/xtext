@@ -15,7 +15,6 @@ import org.eclipse.xtend.core.xtend.XtendTypeDeclaration;
 import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.refactoring.IChangeRedirector;
-import org.eclipse.xtext.ui.refactoring.IRenameRefactoringProvider;
 import org.eclipse.xtext.ui.refactoring.impl.AbstractProcessorBasedRenameParticipant;
 import org.eclipse.xtext.ui.refactoring.ui.IRenameContextFactory;
 import org.eclipse.xtext.ui.refactoring.ui.IRenameElementContext;
@@ -24,9 +23,6 @@ import org.eclipse.xtext.ui.resource.IResourceSetProvider;
 import com.google.inject.Inject;
 
 public class XtendFileRenameParticipant extends AbstractProcessorBasedRenameParticipant {
-
-	@Inject
-	private IRenameRefactoringProvider renameRefactoringProvider;
 
 	@Inject
 	private IResourceSetProvider resourceSetProvider;

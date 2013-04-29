@@ -12,8 +12,6 @@ import org.eclipse.xtext.xbase.compiler.StringBuilderBasedAppendable
 
 import static org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil.*
 
-import static extension org.junit.Assert.*
-
 class AbstractBuilderTest extends AbstractXtendUITestCase {
 	
 	protected static val DEFAULT_BODY = 'throw new UnsupportedOperationException("TODO: auto-generated method stub")'

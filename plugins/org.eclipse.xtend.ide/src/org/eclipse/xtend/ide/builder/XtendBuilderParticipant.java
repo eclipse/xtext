@@ -36,11 +36,8 @@ import org.eclipse.xtext.builder.EclipseResourceFileSystemAccess2;
 import org.eclipse.xtext.generator.OutputConfiguration;
 import org.eclipse.xtext.resource.IResourceDescription.Delta;
 import org.eclipse.xtext.ui.resource.IStorage2UriMapper;
-import org.eclipse.xtext.ui.util.IssueUtil;
-import org.eclipse.xtext.util.OnChangeEvictingCache;
 import org.eclipse.xtext.util.Pair;
 import org.eclipse.xtext.xbase.compiler.ElementIssueProvider;
-import org.eclipse.xtext.xbase.typesystem.IBatchTypeResolver;
 
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
@@ -55,15 +52,6 @@ public class XtendBuilderParticipant extends BuilderParticipant {
 
 	@Inject
 	private IStorage2UriMapper mapper;
-
-	@Inject
-	private IssueUtil issueUtil;
-	
-	@Inject
-	private IBatchTypeResolver batchTypeResolver;
-
-	@Inject
-	private OnChangeEvictingCache cache;
 
 	@Inject
 	private ElementIssueProvider.Factory elementIssueProviderFactory;

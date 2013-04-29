@@ -11,7 +11,6 @@ import java.util.List;
 import java.util.Set;
 
 import org.eclipse.emf.ecore.util.EcoreUtil;
-import org.eclipse.xtend.core.dispatch.DispatchingSupport;
 import org.eclipse.xtend.core.jvmmodel.IXtendJvmAssociations;
 import org.eclipse.xtend.core.xtend.XtendFunction;
 import org.eclipse.xtext.EcoreUtil2;
@@ -27,7 +26,6 @@ import org.eclipse.xtext.common.types.util.TypeConformanceComputer;
 import org.eclipse.xtext.common.types.util.TypeReferences;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.typing.ITypeProvider;
-import org.eclipse.xtext.xbase.typing.JvmOnlyTypeConformanceComputer;
 
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
@@ -53,13 +51,7 @@ public class ReturnTypeProvider {
 	private TypeConformanceComputer typeConformanceComputer;
 	
 	@Inject
-	private JvmOnlyTypeConformanceComputer jvmTypeConformanceComputer;
-	
-	@Inject
 	private TypeReferences typeReferences;
-	
-	@Inject
-	private DispatchingSupport dispatchingSupport;
 	
 	@Inject
 	private XtendOverridesService overridesService;

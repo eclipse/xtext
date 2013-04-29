@@ -38,7 +38,6 @@ import org.eclipse.xtext.ui.editor.model.IXtextDocument;
 import org.eclipse.xtext.ui.editor.model.edit.IModification;
 import org.eclipse.xtext.ui.editor.model.edit.IModificationContext;
 import org.eclipse.xtext.ui.editor.quickfix.IssueResolutionAcceptor;
-import org.eclipse.xtext.ui.refactoring.impl.ProjectUtil;
 import org.eclipse.xtext.validation.Issue;
 import org.eclipse.xtext.xbase.XConstructorCall;
 import org.eclipse.xtext.xbase.XbasePackage;
@@ -55,9 +54,6 @@ import com.google.inject.Provider;
  */
 @NonNullByDefault
 public class CreateXtendTypeQuickfixes extends CreateJavaTypeQuickfixes {
-
-	@Inject 
-	private ProjectUtil projectUtil;
 
 	@Inject
 	private Provider<NewXtendClassWizard> newXtendClassWizardProvider;

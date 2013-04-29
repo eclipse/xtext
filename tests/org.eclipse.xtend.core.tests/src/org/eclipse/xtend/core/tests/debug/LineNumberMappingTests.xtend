@@ -10,8 +10,6 @@ import org.eclipse.xtext.generator.trace.LineMappingProvider
 import org.eclipse.xtext.generator.trace.LineMappingProvider$LineMapping
 import org.junit.Test
 
-import static org.junit.Assert.*
-
 class LineNumberMappingTests extends AbstractXtendTestCase {
 	
 	@Inject IGenerator generator

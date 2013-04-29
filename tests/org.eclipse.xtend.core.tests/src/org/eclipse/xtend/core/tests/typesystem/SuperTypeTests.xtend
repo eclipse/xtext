@@ -12,15 +12,13 @@ import java.io.Serializable
 import java.util.Collection
 import java.util.Collections
 import java.util.List
+import java.util.Set
 import org.eclipse.xtend.core.jvmmodel.IXtendJvmAssociations
 import org.eclipse.xtext.common.types.util.SuperTypeCollector
 import org.eclipse.xtext.xbase.lib.Pair
 import org.eclipse.xtext.xbase.typesystem.references.LightweightTypeReference
 import org.junit.Ignore
 import org.junit.Test
-
-import static org.junit.Assert.*
-import java.util.Set
 
 /**
  * @author Sebastian Zarnekow

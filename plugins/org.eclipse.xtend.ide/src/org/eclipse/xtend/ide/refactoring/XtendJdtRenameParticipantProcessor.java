@@ -16,11 +16,8 @@ import org.eclipse.xtend.core.xtend.XtendFunction;
 import org.eclipse.xtend.core.xtend.XtendPackage;
 import org.eclipse.xtext.common.types.ui.refactoring.participant.JdtRenameParticipant;
 import org.eclipse.xtext.ui.refactoring.impl.RenameElementProcessor;
-import org.eclipse.xtext.xbase.jvmmodel.IJvmModelAssociations;
 import org.eclipse.xtext.xbase.ui.jvmmodel.refactoring.JvmModelJdtRenameParticipantContext;
 import org.eclipse.xtext.xbase.ui.jvmmodel.refactoring.jdt.JdtRenameRefactoringParticipantProcessor;
-
-import com.google.inject.Inject;
 
 /**
  * Allow refactoring of dispatch methods, even though they have more than one associated JVM element.
@@ -28,9 +25,6 @@ import com.google.inject.Inject;
  * @author Jan Koehnlein - Initial contribution and API
  */
 public class XtendJdtRenameParticipantProcessor extends JdtRenameRefactoringParticipantProcessor {
-
-	@Inject
-	private IJvmModelAssociations associations;
 
 	@Override
 	protected RefactoringStatus preCheckInitialConditions(IProgressMonitor pm) throws CoreException {

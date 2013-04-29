@@ -13,7 +13,6 @@ import org.eclipse.xtext.common.types.xtext.ui.ITypesProposalProvider;
 import org.eclipse.xtext.scoping.IScopeProvider;
 import org.eclipse.xtext.ui.editor.XtextSourceViewer;
 import org.eclipse.xtext.ui.editor.contentassist.ContentAssistContext;
-import org.eclipse.xtext.ui.editor.contentassist.IContextInformationProvider;
 import org.eclipse.xtext.ui.editor.model.IXtextDocument;
 
 import com.google.inject.Inject;
@@ -34,9 +33,6 @@ public class XtendJavaDocContentAssistProcessor extends AbstractJavaDocContentAs
 
 	@Inject
 	private XtendJavaDocProposalFactory proposalFactory;
-
-	@Inject(optional = true)
-	private IContextInformationProvider contextInformationProvider;
 
 	public ICompletionProposal[] computeCompletionProposals(ITextViewer viewer, int offset) {
 		if(viewer instanceof XtextSourceViewer){
