@@ -27,7 +27,7 @@ import static extension org.eclipse.ui.texteditor.MarkerUtilities.*
  */
 class PerformanceTest extends AbstractXtendUITestCase {
 	
-	@Rule public static val rule = new StopwatchRule(true)
+	@Rule public val rule = new StopwatchRule(true)
 	
 	@BeforeClass
 	def static void createTestProject() {
