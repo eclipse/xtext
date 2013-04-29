@@ -32,6 +32,7 @@ import org.eclipse.xtext.resource.IDefaultResourceDescriptionStrategy;
 import org.eclipse.xtext.resource.ILocationInFileProvider;
 import org.eclipse.xtext.scoping.IScopeProvider;
 import org.eclipse.xtext.scoping.impl.AbstractDeclarativeScopeProvider;
+import org.eclipse.xtext.validation.CompositeEValidator;
 import org.eclipse.xtext.validation.ConfigurableIssueCodesProvider;
 import org.eclipse.xtext.xbase.XbaseFactory;
 import org.eclipse.xtext.xbase.compiler.XbaseCompiler;
@@ -155,4 +156,10 @@ public class XtendRuntimeModule extends org.eclipse.xtend.core.AbstractXtendRunt
 		return XtendJvmModelInferrer.class;
 	}
 	
+	@Override
+	public void configure(Binder binder) {
+		super.configure(binder);
+		binder.bind(boolean.class).annotatedWith(
+				Names.named(CompositeEValidator.USE_EOBJECT_VALIDATOR)).toInstance(false);
+	}
 }
