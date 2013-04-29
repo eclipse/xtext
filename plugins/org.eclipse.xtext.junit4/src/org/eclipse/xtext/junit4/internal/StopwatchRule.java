@@ -11,6 +11,8 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.PrintStream;
+import java.util.Date;
+import java.util.Iterator;
 import java.util.Map;
 import java.util.Map.Entry;
 
@@ -37,9 +39,12 @@ public class StopwatchRule implements TestRule {
 	public StopwatchRule(boolean watchAll) {
 		this.watchAll = watchAll;
 	}
+	
+	public static Date DATE = new Date(); 
 
-	public void printStopwatchData(Description description, Map<String, Stopwatches.NumbersForTask> data) {
+	public void printStopwatchData(Description description, Map<String, Stopwatches.NumbersForTask> data, long timeSpend) {
 		String property = System.getProperty("stopwatch.file");
+		String isJson = System.getProperty("stopwatch.json");
 		PrintStream out = System.out;
 		FileOutputStream outputStream = null;
 		if (property != null) {
@@ -51,9 +56,29 @@ public class StopwatchRule implements TestRule {
 			}
 		}
 		try {
-			out.println("-------------------------------------------------------------------------------------------------------------------------\n");
-			out.println("Test '" + description.getDisplayName() + "' :");
-			out.println(getStopwatchDataAsReadableString(data));
+			if (isJson == null) {
+				out.println("-------------------------------------------------------------------------------------------------------------------------\n");
+				out.println("Test '" + description.getDisplayName() + "' :");
+				out.println(getStopwatchDataAsReadableString(data));
+			} else {
+				out.println("{");
+				out.println("  \"name\" : \""+description.getDisplayName()+"\",");
+				out.println("  \"date\" : \""+DATE+"\",");
+				out.println("  \"time\" : \""+timeSpend+"\",");
+				out.println("  \"tasks\" : [");
+				Iterator<Entry<String, NumbersForTask>> iter = data.entrySet().iterator();
+				while (iter.hasNext()) {
+					Entry<String, NumbersForTask> task = iter.next(); 
+					out.print("    {\"name\" : \""+task.getKey()+"\",\"time\" : "+task.getValue().getMilliseconds()+",\"measurements\" : "+task.getValue().getNumberOfMeasurements());
+					if (iter.hasNext()) {
+						out.println("},");
+					} else {
+						out.println("}");
+					}
+				}
+				out.println("  ]");
+				out.println("}");
+			}
 		} finally {
 //			out.flush();
 			if (outputStream != null)
@@ -82,12 +107,15 @@ public class StopwatchRule implements TestRule {
 		return new Statement() {
 			@Override
 			public void evaluate() throws Throwable {
+				long timeSpend = -1;
 				try {
 					Stopwatches.setEnabled(true);
 					Stopwatches.resetAll();
+					long before = System.currentTimeMillis();
 					base.evaluate();
+					timeSpend = System.currentTimeMillis()-before;
 				} finally {
-					printStopwatchData(description, Stopwatches.allNumbers());
+					printStopwatchData(description, Stopwatches.allNumbers(), timeSpend);
 					Stopwatches.resetAll();
 					Stopwatches.setEnabled(false);
 				}
