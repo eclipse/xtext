@@ -1,0 +1,31890 @@
+package org.eclipse.xtend.caliper.tests.parser.edited;
+
+import org.eclipse.xtext.*;
+import org.eclipse.xtext.parser.*;
+import org.eclipse.xtext.parser.impl.*;
+import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.xtext.parser.antlr.XtextTokenStream;
+import org.eclipse.xtext.parser.antlr.XtextTokenStream.HiddenTokens;
+import org.eclipse.xtext.parser.antlr.AntlrDatatypeRuleToken;
+import org.eclipse.xtext.xbase.services.XtypeGrammarAccess.XImportDeclarationElements;
+import org.eclipse.xtext.xtype.XtypePackage;
+import org.eclipse.xtend.caliper.tests.parser.edited.AbstractInternalAntlrParser;
+import org.eclipse.xtend.core.services.XtendGrammarAccess;
+import org.eclipse.xtend.core.services.XtendGrammarAccess.MemberElements;
+import org.eclipse.xtend.core.xtend.XtendPackage;
+
+import org.antlr.runtime.*;
+
+import java.util.Stack;
+import java.util.List;
+import java.util.ArrayList;
+import java.util.Map;
+import java.util.HashMap;
+
+import static org.eclipse.xtend.core.xtend.XtendPackage.*;
+import static org.eclipse.xtext.xbase.XbasePackage.*;
+import static org.eclipse.xtext.xtype.XtypePackage.*;
+import static org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotationsPackage.*;
+import static org.eclipse.xtext.common.types.TypesPackage.*;
+
+@SuppressWarnings("all")
+public class NewInternalXtendParser extends AbstractInternalAntlrParser {
+	public static final String[] tokenNames = new String[] { "<invalid>", "<EOR>", "<DOWN>", "<UP>", "RULE_ID",
+			"RULE_STRING", "RULE_RICH_TEXT", "RULE_RICH_TEXT_START", "RULE_RICH_TEXT_INBETWEEN",
+			"RULE_COMMENT_RICH_TEXT_INBETWEEN", "RULE_RICH_TEXT_END", "RULE_COMMENT_RICH_TEXT_END", "RULE_HEX",
+			"RULE_INT", "RULE_DECIMAL", "RULE_IN_RICH_STRING", "RULE_ML_COMMENT", "RULE_SL_COMMENT", "RULE_WS",
+			"RULE_ANY_OTHER", "'package'", "';'", "'class'", "'<'", "','", "'>'", "'extends'", "'implements'", "'{'",
+			"'}'", "'interface'", "'enum'", "'annotation'", "'='", "'extension'", "'('", "')'", "'throws'", "'new'",
+			"'public'", "'private'", "'protected'", "'abstract'", "'static'", "'dispatch'", "'final'", "'val'",
+			"'var'", "'def'", "'override'", "'create'", "':'", "'import'", "'...'", "'FOR'", "'BEFORE'", "'SEPARATOR'",
+			"'AFTER'", "'ENDFOR'", "'IF'", "'ELSE'", "'ENDIF'", "'ELSEIF'", "'@'", "'+'", "'+='", "'-='", "'||'",
+			"'&&'", "'=='", "'!='", "'==='", "'!=='", "'instanceof'", "'>='", "'<='", "'->'", "'..<'", "'..'", "'=>'",
+			"'<>'", "'?:'", "'<=>'", "'-'", "'*'", "'**'", "'/'", "'%'", "'!'", "'as'", "'.'", "'?.'", "'*.'", "'#'",
+			"'['", "']'", "'|'", "'if'", "'else'", "'switch'", "'default'", "'case'", "'for'", "'while'", "'do'",
+			"'super'", "'::'", "'false'", "'true'", "'null'", "'typeof'", "'throw'", "'return'", "'try'", "'finally'",
+			"'catch'", "'?'", "'&'" };
+	public static final int RULE_COMMENT_RICH_TEXT_INBETWEEN = 9;
+	public static final int RULE_ID = 4;
+	public static final int T__29 = 29;
+	public static final int T__28 = 28;
+	public static final int T__27 = 27;
+	public static final int T__26 = 26;
+	public static final int T__25 = 25;
+	public static final int T__24 = 24;
+	public static final int T__23 = 23;
+	public static final int T__22 = 22;
+	public static final int RULE_ANY_OTHER = 19;
+	public static final int T__21 = 21;
+	public static final int T__20 = 20;
+	public static final int RULE_COMMENT_RICH_TEXT_END = 11;
+	public static final int EOF = -1;
+	public static final int T__93 = 93;
+	public static final int T__94 = 94;
+	public static final int T__91 = 91;
+	public static final int RULE_HEX = 12;
+	public static final int T__92 = 92;
+	public static final int T__90 = 90;
+	public static final int RULE_RICH_TEXT_END = 10;
+	public static final int RULE_DECIMAL = 14;
+	public static final int T__99 = 99;
+	public static final int T__98 = 98;
+	public static final int T__97 = 97;
+	public static final int T__96 = 96;
+	public static final int T__95 = 95;
+	public static final int T__80 = 80;
+	public static final int T__81 = 81;
+	public static final int T__82 = 82;
+	public static final int T__83 = 83;
+	public static final int T__85 = 85;
+	public static final int T__84 = 84;
+	public static final int T__87 = 87;
+	public static final int RULE_IN_RICH_STRING = 15;
+	public static final int T__86 = 86;
+	public static final int T__89 = 89;
+	public static final int T__88 = 88;
+	public static final int RULE_ML_COMMENT = 16;
+	public static final int RULE_STRING = 5;
+	public static final int T__71 = 71;
+	public static final int T__72 = 72;
+	public static final int T__70 = 70;
+	public static final int T__76 = 76;
+	public static final int T__75 = 75;
+	public static final int T__74 = 74;
+	public static final int T__73 = 73;
+	public static final int RULE_RICH_TEXT_START = 7;
+	public static final int T__79 = 79;
+	public static final int T__78 = 78;
+	public static final int T__77 = 77;
+	public static final int T__68 = 68;
+	public static final int T__69 = 69;
+	public static final int T__66 = 66;
+	public static final int T__67 = 67;
+	public static final int T__64 = 64;
+	public static final int T__65 = 65;
+	public static final int T__62 = 62;
+	public static final int RULE_RICH_TEXT = 6;
+	public static final int T__63 = 63;
+	public static final int T__116 = 116;
+	public static final int T__117 = 117;
+	public static final int T__114 = 114;
+	public static final int T__115 = 115;
+	public static final int T__61 = 61;
+	public static final int T__60 = 60;
+	public static final int T__55 = 55;
+	public static final int T__56 = 56;
+	public static final int T__57 = 57;
+	public static final int T__58 = 58;
+	public static final int T__51 = 51;
+	public static final int T__52 = 52;
+	public static final int T__53 = 53;
+	public static final int T__54 = 54;
+	public static final int T__107 = 107;
+	public static final int T__108 = 108;
+	public static final int T__109 = 109;
+	public static final int T__59 = 59;
+	public static final int T__103 = 103;
+	public static final int T__104 = 104;
+	public static final int T__105 = 105;
+	public static final int T__106 = 106;
+	public static final int T__111 = 111;
+	public static final int T__110 = 110;
+	public static final int RULE_INT = 13;
+	public static final int T__113 = 113;
+	public static final int T__112 = 112;
+	public static final int T__50 = 50;
+	public static final int T__42 = 42;
+	public static final int T__43 = 43;
+	public static final int T__40 = 40;
+	public static final int T__41 = 41;
+	public static final int T__46 = 46;
+	public static final int T__47 = 47;
+	public static final int T__44 = 44;
+	public static final int T__45 = 45;
+	public static final int T__48 = 48;
+	public static final int T__49 = 49;
+	public static final int T__102 = 102;
+	public static final int T__101 = 101;
+	public static final int T__100 = 100;
+	public static final int RULE_SL_COMMENT = 17;
+	public static final int T__30 = 30;
+	public static final int T__31 = 31;
+	public static final int T__32 = 32;
+	public static final int T__33 = 33;
+	public static final int T__34 = 34;
+	public static final int T__35 = 35;
+	public static final int T__36 = 36;
+	public static final int T__37 = 37;
+	public static final int T__38 = 38;
+	public static final int T__39 = 39;
+	public static final int RULE_RICH_TEXT_INBETWEEN = 8;
+	public static final int RULE_WS = 18;
+
+	public NewInternalXtendParser(TokenStream input) {
+		this(input, new RecognizerSharedState());
+	}
+
+	public NewInternalXtendParser(TokenStream input, RecognizerSharedState state) {
+		super(input, state);
+	}
+
+	public String[] getTokenNames() {
+		return NewInternalXtendParser.tokenNames;
+	}
+
+	public String getGrammarFileName() {
+		return "../org.eclipse.xtend.core/src-gen/org/eclipse/xtend/core/parser/antlr/internal/InternalXtend.g";
+	}
+
+	private XtendGrammarAccess grammarAccess;
+
+	public NewInternalXtendParser(TokenStream input, XtendGrammarAccess grammarAccess) {
+		this(input);
+		this.grammarAccess = grammarAccess;
+		registerRules(grammarAccess.getGrammar());
+	}
+
+	@Override
+	protected String getFirstRuleName() {
+		return "File";
+	}
+
+	@Override
+	protected XtendGrammarAccess getGrammarAccess() {
+		return grammarAccess;
+	}
+
+	public final EObject entryRuleFile() throws RecognitionException {
+		EObject current = null;
+
+		EObject iv_ruleFile = null;
+
+		try {
+			{
+				if (state.backtracking == 0) {
+					newCompositeNode(grammarAccess.getFileRule());
+				}
+				pushFollow(FOLLOW_ruleFile_in_entryRuleFile75);
+				iv_ruleFile = ruleFile();
+
+				state._fsp--;
+				if (state.failed)
+					return current;
+				if (state.backtracking == 0) {
+					current = iv_ruleFile;
+				}
+				match(input, EOF, FOLLOW_EOF_in_entryRuleFile85);
+				if (state.failed)
+					return current;
+
+			}
+
+		}
+
+		catch (RecognitionException re) {
+			recoverAndAppendSkippedTokens(re);
+		} finally {
+		}
+		return current;
+	}
+
+	private void recoverAndAppendSkippedTokens(RecognitionException re) {
+		recover(input, re);
+		appendSkippedTokens();
+	}
+
+	public final EObject ruleFile() throws RecognitionException {
+		EObject current = null;
+
+		Token otherlv_0 = null;
+		Token otherlv_2 = null;
+		AntlrDatatypeRuleToken lv_package_1_0 = null;
+
+		EObject lv_importSection_3_0 = null;
+
+		EObject lv_xtendTypes_4_0 = null;
+
+		enterRule();
+
+		try {
+
+			{
+
+				{
+
+					int alt2 = 2;
+					int LA2_0 = input.LA(1);
+
+					if ((LA2_0 == 20)) {
+						int LA2_1 = input.LA(2);
+
+						if ((LA2_1 == RULE_ID || LA2_1 == 50)) {
+							alt2 = 1;
+						} else if ((LA2_1 == 32)) {
+							int LA2_4 = input.LA(3);
+
+							if ((LA2_4 == EOF || (LA2_4 >= 20 && LA2_4 <= 22) || (LA2_4 >= 30 && LA2_4 <= 31)
+									|| (LA2_4 >= 39 && LA2_4 <= 45) || LA2_4 == 52 || LA2_4 == 63 || LA2_4 == 90)) {
+								alt2 = 1;
+							} else if ((LA2_4 == 32)) {
+								int LA2_5 = input.LA(4);
+
+								if ((LA2_5 == RULE_ID || LA2_5 == 32 || LA2_5 == 50)) {
+									alt2 = 1;
+								}
+							}
+						}
+					}
+					switch (alt2) {
+						case 1:
+
+						{
+							otherlv_0 = (Token) match(input, 20, FOLLOW_20_in_ruleFile123);
+							if (state.failed)
+								return current;
+							if (state.backtracking == 0) {
+
+								newLeafNode(otherlv_0, grammarAccess.getFileAccess().getPackageKeyword_0_0());
+
+							}
+
+							{
+
+								{
+									if (state.backtracking == 0) {
+
+										newCompositeNode(grammarAccess.getFileAccess()
+												.getPackageQualifiedNameParserRuleCall_0_1_0());
+
+									}
+									pushFollow(FOLLOW_ruleQualifiedName_in_ruleFile144);
+									lv_package_1_0 = ruleQualifiedName();
+
+									state._fsp--;
+									if (state.failed)
+										return current;
+									if (state.backtracking == 0) {
+
+										if (current == null) {
+											current = createModelElementForParent(grammarAccess.getFileRule());
+										}
+										set(current, XTEND_FILE__PACKAGE, lv_package_1_0, "QualifiedName");
+										afterParserOrEnumRuleCall();
+
+									}
+
+								}
+
+							}
+
+							int alt1 = 2;
+							int LA1_0 = input.LA(1);
+
+							if ((LA1_0 == 21)) {
+								alt1 = 1;
+							}
+							switch (alt1) {
+								case 1:
+
+								{
+									otherlv_2 = (Token) match(input, 21, FOLLOW_21_in_ruleFile157);
+									if (state.failed)
+										return current;
+									if (state.backtracking == 0) {
+
+										newLeafNode(otherlv_2, grammarAccess.getFileAccess().getSemicolonKeyword_0_2());
+
+									}
+
+								}
+									break;
+
+							}
+
+						}
+							break;
+
+					}
+
+					int alt3 = 2;
+					int LA3_0 = input.LA(1);
+
+					if ((LA3_0 == 52)) {
+						alt3 = 1;
+					}
+					switch (alt3) {
+						case 1:
+
+						{
+
+							{
+								if (state.backtracking == 0) {
+
+									newCompositeNode(grammarAccess.getFileAccess()
+											.getImportSectionXImportSectionParserRuleCall_1_0());
+
+								}
+								pushFollow(FOLLOW_ruleXImportSection_in_ruleFile182);
+								lv_importSection_3_0 = ruleXImportSection();
+
+								state._fsp--;
+								if (state.failed)
+									return current;
+								if (state.backtracking == 0) {
+
+									if (current == null) {
+										current = createModelElementForParent(grammarAccess.getFileRule());
+									}
+									set(current, XTEND_FILE__IMPORT_SECTION, lv_importSection_3_0, null);
+									afterParserOrEnumRuleCall();
+
+								}
+
+							}
+
+						}
+							break;
+
+					}
+
+					loop4: do {
+						int alt4 = 2;
+						int LA4_0 = input.LA(1);
+
+						if ((LA4_0 == 20 || LA4_0 == 22 || (LA4_0 >= 30 && LA4_0 <= 32) || (LA4_0 >= 39 && LA4_0 <= 45) || LA4_0 == 63)) {
+							alt4 = 1;
+						}
+
+						switch (alt4) {
+							case 1:
+
+							{
+
+								{
+									if (state.backtracking == 0) {
+
+										newCompositeNode(grammarAccess.getFileAccess()
+												.getXtendTypesTypeParserRuleCall_2_0());
+
+									}
+									pushFollow(FOLLOW_ruleType_in_ruleFile204);
+									lv_xtendTypes_4_0 = ruleType();
+
+									state._fsp--;
+									if (state.failed)
+										return current;
+									if (state.backtracking == 0) {
+
+										if (current == null) {
+											current = createModelElementForParent(grammarAccess.getFileRule());
+										}
+										add(current, XTEND_FILE__XTEND_TYPES, lv_xtendTypes_4_0, "Type");
+										afterParserOrEnumRuleCall();
+
+									}
+
+								}
+
+							}
+								break;
+
+							default:
+								break loop4;
+						}
+					} while (true);
+
+				}
+
+			}
+
+			if (state.backtracking == 0) {
+				leaveRule();
+			}
+		}
+
+		catch (RecognitionException re) {
+			recoverAndAppendSkippedTokens(re);
+		} finally {
+		}
+		return current;
+	}
+
+	public final EObject entryRuleType() throws RecognitionException {
+		EObject current = null;
+
+		EObject iv_ruleType = null;
+
+		try {
+
+			{
+				if (state.backtracking == 0) {
+					newCompositeNode(grammarAccess.getTypeRule());
+				}
+				pushFollow(FOLLOW_ruleType_in_entryRuleType241);
+				iv_ruleType = ruleType();
+
+				state._fsp--;
+				if (state.failed)
+					return current;
+				if (state.backtracking == 0) {
+					current = iv_ruleType;
+				}
+				match(input, EOF, FOLLOW_EOF_in_entryRuleType251);
+				if (state.failed)
+					return current;
+
+			}
+
+		}
+
+		catch (RecognitionException re) {
+			recoverAndAppendSkippedTokens(re);
+		} finally {
+		}
+		return current;
+	}
+
+	public final EObject ruleType() throws RecognitionException {
+		EObject current = null;
+
+		Token otherlv_4 = null;
+		Token otherlv_6 = null;
+		Token otherlv_8 = null;
+		Token otherlv_10 = null;
+		Token otherlv_11 = null;
+		Token otherlv_13 = null;
+		Token otherlv_15 = null;
+		Token otherlv_17 = null;
+		Token otherlv_19 = null;
+		Token otherlv_22 = null;
+		Token otherlv_24 = null;
+		Token otherlv_26 = null;
+		Token otherlv_28 = null;
+		Token otherlv_29 = null;
+		Token otherlv_31 = null;
+		Token otherlv_33 = null;
+		Token otherlv_35 = null;
+		Token otherlv_38 = null;
+		Token otherlv_40 = null;
+		Token otherlv_42 = null;
+		Token otherlv_44 = null;
+		Token otherlv_45 = null;
+		Token otherlv_48 = null;
+		Token otherlv_50 = null;
+		Token otherlv_52 = null;
+		EObject lv_annotations_1_0 = null;
+
+		AntlrDatatypeRuleToken lv_modifiers_3_0 = null;
+
+		AntlrDatatypeRuleToken lv_name_5_0 = null;
+
+		EObject lv_typeParameters_7_0 = null;
+
+		EObject lv_typeParameters_9_0 = null;
+
+		EObject lv_extends_12_0 = null;
+
+		EObject lv_implements_14_0 = null;
+
+		EObject lv_implements_16_0 = null;
+
+		EObject lv_members_18_0 = null;
+
+		AntlrDatatypeRuleToken lv_modifiers_21_0 = null;
+
+		AntlrDatatypeRuleToken lv_name_23_0 = null;
+
+		EObject lv_typeParameters_25_0 = null;
+
+		EObject lv_typeParameters_27_0 = null;
+
+		EObject lv_extends_30_0 = null;
+
+		EObject lv_extends_32_0 = null;
+
+		EObject lv_members_34_0 = null;
+
+		AntlrDatatypeRuleToken lv_modifiers_37_0 = null;
+
+		AntlrDatatypeRuleToken lv_name_39_0 = null;
+
+		EObject lv_members_41_0 = null;
+
+		EObject lv_members_43_0 = null;
+
+		AntlrDatatypeRuleToken lv_modifiers_47_0 = null;
+
+		AntlrDatatypeRuleToken lv_name_49_0 = null;
+
+		EObject lv_members_51_0 = null;
+
+		enterRule();
+
+		try {
+
+			{
+
+				{
+
+					{
+						if (state.backtracking == 0) {
+
+							current = forceCreateModelElement(grammarAccess.getTypeAccess()
+									.getXtendTypeDeclarationAction_0(), current);
+
+						}
+
+					}
+
+					loop5: do {
+						int alt5 = 2;
+						int LA5_0 = input.LA(1);
+
+						if ((LA5_0 == 63)) {
+							alt5 = 1;
+						}
+
+						switch (alt5) {
+							case 1:
+
+							{
+
+								{
+									if (state.backtracking == 0) {
+
+										newCompositeNode(grammarAccess.getTypeAccess()
+												.getAnnotationsXAnnotationParserRuleCall_1_0());
+
+									}
+									pushFollow(FOLLOW_ruleXAnnotation_in_ruleType306);
+									lv_annotations_1_0 = ruleXAnnotation();
+
+									state._fsp--;
+									if (state.failed)
+										return current;
+									if (state.backtracking == 0) {
+
+										if (current == null) {
+											current = createModelElementForParent(grammarAccess.getTypeRule());
+										}
+										add(current, XTEND_ANNOTATION_TARGET__ANNOTATIONS, lv_annotations_1_0, "XAnnotation");
+										afterParserOrEnumRuleCall();
+
+									}
+
+								}
+
+							}
+								break;
+
+							default:
+								break loop5;
+						}
+					} while (true);
+
+					int alt25 = 4;
+					alt25 = dfa25.predict(input);
+					switch (alt25) {
+						case 1:
+
+						{
+
+							{
+
+								{
+									if (state.backtracking == 0) {
+
+										current = forceCreateModelElementAndSet(grammarAccess.getTypeAccess()
+												.getXtendClassAnnotationInfoAction_2_0_0(), XTEND_MEMBER__ANNOTATION_INFO, current);
+
+									}
+
+								}
+
+								loop6: do {
+									int alt6 = 2;
+									int LA6_0 = input.LA(1);
+
+									if ((LA6_0 == 20 || (LA6_0 >= 39 && LA6_0 <= 45))) {
+										alt6 = 1;
+									}
+
+									switch (alt6) {
+										case 1:
+
+										{
+
+											{
+												if (state.backtracking == 0) {
+
+													newCompositeNode(grammarAccess.getTypeAccess()
+															.getModifiersCommonModifierParserRuleCall_2_0_1_0());
+
+												}
+												pushFollow(FOLLOW_ruleCommonModifier_in_ruleType339);
+												lv_modifiers_3_0 = ruleCommonModifier();
+
+												state._fsp--;
+												if (state.failed)
+													return current;
+												if (state.backtracking == 0) {
+
+													if (current == null) {
+														current = createModelElementForParent(grammarAccess
+																.getTypeRule());
+													}
+													add(current, XTEND_MEMBER__MODIFIERS, lv_modifiers_3_0, "CommonModifier");
+													afterParserOrEnumRuleCall();
+
+												}
+
+											}
+
+										}
+											break;
+
+										default:
+											break loop6;
+									}
+								} while (true);
+
+								otherlv_4 = (Token) match(input, 22, FOLLOW_22_in_ruleType352);
+								if (state.failed)
+									return current;
+								if (state.backtracking == 0) {
+
+									newLeafNode(otherlv_4, grammarAccess.getTypeAccess().getClassKeyword_2_0_2());
+
+								}
+
+								{
+
+									{
+										if (state.backtracking == 0) {
+
+											newCompositeNode(grammarAccess.getTypeAccess()
+													.getNameValidIDParserRuleCall_2_0_3_0());
+
+										}
+										pushFollow(FOLLOW_ruleValidID_in_ruleType373);
+										lv_name_5_0 = ruleValidID();
+
+										state._fsp--;
+										if (state.failed)
+											return current;
+										if (state.backtracking == 0) {
+
+											if (current == null) {
+												current = createModelElementForParent(grammarAccess.getTypeRule());
+											}
+											set(current, XTEND_TYPE_DECLARATION__NAME, lv_name_5_0, "ValidID");
+											afterParserOrEnumRuleCall();
+
+										}
+
+									}
+
+								}
+
+								int alt8 = 2;
+								int LA8_0 = input.LA(1);
+
+								if ((LA8_0 == 23)) {
+									alt8 = 1;
+								}
+								switch (alt8) {
+									case 1:
+
+									{
+										otherlv_6 = (Token) match(input, 23, FOLLOW_23_in_ruleType386);
+										if (state.failed)
+											return current;
+										if (state.backtracking == 0) {
+
+											newLeafNode(otherlv_6, grammarAccess.getTypeAccess()
+													.getLessThanSignKeyword_2_0_4_0());
+
+										}
+
+										{
+
+											{
+												if (state.backtracking == 0) {
+
+													newCompositeNode(grammarAccess
+															.getTypeAccess()
+															.getTypeParametersJvmTypeParameterParserRuleCall_2_0_4_1_0());
+
+												}
+												pushFollow(FOLLOW_ruleJvmTypeParameter_in_ruleType407);
+												lv_typeParameters_7_0 = ruleJvmTypeParameter();
+
+												state._fsp--;
+												if (state.failed)
+													return current;
+												if (state.backtracking == 0) {
+
+													if (current == null) {
+														current = createModelElementForParent(grammarAccess
+																.getTypeRule());
+													}
+													add(current, XTEND_CLASS__TYPE_PARAMETERS, lv_typeParameters_7_0,
+															"JvmTypeParameter");
+													afterParserOrEnumRuleCall();
+
+												}
+
+											}
+
+										}
+
+										loop7: do {
+											int alt7 = 2;
+											int LA7_0 = input.LA(1);
+
+											if ((LA7_0 == 24)) {
+												alt7 = 1;
+											}
+
+											switch (alt7) {
+												case 1:
+
+												{
+													otherlv_8 = (Token) match(input, 24, FOLLOW_24_in_ruleType420);
+													if (state.failed)
+														return current;
+													if (state.backtracking == 0) {
+
+														newLeafNode(otherlv_8, grammarAccess.getTypeAccess()
+																.getCommaKeyword_2_0_4_2_0());
+
+													}
+
+													{
+
+														{
+															if (state.backtracking == 0) {
+
+																newCompositeNode(grammarAccess
+																		.getTypeAccess()
+																		.getTypeParametersJvmTypeParameterParserRuleCall_2_0_4_2_1_0());
+
+															}
+															pushFollow(FOLLOW_ruleJvmTypeParameter_in_ruleType441);
+															lv_typeParameters_9_0 = ruleJvmTypeParameter();
+
+															state._fsp--;
+															if (state.failed)
+																return current;
+															if (state.backtracking == 0) {
+
+																if (current == null) {
+																	current = createModelElementForParent(grammarAccess
+																			.getTypeRule());
+																}
+																add(current, XTEND_CLASS__TYPE_PARAMETERS, lv_typeParameters_9_0,
+																		"JvmTypeParameter");
+																afterParserOrEnumRuleCall();
+
+															}
+
+														}
+
+													}
+
+												}
+													break;
+
+												default:
+													break loop7;
+											}
+										} while (true);
+
+										otherlv_10 = (Token) match(input, 25, FOLLOW_25_in_ruleType455);
+										if (state.failed)
+											return current;
+										if (state.backtracking == 0) {
+
+											newLeafNode(otherlv_10, grammarAccess.getTypeAccess()
+													.getGreaterThanSignKeyword_2_0_4_3());
+
+										}
+
+									}
+										break;
+
+								}
+
+								int alt9 = 2;
+								int LA9_0 = input.LA(1);
+
+								if ((LA9_0 == 26)) {
+									alt9 = 1;
+								}
+								switch (alt9) {
+									case 1:
+
+									{
+										otherlv_11 = (Token) match(input, 26, FOLLOW_26_in_ruleType470);
+										if (state.failed)
+											return current;
+										if (state.backtracking == 0) {
+
+											newLeafNode(otherlv_11, grammarAccess.getTypeAccess()
+													.getExtendsKeyword_2_0_5_0());
+
+										}
+
+										{
+
+											{
+												if (state.backtracking == 0) {
+
+													newCompositeNode(grammarAccess
+															.getTypeAccess()
+															.getExtendsJvmParameterizedTypeReferenceParserRuleCall_2_0_5_1_0());
+
+												}
+												pushFollow(FOLLOW_ruleJvmParameterizedTypeReference_in_ruleType491);
+												lv_extends_12_0 = ruleJvmParameterizedTypeReference();
+
+												state._fsp--;
+												if (state.failed)
+													return current;
+												if (state.backtracking == 0) {
+
+													if (current == null) {
+														current = createModelElementForParent(grammarAccess
+																.getTypeRule());
+													}
+													set(current, XTEND_CLASS__EXTENDS, lv_extends_12_0,
+															"JvmParameterizedTypeReference");
+													afterParserOrEnumRuleCall();
+
+												}
+
+											}
+
+										}
+
+									}
+										break;
+
+								}
+
+								int alt11 = 2;
+								int LA11_0 = input.LA(1);
+
+								if ((LA11_0 == 27)) {
+									alt11 = 1;
+								}
+								switch (alt11) {
+									case 1:
+
+									{
+										otherlv_13 = (Token) match(input, 27, FOLLOW_27_in_ruleType506);
+										if (state.failed)
+											return current;
+										if (state.backtracking == 0) {
+
+											newLeafNode(otherlv_13, grammarAccess.getTypeAccess()
+													.getImplementsKeyword_2_0_6_0());
+
+										}
+
+										{
+
+											{
+												if (state.backtracking == 0) {
+
+													newCompositeNode(grammarAccess
+															.getTypeAccess()
+															.getImplementsJvmParameterizedTypeReferenceParserRuleCall_2_0_6_1_0());
+
+												}
+												pushFollow(FOLLOW_ruleJvmParameterizedTypeReference_in_ruleType527);
+												lv_implements_14_0 = ruleJvmParameterizedTypeReference();
+
+												state._fsp--;
+												if (state.failed)
+													return current;
+												if (state.backtracking == 0) {
+
+													if (current == null) {
+														current = createModelElementForParent(grammarAccess
+																.getTypeRule());
+													}
+													add(current, XTEND_CLASS__IMPLEMENTS, lv_implements_14_0,
+															"JvmParameterizedTypeReference");
+													afterParserOrEnumRuleCall();
+
+												}
+
+											}
+
+										}
+
+										loop10: do {
+											int alt10 = 2;
+											int LA10_0 = input.LA(1);
+
+											if ((LA10_0 == 24)) {
+												alt10 = 1;
+											}
+
+											switch (alt10) {
+												case 1:
+
+												{
+													otherlv_15 = (Token) match(input, 24, FOLLOW_24_in_ruleType540);
+													if (state.failed)
+														return current;
+													if (state.backtracking == 0) {
+
+														newLeafNode(otherlv_15, grammarAccess.getTypeAccess()
+																.getCommaKeyword_2_0_6_2_0());
+
+													}
+
+													{
+
+														{
+															if (state.backtracking == 0) {
+
+																newCompositeNode(grammarAccess
+																		.getTypeAccess()
+																		.getImplementsJvmParameterizedTypeReferenceParserRuleCall_2_0_6_2_1_0());
+
+															}
+															pushFollow(FOLLOW_ruleJvmParameterizedTypeReference_in_ruleType561);
+															lv_implements_16_0 = ruleJvmParameterizedTypeReference();
+
+															state._fsp--;
+															if (state.failed)
+																return current;
+															if (state.backtracking == 0) {
+
+																if (current == null) {
+																	current = createModelElementForParent(grammarAccess
+																			.getTypeRule());
+																}
+																add(current, XTEND_CLASS__IMPLEMENTS, lv_implements_16_0,
+																		"JvmParameterizedTypeReference");
+																afterParserOrEnumRuleCall();
+
+															}
+
+														}
+
+													}
+
+												}
+													break;
+
+												default:
+													break loop10;
+											}
+										} while (true);
+
+									}
+										break;
+
+								}
+
+								otherlv_17 = (Token) match(input, 28, FOLLOW_28_in_ruleType577);
+								if (state.failed)
+									return current;
+								if (state.backtracking == 0) {
+
+									newLeafNode(otherlv_17, grammarAccess.getTypeAccess()
+											.getLeftCurlyBracketKeyword_2_0_7());
+
+								}
+
+								loop12: do {
+									int alt12 = 2;
+									int LA12_0 = input.LA(1);
+
+									if ((LA12_0 == RULE_ID || LA12_0 == 20 || LA12_0 == 32
+											|| (LA12_0 >= 34 && LA12_0 <= 35) || (LA12_0 >= 38 && LA12_0 <= 50)
+											|| LA12_0 == 63 || LA12_0 == 79)) {
+										alt12 = 1;
+									}
+
+									switch (alt12) {
+										case 1:
+
+										{
+
+											{
+												if (state.backtracking == 0) {
+
+													newCompositeNode(grammarAccess.getTypeAccess()
+															.getMembersMemberParserRuleCall_2_0_8_0());
+
+												}
+												pushFollow(FOLLOW_ruleMember_in_ruleType598);
+												lv_members_18_0 = ruleMember();
+
+												state._fsp--;
+												if (state.failed)
+													return current;
+												if (state.backtracking == 0) {
+
+													if (current == null) {
+														current = createModelElementForParent(grammarAccess
+																.getTypeRule());
+													}
+													add(current, XTEND_TYPE_DECLARATION__MEMBERS, lv_members_18_0, "Member");
+													afterParserOrEnumRuleCall();
+
+												}
+
+											}
+
+										}
+											break;
+
+										default:
+											break loop12;
+									}
+								} while (true);
+
+								otherlv_19 = (Token) match(input, 29, FOLLOW_29_in_ruleType611);
+								if (state.failed)
+									return current;
+								if (state.backtracking == 0) {
+
+									newLeafNode(otherlv_19, grammarAccess.getTypeAccess()
+											.getRightCurlyBracketKeyword_2_0_9());
+
+								}
+
+							}
+
+						}
+							break;
+						case 2:
+
+						{
+
+							{
+
+								{
+									if (state.backtracking == 0) {
+
+										current = forceCreateModelElementAndSet(grammarAccess.getTypeAccess()
+												.getXtendInterfaceAnnotationInfoAction_2_1_0(),
+												XTEND_MEMBER__ANNOTATION_INFO, current);
+
+									}
+
+								}
+
+								loop13: do {
+									int alt13 = 2;
+									int LA13_0 = input.LA(1);
+
+									if ((LA13_0 == 20 || (LA13_0 >= 39 && LA13_0 <= 45))) {
+										alt13 = 1;
+									}
+
+									switch (alt13) {
+										case 1:
+
+										{
+
+											{
+												if (state.backtracking == 0) {
+
+													newCompositeNode(grammarAccess.getTypeAccess()
+															.getModifiersCommonModifierParserRuleCall_2_1_1_0());
+
+												}
+												pushFollow(FOLLOW_ruleCommonModifier_in_ruleType649);
+												lv_modifiers_21_0 = ruleCommonModifier();
+
+												state._fsp--;
+												if (state.failed)
+													return current;
+												if (state.backtracking == 0) {
+
+													if (current == null) {
+														current = createModelElementForParent(grammarAccess
+																.getTypeRule());
+													}
+													addModifier(current, lv_modifiers_21_0);
+													afterParserOrEnumRuleCall();
+
+												}
+
+											}
+
+										}
+											break;
+
+										default:
+											break loop13;
+									}
+								} while (true);
+
+								otherlv_22 = (Token) match(input, 30, FOLLOW_30_in_ruleType662);
+								if (state.failed)
+									return current;
+								if (state.backtracking == 0) {
+
+									newLeafNode(otherlv_22, grammarAccess.getTypeAccess().getInterfaceKeyword_2_1_2());
+
+								}
+
+								{
+
+									{
+										if (state.backtracking == 0) {
+
+											newCompositeNode(grammarAccess.getTypeAccess()
+													.getNameValidIDParserRuleCall_2_1_3_0());
+
+										}
+										pushFollow(FOLLOW_ruleValidID_in_ruleType683);
+										lv_name_23_0 = ruleValidID();
+
+										state._fsp--;
+										if (state.failed)
+											return current;
+										if (state.backtracking == 0) {
+
+											if (current == null) {
+												current = createModelElementForParent(grammarAccess.getTypeRule());
+											}
+											set(current, XTEND_TYPE_DECLARATION__NAME, lv_name_23_0, "ValidID");
+											afterParserOrEnumRuleCall();
+
+										}
+
+									}
+
+								}
+
+								int alt15 = 2;
+								int LA15_0 = input.LA(1);
+
+								if ((LA15_0 == 23)) {
+									alt15 = 1;
+								}
+								switch (alt15) {
+									case 1:
+
+									{
+										otherlv_24 = (Token) match(input, 23, FOLLOW_23_in_ruleType696);
+										if (state.failed)
+											return current;
+										if (state.backtracking == 0) {
+
+											newLeafNode(otherlv_24, grammarAccess.getTypeAccess()
+													.getLessThanSignKeyword_2_1_4_0());
+
+										}
+
+										{
+
+											{
+												if (state.backtracking == 0) {
+
+													newCompositeNode(grammarAccess
+															.getTypeAccess()
+															.getTypeParametersJvmTypeParameterParserRuleCall_2_1_4_1_0());
+
+												}
+												pushFollow(FOLLOW_ruleJvmTypeParameter_in_ruleType717);
+												lv_typeParameters_25_0 = ruleJvmTypeParameter();
+
+												state._fsp--;
+												if (state.failed)
+													return current;
+												if (state.backtracking == 0) {
+
+													if (current == null) {
+														current = createModelElementForParent(grammarAccess
+																.getTypeRule());
+													}
+													add(current, XTEND_INTERFACE__TYPE_PARAMETERS, lv_typeParameters_25_0,
+															"JvmTypeParameter");
+													afterParserOrEnumRuleCall();
+
+												}
+
+											}
+
+										}
+
+										loop14: do {
+											int alt14 = 2;
+											int LA14_0 = input.LA(1);
+
+											if ((LA14_0 == 24)) {
+												alt14 = 1;
+											}
+
+											switch (alt14) {
+												case 1:
+
+												{
+													otherlv_26 = (Token) match(input, 24, FOLLOW_24_in_ruleType730);
+													if (state.failed)
+														return current;
+													if (state.backtracking == 0) {
+
+														newLeafNode(otherlv_26, grammarAccess.getTypeAccess()
+																.getCommaKeyword_2_1_4_2_0());
+
+													}
+
+													{
+
+														{
+															if (state.backtracking == 0) {
+
+																newCompositeNode(grammarAccess
+																		.getTypeAccess()
+																		.getTypeParametersJvmTypeParameterParserRuleCall_2_1_4_2_1_0());
+
+															}
+															pushFollow(FOLLOW_ruleJvmTypeParameter_in_ruleType751);
+															lv_typeParameters_27_0 = ruleJvmTypeParameter();
+
+															state._fsp--;
+															if (state.failed)
+																return current;
+															if (state.backtracking == 0) {
+
+																if (current == null) {
+																	current = createModelElementForParent(grammarAccess
+																			.getTypeRule());
+																}
+																add(current, XTEND_INTERFACE__TYPE_PARAMETERS, lv_typeParameters_27_0,
+																		"JvmTypeParameter");
+																afterParserOrEnumRuleCall();
+
+															}
+
+														}
+
+													}
+
+												}
+													break;
+
+												default:
+													break loop14;
+											}
+										} while (true);
+
+										otherlv_28 = (Token) match(input, 25, FOLLOW_25_in_ruleType765);
+										if (state.failed)
+											return current;
+										if (state.backtracking == 0) {
+
+											newLeafNode(otherlv_28, grammarAccess.getTypeAccess()
+													.getGreaterThanSignKeyword_2_1_4_3());
+
+										}
+
+									}
+										break;
+
+								}
+
+								int alt17 = 2;
+								int LA17_0 = input.LA(1);
+
+								if ((LA17_0 == 26)) {
+									alt17 = 1;
+								}
+								switch (alt17) {
+									case 1:
+
+									{
+										otherlv_29 = (Token) match(input, 26, FOLLOW_26_in_ruleType780);
+										if (state.failed)
+											return current;
+										if (state.backtracking == 0) {
+
+											newLeafNode(otherlv_29, grammarAccess.getTypeAccess()
+													.getExtendsKeyword_2_1_5_0());
+
+										}
+
+										{
+
+											{
+												if (state.backtracking == 0) {
+
+													newCompositeNode(grammarAccess
+															.getTypeAccess()
+															.getExtendsJvmParameterizedTypeReferenceParserRuleCall_2_1_5_1_0());
+
+												}
+												pushFollow(FOLLOW_ruleJvmParameterizedTypeReference_in_ruleType801);
+												lv_extends_30_0 = ruleJvmParameterizedTypeReference();
+
+												state._fsp--;
+												if (state.failed)
+													return current;
+												if (state.backtracking == 0) {
+
+													if (current == null) {
+														current = createModelElementForParent(grammarAccess
+																.getTypeRule());
+													}
+													add(current, XTEND_INTERFACE__EXTENDS, lv_extends_30_0,
+															"JvmParameterizedTypeReference");
+													afterParserOrEnumRuleCall();
+
+												}
+
+											}
+
+										}
+
+										loop16: do {
+											int alt16 = 2;
+											int LA16_0 = input.LA(1);
+
+											if ((LA16_0 == 24)) {
+												alt16 = 1;
+											}
+
+											switch (alt16) {
+												case 1:
+
+												{
+													otherlv_31 = (Token) match(input, 24, FOLLOW_24_in_ruleType814);
+													if (state.failed)
+														return current;
+													if (state.backtracking == 0) {
+
+														newLeafNode(otherlv_31, grammarAccess.getTypeAccess()
+																.getCommaKeyword_2_1_5_2_0());
+
+													}
+
+													{
+
+														{
+															if (state.backtracking == 0) {
+
+																newCompositeNode(grammarAccess
+																		.getTypeAccess()
+																		.getExtendsJvmParameterizedTypeReferenceParserRuleCall_2_1_5_2_1_0());
+
+															}
+															pushFollow(FOLLOW_ruleJvmParameterizedTypeReference_in_ruleType835);
+															lv_extends_32_0 = ruleJvmParameterizedTypeReference();
+
+															state._fsp--;
+															if (state.failed)
+																return current;
+															if (state.backtracking == 0) {
+
+																if (current == null) {
+																	current = createModelElementForParent(grammarAccess
+																			.getTypeRule());
+																}
+																add(current, XTEND_INTERFACE__EXTENDS, lv_extends_32_0,
+																		"JvmParameterizedTypeReference");
+																afterParserOrEnumRuleCall();
+
+															}
+
+														}
+
+													}
+
+												}
+													break;
+
+												default:
+													break loop16;
+											}
+										} while (true);
+
+									}
+										break;
+
+								}
+
+								otherlv_33 = (Token) match(input, 28, FOLLOW_28_in_ruleType851);
+								if (state.failed)
+									return current;
+								if (state.backtracking == 0) {
+
+									newLeafNode(otherlv_33, grammarAccess.getTypeAccess()
+											.getLeftCurlyBracketKeyword_2_1_6());
+
+								}
+
+								loop18: do {
+									int alt18 = 2;
+									int LA18_0 = input.LA(1);
+
+									if ((LA18_0 == RULE_ID || LA18_0 == 20 || LA18_0 == 32
+											|| (LA18_0 >= 34 && LA18_0 <= 35) || (LA18_0 >= 38 && LA18_0 <= 50)
+											|| LA18_0 == 63 || LA18_0 == 79)) {
+										alt18 = 1;
+									}
+
+									switch (alt18) {
+										case 1:
+
+										{
+
+											{
+												if (state.backtracking == 0) {
+
+													newCompositeNode(grammarAccess.getTypeAccess()
+															.getMembersMemberParserRuleCall_2_1_7_0());
+
+												}
+												pushFollow(FOLLOW_ruleMember_in_ruleType872);
+												lv_members_34_0 = ruleMember();
+
+												state._fsp--;
+												if (state.failed)
+													return current;
+												if (state.backtracking == 0) {
+
+													if (current == null) {
+														current = createModelElementForParent(grammarAccess
+																.getTypeRule());
+													}
+													add(current, XTEND_TYPE_DECLARATION__MEMBERS, lv_members_34_0, "Member");
+													afterParserOrEnumRuleCall();
+
+												}
+
+											}
+
+										}
+											break;
+
+										default:
+											break loop18;
+									}
+								} while (true);
+
+								otherlv_35 = (Token) match(input, 29, FOLLOW_29_in_ruleType885);
+								if (state.failed)
+									return current;
+								if (state.backtracking == 0) {
+
+									newLeafNode(otherlv_35, grammarAccess.getTypeAccess()
+											.getRightCurlyBracketKeyword_2_1_8());
+
+								}
+
+							}
+
+						}
+							break;
+						case 3:
+
+						{
+
+							{
+
+								{
+									if (state.backtracking == 0) {
+
+										current = forceCreateModelElementAndSet(grammarAccess.getTypeAccess()
+												.getXtendEnumAnnotationInfoAction_2_2_0(), XTEND_MEMBER__ANNOTATION_INFO, current);
+
+									}
+
+								}
+
+								loop19: do {
+									int alt19 = 2;
+									int LA19_0 = input.LA(1);
+
+									if ((LA19_0 == 20 || (LA19_0 >= 39 && LA19_0 <= 45))) {
+										alt19 = 1;
+									}
+
+									switch (alt19) {
+										case 1:
+
+										{
+
+											{
+												if (state.backtracking == 0) {
+
+													newCompositeNode(grammarAccess.getTypeAccess()
+															.getModifiersCommonModifierParserRuleCall_2_2_1_0());
+
+												}
+												pushFollow(FOLLOW_ruleCommonModifier_in_ruleType923);
+												lv_modifiers_37_0 = ruleCommonModifier();
+
+												state._fsp--;
+												if (state.failed)
+													return current;
+												if (state.backtracking == 0) {
+
+													if (current == null) {
+														current = createModelElementForParent(grammarAccess
+																.getTypeRule());
+													}
+													addModifier(current, lv_modifiers_37_0);
+													afterParserOrEnumRuleCall();
+
+												}
+
+											}
+
+										}
+											break;
+
+										default:
+											break loop19;
+									}
+								} while (true);
+
+								otherlv_38 = (Token) match(input, 31, FOLLOW_31_in_ruleType936);
+								if (state.failed)
+									return current;
+								if (state.backtracking == 0) {
+
+									newLeafNode(otherlv_38, grammarAccess.getTypeAccess().getEnumKeyword_2_2_2());
+
+								}
+
+								{
+
+									{
+										if (state.backtracking == 0) {
+
+											newCompositeNode(grammarAccess.getTypeAccess()
+													.getNameValidIDParserRuleCall_2_2_3_0());
+
+										}
+										pushFollow(FOLLOW_ruleValidID_in_ruleType957);
+										lv_name_39_0 = ruleValidID();
+
+										state._fsp--;
+										if (state.failed)
+											return current;
+										if (state.backtracking == 0) {
+
+											if (current == null) {
+												current = createModelElementForParent(grammarAccess.getTypeRule());
+											}
+											set(current, XTEND_TYPE_DECLARATION__NAME, lv_name_39_0, "ValidID");
+											afterParserOrEnumRuleCall();
+
+										}
+
+									}
+
+								}
+
+								otherlv_40 = (Token) match(input, 28, FOLLOW_28_in_ruleType969);
+								if (state.failed)
+									return current;
+								if (state.backtracking == 0) {
+
+									newLeafNode(otherlv_40, grammarAccess.getTypeAccess()
+											.getLeftCurlyBracketKeyword_2_2_4());
+
+								}
+
+								int alt21 = 2;
+								int LA21_0 = input.LA(1);
+
+								if ((LA21_0 == RULE_ID || LA21_0 == 32 || LA21_0 == 50)) {
+									alt21 = 1;
+								}
+								switch (alt21) {
+									case 1:
+
+									{
+
+										{
+
+											{
+												if (state.backtracking == 0) {
+
+													newCompositeNode(grammarAccess.getTypeAccess()
+															.getMembersXtendEnumLiteralParserRuleCall_2_2_5_0_0());
+
+												}
+												pushFollow(FOLLOW_ruleXtendEnumLiteral_in_ruleType991);
+												lv_members_41_0 = ruleXtendEnumLiteral();
+
+												state._fsp--;
+												if (state.failed)
+													return current;
+												if (state.backtracking == 0) {
+
+													if (current == null) {
+														current = createModelElementForParent(grammarAccess
+																.getTypeRule());
+													}
+													add(current, XTEND_TYPE_DECLARATION__MEMBERS, lv_members_41_0, "XtendEnumLiteral");
+													afterParserOrEnumRuleCall();
+
+												}
+
+											}
+
+										}
+
+										loop20: do {
+											int alt20 = 2;
+											int LA20_0 = input.LA(1);
+
+											if ((LA20_0 == 24)) {
+												alt20 = 1;
+											}
+
+											switch (alt20) {
+												case 1:
+
+												{
+													otherlv_42 = (Token) match(input, 24, FOLLOW_24_in_ruleType1004);
+													if (state.failed)
+														return current;
+													if (state.backtracking == 0) {
+
+														newLeafNode(otherlv_42, grammarAccess.getTypeAccess()
+																.getCommaKeyword_2_2_5_1_0());
+
+													}
+
+													{
+
+														{
+															if (state.backtracking == 0) {
+
+																newCompositeNode(grammarAccess
+																		.getTypeAccess()
+																		.getMembersXtendEnumLiteralParserRuleCall_2_2_5_1_1_0());
+
+															}
+															pushFollow(FOLLOW_ruleXtendEnumLiteral_in_ruleType1025);
+															lv_members_43_0 = ruleXtendEnumLiteral();
+
+															state._fsp--;
+															if (state.failed)
+																return current;
+															if (state.backtracking == 0) {
+
+																if (current == null) {
+																	current = createModelElementForParent(grammarAccess
+																			.getTypeRule());
+																}
+																add(current, XTEND_TYPE_DECLARATION__MEMBERS, lv_members_43_0,
+																		"XtendEnumLiteral");
+																afterParserOrEnumRuleCall();
+
+															}
+
+														}
+
+													}
+
+												}
+													break;
+
+												default:
+													break loop20;
+											}
+										} while (true);
+
+									}
+										break;
+
+								}
+
+								int alt22 = 2;
+								int LA22_0 = input.LA(1);
+
+								if ((LA22_0 == 21)) {
+									alt22 = 1;
+								}
+								switch (alt22) {
+									case 1:
+
+									{
+										otherlv_44 = (Token) match(input, 21, FOLLOW_21_in_ruleType1042);
+										if (state.failed)
+											return current;
+										if (state.backtracking == 0) {
+
+											newLeafNode(otherlv_44, grammarAccess.getTypeAccess()
+													.getSemicolonKeyword_2_2_6());
+
+										}
+
+									}
+										break;
+
+								}
+
+								otherlv_45 = (Token) match(input, 29, FOLLOW_29_in_ruleType1056);
+								if (state.failed)
+									return current;
+								if (state.backtracking == 0) {
+
+									newLeafNode(otherlv_45, grammarAccess.getTypeAccess()
+											.getRightCurlyBracketKeyword_2_2_7());
+
+								}
+
+							}
+
+						}
+							break;
+						case 4:
+
+						{
+
+							{
+
+								{
+									if (state.backtracking == 0) {
+
+										current = forceCreateModelElementAndSet(grammarAccess.getTypeAccess()
+												.getXtendAnnotationTypeAnnotationInfoAction_2_3_0(),XTEND_MEMBER__ANNOTATION_INFO, current);
+
+									}
+
+								}
+
+								loop23: do {
+									int alt23 = 2;
+									int LA23_0 = input.LA(1);
+
+									if ((LA23_0 == 20 || (LA23_0 >= 39 && LA23_0 <= 45))) {
+										alt23 = 1;
+									}
+
+									switch (alt23) {
+										case 1:
+
+										{
+
+											{
+												if (state.backtracking == 0) {
+
+													newCompositeNode(grammarAccess.getTypeAccess()
+															.getModifiersCommonModifierParserRuleCall_2_3_1_0());
+
+												}
+												pushFollow(FOLLOW_ruleCommonModifier_in_ruleType1094);
+												lv_modifiers_47_0 = ruleCommonModifier();
+
+												state._fsp--;
+												if (state.failed)
+													return current;
+												if (state.backtracking == 0) {
+
+													if (current == null) {
+														current = createModelElementForParent(grammarAccess
+																.getTypeRule());
+													}
+													addModifier(current, lv_modifiers_47_0);
+													afterParserOrEnumRuleCall();
+
+												}
+
+											}
+
+										}
+											break;
+
+										default:
+											break loop23;
+									}
+								} while (true);
+
+								otherlv_48 = (Token) match(input, 32, FOLLOW_32_in_ruleType1107);
+								if (state.failed)
+									return current;
+								if (state.backtracking == 0) {
+
+									newLeafNode(otherlv_48, grammarAccess.getTypeAccess().getAnnotationKeyword_2_3_2());
+
+								}
+
+								{
+
+									{
+										if (state.backtracking == 0) {
+
+											newCompositeNode(grammarAccess.getTypeAccess()
+													.getNameValidIDParserRuleCall_2_3_3_0());
+
+										}
+										pushFollow(FOLLOW_ruleValidID_in_ruleType1128);
+										lv_name_49_0 = ruleValidID();
+
+										state._fsp--;
+										if (state.failed)
+											return current;
+										if (state.backtracking == 0) {
+
+											if (current == null) {
+												current = createModelElementForParent(grammarAccess.getTypeRule());
+											}
+											set(current, XTEND_TYPE_DECLARATION__NAME, lv_name_49_0, "ValidID");
+											afterParserOrEnumRuleCall();
+
+										}
+
+									}
+
+								}
+
+								otherlv_50 = (Token) match(input, 28, FOLLOW_28_in_ruleType1140);
+								if (state.failed)
+									return current;
+								if (state.backtracking == 0) {
+
+									newLeafNode(otherlv_50, grammarAccess.getTypeAccess()
+											.getLeftCurlyBracketKeyword_2_3_4());
+
+								}
+
+								loop24: do {
+									int alt24 = 2;
+									int LA24_0 = input.LA(1);
+
+									if ((LA24_0 == RULE_ID || LA24_0 == 20 || LA24_0 == 32 || LA24_0 == 35
+											|| (LA24_0 >= 39 && LA24_0 <= 47) || LA24_0 == 50 || LA24_0 == 63 || LA24_0 == 79)) {
+										alt24 = 1;
+									}
+
+									switch (alt24) {
+										case 1:
+
+										{
+
+											{
+												if (state.backtracking == 0) {
+
+													newCompositeNode(grammarAccess.getTypeAccess()
+															.getMembersAnnotationFieldParserRuleCall_2_3_5_0());
+
+												}
+												pushFollow(FOLLOW_ruleAnnotationField_in_ruleType1161);
+												lv_members_51_0 = ruleAnnotationField();
+
+												state._fsp--;
+												if (state.failed)
+													return current;
+												if (state.backtracking == 0) {
+
+													if (current == null) {
+														current = createModelElementForParent(grammarAccess
+																.getTypeRule());
+													}
+													add(current, XTEND_TYPE_DECLARATION__MEMBERS, lv_members_51_0, "AnnotationField");
+													afterParserOrEnumRuleCall();
+
+												}
+
+											}
+
+										}
+											break;
+
+										default:
+											break loop24;
+									}
+								} while (true);
+
+								otherlv_52 = (Token) match(input, 29, FOLLOW_29_in_ruleType1174);
+								if (state.failed)
+									return current;
+								if (state.backtracking == 0) {
+
+									newLeafNode(otherlv_52, grammarAccess.getTypeAccess()
+											.getRightCurlyBracketKeyword_2_3_6());
+
+								}
+
+							}
+
+						}
+							break;
+
+					}
+
+				}
+
+			}
+
+			if (state.backtracking == 0) {
+				leaveRule();
+			}
+		}
+
+		catch (RecognitionException re) {
+			recoverAndAppendSkippedTokens(re);
+		} finally {
+		}
+		return current;
+	}
+
+	public final EObject entryRuleAnnotationField() throws RecognitionException {
+		EObject current = null;
+
+		EObject iv_ruleAnnotationField = null;
+
+		try {
+
+			{
+				if (state.backtracking == 0) {
+					newCompositeNode(grammarAccess.getAnnotationFieldRule());
+				}
+				pushFollow(FOLLOW_ruleAnnotationField_in_entryRuleAnnotationField1212);
+				iv_ruleAnnotationField = ruleAnnotationField();
+
+				state._fsp--;
+				if (state.failed)
+					return current;
+				if (state.backtracking == 0) {
+					current = iv_ruleAnnotationField;
+				}
+				match(input, EOF, FOLLOW_EOF_in_entryRuleAnnotationField1222);
+				if (state.failed)
+					return current;
+
+			}
+
+		}
+
+		catch (RecognitionException re) {
+			recoverAndAppendSkippedTokens(re);
+		} finally {
+		}
+		return current;
+	}
+
+	public final EObject ruleAnnotationField() throws RecognitionException {
+		EObject current = null;
+
+		Token otherlv_8 = null;
+		Token otherlv_10 = null;
+		EObject lv_annotations_0_0 = null;
+
+		AntlrDatatypeRuleToken lv_modifiers_1_0 = null;
+
+		AntlrDatatypeRuleToken lv_modifiers_2_0 = null;
+
+		AntlrDatatypeRuleToken lv_modifiers_3_0 = null;
+
+		EObject lv_type_4_0 = null;
+
+		AntlrDatatypeRuleToken lv_name_5_0 = null;
+
+		EObject lv_type_6_0 = null;
+
+		AntlrDatatypeRuleToken lv_name_7_0 = null;
+
+		EObject lv_initialValue_9_0 = null;
+
+		enterRule();
+
+		try {
+
+			{
+
+				{
+
+					loop26: do {
+						int alt26 = 2;
+						int LA26_0 = input.LA(1);
+
+						if ((LA26_0 == 63)) {
+							alt26 = 1;
+						}
+
+						switch (alt26) {
+							case 1:
+
+							{
+
+								{
+									if (state.backtracking == 0) {
+
+										newCompositeNode(grammarAccess.getAnnotationFieldAccess()
+												.getAnnotationsXAnnotationParserRuleCall_0_0());
+
+									}
+									pushFollow(FOLLOW_ruleXAnnotation_in_ruleAnnotationField1268);
+									lv_annotations_0_0 = ruleXAnnotation();
+
+									state._fsp--;
+									if (state.failed)
+										return current;
+									if (state.backtracking == 0) {
+
+										if (current == null) {
+											current = createModelElementForParent(grammarAccess
+													.getAnnotationFieldRule());
+										}
+										add(current, XTEND_ANNOTATION_TARGET__ANNOTATIONS, lv_annotations_0_0, "XAnnotation");
+										afterParserOrEnumRuleCall();
+
+									}
+
+								}
+
+							}
+								break;
+
+							default:
+								break loop26;
+						}
+					} while (true);
+
+					loop27: do {
+						int alt27 = 2;
+						int LA27_0 = input.LA(1);
+
+						if ((LA27_0 == 20 || (LA27_0 >= 39 && LA27_0 <= 45))) {
+							alt27 = 1;
+						}
+
+						switch (alt27) {
+							case 1:
+
+							{
+
+								{
+									if (state.backtracking == 0) {
+
+										newCompositeNode(grammarAccess.getAnnotationFieldAccess()
+												.getModifiersCommonModifierParserRuleCall_1_0());
+
+									}
+									pushFollow(FOLLOW_ruleCommonModifier_in_ruleAnnotationField1290);
+									lv_modifiers_1_0 = ruleCommonModifier();
+
+									state._fsp--;
+									if (state.failed)
+										return current;
+									if (state.backtracking == 0) {
+
+										if (current == null) {
+											current = createModelElementForParent(grammarAccess
+													.getAnnotationFieldRule());
+										}
+										addModifier(current, lv_modifiers_1_0);
+										afterParserOrEnumRuleCall();
+
+									}
+
+								}
+
+							}
+								break;
+
+							default:
+								break loop27;
+						}
+					} while (true);
+
+					int alt30 = 2;
+					int LA30_0 = input.LA(1);
+
+					if (((LA30_0 >= 46 && LA30_0 <= 47))) {
+						alt30 = 1;
+					} else if ((LA30_0 == RULE_ID || LA30_0 == 32 || LA30_0 == 35 || LA30_0 == 50 || LA30_0 == 79)) {
+						alt30 = 2;
+					} else {
+						if (state.backtracking > 0) {
+							state.failed = true;
+							return current;
+						}
+						NoViableAltException nvae = new NoViableAltException("", 30, 0, input);
+
+						throw nvae;
+					}
+					switch (alt30) {
+						case 1:
+
+						{
+
+							{
+
+								{
+
+									{
+										if (state.backtracking == 0) {
+
+											newCompositeNode(grammarAccess.getAnnotationFieldAccess()
+													.getModifiersFieldModifierParserRuleCall_2_0_0_0());
+
+										}
+										pushFollow(FOLLOW_ruleFieldModifier_in_ruleAnnotationField1314);
+										lv_modifiers_2_0 = ruleFieldModifier();
+
+										state._fsp--;
+										if (state.failed)
+											return current;
+										if (state.backtracking == 0) {
+
+											if (current == null) {
+												current = createModelElementForParent(grammarAccess
+														.getAnnotationFieldRule());
+											}
+											add(current, XTEND_MEMBER__MODIFIERS, lv_modifiers_2_0, "FieldModifier");
+											afterParserOrEnumRuleCall();
+
+										}
+
+									}
+
+								}
+
+								loop28: do {
+									int alt28 = 2;
+									int LA28_0 = input.LA(1);
+
+									if ((LA28_0 == 20 || (LA28_0 >= 39 && LA28_0 <= 45))) {
+										alt28 = 1;
+									}
+
+									switch (alt28) {
+										case 1:
+
+										{
+
+											{
+												if (state.backtracking == 0) {
+
+													newCompositeNode(grammarAccess.getAnnotationFieldAccess()
+															.getModifiersCommonModifierParserRuleCall_2_0_1_0());
+
+												}
+												pushFollow(FOLLOW_ruleCommonModifier_in_ruleAnnotationField1335);
+												lv_modifiers_3_0 = ruleCommonModifier();
+
+												state._fsp--;
+												if (state.failed)
+													return current;
+												if (state.backtracking == 0) {
+
+													if (current == null) {
+														current = createModelElementForParent(grammarAccess
+																.getAnnotationFieldRule());
+													}
+													addModifier(current, lv_modifiers_3_0);
+													afterParserOrEnumRuleCall();
+
+												}
+
+											}
+
+										}
+											break;
+
+										default:
+											break loop28;
+									}
+								} while (true);
+
+								int alt29 = 2;
+								alt29 = dfa29.predict(input);
+								switch (alt29) {
+									case 1:
+
+									{
+
+										{
+											if (state.backtracking == 0) {
+
+												newCompositeNode(grammarAccess.getAnnotationFieldAccess()
+														.getTypeJvmTypeReferenceParserRuleCall_2_0_2_0());
+
+											}
+											pushFollow(FOLLOW_ruleJvmTypeReference_in_ruleAnnotationField1357);
+											lv_type_4_0 = ruleJvmTypeReference();
+
+											state._fsp--;
+											if (state.failed)
+												return current;
+											if (state.backtracking == 0) {
+
+												if (current == null) {
+													current = createModelElementForParent(grammarAccess
+															.getAnnotationFieldRule());
+												}
+												set(current, XTEND_FIELD__TYPE, lv_type_4_0, null);
+												afterParserOrEnumRuleCall();
+
+											}
+
+										}
+
+									}
+										break;
+
+								}
+
+								{
+
+									{
+										if (state.backtracking == 0) {
+
+											newCompositeNode(grammarAccess.getAnnotationFieldAccess()
+													.getNameValidIDParserRuleCall_2_0_3_0());
+
+										}
+										pushFollow(FOLLOW_ruleValidID_in_ruleAnnotationField1379);
+										lv_name_5_0 = ruleValidID();
+
+										state._fsp--;
+										if (state.failed)
+											return current;
+										if (state.backtracking == 0) {
+
+											if (current == null) {
+												current = createModelElementForParent(grammarAccess
+														.getAnnotationFieldRule());
+											}
+											set(current, XTEND_FIELD__NAME, lv_name_5_0, "ValidID");
+											afterParserOrEnumRuleCall();
+
+										}
+
+									}
+
+								}
+
+							}
+
+						}
+							break;
+						case 2:
+
+						{
+
+							{
+
+								{
+
+									{
+										if (state.backtracking == 0) {
+
+											newCompositeNode(grammarAccess.getAnnotationFieldAccess()
+													.getTypeJvmTypeReferenceParserRuleCall_2_1_0_0());
+
+										}
+										pushFollow(FOLLOW_ruleJvmTypeReference_in_ruleAnnotationField1408);
+										lv_type_6_0 = ruleJvmTypeReference();
+
+										state._fsp--;
+										if (state.failed)
+											return current;
+										if (state.backtracking == 0) {
+
+											if (current == null) {
+												current = createModelElementForParent(grammarAccess
+														.getAnnotationFieldRule());
+											}
+											set(current, XTEND_FIELD__TYPE, lv_type_6_0, null);
+											afterParserOrEnumRuleCall();
+
+										}
+
+									}
+
+								}
+
+								{
+
+									{
+										if (state.backtracking == 0) {
+
+											newCompositeNode(grammarAccess.getAnnotationFieldAccess()
+													.getNameValidIDParserRuleCall_2_1_1_0());
+
+										}
+										pushFollow(FOLLOW_ruleValidID_in_ruleAnnotationField1429);
+										lv_name_7_0 = ruleValidID();
+
+										state._fsp--;
+										if (state.failed)
+											return current;
+										if (state.backtracking == 0) {
+
+											if (current == null) {
+												current = createModelElementForParent(grammarAccess
+														.getAnnotationFieldRule());
+											}
+											set(current, XTEND_FIELD__NAME, lv_name_7_0, "ValidID");
+											afterParserOrEnumRuleCall();
+
+										}
+
+									}
+
+								}
+
+							}
+
+						}
+							break;
+
+					}
+
+					int alt31 = 2;
+					int LA31_0 = input.LA(1);
+
+					if ((LA31_0 == 33)) {
+						alt31 = 1;
+					}
+					switch (alt31) {
+						case 1:
+
+						{
+							otherlv_8 = (Token) match(input, 33, FOLLOW_33_in_ruleAnnotationField1444);
+							if (state.failed)
+								return current;
+							if (state.backtracking == 0) {
+
+								newLeafNode(otherlv_8, grammarAccess.getAnnotationFieldAccess()
+										.getEqualsSignKeyword_3_0());
+
+							}
+
+							{
+
+								{
+									if (state.backtracking == 0) {
+
+										newCompositeNode(grammarAccess.getAnnotationFieldAccess()
+												.getInitialValueXAnnotationElementValueParserRuleCall_3_1_0());
+
+									}
+									pushFollow(FOLLOW_ruleXAnnotationElementValue_in_ruleAnnotationField1465);
+									lv_initialValue_9_0 = ruleXAnnotationElementValue();
+
+									state._fsp--;
+									if (state.failed)
+										return current;
+									if (state.backtracking == 0) {
+
+										if (current == null) {
+											current = createModelElementForParent(grammarAccess
+													.getAnnotationFieldRule());
+										}
+										set(current, XTEND_FIELD__INITIAL_VALUE, lv_initialValue_9_0, null);
+										afterParserOrEnumRuleCall();
+
+									}
+
+								}
+
+							}
+
+						}
+							break;
+
+					}
+
+					int alt32 = 2;
+					int LA32_0 = input.LA(1);
+
+					if ((LA32_0 == 21)) {
+						alt32 = 1;
+					}
+					switch (alt32) {
+						case 1:
+
+						{
+							otherlv_10 = (Token) match(input, 21, FOLLOW_21_in_ruleAnnotationField1480);
+							if (state.failed)
+								return current;
+							if (state.backtracking == 0) {
+
+								newLeafNode(otherlv_10, grammarAccess.getAnnotationFieldAccess()
+										.getSemicolonKeyword_4());
+
+							}
+
+						}
+							break;
+
+					}
+
+				}
+
+			}
+
+			if (state.backtracking == 0) {
+				leaveRule();
+			}
+		}
+
+		catch (RecognitionException re) {
+			recoverAndAppendSkippedTokens(re);
+		} finally {
+		}
+		return current;
+	}
+
+	public final EObject entryRuleMember() throws RecognitionException {
+		EObject current = null;
+
+		EObject iv_ruleMember = null;
+
+		try {
+
+			{
+				if (state.backtracking == 0) {
+					newCompositeNode(grammarAccess.getMemberRule());
+				}
+				pushFollow(FOLLOW_ruleMember_in_entryRuleMember1518);
+				iv_ruleMember = ruleMember();
+
+				state._fsp--;
+				if (state.failed)
+					return current;
+				if (state.backtracking == 0) {
+					current = iv_ruleMember;
+				}
+				match(input, EOF, FOLLOW_EOF_in_entryRuleMember1528);
+				if (state.failed)
+					return current;
+
+			}
+
+		}
+
+		catch (RecognitionException re) {
+			recoverAndAppendSkippedTokens(re);
+		} finally {
+		}
+		return current;
+	}
+
+	public final EObject ruleMember() throws RecognitionException {
+		EObject current = null;
+
+		Token lv_modifiers_8_0 = null;
+		Token lv_modifiers_15_0 = null;
+		Token otherlv_21 = null;
+		Token otherlv_23 = null;
+		Token otherlv_29 = null;
+		Token otherlv_31 = null;
+		Token otherlv_33 = null;
+		Token otherlv_37 = null;
+		Token otherlv_40 = null;
+		Token otherlv_43 = null;
+		Token otherlv_45 = null;
+		Token otherlv_47 = null;
+		Token otherlv_49 = null;
+		Token otherlv_50 = null;
+		Token otherlv_52 = null;
+		Token otherlv_56 = null;
+		Token otherlv_59 = null;
+		Token otherlv_60 = null;
+		Token otherlv_62 = null;
+		Token otherlv_64 = null;
+		Token otherlv_65 = null;
+		Token otherlv_67 = null;
+		Token otherlv_69 = null;
+		Token otherlv_70 = null;
+		Token otherlv_72 = null;
+		EObject lv_annotations_1_0 = null;
+
+		AntlrDatatypeRuleToken lv_modifiers_3_0 = null;
+
+		AntlrDatatypeRuleToken lv_modifiers_4_0 = null;
+
+		AntlrDatatypeRuleToken lv_modifiers_5_0 = null;
+
+		EObject lv_type_6_0 = null;
+
+		AntlrDatatypeRuleToken lv_name_7_0 = null;
+
+		AntlrDatatypeRuleToken lv_modifiers_9_0 = null;
+
+		AntlrDatatypeRuleToken lv_modifiers_10_0 = null;
+
+		EObject lv_type_11_0 = null;
+
+		AntlrDatatypeRuleToken lv_name_12_0 = null;
+
+		AntlrDatatypeRuleToken lv_modifiers_13_0 = null;
+
+		AntlrDatatypeRuleToken lv_modifiers_14_0 = null;
+
+		AntlrDatatypeRuleToken lv_modifiers_16_0 = null;
+
+		EObject lv_type_17_0 = null;
+
+		AntlrDatatypeRuleToken lv_name_18_0 = null;
+
+		EObject lv_type_19_0 = null;
+
+		AntlrDatatypeRuleToken lv_name_20_0 = null;
+
+		EObject lv_initialValue_22_0 = null;
+
+		AntlrDatatypeRuleToken lv_modifiers_25_0 = null;
+
+		AntlrDatatypeRuleToken lv_modifiers_26_0 = null;
+
+		AntlrDatatypeRuleToken lv_modifiers_27_0 = null;
+
+		AntlrDatatypeRuleToken lv_modifiers_28_0 = null;
+
+		EObject lv_typeParameters_30_0 = null;
+
+		EObject lv_typeParameters_32_0 = null;
+
+		EObject lv_returnType_34_0 = null;
+
+		EObject lv_createExtensionInfo_35_0 = null;
+
+		AntlrDatatypeRuleToken lv_name_36_0 = null;
+
+		EObject lv_returnType_38_0 = null;
+
+		AntlrDatatypeRuleToken lv_name_39_0 = null;
+
+		EObject lv_createExtensionInfo_41_0 = null;
+
+		AntlrDatatypeRuleToken lv_name_42_0 = null;
+
+		AntlrDatatypeRuleToken lv_name_44_0 = null;
+
+		EObject lv_parameters_46_0 = null;
+
+		EObject lv_parameters_48_0 = null;
+
+		EObject lv_exceptions_51_0 = null;
+
+		EObject lv_exceptions_53_0 = null;
+
+		EObject lv_expression_54_0 = null;
+
+		EObject lv_expression_55_0 = null;
+
+		AntlrDatatypeRuleToken lv_modifiers_58_0 = null;
+
+		EObject lv_typeParameters_61_0 = null;
+
+		EObject lv_typeParameters_63_0 = null;
+
+		EObject lv_parameters_66_0 = null;
+
+		EObject lv_parameters_68_0 = null;
+
+		EObject lv_exceptions_71_0 = null;
+
+		EObject lv_exceptions_73_0 = null;
+
+		EObject lv_expression_74_0 = null;
+
+		enterRule();
+
+		try {
+
+			{
+
+				{
+
+					MemberElements memberAccess = grammarAccess
+							.getMemberAccess();
+					{
+						if (state.backtracking == 0) {
+
+							current = forceCreateModelElement(memberAccess.getXtendMemberAction_0(),
+									current);
+
+						}
+
+					}
+
+					ParserRule memberRule = memberAccess.getRule();
+					loop33: do {
+						int alt33 = 2;
+						int LA33_0 = input.LA(1);
+
+						if ((LA33_0 == 63)) {
+							alt33 = 1;
+						}
+
+						switch (alt33) {
+							case 1:
+
+							{
+
+								{
+									lv_annotations_1_0 = callRuleXAnnotation();
+
+									state._fsp--;
+									if (state.failed)
+										return current;
+									if (state.backtracking == 0) {
+
+										if (current == null) {
+											current = createModelElementForParent(memberRule);
+										}
+										add(current, XTEND_ANNOTATION_TARGET__ANNOTATIONS, lv_annotations_1_0, "XAnnotation");
+										afterParserOrEnumRuleCall();
+
+									}
+
+								}
+
+							}
+								break;
+
+							default:
+								break loop33;
+						}
+					} while (true);
+
+					int alt62 = 3;
+					alt62 = dfa62.predict(input);
+					switch (alt62) {
+						case 1:
+
+						{
+
+							{
+
+								{
+									if (state.backtracking == 0) {
+
+										current = forceCreateModelElementAndSet(memberAccess
+												.getXtendFieldAnnotationInfoAction_2_0_0(), XTEND_MEMBER__ANNOTATION_INFO, current);
+
+									}
+
+								}
+
+								loop34: do {
+									int alt34 = 2;
+									int LA34_0 = input.LA(1);
+
+									if ((LA34_0 == 20 || (LA34_0 >= 39 && LA34_0 <= 45))) {
+										alt34 = 1;
+									}
+
+									switch (alt34) {
+										case 1:
+
+										{
+
+											{
+												if (state.backtracking == 0) {
+
+													newCompositeNode(memberAccess
+															.getModifiersCommonModifierParserRuleCall_2_0_1_0());
+
+												}
+												pushFollow(FOLLOW_ruleCommonModifier_in_ruleMember1616);
+												lv_modifiers_3_0 = ruleCommonModifier();
+
+												state._fsp--;
+												if (state.failed)
+													return current;
+												if (state.backtracking == 0) {
+
+													if (current == null) {
+														current = createModelElementForParent(memberRule);
+													}
+													addModifier(current, lv_modifiers_3_0);
+													afterParserOrEnumRuleCall();
+
+												}
+
+											}
+
+										}
+											break;
+
+										default:
+											break loop34;
+									}
+								} while (true);
+
+								int alt42 = 4;
+								alt42 = dfa42.predict(input);
+								switch (alt42) {
+									case 1:
+
+									{
+
+										{
+
+											{
+
+												{
+													if (state.backtracking == 0) {
+
+														newCompositeNode(memberAccess
+																.getModifiersFieldModifierParserRuleCall_2_0_2_0_0_0());
+
+													}
+													pushFollow(FOLLOW_ruleFieldModifier_in_ruleMember1640);
+													lv_modifiers_4_0 = ruleFieldModifier();
+
+													state._fsp--;
+													if (state.failed)
+														return current;
+													if (state.backtracking == 0) {
+
+														if (current == null) {
+															current = createModelElementForParent(memberAccess.getRule());
+														}
+														add(current, XTEND_MEMBER__MODIFIERS, lv_modifiers_4_0, "FieldModifier");
+														afterParserOrEnumRuleCall();
+
+													}
+
+												}
+
+											}
+
+											loop35: do {
+												int alt35 = 2;
+												int LA35_0 = input.LA(1);
+
+												if ((LA35_0 == 20 || (LA35_0 >= 39 && LA35_0 <= 45))) {
+													alt35 = 1;
+												}
+
+												switch (alt35) {
+													case 1:
+
+													{
+
+														{
+															if (state.backtracking == 0) {
+
+																newCompositeNode(memberAccess
+																		.getModifiersCommonModifierParserRuleCall_2_0_2_0_1_0());
+
+															}
+															pushFollow(FOLLOW_ruleCommonModifier_in_ruleMember1661);
+															lv_modifiers_5_0 = ruleCommonModifier();
+
+															state._fsp--;
+															if (state.failed)
+																return current;
+															if (state.backtracking == 0) {
+
+																if (current == null) {
+																	current = createModelElementForParent(memberAccess.getRule());
+																}
+																addModifier(current, lv_modifiers_5_0);
+																afterParserOrEnumRuleCall();
+
+															}
+
+														}
+
+													}
+														break;
+
+													default:
+														break loop35;
+												}
+											} while (true);
+
+											int alt36 = 2;
+											alt36 = dfa36.predict(input);
+											switch (alt36) {
+												case 1:
+
+												{
+
+													{
+														if (state.backtracking == 0) {
+
+															newCompositeNode(memberAccess
+																	.getTypeJvmTypeReferenceParserRuleCall_2_0_2_0_2_0());
+
+														}
+														pushFollow(FOLLOW_ruleJvmTypeReference_in_ruleMember1683);
+														lv_type_6_0 = ruleJvmTypeReference();
+
+														state._fsp--;
+														if (state.failed)
+															return current;
+														if (state.backtracking == 0) {
+
+															if (current == null) {
+																current = createModelElementForParent(memberRule);
+															}
+															set(current, XTEND_FIELD__TYPE, lv_type_6_0, null);
+															afterParserOrEnumRuleCall();
+
+														}
+
+													}
+
+												}
+													break;
+
+											}
+
+											{
+
+												{
+													if (state.backtracking == 0) {
+
+														newCompositeNode(memberAccess
+																.getNameValidIDParserRuleCall_2_0_2_0_3_0());
+
+													}
+													pushFollow(FOLLOW_ruleValidID_in_ruleMember1705);
+													lv_name_7_0 = ruleValidID();
+
+													state._fsp--;
+													if (state.failed)
+														return current;
+													if (state.backtracking == 0) {
+
+														if (current == null) {
+															current = createModelElementForParent(memberRule);
+														}
+														set(current, XTEND_FIELD__NAME, lv_name_7_0, "ValidID");
+														afterParserOrEnumRuleCall();
+
+													}
+
+												}
+
+											}
+
+										}
+
+									}
+										break;
+									case 2:
+
+									{
+
+										{
+
+											{
+
+												{
+													lv_modifiers_8_0 = (Token) match(input, 34,
+															FOLLOW_34_in_ruleMember1731);
+													if (state.failed)
+														return current;
+													if (state.backtracking == 0) {
+
+														newLeafNode(lv_modifiers_8_0, memberAccess
+																.getModifiersExtensionKeyword_2_0_2_1_0_0());
+
+													}
+													if (state.backtracking == 0) {
+
+														if (current == null) {
+															current = createModelElement(memberRule);
+														}
+														addWithLastConsumed(current, XTEND_MEMBER__MODIFIERS, lv_modifiers_8_0,
+																"extension");
+
+													}
+
+												}
+
+											}
+
+											loop37: do {
+												int alt37 = 3;
+												int LA37_0 = input.LA(1);
+
+												if (((LA37_0 >= 46 && LA37_0 <= 47))) {
+													alt37 = 1;
+												} else if ((LA37_0 == 20 || (LA37_0 >= 39 && LA37_0 <= 45))) {
+													alt37 = 2;
+												}
+
+												switch (alt37) {
+													case 1:
+
+													{
+
+														{
+
+															{
+																if (state.backtracking == 0) {
+
+																	newCompositeNode(memberAccess
+																			.getModifiersFieldModifierParserRuleCall_2_0_2_1_1_0_0());
+
+																}
+																pushFollow(FOLLOW_ruleFieldModifier_in_ruleMember1766);
+																lv_modifiers_9_0 = ruleFieldModifier();
+
+																state._fsp--;
+																if (state.failed)
+																	return current;
+																if (state.backtracking == 0) {
+
+																	if (current == null) {
+																		current = createModelElementForParent(memberRule);
+																	}
+																	add(current, XTEND_MEMBER__MODIFIERS, lv_modifiers_9_0,
+																			"FieldModifier");
+																	afterParserOrEnumRuleCall();
+
+																}
+
+															}
+
+														}
+
+													}
+														break;
+													case 2:
+
+													{
+
+														{
+
+															{
+																if (state.backtracking == 0) {
+
+																	newCompositeNode(memberAccess
+																			.getModifiersCommonModifierParserRuleCall_2_0_2_1_1_1_0());
+
+																}
+																pushFollow(FOLLOW_ruleCommonModifier_in_ruleMember1793);
+																lv_modifiers_10_0 = ruleCommonModifier();
+
+																state._fsp--;
+																if (state.failed)
+																	return current;
+																if (state.backtracking == 0) {
+
+																	if (current == null) {
+																		current = createModelElementForParent(memberRule);
+																	}
+																	addModifier(current, lv_modifiers_10_0);
+																	afterParserOrEnumRuleCall();
+
+																}
+
+															}
+
+														}
+
+													}
+														break;
+
+													default:
+														break loop37;
+												}
+											} while (true);
+
+											{
+
+												{
+													if (state.backtracking == 0) {
+
+														newCompositeNode(memberAccess
+																.getTypeJvmTypeReferenceParserRuleCall_2_0_2_1_2_0());
+
+													}
+													pushFollow(FOLLOW_ruleJvmTypeReference_in_ruleMember1816);
+													lv_type_11_0 = ruleJvmTypeReference();
+
+													state._fsp--;
+													if (state.failed)
+														return current;
+													if (state.backtracking == 0) {
+
+														if (current == null) {
+															current = createModelElementForParent(memberRule);
+														}
+														set(current, XTEND_FIELD__TYPE, lv_type_11_0, null);
+														afterParserOrEnumRuleCall();
+
+													}
+
+												}
+
+											}
+
+											int alt38 = 2;
+											alt38 = dfa38.predict(input);
+											switch (alt38) {
+												case 1:
+
+												{
+
+													{
+														if (state.backtracking == 0) {
+
+															newCompositeNode(memberAccess
+																	.getNameValidIDParserRuleCall_2_0_2_1_3_0());
+
+														}
+														pushFollow(FOLLOW_ruleValidID_in_ruleMember1837);
+														lv_name_12_0 = ruleValidID();
+
+														state._fsp--;
+														if (state.failed)
+															return current;
+														if (state.backtracking == 0) {
+
+															if (current == null) {
+																current = createModelElementForParent(memberRule);
+															}
+															set(current, XTEND_FIELD__NAME, lv_name_12_0, "ValidID");
+															afterParserOrEnumRuleCall();
+
+														}
+
+													}
+
+												}
+													break;
+
+											}
+
+										}
+
+									}
+										break;
+									case 3:
+
+									{
+
+										{
+
+											{
+
+												{
+													if (state.backtracking == 0) {
+
+														newCompositeNode(memberAccess
+																.getModifiersFieldModifierParserRuleCall_2_0_2_2_0_0());
+
+													}
+													pushFollow(FOLLOW_ruleFieldModifier_in_ruleMember1867);
+													lv_modifiers_13_0 = ruleFieldModifier();
+
+													state._fsp--;
+													if (state.failed)
+														return current;
+													if (state.backtracking == 0) {
+
+														if (current == null) {
+															current = createModelElementForParent(memberRule);
+														}
+														add(current, XTEND_MEMBER__MODIFIERS, lv_modifiers_13_0, "FieldModifier");
+														afterParserOrEnumRuleCall();
+
+													}
+
+												}
+
+											}
+
+											loop39: do {
+												int alt39 = 2;
+												int LA39_0 = input.LA(1);
+
+												if ((LA39_0 == 20 || (LA39_0 >= 39 && LA39_0 <= 45))) {
+													alt39 = 1;
+												}
+
+												switch (alt39) {
+													case 1:
+
+													{
+
+														{
+															if (state.backtracking == 0) {
+
+																newCompositeNode(memberAccess
+																		.getModifiersCommonModifierParserRuleCall_2_0_2_2_1_0());
+
+															}
+															pushFollow(FOLLOW_ruleCommonModifier_in_ruleMember1888);
+															lv_modifiers_14_0 = ruleCommonModifier();
+
+															state._fsp--;
+															if (state.failed)
+																return current;
+															if (state.backtracking == 0) {
+
+																if (current == null) {
+																	current = createModelElementForParent(memberRule);
+																}
+																addModifier(current, lv_modifiers_14_0);
+																afterParserOrEnumRuleCall();
+
+															}
+
+														}
+
+													}
+														break;
+
+													default:
+														break loop39;
+												}
+											} while (true);
+
+											{
+
+												{
+													lv_modifiers_15_0 = (Token) match(input, 34,
+															FOLLOW_34_in_ruleMember1907);
+													if (state.failed)
+														return current;
+													if (state.backtracking == 0) {
+
+														newLeafNode(lv_modifiers_15_0, memberAccess
+																.getModifiersExtensionKeyword_2_0_2_2_2_0());
+
+													}
+													if (state.backtracking == 0) {
+
+														if (current == null) {
+															current = createModelElement(memberRule);
+														}
+														addWithLastConsumed(current, XTEND_MEMBER__MODIFIERS, lv_modifiers_15_0,
+																"extension");
+
+													}
+
+												}
+
+											}
+
+											loop40: do {
+												int alt40 = 2;
+												int LA40_0 = input.LA(1);
+
+												if ((LA40_0 == 20 || (LA40_0 >= 39 && LA40_0 <= 45))) {
+													alt40 = 1;
+												}
+
+												switch (alt40) {
+													case 1:
+
+													{
+
+														{
+															if (state.backtracking == 0) {
+
+																newCompositeNode(memberAccess
+																		.getModifiersCommonModifierParserRuleCall_2_0_2_2_3_0());
+
+															}
+															pushFollow(FOLLOW_ruleCommonModifier_in_ruleMember1941);
+															lv_modifiers_16_0 = ruleCommonModifier();
+
+															state._fsp--;
+															if (state.failed)
+																return current;
+															if (state.backtracking == 0) {
+
+																if (current == null) {
+																	current = createModelElementForParent(memberRule);
+																}
+																addModifier(current, lv_modifiers_16_0);
+																afterParserOrEnumRuleCall();
+
+															}
+
+														}
+
+													}
+														break;
+
+													default:
+														break loop40;
+												}
+											} while (true);
+
+											{
+
+												{
+													if (state.backtracking == 0) {
+
+														newCompositeNode(memberAccess
+																.getTypeJvmTypeReferenceParserRuleCall_2_0_2_2_4_0());
+
+													}
+													pushFollow(FOLLOW_ruleJvmTypeReference_in_ruleMember1963);
+													lv_type_17_0 = ruleJvmTypeReference();
+
+													state._fsp--;
+													if (state.failed)
+														return current;
+													if (state.backtracking == 0) {
+
+														if (current == null) {
+															current = createModelElementForParent(memberRule);
+														}
+														set(current, XTEND_FIELD__TYPE, lv_type_17_0, null);
+														afterParserOrEnumRuleCall();
+
+													}
+
+												}
+
+											}
+
+											int alt41 = 2;
+											alt41 = dfa41.predict(input);
+											switch (alt41) {
+												case 1:
+
+												{
+
+													{
+														if (state.backtracking == 0) {
+
+															newCompositeNode(memberAccess
+																	.getNameValidIDParserRuleCall_2_0_2_2_5_0());
+
+														}
+														pushFollow(FOLLOW_ruleValidID_in_ruleMember1984);
+														lv_name_18_0 = ruleValidID();
+
+														state._fsp--;
+														if (state.failed)
+															return current;
+														if (state.backtracking == 0) {
+
+															if (current == null) {
+																current = createModelElementForParent(memberRule);
+															}
+															set(current, XTEND_FIELD__NAME, lv_name_18_0, "ValidID");
+															afterParserOrEnumRuleCall();
+
+														}
+
+													}
+
+												}
+													break;
+
+											}
+
+										}
+
+									}
+										break;
+									case 4:
+
+									{
+
+										{
+
+											{
+
+												{
+													if (state.backtracking == 0) {
+
+														newCompositeNode(memberAccess
+																.getTypeJvmTypeReferenceParserRuleCall_2_0_2_3_0_0());
+
+													}
+													pushFollow(FOLLOW_ruleJvmTypeReference_in_ruleMember2014);
+													lv_type_19_0 = ruleJvmTypeReference();
+
+													state._fsp--;
+													if (state.failed)
+														return current;
+													if (state.backtracking == 0) {
+
+														if (current == null) {
+															current = createModelElementForParent(memberRule);
+														}
+														set(current, XTEND_FIELD__TYPE, lv_type_19_0, null);
+														afterParserOrEnumRuleCall();
+
+													}
+
+												}
+
+											}
+
+											{
+
+												{
+													if (state.backtracking == 0) {
+
+														newCompositeNode(memberAccess
+																.getNameValidIDParserRuleCall_2_0_2_3_1_0());
+
+													}
+													pushFollow(FOLLOW_ruleValidID_in_ruleMember2035);
+													lv_name_20_0 = ruleValidID();
+
+													state._fsp--;
+													if (state.failed)
+														return current;
+													if (state.backtracking == 0) {
+
+														if (current == null) {
+															current = createModelElementForParent(memberRule);
+														}
+														set(current, XTEND_FIELD__NAME, lv_name_20_0, "ValidID");
+														afterParserOrEnumRuleCall();
+
+													}
+
+												}
+
+											}
+
+										}
+
+									}
+										break;
+
+								}
+
+								int alt43 = 2;
+								int LA43_0 = input.LA(1);
+
+								if ((LA43_0 == 33)) {
+									alt43 = 1;
+								}
+								switch (alt43) {
+									case 1:
+
+									{
+										otherlv_21 = (Token) match(input, 33, FOLLOW_33_in_ruleMember2050);
+										if (state.failed)
+											return current;
+										if (state.backtracking == 0) {
+
+											newLeafNode(otherlv_21, memberAccess
+													.getEqualsSignKeyword_2_0_3_0());
+
+										}
+
+										{
+
+											{
+												if (state.backtracking == 0) {
+
+													newCompositeNode(memberAccess
+															.getInitialValueXExpressionParserRuleCall_2_0_3_1_0());
+
+												}
+												pushFollow(FOLLOW_ruleXExpression_in_ruleMember2071);
+												lv_initialValue_22_0 = ruleXExpression();
+
+												state._fsp--;
+												if (state.failed)
+													return current;
+												if (state.backtracking == 0) {
+
+													if (current == null) {
+														current = createModelElementForParent(memberRule);
+													}
+													set(current, XTEND_FIELD__INITIAL_VALUE, lv_initialValue_22_0, null);
+													afterParserOrEnumRuleCall();
+
+												}
+
+											}
+
+										}
+
+									}
+										break;
+
+								}
+
+								int alt44 = 2;
+								int LA44_0 = input.LA(1);
+
+								if ((LA44_0 == 21)) {
+									alt44 = 1;
+								}
+								switch (alt44) {
+									case 1:
+
+									{
+										otherlv_23 = (Token) match(input, 21, FOLLOW_21_in_ruleMember2086);
+										if (state.failed)
+											return current;
+										if (state.backtracking == 0) {
+
+											newLeafNode(otherlv_23, memberAccess
+													.getSemicolonKeyword_2_0_4());
+
+										}
+
+									}
+										break;
+
+								}
+
+							}
+
+						}
+							break;
+						case 2:
+
+						{
+
+							{
+
+								{
+									if (state.backtracking == 0) {
+
+										current = forceCreateModelElementAndSet(memberAccess
+												.getXtendFunctionAnnotationInfoAction_2_1_0(), XTEND_MEMBER__ANNOTATION_INFO, current);
+
+									}
+
+								}
+
+								loop45: do {
+									int alt45 = 2;
+									int LA45_0 = input.LA(1);
+
+									if ((LA45_0 == 20 || (LA45_0 >= 39 && LA45_0 <= 45))) {
+										alt45 = 1;
+									}
+
+									switch (alt45) {
+										case 1:
+
+										{
+
+											{
+												if (state.backtracking == 0) {
+
+													newCompositeNode(memberAccess
+															.getModifiersCommonModifierParserRuleCall_2_1_1_0());
+
+												}
+												pushFollow(FOLLOW_ruleCommonModifier_in_ruleMember2126);
+												lv_modifiers_25_0 = ruleCommonModifier();
+
+												state._fsp--;
+												if (state.failed)
+													return current;
+												if (state.backtracking == 0) {
+
+													if (current == null) {
+														current = createModelElementForParent(memberRule);
+													}
+													addModifier(current, lv_modifiers_25_0);
+													afterParserOrEnumRuleCall();
+
+												}
+
+											}
+
+										}
+											break;
+
+										default:
+											break loop45;
+									}
+								} while (true);
+
+								{
+
+									{
+										if (state.backtracking == 0) {
+
+											newCompositeNode(memberAccess
+													.getModifiersMethodModifierParserRuleCall_2_1_2_0());
+
+										}
+										pushFollow(FOLLOW_ruleMethodModifier_in_ruleMember2148);
+										lv_modifiers_26_0 = ruleMethodModifier();
+
+										state._fsp--;
+										if (state.failed)
+											return current;
+										if (state.backtracking == 0) {
+
+											if (current == null) {
+												current = createModelElementForParent(memberRule);
+											}
+											add(current, XTEND_MEMBER__MODIFIERS, lv_modifiers_26_0, "MethodModifier");
+											afterParserOrEnumRuleCall();
+
+										}
+
+									}
+
+								}
+
+								loop46: do {
+									int alt46 = 3;
+									int LA46_0 = input.LA(1);
+
+									if ((LA46_0 == 20 || (LA46_0 >= 39 && LA46_0 <= 45))) {
+										alt46 = 1;
+									} else if (((LA46_0 >= 48 && LA46_0 <= 49))) {
+										alt46 = 2;
+									}
+
+									switch (alt46) {
+										case 1:
+
+										{
+
+											{
+
+												{
+													if (state.backtracking == 0) {
+
+														newCompositeNode(memberAccess
+																.getModifiersCommonModifierParserRuleCall_2_1_3_0_0());
+
+													}
+													pushFollow(FOLLOW_ruleCommonModifier_in_ruleMember2170);
+													lv_modifiers_27_0 = ruleCommonModifier();
+
+													state._fsp--;
+													if (state.failed)
+														return current;
+													if (state.backtracking == 0) {
+
+														if (current == null) {
+															current = createModelElementForParent(memberRule);
+														}
+														addModifier(current, lv_modifiers_27_0);
+														afterParserOrEnumRuleCall();
+
+													}
+
+												}
+
+											}
+
+										}
+											break;
+										case 2:
+
+										{
+
+											{
+
+												{
+													if (state.backtracking == 0) {
+
+														newCompositeNode(memberAccess
+																.getModifiersMethodModifierParserRuleCall_2_1_3_1_0());
+
+													}
+													pushFollow(FOLLOW_ruleMethodModifier_in_ruleMember2197);
+													lv_modifiers_28_0 = ruleMethodModifier();
+
+													state._fsp--;
+													if (state.failed)
+														return current;
+													if (state.backtracking == 0) {
+
+														if (current == null) {
+															current = createModelElementForParent(memberRule);
+														}
+														add(current, XTEND_MEMBER__MODIFIERS, lv_modifiers_28_0, "MethodModifier");
+														afterParserOrEnumRuleCall();
+
+													}
+
+												}
+
+											}
+
+										}
+											break;
+
+										default:
+											break loop46;
+									}
+								} while (true);
+
+								int alt48 = 2;
+								int LA48_0 = input.LA(1);
+
+								if ((LA48_0 == 23)) {
+									alt48 = 1;
+								}
+								switch (alt48) {
+									case 1:
+
+									{
+										otherlv_29 = (Token) match(input, 23, FOLLOW_23_in_ruleMember2212);
+										if (state.failed)
+											return current;
+										if (state.backtracking == 0) {
+
+											newLeafNode(otherlv_29, memberAccess
+													.getLessThanSignKeyword_2_1_4_0());
+
+										}
+
+										{
+
+											{
+												if (state.backtracking == 0) {
+
+													newCompositeNode(memberAccess
+															.getTypeParametersJvmTypeParameterParserRuleCall_2_1_4_1_0());
+
+												}
+												pushFollow(FOLLOW_ruleJvmTypeParameter_in_ruleMember2233);
+												lv_typeParameters_30_0 = ruleJvmTypeParameter();
+
+												state._fsp--;
+												if (state.failed)
+													return current;
+												if (state.backtracking == 0) {
+
+													if (current == null) {
+														current = createModelElementForParent(memberRule);
+													}
+													add(current, XTEND_FUNCTION__TYPE_PARAMETERS, lv_typeParameters_30_0,
+															"JvmTypeParameter");
+													afterParserOrEnumRuleCall();
+
+												}
+
+											}
+
+										}
+
+										loop47: do {
+											int alt47 = 2;
+											int LA47_0 = input.LA(1);
+
+											if ((LA47_0 == 24)) {
+												alt47 = 1;
+											}
+
+											switch (alt47) {
+												case 1:
+
+												{
+													otherlv_31 = (Token) match(input, 24, FOLLOW_24_in_ruleMember2246);
+													if (state.failed)
+														return current;
+													if (state.backtracking == 0) {
+
+														newLeafNode(otherlv_31, memberAccess
+																.getCommaKeyword_2_1_4_2_0());
+
+													}
+
+													{
+
+														{
+															if (state.backtracking == 0) {
+
+																newCompositeNode(memberAccess
+																		.getTypeParametersJvmTypeParameterParserRuleCall_2_1_4_2_1_0());
+
+															}
+															pushFollow(FOLLOW_ruleJvmTypeParameter_in_ruleMember2267);
+															lv_typeParameters_32_0 = ruleJvmTypeParameter();
+
+															state._fsp--;
+															if (state.failed)
+																return current;
+															if (state.backtracking == 0) {
+
+																if (current == null) {
+																	current = createModelElementForParent(memberRule);
+																}
+																add(current, XTEND_FUNCTION__TYPE_PARAMETERS, lv_typeParameters_32_0,
+																		"JvmTypeParameter");
+																afterParserOrEnumRuleCall();
+
+															}
+
+														}
+
+													}
+
+												}
+													break;
+
+												default:
+													break loop47;
+											}
+										} while (true);
+
+										otherlv_33 = (Token) match(input, 25, FOLLOW_25_in_ruleMember2281);
+										if (state.failed)
+											return current;
+										if (state.backtracking == 0) {
+
+											newLeafNode(otherlv_33, memberAccess
+													.getGreaterThanSignKeyword_2_1_4_3());
+
+										}
+
+									}
+										break;
+
+								}
+
+								int alt49 = 4;
+								alt49 = dfa49.predict(input);
+								switch (alt49) {
+									case 1:
+
+									{
+
+										{
+
+											{
+
+												{
+
+													{
+														if (state.backtracking == 0) {
+
+															newCompositeNode(memberAccess
+																	.getReturnTypeJvmTypeReferenceParserRuleCall_2_1_5_0_0_0_0());
+
+														}
+														pushFollow(FOLLOW_ruleJvmTypeReference_in_ruleMember2343);
+														lv_returnType_34_0 = ruleJvmTypeReference();
+
+														state._fsp--;
+														if (state.failed)
+															return current;
+														if (state.backtracking == 0) {
+
+															if (current == null) {
+																current = createModelElementForParent(memberRule);
+															}
+															set(current, XTEND_FUNCTION__RETURN_TYPE, lv_returnType_34_0,
+																	null);
+															afterParserOrEnumRuleCall();
+
+														}
+
+													}
+
+												}
+
+												{
+
+													{
+														if (state.backtracking == 0) {
+
+															newCompositeNode(memberAccess
+																	.getCreateExtensionInfoCreateExtensionInfoParserRuleCall_2_1_5_0_0_1_0());
+
+														}
+														pushFollow(FOLLOW_ruleCreateExtensionInfo_in_ruleMember2364);
+														lv_createExtensionInfo_35_0 = ruleCreateExtensionInfo();
+
+														state._fsp--;
+														if (state.failed)
+															return current;
+														if (state.backtracking == 0) {
+
+															if (current == null) {
+																current = createModelElementForParent(memberRule);
+															}
+															set(current, XTEND_FUNCTION__CREATE_EXTENSION_INFO,
+																	lv_createExtensionInfo_35_0, "CreateExtensionInfo");
+															afterParserOrEnumRuleCall();
+
+														}
+
+													}
+
+												}
+
+												{
+
+													{
+														if (state.backtracking == 0) {
+
+															newCompositeNode(memberAccess
+																	.getNameValidIDParserRuleCall_2_1_5_0_0_2_0());
+
+														}
+														pushFollow(FOLLOW_ruleValidID_in_ruleMember2385);
+														lv_name_36_0 = ruleValidID();
+
+														state._fsp--;
+														if (state.failed)
+															return current;
+														if (state.backtracking == 0) {
+
+															if (current == null) {
+																current = createModelElementForParent(memberRule);
+															}
+															set(current, XTEND_FUNCTION__NAME, lv_name_36_0, "ValidID");
+															afterParserOrEnumRuleCall();
+
+														}
+
+													}
+
+												}
+
+												otherlv_37 = (Token) match(input, 35, FOLLOW_35_in_ruleMember2397);
+												if (state.failed)
+													return current;
+												if (state.backtracking == 0) {
+
+													newLeafNode(otherlv_37, memberAccess
+															.getLeftParenthesisKeyword_2_1_5_0_0_3());
+
+												}
+
+											}
+
+										}
+
+									}
+										break;
+									case 2:
+
+									{
+
+										{
+
+											{
+
+												{
+
+													{
+														if (state.backtracking == 0) {
+
+															newCompositeNode(memberAccess
+																	.getReturnTypeJvmTypeReferenceParserRuleCall_2_1_5_1_0_0_0());
+
+														}
+														pushFollow(FOLLOW_ruleJvmTypeReference_in_ruleMember2455);
+														lv_returnType_38_0 = ruleJvmTypeReference();
+
+														state._fsp--;
+														if (state.failed)
+															return current;
+														if (state.backtracking == 0) {
+
+															if (current == null) {
+																current = createModelElementForParent(memberRule);
+															}
+															set(current, XTEND_FUNCTION__RETURN_TYPE, lv_returnType_38_0,
+																	null);
+															afterParserOrEnumRuleCall();
+
+														}
+
+													}
+
+												}
+
+												{
+
+													{
+														if (state.backtracking == 0) {
+
+															newCompositeNode(memberAccess
+																	.getNameValidIDParserRuleCall_2_1_5_1_0_1_0());
+
+														}
+														pushFollow(FOLLOW_ruleValidID_in_ruleMember2476);
+														lv_name_39_0 = ruleValidID();
+
+														state._fsp--;
+														if (state.failed)
+															return current;
+														if (state.backtracking == 0) {
+
+															if (current == null) {
+																current = createModelElementForParent(memberRule);
+															}
+															set(current, XTEND_FUNCTION__NAME, lv_name_39_0, "ValidID");
+															afterParserOrEnumRuleCall();
+
+														}
+
+													}
+
+												}
+
+												otherlv_40 = (Token) match(input, 35, FOLLOW_35_in_ruleMember2488);
+												if (state.failed)
+													return current;
+												if (state.backtracking == 0) {
+
+													newLeafNode(otherlv_40, memberAccess
+															.getLeftParenthesisKeyword_2_1_5_1_0_2());
+
+												}
+
+											}
+
+										}
+
+									}
+										break;
+									case 3:
+
+									{
+
+										{
+
+											{
+
+												{
+
+													{
+														if (state.backtracking == 0) {
+
+															newCompositeNode(memberAccess
+																	.getCreateExtensionInfoCreateExtensionInfoParserRuleCall_2_1_5_2_0_0_0());
+
+														}
+														pushFollow(FOLLOW_ruleCreateExtensionInfo_in_ruleMember2546);
+														lv_createExtensionInfo_41_0 = ruleCreateExtensionInfo();
+
+														state._fsp--;
+														if (state.failed)
+															return current;
+														if (state.backtracking == 0) {
+
+															if (current == null) {
+																current = createModelElementForParent(memberRule);
+															}
+															set(current, XTEND_FUNCTION__CREATE_EXTENSION_INFO,
+																	lv_createExtensionInfo_41_0, "CreateExtensionInfo");
+															afterParserOrEnumRuleCall();
+
+														}
+
+													}
+
+												}
+
+												{
+
+													{
+														if (state.backtracking == 0) {
+
+															newCompositeNode(memberAccess
+																	.getNameValidIDParserRuleCall_2_1_5_2_0_1_0());
+
+														}
+														pushFollow(FOLLOW_ruleValidID_in_ruleMember2567);
+														lv_name_42_0 = ruleValidID();
+
+														state._fsp--;
+														if (state.failed)
+															return current;
+														if (state.backtracking == 0) {
+
+															if (current == null) {
+																current = createModelElementForParent(memberRule);
+															}
+															set(current, XTEND_FUNCTION__NAME, lv_name_42_0, "ValidID");
+															afterParserOrEnumRuleCall();
+
+														}
+
+													}
+
+												}
+
+												otherlv_43 = (Token) match(input, 35, FOLLOW_35_in_ruleMember2579);
+												if (state.failed)
+													return current;
+												if (state.backtracking == 0) {
+
+													newLeafNode(otherlv_43, memberAccess
+															.getLeftParenthesisKeyword_2_1_5_2_0_2());
+
+												}
+
+											}
+
+										}
+
+									}
+										break;
+									case 4:
+
+									{
+
+										{
+
+											{
+
+												{
+													if (state.backtracking == 0) {
+
+														newCompositeNode(memberAccess
+																.getNameValidIDParserRuleCall_2_1_5_3_0_0());
+
+													}
+													pushFollow(FOLLOW_ruleValidID_in_ruleMember2609);
+													lv_name_44_0 = ruleValidID();
+
+													state._fsp--;
+													if (state.failed)
+														return current;
+													if (state.backtracking == 0) {
+
+														if (current == null) {
+															current = createModelElementForParent(memberRule);
+														}
+														set(current, XTEND_FUNCTION__NAME, lv_name_44_0, "ValidID");
+														afterParserOrEnumRuleCall();
+
+													}
+
+												}
+
+											}
+
+											otherlv_45 = (Token) match(input, 35, FOLLOW_35_in_ruleMember2621);
+											if (state.failed)
+												return current;
+											if (state.backtracking == 0) {
+
+												newLeafNode(otherlv_45, memberAccess
+														.getLeftParenthesisKeyword_2_1_5_3_1());
+
+											}
+
+										}
+
+									}
+										break;
+
+								}
+
+								int alt51 = 2;
+								int LA51_0 = input.LA(1);
+
+								if ((LA51_0 == RULE_ID || LA51_0 == 32 || (LA51_0 >= 34 && LA51_0 <= 35)
+										|| LA51_0 == 50 || LA51_0 == 63 || LA51_0 == 79)) {
+									alt51 = 1;
+								}
+								switch (alt51) {
+									case 1:
+
+									{
+
+										{
+
+											{
+												if (state.backtracking == 0) {
+
+													newCompositeNode(memberAccess
+															.getParametersParameterParserRuleCall_2_1_6_0_0());
+
+												}
+												pushFollow(FOLLOW_ruleParameter_in_ruleMember2645);
+												lv_parameters_46_0 = ruleParameter();
+
+												state._fsp--;
+												if (state.failed)
+													return current;
+												if (state.backtracking == 0) {
+
+													if (current == null) {
+														current = createModelElementForParent(memberRule);
+													}
+													add(current, XTEND_FUNCTION__PARAMETERS, lv_parameters_46_0, "Parameter");
+													afterParserOrEnumRuleCall();
+
+												}
+
+											}
+
+										}
+
+										loop50: do {
+											int alt50 = 2;
+											int LA50_0 = input.LA(1);
+
+											if ((LA50_0 == 24)) {
+												alt50 = 1;
+											}
+
+											switch (alt50) {
+												case 1:
+
+												{
+													otherlv_47 = (Token) match(input, 24, FOLLOW_24_in_ruleMember2658);
+													if (state.failed)
+														return current;
+													if (state.backtracking == 0) {
+
+														newLeafNode(otherlv_47, memberAccess
+																.getCommaKeyword_2_1_6_1_0());
+
+													}
+
+													{
+
+														{
+															if (state.backtracking == 0) {
+
+																newCompositeNode(memberAccess
+																		.getParametersParameterParserRuleCall_2_1_6_1_1_0());
+
+															}
+															pushFollow(FOLLOW_ruleParameter_in_ruleMember2679);
+															lv_parameters_48_0 = ruleParameter();
+
+															state._fsp--;
+															if (state.failed)
+																return current;
+															if (state.backtracking == 0) {
+
+																if (current == null) {
+																	current = createModelElementForParent(memberRule);
+																}
+																add(current, XTEND_FUNCTION__PARAMETERS, lv_parameters_48_0,
+																		"Parameter");
+																afterParserOrEnumRuleCall();
+
+															}
+
+														}
+
+													}
+
+												}
+													break;
+
+												default:
+													break loop50;
+											}
+										} while (true);
+
+									}
+										break;
+
+								}
+
+								otherlv_49 = (Token) match(input, 36, FOLLOW_36_in_ruleMember2695);
+								if (state.failed)
+									return current;
+								if (state.backtracking == 0) {
+
+									newLeafNode(otherlv_49, memberAccess
+											.getRightParenthesisKeyword_2_1_7());
+
+								}
+
+								int alt53 = 2;
+								int LA53_0 = input.LA(1);
+
+								if ((LA53_0 == 37)) {
+									alt53 = 1;
+								}
+								switch (alt53) {
+									case 1:
+
+									{
+										otherlv_50 = (Token) match(input, 37, FOLLOW_37_in_ruleMember2708);
+										if (state.failed)
+											return current;
+										if (state.backtracking == 0) {
+
+											newLeafNode(otherlv_50, memberAccess
+													.getThrowsKeyword_2_1_8_0());
+
+										}
+
+										{
+
+											{
+												if (state.backtracking == 0) {
+
+													newCompositeNode(memberAccess
+															.getExceptionsJvmTypeReferenceParserRuleCall_2_1_8_1_0());
+
+												}
+												pushFollow(FOLLOW_ruleJvmTypeReference_in_ruleMember2729);
+												lv_exceptions_51_0 = ruleJvmTypeReference();
+
+												state._fsp--;
+												if (state.failed)
+													return current;
+												if (state.backtracking == 0) {
+
+													if (current == null) {
+														current = createModelElementForParent(memberRule);
+													}
+													add(current, XTEND_FUNCTION__EXCEPTIONS, lv_exceptions_51_0, null);
+													afterParserOrEnumRuleCall();
+
+												}
+
+											}
+
+										}
+
+										loop52: do {
+											int alt52 = 2;
+											int LA52_0 = input.LA(1);
+
+											if ((LA52_0 == 24)) {
+												alt52 = 1;
+											}
+
+											switch (alt52) {
+												case 1:
+
+												{
+													otherlv_52 = (Token) match(input, 24, FOLLOW_24_in_ruleMember2742);
+													if (state.failed)
+														return current;
+													if (state.backtracking == 0) {
+
+														newLeafNode(otherlv_52, memberAccess
+																.getCommaKeyword_2_1_8_2_0());
+
+													}
+
+													{
+
+														{
+															if (state.backtracking == 0) {
+
+																newCompositeNode(memberAccess
+																		.getExceptionsJvmTypeReferenceParserRuleCall_2_1_8_2_1_0());
+
+															}
+															pushFollow(FOLLOW_ruleJvmTypeReference_in_ruleMember2763);
+															lv_exceptions_53_0 = ruleJvmTypeReference();
+
+															state._fsp--;
+															if (state.failed)
+																return current;
+															if (state.backtracking == 0) {
+
+																if (current == null) {
+																	current = createModelElementForParent(memberRule);
+																}
+																add(current, XTEND_FUNCTION__EXCEPTIONS, lv_exceptions_53_0,
+																		null);
+																afterParserOrEnumRuleCall();
+
+															}
+
+														}
+
+													}
+
+												}
+													break;
+
+												default:
+													break loop52;
+											}
+										} while (true);
+
+									}
+										break;
+
+								}
+
+								int alt54 = 4;
+								switch (input.LA(1)) {
+									case 28: {
+										alt54 = 1;
+									}
+										break;
+									case RULE_RICH_TEXT:
+									case RULE_RICH_TEXT_START: {
+										alt54 = 2;
+									}
+										break;
+									case 21: {
+										alt54 = 3;
+									}
+										break;
+								}
+
+								switch (alt54) {
+									case 1:
+
+									{
+
+										{
+
+											{
+												if (state.backtracking == 0) {
+
+													newCompositeNode(memberAccess
+															.getExpressionXBlockExpressionParserRuleCall_2_1_9_0_0());
+
+												}
+												pushFollow(FOLLOW_ruleXBlockExpression_in_ruleMember2789);
+												lv_expression_54_0 = ruleXBlockExpression();
+
+												state._fsp--;
+												if (state.failed)
+													return current;
+												if (state.backtracking == 0) {
+
+													if (current == null) {
+														current = createModelElementForParent(memberRule);
+													}
+													set(current, XTEND_FUNCTION__EXPRESSION, lv_expression_54_0, "XBlockExpression");
+													afterParserOrEnumRuleCall();
+
+												}
+
+											}
+
+										}
+
+									}
+										break;
+									case 2:
+
+									{
+
+										{
+
+											{
+												if (state.backtracking == 0) {
+
+													newCompositeNode(memberAccess
+															.getExpressionRichStringParserRuleCall_2_1_9_1_0());
+
+												}
+												pushFollow(FOLLOW_ruleRichString_in_ruleMember2816);
+												lv_expression_55_0 = ruleRichString();
+
+												state._fsp--;
+												if (state.failed)
+													return current;
+												if (state.backtracking == 0) {
+
+													if (current == null) {
+														current = createModelElementForParent(memberRule);
+													}
+													set(current, XTEND_FUNCTION__EXPRESSION, lv_expression_55_0, "RichString");
+													afterParserOrEnumRuleCall();
+
+												}
+
+											}
+
+										}
+
+									}
+										break;
+									case 3:
+
+									{
+										otherlv_56 = (Token) match(input, 21, FOLLOW_21_in_ruleMember2834);
+										if (state.failed)
+											return current;
+										if (state.backtracking == 0) {
+
+											newLeafNode(otherlv_56, memberAccess
+													.getSemicolonKeyword_2_1_9_2());
+
+										}
+
+									}
+										break;
+
+								}
+
+							}
+
+						}
+							break;
+						case 3:
+
+						{
+
+							{
+
+								{
+									if (state.backtracking == 0) {
+
+										current = forceCreateModelElementAndSet(memberAccess
+												.getXtendConstructorAnnotationInfoAction_2_2_0(), XTEND_MEMBER__ANNOTATION_INFO,current);
+
+									}
+
+								}
+
+								loop55: do {
+									int alt55 = 2;
+									int LA55_0 = input.LA(1);
+
+									if ((LA55_0 == 20 || (LA55_0 >= 39 && LA55_0 <= 45))) {
+										alt55 = 1;
+									}
+
+									switch (alt55) {
+										case 1:
+
+										{
+
+											{
+												if (state.backtracking == 0) {
+
+													newCompositeNode(memberAccess
+															.getModifiersCommonModifierParserRuleCall_2_2_1_0());
+
+												}
+												pushFollow(FOLLOW_ruleCommonModifier_in_ruleMember2874);
+												lv_modifiers_58_0 = ruleCommonModifier();
+
+												state._fsp--;
+												if (state.failed)
+													return current;
+												if (state.backtracking == 0) {
+
+													if (current == null) {
+														current = createModelElementForParent(memberRule);
+													}
+													addModifier(current, lv_modifiers_58_0);
+													afterParserOrEnumRuleCall();
+
+												}
+
+											}
+
+										}
+											break;
+
+										default:
+											break loop55;
+									}
+								} while (true);
+
+								otherlv_59 = (Token) match(input, 38, FOLLOW_38_in_ruleMember2887);
+								if (state.failed)
+									return current;
+								if (state.backtracking == 0) {
+
+									newLeafNode(otherlv_59, memberAccess.getNewKeyword_2_2_2());
+
+								}
+
+								int alt57 = 2;
+								int LA57_0 = input.LA(1);
+
+								if ((LA57_0 == 23)) {
+									alt57 = 1;
+								}
+								switch (alt57) {
+									case 1:
+
+									{
+										otherlv_60 = (Token) match(input, 23, FOLLOW_23_in_ruleMember2900);
+										if (state.failed)
+											return current;
+										if (state.backtracking == 0) {
+
+											newLeafNode(otherlv_60, memberAccess
+													.getLessThanSignKeyword_2_2_3_0());
+
+										}
+
+										{
+
+											{
+												if (state.backtracking == 0) {
+
+													newCompositeNode(memberAccess
+															.getTypeParametersJvmTypeParameterParserRuleCall_2_2_3_1_0());
+
+												}
+												pushFollow(FOLLOW_ruleJvmTypeParameter_in_ruleMember2921);
+												lv_typeParameters_61_0 = ruleJvmTypeParameter();
+
+												state._fsp--;
+												if (state.failed)
+													return current;
+												if (state.backtracking == 0) {
+
+													if (current == null) {
+														current = createModelElementForParent(memberRule);
+													}
+													add(current, XTEND_CONSTRUCTOR__TYPE_PARAMETERS, lv_typeParameters_61_0,
+															"JvmTypeParameter");
+													afterParserOrEnumRuleCall();
+
+												}
+
+											}
+
+										}
+
+										loop56: do {
+											int alt56 = 2;
+											int LA56_0 = input.LA(1);
+
+											if ((LA56_0 == 24)) {
+												alt56 = 1;
+											}
+
+											switch (alt56) {
+												case 1:
+
+												{
+													otherlv_62 = (Token) match(input, 24, FOLLOW_24_in_ruleMember2934);
+													if (state.failed)
+														return current;
+													if (state.backtracking == 0) {
+
+														newLeafNode(otherlv_62, memberAccess
+																.getCommaKeyword_2_2_3_2_0());
+
+													}
+
+													{
+
+														{
+															if (state.backtracking == 0) {
+
+																newCompositeNode(memberAccess
+																		.getTypeParametersJvmTypeParameterParserRuleCall_2_2_3_2_1_0());
+
+															}
+															pushFollow(FOLLOW_ruleJvmTypeParameter_in_ruleMember2955);
+															lv_typeParameters_63_0 = ruleJvmTypeParameter();
+
+															state._fsp--;
+															if (state.failed)
+																return current;
+															if (state.backtracking == 0) {
+
+																if (current == null) {
+																	current = createModelElementForParent(memberRule);
+																}
+																add(current, XTEND_CONSTRUCTOR__TYPE_PARAMETERS, lv_typeParameters_63_0,
+																		"JvmTypeParameter");
+																afterParserOrEnumRuleCall();
+
+															}
+
+														}
+
+													}
+
+												}
+													break;
+
+												default:
+													break loop56;
+											}
+										} while (true);
+
+										otherlv_64 = (Token) match(input, 25, FOLLOW_25_in_ruleMember2969);
+										if (state.failed)
+											return current;
+										if (state.backtracking == 0) {
+
+											newLeafNode(otherlv_64, memberAccess
+													.getGreaterThanSignKeyword_2_2_3_3());
+
+										}
+
+									}
+										break;
+
+								}
+
+								otherlv_65 = (Token) match(input, 35, FOLLOW_35_in_ruleMember2983);
+								if (state.failed)
+									return current;
+								if (state.backtracking == 0) {
+
+									newLeafNode(otherlv_65, memberAccess
+											.getLeftParenthesisKeyword_2_2_4());
+
+								}
+
+								int alt59 = 2;
+								int LA59_0 = input.LA(1);
+
+								if ((LA59_0 == RULE_ID || LA59_0 == 32 || (LA59_0 >= 34 && LA59_0 <= 35)
+										|| LA59_0 == 50 || LA59_0 == 63 || LA59_0 == 79)) {
+									alt59 = 1;
+								}
+								switch (alt59) {
+									case 1:
+
+									{
+
+										{
+
+											{
+												if (state.backtracking == 0) {
+
+													newCompositeNode(memberAccess
+															.getParametersParameterParserRuleCall_2_2_5_0_0());
+
+												}
+												pushFollow(FOLLOW_ruleParameter_in_ruleMember3005);
+												lv_parameters_66_0 = ruleParameter();
+
+												state._fsp--;
+												if (state.failed)
+													return current;
+												if (state.backtracking == 0) {
+
+													if (current == null) {
+														current = createModelElementForParent(memberRule);
+													}
+													add(current, XTEND_CONSTRUCTOR__PARAMETERS, lv_parameters_66_0, "Parameter");
+													afterParserOrEnumRuleCall();
+
+												}
+
+											}
+
+										}
+
+										loop58: do {
+											int alt58 = 2;
+											int LA58_0 = input.LA(1);
+
+											if ((LA58_0 == 24)) {
+												alt58 = 1;
+											}
+
+											switch (alt58) {
+												case 1:
+
+												{
+													otherlv_67 = (Token) match(input, 24, FOLLOW_24_in_ruleMember3018);
+													if (state.failed)
+														return current;
+													if (state.backtracking == 0) {
+
+														newLeafNode(otherlv_67, memberAccess
+																.getCommaKeyword_2_2_5_1_0());
+
+													}
+
+													{
+
+														{
+															if (state.backtracking == 0) {
+
+																newCompositeNode(memberAccess
+																		.getParametersParameterParserRuleCall_2_2_5_1_1_0());
+
+															}
+															pushFollow(FOLLOW_ruleParameter_in_ruleMember3039);
+															lv_parameters_68_0 = ruleParameter();
+
+															state._fsp--;
+															if (state.failed)
+																return current;
+															if (state.backtracking == 0) {
+
+																if (current == null) {
+																	current = createModelElementForParent(memberRule);
+																}
+																add(current, XTEND_CONSTRUCTOR__PARAMETERS, lv_parameters_68_0,
+																		"Parameter");
+																afterParserOrEnumRuleCall();
+
+															}
+
+														}
+
+													}
+
+												}
+													break;
+
+												default:
+													break loop58;
+											}
+										} while (true);
+
+									}
+										break;
+
+								}
+
+								otherlv_69 = (Token) match(input, 36, FOLLOW_36_in_ruleMember3055);
+								if (state.failed)
+									return current;
+								if (state.backtracking == 0) {
+
+									newLeafNode(otherlv_69, memberAccess
+											.getRightParenthesisKeyword_2_2_6());
+
+								}
+
+								int alt61 = 2;
+								int LA61_0 = input.LA(1);
+
+								if ((LA61_0 == 37)) {
+									alt61 = 1;
+								}
+								switch (alt61) {
+									case 1:
+
+									{
+										otherlv_70 = (Token) match(input, 37, FOLLOW_37_in_ruleMember3068);
+										if (state.failed)
+											return current;
+										if (state.backtracking == 0) {
+
+											newLeafNode(otherlv_70, memberAccess
+													.getThrowsKeyword_2_2_7_0());
+
+										}
+
+										{
+
+											{
+												if (state.backtracking == 0) {
+
+													newCompositeNode(memberAccess
+															.getExceptionsJvmTypeReferenceParserRuleCall_2_2_7_1_0());
+
+												}
+												pushFollow(FOLLOW_ruleJvmTypeReference_in_ruleMember3089);
+												lv_exceptions_71_0 = ruleJvmTypeReference();
+
+												state._fsp--;
+												if (state.failed)
+													return current;
+												if (state.backtracking == 0) {
+
+													if (current == null) {
+														current = createModelElementForParent(memberRule);
+													}
+													add(current, XTEND_CONSTRUCTOR__EXCEPTIONS, lv_exceptions_71_0, null);
+													afterParserOrEnumRuleCall();
+
+												}
+
+											}
+
+										}
+
+										loop60: do {
+											int alt60 = 2;
+											int LA60_0 = input.LA(1);
+
+											if ((LA60_0 == 24)) {
+												alt60 = 1;
+											}
+
+											switch (alt60) {
+												case 1:
+
+												{
+													otherlv_72 = (Token) match(input, 24, FOLLOW_24_in_ruleMember3102);
+													if (state.failed)
+														return current;
+													if (state.backtracking == 0) {
+
+														newLeafNode(otherlv_72, memberAccess
+																.getCommaKeyword_2_2_7_2_0());
+
+													}
+
+													{
+
+														{
+															if (state.backtracking == 0) {
+
+																newCompositeNode(memberAccess
+																		.getExceptionsJvmTypeReferenceParserRuleCall_2_2_7_2_1_0());
+
+															}
+															pushFollow(FOLLOW_ruleJvmTypeReference_in_ruleMember3123);
+															lv_exceptions_73_0 = ruleJvmTypeReference();
+
+															state._fsp--;
+															if (state.failed)
+																return current;
+															if (state.backtracking == 0) {
+
+																if (current == null) {
+																	current = createModelElementForParent(memberRule);
+																}
+																add(current, XTEND_CONSTRUCTOR__EXCEPTIONS, lv_exceptions_73_0,
+																		null);
+																afterParserOrEnumRuleCall();
+
+															}
+
+														}
+
+													}
+
+												}
+													break;
+
+												default:
+													break loop60;
+											}
+										} while (true);
+
+									}
+										break;
+
+								}
+
+								{
+
+									{
+										if (state.backtracking == 0) {
+
+											newCompositeNode(memberAccess
+													.getExpressionXBlockExpressionParserRuleCall_2_2_8_0());
+
+										}
+										pushFollow(FOLLOW_ruleXBlockExpression_in_ruleMember3148);
+										lv_expression_74_0 = ruleXBlockExpression();
+
+										state._fsp--;
+										if (state.failed)
+											return current;
+										if (state.backtracking == 0) {
+
+											if (current == null) {
+												current = createModelElementForParent(memberRule);
+											}
+											set(current, XTEND_CONSTRUCTOR__EXPRESSION, lv_expression_74_0, "XBlockExpression");
+											afterParserOrEnumRuleCall();
+
+										}
+
+									}
+
+								}
+
+							}
+
+						}
+							break;
+
+					}
+
+				}
+
+			}
+
+			if (state.backtracking == 0) {
+				leaveRule();
+			}
+		}
+
+		catch (RecognitionException re) {
+			recoverAndAppendSkippedTokens(re);
+		} finally {
+		}
+		return current;
+	}
+
+	private void addModifier(EObject current, AntlrDatatypeRuleToken lv_modifiers_10_0) {
+		add(current, XTEND_MEMBER__MODIFIERS, lv_modifiers_10_0,
+				"CommonModifier");
+	}
+
+	private EObject callRuleXAnnotation() throws RecognitionException {
+		EObject lv_annotations_1_0;
+		if (state.backtracking == 0) {
+
+			newCompositeNode(grammarAccess.getMemberAccess()
+					.getAnnotationsXAnnotationParserRuleCall_1_0());
+
+		}
+		pushFollow(FOLLOW_ruleXAnnotation_in_ruleMember1583);
+		lv_annotations_1_0 = ruleXAnnotation();
+		return lv_annotations_1_0;
+	}
+
+	public final EObject entryRuleXtendEnumLiteral() throws RecognitionException {
+		EObject current = null;
+
+		EObject iv_ruleXtendEnumLiteral = null;
+
+		try {
+
+			{
+				if (state.backtracking == 0) {
+					newCompositeNode(grammarAccess.getXtendEnumLiteralRule());
+				}
+				pushFollow(FOLLOW_ruleXtendEnumLiteral_in_entryRuleXtendEnumLiteral3186);
+				iv_ruleXtendEnumLiteral = ruleXtendEnumLiteral();
+
+				state._fsp--;
+				if (state.failed)
+					return current;
+				if (state.backtracking == 0) {
+					current = iv_ruleXtendEnumLiteral;
+				}
+				match(input, EOF, FOLLOW_EOF_in_entryRuleXtendEnumLiteral3196);
+				if (state.failed)
+					return current;
+
+			}
+
+		}
+
+		catch (RecognitionException re) {
+			recoverAndAppendSkippedTokens(re);
+		} finally {
+		}
+		return current;
+	}
+
+	public final EObject ruleXtendEnumLiteral() throws RecognitionException {
+		EObject current = null;
+
+		AntlrDatatypeRuleToken lv_name_0_0 = null;
+
+		enterRule();
+
+		try {
+
+			{
+
+				{
+
+					{
+						if (state.backtracking == 0) {
+
+							newCompositeNode(grammarAccess.getXtendEnumLiteralAccess().getNameValidIDParserRuleCall_0());
+
+						}
+						pushFollow(FOLLOW_ruleValidID_in_ruleXtendEnumLiteral3241);
+						lv_name_0_0 = ruleValidID();
+
+						state._fsp--;
+						if (state.failed)
+							return current;
+						if (state.backtracking == 0) {
+
+							if (current == null) {
+								current = createModelElementForParent(grammarAccess.getXtendEnumLiteralRule());
+							}
+							set(current, XTEND_ENUM_LITERAL__NAME, lv_name_0_0, "ValidID");
+							afterParserOrEnumRuleCall();
+
+						}
+
+					}
+
+				}
+
+			}
+
+			if (state.backtracking == 0) {
+				leaveRule();
+			}
+		}
+
+		catch (RecognitionException re) {
+			recoverAndAppendSkippedTokens(re);
+		} finally {
+		}
+		return current;
+	}
+
+	public final String entryRuleCommonModifier() throws RecognitionException {
+		String current = null;
+
+		AntlrDatatypeRuleToken iv_ruleCommonModifier = null;
+
+		try {
+
+			{
+				if (state.backtracking == 0) {
+					newCompositeNode(grammarAccess.getCommonModifierRule());
+				}
+				pushFollow(FOLLOW_ruleCommonModifier_in_entryRuleCommonModifier3277);
+				iv_ruleCommonModifier = ruleCommonModifier();
+
+				state._fsp--;
+				if (state.failed)
+					return current;
+				if (state.backtracking == 0) {
+					current = iv_ruleCommonModifier.getText();
+				}
+				match(input, EOF, FOLLOW_EOF_in_entryRuleCommonModifier3288);
+				if (state.failed)
+					return current;
+
+			}
+
+		}
+
+		catch (RecognitionException re) {
+			recoverAndAppendSkippedTokens(re);
+		} finally {
+		}
+		return current;
+	}
+
+	public final AntlrDatatypeRuleToken ruleCommonModifier() throws RecognitionException {
+		AntlrDatatypeRuleToken current = new AntlrDatatypeRuleToken();
+
+		Token kw = null;
+
+		enterRule();
+
+		try {
+
+			{
+
+				int alt63 = 8;
+				switch (input.LA(1)) {
+					case 39: {
+						alt63 = 1;
+					}
+						break;
+					case 40: {
+						alt63 = 2;
+					}
+						break;
+					case 41: {
+						alt63 = 3;
+					}
+						break;
+					case 20: {
+						alt63 = 4;
+					}
+						break;
+					case 42: {
+						alt63 = 5;
+					}
+						break;
+					case 43: {
+						alt63 = 6;
+					}
+						break;
+					case 44: {
+						alt63 = 7;
+					}
+						break;
+					case 45: {
+						alt63 = 8;
+					}
+						break;
+					default:
+						if (state.backtracking > 0) {
+							state.failed = true;
+							return current;
+						}
+						NoViableAltException nvae = new NoViableAltException("", 63, 0, input);
+
+						throw nvae;
+				}
+
+				switch (alt63) {
+					case 1:
+
+					{
+						kw = (Token) match(input, 39, FOLLOW_39_in_ruleCommonModifier3326);
+						if (state.failed)
+							return current;
+						if (state.backtracking == 0) {
+
+							current.merge(kw);
+							newLeafNode(kw, grammarAccess.getCommonModifierAccess().getPublicKeyword_0());
+
+						}
+
+					}
+						break;
+					case 2:
+
+					{
+						kw = (Token) match(input, 40, FOLLOW_40_in_ruleCommonModifier3345);
+						if (state.failed)
+							return current;
+						if (state.backtracking == 0) {
+
+							current.merge(kw);
+							newLeafNode(kw, grammarAccess.getCommonModifierAccess().getPrivateKeyword_1());
+
+						}
+
+					}
+						break;
+					case 3:
+
+					{
+						kw = (Token) match(input, 41, FOLLOW_41_in_ruleCommonModifier3364);
+						if (state.failed)
+							return current;
+						if (state.backtracking == 0) {
+
+							current.merge(kw);
+							newLeafNode(kw, grammarAccess.getCommonModifierAccess().getProtectedKeyword_2());
+
+						}
+
+					}
+						break;
+					case 4:
+
+					{
+						kw = (Token) match(input, 20, FOLLOW_20_in_ruleCommonModifier3383);
+						if (state.failed)
+							return current;
+						if (state.backtracking == 0) {
+
+							current.merge(kw);
+							newLeafNode(kw, grammarAccess.getCommonModifierAccess().getPackageKeyword_3());
+
+						}
+
+					}
+						break;
+					case 5:
+
+					{
+						kw = (Token) match(input, 42, FOLLOW_42_in_ruleCommonModifier3402);
+						if (state.failed)
+							return current;
+						if (state.backtracking == 0) {
+
+							current.merge(kw);
+							newLeafNode(kw, grammarAccess.getCommonModifierAccess().getAbstractKeyword_4());
+
+						}
+
+					}
+						break;
+					case 6:
+
+					{
+						kw = (Token) match(input, 43, FOLLOW_43_in_ruleCommonModifier3421);
+						if (state.failed)
+							return current;
+						if (state.backtracking == 0) {
+
+							current.merge(kw);
+							newLeafNode(kw, grammarAccess.getCommonModifierAccess().getStaticKeyword_5());
+
+						}
+
+					}
+						break;
+					case 7:
+
+					{
+						kw = (Token) match(input, 44, FOLLOW_44_in_ruleCommonModifier3440);
+						if (state.failed)
+							return current;
+						if (state.backtracking == 0) {
+
+							current.merge(kw);
+							newLeafNode(kw, grammarAccess.getCommonModifierAccess().getDispatchKeyword_6());
+
+						}
+
+					}
+						break;
+					case 8:
+
+					{
+						kw = (Token) match(input, 45, FOLLOW_45_in_ruleCommonModifier3459);
+						if (state.failed)
+							return current;
+						if (state.backtracking == 0) {
+
+							current.merge(kw);
+							newLeafNode(kw, grammarAccess.getCommonModifierAccess().getFinalKeyword_7());
+
+						}
+
+					}
+						break;
+
+				}
+
+			}
+
+			if (state.backtracking == 0) {
+				leaveRule();
+			}
+		}
+
+		catch (RecognitionException re) {
+			recoverAndAppendSkippedTokens(re);
+		} finally {
+		}
+		return current;
+	}
+
+	public final String entryRuleFieldModifier() throws RecognitionException {
+		String current = null;
+
+		AntlrDatatypeRuleToken iv_ruleFieldModifier = null;
+
+		try {
+
+			{
+				if (state.backtracking == 0) {
+					newCompositeNode(grammarAccess.getFieldModifierRule());
+				}
+				pushFollow(FOLLOW_ruleFieldModifier_in_entryRuleFieldModifier3500);
+				iv_ruleFieldModifier = ruleFieldModifier();
+
+				state._fsp--;
+				if (state.failed)
+					return current;
+				if (state.backtracking == 0) {
+					current = iv_ruleFieldModifier.getText();
+				}
+				match(input, EOF, FOLLOW_EOF_in_entryRuleFieldModifier3511);
+				if (state.failed)
+					return current;
+
+			}
+
+		}
+
+		catch (RecognitionException re) {
+			recoverAndAppendSkippedTokens(re);
+		} finally {
+		}
+		return current;
+	}
+
+	public final AntlrDatatypeRuleToken ruleFieldModifier() throws RecognitionException {
+		AntlrDatatypeRuleToken current = new AntlrDatatypeRuleToken();
+
+		Token kw = null;
+
+		enterRule();
+
+		try {
+
+			{
+
+				int alt64 = 2;
+				int LA64_0 = input.LA(1);
+
+				if ((LA64_0 == 46)) {
+					alt64 = 1;
+				} else if ((LA64_0 == 47)) {
+					alt64 = 2;
+				} else {
+					if (state.backtracking > 0) {
+						state.failed = true;
+						return current;
+					}
+					NoViableAltException nvae = new NoViableAltException("", 64, 0, input);
+
+					throw nvae;
+				}
+				switch (alt64) {
+					case 1:
+
+					{
+						kw = (Token) match(input, 46, FOLLOW_46_in_ruleFieldModifier3549);
+						if (state.failed)
+							return current;
+						if (state.backtracking == 0) {
+
+							current.merge(kw);
+							newLeafNode(kw, grammarAccess.getFieldModifierAccess().getValKeyword_0());
+
+						}
+
+					}
+						break;
+					case 2:
+
+					{
+						kw = (Token) match(input, 47, FOLLOW_47_in_ruleFieldModifier3568);
+						if (state.failed)
+							return current;
+						if (state.backtracking == 0) {
+
+							current.merge(kw);
+							newLeafNode(kw, grammarAccess.getFieldModifierAccess().getVarKeyword_1());
+
+						}
+
+					}
+						break;
+
+				}
+
+			}
+
+			if (state.backtracking == 0) {
+				leaveRule();
+			}
+		}
+
+		catch (RecognitionException re) {
+			recoverAndAppendSkippedTokens(re);
+		} finally {
+		}
+		return current;
+	}
+
+	public final String entryRuleMethodModifier() throws RecognitionException {
+		String current = null;
+
+		AntlrDatatypeRuleToken iv_ruleMethodModifier = null;
+
+		try {
+
+			{
+				if (state.backtracking == 0) {
+					newCompositeNode(grammarAccess.getMethodModifierRule());
+				}
+				pushFollow(FOLLOW_ruleMethodModifier_in_entryRuleMethodModifier3609);
+				iv_ruleMethodModifier = ruleMethodModifier();
+
+				state._fsp--;
+				if (state.failed)
+					return current;
+				if (state.backtracking == 0) {
+					current = iv_ruleMethodModifier.getText();
+				}
+				match(input, EOF, FOLLOW_EOF_in_entryRuleMethodModifier3620);
+				if (state.failed)
+					return current;
+
+			}
+
+		}
+
+		catch (RecognitionException re) {
+			recoverAndAppendSkippedTokens(re);
+		} finally {
+		}
+		return current;
+	}
+
+	public final AntlrDatatypeRuleToken ruleMethodModifier() throws RecognitionException {
+		AntlrDatatypeRuleToken current = new AntlrDatatypeRuleToken();
+
+		Token kw = null;
+
+		enterRule();
+
+		try {
+
+			{
+
+				int alt65 = 2;
+				int LA65_0 = input.LA(1);
+
+				if ((LA65_0 == 48)) {
+					alt65 = 1;
+				} else if ((LA65_0 == 49)) {
+					alt65 = 2;
+				} else {
+					if (state.backtracking > 0) {
+						state.failed = true;
+						return current;
+					}
+					NoViableAltException nvae = new NoViableAltException("", 65, 0, input);
+
+					throw nvae;
+				}
+				switch (alt65) {
+					case 1:
+
+					{
+						kw = (Token) match(input, 48, FOLLOW_48_in_ruleMethodModifier3658);
+						if (state.failed)
+							return current;
+						if (state.backtracking == 0) {
+
+							current.merge(kw);
+							newLeafNode(kw, grammarAccess.getMethodModifierAccess().getDefKeyword_0());
+
+						}
+
+					}
+						break;
+					case 2:
+
+					{
+						kw = (Token) match(input, 49, FOLLOW_49_in_ruleMethodModifier3677);
+						if (state.failed)
+							return current;
+						if (state.backtracking == 0) {
+
+							current.merge(kw);
+							newLeafNode(kw, grammarAccess.getMethodModifierAccess().getOverrideKeyword_1());
+
+						}
+
+					}
+						break;
+
+				}
+
+			}
+
+			if (state.backtracking == 0) {
+				leaveRule();
+			}
+		}
+
+		catch (RecognitionException re) {
+			recoverAndAppendSkippedTokens(re);
+		} finally {
+		}
+		return current;
+	}
+
+	public final EObject entryRuleCreateExtensionInfo() throws RecognitionException {
+		EObject current = null;
+
+		EObject iv_ruleCreateExtensionInfo = null;
+
+		try {
+
+			{
+				if (state.backtracking == 0) {
+					newCompositeNode(grammarAccess.getCreateExtensionInfoRule());
+				}
+				pushFollow(FOLLOW_ruleCreateExtensionInfo_in_entryRuleCreateExtensionInfo3717);
+				iv_ruleCreateExtensionInfo = ruleCreateExtensionInfo();
+
+				state._fsp--;
+				if (state.failed)
+					return current;
+				if (state.backtracking == 0) {
+					current = iv_ruleCreateExtensionInfo;
+				}
+				match(input, EOF, FOLLOW_EOF_in_entryRuleCreateExtensionInfo3727);
+				if (state.failed)
+					return current;
+
+			}
+
+		}
+
+		catch (RecognitionException re) {
+			recoverAndAppendSkippedTokens(re);
+		} finally {
+		}
+		return current;
+	}
+
+	public final EObject ruleCreateExtensionInfo() throws RecognitionException {
+		EObject current = null;
+
+		Token otherlv_0 = null;
+		Token otherlv_2 = null;
+		AntlrDatatypeRuleToken lv_name_1_0 = null;
+
+		EObject lv_createExpression_3_0 = null;
+
+		enterRule();
+
+		try {
+
+			{
+
+				{
+					otherlv_0 = (Token) match(input, 50, FOLLOW_50_in_ruleCreateExtensionInfo3764);
+					if (state.failed)
+						return current;
+					if (state.backtracking == 0) {
+
+						newLeafNode(otherlv_0, grammarAccess.getCreateExtensionInfoAccess().getCreateKeyword_0());
+
+					}
+
+					int alt66 = 2;
+					switch (input.LA(1)) {
+						case RULE_ID: {
+							int LA66_1 = input.LA(2);
+
+							if ((LA66_1 == 51)) {
+								alt66 = 1;
+							}
+						}
+							break;
+						case 50: {
+							int LA66_2 = input.LA(2);
+
+							if ((LA66_2 == 51)) {
+								alt66 = 1;
+							}
+						}
+							break;
+						case 32: {
+							int LA66_3 = input.LA(2);
+
+							if ((LA66_3 == 51)) {
+								alt66 = 1;
+							}
+						}
+							break;
+					}
+
+					switch (alt66) {
+						case 1:
+
+						{
+
+							{
+
+								{
+									if (state.backtracking == 0) {
+
+										newCompositeNode(grammarAccess.getCreateExtensionInfoAccess()
+												.getNameValidIDParserRuleCall_1_0_0());
+
+									}
+									pushFollow(FOLLOW_ruleValidID_in_ruleCreateExtensionInfo3786);
+									lv_name_1_0 = ruleValidID();
+
+									state._fsp--;
+									if (state.failed)
+										return current;
+									if (state.backtracking == 0) {
+
+										if (current == null) {
+											current = createModelElementForParent(grammarAccess
+													.getCreateExtensionInfoRule());
+										}
+										set(current, XTEND_ENUM_LITERAL__NAME, lv_name_1_0, "ValidID");
+										afterParserOrEnumRuleCall();
+
+									}
+
+								}
+
+							}
+
+							otherlv_2 = (Token) match(input, 51, FOLLOW_51_in_ruleCreateExtensionInfo3798);
+							if (state.failed)
+								return current;
+							if (state.backtracking == 0) {
+
+								newLeafNode(otherlv_2, grammarAccess.getCreateExtensionInfoAccess()
+										.getColonKeyword_1_1());
+
+							}
+
+						}
+							break;
+
+					}
+
+					{
+
+						{
+							if (state.backtracking == 0) {
+
+								newCompositeNode(grammarAccess.getCreateExtensionInfoAccess()
+										.getCreateExpressionXExpressionParserRuleCall_2_0());
+
+							}
+							pushFollow(FOLLOW_ruleXExpression_in_ruleCreateExtensionInfo3821);
+							lv_createExpression_3_0 = ruleXExpression();
+
+							state._fsp--;
+							if (state.failed)
+								return current;
+							if (state.backtracking == 0) {
+
+								if (current == null) {
+									current = createModelElementForParent(grammarAccess.getCreateExtensionInfoRule());
+								}
+								set(current, CREATE_EXTENSION_INFO__CREATE_EXPRESSION, lv_createExpression_3_0, null);
+								afterParserOrEnumRuleCall();
+
+							}
+
+						}
+
+					}
+
+				}
+
+			}
+
+			if (state.backtracking == 0) {
+				leaveRule();
+			}
+		}
+
+		catch (RecognitionException re) {
+			recoverAndAppendSkippedTokens(re);
+		} finally {
+		}
+		return current;
+	}
+
+	public final String entryRuleValidID() throws RecognitionException {
+		String current = null;
+
+		AntlrDatatypeRuleToken iv_ruleValidID = null;
+
+		try {
+
+			{
+				if (state.backtracking == 0) {
+					newCompositeNode(grammarAccess.getValidIDRule());
+				}
+				pushFollow(FOLLOW_ruleValidID_in_entryRuleValidID3858);
+				iv_ruleValidID = ruleValidID();
+
+				state._fsp--;
+				if (state.failed)
+					return current;
+				if (state.backtracking == 0) {
+					current = iv_ruleValidID.getText();
+				}
+				match(input, EOF, FOLLOW_EOF_in_entryRuleValidID3869);
+				if (state.failed)
+					return current;
+
+			}
+
+		}
+
+		catch (RecognitionException re) {
+			recoverAndAppendSkippedTokens(re);
+		} finally {
+		}
+		return current;
+	}
+
+	public final AntlrDatatypeRuleToken ruleValidID() throws RecognitionException {
+		AntlrDatatypeRuleToken current = new AntlrDatatypeRuleToken();
+
+		Token this_ID_0 = null;
+		Token kw = null;
+
+		enterRule();
+
+		try {
+
+			{
+
+				int alt67 = 3;
+				switch (input.LA(1)) {
+					case RULE_ID: {
+						alt67 = 1;
+					}
+						break;
+					case 50: {
+						alt67 = 2;
+					}
+						break;
+					case 32: {
+						alt67 = 3;
+					}
+						break;
+					default:
+						if (state.backtracking > 0) {
+							state.failed = true;
+							return current;
+						}
+						NoViableAltException nvae = new NoViableAltException("", 67, 0, input);
+
+						throw nvae;
+				}
+
+				switch (alt67) {
+					case 1:
+
+					{
+						this_ID_0 = (Token) match(input, RULE_ID, FOLLOW_RULE_ID_in_ruleValidID3909);
+						if (state.failed)
+							return current;
+						if (state.backtracking == 0) {
+
+							current.merge(this_ID_0);
+
+						}
+						if (state.backtracking == 0) {
+
+							newLeafNode(this_ID_0, grammarAccess.getValidIDAccess().getIDTerminalRuleCall_0());
+
+						}
+
+					}
+						break;
+					case 2:
+
+					{
+						kw = (Token) match(input, 50, FOLLOW_50_in_ruleValidID3933);
+						if (state.failed)
+							return current;
+						if (state.backtracking == 0) {
+
+							current.merge(kw);
+							newLeafNode(kw, grammarAccess.getValidIDAccess().getCreateKeyword_1());
+
+						}
+
+					}
+						break;
+					case 3:
+
+					{
+						kw = (Token) match(input, 32, FOLLOW_32_in_ruleValidID3952);
+						if (state.failed)
+							return current;
+						if (state.backtracking == 0) {
+
+							current.merge(kw);
+							newLeafNode(kw, grammarAccess.getValidIDAccess().getAnnotationKeyword_2());
+
+						}
+
+					}
+						break;
+
+				}
+
+			}
+
+			if (state.backtracking == 0) {
+				leaveRule();
+			}
+		}
+
+		catch (RecognitionException re) {
+			recoverAndAppendSkippedTokens(re);
+		} finally {
+		}
+		return current;
+	}
+
+	public final String entryRuleFeatureCallID() throws RecognitionException {
+		String current = null;
+
+		AntlrDatatypeRuleToken iv_ruleFeatureCallID = null;
+
+		try {
+
+			{
+				if (state.backtracking == 0) {
+					newCompositeNode(grammarAccess.getFeatureCallIDRule());
+				}
+				pushFollow(FOLLOW_ruleFeatureCallID_in_entryRuleFeatureCallID3993);
+				iv_ruleFeatureCallID = ruleFeatureCallID();
+
+				state._fsp--;
+				if (state.failed)
+					return current;
+				if (state.backtracking == 0) {
+					current = iv_ruleFeatureCallID.getText();
+				}
+				match(input, EOF, FOLLOW_EOF_in_entryRuleFeatureCallID4004);
+				if (state.failed)
+					return current;
+
+			}
+
+		}
+
+		catch (RecognitionException re) {
+			recoverAndAppendSkippedTokens(re);
+		} finally {
+		}
+		return current;
+	}
+
+	public final AntlrDatatypeRuleToken ruleFeatureCallID() throws RecognitionException {
+		AntlrDatatypeRuleToken current = new AntlrDatatypeRuleToken();
+
+		Token this_ID_0 = null;
+		Token kw = null;
+
+		enterRule();
+
+		try {
+
+			{
+
+				int alt68 = 21;
+				switch (input.LA(1)) {
+					case RULE_ID: {
+						alt68 = 1;
+					}
+						break;
+					case 42: {
+						alt68 = 2;
+					}
+						break;
+					case 32: {
+						alt68 = 3;
+					}
+						break;
+					case 22: {
+						alt68 = 4;
+					}
+						break;
+					case 50: {
+						alt68 = 5;
+					}
+						break;
+					case 48: {
+						alt68 = 6;
+					}
+						break;
+					case 44: {
+						alt68 = 7;
+					}
+						break;
+					case 31: {
+						alt68 = 8;
+					}
+						break;
+					case 26: {
+						alt68 = 9;
+					}
+						break;
+					case 34: {
+						alt68 = 10;
+					}
+						break;
+					case 45: {
+						alt68 = 11;
+					}
+						break;
+					case 27: {
+						alt68 = 12;
+					}
+						break;
+					case 52: {
+						alt68 = 13;
+					}
+						break;
+					case 30: {
+						alt68 = 14;
+					}
+						break;
+					case 49: {
+						alt68 = 15;
+					}
+						break;
+					case 20: {
+						alt68 = 16;
+					}
+						break;
+					case 39: {
+						alt68 = 17;
+					}
+						break;
+					case 40: {
+						alt68 = 18;
+					}
+						break;
+					case 41: {
+						alt68 = 19;
+					}
+						break;
+					case 43: {
+						alt68 = 20;
+					}
+						break;
+					case 37: {
+						alt68 = 21;
+					}
+						break;
+					default:
+						if (state.backtracking > 0) {
+							state.failed = true;
+							return current;
+						}
+						NoViableAltException nvae = new NoViableAltException("", 68, 0, input);
+
+						throw nvae;
+				}
+
+				switch (alt68) {
+					case 1:
+
+					{
+						this_ID_0 = (Token) match(input, RULE_ID, FOLLOW_RULE_ID_in_ruleFeatureCallID4044);
+						if (state.failed)
+							return current;
+						if (state.backtracking == 0) {
+
+							current.merge(this_ID_0);
+
+						}
+						if (state.backtracking == 0) {
+
+							newLeafNode(this_ID_0, grammarAccess.getFeatureCallIDAccess().getIDTerminalRuleCall_0());
+
+						}
+
+					}
+						break;
+					case 2:
+
+					{
+						kw = (Token) match(input, 42, FOLLOW_42_in_ruleFeatureCallID4068);
+						if (state.failed)
+							return current;
+						if (state.backtracking == 0) {
+
+							current.merge(kw);
+							newLeafNode(kw, grammarAccess.getFeatureCallIDAccess().getAbstractKeyword_1());
+
+						}
+
+					}
+						break;
+					case 3:
+
+					{
+						kw = (Token) match(input, 32, FOLLOW_32_in_ruleFeatureCallID4087);
+						if (state.failed)
+							return current;
+						if (state.backtracking == 0) {
+
+							current.merge(kw);
+							newLeafNode(kw, grammarAccess.getFeatureCallIDAccess().getAnnotationKeyword_2());
+
+						}
+
+					}
+						break;
+					case 4:
+
+					{
+						kw = (Token) match(input, 22, FOLLOW_22_in_ruleFeatureCallID4106);
+						if (state.failed)
+							return current;
+						if (state.backtracking == 0) {
+
+							current.merge(kw);
+							newLeafNode(kw, grammarAccess.getFeatureCallIDAccess().getClassKeyword_3());
+
+						}
+
+					}
+						break;
+					case 5:
+
+					{
+						kw = (Token) match(input, 50, FOLLOW_50_in_ruleFeatureCallID4125);
+						if (state.failed)
+							return current;
+						if (state.backtracking == 0) {
+
+							current.merge(kw);
+							newLeafNode(kw, grammarAccess.getFeatureCallIDAccess().getCreateKeyword_4());
+
+						}
+
+					}
+						break;
+					case 6:
+
+					{
+						kw = (Token) match(input, 48, FOLLOW_48_in_ruleFeatureCallID4144);
+						if (state.failed)
+							return current;
+						if (state.backtracking == 0) {
+
+							current.merge(kw);
+							newLeafNode(kw, grammarAccess.getFeatureCallIDAccess().getDefKeyword_5());
+
+						}
+
+					}
+						break;
+					case 7:
+
+					{
+						kw = (Token) match(input, 44, FOLLOW_44_in_ruleFeatureCallID4163);
+						if (state.failed)
+							return current;
+						if (state.backtracking == 0) {
+
+							current.merge(kw);
+							newLeafNode(kw, grammarAccess.getFeatureCallIDAccess().getDispatchKeyword_6());
+
+						}
+
+					}
+						break;
+					case 8:
+
+					{
+						kw = (Token) match(input, 31, FOLLOW_31_in_ruleFeatureCallID4182);
+						if (state.failed)
+							return current;
+						if (state.backtracking == 0) {
+
+							current.merge(kw);
+							newLeafNode(kw, grammarAccess.getFeatureCallIDAccess().getEnumKeyword_7());
+
+						}
+
+					}
+						break;
+					case 9:
+
+					{
+						kw = (Token) match(input, 26, FOLLOW_26_in_ruleFeatureCallID4201);
+						if (state.failed)
+							return current;
+						if (state.backtracking == 0) {
+
+							current.merge(kw);
+							newLeafNode(kw, grammarAccess.getFeatureCallIDAccess().getExtendsKeyword_8());
+
+						}
+
+					}
+						break;
+					case 10:
+
+					{
+						kw = (Token) match(input, 34, FOLLOW_34_in_ruleFeatureCallID4220);
+						if (state.failed)
+							return current;
+						if (state.backtracking == 0) {
+
+							current.merge(kw);
+							newLeafNode(kw, grammarAccess.getFeatureCallIDAccess().getExtensionKeyword_9());
+
+						}
+
+					}
+						break;
+					case 11:
+
+					{
+						kw = (Token) match(input, 45, FOLLOW_45_in_ruleFeatureCallID4239);
+						if (state.failed)
+							return current;
+						if (state.backtracking == 0) {
+
+							current.merge(kw);
+							newLeafNode(kw, grammarAccess.getFeatureCallIDAccess().getFinalKeyword_10());
+
+						}
+
+					}
+						break;
+					case 12:
+
+					{
+						kw = (Token) match(input, 27, FOLLOW_27_in_ruleFeatureCallID4258);
+						if (state.failed)
+							return current;
+						if (state.backtracking == 0) {
+
+							current.merge(kw);
+							newLeafNode(kw, grammarAccess.getFeatureCallIDAccess().getImplementsKeyword_11());
+
+						}
+
+					}
+						break;
+					case 13:
+
+					{
+						kw = (Token) match(input, 52, FOLLOW_52_in_ruleFeatureCallID4277);
+						if (state.failed)
+							return current;
+						if (state.backtracking == 0) {
+
+							current.merge(kw);
+							newLeafNode(kw, grammarAccess.getFeatureCallIDAccess().getImportKeyword_12());
+
+						}
+
+					}
+						break;
+					case 14:
+
+					{
+						kw = (Token) match(input, 30, FOLLOW_30_in_ruleFeatureCallID4296);
+						if (state.failed)
+							return current;
+						if (state.backtracking == 0) {
+
+							current.merge(kw);
+							newLeafNode(kw, grammarAccess.getFeatureCallIDAccess().getInterfaceKeyword_13());
+
+						}
+
+					}
+						break;
+					case 15:
+
+					{
+						kw = (Token) match(input, 49, FOLLOW_49_in_ruleFeatureCallID4315);
+						if (state.failed)
+							return current;
+						if (state.backtracking == 0) {
+
+							current.merge(kw);
+							newLeafNode(kw, grammarAccess.getFeatureCallIDAccess().getOverrideKeyword_14());
+
+						}
+
+					}
+						break;
+					case 16:
+
+					{
+						kw = (Token) match(input, 20, FOLLOW_20_in_ruleFeatureCallID4334);
+						if (state.failed)
+							return current;
+						if (state.backtracking == 0) {
+
+							current.merge(kw);
+							newLeafNode(kw, grammarAccess.getFeatureCallIDAccess().getPackageKeyword_15());
+
+						}
+
+					}
+						break;
+					case 17:
+
+					{
+						kw = (Token) match(input, 39, FOLLOW_39_in_ruleFeatureCallID4353);
+						if (state.failed)
+							return current;
+						if (state.backtracking == 0) {
+
+							current.merge(kw);
+							newLeafNode(kw, grammarAccess.getFeatureCallIDAccess().getPublicKeyword_16());
+
+						}
+
+					}
+						break;
+					case 18:
+
+					{
+						kw = (Token) match(input, 40, FOLLOW_40_in_ruleFeatureCallID4372);
+						if (state.failed)
+							return current;
+						if (state.backtracking == 0) {
+
+							current.merge(kw);
+							newLeafNode(kw, grammarAccess.getFeatureCallIDAccess().getPrivateKeyword_17());
+
+						}
+
+					}
+						break;
+					case 19:
+
+					{
+						kw = (Token) match(input, 41, FOLLOW_41_in_ruleFeatureCallID4391);
+						if (state.failed)
+							return current;
+						if (state.backtracking == 0) {
+
+							current.merge(kw);
+							newLeafNode(kw, grammarAccess.getFeatureCallIDAccess().getProtectedKeyword_18());
+
+						}
+
+					}
+						break;
+					case 20:
+
+					{
+						kw = (Token) match(input, 43, FOLLOW_43_in_ruleFeatureCallID4410);
+						if (state.failed)
+							return current;
+						if (state.backtracking == 0) {
+
+							current.merge(kw);
+							newLeafNode(kw, grammarAccess.getFeatureCallIDAccess().getStaticKeyword_19());
+
+						}
+
+					}
+						break;
+					case 21:
+
+					{
+						kw = (Token) match(input, 37, FOLLOW_37_in_ruleFeatureCallID4429);
+						if (state.failed)
+							return current;
+						if (state.backtracking == 0) {
+
+							current.merge(kw);
+							newLeafNode(kw, grammarAccess.getFeatureCallIDAccess().getThrowsKeyword_20());
+
+						}
+
+					}
+						break;
+
+				}
+
+			}
+
+			if (state.backtracking == 0) {
+				leaveRule();
+			}
+		}
+
+		catch (RecognitionException re) {
+			recoverAndAppendSkippedTokens(re);
+		} finally {
+		}
+		return current;
+	}
+
+	public final EObject entryRuleParameter() throws RecognitionException {
+		EObject current = null;
+
+		EObject iv_ruleParameter = null;
+
+		try {
+
+			{
+				if (state.backtracking == 0) {
+					newCompositeNode(grammarAccess.getParameterRule());
+				}
+				pushFollow(FOLLOW_ruleParameter_in_entryRuleParameter4469);
+				iv_ruleParameter = ruleParameter();
+
+				state._fsp--;
+				if (state.failed)
+					return current;
+				if (state.backtracking == 0) {
+					current = iv_ruleParameter;
+				}
+				match(input, EOF, FOLLOW_EOF_in_entryRuleParameter4479);
+				if (state.failed)
+					return current;
+
+			}
+
+		}
+
+		catch (RecognitionException re) {
+			recoverAndAppendSkippedTokens(re);
+		} finally {
+		}
+		return current;
+	}
+
+	public final EObject ruleParameter() throws RecognitionException {
+		EObject current = null;
+
+		Token lv_extension_1_0 = null;
+		Token lv_varArg_4_0 = null;
+		EObject lv_annotations_0_0 = null;
+
+		EObject lv_annotations_2_0 = null;
+
+		EObject lv_parameterType_3_0 = null;
+
+		AntlrDatatypeRuleToken lv_name_5_0 = null;
+
+		enterRule();
+
+		try {
+
+			{
+
+				{
+
+					loop69: do {
+						int alt69 = 2;
+						int LA69_0 = input.LA(1);
+
+						if ((LA69_0 == 63)) {
+							alt69 = 1;
+						}
+
+						switch (alt69) {
+							case 1:
+
+							{
+
+								{
+									if (state.backtracking == 0) {
+
+										newCompositeNode(grammarAccess.getParameterAccess()
+												.getAnnotationsXAnnotationParserRuleCall_0_0());
+
+									}
+									pushFollow(FOLLOW_ruleXAnnotation_in_ruleParameter4525);
+									lv_annotations_0_0 = ruleXAnnotation();
+
+									state._fsp--;
+									if (state.failed)
+										return current;
+									if (state.backtracking == 0) {
+
+										if (current == null) {
+											current = createModelElementForParent(grammarAccess.getParameterRule());
+										}
+										add(current, XTEND_ANNOTATION_TARGET__ANNOTATIONS, lv_annotations_0_0, "XAnnotation");
+										afterParserOrEnumRuleCall();
+
+									}
+
+								}
+
+							}
+								break;
+
+							default:
+								break loop69;
+						}
+					} while (true);
+
+					int alt71 = 2;
+					int LA71_0 = input.LA(1);
+
+					if ((LA71_0 == 34)) {
+						alt71 = 1;
+					}
+					switch (alt71) {
+						case 1:
+
+						{
+
+							{
+
+								{
+									lv_extension_1_0 = (Token) match(input, 34, FOLLOW_34_in_ruleParameter4545);
+									if (state.failed)
+										return current;
+									if (state.backtracking == 0) {
+
+										newLeafNode(lv_extension_1_0, grammarAccess.getParameterAccess()
+												.getExtensionExtensionKeyword_1_0_0());
+
+									}
+									if (state.backtracking == 0) {
+
+										if (current == null) {
+											current = createModelElement(grammarAccess.getParameterRule());
+										}
+										setWithLastConsumed(current, XTEND_PARAMETER__EXTENSION, true, "extension");
+
+									}
+
+								}
+
+							}
+
+							loop70: do {
+								int alt70 = 2;
+								int LA70_0 = input.LA(1);
+
+								if ((LA70_0 == 63)) {
+									alt70 = 1;
+								}
+
+								switch (alt70) {
+									case 1:
+
+									{
+
+										{
+											if (state.backtracking == 0) {
+
+												newCompositeNode(grammarAccess.getParameterAccess()
+														.getAnnotationsXAnnotationParserRuleCall_1_1_0());
+
+											}
+											pushFollow(FOLLOW_ruleXAnnotation_in_ruleParameter4579);
+											lv_annotations_2_0 = ruleXAnnotation();
+
+											state._fsp--;
+											if (state.failed)
+												return current;
+											if (state.backtracking == 0) {
+
+												if (current == null) {
+													current = createModelElementForParent(grammarAccess
+															.getParameterRule());
+												}
+												add(current, XTEND_ANNOTATION_TARGET__ANNOTATIONS, lv_annotations_2_0, "XAnnotation");
+												afterParserOrEnumRuleCall();
+
+											}
+
+										}
+
+									}
+										break;
+
+									default:
+										break loop70;
+								}
+							} while (true);
+
+						}
+							break;
+
+					}
+
+					{
+
+						{
+							if (state.backtracking == 0) {
+
+								newCompositeNode(grammarAccess.getParameterAccess()
+										.getParameterTypeJvmTypeReferenceParserRuleCall_2_0());
+
+							}
+							pushFollow(FOLLOW_ruleJvmTypeReference_in_ruleParameter4603);
+							lv_parameterType_3_0 = ruleJvmTypeReference();
+
+							state._fsp--;
+							if (state.failed)
+								return current;
+							if (state.backtracking == 0) {
+
+								if (current == null) {
+									current = createModelElementForParent(grammarAccess.getParameterRule());
+								}
+								set(current, XTEND_PARAMETER__PARAMETER_TYPE, lv_parameterType_3_0, null);
+								afterParserOrEnumRuleCall();
+
+							}
+
+						}
+
+					}
+
+					int alt72 = 2;
+					int LA72_0 = input.LA(1);
+
+					if ((LA72_0 == 53)) {
+						alt72 = 1;
+					}
+					switch (alt72) {
+						case 1:
+
+						{
+
+							{
+								lv_varArg_4_0 = (Token) match(input, 53, FOLLOW_53_in_ruleParameter4621);
+								if (state.failed)
+									return current;
+								if (state.backtracking == 0) {
+
+									newLeafNode(lv_varArg_4_0, grammarAccess.getParameterAccess()
+											.getVarArgFullStopFullStopFullStopKeyword_3_0());
+
+								}
+								if (state.backtracking == 0) {
+
+									if (current == null) {
+										current = createModelElement(grammarAccess.getParameterRule());
+									}
+									setWithLastConsumed(current, XTEND_PARAMETER__VAR_ARG, true, "...");
+
+								}
+
+							}
+
+						}
+							break;
+
+					}
+
+					{
+
+						{
+							if (state.backtracking == 0) {
+
+								newCompositeNode(grammarAccess.getParameterAccess().getNameValidIDParserRuleCall_4_0());
+
+							}
+							pushFollow(FOLLOW_ruleValidID_in_ruleParameter4656);
+							lv_name_5_0 = ruleValidID();
+
+							state._fsp--;
+							if (state.failed)
+								return current;
+							if (state.backtracking == 0) {
+
+								if (current == null) {
+									current = createModelElementForParent(grammarAccess.getParameterRule());
+								}
+								set(current, XTEND_PARAMETER__NAME, lv_name_5_0, "ValidID");
+								afterParserOrEnumRuleCall();
+
+							}
+
+						}
+
+					}
+
+				}
+
+			}
+
+			if (state.backtracking == 0) {
+				leaveRule();
+			}
+		}
+
+		catch (RecognitionException re) {
+			recoverAndAppendSkippedTokens(re);
+		} finally {
+		}
+		return current;
+	}
+
+	public final EObject entryRuleXVariableDeclaration() throws RecognitionException {
+		EObject current = null;
+
+		EObject iv_ruleXVariableDeclaration = null;
+
+		try {
+
+			{
+				if (state.backtracking == 0) {
+					newCompositeNode(grammarAccess.getXVariableDeclarationRule());
+				}
+				pushFollow(FOLLOW_ruleXVariableDeclaration_in_entryRuleXVariableDeclaration4692);
+				iv_ruleXVariableDeclaration = ruleXVariableDeclaration();
+
+				state._fsp--;
+				if (state.failed)
+					return current;
+				if (state.backtracking == 0) {
+					current = iv_ruleXVariableDeclaration;
+				}
+				match(input, EOF, FOLLOW_EOF_in_entryRuleXVariableDeclaration4702);
+				if (state.failed)
+					return current;
+
+			}
+
+		}
+
+		catch (RecognitionException re) {
+			recoverAndAppendSkippedTokens(re);
+		} finally {
+		}
+		return current;
+	}
+
+	public final EObject ruleXVariableDeclaration() throws RecognitionException {
+		EObject current = null;
+
+		Token lv_writeable_1_0 = null;
+		Token otherlv_2 = null;
+		Token lv_extension_3_0 = null;
+		Token lv_extension_4_0 = null;
+		Token lv_writeable_5_0 = null;
+		Token otherlv_6 = null;
+		Token otherlv_10 = null;
+		EObject lv_type_7_0 = null;
+
+		AntlrDatatypeRuleToken lv_name_8_0 = null;
+
+		AntlrDatatypeRuleToken lv_name_9_0 = null;
+
+		EObject lv_right_11_0 = null;
+
+		enterRule();
+
+		try {
+
+			{
+
+				{
+
+					{
+
+						{
+
+							{
+								if (state.backtracking == 0) {
+
+									current = forceCreateModelElement(grammarAccess.getXVariableDeclarationAccess()
+											.getXtendVariableDeclarationAction_0_0_0(), current);
+
+								}
+
+							}
+
+							int alt76 = 2;
+							int LA76_0 = input.LA(1);
+
+							if (((LA76_0 >= 46 && LA76_0 <= 47))) {
+								alt76 = 1;
+							} else if ((LA76_0 == 34)) {
+								alt76 = 2;
+							} else {
+								if (state.backtracking > 0) {
+									state.failed = true;
+									return current;
+								}
+								NoViableAltException nvae = new NoViableAltException("", 76, 0, input);
+
+								throw nvae;
+							}
+							switch (alt76) {
+								case 1:
+
+								{
+
+									{
+
+										int alt73 = 2;
+										int LA73_0 = input.LA(1);
+
+										if ((LA73_0 == 47)) {
+											alt73 = 1;
+										} else if ((LA73_0 == 46)) {
+											alt73 = 2;
+										} else {
+											if (state.backtracking > 0) {
+												state.failed = true;
+												return current;
+											}
+											NoViableAltException nvae = new NoViableAltException("", 73, 0, input);
+
+											throw nvae;
+										}
+										switch (alt73) {
+											case 1:
+
+											{
+
+												{
+
+													{
+														lv_writeable_1_0 = (Token) match(input, 47,
+																FOLLOW_47_in_ruleXVariableDeclaration4860);
+														if (state.failed)
+															return current;
+														if (state.backtracking == 0) {
+
+															newLeafNode(lv_writeable_1_0, grammarAccess
+																	.getXVariableDeclarationAccess()
+																	.getWriteableVarKeyword_0_0_1_0_0_0_0());
+
+														}
+														if (state.backtracking == 0) {
+
+															if (current == null) {
+																current = createModelElement(grammarAccess
+																		.getXVariableDeclarationRule());
+															}
+															setWithLastConsumed(current, XVARIABLE_DECLARATION__WRITEABLE, true, "var");
+
+														}
+
+													}
+
+												}
+
+											}
+												break;
+											case 2:
+
+											{
+												otherlv_2 = (Token) match(input, 46,
+														FOLLOW_46_in_ruleXVariableDeclaration4891);
+												if (state.failed)
+													return current;
+												if (state.backtracking == 0) {
+
+													newLeafNode(otherlv_2, grammarAccess
+															.getXVariableDeclarationAccess()
+															.getValKeyword_0_0_1_0_0_1());
+
+												}
+
+											}
+												break;
+
+										}
+
+										int alt74 = 2;
+										int LA74_0 = input.LA(1);
+
+										if ((LA74_0 == 34)) {
+											alt74 = 1;
+										}
+										switch (alt74) {
+											case 1:
+
+											{
+
+												{
+													lv_extension_3_0 = (Token) match(input, 34,
+															FOLLOW_34_in_ruleXVariableDeclaration4910);
+													if (state.failed)
+														return current;
+													if (state.backtracking == 0) {
+
+														newLeafNode(lv_extension_3_0, grammarAccess
+																.getXVariableDeclarationAccess()
+																.getExtensionExtensionKeyword_0_0_1_0_1_0());
+
+													}
+													if (state.backtracking == 0) {
+
+														if (current == null) {
+															current = createModelElement(grammarAccess
+																	.getXVariableDeclarationRule());
+														}
+														setWithLastConsumed(current, XTEND_VARIABLE_DECLARATION__EXTENSION, true, "extension");
+
+													}
+
+												}
+
+											}
+												break;
+
+										}
+
+									}
+
+								}
+									break;
+								case 2:
+
+								{
+
+									{
+
+										{
+
+											{
+												lv_extension_4_0 = (Token) match(input, 34,
+														FOLLOW_34_in_ruleXVariableDeclaration4950);
+												if (state.failed)
+													return current;
+												if (state.backtracking == 0) {
+
+													newLeafNode(lv_extension_4_0, grammarAccess
+															.getXVariableDeclarationAccess()
+															.getExtensionExtensionKeyword_0_0_1_1_0_0());
+
+												}
+												if (state.backtracking == 0) {
+
+													if (current == null) {
+														current = createModelElement(grammarAccess
+																.getXVariableDeclarationRule());
+													}
+													setWithLastConsumed(current, XTEND_VARIABLE_DECLARATION__EXTENSION, true, "extension");
+
+												}
+
+											}
+
+										}
+
+										int alt75 = 2;
+										int LA75_0 = input.LA(1);
+
+										if ((LA75_0 == 47)) {
+											alt75 = 1;
+										} else if ((LA75_0 == 46)) {
+											alt75 = 2;
+										} else {
+											if (state.backtracking > 0) {
+												state.failed = true;
+												return current;
+											}
+											NoViableAltException nvae = new NoViableAltException("", 75, 0, input);
+
+											throw nvae;
+										}
+										switch (alt75) {
+											case 1:
+
+											{
+
+												{
+
+													{
+														lv_writeable_5_0 = (Token) match(input, 47,
+																FOLLOW_47_in_ruleXVariableDeclaration4982);
+														if (state.failed)
+															return current;
+														if (state.backtracking == 0) {
+
+															newLeafNode(lv_writeable_5_0, grammarAccess
+																	.getXVariableDeclarationAccess()
+																	.getWriteableVarKeyword_0_0_1_1_1_0_0());
+
+														}
+														if (state.backtracking == 0) {
+
+															if (current == null) {
+																current = createModelElement(grammarAccess
+																		.getXVariableDeclarationRule());
+															}
+															setWithLastConsumed(current, XVARIABLE_DECLARATION__WRITEABLE, true, "var");
+
+														}
+
+													}
+
+												}
+
+											}
+												break;
+											case 2:
+
+											{
+												otherlv_6 = (Token) match(input, 46,
+														FOLLOW_46_in_ruleXVariableDeclaration5013);
+												if (state.failed)
+													return current;
+												if (state.backtracking == 0) {
+
+													newLeafNode(otherlv_6, grammarAccess
+															.getXVariableDeclarationAccess()
+															.getValKeyword_0_0_1_1_1_1());
+
+												}
+
+											}
+												break;
+
+										}
+
+									}
+
+								}
+									break;
+
+							}
+
+						}
+
+					}
+
+					int alt77 = 2;
+					int LA77_0 = input.LA(1);
+
+					if ((LA77_0 == RULE_ID)) {
+						int LA77_1 = input.LA(2);
+
+						if ((synpred5_InternalXtend())) {
+							alt77 = 1;
+						} else if ((true)) {
+							alt77 = 2;
+						} else {
+							if (state.backtracking > 0) {
+								state.failed = true;
+								return current;
+							}
+							NoViableAltException nvae = new NoViableAltException("", 77, 1, input);
+
+							throw nvae;
+						}
+					} else if ((LA77_0 == 50)) {
+						int LA77_2 = input.LA(2);
+
+						if ((synpred5_InternalXtend())) {
+							alt77 = 1;
+						} else if ((true)) {
+							alt77 = 2;
+						} else {
+							if (state.backtracking > 0) {
+								state.failed = true;
+								return current;
+							}
+							NoViableAltException nvae = new NoViableAltException("", 77, 2, input);
+
+							throw nvae;
+						}
+					} else if ((LA77_0 == 32)) {
+						int LA77_3 = input.LA(2);
+
+						if ((synpred5_InternalXtend())) {
+							alt77 = 1;
+						} else if ((true)) {
+							alt77 = 2;
+						} else {
+							if (state.backtracking > 0) {
+								state.failed = true;
+								return current;
+							}
+							NoViableAltException nvae = new NoViableAltException("", 77, 3, input);
+
+							throw nvae;
+						}
+					} else if ((LA77_0 == 35) && (synpred5_InternalXtend())) {
+						alt77 = 1;
+					} else if ((LA77_0 == 79) && (synpred5_InternalXtend())) {
+						alt77 = 1;
+					} else {
+						if (state.backtracking > 0) {
+							state.failed = true;
+							return current;
+						}
+						NoViableAltException nvae = new NoViableAltException("", 77, 0, input);
+
+						throw nvae;
+					}
+					switch (alt77) {
+						case 1:
+
+						{
+
+							{
+
+								{
+
+									{
+
+										{
+											if (state.backtracking == 0) {
+
+												newCompositeNode(grammarAccess.getXVariableDeclarationAccess()
+														.getTypeJvmTypeReferenceParserRuleCall_1_0_0_0_0());
+
+											}
+											pushFollow(FOLLOW_ruleJvmTypeReference_in_ruleXVariableDeclaration5065);
+											lv_type_7_0 = ruleJvmTypeReference();
+
+											state._fsp--;
+											if (state.failed)
+												return current;
+											if (state.backtracking == 0) {
+
+												if (current == null) {
+													current = createModelElementForParent(grammarAccess
+															.getXVariableDeclarationRule());
+												}
+												set(current, XVARIABLE_DECLARATION__TYPE, lv_type_7_0, null);
+												afterParserOrEnumRuleCall();
+
+											}
+
+										}
+
+									}
+
+									{
+
+										{
+											if (state.backtracking == 0) {
+
+												newCompositeNode(grammarAccess.getXVariableDeclarationAccess()
+														.getNameValidIDParserRuleCall_1_0_0_1_0());
+
+											}
+											pushFollow(FOLLOW_ruleValidID_in_ruleXVariableDeclaration5086);
+											lv_name_8_0 = ruleValidID();
+
+											state._fsp--;
+											if (state.failed)
+												return current;
+											if (state.backtracking == 0) {
+
+												if (current == null) {
+													current = createModelElementForParent(grammarAccess
+															.getXVariableDeclarationRule());
+												}
+												set(current, XVARIABLE_DECLARATION__NAME, lv_name_8_0, "ValidID");
+												afterParserOrEnumRuleCall();
+
+											}
+
+										}
+
+									}
+
+								}
+
+							}
+
+						}
+							break;
+						case 2:
+
+						{
+
+							{
+
+								{
+									if (state.backtracking == 0) {
+
+										newCompositeNode(grammarAccess.getXVariableDeclarationAccess()
+												.getNameValidIDParserRuleCall_1_1_0());
+
+									}
+									pushFollow(FOLLOW_ruleValidID_in_ruleXVariableDeclaration5115);
+									lv_name_9_0 = ruleValidID();
+
+									state._fsp--;
+									if (state.failed)
+										return current;
+									if (state.backtracking == 0) {
+
+										if (current == null) {
+											current = createModelElementForParent(grammarAccess
+													.getXVariableDeclarationRule());
+										}
+										set(current, XVARIABLE_DECLARATION__NAME, lv_name_9_0, "ValidID");
+										afterParserOrEnumRuleCall();
+
+									}
+
+								}
+
+							}
+
+						}
+							break;
+
+					}
+
+					int alt78 = 2;
+					int LA78_0 = input.LA(1);
+
+					if ((LA78_0 == 33)) {
+						alt78 = 1;
+					}
+					switch (alt78) {
+						case 1:
+
+						{
+							otherlv_10 = (Token) match(input, 33, FOLLOW_33_in_ruleXVariableDeclaration5129);
+							if (state.failed)
+								return current;
+							if (state.backtracking == 0) {
+
+								newLeafNode(otherlv_10, grammarAccess.getXVariableDeclarationAccess()
+										.getEqualsSignKeyword_2_0());
+
+							}
+
+							{
+
+								{
+									if (state.backtracking == 0) {
+
+										newCompositeNode(grammarAccess.getXVariableDeclarationAccess()
+												.getRightXExpressionParserRuleCall_2_1_0());
+
+									}
+									pushFollow(FOLLOW_ruleXExpression_in_ruleXVariableDeclaration5150);
+									lv_right_11_0 = ruleXExpression();
+
+									state._fsp--;
+									if (state.failed)
+										return current;
+									if (state.backtracking == 0) {
+
+										if (current == null) {
+											current = createModelElementForParent(grammarAccess
+													.getXVariableDeclarationRule());
+										}
+										set(current, XVARIABLE_DECLARATION__RIGHT, lv_right_11_0, null);
+										afterParserOrEnumRuleCall();
+
+									}
+
+								}
+
+							}
+
+						}
+							break;
+
+					}
+
+				}
+
+			}
+
+			if (state.backtracking == 0) {
+				leaveRule();
+			}
+		}
+
+		catch (RecognitionException re) {
+			recoverAndAppendSkippedTokens(re);
+		} finally {
+		}
+		return current;
+	}
+
+	public final EObject entryRuleJvmFormalParameter() throws RecognitionException {
+		EObject current = null;
+
+		EObject iv_ruleJvmFormalParameter = null;
+
+		try {
+
+			{
+				if (state.backtracking == 0) {
+					newCompositeNode(grammarAccess.getJvmFormalParameterRule());
+				}
+				pushFollow(FOLLOW_ruleJvmFormalParameter_in_entryRuleJvmFormalParameter5188);
+				iv_ruleJvmFormalParameter = ruleJvmFormalParameter();
+
+				state._fsp--;
+				if (state.failed)
+					return current;
+				if (state.backtracking == 0) {
+					current = iv_ruleJvmFormalParameter;
+				}
+				match(input, EOF, FOLLOW_EOF_in_entryRuleJvmFormalParameter5198);
+				if (state.failed)
+					return current;
+
+			}
+
+		}
+
+		catch (RecognitionException re) {
+			recoverAndAppendSkippedTokens(re);
+		} finally {
+		}
+		return current;
+	}
+
+	public final EObject ruleJvmFormalParameter() throws RecognitionException {
+		EObject current = null;
+
+		Token lv_extension_0_0 = null;
+		EObject lv_parameterType_1_0 = null;
+
+		AntlrDatatypeRuleToken lv_name_2_0 = null;
+
+		enterRule();
+
+		try {
+
+			{
+
+				{
+
+					int alt79 = 2;
+					int LA79_0 = input.LA(1);
+
+					if ((LA79_0 == 34)) {
+						alt79 = 1;
+					}
+					switch (alt79) {
+						case 1:
+
+						{
+
+							{
+								lv_extension_0_0 = (Token) match(input, 34, FOLLOW_34_in_ruleJvmFormalParameter5241);
+								if (state.failed)
+									return current;
+								if (state.backtracking == 0) {
+
+									newLeafNode(lv_extension_0_0, grammarAccess.getJvmFormalParameterAccess()
+											.getExtensionExtensionKeyword_0_0());
+
+								}
+								if (state.backtracking == 0) {
+
+									if (current == null) {
+										current = createModelElement(grammarAccess.getJvmFormalParameterRule());
+									}
+									setWithLastConsumed(current, XTEND_FORMAL_PARAMETER__EXTENSION, true, "extension");
+
+								}
+
+							}
+
+						}
+							break;
+
+					}
+
+					int alt80 = 2;
+					switch (input.LA(1)) {
+						case RULE_ID: {
+							int LA80_1 = input.LA(2);
+
+							if ((LA80_1 == RULE_ID || LA80_1 == 23 || LA80_1 == 32 || LA80_1 == 50 || LA80_1 == 90 || LA80_1 == 94)) {
+								alt80 = 1;
+							}
+						}
+							break;
+						case 50: {
+							int LA80_2 = input.LA(2);
+
+							if ((LA80_2 == RULE_ID || LA80_2 == 23 || LA80_2 == 32 || LA80_2 == 50 || LA80_2 == 90 || LA80_2 == 94)) {
+								alt80 = 1;
+							}
+						}
+							break;
+						case 32: {
+							int LA80_3 = input.LA(2);
+
+							if ((LA80_3 == RULE_ID || LA80_3 == 23 || LA80_3 == 32 || LA80_3 == 50 || LA80_3 == 90 || LA80_3 == 94)) {
+								alt80 = 1;
+							}
+						}
+							break;
+						case 35:
+						case 79: {
+							alt80 = 1;
+						}
+							break;
+					}
+
+					switch (alt80) {
+						case 1:
+
+						{
+
+							{
+								if (state.backtracking == 0) {
+
+									newCompositeNode(grammarAccess.getJvmFormalParameterAccess()
+											.getParameterTypeJvmTypeReferenceParserRuleCall_1_0());
+
+								}
+								pushFollow(FOLLOW_ruleJvmTypeReference_in_ruleJvmFormalParameter5276);
+								lv_parameterType_1_0 = ruleJvmTypeReference();
+
+								state._fsp--;
+								if (state.failed)
+									return current;
+								if (state.backtracking == 0) {
+
+									if (current == null) {
+										current = createModelElementForParent(grammarAccess.getJvmFormalParameterRule());
+									}
+									set(current, JVM_FORMAL_PARAMETER__PARAMETER_TYPE, lv_parameterType_1_0, null);
+									afterParserOrEnumRuleCall();
+
+								}
+
+							}
+
+						}
+							break;
+
+					}
+
+					{
+
+						{
+							if (state.backtracking == 0) {
+
+								newCompositeNode(grammarAccess.getJvmFormalParameterAccess()
+										.getNameValidIDParserRuleCall_2_0());
+
+							}
+							pushFollow(FOLLOW_ruleValidID_in_ruleJvmFormalParameter5298);
+							lv_name_2_0 = ruleValidID();
+
+							state._fsp--;
+							if (state.failed)
+								return current;
+							if (state.backtracking == 0) {
+
+								if (current == null) {
+									current = createModelElementForParent(grammarAccess.getJvmFormalParameterRule());
+								}
+								set(current, JVM_FORMAL_PARAMETER__NAME, lv_name_2_0, "ValidID");
+								afterParserOrEnumRuleCall();
+
+							}
+
+						}
+
+					}
+
+				}
+
+			}
+
+			if (state.backtracking == 0) {
+				leaveRule();
+			}
+		}
+
+		catch (RecognitionException re) {
+			recoverAndAppendSkippedTokens(re);
+		} finally {
+		}
+		return current;
+	}
+
+	public final EObject entryRuleFullJvmFormalParameter() throws RecognitionException {
+		EObject current = null;
+
+		EObject iv_ruleFullJvmFormalParameter = null;
+
+		try {
+
+			{
+				if (state.backtracking == 0) {
+					newCompositeNode(grammarAccess.getFullJvmFormalParameterRule());
+				}
+				pushFollow(FOLLOW_ruleFullJvmFormalParameter_in_entryRuleFullJvmFormalParameter5334);
+				iv_ruleFullJvmFormalParameter = ruleFullJvmFormalParameter();
+
+				state._fsp--;
+				if (state.failed)
+					return current;
+				if (state.backtracking == 0) {
+					current = iv_ruleFullJvmFormalParameter;
+				}
+				match(input, EOF, FOLLOW_EOF_in_entryRuleFullJvmFormalParameter5344);
+				if (state.failed)
+					return current;
+
+			}
+
+		}
+
+		catch (RecognitionException re) {
+			recoverAndAppendSkippedTokens(re);
+		} finally {
+		}
+		return current;
+	}
+
+	public final EObject ruleFullJvmFormalParameter() throws RecognitionException {
+		EObject current = null;
+
+		Token lv_extension_0_0 = null;
+		EObject lv_parameterType_1_0 = null;
+
+		AntlrDatatypeRuleToken lv_name_2_0 = null;
+
+		enterRule();
+
+		try {
+
+			{
+
+				{
+
+					int alt81 = 2;
+					int LA81_0 = input.LA(1);
+
+					if ((LA81_0 == 34)) {
+						alt81 = 1;
+					}
+					switch (alt81) {
+						case 1:
+
+						{
+
+							{
+								lv_extension_0_0 = (Token) match(input, 34, FOLLOW_34_in_ruleFullJvmFormalParameter5387);
+								if (state.failed)
+									return current;
+								if (state.backtracking == 0) {
+
+									newLeafNode(lv_extension_0_0, grammarAccess.getFullJvmFormalParameterAccess()
+											.getExtensionExtensionKeyword_0_0());
+
+								}
+								if (state.backtracking == 0) {
+
+									if (current == null) {
+										current = createModelElement(grammarAccess.getFullJvmFormalParameterRule());
+									}
+									setWithLastConsumed(current, XTEND_FORMAL_PARAMETER__EXTENSION, true, "extension");
+
+								}
+
+							}
+
+						}
+							break;
+
+					}
+
+					{
+
+						{
+							if (state.backtracking == 0) {
+
+								newCompositeNode(grammarAccess.getFullJvmFormalParameterAccess()
+										.getParameterTypeJvmTypeReferenceParserRuleCall_1_0());
+
+							}
+							pushFollow(FOLLOW_ruleJvmTypeReference_in_ruleFullJvmFormalParameter5422);
+							lv_parameterType_1_0 = ruleJvmTypeReference();
+
+							state._fsp--;
+							if (state.failed)
+								return current;
+							if (state.backtracking == 0) {
+
+								if (current == null) {
+									current = createModelElementForParent(grammarAccess.getFullJvmFormalParameterRule());
+								}
+								set(current, JVM_FORMAL_PARAMETER__PARAMETER_TYPE, lv_parameterType_1_0, null);
+								afterParserOrEnumRuleCall();
+
+							}
+
+						}
+
+					}
+
+					{
+
+						{
+							if (state.backtracking == 0) {
+
+								newCompositeNode(grammarAccess.getFullJvmFormalParameterAccess()
+										.getNameValidIDParserRuleCall_2_0());
+
+							}
+							pushFollow(FOLLOW_ruleValidID_in_ruleFullJvmFormalParameter5443);
+							lv_name_2_0 = ruleValidID();
+
+							state._fsp--;
+							if (state.failed)
+								return current;
+							if (state.backtracking == 0) {
+
+								if (current == null) {
+									current = createModelElementForParent(grammarAccess.getFullJvmFormalParameterRule());
+								}
+								set(current, JVM_FORMAL_PARAMETER__NAME, lv_name_2_0, "ValidID");
+								afterParserOrEnumRuleCall();
+
+							}
+
+						}
+
+					}
+
+				}
+
+			}
+
+			if (state.backtracking == 0) {
+				leaveRule();
+			}
+		}
+
+		catch (RecognitionException re) {
+			recoverAndAppendSkippedTokens(re);
+		} finally {
+		}
+		return current;
+	}
+
+	public final EObject entryRuleXStringLiteral() throws RecognitionException {
+		EObject current = null;
+
+		EObject iv_ruleXStringLiteral = null;
+
+		try {
+
+			{
+				if (state.backtracking == 0) {
+					newCompositeNode(grammarAccess.getXStringLiteralRule());
+				}
+				pushFollow(FOLLOW_ruleXStringLiteral_in_entryRuleXStringLiteral5479);
+				iv_ruleXStringLiteral = ruleXStringLiteral();
+
+				state._fsp--;
+				if (state.failed)
+					return current;
+				if (state.backtracking == 0) {
+					current = iv_ruleXStringLiteral;
+				}
+				match(input, EOF, FOLLOW_EOF_in_entryRuleXStringLiteral5489);
+				if (state.failed)
+					return current;
+
+			}
+
+		}
+
+		catch (RecognitionException re) {
+			recoverAndAppendSkippedTokens(re);
+		} finally {
+		}
+		return current;
+	}
+
+	public final EObject ruleXStringLiteral() throws RecognitionException {
+		EObject current = null;
+
+		EObject this_SimpleStringLiteral_0 = null;
+
+		EObject this_RichString_1 = null;
+
+		enterRule();
+
+		try {
+
+			{
+
+				int alt82 = 2;
+				int LA82_0 = input.LA(1);
+
+				if ((LA82_0 == RULE_STRING)) {
+					alt82 = 1;
+				} else if (((LA82_0 >= RULE_RICH_TEXT && LA82_0 <= RULE_RICH_TEXT_START))) {
+					alt82 = 2;
+				} else {
+					if (state.backtracking > 0) {
+						state.failed = true;
+						return current;
+					}
+					NoViableAltException nvae = new NoViableAltException("", 82, 0, input);
+
+					throw nvae;
+				}
+				switch (alt82) {
+					case 1:
+
+					{
+						if (state.backtracking == 0) {
+
+							newCompositeNode(grammarAccess.getXStringLiteralAccess()
+									.getSimpleStringLiteralParserRuleCall_0());
+
+						}
+						pushFollow(FOLLOW_ruleSimpleStringLiteral_in_ruleXStringLiteral5536);
+						this_SimpleStringLiteral_0 = ruleSimpleStringLiteral();
+
+						state._fsp--;
+						if (state.failed)
+							return current;
+						if (state.backtracking == 0) {
+
+							current = this_SimpleStringLiteral_0;
+							afterParserOrEnumRuleCall();
+
+						}
+
+					}
+						break;
+					case 2:
+
+					{
+						if (state.backtracking == 0) {
+
+							newCompositeNode(grammarAccess.getXStringLiteralAccess().getRichStringParserRuleCall_1());
+
+						}
+						pushFollow(FOLLOW_ruleRichString_in_ruleXStringLiteral5563);
+						this_RichString_1 = ruleRichString();
+
+						state._fsp--;
+						if (state.failed)
+							return current;
+						if (state.backtracking == 0) {
+
+							current = this_RichString_1;
+							afterParserOrEnumRuleCall();
+
+						}
+
+					}
+						break;
+
+				}
+
+			}
+
+			if (state.backtracking == 0) {
+				leaveRule();
+			}
+		}
+
+		catch (RecognitionException re) {
+			recoverAndAppendSkippedTokens(re);
+		} finally {
+		}
+		return current;
+	}
+
+	public final EObject entryRuleSimpleStringLiteral() throws RecognitionException {
+		EObject current = null;
+
+		EObject iv_ruleSimpleStringLiteral = null;
+
+		try {
+
+			{
+				if (state.backtracking == 0) {
+					newCompositeNode(grammarAccess.getSimpleStringLiteralRule());
+				}
+				pushFollow(FOLLOW_ruleSimpleStringLiteral_in_entryRuleSimpleStringLiteral5598);
+				iv_ruleSimpleStringLiteral = ruleSimpleStringLiteral();
+
+				state._fsp--;
+				if (state.failed)
+					return current;
+				if (state.backtracking == 0) {
+					current = iv_ruleSimpleStringLiteral;
+				}
+				match(input, EOF, FOLLOW_EOF_in_entryRuleSimpleStringLiteral5608);
+				if (state.failed)
+					return current;
+
+			}
+
+		}
+
+		catch (RecognitionException re) {
+			recoverAndAppendSkippedTokens(re);
+		} finally {
+		}
+		return current;
+	}
+
+	public final EObject ruleSimpleStringLiteral() throws RecognitionException {
+		EObject current = null;
+
+		Token lv_value_1_0 = null;
+
+		enterRule();
+
+		try {
+
+			{
+
+				{
+
+					{
+						if (state.backtracking == 0) {
+
+							current = forceCreateModelElement(grammarAccess.getSimpleStringLiteralAccess()
+									.getXStringLiteralAction_0(), current);
+
+						}
+
+					}
+
+					{
+
+						{
+							lv_value_1_0 = (Token) match(input, RULE_STRING,
+									FOLLOW_RULE_STRING_in_ruleSimpleStringLiteral5659);
+							if (state.failed)
+								return current;
+							if (state.backtracking == 0) {
+
+								newLeafNode(lv_value_1_0, grammarAccess.getSimpleStringLiteralAccess()
+										.getValueSTRINGTerminalRuleCall_1_0());
+
+							}
+							if (state.backtracking == 0) {
+
+								if (current == null) {
+									current = createModelElement(grammarAccess.getSimpleStringLiteralRule());
+								}
+								setWithLastConsumed(current, XSTRING_LITERAL__VALUE, lv_value_1_0, "STRING");
+
+							}
+
+						}
+
+					}
+
+				}
+
+			}
+
+			if (state.backtracking == 0) {
+				leaveRule();
+			}
+		}
+
+		catch (RecognitionException re) {
+			recoverAndAppendSkippedTokens(re);
+		} finally {
+		}
+		return current;
+	}
+
+	public final EObject entryRuleRichString() throws RecognitionException {
+		EObject current = null;
+
+		EObject iv_ruleRichString = null;
+
+		try {
+
+			{
+				if (state.backtracking == 0) {
+					newCompositeNode(grammarAccess.getRichStringRule());
+				}
+				pushFollow(FOLLOW_ruleRichString_in_entryRuleRichString5700);
+				iv_ruleRichString = ruleRichString();
+
+				state._fsp--;
+				if (state.failed)
+					return current;
+				if (state.backtracking == 0) {
+					current = iv_ruleRichString;
+				}
+				match(input, EOF, FOLLOW_EOF_in_entryRuleRichString5710);
+				if (state.failed)
+					return current;
+
+			}
+
+		}
+
+		catch (RecognitionException re) {
+			recoverAndAppendSkippedTokens(re);
+		} finally {
+		}
+		return current;
+	}
+
+	public final EObject ruleRichString() throws RecognitionException {
+		EObject current = null;
+
+		EObject lv_expressions_1_0 = null;
+
+		EObject lv_expressions_2_0 = null;
+
+		EObject lv_expressions_3_0 = null;
+
+		EObject lv_expressions_4_0 = null;
+
+		EObject lv_expressions_5_0 = null;
+
+		EObject lv_expressions_6_0 = null;
+
+		enterRule();
+
+		try {
+
+			{
+
+				{
+
+					{
+						if (state.backtracking == 0) {
+
+							current = forceCreateModelElement(grammarAccess.getRichStringAccess()
+									.getRichStringAction_0(), current);
+
+						}
+
+					}
+
+					int alt86 = 2;
+					int LA86_0 = input.LA(1);
+
+					if ((LA86_0 == RULE_RICH_TEXT)) {
+						alt86 = 1;
+					} else if ((LA86_0 == RULE_RICH_TEXT_START)) {
+						alt86 = 2;
+					} else {
+						if (state.backtracking > 0) {
+							state.failed = true;
+							return current;
+						}
+						NoViableAltException nvae = new NoViableAltException("", 86, 0, input);
+
+						throw nvae;
+					}
+					switch (alt86) {
+						case 1:
+
+						{
+
+							{
+
+								{
+									if (state.backtracking == 0) {
+
+										newCompositeNode(grammarAccess.getRichStringAccess()
+												.getExpressionsRichStringLiteralParserRuleCall_1_0_0());
+
+									}
+									pushFollow(FOLLOW_ruleRichStringLiteral_in_ruleRichString5766);
+									lv_expressions_1_0 = ruleRichStringLiteral();
+
+									state._fsp--;
+									if (state.failed)
+										return current;
+									if (state.backtracking == 0) {
+
+										if (current == null) {
+											current = createModelElementForParent(grammarAccess.getRichStringRule());
+										}
+										add(current, XBLOCK_EXPRESSION__EXPRESSIONS, lv_expressions_1_0, "RichStringLiteral");
+										afterParserOrEnumRuleCall();
+
+									}
+
+								}
+
+							}
+
+						}
+							break;
+						case 2:
+
+						{
+
+							{
+
+								{
+
+									{
+										if (state.backtracking == 0) {
+
+											newCompositeNode(grammarAccess.getRichStringAccess()
+													.getExpressionsRichStringLiteralStartParserRuleCall_1_1_0_0());
+
+										}
+										pushFollow(FOLLOW_ruleRichStringLiteralStart_in_ruleRichString5794);
+										lv_expressions_2_0 = ruleRichStringLiteralStart();
+
+										state._fsp--;
+										if (state.failed)
+											return current;
+										if (state.backtracking == 0) {
+
+											if (current == null) {
+												current = createModelElementForParent(grammarAccess.getRichStringRule());
+											}
+											add(current, XBLOCK_EXPRESSION__EXPRESSIONS, lv_expressions_2_0, "RichStringLiteralStart");
+											afterParserOrEnumRuleCall();
+
+										}
+
+									}
+
+								}
+
+								int alt83 = 2;
+								int LA83_0 = input.LA(1);
+
+								if (((LA83_0 >= RULE_ID && LA83_0 <= RULE_RICH_TEXT_START)
+										|| (LA83_0 >= RULE_HEX && LA83_0 <= RULE_DECIMAL) || LA83_0 == 20
+										|| (LA83_0 >= 22 && LA83_0 <= 23) || (LA83_0 >= 26 && LA83_0 <= 28)
+										|| (LA83_0 >= 30 && LA83_0 <= 32) || (LA83_0 >= 34 && LA83_0 <= 35)
+										|| (LA83_0 >= 37 && LA83_0 <= 50) || LA83_0 == 52 || LA83_0 == 54
+										|| LA83_0 == 59 || LA83_0 == 64 || LA83_0 == 83 || LA83_0 == 88
+										|| (LA83_0 >= 93 && LA83_0 <= 94) || LA83_0 == 97 || LA83_0 == 99
+										|| (LA83_0 >= 102 && LA83_0 <= 105) || (LA83_0 >= 107 && LA83_0 <= 113))) {
+									alt83 = 1;
+								}
+								switch (alt83) {
+									case 1:
+
+									{
+
+										{
+											if (state.backtracking == 0) {
+
+												newCompositeNode(grammarAccess.getRichStringAccess()
+														.getExpressionsRichStringPartParserRuleCall_1_1_1_0());
+
+											}
+											pushFollow(FOLLOW_ruleRichStringPart_in_ruleRichString5815);
+											lv_expressions_3_0 = ruleRichStringPart();
+
+											state._fsp--;
+											if (state.failed)
+												return current;
+											if (state.backtracking == 0) {
+
+												if (current == null) {
+													current = createModelElementForParent(grammarAccess
+															.getRichStringRule());
+												}
+												add(current, XBLOCK_EXPRESSION__EXPRESSIONS, lv_expressions_3_0, "RichStringPart");
+												afterParserOrEnumRuleCall();
+
+											}
+
+										}
+
+									}
+										break;
+
+								}
+
+								loop85: do {
+									int alt85 = 2;
+									int LA85_0 = input.LA(1);
+
+									if (((LA85_0 >= RULE_RICH_TEXT_INBETWEEN && LA85_0 <= RULE_COMMENT_RICH_TEXT_INBETWEEN))) {
+										alt85 = 1;
+									}
+
+									switch (alt85) {
+										case 1:
+
+										{
+
+											{
+
+												{
+													if (state.backtracking == 0) {
+
+														newCompositeNode(grammarAccess
+																.getRichStringAccess()
+																.getExpressionsRichStringLiteralInbetweenParserRuleCall_1_1_2_0_0());
+
+													}
+													pushFollow(FOLLOW_ruleRichStringLiteralInbetween_in_ruleRichString5838);
+													lv_expressions_4_0 = ruleRichStringLiteralInbetween();
+
+													state._fsp--;
+													if (state.failed)
+														return current;
+													if (state.backtracking == 0) {
+
+														if (current == null) {
+															current = createModelElementForParent(grammarAccess
+																	.getRichStringRule());
+														}
+														add(current, XBLOCK_EXPRESSION__EXPRESSIONS, lv_expressions_4_0,
+																"RichStringLiteralInbetween");
+														afterParserOrEnumRuleCall();
+
+													}
+
+												}
+
+											}
+
+											int alt84 = 2;
+											int LA84_0 = input.LA(1);
+
+											if (((LA84_0 >= RULE_ID && LA84_0 <= RULE_RICH_TEXT_START)
+													|| (LA84_0 >= RULE_HEX && LA84_0 <= RULE_DECIMAL) || LA84_0 == 20
+													|| (LA84_0 >= 22 && LA84_0 <= 23) || (LA84_0 >= 26 && LA84_0 <= 28)
+													|| (LA84_0 >= 30 && LA84_0 <= 32) || (LA84_0 >= 34 && LA84_0 <= 35)
+													|| (LA84_0 >= 37 && LA84_0 <= 50) || LA84_0 == 52 || LA84_0 == 54
+													|| LA84_0 == 59 || LA84_0 == 64 || LA84_0 == 83 || LA84_0 == 88
+													|| (LA84_0 >= 93 && LA84_0 <= 94) || LA84_0 == 97 || LA84_0 == 99
+													|| (LA84_0 >= 102 && LA84_0 <= 105) || (LA84_0 >= 107 && LA84_0 <= 113))) {
+												alt84 = 1;
+											}
+											switch (alt84) {
+												case 1:
+
+												{
+
+													{
+														if (state.backtracking == 0) {
+
+															newCompositeNode(grammarAccess
+																	.getRichStringAccess()
+																	.getExpressionsRichStringPartParserRuleCall_1_1_2_1_0());
+
+														}
+														pushFollow(FOLLOW_ruleRichStringPart_in_ruleRichString5859);
+														lv_expressions_5_0 = ruleRichStringPart();
+
+														state._fsp--;
+														if (state.failed)
+															return current;
+														if (state.backtracking == 0) {
+
+															if (current == null) {
+																current = createModelElementForParent(grammarAccess
+																		.getRichStringRule());
+															}
+															add(current, XBLOCK_EXPRESSION__EXPRESSIONS, lv_expressions_5_0,
+																	"RichStringPart");
+															afterParserOrEnumRuleCall();
+
+														}
+
+													}
+
+												}
+													break;
+
+											}
+
+										}
+											break;
+
+										default:
+											break loop85;
+									}
+								} while (true);
+
+								{
+
+									{
+										if (state.backtracking == 0) {
+
+											newCompositeNode(grammarAccess.getRichStringAccess()
+													.getExpressionsRichStringLiteralEndParserRuleCall_1_1_3_0());
+
+										}
+										pushFollow(FOLLOW_ruleRichStringLiteralEnd_in_ruleRichString5883);
+										lv_expressions_6_0 = ruleRichStringLiteralEnd();
+
+										state._fsp--;
+										if (state.failed)
+											return current;
+										if (state.backtracking == 0) {
+
+											if (current == null) {
+												current = createModelElementForParent(grammarAccess.getRichStringRule());
+											}
+											add(current, XBLOCK_EXPRESSION__EXPRESSIONS, lv_expressions_6_0, "RichStringLiteralEnd");
+											afterParserOrEnumRuleCall();
+
+										}
+
+									}
+
+								}
+
+							}
+
+						}
+							break;
+
+					}
+
+				}
+
+			}
+
+			if (state.backtracking == 0) {
+				leaveRule();
+			}
+		}
+
+		catch (RecognitionException re) {
+			recoverAndAppendSkippedTokens(re);
+		} finally {
+		}
+		return current;
+	}
+
+	public final EObject entryRuleRichStringLiteral() throws RecognitionException {
+		EObject current = null;
+
+		EObject iv_ruleRichStringLiteral = null;
+
+		try {
+
+			{
+				if (state.backtracking == 0) {
+					newCompositeNode(grammarAccess.getRichStringLiteralRule());
+				}
+				pushFollow(FOLLOW_ruleRichStringLiteral_in_entryRuleRichStringLiteral5921);
+				iv_ruleRichStringLiteral = ruleRichStringLiteral();
+
+				state._fsp--;
+				if (state.failed)
+					return current;
+				if (state.backtracking == 0) {
+					current = iv_ruleRichStringLiteral;
+				}
+				match(input, EOF, FOLLOW_EOF_in_entryRuleRichStringLiteral5931);
+				if (state.failed)
+					return current;
+
+			}
+
+		}
+
+		catch (RecognitionException re) {
+			recoverAndAppendSkippedTokens(re);
+		} finally {
+		}
+		return current;
+	}
+
+	public final EObject ruleRichStringLiteral() throws RecognitionException {
+		EObject current = null;
+
+		Token lv_value_1_0 = null;
+
+		enterRule();
+
+		try {
+
+			{
+
+				{
+
+					{
+						if (state.backtracking == 0) {
+
+							current = forceCreateModelElement(grammarAccess.getRichStringLiteralAccess()
+									.getRichStringLiteralAction_0(), current);
+
+						}
+
+					}
+
+					{
+
+						{
+							lv_value_1_0 = (Token) match(input, RULE_RICH_TEXT,
+									FOLLOW_RULE_RICH_TEXT_in_ruleRichStringLiteral5982);
+							if (state.failed)
+								return current;
+							if (state.backtracking == 0) {
+
+								newLeafNode(lv_value_1_0, grammarAccess.getRichStringLiteralAccess()
+										.getValueRICH_TEXTTerminalRuleCall_1_0());
+
+							}
+							if (state.backtracking == 0) {
+
+								if (current == null) {
+									current = createModelElement(grammarAccess.getRichStringLiteralRule());
+								}
+								setWithLastConsumed(current, XSTRING_LITERAL__VALUE, lv_value_1_0, "RICH_TEXT");
+
+							}
+
+						}
+
+					}
+
+				}
+
+			}
+
+			if (state.backtracking == 0) {
+				leaveRule();
+			}
+		}
+
+		catch (RecognitionException re) {
+			recoverAndAppendSkippedTokens(re);
+		} finally {
+		}
+		return current;
+	}
+
+	public final EObject entryRuleRichStringLiteralStart() throws RecognitionException {
+		EObject current = null;
+
+		EObject iv_ruleRichStringLiteralStart = null;
+
+		try {
+
+			{
+				if (state.backtracking == 0) {
+					newCompositeNode(grammarAccess.getRichStringLiteralStartRule());
+				}
+				pushFollow(FOLLOW_ruleRichStringLiteralStart_in_entryRuleRichStringLiteralStart6023);
+				iv_ruleRichStringLiteralStart = ruleRichStringLiteralStart();
+
+				state._fsp--;
+				if (state.failed)
+					return current;
+				if (state.backtracking == 0) {
+					current = iv_ruleRichStringLiteralStart;
+				}
+				match(input, EOF, FOLLOW_EOF_in_entryRuleRichStringLiteralStart6033);
+				if (state.failed)
+					return current;
+
+			}
+
+		}
+
+		catch (RecognitionException re) {
+			recoverAndAppendSkippedTokens(re);
+		} finally {
+		}
+		return current;
+	}
+
+	public final EObject ruleRichStringLiteralStart() throws RecognitionException {
+		EObject current = null;
+
+		Token lv_value_1_0 = null;
+
+		enterRule();
+
+		try {
+
+			{
+
+				{
+
+					{
+						if (state.backtracking == 0) {
+
+							current = forceCreateModelElement(grammarAccess.getRichStringLiteralStartAccess()
+									.getRichStringLiteralAction_0(), current);
+
+						}
+
+					}
+
+					{
+
+						{
+							lv_value_1_0 = (Token) match(input, RULE_RICH_TEXT_START,
+									FOLLOW_RULE_RICH_TEXT_START_in_ruleRichStringLiteralStart6084);
+							if (state.failed)
+								return current;
+							if (state.backtracking == 0) {
+
+								newLeafNode(lv_value_1_0, grammarAccess.getRichStringLiteralStartAccess()
+										.getValueRICH_TEXT_STARTTerminalRuleCall_1_0());
+
+							}
+							if (state.backtracking == 0) {
+
+								if (current == null) {
+									current = createModelElement(grammarAccess.getRichStringLiteralStartRule());
+								}
+								setWithLastConsumed(current, XSTRING_LITERAL__VALUE, lv_value_1_0, "RICH_TEXT_START");
+
+							}
+
+						}
+
+					}
+
+				}
+
+			}
+
+			if (state.backtracking == 0) {
+				leaveRule();
+			}
+		}
+
+		catch (RecognitionException re) {
+			recoverAndAppendSkippedTokens(re);
+		} finally {
+		}
+		return current;
+	}
+
+	public final EObject entryRuleRichStringLiteralInbetween() throws RecognitionException {
+		EObject current = null;
+
+		EObject iv_ruleRichStringLiteralInbetween = null;
+
+		try {
+
+			{
+				if (state.backtracking == 0) {
+					newCompositeNode(grammarAccess.getRichStringLiteralInbetweenRule());
+				}
+				pushFollow(FOLLOW_ruleRichStringLiteralInbetween_in_entryRuleRichStringLiteralInbetween6125);
+				iv_ruleRichStringLiteralInbetween = ruleRichStringLiteralInbetween();
+
+				state._fsp--;
+				if (state.failed)
+					return current;
+				if (state.backtracking == 0) {
+					current = iv_ruleRichStringLiteralInbetween;
+				}
+				match(input, EOF, FOLLOW_EOF_in_entryRuleRichStringLiteralInbetween6135);
+				if (state.failed)
+					return current;
+
+			}
+
+		}
+
+		catch (RecognitionException re) {
+			recoverAndAppendSkippedTokens(re);
+		} finally {
+		}
+		return current;
+	}
+
+	public final EObject ruleRichStringLiteralInbetween() throws RecognitionException {
+		EObject current = null;
+
+		Token lv_value_1_0 = null;
+		Token lv_value_2_0 = null;
+
+		enterRule();
+
+		try {
+
+			{
+
+				{
+
+					{
+						if (state.backtracking == 0) {
+
+							current = forceCreateModelElement(grammarAccess.getRichStringLiteralInbetweenAccess()
+									.getRichStringLiteralAction_0(), current);
+
+						}
+
+					}
+
+					int alt87 = 2;
+					int LA87_0 = input.LA(1);
+
+					if ((LA87_0 == RULE_RICH_TEXT_INBETWEEN)) {
+						alt87 = 1;
+					} else if ((LA87_0 == RULE_COMMENT_RICH_TEXT_INBETWEEN)) {
+						alt87 = 2;
+					} else {
+						if (state.backtracking > 0) {
+							state.failed = true;
+							return current;
+						}
+						NoViableAltException nvae = new NoViableAltException("", 87, 0, input);
+
+						throw nvae;
+					}
+					switch (alt87) {
+						case 1:
+
+						{
+
+							{
+
+								{
+									lv_value_1_0 = (Token) match(input, RULE_RICH_TEXT_INBETWEEN,
+											FOLLOW_RULE_RICH_TEXT_INBETWEEN_in_ruleRichStringLiteralInbetween6187);
+									if (state.failed)
+										return current;
+									if (state.backtracking == 0) {
+
+										newLeafNode(lv_value_1_0, grammarAccess.getRichStringLiteralInbetweenAccess()
+												.getValueRICH_TEXT_INBETWEENTerminalRuleCall_1_0_0());
+
+									}
+									if (state.backtracking == 0) {
+
+										if (current == null) {
+											current = createModelElement(grammarAccess
+													.getRichStringLiteralInbetweenRule());
+										}
+										setWithLastConsumed(current, XSTRING_LITERAL__VALUE, lv_value_1_0, "RICH_TEXT_INBETWEEN");
+
+									}
+
+								}
+
+							}
+
+						}
+							break;
+						case 2:
+
+						{
+
+							{
+
+								{
+									lv_value_2_0 = (Token) match(input, RULE_COMMENT_RICH_TEXT_INBETWEEN,
+											FOLLOW_RULE_COMMENT_RICH_TEXT_INBETWEEN_in_ruleRichStringLiteralInbetween6215);
+									if (state.failed)
+										return current;
+									if (state.backtracking == 0) {
+
+										newLeafNode(lv_value_2_0, grammarAccess.getRichStringLiteralInbetweenAccess()
+												.getValueCOMMENT_RICH_TEXT_INBETWEENTerminalRuleCall_1_1_0());
+
+									}
+									if (state.backtracking == 0) {
+
+										if (current == null) {
+											current = createModelElement(grammarAccess
+													.getRichStringLiteralInbetweenRule());
+										}
+										setWithLastConsumed(current, XSTRING_LITERAL__VALUE, lv_value_2_0,
+												"COMMENT_RICH_TEXT_INBETWEEN");
+
+									}
+
+								}
+
+							}
+
+						}
+							break;
+
+					}
+
+				}
+
+			}
+
+			if (state.backtracking == 0) {
+				leaveRule();
+			}
+		}
+
+		catch (RecognitionException re) {
+			recoverAndAppendSkippedTokens(re);
+		} finally {
+		}
+		return current;
+	}
+
+	public final EObject entryRuleRichStringLiteralEnd() throws RecognitionException {
+		EObject current = null;
+
+		EObject iv_ruleRichStringLiteralEnd = null;
+
+		try {
+
+			{
+				if (state.backtracking == 0) {
+					newCompositeNode(grammarAccess.getRichStringLiteralEndRule());
+				}
+				pushFollow(FOLLOW_ruleRichStringLiteralEnd_in_entryRuleRichStringLiteralEnd6257);
+				iv_ruleRichStringLiteralEnd = ruleRichStringLiteralEnd();
+
+				state._fsp--;
+				if (state.failed)
+					return current;
+				if (state.backtracking == 0) {
+					current = iv_ruleRichStringLiteralEnd;
+				}
+				match(input, EOF, FOLLOW_EOF_in_entryRuleRichStringLiteralEnd6267);
+				if (state.failed)
+					return current;
+
+			}
+
+		}
+
+		catch (RecognitionException re) {
+			recoverAndAppendSkippedTokens(re);
+		} finally {
+		}
+		return current;
+	}
+
+	public final EObject ruleRichStringLiteralEnd() throws RecognitionException {
+		EObject current = null;
+
+		Token lv_value_1_0 = null;
+		Token lv_value_2_0 = null;
+
+		enterRule();
+
+		try {
+
+			{
+
+				{
+
+					{
+						if (state.backtracking == 0) {
+
+							current = forceCreateModelElement(grammarAccess.getRichStringLiteralEndAccess()
+									.getRichStringLiteralAction_0(), current);
+
+						}
+
+					}
+
+					int alt88 = 2;
+					int LA88_0 = input.LA(1);
+
+					if ((LA88_0 == RULE_RICH_TEXT_END)) {
+						alt88 = 1;
+					} else if ((LA88_0 == RULE_COMMENT_RICH_TEXT_END)) {
+						alt88 = 2;
+					} else {
+						if (state.backtracking > 0) {
+							state.failed = true;
+							return current;
+						}
+						NoViableAltException nvae = new NoViableAltException("", 88, 0, input);
+
+						throw nvae;
+					}
+					switch (alt88) {
+						case 1:
+
+						{
+
+							{
+
+								{
+									lv_value_1_0 = (Token) match(input, RULE_RICH_TEXT_END,
+											FOLLOW_RULE_RICH_TEXT_END_in_ruleRichStringLiteralEnd6319);
+									if (state.failed)
+										return current;
+									if (state.backtracking == 0) {
+
+										newLeafNode(lv_value_1_0, grammarAccess.getRichStringLiteralEndAccess()
+												.getValueRICH_TEXT_ENDTerminalRuleCall_1_0_0());
+
+									}
+									if (state.backtracking == 0) {
+
+										if (current == null) {
+											current = createModelElement(grammarAccess.getRichStringLiteralEndRule());
+										}
+										setWithLastConsumed(current, XSTRING_LITERAL__VALUE, lv_value_1_0, "RICH_TEXT_END");
+
+									}
+
+								}
+
+							}
+
+						}
+							break;
+						case 2:
+
+						{
+
+							{
+
+								{
+									lv_value_2_0 = (Token) match(input, RULE_COMMENT_RICH_TEXT_END,
+											FOLLOW_RULE_COMMENT_RICH_TEXT_END_in_ruleRichStringLiteralEnd6347);
+									if (state.failed)
+										return current;
+									if (state.backtracking == 0) {
+
+										newLeafNode(lv_value_2_0, grammarAccess.getRichStringLiteralEndAccess()
+												.getValueCOMMENT_RICH_TEXT_ENDTerminalRuleCall_1_1_0());
+
+									}
+									if (state.backtracking == 0) {
+
+										if (current == null) {
+											current = createModelElement(grammarAccess.getRichStringLiteralEndRule());
+										}
+										setWithLastConsumed(current, XSTRING_LITERAL__VALUE, lv_value_2_0, "COMMENT_RICH_TEXT_END");
+
+									}
+
+								}
+
+							}
+
+						}
+							break;
+
+					}
+
+				}
+
+			}
+
+			if (state.backtracking == 0) {
+				leaveRule();
+			}
+		}
+
+		catch (RecognitionException re) {
+			recoverAndAppendSkippedTokens(re);
+		} finally {
+		}
+		return current;
+	}
+
+	public final EObject entryRuleInternalRichString() throws RecognitionException {
+		EObject current = null;
+
+		EObject iv_ruleInternalRichString = null;
+
+		try {
+
+			{
+				if (state.backtracking == 0) {
+					newCompositeNode(grammarAccess.getInternalRichStringRule());
+				}
+				pushFollow(FOLLOW_ruleInternalRichString_in_entryRuleInternalRichString6389);
+				iv_ruleInternalRichString = ruleInternalRichString();
+
+				state._fsp--;
+				if (state.failed)
+					return current;
+				if (state.backtracking == 0) {
+					current = iv_ruleInternalRichString;
+				}
+				match(input, EOF, FOLLOW_EOF_in_entryRuleInternalRichString6399);
+				if (state.failed)
+					return current;
+
+			}
+
+		}
+
+		catch (RecognitionException re) {
+			recoverAndAppendSkippedTokens(re);
+		} finally {
+		}
+		return current;
+	}
+
+	public final EObject ruleInternalRichString() throws RecognitionException {
+		EObject current = null;
+
+		EObject lv_expressions_1_0 = null;
+
+		EObject lv_expressions_2_0 = null;
+
+		EObject lv_expressions_3_0 = null;
+
+		enterRule();
+
+		try {
+
+			{
+
+				{
+
+					{
+						if (state.backtracking == 0) {
+
+							current = forceCreateModelElement(grammarAccess.getInternalRichStringAccess()
+									.getRichStringAction_0(), current);
+
+						}
+
+					}
+
+					{
+
+						{
+
+							{
+								if (state.backtracking == 0) {
+
+									newCompositeNode(grammarAccess.getInternalRichStringAccess()
+											.getExpressionsRichStringLiteralInbetweenParserRuleCall_1_0_0());
+
+								}
+								pushFollow(FOLLOW_ruleRichStringLiteralInbetween_in_ruleInternalRichString6455);
+								lv_expressions_1_0 = ruleRichStringLiteralInbetween();
+
+								state._fsp--;
+								if (state.failed)
+									return current;
+								if (state.backtracking == 0) {
+
+									if (current == null) {
+										current = createModelElementForParent(grammarAccess.getInternalRichStringRule());
+									}
+									add(current, XBLOCK_EXPRESSION__EXPRESSIONS, lv_expressions_1_0, "RichStringLiteralInbetween");
+									afterParserOrEnumRuleCall();
+
+								}
+
+							}
+
+						}
+
+						loop90: do {
+							int alt90 = 2;
+							int LA90_0 = input.LA(1);
+
+							if (((LA90_0 >= RULE_ID && LA90_0 <= RULE_COMMENT_RICH_TEXT_INBETWEEN)
+									|| (LA90_0 >= RULE_HEX && LA90_0 <= RULE_DECIMAL) || LA90_0 == 20
+									|| (LA90_0 >= 22 && LA90_0 <= 23) || (LA90_0 >= 26 && LA90_0 <= 28)
+									|| (LA90_0 >= 30 && LA90_0 <= 32) || (LA90_0 >= 34 && LA90_0 <= 35)
+									|| (LA90_0 >= 37 && LA90_0 <= 50) || LA90_0 == 52 || LA90_0 == 54 || LA90_0 == 59
+									|| LA90_0 == 64 || LA90_0 == 83 || LA90_0 == 88 || (LA90_0 >= 93 && LA90_0 <= 94)
+									|| LA90_0 == 97 || LA90_0 == 99 || (LA90_0 >= 102 && LA90_0 <= 105) || (LA90_0 >= 107 && LA90_0 <= 113))) {
+								alt90 = 1;
+							}
+
+							switch (alt90) {
+								case 1:
+
+								{
+
+									int alt89 = 2;
+									int LA89_0 = input.LA(1);
+
+									if (((LA89_0 >= RULE_ID && LA89_0 <= RULE_RICH_TEXT_START)
+											|| (LA89_0 >= RULE_HEX && LA89_0 <= RULE_DECIMAL) || LA89_0 == 20
+											|| (LA89_0 >= 22 && LA89_0 <= 23) || (LA89_0 >= 26 && LA89_0 <= 28)
+											|| (LA89_0 >= 30 && LA89_0 <= 32) || (LA89_0 >= 34 && LA89_0 <= 35)
+											|| (LA89_0 >= 37 && LA89_0 <= 50) || LA89_0 == 52 || LA89_0 == 54
+											|| LA89_0 == 59 || LA89_0 == 64 || LA89_0 == 83 || LA89_0 == 88
+											|| (LA89_0 >= 93 && LA89_0 <= 94) || LA89_0 == 97 || LA89_0 == 99
+											|| (LA89_0 >= 102 && LA89_0 <= 105) || (LA89_0 >= 107 && LA89_0 <= 113))) {
+										alt89 = 1;
+									}
+									switch (alt89) {
+										case 1:
+
+										{
+
+											{
+												if (state.backtracking == 0) {
+
+													newCompositeNode(grammarAccess.getInternalRichStringAccess()
+															.getExpressionsRichStringPartParserRuleCall_1_1_0_0());
+
+												}
+												pushFollow(FOLLOW_ruleRichStringPart_in_ruleInternalRichString6477);
+												lv_expressions_2_0 = ruleRichStringPart();
+
+												state._fsp--;
+												if (state.failed)
+													return current;
+												if (state.backtracking == 0) {
+
+													if (current == null) {
+														current = createModelElementForParent(grammarAccess
+																.getInternalRichStringRule());
+													}
+													add(current, XBLOCK_EXPRESSION__EXPRESSIONS, lv_expressions_2_0, "RichStringPart");
+													afterParserOrEnumRuleCall();
+
+												}
+
+											}
+
+										}
+											break;
+
+									}
+
+									{
+
+										{
+											if (state.backtracking == 0) {
+
+												newCompositeNode(grammarAccess
+														.getInternalRichStringAccess()
+														.getExpressionsRichStringLiteralInbetweenParserRuleCall_1_1_1_0());
+
+											}
+											pushFollow(FOLLOW_ruleRichStringLiteralInbetween_in_ruleInternalRichString6499);
+											lv_expressions_3_0 = ruleRichStringLiteralInbetween();
+
+											state._fsp--;
+											if (state.failed)
+												return current;
+											if (state.backtracking == 0) {
+
+												if (current == null) {
+													current = createModelElementForParent(grammarAccess
+															.getInternalRichStringRule());
+												}
+												add(current, XBLOCK_EXPRESSION__EXPRESSIONS, lv_expressions_3_0,
+														"RichStringLiteralInbetween");
+												afterParserOrEnumRuleCall();
+
+											}
+
+										}
+
+									}
+
+								}
+									break;
+
+								default:
+									break loop90;
+							}
+						} while (true);
+
+					}
+
+				}
+
+			}
+
+			if (state.backtracking == 0) {
+				leaveRule();
+			}
+		}
+
+		catch (RecognitionException re) {
+			recoverAndAppendSkippedTokens(re);
+		} finally {
+		}
+		return current;
+	}
+
+	public final EObject entryRuleRichStringPart() throws RecognitionException {
+		EObject current = null;
+
+		EObject iv_ruleRichStringPart = null;
+
+		try {
+
+			{
+				if (state.backtracking == 0) {
+					newCompositeNode(grammarAccess.getRichStringPartRule());
+				}
+				pushFollow(FOLLOW_ruleRichStringPart_in_entryRuleRichStringPart6538);
+				iv_ruleRichStringPart = ruleRichStringPart();
+
+				state._fsp--;
+				if (state.failed)
+					return current;
+				if (state.backtracking == 0) {
+					current = iv_ruleRichStringPart;
+				}
+				match(input, EOF, FOLLOW_EOF_in_entryRuleRichStringPart6548);
+				if (state.failed)
+					return current;
+
+			}
+
+		}
+
+		catch (RecognitionException re) {
+			recoverAndAppendSkippedTokens(re);
+		} finally {
+		}
+		return current;
+	}
+
+	public final EObject ruleRichStringPart() throws RecognitionException {
+		EObject current = null;
+
+		EObject this_XExpressionInsideBlock_0 = null;
+
+		EObject this_RichStringForLoop_1 = null;
+
+		EObject this_RichStringIf_2 = null;
+
+		enterRule();
+
+		try {
+
+			{
+
+				int alt91 = 3;
+				switch (input.LA(1)) {
+					case RULE_ID:
+					case RULE_STRING:
+					case RULE_RICH_TEXT:
+					case RULE_RICH_TEXT_START:
+					case RULE_HEX:
+					case RULE_INT:
+					case RULE_DECIMAL:
+					case 20:
+					case 22:
+					case 23:
+					case 26:
+					case 27:
+					case 28:
+					case 30:
+					case 31:
+					case 32:
+					case 34:
+					case 35:
+					case 37:
+					case 38:
+					case 39:
+					case 40:
+					case 41:
+					case 42:
+					case 43:
+					case 44:
+					case 45:
+					case 46:
+					case 47:
+					case 48:
+					case 49:
+					case 50:
+					case 52:
+					case 64:
+					case 83:
+					case 88:
+					case 93:
+					case 94:
+					case 97:
+					case 99:
+					case 102:
+					case 103:
+					case 104:
+					case 105:
+					case 107:
+					case 108:
+					case 109:
+					case 110:
+					case 111:
+					case 112:
+					case 113: {
+						alt91 = 1;
+					}
+						break;
+					case 54: {
+						alt91 = 2;
+					}
+						break;
+					case 59: {
+						alt91 = 3;
+					}
+						break;
+					default:
+						if (state.backtracking > 0) {
+							state.failed = true;
+							return current;
+						}
+						NoViableAltException nvae = new NoViableAltException("", 91, 0, input);
+
+						throw nvae;
+				}
+
+				switch (alt91) {
+					case 1:
+
+					{
+						if (state.backtracking == 0) {
+
+							newCompositeNode(grammarAccess.getRichStringPartAccess()
+									.getXExpressionInsideBlockParserRuleCall_0());
+
+						}
+						pushFollow(FOLLOW_ruleXExpressionInsideBlock_in_ruleRichStringPart6595);
+						this_XExpressionInsideBlock_0 = ruleXExpressionInsideBlock();
+
+						state._fsp--;
+						if (state.failed)
+							return current;
+						if (state.backtracking == 0) {
+
+							current = this_XExpressionInsideBlock_0;
+							afterParserOrEnumRuleCall();
+
+						}
+
+					}
+						break;
+					case 2:
+
+					{
+						if (state.backtracking == 0) {
+
+							newCompositeNode(grammarAccess.getRichStringPartAccess()
+									.getRichStringForLoopParserRuleCall_1());
+
+						}
+						pushFollow(FOLLOW_ruleRichStringForLoop_in_ruleRichStringPart6622);
+						this_RichStringForLoop_1 = ruleRichStringForLoop();
+
+						state._fsp--;
+						if (state.failed)
+							return current;
+						if (state.backtracking == 0) {
+
+							current = this_RichStringForLoop_1;
+							afterParserOrEnumRuleCall();
+
+						}
+
+					}
+						break;
+					case 3:
+
+					{
+						if (state.backtracking == 0) {
+
+							newCompositeNode(grammarAccess.getRichStringPartAccess().getRichStringIfParserRuleCall_2());
+
+						}
+						pushFollow(FOLLOW_ruleRichStringIf_in_ruleRichStringPart6649);
+						this_RichStringIf_2 = ruleRichStringIf();
+
+						state._fsp--;
+						if (state.failed)
+							return current;
+						if (state.backtracking == 0) {
+
+							current = this_RichStringIf_2;
+							afterParserOrEnumRuleCall();
+
+						}
+
+					}
+						break;
+
+				}
+
+			}
+
+			if (state.backtracking == 0) {
+				leaveRule();
+			}
+		}
+
+		catch (RecognitionException re) {
+			recoverAndAppendSkippedTokens(re);
+		} finally {
+		}
+		return current;
+	}
+
+	public final EObject entryRuleRichStringForLoop() throws RecognitionException {
+		EObject current = null;
+
+		EObject iv_ruleRichStringForLoop = null;
+
+		try {
+
+			{
+				if (state.backtracking == 0) {
+					newCompositeNode(grammarAccess.getRichStringForLoopRule());
+				}
+				pushFollow(FOLLOW_ruleRichStringForLoop_in_entryRuleRichStringForLoop6684);
+				iv_ruleRichStringForLoop = ruleRichStringForLoop();
+
+				state._fsp--;
+				if (state.failed)
+					return current;
+				if (state.backtracking == 0) {
+					current = iv_ruleRichStringForLoop;
+				}
+				match(input, EOF, FOLLOW_EOF_in_entryRuleRichStringForLoop6694);
+				if (state.failed)
+					return current;
+
+			}
+
+		}
+
+		catch (RecognitionException re) {
+			recoverAndAppendSkippedTokens(re);
+		} finally {
+		}
+		return current;
+	}
+
+	public final EObject ruleRichStringForLoop() throws RecognitionException {
+		EObject current = null;
+
+		Token otherlv_1 = null;
+		Token otherlv_3 = null;
+		Token otherlv_5 = null;
+		Token otherlv_7 = null;
+		Token otherlv_9 = null;
+		Token otherlv_12 = null;
+		EObject lv_declaredParam_2_0 = null;
+
+		EObject lv_forExpression_4_0 = null;
+
+		EObject lv_before_6_0 = null;
+
+		EObject lv_separator_8_0 = null;
+
+		EObject lv_after_10_0 = null;
+
+		EObject lv_eachExpression_11_0 = null;
+
+		enterRule();
+
+		try {
+
+			{
+
+				{
+
+					{
+						if (state.backtracking == 0) {
+
+							current = forceCreateModelElement(grammarAccess.getRichStringForLoopAccess()
+									.getRichStringForLoopAction_0(), current);
+
+						}
+
+					}
+
+					otherlv_1 = (Token) match(input, 54, FOLLOW_54_in_ruleRichStringForLoop6740);
+					if (state.failed)
+						return current;
+					if (state.backtracking == 0) {
+
+						newLeafNode(otherlv_1, grammarAccess.getRichStringForLoopAccess().getFORKeyword_1());
+
+					}
+
+					{
+
+						{
+							if (state.backtracking == 0) {
+
+								newCompositeNode(grammarAccess.getRichStringForLoopAccess()
+										.getDeclaredParamJvmFormalParameterParserRuleCall_2_0());
+
+							}
+							pushFollow(FOLLOW_ruleJvmFormalParameter_in_ruleRichStringForLoop6761);
+							lv_declaredParam_2_0 = ruleJvmFormalParameter();
+
+							state._fsp--;
+							if (state.failed)
+								return current;
+							if (state.backtracking == 0) {
+
+								if (current == null) {
+									current = createModelElementForParent(grammarAccess.getRichStringForLoopRule());
+								}
+								set(current, XFOR_LOOP_EXPRESSION__DECLARED_PARAM, lv_declaredParam_2_0, null);
+								afterParserOrEnumRuleCall();
+
+							}
+
+						}
+
+					}
+
+					otherlv_3 = (Token) match(input, 51, FOLLOW_51_in_ruleRichStringForLoop6773);
+					if (state.failed)
+						return current;
+					if (state.backtracking == 0) {
+
+						newLeafNode(otherlv_3, grammarAccess.getRichStringForLoopAccess().getColonKeyword_3());
+
+					}
+
+					{
+
+						{
+							if (state.backtracking == 0) {
+
+								newCompositeNode(grammarAccess.getRichStringForLoopAccess()
+										.getForExpressionXExpressionParserRuleCall_4_0());
+
+							}
+							pushFollow(FOLLOW_ruleXExpression_in_ruleRichStringForLoop6794);
+							lv_forExpression_4_0 = ruleXExpression();
+
+							state._fsp--;
+							if (state.failed)
+								return current;
+							if (state.backtracking == 0) {
+
+								if (current == null) {
+									current = createModelElementForParent(grammarAccess.getRichStringForLoopRule());
+								}
+								set(current, XFOR_LOOP_EXPRESSION__FOR_EXPRESSION, lv_forExpression_4_0, null);
+								afterParserOrEnumRuleCall();
+
+							}
+
+						}
+
+					}
+
+					int alt92 = 2;
+					int LA92_0 = input.LA(1);
+
+					if ((LA92_0 == 55)) {
+						alt92 = 1;
+					}
+					switch (alt92) {
+						case 1:
+
+						{
+							otherlv_5 = (Token) match(input, 55, FOLLOW_55_in_ruleRichStringForLoop6807);
+							if (state.failed)
+								return current;
+							if (state.backtracking == 0) {
+
+								newLeafNode(otherlv_5, grammarAccess.getRichStringForLoopAccess()
+										.getBEFOREKeyword_5_0());
+
+							}
+
+							{
+
+								{
+									if (state.backtracking == 0) {
+
+										newCompositeNode(grammarAccess.getRichStringForLoopAccess()
+												.getBeforeXExpressionParserRuleCall_5_1_0());
+
+									}
+									pushFollow(FOLLOW_ruleXExpression_in_ruleRichStringForLoop6828);
+									lv_before_6_0 = ruleXExpression();
+
+									state._fsp--;
+									if (state.failed)
+										return current;
+									if (state.backtracking == 0) {
+
+										if (current == null) {
+											current = createModelElementForParent(grammarAccess
+													.getRichStringForLoopRule());
+										}
+										set(current, RICH_STRING_FOR_LOOP__BEFORE, lv_before_6_0, null);
+										afterParserOrEnumRuleCall();
+
+									}
+
+								}
+
+							}
+
+						}
+							break;
+
+					}
+
+					int alt93 = 2;
+					int LA93_0 = input.LA(1);
+
+					if ((LA93_0 == 56)) {
+						alt93 = 1;
+					}
+					switch (alt93) {
+						case 1:
+
+						{
+							otherlv_7 = (Token) match(input, 56, FOLLOW_56_in_ruleRichStringForLoop6843);
+							if (state.failed)
+								return current;
+							if (state.backtracking == 0) {
+
+								newLeafNode(otherlv_7, grammarAccess.getRichStringForLoopAccess()
+										.getSEPARATORKeyword_6_0());
+
+							}
+
+							{
+
+								{
+									if (state.backtracking == 0) {
+
+										newCompositeNode(grammarAccess.getRichStringForLoopAccess()
+												.getSeparatorXExpressionParserRuleCall_6_1_0());
+
+									}
+									pushFollow(FOLLOW_ruleXExpression_in_ruleRichStringForLoop6864);
+									lv_separator_8_0 = ruleXExpression();
+
+									state._fsp--;
+									if (state.failed)
+										return current;
+									if (state.backtracking == 0) {
+
+										if (current == null) {
+											current = createModelElementForParent(grammarAccess
+													.getRichStringForLoopRule());
+										}
+										set(current, RICH_STRING_FOR_LOOP__SEPARATOR, lv_separator_8_0, null);
+										afterParserOrEnumRuleCall();
+
+									}
+
+								}
+
+							}
+
+						}
+							break;
+
+					}
+
+					int alt94 = 2;
+					int LA94_0 = input.LA(1);
+
+					if ((LA94_0 == 57)) {
+						alt94 = 1;
+					}
+					switch (alt94) {
+						case 1:
+
+						{
+							otherlv_9 = (Token) match(input, 57, FOLLOW_57_in_ruleRichStringForLoop6879);
+							if (state.failed)
+								return current;
+							if (state.backtracking == 0) {
+
+								newLeafNode(otherlv_9, grammarAccess.getRichStringForLoopAccess().getAFTERKeyword_7_0());
+
+							}
+
+							{
+
+								{
+									if (state.backtracking == 0) {
+
+										newCompositeNode(grammarAccess.getRichStringForLoopAccess()
+												.getAfterXExpressionParserRuleCall_7_1_0());
+
+									}
+									pushFollow(FOLLOW_ruleXExpression_in_ruleRichStringForLoop6900);
+									lv_after_10_0 = ruleXExpression();
+
+									state._fsp--;
+									if (state.failed)
+										return current;
+									if (state.backtracking == 0) {
+
+										if (current == null) {
+											current = createModelElementForParent(grammarAccess
+													.getRichStringForLoopRule());
+										}
+										set(current, RICH_STRING_FOR_LOOP__AFTER, lv_after_10_0, null);
+										afterParserOrEnumRuleCall();
+
+									}
+
+								}
+
+							}
+
+						}
+							break;
+
+					}
+
+					{
+
+						{
+							if (state.backtracking == 0) {
+
+								newCompositeNode(grammarAccess.getRichStringForLoopAccess()
+										.getEachExpressionInternalRichStringParserRuleCall_8_0());
+
+							}
+							pushFollow(FOLLOW_ruleInternalRichString_in_ruleRichStringForLoop6923);
+							lv_eachExpression_11_0 = ruleInternalRichString();
+
+							state._fsp--;
+							if (state.failed)
+								return current;
+							if (state.backtracking == 0) {
+
+								if (current == null) {
+									current = createModelElementForParent(grammarAccess.getRichStringForLoopRule());
+								}
+								set(current, XFOR_LOOP_EXPRESSION__EACH_EXPRESSION, lv_eachExpression_11_0, "InternalRichString");
+								afterParserOrEnumRuleCall();
+
+							}
+
+						}
+
+					}
+
+					otherlv_12 = (Token) match(input, 58, FOLLOW_58_in_ruleRichStringForLoop6935);
+					if (state.failed)
+						return current;
+					if (state.backtracking == 0) {
+
+						newLeafNode(otherlv_12, grammarAccess.getRichStringForLoopAccess().getENDFORKeyword_9());
+
+					}
+
+				}
+
+			}
+
+			if (state.backtracking == 0) {
+				leaveRule();
+			}
+		}
+
+		catch (RecognitionException re) {
+			recoverAndAppendSkippedTokens(re);
+		} finally {
+		}
+		return current;
+	}
+
+	public final EObject entryRuleRichStringIf() throws RecognitionException {
+		EObject current = null;
+
+		EObject iv_ruleRichStringIf = null;
+
+		try {
+
+			{
+				if (state.backtracking == 0) {
+					newCompositeNode(grammarAccess.getRichStringIfRule());
+				}
+				pushFollow(FOLLOW_ruleRichStringIf_in_entryRuleRichStringIf6971);
+				iv_ruleRichStringIf = ruleRichStringIf();
+
+				state._fsp--;
+				if (state.failed)
+					return current;
+				if (state.backtracking == 0) {
+					current = iv_ruleRichStringIf;
+				}
+				match(input, EOF, FOLLOW_EOF_in_entryRuleRichStringIf6981);
+				if (state.failed)
+					return current;
+
+			}
+
+		}
+
+		catch (RecognitionException re) {
+			recoverAndAppendSkippedTokens(re);
+		} finally {
+		}
+		return current;
+	}
+
+	public final EObject ruleRichStringIf() throws RecognitionException {
+		EObject current = null;
+
+		Token otherlv_1 = null;
+		Token otherlv_5 = null;
+		Token otherlv_7 = null;
+		EObject lv_if_2_0 = null;
+
+		EObject lv_then_3_0 = null;
+
+		EObject lv_elseIfs_4_0 = null;
+
+		EObject lv_else_6_0 = null;
+
+		enterRule();
+
+		try {
+
+			{
+
+				{
+
+					{
+						if (state.backtracking == 0) {
+
+							current = forceCreateModelElement(grammarAccess.getRichStringIfAccess()
+									.getRichStringIfAction_0(), current);
+
+						}
+
+					}
+
+					otherlv_1 = (Token) match(input, 59, FOLLOW_59_in_ruleRichStringIf7027);
+					if (state.failed)
+						return current;
+					if (state.backtracking == 0) {
+
+						newLeafNode(otherlv_1, grammarAccess.getRichStringIfAccess().getIFKeyword_1());
+
+					}
+
+					{
+
+						{
+							if (state.backtracking == 0) {
+
+								newCompositeNode(grammarAccess.getRichStringIfAccess()
+										.getIfXExpressionParserRuleCall_2_0());
+
+							}
+							pushFollow(FOLLOW_ruleXExpression_in_ruleRichStringIf7048);
+							lv_if_2_0 = ruleXExpression();
+
+							state._fsp--;
+							if (state.failed)
+								return current;
+							if (state.backtracking == 0) {
+
+								if (current == null) {
+									current = createModelElementForParent(grammarAccess.getRichStringIfRule());
+								}
+								set(current, RICH_STRING_IF__IF, lv_if_2_0, null);
+								afterParserOrEnumRuleCall();
+
+							}
+
+						}
+
+					}
+
+					{
+
+						{
+							if (state.backtracking == 0) {
+
+								newCompositeNode(grammarAccess.getRichStringIfAccess()
+										.getThenInternalRichStringParserRuleCall_3_0());
+
+							}
+							pushFollow(FOLLOW_ruleInternalRichString_in_ruleRichStringIf7069);
+							lv_then_3_0 = ruleInternalRichString();
+
+							state._fsp--;
+							if (state.failed)
+								return current;
+							if (state.backtracking == 0) {
+
+								if (current == null) {
+									current = createModelElementForParent(grammarAccess.getRichStringIfRule());
+								}
+								set(current, RICH_STRING_IF__THEN, lv_then_3_0, "InternalRichString");
+								afterParserOrEnumRuleCall();
+
+							}
+
+						}
+
+					}
+
+					loop95: do {
+						int alt95 = 2;
+						int LA95_0 = input.LA(1);
+
+						if ((LA95_0 == 62)) {
+							alt95 = 1;
+						}
+
+						switch (alt95) {
+							case 1:
+
+							{
+
+								{
+									if (state.backtracking == 0) {
+
+										newCompositeNode(grammarAccess.getRichStringIfAccess()
+												.getElseIfsRichStringElseIfParserRuleCall_4_0());
+
+									}
+									pushFollow(FOLLOW_ruleRichStringElseIf_in_ruleRichStringIf7090);
+									lv_elseIfs_4_0 = ruleRichStringElseIf();
+
+									state._fsp--;
+									if (state.failed)
+										return current;
+									if (state.backtracking == 0) {
+
+										if (current == null) {
+											current = createModelElementForParent(grammarAccess.getRichStringIfRule());
+										}
+										add(current, RICH_STRING_IF__ELSE_IFS, lv_elseIfs_4_0, "RichStringElseIf");
+										afterParserOrEnumRuleCall();
+
+									}
+
+								}
+
+							}
+								break;
+
+							default:
+								break loop95;
+						}
+					} while (true);
+
+					int alt96 = 2;
+					int LA96_0 = input.LA(1);
+
+					if ((LA96_0 == 60)) {
+						alt96 = 1;
+					}
+					switch (alt96) {
+						case 1:
+
+						{
+							otherlv_5 = (Token) match(input, 60, FOLLOW_60_in_ruleRichStringIf7104);
+							if (state.failed)
+								return current;
+							if (state.backtracking == 0) {
+
+								newLeafNode(otherlv_5, grammarAccess.getRichStringIfAccess().getELSEKeyword_5_0());
+
+							}
+
+							{
+
+								{
+									if (state.backtracking == 0) {
+
+										newCompositeNode(grammarAccess.getRichStringIfAccess()
+												.getElseInternalRichStringParserRuleCall_5_1_0());
+
+									}
+									pushFollow(FOLLOW_ruleInternalRichString_in_ruleRichStringIf7125);
+									lv_else_6_0 = ruleInternalRichString();
+
+									state._fsp--;
+									if (state.failed)
+										return current;
+									if (state.backtracking == 0) {
+
+										if (current == null) {
+											current = createModelElementForParent(grammarAccess.getRichStringIfRule());
+										}
+										set(current, RICH_STRING_IF__ELSE, lv_else_6_0, "InternalRichString");
+										afterParserOrEnumRuleCall();
+
+									}
+
+								}
+
+							}
+
+						}
+							break;
+
+					}
+
+					otherlv_7 = (Token) match(input, 61, FOLLOW_61_in_ruleRichStringIf7139);
+					if (state.failed)
+						return current;
+					if (state.backtracking == 0) {
+
+						newLeafNode(otherlv_7, grammarAccess.getRichStringIfAccess().getENDIFKeyword_6());
+
+					}
+
+				}
+
+			}
+
+			if (state.backtracking == 0) {
+				leaveRule();
+			}
+		}
+
+		catch (RecognitionException re) {
+			recoverAndAppendSkippedTokens(re);
+		} finally {
+		}
+		return current;
+	}
+
+	public final EObject entryRuleRichStringElseIf() throws RecognitionException {
+		EObject current = null;
+
+		EObject iv_ruleRichStringElseIf = null;
+
+		try {
+
+			{
+				if (state.backtracking == 0) {
+					newCompositeNode(grammarAccess.getRichStringElseIfRule());
+				}
+				pushFollow(FOLLOW_ruleRichStringElseIf_in_entryRuleRichStringElseIf7175);
+				iv_ruleRichStringElseIf = ruleRichStringElseIf();
+
+				state._fsp--;
+				if (state.failed)
+					return current;
+				if (state.backtracking == 0) {
+					current = iv_ruleRichStringElseIf;
+				}
+				match(input, EOF, FOLLOW_EOF_in_entryRuleRichStringElseIf7185);
+				if (state.failed)
+					return current;
+
+			}
+
+		}
+
+		catch (RecognitionException re) {
+			recoverAndAppendSkippedTokens(re);
+		} finally {
+		}
+		return current;
+	}
+
+	public final EObject ruleRichStringElseIf() throws RecognitionException {
+		EObject current = null;
+
+		Token otherlv_0 = null;
+		EObject lv_if_1_0 = null;
+
+		EObject lv_then_2_0 = null;
+
+		enterRule();
+
+		try {
+
+			{
+
+				{
+					otherlv_0 = (Token) match(input, 62, FOLLOW_62_in_ruleRichStringElseIf7222);
+					if (state.failed)
+						return current;
+					if (state.backtracking == 0) {
+
+						newLeafNode(otherlv_0, grammarAccess.getRichStringElseIfAccess().getELSEIFKeyword_0());
+
+					}
+
+					{
+
+						{
+							if (state.backtracking == 0) {
+
+								newCompositeNode(grammarAccess.getRichStringElseIfAccess()
+										.getIfXExpressionParserRuleCall_1_0());
+
+							}
+							pushFollow(FOLLOW_ruleXExpression_in_ruleRichStringElseIf7243);
+							lv_if_1_0 = ruleXExpression();
+
+							state._fsp--;
+							if (state.failed)
+								return current;
+							if (state.backtracking == 0) {
+
+								if (current == null) {
+									current = createModelElementForParent(grammarAccess.getRichStringElseIfRule());
+								}
+								set(current, RICH_STRING_ELSE_IF__IF, lv_if_1_0, null);
+								afterParserOrEnumRuleCall();
+
+							}
+
+						}
+
+					}
+
+					{
+
+						{
+							if (state.backtracking == 0) {
+
+								newCompositeNode(grammarAccess.getRichStringElseIfAccess()
+										.getThenInternalRichStringParserRuleCall_2_0());
+
+							}
+							pushFollow(FOLLOW_ruleInternalRichString_in_ruleRichStringElseIf7264);
+							lv_then_2_0 = ruleInternalRichString();
+
+							state._fsp--;
+							if (state.failed)
+								return current;
+							if (state.backtracking == 0) {
+
+								if (current == null) {
+									current = createModelElementForParent(grammarAccess.getRichStringElseIfRule());
+								}
+								set(current, RICH_STRING_ELSE_IF__THEN, lv_then_2_0, "InternalRichString");
+								afterParserOrEnumRuleCall();
+
+							}
+
+						}
+
+					}
+
+				}
+
+			}
+
+			if (state.backtracking == 0) {
+				leaveRule();
+			}
+		}
+
+		catch (RecognitionException re) {
+			recoverAndAppendSkippedTokens(re);
+		} finally {
+		}
+		return current;
+	}
+
+	public final EObject entryRuleXAnnotation() throws RecognitionException {
+		EObject current = null;
+
+		EObject iv_ruleXAnnotation = null;
+
+		try {
+
+			{
+				if (state.backtracking == 0) {
+					newCompositeNode(grammarAccess.getXAnnotationRule());
+				}
+				pushFollow(FOLLOW_ruleXAnnotation_in_entryRuleXAnnotation7300);
+				iv_ruleXAnnotation = ruleXAnnotation();
+
+				state._fsp--;
+				if (state.failed)
+					return current;
+				if (state.backtracking == 0) {
+					current = iv_ruleXAnnotation;
+				}
+				match(input, EOF, FOLLOW_EOF_in_entryRuleXAnnotation7310);
+				if (state.failed)
+					return current;
+
+			}
+
+		}
+
+		catch (RecognitionException re) {
+			recoverAndAppendSkippedTokens(re);
+		} finally {
+		}
+		return current;
+	}
+
+	public final EObject ruleXAnnotation() throws RecognitionException {
+		EObject current = null;
+
+		Token otherlv_1 = null;
+		Token otherlv_3 = null;
+		Token otherlv_5 = null;
+		Token otherlv_8 = null;
+		EObject lv_elementValuePairs_4_0 = null;
+
+		EObject lv_elementValuePairs_6_0 = null;
+
+		EObject lv_value_7_0 = null;
+
+		enterRule();
+
+		try {
+
+			{
+
+				{
+
+					{
+						if (state.backtracking == 0) {
+
+							current = forceCreateModelElement(grammarAccess.getXAnnotationAccess()
+									.getXAnnotationAction_0(), current);
+
+						}
+
+					}
+
+					otherlv_1 = (Token) match(input, 63, FOLLOW_63_in_ruleXAnnotation7356);
+					if (state.failed)
+						return current;
+					if (state.backtracking == 0) {
+
+						newLeafNode(otherlv_1, grammarAccess.getXAnnotationAccess().getCommercialAtKeyword_1());
+
+					}
+
+					{
+
+						{
+							if (state.backtracking == 0) {
+
+								if (current == null) {
+									current = createModelElement(grammarAccess.getXAnnotationRule());
+								}
+
+							}
+							if (state.backtracking == 0) {
+
+								newCompositeNode(grammarAccess.getXAnnotationAccess()
+										.getAnnotationTypeJvmAnnotationTypeCrossReference_2_0());
+
+							}
+							pushFollow(FOLLOW_ruleQualifiedName_in_ruleXAnnotation7379);
+							ruleQualifiedName();
+
+							state._fsp--;
+							if (state.failed)
+								return current;
+							if (state.backtracking == 0) {
+
+								afterParserOrEnumRuleCall();
+
+							}
+
+						}
+
+					}
+
+					int alt99 = 2;
+					alt99 = dfa99.predict(input);
+					switch (alt99) {
+						case 1:
+
+						{
+
+							{
+								otherlv_3 = (Token) match(input, 35, FOLLOW_35_in_ruleXAnnotation7400);
+								if (state.failed)
+									return current;
+								if (state.backtracking == 0) {
+
+									newLeafNode(otherlv_3, grammarAccess.getXAnnotationAccess()
+											.getLeftParenthesisKeyword_3_0());
+
+								}
+
+							}
+
+							int alt98 = 3;
+							switch (input.LA(1)) {
+								case RULE_ID: {
+									int LA98_1 = input.LA(2);
+
+									if ((LA98_1 == 36 || LA98_1 == 106)) {
+										alt98 = 2;
+									} else if ((LA98_1 == 33)) {
+										alt98 = 1;
+									}
+								}
+									break;
+								case 50: {
+									int LA98_2 = input.LA(2);
+
+									if ((LA98_2 == 36 || LA98_2 == 106)) {
+										alt98 = 2;
+									} else if ((LA98_2 == 33)) {
+										alt98 = 1;
+									}
+								}
+									break;
+								case 32: {
+									int LA98_3 = input.LA(2);
+
+									if ((LA98_3 == 36 || LA98_3 == 106)) {
+										alt98 = 2;
+									} else if ((LA98_3 == 33)) {
+										alt98 = 1;
+									}
+								}
+									break;
+								case RULE_STRING:
+								case RULE_RICH_TEXT:
+								case RULE_RICH_TEXT_START:
+								case RULE_HEX:
+								case RULE_INT:
+								case RULE_DECIMAL:
+								case 20:
+								case 22:
+								case 26:
+								case 27:
+								case 30:
+								case 31:
+								case 34:
+								case 35:
+								case 37:
+								case 39:
+								case 40:
+								case 41:
+								case 42:
+								case 43:
+								case 44:
+								case 45:
+								case 48:
+								case 49:
+								case 52:
+								case 63:
+								case 93:
+								case 105:
+								case 107:
+								case 108:
+								case 110: {
+									alt98 = 2;
+								}
+									break;
+							}
+
+							switch (alt98) {
+								case 1:
+
+								{
+
+									{
+
+										{
+
+											{
+												if (state.backtracking == 0) {
+
+													newCompositeNode(grammarAccess
+															.getXAnnotationAccess()
+															.getElementValuePairsXAnnotationElementValuePairParserRuleCall_3_1_0_0_0());
+
+												}
+												pushFollow(FOLLOW_ruleXAnnotationElementValuePair_in_ruleXAnnotation7424);
+												lv_elementValuePairs_4_0 = ruleXAnnotationElementValuePair();
+
+												state._fsp--;
+												if (state.failed)
+													return current;
+												if (state.backtracking == 0) {
+
+													if (current == null) {
+														current = createModelElementForParent(grammarAccess
+																.getXAnnotationRule());
+													}
+													add(current, XANNOTATION__ELEMENT_VALUE_PAIRS, lv_elementValuePairs_4_0,
+															"XAnnotationElementValuePair");
+													afterParserOrEnumRuleCall();
+
+												}
+
+											}
+
+										}
+
+										loop97: do {
+											int alt97 = 2;
+											int LA97_0 = input.LA(1);
+
+											if ((LA97_0 == 24)) {
+												alt97 = 1;
+											}
+
+											switch (alt97) {
+												case 1:
+
+												{
+													otherlv_5 = (Token) match(input, 24,
+															FOLLOW_24_in_ruleXAnnotation7437);
+													if (state.failed)
+														return current;
+													if (state.backtracking == 0) {
+
+														newLeafNode(otherlv_5, grammarAccess.getXAnnotationAccess()
+																.getCommaKeyword_3_1_0_1_0());
+
+													}
+
+													{
+
+														{
+															if (state.backtracking == 0) {
+
+																newCompositeNode(grammarAccess
+																		.getXAnnotationAccess()
+																		.getElementValuePairsXAnnotationElementValuePairParserRuleCall_3_1_0_1_1_0());
+
+															}
+															pushFollow(FOLLOW_ruleXAnnotationElementValuePair_in_ruleXAnnotation7458);
+															lv_elementValuePairs_6_0 = ruleXAnnotationElementValuePair();
+
+															state._fsp--;
+															if (state.failed)
+																return current;
+															if (state.backtracking == 0) {
+
+																if (current == null) {
+																	current = createModelElementForParent(grammarAccess
+																			.getXAnnotationRule());
+																}
+																add(current, XANNOTATION__ELEMENT_VALUE_PAIRS,
+																		lv_elementValuePairs_6_0,
+																		"XAnnotationElementValuePair");
+																afterParserOrEnumRuleCall();
+
+															}
+
+														}
+
+													}
+
+												}
+													break;
+
+												default:
+													break loop97;
+											}
+										} while (true);
+
+									}
+
+								}
+									break;
+								case 2:
+
+								{
+
+									{
+
+										{
+											if (state.backtracking == 0) {
+
+												newCompositeNode(grammarAccess.getXAnnotationAccess()
+														.getValueXAnnotationElementValueParserRuleCall_3_1_1_0());
+
+											}
+											pushFollow(FOLLOW_ruleXAnnotationElementValue_in_ruleXAnnotation7488);
+											lv_value_7_0 = ruleXAnnotationElementValue();
+
+											state._fsp--;
+											if (state.failed)
+												return current;
+											if (state.backtracking == 0) {
+
+												if (current == null) {
+													current = createModelElementForParent(grammarAccess
+															.getXAnnotationRule());
+												}
+												set(current, XANNOTATION__VALUE, lv_value_7_0, null);
+												afterParserOrEnumRuleCall();
+
+											}
+
+										}
+
+									}
+
+								}
+									break;
+
+							}
+
+							otherlv_8 = (Token) match(input, 36, FOLLOW_36_in_ruleXAnnotation7502);
+							if (state.failed)
+								return current;
+							if (state.backtracking == 0) {
+
+								newLeafNode(otherlv_8, grammarAccess.getXAnnotationAccess()
+										.getRightParenthesisKeyword_3_2());
+
+							}
+
+						}
+							break;
+
+					}
+
+				}
+
+			}
+
+			if (state.backtracking == 0) {
+				leaveRule();
+			}
+		}
+
+		catch (RecognitionException re) {
+			recoverAndAppendSkippedTokens(re);
+		} finally {
+		}
+		return current;
+	}
+
+	public final EObject entryRuleXAnnotationElementValuePair() throws RecognitionException {
+		EObject current = null;
+
+		EObject iv_ruleXAnnotationElementValuePair = null;
+
+		try {
+
+			{
+				if (state.backtracking == 0) {
+					newCompositeNode(grammarAccess.getXAnnotationElementValuePairRule());
+				}
+				pushFollow(FOLLOW_ruleXAnnotationElementValuePair_in_entryRuleXAnnotationElementValuePair7540);
+				iv_ruleXAnnotationElementValuePair = ruleXAnnotationElementValuePair();
+
+				state._fsp--;
+				if (state.failed)
+					return current;
+				if (state.backtracking == 0) {
+					current = iv_ruleXAnnotationElementValuePair;
+				}
+				match(input, EOF, FOLLOW_EOF_in_entryRuleXAnnotationElementValuePair7550);
+				if (state.failed)
+					return current;
+
+			}
+
+		}
+
+		catch (RecognitionException re) {
+			recoverAndAppendSkippedTokens(re);
+		} finally {
+		}
+		return current;
+	}
+
+	public final EObject ruleXAnnotationElementValuePair() throws RecognitionException {
+		EObject current = null;
+
+		Token otherlv_1 = null;
+		EObject lv_value_2_0 = null;
+
+		enterRule();
+
+		try {
+
+			{
+
+				{
+
+					{
+
+						{
+							if (state.backtracking == 0) {
+
+								if (current == null) {
+									current = createModelElement(grammarAccess.getXAnnotationElementValuePairRule());
+								}
+
+							}
+							if (state.backtracking == 0) {
+
+								newCompositeNode(grammarAccess.getXAnnotationElementValuePairAccess()
+										.getElementJvmOperationCrossReference_0_0());
+
+							}
+							pushFollow(FOLLOW_ruleValidID_in_ruleXAnnotationElementValuePair7598);
+							ruleValidID();
+
+							state._fsp--;
+							if (state.failed)
+								return current;
+							if (state.backtracking == 0) {
+
+								afterParserOrEnumRuleCall();
+
+							}
+
+						}
+
+					}
+
+					otherlv_1 = (Token) match(input, 33, FOLLOW_33_in_ruleXAnnotationElementValuePair7610);
+					if (state.failed)
+						return current;
+					if (state.backtracking == 0) {
+
+						newLeafNode(otherlv_1, grammarAccess.getXAnnotationElementValuePairAccess()
+								.getEqualsSignKeyword_1());
+
+					}
+
+					{
+
+						{
+							if (state.backtracking == 0) {
+
+								newCompositeNode(grammarAccess.getXAnnotationElementValuePairAccess()
+										.getValueXAnnotationElementValueParserRuleCall_2_0());
+
+							}
+							pushFollow(FOLLOW_ruleXAnnotationElementValue_in_ruleXAnnotationElementValuePair7631);
+							lv_value_2_0 = ruleXAnnotationElementValue();
+
+							state._fsp--;
+							if (state.failed)
+								return current;
+							if (state.backtracking == 0) {
+
+								if (current == null) {
+									current = createModelElementForParent(grammarAccess
+											.getXAnnotationElementValuePairRule());
+								}
+								set(current, XANNOTATION__VALUE, lv_value_2_0, null);
+								afterParserOrEnumRuleCall();
+
+							}
+
+						}
+
+					}
+
+				}
+
+			}
+
+			if (state.backtracking == 0) {
+				leaveRule();
+			}
+		}
+
+		catch (RecognitionException re) {
+			recoverAndAppendSkippedTokens(re);
+		} finally {
+		}
+		return current;
+	}
+
+	public final EObject entryRuleXAnnotationElementValueStringConcatenation() throws RecognitionException {
+		EObject current = null;
+
+		EObject iv_ruleXAnnotationElementValueStringConcatenation = null;
+
+		try {
+
+			{
+				if (state.backtracking == 0) {
+					newCompositeNode(grammarAccess.getXAnnotationElementValueStringConcatenationRule());
+				}
+				pushFollow(FOLLOW_ruleXAnnotationElementValueStringConcatenation_in_entryRuleXAnnotationElementValueStringConcatenation7667);
+				iv_ruleXAnnotationElementValueStringConcatenation = ruleXAnnotationElementValueStringConcatenation();
+
+				state._fsp--;
+				if (state.failed)
+					return current;
+				if (state.backtracking == 0) {
+					current = iv_ruleXAnnotationElementValueStringConcatenation;
+				}
+				match(input, EOF, FOLLOW_EOF_in_entryRuleXAnnotationElementValueStringConcatenation7677);
+				if (state.failed)
+					return current;
+
+			}
+
+		}
+
+		catch (RecognitionException re) {
+			recoverAndAppendSkippedTokens(re);
+		} finally {
+		}
+		return current;
+	}
+
+	public final EObject ruleXAnnotationElementValueStringConcatenation() throws RecognitionException {
+		EObject current = null;
+
+		Token lv_operator_2_0 = null;
+		EObject this_XAnnotationElementValue_0 = null;
+
+		EObject lv_rightOperand_3_0 = null;
+
+		enterRule();
+
+		try {
+
+			{
+
+				{
+					if (state.backtracking == 0) {
+
+						newCompositeNode(grammarAccess.getXAnnotationElementValueStringConcatenationAccess()
+								.getXAnnotationElementValueParserRuleCall_0());
+
+					}
+					pushFollow(FOLLOW_ruleXAnnotationElementValue_in_ruleXAnnotationElementValueStringConcatenation7724);
+					this_XAnnotationElementValue_0 = ruleXAnnotationElementValue();
+
+					state._fsp--;
+					if (state.failed)
+						return current;
+					if (state.backtracking == 0) {
+
+						current = this_XAnnotationElementValue_0;
+						afterParserOrEnumRuleCall();
+
+					}
+
+					loop100: do {
+						int alt100 = 2;
+						int LA100_0 = input.LA(1);
+
+						if ((LA100_0 == 64)) {
+							alt100 = 1;
+						}
+
+						switch (alt100) {
+							case 1:
+
+							{
+
+								{
+									if (state.backtracking == 0) {
+
+										current = forceCreateModelElementAndSet(grammarAccess
+												.getXAnnotationElementValueStringConcatenationAccess()
+												.getXAnnotationElementValueBinaryOperationLeftOperandAction_1_0(),XANNOTATION_ELEMENT_VALUE_BINARY_OPERATION__LEFT_OPERAND,
+												current);
+
+									}
+
+								}
+
+								{
+
+									{
+										lv_operator_2_0 = (Token) match(input, 64,
+												FOLLOW_64_in_ruleXAnnotationElementValueStringConcatenation7751);
+										if (state.failed)
+											return current;
+										if (state.backtracking == 0) {
+
+											newLeafNode(lv_operator_2_0, grammarAccess
+													.getXAnnotationElementValueStringConcatenationAccess()
+													.getOperatorPlusSignKeyword_1_1_0());
+
+										}
+										if (state.backtracking == 0) {
+
+											if (current == null) {
+												current = createModelElement(grammarAccess
+														.getXAnnotationElementValueStringConcatenationRule());
+											}
+											setWithLastConsumed(current, XANNOTATION_ELEMENT_VALUE_BINARY_OPERATION__OPERATOR, lv_operator_2_0, "+");
+
+										}
+
+									}
+
+								}
+
+								{
+
+									{
+										if (state.backtracking == 0) {
+
+											newCompositeNode(grammarAccess
+													.getXAnnotationElementValueStringConcatenationAccess()
+													.getRightOperandXAnnotationElementValueParserRuleCall_1_2_0());
+
+										}
+										pushFollow(FOLLOW_ruleXAnnotationElementValue_in_ruleXAnnotationElementValueStringConcatenation7785);
+										lv_rightOperand_3_0 = ruleXAnnotationElementValue();
+
+										state._fsp--;
+										if (state.failed)
+											return current;
+										if (state.backtracking == 0) {
+
+											if (current == null) {
+												current = createModelElementForParent(grammarAccess
+														.getXAnnotationElementValueStringConcatenationRule());
+											}
+											set(current, XANNOTATION_ELEMENT_VALUE_BINARY_OPERATION__RIGHT_OPERAND, lv_rightOperand_3_0, null);
+											afterParserOrEnumRuleCall();
+
+										}
+
+									}
+
+								}
+
+							}
+								break;
+
+							default:
+								break loop100;
+						}
+					} while (true);
+
+				}
+
+			}
+
+			if (state.backtracking == 0) {
+				leaveRule();
+			}
+		}
+
+		catch (RecognitionException re) {
+			recoverAndAppendSkippedTokens(re);
+		} finally {
+		}
+		return current;
+	}
+
+	public final EObject entryRuleXAnnotationElementValue() throws RecognitionException {
+		EObject current = null;
+
+		EObject iv_ruleXAnnotationElementValue = null;
+
+		try {
+
+			{
+				if (state.backtracking == 0) {
+					newCompositeNode(grammarAccess.getXAnnotationElementValueRule());
+				}
+				pushFollow(FOLLOW_ruleXAnnotationElementValue_in_entryRuleXAnnotationElementValue7823);
+				iv_ruleXAnnotationElementValue = ruleXAnnotationElementValue();
+
+				state._fsp--;
+				if (state.failed)
+					return current;
+				if (state.backtracking == 0) {
+					current = iv_ruleXAnnotationElementValue;
+				}
+				match(input, EOF, FOLLOW_EOF_in_entryRuleXAnnotationElementValue7833);
+				if (state.failed)
+					return current;
+
+			}
+
+		}
+
+		catch (RecognitionException re) {
+			recoverAndAppendSkippedTokens(re);
+		} finally {
+		}
+		return current;
+	}
+
+	public final EObject ruleXAnnotationElementValue() throws RecognitionException {
+		EObject current = null;
+
+		Token otherlv_7 = null;
+		Token otherlv_9 = null;
+		EObject this_XAnnotation_0 = null;
+
+		EObject this_XListLiteral_1 = null;
+
+		EObject this_XStringLiteral_2 = null;
+
+		EObject this_XBooleanLiteral_3 = null;
+
+		EObject this_XNumberLiteral_4 = null;
+
+		EObject this_XTypeLiteral_5 = null;
+
+		EObject this_XAnnotationValueFieldReference_6 = null;
+
+		EObject this_XAnnotationElementValueStringConcatenation_8 = null;
+
+		enterRule();
+
+		try {
+
+			{
+
+				int alt101 = 8;
+				switch (input.LA(1)) {
+					case 63: {
+						alt101 = 1;
+					}
+						break;
+					case 93: {
+						alt101 = 2;
+					}
+						break;
+					case RULE_STRING:
+					case RULE_RICH_TEXT:
+					case RULE_RICH_TEXT_START: {
+						alt101 = 3;
+					}
+						break;
+					case 107:
+					case 108: {
+						alt101 = 4;
+					}
+						break;
+					case RULE_HEX:
+					case RULE_INT:
+					case RULE_DECIMAL: {
+						alt101 = 5;
+					}
+						break;
+					case 110: {
+						alt101 = 6;
+					}
+						break;
+					case RULE_ID:
+					case 20:
+					case 22:
+					case 26:
+					case 27:
+					case 30:
+					case 31:
+					case 32:
+					case 34:
+					case 37:
+					case 39:
+					case 40:
+					case 41:
+					case 42:
+					case 43:
+					case 44:
+					case 45:
+					case 48:
+					case 49:
+					case 50:
+					case 52:
+					case 105: {
+						alt101 = 7;
+					}
+						break;
+					case 35: {
+						alt101 = 8;
+					}
+						break;
+					default:
+						if (state.backtracking > 0) {
+							state.failed = true;
+							return current;
+						}
+						NoViableAltException nvae = new NoViableAltException("", 101, 0, input);
+
+						throw nvae;
+				}
+
+				switch (alt101) {
+					case 1:
+
+					{
+						if (state.backtracking == 0) {
+
+							newCompositeNode(grammarAccess.getXAnnotationElementValueAccess()
+									.getXAnnotationParserRuleCall_0());
+
+						}
+						pushFollow(FOLLOW_ruleXAnnotation_in_ruleXAnnotationElementValue7880);
+						this_XAnnotation_0 = ruleXAnnotation();
+
+						state._fsp--;
+						if (state.failed)
+							return current;
+						if (state.backtracking == 0) {
+
+							current = this_XAnnotation_0;
+							afterParserOrEnumRuleCall();
+
+						}
+
+					}
+						break;
+					case 2:
+
+					{
+						if (state.backtracking == 0) {
+
+							newCompositeNode(grammarAccess.getXAnnotationElementValueAccess()
+									.getXListLiteralParserRuleCall_1());
+
+						}
+						pushFollow(FOLLOW_ruleXListLiteral_in_ruleXAnnotationElementValue7907);
+						this_XListLiteral_1 = ruleXListLiteral();
+
+						state._fsp--;
+						if (state.failed)
+							return current;
+						if (state.backtracking == 0) {
+
+							current = this_XListLiteral_1;
+							afterParserOrEnumRuleCall();
+
+						}
+
+					}
+						break;
+					case 3:
+
+					{
+						if (state.backtracking == 0) {
+
+							newCompositeNode(grammarAccess.getXAnnotationElementValueAccess()
+									.getXStringLiteralParserRuleCall_2());
+
+						}
+						pushFollow(FOLLOW_ruleXStringLiteral_in_ruleXAnnotationElementValue7934);
+						this_XStringLiteral_2 = ruleXStringLiteral();
+
+						state._fsp--;
+						if (state.failed)
+							return current;
+						if (state.backtracking == 0) {
+
+							current = this_XStringLiteral_2;
+							afterParserOrEnumRuleCall();
+
+						}
+
+					}
+						break;
+					case 4:
+
+					{
+						if (state.backtracking == 0) {
+
+							newCompositeNode(grammarAccess.getXAnnotationElementValueAccess()
+									.getXBooleanLiteralParserRuleCall_3());
+
+						}
+						pushFollow(FOLLOW_ruleXBooleanLiteral_in_ruleXAnnotationElementValue7961);
+						this_XBooleanLiteral_3 = ruleXBooleanLiteral();
+
+						state._fsp--;
+						if (state.failed)
+							return current;
+						if (state.backtracking == 0) {
+
+							current = this_XBooleanLiteral_3;
+							afterParserOrEnumRuleCall();
+
+						}
+
+					}
+						break;
+					case 5:
+
+					{
+						if (state.backtracking == 0) {
+
+							newCompositeNode(grammarAccess.getXAnnotationElementValueAccess()
+									.getXNumberLiteralParserRuleCall_4());
+
+						}
+						pushFollow(FOLLOW_ruleXNumberLiteral_in_ruleXAnnotationElementValue7988);
+						this_XNumberLiteral_4 = ruleXNumberLiteral();
+
+						state._fsp--;
+						if (state.failed)
+							return current;
+						if (state.backtracking == 0) {
+
+							current = this_XNumberLiteral_4;
+							afterParserOrEnumRuleCall();
+
+						}
+
+					}
+						break;
+					case 6:
+
+					{
+						if (state.backtracking == 0) {
+
+							newCompositeNode(grammarAccess.getXAnnotationElementValueAccess()
+									.getXTypeLiteralParserRuleCall_5());
+
+						}
+						pushFollow(FOLLOW_ruleXTypeLiteral_in_ruleXAnnotationElementValue8015);
+						this_XTypeLiteral_5 = ruleXTypeLiteral();
+
+						state._fsp--;
+						if (state.failed)
+							return current;
+						if (state.backtracking == 0) {
+
+							current = this_XTypeLiteral_5;
+							afterParserOrEnumRuleCall();
+
+						}
+
+					}
+						break;
+					case 7:
+
+					{
+						if (state.backtracking == 0) {
+
+							newCompositeNode(grammarAccess.getXAnnotationElementValueAccess()
+									.getXAnnotationValueFieldReferenceParserRuleCall_6());
+
+						}
+						pushFollow(FOLLOW_ruleXAnnotationValueFieldReference_in_ruleXAnnotationElementValue8042);
+						this_XAnnotationValueFieldReference_6 = ruleXAnnotationValueFieldReference();
+
+						state._fsp--;
+						if (state.failed)
+							return current;
+						if (state.backtracking == 0) {
+
+							current = this_XAnnotationValueFieldReference_6;
+							afterParserOrEnumRuleCall();
+
+						}
+
+					}
+						break;
+					case 8:
+
+					{
+
+						{
+							otherlv_7 = (Token) match(input, 35, FOLLOW_35_in_ruleXAnnotationElementValue8060);
+							if (state.failed)
+								return current;
+							if (state.backtracking == 0) {
+
+								newLeafNode(otherlv_7, grammarAccess.getXAnnotationElementValueAccess()
+										.getLeftParenthesisKeyword_7_0());
+
+							}
+							if (state.backtracking == 0) {
+
+								newCompositeNode(grammarAccess.getXAnnotationElementValueAccess()
+										.getXAnnotationElementValueStringConcatenationParserRuleCall_7_1());
+
+							}
+							pushFollow(FOLLOW_ruleXAnnotationElementValueStringConcatenation_in_ruleXAnnotationElementValue8082);
+							this_XAnnotationElementValueStringConcatenation_8 = ruleXAnnotationElementValueStringConcatenation();
+
+							state._fsp--;
+							if (state.failed)
+								return current;
+							if (state.backtracking == 0) {
+
+								current = this_XAnnotationElementValueStringConcatenation_8;
+								afterParserOrEnumRuleCall();
+
+							}
+							otherlv_9 = (Token) match(input, 36, FOLLOW_36_in_ruleXAnnotationElementValue8093);
+							if (state.failed)
+								return current;
+							if (state.backtracking == 0) {
+
+								newLeafNode(otherlv_9, grammarAccess.getXAnnotationElementValueAccess()
+										.getRightParenthesisKeyword_7_2());
+
+							}
+
+						}
+
+					}
+						break;
+
+				}
+
+			}
+
+			if (state.backtracking == 0) {
+				leaveRule();
+			}
+		}
+
+		catch (RecognitionException re) {
+			recoverAndAppendSkippedTokens(re);
+		} finally {
+		}
+		return current;
+	}
+
+	public final EObject entryRuleXAnnotationValueFieldReference() throws RecognitionException {
+		EObject current = null;
+
+		EObject iv_ruleXAnnotationValueFieldReference = null;
+
+		try {
+
+			{
+				if (state.backtracking == 0) {
+					newCompositeNode(grammarAccess.getXAnnotationValueFieldReferenceRule());
+				}
+				pushFollow(FOLLOW_ruleXAnnotationValueFieldReference_in_entryRuleXAnnotationValueFieldReference8130);
+				iv_ruleXAnnotationValueFieldReference = ruleXAnnotationValueFieldReference();
+
+				state._fsp--;
+				if (state.failed)
+					return current;
+				if (state.backtracking == 0) {
+					current = iv_ruleXAnnotationValueFieldReference;
+				}
+				match(input, EOF, FOLLOW_EOF_in_entryRuleXAnnotationValueFieldReference8140);
+				if (state.failed)
+					return current;
+
+			}
+
+		}
+
+		catch (RecognitionException re) {
+			recoverAndAppendSkippedTokens(re);
+		} finally {
+		}
+		return current;
+	}
+
+	public final EObject ruleXAnnotationValueFieldReference() throws RecognitionException {
+		EObject current = null;
+
+		enterRule();
+
+		try {
+
+			{
+
+				{
+
+					{
+						if (state.backtracking == 0) {
+
+							current = forceCreateModelElement(grammarAccess.getXAnnotationValueFieldReferenceAccess()
+									.getXFeatureCallAction_0(), current);
+
+						}
+
+					}
+
+					int alt102 = 2;
+					switch (input.LA(1)) {
+						case RULE_ID: {
+							int LA102_1 = input.LA(2);
+
+							if ((LA102_1 == 106)) {
+								alt102 = 1;
+							}
+						}
+							break;
+						case 50: {
+							int LA102_2 = input.LA(2);
+
+							if ((LA102_2 == 106)) {
+								alt102 = 1;
+							}
+						}
+							break;
+						case 32: {
+							int LA102_3 = input.LA(2);
+
+							if ((LA102_3 == 106)) {
+								alt102 = 1;
+							}
+						}
+							break;
+					}
+
+					switch (alt102) {
+						case 1:
+
+						{
+
+							{
+								if (state.backtracking == 0) {
+
+									if (current == null) {
+										current = createModelElement(grammarAccess
+												.getXAnnotationValueFieldReferenceRule());
+									}
+
+								}
+								if (state.backtracking == 0) {
+
+									newCompositeNode(grammarAccess.getXAnnotationValueFieldReferenceAccess()
+											.getDeclaringTypeJvmDeclaredTypeCrossReference_1_0());
+
+								}
+								pushFollow(FOLLOW_ruleStaticQualifier_in_ruleXAnnotationValueFieldReference8197);
+								ruleStaticQualifier();
+
+								state._fsp--;
+								if (state.failed)
+									return current;
+								if (state.backtracking == 0) {
+
+									afterParserOrEnumRuleCall();
+
+								}
+
+							}
+
+						}
+							break;
+
+					}
+
+					{
+
+						{
+							if (state.backtracking == 0) {
+
+								if (current == null) {
+									current = createModelElement(grammarAccess.getXAnnotationValueFieldReferenceRule());
+								}
+
+							}
+							if (state.backtracking == 0) {
+
+								newCompositeNode(grammarAccess.getXAnnotationValueFieldReferenceAccess()
+										.getFeatureJvmIdentifiableElementCrossReference_2_0());
+
+							}
+							pushFollow(FOLLOW_ruleIdOrSuper_in_ruleXAnnotationValueFieldReference8221);
+							ruleIdOrSuper();
+
+							state._fsp--;
+							if (state.failed)
+								return current;
+							if (state.backtracking == 0) {
+
+								afterParserOrEnumRuleCall();
+
+							}
+
+						}
+
+					}
+
+				}
+
+			}
+
+			if (state.backtracking == 0) {
+				leaveRule();
+			}
+		}
+
+		catch (RecognitionException re) {
+			recoverAndAppendSkippedTokens(re);
+		} finally {
+		}
+		return current;
+	}
+
+	public final EObject entryRuleXExpression() throws RecognitionException {
+		EObject current = null;
+
+		EObject iv_ruleXExpression = null;
+
+		try {
+
+			{
+				if (state.backtracking == 0) {
+					newCompositeNode(grammarAccess.getXExpressionRule());
+				}
+				pushFollow(FOLLOW_ruleXExpression_in_entryRuleXExpression8257);
+				iv_ruleXExpression = ruleXExpression();
+
+				state._fsp--;
+				if (state.failed)
+					return current;
+				if (state.backtracking == 0) {
+					current = iv_ruleXExpression;
+				}
+				match(input, EOF, FOLLOW_EOF_in_entryRuleXExpression8267);
+				if (state.failed)
+					return current;
+
+			}
+
+		}
+
+		catch (RecognitionException re) {
+			recoverAndAppendSkippedTokens(re);
+		} finally {
+		}
+		return current;
+	}
+
+	public final EObject ruleXExpression() throws RecognitionException {
+		EObject current = null;
+
+		EObject this_XAssignment_0 = null;
+
+		enterRule();
+
+		try {
+
+			{
+				if (state.backtracking == 0) {
+
+					newCompositeNode(grammarAccess.getXExpressionAccess().getXAssignmentParserRuleCall());
+
+				}
+				pushFollow(FOLLOW_ruleXAssignment_in_ruleXExpression8313);
+				this_XAssignment_0 = ruleXAssignment();
+
+				state._fsp--;
+				if (state.failed)
+					return current;
+				if (state.backtracking == 0) {
+
+					current = this_XAssignment_0;
+					afterParserOrEnumRuleCall();
+
+				}
+
+			}
+
+			if (state.backtracking == 0) {
+				leaveRule();
+			}
+		}
+
+		catch (RecognitionException re) {
+			recoverAndAppendSkippedTokens(re);
+		} finally {
+		}
+		return current;
+	}
+
+	public final EObject entryRuleXAssignment() throws RecognitionException {
+		EObject current = null;
+
+		EObject iv_ruleXAssignment = null;
+
+		try {
+
+			{
+				if (state.backtracking == 0) {
+					newCompositeNode(grammarAccess.getXAssignmentRule());
+				}
+				pushFollow(FOLLOW_ruleXAssignment_in_entryRuleXAssignment8347);
+				iv_ruleXAssignment = ruleXAssignment();
+
+				state._fsp--;
+				if (state.failed)
+					return current;
+				if (state.backtracking == 0) {
+					current = iv_ruleXAssignment;
+				}
+				match(input, EOF, FOLLOW_EOF_in_entryRuleXAssignment8357);
+				if (state.failed)
+					return current;
+
+			}
+
+		}
+
+		catch (RecognitionException re) {
+			recoverAndAppendSkippedTokens(re);
+		} finally {
+		}
+		return current;
+	}
+
+	public final EObject ruleXAssignment() throws RecognitionException {
+		EObject current = null;
+
+		EObject lv_value_3_0 = null;
+
+		EObject this_XOrExpression_4 = null;
+
+		EObject lv_rightOperand_7_0 = null;
+
+		enterRule();
+
+		try {
+
+			{
+
+				int alt104 = 2;
+				alt104 = dfa104.predict(input);
+				switch (alt104) {
+					case 1:
+
+					{
+
+						{
+
+							{
+								if (state.backtracking == 0) {
+
+									current = forceCreateModelElement(grammarAccess.getXAssignmentAccess()
+											.getXAssignmentAction_0_0(), current);
+
+								}
+
+							}
+
+							{
+
+								{
+									if (state.backtracking == 0) {
+
+										if (current == null) {
+											current = createModelElement(grammarAccess.getXAssignmentRule());
+										}
+
+									}
+									if (state.backtracking == 0) {
+
+										newCompositeNode(grammarAccess.getXAssignmentAccess()
+												.getFeatureJvmIdentifiableElementCrossReference_0_1_0());
+
+									}
+									pushFollow(FOLLOW_ruleFeatureCallID_in_ruleXAssignment8415);
+									ruleFeatureCallID();
+
+									state._fsp--;
+									if (state.failed)
+										return current;
+									if (state.backtracking == 0) {
+
+										afterParserOrEnumRuleCall();
+
+									}
+
+								}
+
+							}
+
+							if (state.backtracking == 0) {
+
+								newCompositeNode(grammarAccess.getXAssignmentAccess()
+										.getOpSingleAssignParserRuleCall_0_2());
+
+							}
+							pushFollow(FOLLOW_ruleOpSingleAssign_in_ruleXAssignment8431);
+							ruleOpSingleAssign();
+
+							state._fsp--;
+							if (state.failed)
+								return current;
+							if (state.backtracking == 0) {
+
+								afterParserOrEnumRuleCall();
+
+							}
+
+							{
+
+								{
+									if (state.backtracking == 0) {
+
+										newCompositeNode(grammarAccess.getXAssignmentAccess()
+												.getValueXAssignmentParserRuleCall_0_3_0());
+
+									}
+									pushFollow(FOLLOW_ruleXAssignment_in_ruleXAssignment8451);
+									lv_value_3_0 = ruleXAssignment();
+
+									state._fsp--;
+									if (state.failed)
+										return current;
+									if (state.backtracking == 0) {
+
+										if (current == null) {
+											current = createModelElementForParent(grammarAccess.getXAssignmentRule());
+										}
+										set(current, XASSIGNMENT__VALUE, lv_value_3_0, null);
+										afterParserOrEnumRuleCall();
+
+									}
+
+								}
+
+							}
+
+						}
+
+					}
+						break;
+					case 2:
+
+					{
+
+						{
+							if (state.backtracking == 0) {
+
+								newCompositeNode(grammarAccess.getXAssignmentAccess()
+										.getXOrExpressionParserRuleCall_1_0());
+
+							}
+							pushFollow(FOLLOW_ruleXOrExpression_in_ruleXAssignment8481);
+							this_XOrExpression_4 = ruleXOrExpression();
+
+							state._fsp--;
+							if (state.failed)
+								return current;
+							if (state.backtracking == 0) {
+
+								current = this_XOrExpression_4;
+								afterParserOrEnumRuleCall();
+
+							}
+
+							int alt103 = 2;
+							int LA103_0 = input.LA(1);
+
+							if ((LA103_0 == 65)) {
+								int LA103_1 = input.LA(2);
+
+								if ((synpred7_InternalXtend())) {
+									alt103 = 1;
+								}
+							} else if ((LA103_0 == 66)) {
+								int LA103_2 = input.LA(2);
+
+								if ((synpred7_InternalXtend())) {
+									alt103 = 1;
+								}
+							}
+							switch (alt103) {
+								case 1:
+
+								{
+
+									{
+
+										{
+
+											{
+												if (state.backtracking == 0) {
+
+													current = forceCreateModelElementAndSet(grammarAccess
+															.getXAssignmentAccess()
+															.getXBinaryOperationLeftOperandAction_1_1_0_0_0(),XBINARY_OPERATION__LEFT_OPERAND, current);
+
+												}
+
+											}
+
+											{
+
+												{
+													if (state.backtracking == 0) {
+
+														if (current == null) {
+															current = createModelElement(grammarAccess
+																	.getXAssignmentRule());
+														}
+
+													}
+													if (state.backtracking == 0) {
+
+														newCompositeNode(grammarAccess
+																.getXAssignmentAccess()
+																.getFeatureJvmIdentifiableElementCrossReference_1_1_0_0_1_0());
+
+													}
+													pushFollow(FOLLOW_ruleOpMultiAssign_in_ruleXAssignment8534);
+													ruleOpMultiAssign();
+
+													state._fsp--;
+													if (state.failed)
+														return current;
+													if (state.backtracking == 0) {
+
+														afterParserOrEnumRuleCall();
+
+													}
+
+												}
+
+											}
+
+										}
+
+									}
+
+									{
+
+										{
+											if (state.backtracking == 0) {
+
+												newCompositeNode(grammarAccess.getXAssignmentAccess()
+														.getRightOperandXAssignmentParserRuleCall_1_1_1_0());
+
+											}
+											pushFollow(FOLLOW_ruleXAssignment_in_ruleXAssignment8557);
+											lv_rightOperand_7_0 = ruleXAssignment();
+
+											state._fsp--;
+											if (state.failed)
+												return current;
+											if (state.backtracking == 0) {
+
+												if (current == null) {
+													current = createModelElementForParent(grammarAccess
+															.getXAssignmentRule());
+												}
+												set(current, XBINARY_OPERATION__RIGHT_OPERAND, lv_rightOperand_7_0, null);
+												afterParserOrEnumRuleCall();
+
+											}
+
+										}
+
+									}
+
+								}
+									break;
+
+							}
+
+						}
+
+					}
+						break;
+
+				}
+
+			}
+
+			if (state.backtracking == 0) {
+				leaveRule();
+			}
+		}
+
+		catch (RecognitionException re) {
+			recoverAndAppendSkippedTokens(re);
+		} finally {
+		}
+		return current;
+	}
+
+	public final String entryRuleOpSingleAssign() throws RecognitionException {
+		String current = null;
+
+		AntlrDatatypeRuleToken iv_ruleOpSingleAssign = null;
+
+		try {
+
+			{
+				if (state.backtracking == 0) {
+					newCompositeNode(grammarAccess.getOpSingleAssignRule());
+				}
+				pushFollow(FOLLOW_ruleOpSingleAssign_in_entryRuleOpSingleAssign8597);
+				iv_ruleOpSingleAssign = ruleOpSingleAssign();
+
+				state._fsp--;
+				if (state.failed)
+					return current;
+				if (state.backtracking == 0) {
+					current = iv_ruleOpSingleAssign.getText();
+				}
+				match(input, EOF, FOLLOW_EOF_in_entryRuleOpSingleAssign8608);
+				if (state.failed)
+					return current;
+
+			}
+
+		}
+
+		catch (RecognitionException re) {
+			recoverAndAppendSkippedTokens(re);
+		} finally {
+		}
+		return current;
+	}
+
+	public final AntlrDatatypeRuleToken ruleOpSingleAssign() throws RecognitionException {
+		AntlrDatatypeRuleToken current = new AntlrDatatypeRuleToken();
+
+		Token kw = null;
+
+		enterRule();
+
+		try {
+
+			{
+				kw = (Token) match(input, 33, FOLLOW_33_in_ruleOpSingleAssign8645);
+				if (state.failed)
+					return current;
+				if (state.backtracking == 0) {
+
+					current.merge(kw);
+					newLeafNode(kw, grammarAccess.getOpSingleAssignAccess().getEqualsSignKeyword());
+
+				}
+
+			}
+
+			if (state.backtracking == 0) {
+				leaveRule();
+			}
+		}
+
+		catch (RecognitionException re) {
+			recoverAndAppendSkippedTokens(re);
+		} finally {
+		}
+		return current;
+	}
+
+	public final String entryRuleOpMultiAssign() throws RecognitionException {
+		String current = null;
+
+		AntlrDatatypeRuleToken iv_ruleOpMultiAssign = null;
+
+		try {
+
+			{
+				if (state.backtracking == 0) {
+					newCompositeNode(grammarAccess.getOpMultiAssignRule());
+				}
+				pushFollow(FOLLOW_ruleOpMultiAssign_in_entryRuleOpMultiAssign8685);
+				iv_ruleOpMultiAssign = ruleOpMultiAssign();
+
+				state._fsp--;
+				if (state.failed)
+					return current;
+				if (state.backtracking == 0) {
+					current = iv_ruleOpMultiAssign.getText();
+				}
+				match(input, EOF, FOLLOW_EOF_in_entryRuleOpMultiAssign8696);
+				if (state.failed)
+					return current;
+
+			}
+
+		}
+
+		catch (RecognitionException re) {
+			recoverAndAppendSkippedTokens(re);
+		} finally {
+		}
+		return current;
+	}
+
+	public final AntlrDatatypeRuleToken ruleOpMultiAssign() throws RecognitionException {
+		AntlrDatatypeRuleToken current = new AntlrDatatypeRuleToken();
+
+		Token kw = null;
+
+		enterRule();
+
+		try {
+
+			{
+
+				int alt105 = 2;
+				int LA105_0 = input.LA(1);
+
+				if ((LA105_0 == 65)) {
+					alt105 = 1;
+				} else if ((LA105_0 == 66)) {
+					alt105 = 2;
+				} else {
+					if (state.backtracking > 0) {
+						state.failed = true;
+						return current;
+					}
+					NoViableAltException nvae = new NoViableAltException("", 105, 0, input);
+
+					throw nvae;
+				}
+				switch (alt105) {
+					case 1:
+
+					{
+						kw = (Token) match(input, 65, FOLLOW_65_in_ruleOpMultiAssign8734);
+						if (state.failed)
+							return current;
+						if (state.backtracking == 0) {
+
+							current.merge(kw);
+							newLeafNode(kw, grammarAccess.getOpMultiAssignAccess().getPlusSignEqualsSignKeyword_0());
+
+						}
+
+					}
+						break;
+					case 2:
+
+					{
+						kw = (Token) match(input, 66, FOLLOW_66_in_ruleOpMultiAssign8753);
+						if (state.failed)
+							return current;
+						if (state.backtracking == 0) {
+
+							current.merge(kw);
+							newLeafNode(kw, grammarAccess.getOpMultiAssignAccess().getHyphenMinusEqualsSignKeyword_1());
+
+						}
+
+					}
+						break;
+
+				}
+
+			}
+
+			if (state.backtracking == 0) {
+				leaveRule();
+			}
+		}
+
+		catch (RecognitionException re) {
+			recoverAndAppendSkippedTokens(re);
+		} finally {
+		}
+		return current;
+	}
+
+	public final EObject entryRuleXOrExpression() throws RecognitionException {
+		EObject current = null;
+
+		EObject iv_ruleXOrExpression = null;
+
+		try {
+
+			{
+				if (state.backtracking == 0) {
+					newCompositeNode(grammarAccess.getXOrExpressionRule());
+				}
+				pushFollow(FOLLOW_ruleXOrExpression_in_entryRuleXOrExpression8793);
+				iv_ruleXOrExpression = ruleXOrExpression();
+
+				state._fsp--;
+				if (state.failed)
+					return current;
+				if (state.backtracking == 0) {
+					current = iv_ruleXOrExpression;
+				}
+				match(input, EOF, FOLLOW_EOF_in_entryRuleXOrExpression8803);
+				if (state.failed)
+					return current;
+
+			}
+
+		}
+
+		catch (RecognitionException re) {
+			recoverAndAppendSkippedTokens(re);
+		} finally {
+		}
+		return current;
+	}
+
+	public final EObject ruleXOrExpression() throws RecognitionException {
+		EObject current = null;
+
+		EObject this_XAndExpression_0 = null;
+
+		EObject lv_rightOperand_3_0 = null;
+
+		enterRule();
+
+		try {
+
+			{
+
+				{
+					if (state.backtracking == 0) {
+
+						newCompositeNode(grammarAccess.getXOrExpressionAccess().getXAndExpressionParserRuleCall_0());
+
+					}
+					pushFollow(FOLLOW_ruleXAndExpression_in_ruleXOrExpression8850);
+					this_XAndExpression_0 = ruleXAndExpression();
+
+					state._fsp--;
+					if (state.failed)
+						return current;
+					if (state.backtracking == 0) {
+
+						current = this_XAndExpression_0;
+						afterParserOrEnumRuleCall();
+
+					}
+
+					loop106: do {
+						int alt106 = 2;
+						int LA106_0 = input.LA(1);
+
+						if ((LA106_0 == 67)) {
+							int LA106_2 = input.LA(2);
+
+							if ((synpred8_InternalXtend())) {
+								alt106 = 1;
+							}
+
+						}
+
+						switch (alt106) {
+							case 1:
+
+							{
+
+								{
+
+									{
+
+										{
+											if (state.backtracking == 0) {
+
+												current = forceCreateModelElementAndSet(grammarAccess
+														.getXOrExpressionAccess()
+														.getXBinaryOperationLeftOperandAction_1_0_0_0(), XBINARY_OPERATION__LEFT_OPERAND,current);
+
+											}
+
+										}
+
+										{
+
+											{
+												if (state.backtracking == 0) {
+
+													if (current == null) {
+														current = createModelElement(grammarAccess
+																.getXOrExpressionRule());
+													}
+
+												}
+												if (state.backtracking == 0) {
+
+													newCompositeNode(grammarAccess.getXOrExpressionAccess()
+															.getFeatureJvmIdentifiableElementCrossReference_1_0_0_1_0());
+
+												}
+												pushFollow(FOLLOW_ruleOpOr_in_ruleXOrExpression8903);
+												ruleOpOr();
+
+												state._fsp--;
+												if (state.failed)
+													return current;
+												if (state.backtracking == 0) {
+
+													afterParserOrEnumRuleCall();
+
+												}
+
+											}
+
+										}
+
+									}
+
+								}
+
+								{
+
+									{
+										if (state.backtracking == 0) {
+
+											newCompositeNode(grammarAccess.getXOrExpressionAccess()
+													.getRightOperandXAndExpressionParserRuleCall_1_1_0());
+
+										}
+										pushFollow(FOLLOW_ruleXAndExpression_in_ruleXOrExpression8926);
+										lv_rightOperand_3_0 = ruleXAndExpression();
+
+										state._fsp--;
+										if (state.failed)
+											return current;
+										if (state.backtracking == 0) {
+
+											if (current == null) {
+												current = createModelElementForParent(grammarAccess
+														.getXOrExpressionRule());
+											}
+											set(current, XBINARY_OPERATION__RIGHT_OPERAND, lv_rightOperand_3_0, null);
+											afterParserOrEnumRuleCall();
+
+										}
+
+									}
+
+								}
+
+							}
+								break;
+
+							default:
+								break loop106;
+						}
+					} while (true);
+
+				}
+
+			}
+
+			if (state.backtracking == 0) {
+				leaveRule();
+			}
+		}
+
+		catch (RecognitionException re) {
+			recoverAndAppendSkippedTokens(re);
+		} finally {
+		}
+		return current;
+	}
+
+	public final String entryRuleOpOr() throws RecognitionException {
+		String current = null;
+
+		AntlrDatatypeRuleToken iv_ruleOpOr = null;
+
+		try {
+
+			{
+				if (state.backtracking == 0) {
+					newCompositeNode(grammarAccess.getOpOrRule());
+				}
+				pushFollow(FOLLOW_ruleOpOr_in_entryRuleOpOr8965);
+				iv_ruleOpOr = ruleOpOr();
+
+				state._fsp--;
+				if (state.failed)
+					return current;
+				if (state.backtracking == 0) {
+					current = iv_ruleOpOr.getText();
+				}
+				match(input, EOF, FOLLOW_EOF_in_entryRuleOpOr8976);
+				if (state.failed)
+					return current;
+
+			}
+
+		}
+
+		catch (RecognitionException re) {
+			recoverAndAppendSkippedTokens(re);
+		} finally {
+		}
+		return current;
+	}
+
+	public final AntlrDatatypeRuleToken ruleOpOr() throws RecognitionException {
+		AntlrDatatypeRuleToken current = new AntlrDatatypeRuleToken();
+
+		Token kw = null;
+
+		enterRule();
+
+		try {
+
+			{
+				kw = (Token) match(input, 67, FOLLOW_67_in_ruleOpOr9013);
+				if (state.failed)
+					return current;
+				if (state.backtracking == 0) {
+
+					current.merge(kw);
+					newLeafNode(kw, grammarAccess.getOpOrAccess().getVerticalLineVerticalLineKeyword());
+
+				}
+
+			}
+
+			if (state.backtracking == 0) {
+				leaveRule();
+			}
+		}
+
+		catch (RecognitionException re) {
+			recoverAndAppendSkippedTokens(re);
+		} finally {
+		}
+		return current;
+	}
+
+	public final EObject entryRuleXAndExpression() throws RecognitionException {
+		EObject current = null;
+
+		EObject iv_ruleXAndExpression = null;
+
+		try {
+
+			{
+				if (state.backtracking == 0) {
+					newCompositeNode(grammarAccess.getXAndExpressionRule());
+				}
+				pushFollow(FOLLOW_ruleXAndExpression_in_entryRuleXAndExpression9052);
+				iv_ruleXAndExpression = ruleXAndExpression();
+
+				state._fsp--;
+				if (state.failed)
+					return current;
+				if (state.backtracking == 0) {
+					current = iv_ruleXAndExpression;
+				}
+				match(input, EOF, FOLLOW_EOF_in_entryRuleXAndExpression9062);
+				if (state.failed)
+					return current;
+
+			}
+
+		}
+
+		catch (RecognitionException re) {
+			recoverAndAppendSkippedTokens(re);
+		} finally {
+		}
+		return current;
+	}
+
+	public final EObject ruleXAndExpression() throws RecognitionException {
+		EObject current = null;
+
+		EObject this_XEqualityExpression_0 = null;
+
+		EObject lv_rightOperand_3_0 = null;
+
+		enterRule();
+
+		try {
+
+			{
+
+				{
+					if (state.backtracking == 0) {
+
+						newCompositeNode(grammarAccess.getXAndExpressionAccess()
+								.getXEqualityExpressionParserRuleCall_0());
+
+					}
+					pushFollow(FOLLOW_ruleXEqualityExpression_in_ruleXAndExpression9109);
+					this_XEqualityExpression_0 = ruleXEqualityExpression();
+
+					state._fsp--;
+					if (state.failed)
+						return current;
+					if (state.backtracking == 0) {
+
+						current = this_XEqualityExpression_0;
+						afterParserOrEnumRuleCall();
+
+					}
+
+					loop107: do {
+						int alt107 = 2;
+						int LA107_0 = input.LA(1);
+
+						if ((LA107_0 == 68)) {
+							int LA107_2 = input.LA(2);
+
+							if ((synpred9_InternalXtend())) {
+								alt107 = 1;
+							}
+
+						}
+
+						switch (alt107) {
+							case 1:
+
+							{
+
+								{
+
+									{
+
+										{
+											if (state.backtracking == 0) {
+
+												current = forceCreateModelElementAndSet(grammarAccess
+														.getXAndExpressionAccess()
+														.getXBinaryOperationLeftOperandAction_1_0_0_0(),XBINARY_OPERATION__LEFT_OPERAND, current);
+
+											}
+
+										}
+
+										{
+
+											{
+												if (state.backtracking == 0) {
+
+													if (current == null) {
+														current = createModelElement(grammarAccess
+																.getXAndExpressionRule());
+													}
+
+												}
+												if (state.backtracking == 0) {
+
+													newCompositeNode(grammarAccess.getXAndExpressionAccess()
+															.getFeatureJvmIdentifiableElementCrossReference_1_0_0_1_0());
+
+												}
+												pushFollow(FOLLOW_ruleOpAnd_in_ruleXAndExpression9162);
+												ruleOpAnd();
+
+												state._fsp--;
+												if (state.failed)
+													return current;
+												if (state.backtracking == 0) {
+
+													afterParserOrEnumRuleCall();
+
+												}
+
+											}
+
+										}
+
+									}
+
+								}
+
+								{
+
+									{
+										if (state.backtracking == 0) {
+
+											newCompositeNode(grammarAccess.getXAndExpressionAccess()
+													.getRightOperandXEqualityExpressionParserRuleCall_1_1_0());
+
+										}
+										pushFollow(FOLLOW_ruleXEqualityExpression_in_ruleXAndExpression9185);
+										lv_rightOperand_3_0 = ruleXEqualityExpression();
+
+										state._fsp--;
+										if (state.failed)
+											return current;
+										if (state.backtracking == 0) {
+
+											if (current == null) {
+												current = createModelElementForParent(grammarAccess
+														.getXAndExpressionRule());
+											}
+											set(current, XBINARY_OPERATION__RIGHT_OPERAND, lv_rightOperand_3_0, null);
+											afterParserOrEnumRuleCall();
+
+										}
+
+									}
+
+								}
+
+							}
+								break;
+
+							default:
+								break loop107;
+						}
+					} while (true);
+
+				}
+
+			}
+
+			if (state.backtracking == 0) {
+				leaveRule();
+			}
+		}
+
+		catch (RecognitionException re) {
+			recoverAndAppendSkippedTokens(re);
+		} finally {
+		}
+		return current;
+	}
+
+	public final String entryRuleOpAnd() throws RecognitionException {
+		String current = null;
+
+		AntlrDatatypeRuleToken iv_ruleOpAnd = null;
+
+		try {
+
+			{
+				if (state.backtracking == 0) {
+					newCompositeNode(grammarAccess.getOpAndRule());
+				}
+				pushFollow(FOLLOW_ruleOpAnd_in_entryRuleOpAnd9224);
+				iv_ruleOpAnd = ruleOpAnd();
+
+				state._fsp--;
+				if (state.failed)
+					return current;
+				if (state.backtracking == 0) {
+					current = iv_ruleOpAnd.getText();
+				}
+				match(input, EOF, FOLLOW_EOF_in_entryRuleOpAnd9235);
+				if (state.failed)
+					return current;
+
+			}
+
+		}
+
+		catch (RecognitionException re) {
+			recoverAndAppendSkippedTokens(re);
+		} finally {
+		}
+		return current;
+	}
+
+	public final AntlrDatatypeRuleToken ruleOpAnd() throws RecognitionException {
+		AntlrDatatypeRuleToken current = new AntlrDatatypeRuleToken();
+
+		Token kw = null;
+
+		enterRule();
+
+		try {
+
+			{
+				kw = (Token) match(input, 68, FOLLOW_68_in_ruleOpAnd9272);
+				if (state.failed)
+					return current;
+				if (state.backtracking == 0) {
+
+					current.merge(kw);
+					newLeafNode(kw, grammarAccess.getOpAndAccess().getAmpersandAmpersandKeyword());
+
+				}
+
+			}
+
+			if (state.backtracking == 0) {
+				leaveRule();
+			}
+		}
+
+		catch (RecognitionException re) {
+			recoverAndAppendSkippedTokens(re);
+		} finally {
+		}
+		return current;
+	}
+
+	public final EObject entryRuleXEqualityExpression() throws RecognitionException {
+		EObject current = null;
+
+		EObject iv_ruleXEqualityExpression = null;
+
+		try {
+
+			{
+				if (state.backtracking == 0) {
+					newCompositeNode(grammarAccess.getXEqualityExpressionRule());
+				}
+				pushFollow(FOLLOW_ruleXEqualityExpression_in_entryRuleXEqualityExpression9311);
+				iv_ruleXEqualityExpression = ruleXEqualityExpression();
+
+				state._fsp--;
+				if (state.failed)
+					return current;
+				if (state.backtracking == 0) {
+					current = iv_ruleXEqualityExpression;
+				}
+				match(input, EOF, FOLLOW_EOF_in_entryRuleXEqualityExpression9321);
+				if (state.failed)
+					return current;
+
+			}
+
+		}
+
+		catch (RecognitionException re) {
+			recoverAndAppendSkippedTokens(re);
+		} finally {
+		}
+		return current;
+	}
+
+	public final EObject ruleXEqualityExpression() throws RecognitionException {
+		EObject current = null;
+
+		EObject this_XRelationalExpression_0 = null;
+
+		EObject lv_rightOperand_3_0 = null;
+
+		enterRule();
+
+		try {
+
+			{
+
+				{
+					if (state.backtracking == 0) {
+
+						newCompositeNode(grammarAccess.getXEqualityExpressionAccess()
+								.getXRelationalExpressionParserRuleCall_0());
+
+					}
+					pushFollow(FOLLOW_ruleXRelationalExpression_in_ruleXEqualityExpression9368);
+					this_XRelationalExpression_0 = ruleXRelationalExpression();
+
+					state._fsp--;
+					if (state.failed)
+						return current;
+					if (state.backtracking == 0) {
+
+						current = this_XRelationalExpression_0;
+						afterParserOrEnumRuleCall();
+
+					}
+
+					loop108: do {
+						int alt108 = 2;
+						switch (input.LA(1)) {
+							case 69: {
+								int LA108_2 = input.LA(2);
+
+								if ((synpred10_InternalXtend())) {
+									alt108 = 1;
+								}
+
+							}
+								break;
+							case 70: {
+								int LA108_3 = input.LA(2);
+
+								if ((synpred10_InternalXtend())) {
+									alt108 = 1;
+								}
+
+							}
+								break;
+							case 71: {
+								int LA108_4 = input.LA(2);
+
+								if ((synpred10_InternalXtend())) {
+									alt108 = 1;
+								}
+
+							}
+								break;
+							case 72: {
+								int LA108_5 = input.LA(2);
+
+								if ((synpred10_InternalXtend())) {
+									alt108 = 1;
+								}
+
+							}
+								break;
+
+						}
+
+						switch (alt108) {
+							case 1:
+
+							{
+
+								{
+
+									{
+
+										{
+											if (state.backtracking == 0) {
+
+												current = forceCreateModelElementAndSet(grammarAccess
+														.getXEqualityExpressionAccess()
+														.getXBinaryOperationLeftOperandAction_1_0_0_0(), XBINARY_OPERATION__LEFT_OPERAND,current);
+
+											}
+
+										}
+
+										{
+
+											{
+												if (state.backtracking == 0) {
+
+													if (current == null) {
+														current = createModelElement(grammarAccess
+																.getXEqualityExpressionRule());
+													}
+
+												}
+												if (state.backtracking == 0) {
+
+													newCompositeNode(grammarAccess.getXEqualityExpressionAccess()
+															.getFeatureJvmIdentifiableElementCrossReference_1_0_0_1_0());
+
+												}
+												pushFollow(FOLLOW_ruleOpEquality_in_ruleXEqualityExpression9421);
+												ruleOpEquality();
+
+												state._fsp--;
+												if (state.failed)
+													return current;
+												if (state.backtracking == 0) {
+
+													afterParserOrEnumRuleCall();
+
+												}
+
+											}
+
+										}
+
+									}
+
+								}
+
+								{
+
+									{
+										if (state.backtracking == 0) {
+
+											newCompositeNode(grammarAccess.getXEqualityExpressionAccess()
+													.getRightOperandXRelationalExpressionParserRuleCall_1_1_0());
+
+										}
+										pushFollow(FOLLOW_ruleXRelationalExpression_in_ruleXEqualityExpression9444);
+										lv_rightOperand_3_0 = ruleXRelationalExpression();
+
+										state._fsp--;
+										if (state.failed)
+											return current;
+										if (state.backtracking == 0) {
+
+											if (current == null) {
+												current = createModelElementForParent(grammarAccess
+														.getXEqualityExpressionRule());
+											}
+											set(current, XBINARY_OPERATION__RIGHT_OPERAND, lv_rightOperand_3_0, null);
+											afterParserOrEnumRuleCall();
+
+										}
+
+									}
+
+								}
+
+							}
+								break;
+
+							default:
+								break loop108;
+						}
+					} while (true);
+
+				}
+
+			}
+
+			if (state.backtracking == 0) {
+				leaveRule();
+			}
+		}
+
+		catch (RecognitionException re) {
+			recoverAndAppendSkippedTokens(re);
+		} finally {
+		}
+		return current;
+	}
+
+	public final String entryRuleOpEquality() throws RecognitionException {
+		String current = null;
+
+		AntlrDatatypeRuleToken iv_ruleOpEquality = null;
+
+		try {
+
+			{
+				if (state.backtracking == 0) {
+					newCompositeNode(grammarAccess.getOpEqualityRule());
+				}
+				pushFollow(FOLLOW_ruleOpEquality_in_entryRuleOpEquality9483);
+				iv_ruleOpEquality = ruleOpEquality();
+
+				state._fsp--;
+				if (state.failed)
+					return current;
+				if (state.backtracking == 0) {
+					current = iv_ruleOpEquality.getText();
+				}
+				match(input, EOF, FOLLOW_EOF_in_entryRuleOpEquality9494);
+				if (state.failed)
+					return current;
+
+			}
+
+		}
+
+		catch (RecognitionException re) {
+			recoverAndAppendSkippedTokens(re);
+		} finally {
+		}
+		return current;
+	}
+
+	public final AntlrDatatypeRuleToken ruleOpEquality() throws RecognitionException {
+		AntlrDatatypeRuleToken current = new AntlrDatatypeRuleToken();
+
+		Token kw = null;
+
+		enterRule();
+
+		try {
+
+			{
+
+				int alt109 = 4;
+				switch (input.LA(1)) {
+					case 69: {
+						alt109 = 1;
+					}
+						break;
+					case 70: {
+						alt109 = 2;
+					}
+						break;
+					case 71: {
+						alt109 = 3;
+					}
+						break;
+					case 72: {
+						alt109 = 4;
+					}
+						break;
+					default:
+						if (state.backtracking > 0) {
+							state.failed = true;
+							return current;
+						}
+						NoViableAltException nvae = new NoViableAltException("", 109, 0, input);
+
+						throw nvae;
+				}
+
+				switch (alt109) {
+					case 1:
+
+					{
+						kw = (Token) match(input, 69, FOLLOW_69_in_ruleOpEquality9532);
+						if (state.failed)
+							return current;
+						if (state.backtracking == 0) {
+
+							current.merge(kw);
+							newLeafNode(kw, grammarAccess.getOpEqualityAccess().getEqualsSignEqualsSignKeyword_0());
+
+						}
+
+					}
+						break;
+					case 2:
+
+					{
+						kw = (Token) match(input, 70, FOLLOW_70_in_ruleOpEquality9551);
+						if (state.failed)
+							return current;
+						if (state.backtracking == 0) {
+
+							current.merge(kw);
+							newLeafNode(kw, grammarAccess.getOpEqualityAccess().getExclamationMarkEqualsSignKeyword_1());
+
+						}
+
+					}
+						break;
+					case 3:
+
+					{
+						kw = (Token) match(input, 71, FOLLOW_71_in_ruleOpEquality9570);
+						if (state.failed)
+							return current;
+						if (state.backtracking == 0) {
+
+							current.merge(kw);
+							newLeafNode(kw, grammarAccess.getOpEqualityAccess()
+									.getEqualsSignEqualsSignEqualsSignKeyword_2());
+
+						}
+
+					}
+						break;
+					case 4:
+
+					{
+						kw = (Token) match(input, 72, FOLLOW_72_in_ruleOpEquality9589);
+						if (state.failed)
+							return current;
+						if (state.backtracking == 0) {
+
+							current.merge(kw);
+							newLeafNode(kw, grammarAccess.getOpEqualityAccess()
+									.getExclamationMarkEqualsSignEqualsSignKeyword_3());
+
+						}
+
+					}
+						break;
+
+				}
+
+			}
+
+			if (state.backtracking == 0) {
+				leaveRule();
+			}
+		}
+
+		catch (RecognitionException re) {
+			recoverAndAppendSkippedTokens(re);
+		} finally {
+		}
+		return current;
+	}
+
+	public final EObject entryRuleXRelationalExpression() throws RecognitionException {
+		EObject current = null;
+
+		EObject iv_ruleXRelationalExpression = null;
+
+		try {
+
+			{
+				if (state.backtracking == 0) {
+					newCompositeNode(grammarAccess.getXRelationalExpressionRule());
+				}
+				pushFollow(FOLLOW_ruleXRelationalExpression_in_entryRuleXRelationalExpression9629);
+				iv_ruleXRelationalExpression = ruleXRelationalExpression();
+
+				state._fsp--;
+				if (state.failed)
+					return current;
+				if (state.backtracking == 0) {
+					current = iv_ruleXRelationalExpression;
+				}
+				match(input, EOF, FOLLOW_EOF_in_entryRuleXRelationalExpression9639);
+				if (state.failed)
+					return current;
+
+			}
+
+		}
+
+		catch (RecognitionException re) {
+			recoverAndAppendSkippedTokens(re);
+		} finally {
+		}
+		return current;
+	}
+
+	public final EObject ruleXRelationalExpression() throws RecognitionException {
+		EObject current = null;
+
+		Token otherlv_2 = null;
+		EObject this_XOtherOperatorExpression_0 = null;
+
+		EObject lv_type_3_0 = null;
+
+		EObject lv_rightOperand_6_0 = null;
+
+		enterRule();
+
+		try {
+
+			{
+
+				{
+					if (state.backtracking == 0) {
+
+						newCompositeNode(grammarAccess.getXRelationalExpressionAccess()
+								.getXOtherOperatorExpressionParserRuleCall_0());
+
+					}
+					pushFollow(FOLLOW_ruleXOtherOperatorExpression_in_ruleXRelationalExpression9686);
+					this_XOtherOperatorExpression_0 = ruleXOtherOperatorExpression();
+
+					state._fsp--;
+					if (state.failed)
+						return current;
+					if (state.backtracking == 0) {
+
+						current = this_XOtherOperatorExpression_0;
+						afterParserOrEnumRuleCall();
+
+					}
+
+					loop110: do {
+						int alt110 = 3;
+						switch (input.LA(1)) {
+							case 23: {
+								int LA110_2 = input.LA(2);
+
+								if ((synpred12_InternalXtend())) {
+									alt110 = 2;
+								}
+
+							}
+								break;
+							case 25: {
+								int LA110_3 = input.LA(2);
+
+								if ((synpred12_InternalXtend())) {
+									alt110 = 2;
+								}
+
+							}
+								break;
+							case 73: {
+								int LA110_4 = input.LA(2);
+
+								if ((synpred11_InternalXtend())) {
+									alt110 = 1;
+								}
+
+							}
+								break;
+							case 74: {
+								int LA110_5 = input.LA(2);
+
+								if ((synpred12_InternalXtend())) {
+									alt110 = 2;
+								}
+
+							}
+								break;
+							case 75: {
+								int LA110_6 = input.LA(2);
+
+								if ((synpred12_InternalXtend())) {
+									alt110 = 2;
+								}
+
+							}
+								break;
+
+						}
+
+						switch (alt110) {
+							case 1:
+
+							{
+
+								{
+
+									{
+
+										{
+
+											{
+												if (state.backtracking == 0) {
+
+													current = forceCreateModelElementAndSet(grammarAccess
+															.getXRelationalExpressionAccess()
+															.getXInstanceOfExpressionExpressionAction_1_0_0_0_0(), XINSTANCE_OF_EXPRESSION__EXPRESSION,
+															current);
+
+												}
+
+											}
+
+											otherlv_2 = (Token) match(input, 73,
+													FOLLOW_73_in_ruleXRelationalExpression9722);
+											if (state.failed)
+												return current;
+											if (state.backtracking == 0) {
+
+												newLeafNode(otherlv_2, grammarAccess.getXRelationalExpressionAccess()
+														.getInstanceofKeyword_1_0_0_0_1());
+
+											}
+
+										}
+
+									}
+
+									{
+
+										{
+											if (state.backtracking == 0) {
+
+												newCompositeNode(grammarAccess.getXRelationalExpressionAccess()
+														.getTypeJvmTypeReferenceParserRuleCall_1_0_1_0());
+
+											}
+											pushFollow(FOLLOW_ruleJvmTypeReference_in_ruleXRelationalExpression9745);
+											lv_type_3_0 = ruleJvmTypeReference();
+
+											state._fsp--;
+											if (state.failed)
+												return current;
+											if (state.backtracking == 0) {
+
+												if (current == null) {
+													current = createModelElementForParent(grammarAccess
+															.getXRelationalExpressionRule());
+												}
+												set(current, XINSTANCE_OF_EXPRESSION__TYPE, lv_type_3_0, null);
+												afterParserOrEnumRuleCall();
+
+											}
+
+										}
+
+									}
+
+								}
+
+							}
+								break;
+							case 2:
+
+							{
+
+								{
+
+									{
+
+										{
+
+											{
+												if (state.backtracking == 0) {
+
+													current = forceCreateModelElementAndSet(grammarAccess
+															.getXRelationalExpressionAccess()
+															.getXBinaryOperationLeftOperandAction_1_1_0_0_0(), XBINARY_OPERATION__LEFT_OPERAND, current);
+
+												}
+
+											}
+
+											{
+
+												{
+													if (state.backtracking == 0) {
+
+														if (current == null) {
+															current = createModelElement(grammarAccess
+																	.getXRelationalExpressionRule());
+														}
+
+													}
+													if (state.backtracking == 0) {
+
+														newCompositeNode(grammarAccess
+																.getXRelationalExpressionAccess()
+																.getFeatureJvmIdentifiableElementCrossReference_1_1_0_0_1_0());
+
+													}
+													pushFollow(FOLLOW_ruleOpCompare_in_ruleXRelationalExpression9806);
+													ruleOpCompare();
+
+													state._fsp--;
+													if (state.failed)
+														return current;
+													if (state.backtracking == 0) {
+
+														afterParserOrEnumRuleCall();
+
+													}
+
+												}
+
+											}
+
+										}
+
+									}
+
+									{
+
+										{
+											if (state.backtracking == 0) {
+
+												newCompositeNode(grammarAccess
+														.getXRelationalExpressionAccess()
+														.getRightOperandXOtherOperatorExpressionParserRuleCall_1_1_1_0());
+
+											}
+											pushFollow(FOLLOW_ruleXOtherOperatorExpression_in_ruleXRelationalExpression9829);
+											lv_rightOperand_6_0 = ruleXOtherOperatorExpression();
+
+											state._fsp--;
+											if (state.failed)
+												return current;
+											if (state.backtracking == 0) {
+
+												if (current == null) {
+													current = createModelElementForParent(grammarAccess
+															.getXRelationalExpressionRule());
+												}
+												set(current, XBINARY_OPERATION__RIGHT_OPERAND, lv_rightOperand_6_0,
+														null);
+												afterParserOrEnumRuleCall();
+
+											}
+
+										}
+
+									}
+
+								}
+
+							}
+								break;
+
+							default:
+								break loop110;
+						}
+					} while (true);
+
+				}
+
+			}
+
+			if (state.backtracking == 0) {
+				leaveRule();
+			}
+		}
+
+		catch (RecognitionException re) {
+			recoverAndAppendSkippedTokens(re);
+		} finally {
+		}
+		return current;
+	}
+
+	public final String entryRuleOpCompare() throws RecognitionException {
+		String current = null;
+
+		AntlrDatatypeRuleToken iv_ruleOpCompare = null;
+
+		try {
+
+			{
+				if (state.backtracking == 0) {
+					newCompositeNode(grammarAccess.getOpCompareRule());
+				}
+				pushFollow(FOLLOW_ruleOpCompare_in_entryRuleOpCompare9869);
+				iv_ruleOpCompare = ruleOpCompare();
+
+				state._fsp--;
+				if (state.failed)
+					return current;
+				if (state.backtracking == 0) {
+					current = iv_ruleOpCompare.getText();
+				}
+				match(input, EOF, FOLLOW_EOF_in_entryRuleOpCompare9880);
+				if (state.failed)
+					return current;
+
+			}
+
+		}
+
+		catch (RecognitionException re) {
+			recoverAndAppendSkippedTokens(re);
+		} finally {
+		}
+		return current;
+	}
+
+	public final AntlrDatatypeRuleToken ruleOpCompare() throws RecognitionException {
+		AntlrDatatypeRuleToken current = new AntlrDatatypeRuleToken();
+
+		Token kw = null;
+
+		enterRule();
+
+		try {
+
+			{
+
+				int alt111 = 4;
+				switch (input.LA(1)) {
+					case 74: {
+						alt111 = 1;
+					}
+						break;
+					case 75: {
+						alt111 = 2;
+					}
+						break;
+					case 25: {
+						alt111 = 3;
+					}
+						break;
+					case 23: {
+						alt111 = 4;
+					}
+						break;
+					default:
+						if (state.backtracking > 0) {
+							state.failed = true;
+							return current;
+						}
+						NoViableAltException nvae = new NoViableAltException("", 111, 0, input);
+
+						throw nvae;
+				}
+
+				switch (alt111) {
+					case 1:
+
+					{
+						kw = (Token) match(input, 74, FOLLOW_74_in_ruleOpCompare9918);
+						if (state.failed)
+							return current;
+						if (state.backtracking == 0) {
+
+							current.merge(kw);
+							newLeafNode(kw, grammarAccess.getOpCompareAccess().getGreaterThanSignEqualsSignKeyword_0());
+
+						}
+
+					}
+						break;
+					case 2:
+
+					{
+						kw = (Token) match(input, 75, FOLLOW_75_in_ruleOpCompare9937);
+						if (state.failed)
+							return current;
+						if (state.backtracking == 0) {
+
+							current.merge(kw);
+							newLeafNode(kw, grammarAccess.getOpCompareAccess().getLessThanSignEqualsSignKeyword_1());
+
+						}
+
+					}
+						break;
+					case 3:
+
+					{
+						kw = (Token) match(input, 25, FOLLOW_25_in_ruleOpCompare9956);
+						if (state.failed)
+							return current;
+						if (state.backtracking == 0) {
+
+							current.merge(kw);
+							newLeafNode(kw, grammarAccess.getOpCompareAccess().getGreaterThanSignKeyword_2());
+
+						}
+
+					}
+						break;
+					case 4:
+
+					{
+						kw = (Token) match(input, 23, FOLLOW_23_in_ruleOpCompare9975);
+						if (state.failed)
+							return current;
+						if (state.backtracking == 0) {
+
+							current.merge(kw);
+							newLeafNode(kw, grammarAccess.getOpCompareAccess().getLessThanSignKeyword_3());
+
+						}
+
+					}
+						break;
+
+				}
+
+			}
+
+			if (state.backtracking == 0) {
+				leaveRule();
+			}
+		}
+
+		catch (RecognitionException re) {
+			recoverAndAppendSkippedTokens(re);
+		} finally {
+		}
+		return current;
+	}
+
+	public final EObject entryRuleXOtherOperatorExpression() throws RecognitionException {
+		EObject current = null;
+
+		EObject iv_ruleXOtherOperatorExpression = null;
+
+		try {
+
+			{
+				if (state.backtracking == 0) {
+					newCompositeNode(grammarAccess.getXOtherOperatorExpressionRule());
+				}
+				pushFollow(FOLLOW_ruleXOtherOperatorExpression_in_entryRuleXOtherOperatorExpression10015);
+				iv_ruleXOtherOperatorExpression = ruleXOtherOperatorExpression();
+
+				state._fsp--;
+				if (state.failed)
+					return current;
+				if (state.backtracking == 0) {
+					current = iv_ruleXOtherOperatorExpression;
+				}
+				match(input, EOF, FOLLOW_EOF_in_entryRuleXOtherOperatorExpression10025);
+				if (state.failed)
+					return current;
+
+			}
+
+		}
+
+		catch (RecognitionException re) {
+			recoverAndAppendSkippedTokens(re);
+		} finally {
+		}
+		return current;
+	}
+
+	public final EObject ruleXOtherOperatorExpression() throws RecognitionException {
+		EObject current = null;
+
+		EObject this_XAdditiveExpression_0 = null;
+
+		EObject lv_rightOperand_3_0 = null;
+
+		enterRule();
+
+		try {
+
+			{
+
+				{
+					if (state.backtracking == 0) {
+
+						newCompositeNode(grammarAccess.getXOtherOperatorExpressionAccess()
+								.getXAdditiveExpressionParserRuleCall_0());
+
+					}
+					pushFollow(FOLLOW_ruleXAdditiveExpression_in_ruleXOtherOperatorExpression10072);
+					this_XAdditiveExpression_0 = ruleXAdditiveExpression();
+
+					state._fsp--;
+					if (state.failed)
+						return current;
+					if (state.backtracking == 0) {
+
+						current = this_XAdditiveExpression_0;
+						afterParserOrEnumRuleCall();
+
+					}
+
+					loop112: do {
+						int alt112 = 2;
+						alt112 = dfa112.predict(input);
+						switch (alt112) {
+							case 1:
+
+							{
+
+								{
+
+									{
+
+										{
+											if (state.backtracking == 0) {
+
+												current = forceCreateModelElementAndSet(grammarAccess
+														.getXOtherOperatorExpressionAccess()
+														.getXBinaryOperationLeftOperandAction_1_0_0_0(), XBINARY_OPERATION__LEFT_OPERAND, current);
+
+											}
+
+										}
+
+										{
+
+											{
+												if (state.backtracking == 0) {
+
+													if (current == null) {
+														current = createModelElement(grammarAccess
+																.getXOtherOperatorExpressionRule());
+													}
+
+												}
+												if (state.backtracking == 0) {
+
+													newCompositeNode(grammarAccess.getXOtherOperatorExpressionAccess()
+															.getFeatureJvmIdentifiableElementCrossReference_1_0_0_1_0());
+
+												}
+												pushFollow(FOLLOW_ruleOpOther_in_ruleXOtherOperatorExpression10125);
+												ruleOpOther();
+
+												state._fsp--;
+												if (state.failed)
+													return current;
+												if (state.backtracking == 0) {
+
+													afterParserOrEnumRuleCall();
+
+												}
+
+											}
+
+										}
+
+									}
+
+								}
+
+								{
+
+									{
+										if (state.backtracking == 0) {
+
+											newCompositeNode(grammarAccess.getXOtherOperatorExpressionAccess()
+													.getRightOperandXAdditiveExpressionParserRuleCall_1_1_0());
+
+										}
+										pushFollow(FOLLOW_ruleXAdditiveExpression_in_ruleXOtherOperatorExpression10148);
+										lv_rightOperand_3_0 = ruleXAdditiveExpression();
+
+										state._fsp--;
+										if (state.failed)
+											return current;
+										if (state.backtracking == 0) {
+
+											if (current == null) {
+												current = createModelElementForParent(grammarAccess
+														.getXOtherOperatorExpressionRule());
+											}
+											set(current, XBINARY_OPERATION__RIGHT_OPERAND, lv_rightOperand_3_0, null);
+											afterParserOrEnumRuleCall();
+
+										}
+
+									}
+
+								}
+
+							}
+								break;
+
+							default:
+								break loop112;
+						}
+					} while (true);
+
+				}
+
+			}
+
+			if (state.backtracking == 0) {
+				leaveRule();
+			}
+		}
+
+		catch (RecognitionException re) {
+			recoverAndAppendSkippedTokens(re);
+		} finally {
+		}
+		return current;
+	}
+
+	public final String entryRuleOpOther() throws RecognitionException {
+		String current = null;
+
+		AntlrDatatypeRuleToken iv_ruleOpOther = null;
+
+		try {
+
+			{
+				if (state.backtracking == 0) {
+					newCompositeNode(grammarAccess.getOpOtherRule());
+				}
+				pushFollow(FOLLOW_ruleOpOther_in_entryRuleOpOther10187);
+				iv_ruleOpOther = ruleOpOther();
+
+				state._fsp--;
+				if (state.failed)
+					return current;
+				if (state.backtracking == 0) {
+					current = iv_ruleOpOther.getText();
+				}
+				match(input, EOF, FOLLOW_EOF_in_entryRuleOpOther10198);
+				if (state.failed)
+					return current;
+
+			}
+
+		}
+
+		catch (RecognitionException re) {
+			recoverAndAppendSkippedTokens(re);
+		} finally {
+		}
+		return current;
+	}
+
+	public final AntlrDatatypeRuleToken ruleOpOther() throws RecognitionException {
+		AntlrDatatypeRuleToken current = new AntlrDatatypeRuleToken();
+
+		Token kw = null;
+
+		enterRule();
+
+		try {
+
+			{
+
+				int alt115 = 10;
+				alt115 = dfa115.predict(input);
+				switch (alt115) {
+					case 1:
+
+					{
+						kw = (Token) match(input, 76, FOLLOW_76_in_ruleOpOther10236);
+						if (state.failed)
+							return current;
+						if (state.backtracking == 0) {
+
+							current.merge(kw);
+							newLeafNode(kw, grammarAccess.getOpOtherAccess().getHyphenMinusGreaterThanSignKeyword_0());
+
+						}
+
+					}
+						break;
+					case 2:
+
+					{
+						kw = (Token) match(input, 77, FOLLOW_77_in_ruleOpOther10255);
+						if (state.failed)
+							return current;
+						if (state.backtracking == 0) {
+
+							current.merge(kw);
+							newLeafNode(kw, grammarAccess.getOpOtherAccess().getFullStopFullStopLessThanSignKeyword_1());
+
+						}
+
+					}
+						break;
+					case 3:
+
+					{
+
+						{
+							kw = (Token) match(input, 25, FOLLOW_25_in_ruleOpOther10275);
+							if (state.failed)
+								return current;
+							if (state.backtracking == 0) {
+
+								current.merge(kw);
+								newLeafNode(kw, grammarAccess.getOpOtherAccess().getGreaterThanSignKeyword_2_0());
+
+							}
+							kw = (Token) match(input, 78, FOLLOW_78_in_ruleOpOther10288);
+							if (state.failed)
+								return current;
+							if (state.backtracking == 0) {
+
+								current.merge(kw);
+								newLeafNode(kw, grammarAccess.getOpOtherAccess().getFullStopFullStopKeyword_2_1());
+
+							}
+
+						}
+
+					}
+						break;
+					case 4:
+
+					{
+						kw = (Token) match(input, 78, FOLLOW_78_in_ruleOpOther10308);
+						if (state.failed)
+							return current;
+						if (state.backtracking == 0) {
+
+							current.merge(kw);
+							newLeafNode(kw, grammarAccess.getOpOtherAccess().getFullStopFullStopKeyword_3());
+
+						}
+
+					}
+						break;
+					case 5:
+
+					{
+						kw = (Token) match(input, 79, FOLLOW_79_in_ruleOpOther10327);
+						if (state.failed)
+							return current;
+						if (state.backtracking == 0) {
+
+							current.merge(kw);
+							newLeafNode(kw, grammarAccess.getOpOtherAccess().getEqualsSignGreaterThanSignKeyword_4());
+
+						}
+
+					}
+						break;
+					case 6:
+
+					{
+
+						{
+							kw = (Token) match(input, 25, FOLLOW_25_in_ruleOpOther10347);
+							if (state.failed)
+								return current;
+							if (state.backtracking == 0) {
+
+								current.merge(kw);
+								newLeafNode(kw, grammarAccess.getOpOtherAccess().getGreaterThanSignKeyword_5_0());
+
+							}
+
+							int alt113 = 2;
+							int LA113_0 = input.LA(1);
+
+							if ((LA113_0 == 25)) {
+								int LA113_1 = input.LA(2);
+
+								if ((LA113_1 == 25) && (synpred14_InternalXtend())) {
+									alt113 = 1;
+								} else if ((LA113_1 == EOF || (LA113_1 >= RULE_ID && LA113_1 <= RULE_RICH_TEXT_START)
+										|| (LA113_1 >= RULE_HEX && LA113_1 <= RULE_DECIMAL) || LA113_1 == 20
+										|| (LA113_1 >= 22 && LA113_1 <= 23) || (LA113_1 >= 26 && LA113_1 <= 28)
+										|| (LA113_1 >= 30 && LA113_1 <= 32) || (LA113_1 >= 34 && LA113_1 <= 35)
+										|| (LA113_1 >= 37 && LA113_1 <= 45) || (LA113_1 >= 48 && LA113_1 <= 50)
+										|| LA113_1 == 52 || LA113_1 == 64 || LA113_1 == 83 || LA113_1 == 88
+										|| (LA113_1 >= 93 && LA113_1 <= 94) || LA113_1 == 97 || LA113_1 == 99
+										|| (LA113_1 >= 102 && LA113_1 <= 105) || (LA113_1 >= 107 && LA113_1 <= 113))) {
+									alt113 = 2;
+								} else {
+									if (state.backtracking > 0) {
+										state.failed = true;
+										return current;
+									}
+									NoViableAltException nvae = new NoViableAltException("", 113, 1, input);
+
+									throw nvae;
+								}
+							} else {
+								if (state.backtracking > 0) {
+									state.failed = true;
+									return current;
+								}
+								NoViableAltException nvae = new NoViableAltException("", 113, 0, input);
+
+								throw nvae;
+							}
+							switch (alt113) {
+								case 1:
+
+								{
+
+									{
+
+										{
+											kw = (Token) match(input, 25, FOLLOW_25_in_ruleOpOther10378);
+											if (state.failed)
+												return current;
+											if (state.backtracking == 0) {
+
+												current.merge(kw);
+												newLeafNode(kw, grammarAccess.getOpOtherAccess()
+														.getGreaterThanSignKeyword_5_1_0_0_0());
+
+											}
+											kw = (Token) match(input, 25, FOLLOW_25_in_ruleOpOther10391);
+											if (state.failed)
+												return current;
+											if (state.backtracking == 0) {
+
+												current.merge(kw);
+												newLeafNode(kw, grammarAccess.getOpOtherAccess()
+														.getGreaterThanSignKeyword_5_1_0_0_1());
+
+											}
+
+										}
+
+									}
+
+								}
+									break;
+								case 2:
+
+								{
+									kw = (Token) match(input, 25, FOLLOW_25_in_ruleOpOther10412);
+									if (state.failed)
+										return current;
+									if (state.backtracking == 0) {
+
+										current.merge(kw);
+										newLeafNode(kw, grammarAccess.getOpOtherAccess()
+												.getGreaterThanSignKeyword_5_1_1());
+
+									}
+
+								}
+									break;
+
+							}
+
+						}
+
+					}
+						break;
+					case 7:
+
+					{
+
+						{
+							kw = (Token) match(input, 23, FOLLOW_23_in_ruleOpOther10434);
+							if (state.failed)
+								return current;
+							if (state.backtracking == 0) {
+
+								current.merge(kw);
+								newLeafNode(kw, grammarAccess.getOpOtherAccess().getLessThanSignKeyword_6_0());
+
+							}
+
+							int alt114 = 2;
+							int LA114_0 = input.LA(1);
+
+							if ((LA114_0 == 23)) {
+								int LA114_1 = input.LA(2);
+
+								if ((synpred15_InternalXtend())) {
+									alt114 = 1;
+								} else if ((true)) {
+									alt114 = 2;
+								} else {
+									if (state.backtracking > 0) {
+										state.failed = true;
+										return current;
+									}
+									NoViableAltException nvae = new NoViableAltException("", 114, 1, input);
+
+									throw nvae;
+								}
+							} else {
+								if (state.backtracking > 0) {
+									state.failed = true;
+									return current;
+								}
+								NoViableAltException nvae = new NoViableAltException("", 114, 0, input);
+
+								throw nvae;
+							}
+							switch (alt114) {
+								case 1:
+
+								{
+
+									{
+
+										{
+											kw = (Token) match(input, 23, FOLLOW_23_in_ruleOpOther10465);
+											if (state.failed)
+												return current;
+											if (state.backtracking == 0) {
+
+												current.merge(kw);
+												newLeafNode(kw, grammarAccess.getOpOtherAccess()
+														.getLessThanSignKeyword_6_1_0_0_0());
+
+											}
+											kw = (Token) match(input, 23, FOLLOW_23_in_ruleOpOther10478);
+											if (state.failed)
+												return current;
+											if (state.backtracking == 0) {
+
+												current.merge(kw);
+												newLeafNode(kw, grammarAccess.getOpOtherAccess()
+														.getLessThanSignKeyword_6_1_0_0_1());
+
+											}
+
+										}
+
+									}
+
+								}
+									break;
+								case 2:
+
+								{
+									kw = (Token) match(input, 23, FOLLOW_23_in_ruleOpOther10499);
+									if (state.failed)
+										return current;
+									if (state.backtracking == 0) {
+
+										current.merge(kw);
+										newLeafNode(kw, grammarAccess.getOpOtherAccess().getLessThanSignKeyword_6_1_1());
+
+									}
+
+								}
+									break;
+
+							}
+
+						}
+
+					}
+						break;
+					case 8:
+
+					{
+						kw = (Token) match(input, 80, FOLLOW_80_in_ruleOpOther10520);
+						if (state.failed)
+							return current;
+						if (state.backtracking == 0) {
+
+							current.merge(kw);
+							newLeafNode(kw, grammarAccess.getOpOtherAccess().getLessThanSignGreaterThanSignKeyword_7());
+
+						}
+
+					}
+						break;
+					case 9:
+
+					{
+						kw = (Token) match(input, 81, FOLLOW_81_in_ruleOpOther10539);
+						if (state.failed)
+							return current;
+						if (state.backtracking == 0) {
+
+							current.merge(kw);
+							newLeafNode(kw, grammarAccess.getOpOtherAccess().getQuestionMarkColonKeyword_8());
+
+						}
+
+					}
+						break;
+					case 10:
+
+					{
+						kw = (Token) match(input, 82, FOLLOW_82_in_ruleOpOther10558);
+						if (state.failed)
+							return current;
+						if (state.backtracking == 0) {
+
+							current.merge(kw);
+							newLeafNode(kw, grammarAccess.getOpOtherAccess()
+									.getLessThanSignEqualsSignGreaterThanSignKeyword_9());
+
+						}
+
+					}
+						break;
+
+				}
+
+			}
+
+			if (state.backtracking == 0) {
+				leaveRule();
+			}
+		}
+
+		catch (RecognitionException re) {
+			recoverAndAppendSkippedTokens(re);
+		} finally {
+		}
+		return current;
+	}
+
+	public final EObject entryRuleXAdditiveExpression() throws RecognitionException {
+		EObject current = null;
+
+		EObject iv_ruleXAdditiveExpression = null;
+
+		try {
+
+			{
+				if (state.backtracking == 0) {
+					newCompositeNode(grammarAccess.getXAdditiveExpressionRule());
+				}
+				pushFollow(FOLLOW_ruleXAdditiveExpression_in_entryRuleXAdditiveExpression10598);
+				iv_ruleXAdditiveExpression = ruleXAdditiveExpression();
+
+				state._fsp--;
+				if (state.failed)
+					return current;
+				if (state.backtracking == 0) {
+					current = iv_ruleXAdditiveExpression;
+				}
+				match(input, EOF, FOLLOW_EOF_in_entryRuleXAdditiveExpression10608);
+				if (state.failed)
+					return current;
+
+			}
+
+		}
+
+		catch (RecognitionException re) {
+			recoverAndAppendSkippedTokens(re);
+		} finally {
+		}
+		return current;
+	}
+
+	public final EObject ruleXAdditiveExpression() throws RecognitionException {
+		EObject current = null;
+
+		EObject this_XMultiplicativeExpression_0 = null;
+
+		EObject lv_rightOperand_3_0 = null;
+
+		enterRule();
+
+		try {
+
+			{
+
+				{
+					if (state.backtracking == 0) {
+
+						newCompositeNode(grammarAccess.getXAdditiveExpressionAccess()
+								.getXMultiplicativeExpressionParserRuleCall_0());
+
+					}
+					pushFollow(FOLLOW_ruleXMultiplicativeExpression_in_ruleXAdditiveExpression10655);
+					this_XMultiplicativeExpression_0 = ruleXMultiplicativeExpression();
+
+					state._fsp--;
+					if (state.failed)
+						return current;
+					if (state.backtracking == 0) {
+
+						current = this_XMultiplicativeExpression_0;
+						afterParserOrEnumRuleCall();
+
+					}
+
+					loop116: do {
+						int alt116 = 2;
+						int LA116_0 = input.LA(1);
+
+						if ((LA116_0 == 83)) {
+							int LA116_2 = input.LA(2);
+
+							if ((synpred16_InternalXtend())) {
+								alt116 = 1;
+							}
+
+						} else if ((LA116_0 == 64)) {
+							int LA116_3 = input.LA(2);
+
+							if ((synpred16_InternalXtend())) {
+								alt116 = 1;
+							}
+
+						}
+
+						switch (alt116) {
+							case 1:
+
+							{
+
+								{
+
+									{
+
+										{
+											if (state.backtracking == 0) {
+
+												current = forceCreateModelElementAndSet(grammarAccess
+														.getXAdditiveExpressionAccess()
+														.getXBinaryOperationLeftOperandAction_1_0_0_0(), XBINARY_OPERATION__LEFT_OPERAND, current);
+
+											}
+
+										}
+
+										{
+
+											{
+												if (state.backtracking == 0) {
+
+													if (current == null) {
+														current = createModelElement(grammarAccess
+																.getXAdditiveExpressionRule());
+													}
+
+												}
+												if (state.backtracking == 0) {
+
+													newCompositeNode(grammarAccess.getXAdditiveExpressionAccess()
+															.getFeatureJvmIdentifiableElementCrossReference_1_0_0_1_0());
+
+												}
+												pushFollow(FOLLOW_ruleOpAdd_in_ruleXAdditiveExpression10708);
+												ruleOpAdd();
+
+												state._fsp--;
+												if (state.failed)
+													return current;
+												if (state.backtracking == 0) {
+
+													afterParserOrEnumRuleCall();
+
+												}
+
+											}
+
+										}
+
+									}
+
+								}
+
+								{
+
+									{
+										if (state.backtracking == 0) {
+
+											newCompositeNode(grammarAccess.getXAdditiveExpressionAccess()
+													.getRightOperandXMultiplicativeExpressionParserRuleCall_1_1_0());
+
+										}
+										pushFollow(FOLLOW_ruleXMultiplicativeExpression_in_ruleXAdditiveExpression10731);
+										lv_rightOperand_3_0 = ruleXMultiplicativeExpression();
+
+										state._fsp--;
+										if (state.failed)
+											return current;
+										if (state.backtracking == 0) {
+
+											if (current == null) {
+												current = createModelElementForParent(grammarAccess
+														.getXAdditiveExpressionRule());
+											}
+											set(current, XBINARY_OPERATION__RIGHT_OPERAND, lv_rightOperand_3_0,
+													null);
+											afterParserOrEnumRuleCall();
+
+										}
+
+									}
+
+								}
+
+							}
+								break;
+
+							default:
+								break loop116;
+						}
+					} while (true);
+
+				}
+
+			}
+
+			if (state.backtracking == 0) {
+				leaveRule();
+			}
+		}
+
+		catch (RecognitionException re) {
+			recoverAndAppendSkippedTokens(re);
+		} finally {
+		}
+		return current;
+	}
+
+	public final String entryRuleOpAdd() throws RecognitionException {
+		String current = null;
+
+		AntlrDatatypeRuleToken iv_ruleOpAdd = null;
+
+		try {
+
+			{
+				if (state.backtracking == 0) {
+					newCompositeNode(grammarAccess.getOpAddRule());
+				}
+				pushFollow(FOLLOW_ruleOpAdd_in_entryRuleOpAdd10770);
+				iv_ruleOpAdd = ruleOpAdd();
+
+				state._fsp--;
+				if (state.failed)
+					return current;
+				if (state.backtracking == 0) {
+					current = iv_ruleOpAdd.getText();
+				}
+				match(input, EOF, FOLLOW_EOF_in_entryRuleOpAdd10781);
+				if (state.failed)
+					return current;
+
+			}
+
+		}
+
+		catch (RecognitionException re) {
+			recoverAndAppendSkippedTokens(re);
+		} finally {
+		}
+		return current;
+	}
+
+	public final AntlrDatatypeRuleToken ruleOpAdd() throws RecognitionException {
+		AntlrDatatypeRuleToken current = new AntlrDatatypeRuleToken();
+
+		Token kw = null;
+
+		enterRule();
+
+		try {
+
+			{
+
+				int alt117 = 2;
+				int LA117_0 = input.LA(1);
+
+				if ((LA117_0 == 64)) {
+					alt117 = 1;
+				} else if ((LA117_0 == 83)) {
+					alt117 = 2;
+				} else {
+					if (state.backtracking > 0) {
+						state.failed = true;
+						return current;
+					}
+					NoViableAltException nvae = new NoViableAltException("", 117, 0, input);
+
+					throw nvae;
+				}
+				switch (alt117) {
+					case 1:
+
+					{
+						kw = (Token) match(input, 64, FOLLOW_64_in_ruleOpAdd10819);
+						if (state.failed)
+							return current;
+						if (state.backtracking == 0) {
+
+							current.merge(kw);
+							newLeafNode(kw, grammarAccess.getOpAddAccess().getPlusSignKeyword_0());
+
+						}
+
+					}
+						break;
+					case 2:
+
+					{
+						kw = (Token) match(input, 83, FOLLOW_83_in_ruleOpAdd10838);
+						if (state.failed)
+							return current;
+						if (state.backtracking == 0) {
+
+							current.merge(kw);
+							newLeafNode(kw, grammarAccess.getOpAddAccess().getHyphenMinusKeyword_1());
+
+						}
+
+					}
+						break;
+
+				}
+
+			}
+
+			if (state.backtracking == 0) {
+				leaveRule();
+			}
+		}
+
+		catch (RecognitionException re) {
+			recoverAndAppendSkippedTokens(re);
+		} finally {
+		}
+		return current;
+	}
+
+	public final EObject entryRuleXMultiplicativeExpression() throws RecognitionException {
+		EObject current = null;
+
+		EObject iv_ruleXMultiplicativeExpression = null;
+
+		try {
+
+			{
+				if (state.backtracking == 0) {
+					newCompositeNode(grammarAccess.getXMultiplicativeExpressionRule());
+				}
+				pushFollow(FOLLOW_ruleXMultiplicativeExpression_in_entryRuleXMultiplicativeExpression10878);
+				iv_ruleXMultiplicativeExpression = ruleXMultiplicativeExpression();
+
+				state._fsp--;
+				if (state.failed)
+					return current;
+				if (state.backtracking == 0) {
+					current = iv_ruleXMultiplicativeExpression;
+				}
+				match(input, EOF, FOLLOW_EOF_in_entryRuleXMultiplicativeExpression10888);
+				if (state.failed)
+					return current;
+
+			}
+
+		}
+
+		catch (RecognitionException re) {
+			recoverAndAppendSkippedTokens(re);
+		} finally {
+		}
+		return current;
+	}
+
+	public final EObject ruleXMultiplicativeExpression() throws RecognitionException {
+		EObject current = null;
+
+		EObject this_XUnaryOperation_0 = null;
+
+		EObject lv_rightOperand_3_0 = null;
+
+		enterRule();
+
+		try {
+
+			{
+
+				{
+					if (state.backtracking == 0) {
+
+						newCompositeNode(grammarAccess.getXMultiplicativeExpressionAccess()
+								.getXUnaryOperationParserRuleCall_0());
+
+					}
+					pushFollow(FOLLOW_ruleXUnaryOperation_in_ruleXMultiplicativeExpression10935);
+					this_XUnaryOperation_0 = ruleXUnaryOperation();
+
+					state._fsp--;
+					if (state.failed)
+						return current;
+					if (state.backtracking == 0) {
+
+						current = this_XUnaryOperation_0;
+						afterParserOrEnumRuleCall();
+
+					}
+
+					loop118: do {
+						int alt118 = 2;
+						switch (input.LA(1)) {
+							case 84: {
+								int LA118_2 = input.LA(2);
+
+								if ((synpred17_InternalXtend())) {
+									alt118 = 1;
+								}
+
+							}
+								break;
+							case 85: {
+								int LA118_3 = input.LA(2);
+
+								if ((synpred17_InternalXtend())) {
+									alt118 = 1;
+								}
+
+							}
+								break;
+							case 86: {
+								int LA118_4 = input.LA(2);
+
+								if ((synpred17_InternalXtend())) {
+									alt118 = 1;
+								}
+
+							}
+								break;
+							case 87: {
+								int LA118_5 = input.LA(2);
+
+								if ((synpred17_InternalXtend())) {
+									alt118 = 1;
+								}
+
+							}
+								break;
+
+						}
+
+						switch (alt118) {
+							case 1:
+
+							{
+
+								{
+
+									{
+
+										{
+											if (state.backtracking == 0) {
+
+												current = forceCreateModelElementAndSet(grammarAccess
+														.getXMultiplicativeExpressionAccess()
+														.getXBinaryOperationLeftOperandAction_1_0_0_0(),XBINARY_OPERATION__LEFT_OPERAND,  current);
+
+											}
+
+										}
+
+										{
+
+											{
+												if (state.backtracking == 0) {
+
+													if (current == null) {
+														current = createModelElement(grammarAccess
+																.getXMultiplicativeExpressionRule());
+													}
+
+												}
+												if (state.backtracking == 0) {
+
+													newCompositeNode(grammarAccess.getXMultiplicativeExpressionAccess()
+															.getFeatureJvmIdentifiableElementCrossReference_1_0_0_1_0());
+
+												}
+												pushFollow(FOLLOW_ruleOpMulti_in_ruleXMultiplicativeExpression10988);
+												ruleOpMulti();
+
+												state._fsp--;
+												if (state.failed)
+													return current;
+												if (state.backtracking == 0) {
+
+													afterParserOrEnumRuleCall();
+
+												}
+
+											}
+
+										}
+
+									}
+
+								}
+
+								{
+
+									{
+										if (state.backtracking == 0) {
+
+											newCompositeNode(grammarAccess.getXMultiplicativeExpressionAccess()
+													.getRightOperandXUnaryOperationParserRuleCall_1_1_0());
+
+										}
+										pushFollow(FOLLOW_ruleXUnaryOperation_in_ruleXMultiplicativeExpression11011);
+										lv_rightOperand_3_0 = ruleXUnaryOperation();
+
+										state._fsp--;
+										if (state.failed)
+											return current;
+										if (state.backtracking == 0) {
+
+											if (current == null) {
+												current = createModelElementForParent(grammarAccess
+														.getXMultiplicativeExpressionRule());
+											}
+											set(current, XBINARY_OPERATION__RIGHT_OPERAND, lv_rightOperand_3_0, null);
+											afterParserOrEnumRuleCall();
+
+										}
+
+									}
+
+								}
+
+							}
+								break;
+
+							default:
+								break loop118;
+						}
+					} while (true);
+
+				}
+
+			}
+
+			if (state.backtracking == 0) {
+				leaveRule();
+			}
+		}
+
+		catch (RecognitionException re) {
+			recoverAndAppendSkippedTokens(re);
+		} finally {
+		}
+		return current;
+	}
+
+	public final String entryRuleOpMulti() throws RecognitionException {
+		String current = null;
+
+		AntlrDatatypeRuleToken iv_ruleOpMulti = null;
+
+		try {
+
+			{
+				if (state.backtracking == 0) {
+					newCompositeNode(grammarAccess.getOpMultiRule());
+				}
+				pushFollow(FOLLOW_ruleOpMulti_in_entryRuleOpMulti11050);
+				iv_ruleOpMulti = ruleOpMulti();
+
+				state._fsp--;
+				if (state.failed)
+					return current;
+				if (state.backtracking == 0) {
+					current = iv_ruleOpMulti.getText();
+				}
+				match(input, EOF, FOLLOW_EOF_in_entryRuleOpMulti11061);
+				if (state.failed)
+					return current;
+
+			}
+
+		}
+
+		catch (RecognitionException re) {
+			recoverAndAppendSkippedTokens(re);
+		} finally {
+		}
+		return current;
+	}
+
+	public final AntlrDatatypeRuleToken ruleOpMulti() throws RecognitionException {
+		AntlrDatatypeRuleToken current = new AntlrDatatypeRuleToken();
+
+		Token kw = null;
+
+		enterRule();
+
+		try {
+
+			{
+
+				int alt119 = 4;
+				switch (input.LA(1)) {
+					case 84: {
+						alt119 = 1;
+					}
+						break;
+					case 85: {
+						alt119 = 2;
+					}
+						break;
+					case 86: {
+						alt119 = 3;
+					}
+						break;
+					case 87: {
+						alt119 = 4;
+					}
+						break;
+					default:
+						if (state.backtracking > 0) {
+							state.failed = true;
+							return current;
+						}
+						NoViableAltException nvae = new NoViableAltException("", 119, 0, input);
+
+						throw nvae;
+				}
+
+				switch (alt119) {
+					case 1:
+
+					{
+						kw = (Token) match(input, 84, FOLLOW_84_in_ruleOpMulti11099);
+						if (state.failed)
+							return current;
+						if (state.backtracking == 0) {
+
+							current.merge(kw);
+							newLeafNode(kw, grammarAccess.getOpMultiAccess().getAsteriskKeyword_0());
+
+						}
+
+					}
+						break;
+					case 2:
+
+					{
+						kw = (Token) match(input, 85, FOLLOW_85_in_ruleOpMulti11118);
+						if (state.failed)
+							return current;
+						if (state.backtracking == 0) {
+
+							current.merge(kw);
+							newLeafNode(kw, grammarAccess.getOpMultiAccess().getAsteriskAsteriskKeyword_1());
+
+						}
+
+					}
+						break;
+					case 3:
+
+					{
+						kw = (Token) match(input, 86, FOLLOW_86_in_ruleOpMulti11137);
+						if (state.failed)
+							return current;
+						if (state.backtracking == 0) {
+
+							current.merge(kw);
+							newLeafNode(kw, grammarAccess.getOpMultiAccess().getSolidusKeyword_2());
+
+						}
+
+					}
+						break;
+					case 4:
+
+					{
+						kw = (Token) match(input, 87, FOLLOW_87_in_ruleOpMulti11156);
+						if (state.failed)
+							return current;
+						if (state.backtracking == 0) {
+
+							current.merge(kw);
+							newLeafNode(kw, grammarAccess.getOpMultiAccess().getPercentSignKeyword_3());
+
+						}
+
+					}
+						break;
+
+				}
+
+			}
+
+			if (state.backtracking == 0) {
+				leaveRule();
+			}
+		}
+
+		catch (RecognitionException re) {
+			recoverAndAppendSkippedTokens(re);
+		} finally {
+		}
+		return current;
+	}
+
+	public final EObject entryRuleXUnaryOperation() throws RecognitionException {
+		EObject current = null;
+
+		EObject iv_ruleXUnaryOperation = null;
+
+		try {
+
+			{
+				if (state.backtracking == 0) {
+					newCompositeNode(grammarAccess.getXUnaryOperationRule());
+				}
+				pushFollow(FOLLOW_ruleXUnaryOperation_in_entryRuleXUnaryOperation11196);
+				iv_ruleXUnaryOperation = ruleXUnaryOperation();
+
+				state._fsp--;
+				if (state.failed)
+					return current;
+				if (state.backtracking == 0) {
+					current = iv_ruleXUnaryOperation;
+				}
+				match(input, EOF, FOLLOW_EOF_in_entryRuleXUnaryOperation11206);
+				if (state.failed)
+					return current;
+
+			}
+
+		}
+
+		catch (RecognitionException re) {
+			recoverAndAppendSkippedTokens(re);
+		} finally {
+		}
+		return current;
+	}
+
+	public final EObject ruleXUnaryOperation() throws RecognitionException {
+		EObject current = null;
+
+		EObject lv_operand_2_0 = null;
+
+		EObject this_XCastedExpression_3 = null;
+
+		enterRule();
+
+		try {
+
+			{
+
+				int alt120 = 2;
+				int LA120_0 = input.LA(1);
+
+				if ((LA120_0 == 64 || LA120_0 == 83 || LA120_0 == 88)) {
+					alt120 = 1;
+				} else if (((LA120_0 >= RULE_ID && LA120_0 <= RULE_RICH_TEXT_START)
+						|| (LA120_0 >= RULE_HEX && LA120_0 <= RULE_DECIMAL) || LA120_0 == 20
+						|| (LA120_0 >= 22 && LA120_0 <= 23) || (LA120_0 >= 26 && LA120_0 <= 28)
+						|| (LA120_0 >= 30 && LA120_0 <= 32) || (LA120_0 >= 34 && LA120_0 <= 35)
+						|| (LA120_0 >= 37 && LA120_0 <= 45) || (LA120_0 >= 48 && LA120_0 <= 50) || LA120_0 == 52
+						|| (LA120_0 >= 93 && LA120_0 <= 94) || LA120_0 == 97 || LA120_0 == 99
+						|| (LA120_0 >= 102 && LA120_0 <= 105) || (LA120_0 >= 107 && LA120_0 <= 113))) {
+					alt120 = 2;
+				} else {
+					if (state.backtracking > 0) {
+						state.failed = true;
+						return current;
+					}
+					NoViableAltException nvae = new NoViableAltException("", 120, 0, input);
+
+					throw nvae;
+				}
+				switch (alt120) {
+					case 1:
+
+					{
+
+						{
+
+							{
+								if (state.backtracking == 0) {
+
+									current = forceCreateModelElement(grammarAccess.getXUnaryOperationAccess()
+											.getXUnaryOperationAction_0_0(), current);
+
+								}
+
+							}
+
+							{
+
+								{
+									if (state.backtracking == 0) {
+
+										if (current == null) {
+											current = createModelElement(grammarAccess.getXUnaryOperationRule());
+										}
+
+									}
+									if (state.backtracking == 0) {
+
+										newCompositeNode(grammarAccess.getXUnaryOperationAccess()
+												.getFeatureJvmIdentifiableElementCrossReference_0_1_0());
+
+									}
+									pushFollow(FOLLOW_ruleOpUnary_in_ruleXUnaryOperation11264);
+									ruleOpUnary();
+
+									state._fsp--;
+									if (state.failed)
+										return current;
+									if (state.backtracking == 0) {
+
+										afterParserOrEnumRuleCall();
+
+									}
+
+								}
+
+							}
+
+							{
+
+								{
+									if (state.backtracking == 0) {
+
+										newCompositeNode(grammarAccess.getXUnaryOperationAccess()
+												.getOperandXUnaryOperationParserRuleCall_0_2_0());
+
+									}
+									pushFollow(FOLLOW_ruleXUnaryOperation_in_ruleXUnaryOperation11285);
+									lv_operand_2_0 = ruleXUnaryOperation();
+
+									state._fsp--;
+									if (state.failed)
+										return current;
+									if (state.backtracking == 0) {
+
+										if (current == null) {
+											current = createModelElementForParent(grammarAccess
+													.getXUnaryOperationRule());
+										}
+										set(current, XUNARY_OPERATION__OPERAND, lv_operand_2_0, null);
+										afterParserOrEnumRuleCall();
+
+									}
+
+								}
+
+							}
+
+						}
+
+					}
+						break;
+					case 2:
+
+					{
+						if (state.backtracking == 0) {
+
+							newCompositeNode(grammarAccess.getXUnaryOperationAccess()
+									.getXCastedExpressionParserRuleCall_1());
+
+						}
+						pushFollow(FOLLOW_ruleXCastedExpression_in_ruleXUnaryOperation11314);
+						this_XCastedExpression_3 = ruleXCastedExpression();
+
+						state._fsp--;
+						if (state.failed)
+							return current;
+						if (state.backtracking == 0) {
+
+							current = this_XCastedExpression_3;
+							afterParserOrEnumRuleCall();
+
+						}
+
+					}
+						break;
+
+				}
+
+			}
+
+			if (state.backtracking == 0) {
+				leaveRule();
+			}
+		}
+
+		catch (RecognitionException re) {
+			recoverAndAppendSkippedTokens(re);
+		} finally {
+		}
+		return current;
+	}
+
+	public final String entryRuleOpUnary() throws RecognitionException {
+		String current = null;
+
+		AntlrDatatypeRuleToken iv_ruleOpUnary = null;
+
+		try {
+
+			{
+				if (state.backtracking == 0) {
+					newCompositeNode(grammarAccess.getOpUnaryRule());
+				}
+				pushFollow(FOLLOW_ruleOpUnary_in_entryRuleOpUnary11350);
+				iv_ruleOpUnary = ruleOpUnary();
+
+				state._fsp--;
+				if (state.failed)
+					return current;
+				if (state.backtracking == 0) {
+					current = iv_ruleOpUnary.getText();
+				}
+				match(input, EOF, FOLLOW_EOF_in_entryRuleOpUnary11361);
+				if (state.failed)
+					return current;
+
+			}
+
+		}
+
+		catch (RecognitionException re) {
+			recoverAndAppendSkippedTokens(re);
+		} finally {
+		}
+		return current;
+	}
+
+	public final AntlrDatatypeRuleToken ruleOpUnary() throws RecognitionException {
+		AntlrDatatypeRuleToken current = new AntlrDatatypeRuleToken();
+
+		Token kw = null;
+
+		enterRule();
+
+		try {
+
+			{
+
+				int alt121 = 3;
+				switch (input.LA(1)) {
+					case 88: {
+						alt121 = 1;
+					}
+						break;
+					case 83: {
+						alt121 = 2;
+					}
+						break;
+					case 64: {
+						alt121 = 3;
+					}
+						break;
+					default:
+						if (state.backtracking > 0) {
+							state.failed = true;
+							return current;
+						}
+						NoViableAltException nvae = new NoViableAltException("", 121, 0, input);
+
+						throw nvae;
+				}
+
+				switch (alt121) {
+					case 1:
+
+					{
+						kw = (Token) match(input, 88, FOLLOW_88_in_ruleOpUnary11399);
+						if (state.failed)
+							return current;
+						if (state.backtracking == 0) {
+
+							current.merge(kw);
+							newLeafNode(kw, grammarAccess.getOpUnaryAccess().getExclamationMarkKeyword_0());
+
+						}
+
+					}
+						break;
+					case 2:
+
+					{
+						kw = (Token) match(input, 83, FOLLOW_83_in_ruleOpUnary11418);
+						if (state.failed)
+							return current;
+						if (state.backtracking == 0) {
+
+							current.merge(kw);
+							newLeafNode(kw, grammarAccess.getOpUnaryAccess().getHyphenMinusKeyword_1());
+
+						}
+
+					}
+						break;
+					case 3:
+
+					{
+						kw = (Token) match(input, 64, FOLLOW_64_in_ruleOpUnary11437);
+						if (state.failed)
+							return current;
+						if (state.backtracking == 0) {
+
+							current.merge(kw);
+							newLeafNode(kw, grammarAccess.getOpUnaryAccess().getPlusSignKeyword_2());
+
+						}
+
+					}
+						break;
+
+				}
+
+			}
+
+			if (state.backtracking == 0) {
+				leaveRule();
+			}
+		}
+
+		catch (RecognitionException re) {
+			recoverAndAppendSkippedTokens(re);
+		} finally {
+		}
+		return current;
+	}
+
+	public final EObject entryRuleXCastedExpression() throws RecognitionException {
+		EObject current = null;
+
+		EObject iv_ruleXCastedExpression = null;
+
+		try {
+
+			{
+				if (state.backtracking == 0) {
+					newCompositeNode(grammarAccess.getXCastedExpressionRule());
+				}
+				pushFollow(FOLLOW_ruleXCastedExpression_in_entryRuleXCastedExpression11477);
+				iv_ruleXCastedExpression = ruleXCastedExpression();
+
+				state._fsp--;
+				if (state.failed)
+					return current;
+				if (state.backtracking == 0) {
+					current = iv_ruleXCastedExpression;
+				}
+				match(input, EOF, FOLLOW_EOF_in_entryRuleXCastedExpression11487);
+				if (state.failed)
+					return current;
+
+			}
+
+		}
+
+		catch (RecognitionException re) {
+			recoverAndAppendSkippedTokens(re);
+		} finally {
+		}
+		return current;
+	}
+
+	public final EObject ruleXCastedExpression() throws RecognitionException {
+		EObject current = null;
+
+		Token otherlv_2 = null;
+		EObject this_XMemberFeatureCall_0 = null;
+
+		EObject lv_type_3_0 = null;
+
+		enterRule();
+
+		try {
+
+			{
+
+				{
+					if (state.backtracking == 0) {
+
+						newCompositeNode(grammarAccess.getXCastedExpressionAccess()
+								.getXMemberFeatureCallParserRuleCall_0());
+
+					}
+					pushFollow(FOLLOW_ruleXMemberFeatureCall_in_ruleXCastedExpression11534);
+					this_XMemberFeatureCall_0 = ruleXMemberFeatureCall();
+
+					state._fsp--;
+					if (state.failed)
+						return current;
+					if (state.backtracking == 0) {
+
+						current = this_XMemberFeatureCall_0;
+						afterParserOrEnumRuleCall();
+
+					}
+
+					loop122: do {
+						int alt122 = 2;
+						int LA122_0 = input.LA(1);
+
+						if ((LA122_0 == 89)) {
+							int LA122_2 = input.LA(2);
+
+							if ((synpred18_InternalXtend())) {
+								alt122 = 1;
+							}
+
+						}
+
+						switch (alt122) {
+							case 1:
+
+							{
+
+								{
+
+									{
+
+										{
+											if (state.backtracking == 0) {
+
+												current = forceCreateModelElementAndSet(grammarAccess
+														.getXCastedExpressionAccess()
+														.getXCastedExpressionTargetAction_1_0_0_0(),XCASTED_EXPRESSION__TARGET, current);
+
+											}
+
+										}
+
+										otherlv_2 = (Token) match(input, 89, FOLLOW_89_in_ruleXCastedExpression11569);
+										if (state.failed)
+											return current;
+										if (state.backtracking == 0) {
+
+											newLeafNode(otherlv_2, grammarAccess.getXCastedExpressionAccess()
+													.getAsKeyword_1_0_0_1());
+
+										}
+
+									}
+
+								}
+
+								{
+
+									{
+										if (state.backtracking == 0) {
+
+											newCompositeNode(grammarAccess.getXCastedExpressionAccess()
+													.getTypeJvmTypeReferenceParserRuleCall_1_1_0());
+
+										}
+										pushFollow(FOLLOW_ruleJvmTypeReference_in_ruleXCastedExpression11592);
+										lv_type_3_0 = ruleJvmTypeReference();
+
+										state._fsp--;
+										if (state.failed)
+											return current;
+										if (state.backtracking == 0) {
+
+											if (current == null) {
+												current = createModelElementForParent(grammarAccess
+														.getXCastedExpressionRule());
+											}
+											set(current, XCASTED_EXPRESSION__TYPE, lv_type_3_0, null);
+											afterParserOrEnumRuleCall();
+
+										}
+
+									}
+
+								}
+
+							}
+								break;
+
+							default:
+								break loop122;
+						}
+					} while (true);
+
+				}
+
+			}
+
+			if (state.backtracking == 0) {
+				leaveRule();
+			}
+		}
+
+		catch (RecognitionException re) {
+			recoverAndAppendSkippedTokens(re);
+		} finally {
+		}
+		return current;
+	}
+
+	public final EObject entryRuleXMemberFeatureCall() throws RecognitionException {
+		EObject current = null;
+
+		EObject iv_ruleXMemberFeatureCall = null;
+
+		try {
+
+			{
+				if (state.backtracking == 0) {
+					newCompositeNode(grammarAccess.getXMemberFeatureCallRule());
+				}
+				pushFollow(FOLLOW_ruleXMemberFeatureCall_in_entryRuleXMemberFeatureCall11630);
+				iv_ruleXMemberFeatureCall = ruleXMemberFeatureCall();
+
+				state._fsp--;
+				if (state.failed)
+					return current;
+				if (state.backtracking == 0) {
+					current = iv_ruleXMemberFeatureCall;
+				}
+				match(input, EOF, FOLLOW_EOF_in_entryRuleXMemberFeatureCall11640);
+				if (state.failed)
+					return current;
+
+			}
+
+		}
+
+		catch (RecognitionException re) {
+			recoverAndAppendSkippedTokens(re);
+		} finally {
+		}
+		return current;
+	}
+
+	public final EObject ruleXMemberFeatureCall() throws RecognitionException {
+		EObject current = null;
+
+		Token otherlv_2 = null;
+		Token otherlv_7 = null;
+		Token lv_nullSafe_8_0 = null;
+		Token lv_spreading_9_0 = null;
+		Token otherlv_10 = null;
+		Token otherlv_12 = null;
+		Token otherlv_14 = null;
+		Token lv_explicitOperationCall_16_0 = null;
+		Token otherlv_19 = null;
+		Token otherlv_21 = null;
+		EObject this_XPrimaryExpression_0 = null;
+
+		EObject lv_value_5_0 = null;
+
+		EObject lv_typeArguments_11_0 = null;
+
+		EObject lv_typeArguments_13_0 = null;
+
+		EObject lv_memberCallArguments_17_0 = null;
+
+		EObject lv_memberCallArguments_18_0 = null;
+
+		EObject lv_memberCallArguments_20_0 = null;
+
+		EObject lv_memberCallArguments_22_0 = null;
+
+		enterRule();
+
+		try {
+
+			{
+
+				{
+					if (state.backtracking == 0) {
+
+						newCompositeNode(grammarAccess.getXMemberFeatureCallAccess()
+								.getXPrimaryExpressionParserRuleCall_0());
+
+					}
+					pushFollow(FOLLOW_ruleXPrimaryExpression_in_ruleXMemberFeatureCall11687);
+					this_XPrimaryExpression_0 = ruleXPrimaryExpression();
+
+					state._fsp--;
+					if (state.failed)
+						return current;
+					if (state.backtracking == 0) {
+
+						current = this_XPrimaryExpression_0;
+						afterParserOrEnumRuleCall();
+
+					}
+
+					loop130: do {
+						int alt130 = 3;
+						switch (input.LA(1)) {
+							case 90: {
+								int LA130_2 = input.LA(2);
+
+								if ((synpred19_InternalXtend())) {
+									alt130 = 1;
+								} else if ((synpred20_InternalXtend())) {
+									alt130 = 2;
+								}
+
+							}
+								break;
+							case 91: {
+								int LA130_3 = input.LA(2);
+
+								if ((synpred20_InternalXtend())) {
+									alt130 = 2;
+								}
+
+							}
+								break;
+							case 92: {
+								int LA130_4 = input.LA(2);
+
+								if ((synpred20_InternalXtend())) {
+									alt130 = 2;
+								}
+
+							}
+								break;
+
+						}
+
+						switch (alt130) {
+							case 1:
+
+							{
+
+								{
+
+									{
+
+										{
+
+											{
+												if (state.backtracking == 0) {
+
+													current = forceCreateModelElementAndSet(grammarAccess
+															.getXMemberFeatureCallAccess()
+															.getXAssignmentAssignableAction_1_0_0_0_0(), XASSIGNMENT__ASSIGNABLE, current);
+
+												}
+
+											}
+
+											otherlv_2 = (Token) match(input, 90,
+													FOLLOW_90_in_ruleXMemberFeatureCall11736);
+											if (state.failed)
+												return current;
+											if (state.backtracking == 0) {
+
+												newLeafNode(otherlv_2, grammarAccess.getXMemberFeatureCallAccess()
+														.getFullStopKeyword_1_0_0_0_1());
+
+											}
+
+											{
+
+												{
+													if (state.backtracking == 0) {
+
+														if (current == null) {
+															current = createModelElement(grammarAccess
+																	.getXMemberFeatureCallRule());
+														}
+
+													}
+													if (state.backtracking == 0) {
+
+														newCompositeNode(grammarAccess
+																.getXMemberFeatureCallAccess()
+																.getFeatureJvmIdentifiableElementCrossReference_1_0_0_0_2_0());
+
+													}
+													pushFollow(FOLLOW_ruleFeatureCallID_in_ruleXMemberFeatureCall11759);
+													ruleFeatureCallID();
+
+													state._fsp--;
+													if (state.failed)
+														return current;
+													if (state.backtracking == 0) {
+
+														afterParserOrEnumRuleCall();
+
+													}
+
+												}
+
+											}
+
+											if (state.backtracking == 0) {
+
+												newCompositeNode(grammarAccess.getXMemberFeatureCallAccess()
+														.getOpSingleAssignParserRuleCall_1_0_0_0_3());
+
+											}
+											pushFollow(FOLLOW_ruleOpSingleAssign_in_ruleXMemberFeatureCall11775);
+											ruleOpSingleAssign();
+
+											state._fsp--;
+											if (state.failed)
+												return current;
+											if (state.backtracking == 0) {
+
+												afterParserOrEnumRuleCall();
+
+											}
+
+										}
+
+									}
+
+									{
+
+										{
+											if (state.backtracking == 0) {
+
+												newCompositeNode(grammarAccess.getXMemberFeatureCallAccess()
+														.getValueXAssignmentParserRuleCall_1_0_1_0());
+
+											}
+											pushFollow(FOLLOW_ruleXAssignment_in_ruleXMemberFeatureCall11797);
+											lv_value_5_0 = ruleXAssignment();
+
+											state._fsp--;
+											if (state.failed)
+												return current;
+											if (state.backtracking == 0) {
+
+												if (current == null) {
+													current = createModelElementForParent(grammarAccess
+															.getXMemberFeatureCallRule());
+												}
+												set(current, XASSIGNMENT__VALUE, lv_value_5_0, null);
+												afterParserOrEnumRuleCall();
+
+											}
+
+										}
+
+									}
+
+								}
+
+							}
+								break;
+							case 2:
+
+							{
+
+								{
+
+									{
+
+										{
+
+											{
+												if (state.backtracking == 0) {
+
+													current = forceCreateModelElementAndSet(grammarAccess
+															.getXMemberFeatureCallAccess()
+															.getXMemberFeatureCallMemberCallTargetAction_1_1_0_0_0(),XMEMBER_FEATURE_CALL__MEMBER_CALL_TARGET,
+															current);
+
+												}
+
+											}
+
+											int alt123 = 3;
+											switch (input.LA(1)) {
+												case 90: {
+													alt123 = 1;
+												}
+													break;
+												case 91: {
+													alt123 = 2;
+												}
+													break;
+												case 92: {
+													alt123 = 3;
+												}
+													break;
+												default:
+													if (state.backtracking > 0) {
+														state.failed = true;
+														return current;
+													}
+													NoViableAltException nvae = new NoViableAltException("", 123, 0,
+															input);
+
+													throw nvae;
+											}
+
+											switch (alt123) {
+												case 1:
+
+												{
+													otherlv_7 = (Token) match(input, 90,
+															FOLLOW_90_in_ruleXMemberFeatureCall11883);
+													if (state.failed)
+														return current;
+													if (state.backtracking == 0) {
+
+														newLeafNode(otherlv_7, grammarAccess
+																.getXMemberFeatureCallAccess()
+																.getFullStopKeyword_1_1_0_0_1_0());
+
+													}
+
+												}
+													break;
+												case 2:
+
+												{
+
+													{
+
+														{
+															lv_nullSafe_8_0 = (Token) match(input, 91,
+																	FOLLOW_91_in_ruleXMemberFeatureCall11907);
+															if (state.failed)
+																return current;
+															if (state.backtracking == 0) {
+
+																newLeafNode(
+																		lv_nullSafe_8_0,
+																		grammarAccess
+																				.getXMemberFeatureCallAccess()
+																				.getNullSafeQuestionMarkFullStopKeyword_1_1_0_0_1_1_0());
+
+															}
+															if (state.backtracking == 0) {
+
+																if (current == null) {
+																	current = createModelElement(grammarAccess
+																			.getXMemberFeatureCallRule());
+																}
+																setWithLastConsumed(current, XMEMBER_FEATURE_CALL__NULL_SAFE, true, "?.");
+
+															}
+
+														}
+
+													}
+
+												}
+													break;
+												case 3:
+
+												{
+
+													{
+
+														{
+															lv_spreading_9_0 = (Token) match(input, 92,
+																	FOLLOW_92_in_ruleXMemberFeatureCall11944);
+															if (state.failed)
+																return current;
+															if (state.backtracking == 0) {
+
+																newLeafNode(
+																		lv_spreading_9_0,
+																		grammarAccess
+																				.getXMemberFeatureCallAccess()
+																				.getSpreadingAsteriskFullStopKeyword_1_1_0_0_1_2_0());
+
+															}
+															if (state.backtracking == 0) {
+
+																if (current == null) {
+																	current = createModelElement(grammarAccess
+																			.getXMemberFeatureCallRule());
+																}
+																setWithLastConsumed(current, XMEMBER_FEATURE_CALL__SPREADING, true, "*.");
+
+															}
+
+														}
+
+													}
+
+												}
+													break;
+
+											}
+
+										}
+
+									}
+
+									int alt125 = 2;
+									int LA125_0 = input.LA(1);
+
+									if ((LA125_0 == 23)) {
+										alt125 = 1;
+									}
+									switch (alt125) {
+										case 1:
+
+										{
+											otherlv_10 = (Token) match(input, 23,
+													FOLLOW_23_in_ruleXMemberFeatureCall11973);
+											if (state.failed)
+												return current;
+											if (state.backtracking == 0) {
+
+												newLeafNode(otherlv_10, grammarAccess.getXMemberFeatureCallAccess()
+														.getLessThanSignKeyword_1_1_1_0());
+
+											}
+
+											{
+
+												{
+													if (state.backtracking == 0) {
+
+														newCompositeNode(grammarAccess
+																.getXMemberFeatureCallAccess()
+																.getTypeArgumentsJvmArgumentTypeReferenceParserRuleCall_1_1_1_1_0());
+
+													}
+													pushFollow(FOLLOW_ruleJvmArgumentTypeReference_in_ruleXMemberFeatureCall11994);
+													lv_typeArguments_11_0 = ruleJvmArgumentTypeReference();
+
+													state._fsp--;
+													if (state.failed)
+														return current;
+													if (state.backtracking == 0) {
+
+														if (current == null) {
+															current = createModelElementForParent(grammarAccess
+																	.getXMemberFeatureCallRule());
+														}
+														add(current, XABSTRACT_FEATURE_CALL__TYPE_ARGUMENTS, lv_typeArguments_11_0,
+																"JvmArgumentTypeReference");
+														afterParserOrEnumRuleCall();
+
+													}
+
+												}
+
+											}
+
+											loop124: do {
+												int alt124 = 2;
+												int LA124_0 = input.LA(1);
+
+												if ((LA124_0 == 24)) {
+													alt124 = 1;
+												}
+
+												switch (alt124) {
+													case 1:
+
+													{
+														otherlv_12 = (Token) match(input, 24,
+																FOLLOW_24_in_ruleXMemberFeatureCall12007);
+														if (state.failed)
+															return current;
+														if (state.backtracking == 0) {
+
+															newLeafNode(otherlv_12, grammarAccess
+																	.getXMemberFeatureCallAccess()
+																	.getCommaKeyword_1_1_1_2_0());
+
+														}
+
+														{
+
+															{
+																if (state.backtracking == 0) {
+
+																	newCompositeNode(grammarAccess
+																			.getXMemberFeatureCallAccess()
+																			.getTypeArgumentsJvmArgumentTypeReferenceParserRuleCall_1_1_1_2_1_0());
+
+																}
+																pushFollow(FOLLOW_ruleJvmArgumentTypeReference_in_ruleXMemberFeatureCall12028);
+																lv_typeArguments_13_0 = ruleJvmArgumentTypeReference();
+
+																state._fsp--;
+																if (state.failed)
+																	return current;
+																if (state.backtracking == 0) {
+
+																	if (current == null) {
+																		current = createModelElementForParent(grammarAccess
+																				.getXMemberFeatureCallRule());
+																	}
+																	add(current, XABSTRACT_FEATURE_CALL__TYPE_ARGUMENTS,
+																			lv_typeArguments_13_0,
+																			"JvmArgumentTypeReference");
+																	afterParserOrEnumRuleCall();
+
+																}
+
+															}
+
+														}
+
+													}
+														break;
+
+													default:
+														break loop124;
+												}
+											} while (true);
+
+											otherlv_14 = (Token) match(input, 25,
+													FOLLOW_25_in_ruleXMemberFeatureCall12042);
+											if (state.failed)
+												return current;
+											if (state.backtracking == 0) {
+
+												newLeafNode(otherlv_14, grammarAccess.getXMemberFeatureCallAccess()
+														.getGreaterThanSignKeyword_1_1_1_3());
+
+											}
+
+										}
+											break;
+
+									}
+
+									{
+
+										{
+											if (state.backtracking == 0) {
+
+												if (current == null) {
+													current = createModelElement(grammarAccess
+															.getXMemberFeatureCallRule());
+												}
+
+											}
+											if (state.backtracking == 0) {
+
+												newCompositeNode(grammarAccess.getXMemberFeatureCallAccess()
+														.getFeatureJvmIdentifiableElementCrossReference_1_1_2_0());
+
+											}
+											pushFollow(FOLLOW_ruleFeatureCallID_in_ruleXMemberFeatureCall12067);
+											ruleFeatureCallID();
+
+											state._fsp--;
+											if (state.failed)
+												return current;
+											if (state.backtracking == 0) {
+
+												afterParserOrEnumRuleCall();
+
+											}
+
+										}
+
+									}
+
+									int alt128 = 2;
+									alt128 = dfa128.predict(input);
+									switch (alt128) {
+										case 1:
+
+										{
+
+											{
+
+												{
+													lv_explicitOperationCall_16_0 = (Token) match(input, 35,
+															FOLLOW_35_in_ruleXMemberFeatureCall12101);
+													if (state.failed)
+														return current;
+													if (state.backtracking == 0) {
+
+														newLeafNode(
+																lv_explicitOperationCall_16_0,
+																grammarAccess
+																		.getXMemberFeatureCallAccess()
+																		.getExplicitOperationCallLeftParenthesisKeyword_1_1_3_0_0());
+
+													}
+													if (state.backtracking == 0) {
+
+														if (current == null) {
+															current = createModelElement(grammarAccess
+																	.getXMemberFeatureCallRule());
+														}
+														setWithLastConsumed(current, XMEMBER_FEATURE_CALL__EXPLICIT_OPERATION_CALL, true, "(");
+
+													}
+
+												}
+
+											}
+
+											int alt127 = 3;
+											alt127 = dfa127.predict(input);
+											switch (alt127) {
+												case 1:
+
+												{
+
+													{
+
+														{
+															if (state.backtracking == 0) {
+
+																newCompositeNode(grammarAccess
+																		.getXMemberFeatureCallAccess()
+																		.getMemberCallArgumentsXShortClosureParserRuleCall_1_1_3_1_0_0());
+
+															}
+															pushFollow(FOLLOW_ruleXShortClosure_in_ruleXMemberFeatureCall12186);
+															lv_memberCallArguments_17_0 = ruleXShortClosure();
+
+															state._fsp--;
+															if (state.failed)
+																return current;
+															if (state.backtracking == 0) {
+
+																if (current == null) {
+																	current = createModelElementForParent(grammarAccess
+																			.getXMemberFeatureCallRule());
+																}
+																add(current, XMEMBER_FEATURE_CALL__MEMBER_CALL_ARGUMENTS,
+																		lv_memberCallArguments_17_0, "XShortClosure");
+																afterParserOrEnumRuleCall();
+
+															}
+
+														}
+
+													}
+
+												}
+													break;
+												case 2:
+
+												{
+
+													{
+
+														{
+
+															{
+																if (state.backtracking == 0) {
+
+																	newCompositeNode(grammarAccess
+																			.getXMemberFeatureCallAccess()
+																			.getMemberCallArgumentsXExpressionParserRuleCall_1_1_3_1_1_0_0());
+
+																}
+																pushFollow(FOLLOW_ruleXExpression_in_ruleXMemberFeatureCall12214);
+																lv_memberCallArguments_18_0 = ruleXExpression();
+
+																state._fsp--;
+																if (state.failed)
+																	return current;
+																if (state.backtracking == 0) {
+
+																	if (current == null) {
+																		current = createModelElementForParent(grammarAccess
+																				.getXMemberFeatureCallRule());
+																	}
+																	add(current, XMEMBER_FEATURE_CALL__MEMBER_CALL_ARGUMENTS,
+																			lv_memberCallArguments_18_0, null);
+																	afterParserOrEnumRuleCall();
+
+																}
+
+															}
+
+														}
+
+														loop126: do {
+															int alt126 = 2;
+															int LA126_0 = input.LA(1);
+
+															if ((LA126_0 == 24)) {
+																alt126 = 1;
+															}
+
+															switch (alt126) {
+																case 1:
+
+																{
+																	otherlv_19 = (Token) match(input, 24,
+																			FOLLOW_24_in_ruleXMemberFeatureCall12227);
+																	if (state.failed)
+																		return current;
+																	if (state.backtracking == 0) {
+
+																		newLeafNode(otherlv_19, grammarAccess
+																				.getXMemberFeatureCallAccess()
+																				.getCommaKeyword_1_1_3_1_1_1_0());
+
+																	}
+
+																	{
+
+																		{
+																			if (state.backtracking == 0) {
+
+																				newCompositeNode(grammarAccess
+																						.getXMemberFeatureCallAccess()
+																						.getMemberCallArgumentsXExpressionParserRuleCall_1_1_3_1_1_1_1_0());
+
+																			}
+																			pushFollow(FOLLOW_ruleXExpression_in_ruleXMemberFeatureCall12248);
+																			lv_memberCallArguments_20_0 = ruleXExpression();
+
+																			state._fsp--;
+																			if (state.failed)
+																				return current;
+																			if (state.backtracking == 0) {
+
+																				if (current == null) {
+																					current = createModelElementForParent(grammarAccess
+																							.getXMemberFeatureCallRule());
+																				}
+																				add(current, XMEMBER_FEATURE_CALL__MEMBER_CALL_ARGUMENTS,
+																						lv_memberCallArguments_20_0,
+																						null);
+																				afterParserOrEnumRuleCall();
+
+																			}
+
+																		}
+
+																	}
+
+																}
+																	break;
+
+																default:
+																	break loop126;
+															}
+														} while (true);
+
+													}
+
+												}
+													break;
+
+											}
+
+											otherlv_21 = (Token) match(input, 36,
+													FOLLOW_36_in_ruleXMemberFeatureCall12265);
+											if (state.failed)
+												return current;
+											if (state.backtracking == 0) {
+
+												newLeafNode(otherlv_21, grammarAccess.getXMemberFeatureCallAccess()
+														.getRightParenthesisKeyword_1_1_3_2());
+
+											}
+
+										}
+											break;
+
+									}
+
+									int alt129 = 2;
+									alt129 = dfa129.predict(input);
+									switch (alt129) {
+										case 1:
+
+										{
+
+											{
+												if (state.backtracking == 0) {
+
+													newCompositeNode(grammarAccess.getXMemberFeatureCallAccess()
+															.getMemberCallArgumentsXClosureParserRuleCall_1_1_4_0());
+
+												}
+												pushFollow(FOLLOW_ruleXClosure_in_ruleXMemberFeatureCall12300);
+												lv_memberCallArguments_22_0 = ruleXClosure();
+
+												state._fsp--;
+												if (state.failed)
+													return current;
+												if (state.backtracking == 0) {
+
+													if (current == null) {
+														current = createModelElementForParent(grammarAccess
+																.getXMemberFeatureCallRule());
+													}
+													add(current, XMEMBER_FEATURE_CALL__MEMBER_CALL_ARGUMENTS, lv_memberCallArguments_22_0,
+															"XClosure");
+													afterParserOrEnumRuleCall();
+
+												}
+
+											}
+
+										}
+											break;
+
+									}
+
+								}
+
+							}
+								break;
+
+							default:
+								break loop130;
+						}
+					} while (true);
+
+				}
+
+			}
+
+			if (state.backtracking == 0) {
+				leaveRule();
+			}
+		}
+
+		catch (RecognitionException re) {
+			recoverAndAppendSkippedTokens(re);
+		} finally {
+		}
+		return current;
+	}
+
+	public final EObject entryRuleXPrimaryExpression() throws RecognitionException {
+		EObject current = null;
+
+		EObject iv_ruleXPrimaryExpression = null;
+
+		try {
+
+			{
+				if (state.backtracking == 0) {
+					newCompositeNode(grammarAccess.getXPrimaryExpressionRule());
+				}
+				pushFollow(FOLLOW_ruleXPrimaryExpression_in_entryRuleXPrimaryExpression12340);
+				iv_ruleXPrimaryExpression = ruleXPrimaryExpression();
+
+				state._fsp--;
+				if (state.failed)
+					return current;
+				if (state.backtracking == 0) {
+					current = iv_ruleXPrimaryExpression;
+				}
+				match(input, EOF, FOLLOW_EOF_in_entryRuleXPrimaryExpression12350);
+				if (state.failed)
+					return current;
+
+			}
+
+		}
+
+		catch (RecognitionException re) {
+			recoverAndAppendSkippedTokens(re);
+		} finally {
+		}
+		return current;
+	}
+
+	public final EObject ruleXPrimaryExpression() throws RecognitionException {
+		EObject current = null;
+
+		EObject this_XConstructorCall_0 = null;
+
+		EObject this_XBlockExpression_1 = null;
+
+		EObject this_XSwitchExpression_2 = null;
+
+		EObject this_XFeatureCall_3 = null;
+
+		EObject this_XLiteral_4 = null;
+
+		EObject this_XIfExpression_5 = null;
+
+		EObject this_XForLoopExpression_6 = null;
+
+		EObject this_XWhileExpression_7 = null;
+
+		EObject this_XDoWhileExpression_8 = null;
+
+		EObject this_XThrowExpression_9 = null;
+
+		EObject this_XReturnExpression_10 = null;
+
+		EObject this_XTryCatchFinallyExpression_11 = null;
+
+		EObject this_XParenthesizedExpression_12 = null;
+
+		enterRule();
+
+		try {
+
+			{
+
+				int alt131 = 13;
+				alt131 = dfa131.predict(input);
+				switch (alt131) {
+					case 1:
+
+					{
+						if (state.backtracking == 0) {
+
+							newCompositeNode(grammarAccess.getXPrimaryExpressionAccess()
+									.getXConstructorCallParserRuleCall_0());
+
+						}
+						pushFollow(FOLLOW_ruleXConstructorCall_in_ruleXPrimaryExpression12397);
+						this_XConstructorCall_0 = ruleXConstructorCall();
+
+						state._fsp--;
+						if (state.failed)
+							return current;
+						if (state.backtracking == 0) {
+
+							current = this_XConstructorCall_0;
+							afterParserOrEnumRuleCall();
+
+						}
+
+					}
+						break;
+					case 2:
+
+					{
+						if (state.backtracking == 0) {
+
+							newCompositeNode(grammarAccess.getXPrimaryExpressionAccess()
+									.getXBlockExpressionParserRuleCall_1());
+
+						}
+						pushFollow(FOLLOW_ruleXBlockExpression_in_ruleXPrimaryExpression12424);
+						this_XBlockExpression_1 = ruleXBlockExpression();
+
+						state._fsp--;
+						if (state.failed)
+							return current;
+						if (state.backtracking == 0) {
+
+							current = this_XBlockExpression_1;
+							afterParserOrEnumRuleCall();
+
+						}
+
+					}
+						break;
+					case 3:
+
+					{
+						if (state.backtracking == 0) {
+
+							newCompositeNode(grammarAccess.getXPrimaryExpressionAccess()
+									.getXSwitchExpressionParserRuleCall_2());
+
+						}
+						pushFollow(FOLLOW_ruleXSwitchExpression_in_ruleXPrimaryExpression12451);
+						this_XSwitchExpression_2 = ruleXSwitchExpression();
+
+						state._fsp--;
+						if (state.failed)
+							return current;
+						if (state.backtracking == 0) {
+
+							current = this_XSwitchExpression_2;
+							afterParserOrEnumRuleCall();
+
+						}
+
+					}
+						break;
+					case 4:
+
+					{
+						if (state.backtracking == 0) {
+
+							newCompositeNode(grammarAccess.getXPrimaryExpressionAccess()
+									.getXFeatureCallParserRuleCall_3());
+
+						}
+						pushFollow(FOLLOW_ruleXFeatureCall_in_ruleXPrimaryExpression12478);
+						this_XFeatureCall_3 = ruleXFeatureCall();
+
+						state._fsp--;
+						if (state.failed)
+							return current;
+						if (state.backtracking == 0) {
+
+							current = this_XFeatureCall_3;
+							afterParserOrEnumRuleCall();
+
+						}
+
+					}
+						break;
+					case 5:
+
+					{
+						if (state.backtracking == 0) {
+
+							newCompositeNode(grammarAccess.getXPrimaryExpressionAccess().getXLiteralParserRuleCall_4());
+
+						}
+						pushFollow(FOLLOW_ruleXLiteral_in_ruleXPrimaryExpression12505);
+						this_XLiteral_4 = ruleXLiteral();
+
+						state._fsp--;
+						if (state.failed)
+							return current;
+						if (state.backtracking == 0) {
+
+							current = this_XLiteral_4;
+							afterParserOrEnumRuleCall();
+
+						}
+
+					}
+						break;
+					case 6:
+
+					{
+						if (state.backtracking == 0) {
+
+							newCompositeNode(grammarAccess.getXPrimaryExpressionAccess()
+									.getXIfExpressionParserRuleCall_5());
+
+						}
+						pushFollow(FOLLOW_ruleXIfExpression_in_ruleXPrimaryExpression12532);
+						this_XIfExpression_5 = ruleXIfExpression();
+
+						state._fsp--;
+						if (state.failed)
+							return current;
+						if (state.backtracking == 0) {
+
+							current = this_XIfExpression_5;
+							afterParserOrEnumRuleCall();
+
+						}
+
+					}
+						break;
+					case 7:
+
+					{
+						if (state.backtracking == 0) {
+
+							newCompositeNode(grammarAccess.getXPrimaryExpressionAccess()
+									.getXForLoopExpressionParserRuleCall_6());
+
+						}
+						pushFollow(FOLLOW_ruleXForLoopExpression_in_ruleXPrimaryExpression12559);
+						this_XForLoopExpression_6 = ruleXForLoopExpression();
+
+						state._fsp--;
+						if (state.failed)
+							return current;
+						if (state.backtracking == 0) {
+
+							current = this_XForLoopExpression_6;
+							afterParserOrEnumRuleCall();
+
+						}
+
+					}
+						break;
+					case 8:
+
+					{
+						if (state.backtracking == 0) {
+
+							newCompositeNode(grammarAccess.getXPrimaryExpressionAccess()
+									.getXWhileExpressionParserRuleCall_7());
+
+						}
+						pushFollow(FOLLOW_ruleXWhileExpression_in_ruleXPrimaryExpression12586);
+						this_XWhileExpression_7 = ruleXWhileExpression();
+
+						state._fsp--;
+						if (state.failed)
+							return current;
+						if (state.backtracking == 0) {
+
+							current = this_XWhileExpression_7;
+							afterParserOrEnumRuleCall();
+
+						}
+
+					}
+						break;
+					case 9:
+
+					{
+						if (state.backtracking == 0) {
+
+							newCompositeNode(grammarAccess.getXPrimaryExpressionAccess()
+									.getXDoWhileExpressionParserRuleCall_8());
+
+						}
+						pushFollow(FOLLOW_ruleXDoWhileExpression_in_ruleXPrimaryExpression12613);
+						this_XDoWhileExpression_8 = ruleXDoWhileExpression();
+
+						state._fsp--;
+						if (state.failed)
+							return current;
+						if (state.backtracking == 0) {
+
+							current = this_XDoWhileExpression_8;
+							afterParserOrEnumRuleCall();
+
+						}
+
+					}
+						break;
+					case 10:
+
+					{
+						if (state.backtracking == 0) {
+
+							newCompositeNode(grammarAccess.getXPrimaryExpressionAccess()
+									.getXThrowExpressionParserRuleCall_9());
+
+						}
+						pushFollow(FOLLOW_ruleXThrowExpression_in_ruleXPrimaryExpression12640);
+						this_XThrowExpression_9 = ruleXThrowExpression();
+
+						state._fsp--;
+						if (state.failed)
+							return current;
+						if (state.backtracking == 0) {
+
+							current = this_XThrowExpression_9;
+							afterParserOrEnumRuleCall();
+
+						}
+
+					}
+						break;
+					case 11:
+
+					{
+						if (state.backtracking == 0) {
+
+							newCompositeNode(grammarAccess.getXPrimaryExpressionAccess()
+									.getXReturnExpressionParserRuleCall_10());
+
+						}
+						pushFollow(FOLLOW_ruleXReturnExpression_in_ruleXPrimaryExpression12667);
+						this_XReturnExpression_10 = ruleXReturnExpression();
+
+						state._fsp--;
+						if (state.failed)
+							return current;
+						if (state.backtracking == 0) {
+
+							current = this_XReturnExpression_10;
+							afterParserOrEnumRuleCall();
+
+						}
+
+					}
+						break;
+					case 12:
+
+					{
+						if (state.backtracking == 0) {
+
+							newCompositeNode(grammarAccess.getXPrimaryExpressionAccess()
+									.getXTryCatchFinallyExpressionParserRuleCall_11());
+
+						}
+						pushFollow(FOLLOW_ruleXTryCatchFinallyExpression_in_ruleXPrimaryExpression12694);
+						this_XTryCatchFinallyExpression_11 = ruleXTryCatchFinallyExpression();
+
+						state._fsp--;
+						if (state.failed)
+							return current;
+						if (state.backtracking == 0) {
+
+							current = this_XTryCatchFinallyExpression_11;
+							afterParserOrEnumRuleCall();
+
+						}
+
+					}
+						break;
+					case 13:
+
+					{
+						if (state.backtracking == 0) {
+
+							newCompositeNode(grammarAccess.getXPrimaryExpressionAccess()
+									.getXParenthesizedExpressionParserRuleCall_12());
+
+						}
+						pushFollow(FOLLOW_ruleXParenthesizedExpression_in_ruleXPrimaryExpression12721);
+						this_XParenthesizedExpression_12 = ruleXParenthesizedExpression();
+
+						state._fsp--;
+						if (state.failed)
+							return current;
+						if (state.backtracking == 0) {
+
+							current = this_XParenthesizedExpression_12;
+							afterParserOrEnumRuleCall();
+
+						}
+
+					}
+						break;
+
+				}
+
+			}
+
+			if (state.backtracking == 0) {
+				leaveRule();
+			}
+		}
+
+		catch (RecognitionException re) {
+			recoverAndAppendSkippedTokens(re);
+		} finally {
+		}
+		return current;
+	}
+
+	public final EObject entryRuleXLiteral() throws RecognitionException {
+		EObject current = null;
+
+		EObject iv_ruleXLiteral = null;
+
+		try {
+
+			{
+				if (state.backtracking == 0) {
+					newCompositeNode(grammarAccess.getXLiteralRule());
+				}
+				pushFollow(FOLLOW_ruleXLiteral_in_entryRuleXLiteral12756);
+				iv_ruleXLiteral = ruleXLiteral();
+
+				state._fsp--;
+				if (state.failed)
+					return current;
+				if (state.backtracking == 0) {
+					current = iv_ruleXLiteral;
+				}
+				match(input, EOF, FOLLOW_EOF_in_entryRuleXLiteral12766);
+				if (state.failed)
+					return current;
+
+			}
+
+		}
+
+		catch (RecognitionException re) {
+			recoverAndAppendSkippedTokens(re);
+		} finally {
+		}
+		return current;
+	}
+
+	public final EObject ruleXLiteral() throws RecognitionException {
+		EObject current = null;
+
+		EObject this_XCollectionLiteral_0 = null;
+
+		EObject this_XClosure_1 = null;
+
+		EObject this_XBooleanLiteral_2 = null;
+
+		EObject this_XNumberLiteral_3 = null;
+
+		EObject this_XNullLiteral_4 = null;
+
+		EObject this_XStringLiteral_5 = null;
+
+		EObject this_XTypeLiteral_6 = null;
+
+		enterRule();
+
+		try {
+
+			{
+
+				int alt132 = 7;
+				int LA132_0 = input.LA(1);
+
+				if ((LA132_0 == 93)) {
+					alt132 = 1;
+				} else if ((LA132_0 == 94) && (synpred24_InternalXtend())) {
+					alt132 = 2;
+				} else if (((LA132_0 >= 107 && LA132_0 <= 108))) {
+					alt132 = 3;
+				} else if (((LA132_0 >= RULE_HEX && LA132_0 <= RULE_DECIMAL))) {
+					alt132 = 4;
+				} else if ((LA132_0 == 109)) {
+					alt132 = 5;
+				} else if (((LA132_0 >= RULE_STRING && LA132_0 <= RULE_RICH_TEXT_START))) {
+					alt132 = 6;
+				} else if ((LA132_0 == 110)) {
+					alt132 = 7;
+				} else {
+					if (state.backtracking > 0) {
+						state.failed = true;
+						return current;
+					}
+					NoViableAltException nvae = new NoViableAltException("", 132, 0, input);
+
+					throw nvae;
+				}
+				switch (alt132) {
+					case 1:
+
+					{
+						if (state.backtracking == 0) {
+
+							newCompositeNode(grammarAccess.getXLiteralAccess().getXCollectionLiteralParserRuleCall_0());
+
+						}
+						pushFollow(FOLLOW_ruleXCollectionLiteral_in_ruleXLiteral12813);
+						this_XCollectionLiteral_0 = ruleXCollectionLiteral();
+
+						state._fsp--;
+						if (state.failed)
+							return current;
+						if (state.backtracking == 0) {
+
+							current = this_XCollectionLiteral_0;
+							afterParserOrEnumRuleCall();
+
+						}
+
+					}
+						break;
+					case 2:
+
+					{
+
+						{
+							if (state.backtracking == 0) {
+
+								newCompositeNode(grammarAccess.getXLiteralAccess().getXClosureParserRuleCall_1());
+
+							}
+							pushFollow(FOLLOW_ruleXClosure_in_ruleXLiteral12853);
+							this_XClosure_1 = ruleXClosure();
+
+							state._fsp--;
+							if (state.failed)
+								return current;
+							if (state.backtracking == 0) {
+
+								current = this_XClosure_1;
+								afterParserOrEnumRuleCall();
+
+							}
+
+						}
+
+					}
+						break;
+					case 3:
+
+					{
+						if (state.backtracking == 0) {
+
+							newCompositeNode(grammarAccess.getXLiteralAccess().getXBooleanLiteralParserRuleCall_2());
+
+						}
+						pushFollow(FOLLOW_ruleXBooleanLiteral_in_ruleXLiteral12881);
+						this_XBooleanLiteral_2 = ruleXBooleanLiteral();
+
+						state._fsp--;
+						if (state.failed)
+							return current;
+						if (state.backtracking == 0) {
+
+							current = this_XBooleanLiteral_2;
+							afterParserOrEnumRuleCall();
+
+						}
+
+					}
+						break;
+					case 4:
+
+					{
+						if (state.backtracking == 0) {
+
+							newCompositeNode(grammarAccess.getXLiteralAccess().getXNumberLiteralParserRuleCall_3());
+
+						}
+						pushFollow(FOLLOW_ruleXNumberLiteral_in_ruleXLiteral12908);
+						this_XNumberLiteral_3 = ruleXNumberLiteral();
+
+						state._fsp--;
+						if (state.failed)
+							return current;
+						if (state.backtracking == 0) {
+
+							current = this_XNumberLiteral_3;
+							afterParserOrEnumRuleCall();
+
+						}
+
+					}
+						break;
+					case 5:
+
+					{
+						if (state.backtracking == 0) {
+
+							newCompositeNode(grammarAccess.getXLiteralAccess().getXNullLiteralParserRuleCall_4());
+
+						}
+						pushFollow(FOLLOW_ruleXNullLiteral_in_ruleXLiteral12935);
+						this_XNullLiteral_4 = ruleXNullLiteral();
+
+						state._fsp--;
+						if (state.failed)
+							return current;
+						if (state.backtracking == 0) {
+
+							current = this_XNullLiteral_4;
+							afterParserOrEnumRuleCall();
+
+						}
+
+					}
+						break;
+					case 6:
+
+					{
+						if (state.backtracking == 0) {
+
+							newCompositeNode(grammarAccess.getXLiteralAccess().getXStringLiteralParserRuleCall_5());
+
+						}
+						pushFollow(FOLLOW_ruleXStringLiteral_in_ruleXLiteral12962);
+						this_XStringLiteral_5 = ruleXStringLiteral();
+
+						state._fsp--;
+						if (state.failed)
+							return current;
+						if (state.backtracking == 0) {
+
+							current = this_XStringLiteral_5;
+							afterParserOrEnumRuleCall();
+
+						}
+
+					}
+						break;
+					case 7:
+
+					{
+						if (state.backtracking == 0) {
+
+							newCompositeNode(grammarAccess.getXLiteralAccess().getXTypeLiteralParserRuleCall_6());
+
+						}
+						pushFollow(FOLLOW_ruleXTypeLiteral_in_ruleXLiteral12989);
+						this_XTypeLiteral_6 = ruleXTypeLiteral();
+
+						state._fsp--;
+						if (state.failed)
+							return current;
+						if (state.backtracking == 0) {
+
+							current = this_XTypeLiteral_6;
+							afterParserOrEnumRuleCall();
+
+						}
+
+					}
+						break;
+
+				}
+
+			}
+
+			if (state.backtracking == 0) {
+				leaveRule();
+			}
+		}
+
+		catch (RecognitionException re) {
+			recoverAndAppendSkippedTokens(re);
+		} finally {
+		}
+		return current;
+	}
+
+	public final EObject entryRuleXCollectionLiteral() throws RecognitionException {
+		EObject current = null;
+
+		EObject iv_ruleXCollectionLiteral = null;
+
+		try {
+
+			{
+				if (state.backtracking == 0) {
+					newCompositeNode(grammarAccess.getXCollectionLiteralRule());
+				}
+				pushFollow(FOLLOW_ruleXCollectionLiteral_in_entryRuleXCollectionLiteral13024);
+				iv_ruleXCollectionLiteral = ruleXCollectionLiteral();
+
+				state._fsp--;
+				if (state.failed)
+					return current;
+				if (state.backtracking == 0) {
+					current = iv_ruleXCollectionLiteral;
+				}
+				match(input, EOF, FOLLOW_EOF_in_entryRuleXCollectionLiteral13034);
+				if (state.failed)
+					return current;
+
+			}
+
+		}
+
+		catch (RecognitionException re) {
+			recoverAndAppendSkippedTokens(re);
+		} finally {
+		}
+		return current;
+	}
+
+	public final EObject ruleXCollectionLiteral() throws RecognitionException {
+		EObject current = null;
+
+		EObject this_XSetLiteral_0 = null;
+
+		EObject this_XListLiteral_1 = null;
+
+		enterRule();
+
+		try {
+
+			{
+
+				int alt133 = 2;
+				int LA133_0 = input.LA(1);
+
+				if ((LA133_0 == 93)) {
+					int LA133_1 = input.LA(2);
+
+					if ((LA133_1 == 94)) {
+						alt133 = 2;
+					} else if ((LA133_1 == 28)) {
+						alt133 = 1;
+					} else {
+						if (state.backtracking > 0) {
+							state.failed = true;
+							return current;
+						}
+						NoViableAltException nvae = new NoViableAltException("", 133, 1, input);
+
+						throw nvae;
+					}
+				} else {
+					if (state.backtracking > 0) {
+						state.failed = true;
+						return current;
+					}
+					NoViableAltException nvae = new NoViableAltException("", 133, 0, input);
+
+					throw nvae;
+				}
+				switch (alt133) {
+					case 1:
+
+					{
+						if (state.backtracking == 0) {
+
+							newCompositeNode(grammarAccess.getXCollectionLiteralAccess()
+									.getXSetLiteralParserRuleCall_0());
+
+						}
+						pushFollow(FOLLOW_ruleXSetLiteral_in_ruleXCollectionLiteral13081);
+						this_XSetLiteral_0 = ruleXSetLiteral();
+
+						state._fsp--;
+						if (state.failed)
+							return current;
+						if (state.backtracking == 0) {
+
+							current = this_XSetLiteral_0;
+							afterParserOrEnumRuleCall();
+
+						}
+
+					}
+						break;
+					case 2:
+
+					{
+						if (state.backtracking == 0) {
+
+							newCompositeNode(grammarAccess.getXCollectionLiteralAccess()
+									.getXListLiteralParserRuleCall_1());
+
+						}
+						pushFollow(FOLLOW_ruleXListLiteral_in_ruleXCollectionLiteral13108);
+						this_XListLiteral_1 = ruleXListLiteral();
+
+						state._fsp--;
+						if (state.failed)
+							return current;
+						if (state.backtracking == 0) {
+
+							current = this_XListLiteral_1;
+							afterParserOrEnumRuleCall();
+
+						}
+
+					}
+						break;
+
+				}
+
+			}
+
+			if (state.backtracking == 0) {
+				leaveRule();
+			}
+		}
+
+		catch (RecognitionException re) {
+			recoverAndAppendSkippedTokens(re);
+		} finally {
+		}
+		return current;
+	}
+
+	public final EObject entryRuleXSetLiteral() throws RecognitionException {
+		EObject current = null;
+
+		EObject iv_ruleXSetLiteral = null;
+
+		try {
+
+			{
+				if (state.backtracking == 0) {
+					newCompositeNode(grammarAccess.getXSetLiteralRule());
+				}
+				pushFollow(FOLLOW_ruleXSetLiteral_in_entryRuleXSetLiteral13143);
+				iv_ruleXSetLiteral = ruleXSetLiteral();
+
+				state._fsp--;
+				if (state.failed)
+					return current;
+				if (state.backtracking == 0) {
+					current = iv_ruleXSetLiteral;
+				}
+				match(input, EOF, FOLLOW_EOF_in_entryRuleXSetLiteral13153);
+				if (state.failed)
+					return current;
+
+			}
+
+		}
+
+		catch (RecognitionException re) {
+			recoverAndAppendSkippedTokens(re);
+		} finally {
+		}
+		return current;
+	}
+
+	public final EObject ruleXSetLiteral() throws RecognitionException {
+		EObject current = null;
+
+		Token otherlv_1 = null;
+		Token otherlv_2 = null;
+		Token otherlv_4 = null;
+		Token otherlv_6 = null;
+		EObject lv_elements_3_0 = null;
+
+		EObject lv_elements_5_0 = null;
+
+		enterRule();
+
+		try {
+
+			{
+
+				{
+
+					{
+						if (state.backtracking == 0) {
+
+							current = forceCreateModelElement(grammarAccess.getXSetLiteralAccess()
+									.getXSetLiteralAction_0(), current);
+
+						}
+
+					}
+
+					otherlv_1 = (Token) match(input, 93, FOLLOW_93_in_ruleXSetLiteral13199);
+					if (state.failed)
+						return current;
+					if (state.backtracking == 0) {
+
+						newLeafNode(otherlv_1, grammarAccess.getXSetLiteralAccess().getNumberSignKeyword_1());
+
+					}
+					otherlv_2 = (Token) match(input, 28, FOLLOW_28_in_ruleXSetLiteral13211);
+					if (state.failed)
+						return current;
+					if (state.backtracking == 0) {
+
+						newLeafNode(otherlv_2, grammarAccess.getXSetLiteralAccess().getLeftCurlyBracketKeyword_2());
+
+					}
+
+					int alt135 = 2;
+					int LA135_0 = input.LA(1);
+
+					if (((LA135_0 >= RULE_ID && LA135_0 <= RULE_RICH_TEXT_START)
+							|| (LA135_0 >= RULE_HEX && LA135_0 <= RULE_DECIMAL) || LA135_0 == 20
+							|| (LA135_0 >= 22 && LA135_0 <= 23) || (LA135_0 >= 26 && LA135_0 <= 28)
+							|| (LA135_0 >= 30 && LA135_0 <= 32) || (LA135_0 >= 34 && LA135_0 <= 35)
+							|| (LA135_0 >= 37 && LA135_0 <= 45) || (LA135_0 >= 48 && LA135_0 <= 50) || LA135_0 == 52
+							|| LA135_0 == 64 || LA135_0 == 83 || LA135_0 == 88 || (LA135_0 >= 93 && LA135_0 <= 94)
+							|| LA135_0 == 97 || LA135_0 == 99 || (LA135_0 >= 102 && LA135_0 <= 105) || (LA135_0 >= 107 && LA135_0 <= 113))) {
+						alt135 = 1;
+					}
+					switch (alt135) {
+						case 1:
+
+						{
+
+							{
+
+								{
+									if (state.backtracking == 0) {
+
+										newCompositeNode(grammarAccess.getXSetLiteralAccess()
+												.getElementsXExpressionParserRuleCall_3_0_0());
+
+									}
+									pushFollow(FOLLOW_ruleXExpression_in_ruleXSetLiteral13233);
+									lv_elements_3_0 = ruleXExpression();
+
+									state._fsp--;
+									if (state.failed)
+										return current;
+									if (state.backtracking == 0) {
+
+										if (current == null) {
+											current = createModelElementForParent(grammarAccess.getXSetLiteralRule());
+										}
+										add(current, XCOLLECTION_LITERAL__ELEMENTS, lv_elements_3_0, null);
+										afterParserOrEnumRuleCall();
+
+									}
+
+								}
+
+							}
+
+							loop134: do {
+								int alt134 = 2;
+								int LA134_0 = input.LA(1);
+
+								if ((LA134_0 == 24)) {
+									alt134 = 1;
+								}
+
+								switch (alt134) {
+									case 1:
+
+									{
+										otherlv_4 = (Token) match(input, 24, FOLLOW_24_in_ruleXSetLiteral13246);
+										if (state.failed)
+											return current;
+										if (state.backtracking == 0) {
+
+											newLeafNode(otherlv_4, grammarAccess.getXSetLiteralAccess()
+													.getCommaKeyword_3_1_0());
+
+										}
+
+										{
+
+											{
+												if (state.backtracking == 0) {
+
+													newCompositeNode(grammarAccess.getXSetLiteralAccess()
+															.getElementsXExpressionParserRuleCall_3_1_1_0());
+
+												}
+												pushFollow(FOLLOW_ruleXExpression_in_ruleXSetLiteral13267);
+												lv_elements_5_0 = ruleXExpression();
+
+												state._fsp--;
+												if (state.failed)
+													return current;
+												if (state.backtracking == 0) {
+
+													if (current == null) {
+														current = createModelElementForParent(grammarAccess
+																.getXSetLiteralRule());
+													}
+													add(current, XCOLLECTION_LITERAL__ELEMENTS, lv_elements_5_0, null);
+													afterParserOrEnumRuleCall();
+
+												}
+
+											}
+
+										}
+
+									}
+										break;
+
+									default:
+										break loop134;
+								}
+							} while (true);
+
+						}
+							break;
+
+					}
+
+					otherlv_6 = (Token) match(input, 29, FOLLOW_29_in_ruleXSetLiteral13283);
+					if (state.failed)
+						return current;
+					if (state.backtracking == 0) {
+
+						newLeafNode(otherlv_6, grammarAccess.getXSetLiteralAccess().getRightCurlyBracketKeyword_4());
+
+					}
+
+				}
+
+			}
+
+			if (state.backtracking == 0) {
+				leaveRule();
+			}
+		}
+
+		catch (RecognitionException re) {
+			recoverAndAppendSkippedTokens(re);
+		} finally {
+		}
+		return current;
+	}
+
+	public final EObject entryRuleXListLiteral() throws RecognitionException {
+		EObject current = null;
+
+		EObject iv_ruleXListLiteral = null;
+
+		try {
+
+			{
+				if (state.backtracking == 0) {
+					newCompositeNode(grammarAccess.getXListLiteralRule());
+				}
+				pushFollow(FOLLOW_ruleXListLiteral_in_entryRuleXListLiteral13319);
+				iv_ruleXListLiteral = ruleXListLiteral();
+
+				state._fsp--;
+				if (state.failed)
+					return current;
+				if (state.backtracking == 0) {
+					current = iv_ruleXListLiteral;
+				}
+				match(input, EOF, FOLLOW_EOF_in_entryRuleXListLiteral13329);
+				if (state.failed)
+					return current;
+
+			}
+
+		}
+
+		catch (RecognitionException re) {
+			recoverAndAppendSkippedTokens(re);
+		} finally {
+		}
+		return current;
+	}
+
+	public final EObject ruleXListLiteral() throws RecognitionException {
+		EObject current = null;
+
+		Token otherlv_1 = null;
+		Token otherlv_2 = null;
+		Token otherlv_4 = null;
+		Token otherlv_6 = null;
+		EObject lv_elements_3_0 = null;
+
+		EObject lv_elements_5_0 = null;
+
+		enterRule();
+
+		try {
+
+			{
+
+				{
+
+					{
+						if (state.backtracking == 0) {
+
+							current = forceCreateModelElement(grammarAccess.getXListLiteralAccess()
+									.getXListLiteralAction_0(), current);
+
+						}
+
+					}
+
+					otherlv_1 = (Token) match(input, 93, FOLLOW_93_in_ruleXListLiteral13375);
+					if (state.failed)
+						return current;
+					if (state.backtracking == 0) {
+
+						newLeafNode(otherlv_1, grammarAccess.getXListLiteralAccess().getNumberSignKeyword_1());
+
+					}
+					otherlv_2 = (Token) match(input, 94, FOLLOW_94_in_ruleXListLiteral13387);
+					if (state.failed)
+						return current;
+					if (state.backtracking == 0) {
+
+						newLeafNode(otherlv_2, grammarAccess.getXListLiteralAccess().getLeftSquareBracketKeyword_2());
+
+					}
+
+					int alt137 = 2;
+					int LA137_0 = input.LA(1);
+
+					if (((LA137_0 >= RULE_ID && LA137_0 <= RULE_RICH_TEXT_START)
+							|| (LA137_0 >= RULE_HEX && LA137_0 <= RULE_DECIMAL) || LA137_0 == 20
+							|| (LA137_0 >= 22 && LA137_0 <= 23) || (LA137_0 >= 26 && LA137_0 <= 28)
+							|| (LA137_0 >= 30 && LA137_0 <= 32) || (LA137_0 >= 34 && LA137_0 <= 35)
+							|| (LA137_0 >= 37 && LA137_0 <= 45) || (LA137_0 >= 48 && LA137_0 <= 50) || LA137_0 == 52
+							|| LA137_0 == 64 || LA137_0 == 83 || LA137_0 == 88 || (LA137_0 >= 93 && LA137_0 <= 94)
+							|| LA137_0 == 97 || LA137_0 == 99 || (LA137_0 >= 102 && LA137_0 <= 105) || (LA137_0 >= 107 && LA137_0 <= 113))) {
+						alt137 = 1;
+					}
+					switch (alt137) {
+						case 1:
+
+						{
+
+							{
+
+								{
+									if (state.backtracking == 0) {
+
+										newCompositeNode(grammarAccess.getXListLiteralAccess()
+												.getElementsXExpressionParserRuleCall_3_0_0());
+
+									}
+									pushFollow(FOLLOW_ruleXExpression_in_ruleXListLiteral13409);
+									lv_elements_3_0 = ruleXExpression();
+
+									state._fsp--;
+									if (state.failed)
+										return current;
+									if (state.backtracking == 0) {
+
+										if (current == null) {
+											current = createModelElementForParent(grammarAccess.getXListLiteralRule());
+										}
+										add(current, XCOLLECTION_LITERAL__ELEMENTS, lv_elements_3_0, null);
+										afterParserOrEnumRuleCall();
+
+									}
+
+								}
+
+							}
+
+							loop136: do {
+								int alt136 = 2;
+								int LA136_0 = input.LA(1);
+
+								if ((LA136_0 == 24)) {
+									alt136 = 1;
+								}
+
+								switch (alt136) {
+									case 1:
+
+									{
+										otherlv_4 = (Token) match(input, 24, FOLLOW_24_in_ruleXListLiteral13422);
+										if (state.failed)
+											return current;
+										if (state.backtracking == 0) {
+
+											newLeafNode(otherlv_4, grammarAccess.getXListLiteralAccess()
+													.getCommaKeyword_3_1_0());
+
+										}
+
+										{
+
+											{
+												if (state.backtracking == 0) {
+
+													newCompositeNode(grammarAccess.getXListLiteralAccess()
+															.getElementsXExpressionParserRuleCall_3_1_1_0());
+
+												}
+												pushFollow(FOLLOW_ruleXExpression_in_ruleXListLiteral13443);
+												lv_elements_5_0 = ruleXExpression();
+
+												state._fsp--;
+												if (state.failed)
+													return current;
+												if (state.backtracking == 0) {
+
+													if (current == null) {
+														current = createModelElementForParent(grammarAccess
+																.getXListLiteralRule());
+													}
+													add(current, XCOLLECTION_LITERAL__ELEMENTS, lv_elements_5_0, null);
+													afterParserOrEnumRuleCall();
+
+												}
+
+											}
+
+										}
+
+									}
+										break;
+
+									default:
+										break loop136;
+								}
+							} while (true);
+
+						}
+							break;
+
+					}
+
+					otherlv_6 = (Token) match(input, 95, FOLLOW_95_in_ruleXListLiteral13459);
+					if (state.failed)
+						return current;
+					if (state.backtracking == 0) {
+
+						newLeafNode(otherlv_6, grammarAccess.getXListLiteralAccess().getRightSquareBracketKeyword_4());
+
+					}
+
+				}
+
+			}
+
+			if (state.backtracking == 0) {
+				leaveRule();
+			}
+		}
+
+		catch (RecognitionException re) {
+			recoverAndAppendSkippedTokens(re);
+		} finally {
+		}
+		return current;
+	}
+
+	public final EObject entryRuleXClosure() throws RecognitionException {
+		EObject current = null;
+
+		EObject iv_ruleXClosure = null;
+
+		try {
+
+			{
+				if (state.backtracking == 0) {
+					newCompositeNode(grammarAccess.getXClosureRule());
+				}
+				pushFollow(FOLLOW_ruleXClosure_in_entryRuleXClosure13495);
+				iv_ruleXClosure = ruleXClosure();
+
+				state._fsp--;
+				if (state.failed)
+					return current;
+				if (state.backtracking == 0) {
+					current = iv_ruleXClosure;
+				}
+				match(input, EOF, FOLLOW_EOF_in_entryRuleXClosure13505);
+				if (state.failed)
+					return current;
+
+			}
+
+		}
+
+		catch (RecognitionException re) {
+			recoverAndAppendSkippedTokens(re);
+		} finally {
+		}
+		return current;
+	}
+
+	public final EObject ruleXClosure() throws RecognitionException {
+		EObject current = null;
+
+		Token otherlv_1 = null;
+		Token otherlv_3 = null;
+		Token lv_explicitSyntax_5_0 = null;
+		Token otherlv_7 = null;
+		EObject lv_declaredFormalParameters_2_0 = null;
+
+		EObject lv_declaredFormalParameters_4_0 = null;
+
+		EObject lv_expression_6_0 = null;
+
+		enterRule();
+
+		try {
+
+			{
+
+				{
+
+					{
+
+						{
+
+							{
+								if (state.backtracking == 0) {
+
+									current = forceCreateModelElement(grammarAccess.getXClosureAccess()
+											.getXClosureAction_0_0_0(), current);
+
+								}
+
+							}
+
+							otherlv_1 = (Token) match(input, 94, FOLLOW_94_in_ruleXClosure13565);
+							if (state.failed)
+								return current;
+							if (state.backtracking == 0) {
+
+								newLeafNode(otherlv_1, grammarAccess.getXClosureAccess()
+										.getLeftSquareBracketKeyword_0_0_1());
+
+							}
+
+						}
+
+					}
+
+					int alt140 = 2;
+					alt140 = dfa140.predict(input);
+					switch (alt140) {
+						case 1:
+
+						{
+
+							{
+
+								int alt139 = 2;
+								int LA139_0 = input.LA(1);
+
+								if ((LA139_0 == RULE_ID || LA139_0 == 32 || (LA139_0 >= 34 && LA139_0 <= 35)
+										|| LA139_0 == 50 || LA139_0 == 79)) {
+									alt139 = 1;
+								}
+								switch (alt139) {
+									case 1:
+
+									{
+
+										{
+
+											{
+												if (state.backtracking == 0) {
+
+													newCompositeNode(grammarAccess
+															.getXClosureAccess()
+															.getDeclaredFormalParametersJvmFormalParameterParserRuleCall_1_0_0_0_0());
+
+												}
+												pushFollow(FOLLOW_ruleJvmFormalParameter_in_ruleXClosure13638);
+												lv_declaredFormalParameters_2_0 = ruleJvmFormalParameter();
+
+												state._fsp--;
+												if (state.failed)
+													return current;
+												if (state.backtracking == 0) {
+
+													if (current == null) {
+														current = createModelElementForParent(grammarAccess
+																.getXClosureRule());
+													}
+													add(current, XCLOSURE__DECLARED_FORMAL_PARAMETERS,
+															lv_declaredFormalParameters_2_0, null);
+													afterParserOrEnumRuleCall();
+
+												}
+
+											}
+
+										}
+
+										loop138: do {
+											int alt138 = 2;
+											int LA138_0 = input.LA(1);
+
+											if ((LA138_0 == 24)) {
+												alt138 = 1;
+											}
+
+											switch (alt138) {
+												case 1:
+
+												{
+													otherlv_3 = (Token) match(input, 24, FOLLOW_24_in_ruleXClosure13651);
+													if (state.failed)
+														return current;
+													if (state.backtracking == 0) {
+
+														newLeafNode(otherlv_3, grammarAccess.getXClosureAccess()
+																.getCommaKeyword_1_0_0_1_0());
+
+													}
+
+													{
+
+														{
+															if (state.backtracking == 0) {
+
+																newCompositeNode(grammarAccess
+																		.getXClosureAccess()
+																		.getDeclaredFormalParametersJvmFormalParameterParserRuleCall_1_0_0_1_1_0());
+
+															}
+															pushFollow(FOLLOW_ruleJvmFormalParameter_in_ruleXClosure13672);
+															lv_declaredFormalParameters_4_0 = ruleJvmFormalParameter();
+
+															state._fsp--;
+															if (state.failed)
+																return current;
+															if (state.backtracking == 0) {
+
+																if (current == null) {
+																	current = createModelElementForParent(grammarAccess
+																			.getXClosureRule());
+																}
+																add(current, XCLOSURE__DECLARED_FORMAL_PARAMETERS,
+																		lv_declaredFormalParameters_4_0,
+																		null);
+																afterParserOrEnumRuleCall();
+
+															}
+
+														}
+
+													}
+
+												}
+													break;
+
+												default:
+													break loop138;
+											}
+										} while (true);
+
+									}
+										break;
+
+								}
+
+								{
+
+									{
+										lv_explicitSyntax_5_0 = (Token) match(input, 96, FOLLOW_96_in_ruleXClosure13694);
+										if (state.failed)
+											return current;
+										if (state.backtracking == 0) {
+
+											newLeafNode(lv_explicitSyntax_5_0, grammarAccess.getXClosureAccess()
+													.getExplicitSyntaxVerticalLineKeyword_1_0_1_0());
+
+										}
+										if (state.backtracking == 0) {
+
+											if (current == null) {
+												current = createModelElement(grammarAccess.getXClosureRule());
+											}
+											setWithLastConsumed(current, XCLOSURE__EXPLICIT_SYNTAX, true, "|");
+
+										}
+
+									}
+
+								}
+
+							}
+
+						}
+							break;
+
+					}
+
+					{
+
+						{
+							if (state.backtracking == 0) {
+
+								newCompositeNode(grammarAccess.getXClosureAccess()
+										.getExpressionXExpressionInClosureParserRuleCall_2_0());
+
+							}
+							pushFollow(FOLLOW_ruleXExpressionInClosure_in_ruleXClosure13731);
+							lv_expression_6_0 = ruleXExpressionInClosure();
+
+							state._fsp--;
+							if (state.failed)
+								return current;
+							if (state.backtracking == 0) {
+
+								if (current == null) {
+									current = createModelElementForParent(grammarAccess.getXClosureRule());
+								}
+								set(current, XCLOSURE__EXPRESSION, lv_expression_6_0, null);
+								afterParserOrEnumRuleCall();
+
+							}
+
+						}
+
+					}
+
+					otherlv_7 = (Token) match(input, 95, FOLLOW_95_in_ruleXClosure13743);
+					if (state.failed)
+						return current;
+					if (state.backtracking == 0) {
+
+						newLeafNode(otherlv_7, grammarAccess.getXClosureAccess().getRightSquareBracketKeyword_3());
+
+					}
+
+				}
+
+			}
+
+			if (state.backtracking == 0) {
+				leaveRule();
+			}
+		}
+
+		catch (RecognitionException re) {
+			recoverAndAppendSkippedTokens(re);
+		} finally {
+		}
+		return current;
+	}
+
+	public final EObject entryRuleXExpressionInClosure() throws RecognitionException {
+		EObject current = null;
+
+		EObject iv_ruleXExpressionInClosure = null;
+
+		try {
+
+			{
+				if (state.backtracking == 0) {
+					newCompositeNode(grammarAccess.getXExpressionInClosureRule());
+				}
+				pushFollow(FOLLOW_ruleXExpressionInClosure_in_entryRuleXExpressionInClosure13779);
+				iv_ruleXExpressionInClosure = ruleXExpressionInClosure();
+
+				state._fsp--;
+				if (state.failed)
+					return current;
+				if (state.backtracking == 0) {
+					current = iv_ruleXExpressionInClosure;
+				}
+				match(input, EOF, FOLLOW_EOF_in_entryRuleXExpressionInClosure13789);
+				if (state.failed)
+					return current;
+
+			}
+
+		}
+
+		catch (RecognitionException re) {
+			recoverAndAppendSkippedTokens(re);
+		} finally {
+		}
+		return current;
+	}
+
+	public final EObject ruleXExpressionInClosure() throws RecognitionException {
+		EObject current = null;
+
+		Token otherlv_2 = null;
+		EObject lv_expressions_1_0 = null;
+
+		enterRule();
+
+		try {
+
+			{
+
+				{
+
+					{
+						if (state.backtracking == 0) {
+
+							current = forceCreateModelElement(grammarAccess.getXExpressionInClosureAccess()
+									.getXBlockExpressionAction_0(), current);
+
+						}
+
+					}
+
+					loop142: do {
+						int alt142 = 2;
+						int LA142_0 = input.LA(1);
+
+						if (((LA142_0 >= RULE_ID && LA142_0 <= RULE_RICH_TEXT_START)
+								|| (LA142_0 >= RULE_HEX && LA142_0 <= RULE_DECIMAL) || LA142_0 == 20
+								|| (LA142_0 >= 22 && LA142_0 <= 23) || (LA142_0 >= 26 && LA142_0 <= 28)
+								|| (LA142_0 >= 30 && LA142_0 <= 32) || (LA142_0 >= 34 && LA142_0 <= 35)
+								|| (LA142_0 >= 37 && LA142_0 <= 50) || LA142_0 == 52 || LA142_0 == 64 || LA142_0 == 83
+								|| LA142_0 == 88 || (LA142_0 >= 93 && LA142_0 <= 94) || LA142_0 == 97 || LA142_0 == 99
+								|| (LA142_0 >= 102 && LA142_0 <= 105) || (LA142_0 >= 107 && LA142_0 <= 113))) {
+							alt142 = 1;
+						}
+
+						switch (alt142) {
+							case 1:
+
+							{
+
+								{
+
+									{
+										if (state.backtracking == 0) {
+
+											newCompositeNode(grammarAccess.getXExpressionInClosureAccess()
+													.getExpressionsXExpressionInsideBlockParserRuleCall_1_0_0());
+
+										}
+										pushFollow(FOLLOW_ruleXExpressionInsideBlock_in_ruleXExpressionInClosure13845);
+										lv_expressions_1_0 = ruleXExpressionInsideBlock();
+
+										state._fsp--;
+										if (state.failed)
+											return current;
+										if (state.backtracking == 0) {
+
+											if (current == null) {
+												current = createModelElementForParent(grammarAccess
+														.getXExpressionInClosureRule());
+											}
+											add(current, XBLOCK_EXPRESSION__EXPRESSIONS, lv_expressions_1_0, "XExpressionInsideBlock");
+											afterParserOrEnumRuleCall();
+
+										}
+
+									}
+
+								}
+
+								int alt141 = 2;
+								int LA141_0 = input.LA(1);
+
+								if ((LA141_0 == 21)) {
+									alt141 = 1;
+								}
+								switch (alt141) {
+									case 1:
+
+									{
+										otherlv_2 = (Token) match(input, 21, FOLLOW_21_in_ruleXExpressionInClosure13858);
+										if (state.failed)
+											return current;
+										if (state.backtracking == 0) {
+
+											newLeafNode(otherlv_2, grammarAccess.getXExpressionInClosureAccess()
+													.getSemicolonKeyword_1_1());
+
+										}
+
+									}
+										break;
+
+								}
+
+							}
+								break;
+
+							default:
+								break loop142;
+						}
+					} while (true);
+
+				}
+
+			}
+
+			if (state.backtracking == 0) {
+				leaveRule();
+			}
+		}
+
+		catch (RecognitionException re) {
+			recoverAndAppendSkippedTokens(re);
+		} finally {
+		}
+		return current;
+	}
+
+	public final EObject entryRuleXShortClosure() throws RecognitionException {
+		EObject current = null;
+
+		EObject iv_ruleXShortClosure = null;
+
+		try {
+
+			{
+				if (state.backtracking == 0) {
+					newCompositeNode(grammarAccess.getXShortClosureRule());
+				}
+				pushFollow(FOLLOW_ruleXShortClosure_in_entryRuleXShortClosure13898);
+				iv_ruleXShortClosure = ruleXShortClosure();
+
+				state._fsp--;
+				if (state.failed)
+					return current;
+				if (state.backtracking == 0) {
+					current = iv_ruleXShortClosure;
+				}
+				match(input, EOF, FOLLOW_EOF_in_entryRuleXShortClosure13908);
+				if (state.failed)
+					return current;
+
+			}
+
+		}
+
+		catch (RecognitionException re) {
+			recoverAndAppendSkippedTokens(re);
+		} finally {
+		}
+		return current;
+	}
+
+	public final EObject ruleXShortClosure() throws RecognitionException {
+		EObject current = null;
+
+		Token otherlv_2 = null;
+		Token lv_explicitSyntax_4_0 = null;
+		EObject lv_declaredFormalParameters_1_0 = null;
+
+		EObject lv_declaredFormalParameters_3_0 = null;
+
+		EObject lv_expression_5_0 = null;
+
+		enterRule();
+
+		try {
+
+			{
+
+				{
+
+					{
+
+						{
+
+							{
+								if (state.backtracking == 0) {
+
+									current = forceCreateModelElement(grammarAccess.getXShortClosureAccess()
+											.getXClosureAction_0_0_0(), current);
+
+								}
+
+							}
+
+							int alt144 = 2;
+							int LA144_0 = input.LA(1);
+
+							if ((LA144_0 == RULE_ID || LA144_0 == 32 || (LA144_0 >= 34 && LA144_0 <= 35)
+									|| LA144_0 == 50 || LA144_0 == 79)) {
+								alt144 = 1;
+							}
+							switch (alt144) {
+								case 1:
+
+								{
+
+									{
+
+										{
+											if (state.backtracking == 0) {
+
+												newCompositeNode(grammarAccess
+														.getXShortClosureAccess()
+														.getDeclaredFormalParametersJvmFormalParameterParserRuleCall_0_0_1_0_0());
+
+											}
+											pushFollow(FOLLOW_ruleJvmFormalParameter_in_ruleXShortClosure14016);
+											lv_declaredFormalParameters_1_0 = ruleJvmFormalParameter();
+
+											state._fsp--;
+											if (state.failed)
+												return current;
+											if (state.backtracking == 0) {
+
+												if (current == null) {
+													current = createModelElementForParent(grammarAccess
+															.getXShortClosureRule());
+												}
+												add(current, XCLOSURE__DECLARED_FORMAL_PARAMETERS,
+														lv_declaredFormalParameters_1_0, null);
+												afterParserOrEnumRuleCall();
+
+											}
+
+										}
+
+									}
+
+									loop143: do {
+										int alt143 = 2;
+										int LA143_0 = input.LA(1);
+
+										if ((LA143_0 == 24)) {
+											alt143 = 1;
+										}
+
+										switch (alt143) {
+											case 1:
+
+											{
+												otherlv_2 = (Token) match(input, 24,
+														FOLLOW_24_in_ruleXShortClosure14029);
+												if (state.failed)
+													return current;
+												if (state.backtracking == 0) {
+
+													newLeafNode(otherlv_2, grammarAccess.getXShortClosureAccess()
+															.getCommaKeyword_0_0_1_1_0());
+
+												}
+
+												{
+
+													{
+														if (state.backtracking == 0) {
+
+															newCompositeNode(grammarAccess
+																	.getXShortClosureAccess()
+																	.getDeclaredFormalParametersJvmFormalParameterParserRuleCall_0_0_1_1_1_0());
+
+														}
+														pushFollow(FOLLOW_ruleJvmFormalParameter_in_ruleXShortClosure14050);
+														lv_declaredFormalParameters_3_0 = ruleJvmFormalParameter();
+
+														state._fsp--;
+														if (state.failed)
+															return current;
+														if (state.backtracking == 0) {
+
+															if (current == null) {
+																current = createModelElementForParent(grammarAccess
+																		.getXShortClosureRule());
+															}
+															add(current, XCLOSURE__DECLARED_FORMAL_PARAMETERS,
+																	lv_declaredFormalParameters_3_0,
+																	null);
+															afterParserOrEnumRuleCall();
+
+														}
+
+													}
+
+												}
+
+											}
+												break;
+
+											default:
+												break loop143;
+										}
+									} while (true);
+
+								}
+									break;
+
+							}
+
+							{
+
+								{
+									lv_explicitSyntax_4_0 = (Token) match(input, 96,
+											FOLLOW_96_in_ruleXShortClosure14072);
+									if (state.failed)
+										return current;
+									if (state.backtracking == 0) {
+
+										newLeafNode(lv_explicitSyntax_4_0, grammarAccess.getXShortClosureAccess()
+												.getExplicitSyntaxVerticalLineKeyword_0_0_2_0());
+
+									}
+									if (state.backtracking == 0) {
+
+										if (current == null) {
+											current = createModelElement(grammarAccess.getXShortClosureRule());
+										}
+										setWithLastConsumed(current, XCLOSURE__EXPLICIT_SYNTAX, true, "|");
+
+									}
+
+								}
+
+							}
+
+						}
+
+					}
+
+					{
+
+						{
+							if (state.backtracking == 0) {
+
+								newCompositeNode(grammarAccess.getXShortClosureAccess()
+										.getExpressionXExpressionParserRuleCall_1_0());
+
+							}
+							pushFollow(FOLLOW_ruleXExpression_in_ruleXShortClosure14108);
+							lv_expression_5_0 = ruleXExpression();
+
+							state._fsp--;
+							if (state.failed)
+								return current;
+							if (state.backtracking == 0) {
+
+								if (current == null) {
+									current = createModelElementForParent(grammarAccess.getXShortClosureRule());
+								}
+								set(current, XCLOSURE__EXPRESSION, lv_expression_5_0, null);
+								afterParserOrEnumRuleCall();
+
+							}
+
+						}
+
+					}
+
+				}
+
+			}
+
+			if (state.backtracking == 0) {
+				leaveRule();
+			}
+		}
+
+		catch (RecognitionException re) {
+			recoverAndAppendSkippedTokens(re);
+		} finally {
+		}
+		return current;
+	}
+
+	public final EObject entryRuleXParenthesizedExpression() throws RecognitionException {
+		EObject current = null;
+
+		EObject iv_ruleXParenthesizedExpression = null;
+
+		try {
+
+			{
+				if (state.backtracking == 0) {
+					newCompositeNode(grammarAccess.getXParenthesizedExpressionRule());
+				}
+				pushFollow(FOLLOW_ruleXParenthesizedExpression_in_entryRuleXParenthesizedExpression14144);
+				iv_ruleXParenthesizedExpression = ruleXParenthesizedExpression();
+
+				state._fsp--;
+				if (state.failed)
+					return current;
+				if (state.backtracking == 0) {
+					current = iv_ruleXParenthesizedExpression;
+				}
+				match(input, EOF, FOLLOW_EOF_in_entryRuleXParenthesizedExpression14154);
+				if (state.failed)
+					return current;
+
+			}
+
+		}
+
+		catch (RecognitionException re) {
+			recoverAndAppendSkippedTokens(re);
+		} finally {
+		}
+		return current;
+	}
+
+	public final EObject ruleXParenthesizedExpression() throws RecognitionException {
+		EObject current = null;
+
+		Token otherlv_0 = null;
+		Token otherlv_2 = null;
+		EObject this_XExpression_1 = null;
+
+		enterRule();
+
+		try {
+
+			{
+
+				{
+					otherlv_0 = (Token) match(input, 35, FOLLOW_35_in_ruleXParenthesizedExpression14191);
+					if (state.failed)
+						return current;
+					if (state.backtracking == 0) {
+
+						newLeafNode(otherlv_0, grammarAccess.getXParenthesizedExpressionAccess()
+								.getLeftParenthesisKeyword_0());
+
+					}
+					if (state.backtracking == 0) {
+
+						newCompositeNode(grammarAccess.getXParenthesizedExpressionAccess()
+								.getXExpressionParserRuleCall_1());
+
+					}
+					pushFollow(FOLLOW_ruleXExpression_in_ruleXParenthesizedExpression14213);
+					this_XExpression_1 = ruleXExpression();
+
+					state._fsp--;
+					if (state.failed)
+						return current;
+					if (state.backtracking == 0) {
+
+						current = this_XExpression_1;
+						afterParserOrEnumRuleCall();
+
+					}
+					otherlv_2 = (Token) match(input, 36, FOLLOW_36_in_ruleXParenthesizedExpression14224);
+					if (state.failed)
+						return current;
+					if (state.backtracking == 0) {
+
+						newLeafNode(otherlv_2, grammarAccess.getXParenthesizedExpressionAccess()
+								.getRightParenthesisKeyword_2());
+
+					}
+
+				}
+
+			}
+
+			if (state.backtracking == 0) {
+				leaveRule();
+			}
+		}
+
+		catch (RecognitionException re) {
+			recoverAndAppendSkippedTokens(re);
+		} finally {
+		}
+		return current;
+	}
+
+	public final EObject entryRuleXIfExpression() throws RecognitionException {
+		EObject current = null;
+
+		EObject iv_ruleXIfExpression = null;
+
+		try {
+
+			{
+				if (state.backtracking == 0) {
+					newCompositeNode(grammarAccess.getXIfExpressionRule());
+				}
+				pushFollow(FOLLOW_ruleXIfExpression_in_entryRuleXIfExpression14260);
+				iv_ruleXIfExpression = ruleXIfExpression();
+
+				state._fsp--;
+				if (state.failed)
+					return current;
+				if (state.backtracking == 0) {
+					current = iv_ruleXIfExpression;
+				}
+				match(input, EOF, FOLLOW_EOF_in_entryRuleXIfExpression14270);
+				if (state.failed)
+					return current;
+
+			}
+
+		}
+
+		catch (RecognitionException re) {
+			recoverAndAppendSkippedTokens(re);
+		} finally {
+		}
+		return current;
+	}
+
+	public final EObject ruleXIfExpression() throws RecognitionException {
+		EObject current = null;
+
+		Token otherlv_1 = null;
+		Token otherlv_2 = null;
+		Token otherlv_4 = null;
+		Token otherlv_6 = null;
+		EObject lv_if_3_0 = null;
+
+		EObject lv_then_5_0 = null;
+
+		EObject lv_else_7_0 = null;
+
+		enterRule();
+
+		try {
+
+			{
+
+				{
+
+					{
+						if (state.backtracking == 0) {
+
+							current = forceCreateModelElement(grammarAccess.getXIfExpressionAccess()
+									.getXIfExpressionAction_0(), current);
+
+						}
+
+					}
+
+					otherlv_1 = (Token) match(input, 97, FOLLOW_97_in_ruleXIfExpression14316);
+					if (state.failed)
+						return current;
+					if (state.backtracking == 0) {
+
+						newLeafNode(otherlv_1, grammarAccess.getXIfExpressionAccess().getIfKeyword_1());
+
+					}
+					otherlv_2 = (Token) match(input, 35, FOLLOW_35_in_ruleXIfExpression14328);
+					if (state.failed)
+						return current;
+					if (state.backtracking == 0) {
+
+						newLeafNode(otherlv_2, grammarAccess.getXIfExpressionAccess().getLeftParenthesisKeyword_2());
+
+					}
+
+					{
+
+						{
+							if (state.backtracking == 0) {
+
+								newCompositeNode(grammarAccess.getXIfExpressionAccess()
+										.getIfXExpressionParserRuleCall_3_0());
+
+							}
+							pushFollow(FOLLOW_ruleXExpression_in_ruleXIfExpression14349);
+							lv_if_3_0 = ruleXExpression();
+
+							state._fsp--;
+							if (state.failed)
+								return current;
+							if (state.backtracking == 0) {
+
+								if (current == null) {
+									current = createModelElementForParent(grammarAccess.getXIfExpressionRule());
+								}
+								set(current, XIF_EXPRESSION__IF, lv_if_3_0, null);
+								afterParserOrEnumRuleCall();
+
+							}
+
+						}
+
+					}
+
+					otherlv_4 = (Token) match(input, 36, FOLLOW_36_in_ruleXIfExpression14361);
+					if (state.failed)
+						return current;
+					if (state.backtracking == 0) {
+
+						newLeafNode(otherlv_4, grammarAccess.getXIfExpressionAccess().getRightParenthesisKeyword_4());
+
+					}
+
+					{
+
+						{
+							if (state.backtracking == 0) {
+
+								newCompositeNode(grammarAccess.getXIfExpressionAccess()
+										.getThenXExpressionParserRuleCall_5_0());
+
+							}
+							pushFollow(FOLLOW_ruleXExpression_in_ruleXIfExpression14382);
+							lv_then_5_0 = ruleXExpression();
+
+							state._fsp--;
+							if (state.failed)
+								return current;
+							if (state.backtracking == 0) {
+
+								if (current == null) {
+									current = createModelElementForParent(grammarAccess.getXIfExpressionRule());
+								}
+								set(current, XIF_EXPRESSION__THEN, lv_then_5_0, null);
+								afterParserOrEnumRuleCall();
+
+							}
+
+						}
+
+					}
+
+					int alt145 = 2;
+					int LA145_0 = input.LA(1);
+
+					if ((LA145_0 == 98)) {
+						int LA145_1 = input.LA(2);
+
+						if ((synpred28_InternalXtend())) {
+							alt145 = 1;
+						}
+					}
+					switch (alt145) {
+						case 1:
+
+						{
+
+							{
+								otherlv_6 = (Token) match(input, 98, FOLLOW_98_in_ruleXIfExpression14403);
+								if (state.failed)
+									return current;
+								if (state.backtracking == 0) {
+
+									newLeafNode(otherlv_6, grammarAccess.getXIfExpressionAccess().getElseKeyword_6_0());
+
+								}
+
+							}
+
+							{
+
+								{
+									if (state.backtracking == 0) {
+
+										newCompositeNode(grammarAccess.getXIfExpressionAccess()
+												.getElseXExpressionParserRuleCall_6_1_0());
+
+									}
+									pushFollow(FOLLOW_ruleXExpression_in_ruleXIfExpression14425);
+									lv_else_7_0 = ruleXExpression();
+
+									state._fsp--;
+									if (state.failed)
+										return current;
+									if (state.backtracking == 0) {
+
+										if (current == null) {
+											current = createModelElementForParent(grammarAccess.getXIfExpressionRule());
+										}
+										set(current, XIF_EXPRESSION__ELSE, lv_else_7_0, null);
+										afterParserOrEnumRuleCall();
+
+									}
+
+								}
+
+							}
+
+						}
+							break;
+
+					}
+
+				}
+
+			}
+
+			if (state.backtracking == 0) {
+				leaveRule();
+			}
+		}
+
+		catch (RecognitionException re) {
+			recoverAndAppendSkippedTokens(re);
+		} finally {
+		}
+		return current;
+	}
+
+	public final EObject entryRuleXSwitchExpression() throws RecognitionException {
+		EObject current = null;
+
+		EObject iv_ruleXSwitchExpression = null;
+
+		try {
+
+			{
+				if (state.backtracking == 0) {
+					newCompositeNode(grammarAccess.getXSwitchExpressionRule());
+				}
+				pushFollow(FOLLOW_ruleXSwitchExpression_in_entryRuleXSwitchExpression14463);
+				iv_ruleXSwitchExpression = ruleXSwitchExpression();
+
+				state._fsp--;
+				if (state.failed)
+					return current;
+				if (state.backtracking == 0) {
+					current = iv_ruleXSwitchExpression;
+				}
+				match(input, EOF, FOLLOW_EOF_in_entryRuleXSwitchExpression14473);
+				if (state.failed)
+					return current;
+
+			}
+
+		}
+
+		catch (RecognitionException re) {
+			recoverAndAppendSkippedTokens(re);
+		} finally {
+		}
+		return current;
+	}
+
+	public final EObject ruleXSwitchExpression() throws RecognitionException {
+		EObject current = null;
+
+		Token otherlv_1 = null;
+		Token otherlv_3 = null;
+		Token otherlv_5 = null;
+		Token otherlv_7 = null;
+		Token otherlv_9 = null;
+		Token otherlv_10 = null;
+		Token otherlv_12 = null;
+		Token otherlv_13 = null;
+		Token otherlv_15 = null;
+		AntlrDatatypeRuleToken lv_localVarName_2_0 = null;
+
+		EObject lv_switch_4_0 = null;
+
+		AntlrDatatypeRuleToken lv_localVarName_6_0 = null;
+
+		EObject lv_switch_8_0 = null;
+
+		EObject lv_cases_11_0 = null;
+
+		EObject lv_default_14_0 = null;
+
+		enterRule();
+
+		try {
+
+			{
+
+				{
+
+					{
+						if (state.backtracking == 0) {
+
+							current = forceCreateModelElement(grammarAccess.getXSwitchExpressionAccess()
+									.getXSwitchExpressionAction_0(), current);
+
+						}
+
+					}
+
+					otherlv_1 = (Token) match(input, 99, FOLLOW_99_in_ruleXSwitchExpression14519);
+					if (state.failed)
+						return current;
+					if (state.backtracking == 0) {
+
+						newLeafNode(otherlv_1, grammarAccess.getXSwitchExpressionAccess().getSwitchKeyword_1());
+
+					}
+
+					int alt147 = 2;
+					int LA147_0 = input.LA(1);
+
+					if (((LA147_0 >= RULE_ID && LA147_0 <= RULE_RICH_TEXT_START)
+							|| (LA147_0 >= RULE_HEX && LA147_0 <= RULE_DECIMAL) || LA147_0 == 20
+							|| (LA147_0 >= 22 && LA147_0 <= 23) || (LA147_0 >= 26 && LA147_0 <= 28)
+							|| (LA147_0 >= 30 && LA147_0 <= 32) || LA147_0 == 34 || (LA147_0 >= 37 && LA147_0 <= 45)
+							|| (LA147_0 >= 48 && LA147_0 <= 50) || LA147_0 == 52 || LA147_0 == 64 || LA147_0 == 83
+							|| LA147_0 == 88 || (LA147_0 >= 93 && LA147_0 <= 94) || LA147_0 == 97 || LA147_0 == 99
+							|| (LA147_0 >= 102 && LA147_0 <= 105) || (LA147_0 >= 107 && LA147_0 <= 113))) {
+						alt147 = 1;
+					} else if ((LA147_0 == 35)) {
+						switch (input.LA(2)) {
+							case RULE_ID: {
+								int LA147_3 = input.LA(3);
+
+								if ((LA147_3 == 23 || LA147_3 == 25 || LA147_3 == 33
+										|| (LA147_3 >= 35 && LA147_3 <= 36) || (LA147_3 >= 64 && LA147_3 <= 87)
+										|| (LA147_3 >= 89 && LA147_3 <= 92) || LA147_3 == 94 || LA147_3 == 106)) {
+									alt147 = 1;
+								} else if ((LA147_3 == 51) && (synpred30_InternalXtend())) {
+									alt147 = 2;
+								} else {
+									if (state.backtracking > 0) {
+										state.failed = true;
+										return current;
+									}
+									NoViableAltException nvae = new NoViableAltException("", 147, 3, input);
+
+									throw nvae;
+								}
+							}
+								break;
+							case 50: {
+								int LA147_4 = input.LA(3);
+
+								if ((LA147_4 == 23 || LA147_4 == 25 || LA147_4 == 33
+										|| (LA147_4 >= 35 && LA147_4 <= 36) || (LA147_4 >= 64 && LA147_4 <= 87)
+										|| (LA147_4 >= 89 && LA147_4 <= 92) || LA147_4 == 94 || LA147_4 == 106)) {
+									alt147 = 1;
+								} else if ((LA147_4 == 51) && (synpred30_InternalXtend())) {
+									alt147 = 2;
+								} else {
+									if (state.backtracking > 0) {
+										state.failed = true;
+										return current;
+									}
+									NoViableAltException nvae = new NoViableAltException("", 147, 4, input);
+
+									throw nvae;
+								}
+							}
+								break;
+							case 32: {
+								int LA147_5 = input.LA(3);
+
+								if ((LA147_5 == 23 || LA147_5 == 25 || LA147_5 == 33
+										|| (LA147_5 >= 35 && LA147_5 <= 36) || (LA147_5 >= 64 && LA147_5 <= 87)
+										|| (LA147_5 >= 89 && LA147_5 <= 92) || LA147_5 == 94 || LA147_5 == 106)) {
+									alt147 = 1;
+								} else if ((LA147_5 == 51) && (synpred30_InternalXtend())) {
+									alt147 = 2;
+								} else {
+									if (state.backtracking > 0) {
+										state.failed = true;
+										return current;
+									}
+									NoViableAltException nvae = new NoViableAltException("", 147, 5, input);
+
+									throw nvae;
+								}
+							}
+								break;
+							case RULE_STRING:
+							case RULE_RICH_TEXT:
+							case RULE_RICH_TEXT_START:
+							case RULE_HEX:
+							case RULE_INT:
+							case RULE_DECIMAL:
+							case 20:
+							case 22:
+							case 23:
+							case 26:
+							case 27:
+							case 28:
+							case 30:
+							case 31:
+							case 34:
+							case 35:
+							case 37:
+							case 38:
+							case 39:
+							case 40:
+							case 41:
+							case 42:
+							case 43:
+							case 44:
+							case 45:
+							case 48:
+							case 49:
+							case 52:
+							case 64:
+							case 83:
+							case 88:
+							case 93:
+							case 94:
+							case 97:
+							case 99:
+							case 102:
+							case 103:
+							case 104:
+							case 105:
+							case 107:
+							case 108:
+							case 109:
+							case 110:
+							case 111:
+							case 112:
+							case 113: {
+								alt147 = 1;
+							}
+								break;
+							default:
+								if (state.backtracking > 0) {
+									state.failed = true;
+									return current;
+								}
+								NoViableAltException nvae = new NoViableAltException("", 147, 2, input);
+
+								throw nvae;
+						}
+
+					} else {
+						if (state.backtracking > 0) {
+							state.failed = true;
+							return current;
+						}
+						NoViableAltException nvae = new NoViableAltException("", 147, 0, input);
+
+						throw nvae;
+					}
+					switch (alt147) {
+						case 1:
+
+						{
+
+							{
+
+								int alt146 = 2;
+								switch (input.LA(1)) {
+									case RULE_ID: {
+										int LA146_1 = input.LA(2);
+
+										if ((LA146_1 == 51) && (synpred29_InternalXtend())) {
+											alt146 = 1;
+										}
+									}
+										break;
+									case 50: {
+										int LA146_2 = input.LA(2);
+
+										if ((LA146_2 == 51) && (synpred29_InternalXtend())) {
+											alt146 = 1;
+										}
+									}
+										break;
+									case 32: {
+										int LA146_3 = input.LA(2);
+
+										if ((LA146_3 == 51) && (synpred29_InternalXtend())) {
+											alt146 = 1;
+										}
+									}
+										break;
+								}
+
+								switch (alt146) {
+									case 1:
+
+									{
+
+										{
+
+											{
+
+												{
+													if (state.backtracking == 0) {
+
+														newCompositeNode(grammarAccess.getXSwitchExpressionAccess()
+																.getLocalVarNameValidIDParserRuleCall_2_0_0_0_0_0());
+
+													}
+													pushFollow(FOLLOW_ruleValidID_in_ruleXSwitchExpression14562);
+													lv_localVarName_2_0 = ruleValidID();
+
+													state._fsp--;
+													if (state.failed)
+														return current;
+													if (state.backtracking == 0) {
+
+														if (current == null) {
+															current = createModelElementForParent(grammarAccess
+																	.getXSwitchExpressionRule());
+														}
+														set(current, XSWITCH_EXPRESSION__LOCAL_VAR_NAME, lv_localVarName_2_0, "ValidID");
+														afterParserOrEnumRuleCall();
+
+													}
+
+												}
+
+											}
+
+											otherlv_3 = (Token) match(input, 51,
+													FOLLOW_51_in_ruleXSwitchExpression14574);
+											if (state.failed)
+												return current;
+											if (state.backtracking == 0) {
+
+												newLeafNode(otherlv_3, grammarAccess.getXSwitchExpressionAccess()
+														.getColonKeyword_2_0_0_0_1());
+
+											}
+
+										}
+
+									}
+										break;
+
+								}
+
+								{
+
+									{
+										if (state.backtracking == 0) {
+
+											newCompositeNode(grammarAccess.getXSwitchExpressionAccess()
+													.getSwitchXExpressionParserRuleCall_2_0_1_0());
+
+										}
+										pushFollow(FOLLOW_ruleXExpression_in_ruleXSwitchExpression14598);
+										lv_switch_4_0 = ruleXExpression();
+
+										state._fsp--;
+										if (state.failed)
+											return current;
+										if (state.backtracking == 0) {
+
+											if (current == null) {
+												current = createModelElementForParent(grammarAccess
+														.getXSwitchExpressionRule());
+											}
+											set(current, XSWITCH_EXPRESSION__SWITCH, lv_switch_4_0, null);
+											afterParserOrEnumRuleCall();
+
+										}
+
+									}
+
+								}
+
+							}
+
+						}
+							break;
+						case 2:
+
+						{
+
+							{
+
+								{
+
+									{
+										otherlv_5 = (Token) match(input, 35, FOLLOW_35_in_ruleXSwitchExpression14642);
+										if (state.failed)
+											return current;
+										if (state.backtracking == 0) {
+
+											newLeafNode(otherlv_5, grammarAccess.getXSwitchExpressionAccess()
+													.getLeftParenthesisKeyword_2_1_0_0_0());
+
+										}
+
+										{
+
+											{
+												if (state.backtracking == 0) {
+
+													newCompositeNode(grammarAccess.getXSwitchExpressionAccess()
+															.getLocalVarNameValidIDParserRuleCall_2_1_0_0_1_0());
+
+												}
+												pushFollow(FOLLOW_ruleValidID_in_ruleXSwitchExpression14663);
+												lv_localVarName_6_0 = ruleValidID();
+
+												state._fsp--;
+												if (state.failed)
+													return current;
+												if (state.backtracking == 0) {
+
+													if (current == null) {
+														current = createModelElementForParent(grammarAccess
+																.getXSwitchExpressionRule());
+													}
+													set(current, XSWITCH_EXPRESSION__LOCAL_VAR_NAME, lv_localVarName_6_0, "ValidID");
+													afterParserOrEnumRuleCall();
+
+												}
+
+											}
+
+										}
+
+										otherlv_7 = (Token) match(input, 51, FOLLOW_51_in_ruleXSwitchExpression14675);
+										if (state.failed)
+											return current;
+										if (state.backtracking == 0) {
+
+											newLeafNode(otherlv_7, grammarAccess.getXSwitchExpressionAccess()
+													.getColonKeyword_2_1_0_0_2());
+
+										}
+
+									}
+
+								}
+
+								{
+
+									{
+										if (state.backtracking == 0) {
+
+											newCompositeNode(grammarAccess.getXSwitchExpressionAccess()
+													.getSwitchXExpressionParserRuleCall_2_1_1_0());
+
+										}
+										pushFollow(FOLLOW_ruleXExpression_in_ruleXSwitchExpression14698);
+										lv_switch_8_0 = ruleXExpression();
+
+										state._fsp--;
+										if (state.failed)
+											return current;
+										if (state.backtracking == 0) {
+
+											if (current == null) {
+												current = createModelElementForParent(grammarAccess
+														.getXSwitchExpressionRule());
+											}
+											set(current, XSWITCH_EXPRESSION__SWITCH, lv_switch_8_0, null);
+											afterParserOrEnumRuleCall();
+
+										}
+
+									}
+
+								}
+
+								otherlv_9 = (Token) match(input, 36, FOLLOW_36_in_ruleXSwitchExpression14710);
+								if (state.failed)
+									return current;
+								if (state.backtracking == 0) {
+
+									newLeafNode(otherlv_9, grammarAccess.getXSwitchExpressionAccess()
+											.getRightParenthesisKeyword_2_1_2());
+
+								}
+
+							}
+
+						}
+							break;
+
+					}
+
+					otherlv_10 = (Token) match(input, 28, FOLLOW_28_in_ruleXSwitchExpression14724);
+					if (state.failed)
+						return current;
+					if (state.backtracking == 0) {
+
+						newLeafNode(otherlv_10, grammarAccess.getXSwitchExpressionAccess()
+								.getLeftCurlyBracketKeyword_3());
+
+					}
+
+					int cnt148 = 0;
+					loop148: do {
+						int alt148 = 2;
+						int LA148_0 = input.LA(1);
+
+						if ((LA148_0 == RULE_ID || LA148_0 == 32 || LA148_0 == 35 || (LA148_0 >= 50 && LA148_0 <= 51)
+								|| LA148_0 == 79 || LA148_0 == 101)) {
+							alt148 = 1;
+						}
+
+						switch (alt148) {
+							case 1:
+
+							{
+
+								{
+									if (state.backtracking == 0) {
+
+										newCompositeNode(grammarAccess.getXSwitchExpressionAccess()
+												.getCasesXCasePartParserRuleCall_4_0());
+
+									}
+									pushFollow(FOLLOW_ruleXCasePart_in_ruleXSwitchExpression14745);
+									lv_cases_11_0 = ruleXCasePart();
+
+									state._fsp--;
+									if (state.failed)
+										return current;
+									if (state.backtracking == 0) {
+
+										if (current == null) {
+											current = createModelElementForParent(grammarAccess
+													.getXSwitchExpressionRule());
+										}
+										add(current, XSWITCH_EXPRESSION__CASES, lv_cases_11_0, "XCasePart");
+										afterParserOrEnumRuleCall();
+
+									}
+
+								}
+
+							}
+								break;
+
+							default:
+								if (cnt148 >= 1)
+									break loop148;
+								if (state.backtracking > 0) {
+									state.failed = true;
+									return current;
+								}
+								EarlyExitException eee = new EarlyExitException(148, input);
+								throw eee;
+						}
+						cnt148++;
+					} while (true);
+
+					int alt149 = 2;
+					int LA149_0 = input.LA(1);
+
+					if ((LA149_0 == 100)) {
+						alt149 = 1;
+					}
+					switch (alt149) {
+						case 1:
+
+						{
+							otherlv_12 = (Token) match(input, 100, FOLLOW_100_in_ruleXSwitchExpression14759);
+							if (state.failed)
+								return current;
+							if (state.backtracking == 0) {
+
+								newLeafNode(otherlv_12, grammarAccess.getXSwitchExpressionAccess()
+										.getDefaultKeyword_5_0());
+
+							}
+							otherlv_13 = (Token) match(input, 51, FOLLOW_51_in_ruleXSwitchExpression14771);
+							if (state.failed)
+								return current;
+							if (state.backtracking == 0) {
+
+								newLeafNode(otherlv_13, grammarAccess.getXSwitchExpressionAccess()
+										.getColonKeyword_5_1());
+
+							}
+
+							{
+
+								{
+									if (state.backtracking == 0) {
+
+										newCompositeNode(grammarAccess.getXSwitchExpressionAccess()
+												.getDefaultXExpressionParserRuleCall_5_2_0());
+
+									}
+									pushFollow(FOLLOW_ruleXExpression_in_ruleXSwitchExpression14792);
+									lv_default_14_0 = ruleXExpression();
+
+									state._fsp--;
+									if (state.failed)
+										return current;
+									if (state.backtracking == 0) {
+
+										if (current == null) {
+											current = createModelElementForParent(grammarAccess
+													.getXSwitchExpressionRule());
+										}
+										set(current,XSWITCH_EXPRESSION__DEFAULT, lv_default_14_0, null);
+										afterParserOrEnumRuleCall();
+
+									}
+
+								}
+
+							}
+
+						}
+							break;
+
+					}
+
+					otherlv_15 = (Token) match(input, 29, FOLLOW_29_in_ruleXSwitchExpression14806);
+					if (state.failed)
+						return current;
+					if (state.backtracking == 0) {
+
+						newLeafNode(otherlv_15, grammarAccess.getXSwitchExpressionAccess()
+								.getRightCurlyBracketKeyword_6());
+
+					}
+
+				}
+
+			}
+
+			if (state.backtracking == 0) {
+				leaveRule();
+			}
+		}
+
+		catch (RecognitionException re) {
+			recoverAndAppendSkippedTokens(re);
+		} finally {
+		}
+		return current;
+	}
+
+	public final EObject entryRuleXCasePart() throws RecognitionException {
+		EObject current = null;
+
+		EObject iv_ruleXCasePart = null;
+
+		try {
+
+			{
+				if (state.backtracking == 0) {
+					newCompositeNode(grammarAccess.getXCasePartRule());
+				}
+				pushFollow(FOLLOW_ruleXCasePart_in_entryRuleXCasePart14842);
+				iv_ruleXCasePart = ruleXCasePart();
+
+				state._fsp--;
+				if (state.failed)
+					return current;
+				if (state.backtracking == 0) {
+					current = iv_ruleXCasePart;
+				}
+				match(input, EOF, FOLLOW_EOF_in_entryRuleXCasePart14852);
+				if (state.failed)
+					return current;
+
+			}
+
+		}
+
+		catch (RecognitionException re) {
+			recoverAndAppendSkippedTokens(re);
+		} finally {
+		}
+		return current;
+	}
+
+	public final EObject ruleXCasePart() throws RecognitionException {
+		EObject current = null;
+
+		Token otherlv_1 = null;
+		Token otherlv_3 = null;
+		EObject lv_typeGuard_0_0 = null;
+
+		EObject lv_case_2_0 = null;
+
+		EObject lv_then_4_0 = null;
+
+		enterRule();
+
+		try {
+
+			{
+
+				{
+
+					int alt150 = 2;
+					int LA150_0 = input.LA(1);
+
+					if ((LA150_0 == RULE_ID || LA150_0 == 32 || LA150_0 == 35 || LA150_0 == 50 || LA150_0 == 79)) {
+						alt150 = 1;
+					}
+					switch (alt150) {
+						case 1:
+
+						{
+
+							{
+								if (state.backtracking == 0) {
+
+									newCompositeNode(grammarAccess.getXCasePartAccess()
+											.getTypeGuardJvmTypeReferenceParserRuleCall_0_0());
+
+								}
+								pushFollow(FOLLOW_ruleJvmTypeReference_in_ruleXCasePart14898);
+								lv_typeGuard_0_0 = ruleJvmTypeReference();
+
+								state._fsp--;
+								if (state.failed)
+									return current;
+								if (state.backtracking == 0) {
+
+									if (current == null) {
+										current = createModelElementForParent(grammarAccess.getXCasePartRule());
+									}
+									set(current, XCASE_PART__TYPE_GUARD, lv_typeGuard_0_0, null);
+									afterParserOrEnumRuleCall();
+
+								}
+
+							}
+
+						}
+							break;
+
+					}
+
+					int alt151 = 2;
+					int LA151_0 = input.LA(1);
+
+					if ((LA151_0 == 101)) {
+						alt151 = 1;
+					}
+					switch (alt151) {
+						case 1:
+
+						{
+							otherlv_1 = (Token) match(input, 101, FOLLOW_101_in_ruleXCasePart14912);
+							if (state.failed)
+								return current;
+							if (state.backtracking == 0) {
+
+								newLeafNode(otherlv_1, grammarAccess.getXCasePartAccess().getCaseKeyword_1_0());
+
+							}
+
+							{
+
+								{
+									if (state.backtracking == 0) {
+
+										newCompositeNode(grammarAccess.getXCasePartAccess()
+												.getCaseXExpressionParserRuleCall_1_1_0());
+
+									}
+									pushFollow(FOLLOW_ruleXExpression_in_ruleXCasePart14933);
+									lv_case_2_0 = ruleXExpression();
+
+									state._fsp--;
+									if (state.failed)
+										return current;
+									if (state.backtracking == 0) {
+
+										if (current == null) {
+											current = createModelElementForParent(grammarAccess.getXCasePartRule());
+										}
+										set(current, XCASE_PART__CASE, lv_case_2_0, null);
+										afterParserOrEnumRuleCall();
+
+									}
+
+								}
+
+							}
+
+						}
+							break;
+
+					}
+
+					otherlv_3 = (Token) match(input, 51, FOLLOW_51_in_ruleXCasePart14947);
+					if (state.failed)
+						return current;
+					if (state.backtracking == 0) {
+
+						newLeafNode(otherlv_3, grammarAccess.getXCasePartAccess().getColonKeyword_2());
+
+					}
+
+					{
+
+						{
+							if (state.backtracking == 0) {
+
+								newCompositeNode(grammarAccess.getXCasePartAccess()
+										.getThenXExpressionParserRuleCall_3_0());
+
+							}
+							pushFollow(FOLLOW_ruleXExpression_in_ruleXCasePart14968);
+							lv_then_4_0 = ruleXExpression();
+
+							state._fsp--;
+							if (state.failed)
+								return current;
+							if (state.backtracking == 0) {
+
+								if (current == null) {
+									current = createModelElementForParent(grammarAccess.getXCasePartRule());
+								}
+								set(current, XCASE_PART__THEN, lv_then_4_0, null);
+								afterParserOrEnumRuleCall();
+
+							}
+
+						}
+
+					}
+
+				}
+
+			}
+
+			if (state.backtracking == 0) {
+				leaveRule();
+			}
+		}
+
+		catch (RecognitionException re) {
+			recoverAndAppendSkippedTokens(re);
+		} finally {
+		}
+		return current;
+	}
+
+	public final EObject entryRuleXForLoopExpression() throws RecognitionException {
+		EObject current = null;
+
+		EObject iv_ruleXForLoopExpression = null;
+
+		try {
+
+			{
+				if (state.backtracking == 0) {
+					newCompositeNode(grammarAccess.getXForLoopExpressionRule());
+				}
+				pushFollow(FOLLOW_ruleXForLoopExpression_in_entryRuleXForLoopExpression15004);
+				iv_ruleXForLoopExpression = ruleXForLoopExpression();
+
+				state._fsp--;
+				if (state.failed)
+					return current;
+				if (state.backtracking == 0) {
+					current = iv_ruleXForLoopExpression;
+				}
+				match(input, EOF, FOLLOW_EOF_in_entryRuleXForLoopExpression15014);
+				if (state.failed)
+					return current;
+
+			}
+
+		}
+
+		catch (RecognitionException re) {
+			recoverAndAppendSkippedTokens(re);
+		} finally {
+		}
+		return current;
+	}
+
+	public final EObject ruleXForLoopExpression() throws RecognitionException {
+		EObject current = null;
+
+		Token otherlv_1 = null;
+		Token otherlv_2 = null;
+		Token otherlv_4 = null;
+		Token otherlv_6 = null;
+		EObject lv_declaredParam_3_0 = null;
+
+		EObject lv_forExpression_5_0 = null;
+
+		EObject lv_eachExpression_7_0 = null;
+
+		enterRule();
+
+		try {
+
+			{
+
+				{
+
+					{
+						if (state.backtracking == 0) {
+
+							current = forceCreateModelElement(grammarAccess.getXForLoopExpressionAccess()
+									.getXForLoopExpressionAction_0(), current);
+
+						}
+
+					}
+
+					otherlv_1 = (Token) match(input, 102, FOLLOW_102_in_ruleXForLoopExpression15060);
+					if (state.failed)
+						return current;
+					if (state.backtracking == 0) {
+
+						newLeafNode(otherlv_1, grammarAccess.getXForLoopExpressionAccess().getForKeyword_1());
+
+					}
+					otherlv_2 = (Token) match(input, 35, FOLLOW_35_in_ruleXForLoopExpression15072);
+					if (state.failed)
+						return current;
+					if (state.backtracking == 0) {
+
+						newLeafNode(otherlv_2, grammarAccess.getXForLoopExpressionAccess()
+								.getLeftParenthesisKeyword_2());
+
+					}
+
+					{
+
+						{
+							if (state.backtracking == 0) {
+
+								newCompositeNode(grammarAccess.getXForLoopExpressionAccess()
+										.getDeclaredParamJvmFormalParameterParserRuleCall_3_0());
+
+							}
+							pushFollow(FOLLOW_ruleJvmFormalParameter_in_ruleXForLoopExpression15093);
+							lv_declaredParam_3_0 = ruleJvmFormalParameter();
+
+							state._fsp--;
+							if (state.failed)
+								return current;
+							if (state.backtracking == 0) {
+
+								if (current == null) {
+									current = createModelElementForParent(grammarAccess.getXForLoopExpressionRule());
+								}
+								set(current, XFOR_LOOP_EXPRESSION__DECLARED_PARAM, lv_declaredParam_3_0, null);
+								afterParserOrEnumRuleCall();
+
+							}
+
+						}
+
+					}
+
+					otherlv_4 = (Token) match(input, 51, FOLLOW_51_in_ruleXForLoopExpression15105);
+					if (state.failed)
+						return current;
+					if (state.backtracking == 0) {
+
+						newLeafNode(otherlv_4, grammarAccess.getXForLoopExpressionAccess().getColonKeyword_4());
+
+					}
+
+					{
+
+						{
+							if (state.backtracking == 0) {
+
+								newCompositeNode(grammarAccess.getXForLoopExpressionAccess()
+										.getForExpressionXExpressionParserRuleCall_5_0());
+
+							}
+							pushFollow(FOLLOW_ruleXExpression_in_ruleXForLoopExpression15126);
+							lv_forExpression_5_0 = ruleXExpression();
+
+							state._fsp--;
+							if (state.failed)
+								return current;
+							if (state.backtracking == 0) {
+
+								if (current == null) {
+									current = createModelElementForParent(grammarAccess.getXForLoopExpressionRule());
+								}
+								set(current, XFOR_LOOP_EXPRESSION__FOR_EXPRESSION, lv_forExpression_5_0, null);
+								afterParserOrEnumRuleCall();
+
+							}
+
+						}
+
+					}
+
+					otherlv_6 = (Token) match(input, 36, FOLLOW_36_in_ruleXForLoopExpression15138);
+					if (state.failed)
+						return current;
+					if (state.backtracking == 0) {
+
+						newLeafNode(otherlv_6, grammarAccess.getXForLoopExpressionAccess()
+								.getRightParenthesisKeyword_6());
+
+					}
+
+					{
+
+						{
+							if (state.backtracking == 0) {
+
+								newCompositeNode(grammarAccess.getXForLoopExpressionAccess()
+										.getEachExpressionXExpressionParserRuleCall_7_0());
+
+							}
+							pushFollow(FOLLOW_ruleXExpression_in_ruleXForLoopExpression15159);
+							lv_eachExpression_7_0 = ruleXExpression();
+
+							state._fsp--;
+							if (state.failed)
+								return current;
+							if (state.backtracking == 0) {
+
+								if (current == null) {
+									current = createModelElementForParent(grammarAccess.getXForLoopExpressionRule());
+								}
+								set(current, XFOR_LOOP_EXPRESSION__EACH_EXPRESSION, lv_eachExpression_7_0, null);
+								afterParserOrEnumRuleCall();
+
+							}
+
+						}
+
+					}
+
+				}
+
+			}
+
+			if (state.backtracking == 0) {
+				leaveRule();
+			}
+		}
+
+		catch (RecognitionException re) {
+			recoverAndAppendSkippedTokens(re);
+		} finally {
+		}
+		return current;
+	}
+
+	public final EObject entryRuleXWhileExpression() throws RecognitionException {
+		EObject current = null;
+
+		EObject iv_ruleXWhileExpression = null;
+
+		try {
+
+			{
+				if (state.backtracking == 0) {
+					newCompositeNode(grammarAccess.getXWhileExpressionRule());
+				}
+				pushFollow(FOLLOW_ruleXWhileExpression_in_entryRuleXWhileExpression15195);
+				iv_ruleXWhileExpression = ruleXWhileExpression();
+
+				state._fsp--;
+				if (state.failed)
+					return current;
+				if (state.backtracking == 0) {
+					current = iv_ruleXWhileExpression;
+				}
+				match(input, EOF, FOLLOW_EOF_in_entryRuleXWhileExpression15205);
+				if (state.failed)
+					return current;
+
+			}
+
+		}
+
+		catch (RecognitionException re) {
+			recoverAndAppendSkippedTokens(re);
+		} finally {
+		}
+		return current;
+	}
+
+	public final EObject ruleXWhileExpression() throws RecognitionException {
+		EObject current = null;
+
+		Token otherlv_1 = null;
+		Token otherlv_2 = null;
+		Token otherlv_4 = null;
+		EObject lv_predicate_3_0 = null;
+
+		EObject lv_body_5_0 = null;
+
+		enterRule();
+
+		try {
+
+			{
+
+				{
+
+					{
+						if (state.backtracking == 0) {
+
+							current = forceCreateModelElement(grammarAccess.getXWhileExpressionAccess()
+									.getXWhileExpressionAction_0(), current);
+
+						}
+
+					}
+
+					otherlv_1 = (Token) match(input, 103, FOLLOW_103_in_ruleXWhileExpression15251);
+					if (state.failed)
+						return current;
+					if (state.backtracking == 0) {
+
+						newLeafNode(otherlv_1, grammarAccess.getXWhileExpressionAccess().getWhileKeyword_1());
+
+					}
+					otherlv_2 = (Token) match(input, 35, FOLLOW_35_in_ruleXWhileExpression15263);
+					if (state.failed)
+						return current;
+					if (state.backtracking == 0) {
+
+						newLeafNode(otherlv_2, grammarAccess.getXWhileExpressionAccess().getLeftParenthesisKeyword_2());
+
+					}
+
+					{
+
+						{
+							if (state.backtracking == 0) {
+
+								newCompositeNode(grammarAccess.getXWhileExpressionAccess()
+										.getPredicateXExpressionParserRuleCall_3_0());
+
+							}
+							pushFollow(FOLLOW_ruleXExpression_in_ruleXWhileExpression15284);
+							lv_predicate_3_0 = ruleXExpression();
+
+							state._fsp--;
+							if (state.failed)
+								return current;
+							if (state.backtracking == 0) {
+
+								if (current == null) {
+									current = createModelElementForParent(grammarAccess.getXWhileExpressionRule());
+								}
+								set(current, XABSTRACT_WHILE_EXPRESSION__PREDICATE, lv_predicate_3_0, null);
+								afterParserOrEnumRuleCall();
+
+							}
+
+						}
+
+					}
+
+					otherlv_4 = (Token) match(input, 36, FOLLOW_36_in_ruleXWhileExpression15296);
+					if (state.failed)
+						return current;
+					if (state.backtracking == 0) {
+
+						newLeafNode(otherlv_4, grammarAccess.getXWhileExpressionAccess().getRightParenthesisKeyword_4());
+
+					}
+
+					{
+
+						{
+							if (state.backtracking == 0) {
+
+								newCompositeNode(grammarAccess.getXWhileExpressionAccess()
+										.getBodyXExpressionParserRuleCall_5_0());
+
+							}
+							pushFollow(FOLLOW_ruleXExpression_in_ruleXWhileExpression15317);
+							lv_body_5_0 = ruleXExpression();
+
+							state._fsp--;
+							if (state.failed)
+								return current;
+							if (state.backtracking == 0) {
+
+								if (current == null) {
+									current = createModelElementForParent(grammarAccess.getXWhileExpressionRule());
+								}
+								set(current, XABSTRACT_WHILE_EXPRESSION__BODY, lv_body_5_0, null);
+								afterParserOrEnumRuleCall();
+
+							}
+
+						}
+
+					}
+
+				}
+
+			}
+
+			if (state.backtracking == 0) {
+				leaveRule();
+			}
+		}
+
+		catch (RecognitionException re) {
+			recoverAndAppendSkippedTokens(re);
+		} finally {
+		}
+		return current;
+	}
+
+	public final EObject entryRuleXDoWhileExpression() throws RecognitionException {
+		EObject current = null;
+
+		EObject iv_ruleXDoWhileExpression = null;
+
+		try {
+
+			{
+				if (state.backtracking == 0) {
+					newCompositeNode(grammarAccess.getXDoWhileExpressionRule());
+				}
+				pushFollow(FOLLOW_ruleXDoWhileExpression_in_entryRuleXDoWhileExpression15353);
+				iv_ruleXDoWhileExpression = ruleXDoWhileExpression();
+
+				state._fsp--;
+				if (state.failed)
+					return current;
+				if (state.backtracking == 0) {
+					current = iv_ruleXDoWhileExpression;
+				}
+				match(input, EOF, FOLLOW_EOF_in_entryRuleXDoWhileExpression15363);
+				if (state.failed)
+					return current;
+
+			}
+
+		}
+
+		catch (RecognitionException re) {
+			recoverAndAppendSkippedTokens(re);
+		} finally {
+		}
+		return current;
+	}
+
+	public final EObject ruleXDoWhileExpression() throws RecognitionException {
+		EObject current = null;
+
+		Token otherlv_1 = null;
+		Token otherlv_3 = null;
+		Token otherlv_4 = null;
+		Token otherlv_6 = null;
+		EObject lv_body_2_0 = null;
+
+		EObject lv_predicate_5_0 = null;
+
+		enterRule();
+
+		try {
+
+			{
+
+				{
+
+					{
+						if (state.backtracking == 0) {
+
+							current = forceCreateModelElement(grammarAccess.getXDoWhileExpressionAccess()
+									.getXDoWhileExpressionAction_0(), current);
+
+						}
+
+					}
+
+					otherlv_1 = (Token) match(input, 104, FOLLOW_104_in_ruleXDoWhileExpression15409);
+					if (state.failed)
+						return current;
+					if (state.backtracking == 0) {
+
+						newLeafNode(otherlv_1, grammarAccess.getXDoWhileExpressionAccess().getDoKeyword_1());
+
+					}
+
+					{
+
+						{
+							if (state.backtracking == 0) {
+
+								newCompositeNode(grammarAccess.getXDoWhileExpressionAccess()
+										.getBodyXExpressionParserRuleCall_2_0());
+
+							}
+							pushFollow(FOLLOW_ruleXExpression_in_ruleXDoWhileExpression15430);
+							lv_body_2_0 = ruleXExpression();
+
+							state._fsp--;
+							if (state.failed)
+								return current;
+							if (state.backtracking == 0) {
+
+								if (current == null) {
+									current = createModelElementForParent(grammarAccess.getXDoWhileExpressionRule());
+								}
+								set(current, XABSTRACT_WHILE_EXPRESSION__BODY, lv_body_2_0, null);
+								afterParserOrEnumRuleCall();
+
+							}
+
+						}
+
+					}
+
+					otherlv_3 = (Token) match(input, 103, FOLLOW_103_in_ruleXDoWhileExpression15442);
+					if (state.failed)
+						return current;
+					if (state.backtracking == 0) {
+
+						newLeafNode(otherlv_3, grammarAccess.getXDoWhileExpressionAccess().getWhileKeyword_3());
+
+					}
+					otherlv_4 = (Token) match(input, 35, FOLLOW_35_in_ruleXDoWhileExpression15454);
+					if (state.failed)
+						return current;
+					if (state.backtracking == 0) {
+
+						newLeafNode(otherlv_4, grammarAccess.getXDoWhileExpressionAccess()
+								.getLeftParenthesisKeyword_4());
+
+					}
+
+					{
+
+						{
+							if (state.backtracking == 0) {
+
+								newCompositeNode(grammarAccess.getXDoWhileExpressionAccess()
+										.getPredicateXExpressionParserRuleCall_5_0());
+
+							}
+							pushFollow(FOLLOW_ruleXExpression_in_ruleXDoWhileExpression15475);
+							lv_predicate_5_0 = ruleXExpression();
+
+							state._fsp--;
+							if (state.failed)
+								return current;
+							if (state.backtracking == 0) {
+
+								if (current == null) {
+									current = createModelElementForParent(grammarAccess.getXDoWhileExpressionRule());
+								}
+								set(current, XABSTRACT_WHILE_EXPRESSION__PREDICATE, lv_predicate_5_0, null);
+								afterParserOrEnumRuleCall();
+
+							}
+
+						}
+
+					}
+
+					otherlv_6 = (Token) match(input, 36, FOLLOW_36_in_ruleXDoWhileExpression15487);
+					if (state.failed)
+						return current;
+					if (state.backtracking == 0) {
+
+						newLeafNode(otherlv_6, grammarAccess.getXDoWhileExpressionAccess()
+								.getRightParenthesisKeyword_6());
+
+					}
+
+				}
+
+			}
+
+			if (state.backtracking == 0) {
+				leaveRule();
+			}
+		}
+
+		catch (RecognitionException re) {
+			recoverAndAppendSkippedTokens(re);
+		} finally {
+		}
+		return current;
+	}
+
+	public final EObject entryRuleXBlockExpression() throws RecognitionException {
+		EObject current = null;
+
+		EObject iv_ruleXBlockExpression = null;
+
+		try {
+
+			{
+				if (state.backtracking == 0) {
+					newCompositeNode(grammarAccess.getXBlockExpressionRule());
+				}
+				pushFollow(FOLLOW_ruleXBlockExpression_in_entryRuleXBlockExpression15523);
+				iv_ruleXBlockExpression = ruleXBlockExpression();
+
+				state._fsp--;
+				if (state.failed)
+					return current;
+				if (state.backtracking == 0) {
+					current = iv_ruleXBlockExpression;
+				}
+				match(input, EOF, FOLLOW_EOF_in_entryRuleXBlockExpression15533);
+				if (state.failed)
+					return current;
+
+			}
+
+		}
+
+		catch (RecognitionException re) {
+			recoverAndAppendSkippedTokens(re);
+		} finally {
+		}
+		return current;
+	}
+
+	public final EObject ruleXBlockExpression() throws RecognitionException {
+		EObject current = null;
+
+		Token otherlv_1 = null;
+		Token otherlv_3 = null;
+		Token otherlv_4 = null;
+		EObject lv_expressions_2_0 = null;
+
+		enterRule();
+
+		try {
+
+			{
+
+				{
+
+					{
+						if (state.backtracking == 0) {
+
+							current = forceCreateModelElement(grammarAccess.getXBlockExpressionAccess()
+									.getXBlockExpressionAction_0(), current);
+
+						}
+
+					}
+
+					otherlv_1 = (Token) match(input, 28, FOLLOW_28_in_ruleXBlockExpression15579);
+					if (state.failed)
+						return current;
+					if (state.backtracking == 0) {
+
+						newLeafNode(otherlv_1, grammarAccess.getXBlockExpressionAccess().getLeftCurlyBracketKeyword_1());
+
+					}
+
+					loop153: do {
+						int alt153 = 2;
+						int LA153_0 = input.LA(1);
+
+						if (((LA153_0 >= RULE_ID && LA153_0 <= RULE_RICH_TEXT_START)
+								|| (LA153_0 >= RULE_HEX && LA153_0 <= RULE_DECIMAL) || LA153_0 == 20
+								|| (LA153_0 >= 22 && LA153_0 <= 23) || (LA153_0 >= 26 && LA153_0 <= 28)
+								|| (LA153_0 >= 30 && LA153_0 <= 32) || (LA153_0 >= 34 && LA153_0 <= 35)
+								|| (LA153_0 >= 37 && LA153_0 <= 50) || LA153_0 == 52 || LA153_0 == 64 || LA153_0 == 83
+								|| LA153_0 == 88 || (LA153_0 >= 93 && LA153_0 <= 94) || LA153_0 == 97 || LA153_0 == 99
+								|| (LA153_0 >= 102 && LA153_0 <= 105) || (LA153_0 >= 107 && LA153_0 <= 113))) {
+							alt153 = 1;
+						}
+
+						switch (alt153) {
+							case 1:
+
+							{
+
+								{
+
+									{
+										if (state.backtracking == 0) {
+
+											newCompositeNode(grammarAccess.getXBlockExpressionAccess()
+													.getExpressionsXExpressionInsideBlockParserRuleCall_2_0_0());
+
+										}
+										pushFollow(FOLLOW_ruleXExpressionInsideBlock_in_ruleXBlockExpression15601);
+										lv_expressions_2_0 = ruleXExpressionInsideBlock();
+
+										state._fsp--;
+										if (state.failed)
+											return current;
+										if (state.backtracking == 0) {
+
+											if (current == null) {
+												current = createModelElementForParent(grammarAccess
+														.getXBlockExpressionRule());
+											}
+											add(current, XBLOCK_EXPRESSION__EXPRESSIONS, lv_expressions_2_0, "XExpressionInsideBlock");
+											afterParserOrEnumRuleCall();
+
+										}
+
+									}
+
+								}
+
+								int alt152 = 2;
+								int LA152_0 = input.LA(1);
+
+								if ((LA152_0 == 21)) {
+									alt152 = 1;
+								}
+								switch (alt152) {
+									case 1:
+
+									{
+										otherlv_3 = (Token) match(input, 21, FOLLOW_21_in_ruleXBlockExpression15614);
+										if (state.failed)
+											return current;
+										if (state.backtracking == 0) {
+
+											newLeafNode(otherlv_3, grammarAccess.getXBlockExpressionAccess()
+													.getSemicolonKeyword_2_1());
+
+										}
+
+									}
+										break;
+
+								}
+
+							}
+								break;
+
+							default:
+								break loop153;
+						}
+					} while (true);
+
+					otherlv_4 = (Token) match(input, 29, FOLLOW_29_in_ruleXBlockExpression15630);
+					if (state.failed)
+						return current;
+					if (state.backtracking == 0) {
+
+						newLeafNode(otherlv_4, grammarAccess.getXBlockExpressionAccess()
+								.getRightCurlyBracketKeyword_3());
+
+					}
+
+				}
+
+			}
+
+			if (state.backtracking == 0) {
+				leaveRule();
+			}
+		}
+
+		catch (RecognitionException re) {
+			recoverAndAppendSkippedTokens(re);
+		} finally {
+		}
+		return current;
+	}
+
+	public final EObject entryRuleXExpressionInsideBlock() throws RecognitionException {
+		EObject current = null;
+
+		EObject iv_ruleXExpressionInsideBlock = null;
+
+		try {
+
+			{
+				if (state.backtracking == 0) {
+					newCompositeNode(grammarAccess.getXExpressionInsideBlockRule());
+				}
+				pushFollow(FOLLOW_ruleXExpressionInsideBlock_in_entryRuleXExpressionInsideBlock15666);
+				iv_ruleXExpressionInsideBlock = ruleXExpressionInsideBlock();
+
+				state._fsp--;
+				if (state.failed)
+					return current;
+				if (state.backtracking == 0) {
+					current = iv_ruleXExpressionInsideBlock;
+				}
+				match(input, EOF, FOLLOW_EOF_in_entryRuleXExpressionInsideBlock15676);
+				if (state.failed)
+					return current;
+
+			}
+
+		}
+
+		catch (RecognitionException re) {
+			recoverAndAppendSkippedTokens(re);
+		} finally {
+		}
+		return current;
+	}
+
+	public final EObject ruleXExpressionInsideBlock() throws RecognitionException {
+		EObject current = null;
+
+		EObject this_XVariableDeclaration_0 = null;
+
+		EObject this_XExpression_1 = null;
+
+		enterRule();
+
+		try {
+
+			{
+
+				int alt154 = 2;
+				int LA154_0 = input.LA(1);
+
+				if ((LA154_0 == 47) && (synpred31_InternalXtend())) {
+					alt154 = 1;
+				} else if ((LA154_0 == 46) && (synpred31_InternalXtend())) {
+					alt154 = 1;
+				} else if ((LA154_0 == 34)) {
+					switch (input.LA(2)) {
+						case EOF:
+						case RULE_ID:
+						case RULE_STRING:
+						case RULE_RICH_TEXT:
+						case RULE_RICH_TEXT_START:
+						case RULE_RICH_TEXT_INBETWEEN:
+						case RULE_COMMENT_RICH_TEXT_INBETWEEN:
+						case RULE_RICH_TEXT_END:
+						case RULE_COMMENT_RICH_TEXT_END:
+						case RULE_HEX:
+						case RULE_INT:
+						case RULE_DECIMAL:
+						case 20:
+						case 21:
+						case 22:
+						case 23:
+						case 25:
+						case 26:
+						case 27:
+						case 28:
+						case 29:
+						case 30:
+						case 31:
+						case 32:
+						case 33:
+						case 34:
+						case 35:
+						case 37:
+						case 38:
+						case 39:
+						case 40:
+						case 41:
+						case 42:
+						case 43:
+						case 44:
+						case 45:
+						case 48:
+						case 49:
+						case 50:
+						case 52:
+						case 64:
+						case 65:
+						case 66:
+						case 67:
+						case 68:
+						case 69:
+						case 70:
+						case 71:
+						case 72:
+						case 73:
+						case 74:
+						case 75:
+						case 76:
+						case 77:
+						case 78:
+						case 79:
+						case 80:
+						case 81:
+						case 82:
+						case 83:
+						case 84:
+						case 85:
+						case 86:
+						case 87:
+						case 88:
+						case 89:
+						case 90:
+						case 91:
+						case 92:
+						case 93:
+						case 94:
+						case 95:
+						case 97:
+						case 99:
+						case 102:
+						case 103:
+						case 104:
+						case 105:
+						case 107:
+						case 108:
+						case 109:
+						case 110:
+						case 111:
+						case 112:
+						case 113: {
+							alt154 = 2;
+						}
+							break;
+						case 47: {
+							int LA154_5 = input.LA(3);
+
+							if ((synpred31_InternalXtend())) {
+								alt154 = 1;
+							} else if ((true)) {
+								alt154 = 2;
+							} else {
+								if (state.backtracking > 0) {
+									state.failed = true;
+									return current;
+								}
+								NoViableAltException nvae = new NoViableAltException("", 154, 5, input);
+
+								throw nvae;
+							}
+						}
+							break;
+						case 46: {
+							int LA154_6 = input.LA(3);
+
+							if ((synpred31_InternalXtend())) {
+								alt154 = 1;
+							} else if ((true)) {
+								alt154 = 2;
+							} else {
+								if (state.backtracking > 0) {
+									state.failed = true;
+									return current;
+								}
+								NoViableAltException nvae = new NoViableAltException("", 154, 6, input);
+
+								throw nvae;
+							}
+						}
+							break;
+						default:
+							if (state.backtracking > 0) {
+								state.failed = true;
+								return current;
+							}
+							NoViableAltException nvae = new NoViableAltException("", 154, 3, input);
+
+							throw nvae;
+					}
+
+				} else if (((LA154_0 >= RULE_ID && LA154_0 <= RULE_RICH_TEXT_START)
+						|| (LA154_0 >= RULE_HEX && LA154_0 <= RULE_DECIMAL) || LA154_0 == 20
+						|| (LA154_0 >= 22 && LA154_0 <= 23) || (LA154_0 >= 26 && LA154_0 <= 28)
+						|| (LA154_0 >= 30 && LA154_0 <= 32) || LA154_0 == 35 || (LA154_0 >= 37 && LA154_0 <= 45)
+						|| (LA154_0 >= 48 && LA154_0 <= 50) || LA154_0 == 52 || LA154_0 == 64 || LA154_0 == 83
+						|| LA154_0 == 88 || (LA154_0 >= 93 && LA154_0 <= 94) || LA154_0 == 97 || LA154_0 == 99
+						|| (LA154_0 >= 102 && LA154_0 <= 105) || (LA154_0 >= 107 && LA154_0 <= 113))) {
+					alt154 = 2;
+				} else {
+					if (state.backtracking > 0) {
+						state.failed = true;
+						return current;
+					}
+					NoViableAltException nvae = new NoViableAltException("", 154, 0, input);
+
+					throw nvae;
+				}
+				switch (alt154) {
+					case 1:
+
+					{
+
+						{
+							if (state.backtracking == 0) {
+
+								newCompositeNode(grammarAccess.getXExpressionInsideBlockAccess()
+										.getXVariableDeclarationParserRuleCall_0());
+
+							}
+							pushFollow(FOLLOW_ruleXVariableDeclaration_in_ruleXExpressionInsideBlock15825);
+							this_XVariableDeclaration_0 = ruleXVariableDeclaration();
+
+							state._fsp--;
+							if (state.failed)
+								return current;
+							if (state.backtracking == 0) {
+
+								current = this_XVariableDeclaration_0;
+								afterParserOrEnumRuleCall();
+
+							}
+
+						}
+
+					}
+						break;
+					case 2:
+
+					{
+						if (state.backtracking == 0) {
+
+							newCompositeNode(grammarAccess.getXExpressionInsideBlockAccess()
+									.getXExpressionParserRuleCall_1());
+
+						}
+						pushFollow(FOLLOW_ruleXExpression_in_ruleXExpressionInsideBlock15853);
+						this_XExpression_1 = ruleXExpression();
+
+						state._fsp--;
+						if (state.failed)
+							return current;
+						if (state.backtracking == 0) {
+
+							current = this_XExpression_1;
+							afterParserOrEnumRuleCall();
+
+						}
+
+					}
+						break;
+
+				}
+
+			}
+
+			if (state.backtracking == 0) {
+				leaveRule();
+			}
+		}
+
+		catch (RecognitionException re) {
+			recoverAndAppendSkippedTokens(re);
+		} finally {
+		}
+		return current;
+	}
+
+	public final EObject entryRuleXFeatureCall() throws RecognitionException {
+		EObject current = null;
+
+		EObject iv_ruleXFeatureCall = null;
+
+		try {
+
+			{
+				if (state.backtracking == 0) {
+					newCompositeNode(grammarAccess.getXFeatureCallRule());
+				}
+				pushFollow(FOLLOW_ruleXFeatureCall_in_entryRuleXFeatureCall15888);
+				iv_ruleXFeatureCall = ruleXFeatureCall();
+
+				state._fsp--;
+				if (state.failed)
+					return current;
+				if (state.backtracking == 0) {
+					current = iv_ruleXFeatureCall;
+				}
+				match(input, EOF, FOLLOW_EOF_in_entryRuleXFeatureCall15898);
+				if (state.failed)
+					return current;
+
+			}
+
+		}
+
+		catch (RecognitionException re) {
+			recoverAndAppendSkippedTokens(re);
+		} finally {
+		}
+		return current;
+	}
+
+	public final EObject ruleXFeatureCall() throws RecognitionException {
+		EObject current = null;
+
+		Token otherlv_2 = null;
+		Token otherlv_4 = null;
+		Token otherlv_6 = null;
+		Token lv_explicitOperationCall_8_0 = null;
+		Token otherlv_11 = null;
+		Token otherlv_13 = null;
+		EObject lv_typeArguments_3_0 = null;
+
+		EObject lv_typeArguments_5_0 = null;
+
+		EObject lv_featureCallArguments_9_0 = null;
+
+		EObject lv_featureCallArguments_10_0 = null;
+
+		EObject lv_featureCallArguments_12_0 = null;
+
+		EObject lv_featureCallArguments_14_0 = null;
+
+		enterRule();
+
+		try {
+
+			{
+
+				{
+
+					{
+						if (state.backtracking == 0) {
+
+							current = forceCreateModelElement(grammarAccess.getXFeatureCallAccess()
+									.getXFeatureCallAction_0(), current);
+
+						}
+
+					}
+
+					int alt155 = 2;
+					switch (input.LA(1)) {
+						case RULE_ID: {
+							int LA155_1 = input.LA(2);
+
+							if ((LA155_1 == 106)) {
+								alt155 = 1;
+							}
+						}
+							break;
+						case 50: {
+							int LA155_2 = input.LA(2);
+
+							if ((LA155_2 == 106)) {
+								alt155 = 1;
+							}
+						}
+							break;
+						case 32: {
+							int LA155_3 = input.LA(2);
+
+							if ((LA155_3 == 106)) {
+								alt155 = 1;
+							}
+						}
+							break;
+					}
+
+					switch (alt155) {
+						case 1:
+
+						{
+
+							{
+								if (state.backtracking == 0) {
+
+									if (current == null) {
+										current = createModelElement(grammarAccess.getXFeatureCallRule());
+									}
+
+								}
+								if (state.backtracking == 0) {
+
+									newCompositeNode(grammarAccess.getXFeatureCallAccess()
+											.getDeclaringTypeJvmDeclaredTypeCrossReference_1_0());
+
+								}
+								pushFollow(FOLLOW_ruleStaticQualifier_in_ruleXFeatureCall15955);
+								ruleStaticQualifier();
+
+								state._fsp--;
+								if (state.failed)
+									return current;
+								if (state.backtracking == 0) {
+
+									afterParserOrEnumRuleCall();
+
+								}
+
+							}
+
+						}
+							break;
+
+					}
+
+					int alt157 = 2;
+					int LA157_0 = input.LA(1);
+
+					if ((LA157_0 == 23)) {
+						alt157 = 1;
+					}
+					switch (alt157) {
+						case 1:
+
+						{
+							otherlv_2 = (Token) match(input, 23, FOLLOW_23_in_ruleXFeatureCall15969);
+							if (state.failed)
+								return current;
+							if (state.backtracking == 0) {
+
+								newLeafNode(otherlv_2, grammarAccess.getXFeatureCallAccess()
+										.getLessThanSignKeyword_2_0());
+
+							}
+
+							{
+
+								{
+									if (state.backtracking == 0) {
+
+										newCompositeNode(grammarAccess.getXFeatureCallAccess()
+												.getTypeArgumentsJvmArgumentTypeReferenceParserRuleCall_2_1_0());
+
+									}
+									pushFollow(FOLLOW_ruleJvmArgumentTypeReference_in_ruleXFeatureCall15990);
+									lv_typeArguments_3_0 = ruleJvmArgumentTypeReference();
+
+									state._fsp--;
+									if (state.failed)
+										return current;
+									if (state.backtracking == 0) {
+
+										if (current == null) {
+											current = createModelElementForParent(grammarAccess.getXFeatureCallRule());
+										}
+										add(current, XABSTRACT_FEATURE_CALL__TYPE_ARGUMENTS, lv_typeArguments_3_0, "JvmArgumentTypeReference");
+										afterParserOrEnumRuleCall();
+
+									}
+
+								}
+
+							}
+
+							loop156: do {
+								int alt156 = 2;
+								int LA156_0 = input.LA(1);
+
+								if ((LA156_0 == 24)) {
+									alt156 = 1;
+								}
+
+								switch (alt156) {
+									case 1:
+
+									{
+										otherlv_4 = (Token) match(input, 24, FOLLOW_24_in_ruleXFeatureCall16003);
+										if (state.failed)
+											return current;
+										if (state.backtracking == 0) {
+
+											newLeafNode(otherlv_4, grammarAccess.getXFeatureCallAccess()
+													.getCommaKeyword_2_2_0());
+
+										}
+
+										{
+
+											{
+												if (state.backtracking == 0) {
+
+													newCompositeNode(grammarAccess
+															.getXFeatureCallAccess()
+															.getTypeArgumentsJvmArgumentTypeReferenceParserRuleCall_2_2_1_0());
+
+												}
+												pushFollow(FOLLOW_ruleJvmArgumentTypeReference_in_ruleXFeatureCall16024);
+												lv_typeArguments_5_0 = ruleJvmArgumentTypeReference();
+
+												state._fsp--;
+												if (state.failed)
+													return current;
+												if (state.backtracking == 0) {
+
+													if (current == null) {
+														current = createModelElementForParent(grammarAccess
+																.getXFeatureCallRule());
+													}
+													add(current, XABSTRACT_FEATURE_CALL__TYPE_ARGUMENTS, lv_typeArguments_5_0,
+															"JvmArgumentTypeReference");
+													afterParserOrEnumRuleCall();
+
+												}
+
+											}
+
+										}
+
+									}
+										break;
+
+									default:
+										break loop156;
+								}
+							} while (true);
+
+							otherlv_6 = (Token) match(input, 25, FOLLOW_25_in_ruleXFeatureCall16038);
+							if (state.failed)
+								return current;
+							if (state.backtracking == 0) {
+
+								newLeafNode(otherlv_6, grammarAccess.getXFeatureCallAccess()
+										.getGreaterThanSignKeyword_2_3());
+
+							}
+
+						}
+							break;
+
+					}
+
+					{
+
+						{
+							if (state.backtracking == 0) {
+
+								if (current == null) {
+									current = createModelElement(grammarAccess.getXFeatureCallRule());
+								}
+
+							}
+							if (state.backtracking == 0) {
+
+								newCompositeNode(grammarAccess.getXFeatureCallAccess()
+										.getFeatureJvmIdentifiableElementCrossReference_3_0());
+
+							}
+							pushFollow(FOLLOW_ruleIdOrSuper_in_ruleXFeatureCall16063);
+							ruleIdOrSuper();
+
+							state._fsp--;
+							if (state.failed)
+								return current;
+							if (state.backtracking == 0) {
+
+								afterParserOrEnumRuleCall();
+
+							}
+
+						}
+
+					}
+
+					int alt160 = 2;
+					alt160 = dfa160.predict(input);
+					switch (alt160) {
+						case 1:
+
+						{
+
+							{
+
+								{
+									lv_explicitOperationCall_8_0 = (Token) match(input, 35,
+											FOLLOW_35_in_ruleXFeatureCall16097);
+									if (state.failed)
+										return current;
+									if (state.backtracking == 0) {
+
+										newLeafNode(lv_explicitOperationCall_8_0, grammarAccess.getXFeatureCallAccess()
+												.getExplicitOperationCallLeftParenthesisKeyword_4_0_0());
+
+									}
+									if (state.backtracking == 0) {
+
+										if (current == null) {
+											current = createModelElement(grammarAccess.getXFeatureCallRule());
+										}
+										setWithLastConsumed(current, XFEATURE_CALL__EXPLICIT_OPERATION_CALL, true, "(");
+
+									}
+
+								}
+
+							}
+
+							int alt159 = 3;
+							alt159 = dfa159.predict(input);
+							switch (alt159) {
+								case 1:
+
+								{
+
+									{
+
+										{
+											if (state.backtracking == 0) {
+
+												newCompositeNode(grammarAccess.getXFeatureCallAccess()
+														.getFeatureCallArgumentsXShortClosureParserRuleCall_4_1_0_0());
+
+											}
+											pushFollow(FOLLOW_ruleXShortClosure_in_ruleXFeatureCall16182);
+											lv_featureCallArguments_9_0 = ruleXShortClosure();
+
+											state._fsp--;
+											if (state.failed)
+												return current;
+											if (state.backtracking == 0) {
+
+												if (current == null) {
+													current = createModelElementForParent(grammarAccess
+															.getXFeatureCallRule());
+												}
+												add(current, XFEATURE_CALL__FEATURE_CALL_ARGUMENTS, lv_featureCallArguments_9_0,
+														"XShortClosure");
+												afterParserOrEnumRuleCall();
+
+											}
+
+										}
+
+									}
+
+								}
+									break;
+								case 2:
+
+								{
+
+									{
+
+										{
+
+											{
+												if (state.backtracking == 0) {
+
+													newCompositeNode(grammarAccess
+															.getXFeatureCallAccess()
+															.getFeatureCallArgumentsXExpressionParserRuleCall_4_1_1_0_0());
+
+												}
+												pushFollow(FOLLOW_ruleXExpression_in_ruleXFeatureCall16210);
+												lv_featureCallArguments_10_0 = ruleXExpression();
+
+												state._fsp--;
+												if (state.failed)
+													return current;
+												if (state.backtracking == 0) {
+
+													if (current == null) {
+														current = createModelElementForParent(grammarAccess
+																.getXFeatureCallRule());
+													}
+													add(current, XFEATURE_CALL__FEATURE_CALL_ARGUMENTS, lv_featureCallArguments_10_0,
+															null);
+													afterParserOrEnumRuleCall();
+
+												}
+
+											}
+
+										}
+
+										loop158: do {
+											int alt158 = 2;
+											int LA158_0 = input.LA(1);
+
+											if ((LA158_0 == 24)) {
+												alt158 = 1;
+											}
+
+											switch (alt158) {
+												case 1:
+
+												{
+													otherlv_11 = (Token) match(input, 24,
+															FOLLOW_24_in_ruleXFeatureCall16223);
+													if (state.failed)
+														return current;
+													if (state.backtracking == 0) {
+
+														newLeafNode(otherlv_11, grammarAccess.getXFeatureCallAccess()
+																.getCommaKeyword_4_1_1_1_0());
+
+													}
+
+													{
+
+														{
+															if (state.backtracking == 0) {
+
+																newCompositeNode(grammarAccess
+																		.getXFeatureCallAccess()
+																		.getFeatureCallArgumentsXExpressionParserRuleCall_4_1_1_1_1_0());
+
+															}
+															pushFollow(FOLLOW_ruleXExpression_in_ruleXFeatureCall16244);
+															lv_featureCallArguments_12_0 = ruleXExpression();
+
+															state._fsp--;
+															if (state.failed)
+																return current;
+															if (state.backtracking == 0) {
+
+																if (current == null) {
+																	current = createModelElementForParent(grammarAccess
+																			.getXFeatureCallRule());
+																}
+																add(current, XFEATURE_CALL__FEATURE_CALL_ARGUMENTS,
+																		lv_featureCallArguments_12_0, null);
+																afterParserOrEnumRuleCall();
+
+															}
+
+														}
+
+													}
+
+												}
+													break;
+
+												default:
+													break loop158;
+											}
+										} while (true);
+
+									}
+
+								}
+									break;
+
+							}
+
+							otherlv_13 = (Token) match(input, 36, FOLLOW_36_in_ruleXFeatureCall16261);
+							if (state.failed)
+								return current;
+							if (state.backtracking == 0) {
+
+								newLeafNode(otherlv_13, grammarAccess.getXFeatureCallAccess()
+										.getRightParenthesisKeyword_4_2());
+
+							}
+
+						}
+							break;
+
+					}
+
+					int alt161 = 2;
+					alt161 = dfa161.predict(input);
+					switch (alt161) {
+						case 1:
+
+						{
+
+							{
+								if (state.backtracking == 0) {
+
+									newCompositeNode(grammarAccess.getXFeatureCallAccess()
+											.getFeatureCallArgumentsXClosureParserRuleCall_5_0());
+
+								}
+								pushFollow(FOLLOW_ruleXClosure_in_ruleXFeatureCall16296);
+								lv_featureCallArguments_14_0 = ruleXClosure();
+
+								state._fsp--;
+								if (state.failed)
+									return current;
+								if (state.backtracking == 0) {
+
+									if (current == null) {
+										current = createModelElementForParent(grammarAccess.getXFeatureCallRule());
+									}
+									add(current, XFEATURE_CALL__FEATURE_CALL_ARGUMENTS, lv_featureCallArguments_14_0, "XClosure");
+									afterParserOrEnumRuleCall();
+
+								}
+
+							}
+
+						}
+							break;
+
+					}
+
+				}
+
+			}
+
+			if (state.backtracking == 0) {
+				leaveRule();
+			}
+		}
+
+		catch (RecognitionException re) {
+			recoverAndAppendSkippedTokens(re);
+		} finally {
+		}
+		return current;
+	}
+
+	public final String entryRuleIdOrSuper() throws RecognitionException {
+		String current = null;
+
+		AntlrDatatypeRuleToken iv_ruleIdOrSuper = null;
+
+		try {
+
+			{
+				if (state.backtracking == 0) {
+					newCompositeNode(grammarAccess.getIdOrSuperRule());
+				}
+				pushFollow(FOLLOW_ruleIdOrSuper_in_entryRuleIdOrSuper16334);
+				iv_ruleIdOrSuper = ruleIdOrSuper();
+
+				state._fsp--;
+				if (state.failed)
+					return current;
+				if (state.backtracking == 0) {
+					current = iv_ruleIdOrSuper.getText();
+				}
+				match(input, EOF, FOLLOW_EOF_in_entryRuleIdOrSuper16345);
+				if (state.failed)
+					return current;
+
+			}
+
+		}
+
+		catch (RecognitionException re) {
+			recoverAndAppendSkippedTokens(re);
+		} finally {
+		}
+		return current;
+	}
+
+	public final AntlrDatatypeRuleToken ruleIdOrSuper() throws RecognitionException {
+		AntlrDatatypeRuleToken current = new AntlrDatatypeRuleToken();
+
+		Token kw = null;
+		AntlrDatatypeRuleToken this_FeatureCallID_0 = null;
+
+		enterRule();
+
+		try {
+
+			{
+
+				int alt162 = 2;
+				int LA162_0 = input.LA(1);
+
+				if ((LA162_0 == RULE_ID || LA162_0 == 20 || LA162_0 == 22 || (LA162_0 >= 26 && LA162_0 <= 27)
+						|| (LA162_0 >= 30 && LA162_0 <= 32) || LA162_0 == 34 || LA162_0 == 37
+						|| (LA162_0 >= 39 && LA162_0 <= 45) || (LA162_0 >= 48 && LA162_0 <= 50) || LA162_0 == 52)) {
+					alt162 = 1;
+				} else if ((LA162_0 == 105)) {
+					alt162 = 2;
+				} else {
+					if (state.backtracking > 0) {
+						state.failed = true;
+						return current;
+					}
+					NoViableAltException nvae = new NoViableAltException("", 162, 0, input);
+
+					throw nvae;
+				}
+				switch (alt162) {
+					case 1:
+
+					{
+						if (state.backtracking == 0) {
+
+							newCompositeNode(grammarAccess.getIdOrSuperAccess().getFeatureCallIDParserRuleCall_0());
+
+						}
+						pushFollow(FOLLOW_ruleFeatureCallID_in_ruleIdOrSuper16392);
+						this_FeatureCallID_0 = ruleFeatureCallID();
+
+						state._fsp--;
+						if (state.failed)
+							return current;
+						if (state.backtracking == 0) {
+
+							current.merge(this_FeatureCallID_0);
+
+						}
+						if (state.backtracking == 0) {
+
+							afterParserOrEnumRuleCall();
+
+						}
+
+					}
+						break;
+					case 2:
+
+					{
+						kw = (Token) match(input, 105, FOLLOW_105_in_ruleIdOrSuper16416);
+						if (state.failed)
+							return current;
+						if (state.backtracking == 0) {
+
+							current.merge(kw);
+							newLeafNode(kw, grammarAccess.getIdOrSuperAccess().getSuperKeyword_1());
+
+						}
+
+					}
+						break;
+
+				}
+
+			}
+
+			if (state.backtracking == 0) {
+				leaveRule();
+			}
+		}
+
+		catch (RecognitionException re) {
+			recoverAndAppendSkippedTokens(re);
+		} finally {
+		}
+		return current;
+	}
+
+	public final String entryRuleStaticQualifier() throws RecognitionException {
+		String current = null;
+
+		AntlrDatatypeRuleToken iv_ruleStaticQualifier = null;
+
+		try {
+
+			{
+				if (state.backtracking == 0) {
+					newCompositeNode(grammarAccess.getStaticQualifierRule());
+				}
+				pushFollow(FOLLOW_ruleStaticQualifier_in_entryRuleStaticQualifier16457);
+				iv_ruleStaticQualifier = ruleStaticQualifier();
+
+				state._fsp--;
+				if (state.failed)
+					return current;
+				if (state.backtracking == 0) {
+					current = iv_ruleStaticQualifier.getText();
+				}
+				match(input, EOF, FOLLOW_EOF_in_entryRuleStaticQualifier16468);
+				if (state.failed)
+					return current;
+
+			}
+
+		}
+
+		catch (RecognitionException re) {
+			recoverAndAppendSkippedTokens(re);
+		} finally {
+		}
+		return current;
+	}
+
+	public final AntlrDatatypeRuleToken ruleStaticQualifier() throws RecognitionException {
+		AntlrDatatypeRuleToken current = new AntlrDatatypeRuleToken();
+
+		Token kw = null;
+		AntlrDatatypeRuleToken this_ValidID_0 = null;
+
+		enterRule();
+
+		try {
+
+			{
+
+				int cnt163 = 0;
+				loop163: do {
+					int alt163 = 2;
+					switch (input.LA(1)) {
+						case RULE_ID: {
+							int LA163_1 = input.LA(2);
+
+							if ((LA163_1 == 106)) {
+								alt163 = 1;
+							}
+
+						}
+							break;
+						case 32: {
+							int LA163_3 = input.LA(2);
+
+							if ((LA163_3 == 106)) {
+								alt163 = 1;
+							}
+
+						}
+							break;
+						case 50: {
+							int LA163_4 = input.LA(2);
+
+							if ((LA163_4 == 106)) {
+								alt163 = 1;
+							}
+
+						}
+							break;
+
+					}
+
+					switch (alt163) {
+						case 1:
+
+						{
+							if (state.backtracking == 0) {
+
+								newCompositeNode(grammarAccess.getStaticQualifierAccess().getValidIDParserRuleCall_0());
+
+							}
+							pushFollow(FOLLOW_ruleValidID_in_ruleStaticQualifier16515);
+							this_ValidID_0 = ruleValidID();
+
+							state._fsp--;
+							if (state.failed)
+								return current;
+							if (state.backtracking == 0) {
+
+								current.merge(this_ValidID_0);
+
+							}
+							if (state.backtracking == 0) {
+
+								afterParserOrEnumRuleCall();
+
+							}
+							kw = (Token) match(input, 106, FOLLOW_106_in_ruleStaticQualifier16533);
+							if (state.failed)
+								return current;
+							if (state.backtracking == 0) {
+
+								current.merge(kw);
+								newLeafNode(kw, grammarAccess.getStaticQualifierAccess().getColonColonKeyword_1());
+
+							}
+
+						}
+							break;
+
+						default:
+							if (cnt163 >= 1)
+								break loop163;
+							if (state.backtracking > 0) {
+								state.failed = true;
+								return current;
+							}
+							EarlyExitException eee = new EarlyExitException(163, input);
+							throw eee;
+					}
+					cnt163++;
+				} while (true);
+
+			}
+
+			if (state.backtracking == 0) {
+				leaveRule();
+			}
+		}
+
+		catch (RecognitionException re) {
+			recoverAndAppendSkippedTokens(re);
+		} finally {
+		}
+		return current;
+	}
+
+	public final EObject entryRuleXConstructorCall() throws RecognitionException {
+		EObject current = null;
+
+		EObject iv_ruleXConstructorCall = null;
+
+		try {
+
+			{
+				if (state.backtracking == 0) {
+					newCompositeNode(grammarAccess.getXConstructorCallRule());
+				}
+				pushFollow(FOLLOW_ruleXConstructorCall_in_entryRuleXConstructorCall16574);
+				iv_ruleXConstructorCall = ruleXConstructorCall();
+
+				state._fsp--;
+				if (state.failed)
+					return current;
+				if (state.backtracking == 0) {
+					current = iv_ruleXConstructorCall;
+				}
+				match(input, EOF, FOLLOW_EOF_in_entryRuleXConstructorCall16584);
+				if (state.failed)
+					return current;
+
+			}
+
+		}
+
+		catch (RecognitionException re) {
+			recoverAndAppendSkippedTokens(re);
+		} finally {
+		}
+		return current;
+	}
+
+	public final EObject ruleXConstructorCall() throws RecognitionException {
+		EObject current = null;
+
+		Token otherlv_1 = null;
+		Token otherlv_3 = null;
+		Token otherlv_5 = null;
+		Token otherlv_7 = null;
+		Token otherlv_8 = null;
+		Token otherlv_11 = null;
+		Token otherlv_13 = null;
+		EObject lv_typeArguments_4_0 = null;
+
+		EObject lv_typeArguments_6_0 = null;
+
+		EObject lv_arguments_9_0 = null;
+
+		EObject lv_arguments_10_0 = null;
+
+		EObject lv_arguments_12_0 = null;
+
+		EObject lv_arguments_14_0 = null;
+
+		enterRule();
+
+		try {
+
+			{
+
+				{
+
+					{
+						if (state.backtracking == 0) {
+
+							current = forceCreateModelElement(grammarAccess.getXConstructorCallAccess()
+									.getXConstructorCallAction_0(), current);
+
+						}
+
+					}
+
+					otherlv_1 = (Token) match(input, 38, FOLLOW_38_in_ruleXConstructorCall16630);
+					if (state.failed)
+						return current;
+					if (state.backtracking == 0) {
+
+						newLeafNode(otherlv_1, grammarAccess.getXConstructorCallAccess().getNewKeyword_1());
+
+					}
+
+					{
+
+						{
+							if (state.backtracking == 0) {
+
+								if (current == null) {
+									current = createModelElement(grammarAccess.getXConstructorCallRule());
+								}
+
+							}
+							if (state.backtracking == 0) {
+
+								newCompositeNode(grammarAccess.getXConstructorCallAccess()
+										.getConstructorJvmConstructorCrossReference_2_0());
+
+							}
+							pushFollow(FOLLOW_ruleQualifiedName_in_ruleXConstructorCall16653);
+							ruleQualifiedName();
+
+							state._fsp--;
+							if (state.failed)
+								return current;
+							if (state.backtracking == 0) {
+
+								afterParserOrEnumRuleCall();
+
+							}
+
+						}
+
+					}
+
+					int alt165 = 2;
+					alt165 = dfa165.predict(input);
+					switch (alt165) {
+						case 1:
+
+						{
+
+							{
+								otherlv_3 = (Token) match(input, 23, FOLLOW_23_in_ruleXConstructorCall16674);
+								if (state.failed)
+									return current;
+								if (state.backtracking == 0) {
+
+									newLeafNode(otherlv_3, grammarAccess.getXConstructorCallAccess()
+											.getLessThanSignKeyword_3_0());
+
+								}
+
+							}
+
+							{
+
+								{
+									if (state.backtracking == 0) {
+
+										newCompositeNode(grammarAccess.getXConstructorCallAccess()
+												.getTypeArgumentsJvmArgumentTypeReferenceParserRuleCall_3_1_0());
+
+									}
+									pushFollow(FOLLOW_ruleJvmArgumentTypeReference_in_ruleXConstructorCall16696);
+									lv_typeArguments_4_0 = ruleJvmArgumentTypeReference();
+
+									state._fsp--;
+									if (state.failed)
+										return current;
+									if (state.backtracking == 0) {
+
+										if (current == null) {
+											current = createModelElementForParent(grammarAccess
+													.getXConstructorCallRule());
+										}
+										add(current, XCONSTRUCTOR_CALL__TYPE_ARGUMENTS, lv_typeArguments_4_0, "JvmArgumentTypeReference");
+										afterParserOrEnumRuleCall();
+
+									}
+
+								}
+
+							}
+
+							loop164: do {
+								int alt164 = 2;
+								int LA164_0 = input.LA(1);
+
+								if ((LA164_0 == 24)) {
+									alt164 = 1;
+								}
+
+								switch (alt164) {
+									case 1:
+
+									{
+										otherlv_5 = (Token) match(input, 24, FOLLOW_24_in_ruleXConstructorCall16709);
+										if (state.failed)
+											return current;
+										if (state.backtracking == 0) {
+
+											newLeafNode(otherlv_5, grammarAccess.getXConstructorCallAccess()
+													.getCommaKeyword_3_2_0());
+
+										}
+
+										{
+
+											{
+												if (state.backtracking == 0) {
+
+													newCompositeNode(grammarAccess
+															.getXConstructorCallAccess()
+															.getTypeArgumentsJvmArgumentTypeReferenceParserRuleCall_3_2_1_0());
+
+												}
+												pushFollow(FOLLOW_ruleJvmArgumentTypeReference_in_ruleXConstructorCall16730);
+												lv_typeArguments_6_0 = ruleJvmArgumentTypeReference();
+
+												state._fsp--;
+												if (state.failed)
+													return current;
+												if (state.backtracking == 0) {
+
+													if (current == null) {
+														current = createModelElementForParent(grammarAccess
+																.getXConstructorCallRule());
+													}
+													add(current, XCONSTRUCTOR_CALL__TYPE_ARGUMENTS, lv_typeArguments_6_0,
+															"JvmArgumentTypeReference");
+													afterParserOrEnumRuleCall();
+
+												}
+
+											}
+
+										}
+
+									}
+										break;
+
+									default:
+										break loop164;
+								}
+							} while (true);
+
+							otherlv_7 = (Token) match(input, 25, FOLLOW_25_in_ruleXConstructorCall16744);
+							if (state.failed)
+								return current;
+							if (state.backtracking == 0) {
+
+								newLeafNode(otherlv_7, grammarAccess.getXConstructorCallAccess()
+										.getGreaterThanSignKeyword_3_3());
+
+							}
+
+						}
+							break;
+
+					}
+
+					int alt168 = 2;
+					alt168 = dfa168.predict(input);
+					switch (alt168) {
+						case 1:
+
+						{
+
+							{
+								otherlv_8 = (Token) match(input, 35, FOLLOW_35_in_ruleXConstructorCall16767);
+								if (state.failed)
+									return current;
+								if (state.backtracking == 0) {
+
+									newLeafNode(otherlv_8, grammarAccess.getXConstructorCallAccess()
+											.getLeftParenthesisKeyword_4_0());
+
+								}
+
+							}
+
+							int alt167 = 3;
+							alt167 = dfa167.predict(input);
+							switch (alt167) {
+								case 1:
+
+								{
+
+									{
+
+										{
+											if (state.backtracking == 0) {
+
+												newCompositeNode(grammarAccess.getXConstructorCallAccess()
+														.getArgumentsXShortClosureParserRuleCall_4_1_0_0());
+
+											}
+											pushFollow(FOLLOW_ruleXShortClosure_in_ruleXConstructorCall16840);
+											lv_arguments_9_0 = ruleXShortClosure();
+
+											state._fsp--;
+											if (state.failed)
+												return current;
+											if (state.backtracking == 0) {
+
+												if (current == null) {
+													current = createModelElementForParent(grammarAccess
+															.getXConstructorCallRule());
+												}
+												add(current, XCONSTRUCTOR_CALL__ARGUMENTS, lv_arguments_9_0, "XShortClosure");
+												afterParserOrEnumRuleCall();
+
+											}
+
+										}
+
+									}
+
+								}
+									break;
+								case 2:
+
+								{
+
+									{
+
+										{
+
+											{
+												if (state.backtracking == 0) {
+
+													newCompositeNode(grammarAccess.getXConstructorCallAccess()
+															.getArgumentsXExpressionParserRuleCall_4_1_1_0_0());
+
+												}
+												pushFollow(FOLLOW_ruleXExpression_in_ruleXConstructorCall16868);
+												lv_arguments_10_0 = ruleXExpression();
+
+												state._fsp--;
+												if (state.failed)
+													return current;
+												if (state.backtracking == 0) {
+
+													if (current == null) {
+														current = createModelElementForParent(grammarAccess
+																.getXConstructorCallRule());
+													}
+													add(current, XCONSTRUCTOR_CALL__ARGUMENTS, lv_arguments_10_0, null);
+													afterParserOrEnumRuleCall();
+
+												}
+
+											}
+
+										}
+
+										loop166: do {
+											int alt166 = 2;
+											int LA166_0 = input.LA(1);
+
+											if ((LA166_0 == 24)) {
+												alt166 = 1;
+											}
+
+											switch (alt166) {
+												case 1:
+
+												{
+													otherlv_11 = (Token) match(input, 24,
+															FOLLOW_24_in_ruleXConstructorCall16881);
+													if (state.failed)
+														return current;
+													if (state.backtracking == 0) {
+
+														newLeafNode(otherlv_11, grammarAccess
+																.getXConstructorCallAccess()
+																.getCommaKeyword_4_1_1_1_0());
+
+													}
+
+													{
+
+														{
+															if (state.backtracking == 0) {
+
+																newCompositeNode(grammarAccess
+																		.getXConstructorCallAccess()
+																		.getArgumentsXExpressionParserRuleCall_4_1_1_1_1_0());
+
+															}
+															pushFollow(FOLLOW_ruleXExpression_in_ruleXConstructorCall16902);
+															lv_arguments_12_0 = ruleXExpression();
+
+															state._fsp--;
+															if (state.failed)
+																return current;
+															if (state.backtracking == 0) {
+
+																if (current == null) {
+																	current = createModelElementForParent(grammarAccess
+																			.getXConstructorCallRule());
+																}
+																add(current, XCONSTRUCTOR_CALL__ARGUMENTS, lv_arguments_12_0,
+																		null);
+																afterParserOrEnumRuleCall();
+
+															}
+
+														}
+
+													}
+
+												}
+													break;
+
+												default:
+													break loop166;
+											}
+										} while (true);
+
+									}
+
+								}
+									break;
+
+							}
+
+							otherlv_13 = (Token) match(input, 36, FOLLOW_36_in_ruleXConstructorCall16919);
+							if (state.failed)
+								return current;
+							if (state.backtracking == 0) {
+
+								newLeafNode(otherlv_13, grammarAccess.getXConstructorCallAccess()
+										.getRightParenthesisKeyword_4_2());
+
+							}
+
+						}
+							break;
+
+					}
+
+					int alt169 = 2;
+					alt169 = dfa169.predict(input);
+					switch (alt169) {
+						case 1:
+
+						{
+
+							{
+								if (state.backtracking == 0) {
+
+									newCompositeNode(grammarAccess.getXConstructorCallAccess()
+											.getArgumentsXClosureParserRuleCall_5_0());
+
+								}
+								pushFollow(FOLLOW_ruleXClosure_in_ruleXConstructorCall16954);
+								lv_arguments_14_0 = ruleXClosure();
+
+								state._fsp--;
+								if (state.failed)
+									return current;
+								if (state.backtracking == 0) {
+
+									if (current == null) {
+										current = createModelElementForParent(grammarAccess.getXConstructorCallRule());
+									}
+									add(current, XCONSTRUCTOR_CALL__ARGUMENTS, lv_arguments_14_0, "XClosure");
+									afterParserOrEnumRuleCall();
+
+								}
+
+							}
+
+						}
+							break;
+
+					}
+
+				}
+
+			}
+
+			if (state.backtracking == 0) {
+				leaveRule();
+			}
+		}
+
+		catch (RecognitionException re) {
+			recoverAndAppendSkippedTokens(re);
+		} finally {
+		}
+		return current;
+	}
+
+	public final EObject entryRuleXBooleanLiteral() throws RecognitionException {
+		EObject current = null;
+
+		EObject iv_ruleXBooleanLiteral = null;
+
+		try {
+
+			{
+				if (state.backtracking == 0) {
+					newCompositeNode(grammarAccess.getXBooleanLiteralRule());
+				}
+				pushFollow(FOLLOW_ruleXBooleanLiteral_in_entryRuleXBooleanLiteral16991);
+				iv_ruleXBooleanLiteral = ruleXBooleanLiteral();
+
+				state._fsp--;
+				if (state.failed)
+					return current;
+				if (state.backtracking == 0) {
+					current = iv_ruleXBooleanLiteral;
+				}
+				match(input, EOF, FOLLOW_EOF_in_entryRuleXBooleanLiteral17001);
+				if (state.failed)
+					return current;
+
+			}
+
+		}
+
+		catch (RecognitionException re) {
+			recoverAndAppendSkippedTokens(re);
+		} finally {
+		}
+		return current;
+	}
+
+	public final EObject ruleXBooleanLiteral() throws RecognitionException {
+		EObject current = null;
+
+		Token otherlv_1 = null;
+		Token lv_isTrue_2_0 = null;
+
+		enterRule();
+
+		try {
+
+			{
+
+				{
+
+					{
+						if (state.backtracking == 0) {
+
+							current = forceCreateModelElement(grammarAccess.getXBooleanLiteralAccess()
+									.getXBooleanLiteralAction_0(), current);
+
+						}
+
+					}
+
+					int alt170 = 2;
+					int LA170_0 = input.LA(1);
+
+					if ((LA170_0 == 107)) {
+						alt170 = 1;
+					} else if ((LA170_0 == 108)) {
+						alt170 = 2;
+					} else {
+						if (state.backtracking > 0) {
+							state.failed = true;
+							return current;
+						}
+						NoViableAltException nvae = new NoViableAltException("", 170, 0, input);
+
+						throw nvae;
+					}
+					switch (alt170) {
+						case 1:
+
+						{
+							otherlv_1 = (Token) match(input, 107, FOLLOW_107_in_ruleXBooleanLiteral17048);
+							if (state.failed)
+								return current;
+							if (state.backtracking == 0) {
+
+								newLeafNode(otherlv_1, grammarAccess.getXBooleanLiteralAccess().getFalseKeyword_1_0());
+
+							}
+
+						}
+							break;
+						case 2:
+
+						{
+
+							{
+
+								{
+									lv_isTrue_2_0 = (Token) match(input, 108, FOLLOW_108_in_ruleXBooleanLiteral17072);
+									if (state.failed)
+										return current;
+									if (state.backtracking == 0) {
+
+										newLeafNode(lv_isTrue_2_0, grammarAccess.getXBooleanLiteralAccess()
+												.getIsTrueTrueKeyword_1_1_0());
+
+									}
+									if (state.backtracking == 0) {
+
+										if (current == null) {
+											current = createModelElement(grammarAccess.getXBooleanLiteralRule());
+										}
+										setWithLastConsumed(current, XBOOLEAN_LITERAL__IS_TRUE, true, "true");
+
+									}
+
+								}
+
+							}
+
+						}
+							break;
+
+					}
+
+				}
+
+			}
+
+			if (state.backtracking == 0) {
+				leaveRule();
+			}
+		}
+
+		catch (RecognitionException re) {
+			recoverAndAppendSkippedTokens(re);
+		} finally {
+		}
+		return current;
+	}
+
+	public final EObject entryRuleXNullLiteral() throws RecognitionException {
+		EObject current = null;
+
+		EObject iv_ruleXNullLiteral = null;
+
+		try {
+
+			{
+				if (state.backtracking == 0) {
+					newCompositeNode(grammarAccess.getXNullLiteralRule());
+				}
+				pushFollow(FOLLOW_ruleXNullLiteral_in_entryRuleXNullLiteral17122);
+				iv_ruleXNullLiteral = ruleXNullLiteral();
+
+				state._fsp--;
+				if (state.failed)
+					return current;
+				if (state.backtracking == 0) {
+					current = iv_ruleXNullLiteral;
+				}
+				match(input, EOF, FOLLOW_EOF_in_entryRuleXNullLiteral17132);
+				if (state.failed)
+					return current;
+
+			}
+
+		}
+
+		catch (RecognitionException re) {
+			recoverAndAppendSkippedTokens(re);
+		} finally {
+		}
+		return current;
+	}
+
+	public final EObject ruleXNullLiteral() throws RecognitionException {
+		EObject current = null;
+
+		Token otherlv_1 = null;
+
+		enterRule();
+
+		try {
+
+			{
+
+				{
+
+					{
+						if (state.backtracking == 0) {
+
+							current = forceCreateModelElement(grammarAccess.getXNullLiteralAccess()
+									.getXNullLiteralAction_0(), current);
+
+						}
+
+					}
+
+					otherlv_1 = (Token) match(input, 109, FOLLOW_109_in_ruleXNullLiteral17178);
+					if (state.failed)
+						return current;
+					if (state.backtracking == 0) {
+
+						newLeafNode(otherlv_1, grammarAccess.getXNullLiteralAccess().getNullKeyword_1());
+
+					}
+
+				}
+
+			}
+
+			if (state.backtracking == 0) {
+				leaveRule();
+			}
+		}
+
+		catch (RecognitionException re) {
+			recoverAndAppendSkippedTokens(re);
+		} finally {
+		}
+		return current;
+	}
+
+	public final EObject entryRuleXNumberLiteral() throws RecognitionException {
+		EObject current = null;
+
+		EObject iv_ruleXNumberLiteral = null;
+
+		try {
+
+			{
+				if (state.backtracking == 0) {
+					newCompositeNode(grammarAccess.getXNumberLiteralRule());
+				}
+				pushFollow(FOLLOW_ruleXNumberLiteral_in_entryRuleXNumberLiteral17214);
+				iv_ruleXNumberLiteral = ruleXNumberLiteral();
+
+				state._fsp--;
+				if (state.failed)
+					return current;
+				if (state.backtracking == 0) {
+					current = iv_ruleXNumberLiteral;
+				}
+				match(input, EOF, FOLLOW_EOF_in_entryRuleXNumberLiteral17224);
+				if (state.failed)
+					return current;
+
+			}
+
+		}
+
+		catch (RecognitionException re) {
+			recoverAndAppendSkippedTokens(re);
+		} finally {
+		}
+		return current;
+	}
+
+	public final EObject ruleXNumberLiteral() throws RecognitionException {
+		EObject current = null;
+
+		AntlrDatatypeRuleToken lv_value_1_0 = null;
+
+		enterRule();
+
+		try {
+
+			{
+
+				{
+
+					{
+						if (state.backtracking == 0) {
+
+							current = forceCreateModelElement(grammarAccess.getXNumberLiteralAccess()
+									.getXNumberLiteralAction_0(), current);
+
+						}
+
+					}
+
+					{
+
+						{
+							if (state.backtracking == 0) {
+
+								newCompositeNode(grammarAccess.getXNumberLiteralAccess()
+										.getValueNumberParserRuleCall_1_0());
+
+							}
+							pushFollow(FOLLOW_ruleNumber_in_ruleXNumberLiteral17279);
+							lv_value_1_0 = ruleNumber();
+
+							state._fsp--;
+							if (state.failed)
+								return current;
+							if (state.backtracking == 0) {
+
+								if (current == null) {
+									current = createModelElementForParent(grammarAccess.getXNumberLiteralRule());
+								}
+								set(current, XNUMBER_LITERAL__VALUE, lv_value_1_0, "Number");
+								afterParserOrEnumRuleCall();
+
+							}
+
+						}
+
+					}
+
+				}
+
+			}
+
+			if (state.backtracking == 0) {
+				leaveRule();
+			}
+		}
+
+		catch (RecognitionException re) {
+			recoverAndAppendSkippedTokens(re);
+		} finally {
+		}
+		return current;
+	}
+
+	public final EObject entryRuleXTypeLiteral() throws RecognitionException {
+		EObject current = null;
+
+		EObject iv_ruleXTypeLiteral = null;
+
+		try {
+
+			{
+				if (state.backtracking == 0) {
+					newCompositeNode(grammarAccess.getXTypeLiteralRule());
+				}
+				pushFollow(FOLLOW_ruleXTypeLiteral_in_entryRuleXTypeLiteral17315);
+				iv_ruleXTypeLiteral = ruleXTypeLiteral();
+
+				state._fsp--;
+				if (state.failed)
+					return current;
+				if (state.backtracking == 0) {
+					current = iv_ruleXTypeLiteral;
+				}
+				match(input, EOF, FOLLOW_EOF_in_entryRuleXTypeLiteral17325);
+				if (state.failed)
+					return current;
+
+			}
+
+		}
+
+		catch (RecognitionException re) {
+			recoverAndAppendSkippedTokens(re);
+		} finally {
+		}
+		return current;
+	}
+
+	public final EObject ruleXTypeLiteral() throws RecognitionException {
+		EObject current = null;
+
+		Token otherlv_1 = null;
+		Token otherlv_2 = null;
+		Token otherlv_5 = null;
+		AntlrDatatypeRuleToken lv_arrayDimensions_4_0 = null;
+
+		enterRule();
+
+		try {
+
+			{
+
+				{
+
+					{
+						if (state.backtracking == 0) {
+
+							current = forceCreateModelElement(grammarAccess.getXTypeLiteralAccess()
+									.getXTypeLiteralAction_0(), current);
+
+						}
+
+					}
+
+					otherlv_1 = (Token) match(input, 110, FOLLOW_110_in_ruleXTypeLiteral17371);
+					if (state.failed)
+						return current;
+					if (state.backtracking == 0) {
+
+						newLeafNode(otherlv_1, grammarAccess.getXTypeLiteralAccess().getTypeofKeyword_1());
+
+					}
+					otherlv_2 = (Token) match(input, 35, FOLLOW_35_in_ruleXTypeLiteral17383);
+					if (state.failed)
+						return current;
+					if (state.backtracking == 0) {
+
+						newLeafNode(otherlv_2, grammarAccess.getXTypeLiteralAccess().getLeftParenthesisKeyword_2());
+
+					}
+
+					{
+
+						{
+							if (state.backtracking == 0) {
+
+								if (current == null) {
+									current = createModelElement(grammarAccess.getXTypeLiteralRule());
+								}
+
+							}
+							if (state.backtracking == 0) {
+
+								newCompositeNode(grammarAccess.getXTypeLiteralAccess()
+										.getTypeJvmTypeCrossReference_3_0());
+
+							}
+							pushFollow(FOLLOW_ruleQualifiedName_in_ruleXTypeLiteral17406);
+							ruleQualifiedName();
+
+							state._fsp--;
+							if (state.failed)
+								return current;
+							if (state.backtracking == 0) {
+
+								afterParserOrEnumRuleCall();
+
+							}
+
+						}
+
+					}
+
+					loop171: do {
+						int alt171 = 2;
+						int LA171_0 = input.LA(1);
+
+						if ((LA171_0 == 94)) {
+							alt171 = 1;
+						}
+
+						switch (alt171) {
+							case 1:
+
+							{
+
+								{
+									if (state.backtracking == 0) {
+
+										newCompositeNode(grammarAccess.getXTypeLiteralAccess()
+												.getArrayDimensionsArrayBracketsParserRuleCall_4_0());
+
+									}
+									pushFollow(FOLLOW_ruleArrayBrackets_in_ruleXTypeLiteral17427);
+									lv_arrayDimensions_4_0 = ruleArrayBrackets();
+
+									state._fsp--;
+									if (state.failed)
+										return current;
+									if (state.backtracking == 0) {
+
+										if (current == null) {
+											current = createModelElementForParent(grammarAccess.getXTypeLiteralRule());
+										}
+										add(current, XTYPE_LITERAL__ARRAY_DIMENSIONS, lv_arrayDimensions_4_0, "ArrayBrackets");
+										afterParserOrEnumRuleCall();
+
+									}
+
+								}
+
+							}
+								break;
+
+							default:
+								break loop171;
+						}
+					} while (true);
+
+					otherlv_5 = (Token) match(input, 36, FOLLOW_36_in_ruleXTypeLiteral17440);
+					if (state.failed)
+						return current;
+					if (state.backtracking == 0) {
+
+						newLeafNode(otherlv_5, grammarAccess.getXTypeLiteralAccess().getRightParenthesisKeyword_5());
+
+					}
+
+				}
+
+			}
+
+			if (state.backtracking == 0) {
+				leaveRule();
+			}
+		}
+
+		catch (RecognitionException re) {
+			recoverAndAppendSkippedTokens(re);
+		} finally {
+		}
+		return current;
+	}
+
+	public final EObject entryRuleXThrowExpression() throws RecognitionException {
+		EObject current = null;
+
+		EObject iv_ruleXThrowExpression = null;
+
+		try {
+
+			{
+				if (state.backtracking == 0) {
+					newCompositeNode(grammarAccess.getXThrowExpressionRule());
+				}
+				pushFollow(FOLLOW_ruleXThrowExpression_in_entryRuleXThrowExpression17476);
+				iv_ruleXThrowExpression = ruleXThrowExpression();
+
+				state._fsp--;
+				if (state.failed)
+					return current;
+				if (state.backtracking == 0) {
+					current = iv_ruleXThrowExpression;
+				}
+				match(input, EOF, FOLLOW_EOF_in_entryRuleXThrowExpression17486);
+				if (state.failed)
+					return current;
+
+			}
+
+		}
+
+		catch (RecognitionException re) {
+			recoverAndAppendSkippedTokens(re);
+		} finally {
+		}
+		return current;
+	}
+
+	public final EObject ruleXThrowExpression() throws RecognitionException {
+		EObject current = null;
+
+		Token otherlv_1 = null;
+		EObject lv_expression_2_0 = null;
+
+		enterRule();
+
+		try {
+
+			{
+
+				{
+
+					{
+						if (state.backtracking == 0) {
+
+							current = forceCreateModelElement(grammarAccess.getXThrowExpressionAccess()
+									.getXThrowExpressionAction_0(), current);
+
+						}
+
+					}
+
+					otherlv_1 = (Token) match(input, 111, FOLLOW_111_in_ruleXThrowExpression17532);
+					if (state.failed)
+						return current;
+					if (state.backtracking == 0) {
+
+						newLeafNode(otherlv_1, grammarAccess.getXThrowExpressionAccess().getThrowKeyword_1());
+
+					}
+
+					{
+
+						{
+							if (state.backtracking == 0) {
+
+								newCompositeNode(grammarAccess.getXThrowExpressionAccess()
+										.getExpressionXExpressionParserRuleCall_2_0());
+
+							}
+							pushFollow(FOLLOW_ruleXExpression_in_ruleXThrowExpression17553);
+							lv_expression_2_0 = ruleXExpression();
+
+							state._fsp--;
+							if (state.failed)
+								return current;
+							if (state.backtracking == 0) {
+
+								if (current == null) {
+									current = createModelElementForParent(grammarAccess.getXThrowExpressionRule());
+								}
+								set(current, XTHROW_EXPRESSION__EXPRESSION, lv_expression_2_0, null);
+								afterParserOrEnumRuleCall();
+
+							}
+
+						}
+
+					}
+
+				}
+
+			}
+
+			if (state.backtracking == 0) {
+				leaveRule();
+			}
+		}
+
+		catch (RecognitionException re) {
+			recoverAndAppendSkippedTokens(re);
+		} finally {
+		}
+		return current;
+	}
+
+	public final EObject entryRuleXReturnExpression() throws RecognitionException {
+		EObject current = null;
+
+		EObject iv_ruleXReturnExpression = null;
+
+		try {
+
+			{
+				if (state.backtracking == 0) {
+					newCompositeNode(grammarAccess.getXReturnExpressionRule());
+				}
+				pushFollow(FOLLOW_ruleXReturnExpression_in_entryRuleXReturnExpression17589);
+				iv_ruleXReturnExpression = ruleXReturnExpression();
+
+				state._fsp--;
+				if (state.failed)
+					return current;
+				if (state.backtracking == 0) {
+					current = iv_ruleXReturnExpression;
+				}
+				match(input, EOF, FOLLOW_EOF_in_entryRuleXReturnExpression17599);
+				if (state.failed)
+					return current;
+
+			}
+
+		}
+
+		catch (RecognitionException re) {
+			recoverAndAppendSkippedTokens(re);
+		} finally {
+		}
+		return current;
+	}
+
+	public final EObject ruleXReturnExpression() throws RecognitionException {
+		EObject current = null;
+
+		Token otherlv_1 = null;
+		EObject lv_expression_2_0 = null;
+
+		enterRule();
+
+		try {
+
+			{
+
+				{
+
+					{
+						if (state.backtracking == 0) {
+
+							current = forceCreateModelElement(grammarAccess.getXReturnExpressionAccess()
+									.getXReturnExpressionAction_0(), current);
+
+						}
+
+					}
+
+					otherlv_1 = (Token) match(input, 112, FOLLOW_112_in_ruleXReturnExpression17645);
+					if (state.failed)
+						return current;
+					if (state.backtracking == 0) {
+
+						newLeafNode(otherlv_1, grammarAccess.getXReturnExpressionAccess().getReturnKeyword_1());
+
+					}
+
+					int alt172 = 2;
+					alt172 = dfa172.predict(input);
+					switch (alt172) {
+						case 1:
+
+						{
+
+							{
+								if (state.backtracking == 0) {
+
+									newCompositeNode(grammarAccess.getXReturnExpressionAccess()
+											.getExpressionXExpressionParserRuleCall_2_0());
+
+								}
+								pushFollow(FOLLOW_ruleXExpression_in_ruleXReturnExpression17676);
+								lv_expression_2_0 = ruleXExpression();
+
+								state._fsp--;
+								if (state.failed)
+									return current;
+								if (state.backtracking == 0) {
+
+									if (current == null) {
+										current = createModelElementForParent(grammarAccess.getXReturnExpressionRule());
+									}
+									set(current, XRETURN_EXPRESSION__EXPRESSION, lv_expression_2_0, null);
+									afterParserOrEnumRuleCall();
+
+								}
+
+							}
+
+						}
+							break;
+
+					}
+
+				}
+
+			}
+
+			if (state.backtracking == 0) {
+				leaveRule();
+			}
+		}
+
+		catch (RecognitionException re) {
+			recoverAndAppendSkippedTokens(re);
+		} finally {
+		}
+		return current;
+	}
+
+	public final EObject entryRuleXTryCatchFinallyExpression() throws RecognitionException {
+		EObject current = null;
+
+		EObject iv_ruleXTryCatchFinallyExpression = null;
+
+		try {
+
+			{
+				if (state.backtracking == 0) {
+					newCompositeNode(grammarAccess.getXTryCatchFinallyExpressionRule());
+				}
+				pushFollow(FOLLOW_ruleXTryCatchFinallyExpression_in_entryRuleXTryCatchFinallyExpression17713);
+				iv_ruleXTryCatchFinallyExpression = ruleXTryCatchFinallyExpression();
+
+				state._fsp--;
+				if (state.failed)
+					return current;
+				if (state.backtracking == 0) {
+					current = iv_ruleXTryCatchFinallyExpression;
+				}
+				match(input, EOF, FOLLOW_EOF_in_entryRuleXTryCatchFinallyExpression17723);
+				if (state.failed)
+					return current;
+
+			}
+
+		}
+
+		catch (RecognitionException re) {
+			recoverAndAppendSkippedTokens(re);
+		} finally {
+		}
+		return current;
+	}
+
+	public final EObject ruleXTryCatchFinallyExpression() throws RecognitionException {
+		EObject current = null;
+
+		Token otherlv_1 = null;
+		Token otherlv_4 = null;
+		Token otherlv_6 = null;
+		EObject lv_expression_2_0 = null;
+
+		EObject lv_catchClauses_3_0 = null;
+
+		EObject lv_finallyExpression_5_0 = null;
+
+		EObject lv_finallyExpression_7_0 = null;
+
+		enterRule();
+
+		try {
+
+			{
+
+				{
+
+					{
+						if (state.backtracking == 0) {
+
+							current = forceCreateModelElement(grammarAccess.getXTryCatchFinallyExpressionAccess()
+									.getXTryCatchFinallyExpressionAction_0(), current);
+
+						}
+
+					}
+
+					otherlv_1 = (Token) match(input, 113, FOLLOW_113_in_ruleXTryCatchFinallyExpression17769);
+					if (state.failed)
+						return current;
+					if (state.backtracking == 0) {
+
+						newLeafNode(otherlv_1, grammarAccess.getXTryCatchFinallyExpressionAccess().getTryKeyword_1());
+
+					}
+
+					{
+
+						{
+							if (state.backtracking == 0) {
+
+								newCompositeNode(grammarAccess.getXTryCatchFinallyExpressionAccess()
+										.getExpressionXExpressionParserRuleCall_2_0());
+
+							}
+							pushFollow(FOLLOW_ruleXExpression_in_ruleXTryCatchFinallyExpression17790);
+							lv_expression_2_0 = ruleXExpression();
+
+							state._fsp--;
+							if (state.failed)
+								return current;
+							if (state.backtracking == 0) {
+
+								if (current == null) {
+									current = createModelElementForParent(grammarAccess
+											.getXTryCatchFinallyExpressionRule());
+								}
+								set(current, XTRY_CATCH_FINALLY_EXPRESSION__EXPRESSION, lv_expression_2_0, null);
+								afterParserOrEnumRuleCall();
+
+							}
+
+						}
+
+					}
+
+					int alt175 = 2;
+					int LA175_0 = input.LA(1);
+
+					if ((LA175_0 == 115)) {
+						alt175 = 1;
+					} else if ((LA175_0 == 114)) {
+						alt175 = 2;
+					} else {
+						if (state.backtracking > 0) {
+							state.failed = true;
+							return current;
+						}
+						NoViableAltException nvae = new NoViableAltException("", 175, 0, input);
+
+						throw nvae;
+					}
+					switch (alt175) {
+						case 1:
+
+						{
+
+							{
+
+								int cnt173 = 0;
+								loop173: do {
+									int alt173 = 2;
+									int LA173_0 = input.LA(1);
+
+									if ((LA173_0 == 115)) {
+										int LA173_2 = input.LA(2);
+
+										if ((synpred40_InternalXtend())) {
+											alt173 = 1;
+										}
+
+									}
+
+									switch (alt173) {
+										case 1:
+
+										{
+
+											{
+												if (state.backtracking == 0) {
+
+													newCompositeNode(grammarAccess
+															.getXTryCatchFinallyExpressionAccess()
+															.getCatchClausesXCatchClauseParserRuleCall_3_0_0_0());
+
+												}
+												pushFollow(FOLLOW_ruleXCatchClause_in_ruleXTryCatchFinallyExpression17820);
+												lv_catchClauses_3_0 = ruleXCatchClause();
+
+												state._fsp--;
+												if (state.failed)
+													return current;
+												if (state.backtracking == 0) {
+
+													if (current == null) {
+														current = createModelElementForParent(grammarAccess
+																.getXTryCatchFinallyExpressionRule());
+													}
+													add(current, XTRY_CATCH_FINALLY_EXPRESSION__CATCH_CLAUSES, lv_catchClauses_3_0, "XCatchClause");
+													afterParserOrEnumRuleCall();
+
+												}
+
+											}
+
+										}
+											break;
+
+										default:
+											if (cnt173 >= 1)
+												break loop173;
+											if (state.backtracking > 0) {
+												state.failed = true;
+												return current;
+											}
+											EarlyExitException eee = new EarlyExitException(173, input);
+											throw eee;
+									}
+									cnt173++;
+								} while (true);
+
+								int alt174 = 2;
+								int LA174_0 = input.LA(1);
+
+								if ((LA174_0 == 114)) {
+									int LA174_1 = input.LA(2);
+
+									if ((synpred41_InternalXtend())) {
+										alt174 = 1;
+									}
+								}
+								switch (alt174) {
+									case 1:
+
+									{
+
+										{
+											otherlv_4 = (Token) match(input, 114,
+													FOLLOW_114_in_ruleXTryCatchFinallyExpression17842);
+											if (state.failed)
+												return current;
+											if (state.backtracking == 0) {
+
+												newLeafNode(otherlv_4, grammarAccess
+														.getXTryCatchFinallyExpressionAccess()
+														.getFinallyKeyword_3_0_1_0());
+
+											}
+
+										}
+
+										{
+
+											{
+												if (state.backtracking == 0) {
+
+													newCompositeNode(grammarAccess
+															.getXTryCatchFinallyExpressionAccess()
+															.getFinallyExpressionXExpressionParserRuleCall_3_0_1_1_0());
+
+												}
+												pushFollow(FOLLOW_ruleXExpression_in_ruleXTryCatchFinallyExpression17864);
+												lv_finallyExpression_5_0 = ruleXExpression();
+
+												state._fsp--;
+												if (state.failed)
+													return current;
+												if (state.backtracking == 0) {
+
+													if (current == null) {
+														current = createModelElementForParent(grammarAccess
+																.getXTryCatchFinallyExpressionRule());
+													}
+													set(current, XTRY_CATCH_FINALLY_EXPRESSION__FINALLY_EXPRESSION, lv_finallyExpression_5_0,
+															null);
+													afterParserOrEnumRuleCall();
+
+												}
+
+											}
+
+										}
+
+									}
+										break;
+
+								}
+
+							}
+
+						}
+							break;
+						case 2:
+
+						{
+
+							{
+								otherlv_6 = (Token) match(input, 114, FOLLOW_114_in_ruleXTryCatchFinallyExpression17886);
+								if (state.failed)
+									return current;
+								if (state.backtracking == 0) {
+
+									newLeafNode(otherlv_6, grammarAccess.getXTryCatchFinallyExpressionAccess()
+											.getFinallyKeyword_3_1_0());
+
+								}
+
+								{
+
+									{
+										if (state.backtracking == 0) {
+
+											newCompositeNode(grammarAccess.getXTryCatchFinallyExpressionAccess()
+													.getFinallyExpressionXExpressionParserRuleCall_3_1_1_0());
+
+										}
+										pushFollow(FOLLOW_ruleXExpression_in_ruleXTryCatchFinallyExpression17907);
+										lv_finallyExpression_7_0 = ruleXExpression();
+
+										state._fsp--;
+										if (state.failed)
+											return current;
+										if (state.backtracking == 0) {
+
+											if (current == null) {
+												current = createModelElementForParent(grammarAccess
+														.getXTryCatchFinallyExpressionRule());
+											}
+											set(current, XTRY_CATCH_FINALLY_EXPRESSION__FINALLY_EXPRESSION, lv_finallyExpression_7_0, null);
+											afterParserOrEnumRuleCall();
+
+										}
+
+									}
+
+								}
+
+							}
+
+						}
+							break;
+
+					}
+
+				}
+
+			}
+
+			if (state.backtracking == 0) {
+				leaveRule();
+			}
+		}
+
+		catch (RecognitionException re) {
+			recoverAndAppendSkippedTokens(re);
+		} finally {
+		}
+		return current;
+	}
+
+	public final EObject entryRuleXCatchClause() throws RecognitionException {
+		EObject current = null;
+
+		EObject iv_ruleXCatchClause = null;
+
+		try {
+
+			{
+				if (state.backtracking == 0) {
+					newCompositeNode(grammarAccess.getXCatchClauseRule());
+				}
+				pushFollow(FOLLOW_ruleXCatchClause_in_entryRuleXCatchClause17945);
+				iv_ruleXCatchClause = ruleXCatchClause();
+
+				state._fsp--;
+				if (state.failed)
+					return current;
+				if (state.backtracking == 0) {
+					current = iv_ruleXCatchClause;
+				}
+				match(input, EOF, FOLLOW_EOF_in_entryRuleXCatchClause17955);
+				if (state.failed)
+					return current;
+
+			}
+
+		}
+
+		catch (RecognitionException re) {
+			recoverAndAppendSkippedTokens(re);
+		} finally {
+		}
+		return current;
+	}
+
+	public final EObject ruleXCatchClause() throws RecognitionException {
+		EObject current = null;
+
+		Token otherlv_0 = null;
+		Token otherlv_1 = null;
+		Token otherlv_3 = null;
+		EObject lv_declaredParam_2_0 = null;
+
+		EObject lv_expression_4_0 = null;
+
+		enterRule();
+
+		try {
+
+			{
+
+				{
+
+					{
+						otherlv_0 = (Token) match(input, 115, FOLLOW_115_in_ruleXCatchClause18000);
+						if (state.failed)
+							return current;
+						if (state.backtracking == 0) {
+
+							newLeafNode(otherlv_0, grammarAccess.getXCatchClauseAccess().getCatchKeyword_0());
+
+						}
+
+					}
+
+					otherlv_1 = (Token) match(input, 35, FOLLOW_35_in_ruleXCatchClause18013);
+					if (state.failed)
+						return current;
+					if (state.backtracking == 0) {
+
+						newLeafNode(otherlv_1, grammarAccess.getXCatchClauseAccess().getLeftParenthesisKeyword_1());
+
+					}
+
+					{
+
+						{
+							if (state.backtracking == 0) {
+
+								newCompositeNode(grammarAccess.getXCatchClauseAccess()
+										.getDeclaredParamFullJvmFormalParameterParserRuleCall_2_0());
+
+							}
+							pushFollow(FOLLOW_ruleFullJvmFormalParameter_in_ruleXCatchClause18034);
+							lv_declaredParam_2_0 = ruleFullJvmFormalParameter();
+
+							state._fsp--;
+							if (state.failed)
+								return current;
+							if (state.backtracking == 0) {
+
+								if (current == null) {
+									current = createModelElementForParent(grammarAccess.getXCatchClauseRule());
+								}
+								set(current, XCATCH_CLAUSE__DECLARED_PARAM, lv_declaredParam_2_0, null);
+								afterParserOrEnumRuleCall();
+
+							}
+
+						}
+
+					}
+
+					otherlv_3 = (Token) match(input, 36, FOLLOW_36_in_ruleXCatchClause18046);
+					if (state.failed)
+						return current;
+					if (state.backtracking == 0) {
+
+						newLeafNode(otherlv_3, grammarAccess.getXCatchClauseAccess().getRightParenthesisKeyword_3());
+
+					}
+
+					{
+
+						{
+							if (state.backtracking == 0) {
+
+								newCompositeNode(grammarAccess.getXCatchClauseAccess()
+										.getExpressionXExpressionParserRuleCall_4_0());
+
+							}
+							pushFollow(FOLLOW_ruleXExpression_in_ruleXCatchClause18067);
+							lv_expression_4_0 = ruleXExpression();
+
+							state._fsp--;
+							if (state.failed)
+								return current;
+							if (state.backtracking == 0) {
+
+								if (current == null) {
+									current = createModelElementForParent(grammarAccess.getXCatchClauseRule());
+								}
+								set(current, XCATCH_CLAUSE__EXPRESSION, lv_expression_4_0, null);
+								afterParserOrEnumRuleCall();
+
+							}
+
+						}
+
+					}
+
+				}
+
+			}
+
+			if (state.backtracking == 0) {
+				leaveRule();
+			}
+		}
+
+		catch (RecognitionException re) {
+			recoverAndAppendSkippedTokens(re);
+		} finally {
+		}
+		return current;
+	}
+
+	public final String entryRuleQualifiedName() throws RecognitionException {
+		String current = null;
+
+		AntlrDatatypeRuleToken iv_ruleQualifiedName = null;
+
+		try {
+
+			{
+				if (state.backtracking == 0) {
+					newCompositeNode(grammarAccess.getQualifiedNameRule());
+				}
+				pushFollow(FOLLOW_ruleQualifiedName_in_entryRuleQualifiedName18104);
+				iv_ruleQualifiedName = ruleQualifiedName();
+
+				state._fsp--;
+				if (state.failed)
+					return current;
+				if (state.backtracking == 0) {
+					current = iv_ruleQualifiedName.getText();
+				}
+				match(input, EOF, FOLLOW_EOF_in_entryRuleQualifiedName18115);
+				if (state.failed)
+					return current;
+
+			}
+
+		}
+
+		catch (RecognitionException re) {
+			recoverAndAppendSkippedTokens(re);
+		} finally {
+		}
+		return current;
+	}
+
+	public final AntlrDatatypeRuleToken ruleQualifiedName() throws RecognitionException {
+		AntlrDatatypeRuleToken current = new AntlrDatatypeRuleToken();
+
+		Token kw = null;
+		AntlrDatatypeRuleToken this_ValidID_0 = null;
+
+		AntlrDatatypeRuleToken this_ValidID_2 = null;
+
+		enterRule();
+
+		try {
+
+			{
+
+				{
+					if (state.backtracking == 0) {
+
+						newCompositeNode(grammarAccess.getQualifiedNameAccess().getValidIDParserRuleCall_0());
+
+					}
+					pushFollow(FOLLOW_ruleValidID_in_ruleQualifiedName18162);
+					this_ValidID_0 = ruleValidID();
+
+					state._fsp--;
+					if (state.failed)
+						return current;
+					if (state.backtracking == 0) {
+
+						current.merge(this_ValidID_0);
+
+					}
+					if (state.backtracking == 0) {
+
+						afterParserOrEnumRuleCall();
+
+					}
+
+					loop176: do {
+						int alt176 = 2;
+						int LA176_0 = input.LA(1);
+
+						if ((LA176_0 == 90)) {
+							switch (input.LA(2)) {
+								case RULE_ID: {
+									int LA176_3 = input.LA(3);
+
+									if ((synpred43_InternalXtend())) {
+										alt176 = 1;
+									}
+
+								}
+									break;
+								case 32: {
+									int LA176_4 = input.LA(3);
+
+									if ((synpred43_InternalXtend())) {
+										alt176 = 1;
+									}
+
+								}
+									break;
+								case 50: {
+									int LA176_5 = input.LA(3);
+
+									if ((synpred43_InternalXtend())) {
+										alt176 = 1;
+									}
+
+								}
+									break;
+
+							}
+
+						}
+
+						switch (alt176) {
+							case 1:
+
+							{
+
+								{
+									kw = (Token) match(input, 90, FOLLOW_90_in_ruleQualifiedName18190);
+									if (state.failed)
+										return current;
+									if (state.backtracking == 0) {
+
+										current.merge(kw);
+										newLeafNode(kw, grammarAccess.getQualifiedNameAccess().getFullStopKeyword_1_0());
+
+									}
+
+								}
+
+								if (state.backtracking == 0) {
+
+									newCompositeNode(grammarAccess.getQualifiedNameAccess()
+											.getValidIDParserRuleCall_1_1());
+
+								}
+								pushFollow(FOLLOW_ruleValidID_in_ruleQualifiedName18213);
+								this_ValidID_2 = ruleValidID();
+
+								state._fsp--;
+								if (state.failed)
+									return current;
+								if (state.backtracking == 0) {
+
+									current.merge(this_ValidID_2);
+
+								}
+								if (state.backtracking == 0) {
+
+									afterParserOrEnumRuleCall();
+
+								}
+
+							}
+								break;
+
+							default:
+								break loop176;
+						}
+					} while (true);
+
+				}
+
+			}
+
+			if (state.backtracking == 0) {
+				leaveRule();
+			}
+		}
+
+		catch (RecognitionException re) {
+			recoverAndAppendSkippedTokens(re);
+		} finally {
+		}
+		return current;
+	}
+
+	public final String entryRuleNumber() throws RecognitionException {
+		String current = null;
+
+		AntlrDatatypeRuleToken iv_ruleNumber = null;
+
+		HiddenTokens myHiddenTokenState = ((XtextTokenStream) input).setHiddenTokens();
+
+		try {
+
+			{
+				if (state.backtracking == 0) {
+					newCompositeNode(grammarAccess.getNumberRule());
+				}
+				pushFollow(FOLLOW_ruleNumber_in_entryRuleNumber18267);
+				iv_ruleNumber = ruleNumber();
+
+				state._fsp--;
+				if (state.failed)
+					return current;
+				if (state.backtracking == 0) {
+					current = iv_ruleNumber.getText();
+				}
+				match(input, EOF, FOLLOW_EOF_in_entryRuleNumber18278);
+				if (state.failed)
+					return current;
+
+			}
+
+		}
+
+		catch (RecognitionException re) {
+			recoverAndAppendSkippedTokens(re);
+		} finally {
+
+			myHiddenTokenState.restore();
+
+		}
+		return current;
+	}
+
+	public final AntlrDatatypeRuleToken ruleNumber() throws RecognitionException {
+		AntlrDatatypeRuleToken current = new AntlrDatatypeRuleToken();
+
+		Token this_HEX_0 = null;
+		Token this_INT_1 = null;
+		Token this_DECIMAL_2 = null;
+		Token kw = null;
+		Token this_INT_4 = null;
+		Token this_DECIMAL_5 = null;
+
+		enterRule();
+		HiddenTokens myHiddenTokenState = ((XtextTokenStream) input).setHiddenTokens();
+
+		try {
+
+			{
+
+				int alt180 = 2;
+				int LA180_0 = input.LA(1);
+
+				if ((LA180_0 == RULE_HEX)) {
+					alt180 = 1;
+				} else if (((LA180_0 >= RULE_INT && LA180_0 <= RULE_DECIMAL))) {
+					alt180 = 2;
+				} else {
+					if (state.backtracking > 0) {
+						state.failed = true;
+						return current;
+					}
+					NoViableAltException nvae = new NoViableAltException("", 180, 0, input);
+
+					throw nvae;
+				}
+				switch (alt180) {
+					case 1:
+
+					{
+						this_HEX_0 = (Token) match(input, RULE_HEX, FOLLOW_RULE_HEX_in_ruleNumber18322);
+						if (state.failed)
+							return current;
+						if (state.backtracking == 0) {
+
+							current.merge(this_HEX_0);
+
+						}
+						if (state.backtracking == 0) {
+
+							newLeafNode(this_HEX_0, grammarAccess.getNumberAccess().getHEXTerminalRuleCall_0());
+
+						}
+
+					}
+						break;
+					case 2:
+
+					{
+
+						{
+
+							int alt177 = 2;
+							int LA177_0 = input.LA(1);
+
+							if ((LA177_0 == RULE_INT)) {
+								alt177 = 1;
+							} else if ((LA177_0 == RULE_DECIMAL)) {
+								alt177 = 2;
+							} else {
+								if (state.backtracking > 0) {
+									state.failed = true;
+									return current;
+								}
+								NoViableAltException nvae = new NoViableAltException("", 177, 0, input);
+
+								throw nvae;
+							}
+							switch (alt177) {
+								case 1:
+
+								{
+									this_INT_1 = (Token) match(input, RULE_INT, FOLLOW_RULE_INT_in_ruleNumber18350);
+									if (state.failed)
+										return current;
+									if (state.backtracking == 0) {
+
+										current.merge(this_INT_1);
+
+									}
+									if (state.backtracking == 0) {
+
+										newLeafNode(this_INT_1, grammarAccess.getNumberAccess()
+												.getINTTerminalRuleCall_1_0_0());
+
+									}
+
+								}
+									break;
+								case 2:
+
+								{
+									this_DECIMAL_2 = (Token) match(input, RULE_DECIMAL,
+											FOLLOW_RULE_DECIMAL_in_ruleNumber18376);
+									if (state.failed)
+										return current;
+									if (state.backtracking == 0) {
+
+										current.merge(this_DECIMAL_2);
+
+									}
+									if (state.backtracking == 0) {
+
+										newLeafNode(this_DECIMAL_2, grammarAccess.getNumberAccess()
+												.getDECIMALTerminalRuleCall_1_0_1());
+
+									}
+
+								}
+									break;
+
+							}
+
+							int alt179 = 2;
+							int LA179_0 = input.LA(1);
+
+							if ((LA179_0 == 90)) {
+								int LA179_1 = input.LA(2);
+
+								if (((LA179_1 >= RULE_INT && LA179_1 <= RULE_DECIMAL))) {
+									alt179 = 1;
+								}
+							}
+							switch (alt179) {
+								case 1:
+
+								{
+									kw = (Token) match(input, 90, FOLLOW_90_in_ruleNumber18396);
+									if (state.failed)
+										return current;
+									if (state.backtracking == 0) {
+
+										current.merge(kw);
+										newLeafNode(kw, grammarAccess.getNumberAccess().getFullStopKeyword_1_1_0());
+
+									}
+
+									int alt178 = 2;
+									int LA178_0 = input.LA(1);
+
+									if ((LA178_0 == RULE_INT)) {
+										alt178 = 1;
+									} else if ((LA178_0 == RULE_DECIMAL)) {
+										alt178 = 2;
+									} else {
+										if (state.backtracking > 0) {
+											state.failed = true;
+											return current;
+										}
+										NoViableAltException nvae = new NoViableAltException("", 178, 0, input);
+
+										throw nvae;
+									}
+									switch (alt178) {
+										case 1:
+
+										{
+											this_INT_4 = (Token) match(input, RULE_INT,
+													FOLLOW_RULE_INT_in_ruleNumber18412);
+											if (state.failed)
+												return current;
+											if (state.backtracking == 0) {
+
+												current.merge(this_INT_4);
+
+											}
+											if (state.backtracking == 0) {
+
+												newLeafNode(this_INT_4, grammarAccess.getNumberAccess()
+														.getINTTerminalRuleCall_1_1_1_0());
+
+											}
+
+										}
+											break;
+										case 2:
+
+										{
+											this_DECIMAL_5 = (Token) match(input, RULE_DECIMAL,
+													FOLLOW_RULE_DECIMAL_in_ruleNumber18438);
+											if (state.failed)
+												return current;
+											if (state.backtracking == 0) {
+
+												current.merge(this_DECIMAL_5);
+
+											}
+											if (state.backtracking == 0) {
+
+												newLeafNode(this_DECIMAL_5, grammarAccess.getNumberAccess()
+														.getDECIMALTerminalRuleCall_1_1_1_1());
+
+											}
+
+										}
+											break;
+
+									}
+
+								}
+									break;
+
+							}
+
+						}
+
+					}
+						break;
+
+				}
+
+			}
+
+			if (state.backtracking == 0) {
+				leaveRule();
+			}
+		}
+
+		catch (RecognitionException re) {
+			recoverAndAppendSkippedTokens(re);
+		} finally {
+
+			myHiddenTokenState.restore();
+
+		}
+		return current;
+	}
+
+	public final EObject entryRuleJvmTypeReference() throws RecognitionException {
+		EObject current = null;
+
+		EObject iv_ruleJvmTypeReference = null;
+
+		try {
+
+			{
+				if (state.backtracking == 0) {
+					newCompositeNode(grammarAccess.getJvmTypeReferenceRule());
+				}
+				pushFollow(FOLLOW_ruleJvmTypeReference_in_entryRuleJvmTypeReference18491);
+				iv_ruleJvmTypeReference = ruleJvmTypeReference();
+
+				state._fsp--;
+				if (state.failed)
+					return current;
+				if (state.backtracking == 0) {
+					current = iv_ruleJvmTypeReference;
+				}
+				match(input, EOF, FOLLOW_EOF_in_entryRuleJvmTypeReference18501);
+				if (state.failed)
+					return current;
+
+			}
+
+		}
+
+		catch (RecognitionException re) {
+			recoverAndAppendSkippedTokens(re);
+		} finally {
+		}
+		return current;
+	}
+
+	public final EObject ruleJvmTypeReference() throws RecognitionException {
+		EObject current = null;
+
+		EObject this_JvmParameterizedTypeReference_0 = null;
+
+		EObject this_XFunctionTypeRef_3 = null;
+
+		enterRule();
+
+		try {
+
+			{
+
+				int alt182 = 2;
+				int LA182_0 = input.LA(1);
+
+				if ((LA182_0 == RULE_ID || LA182_0 == 32 || LA182_0 == 50)) {
+					alt182 = 1;
+				} else if ((LA182_0 == 35 || LA182_0 == 79)) {
+					alt182 = 2;
+				} else {
+					if (state.backtracking > 0) {
+						state.failed = true;
+						return current;
+					}
+					NoViableAltException nvae = new NoViableAltException("", 182, 0, input);
+
+					throw nvae;
+				}
+				switch (alt182) {
+					case 1:
+
+					{
+
+						{
+							if (state.backtracking == 0) {
+
+								newCompositeNode(grammarAccess.getJvmTypeReferenceAccess()
+										.getJvmParameterizedTypeReferenceParserRuleCall_0_0());
+
+							}
+							pushFollow(FOLLOW_ruleJvmParameterizedTypeReference_in_ruleJvmTypeReference18549);
+							this_JvmParameterizedTypeReference_0 = ruleJvmParameterizedTypeReference();
+
+							state._fsp--;
+							if (state.failed)
+								return current;
+							if (state.backtracking == 0) {
+
+								current = this_JvmParameterizedTypeReference_0;
+								afterParserOrEnumRuleCall();
+
+							}
+
+							loop181: do {
+								int alt181 = 2;
+								int LA181_0 = input.LA(1);
+
+								if ((LA181_0 == 94)) {
+									int LA181_2 = input.LA(2);
+
+									if ((LA181_2 == 95)) {
+										int LA181_3 = input.LA(3);
+
+										if ((synpred44_InternalXtend())) {
+											alt181 = 1;
+										}
+
+									}
+
+								}
+
+								switch (alt181) {
+									case 1:
+
+									{
+
+										{
+
+											{
+												if (state.backtracking == 0) {
+
+													current = forceCreateModelElementAndSet(
+															grammarAccess
+																	.getJvmTypeReferenceAccess()
+																	.getJvmGenericArrayTypeReferenceComponentTypeAction_0_1_0_0(),JVM_GENERIC_ARRAY_TYPE_REFERENCE__COMPONENT_TYPE,
+															current);
+
+												}
+
+											}
+
+											if (state.backtracking == 0) {
+
+												newCompositeNode(grammarAccess.getJvmTypeReferenceAccess()
+														.getArrayBracketsParserRuleCall_0_1_0_1());
+
+											}
+											pushFollow(FOLLOW_ruleArrayBrackets_in_ruleJvmTypeReference18585);
+											ruleArrayBrackets();
+
+											state._fsp--;
+											if (state.failed)
+												return current;
+											if (state.backtracking == 0) {
+
+												afterParserOrEnumRuleCall();
+
+											}
+
+										}
+
+									}
+										break;
+
+									default:
+										break loop181;
+								}
+							} while (true);
+
+						}
+
+					}
+						break;
+					case 2:
+
+					{
+						if (state.backtracking == 0) {
+
+							newCompositeNode(grammarAccess.getJvmTypeReferenceAccess()
+									.getXFunctionTypeRefParserRuleCall_1());
+
+						}
+						pushFollow(FOLLOW_ruleXFunctionTypeRef_in_ruleJvmTypeReference18616);
+						this_XFunctionTypeRef_3 = ruleXFunctionTypeRef();
+
+						state._fsp--;
+						if (state.failed)
+							return current;
+						if (state.backtracking == 0) {
+
+							current = this_XFunctionTypeRef_3;
+							afterParserOrEnumRuleCall();
+
+						}
+
+					}
+						break;
+
+				}
+
+			}
+
+			if (state.backtracking == 0) {
+				leaveRule();
+			}
+		}
+
+		catch (RecognitionException re) {
+			recoverAndAppendSkippedTokens(re);
+		} finally {
+		}
+		return current;
+	}
+
+	public final String entryRuleArrayBrackets() throws RecognitionException {
+		String current = null;
+
+		AntlrDatatypeRuleToken iv_ruleArrayBrackets = null;
+
+		try {
+
+			{
+				if (state.backtracking == 0) {
+					newCompositeNode(grammarAccess.getArrayBracketsRule());
+				}
+				pushFollow(FOLLOW_ruleArrayBrackets_in_entryRuleArrayBrackets18652);
+				iv_ruleArrayBrackets = ruleArrayBrackets();
+
+				state._fsp--;
+				if (state.failed)
+					return current;
+				if (state.backtracking == 0) {
+					current = iv_ruleArrayBrackets.getText();
+				}
+				match(input, EOF, FOLLOW_EOF_in_entryRuleArrayBrackets18663);
+				if (state.failed)
+					return current;
+
+			}
+
+		}
+
+		catch (RecognitionException re) {
+			recoverAndAppendSkippedTokens(re);
+		} finally {
+		}
+		return current;
+	}
+
+	public final AntlrDatatypeRuleToken ruleArrayBrackets() throws RecognitionException {
+		AntlrDatatypeRuleToken current = new AntlrDatatypeRuleToken();
+
+		Token kw = null;
+
+		enterRule();
+
+		try {
+
+			{
+
+				{
+					kw = (Token) match(input, 94, FOLLOW_94_in_ruleArrayBrackets18701);
+					if (state.failed)
+						return current;
+					if (state.backtracking == 0) {
+
+						current.merge(kw);
+						newLeafNode(kw, grammarAccess.getArrayBracketsAccess().getLeftSquareBracketKeyword_0());
+
+					}
+					kw = (Token) match(input, 95, FOLLOW_95_in_ruleArrayBrackets18714);
+					if (state.failed)
+						return current;
+					if (state.backtracking == 0) {
+
+						current.merge(kw);
+						newLeafNode(kw, grammarAccess.getArrayBracketsAccess().getRightSquareBracketKeyword_1());
+
+					}
+
+				}
+
+			}
+
+			if (state.backtracking == 0) {
+				leaveRule();
+			}
+		}
+
+		catch (RecognitionException re) {
+			recoverAndAppendSkippedTokens(re);
+		} finally {
+		}
+		return current;
+	}
+
+	public final EObject entryRuleXFunctionTypeRef() throws RecognitionException {
+		EObject current = null;
+
+		EObject iv_ruleXFunctionTypeRef = null;
+
+		try {
+
+			{
+				if (state.backtracking == 0) {
+					newCompositeNode(grammarAccess.getXFunctionTypeRefRule());
+				}
+				pushFollow(FOLLOW_ruleXFunctionTypeRef_in_entryRuleXFunctionTypeRef18754);
+				iv_ruleXFunctionTypeRef = ruleXFunctionTypeRef();
+
+				state._fsp--;
+				if (state.failed)
+					return current;
+				if (state.backtracking == 0) {
+					current = iv_ruleXFunctionTypeRef;
+				}
+				match(input, EOF, FOLLOW_EOF_in_entryRuleXFunctionTypeRef18764);
+				if (state.failed)
+					return current;
+
+			}
+
+		}
+
+		catch (RecognitionException re) {
+			recoverAndAppendSkippedTokens(re);
+		} finally {
+		}
+		return current;
+	}
+
+	public final EObject ruleXFunctionTypeRef() throws RecognitionException {
+		EObject current = null;
+
+		Token otherlv_0 = null;
+		Token otherlv_2 = null;
+		Token otherlv_4 = null;
+		Token otherlv_5 = null;
+		EObject lv_paramTypes_1_0 = null;
+
+		EObject lv_paramTypes_3_0 = null;
+
+		EObject lv_returnType_6_0 = null;
+
+		enterRule();
+
+		try {
+
+			{
+
+				{
+
+					int alt185 = 2;
+					int LA185_0 = input.LA(1);
+
+					if ((LA185_0 == 35)) {
+						alt185 = 1;
+					}
+					switch (alt185) {
+						case 1:
+
+						{
+							otherlv_0 = (Token) match(input, 35, FOLLOW_35_in_ruleXFunctionTypeRef18802);
+							if (state.failed)
+								return current;
+							if (state.backtracking == 0) {
+
+								newLeafNode(otherlv_0, grammarAccess.getXFunctionTypeRefAccess()
+										.getLeftParenthesisKeyword_0_0());
+
+							}
+
+							int alt184 = 2;
+							int LA184_0 = input.LA(1);
+
+							if ((LA184_0 == RULE_ID || LA184_0 == 32 || LA184_0 == 35 || LA184_0 == 50 || LA184_0 == 79)) {
+								alt184 = 1;
+							}
+							switch (alt184) {
+								case 1:
+
+								{
+
+									{
+
+										{
+											if (state.backtracking == 0) {
+
+												newCompositeNode(grammarAccess.getXFunctionTypeRefAccess()
+														.getParamTypesJvmTypeReferenceParserRuleCall_0_1_0_0());
+
+											}
+											pushFollow(FOLLOW_ruleJvmTypeReference_in_ruleXFunctionTypeRef18824);
+											lv_paramTypes_1_0 = ruleJvmTypeReference();
+
+											state._fsp--;
+											if (state.failed)
+												return current;
+											if (state.backtracking == 0) {
+
+												if (current == null) {
+													current = createModelElementForParent(grammarAccess
+															.getXFunctionTypeRefRule());
+												}
+												add(current, XFUNCTION_TYPE_REF__PARAM_TYPES, lv_paramTypes_1_0, null);
+												afterParserOrEnumRuleCall();
+
+											}
+
+										}
+
+									}
+
+									loop183: do {
+										int alt183 = 2;
+										int LA183_0 = input.LA(1);
+
+										if ((LA183_0 == 24)) {
+											alt183 = 1;
+										}
+
+										switch (alt183) {
+											case 1:
+
+											{
+												otherlv_2 = (Token) match(input, 24,
+														FOLLOW_24_in_ruleXFunctionTypeRef18837);
+												if (state.failed)
+													return current;
+												if (state.backtracking == 0) {
+
+													newLeafNode(otherlv_2, grammarAccess.getXFunctionTypeRefAccess()
+															.getCommaKeyword_0_1_1_0());
+
+												}
+
+												{
+
+													{
+														if (state.backtracking == 0) {
+
+															newCompositeNode(grammarAccess
+																	.getXFunctionTypeRefAccess()
+																	.getParamTypesJvmTypeReferenceParserRuleCall_0_1_1_1_0());
+
+														}
+														pushFollow(FOLLOW_ruleJvmTypeReference_in_ruleXFunctionTypeRef18858);
+														lv_paramTypes_3_0 = ruleJvmTypeReference();
+
+														state._fsp--;
+														if (state.failed)
+															return current;
+														if (state.backtracking == 0) {
+
+															if (current == null) {
+																current = createModelElementForParent(grammarAccess
+																		.getXFunctionTypeRefRule());
+															}
+															add(current, XFUNCTION_TYPE_REF__PARAM_TYPES, lv_paramTypes_3_0,
+																	null);
+															afterParserOrEnumRuleCall();
+
+														}
+
+													}
+
+												}
+
+											}
+												break;
+
+											default:
+												break loop183;
+										}
+									} while (true);
+
+								}
+									break;
+
+							}
+
+							otherlv_4 = (Token) match(input, 36, FOLLOW_36_in_ruleXFunctionTypeRef18874);
+							if (state.failed)
+								return current;
+							if (state.backtracking == 0) {
+
+								newLeafNode(otherlv_4, grammarAccess.getXFunctionTypeRefAccess()
+										.getRightParenthesisKeyword_0_2());
+
+							}
+
+						}
+							break;
+
+					}
+
+					otherlv_5 = (Token) match(input, 79, FOLLOW_79_in_ruleXFunctionTypeRef18888);
+					if (state.failed)
+						return current;
+					if (state.backtracking == 0) {
+
+						newLeafNode(otherlv_5, grammarAccess.getXFunctionTypeRefAccess()
+								.getEqualsSignGreaterThanSignKeyword_1());
+
+					}
+
+					{
+
+						{
+							if (state.backtracking == 0) {
+
+								newCompositeNode(grammarAccess.getXFunctionTypeRefAccess()
+										.getReturnTypeJvmTypeReferenceParserRuleCall_2_0());
+
+							}
+							pushFollow(FOLLOW_ruleJvmTypeReference_in_ruleXFunctionTypeRef18909);
+							lv_returnType_6_0 = ruleJvmTypeReference();
+
+							state._fsp--;
+							if (state.failed)
+								return current;
+							if (state.backtracking == 0) {
+
+								if (current == null) {
+									current = createModelElementForParent(grammarAccess.getXFunctionTypeRefRule());
+								}
+								set(current, XFUNCTION_TYPE_REF__RETURN_TYPE, lv_returnType_6_0, null);
+								afterParserOrEnumRuleCall();
+
+							}
+
+						}
+
+					}
+
+				}
+
+			}
+
+			if (state.backtracking == 0) {
+				leaveRule();
+			}
+		}
+
+		catch (RecognitionException re) {
+			recoverAndAppendSkippedTokens(re);
+		} finally {
+		}
+		return current;
+	}
+
+	public final EObject entryRuleJvmParameterizedTypeReference() throws RecognitionException {
+		EObject current = null;
+
+		EObject iv_ruleJvmParameterizedTypeReference = null;
+
+		try {
+
+			{
+				if (state.backtracking == 0) {
+					newCompositeNode(grammarAccess.getJvmParameterizedTypeReferenceRule());
+				}
+				pushFollow(FOLLOW_ruleJvmParameterizedTypeReference_in_entryRuleJvmParameterizedTypeReference18945);
+				iv_ruleJvmParameterizedTypeReference = ruleJvmParameterizedTypeReference();
+
+				state._fsp--;
+				if (state.failed)
+					return current;
+				if (state.backtracking == 0) {
+					current = iv_ruleJvmParameterizedTypeReference;
+				}
+				match(input, EOF, FOLLOW_EOF_in_entryRuleJvmParameterizedTypeReference18955);
+				if (state.failed)
+					return current;
+
+			}
+
+		}
+
+		catch (RecognitionException re) {
+			recoverAndAppendSkippedTokens(re);
+		} finally {
+		}
+		return current;
+	}
+
+	public final EObject ruleJvmParameterizedTypeReference() throws RecognitionException {
+		EObject current = null;
+
+		Token otherlv_1 = null;
+		Token otherlv_3 = null;
+		Token otherlv_5 = null;
+		EObject lv_arguments_2_0 = null;
+
+		EObject lv_arguments_4_0 = null;
+
+		enterRule();
+
+		try {
+
+			{
+
+				{
+
+					{
+
+						{
+							if (state.backtracking == 0) {
+
+								if (current == null) {
+									current = createModelElement(grammarAccess.getJvmParameterizedTypeReferenceRule());
+								}
+
+							}
+							if (state.backtracking == 0) {
+
+								newCompositeNode(grammarAccess.getJvmParameterizedTypeReferenceAccess()
+										.getTypeJvmTypeCrossReference_0_0());
+
+							}
+							pushFollow(FOLLOW_ruleQualifiedName_in_ruleJvmParameterizedTypeReference19003);
+							ruleQualifiedName();
+
+							state._fsp--;
+							if (state.failed)
+								return current;
+							if (state.backtracking == 0) {
+
+								afterParserOrEnumRuleCall();
+
+							}
+
+						}
+
+					}
+
+					int alt187 = 2;
+					alt187 = dfa187.predict(input);
+					switch (alt187) {
+						case 1:
+
+						{
+
+							{
+								otherlv_1 = (Token) match(input, 23,
+										FOLLOW_23_in_ruleJvmParameterizedTypeReference19024);
+								if (state.failed)
+									return current;
+								if (state.backtracking == 0) {
+
+									newLeafNode(otherlv_1, grammarAccess.getJvmParameterizedTypeReferenceAccess()
+											.getLessThanSignKeyword_1_0());
+
+								}
+
+							}
+
+							{
+
+								{
+									if (state.backtracking == 0) {
+
+										newCompositeNode(grammarAccess.getJvmParameterizedTypeReferenceAccess()
+												.getArgumentsJvmArgumentTypeReferenceParserRuleCall_1_1_0());
+
+									}
+									pushFollow(FOLLOW_ruleJvmArgumentTypeReference_in_ruleJvmParameterizedTypeReference19046);
+									lv_arguments_2_0 = ruleJvmArgumentTypeReference();
+
+									state._fsp--;
+									if (state.failed)
+										return current;
+									if (state.backtracking == 0) {
+
+										if (current == null) {
+											current = createModelElementForParent(grammarAccess
+													.getJvmParameterizedTypeReferenceRule());
+										}
+										add(current, JVM_PARAMETERIZED_TYPE_REFERENCE__ARGUMENTS, lv_arguments_2_0, "JvmArgumentTypeReference");
+										afterParserOrEnumRuleCall();
+
+									}
+
+								}
+
+							}
+
+							loop186: do {
+								int alt186 = 2;
+								int LA186_0 = input.LA(1);
+
+								if ((LA186_0 == 24)) {
+									alt186 = 1;
+								}
+
+								switch (alt186) {
+									case 1:
+
+									{
+										otherlv_3 = (Token) match(input, 24,
+												FOLLOW_24_in_ruleJvmParameterizedTypeReference19059);
+										if (state.failed)
+											return current;
+										if (state.backtracking == 0) {
+
+											newLeafNode(otherlv_3, grammarAccess
+													.getJvmParameterizedTypeReferenceAccess().getCommaKeyword_1_2_0());
+
+										}
+
+										{
+
+											{
+												if (state.backtracking == 0) {
+
+													newCompositeNode(grammarAccess
+															.getJvmParameterizedTypeReferenceAccess()
+															.getArgumentsJvmArgumentTypeReferenceParserRuleCall_1_2_1_0());
+
+												}
+												pushFollow(FOLLOW_ruleJvmArgumentTypeReference_in_ruleJvmParameterizedTypeReference19080);
+												lv_arguments_4_0 = ruleJvmArgumentTypeReference();
+
+												state._fsp--;
+												if (state.failed)
+													return current;
+												if (state.backtracking == 0) {
+
+													if (current == null) {
+														current = createModelElementForParent(grammarAccess
+																.getJvmParameterizedTypeReferenceRule());
+													}
+													add(current, JVM_PARAMETERIZED_TYPE_REFERENCE__ARGUMENTS, lv_arguments_4_0,
+															"JvmArgumentTypeReference");
+													afterParserOrEnumRuleCall();
+
+												}
+
+											}
+
+										}
+
+									}
+										break;
+
+									default:
+										break loop186;
+								}
+							} while (true);
+
+							otherlv_5 = (Token) match(input, 25, FOLLOW_25_in_ruleJvmParameterizedTypeReference19094);
+							if (state.failed)
+								return current;
+							if (state.backtracking == 0) {
+
+								newLeafNode(otherlv_5, grammarAccess.getJvmParameterizedTypeReferenceAccess()
+										.getGreaterThanSignKeyword_1_3());
+
+							}
+
+						}
+							break;
+
+					}
+
+				}
+
+			}
+
+			if (state.backtracking == 0) {
+				leaveRule();
+			}
+		}
+
+		catch (RecognitionException re) {
+			recoverAndAppendSkippedTokens(re);
+		} finally {
+		}
+		return current;
+	}
+
+	public final EObject entryRuleJvmArgumentTypeReference() throws RecognitionException {
+		EObject current = null;
+
+		EObject iv_ruleJvmArgumentTypeReference = null;
+
+		try {
+
+			{
+				if (state.backtracking == 0) {
+					newCompositeNode(grammarAccess.getJvmArgumentTypeReferenceRule());
+				}
+				pushFollow(FOLLOW_ruleJvmArgumentTypeReference_in_entryRuleJvmArgumentTypeReference19132);
+				iv_ruleJvmArgumentTypeReference = ruleJvmArgumentTypeReference();
+
+				state._fsp--;
+				if (state.failed)
+					return current;
+				if (state.backtracking == 0) {
+					current = iv_ruleJvmArgumentTypeReference;
+				}
+				match(input, EOF, FOLLOW_EOF_in_entryRuleJvmArgumentTypeReference19142);
+				if (state.failed)
+					return current;
+
+			}
+
+		}
+
+		catch (RecognitionException re) {
+			recoverAndAppendSkippedTokens(re);
+		} finally {
+		}
+		return current;
+	}
+
+	public final EObject ruleJvmArgumentTypeReference() throws RecognitionException {
+		EObject current = null;
+
+		EObject this_JvmTypeReference_0 = null;
+
+		EObject this_JvmWildcardTypeReference_1 = null;
+
+		enterRule();
+
+		try {
+
+			{
+
+				int alt188 = 2;
+				int LA188_0 = input.LA(1);
+
+				if ((LA188_0 == RULE_ID || LA188_0 == 32 || LA188_0 == 35 || LA188_0 == 50 || LA188_0 == 79)) {
+					alt188 = 1;
+				} else if ((LA188_0 == 116)) {
+					alt188 = 2;
+				} else {
+					if (state.backtracking > 0) {
+						state.failed = true;
+						return current;
+					}
+					NoViableAltException nvae = new NoViableAltException("", 188, 0, input);
+
+					throw nvae;
+				}
+				switch (alt188) {
+					case 1:
+
+					{
+						if (state.backtracking == 0) {
+
+							newCompositeNode(grammarAccess.getJvmArgumentTypeReferenceAccess()
+									.getJvmTypeReferenceParserRuleCall_0());
+
+						}
+						pushFollow(FOLLOW_ruleJvmTypeReference_in_ruleJvmArgumentTypeReference19189);
+						this_JvmTypeReference_0 = ruleJvmTypeReference();
+
+						state._fsp--;
+						if (state.failed)
+							return current;
+						if (state.backtracking == 0) {
+
+							current = this_JvmTypeReference_0;
+							afterParserOrEnumRuleCall();
+
+						}
+
+					}
+						break;
+					case 2:
+
+					{
+						if (state.backtracking == 0) {
+
+							newCompositeNode(grammarAccess.getJvmArgumentTypeReferenceAccess()
+									.getJvmWildcardTypeReferenceParserRuleCall_1());
+
+						}
+						pushFollow(FOLLOW_ruleJvmWildcardTypeReference_in_ruleJvmArgumentTypeReference19216);
+						this_JvmWildcardTypeReference_1 = ruleJvmWildcardTypeReference();
+
+						state._fsp--;
+						if (state.failed)
+							return current;
+						if (state.backtracking == 0) {
+
+							current = this_JvmWildcardTypeReference_1;
+							afterParserOrEnumRuleCall();
+
+						}
+
+					}
+						break;
+
+				}
+
+			}
+
+			if (state.backtracking == 0) {
+				leaveRule();
+			}
+		}
+
+		catch (RecognitionException re) {
+			recoverAndAppendSkippedTokens(re);
+		} finally {
+		}
+		return current;
+	}
+
+	public final EObject entryRuleJvmWildcardTypeReference() throws RecognitionException {
+		EObject current = null;
+
+		EObject iv_ruleJvmWildcardTypeReference = null;
+
+		try {
+
+			{
+				if (state.backtracking == 0) {
+					newCompositeNode(grammarAccess.getJvmWildcardTypeReferenceRule());
+				}
+				pushFollow(FOLLOW_ruleJvmWildcardTypeReference_in_entryRuleJvmWildcardTypeReference19251);
+				iv_ruleJvmWildcardTypeReference = ruleJvmWildcardTypeReference();
+
+				state._fsp--;
+				if (state.failed)
+					return current;
+				if (state.backtracking == 0) {
+					current = iv_ruleJvmWildcardTypeReference;
+				}
+				match(input, EOF, FOLLOW_EOF_in_entryRuleJvmWildcardTypeReference19261);
+				if (state.failed)
+					return current;
+
+			}
+
+		}
+
+		catch (RecognitionException re) {
+			recoverAndAppendSkippedTokens(re);
+		} finally {
+		}
+		return current;
+	}
+
+	public final EObject ruleJvmWildcardTypeReference() throws RecognitionException {
+		EObject current = null;
+
+		Token otherlv_1 = null;
+		EObject lv_constraints_2_0 = null;
+
+		EObject lv_constraints_3_0 = null;
+
+		enterRule();
+
+		try {
+
+			{
+
+				{
+
+					{
+						if (state.backtracking == 0) {
+
+							current = forceCreateModelElement(grammarAccess.getJvmWildcardTypeReferenceAccess()
+									.getJvmWildcardTypeReferenceAction_0(), current);
+
+						}
+
+					}
+
+					otherlv_1 = (Token) match(input, 116, FOLLOW_116_in_ruleJvmWildcardTypeReference19307);
+					if (state.failed)
+						return current;
+					if (state.backtracking == 0) {
+
+						newLeafNode(otherlv_1, grammarAccess.getJvmWildcardTypeReferenceAccess()
+								.getQuestionMarkKeyword_1());
+
+					}
+
+					int alt189 = 3;
+					int LA189_0 = input.LA(1);
+
+					if ((LA189_0 == 26)) {
+						alt189 = 1;
+					} else if ((LA189_0 == 105)) {
+						alt189 = 2;
+					}
+					switch (alt189) {
+						case 1:
+
+						{
+
+							{
+
+								{
+									if (state.backtracking == 0) {
+
+										newCompositeNode(grammarAccess.getJvmWildcardTypeReferenceAccess()
+												.getConstraintsJvmUpperBoundParserRuleCall_2_0_0());
+
+									}
+									pushFollow(FOLLOW_ruleJvmUpperBound_in_ruleJvmWildcardTypeReference19329);
+									lv_constraints_2_0 = ruleJvmUpperBound();
+
+									state._fsp--;
+									if (state.failed)
+										return current;
+									if (state.backtracking == 0) {
+
+										if (current == null) {
+											current = createModelElementForParent(grammarAccess
+													.getJvmWildcardTypeReferenceRule());
+										}
+										add(current, JVM_CONSTRAINT_OWNER__CONSTRAINTS, lv_constraints_2_0, "JvmUpperBound");
+										afterParserOrEnumRuleCall();
+
+									}
+
+								}
+
+							}
+
+						}
+							break;
+						case 2:
+
+						{
+
+							{
+
+								{
+									if (state.backtracking == 0) {
+
+										newCompositeNode(grammarAccess.getJvmWildcardTypeReferenceAccess()
+												.getConstraintsJvmLowerBoundParserRuleCall_2_1_0());
+
+									}
+									pushFollow(FOLLOW_ruleJvmLowerBound_in_ruleJvmWildcardTypeReference19356);
+									lv_constraints_3_0 = ruleJvmLowerBound();
+
+									state._fsp--;
+									if (state.failed)
+										return current;
+									if (state.backtracking == 0) {
+
+										if (current == null) {
+											current = createModelElementForParent(grammarAccess
+													.getJvmWildcardTypeReferenceRule());
+										}
+										add(current, JVM_CONSTRAINT_OWNER__CONSTRAINTS, lv_constraints_3_0, "JvmLowerBound");
+										afterParserOrEnumRuleCall();
+
+									}
+
+								}
+
+							}
+
+						}
+							break;
+
+					}
+
+				}
+
+			}
+
+			if (state.backtracking == 0) {
+				leaveRule();
+			}
+		}
+
+		catch (RecognitionException re) {
+			recoverAndAppendSkippedTokens(re);
+		} finally {
+		}
+		return current;
+	}
+
+	public final EObject entryRuleJvmUpperBound() throws RecognitionException {
+		EObject current = null;
+
+		EObject iv_ruleJvmUpperBound = null;
+
+		try {
+
+			{
+				if (state.backtracking == 0) {
+					newCompositeNode(grammarAccess.getJvmUpperBoundRule());
+				}
+				pushFollow(FOLLOW_ruleJvmUpperBound_in_entryRuleJvmUpperBound19394);
+				iv_ruleJvmUpperBound = ruleJvmUpperBound();
+
+				state._fsp--;
+				if (state.failed)
+					return current;
+				if (state.backtracking == 0) {
+					current = iv_ruleJvmUpperBound;
+				}
+				match(input, EOF, FOLLOW_EOF_in_entryRuleJvmUpperBound19404);
+				if (state.failed)
+					return current;
+
+			}
+
+		}
+
+		catch (RecognitionException re) {
+			recoverAndAppendSkippedTokens(re);
+		} finally {
+		}
+		return current;
+	}
+
+	public final EObject ruleJvmUpperBound() throws RecognitionException {
+		EObject current = null;
+
+		Token otherlv_0 = null;
+		EObject lv_typeReference_1_0 = null;
+
+		enterRule();
+
+		try {
+
+			{
+
+				{
+					otherlv_0 = (Token) match(input, 26, FOLLOW_26_in_ruleJvmUpperBound19441);
+					if (state.failed)
+						return current;
+					if (state.backtracking == 0) {
+
+						newLeafNode(otherlv_0, grammarAccess.getJvmUpperBoundAccess().getExtendsKeyword_0());
+
+					}
+
+					{
+
+						{
+							if (state.backtracking == 0) {
+
+								newCompositeNode(grammarAccess.getJvmUpperBoundAccess()
+										.getTypeReferenceJvmTypeReferenceParserRuleCall_1_0());
+
+							}
+							pushFollow(FOLLOW_ruleJvmTypeReference_in_ruleJvmUpperBound19462);
+							lv_typeReference_1_0 = ruleJvmTypeReference();
+
+							state._fsp--;
+							if (state.failed)
+								return current;
+							if (state.backtracking == 0) {
+
+								if (current == null) {
+									current = createModelElementForParent(grammarAccess.getJvmUpperBoundRule());
+								}
+								set(current, JVM_TYPE_CONSTRAINT__TYPE_REFERENCE, lv_typeReference_1_0, null);
+								afterParserOrEnumRuleCall();
+
+							}
+
+						}
+
+					}
+
+				}
+
+			}
+
+			if (state.backtracking == 0) {
+				leaveRule();
+			}
+		}
+
+		catch (RecognitionException re) {
+			recoverAndAppendSkippedTokens(re);
+		} finally {
+		}
+		return current;
+	}
+
+	public final EObject entryRuleJvmUpperBoundAnded() throws RecognitionException {
+		EObject current = null;
+
+		EObject iv_ruleJvmUpperBoundAnded = null;
+
+		try {
+
+			{
+				if (state.backtracking == 0) {
+					newCompositeNode(grammarAccess.getJvmUpperBoundAndedRule());
+				}
+				pushFollow(FOLLOW_ruleJvmUpperBoundAnded_in_entryRuleJvmUpperBoundAnded19498);
+				iv_ruleJvmUpperBoundAnded = ruleJvmUpperBoundAnded();
+
+				state._fsp--;
+				if (state.failed)
+					return current;
+				if (state.backtracking == 0) {
+					current = iv_ruleJvmUpperBoundAnded;
+				}
+				match(input, EOF, FOLLOW_EOF_in_entryRuleJvmUpperBoundAnded19508);
+				if (state.failed)
+					return current;
+
+			}
+
+		}
+
+		catch (RecognitionException re) {
+			recoverAndAppendSkippedTokens(re);
+		} finally {
+		}
+		return current;
+	}
+
+	public final EObject ruleJvmUpperBoundAnded() throws RecognitionException {
+		EObject current = null;
+
+		Token otherlv_0 = null;
+		EObject lv_typeReference_1_0 = null;
+
+		enterRule();
+
+		try {
+
+			{
+
+				{
+					otherlv_0 = (Token) match(input, 117, FOLLOW_117_in_ruleJvmUpperBoundAnded19545);
+					if (state.failed)
+						return current;
+					if (state.backtracking == 0) {
+
+						newLeafNode(otherlv_0, grammarAccess.getJvmUpperBoundAndedAccess().getAmpersandKeyword_0());
+
+					}
+
+					{
+
+						{
+							if (state.backtracking == 0) {
+
+								newCompositeNode(grammarAccess.getJvmUpperBoundAndedAccess()
+										.getTypeReferenceJvmTypeReferenceParserRuleCall_1_0());
+
+							}
+							pushFollow(FOLLOW_ruleJvmTypeReference_in_ruleJvmUpperBoundAnded19566);
+							lv_typeReference_1_0 = ruleJvmTypeReference();
+
+							state._fsp--;
+							if (state.failed)
+								return current;
+							if (state.backtracking == 0) {
+
+								if (current == null) {
+									current = createModelElementForParent(grammarAccess.getJvmUpperBoundAndedRule());
+								}
+								set(current, JVM_TYPE_CONSTRAINT__TYPE_REFERENCE, lv_typeReference_1_0, null);
+								afterParserOrEnumRuleCall();
+
+							}
+
+						}
+
+					}
+
+				}
+
+			}
+
+			if (state.backtracking == 0) {
+				leaveRule();
+			}
+		}
+
+		catch (RecognitionException re) {
+			recoverAndAppendSkippedTokens(re);
+		} finally {
+		}
+		return current;
+	}
+
+	public final EObject entryRuleJvmLowerBound() throws RecognitionException {
+		EObject current = null;
+
+		EObject iv_ruleJvmLowerBound = null;
+
+		try {
+
+			{
+				if (state.backtracking == 0) {
+					newCompositeNode(grammarAccess.getJvmLowerBoundRule());
+				}
+				pushFollow(FOLLOW_ruleJvmLowerBound_in_entryRuleJvmLowerBound19602);
+				iv_ruleJvmLowerBound = ruleJvmLowerBound();
+
+				state._fsp--;
+				if (state.failed)
+					return current;
+				if (state.backtracking == 0) {
+					current = iv_ruleJvmLowerBound;
+				}
+				match(input, EOF, FOLLOW_EOF_in_entryRuleJvmLowerBound19612);
+				if (state.failed)
+					return current;
+
+			}
+
+		}
+
+		catch (RecognitionException re) {
+			recoverAndAppendSkippedTokens(re);
+		} finally {
+		}
+		return current;
+	}
+
+	public final EObject ruleJvmLowerBound() throws RecognitionException {
+		EObject current = null;
+
+		Token otherlv_0 = null;
+		EObject lv_typeReference_1_0 = null;
+
+		enterRule();
+
+		try {
+
+			{
+
+				{
+					otherlv_0 = (Token) match(input, 105, FOLLOW_105_in_ruleJvmLowerBound19649);
+					if (state.failed)
+						return current;
+					if (state.backtracking == 0) {
+
+						newLeafNode(otherlv_0, grammarAccess.getJvmLowerBoundAccess().getSuperKeyword_0());
+
+					}
+
+					{
+
+						{
+							if (state.backtracking == 0) {
+
+								newCompositeNode(grammarAccess.getJvmLowerBoundAccess()
+										.getTypeReferenceJvmTypeReferenceParserRuleCall_1_0());
+
+							}
+							pushFollow(FOLLOW_ruleJvmTypeReference_in_ruleJvmLowerBound19670);
+							lv_typeReference_1_0 = ruleJvmTypeReference();
+
+							state._fsp--;
+							if (state.failed)
+								return current;
+							if (state.backtracking == 0) {
+
+								if (current == null) {
+									current = createModelElementForParent(grammarAccess.getJvmLowerBoundRule());
+								}
+								set(current, JVM_TYPE_CONSTRAINT__TYPE_REFERENCE, lv_typeReference_1_0, null);
+								afterParserOrEnumRuleCall();
+
+							}
+
+						}
+
+					}
+
+				}
+
+			}
+
+			if (state.backtracking == 0) {
+				leaveRule();
+			}
+		}
+
+		catch (RecognitionException re) {
+			recoverAndAppendSkippedTokens(re);
+		} finally {
+		}
+		return current;
+	}
+
+	public final EObject entryRuleJvmTypeParameter() throws RecognitionException {
+		EObject current = null;
+
+		EObject iv_ruleJvmTypeParameter = null;
+
+		try {
+
+			{
+				if (state.backtracking == 0) {
+					newCompositeNode(grammarAccess.getJvmTypeParameterRule());
+				}
+				pushFollow(FOLLOW_ruleJvmTypeParameter_in_entryRuleJvmTypeParameter19706);
+				iv_ruleJvmTypeParameter = ruleJvmTypeParameter();
+
+				state._fsp--;
+				if (state.failed)
+					return current;
+				if (state.backtracking == 0) {
+					current = iv_ruleJvmTypeParameter;
+				}
+				match(input, EOF, FOLLOW_EOF_in_entryRuleJvmTypeParameter19716);
+				if (state.failed)
+					return current;
+
+			}
+
+		}
+
+		catch (RecognitionException re) {
+			recoverAndAppendSkippedTokens(re);
+		} finally {
+		}
+		return current;
+	}
+
+	public final EObject ruleJvmTypeParameter() throws RecognitionException {
+		EObject current = null;
+
+		AntlrDatatypeRuleToken lv_name_0_0 = null;
+
+		EObject lv_constraints_1_0 = null;
+
+		EObject lv_constraints_2_0 = null;
+
+		EObject lv_constraints_3_0 = null;
+
+		enterRule();
+
+		try {
+
+			{
+
+				{
+
+					{
+
+						{
+							if (state.backtracking == 0) {
+
+								newCompositeNode(grammarAccess.getJvmTypeParameterAccess()
+										.getNameValidIDParserRuleCall_0_0());
+
+							}
+							pushFollow(FOLLOW_ruleValidID_in_ruleJvmTypeParameter19762);
+							lv_name_0_0 = ruleValidID();
+
+							state._fsp--;
+							if (state.failed)
+								return current;
+							if (state.backtracking == 0) {
+
+								if (current == null) {
+									current = createModelElementForParent(grammarAccess.getJvmTypeParameterRule());
+								}
+								set(current, JVM_TYPE_PARAMETER__NAME, lv_name_0_0, "ValidID");
+								afterParserOrEnumRuleCall();
+
+							}
+
+						}
+
+					}
+
+					int alt191 = 3;
+					int LA191_0 = input.LA(1);
+
+					if ((LA191_0 == 26)) {
+						alt191 = 1;
+					} else if ((LA191_0 == 105)) {
+						alt191 = 2;
+					}
+					switch (alt191) {
+						case 1:
+
+						{
+
+							{
+
+								{
+
+									{
+										if (state.backtracking == 0) {
+
+											newCompositeNode(grammarAccess.getJvmTypeParameterAccess()
+													.getConstraintsJvmUpperBoundParserRuleCall_1_0_0_0());
+
+										}
+										pushFollow(FOLLOW_ruleJvmUpperBound_in_ruleJvmTypeParameter19785);
+										lv_constraints_1_0 = ruleJvmUpperBound();
+
+										state._fsp--;
+										if (state.failed)
+											return current;
+										if (state.backtracking == 0) {
+
+											if (current == null) {
+												current = createModelElementForParent(grammarAccess
+														.getJvmTypeParameterRule());
+											}
+											add(current, JVM_CONSTRAINT_OWNER__CONSTRAINTS, lv_constraints_1_0, "JvmUpperBound");
+											afterParserOrEnumRuleCall();
+
+										}
+
+									}
+
+								}
+
+								loop190: do {
+									int alt190 = 2;
+									int LA190_0 = input.LA(1);
+
+									if ((LA190_0 == 117)) {
+										alt190 = 1;
+									}
+
+									switch (alt190) {
+										case 1:
+
+										{
+
+											{
+												if (state.backtracking == 0) {
+
+													newCompositeNode(grammarAccess.getJvmTypeParameterAccess()
+															.getConstraintsJvmUpperBoundAndedParserRuleCall_1_0_1_0());
+
+												}
+												pushFollow(FOLLOW_ruleJvmUpperBoundAnded_in_ruleJvmTypeParameter19806);
+												lv_constraints_2_0 = ruleJvmUpperBoundAnded();
+
+												state._fsp--;
+												if (state.failed)
+													return current;
+												if (state.backtracking == 0) {
+
+													if (current == null) {
+														current = createModelElementForParent(grammarAccess
+																.getJvmTypeParameterRule());
+													}
+													add(current, JVM_CONSTRAINT_OWNER__CONSTRAINTS, lv_constraints_2_0,
+															"JvmUpperBoundAnded");
+													afterParserOrEnumRuleCall();
+
+												}
+
+											}
+
+										}
+											break;
+
+										default:
+											break loop190;
+									}
+								} while (true);
+
+							}
+
+						}
+							break;
+						case 2:
+
+						{
+
+							{
+
+								{
+									if (state.backtracking == 0) {
+
+										newCompositeNode(grammarAccess.getJvmTypeParameterAccess()
+												.getConstraintsJvmLowerBoundParserRuleCall_1_1_0());
+
+									}
+									pushFollow(FOLLOW_ruleJvmLowerBound_in_ruleJvmTypeParameter19835);
+									lv_constraints_3_0 = ruleJvmLowerBound();
+
+									state._fsp--;
+									if (state.failed)
+										return current;
+									if (state.backtracking == 0) {
+
+										if (current == null) {
+											current = createModelElementForParent(grammarAccess
+													.getJvmTypeParameterRule());
+										}
+										add(current, JVM_CONSTRAINT_OWNER__CONSTRAINTS, lv_constraints_3_0, "JvmLowerBound");
+										afterParserOrEnumRuleCall();
+
+									}
+
+								}
+
+							}
+
+						}
+							break;
+
+					}
+
+				}
+
+			}
+
+			if (state.backtracking == 0) {
+				leaveRule();
+			}
+		}
+
+		catch (RecognitionException re) {
+			recoverAndAppendSkippedTokens(re);
+		} finally {
+		}
+		return current;
+	}
+
+	public final String entryRuleQualifiedNameWithWildcard() throws RecognitionException {
+		String current = null;
+
+		AntlrDatatypeRuleToken iv_ruleQualifiedNameWithWildcard = null;
+
+		try {
+
+			{
+				if (state.backtracking == 0) {
+					newCompositeNode(grammarAccess.getQualifiedNameWithWildcardRule());
+				}
+				pushFollow(FOLLOW_ruleQualifiedNameWithWildcard_in_entryRuleQualifiedNameWithWildcard19874);
+				iv_ruleQualifiedNameWithWildcard = ruleQualifiedNameWithWildcard();
+
+				state._fsp--;
+				if (state.failed)
+					return current;
+				if (state.backtracking == 0) {
+					current = iv_ruleQualifiedNameWithWildcard.getText();
+				}
+				match(input, EOF, FOLLOW_EOF_in_entryRuleQualifiedNameWithWildcard19885);
+				if (state.failed)
+					return current;
+
+			}
+
+		}
+
+		catch (RecognitionException re) {
+			recoverAndAppendSkippedTokens(re);
+		} finally {
+		}
+		return current;
+	}
+
+	public final AntlrDatatypeRuleToken ruleQualifiedNameWithWildcard() throws RecognitionException {
+		AntlrDatatypeRuleToken current = new AntlrDatatypeRuleToken();
+
+		Token kw = null;
+		AntlrDatatypeRuleToken this_QualifiedName_0 = null;
+
+		enterRule();
+
+		try {
+
+			{
+
+				{
+					if (state.backtracking == 0) {
+
+						newCompositeNode(grammarAccess.getQualifiedNameWithWildcardAccess()
+								.getQualifiedNameParserRuleCall_0());
+
+					}
+					pushFollow(FOLLOW_ruleQualifiedName_in_ruleQualifiedNameWithWildcard19932);
+					this_QualifiedName_0 = ruleQualifiedName();
+
+					state._fsp--;
+					if (state.failed)
+						return current;
+					if (state.backtracking == 0) {
+
+						current.merge(this_QualifiedName_0);
+
+					}
+					if (state.backtracking == 0) {
+
+						afterParserOrEnumRuleCall();
+
+					}
+					kw = (Token) match(input, 90, FOLLOW_90_in_ruleQualifiedNameWithWildcard19950);
+					if (state.failed)
+						return current;
+					if (state.backtracking == 0) {
+
+						current.merge(kw);
+						newLeafNode(kw, grammarAccess.getQualifiedNameWithWildcardAccess().getFullStopKeyword_1());
+
+					}
+					kw = (Token) match(input, 84, FOLLOW_84_in_ruleQualifiedNameWithWildcard19963);
+					if (state.failed)
+						return current;
+					if (state.backtracking == 0) {
+
+						current.merge(kw);
+						newLeafNode(kw, grammarAccess.getQualifiedNameWithWildcardAccess().getAsteriskKeyword_2());
+
+					}
+
+				}
+
+			}
+
+			if (state.backtracking == 0) {
+				leaveRule();
+			}
+		}
+
+		catch (RecognitionException re) {
+			recoverAndAppendSkippedTokens(re);
+		} finally {
+		}
+		return current;
+	}
+
+	public final EObject entryRuleXImportSection() throws RecognitionException {
+		EObject current = null;
+
+		EObject iv_ruleXImportSection = null;
+
+		try {
+
+			{
+				if (state.backtracking == 0) {
+					newCompositeNode(grammarAccess.getXImportSectionRule());
+				}
+				pushFollow(FOLLOW_ruleXImportSection_in_entryRuleXImportSection20003);
+				iv_ruleXImportSection = ruleXImportSection();
+
+				state._fsp--;
+				if (state.failed)
+					return current;
+				if (state.backtracking == 0) {
+					current = iv_ruleXImportSection;
+				}
+				match(input, EOF, FOLLOW_EOF_in_entryRuleXImportSection20013);
+				if (state.failed)
+					return current;
+
+			}
+
+		}
+
+		catch (RecognitionException re) {
+			recoverAndAppendSkippedTokens(re);
+		} finally {
+		}
+		return current;
+	}
+
+	public final EObject ruleXImportSection() throws RecognitionException {
+		EObject current = null;
+
+		EObject lv_importDeclarations_0_0 = null;
+
+		enterRule();
+
+		try {
+
+			{
+
+				int cnt192 = 0;
+				loop192: do {
+					int alt192 = 2;
+					int LA192_0 = input.LA(1);
+
+					if ((LA192_0 == 52)) {
+						alt192 = 1;
+					}
+
+					switch (alt192) {
+						case 1:
+
+						{
+
+							{
+								if (state.backtracking == 0) {
+
+									newCompositeNode(grammarAccess.getXImportSectionAccess()
+											.getImportDeclarationsXImportDeclarationParserRuleCall_0());
+
+								}
+								pushFollow(FOLLOW_ruleXImportDeclaration_in_ruleXImportSection20058);
+								lv_importDeclarations_0_0 = ruleXImportDeclaration();
+
+								state._fsp--;
+								if (state.failed)
+									return current;
+								if (state.backtracking == 0) {
+
+									if (current == null) {
+										current = createModelElementForParent(grammarAccess.getXImportSectionRule());
+									}
+									add(current, XIMPORT_SECTION__IMPORT_DECLARATIONS, lv_importDeclarations_0_0, "XImportDeclaration");
+									afterParserOrEnumRuleCall();
+
+								}
+
+							}
+
+						}
+							break;
+
+						default:
+							if (cnt192 >= 1)
+								break loop192;
+							if (state.backtracking > 0) {
+								state.failed = true;
+								return current;
+							}
+							EarlyExitException eee = new EarlyExitException(192, input);
+							throw eee;
+					}
+					cnt192++;
+				} while (true);
+
+			}
+
+			if (state.backtracking == 0) {
+				leaveRule();
+			}
+		}
+
+		catch (RecognitionException re) {
+			recoverAndAppendSkippedTokens(re);
+		} finally {
+		}
+		return current;
+	}
+
+	public final EObject entryRuleXImportDeclaration() throws RecognitionException {
+		EObject current = null;
+
+		EObject iv_ruleXImportDeclaration = null;
+
+		try {
+
+			{
+				if (state.backtracking == 0) {
+					newCompositeNode(grammarAccess.getXImportDeclarationRule());
+				}
+				pushFollow(FOLLOW_ruleXImportDeclaration_in_entryRuleXImportDeclaration20094);
+				iv_ruleXImportDeclaration = ruleXImportDeclaration();
+
+				state._fsp--;
+				if (state.failed)
+					return current;
+				if (state.backtracking == 0) {
+					current = iv_ruleXImportDeclaration;
+				}
+				match(input, EOF, FOLLOW_EOF_in_entryRuleXImportDeclaration20104);
+				if (state.failed)
+					return current;
+
+			}
+
+		}
+
+		catch (RecognitionException re) {
+			recoverAndAppendSkippedTokens(re);
+		} finally {
+		}
+		return current;
+	}
+
+	public final EObject ruleXImportDeclaration() throws RecognitionException {
+		EObject current = null;
+
+		Token otherlv_0 = null;
+		Token lv_static_1_0 = null;
+		Token lv_extension_2_0 = null;
+		Token otherlv_4 = null;
+		Token otherlv_5 = null;
+		Token otherlv_8 = null;
+		AntlrDatatypeRuleToken lv_importedNamespace_7_0 = null;
+
+		enterRule();
+
+		try {
+
+			{
+
+				{
+					otherlv_0 = (Token) match(input, 52, FOLLOW_52_in_ruleXImportDeclaration20141);
+					if (state.failed)
+						return current;
+					XImportDeclarationElements xImportDeclarationAccess = grammarAccess.getXImportDeclarationAccess();
+					if (state.backtracking == 0) {
+
+						newLeafNode(otherlv_0, xImportDeclarationAccess.getImportKeyword_0());
+
+					}
+
+					int alt194 = 3;
+					alt194 = dfa194.predict(input);
+					ParserRule xImportDeclarationRule = grammarAccess
+							.getXImportDeclarationRule();
+					switch (alt194) {
+						case 1:
+
+						{
+
+							{
+
+								{
+
+									{
+										lv_static_1_0 = (Token) match(input, 43,
+												FOLLOW_43_in_ruleXImportDeclaration20161);
+										if (state.failed)
+											return current;
+										if (state.backtracking == 0) {
+
+											newLeafNode(lv_static_1_0, xImportDeclarationAccess
+													.getStaticStaticKeyword_1_0_0_0());
+
+										}
+										if (state.backtracking == 0) {
+
+											if (current == null) {
+												current = createModelElement(xImportDeclarationRule);
+											}
+											setWithLastConsumed(current, XIMPORT_DECLARATION__STATIC, true, "static");
+
+										}
+
+									}
+
+								}
+
+								int alt193 = 2;
+								int LA193_0 = input.LA(1);
+
+								if ((LA193_0 == 34)) {
+									alt193 = 1;
+								}
+								switch (alt193) {
+									case 1:
+
+									{
+
+										{
+											lv_extension_2_0 = (Token) match(input, 34,
+													FOLLOW_34_in_ruleXImportDeclaration20192);
+											if (state.failed)
+												return current;
+											if (state.backtracking == 0) {
+
+												newLeafNode(lv_extension_2_0, xImportDeclarationAccess
+														.getExtensionExtensionKeyword_1_0_1_0());
+
+											}
+											if (state.backtracking == 0) {
+
+												if (current == null) {
+													current = createModelElement(xImportDeclarationRule);
+												}
+												setWithLastConsumed(current, XIMPORT_DECLARATION__EXTENSION, true, "extension");
+
+											}
+
+										}
+
+									}
+										break;
+
+								}
+
+								{
+
+									{
+										if (state.backtracking == 0) {
+
+											if (current == null) {
+												current = createModelElement(xImportDeclarationRule);
+											}
+
+										}
+										if (state.backtracking == 0) {
+
+											newCompositeNode(xImportDeclarationAccess
+													.getImportedTypeJvmDeclaredTypeCrossReference_1_0_2_0());
+
+										}
+										pushFollow(FOLLOW_ruleQualifiedName_in_ruleXImportDeclaration20229);
+										ruleQualifiedName();
+
+										state._fsp--;
+										if (state.failed)
+											return current;
+										if (state.backtracking == 0) {
+
+											afterParserOrEnumRuleCall();
+
+										}
+
+									}
+
+								}
+
+								otherlv_4 = (Token) match(input, 90, FOLLOW_90_in_ruleXImportDeclaration20241);
+								if (state.failed)
+									return current;
+								if (state.backtracking == 0) {
+
+									newLeafNode(otherlv_4, xImportDeclarationAccess
+											.getFullStopKeyword_1_0_3());
+
+								}
+								otherlv_5 = (Token) match(input, 84, FOLLOW_84_in_ruleXImportDeclaration20253);
+								if (state.failed)
+									return current;
+								if (state.backtracking == 0) {
+
+									newLeafNode(otherlv_5, xImportDeclarationAccess
+											.getAsteriskKeyword_1_0_4());
+
+								}
+
+							}
+
+						}
+							break;
+						case 2:
+
+						{
+
+							{
+
+								{
+									if (state.backtracking == 0) {
+
+										if (current == null) {
+											current = createModelElement(xImportDeclarationRule);
+										}
+
+									}
+									if (state.backtracking == 0) {
+
+										newCompositeNode(xImportDeclarationAccess
+												.getImportedTypeJvmDeclaredTypeCrossReference_1_1_0());
+
+									}
+									pushFollow(FOLLOW_ruleQualifiedName_in_ruleXImportDeclaration20283);
+									ruleQualifiedName();
+
+									state._fsp--;
+									if (state.failed)
+										return current;
+									if (state.backtracking == 0) {
+
+										afterParserOrEnumRuleCall();
+
+									}
+
+								}
+
+							}
+
+						}
+							break;
+						case 3:
+
+						{
+
+							{
+
+								{
+									if (state.backtracking == 0) {
+
+										newCompositeNode(xImportDeclarationAccess
+												.getImportedNamespaceQualifiedNameWithWildcardParserRuleCall_1_2_0());
+
+									}
+									pushFollow(FOLLOW_ruleQualifiedNameWithWildcard_in_ruleXImportDeclaration20310);
+									lv_importedNamespace_7_0 = ruleQualifiedNameWithWildcard();
+
+									state._fsp--;
+									if (state.failed)
+										return current;
+									if (state.backtracking == 0) {
+
+										if (current == null) {
+											current = createModelElementForParent(xImportDeclarationRule);
+										}
+										set(current, XIMPORT_DECLARATION__IMPORTED_NAMESPACE, lv_importedNamespace_7_0,
+												"QualifiedNameWithWildcard");
+										afterParserOrEnumRuleCall();
+
+									}
+
+								}
+
+							}
+
+						}
+							break;
+
+					}
+
+					int alt195 = 2;
+					int LA195_0 = input.LA(1);
+
+					if ((LA195_0 == 21)) {
+						alt195 = 1;
+					}
+					switch (alt195) {
+						case 1:
+
+						{
+							otherlv_8 = (Token) match(input, 21, FOLLOW_21_in_ruleXImportDeclaration20324);
+							if (state.failed)
+								return current;
+							if (state.backtracking == 0) {
+
+								newLeafNode(otherlv_8, xImportDeclarationAccess
+										.getSemicolonKeyword_2());
+
+							}
+
+						}
+							break;
+
+					}
+
+				}
+
+			}
+
+			if (state.backtracking == 0) {
+				leaveRule();
+			}
+		}
+
+		catch (RecognitionException re) {
+			recoverAndAppendSkippedTokens(re);
+		} finally {
+		}
+		return current;
+	}
+
+	public final void synpred1_InternalXtend_fragment() throws RecognitionException {
+
+		{
+
+			{
+
+				{
+
+					{
+						pushFollow(FOLLOW_ruleJvmTypeReference_in_synpred1_InternalXtend2300);
+						ruleJvmTypeReference();
+
+						state._fsp--;
+						if (state.failed)
+							return;
+
+					}
+
+				}
+
+				{
+
+					{
+						pushFollow(FOLLOW_ruleCreateExtensionInfo_in_synpred1_InternalXtend2309);
+						ruleCreateExtensionInfo();
+
+						state._fsp--;
+						if (state.failed)
+							return;
+
+					}
+
+				}
+
+				{
+
+					{
+						pushFollow(FOLLOW_ruleValidID_in_synpred1_InternalXtend2318);
+						ruleValidID();
+
+						state._fsp--;
+						if (state.failed)
+							return;
+
+					}
+
+				}
+
+				match(input, 35, FOLLOW_35_in_synpred1_InternalXtend2324);
+				if (state.failed)
+					return;
+
+			}
+
+		}
+	}
+
+	public final void synpred2_InternalXtend_fragment() throws RecognitionException {
+
+		{
+
+			{
+
+				{
+
+					{
+						pushFollow(FOLLOW_ruleJvmTypeReference_in_synpred2_InternalXtend2421);
+						ruleJvmTypeReference();
+
+						state._fsp--;
+						if (state.failed)
+							return;
+
+					}
+
+				}
+
+				{
+
+					{
+						pushFollow(FOLLOW_ruleValidID_in_synpred2_InternalXtend2430);
+						ruleValidID();
+
+						state._fsp--;
+						if (state.failed)
+							return;
+
+					}
+
+				}
+
+				match(input, 35, FOLLOW_35_in_synpred2_InternalXtend2436);
+				if (state.failed)
+					return;
+
+			}
+
+		}
+	}
+
+	public final void synpred3_InternalXtend_fragment() throws RecognitionException {
+
+		{
+
+			{
+
+				{
+
+					{
+						pushFollow(FOLLOW_ruleCreateExtensionInfo_in_synpred3_InternalXtend2512);
+						ruleCreateExtensionInfo();
+
+						state._fsp--;
+						if (state.failed)
+							return;
+
+					}
+
+				}
+
+				{
+
+					{
+						pushFollow(FOLLOW_ruleValidID_in_synpred3_InternalXtend2521);
+						ruleValidID();
+
+						state._fsp--;
+						if (state.failed)
+							return;
+
+					}
+
+				}
+
+				match(input, 35, FOLLOW_35_in_synpred3_InternalXtend2527);
+				if (state.failed)
+					return;
+
+			}
+
+		}
+	}
+
+	public final void synpred5_InternalXtend_fragment() throws RecognitionException {
+
+		{
+
+			{
+
+				{
+
+					{
+						pushFollow(FOLLOW_ruleJvmTypeReference_in_synpred5_InternalXtend5035);
+						ruleJvmTypeReference();
+
+						state._fsp--;
+						if (state.failed)
+							return;
+
+					}
+
+				}
+
+				{
+
+					{
+						pushFollow(FOLLOW_ruleValidID_in_synpred5_InternalXtend5044);
+						ruleValidID();
+
+						state._fsp--;
+						if (state.failed)
+							return;
+
+					}
+
+				}
+
+			}
+
+		}
+	}
+
+	public final void synpred6_InternalXtend_fragment() throws RecognitionException {
+
+		{
+			match(input, 35, FOLLOW_35_in_synpred6_InternalXtend7392);
+			if (state.failed)
+				return;
+
+		}
+	}
+
+	public final void synpred7_InternalXtend_fragment() throws RecognitionException {
+
+		{
+
+			{
+
+				{
+				}
+
+				{
+
+					{
+						pushFollow(FOLLOW_ruleOpMultiAssign_in_synpred7_InternalXtend8502);
+						ruleOpMultiAssign();
+
+						state._fsp--;
+						if (state.failed)
+							return;
+
+					}
+
+				}
+
+			}
+
+		}
+	}
+
+	public final void synpred8_InternalXtend_fragment() throws RecognitionException {
+
+		{
+
+			{
+
+				{
+				}
+
+				{
+
+					{
+						pushFollow(FOLLOW_ruleOpOr_in_synpred8_InternalXtend8871);
+						ruleOpOr();
+
+						state._fsp--;
+						if (state.failed)
+							return;
+
+					}
+
+				}
+
+			}
+
+		}
+	}
+
+	public final void synpred9_InternalXtend_fragment() throws RecognitionException {
+
+		{
+
+			{
+
+				{
+				}
+
+				{
+
+					{
+						pushFollow(FOLLOW_ruleOpAnd_in_synpred9_InternalXtend9130);
+						ruleOpAnd();
+
+						state._fsp--;
+						if (state.failed)
+							return;
+
+					}
+
+				}
+
+			}
+
+		}
+	}
+
+	public final void synpred10_InternalXtend_fragment() throws RecognitionException {
+
+		{
+
+			{
+
+				{
+				}
+
+				{
+
+					{
+						pushFollow(FOLLOW_ruleOpEquality_in_synpred10_InternalXtend9389);
+						ruleOpEquality();
+
+						state._fsp--;
+						if (state.failed)
+							return;
+
+					}
+
+				}
+
+			}
+
+		}
+	}
+
+	public final void synpred11_InternalXtend_fragment() throws RecognitionException {
+
+		{
+
+			{
+
+				{
+				}
+
+				match(input, 73, FOLLOW_73_in_synpred11_InternalXtend9703);
+				if (state.failed)
+					return;
+
+			}
+
+		}
+	}
+
+	public final void synpred12_InternalXtend_fragment() throws RecognitionException {
+
+		{
+
+			{
+
+				{
+				}
+
+				{
+
+					{
+						pushFollow(FOLLOW_ruleOpCompare_in_synpred12_InternalXtend9774);
+						ruleOpCompare();
+
+						state._fsp--;
+						if (state.failed)
+							return;
+
+					}
+
+				}
+
+			}
+
+		}
+	}
+
+	public final void synpred13_InternalXtend_fragment() throws RecognitionException {
+
+		{
+
+			{
+
+				{
+				}
+
+				{
+
+					{
+						pushFollow(FOLLOW_ruleOpOther_in_synpred13_InternalXtend10093);
+						ruleOpOther();
+
+						state._fsp--;
+						if (state.failed)
+							return;
+
+					}
+
+				}
+
+			}
+
+		}
+	}
+
+	public final void synpred14_InternalXtend_fragment() throws RecognitionException {
+
+		{
+
+			{
+				match(input, 25, FOLLOW_25_in_synpred14_InternalXtend10362);
+				if (state.failed)
+					return;
+				match(input, 25, FOLLOW_25_in_synpred14_InternalXtend10367);
+				if (state.failed)
+					return;
+
+			}
+
+		}
+	}
+
+	public final void synpred15_InternalXtend_fragment() throws RecognitionException {
+
+		{
+
+			{
+				match(input, 23, FOLLOW_23_in_synpred15_InternalXtend10449);
+				if (state.failed)
+					return;
+				match(input, 23, FOLLOW_23_in_synpred15_InternalXtend10454);
+				if (state.failed)
+					return;
+
+			}
+
+		}
+	}
+
+	public final void synpred16_InternalXtend_fragment() throws RecognitionException {
+
+		{
+
+			{
+
+				{
+				}
+
+				{
+
+					{
+						pushFollow(FOLLOW_ruleOpAdd_in_synpred16_InternalXtend10676);
+						ruleOpAdd();
+
+						state._fsp--;
+						if (state.failed)
+							return;
+
+					}
+
+				}
+
+			}
+
+		}
+	}
+
+	public final void synpred17_InternalXtend_fragment() throws RecognitionException {
+
+		{
+
+			{
+
+				{
+				}
+
+				{
+
+					{
+						pushFollow(FOLLOW_ruleOpMulti_in_synpred17_InternalXtend10956);
+						ruleOpMulti();
+
+						state._fsp--;
+						if (state.failed)
+							return;
+
+					}
+
+				}
+
+			}
+
+		}
+	}
+
+	public final void synpred18_InternalXtend_fragment() throws RecognitionException {
+
+		{
+
+			{
+
+				{
+				}
+
+				match(input, 89, FOLLOW_89_in_synpred18_InternalXtend11550);
+				if (state.failed)
+					return;
+
+			}
+
+		}
+	}
+
+	public final void synpred19_InternalXtend_fragment() throws RecognitionException {
+
+		{
+
+			{
+
+				{
+				}
+
+				match(input, 90, FOLLOW_90_in_synpred19_InternalXtend11704);
+				if (state.failed)
+					return;
+
+				{
+
+					{
+						pushFollow(FOLLOW_ruleFeatureCallID_in_synpred19_InternalXtend11713);
+						ruleFeatureCallID();
+
+						state._fsp--;
+						if (state.failed)
+							return;
+
+					}
+
+				}
+
+				pushFollow(FOLLOW_ruleOpSingleAssign_in_synpred19_InternalXtend11719);
+				ruleOpSingleAssign();
+
+				state._fsp--;
+				if (state.failed)
+					return;
+
+			}
+
+		}
+	}
+
+	public final void synpred20_InternalXtend_fragment() throws RecognitionException {
+
+		{
+
+			{
+
+				{
+				}
+
+				int alt200 = 3;
+				switch (input.LA(1)) {
+					case 90: {
+						alt200 = 1;
+					}
+						break;
+					case 91: {
+						alt200 = 2;
+					}
+						break;
+					case 92: {
+						alt200 = 3;
+					}
+						break;
+					default:
+						if (state.backtracking > 0) {
+							state.failed = true;
+							return;
+						}
+						NoViableAltException nvae = new NoViableAltException("", 200, 0, input);
+
+						throw nvae;
+				}
+
+				switch (alt200) {
+					case 1:
+
+					{
+						match(input, 90, FOLLOW_90_in_synpred20_InternalXtend11822);
+						if (state.failed)
+							return;
+
+					}
+						break;
+					case 2:
+
+					{
+
+						{
+
+							{
+								match(input, 91, FOLLOW_91_in_synpred20_InternalXtend11836);
+								if (state.failed)
+									return;
+
+							}
+
+						}
+
+					}
+						break;
+					case 3:
+
+					{
+
+						{
+
+							{
+								match(input, 92, FOLLOW_92_in_synpred20_InternalXtend11856);
+								if (state.failed)
+									return;
+
+							}
+
+						}
+
+					}
+						break;
+
+				}
+
+			}
+
+		}
+	}
+
+	public final void synpred21_InternalXtend_fragment() throws RecognitionException {
+
+		{
+
+			{
+				match(input, 35, FOLLOW_35_in_synpred21_InternalXtend12083);
+				if (state.failed)
+					return;
+
+			}
+
+		}
+	}
+
+	public final void synpred22_InternalXtend_fragment() throws RecognitionException {
+
+		{
+
+			{
+
+				{
+				}
+
+				int alt202 = 2;
+				int LA202_0 = input.LA(1);
+
+				if ((LA202_0 == RULE_ID || LA202_0 == 32 || (LA202_0 >= 34 && LA202_0 <= 35) || LA202_0 == 50 || LA202_0 == 79)) {
+					alt202 = 1;
+				}
+				switch (alt202) {
+					case 1:
+
+					{
+
+						{
+
+							{
+								pushFollow(FOLLOW_ruleJvmFormalParameter_in_synpred22_InternalXtend12135);
+								ruleJvmFormalParameter();
+
+								state._fsp--;
+								if (state.failed)
+									return;
+
+							}
+
+						}
+
+						loop201: do {
+							int alt201 = 2;
+							int LA201_0 = input.LA(1);
+
+							if ((LA201_0 == 24)) {
+								alt201 = 1;
+							}
+
+							switch (alt201) {
+								case 1:
+
+								{
+									match(input, 24, FOLLOW_24_in_synpred22_InternalXtend12142);
+									if (state.failed)
+										return;
+
+									{
+
+										{
+											pushFollow(FOLLOW_ruleJvmFormalParameter_in_synpred22_InternalXtend12149);
+											ruleJvmFormalParameter();
+
+											state._fsp--;
+											if (state.failed)
+												return;
+
+										}
+
+									}
+
+								}
+									break;
+
+								default:
+									break loop201;
+							}
+						} while (true);
+
+					}
+						break;
+
+				}
+
+				{
+
+					{
+						match(input, 96, FOLLOW_96_in_synpred22_InternalXtend12163);
+						if (state.failed)
+							return;
+
+					}
+
+				}
+
+			}
+
+		}
+	}
+
+	public final void synpred23_InternalXtend_fragment() throws RecognitionException {
+
+		{
+
+			{
+
+				{
+				}
+
+				match(input, 94, FOLLOW_94_in_synpred23_InternalXtend12283);
+				if (state.failed)
+					return;
+
+			}
+
+		}
+	}
+
+	public final void synpred24_InternalXtend_fragment() throws RecognitionException {
+
+		{
+
+			{
+
+				{
+				}
+
+				match(input, 94, FOLLOW_94_in_synpred24_InternalXtend12834);
+				if (state.failed)
+					return;
+
+			}
+
+		}
+	}
+
+	public final void synpred26_InternalXtend_fragment() throws RecognitionException {
+
+		{
+
+			{
+
+				int alt204 = 2;
+				int LA204_0 = input.LA(1);
+
+				if ((LA204_0 == RULE_ID || LA204_0 == 32 || (LA204_0 >= 34 && LA204_0 <= 35) || LA204_0 == 50 || LA204_0 == 79)) {
+					alt204 = 1;
+				}
+				switch (alt204) {
+					case 1:
+
+					{
+
+						{
+
+							{
+								pushFollow(FOLLOW_ruleJvmFormalParameter_in_synpred26_InternalXtend13584);
+								ruleJvmFormalParameter();
+
+								state._fsp--;
+								if (state.failed)
+									return;
+
+							}
+
+						}
+
+						loop203: do {
+							int alt203 = 2;
+							int LA203_0 = input.LA(1);
+
+							if ((LA203_0 == 24)) {
+								alt203 = 1;
+							}
+
+							switch (alt203) {
+								case 1:
+
+								{
+									match(input, 24, FOLLOW_24_in_synpred26_InternalXtend13591);
+									if (state.failed)
+										return;
+
+									{
+
+										{
+											pushFollow(FOLLOW_ruleJvmFormalParameter_in_synpred26_InternalXtend13598);
+											ruleJvmFormalParameter();
+
+											state._fsp--;
+											if (state.failed)
+												return;
+
+										}
+
+									}
+
+								}
+									break;
+
+								default:
+									break loop203;
+							}
+						} while (true);
+
+					}
+						break;
+
+				}
+
+				{
+
+					{
+						match(input, 96, FOLLOW_96_in_synpred26_InternalXtend13612);
+						if (state.failed)
+							return;
+
+					}
+
+				}
+
+			}
+
+		}
+	}
+
+	public final void synpred28_InternalXtend_fragment() throws RecognitionException {
+
+		{
+			match(input, 98, FOLLOW_98_in_synpred28_InternalXtend14395);
+			if (state.failed)
+				return;
+
+		}
+	}
+
+	public final void synpred29_InternalXtend_fragment() throws RecognitionException {
+
+		{
+
+			{
+
+				{
+
+					{
+						pushFollow(FOLLOW_ruleValidID_in_synpred29_InternalXtend14537);
+						ruleValidID();
+
+						state._fsp--;
+						if (state.failed)
+							return;
+
+					}
+
+				}
+
+				match(input, 51, FOLLOW_51_in_synpred29_InternalXtend14543);
+				if (state.failed)
+					return;
+
+			}
+
+		}
+	}
+
+	public final void synpred30_InternalXtend_fragment() throws RecognitionException {
+
+		{
+
+			{
+				match(input, 35, FOLLOW_35_in_synpred30_InternalXtend14619);
+				if (state.failed)
+					return;
+
+				{
+
+					{
+						pushFollow(FOLLOW_ruleValidID_in_synpred30_InternalXtend14626);
+						ruleValidID();
+
+						state._fsp--;
+						if (state.failed)
+							return;
+
+					}
+
+				}
+
+				match(input, 51, FOLLOW_51_in_synpred30_InternalXtend14632);
+				if (state.failed)
+					return;
+
+			}
+
+		}
+	}
+
+	public final void synpred31_InternalXtend_fragment() throws RecognitionException {
+
+		{
+
+			{
+
+				{
+				}
+
+				int alt210 = 2;
+				int LA210_0 = input.LA(1);
+
+				if (((LA210_0 >= 46 && LA210_0 <= 47))) {
+					alt210 = 1;
+				} else if ((LA210_0 == 34)) {
+					alt210 = 2;
+				} else {
+					if (state.backtracking > 0) {
+						state.failed = true;
+						return;
+					}
+					NoViableAltException nvae = new NoViableAltException("", 210, 0, input);
+
+					throw nvae;
+				}
+				switch (alt210) {
+					case 1:
+
+					{
+
+						{
+
+							int alt207 = 2;
+							int LA207_0 = input.LA(1);
+
+							if ((LA207_0 == 47)) {
+								alt207 = 1;
+							} else if ((LA207_0 == 46)) {
+								alt207 = 2;
+							} else {
+								if (state.backtracking > 0) {
+									state.failed = true;
+									return;
+								}
+								NoViableAltException nvae = new NoViableAltException("", 207, 0, input);
+
+								throw nvae;
+							}
+							switch (alt207) {
+								case 1:
+
+								{
+
+									{
+
+										{
+											match(input, 47, FOLLOW_47_in_synpred31_InternalXtend15724);
+											if (state.failed)
+												return;
+
+										}
+
+									}
+
+								}
+									break;
+								case 2:
+
+								{
+									match(input, 46, FOLLOW_46_in_synpred31_InternalXtend15740);
+									if (state.failed)
+										return;
+
+								}
+									break;
+
+							}
+
+							int alt208 = 2;
+							int LA208_0 = input.LA(1);
+
+							if ((LA208_0 == 34)) {
+								alt208 = 1;
+							}
+							switch (alt208) {
+								case 1:
+
+								{
+
+									{
+										match(input, 34, FOLLOW_34_in_synpred31_InternalXtend15749);
+										if (state.failed)
+											return;
+
+									}
+
+								}
+									break;
+
+							}
+
+						}
+
+					}
+						break;
+					case 2:
+
+					{
+
+						{
+
+							{
+
+								{
+									match(input, 34, FOLLOW_34_in_synpred31_InternalXtend15772);
+									if (state.failed)
+										return;
+
+								}
+
+							}
+
+							int alt209 = 2;
+							int LA209_0 = input.LA(1);
+
+							if ((LA209_0 == 47)) {
+								alt209 = 1;
+							} else if ((LA209_0 == 46)) {
+								alt209 = 2;
+							} else {
+								if (state.backtracking > 0) {
+									state.failed = true;
+									return;
+								}
+								NoViableAltException nvae = new NoViableAltException("", 209, 0, input);
+
+								throw nvae;
+							}
+							switch (alt209) {
+								case 1:
+
+								{
+
+									{
+
+										{
+											match(input, 47, FOLLOW_47_in_synpred31_InternalXtend15787);
+											if (state.failed)
+												return;
+
+										}
+
+									}
+
+								}
+									break;
+								case 2:
+
+								{
+									match(input, 46, FOLLOW_46_in_synpred31_InternalXtend15803);
+									if (state.failed)
+										return;
+
+								}
+									break;
+
+							}
+
+						}
+
+					}
+						break;
+
+				}
+
+			}
+
+		}
+	}
+
+	public final void synpred32_InternalXtend_fragment() throws RecognitionException {
+
+		{
+
+			{
+				match(input, 35, FOLLOW_35_in_synpred32_InternalXtend16079);
+				if (state.failed)
+					return;
+
+			}
+
+		}
+	}
+
+	public final void synpred33_InternalXtend_fragment() throws RecognitionException {
+
+		{
+
+			{
+
+				{
+				}
+
+				int alt212 = 2;
+				int LA212_0 = input.LA(1);
+
+				if ((LA212_0 == RULE_ID || LA212_0 == 32 || (LA212_0 >= 34 && LA212_0 <= 35) || LA212_0 == 50 || LA212_0 == 79)) {
+					alt212 = 1;
+				}
+				switch (alt212) {
+					case 1:
+
+					{
+
+						{
+
+							{
+								pushFollow(FOLLOW_ruleJvmFormalParameter_in_synpred33_InternalXtend16131);
+								ruleJvmFormalParameter();
+
+								state._fsp--;
+								if (state.failed)
+									return;
+
+							}
+
+						}
+
+						loop211: do {
+							int alt211 = 2;
+							int LA211_0 = input.LA(1);
+
+							if ((LA211_0 == 24)) {
+								alt211 = 1;
+							}
+
+							switch (alt211) {
+								case 1:
+
+								{
+									match(input, 24, FOLLOW_24_in_synpred33_InternalXtend16138);
+									if (state.failed)
+										return;
+
+									{
+
+										{
+											pushFollow(FOLLOW_ruleJvmFormalParameter_in_synpred33_InternalXtend16145);
+											ruleJvmFormalParameter();
+
+											state._fsp--;
+											if (state.failed)
+												return;
+
+										}
+
+									}
+
+								}
+									break;
+
+								default:
+									break loop211;
+							}
+						} while (true);
+
+					}
+						break;
+
+				}
+
+				{
+
+					{
+						match(input, 96, FOLLOW_96_in_synpred33_InternalXtend16159);
+						if (state.failed)
+							return;
+
+					}
+
+				}
+
+			}
+
+		}
+	}
+
+	public final void synpred34_InternalXtend_fragment() throws RecognitionException {
+
+		{
+
+			{
+
+				{
+				}
+
+				match(input, 94, FOLLOW_94_in_synpred34_InternalXtend16279);
+				if (state.failed)
+					return;
+
+			}
+
+		}
+	}
+
+	public final void synpred35_InternalXtend_fragment() throws RecognitionException {
+
+		{
+			match(input, 23, FOLLOW_23_in_synpred35_InternalXtend16666);
+			if (state.failed)
+				return;
+
+		}
+	}
+
+	public final void synpred36_InternalXtend_fragment() throws RecognitionException {
+
+		{
+			match(input, 35, FOLLOW_35_in_synpred36_InternalXtend16759);
+			if (state.failed)
+				return;
+
+		}
+	}
+
+	public final void synpred37_InternalXtend_fragment() throws RecognitionException {
+
+		{
+
+			{
+
+				{
+				}
+
+				int alt214 = 2;
+				int LA214_0 = input.LA(1);
+
+				if ((LA214_0 == RULE_ID || LA214_0 == 32 || (LA214_0 >= 34 && LA214_0 <= 35) || LA214_0 == 50 || LA214_0 == 79)) {
+					alt214 = 1;
+				}
+				switch (alt214) {
+					case 1:
+
+					{
+
+						{
+
+							{
+								pushFollow(FOLLOW_ruleJvmFormalParameter_in_synpred37_InternalXtend16789);
+								ruleJvmFormalParameter();
+
+								state._fsp--;
+								if (state.failed)
+									return;
+
+							}
+
+						}
+
+						loop213: do {
+							int alt213 = 2;
+							int LA213_0 = input.LA(1);
+
+							if ((LA213_0 == 24)) {
+								alt213 = 1;
+							}
+
+							switch (alt213) {
+								case 1:
+
+								{
+									match(input, 24, FOLLOW_24_in_synpred37_InternalXtend16796);
+									if (state.failed)
+										return;
+
+									{
+
+										{
+											pushFollow(FOLLOW_ruleJvmFormalParameter_in_synpred37_InternalXtend16803);
+											ruleJvmFormalParameter();
+
+											state._fsp--;
+											if (state.failed)
+												return;
+
+										}
+
+									}
+
+								}
+									break;
+
+								default:
+									break loop213;
+							}
+						} while (true);
+
+					}
+						break;
+
+				}
+
+				{
+
+					{
+						match(input, 96, FOLLOW_96_in_synpred37_InternalXtend16817);
+						if (state.failed)
+							return;
+
+					}
+
+				}
+
+			}
+
+		}
+	}
+
+	public final void synpred38_InternalXtend_fragment() throws RecognitionException {
+
+		{
+
+			{
+
+				{
+				}
+
+				match(input, 94, FOLLOW_94_in_synpred38_InternalXtend16937);
+				if (state.failed)
+					return;
+
+			}
+
+		}
+	}
+
+	public final void synpred39_InternalXtend_fragment() throws RecognitionException {
+
+		{
+
+			{
+				pushFollow(FOLLOW_ruleXExpression_in_synpred39_InternalXtend17659);
+				ruleXExpression();
+
+				state._fsp--;
+				if (state.failed)
+					return;
+
+			}
+
+		}
+	}
+
+	public final void synpred40_InternalXtend_fragment() throws RecognitionException {
+
+		{
+			match(input, 115, FOLLOW_115_in_synpred40_InternalXtend17804);
+			if (state.failed)
+				return;
+
+		}
+	}
+
+	public final void synpred41_InternalXtend_fragment() throws RecognitionException {
+
+		{
+			match(input, 114, FOLLOW_114_in_synpred41_InternalXtend17834);
+			if (state.failed)
+				return;
+
+		}
+	}
+
+	public final void synpred43_InternalXtend_fragment() throws RecognitionException {
+
+		{
+			match(input, 90, FOLLOW_90_in_synpred43_InternalXtend18181);
+			if (state.failed)
+				return;
+
+		}
+	}
+
+	public final void synpred44_InternalXtend_fragment() throws RecognitionException {
+
+		{
+
+			{
+
+				{
+				}
+
+				pushFollow(FOLLOW_ruleArrayBrackets_in_synpred44_InternalXtend18564);
+				ruleArrayBrackets();
+
+				state._fsp--;
+				if (state.failed)
+					return;
+
+			}
+
+		}
+	}
+
+	public final void synpred45_InternalXtend_fragment() throws RecognitionException {
+
+		{
+			match(input, 23, FOLLOW_23_in_synpred45_InternalXtend19016);
+			if (state.failed)
+				return;
+
+		}
+	}
+
+	public final boolean synpred5_InternalXtend() {
+		state.backtracking++;
+		int start = input.mark();
+		try {
+			synpred5_InternalXtend_fragment(); // can never throw exception
+		} catch (RecognitionException re) {
+			System.err.println("impossible: " + re);
+		}
+		boolean success = !state.failed;
+		input.rewind(start);
+		state.backtracking--;
+		state.failed = false;
+		return success;
+	}
+
+	public final boolean synpred9_InternalXtend() {
+		state.backtracking++;
+		int start = input.mark();
+		try {
+			synpred9_InternalXtend_fragment(); // can never throw exception
+		} catch (RecognitionException re) {
+			System.err.println("impossible: " + re);
+		}
+		boolean success = !state.failed;
+		input.rewind(start);
+		state.backtracking--;
+		state.failed = false;
+		return success;
+	}
+
+	public final boolean synpred7_InternalXtend() {
+		state.backtracking++;
+		int start = input.mark();
+		try {
+			synpred7_InternalXtend_fragment(); // can never throw exception
+		} catch (RecognitionException re) {
+			System.err.println("impossible: " + re);
+		}
+		boolean success = !state.failed;
+		input.rewind(start);
+		state.backtracking--;
+		state.failed = false;
+		return success;
+	}
+
+	public final boolean synpred38_InternalXtend() {
+		state.backtracking++;
+		int start = input.mark();
+		try {
+			synpred38_InternalXtend_fragment(); // can never throw exception
+		} catch (RecognitionException re) {
+			System.err.println("impossible: " + re);
+		}
+		boolean success = !state.failed;
+		input.rewind(start);
+		state.backtracking--;
+		state.failed = false;
+		return success;
+	}
+
+	public final boolean synpred6_InternalXtend() {
+		state.backtracking++;
+		int start = input.mark();
+		try {
+			synpred6_InternalXtend_fragment(); // can never throw exception
+		} catch (RecognitionException re) {
+			System.err.println("impossible: " + re);
+		}
+		boolean success = !state.failed;
+		input.rewind(start);
+		state.backtracking--;
+		state.failed = false;
+		return success;
+	}
+
+	public final boolean synpred39_InternalXtend() {
+		state.backtracking++;
+		int start = input.mark();
+		try {
+			synpred39_InternalXtend_fragment(); // can never throw exception
+		} catch (RecognitionException re) {
+			System.err.println("impossible: " + re);
+		}
+		boolean success = !state.failed;
+		input.rewind(start);
+		state.backtracking--;
+		state.failed = false;
+		return success;
+	}
+
+	public final boolean synpred26_InternalXtend() {
+		state.backtracking++;
+		int start = input.mark();
+		try {
+			synpred26_InternalXtend_fragment(); // can never throw exception
+		} catch (RecognitionException re) {
+			System.err.println("impossible: " + re);
+		}
+		boolean success = !state.failed;
+		input.rewind(start);
+		state.backtracking--;
+		state.failed = false;
+		return success;
+	}
+
+	public final boolean synpred1_InternalXtend() {
+		state.backtracking++;
+		int start = input.mark();
+		try {
+			synpred1_InternalXtend_fragment(); // can never throw exception
+		} catch (RecognitionException re) {
+			System.err.println("impossible: " + re);
+		}
+		boolean success = !state.failed;
+		input.rewind(start);
+		state.backtracking--;
+		state.failed = false;
+		return success;
+	}
+
+	public final boolean synpred10_InternalXtend() {
+		state.backtracking++;
+		int start = input.mark();
+		try {
+			synpred10_InternalXtend_fragment(); // can never throw exception
+		} catch (RecognitionException re) {
+			System.err.println("impossible: " + re);
+		}
+		boolean success = !state.failed;
+		input.rewind(start);
+		state.backtracking--;
+		state.failed = false;
+		return success;
+	}
+
+	public final boolean synpred43_InternalXtend() {
+		state.backtracking++;
+		int start = input.mark();
+		try {
+			synpred43_InternalXtend_fragment(); // can never throw exception
+		} catch (RecognitionException re) {
+			System.err.println("impossible: " + re);
+		}
+		boolean success = !state.failed;
+		input.rewind(start);
+		state.backtracking--;
+		state.failed = false;
+		return success;
+	}
+
+	public final boolean synpred22_InternalXtend() {
+		state.backtracking++;
+		int start = input.mark();
+		try {
+			synpred22_InternalXtend_fragment(); // can never throw exception
+		} catch (RecognitionException re) {
+			System.err.println("impossible: " + re);
+		}
+		boolean success = !state.failed;
+		input.rewind(start);
+		state.backtracking--;
+		state.failed = false;
+		return success;
+	}
+
+	public final boolean synpred12_InternalXtend() {
+		state.backtracking++;
+		int start = input.mark();
+		try {
+			synpred12_InternalXtend_fragment(); // can never throw exception
+		} catch (RecognitionException re) {
+			System.err.println("impossible: " + re);
+		}
+		boolean success = !state.failed;
+		input.rewind(start);
+		state.backtracking--;
+		state.failed = false;
+		return success;
+	}
+
+	public final boolean synpred18_InternalXtend() {
+		state.backtracking++;
+		int start = input.mark();
+		try {
+			synpred18_InternalXtend_fragment(); // can never throw exception
+		} catch (RecognitionException re) {
+			System.err.println("impossible: " + re);
+		}
+		boolean success = !state.failed;
+		input.rewind(start);
+		state.backtracking--;
+		state.failed = false;
+		return success;
+	}
+
+	public final boolean synpred24_InternalXtend() {
+		state.backtracking++;
+		int start = input.mark();
+		try {
+			synpred24_InternalXtend_fragment(); // can never throw exception
+		} catch (RecognitionException re) {
+			System.err.println("impossible: " + re);
+		}
+		boolean success = !state.failed;
+		input.rewind(start);
+		state.backtracking--;
+		state.failed = false;
+		return success;
+	}
+
+	public final boolean synpred32_InternalXtend() {
+		state.backtracking++;
+		int start = input.mark();
+		try {
+			synpred32_InternalXtend_fragment(); // can never throw exception
+		} catch (RecognitionException re) {
+			System.err.println("impossible: " + re);
+		}
+		boolean success = !state.failed;
+		input.rewind(start);
+		state.backtracking--;
+		state.failed = false;
+		return success;
+	}
+
+	public final boolean synpred3_InternalXtend() {
+		state.backtracking++;
+		int start = input.mark();
+		try {
+			synpred3_InternalXtend_fragment(); // can never throw exception
+		} catch (RecognitionException re) {
+			System.err.println("impossible: " + re);
+		}
+		boolean success = !state.failed;
+		input.rewind(start);
+		state.backtracking--;
+		state.failed = false;
+		return success;
+	}
+
+	public final boolean synpred31_InternalXtend() {
+		state.backtracking++;
+		int start = input.mark();
+		try {
+			synpred31_InternalXtend_fragment(); // can never throw exception
+		} catch (RecognitionException re) {
+			System.err.println("impossible: " + re);
+		}
+		boolean success = !state.failed;
+		input.rewind(start);
+		state.backtracking--;
+		state.failed = false;
+		return success;
+	}
+
+	public final boolean synpred33_InternalXtend() {
+		state.backtracking++;
+		int start = input.mark();
+		try {
+			synpred33_InternalXtend_fragment(); // can never throw exception
+		} catch (RecognitionException re) {
+			System.err.println("impossible: " + re);
+		}
+		boolean success = !state.failed;
+		input.rewind(start);
+		state.backtracking--;
+		state.failed = false;
+		return success;
+	}
+
+	public final boolean synpred14_InternalXtend() {
+		state.backtracking++;
+		int start = input.mark();
+		try {
+			synpred14_InternalXtend_fragment(); // can never throw exception
+		} catch (RecognitionException re) {
+			System.err.println("impossible: " + re);
+		}
+		boolean success = !state.failed;
+		input.rewind(start);
+		state.backtracking--;
+		state.failed = false;
+		return success;
+	}
+
+	public final boolean synpred17_InternalXtend() {
+		state.backtracking++;
+		int start = input.mark();
+		try {
+			synpred17_InternalXtend_fragment(); // can never throw exception
+		} catch (RecognitionException re) {
+			System.err.println("impossible: " + re);
+		}
+		boolean success = !state.failed;
+		input.rewind(start);
+		state.backtracking--;
+		state.failed = false;
+		return success;
+	}
+
+	public final boolean synpred41_InternalXtend() {
+		state.backtracking++;
+		int start = input.mark();
+		try {
+			synpred41_InternalXtend_fragment(); // can never throw exception
+		} catch (RecognitionException re) {
+			System.err.println("impossible: " + re);
+		}
+		boolean success = !state.failed;
+		input.rewind(start);
+		state.backtracking--;
+		state.failed = false;
+		return success;
+	}
+
+	public final boolean synpred40_InternalXtend() {
+		state.backtracking++;
+		int start = input.mark();
+		try {
+			synpred40_InternalXtend_fragment(); // can never throw exception
+		} catch (RecognitionException re) {
+			System.err.println("impossible: " + re);
+		}
+		boolean success = !state.failed;
+		input.rewind(start);
+		state.backtracking--;
+		state.failed = false;
+		return success;
+	}
+
+	public final boolean synpred2_InternalXtend() {
+		state.backtracking++;
+		int start = input.mark();
+		try {
+			synpred2_InternalXtend_fragment(); // can never throw exception
+		} catch (RecognitionException re) {
+			System.err.println("impossible: " + re);
+		}
+		boolean success = !state.failed;
+		input.rewind(start);
+		state.backtracking--;
+		state.failed = false;
+		return success;
+	}
+
+	public final boolean synpred23_InternalXtend() {
+		state.backtracking++;
+		int start = input.mark();
+		try {
+			synpred23_InternalXtend_fragment(); // can never throw exception
+		} catch (RecognitionException re) {
+			System.err.println("impossible: " + re);
+		}
+		boolean success = !state.failed;
+		input.rewind(start);
+		state.backtracking--;
+		state.failed = false;
+		return success;
+	}
+
+	public final boolean synpred44_InternalXtend() {
+		state.backtracking++;
+		int start = input.mark();
+		try {
+			synpred44_InternalXtend_fragment(); // can never throw exception
+		} catch (RecognitionException re) {
+			System.err.println("impossible: " + re);
+		}
+		boolean success = !state.failed;
+		input.rewind(start);
+		state.backtracking--;
+		state.failed = false;
+		return success;
+	}
+
+	public final boolean synpred16_InternalXtend() {
+		state.backtracking++;
+		int start = input.mark();
+		try {
+			synpred16_InternalXtend_fragment(); // can never throw exception
+		} catch (RecognitionException re) {
+			System.err.println("impossible: " + re);
+		}
+		boolean success = !state.failed;
+		input.rewind(start);
+		state.backtracking--;
+		state.failed = false;
+		return success;
+	}
+
+	public final boolean synpred36_InternalXtend() {
+		state.backtracking++;
+		int start = input.mark();
+		try {
+			synpred36_InternalXtend_fragment(); // can never throw exception
+		} catch (RecognitionException re) {
+			System.err.println("impossible: " + re);
+		}
+		boolean success = !state.failed;
+		input.rewind(start);
+		state.backtracking--;
+		state.failed = false;
+		return success;
+	}
+
+	public final boolean synpred19_InternalXtend() {
+		state.backtracking++;
+		int start = input.mark();
+		try {
+			synpred19_InternalXtend_fragment(); // can never throw exception
+		} catch (RecognitionException re) {
+			System.err.println("impossible: " + re);
+		}
+		boolean success = !state.failed;
+		input.rewind(start);
+		state.backtracking--;
+		state.failed = false;
+		return success;
+	}
+
+	public final boolean synpred37_InternalXtend() {
+		state.backtracking++;
+		int start = input.mark();
+		try {
+			synpred37_InternalXtend_fragment(); // can never throw exception
+		} catch (RecognitionException re) {
+			System.err.println("impossible: " + re);
+		}
+		boolean success = !state.failed;
+		input.rewind(start);
+		state.backtracking--;
+		state.failed = false;
+		return success;
+	}
+
+	public final boolean synpred29_InternalXtend() {
+		state.backtracking++;
+		int start = input.mark();
+		try {
+			synpred29_InternalXtend_fragment(); // can never throw exception
+		} catch (RecognitionException re) {
+			System.err.println("impossible: " + re);
+		}
+		boolean success = !state.failed;
+		input.rewind(start);
+		state.backtracking--;
+		state.failed = false;
+		return success;
+	}
+
+	public final boolean synpred35_InternalXtend() {
+		state.backtracking++;
+		int start = input.mark();
+		try {
+			synpred35_InternalXtend_fragment(); // can never throw exception
+		} catch (RecognitionException re) {
+			System.err.println("impossible: " + re);
+		}
+		boolean success = !state.failed;
+		input.rewind(start);
+		state.backtracking--;
+		state.failed = false;
+		return success;
+	}
+
+	public final boolean synpred45_InternalXtend() {
+		state.backtracking++;
+		int start = input.mark();
+		try {
+			synpred45_InternalXtend_fragment(); // can never throw exception
+		} catch (RecognitionException re) {
+			System.err.println("impossible: " + re);
+		}
+		boolean success = !state.failed;
+		input.rewind(start);
+		state.backtracking--;
+		state.failed = false;
+		return success;
+	}
+
+	public final boolean synpred8_InternalXtend() {
+		state.backtracking++;
+		int start = input.mark();
+		try {
+			synpred8_InternalXtend_fragment(); // can never throw exception
+		} catch (RecognitionException re) {
+			System.err.println("impossible: " + re);
+		}
+		boolean success = !state.failed;
+		input.rewind(start);
+		state.backtracking--;
+		state.failed = false;
+		return success;
+	}
+
+	public final boolean synpred34_InternalXtend() {
+		state.backtracking++;
+		int start = input.mark();
+		try {
+			synpred34_InternalXtend_fragment(); // can never throw exception
+		} catch (RecognitionException re) {
+			System.err.println("impossible: " + re);
+		}
+		boolean success = !state.failed;
+		input.rewind(start);
+		state.backtracking--;
+		state.failed = false;
+		return success;
+	}
+
+	public final boolean synpred30_InternalXtend() {
+		state.backtracking++;
+		int start = input.mark();
+		try {
+			synpred30_InternalXtend_fragment(); // can never throw exception
+		} catch (RecognitionException re) {
+			System.err.println("impossible: " + re);
+		}
+		boolean success = !state.failed;
+		input.rewind(start);
+		state.backtracking--;
+		state.failed = false;
+		return success;
+	}
+
+	public final boolean synpred11_InternalXtend() {
+		state.backtracking++;
+		int start = input.mark();
+		try {
+			synpred11_InternalXtend_fragment(); // can never throw exception
+		} catch (RecognitionException re) {
+			System.err.println("impossible: " + re);
+		}
+		boolean success = !state.failed;
+		input.rewind(start);
+		state.backtracking--;
+		state.failed = false;
+		return success;
+	}
+
+	public final boolean synpred15_InternalXtend() {
+		state.backtracking++;
+		int start = input.mark();
+		try {
+			synpred15_InternalXtend_fragment(); // can never throw exception
+		} catch (RecognitionException re) {
+			System.err.println("impossible: " + re);
+		}
+		boolean success = !state.failed;
+		input.rewind(start);
+		state.backtracking--;
+		state.failed = false;
+		return success;
+	}
+
+	public final boolean synpred21_InternalXtend() {
+		state.backtracking++;
+		int start = input.mark();
+		try {
+			synpred21_InternalXtend_fragment(); // can never throw exception
+		} catch (RecognitionException re) {
+			System.err.println("impossible: " + re);
+		}
+		boolean success = !state.failed;
+		input.rewind(start);
+		state.backtracking--;
+		state.failed = false;
+		return success;
+	}
+
+	public final boolean synpred13_InternalXtend() {
+		state.backtracking++;
+		int start = input.mark();
+		try {
+			synpred13_InternalXtend_fragment(); // can never throw exception
+		} catch (RecognitionException re) {
+			System.err.println("impossible: " + re);
+		}
+		boolean success = !state.failed;
+		input.rewind(start);
+		state.backtracking--;
+		state.failed = false;
+		return success;
+	}
+
+	public final boolean synpred20_InternalXtend() {
+		state.backtracking++;
+		int start = input.mark();
+		try {
+			synpred20_InternalXtend_fragment(); // can never throw exception
+		} catch (RecognitionException re) {
+			System.err.println("impossible: " + re);
+		}
+		boolean success = !state.failed;
+		input.rewind(start);
+		state.backtracking--;
+		state.failed = false;
+		return success;
+	}
+
+	public final boolean synpred28_InternalXtend() {
+		state.backtracking++;
+		int start = input.mark();
+		try {
+			synpred28_InternalXtend_fragment(); // can never throw exception
+		} catch (RecognitionException re) {
+			System.err.println("impossible: " + re);
+		}
+		boolean success = !state.failed;
+		input.rewind(start);
+		state.backtracking--;
+		state.failed = false;
+		return success;
+	}
+
+	protected DFA25 dfa25 = new DFA25(this);
+	protected DFA29 dfa29 = new DFA29(this);
+	protected DFA62 dfa62 = new DFA62(this);
+	protected DFA42 dfa42 = new DFA42(this);
+	protected DFA36 dfa36 = new DFA36(this);
+	protected DFA38 dfa38 = new DFA38(this);
+	protected DFA41 dfa41 = new DFA41(this);
+	protected DFA49 dfa49 = new DFA49(this);
+	protected DFA99 dfa99 = new DFA99(this);
+	protected DFA104 dfa104 = new DFA104(this);
+	protected DFA112 dfa112 = new DFA112(this);
+	protected DFA115 dfa115 = new DFA115(this);
+	protected DFA128 dfa128 = new DFA128(this);
+	protected DFA127 dfa127 = new DFA127(this);
+	protected DFA129 dfa129 = new DFA129(this);
+	protected DFA131 dfa131 = new DFA131(this);
+	protected DFA140 dfa140 = new DFA140(this);
+	protected DFA160 dfa160 = new DFA160(this);
+	protected DFA159 dfa159 = new DFA159(this);
+	protected DFA161 dfa161 = new DFA161(this);
+	protected DFA165 dfa165 = new DFA165(this);
+	protected DFA168 dfa168 = new DFA168(this);
+	protected DFA167 dfa167 = new DFA167(this);
+	protected DFA169 dfa169 = new DFA169(this);
+	protected DFA172 dfa172 = new DFA172(this);
+	protected DFA187 dfa187 = new DFA187(this);
+	protected DFA194 dfa194 = new DFA194(this);
+	static final String DFA25_eotS = "\15\uffff";
+	static final String DFA25_eofS = "\15\uffff";
+	static final String DFA25_minS = "\11\24\4\uffff";
+	static final String DFA25_maxS = "\11\55\4\uffff";
+	static final String DFA25_acceptS = "\11\uffff\1\1\1\2\1\3\1\4";
+	static final String DFA25_specialS = "\15\uffff}>";
+	static final String[] DFA25_transitionS = {
+			"\1\4\1\uffff\1\11\7\uffff\1\12\1\13\1\14\6\uffff\1\1\1\2\1\3" + "\1\5\1\6\1\7\1\10",
+			"\1\4\1\uffff\1\11\7\uffff\1\12\1\13\1\14\6\uffff\1\1\1\2\1" + "\3\1\5\1\6\1\7\1\10",
+			"\1\4\1\uffff\1\11\7\uffff\1\12\1\13\1\14\6\uffff\1\1\1\2\1" + "\3\1\5\1\6\1\7\1\10",
+			"\1\4\1\uffff\1\11\7\uffff\1\12\1\13\1\14\6\uffff\1\1\1\2\1" + "\3\1\5\1\6\1\7\1\10",
+			"\1\4\1\uffff\1\11\7\uffff\1\12\1\13\1\14\6\uffff\1\1\1\2\1" + "\3\1\5\1\6\1\7\1\10",
+			"\1\4\1\uffff\1\11\7\uffff\1\12\1\13\1\14\6\uffff\1\1\1\2\1" + "\3\1\5\1\6\1\7\1\10",
+			"\1\4\1\uffff\1\11\7\uffff\1\12\1\13\1\14\6\uffff\1\1\1\2\1" + "\3\1\5\1\6\1\7\1\10",
+			"\1\4\1\uffff\1\11\7\uffff\1\12\1\13\1\14\6\uffff\1\1\1\2\1" + "\3\1\5\1\6\1\7\1\10",
+			"\1\4\1\uffff\1\11\7\uffff\1\12\1\13\1\14\6\uffff\1\1\1\2\1" + "\3\1\5\1\6\1\7\1\10", "", "", "", "" };
+
+	static final short[] DFA25_eot = DFA.unpackEncodedString(DFA25_eotS);
+	static final short[] DFA25_eof = DFA.unpackEncodedString(DFA25_eofS);
+	static final char[] DFA25_min = DFA.unpackEncodedStringToUnsignedChars(DFA25_minS);
+	static final char[] DFA25_max = DFA.unpackEncodedStringToUnsignedChars(DFA25_maxS);
+	static final short[] DFA25_accept = DFA.unpackEncodedString(DFA25_acceptS);
+	static final short[] DFA25_special = DFA.unpackEncodedString(DFA25_specialS);
+	static final short[][] DFA25_transition;
+
+	static {
+		int numStates = DFA25_transitionS.length;
+		DFA25_transition = new short[numStates][];
+		for (int i = 0; i < numStates; i++) {
+			DFA25_transition[i] = DFA.unpackEncodedString(DFA25_transitionS[i]);
+		}
+	}
+
+	class DFA25 extends DFA {
+
+		public DFA25(BaseRecognizer recognizer) {
+			this.recognizer = recognizer;
+			this.decisionNumber = 25;
+			this.eot = DFA25_eot;
+			this.eof = DFA25_eof;
+			this.min = DFA25_min;
+			this.max = DFA25_max;
+			this.accept = DFA25_accept;
+			this.special = DFA25_special;
+			this.transition = DFA25_transition;
+		}
+
+		public String getDescription() {
+			return "187:3: ( ( () ( (lv_modifiers_3_0= ruleCommonModifier ) )* otherlv_4= 'class' ( (lv_name_5_0= ruleValidID ) ) (otherlv_6= '<' ( (lv_typeParameters_7_0= ruleJvmTypeParameter ) ) (otherlv_8= ',' ( (lv_typeParameters_9_0= ruleJvmTypeParameter ) ) )* otherlv_10= '>' )? (otherlv_11= 'extends' ( (lv_extends_12_0= ruleJvmParameterizedTypeReference ) ) )? (otherlv_13= 'implements' ( (lv_implements_14_0= ruleJvmParameterizedTypeReference ) ) (otherlv_15= ',' ( (lv_implements_16_0= ruleJvmParameterizedTypeReference ) ) )* )? otherlv_17= '{' ( (lv_members_18_0= ruleMember ) )* otherlv_19= '}' ) | ( () ( (lv_modifiers_21_0= ruleCommonModifier ) )* otherlv_22= 'interface' ( (lv_name_23_0= ruleValidID ) ) (otherlv_24= '<' ( (lv_typeParameters_25_0= ruleJvmTypeParameter ) ) (otherlv_26= ',' ( (lv_typeParameters_27_0= ruleJvmTypeParameter ) ) )* otherlv_28= '>' )? (otherlv_29= 'extends' ( (lv_extends_30_0= ruleJvmParameterizedTypeReference ) ) (otherlv_31= ',' ( (lv_extends_32_0= ruleJvmParameterizedTypeReference ) ) )* )? otherlv_33= '{' ( (lv_members_34_0= ruleMember ) )* otherlv_35= '}' ) | ( () ( (lv_modifiers_37_0= ruleCommonModifier ) )* otherlv_38= 'enum' ( (lv_name_39_0= ruleValidID ) ) otherlv_40= '{' ( ( (lv_members_41_0= ruleXtendEnumLiteral ) ) (otherlv_42= ',' ( (lv_members_43_0= ruleXtendEnumLiteral ) ) )* )? (otherlv_44= ';' )? otherlv_45= '}' ) | ( () ( (lv_modifiers_47_0= ruleCommonModifier ) )* otherlv_48= 'annotation' ( (lv_name_49_0= ruleValidID ) ) otherlv_50= '{' ( (lv_members_51_0= ruleAnnotationField ) )* otherlv_52= '}' ) )";
+		}
+	}
+
+	static final String DFA29_eotS = "\17\uffff";
+	static final String DFA29_eofS = "\1\uffff\3\10\1\uffff\3\4\7\uffff";
+	static final String DFA29_minS = "\4\4\1\uffff\3\4\1\uffff\6\4";
+	static final String DFA29_maxS = "\1\117\3\136\1\uffff\3\136\1\uffff\6\136";
+	static final String DFA29_acceptS = "\4\uffff\1\1\3\uffff\1\2\6\uffff";
+	static final String DFA29_specialS = "\17\uffff}>";
+	static final String[] DFA29_transitionS = {
+			"\1\1\33\uffff\1\3\2\uffff\1\4\16\uffff\1\2\34\uffff\1\4",
+			"\1\5\17\uffff\2\10\1\uffff\1\4\5\uffff\1\10\2\uffff\1\7\1\10"
+					+ "\1\uffff\1\10\3\uffff\11\10\2\uffff\1\6\14\uffff\1\10\17\uffff"
+					+ "\1\10\12\uffff\1\4\3\uffff\1\4",
+			"\1\5\17\uffff\2\10\1\uffff\1\4\5\uffff\1\10\2\uffff\1\7\1\10"
+					+ "\1\uffff\1\10\3\uffff\11\10\2\uffff\1\6\14\uffff\1\10\17\uffff"
+					+ "\1\10\12\uffff\1\4\3\uffff\1\4",
+			"\1\5\17\uffff\2\10\1\uffff\1\4\5\uffff\1\10\2\uffff\1\7\1\10"
+					+ "\1\uffff\1\10\3\uffff\11\10\2\uffff\1\6\14\uffff\1\10\17\uffff"
+					+ "\1\10\12\uffff\1\4\3\uffff\1\4",
+			"",
+			"\1\11\17\uffff\2\4\1\uffff\1\10\5\uffff\1\4\2\uffff\1\13\1"
+					+ "\4\1\uffff\1\4\3\uffff\11\4\2\uffff\1\12\14\uffff\1\4\17\uffff"
+					+ "\1\4\12\uffff\1\10\3\uffff\1\10",
+			"\1\11\17\uffff\2\4\1\uffff\1\10\5\uffff\1\4\2\uffff\1\13\1"
+					+ "\4\1\uffff\1\4\3\uffff\11\4\2\uffff\1\12\14\uffff\1\4\17\uffff"
+					+ "\1\4\12\uffff\1\10\3\uffff\1\10",
+			"\1\11\17\uffff\2\4\1\uffff\1\10\5\uffff\1\4\2\uffff\1\13\1"
+					+ "\4\1\uffff\1\4\3\uffff\11\4\2\uffff\1\12\14\uffff\1\4\17\uffff"
+					+ "\1\4\12\uffff\1\10\3\uffff\1\10",
+			"",
+			"\1\14\17\uffff\2\10\1\uffff\1\4\5\uffff\1\10\2\uffff\1\16\1"
+					+ "\10\1\uffff\1\10\3\uffff\11\10\2\uffff\1\15\14\uffff\1\10\17"
+					+ "\uffff\1\10\12\uffff\1\4\3\uffff\1\4",
+			"\1\14\17\uffff\2\10\1\uffff\1\4\5\uffff\1\10\2\uffff\1\16\1"
+					+ "\10\1\uffff\1\10\3\uffff\11\10\2\uffff\1\15\14\uffff\1\10\17"
+					+ "\uffff\1\10\12\uffff\1\4\3\uffff\1\4",
+			"\1\14\17\uffff\2\10\1\uffff\1\4\5\uffff\1\10\2\uffff\1\16\1"
+					+ "\10\1\uffff\1\10\3\uffff\11\10\2\uffff\1\15\14\uffff\1\10\17"
+					+ "\uffff\1\10\12\uffff\1\4\3\uffff\1\4",
+			"\1\11\17\uffff\2\4\1\uffff\1\10\5\uffff\1\4\2\uffff\1\13\1"
+					+ "\4\1\uffff\1\4\3\uffff\11\4\2\uffff\1\12\14\uffff\1\4\17\uffff"
+					+ "\1\4\12\uffff\1\10\3\uffff\1\10",
+			"\1\11\17\uffff\2\4\1\uffff\1\10\5\uffff\1\4\2\uffff\1\13\1"
+					+ "\4\1\uffff\1\4\3\uffff\11\4\2\uffff\1\12\14\uffff\1\4\17\uffff"
+					+ "\1\4\12\uffff\1\10\3\uffff\1\10",
+			"\1\11\17\uffff\2\4\1\uffff\1\10\5\uffff\1\4\2\uffff\1\13\1"
+					+ "\4\1\uffff\1\4\3\uffff\11\4\2\uffff\1\12\14\uffff\1\4\17\uffff"
+					+ "\1\4\12\uffff\1\10\3\uffff\1\10" };
+
+	static final short[] DFA29_eot = DFA.unpackEncodedString(DFA29_eotS);
+	static final short[] DFA29_eof = DFA.unpackEncodedString(DFA29_eofS);
+	static final char[] DFA29_min = DFA.unpackEncodedStringToUnsignedChars(DFA29_minS);
+	static final char[] DFA29_max = DFA.unpackEncodedStringToUnsignedChars(DFA29_maxS);
+	static final short[] DFA29_accept = DFA.unpackEncodedString(DFA29_acceptS);
+	static final short[] DFA29_special = DFA.unpackEncodedString(DFA29_specialS);
+	static final short[][] DFA29_transition;
+
+	static {
+		int numStates = DFA29_transitionS.length;
+		DFA29_transition = new short[numStates][];
+		for (int i = 0; i < numStates; i++) {
+			DFA29_transition[i] = DFA.unpackEncodedString(DFA29_transitionS[i]);
+		}
+	}
+
+	class DFA29 extends DFA {
+
+		public DFA29(BaseRecognizer recognizer) {
+			this.recognizer = recognizer;
+			this.decisionNumber = 29;
+			this.eot = DFA29_eot;
+			this.eof = DFA29_eof;
+			this.min = DFA29_min;
+			this.max = DFA29_max;
+			this.accept = DFA29_accept;
+			this.special = DFA29_special;
+			this.transition = DFA29_transition;
+		}
+
+		public String getDescription() {
+			return "803:3: ( (lv_type_4_0= ruleJvmTypeReference ) )?";
+		}
+	}
+
+	static final String DFA62_eotS = "\14\uffff";
+	static final String DFA62_eofS = "\14\uffff";
+	static final String DFA62_minS = "\11\4\3\uffff";
+	static final String DFA62_maxS = "\11\117\3\uffff";
+	static final String DFA62_acceptS = "\11\uffff\1\1\1\2\1\3";
+	static final String DFA62_specialS = "\14\uffff}>";
+	static final String[] DFA62_transitionS = {
+			"\1\11\17\uffff\1\4\13\uffff\1\11\1\uffff\2\11\2\uffff\1\13\1"
+					+ "\1\1\2\1\3\1\5\1\6\1\7\1\10\2\11\2\12\1\11\34\uffff\1\11",
+			"\1\11\17\uffff\1\4\13\uffff\1\11\1\uffff\2\11\2\uffff\1\13"
+					+ "\1\1\1\2\1\3\1\5\1\6\1\7\1\10\2\11\2\12\1\11\34\uffff\1\11",
+			"\1\11\17\uffff\1\4\13\uffff\1\11\1\uffff\2\11\2\uffff\1\13"
+					+ "\1\1\1\2\1\3\1\5\1\6\1\7\1\10\2\11\2\12\1\11\34\uffff\1\11",
+			"\1\11\17\uffff\1\4\13\uffff\1\11\1\uffff\2\11\2\uffff\1\13"
+					+ "\1\1\1\2\1\3\1\5\1\6\1\7\1\10\2\11\2\12\1\11\34\uffff\1\11",
+			"\1\11\17\uffff\1\4\13\uffff\1\11\1\uffff\2\11\2\uffff\1\13"
+					+ "\1\1\1\2\1\3\1\5\1\6\1\7\1\10\2\11\2\12\1\11\34\uffff\1\11",
+			"\1\11\17\uffff\1\4\13\uffff\1\11\1\uffff\2\11\2\uffff\1\13"
+					+ "\1\1\1\2\1\3\1\5\1\6\1\7\1\10\2\11\2\12\1\11\34\uffff\1\11",
+			"\1\11\17\uffff\1\4\13\uffff\1\11\1\uffff\2\11\2\uffff\1\13"
+					+ "\1\1\1\2\1\3\1\5\1\6\1\7\1\10\2\11\2\12\1\11\34\uffff\1\11",
+			"\1\11\17\uffff\1\4\13\uffff\1\11\1\uffff\2\11\2\uffff\1\13"
+					+ "\1\1\1\2\1\3\1\5\1\6\1\7\1\10\2\11\2\12\1\11\34\uffff\1\11",
+			"\1\11\17\uffff\1\4\13\uffff\1\11\1\uffff\2\11\2\uffff\1\13"
+					+ "\1\1\1\2\1\3\1\5\1\6\1\7\1\10\2\11\2\12\1\11\34\uffff\1\11", "", "", "" };
+
+	static final short[] DFA62_eot = DFA.unpackEncodedString(DFA62_eotS);
+	static final short[] DFA62_eof = DFA.unpackEncodedString(DFA62_eofS);
+	static final char[] DFA62_min = DFA.unpackEncodedStringToUnsignedChars(DFA62_minS);
+	static final char[] DFA62_max = DFA.unpackEncodedStringToUnsignedChars(DFA62_maxS);
+	static final short[] DFA62_accept = DFA.unpackEncodedString(DFA62_acceptS);
+	static final short[] DFA62_special = DFA.unpackEncodedString(DFA62_specialS);
+	static final short[][] DFA62_transition;
+
+	static {
+		int numStates = DFA62_transitionS.length;
+		DFA62_transition = new short[numStates][];
+		for (int i = 0; i < numStates; i++) {
+			DFA62_transition[i] = DFA.unpackEncodedString(DFA62_transitionS[i]);
+		}
+	}
+
+	class DFA62 extends DFA {
+
+		public DFA62(BaseRecognizer recognizer) {
+			this.recognizer = recognizer;
+			this.decisionNumber = 62;
+			this.eot = DFA62_eot;
+			this.eof = DFA62_eof;
+			this.min = DFA62_min;
+			this.max = DFA62_max;
+			this.accept = DFA62_accept;
+			this.special = DFA62_special;
+			this.transition = DFA62_transition;
+		}
+
+		public String getDescription() {
+			return "947:3: ( ( () ( (lv_modifiers_3_0= ruleCommonModifier ) )* ( ( ( (lv_modifiers_4_0= ruleFieldModifier ) ) ( (lv_modifiers_5_0= ruleCommonModifier ) )* ( (lv_type_6_0= ruleJvmTypeReference ) )? ( (lv_name_7_0= ruleValidID ) ) ) | ( ( (lv_modifiers_8_0= 'extension' ) ) ( ( (lv_modifiers_9_0= ruleFieldModifier ) ) | ( (lv_modifiers_10_0= ruleCommonModifier ) ) )* ( (lv_type_11_0= ruleJvmTypeReference ) ) ( (lv_name_12_0= ruleValidID ) )? ) | ( ( (lv_modifiers_13_0= ruleFieldModifier ) ) ( (lv_modifiers_14_0= ruleCommonModifier ) )* ( (lv_modifiers_15_0= 'extension' ) ) ( (lv_modifiers_16_0= ruleCommonModifier ) )* ( (lv_type_17_0= ruleJvmTypeReference ) ) ( (lv_name_18_0= ruleValidID ) )? ) | ( ( (lv_type_19_0= ruleJvmTypeReference ) ) ( (lv_name_20_0= ruleValidID ) ) ) ) (otherlv_21= '=' ( (lv_initialValue_22_0= ruleXExpression ) ) )? (otherlv_23= ';' )? ) | ( () ( (lv_modifiers_25_0= ruleCommonModifier ) )* ( (lv_modifiers_26_0= ruleMethodModifier ) ) ( ( (lv_modifiers_27_0= ruleCommonModifier ) ) | ( (lv_modifiers_28_0= ruleMethodModifier ) ) )* (otherlv_29= '<' ( (lv_typeParameters_30_0= ruleJvmTypeParameter ) ) (otherlv_31= ',' ( (lv_typeParameters_32_0= ruleJvmTypeParameter ) ) )* otherlv_33= '>' )? ( ( ( ( ( ( ruleJvmTypeReference ) ) ( ( ruleCreateExtensionInfo ) ) ( ( ruleValidID ) ) '(' ) )=> ( ( (lv_returnType_34_0= ruleJvmTypeReference ) ) ( (lv_createExtensionInfo_35_0= ruleCreateExtensionInfo ) ) ( (lv_name_36_0= ruleValidID ) ) otherlv_37= '(' ) ) | ( ( ( ( ( ruleJvmTypeReference ) ) ( ( ruleValidID ) ) '(' ) )=> ( ( (lv_returnType_38_0= ruleJvmTypeReference ) ) ( (lv_name_39_0= ruleValidID ) ) otherlv_40= '(' ) ) | ( ( ( ( ( ruleCreateExtensionInfo ) ) ( ( ruleValidID ) ) '(' ) )=> ( ( (lv_createExtensionInfo_41_0= ruleCreateExtensionInfo ) ) ( (lv_name_42_0= ruleValidID ) ) otherlv_43= '(' ) ) | ( ( (lv_name_44_0= ruleValidID ) ) otherlv_45= '(' ) ) ( ( (lv_parameters_46_0= ruleParameter ) ) (otherlv_47= ',' ( (lv_parameters_48_0= ruleParameter ) ) )* )? otherlv_49= ')' (otherlv_50= 'throws' ( (lv_exceptions_51_0= ruleJvmTypeReference ) ) (otherlv_52= ',' ( (lv_exceptions_53_0= ruleJvmTypeReference ) ) )* )? ( ( (lv_expression_54_0= ruleXBlockExpression ) ) | ( (lv_expression_55_0= ruleRichString ) ) | otherlv_56= ';' )? ) | ( () ( (lv_modifiers_58_0= ruleCommonModifier ) )* otherlv_59= 'new' (otherlv_60= '<' ( (lv_typeParameters_61_0= ruleJvmTypeParameter ) ) (otherlv_62= ',' ( (lv_typeParameters_63_0= ruleJvmTypeParameter ) ) )* otherlv_64= '>' )? otherlv_65= '(' ( ( (lv_parameters_66_0= ruleParameter ) ) (otherlv_67= ',' ( (lv_parameters_68_0= ruleParameter ) ) )* )? otherlv_69= ')' (otherlv_70= 'throws' ( (lv_exceptions_71_0= ruleJvmTypeReference ) ) (otherlv_72= ',' ( (lv_exceptions_73_0= ruleJvmTypeReference ) ) )* )? ( (lv_expression_74_0= ruleXBlockExpression ) ) ) )";
+		}
+	}
+
+	static final String DFA42_eotS = "\17\uffff";
+	static final String DFA42_eofS = "\17\uffff";
+	static final String DFA42_minS = "\3\4\2\uffff\10\4\2\uffff";
+	static final String DFA42_maxS = "\3\117\2\uffff\10\117\2\uffff";
+	static final String DFA42_acceptS = "\3\uffff\1\2\1\4\10\uffff\1\3\1\1";
+	static final String DFA42_specialS = "\17\uffff}>";
+	static final String[] DFA42_transitionS = {
+			"\1\4\33\uffff\1\4\1\uffff\1\3\1\4\12\uffff\1\1\1\2\2\uffff\1" + "\4\34\uffff\1\4",
+			"\1\16\17\uffff\1\10\13\uffff\1\16\1\uffff\1\15\1\16\3\uffff"
+					+ "\1\5\1\6\1\7\1\11\1\12\1\13\1\14\4\uffff\1\16\34\uffff\1\16",
+			"\1\16\17\uffff\1\10\13\uffff\1\16\1\uffff\1\15\1\16\3\uffff"
+					+ "\1\5\1\6\1\7\1\11\1\12\1\13\1\14\4\uffff\1\16\34\uffff\1\16",
+			"",
+			"",
+			"\1\16\17\uffff\1\10\13\uffff\1\16\1\uffff\1\15\1\16\3\uffff"
+					+ "\1\5\1\6\1\7\1\11\1\12\1\13\1\14\4\uffff\1\16\34\uffff\1\16",
+			"\1\16\17\uffff\1\10\13\uffff\1\16\1\uffff\1\15\1\16\3\uffff"
+					+ "\1\5\1\6\1\7\1\11\1\12\1\13\1\14\4\uffff\1\16\34\uffff\1\16",
+			"\1\16\17\uffff\1\10\13\uffff\1\16\1\uffff\1\15\1\16\3\uffff"
+					+ "\1\5\1\6\1\7\1\11\1\12\1\13\1\14\4\uffff\1\16\34\uffff\1\16",
+			"\1\16\17\uffff\1\10\13\uffff\1\16\1\uffff\1\15\1\16\3\uffff"
+					+ "\1\5\1\6\1\7\1\11\1\12\1\13\1\14\4\uffff\1\16\34\uffff\1\16",
+			"\1\16\17\uffff\1\10\13\uffff\1\16\1\uffff\1\15\1\16\3\uffff"
+					+ "\1\5\1\6\1\7\1\11\1\12\1\13\1\14\4\uffff\1\16\34\uffff\1\16",
+			"\1\16\17\uffff\1\10\13\uffff\1\16\1\uffff\1\15\1\16\3\uffff"
+					+ "\1\5\1\6\1\7\1\11\1\12\1\13\1\14\4\uffff\1\16\34\uffff\1\16",
+			"\1\16\17\uffff\1\10\13\uffff\1\16\1\uffff\1\15\1\16\3\uffff"
+					+ "\1\5\1\6\1\7\1\11\1\12\1\13\1\14\4\uffff\1\16\34\uffff\1\16",
+			"\1\16\17\uffff\1\10\13\uffff\1\16\1\uffff\1\15\1\16\3\uffff"
+					+ "\1\5\1\6\1\7\1\11\1\12\1\13\1\14\4\uffff\1\16\34\uffff\1\16", "", "" };
+
+	static final short[] DFA42_eot = DFA.unpackEncodedString(DFA42_eotS);
+	static final short[] DFA42_eof = DFA.unpackEncodedString(DFA42_eofS);
+	static final char[] DFA42_min = DFA.unpackEncodedStringToUnsignedChars(DFA42_minS);
+	static final char[] DFA42_max = DFA.unpackEncodedStringToUnsignedChars(DFA42_maxS);
+	static final short[] DFA42_accept = DFA.unpackEncodedString(DFA42_acceptS);
+	static final short[] DFA42_special = DFA.unpackEncodedString(DFA42_specialS);
+	static final short[][] DFA42_transition;
+
+	static {
+		int numStates = DFA42_transitionS.length;
+		DFA42_transition = new short[numStates][];
+		for (int i = 0; i < numStates; i++) {
+			DFA42_transition[i] = DFA.unpackEncodedString(DFA42_transitionS[i]);
+		}
+	}
+
+	class DFA42 extends DFA {
+
+		public DFA42(BaseRecognizer recognizer) {
+			this.recognizer = recognizer;
+			this.decisionNumber = 42;
+			this.eot = DFA42_eot;
+			this.eof = DFA42_eof;
+			this.min = DFA42_min;
+			this.max = DFA42_max;
+			this.accept = DFA42_accept;
+			this.special = DFA42_special;
+			this.transition = DFA42_transition;
+		}
+
+		public String getDescription() {
+			return "971:3: ( ( ( (lv_modifiers_4_0= ruleFieldModifier ) ) ( (lv_modifiers_5_0= ruleCommonModifier ) )* ( (lv_type_6_0= ruleJvmTypeReference ) )? ( (lv_name_7_0= ruleValidID ) ) ) | ( ( (lv_modifiers_8_0= 'extension' ) ) ( ( (lv_modifiers_9_0= ruleFieldModifier ) ) | ( (lv_modifiers_10_0= ruleCommonModifier ) ) )* ( (lv_type_11_0= ruleJvmTypeReference ) ) ( (lv_name_12_0= ruleValidID ) )? ) | ( ( (lv_modifiers_13_0= ruleFieldModifier ) ) ( (lv_modifiers_14_0= ruleCommonModifier ) )* ( (lv_modifiers_15_0= 'extension' ) ) ( (lv_modifiers_16_0= ruleCommonModifier ) )* ( (lv_type_17_0= ruleJvmTypeReference ) ) ( (lv_name_18_0= ruleValidID ) )? ) | ( ( (lv_type_19_0= ruleJvmTypeReference ) ) ( (lv_name_20_0= ruleValidID ) ) ) )";
+		}
+	}
+
+	static final String DFA36_eotS = "\17\uffff";
+	static final String DFA36_eofS = "\1\uffff\3\5\2\uffff\3\4\6\uffff";
+	static final String DFA36_minS = "\4\4\2\uffff\11\4";
+	static final String DFA36_maxS = "\1\117\3\136\2\uffff\11\136";
+	static final String DFA36_acceptS = "\4\uffff\1\1\1\2\11\uffff";
+	static final String DFA36_specialS = "\17\uffff}>";
+	static final String[] DFA36_transitionS = {
+			"\1\1\33\uffff\1\3\2\uffff\1\4\16\uffff\1\2\34\uffff\1\4",
+			"\1\6\17\uffff\2\5\1\uffff\1\4\5\uffff\1\5\2\uffff\1\10\3\5"
+					+ "\2\uffff\14\5\1\7\14\uffff\1\5\17\uffff\1\5\12\uffff\1\4\3\uffff" + "\1\4",
+			"\1\6\17\uffff\2\5\1\uffff\1\4\5\uffff\1\5\2\uffff\1\10\3\5"
+					+ "\2\uffff\14\5\1\7\14\uffff\1\5\17\uffff\1\5\12\uffff\1\4\3\uffff" + "\1\4",
+			"\1\6\17\uffff\2\5\1\uffff\1\4\5\uffff\1\5\2\uffff\1\10\3\5"
+					+ "\2\uffff\14\5\1\7\14\uffff\1\5\17\uffff\1\5\12\uffff\1\4\3\uffff" + "\1\4",
+			"",
+			"",
+			"\1\11\17\uffff\2\4\1\uffff\1\5\5\uffff\1\4\2\uffff\1\13\3\4"
+					+ "\2\uffff\14\4\1\12\14\uffff\1\4\17\uffff\1\4\12\uffff\1\5\3" + "\uffff\1\5",
+			"\1\11\17\uffff\2\4\1\uffff\1\5\5\uffff\1\4\2\uffff\1\13\3\4"
+					+ "\2\uffff\14\4\1\12\14\uffff\1\4\17\uffff\1\4\12\uffff\1\5\3" + "\uffff\1\5",
+			"\1\11\17\uffff\2\4\1\uffff\1\5\5\uffff\1\4\2\uffff\1\13\3\4"
+					+ "\2\uffff\14\4\1\12\14\uffff\1\4\17\uffff\1\4\12\uffff\1\5\3" + "\uffff\1\5",
+			"\1\14\17\uffff\2\5\1\uffff\1\4\5\uffff\1\5\2\uffff\1\16\3\5"
+					+ "\2\uffff\14\5\1\15\14\uffff\1\5\17\uffff\1\5\12\uffff\1\4\3" + "\uffff\1\4",
+			"\1\14\17\uffff\2\5\1\uffff\1\4\5\uffff\1\5\2\uffff\1\16\3\5"
+					+ "\2\uffff\14\5\1\15\14\uffff\1\5\17\uffff\1\5\12\uffff\1\4\3" + "\uffff\1\4",
+			"\1\14\17\uffff\2\5\1\uffff\1\4\5\uffff\1\5\2\uffff\1\16\3\5"
+					+ "\2\uffff\14\5\1\15\14\uffff\1\5\17\uffff\1\5\12\uffff\1\4\3" + "\uffff\1\4",
+			"\1\11\17\uffff\2\4\1\uffff\1\5\5\uffff\1\4\2\uffff\1\13\3\4"
+					+ "\2\uffff\14\4\1\12\14\uffff\1\4\17\uffff\1\4\12\uffff\1\5\3" + "\uffff\1\5",
+			"\1\11\17\uffff\2\4\1\uffff\1\5\5\uffff\1\4\2\uffff\1\13\3\4"
+					+ "\2\uffff\14\4\1\12\14\uffff\1\4\17\uffff\1\4\12\uffff\1\5\3" + "\uffff\1\5",
+			"\1\11\17\uffff\2\4\1\uffff\1\5\5\uffff\1\4\2\uffff\1\13\3\4"
+					+ "\2\uffff\14\4\1\12\14\uffff\1\4\17\uffff\1\4\12\uffff\1\5\3" + "\uffff\1\5" };
+
+	static final short[] DFA36_eot = DFA.unpackEncodedString(DFA36_eotS);
+	static final short[] DFA36_eof = DFA.unpackEncodedString(DFA36_eofS);
+	static final char[] DFA36_min = DFA.unpackEncodedStringToUnsignedChars(DFA36_minS);
+	static final char[] DFA36_max = DFA.unpackEncodedStringToUnsignedChars(DFA36_maxS);
+	static final short[] DFA36_accept = DFA.unpackEncodedString(DFA36_acceptS);
+	static final short[] DFA36_special = DFA.unpackEncodedString(DFA36_specialS);
+	static final short[][] DFA36_transition;
+
+	static {
+		int numStates = DFA36_transitionS.length;
+		DFA36_transition = new short[numStates][];
+		for (int i = 0; i < numStates; i++) {
+			DFA36_transition[i] = DFA.unpackEncodedString(DFA36_transitionS[i]);
+		}
+	}
+
+	class DFA36 extends DFA {
+
+		public DFA36(BaseRecognizer recognizer) {
+			this.recognizer = recognizer;
+			this.decisionNumber = 36;
+			this.eot = DFA36_eot;
+			this.eof = DFA36_eof;
+			this.min = DFA36_min;
+			this.max = DFA36_max;
+			this.accept = DFA36_accept;
+			this.special = DFA36_special;
+			this.transition = DFA36_transition;
+		}
+
+		public String getDescription() {
+			return "1007:3: ( (lv_type_6_0= ruleJvmTypeReference ) )?";
+		}
+	}
+
+	static final String DFA38_eotS = "\14\uffff";
+	static final String DFA38_eofS = "\1\4\3\5\10\uffff";
+	static final String DFA38_minS = "\4\4\2\uffff\6\4";
+	static final String DFA38_maxS = "\1\117\3\136\2\uffff\6\136";
+	static final String DFA38_acceptS = "\4\uffff\1\2\1\1\6\uffff";
+	static final String DFA38_specialS = "\14\uffff}>";
+	static final String[] DFA38_transitionS = {
+			"\1\1\17\uffff\2\4\7\uffff\1\4\2\uffff\1\3\3\4\2\uffff\14\4\1" + "\2\14\uffff\1\4\17\uffff\1\4",
+			"\1\6\17\uffff\2\5\1\uffff\1\4\5\uffff\1\5\2\uffff\1\10\3\5"
+					+ "\2\uffff\14\5\1\7\14\uffff\1\5\17\uffff\1\5\12\uffff\1\4\3\uffff" + "\1\4",
+			"\1\6\17\uffff\2\5\1\uffff\1\4\5\uffff\1\5\2\uffff\1\10\3\5"
+					+ "\2\uffff\14\5\1\7\14\uffff\1\5\17\uffff\1\5\12\uffff\1\4\3\uffff" + "\1\4",
+			"\1\6\17\uffff\2\5\1\uffff\1\4\5\uffff\1\5\2\uffff\1\10\3\5"
+					+ "\2\uffff\14\5\1\7\14\uffff\1\5\17\uffff\1\5\12\uffff\1\4\3\uffff" + "\1\4",
+			"",
+			"",
+			"\1\11\17\uffff\2\4\1\uffff\1\5\5\uffff\1\4\2\uffff\1\13\3\4"
+					+ "\2\uffff\14\4\1\12\14\uffff\1\4\17\uffff\1\4\12\uffff\1\5\3" + "\uffff\1\5",
+			"\1\11\17\uffff\2\4\1\uffff\1\5\5\uffff\1\4\2\uffff\1\13\3\4"
+					+ "\2\uffff\14\4\1\12\14\uffff\1\4\17\uffff\1\4\12\uffff\1\5\3" + "\uffff\1\5",
+			"\1\11\17\uffff\2\4\1\uffff\1\5\5\uffff\1\4\2\uffff\1\13\3\4"
+					+ "\2\uffff\14\4\1\12\14\uffff\1\4\17\uffff\1\4\12\uffff\1\5\3" + "\uffff\1\5",
+			"\1\6\17\uffff\2\5\1\uffff\1\4\5\uffff\1\5\2\uffff\1\10\3\5"
+					+ "\2\uffff\14\5\1\7\14\uffff\1\5\17\uffff\1\5\12\uffff\1\4\3\uffff" + "\1\4",
+			"\1\6\17\uffff\2\5\1\uffff\1\4\5\uffff\1\5\2\uffff\1\10\3\5"
+					+ "\2\uffff\14\5\1\7\14\uffff\1\5\17\uffff\1\5\12\uffff\1\4\3\uffff" + "\1\4",
+			"\1\6\17\uffff\2\5\1\uffff\1\4\5\uffff\1\5\2\uffff\1\10\3\5"
+					+ "\2\uffff\14\5\1\7\14\uffff\1\5\17\uffff\1\5\12\uffff\1\4\3\uffff" + "\1\4" };
+
+	static final short[] DFA38_eot = DFA.unpackEncodedString(DFA38_eotS);
+	static final short[] DFA38_eof = DFA.unpackEncodedString(DFA38_eofS);
+	static final char[] DFA38_min = DFA.unpackEncodedStringToUnsignedChars(DFA38_minS);
+	static final char[] DFA38_max = DFA.unpackEncodedStringToUnsignedChars(DFA38_maxS);
+	static final short[] DFA38_accept = DFA.unpackEncodedString(DFA38_acceptS);
+	static final short[] DFA38_special = DFA.unpackEncodedString(DFA38_specialS);
+	static final short[][] DFA38_transition;
+
+	static {
+		int numStates = DFA38_transitionS.length;
+		DFA38_transition = new short[numStates][];
+		for (int i = 0; i < numStates; i++) {
+			DFA38_transition[i] = DFA.unpackEncodedString(DFA38_transitionS[i]);
+		}
+	}
+
+	class DFA38 extends DFA {
+
+		public DFA38(BaseRecognizer recognizer) {
+			this.recognizer = recognizer;
+			this.decisionNumber = 38;
+			this.eot = DFA38_eot;
+			this.eof = DFA38_eof;
+			this.min = DFA38_min;
+			this.max = DFA38_max;
+			this.accept = DFA38_accept;
+			this.special = DFA38_special;
+			this.transition = DFA38_transition;
+		}
+
+		public String getDescription() {
+			return "1114:2: ( (lv_name_12_0= ruleValidID ) )?";
+		}
+	}
+
+	static final String DFA41_eotS = "\14\uffff";
+	static final String DFA41_eofS = "\1\4\3\5\10\uffff";
+	static final String DFA41_minS = "\4\4\2\uffff\6\4";
+	static final String DFA41_maxS = "\1\117\3\136\2\uffff\6\136";
+	static final String DFA41_acceptS = "\4\uffff\1\2\1\1\6\uffff";
+	static final String DFA41_specialS = "\14\uffff}>";
+	static final String[] DFA41_transitionS = {
+			"\1\1\17\uffff\2\4\7\uffff\1\4\2\uffff\1\3\3\4\2\uffff\14\4\1" + "\2\14\uffff\1\4\17\uffff\1\4",
+			"\1\6\17\uffff\2\5\1\uffff\1\4\5\uffff\1\5\2\uffff\1\10\3\5"
+					+ "\2\uffff\14\5\1\7\14\uffff\1\5\17\uffff\1\5\12\uffff\1\4\3\uffff" + "\1\4",
+			"\1\6\17\uffff\2\5\1\uffff\1\4\5\uffff\1\5\2\uffff\1\10\3\5"
+					+ "\2\uffff\14\5\1\7\14\uffff\1\5\17\uffff\1\5\12\uffff\1\4\3\uffff" + "\1\4",
+			"\1\6\17\uffff\2\5\1\uffff\1\4\5\uffff\1\5\2\uffff\1\10\3\5"
+					+ "\2\uffff\14\5\1\7\14\uffff\1\5\17\uffff\1\5\12\uffff\1\4\3\uffff" + "\1\4",
+			"",
+			"",
+			"\1\11\17\uffff\2\4\1\uffff\1\5\5\uffff\1\4\2\uffff\1\13\3\4"
+					+ "\2\uffff\14\4\1\12\14\uffff\1\4\17\uffff\1\4\12\uffff\1\5\3" + "\uffff\1\5",
+			"\1\11\17\uffff\2\4\1\uffff\1\5\5\uffff\1\4\2\uffff\1\13\3\4"
+					+ "\2\uffff\14\4\1\12\14\uffff\1\4\17\uffff\1\4\12\uffff\1\5\3" + "\uffff\1\5",
+			"\1\11\17\uffff\2\4\1\uffff\1\5\5\uffff\1\4\2\uffff\1\13\3\4"
+					+ "\2\uffff\14\4\1\12\14\uffff\1\4\17\uffff\1\4\12\uffff\1\5\3" + "\uffff\1\5",
+			"\1\6\17\uffff\2\5\1\uffff\1\4\5\uffff\1\5\2\uffff\1\10\3\5"
+					+ "\2\uffff\14\5\1\7\14\uffff\1\5\17\uffff\1\5\12\uffff\1\4\3\uffff" + "\1\4",
+			"\1\6\17\uffff\2\5\1\uffff\1\4\5\uffff\1\5\2\uffff\1\10\3\5"
+					+ "\2\uffff\14\5\1\7\14\uffff\1\5\17\uffff\1\5\12\uffff\1\4\3\uffff" + "\1\4",
+			"\1\6\17\uffff\2\5\1\uffff\1\4\5\uffff\1\5\2\uffff\1\10\3\5"
+					+ "\2\uffff\14\5\1\7\14\uffff\1\5\17\uffff\1\5\12\uffff\1\4\3\uffff" + "\1\4" };
+
+	static final short[] DFA41_eot = DFA.unpackEncodedString(DFA41_eotS);
+	static final short[] DFA41_eof = DFA.unpackEncodedString(DFA41_eofS);
+	static final char[] DFA41_min = DFA.unpackEncodedStringToUnsignedChars(DFA41_minS);
+	static final char[] DFA41_max = DFA.unpackEncodedStringToUnsignedChars(DFA41_maxS);
+	static final short[] DFA41_accept = DFA.unpackEncodedString(DFA41_acceptS);
+	static final short[] DFA41_special = DFA.unpackEncodedString(DFA41_specialS);
+	static final short[][] DFA41_transition;
+
+	static {
+		int numStates = DFA41_transitionS.length;
+		DFA41_transition = new short[numStates][];
+		for (int i = 0; i < numStates; i++) {
+			DFA41_transition[i] = DFA.unpackEncodedString(DFA41_transitionS[i]);
+		}
+	}
+
+	class DFA41 extends DFA {
+
+		public DFA41(BaseRecognizer recognizer) {
+			this.recognizer = recognizer;
+			this.decisionNumber = 41;
+			this.eot = DFA41_eot;
+			this.eof = DFA41_eof;
+			this.min = DFA41_min;
+			this.max = DFA41_max;
+			this.accept = DFA41_accept;
+			this.special = DFA41_special;
+			this.transition = DFA41_transition;
+		}
+
+		public String getDescription() {
+			return "1220:2: ( (lv_name_18_0= ruleValidID ) )?";
+		}
+	}
+
+	static final String DFA49_eotS = "\12\uffff";
+	static final String DFA49_eofS = "\12\uffff";
+	static final String DFA49_minS = "\1\4\5\0\4\uffff";
+	static final String DFA49_maxS = "\1\117\5\0\4\uffff";
+	static final String DFA49_acceptS = "\6\uffff\1\1\1\2\1\4\1\3";
+	static final String DFA49_specialS = "\1\uffff\1\0\1\1\1\2\1\3\1\4\4\uffff}>";
+	static final String[] DFA49_transitionS = { "\1\1\33\uffff\1\3\2\uffff\1\4\16\uffff\1\2\34\uffff\1\5", "\1\uffff",
+			"\1\uffff", "\1\uffff", "\1\uffff", "\1\uffff", "", "", "", "" };
+
+	static final short[] DFA49_eot = DFA.unpackEncodedString(DFA49_eotS);
+	static final short[] DFA49_eof = DFA.unpackEncodedString(DFA49_eofS);
+	static final char[] DFA49_min = DFA.unpackEncodedStringToUnsignedChars(DFA49_minS);
+	static final char[] DFA49_max = DFA.unpackEncodedStringToUnsignedChars(DFA49_maxS);
+	static final short[] DFA49_accept = DFA.unpackEncodedString(DFA49_acceptS);
+	static final short[] DFA49_special = DFA.unpackEncodedString(DFA49_specialS);
+	static final short[][] DFA49_transition;
+
+	static {
+		int numStates = DFA49_transitionS.length;
+		DFA49_transition = new short[numStates][];
+		for (int i = 0; i < numStates; i++) {
+			DFA49_transition[i] = DFA.unpackEncodedString(DFA49_transitionS[i]);
+		}
+	}
+
+	class DFA49 extends DFA {
+
+		public DFA49(BaseRecognizer recognizer) {
+			this.recognizer = recognizer;
+			this.decisionNumber = 49;
+			this.eot = DFA49_eot;
+			this.eof = DFA49_eof;
+			this.min = DFA49_min;
+			this.max = DFA49_max;
+			this.accept = DFA49_accept;
+			this.special = DFA49_special;
+			this.transition = DFA49_transition;
+		}
+
+		public String getDescription() {
+			return "1429:3: ( ( ( ( ( ( ruleJvmTypeReference ) ) ( ( ruleCreateExtensionInfo ) ) ( ( ruleValidID ) ) '(' ) )=> ( ( (lv_returnType_34_0= ruleJvmTypeReference ) ) ( (lv_createExtensionInfo_35_0= ruleCreateExtensionInfo ) ) ( (lv_name_36_0= ruleValidID ) ) otherlv_37= '(' ) ) | ( ( ( ( ( ruleJvmTypeReference ) ) ( ( ruleValidID ) ) '(' ) )=> ( ( (lv_returnType_38_0= ruleJvmTypeReference ) ) ( (lv_name_39_0= ruleValidID ) ) otherlv_40= '(' ) ) | ( ( ( ( ( ruleCreateExtensionInfo ) ) ( ( ruleValidID ) ) '(' ) )=> ( ( (lv_createExtensionInfo_41_0= ruleCreateExtensionInfo ) ) ( (lv_name_42_0= ruleValidID ) ) otherlv_43= '(' ) ) | ( ( (lv_name_44_0= ruleValidID ) ) otherlv_45= '(' ) )";
+		}
+
+		public int specialStateTransition(int s, IntStream _input) throws NoViableAltException {
+			TokenStream input = (TokenStream) _input;
+			int _s = s;
+			switch (s) {
+				case 0:
+					int LA49_1 = input.LA(1);
+
+					int index49_1 = input.index();
+					input.rewind();
+					s = -1;
+					if ((synpred1_InternalXtend())) {
+						s = 6;
+					}
+
+					else if ((synpred2_InternalXtend())) {
+						s = 7;
+					}
+
+					else if ((true)) {
+						s = 8;
+					}
+
+					input.seek(index49_1);
+					if (s >= 0)
+						return s;
+					break;
+				case 1:
+					int LA49_2 = input.LA(1);
+
+					int index49_2 = input.index();
+					input.rewind();
+					s = -1;
+					if ((synpred1_InternalXtend())) {
+						s = 6;
+					}
+
+					else if ((synpred2_InternalXtend())) {
+						s = 7;
+					}
+
+					else if ((synpred3_InternalXtend())) {
+						s = 9;
+					}
+
+					else if ((true)) {
+						s = 8;
+					}
+
+					input.seek(index49_2);
+					if (s >= 0)
+						return s;
+					break;
+				case 2:
+					int LA49_3 = input.LA(1);
+
+					int index49_3 = input.index();
+					input.rewind();
+					s = -1;
+					if ((synpred1_InternalXtend())) {
+						s = 6;
+					}
+
+					else if ((synpred2_InternalXtend())) {
+						s = 7;
+					}
+
+					else if ((true)) {
+						s = 8;
+					}
+
+					input.seek(index49_3);
+					if (s >= 0)
+						return s;
+					break;
+				case 3:
+					int LA49_4 = input.LA(1);
+
+					int index49_4 = input.index();
+					input.rewind();
+					s = -1;
+					if ((synpred1_InternalXtend())) {
+						s = 6;
+					}
+
+					else if ((synpred2_InternalXtend())) {
+						s = 7;
+					}
+
+					input.seek(index49_4);
+					if (s >= 0)
+						return s;
+					break;
+				case 4:
+					int LA49_5 = input.LA(1);
+
+					int index49_5 = input.index();
+					input.rewind();
+					s = -1;
+					if ((synpred1_InternalXtend())) {
+						s = 6;
+					}
+
+					else if ((synpred2_InternalXtend())) {
+						s = 7;
+					}
+
+					input.seek(index49_5);
+					if (s >= 0)
+						return s;
+					break;
+			}
+			if (state.backtracking > 0) {
+				state.failed = true;
+				return -1;
+			}
+			NoViableAltException nvae = new NoViableAltException(getDescription(), 49, _s, input);
+			error(nvae);
+			throw nvae;
+		}
+	}
+
+	static final String DFA99_eotS = "\37\uffff";
+	static final String DFA99_eofS = "\1\2\36\uffff";
+	static final String DFA99_minS = "\1\4\1\0\35\uffff";
+	static final String DFA99_maxS = "\1\117\1\0\35\uffff";
+	static final String DFA99_acceptS = "\2\uffff\1\2\33\uffff\1\1";
+	static final String DFA99_specialS = "\1\uffff\1\0\35\uffff}>";
+	static final String[] DFA99_transitionS = {
+			"\1\2\17\uffff\3\2\1\uffff\1\2\4\uffff\4\2\1\uffff\1\2\1\1\1" + "\2\1\uffff\15\2\14\uffff\2\2\16\uffff\1\2",
+			"\1\uffff", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "",
+			"", "", "", "", "" };
+
+	static final short[] DFA99_eot = DFA.unpackEncodedString(DFA99_eotS);
+	static final short[] DFA99_eof = DFA.unpackEncodedString(DFA99_eofS);
+	static final char[] DFA99_min = DFA.unpackEncodedStringToUnsignedChars(DFA99_minS);
+	static final char[] DFA99_max = DFA.unpackEncodedStringToUnsignedChars(DFA99_maxS);
+	static final short[] DFA99_accept = DFA.unpackEncodedString(DFA99_acceptS);
+	static final short[] DFA99_special = DFA.unpackEncodedString(DFA99_specialS);
+	static final short[][] DFA99_transition;
+
+	static {
+		int numStates = DFA99_transitionS.length;
+		DFA99_transition = new short[numStates][];
+		for (int i = 0; i < numStates; i++) {
+			DFA99_transition[i] = DFA.unpackEncodedString(DFA99_transitionS[i]);
+		}
+	}
+
+	class DFA99 extends DFA {
+
+		public DFA99(BaseRecognizer recognizer) {
+			this.recognizer = recognizer;
+			this.decisionNumber = 99;
+			this.eot = DFA99_eot;
+			this.eof = DFA99_eof;
+			this.min = DFA99_min;
+			this.max = DFA99_max;
+			this.accept = DFA99_accept;
+			this.special = DFA99_special;
+			this.transition = DFA99_transition;
+		}
+
+		public String getDescription() {
+			return "3825:2: ( ( ( '(' )=>otherlv_3= '(' ) ( ( ( (lv_elementValuePairs_4_0= ruleXAnnotationElementValuePair ) ) (otherlv_5= ',' ( (lv_elementValuePairs_6_0= ruleXAnnotationElementValuePair ) ) )* ) | ( (lv_value_7_0= ruleXAnnotationElementValue ) ) )? otherlv_8= ')' )?";
+		}
+
+		public int specialStateTransition(int s, IntStream _input) throws NoViableAltException {
+			TokenStream input = (TokenStream) _input;
+			int _s = s;
+			switch (s) {
+				case 0:
+					int LA99_1 = input.LA(1);
+
+					int index99_1 = input.index();
+					input.rewind();
+					s = -1;
+					if ((synpred6_InternalXtend())) {
+						s = 30;
+					}
+
+					else if ((true)) {
+						s = 2;
+					}
+
+					input.seek(index99_1);
+					if (s >= 0)
+						return s;
+					break;
+			}
+			if (state.backtracking > 0) {
+				state.failed = true;
+				return -1;
+			}
+			NoViableAltException nvae = new NoViableAltException(getDescription(), 99, _s, input);
+			error(nvae);
+			throw nvae;
+		}
+	}
+
+	static final String DFA104_eotS = "\30\uffff";
+	static final String DFA104_eofS = "\1\uffff\25\26\2\uffff";
+	static final String DFA104_minS = "\26\4\2\uffff";
+	static final String DFA104_maxS = "\1\161\25\163\2\uffff";
+	static final String DFA104_acceptS = "\26\uffff\1\2\1\1";
+	static final String DFA104_specialS = "\30\uffff}>";
+	static final String[] DFA104_transitionS = {
+			"\1\1\3\26\4\uffff\3\26\5\uffff\1\20\1\uffff\1\4\1\26\2\uffff"
+					+ "\1\11\1\14\1\26\1\uffff\1\16\1\10\1\3\1\uffff\1\12\1\26\1\uffff"
+					+ "\1\25\1\26\1\21\1\22\1\23\1\2\1\24\1\7\1\13\2\uffff\1\6\1\17"
+					+ "\1\5\1\uffff\1\15\13\uffff\1\26\22\uffff\1\26\4\uffff\1\26\4"
+					+ "\uffff\2\26\2\uffff\1\26\1\uffff\1\26\2\uffff\4\26\1\uffff\7" + "\26",
+			"\13\26\5\uffff\15\26\1\27\23\26\2\uffff\3\26\5\uffff\41\26" + "\1\uffff\23\26",
+			"\13\26\5\uffff\15\26\1\27\23\26\2\uffff\3\26\5\uffff\41\26" + "\1\uffff\11\26\1\uffff\11\26",
+			"\13\26\5\uffff\15\26\1\27\23\26\2\uffff\3\26\5\uffff\41\26" + "\1\uffff\23\26",
+			"\13\26\5\uffff\15\26\1\27\23\26\2\uffff\3\26\5\uffff\41\26" + "\1\uffff\11\26\1\uffff\11\26",
+			"\13\26\5\uffff\15\26\1\27\23\26\2\uffff\3\26\5\uffff\41\26" + "\1\uffff\23\26",
+			"\13\26\5\uffff\15\26\1\27\23\26\2\uffff\3\26\5\uffff\41\26" + "\1\uffff\11\26\1\uffff\11\26",
+			"\13\26\5\uffff\15\26\1\27\23\26\2\uffff\3\26\5\uffff\41\26" + "\1\uffff\11\26\1\uffff\11\26",
+			"\13\26\5\uffff\15\26\1\27\23\26\2\uffff\3\26\5\uffff\41\26" + "\1\uffff\11\26\1\uffff\11\26",
+			"\13\26\5\uffff\15\26\1\27\23\26\2\uffff\3\26\5\uffff\41\26" + "\1\uffff\11\26\1\uffff\11\26",
+			"\13\26\5\uffff\15\26\1\27\23\26\2\uffff\3\26\5\uffff\41\26" + "\1\uffff\11\26\1\uffff\11\26",
+			"\13\26\5\uffff\15\26\1\27\23\26\2\uffff\3\26\5\uffff\41\26" + "\1\uffff\11\26\1\uffff\11\26",
+			"\13\26\5\uffff\15\26\1\27\23\26\2\uffff\3\26\5\uffff\41\26" + "\1\uffff\11\26\1\uffff\11\26",
+			"\13\26\5\uffff\15\26\1\27\23\26\2\uffff\3\26\5\uffff\41\26" + "\1\uffff\11\26\1\uffff\11\26",
+			"\13\26\5\uffff\15\26\1\27\23\26\2\uffff\3\26\5\uffff\41\26" + "\1\uffff\11\26\1\uffff\11\26",
+			"\13\26\5\uffff\15\26\1\27\23\26\2\uffff\3\26\5\uffff\41\26" + "\1\uffff\11\26\1\uffff\11\26",
+			"\13\26\5\uffff\15\26\1\27\23\26\2\uffff\3\26\5\uffff\41\26" + "\1\uffff\11\26\1\uffff\11\26",
+			"\13\26\5\uffff\15\26\1\27\23\26\2\uffff\3\26\5\uffff\41\26" + "\1\uffff\11\26\1\uffff\11\26",
+			"\13\26\5\uffff\15\26\1\27\23\26\2\uffff\3\26\5\uffff\41\26" + "\1\uffff\11\26\1\uffff\11\26",
+			"\13\26\5\uffff\15\26\1\27\23\26\2\uffff\3\26\5\uffff\41\26" + "\1\uffff\11\26\1\uffff\11\26",
+			"\13\26\5\uffff\15\26\1\27\23\26\2\uffff\3\26\5\uffff\41\26" + "\1\uffff\11\26\1\uffff\11\26",
+			"\13\26\5\uffff\15\26\1\27\23\26\2\uffff\3\26\5\uffff\41\26" + "\1\uffff\11\26\1\uffff\11\26", "", "" };
+
+	static final short[] DFA104_eot = DFA.unpackEncodedString(DFA104_eotS);
+	static final short[] DFA104_eof = DFA.unpackEncodedString(DFA104_eofS);
+	static final char[] DFA104_min = DFA.unpackEncodedStringToUnsignedChars(DFA104_minS);
+	static final char[] DFA104_max = DFA.unpackEncodedStringToUnsignedChars(DFA104_maxS);
+	static final short[] DFA104_accept = DFA.unpackEncodedString(DFA104_acceptS);
+	static final short[] DFA104_special = DFA.unpackEncodedString(DFA104_specialS);
+	static final short[][] DFA104_transition;
+
+	static {
+		int numStates = DFA104_transitionS.length;
+		DFA104_transition = new short[numStates][];
+		for (int i = 0; i < numStates; i++) {
+			DFA104_transition[i] = DFA.unpackEncodedString(DFA104_transitionS[i]);
+		}
+	}
+
+	class DFA104 extends DFA {
+
+		public DFA104(BaseRecognizer recognizer) {
+			this.recognizer = recognizer;
+			this.decisionNumber = 104;
+			this.eot = DFA104_eot;
+			this.eof = DFA104_eof;
+			this.min = DFA104_min;
+			this.max = DFA104_max;
+			this.accept = DFA104_accept;
+			this.special = DFA104_special;
+			this.transition = DFA104_transition;
+		}
+
+		public String getDescription() {
+			return "4236:1: ( ( () ( ( ruleFeatureCallID ) ) ruleOpSingleAssign ( (lv_value_3_0= ruleXAssignment ) ) ) | (this_XOrExpression_4= ruleXOrExpression ( ( ( ( () ( ( ruleOpMultiAssign ) ) ) )=> ( () ( ( ruleOpMultiAssign ) ) ) ) ( (lv_rightOperand_7_0= ruleXAssignment ) ) )? ) )";
+		}
+	}
+
+	static final String DFA112_eotS = "\14\uffff";
+	static final String DFA112_eofS = "\1\1\13\uffff";
+	static final String DFA112_minS = "\1\4\1\uffff\11\0\1\uffff";
+	static final String DFA112_maxS = "\1\163\1\uffff\11\0\1\uffff";
+	static final String DFA112_acceptS = "\1\uffff\1\2\11\uffff\1\1";
+	static final String DFA112_specialS = "\2\uffff\1\4\1\7\1\6\1\2\1\3\1\10\1\0\1\1\1\5\1\uffff}>";
+	static final String[] DFA112_transitionS = {
+			"\13\1\5\uffff\3\1\1\3\1\1\1\2\7\1\1\uffff\23\1\2\uffff\3\1\5"
+					+ "\uffff\15\1\1\5\1\6\1\7\1\4\1\10\1\11\1\12\15\1\1\uffff\11\1" + "\1\uffff\11\1", "", "\1\uffff",
+			"\1\uffff", "\1\uffff", "\1\uffff", "\1\uffff", "\1\uffff", "\1\uffff", "\1\uffff", "\1\uffff", "" };
+
+	static final short[] DFA112_eot = DFA.unpackEncodedString(DFA112_eotS);
+	static final short[] DFA112_eof = DFA.unpackEncodedString(DFA112_eofS);
+	static final char[] DFA112_min = DFA.unpackEncodedStringToUnsignedChars(DFA112_minS);
+	static final char[] DFA112_max = DFA.unpackEncodedStringToUnsignedChars(DFA112_maxS);
+	static final short[] DFA112_accept = DFA.unpackEncodedString(DFA112_acceptS);
+	static final short[] DFA112_special = DFA.unpackEncodedString(DFA112_specialS);
+	static final short[][] DFA112_transition;
+
+	static {
+		int numStates = DFA112_transitionS.length;
+		DFA112_transition = new short[numStates][];
+		for (int i = 0; i < numStates; i++) {
+			DFA112_transition[i] = DFA.unpackEncodedString(DFA112_transitionS[i]);
+		}
+	}
+
+	class DFA112 extends DFA {
+
+		public DFA112(BaseRecognizer recognizer) {
+			this.recognizer = recognizer;
+			this.decisionNumber = 112;
+			this.eot = DFA112_eot;
+			this.eof = DFA112_eof;
+			this.min = DFA112_min;
+			this.max = DFA112_max;
+			this.accept = DFA112_accept;
+			this.special = DFA112_special;
+			this.transition = DFA112_transition;
+		}
+
+		public String getDescription() {
+			return "()* loopback of 4905:1: ( ( ( ( () ( ( ruleOpOther ) ) ) )=> ( () ( ( ruleOpOther ) ) ) ) ( (lv_rightOperand_3_0= ruleXAdditiveExpression ) ) )*";
+		}
+
+		public int specialStateTransition(int s, IntStream _input) throws NoViableAltException {
+			TokenStream input = (TokenStream) _input;
+			int _s = s;
+			switch (s) {
+				case 0:
+					int LA112_8 = input.LA(1);
+
+					int index112_8 = input.index();
+					input.rewind();
+					s = -1;
+					if ((synpred13_InternalXtend())) {
+						s = 11;
+					}
+
+					else if ((true)) {
+						s = 1;
+					}
+
+					input.seek(index112_8);
+					if (s >= 0)
+						return s;
+					break;
+				case 1:
+					int LA112_9 = input.LA(1);
+
+					int index112_9 = input.index();
+					input.rewind();
+					s = -1;
+					if ((synpred13_InternalXtend())) {
+						s = 11;
+					}
+
+					else if ((true)) {
+						s = 1;
+					}
+
+					input.seek(index112_9);
+					if (s >= 0)
+						return s;
+					break;
+				case 2:
+					int LA112_5 = input.LA(1);
+
+					int index112_5 = input.index();
+					input.rewind();
+					s = -1;
+					if ((synpred13_InternalXtend())) {
+						s = 11;
+					}
+
+					else if ((true)) {
+						s = 1;
+					}
+
+					input.seek(index112_5);
+					if (s >= 0)
+						return s;
+					break;
+				case 3:
+					int LA112_6 = input.LA(1);
+
+					int index112_6 = input.index();
+					input.rewind();
+					s = -1;
+					if ((synpred13_InternalXtend())) {
+						s = 11;
+					}
+
+					else if ((true)) {
+						s = 1;
+					}
+
+					input.seek(index112_6);
+					if (s >= 0)
+						return s;
+					break;
+				case 4:
+					int LA112_2 = input.LA(1);
+
+					int index112_2 = input.index();
+					input.rewind();
+					s = -1;
+					if ((synpred13_InternalXtend())) {
+						s = 11;
+					}
+
+					else if ((true)) {
+						s = 1;
+					}
+
+					input.seek(index112_2);
+					if (s >= 0)
+						return s;
+					break;
+				case 5:
+					int LA112_10 = input.LA(1);
+
+					int index112_10 = input.index();
+					input.rewind();
+					s = -1;
+					if ((synpred13_InternalXtend())) {
+						s = 11;
+					}
+
+					else if ((true)) {
+						s = 1;
+					}
+
+					input.seek(index112_10);
+					if (s >= 0)
+						return s;
+					break;
+				case 6:
+					int LA112_4 = input.LA(1);
+
+					int index112_4 = input.index();
+					input.rewind();
+					s = -1;
+					if ((synpred13_InternalXtend())) {
+						s = 11;
+					}
+
+					else if ((true)) {
+						s = 1;
+					}
+
+					input.seek(index112_4);
+					if (s >= 0)
+						return s;
+					break;
+				case 7:
+					int LA112_3 = input.LA(1);
+
+					int index112_3 = input.index();
+					input.rewind();
+					s = -1;
+					if ((synpred13_InternalXtend())) {
+						s = 11;
+					}
+
+					else if ((true)) {
+						s = 1;
+					}
+
+					input.seek(index112_3);
+					if (s >= 0)
+						return s;
+					break;
+				case 8:
+					int LA112_7 = input.LA(1);
+
+					int index112_7 = input.index();
+					input.rewind();
+					s = -1;
+					if ((synpred13_InternalXtend())) {
+						s = 11;
+					}
+
+					else if ((true)) {
+						s = 1;
+					}
+
+					input.seek(index112_7);
+					if (s >= 0)
+						return s;
+					break;
+			}
+			if (state.backtracking > 0) {
+				state.failed = true;
+				return -1;
+			}
+			NoViableAltException nvae = new NoViableAltException(getDescription(), 112, _s, input);
+			error(nvae);
+			throw nvae;
+		}
+	}
+
+	static final String DFA115_eotS = "\14\uffff";
+	static final String DFA115_eofS = "\14\uffff";
+	static final String DFA115_minS = "\1\27\2\uffff\1\31\10\uffff";
+	static final String DFA115_maxS = "\1\122\2\uffff\1\116\10\uffff";
+	static final String DFA115_acceptS = "\1\uffff\1\1\1\2\1\uffff\1\4\1\5\1\7\1\10\1\11\1\12\1\6\1\3";
+	static final String DFA115_specialS = "\14\uffff}>";
+	static final String[] DFA115_transitionS = { "\1\6\1\uffff\1\3\62\uffff\1\1\1\2\1\4\1\5\1\7\1\10\1\11", "", "",
+			"\1\12\64\uffff\1\13", "", "", "", "", "", "", "", "" };
+
+	static final short[] DFA115_eot = DFA.unpackEncodedString(DFA115_eotS);
+	static final short[] DFA115_eof = DFA.unpackEncodedString(DFA115_eofS);
+	static final char[] DFA115_min = DFA.unpackEncodedStringToUnsignedChars(DFA115_minS);
+	static final char[] DFA115_max = DFA.unpackEncodedStringToUnsignedChars(DFA115_maxS);
+	static final short[] DFA115_accept = DFA.unpackEncodedString(DFA115_acceptS);
+	static final short[] DFA115_special = DFA.unpackEncodedString(DFA115_specialS);
+	static final short[][] DFA115_transition;
+
+	static {
+		int numStates = DFA115_transitionS.length;
+		DFA115_transition = new short[numStates][];
+		for (int i = 0; i < numStates; i++) {
+			DFA115_transition[i] = DFA.unpackEncodedString(DFA115_transitionS[i]);
+		}
+	}
+
+	class DFA115 extends DFA {
+
+		public DFA115(BaseRecognizer recognizer) {
+			this.recognizer = recognizer;
+			this.decisionNumber = 115;
+			this.eot = DFA115_eot;
+			this.eof = DFA115_eof;
+			this.min = DFA115_min;
+			this.max = DFA115_max;
+			this.accept = DFA115_accept;
+			this.special = DFA115_special;
+			this.transition = DFA115_transition;
+		}
+
+		public String getDescription() {
+			return "4970:1: (kw= '->' | kw= '..<' | (kw= '>' kw= '..' ) | kw= '..' | kw= '=>' | (kw= '>' ( ( ( ( '>' '>' ) )=> (kw= '>' kw= '>' ) ) | kw= '>' ) ) | (kw= '<' ( ( ( ( '<' '<' ) )=> (kw= '<' kw= '<' ) ) | kw= '<' ) ) | kw= '<>' | kw= '?:' | kw= '<=>' )";
+		}
+	}
+
+	static final String DFA128_eotS = "\144\uffff";
+	static final String DFA128_eofS = "\1\2\143\uffff";
+	static final String DFA128_minS = "\1\4\1\0\142\uffff";
+	static final String DFA128_maxS = "\1\163\1\0\142\uffff";
+	static final String DFA128_acceptS = "\2\uffff\1\2\140\uffff\1\1";
+	static final String DFA128_specialS = "\1\uffff\1\0\142\uffff}>";
+	static final String[] DFA128_transitionS = {
+			"\13\2\5\uffff\15\2\1\uffff\1\2\1\1\21\2\2\uffff\3\2\5\uffff" + "\41\2\1\uffff\11\2\1\uffff\11\2",
+			"\1\uffff", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "",
+			"", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "",
+			"", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "",
+			"", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "" };
+
+	static final short[] DFA128_eot = DFA.unpackEncodedString(DFA128_eotS);
+	static final short[] DFA128_eof = DFA.unpackEncodedString(DFA128_eofS);
+	static final char[] DFA128_min = DFA.unpackEncodedStringToUnsignedChars(DFA128_minS);
+	static final char[] DFA128_max = DFA.unpackEncodedStringToUnsignedChars(DFA128_maxS);
+	static final short[] DFA128_accept = DFA.unpackEncodedString(DFA128_acceptS);
+	static final short[] DFA128_special = DFA.unpackEncodedString(DFA128_specialS);
+	static final short[][] DFA128_transition;
+
+	static {
+		int numStates = DFA128_transitionS.length;
+		DFA128_transition = new short[numStates][];
+		for (int i = 0; i < numStates; i++) {
+			DFA128_transition[i] = DFA.unpackEncodedString(DFA128_transitionS[i]);
+		}
+	}
+
+	class DFA128 extends DFA {
+
+		public DFA128(BaseRecognizer recognizer) {
+			this.recognizer = recognizer;
+			this.decisionNumber = 128;
+			this.eot = DFA128_eot;
+			this.eof = DFA128_eof;
+			this.min = DFA128_min;
+			this.max = DFA128_max;
+			this.accept = DFA128_accept;
+			this.special = DFA128_special;
+			this.transition = DFA128_transition;
+		}
+
+		public String getDescription() {
+			return "5701:2: ( ( ( ( '(' ) )=> (lv_explicitOperationCall_16_0= '(' ) ) ( ( ( ( () ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )? ( ( '|' ) ) ) )=> (lv_memberCallArguments_17_0= ruleXShortClosure ) ) | ( ( (lv_memberCallArguments_18_0= ruleXExpression ) ) (otherlv_19= ',' ( (lv_memberCallArguments_20_0= ruleXExpression ) ) )* ) )? otherlv_21= ')' )?";
+		}
+
+		public int specialStateTransition(int s, IntStream _input) throws NoViableAltException {
+			TokenStream input = (TokenStream) _input;
+			int _s = s;
+			switch (s) {
+				case 0:
+					int LA128_1 = input.LA(1);
+
+					int index128_1 = input.index();
+					input.rewind();
+					s = -1;
+					if ((synpred21_InternalXtend())) {
+						s = 99;
+					}
+
+					else if ((true)) {
+						s = 2;
+					}
+
+					input.seek(index128_1);
+					if (s >= 0)
+						return s;
+					break;
+			}
+			if (state.backtracking > 0) {
+				state.failed = true;
+				return -1;
+			}
+			NoViableAltException nvae = new NoViableAltException(getDescription(), 128, _s, input);
+			error(nvae);
+			throw nvae;
+		}
+	}
+
+	static final String DFA127_eotS = "\65\uffff";
+	static final String DFA127_eofS = "\65\uffff";
+	static final String DFA127_minS = "\1\4\5\0\57\uffff";
+	static final String DFA127_maxS = "\1\161\5\0\57\uffff";
+	static final String DFA127_acceptS = "\6\uffff\2\1\1\2\53\uffff\1\3";
+	static final String DFA127_specialS = "\1\0\1\1\1\2\1\3\1\4\1\5\57\uffff}>";
+	static final String[] DFA127_transitionS = {
+			"\1\2\3\10\4\uffff\3\10\5\uffff\1\10\1\uffff\2\10\2\uffff\3\10"
+					+ "\1\uffff\2\10\1\4\1\uffff\1\1\1\5\1\64\11\10\2\uffff\2\10\1"
+					+ "\3\1\uffff\1\10\13\uffff\1\10\16\uffff\1\6\3\uffff\1\10\4\uffff"
+					+ "\1\10\4\uffff\2\10\1\uffff\1\7\1\10\1\uffff\1\10\2\uffff\4\10" + "\1\uffff\7\10", "\1\uffff",
+			"\1\uffff", "\1\uffff", "\1\uffff", "\1\uffff", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "",
+			"", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "",
+			"", "", "", "", "" };
+
+	static final short[] DFA127_eot = DFA.unpackEncodedString(DFA127_eotS);
+	static final short[] DFA127_eof = DFA.unpackEncodedString(DFA127_eofS);
+	static final char[] DFA127_min = DFA.unpackEncodedStringToUnsignedChars(DFA127_minS);
+	static final char[] DFA127_max = DFA.unpackEncodedStringToUnsignedChars(DFA127_maxS);
+	static final short[] DFA127_accept = DFA.unpackEncodedString(DFA127_acceptS);
+	static final short[] DFA127_special = DFA.unpackEncodedString(DFA127_specialS);
+	static final short[][] DFA127_transition;
+
+	static {
+		int numStates = DFA127_transitionS.length;
+		DFA127_transition = new short[numStates][];
+		for (int i = 0; i < numStates; i++) {
+			DFA127_transition[i] = DFA.unpackEncodedString(DFA127_transitionS[i]);
+		}
+	}
+
+	class DFA127 extends DFA {
+
+		public DFA127(BaseRecognizer recognizer) {
+			this.recognizer = recognizer;
+			this.decisionNumber = 127;
+			this.eot = DFA127_eot;
+			this.eof = DFA127_eof;
+			this.min = DFA127_min;
+			this.max = DFA127_max;
+			this.accept = DFA127_accept;
+			this.special = DFA127_special;
+			this.transition = DFA127_transition;
+		}
+
+		public String getDescription() {
+			return "5722:2: ( ( ( ( () ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )? ( ( '|' ) ) ) )=> (lv_memberCallArguments_17_0= ruleXShortClosure ) ) | ( ( (lv_memberCallArguments_18_0= ruleXExpression ) ) (otherlv_19= ',' ( (lv_memberCallArguments_20_0= ruleXExpression ) ) )* ) )?";
+		}
+
+		public int specialStateTransition(int s, IntStream _input) throws NoViableAltException {
+			TokenStream input = (TokenStream) _input;
+			int _s = s;
+			switch (s) {
+				case 0:
+					int LA127_0 = input.LA(1);
+
+					int index127_0 = input.index();
+					input.rewind();
+					s = -1;
+					if ((LA127_0 == 34)) {
+						s = 1;
+					}
+
+					else if ((LA127_0 == RULE_ID)) {
+						s = 2;
+					}
+
+					else if ((LA127_0 == 50)) {
+						s = 3;
+					}
+
+					else if ((LA127_0 == 32)) {
+						s = 4;
+					}
+
+					else if ((LA127_0 == 35)) {
+						s = 5;
+					}
+
+					else if ((LA127_0 == 79) && (synpred22_InternalXtend())) {
+						s = 6;
+					}
+
+					else if ((LA127_0 == 96) && (synpred22_InternalXtend())) {
+						s = 7;
+					}
+
+					else if (((LA127_0 >= RULE_STRING && LA127_0 <= RULE_RICH_TEXT_START)
+							|| (LA127_0 >= RULE_HEX && LA127_0 <= RULE_DECIMAL) || LA127_0 == 20
+							|| (LA127_0 >= 22 && LA127_0 <= 23) || (LA127_0 >= 26 && LA127_0 <= 28)
+							|| (LA127_0 >= 30 && LA127_0 <= 31) || (LA127_0 >= 37 && LA127_0 <= 45)
+							|| (LA127_0 >= 48 && LA127_0 <= 49) || LA127_0 == 52 || LA127_0 == 64 || LA127_0 == 83
+							|| LA127_0 == 88 || (LA127_0 >= 93 && LA127_0 <= 94) || LA127_0 == 97 || LA127_0 == 99
+							|| (LA127_0 >= 102 && LA127_0 <= 105) || (LA127_0 >= 107 && LA127_0 <= 113))) {
+						s = 8;
+					}
+
+					else if ((LA127_0 == 36)) {
+						s = 52;
+					}
+
+					input.seek(index127_0);
+					if (s >= 0)
+						return s;
+					break;
+				case 1:
+					int LA127_1 = input.LA(1);
+
+					int index127_1 = input.index();
+					input.rewind();
+					s = -1;
+					if ((synpred22_InternalXtend())) {
+						s = 7;
+					}
+
+					else if ((true)) {
+						s = 8;
+					}
+
+					input.seek(index127_1);
+					if (s >= 0)
+						return s;
+					break;
+				case 2:
+					int LA127_2 = input.LA(1);
+
+					int index127_2 = input.index();
+					input.rewind();
+					s = -1;
+					if ((synpred22_InternalXtend())) {
+						s = 7;
+					}
+
+					else if ((true)) {
+						s = 8;
+					}
+
+					input.seek(index127_2);
+					if (s >= 0)
+						return s;
+					break;
+				case 3:
+					int LA127_3 = input.LA(1);
+
+					int index127_3 = input.index();
+					input.rewind();
+					s = -1;
+					if ((synpred22_InternalXtend())) {
+						s = 7;
+					}
+
+					else if ((true)) {
+						s = 8;
+					}
+
+					input.seek(index127_3);
+					if (s >= 0)
+						return s;
+					break;
+				case 4:
+					int LA127_4 = input.LA(1);
+
+					int index127_4 = input.index();
+					input.rewind();
+					s = -1;
+					if ((synpred22_InternalXtend())) {
+						s = 7;
+					}
+
+					else if ((true)) {
+						s = 8;
+					}
+
+					input.seek(index127_4);
+					if (s >= 0)
+						return s;
+					break;
+				case 5:
+					int LA127_5 = input.LA(1);
+
+					int index127_5 = input.index();
+					input.rewind();
+					s = -1;
+					if ((synpred22_InternalXtend())) {
+						s = 7;
+					}
+
+					else if ((true)) {
+						s = 8;
+					}
+
+					input.seek(index127_5);
+					if (s >= 0)
+						return s;
+					break;
+			}
+			if (state.backtracking > 0) {
+				state.failed = true;
+				return -1;
+			}
+			NoViableAltException nvae = new NoViableAltException(getDescription(), 127, _s, input);
+			error(nvae);
+			throw nvae;
+		}
+	}
+
+	static final String DFA129_eotS = "\144\uffff";
+	static final String DFA129_eofS = "\1\2\143\uffff";
+	static final String DFA129_minS = "\1\4\1\0\142\uffff";
+	static final String DFA129_maxS = "\1\163\1\0\142\uffff";
+	static final String DFA129_acceptS = "\2\uffff\1\2\140\uffff\1\1";
+	static final String DFA129_specialS = "\1\uffff\1\0\142\uffff}>";
+	static final String[] DFA129_transitionS = {
+			"\13\2\5\uffff\15\2\1\uffff\23\2\2\uffff\3\2\5\uffff\37\2\1\1" + "\1\2\1\uffff\11\2\1\uffff\11\2",
+			"\1\uffff", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "",
+			"", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "",
+			"", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "",
+			"", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "" };
+
+	static final short[] DFA129_eot = DFA.unpackEncodedString(DFA129_eotS);
+	static final short[] DFA129_eof = DFA.unpackEncodedString(DFA129_eofS);
+	static final char[] DFA129_min = DFA.unpackEncodedStringToUnsignedChars(DFA129_minS);
+	static final char[] DFA129_max = DFA.unpackEncodedStringToUnsignedChars(DFA129_maxS);
+	static final short[] DFA129_accept = DFA.unpackEncodedString(DFA129_acceptS);
+	static final short[] DFA129_special = DFA.unpackEncodedString(DFA129_specialS);
+	static final short[][] DFA129_transition;
+
+	static {
+		int numStates = DFA129_transitionS.length;
+		DFA129_transition = new short[numStates][];
+		for (int i = 0; i < numStates; i++) {
+			DFA129_transition[i] = DFA.unpackEncodedString(DFA129_transitionS[i]);
+		}
+	}
+
+	class DFA129 extends DFA {
+
+		public DFA129(BaseRecognizer recognizer) {
+			this.recognizer = recognizer;
+			this.decisionNumber = 129;
+			this.eot = DFA129_eot;
+			this.eof = DFA129_eof;
+			this.min = DFA129_min;
+			this.max = DFA129_max;
+			this.accept = DFA129_accept;
+			this.special = DFA129_special;
+			this.transition = DFA129_transition;
+		}
+
+		public String getDescription() {
+			return "5801:3: ( ( ( () '[' ) )=> (lv_memberCallArguments_22_0= ruleXClosure ) )?";
+		}
+
+		public int specialStateTransition(int s, IntStream _input) throws NoViableAltException {
+			TokenStream input = (TokenStream) _input;
+			int _s = s;
+			switch (s) {
+				case 0:
+					int LA129_1 = input.LA(1);
+
+					int index129_1 = input.index();
+					input.rewind();
+					s = -1;
+					if ((synpred23_InternalXtend())) {
+						s = 99;
+					}
+
+					else if ((true)) {
+						s = 2;
+					}
+
+					input.seek(index129_1);
+					if (s >= 0)
+						return s;
+					break;
+			}
+			if (state.backtracking > 0) {
+				state.failed = true;
+				return -1;
+			}
+			NoViableAltException nvae = new NoViableAltException(getDescription(), 129, _s, input);
+			error(nvae);
+			throw nvae;
+		}
+	}
+
+	static final String DFA131_eotS = "\16\uffff";
+	static final String DFA131_eofS = "\16\uffff";
+	static final String DFA131_minS = "\1\4\15\uffff";
+	static final String DFA131_maxS = "\1\161\15\uffff";
+	static final String DFA131_acceptS = "\1\uffff\1\1\1\2\1\3\1\4\1\5\1\6\1\7\1\10\1\11\1\12\1\13\1\14\1" + "\15";
+	static final String DFA131_specialS = "\16\uffff}>";
+	static final String[] DFA131_transitionS = {
+			"\1\4\3\5\4\uffff\3\5\5\uffff\1\4\1\uffff\2\4\2\uffff\2\4\1\2"
+					+ "\1\uffff\3\4\1\uffff\1\4\1\15\1\uffff\1\4\1\1\7\4\2\uffff\3"
+					+ "\4\1\uffff\1\4\50\uffff\2\5\2\uffff\1\6\1\uffff\1\3\2\uffff"
+					+ "\1\7\1\10\1\11\1\4\1\uffff\4\5\1\12\1\13\1\14", "", "", "", "", "", "", "", "", "", "", "", "",
+			"" };
+
+	static final short[] DFA131_eot = DFA.unpackEncodedString(DFA131_eotS);
+	static final short[] DFA131_eof = DFA.unpackEncodedString(DFA131_eofS);
+	static final char[] DFA131_min = DFA.unpackEncodedStringToUnsignedChars(DFA131_minS);
+	static final char[] DFA131_max = DFA.unpackEncodedStringToUnsignedChars(DFA131_maxS);
+	static final short[] DFA131_accept = DFA.unpackEncodedString(DFA131_acceptS);
+	static final short[] DFA131_special = DFA.unpackEncodedString(DFA131_specialS);
+	static final short[][] DFA131_transition;
+
+	static {
+		int numStates = DFA131_transitionS.length;
+		DFA131_transition = new short[numStates][];
+		for (int i = 0; i < numStates; i++) {
+			DFA131_transition[i] = DFA.unpackEncodedString(DFA131_transitionS[i]);
+		}
+	}
+
+	class DFA131 extends DFA {
+
+		public DFA131(BaseRecognizer recognizer) {
+			this.recognizer = recognizer;
+			this.decisionNumber = 131;
+			this.eot = DFA131_eot;
+			this.eof = DFA131_eof;
+			this.min = DFA131_min;
+			this.max = DFA131_max;
+			this.accept = DFA131_accept;
+			this.special = DFA131_special;
+			this.transition = DFA131_transition;
+		}
+
+		public String getDescription() {
+			return "5842:1: (this_XConstructorCall_0= ruleXConstructorCall | this_XBlockExpression_1= ruleXBlockExpression | this_XSwitchExpression_2= ruleXSwitchExpression | this_XFeatureCall_3= ruleXFeatureCall | this_XLiteral_4= ruleXLiteral | this_XIfExpression_5= ruleXIfExpression | this_XForLoopExpression_6= ruleXForLoopExpression | this_XWhileExpression_7= ruleXWhileExpression | this_XDoWhileExpression_8= ruleXDoWhileExpression | this_XThrowExpression_9= ruleXThrowExpression | this_XReturnExpression_10= ruleXReturnExpression | this_XTryCatchFinallyExpression_11= ruleXTryCatchFinallyExpression | this_XParenthesizedExpression_12= ruleXParenthesizedExpression )";
+		}
+	}
+
+	static final String DFA140_eotS = "\67\uffff";
+	static final String DFA140_eofS = "\67\uffff";
+	static final String DFA140_minS = "\1\4\5\0\61\uffff";
+	static final String DFA140_maxS = "\1\161\5\0\61\uffff";
+	static final String DFA140_acceptS = "\6\uffff\2\1\1\2\56\uffff";
+	static final String DFA140_specialS = "\1\0\1\1\1\2\1\3\1\4\1\5\61\uffff}>";
+	static final String[] DFA140_transitionS = {
+			"\1\2\3\10\4\uffff\3\10\5\uffff\1\10\1\uffff\2\10\2\uffff\3\10"
+					+ "\1\uffff\2\10\1\4\1\uffff\1\1\1\5\1\uffff\15\10\1\3\1\uffff"
+					+ "\1\10\13\uffff\1\10\16\uffff\1\6\3\uffff\1\10\4\uffff\1\10\4"
+					+ "\uffff\3\10\1\7\1\10\1\uffff\1\10\2\uffff\4\10\1\uffff\7\10", "\1\uffff", "\1\uffff",
+			"\1\uffff", "\1\uffff", "\1\uffff", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "",
+			"", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "",
+			"", "", "", "" };
+
+	static final short[] DFA140_eot = DFA.unpackEncodedString(DFA140_eotS);
+	static final short[] DFA140_eof = DFA.unpackEncodedString(DFA140_eofS);
+	static final char[] DFA140_min = DFA.unpackEncodedStringToUnsignedChars(DFA140_minS);
+	static final char[] DFA140_max = DFA.unpackEncodedStringToUnsignedChars(DFA140_maxS);
+	static final short[] DFA140_accept = DFA.unpackEncodedString(DFA140_acceptS);
+	static final short[] DFA140_special = DFA.unpackEncodedString(DFA140_specialS);
+	static final short[][] DFA140_transition;
+
+	static {
+		int numStates = DFA140_transitionS.length;
+		DFA140_transition = new short[numStates][];
+		for (int i = 0; i < numStates; i++) {
+			DFA140_transition[i] = DFA.unpackEncodedString(DFA140_transitionS[i]);
+		}
+	}
+
+	class DFA140 extends DFA {
+
+		public DFA140(BaseRecognizer recognizer) {
+			this.recognizer = recognizer;
+			this.decisionNumber = 140;
+			this.eot = DFA140_eot;
+			this.eof = DFA140_eof;
+			this.min = DFA140_min;
+			this.max = DFA140_max;
+			this.accept = DFA140_accept;
+			this.special = DFA140_special;
+			this.transition = DFA140_transition;
+		}
+
+		public String getDescription() {
+			return "6294:3: ( ( ( ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )? ( ( '|' ) ) ) )=> ( ( ( (lv_declaredFormalParameters_2_0= ruleJvmFormalParameter ) ) (otherlv_3= ',' ( (lv_declaredFormalParameters_4_0= ruleJvmFormalParameter ) ) )* )? ( (lv_explicitSyntax_5_0= '|' ) ) ) )?";
+		}
+
+		public int specialStateTransition(int s, IntStream _input) throws NoViableAltException {
+			TokenStream input = (TokenStream) _input;
+			int _s = s;
+			switch (s) {
+				case 0:
+					int LA140_0 = input.LA(1);
+
+					int index140_0 = input.index();
+					input.rewind();
+					s = -1;
+					if ((LA140_0 == 34)) {
+						s = 1;
+					}
+
+					else if ((LA140_0 == RULE_ID)) {
+						s = 2;
+					}
+
+					else if ((LA140_0 == 50)) {
+						s = 3;
+					}
+
+					else if ((LA140_0 == 32)) {
+						s = 4;
+					}
+
+					else if ((LA140_0 == 35)) {
+						s = 5;
+					}
+
+					else if ((LA140_0 == 79) && (synpred26_InternalXtend())) {
+						s = 6;
+					}
+
+					else if ((LA140_0 == 96) && (synpred26_InternalXtend())) {
+						s = 7;
+					}
+
+					else if (((LA140_0 >= RULE_STRING && LA140_0 <= RULE_RICH_TEXT_START)
+							|| (LA140_0 >= RULE_HEX && LA140_0 <= RULE_DECIMAL) || LA140_0 == 20
+							|| (LA140_0 >= 22 && LA140_0 <= 23) || (LA140_0 >= 26 && LA140_0 <= 28)
+							|| (LA140_0 >= 30 && LA140_0 <= 31) || (LA140_0 >= 37 && LA140_0 <= 49) || LA140_0 == 52
+							|| LA140_0 == 64 || LA140_0 == 83 || LA140_0 == 88 || (LA140_0 >= 93 && LA140_0 <= 95)
+							|| LA140_0 == 97 || LA140_0 == 99 || (LA140_0 >= 102 && LA140_0 <= 105) || (LA140_0 >= 107 && LA140_0 <= 113))) {
+						s = 8;
+					}
+
+					input.seek(index140_0);
+					if (s >= 0)
+						return s;
+					break;
+				case 1:
+					int LA140_1 = input.LA(1);
+
+					int index140_1 = input.index();
+					input.rewind();
+					s = -1;
+					if ((synpred26_InternalXtend())) {
+						s = 7;
+					}
+
+					else if ((true)) {
+						s = 8;
+					}
+
+					input.seek(index140_1);
+					if (s >= 0)
+						return s;
+					break;
+				case 2:
+					int LA140_2 = input.LA(1);
+
+					int index140_2 = input.index();
+					input.rewind();
+					s = -1;
+					if ((synpred26_InternalXtend())) {
+						s = 7;
+					}
+
+					else if ((true)) {
+						s = 8;
+					}
+
+					input.seek(index140_2);
+					if (s >= 0)
+						return s;
+					break;
+				case 3:
+					int LA140_3 = input.LA(1);
+
+					int index140_3 = input.index();
+					input.rewind();
+					s = -1;
+					if ((synpred26_InternalXtend())) {
+						s = 7;
+					}
+
+					else if ((true)) {
+						s = 8;
+					}
+
+					input.seek(index140_3);
+					if (s >= 0)
+						return s;
+					break;
+				case 4:
+					int LA140_4 = input.LA(1);
+
+					int index140_4 = input.index();
+					input.rewind();
+					s = -1;
+					if ((synpred26_InternalXtend())) {
+						s = 7;
+					}
+
+					else if ((true)) {
+						s = 8;
+					}
+
+					input.seek(index140_4);
+					if (s >= 0)
+						return s;
+					break;
+				case 5:
+					int LA140_5 = input.LA(1);
+
+					int index140_5 = input.index();
+					input.rewind();
+					s = -1;
+					if ((synpred26_InternalXtend())) {
+						s = 7;
+					}
+
+					else if ((true)) {
+						s = 8;
+					}
+
+					input.seek(index140_5);
+					if (s >= 0)
+						return s;
+					break;
+			}
+			if (state.backtracking > 0) {
+				state.failed = true;
+				return -1;
+			}
+			NoViableAltException nvae = new NoViableAltException(getDescription(), 140, _s, input);
+			error(nvae);
+			throw nvae;
+		}
+	}
+
+	static final String DFA160_eotS = "\144\uffff";
+	static final String DFA160_eofS = "\1\2\143\uffff";
+	static final String DFA160_minS = "\1\4\1\0\142\uffff";
+	static final String DFA160_maxS = "\1\163\1\0\142\uffff";
+	static final String DFA160_acceptS = "\2\uffff\1\2\140\uffff\1\1";
+	static final String DFA160_specialS = "\1\uffff\1\0\142\uffff}>";
+	static final String[] DFA160_transitionS = {
+			"\13\2\5\uffff\15\2\1\uffff\1\2\1\1\21\2\2\uffff\3\2\5\uffff" + "\41\2\1\uffff\11\2\1\uffff\11\2",
+			"\1\uffff", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "",
+			"", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "",
+			"", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "",
+			"", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "" };
+
+	static final short[] DFA160_eot = DFA.unpackEncodedString(DFA160_eotS);
+	static final short[] DFA160_eof = DFA.unpackEncodedString(DFA160_eofS);
+	static final char[] DFA160_min = DFA.unpackEncodedStringToUnsignedChars(DFA160_minS);
+	static final char[] DFA160_max = DFA.unpackEncodedStringToUnsignedChars(DFA160_maxS);
+	static final short[] DFA160_accept = DFA.unpackEncodedString(DFA160_acceptS);
+	static final short[] DFA160_special = DFA.unpackEncodedString(DFA160_specialS);
+	static final short[][] DFA160_transition;
+
+	static {
+		int numStates = DFA160_transitionS.length;
+		DFA160_transition = new short[numStates][];
+		for (int i = 0; i < numStates; i++) {
+			DFA160_transition[i] = DFA.unpackEncodedString(DFA160_transitionS[i]);
+		}
+	}
+
+	class DFA160 extends DFA {
+
+		public DFA160(BaseRecognizer recognizer) {
+			this.recognizer = recognizer;
+			this.decisionNumber = 160;
+			this.eot = DFA160_eot;
+			this.eof = DFA160_eof;
+			this.min = DFA160_min;
+			this.max = DFA160_max;
+			this.accept = DFA160_accept;
+			this.special = DFA160_special;
+			this.transition = DFA160_transition;
+		}
+
+		public String getDescription() {
+			return "7436:2: ( ( ( ( '(' ) )=> (lv_explicitOperationCall_8_0= '(' ) ) ( ( ( ( () ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )? ( ( '|' ) ) ) )=> (lv_featureCallArguments_9_0= ruleXShortClosure ) ) | ( ( (lv_featureCallArguments_10_0= ruleXExpression ) ) (otherlv_11= ',' ( (lv_featureCallArguments_12_0= ruleXExpression ) ) )* ) )? otherlv_13= ')' )?";
+		}
+
+		public int specialStateTransition(int s, IntStream _input) throws NoViableAltException {
+			TokenStream input = (TokenStream) _input;
+			int _s = s;
+			switch (s) {
+				case 0:
+					int LA160_1 = input.LA(1);
+
+					int index160_1 = input.index();
+					input.rewind();
+					s = -1;
+					if ((synpred32_InternalXtend())) {
+						s = 99;
+					}
+
+					else if ((true)) {
+						s = 2;
+					}
+
+					input.seek(index160_1);
+					if (s >= 0)
+						return s;
+					break;
+			}
+			if (state.backtracking > 0) {
+				state.failed = true;
+				return -1;
+			}
+			NoViableAltException nvae = new NoViableAltException(getDescription(), 160, _s, input);
+			error(nvae);
+			throw nvae;
+		}
+	}
+
+	static final String DFA159_eotS = "\65\uffff";
+	static final String DFA159_eofS = "\65\uffff";
+	static final String DFA159_minS = "\1\4\5\0\57\uffff";
+	static final String DFA159_maxS = "\1\161\5\0\57\uffff";
+	static final String DFA159_acceptS = "\6\uffff\2\1\1\2\53\uffff\1\3";
+	static final String DFA159_specialS = "\1\0\1\1\1\2\1\3\1\4\1\5\57\uffff}>";
+	static final String[] DFA159_transitionS = {
+			"\1\2\3\10\4\uffff\3\10\5\uffff\1\10\1\uffff\2\10\2\uffff\3\10"
+					+ "\1\uffff\2\10\1\4\1\uffff\1\1\1\5\1\64\11\10\2\uffff\2\10\1"
+					+ "\3\1\uffff\1\10\13\uffff\1\10\16\uffff\1\6\3\uffff\1\10\4\uffff"
+					+ "\1\10\4\uffff\2\10\1\uffff\1\7\1\10\1\uffff\1\10\2\uffff\4\10" + "\1\uffff\7\10", "\1\uffff",
+			"\1\uffff", "\1\uffff", "\1\uffff", "\1\uffff", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "",
+			"", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "",
+			"", "", "", "", "" };
+
+	static final short[] DFA159_eot = DFA.unpackEncodedString(DFA159_eotS);
+	static final short[] DFA159_eof = DFA.unpackEncodedString(DFA159_eofS);
+	static final char[] DFA159_min = DFA.unpackEncodedStringToUnsignedChars(DFA159_minS);
+	static final char[] DFA159_max = DFA.unpackEncodedStringToUnsignedChars(DFA159_maxS);
+	static final short[] DFA159_accept = DFA.unpackEncodedString(DFA159_acceptS);
+	static final short[] DFA159_special = DFA.unpackEncodedString(DFA159_specialS);
+	static final short[][] DFA159_transition;
+
+	static {
+		int numStates = DFA159_transitionS.length;
+		DFA159_transition = new short[numStates][];
+		for (int i = 0; i < numStates; i++) {
+			DFA159_transition[i] = DFA.unpackEncodedString(DFA159_transitionS[i]);
+		}
+	}
+
+	class DFA159 extends DFA {
+
+		public DFA159(BaseRecognizer recognizer) {
+			this.recognizer = recognizer;
+			this.decisionNumber = 159;
+			this.eot = DFA159_eot;
+			this.eof = DFA159_eof;
+			this.min = DFA159_min;
+			this.max = DFA159_max;
+			this.accept = DFA159_accept;
+			this.special = DFA159_special;
+			this.transition = DFA159_transition;
+		}
+
+		public String getDescription() {
+			return "7457:2: ( ( ( ( () ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )? ( ( '|' ) ) ) )=> (lv_featureCallArguments_9_0= ruleXShortClosure ) ) | ( ( (lv_featureCallArguments_10_0= ruleXExpression ) ) (otherlv_11= ',' ( (lv_featureCallArguments_12_0= ruleXExpression ) ) )* ) )?";
+		}
+
+		public int specialStateTransition(int s, IntStream _input) throws NoViableAltException {
+			TokenStream input = (TokenStream) _input;
+			int _s = s;
+			switch (s) {
+				case 0:
+					int LA159_0 = input.LA(1);
+
+					int index159_0 = input.index();
+					input.rewind();
+					s = -1;
+					if ((LA159_0 == 34)) {
+						s = 1;
+					}
+
+					else if ((LA159_0 == RULE_ID)) {
+						s = 2;
+					}
+
+					else if ((LA159_0 == 50)) {
+						s = 3;
+					}
+
+					else if ((LA159_0 == 32)) {
+						s = 4;
+					}
+
+					else if ((LA159_0 == 35)) {
+						s = 5;
+					}
+
+					else if ((LA159_0 == 79) && (synpred33_InternalXtend())) {
+						s = 6;
+					}
+
+					else if ((LA159_0 == 96) && (synpred33_InternalXtend())) {
+						s = 7;
+					}
+
+					else if (((LA159_0 >= RULE_STRING && LA159_0 <= RULE_RICH_TEXT_START)
+							|| (LA159_0 >= RULE_HEX && LA159_0 <= RULE_DECIMAL) || LA159_0 == 20
+							|| (LA159_0 >= 22 && LA159_0 <= 23) || (LA159_0 >= 26 && LA159_0 <= 28)
+							|| (LA159_0 >= 30 && LA159_0 <= 31) || (LA159_0 >= 37 && LA159_0 <= 45)
+							|| (LA159_0 >= 48 && LA159_0 <= 49) || LA159_0 == 52 || LA159_0 == 64 || LA159_0 == 83
+							|| LA159_0 == 88 || (LA159_0 >= 93 && LA159_0 <= 94) || LA159_0 == 97 || LA159_0 == 99
+							|| (LA159_0 >= 102 && LA159_0 <= 105) || (LA159_0 >= 107 && LA159_0 <= 113))) {
+						s = 8;
+					}
+
+					else if ((LA159_0 == 36)) {
+						s = 52;
+					}
+
+					input.seek(index159_0);
+					if (s >= 0)
+						return s;
+					break;
+				case 1:
+					int LA159_1 = input.LA(1);
+
+					int index159_1 = input.index();
+					input.rewind();
+					s = -1;
+					if ((synpred33_InternalXtend())) {
+						s = 7;
+					}
+
+					else if ((true)) {
+						s = 8;
+					}
+
+					input.seek(index159_1);
+					if (s >= 0)
+						return s;
+					break;
+				case 2:
+					int LA159_2 = input.LA(1);
+
+					int index159_2 = input.index();
+					input.rewind();
+					s = -1;
+					if ((synpred33_InternalXtend())) {
+						s = 7;
+					}
+
+					else if ((true)) {
+						s = 8;
+					}
+
+					input.seek(index159_2);
+					if (s >= 0)
+						return s;
+					break;
+				case 3:
+					int LA159_3 = input.LA(1);
+
+					int index159_3 = input.index();
+					input.rewind();
+					s = -1;
+					if ((synpred33_InternalXtend())) {
+						s = 7;
+					}
+
+					else if ((true)) {
+						s = 8;
+					}
+
+					input.seek(index159_3);
+					if (s >= 0)
+						return s;
+					break;
+				case 4:
+					int LA159_4 = input.LA(1);
+
+					int index159_4 = input.index();
+					input.rewind();
+					s = -1;
+					if ((synpred33_InternalXtend())) {
+						s = 7;
+					}
+
+					else if ((true)) {
+						s = 8;
+					}
+
+					input.seek(index159_4);
+					if (s >= 0)
+						return s;
+					break;
+				case 5:
+					int LA159_5 = input.LA(1);
+
+					int index159_5 = input.index();
+					input.rewind();
+					s = -1;
+					if ((synpred33_InternalXtend())) {
+						s = 7;
+					}
+
+					else if ((true)) {
+						s = 8;
+					}
+
+					input.seek(index159_5);
+					if (s >= 0)
+						return s;
+					break;
+			}
+			if (state.backtracking > 0) {
+				state.failed = true;
+				return -1;
+			}
+			NoViableAltException nvae = new NoViableAltException(getDescription(), 159, _s, input);
+			error(nvae);
+			throw nvae;
+		}
+	}
+
+	static final String DFA161_eotS = "\144\uffff";
+	static final String DFA161_eofS = "\1\2\143\uffff";
+	static final String DFA161_minS = "\1\4\1\0\142\uffff";
+	static final String DFA161_maxS = "\1\163\1\0\142\uffff";
+	static final String DFA161_acceptS = "\2\uffff\1\2\140\uffff\1\1";
+	static final String DFA161_specialS = "\1\uffff\1\0\142\uffff}>";
+	static final String[] DFA161_transitionS = {
+			"\13\2\5\uffff\15\2\1\uffff\23\2\2\uffff\3\2\5\uffff\37\2\1\1" + "\1\2\1\uffff\11\2\1\uffff\11\2",
+			"\1\uffff", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "",
+			"", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "",
+			"", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "",
+			"", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "" };
+
+	static final short[] DFA161_eot = DFA.unpackEncodedString(DFA161_eotS);
+	static final short[] DFA161_eof = DFA.unpackEncodedString(DFA161_eofS);
+	static final char[] DFA161_min = DFA.unpackEncodedStringToUnsignedChars(DFA161_minS);
+	static final char[] DFA161_max = DFA.unpackEncodedStringToUnsignedChars(DFA161_maxS);
+	static final short[] DFA161_accept = DFA.unpackEncodedString(DFA161_acceptS);
+	static final short[] DFA161_special = DFA.unpackEncodedString(DFA161_specialS);
+	static final short[][] DFA161_transition;
+
+	static {
+		int numStates = DFA161_transitionS.length;
+		DFA161_transition = new short[numStates][];
+		for (int i = 0; i < numStates; i++) {
+			DFA161_transition[i] = DFA.unpackEncodedString(DFA161_transitionS[i]);
+		}
+	}
+
+	class DFA161 extends DFA {
+
+		public DFA161(BaseRecognizer recognizer) {
+			this.recognizer = recognizer;
+			this.decisionNumber = 161;
+			this.eot = DFA161_eot;
+			this.eof = DFA161_eof;
+			this.min = DFA161_min;
+			this.max = DFA161_max;
+			this.accept = DFA161_accept;
+			this.special = DFA161_special;
+			this.transition = DFA161_transition;
+		}
+
+		public String getDescription() {
+			return "7536:3: ( ( ( () '[' ) )=> (lv_featureCallArguments_14_0= ruleXClosure ) )?";
+		}
+
+		public int specialStateTransition(int s, IntStream _input) throws NoViableAltException {
+			TokenStream input = (TokenStream) _input;
+			int _s = s;
+			switch (s) {
+				case 0:
+					int LA161_1 = input.LA(1);
+
+					int index161_1 = input.index();
+					input.rewind();
+					s = -1;
+					if ((synpred34_InternalXtend())) {
+						s = 99;
+					}
+
+					else if ((true)) {
+						s = 2;
+					}
+
+					input.seek(index161_1);
+					if (s >= 0)
+						return s;
+					break;
+			}
+			if (state.backtracking > 0) {
+				state.failed = true;
+				return -1;
+			}
+			NoViableAltException nvae = new NoViableAltException(getDescription(), 161, _s, input);
+			error(nvae);
+			throw nvae;
+		}
+	}
+
+	static final String DFA165_eotS = "\144\uffff";
+	static final String DFA165_eofS = "\1\2\143\uffff";
+	static final String DFA165_minS = "\1\4\1\0\142\uffff";
+	static final String DFA165_maxS = "\1\163\1\0\142\uffff";
+	static final String DFA165_acceptS = "\2\uffff\1\2\140\uffff\1\1";
+	static final String DFA165_specialS = "\1\uffff\1\0\142\uffff}>";
+	static final String[] DFA165_transitionS = {
+			"\13\2\5\uffff\3\2\1\1\11\2\1\uffff\23\2\2\uffff\3\2\5\uffff" + "\41\2\1\uffff\11\2\1\uffff\11\2",
+			"\1\uffff", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "",
+			"", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "",
+			"", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "",
+			"", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "" };
+
+	static final short[] DFA165_eot = DFA.unpackEncodedString(DFA165_eotS);
+	static final short[] DFA165_eof = DFA.unpackEncodedString(DFA165_eofS);
+	static final char[] DFA165_min = DFA.unpackEncodedStringToUnsignedChars(DFA165_minS);
+	static final char[] DFA165_max = DFA.unpackEncodedStringToUnsignedChars(DFA165_maxS);
+	static final short[] DFA165_accept = DFA.unpackEncodedString(DFA165_acceptS);
+	static final short[] DFA165_special = DFA.unpackEncodedString(DFA165_specialS);
+	static final short[][] DFA165_transition;
+
+	static {
+		int numStates = DFA165_transitionS.length;
+		DFA165_transition = new short[numStates][];
+		for (int i = 0; i < numStates; i++) {
+			DFA165_transition[i] = DFA.unpackEncodedString(DFA165_transitionS[i]);
+		}
+	}
+
+	class DFA165 extends DFA {
+
+		public DFA165(BaseRecognizer recognizer) {
+			this.recognizer = recognizer;
+			this.decisionNumber = 165;
+			this.eot = DFA165_eot;
+			this.eof = DFA165_eof;
+			this.min = DFA165_min;
+			this.max = DFA165_max;
+			this.accept = DFA165_accept;
+			this.special = DFA165_special;
+			this.transition = DFA165_transition;
+		}
+
+		public String getDescription() {
+			return "7679:2: ( ( ( '<' )=>otherlv_3= '<' ) ( (lv_typeArguments_4_0= ruleJvmArgumentTypeReference ) ) (otherlv_5= ',' ( (lv_typeArguments_6_0= ruleJvmArgumentTypeReference ) ) )* otherlv_7= '>' )?";
+		}
+
+		public int specialStateTransition(int s, IntStream _input) throws NoViableAltException {
+			TokenStream input = (TokenStream) _input;
+			int _s = s;
+			switch (s) {
+				case 0:
+					int LA165_1 = input.LA(1);
+
+					int index165_1 = input.index();
+					input.rewind();
+					s = -1;
+					if ((synpred35_InternalXtend())) {
+						s = 99;
+					}
+
+					else if ((true)) {
+						s = 2;
+					}
+
+					input.seek(index165_1);
+					if (s >= 0)
+						return s;
+					break;
+			}
+			if (state.backtracking > 0) {
+				state.failed = true;
+				return -1;
+			}
+			NoViableAltException nvae = new NoViableAltException(getDescription(), 165, _s, input);
+			error(nvae);
+			throw nvae;
+		}
+	}
+
+	static final String DFA168_eotS = "\144\uffff";
+	static final String DFA168_eofS = "\1\2\143\uffff";
+	static final String DFA168_minS = "\1\4\1\0\142\uffff";
+	static final String DFA168_maxS = "\1\163\1\0\142\uffff";
+	static final String DFA168_acceptS = "\2\uffff\1\2\140\uffff\1\1";
+	static final String DFA168_specialS = "\1\uffff\1\0\142\uffff}>";
+	static final String[] DFA168_transitionS = {
+			"\13\2\5\uffff\15\2\1\uffff\1\2\1\1\21\2\2\uffff\3\2\5\uffff" + "\41\2\1\uffff\11\2\1\uffff\11\2",
+			"\1\uffff", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "",
+			"", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "",
+			"", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "",
+			"", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "" };
+
+	static final short[] DFA168_eot = DFA.unpackEncodedString(DFA168_eotS);
+	static final short[] DFA168_eof = DFA.unpackEncodedString(DFA168_eofS);
+	static final char[] DFA168_min = DFA.unpackEncodedStringToUnsignedChars(DFA168_minS);
+	static final char[] DFA168_max = DFA.unpackEncodedStringToUnsignedChars(DFA168_maxS);
+	static final short[] DFA168_accept = DFA.unpackEncodedString(DFA168_acceptS);
+	static final short[] DFA168_special = DFA.unpackEncodedString(DFA168_specialS);
+	static final short[][] DFA168_transition;
+
+	static {
+		int numStates = DFA168_transitionS.length;
+		DFA168_transition = new short[numStates][];
+		for (int i = 0; i < numStates; i++) {
+			DFA168_transition[i] = DFA.unpackEncodedString(DFA168_transitionS[i]);
+		}
+	}
+
+	class DFA168 extends DFA {
+
+		public DFA168(BaseRecognizer recognizer) {
+			this.recognizer = recognizer;
+			this.decisionNumber = 168;
+			this.eot = DFA168_eot;
+			this.eof = DFA168_eof;
+			this.min = DFA168_min;
+			this.max = DFA168_max;
+			this.accept = DFA168_accept;
+			this.special = DFA168_special;
+			this.transition = DFA168_transition;
+		}
+
+		public String getDescription() {
+			return "7728:3: ( ( ( '(' )=>otherlv_8= '(' ) ( ( ( ( () ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )? ( ( '|' ) ) ) )=> (lv_arguments_9_0= ruleXShortClosure ) ) | ( ( (lv_arguments_10_0= ruleXExpression ) ) (otherlv_11= ',' ( (lv_arguments_12_0= ruleXExpression ) ) )* ) )? otherlv_13= ')' )?";
+		}
+
+		public int specialStateTransition(int s, IntStream _input) throws NoViableAltException {
+			TokenStream input = (TokenStream) _input;
+			int _s = s;
+			switch (s) {
+				case 0:
+					int LA168_1 = input.LA(1);
+
+					int index168_1 = input.index();
+					input.rewind();
+					s = -1;
+					if ((synpred36_InternalXtend())) {
+						s = 99;
+					}
+
+					else if ((true)) {
+						s = 2;
+					}
+
+					input.seek(index168_1);
+					if (s >= 0)
+						return s;
+					break;
+			}
+			if (state.backtracking > 0) {
+				state.failed = true;
+				return -1;
+			}
+			NoViableAltException nvae = new NoViableAltException(getDescription(), 168, _s, input);
+			error(nvae);
+			throw nvae;
+		}
+	}
+
+	static final String DFA167_eotS = "\65\uffff";
+	static final String DFA167_eofS = "\65\uffff";
+	static final String DFA167_minS = "\1\4\5\0\57\uffff";
+	static final String DFA167_maxS = "\1\161\5\0\57\uffff";
+	static final String DFA167_acceptS = "\6\uffff\2\1\1\2\53\uffff\1\3";
+	static final String DFA167_specialS = "\1\0\1\1\1\2\1\3\1\4\1\5\57\uffff}>";
+	static final String[] DFA167_transitionS = {
+			"\1\2\3\10\4\uffff\3\10\5\uffff\1\10\1\uffff\2\10\2\uffff\3\10"
+					+ "\1\uffff\2\10\1\4\1\uffff\1\1\1\5\1\64\11\10\2\uffff\2\10\1"
+					+ "\3\1\uffff\1\10\13\uffff\1\10\16\uffff\1\6\3\uffff\1\10\4\uffff"
+					+ "\1\10\4\uffff\2\10\1\uffff\1\7\1\10\1\uffff\1\10\2\uffff\4\10" + "\1\uffff\7\10", "\1\uffff",
+			"\1\uffff", "\1\uffff", "\1\uffff", "\1\uffff", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "",
+			"", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "",
+			"", "", "", "", "" };
+
+	static final short[] DFA167_eot = DFA.unpackEncodedString(DFA167_eotS);
+	static final short[] DFA167_eof = DFA.unpackEncodedString(DFA167_eofS);
+	static final char[] DFA167_min = DFA.unpackEncodedStringToUnsignedChars(DFA167_minS);
+	static final char[] DFA167_max = DFA.unpackEncodedStringToUnsignedChars(DFA167_maxS);
+	static final short[] DFA167_accept = DFA.unpackEncodedString(DFA167_acceptS);
+	static final short[] DFA167_special = DFA.unpackEncodedString(DFA167_specialS);
+	static final short[][] DFA167_transition;
+
+	static {
+		int numStates = DFA167_transitionS.length;
+		DFA167_transition = new short[numStates][];
+		for (int i = 0; i < numStates; i++) {
+			DFA167_transition[i] = DFA.unpackEncodedString(DFA167_transitionS[i]);
+		}
+	}
+
+	class DFA167 extends DFA {
+
+		public DFA167(BaseRecognizer recognizer) {
+			this.recognizer = recognizer;
+			this.decisionNumber = 167;
+			this.eot = DFA167_eot;
+			this.eof = DFA167_eof;
+			this.min = DFA167_min;
+			this.max = DFA167_max;
+			this.accept = DFA167_accept;
+			this.special = DFA167_special;
+			this.transition = DFA167_transition;
+		}
+
+		public String getDescription() {
+			return "7733:2: ( ( ( ( () ( ( ( ruleJvmFormalParameter ) ) ( ',' ( ( ruleJvmFormalParameter ) ) )* )? ( ( '|' ) ) ) )=> (lv_arguments_9_0= ruleXShortClosure ) ) | ( ( (lv_arguments_10_0= ruleXExpression ) ) (otherlv_11= ',' ( (lv_arguments_12_0= ruleXExpression ) ) )* ) )?";
+		}
+
+		public int specialStateTransition(int s, IntStream _input) throws NoViableAltException {
+			TokenStream input = (TokenStream) _input;
+			int _s = s;
+			switch (s) {
+				case 0:
+					int LA167_0 = input.LA(1);
+
+					int index167_0 = input.index();
+					input.rewind();
+					s = -1;
+					if ((LA167_0 == 34)) {
+						s = 1;
+					}
+
+					else if ((LA167_0 == RULE_ID)) {
+						s = 2;
+					}
+
+					else if ((LA167_0 == 50)) {
+						s = 3;
+					}
+
+					else if ((LA167_0 == 32)) {
+						s = 4;
+					}
+
+					else if ((LA167_0 == 35)) {
+						s = 5;
+					}
+
+					else if ((LA167_0 == 79) && (synpred37_InternalXtend())) {
+						s = 6;
+					}
+
+					else if ((LA167_0 == 96) && (synpred37_InternalXtend())) {
+						s = 7;
+					}
+
+					else if (((LA167_0 >= RULE_STRING && LA167_0 <= RULE_RICH_TEXT_START)
+							|| (LA167_0 >= RULE_HEX && LA167_0 <= RULE_DECIMAL) || LA167_0 == 20
+							|| (LA167_0 >= 22 && LA167_0 <= 23) || (LA167_0 >= 26 && LA167_0 <= 28)
+							|| (LA167_0 >= 30 && LA167_0 <= 31) || (LA167_0 >= 37 && LA167_0 <= 45)
+							|| (LA167_0 >= 48 && LA167_0 <= 49) || LA167_0 == 52 || LA167_0 == 64 || LA167_0 == 83
+							|| LA167_0 == 88 || (LA167_0 >= 93 && LA167_0 <= 94) || LA167_0 == 97 || LA167_0 == 99
+							|| (LA167_0 >= 102 && LA167_0 <= 105) || (LA167_0 >= 107 && LA167_0 <= 113))) {
+						s = 8;
+					}
+
+					else if ((LA167_0 == 36)) {
+						s = 52;
+					}
+
+					input.seek(index167_0);
+					if (s >= 0)
+						return s;
+					break;
+				case 1:
+					int LA167_1 = input.LA(1);
+
+					int index167_1 = input.index();
+					input.rewind();
+					s = -1;
+					if ((synpred37_InternalXtend())) {
+						s = 7;
+					}
+
+					else if ((true)) {
+						s = 8;
+					}
+
+					input.seek(index167_1);
+					if (s >= 0)
+						return s;
+					break;
+				case 2:
+					int LA167_2 = input.LA(1);
+
+					int index167_2 = input.index();
+					input.rewind();
+					s = -1;
+					if ((synpred37_InternalXtend())) {
+						s = 7;
+					}
+
+					else if ((true)) {
+						s = 8;
+					}
+
+					input.seek(index167_2);
+					if (s >= 0)
+						return s;
+					break;
+				case 3:
+					int LA167_3 = input.LA(1);
+
+					int index167_3 = input.index();
+					input.rewind();
+					s = -1;
+					if ((synpred37_InternalXtend())) {
+						s = 7;
+					}
+
+					else if ((true)) {
+						s = 8;
+					}
+
+					input.seek(index167_3);
+					if (s >= 0)
+						return s;
+					break;
+				case 4:
+					int LA167_4 = input.LA(1);
+
+					int index167_4 = input.index();
+					input.rewind();
+					s = -1;
+					if ((synpred37_InternalXtend())) {
+						s = 7;
+					}
+
+					else if ((true)) {
+						s = 8;
+					}
+
+					input.seek(index167_4);
+					if (s >= 0)
+						return s;
+					break;
+				case 5:
+					int LA167_5 = input.LA(1);
+
+					int index167_5 = input.index();
+					input.rewind();
+					s = -1;
+					if ((synpred37_InternalXtend())) {
+						s = 7;
+					}
+
+					else if ((true)) {
+						s = 8;
+					}
+
+					input.seek(index167_5);
+					if (s >= 0)
+						return s;
+					break;
+			}
+			if (state.backtracking > 0) {
+				state.failed = true;
+				return -1;
+			}
+			NoViableAltException nvae = new NoViableAltException(getDescription(), 167, _s, input);
+			error(nvae);
+			throw nvae;
+		}
+	}
+
+	static final String DFA169_eotS = "\144\uffff";
+	static final String DFA169_eofS = "\1\2\143\uffff";
+	static final String DFA169_minS = "\1\4\1\0\142\uffff";
+	static final String DFA169_maxS = "\1\163\1\0\142\uffff";
+	static final String DFA169_acceptS = "\2\uffff\1\2\140\uffff\1\1";
+	static final String DFA169_specialS = "\1\uffff\1\0\142\uffff}>";
+	static final String[] DFA169_transitionS = {
+			"\13\2\5\uffff\15\2\1\uffff\23\2\2\uffff\3\2\5\uffff\37\2\1\1" + "\1\2\1\uffff\11\2\1\uffff\11\2",
+			"\1\uffff", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "",
+			"", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "",
+			"", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "",
+			"", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "" };
+
+	static final short[] DFA169_eot = DFA.unpackEncodedString(DFA169_eotS);
+	static final short[] DFA169_eof = DFA.unpackEncodedString(DFA169_eofS);
+	static final char[] DFA169_min = DFA.unpackEncodedStringToUnsignedChars(DFA169_minS);
+	static final char[] DFA169_max = DFA.unpackEncodedStringToUnsignedChars(DFA169_maxS);
+	static final short[] DFA169_accept = DFA.unpackEncodedString(DFA169_acceptS);
+	static final short[] DFA169_special = DFA.unpackEncodedString(DFA169_specialS);
+	static final short[][] DFA169_transition;
+
+	static {
+		int numStates = DFA169_transitionS.length;
+		DFA169_transition = new short[numStates][];
+		for (int i = 0; i < numStates; i++) {
+			DFA169_transition[i] = DFA.unpackEncodedString(DFA169_transitionS[i]);
+		}
+	}
+
+	class DFA169 extends DFA {
+
+		public DFA169(BaseRecognizer recognizer) {
+			this.recognizer = recognizer;
+			this.decisionNumber = 169;
+			this.eot = DFA169_eot;
+			this.eof = DFA169_eof;
+			this.min = DFA169_min;
+			this.max = DFA169_max;
+			this.accept = DFA169_accept;
+			this.special = DFA169_special;
+			this.transition = DFA169_transition;
+		}
+
+		public String getDescription() {
+			return "7812:3: ( ( ( () '[' ) )=> (lv_arguments_14_0= ruleXClosure ) )?";
+		}
+
+		public int specialStateTransition(int s, IntStream _input) throws NoViableAltException {
+			TokenStream input = (TokenStream) _input;
+			int _s = s;
+			switch (s) {
+				case 0:
+					int LA169_1 = input.LA(1);
+
+					int index169_1 = input.index();
+					input.rewind();
+					s = -1;
+					if ((synpred38_InternalXtend())) {
+						s = 99;
+					}
+
+					else if ((true)) {
+						s = 2;
+					}
+
+					input.seek(index169_1);
+					if (s >= 0)
+						return s;
+					break;
+			}
+			if (state.backtracking > 0) {
+				state.failed = true;
+				return -1;
+			}
+			NoViableAltException nvae = new NoViableAltException(getDescription(), 169, _s, input);
+			error(nvae);
+			throw nvae;
+		}
+	}
+
+	static final String DFA172_eotS = "\144\uffff";
+	static final String DFA172_eofS = "\1\62\143\uffff";
+	static final String DFA172_minS = "\1\4\61\0\62\uffff";
+	static final String DFA172_maxS = "\1\163\61\0\62\uffff";
+	static final String DFA172_acceptS = "\62\uffff\1\2\60\uffff\1\1";
+	static final String DFA172_specialS = "\1\uffff\1\0\1\1\1\2\1\3\1\4\1\5\1\6\1\7\1\10\1\11\1\12\1\13\1\14"
+			+ "\1\15\1\16\1\17\1\20\1\21\1\22\1\23\1\24\1\25\1\26\1\27\1\30\1\31"
+			+ "\1\32\1\33\1\34\1\35\1\36\1\37\1\40\1\41\1\42\1\43\1\44\1\45\1\46"
+			+ "\1\47\1\50\1\51\1\52\1\53\1\54\1\55\1\56\1\57\1\60\62\uffff}>";
+	static final String[] DFA172_transitionS = {
+			"\1\1\1\46\1\47\1\50\4\62\1\42\1\43\1\44\5\uffff\1\20\1\62\1"
+					+ "\4\1\34\2\62\1\11\1\14\1\32\1\62\1\16\1\10\1\3\1\uffff\1\12"
+					+ "\1\61\1\62\1\25\1\31\1\21\1\22\1\23\1\2\1\24\1\7\1\13\2\62\1"
+					+ "\6\1\17\1\5\1\62\1\15\2\uffff\3\62\5\uffff\1\62\1\30\22\62\1"
+					+ "\27\4\62\1\26\4\62\1\36\1\37\1\62\1\uffff\1\52\1\62\1\33\2\62"
+					+ "\1\53\1\54\1\55\1\35\1\uffff\1\40\1\41\1\45\1\51\1\56\1\57\1" + "\60\2\62", "\1\uffff",
+			"\1\uffff", "\1\uffff", "\1\uffff", "\1\uffff", "\1\uffff", "\1\uffff", "\1\uffff", "\1\uffff", "\1\uffff",
+			"\1\uffff", "\1\uffff", "\1\uffff", "\1\uffff", "\1\uffff", "\1\uffff", "\1\uffff", "\1\uffff", "\1\uffff",
+			"\1\uffff", "\1\uffff", "\1\uffff", "\1\uffff", "\1\uffff", "\1\uffff", "\1\uffff", "\1\uffff", "\1\uffff",
+			"\1\uffff", "\1\uffff", "\1\uffff", "\1\uffff", "\1\uffff", "\1\uffff", "\1\uffff", "\1\uffff", "\1\uffff",
+			"\1\uffff", "\1\uffff", "\1\uffff", "\1\uffff", "\1\uffff", "\1\uffff", "\1\uffff", "\1\uffff", "\1\uffff",
+			"\1\uffff", "\1\uffff", "\1\uffff", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "",
+			"", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "",
+			"", "", "", "", "" };
+
+	static final short[] DFA172_eot = DFA.unpackEncodedString(DFA172_eotS);
+	static final short[] DFA172_eof = DFA.unpackEncodedString(DFA172_eofS);
+	static final char[] DFA172_min = DFA.unpackEncodedStringToUnsignedChars(DFA172_minS);
+	static final char[] DFA172_max = DFA.unpackEncodedStringToUnsignedChars(DFA172_maxS);
+	static final short[] DFA172_accept = DFA.unpackEncodedString(DFA172_acceptS);
+	static final short[] DFA172_special = DFA.unpackEncodedString(DFA172_specialS);
+	static final short[][] DFA172_transition;
+
+	static {
+		int numStates = DFA172_transitionS.length;
+		DFA172_transition = new short[numStates][];
+		for (int i = 0; i < numStates; i++) {
+			DFA172_transition[i] = DFA.unpackEncodedString(DFA172_transitionS[i]);
+		}
+	}
+
+	class DFA172 extends DFA {
+
+		public DFA172(BaseRecognizer recognizer) {
+			this.recognizer = recognizer;
+			this.decisionNumber = 172;
+			this.eot = DFA172_eot;
+			this.eof = DFA172_eof;
+			this.min = DFA172_min;
+			this.max = DFA172_max;
+			this.accept = DFA172_accept;
+			this.special = DFA172_special;
+			this.transition = DFA172_transition;
+		}
+
+		public String getDescription() {
+			return "8107:1: ( ( ( ruleXExpression ) )=> (lv_expression_2_0= ruleXExpression ) )?";
+		}
+
+		public int specialStateTransition(int s, IntStream _input) throws NoViableAltException {
+			TokenStream input = (TokenStream) _input;
+			int _s = s;
+			switch (s) {
+				case 0:
+					int LA172_1 = input.LA(1);
+
+					int index172_1 = input.index();
+					input.rewind();
+					s = -1;
+					if ((synpred39_InternalXtend())) {
+						s = 99;
+					}
+
+					else if ((true)) {
+						s = 50;
+					}
+
+					input.seek(index172_1);
+					if (s >= 0)
+						return s;
+					break;
+				case 1:
+					int LA172_2 = input.LA(1);
+
+					int index172_2 = input.index();
+					input.rewind();
+					s = -1;
+					if ((synpred39_InternalXtend())) {
+						s = 99;
+					}
+
+					else if ((true)) {
+						s = 50;
+					}
+
+					input.seek(index172_2);
+					if (s >= 0)
+						return s;
+					break;
+				case 2:
+					int LA172_3 = input.LA(1);
+
+					int index172_3 = input.index();
+					input.rewind();
+					s = -1;
+					if ((synpred39_InternalXtend())) {
+						s = 99;
+					}
+
+					else if ((true)) {
+						s = 50;
+					}
+
+					input.seek(index172_3);
+					if (s >= 0)
+						return s;
+					break;
+				case 3:
+					int LA172_4 = input.LA(1);
+
+					int index172_4 = input.index();
+					input.rewind();
+					s = -1;
+					if ((synpred39_InternalXtend())) {
+						s = 99;
+					}
+
+					else if ((true)) {
+						s = 50;
+					}
+
+					input.seek(index172_4);
+					if (s >= 0)
+						return s;
+					break;
+				case 4:
+					int LA172_5 = input.LA(1);
+
+					int index172_5 = input.index();
+					input.rewind();
+					s = -1;
+					if ((synpred39_InternalXtend())) {
+						s = 99;
+					}
+
+					else if ((true)) {
+						s = 50;
+					}
+
+					input.seek(index172_5);
+					if (s >= 0)
+						return s;
+					break;
+				case 5:
+					int LA172_6 = input.LA(1);
+
+					int index172_6 = input.index();
+					input.rewind();
+					s = -1;
+					if ((synpred39_InternalXtend())) {
+						s = 99;
+					}
+
+					else if ((true)) {
+						s = 50;
+					}
+
+					input.seek(index172_6);
+					if (s >= 0)
+						return s;
+					break;
+				case 6:
+					int LA172_7 = input.LA(1);
+
+					int index172_7 = input.index();
+					input.rewind();
+					s = -1;
+					if ((synpred39_InternalXtend())) {
+						s = 99;
+					}
+
+					else if ((true)) {
+						s = 50;
+					}
+
+					input.seek(index172_7);
+					if (s >= 0)
+						return s;
+					break;
+				case 7:
+					int LA172_8 = input.LA(1);
+
+					int index172_8 = input.index();
+					input.rewind();
+					s = -1;
+					if ((synpred39_InternalXtend())) {
+						s = 99;
+					}
+
+					else if ((true)) {
+						s = 50;
+					}
+
+					input.seek(index172_8);
+					if (s >= 0)
+						return s;
+					break;
+				case 8:
+					int LA172_9 = input.LA(1);
+
+					int index172_9 = input.index();
+					input.rewind();
+					s = -1;
+					if ((synpred39_InternalXtend())) {
+						s = 99;
+					}
+
+					else if ((true)) {
+						s = 50;
+					}
+
+					input.seek(index172_9);
+					if (s >= 0)
+						return s;
+					break;
+				case 9:
+					int LA172_10 = input.LA(1);
+
+					int index172_10 = input.index();
+					input.rewind();
+					s = -1;
+					if ((synpred39_InternalXtend())) {
+						s = 99;
+					}
+
+					else if ((true)) {
+						s = 50;
+					}
+
+					input.seek(index172_10);
+					if (s >= 0)
+						return s;
+					break;
+				case 10:
+					int LA172_11 = input.LA(1);
+
+					int index172_11 = input.index();
+					input.rewind();
+					s = -1;
+					if ((synpred39_InternalXtend())) {
+						s = 99;
+					}
+
+					else if ((true)) {
+						s = 50;
+					}
+
+					input.seek(index172_11);
+					if (s >= 0)
+						return s;
+					break;
+				case 11:
+					int LA172_12 = input.LA(1);
+
+					int index172_12 = input.index();
+					input.rewind();
+					s = -1;
+					if ((synpred39_InternalXtend())) {
+						s = 99;
+					}
+
+					else if ((true)) {
+						s = 50;
+					}
+
+					input.seek(index172_12);
+					if (s >= 0)
+						return s;
+					break;
+				case 12:
+					int LA172_13 = input.LA(1);
+
+					int index172_13 = input.index();
+					input.rewind();
+					s = -1;
+					if ((synpred39_InternalXtend())) {
+						s = 99;
+					}
+
+					else if ((true)) {
+						s = 50;
+					}
+
+					input.seek(index172_13);
+					if (s >= 0)
+						return s;
+					break;
+				case 13:
+					int LA172_14 = input.LA(1);
+
+					int index172_14 = input.index();
+					input.rewind();
+					s = -1;
+					if ((synpred39_InternalXtend())) {
+						s = 99;
+					}
+
+					else if ((true)) {
+						s = 50;
+					}
+
+					input.seek(index172_14);
+					if (s >= 0)
+						return s;
+					break;
+				case 14:
+					int LA172_15 = input.LA(1);
+
+					int index172_15 = input.index();
+					input.rewind();
+					s = -1;
+					if ((synpred39_InternalXtend())) {
+						s = 99;
+					}
+
+					else if ((true)) {
+						s = 50;
+					}
+
+					input.seek(index172_15);
+					if (s >= 0)
+						return s;
+					break;
+				case 15:
+					int LA172_16 = input.LA(1);
+
+					int index172_16 = input.index();
+					input.rewind();
+					s = -1;
+					if ((synpred39_InternalXtend())) {
+						s = 99;
+					}
+
+					else if ((true)) {
+						s = 50;
+					}
+
+					input.seek(index172_16);
+					if (s >= 0)
+						return s;
+					break;
+				case 16:
+					int LA172_17 = input.LA(1);
+
+					int index172_17 = input.index();
+					input.rewind();
+					s = -1;
+					if ((synpred39_InternalXtend())) {
+						s = 99;
+					}
+
+					else if ((true)) {
+						s = 50;
+					}
+
+					input.seek(index172_17);
+					if (s >= 0)
+						return s;
+					break;
+				case 17:
+					int LA172_18 = input.LA(1);
+
+					int index172_18 = input.index();
+					input.rewind();
+					s = -1;
+					if ((synpred39_InternalXtend())) {
+						s = 99;
+					}
+
+					else if ((true)) {
+						s = 50;
+					}
+
+					input.seek(index172_18);
+					if (s >= 0)
+						return s;
+					break;
+				case 18:
+					int LA172_19 = input.LA(1);
+
+					int index172_19 = input.index();
+					input.rewind();
+					s = -1;
+					if ((synpred39_InternalXtend())) {
+						s = 99;
+					}
+
+					else if ((true)) {
+						s = 50;
+					}
+
+					input.seek(index172_19);
+					if (s >= 0)
+						return s;
+					break;
+				case 19:
+					int LA172_20 = input.LA(1);
+
+					int index172_20 = input.index();
+					input.rewind();
+					s = -1;
+					if ((synpred39_InternalXtend())) {
+						s = 99;
+					}
+
+					else if ((true)) {
+						s = 50;
+					}
+
+					input.seek(index172_20);
+					if (s >= 0)
+						return s;
+					break;
+				case 20:
+					int LA172_21 = input.LA(1);
+
+					int index172_21 = input.index();
+					input.rewind();
+					s = -1;
+					if ((synpred39_InternalXtend())) {
+						s = 99;
+					}
+
+					else if ((true)) {
+						s = 50;
+					}
+
+					input.seek(index172_21);
+					if (s >= 0)
+						return s;
+					break;
+				case 21:
+					int LA172_22 = input.LA(1);
+
+					int index172_22 = input.index();
+					input.rewind();
+					s = -1;
+					if ((synpred39_InternalXtend())) {
+						s = 99;
+					}
+
+					else if ((true)) {
+						s = 50;
+					}
+
+					input.seek(index172_22);
+					if (s >= 0)
+						return s;
+					break;
+				case 22:
+					int LA172_23 = input.LA(1);
+
+					int index172_23 = input.index();
+					input.rewind();
+					s = -1;
+					if ((synpred39_InternalXtend())) {
+						s = 99;
+					}
+
+					else if ((true)) {
+						s = 50;
+					}
+
+					input.seek(index172_23);
+					if (s >= 0)
+						return s;
+					break;
+				case 23:
+					int LA172_24 = input.LA(1);
+
+					int index172_24 = input.index();
+					input.rewind();
+					s = -1;
+					if ((synpred39_InternalXtend())) {
+						s = 99;
+					}
+
+					else if ((true)) {
+						s = 50;
+					}
+
+					input.seek(index172_24);
+					if (s >= 0)
+						return s;
+					break;
+				case 24:
+					int LA172_25 = input.LA(1);
+
+					int index172_25 = input.index();
+					input.rewind();
+					s = -1;
+					if ((synpred39_InternalXtend())) {
+						s = 99;
+					}
+
+					else if ((true)) {
+						s = 50;
+					}
+
+					input.seek(index172_25);
+					if (s >= 0)
+						return s;
+					break;
+				case 25:
+					int LA172_26 = input.LA(1);
+
+					int index172_26 = input.index();
+					input.rewind();
+					s = -1;
+					if ((synpred39_InternalXtend())) {
+						s = 99;
+					}
+
+					else if ((true)) {
+						s = 50;
+					}
+
+					input.seek(index172_26);
+					if (s >= 0)
+						return s;
+					break;
+				case 26:
+					int LA172_27 = input.LA(1);
+
+					int index172_27 = input.index();
+					input.rewind();
+					s = -1;
+					if ((synpred39_InternalXtend())) {
+						s = 99;
+					}
+
+					else if ((true)) {
+						s = 50;
+					}
+
+					input.seek(index172_27);
+					if (s >= 0)
+						return s;
+					break;
+				case 27:
+					int LA172_28 = input.LA(1);
+
+					int index172_28 = input.index();
+					input.rewind();
+					s = -1;
+					if ((synpred39_InternalXtend())) {
+						s = 99;
+					}
+
+					else if ((true)) {
+						s = 50;
+					}
+
+					input.seek(index172_28);
+					if (s >= 0)
+						return s;
+					break;
+				case 28:
+					int LA172_29 = input.LA(1);
+
+					int index172_29 = input.index();
+					input.rewind();
+					s = -1;
+					if ((synpred39_InternalXtend())) {
+						s = 99;
+					}
+
+					else if ((true)) {
+						s = 50;
+					}
+
+					input.seek(index172_29);
+					if (s >= 0)
+						return s;
+					break;
+				case 29:
+					int LA172_30 = input.LA(1);
+
+					int index172_30 = input.index();
+					input.rewind();
+					s = -1;
+					if ((synpred39_InternalXtend())) {
+						s = 99;
+					}
+
+					else if ((true)) {
+						s = 50;
+					}
+
+					input.seek(index172_30);
+					if (s >= 0)
+						return s;
+					break;
+				case 30:
+					int LA172_31 = input.LA(1);
+
+					int index172_31 = input.index();
+					input.rewind();
+					s = -1;
+					if ((synpred39_InternalXtend())) {
+						s = 99;
+					}
+
+					else if ((true)) {
+						s = 50;
+					}
+
+					input.seek(index172_31);
+					if (s >= 0)
+						return s;
+					break;
+				case 31:
+					int LA172_32 = input.LA(1);
+
+					int index172_32 = input.index();
+					input.rewind();
+					s = -1;
+					if ((synpred39_InternalXtend())) {
+						s = 99;
+					}
+
+					else if ((true)) {
+						s = 50;
+					}
+
+					input.seek(index172_32);
+					if (s >= 0)
+						return s;
+					break;
+				case 32:
+					int LA172_33 = input.LA(1);
+
+					int index172_33 = input.index();
+					input.rewind();
+					s = -1;
+					if ((synpred39_InternalXtend())) {
+						s = 99;
+					}
+
+					else if ((true)) {
+						s = 50;
+					}
+
+					input.seek(index172_33);
+					if (s >= 0)
+						return s;
+					break;
+				case 33:
+					int LA172_34 = input.LA(1);
+
+					int index172_34 = input.index();
+					input.rewind();
+					s = -1;
+					if ((synpred39_InternalXtend())) {
+						s = 99;
+					}
+
+					else if ((true)) {
+						s = 50;
+					}
+
+					input.seek(index172_34);
+					if (s >= 0)
+						return s;
+					break;
+				case 34:
+					int LA172_35 = input.LA(1);
+
+					int index172_35 = input.index();
+					input.rewind();
+					s = -1;
+					if ((synpred39_InternalXtend())) {
+						s = 99;
+					}
+
+					else if ((true)) {
+						s = 50;
+					}
+
+					input.seek(index172_35);
+					if (s >= 0)
+						return s;
+					break;
+				case 35:
+					int LA172_36 = input.LA(1);
+
+					int index172_36 = input.index();
+					input.rewind();
+					s = -1;
+					if ((synpred39_InternalXtend())) {
+						s = 99;
+					}
+
+					else if ((true)) {
+						s = 50;
+					}
+
+					input.seek(index172_36);
+					if (s >= 0)
+						return s;
+					break;
+				case 36:
+					int LA172_37 = input.LA(1);
+
+					int index172_37 = input.index();
+					input.rewind();
+					s = -1;
+					if ((synpred39_InternalXtend())) {
+						s = 99;
+					}
+
+					else if ((true)) {
+						s = 50;
+					}
+
+					input.seek(index172_37);
+					if (s >= 0)
+						return s;
+					break;
+				case 37:
+					int LA172_38 = input.LA(1);
+
+					int index172_38 = input.index();
+					input.rewind();
+					s = -1;
+					if ((synpred39_InternalXtend())) {
+						s = 99;
+					}
+
+					else if ((true)) {
+						s = 50;
+					}
+
+					input.seek(index172_38);
+					if (s >= 0)
+						return s;
+					break;
+				case 38:
+					int LA172_39 = input.LA(1);
+
+					int index172_39 = input.index();
+					input.rewind();
+					s = -1;
+					if ((synpred39_InternalXtend())) {
+						s = 99;
+					}
+
+					else if ((true)) {
+						s = 50;
+					}
+
+					input.seek(index172_39);
+					if (s >= 0)
+						return s;
+					break;
+				case 39:
+					int LA172_40 = input.LA(1);
+
+					int index172_40 = input.index();
+					input.rewind();
+					s = -1;
+					if ((synpred39_InternalXtend())) {
+						s = 99;
+					}
+
+					else if ((true)) {
+						s = 50;
+					}
+
+					input.seek(index172_40);
+					if (s >= 0)
+						return s;
+					break;
+				case 40:
+					int LA172_41 = input.LA(1);
+
+					int index172_41 = input.index();
+					input.rewind();
+					s = -1;
+					if ((synpred39_InternalXtend())) {
+						s = 99;
+					}
+
+					else if ((true)) {
+						s = 50;
+					}
+
+					input.seek(index172_41);
+					if (s >= 0)
+						return s;
+					break;
+				case 41:
+					int LA172_42 = input.LA(1);
+
+					int index172_42 = input.index();
+					input.rewind();
+					s = -1;
+					if ((synpred39_InternalXtend())) {
+						s = 99;
+					}
+
+					else if ((true)) {
+						s = 50;
+					}
+
+					input.seek(index172_42);
+					if (s >= 0)
+						return s;
+					break;
+				case 42:
+					int LA172_43 = input.LA(1);
+
+					int index172_43 = input.index();
+					input.rewind();
+					s = -1;
+					if ((synpred39_InternalXtend())) {
+						s = 99;
+					}
+
+					else if ((true)) {
+						s = 50;
+					}
+
+					input.seek(index172_43);
+					if (s >= 0)
+						return s;
+					break;
+				case 43:
+					int LA172_44 = input.LA(1);
+
+					int index172_44 = input.index();
+					input.rewind();
+					s = -1;
+					if ((synpred39_InternalXtend())) {
+						s = 99;
+					}
+
+					else if ((true)) {
+						s = 50;
+					}
+
+					input.seek(index172_44);
+					if (s >= 0)
+						return s;
+					break;
+				case 44:
+					int LA172_45 = input.LA(1);
+
+					int index172_45 = input.index();
+					input.rewind();
+					s = -1;
+					if ((synpred39_InternalXtend())) {
+						s = 99;
+					}
+
+					else if ((true)) {
+						s = 50;
+					}
+
+					input.seek(index172_45);
+					if (s >= 0)
+						return s;
+					break;
+				case 45:
+					int LA172_46 = input.LA(1);
+
+					int index172_46 = input.index();
+					input.rewind();
+					s = -1;
+					if ((synpred39_InternalXtend())) {
+						s = 99;
+					}
+
+					else if ((true)) {
+						s = 50;
+					}
+
+					input.seek(index172_46);
+					if (s >= 0)
+						return s;
+					break;
+				case 46:
+					int LA172_47 = input.LA(1);
+
+					int index172_47 = input.index();
+					input.rewind();
+					s = -1;
+					if ((synpred39_InternalXtend())) {
+						s = 99;
+					}
+
+					else if ((true)) {
+						s = 50;
+					}
+
+					input.seek(index172_47);
+					if (s >= 0)
+						return s;
+					break;
+				case 47:
+					int LA172_48 = input.LA(1);
+
+					int index172_48 = input.index();
+					input.rewind();
+					s = -1;
+					if ((synpred39_InternalXtend())) {
+						s = 99;
+					}
+
+					else if ((true)) {
+						s = 50;
+					}
+
+					input.seek(index172_48);
+					if (s >= 0)
+						return s;
+					break;
+				case 48:
+					int LA172_49 = input.LA(1);
+
+					int index172_49 = input.index();
+					input.rewind();
+					s = -1;
+					if ((synpred39_InternalXtend())) {
+						s = 99;
+					}
+
+					else if ((true)) {
+						s = 50;
+					}
+
+					input.seek(index172_49);
+					if (s >= 0)
+						return s;
+					break;
+			}
+			if (state.backtracking > 0) {
+				state.failed = true;
+				return -1;
+			}
+			NoViableAltException nvae = new NoViableAltException(getDescription(), 172, _s, input);
+			error(nvae);
+			throw nvae;
+		}
+	}
+
+	static final String DFA187_eotS = "\147\uffff";
+	static final String DFA187_eofS = "\1\2\146\uffff";
+	static final String DFA187_minS = "\1\4\1\0\145\uffff";
+	static final String DFA187_maxS = "\1\165\1\0\145\uffff";
+	static final String DFA187_acceptS = "\2\uffff\1\2\143\uffff\1\1";
+	static final String DFA187_specialS = "\1\uffff\1\0\145\uffff}>";
+	static final String[] DFA187_transitionS = {
+			"\13\2\5\uffff\3\2\1\1\36\2\1\uffff\3\2\5\uffff\41\2\1\uffff" + "\11\2\1\uffff\11\2\1\uffff\1\2",
+			"\1\uffff", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "",
+			"", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "",
+			"", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "",
+			"", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "" };
+
+	static final short[] DFA187_eot = DFA.unpackEncodedString(DFA187_eotS);
+	static final short[] DFA187_eof = DFA.unpackEncodedString(DFA187_eofS);
+	static final char[] DFA187_min = DFA.unpackEncodedStringToUnsignedChars(DFA187_minS);
+	static final char[] DFA187_max = DFA.unpackEncodedStringToUnsignedChars(DFA187_maxS);
+	static final short[] DFA187_accept = DFA.unpackEncodedString(DFA187_acceptS);
+	static final short[] DFA187_special = DFA.unpackEncodedString(DFA187_specialS);
+	static final short[][] DFA187_transition;
+
+	static {
+		int numStates = DFA187_transitionS.length;
+		DFA187_transition = new short[numStates][];
+		for (int i = 0; i < numStates; i++) {
+			DFA187_transition[i] = DFA.unpackEncodedString(DFA187_transitionS[i]);
+		}
+	}
+
+	class DFA187 extends DFA {
+
+		public DFA187(BaseRecognizer recognizer) {
+			this.recognizer = recognizer;
+			this.decisionNumber = 187;
+			this.eot = DFA187_eot;
+			this.eof = DFA187_eof;
+			this.min = DFA187_min;
+			this.max = DFA187_max;
+			this.accept = DFA187_accept;
+			this.special = DFA187_special;
+			this.transition = DFA187_transition;
+		}
+
+		public String getDescription() {
+			return "8654:2: ( ( ( '<' )=>otherlv_1= '<' ) ( (lv_arguments_2_0= ruleJvmArgumentTypeReference ) ) (otherlv_3= ',' ( (lv_arguments_4_0= ruleJvmArgumentTypeReference ) ) )* otherlv_5= '>' )?";
+		}
+
+		public int specialStateTransition(int s, IntStream _input) throws NoViableAltException {
+			TokenStream input = (TokenStream) _input;
+			int _s = s;
+			switch (s) {
+				case 0:
+					int LA187_1 = input.LA(1);
+
+					int index187_1 = input.index();
+					input.rewind();
+					s = -1;
+					if ((synpred45_InternalXtend())) {
+						s = 102;
+					}
+
+					else if ((true)) {
+						s = 2;
+					}
+
+					input.seek(index187_1);
+					if (s >= 0)
+						return s;
+					break;
+			}
+			if (state.backtracking > 0) {
+				state.failed = true;
+				return -1;
+			}
+			NoViableAltException nvae = new NoViableAltException(getDescription(), 187, _s, input);
+			error(nvae);
+			throw nvae;
+		}
+	}
+
+	static final String DFA194_eotS = "\13\uffff";
+	static final String DFA194_eofS = "\2\uffff\3\6\2\uffff\3\6\1\uffff";
+	static final String DFA194_minS = "\1\4\1\uffff\3\24\1\4\1\uffff\3\24\1\uffff";
+	static final String DFA194_maxS = "\1\62\1\uffff\3\132\1\124\1\uffff\3\132\1\uffff";
+	static final String DFA194_acceptS = "\1\uffff\1\1\4\uffff\1\2\3\uffff\1\3";
+	static final String DFA194_specialS = "\13\uffff}>";
+	static final String[] DFA194_transitionS = { "\1\2\33\uffff\1\4\12\uffff\1\1\6\uffff\1\3", "",
+			"\3\6\7\uffff\3\6\6\uffff\7\6\6\uffff\1\6\12\uffff\1\6\32\uffff" + "\1\5",
+			"\3\6\7\uffff\3\6\6\uffff\7\6\6\uffff\1\6\12\uffff\1\6\32\uffff" + "\1\5",
+			"\3\6\7\uffff\3\6\6\uffff\7\6\6\uffff\1\6\12\uffff\1\6\32\uffff" + "\1\5",
+			"\1\7\33\uffff\1\11\21\uffff\1\10\41\uffff\1\12", "",
+			"\3\6\7\uffff\3\6\6\uffff\7\6\6\uffff\1\6\12\uffff\1\6\32\uffff" + "\1\5",
+			"\3\6\7\uffff\3\6\6\uffff\7\6\6\uffff\1\6\12\uffff\1\6\32\uffff" + "\1\5",
+			"\3\6\7\uffff\3\6\6\uffff\7\6\6\uffff\1\6\12\uffff\1\6\32\uffff" + "\1\5", "" };
+
+	static final short[] DFA194_eot = DFA.unpackEncodedString(DFA194_eotS);
+	static final short[] DFA194_eof = DFA.unpackEncodedString(DFA194_eofS);
+	static final char[] DFA194_min = DFA.unpackEncodedStringToUnsignedChars(DFA194_minS);
+	static final char[] DFA194_max = DFA.unpackEncodedStringToUnsignedChars(DFA194_maxS);
+	static final short[] DFA194_accept = DFA.unpackEncodedString(DFA194_acceptS);
+	static final short[] DFA194_special = DFA.unpackEncodedString(DFA194_specialS);
+	static final short[][] DFA194_transition;
+
+	static {
+		int numStates = DFA194_transitionS.length;
+		DFA194_transition = new short[numStates][];
+		for (int i = 0; i < numStates; i++) {
+			DFA194_transition[i] = DFA.unpackEncodedString(DFA194_transitionS[i]);
+		}
+	}
+
+	class DFA194 extends DFA {
+
+		public DFA194(BaseRecognizer recognizer) {
+			this.recognizer = recognizer;
+			this.decisionNumber = 194;
+			this.eot = DFA194_eot;
+			this.eof = DFA194_eof;
+			this.min = DFA194_min;
+			this.max = DFA194_max;
+			this.accept = DFA194_accept;
+			this.special = DFA194_special;
+			this.transition = DFA194_transition;
+		}
+
+		public String getDescription() {
+			return "9142:1: ( ( ( (lv_static_1_0= 'static' ) ) ( (lv_extension_2_0= 'extension' ) )? ( ( ruleQualifiedName ) ) otherlv_4= '.' otherlv_5= '*' ) | ( ( ruleQualifiedName ) ) | ( (lv_importedNamespace_7_0= ruleQualifiedNameWithWildcard ) ) )";
+		}
+	}
+
+	public static final BitSet FOLLOW_ruleFile_in_entryRuleFile75 = new BitSet(new long[] { 0x0000000000000000L });
+	public static final BitSet FOLLOW_EOF_in_entryRuleFile85 = new BitSet(new long[] { 0x0000000000000002L });
+	public static final BitSet FOLLOW_20_in_ruleFile123 = new BitSet(new long[] { 0x0004000100000010L });
+	public static final BitSet FOLLOW_ruleQualifiedName_in_ruleFile144 = new BitSet(new long[] { 0x80103F81C0700002L });
+	public static final BitSet FOLLOW_21_in_ruleFile157 = new BitSet(new long[] { 0x80103F81C0500002L });
+	public static final BitSet FOLLOW_ruleXImportSection_in_ruleFile182 = new BitSet(new long[] { 0x80003F81C0500002L });
+	public static final BitSet FOLLOW_ruleType_in_ruleFile204 = new BitSet(new long[] { 0x80003F81C0500002L });
+	public static final BitSet FOLLOW_ruleType_in_entryRuleType241 = new BitSet(new long[] { 0x0000000000000000L });
+	public static final BitSet FOLLOW_EOF_in_entryRuleType251 = new BitSet(new long[] { 0x0000000000000002L });
+	public static final BitSet FOLLOW_ruleXAnnotation_in_ruleType306 = new BitSet(new long[] { 0x80003F81C0500000L });
+	public static final BitSet FOLLOW_ruleCommonModifier_in_ruleType339 = new BitSet(new long[] { 0x00003F8000500000L });
+	public static final BitSet FOLLOW_22_in_ruleType352 = new BitSet(new long[] { 0x0004000100000010L });
+	public static final BitSet FOLLOW_ruleValidID_in_ruleType373 = new BitSet(new long[] { 0x000000001C800000L });
+	public static final BitSet FOLLOW_23_in_ruleType386 = new BitSet(new long[] { 0x0004000100000010L });
+	public static final BitSet FOLLOW_ruleJvmTypeParameter_in_ruleType407 = new BitSet(
+			new long[] { 0x0000000003000000L });
+	public static final BitSet FOLLOW_24_in_ruleType420 = new BitSet(new long[] { 0x0004000100000010L });
+	public static final BitSet FOLLOW_ruleJvmTypeParameter_in_ruleType441 = new BitSet(
+			new long[] { 0x0000000003000000L });
+	public static final BitSet FOLLOW_25_in_ruleType455 = new BitSet(new long[] { 0x000000001C000000L });
+	public static final BitSet FOLLOW_26_in_ruleType470 = new BitSet(new long[] { 0x0004000100000010L });
+	public static final BitSet FOLLOW_ruleJvmParameterizedTypeReference_in_ruleType491 = new BitSet(
+			new long[] { 0x0000000018000000L });
+	public static final BitSet FOLLOW_27_in_ruleType506 = new BitSet(new long[] { 0x0004000100000010L });
+	public static final BitSet FOLLOW_ruleJvmParameterizedTypeReference_in_ruleType527 = new BitSet(
+			new long[] { 0x0000000011000000L });
+	public static final BitSet FOLLOW_24_in_ruleType540 = new BitSet(new long[] { 0x0004000100000010L });
+	public static final BitSet FOLLOW_ruleJvmParameterizedTypeReference_in_ruleType561 = new BitSet(
+			new long[] { 0x0000000011000000L });
+	public static final BitSet FOLLOW_28_in_ruleType577 = new BitSet(new long[] { 0x8007FFCD20100010L,
+			0x0000000000008000L });
+	public static final BitSet FOLLOW_ruleMember_in_ruleType598 = new BitSet(new long[] { 0x8007FFCD20100010L,
+			0x0000000000008000L });
+	public static final BitSet FOLLOW_29_in_ruleType611 = new BitSet(new long[] { 0x0000000000000002L });
+	public static final BitSet FOLLOW_ruleCommonModifier_in_ruleType649 = new BitSet(new long[] { 0x00003F8040100000L });
+	public static final BitSet FOLLOW_30_in_ruleType662 = new BitSet(new long[] { 0x0004000100000010L });
+	public static final BitSet FOLLOW_ruleValidID_in_ruleType683 = new BitSet(new long[] { 0x0000000014800000L });
+	public static final BitSet FOLLOW_23_in_ruleType696 = new BitSet(new long[] { 0x0004000100000010L });
+	public static final BitSet FOLLOW_ruleJvmTypeParameter_in_ruleType717 = new BitSet(
+			new long[] { 0x0000000003000000L });
+	public static final BitSet FOLLOW_24_in_ruleType730 = new BitSet(new long[] { 0x0004000100000010L });
+	public static final BitSet FOLLOW_ruleJvmTypeParameter_in_ruleType751 = new BitSet(
+			new long[] { 0x0000000003000000L });
+	public static final BitSet FOLLOW_25_in_ruleType765 = new BitSet(new long[] { 0x0000000014000000L });
+	public static final BitSet FOLLOW_26_in_ruleType780 = new BitSet(new long[] { 0x0004000100000010L });
+	public static final BitSet FOLLOW_ruleJvmParameterizedTypeReference_in_ruleType801 = new BitSet(
+			new long[] { 0x0000000011000000L });
+	public static final BitSet FOLLOW_24_in_ruleType814 = new BitSet(new long[] { 0x0004000100000010L });
+	public static final BitSet FOLLOW_ruleJvmParameterizedTypeReference_in_ruleType835 = new BitSet(
+			new long[] { 0x0000000011000000L });
+	public static final BitSet FOLLOW_28_in_ruleType851 = new BitSet(new long[] { 0x8007FFCD20100010L,
+			0x0000000000008000L });
+	public static final BitSet FOLLOW_ruleMember_in_ruleType872 = new BitSet(new long[] { 0x8007FFCD20100010L,
+			0x0000000000008000L });
+	public static final BitSet FOLLOW_29_in_ruleType885 = new BitSet(new long[] { 0x0000000000000002L });
+	public static final BitSet FOLLOW_ruleCommonModifier_in_ruleType923 = new BitSet(new long[] { 0x00003F8080100000L });
+	public static final BitSet FOLLOW_31_in_ruleType936 = new BitSet(new long[] { 0x0004000100000010L });
+	public static final BitSet FOLLOW_ruleValidID_in_ruleType957 = new BitSet(new long[] { 0x0000000010000000L });
+	public static final BitSet FOLLOW_28_in_ruleType969 = new BitSet(new long[] { 0x0004000120200010L });
+	public static final BitSet FOLLOW_ruleXtendEnumLiteral_in_ruleType991 = new BitSet(
+			new long[] { 0x0000000021200000L });
+	public static final BitSet FOLLOW_24_in_ruleType1004 = new BitSet(new long[] { 0x0004000100000010L });
+	public static final BitSet FOLLOW_ruleXtendEnumLiteral_in_ruleType1025 = new BitSet(
+			new long[] { 0x0000000021200000L });
+	public static final BitSet FOLLOW_21_in_ruleType1042 = new BitSet(new long[] { 0x0000000020000000L });
+	public static final BitSet FOLLOW_29_in_ruleType1056 = new BitSet(new long[] { 0x0000000000000002L });
+	public static final BitSet FOLLOW_ruleCommonModifier_in_ruleType1094 = new BitSet(
+			new long[] { 0x00003F8100100000L });
+	public static final BitSet FOLLOW_32_in_ruleType1107 = new BitSet(new long[] { 0x0004000100000010L });
+	public static final BitSet FOLLOW_ruleValidID_in_ruleType1128 = new BitSet(new long[] { 0x0000000010000000L });
+	public static final BitSet FOLLOW_28_in_ruleType1140 = new BitSet(new long[] { 0x8004FF8D20100010L,
+			0x0000000000008000L });
+	public static final BitSet FOLLOW_ruleAnnotationField_in_ruleType1161 = new BitSet(new long[] {
+			0x8004FF8D20100010L, 0x0000000000008000L });
+	public static final BitSet FOLLOW_29_in_ruleType1174 = new BitSet(new long[] { 0x0000000000000002L });
+	public static final BitSet FOLLOW_ruleAnnotationField_in_entryRuleAnnotationField1212 = new BitSet(
+			new long[] { 0x0000000000000000L });
+	public static final BitSet FOLLOW_EOF_in_entryRuleAnnotationField1222 = new BitSet(
+			new long[] { 0x0000000000000002L });
+	public static final BitSet FOLLOW_ruleXAnnotation_in_ruleAnnotationField1268 = new BitSet(new long[] {
+			0x8004FF8D00100010L, 0x0000000000008000L });
+	public static final BitSet FOLLOW_ruleCommonModifier_in_ruleAnnotationField1290 = new BitSet(new long[] {
+			0x0004FF8D00100010L, 0x0000000000008000L });
+	public static final BitSet FOLLOW_ruleFieldModifier_in_ruleAnnotationField1314 = new BitSet(new long[] {
+			0x0004FF8D00100010L, 0x0000000000008000L });
+	public static final BitSet FOLLOW_ruleCommonModifier_in_ruleAnnotationField1335 = new BitSet(new long[] {
+			0x0004FF8D00100010L, 0x0000000000008000L });
+	public static final BitSet FOLLOW_ruleJvmTypeReference_in_ruleAnnotationField1357 = new BitSet(
+			new long[] { 0x0004000100000010L });
+	public static final BitSet FOLLOW_ruleValidID_in_ruleAnnotationField1379 = new BitSet(
+			new long[] { 0x0000000200200002L });
+	public static final BitSet FOLLOW_ruleJvmTypeReference_in_ruleAnnotationField1408 = new BitSet(
+			new long[] { 0x0004000100000010L });
+	public static final BitSet FOLLOW_ruleValidID_in_ruleAnnotationField1429 = new BitSet(
+			new long[] { 0x0000000200200002L });
+	public static final BitSet FOLLOW_33_in_ruleAnnotationField1444 = new BitSet(new long[] { 0x80173FADCC5070F0L,
+			0x00005A0020000000L });
+	public static final BitSet FOLLOW_ruleXAnnotationElementValue_in_ruleAnnotationField1465 = new BitSet(
+			new long[] { 0x0000000000200002L });
+	public static final BitSet FOLLOW_21_in_ruleAnnotationField1480 = new BitSet(new long[] { 0x0000000000000002L });
+	public static final BitSet FOLLOW_ruleMember_in_entryRuleMember1518 = new BitSet(new long[] { 0x0000000000000000L });
+	public static final BitSet FOLLOW_EOF_in_entryRuleMember1528 = new BitSet(new long[] { 0x0000000000000002L });
+	public static final BitSet FOLLOW_ruleXAnnotation_in_ruleMember1583 = new BitSet(new long[] { 0x8007FFCD00100010L,
+			0x0000000000008000L });
+	public static final BitSet FOLLOW_ruleCommonModifier_in_ruleMember1616 = new BitSet(new long[] {
+			0x0004FF8D00100010L, 0x0000000000008000L });
+	public static final BitSet FOLLOW_ruleFieldModifier_in_ruleMember1640 = new BitSet(new long[] {
+			0x0004FF8D00100010L, 0x0000000000008000L });
+	public static final BitSet FOLLOW_ruleCommonModifier_in_ruleMember1661 = new BitSet(new long[] {
+			0x0004FF8D00100010L, 0x0000000000008000L });
+	public static final BitSet FOLLOW_ruleJvmTypeReference_in_ruleMember1683 = new BitSet(
+			new long[] { 0x0004000100000010L });
+	public static final BitSet FOLLOW_ruleValidID_in_ruleMember1705 = new BitSet(new long[] { 0x0000000200200002L });
+	public static final BitSet FOLLOW_34_in_ruleMember1731 = new BitSet(new long[] { 0x0004FF8D00100010L,
+			0x0000000000008000L });
+	public static final BitSet FOLLOW_ruleFieldModifier_in_ruleMember1766 = new BitSet(new long[] {
+			0x0004FF8D00100010L, 0x0000000000008000L });
+	public static final BitSet FOLLOW_ruleCommonModifier_in_ruleMember1793 = new BitSet(new long[] {
+			0x0004FF8D00100010L, 0x0000000000008000L });
+	public static final BitSet FOLLOW_ruleJvmTypeReference_in_ruleMember1816 = new BitSet(
+			new long[] { 0x0004000300200012L });
+	public static final BitSet FOLLOW_ruleValidID_in_ruleMember1837 = new BitSet(new long[] { 0x0000000200200002L });
+	public static final BitSet FOLLOW_ruleFieldModifier_in_ruleMember1867 = new BitSet(
+			new long[] { 0x00003F8400100000L });
+	public static final BitSet FOLLOW_ruleCommonModifier_in_ruleMember1888 = new BitSet(
+			new long[] { 0x00003F8400100000L });
+	public static final BitSet FOLLOW_34_in_ruleMember1907 = new BitSet(new long[] { 0x0004FF8D00100010L,
+			0x0000000000008000L });
+	public static final BitSet FOLLOW_ruleCommonModifier_in_ruleMember1941 = new BitSet(new long[] {
+			0x0004FF8D00100010L, 0x0000000000008000L });
+	public static final BitSet FOLLOW_ruleJvmTypeReference_in_ruleMember1963 = new BitSet(
+			new long[] { 0x0004000300200012L });
+	public static final BitSet FOLLOW_ruleValidID_in_ruleMember1984 = new BitSet(new long[] { 0x0000000200200002L });
+	public static final BitSet FOLLOW_ruleJvmTypeReference_in_ruleMember2014 = new BitSet(
+			new long[] { 0x0004000100000010L });
+	public static final BitSet FOLLOW_ruleValidID_in_ruleMember2035 = new BitSet(new long[] { 0x0000000200200002L });
+	public static final BitSet FOLLOW_33_in_ruleMember2050 = new BitSet(new long[] { 0x00173FEDDCD070F0L,
+			0x0003FBCA61080001L });
+	public static final BitSet FOLLOW_ruleXExpression_in_ruleMember2071 = new BitSet(new long[] { 0x0000000000200002L });
+	public static final BitSet FOLLOW_21_in_ruleMember2086 = new BitSet(new long[] { 0x0000000000000002L });
+	public static final BitSet FOLLOW_ruleCommonModifier_in_ruleMember2126 = new BitSet(
+			new long[] { 0x00033F8000100000L });
+	public static final BitSet FOLLOW_ruleMethodModifier_in_ruleMember2148 = new BitSet(new long[] {
+			0x0007FF8D00900010L, 0x0000000000008000L });
+	public static final BitSet FOLLOW_ruleCommonModifier_in_ruleMember2170 = new BitSet(new long[] {
+			0x0007FF8D00900010L, 0x0000000000008000L });
+	public static final BitSet FOLLOW_ruleMethodModifier_in_ruleMember2197 = new BitSet(new long[] {
+			0x0007FF8D00900010L, 0x0000000000008000L });
+	public static final BitSet FOLLOW_23_in_ruleMember2212 = new BitSet(new long[] { 0x0004000100000010L });
+	public static final BitSet FOLLOW_ruleJvmTypeParameter_in_ruleMember2233 = new BitSet(
+			new long[] { 0x0000000003000000L });
+	public static final BitSet FOLLOW_24_in_ruleMember2246 = new BitSet(new long[] { 0x0004000100000010L });
+	public static final BitSet FOLLOW_ruleJvmTypeParameter_in_ruleMember2267 = new BitSet(
+			new long[] { 0x0000000003000000L });
+	public static final BitSet FOLLOW_25_in_ruleMember2281 = new BitSet(new long[] { 0x0004FF8D00100010L,
+			0x0000000000008000L });
+	public static final BitSet FOLLOW_ruleJvmTypeReference_in_ruleMember2343 = new BitSet(
+			new long[] { 0x0004000000000000L });
+	public static final BitSet FOLLOW_ruleCreateExtensionInfo_in_ruleMember2364 = new BitSet(
+			new long[] { 0x0004000100000010L });
+	public static final BitSet FOLLOW_ruleValidID_in_ruleMember2385 = new BitSet(new long[] { 0x0000000800000000L });
+	public static final BitSet FOLLOW_35_in_ruleMember2397 = new BitSet(new long[] { 0x8004FF9D00100010L,
+			0x0000000000008000L });
+	public static final BitSet FOLLOW_ruleJvmTypeReference_in_ruleMember2455 = new BitSet(
+			new long[] { 0x0004000100000010L });
+	public static final BitSet FOLLOW_ruleValidID_in_ruleMember2476 = new BitSet(new long[] { 0x0000000800000000L });
+	public static final BitSet FOLLOW_35_in_ruleMember2488 = new BitSet(new long[] { 0x8004FF9D00100010L,
+			0x0000000000008000L });
+	public static final BitSet FOLLOW_ruleCreateExtensionInfo_in_ruleMember2546 = new BitSet(
+			new long[] { 0x0004000100000010L });
+	public static final BitSet FOLLOW_ruleValidID_in_ruleMember2567 = new BitSet(new long[] { 0x0000000800000000L });
+	public static final BitSet FOLLOW_35_in_ruleMember2579 = new BitSet(new long[] { 0x8004FF9D00100010L,
+			0x0000000000008000L });
+	public static final BitSet FOLLOW_ruleValidID_in_ruleMember2609 = new BitSet(new long[] { 0x0000000800000000L });
+	public static final BitSet FOLLOW_35_in_ruleMember2621 = new BitSet(new long[] { 0x8004FF9D00100010L,
+			0x0000000000008000L });
+	public static final BitSet FOLLOW_ruleParameter_in_ruleMember2645 = new BitSet(new long[] { 0x0000001001000000L });
+	public static final BitSet FOLLOW_24_in_ruleMember2658 = new BitSet(new long[] { 0x8004FF8D00100010L,
+			0x0000000000008000L });
+	public static final BitSet FOLLOW_ruleParameter_in_ruleMember2679 = new BitSet(new long[] { 0x0000001001000000L });
+	public static final BitSet FOLLOW_36_in_ruleMember2695 = new BitSet(new long[] { 0x00000020102000E2L });
+	public static final BitSet FOLLOW_37_in_ruleMember2708 = new BitSet(new long[] { 0x0004FF8D00100010L,
+			0x0000000000008000L });
+	public static final BitSet FOLLOW_ruleJvmTypeReference_in_ruleMember2729 = new BitSet(
+			new long[] { 0x00000000112000E2L });
+	public static final BitSet FOLLOW_24_in_ruleMember2742 = new BitSet(new long[] { 0x0004FF8D00100010L,
+			0x0000000000008000L });
+	public static final BitSet FOLLOW_ruleJvmTypeReference_in_ruleMember2763 = new BitSet(
+			new long[] { 0x00000000112000E2L });
+	public static final BitSet FOLLOW_ruleXBlockExpression_in_ruleMember2789 = new BitSet(
+			new long[] { 0x0000000000000002L });
+	public static final BitSet FOLLOW_ruleRichString_in_ruleMember2816 = new BitSet(new long[] { 0x0000000000000002L });
+	public static final BitSet FOLLOW_21_in_ruleMember2834 = new BitSet(new long[] { 0x0000000000000002L });
+	public static final BitSet FOLLOW_ruleCommonModifier_in_ruleMember2874 = new BitSet(
+			new long[] { 0x00003FC000100000L });
+	public static final BitSet FOLLOW_38_in_ruleMember2887 = new BitSet(new long[] { 0x0000000800800000L });
+	public static final BitSet FOLLOW_23_in_ruleMember2900 = new BitSet(new long[] { 0x0004000100000010L });
+	public static final BitSet FOLLOW_ruleJvmTypeParameter_in_ruleMember2921 = new BitSet(
+			new long[] { 0x0000000003000000L });
+	public static final BitSet FOLLOW_24_in_ruleMember2934 = new BitSet(new long[] { 0x0004000100000010L });
+	public static final BitSet FOLLOW_ruleJvmTypeParameter_in_ruleMember2955 = new BitSet(
+			new long[] { 0x0000000003000000L });
+	public static final BitSet FOLLOW_25_in_ruleMember2969 = new BitSet(new long[] { 0x0000000800000000L });
+	public static final BitSet FOLLOW_35_in_ruleMember2983 = new BitSet(new long[] { 0x8004FF9D00100010L,
+			0x0000000000008000L });
+	public static final BitSet FOLLOW_ruleParameter_in_ruleMember3005 = new BitSet(new long[] { 0x0000001001000000L });
+	public static final BitSet FOLLOW_24_in_ruleMember3018 = new BitSet(new long[] { 0x8004FF8D00100010L,
+			0x0000000000008000L });
+	public static final BitSet FOLLOW_ruleParameter_in_ruleMember3039 = new BitSet(new long[] { 0x0000001001000000L });
+	public static final BitSet FOLLOW_36_in_ruleMember3055 = new BitSet(new long[] { 0x0000002010000000L });
+	public static final BitSet FOLLOW_37_in_ruleMember3068 = new BitSet(new long[] { 0x0004FF8D00100010L,
+			0x0000000000008000L });
+	public static final BitSet FOLLOW_ruleJvmTypeReference_in_ruleMember3089 = new BitSet(
+			new long[] { 0x0000000011000000L });
+	public static final BitSet FOLLOW_24_in_ruleMember3102 = new BitSet(new long[] { 0x0004FF8D00100010L,
+			0x0000000000008000L });
+	public static final BitSet FOLLOW_ruleJvmTypeReference_in_ruleMember3123 = new BitSet(
+			new long[] { 0x0000000011000000L });
+	public static final BitSet FOLLOW_ruleXBlockExpression_in_ruleMember3148 = new BitSet(
+			new long[] { 0x0000000000000002L });
+	public static final BitSet FOLLOW_ruleXtendEnumLiteral_in_entryRuleXtendEnumLiteral3186 = new BitSet(
+			new long[] { 0x0000000000000000L });
+	public static final BitSet FOLLOW_EOF_in_entryRuleXtendEnumLiteral3196 = new BitSet(
+			new long[] { 0x0000000000000002L });
+	public static final BitSet FOLLOW_ruleValidID_in_ruleXtendEnumLiteral3241 = new BitSet(
+			new long[] { 0x0000000000000002L });
+	public static final BitSet FOLLOW_ruleCommonModifier_in_entryRuleCommonModifier3277 = new BitSet(
+			new long[] { 0x0000000000000000L });
+	public static final BitSet FOLLOW_EOF_in_entryRuleCommonModifier3288 = new BitSet(
+			new long[] { 0x0000000000000002L });
+	public static final BitSet FOLLOW_39_in_ruleCommonModifier3326 = new BitSet(new long[] { 0x0000000000000002L });
+	public static final BitSet FOLLOW_40_in_ruleCommonModifier3345 = new BitSet(new long[] { 0x0000000000000002L });
+	public static final BitSet FOLLOW_41_in_ruleCommonModifier3364 = new BitSet(new long[] { 0x0000000000000002L });
+	public static final BitSet FOLLOW_20_in_ruleCommonModifier3383 = new BitSet(new long[] { 0x0000000000000002L });
+	public static final BitSet FOLLOW_42_in_ruleCommonModifier3402 = new BitSet(new long[] { 0x0000000000000002L });
+	public static final BitSet FOLLOW_43_in_ruleCommonModifier3421 = new BitSet(new long[] { 0x0000000000000002L });
+	public static final BitSet FOLLOW_44_in_ruleCommonModifier3440 = new BitSet(new long[] { 0x0000000000000002L });
+	public static final BitSet FOLLOW_45_in_ruleCommonModifier3459 = new BitSet(new long[] { 0x0000000000000002L });
+	public static final BitSet FOLLOW_ruleFieldModifier_in_entryRuleFieldModifier3500 = new BitSet(
+			new long[] { 0x0000000000000000L });
+	public static final BitSet FOLLOW_EOF_in_entryRuleFieldModifier3511 = new BitSet(new long[] { 0x0000000000000002L });
+	public static final BitSet FOLLOW_46_in_ruleFieldModifier3549 = new BitSet(new long[] { 0x0000000000000002L });
+	public static final BitSet FOLLOW_47_in_ruleFieldModifier3568 = new BitSet(new long[] { 0x0000000000000002L });
+	public static final BitSet FOLLOW_ruleMethodModifier_in_entryRuleMethodModifier3609 = new BitSet(
+			new long[] { 0x0000000000000000L });
+	public static final BitSet FOLLOW_EOF_in_entryRuleMethodModifier3620 = new BitSet(
+			new long[] { 0x0000000000000002L });
+	public static final BitSet FOLLOW_48_in_ruleMethodModifier3658 = new BitSet(new long[] { 0x0000000000000002L });
+	public static final BitSet FOLLOW_49_in_ruleMethodModifier3677 = new BitSet(new long[] { 0x0000000000000002L });
+	public static final BitSet FOLLOW_ruleCreateExtensionInfo_in_entryRuleCreateExtensionInfo3717 = new BitSet(
+			new long[] { 0x0000000000000000L });
+	public static final BitSet FOLLOW_EOF_in_entryRuleCreateExtensionInfo3727 = new BitSet(
+			new long[] { 0x0000000000000002L });
+	public static final BitSet FOLLOW_50_in_ruleCreateExtensionInfo3764 = new BitSet(new long[] { 0x00173FEDDCD070F0L,
+			0x0003FBCA61080001L });
+	public static final BitSet FOLLOW_ruleValidID_in_ruleCreateExtensionInfo3786 = new BitSet(
+			new long[] { 0x0008000000000000L });
+	public static final BitSet FOLLOW_51_in_ruleCreateExtensionInfo3798 = new BitSet(new long[] { 0x00173FEDDCD070F0L,
+			0x0003FBCA61080001L });
+	public static final BitSet FOLLOW_ruleXExpression_in_ruleCreateExtensionInfo3821 = new BitSet(
+			new long[] { 0x0000000000000002L });
+	public static final BitSet FOLLOW_ruleValidID_in_entryRuleValidID3858 = new BitSet(
+			new long[] { 0x0000000000000000L });
+	public static final BitSet FOLLOW_EOF_in_entryRuleValidID3869 = new BitSet(new long[] { 0x0000000000000002L });
+	public static final BitSet FOLLOW_RULE_ID_in_ruleValidID3909 = new BitSet(new long[] { 0x0000000000000002L });
+	public static final BitSet FOLLOW_50_in_ruleValidID3933 = new BitSet(new long[] { 0x0000000000000002L });
+	public static final BitSet FOLLOW_32_in_ruleValidID3952 = new BitSet(new long[] { 0x0000000000000002L });
+	public static final BitSet FOLLOW_ruleFeatureCallID_in_entryRuleFeatureCallID3993 = new BitSet(
+			new long[] { 0x0000000000000000L });
+	public static final BitSet FOLLOW_EOF_in_entryRuleFeatureCallID4004 = new BitSet(new long[] { 0x0000000000000002L });
+	public static final BitSet FOLLOW_RULE_ID_in_ruleFeatureCallID4044 = new BitSet(new long[] { 0x0000000000000002L });
+	public static final BitSet FOLLOW_42_in_ruleFeatureCallID4068 = new BitSet(new long[] { 0x0000000000000002L });
+	public static final BitSet FOLLOW_32_in_ruleFeatureCallID4087 = new BitSet(new long[] { 0x0000000000000002L });
+	public static final BitSet FOLLOW_22_in_ruleFeatureCallID4106 = new BitSet(new long[] { 0x0000000000000002L });
+	public static final BitSet FOLLOW_50_in_ruleFeatureCallID4125 = new BitSet(new long[] { 0x0000000000000002L });
+	public static final BitSet FOLLOW_48_in_ruleFeatureCallID4144 = new BitSet(new long[] { 0x0000000000000002L });
+	public static final BitSet FOLLOW_44_in_ruleFeatureCallID4163 = new BitSet(new long[] { 0x0000000000000002L });
+	public static final BitSet FOLLOW_31_in_ruleFeatureCallID4182 = new BitSet(new long[] { 0x0000000000000002L });
+	public static final BitSet FOLLOW_26_in_ruleFeatureCallID4201 = new BitSet(new long[] { 0x0000000000000002L });
+	public static final BitSet FOLLOW_34_in_ruleFeatureCallID4220 = new BitSet(new long[] { 0x0000000000000002L });
+	public static final BitSet FOLLOW_45_in_ruleFeatureCallID4239 = new BitSet(new long[] { 0x0000000000000002L });
+	public static final BitSet FOLLOW_27_in_ruleFeatureCallID4258 = new BitSet(new long[] { 0x0000000000000002L });
+	public static final BitSet FOLLOW_52_in_ruleFeatureCallID4277 = new BitSet(new long[] { 0x0000000000000002L });
+	public static final BitSet FOLLOW_30_in_ruleFeatureCallID4296 = new BitSet(new long[] { 0x0000000000000002L });
+	public static final BitSet FOLLOW_49_in_ruleFeatureCallID4315 = new BitSet(new long[] { 0x0000000000000002L });
+	public static final BitSet FOLLOW_20_in_ruleFeatureCallID4334 = new BitSet(new long[] { 0x0000000000000002L });
+	public static final BitSet FOLLOW_39_in_ruleFeatureCallID4353 = new BitSet(new long[] { 0x0000000000000002L });
+	public static final BitSet FOLLOW_40_in_ruleFeatureCallID4372 = new BitSet(new long[] { 0x0000000000000002L });
+	public static final BitSet FOLLOW_41_in_ruleFeatureCallID4391 = new BitSet(new long[] { 0x0000000000000002L });
+	public static final BitSet FOLLOW_43_in_ruleFeatureCallID4410 = new BitSet(new long[] { 0x0000000000000002L });
+	public static final BitSet FOLLOW_37_in_ruleFeatureCallID4429 = new BitSet(new long[] { 0x0000000000000002L });
+	public static final BitSet FOLLOW_ruleParameter_in_entryRuleParameter4469 = new BitSet(
+			new long[] { 0x0000000000000000L });
+	public static final BitSet FOLLOW_EOF_in_entryRuleParameter4479 = new BitSet(new long[] { 0x0000000000000002L });
+	public static final BitSet FOLLOW_ruleXAnnotation_in_ruleParameter4525 = new BitSet(new long[] {
+			0x8004FF8D00100010L, 0x0000000000008000L });
+	public static final BitSet FOLLOW_34_in_ruleParameter4545 = new BitSet(new long[] { 0x8004FF8D00100010L,
+			0x0000000000008000L });
+	public static final BitSet FOLLOW_ruleXAnnotation_in_ruleParameter4579 = new BitSet(new long[] {
+			0x8004FF8D00100010L, 0x0000000000008000L });
+	public static final BitSet FOLLOW_ruleJvmTypeReference_in_ruleParameter4603 = new BitSet(
+			new long[] { 0x0024000100000010L });
+	public static final BitSet FOLLOW_53_in_ruleParameter4621 = new BitSet(new long[] { 0x0004000100000010L });
+	public static final BitSet FOLLOW_ruleValidID_in_ruleParameter4656 = new BitSet(new long[] { 0x0000000000000002L });
+	public static final BitSet FOLLOW_ruleXVariableDeclaration_in_entryRuleXVariableDeclaration4692 = new BitSet(
+			new long[] { 0x0000000000000000L });
+	public static final BitSet FOLLOW_EOF_in_entryRuleXVariableDeclaration4702 = new BitSet(
+			new long[] { 0x0000000000000002L });
+	public static final BitSet FOLLOW_47_in_ruleXVariableDeclaration4860 = new BitSet(new long[] { 0x0004FF8D00100010L,
+			0x0000000000008000L });
+	public static final BitSet FOLLOW_46_in_ruleXVariableDeclaration4891 = new BitSet(new long[] { 0x0004FF8D00100010L,
+			0x0000000000008000L });
+	public static final BitSet FOLLOW_34_in_ruleXVariableDeclaration4910 = new BitSet(new long[] { 0x0004FF8D00100010L,
+			0x0000000000008000L });
+	public static final BitSet FOLLOW_34_in_ruleXVariableDeclaration4950 = new BitSet(
+			new long[] { 0x0000C00000000000L });
+	public static final BitSet FOLLOW_47_in_ruleXVariableDeclaration4982 = new BitSet(new long[] { 0x0004FF8D00100010L,
+			0x0000000000008000L });
+	public static final BitSet FOLLOW_46_in_ruleXVariableDeclaration5013 = new BitSet(new long[] { 0x0004FF8D00100010L,
+			0x0000000000008000L });
+	public static final BitSet FOLLOW_ruleJvmTypeReference_in_ruleXVariableDeclaration5065 = new BitSet(
+			new long[] { 0x0004000100000010L });
+	public static final BitSet FOLLOW_ruleValidID_in_ruleXVariableDeclaration5086 = new BitSet(
+			new long[] { 0x0000000200000002L });
+	public static final BitSet FOLLOW_ruleValidID_in_ruleXVariableDeclaration5115 = new BitSet(
+			new long[] { 0x0000000200000002L });
+	public static final BitSet FOLLOW_33_in_ruleXVariableDeclaration5129 = new BitSet(new long[] { 0x00173FEDDCD070F0L,
+			0x0003FBCA61080001L });
+	public static final BitSet FOLLOW_ruleXExpression_in_ruleXVariableDeclaration5150 = new BitSet(
+			new long[] { 0x0000000000000002L });
+	public static final BitSet FOLLOW_ruleJvmFormalParameter_in_entryRuleJvmFormalParameter5188 = new BitSet(
+			new long[] { 0x0000000000000000L });
+	public static final BitSet FOLLOW_EOF_in_entryRuleJvmFormalParameter5198 = new BitSet(
+			new long[] { 0x0000000000000002L });
+	public static final BitSet FOLLOW_34_in_ruleJvmFormalParameter5241 = new BitSet(new long[] { 0x0004FF8D00100010L,
+			0x0000000000008000L });
+	public static final BitSet FOLLOW_ruleJvmTypeReference_in_ruleJvmFormalParameter5276 = new BitSet(
+			new long[] { 0x0004000100000010L });
+	public static final BitSet FOLLOW_ruleValidID_in_ruleJvmFormalParameter5298 = new BitSet(
+			new long[] { 0x0000000000000002L });
+	public static final BitSet FOLLOW_ruleFullJvmFormalParameter_in_entryRuleFullJvmFormalParameter5334 = new BitSet(
+			new long[] { 0x0000000000000000L });
+	public static final BitSet FOLLOW_EOF_in_entryRuleFullJvmFormalParameter5344 = new BitSet(
+			new long[] { 0x0000000000000002L });
+	public static final BitSet FOLLOW_34_in_ruleFullJvmFormalParameter5387 = new BitSet(new long[] {
+			0x0004FF8D00100010L, 0x0000000000008000L });
+	public static final BitSet FOLLOW_ruleJvmTypeReference_in_ruleFullJvmFormalParameter5422 = new BitSet(
+			new long[] { 0x0004000100000010L });
+	public static final BitSet FOLLOW_ruleValidID_in_ruleFullJvmFormalParameter5443 = new BitSet(
+			new long[] { 0x0000000000000002L });
+	public static final BitSet FOLLOW_ruleXStringLiteral_in_entryRuleXStringLiteral5479 = new BitSet(
+			new long[] { 0x0000000000000000L });
+	public static final BitSet FOLLOW_EOF_in_entryRuleXStringLiteral5489 = new BitSet(
+			new long[] { 0x0000000000000002L });
+	public static final BitSet FOLLOW_ruleSimpleStringLiteral_in_ruleXStringLiteral5536 = new BitSet(
+			new long[] { 0x0000000000000002L });
+	public static final BitSet FOLLOW_ruleRichString_in_ruleXStringLiteral5563 = new BitSet(
+			new long[] { 0x0000000000000002L });
+	public static final BitSet FOLLOW_ruleSimpleStringLiteral_in_entryRuleSimpleStringLiteral5598 = new BitSet(
+			new long[] { 0x0000000000000000L });
+	public static final BitSet FOLLOW_EOF_in_entryRuleSimpleStringLiteral5608 = new BitSet(
+			new long[] { 0x0000000000000002L });
+	public static final BitSet FOLLOW_RULE_STRING_in_ruleSimpleStringLiteral5659 = new BitSet(
+			new long[] { 0x0000000000000002L });
+	public static final BitSet FOLLOW_ruleRichString_in_entryRuleRichString5700 = new BitSet(
+			new long[] { 0x0000000000000000L });
+	public static final BitSet FOLLOW_EOF_in_entryRuleRichString5710 = new BitSet(new long[] { 0x0000000000000002L });
+	public static final BitSet FOLLOW_ruleRichStringLiteral_in_ruleRichString5766 = new BitSet(
+			new long[] { 0x0000000000000002L });
+	public static final BitSet FOLLOW_ruleRichStringLiteralStart_in_ruleRichString5794 = new BitSet(new long[] {
+			0x0857FFEDDCD07FF0L, 0x0003FBCA61080001L });
+	public static final BitSet FOLLOW_ruleRichStringPart_in_ruleRichString5815 = new BitSet(new long[] {
+			0x0857FFEDDCD07FF0L, 0x0003FBCA61080001L });
+	public static final BitSet FOLLOW_ruleRichStringLiteralInbetween_in_ruleRichString5838 = new BitSet(new long[] {
+			0x0857FFEDDCD07FF0L, 0x0003FBCA61080001L });
+	public static final BitSet FOLLOW_ruleRichStringPart_in_ruleRichString5859 = new BitSet(new long[] {
+			0x0857FFEDDCD07FF0L, 0x0003FBCA61080001L });
+	public static final BitSet FOLLOW_ruleRichStringLiteralEnd_in_ruleRichString5883 = new BitSet(
+			new long[] { 0x0000000000000002L });
+	public static final BitSet FOLLOW_ruleRichStringLiteral_in_entryRuleRichStringLiteral5921 = new BitSet(
+			new long[] { 0x0000000000000000L });
+	public static final BitSet FOLLOW_EOF_in_entryRuleRichStringLiteral5931 = new BitSet(
+			new long[] { 0x0000000000000002L });
+	public static final BitSet FOLLOW_RULE_RICH_TEXT_in_ruleRichStringLiteral5982 = new BitSet(
+			new long[] { 0x0000000000000002L });
+	public static final BitSet FOLLOW_ruleRichStringLiteralStart_in_entryRuleRichStringLiteralStart6023 = new BitSet(
+			new long[] { 0x0000000000000000L });
+	public static final BitSet FOLLOW_EOF_in_entryRuleRichStringLiteralStart6033 = new BitSet(
+			new long[] { 0x0000000000000002L });
+	public static final BitSet FOLLOW_RULE_RICH_TEXT_START_in_ruleRichStringLiteralStart6084 = new BitSet(
+			new long[] { 0x0000000000000002L });
+	public static final BitSet FOLLOW_ruleRichStringLiteralInbetween_in_entryRuleRichStringLiteralInbetween6125 = new BitSet(
+			new long[] { 0x0000000000000000L });
+	public static final BitSet FOLLOW_EOF_in_entryRuleRichStringLiteralInbetween6135 = new BitSet(
+			new long[] { 0x0000000000000002L });
+	public static final BitSet FOLLOW_RULE_RICH_TEXT_INBETWEEN_in_ruleRichStringLiteralInbetween6187 = new BitSet(
+			new long[] { 0x0000000000000002L });
+	public static final BitSet FOLLOW_RULE_COMMENT_RICH_TEXT_INBETWEEN_in_ruleRichStringLiteralInbetween6215 = new BitSet(
+			new long[] { 0x0000000000000002L });
+	public static final BitSet FOLLOW_ruleRichStringLiteralEnd_in_entryRuleRichStringLiteralEnd6257 = new BitSet(
+			new long[] { 0x0000000000000000L });
+	public static final BitSet FOLLOW_EOF_in_entryRuleRichStringLiteralEnd6267 = new BitSet(
+			new long[] { 0x0000000000000002L });
+	public static final BitSet FOLLOW_RULE_RICH_TEXT_END_in_ruleRichStringLiteralEnd6319 = new BitSet(
+			new long[] { 0x0000000000000002L });
+	public static final BitSet FOLLOW_RULE_COMMENT_RICH_TEXT_END_in_ruleRichStringLiteralEnd6347 = new BitSet(
+			new long[] { 0x0000000000000002L });
+	public static final BitSet FOLLOW_ruleInternalRichString_in_entryRuleInternalRichString6389 = new BitSet(
+			new long[] { 0x0000000000000000L });
+	public static final BitSet FOLLOW_EOF_in_entryRuleInternalRichString6399 = new BitSet(
+			new long[] { 0x0000000000000002L });
+	public static final BitSet FOLLOW_ruleRichStringLiteralInbetween_in_ruleInternalRichString6455 = new BitSet(
+			new long[] { 0x0857FFEDDCD073F2L, 0x0003FBCA61080001L });
+	public static final BitSet FOLLOW_ruleRichStringPart_in_ruleInternalRichString6477 = new BitSet(
+			new long[] { 0x0000000000000300L });
+	public static final BitSet FOLLOW_ruleRichStringLiteralInbetween_in_ruleInternalRichString6499 = new BitSet(
+			new long[] { 0x0857FFEDDCD073F2L, 0x0003FBCA61080001L });
+	public static final BitSet FOLLOW_ruleRichStringPart_in_entryRuleRichStringPart6538 = new BitSet(
+			new long[] { 0x0000000000000000L });
+	public static final BitSet FOLLOW_EOF_in_entryRuleRichStringPart6548 = new BitSet(
+			new long[] { 0x0000000000000002L });
+	public static final BitSet FOLLOW_ruleXExpressionInsideBlock_in_ruleRichStringPart6595 = new BitSet(
+			new long[] { 0x0000000000000002L });
+	public static final BitSet FOLLOW_ruleRichStringForLoop_in_ruleRichStringPart6622 = new BitSet(
+			new long[] { 0x0000000000000002L });
+	public static final BitSet FOLLOW_ruleRichStringIf_in_ruleRichStringPart6649 = new BitSet(
+			new long[] { 0x0000000000000002L });
+	public static final BitSet FOLLOW_ruleRichStringForLoop_in_entryRuleRichStringForLoop6684 = new BitSet(
+			new long[] { 0x0000000000000000L });
+	public static final BitSet FOLLOW_EOF_in_entryRuleRichStringForLoop6694 = new BitSet(
+			new long[] { 0x0000000000000002L });
+	public static final BitSet FOLLOW_54_in_ruleRichStringForLoop6740 = new BitSet(new long[] { 0x0004FF8D00100010L,
+			0x0000000000008000L });
+	public static final BitSet FOLLOW_ruleJvmFormalParameter_in_ruleRichStringForLoop6761 = new BitSet(
+			new long[] { 0x0008000000000000L });
+	public static final BitSet FOLLOW_51_in_ruleRichStringForLoop6773 = new BitSet(new long[] { 0x00173FEDDCD070F0L,
+			0x0003FBCA61080001L });
+	public static final BitSet FOLLOW_ruleXExpression_in_ruleRichStringForLoop6794 = new BitSet(
+			new long[] { 0x0380000000000300L });
+	public static final BitSet FOLLOW_55_in_ruleRichStringForLoop6807 = new BitSet(new long[] { 0x00173FEDDCD070F0L,
+			0x0003FBCA61080001L });
+	public static final BitSet FOLLOW_ruleXExpression_in_ruleRichStringForLoop6828 = new BitSet(
+			new long[] { 0x0380000000000300L });
+	public static final BitSet FOLLOW_56_in_ruleRichStringForLoop6843 = new BitSet(new long[] { 0x00173FEDDCD070F0L,
+			0x0003FBCA61080001L });
+	public static final BitSet FOLLOW_ruleXExpression_in_ruleRichStringForLoop6864 = new BitSet(
+			new long[] { 0x0380000000000300L });
+	public static final BitSet FOLLOW_57_in_ruleRichStringForLoop6879 = new BitSet(new long[] { 0x00173FEDDCD070F0L,
+			0x0003FBCA61080001L });
+	public static final BitSet FOLLOW_ruleXExpression_in_ruleRichStringForLoop6900 = new BitSet(
+			new long[] { 0x0380000000000300L });
+	public static final BitSet FOLLOW_ruleInternalRichString_in_ruleRichStringForLoop6923 = new BitSet(
+			new long[] { 0x0400000000000000L });
+	public static final BitSet FOLLOW_58_in_ruleRichStringForLoop6935 = new BitSet(new long[] { 0x0000000000000002L });
+	public static final BitSet FOLLOW_ruleRichStringIf_in_entryRuleRichStringIf6971 = new BitSet(
+			new long[] { 0x0000000000000000L });
+	public static final BitSet FOLLOW_EOF_in_entryRuleRichStringIf6981 = new BitSet(new long[] { 0x0000000000000002L });
+	public static final BitSet FOLLOW_59_in_ruleRichStringIf7027 = new BitSet(new long[] { 0x00173FEDDCD070F0L,
+			0x0003FBCA61080001L });
+	public static final BitSet FOLLOW_ruleXExpression_in_ruleRichStringIf7048 = new BitSet(
+			new long[] { 0x0380000000000300L });
+	public static final BitSet FOLLOW_ruleInternalRichString_in_ruleRichStringIf7069 = new BitSet(
+			new long[] { 0x7000000000000000L });
+	public static final BitSet FOLLOW_ruleRichStringElseIf_in_ruleRichStringIf7090 = new BitSet(
+			new long[] { 0x7000000000000000L });
+	public static final BitSet FOLLOW_60_in_ruleRichStringIf7104 = new BitSet(new long[] { 0x0380000000000300L });
+	public static final BitSet FOLLOW_ruleInternalRichString_in_ruleRichStringIf7125 = new BitSet(
+			new long[] { 0x2000000000000000L });
+	public static final BitSet FOLLOW_61_in_ruleRichStringIf7139 = new BitSet(new long[] { 0x0000000000000002L });
+	public static final BitSet FOLLOW_ruleRichStringElseIf_in_entryRuleRichStringElseIf7175 = new BitSet(
+			new long[] { 0x0000000000000000L });
+	public static final BitSet FOLLOW_EOF_in_entryRuleRichStringElseIf7185 = new BitSet(
+			new long[] { 0x0000000000000002L });
+	public static final BitSet FOLLOW_62_in_ruleRichStringElseIf7222 = new BitSet(new long[] { 0x00173FEDDCD070F0L,
+			0x0003FBCA61080001L });
+	public static final BitSet FOLLOW_ruleXExpression_in_ruleRichStringElseIf7243 = new BitSet(
+			new long[] { 0x0380000000000300L });
+	public static final BitSet FOLLOW_ruleInternalRichString_in_ruleRichStringElseIf7264 = new BitSet(
+			new long[] { 0x0000000000000002L });
+	public static final BitSet FOLLOW_ruleXAnnotation_in_entryRuleXAnnotation7300 = new BitSet(
+			new long[] { 0x0000000000000000L });
+	public static final BitSet FOLLOW_EOF_in_entryRuleXAnnotation7310 = new BitSet(new long[] { 0x0000000000000002L });
+	public static final BitSet FOLLOW_63_in_ruleXAnnotation7356 = new BitSet(new long[] { 0x0004000100000010L });
+	public static final BitSet FOLLOW_ruleQualifiedName_in_ruleXAnnotation7379 = new BitSet(
+			new long[] { 0x0000000800000002L });
+	public static final BitSet FOLLOW_35_in_ruleXAnnotation7400 = new BitSet(new long[] { 0x80173FBDCC5070F0L,
+			0x00005A0020000000L });
+	public static final BitSet FOLLOW_ruleXAnnotationElementValuePair_in_ruleXAnnotation7424 = new BitSet(
+			new long[] { 0x0000001001000000L });
+	public static final BitSet FOLLOW_24_in_ruleXAnnotation7437 = new BitSet(new long[] { 0x0004000100000010L });
+	public static final BitSet FOLLOW_ruleXAnnotationElementValuePair_in_ruleXAnnotation7458 = new BitSet(
+			new long[] { 0x0000001001000000L });
+	public static final BitSet FOLLOW_ruleXAnnotationElementValue_in_ruleXAnnotation7488 = new BitSet(
+			new long[] { 0x0000001000000000L });
+	public static final BitSet FOLLOW_36_in_ruleXAnnotation7502 = new BitSet(new long[] { 0x0000000000000002L });
+	public static final BitSet FOLLOW_ruleXAnnotationElementValuePair_in_entryRuleXAnnotationElementValuePair7540 = new BitSet(
+			new long[] { 0x0000000000000000L });
+	public static final BitSet FOLLOW_EOF_in_entryRuleXAnnotationElementValuePair7550 = new BitSet(
+			new long[] { 0x0000000000000002L });
+	public static final BitSet FOLLOW_ruleValidID_in_ruleXAnnotationElementValuePair7598 = new BitSet(
+			new long[] { 0x0000000200000000L });
+	public static final BitSet FOLLOW_33_in_ruleXAnnotationElementValuePair7610 = new BitSet(new long[] {
+			0x80173FADCC5070F0L, 0x00005A0020000000L });
+	public static final BitSet FOLLOW_ruleXAnnotationElementValue_in_ruleXAnnotationElementValuePair7631 = new BitSet(
+			new long[] { 0x0000000000000002L });
+	public static final BitSet FOLLOW_ruleXAnnotationElementValueStringConcatenation_in_entryRuleXAnnotationElementValueStringConcatenation7667 = new BitSet(
+			new long[] { 0x0000000000000000L });
+	public static final BitSet FOLLOW_EOF_in_entryRuleXAnnotationElementValueStringConcatenation7677 = new BitSet(
+			new long[] { 0x0000000000000002L });
+	public static final BitSet FOLLOW_ruleXAnnotationElementValue_in_ruleXAnnotationElementValueStringConcatenation7724 = new BitSet(
+			new long[] { 0x0000000000000002L, 0x0000000000000001L });
+	public static final BitSet FOLLOW_64_in_ruleXAnnotationElementValueStringConcatenation7751 = new BitSet(new long[] {
+			0x80173FADCC5070F0L, 0x00005A0020000000L });
+	public static final BitSet FOLLOW_ruleXAnnotationElementValue_in_ruleXAnnotationElementValueStringConcatenation7785 = new BitSet(
+			new long[] { 0x0000000000000002L, 0x0000000000000001L });
+	public static final BitSet FOLLOW_ruleXAnnotationElementValue_in_entryRuleXAnnotationElementValue7823 = new BitSet(
+			new long[] { 0x0000000000000000L });
+	public static final BitSet FOLLOW_EOF_in_entryRuleXAnnotationElementValue7833 = new BitSet(
+			new long[] { 0x0000000000000002L });
+	public static final BitSet FOLLOW_ruleXAnnotation_in_ruleXAnnotationElementValue7880 = new BitSet(
+			new long[] { 0x0000000000000002L });
+	public static final BitSet FOLLOW_ruleXListLiteral_in_ruleXAnnotationElementValue7907 = new BitSet(
+			new long[] { 0x0000000000000002L });
+	public static final BitSet FOLLOW_ruleXStringLiteral_in_ruleXAnnotationElementValue7934 = new BitSet(
+			new long[] { 0x0000000000000002L });
+	public static final BitSet FOLLOW_ruleXBooleanLiteral_in_ruleXAnnotationElementValue7961 = new BitSet(
+			new long[] { 0x0000000000000002L });
+	public static final BitSet FOLLOW_ruleXNumberLiteral_in_ruleXAnnotationElementValue7988 = new BitSet(
+			new long[] { 0x0000000000000002L });
+	public static final BitSet FOLLOW_ruleXTypeLiteral_in_ruleXAnnotationElementValue8015 = new BitSet(
+			new long[] { 0x0000000000000002L });
+	public static final BitSet FOLLOW_ruleXAnnotationValueFieldReference_in_ruleXAnnotationElementValue8042 = new BitSet(
+			new long[] { 0x0000000000000002L });
+	public static final BitSet FOLLOW_35_in_ruleXAnnotationElementValue8060 = new BitSet(new long[] {
+			0x80173FADCC5070F0L, 0x00005A0020000000L });
+	public static final BitSet FOLLOW_ruleXAnnotationElementValueStringConcatenation_in_ruleXAnnotationElementValue8082 = new BitSet(
+			new long[] { 0x0000001000000000L });
+	public static final BitSet FOLLOW_36_in_ruleXAnnotationElementValue8093 = new BitSet(
+			new long[] { 0x0000000000000002L });
+	public static final BitSet FOLLOW_ruleXAnnotationValueFieldReference_in_entryRuleXAnnotationValueFieldReference8130 = new BitSet(
+			new long[] { 0x0000000000000000L });
+	public static final BitSet FOLLOW_EOF_in_entryRuleXAnnotationValueFieldReference8140 = new BitSet(
+			new long[] { 0x0000000000000002L });
+	public static final BitSet FOLLOW_ruleStaticQualifier_in_ruleXAnnotationValueFieldReference8197 = new BitSet(
+			new long[] { 0x00173FA5CC500010L, 0x0000020000000000L });
+	public static final BitSet FOLLOW_ruleIdOrSuper_in_ruleXAnnotationValueFieldReference8221 = new BitSet(
+			new long[] { 0x0000000000000002L });
+	public static final BitSet FOLLOW_ruleXExpression_in_entryRuleXExpression8257 = new BitSet(
+			new long[] { 0x0000000000000000L });
+	public static final BitSet FOLLOW_EOF_in_entryRuleXExpression8267 = new BitSet(new long[] { 0x0000000000000002L });
+	public static final BitSet FOLLOW_ruleXAssignment_in_ruleXExpression8313 = new BitSet(
+			new long[] { 0x0000000000000002L });
+	public static final BitSet FOLLOW_ruleXAssignment_in_entryRuleXAssignment8347 = new BitSet(
+			new long[] { 0x0000000000000000L });
+	public static final BitSet FOLLOW_EOF_in_entryRuleXAssignment8357 = new BitSet(new long[] { 0x0000000000000002L });
+	public static final BitSet FOLLOW_ruleFeatureCallID_in_ruleXAssignment8415 = new BitSet(
+			new long[] { 0x0000000200000000L });
+	public static final BitSet FOLLOW_ruleOpSingleAssign_in_ruleXAssignment8431 = new BitSet(new long[] {
+			0x00173FEDDCD070F0L, 0x0003FBCA61080001L });
+	public static final BitSet FOLLOW_ruleXAssignment_in_ruleXAssignment8451 = new BitSet(
+			new long[] { 0x0000000000000002L });
+	public static final BitSet FOLLOW_ruleXOrExpression_in_ruleXAssignment8481 = new BitSet(new long[] {
+			0x0000000000000002L, 0x0000000000000006L });
+	public static final BitSet FOLLOW_ruleOpMultiAssign_in_ruleXAssignment8534 = new BitSet(new long[] {
+			0x00173FEDDCD070F0L, 0x0003FBCA61080001L });
+	public static final BitSet FOLLOW_ruleXAssignment_in_ruleXAssignment8557 = new BitSet(
+			new long[] { 0x0000000000000002L });
+	public static final BitSet FOLLOW_ruleOpSingleAssign_in_entryRuleOpSingleAssign8597 = new BitSet(
+			new long[] { 0x0000000000000000L });
+	public static final BitSet FOLLOW_EOF_in_entryRuleOpSingleAssign8608 = new BitSet(
+			new long[] { 0x0000000000000002L });
+	public static final BitSet FOLLOW_33_in_ruleOpSingleAssign8645 = new BitSet(new long[] { 0x0000000000000002L });
+	public static final BitSet FOLLOW_ruleOpMultiAssign_in_entryRuleOpMultiAssign8685 = new BitSet(
+			new long[] { 0x0000000000000000L });
+	public static final BitSet FOLLOW_EOF_in_entryRuleOpMultiAssign8696 = new BitSet(new long[] { 0x0000000000000002L });
+	public static final BitSet FOLLOW_65_in_ruleOpMultiAssign8734 = new BitSet(new long[] { 0x0000000000000002L });
+	public static final BitSet FOLLOW_66_in_ruleOpMultiAssign8753 = new BitSet(new long[] { 0x0000000000000002L });
+	public static final BitSet FOLLOW_ruleXOrExpression_in_entryRuleXOrExpression8793 = new BitSet(
+			new long[] { 0x0000000000000000L });
+	public static final BitSet FOLLOW_EOF_in_entryRuleXOrExpression8803 = new BitSet(new long[] { 0x0000000000000002L });
+	public static final BitSet FOLLOW_ruleXAndExpression_in_ruleXOrExpression8850 = new BitSet(new long[] {
+			0x0000000000000002L, 0x0000000000000008L });
+	public static final BitSet FOLLOW_ruleOpOr_in_ruleXOrExpression8903 = new BitSet(new long[] { 0x00173FEDDCD070F0L,
+			0x0003FBCA61080001L });
+	public static final BitSet FOLLOW_ruleXAndExpression_in_ruleXOrExpression8926 = new BitSet(new long[] {
+			0x0000000000000002L, 0x0000000000000008L });
+	public static final BitSet FOLLOW_ruleOpOr_in_entryRuleOpOr8965 = new BitSet(new long[] { 0x0000000000000000L });
+	public static final BitSet FOLLOW_EOF_in_entryRuleOpOr8976 = new BitSet(new long[] { 0x0000000000000002L });
+	public static final BitSet FOLLOW_67_in_ruleOpOr9013 = new BitSet(new long[] { 0x0000000000000002L });
+	public static final BitSet FOLLOW_ruleXAndExpression_in_entryRuleXAndExpression9052 = new BitSet(
+			new long[] { 0x0000000000000000L });
+	public static final BitSet FOLLOW_EOF_in_entryRuleXAndExpression9062 = new BitSet(
+			new long[] { 0x0000000000000002L });
+	public static final BitSet FOLLOW_ruleXEqualityExpression_in_ruleXAndExpression9109 = new BitSet(new long[] {
+			0x0000000000000002L, 0x0000000000000010L });
+	public static final BitSet FOLLOW_ruleOpAnd_in_ruleXAndExpression9162 = new BitSet(new long[] {
+			0x00173FEDDCD070F0L, 0x0003FBCA61080001L });
+	public static final BitSet FOLLOW_ruleXEqualityExpression_in_ruleXAndExpression9185 = new BitSet(new long[] {
+			0x0000000000000002L, 0x0000000000000010L });
+	public static final BitSet FOLLOW_ruleOpAnd_in_entryRuleOpAnd9224 = new BitSet(new long[] { 0x0000000000000000L });
+	public static final BitSet FOLLOW_EOF_in_entryRuleOpAnd9235 = new BitSet(new long[] { 0x0000000000000002L });
+	public static final BitSet FOLLOW_68_in_ruleOpAnd9272 = new BitSet(new long[] { 0x0000000000000002L });
+	public static final BitSet FOLLOW_ruleXEqualityExpression_in_entryRuleXEqualityExpression9311 = new BitSet(
+			new long[] { 0x0000000000000000L });
+	public static final BitSet FOLLOW_EOF_in_entryRuleXEqualityExpression9321 = new BitSet(
+			new long[] { 0x0000000000000002L });
+	public static final BitSet FOLLOW_ruleXRelationalExpression_in_ruleXEqualityExpression9368 = new BitSet(new long[] {
+			0x0000000000000002L, 0x00000000000001E0L });
+	public static final BitSet FOLLOW_ruleOpEquality_in_ruleXEqualityExpression9421 = new BitSet(new long[] {
+			0x00173FEDDCD070F0L, 0x0003FBCA61080001L });
+	public static final BitSet FOLLOW_ruleXRelationalExpression_in_ruleXEqualityExpression9444 = new BitSet(new long[] {
+			0x0000000000000002L, 0x00000000000001E0L });
+	public static final BitSet FOLLOW_ruleOpEquality_in_entryRuleOpEquality9483 = new BitSet(
+			new long[] { 0x0000000000000000L });
+	public static final BitSet FOLLOW_EOF_in_entryRuleOpEquality9494 = new BitSet(new long[] { 0x0000000000000002L });
+	public static final BitSet FOLLOW_69_in_ruleOpEquality9532 = new BitSet(new long[] { 0x0000000000000002L });
+	public static final BitSet FOLLOW_70_in_ruleOpEquality9551 = new BitSet(new long[] { 0x0000000000000002L });
+	public static final BitSet FOLLOW_71_in_ruleOpEquality9570 = new BitSet(new long[] { 0x0000000000000002L });
+	public static final BitSet FOLLOW_72_in_ruleOpEquality9589 = new BitSet(new long[] { 0x0000000000000002L });
+	public static final BitSet FOLLOW_ruleXRelationalExpression_in_entryRuleXRelationalExpression9629 = new BitSet(
+			new long[] { 0x0000000000000000L });
+	public static final BitSet FOLLOW_EOF_in_entryRuleXRelationalExpression9639 = new BitSet(
+			new long[] { 0x0000000000000002L });
+	public static final BitSet FOLLOW_ruleXOtherOperatorExpression_in_ruleXRelationalExpression9686 = new BitSet(
+			new long[] { 0x0000000002800002L, 0x0000000000000E00L });
+	public static final BitSet FOLLOW_73_in_ruleXRelationalExpression9722 = new BitSet(new long[] {
+			0x0004FF8D00100010L, 0x0000000000008000L });
+	public static final BitSet FOLLOW_ruleJvmTypeReference_in_ruleXRelationalExpression9745 = new BitSet(new long[] {
+			0x0000000002800002L, 0x0000000000000E00L });
+	public static final BitSet FOLLOW_ruleOpCompare_in_ruleXRelationalExpression9806 = new BitSet(new long[] {
+			0x00173FEDDCD070F0L, 0x0003FBCA61080001L });
+	public static final BitSet FOLLOW_ruleXOtherOperatorExpression_in_ruleXRelationalExpression9829 = new BitSet(
+			new long[] { 0x0000000002800002L, 0x0000000000000E00L });
+	public static final BitSet FOLLOW_ruleOpCompare_in_entryRuleOpCompare9869 = new BitSet(
+			new long[] { 0x0000000000000000L });
+	public static final BitSet FOLLOW_EOF_in_entryRuleOpCompare9880 = new BitSet(new long[] { 0x0000000000000002L });
+	public static final BitSet FOLLOW_74_in_ruleOpCompare9918 = new BitSet(new long[] { 0x0000000000000002L });
+	public static final BitSet FOLLOW_75_in_ruleOpCompare9937 = new BitSet(new long[] { 0x0000000000000002L });
+	public static final BitSet FOLLOW_25_in_ruleOpCompare9956 = new BitSet(new long[] { 0x0000000000000002L });
+	public static final BitSet FOLLOW_23_in_ruleOpCompare9975 = new BitSet(new long[] { 0x0000000000000002L });
+	public static final BitSet FOLLOW_ruleXOtherOperatorExpression_in_entryRuleXOtherOperatorExpression10015 = new BitSet(
+			new long[] { 0x0000000000000000L });
+	public static final BitSet FOLLOW_EOF_in_entryRuleXOtherOperatorExpression10025 = new BitSet(
+			new long[] { 0x0000000000000002L });
+	public static final BitSet FOLLOW_ruleXAdditiveExpression_in_ruleXOtherOperatorExpression10072 = new BitSet(
+			new long[] { 0x0000000002800002L, 0x000000000007F000L });
+	public static final BitSet FOLLOW_ruleOpOther_in_ruleXOtherOperatorExpression10125 = new BitSet(new long[] {
+			0x00173FEDDCD070F0L, 0x0003FBCA61080001L });
+	public static final BitSet FOLLOW_ruleXAdditiveExpression_in_ruleXOtherOperatorExpression10148 = new BitSet(
+			new long[] { 0x0000000002800002L, 0x000000000007F000L });
+	public static final BitSet FOLLOW_ruleOpOther_in_entryRuleOpOther10187 = new BitSet(
+			new long[] { 0x0000000000000000L });
+	public static final BitSet FOLLOW_EOF_in_entryRuleOpOther10198 = new BitSet(new long[] { 0x0000000000000002L });
+	public static final BitSet FOLLOW_76_in_ruleOpOther10236 = new BitSet(new long[] { 0x0000000000000002L });
+	public static final BitSet FOLLOW_77_in_ruleOpOther10255 = new BitSet(new long[] { 0x0000000000000002L });
+	public static final BitSet FOLLOW_25_in_ruleOpOther10275 = new BitSet(new long[] { 0x0000000000000000L,
+			0x0000000000004000L });
+	public static final BitSet FOLLOW_78_in_ruleOpOther10288 = new BitSet(new long[] { 0x0000000000000002L });
+	public static final BitSet FOLLOW_78_in_ruleOpOther10308 = new BitSet(new long[] { 0x0000000000000002L });
+	public static final BitSet FOLLOW_79_in_ruleOpOther10327 = new BitSet(new long[] { 0x0000000000000002L });
+	public static final BitSet FOLLOW_25_in_ruleOpOther10347 = new BitSet(new long[] { 0x0000000002000000L });
+	public static final BitSet FOLLOW_25_in_ruleOpOther10378 = new BitSet(new long[] { 0x0000000002000000L });
+	public static final BitSet FOLLOW_25_in_ruleOpOther10391 = new BitSet(new long[] { 0x0000000000000002L });
+	public static final BitSet FOLLOW_25_in_ruleOpOther10412 = new BitSet(new long[] { 0x0000000000000002L });
+	public static final BitSet FOLLOW_23_in_ruleOpOther10434 = new BitSet(new long[] { 0x0000000000800000L });
+	public static final BitSet FOLLOW_23_in_ruleOpOther10465 = new BitSet(new long[] { 0x0000000000800000L });
+	public static final BitSet FOLLOW_23_in_ruleOpOther10478 = new BitSet(new long[] { 0x0000000000000002L });
+	public static final BitSet FOLLOW_23_in_ruleOpOther10499 = new BitSet(new long[] { 0x0000000000000002L });
+	public static final BitSet FOLLOW_80_in_ruleOpOther10520 = new BitSet(new long[] { 0x0000000000000002L });
+	public static final BitSet FOLLOW_81_in_ruleOpOther10539 = new BitSet(new long[] { 0x0000000000000002L });
+	public static final BitSet FOLLOW_82_in_ruleOpOther10558 = new BitSet(new long[] { 0x0000000000000002L });
+	public static final BitSet FOLLOW_ruleXAdditiveExpression_in_entryRuleXAdditiveExpression10598 = new BitSet(
+			new long[] { 0x0000000000000000L });
+	public static final BitSet FOLLOW_EOF_in_entryRuleXAdditiveExpression10608 = new BitSet(
+			new long[] { 0x0000000000000002L });
+	public static final BitSet FOLLOW_ruleXMultiplicativeExpression_in_ruleXAdditiveExpression10655 = new BitSet(
+			new long[] { 0x0000000000000002L, 0x0000000000080001L });
+	public static final BitSet FOLLOW_ruleOpAdd_in_ruleXAdditiveExpression10708 = new BitSet(new long[] {
+			0x00173FEDDCD070F0L, 0x0003FBCA61080001L });
+	public static final BitSet FOLLOW_ruleXMultiplicativeExpression_in_ruleXAdditiveExpression10731 = new BitSet(
+			new long[] { 0x0000000000000002L, 0x0000000000080001L });
+	public static final BitSet FOLLOW_ruleOpAdd_in_entryRuleOpAdd10770 = new BitSet(new long[] { 0x0000000000000000L });
+	public static final BitSet FOLLOW_EOF_in_entryRuleOpAdd10781 = new BitSet(new long[] { 0x0000000000000002L });
+	public static final BitSet FOLLOW_64_in_ruleOpAdd10819 = new BitSet(new long[] { 0x0000000000000002L });
+	public static final BitSet FOLLOW_83_in_ruleOpAdd10838 = new BitSet(new long[] { 0x0000000000000002L });
+	public static final BitSet FOLLOW_ruleXMultiplicativeExpression_in_entryRuleXMultiplicativeExpression10878 = new BitSet(
+			new long[] { 0x0000000000000000L });
+	public static final BitSet FOLLOW_EOF_in_entryRuleXMultiplicativeExpression10888 = new BitSet(
+			new long[] { 0x0000000000000002L });
+	public static final BitSet FOLLOW_ruleXUnaryOperation_in_ruleXMultiplicativeExpression10935 = new BitSet(
+			new long[] { 0x0000000000000002L, 0x0000000000F00000L });
+	public static final BitSet FOLLOW_ruleOpMulti_in_ruleXMultiplicativeExpression10988 = new BitSet(new long[] {
+			0x00173FEDDCD070F0L, 0x0003FBCA61080001L });
+	public static final BitSet FOLLOW_ruleXUnaryOperation_in_ruleXMultiplicativeExpression11011 = new BitSet(
+			new long[] { 0x0000000000000002L, 0x0000000000F00000L });
+	public static final BitSet FOLLOW_ruleOpMulti_in_entryRuleOpMulti11050 = new BitSet(
+			new long[] { 0x0000000000000000L });
+	public static final BitSet FOLLOW_EOF_in_entryRuleOpMulti11061 = new BitSet(new long[] { 0x0000000000000002L });
+	public static final BitSet FOLLOW_84_in_ruleOpMulti11099 = new BitSet(new long[] { 0x0000000000000002L });
+	public static final BitSet FOLLOW_85_in_ruleOpMulti11118 = new BitSet(new long[] { 0x0000000000000002L });
+	public static final BitSet FOLLOW_86_in_ruleOpMulti11137 = new BitSet(new long[] { 0x0000000000000002L });
+	public static final BitSet FOLLOW_87_in_ruleOpMulti11156 = new BitSet(new long[] { 0x0000000000000002L });
+	public static final BitSet FOLLOW_ruleXUnaryOperation_in_entryRuleXUnaryOperation11196 = new BitSet(
+			new long[] { 0x0000000000000000L });
+	public static final BitSet FOLLOW_EOF_in_entryRuleXUnaryOperation11206 = new BitSet(
+			new long[] { 0x0000000000000002L });
+	public static final BitSet FOLLOW_ruleOpUnary_in_ruleXUnaryOperation11264 = new BitSet(new long[] {
+			0x00173FEDDCD070F0L, 0x0003FBCA61080001L });
+	public static final BitSet FOLLOW_ruleXUnaryOperation_in_ruleXUnaryOperation11285 = new BitSet(
+			new long[] { 0x0000000000000002L });
+	public static final BitSet FOLLOW_ruleXCastedExpression_in_ruleXUnaryOperation11314 = new BitSet(
+			new long[] { 0x0000000000000002L });
+	public static final BitSet FOLLOW_ruleOpUnary_in_entryRuleOpUnary11350 = new BitSet(
+			new long[] { 0x0000000000000000L });
+	public static final BitSet FOLLOW_EOF_in_entryRuleOpUnary11361 = new BitSet(new long[] { 0x0000000000000002L });
+	public static final BitSet FOLLOW_88_in_ruleOpUnary11399 = new BitSet(new long[] { 0x0000000000000002L });
+	public static final BitSet FOLLOW_83_in_ruleOpUnary11418 = new BitSet(new long[] { 0x0000000000000002L });
+	public static final BitSet FOLLOW_64_in_ruleOpUnary11437 = new BitSet(new long[] { 0x0000000000000002L });
+	public static final BitSet FOLLOW_ruleXCastedExpression_in_entryRuleXCastedExpression11477 = new BitSet(
+			new long[] { 0x0000000000000000L });
+	public static final BitSet FOLLOW_EOF_in_entryRuleXCastedExpression11487 = new BitSet(
+			new long[] { 0x0000000000000002L });
+	public static final BitSet FOLLOW_ruleXMemberFeatureCall_in_ruleXCastedExpression11534 = new BitSet(new long[] {
+			0x0000000000000002L, 0x0000000002000000L });
+	public static final BitSet FOLLOW_89_in_ruleXCastedExpression11569 = new BitSet(new long[] { 0x0004FF8D00100010L,
+			0x0000000000008000L });
+	public static final BitSet FOLLOW_ruleJvmTypeReference_in_ruleXCastedExpression11592 = new BitSet(new long[] {
+			0x0000000000000002L, 0x0000000002000000L });
+	public static final BitSet FOLLOW_ruleXMemberFeatureCall_in_entryRuleXMemberFeatureCall11630 = new BitSet(
+			new long[] { 0x0000000000000000L });
+	public static final BitSet FOLLOW_EOF_in_entryRuleXMemberFeatureCall11640 = new BitSet(
+			new long[] { 0x0000000000000002L });
+	public static final BitSet FOLLOW_ruleXPrimaryExpression_in_ruleXMemberFeatureCall11687 = new BitSet(new long[] {
+			0x0000000000000002L, 0x000000001C000000L });
+	public static final BitSet FOLLOW_90_in_ruleXMemberFeatureCall11736 = new BitSet(new long[] { 0x00173FA5CC500010L });
+	public static final BitSet FOLLOW_ruleFeatureCallID_in_ruleXMemberFeatureCall11759 = new BitSet(
+			new long[] { 0x0000000200000000L });
+	public static final BitSet FOLLOW_ruleOpSingleAssign_in_ruleXMemberFeatureCall11775 = new BitSet(new long[] {
+			0x00173FEDDCD070F0L, 0x0003FBCA61080001L });
+	public static final BitSet FOLLOW_ruleXAssignment_in_ruleXMemberFeatureCall11797 = new BitSet(new long[] {
+			0x0000000000000002L, 0x000000001C000000L });
+	public static final BitSet FOLLOW_90_in_ruleXMemberFeatureCall11883 = new BitSet(new long[] { 0x00173FA5CCD00010L });
+	public static final BitSet FOLLOW_91_in_ruleXMemberFeatureCall11907 = new BitSet(new long[] { 0x00173FA5CCD00010L });
+	public static final BitSet FOLLOW_92_in_ruleXMemberFeatureCall11944 = new BitSet(new long[] { 0x00173FA5CCD00010L });
+	public static final BitSet FOLLOW_23_in_ruleXMemberFeatureCall11973 = new BitSet(new long[] { 0x0004FF8D00100010L,
+			0x0010000000008000L });
+	public static final BitSet FOLLOW_ruleJvmArgumentTypeReference_in_ruleXMemberFeatureCall11994 = new BitSet(
+			new long[] { 0x0000000003000000L });
+	public static final BitSet FOLLOW_24_in_ruleXMemberFeatureCall12007 = new BitSet(new long[] { 0x0004FF8D00100010L,
+			0x0010000000008000L });
+	public static final BitSet FOLLOW_ruleJvmArgumentTypeReference_in_ruleXMemberFeatureCall12028 = new BitSet(
+			new long[] { 0x0000000003000000L });
+	public static final BitSet FOLLOW_25_in_ruleXMemberFeatureCall12042 = new BitSet(new long[] { 0x00173FA5CC500010L });
+	public static final BitSet FOLLOW_ruleFeatureCallID_in_ruleXMemberFeatureCall12067 = new BitSet(new long[] {
+			0x0000000800000002L, 0x000000005C000000L });
+	public static final BitSet FOLLOW_35_in_ruleXMemberFeatureCall12101 = new BitSet(new long[] { 0x0017FFFDDCD070F0L,
+			0x0003FBCB61088001L });
+	public static final BitSet FOLLOW_ruleXShortClosure_in_ruleXMemberFeatureCall12186 = new BitSet(
+			new long[] { 0x0000001000000000L });
+	public static final BitSet FOLLOW_ruleXExpression_in_ruleXMemberFeatureCall12214 = new BitSet(
+			new long[] { 0x0000001001000000L });
+	public static final BitSet FOLLOW_24_in_ruleXMemberFeatureCall12227 = new BitSet(new long[] { 0x00173FEDDCD070F0L,
+			0x0003FBCA61080001L });
+	public static final BitSet FOLLOW_ruleXExpression_in_ruleXMemberFeatureCall12248 = new BitSet(
+			new long[] { 0x0000001001000000L });
+	public static final BitSet FOLLOW_36_in_ruleXMemberFeatureCall12265 = new BitSet(new long[] { 0x0000000000000002L,
+			0x000000005C000000L });
+	public static final BitSet FOLLOW_ruleXClosure_in_ruleXMemberFeatureCall12300 = new BitSet(new long[] {
+			0x0000000000000002L, 0x000000001C000000L });
+	public static final BitSet FOLLOW_ruleXPrimaryExpression_in_entryRuleXPrimaryExpression12340 = new BitSet(
+			new long[] { 0x0000000000000000L });
+	public static final BitSet FOLLOW_EOF_in_entryRuleXPrimaryExpression12350 = new BitSet(
+			new long[] { 0x0000000000000002L });
+	public static final BitSet FOLLOW_ruleXConstructorCall_in_ruleXPrimaryExpression12397 = new BitSet(
+			new long[] { 0x0000000000000002L });
+	public static final BitSet FOLLOW_ruleXBlockExpression_in_ruleXPrimaryExpression12424 = new BitSet(
+			new long[] { 0x0000000000000002L });
+	public static final BitSet FOLLOW_ruleXSwitchExpression_in_ruleXPrimaryExpression12451 = new BitSet(
+			new long[] { 0x0000000000000002L });
+	public static final BitSet FOLLOW_ruleXFeatureCall_in_ruleXPrimaryExpression12478 = new BitSet(
+			new long[] { 0x0000000000000002L });
+	public static final BitSet FOLLOW_ruleXLiteral_in_ruleXPrimaryExpression12505 = new BitSet(
+			new long[] { 0x0000000000000002L });
+	public static final BitSet FOLLOW_ruleXIfExpression_in_ruleXPrimaryExpression12532 = new BitSet(
+			new long[] { 0x0000000000000002L });
+	public static final BitSet FOLLOW_ruleXForLoopExpression_in_ruleXPrimaryExpression12559 = new BitSet(
+			new long[] { 0x0000000000000002L });
+	public static final BitSet FOLLOW_ruleXWhileExpression_in_ruleXPrimaryExpression12586 = new BitSet(
+			new long[] { 0x0000000000000002L });
+	public static final BitSet FOLLOW_ruleXDoWhileExpression_in_ruleXPrimaryExpression12613 = new BitSet(
+			new long[] { 0x0000000000000002L });
+	public static final BitSet FOLLOW_ruleXThrowExpression_in_ruleXPrimaryExpression12640 = new BitSet(
+			new long[] { 0x0000000000000002L });
+	public static final BitSet FOLLOW_ruleXReturnExpression_in_ruleXPrimaryExpression12667 = new BitSet(
+			new long[] { 0x0000000000000002L });
+	public static final BitSet FOLLOW_ruleXTryCatchFinallyExpression_in_ruleXPrimaryExpression12694 = new BitSet(
+			new long[] { 0x0000000000000002L });
+	public static final BitSet FOLLOW_ruleXParenthesizedExpression_in_ruleXPrimaryExpression12721 = new BitSet(
+			new long[] { 0x0000000000000002L });
+	public static final BitSet FOLLOW_ruleXLiteral_in_entryRuleXLiteral12756 = new BitSet(
+			new long[] { 0x0000000000000000L });
+	public static final BitSet FOLLOW_EOF_in_entryRuleXLiteral12766 = new BitSet(new long[] { 0x0000000000000002L });
+	public static final BitSet FOLLOW_ruleXCollectionLiteral_in_ruleXLiteral12813 = new BitSet(
+			new long[] { 0x0000000000000002L });
+	public static final BitSet FOLLOW_ruleXClosure_in_ruleXLiteral12853 = new BitSet(new long[] { 0x0000000000000002L });
+	public static final BitSet FOLLOW_ruleXBooleanLiteral_in_ruleXLiteral12881 = new BitSet(
+			new long[] { 0x0000000000000002L });
+	public static final BitSet FOLLOW_ruleXNumberLiteral_in_ruleXLiteral12908 = new BitSet(
+			new long[] { 0x0000000000000002L });
+	public static final BitSet FOLLOW_ruleXNullLiteral_in_ruleXLiteral12935 = new BitSet(
+			new long[] { 0x0000000000000002L });
+	public static final BitSet FOLLOW_ruleXStringLiteral_in_ruleXLiteral12962 = new BitSet(
+			new long[] { 0x0000000000000002L });
+	public static final BitSet FOLLOW_ruleXTypeLiteral_in_ruleXLiteral12989 = new BitSet(
+			new long[] { 0x0000000000000002L });
+	public static final BitSet FOLLOW_ruleXCollectionLiteral_in_entryRuleXCollectionLiteral13024 = new BitSet(
+			new long[] { 0x0000000000000000L });
+	public static final BitSet FOLLOW_EOF_in_entryRuleXCollectionLiteral13034 = new BitSet(
+			new long[] { 0x0000000000000002L });
+	public static final BitSet FOLLOW_ruleXSetLiteral_in_ruleXCollectionLiteral13081 = new BitSet(
+			new long[] { 0x0000000000000002L });
+	public static final BitSet FOLLOW_ruleXListLiteral_in_ruleXCollectionLiteral13108 = new BitSet(
+			new long[] { 0x0000000000000002L });
+	public static final BitSet FOLLOW_ruleXSetLiteral_in_entryRuleXSetLiteral13143 = new BitSet(
+			new long[] { 0x0000000000000000L });
+	public static final BitSet FOLLOW_EOF_in_entryRuleXSetLiteral13153 = new BitSet(new long[] { 0x0000000000000002L });
+	public static final BitSet FOLLOW_93_in_ruleXSetLiteral13199 = new BitSet(new long[] { 0x0000000010000000L });
+	public static final BitSet FOLLOW_28_in_ruleXSetLiteral13211 = new BitSet(new long[] { 0x00173FEDFCD070F0L,
+			0x0003FBCA61080001L });
+	public static final BitSet FOLLOW_ruleXExpression_in_ruleXSetLiteral13233 = new BitSet(
+			new long[] { 0x0000000021000000L });
+	public static final BitSet FOLLOW_24_in_ruleXSetLiteral13246 = new BitSet(new long[] { 0x00173FEDDCD070F0L,
+			0x0003FBCA61080001L });
+	public static final BitSet FOLLOW_ruleXExpression_in_ruleXSetLiteral13267 = new BitSet(
+			new long[] { 0x0000000021000000L });
+	public static final BitSet FOLLOW_29_in_ruleXSetLiteral13283 = new BitSet(new long[] { 0x0000000000000002L });
+	public static final BitSet FOLLOW_ruleXListLiteral_in_entryRuleXListLiteral13319 = new BitSet(
+			new long[] { 0x0000000000000000L });
+	public static final BitSet FOLLOW_EOF_in_entryRuleXListLiteral13329 = new BitSet(new long[] { 0x0000000000000002L });
+	public static final BitSet FOLLOW_93_in_ruleXListLiteral13375 = new BitSet(new long[] { 0x0000000000000000L,
+			0x0000000040000000L });
+	public static final BitSet FOLLOW_94_in_ruleXListLiteral13387 = new BitSet(new long[] { 0x00173FEDDCD070F0L,
+			0x0003FBCAE1080001L });
+	public static final BitSet FOLLOW_ruleXExpression_in_ruleXListLiteral13409 = new BitSet(new long[] {
+			0x0000000001000000L, 0x0000000080000000L });
+	public static final BitSet FOLLOW_24_in_ruleXListLiteral13422 = new BitSet(new long[] { 0x00173FEDDCD070F0L,
+			0x0003FBCA61080001L });
+	public static final BitSet FOLLOW_ruleXExpression_in_ruleXListLiteral13443 = new BitSet(new long[] {
+			0x0000000001000000L, 0x0000000080000000L });
+	public static final BitSet FOLLOW_95_in_ruleXListLiteral13459 = new BitSet(new long[] { 0x0000000000000002L });
+	public static final BitSet FOLLOW_ruleXClosure_in_entryRuleXClosure13495 = new BitSet(
+			new long[] { 0x0000000000000000L });
+	public static final BitSet FOLLOW_EOF_in_entryRuleXClosure13505 = new BitSet(new long[] { 0x0000000000000002L });
+	public static final BitSet FOLLOW_94_in_ruleXClosure13565 = new BitSet(new long[] { 0x0017FFEDDCD070F0L,
+			0x0003FBCBE1088001L });
+	public static final BitSet FOLLOW_ruleJvmFormalParameter_in_ruleXClosure13638 = new BitSet(new long[] {
+			0x0000000001000000L, 0x0000000100000000L });
+	public static final BitSet FOLLOW_24_in_ruleXClosure13651 = new BitSet(new long[] { 0x0004FF8D00100010L,
+			0x0000000000008000L });
+	public static final BitSet FOLLOW_ruleJvmFormalParameter_in_ruleXClosure13672 = new BitSet(new long[] {
+			0x0000000001000000L, 0x0000000100000000L });
+	public static final BitSet FOLLOW_96_in_ruleXClosure13694 = new BitSet(new long[] { 0x0017FFEDDCD070F0L,
+			0x0003FBCAE1080001L });
+	public static final BitSet FOLLOW_ruleXExpressionInClosure_in_ruleXClosure13731 = new BitSet(new long[] {
+			0x0000000000000000L, 0x0000000080000000L });
+	public static final BitSet FOLLOW_95_in_ruleXClosure13743 = new BitSet(new long[] { 0x0000000000000002L });
+	public static final BitSet FOLLOW_ruleXExpressionInClosure_in_entryRuleXExpressionInClosure13779 = new BitSet(
+			new long[] { 0x0000000000000000L });
+	public static final BitSet FOLLOW_EOF_in_entryRuleXExpressionInClosure13789 = new BitSet(
+			new long[] { 0x0000000000000002L });
+	public static final BitSet FOLLOW_ruleXExpressionInsideBlock_in_ruleXExpressionInClosure13845 = new BitSet(
+			new long[] { 0x0017FFEDDCF070F2L, 0x0003FBCA61080001L });
+	public static final BitSet FOLLOW_21_in_ruleXExpressionInClosure13858 = new BitSet(new long[] {
+			0x0017FFEDDCD070F2L, 0x0003FBCA61080001L });
+	public static final BitSet FOLLOW_ruleXShortClosure_in_entryRuleXShortClosure13898 = new BitSet(
+			new long[] { 0x0000000000000000L });
+	public static final BitSet FOLLOW_EOF_in_entryRuleXShortClosure13908 = new BitSet(
+			new long[] { 0x0000000000000002L });
+	public static final BitSet FOLLOW_ruleJvmFormalParameter_in_ruleXShortClosure14016 = new BitSet(new long[] {
+			0x0000000001000000L, 0x0000000100000000L });
+	public static final BitSet FOLLOW_24_in_ruleXShortClosure14029 = new BitSet(new long[] { 0x0004FF8D00100010L,
+			0x0000000000008000L });
+	public static final BitSet FOLLOW_ruleJvmFormalParameter_in_ruleXShortClosure14050 = new BitSet(new long[] {
+			0x0000000001000000L, 0x0000000100000000L });
+	public static final BitSet FOLLOW_96_in_ruleXShortClosure14072 = new BitSet(new long[] { 0x00173FEDDCD070F0L,
+			0x0003FBCA61080001L });
+	public static final BitSet FOLLOW_ruleXExpression_in_ruleXShortClosure14108 = new BitSet(
+			new long[] { 0x0000000000000002L });
+	public static final BitSet FOLLOW_ruleXParenthesizedExpression_in_entryRuleXParenthesizedExpression14144 = new BitSet(
+			new long[] { 0x0000000000000000L });
+	public static final BitSet FOLLOW_EOF_in_entryRuleXParenthesizedExpression14154 = new BitSet(
+			new long[] { 0x0000000000000002L });
+	public static final BitSet FOLLOW_35_in_ruleXParenthesizedExpression14191 = new BitSet(new long[] {
+			0x00173FEDDCD070F0L, 0x0003FBCA61080001L });
+	public static final BitSet FOLLOW_ruleXExpression_in_ruleXParenthesizedExpression14213 = new BitSet(
+			new long[] { 0x0000001000000000L });
+	public static final BitSet FOLLOW_36_in_ruleXParenthesizedExpression14224 = new BitSet(
+			new long[] { 0x0000000000000002L });
+	public static final BitSet FOLLOW_ruleXIfExpression_in_entryRuleXIfExpression14260 = new BitSet(
+			new long[] { 0x0000000000000000L });
+	public static final BitSet FOLLOW_EOF_in_entryRuleXIfExpression14270 = new BitSet(
+			new long[] { 0x0000000000000002L });
+	public static final BitSet FOLLOW_97_in_ruleXIfExpression14316 = new BitSet(new long[] { 0x0000000800000000L });
+	public static final BitSet FOLLOW_35_in_ruleXIfExpression14328 = new BitSet(new long[] { 0x00173FEDDCD070F0L,
+			0x0003FBCA61080001L });
+	public static final BitSet FOLLOW_ruleXExpression_in_ruleXIfExpression14349 = new BitSet(
+			new long[] { 0x0000001000000000L });
+	public static final BitSet FOLLOW_36_in_ruleXIfExpression14361 = new BitSet(new long[] { 0x00173FEDDCD070F0L,
+			0x0003FBCA61080001L });
+	public static final BitSet FOLLOW_ruleXExpression_in_ruleXIfExpression14382 = new BitSet(new long[] {
+			0x0000000000000002L, 0x0000000400000000L });
+	public static final BitSet FOLLOW_98_in_ruleXIfExpression14403 = new BitSet(new long[] { 0x00173FEDDCD070F0L,
+			0x0003FBCA61080001L });
+	public static final BitSet FOLLOW_ruleXExpression_in_ruleXIfExpression14425 = new BitSet(
+			new long[] { 0x0000000000000002L });
+	public static final BitSet FOLLOW_ruleXSwitchExpression_in_entryRuleXSwitchExpression14463 = new BitSet(
+			new long[] { 0x0000000000000000L });
+	public static final BitSet FOLLOW_EOF_in_entryRuleXSwitchExpression14473 = new BitSet(
+			new long[] { 0x0000000000000002L });
+	public static final BitSet FOLLOW_99_in_ruleXSwitchExpression14519 = new BitSet(new long[] { 0x00173FEDDCD070F0L,
+			0x0003FBCA61080001L });
+	public static final BitSet FOLLOW_ruleValidID_in_ruleXSwitchExpression14562 = new BitSet(
+			new long[] { 0x0008000000000000L });
+	public static final BitSet FOLLOW_51_in_ruleXSwitchExpression14574 = new BitSet(new long[] { 0x00173FEDDCD070F0L,
+			0x0003FBCA61080001L });
+	public static final BitSet FOLLOW_ruleXExpression_in_ruleXSwitchExpression14598 = new BitSet(
+			new long[] { 0x0000000010000000L });
+	public static final BitSet FOLLOW_35_in_ruleXSwitchExpression14642 = new BitSet(new long[] { 0x0004000100000010L });
+	public static final BitSet FOLLOW_ruleValidID_in_ruleXSwitchExpression14663 = new BitSet(
+			new long[] { 0x0008000000000000L });
+	public static final BitSet FOLLOW_51_in_ruleXSwitchExpression14675 = new BitSet(new long[] { 0x00173FEDDCD070F0L,
+			0x0003FBCA61080001L });
+	public static final BitSet FOLLOW_ruleXExpression_in_ruleXSwitchExpression14698 = new BitSet(
+			new long[] { 0x0000001000000000L });
+	public static final BitSet FOLLOW_36_in_ruleXSwitchExpression14710 = new BitSet(new long[] { 0x0000000010000000L });
+	public static final BitSet FOLLOW_28_in_ruleXSwitchExpression14724 = new BitSet(new long[] { 0x000CFF8D00100010L,
+			0x0000002000008000L });
+	public static final BitSet FOLLOW_ruleXCasePart_in_ruleXSwitchExpression14745 = new BitSet(new long[] {
+			0x000CFF8D20100010L, 0x0000003000008000L });
+	public static final BitSet FOLLOW_100_in_ruleXSwitchExpression14759 = new BitSet(new long[] { 0x0008000000000000L });
+	public static final BitSet FOLLOW_51_in_ruleXSwitchExpression14771 = new BitSet(new long[] { 0x00173FEDDCD070F0L,
+			0x0003FBCA61080001L });
+	public static final BitSet FOLLOW_ruleXExpression_in_ruleXSwitchExpression14792 = new BitSet(
+			new long[] { 0x0000000020000000L });
+	public static final BitSet FOLLOW_29_in_ruleXSwitchExpression14806 = new BitSet(new long[] { 0x0000000000000002L });
+	public static final BitSet FOLLOW_ruleXCasePart_in_entryRuleXCasePart14842 = new BitSet(
+			new long[] { 0x0000000000000000L });
+	public static final BitSet FOLLOW_EOF_in_entryRuleXCasePart14852 = new BitSet(new long[] { 0x0000000000000002L });
+	public static final BitSet FOLLOW_ruleJvmTypeReference_in_ruleXCasePart14898 = new BitSet(new long[] {
+			0x0008000000000000L, 0x0000002000000000L });
+	public static final BitSet FOLLOW_101_in_ruleXCasePart14912 = new BitSet(new long[] { 0x00173FEDDCD070F0L,
+			0x0003FBCA61080001L });
+	public static final BitSet FOLLOW_ruleXExpression_in_ruleXCasePart14933 = new BitSet(
+			new long[] { 0x0008000000000000L });
+	public static final BitSet FOLLOW_51_in_ruleXCasePart14947 = new BitSet(new long[] { 0x00173FEDDCD070F0L,
+			0x0003FBCA61080001L });
+	public static final BitSet FOLLOW_ruleXExpression_in_ruleXCasePart14968 = new BitSet(
+			new long[] { 0x0000000000000002L });
+	public static final BitSet FOLLOW_ruleXForLoopExpression_in_entryRuleXForLoopExpression15004 = new BitSet(
+			new long[] { 0x0000000000000000L });
+	public static final BitSet FOLLOW_EOF_in_entryRuleXForLoopExpression15014 = new BitSet(
+			new long[] { 0x0000000000000002L });
+	public static final BitSet FOLLOW_102_in_ruleXForLoopExpression15060 = new BitSet(
+			new long[] { 0x0000000800000000L });
+	public static final BitSet FOLLOW_35_in_ruleXForLoopExpression15072 = new BitSet(new long[] { 0x0004FF8D00100010L,
+			0x0000000000008000L });
+	public static final BitSet FOLLOW_ruleJvmFormalParameter_in_ruleXForLoopExpression15093 = new BitSet(
+			new long[] { 0x0008000000000000L });
+	public static final BitSet FOLLOW_51_in_ruleXForLoopExpression15105 = new BitSet(new long[] { 0x00173FEDDCD070F0L,
+			0x0003FBCA61080001L });
+	public static final BitSet FOLLOW_ruleXExpression_in_ruleXForLoopExpression15126 = new BitSet(
+			new long[] { 0x0000001000000000L });
+	public static final BitSet FOLLOW_36_in_ruleXForLoopExpression15138 = new BitSet(new long[] { 0x00173FEDDCD070F0L,
+			0x0003FBCA61080001L });
+	public static final BitSet FOLLOW_ruleXExpression_in_ruleXForLoopExpression15159 = new BitSet(
+			new long[] { 0x0000000000000002L });
+	public static final BitSet FOLLOW_ruleXWhileExpression_in_entryRuleXWhileExpression15195 = new BitSet(
+			new long[] { 0x0000000000000000L });
+	public static final BitSet FOLLOW_EOF_in_entryRuleXWhileExpression15205 = new BitSet(
+			new long[] { 0x0000000000000002L });
+	public static final BitSet FOLLOW_103_in_ruleXWhileExpression15251 = new BitSet(new long[] { 0x0000000800000000L });
+	public static final BitSet FOLLOW_35_in_ruleXWhileExpression15263 = new BitSet(new long[] { 0x00173FEDDCD070F0L,
+			0x0003FBCA61080001L });
+	public static final BitSet FOLLOW_ruleXExpression_in_ruleXWhileExpression15284 = new BitSet(
+			new long[] { 0x0000001000000000L });
+	public static final BitSet FOLLOW_36_in_ruleXWhileExpression15296 = new BitSet(new long[] { 0x00173FEDDCD070F0L,
+			0x0003FBCA61080001L });
+	public static final BitSet FOLLOW_ruleXExpression_in_ruleXWhileExpression15317 = new BitSet(
+			new long[] { 0x0000000000000002L });
+	public static final BitSet FOLLOW_ruleXDoWhileExpression_in_entryRuleXDoWhileExpression15353 = new BitSet(
+			new long[] { 0x0000000000000000L });
+	public static final BitSet FOLLOW_EOF_in_entryRuleXDoWhileExpression15363 = new BitSet(
+			new long[] { 0x0000000000000002L });
+	public static final BitSet FOLLOW_104_in_ruleXDoWhileExpression15409 = new BitSet(new long[] { 0x00173FEDDCD070F0L,
+			0x0003FBCA61080001L });
+	public static final BitSet FOLLOW_ruleXExpression_in_ruleXDoWhileExpression15430 = new BitSet(new long[] {
+			0x0000000000000000L, 0x0000008000000000L });
+	public static final BitSet FOLLOW_103_in_ruleXDoWhileExpression15442 = new BitSet(
+			new long[] { 0x0000000800000000L });
+	public static final BitSet FOLLOW_35_in_ruleXDoWhileExpression15454 = new BitSet(new long[] { 0x00173FEDDCD070F0L,
+			0x0003FBCA61080001L });
+	public static final BitSet FOLLOW_ruleXExpression_in_ruleXDoWhileExpression15475 = new BitSet(
+			new long[] { 0x0000001000000000L });
+	public static final BitSet FOLLOW_36_in_ruleXDoWhileExpression15487 = new BitSet(new long[] { 0x0000000000000002L });
+	public static final BitSet FOLLOW_ruleXBlockExpression_in_entryRuleXBlockExpression15523 = new BitSet(
+			new long[] { 0x0000000000000000L });
+	public static final BitSet FOLLOW_EOF_in_entryRuleXBlockExpression15533 = new BitSet(
+			new long[] { 0x0000000000000002L });
+	public static final BitSet FOLLOW_28_in_ruleXBlockExpression15579 = new BitSet(new long[] { 0x0017FFEDFCD070F0L,
+			0x0003FBCA61080001L });
+	public static final BitSet FOLLOW_ruleXExpressionInsideBlock_in_ruleXBlockExpression15601 = new BitSet(new long[] {
+			0x0017FFEDFCF070F0L, 0x0003FBCA61080001L });
+	public static final BitSet FOLLOW_21_in_ruleXBlockExpression15614 = new BitSet(new long[] { 0x0017FFEDFCD070F0L,
+			0x0003FBCA61080001L });
+	public static final BitSet FOLLOW_29_in_ruleXBlockExpression15630 = new BitSet(new long[] { 0x0000000000000002L });
+	public static final BitSet FOLLOW_ruleXExpressionInsideBlock_in_entryRuleXExpressionInsideBlock15666 = new BitSet(
+			new long[] { 0x0000000000000000L });
+	public static final BitSet FOLLOW_EOF_in_entryRuleXExpressionInsideBlock15676 = new BitSet(
+			new long[] { 0x0000000000000002L });
+	public static final BitSet FOLLOW_ruleXVariableDeclaration_in_ruleXExpressionInsideBlock15825 = new BitSet(
+			new long[] { 0x0000000000000002L });
+	public static final BitSet FOLLOW_ruleXExpression_in_ruleXExpressionInsideBlock15853 = new BitSet(
+			new long[] { 0x0000000000000002L });
+	public static final BitSet FOLLOW_ruleXFeatureCall_in_entryRuleXFeatureCall15888 = new BitSet(
+			new long[] { 0x0000000000000000L });
+	public static final BitSet FOLLOW_EOF_in_entryRuleXFeatureCall15898 = new BitSet(new long[] { 0x0000000000000002L });
+	public static final BitSet FOLLOW_ruleStaticQualifier_in_ruleXFeatureCall15955 = new BitSet(new long[] {
+			0x00173FA5CCD00010L, 0x0000020000000000L });
+	public static final BitSet FOLLOW_23_in_ruleXFeatureCall15969 = new BitSet(new long[] { 0x0004FF8D00100010L,
+			0x0010000000008000L });
+	public static final BitSet FOLLOW_ruleJvmArgumentTypeReference_in_ruleXFeatureCall15990 = new BitSet(
+			new long[] { 0x0000000003000000L });
+	public static final BitSet FOLLOW_24_in_ruleXFeatureCall16003 = new BitSet(new long[] { 0x0004FF8D00100010L,
+			0x0010000000008000L });
+	public static final BitSet FOLLOW_ruleJvmArgumentTypeReference_in_ruleXFeatureCall16024 = new BitSet(
+			new long[] { 0x0000000003000000L });
+	public static final BitSet FOLLOW_25_in_ruleXFeatureCall16038 = new BitSet(new long[] { 0x00173FA5CC500010L,
+			0x0000020000000000L });
+	public static final BitSet FOLLOW_ruleIdOrSuper_in_ruleXFeatureCall16063 = new BitSet(new long[] {
+			0x0000000800000002L, 0x0000000040000000L });
+	public static final BitSet FOLLOW_35_in_ruleXFeatureCall16097 = new BitSet(new long[] { 0x0017FFFDDCD070F0L,
+			0x0003FBCB61088001L });
+	public static final BitSet FOLLOW_ruleXShortClosure_in_ruleXFeatureCall16182 = new BitSet(
+			new long[] { 0x0000001000000000L });
+	public static final BitSet FOLLOW_ruleXExpression_in_ruleXFeatureCall16210 = new BitSet(
+			new long[] { 0x0000001001000000L });
+	public static final BitSet FOLLOW_24_in_ruleXFeatureCall16223 = new BitSet(new long[] { 0x00173FEDDCD070F0L,
+			0x0003FBCA61080001L });
+	public static final BitSet FOLLOW_ruleXExpression_in_ruleXFeatureCall16244 = new BitSet(
+			new long[] { 0x0000001001000000L });
+	public static final BitSet FOLLOW_36_in_ruleXFeatureCall16261 = new BitSet(new long[] { 0x0000000000000002L,
+			0x0000000040000000L });
+	public static final BitSet FOLLOW_ruleXClosure_in_ruleXFeatureCall16296 = new BitSet(
+			new long[] { 0x0000000000000002L });
+	public static final BitSet FOLLOW_ruleIdOrSuper_in_entryRuleIdOrSuper16334 = new BitSet(
+			new long[] { 0x0000000000000000L });
+	public static final BitSet FOLLOW_EOF_in_entryRuleIdOrSuper16345 = new BitSet(new long[] { 0x0000000000000002L });
+	public static final BitSet FOLLOW_ruleFeatureCallID_in_ruleIdOrSuper16392 = new BitSet(
+			new long[] { 0x0000000000000002L });
+	public static final BitSet FOLLOW_105_in_ruleIdOrSuper16416 = new BitSet(new long[] { 0x0000000000000002L });
+	public static final BitSet FOLLOW_ruleStaticQualifier_in_entryRuleStaticQualifier16457 = new BitSet(
+			new long[] { 0x0000000000000000L });
+	public static final BitSet FOLLOW_EOF_in_entryRuleStaticQualifier16468 = new BitSet(
+			new long[] { 0x0000000000000002L });
+	public static final BitSet FOLLOW_ruleValidID_in_ruleStaticQualifier16515 = new BitSet(new long[] {
+			0x0000000000000000L, 0x0000040000000000L });
+	public static final BitSet FOLLOW_106_in_ruleStaticQualifier16533 = new BitSet(new long[] { 0x0004000100000012L });
+	public static final BitSet FOLLOW_ruleXConstructorCall_in_entryRuleXConstructorCall16574 = new BitSet(
+			new long[] { 0x0000000000000000L });
+	public static final BitSet FOLLOW_EOF_in_entryRuleXConstructorCall16584 = new BitSet(
+			new long[] { 0x0000000000000002L });
+	public static final BitSet FOLLOW_38_in_ruleXConstructorCall16630 = new BitSet(new long[] { 0x0004000100000010L });
+	public static final BitSet FOLLOW_ruleQualifiedName_in_ruleXConstructorCall16653 = new BitSet(new long[] {
+			0x0000000800800002L, 0x0000000040000000L });
+	public static final BitSet FOLLOW_23_in_ruleXConstructorCall16674 = new BitSet(new long[] { 0x0004FF8D00100010L,
+			0x0010000000008000L });
+	public static final BitSet FOLLOW_ruleJvmArgumentTypeReference_in_ruleXConstructorCall16696 = new BitSet(
+			new long[] { 0x0000000003000000L });
+	public static final BitSet FOLLOW_24_in_ruleXConstructorCall16709 = new BitSet(new long[] { 0x0004FF8D00100010L,
+			0x0010000000008000L });
+	public static final BitSet FOLLOW_ruleJvmArgumentTypeReference_in_ruleXConstructorCall16730 = new BitSet(
+			new long[] { 0x0000000003000000L });
+	public static final BitSet FOLLOW_25_in_ruleXConstructorCall16744 = new BitSet(new long[] { 0x0000000800000002L,
+			0x0000000040000000L });
+	public static final BitSet FOLLOW_35_in_ruleXConstructorCall16767 = new BitSet(new long[] { 0x0017FFFDDCD070F0L,
+			0x0003FBCB61088001L });
+	public static final BitSet FOLLOW_ruleXShortClosure_in_ruleXConstructorCall16840 = new BitSet(
+			new long[] { 0x0000001000000000L });
+	public static final BitSet FOLLOW_ruleXExpression_in_ruleXConstructorCall16868 = new BitSet(
+			new long[] { 0x0000001001000000L });
+	public static final BitSet FOLLOW_24_in_ruleXConstructorCall16881 = new BitSet(new long[] { 0x00173FEDDCD070F0L,
+			0x0003FBCA61080001L });
+	public static final BitSet FOLLOW_ruleXExpression_in_ruleXConstructorCall16902 = new BitSet(
+			new long[] { 0x0000001001000000L });
+	public static final BitSet FOLLOW_36_in_ruleXConstructorCall16919 = new BitSet(new long[] { 0x0000000000000002L,
+			0x0000000040000000L });
+	public static final BitSet FOLLOW_ruleXClosure_in_ruleXConstructorCall16954 = new BitSet(
+			new long[] { 0x0000000000000002L });
+	public static final BitSet FOLLOW_ruleXBooleanLiteral_in_entryRuleXBooleanLiteral16991 = new BitSet(
+			new long[] { 0x0000000000000000L });
+	public static final BitSet FOLLOW_EOF_in_entryRuleXBooleanLiteral17001 = new BitSet(
+			new long[] { 0x0000000000000002L });
+	public static final BitSet FOLLOW_107_in_ruleXBooleanLiteral17048 = new BitSet(new long[] { 0x0000000000000002L });
+	public static final BitSet FOLLOW_108_in_ruleXBooleanLiteral17072 = new BitSet(new long[] { 0x0000000000000002L });
+	public static final BitSet FOLLOW_ruleXNullLiteral_in_entryRuleXNullLiteral17122 = new BitSet(
+			new long[] { 0x0000000000000000L });
+	public static final BitSet FOLLOW_EOF_in_entryRuleXNullLiteral17132 = new BitSet(new long[] { 0x0000000000000002L });
+	public static final BitSet FOLLOW_109_in_ruleXNullLiteral17178 = new BitSet(new long[] { 0x0000000000000002L });
+	public static final BitSet FOLLOW_ruleXNumberLiteral_in_entryRuleXNumberLiteral17214 = new BitSet(
+			new long[] { 0x0000000000000000L });
+	public static final BitSet FOLLOW_EOF_in_entryRuleXNumberLiteral17224 = new BitSet(
+			new long[] { 0x0000000000000002L });
+	public static final BitSet FOLLOW_ruleNumber_in_ruleXNumberLiteral17279 = new BitSet(
+			new long[] { 0x0000000000000002L });
+	public static final BitSet FOLLOW_ruleXTypeLiteral_in_entryRuleXTypeLiteral17315 = new BitSet(
+			new long[] { 0x0000000000000000L });
+	public static final BitSet FOLLOW_EOF_in_entryRuleXTypeLiteral17325 = new BitSet(new long[] { 0x0000000000000002L });
+	public static final BitSet FOLLOW_110_in_ruleXTypeLiteral17371 = new BitSet(new long[] { 0x0000000800000000L });
+	public static final BitSet FOLLOW_35_in_ruleXTypeLiteral17383 = new BitSet(new long[] { 0x0004000100000010L });
+	public static final BitSet FOLLOW_ruleQualifiedName_in_ruleXTypeLiteral17406 = new BitSet(new long[] {
+			0x0000001000000000L, 0x0000000040000000L });
+	public static final BitSet FOLLOW_ruleArrayBrackets_in_ruleXTypeLiteral17427 = new BitSet(new long[] {
+			0x0000001000000000L, 0x0000000040000000L });
+	public static final BitSet FOLLOW_36_in_ruleXTypeLiteral17440 = new BitSet(new long[] { 0x0000000000000002L });
+	public static final BitSet FOLLOW_ruleXThrowExpression_in_entryRuleXThrowExpression17476 = new BitSet(
+			new long[] { 0x0000000000000000L });
+	public static final BitSet FOLLOW_EOF_in_entryRuleXThrowExpression17486 = new BitSet(
+			new long[] { 0x0000000000000002L });
+	public static final BitSet FOLLOW_111_in_ruleXThrowExpression17532 = new BitSet(new long[] { 0x00173FEDDCD070F0L,
+			0x0003FBCA61080001L });
+	public static final BitSet FOLLOW_ruleXExpression_in_ruleXThrowExpression17553 = new BitSet(
+			new long[] { 0x0000000000000002L });
+	public static final BitSet FOLLOW_ruleXReturnExpression_in_entryRuleXReturnExpression17589 = new BitSet(
+			new long[] { 0x0000000000000000L });
+	public static final BitSet FOLLOW_EOF_in_entryRuleXReturnExpression17599 = new BitSet(
+			new long[] { 0x0000000000000002L });
+	public static final BitSet FOLLOW_112_in_ruleXReturnExpression17645 = new BitSet(new long[] { 0x00173FEDDCD070F2L,
+			0x0003FBCA61080001L });
+	public static final BitSet FOLLOW_ruleXExpression_in_ruleXReturnExpression17676 = new BitSet(
+			new long[] { 0x0000000000000002L });
+	public static final BitSet FOLLOW_ruleXTryCatchFinallyExpression_in_entryRuleXTryCatchFinallyExpression17713 = new BitSet(
+			new long[] { 0x0000000000000000L });
+	public static final BitSet FOLLOW_EOF_in_entryRuleXTryCatchFinallyExpression17723 = new BitSet(
+			new long[] { 0x0000000000000002L });
+	public static final BitSet FOLLOW_113_in_ruleXTryCatchFinallyExpression17769 = new BitSet(new long[] {
+			0x00173FEDDCD070F0L, 0x0003FBCA61080001L });
+	public static final BitSet FOLLOW_ruleXExpression_in_ruleXTryCatchFinallyExpression17790 = new BitSet(new long[] {
+			0x0000000000000000L, 0x000C000000000000L });
+	public static final BitSet FOLLOW_ruleXCatchClause_in_ruleXTryCatchFinallyExpression17820 = new BitSet(new long[] {
+			0x0000000000000002L, 0x000C000000000000L });
+	public static final BitSet FOLLOW_114_in_ruleXTryCatchFinallyExpression17842 = new BitSet(new long[] {
+			0x00173FEDDCD070F0L, 0x0003FBCA61080001L });
+	public static final BitSet FOLLOW_ruleXExpression_in_ruleXTryCatchFinallyExpression17864 = new BitSet(
+			new long[] { 0x0000000000000002L });
+	public static final BitSet FOLLOW_114_in_ruleXTryCatchFinallyExpression17886 = new BitSet(new long[] {
+			0x00173FEDDCD070F0L, 0x0003FBCA61080001L });
+	public static final BitSet FOLLOW_ruleXExpression_in_ruleXTryCatchFinallyExpression17907 = new BitSet(
+			new long[] { 0x0000000000000002L });
+	public static final BitSet FOLLOW_ruleXCatchClause_in_entryRuleXCatchClause17945 = new BitSet(
+			new long[] { 0x0000000000000000L });
+	public static final BitSet FOLLOW_EOF_in_entryRuleXCatchClause17955 = new BitSet(new long[] { 0x0000000000000002L });
+	public static final BitSet FOLLOW_115_in_ruleXCatchClause18000 = new BitSet(new long[] { 0x0000000800000000L });
+	public static final BitSet FOLLOW_35_in_ruleXCatchClause18013 = new BitSet(new long[] { 0x0004FF8D00100010L,
+			0x0000000000008000L });
+	public static final BitSet FOLLOW_ruleFullJvmFormalParameter_in_ruleXCatchClause18034 = new BitSet(
+			new long[] { 0x0000001000000000L });
+	public static final BitSet FOLLOW_36_in_ruleXCatchClause18046 = new BitSet(new long[] { 0x00173FEDDCD070F0L,
+			0x0003FBCA61080001L });
+	public static final BitSet FOLLOW_ruleXExpression_in_ruleXCatchClause18067 = new BitSet(
+			new long[] { 0x0000000000000002L });
+	public static final BitSet FOLLOW_ruleQualifiedName_in_entryRuleQualifiedName18104 = new BitSet(
+			new long[] { 0x0000000000000000L });
+	public static final BitSet FOLLOW_EOF_in_entryRuleQualifiedName18115 = new BitSet(
+			new long[] { 0x0000000000000002L });
+	public static final BitSet FOLLOW_ruleValidID_in_ruleQualifiedName18162 = new BitSet(new long[] {
+			0x0000000000000002L, 0x0000000004000000L });
+	public static final BitSet FOLLOW_90_in_ruleQualifiedName18190 = new BitSet(new long[] { 0x0004000100000010L });
+	public static final BitSet FOLLOW_ruleValidID_in_ruleQualifiedName18213 = new BitSet(new long[] {
+			0x0000000000000002L, 0x0000000004000000L });
+	public static final BitSet FOLLOW_ruleNumber_in_entryRuleNumber18267 = new BitSet(
+			new long[] { 0x0000000000000000L });
+	public static final BitSet FOLLOW_EOF_in_entryRuleNumber18278 = new BitSet(new long[] { 0x0000000000000002L });
+	public static final BitSet FOLLOW_RULE_HEX_in_ruleNumber18322 = new BitSet(new long[] { 0x0000000000000002L });
+	public static final BitSet FOLLOW_RULE_INT_in_ruleNumber18350 = new BitSet(new long[] { 0x0000000000000002L,
+			0x0000000004000000L });
+	public static final BitSet FOLLOW_RULE_DECIMAL_in_ruleNumber18376 = new BitSet(new long[] { 0x0000000000000002L,
+			0x0000000004000000L });
+	public static final BitSet FOLLOW_90_in_ruleNumber18396 = new BitSet(new long[] { 0x0000000000006000L });
+	public static final BitSet FOLLOW_RULE_INT_in_ruleNumber18412 = new BitSet(new long[] { 0x0000000000000002L });
+	public static final BitSet FOLLOW_RULE_DECIMAL_in_ruleNumber18438 = new BitSet(new long[] { 0x0000000000000002L });
+	public static final BitSet FOLLOW_ruleJvmTypeReference_in_entryRuleJvmTypeReference18491 = new BitSet(
+			new long[] { 0x0000000000000000L });
+	public static final BitSet FOLLOW_EOF_in_entryRuleJvmTypeReference18501 = new BitSet(
+			new long[] { 0x0000000000000002L });
+	public static final BitSet FOLLOW_ruleJvmParameterizedTypeReference_in_ruleJvmTypeReference18549 = new BitSet(
+			new long[] { 0x0000000000000002L, 0x0000000040000000L });
+	public static final BitSet FOLLOW_ruleArrayBrackets_in_ruleJvmTypeReference18585 = new BitSet(new long[] {
+			0x0000000000000002L, 0x0000000040000000L });
+	public static final BitSet FOLLOW_ruleXFunctionTypeRef_in_ruleJvmTypeReference18616 = new BitSet(
+			new long[] { 0x0000000000000002L });
+	public static final BitSet FOLLOW_ruleArrayBrackets_in_entryRuleArrayBrackets18652 = new BitSet(
+			new long[] { 0x0000000000000000L });
+	public static final BitSet FOLLOW_EOF_in_entryRuleArrayBrackets18663 = new BitSet(
+			new long[] { 0x0000000000000002L });
+	public static final BitSet FOLLOW_94_in_ruleArrayBrackets18701 = new BitSet(new long[] { 0x0000000000000000L,
+			0x0000000080000000L });
+	public static final BitSet FOLLOW_95_in_ruleArrayBrackets18714 = new BitSet(new long[] { 0x0000000000000002L });
+	public static final BitSet FOLLOW_ruleXFunctionTypeRef_in_entryRuleXFunctionTypeRef18754 = new BitSet(
+			new long[] { 0x0000000000000000L });
+	public static final BitSet FOLLOW_EOF_in_entryRuleXFunctionTypeRef18764 = new BitSet(
+			new long[] { 0x0000000000000002L });
+	public static final BitSet FOLLOW_35_in_ruleXFunctionTypeRef18802 = new BitSet(new long[] { 0x0004FF9D00100010L,
+			0x0000000000008000L });
+	public static final BitSet FOLLOW_ruleJvmTypeReference_in_ruleXFunctionTypeRef18824 = new BitSet(
+			new long[] { 0x0000001001000000L });
+	public static final BitSet FOLLOW_24_in_ruleXFunctionTypeRef18837 = new BitSet(new long[] { 0x0004FF8D00100010L,
+			0x0000000000008000L });
+	public static final BitSet FOLLOW_ruleJvmTypeReference_in_ruleXFunctionTypeRef18858 = new BitSet(
+			new long[] { 0x0000001001000000L });
+	public static final BitSet FOLLOW_36_in_ruleXFunctionTypeRef18874 = new BitSet(new long[] { 0x0000000000000000L,
+			0x0000000000008000L });
+	public static final BitSet FOLLOW_79_in_ruleXFunctionTypeRef18888 = new BitSet(new long[] { 0x0004FF8D00100010L,
+			0x0000000000008000L });
+	public static final BitSet FOLLOW_ruleJvmTypeReference_in_ruleXFunctionTypeRef18909 = new BitSet(
+			new long[] { 0x0000000000000002L });
+	public static final BitSet FOLLOW_ruleJvmParameterizedTypeReference_in_entryRuleJvmParameterizedTypeReference18945 = new BitSet(
+			new long[] { 0x0000000000000000L });
+	public static final BitSet FOLLOW_EOF_in_entryRuleJvmParameterizedTypeReference18955 = new BitSet(
+			new long[] { 0x0000000000000002L });
+	public static final BitSet FOLLOW_ruleQualifiedName_in_ruleJvmParameterizedTypeReference19003 = new BitSet(
+			new long[] { 0x0000000000800002L });
+	public static final BitSet FOLLOW_23_in_ruleJvmParameterizedTypeReference19024 = new BitSet(new long[] {
+			0x0004FF8D00100010L, 0x0010000000008000L });
+	public static final BitSet FOLLOW_ruleJvmArgumentTypeReference_in_ruleJvmParameterizedTypeReference19046 = new BitSet(
+			new long[] { 0x0000000003000000L });
+	public static final BitSet FOLLOW_24_in_ruleJvmParameterizedTypeReference19059 = new BitSet(new long[] {
+			0x0004FF8D00100010L, 0x0010000000008000L });
+	public static final BitSet FOLLOW_ruleJvmArgumentTypeReference_in_ruleJvmParameterizedTypeReference19080 = new BitSet(
+			new long[] { 0x0000000003000000L });
+	public static final BitSet FOLLOW_25_in_ruleJvmParameterizedTypeReference19094 = new BitSet(
+			new long[] { 0x0000000000000002L });
+	public static final BitSet FOLLOW_ruleJvmArgumentTypeReference_in_entryRuleJvmArgumentTypeReference19132 = new BitSet(
+			new long[] { 0x0000000000000000L });
+	public static final BitSet FOLLOW_EOF_in_entryRuleJvmArgumentTypeReference19142 = new BitSet(
+			new long[] { 0x0000000000000002L });
+	public static final BitSet FOLLOW_ruleJvmTypeReference_in_ruleJvmArgumentTypeReference19189 = new BitSet(
+			new long[] { 0x0000000000000002L });
+	public static final BitSet FOLLOW_ruleJvmWildcardTypeReference_in_ruleJvmArgumentTypeReference19216 = new BitSet(
+			new long[] { 0x0000000000000002L });
+	public static final BitSet FOLLOW_ruleJvmWildcardTypeReference_in_entryRuleJvmWildcardTypeReference19251 = new BitSet(
+			new long[] { 0x0000000000000000L });
+	public static final BitSet FOLLOW_EOF_in_entryRuleJvmWildcardTypeReference19261 = new BitSet(
+			new long[] { 0x0000000000000002L });
+	public static final BitSet FOLLOW_116_in_ruleJvmWildcardTypeReference19307 = new BitSet(new long[] {
+			0x0000000004000002L, 0x0000020000000000L });
+	public static final BitSet FOLLOW_ruleJvmUpperBound_in_ruleJvmWildcardTypeReference19329 = new BitSet(
+			new long[] { 0x0000000000000002L });
+	public static final BitSet FOLLOW_ruleJvmLowerBound_in_ruleJvmWildcardTypeReference19356 = new BitSet(
+			new long[] { 0x0000000000000002L });
+	public static final BitSet FOLLOW_ruleJvmUpperBound_in_entryRuleJvmUpperBound19394 = new BitSet(
+			new long[] { 0x0000000000000000L });
+	public static final BitSet FOLLOW_EOF_in_entryRuleJvmUpperBound19404 = new BitSet(
+			new long[] { 0x0000000000000002L });
+	public static final BitSet FOLLOW_26_in_ruleJvmUpperBound19441 = new BitSet(new long[] { 0x0004FF8D00100010L,
+			0x0000000000008000L });
+	public static final BitSet FOLLOW_ruleJvmTypeReference_in_ruleJvmUpperBound19462 = new BitSet(
+			new long[] { 0x0000000000000002L });
+	public static final BitSet FOLLOW_ruleJvmUpperBoundAnded_in_entryRuleJvmUpperBoundAnded19498 = new BitSet(
+			new long[] { 0x0000000000000000L });
+	public static final BitSet FOLLOW_EOF_in_entryRuleJvmUpperBoundAnded19508 = new BitSet(
+			new long[] { 0x0000000000000002L });
+	public static final BitSet FOLLOW_117_in_ruleJvmUpperBoundAnded19545 = new BitSet(new long[] { 0x0004FF8D00100010L,
+			0x0000000000008000L });
+	public static final BitSet FOLLOW_ruleJvmTypeReference_in_ruleJvmUpperBoundAnded19566 = new BitSet(
+			new long[] { 0x0000000000000002L });
+	public static final BitSet FOLLOW_ruleJvmLowerBound_in_entryRuleJvmLowerBound19602 = new BitSet(
+			new long[] { 0x0000000000000000L });
+	public static final BitSet FOLLOW_EOF_in_entryRuleJvmLowerBound19612 = new BitSet(
+			new long[] { 0x0000000000000002L });
+	public static final BitSet FOLLOW_105_in_ruleJvmLowerBound19649 = new BitSet(new long[] { 0x0004FF8D00100010L,
+			0x0000000000008000L });
+	public static final BitSet FOLLOW_ruleJvmTypeReference_in_ruleJvmLowerBound19670 = new BitSet(
+			new long[] { 0x0000000000000002L });
+	public static final BitSet FOLLOW_ruleJvmTypeParameter_in_entryRuleJvmTypeParameter19706 = new BitSet(
+			new long[] { 0x0000000000000000L });
+	public static final BitSet FOLLOW_EOF_in_entryRuleJvmTypeParameter19716 = new BitSet(
+			new long[] { 0x0000000000000002L });
+	public static final BitSet FOLLOW_ruleValidID_in_ruleJvmTypeParameter19762 = new BitSet(new long[] {
+			0x0000000004000002L, 0x0000020000000000L });
+	public static final BitSet FOLLOW_ruleJvmUpperBound_in_ruleJvmTypeParameter19785 = new BitSet(new long[] {
+			0x0000000000000002L, 0x0020000000000000L });
+	public static final BitSet FOLLOW_ruleJvmUpperBoundAnded_in_ruleJvmTypeParameter19806 = new BitSet(new long[] {
+			0x0000000000000002L, 0x0020000000000000L });
+	public static final BitSet FOLLOW_ruleJvmLowerBound_in_ruleJvmTypeParameter19835 = new BitSet(
+			new long[] { 0x0000000000000002L });
+	public static final BitSet FOLLOW_ruleQualifiedNameWithWildcard_in_entryRuleQualifiedNameWithWildcard19874 = new BitSet(
+			new long[] { 0x0000000000000000L });
+	public static final BitSet FOLLOW_EOF_in_entryRuleQualifiedNameWithWildcard19885 = new BitSet(
+			new long[] { 0x0000000000000002L });
+	public static final BitSet FOLLOW_ruleQualifiedName_in_ruleQualifiedNameWithWildcard19932 = new BitSet(new long[] {
+			0x0000000000000000L, 0x0000000004000000L });
+	public static final BitSet FOLLOW_90_in_ruleQualifiedNameWithWildcard19950 = new BitSet(new long[] {
+			0x0000000000000000L, 0x0000000000100000L });
+	public static final BitSet FOLLOW_84_in_ruleQualifiedNameWithWildcard19963 = new BitSet(
+			new long[] { 0x0000000000000002L });
+	public static final BitSet FOLLOW_ruleXImportSection_in_entryRuleXImportSection20003 = new BitSet(
+			new long[] { 0x0000000000000000L });
+	public static final BitSet FOLLOW_EOF_in_entryRuleXImportSection20013 = new BitSet(
+			new long[] { 0x0000000000000002L });
+	public static final BitSet FOLLOW_ruleXImportDeclaration_in_ruleXImportSection20058 = new BitSet(
+			new long[] { 0x0010000000000002L });
+	public static final BitSet FOLLOW_ruleXImportDeclaration_in_entryRuleXImportDeclaration20094 = new BitSet(
+			new long[] { 0x0000000000000000L });
+	public static final BitSet FOLLOW_EOF_in_entryRuleXImportDeclaration20104 = new BitSet(
+			new long[] { 0x0000000000000002L });
+	public static final BitSet FOLLOW_52_in_ruleXImportDeclaration20141 = new BitSet(new long[] { 0x0004080100000010L });
+	public static final BitSet FOLLOW_43_in_ruleXImportDeclaration20161 = new BitSet(new long[] { 0x0004000500000010L });
+	public static final BitSet FOLLOW_34_in_ruleXImportDeclaration20192 = new BitSet(new long[] { 0x0004000100000010L });
+	public static final BitSet FOLLOW_ruleQualifiedName_in_ruleXImportDeclaration20229 = new BitSet(new long[] {
+			0x0000000000000000L, 0x0000000004000000L });
+	public static final BitSet FOLLOW_90_in_ruleXImportDeclaration20241 = new BitSet(new long[] { 0x0000000000000000L,
+			0x0000000000100000L });
+	public static final BitSet FOLLOW_84_in_ruleXImportDeclaration20253 = new BitSet(new long[] { 0x0000000000200002L });
+	public static final BitSet FOLLOW_ruleQualifiedName_in_ruleXImportDeclaration20283 = new BitSet(
+			new long[] { 0x0000000000200002L });
+	public static final BitSet FOLLOW_ruleQualifiedNameWithWildcard_in_ruleXImportDeclaration20310 = new BitSet(
+			new long[] { 0x0000000000200002L });
+	public static final BitSet FOLLOW_21_in_ruleXImportDeclaration20324 = new BitSet(new long[] { 0x0000000000000002L });
+	public static final BitSet FOLLOW_ruleJvmTypeReference_in_synpred1_InternalXtend2300 = new BitSet(
+			new long[] { 0x0004000000000000L });
+	public static final BitSet FOLLOW_ruleCreateExtensionInfo_in_synpred1_InternalXtend2309 = new BitSet(
+			new long[] { 0x0004000100000010L });
+	public static final BitSet FOLLOW_ruleValidID_in_synpred1_InternalXtend2318 = new BitSet(
+			new long[] { 0x0000000800000000L });
+	public static final BitSet FOLLOW_35_in_synpred1_InternalXtend2324 = new BitSet(new long[] { 0x0000000000000002L });
+	public static final BitSet FOLLOW_ruleJvmTypeReference_in_synpred2_InternalXtend2421 = new BitSet(
+			new long[] { 0x0004000100000010L });
+	public static final BitSet FOLLOW_ruleValidID_in_synpred2_InternalXtend2430 = new BitSet(
+			new long[] { 0x0000000800000000L });
+	public static final BitSet FOLLOW_35_in_synpred2_InternalXtend2436 = new BitSet(new long[] { 0x0000000000000002L });
+	public static final BitSet FOLLOW_ruleCreateExtensionInfo_in_synpred3_InternalXtend2512 = new BitSet(
+			new long[] { 0x0004000100000010L });
+	public static final BitSet FOLLOW_ruleValidID_in_synpred3_InternalXtend2521 = new BitSet(
+			new long[] { 0x0000000800000000L });
+	public static final BitSet FOLLOW_35_in_synpred3_InternalXtend2527 = new BitSet(new long[] { 0x0000000000000002L });
+	public static final BitSet FOLLOW_ruleJvmTypeReference_in_synpred5_InternalXtend5035 = new BitSet(
+			new long[] { 0x0004000100000010L });
+	public static final BitSet FOLLOW_ruleValidID_in_synpred5_InternalXtend5044 = new BitSet(
+			new long[] { 0x0000000000000002L });
+	public static final BitSet FOLLOW_35_in_synpred6_InternalXtend7392 = new BitSet(new long[] { 0x0000000000000002L });
+	public static final BitSet FOLLOW_ruleOpMultiAssign_in_synpred7_InternalXtend8502 = new BitSet(
+			new long[] { 0x0000000000000002L });
+	public static final BitSet FOLLOW_ruleOpOr_in_synpred8_InternalXtend8871 = new BitSet(
+			new long[] { 0x0000000000000002L });
+	public static final BitSet FOLLOW_ruleOpAnd_in_synpred9_InternalXtend9130 = new BitSet(
+			new long[] { 0x0000000000000002L });
+	public static final BitSet FOLLOW_ruleOpEquality_in_synpred10_InternalXtend9389 = new BitSet(
+			new long[] { 0x0000000000000002L });
+	public static final BitSet FOLLOW_73_in_synpred11_InternalXtend9703 = new BitSet(new long[] { 0x0000000000000002L });
+	public static final BitSet FOLLOW_ruleOpCompare_in_synpred12_InternalXtend9774 = new BitSet(
+			new long[] { 0x0000000000000002L });
+	public static final BitSet FOLLOW_ruleOpOther_in_synpred13_InternalXtend10093 = new BitSet(
+			new long[] { 0x0000000000000002L });
+	public static final BitSet FOLLOW_25_in_synpred14_InternalXtend10362 = new BitSet(
+			new long[] { 0x0000000002000000L });
+	public static final BitSet FOLLOW_25_in_synpred14_InternalXtend10367 = new BitSet(
+			new long[] { 0x0000000000000002L });
+	public static final BitSet FOLLOW_23_in_synpred15_InternalXtend10449 = new BitSet(
+			new long[] { 0x0000000000800000L });
+	public static final BitSet FOLLOW_23_in_synpred15_InternalXtend10454 = new BitSet(
+			new long[] { 0x0000000000000002L });
+	public static final BitSet FOLLOW_ruleOpAdd_in_synpred16_InternalXtend10676 = new BitSet(
+			new long[] { 0x0000000000000002L });
+	public static final BitSet FOLLOW_ruleOpMulti_in_synpred17_InternalXtend10956 = new BitSet(
+			new long[] { 0x0000000000000002L });
+	public static final BitSet FOLLOW_89_in_synpred18_InternalXtend11550 = new BitSet(
+			new long[] { 0x0000000000000002L });
+	public static final BitSet FOLLOW_90_in_synpred19_InternalXtend11704 = new BitSet(
+			new long[] { 0x00173FA5CC500010L });
+	public static final BitSet FOLLOW_ruleFeatureCallID_in_synpred19_InternalXtend11713 = new BitSet(
+			new long[] { 0x0000000200000000L });
+	public static final BitSet FOLLOW_ruleOpSingleAssign_in_synpred19_InternalXtend11719 = new BitSet(
+			new long[] { 0x0000000000000002L });
+	public static final BitSet FOLLOW_90_in_synpred20_InternalXtend11822 = new BitSet(
+			new long[] { 0x0000000000000002L });
+	public static final BitSet FOLLOW_91_in_synpred20_InternalXtend11836 = new BitSet(
+			new long[] { 0x0000000000000002L });
+	public static final BitSet FOLLOW_92_in_synpred20_InternalXtend11856 = new BitSet(
+			new long[] { 0x0000000000000002L });
+	public static final BitSet FOLLOW_35_in_synpred21_InternalXtend12083 = new BitSet(
+			new long[] { 0x0000000000000002L });
+	public static final BitSet FOLLOW_ruleJvmFormalParameter_in_synpred22_InternalXtend12135 = new BitSet(new long[] {
+			0x0000000001000000L, 0x0000000100000000L });
+	public static final BitSet FOLLOW_24_in_synpred22_InternalXtend12142 = new BitSet(new long[] { 0x0004FF8D00100010L,
+			0x0000000000008000L });
+	public static final BitSet FOLLOW_ruleJvmFormalParameter_in_synpred22_InternalXtend12149 = new BitSet(new long[] {
+			0x0000000001000000L, 0x0000000100000000L });
+	public static final BitSet FOLLOW_96_in_synpred22_InternalXtend12163 = new BitSet(
+			new long[] { 0x0000000000000002L });
+	public static final BitSet FOLLOW_94_in_synpred23_InternalXtend12283 = new BitSet(
+			new long[] { 0x0000000000000002L });
+	public static final BitSet FOLLOW_94_in_synpred24_InternalXtend12834 = new BitSet(
+			new long[] { 0x0000000000000002L });
+	public static final BitSet FOLLOW_ruleJvmFormalParameter_in_synpred26_InternalXtend13584 = new BitSet(new long[] {
+			0x0000000001000000L, 0x0000000100000000L });
+	public static final BitSet FOLLOW_24_in_synpred26_InternalXtend13591 = new BitSet(new long[] { 0x0004FF8D00100010L,
+			0x0000000000008000L });
+	public static final BitSet FOLLOW_ruleJvmFormalParameter_in_synpred26_InternalXtend13598 = new BitSet(new long[] {
+			0x0000000001000000L, 0x0000000100000000L });
+	public static final BitSet FOLLOW_96_in_synpred26_InternalXtend13612 = new BitSet(
+			new long[] { 0x0000000000000002L });
+	public static final BitSet FOLLOW_98_in_synpred28_InternalXtend14395 = new BitSet(
+			new long[] { 0x0000000000000002L });
+	public static final BitSet FOLLOW_ruleValidID_in_synpred29_InternalXtend14537 = new BitSet(
+			new long[] { 0x0008000000000000L });
+	public static final BitSet FOLLOW_51_in_synpred29_InternalXtend14543 = new BitSet(
+			new long[] { 0x0000000000000002L });
+	public static final BitSet FOLLOW_35_in_synpred30_InternalXtend14619 = new BitSet(
+			new long[] { 0x0004000100000010L });
+	public static final BitSet FOLLOW_ruleValidID_in_synpred30_InternalXtend14626 = new BitSet(
+			new long[] { 0x0008000000000000L });
+	public static final BitSet FOLLOW_51_in_synpred30_InternalXtend14632 = new BitSet(
+			new long[] { 0x0000000000000002L });
+	public static final BitSet FOLLOW_47_in_synpred31_InternalXtend15724 = new BitSet(
+			new long[] { 0x0000000400000002L });
+	public static final BitSet FOLLOW_46_in_synpred31_InternalXtend15740 = new BitSet(
+			new long[] { 0x0000000400000002L });
+	public static final BitSet FOLLOW_34_in_synpred31_InternalXtend15749 = new BitSet(
+			new long[] { 0x0000000000000002L });
+	public static final BitSet FOLLOW_34_in_synpred31_InternalXtend15772 = new BitSet(
+			new long[] { 0x0000C00000000000L });
+	public static final BitSet FOLLOW_47_in_synpred31_InternalXtend15787 = new BitSet(
+			new long[] { 0x0000000000000002L });
+	public static final BitSet FOLLOW_46_in_synpred31_InternalXtend15803 = new BitSet(
+			new long[] { 0x0000000000000002L });
+	public static final BitSet FOLLOW_35_in_synpred32_InternalXtend16079 = new BitSet(
+			new long[] { 0x0000000000000002L });
+	public static final BitSet FOLLOW_ruleJvmFormalParameter_in_synpred33_InternalXtend16131 = new BitSet(new long[] {
+			0x0000000001000000L, 0x0000000100000000L });
+	public static final BitSet FOLLOW_24_in_synpred33_InternalXtend16138 = new BitSet(new long[] { 0x0004FF8D00100010L,
+			0x0000000000008000L });
+	public static final BitSet FOLLOW_ruleJvmFormalParameter_in_synpred33_InternalXtend16145 = new BitSet(new long[] {
+			0x0000000001000000L, 0x0000000100000000L });
+	public static final BitSet FOLLOW_96_in_synpred33_InternalXtend16159 = new BitSet(
+			new long[] { 0x0000000000000002L });
+	public static final BitSet FOLLOW_94_in_synpred34_InternalXtend16279 = new BitSet(
+			new long[] { 0x0000000000000002L });
+	public static final BitSet FOLLOW_23_in_synpred35_InternalXtend16666 = new BitSet(
+			new long[] { 0x0000000000000002L });
+	public static final BitSet FOLLOW_35_in_synpred36_InternalXtend16759 = new BitSet(
+			new long[] { 0x0000000000000002L });
+	public static final BitSet FOLLOW_ruleJvmFormalParameter_in_synpred37_InternalXtend16789 = new BitSet(new long[] {
+			0x0000000001000000L, 0x0000000100000000L });
+	public static final BitSet FOLLOW_24_in_synpred37_InternalXtend16796 = new BitSet(new long[] { 0x0004FF8D00100010L,
+			0x0000000000008000L });
+	public static final BitSet FOLLOW_ruleJvmFormalParameter_in_synpred37_InternalXtend16803 = new BitSet(new long[] {
+			0x0000000001000000L, 0x0000000100000000L });
+	public static final BitSet FOLLOW_96_in_synpred37_InternalXtend16817 = new BitSet(
+			new long[] { 0x0000000000000002L });
+	public static final BitSet FOLLOW_94_in_synpred38_InternalXtend16937 = new BitSet(
+			new long[] { 0x0000000000000002L });
+	public static final BitSet FOLLOW_ruleXExpression_in_synpred39_InternalXtend17659 = new BitSet(
+			new long[] { 0x0000000000000002L });
+	public static final BitSet FOLLOW_115_in_synpred40_InternalXtend17804 = new BitSet(
+			new long[] { 0x0000000000000002L });
+	public static final BitSet FOLLOW_114_in_synpred41_InternalXtend17834 = new BitSet(
+			new long[] { 0x0000000000000002L });
+	public static final BitSet FOLLOW_90_in_synpred43_InternalXtend18181 = new BitSet(
+			new long[] { 0x0000000000000002L });
+	public static final BitSet FOLLOW_ruleArrayBrackets_in_synpred44_InternalXtend18564 = new BitSet(
+			new long[] { 0x0000000000000002L });
+	public static final BitSet FOLLOW_23_in_synpred45_InternalXtend19016 = new BitSet(
+			new long[] { 0x0000000000000002L });
+
+}
