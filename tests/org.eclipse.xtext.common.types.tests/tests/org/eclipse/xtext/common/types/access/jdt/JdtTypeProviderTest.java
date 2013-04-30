@@ -7,7 +7,6 @@
  *******************************************************************************/
 package org.eclipse.xtext.common.types.access.jdt;
 
-import java.util.List;
 import java.util.Map;
 
 import org.eclipse.emf.common.util.URI;
@@ -26,10 +25,7 @@ import org.eclipse.jdt.core.dom.IMethodBinding;
 import org.eclipse.jdt.core.dom.ITypeBinding;
 import org.eclipse.xtext.common.types.JvmConstructor;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
-import org.eclipse.xtext.common.types.JvmEnumerationType;
-import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmGenericType;
-import org.eclipse.xtext.common.types.JvmMember;
 import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmParameterizedTypeReference;
 import org.eclipse.xtext.common.types.JvmVoid;
@@ -37,20 +33,17 @@ import org.eclipse.xtext.common.types.TypesFactory;
 import org.eclipse.xtext.common.types.access.IJvmTypeProvider;
 import org.eclipse.xtext.common.types.access.IMirror;
 import org.eclipse.xtext.common.types.access.TypeResource;
-import org.eclipse.xtext.common.types.access.impl.AbstractTypeProviderTest;
 import org.eclipse.xtext.common.types.access.impl.PrimitiveMirror;
 import org.eclipse.xtext.common.types.access.impl.URIHelperConstants;
-import org.eclipse.xtext.common.types.testSetups.TestEnum;
 import org.eclipse.xtext.common.types.util.jdt.JavaElementFinder;
 import org.junit.After;
-import org.junit.Assume;
 import org.junit.Ignore;
 import org.junit.Test;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public class JdtTypeProviderTest extends AbstractTypeProviderTest {
+public class JdtTypeProviderTest extends AbstractJdtTypeProviderTest {
 
 	private ResourceSet resourceSet;
 	private JdtTypeProvider typeProvider;
@@ -269,40 +262,17 @@ public class JdtTypeProviderTest extends AbstractTypeProviderTest {
 		assertNull(type);
 	}
 	
+	@Override
 	@Test public void testEnum_05() throws Exception {
-		Assume.assumeTrue(isParameterNamesAvailable());
-		
-		String typeName = TestEnum.class.getName();
-		JvmEnumerationType type = (JvmEnumerationType) getTypeProvider().findTypeByName(typeName);
-		boolean constructorSeen = false;
-		for(JvmMember member: type.getMembers()) {
-			if (member instanceof JvmConstructor) {
-				constructorSeen = true;
-				List<JvmFormalParameter> parameters = ((JvmConstructor) member).getParameters();
-				assertEquals(1, parameters.size());
-				JvmFormalParameter singleParam = parameters.get(0);
-				assertEquals("string", singleParam.getName());
-			}
+		if (isParameterNamesAvailable()) {
+			super.testEnum_05();
 		}
-		assertTrue("constructorSeen", constructorSeen);
 	}
 	
 	@Test public void testEnum_06() throws Exception {
-		Assume.assumeTrue(!isParameterNamesAvailable());
-		
-		String typeName = TestEnum.class.getName();
-		JvmEnumerationType type = (JvmEnumerationType) getTypeProvider().findTypeByName(typeName);
-		boolean constructorSeen = false;
-		for(JvmMember member: type.getMembers()) {
-			if (member instanceof JvmConstructor) {
-				constructorSeen = true;
-				List<JvmFormalParameter> parameters = ((JvmConstructor) member).getParameters();
-				assertEquals(1, parameters.size());
-				JvmFormalParameter singleParam = parameters.get(0);
-				assertEquals("arg2", singleParam.getName());
-			}
+		if (!isParameterNamesAvailable()) {
+			doTestEnum_05("arg2");
 		}
-		assertTrue("constructorSeen", constructorSeen);
 	}
 
 	@SuppressWarnings("deprecation")
