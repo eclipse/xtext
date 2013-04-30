@@ -22,6 +22,11 @@ import static org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil.*
 
 import static extension org.eclipse.ui.texteditor.MarkerUtilities.*
 import org.eclipse.xtext.util.StringInputStream
+import org.eclipse.xtext.util.internal.Stopwatches
+import org.eclipse.jdt.core.JavaCore
+import org.eclipse.xtext.builder.nature.ToggleXtextNatureAction
+import org.eclipse.xtext.junit4.ui.util.JavaProjectSetupUtil
+import org.eclipse.jdt.core.IJavaProject
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -56,10 +61,64 @@ class PerformanceTest extends AbstractXtendUITestCase {
 	
 	@Test 
 	def void testIncrementalBuild() throws Exception {
+		internalTestIncrementalBuild();
+		internalTestIncrementalBuild();
+		Stopwatches::resetAll
+		internalTestIncrementalBuild();
+	}
+	
+	def void internalTestIncrementalBuild() throws Exception {
 		val project = PerformanceTestProjectSetup::testProject.project
 		val file = project.getFile("src/org/eclipse/xtext/xbase/formatting/XbaseFormatter2.xtend");
 		file.appendContents(new StringInputStream("//foo\n"), true, true, null);
 		PerformanceTestProjectSetup::waitForAutoBuild
+	}
+	
+	@Test 
+	def void testBuildOfDownstreamProject() throws Exception {
+		val project = PerformanceTestProjectSetup::testProject
+		val downStreamProject = PerformanceTestProjectSetup::createJavaProject("performance.test.project.downstream", 
+						#[JavaCore::NATURE_ID, "org.eclipse.pde.PluginNature"]);
+		JavaProjectSetupUtil::addProjectReference(downStreamProject, project);
+		new ToggleXtextNatureAction().toggleNature(downStreamProject.getProject());
+		val sourceFolder = JavaProjectSetupUtil::addSourceFolder(downStreamProject, "src");
+		JavaProjectSetupUtil::addSourceFolder(downStreamProject, "xtend-gen");
+		sourceFolder.getFolder("foo").create(true,true,null)
+		val sourceFile = sourceFolder.getFile("foo/MyFile.xtend")
+		sourceFile.create(new StringInputStream('''
+			package foo
+			
+			import org.eclipse.xtext.xbase.formatting.BasicFormatterPreferenceKeys
+			import org.eclipse.xtext.xbase.formatting.FormattableDocument
+			import org.eclipse.xtext.xbase.formatting.HiddenLeafAccess
+			import org.eclipse.xtext.xbase.formatting.NodeModelAccess
+			import org.eclipse.xtext.xbase.formatting.XbaseFormatter2
+			
+			class MyFile extends XbaseFormatter2 {
+				
+				def a(BasicFormatterPreferenceKeys keys) {
+					BasicFormatterPreferenceKeys::indentation
+				}
+				
+				def b(FormattableDocument doc) {
+					doc.cfg.get(BasicFormatterPreferenceKeys::indentation)
+				}
+				
+				def c(HiddenLeafAccess x) {
+					x.getHiddenLeafsAfter(null).newLines
+				}
+				
+				def d(NodeModelAccess x) {
+					x.nodeForEObject(null).asTreeIterable
+				}
+			}
+		'''), true, null)
+		
+		val p = downStreamProject.project
+		p.build(IncrementalProjectBuilder::FULL_BUILD, null)
+		p.build(IncrementalProjectBuilder::FULL_BUILD, null)
+		Stopwatches::resetAll
+		p.build(IncrementalProjectBuilder::FULL_BUILD, null)
 	}
 	
 	@Test 
