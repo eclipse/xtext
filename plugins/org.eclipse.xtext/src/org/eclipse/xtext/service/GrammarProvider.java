@@ -12,6 +12,7 @@ import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.XtextPackage;
 import org.eclipse.xtext.parser.BaseEPackageAccess;
 import org.eclipse.xtext.resource.ClasspathUriUtil;
+import org.eclipse.xtext.resource.FileNotFoundOnClasspathException;
 import org.eclipse.xtext.resource.XtextResourceSet;
 
 import com.google.inject.Inject;
@@ -54,9 +55,18 @@ public class GrammarProvider {
 						final ClassLoader classLoaderToUse = requestor == null ? getClass().getClassLoader() : requestor.getClass().getClassLoader();
 						resourceSet.setClasspathURIContext(classLoaderToUse);
 					}
-					grammar = (Grammar) BaseEPackageAccess.loadGrammarFile(
-							ClasspathUriUtil.CLASSPATH_SCHEME + ":/" + languageName.replace('.', '/') + ".xmi",
-							resourceSet);
+					String fileWithoutExt = ClasspathUriUtil.CLASSPATH_SCHEME + ":/" + languageName.replace('.', '/');
+					try {
+						grammar = (Grammar) BaseEPackageAccess.loadGrammarFile(fileWithoutExt + ".xtextbin", resourceSet);
+					} catch (RuntimeException e) {
+						Throwable cause = e;
+						while (cause.getCause() != null)
+							cause = cause.getCause();
+						if (cause instanceof FileNotFoundOnClasspathException) {
+							grammar = (Grammar) BaseEPackageAccess.loadGrammarFile(fileWithoutExt + ".xmi", resourceSet);
+						} else
+							throw e;
+					}
 				}
 			}
 		}

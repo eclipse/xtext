@@ -52,6 +52,13 @@ public class GrammarUtil {
 	public static String getClasspathRelativePathToXmi(Grammar grammar) {
 		return getLanguageId(grammar).replace('.', '/') + ".xmi";
 	}
+	
+	/**
+	 * @since 2.4
+	 */
+	public static String getClasspathRelativePathToBinGrammar(Grammar grammar) {
+		return getLanguageId(grammar).replace('.', '/') + ".xtextbin";
+	}
 
 	public static String getLanguageId(Grammar g) {
 		return g.getName();
