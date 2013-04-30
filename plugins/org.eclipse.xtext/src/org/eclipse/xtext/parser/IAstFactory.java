@@ -51,4 +51,31 @@ public interface IAstFactory {
 	void add(EObject _this, String feature, Object value, String lexerRule, INode node)
 			throws ValueConverterException;
 
+	/**
+	 * Enhancement to the {@link IAstFactory}. This specialization allows to pass the featureId rather
+	 * than the feature name if it is already known.
+	 * 
+	 * @author Sebastian Zarnekow - Initial contribution and API
+	 * @since 2.5
+	 */
+	interface Extension {
+		/**
+		 * Assigns a given value to a feature of the element <code>_this</code>. The value may be converted
+		 * according to the optional lexer rule. 
+		 * The feature must be resolvable to a single value feature.
+		 * 
+		 * @throws ValueConverterException if the value cannot be converted.
+		 */
+		void set(EObject owner, int featureID, Object value, String lexerRule, INode node) throws ValueConverterException;
+
+		/**
+		 * Adds a given value to a list described by the given feature. The list is owned by
+		 * the element <code>_this</code>. The given value may be converted
+		 * according to the optional lexer rule. 
+		 * The feature must be resolvable to a multi value feature.
+		 * 
+		 * @throws ValueConverterException if the value cannot be converted.
+		 */
+		void add(EObject owner, int featureID, Object value, String lexerRule, INode node) throws ValueConverterException;
+	}
 }
