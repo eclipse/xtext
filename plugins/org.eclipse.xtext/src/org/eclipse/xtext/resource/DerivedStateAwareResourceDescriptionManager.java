@@ -14,10 +14,8 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtext.resource.impl.DefaultResourceDescription;
 import org.eclipse.xtext.resource.impl.DefaultResourceDescriptionManager;
 import org.eclipse.xtext.resource.impl.EObjectDescriptionLookUp;
-import org.eclipse.xtext.util.IResourceScopeCache;
 import org.eclipse.xtext.util.RuntimeIOException;
 
-import com.google.inject.Inject;
 import com.google.inject.Singleton;
 
 /**
@@ -32,9 +30,6 @@ public class DerivedStateAwareResourceDescriptionManager extends DefaultResource
 	
 	private final static Logger log = Logger.getLogger(DerivedStateAwareResourceDescriptionManager.class);
 	
-	@Inject
-	private IResourceScopeCache cache = IResourceScopeCache.NullImpl.INSTANCE;
-
 	@Override
 	protected IResourceDescription internalGetResourceDescription(final Resource resource,
 			IDefaultResourceDescriptionStrategy strategy) {
@@ -71,7 +66,7 @@ public class DerivedStateAwareResourceDescriptionManager extends DefaultResource
 	}
 	
 	protected IResourceDescription createResourceDescription(Resource resource, IDefaultResourceDescriptionStrategy strategy) {
-		return new DefaultResourceDescription(resource, strategy, cache) {
+		return new DefaultResourceDescription(resource, strategy, getCache()) {
 			@Override
 			protected EObjectDescriptionLookUp getLookUp() {
 				if (lookup == null)

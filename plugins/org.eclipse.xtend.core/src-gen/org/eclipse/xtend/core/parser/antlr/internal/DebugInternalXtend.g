@@ -344,14 +344,21 @@ ruleXAnnotationElementValuePair :
 
 // Rule XAnnotationElementValue
 ruleXAnnotationElementValue :
-	ruleXAnnotation |
 	( (
-	'#' '[' ruleXAnnotation
+	'#' '['
 	) => (
-		'#' '[' ruleXAnnotation
+		'#' '['
 	) ) (
-		',' ruleXAnnotation
-	)* ']' |
+		ruleXAnnotationOrExpression (
+			',' ruleXAnnotationOrExpression
+		)*
+	)? ']' |
+	ruleXAnnotationOrExpression
+;
+
+// Rule XAnnotationOrExpression
+ruleXAnnotationOrExpression :
+	ruleXAnnotation |
 	ruleXExpression
 ;
 
