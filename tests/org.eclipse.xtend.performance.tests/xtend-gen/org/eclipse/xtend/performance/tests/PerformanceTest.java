@@ -7,6 +7,7 @@
  */
 package org.eclipse.xtend.performance.tests;
 
+import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IMarker;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IResource;
@@ -17,6 +18,7 @@ import org.eclipse.xtend.ide.tests.AbstractXtendUITestCase;
 import org.eclipse.xtend.performance.tests.PerformanceTestProjectSetup;
 import org.eclipse.xtext.junit4.internal.StopwatchRule;
 import org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil;
+import org.eclipse.xtext.util.StringInputStream;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.Functions.Function0;
 import org.junit.AfterClass;
@@ -68,6 +70,15 @@ public class PerformanceTest extends AbstractXtendUITestCase {
   public void testFullBuild() throws Exception {
     final IProject project = PerformanceTestProjectSetup.testProject.getProject();
     project.build(IncrementalProjectBuilder.FULL_BUILD, null);
+  }
+  
+  @Test
+  public void testIncrementalBuild() throws Exception {
+    final IProject project = PerformanceTestProjectSetup.testProject.getProject();
+    final IFile file = project.getFile("src/org/eclipse/xtext/xbase/formatting/XbaseFormatter2.xtend");
+    StringInputStream _stringInputStream = new StringInputStream("//foo\n");
+    file.appendContents(_stringInputStream, true, true, null);
+    PerformanceTestProjectSetup.waitForAutoBuild();
   }
   
   @Test
