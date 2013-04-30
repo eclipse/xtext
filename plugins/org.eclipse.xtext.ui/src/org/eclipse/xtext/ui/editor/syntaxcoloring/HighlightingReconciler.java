@@ -10,7 +10,6 @@ package org.eclipse.xtext.ui.editor.syntaxcoloring;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.log4j.Logger;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
@@ -22,6 +21,8 @@ import org.eclipse.jface.text.TextPresentation;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.IWorkbenchPartSite;
+import org.eclipse.xtext.nodemodel.ICompositeNode;
+import org.eclipse.xtext.parser.IParseResult;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.editor.XtextEditor;
 import org.eclipse.xtext.ui.editor.XtextSourceViewer;
@@ -287,6 +288,8 @@ public class HighlightingReconciler implements ITextInputListener, IXtextModelLi
 			if (highlightingPresenter.isCanceled())
 				return;
 
+			assert isModelInSyncWithDocument(resource);
+			
 			startReconcilingPositions();
 
 			if (!highlightingPresenter.isCanceled()) {
@@ -308,6 +311,21 @@ public class HighlightingReconciler implements ITextInputListener, IXtextModelLi
 				reconciling = false;
 			}
 		}
+	}
+
+	/**
+	 * @since 2.4
+	 */
+	protected boolean isModelInSyncWithDocument(XtextResource resource) {
+		if(resource != null  
+				&& sourceViewer != null && sourceViewer.getDocument() != null) {
+			IParseResult parseResult = resource.getParseResult();
+			if(parseResult != null) {
+				ICompositeNode rootNode = parseResult.getRootNode();
+				return rootNode.getText().equals(sourceViewer.getDocument().get());
+			}
+		}
+		return true;
 	}
 
 	public void setCalculator(ISemanticHighlightingCalculator calculator) {
