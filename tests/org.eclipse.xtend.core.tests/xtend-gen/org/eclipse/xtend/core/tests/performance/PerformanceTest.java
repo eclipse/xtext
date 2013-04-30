@@ -17,7 +17,6 @@ import org.eclipse.xtext.xbase.lib.Functions.Function0;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IntegerRange;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
-import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
 
@@ -363,12 +362,26 @@ public class PerformanceTest extends AbstractXtendTestCase {
   }
   
   @Test
-  @Ignore
   public void doCompileFiveTimes() {
     this.doCompile();
     this.doCompile();
     this.doCompile();
     this.doCompile();
     this.doCompile();
+  }
+  
+  @Test
+  public void doCompileTenTimes() {
+    this.doCompileFiveTimes();
+    this.doCompileFiveTimes();
+  }
+  
+  @Test
+  public void doCompileFiftyTimes() {
+    this.doCompileTenTimes();
+    this.doCompileTenTimes();
+    this.doCompileTenTimes();
+    this.doCompileTenTimes();
+    this.doCompileTenTimes();
   }
 }

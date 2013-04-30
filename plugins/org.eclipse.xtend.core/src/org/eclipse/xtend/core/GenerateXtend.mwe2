@@ -4,13 +4,12 @@ import org.eclipse.emf.mwe.utils.*
 import org.eclipse.xtext.generator.*
 import org.eclipse.xtext.ui.generator.*
 import org.eclipse.xtext.generator.parser.antlr.*
-import org.eclipse.xtext.resource.XtextResourceSet 
+import org.eclipse.xtext.resource.XtextResourceSet
 
 var grammarURI = "classpath:/org/eclipse/xtend/core/Xtend.xtext"
 var file.extensions = "xtend"
 var projectName = "org.eclipse.xtend.core"
 var projectPath = "../${projectName}"
-
 var uiProjectName = "org.eclipse.xtend.ide"
 var uiProjectPath = "../${uiProjectName}"
 var backtrack = false
@@ -22,7 +21,7 @@ Workflow {
 		scanClassPath = true
 		registerGenModelFile = "platform:/resource/org.eclipse.xtext.xbase/model/Xbase.genmodel"
 	}
-	
+
 	bean = StandaloneSetup {
 		resourceSet = XtextResourceSet : resourceSet {}
 		registerEcoreFile = "platform:/resource/org.eclipse.xtext.common.types/model/JavaVMTypes.ecore"
@@ -31,23 +30,23 @@ Workflow {
 		registerEcoreFile = "platform:/resource/org.eclipse.xtext.xbase/model/XAnnotations.ecore"
 		registerEcoreFile = "platform:/resource/${projectName}/model/Xtend.ecore"
 	}
-	
+
 	component = DirectoryCleaner {
 		directory = "${projectPath}/emf-gen"
 	}
 
 	component = org.eclipse.emf.mwe2.ecore.EcoreGenerator {
 		genModel = "platform:/resource/${projectName}/model/Xtend.genmodel"
-		srcPath ="platform:/resource/${projectName}/src"
-		srcPath ="platform:/resource/org.eclipse.xtext.common.types/src"
-		srcPath ="platform:/resource/org.eclipse.xtext.xbase/src"
+		srcPath = "platform:/resource/${projectName}/src"
+		srcPath = "platform:/resource/org.eclipse.xtext.common.types/src"
+		srcPath = "platform:/resource/org.eclipse.xtext.xbase/src"
 	}
-	
+
 	component = org.eclipse.emf.mwe2.ecore.EcoreGenerator {
 		genModel = "platform:/resource/${projectName}/model/RichStrings.genmodel"
-		srcPath ="platform:/resource/${projectName}/src"
-		srcPath ="platform:/resource/org.eclipse.xtext.common.types/src"
-		srcPath ="platform:/resource/org.eclipse.xtext.xbase/src"
+		srcPath = "platform:/resource/${projectName}/src"
+		srcPath = "platform:/resource/org.eclipse.xtext.common.types/src"
+		srcPath = "platform:/resource/org.eclipse.xtext.xbase/src"
 	}
 
 	component = DirectoryCleaner {
@@ -74,7 +73,7 @@ Workflow {
 			fileExtensions = file.extensions
 			fragment = grammarAccess.GrammarAccessFragment {}
 			fragment = serializer.SerializerFragment {
-				// generateDebugData = true
+			// generateDebugData = true
 			}
 			fragment = resourceFactory.ResourceFactoryFragment {
 				fileExtensions = file.extensions

@@ -40,36 +40,44 @@ public class JavaIDValueConverter extends IDValueConverter {
 		return Character.isJavaIdentifierPart(c);
 	}
 
+	public static String convertFromJavaIdentifier(String identifier, INode node) {
+		int idx = identifier.indexOf('\\');
+		if (idx < 0) {
+			return identifier;
+		}
+		return doConvertFromJavaString(identifier, 0, node);
+	}
+
 	/**
 	 * Mostly copied from {@link Strings#convertFromJavaString(String, boolean)}
 	 */
-	public static String convertFromJavaIdentifier(String identifier, INode node) {
-		char[] in = identifier.toCharArray();
-		int off = 0;
+	private static String doConvertFromJavaString(String identifier, int firstEscapeSequence, INode node) {
+		int off = firstEscapeSequence;
 		int len = identifier.length();
 		char[] convtBuf = new char[len];
 		char aChar;
 		char[] out = convtBuf;
-		int outLen = 0;
+		identifier.getChars(0, firstEscapeSequence, out, 0);
+		int outLen = firstEscapeSequence;
 		int end = off + len;
 		boolean error = false;
 		boolean badChar = false;
 		while (off < end) {
-			aChar = in[off++];
+			aChar = identifier.charAt(off++);
 			if (aChar == '\\') {
 				if (off < end) {
-					aChar = in[off++];
+					aChar = identifier.charAt(off++);
 					switch (aChar) {
 						case 'u': {
 							// Read the xxxx
 							int value = 0;
-							if (off + 4 > end || !isHexSequence(in, off, 4)) {
+							if (off + 4 > end || !isHexSequence(identifier, off, 4)) {
 								error = true;
 								out[outLen++] = aChar;
 								break;
 							} else {
 								for (int i = 0; i < 4; i++) {
-									aChar = in[off++];
+									aChar = identifier.charAt(off++);
 									switch (aChar) {
 									case '0':
 									case '1':
@@ -157,9 +165,9 @@ public class JavaIDValueConverter extends IDValueConverter {
 		return true;
 	}
 
-	private static boolean isHexSequence(char[] in, int off, int chars) {
-		for(int i = off; i < in.length && i < off + chars; i++) {
-			char c = in[i];
+	private static boolean isHexSequence(String in, int off, int chars) {
+		for(int i = off; i < in.length() && i < off + chars; i++) {
+			char c = in.charAt(i);
 			switch (c) {
 				case '0':
 				case '1':

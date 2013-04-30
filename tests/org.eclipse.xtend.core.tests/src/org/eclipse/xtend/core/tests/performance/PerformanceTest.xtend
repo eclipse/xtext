@@ -328,13 +328,30 @@ class PerformanceTest extends AbstractXtendTestCase {
 	}
 	
 	@Test
-	@Ignore
+//	@Ignore
 	def void doCompileFiveTimes() {
 		doCompile
 		doCompile
 		doCompile
 		doCompile
 		doCompile
+	}
+	
+	@Test
+//	@Ignore
+	def void doCompileTenTimes() {
+		doCompileFiveTimes
+		doCompileFiveTimes
+	}
+	
+	@Test
+//	@Ignore
+	def void doCompileFiftyTimes() {
+		doCompileTenTimes
+		doCompileTenTimes
+		doCompileTenTimes
+		doCompileTenTimes
+		doCompileTenTimes
 	}
 }
 
