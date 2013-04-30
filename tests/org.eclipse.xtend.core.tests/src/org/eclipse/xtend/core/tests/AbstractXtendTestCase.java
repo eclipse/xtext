@@ -23,6 +23,7 @@ import org.eclipse.xtend.core.xtend.XtendField;
 import org.eclipse.xtend.core.xtend.XtendFile;
 import org.eclipse.xtend.core.xtend.XtendFunction;
 import org.eclipse.xtend.core.xtend.XtendInterface;
+import org.eclipse.xtext.common.types.access.IJvmTypeProvider;
 import org.eclipse.xtext.diagnostics.Severity;
 import org.eclipse.xtext.junit4.InjectWith;
 import org.eclipse.xtext.junit4.XtextRunner;
@@ -50,6 +51,9 @@ public abstract class AbstractXtendTestCase extends Assert {
 
 	@Inject
 	private Provider<XtextResourceSet> resourceSetProvider;
+	
+	@Inject
+	private IJvmTypeProvider.Factory providerFactory;
 
 	protected XtendClass clazz(String string) throws Exception {
 		return (XtendClass) file(string).getXtendTypes().get(0);
@@ -80,6 +84,7 @@ public abstract class AbstractXtendTestCase extends Assert {
 
 	protected XtextResourceSet getResourceSet() {
 		XtextResourceSet set = resourceSetProvider.get();
+		providerFactory.createTypeProvider(set);
 		return set;
 	}
 	
