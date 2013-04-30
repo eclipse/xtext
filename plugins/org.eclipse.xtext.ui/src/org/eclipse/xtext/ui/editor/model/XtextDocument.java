@@ -123,7 +123,11 @@ public class XtextDocument extends Document implements IXtextDocument {
 	protected void notifyModelListeners(XtextResource res) {
 		Object[] listeners = modelListeners.getListeners();
 		for (int i = 0; i < listeners.length; i++) {
-			((IXtextModelListener) listeners[i]).modelChanged(res);
+			try {
+				((IXtextModelListener) listeners[i]).modelChanged(res);
+			} catch(Exception exc) {
+				log.error("Error in IXtextModelListener", exc);
+			}
 		}
 	}
 
