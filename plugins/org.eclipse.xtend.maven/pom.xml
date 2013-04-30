@@ -110,8 +110,11 @@
 	</scm>
 	<profiles>
 		<profile>
-			<id>local-deployment</id>
+			<id>local-build</id>
 			<properties>
+				<!-- local.build changes ant script behavior which creates standalone 
+					jar -->
+				<local.build>true</local.build>
 				<deployment.folder>/Applications/nexus-2.4.0-09-bundle/sonatype-work/nexus/storage/snapshots/</deployment.folder>
 				<deployment.url>file:/Applications/nexus-2.4.0-09-bundle/sonatype-work/nexus/storage/snapshots/</deployment.url>
 			</properties>
@@ -164,7 +167,7 @@
 			</pluginRepositories>
 		</profile>
 		<profile>
-			<id>eclipse-hudson-deployment</id>
+			<id>eclipse-hudson-build</id>
 			<properties>
 				<deployment.folder>/shared/common/xtend/maven/</deployment.folder>
 				<deployment.url>file:///shared/common/xtend/maven/</deployment.url>
@@ -216,42 +219,16 @@
 					<url>http://repo.maven.apache.org/maven2</url>
 				</pluginRepository>
 			</pluginRepositories>
-			<!-- <build>
-				<plugins>
-					<plugin>
-						<groupId>org.codehaus.mojo</groupId>
-						<artifactId>exec-maven-plugin</artifactId>
-						<version>1.1.1</version>
-						<executions>
-							<execution>
-								<id>Reindex nexus</id>
-								<phase>deploy</phase>
-								<goals>
-									<goal>exec</goal>
-								</goals>
-							</execution>
-						</executions>
-						<configuration>
-							<executable>java</executable>
-							<workingDirectory>${deployment.folder}/</workingDirectory>
-							<arguments>
-								<argument>-jar</argument>
-								<argument>${deployment.folder}/nexus-indexer-3.0.4-cli.jar</argument>
-								<argument>-t</argument>
-								<argument>min</argument>
-								<argument>-i</argument>
-								<argument>maven-index</argument>
-								<argument>-r</argument>
-								<argument>./</argument>
-								<argument>-n</argument>
-								<argument>${xtend.repo.name}</argument>
-								<argument>-d</argument>
-								<argument>.index</argument>
-							</arguments>
-						</configuration>
-					</plugin>
-				</plugins>
-			</build>-->
+			<!-- <build> <plugins> <plugin> <groupId>org.codehaus.mojo</groupId> <artifactId>exec-maven-plugin</artifactId> 
+				<version>1.1.1</version> <executions> <execution> <id>Reindex nexus</id> 
+				<phase>deploy</phase> <goals> <goal>exec</goal> </goals> </execution> </executions> 
+				<configuration> <executable>java</executable> <workingDirectory>${deployment.folder}/</workingDirectory> 
+				<arguments> <argument>-jar</argument> <argument>${deployment.folder}/nexus-indexer-3.0.4-cli.jar</argument> 
+				<argument>-t</argument> <argument>min</argument> <argument>-i</argument> 
+				<argument>maven-index</argument> <argument>-r</argument> <argument>./</argument> 
+				<argument>-n</argument> <argument>${xtend.repo.name}</argument> <argument>-d</argument> 
+				<argument>.index</argument> </arguments> </configuration> </plugin> </plugins> 
+				</build> -->
 		</profile>
 	</profiles>
 	<url>http://www.eclipse.org/xtend/</url>

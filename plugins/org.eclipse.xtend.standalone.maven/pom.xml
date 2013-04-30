@@ -9,6 +9,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.eclipse.xtend</groupId>
 	<artifactId>org.eclipse.xtend.standalone</artifactId>
+	<name>Xtend Dependencies Library - Standalone</name>
 	<packaging>jar</packaging>
 	<properties>
 		<tycho-version>0.17.0</tycho-version>
@@ -16,7 +17,23 @@
 		<juno-url>http://download.eclipse.org/eclipse/updates/3.8</juno-url>
 		<emf-url>http://download.eclipse.org/modeling/emf/emf/updates/nightly</emf-url>
 		<xtext-url>http://download.eclipse.org/modeling/tmf/xtext/updates/composite/releases</xtext-url>
+		<mirroring.phase>prepare-package</mirroring.phase>
+		<skipMirroring>false</skipMirroring>
 	</properties>
+	<profiles>
+		<profile>
+			<id>mirror</id>
+			<activation>
+				<property>
+					<name>skipMirroring</name>
+					<value>true</value>
+				</property>
+			</activation>
+			<properties>
+				<mirroring.phase>never</mirroring.phase>
+			</properties>
+		</profile>
+	</profiles>
 	<build>
 		<plugins>
 			<plugin>
@@ -25,13 +42,22 @@
 				<version>${tycho-version}</version>
 				<executions>
 					<execution>
-						<phase>prepare-package</phase>
+						<phase>${mirroring.phase}</phase>
 						<goals>
 							<goal>mirror</goal>
 						</goals>
 					</execution>
 				</executions>
 				<configuration>
+					<destination>${project.build.directory}/dependencies-mvn</destination>
+					<followStrictOnly>true</followStrictOnly>
+					<includeOptional>false</includeOptional>
+					<includeNonGreedy>false</includeNonGreedy>
+					<latestVersionOnly>false</latestVersionOnly>
+					<mirrorMetadataOnly>false</mirrorMetadataOnly>
+					<compress>true</compress>
+					<append>false</append>
+					<includePacked>false</includePacked>
 					<source>
 						<!-- source repositories to mirror from -->
 						<repository>
@@ -76,6 +102,9 @@
 							<id>org.eclipse.jdt.annotation</id>
 						</iu>
 						<iu>
+							<id>org.antlr.runtime</id>
+						</iu>
+						<iu>
 							<id>org.eclipse.xtext</id>
 						</iu>
 						<iu>
@@ -85,10 +114,19 @@
 							<id>org.eclipse.xtext.util</id>
 						</iu>
 						<iu>
+							<id>org.eclipse.xtext.smap</id>
+						</iu>
+						<iu>
+							<id>org.eclipse.xtext.junit4</id>
+						</iu>
+						<iu>
 							<id>org.eclipse.xtext.xbase</id>
 						</iu>
 						<iu>
 							<id>org.eclipse.xtext.xbase.lib</id>
+						</iu>
+						<iu>
+							<id>org.eclipse.xtext.xbase.junit</id>
 						</iu>
 						<iu>
 							<id>org.eclipse.xtend.core</id>
@@ -96,18 +134,7 @@
 						<iu>
 							<id>org.eclipse.xtend.lib</id>
 						</iu>
-						<iu>
-							<id>org.eclipse.xtext.smap</id>
-						</iu>
-						<iu>
-							<id>org.eclipse.xtext.junit4</id>
-						</iu>
-						<iu>
-							<id>org.eclipse.xtext.xbase.junit</id>
-						</iu>
-						<iu>
-							<id>org.antlr.runtime</id>
-						</iu>
+
 						<!-- Sources -->
 						<iu>
 							<id>org.eclipse.emf.ecore.source</id>
@@ -162,28 +189,21 @@
 							<id>org.antlr.runtime.source</id>
 						</iu>
 					</ius>
-					<destination>${project.build.directory}/dependencies-mvn</destination>
-					<followStrictOnly>true</followStrictOnly>
-					<includeOptional>false</includeOptional>
-					<includeNonGreedy>false</includeNonGreedy>
-					<latestVersionOnly>false</latestVersionOnly>
-					<mirrorMetadataOnly>false</mirrorMetadataOnly>
-					<compress>true</compress>
-					<append>false</append>
-					<includePacked>false</includePacked>
 				</configuration>
 			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-antrun-plugin</artifactId>
-				<version>1.6</version>
+				<version>1.7</version>
 				<executions>
 					<execution>
 						<id>prepare</id>
 						<phase>prepare-package</phase>
 						<configuration>
-							<tasks>
-								<echo message="prepare jar content" />
+
+							<target>
+								<echo>${mirroring.phase}</echo>
+								<echo message="Prepare jar content:" />
 								<ant antfile="${basedir}/create-uberjar.ant" target="run"
 									dir="${basedir}">
 									<property name="maven.version" value="${project.version}" />
@@ -191,7 +211,7 @@
 									<property name="sourceJarTemp"
 										value="${project.build.directory}/sourcesJarTemp" />
 								</ant>
-							</tasks>
+							</target>
 						</configuration>
 						<goals>
 							<goal>run</goal>
@@ -256,5 +276,5 @@
 			</exclusions>
 		</dependency>
 	</dependencies>
-	<name>Xtend Dependencies Library - Standalone</name>
+
 </project>
