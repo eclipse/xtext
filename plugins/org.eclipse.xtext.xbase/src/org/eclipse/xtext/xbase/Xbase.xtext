@@ -41,7 +41,7 @@ OpAnd:
 
 XEqualityExpression returns XExpression:
 	XRelationalExpression (=>({XBinaryOperation.leftOperand=current} feature=[types::JvmIdentifiableElement|OpEquality])
-	rightOperand=XRelationalExpression)*;
+		rightOperand=XRelationalExpression)*;
 
 OpEquality:
 	'==' | '!=' | '===' | '!==';
@@ -56,7 +56,7 @@ OpCompare:
 
 XOtherOperatorExpression returns XExpression:
 	XAdditiveExpression (=>({XBinaryOperation.leftOperand=current} feature=[types::JvmIdentifiableElement|OpOther])
-	rightOperand=XAdditiveExpression)*;
+		rightOperand=XAdditiveExpression)*;
 
 OpOther:
 	  '->' 
@@ -72,7 +72,7 @@ OpOther:
 
 XAdditiveExpression returns XExpression:
 	XMultiplicativeExpression (=>({XBinaryOperation.leftOperand=current} feature=[types::JvmIdentifiableElement|OpAdd])
-	rightOperand=XMultiplicativeExpression)*;
+		rightOperand=XMultiplicativeExpression)*;
 
 OpAdd:
 	'+' | '-';

@@ -1,22 +1,30 @@
 «REM»
 /*******************************************************************************
- * Copyright (c) 2008 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2013 itemis AG (http://www.itemis.eu) and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *
  *******************************************************************************/
+ 
+This was initlially copied from the default AntlrGrammar.xpt and enhanced
+to exploit optimized feature assignements. In Xtend, all current types are known
+statically thus it is possible to use feature IDs rather than feature literals 
+or feature names to assign values reflectively. 
+ 
 «ENDREM»
 
 «IMPORT org::eclipse::xtext»
 «IMPORT org::eclipse::emf::ecore»
+«IMPORT org::eclipse::xtext::generator::parser::antlr»
 
 «EXTENSION org::eclipse::xtext::generator::Naming»
 «EXTENSION org::eclipse::xtext::generator::parser::antlr::AntlrGrammar»
 «EXTENSION org::eclipse::xtext::generator::parser::antlr::Parser»
 «EXTENSION org::eclipse::xtext::generator::grammarAccess::GrammarAccess»
 «EXTENSION org::eclipse::xtext::EcoreUtils»
+«EXTENSION org::eclipse::xtend::core::parser::FeatureLiterals»
 
 «DEFINE grammar(AntlrOptions options, boolean debugGrammar) FOR Grammar»
 «FILE (getGrammarFileName().toJavaPackage() + (debugGrammar ? ".Debug" : ".") + getGrammarFileName().toSimpleName()).asPath()+".g" SRC_GEN-»
@@ -29,7 +37,7 @@ grammar «IF debugGrammar»Debug«ENDIF»«getGrammarFileName().toSimpleName()»;
 options {
 «ENDIF-»
 «IF !debugGrammar-»
-	superClass=AbstractInternalAntlrParser;
+	superClass=InternalXtendParserBase;
 «ENDIF-»
 	«IF options.backtrack-»
 	backtrack=true;
@@ -64,7 +72,6 @@ import org.eclipse.emf.ecore.EObject;
 «IF !allEnumRules().isEmpty-»
 import org.eclipse.emf.common.util.Enumerator;
 «ENDIF-»
-import org.eclipse.xtext.parser.antlr.AbstractInternalAntlrParser;
 import org.eclipse.xtext.parser.antlr.XtextTokenStream;
 import org.eclipse.xtext.parser.antlr.XtextTokenStream.HiddenTokens;
 «IF !allParserRules().allContents().typeSelect(UnorderedGroup).isEmpty && options.backtrack-»
@@ -72,6 +79,12 @@ import org.eclipse.xtext.parser.antlr.IUnorderedGroupHelper.UnorderedGroupState;
 «ENDIF-»
 import org.eclipse.xtext.parser.antlr.AntlrDatatypeRuleToken;
 import «gaFQName()»;
+
+import static org.eclipse.xtend.core.xtend.XtendPackage.*;
+import static org.eclipse.xtext.xbase.XbasePackage.*;
+import static org.eclipse.xtext.xtype.XtypePackage.*;
+import static org.eclipse.xtext.xbase.annotations.xAnnotations.XAnnotationsPackage.*;
+import static org.eclipse.xtext.common.types.TypesPackage.*;
 
 }
 
@@ -474,7 +487,7 @@ finally {
 	        if ($current==null) {
 	            $current = createModelElement(«assignment.containingRule().grammarElementAccessInRule()»);
 	        }
-       		«assignment.setOrAdd()»WithLastConsumed($current, "«assignment.feature»", «
+       		«assignment.setOrAdd()»WithLastConsumed($current, «assignment.featureLiteral()», «
         		IF assignment.isBoolean()»true«
         		ELSE»«assignment.localVar(this)»«
         		ENDIF», «assignment.terminal.toStringLiteralInAssignment()»);
@@ -521,7 +534,7 @@ finally {
 	        }
        		«assignment.setOrAdd()»(
        			$current, 
-       			"«assignment.feature»",
+       			«assignment.featureLiteral()»,
         		«IF assignment.isBoolean()»true«ELSE»«assignment.localVar(call)»«ENDIF», 
         		«call.toStringLiteral()»);
 	        afterParserOrEnumRuleCall();
@@ -542,7 +555,7 @@ finally {
 	        }
        		«assignment.setOrAdd()»(
        			$current, 
-       			"«assignment.feature»",
+       			«assignment.featureLiteral()»,
         		«IF assignment.isBoolean()»true«ELSE»«assignment.localVar(call)»«ENDIF», 
         		«call.toStringLiteral()»);
 	        afterParserOrEnumRuleCall();
@@ -562,7 +575,7 @@ finally {
 	        }
        		«assignment.setOrAdd()»WithLastConsumed(
        			$current, 
-       			"«assignment.feature»",
+       			«assignment.featureLiteral()»,
         		«IF assignment.isBoolean()»true«ELSE»«assignment.localVar(call)»«ENDIF», 
         		«call.toStringLiteral()»);
 	    }
@@ -605,6 +618,7 @@ finally {
     {
         $current = forceCreateModelElement«IF feature != null-»And«setOrAdd().toFirstUpper()»«ENDIF»(
             «grammarElementAccessInRule()»,
+            «IF feature != null»«featureLiteral()»,«ENDIF»
             $current);
     }
 «ENDIF-»

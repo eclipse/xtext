@@ -27,7 +27,7 @@ import com.google.inject.Inject;
 /**
  * @author Sven Efftinge - Initial contribution and API
  */
-public class DefaultEcoreElementFactory implements IAstFactory {
+public class DefaultEcoreElementFactory implements IAstFactory, IAstFactory.Extension {
 
 	private static final Logger log = Logger.getLogger(DefaultEcoreElementFactory.class);
 	
@@ -72,6 +72,52 @@ public class DefaultEcoreElementFactory implements IAstFactory {
 			checkNullForPrimitiveFeatures(structuralFeature, tokenValue, node);
 			object.eSet(structuralFeature, tokenValue);
 			throw e;
+		} catch(ValueConverterException e) {
+			throw e;
+		} catch(NullPointerException e) {
+			log.warn(e.getMessage(), e);
+			throw new ValueConverterException("A NullPointerException occured. This indicates a missing value converter or a bug in its implementation.", node, e);
+		} catch(Exception e) {
+			throw new ValueConverterException(null, node, e);
+		}
+	}
+	
+	/**
+	 * @since 2.5
+	 */
+	public void add(EObject owner, int featureID, Object value, String ruleName, INode node) throws ValueConverterException {
+		if (value == null)
+			return;
+		@SuppressWarnings("unchecked")
+		InternalEList<Object> values = (InternalEList<Object>) ((InternalEObject)owner).eGet(featureID, false, false);
+		try {
+			final Object tokenValue = getTokenValue(value, ruleName, node);
+			values.addUnique(tokenValue);
+		} catch(ValueConverterWithValueException e) {
+			final Object tokenValue = e.getValue();
+			values.addUnique(tokenValue);
+			throw e;
+		} catch(ValueConverterException e) {
+			throw e;
+		} catch(NullPointerException e) {
+			log.error(e.getMessage(), e);
+			throw new ValueConverterException("A NullPointerException occured. This indicates a missing value converter or a bug in its implementation.", node, e);
+		} catch(Exception e) {
+			throw new ValueConverterException(null, node, e);
+		}
+	}
+	
+	/**
+	 * @since 2.5
+	 */
+	public void set(EObject owner, int featureID, Object value, String ruleName, INode node)
+			throws ValueConverterException {
+		try {
+			final Object tokenValue = getTokenValue(value, ruleName, node);
+			((InternalEObject)owner).eSet(featureID, tokenValue);
+		} catch(ValueConverterWithValueException e) {
+			final Object tokenValue = e.getValue();
+			((InternalEObject)owner).eSet(featureID, tokenValue);
 		} catch(ValueConverterException e) {
 			throw e;
 		} catch(NullPointerException e) {

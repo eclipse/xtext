@@ -79,8 +79,9 @@ Workflow {
 			fragment = resourceFactory.ResourceFactoryFragment {
 				fileExtensions = file.extensions
 			}
-			fragment = XtextAntlrGeneratorFragment {
-				options = auto-inject {}
+			fragment = parser.ParserGenerator {
+				options = auto-inject {
+				}
 			}
 			fragment = DebugAntlrGeneratorFragment {
 				options = auto-inject {}
