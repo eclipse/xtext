@@ -21,6 +21,7 @@ import org.junit.Test
 import static org.eclipse.xtext.junit4.ui.util.IResourcesSetupUtil.*
 
 import static extension org.eclipse.ui.texteditor.MarkerUtilities.*
+import org.eclipse.xtext.util.StringInputStream
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -51,6 +52,14 @@ class PerformanceTest extends AbstractXtendUITestCase {
 	def void testFullBuild() throws Exception {
 		val project = PerformanceTestProjectSetup::testProject.project
 		project.build(IncrementalProjectBuilder::FULL_BUILD, null)
+	}
+	
+	@Test 
+	def void testIncrementalBuild() throws Exception {
+		val project = PerformanceTestProjectSetup::testProject.project
+		val file = project.getFile("src/org/eclipse/xtext/xbase/formatting/XbaseFormatter2.xtend");
+		file.appendContents(new StringInputStream("//foo\n"), true, true, null);
+		PerformanceTestProjectSetup::waitForAutoBuild
 	}
 	
 	@Test 
