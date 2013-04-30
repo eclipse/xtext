@@ -81,6 +81,7 @@ import org.eclipse.xtext.common.types.util.TypeReferences;
 import org.eclipse.xtext.util.Strings;
 import org.eclipse.xtext.util.internal.Stopwatches;
 import org.eclipse.xtext.util.internal.Stopwatches.StoppedTask;
+import org.osgi.framework.Version;
 
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
@@ -112,6 +113,58 @@ public class JdtBasedTypeFactory implements ITypeFactory<IType> {
 	 */
 	static final JvmType[] PRIMITIVE_PROXIES = new JvmType[TypeURIHelper.PRIMITIVE_URIS.length];
 	
+	private static JdtCompliance getComplianceLevel() {
+		Version jdtVersion = JavaCore.getPlugin().getBundle().getVersion();
+		if (jdtVersion.compareTo(new Version(3, 6, 0)) >= 0) {
+			return JdtCompliance.Other;
+		}
+		return JdtCompliance.Galileo;
+	}
+	
+	enum JdtCompliance {
+		Galileo {
+			@Override
+			ParameterNameInitializer createParameterNameInitializer(
+					IMethodBinding method,
+					WorkingCopyOwner workingCopyOwner,
+					JvmExecutable result,
+					String handleIdentifier,
+					String[] path,
+					String name,
+					SegmentSequence signaturex) {
+				if (method.isConstructor() && method.getDeclaringClass().isMember()) {
+					return new ParameterNameInitializer(workingCopyOwner, result, handleIdentifier, path, name, signaturex) {
+						@Override
+						protected void setParameterNames(IMethod javaMethod, java.util.List<JvmFormalParameter> parameters) throws JavaModelException {
+							String[] parameterNames = javaMethod.getParameterNames();
+							int size = parameters.size();
+							if (size == parameterNames.length) {
+								super.setParameterNames(javaMethod, parameters);
+							} else if (size == parameterNames.length - 1) {
+								for (int i = 1; i < parameterNames.length; i++) {
+									String string = parameterNames[i];
+									parameters.get(i - 1).setName(string);
+								}
+							} else {
+								throw new IllegalStateException("unmatching arity for java method "+javaMethod.toString()+" and "+getExecutable().getIdentifier());
+							}
+						}
+					};
+				}
+				return new ParameterNameInitializer(workingCopyOwner, result, handleIdentifier, path, name, signaturex);
+			}
+		},
+		Other {
+
+		};
+		ParameterNameInitializer createParameterNameInitializer(IMethodBinding method, WorkingCopyOwner workingCopyOwner,
+				JvmExecutable result, String handleIdentifier, String[] path, String name, SegmentSequence signaturex) {
+			return new ParameterNameInitializer(workingCopyOwner, result, handleIdentifier, path, name, signaturex);
+		}
+	}
+	
+	private static final JdtCompliance jdtCompliance = getComplianceLevel(); 
+	
 	static {
 		// Initialize the primitive proxies at the same indices as in the PRIMITIVE_URIs.
 		//
@@ -124,7 +177,7 @@ public class JdtBasedTypeFactory implements ITypeFactory<IType> {
 			}
 		}
 	}
-
+	
 	/**
 	 * Mappings from qualified type binding name to proxy instance for all the types in {@link TypeURIHelper#COMMON_CLASS_NAMES}.
 	 */
@@ -275,39 +328,46 @@ public class JdtBasedTypeFactory implements ITypeFactory<IType> {
 		IBinding binding = bindings[0];
 		if (binding instanceof ITypeBinding) {
 			createType.start();
-
 			ITypeBinding typeBinding = (ITypeBinding) binding;
 			
-			// Maintain a string builder we pass along during recursion 
-			// that contains the prefix for the fully qualified name of binding instance being traversed.
-			//
-			StringBuilder fqn = new StringBuilder(100);
-			IPackageBinding packageBinding = typeBinding.getPackage();
-			String packageName = null;
-			if (packageBinding != null && !packageBinding.isUnnamed()) {
-				packageName = packageBinding.getName();
-				fqn.append(packageBinding.getName());
-				fqn.append('.');
-			}
-
-			JvmDeclaredType result = createType(typeBinding, jdtType.getHandleIdentifier(), Lists.<String>newArrayList(), fqn);
-			result.setPackageName(packageName);
+			JvmDeclaredType result = createType(jdtType, typeBinding);
 
 			// Clear the cached information.
 			//
-			typeProxies.clear();
-			operationProxies.clear();
-			annotationProxies.clear();
-			qualifiedNames.clear();
-			enumerationLiteralProxies.clear();
-			stringTypeBinding = null;
-			classTypeBinding = null;
-
+			clearCache();
 			createType.stop();
 			return result;
 		} else
 			throw new IllegalStateException("Expected ITypeBinding for '" + jdtType.getFullyQualifiedName()
 					+ "', but got '" + binding.toString() + "'.");
+	}
+
+	private void clearCache() {
+		typeProxies.clear();
+		operationProxies.clear();
+		annotationProxies.clear();
+		qualifiedNames.clear();
+		enumerationLiteralProxies.clear();
+		stringTypeBinding = null;
+		classTypeBinding = null;
+	}
+
+	private JvmDeclaredType createType(IType type, ITypeBinding binding) {
+		// Maintain a string builder we pass along during recursion 
+		// that contains the prefix for the fully qualified name of binding instance being traversed.
+		//
+		StringBuilder fqn = new StringBuilder(100);
+		IPackageBinding packageBinding = binding.getPackage();
+		String packageName = null;
+		if (packageBinding != null && !packageBinding.isUnnamed()) {
+			packageName = packageBinding.getName();
+			fqn.append(packageBinding.getName());
+			fqn.append('.');
+		}
+
+		JvmDeclaredType result = createType(binding, type.getHandleIdentifier(), Lists.<String>newArrayList(), fqn);
+		result.setPackageName(packageName);
+		return result;
 	}
 
 	/**
@@ -1103,7 +1163,7 @@ public class JdtBasedTypeFactory implements ITypeFactory<IType> {
 					ParameterNameInitializer initializer = new EnumConstructorParameterNameInitializer(workingCopyOwner, result, handleIdentifier, path, name, signaturex);
 					((JvmExecutableImplCustom)result).setParameterNameInitializer(initializer);
 				} else {
-					ParameterNameInitializer initializer = new ParameterNameInitializer(workingCopyOwner, result, handleIdentifier, path, name, signaturex);
+					ParameterNameInitializer initializer = jdtCompliance.createParameterNameInitializer(method, workingCopyOwner, result, handleIdentifier, path, name, signaturex);
 					((JvmExecutableImplCustom)result).setParameterNameInitializer(initializer);
 				}
 			}
