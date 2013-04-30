@@ -83,10 +83,14 @@ public class GrammarAccessFragment extends AbstractGeneratorFragment {
 
 		// save grammar model
 		String path;
-		if(xmlVersion == null) 
+		if (xmlVersion == null) {
 			path = GrammarUtil.getClasspathRelativePathToBinGrammar(copy);
-		else 
+		} else {
+			log.warn("'xmlVersion' has been specified for this "
+					+ GrammarAccessFragment.class.getSimpleName()
+					+ ". Therefore, the grammar is persisted as XMI and not as binary. This can be a performance drawback.");
 			path = GrammarUtil.getClasspathRelativePathToXmi(copy);
+		}
 		URI uri = URI.createURI(ctx.getOutput().getOutlet(Generator.SRC_GEN).getPath() + "/" + path);
 		Resource resource = set.createResource(uri, ContentHandler.UNSPECIFIED_CONTENT_TYPE);
 		addAllGrammarsToResource(resource, copy, new HashSet<Grammar>());
