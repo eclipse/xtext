@@ -1,0 +1,28 @@
+«REM»
+/*******************************************************************************
+ * Copyright (c) 2013 itemis AG (http://www.itemis.eu) and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *
+ *******************************************************************************/
+«ENDREM»
+
+«IMPORT org::eclipse::xtext»
+«IMPORT org::eclipse::xtext::generator::parser::antlr»
+
+«EXTENSION org::eclipse::xtext::generator::parser::antlr::Parser»
+«EXTENSION org::eclipse::xtext::generator::Naming»
+
+«DEFINE generate(AntlrOptions options) FOR Grammar»
+	«EXPAND org::eclipse::xtext::generator::parser::antlr::IParser::parser»
+	«EXPAND ParserGrammar::grammar(options, false)»
+	«EXPAND org::eclipse::xtext::generator::parser::antlr::AntlrTokenFileProvider::file FOR this»
+«ENDDEFINE»
+
+«DEFINE addToPluginXmlRt(AntlrOptions options) FOR Grammar»«ENDDEFINE»
+
+«DEFINE addToPluginXmlUi(AntlrOptions options) FOR Grammar»«ENDDEFINE»
+
+«DEFINE addToStandaloneSetup(AntlrOptions options) FOR Grammar»«ENDDEFINE»

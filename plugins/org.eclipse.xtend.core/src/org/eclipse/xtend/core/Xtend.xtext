@@ -694,4 +694,3 @@ terminal fragment IDENTIFIER_PART_IMPL:
 	| '\uFF10'..'\uFF19'
 	| '\uFFF9'..'\uFFFB'
 ;
-
