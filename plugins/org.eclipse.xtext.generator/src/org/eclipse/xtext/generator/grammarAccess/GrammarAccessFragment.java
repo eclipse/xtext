@@ -11,6 +11,7 @@ import static org.eclipse.xtext.util.Strings.*;
 
 import java.io.IOException;
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Set;
 
 import org.apache.log4j.Logger;
@@ -19,6 +20,7 @@ import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.resource.ContentHandler;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.emf.ecore.resource.impl.BinaryResourceImpl;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.xmi.XMLResource;
 import org.eclipse.xpand2.XpandExecutionContext;
@@ -32,6 +34,8 @@ import org.eclipse.xtext.generator.BindFactory;
 import org.eclipse.xtext.generator.Binding;
 import org.eclipse.xtext.generator.Generator;
 
+import com.google.common.collect.Maps;
+
 /**
  * A grammar access fragment that handles subpackages of EPackages gracefully. In general, we recommend to avoid
  * nested EPackages if possible.
@@ -43,7 +47,7 @@ public class GrammarAccessFragment extends AbstractGeneratorFragment {
 
 	private static final Logger log = Logger.getLogger(GrammarAccessFragment.class);
 
-	private String xmlVersion = "1.0";
+	private String xmlVersion = null;
 
 	@Override
 	protected String getTemplate() {
@@ -78,17 +82,24 @@ public class GrammarAccessFragment extends AbstractGeneratorFragment {
 		ResourceSet set = copy.eResource().getResourceSet();
 
 		// save grammar model
-		String xmiPath = GrammarUtil.getClasspathRelativePathToXmi(copy);
-		Resource resource = set.createResource(
-				URI.createURI(ctx.getOutput().getOutlet(Generator.SRC_GEN).getPath() + "/" + xmiPath),
-				ContentHandler.UNSPECIFIED_CONTENT_TYPE);
+		String path;
+		if(xmlVersion == null) 
+			path = GrammarUtil.getClasspathRelativePathToBinGrammar(copy);
+		else 
+			path = GrammarUtil.getClasspathRelativePathToXmi(copy);
+		URI uri = URI.createURI(ctx.getOutput().getOutlet(Generator.SRC_GEN).getPath() + "/" + path);
+		Resource resource = set.createResource(uri, ContentHandler.UNSPECIFIED_CONTENT_TYPE);
 		addAllGrammarsToResource(resource, copy, new HashSet<Grammar>());
 		isSaving.set(Boolean.TRUE);
+		Map<String, Object> saveOptions = Maps.newHashMap();
 		if (resource instanceof XMLResource) {
 			((XMLResource) resource).setXMLVersion(getXmlVersion());
+		} else if (resource instanceof BinaryResourceImpl){
+			saveOptions.put(BinaryResourceImpl.OPTION_VERSION, BinaryResourceImpl.BinaryIO.Version.VERSION_1_1);
+			saveOptions.put(BinaryResourceImpl.OPTION_STYLE_DATA_CONVERTER, Boolean.TRUE);
 		}
 		try {
-			resource.save(null);
+			resource.save(saveOptions);
 		} catch (IOException e) {
 			log.error(e.getMessage(), e);
 		} finally {
@@ -167,6 +178,6 @@ public class GrammarAccessFragment extends AbstractGeneratorFragment {
 	}
 
 	public String getXmlVersion() {
-		return xmlVersion;
+		return xmlVersion == null ? "1.0" : xmlVersion;
 	}
 }
