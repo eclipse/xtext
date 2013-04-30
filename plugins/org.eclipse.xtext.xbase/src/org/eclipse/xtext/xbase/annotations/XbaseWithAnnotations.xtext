@@ -27,7 +27,10 @@ XAnnotationElementValuePair :
 ;
 
 XAnnotationElementValue returns xbase::XExpression :
-	XAnnotation |
-	{xbase::XListLiteral} =>('#' '[' elements+=XAnnotation) (',' elements+=XAnnotation )* ']' |
-	XExpression
+	  =>({xbase::XListLiteral} '#' '[') (elements+=XAnnotationOrExpression (',' elements+=XAnnotationOrExpression )*)? ']'
+	| XAnnotationOrExpression
+;
+
+XAnnotationOrExpression returns xbase::XExpression:
+	XAnnotation | XExpression
 ;

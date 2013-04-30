@@ -344,14 +344,21 @@ ruleXAnnotationElementValuePair :
 
 // Rule XAnnotationElementValue
 ruleXAnnotationElementValue :
-	ruleXAnnotation |
 	( (
-	'#' '[' ruleXAnnotation
+	'#' '['
 	) => (
-		'#' '[' ruleXAnnotation
+		'#' '['
 	) ) (
-		',' ruleXAnnotation
-	)* ']' |
+		ruleXAnnotationOrExpression (
+			',' ruleXAnnotationOrExpression
+		)*
+	)? ']' |
+	ruleXAnnotationOrExpression
+;
+
+// Rule XAnnotationOrExpression
+ruleXAnnotationOrExpression :
+	ruleXAnnotation |
 	ruleXExpression
 ;
 
@@ -985,13 +992,7 @@ ruleXImportDeclaration :
 ;
 
 RULE_ID :
-	'^'? (
-		RULE_IDENTIFIER_START |
-		RULE_UNICODE_ESCAPE
-	) (
-		RULE_IDENTIFIER_PART |
-		RULE_UNICODE_ESCAPE
-	)*
+	'^'? RULE_IDENTIFIER_START RULE_IDENTIFIER_PART*
 ;
 
 fragment RULE_HEX_DIGIT :
