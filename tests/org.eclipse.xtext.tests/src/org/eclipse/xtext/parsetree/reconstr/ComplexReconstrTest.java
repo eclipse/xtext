@@ -40,7 +40,7 @@ public class ComplexReconstrTest extends AbstractXtextTests {
 		XtextResourceSet rs = get(XtextResourceSet.class);
 		rs.setClasspathURIContext(getClass());
 		URI u = URI
-				.createURI("classpath:/org/eclipse/xtext/parsetree/reconstr/ComplexReconstrTestLanguage.xmi");
+				.createURI("classpath:/org/eclipse/xtext/parsetree/reconstr/ComplexReconstrTestLanguage.xtextbin");
 		EObject o = rs.getResource(u, true).getContents().get(0);
 		for (Object x : o.eContents())
 			if (x instanceof ParserRule) {
