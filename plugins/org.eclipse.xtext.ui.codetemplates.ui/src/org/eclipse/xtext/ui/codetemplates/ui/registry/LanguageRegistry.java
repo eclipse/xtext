@@ -20,12 +20,10 @@ import org.eclipse.xtext.ui.editor.templates.ContextTypeIdHelper;
 
 import com.google.common.collect.Maps;
 import com.google.inject.Provider;
-import com.google.inject.Singleton;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-@Singleton
 public class LanguageRegistry {
 
 	protected static class Language {
