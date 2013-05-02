@@ -14,7 +14,6 @@ import java.util.Set;
 
 import org.apache.log4j.Logger;
 import org.eclipse.emf.common.util.EList;
-import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.common.util.WrappedException;
 import org.eclipse.emf.ecore.EClass;
@@ -37,6 +36,7 @@ import org.eclipse.xtext.diagnostics.IDiagnosticConsumer;
 import org.eclipse.xtext.diagnostics.IDiagnosticProducer;
 import org.eclipse.xtext.linking.impl.AbstractCleaningLinker;
 import org.eclipse.xtext.linking.impl.LinkingDiagnosticProducer;
+import org.eclipse.xtext.nodemodel.BidiTreeIterator;
 import org.eclipse.xtext.nodemodel.ICompositeNode;
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.nodemodel.util.NodeModelUtils;
@@ -44,10 +44,11 @@ import org.eclipse.xtext.util.EcoreGenericsUtil;
 import org.eclipse.xtext.util.OnChangeEvictingCache;
 import org.eclipse.xtext.util.SimpleCache;
 import org.eclipse.xtext.util.concurrent.IUnitOfWork;
+import org.eclipse.xtext.util.internal.Stopwatches;
+import org.eclipse.xtext.util.internal.Stopwatches.StoppedTask;
 
 import com.google.common.base.Function;
 import com.google.common.collect.ArrayListMultimap;
-import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Multimap;
 import com.google.common.collect.Sets;
@@ -83,21 +84,42 @@ public class LazyLinker extends AbstractCleaningLinker {
 	@Inject
 	private OnChangeEvictingCache cache;
 
+	private final StoppedTask installProxiesTask = Stopwatches.forTask("LazyLinker.installProxies");
+
 	@Override
 	protected void doLinkModel(final EObject model, IDiagnosticConsumer consumer) {
 		final Multimap<EStructuralFeature.Setting, INode> settingsToLink = ArrayListMultimap.create();
 		final LinkingDiagnosticProducer producer = new LinkingDiagnosticProducer(consumer);
+		installProxiesTask.start();
 		cache.execWithoutCacheClear(model.eResource(), new IUnitOfWork.Void<Resource>() {
 			@Override
 			public void process(Resource state) throws Exception {
-				installProxies(model, producer, settingsToLink);
-				TreeIterator<EObject> iterator = model.eAllContents();
-				while (iterator.hasNext()) {
-					EObject eObject = iterator.next();
-					installProxies(eObject, producer, settingsToLink);
+				ICompositeNode rootNode = NodeModelUtils.getNode(model);
+				for (BidiTreeIterator<INode> iterator = rootNode.getAsTreeIterable().iterator(); iterator.hasNext(); ) {
+					final INode node = iterator.next();
+					EObject grammarElement = node.getGrammarElement();
+					if (!(grammarElement instanceof CrossReference)) {
+						continue;
+					}
+					iterator.prune();
+
+					CrossReference ref = (CrossReference) grammarElement;
+					EObject obj = NodeModelUtils.findActualSemanticObjectFor(node);
+					producer.setNode(node);
+					final EReference eRef = GrammarUtil.getReference(ref, obj.eClass());
+					if (eRef == null) {
+						throw new IllegalStateException("Couldn't find EReference for crossreference " + ref);
+					}
+					if (!eRef.isResolveProxies() /*|| eRef.getEOpposite() != null see https://bugs.eclipse.org/bugs/show_bug.cgi?id=282486*/) {
+						final EStructuralFeature.Setting setting = ((InternalEObject) obj).eSetting(eRef);
+						settingsToLink.put(new SettingDelegate(setting), node);
+					} else {
+						createAndSetProxy(obj, node, eRef);
+					}
 				}
 			}
 		});
+		installProxiesTask.stop();
 		installQueuedLinks(settingsToLink);
 	}
 
@@ -117,7 +139,7 @@ public class LazyLinker extends AbstractCleaningLinker {
 
 		for (Iterator<INode> iterator = parentNode.getChildren().iterator(); iterator.hasNext(); ) {
 			INode node = iterator.next();
-			if (node.getGrammarElement() instanceof CrossReference && !Iterables.isEmpty(node.getLeafNodes())) {
+			if (node.getGrammarElement() instanceof CrossReference) {
 				CrossReference ref = (CrossReference) node.getGrammarElement();
 				producer.setNode(node);
 				final EReference eRef = GrammarUtil.getReference(ref, eClass);
