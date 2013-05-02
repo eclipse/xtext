@@ -27,6 +27,8 @@ import org.eclipse.jdt.core.JavaCore
 import org.eclipse.xtext.builder.nature.ToggleXtextNatureAction
 import org.eclipse.xtext.junit4.ui.util.JavaProjectSetupUtil
 import org.eclipse.jdt.core.IJavaProject
+import com.yourkit.api.Controller
+import com.yourkit.Constants
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -51,12 +53,9 @@ class PerformanceTest extends AbstractXtendUITestCase {
 	def void testCleanBuild() throws Exception {
 		val project = PerformanceTestProjectSetup::testProject.project
 		project.build(IncrementalProjectBuilder::CLEAN_BUILD, null)
-	}
-	
-	@Test 
-	def void testFullBuild() throws Exception {
-		val project = PerformanceTestProjectSetup::testProject.project
-		project.build(IncrementalProjectBuilder::FULL_BUILD, null)
+		project.build(IncrementalProjectBuilder::CLEAN_BUILD, null)
+		Stopwatches::resetAll
+		project.build(IncrementalProjectBuilder::CLEAN_BUILD, null)
 	}
 	
 	@Test 
@@ -122,16 +121,22 @@ class PerformanceTest extends AbstractXtendUITestCase {
 	}
 	
 	@Test 
-	def void testFullBuildAgain() throws Exception {
+	def void testFullBuild() throws Exception {
 		val project = PerformanceTestProjectSetup::testProject.project
+		project.build(IncrementalProjectBuilder::FULL_BUILD, null)
+		project.build(IncrementalProjectBuilder::FULL_BUILD, null)
+		Stopwatches::resetAll
 		project.build(IncrementalProjectBuilder::FULL_BUILD, null)
 	}
 	
 	@Test 
-	def void testCleanBuildTwice() throws Exception {
+	def void testCleanFullBuild() throws Exception {
 		val project = PerformanceTestProjectSetup::testProject.project
 		project.build(IncrementalProjectBuilder::CLEAN_BUILD, null)
 		project.build(IncrementalProjectBuilder::FULL_BUILD, null)
+		project.build(IncrementalProjectBuilder::CLEAN_BUILD, null)
+		project.build(IncrementalProjectBuilder::FULL_BUILD, null)
+		Stopwatches::resetAll
 		project.build(IncrementalProjectBuilder::CLEAN_BUILD, null)
 		project.build(IncrementalProjectBuilder::FULL_BUILD, null)
 	}
