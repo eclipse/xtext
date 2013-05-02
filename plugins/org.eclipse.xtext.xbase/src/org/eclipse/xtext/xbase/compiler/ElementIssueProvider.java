@@ -90,7 +90,7 @@ public class ElementIssueProvider implements IElementIssueProvider {
 		}
 
 		protected List<Issue> collectIssues(Resource resource) {
-			List<Issue> issues = newArrayList(resourceValidator.validate(resource, CheckMode.ALL, CancelIndicator.NullImpl));
+			List<Issue> issues = newArrayList(resourceValidator.validate(resource, CheckMode.NORMAL_AND_FAST, CancelIndicator.NullImpl));
 			synthesizeIssuesForFollowUpErrors(resource, issues);
 			return issues;
 		}
