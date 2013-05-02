@@ -47,7 +47,6 @@ import org.eclipse.xtext.util.concurrent.IUnitOfWork;
 
 import com.google.common.base.Function;
 import com.google.common.collect.ArrayListMultimap;
-import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Multimap;
 import com.google.common.collect.Sets;
@@ -117,12 +116,12 @@ public class LazyLinker extends AbstractCleaningLinker {
 
 		for (Iterator<INode> iterator = parentNode.getChildren().iterator(); iterator.hasNext(); ) {
 			INode node = iterator.next();
-			if (node.getGrammarElement() instanceof CrossReference && !Iterables.isEmpty(node.getLeafNodes())) {
-				CrossReference ref = (CrossReference) node.getGrammarElement();
+			EObject grammarElement = node.getGrammarElement();
+			if (grammarElement instanceof CrossReference) {
 				producer.setNode(node);
-				final EReference eRef = GrammarUtil.getReference(ref, eClass);
+				final EReference eRef = GrammarUtil.getReference((CrossReference) grammarElement, eClass);
 				if (eRef == null) {
-					throw new IllegalStateException("Couldn't find EReference for crossreference " + ref);
+					throw new IllegalStateException("Couldn't find EReference for crossreference " + grammarElement);
 				}
 				if (!eRef.isResolveProxies() /*|| eRef.getEOpposite() != null see https://bugs.eclipse.org/bugs/show_bug.cgi?id=282486*/) {
 					final EStructuralFeature.Setting setting = ((InternalEObject) obj).eSetting(eRef);
