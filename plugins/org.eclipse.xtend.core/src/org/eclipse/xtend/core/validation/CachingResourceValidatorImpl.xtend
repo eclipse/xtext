@@ -12,15 +12,9 @@ class CachingResourceValidatorImpl extends ResourceValidatorImpl {
 	@Inject OnChangeEvictingCache cache
 
 	override validate(Resource resource, CheckMode mode, CancelIndicator mon) {
-		try {
-			return cache.get(resource, resource) [ |
-				super.validate(resource, mode, mon)
-			]
-		} finally {
-			if(mon.canceled) {
-				cache.clear(resource)
-			}
-		}
+		return cache.get(mode, resource) [ |
+			super.validate(resource, mode, mon)
+		]
 	}
 
 }
