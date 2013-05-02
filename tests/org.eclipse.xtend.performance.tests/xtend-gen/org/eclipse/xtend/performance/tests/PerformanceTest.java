@@ -71,12 +71,9 @@ public class PerformanceTest extends AbstractXtendUITestCase {
   public void testCleanBuild() throws Exception {
     final IProject project = PerformanceTestProjectSetup.testProject.getProject();
     project.build(IncrementalProjectBuilder.CLEAN_BUILD, null);
-  }
-  
-  @Test
-  public void testFullBuild() throws Exception {
-    final IProject project = PerformanceTestProjectSetup.testProject.getProject();
-    project.build(IncrementalProjectBuilder.FULL_BUILD, null);
+    project.build(IncrementalProjectBuilder.CLEAN_BUILD, null);
+    Stopwatches.resetAll();
+    project.build(IncrementalProjectBuilder.CLEAN_BUILD, null);
   }
   
   @Test
@@ -182,16 +179,22 @@ public class PerformanceTest extends AbstractXtendUITestCase {
   }
   
   @Test
-  public void testFullBuildAgain() throws Exception {
+  public void testFullBuild() throws Exception {
     final IProject project = PerformanceTestProjectSetup.testProject.getProject();
+    project.build(IncrementalProjectBuilder.FULL_BUILD, null);
+    project.build(IncrementalProjectBuilder.FULL_BUILD, null);
+    Stopwatches.resetAll();
     project.build(IncrementalProjectBuilder.FULL_BUILD, null);
   }
   
   @Test
-  public void testCleanBuildTwice() throws Exception {
+  public void testCleanFullBuild() throws Exception {
     final IProject project = PerformanceTestProjectSetup.testProject.getProject();
     project.build(IncrementalProjectBuilder.CLEAN_BUILD, null);
     project.build(IncrementalProjectBuilder.FULL_BUILD, null);
+    project.build(IncrementalProjectBuilder.CLEAN_BUILD, null);
+    project.build(IncrementalProjectBuilder.FULL_BUILD, null);
+    Stopwatches.resetAll();
     project.build(IncrementalProjectBuilder.CLEAN_BUILD, null);
     project.build(IncrementalProjectBuilder.FULL_BUILD, null);
   }
