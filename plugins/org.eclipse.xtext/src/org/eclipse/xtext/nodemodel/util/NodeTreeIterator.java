@@ -36,30 +36,18 @@ public class NodeTreeIterator extends UnmodifiableIterator<INode> implements Bid
 	public boolean hasNext() {
 		if (nextComputed)
 			return next != null;
+
 		if (lastNextReturned == null) {
-			if (lastPreviousReturned != null)
-				next = lastPreviousReturned;
-			else
-				next = root;
+			next = lastPreviousReturned != null ? lastPreviousReturned : root;
 		} else if (!pruned && lastNextReturned instanceof ICompositeNode && ((ICompositeNode) lastNextReturned).hasChildren()) {
 			next = ((ICompositeNode) lastNextReturned).getFirstChild();
-		} else if (lastNextReturned.hasNextSibling()) {
-			if (root.equals(lastNextReturned))
-				next = null;
-			else
-				next = lastNextReturned.getNextSibling();
+		} else if (root.equals(lastNextReturned)) {
+			next = null;
+		} else if ((next = lastNextReturned.getNextSibling()) != null) {
+			// next found
 		} else {
-			if (root.equals(lastNextReturned))
-				next = null;
-			else {
-				ICompositeNode parent = lastNextReturned.getParent();
-				while (next == null && !root.equals(parent) && parent != null && parent.getParent() != null) {
-					if (parent.hasNextSibling()) {
-						next = parent.getNextSibling();
-					} else {
-						parent = parent.getParent();
-					}
-				}
+			for (INode parent = lastNextReturned.getParent(); next == null && parent != null && !root.equals(parent); parent = parent.getParent()) {
+				next = parent.getNextSibling();
 			}
 		}
 		nextComputed = true;
@@ -86,30 +74,18 @@ public class NodeTreeIterator extends UnmodifiableIterator<INode> implements Bid
 	public boolean hasPrevious() {
 		if (previousComputed)
 			return previous != null;
+
 		if (lastPreviousReturned == null) {
-			if (lastNextReturned != null)
-				previous = lastNextReturned;
-			else
-				previous = root;
+			previous = lastNextReturned != null ? lastNextReturned : root;
 		} else if (!pruned && lastPreviousReturned instanceof ICompositeNode && ((ICompositeNode) lastPreviousReturned).hasChildren()) {
 			previous = ((ICompositeNode) lastPreviousReturned).getLastChild();
-		} else if (lastPreviousReturned.hasPreviousSibling()) {
-			if (root.equals(lastPreviousReturned))
-				previous = null;
-			else
-				previous = lastPreviousReturned.getPreviousSibling();
+		} else if (root.equals(lastPreviousReturned)) {
+			previous = null;
+		} else if ((previous = lastPreviousReturned.getPreviousSibling()) != null) {
+			// previous found
 		} else {
-			if (root.equals(lastPreviousReturned))
-				previous = null;
-			else {
-				ICompositeNode parent = lastPreviousReturned.getParent();
-				while (previous == null && !root.equals(parent) && parent != null && parent.getParent() != null) {
-					if (parent.hasPreviousSibling()) {
-						previous = parent.getPreviousSibling();
-					} else {
-						parent = parent.getParent();
-					}
-				}
+			for (INode parent = lastPreviousReturned.getParent(); previous == null && parent != null && !root.equals(parent); parent = parent.getParent()) {
+				previous = parent.getPreviousSibling();
 			}
 		}
 		previousComputed = true;
