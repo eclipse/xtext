@@ -16,19 +16,12 @@ public class CachingResourceValidatorImpl extends ResourceValidatorImpl {
   private OnChangeEvictingCache cache;
   
   public List<Issue> validate(final Resource resource, final CheckMode mode, final CancelIndicator mon) {
-    try {
-      final Provider<List<Issue>> _function = new Provider<List<Issue>>() {
-          public List<Issue> get() {
-            List<Issue> _validate = CachingResourceValidatorImpl.super.validate(resource, mode, mon);
-            return _validate;
-          }
-        };
-      return this.cache.<List<Issue>>get(resource, resource, _function);
-    } finally {
-      boolean _isCanceled = mon.isCanceled();
-      if (_isCanceled) {
-        this.cache.clear(resource);
-      }
-    }
+    final Provider<List<Issue>> _function = new Provider<List<Issue>>() {
+        public List<Issue> get() {
+          List<Issue> _validate = CachingResourceValidatorImpl.super.validate(resource, mode, mon);
+          return _validate;
+        }
+      };
+    return this.cache.<List<Issue>>get(mode, resource, _function);
   }
 }
