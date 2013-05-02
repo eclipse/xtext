@@ -235,13 +235,14 @@ public class NodeModelUtils {
 		if (node.hasDirectSemanticElement())
 			return node.getSemanticElement();
 		EObject grammarElement = node.getGrammarElement();
+		ICompositeNode parent = node.getParent();
 		if (grammarElement == null)
-			return findActualSemanticObjectFor(node.getParent());
+			return findActualSemanticObjectFor(parent);
 		Assignment assignment = GrammarUtil.containingAssignment(grammarElement);
 		if (assignment != null) {
-			if (node.getParent().hasDirectSemanticElement())
-				return findActualSemanticObjectFor(node.getParent());
-			INode sibling = node.getParent().getFirstChild();
+			if (parent.hasDirectSemanticElement())
+				return findActualSemanticObjectFor(parent);
+			INode sibling = parent.getFirstChild();
 			while(sibling != node) {
 				EObject siblingGrammarElement = sibling.getGrammarElement();
 				if (siblingGrammarElement != null && GrammarUtil.containingAssignment(siblingGrammarElement) == null) {
@@ -255,7 +256,7 @@ public class NodeModelUtils {
 			if (result != null)
 				return result;
 		}
-		return findActualSemanticObjectFor(node.getParent());
+		return findActualSemanticObjectFor(parent);
 	}
 
 	@Nullable
