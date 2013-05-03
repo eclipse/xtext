@@ -23,6 +23,7 @@ import static org.eclipse.xtext.common.types.TypesPackage$Literals.*
 import static org.eclipse.xtext.xbase.XbasePackage$Literals.*
 import static org.eclipse.xtext.xbase.validation.IssueCodes.*
 import static org.eclipse.xtext.xtype.XtypePackage$Literals.*
+import org.eclipse.xtext.util.OnChangeEvictingCache
 
 class XtendUIValidationTests extends AbstractXtendUITestCase {
 	@Inject
@@ -31,6 +32,8 @@ class XtendUIValidationTests extends AbstractXtendUITestCase {
 	private ValidationTestHelper helper;
 	@Inject
 	private IPreferenceStoreAccess prefStoreAccess;
+	@Inject
+	private OnChangeEvictingCache cache
 	
 	override tearDown() throws Exception {
 		testHelper.tearDown
@@ -258,7 +261,8 @@ class XtendUIValidationTests extends AbstractXtendUITestCase {
 			''')
 			val function = xtendFile.xtendTypes.filter(typeof(XtendClass)).head.members.head as XtendFunction
 			helper.assertError(function.parameters.get(0), JVM_TYPE_REFERENCE, FORBIDDEN_REFERENCE)
-			
+			// clear the cache, since xtend caches computed issues
+			cache.clear(xtendFile.eResource)
 			javaProject.setOption(JavaCore::COMPILER_PB_FORBIDDEN_REFERENCE, otherSeverity)
 			helper.assertWarning(function.parameters.get(0), JVM_TYPE_REFERENCE, FORBIDDEN_REFERENCE)
 		} finally {
@@ -316,6 +320,8 @@ class XtendUIValidationTests extends AbstractXtendUITestCase {
 			val clazz = xtendFile.getXtendTypes.head as XtendClass
 			val member = clazz.members.head
 			helper.assertNoIssues(member)
+			// clear the cache, since xtend caches computed issues
+			cache.clear(xtendFile.eResource)
 			javaProject.setOption(JavaCore::COMPILER_PB_INVALID_JAVADOC, otherSeverity)
 			helper.assertWarning(member, XTEND_FUNCTION, IssueCodes::JAVA_DOC_LINKING_DIAGNOSTIC, "javaDoc","List","cannot be resolved to a type");
 		} finally {
