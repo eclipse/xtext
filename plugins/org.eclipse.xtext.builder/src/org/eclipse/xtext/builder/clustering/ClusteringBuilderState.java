@@ -110,7 +110,7 @@ public class ClusteringBuilderState extends AbstractBuilderState {
         // use this. Once the build is completed, the persistable index is reset to the contents of newState by
         // virtue of the newMap, which is maintained in synch with this.
         ResourceSet resourceSet = buildData.getResourceSet();
-        final CurrentDescriptions newState = new CurrentDescriptions(resourceSet, newData);
+        final CurrentDescriptions newState = new CurrentDescriptions(resourceSet, newData, buildData);
 
         // Step 3: Create a queue; write new temporary resource descriptions for the added or updated resources so that we can link
         // subsequently; put all the added or updated resources into the queue.

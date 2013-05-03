@@ -16,6 +16,7 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.builder.builderState.ResourceDescriptionsData;
+import org.eclipse.xtext.builder.impl.BuildData;
 import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.resource.IResourceDescription;
@@ -31,6 +32,15 @@ public class CurrentDescriptions extends AdapterImpl implements IResourceDescrip
 	 * New index.
 	 */
 	private final ResourceDescriptionsData newData;
+	
+	private BuildData buildData;
+	
+	/**
+	 * @since 2.4
+	 */
+	public BuildData getBuildData() {
+		return buildData;
+	}
 
 	/**
 	 * Create a new index based on an old one.
@@ -43,6 +53,23 @@ public class CurrentDescriptions extends AdapterImpl implements IResourceDescrip
 	public CurrentDescriptions(ResourceSet resourceSet, ResourceDescriptionsData newData) {
 		this.newData = newData;
 		resourceSet.eAdapters().add(this);
+	}
+	
+	
+	/**
+	 * Create a new index based on an old one.
+	 * 
+	 * @param resourceSet
+	 *            The resource set
+	 * @param newData
+	 *            the new index state.
+	 * @param buildData
+	 * 			  the currently processed builddata
+	 * @since 2.4            
+	 */
+	public CurrentDescriptions(ResourceSet resourceSet, ResourceDescriptionsData newData, BuildData buildData) {
+		this(resourceSet, newData);
+		this.buildData = buildData;
 	}
 
 	/**
@@ -116,6 +143,10 @@ public class CurrentDescriptions extends AdapterImpl implements IResourceDescrip
 
 		/** Base index. */
 		private IResourceDescriptions delegate;
+		
+		public IResourceDescriptions getDelegate() {
+			return delegate;
+		}
 
 		/**
 		 * Set the context.
