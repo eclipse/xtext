@@ -5,6 +5,7 @@ import com.google.common.collect.Iterables;
 import com.google.inject.Inject;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.jdt.core.JavaCore;
 import org.eclipse.jdt.internal.core.JavaModel;
@@ -27,6 +28,7 @@ import org.eclipse.xtext.common.types.JvmParameterizedTypeReference;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.junit4.validation.ValidationTestHelper;
 import org.eclipse.xtext.ui.editor.preferences.IPreferenceStoreAccess;
+import org.eclipse.xtext.util.OnChangeEvictingCache;
 import org.eclipse.xtext.xbase.XExpression;
 import org.eclipse.xtext.xbase.lib.Exceptions;
 import org.eclipse.xtext.xbase.lib.IntegerRange;
@@ -49,6 +51,9 @@ public class XtendUIValidationTests extends AbstractXtendUITestCase {
   
   @Inject
   private IPreferenceStoreAccess prefStoreAccess;
+  
+  @Inject
+  private OnChangeEvictingCache cache;
   
   public void tearDown() throws Exception {
     this.testHelper.tearDown();
@@ -525,6 +530,8 @@ public class XtendUIValidationTests extends AbstractXtendUITestCase {
         EList<XtendParameter> _parameters = function.getParameters();
         XtendParameter _get = _parameters.get(0);
         this.helper.assertError(_get, org.eclipse.xtext.common.types.TypesPackage.Literals.JVM_TYPE_REFERENCE, org.eclipse.xtext.xbase.validation.IssueCodes.FORBIDDEN_REFERENCE);
+        Resource _eResource = xtendFile.eResource();
+        this.cache.clear(_eResource);
         javaProject.setOption(JavaCore.COMPILER_PB_FORBIDDEN_REFERENCE, otherSeverity);
         EList<XtendParameter> _parameters_1 = function.getParameters();
         XtendParameter _get_1 = _parameters_1.get(0);
@@ -631,6 +638,8 @@ public class XtendUIValidationTests extends AbstractXtendUITestCase {
       EList<XtendMember> _members = clazz.getMembers();
       final XtendMember member = IterableExtensions.<XtendMember>head(_members);
       this.helper.assertNoIssues(member);
+      Resource _eResource = xtendFile.eResource();
+      this.cache.clear(_eResource);
       javaProject.setOption(JavaCore.COMPILER_PB_INVALID_JAVADOC, otherSeverity);
       this.helper.assertWarning(member, Literals.XTEND_FUNCTION, IssueCodes.JAVA_DOC_LINKING_DIAGNOSTIC, "javaDoc", "List", "cannot be resolved to a type");
     } finally {
