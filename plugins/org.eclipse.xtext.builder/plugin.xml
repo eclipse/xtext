@@ -66,5 +66,14 @@
       <attribute name="path"/>
       <attribute name="generatorName"/>
    </extension>
+   <extension
+         point="org.eclipse.jdt.core.compilationParticipant">
+      <compilationParticipant
+            class="org.eclipse.xtext.builder.impl.javasupport.JdtCompilationParticipant"
+            createsProblems="false"
+            id="org.eclipse.xtext.builder.jdtCompilationParticipant"
+            modifiesEnvironment="false">
+      </compilationParticipant>
+   </extension>
    
 </plugin>
