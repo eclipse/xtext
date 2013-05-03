@@ -1,0 +1,9 @@
+Change-Id: I83e352631d4878e23d98c4b89497a1f23ac675db
+Code-Review+2: Sven Efftinge <sven.efftinge@itemis.de>
+IP-Clean+1: Sven Efftinge <sven.efftinge@itemis.de>
+Verified+1: Sven Efftinge <sven.efftinge@itemis.de>
+Submitted-by: Sven Efftinge <sven.efftinge@itemis.de>
+Submitted-at: Fri, 03 May 2013 02:59:46 -0400
+Reviewed-on: https://git.eclipse.org/r/12451
+Project: tmf/org.eclipse.xtext
+Branch: refs/heads/master
