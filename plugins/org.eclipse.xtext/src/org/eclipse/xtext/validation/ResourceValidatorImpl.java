@@ -8,6 +8,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.validation;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
@@ -66,7 +67,7 @@ public class ResourceValidatorImpl implements IResourceValidator {
 			final CancelIndicator monitor = mon == null ? CancelIndicator.NullImpl : mon;
 			resolveProxies(resource, monitor);
 			if (monitor.isCanceled())
-				return null;
+				return Collections.emptyList();
 
 			final List<Issue> result = Lists.newArrayListWithExpectedSize(resource.getErrors().size()
 					+ resource.getWarnings().size());
@@ -77,19 +78,19 @@ public class ResourceValidatorImpl implements IResourceValidator {
 				if (mode.shouldCheck(CheckType.FAST)) {
 					for (int i = 0; i < resource.getErrors().size(); i++) {
 						if (monitor.isCanceled())
-							return null;
+							return Collections.emptyList();
 						issueFromXtextResourceDiagnostic(resource.getErrors().get(i), Severity.ERROR, acceptor);
 					}
 
 					for (int i = 0; i < resource.getWarnings().size(); i++) {
 						if (monitor.isCanceled())
-							return null;
+							return Collections.emptyList();
 						issueFromXtextResourceDiagnostic(resource.getWarnings().get(i), Severity.WARNING, acceptor);
 					}
 				}
 
 				if (monitor.isCanceled())
-					return null;
+					return Collections.emptyList();
 				boolean syntaxDiagFail = !result.isEmpty();
 				logCheckStatus(resource, syntaxDiagFail, "Syntax");
 
@@ -97,7 +98,7 @@ public class ResourceValidatorImpl implements IResourceValidator {
 				// Collect validator diagnostics
 				validate(resource, mode, monitor, acceptor);
 				if (monitor.isCanceled())
-					return null;
+					return Collections.emptyList();
 			} catch (RuntimeException e) {
 				log.error(e.getMessage(), e);
 			}
