@@ -7,15 +7,16 @@
  *******************************************************************************/
 package org.eclipse.xtend.ide.editor.model;
 
-import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
 
-import org.antlr.runtime.CommonToken;
+import org.antlr.runtime.Token;
+import org.antlr.runtime.TokenSource;
 import org.eclipse.xtext.parser.antlr.ITokenDefProvider;
 import org.eclipse.xtext.ui.LexerUIBindings;
 import org.eclipse.xtext.ui.editor.model.DocumentTokenSource;
+import org.eclipse.xtext.ui.editor.model.DocumentTokenSource2;
 
 import com.google.inject.Inject;
 import com.google.inject.name.Named;
@@ -23,39 +24,45 @@ import com.google.inject.name.Named;
 /**
  * @author Holger Schill - Initial contribution and API
  */
-public class XtendDocumentTokenSource extends DocumentTokenSource {
+public class XtendDocumentTokenSource extends DocumentTokenSource2 {
 
 	public static final int JAVA_DOC_TOKEN_TYPE = -10000;
 
-	@Inject
-	@Named(LexerUIBindings.HIGHLIGHTING)
-	protected ITokenDefProvider tokenDefProvider;
-
 	protected int multilineTokenType = -1;
 
-	@Override
-	protected List<TokenInfo> createTokenInfos(String string) {
+	@Inject
+	protected void initializeMultilineTokenType(@Named(LexerUIBindings.HIGHLIGHTING) ITokenDefProvider tokenDefProvider) {
 		Map<Integer, String> tokenDefMap = tokenDefProvider.getTokenDefMap();
 		Set<Entry<Integer, String>> entrySet = tokenDefMap.entrySet();
 		for(Entry<Integer, String> entry : entrySet){
 			if(entry.getValue().equals("RULE_ML_COMMENT")){
 				multilineTokenType = entry.getKey();
+				return;
 			}
 		}
-		if(multilineTokenType == -1){
-			throw new RuntimeException("No Token for RULE ML_COMMENT found in tokenTypeDefs!");
-		}
-		return super.createTokenInfos(string);
+		throw new RuntimeException("No Token for RULE ML_COMMENT found in tokenTypeDefs!");
 	}
 
 	@Override
-	protected TokenInfo createTokenInfo(CommonToken token) {
-		if(token.getType() == multilineTokenType){
-			String text = token.getText();
-			if(text.startsWith("/**") && !text.startsWith("/***")){
-				token.setType(JAVA_DOC_TOKEN_TYPE);
+	protected TokenSource createTokenSource(String string) {
+		final TokenSource delegate = super.createTokenSource(string);
+		return new TokenSource() {
+
+			public Token nextToken() {
+				Token token = delegate.nextToken();
+				if(token.getType() == multilineTokenType) {
+					String text = token.getText();
+					if(text.startsWith("/**") && !text.startsWith("/***")){
+						token.setType(JAVA_DOC_TOKEN_TYPE);
+					}
+				}
+				return token;
 			}
-		}
-		return new TokenInfo(token);
+
+			public String getSourceName() {
+				return delegate.getSourceName();
+			}
+		};
 	}
 }
+
