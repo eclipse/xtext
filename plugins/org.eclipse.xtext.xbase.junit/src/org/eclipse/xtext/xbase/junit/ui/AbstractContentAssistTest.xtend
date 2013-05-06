@@ -20,8 +20,6 @@ import org.junit.BeforeClass
 
 import static org.eclipse.xtext.junit4.ui.util.JavaProjectSetupUtil.*
 
-import static extension org.eclipse.xtext.xbase.junit.ui.AbstractContentAssistTest.*
-
 @SuppressWarnings("restriction")
 class AbstractContentAssistTest implements ResourceLoadHelper, IJavaProjectProvider {
 	

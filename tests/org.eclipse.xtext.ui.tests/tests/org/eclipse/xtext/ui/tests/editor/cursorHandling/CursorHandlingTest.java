@@ -111,6 +111,23 @@ public class CursorHandlingTest extends AbstractCursorHandlingTest {
 				"*/", editor);
 	}
 	
+	@Test public void testToLineStartInMlComment_05() throws Exception { 
+		XtextEditor editor = openEditor("\n\n  /** beg|in\n" + 
+				"*/");
+		toLineStart(editor);
+		assertState("\n\n  /** |begin\n" +
+				"*/", editor);
+		toLineStart(editor);
+		assertState("\n\n  |/** begin\n" +
+				"*/", editor);
+		toLineStart(editor);
+		assertState("\n\n|  /** begin\n" +
+				"*/", editor);
+		toLineStart(editor);
+		assertState("\n\n  |/** begin\n" +
+				"*/", editor);
+	}
+	
 	@Test public void testNavigateLeft_01() throws Exception {
 		XtextEditor editor = openEditor(" CamelCaseWo|rd ");
 		navigateLeft(editor);

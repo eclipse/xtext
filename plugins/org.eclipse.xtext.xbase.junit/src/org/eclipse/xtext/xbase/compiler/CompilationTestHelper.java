@@ -39,7 +39,6 @@ import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.Pair;
 import org.junit.Assert;
 
-import com.google.common.base.Joiner;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 
@@ -176,7 +175,7 @@ public class CompilationTestHelper {
 				public Map<String,String> getGeneratedCode() {
 					if (generatedCode == null) {
 						generatedCode = newHashMap();
-						for (final Entry<String, CharSequence> e : access.getFiles().entrySet()) {
+						for (final Entry<String, CharSequence> e : access.getTextFiles().entrySet()) {
 							String name = e.getKey().substring("DEFAULT_OUTPUT".length(), e.getKey().length() - ".java".length());
 							generatedCode.put(name.replace('/', '.'), e.getValue().toString());
 						}
@@ -224,7 +223,7 @@ public class CompilationTestHelper {
 				}
 
 				public Map<String, CharSequence> getAllGeneratedResources() {
-					return access.getFiles();
+					return access.getTextFiles();
 				}
 				
 			});
