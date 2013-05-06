@@ -55,7 +55,7 @@ public class XtextResourceSetProvider implements IResourceSetProvider {
 	protected Map<URI, URI> computePlatformURIMap(IJavaProject javaProject) {
 		HashMap<URI, URI> hashMap = newHashMap();
 		try {
-			hashMap.putAll(EcorePlugin.computePlatformURIMap());
+			hashMap.putAll(EcorePlugin.computePlatformURIMap(false));
 		} catch (Exception e) {
 			LOG.error(e.getMessage(), e);
 		}

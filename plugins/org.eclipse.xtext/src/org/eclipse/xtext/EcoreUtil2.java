@@ -126,10 +126,11 @@ public class EcoreUtil2 extends EcoreUtil {
 	/**
 	 * A generified facade to {@link EcoreUtil#copy(EObject)}.
 	 * Note that since EMF 2.6 {@link EcoreUtil#copy(EObject)} is already generic.
+	 * @deprecated use {@link EcoreUtil#copy(EObject)} instead.
 	 */
-	@SuppressWarnings("unchecked")
+	@Deprecated
 	public static <T extends EObject> T clone(T eObject) {
-		return (T) EcoreUtil.copy(eObject);
+		return EcoreUtil.copy(eObject);
 	}
 	
 	/**
