@@ -60,7 +60,6 @@ import org.eclipse.xtext.validation.IConcreteSyntaxValidator;
 import org.eclipse.xtext.validation.impl.ConcreteSyntaxValidator;
 
 import com.google.inject.Binder;
-import com.google.inject.Key;
 import com.google.inject.Provider;
 import com.google.inject.name.Names;
 

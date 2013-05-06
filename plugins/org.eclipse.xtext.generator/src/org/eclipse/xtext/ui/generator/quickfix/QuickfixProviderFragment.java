@@ -9,8 +9,6 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.generator.quickfix;
 
-import static java.util.Collections.*;
-
 import java.util.List;
 import java.util.Set;
 

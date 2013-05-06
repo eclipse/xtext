@@ -33,6 +33,7 @@ import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.jface.text.BadLocationException;
 import org.eclipse.jface.text.IDocument;
 import org.eclipse.jface.text.IDocumentExtension3;
+import org.eclipse.jface.text.IRegion;
 import org.eclipse.jface.text.ITextSelection;
 import org.eclipse.jface.text.Position;
 import org.eclipse.jface.text.TextUtilities;
@@ -1262,31 +1263,40 @@ public class XtextEditor extends TextEditor {
 				// Should not happen
 			}
 
-			int index = super.getLineStartPosition(document, line, length, offset);
+			int lineStartPosition = super.getLineStartPosition(document, line, length, offset);
 			if (tokenTypeToPartitionTypeMapperExtension.isMultiLineComment(type)
 					|| tokenTypeToPartitionTypeMapperExtension.isSingleLineComment(type)) {
-				return getCommentLineStartPosition(line, length, offset, index);
+				try {
+					IRegion lineInformation = document.getLineInformationOfOffset(offset);
+					int offsetInLine = offset - lineInformation.getOffset();
+					return getCommentLineStartPosition(line, length, offsetInLine, lineStartPosition);
+				} catch(BadLocationException e) {
+					// Should not happen
+				}
 			} 
 			if (type.equals(IDocument.DEFAULT_CONTENT_TYPE)) {
-				if (isStartOfSingleLineComment(line, length, index) && !isStartOfMultiLineComment(line, length, index)) {
-					return getTextStartPosition(line, length, index + 1);
+				if (isStartOfSingleLineComment(line, length, lineStartPosition) && !isStartOfMultiLineComment(line, length, lineStartPosition)) {
+					return getTextStartPosition(line, length, lineStartPosition + 1);
 				}
 			}
-			return index;
+			return lineStartPosition;
 		}
 
-		private int getCommentLineStartPosition(final String line, final int length, final int offset, int index) {
-			if (isMiddleOfMultiLineComment(line, length, index)) {
-				return getTextStartPosition(line, length, index);
+		private int getCommentLineStartPosition(final String line, final int length, int offsetInLine, int lineStartPosition) {
+			if (isMiddleOfMultiLineComment(line, length, lineStartPosition)) {
+				return getTextStartPosition(line, length, lineStartPosition);
 			} 
-			if (isStartOfMultiLineComment(line, length, index)) {
-				int textStartPosition = getTextStartPosition(line, length, index + 2);
-				return offset > textStartPosition ? textStartPosition : index;
+			if (isStartOfMultiLineComment(line, length, lineStartPosition)) {
+				int textStartPosition = getTextStartPosition(line, length, lineStartPosition + 2);
+				if (offsetInLine <= textStartPosition) {
+					return lineStartPosition;
+				}
+				return lineStartPosition < textStartPosition ? textStartPosition : lineStartPosition;
 			} 
-			if (isStartOfSingleLineComment(line, length, index)) {
-				return getTextStartPosition(line, length, index + 1);
+			if (isStartOfSingleLineComment(line, length, lineStartPosition)) {
+				return getTextStartPosition(line, length, lineStartPosition + 1);
 			}
-			return index;
+			return lineStartPosition;
 		}
 
 		private boolean isStartOfSingleLineComment(final String line, final int length, int index) {

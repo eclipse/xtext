@@ -93,7 +93,6 @@ import org.eclipse.xtext.ui.editor.templates.XtextTemplateContextTypeRegistry;
 import org.eclipse.xtext.ui.editor.templates.XtextTemplateStore;
 import org.eclipse.xtext.ui.editor.toggleComments.DefaultSingleLineCommentHelper;
 import org.eclipse.xtext.ui.editor.toggleComments.ISingleLineCommentHelper;
-import org.eclipse.xtext.ui.generator.trace.DefaultUITraceURIConverter;
 import org.eclipse.xtext.ui.label.DefaultDescriptionLabelProvider;
 import org.eclipse.xtext.ui.label.DefaultEObjectLabelProvider;
 import org.eclipse.xtext.ui.label.InjectableAdapterFactoryLabelProvider;
