@@ -99,7 +99,12 @@ public class XbaseBreakpointUtil {
 			}
 		} else if (input instanceof IClassFileEditorInput) {
 			IClassFile classFile = ((IClassFileEditorInput) input).getClassFile();
+			if (classFile == null) {
+				return null;
+			}
 			ITrace traceToSource = traceForTypeRootProvider.getTraceToSource(classFile);
+			if (traceToSource == null)
+				return null;
 			for (ILocationInResource loc : traceToSource.getAllAssociatedLocations())
 				return loc.getSrcRelativeResourceURI();
 			return null;

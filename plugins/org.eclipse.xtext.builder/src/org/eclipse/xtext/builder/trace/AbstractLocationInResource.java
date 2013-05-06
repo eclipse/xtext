@@ -65,6 +65,7 @@ public abstract class AbstractLocationInResource implements ILocationInResource 
 		return absoluteURI;
 	}
 	
+	@NonNull
 	public InputStream getContents() throws CoreException {
 		return trace.getContents(getSrcRelativeResourceURI(), getProject());
 	}
