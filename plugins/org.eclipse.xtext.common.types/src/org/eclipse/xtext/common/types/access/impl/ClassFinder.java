@@ -11,9 +11,6 @@ import static com.google.common.collect.Maps.*;
 
 import java.util.Map;
 
-import org.eclipse.xtext.util.internal.Stopwatches;
-import org.eclipse.xtext.util.internal.Stopwatches.StoppedTask;
-
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
