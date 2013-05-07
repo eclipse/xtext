@@ -12,6 +12,7 @@
     <bundles name="com.google.guava.source" versionRange="[10.0.0,11.0.0)"/>
     <bundles name="com.google.inject"/>
     <bundles name="com.google.inject.source"/>
+    <bundles name="org.apache.ant" versionRange="1.8.0"/>
     <bundles name="org.apache.log4j"/>
     <bundles name="org.apache.log4j.source"/>
     <bundles name="org.aopalliance"/>
