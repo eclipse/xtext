@@ -74,12 +74,12 @@ public class DamagerRepairerPerformanceTest extends Assert implements ITokenScan
 		protected void appendAndCheck(String text) throws BadLocationException {
 			int offset = doc.getLength();
 			doc.replace(offset, 0, text);
-			assertEquals(Math.max(0, offset), Math.min(doc.getLength(), text.length()));
+			assertEquals(Math.max(0, offset - 1), Math.min(doc.getLength(), text.length() + 1));
 		}
 		
 		protected void insertAndCheck(String text, int offset) throws BadLocationException {
 			doc.replace(offset, 0, text);
-			assertEquals(Math.max(0, offset), Math.min(doc.getLength(), text.length()));
+			assertEquals(Math.max(0, offset - 1), Math.min(doc.getLength(), text.length() + 1));
 		}
 		
 		protected void prependAndCheck(String text) throws BadLocationException {
@@ -116,6 +116,7 @@ public class DamagerRepairerPerformanceTest extends Assert implements ITokenScan
 	
 	@Test public void testInsert() throws BadLocationException {
 		Tester tester = new Tester(damager);
+		tester.insertAndCheck("abc ", 0);
 		int offset = tester.doc.getLength();
 		for(int i = 0; i < MAX; i++) {
 			tester.insertAndCheck("abc ", offset);
@@ -124,6 +125,7 @@ public class DamagerRepairerPerformanceTest extends Assert implements ITokenScan
 	
 	@Test public void testInsert2() throws BadLocationException {
 		Tester tester = new Tester(damager);
+		tester.insertAndCheck("abc ", 0);
 		int offset = tester.doc.getLength();
 		for(int i = 0; i < MAX; i++) {
 			tester.insertAndCheck("abc ", offset);

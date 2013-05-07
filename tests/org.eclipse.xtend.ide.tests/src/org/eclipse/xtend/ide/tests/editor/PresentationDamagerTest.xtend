@@ -1,8 +1,13 @@
 package org.eclipse.xtend.ide.tests.editor
 
-import org.eclipse.xtext.junit4.ui.AbstractDamagerRepairerTest
+import org.eclipse.jface.text.Document
 import org.eclipse.xtend.core.parser.antlr.internal.InternalXtendLexer
+import org.eclipse.xtext.junit4.ui.AbstractDamagerRepairerTest
 import org.junit.Test
+import org.eclipse.xtend.ide.editor.model.XtendDocumentTokenSource
+import org.eclipse.xtext.ui.editor.model.XtextDocument
+import org.eclipse.xtext.parser.antlr.AntlrTokenDefProvider
+import org.eclipse.xtend.core.parser.antlr.XtendAntlrTokenFileProvider
 
 class PresentationDamagerTest extends AbstractDamagerRepairerTest {
 	
@@ -22,7 +27,7 @@ class PresentationDamagerTest extends AbstractDamagerRepairerTest {
 
 	@Test
 	def void testRichString_2() {
-		assertEquals(5, 15, check("text ''rich\ntext'''", 5, 0, "'"))
+		assertEquals(4, 16, check("text ''rich\ntext'''", 5, 0, "'"))
 	}
 	
 	@Test
@@ -62,17 +67,17 @@ class PresentationDamagerTest extends AbstractDamagerRepairerTest {
 	
 	@Test
 	def void testString_0() {
-		assertEquals(5, 16, check("text 'string\ntext'text", 5, 1, ""))
+		assertEquals(4, 17, check("text 'string\ntext'text", 5, 1, ""))
 	}
 	
 	@Test
 	def void testString_1() {
-		assertEquals(5, 16, check("text string\ntext'text", 5, 1, "'"))
+		assertEquals(4, 17, check("text string\ntext'text", 5, 1, "'"))
 	}
 	
 	@Test
 	def void testString_2() {
-		assertEquals(5, 25, check("text string\ntext'text''string", 5, 0, "'"))
+		assertEquals(4, 26, check("text string\ntext'text''string", 5, 0, "'"))
 	}
 	
 	@Test 
@@ -80,4 +85,15 @@ class PresentationDamagerTest extends AbstractDamagerRepairerTest {
 		assertEquals(4, 37, check("text/* comment\ncomment' */\n'string'text", 14, 0, "*/"))
 	}
 	
+	override Document createDocument(String before) throws Exception {
+		val source = new XtendDocumentTokenSource => [
+			tokenDefProvider = new AntlrTokenDefProvider => [
+				antlrTokenFileProvider = new XtendAntlrTokenFileProvider
+			]
+			lexer = [|createLexer]
+		]
+		val document = new XtextDocument(source, null)
+		document.set(before)
+		document
+	}
 }

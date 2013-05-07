@@ -30,7 +30,7 @@ public class XtendDocumentTokenSource extends DocumentTokenSource {
 	protected int multilineTokenType = -1;
 
 	@Inject
-	protected void initializeMultilineTokenType(@Named(LexerUIBindings.HIGHLIGHTING) ITokenDefProvider tokenDefProvider) {
+	public void setTokenDefProvider(@Named(LexerUIBindings.HIGHLIGHTING) ITokenDefProvider tokenDefProvider) {
 		Map<Integer, String> tokenDefMap = tokenDefProvider.getTokenDefMap();
 		Set<Entry<Integer, String>> entrySet = tokenDefMap.entrySet();
 		for(Entry<Integer, String> entry : entrySet){
