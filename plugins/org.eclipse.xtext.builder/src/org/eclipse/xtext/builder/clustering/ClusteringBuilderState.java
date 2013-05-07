@@ -214,8 +214,11 @@ public class ClusteringBuilderState extends AbstractBuilderState {
                         	} catch (OperationCanceledException e) {
                         		loadOperation.cancel();
                         		throw e;
+                        	} catch (WrappedException e) {
+                        		throw e;
                         	} catch (RuntimeException e) {
                         		LOGGER.error("Error resolving cross references on resource '"+actualResourceURI+"'", e);
+                        		throw new LoadOperationException(actualResourceURI, e);
                         	}
                         }
                     } catch (final WrappedException ex) {
