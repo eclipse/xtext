@@ -16,7 +16,6 @@ import org.antlr.runtime.TokenSource;
 import org.eclipse.xtext.parser.antlr.ITokenDefProvider;
 import org.eclipse.xtext.ui.LexerUIBindings;
 import org.eclipse.xtext.ui.editor.model.DocumentTokenSource;
-import org.eclipse.xtext.ui.editor.model.DocumentTokenSource2;
 
 import com.google.inject.Inject;
 import com.google.inject.name.Named;
@@ -24,7 +23,7 @@ import com.google.inject.name.Named;
 /**
  * @author Holger Schill - Initial contribution and API
  */
-public class XtendDocumentTokenSource extends DocumentTokenSource2 {
+public class XtendDocumentTokenSource extends DocumentTokenSource {
 
 	public static final int JAVA_DOC_TOKEN_TYPE = -10000;
 
