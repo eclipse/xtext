@@ -162,4 +162,24 @@ public class JdtBasedSimpleTypeScopeProviderTest extends Assert {
 		assertFalse(objectResource.isLoaded());
 		assertTrue(stringElement.getEObjectOrProxy().eResource().isLoaded());
 	}
+	
+	@Test public void testNotificationWithDeliverFalse_01() {
+		field.eResource().getResourceSet().eSetDeliver(false);
+		testNotification_01();
+	}
+	
+	@Test public void testNotificationWithDeliverFalse_02() {
+		field.eResource().getResourceSet().eSetDeliver(false);
+		testNotification_02();
+	}
+	
+	@Test public void testNotificationWithDeliverFalse_03() {
+		field.eResource().getResourceSet().eSetDeliver(false);
+		testNotification_03();
+	}
+	
+	@Test public void testNotificationWithDeliverFalse_04() {
+		field.eResource().getResourceSet().eSetDeliver(false);
+		testNotification_04();
+	}
 }
