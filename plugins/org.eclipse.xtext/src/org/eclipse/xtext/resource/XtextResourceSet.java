@@ -43,7 +43,8 @@ public class XtextResourceSet extends ResourceSetImpl {
 				map.remove(oldOne);
 				if (oldOne != null) {
 					URI oldNormalized = getURIConverter().normalize(oldOne);
-					map.remove(oldNormalized);
+					if (!oldOne.equals(oldNormalized))
+						map.remove(oldNormalized);
 				}
 				Resource resource = (Resource) notification.getNotifier();
 				registerURI(resource);
@@ -70,9 +71,11 @@ public class XtextResourceSet extends ResourceSetImpl {
 			final URI uri = resource.getURI();
 			if (uri != null) {
 				URI normalized = getURIConverter().normalize(uri);
-				Resource previous = map.put(normalized, resource);
-				if (previous != null && previous != resource) {
-					throw new IllegalStateException("A resource with the normalized URI '"+normalized+"' was already registered. The resource with the URI '"+previous+"' is no longer registered with the normalized form.");
+				if (!normalized.equals(uri)) {
+					Resource previous = map.put(normalized, resource);
+					if (previous != null && previous != resource) {
+						throw new IllegalStateException("A resource with the normalized URI '"+normalized+"' was already registered. The resource with the URI '"+previous+"' is no longer registered with the normalized form.");
+					}
 				}
 			}
 			Resource previous = map.put(uri, resource);
@@ -101,6 +104,13 @@ public class XtextResourceSet extends ResourceSetImpl {
 			final NotificationChain inverseRemove = super.inverseRemove(resource, notifications);
 			resource.eAdapters().remove(getUriChangeListener());
 			return inverseRemove;
+		}
+		
+		@Override
+		protected void doClear() {
+			super.doClear();
+			// don't iterate the values of the map per resource but just clear it all at once
+			getURIResourceMap().clear();
 		}
 
 	}
