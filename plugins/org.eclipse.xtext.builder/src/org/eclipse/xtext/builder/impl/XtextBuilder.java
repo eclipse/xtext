@@ -72,7 +72,7 @@ public class XtextBuilder extends IncrementalProjectBuilder {
 	@Override
 	protected IProject[] build(int kind, Map args, IProgressMonitor monitor) throws CoreException {
 		long startTime = System.currentTimeMillis();
-		StoppedTask task = Stopwatches.forTask("XtextBuilder.build");
+		StoppedTask task = Stopwatches.forTask(String.format("XtextBuilder.build[%s]", getKindAsString(kind)));
 		try {
 			task.start();
 			if (monitor != null) {
@@ -110,6 +110,22 @@ public class XtextBuilder extends IncrementalProjectBuilder {
 			task.stop();
 		}
 		return getProject().getReferencedProjects();
+	}
+
+	private String getKindAsString(int kind) {
+		if (kind == FULL_BUILD) {
+			return "FULL";
+		}
+		if (kind == CLEAN_BUILD) {
+			return "CLEAN";
+		}
+		if (kind == INCREMENTAL_BUILD) {
+			return "INCREMENTAL";
+		}
+		if (kind == AUTO_BUILD) {
+			return "AUTO";
+		}
+		return "UNKOWN:" + kind;
 	}
 
 	/**

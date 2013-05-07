@@ -13,9 +13,12 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import com.google.inject.ImplementedBy;
 
 /**
+ * This strategy allows to cope with low memory environments where resources have to
+ * be unloaded during the build.
+ * 
  * @author Knut Wannheden - Initial contribution and API
  */
-@ImplementedBy(DynamicResourceClusteringPolicy.class)
+@ImplementedBy(DisabledClusteringPolicy.class)
 public interface IResourceClusteringPolicy {
 
 	/**
