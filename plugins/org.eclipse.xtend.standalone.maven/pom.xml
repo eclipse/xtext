@@ -200,9 +200,7 @@
 						<id>prepare</id>
 						<phase>prepare-package</phase>
 						<configuration>
-
 							<target>
-								<echo>${mirroring.phase}</echo>
 								<echo message="Prepare jar content:" />
 								<ant antfile="${basedir}/create-uberjar.ant" target="run"
 									dir="${basedir}">
