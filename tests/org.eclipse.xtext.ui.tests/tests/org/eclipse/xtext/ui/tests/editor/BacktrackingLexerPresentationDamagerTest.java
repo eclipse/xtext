@@ -9,8 +9,8 @@ package org.eclipse.xtext.ui.tests.editor;
 
 import org.eclipse.jface.text.Document;
 import org.eclipse.xtext.parser.antlr.Lexer;
+import org.eclipse.xtext.ui.editor.model.BacktrackingLexerDocumentTokenSource;
 import org.eclipse.xtext.ui.editor.model.DocumentTokenSource;
-import org.eclipse.xtext.ui.editor.model.DocumentTokenSource2;
 import org.eclipse.xtext.ui.editor.model.XtextDocument;
 
 import com.google.inject.Provider;
@@ -18,11 +18,11 @@ import com.google.inject.Provider;
 /**
  * @author Jan Koehnlein - Initial contribution and API
  */
-public class PresentationDamagerTest2 extends PresentationDamagerTest {
+public class BacktrackingLexerPresentationDamagerTest extends PresentationDamagerTest {
 	
 	@Override
 	protected Document createDocument(String before) throws Exception {
-		DocumentTokenSource source = new DocumentTokenSource2();
+		DocumentTokenSource source = new BacktrackingLexerDocumentTokenSource();
 		source.setLexer(new Provider<Lexer>() {
 			public Lexer get() {
 				return createLexer();
@@ -35,16 +35,17 @@ public class PresentationDamagerTest2 extends PresentationDamagerTest {
 
 	@Override
 	public void testAddElement() throws Exception {
-		assertEquals(4,12,check("foo bar",7,0," honolulu"));
+		assertEquals(7,9,check("foo bar",7,0," honolulu"));
+	}
+
+	@Override
+	public void testRemoveFullElement() throws Exception {
+		assertEquals(4,0,check("foo bar",4,3,""));
 	}
 	
 	@Override
 	public void testBug279061() throws Exception {
-		assertEquals(0,5, check("foo(x", 3, 2, "(x"));
+		assertEquals(3,2, check("foo(x", 3, 2, "(x"));
 	}
-	
-	@Override
-	public void testRemoveFullElement() throws Exception {
-		assertEquals(3,1,check("foo bar",4,3,""));
-	}
+
 }

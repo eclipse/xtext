@@ -29,6 +29,16 @@ import com.google.inject.Provider;
 import com.google.inject.name.Named;
 
 /**
+ * For languages with lexers without backtracking. For these we can start lexing from the 
+ * first damaged token instead of from the beginning. This is a lot faster especially when 
+ * editing the trunk of big files.
+ *  
+ * As opposed to the original {@link BacktrackingLexerDocumentTokenSource}, the damaged region
+ * returned by this class always includes the token touching the region the event refers to,
+ * i.e. the first token overlapping wit the region or the token that ends with the beginning
+ * of the region.  
+ *   
+ * @author Jan Koehnlein - Initial contribution and API
  * @author Sebastian Zarnekow - Initial contribution and API
  * @author Sven Efftinge
  */
@@ -320,26 +330,29 @@ public class DocumentTokenSource {
 	protected RepairEntryData getRepairEntryData(DocumentEvent e) throws Exception {
 		int tokenStartsAt = 0;
 		int tokenInfoIdx = 0;
-		TokenSource source = createTokenSource(e.fDocument.get());
-		CommonToken token = (CommonToken) source.nextToken();
-		// find start idx
-		while (true) {
-			if (token == Token.EOF_TOKEN) {
+		for(tokenInfoIdx = 0; tokenInfoIdx< getInternalModifyableTokenInfos().size(); ++tokenInfoIdx) {
+			TokenInfo oldToken = getInternalModifyableTokenInfos().get(tokenInfoIdx);
+			if(tokenStartsAt <= e.getOffset() && tokenStartsAt + oldToken.getLength() >= e.getOffset())
 				break;
-			}
-			if (tokenInfoIdx >= internalModifyableTokenInfos.size())
-				break;
-			TokenInfo tokenInfo = internalModifyableTokenInfos.get(tokenInfoIdx);
-			if (tokenInfo.type != token.getType()
-					|| token.getStopIndex() - token.getStartIndex() + 1 != tokenInfo.length)
-				break;
-			if (tokenStartsAt + tokenInfo.length > e.fOffset)
-				break;
-			tokenStartsAt += tokenInfo.length;
-			tokenInfoIdx++;
-			token = (CommonToken) source.nextToken();
+			tokenStartsAt += oldToken.getLength();
 		}
-		return new RepairEntryData(tokenStartsAt, tokenInfoIdx, token, source);
+		final TokenSource delegate = createTokenSource(e.fDocument.get(tokenStartsAt, e.fDocument.getLength() - tokenStartsAt));
+		final int offset = tokenStartsAt;
+		TokenSource source = new TokenSource() {
+			public Token nextToken() {
+				CommonToken commonToken = (CommonToken) delegate.nextToken();
+				commonToken.setText(commonToken.getText());
+				commonToken.setStartIndex(commonToken.getStartIndex()+offset);
+				commonToken.setStopIndex(commonToken.getStopIndex()+offset);
+				return commonToken;
+			}
+
+			public String getSourceName() {
+				return delegate.getSourceName();
+			}
+		};
+		final CommonToken token = (CommonToken) source.nextToken();
+		return new RepairEntryData(offset, tokenInfoIdx, token, source);
 	}
 	
 	/**
