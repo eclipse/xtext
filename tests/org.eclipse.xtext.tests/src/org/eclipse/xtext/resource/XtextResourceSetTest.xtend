@@ -50,10 +50,11 @@ abstract class AbstractXtextResourceSetTest extends AbstractResourceSetTest {
 		
 		rs.resources += resource
 		
-		assertEquals(2, rs.URIResourceMap.size)
+		assertEquals(1, rs.URIResourceMap.size)
 		
 		rs.resources.remove(resource)
 		
+		assertTrue(resource.eAdapters.empty)
 		assertEquals(0, rs.URIResourceMap.size)
 	}
 	
@@ -68,10 +69,11 @@ abstract class AbstractXtextResourceSetTest extends AbstractResourceSetTest {
 		
 		rs.resources += newArrayList(resource)
 		
-		assertEquals(2, rs.URIResourceMap.size)
+		assertEquals(1, rs.URIResourceMap.size)
 		
 		rs.resources.remove(resource)
 		
+		assertTrue(resource.eAdapters.empty)
 		assertEquals(0, rs.URIResourceMap.size)
 	}
 	
@@ -89,13 +91,127 @@ abstract class AbstractXtextResourceSetTest extends AbstractResourceSetTest {
 		
 		// set the URI
 		resource.URI = URI::createURI('foo')
-		assertEquals(2, rs.URIResourceMap.size)
+		assertEquals(1, rs.URIResourceMap.size)
 		assertFalse(rs.URIResourceMap.containsKey(null))
 		assertEquals(resource, rs.URIResourceMap.get(resource.URI))
 		assertEquals(resource, rs.URIResourceMap.get(rs.URIConverter.normalize(resource.URI)))
 		
 		// set the URI
 		resource.URI = URI::createURI('bar')
+		assertEquals(1, rs.URIResourceMap.size)
+		assertFalse(rs.URIResourceMap.containsKey(null))
+		assertEquals(resource, rs.URIResourceMap.get(resource.URI))
+		assertEquals(resource, rs.URIResourceMap.get(rs.URIConverter.normalize(resource.URI)))
+		
+		// set the URI back to null
+		resource.URI = null
+		assertEquals(1, rs.URIResourceMap.size)
+		assertEquals(resource, rs.URIResourceMap.get(null))
+		
+		// remove the resource
+		rs.resources.remove(resource)
+		
+		assertTrue(resource.eAdapters.empty)
+		assertEquals(0, rs.URIResourceMap.size)
+	}
+	
+	@Test
+	def void testResourcesAreCleared_01() {
+		val rs = createEmptyResourceSet
+		
+		assertEquals(0, rs.URIResourceMap.size)
+		
+		val resource = new XtextResource
+		resource.URI = URI::createURI('foo')
+		
+		rs.resources += newArrayList(resource)
+		
+		assertEquals(1, rs.URIResourceMap.size)
+		
+		rs.resources.clear
+		
+		assertTrue(resource.eAdapters.empty)
+		assertEquals(0, rs.URIResourceMap.size)
+	}
+	
+	@Test
+	def void testResourcesAreClearedWithDeliverFalse_01() {
+		val rs = createEmptyResourceSet
+		
+		assertEquals(0, rs.URIResourceMap.size)
+		
+		val resource = new XtextResource
+		resource.URI = URI::createURI('foo')
+		
+		rs.resources += newArrayList(resource)
+		
+		assertEquals(1, rs.URIResourceMap.size)
+		rs.eSetDeliver(false)
+		rs.resources.clear
+		
+		assertTrue(resource.eAdapters.empty)
+		assertEquals(0, rs.URIResourceMap.size)
+	}
+	
+	@Test
+	def void testResourcesAreInMapWithNormalizedURI_01() {
+		val rs = createEmptyResourceSet
+		
+		assertEquals(0, rs.URIResourceMap.size)
+		
+		val resource = new XtextResource
+		resource.URI = URI::createURI('/a/../foo')
+		
+		rs.resources += resource
+		
+		assertEquals(2, rs.URIResourceMap.size)
+		
+		rs.resources.remove(resource)
+		
+		assertTrue(resource.eAdapters.empty)
+		assertEquals(0, rs.URIResourceMap.size)
+	}
+	
+	@Test
+	def void testResourcesAreInMapWithNormalizedURI_02() {
+		val rs = createEmptyResourceSet
+		
+		assertEquals(0, rs.URIResourceMap.size)
+		
+		val resource = new XtextResource
+		resource.URI = URI::createURI('/a/../foo')
+		
+		rs.resources += newArrayList(resource)
+		
+		assertEquals(2, rs.URIResourceMap.size)
+		
+		rs.resources.remove(resource)
+		
+		assertTrue(resource.eAdapters.empty)
+		assertEquals(0, rs.URIResourceMap.size)
+	}
+	
+	@Test
+	def void testResourcesAreInMapWithNormalizedURI_03() {
+		val rs = createEmptyResourceSet
+		
+		assertEquals(0, rs.URIResourceMap.size)
+		
+		val resource = new XtextResource
+		
+		rs.resources += resource
+		assertEquals(1, rs.URIResourceMap.size)
+		assertEquals(resource, rs.URIResourceMap.get(null))
+		
+		// set the URI
+		resource.URI = URI::createURI('/a/../foo')
+		assertEquals(2, rs.URIResourceMap.size)
+		assertFalse(rs.URIResourceMap.containsKey(null))
+		assertEquals(resource, rs.URIResourceMap.get(resource.URI))
+		assertEquals(resource, rs.URIResourceMap.get(rs.URIConverter.normalize(resource.URI)))
+		
+		// set the URI
+		resource.URI = URI::createURI('/a/../bar')
 		assertEquals(2, rs.URIResourceMap.size)
 		assertFalse(rs.URIResourceMap.containsKey(null))
 		assertEquals(resource, rs.URIResourceMap.get(resource.URI))
@@ -109,6 +225,45 @@ abstract class AbstractXtextResourceSetTest extends AbstractResourceSetTest {
 		// remove the resource
 		rs.resources.remove(resource)
 		
+		assertTrue(resource.eAdapters.empty)
+		assertEquals(0, rs.URIResourceMap.size)
+	}
+	
+	@Test
+	def void testResourcesAreClearedWithNormalizedURI_01() {
+		val rs = createEmptyResourceSet
+		
+		assertEquals(0, rs.URIResourceMap.size)
+		
+		val resource = new XtextResource
+		resource.URI = URI::createURI('/a/../foo')
+		
+		rs.resources += newArrayList(resource)
+		
+		assertEquals(2, rs.URIResourceMap.size)
+		
+		rs.resources.clear
+		
+		assertTrue(resource.eAdapters.empty)
+		assertEquals(0, rs.URIResourceMap.size)
+	}
+	
+	@Test
+	def void testResourcesAreClearedWithDeliverFalseWithNormalizedURI_01() {
+		val rs = createEmptyResourceSet
+		
+		assertEquals(0, rs.URIResourceMap.size)
+		
+		val resource = new XtextResource
+		resource.URI = URI::createURI('//a/../foo')
+		
+		rs.resources += newArrayList(resource)
+		
+		assertEquals(2, rs.URIResourceMap.size)
+		rs.eSetDeliver(false)
+		rs.resources.clear
+		
+		assertTrue(resource.eAdapters.empty)
 		assertEquals(0, rs.URIResourceMap.size)
 	}
 }
