@@ -29,18 +29,18 @@ public class PresentationDamagerTest extends AbstractDamagerRepairerTest {
 		assertEquals(0,0,check("foo",0,3,""));
 	}
 	
-	@Test public void testRemoveFullElement() throws Exception {
-		assertEquals(4,0,check("foo bar",4,3,""));
-	}
-	
 	@Test public void testRemovePartlyElement() throws Exception {
 		assertEquals(4,1,check("foo bar",5,2,""));
 	}
 	
 	@Test public void testAddElement() throws Exception {
-		assertEquals(7,9,check("foo bar",7,0," honolulu"));
+		assertEquals(4,12,check("foo bar",7,0," honolulu"));
 	}
 	
+	@Test public void testRemoveFullElement() throws Exception {
+		assertEquals(3,1,check("foo bar",4,3,""));
+	}
+
 	@Test public void testAddElement2() throws Exception {
 		assertEquals(4,11,check("foo bar",7,0,"honolulu"));
 	}
@@ -59,10 +59,10 @@ public class PresentationDamagerTest extends AbstractDamagerRepairerTest {
 	
 	@Test public void testBug276628() throws Exception {
 		assertEquals(7,10,check("Rule2: 'keyword';",8,9,"keyword';"));
-	}
+	}	
 	
 	@Test public void testBug279061() throws Exception {
-		assertEquals(3,2, check("foo(x", 3, 2, "(x"));
+		assertEquals(0,5, check("foo(x", 3, 2, "(x"));
 	}
 	
 	@Test public void testPartitionsWithoutSpace() throws Exception {
