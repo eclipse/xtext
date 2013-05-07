@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<project name="XtendCompilerTest" default="compile">
+
+	<property name="dest.dir" location="${ant.file}/../xtend-gen" />
+
+	<!-- pathref 'xtend.deps' will be  modified programmmaticaly, when tests are started-->
+	<path id="xtend.deps">
+		<pathelement path="../../../../plugins/org.eclipse.xtend.core/bin" />
+	</path>
+
+
+	<target name="compiler.init" depends="clean">
+		<taskdef name="xtendc" classname="org.eclipse.xtend.core.compiler.batch.XtendCompilerAntTask">
+			<classpath>
+				<pathelement path="../../../../plugins/org.eclipse.xtend.core/bin" />
+			</classpath>
+		</taskdef>
+	</target>
+
+	<target name="compile" depends="compiler.init">
+		<xtendc destdir="${dest.dir}" srcdir="../test data/test">
+			<classpath refid="xtend.deps" />
+		</xtendc>
+	</target>
+
+	<target name="compile.srdir.not.a.dir" depends="compiler.init">
+		<xtendc destdir="${dest.dir}" srcdir="../test data/test/B.xtend">
+			<classpath refid="xtend.deps" />
+		</xtendc>
+	</target>
+
+	<target name="compile.missing.srcdir" depends="compiler.init">
+		<xtendc destdir="${dest.dir}">
+			<classpath refid="xtend.deps" />
+		</xtendc>
+	</target>
+
+	<target name="compile.missing.destdir" depends="compiler.init">
+		<xtendc srcdir="../test data/test">
+			<classpath refid="xtend.deps" />
+		</xtendc>
+	</target>
+
+	<target name="compile.multisrc" depends="compiler.init">
+		<xtendc destdir="./xtend-gen">
+			<srcdir>
+				<pathelement path="../test data/test" />
+				<pathelement path="../bug396747/test" />
+				<pathelement path="../ant/test" />
+			</srcdir>
+			<classpath refid="xtend.deps" />
+		</xtendc>
+	</target>
+
+	<target name="clean">
+		<delete failonerror="false" quiet="true" includeemptydirs="true">
+			<fileset dir="${dest.dir}" />
+		</delete>
+
+	</target>
+
+</project>
