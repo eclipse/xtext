@@ -12,6 +12,7 @@
 		<!-- supply defaults -->
 		<property name="build.id" value="" />
 		<property name="hudson.build.id" value="" />
+		<property name="skip.javadoc" value="false" />
 
 		<propertyfile file="${promoter.properties.file}" comment="Promoter script properties">
 			<entry key="java.home" value="${java.home}" />
@@ -331,7 +332,7 @@
 		</antcall>
 	</target>
 
-	<target name="-publish.javadoc" if="build.stable">
+	<target name="-publish.javadoc" if="build.stable" unless="skip.javadoc">
 		<!-- copy javadoc -->
 		<echo>Unzipping javadoc</echo>
 		<unzip dest="${downloads.area}/javadoc/${base.version}" overwrite="true" >

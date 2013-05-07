@@ -7,6 +7,7 @@
 		<property name="output" value="./javadoc" />
 		<property name="checkoutLocation" value="../.." />
 		<property name="targetPlatform" value="${eclipse.home}" />
+		<property name="skip.javadoc" value="false" />
 
 		<property name="sourcesLocation" value="${checkoutLocation}/plugins/" />
 		<condition property="build.stable" value="yes">
@@ -26,10 +27,11 @@
 		<echo message="Build id ${build.id}" />
 		<echo message="Build stable? ${build.stable}" />
 		<echo message="Force javadoc generation? ${force.javadoc}" />
+		<echo message="Skip javadoc generation? ${skip.javadoc}" />
 		<antcall target="-generate.javadoc" inheritall="true" />
 	</target>
 
-	<target name="-generate.javadoc" if="generate.javadoc">
+	<target name="-generate.javadoc" if="generate.javadoc" unless="skip.javadoc">
 
 		<!-- Define classpath -->
 		<path id="javadoc-classpath">
