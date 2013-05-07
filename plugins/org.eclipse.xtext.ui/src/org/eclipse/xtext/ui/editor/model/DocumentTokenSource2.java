@@ -17,6 +17,11 @@ import org.eclipse.jface.text.DocumentEvent;
  * For these we can start lexing from the first damaged token instead of from the beginning.
  * This is a lot faster especially when editing the trunk of big files.
  *  
+ * As opposed to its superclass {@link DocumentTokenSource}, the damaged region
+ * returned by this class always includes the token touching the region the event refers to,
+ * i.e. the first token overlapping wit the region or the token that ends with the beginning
+ * of the region.  
+ *   
  * @author Jan Koehnlein - Initial contribution and API
  * @since 2.4
  */
