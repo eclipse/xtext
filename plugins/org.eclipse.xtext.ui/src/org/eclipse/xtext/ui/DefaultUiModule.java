@@ -71,6 +71,8 @@ import org.eclipse.xtext.ui.editor.hover.IEObjectHover;
 import org.eclipse.xtext.ui.editor.hover.ProblemAnnotationHover;
 import org.eclipse.xtext.ui.editor.hyperlinking.DefaultHyperlinkDetector;
 import org.eclipse.xtext.ui.editor.model.DocumentPartitioner;
+import org.eclipse.xtext.ui.editor.model.DocumentTokenSource;
+import org.eclipse.xtext.ui.editor.model.DocumentTokenSource2;
 import org.eclipse.xtext.ui.editor.model.IResourceForEditorInputFactory;
 import org.eclipse.xtext.ui.editor.model.JavaClassPathResourceForIEditorInputFactory;
 import org.eclipse.xtext.ui.editor.model.PartitionTokenScanner;
@@ -378,6 +380,13 @@ public class DefaultUiModule extends AbstractGenericModule {
 	 */
 	public Class<? extends ITraceURIConverter> bindITraceURIConverter() {
 		return DefaultTraceURIConverter.class;
+	}
+	
+	/**
+	 * @since 2.4
+	 */
+	public Class<? extends DocumentTokenSource> bindDocumentTokenSource() {
+		return DocumentTokenSource2.class;
 	}
 }
 
