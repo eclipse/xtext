@@ -12,7 +12,7 @@
     <bundles name="com.google.guava.source" versionRange="[10.0.0,11.0.0)"/>
     <bundles name="com.google.inject"/>
     <bundles name="com.google.inject.source"/>
-    <bundles name="org.apache.ant" versionRange="1.8.0"/>
+    <bundles name="org.apache.ant" versionRange="[1.8.4,1.9.0)"/>
     <bundles name="org.apache.log4j"/>
     <bundles name="org.apache.log4j.source"/>
     <bundles name="org.aopalliance"/>
@@ -27,11 +27,11 @@
     <bundles name="org.apache.commons.lang"/>
     <bundles name="org.apache.commons.lang.source"/>
   </repositories>
-   <repositories location="http://download.eclipse.org/modeling/emf/emf/updates/nightly">
-        <features name="org.eclipse.emf.feature.group"/>
-        <features name="org.eclipse.emf.source.feature.group"/>
-      </repositories>
-      <repositories location="http://download.eclipse.org/modeling/emf/compare/updates/milestones/2.1/">
-        <features name="org.eclipse.emf.compare.feature.group"/>
-      </repositories>
+  <repositories location="http://download.eclipse.org/modeling/emf/emf/updates/nightly">
+    <features name="org.eclipse.emf.feature.group"/>
+    <features name="org.eclipse.emf.source.feature.group"/>
+  </repositories>
+  <repositories location="http://download.eclipse.org/modeling/emf/compare/updates/milestones/2.1/">
+     <features name="org.eclipse.emf.compare.feature.group"/>
+  </repositories>
 </aggregator:Contribution>
