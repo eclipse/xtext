@@ -150,7 +150,7 @@ public class DeltaConverter {
 							List<IEObjectDescription> additionallyExportedEObjects = getAdditionallyExportedEObjects(type, child);
 							oldDescription = new LayeredTypeResourceDescription(newDescription, additionallyExportedEObjects);
 						}
-						IResourceDescription.Delta resourceDelta = new ChangedResourceDescriptionDelta(oldDescription, newDescription);
+						IResourceDescription.Delta resourceDelta = createResourceDescriptionDelta(type, oldDescription, newDescription);
 						result.add(resourceDelta);
 					}
 				}
@@ -170,7 +170,7 @@ public class DeltaConverter {
 						oldDescription = new TypeResourceDescription(uri, Collections.<IEObjectDescription>singletonList(
 							new NameBasedEObjectDescription(nameConverter.toQualifiedName(expectedPrimaryTypeName))));
 	 				}
-					IResourceDescription.Delta resourceDelta = new ChangedResourceDescriptionDelta(oldDescription, newDescription);
+					IResourceDescription.Delta resourceDelta = createResourceDescriptionDelta(primaryType, oldDescription, newDescription);
 					result.add(resourceDelta);
 				}
 			}
@@ -178,10 +178,18 @@ public class DeltaConverter {
 				URI uri = uriHelper.createResourceURIForFQN(expectedPrimaryTypeName);
 				TypeResourceDescription oldDescription = new TypeResourceDescription(uri, Collections.<IEObjectDescription>singletonList(
 						new NameBasedEObjectDescription(nameConverter.toQualifiedName(expectedPrimaryTypeName))));
-				IResourceDescription.Delta resourceDelta = new ChangedResourceDescriptionDelta(oldDescription, null);
+				IResourceDescription.Delta resourceDelta = createResourceDescriptionDelta(null, oldDescription, null);
 				result.add(resourceDelta);
  			}
 		}
+	}
+
+	/**
+	 * @since 2.4
+	 */
+	protected IResourceDescription.Delta createResourceDescriptionDelta(IType type, IResourceDescription oldDescription,
+			TypeResourceDescription newDescription) {
+		return new ChangedResourceDescriptionDelta(oldDescription, newDescription);
 	}
 	
 	/**
@@ -268,7 +276,7 @@ public class DeltaConverter {
 								URI uri = getURIFor(type);
 								List<IEObjectDescription> exported = getExportedEObjects(type);
 								TypeResourceDescription newDescription = new TypeResourceDescription(uri, exported);
-								IResourceDescription.Delta resourceDelta = new ChangedResourceDescriptionDelta(null, newDescription);
+								IResourceDescription.Delta resourceDelta = createResourceDescriptionDelta(type, null, newDescription);
 								result.add(resourceDelta);
 							}
 						}

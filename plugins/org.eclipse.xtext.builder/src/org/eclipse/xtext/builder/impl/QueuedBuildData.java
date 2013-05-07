@@ -13,11 +13,15 @@ import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.Map;
 import java.util.Queue;
+import java.util.Set;
 
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IStorage;
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.xtext.naming.QualifiedName;
+import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.resource.IResourceDescription;
+import org.eclipse.xtext.resource.impl.ChangedResourceDescriptionDelta;
 import org.eclipse.xtext.ui.XtextProjectHelper;
 import org.eclipse.xtext.ui.resource.IStorage2UriMapper;
 import org.eclipse.xtext.util.Pair;
@@ -34,38 +38,69 @@ import com.google.inject.Singleton;
  */
 @Singleton
 public class QueuedBuildData {
-	
+
 	private Collection<IResourceDescription.Delta> deltas;
+	private Collection<UnconfirmedResourceDescriptionDelta> unconfirmedDeltas;
 	private LinkedList<URI> uris;
 	private Map<String, LinkedList<URI>> projectNameToChangedResource;
-	
+
 	public QueuedBuildData() {
 		deltas = Lists.newArrayList();
+		unconfirmedDeltas = Lists.newArrayList();
 		uris = Lists.newLinkedList();
 		projectNameToChangedResource = Maps.newHashMap();
 	}
 
-	public synchronized void queueChanges(Collection<IResourceDescription.Delta> deltas) {
-		if (deltas != null && !deltas.isEmpty()) {
-			this.deltas.addAll(deltas);
+	public void confirmChanges(IProject project, Set<QualifiedName> names) {
+		Iterator<UnconfirmedResourceDescriptionDelta> iterator = unconfirmedDeltas.iterator();
+		while (iterator.hasNext()) {
+			UnconfirmedResourceDescriptionDelta unconfirmed = iterator.next();
+			if (unconfirmed.getProject().equals(project)) {
+				iterator.remove();
+				if (namesIntersect(unconfirmed.getNew(), names) || namesIntersect(unconfirmed.getOld(), names)) {
+					deltas.add(new ChangedResourceDescriptionDelta(unconfirmed.getOld(), unconfirmed.getNew()));
+				}
+			}
 		}
 	}
-	
+
+	protected boolean namesIntersect(IResourceDescription desc, Set<QualifiedName> names) {
+		if (desc != null)
+			for (IEObjectDescription name : desc.getExportedObjects())
+				if (names.contains(name.getQualifiedName()))
+					return true;
+		return false;
+	}
+
+	public boolean hasUnconfirmedChanges() {
+		return !unconfirmedDeltas.isEmpty();
+	}
+
+	public synchronized void queueChanges(Collection<IResourceDescription.Delta> deltas) {
+		if (deltas != null && !deltas.isEmpty()) {
+			for (IResourceDescription.Delta delta : deltas)
+				if (delta instanceof UnconfirmedResourceDescriptionDelta)
+					this.unconfirmedDeltas.add((UnconfirmedResourceDescriptionDelta) delta);
+				else
+					this.deltas.add(delta);
+		}
+	}
+
 	public synchronized void queueURIs(Collection<URI> uris) {
 		if (uris != null && !uris.isEmpty()) {
-			for(URI uri: uris) {
+			for (URI uri : uris) {
 				queueURI(uri);
 			}
 		}
 	}
-	
+
 	@Inject
 	private IStorage2UriMapper mapper;
-	
+
 	public void queueURI(URI uri) {
 		Iterable<Pair<IStorage, IProject>> iterable = mapper.getStorages(uri);
 		boolean associatedWithProject = false;
-		for(Pair<IStorage, IProject> pair: iterable) {
+		for (Pair<IStorage, IProject> pair : iterable) {
 			IProject project = pair.getSecond();
 			if (XtextProjectHelper.hasNature(project)) {
 				String projectName = project.getName();
@@ -134,15 +169,15 @@ public class QueuedBuildData {
 	protected IStorage2UriMapper getMapper() {
 		return mapper;
 	}
-	
+
 	protected Collection<IResourceDescription.Delta> getDeltas() {
 		return deltas;
 	}
-	
+
 	protected Map<String, LinkedList<URI>> getProjectNameToChangedResource() {
 		return projectNameToChangedResource;
 	}
-	
+
 	protected LinkedList<URI> getUris() {
 		return uris;
 	}
