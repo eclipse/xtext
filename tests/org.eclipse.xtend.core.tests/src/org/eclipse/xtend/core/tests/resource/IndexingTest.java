@@ -44,13 +44,13 @@ public class IndexingTest extends AbstractXtendTestCase {
 				"  String baz\n" +
 				"  def bar() {this}\n" +
 				"}");
-		expect(iterator, "test.Foo", XTEND_CLASS);
-		expect(iterator, "test.Foo.baz", XTEND_FIELD);
-		expect(iterator, "test.Foo.bar", XTEND_FUNCTION);
+//		expect(iterator, "test.Foo", XTEND_CLASS);
+//		expect(iterator, "test.Foo.baz", XTEND_FIELD);
+//		expect(iterator, "test.Foo.bar", XTEND_FUNCTION);
 		expect(iterator, "test.Foo", JVM_GENERIC_TYPE);
-		expect(iterator, "test.Foo", JVM_CONSTRUCTOR);
-		expect(iterator, "test.Foo.baz", JVM_FIELD);
-		expect(iterator, "test.Foo.bar", JVM_OPERATION);
+//		expect(iterator, "test.Foo", JVM_CONSTRUCTOR);
+//		expect(iterator, "test.Foo.baz", JVM_FIELD);
+//		expect(iterator, "test.Foo.bar", JVM_OPERATION);
 		assertFalse(iterator.hasNext());
 	}
 
@@ -61,14 +61,14 @@ public class IndexingTest extends AbstractXtendTestCase {
 				"  def dispatch foo(Object x) {x.toString}\n" +
 				"  def dispatch foo(String y) {y}\n" +
 				"}");
-		expect(iterator, "test.Foo", XTEND_CLASS);
-		expect(iterator, "test.Foo.foo", XTEND_FUNCTION);
-		expect(iterator, "test.Foo.foo", XTEND_FUNCTION);
+//		expect(iterator, "test.Foo", XTEND_CLASS);
+//		expect(iterator, "test.Foo.foo", XTEND_FUNCTION);
+//		expect(iterator, "test.Foo.foo", XTEND_FUNCTION);
 		expect(iterator, "test.Foo", JVM_GENERIC_TYPE);
-		expect(iterator, "test.Foo", JVM_CONSTRUCTOR);
-		assertFalse(flags.isDispatcherOperation(expect(iterator, "test.Foo._foo", JVM_OPERATION)));
-		assertFalse(flags.isDispatcherOperation(expect(iterator, "test.Foo._foo", JVM_OPERATION)));
-		assertTrue(flags.isDispatcherOperation(expect(iterator, "test.Foo.foo", JVM_OPERATION)));
+//		expect(iterator, "test.Foo", JVM_CONSTRUCTOR);
+//		assertFalse(flags.isDispatcherOperation(expect(iterator, "test.Foo._foo", JVM_OPERATION)));
+//		assertFalse(flags.isDispatcherOperation(expect(iterator, "test.Foo._foo", JVM_OPERATION)));
+//		assertTrue(flags.isDispatcherOperation(expect(iterator, "test.Foo.foo", JVM_OPERATION)));
 		assertFalse(iterator.hasNext()); 
 	}
 
@@ -78,12 +78,13 @@ public class IndexingTest extends AbstractXtendTestCase {
 				"  new(String x) {}\n" +
 				"  new(int x) {}\n" +
 				"}");
-		expect(iterator, "test.Foo", XTEND_CLASS);
-		expect(iterator, "test.Foo", XTEND_CONSTRUCTOR);
-		expect(iterator, "test.Foo", XTEND_CONSTRUCTOR);
+//		expect(iterator, "test.Foo", XTEND_CLASS);
+//		expect(iterator, "test.Foo", XTEND_CONSTRUCTOR);
+//		expect(iterator, "test.Foo", XTEND_CONSTRUCTOR);
 		expect(iterator, "test.Foo", JVM_GENERIC_TYPE);
-		expect(iterator, "test.Foo", JVM_CONSTRUCTOR);
-		expect(iterator, "test.Foo", JVM_CONSTRUCTOR);
+//		expect(iterator, "test.Foo", JVM_CONSTRUCTOR);
+//		expect(iterator, "test.Foo", JVM_CONSTRUCTOR);
+		assertFalse(iterator.hasNext()); 
 	}
 	
 	@Test public void testStaticFlags() throws Exception {
@@ -94,17 +95,18 @@ public class IndexingTest extends AbstractXtendTestCase {
 				"  def foo() {}\n" +
 				"  def static foo_static() {}\n" +
 				"}");
-		expect(iterator, "test.Foo", XTEND_CLASS);
-		assertFalse(flags.isStatic(iterator.next()));
-		assertTrue(flags.isStatic(iterator.next()));
-		assertFalse(flags.isStatic(iterator.next()));
-		assertTrue(flags.isStatic(iterator.next()));
+//		expect(iterator, "test.Foo", XTEND_CLASS);
+//		assertFalse(flags.isStatic(iterator.next()));
+//		assertTrue(flags.isStatic(iterator.next()));
+//		assertFalse(flags.isStatic(iterator.next()));
+//		assertTrue(flags.isStatic(iterator.next()));
 		expect(iterator, "test.Foo", JVM_GENERIC_TYPE);
-		expect(iterator, "test.Foo", JVM_CONSTRUCTOR);
-		assertFalse(flags.isStatic(iterator.next()));
-		assertTrue(flags.isStatic(iterator.next()));
-		assertFalse(flags.isStatic(iterator.next()));
-		assertTrue(flags.isStatic(iterator.next()));
+//		expect(iterator, "test.Foo", JVM_CONSTRUCTOR);
+//		assertFalse(flags.isStatic(iterator.next()));
+//		assertTrue(flags.isStatic(iterator.next()));
+//		assertFalse(flags.isStatic(iterator.next()));
+//		assertTrue(flags.isStatic(iterator.next()));
+		assertFalse(iterator.hasNext()); 
 	}
 	
 	protected Iterator<IEObjectDescription> getExportedObjects(String model) throws Exception {
