@@ -50,8 +50,8 @@ public class ResourceDescriptionsData extends AbstractCompoundSelectable {
 				return from.getURI();
 			}
 		});
-		// magic number - it is assumend that we export at least 10 entries per resource description
-		lookupMap = Maps.newHashMapWithExpectedSize(resourceDescriptionMap.size() * 10);
+		// magic number - it is assumend that we export at least 2 entries per resource description
+		lookupMap = Maps.newHashMapWithExpectedSize(resourceDescriptionMap.size() * 2);
 	    for (IResourceDescription description: descriptions) {
 	    	registerDescription(description, lookupMap);
 	    }

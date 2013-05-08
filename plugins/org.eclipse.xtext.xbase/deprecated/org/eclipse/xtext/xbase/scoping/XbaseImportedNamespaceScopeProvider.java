@@ -19,6 +19,7 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
+import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
@@ -40,7 +41,6 @@ import org.eclipse.xtext.scoping.impl.MultimapBasedSelectable;
 import org.eclipse.xtext.scoping.impl.ScopeBasedSelectable;
 import org.eclipse.xtext.scoping.impl.SelectableBasedScope;
 import org.eclipse.xtext.util.IResourceScopeCache;
-import org.eclipse.xtext.util.SimpleAttributeResolver;
 import org.eclipse.xtext.util.Strings;
 import org.eclipse.xtext.util.Tuples;
 import org.eclipse.xtext.xbase.jvmmodel.IJvmModelAssociations;
@@ -202,16 +202,25 @@ public class XbaseImportedNamespaceScopeProvider extends AbstractGlobalScopeDele
 
 	protected List<ImportNormalizer> internalGetImportedNamespaceResolvers(final EObject context, boolean ignoreCase) {
 		List<ImportNormalizer> importedNamespaceResolvers = Lists.newArrayList();
-		SimpleAttributeResolver<EObject, String> importResolver = SimpleAttributeResolver.newResolver(String.class,
-				"importedNamespace");
 		EList<EObject> eContents = context.eContents();
 		for (EObject child : eContents) {
-			String value = importResolver.getValue(child);
+			String value = getImportedNamespace(child);
 			ImportNormalizer resolver = createImportedNamespaceResolver(value, ignoreCase);
 			if (resolver != null)
 				importedNamespaceResolvers.add(resolver);
 		}
 		return importedNamespaceResolvers;
+	}
+	
+	/**
+	 * @since 2.4
+	 */
+	protected String getImportedNamespace(EObject object) {
+		EStructuralFeature feature = object.eClass().getEStructuralFeature("importedNamespace");
+		if (feature != null && String.class.equals(feature.getEType().getInstanceClass())) {
+			return (String) object.eGet(feature);
+		}
+		return null;
 	}
 
 	/**
