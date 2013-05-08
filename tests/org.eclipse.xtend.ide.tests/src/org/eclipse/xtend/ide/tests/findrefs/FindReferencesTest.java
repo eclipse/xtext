@@ -28,7 +28,7 @@ import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.resource.IReferenceDescription;
 import org.eclipse.xtext.resource.impl.DefaultReferenceDescription;
 import org.eclipse.xtext.ui.editor.findrefs.IReferenceFinder;
-import org.eclipse.xtext.ui.editor.findrefs.SimpleLocalResourceAccess;
+import org.eclipse.xtext.ui.editor.findrefs.ResourceAccess;
 import org.eclipse.xtext.util.IAcceptor;
 import org.eclipse.xtext.xbase.XBlockExpression;
 import org.eclipse.xtext.xbase.ui.jvmmodel.findrefs.JvmModelReferenceQueryExecutor;
@@ -149,9 +149,13 @@ public class FindReferencesTest extends AbstractXtendUITestCase {
 
 		@Inject
 		private IReferenceFinder referenceFinder;
+		
+		@Inject
+		private Provider<ResourceAccess> resourceAccessProvider;
+		
 		private Iterable<URI> targetURIs;
 		private Predicate<IReferenceDescription> filter;
-		private SimpleLocalResourceAccess localResourceAccess;
+		private ResourceAccess localResourceAccess;
 		private IAcceptor<IReferenceDescription> filteringAcceptor;
 
 		@Override
@@ -168,7 +172,8 @@ public class FindReferencesTest extends AbstractXtendUITestCase {
 						acceptor.accept(t);
 				}
 			};
-			localResourceAccess = new SimpleLocalResourceAccess(target.eResource().getResourceSet());
+			localResourceAccess = resourceAccessProvider.get();
+			localResourceAccess.registerResourceSet(target.eResource().getResourceSet());
 		}
 
 		@Override
