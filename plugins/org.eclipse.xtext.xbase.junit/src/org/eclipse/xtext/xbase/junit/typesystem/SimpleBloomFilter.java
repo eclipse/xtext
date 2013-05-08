@@ -110,19 +110,19 @@ public final class SimpleBloomFilter {
 	}
 
 	/**
-	 * Creates a {@code Builder} of a {@link com.google.common.hash.BloomFilter BloomFilter<T>}, with the expected number of insertions, and a
+	 * Creates a {@code Builder} of a   {@link SimpleBloomFilter}, with the expected number of insertions, and a
 	 * default expected false positive probability of 3%.
 	 * 
 	 * <p>
-	 * Note that overflowing a {@code BloomFilter} with significantly more elements than specified, will result in its
+	 * Note that overflowing a {@code SimpleBloomFilter} with significantly more elements than specified, will result in its
 	 * saturation, and a sharp deterioration of its false positive probability.
 	 * 
 	 * <p>
-	 * The constructed {@code BloomFilter<T>} will be serializable if the provided {@code Funnel<T>} is.
+	 * The constructed {@code SimpleBloomFilter<T>} will be serializable if the provided {@code Funnel<T>} is.
 	 * 
 	 * @param expectedInsertions
-	 *            the number of expected insertions to the constructed {@code BloomFilter<T>}; must be positive
-	 * @return a {@code BloomFilter}
+	 *            the number of expected insertions to the constructed {@code SimpleBloomFilter<T>}; must be positive
+	 * @return a {@code SimpleBloomFilter}
 	 */
 	public static SimpleBloomFilter create(int expectedInsertions) {
 		return create(expectedInsertions, 0.03); // FYI, for 3%, we always get 5 hash functions
