@@ -137,6 +137,9 @@ public class XtextBuilder extends IncrementalProjectBuilder {
 		final SubMonitor progress = SubMonitor.convert(monitor, Messages.XtextBuilder_CollectingResources, 10);
 		progress.subTask(Messages.XtextBuilder_CollectingResources);
 
+		if (!queuedBuildData.tryConfirmAllChanges(getProject()))
+			needRebuild();
+
 		final ToBeBuilt toBeBuilt = new ToBeBuilt();
 		IResourceDeltaVisitor visitor = new IResourceDeltaVisitor() {
 			public boolean visit(IResourceDelta delta) throws CoreException {
