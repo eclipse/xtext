@@ -10,7 +10,6 @@ package org.eclipse.xtext.xbase.compiler;
 import static com.google.common.collect.Lists.*;
 import static com.google.common.collect.Maps.*;
 import static com.google.common.collect.Sets.*;
-import static java.util.Collections.*;
 
 import java.util.Map;
 import java.util.Set;
@@ -82,6 +81,10 @@ public class ScopeStack {
 		if (scopes.isEmpty())
 			throw new IllegalArgumentException("No scope has been opened yet.");
 		Scope currentScope = scopes.peek();
+		if (get(proposedName) == null) {
+			currentScope.addVariable(proposedName, synthetic, key);
+			return proposedName;
+		}
 		final Set<String> names = newHashSet();
 		boolean scopeClosed = false;
 		// add only the non-synthetic variables, since they could be referenced from nested scopes.
