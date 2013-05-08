@@ -2,17 +2,61 @@
 <project name="XtendCompilerTest" default="compile">
 
 	<property name="dest.dir" location="${ant.file}/../xtend-gen" />
+	<property name="deps.dir" value="/Applications/eclipse/plugins" />
+
+	<path id="compiled.xtend">
+		<pathelement path="../../../../plugins/org.eclipse.xtend.core/bin" />
+	</path>
+
+	<!-- add newest (sorted by name) folderst to keep.dirs.res_id resources collection -->
+	<resources id="keep.dirs.res_id">
+		<last count="1">
+			<sort>
+				<fileset dir="${deps.dir}" includes="org.eclipse.xtend.core_*.jar" />
+				<name />
+			</sort>
+		</last>
+	</resources>
+	<pathconvert property="latest.core" pathsep="," refid="keep.dirs.res_id">
+		<chainedmapper>
+			<flattenmapper />
+			<regexpmapper from="^(.*)$$" to="\1" />
+		</chainedmapper>
+	</pathconvert>
 
 	<!-- pathref 'xtend.deps' will be  modified programmmaticaly, when tests are started-->
 	<path id="xtend.deps">
-		<pathelement path="../../../../plugins/org.eclipse.xtend.core/bin" />
+		<fileset dir="${deps.dir}">
+			<include name="${latest.core}" />
+			<include name="org.apache.log4j*.jar" />
+			<include name="org.eclipse.emf.ecore_*.jar" />
+			<include name="org.eclipse.emf.ecore.xmi_*.jar" />
+			<include name="org.eclipse.emf.common_*.jar" />
+			<include name="org.eclipse.emf.codegen_*.jar" />
+			<include name="com.google.guava_*.jar" />
+			<include name="com.google.inject_*.jar" />
+			<include name="javax.injec*.jar" />
+			<include name="org.eclipse.jdt.core*.jar" />
+			<include name="org.antlr*.jar" />
+			<include name="org.eclipse.xtext_*.jar" />
+			<include name="org.eclipse.xtext.common.types_*.jar" />
+			<include name="org.eclipse.xtext.util_*.jar" />
+			<include name="org.eclipse.xtext.smap_*.jar" />
+			<include name="org.eclipse.xtext.xbase*.jar" />
+			<include name="org.eclipse.xtend.core_*.jar" />
+			<include name="org.eclipse.xtend.lib_*.jar" />
+			<exclude name="*.source*.jar" />
+			<exclude name="*.ui*.jar" />
+			<exclude name="*.gwt*.jar" />
+		</fileset>
+		<path refid="compiled.xtend" />
 	</path>
 
 
 	<target name="compiler.init" depends="clean">
 		<taskdef name="xtendc" classname="org.eclipse.xtend.core.compiler.batch.XtendCompilerAntTask">
 			<classpath>
-				<pathelement path="../../../../plugins/org.eclipse.xtend.core/bin" />
+				<path refid="compiled.xtend" />
 			</classpath>
 		</taskdef>
 	</target>

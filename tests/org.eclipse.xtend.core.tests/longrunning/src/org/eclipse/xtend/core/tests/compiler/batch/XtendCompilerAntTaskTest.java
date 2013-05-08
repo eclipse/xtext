@@ -16,20 +16,16 @@ import org.apache.tools.ant.BuildException;
 import org.apache.tools.ant.BuildListener;
 import org.apache.tools.ant.Project;
 import org.apache.tools.ant.ProjectHelper;
-import org.apache.tools.ant.types.FileSet;
-import org.apache.tools.ant.types.Path;
 import org.apache.tools.ant.types.selectors.FilenameSelector;
 import org.eclipse.pde.core.plugin.TargetPlatform;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 
 /**
  * @author Dennis Huebner - Initial contribution and API
  */
-@Ignore
 public class XtendCompilerAntTaskTest {
 	protected Project project;
 	private StringBuffer logBuffer;
@@ -42,18 +38,6 @@ public class XtendCompilerAntTaskTest {
 	public void setUp() {
 		// initialize Ant
 		configureProject("batch-compiler-data/ant/test.ant");
-		Path path = (Path) project.getReference("xtend.deps");
-		FileSet fset = new FileSet();
-		File pluginsFolder = new File(new File(TargetPlatform.getLocation()), "plugins");
-		fset.setDir(pluginsFolder);
-		fset.createInclude().setName("org.apache.log4*.jar");
-		fset.createInclude().setName("com.google*.jar");
-		fset.createInclude().setName("javax.inject*.jar");
-		fset.createInclude().setName("org.eclipse.xtex*.jar");
-		fset.createInclude().setName("org.eclipse.xten*.jar");
-		fset.createInclude().setName("org.eclipse.emf*jar");
-
-		path.addFileset(fset);
 	}
 
 	@After
@@ -128,6 +112,9 @@ public class XtendCompilerAntTaskTest {
 		project = new Project();
 		project.init();
 		File antFile = new File(System.getProperty("root"), filename);
+		File pluginsFolder = new File(new File(TargetPlatform.getLocation()), "plugins");
+		project.setUserProperty("deps.dir", pluginsFolder.getAbsolutePath());
+		
 		project.setUserProperty("ant.file", antFile.getAbsolutePath());
 		project.addBuildListener(new AntTestListener(Project.MSG_ERR));
 		ProjectHelper.configureProject(project, antFile);
