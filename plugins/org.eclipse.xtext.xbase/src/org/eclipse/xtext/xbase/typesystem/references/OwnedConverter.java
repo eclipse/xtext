@@ -47,7 +47,7 @@ public class OwnedConverter extends AbstractXtypeReferenceVisitor<LightweightTyp
 	private final boolean keepUnboundWildcards;
 
 	/**
-.	 * Creates a new owneder converter with proper substitution of unbound wildcards.
+.	 * Creates a new owned converter with proper substitution of unbound wildcards.
 	 * Equivalent to <code>new OwnedConverter(owner, false)</code>.
 	 */
 	public OwnedConverter(ITypeReferenceOwner owner) {
